@@ -20,8 +20,11 @@ scrollbar slider {
 }
 
 progress, trough {
-	min-height: 20px;
+	min-height: 40px;
 	font-size: 50px;
+  background-color: #404E57;
+  color: #404E57;
+  border: #000 1px solid;
 }
 
 progress {
@@ -30,9 +33,14 @@ progress {
 	font-weight: lighter;
 }
 
-.printing-progress-bar{
-	font-size: 60px;
+.printing-progress-bar {
+	font-size: 25px;
 	color: #00C9B4;
+}
+
+.printing-progress-bar text {
+	font-size: 25px;
+	color: #404e57;
 }
 
 .printing-state {
@@ -76,6 +84,34 @@ button.active {
 
 button.file-list {
 	margin: 0px;
+}
+
+.distbutton_top {
+  border: 3px solid #fff;
+  border-bottom: 0px;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  margin-bottom: 0px;
+}
+
+.distbutton {
+  border: 3px solid #fff;
+  border-top: 3px solid #ccc;
+  border-bottom: 0px;
+  margin-top: 0;
+  margin-bottom: 0px;
+}
+
+.distbutton_bottom {
+  border: 3px solid #fff;
+  border-top: 3px solid #ccc;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  margin-top: 0;
+}
+
+.distbutton_active {
+  background-color: #20303D;
 }
 
 entry {
@@ -149,7 +185,7 @@ button.keyboard {
 .printing-status-label {
 	padding-top: 5px;
 	padding-bottom: 3px;
-
+  color: #ccc;
 	font-size: 24px;
 }
 

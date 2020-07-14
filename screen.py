@@ -13,7 +13,7 @@ from gi.repository import Gtk, Gdk, GLib
 
 from KlippyWebsocket import KlippyWebsocket
 from KlippyGtk import KlippyGtk
-from panels import IdleStatusPanel
+from panels import *
 
 config = "/opt/printer/KlipperScreen/KlipperScreen.config"
 
@@ -25,6 +25,7 @@ class KlipperScreen(Gtk.Window):
 
     panels = {}
     _cur_panels = []
+    filename = ""
 
     def __init__(self):
         self.read_config()
@@ -32,22 +33,71 @@ class KlipperScreen(Gtk.Window):
         Gtk.Window.__init__(self)
 
         self.set_default_size(Gdk.Screen.get_width(Gdk.Screen.get_default()), Gdk.Screen.get_height(Gdk.Screen.get_default()))
+        print str(Gdk.Screen.get_width(Gdk.Screen.get_default()))+"x"+str(Gdk.Screen.get_height(Gdk.Screen.get_default()))
 
-        r = requests.get("http://127.0.0.1:7125/printer/info") #, headers={"x-api-key":api_key})
-        if r.status_code != 200:
-            self.printer_initializing()
-            self.create_websocket()
-            return
+        self.show_panel('splash_screen', "SplashScreenPanel")
 
+        ready = False
+
+        while ready == False:
+            r = requests.get("http://127.0.0.1:7125/printer/info") #, headers={"x-api-key":api_key})
+            if r.status_code != 200:
+                time.sleep(1)
+                continue
+
+            data = json.loads(r.content)
+
+            if data['result']['is_ready'] != True:
+                time.sleep(1)
+                continue
+            ready = True
+
+        r = requests.get("http://127.0.0.1:7125/printer/status?toolhead")
+        self.create_websocket()
+
+        #TODO: Check that we get good data
         data = json.loads(r.content)
 
-        if data['result']['is_ready'] != True:
-            self.printer_initializing()
-            self.create_websocket()
-            return
+        if data['result']['toolhead']['status'] == "Printing":
+            self.show_panel('job_status',"JobStatusPanel")
+        else:
+            self.show_panel('main_panel',"MainPanel",2,items=self._config)
 
-        self.create_websocket()
-        self.main_panel()
+
+    def show_panel(self, panel_name, type, remove=None, pop=True, **kwargs):
+        if remove == 2:
+            self._remove_all_panels()
+        elif remove == 1:
+            self._remove_current_panel(pop)
+        if panel_name not in self.panels:
+            if type == "SplashScreenPanel":
+                self.panels[panel_name] = SplashScreenPanel(self)
+            elif type == "MainPanel":
+                self.panels[panel_name] = MainPanel(self)
+            elif type == "menu":
+                self.panels[panel_name] = MenuPanel(self)
+                print panel_name
+            elif type == "JobStatusPanel":
+                self.panels[panel_name] = JobStatusPanel(self)
+            elif type == "move":
+                self.panels[panel_name] = MovePanel(self)
+            elif type == "temperature":
+                self.panels[panel_name] = TemperaturePanel(self)
+            #Temporary for development
+            else:
+                self.panels[panel_name] = MovePanel(self)
+
+            if kwargs != {}:
+                print self.panels
+                print kwargs
+                self.panels[panel_name].initialize(**kwargs)
+            else :
+                self.panels[panel_name].initialize()
+
+        self.add(self.panels[panel_name].get())
+        self.show_all()
+        self._cur_panels.append(panel_name)
+        print self._cur_panels
 
 
     def read_config (self):
@@ -67,24 +117,10 @@ class KlipperScreen(Gtk.Window):
 
     def splash_screen(self):
         if "splash_screen" not in self.panels:
-            image = Gtk.Image()
-            #TODO: update file reference
-            image.set_from_file("/opt/printer/OctoScreen/styles/z-bolt/images/logo.png")
+            self.panels['splash_screen'] = SplashScreenPanel(self)
+            self.panels['splash_screen'].initialize()
 
-            label = Gtk.Label()
-            label.set_text("Initializing printer...")
-            #label = Gtk.Button(label="Initializing printer...")
-            #label.connect("clicked", self.printer_initialize)
-
-            main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=15)
-            main.pack_start(image, True, True, 10)
-            main.pack_end(label, True, True, 10)
-
-            box = Gtk.VBox()
-            box.add(main)
-            self.panels['splash_screen'] = box
-
-        self.add(self.panels['splash_screen'])
+        self.add(self.panels['splash_screen'].get())
         self.show_all()
         self._cur_panels = ['splash_screen']
 
@@ -93,38 +129,18 @@ class KlipperScreen(Gtk.Window):
         self._ws.connect()
         self._curr = 0
 
-    def main_panel (self):
-        if "main_panel" not in self.panels:
-            box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
 
-            grid = Gtk.Grid()
-            grid.set_row_homogeneous(True)
-            grid.set_column_homogeneous(True)
-
-            self.panels['idle_status'] = IdleStatusPanel(self)
-
-
-            grid.attach(self.panels['idle_status'].initialize(), 0, 0, 1, 1)
-            #grid.attach(box2, 1, 0, 1, 1)
-
-
-            grid.attach(self.arrangeMenuItems(self._config,2), 1, 0, 1, 1)
-
-            self.panels['main_screen'] = grid
-
-        print ("### Adding main panel")
-        self.add(self.panels['main_screen'])
-        self.show_all()
-        self._cur_panels.append("main_screen")
-
-    def _go_to_submenu(self, widget, menu):
-        print "#### Go to submenu " + str(menu)
-        self._remove_current_panel(False)
+    def _go_to_submenu(self, widget, name):
+        print "#### Go to submenu " + str(name)
+        #self._remove_current_panel(False)
 
         # Find current menu item
         panels = list(self._cur_panels)
-        cur_item = self._find_current_menu_item(menu, self._config, panels.pop(0))
+        cur_item = self._find_current_menu_item(name, self._config, panels.pop(0))
         menu = cur_item['items']
+        print menu
+        self.show_panel("_".join(self._cur_panels) + '_' + name, "menu", 1, False, menu=menu)
+        return
 
         grid = self.arrangeMenuItems(menu, 4)
 
@@ -140,9 +156,10 @@ class KlipperScreen(Gtk.Window):
 
 
     def _find_current_menu_item(self, menu, items, names):
-        # TODO: Make recursive
-        return items[menu]
-
+        for item in items:
+            if item['name'] == menu:
+                return item
+        #TODO: Add error check
 
     def _remove_all_panels(self):
         while len(self._cur_panels) > 0:
@@ -155,13 +172,13 @@ class KlipperScreen(Gtk.Window):
             self.remove(
                 self.panels[
                     self._cur_panels[-1]
-                ]
+                ].get()
             )
             if pop == True:
                 print "Popping _cur_panels"
                 self._cur_panels.pop()
                 if len(self._cur_panels) > 0:
-                    self.add(self.panels[self._cur_panels[-1]])
+                    self.add(self.panels[self._cur_panels[-1]].get())
                     self.show_all()
 
     def _menu_go_back (self, widget):
@@ -192,6 +209,32 @@ class KlipperScreen(Gtk.Window):
                         round(data['extruder']['temperature'],1),
                         round(data['extruder']['target'],1)
                     )
+            if "job_status" in self.panels:
+                #print json.dumps(data, indent=2)
+                if "heater_bed" in data:
+                    self.panels['job_status'].update_temp(
+                        "bed",
+                        round(data['heater_bed']['temperature'],1),
+                        round(data['heater_bed']['target'],1)
+                    )
+                if "extruder" in data and data['extruder'] != "extruder":
+                    self.panels['job_status'].update_temp(
+                        "tool0",
+                        round(data['extruder']['temperature'],1),
+                        round(data['extruder']['target'],1)
+                    )
+                if "virtual_sdcard" in data:
+                    print data['virtual_sdcard']
+                    if "current_file" in data['virtual_sdcard'] and self.filename != data['virtual_sdcard']['current_file']:
+                        if data['virtual_sdcard']['current_file'] != "":
+                            file = KlippyGtk.formatFileName(data['virtual_sdcard']['current_file'])
+                        else:
+                            file = "Unknown"
+                        #self.panels['job_status'].update_image_text("file", file)
+                    if "print_duration" in data['virtual_sdcard']:
+                        self.panels['job_status'].update_image_text("time", "Time: " +KlippyGtk.formatTimeString(data['virtual_sdcard']['print_duration']))
+                    if "progress" in data['virtual_sdcard']:
+                        self.panels['job_status'].update_progress(data['virtual_sdcard']['progress'])
 
 
     def set_bed_temp (self, num, target):
@@ -239,7 +282,7 @@ class KlipperScreen(Gtk.Window):
 
     def printer_ready(self):
         self._remove_all_panels()
-        self.main_panel()
+        self.show_panel('main_panel',"MainPanel",2,items=self._config)
 
     def on_button1_clicked(self, widget):
         print("Hello")

@@ -56,7 +56,7 @@ class KlippyWebsocket(threading.Thread):
 
     def on_message(self, message):
         result = json.loads(message)
-        print json.dumps(result, indent=2)
+        #print json.dumps(result, indent=2)
         GLib.idle_add(self._callback, result['method'], result['params'][0])
 
     def send_method(self, method, params):
