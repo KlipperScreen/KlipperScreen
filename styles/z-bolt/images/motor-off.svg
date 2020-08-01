@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="60.13768"
+   height="60.776516"
+   viewBox="0 0 60.137677 60.776516"
+   id="svg4160"
+   version="1.1"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06"
+   sodipodi:docname="motor-off.svg">
+  <defs
+     id="defs4162" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.6"
+     inkscape:cx="-6.6263317"
+     inkscape:cy="58.520971"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer2"
+     showgrid="true"
+     units="in"
+     showguides="false"
+     inkscape:window-width="3200"
+     inkscape:window-height="1800"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:snap-bbox="true"
+     inkscape:snap-global="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4712"
+       originx="-9.9771178"
+       originy="-29.820954" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4165">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Move"
+     style="display:inline"
+     transform="translate(-3.5328446,2.2636422)">
+    <g
+       transform="matrix(0.8711992,0,0,0.8711992,-2.4678882,-9.9664553)"
+       id="g49">
+      <path
+         sodipodi:nodetypes="ccccccc"
+         inkscape:connector-curvature="0"
+         id="rect4760-8"
+         d="m 22.795553,16.619161 3.21242,-1.25 3.212421,1.25 v 47.687531 l -3.212421,0.892857 -3.21242,-0.892857 z"
+         style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <ellipse
+         ry="22.087179"
+         rx="21.819319"
+         cy="48.14286"
+         cx="39.839287"
+         id="path4508"
+         style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cccccc"
+         inkscape:connector-curvature="0"
+         id="path4535"
+         d="M 39.382891,38.886141 57.933077,66.678837 49.659078,72.294968 31.108892,44.502272 30.826474,35.633291 Z"
+         style="fill:#FFFFFF;fill-opacity:1;fill-rule:evenodd;stroke:#FFFFFF;stroke-width:3;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <ellipse
+         ry="6.6224618"
+         rx="6.5331759"
+         cy="69.252129"
+         cx="53.575146"
+         id="path4149"
+         style="fill:#FFFFFF;fill-opacity:1;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4153"
+         d="M 33.143956,38.785753 54.361122,70.405869"
+         style="fill:none;fill-rule:evenodd;stroke:#232323;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text4803-5-0"
+         y="24.558838"
+         x="14.222913"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="font-size:17.5px;line-height:1.25"
+           y="24.558838"
+           x="14.222913"
+           id="tspan4188"
+           sodipodi:role="line">0</tspan></text>
+      <text
+         id="text4803-5-0-0"
+         y="24.862139"
+         x="56.772427"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="font-size:17.5px;line-height:1.25"
+           y="24.862139"
+           x="56.772427"
+           id="tspan4208"
+           sodipodi:role="line">1</tspan></text>
+    </g>
+  </g>
+</svg>

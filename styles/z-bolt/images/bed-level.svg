@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="74px" height="62px" viewBox="0 0 74 62" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>bed-level</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-662.000000, -314.000000)" stroke="#FFFFFF">
+            <g id="leveling" transform="translate(662.000000, 314.000000)">
+                <path d="M68.8858131,42.733564 C68.8858131,40.982699 67.4394464,39.5363322 65.6885813,39.5363322 L8.1384083,39.5363322 C6.38754325,39.5363322 4.94117647,40.982699 4.94117647,42.733564 L4.94117647,43.9515571 C4.94117647,45.7024221 6.38754325,47.1487889 8.1384083,47.1487889 L65.6885813,47.1487889 C67.4394464,47.1487889 68.8858131,45.7024221 68.8858131,43.9515571 L68.8858131,42.733564 Z" id="Path" stroke-width="3" fill="#FFFFFF" stroke-linecap="round"></path>
+                <polyline id="Path" stroke-width="2" stroke-linejoin="round" points="11.0311419 49.432526 11.0311419 54 17.1211073 54 17.1211073 49.432526"></polyline>
+                <polyline id="Path" stroke-width="2" stroke-linejoin="round" points="56.7058824 49.432526 56.7058824 54 62.7958478 54 62.7958478 49.432526"></polyline>
+                <g id="Group" transform="translate(4.761246, 6.000000)" stroke-linejoin="round">
+                    <polyline id="Path" stroke-width="1.9497" points="37.7577855 5.32871972 57.550173 0 59.9100346 8.83044983 2.58823529 24.2076125 0.228373702 15.3771626 20.0968858 10.0484429"></polyline>
+                    <polyline id="Path" points="0.456747405 16.1384083 20.2491349 10.8096886 22.532872 13.3979239 37.2249135 9.43944637 37.9100346 6.0899654 57.7785467 0.761245675"></polyline>
+                    <polyline id="Path" stroke-width="2" points="19.3356401 10.2768166 20.0207612 6.92733564 36.2352941 2.58823529 38.4429066 5.17647059"></polyline>
+                    <path d="M32.5051903,6.5467128 C32.6574394,7.07958478 32.3529412,7.53633218 31.8200692,7.68858131 L26.2629758,9.1349481 C25.7301038,9.28719723 25.2733564,8.98269896 25.1211073,8.44982699 L24.816609,7.30795848 C24.6643599,6.77508651 24.9688581,6.3183391 25.5017301,6.16608997 L31.0588235,4.71972318 C31.5916955,4.56747405 32.0484429,4.87197232 32.200692,5.40484429 L32.5051903,6.5467128 Z" id="Path" stroke-width="1.9008"></path>
+                </g>
+                <path d="M7.98615917,34.2076125 L65.8408304,34.2076125" id="Path" stroke-width="1.9008" stroke-linejoin="round"></path>
+                <path d="M8.74740484,34.2076125 L65.8408304,18.982699" id="Path" stroke-width="2" stroke-linejoin="round"></path>
+                <path d="M39.5017301,25.83391 C40.7197232,27.1280277 41.4809689,28.8788927 41.4809689,30.7820069 C41.4809689,32 41.1764706,33.2179931 40.6435986,34.2076125" id="Path" stroke-width="2" stroke-linejoin="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>

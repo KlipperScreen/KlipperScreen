@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px" height="58px" viewBox="0 0 56 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>magnet-off</title>
+    <desc>Created with Sketch.</desc>
+    <g id="a" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-2209.000000, -2179.000000)" fill-rule="nonzero">
+            <g id="magnet-off" transform="translate(2209.000000, 2179.000000)">
+                <path d="M24,5 C10.7662222,5 0,15.7662222 0,29 C0,42.2337778 10.7662222,53 24,53 L42.6666667,53 L42.6666667,38.7777778 L24,38.7777778 C18.6088889,38.7777778 14.2222222,34.3911111 14.2222222,29 C14.2222222,23.6088889 18.6088889,19.2222222 24,19.2222222 L42.6666667,19.2222222 L42.6666667,5 L24,5 Z M12.4444444,29 C12.4444444,35.3715556 17.6284444,40.5555556 24,40.5555556 L32.8888889,40.5555556 L32.8888889,51.2222222 L24,51.2222222 C11.7466667,51.2222222 1.77777778,41.2533333 1.77777778,29 C1.77777778,16.7466667 11.7466667,6.77777778 24,6.77777778 L32.8888889,6.77777778 L32.8888889,17.4444444 L24,17.4444444 C17.6284444,17.4444444 12.4444444,22.6284444 12.4444444,29 Z" id="Shape" fill="#FFFFFF"></path>
+                <polygon id="Path" fill="#FFFFFF" points="42.6666667 53 32.8888889 53 32.8888889 38.7777778 42.6666667 38.7777778"></polygon>
+                <rect id="Rectangle" fill="#FFFFFF" x="32.8888889" y="5" width="9.77777778" height="14.2222222"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

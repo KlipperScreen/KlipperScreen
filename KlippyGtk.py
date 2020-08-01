@@ -3,20 +3,27 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GdkPixbuf, GLib
+import os
+klipperscreendir = os.getcwd()
 
 class KlippyGtk:
     labels = {}
 
-    #def __init__ (self):
+    @staticmethod
+    def Label(label, style):
+        l = Gtk.Label(label)
+        if style != False:
+            l.get_style_context().add_class(style)
+        return l
 
     @staticmethod
     def ImageLabel(image_name, text, size=20, style=False):
         box1 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=15)
         image = Gtk.Image()
         #TODO: update file reference
-        image.set_from_file("/opt/printer/OctoScreen/styles/z-bolt/images/" + str(image_name) + ".svg")
+        image.set_from_file(klipperscreendir + "/styles/z-bolt/images/" + str(image_name) + ".svg")
 
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale("/opt/printer/OctoScreen/styles/z-bolt/images/" + str(image_name) + ".svg", 20, 20, True)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(klipperscreendir + "/styles/z-bolt/images/" + str(image_name) + ".svg", 20, 20, True)
         image.set_from_pixbuf(pixbuf)
 
         label = Gtk.Label()
@@ -31,21 +38,105 @@ class KlippyGtk:
         return {"l": label, "b": box1}
 
     @staticmethod
+    def Image(image_name, style=False, width=None, height=None):
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file(klipperscreendir + "/styles/z-bolt/images/" + str(image_name) + ".svg")
+
+        if height != None and width != None:
+            pixbuf = pixbuf.scale_simple(width, height, GdkPixbuf.InterpType.BILINEAR)
+
+        return Gtk.Image.new_from_pixbuf(pixbuf)
+
+
+    @staticmethod
     def ProgressBar(style=False):
         bar = Gtk.ProgressBar()
 
         if style != False:
-            print "Styling bar " + style
             ctx = bar.get_style_context()
             ctx.add_class(style)
 
         return bar
 
     @staticmethod
-    def ButtonImage(image_name, label, style=False):
-        img = Gtk.Image.new_from_file("/opt/printer/OctoScreen/styles/z-bolt/images/" + str(image_name) + ".svg")
+    def Button(label=None, style=None):
+        b = Gtk.Button(label=label)
+        b.set_hexpand(True)
+        b.set_vexpand(True)
+        b.set_can_focus(False)
+        b.props.relief = Gtk.ReliefStyle.NONE
+
+        if style != None:
+            b.get_style_context().add_class(style)
+
+        return b
+
+    @staticmethod
+    def ButtonImage(image_name, label=None, style=None, height=None, width=None):
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file(klipperscreendir + "/styles/z-bolt/images/" + str(image_name) + ".svg")
+
+        if height != None and width != None:
+            pixbuf = pixbuf.scale_simple(width, height, GdkPixbuf.InterpType.BILINEAR)
+
+
+        img = Gtk.Image.new_from_pixbuf(pixbuf)
 
         b = Gtk.Button(label=label)
+        b.set_image(img)
+        b.set_hexpand(True)
+        b.set_vexpand(True)
+        b.set_can_focus(False)
+        b.set_image_position(Gtk.PositionType.TOP)
+        b.set_always_show_image(True)
+        b.props.relief = Gtk.ReliefStyle.NONE
+
+        if style != None:
+            b.get_style_context().add_class(style)
+
+        return b
+
+    @staticmethod
+    def ConfirmDialog(screen, text, buttons, callback=None, *args):
+        dialog = Gtk.Dialog()
+        #TODO: Factor other resolutions in
+        dialog.set_default_size(984, 580)
+        dialog.set_resizable(False)
+        dialog.set_transient_for(screen)
+        dialog.set_modal(True)
+
+        for button in buttons:
+            dialog.add_button(button_text=button['name'], response_id=button['response'])
+
+        dialog.connect("response", callback, *args)
+        dialog.get_style_context().add_class("dialog")
+
+        content_area = dialog.get_content_area()
+        content_area.set_margin_start(15)
+        content_area.set_margin_end(15)
+        content_area.set_margin_top(15)
+        content_area.set_margin_bottom(15)
+
+        label = Gtk.Label()
+        label.set_line_wrap(True)
+        label.set_size_request(250, -1)
+        label.set_markup(text)
+        label.get_style_context().add_class("text")
+        table = Gtk.Table(1, 1, False)
+        table.attach(label, 0, 1, 0, 1, Gtk.AttachOptions.SHRINK | Gtk.AttachOptions.FILL)
+        table.set_vexpand(True)
+        table.set_halign(Gtk.Align.CENTER)
+        table.set_valign(Gtk.Align.CENTER)
+        content_area.add(table)
+
+        dialog.show_all()
+
+        return dialog
+
+
+    @staticmethod
+    def ToggleButtonImage(image_name, label, style=False):
+        img = Gtk.Image.new_from_file(klipperscreendir + "/styles/z-bolt/images/" + str(image_name) + ".svg")
+
+        b = Gtk.ToggleButton(label=label)
         #b.props.relief = Gtk.RELIEF_NONE
         b.set_image(img)
         b.set_hexpand(True)
@@ -60,6 +151,13 @@ class KlippyGtk:
             ctx.add_class(style)
 
         return b
+
+    @staticmethod
+    def HomogeneousGrid():
+        g = Gtk.Grid()
+        g.set_row_homogeneous(True)
+        g.set_column_homogeneous(True)
+        return g
 
     @staticmethod
     def ToggleButton(text):
@@ -82,9 +180,9 @@ class KlippyGtk:
     def formatTimeString(seconds):
         time = int(seconds)
         text = ""
-        if time/3600 !=0:
-            text += str(time/3600)+"h "
-        text += str(time/60%60)+"m "+str(time%60)+"s"
+        if int(time/3600) !=0:
+            text += str(int(time/3600))+"h "
+        text += str(int(time/60)%60)+"m "+str(time%60)+"s"
         return text
 
     @staticmethod

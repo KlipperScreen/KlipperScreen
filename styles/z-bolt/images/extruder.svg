@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="52px" height="60px" viewBox="0 0 52 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>extruder</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-69.000000, -313.000000)" stroke="#FFFFFF">
+            <g id="extruder" transform="translate(69.000000, 313.000000)">
+                <g id="Group" transform="translate(3.000000, 1.000000)" fill="#FFFFFF" stroke-linecap="round" stroke-width="3">
+                    <path d="M0.402777778,2.81944444 L4.83333333,0.402777778" id="Line"></path>
+                    <path d="M4.83333333,0.402777778 L11.6805556,0.402777778" id="Line-2"></path>
+                    <path d="M11.6805556,0.402777778 L14.0972222,3.625" id="Line-3" stroke-linejoin="round"></path>
+                    <path d="M0.402777778,2.81944444 L0.402777778,12.4861111" id="Line-5"></path>
+                    <path d="M14.0972222,3.625 L23.7638889,3.625" id="Line-4"></path>
+                    <path d="M0.402777778,12.4861111 L3.22222222,17.3194444" id="Line-6"></path>
+                    <path d="M3.22222222,38.2638889 L0.402777778,42.2916667" id="Line-8"></path>
+                    <path d="M0.402777778,42.2916667 L0.402777778,53.5694444" id="Line-9"></path>
+                    <path d="M3.22222222,17.3194444 L3.22222222,38.2638889" id="Line-7"></path>
+                    <path d="M0.402777778,53.5694444 L10.875,55.5833333" id="Line-10"></path>
+                    <path d="M10.875,55.5833333 L14.0972222,51.9583333" id="Line-11"></path>
+                    <path d="M14.0972222,51.9583333 L23.7638889,51.9583333" id="Line-12"></path>
+                </g>
+                <g id="Group" transform="translate(36.564815, 28.925926) scale(-1, 1) translate(-36.564815, -28.925926) translate(24.212963, 1.000000)" stroke-linecap="round" stroke-width="3">
+                    <path d="M0.402777778,2.81944444 L4.83333333,0.402777778" id="Line"></path>
+                    <path d="M4.83333333,0.402777778 L11.6805556,0.402777778" id="Line-2"></path>
+                    <path d="M11.6805556,0.402777778 L14.0972222,3.625" id="Line-3" stroke-linejoin="round"></path>
+                    <path d="M0.402777778,2.81944444 L0.402777778,12.4861111" id="Line-5"></path>
+                    <path d="M14.0972222,3.625 L23.7638889,3.625" id="Line-4"></path>
+                    <path d="M0.402777778,12.4861111 L3.22222222,17.3194444" id="Line-6"></path>
+                    <path d="M3.22222222,38.2638889 L0.402777778,42.2916667" id="Line-8"></path>
+                    <path d="M0.402777778,42.2916667 L0.402777778,53.5694444" id="Line-9"></path>
+                    <path d="M3.22222222,17.3194444 L3.22222222,38.2638889" id="Line-7"></path>
+                    <path d="M0.402777778,53.5694444 L10.875,55.5833333" id="Line-10"></path>
+                    <path d="M10.875,55.5833333 L14.0972222,51.9583333" id="Line-11"></path>
+                    <path d="M14.0972222,51.9583333 L23.7638889,51.9583333" id="Line-12"></path>
+                </g>
+                <circle id="Oval" stroke-width="3" cx="25.9583333" cy="24.7638889" r="15.7083333"></circle>
+                <path d="M23.5416667,55.375 L25.9583333,58.5972222" id="Line-16" stroke-width="2" stroke-linecap="round"></path>
+                <path d="M25.9583333,58.5972222 L28.375,55.375" id="Line-17" stroke-width="2" stroke-linecap="round"></path>
+                <path d="M18.7083333,55.375 L33.2083333,55.375" id="Line-14" stroke-width="2" stroke-linecap="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>

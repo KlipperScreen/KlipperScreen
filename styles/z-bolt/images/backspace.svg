@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="51px" height="42px" viewBox="0 0 51 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>backspace</title>
+    <desc>Created with Sketch.</desc>
+    <g id="a" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-2191.000000, -2291.000000)" fill="#FFFFFF">
+            <g id="backspace" transform="translate(2191.000000, 2291.000000)">
+                <path d="M15.1893688,8.41820598 L7,21.521196 L15.1893688,34.624186 L41.0523588,34.624186 L41.0523588,8.41820598 L15.1893688,8.41820598 Z M39.5108306,33.0826578 L16.0441462,33.0826578 L8.81823256,21.521196 L16.0441462,9.95973422 L39.5108306,9.95973422 L39.5108306,33.0826578 Z" id="Shape" fill-rule="nonzero"></path>
+                <polygon id="Path" points="21.5574219 28.2322392 27.1786047 22.6110565 32.7997874 28.2322392 33.8896478 27.1423787 28.2684651 21.521196 33.8896478 15.9000133 32.7997874 14.8101528 27.1786047 20.4313355 21.5574219 14.8101528 20.4675615 15.9000133 26.0887442 21.521196 20.4675615 27.1423787"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

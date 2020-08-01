@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="62px" height="63px" viewBox="0 0 62 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>actions</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Version-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-670.000000, -42.000000)">
+            <text id="Actions" font-family="OpenSans-Regular, Open Sans" font-size="14" font-weight="normal" fill="#FFFFFF">
+                <tspan x="674.632324" y="116">Actions</tspan>
+            </text>
+            <g id="extruder" transform="translate(674.000000, 45.000000)" stroke="#FFFFFF" stroke-linecap="round" stroke-width="2">
+                <g id="Group" fill="#FFFFFF">
+                    <path d="M0.332729469,2.32910628 L3.99275362,0.332729469" id="Line"></path>
+                    <path d="M3.99275362,0.332729469 L9.64915459,0.332729469" id="Line-2"></path>
+                    <path d="M9.64915459,0.332729469 L11.6455314,2.99456522" id="Line-3" stroke-linejoin="round"></path>
+                    <path d="M0.332729469,2.32910628 L0.332729469,10.3146135" id="Line-5"></path>
+                    <path d="M11.6455314,2.99456522 L19.6310386,2.99456522" id="Line-4"></path>
+                    <path d="M0.332729469,10.3146135 L2.66183575,14.3073671" id="Line-6"></path>
+                    <path d="M2.66183575,31.6092995 L0.332729469,34.9365942" id="Line-8"></path>
+                    <path d="M0.332729469,34.9365942 L0.332729469,44.2530193" id="Line-9"></path>
+                    <path d="M2.66183575,14.3073671 L2.66183575,31.6092995" id="Line-7"></path>
+                    <path d="M0.332729469,44.2530193 L8.98369565,45.9166667" id="Line-10"></path>
+                    <path d="M8.98369565,45.9166667 L11.6455314,42.9221014" id="Line-11"></path>
+                    <path d="M11.6455314,42.9221014 L19.6310386,42.9221014" id="Line-12"></path>
+                </g>
+                <g id="Group" transform="translate(27.727456, 23.069243) scale(-1, 1) translate(-27.727456, -23.069243) translate(17.523752, 0.000000)">
+                    <path d="M0.332729469,2.32910628 L3.99275362,0.332729469" id="Line"></path>
+                    <path d="M3.99275362,0.332729469 L9.64915459,0.332729469" id="Line-2"></path>
+                    <path d="M9.64915459,0.332729469 L11.6455314,2.99456522" id="Line-3" stroke-linejoin="round"></path>
+                    <path d="M0.332729469,2.32910628 L0.332729469,10.3146135" id="Line-5"></path>
+                    <path d="M11.6455314,2.99456522 L19.6310386,2.99456522" id="Line-4"></path>
+                    <path d="M0.332729469,10.3146135 L2.66183575,14.3073671" id="Line-6"></path>
+                    <path d="M2.66183575,31.6092995 L0.332729469,34.9365942" id="Line-8"></path>
+                    <path d="M0.332729469,34.9365942 L0.332729469,44.2530193" id="Line-9"></path>
+                    <path d="M2.66183575,14.3073671 L2.66183575,31.6092995" id="Line-7"></path>
+                    <path d="M0.332729469,44.2530193 L8.98369565,45.9166667" id="Line-10"></path>
+                    <path d="M8.98369565,45.9166667 L11.6455314,42.9221014" id="Line-11"></path>
+                    <path d="M11.6455314,42.9221014 L19.6310386,42.9221014" id="Line-12"></path>
+                </g>
+            </g>
+            <g id="move" transform="translate(677.000000, 49.000000)" stroke="#FFFFFF">
+                <path d="M25.7033415,35.9675196 C25.7033415,40.0620755 25.7033415,43.401567 25.7033415,49.4690555" id="path4868-4" stroke-width="2.70030717" stroke-linecap="round"></path>
+                <polygon id="path7561-4" stroke-width="1.5" fill="#000000" stroke-linejoin="round" points="36.6553293 44.3078665 26.4157438 52.6682912 16.0687275 44.3946715 20.1647883 41.0505013 23.4799761 43.7014748 23.3422388 33.9442983 29.1645782 33.8906342 29.3019653 43.6230029 32.5165189 40.9982315 36.6553293 44.307862"></polygon>
+                <circle id="path8128" stroke-width="2.12328914" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" transform="translate(25.961706, 26.198412) rotate(-89.382484) translate(-25.961706, -26.198412) " cx="25.9617056" cy="26.1984123" r="3.53881537"></circle>
+                <polygon id="path7561-4-4" stroke-width="1.5" fill="#000000" stroke-linejoin="round" points="36.3903643 8.46864901 26.1507815 0.108224376 15.8037625 8.38184403 19.8998225 11.7260142 23.2150076 9.07504078 23.0772739 18.8322173 28.8996132 18.8858814 29.0369958 9.15351261 32.2515495 11.7782841 36.3903643 8.46865351"></polygon>
+                <polygon id="path7561-4-8" stroke-width="1.5" fill="#000000" stroke-linejoin="round" points="43.7976741 16.2438892 52.0613638 26.561699 43.6907339 36.8303965 40.3852599 32.7030454 43.0673157 29.412956 33.3092751 29.4588612 33.3104453 23.6362744 43.0436764 23.5904862 40.4492734 20.3513732 43.7977074 16.2438883"></polygon>
+                <polygon id="path7561-4-8-0" stroke-width="1.5" fill="#000000" stroke-linejoin="round" points="8.34000278 16.1114058 0.0763161142 26.4292156 8.44694394 36.6979131 11.752417 32.570562 9.07036386 29.2804726 18.8284009 29.3263778 18.8275008 23.503791 9.09427058 23.4580028 11.6886717 20.2188898 8.34023681 16.1114049"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

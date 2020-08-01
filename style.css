@@ -8,27 +8,36 @@ window {
 	font-size: 20px;
 }
 
-scrollbar, scrollbar button {
+scrollbar, scrollbar button, scrollbar trough {
 	border: none;
 	background-color: #13181C;
 }
 
 scrollbar slider {
-	min-width: 88px;
+	min-width: 60px;
 	border-radius: 15px;
 	background-color: #404E57;
 }
 
+frame {
+    color: #fff;
+    border-bottom: 1px solid #444;
+}
+
+.text {
+    color: #fff;
+}
+
 progress, trough {
 	min-height: 40px;
-	font-size: 50px;
-  background-color: #404E57;
-  color: #404E57;
-  border: #000 1px solid;
+	/*font-size: 50px;*/
+    background-color: #404E57;
+    color: #fff;
+    border: #000 1px solid;
 }
 
 progress {
-	background-color: #00C9B4;
+	background-color: #d47b00;
 	font-size: 50px;
 	font-weight: lighter;
 }
@@ -38,9 +47,9 @@ progress {
 	color: #00C9B4;
 }
 
-.printing-progress-bar text {
+.printing-progress-text {
 	font-size: 25px;
-	color: #404e57;
+	color: #fff;
 }
 
 .printing-state {
@@ -53,13 +62,17 @@ button {
 	margin: 5px;
 	margin-bottom: 10px;
 	border-radius: 0;
-  border: 0px solid #000;
-  color: #fff;
+    border: 0px solid #000;
+    color: #fff;
 	-gtk-icon-shadow: none;
 }
 
 button:active {
 	background-color: #304C62;
+}
+
+.button_active {
+  background-color: #20303D;
 }
 
 button.color1 {
@@ -88,13 +101,37 @@ button.file-list {
 
 .distbutton_top {
   border: 3px solid #fff;
-  border-bottom: 0px;
-  border-top-right-radius: 15px;
+  border-right: 0px;
   border-top-left-radius: 15px;
-  margin-bottom: 0px;
+  border-bottom-left-radius: 15px;
+  margin-right: 0px;
 }
 
 .distbutton {
+  border: 3px solid #fff;
+  border-left: 3px solid #ccc;
+  border-right: 0px;
+  margin-left: 0;
+  margin-right: 0px;
+}
+
+.distbutton_bottom {
+  border: 3px solid #fff;
+  border-left: 3px solid #ccc;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  margin-left: 0;
+}
+
+.tempbutton_top {
+  border: 3px solid #fff;
+  border-bottom: 0px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  margin-bottom: 0px;
+}
+
+.tempbutton {
   border: 3px solid #fff;
   border-top: 3px solid #ccc;
   border-bottom: 0px;
@@ -102,11 +139,11 @@ button.file-list {
   margin-bottom: 0px;
 }
 
-.distbutton_bottom {
+.tempbutton_bottom {
   border: 3px solid #fff;
   border-top: 3px solid #ccc;
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   margin-top: 0;
 }
 
@@ -134,18 +171,7 @@ button.keyboard {
 	font-size: 20px;
 	padding: 50px;
 	background-color: #000;
-}
-
-.dialog button {
-	padding: 30px 50px 30px 50px;
-	border-bottom: 8px solid #009384;
-}
-
-.dialog {
-	border: 2px solid black;
-	font-size: 20px;
-	padding: 50px;
-	background-color: #000;
+    margin: 20px;
 }
 
 .dialog button {
@@ -185,10 +211,91 @@ button.keyboard {
 .printing-status-label {
 	padding-top: 5px;
 	padding-bottom: 3px;
-  color: #ccc;
+    color: #ccc;
 	font-size: 24px;
 }
 
 .hidden {
     opacity: 0;
+}
+
+
+.temperature_entry {
+  border: 0px;
+  color: #fff;
+  margin: 10px 5px 5px 5px;
+}
+
+.numpad_tleft {
+  border-left: 3px solid #fff;
+  border-top: 3px solid #fff;
+  border-top-left-radius: 15px;
+  margin: 3px 0 0 3px;
+}
+
+.numpad_top {
+  border-left: 3px solid #ccc;
+  border-top: 3px solid #fff;
+  margin: 3px 0 0 0;
+}
+
+.numpad_tright {
+  border-left: 3px solid #fff;
+  border-right: 3px solid #fff;
+  border-top: 3px solid #fff;
+  border-top-right-radius: 15px;
+  margin: 3px 3px 0 0;
+}
+
+.numpad_left {
+  border-left: 3px solid #fff;
+  border-top: 3px solid #ccc;
+  margin: 0 0 0 3px;
+}
+
+.numpad_button {
+  border-left: 3px solid #ccc;
+  border-top: 3px solid #ccc;
+  margin: 0;
+}
+
+.numpad_right {
+  border-right: 3px solid #fff;
+  border-left: 3px solid #ccc;
+  border-top: 3px solid #ccc;
+  margin: 0 3px 0 0;
+}
+
+.numpad_bleft {
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  border-top: 3px solid #ccc;
+  border-bottom-left-radius: 15px;
+  margin: 0 0 3px 3px;
+}
+
+.numpad_bottom {
+  border-left: 3px solid #ccc;
+  border-bottom: 3px solid #fff;
+  border-top: 3px solid #ccc;
+  margin: 0 0 3px 0;
+}
+
+.numpad_bright {
+  border-left: 3px solid #ccc;
+  border-bottom: 3px solid #fff;
+  border-top: 3px solid #ccc;
+  border-right: 3px solid #ccc;
+  border-bottom-right-radius: 15px;
+  margin: 0 3px 3px 0;
+}
+
+.fan_slider {
+  margin: 20px;
+  color: #fff;
+}
+
+scale mark {
+  margin-top: 20px;
+  color: #fff;
 }

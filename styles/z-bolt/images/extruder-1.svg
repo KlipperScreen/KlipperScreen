@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="77px" height="80px" viewBox="0 0 77 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>extruder1</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-62.000000, -173.000000)">
+            <g id="extruder-1" transform="translate(62.000000, 173.000000)">
+                <g id="Group" transform="translate(10.000000, 6.000000)" fill="#FFFFFF" stroke="#FFFFFF" stroke-linecap="round" stroke-width="2">
+                    <path d="M0.5,3.5 L6,0.5" id="Line"></path>
+                    <path d="M6,0.5 L14.5,0.5" id="Line-2"></path>
+                    <path d="M14.5,0.5 L17.5,4.5" id="Line-3" stroke-linejoin="round"></path>
+                    <path d="M0.5,3.5 L0.5,15.5" id="Line-5"></path>
+                    <path d="M17.5,4.5 L29.5,4.5" id="Line-4"></path>
+                    <path d="M0.5,15.5 L4,21.5" id="Line-6"></path>
+                    <path d="M4,47.5 L0.5,52.5" id="Line-8"></path>
+                    <path d="M0.5,52.5 L0.5,66.5" id="Line-9"></path>
+                    <path d="M4,21.5 L4,47.5" id="Line-7"></path>
+                    <path d="M0.5,66.5 L13.5,69" id="Line-10"></path>
+                    <path d="M13.5,69 L17.5,64.5" id="Line-11"></path>
+                    <path d="M17.5,64.5 L29.5,64.5" id="Line-12"></path>
+                </g>
+                <g id="Group" transform="translate(52.000000, 40.500000) scale(-1, 1) translate(-52.000000, -40.500000) translate(37.000000, 6.000000)" stroke="#FFFFFF" stroke-linecap="round" stroke-width="2">
+                    <path d="M0.5,3.5 L6,0.5" id="Line"></path>
+                    <path d="M6,0.5 L14.5,0.5" id="Line-2"></path>
+                    <path d="M14.5,0.5 L17.5,4.5" id="Line-3" stroke-linejoin="round"></path>
+                    <path d="M0.5,3.5 L0.5,15.5" id="Line-5"></path>
+                    <path d="M17.5,4.5 L29.5,4.5" id="Line-4"></path>
+                    <path d="M0.5,15.5 L4,21.5" id="Line-6"></path>
+                    <path d="M4,47.5 L0.5,52.5" id="Line-8"></path>
+                    <path d="M0.5,52.5 L0.5,66.5" id="Line-9"></path>
+                    <path d="M4,21.5 L4,47.5" id="Line-7"></path>
+                    <path d="M0.5,66.5 L13.5,69" id="Line-10"></path>
+                    <path d="M13.5,69 L17.5,64.5" id="Line-11"></path>
+                    <path d="M17.5,64.5 L29.5,64.5" id="Line-12"></path>
+                </g>
+                <circle id="Oval" stroke="#FFFFFF" stroke-width="2" cx="38.5" cy="35.5" r="19.5"></circle>
+                <circle id="Oval" stroke="#000000" stroke-width="0.5" fill="#FFFFFF" cx="55" cy="22" r="21"></circle>
+                <text id="1" font-family="OpenSans-SemiBold, Open Sans" font-size="26" font-weight="500" fill="#000000">
+                    <tspan x="47.6188697" y="31">1</tspan>
+                </text>
+                <path d="M35.5,73.5 L38.5,77.5" id="Line-16" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"></path>
+                <path d="M38.5,77.5 L41.5,73.5" id="Line-17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"></path>
+                <path d="M29.5,73.5 L47.5,73.5" id="Line-14" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>
