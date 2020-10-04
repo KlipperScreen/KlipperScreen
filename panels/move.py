@@ -98,7 +98,7 @@ class MovePanel(ScreenPanel):
         self._screen.add_subscription(panel_name)
 
     def home(self, widget):
-        self._screen._ws.send_method("post_printer_gcode_script", {"script": KlippyGcodes.HOME})
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
 
     def process_update(self, data):
         if "toolhead" in data and "position" in data["toolhead"]:
@@ -127,7 +127,6 @@ class MovePanel(ScreenPanel):
         logging.info("# Moving " + axis + " " + dist + "mm")
 
         print("%s\n%s %s%s" % (KlippyGcodes.MOVE_RELATIVE, KlippyGcodes.MOVE, axis, dist))
-        #self._screen._ws.send_method("post_printer_gcode_script", {"script": KlippyGcodes.MOVE_RELATIVE})
-        self._screen._ws.send_method("post_printer_gcode_script", {
-            "script": "%s\n%s %s%s" % (KlippyGcodes.MOVE_RELATIVE, KlippyGcodes.MOVE, axis, dist)
-        })
+        self._screen._ws.klippy.gcode_script(
+            "%s\n%s %s%s" % (KlippyGcodes.MOVE_RELATIVE, KlippyGcodes.MOVE, axis, dist)
+        )

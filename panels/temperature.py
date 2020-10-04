@@ -10,33 +10,34 @@ from panels.screen_panel import ScreenPanel
 
 
 class TemperaturePanel(ScreenPanel):
-    active_heater = "tool0"
+    active_heater = "extruder"
     tempdeltas = ["1","5","10","25"]
     tempdelta = "10"
-    target_temps = {
-        "bed": 0
-    }
 
     def initialize(self, panel_name):
         grid = KlippyGtk.HomogeneousGrid()
 
         eq_grid = KlippyGtk.HomogeneousGrid()
-        for i in range(self._screen.extrudercount):
-            self.target_temps["tool"+str(i)] = 0
+        i = 0
+        for x in self._printer.get_tools():
             if i > 3:
                 break
-            self.labels["tool" + str(i)] = KlippyGtk.ToggleButtonImage("extruder-"+str(i+1), KlippyGtk.formatTemperatureString(0, 0))
-            self.labels["tool" + str(i)].connect('clicked', self.select_heater, "tool"+str(i))
-            if i == 1:
-                self.labels["tool0"].set_active(True)
-            eq_grid.attach(self.labels["tool" + str(i)], i%2, i/2, 1, 1)
+            elif i == 0:
+                primary_tool = x
+            self.labels[x] = KlippyGtk.ToggleButtonImage("extruder-"+str(i+1), KlippyGtk.formatTemperatureString(0, 0))
+            self.labels[x].connect('clicked', self.select_heater, x)
+            if i == 0:
+                self.labels[x].set_active(True)
+            eq_grid.attach(self.labels[x], i%2, i/2, 1, 1)
+            i += 1
 
-        self.labels["tool0"].get_style_context().add_class('button_active')
+        print ("Primary tool: " + primary_tool)
+        self.labels[primary_tool].get_style_context().add_class('button_active')
 
-        self.labels['bed'] = KlippyGtk.ToggleButtonImage("bed", KlippyGtk.formatTemperatureString(0, 0))
-        self.labels["bed"].connect('clicked', self.select_heater, "bed")
-        width = 2 if i > 0 else 1
-        eq_grid.attach(self.labels['bed'], 0, i/2+1, width, 1)
+        self.labels["heater_bed"] = KlippyGtk.ToggleButtonImage("bed", KlippyGtk.formatTemperatureString(0, 0))
+        self.labels["heater_bed"].connect('clicked', self.select_heater, "heater_bed")
+        width = 2 if i > 1 else 1
+        eq_grid.attach(self.labels["heater_bed"], 0, i/2+1, width, 1)
 
         self.labels["control_grid"] = KlippyGtk.HomogeneousGrid()
 
@@ -83,7 +84,7 @@ class TemperaturePanel(ScreenPanel):
 
         self._screen.add_subscription(panel_name)
 
-        self.update_temp("bed",35,40)
+        self.update_temp("heater_bed",35,40)
 
     def change_temp_delta(self, widget, tempdelta):
         if self.tempdelta == tempdelta:
@@ -174,41 +175,39 @@ class TemperaturePanel(ScreenPanel):
         logging.info("### Active heater " + self.active_heater)
 
     def process_update(self, data):
-        if "heater_bed" in data:
-            self.target_temps["bed"] = data['heater_bed']['target']
-            self.update_temp(
-                "bed",
-                round(data['heater_bed']['temperature'],1),
-                round(data['heater_bed']['target'],1)
-                )
-        if "extruder" in data and data['extruder'] != "extruder":
-            self.target_temps["tool0"] = data['extruder']['target']
-            self.update_temp(
-                "tool0",
-                round(data['extruder']['temperature'],1),
-                round(data['extruder']['target'],1)
+        self.update_temp("heater_bed",
+            self._printer.get_dev_stat("heater_bed","temperature"),
+            self._printer.get_dev_stat("heater_bed","target")
+        )
+        for x in self._printer.get_tools():
+            self.update_temp(x,
+                self._printer.get_dev_stat(x,"temperature"),
+                self._printer.get_dev_stat(x,"target")
             )
+        return
 
     def change_target_temp(self, widget, dir):
+        target = self._printer.get_dev_stat(self.active_heater, "target")
         if dir == "+":
-            self.target_temps[self.active_heater] += int(self.tempdelta)
-            if self.target_temps[self.active_heater] > KlippyGcodes.MAX_EXT_TEMP:
-                self.target_temps[self.active_heater] = KlippyGcodes.MAX_EXT_TEMP
+            target += int(self.tempdelta)
+            if target > KlippyGcodes.MAX_EXT_TEMP:
+                target = KlippyGcodes.MAX_EXT_TEMP
         else:
-            self.target_temps[self.active_heater] -= int(self.tempdelta)
-            if self.target_temps[self.active_heater] < 0:
-                self.target_temps[self.active_heater] = 0
+            target -= int(self.tempdelta)
+            if target < 0:
+                target = 0
 
+        self._printer.set_dev_stat(self.active_heater, "target", target)
 
-        if self.active_heater == "bed":
-            self._screen._ws.send_method("post_printer_gcode_script", {"script": KlippyGcodes.set_bed_temp(
-                self.target_temps[self.active_heater]
-            )})
+        if self.active_heater == "heater_bed":
+            self._screen._ws.klippy.gcode_script( KlippyGcodes.set_bed_temp(
+                target
+            ))
         else:
-            self._screen._ws.send_method("post_printer_gcode_script", {"script": KlippyGcodes.set_ext_temp(
-                self.target_temps[self.active_heater],
-                self.active_heater.replace("tool","")
-            )})
+            self._screen._ws.klippy.gcode_script( KlippyGcodes.set_ext_temp(
+                target,
+                self._printer.get_tool_number(self.active_heater)
+            ))
 
     def update_entry(self, widget, digit):
         text = self.labels['entry'].get_text()
@@ -217,16 +216,18 @@ class TemperaturePanel(ScreenPanel):
                 return
             self.labels['entry'].set_text(text[0:-1])
         elif digit == 'E':
-            if self.active_heater == "bed":
+            if self.active_heater == "heater_bed":
                 temp = int(text)
                 temp = 0 if temp < 0 or temp > KlippyGcodes.MAX_BED_TEMP else temp
-                self.target_temps[self.active_heater] = temp
-                self._screen._ws.send_method("post_printer_gcode_script", {"script": KlippyGcodes.set_bed_temp(temp)})
+                self._screen._ws.klippy.gcode_script(KlippyGcodes.set_bed_temp(temp))
             else:
                 temp = int(text)
                 temp = 0 if temp < 0 or temp > KlippyGcodes.MAX_EXT_TEMP else temp
-                self.target_temps[self.active_heater] = temp
-                self._screen._ws.send_method("post_printer_gcode_script", {"script": KlippyGcodes.set_ext_temp(temp, self.active_heater.replace("tool",""))})
+                self._screen._ws.klippy.gcode_script( KlippyGcodes.set_ext_temp(
+                    temp,
+                    self._printer.get_tool_number(self.active_heater)
+                ))
+            self._printer.set_dev_stat(self.active_heater, "target", temp)
             self.labels['entry'].set_text("")
         else:
             if len(text) >= 3:

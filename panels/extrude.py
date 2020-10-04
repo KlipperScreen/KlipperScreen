@@ -99,11 +99,10 @@ class ExtrudePanel(ScreenPanel):
         self._screen.add_subscription(panel_name)
 
     def process_update(self, data):
-        if "extruder" in data and data['extruder'] != "extruder":
-            self.update_temp(
-                "tool0",
-                round(data['extruder']['temperature'],1),
-                round(data['extruder']['temperature'],1)
+        for x in self._printer.get_tools():
+            self.update_temp(x,
+                self._printer.get_dev_stat(x,"temperature"),
+                self._printer.get_dev_stat(x,"target")
             )
 
     def change_distance(self, widget, distance):
@@ -141,5 +140,5 @@ class ExtrudePanel(ScreenPanel):
         speed = self.speed_trans[self.speed]
         print(KlippyGcodes.extrude(dist, speed))
 
-        self._screen._ws.send_method("post_printer_gcode_script", {"script": KlippyGcodes.EXTRUDE_REL})
-        self._screen._ws.send_method("post_printer_gcode_script", {"script": KlippyGcodes.extrude(dist, speed)})
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.EXTRUDE_REL)
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.extrude(dist, speed))

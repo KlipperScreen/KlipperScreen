@@ -147,12 +147,42 @@ class MoonrakerApi:
 
     def emergency_stop(self):
         self._ws.send_method(
-            "post_printer_emergency_stop"
+            "printer.emergency_stop"
+        )
+
+    def gcode_script(self, script, callback=None, *args):
+        self._ws.send_method(
+            "printer.gcode.script",
+            {"script": script},
+            callback,
+            *args
+        )
+
+    def get_file_list(self, callback=None, *args):
+        self._ws.send_method(
+            "server.files.list",
+            {},
+            callback,
+            *args
+        )
+
+    def get_file_metadata(self, filename, callback=None, *args):
+        self._ws.send_method(
+            "server.files.metadata",
+            {"filename": filename},
+            callback,
+            *args
+        )
+
+    def object_subscription(self, updates):
+        self._ws.send_method(
+            "printer.objects.subscribe",
+            updates
         )
 
     def print_cancel(self, callback=None, *args):
         self._ws.send_method(
-            "post_printer_print_cancel",
+            "printer.print.cancel",
             {},
             callback,
             *args
@@ -160,7 +190,7 @@ class MoonrakerApi:
 
     def print_pause(self, callback=None, *args):
         self._ws.send_method(
-            "post_printer_print_pause",
+            "printer.print.pause",
             {},
             callback,
             *args
@@ -168,7 +198,7 @@ class MoonrakerApi:
 
     def print_resume(self, callback=None, *args):
         self._ws.send_method(
-            "post_printer_print_resume",
+            "printer.print.resume",
             {},
             callback,
             *args
@@ -176,7 +206,7 @@ class MoonrakerApi:
 
     def print_start(self, filename, callback=None, *args):
         self._ws.send_method(
-            "post_printer_print_start",
+            "printer.print.start",
             {
                 "filename": filename
             },
@@ -185,9 +215,9 @@ class MoonrakerApi:
         )
 
     def temperature_set(self, heater, target, callback=None, *args):
-        if heater == "bed":
+        if heater == "heater_bed":
             self._ws.send_method(
-                "post_printer_gcode_script",
+                "printer.gcode.script",
                 {
                     "script": KlippyGcodes.set_bed_temp(target)
                 },
@@ -197,7 +227,7 @@ class MoonrakerApi:
         else:
             #TODO: Add max/min limits
             self._ws.send_method(
-                "post_printer_gcode_script",
+                "printer.gcode.script",
                 {
                     "script": KlippyGcodes.set_ext_temp(target, heater.replace("tool",""))
                 },
@@ -205,12 +235,32 @@ class MoonrakerApi:
                 *args
             )
 
+    def set_bed_temp(self, target, callback=None, *args):
+        self._ws.send_method(
+            "printer.gcode.script",
+            {
+                "script": KlippyGcodes.set_bed_temp(target)
+            },
+            callback,
+            *args
+        )
+
+    def set_tool_temp(self, tool, target, callback=None, *args):
+        self._ws.send_method(
+            "printer.gcode.script",
+            {
+                "script": KlippyGcodes.set_ext_temp(target, tool)
+            },
+            callback,
+            *args
+        )
+
     def restart(self):
         self._ws.send_method(
-            "post_printer_restart"
+            "printer.restart"
         )
 
     def restart_firmware(self):
         self._ws.send_method(
-            "post_printer_firmware_restart"
+            "printer.firmware_restart"
         )

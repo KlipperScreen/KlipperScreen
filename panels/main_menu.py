@@ -15,20 +15,28 @@ class MainPanel(MenuPanel):
         # Create Extruders and bed icons
         eq_grid = KlippyGtk.HomogeneousGrid()
 
-        for i in range(extrudercount):
+
+        i = 0
+        for x in self._printer.get_tools():
             if i > 3:
                 break
-            self.labels["tool" + str(i)] = KlippyGtk.ButtonImage("extruder-"+str(i+1), KlippyGtk.formatTemperatureString(0, 0))
-            eq_grid.attach(self.labels["tool" + str(i)], i%2, i/2, 1, 1)
+            self.labels[x] = KlippyGtk.ButtonImage("extruder-"+str(i+1), KlippyGtk.formatTemperatureString(0, 0))
+            eq_grid.attach(self.labels[x], i%2, i/2, 1, 1)
+            i += 1
 
-        self.labels['bed'] = KlippyGtk.ButtonImage("bed", KlippyGtk.formatTemperatureString(0, 0))
+        self.labels['heater_bed'] = KlippyGtk.ButtonImage("bed", KlippyGtk.formatTemperatureString(0, 0))
 
-        width = 2 if i > 0 else 1
-        eq_grid.attach(self.labels['bed'], 0, i/2+1, width, 1)
+        width = 2 if i > 1 else 1
+        eq_grid.attach(self.labels['heater_bed'], 0, i/2+1, width, 1)
 
         grid.attach(eq_grid, 0, 0, 1, 1)
         grid.attach(self.arrangeMenuItems(items, 2, True), 1, 0, 1, 1)
         self.grid = grid
+
+        self.target_temps = {
+            "heater_bed": 0,
+            "extruder": 0
+        }
 
         self._screen.add_subscription(panel_name)
 
@@ -40,15 +48,13 @@ class MainPanel(MenuPanel):
             self.labels[dev].set_label(KlippyGtk.formatTemperatureString(temp, target))
 
     def process_update(self, data):
-        if "heater_bed" in data:
-            self.update_temp(
-                "bed",
-                round(data['heater_bed']['temperature'],1),
-                round(data['heater_bed']['target'],1)
+        self.update_temp("heater_bed",
+            self._printer.get_dev_stat("heater_bed","temperature"),
+            self._printer.get_dev_stat("heater_bed","target")
+        )
+        for x in self._printer.get_tools():
+            self.update_temp(x,
+                self._printer.get_dev_stat(x,"temperature"),
+                self._printer.get_dev_stat(x,"target")
             )
-        if "extruder" in data:
-            self.update_temp(
-                "tool0",
-                round(data['extruder']['temperature'],1),
-                round(data['extruder']['target'],1)
-            )
+        return

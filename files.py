@@ -16,7 +16,7 @@ class KlippyFiles:
 
 
     def _callback(self, result, method, params):
-        if method == "get_file_list":
+        if method == "server.files.list":
             if isinstance(result['result'],list):
                 for item in result['result']:
                     self.filelist.append(item['filename'])
@@ -34,11 +34,11 @@ class KlippyFiles:
             #print(json.dumps(result, indent=4))
 
     def ret_files(self):
-        self._screen._ws.send_method("get_file_list", {}, self._callback)
+        self._screen._ws.klippy.get_file_list(self._callback)
 
     def ret_file_data (self, filename):
         print("Getting file info for %s" % (filename))
-        self._screen._ws.send_method("get_file_metadata", {"filename": filename}, self._callback)
+        self._screen._ws.klippy.get_file_metadata(filename, self._callback)
 
     def get_file_list(self):
         return self.filelist

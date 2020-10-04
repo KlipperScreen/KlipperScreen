@@ -36,7 +36,7 @@ class KlippyGcodes:
 
     @staticmethod
     def set_ext_temp(temp, tool=0):
-        return KlippyGcodes.SET_EXT_TEMP + " T" + tool + " S" + str(temp)
+        return KlippyGcodes.SET_EXT_TEMP + " T" + str(tool) + " S" + str(temp)
 
     @staticmethod
     def set_fan_speed(speed):

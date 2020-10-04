@@ -51,33 +51,36 @@ class JobStatusPanel(ScreenPanel):
         #pbox.pack_end(self.labels['progress'], False, False, 0)
         pbox.pack_end(overlay, False, False, 0)
 
-        grid.attach(pbox, 2, 0, 3, 2)
+        grid.attach(pbox, 1, 0, 3, 2)
 
-        self.labels['tool0'] = KlippyGtk.ButtonImage("extruder-1", KlippyGtk.formatTemperatureString(0, 0))
-        self.labels['tool0'].set_sensitive(False)
-        grid.attach(self.labels['tool0'], 0, 0, 1, 1)
-        #self.labels['tool1'] = KlippyGtk.ButtonImage("extruder-2", KlippyGtk.formatTemperatureString(0, 0))
-        #self.labels['tool1'].set_sensitive(False)
-        #grid.attach(self.labels['tool1'], 1, 0, 1, 1)
-        self.labels['bed'] = KlippyGtk.ButtonImage("bed", KlippyGtk.formatTemperatureString(0, 0))
-        self.labels['bed'].set_sensitive(False)
-        grid.attach(self.labels['bed'], 0, 2, 1, 1)
+        self.labels['extruder'] = KlippyGtk.ButtonImage("extruder-1", KlippyGtk.formatTemperatureString(0, 0))
+        self.labels['extruder'].set_sensitive(False)
+        grid.attach(self.labels['extruder'], 0, 0, 1, 1)
+
+        self.labels['heater_bed'] = KlippyGtk.ButtonImage("bed", KlippyGtk.formatTemperatureString(0, 0))
+        self.labels['heater_bed'].set_sensitive(False)
+        grid.attach(self.labels['heater_bed'], 0, 1, 1, 1)
 
         self.labels['resume'] = KlippyGtk.ButtonImage("resume","Resume","color1")
         self.labels['resume'].connect("clicked",self.resume)
-        #grid.attach(self.labels['play'], 1, 2, 1, 1)
         self.labels['pause'] = KlippyGtk.ButtonImage("pause","Pause","color1" )
         self.labels['pause'].connect("clicked",self.pause)
-        grid.attach(self.labels['pause'], 1, 2, 1, 1)
+
+        if self._printer.get_stat('pause_resume','is_paused') == True:
+            self.is_paused = True
+            grid.attach(self.labels['resume'], 0, 2, 1, 1)
+        else:
+            grid.attach(self.labels['pause'], 0, 2, 1, 1)
+
         self.labels['cancel'] = KlippyGtk.ButtonImage("stop","Cancel","color2")
         self.labels['cancel'].connect("clicked", self.cancel)
-        grid.attach(self.labels['cancel'], 2, 2, 1, 1)
+        grid.attach(self.labels['cancel'], 1, 2, 1, 1)
         self.labels['estop'] = KlippyGtk.ButtonImage("decrease","Emergency Stop","color4")
         self.labels['estop'].connect("clicked", self.emergency_stop)
-        grid.attach(self.labels['estop'], 3, 2, 1, 1)
+        grid.attach(self.labels['estop'], 2, 2, 1, 1)
         self.labels['control'] = KlippyGtk.ButtonImage("control","Control","color3")
         self.labels['control'].connect("clicked", self._screen._go_to_submenu, "Control")
-        grid.attach(self.labels['control'], 4, 2, 1, 1)
+        grid.attach(self.labels['control'], 3, 2, 1, 1)
 
         self.panel = grid
 
@@ -118,7 +121,7 @@ class JobStatusPanel(ScreenPanel):
             self.enable_button("pause","cancel")
             return
 
-        self._screen._ws.klippy.print_cancel(self._response_callback, "enable_button", "pause", "stop")
+        self._screen._ws.klippy.print_cancel(self._response_callback, "enable_button", "pause", "cancel")
 
 
     def emergency_stop(self, widget):
@@ -138,43 +141,42 @@ class JobStatusPanel(ScreenPanel):
 
 
     def process_update(self, data):
-        if "heater_bed" in data:
-            self.update_temp(
-                "bed",
-                round(data['heater_bed']['temperature'],1),
-                round(data['heater_bed']['target'],1)
+        self.update_temp("heater_bed",
+            self._printer.get_dev_stat("heater_bed","temperature"),
+            self._printer.get_dev_stat("heater_bed","target")
+        )
+        for x in self._printer.get_tools():
+            self.update_temp(x,
+                self._printer.get_dev_stat(x,"temperature"),
+                self._printer.get_dev_stat(x,"target")
             )
-        if "extruder" in data and data['extruder'] != "extruder":
-            self.update_temp(
-                "tool0",
-                round(data['extruder']['temperature'],1),
-                round(data['extruder']['target'],1)
-            )
-        if "virtual_sdcard" in data:
-            if "filename" in data['virtual_sdcard'] and self.filename != data['virtual_sdcard']['filename']:
-                if data['virtual_sdcard']['filename'] != "":
-                    self.filename = KlippyGtk.formatFileName(data['virtual_sdcard']['filename'])
-                    self.update_image_text("file", self.filename)
-                else:
-                    file = "Unknown"
-                    self.update_image_text("file", "Unknown")
 
-            if "print_duration" in data['virtual_sdcard']:
-                self.update_text("time", str(KlippyGtk.formatTimeString(data['virtual_sdcard']['print_duration'])))
-            if "progress" in data['virtual_sdcard']:
-                self.update_progress(data['virtual_sdcard']['progress'])
-        if "toolhead" in data:
-            if "print_time" in data['toolhead']:
-                self.update_text("time_left", str(KlippyGtk.formatTimeString(data['toolhead']['print_time'])))
+        vsd = self._printer.get_stat("print_stats")
+        if "filename" in vsd and self.filename != vsd['filename']:
+            if vsd['filename'] != "":
+                self.filename = KlippyGtk.formatFileName(vsd['filename'])
+                self.update_image_text("file", self.filename)
+            else:
+                file = "Unknown"
+                self.update_image_text("file", "Unknown")
+
+        self.update_text("time", str(KlippyGtk.formatTimeString(vsd['print_duration'])))
+        self.update_text("time_left", str(KlippyGtk.formatTimeString(
+            vsd['print_duration'] / self._printer.get_stat('virtual_sdcard','progress')
+                - vsd['print_duration']
+        )))
+
+        self.update_progress(self._printer.get_stat('virtual_sdcard','progress'))
+
         if "pause_resume" in data:
             if self.is_paused == True and data['pause_resume']['is_paused'] == False:
                 self.is_paused = False
-                self.panel.attach(self.labels['pause'], 1, 2, 1, 1)
+                self.panel.attach(self.labels['pause'], 0, 2, 1, 1)
                 self.panel.remove(self.labels['resume'])
                 self.panel.show_all()
             if self.is_paused == False and data['pause_resume']['is_paused'] == True:
                 self.is_paused = True
-                self.panel.attach(self.labels['resume'], 1, 2, 1, 1)
+                self.panel.attach(self.labels['resume'], 0, 2, 1, 1)
                 self.panel.remove(self.labels['pause'])
                 self.panel.show_all()
 

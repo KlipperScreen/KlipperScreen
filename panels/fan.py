@@ -74,10 +74,12 @@ class FanPanel(ScreenPanel):
 
 
     def set_fan_speed(self, widget):
-        self._screen._ws.send_method("post_printer_gcode_script", {"script": KlippyGcodes.set_fan_speed(self.labels['scale'].get_value())})
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.set_fan_speed(self.labels['scale'].get_value()))
         self.cancel_select_fan_speed(widget)
 
     def set_fan_on(self, widget, fanon):
         speed = 100 if fanon == True else 0
+        self.labels["scale"].disconnect_by_func(self.select_fan_speed)
         self.labels["scale"].set_value(speed)
-        self._screen._ws.send_method("post_printer_gcode_script", {"script": KlippyGcodes.set_fan_speed(speed)})
+        self.labels["scale"].connect("value-changed", self.select_fan_speed)
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.set_fan_speed(speed))

@@ -19,6 +19,7 @@ from KlippyWebsocket import KlippyWebsocket
 from KlippyRest import KlippyRest
 from files import KlippyFiles
 from KlippyGtk import KlippyGtk
+from printer import Printer
 
 # Do this better in the future
 from panels.screen_panel import *
@@ -56,6 +57,7 @@ class KlipperScreen(Gtk.Window):
     subscriptions = []
     last_update = {}
     shutdown = True
+    printer = None
 
     def __init__(self):
         self.read_config()
@@ -65,6 +67,7 @@ class KlipperScreen(Gtk.Window):
         Gtk.Window.__init__(self)
 
         self.set_default_size(Gdk.Screen.get_width(Gdk.Screen.get_default()), Gdk.Screen.get_height(Gdk.Screen.get_default()))
+        self.set_resizable(False)
         logging.info(str(Gdk.Screen.get_width(Gdk.Screen.get_default()))+"x"+str(Gdk.Screen.get_height(Gdk.Screen.get_default())))
 
         self.printer_initializing("Connecting to Moonraker")
@@ -82,7 +85,7 @@ class KlipperScreen(Gtk.Window):
         if not hasattr(self, "_ws"):
             self.create_websocket()
 
-        if info['result']['is_ready'] == False and "M112" in info['result']['message']:
+        if info['result']['state'] == "ready" and "M112" in info['result']['state_message']:
             print("Emergency stopped")
             self.printer_initializing("Shutdown due to Emergency Stop")
 
@@ -90,29 +93,42 @@ class KlipperScreen(Gtk.Window):
             'idle_timeout',
             'configfile',
             'toolhead',
-            'virtual_sdcard'
+            'virtual_sdcard',
+            'print_stats',
+            'heater_bed',
+            'extruder',
+            'pause_resume'
         ]
-        r = requests.get("http://127.0.0.1:7125/printer/objects/status?" + "&".join(status_objects))
+        r = requests.get("http://127.0.0.1:7125/printer/objects/query?" + "&".join(status_objects))
 
         requested_updates = {
             "toolhead": [],
             "virtual_sdcard": [],
+            "print_stats": [],
             "heater_bed": [],
-            "extruder": []
+            "extruder": [],
+            "configfile": []
         }
 
         #TODO: Check that we get good data
         data = json.loads(r.content)
+        data = data['result']['status']
         for x in data:
             self.last_update[x] = data[x]
 
-        self.printer_config = data['result']['configfile']['config']
-        self.read_printer_config()
+        self.printer_config = data['configfile']['config']
+        #self.read_printer_config()
+        self.printer = Printer(data)
+
+        # Initialize target values. TODO: methodize this
+        print (json.dumps(data, indent=2))
+        self.printer.set_dev_stat("heater_bed", "target", data['heater_bed']['target'])
+        self.printer.set_dev_stat("extruder", "target", data['extruder']['target'])
 
         print (info)
-        if data['result']['toolhead']['status'] == "Printing" and data['result']['virtual_sdcard']['is_active'] == True:
+        if (data['print_stats']['state'] == "printing" or data['print_stats']['state'] == "paused"):
             self.printer_printing()
-        elif info['result']['is_ready'] == True:
+        elif info['result']['state'] == "ready":
             self.printer_ready()
 
         while (self._ws.is_connected() == False):
@@ -121,10 +137,8 @@ class KlipperScreen(Gtk.Window):
 
         self.files = KlippyFiles(self)
 
-        self._ws.send_method(
-            "post_printer_objects_subscription",
-            requested_updates
-        )
+        self._ws.klippy.object_subscription(requested_updates)
+
 
 
     def read_printer_config(self):
@@ -139,6 +153,8 @@ class KlipperScreen(Gtk.Window):
                 self.extrudercount += 1
 
         logging.info("### Toolcount: " + str(self.toolcount) + " Heaters: " + str(self.extrudercount))
+
+        self._printer = Printer(self.toolcount, self.extrudercount)
 
     def show_panel(self, panel_name, type, remove=None, pop=True, **kwargs):
         if remove == 2:
@@ -296,25 +312,57 @@ class KlipperScreen(Gtk.Window):
     def _websocket_callback(self, action, data):
         #print(json.dumps(data, indent=2))
 
-        if action == "notify_klippy_state_changed":
-            if data == "ready":
-                logging.info("### Going to ready state")
-                self.printer_ready()
-            elif data == "disconnect" or data == "shutdown":
+        self.printer.process_update(data)
+
+        if "webhooks" in data:
+            print(data)
+
+
+        if "webhooks" in data and "state" in data['webhooks']:
+            if data['webhooks']['state'] == "shutdown":
                 logging.info("### Going to disconnected state")
                 self.printer_initializing("Klipper has shutdown")
+            elif data['webhooks']['state'] == "ready":
+                logging.info("### Going to ready state")
+                self.printer_ready()
+        else:
+            active = self.printer.get_stat('virtual_sdcard','is_active')
+            paused = self.printer.get_stat('pause_resume','is_paused')
+            if "job_status" in self._cur_panels:
+                if active == False and paused == False:
+                    self.printer_ready()
+            else:
+                if active == True or paused == True:
+                    self.printer_printing()
 
-        elif action == "notify_status_update":
+
+
+
+        if action == "notify_status_update":
             for x in data:
                 self.last_update[x] = data[x]
 
-            if "virtual_sdcard" in data and self.shutdown == False:
-                if ((data['virtual_sdcard']['is_active'] == True or data['pause_resume']['is_paused'] == True)
-                        and "job_status" not in self._cur_panels):
-                    self.printer_printing()
-                elif (data['virtual_sdcard']['is_active'] == False and data['pause_resume']['is_paused'] == False
-                        and "job_status" in self._cur_panels):
-                    self.printer_ready()
+            #if "virtual_sdcard" in data and self.shutdown == False:
+            #    if (self.printer.get_stat('pause_resume','is_paused') == True) and "job_status" not in self._cur_panels):
+            #        self.printer_printing()
+            #    elif ((self.printer.get_stat('virtual_sdcard','is_active') == False and self.printer.get_stat('pause_resume','is_paused') == False)
+            #            and "job_status" in self._cur_panels):
+            #        self.printer_ready()
+
+            if "heater_bed" in data:
+                d = data["heater_bed"]
+                if "target" in d:
+                    self.printer.set_dev_stat("heater_bed", "target", d["target"])
+                if "temperature" in d:
+                    self.printer.set_dev_stat("heater_bed", "temperature", d["temperature"])
+            for x in self.printer.get_tools():
+                if x in data:
+                    d = data[x]
+                    if "target" in d:
+                        self.printer.set_dev_stat(x, "target", d["target"])
+                    if "temperature" in d:
+                        self.printer.set_dev_stat(x, "temperature", d["temperature"])
+
             for sub in self.subscriptions:
                 self.panels[sub].process_update(data)
 
@@ -331,7 +379,7 @@ class KlipperScreen(Gtk.Window):
 
     def printer_ready(self):
         self.shutdown = False
-        self.show_panel('main_panel', "MainPanel", 2, items=self._config['mainmenu'], extrudercount=self.extrudercount)
+        self.show_panel('main_panel', "MainPanel", 2, items=self._config['mainmenu'], extrudercount=self.printer.get_extruder_count())
 
     def printer_printing(self):
         self.show_panel('job_status',"JobStatusPanel", 2)

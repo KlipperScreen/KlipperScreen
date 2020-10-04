@@ -16,8 +16,8 @@ class ZCalibratePanel:
         self._screen = screen
 
     def initialize(self, panel_name):
-        self._screen._ws.send_method("post_printer_gcode_script", {"script": KlippyGcodes.HOME})
-        self._screen._ws.send_method("post_printer_gcode_script", {"script": KlippyGcodes.PROBE_CALIBRATE})
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_CALIBRATE)
 
         grid = KlippyGtk.HomogeneousGrid()
 
@@ -118,12 +118,12 @@ class ZCalibratePanel:
     def move(self, widget, dir):
         dist = str(self.distance) if dir == "+" else "-" + str(self.distance)
         print("# Moving " + KlippyGcodes.probe_move(dist))
-        self._screen._ws.send_method("post_printer_gcode_script", {"script": KlippyGcodes.probe_move(dist)})
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.probe_move(dist))
 
     def abort(self, widget):
-        self._screen._ws.send_method("post_printer_gcode_script", {"script": KlippyGcodes.PROBE_ABORT})
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_ABORT)
         self._screen._menu_go_back(widget)
 
     def accept(self, widget):
-        self._screen._ws.send_method("post_printer_gcode_script", {"script": KlippyGcodes.PROBE_ACCEPT})
-        self._screen._ws.send_method("post_printer_gcode_script", {"script": KlippyGcodes.SAVE_CONFIG})
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_ACCEPT)
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.SAVE_CONFIG)

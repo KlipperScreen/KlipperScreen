@@ -58,8 +58,6 @@ class SystemPanel(ScreenPanel):
 
     def restart_klippy(self, type=None):
         if type == "firmware":
-            method = "post_printer_firmware_restart"
+            self._screen._ws.klippy.restart_firmware()
         else:
-            method = "post_printer_restart"
-
-        self._screen._ws.send_method(method)
+            self._screen._ws.klippy.restart()
