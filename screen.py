@@ -339,16 +339,6 @@ class KlipperScreen(Gtk.Window):
 
 
         if action == "notify_status_update":
-            for x in data:
-                self.last_update[x] = data[x]
-
-            #if "virtual_sdcard" in data and self.shutdown == False:
-            #    if (self.printer.get_stat('pause_resume','is_paused') == True) and "job_status" not in self._cur_panels):
-            #        self.printer_printing()
-            #    elif ((self.printer.get_stat('virtual_sdcard','is_active') == False and self.printer.get_stat('pause_resume','is_paused') == False)
-            #            and "job_status" in self._cur_panels):
-            #        self.printer_ready()
-
             if "heater_bed" in data:
                 d = data["heater_bed"]
                 if "target" in d:
