@@ -45,6 +45,6 @@ install_systemd_service()
 }
 
 
-#install_packages
+install_packages
 create_virtualenv
 install_systemd_service
