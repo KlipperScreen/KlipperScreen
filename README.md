@@ -1,31 +1,42 @@
 # KlipperScreen
 KlipperScreen is an idea based from [OctoScreen](https://github.com/Z-Bolt/OctoScreen/), but instead of needing OctoPrint or to compile go, KlipperScreen is python based and interacts directly with Moonraker, Klipper's API service, so that it can be run with no dependencies besides Klipper.
 
-Currently working features:
- - Homing
- - Preheating
- - Job Status and control
- - Temperature control
- - Extrude control
- - Fan control
- - Disable steppers
- - Configure Z Offset using PROBE_CALIBRATE
-
-Working on:
- - Print tuning (Z Babystepping, Speed Control, Flow Control)
- - Better system panel
- - Wifi selection
- - Manual bed leveling assist
- - Using thumbnails from prusa on job status page
+Current feature list:
+ - [x] Homing
+ - [x] Preheating
+ - [x] Job Status and control
+ - [x] Temperature control
+ - [x] Extrude control
+ - [x] Fan control
+ - [x] Disable steppers
+ - [x] Configure Z Offset using PROBE_CALIBRATE
+ - [ ] Print tuning (Z Babystepping, Speed Control, Flow Control)
+ - [ ] Better system panel
+ - [ ] Wifi selection
+ - [ ] Manual bed leveling assist
+ - [ ] Using thumbnails from prusa on job status page
 
 
 More details to come...
 
 ### Installation
+Follow the instructions to install klipper and moonraker.
+klipper: https://github.com/KevinOConnor/klipper/
+moonraker: https://github.com/Arksine/moonraker
+
+Ensure that 127.0.0.1 is a trusted client for moonraker, such as in this example:
+```
+[authorization]
+trusted_clients:
+  127.0.0.1
+```
+
+For moonraker, ensure that 127.0.0.1 is a trusted client:
+
 Run _scripts/KlipperScreen-install.sh_
 This script will install packages that are listed under manual install, create a
 python virtual environment at ${HOME}/.KlipperScreen-env and install a systemd
-service file. 
+service file.
 
 ### Manual Installation
 ```
