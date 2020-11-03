@@ -10,7 +10,7 @@ class KlippyRest:
         self.port = port
 
     def get_info(self):
-        return self.send_request("printer/info")
+        return self.send_request("server/info")
 
     def send_request(self, method):
         r = requests.get("http://%s:%s/%s" % (self.ip, self.port, method))

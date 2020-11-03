@@ -57,7 +57,6 @@ logger.addHandler(ch)
 
 klipperscreendir = os.getcwd()
 config = klipperscreendir + "/KlipperScreen.config"
-logger.warning("test test")
 logger.info("Config file: " + config)
 
 class KlipperScreen(Gtk.Window):
@@ -105,7 +104,8 @@ class KlipperScreen(Gtk.Window):
         if not hasattr(self, "_ws"):
             self.create_websocket()
 
-        if info['result']['state'] == "ready" and "M112" in info['result']['state_message']:
+        if (info['result']['klippy_state'] == "ready" and "state_message" in info['result'] and
+                "M112" in info['result']['state_message']):
             logger.warning("Printer is emergency stopped")
             self.printer_initializing("Shutdown due to Emergency Stop")
 
@@ -131,6 +131,7 @@ class KlipperScreen(Gtk.Window):
         }
 
         #TODO: Check that we get good data
+        print (r.content)
         data = json.loads(r.content)
         data = data['result']['status']
         for x in data:
@@ -146,7 +147,7 @@ class KlipperScreen(Gtk.Window):
         print (info)
         if (data['print_stats']['state'] == "printing" or data['print_stats']['state'] == "paused"):
             self.printer_printing()
-        elif info['result']['state'] == "ready":
+        elif info['result']['klippy_state'] == "ready":
             self.printer_ready()
 
         while (self._ws.is_connected() == False):
