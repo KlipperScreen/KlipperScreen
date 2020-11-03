@@ -79,7 +79,7 @@ class PrintPanel(ScreenPanel):
         info = Gtk.Label("Uploaded: blah - Size: blah")
         info.set_halign(Gtk.Align.START)
         info.set_markup("<small>Uploaded: <b>%s</b> - Size: <b>%s</b></small>" % (
-            humanize.naturaltime(fileinfo['modified']),
+            fileinfo['modified'],
             humanize.naturalsize(fileinfo['size'])
         ))
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
