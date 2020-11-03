@@ -9,6 +9,7 @@ import requests
 import websocket
 import asyncio
 import logging
+logger = logging.getLogger("KlipperScreen.KlipperWebsocket")
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
@@ -30,6 +31,7 @@ api = {
         "url": "/access/oneshot_token"
     }
 }
+
 class KlippyWebsocket(threading.Thread):
     _req_id = 0
     connected = False
@@ -50,7 +52,7 @@ class KlippyWebsocket(threading.Thread):
             headers={"x-api-key":api_key}
         )
         if r.status_code != 200:
-            logging.info("Failed to retrieve oneshot token")
+            logger.info("Failed to retrieve oneshot token")
             return
 
         token = json.loads(r.content)['result']
@@ -109,12 +111,12 @@ class KlippyWebsocket(threading.Thread):
 
     def on_open(self, ws):
         print("### ws open ###")
-        logging.info("### ws open ###")
+        logger.info("### ws open ###")
         self.connected = True
 
     def on_close(self, ws):
         print("### ws closed ###")
-        logging.info("### ws closed ###")
+        logger.info("### ws closed ###")
         self.connected = False
 
         # TODO: Make non-blocking
@@ -146,11 +148,13 @@ class MoonrakerApi:
         self._ws = ws
 
     def emergency_stop(self):
+        logger.info("Sending printer.emergency_stop")
         self._ws.send_method(
             "printer.emergency_stop"
         )
 
     def gcode_script(self, script, callback=None, *args):
+        logger.debug("Sending printer.gcode.script: %s", script)
         self._ws.send_method(
             "printer.gcode.script",
             {"script": script},
@@ -159,6 +163,7 @@ class MoonrakerApi:
         )
 
     def get_file_list(self, callback=None, *args):
+        logger.debug("Sending server.files.list")
         self._ws.send_method(
             "server.files.list",
             {},
@@ -167,6 +172,7 @@ class MoonrakerApi:
         )
 
     def get_file_metadata(self, filename, callback=None, *args):
+        logger.debug("Sending server.files.metadata: %s", filename)
         self._ws.send_method(
             "server.files.metadata",
             {"filename": filename},
@@ -175,12 +181,14 @@ class MoonrakerApi:
         )
 
     def object_subscription(self, updates):
+        logger.debug("Sending printer.objects.subscribe: %s", str(updates))
         self._ws.send_method(
             "printer.objects.subscribe",
             updates
         )
 
     def print_cancel(self, callback=None, *args):
+        logger.debug("Sending printer.print.cancel")
         self._ws.send_method(
             "printer.print.cancel",
             {},
@@ -189,6 +197,7 @@ class MoonrakerApi:
         )
 
     def print_pause(self, callback=None, *args):
+        logger.debug("Sending printer.print.pause")
         self._ws.send_method(
             "printer.print.pause",
             {},
@@ -197,6 +206,7 @@ class MoonrakerApi:
         )
 
     def print_resume(self, callback=None, *args):
+        logger.debug("Sending printer.print.resume")
         self._ws.send_method(
             "printer.print.resume",
             {},
@@ -205,6 +215,7 @@ class MoonrakerApi:
         )
 
     def print_start(self, filename, callback=None, *args):
+        logger.debug("Sending printer.print.start")
         self._ws.send_method(
             "printer.print.start",
             {
@@ -216,6 +227,7 @@ class MoonrakerApi:
 
     def temperature_set(self, heater, target, callback=None, *args):
         if heater == "heater_bed":
+            logger.debug("Sending printer.gcode.script: %s", KlippyGcodes.set_bed_temp(target))
             self._ws.send_method(
                 "printer.gcode.script",
                 {
@@ -225,6 +237,8 @@ class MoonrakerApi:
                 *args
             )
         else:
+            logger.debug("Sending printer.gcode.script: %s",
+                KlippyGcodes.set_ext_temp(target, heater.replace("tool","")))
             #TODO: Add max/min limits
             self._ws.send_method(
                 "printer.gcode.script",
@@ -236,6 +250,7 @@ class MoonrakerApi:
             )
 
     def set_bed_temp(self, target, callback=None, *args):
+        logger.debug("Sending set_bed_temp: %s", KlippyGcodes.set_bed_temp(target))
         self._ws.send_method(
             "printer.gcode.script",
             {
@@ -246,6 +261,7 @@ class MoonrakerApi:
         )
 
     def set_tool_temp(self, tool, target, callback=None, *args):
+        logger.debug("Sending set_tool_temp: %s", KlippyGcodes.set_ext_temp(target, tool))
         self._ws.send_method(
             "printer.gcode.script",
             {
@@ -256,11 +272,13 @@ class MoonrakerApi:
         )
 
     def restart(self):
+        logger.debug("Sending printer.restart")
         self._ws.send_method(
             "printer.restart"
         )
 
     def restart_firmware(self):
+        logger.debug("Sending printer.firmware_restart")
         self._ws.send_method(
             "printer.firmware_restart"
         )

@@ -6,6 +6,9 @@ from gi.repository import Gtk, Gdk, GLib
 from KlippyGtk import KlippyGtk
 from KlippyGcodes import KlippyGcodes
 
+import logging
+logger = logging.getLogger("KlipperScreen.ZCalibratePanel")
+
 class ZCalibratePanel:
     _screen = None
     labels = {}
@@ -117,13 +120,15 @@ class ZCalibratePanel:
 
     def move(self, widget, dir):
         dist = str(self.distance) if dir == "+" else "-" + str(self.distance)
-        print("# Moving " + KlippyGcodes.probe_move(dist))
+        logger.info("# Moving %s", KlippyGcodes.probe_move(dist))
         self._screen._ws.klippy.gcode_script(KlippyGcodes.probe_move(dist))
 
     def abort(self, widget):
+        logger.info("Aborting Z calibrate")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_ABORT)
         self._screen._menu_go_back(widget)
 
     def accept(self, widget):
+        logger.info("Accepting Z calibrate")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_ACCEPT)
         self._screen._ws.klippy.gcode_script(KlippyGcodes.SAVE_CONFIG)
