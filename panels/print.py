@@ -9,9 +9,10 @@ from KlippyGtk import KlippyGtk
 from KlippyGcodes import KlippyGcodes
 from panels.screen_panel import ScreenPanel
 
+logger = logging.getLogger("KlipperScreen.PrintPanel")
+
 class PrintPanel(ScreenPanel):
     def initialize(self, panel_name):
-
         scroll = Gtk.ScrolledWindow()
         scroll.set_property("overlay-scrolling", False)
         scroll.set_vexpand(True)
@@ -42,12 +43,19 @@ class PrintPanel(ScreenPanel):
         self.labels['filelist'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.labels['filelist'].set_vexpand(True)
 
+        #self.labels['filelist'] = Gtk.Grid(orientation=Gtk.Orientation.VERTICAL)
+        #self.labels['filelist'].set_vexpand(True)
+        self.labels['filelist'] = Gtk.Grid()
+
+        self.files = {}
         self.reload_files()
-        
+
         scroll.add(self.labels['filelist'])
 
 
         self.panel = box
+
+        self._screen.files.add_file_callback(self._callback)
 
 
         return
@@ -98,8 +106,20 @@ class PrintPanel(ScreenPanel):
         file.add(actions)
         frame.add(file)
 
-        self.labels['filelist'].add(frame)
+        self.files[filename] = frame
+        files = sorted(self.files)
+        pos = files.index(filename)
+
+        self.labels['filelist'].insert_row(pos)
+        self.labels['filelist'].attach(self.files[filename], 0, pos, 1, 1)
         self.labels['filelist'].show_all()
+
+    def delete_file(self, filename):
+        files = sorted(self.files)
+        pos = files.index(filename)
+        self.labels['filelist'].remove_row(pos)
+        self.labels['filelist'].show_all()
+        self.files.pop(filename)
 
     def reload_files(self, widget=None):
         for child in self.labels['filelist'].get_children():
@@ -109,6 +129,14 @@ class PrintPanel(ScreenPanel):
         for file in self._screen.files.get_file_list():
             #TODO: Change priority on this
             GLib.idle_add(self.add_file, file)
+
+    def _callback(self, newfiles, deletedfiles):
+        logger.debug("newfiles: %s", newfiles)
+        for file in newfiles:
+            self.add_file(file)
+        logger.debug("deletedfiles: %s", deletedfiles)
+        for file in deletedfiles:
+            self.delete_file(file)
 
     def confirm_print(self, widget, filename):
         dialog = KlippyGtk.ConfirmDialog(
