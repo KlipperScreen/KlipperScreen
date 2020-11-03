@@ -15,9 +15,15 @@ Current feature list:
  - [ ] Wifi selection
  - [ ] Manual bed leveling assist
  - [ ] Using thumbnails from prusa on job status page
+ - [ ] Scale UI based off of resolution
 
 
 More details to come...
+
+### Required Hardware
+KlipperScreen should run on any HDMI touchscreen that you can connect to a raspberry pi. The required video driver may
+be slightly different depending on what model you get. I am developing on a 1024x600 resolution screen. Due to this,
+other resolutions may not be scaled properly at this moment. UI scaling is a future development item.
 
 ### Installation
 Follow the instructions to install klipper and moonraker.
