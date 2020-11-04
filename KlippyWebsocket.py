@@ -163,7 +163,8 @@ class MoonrakerApi:
         )
 
     def get_file_list(self, callback=None, *args):
-        logger.debug("Sending server.files.list")
+        #Commenting this log for being too noisy
+        #logger.debug("Sending server.files.list")
         self._ws.send_method(
             "server.files.list",
             {},

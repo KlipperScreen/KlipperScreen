@@ -19,11 +19,7 @@ class ZCalibratePanel:
         self._screen = screen
 
     def initialize(self, panel_name):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_CALIBRATE)
-
         grid = KlippyGtk.HomogeneousGrid()
-
 
         label = Gtk.Label("Z Offset: ")
         label.get_style_context().add_class('temperature_entry')
@@ -38,10 +34,6 @@ class ZCalibratePanel:
         zpos.connect("clicked", self.move, "+")
         zneg = KlippyGtk.ButtonImage('z-offset-increase',"Lower Nozzle")
         zneg.connect("clicked", self.move, "-")
-
-
-
-
 
         distgrid = Gtk.Grid()
         j = 0;
@@ -67,10 +59,6 @@ class ZCalibratePanel:
         space_grid.attach(distgrid,0,1,1,1)
         space_grid.attach(Gtk.Label(" "),0,2,1,1)
 
-
-
-
-
         complete = KlippyGtk.ButtonImage('complete','Accept','color2')
         complete.connect("clicked", self.accept)
 
@@ -90,10 +78,9 @@ class ZCalibratePanel:
         self.grid = grid
         self._screen.add_subscription(panel_name)
 
-
-    def get(self):
-        # Return gtk item
-        return self.grid
+    def activate(self):
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_CALIBRATE)
 
     def process_update(self, data):
         if "toolhead" in data and "position" in data['toolhead']:

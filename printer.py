@@ -33,8 +33,6 @@ class Printer:
                     "target": 0
                 }
 
-        print (self.devices)
-        print (self.tools)
         logging.info("### Toolcount: " + str(self.toolcount) + " Heaters: " + str(self.extrudercount))
 
     def process_update(self, data):
@@ -43,6 +41,14 @@ class Printer:
             if x in data:
                 for y in data[x]:
                     self.data[x][y] = data[x][y]
+
+    def get_config_section_list(self):
+        return list(self.config)
+
+    def get_config_section(self, section):
+        if section not in self.config:
+            return False
+        return self.config[section]
 
     def get_stat(self, stat, substat = None):
         if substat != None:

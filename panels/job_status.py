@@ -123,10 +123,6 @@ class JobStatusPanel(ScreenPanel):
 
         self._screen._ws.klippy.print_cancel(self._response_callback, "enable_button", "pause", "cancel")
 
-
-    def emergency_stop(self, widget):
-        self._screen._ws.klippy.emergency_stop()
-
     def _response_callback(self, response, method, params, func, *args):
         if func == "enable_button":
             self.enable_button(*args)

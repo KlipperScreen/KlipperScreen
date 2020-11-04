@@ -104,8 +104,7 @@ class KlipperScreen(Gtk.Window):
         if not hasattr(self, "_ws"):
             self.create_websocket()
 
-        if (info['result']['klippy_state'] == "ready" and "state_message" in info['result'] and
-                "M112" in info['result']['state_message']):
+        if info['result']['klippy_state'] == "error":
             logger.warning("Printer is emergency stopped")
             self.printer_initializing("Shutdown due to Emergency Stop")
 
@@ -138,6 +137,7 @@ class KlipperScreen(Gtk.Window):
             self.last_update[x] = data[x]
 
         self.printer_config = data['configfile']['config']
+        #logger.debug("Printer config: %s" % json.dumps(self.printer_config, indent=2))
         self.printer = Printer(data)
 
         # Initialize target values. TODO: methodize this
@@ -206,6 +206,9 @@ class KlipperScreen(Gtk.Window):
 
             if hasattr(self.panels[panel_name],"process_update"):
                 self.panels[panel_name].process_update(self.last_update)
+
+        if hasattr(self.panels[panel_name],"activate"):
+            self.panels[panel_name].activate()
 
         self.add(self.panels[panel_name].get())
         self.show_all()
@@ -370,6 +373,28 @@ class KlipperScreen(Gtk.Window):
 
     def printer_ready(self):
         self.shutdown = False
+
+        status_objects = [
+            'idle_timeout',
+            'configfile',
+            'toolhead',
+            'virtual_sdcard',
+            'print_stats',
+            'heater_bed',
+            'extruder',
+            'pause_resume'
+        ]
+        r = requests.get("http://127.0.0.1:7125/printer/objects/query?" + "&".join(status_objects))
+
+        #TODO: Check that we get good data
+        data = json.loads(r.content)
+        self.printer_config = data['result']['status']['configfile']['config']
+        logger.debug("Printer config: %s" % json.dumps(self.printer_config, indent=2))
+        self.printer = Printer(data['result']['status'])
+
+        logger.debug("Config sections: %s", self.printer.get_config_section_list())
+        logger.debug("Bed_screws: %s", self.printer.get_config_section("bed_screws"))
+
         self.show_panel('main_panel', "MainPanel", 2, items=self._config['mainmenu'], extrudercount=self.printer.get_extruder_count())
 
     def printer_printing(self):

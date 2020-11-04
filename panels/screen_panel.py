@@ -17,9 +17,15 @@ class ScreenPanel:
         # Create gtk items here
         return
 
+    def emergency_stop(self, widget):
+        self._screen._ws.klippy.emergency_stop()
+
     def get(self):
         # Return gtk item
         return self.panel
+
+    def home(self, widget):
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
 
     def menu_item_clicked(self, widget, panel, item):
         print("### Creating panel "+ item['panel'])

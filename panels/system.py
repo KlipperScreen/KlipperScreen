@@ -17,7 +17,7 @@ class SystemPanel(ScreenPanel):
         restart = KlippyGtk.ButtonImage('reboot','Klipper Restart','color1')
         restart.connect("clicked", self.restart_klippy)
         firmrestart = KlippyGtk.ButtonImage('restart','Firmware Restart','color2')
-        restart.connect("clicked", self.restart_klippy, "firmware")
+        firmrestart.connect("clicked", self.restart_klippy, "firmware")
         back = KlippyGtk.ButtonImage('back', 'Back')
         back.connect("clicked", self._screen._menu_go_back)
 

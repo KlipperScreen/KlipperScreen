@@ -97,9 +97,6 @@ class MovePanel(ScreenPanel):
         self.panel = grid
         self._screen.add_subscription(panel_name)
 
-    def home(self, widget):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
-
     def process_update(self, data):
         if "toolhead" in data and "position" in data["toolhead"]:
             self.labels['pos_x'].set_text("X: %.2f" % (data["toolhead"]["position"][0]))
