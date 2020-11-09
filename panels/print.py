@@ -4,6 +4,7 @@ import logging
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
+from datetime import datetime
 
 from KlippyGtk import KlippyGtk
 from KlippyGcodes import KlippyGcodes
@@ -79,7 +80,7 @@ class PrintPanel(ScreenPanel):
         info = Gtk.Label("Uploaded: blah - Size: blah")
         info.set_halign(Gtk.Align.START)
         info.set_markup("<small>Uploaded: <b>%s</b> - Size: <b>%s</b></small>" % (
-            fileinfo['modified'],
+            datetime.fromtimestamp(fileinfo['modified']).strftime("%Y-%m-%d %H:%M"),
             humanize.naturalsize(fileinfo['size'])
         ))
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
