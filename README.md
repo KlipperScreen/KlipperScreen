@@ -25,7 +25,22 @@ KlipperScreen should run on any HDMI touchscreen that you can connect to a raspb
 be slightly different depending on what model you get. I am developing on a 1024x600 resolution screen. Due to this,
 other resolutions may not be scaled properly at this moment. UI scaling is a future development item.
 
+#### Configure Hardware
+
+Add the following to _/boot/config.txt_. You can alter the hdmi_cvt to your screen specifications. This example is setup
+for a resolution of 1024x600 and a refresh rate of 60hz.
+```
+hdmi_cvt=1024 600 60 6 0 0 0
+hdmi_group=2
+hdmi_mode=87
+hdmi_drive=2
+```
+* Development has been using 1024x600 for a screen resolution. Other resolutions may have issues currently
+
+After changing _/boot/config.txt_ you must reboot your raspberry pi. Please also ensure you followed setting up your screen via the screen instructions. This will likely have a xorg.conf.d file for input from the touchscreen that you need to create.
+
 ### Installation
+
 Follow the instructions to install klipper and moonraker.
 klipper: https://github.com/KevinOConnor/klipper/
 moonraker: https://github.com/Arksine/moonraker
@@ -43,29 +58,5 @@ Run _scripts/KlipperScreen-install.sh_
 This script will install packages that are listed under manual install, create a
 python virtual environment at ${HOME}/.KlipperScreen-env and install a systemd
 service file.
-
-### Manual Installation
-```
-sudo apt install -y xserver-xorg-video-fbturbo xinit xinput x11-xserver-utils python-gi python-gi-cairo gir1.2-gtk-3.0 python-requests python-websocket
-```
-
-Add the following to _/boot/config.txt_
-```
-hdmi_cvt=1024 600 60 6 0 0 0
-hdmi_group=2
-hdmi_mode=87
-hdmi_drive=2
-```
-* Development has been using 1024x600 for a screen resolution. Other resolutions may have issues currently
-
-After changing _/boot/config.txt_ you must reboot your raspberry pi. Please also ensure you followed setting up your screen via the screen instructions. This will likely have a xorg.conf.d file for inputs that you need to create.
-
-Once that is done, follow the [Moonraker installation instructions](https://github.com/Arksine/moonraker/blob/master/docs/installation.md) to install the latest version of moonraker.
-
-Using sudo, then run the service install script under _scripts/install_service.sh_ and perform _sudo systemctl daemon-reload_. You can then start KlipperScreen with systemctl such as _systemctl start KlipperScreen_
-
-
-
-
 
 As an option to do development or interact with KlipperScreen from your computer, you may install tigervnc-scraping-server and VNC to your pi instance. Follow tigervnc server setup procedures for details on how to do that.
