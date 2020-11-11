@@ -76,6 +76,17 @@ class KlipperScreen(Gtk.Window):
     def __init__(self):
         self.read_config()
         self.init_style()
+        self.printer = Printer({
+            'configfile': {
+                'config': {}
+            },
+            'print_stats': {
+                'state': 'disconnected'
+            },
+            'virtual_sdcard': {
+                'is_active': False
+            }
+        })
 
         self.apiclient = KlippyRest("127.0.0.1",7125)
         Gtk.Window.__init__(self)
@@ -104,9 +115,14 @@ class KlipperScreen(Gtk.Window):
         if not hasattr(self, "_ws"):
             self.create_websocket()
 
+        print(info)
+        if info['result']['klippy_state'] == "disconnected":
+            self.printer_initializing("Klipper is not connected to moonraker")
+            return
         if info['result']['klippy_state'] == "error":
             logger.warning("Printer is emergency stopped")
             self.printer_initializing("Shutdown due to Emergency Stop")
+            return
 
         status_objects = [
             'idle_timeout',
@@ -120,25 +136,20 @@ class KlipperScreen(Gtk.Window):
         ]
         r = requests.get("http://127.0.0.1:7125/printer/objects/query?" + "&".join(status_objects))
 
-        requested_updates = {
-            "toolhead": [],
-            "virtual_sdcard": [],
-            "print_stats": [],
-            "heater_bed": [],
-            "extruder": [],
-            "configfile": []
-        }
-
         #TODO: Check that we get good data
-        print (r.content)
-        data = json.loads(r.content)
+        #print (r.content)
+        try:
+            data = json.loads(r.content)
+        except:
+            logger.info("Not able to load data. Klippy is most likely offline")
+            return
         data = data['result']['status']
         for x in data:
             self.last_update[x] = data[x]
 
         self.printer_config = data['configfile']['config']
         #logger.debug("Printer config: %s" % json.dumps(self.printer_config, indent=2))
-        self.printer = Printer(data)
+        self.printer.__init__(data)
 
         # Initialize target values. TODO: methodize this
         self.printer.set_dev_stat("heater_bed", "target", data['heater_bed']['target'])
@@ -150,12 +161,17 @@ class KlipperScreen(Gtk.Window):
         elif info['result']['klippy_state'] == "ready":
             self.printer_ready()
 
-        while (self._ws.is_connected() == False):
-            logger.warning("### Main: Waiting for websocket")
-            continue
-
         self.files = KlippyFiles(self)
 
+    def ws_subscribe(self):
+        requested_updates = {
+            "toolhead": [],
+            "virtual_sdcard": [],
+            "print_stats": [],
+            "heater_bed": [],
+            "extruder": [],
+            "configfile": []
+        }
         self._ws.klippy.object_subscription(requested_updates)
 
     def show_panel(self, panel_name, type, remove=None, pop=True, **kwargs):
@@ -315,13 +331,17 @@ class KlipperScreen(Gtk.Window):
     def _websocket_callback(self, action, data):
         #print(json.dumps([action, data], indent=2))
 
-        if action == "notify_status_update":
+        if action == "notify_klippy_disconnected":
+            logger.info("### Going to disconnected state")
+            self.printer_initializing("Klipper has shutdown")
+            return
+        elif action == "notify_status_update":
             self.printer.process_update(data)
-            if "webhooks" in data and "klippy_state" in data['webhooks']:
-                if data['webhooks']['klippy_state'] == "shutdown":
-                    logger.info("### Going to disconnected state")
-                    self.printer_initializing("Klipper has shutdown")
-                elif data['webhooks']['state'] == "ready":
+            if "webhooks" in data and "state" in data['webhooks']:
+                #if data['webhooks']['state'] == "shutdown":
+                #    logger.info("### Going to disconnected state")
+                #    self.printer_initializing("Klipper has shutdown")
+                if data['webhooks']['state'] == "ready":
                     logger.info("### Going to ready state")
                     self.printer_ready()
             else:
@@ -333,12 +353,13 @@ class KlipperScreen(Gtk.Window):
                 else:
                     if active == True or paused == True:
                         self.printer_printing()
-
-        if action == "notify_filelist_changed":
+        elif action == "notify_filelist_changed":
             logger.debug("Filelist changed: %s", json.dumps(data,indent=2))
             #self.files.add_file()
         elif action == "notify_metadata_update":
             self.files.update_metadata(data['filename'])
+        else:
+            logger.debug(json.dumps([action, data], indent=2))
 
         for sub in self.subscriptions:
             self.panels[sub].process_update(data)
@@ -376,6 +397,7 @@ class KlipperScreen(Gtk.Window):
 
         # Reinitialize printer, in case the printer was shut down and anything has changed.
         self.printer.__init__(data['result']['status'])
+        self.ws_subscribe()
 
         #logger.debug("Config sections: %s", self.printer.get_config_section_list())
         #logger.debug("Bed_screws: %s", self.printer.get_config_section("bed_screws"))

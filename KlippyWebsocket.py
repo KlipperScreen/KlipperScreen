@@ -91,7 +91,7 @@ class KlippyWebsocket(threading.Thread):
                 GLib.PRIORITY_HIGH_IDLE,
                 self._callback,
                 response['method'],
-                response['params'][0]
+                response['params'][0] if "params" in response else {}
             )
         return
 
@@ -109,12 +109,10 @@ class KlippyWebsocket(threading.Thread):
         self.ws.send(json.dumps(data))
 
     def on_open(self, ws):
-        print("### ws open ###")
         logger.info("### ws open ###")
         self.connected = True
 
     def on_close(self, ws):
-        print("### ws closed ###")
         logger.info("### ws closed ###")
         self.connected = False
 
@@ -130,13 +128,17 @@ class KlippyWebsocket(threading.Thread):
                 info = self._screen.apiclient.get_info()
             except Exception:
                 continue
-            print(info)
             if info != False:
                 self.connect()
                 if self.is_connected():
                     break
-            print ("### Waiting for websocket")
+            logger.info("### Waiting for websocket")
             time.sleep(.5)
+
+        Gdk.threads_add_idle(
+            GLib.PRIORITY_HIGH_IDLE,
+            self._screen.printer_ready
+        )
 
 
     def on_error(self, ws, error):
