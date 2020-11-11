@@ -15,6 +15,7 @@ class BedLevelPanel(ScreenPanel):
     def initialize(self, menu):
         self.screws = None
         self.panel = KlippyGtk.HomogeneousGrid()
+        self.disabled_motors = False
 
         screws = []
         if "bed_screws" in self._screen.printer.get_config_section_list():
@@ -75,9 +76,10 @@ class BedLevelPanel(ScreenPanel):
         self.labels['home'].connect("clicked", self.home)
 
         self.labels['dm'] = KlippyGtk.ButtonImage("motor-off", "Disable XY", "color3")
+        self.labels['dm'].connect("clicked", self.disable_motors)
 
         self.panel.attach(self.labels['home'], 0, 0, 1, 1)
-        #self.panel.attach(self.labels['dm'], 0, 1, 1, 1)
+        self.panel.attach(self.labels['dm'], 0, 1, 1, 1)
 
         self.labels['estop'] = KlippyGtk.ButtonImage("decrease","Emergency Stop","color4")
         self.labels['estop'].connect("clicked", self.emergency_stop)
@@ -96,8 +98,17 @@ class BedLevelPanel(ScreenPanel):
             "G1 Z.1 F300\n"
         ]
 
+        if self.disabled_motors:
+            self.disabled_motors = False
+            script.insert(0, "G28")
+
         self._screen._ws.klippy.gcode_script(
             "\n".join(script)
+        )
+
+    def disable_motors(self, widget):
+        self._screen._ws.klippy.gcode_script(
+            "M18" # Disable motors
         )
 
 
