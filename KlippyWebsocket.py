@@ -106,7 +106,6 @@ class KlippyWebsocket(threading.Thread):
             "params": params,
             "id": self._req_id
         }
-        print(json.dumps(data))
         self.ws.send(json.dumps(data))
 
     def on_open(self, ws):

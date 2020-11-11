@@ -42,6 +42,20 @@ class Printer:
                 for y in data[x]:
                     self.data[x][y] = data[x][y]
 
+        if "heater_bed" in data:
+            d = data["heater_bed"]
+            if "target" in d:
+                self.set_dev_stat("heater_bed", "target", d["target"])
+            if "temperature" in d:
+                self.set_dev_stat("heater_bed", "temperature", d["temperature"])
+        for x in self.get_tools():
+            if x in data:
+                d = data[x]
+                if "target" in d:
+                    self.set_dev_stat(x, "target", d["target"])
+                if "temperature" in d:
+                    self.set_dev_stat(x, "temperature", d["temperature"])
+
     def get_config_section_list(self):
         return list(self.config)
 

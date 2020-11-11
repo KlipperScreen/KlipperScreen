@@ -313,52 +313,35 @@ class KlipperScreen(Gtk.Window):
                 return
 
     def _websocket_callback(self, action, data):
-        #print(json.dumps(data, indent=2))
+        #print(json.dumps([action, data], indent=2))
 
-        self.printer.process_update(data)
-
-        if "webhooks" in data:
-            print(data)
-
-
-        if "webhooks" in data and "state" in data['webhooks']:
-            if data['webhooks']['state'] == "shutdown":
-                logger.info("### Going to disconnected state")
-                self.printer_initializing("Klipper has shutdown")
-            elif data['webhooks']['state'] == "ready":
-                logger.info("### Going to ready state")
-                self.printer_ready()
-        else:
-            active = self.printer.get_stat('virtual_sdcard','is_active')
-            paused = self.printer.get_stat('pause_resume','is_paused')
-            if "job_status" in self._cur_panels:
-                if active == False and paused == False:
+        if action == "notify_status_update":
+            self.printer.process_update(data)
+            if "webhooks" in data and "klippy_state" in data['webhooks']:
+                if data['webhooks']['klippy_state'] == "shutdown":
+                    logger.info("### Going to disconnected state")
+                    self.printer_initializing("Klipper has shutdown")
+                elif data['webhooks']['state'] == "ready":
+                    logger.info("### Going to ready state")
                     self.printer_ready()
             else:
-                if active == True or paused == True:
-                    self.printer_printing()
-
+                active = self.printer.get_stat('virtual_sdcard','is_active')
+                paused = self.printer.get_stat('pause_resume','is_paused')
+                if "job_status" in self._cur_panels:
+                    if active == False and paused == False:
+                        self.printer_ready()
+                else:
+                    if active == True or paused == True:
+                        self.printer_printing()
 
         if action == "notify_filelist_changed":
-            logger.DEBUG("Filelist changed: %s", json.dumps(data,indent=2))
+            logger.debug("Filelist changed: %s", json.dumps(data,indent=2))
             #self.files.add_file()
-        elif action == "notify_status_update":
-            if "heater_bed" in data:
-                d = data["heater_bed"]
-                if "target" in d:
-                    self.printer.set_dev_stat("heater_bed", "target", d["target"])
-                if "temperature" in d:
-                    self.printer.set_dev_stat("heater_bed", "temperature", d["temperature"])
-            for x in self.printer.get_tools():
-                if x in data:
-                    d = data[x]
-                    if "target" in d:
-                        self.printer.set_dev_stat(x, "target", d["target"])
-                    if "temperature" in d:
-                        self.printer.set_dev_stat(x, "temperature", d["temperature"])
+        elif action == "notify_metadata_update":
+            self.files.update_metadata(data['filename'])
 
-            for sub in self.subscriptions:
-                self.panels[sub].process_update(data)
+        for sub in self.subscriptions:
+            self.panels[sub].process_update(data)
 
 
     def _send_action(self, widget, method, params):
@@ -389,11 +372,13 @@ class KlipperScreen(Gtk.Window):
         #TODO: Check that we get good data
         data = json.loads(r.content)
         self.printer_config = data['result']['status']['configfile']['config']
-        logger.debug("Printer config: %s" % json.dumps(self.printer_config, indent=2))
-        self.printer = Printer(data['result']['status'])
+        #logger.debug("Printer config: %s" % json.dumps(self.printer_config, indent=2))
 
-        logger.debug("Config sections: %s", self.printer.get_config_section_list())
-        logger.debug("Bed_screws: %s", self.printer.get_config_section("bed_screws"))
+        # Reinitialize printer, in case the printer was shut down and anything has changed.
+        self.printer.__init__(data['result']['status'])
+
+        #logger.debug("Config sections: %s", self.printer.get_config_section_list())
+        #logger.debug("Bed_screws: %s", self.printer.get_config_section("bed_screws"))
 
         self.show_panel('main_panel', "MainPanel", 2, items=self._config['mainmenu'], extrudercount=self.printer.get_extruder_count())
 

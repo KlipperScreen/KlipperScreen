@@ -1,6 +1,8 @@
 import logging
 import asyncio
 import json
+import os
+import base64
 
 import gi
 gi.require_version("Gtk", "3.0")
@@ -17,12 +19,15 @@ class KlippyFiles:
     def __init__(self, screen):
         self._screen = screen
         self.timeout = GLib.timeout_add(2000, self.ret_files)
-        #GLib.idle_add(self.ret_files)
+
+        if not os.path.exists('/tmp/.KS-thumbnails'):
+            os.makedirs('/tmp/.KS-thumbnails')
+        GLib.idle_add(self.ret_files)
 
 
     def _callback(self, result, method, params):
         if method == "server.files.list":
-            if isinstance(result['result'],list):
+            if "result" in result and isinstance(result['result'],list):
                 newfiles = []
                 deletedfiles = self.filelist.copy()
                 for item in result['result']:
@@ -36,6 +41,7 @@ class KlippyFiles:
                             "size": item['size'],
                             "modified": item['modified']
                         }
+                        self.update_metadata(item['filename'])
 
                 if len(self.callbacks) > 0 and (len(newfiles) > 0 or len(deletedfiles) > 0):
                     logger.debug("Running callbacks...")
@@ -53,14 +59,27 @@ class KlippyFiles:
                 #await asyncio.gather(files)
                 #files = [GLib.idle_add(self.ret_file_data, file) for file in self.files]
 
-        elif method == "get_file_metadata":
-            print("Got metadata for %s" % (result['result']['filename']))
-            #print(json.dumps(result, indent=4))
+        elif method == "server.files.metadata":
+            if "error" in result.keys():
+                logger.debug("Error in getting metadata for %s" %(params['filename']))
+                GLib.timeout_add(2000, self._screen._ws.klippy.get_file_metadata, params['filename'], self._callback)
+                return
+
+            logger.debug("Got metadata for %s" % (result['result']['filename']))
+            for x in result['result']:
+                self.files[params['filename']][x] = result['result'][x]
+            if "thumbnails" in self.files[params['filename']]:
+                self.files[params['filename']]['thumbnails'].sort(key=lambda x: x['size'], reverse=True)
+
+                for thumbnail in self.files[params['filename']]['thumbnails']:
+                    f = open("/tmp/.KS-thumbnails/%s-%s" % (params['filename'], thumbnail['size']), "wb")
+                    f.write(base64.b64decode(thumbnail['data']))
+                    f.close()
+            for cb in self.callbacks:
+                cb([], [], [params['filename']])
 
     def add_file_callback(self, callback):
         self.callbacks.append(callback)
-        print("Callbacks...")
-        print(self.callbacks)
 
     def ret_files(self):
         self._screen._ws.klippy.get_file_list(self._callback)
@@ -81,3 +100,6 @@ class KlippyFiles:
 
     def add_file(self, file_name, size, modified, old_file_name = None):
         print(file_name)
+
+    def update_metadata(self, filename):
+        self._screen._ws.klippy.get_file_metadata(filename, self._callback)

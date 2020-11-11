@@ -46,6 +46,23 @@ class KlippyGtk:
 
         return Gtk.Image.new_from_pixbuf(pixbuf)
 
+    @staticmethod
+    def ImageFromFile(filename, style=False, width=None, height=None):
+        if height != -1 or width != -1:
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename, width, height, True)
+        else:
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file(filename)
+
+        return Gtk.Image.new_from_pixbuf(pixbuf)
+
+    @staticmethod
+    def PixbufFromFile(filename, style=False, width=None, height=None):
+        if height != -1 or width != -1:
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename, width, height, True)
+        else:
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file(filename)
+
+        return pixbuf
 
     @staticmethod
     def ProgressBar(style=False):
@@ -117,7 +134,7 @@ class KlippyGtk:
 
         label = Gtk.Label()
         label.set_line_wrap(True)
-        label.set_size_request(250, -1)
+        label.set_size_request(800, -1)
         label.set_markup(text)
         label.get_style_context().add_class("text")
         table = Gtk.Table(1, 1, False)
