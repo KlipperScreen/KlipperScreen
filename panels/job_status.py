@@ -156,10 +156,13 @@ class JobStatusPanel(ScreenPanel):
                 file = "Unknown"
                 self.update_image_text("file", "Unknown")
 
+
+        progress = 0 if self._printer.get_stat('virtual_sdcard','progress') == 0 else (vsd['print_duration'] /
+            self._printer.get_stat('virtual_sdcard','progress') - vsd['print_duration'])
+
         self.update_text("time", str(KlippyGtk.formatTimeString(vsd['print_duration'])))
         self.update_text("time_left", str(KlippyGtk.formatTimeString(
-            vsd['print_duration'] / self._printer.get_stat('virtual_sdcard','progress')
-                - vsd['print_duration']
+            progress
         )))
 
         self.update_progress(self._printer.get_stat('virtual_sdcard','progress'))
