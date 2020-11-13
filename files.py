@@ -22,7 +22,7 @@ class KlippyFiles:
 
         if not os.path.exists('/tmp/.KS-thumbnails'):
             os.makedirs('/tmp/.KS-thumbnails')
-        GLib.idle_add(self.ret_files)
+        GLib.idle_add(self.ret_files, False)
 
 
     def _callback(self, result, method, params):
@@ -81,9 +81,9 @@ class KlippyFiles:
     def add_file_callback(self, callback):
         self.callbacks.append(callback)
 
-    def ret_files(self):
+    def ret_files(self, retval=True):
         self._screen._ws.klippy.get_file_list(self._callback)
-        return True
+        return retval
 
     def ret_file_data (self, filename):
         print("Getting file info for %s" % (filename))

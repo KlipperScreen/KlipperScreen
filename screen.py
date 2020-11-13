@@ -165,12 +165,14 @@ class KlipperScreen(Gtk.Window):
 
     def ws_subscribe(self):
         requested_updates = {
-            "toolhead": [],
-            "virtual_sdcard": [],
-            "print_stats": [],
-            "heater_bed": [],
-            "extruder": [],
-            "configfile": []
+            "objects": {
+                "toolhead": ["homed_axes","estimated_print_time","print_time","position","extruder"],
+                "virtual_sdcard": ["file_position","is_active","progress"],
+                "print_stats": ["print_duration","total_duration","filament_used","filename","state","message"],
+                "heater_bed": ["target","temperature"],
+                "extruder": ["target","temperature","pressure_advance","smooth_time"],
+                "configfile": ["config"]
+            }
         }
         self._ws.klippy.object_subscription(requested_updates)
 
