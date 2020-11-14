@@ -3,7 +3,7 @@ import humanize
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib
+from gi.repository import Gtk, Gdk, GLib, Pango
 from datetime import datetime
 
 from KlippyGtk import KlippyGtk
@@ -74,9 +74,11 @@ class PrintPanel(ScreenPanel):
         name = Gtk.Label()
         #n = 50
         #name.set_markup("<big>%s</big>" % ("\n".join([filename[i:i+n] for i in range(0, len(filename), n)])))
-        name.set_markup("<big>%s</big>" % (filename))
+        name.set_markup("<big><b>%s</b></big>" % (filename))
         name.set_hexpand(True)
         name.set_halign(Gtk.Align.START)
+        name.set_line_wrap(True)
+        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
         info = Gtk.Label("Uploaded: blah - Size: blah")
         info.set_halign(Gtk.Align.START)
@@ -142,7 +144,7 @@ class PrintPanel(ScreenPanel):
         if fileinfo == None:
             return
 
-        return "<small>Uploaded: <b>%s</b> - Size: <b>%s</b> - Print Time: <b>%s</b></small>" % (
+        return "<small>Uploaded: <b>%s</b> - Size: <b>%s</b>\nPrint Time: <b>%s</b></small>" % (
             datetime.fromtimestamp(fileinfo['modified']).strftime("%Y-%m-%d %H:%M"),
             humanize.naturalsize(fileinfo['size']),
             self.get_print_time(filename)
