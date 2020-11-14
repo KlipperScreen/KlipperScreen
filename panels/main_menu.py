@@ -1,10 +1,13 @@
 import gi
+import logging
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
 
 from KlippyGtk import KlippyGtk
 from panels.menu import MenuPanel
+
+logger = logging.getLogger("KlipperScreen.MainMenu")
 
 class MainPanel(MenuPanel):
 

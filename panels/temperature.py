@@ -8,6 +8,7 @@ from KlippyGtk import KlippyGtk
 from KlippyGcodes import KlippyGcodes
 from panels.screen_panel import ScreenPanel
 
+logger = logging.getLogger("KlipperScreen.TemperaturePanel")
 
 class TemperaturePanel(ScreenPanel):
     active_heater = "extruder"

@@ -1,4 +1,5 @@
 import gi
+import logging
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
@@ -6,6 +7,8 @@ from gi.repository import Gtk, Gdk, GLib
 from KlippyGtk import KlippyGtk
 from KlippyGcodes import KlippyGcodes
 from panels.screen_panel import ScreenPanel
+
+logger = logging.getLogger("KlipperScreen.FanPanel")
 
 class FanPanel(ScreenPanel):
     user_selecting = False

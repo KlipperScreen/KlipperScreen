@@ -7,6 +7,7 @@ from gi.repository import Gtk, Gdk, GLib
 from KlippyGtk import KlippyGtk
 from panels.screen_panel import ScreenPanel
 
+logger = logging.getLogger("KlipperScreen.PreheatPanel")
 
 class PreheatPanel(ScreenPanel):
     active_heaters = []
