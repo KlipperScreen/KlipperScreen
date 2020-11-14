@@ -2,4 +2,4 @@ websocket==0.2.1
 requests==2.24.0
 vext==0.7.4
 websocket-client==0.57.0
-humanize==2.5.0
+humanize==3.1.0
