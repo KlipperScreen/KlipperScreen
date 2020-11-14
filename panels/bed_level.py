@@ -1,4 +1,5 @@
 import gi
+import logging
 import re
 
 gi.require_version("Gtk", "3.0")
@@ -8,7 +9,6 @@ from KlippyGcodes import KlippyGcodes
 from KlippyGtk import KlippyGtk
 from panels.screen_panel import ScreenPanel
 
-import logging
 logger = logging.getLogger("KlipperScreen.BedLevelPanel")
 
 class BedLevelPanel(ScreenPanel):

@@ -8,6 +8,8 @@ from KlippyGtk import KlippyGtk
 from KlippyGcodes import KlippyGcodes
 from panels.screen_panel import ScreenPanel
 
+logger = logging.getLogger("KlipperScreen.ExtrudePanel")
+
 class ExtrudePanel(ScreenPanel):
     distance = 1
     distances = ['1','5','10','25']
