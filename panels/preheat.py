@@ -100,7 +100,8 @@ class PreheatPanel(ScreenPanel):
                 self._printer.set_dev_stat(heater,"target", int(self.preheat_options[setting]["bed"]))
             else:
                 print ("Setting %s to %d" % (heater, self.preheat_options[setting]['tool']))
-                self._screen._ws.klippy.set_tool_temp(heater, self.preheat_options[setting]["tool"])
+                self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater),
+                    self.preheat_options[setting]["tool"])
                 self._printer.set_dev_stat(heater,"target", int(self.preheat_options[setting]["tool"]))
 
     def process_update(self, data):
