@@ -216,7 +216,7 @@ class PrintPanel(ScreenPanel):
     def confirm_print(self, widget, filename):
         dialog = Gtk.Dialog()
         #TODO: Factor other resolutions in
-        dialog.set_default_size(984, 580)
+        dialog.set_default_size(self._screen.width - 15, self._screen.height - 15)
         dialog.set_resizable(False)
         dialog.set_transient_for(self._screen)
         dialog.set_modal(True)
@@ -234,18 +234,21 @@ class PrintPanel(ScreenPanel):
         content_area.set_margin_bottom(15)
 
         label = Gtk.Label()
+        label.set_markup("Are you sure you want to print <b>%s</b>?" % (filename))
+        label.set_hexpand(True)
+        label.set_halign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
-        label.set_size_request(800, -1)
-        label.set_markup("Are you sure you want to print <b>%s</b>?\n\n" % (filename))
+        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         label.get_style_context().add_class("text")
 
         grid = Gtk.Grid()
         grid.add(label)
+        grid.set_size_request(self._screen.width - 60, -1)
 
-        pixbuf = self.get_file_image(filename, 400, 350)
+        pixbuf = self.get_file_image(filename, self._screen.width/2, self._screen.height/3)
         if pixbuf != None:
             image = Gtk.Image.new_from_pixbuf(pixbuf)
-
+            image.set_margin_top(20)
             grid.attach_next_to(image, label, Gtk.PositionType.BOTTOM, 1, 3)
 
         #table.attach(label, 0, 1, 0, 1, Gtk.AttachOptions.SHRINK | Gtk.AttachOptions.FILL)
@@ -253,7 +256,7 @@ class PrintPanel(ScreenPanel):
         grid.set_halign(Gtk.Align.CENTER)
         grid.set_valign(Gtk.Align.CENTER)
         content_area.add(grid)
-
+        dialog.resize(self._screen.width - 15, self._screen.height - 15)
         dialog.show_all()
 
     def confirm_print_response(self, widget, response_id, filename):

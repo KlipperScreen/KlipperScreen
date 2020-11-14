@@ -91,9 +91,11 @@ class KlipperScreen(Gtk.Window):
         self.apiclient = KlippyRest("127.0.0.1",7125)
         Gtk.Window.__init__(self)
 
-        self.set_default_size(Gdk.Screen.get_width(Gdk.Screen.get_default()), Gdk.Screen.get_height(Gdk.Screen.get_default()))
+        self.width = Gdk.Screen.get_width(Gdk.Screen.get_default())
+        self.height = Gdk.Screen.get_height(Gdk.Screen.get_default())
+        self.set_default_size(self.width, self.height)
         self.set_resizable(False)
-        logger.info("Screen resolution: %s", str(Gdk.Screen.get_width(Gdk.Screen.get_default()))+"x"+str(Gdk.Screen.get_height(Gdk.Screen.get_default())))
+        logger.info("Screen resolution: %sx%s" % (self.width, self.height))
 
         self.printer_initializing("Connecting to Moonraker")
 
