@@ -6,7 +6,7 @@
 * [Preheat](#preheat)
 
 ### Main Menu
-![Main Menu](/docs/img/main.png)
+![Main Menu](/docs/img/main_panel.png)
 
 ### Move
 ![Move Panel](/docs/img/move.png)
