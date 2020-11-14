@@ -64,6 +64,14 @@ class PreheatPanel(ScreenPanel):
 
         self._screen.add_subscription(panel_name)
 
+    def activate(self):
+        for x in self._printer.get_tools():
+            if x not in self.active_heaters:
+                self.select_heater(None, x)
+
+        if "heater_bed" not in self.active_heaters:
+            self.select_heater(None, "heater_bed")
+
     def select_heater(self, widget, heater):
         if heater in self.active_heaters:
             self.active_heaters.pop(self.active_heaters.index(heater))
