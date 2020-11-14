@@ -214,7 +214,7 @@ class PrintPanel(ScreenPanel):
     def confirm_print(self, widget, filename):
         dialog = Gtk.Dialog()
         #TODO: Factor other resolutions in
-        dialog.set_default_size(984, 580)
+        dialog.set_default_size(800, 480)
         dialog.set_resizable(False)
         dialog.set_transient_for(self._screen)
         dialog.set_modal(True)
