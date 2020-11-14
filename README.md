@@ -10,11 +10,11 @@ Current feature list:
  - [x] Fan control
  - [x] Disable steppers
  - [x] Configure Z Offset using PROBE_CALIBRATE
- - [ ] Print tuning (Z Babystepping, Speed Control, Flow Control)
+ - [x] Print tuning (Z Babystepping, Speed Control, Flow Control)
+ - [x] Manual bed leveling assist
+ - [x] Using thumbnails from prusa on job status page
  - [ ] Better system panel
  - [ ] Wifi selection
- - [ ] Manual bed leveling assist
- - [ ] Using thumbnails from prusa on job status page
  - [ ] Scale UI based off of resolution
 
 

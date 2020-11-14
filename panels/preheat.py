@@ -64,6 +64,14 @@ class PreheatPanel(ScreenPanel):
 
         self._screen.add_subscription(panel_name)
 
+    def activate(self):
+        for x in self._printer.get_tools():
+            if x not in self.active_heaters:
+                self.select_heater(None, x)
+
+        if "heater_bed" not in self.active_heaters:
+            self.select_heater(None, "heater_bed")
+
     def select_heater(self, widget, heater):
         if heater in self.active_heaters:
             self.active_heaters.pop(self.active_heaters.index(heater))
@@ -92,7 +100,8 @@ class PreheatPanel(ScreenPanel):
                 self._printer.set_dev_stat(heater,"target", int(self.preheat_options[setting]["bed"]))
             else:
                 print ("Setting %s to %d" % (heater, self.preheat_options[setting]['tool']))
-                self._screen._ws.klippy.set_tool_temp(heater, self.preheat_options[setting]["tool"])
+                self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater),
+                    self.preheat_options[setting]["tool"])
                 self._printer.set_dev_stat(heater,"target", int(self.preheat_options[setting]["tool"]))
 
     def process_update(self, data):
