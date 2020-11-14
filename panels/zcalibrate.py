@@ -5,11 +5,12 @@ from gi.repository import Gtk, Gdk, GLib
 
 from KlippyGtk import KlippyGtk
 from KlippyGcodes import KlippyGcodes
+from panels.screen_panel import ScreenPanel
 
 import logging
 logger = logging.getLogger("KlipperScreen.ZCalibratePanel")
 
-class ZCalibratePanel:
+class ZCalibratePanel(ScreenPanel):
     _screen = None
     labels = {}
     distance = 1
@@ -75,7 +76,7 @@ class ZCalibratePanel:
         grid.attach(b, 3, 2, 1, 1)
 
 
-        self.grid = grid
+        self.panel = grid
         self._screen.add_subscription(panel_name)
 
     def activate(self):
