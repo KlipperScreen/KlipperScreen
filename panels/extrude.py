@@ -33,7 +33,7 @@ class ExtrudePanel(ScreenPanel):
         self.labels['tool0'].get_style_context().add_class("button_active")
         self.labels['extrude'] = KlippyGtk.ButtonImage("extrude","Extrude","color3")
         self.labels['extrude'].connect("clicked", self.extrude, "+")
-        self.labels['retract'] = KlippyGtk.ButtonImage("extrude","Retract","color2")
+        self.labels['retract'] = KlippyGtk.ButtonImage("retract","Retract","color2")
         self.labels['retract'].connect("clicked", self.extrude, "-")
         self.labels['temperature'] = KlippyGtk.ButtonImage("heat-up","Temperature","color4")
         self.labels['temperature'].connect("clicked", self.menu_item_clicked, "temperature", {
