@@ -18,7 +18,9 @@ class KlippyGcodes:
     SET_BED_TEMP    = "M140"
     MAX_BED_TEMP    = 150
 
+    SET_EXT_FACTOR  = "M221"
     SET_FAN_SPEED   = "M106"
+    SET_SPD_FACTOR  = "M220"
 
     PROBE_CALIBRATE = "PROBE_CALIBRATE"
     PROBE_MOVE      = "TESTZ Z="
@@ -42,6 +44,14 @@ class KlippyGcodes:
     def set_fan_speed(speed):
         speed = str( int(float(int(speed) % 101)/100*255) )
         return KlippyGcodes.SET_FAN_SPEED + " S"+ speed
+
+    @staticmethod
+    def set_extrusion_rate(rate):
+        return "%s S%s" % (KlippyGcodes.SET_EXT_FACTOR, rate)
+
+    @staticmethod
+    def set_speed_rate(rate):
+        return "%s S%s" % (KlippyGcodes.SET_SPD_FACTOR, rate)
 
     @staticmethod
     def probe_move(dist):

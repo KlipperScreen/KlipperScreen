@@ -36,7 +36,8 @@ class Printer:
         logging.info("### Toolcount: " + str(self.toolcount) + " Heaters: " + str(self.extrudercount))
 
     def process_update(self, data):
-        keys = ['virtual_sdcard','pause_resume','idle_timeoue','print_stats']
+        keys = ['virtual_sdcard','pause_resume','idle_timeout','print_stats']
+        keys = ['fan','gcode_move','idle_timeout','pause_resume','print_stats','toolhead','virtual_sdcard']
         for x in keys:
             if x in data:
                 for y in data[x]:
@@ -63,6 +64,9 @@ class Printer:
         if section not in self.config:
             return False
         return self.config[section]
+
+    def get_data(self):
+        return self.data
 
     def get_stat(self, stat, substat = None):
         if substat != None:

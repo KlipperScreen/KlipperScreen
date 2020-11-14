@@ -127,6 +127,8 @@ class KlipperScreen(Gtk.Window):
         status_objects = [
             'idle_timeout',
             'configfile',
+            'gcode_move',
+            'fan',
             'toolhead',
             'virtual_sdcard',
             'print_stats',
@@ -166,12 +168,14 @@ class KlipperScreen(Gtk.Window):
     def ws_subscribe(self):
         requested_updates = {
             "objects": {
-                "toolhead": ["homed_axes","estimated_print_time","print_time","position","extruder"],
-                "virtual_sdcard": ["file_position","is_active","progress"],
-                "print_stats": ["print_duration","total_duration","filament_used","filename","state","message"],
-                "heater_bed": ["target","temperature"],
+                "configfile": ["config"],
                 "extruder": ["target","temperature","pressure_advance","smooth_time"],
-                "configfile": ["config"]
+                "fan": ["speed"],
+                "gcode_move": ["homing_origin","extrude_factor","speed_factor"],
+                "heater_bed": ["target","temperature"],
+                "print_stats": ["print_duration","total_duration","filament_used","filename","state","message"],
+                "toolhead": ["homed_axes","estimated_print_time","print_time","position","extruder"],
+                "virtual_sdcard": ["file_position","is_active","progress"]
             }
         }
         self._ws.klippy.object_subscription(requested_updates)
@@ -223,7 +227,7 @@ class KlipperScreen(Gtk.Window):
                 self.panels[panel_name].initialize(panel_name)
 
             if hasattr(self.panels[panel_name],"process_update"):
-                self.panels[panel_name].process_update(self.last_update)
+                self.panels[panel_name].process_update(self.printer.get_data())
 
         if hasattr(self.panels[panel_name],"activate"):
             self.panels[panel_name].activate()
@@ -337,12 +341,12 @@ class KlipperScreen(Gtk.Window):
             logger.info("### Going to disconnected state")
             self.printer_initializing("Klipper has shutdown")
             return
+        elif action == "notify_klippy_ready":
+            logger.info("### Going to ready state")
+            self.printer_ready()
         elif action == "notify_status_update":
             self.printer.process_update(data)
             if "webhooks" in data and "state" in data['webhooks']:
-                #if data['webhooks']['state'] == "shutdown":
-                #    logger.info("### Going to disconnected state")
-                #    self.printer_initializing("Klipper has shutdown")
                 if data['webhooks']['state'] == "ready":
                     logger.info("### Going to ready state")
                     self.printer_ready()
@@ -407,6 +411,7 @@ class KlipperScreen(Gtk.Window):
         self.show_panel('main_panel', "MainPanel", 2, items=self._config['mainmenu'], extrudercount=self.printer.get_extruder_count())
 
     def printer_printing(self):
+        self.ws_subscribe()
         self.show_panel('job_status',"JobStatusPanel", 2)
 
 def main():

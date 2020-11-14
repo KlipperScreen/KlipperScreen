@@ -8,56 +8,97 @@ from KlippyGtk import KlippyGtk
 from KlippyGcodes import KlippyGcodes
 from panels.screen_panel import ScreenPanel
 
+logger = logging.getLogger("KlipperScreen.FineTunePanel")
+
 class FineTune(ScreenPanel):
     user_selecting = False
 
-    delta = 1
-    deltas = ['1','5','10','25']
+    bs = 0
+    bs_delta = "0.05"
+    bs_deltas = ["0.01","0.05"]
+    percent_delta = 1
+    percent_deltas = ['1','5','10','25']
+
+    extrusion = 0
+    speed = 0
 
     def initialize(self, panel_name):
         # Create gtk items here
         grid = KlippyGtk.HomogeneousGrid()
+        logger.debug("FineTunePanel")
 
 
-        self.labels['z+'] = KlippyGtk.ButtonImage("move-z+", "Z+ .05mm", "color1")
+        self.labels['z+'] = KlippyGtk.ButtonImage("move-z-", "Z+", "color1")
+        self.labels['z+'].connect("clicked", self.change_babystepping, "+")
         self.labels['zoffset'] = Gtk.Label("Z Offset: 0.00mm")
-        self.labels['z-'] = KlippyGtk.ButtonImage("move-z-", "Z- .05mm", "color1")
+        self.labels['zoffset'].get_style_context().add_class('temperature_entry')
+        self.labels['z-'] = KlippyGtk.ButtonImage("move-z+", "Z-", "color1")
+        self.labels['z-'].connect("clicked", self.change_babystepping, "-")
 
         grid.attach(self.labels['z+'], 0, 0, 1, 1)
+        grid.attach(self.labels['zoffset'], 0, 1, 1, 1)
         grid.attach(self.labels['z-'], 0, 2, 1, 1)
 
         self.labels['fan+'] = KlippyGtk.ButtonImage("fan-on", "Increase Fan", "color2")
+        self.labels['fan+'].connect("clicked", self.change_fan, "+")
         self.labels['fanspeed'] = Gtk.Label("Fan: 100%")
+        self.labels['fanspeed'].get_style_context().add_class('temperature_entry')
         self.labels['fan-'] = KlippyGtk.ButtonImage("fan-off", "Decrease Fan", "color2")
+        self.labels['fan-'].connect("clicked", self.change_fan, "-")
         grid.attach(self.labels['fan+'], 1, 0, 1, 1)
         grid.attach(self.labels['fanspeed'], 1, 1, 1, 1)
         grid.attach(self.labels['fan-'], 1, 2, 1, 1)
 
         self.labels['speed+'] = KlippyGtk.ButtonImage("speed-step", "Increase Speed", "color3")
+        self.labels['speed+'].connect("clicked", self.change_speed, "+")
         self.labels['speedfactor'] = Gtk.Label("Speed: 100%")
+        self.labels['speedfactor'].get_style_context().add_class('temperature_entry')
         self.labels['speed-'] = KlippyGtk.ButtonImage("speed-step", "Decrease Speed", "color3")
+        self.labels['speed-'].connect("clicked", self.change_speed, "-")
         grid.attach(self.labels['speed+'], 2, 0, 1, 1)
         grid.attach(self.labels['speedfactor'], 2, 1, 1, 1)
         grid.attach(self.labels['speed-'], 2, 2, 1, 1)
 
         self.labels['extrude+'] = KlippyGtk.ButtonImage("extrude", "Increase Extrusion", "color4")
+        self.labels['extrude+'].connect("clicked", self.change_extrusion, "+")
         self.labels['extrudefactor'] = Gtk.Label("Extrusion: 100%")
+        self.labels['extrudefactor'].get_style_context().add_class('temperature_entry')
         self.labels['extrude-'] = KlippyGtk.ButtonImage("retract", "Decrease Extrusion", "color4")
+        self.labels['extrude-'].connect("clicked", self.change_extrusion, "-")
         grid.attach(self.labels['extrude+'], 3, 0, 1, 1)
         grid.attach(self.labels['extrudefactor'], 3, 1, 1, 1)
         grid.attach(self.labels['extrude-'], 3, 2, 1, 1)
 
 
-
-        deltgrid = Gtk.Grid()
+        # babystepping grid
+        bsgrid = Gtk.Grid()
         j = 0;
-        for i in self.deltas:
+        for i in self.bs_deltas:
             self.labels[i] = KlippyGtk.ToggleButton(i)
-            self.labels[i].connect("clicked", self.change_delta, i)
+            self.labels[i].connect("clicked", self.change_bs_delta, i)
             ctx = self.labels[i].get_style_context()
             if j == 0:
                 ctx.add_class("distbutton_top")
-            elif j == len(self.deltas)-1:
+            elif j == len(self.bs_deltas)-1:
+                ctx.add_class("distbutton_bottom")
+            else:
+                ctx.add_class("distbutton")
+            if i == "0.05":
+                ctx.add_class("distbutton_active")
+            bsgrid.attach(self.labels[i], j, 0, 1, 1)
+            j += 1
+        grid.attach(bsgrid, 0, 3, 1, 1)
+
+        # Grid for percentage
+        deltgrid = Gtk.Grid()
+        j = 0;
+        for i in self.percent_deltas:
+            self.labels[i] = KlippyGtk.ToggleButton("%s%%" % i)
+            self.labels[i].connect("clicked", self.change_percent_delta, i)
+            ctx = self.labels[i].get_style_context()
+            if j == 0:
+                ctx.add_class("distbutton_top")
+            elif j == len(self.percent_deltas)-1:
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
@@ -78,31 +119,101 @@ class FineTune(ScreenPanel):
         grid.attach(b,3,3,1,1)
 
         self.panel = grid
-        #self._screen.add_subscription(panel_name)
+        self._screen.add_subscription(panel_name)
 
     def process_update(self, data):
-        return
-        if "fan" in data and "speed" in data["fan"] and self.user_selecting == False:
-            self.labels["scale"].disconnect_by_func(self.select_fan_speed)
-            self.labels["scale"].set_value(float(int(float(data["fan"]["speed"]) * 100)))
-            self.labels["scale"].connect("value-changed", self.select_fan_speed)
+        if "gcode_move" in data:
+            if "homing_origin" in data["gcode_move"]:
+                self.labels['zoffset'].set_text("Z Offset: %.2fmm" % data["gcode_move"]["homing_origin"][2])
+            if "extrude_factor" in data["gcode_move"]:
+                self.extrusion = int(data["gcode_move"]["extrude_factor"]*100)
+                self.labels['extrudefactor'].set_text("Extrusion: %3d%%" % self.extrusion)
+            if "speed_factor" in data["gcode_move"]:
+                self.speed = int(data["gcode_move"]["speed_factor"]*100)
+                self.labels['speedfactor'].set_text("Speed: %3d%%" % self.speed)
 
-    def change_delta(self, widget, delta):
-        if self.delta == delta:
+        if "fan" in data and "speed" in data['fan']:
+            self.fan = int(round(data['fan']['speed'],2)*100)
+            self.labels['fanspeed'].set_text("Fan: %3d%%" % self.fan)
+
+    def change_babystepping(self, widget, dir):
+        if dir == "+":
+            gcode = "SET_GCODE_OFFSET Z_ADJUST=%s MOVE=1" % self.bs_delta
+        else:
+            gcode = "SET_GCODE_OFFSET Z_ADJUST=-%s MOVE=1" % self.bs_delta
+
+        self._screen._ws.klippy.gcode_script(gcode)
+
+
+
+    def change_bs_delta(self, widget, bs):
+        if self.bs_delta == bs:
+            return
+        logging.info("### BabyStepping " + str(bs))
+
+        ctx = self.labels[str(self.bs_delta)].get_style_context()
+        ctx.remove_class("distbutton_active")
+
+        self.bs_delta = bs
+        ctx = self.labels[self.bs_delta].get_style_context()
+        ctx.add_class("distbutton_active")
+        for i in self.bs_deltas:
+            if i == self.bs_delta:
+                continue
+            self.labels[i].set_active(False)
+
+    def change_extrusion(self, widget, dir):
+        if dir == "+":
+            self.extrusion += int(self.percent_delta)
+        else:
+            self.extrusion -= int(self.percent_delta)
+
+        if self.extrusion < 0:
+            self.extrusion = 0
+
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.set_extrusion_rate(self.extrusion))
+
+    def change_fan(self, widget, dir):
+        if dir == "+":
+            self.fan += int(self.percent_delta)
+        else:
+            self.fan -= int(self.percent_delta)
+
+        if self.fan < 0:
+            self.fan = 0
+        elif self.fan > 100:
+            self.fan = 100
+
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.set_fan_speed(self.fan))
+
+    def change_speed(self, widget, dir):
+        if dir == "+":
+            self.speed += int(self.percent_delta)
+        else:
+            self.speed -= int(self.percent_delta)
+
+        if self.speed < 0:
+            self.speed = 0
+
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.set_speed_rate(self.speed))
+
+    def change_percent_delta(self, widget, delta):
+        if self.percent_delta == delta:
             return
         logging.info("### Delta " + str(delta))
 
-        ctx = self.labels[str(self.delta)].get_style_context()
+        ctx = self.labels[str(self.percent_delta)].get_style_context()
         ctx.remove_class("distbutton_active")
 
-        self.delta = delta
-        ctx = self.labels[self.delta].get_style_context()
+        self.percent_delta = delta
+        ctx = self.labels[self.percent_delta].get_style_context()
         ctx.add_class("distbutton_active")
-        for i in self.deltas:
-            if i == self.delta:
+        for i in self.percent_deltas:
+            if i == self.percent_delta:
                 continue
             self.labels[str(i)].set_active(False)
 
+    #def
 
     def select_fan_speed(self, widget):
         if self.user_selecting == True:
@@ -117,13 +228,3 @@ class FineTune(ScreenPanel):
         self.user_selecting = False
         self.panel.remove(self.labels["apply"])
         self.panel.remove(self.labels["cancel"])
-
-
-    def set_fan_speed(self, widget):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.set_fan_speed(self.labels['scale'].get_value()))
-        self.cancel_select_fan_speed(widget)
-
-    def set_fan_on(self, widget, fanon):
-        speed = 100 if fanon == True else 0
-        self.labels["scale"].set_value(speed)
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.set_fan_speed(speed))
