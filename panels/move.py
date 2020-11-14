@@ -38,8 +38,8 @@ class MovePanel(ScreenPanel):
         self.labels['home'].connect("clicked", self.home)
 
 
-        grid.attach(self.labels['x+'], 0, 1, 1, 1)
-        grid.attach(self.labels['x-'], 2, 1, 1, 1)
+        grid.attach(self.labels['x+'], 2, 1, 1, 1)
+        grid.attach(self.labels['x-'], 0, 1, 1, 1)
         grid.attach(self.labels['y+'], 1, 0, 1, 1)
         grid.attach(self.labels['y-'], 1, 1, 1, 1)
         grid.attach(self.labels['z+'], 3, 0, 1, 1)
