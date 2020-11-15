@@ -58,7 +58,7 @@ start_KlipperScreen() {
     sudo systemctl start KlipperScreen
 }
 
-#install_packages
+install_packages
 create_virtualenv
 install_systemd_service
 update_x11
