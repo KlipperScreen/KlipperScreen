@@ -206,4 +206,4 @@ class KlippyGtk:
     def formatTemperatureString(temp, target):
         if (target > temp-2 and target < temp+2) or round(target,0) == 0:
             return str(round(temp,2)) + "°C" #°C →"
-        return str(round(temp,2)) + "°C  → " + str(round(target,2)) + "°C"
+        return str(round(temp)) + " → " + str(round(target)) + "°C"
