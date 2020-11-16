@@ -9,7 +9,8 @@ import requests
 import websocket
 import logging
 import os
-import asyncio
+import re
+import subprocess
 
 
 gi.require_version("Gtk", "3.0")
@@ -95,6 +96,7 @@ class KlipperScreen(Gtk.Window):
         self.height = Gdk.Screen.get_height(Gdk.Screen.get_default())
         self.set_default_size(self.width, self.height)
         self.set_resizable(False)
+        logger.info("KlipperScreen version: %s" % get_software_version())
         logger.info("Screen resolution: %sx%s" % (self.width, self.height))
 
         self.printer_initializing("Connecting to Moonraker")
@@ -189,44 +191,50 @@ class KlipperScreen(Gtk.Window):
             self._remove_current_panel(pop)
 
         if panel_name not in self.panels:
-            if type == "SplashScreenPanel":
-                self.panels[panel_name] = SplashScreenPanel(self)
-            elif type == "MainPanel":
-                self.panels[panel_name] = MainPanel(self)
-            elif type == "menu":
-                self.panels[panel_name] = MenuPanel(self)
-            elif type == "bed_level":
-                self.panels[panel_name] = BedLevelPanel(self)
-            elif type == "extrude":
-                self.panels[panel_name] = ExtrudePanel(self)
-            elif type == "finetune":
-                self.panels[panel_name] = FineTune(self)
-            elif type == "JobStatusPanel":
-                self.panels[panel_name] = JobStatusPanel(self)
-            elif type == "move":
-                self.panels[panel_name] = MovePanel(self)
-            elif type == "network":
-                self.panels[panel_name] = NetworkPanel(self)
-            elif type == "preheat":
-                self.panels[panel_name] = PreheatPanel(self)
-            elif type == "print":
-                self.panels[panel_name] = PrintPanel(self)
-            elif type == "temperature":
-                self.panels[panel_name] = TemperaturePanel(self)
-            elif type == "fan":
-                self.panels[panel_name] = FanPanel(self)
-            elif type == "system":
-                self.panels[panel_name] = SystemPanel(self)
-            elif type == "zcalibrate":
-                self.panels[panel_name] = ZCalibratePanel(self)
-            #Temporary for development
-            else:
-                self.panels[panel_name] = MovePanel(self)
+            try:
+                if type == "SplashScreenPanel":
+                    self.panels[panel_name] = SplashScreenPanel(self)
+                elif type == "MainPanel":
+                    self.panels[panel_name] = MainPanel(self)
+                elif type == "menu":
+                    self.panels[panel_name] = MenuPanel(self)
+                elif type == "bed_level":
+                    self.panels[panel_name] = BedLevelPanel(self)
+                elif type == "extrude":
+                    self.panels[panel_name] = ExtrudePanel(self)
+                elif type == "finetune":
+                    self.panels[panel_name] = FineTune(self)
+                elif type == "JobStatusPanel":
+                    self.panels[panel_name] = JobStatusPanel(self)
+                elif type == "move":
+                    self.panels[panel_name] = MovePanel(self)
+                elif type == "network":
+                    self.panels[panel_name] = NetworkPanel(self)
+                elif type == "preheat":
+                    self.panels[panel_name] = PreheatPanel(self)
+                elif type == "print":
+                    self.panels[panel_name] = PrintPanel(self)
+                elif type == "temperature":
+                    self.panels[panel_name] = TemperaturePanel(self)
+                elif type == "fan":
+                    self.panels[panel_name] = FanPanel(self)
+                elif type == "system":
+                    self.panels[panel_name] = SystemPanel(self)
+                elif type == "zcalibrate":
+                    self.panels[panel_name] = ZCalibratePanel(self)
+                #Temporary for development
+                else:
+                    self.panels[panel_name] = MovePanel(self)
+            except:
+                logger.exception("Unable to load panel %s" % panel_name)
 
-            if kwargs != {}:
-                self.panels[panel_name].initialize(panel_name, **kwargs)
-            else:
-                self.panels[panel_name].initialize(panel_name)
+            try:
+                if kwargs != {}:
+                    self.panels[panel_name].initialize(panel_name, **kwargs)
+                else:
+                    self.panels[panel_name].initialize(panel_name)
+            except:
+                logger.exception("Error initializing panel %s" % panel_name)
 
             if hasattr(self.panels[panel_name],"process_update"):
                 self.panels[panel_name].process_update(self.printer.get_data())
@@ -241,8 +249,17 @@ class KlipperScreen(Gtk.Window):
 
 
     def read_config (self):
-        with open(config) as config_file:
-            self._config = json.load(config_file)
+        try:
+            with open(config) as config_file:
+                self._config = json.load(config_file)
+                lines = [
+                    "===== Config File =====",
+                    json.dumps(self._config, indent=2),
+                    "=======================",
+                ]
+                logger.info("\n".join(lines))
+        except:
+            logger.exception("Error reading configuration file")
 
 
     def init_style(self):
@@ -366,7 +383,8 @@ class KlipperScreen(Gtk.Window):
             #self.files.add_file()
         elif action == "notify_metadata_update":
             self.files.update_metadata(data['filename'])
-        else:
+        elif not (action == "notify_gcode_response" and data.startswith("B:")
+                and re.search(r'B:[0-9\.]+\s/[0-9\.]+\sT[0-9]+:[0-9\.]+', data)):
             logger.debug(json.dumps([action, data], indent=2))
 
         for sub in self.subscriptions:
@@ -389,6 +407,7 @@ class KlipperScreen(Gtk.Window):
         status_objects = [
             'idle_timeout',
             'configfile',
+            'gcode_move',
             'toolhead',
             'virtual_sdcard',
             'print_stats',
@@ -416,6 +435,25 @@ class KlipperScreen(Gtk.Window):
         self.ws_subscribe()
         self.show_panel('job_status',"JobStatusPanel", 2)
 
+def get_software_version():
+    prog = ('git', '-C', os.path.dirname(__file__), 'describe', '--always',
+            '--tags', '--long', '--dirty')
+    try:
+        process = subprocess.Popen(prog, stdout=subprocess.PIPE,
+                                   stderr=subprocess.PIPE)
+        ver, err = process.communicate()
+        retcode = process.wait()
+        if retcode == 0:
+            version = ver.strip()
+            if isinstance(version, bytes):
+                version = version.decode()
+            return version
+        else:
+            logger.debug(f"Error getting git version: {err}")
+    except OSError:
+        logger.exception("Error runing git describe")
+    return "?"
+
 def main():
 
     win = KlipperScreen()
@@ -425,4 +463,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except:
+        logger.exception("Fatal error in main loop")
