@@ -18,6 +18,7 @@ class FineTune(ScreenPanel):
     bs_deltas = ["0.01","0.05"]
     percent_delta = 1
     percent_deltas = ['1','5','10','25']
+    fan = 100
 
     extrusion = 0
     speed = 0
