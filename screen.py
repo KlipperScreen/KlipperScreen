@@ -96,7 +96,8 @@ class KlipperScreen(Gtk.Window):
         self.height = Gdk.Screen.get_height(Gdk.Screen.get_default())
         self.set_default_size(self.width, self.height)
         self.set_resizable(False)
-        logger.info("KlipperScreen version: %s" % get_software_version())
+        self.version = get_software_version()
+        logger.info("KlipperScreen version: %s" % self.version)
         logger.info("Screen resolution: %sx%s" % (self.width, self.height))
 
         self.printer_initializing("Connecting to Moonraker")
