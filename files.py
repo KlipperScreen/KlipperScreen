@@ -18,7 +18,7 @@ class KlippyFiles:
 
     def __init__(self, screen):
         self._screen = screen
-        self.timeout = GLib.timeout_add(2000, self.ret_files)
+        self.add_timeout()
 
         if not os.path.exists('/tmp/.KS-thumbnails'):
             os.makedirs('/tmp/.KS-thumbnails')
@@ -81,8 +81,18 @@ class KlippyFiles:
     def add_file_callback(self, callback):
         self.callbacks.append(callback)
 
+    def add_timeout(self):
+        if self.timeout == None:
+            self.timeout = GLib.timeout_add(4000, self.ret_files)
+
+    def remove_timeout(self):
+        if self.timeout != None:
+            self.timeout = None
+
     def ret_files(self, retval=True):
-        self._screen._ws.klippy.get_file_list(self._callback)
+        if not self._screen._ws.klippy.get_file_list(self._callback):
+            self.timeout = None
+            return False
         return retval
 
     def ret_file_data (self, filename):

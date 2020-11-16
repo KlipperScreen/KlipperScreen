@@ -64,7 +64,7 @@ class SystemPanel(ScreenPanel):
         #TODO: Shouldn't need this
         self.system_timeout = GLib.timeout_add(1000, self.update_system_load)
 
-    def restart_klippy(self, type=None):
+    def restart_klippy(self, widget, type=None):
         if type == "firmware":
             self._screen._ws.klippy.restart_firmware()
         else:
