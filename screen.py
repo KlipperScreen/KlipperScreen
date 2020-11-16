@@ -100,7 +100,7 @@ class KlipperScreen(Gtk.Window):
         logger.info("KlipperScreen version: %s" % self.version)
         logger.info("Screen resolution: %sx%s" % (self.width, self.height))
 
-        self.printer_initializing("Connecting to Moonraker")
+        self.printer_initializing("Initializing")
 
         # Disable DPMS
         os.system("/usr/bin/xset -display :0 s off")
@@ -110,9 +110,11 @@ class KlipperScreen(Gtk.Window):
         ready = False
 
         try:
-            info = self.apiclient.get_info()
+            info = self.apiclient.get_server_info()
         except Exception:
             return
+
+        self.printer_initializing("Initializing")
 
         if info == False:
             return
@@ -121,8 +123,8 @@ class KlipperScreen(Gtk.Window):
             self.create_websocket()
 
         print(info)
-        if info['result']['klippy_state'] == "disconnected":
-            self.printer_initializing("Klipper is not connected to moonraker")
+        if info['result']['klippy_state'] == "shutdown":
+            self.printer_initializing("Klipper is shutdown")
             return
         if info['result']['klippy_state'] == "error":
             logger.warning("Printer is emergency stopped")
@@ -186,11 +188,6 @@ class KlipperScreen(Gtk.Window):
         self._ws.klippy.object_subscription(requested_updates)
 
     def show_panel(self, panel_name, type, remove=None, pop=True, **kwargs):
-        if remove == 2:
-            self._remove_all_panels()
-        elif remove == 1:
-            self._remove_current_panel(pop)
-
         if panel_name not in self.panels:
             try:
                 if type == "SplashScreenPanel":
@@ -227,7 +224,8 @@ class KlipperScreen(Gtk.Window):
                 else:
                     self.panels[panel_name] = MovePanel(self)
             except:
-                logger.exception("Unable to load panel %s" % panel_name)
+                self.show_error_modal("Unable to load panel %s" % panel_name)
+                return
 
             try:
                 if kwargs != {}:
@@ -235,7 +233,8 @@ class KlipperScreen(Gtk.Window):
                 else:
                     self.panels[panel_name].initialize(panel_name)
             except:
-                logger.exception("Error initializing panel %s" % panel_name)
+                self.show_error_modal("Unable to load panel %s" % panel_name)
+                return
 
             if hasattr(self.panels[panel_name],"process_update"):
                 self.panels[panel_name].process_update(self.printer.get_data())
@@ -243,11 +242,56 @@ class KlipperScreen(Gtk.Window):
         if hasattr(self.panels[panel_name],"activate"):
             self.panels[panel_name].activate()
 
+        if remove == 2:
+            self._remove_all_panels()
+        elif remove == 1:
+            self._remove_current_panel(pop)
+
         self.add(self.panels[panel_name].get())
         self.show_all()
         self._cur_panels.append(panel_name)
         logger.debug("Current panel hierarchy: %s", str(self._cur_panels))
 
+    def show_error_modal(self, err):
+        logger.exception("Showing error modal: %s", err)
+        dialog = Gtk.Dialog()
+        dialog.set_default_size(self.width - 15, self.height - 15)
+        dialog.set_resizable(False)
+        dialog.set_transient_for(self)
+        dialog.set_modal(True)
+
+        dialog.add_button(button_text="Cancel", response_id=Gtk.ResponseType.CANCEL)
+        dialog.connect("response", self.error_modal_response)
+        dialog.get_style_context().add_class("dialog")
+
+        content_area = dialog.get_content_area()
+        content_area.set_margin_start(15)
+        content_area.set_margin_end(15)
+        content_area.set_margin_top(15)
+        content_area.set_margin_bottom(15)
+
+        label = Gtk.Label()
+        label.set_markup(("%s \n\nCheck /tmp/KlipperScreen.log for more information.\nPlease submit an issue "
+            + "on GitHub for help.") % err)
+        label.set_hexpand(True)
+        label.set_halign(Gtk.Align.CENTER)
+        label.set_line_wrap(True)
+        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        label.get_style_context().add_class("text")
+
+        grid = Gtk.Grid()
+        grid.add(label)
+        grid.set_size_request(self.width - 60, -1)
+        grid.set_vexpand(True)
+        grid.set_halign(Gtk.Align.CENTER)
+        grid.set_valign(Gtk.Align.CENTER)
+
+        content_area.add(grid)
+        dialog.resize(self.width - 15, self.height - 15)
+        dialog.show_all()
+
+    def error_modal_response(self, widget, response_id):
+        widget.destroy()
 
     def read_config (self):
         try:
@@ -409,6 +453,7 @@ class KlipperScreen(Gtk.Window):
             'idle_timeout',
             'configfile',
             'gcode_move',
+            'fan',
             'toolhead',
             'virtual_sdcard',
             'print_stats',
@@ -416,19 +461,19 @@ class KlipperScreen(Gtk.Window):
             'extruder',
             'pause_resume'
         ]
-        r = requests.get("http://127.0.0.1:7125/printer/objects/query?" + "&".join(status_objects))
-
-        #TODO: Check that we get good data
-        data = json.loads(r.content)
-        self.printer_config = data['result']['status']['configfile']['config']
-        #logger.debug("Printer config: %s" % json.dumps(self.printer_config, indent=2))
+        data = self.apiclient.send_request("printer/objects/query?" + "&".join(status_objects))
+        if data == False:
+            self.printer_initializing("Moonraker error")
+            return
+        data = data['result']['status']
 
         # Reinitialize printer, in case the printer was shut down and anything has changed.
-        self.printer.__init__(data['result']['status'])
+        self.printer.__init__(data)
         self.ws_subscribe()
 
-        #logger.debug("Config sections: %s", self.printer.get_config_section_list())
-        #logger.debug("Bed_screws: %s", self.printer.get_config_section("bed_screws"))
+        if (data['print_stats']['state'] == "printing" or data['print_stats']['state'] == "paused"):
+            self.printer_printing()
+            return
 
         self.show_panel('main_panel', "MainPanel", 2, items=self._config['mainmenu'], extrudercount=self.printer.get_extruder_count())
 

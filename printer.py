@@ -32,6 +32,7 @@ class Printer:
                     "temperature": 0,
                     "target": 0
                 }
+        self.process_update(data)
 
         logging.info("### Toolcount: " + str(self.toolcount) + " Heaters: " + str(self.extrudercount))
 
