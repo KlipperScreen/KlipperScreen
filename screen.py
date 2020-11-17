@@ -16,11 +16,11 @@ import subprocess
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
 
-from KlippyWebsocket import KlippyWebsocket
-from KlippyRest import KlippyRest
-from files import KlippyFiles
+from ks_includes.KlippyWebsocket import KlippyWebsocket
+from ks_includes.KlippyRest import KlippyRest
+from ks_includes.files import KlippyFiles
 from KlippyGtk import KlippyGtk
-from printer import Printer
+from ks_includes.printer import Printer
 
 from ks_includes.config import KlipperScreenConfig
 

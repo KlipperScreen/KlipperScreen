@@ -82,7 +82,7 @@ class JobStatusPanel(ScreenPanel):
         self.labels['estop'].connect("clicked", self.emergency_stop)
         grid.attach(self.labels['estop'], 2, 2, 1, 1)
         self.labels['control'] = KlippyGtk.ButtonImage("control","Control","color3")
-        self.labels['control'].connect("clicked", self._screen._go_to_submenu, "Control")
+        self.labels['control'].connect("clicked", self._screen._go_to_submenu, "")
         grid.attach(self.labels['control'], 3, 2, 1, 1)
 
         self.panel = grid
