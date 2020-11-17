@@ -13,7 +13,8 @@ class PreheatPanel(ScreenPanel):
     active_heaters = []
 
     def initialize(self, panel_name):
-        self.preheat_options = self._screen._config['preheat_options']
+        self.preheat_options = self._screen._config.get_preheat_options()
+        logger.debug("Preheat options: %s" % self.preheat_options)
 
         grid = KlippyGtk.HomogeneousGrid()
 
@@ -99,10 +100,10 @@ class PreheatPanel(ScreenPanel):
                 self._screen._ws.klippy.set_bed_temp(self.preheat_options[setting]["bed"])
                 self._printer.set_dev_stat(heater,"target", int(self.preheat_options[setting]["bed"]))
             else:
-                print ("Setting %s to %d" % (heater, self.preheat_options[setting]['tool']))
+                print ("Setting %s to %d" % (heater, self.preheat_options[setting]['extruder']))
                 self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater),
-                    self.preheat_options[setting]["tool"])
-                self._printer.set_dev_stat(heater,"target", int(self.preheat_options[setting]["tool"]))
+                    self.preheat_options[setting]["extruder"])
+                self._printer.set_dev_stat(heater,"target", int(self.preheat_options[setting]["extruder"]))
 
     def process_update(self, data):
         self.update_temp("heater_bed",
