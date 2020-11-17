@@ -32,19 +32,24 @@ class MenuPanel(ScreenPanel):
             col = i % columns
             row = int(i/columns)
             width = 1
+
             if expandLast == True and i+1 == l and l%2 == 1:
                 width = 2
-            b = KlippyGtk.ButtonImage(
-                items[i]['icon'], items[i]['name'], "color"+str((i%4)+1)
-            )
 
-            if "panel" in items[i]:
-                b.connect("clicked", self.menu_item_clicked, items[i]['panel'], items[i])
-            elif "items" in items[i]:
-                b.connect("clicked", self._screen._go_to_submenu, items[i]['name'])
-            elif "method" in items[i]:
-                params = items[i]['params'] if "params" in items[i] else {}
-                b.connect("clicked", self._screen._send_action, items[i]['method'], params)
+            key = list(items[i])[0]
+            logger.debug("Key: %s" % key)
+            item = items[i][key]
+            b = KlippyGtk.ButtonImage(
+                item['icon'], item['name'], "color"+str((i%4)+1)
+            )
+            logger.debug("Item: %s" % item)
+            if item['panel'] != False:
+                b.connect("clicked", self.menu_item_clicked, item['panel'], item)
+            elif item['method'] != False:
+                params = item['params'] if item['params'] != False else {}
+                b.connect("clicked", self._screen._send_action, item['method'], params)
+            else:
+                b.connect("clicked", self._screen._go_to_submenu, key)
 
             grid.attach(b, col, row, width, 1)
 

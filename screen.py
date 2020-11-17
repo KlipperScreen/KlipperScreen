@@ -21,6 +21,8 @@ from files import KlippyFiles
 from KlippyGtk import KlippyGtk
 from printer import Printer
 
+from ks_includes.config import KlipperScreenConfig
+
 # Do this better in the future
 from panels.screen_panel import *
 from panels.bed_level import *
@@ -74,7 +76,7 @@ class KlipperScreen(Gtk.Window):
     printer = None
 
     def __init__(self):
-        self.read_config()
+        self._config = KlipperScreenConfig()
         self.init_style()
         self.printer = Printer({
             'configfile': {
@@ -240,10 +242,6 @@ class KlipperScreen(Gtk.Window):
         logger.debug("Current panel hierarchy: %s", str(self._cur_panels))
 
 
-    def read_config (self):
-        with open(config) as config_file:
-            self._config = json.load(config_file)
-
 
     def init_style(self):
         style_provider = Gtk.CssProvider()
@@ -268,15 +266,19 @@ class KlipperScreen(Gtk.Window):
         # Find current menu item
         panels = list(self._cur_panels)
         if "job_status" not in self._cur_panels:
-            cur_item = self._find_current_menu_item(name, self._config['mainmenu'], panels.pop(0))
-            menu = cur_item['items']
+            menu = "__main"
         else:
-            menu = self._config['printmenu']
+            menu = "__print"
 
         logger.info("#### Menu " + str(menu))
         #self.show_panel("_".join(self._cur_panels) + '_' + name, "menu", 1, False, menu=menu)
 
-        self.show_panel(self._cur_panels[-1] + '_' + name, "menu", 1, False, items=menu)
+        menuitems = self._config.get_menu_items(menu, name)
+        if len(menuitems) == 0:
+            logger.info("No items in menu, returning.")
+            return
+
+        self.show_panel(self._cur_panels[-1] + '_' + name, "menu", 1, False, items=menuitems)
         return
 
         grid = self.arrangeMenuItems(menu, 4)
@@ -289,14 +291,6 @@ class KlipperScreen(Gtk.Window):
         self.panels[cur_item['name']] = grid
         self.add(self.panels[cur_item['name']])
         self.show_all()
-
-
-
-    def _find_current_menu_item(self, menu, items, names):
-        for item in items:
-            if item['name'] == menu:
-                return item
-        #TODO: Add error check
 
     def _remove_all_panels(self):
         while len(self._cur_panels) > 0:
@@ -409,8 +403,8 @@ class KlipperScreen(Gtk.Window):
 
         #logger.debug("Config sections: %s", self.printer.get_config_section_list())
         #logger.debug("Bed_screws: %s", self.printer.get_config_section("bed_screws"))
-
-        self.show_panel('main_panel', "MainPanel", 2, items=self._config['mainmenu'], extrudercount=self.printer.get_extruder_count())
+        
+        self.show_panel('main_panel', "MainPanel", 2, items=self._config.get_menu_items("__main"), extrudercount=self.printer.get_extruder_count())
 
     def printer_printing(self):
         self.ws_subscribe()
@@ -425,4 +419,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except:
+        logger.exception("Fatal error in main loop")
