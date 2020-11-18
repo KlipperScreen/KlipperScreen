@@ -47,7 +47,7 @@ class BedLevelPanel(ScreenPanel):
             yconf = self._screen.printer.get_config_section("stepper_y")
             x = int(int(xconf['position_max'])/4)
             y = int(int(yconf['position_max'])/4)
-            screws = [
+            self.screws = [
                 [x, y],
                 [x*3, y],
                 [x, y*3],
