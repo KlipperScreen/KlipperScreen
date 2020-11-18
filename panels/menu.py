@@ -4,8 +4,8 @@ import logging
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
 
-from KlippyGtk import KlippyGtk
-from panels.screen_panel import ScreenPanel
+from ks_includes.KlippyGtk import KlippyGtk
+from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.MenuPanel")
 

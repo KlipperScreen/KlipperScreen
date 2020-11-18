@@ -13,7 +13,7 @@ logger = logging.getLogger("KlipperScreen.KlipperWebsocket")
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
-from KlippyGcodes import KlippyGcodes
+from ks_includes.KlippyGcodes import KlippyGcodes
 
 #f = open("/home/pi/.moonraker_api_key", "r")
 api_key = "" #f.readline()

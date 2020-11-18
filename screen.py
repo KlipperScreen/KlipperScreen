@@ -20,13 +20,13 @@ from gi.repository import Gtk, Gdk, GLib
 from ks_includes.KlippyWebsocket import KlippyWebsocket
 from ks_includes.KlippyRest import KlippyRest
 from ks_includes.files import KlippyFiles
-from KlippyGtk import KlippyGtk
+from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.printer import Printer
 
 from ks_includes.config import KlipperScreenConfig
 
 # Do this better in the future
-from panels.screen_panel import *
+#from ks_includes.screen_panel import *
 from panels.bed_level import *
 from panels.extrude import *
 from panels.fan import *
@@ -345,9 +345,14 @@ class KlipperScreen(Gtk.Window):
             #self.files.add_file()
         elif action == "notify_metadata_update":
             self.files.update_metadata(data['filename'])
-        elif self.shutdown == False and not (action == "notify_gcode_response" and data.startswith("B:")
-                and re.search(r'B:[0-9\.]+\s/[0-9\.]+\sT[0-9]+:[0-9\.]+', data)):
-            logger.debug(json.dumps([action, data], indent=2))
+        elif self.shutdown == False and action == "notify_gcode response":
+            if "Klipper state: Shutdown" in data:
+                self.shutdown == True
+                self.printer_initializing(_("Klipper has shutdown"))
+
+            if not (data.startswith("B:") and
+                re.search(r'B:[0-9\.]+\s/[0-9\.]+\sT[0-9]+:[0-9\.]+', data)):
+                logger.debug(json.dumps([action, data], indent=2))
 
         for sub in self.subscriptions:
             self.panels[sub].process_update(data)
