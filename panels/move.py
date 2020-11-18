@@ -17,7 +17,7 @@ class MovePanel(ScreenPanel):
 
     def initialize(self, panel_name):
         _ = self.lang.gettext
-        
+
         grid = KlippyGtk.HomogeneousGrid()
 
         self.labels['x+'] = KlippyGtk.ButtonImage("move-x+", _("X+"), "color1")

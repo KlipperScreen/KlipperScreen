@@ -28,7 +28,7 @@ class KlippyGtk:
 
         label = Gtk.Label()
         label.set_text(text)
-        box1.add(image) #, size, size)
+        box1.add(image)
         box1.add(label)
 
         if style != False:
