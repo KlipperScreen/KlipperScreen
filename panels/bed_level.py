@@ -110,11 +110,3 @@ class BedLevelPanel(ScreenPanel):
         self._screen._ws.klippy.gcode_script(
             "M18" # Disable motors
         )
-
-
-
-
-
-
-#for screw in screws:
-#    sorted(screws.items(), key=lambda x: (float(x[1].split(",")[0]), float(x[1].split(",")[1])))
