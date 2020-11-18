@@ -203,21 +203,10 @@ class KlipperScreen(Gtk.Window):
 
     def show_error_modal(self, err):
         logger.exception("Showing error modal: %s", err)
-        dialog = Gtk.Dialog()
-        dialog.set_default_size(self.width - 15, self.height - 15)
-        dialog.set_resizable(False)
-        dialog.set_transient_for(self)
-        dialog.set_modal(True)
 
-        dialog.add_button(button_text="Cancel", response_id=Gtk.ResponseType.CANCEL)
-        dialog.connect("response", self.error_modal_response)
-        dialog.get_style_context().add_class("dialog")
-
-        content_area = dialog.get_content_area()
-        content_area.set_margin_start(15)
-        content_area.set_margin_end(15)
-        content_area.set_margin_top(15)
-        content_area.set_margin_bottom(15)
+        buttons = [
+            {"name":"Go Back","response": Gtk.ResponseType.CANCEL}
+        ]
 
         label = Gtk.Label()
         label.set_markup(("%s \n\nCheck /tmp/KlipperScreen.log for more information.\nPlease submit an issue "
@@ -228,16 +217,7 @@ class KlipperScreen(Gtk.Window):
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         label.get_style_context().add_class("text")
 
-        grid = Gtk.Grid()
-        grid.add(label)
-        grid.set_size_request(self.width - 60, -1)
-        grid.set_vexpand(True)
-        grid.set_halign(Gtk.Align.CENTER)
-        grid.set_valign(Gtk.Align.CENTER)
-
-        content_area.add(grid)
-        dialog.resize(self.width - 15, self.height - 15)
-        dialog.show_all()
+        dialog = KlippyGtk.Dialog(self,  buttons, label, self.error_modal_response)
 
     def error_modal_response(self, widget, response_id):
         widget.destroy()
@@ -366,6 +346,27 @@ class KlipperScreen(Gtk.Window):
         for sub in self.subscriptions:
             self.panels[sub].process_update(data)
 
+    def _confirm_send_action(self, widget, text, method, params):
+        buttons = [
+            {"name":"Continue", "response": Gtk.ResponseType.OK},
+            {"name":"Cancel","response": Gtk.ResponseType.CANCEL}
+        ]
+
+        label = Gtk.Label()
+        label.set_markup(text)
+        label.set_hexpand(True)
+        label.set_halign(Gtk.Align.CENTER)
+        label.set_line_wrap(True)
+        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        label.get_style_context().add_class("text")
+
+        dialog = KlippyGtk.Dialog(self,  buttons, label, self._confirm_send_action_response,  method, params)
+
+    def _confirm_send_action_response(self, widget, response_id, method, params):
+        if response_id == Gtk.ResponseType.OK:
+            self._send_action(widget, method, params)
+
+        widget.destroy()
 
     def _send_action(self, widget, method, params):
         self._ws.send_method(method, params)

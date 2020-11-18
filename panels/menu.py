@@ -47,7 +47,10 @@ class MenuPanel(ScreenPanel):
                 b.connect("clicked", self.menu_item_clicked, item['panel'], item)
             elif item['method'] != False:
                 params = item['params'] if item['params'] != False else {}
-                b.connect("clicked", self._screen._send_action, item['method'], params)
+                if item['confirm'] != False:
+                    b.connect("clicked", self._screen._confirm_send_action, item['confirm'], item['method'], params)
+                else:
+                    b.connect("clicked", self._screen._send_action, item['method'], params)
             else:
                 b.connect("clicked", self._screen._go_to_submenu, key)
 

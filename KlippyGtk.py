@@ -112,10 +112,9 @@ class KlippyGtk:
         return b
 
     @staticmethod
-    def ConfirmDialog(screen, text, buttons, callback=None, *args):
+    def Dialog(screen, buttons, content, callback=None, *args):
         dialog = Gtk.Dialog()
-        #TODO: Factor other resolutions in
-        dialog.set_default_size(984, 580)
+        dialog.set_default_size(screen.width - 15, screen.height - 15)
         dialog.set_resizable(False)
         dialog.set_transient_for(screen)
         dialog.set_modal(True)
@@ -126,27 +125,23 @@ class KlippyGtk:
         dialog.connect("response", callback, *args)
         dialog.get_style_context().add_class("dialog")
 
+        grid = Gtk.Grid()
+        grid.set_size_request(screen.width - 60, -1)
+        grid.set_vexpand(True)
+        grid.set_halign(Gtk.Align.CENTER)
+        grid.set_valign(Gtk.Align.CENTER)
+        grid.add(content)
+
         content_area = dialog.get_content_area()
         content_area.set_margin_start(15)
         content_area.set_margin_end(15)
         content_area.set_margin_top(15)
         content_area.set_margin_bottom(15)
-
-        label = Gtk.Label()
-        label.set_line_wrap(True)
-        label.set_size_request(800, -1)
-        label.set_markup(text)
-        label.get_style_context().add_class("text")
-        table = Gtk.Table(1, 1, False)
-        table.attach(label, 0, 1, 0, 1, Gtk.AttachOptions.SHRINK | Gtk.AttachOptions.FILL)
-        table.set_vexpand(True)
-        table.set_halign(Gtk.Align.CENTER)
-        table.set_valign(Gtk.Align.CENTER)
-        content_area.add(table)
+        content_area.add(grid)
 
         dialog.show_all()
 
-        return dialog
+        return dialog, grid
 
 
     @staticmethod

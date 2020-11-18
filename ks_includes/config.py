@@ -94,6 +94,7 @@ class KlipperScreenConfig:
             "icon": cfg.get("icon"),
             "panel": cfg.get("panel", False),
             "method": cfg.get("method", False),
+            "confirm": cfg.get("confirm", False)
         }
 
         try:
