@@ -9,6 +9,7 @@ from KlippyGcodes import KlippyGcodes
 class ScreenPanel:
     def __init__(self, screen):
         self._screen = screen
+        self.lang = self._screen.lang
         self._printer = screen.printer
         self.labels = {}
 

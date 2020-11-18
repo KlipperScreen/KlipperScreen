@@ -16,6 +16,8 @@ class TemperaturePanel(ScreenPanel):
     tempdelta = "10"
 
     def initialize(self, panel_name):
+        _ = self.lang.gettext
+
         grid = KlippyGtk.HomogeneousGrid()
 
         eq_grid = KlippyGtk.HomogeneousGrid()
@@ -42,11 +44,11 @@ class TemperaturePanel(ScreenPanel):
 
         self.labels["control_grid"] = KlippyGtk.HomogeneousGrid()
 
-        self.labels["increase"] = KlippyGtk.ButtonImage("increase", "Increase", "color1")
+        self.labels["increase"] = KlippyGtk.ButtonImage("increase", _("Increase"), "color1")
         self.labels["increase"].connect("clicked",self.change_target_temp, "+")
-        self.labels["decrease"] = KlippyGtk.ButtonImage("decrease", "Decrease", "color3")
+        self.labels["decrease"] = KlippyGtk.ButtonImage("decrease", _("Decrease"), "color3")
         self.labels["decrease"].connect("clicked",self.change_target_temp, "-")
-        self.labels["npad"] = KlippyGtk.ButtonImage("settings", "Number Pad", "color2")
+        self.labels["npad"] = KlippyGtk.ButtonImage("settings", _("Number Pad"), "color2")
         self.labels["npad"].connect("clicked", self.show_numpad)
 
         tempgrid = Gtk.Grid()
@@ -73,7 +75,7 @@ class TemperaturePanel(ScreenPanel):
         self.labels["control_grid"].attach(self.labels["decrease"], 3, 1, 1, 1)
         self.labels["control_grid"].attach(self.labels["npad"], 2, 2, 1, 1)
 
-        b = KlippyGtk.ButtonImage('back', 'Back')
+        b = KlippyGtk.ButtonImage('back', _('Back'))
         b.connect("clicked", self._screen._menu_go_back)
         self.labels["control_grid"].attach(b, 3, 2, 1, 1)
 
@@ -104,6 +106,8 @@ class TemperaturePanel(ScreenPanel):
             self.labels["deg" + str(i)].set_active(False)
 
     def show_numpad(self, widget):
+        _ = self.lang.gettext
+
         numpad = KlippyGtk.HomogeneousGrid()
 
         keys = [
@@ -139,7 +143,7 @@ class TemperaturePanel(ScreenPanel):
         ctx = self.labels['entry'].get_style_context()
         ctx.add_class('temperature_entry')
 
-        b = KlippyGtk.ButtonImage('back', 'Close')
+        b = KlippyGtk.ButtonImage('back', _('Close'))
         b.connect("clicked", self.hide_numpad)
 
         #numpad.attach(b, 0, 5, 3, 1)

@@ -9,5 +9,6 @@ from panels.screen_panel import ScreenPanel
 
 class ExamplePanel(ScreenPanel):
     def initialize(self, panel_name):
+        _ = self.lang.gettext
         # Create gtk items here
         return

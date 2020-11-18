@@ -13,6 +13,7 @@ logger = logging.getLogger("KlipperScreen.BedLevelPanel")
 
 class BedLevelPanel(ScreenPanel):
     def initialize(self, menu):
+        _ = self.lang.gettext
         self.screws = None
         self.panel = KlippyGtk.HomogeneousGrid()
         self.disabled_motors = False
@@ -72,20 +73,20 @@ class BedLevelPanel(ScreenPanel):
         self.panel.attach(self.labels['bl'], 1, 1, 1, 1)
         self.panel.attach(self.labels['br'], 2, 1, 1, 1)
 
-        self.labels['home'] = KlippyGtk.ButtonImage("home","Home All","color2")
+        self.labels['home'] = KlippyGtk.ButtonImage("home",_("Home All"),"color2")
         self.labels['home'].connect("clicked", self.home)
 
-        self.labels['dm'] = KlippyGtk.ButtonImage("motor-off", "Disable XY", "color3")
+        self.labels['dm'] = KlippyGtk.ButtonImage("motor-off", _("Disable XY"), "color3")
         self.labels['dm'].connect("clicked", self.disable_motors)
 
         self.panel.attach(self.labels['home'], 0, 0, 1, 1)
         self.panel.attach(self.labels['dm'], 0, 1, 1, 1)
 
-        self.labels['estop'] = KlippyGtk.ButtonImage("decrease","Emergency Stop","color4")
+        self.labels['estop'] = KlippyGtk.ButtonImage("decrease",_("Emergency Stop"),"color4")
         self.labels['estop'].connect("clicked", self.emergency_stop)
         self.panel.attach(self.labels['estop'], 3, 0, 1, 1)
 
-        b = KlippyGtk.ButtonImage('back', 'Back')
+        b = KlippyGtk.ButtonImage('back', _('Back'))
         b.connect("clicked", self._screen._menu_go_back)
         self.panel.attach(b, 3, 1, 1, 1)
 

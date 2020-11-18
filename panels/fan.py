@@ -14,7 +14,8 @@ class FanPanel(ScreenPanel):
     user_selecting = False
 
     def initialize(self, panel_name):
-        # Create gtk items here
+        _ = self.lang.gettext
+
         grid = KlippyGtk.HomogeneousGrid()
 
         box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
@@ -28,17 +29,17 @@ class FanPanel(ScreenPanel):
         self.labels["scale"].get_style_context().add_class("fan_slider")
         box.add(self.labels["scale"])
 
-        self.labels["fanoff"] = KlippyGtk.ButtonImage("fan-off", "Fan Off")
+        self.labels["fanoff"] = KlippyGtk.ButtonImage("fan-off", _("Fan Off"))
         self.labels["fanoff"].get_style_context().add_class("color1")
         self.labels["fanoff"].connect("clicked", self.set_fan_on, False)
-        self.labels["fanon"] = KlippyGtk.ButtonImage("fan", "Fan On")
+        self.labels["fanon"] = KlippyGtk.ButtonImage("fan", _("Fan On"))
         self.labels["fanon"].get_style_context().add_class("color3")
         self.labels["fanon"].connect("clicked", self.set_fan_on, True)
 
-        self.labels["apply"] = KlippyGtk.ButtonImage("resume", "Set Speed")
+        self.labels["apply"] = KlippyGtk.ButtonImage("resume", _("Set Speed"))
         self.labels["apply"].get_style_context().add_class("color2")
         self.labels["apply"].connect("clicked", self.set_fan_speed)
-        self.labels["cancel"] = KlippyGtk.ButtonImage("stop", "Cancel Change")
+        self.labels["cancel"] = KlippyGtk.ButtonImage("stop", _("Cancel Change"))
         self.labels["cancel"].get_style_context().add_class("color4")
         self.labels["cancel"].connect("clicked", self.cancel_select_fan_speed)
         self.labels["cancel"].hide()
@@ -48,7 +49,7 @@ class FanPanel(ScreenPanel):
         grid.attach(self.labels["fanoff"], 0, 2, 1, 1)
         grid.attach(self.labels["fanon"], 1, 2, 1, 1)
 
-        b = KlippyGtk.ButtonImage('back', 'Back')
+        b = KlippyGtk.ButtonImage('back', _('Back'))
         b.connect("clicked", self._screen._menu_go_back)
         grid.attach(b,3,2,1,1)
 

@@ -16,24 +16,22 @@ class ZCalibratePanel(ScreenPanel):
     distance = 1
     distances = ['.01','.05','.1','.5','1','5']
 
-    def __init__(self, screen):
-        self._screen = screen
-
     def initialize(self, panel_name):
+        _ = self.lang.gettext
         grid = KlippyGtk.HomogeneousGrid()
 
-        label = Gtk.Label("Z Offset: ")
+        label = Gtk.Label(_("Z Offset") + ": ")
         label.get_style_context().add_class('temperature_entry')
-        self.labels['zpos'] = Gtk.Label("Homing")
+        self.labels['zpos'] = Gtk.Label(_("Homing"))
         self.labels['zpos'].get_style_context().add_class('temperature_entry')
         box = Gtk.Box()
 
         box.add(label)
         box.add(self.labels['zpos'])
 
-        zpos = KlippyGtk.ButtonImage('z-offset-decrease',"Raise Nozzle")
+        zpos = KlippyGtk.ButtonImage('z-offset-decrease',_("Raise Nozzle"))
         zpos.connect("clicked", self.move, "+")
-        zneg = KlippyGtk.ButtonImage('z-offset-increase',"Lower Nozzle")
+        zneg = KlippyGtk.ButtonImage('z-offset-increase',_("Lower Nozzle"))
         zneg.connect("clicked", self.move, "-")
 
         distgrid = Gtk.Grid()
@@ -56,15 +54,15 @@ class ZCalibratePanel(ScreenPanel):
         self.labels["1"].set_active(True)
 
         space_grid = KlippyGtk.HomogeneousGrid()
-        space_grid.attach(Gtk.Label("Distance (mm):"),0,0,1,1)
+        space_grid.attach(Gtk.Label(_("Distance (mm)") + ":"),0,0,1,1)
         space_grid.attach(distgrid,0,1,1,1)
         space_grid.attach(Gtk.Label(" "),0,2,1,1)
 
-        complete = KlippyGtk.ButtonImage('complete','Accept','color2')
+        complete = KlippyGtk.ButtonImage('complete',_('Accept'),'color2')
         complete.connect("clicked", self.accept)
 
 
-        b = KlippyGtk.ButtonImage('back', 'Abort')
+        b = KlippyGtk.ButtonImage('back', _('Abort'))
         b.connect("clicked", self.abort)
 
 
@@ -94,7 +92,6 @@ class ZCalibratePanel(ScreenPanel):
     def change_distance(self, widget, distance):
         if self.distance == distance:
             return
-        print("### Distance " + str(distance))
 
         ctx = self.labels[str(self.distance)].get_style_context()
         ctx.remove_class("distbutton_active")

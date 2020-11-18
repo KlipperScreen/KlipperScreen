@@ -14,11 +14,13 @@ class SplashScreenPanel(ScreenPanel):
     box = None
 
     def initialize(self, panel_name):
+        _ = self.lang.gettext
+
         image = Gtk.Image()
         #TODO: update file reference
         image.set_from_file(os.getcwd() + "/styles/z-bolt/images/klipper.png")
 
-        self.labels['text'] = Gtk.Label("Initializing printer...")
+        self.labels['text'] = Gtk.Label(_("Initializing printer..."))
         self.labels['text'].get_style_context().add_class("text")
 
 
@@ -49,10 +51,12 @@ class SplashScreenPanel(ScreenPanel):
             self.labels['actions'].remove(child)
 
     def show_restart_buttons(self):
+        _ = self.lang.gettext
+
         if "firmware_restart" not in self.labels:
-            self.labels['restart'] = KlippyGtk.ButtonImage("reboot","Restart","color1")
+            self.labels['restart'] = KlippyGtk.ButtonImage("reboot",_("Restart"),"color1")
             self.labels['restart'].connect("clicked", self.restart)
-            self.labels['firmware_restart'] = KlippyGtk.ButtonImage("restart","Firmware Restart","color2")
+            self.labels['firmware_restart'] = KlippyGtk.ButtonImage("restart",_("Firmware Restart"),"color2")
             self.labels['firmware_restart'].connect("clicked", self.firmware_restart)
 
         self.clear_action_bar()

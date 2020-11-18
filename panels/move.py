@@ -16,25 +16,26 @@ class MovePanel(ScreenPanel):
 
 
     def initialize(self, panel_name):
-
+        _ = self.lang.gettext
+        
         grid = KlippyGtk.HomogeneousGrid()
 
-        self.labels['x+'] = KlippyGtk.ButtonImage("move-x+", "X+", "color1")
+        self.labels['x+'] = KlippyGtk.ButtonImage("move-x+", _("X+"), "color1")
         self.labels['x+'].connect("clicked", self.move, "X", "+")
-        self.labels['x-'] = KlippyGtk.ButtonImage("move-x-", "X-", "color1")
+        self.labels['x-'] = KlippyGtk.ButtonImage("move-x-", _("X-"), "color1")
         self.labels['x-'].connect("clicked", self.move, "X", "-")
 
-        self.labels['y+'] = KlippyGtk.ButtonImage("move-y+", "Y+", "color2")
+        self.labels['y+'] = KlippyGtk.ButtonImage("move-y+", _("Y+"), "color2")
         self.labels['y+'].connect("clicked", self.move, "Y", "+")
-        self.labels['y-'] = KlippyGtk.ButtonImage("move-y-", "Y-", "color2")
+        self.labels['y-'] = KlippyGtk.ButtonImage("move-y-", _("Y-"), "color2")
         self.labels['y-'].connect("clicked", self.move, "Y", "-")
 
-        self.labels['z+'] = KlippyGtk.ButtonImage("move-z-", "Z+", "color3")
+        self.labels['z+'] = KlippyGtk.ButtonImage("move-z-", _("Z+"), "color3")
         self.labels['z+'].connect("clicked", self.move, "Z", "+")
-        self.labels['z-'] = KlippyGtk.ButtonImage("move-z+", "Z-", "color3")
+        self.labels['z-'] = KlippyGtk.ButtonImage("move-z+", _("Z-"), "color3")
         self.labels['z-'].connect("clicked", self.move, "Z", "-")
 
-        self.labels['home'] = KlippyGtk.ButtonImage("home", "Home All")
+        self.labels['home'] = KlippyGtk.ButtonImage("home", _("Home All"))
         self.labels['home'].connect("clicked", self.home)
 
 
@@ -83,7 +84,7 @@ class MovePanel(ScreenPanel):
         bottomgrid.attach(self.labels['pos_y'], 1, 0, 1, 1)
         bottomgrid.attach(self.labels['pos_z'], 2, 0, 1, 1)
         box.pack_start(bottomgrid, True, True, 0)
-        self.labels['move_dist'] = Gtk.Label("Move Distance (mm)")
+        self.labels['move_dist'] = Gtk.Label(_("Move Distance (mm)"))
         self.labels['move_dist'].get_style_context().add_class("text")
         box.pack_start(self.labels['move_dist'], True, True, 0)
         box.pack_start(distgrid, True, True, 0)
@@ -92,7 +93,7 @@ class MovePanel(ScreenPanel):
 
 
 
-        b = KlippyGtk.ButtonImage('back', 'Back')
+        b = KlippyGtk.ButtonImage('back', _('Back'))
         b.connect("clicked", self._screen._menu_go_back)
         grid.attach(b, 3, 2, 1, 1)
 

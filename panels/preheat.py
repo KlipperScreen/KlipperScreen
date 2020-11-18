@@ -13,6 +13,7 @@ class PreheatPanel(ScreenPanel):
     active_heaters = []
 
     def initialize(self, panel_name):
+        _ = self.lang.gettext
         self.preheat_options = self._screen._config.get_preheat_options()
         logger.debug("Preheat options: %s" % self.preheat_options)
 
@@ -47,10 +48,10 @@ class PreheatPanel(ScreenPanel):
             i += 1
 
 
-        cooldown = KlippyGtk.ButtonImage('cool-down', 'Cooldown')
+        cooldown = KlippyGtk.ButtonImage('cool-down', _('Cooldown'))
         cooldown.connect("clicked", self.set_temperature, "cooldown")
 
-        b = KlippyGtk.ButtonImage('back', 'Back')
+        b = KlippyGtk.ButtonImage('back', _('Back'))
         b.connect("clicked", self._screen._menu_go_back)
 
         row = int(i/2) if i%2 == 0 else int(i/2)+1

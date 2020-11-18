@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import gi
+import gettext
 import time
 import threading
 
@@ -91,6 +92,8 @@ class KlipperScreen(Gtk.Window):
                 'is_active': False
             }
         })
+        self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales')
+        _ = self.lang.gettext
 
         self.apiclient = KlippyRest("127.0.0.1",7125)
         Gtk.Window.__init__(self)
@@ -103,7 +106,7 @@ class KlipperScreen(Gtk.Window):
         logger.info("KlipperScreen version: %s" % self.version)
         logger.info("Screen resolution: %sx%s" % (self.width, self.height))
 
-        self.printer_initializing("Initializing")
+        self.printer_initializing(_("Initializing"))
 
         self._ws = KlippyWebsocket(self, {
             "on_connect": self.init_printer,
@@ -182,6 +185,7 @@ class KlipperScreen(Gtk.Window):
                 else:
                     self.panels[panel_name].initialize(panel_name)
             except:
+                del self.panels[panel_name]
                 self.show_error_modal("Unable to load panel %s" % panel_name)
                 return
 
@@ -202,15 +206,16 @@ class KlipperScreen(Gtk.Window):
         logger.debug("Current panel hierarchy: %s", str(self._cur_panels))
 
     def show_error_modal(self, err):
+        _ = self.lang.gettext
         logger.exception("Showing error modal: %s", err)
 
         buttons = [
-            {"name":"Go Back","response": Gtk.ResponseType.CANCEL}
+            {"name":_("Go Back"),"response": Gtk.ResponseType.CANCEL}
         ]
 
         label = Gtk.Label()
-        label.set_markup(("%s \n\nCheck /tmp/KlipperScreen.log for more information.\nPlease submit an issue "
-            + "on GitHub for help.") % err)
+        label.set_markup(("%s \n\n" % err) +
+            _("Check /tmp/KlipperScreen.log for more information.\nPlease submit an issue on GitHub for help."))
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
@@ -305,11 +310,12 @@ class KlipperScreen(Gtk.Window):
                 return
 
     def _websocket_callback(self, action, data):
+        _ = self.lang.gettext
         #print(json.dumps([action, data], indent=2))
 
         if action == "notify_klippy_disconnected":
             logger.info("### Going to disconnected state")
-            self.printer_initializing("Klipper has shutdown")
+            self.printer_initializing(_("Klipper has shutdown"))
             return
         elif action == "notify_klippy_ready":
             logger.info("### Going to ready state")
@@ -324,7 +330,7 @@ class KlipperScreen(Gtk.Window):
                     self.printer_ready()
                 elif data['webhooks']['state'] == "shutdown":
                     self.shutdown == True
-                    self.printer_initializing("Klipper shutdown")
+                    self.printer_initializing(_("Klipper has shutdown"))
             else:
                 active = self.printer.get_stat('virtual_sdcard','is_active')
                 paused = self.printer.get_stat('pause_resume','is_paused')
@@ -347,9 +353,11 @@ class KlipperScreen(Gtk.Window):
             self.panels[sub].process_update(data)
 
     def _confirm_send_action(self, widget, text, method, params):
+        _ = self.lang.gettext
+
         buttons = [
-            {"name":"Continue", "response": Gtk.ResponseType.OK},
-            {"name":"Cancel","response": Gtk.ResponseType.CANCEL}
+            {"name":_("Continue"), "response": Gtk.ResponseType.OK},
+            {"name":_("Cancel"),"response": Gtk.ResponseType.CANCEL}
         ]
 
         label = Gtk.Label()
@@ -360,7 +368,7 @@ class KlipperScreen(Gtk.Window):
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         label.get_style_context().add_class("text")
 
-        dialog = KlippyGtk.Dialog(self,  buttons, label, self._confirm_send_action_response,  method, params)
+        dialog = KlippyGtk.Dialog(self, buttons, label, self._confirm_send_action_response,  method, params)
 
     def _confirm_send_action_response(self, widget, response_id, method, params):
         if response_id == Gtk.ResponseType.OK:
@@ -379,6 +387,7 @@ class KlipperScreen(Gtk.Window):
             self.panels['splash_screen'].show_restart_buttons()
 
     def init_printer(self):
+        _ = self.lang.gettext
         self.shutdown = False
 
         status_objects = [
@@ -396,7 +405,7 @@ class KlipperScreen(Gtk.Window):
         info = self.apiclient.get_printer_info()
         data = self.apiclient.send_request("printer/objects/query?" + "&".join(status_objects))
         if info == False or data == False:
-            self.printer_initializing("Moonraker error")
+            self.printer_initializing(_("Moonraker error"))
             return
         data = data['result']['status']
 
@@ -412,10 +421,10 @@ class KlipperScreen(Gtk.Window):
         if info['result']['state'] == "shutdown":
             if "FIRMWARE_RESTART" in info['result']['state_message']:
                 self.printer_initializing(
-                    "Klipper has encountered an error. Issue a FIRMWARE_RESTART to attempt fixing the issue."
+                    _("Klipper has encountered an error. Issue a FIRMWARE_RESTART to attempt fixing the issue.")
                 )
             else:
-                self.printer_initializing("Klippy is shutdown")
+                self.printer_initializing(_("Klipper has shutdown"))
             return
         if (data['print_stats']['state'] == "printing" or data['print_stats']['state'] == "paused"):
             self.printer_printing()

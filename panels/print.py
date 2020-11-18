@@ -140,13 +140,18 @@ class PrintPanel(ScreenPanel):
 
 
     def get_file_info_str(self, filename):
+        _ = self.lang.gettext
+
         fileinfo = self._screen.files.get_file_info(filename)
         if fileinfo == None:
             return
 
-        return "<small>Uploaded: <b>%s</b> - Size: <b>%s</b>\nPrint Time: <b>%s</b></small>" % (
+        return "<small>%s: <b>%s</b> - %s: <b>%s</b>\n%s: <b>%s</b></small>" % (
+            _("Uploaded"),
             datetime.fromtimestamp(fileinfo['modified']).strftime("%Y-%m-%d %H:%M"),
+            _("Size"),
             humanize.naturalsize(fileinfo['size']),
+            _("Print Time"),
             self.get_print_time(filename)
         )
 
@@ -214,27 +219,14 @@ class PrintPanel(ScreenPanel):
             self.update_file(file)
 
     def confirm_print(self, widget, filename):
-        dialog = Gtk.Dialog()
-        #TODO: Factor other resolutions in
-        dialog.set_default_size(self._screen.width - 15, self._screen.height - 15)
-        dialog.set_resizable(False)
-        dialog.set_transient_for(self._screen)
-        dialog.set_modal(True)
-
-        dialog.add_button(button_text="Print", response_id=Gtk.ResponseType.OK)
-        dialog.add_button(button_text="Cancel", response_id=Gtk.ResponseType.CANCEL)
-
-        dialog.connect("response", self.confirm_print_response, filename)
-        dialog.get_style_context().add_class("dialog")
-
-        content_area = dialog.get_content_area()
-        content_area.set_margin_start(15)
-        content_area.set_margin_end(15)
-        content_area.set_margin_top(15)
-        content_area.set_margin_bottom(15)
+        _ = self.lang.gettext
+        buttons = [
+            {"name":_("Print"), "response": Gtk.ResponseType.OK},
+            {"name":_("Cancel"),"response": Gtk.ResponseType.CANCEL}
+        ]
 
         label = Gtk.Label()
-        label.set_markup("Are you sure you want to print <b>%s</b>?" % (filename))
+        label.set_markup("%s <b>%s</b>%s" % (_("Are you sure you want to print"), filename, _("?")))
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
@@ -255,9 +247,8 @@ class PrintPanel(ScreenPanel):
         grid.set_vexpand(True)
         grid.set_halign(Gtk.Align.CENTER)
         grid.set_valign(Gtk.Align.CENTER)
-        content_area.add(grid)
-        dialog.resize(self._screen.width - 15, self._screen.height - 15)
-        dialog.show_all()
+
+        dialog = KlippyGtk.Dialog(self._screen, buttons, grid, self.confirm_print_response,  filename)
 
     def confirm_print_response(self, widget, response_id, filename):
         widget.destroy()

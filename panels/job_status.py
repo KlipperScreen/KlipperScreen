@@ -14,6 +14,7 @@ class JobStatusPanel(ScreenPanel):
     filename = None
 
     def initialize(self, panel_name):
+        _ = self.lang.gettext
         grid = KlippyGtk.HomogeneousGrid()
 
         self.labels['progress'] = KlippyGtk.ProgressBar("printing-progress-bar")
@@ -29,10 +30,10 @@ class JobStatusPanel(ScreenPanel):
         overlay.add_overlay(self.labels['progress_text'])
 
         self.labels['file'] = KlippyGtk.ImageLabel("file","",20,"printing-status-label")
-        self.labels['time_label'] = KlippyGtk.ImageLabel("speed-step","Time Elapsed",20,"printing-status-label")
-        self.labels['time'] = KlippyGtk.Label("Time Elapsed","printing-status-label")
-        self.labels['time_left_label'] = KlippyGtk.ImageLabel("speed-step","Time Left",20,"printing-status-label")
-        self.labels['time_left'] = KlippyGtk.Label("Time Left","printing-status-label")
+        self.labels['time_label'] = KlippyGtk.ImageLabel("speed-step",_("Time Elapsed"),20,"printing-status-label")
+        self.labels['time'] = KlippyGtk.Label(_("Time Elapsed"),"printing-status-label")
+        self.labels['time_left_label'] = KlippyGtk.ImageLabel("speed-step",_("Time Left"),20,"printing-status-label")
+        self.labels['time_left'] = KlippyGtk.Label(_("Time Left"),"printing-status-label")
         timegrid = Gtk.Grid()
         timegrid.attach(self.labels['time_label']['b'], 0, 0, 1, 1)
         timegrid.attach(self.labels['time'], 0, 1, 1, 1)
@@ -64,9 +65,9 @@ class JobStatusPanel(ScreenPanel):
         self.labels['heater_bed'].set_sensitive(False)
         grid.attach(self.labels['heater_bed'], 0, 1, 1, 1)
 
-        self.labels['resume'] = KlippyGtk.ButtonImage("resume","Resume","color1")
+        self.labels['resume'] = KlippyGtk.ButtonImage("resume",_("Resume"),"color1")
         self.labels['resume'].connect("clicked",self.resume)
-        self.labels['pause'] = KlippyGtk.ButtonImage("pause","Pause","color1" )
+        self.labels['pause'] = KlippyGtk.ButtonImage("pause",_("Pause"),"color1" )
         self.labels['pause'].connect("clicked",self.pause)
 
         if self._printer.get_stat('pause_resume','is_paused') == True:
@@ -75,13 +76,13 @@ class JobStatusPanel(ScreenPanel):
         else:
             grid.attach(self.labels['pause'], 0, 2, 1, 1)
 
-        self.labels['cancel'] = KlippyGtk.ButtonImage("stop","Cancel","color2")
+        self.labels['cancel'] = KlippyGtk.ButtonImage("stop",_("Cancel"),"color2")
         self.labels['cancel'].connect("clicked", self.cancel)
         grid.attach(self.labels['cancel'], 1, 2, 1, 1)
-        self.labels['estop'] = KlippyGtk.ButtonImage("decrease","Emergency Stop","color4")
+        self.labels['estop'] = KlippyGtk.ButtonImage("decrease",_("Emergency Stop"),"color4")
         self.labels['estop'].connect("clicked", self.emergency_stop)
         grid.attach(self.labels['estop'], 2, 2, 1, 1)
-        self.labels['control'] = KlippyGtk.ButtonImage("control","Control","color3")
+        self.labels['control'] = KlippyGtk.ButtonImage("control",_("Control"),"color3")
         self.labels['control'].connect("clicked", self._screen._go_to_submenu, "")
         grid.attach(self.labels['control'], 3, 2, 1, 1)
 
@@ -100,16 +101,18 @@ class JobStatusPanel(ScreenPanel):
         self._screen.show_all()
 
     def cancel(self, widget):
+        _ = self.lang.gettext
+
         dialog = KlippyGtk.ConfirmDialog(
             self._screen,
-            "Are you sure you wish to cancel this print?",
+            _("Are you sure you wish to cancel this print?"),
             [
                 {
-                    "name": "Cancel Print",
+                    "name": _("Cancel Print"),
                     "response": Gtk.ResponseType.OK
                 },
                 {
-                    "name": "Go Back",
+                    "name": _("Go Back"),
                     "response": Gtk.ResponseType.CANCEL
                 }
             ],

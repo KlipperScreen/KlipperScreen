@@ -11,11 +11,11 @@ logger = logging.getLogger("KlipperScreen.MenuPanel")
 
 class MenuPanel(ScreenPanel):
     def initialize(self, panel_name, items):
-        print("### Making a new menu")
+        _ = self.lang.gettext
 
         grid = self.arrangeMenuItems(items, 4)
 
-        b = KlippyGtk.ButtonImage('back', 'Back')
+        b = KlippyGtk.ButtonImage('back', _('Back'))
         b.connect("clicked", self._screen._menu_go_back)
         grid.attach(b, 3, 1, 1, 1)
 

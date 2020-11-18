@@ -13,13 +13,13 @@ logger = logging.getLogger("KlipperScreen.SystemPanel")
 
 class SystemPanel(ScreenPanel):
     def initialize(self, panel_name):
-        # Create gtk items here
+        _ = self.lang.gettext
 
         grid = KlippyGtk.HomogeneousGrid()
 
-        restart = KlippyGtk.ButtonImage('reboot','Klipper Restart','color1')
+        restart = KlippyGtk.ButtonImage('reboot',_('Klipper Restart'),'color1')
         restart.connect("clicked", self.restart_klippy)
-        firmrestart = KlippyGtk.ButtonImage('restart','Firmware Restart','color2')
+        firmrestart = KlippyGtk.ButtonImage('restart',_('Firmware Restart'),'color2')
         firmrestart.connect("clicked", self.restart_klippy, "firmware")
         back = KlippyGtk.ButtonImage('back', 'Back')
         back.connect("clicked", self._screen._menu_go_back)
@@ -27,7 +27,7 @@ class SystemPanel(ScreenPanel):
         info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         info.set_vexpand(True)
 
-        title = Gtk.Label("System Information")
+        title = Gtk.Label(_("System Information"))
         title.set_margin_bottom(5)
         title.set_margin_top(15)
 
@@ -39,7 +39,7 @@ class SystemPanel(ScreenPanel):
         title.get_style_context().add_class('temperature_entry')
         self.labels['loadavg'].get_style_context().add_class('temperature_entry')
 
-        self.labels['version'] = Gtk.Label("KlipperScreen Version: %s" % self._screen.version)
+        self.labels['version'] = Gtk.Label(_("KlipperScreen Version") + (": %s" % self._screen.version))
         self.labels['version'].set_margin_top(15)
         self.labels['version'].get_style_context().add_class('temperature_entry')
 
@@ -56,9 +56,10 @@ class SystemPanel(ScreenPanel):
         self.panel = grid
 
     def update_system_load(self):
+        _ = self.lang.gettext
         lavg = os.getloadavg()
         self.labels['loadavg'].set_text(
-            "Load Average: %.2f %.2f %.2f" % (lavg[0], lavg[1], lavg[2])
+            _("Load Average") + (": %.2f %.2f %.2f" % (lavg[0], lavg[1], lavg[2]))
         )
 
         #TODO: Shouldn't need this
