@@ -10,22 +10,22 @@
 * [Temperature](#temperature)
 
 ### Main Menu
-![Main Menu](/docs/img/main_panel.png)
+![Main Menu](img/main_panel.png)
 
 ### Bed Level
-![Bed Level](/docs/img/bedlevel.png)
+![Bed Level](img/bedlevel.png)
 
 ### Extrude
-![Extrude](/docs/img/extrude.png)
+![Extrude](img/extrude.png)
 
 ### Fan
-![Fan](/docs/img/fan.png)
+![Fan](img/fan.png)
 
 ### Move
-![Move Panel](/docs/img/move.png)
+![Move Panel](img/move.png)
 
 ### Preheat
-![Preheat Panel](/docs/img/preheat.png)
+![Preheat Panel](img/preheat.png)
 
 ### Temperature
-![Temperature](/docs/img/temperature.png)
+![Temperature](img/temperature.png)
