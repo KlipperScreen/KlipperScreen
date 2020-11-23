@@ -26,5 +26,7 @@ be slightly different depending on what model you get. I am developing on a 1024
 other resolutions may not be scaled properly at this moment. UI scaling is a future development item.
 
 ### Links
+
 [Installation](docs/Installation.md)
+
 [Configuration](docs/Configuration.md)

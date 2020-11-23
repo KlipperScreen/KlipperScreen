@@ -1,6 +1,7 @@
 # Configuration
 
-In the KlipperScreen folder, a file _KlipperScreen.conf_ allows for configuration of the screen. This document will detail how to configure KlipperScreen. A default config is included here: [ks_includes/KlipperScreen.conf](ks_includes/KlipperScreen.conf)
+In the KlipperScreen folder, a file _KlipperScreen.conf_ allows for configuration of the screen. This document will
+detail how to configure KlipperScreen. A default config is included here: [ks_includes/KlipperScreen.conf](../ks_includes/KlipperScreen.conf)
 
 
 ## Preheat Options
