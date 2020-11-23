@@ -117,4 +117,4 @@ class ZCalibratePanel(ScreenPanel):
     def accept(self, widget):
         logger.info("Accepting Z calibrate")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_ACCEPT)
-        #self._screen._ws.klippy.gcode_script(KlippyGcodes.SAVE_CONFIG)
+        self._screen._menu_go_back(widget)
