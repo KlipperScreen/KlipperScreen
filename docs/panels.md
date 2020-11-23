@@ -5,9 +5,14 @@
 * [Bed Level](#bed-level)
 * [Extrude](#extrude)
 * [Fan](#fan)
-* [Move](#move)
-* [Preheat](#preheat)
-* [Temperature](#temperature)
+* [finetune](#finetune)
+* [move](#move)
+* [network](#network)
+* [preheat](#preheat)
+* [system](#system)
+* [temperature](#temperature)
+* [zcalibrate](#zcalibrate)
+
 
 ### Main Menu
 ![Main Menu](img/main_panel.png)

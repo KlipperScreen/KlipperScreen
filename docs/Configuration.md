@@ -18,8 +18,6 @@ different items and there are several panel options available. It is possible to
 button press. There are two menus available in KlipperScreen, __main and __print. The __main menu is displayed while the
 printer is idle. The __print menu is accessible from the printing status page.
 
-Available panels are listed here: [docs/panels.md](panels.md)
-
 A menu item is configured as follows:
 ```
 [menu __main my_menu_item]
@@ -34,6 +32,9 @@ method: printer.gcode.script
 # Parameters that would be passed with the method above
 params: {"script":"G28 X"}
 ```
+Available panels are listed here: [docs/panels.md](panels.md)
+
+
 
 A sample configuration of a main menu would be as follows:
 ```
