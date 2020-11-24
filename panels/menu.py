@@ -9,6 +9,9 @@ from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.MenuPanel")
 
+def create_panel(*args):
+    return MenuPanel(*args)
+
 class MenuPanel(ScreenPanel):
     def initialize(self, panel_name, items):
         _ = self.lang.gettext

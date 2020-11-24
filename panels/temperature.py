@@ -10,6 +10,9 @@ from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.TemperaturePanel")
 
+def create_panel(*args):
+    return TemperaturePanel(*args)
+
 class TemperaturePanel(ScreenPanel):
     active_heater = "extruder"
     tempdeltas = ["1","5","10","25"]

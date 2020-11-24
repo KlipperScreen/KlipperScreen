@@ -10,7 +10,10 @@ from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.FineTunePanel")
 
-class FineTune(ScreenPanel):
+def create_panel(*args):
+    return FineTunePanel(*args)
+
+class FineTunePanel(ScreenPanel):
     user_selecting = False
 
     bs = 0

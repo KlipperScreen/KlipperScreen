@@ -10,6 +10,9 @@ from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.ExtrudePanel")
 
+def create_panel(*args):
+    return ExtrudePanel(*args)
+
 class ExtrudePanel(ScreenPanel):
     distance = 1
     distances = ['1','5','10','25']

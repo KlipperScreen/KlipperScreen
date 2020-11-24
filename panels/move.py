@@ -10,6 +10,9 @@ from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.MovePanel")
 
+def create_panel(*args):
+    return MovePanel(*args)
+
 class MovePanel(ScreenPanel):
     distance = 1
     distances = ['.1','.5','1','5','10','25']
