@@ -61,9 +61,11 @@ class ZCalibratePanel(ScreenPanel):
         space_grid.attach(distgrid,0,1,1,1)
         space_grid.attach(Gtk.Label(" "),0,2,1,1)
 
+        estop = KlippyGtk.ButtonImage("decrease",_("Emergency Stop"),"color4")
+        estop.connect("clicked", self.emergency_stop)
+
         complete = KlippyGtk.ButtonImage('complete',_('Accept'),'color2')
         complete.connect("clicked", self.accept)
-
 
         b = KlippyGtk.ButtonImage('back', _('Abort'))
         b.connect("clicked", self.abort)
@@ -72,6 +74,7 @@ class ZCalibratePanel(ScreenPanel):
         grid.attach(zpos, 1, 0, 1, 1)
         grid.attach(box, 0, 1, 2, 1)
         grid.attach(zneg, 1, 1, 1, 1)
+        grid.attach(estop, 3, 0, 1, 1)
         grid.attach(complete, 3, 1, 1, 1)
         grid.attach(space_grid, 0, 2, 3, 1)
         grid.attach(b, 3, 2, 1, 1)
