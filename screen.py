@@ -8,6 +8,7 @@ import threading
 import json
 import requests
 import websocket
+import importlib
 import logging
 import os
 import re
@@ -27,7 +28,6 @@ from ks_includes.config import KlipperScreenConfig
 
 # Do this better in the future
 #from ks_includes.screen_panel import *
-from panels.bed_level import *
 from panels.extrude import *
 from panels.fan import *
 from panels.fine_tune import *
@@ -42,6 +42,7 @@ from panels.splash_screen import *
 from panels.system import *
 from panels.temperature import *
 from panels.zcalibrate import *
+CORE_PANELS = ["main_menu","menu","job_status"]
 
 # Create logging
 logger = logging.getLogger('KlipperScreen')
@@ -70,6 +71,7 @@ class KlipperScreen(Gtk.Window):
     number_tools = 1
 
     panels = {}
+    load_panel = {}
     _cur_panels = []
     files = None
     filename = ""
@@ -106,6 +108,8 @@ class KlipperScreen(Gtk.Window):
         logger.info("KlipperScreen version: %s" % self.version)
         logger.info("Screen resolution: %sx%s" % (self.width, self.height))
 
+        #self._load_panels()
+
         self.printer_initializing(_("Initializing"))
 
         self._ws = KlippyWebsocket(self, {
@@ -139,45 +143,34 @@ class KlipperScreen(Gtk.Window):
         }
         self._ws.klippy.object_subscription(requested_updates)
 
+    def _load_panel(self, panel, *args):
+        if not panel in self.load_panel:
+            logger.debug("Loading panel: %s" % panel)
+            panel_path = os.path.join(os.path.dirname(__file__), 'panels', "%s.py" % panel)
+            logger.info("Panel path: %s" % panel_path)
+            if not os.path.exists(panel_path):
+                msg = f"Panel {panel} does not exist"
+                logger.info(msg)
+                raise Exception(msg)
+
+            module = importlib.import_module("panels.%s" % panel)
+            if not hasattr(module, "create_panel"):
+                msg = f"Cannot locate create_panel function for {panel}"
+                logger.info(msg)
+                raise Exception(msg)
+            self.load_panel[panel] = getattr(module, "create_panel")
+
+        try:
+            return self.load_panel[panel](*args)
+        except Exception:
+            msg = f"Unable to create panel {panel}"
+            logger.exception(msg)
+            raise Exception(msg)
+
+
     def show_panel(self, panel_name, type, remove=None, pop=True, **kwargs):
         if panel_name not in self.panels:
-            try:
-                if type == "SplashScreenPanel":
-                    self.panels[panel_name] = SplashScreenPanel(self)
-                elif type == "MainPanel":
-                    self.panels[panel_name] = MainPanel(self)
-                elif type == "menu":
-                    self.panels[panel_name] = MenuPanel(self)
-                elif type == "bed_level":
-                    self.panels[panel_name] = BedLevelPanel(self)
-                elif type == "extrude":
-                    self.panels[panel_name] = ExtrudePanel(self)
-                elif type == "finetune":
-                    self.panels[panel_name] = FineTune(self)
-                elif type == "JobStatusPanel":
-                    self.panels[panel_name] = JobStatusPanel(self)
-                elif type == "move":
-                    self.panels[panel_name] = MovePanel(self)
-                elif type == "network":
-                    self.panels[panel_name] = NetworkPanel(self)
-                elif type == "preheat":
-                    self.panels[panel_name] = PreheatPanel(self)
-                elif type == "print":
-                    self.panels[panel_name] = PrintPanel(self)
-                elif type == "temperature":
-                    self.panels[panel_name] = TemperaturePanel(self)
-                elif type == "fan":
-                    self.panels[panel_name] = FanPanel(self)
-                elif type == "system":
-                    self.panels[panel_name] = SystemPanel(self)
-                elif type == "zcalibrate":
-                    self.panels[panel_name] = ZCalibratePanel(self)
-                #Temporary for development
-                else:
-                    self.panels[panel_name] = MovePanel(self)
-            except:
-                self.show_error_modal("Unable to load panel %s" % panel_name)
-                return
+            self.panels[panel_name] = self._load_panel(type, self)
 
             try:
                 if kwargs != {}:
@@ -186,7 +179,7 @@ class KlipperScreen(Gtk.Window):
                     self.panels[panel_name].initialize(panel_name)
             except:
                 del self.panels[panel_name]
-                self.show_error_modal("Unable to load panel %s" % panel_name)
+                self.show_error_modal("Unable to load panel %s" % type)
                 return
 
             if hasattr(self.panels[panel_name],"process_update"):
@@ -386,7 +379,7 @@ class KlipperScreen(Gtk.Window):
 
     def printer_initializing(self, text=None):
         self.shutdown = True
-        self.show_panel('splash_screen',"SplashScreenPanel", 2)
+        self.show_panel('splash_screen',"splash_screen", 2)
         if text != None:
             self.panels['splash_screen'].update_text(text)
             self.panels['splash_screen'].show_restart_buttons()
@@ -442,12 +435,12 @@ class KlipperScreen(Gtk.Window):
             return
 
         self.files.add_timeout()
-        self.show_panel('main_panel', "MainPanel", 2, items=self._config.get_menu_items("__main"), extrudercount=self.printer.get_extruder_count())
+        self.show_panel('main_panel', "main_menu", 2, items=self._config.get_menu_items("__main"), extrudercount=self.printer.get_extruder_count())
 
     def printer_printing(self):
         self.ws_subscribe()
         self.files.remove_timeout()
-        self.show_panel('job_status',"JobStatusPanel", 2)
+        self.show_panel('job_status',"job_status", 2)
 
 def get_software_version():
     prog = ('git', '-C', os.path.dirname(__file__), 'describe', '--always',

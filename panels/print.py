@@ -12,6 +12,9 @@ from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.PrintPanel")
 
+def create_panel(*args):
+    return PrintPanel(*args)
+
 class PrintPanel(ScreenPanel):
     def initialize(self, panel_name):
         self.labels['files'] = {}

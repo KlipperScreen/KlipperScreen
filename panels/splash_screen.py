@@ -10,6 +10,9 @@ from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.SplashScreenPanel")
 
+def create_panel(*args):
+    return SplashScreenPanel(*args)
+
 class SplashScreenPanel(ScreenPanel):
     box = None
 

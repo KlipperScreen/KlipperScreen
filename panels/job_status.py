@@ -9,6 +9,9 @@ from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.JobStatusPanel")
 
+def create_panel(*args):
+    return JobStatusPanel(*args)
+
 class JobStatusPanel(ScreenPanel):
     is_paused = False
     filename = None

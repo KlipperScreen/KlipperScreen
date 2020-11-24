@@ -10,6 +10,9 @@ from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.FanPanel")
 
+def create_panel(*args):
+    return FanPanel(*args)
+
 class FanPanel(ScreenPanel):
     user_selecting = False
 

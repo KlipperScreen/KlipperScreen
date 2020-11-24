@@ -111,3 +111,6 @@ class BedLevelPanel(ScreenPanel):
         self._screen._ws.klippy.gcode_script(
             "M18" # Disable motors
         )
+
+def create_panel(*args):
+    return BedLevelPanel(*args)

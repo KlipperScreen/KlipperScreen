@@ -10,6 +10,9 @@ from ks_includes.screen_panel import ScreenPanel
 import logging
 logger = logging.getLogger("KlipperScreen.ZCalibratePanel")
 
+def create_panel(*args):
+    return ZCalibratePanel(*args)
+
 class ZCalibratePanel(ScreenPanel):
     _screen = None
     labels = {}

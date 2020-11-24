@@ -11,6 +11,9 @@ from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.SystemPanel")
 
+def create_panel(*args):
+    return SystemPanel(*args)
+
 class SystemPanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext

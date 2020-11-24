@@ -9,6 +9,9 @@ from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.PreheatPanel")
 
+def create_panel(*args):
+    return PreheatPanel(*args)
+
 class PreheatPanel(ScreenPanel):
     active_heaters = []
 
