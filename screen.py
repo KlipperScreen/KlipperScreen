@@ -26,24 +26,6 @@ from ks_includes.printer import Printer
 
 from ks_includes.config import KlipperScreenConfig
 
-# Do this better in the future
-#from ks_includes.screen_panel import *
-from panels.extrude import *
-from panels.fan import *
-from panels.fine_tune import *
-from panels.job_status import *
-from panels.main_menu import *
-from panels.menu import *
-from panels.move import *
-from panels.network import *
-from panels.preheat import *
-from panels.print import *
-from panels.splash_screen import *
-from panels.system import *
-from panels.temperature import *
-from panels.zcalibrate import *
-CORE_PANELS = ["main_menu","menu","job_status"]
-
 # Create logging
 logger = logging.getLogger('KlipperScreen')
 logger.setLevel(logging.DEBUG)
