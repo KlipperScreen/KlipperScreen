@@ -40,12 +40,10 @@ class MenuPanel(ScreenPanel):
                 width = 2
 
             key = list(items[i])[0]
-            logger.debug("Key: %s" % key)
             item = items[i][key]
             b = KlippyGtk.ButtonImage(
                 item['icon'], item['name'], "color"+str((i%4)+1)
             )
-            logger.debug("Item: %s" % item)
             if item['panel'] != False:
                 b.connect("clicked", self.menu_item_clicked, item['panel'], item)
             elif item['method'] != False:
