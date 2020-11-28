@@ -1,9 +1,12 @@
 ## Changelog
 
+#### 2020 11 28
+* Add option for enable in menu for configuration. This can hide certain options
+
 #### 2020 11 18
-* Changed configuration file format. 
-* Moved default configuration file to an include folder. 
-* Added ability to do a confirm dialog from a menu item when running a script 
+* Changed configuration file format.
+* Moved default configuration file to an include folder.
+* Added ability to do a confirm dialog from a menu item when running a script
 * Added "Save Config" button to default configuration's Configuration menu.
 
 #### 2020 11 14

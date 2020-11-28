@@ -32,9 +32,16 @@ panel: preheat
 method: printer.gcode.script
 # Parameters that would be passed with the method above
 params: {"script":"G28 X"}
+# Enable allows hiding of a menu if the condition is false. This statement is evaluated in Jinja2
+#   Available variables are listed below.
+enable: {{ printer.power_devices.count > 0 }}
 ```
 Available panels are listed here: [docs/panels.md](panels.md)
 
+Certain variables are available for conditional testing of the enable statement:
+```
+printer.power_devices.count # Number of power devices configured in Moonraker
+```
 
 
 A sample configuration of a main menu would be as follows:

@@ -7,6 +7,8 @@ from gi.repository import Gtk, Gdk, GLib
 from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.screen_panel import ScreenPanel
 
+from jinja2 import Template
+
 logger = logging.getLogger("KlipperScreen.MenuPanel")
 
 def create_panel(*args):
@@ -16,6 +18,7 @@ class MenuPanel(ScreenPanel):
     def initialize(self, panel_name, items):
         _ = self.lang.gettext
 
+        self.activate()
         grid = self.arrangeMenuItems(items, 4)
 
         b = KlippyGtk.ButtonImage('back', _('Back'))
@@ -24,10 +27,26 @@ class MenuPanel(ScreenPanel):
 
         self.panel = grid
 
+    def activate(self):
+        self.j2_data = {
+            "printer": {
+                "power_devices": {
+                    "count": len(self._screen.printer.get_power_devices())
+                }
+            }
+        }
+        logger.debug("j2_data: %s" % self.j2_data)
+
     def arrangeMenuItems (self, items, columns, expandLast=False):
         grid = Gtk.Grid()
         grid.set_row_homogeneous(True)
         grid.set_column_homogeneous(True)
+        logger.debug(items)
+        for item in items:
+            key = list(item)[0]
+            logger.debug(item)
+            if not self.evaluate_enable(item[key]['enable']):
+                items.remove(item)
 
         l = len(items)
         i = 0
@@ -60,3 +79,22 @@ class MenuPanel(ScreenPanel):
             i += 1
 
         return grid
+
+    def evaluate_enable(self, enable):
+        if enable == True:
+            return True
+        if enable == False:
+            return False
+
+        try:
+            logger.debug("Template: '%s'" % enable)
+            logger.debug("Date: %s" % self.j2_data)
+            j2_temp = Template(enable)
+            result = j2_temp.render(self.j2_data)
+            logger.debug("Result: %s" % result)
+            if result == 'True':
+                return True
+            return False
+        except:
+            logger.debug("Error evaluating enable statement: %s", enable)
+            return False
