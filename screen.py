@@ -320,6 +320,9 @@ class KlipperScreen(Gtk.Window):
             #self.files.add_file()
         elif action == "notify_metadata_update":
             self.files.update_metadata(data['filename'])
+        elif action == "notify_power_changed":
+            logger.debug("Power status changed: %s", data)
+            self.printer.process_power_update(data)
         elif self.shutdown == False and action == "notify_gcode_response":
             if "Klipper state: Shutdown" in data:
                 self.shutdown == True
@@ -384,6 +387,7 @@ class KlipperScreen(Gtk.Window):
         ]
         info = self.apiclient.get_printer_info()
         data = self.apiclient.send_request("printer/objects/query?" + "&".join(status_objects))
+        powerdevs = self.apiclient.send_request("machine/device_power/devices")
         if info == False or data == False:
             self.printer_initializing(_("Moonraker error"))
             return
@@ -392,6 +396,7 @@ class KlipperScreen(Gtk.Window):
         # Reinitialize printer, in case the printer was shut down and anything has changed.
         self.printer.__init__(data)
         self.ws_subscribe()
+        self.printer.configure_power_devices(powerdevs['result'])
 
         if self.files == None:
             self.files = KlippyFiles(self)

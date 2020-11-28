@@ -3,7 +3,7 @@ import logging
 import os
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib
+from gi.repository import Gtk, Gdk, GLib, Pango
 
 from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.screen_panel import ScreenPanel
@@ -25,6 +25,8 @@ class SplashScreenPanel(ScreenPanel):
 
         self.labels['text'] = Gtk.Label(_("Initializing printer..."))
         self.labels['text'].get_style_context().add_class("text")
+        self.labels['text'].set_line_wrap(True)
+        self.labels['text'].set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
 
         self.labels['actions'] = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
@@ -57,6 +59,7 @@ class SplashScreenPanel(ScreenPanel):
         _ = self.lang.gettext
 
         if "firmware_restart" not in self.labels:
+            self.labels['power'] = KlippyGtk.ButtonImage("reboot",_("Power On Printer"),"color3")
             self.labels['restart'] = KlippyGtk.ButtonImage("reboot",_("Restart"),"color1")
             self.labels['restart'].connect("clicked", self.restart)
             self.labels['firmware_restart'] = KlippyGtk.ButtonImage("restart",_("Firmware Restart"),"color2")
@@ -64,11 +67,22 @@ class SplashScreenPanel(ScreenPanel):
 
         self.clear_action_bar()
 
+        devices = [i for i in self._screen.printer.get_power_devices() if i.lower().startswith('printer')]
+        logger.debug("Power devices: %s" % devices)
+        if len(devices) > 0:
+            logger.debug("Adding power button")
+            self.labels['power'].connect("clicked", self.power_on, devices[0])
+            self.labels['actions'].add(self.labels['power'])
+
+        self.labels['actions'].add(self.labels['power'])
         self.labels['actions'].add(self.labels['restart'])
         self.labels['actions'].add(self.labels['firmware_restart'])
 
     def firmware_restart(self, widget):
         self._screen._ws.klippy.restart_firmware()
+
+    def power_on(self, widget, device):
+        self._screen._ws.klippy.power_device_on(device)
 
     def restart(self, widget):
         self._screen._ws.klippy.restart()

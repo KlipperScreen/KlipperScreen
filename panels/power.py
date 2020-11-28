@@ -1,0 +1,122 @@
+import gi
+import logging
+
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk, Gdk, GLib, Pango
+
+from ks_includes.KlippyGtk import KlippyGtk
+from ks_includes.KlippyGcodes import KlippyGcodes
+from ks_includes.screen_panel import ScreenPanel
+
+logger = logging.getLogger("KlipperScreen.PowerPanel")
+
+def create_panel(*args):
+    return PowerPanel(*args)
+
+class PowerPanel(ScreenPanel):
+    def initialize(self, panel_name):
+        _ = self.lang.gettext
+        self.devices = {}
+
+        # Create bottom bar
+        bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        bar.set_hexpand(True)
+        bar.set_vexpand(False)
+        bar.set_halign(Gtk.Align.END)
+        bar.set_margin_top(5)
+        bar.set_margin_bottom(5)
+        bar.set_margin_end(5)
+
+        # Add a back button to the bottom bar
+        back = KlippyGtk.ButtonImage('back', None, None, 60, 60)
+        back.connect("clicked", self._screen._menu_go_back)
+        bar.add(back)
+
+        # Create a scroll window for the power devices
+        scroll = Gtk.ScrolledWindow()
+        scroll.set_property("overlay-scrolling", False)
+        scroll.set_vexpand(True)
+
+        # Create a grid for all devices
+        self.labels['devices'] = Gtk.Grid()
+        scroll.add(self.labels['devices'])
+
+        # Create a box to contain all of the above
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        box.set_vexpand(True)
+        box.pack_start(scroll, True, True, 0)
+        box.pack_end(bar, False, False, 0)
+
+        self.load_power_devices()
+
+        self.panel = box
+        self._screen.add_subscription(panel_name)
+
+    def add_device(self, device):
+
+        frame = Gtk.Frame()
+        frame.set_property("shadow-type",Gtk.ShadowType.NONE)
+
+        name = Gtk.Label()
+        name.set_markup("<big><b>%s</b></big>" % (device))
+        name.set_hexpand(True)
+        name.set_halign(Gtk.Align.START)
+        name.set_line_wrap(True)
+        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+
+        switch = Gtk.Switch()
+        switch.set_hexpand(False)
+        switch.set_active(True if self._screen.printer.get_power_device_status(device) == "on" else False)
+        switch.connect("notify::active", self.on_switch, device)
+        switch.set_property("width-request", 150)
+        switch.set_property("height-request", 80)
+
+        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        labels.add(name)
+
+        dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        dev.set_margin_top(10)
+        dev.set_margin_end(15)
+        dev.set_margin_start(15)
+        dev.set_margin_bottom(10)
+        dev.set_hexpand(True)
+        dev.set_vexpand(False)
+
+        dev.add(labels)
+        dev.add(switch)
+        frame.add(dev)
+
+        self.devices[device] = {
+            "row": frame,
+            "switch": switch
+        }
+
+        devices = sorted(self.devices)
+        pos = devices.index(device)
+
+        self.labels['devices'].insert_row(pos)
+        self.labels['devices'].attach(self.devices[device]['row'], 0, pos, 1, 1)
+        self.labels['devices'].show_all()
+
+    def load_power_devices(self):
+        devices = self._screen.printer.get_power_devices()
+        for x in devices:
+            self.add_device(x)
+
+    def on_switch(self, switch, gparam, device):
+        logger.debug("Power toggled %s" % device)
+        if switch.get_active():
+            self._screen._ws.klippy.power_device_on(device)
+        else:
+            self._screen._ws.klippy.power_device_off(device)
+
+    def process_update(self, action, data):
+        if action != "notify_power_changed":
+            return
+
+        if data['device'] not in self.devices:
+            return
+        device = data['device']
+        self.devices[device]['switch'].disconnect_by_func(self.on_switch)
+        self.devices[device]['switch'].set_active(True if data['status'] == "on" else False)
+        self.devices[device]['switch'].connect("notify::active", self.on_switch, device)

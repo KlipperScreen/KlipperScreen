@@ -2,6 +2,7 @@
 
 #### 2020 11 28
 * Add option for enable in menu for configuration. This can hide certain options
+* Add Power panel to control power devices via moonraker
 
 #### 2020 11 18
 * Changed configuration file format.

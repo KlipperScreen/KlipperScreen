@@ -202,6 +202,24 @@ class MoonrakerApi:
             updates
         )
 
+    def power_device_off(self, device, callback=None, *args):
+        logger.debug("Sending machine.device_power.off: %s" % device)
+        return self._ws.send_method(
+            "machine.device_power.off",
+            {device: False},
+            callback,
+            *args
+        )
+
+    def power_device_on(self, device, callback=None, *args):
+        logger.debug("Sending machine.device_power.on %s" % device)
+        return self._ws.send_method(
+            "machine.device_power.on",
+            {device: False},
+            callback,
+            *args
+        )
+
     def print_cancel(self, callback=None, *args):
         logger.debug("Sending printer.print.cancel")
         return self._ws.send_method(

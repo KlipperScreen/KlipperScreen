@@ -67,6 +67,9 @@ class KlipperScreenConfig:
 
         return preheat_options
 
+    def get_printer_power_name(self):
+        return self.config['settings'].get("printer_power_name", "printer")
+
 
     def log_config(self, config):
         lines = [
@@ -94,7 +97,8 @@ class KlipperScreenConfig:
             "icon": cfg.get("icon"),
             "panel": cfg.get("panel", False),
             "method": cfg.get("method", False),
-            "confirm": cfg.get("confirm", False)
+            "confirm": cfg.get("confirm", False),
+            "enable": cfg.get("enable", True)
         }
 
         try:

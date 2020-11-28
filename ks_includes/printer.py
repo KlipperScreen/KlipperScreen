@@ -1,5 +1,7 @@
 import logging
 
+logger = logging.getLogger("KlipperScreen.Printer")
+
 class Printer:
 
     def __init__(self, data):
@@ -12,6 +14,7 @@ class Printer:
         self.devices = {}
         self.state = data['print_stats']['state']
         self.data = data
+        self.power_devices = {}
 
         for x in self.config.keys():
             if x.startswith('extruder'):
@@ -35,6 +38,17 @@ class Printer:
         self.process_update(data)
 
         logging.info("### Toolcount: " + str(self.toolcount) + " Heaters: " + str(self.extrudercount))
+
+    def configure_power_devices(self, data):
+        self.power_devices = {}
+
+        logger.debug("Processing power devices: %s" % data)
+        for x in data['devices']:
+            logger.debug(x)
+            self.power_devices[x['device']] = {
+                "status": "on" if x['status'] == "on" else "off"
+            }
+        logger.debug("Power devices: %s" % self.power_devices)
 
     def process_update(self, data):
         keys = ['virtual_sdcard','pause_resume','idle_timeout','print_stats']
@@ -61,6 +75,10 @@ class Printer:
                 if "temperature" in d:
                     self.set_dev_stat(x, "temperature", d["temperature"])
 
+    def process_power_update(self, data):
+        if data['device'] in self.power_devices:
+            self.power_devices[data['device']]['status'] = data['status']
+
     def get_config_section_list(self):
         return list(self.config)
 
@@ -71,6 +89,14 @@ class Printer:
 
     def get_data(self):
         return self.data
+
+    def get_power_devices(self):
+        return list(self.power_devices)
+
+    def get_power_device_status(self, device):
+        if device not in self.power_devices:
+            return
+        return self.power_devices[device]['status']
 
     def get_stat(self, stat, substat = None):
         if substat != None:
