@@ -4,7 +4,7 @@ logger = logging.getLogger("KlipperScreen.Printer")
 
 class Printer:
 
-    def __init__(self, data):
+    def __init__(self, printer_info, data):
         self.config = data['configfile']['config']
 
         logging.info("### Reading printer config")
@@ -14,7 +14,12 @@ class Printer:
         self.devices = {}
         self.state = data['print_stats']['state']
         self.data = data
+        self.klipper = {}
         self.power_devices = {}
+
+        self.klipper = {
+            "version": printer_info['software_version']
+        }
 
         for x in self.config.keys():
             if x.startswith('extruder'):
@@ -37,7 +42,8 @@ class Printer:
                 }
         self.process_update(data)
 
-        logging.info("### Toolcount: " + str(self.toolcount) + " Heaters: " + str(self.extrudercount))
+        logger.info("Klipper version: %s", self.klipper['version'])
+        logger.info("### Toolcount: " + str(self.toolcount) + " Heaters: " + str(self.extrudercount))
 
     def configure_power_devices(self, data):
         self.power_devices = {}
@@ -89,6 +95,9 @@ class Printer:
 
     def get_data(self):
         return self.data
+
+    def get_klipper_version(self):
+        return self.klipper['version']
 
     def get_power_devices(self):
         return list(self.power_devices)

@@ -66,6 +66,8 @@ class KlipperScreen(Gtk.Window):
         self._config = KlipperScreenConfig()
         self.init_style()
         self.printer = Printer({
+            "software_version": "Unknown"
+        }, {
             'configfile': {
                 'config': {}
             },
@@ -385,16 +387,16 @@ class KlipperScreen(Gtk.Window):
             'extruder',
             'pause_resume'
         ]
-        info = self.apiclient.get_printer_info()
+        printer_info = self.apiclient.get_printer_info()
         data = self.apiclient.send_request("printer/objects/query?" + "&".join(status_objects))
         powerdevs = self.apiclient.send_request("machine/device_power/devices")
-        if info == False or data == False:
+        if printer_info == False or data == False:
             self.printer_initializing(_("Moonraker error"))
             return
         data = data['result']['status']
 
         # Reinitialize printer, in case the printer was shut down and anything has changed.
-        self.printer.__init__(data)
+        self.printer.__init__(printer_info['result'], data)
         self.ws_subscribe()
         self.printer.configure_power_devices(powerdevs['result'])
 
@@ -403,8 +405,8 @@ class KlipperScreen(Gtk.Window):
         else:
             self.files.add_timeout()
 
-        if info['result']['state'] == "shutdown":
-            if "FIRMWARE_RESTART" in info['result']['state_message']:
+        if printer_info['result']['state'] == "shutdown":
+            if "FIRMWARE_RESTART" in printer_info['result']['state_message']:
                 self.printer_initializing(
                     _("Klipper has encountered an error. Issue a FIRMWARE_RESTART to attempt fixing the issue.")
                 )

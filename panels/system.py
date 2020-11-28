@@ -42,13 +42,19 @@ class SystemPanel(ScreenPanel):
         title.get_style_context().add_class('temperature_entry')
         self.labels['loadavg'].get_style_context().add_class('temperature_entry')
 
-        self.labels['version'] = Gtk.Label(_("KlipperScreen Version") + (": %s" % self._screen.version))
-        self.labels['version'].set_margin_top(15)
-        self.labels['version'].get_style_context().add_class('temperature_entry')
+        self.labels['klipper_version'] = Gtk.Label(_("Klipper Version") +
+            (": %s" % self._screen.printer.get_klipper_version()))
+        self.labels['klipper_version'].set_margin_top(15)
+        self.labels['klipper_version'].get_style_context().add_class('temperature_entry')
+
+        self.labels['ks_version'] = Gtk.Label(_("KlipperScreen Version") + (": %s" % self._screen.version))
+        self.labels['ks_version'].set_margin_top(15)
+        self.labels['ks_version'].get_style_context().add_class('temperature_entry')
 
         info.add(title)
         info.add(self.labels['loadavg'])
-        info.add(self.labels['version'])
+        info.add(self.labels['klipper_version'])
+        info.add(self.labels['ks_version'])
 
 
         grid.attach(info, 0, 0, 4, 2)
