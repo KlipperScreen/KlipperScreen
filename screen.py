@@ -16,7 +16,7 @@ import subprocess
 
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib
+from gi.repository import Gtk, Gdk, GLib, Pango
 
 from ks_includes.KlippyWebsocket import KlippyWebsocket
 from ks_includes.KlippyRest import KlippyRest
@@ -320,7 +320,7 @@ class KlipperScreen(Gtk.Window):
             #self.files.add_file()
         elif action == "notify_metadata_update":
             self.files.update_metadata(data['filename'])
-        elif self.shutdown == False and action == "notify_gcode response":
+        elif self.shutdown == False and action == "notify_gcode_response":
             if "Klipper state: Shutdown" in data:
                 self.shutdown == True
                 self.printer_initializing(_("Klipper has shutdown"))
