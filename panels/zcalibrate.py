@@ -88,7 +88,10 @@ class ZCalibratePanel(ScreenPanel):
             self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
         self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_CALIBRATE)
 
-    def process_update(self, data):
+    def process_update(self, action, data):
+        if action != "notify_status_update":
+            return
+
         if "toolhead" in data and "position" in data['toolhead']:
             self.updatePosition(data['toolhead']['position'])
 

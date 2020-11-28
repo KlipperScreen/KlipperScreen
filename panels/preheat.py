@@ -109,7 +109,10 @@ class PreheatPanel(ScreenPanel):
                     self.preheat_options[setting]["extruder"])
                 self._printer.set_dev_stat(heater,"target", int(self.preheat_options[setting]["extruder"]))
 
-    def process_update(self, data):
+    def process_update(self, action, data):
+        if action != "notify_status_update":
+            return
+
         self.update_temp("heater_bed",
             self._printer.get_dev_stat("heater_bed","temperature"),
             self._printer.get_dev_stat("heater_bed","target")

@@ -59,8 +59,9 @@ class FanPanel(ScreenPanel):
         self.panel = grid
         self._screen.add_subscription(panel_name)
 
-    def process_update(self, data):
-        if "fan" in data and "speed" in data["fan"] and self.user_selecting == False:
+    def process_update(self, action, data):
+        if (action == "notify_status_update" and "fan" in data and "speed" in data["fan"] and
+            self.user_selecting == False):
             self.labels["scale"].disconnect_by_func(self.select_fan_speed)
             self.labels["scale"].set_value(float(int(float(data["fan"]["speed"]) * 100)))
             self.labels["scale"].connect("value-changed", self.select_fan_speed)

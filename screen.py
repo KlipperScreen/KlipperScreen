@@ -165,7 +165,7 @@ class KlipperScreen(Gtk.Window):
                 return
 
             if hasattr(self.panels[panel_name],"process_update"):
-                self.panels[panel_name].process_update(self.printer.get_data())
+                self.panels[panel_name].process_update("notify_status_update", self.printer.get_data())
 
         if hasattr(self.panels[panel_name],"activate"):
             self.panels[panel_name].activate()
@@ -330,7 +330,7 @@ class KlipperScreen(Gtk.Window):
                 logger.debug(json.dumps([action, data], indent=2))
 
         for sub in self.subscriptions:
-            self.panels[sub].process_update(data)
+            self.panels[sub].process_update(action, data)
 
     def _confirm_send_action(self, widget, text, method, params):
         _ = self.lang.gettext

@@ -126,8 +126,11 @@ class FineTunePanel(ScreenPanel):
         self.panel = grid
         self._screen.add_subscription(panel_name)
 
-    def process_update(self, data):
+    def process_update(self, action, data):
         _ = self.lang.gettext
+
+        if action != "notify_status_update":
+            return
 
         if "gcode_move" in data:
             if "homing_origin" in data["gcode_move"]:

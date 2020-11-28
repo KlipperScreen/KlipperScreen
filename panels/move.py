@@ -103,7 +103,10 @@ class MovePanel(ScreenPanel):
         self.panel = grid
         self._screen.add_subscription(panel_name)
 
-    def process_update(self, data):
+    def process_update(self, action, data):
+        if action != "notify_status_update":
+            return
+        
         if "toolhead" in data and "position" in data["toolhead"]:
             self.labels['pos_x'].set_text("X: %.2f" % (data["toolhead"]["position"][0]))
             self.labels['pos_y'].set_text("Y: %.2f" % (data["toolhead"]["position"][1]))

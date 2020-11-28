@@ -145,7 +145,10 @@ class JobStatusPanel(ScreenPanel):
             self.labels[arg].set_sensitive(False)
 
 
-    def process_update(self, data):
+    def process_update(self, action, data):
+        if action != "notify_status_update":
+            return
+        
         self.update_temp("heater_bed",
             self._printer.get_dev_stat("heater_bed","temperature"),
             self._printer.get_dev_stat("heater_bed","target")

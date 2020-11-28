@@ -101,7 +101,7 @@ class ExtrudePanel(ScreenPanel):
         self.panel = grid
         self._screen.add_subscription(panel_name)
 
-    def process_update(self, data):
+    def process_update(self, action, data):
         for x in self._printer.get_tools():
             self.update_temp(x,
                 self._printer.get_dev_stat(x,"temperature"),
