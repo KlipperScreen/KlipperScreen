@@ -398,7 +398,9 @@ class KlipperScreen(Gtk.Window):
         # Reinitialize printer, in case the printer was shut down and anything has changed.
         self.printer.__init__(printer_info['result'], data)
         self.ws_subscribe()
-        self.printer.configure_power_devices(powerdevs['result'])
+
+        if powerdevs != False:
+            self.printer.configure_power_devices(powerdevs['result'])
 
         if self.files == None:
             self.files = KlippyFiles(self)
