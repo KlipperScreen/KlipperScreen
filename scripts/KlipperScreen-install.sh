@@ -41,6 +41,7 @@ install_systemd_service()
     KSPATH_ESC=$(sed "s/\//\\\\\//g" <<< $KSPATH)
     KSENV_ESC=$(sed "s/\//\\\\\//g" <<< $KSENV)
 
+    SERVICE=$(sed "s/KS_USER/$USER/g" <<< $SERVICE)
     SERVICE=$(sed "s/KS_ENV/$KSENV_ESC/g" <<< $SERVICE)
     SERVICE=$(sed "s/KS_DIR/$KSPATH_ESC/g" <<< $SERVICE)
 
