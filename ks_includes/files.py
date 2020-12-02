@@ -62,7 +62,7 @@ class KlippyFiles:
         elif method == "server.files.metadata":
             if "error" in result.keys():
                 logger.debug("Error in getting metadata for %s" %(params['filename']))
-                GLib.timeout_add(2000, self._screen._ws.klippy.get_file_metadata, params['filename'], self._callback)
+                self.request_metadata(params['filename'])
                 return
 
             logger.debug("Got metadata for %s" % (result['result']['filename']))
@@ -88,6 +88,10 @@ class KlippyFiles:
     def remove_timeout(self):
         if self.timeout != None:
             self.timeout = None
+
+    def request_metadata(self, filename):
+        GLib.timeout_add(2000, self._screen._ws.klippy.get_file_metadata, filename, self._callback)
+        return False
 
     def ret_files(self, retval=True):
         if not self._screen._ws.klippy.get_file_list(self._callback):
