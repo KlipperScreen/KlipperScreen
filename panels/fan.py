@@ -14,6 +14,7 @@ def create_panel(*args):
     return FanPanel(*args)
 
 class FanPanel(ScreenPanel):
+    fan_speed = 0
     user_selecting = False
 
     def initialize(self, panel_name):
@@ -59,9 +60,11 @@ class FanPanel(ScreenPanel):
     def process_update(self, action, data):
         if (action == "notify_status_update" and "fan" in data and "speed" in data["fan"] and
             self.user_selecting == False):
+            self.fan_speed = float(int(float(data["fan"]["speed"]) * 100))
             self.labels["scale"].disconnect_by_func(self.select_fan_speed)
-            self.labels["scale"].set_value(float(int(float(data["fan"]["speed"]) * 100)))
+            self.labels["scale"].set_value(self.fan_speed)
             self.labels["scale"].connect("value-changed", self.select_fan_speed)
+
 
     def select_fan_speed(self, widget):
         if self.user_selecting == True:
@@ -73,6 +76,7 @@ class FanPanel(ScreenPanel):
         self._screen.show_all()
 
     def cancel_select_fan_speed(self, widget):
+        self.labels["scale"].set_value(self.fan_speed)
         self.user_selecting = False
         self.grid.remove(self.labels["apply"])
         self.grid.remove(self.labels["cancel"])
