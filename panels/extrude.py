@@ -91,14 +91,7 @@ class ExtrudePanel(ScreenPanel):
 
         grid.attach(box, 1, 2, 2, 1)
 
-
-        b = KlippyGtk.ButtonImage("back", "Back")
-        b.connect("clicked", self._screen._menu_go_back)
-        grid.attach(b, 3, 2, 1, 1)
-
-
-
-        self.panel = grid
+        self.content.add(grid)
         self._screen.add_subscription(panel_name)
 
     def process_update(self, action, data):

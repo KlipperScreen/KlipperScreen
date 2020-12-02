@@ -56,6 +56,14 @@ class KlipperScreenConfig:
 
         return menu_items
 
+    def get_menu_name(self, menu="__main", subsection=""):
+        name = ("menu %s %s" % (menu, subsection)) if subsection != "" else ("menu %s" % menu)
+        logger.debug("Menu name: %s" % name)
+        if name not in self.config:
+            return False
+        return self.config[name].get('name')
+
+
     def get_preheat_options(self):
         index = "preheat "
         items = [i[len(index):] for i in self.config.sections() if i.startswith(index)]

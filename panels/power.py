@@ -18,20 +18,6 @@ class PowerPanel(ScreenPanel):
         _ = self.lang.gettext
         self.devices = {}
 
-        # Create bottom bar
-        bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        bar.set_hexpand(True)
-        bar.set_vexpand(False)
-        bar.set_halign(Gtk.Align.END)
-        bar.set_margin_top(5)
-        bar.set_margin_bottom(5)
-        bar.set_margin_end(5)
-
-        # Add a back button to the bottom bar
-        back = KlippyGtk.ButtonImage('back', None, None, 60, 60)
-        back.connect("clicked", self._screen._menu_go_back)
-        bar.add(back)
-
         # Create a scroll window for the power devices
         scroll = Gtk.ScrolledWindow()
         scroll.set_property("overlay-scrolling", False)
@@ -45,11 +31,11 @@ class PowerPanel(ScreenPanel):
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         box.set_vexpand(True)
         box.pack_start(scroll, True, True, 0)
-        box.pack_end(bar, False, False, 0)
 
         self.load_power_devices()
 
-        self.panel = box
+        self.content.add(box)
+
         self._screen.add_subscription(panel_name)
 
     def add_device(self, device):

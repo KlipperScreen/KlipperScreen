@@ -85,8 +85,8 @@ class Printer:
         if data['device'] in self.power_devices:
             self.power_devices[data['device']]['status'] = data['status']
 
-    def get_config_section_list(self):
-        return list(self.config)
+    def get_config_section_list(self, search=""):
+        return [i for i in list(self.config) if i.startswith(search)]
 
     def get_config_section(self, section):
         if section not in self.config:

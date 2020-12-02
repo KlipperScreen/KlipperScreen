@@ -82,14 +82,14 @@ class JobStatusPanel(ScreenPanel):
         self.labels['cancel'] = KlippyGtk.ButtonImage("stop",_("Cancel"),"color2")
         self.labels['cancel'].connect("clicked", self.cancel)
         grid.attach(self.labels['cancel'], 1, 2, 1, 1)
-        self.labels['estop'] = KlippyGtk.ButtonImage("decrease",_("Emergency Stop"),"color4")
+        self.labels['estop'] = KlippyGtk.ButtonImage("emergency",_("Emergency Stop"),"color4")
         self.labels['estop'].connect("clicked", self.emergency_stop)
         grid.attach(self.labels['estop'], 2, 2, 1, 1)
         self.labels['control'] = KlippyGtk.ButtonImage("control",_("Control"),"color3")
         self.labels['control'].connect("clicked", self._screen._go_to_submenu, "")
         grid.attach(self.labels['control'], 3, 2, 1, 1)
 
-        self.panel = grid
+        self.layout = grid
 
         self._screen.add_subscription(panel_name)
 
@@ -148,7 +148,7 @@ class JobStatusPanel(ScreenPanel):
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
-        
+
         self.update_temp("heater_bed",
             self._printer.get_dev_stat("heater_bed","temperature"),
             self._printer.get_dev_stat("heater_bed","target")

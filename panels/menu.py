@@ -15,17 +15,16 @@ def create_panel(*args):
     return MenuPanel(*args)
 
 class MenuPanel(ScreenPanel):
-    def initialize(self, panel_name, items):
+    def initialize(self, panel_name, display_name, items):
         _ = self.lang.gettext
 
         self.activate()
+
         grid = self.arrangeMenuItems(items, 4)
+        grid.set_size_request(self._screen.width, self._screen.height-45)
 
-        b = KlippyGtk.ButtonImage('back', _('Back'))
-        b.connect("clicked", self._screen._menu_go_back)
-        grid.attach(b, 3, 1, 1, 1)
-
-        self.panel = grid
+        self.content.add(grid)
+        self.panel = self.layout
 
     def activate(self):
         self.j2_data = {

@@ -30,12 +30,13 @@ class FineTunePanel(ScreenPanel):
         _ = self.lang.gettext
 
         grid = KlippyGtk.HomogeneousGrid()
+        grid.set_row_homogeneous(False)
         logger.debug("FineTunePanel")
 
 
         self.labels['z+'] = KlippyGtk.ButtonImage("move-z-", _("Z+"), "color1")
         self.labels['z+'].connect("clicked", self.change_babystepping, "+")
-        self.labels['zoffset'] = Gtk.Label(_("Z Offset") + ": 0.00" + _("mm"))
+        self.labels['zoffset'] = Gtk.Label("0.00" + _("mm"))
         self.labels['zoffset'].get_style_context().add_class('temperature_entry')
         self.labels['z-'] = KlippyGtk.ButtonImage("move-z+", _("Z-"), "color1")
         self.labels['z-'].connect("clicked", self.change_babystepping, "-")
@@ -46,7 +47,7 @@ class FineTunePanel(ScreenPanel):
 
         self.labels['fan+'] = KlippyGtk.ButtonImage("fan-on", _("Fan +"), "color2")
         self.labels['fan+'].connect("clicked", self.change_fan, "+")
-        self.labels['fanspeed'] = Gtk.Label(_("Fan") + ": 100%")
+        self.labels['fanspeed'] = Gtk.Label("100%")
         self.labels['fanspeed'].get_style_context().add_class('temperature_entry')
         self.labels['fan-'] = KlippyGtk.ButtonImage("fan-off", _("Fan -"), "color2")
         self.labels['fan-'].connect("clicked", self.change_fan, "-")
@@ -56,7 +57,7 @@ class FineTunePanel(ScreenPanel):
 
         self.labels['speed+'] = KlippyGtk.ButtonImage("speed-step", _("Speed +"), "color3")
         self.labels['speed+'].connect("clicked", self.change_speed, "+")
-        self.labels['speedfactor'] = Gtk.Label(_("Speed") + ": 100%")
+        self.labels['speedfactor'] = Gtk.Label("100%")
         self.labels['speedfactor'].get_style_context().add_class('temperature_entry')
         self.labels['speed-'] = KlippyGtk.ButtonImage("speed-step", _("Speed -"), "color3")
         self.labels['speed-'].connect("clicked", self.change_speed, "-")
@@ -66,7 +67,7 @@ class FineTunePanel(ScreenPanel):
 
         self.labels['extrude+'] = KlippyGtk.ButtonImage("extrude", _("Extrusion +"), "color4")
         self.labels['extrude+'].connect("clicked", self.change_extrusion, "+")
-        self.labels['extrudefactor'] = Gtk.Label(_("Extrusion") + ": 100%")
+        self.labels['extrudefactor'] = Gtk.Label("100%")
         self.labels['extrudefactor'].get_style_context().add_class('temperature_entry')
         self.labels['extrude-'] = KlippyGtk.ButtonImage("retract", _("Extrusion -"), "color4")
         self.labels['extrude-'].connect("clicked", self.change_extrusion, "-")
@@ -114,16 +115,10 @@ class FineTunePanel(ScreenPanel):
 
         self.labels["1"].set_active(True)
 
-        grid.attach(deltgrid, 1, 3, 2, 1)
+        grid.attach(deltgrid, 1, 3, 3, 1)
 
-
-
-
-        b = KlippyGtk.ButtonImage('back', _('Back'))
-        b.connect("clicked", self._screen._menu_go_back)
-        grid.attach(b,3,3,1,1)
-
-        self.panel = grid
+        #self.panel = grid
+        self.content.add(grid)
         self._screen.add_subscription(panel_name)
 
     def process_update(self, action, data):
@@ -134,17 +129,17 @@ class FineTunePanel(ScreenPanel):
 
         if "gcode_move" in data:
             if "homing_origin" in data["gcode_move"]:
-                self.labels['zoffset'].set_text(_("Z Offset") + ": %.2fmm" % data["gcode_move"]["homing_origin"][2])
+                self.labels['zoffset'].set_text("%.2fmm" % data["gcode_move"]["homing_origin"][2])
             if "extrude_factor" in data["gcode_move"]:
                 self.extrusion = int(data["gcode_move"]["extrude_factor"]*100)
-                self.labels['extrudefactor'].set_text(_("Extrusion") + ": %3d%%" % self.extrusion)
+                self.labels['extrudefactor'].set_text("%3d%%" % self.extrusion)
             if "speed_factor" in data["gcode_move"]:
                 self.speed = int(data["gcode_move"]["speed_factor"]*100)
-                self.labels['speedfactor'].set_text(_("Speed") + ": %3d%%" % self.speed)
+                self.labels['speedfactor'].set_text("%3d%%" % self.speed)
 
         if "fan" in data and "speed" in data['fan']:
             self.fan = int(round(data['fan']['speed'],2)*100)
-            self.labels['fanspeed'].set_text(_("Fan") + ": %3d%%" % self.fan)
+            self.labels['fanspeed'].set_text("%3d%%" % self.fan)
 
     def change_babystepping(self, widget, dir):
         if dir == "+":

@@ -27,6 +27,7 @@ class SplashScreenPanel(ScreenPanel):
         self.labels['text'].get_style_context().add_class("text")
         self.labels['text'].set_line_wrap(True)
         self.labels['text'].set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        self.labels['text'].set_halign(Gtk.Align.CENTER)
 
 
         self.labels['actions'] = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
@@ -45,7 +46,7 @@ class SplashScreenPanel(ScreenPanel):
         box = Gtk.VBox()
         box.add(main)
 
-        self.panel = box
+        self.layout = box
 
     def update_text(self, text):
         self.labels['text'].set_text(text)

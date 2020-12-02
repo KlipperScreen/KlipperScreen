@@ -19,6 +19,10 @@ scrollbar slider {
 	background-color: #404E57;
 }
 
+label {
+    color: white;
+}
+
 frame {
     color: #fff;
     border-bottom: 1px solid #444;

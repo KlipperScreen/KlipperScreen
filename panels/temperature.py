@@ -73,20 +73,20 @@ class TemperaturePanel(ScreenPanel):
 
         self.labels["deg" + self.tempdelta].set_active(True)
 
-        self.labels["control_grid"].attach(tempgrid, 2, 0, 1, 2)
+        vbox = Gtk.VBox()
+        vbox.pack_start(Gtk.Label("Temp °C"), False, False, 4)
+        vbox.pack_end(tempgrid, True, True, 0)
+
+        self.labels["control_grid"].attach(vbox, 2, 0, 1, 3)
         self.labels["control_grid"].attach(self.labels["increase"], 3, 0, 1, 1)
         self.labels["control_grid"].attach(self.labels["decrease"], 3, 1, 1, 1)
-        self.labels["control_grid"].attach(self.labels["npad"], 2, 2, 1, 1)
-
-        b = KlippyGtk.ButtonImage('back', _('Back'))
-        b.connect("clicked", self._screen._menu_go_back)
-        self.labels["control_grid"].attach(b, 3, 2, 1, 1)
-
+        self.labels["control_grid"].attach(self.labels["npad"], 3, 2, 1, 1)
 
         grid.attach(eq_grid, 0, 0, 1, 1)
         grid.attach(self.labels["control_grid"], 1, 0, 1, 1)
 
-        self.panel = grid
+        self.grid = grid
+        self.content.add(grid)
 
         self._screen.add_subscription(panel_name)
 
@@ -158,15 +158,15 @@ class TemperaturePanel(ScreenPanel):
 
         self.labels["keypad"] = numpad
 
-        self.panel.remove_column(1)
-        #self.panel.attach(self.labels["keypad"], 1, 0, 1, 1)
-        self.panel.attach(box, 1, 0, 1, 1)
-        self.panel.show_all()
+        self.grid.remove_column(1)
+        #self.grid.attach(self.labels["keypad"], 1, 0, 1, 1)
+        self.grid.attach(box, 1, 0, 1, 1)
+        self.grid.show_all()
 
     def hide_numpad(self, widget):
-        self.panel.remove_column(1)
-        self.panel.attach(self.labels["control_grid"], 1, 0, 1, 1)
-        self.panel.show_all()
+        self.grid.remove_column(1)
+        self.grid.attach(self.labels["control_grid"], 1, 0, 1, 1)
+        self.grid.show_all()
 
 
     def select_heater (self, widget, heater):
@@ -185,7 +185,7 @@ class TemperaturePanel(ScreenPanel):
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
-        
+
         self.update_temp("heater_bed",
             self._printer.get_dev_stat("heater_bed","temperature"),
             self._printer.get_dev_stat("heater_bed","target")

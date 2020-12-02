@@ -15,7 +15,7 @@ class BedLevelPanel(ScreenPanel):
     def initialize(self, menu):
         _ = self.lang.gettext
         self.screws = None
-        self.panel = KlippyGtk.HomogeneousGrid()
+        grid = KlippyGtk.HomogeneousGrid()
         self.disabled_motors = False
 
         screws = []
@@ -68,10 +68,10 @@ class BedLevelPanel(ScreenPanel):
         self.labels['br'] = KlippyGtk.ButtonImage("bed-level-b-r")
         self.labels['br'].connect("clicked", self.go_to_position, self.screws[1])
 
-        self.panel.attach(self.labels['tl'], 1, 0, 1, 1)
-        self.panel.attach(self.labels['tr'], 2, 0, 1, 1)
-        self.panel.attach(self.labels['bl'], 1, 1, 1, 1)
-        self.panel.attach(self.labels['br'], 2, 1, 1, 1)
+        grid.attach(self.labels['tl'], 1, 0, 1, 1)
+        grid.attach(self.labels['tr'], 2, 0, 1, 1)
+        grid.attach(self.labels['bl'], 1, 1, 1, 1)
+        grid.attach(self.labels['br'], 2, 1, 1, 1)
 
         self.labels['home'] = KlippyGtk.ButtonImage("home",_("Home All"),"color2")
         self.labels['home'].connect("clicked", self.home)
@@ -79,16 +79,14 @@ class BedLevelPanel(ScreenPanel):
         self.labels['dm'] = KlippyGtk.ButtonImage("motor-off", _("Disable XY"), "color3")
         self.labels['dm'].connect("clicked", self.disable_motors)
 
-        self.panel.attach(self.labels['home'], 0, 0, 1, 1)
-        self.panel.attach(self.labels['dm'], 0, 1, 1, 1)
+        grid.attach(self.labels['home'], 0, 0, 1, 1)
+        grid.attach(self.labels['dm'], 0, 1, 1, 1)
 
         self.labels['estop'] = KlippyGtk.ButtonImage("decrease",_("Emergency Stop"),"color4")
         self.labels['estop'].connect("clicked", self.emergency_stop)
-        self.panel.attach(self.labels['estop'], 3, 0, 1, 1)
+        grid.attach(self.labels['estop'], 3, 0, 1, 1)
 
-        b = KlippyGtk.ButtonImage('back', _('Back'))
-        b.connect("clicked", self._screen._menu_go_back)
-        self.panel.attach(b, 3, 1, 1, 1)
+        self.content.add(grid)
 
     def go_to_position(self, widget, position):
         logger.debug("Going to position: %s", position)

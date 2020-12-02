@@ -16,7 +16,8 @@ def create_panel(*args):
 class NetworkPanel(ScreenPanel):
     def initialize(self, menu):
         _ = self.lang.gettext
-        self.panel = KlippyGtk.HomogeneousGrid()
+        grid = KlippyGtk.HomogeneousGrid()
+        grid.set_hexpand(True)
 
         # Get Hostname
         stream = os.popen('hostname -A')
@@ -31,9 +32,6 @@ class NetworkPanel(ScreenPanel):
             _("Network Info") + "\n\n%s%s" % (hostname, ip)
         )
         self.labels['networkinfo'].get_style_context().add_class('temperature_entry')
-        self.panel.attach(self.labels['networkinfo'], 1, 0, 1, 1)
+        grid.attach(self.labels['networkinfo'], 1, 0, 1, 1)
 
-
-        b = KlippyGtk.ButtonImage('back', _('Back'))
-        b.connect("clicked", self._screen._menu_go_back)
-        self.panel.attach(b, 1, 1, 1, 1)
+        self.content.add(grid)

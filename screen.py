@@ -152,9 +152,9 @@ class KlipperScreen(Gtk.Window):
             raise Exception(msg)
 
 
-    def show_panel(self, panel_name, type, remove=None, pop=True, **kwargs):
+    def show_panel(self, panel_name, type, title, remove=None, pop=True, **kwargs):
         if panel_name not in self.panels:
-            self.panels[panel_name] = self._load_panel(type, self)
+            self.panels[panel_name] = self._load_panel(type, self, title)
 
             try:
                 if kwargs != {}:
@@ -227,14 +227,14 @@ class KlipperScreen(Gtk.Window):
             menu = "__print"
 
         logger.info("#### Menu " + str(menu))
-        #self.show_panel("_".join(self._cur_panels) + '_' + name, "menu", 1, False, menu=menu)
-
+        disname = self._config.get_menu_name(menu, name)
         menuitems = self._config.get_menu_items(menu, name)
         if len(menuitems) == 0:
             logger.info("No items in menu, returning.")
             return
 
-        self.show_panel(self._cur_panels[-1] + '_' + name, "menu", 1, False, items=menuitems)
+        self.show_panel(self._cur_panels[-1] + '_' + name, "menu", disname, 1, False, display_name=disname,
+            items=menuitems)
         return
 
         grid = self.arrangeMenuItems(menu, 4)
@@ -250,27 +250,27 @@ class KlipperScreen(Gtk.Window):
 
     def _remove_all_panels(self):
         while len(self._cur_panels) > 0:
-            self._remove_current_panel()
+            self._remove_current_panel(True, False)
+        self.show_all()
 
-
-
-    def _remove_current_panel(self, pop=True):
+    def _remove_current_panel(self, pop=True, show=True):
         if len(self._cur_panels) > 0:
-            self.remove(
-                self.panels[
-                    self._cur_panels[-1]
-                ].get()
-            )
+            self.remove(self.panels[self._cur_panels[-1]].get())
             if pop == True:
                 self._cur_panels.pop()
                 if len(self._cur_panels) > 0:
                     self.add(self.panels[self._cur_panels[-1]].get())
-                    self.show_all()
+                    if show == True:
+                        self.show_all()
 
-    def _menu_go_back (self, widget):
+    def _menu_go_back (self, widget=None):
         logger.info("#### Menu go back")
         self._remove_current_panel()
 
+    def _menu_go_home(self):
+        logger.info("#### Menu go home")
+        while len(self._cur_panels) > 1:
+            self._remove_current_panel()
 
     def add_subscription (self, panel_name):
         add = True
@@ -366,7 +366,7 @@ class KlipperScreen(Gtk.Window):
 
     def printer_initializing(self, text=None):
         self.shutdown = True
-        self.show_panel('splash_screen',"splash_screen", 2)
+        self.show_panel('splash_screen',"splash_screen", "Splash Screen", 2)
         if text != None:
             self.panels['splash_screen'].update_text(text)
             self.panels['splash_screen'].show_restart_buttons()
@@ -410,7 +410,7 @@ class KlipperScreen(Gtk.Window):
         if printer_info['result']['state'] == "shutdown":
             if "FIRMWARE_RESTART" in printer_info['result']['state_message']:
                 self.printer_initializing(
-                    _("Klipper has encountered an error. Issue a FIRMWARE_RESTART to attempt fixing the issue.")
+                    _("Klipper has encountered an error.\nIssue a FIRMWARE_RESTART to attempt fixing the issue.")
                 )
             else:
                 self.printer_initializing(_("Klipper has shutdown"))
@@ -426,12 +426,13 @@ class KlipperScreen(Gtk.Window):
             return
 
         self.files.add_timeout()
-        self.show_panel('main_panel', "main_menu", 2, items=self._config.get_menu_items("__main"), extrudercount=self.printer.get_extruder_count())
+        self.show_panel('main_panel', "main_menu", "Main Menu", 2, items=self._config.get_menu_items("__main"),
+            extrudercount=self.printer.get_extruder_count())
 
     def printer_printing(self):
         self.ws_subscribe()
         self.files.remove_timeout()
-        self.show_panel('job_status',"job_status", 2)
+        self.show_panel('job_status',"job_status", "Print Status", 2)
 
 def get_software_version():
     prog = ('git', '-C', os.path.dirname(__file__), 'describe', '--always',

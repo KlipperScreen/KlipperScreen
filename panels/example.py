@@ -17,4 +17,5 @@ class ExamplePanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
         # Create gtk items here
-        return
+
+        self.content.add(Gtk.Box())

@@ -54,18 +54,14 @@ class PreheatPanel(ScreenPanel):
         cooldown = KlippyGtk.ButtonImage('cool-down', _('Cooldown'))
         cooldown.connect("clicked", self.set_temperature, "cooldown")
 
-        b = KlippyGtk.ButtonImage('back', _('Back'))
-        b.connect("clicked", self._screen._menu_go_back)
-
         row = int(i/2) if i%2 == 0 else int(i/2)+1
-        self.labels["control_grid"].attach(cooldown, 0, row, 1, 1)
-        self.labels["control_grid"].attach(b, 1, row, 1, 1)
+        self.labels["control_grid"].attach(cooldown, i%2, int(i/2), 1, 1)
 
 
         grid.attach(eq_grid, 0, 0, 1, 1)
         grid.attach(self.labels["control_grid"], 1, 0, 1, 1)
 
-        self.panel = grid
+        self.content.add(grid)
 
         self._screen.add_subscription(panel_name)
 

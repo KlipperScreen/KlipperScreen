@@ -50,13 +50,10 @@ class FanPanel(ScreenPanel):
         grid.attach(Gtk.Label(), 0, 0, 1, 1)
         grid.attach(box, 0, 1, 4, 1)
         grid.attach(self.labels["fanoff"], 0, 2, 1, 1)
-        grid.attach(self.labels["fanon"], 1, 2, 1, 1)
+        grid.attach(self.labels["fanon"], 3, 2, 1, 1)
 
-        b = KlippyGtk.ButtonImage('back', _('Back'))
-        b.connect("clicked", self._screen._menu_go_back)
-        grid.attach(b,3,2,1,1)
-
-        self.panel = grid
+        self.grid = grid
+        self.content.add(grid)
         self._screen.add_subscription(panel_name)
 
     def process_update(self, action, data):
@@ -71,14 +68,14 @@ class FanPanel(ScreenPanel):
             return
 
         self.user_selecting = True
-        self.panel.attach(self.labels["apply"], 3, 0, 1, 1)
-        self.panel.attach(self.labels["cancel"], 0, 0, 1, 1)
+        self.grid.attach(self.labels["apply"], 3, 0, 1, 1)
+        self.grid.attach(self.labels["cancel"], 0, 0, 1, 1)
         self._screen.show_all()
 
     def cancel_select_fan_speed(self, widget):
         self.user_selecting = False
-        self.panel.remove(self.labels["apply"])
-        self.panel.remove(self.labels["cancel"])
+        self.grid.remove(self.labels["apply"])
+        self.grid.remove(self.labels["cancel"])
 
 
     def set_fan_speed(self, widget):

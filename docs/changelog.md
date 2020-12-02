@@ -1,5 +1,8 @@
 ## Changelog
 
+#### 2020 12 02
+* Change panel layout: Added Title, Back, Emergency Stop, and Home to panels.
+
 #### 2020 11 28
 * Add option for enable in menu for configuration. This can hide certain options
 * Add Power panel to control power devices via moonraker

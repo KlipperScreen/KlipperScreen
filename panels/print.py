@@ -27,23 +27,9 @@ class PrintPanel(ScreenPanel):
         box.set_vexpand(True)
         box.pack_start(scroll, True, True, 0)
 
-
-        bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        bar.set_hexpand(True)
-        bar.set_vexpand(False)
-        bar.set_halign(Gtk.Align.END)
-        bar.set_margin_top(5)
-        bar.set_margin_bottom(5)
-        bar.set_margin_end(5)
         refresh = KlippyGtk.ButtonImage('refresh', None, None, 60, 60)
         refresh.connect("clicked", self.reload_files)
         #bar.add(refresh)
-
-        back = KlippyGtk.ButtonImage('back', None, None, 60, 60)
-        back.connect("clicked", self._screen._menu_go_back)
-        bar.add(back)
-
-        box.pack_end(bar, False, False, 0)
 
         self.labels['filelist'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.labels['filelist'].set_vexpand(True)
@@ -57,8 +43,7 @@ class PrintPanel(ScreenPanel):
 
         scroll.add(self.labels['filelist'])
 
-
-        self.panel = box
+        self.content.add(box)
 
         self._screen.files.add_file_callback(self._callback)
 
