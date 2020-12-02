@@ -119,6 +119,7 @@ class KlipperScreen(Gtk.Window):
                 "fan": ["speed"],
                 "gcode_move": ["homing_origin","extrude_factor","speed_factor"],
                 "heater_bed": ["target","temperature"],
+                "pause_resume": ["is_paused"],
                 "print_stats": ["print_duration","total_duration","filament_used","filename","state","message"],
                 "toolhead": ["homed_axes","estimated_print_time","print_time","position","extruder"],
                 "virtual_sdcard": ["file_position","is_active","progress"],
