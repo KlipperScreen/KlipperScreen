@@ -2,7 +2,7 @@ import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib
+from gi.repository import Gtk, Gdk, GLib, Pango
 
 from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.screen_panel import ScreenPanel
@@ -93,13 +93,16 @@ class JobStatusPanel(ScreenPanel):
 
         self._screen.add_subscription(panel_name)
 
+    def activate(self):
+        self.enable_button("pause","cancel","resume")
+
     def resume(self, widget):
-        self.disable_button("resume","cancel")
+        #self.disable_button("resume","cancel")
         self._screen._ws.klippy.print_resume(self._response_callback, "enable_button", "pause", "cancel")
         self._screen.show_all()
 
     def pause(self, widget):
-        self.disable_button("pause","cancel")
+        #self.disable_button("pause","cancel")
         self._screen._ws.klippy.print_pause(self._response_callback, "enable_button", "resume", "cancel")
         self._screen.show_all()
 
@@ -129,7 +132,9 @@ class JobStatusPanel(ScreenPanel):
             self.enable_button("pause","cancel")
             return
 
-        self._screen._ws.klippy.print_cancel(self._response_callback, "enable_button", "pause", "cancel")
+        logger.debug("Canceling print")
+        self.disable_button("pause","resume","cancel")
+        self._screen._ws.klippy.print_cancel(self._response_callback)
 
     def _response_callback(self, response, method, params, func, *args):
         if func == "enable_button":
