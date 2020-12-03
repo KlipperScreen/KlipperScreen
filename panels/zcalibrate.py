@@ -85,10 +85,9 @@ class ZCalibratePanel(ScreenPanel):
         self._screen.add_subscription(panel_name)
 
     def activate(self):
-        #if self._screen.printer.get_stat("toolhead","homed_axes") != "xyz":
-        #    self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
-        #self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_CALIBRATE)
-        print("nothing")
+        if self._screen.printer.get_stat("toolhead","homed_axes") != "xyz":
+            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_CALIBRATE)
 
     def process_update(self, action, data):
         if action != "notify_status_update":
