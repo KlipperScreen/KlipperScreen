@@ -46,6 +46,15 @@ progress {
 	font-weight: lighter;
 }
 
+.message_popup {
+    background-color: #367554;
+    border-bottom: 2px solid #fff;
+}
+
+.message_popup button {
+    background-color: #367554;
+}
+
 .printing-progress-bar {
 	font-size: 25px;
 	color: #00C9B4;

@@ -183,6 +183,38 @@ class KlipperScreen(Gtk.Window):
         self._cur_panels.append(panel_name)
         logger.debug("Current panel hierarchy: %s", str(self._cur_panels))
 
+    def show_popup_message(self, message):
+        box = Gtk.Box()
+        box.get_style_context().add_class("message_popup")
+        box.set_size_request(self.width, 50)
+        label = Gtk.Label()
+        label.set_text(message)
+
+        close = Gtk.Button.new_with_label("X")
+        close.set_can_focus(False)
+        close.props.relief = Gtk.ReliefStyle.NONE
+        close.connect("clicked", self.close_popup_message)
+
+        box.pack_start(label, True, True, 10)
+        box.pack_end(close, False, False, 10)
+        box.set_halign(Gtk.Align.CENTER)
+
+        self.panels[self._cur_panels[-1]].get().put(box, 0,0)
+        self.show_all()
+        self.popup_message = box
+
+        GLib.timeout_add(10000, self.close_popup_message)
+
+        return False
+
+    def close_popup_message(self, widget=None):
+        if self.popup_message == None:
+            return
+
+        self.panels[self._cur_panels[-1]].get().remove(self.popup_message)
+        self.popup_message = None
+        self.show_all()
+
     def show_error_modal(self, err):
         _ = self.lang.gettext
         logger.exception("Showing error modal: %s", err)
