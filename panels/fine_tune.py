@@ -45,25 +45,15 @@ class FineTunePanel(ScreenPanel):
         grid.attach(self.labels['zoffset'], 0, 1, 1, 1)
         grid.attach(self.labels['z-'], 0, 2, 1, 1)
 
-        self.labels['fan+'] = KlippyGtk.ButtonImage("fan-on", _("Fan +"), "color2")
-        self.labels['fan+'].connect("clicked", self.change_fan, "+")
-        self.labels['fanspeed'] = Gtk.Label("100%")
-        self.labels['fanspeed'].get_style_context().add_class('temperature_entry')
-        self.labels['fan-'] = KlippyGtk.ButtonImage("fan-off", _("Fan -"), "color2")
-        self.labels['fan-'].connect("clicked", self.change_fan, "-")
-        grid.attach(self.labels['fan+'], 1, 0, 1, 1)
-        grid.attach(self.labels['fanspeed'], 1, 1, 1, 1)
-        grid.attach(self.labels['fan-'], 1, 2, 1, 1)
-
         self.labels['speed+'] = KlippyGtk.ButtonImage("speed-step", _("Speed +"), "color3")
         self.labels['speed+'].connect("clicked", self.change_speed, "+")
         self.labels['speedfactor'] = Gtk.Label("100%")
         self.labels['speedfactor'].get_style_context().add_class('temperature_entry')
         self.labels['speed-'] = KlippyGtk.ButtonImage("speed-step", _("Speed -"), "color3")
         self.labels['speed-'].connect("clicked", self.change_speed, "-")
-        grid.attach(self.labels['speed+'], 2, 0, 1, 1)
-        grid.attach(self.labels['speedfactor'], 2, 1, 1, 1)
-        grid.attach(self.labels['speed-'], 2, 2, 1, 1)
+        grid.attach(self.labels['speed+'], 1, 0, 1, 1)
+        grid.attach(self.labels['speedfactor'], 1, 1, 1, 1)
+        grid.attach(self.labels['speed-'], 1, 2, 1, 1)
 
         self.labels['extrude+'] = KlippyGtk.ButtonImage("extrude", _("Extrusion +"), "color4")
         self.labels['extrude+'].connect("clicked", self.change_extrusion, "+")
@@ -71,9 +61,9 @@ class FineTunePanel(ScreenPanel):
         self.labels['extrudefactor'].get_style_context().add_class('temperature_entry')
         self.labels['extrude-'] = KlippyGtk.ButtonImage("retract", _("Extrusion -"), "color4")
         self.labels['extrude-'].connect("clicked", self.change_extrusion, "-")
-        grid.attach(self.labels['extrude+'], 3, 0, 1, 1)
-        grid.attach(self.labels['extrudefactor'], 3, 1, 1, 1)
-        grid.attach(self.labels['extrude-'], 3, 2, 1, 1)
+        grid.attach(self.labels['extrude+'], 2, 0, 1, 1)
+        grid.attach(self.labels['extrudefactor'], 2, 1, 1, 1)
+        grid.attach(self.labels['extrude-'], 2, 2, 1, 1)
 
 
         # babystepping grid
@@ -115,7 +105,7 @@ class FineTunePanel(ScreenPanel):
 
         self.labels["1"].set_active(True)
 
-        grid.attach(deltgrid, 1, 3, 3, 1)
+        grid.attach(deltgrid, 1, 3, 2, 1)
 
         #self.panel = grid
         self.content.add(grid)
@@ -136,10 +126,6 @@ class FineTunePanel(ScreenPanel):
             if "speed_factor" in data["gcode_move"]:
                 self.speed = int(data["gcode_move"]["speed_factor"]*100)
                 self.labels['speedfactor'].set_text("%3d%%" % self.speed)
-
-        if "fan" in data and "speed" in data['fan']:
-            self.fan = int(round(data['fan']['speed'],2)*100)
-            self.labels['fanspeed'].set_text("%3d%%" % self.fan)
 
     def change_babystepping(self, widget, dir):
         if dir == "+":

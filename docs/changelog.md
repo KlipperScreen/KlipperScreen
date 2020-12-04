@@ -1,9 +1,11 @@
 ## Changelog
 
 #### 2020 12 04
+* Removed fan options from fine tuning
 * Add bed mesh panel
 * Added more variables to the menu enable option
 * Hide extrude panel during printing if the printer is not paused
+* Add fan panel to print control menu
 
 #### 2020 12 02
 * Change panel layout: Added Title, Back, Emergency Stop, and Home to panels.
