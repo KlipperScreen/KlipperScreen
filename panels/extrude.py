@@ -95,8 +95,11 @@ class ExtrudePanel(ScreenPanel):
         self._screen.add_subscription(panel_name)
 
     def process_update(self, action, data):
+        if action != "notify_status_update":
+            return
+
         for x in self._printer.get_tools():
-            self.update_temp(x,
+            self.update_temp("tool%s" % self._printer.get_tool_number(x),
                 self._printer.get_dev_stat(x,"temperature"),
                 self._printer.get_dev_stat(x,"target")
             )
