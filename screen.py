@@ -236,18 +236,6 @@ class KlipperScreen(Gtk.Window):
 
         self.show_panel(self._cur_panels[-1] + '_' + name, "menu", disname, 1, False, display_name=disname,
             items=menuitems)
-        return
-
-        grid = self.arrangeMenuItems(menu, 4)
-
-        b = KlippyGtk.ButtonImage('back', 'Back')
-        b.connect("clicked", self._menu_go_back)
-        grid.attach(b, 4, 2, 1, 1)
-
-        self._cur_panels.append(cur_item['name']) #str(cur_item['name']))
-        self.panels[cur_item['name']] = grid
-        self.add(self.panels[cur_item['name']])
-        self.show_all()
 
     def _remove_all_panels(self):
         while len(self._cur_panels) > 0:
