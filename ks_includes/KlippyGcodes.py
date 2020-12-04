@@ -34,16 +34,16 @@ class KlippyGcodes:
 
     @staticmethod
     def set_bed_temp(temp):
-        return KlippyGcodes.SET_BED_TEMP + " S" + str(temp)
+        return "%s S%s" % (KlippyGcodes.SET_BED_TEMP, str(temp))
 
     @staticmethod
     def set_ext_temp(temp, tool=0):
-        return KlippyGcodes.SET_EXT_TEMP + " T" + str(tool) + " S" + str(temp)
+        return "%s T%s S%s" % (KlippyGcodes.SET_EXT_TEMP, str(tool), str(temp))
 
     @staticmethod
     def set_fan_speed(speed):
         speed = str( int(float(int(speed) % 101)/100*255) )
-        return KlippyGcodes.SET_FAN_SPEED + " S"+ speed
+        return "%s S%s" % (KlippyGcodes.SET_FAN_SPEED, speed)
 
     @staticmethod
     def set_extrusion_rate(rate):
@@ -59,4 +59,12 @@ class KlippyGcodes:
 
     @staticmethod
     def extrude(dist, speed=500):
-        return KlippyGcodes.MOVE + " E" + dist + " F" + speed
+        return "%s E%s F%s" % (KlippyGcodes.MOVE, dist, speed)
+
+    @staticmethod
+    def bed_mesh_load(profile):
+        return "BED_MESH_PROFILE LOAD=%s" % profile
+
+    @staticmethod
+    def bed_mesh_save(profile):
+        return "BED_MESH_PROFILE SAVE=%s" % profile

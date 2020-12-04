@@ -114,6 +114,7 @@ class KlipperScreen(Gtk.Window):
     def ws_subscribe(self):
         requested_updates = {
             "objects": {
+                "bed_mesh": ["profile_name","mesh_max","mesh_min","probed_matrix"],
                 "configfile": ["config"],
                 "extruder": ["target","temperature","pressure_advance","smooth_time"],
                 "fan": ["speed"],
@@ -397,6 +398,7 @@ class KlipperScreen(Gtk.Window):
         self.shutdown = False
 
         status_objects = [
+            'bed_mesh',
             'idle_timeout',
             'configfile',
             'gcode_move',
