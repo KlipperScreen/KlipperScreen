@@ -217,19 +217,3 @@ class FineTunePanel(ScreenPanel):
             if i == self.percent_delta:
                 continue
             self.labels[str(i)].set_active(False)
-
-    #def
-
-    def select_fan_speed(self, widget):
-        if self.user_selecting == True:
-            return
-
-        self.user_selecting = True
-        self.panel.attach(self.labels["apply"], 3, 0, 1, 1)
-        self.panel.attach(self.labels["cancel"], 0, 0, 1, 1)
-        self._screen.show_all()
-
-    def cancel_select_fan_speed(self, widget):
-        self.user_selecting = False
-        self.panel.remove(self.labels["apply"])
-        self.panel.remove(self.labels["cancel"])
