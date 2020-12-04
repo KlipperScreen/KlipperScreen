@@ -47,6 +47,7 @@ install_systemd_service()
 
     echo "$SERVICE" | sudo tee /etc/systemd/system/KlipperScreen.service > /dev/null
     sudo systemctl daemon-reload
+    sudo systemctl enable KlipperScreen
 }
 
 update_x11()
