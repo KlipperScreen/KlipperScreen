@@ -85,6 +85,9 @@ class Printer:
         if data['device'] in self.power_devices:
             self.power_devices[data['device']]['status'] = data['status']
 
+    def config_section_exists(self, section):
+        return section in list(self.config)
+
     def get_config_section_list(self, search=""):
         return [i for i in list(self.config) if i.startswith(search)]
 
@@ -95,6 +98,24 @@ class Printer:
 
     def get_data(self):
         return self.data
+
+    def get_printer_status_data(self):
+        data = {
+            "printer": {
+                "idle_timeout": self.get_stat("idle_timeout").copy(),
+                "pause_resume": self.get_stat("pause_resume").copy(),
+                "power_devices": {
+                    "count": len(self.get_power_devices())
+                }
+            }
+        }
+
+        sections = ["bed_mesh","bltouch","probe"]
+        for section in sections:
+            if self.config_section_exists(section):
+                data["printer"][section] = self.get_config_section(section).copy()
+        
+        return data
 
     def get_klipper_version(self):
         return self.klipper['version']
@@ -108,8 +129,12 @@ class Printer:
         return self.power_devices[device]['status']
 
     def get_stat(self, stat, substat = None):
+        if stat not in self.data:
+            return None
         if substat != None:
-            return self.data[stat][substat]
+            if substat in self.data[stat]:
+                return self.data[stat][substat]
+            return None
         return self.data[stat]
 
     def set_dev_temps(self, dev, temp, target=None):

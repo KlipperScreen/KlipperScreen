@@ -15,41 +15,34 @@ def create_panel(*args):
     return MenuPanel(*args)
 
 class MenuPanel(ScreenPanel):
+    i = 0
     def initialize(self, panel_name, display_name, items):
         _ = self.lang.gettext
 
-        self.activate()
+        self.items = items
+        self.create_menu_items()
 
-        grid = self.arrangeMenuItems(items, 4)
-        grid.set_size_request(self._screen.width, self._screen.height-45)
-
-        self.content.add(grid)
-        self.panel = self.layout
+        self.grid = Gtk.Grid()
+        self.grid.set_row_homogeneous(True)
+        self.grid.set_column_homogeneous(True)
+        self.content.add(self.grid)
 
     def activate(self):
-        self.j2_data = {
-            "printer": {
-                "power_devices": {
-                    "count": len(self._screen.printer.get_power_devices())
-                }
-            }
-        }
-        logger.debug("j2_data: %s" % self.j2_data)
+        self.j2_data = self._printer.get_printer_status_data()
+        self.arrangeMenuItems(self.items, 4)
 
     def arrangeMenuItems (self, items, columns, expandLast=False):
-        grid = Gtk.Grid()
-        grid.set_row_homogeneous(True)
-        grid.set_column_homogeneous(True)
-        logger.debug(items)
-        for item in items:
-            key = list(item)[0]
-            logger.debug(item)
-            if not self.evaluate_enable(item[key]['enable']):
-                items.remove(item)
+        for child in self.grid.get_children():
+            self.grid.remove(child)
 
         l = len(items)
         i = 0
-        for i in range(l):
+        for item in items:
+            key = list(item)[0]
+            logger.debug("Evaluating item: %s" % key)
+            if not self.evaluate_enable(item[key]['enable']):
+                continue
+
             col = i % columns
             row = int(i/columns)
             width = 1
@@ -57,8 +50,15 @@ class MenuPanel(ScreenPanel):
             if expandLast == True and i+1 == l and l%2 == 1:
                 width = 2
 
-            key = list(items[i])[0]
-            item = items[i][key]
+            self.grid.attach(self.labels[key], col, row, width, 1)
+            i += 1
+
+        return self.grid
+
+    def create_menu_items(self):
+        for i in range(len(self.items)):
+            key = list(self.items[i])[0]
+            item = self.items[i][key]
             b = KlippyGtk.ButtonImage(
                 item['icon'], item['name'], "color"+str((i%4)+1)
             )
@@ -72,12 +72,7 @@ class MenuPanel(ScreenPanel):
                     b.connect("clicked", self._screen._send_action, item['method'], params)
             else:
                 b.connect("clicked", self._screen._go_to_submenu, key)
-
-            grid.attach(b, col, row, width, 1)
-
-            i += 1
-
-        return grid
+            self.labels[key] = b
 
     def evaluate_enable(self, enable):
         if enable == True:
@@ -90,7 +85,6 @@ class MenuPanel(ScreenPanel):
             logger.debug("Date: %s" % self.j2_data)
             j2_temp = Template(enable)
             result = j2_temp.render(self.j2_data)
-            logger.debug("Result: %s" % result)
             if result == 'True':
                 return True
             return False
