@@ -40,6 +40,10 @@ Available panels are listed here: [docs/panels.md](panels.md)
 
 Certain variables are available for conditional testing of the enable statement:
 ```
+printer.bltouch # Available if bltouch section defined in config
+printer.idle_timeout # Idle timeout section
+printer.pause_resume # Pause resume section of Klipper
+printer.probe # Available if probe section defined in config
 printer.power_devices.count # Number of power devices configured in Moonraker
 ```
 
