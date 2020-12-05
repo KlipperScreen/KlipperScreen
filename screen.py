@@ -354,6 +354,8 @@ class KlipperScreen(Gtk.Window):
 
             if not (data.startswith("B:") and
                 re.search(r'B:[0-9\.]+\s/[0-9\.]+\sT[0-9]+:[0-9\.]+', data)):
+                if data.startswith("!! "):
+                    self.show_popup_message(data[3:])
                 logger.debug(json.dumps([action, data], indent=2))
 
         for sub in self.subscriptions:

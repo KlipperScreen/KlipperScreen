@@ -151,10 +151,6 @@ class BedMeshPanel(ScreenPanel):
             self.add_profile(prof[9:])
 
     def process_update(self, action, data):
-        if action == "notify_gcode_response":
-            if "must home axis first" in data.lower():
-                self._screen.show_popup_message("Must home axis first.")
-
         if action == "notify_status_update":
             if "bed_mesh" in data and "profile_name" in data['bed_mesh']:
                 logger.debug("bed_mesh: %s" % data)
