@@ -15,6 +15,7 @@ class KlippyFiles:
     filelist = []
     files = {}
     timeout = None
+    metadata_timeout = {}
 
     def __init__(self, screen):
         self._screen = screen
@@ -41,7 +42,7 @@ class KlippyFiles:
                             "size": item['size'],
                             "modified": item['modified']
                         }
-                        self.update_metadata(item['filename'])
+                        self.request_metadata(item['filename'])
 
                 if len(self.callbacks) > 0 and (len(newfiles) > 0 or len(deletedfiles) > 0):
                     logger.debug("Running callbacks...")
@@ -54,18 +55,16 @@ class KlippyFiles:
                         self.filelist.remove(file)
                         self.files.pop(file, None)
 
-                    #self.get_file_data(item['filename'])
-                #files = [asyncio.create_task(self.get_file_data(file)) for file in self.files]
-                #await asyncio.gather(files)
-                #files = [GLib.idle_add(self.ret_file_data, file) for file in self.files]
-
         elif method == "server.files.metadata":
             if "error" in result.keys():
-                logger.debug("Error in getting metadata for %s" %(params['filename']))
-                self.request_metadata(params['filename'])
+                logger.debug("Error in getting metadata for %s. Retrying in 6 seconds" %(params['filename']))
                 return
 
             logger.debug("Got metadata for %s" % (result['result']['filename']))
+            if params['filename'] in self.metadata_timeout:
+                GLib.source_remove(self.metadata_timeout[params['filename']])
+                del self.metadata_timeout[params['filename']]
+
             for x in result['result']:
                 self.files[params['filename']][x] = result['result'][x]
             if "thumbnails" in self.files[params['filename']]:
@@ -90,8 +89,11 @@ class KlippyFiles:
             self.timeout = None
 
     def request_metadata(self, filename):
-        GLib.timeout_add(2000, self._screen._ws.klippy.get_file_metadata, filename, self._callback)
-        return False
+        if filename in self.metadata_timeout:
+            GLib.source_remove(self.metadata_timeout[filename])
+        self.metadata_timeout[filename] = GLib.timeout_add(
+            6000, self._screen._ws.klippy.get_file_metadata, filename, self._callback
+        )
 
     def ret_files(self, retval=True):
         if not self._screen._ws.klippy.get_file_list(self._callback):
@@ -114,6 +116,3 @@ class KlippyFiles:
 
     def add_file(self, file_name, size, modified, old_file_name = None):
         print(file_name)
-
-    def update_metadata(self, filename):
-        self._screen._ws.klippy.get_file_metadata(filename, self._callback)
