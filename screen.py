@@ -189,6 +189,8 @@ class KlipperScreen(Gtk.Window):
         box.get_style_context().add_class("message_popup")
         box.set_size_request(self.width, 50)
         label = Gtk.Label()
+        if "must home axis first" in message.lower():
+            message = "Must home all axis first."
         label.set_text(message)
 
         close = Gtk.Button.new_with_label("X")
@@ -200,7 +202,12 @@ class KlipperScreen(Gtk.Window):
         box.pack_end(close, False, False, 10)
         box.set_halign(Gtk.Align.CENTER)
 
-        self.panels[self._cur_panels[-1]].get().put(box, 0,0)
+        cur_panel = self.panels[self._cur_panels[-1]]
+        for i in ['back','estop','home']:
+            if i in cur_panel.control:
+                cur_panel.control[i].set_sensitive(False)
+        cur_panel.get().put(box, 0,0)
+
         self.show_all()
         self.popup_message = box
 
@@ -212,7 +219,11 @@ class KlipperScreen(Gtk.Window):
         if self.popup_message == None:
             return
 
-        self.panels[self._cur_panels[-1]].get().remove(self.popup_message)
+        cur_panel = self.panels[self._cur_panels[-1]]
+        for i in ['back','estop','home']:
+            if i in cur_panel.control:
+                cur_panel.control[i].set_sensitive(True)
+        cur_panel.get().remove(self.popup_message)
         self.popup_message = None
         self.show_all()
 

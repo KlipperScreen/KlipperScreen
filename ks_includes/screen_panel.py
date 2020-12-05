@@ -10,6 +10,7 @@ logger = logging.getLogger("KlipperScreen.ScreenPanel")
 
 class ScreenPanel:
     title_spacing = 50
+    control = {}
 
     def __init__(self, screen, title, back=True):
         self._screen = screen
@@ -21,17 +22,17 @@ class ScreenPanel:
         self.layout.set_size(self._screen.width, self._screen.height)
 
         if back == True:
-            b = KlippyGtk.ButtonImage('back', None, None, 40, 40)
-            b.connect("clicked", self._screen._menu_go_back)
-            self.layout.put(b, 0, 0)
+            self.control['back'] = KlippyGtk.ButtonImage('back', None, None, 40, 40)
+            self.control['back'].connect("clicked", self._screen._menu_go_back)
+            self.layout.put(self.control['back'], 0, 0)
 
-            h = KlippyGtk.ButtonImage('home', None, None, 40, 40)
-            h.connect("clicked", self.menu_return, True)
-            self.layout.put(h, self._screen.width - 55, 0)
+            self.control['home'] = KlippyGtk.ButtonImage('home', None, None, 40, 40)
+            self.control['home'].connect("clicked", self.menu_return, True)
+            self.layout.put(self.control['home'], self._screen.width - 55, 0)
 
-        e = KlippyGtk.ButtonImage('emergency', None, None, 40, 40)
-        e.connect("clicked", self.emergency_stop)
-        self.layout.put(e, int(self._screen.width/4*3) - 20, 0)
+        self.control['estop'] = KlippyGtk.ButtonImage('emergency', None, None, 40, 40)
+        self.control['estop'].connect("clicked", self.emergency_stop)
+        self.layout.put(self.control['estop'], int(self._screen.width/4*3) - 20, 0)
 
         self.title = Gtk.Label()
         self.title.set_size_request(self._screen.width, self.title_spacing)
