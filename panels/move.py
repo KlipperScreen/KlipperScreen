@@ -123,6 +123,9 @@ class MovePanel(ScreenPanel):
             self.labels[str(i)].set_active(False)
 
     def move(self, widget, axis, dir):
+        if self._config.get_main_config_option("invert_%s" % axis.lower(), False):
+            dir = "-" if dir == "+" else "+"
+
         dist = str(self.distance) if dir == "+" else "-" + str(self.distance)
         logging.info("# Moving " + axis + " " + dist + "mm")
 

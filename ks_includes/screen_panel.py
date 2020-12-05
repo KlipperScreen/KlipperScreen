@@ -14,6 +14,7 @@ class ScreenPanel:
 
     def __init__(self, screen, title, back=True):
         self._screen = screen
+        self._config = screen._config
         self.lang = self._screen.lang
         self._printer = screen.printer
         self.labels = {}

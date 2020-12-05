@@ -14,33 +14,36 @@ class ConfigError(Exception):
 
 class KlipperScreenConfig:
     config = None
+    configfile_name = "KlipperScreen.conf"
 
     def __init__(self):
+        self.default_config_path = "%s/ks_includes/%s" % (os.getcwd(), self.configfile_name)
         self.config = configparser.ConfigParser()
         self.config_path = self.get_config_file_location()
 
         try:
-            self.config.read(self.config_path)
+            self.config.read(self.default_config_path)
+            if self.config_path != self.default_config_path:
+                self.config.read(self.config_path)
         except KeyError:
             raise ConfigError(f"Error reading config: {self.config_path}")
 
         self.log_config(self.config)
-
         self.get_menu_items("__main")
         #self.build_main_menu(self.config)
 
-
     def get_config_file_location(self):
-        conf_name = "KlipperScreen.conf"
-
-        file = "%s/%s" % (os.getenv("HOME"), conf_name)
+        file = "%s/%s" % (os.getenv("HOME"), self.configfile_name)
         if not path.exists(file):
-            file = "%s/%s" % (os.getcwd(), conf_name)
+            file = "%s/%s" % (os.getcwd(), self.configfile_name)
             if not path.exists(file):
-                file = "%s/ks_includes/%s" % (os.getcwd(), conf_name)
+                file = self.default_config_path
 
         logger.info("Found configuration file at: %s" % file)
         return file
+
+    def get_main_config_option(self, option, default=None):
+        return self.config['main'].get(option, default)
 
     def get_menu_items(self, menu="__main", subsection=""):
         if subsection != "":
@@ -93,8 +96,6 @@ class KlipperScreenConfig:
         config.write(sfile)
         sfile.seek(0)
         return sfile.read().strip()
-
-
 
     def _build_menu_item(self, menu, name):
         if name not in self.config:

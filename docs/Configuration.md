@@ -1,7 +1,22 @@
 # Configuration
 
-In the KlipperScreen folder, a file _KlipperScreen.conf_ allows for configuration of the screen. This document will
-detail how to configure KlipperScreen. A default config is included here: [ks_includes/KlipperScreen.conf](../ks_includes/KlipperScreen.conf)
+KlipperScreen has some configuration options which are outlined below. KlipperScreen will search for a configuration
+file in the following order:
+_${HOME}/KlipperScreen.conf_
+_${KlipperScreen_Directory}/KlipperScreen.conf_
+
+If one of those files are found, it will be used over the default configuration. The default configuration will be
+merged with the custom configuration, so if you do not define any menus the default menus will be used.The default
+config is included here: [ks_includes/KlipperScreen.conf](../ks_includes/KlipperScreen.conf)
+
+## Main Options
+```
+[main]
+# Invert axis in move panel. Default is False. Change to true to invert
+invert_x: False
+invert_y: False
+invert_z: False
+```
 
 
 ## Preheat Options
