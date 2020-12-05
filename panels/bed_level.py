@@ -15,6 +15,9 @@ def create_panel(*args):
     return BedLevelPanel(*args)
 
 class BedLevelPanel(ScreenPanel):
+    x_offset = 0
+    y_offset = 0
+
     def initialize(self, panel_name):
         _ = self.lang.gettext
         self.panel_name = panel_name
@@ -23,11 +26,21 @@ class BedLevelPanel(ScreenPanel):
         self.disabled_motors = False
 
         screws = []
-        if "bed_screws" in self._screen.printer.get_config_section_list():
-            bed_screws = self._screen.printer.get_config_section("bed_screws")
-            for item in bed_screws:
-                if re.match(r"^[0-9\.]+,[0-9\.]+$", bed_screws[item]):
-                    screws.append(bed_screws[item].split(","))
+        config_section = None
+        if "screws_tilt_adjust" in self._screen.printer.get_config_section_list():
+            config_section = self._screen.printer.get_config_section("screws_tilt_adjust")
+        elif "bed_screws" in self._screen.printer.get_config_section_list():
+            config_section = self._screen.printer.get_config_section("bed_screws")
+
+        if config_section != None:
+            for item in config_section:
+                logger.debug("Screws section: %s" % config_section[item])
+                result = re.match(r"([0-9\.]+)\s*,\s*([0-9\.]+)", config_section[item])
+                if result:
+                    screws.append([
+                        round(float(result.group(1)),2),
+                        round(float(result.group(2)),2)
+                    ])
 
             screws = sorted(screws, key=lambda x: (float(x[1]), float(x[0])))
             logger.debug("Bed screw locations [x,y]: %s", screws)
@@ -36,15 +49,19 @@ class BedLevelPanel(ScreenPanel):
                 y_offset = 0
                 bltouch = self._screen.printer.get_config_section("bltouch")
                 if "x_offset" in bltouch:
-                    x_offset = float(bltouch['x_offset'])
+                    self.x_offset = float(bltouch['x_offset'])
                 if "y_offset" in bltouch:
-                    y_offset = float(bltouch['y_offset'])
+                    self.y_offset = float(bltouch['y_offset'])
                 new_screws = []
                 for screw in screws:
-                    new_screws.append([float(screw[0]) + x_offset, float(screw[1]) + y_offset])
+                    new_screws.append([
+                        round(float(screw[0]) + self.x_offset,2),
+                        round(float(screw[1]) + self.y_offset,2)
+                    ])
                 screws = new_screws
 
             self.screws = screws
+            logger.debug("Screws: %s" % screws)
 
         if len(screws) < 4:
             logger.debug("bed_screws not configured, calculating locations")
@@ -93,6 +110,12 @@ class BedLevelPanel(ScreenPanel):
 
         self.content.add(grid)
 
+    def activate(self):
+        self.labels['bl'].set_label("")
+        self.labels['br'].set_label("")
+        self.labels['fl'].set_label("")
+        self.labels['fr'].set_label("")
+
     def go_to_position(self, widget, position):
         logger.debug("Going to position: %s", position)
         script = [
@@ -118,13 +141,22 @@ class BedLevelPanel(ScreenPanel):
     def process_update(self, action, data):
         if action == "notify_gcode_response":
             result = re.match(
-                "^// (back|front) (left|right) screw : X [0-9\.]+, Y [0-9\.]+, Z [0-9\.]+ : Adjust -> ([CW]+ [0-9:]+)",
+                "^// (.*) : X ([0-9\.]+), Y ([0-9\.]+), Z [0-9\.]+ : Adjust -> ([CW]+ [0-9:]+)",
                 data
             )
             if result:
-                self.labels["%s%s" % (result.group(1)[0:1], result.group(2)[0:1])].set_label(result.group(3))
+                screw_labels = ['fl','fr','br','bl']
+                x = int(float(result.group(2)) + self.x_offset)
+                y = int(float(result.group(3)) + self.y_offset)
+                logger.debug(data)
+                logger.debug("X: %s Y: %s" % (x,y))
+                for i in range(len(self.screws)):
+                    logger.debug(self.screws[i])
+                    if x == int(float(self.screws[i][0])) and y == int(float(self.screws[i][1])):
+                        break
+                self.labels[screw_labels[i]].set_label(result.group(4))
                 self.response_count += 1
-                if self.response_count > 3:
+                if self.response_count >= len(self.screws-1):
                     self._screen.remove_subscription(self.panel_name)
 
 
