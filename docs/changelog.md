@@ -6,6 +6,7 @@
 * Added more variables to the menu enable option
 * Hide extrude panel during printing if the printer is not paused
 * Add fan panel to print control menu
+* Included screws_tilt_calculate gcode command into the bed level panel. This section must be configured in klipper.
 
 #### 2020 12 02
 * Change panel layout: Added Title, Back, Emergency Stop, and Home to panels.

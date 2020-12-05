@@ -11,9 +11,13 @@ from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.BedLevelPanel")
 
+def create_panel(*args):
+    return BedLevelPanel(*args)
+
 class BedLevelPanel(ScreenPanel):
-    def initialize(self, menu):
+    def initialize(self, panel_name):
         _ = self.lang.gettext
+        self.panel_name = panel_name
         self.screws = None
         grid = KlippyGtk.HomogeneousGrid()
         self.disabled_motors = False
@@ -59,19 +63,19 @@ class BedLevelPanel(ScreenPanel):
             logger.debug("Configured screw locations [x,y]: %s", screws)
 
 
-        self.labels['tl'] = KlippyGtk.ButtonImage("bed-level-t-l")
-        self.labels['tl'].connect("clicked", self.go_to_position, self.screws[2])
-        self.labels['tr'] = KlippyGtk.ButtonImage("bed-level-t-r")
-        self.labels['tr'].connect("clicked", self.go_to_position, self.screws[3])
-        self.labels['bl'] = KlippyGtk.ButtonImage("bed-level-b-l")
-        self.labels['bl'].connect("clicked", self.go_to_position, self.screws[0])
-        self.labels['br'] = KlippyGtk.ButtonImage("bed-level-b-r")
-        self.labels['br'].connect("clicked", self.go_to_position, self.screws[1])
+        self.labels['bl'] = KlippyGtk.ButtonImage("bed-level-t-l", None, None, )
+        self.labels['bl'].connect("clicked", self.go_to_position, self.screws[2])
+        self.labels['br'] = KlippyGtk.ButtonImage("bed-level-t-r")
+        self.labels['br'].connect("clicked", self.go_to_position, self.screws[3])
+        self.labels['fl'] = KlippyGtk.ButtonImage("bed-level-b-l")
+        self.labels['fl'].connect("clicked", self.go_to_position, self.screws[0])
+        self.labels['fr'] = KlippyGtk.ButtonImage("bed-level-b-r")
+        self.labels['fr'].connect("clicked", self.go_to_position, self.screws[1])
 
-        grid.attach(self.labels['tl'], 1, 0, 1, 1)
-        grid.attach(self.labels['tr'], 2, 0, 1, 1)
-        grid.attach(self.labels['bl'], 1, 1, 1, 1)
-        grid.attach(self.labels['br'], 2, 1, 1, 1)
+        grid.attach(self.labels['bl'], 1, 0, 1, 1)
+        grid.attach(self.labels['br'], 2, 0, 1, 1)
+        grid.attach(self.labels['fl'], 1, 1, 1, 1)
+        grid.attach(self.labels['fr'], 2, 1, 1, 1)
 
         self.labels['home'] = KlippyGtk.ButtonImage("home",_("Home All"),"color2")
         self.labels['home'].connect("clicked", self.home)
@@ -82,9 +86,10 @@ class BedLevelPanel(ScreenPanel):
         grid.attach(self.labels['home'], 0, 0, 1, 1)
         grid.attach(self.labels['dm'], 0, 1, 1, 1)
 
-        self.labels['estop'] = KlippyGtk.ButtonImage("decrease",_("Emergency Stop"),"color4")
-        self.labels['estop'].connect("clicked", self.emergency_stop)
-        grid.attach(self.labels['estop'], 3, 0, 1, 1)
+        if self._printer.config_section_exists("screws_tilt_adjust"):
+            self.labels['screws'] = KlippyGtk.ButtonImage("refresh",_("Screws Adjust"),"color4")
+            self.labels['screws'].connect("clicked", self.screws_tilt_calculate)
+            grid.attach(self.labels['screws'], 3, 0, 1, 1)
 
         self.content.add(grid)
 
@@ -110,5 +115,20 @@ class BedLevelPanel(ScreenPanel):
             "M18" # Disable motors
         )
 
-def create_panel(*args):
-    return BedLevelPanel(*args)
+    def process_update(self, action, data):
+        if action == "notify_gcode_response":
+            result = re.match(
+                "^// (back|front) (left|right) screw : X [0-9\.]+, Y [0-9\.]+, Z [0-9\.]+ : Adjust -> ([CW]+ [0-9:]+)",
+                data
+            )
+            if result:
+                self.labels["%s%s" % (result.group(1)[0:1], result.group(2)[0:1])].set_label(result.group(3))
+                self.response_count += 1
+                if self.response_count > 3:
+                    self._screen.remove_subscription(self.panel_name)
+
+
+    def screws_tilt_calculate(self, widget):
+        self.response_count = 0
+        self._screen.add_subscription(self.panel_name)
+        self._screen._ws.klippy.gcode_script("SCREWS_TILT_CALCULATE")
