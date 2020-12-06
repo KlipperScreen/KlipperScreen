@@ -26,13 +26,14 @@ class BedLevelPanel(ScreenPanel):
         self.disabled_motors = False
 
         screws = []
-        config_section = None
+        config_section_name = None
         if "screws_tilt_adjust" in self._screen.printer.get_config_section_list():
-            config_section = self._screen.printer.get_config_section("screws_tilt_adjust")
+            config_section_name = "screws_tilt_adjust"
         elif "bed_screws" in self._screen.printer.get_config_section_list():
-            config_section = self._screen.printer.get_config_section("bed_screws")
+            config_section_name = "bed_screws"
 
-        if config_section != None:
+        if config_section_name != None:
+            config_section = self._screen.printer.get_config_section(config_section_name)
             for item in config_section:
                 logger.debug("Screws section: %s" % config_section[item])
                 result = re.match(r"([0-9\.]+)\s*,\s*([0-9\.]+)", config_section[item])
@@ -44,7 +45,8 @@ class BedLevelPanel(ScreenPanel):
 
             screws = sorted(screws, key=lambda x: (float(x[1]), float(x[0])))
             logger.debug("Bed screw locations [x,y]: %s", screws)
-            if "bltouch" in self._screen.printer.get_config_section_list():
+            if ("bltouch" in self._screen.printer.get_config_section_list() and 
+                    config_section_name == "screws_tilt_adjust"):
                 x_offset = 0
                 y_offset = 0
                 bltouch = self._screen.printer.get_config_section("bltouch")
