@@ -63,6 +63,7 @@ class KlipperScreen(Gtk.Window):
     printer = None
 
     def __init__(self):
+        Gtk.Window.__init__(self)
         self.width = Gdk.Screen.get_width(Gdk.Screen.get_default())
         self.height = Gdk.Screen.get_height(Gdk.Screen.get_default())
         self.set_default_size(self.width, self.height)
@@ -89,7 +90,6 @@ class KlipperScreen(Gtk.Window):
         _ = self.lang.gettext
 
         self.apiclient = KlippyRest("127.0.0.1",7125)
-        Gtk.Window.__init__(self)
 
         #self._load_panels()
 
