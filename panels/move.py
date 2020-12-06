@@ -4,7 +4,6 @@ import logging
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
 
-from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
@@ -21,24 +20,24 @@ class MovePanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
 
-        grid = KlippyGtk.HomogeneousGrid()
+        grid = self._gtk.HomogeneousGrid()
 
-        self.labels['x+'] = KlippyGtk.ButtonImage("move-x+", _("X+"), "color1")
+        self.labels['x+'] = self._gtk.ButtonImage("move-x+", _("X+"), "color1")
         self.labels['x+'].connect("clicked", self.move, "X", "+")
-        self.labels['x-'] = KlippyGtk.ButtonImage("move-x-", _("X-"), "color1")
+        self.labels['x-'] = self._gtk.ButtonImage("move-x-", _("X-"), "color1")
         self.labels['x-'].connect("clicked", self.move, "X", "-")
 
-        self.labels['y+'] = KlippyGtk.ButtonImage("move-y+", _("Y+"), "color2")
+        self.labels['y+'] = self._gtk.ButtonImage("move-y+", _("Y+"), "color2")
         self.labels['y+'].connect("clicked", self.move, "Y", "+")
-        self.labels['y-'] = KlippyGtk.ButtonImage("move-y-", _("Y-"), "color2")
+        self.labels['y-'] = self._gtk.ButtonImage("move-y-", _("Y-"), "color2")
         self.labels['y-'].connect("clicked", self.move, "Y", "-")
 
-        self.labels['z+'] = KlippyGtk.ButtonImage("move-z-", _("Z+"), "color3")
+        self.labels['z+'] = self._gtk.ButtonImage("move-z-", _("Z+"), "color3")
         self.labels['z+'].connect("clicked", self.move, "Z", "+")
-        self.labels['z-'] = KlippyGtk.ButtonImage("move-z+", _("Z-"), "color3")
+        self.labels['z-'] = self._gtk.ButtonImage("move-z+", _("Z-"), "color3")
         self.labels['z-'].connect("clicked", self.move, "Z", "-")
 
-        self.labels['home'] = KlippyGtk.ButtonImage("home", _("Home All"))
+        self.labels['home'] = self._gtk.ButtonImage("home", _("Home All"))
         self.labels['home'].connect("clicked", self.home)
 
 
@@ -54,7 +53,7 @@ class MovePanel(ScreenPanel):
         distgrid = Gtk.Grid()
         j = 0;
         for i in self.distances:
-            self.labels[i] = KlippyGtk.ToggleButton(i)
+            self.labels[i] = self._gtk.ToggleButton(i)
             self.labels[i].connect("clicked", self.change_distance, i)
             ctx = self.labels[i].get_style_context()
             if j == 0:
@@ -70,25 +69,21 @@ class MovePanel(ScreenPanel):
 
         self.labels["1"].set_active(True)
 
-        #space_grid = KlippyGtk.HomogeneousGrid()
+        #space_grid = self._gtk.HomogeneousGrid()
         #space_grid.attach(Gtk.Label("Distance (mm):"),0,0,1,1)
         #space_grid.attach(distgrid,0,1,1,1)
         #space_grid.attach(Gtk.Label(" "),0,2,1,1)
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 
-        bottomgrid = KlippyGtk.HomogeneousGrid()
+        bottomgrid = self._gtk.HomogeneousGrid()
         self.labels['pos_x'] = Gtk.Label("X: 0")
         self.labels['pos_y'] = Gtk.Label("Y: 0")
         self.labels['pos_z'] = Gtk.Label("Z: 0")
-        self.labels['pos_x'].get_style_context().add_class("text")
-        self.labels['pos_y'].get_style_context().add_class("text")
-        self.labels['pos_z'].get_style_context().add_class("text")
         bottomgrid.attach(self.labels['pos_x'], 0, 0, 1, 1)
         bottomgrid.attach(self.labels['pos_y'], 1, 0, 1, 1)
         bottomgrid.attach(self.labels['pos_z'], 2, 0, 1, 1)
         box.pack_start(bottomgrid, True, True, 0)
         self.labels['move_dist'] = Gtk.Label(_("Move Distance (mm)"))
-        self.labels['move_dist'].get_style_context().add_class("text")
         box.pack_start(self.labels['move_dist'], True, True, 0)
         box.pack_start(distgrid, True, True, 0)
 

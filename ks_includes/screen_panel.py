@@ -18,22 +18,26 @@ class ScreenPanel:
         self.lang = self._screen.lang
         self._printer = screen.printer
         self.labels = {}
+        self._gtk = screen.gtk
 
         self.layout = Gtk.Layout()
         self.layout.set_size(self._screen.width, self._screen.height)
 
+        button_scale = self._gtk.get_header_image_scale()
+        logger.debug("Button scale: %s" % button_scale)
         if back == True:
-            self.control['back'] = KlippyGtk.ButtonImage('back', None, None, 40, 40)
+            self.control['back'] = self._gtk.ButtonImage('back', None, None, button_scale[0], button_scale[1])
             self.control['back'].connect("clicked", self._screen._menu_go_back)
             self.layout.put(self.control['back'], 0, 0)
 
-            self.control['home'] = KlippyGtk.ButtonImage('home', None, None, 40, 40)
+            self.control['home'] = self._gtk.ButtonImage('home', None, None, button_scale[0], button_scale[1])
             self.control['home'].connect("clicked", self.menu_return, True)
-            self.layout.put(self.control['home'], self._screen.width - 55, 0)
+            self.layout.put(self.control['home'], self._screen.width - round(
+                self._gtk.get_image_width() * button_scale[0] * 1.45), 0)
 
-        self.control['estop'] = KlippyGtk.ButtonImage('emergency', None, None, 40, 40)
+        self.control['estop'] = self._gtk.ButtonImage('emergency', None, None, button_scale[0], button_scale[1])
         self.control['estop'].connect("clicked", self.emergency_stop)
-        self.layout.put(self.control['estop'], int(self._screen.width/4*3) - 20, 0)
+        self.layout.put(self.control['estop'], int(self._screen.width/4*3 - button_scale[0]/2), 0)
 
         self.title = Gtk.Label()
         self.title.set_size_request(self._screen.width, self.title_spacing)
@@ -85,4 +89,4 @@ class ScreenPanel:
 
     def update_temp(self, dev, temp, target):
         if dev in self.labels:
-            self.labels[dev].set_label(KlippyGtk.formatTemperatureString(temp, target))
+            self.labels[dev].set_label(self._gtk.formatTemperatureString(temp, target))

@@ -3,11 +3,9 @@ import logging
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
-
-from ks_includes.KlippyGtk import KlippyGtk
-from ks_includes.screen_panel import ScreenPanel
-
 from jinja2 import Template
+
+from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.MenuPanel")
 
@@ -59,7 +57,7 @@ class MenuPanel(ScreenPanel):
         for i in range(len(self.items)):
             key = list(self.items[i])[0]
             item = self.items[i][key]
-            b = KlippyGtk.ButtonImage(
+            b = self._gtk.ButtonImage(
                 item['icon'], item['name'], "color"+str((i%4)+1)
             )
             if item['panel'] != False:

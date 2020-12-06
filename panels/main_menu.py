@@ -4,7 +4,6 @@ import logging
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
 
-from ks_includes.KlippyGtk import KlippyGtk
 from panels.menu import MenuPanel
 
 logger = logging.getLogger("KlipperScreen.MainMenu")
@@ -19,22 +18,21 @@ class MainPanel(MenuPanel):
 
         self.layout = Gtk.Layout()
         self.layout.set_size(self._screen.width, self._screen.height)
-        grid = KlippyGtk.HomogeneousGrid()
+        grid = self._gtk.HomogeneousGrid()
         grid.set_size_request(self._screen.width, self._screen.height)
 
         # Create Extruders and bed icons
-        eq_grid = KlippyGtk.HomogeneousGrid()
-
+        eq_grid = self._gtk.HomogeneousGrid()
 
         i = 0
         for x in self._printer.get_tools():
             if i > 3:
                 break
-            self.labels[x] = KlippyGtk.ButtonImage("extruder-"+str(i+1), KlippyGtk.formatTemperatureString(0, 0))
+            self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i+1), self._gtk.formatTemperatureString(0, 0))
             eq_grid.attach(self.labels[x], i%2, i/2, 1, 1)
             i += 1
 
-        self.labels['heater_bed'] = KlippyGtk.ButtonImage("bed", KlippyGtk.formatTemperatureString(0, 0))
+        self.labels['heater_bed'] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
 
         width = 2 if i > 1 else 1
         eq_grid.attach(self.labels['heater_bed'], 0, i/2+1, width, 1)
@@ -64,7 +62,7 @@ class MainPanel(MenuPanel):
 
     def update_temp(self, dev, temp, target):
         if dev in self.labels:
-            self.labels[dev].set_label(KlippyGtk.formatTemperatureString(temp, target))
+            self.labels[dev].set_label(self._gtk.formatTemperatureString(temp, target))
 
     def process_update(self, action, data):
         if action != "notify_status_update":

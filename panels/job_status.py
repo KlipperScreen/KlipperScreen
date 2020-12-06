@@ -4,7 +4,6 @@ import logging
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
 
-from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.JobStatusPanel")
@@ -18,9 +17,9 @@ class JobStatusPanel(ScreenPanel):
 
     def initialize(self, panel_name):
         _ = self.lang.gettext
-        grid = KlippyGtk.HomogeneousGrid()
+        grid = self._gtk.HomogeneousGrid()
 
-        self.labels['progress'] = KlippyGtk.ProgressBar("printing-progress-bar")
+        self.labels['progress'] = self._gtk.ProgressBar("printing-progress-bar")
         #self.labels['progress'].set_vexpand(True)
         #self.labels['progress'].set_valign(Gtk.Align.CENTER)
         self.labels['progress'].set_show_text(False)
@@ -32,11 +31,11 @@ class JobStatusPanel(ScreenPanel):
         overlay.add(self.labels['progress'])
         overlay.add_overlay(self.labels['progress_text'])
 
-        self.labels['file'] = KlippyGtk.ImageLabel("file","",20,"printing-status-label")
-        self.labels['time_label'] = KlippyGtk.ImageLabel("speed-step",_("Time Elapsed"),20,"printing-status-label")
-        self.labels['time'] = KlippyGtk.Label(_("Time Elapsed"),"printing-status-label")
-        self.labels['time_left_label'] = KlippyGtk.ImageLabel("speed-step",_("Time Left"),20,"printing-status-label")
-        self.labels['time_left'] = KlippyGtk.Label(_("Time Left"),"printing-status-label")
+        self.labels['file'] = self._gtk.ImageLabel("file","",20,"printing-status-label")
+        self.labels['time_label'] = self._gtk.ImageLabel("speed-step",_("Time Elapsed"),20,"printing-status-label")
+        self.labels['time'] = self._gtk.Label(_("Time Elapsed"),"printing-status-label")
+        self.labels['time_left_label'] = self._gtk.ImageLabel("speed-step",_("Time Left"),20,"printing-status-label")
+        self.labels['time_left'] = self._gtk.Label(_("Time Left"),"printing-status-label")
         timegrid = Gtk.Grid()
         timegrid.attach(self.labels['time_label']['b'], 0, 0, 1, 1)
         timegrid.attach(self.labels['time'], 0, 1, 1, 1)
@@ -60,17 +59,17 @@ class JobStatusPanel(ScreenPanel):
 
         grid.attach(pbox, 1, 0, 3, 2)
 
-        self.labels['extruder'] = KlippyGtk.ButtonImage("extruder-1", KlippyGtk.formatTemperatureString(0, 0))
+        self.labels['extruder'] = self._gtk.ButtonImage("extruder-1", self._gtk.formatTemperatureString(0, 0))
         self.labels['extruder'].set_sensitive(False)
         grid.attach(self.labels['extruder'], 0, 0, 1, 1)
 
-        self.labels['heater_bed'] = KlippyGtk.ButtonImage("bed", KlippyGtk.formatTemperatureString(0, 0))
+        self.labels['heater_bed'] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
         self.labels['heater_bed'].set_sensitive(False)
         grid.attach(self.labels['heater_bed'], 0, 1, 1, 1)
 
-        self.labels['resume'] = KlippyGtk.ButtonImage("resume",_("Resume"),"color1")
+        self.labels['resume'] = self._gtk.ButtonImage("resume",_("Resume"),"color1")
         self.labels['resume'].connect("clicked",self.resume)
-        self.labels['pause'] = KlippyGtk.ButtonImage("pause",_("Pause"),"color1" )
+        self.labels['pause'] = self._gtk.ButtonImage("pause",_("Pause"),"color1" )
         self.labels['pause'].connect("clicked",self.pause)
 
         if self._printer.get_stat('pause_resume','is_paused') == True:
@@ -79,13 +78,13 @@ class JobStatusPanel(ScreenPanel):
         else:
             grid.attach(self.labels['pause'], 0, 2, 1, 1)
 
-        self.labels['cancel'] = KlippyGtk.ButtonImage("stop",_("Cancel"),"color2")
+        self.labels['cancel'] = self._gtk.ButtonImage("stop",_("Cancel"),"color2")
         self.labels['cancel'].connect("clicked", self.cancel)
         grid.attach(self.labels['cancel'], 1, 2, 1, 1)
-        self.labels['estop'] = KlippyGtk.ButtonImage("emergency",_("Emergency Stop"),"color4")
+        self.labels['estop'] = self._gtk.ButtonImage("emergency",_("Emergency Stop"),"color4")
         self.labels['estop'].connect("clicked", self.emergency_stop)
         grid.attach(self.labels['estop'], 2, 2, 1, 1)
-        self.labels['control'] = KlippyGtk.ButtonImage("control",_("Control"),"color3")
+        self.labels['control'] = self._gtk.ButtonImage("control",_("Control"),"color3")
         self.labels['control'].connect("clicked", self._screen._go_to_submenu, "")
         grid.attach(self.labels['control'], 3, 2, 1, 1)
 
@@ -120,9 +119,8 @@ class JobStatusPanel(ScreenPanel):
         label.set_halign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-        label.get_style_context().add_class("text")
 
-        dialog = KlippyGtk.Dialog(self._screen, buttons, label, self.cancel_confirm)
+        dialog = self._gtk.Dialog(self._screen, buttons, label, self.cancel_confirm)
         self.disable_button("pause","cancel")
 
     def cancel_confirm(self, widget, response_id):
@@ -166,7 +164,7 @@ class JobStatusPanel(ScreenPanel):
         vsd = self._printer.get_stat("print_stats")
         if "filename" in vsd and self.filename != vsd['filename']:
             if vsd['filename'] != "":
-                self.filename = KlippyGtk.formatFileName(vsd['filename'])
+                self.filename = self._gtk.formatFileName(vsd['filename'])
                 self.update_image_text("file", self.filename)
             else:
                 file = "Unknown"
@@ -176,8 +174,8 @@ class JobStatusPanel(ScreenPanel):
         progress = 0 if self._printer.get_stat('virtual_sdcard','progress') == 0 else (vsd['print_duration'] /
             self._printer.get_stat('virtual_sdcard','progress') - vsd['print_duration'])
 
-        self.update_text("time", str(KlippyGtk.formatTimeString(vsd['print_duration'])))
-        self.update_text("time_left", str(KlippyGtk.formatTimeString(
+        self.update_text("time", str(self._gtk.formatTimeString(vsd['print_duration'])))
+        self.update_text("time_left", str(self._gtk.formatTimeString(
             progress
         )))
 
@@ -209,4 +207,4 @@ class JobStatusPanel(ScreenPanel):
 
     def update_temp(self, dev, temp, target):
         if dev in self.labels:
-            self.labels[dev].set_label(KlippyGtk.formatTemperatureString(temp, target))
+            self.labels[dev].set_label(self._gtk.formatTemperatureString(temp, target))

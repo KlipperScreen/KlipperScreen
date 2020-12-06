@@ -5,7 +5,6 @@ import os
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
 
-from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.SplashScreenPanel")
@@ -24,7 +23,6 @@ class SplashScreenPanel(ScreenPanel):
         image.set_from_file(os.getcwd() + "/styles/z-bolt/images/klipper.png")
 
         self.labels['text'] = Gtk.Label(_("Initializing printer..."))
-        self.labels['text'].get_style_context().add_class("text")
         self.labels['text'].set_line_wrap(True)
         self.labels['text'].set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         self.labels['text'].set_halign(Gtk.Align.CENTER)
@@ -60,10 +58,10 @@ class SplashScreenPanel(ScreenPanel):
         _ = self.lang.gettext
 
         if "firmware_restart" not in self.labels:
-            self.labels['power'] = KlippyGtk.ButtonImage("reboot",_("Power On Printer"),"color3")
-            self.labels['restart'] = KlippyGtk.ButtonImage("reboot",_("Restart"),"color1")
+            self.labels['power'] = self._gtk.ButtonImage("reboot",_("Power On Printer"),"color3")
+            self.labels['restart'] = self._gtk.ButtonImage("reboot",_("Restart"),"color1")
             self.labels['restart'].connect("clicked", self.restart)
-            self.labels['firmware_restart'] = KlippyGtk.ButtonImage("restart",_("Firmware Restart"),"color2")
+            self.labels['firmware_restart'] = self._gtk.ButtonImage("restart",_("Firmware Restart"),"color2")
             self.labels['firmware_restart'].connect("clicked", self.firmware_restart)
 
         self.clear_action_bar()
