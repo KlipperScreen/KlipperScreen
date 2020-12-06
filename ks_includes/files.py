@@ -94,6 +94,10 @@ class KlippyFiles:
         self.metadata_timeout[filename] = GLib.timeout_add(
             6000, self._screen._ws.klippy.get_file_metadata, filename, self._callback
         )
+        GLib.idle_add(
+            lambda x, y: False if self._screen._ws.klippy.get_file_metadata(x,y) else False,
+            filename, self._callback
+        )
 
     def ret_files(self, retval=True):
         if not self._screen._ws.klippy.get_file_list(self._callback):
