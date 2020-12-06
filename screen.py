@@ -63,6 +63,13 @@ class KlipperScreen(Gtk.Window):
     printer = None
 
     def __init__(self):
+        self.width = Gdk.Screen.get_width(Gdk.Screen.get_default())
+        self.height = Gdk.Screen.get_height(Gdk.Screen.get_default())
+        self.set_default_size(self.width, self.height)
+        self.set_resizable(False)
+        self.version = get_software_version()
+        logger.info("KlipperScreen version: %s" % self.version)
+        logger.info("Screen resolution: %sx%s" % (self.width, self.height))
         self._config = KlipperScreenConfig()
         self.init_style()
         self.printer = Printer({
@@ -83,14 +90,6 @@ class KlipperScreen(Gtk.Window):
 
         self.apiclient = KlippyRest("127.0.0.1",7125)
         Gtk.Window.__init__(self)
-
-        self.width = Gdk.Screen.get_width(Gdk.Screen.get_default())
-        self.height = Gdk.Screen.get_height(Gdk.Screen.get_default())
-        self.set_default_size(self.width, self.height)
-        self.set_resizable(False)
-        self.version = get_software_version()
-        logger.info("KlipperScreen version: %s" % self.version)
-        logger.info("Screen resolution: %sx%s" % (self.width, self.height))
 
         #self._load_panels()
 
