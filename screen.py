@@ -365,7 +365,7 @@ class KlipperScreen(Gtk.Window):
             logger.debug("Filelist changed: %s", json.dumps(data,indent=2))
             #self.files.add_file()
         elif action == "notify_metadata_update":
-            self.files.update_metadata(data['filename'])
+            self.files.request_metadata(data['filename'])
         elif action == "notify_power_changed":
             logger.debug("Power status changed: %s", data)
             self.printer.process_power_update(data)
