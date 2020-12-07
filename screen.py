@@ -244,7 +244,7 @@ class KlipperScreen(Gtk.Window):
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        dialog = KlippyGtk.Dialog(self,  buttons, label, self.error_modal_response)
+        dialog = self.gtk.Dialog(self,  buttons, label, self.error_modal_response)
 
     def error_modal_response(self, widget, response_id):
         widget.destroy()
@@ -395,7 +395,7 @@ class KlipperScreen(Gtk.Window):
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        dialog = KlippyGtk.Dialog(self, buttons, label, self._confirm_send_action_response,  method, params)
+        dialog = self.gtk.Dialog(self, buttons, label, self._confirm_send_action_response,  method, params)
 
     def _confirm_send_action_response(self, widget, response_id, method, params):
         if response_id == Gtk.ResponseType.OK:
