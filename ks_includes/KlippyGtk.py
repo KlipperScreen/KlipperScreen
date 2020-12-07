@@ -1,30 +1,61 @@
 # -*- coding: utf-8 -*-
 import gi
+import logging
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GdkPixbuf, GLib
 import os
 klipperscreendir = os.getcwd()
 
+logger = logging.getLogger("KlipperScreen.KlippyGtk")
+
 class KlippyGtk:
     labels = {}
+    font_ratio = 51
+    width_ratio = 16
+    height_ratio = 9.375
 
-    @staticmethod
-    def Label(label, style):
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+        self.font_size = int(round(self.width / self.font_ratio))
+        self.header_size = int(round((self.width / self.width_ratio) / 1.33))
+        self.img_width = int(round(self.width / self.width_ratio))
+        self.img_height = int(round(self.height / self.height_ratio))
+        self.header_image_scale_width = .625
+        self.header_image_scale_height = .625
+
+        logger.debug("img width: %s height: %s" % (self.img_width, self.img_height))
+
+    def get_header_size(self):
+        return self.header_size
+
+    def get_header_image_scale(self):
+        return [self.header_image_scale_width, self.header_image_scale_height]
+
+    def get_image_width(self):
+        return self.img_width
+
+    def get_image_height(self):
+        return self.img_height
+
+    def get_font_size(self):
+        return self.font_size
+
+    def Label(self, label, style):
         l = Gtk.Label(label)
         if style != False:
             l.get_style_context().add_class(style)
         return l
 
-    @staticmethod
-    def ImageLabel(image_name, text, size=20, style=False):
+    def ImageLabel(self, image_name, text, size=20, style=False, width_scale=.32, height_scale=.32):
         box1 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=15)
-        image = Gtk.Image()
-        #TODO: update file reference
-        image.set_from_file(klipperscreendir + "/styles/z-bolt/images/" + str(image_name) + ".svg")
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+            "%s/styles/z-bolt/images/%s.svg" % (klipperscreendir, str(image_name)),
+            int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
 
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(klipperscreendir + "/styles/z-bolt/images/" + str(image_name) + ".svg", 20, 20, True)
-        image.set_from_pixbuf(pixbuf)
+        image = Gtk.Image.new_from_pixbuf(pixbuf)
 
         label = Gtk.Label()
         label.set_text(text)
@@ -37,35 +68,26 @@ class KlippyGtk:
 
         return {"l": label, "b": box1}
 
-    @staticmethod
-    def Image(image_name, style=False, width=None, height=None):
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file(klipperscreendir + "/styles/z-bolt/images/" + str(image_name) + ".svg")
-
-        if height != None and width != None:
-            pixbuf = pixbuf.scale_simple(width, height, GdkPixbuf.InterpType.BILINEAR)
+    def Image(self, image_name, style=False, width_scale=1, height_scale=1):
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+            "%s/styles/z-bolt/images/%s.svg" % (klipperscreendir, str(image_name)),
+            int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
 
         return Gtk.Image.new_from_pixbuf(pixbuf)
 
-    @staticmethod
-    def ImageFromFile(filename, style=False, width=None, height=None):
-        if height != -1 or width != -1:
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename, width, height, True)
-        else:
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file(filename)
+    def ImageFromFile(self, filename, style=False, width_scale=1, height_scale=1):
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename,
+            int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
 
         return Gtk.Image.new_from_pixbuf(pixbuf)
 
-    @staticmethod
-    def PixbufFromFile(filename, style=False, width=None, height=None):
-        if height != -1 or width != -1:
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename, width, height, True)
-        else:
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file(filename)
+    def PixbufFromFile(self, filename, style=False, width_scale=1, height_scale=1):
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename, int(round(self.img_width * width_scale)),
+            int(round(self.img_height * height_scale)), True)
 
         return pixbuf
 
-    @staticmethod
-    def ProgressBar(style=False):
+    def ProgressBar(self, style=False):
         bar = Gtk.ProgressBar()
 
         if style != False:
@@ -74,8 +96,7 @@ class KlippyGtk:
 
         return bar
 
-    @staticmethod
-    def Button(label=None, style=None):
+    def Button(self, label=None, style=None):
         b = Gtk.Button(label=label)
         b.set_hexpand(True)
         b.set_vexpand(True)
@@ -87,13 +108,14 @@ class KlippyGtk:
 
         return b
 
-    @staticmethod
-    def ButtonImage(image_name, label=None, style=None, height=None, width=None):
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file(klipperscreendir + "/styles/z-bolt/images/" + str(image_name) + ".svg")
-
-        if height != None and width != None:
-            pixbuf = pixbuf.scale_simple(width, height, GdkPixbuf.InterpType.BILINEAR)
-
+    def ButtonImage(self, image_name, label=None, style=None, width_scale=1, height_scale=1):
+        filename = "%s/styles/z-bolt/images/%s.svg" % (klipperscreendir, str(image_name))
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+            filename,
+            int(round(self.img_width * width_scale)),
+            int(round(self.img_height * height_scale)),
+            True
+        )
 
         img = Gtk.Image.new_from_pixbuf(pixbuf)
 
@@ -111,8 +133,7 @@ class KlippyGtk:
 
         return b
 
-    @staticmethod
-    def Dialog(screen, buttons, content, callback=None, *args):
+    def Dialog(self, screen, buttons, content, callback=None, *args):
         dialog = Gtk.Dialog()
         dialog.set_default_size(screen.width - 15, screen.height - 15)
         dialog.set_resizable(False)
@@ -144,9 +165,16 @@ class KlippyGtk:
         return dialog, grid
 
 
-    @staticmethod
-    def ToggleButtonImage(image_name, label, style=False):
-        img = Gtk.Image.new_from_file(klipperscreendir + "/styles/z-bolt/images/" + str(image_name) + ".svg")
+    def ToggleButtonImage(self, image_name, label, style=False, width_scale=1, height_scale=1):
+        filename = "%s/styles/z-bolt/images/%s.svg" % (klipperscreendir, str(image_name))
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+            filename,
+            int(round(self.img_width * width_scale)),
+            int(round(self.img_height * height_scale)),
+            True
+        )
+
+        img = Gtk.Image.new_from_pixbuf(pixbuf)
 
         b = Gtk.ToggleButton(label=label)
         #b.props.relief = Gtk.RELIEF_NONE
@@ -164,8 +192,7 @@ class KlippyGtk:
 
         return b
 
-    @staticmethod
-    def HomogeneousGrid(width=None, height=None):
+    def HomogeneousGrid(self, width=None, height=None):
         g = Gtk.Grid()
         g.set_row_homogeneous(True)
         g.set_column_homogeneous(True)
@@ -173,16 +200,14 @@ class KlippyGtk:
             g.set_size_request(width, height)
         return g
 
-    @staticmethod
-    def ToggleButton(text):
+    def ToggleButton(self, text):
         b = Gtk.ToggleButton(text)
         b.props.relief = Gtk.ReliefStyle.NONE
         b.set_hexpand(True)
         b.set_vexpand(True)
         return b
 
-    @staticmethod
-    def formatFileName(name):
+    def formatFileName(self, name):
         name = name.split('/')[-1] if "/" in name else name
         name = name.split('.gcod')[0] if ".gcode" in name else name
         if len(name) > 25:
@@ -190,8 +215,7 @@ class KlippyGtk:
         return name
 
 
-    @staticmethod
-    def formatTimeString(seconds):
+    def formatTimeString(self, seconds):
         time = int(seconds)
         text = ""
         if int(time/3600) !=0:
@@ -199,8 +223,7 @@ class KlippyGtk:
         text += str(int(time/60)%60)+"m "+str(time%60)+"s"
         return text
 
-    @staticmethod
-    def formatTemperatureString(temp, target):
+    def formatTemperatureString(self, temp, target):
         if (target > temp-2 and target < temp+2) or round(target,0) == 0:
             return str(round(temp,2)) + "°C" #°C →"
         return str(round(temp)) + " → " + str(round(target)) + "°C"

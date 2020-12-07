@@ -4,7 +4,6 @@ import logging
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
 
-from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
@@ -28,15 +27,15 @@ class ExtrudePanel(ScreenPanel):
             _("Fast"): "1400"
         }
 
-        grid = KlippyGtk.HomogeneousGrid()
+        grid = self._gtk.HomogeneousGrid()
 
-        self.labels['tool0'] = KlippyGtk.ButtonImage("extruder-1",_("Tool 1"),"color1")
+        self.labels['tool0'] = self._gtk.ButtonImage("extruder-1",_("Tool 1"),"color1")
         self.labels['tool0'].get_style_context().add_class("button_active")
-        self.labels['extrude'] = KlippyGtk.ButtonImage("extrude",_("Extrude"),"color3")
+        self.labels['extrude'] = self._gtk.ButtonImage("extrude",_("Extrude"),"color3")
         self.labels['extrude'].connect("clicked", self.extrude, "+")
-        self.labels['retract'] = KlippyGtk.ButtonImage("retract",_("Retract"),"color2")
+        self.labels['retract'] = self._gtk.ButtonImage("retract",_("Retract"),"color2")
         self.labels['retract'].connect("clicked", self.extrude, "-")
-        self.labels['temperature'] = KlippyGtk.ButtonImage("heat-up",_("Temperature"),"color4")
+        self.labels['temperature'] = self._gtk.ButtonImage("heat-up",_("Temperature"),"color4")
         self.labels['temperature'].connect("clicked", self.menu_item_clicked, "temperature", {
             "name": "Temperature",
             "panel": "temperature"
@@ -52,7 +51,7 @@ class ExtrudePanel(ScreenPanel):
         distgrid = Gtk.Grid()
         j = 0;
         for i in self.distances:
-            self.labels["dist"+str(i)] = KlippyGtk.ToggleButton(i)
+            self.labels["dist"+str(i)] = self._gtk.ToggleButton(i)
             self.labels["dist"+str(i)].connect("clicked", self.change_distance, i)
             ctx = self.labels["dist"+str(i)].get_style_context()
             if j == 0:
@@ -70,7 +69,7 @@ class ExtrudePanel(ScreenPanel):
         speedgrid = Gtk.Grid()
         j = 0;
         for i in self.speeds:
-            self.labels["speed"+str(i)] = KlippyGtk.ToggleButton(i)
+            self.labels["speed"+str(i)] = self._gtk.ToggleButton(i)
             self.labels["speed"+str(i)].connect("clicked", self.change_speed, i)
             ctx = self.labels["speed"+str(i)].get_style_context()
             if j == 0:

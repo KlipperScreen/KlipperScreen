@@ -5,7 +5,6 @@ import os
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
 
-from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
@@ -18,11 +17,11 @@ class SystemPanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
 
-        grid = KlippyGtk.HomogeneousGrid()
+        grid = self._gtk.HomogeneousGrid()
 
-        restart = KlippyGtk.ButtonImage('reboot',_('Klipper Restart'),'color1')
+        restart = self._gtk.ButtonImage('reboot',_('Klipper Restart'),'color1')
         restart.connect("clicked", self.restart_klippy)
-        firmrestart = KlippyGtk.ButtonImage('restart',_('Firmware Restart'),'color2')
+        firmrestart = self._gtk.ButtonImage('restart',_('Firmware Restart'),'color2')
         firmrestart.connect("clicked", self.restart_klippy, "firmware")
 
         info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)

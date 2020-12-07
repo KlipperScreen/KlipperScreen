@@ -42,6 +42,9 @@ class KlipperScreenConfig:
         logger.info("Found configuration file at: %s" % file)
         return file
 
+    def get_main_config(self):
+        return self.config['main']
+
     def get_main_config_option(self, option, default=None):
         return self.config['main'].get(option, default)
 

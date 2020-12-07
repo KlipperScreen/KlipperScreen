@@ -6,7 +6,6 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
 from datetime import datetime
 
-from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
@@ -26,10 +25,6 @@ class PrintPanel(ScreenPanel):
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         box.set_vexpand(True)
         box.pack_start(scroll, True, True, 0)
-
-        refresh = KlippyGtk.ButtonImage('refresh', None, None, 60, 60)
-        refresh.connect("clicked", self.reload_files)
-        #bar.add(refresh)
 
         self.labels['filelist'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.labels['filelist'].set_vexpand(True)
@@ -57,6 +52,7 @@ class PrintPanel(ScreenPanel):
 
         frame = Gtk.Frame()
         frame.set_property("shadow-type",Gtk.ShadowType.NONE)
+        frame.get_style_context().add_class("frame-item")
 
 
         name = Gtk.Label()
@@ -78,20 +74,16 @@ class PrintPanel(ScreenPanel):
         labels.set_valign(Gtk.Align.CENTER)
         labels.set_halign(Gtk.Align.START)
 
-        actions = KlippyGtk.ButtonImage("print",None,"color3")
+        actions = self._gtk.ButtonImage("print",None,"color3")
         actions.connect("clicked", self.confirm_print, filename)
         actions.set_hexpand(False)
         actions.set_halign(Gtk.Align.END)
 
         file = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        file.set_margin_top(1)
-        file.set_margin_end(15)
-        file.set_margin_start(15)
-        file.set_margin_bottom(1)
         file.set_hexpand(True)
         file.set_vexpand(False)
 
-        icon = KlippyGtk.Image("file", False, 100, 100)
+        icon = self._gtk.Image("file", False, 1.6, 1.6)
         pixbuf = self.get_file_image(filename)
         if pixbuf != None:
             icon.set_from_pixbuf(pixbuf)
@@ -115,14 +107,14 @@ class PrintPanel(ScreenPanel):
         self.labels['filelist'].attach(self.files[filename], 0, pos, 1, 1)
         self.labels['filelist'].show_all()
 
-    def get_file_image(self, filename, width=100, height=100):
+    def get_file_image(self, filename, width=1.6, height=1.6):
         fileinfo = self._screen.files.get_file_info(filename)
         if fileinfo == None:
             return None
 
         if "thumbnails" in fileinfo and len(fileinfo["thumbnails"]) > 0:
             thumbnail = fileinfo['thumbnails'][0]
-            return KlippyGtk.PixbufFromFile("/tmp/.KS-thumbnails/%s-%s" % (fileinfo['filename'], thumbnail['size']),
+            return self._gtk.PixbufFromFile("/tmp/.KS-thumbnails/%s-%s" % (fileinfo['filename'], thumbnail['size']),
                 None, width, height)
         return None
 
@@ -219,16 +211,14 @@ class PrintPanel(ScreenPanel):
         label.set_halign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-        label.get_style_context().add_class("text")
 
         grid = Gtk.Grid()
         grid.add(label)
         grid.set_size_request(self._screen.width - 60, -1)
 
-        pixbuf = self.get_file_image(filename, self._screen.width/2, self._screen.height/3)
+        pixbuf = self.get_file_image(filename, 8, 3.2)
         if pixbuf != None:
             image = Gtk.Image.new_from_pixbuf(pixbuf)
-            image.set_margin_top(20)
             grid.attach_next_to(image, label, Gtk.PositionType.BOTTOM, 1, 3)
 
         #table.attach(label, 0, 1, 0, 1, Gtk.AttachOptions.SHRINK | Gtk.AttachOptions.FILL)
@@ -236,7 +226,7 @@ class PrintPanel(ScreenPanel):
         grid.set_halign(Gtk.Align.CENTER)
         grid.set_valign(Gtk.Align.CENTER)
 
-        dialog = KlippyGtk.Dialog(self._screen, buttons, grid, self.confirm_print_response,  filename)
+        dialog = self._gtk.Dialog(self._screen, buttons, grid, self.confirm_print_response,  filename)
 
     def confirm_print_response(self, widget, response_id, filename):
         widget.destroy()

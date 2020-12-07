@@ -3,7 +3,6 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
 
-from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
@@ -24,7 +23,7 @@ class ZCalibratePanel(ScreenPanel):
 
     def initialize(self, panel_name):
         _ = self.lang.gettext
-        grid = KlippyGtk.HomogeneousGrid()
+        grid = self._gtk.HomogeneousGrid()
 
         label = Gtk.Label(_("Z Offset") + ": \n")
         self.labels['zposition'] = Gtk.Label(_("Homing"))
@@ -35,15 +34,15 @@ class ZCalibratePanel(ScreenPanel):
         box.add(label)
         box.add(self.labels['zposition'])
 
-        zpos = KlippyGtk.ButtonImage('z-offset-decrease',_("Raise Nozzle"))
+        zpos = self._gtk.ButtonImage('z-offset-decrease',_("Raise Nozzle"))
         zpos.connect("clicked", self.move, "+")
-        zneg = KlippyGtk.ButtonImage('z-offset-increase',_("Lower Nozzle"))
+        zneg = self._gtk.ButtonImage('z-offset-increase',_("Lower Nozzle"))
         zneg.connect("clicked", self.move, "-")
 
         distgrid = Gtk.Grid()
         j = 0;
         for i in self.distances:
-            self.labels[i] = KlippyGtk.ToggleButton(i)
+            self.labels[i] = self._gtk.ToggleButton(i)
             self.labels[i].connect("clicked", self.change_distance, i)
             ctx = self.labels[i].get_style_context()
             if j == 0:
@@ -59,16 +58,16 @@ class ZCalibratePanel(ScreenPanel):
 
         self.labels["1"].set_active(True)
 
-        space_grid = KlippyGtk.HomogeneousGrid()
+        space_grid = self._gtk.HomogeneousGrid()
         space_grid.set_row_homogeneous(False)
         space_grid.attach(Gtk.Label(_("Distance (mm)") + ":"),0,0,1,1)
         space_grid.attach(distgrid,0,1,1,1)
         space_grid.attach(Gtk.Label(" "),0,2,1,1)
 
-        complete = KlippyGtk.ButtonImage('complete',_('Accept'),'color2')
+        complete = self._gtk.ButtonImage('complete',_('Accept'),'color2')
         complete.connect("clicked", self.accept)
 
-        b = KlippyGtk.ButtonImage('back', _('Abort'))
+        b = self._gtk.ButtonImage('back', _('Abort'))
         b.connect("clicked", self.abort)
 
 

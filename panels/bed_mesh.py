@@ -4,7 +4,6 @@ import logging
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
 
-from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
@@ -71,25 +70,25 @@ class BedMeshPanel(ScreenPanel):
         name.set_line_wrap(True)
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        load = KlippyGtk.ButtonImage("load",None,"color2")
+        load = self._gtk.ButtonImage("load","Load","color2")
         load.connect("clicked", self.send_load_mesh, profile)
         load.set_size_request(60,0)
         load.set_hexpand(False)
         load.set_halign(Gtk.Align.END)
 
-        refresh = KlippyGtk.ButtonImage("refresh",None,"color4")
+        refresh = self._gtk.ButtonImage("refresh","Calibrate","color4")
         refresh.connect("clicked", self.calibrate_mesh)
         refresh.set_size_request(60,0)
         refresh.set_hexpand(False)
         refresh.set_halign(Gtk.Align.END)
 
-        info = KlippyGtk.ButtonImage("info",None,"color3")
+        info = self._gtk.ButtonImage("info",None,"color3")
         info.connect("clicked", self.show_mesh, profile)
         info.set_size_request(60,0)
         info.set_hexpand(False)
         info.set_halign(Gtk.Align.END)
 
-        save = KlippyGtk.ButtonImage("sd",None,"color3")
+        save = self._gtk.ButtonImage("sd","Save","color3")
         save.connect("clicked", self.send_save_mesh, profile)
         save.set_size_request(60,0)
         save.set_hexpand(False)
@@ -153,7 +152,6 @@ class BedMeshPanel(ScreenPanel):
     def process_update(self, action, data):
         if action == "notify_status_update":
             if "bed_mesh" in data and "profile_name" in data['bed_mesh']:
-                logger.debug("bed_mesh: %s" % data)
                 if data['bed_mesh']['profile_name'] != self.active_mesh:
                     self.activate_mesh(data['bed_mesh']['profile_name'])
 
@@ -173,7 +171,7 @@ class BedMeshPanel(ScreenPanel):
         buttons = [
             {"name": _("Close"), "response": Gtk.ResponseType.CANCEL}
         ]
-        dialog = KlippyGtk.Dialog(self._screen, buttons, self.graphs[profile], self._close_dialog)
+        dialog = self._gtk.Dialog(self._screen, buttons, self.graphs[profile], self._close_dialog)
 
     def _close_dialog(self, widget, response):
         widget.destroy()

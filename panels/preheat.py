@@ -4,7 +4,6 @@ import logging
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
 
-from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.PreheatPanel")
@@ -20,30 +19,30 @@ class PreheatPanel(ScreenPanel):
         self.preheat_options = self._screen._config.get_preheat_options()
         logger.debug("Preheat options: %s" % self.preheat_options)
 
-        grid = KlippyGtk.HomogeneousGrid()
+        grid = self._gtk.HomogeneousGrid()
 
-        eq_grid = KlippyGtk.HomogeneousGrid()
+        eq_grid = self._gtk.HomogeneousGrid()
         i = 0
         for x in self._printer.get_tools():
             if i > 3:
                 break
             elif i == 0:
                 primary_tool = x
-            self.labels[x] = KlippyGtk.ToggleButtonImage("extruder-"+str(i+1), KlippyGtk.formatTemperatureString(0, 0))
+            self.labels[x] = self._gtk.ToggleButtonImage("extruder-"+str(i+1), self._gtk.formatTemperatureString(0, 0))
             self.labels[x].connect('clicked', self.select_heater, x)
             eq_grid.attach(self.labels[x], i%2, i/2, 1, 1)
             i += 1
 
-        self.labels["heater_bed"] = KlippyGtk.ToggleButtonImage("bed", KlippyGtk.formatTemperatureString(0, 0))
+        self.labels["heater_bed"] = self._gtk.ToggleButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
         self.labels["heater_bed"].connect('clicked', self.select_heater, "heater_bed")
         width = 2 if i > 1 else 1
         eq_grid.attach(self.labels["heater_bed"], 0, i/2+1, width, 1)
 
-        self.labels["control_grid"] = KlippyGtk.HomogeneousGrid()
+        self.labels["control_grid"] = self._gtk.HomogeneousGrid()
 
         i = 0
         for option in  self.preheat_options:
-            self.labels[option] = KlippyGtk.Button(option, "color%d" % ((i%4)+1))
+            self.labels[option] = self._gtk.Button(option, "color%d" % ((i%4)+1))
             self.labels[option].connect("clicked", self.set_temperature, option)
             self.labels['control_grid'].attach(
                 self.labels[option],
@@ -51,7 +50,7 @@ class PreheatPanel(ScreenPanel):
             i += 1
 
 
-        cooldown = KlippyGtk.ButtonImage('cool-down', _('Cooldown'))
+        cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'))
         cooldown.connect("clicked", self.set_temperature, "cooldown")
 
         row = int(i/2) if i%2 == 0 else int(i/2)+1

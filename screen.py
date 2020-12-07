@@ -63,16 +63,9 @@ class KlipperScreen(Gtk.Window):
     shutdown = True
 
     def __init__(self):
-        Gtk.Window.__init__(self)
-        self.width = Gdk.Screen.get_width(Gdk.Screen.get_default())
-        self.height = Gdk.Screen.get_height(Gdk.Screen.get_default())
-        self.set_default_size(self.width, self.height)
-        self.set_resizable(False)
         self.version = get_software_version()
         logger.info("KlipperScreen version: %s" % self.version)
-        logger.info("Screen resolution: %sx%s" % (self.width, self.height))
         self._config = KlipperScreenConfig()
-        self.init_style()
         self.printer = Printer({
             "software_version": "Unknown"
         }, {
@@ -90,6 +83,15 @@ class KlipperScreen(Gtk.Window):
         _ = self.lang.gettext
 
         self.apiclient = KlippyRest("127.0.0.1",7125)
+        Gtk.Window.__init__(self)
+        self.width = self._config.get_main_config().getint("width", Gdk.Screen.get_width(Gdk.Screen.get_default()))
+        self.height = self._config.get_main_config().getint("height", Gdk.Screen.get_height(Gdk.Screen.get_default()))
+        self.set_default_size(self.width, self.height)
+        self.set_resizable(False)
+        logger.info("Screen resolution: %sx%s" % (self.width, self.height))
+
+        self.gtk = KlippyGtk(self.width, self.height)
+        self.init_style()
 
         #self._load_panels()
 
@@ -189,7 +191,7 @@ class KlipperScreen(Gtk.Window):
 
         box = Gtk.Box()
         box.get_style_context().add_class("message_popup")
-        box.set_size_request(self.width, 50)
+        box.set_size_request(self.width, self.gtk.get_header_size())
         label = Gtk.Label()
         if "must home axis first" in message.lower():
             message = "Must home all axis first."
@@ -200,8 +202,8 @@ class KlipperScreen(Gtk.Window):
         close.props.relief = Gtk.ReliefStyle.NONE
         close.connect("clicked", self.close_popup_message)
 
-        box.pack_start(label, True, True, 10)
-        box.pack_end(close, False, False, 10)
+        box.pack_start(label, True, True, 0)
+        box.pack_end(close, False, False, 0)
         box.set_halign(Gtk.Align.CENTER)
 
         cur_panel = self.panels[self._cur_panels[-1]]
@@ -244,9 +246,8 @@ class KlipperScreen(Gtk.Window):
         label.set_halign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-        label.get_style_context().add_class("text")
 
-        dialog = KlippyGtk.Dialog(self,  buttons, label, self.error_modal_response)
+        dialog = self.gtk.Dialog(self,  buttons, label, self.error_modal_response)
 
     def error_modal_response(self, widget, response_id):
         widget.destroy()
@@ -254,7 +255,15 @@ class KlipperScreen(Gtk.Window):
 
     def init_style(self):
         style_provider = Gtk.CssProvider()
-        style_provider.load_from_path(klipperscreendir + "/style.css")
+        #style_provider.load_from_path(klipperscreendir + "/style.css")
+
+        css = open(klipperscreendir + "/styles/style.css")
+        css_data = css.read()
+        css.close()
+        css_data = css_data.replace("KS_FONT_SIZE",str(self.gtk.get_font_size()))
+
+        style_provider = Gtk.CssProvider()
+        style_provider.load_from_data(css_data.encode())
 
         Gtk.StyleContext.add_provider_for_screen(
             Gdk.Screen.get_default(),
@@ -388,9 +397,8 @@ class KlipperScreen(Gtk.Window):
         label.set_halign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-        label.get_style_context().add_class("text")
 
-        dialog = KlippyGtk.Dialog(self, buttons, label, self._confirm_send_action_response,  method, params)
+        dialog = self.gtk.Dialog(self, buttons, label, self._confirm_send_action_response,  method, params)
 
     def _confirm_send_action_response(self, widget, response_id, method, params):
         if response_id == Gtk.ResponseType.OK:

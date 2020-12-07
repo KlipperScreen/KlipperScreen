@@ -4,7 +4,6 @@ import logging
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
 
-from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
@@ -21,16 +20,16 @@ class TemperaturePanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
 
-        grid = KlippyGtk.HomogeneousGrid()
+        grid = self._gtk.HomogeneousGrid()
 
-        eq_grid = KlippyGtk.HomogeneousGrid()
+        eq_grid = self._gtk.HomogeneousGrid()
         i = 0
         for x in self._printer.get_tools():
             if i > 3:
                 break
             elif i == 0:
                 primary_tool = x
-            self.labels[x] = KlippyGtk.ToggleButtonImage("extruder-"+str(i+1), KlippyGtk.formatTemperatureString(0, 0))
+            self.labels[x] = self._gtk.ToggleButtonImage("extruder-"+str(i+1), self._gtk.formatTemperatureString(0, 0))
             self.labels[x].connect('clicked', self.select_heater, x)
             if i == 0:
                 self.labels[x].set_active(True)
@@ -40,24 +39,24 @@ class TemperaturePanel(ScreenPanel):
         print ("Primary tool: " + primary_tool)
         self.labels[primary_tool].get_style_context().add_class('button_active')
 
-        self.labels["heater_bed"] = KlippyGtk.ToggleButtonImage("bed", KlippyGtk.formatTemperatureString(0, 0))
+        self.labels["heater_bed"] = self._gtk.ToggleButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
         self.labels["heater_bed"].connect('clicked', self.select_heater, "heater_bed")
         width = 2 if i > 1 else 1
         eq_grid.attach(self.labels["heater_bed"], 0, i/2+1, width, 1)
 
-        self.labels["control_grid"] = KlippyGtk.HomogeneousGrid()
+        self.labels["control_grid"] = self._gtk.HomogeneousGrid()
 
-        self.labels["increase"] = KlippyGtk.ButtonImage("increase", _("Increase"), "color1")
+        self.labels["increase"] = self._gtk.ButtonImage("increase", _("Increase"), "color1")
         self.labels["increase"].connect("clicked",self.change_target_temp, "+")
-        self.labels["decrease"] = KlippyGtk.ButtonImage("decrease", _("Decrease"), "color3")
+        self.labels["decrease"] = self._gtk.ButtonImage("decrease", _("Decrease"), "color3")
         self.labels["decrease"].connect("clicked",self.change_target_temp, "-")
-        self.labels["npad"] = KlippyGtk.ButtonImage("settings", _("Number Pad"), "color2")
+        self.labels["npad"] = self._gtk.ButtonImage("settings", _("Number Pad"), "color2")
         self.labels["npad"].connect("clicked", self.show_numpad)
 
         tempgrid = Gtk.Grid()
         j = 0;
         for i in self.tempdeltas:
-            self.labels['deg'+ i] = KlippyGtk.ToggleButton(i)
+            self.labels['deg'+ i] = self._gtk.ToggleButton(i)
             self.labels['deg'+ i].connect("clicked", self.change_temp_delta, i)
             ctx = self.labels['deg'+ i].get_style_context()
             if j == 0:
@@ -111,7 +110,7 @@ class TemperaturePanel(ScreenPanel):
     def show_numpad(self, widget):
         _ = self.lang.gettext
 
-        numpad = KlippyGtk.HomogeneousGrid()
+        numpad = self._gtk.HomogeneousGrid()
 
         keys = [
             ['1','numpad_tleft'],
@@ -130,9 +129,9 @@ class TemperaturePanel(ScreenPanel):
         for i in range(len(keys)):
             id = 'button_' + str(keys[i][0])
             if keys[i][0] == "B":
-                self.labels[id] = KlippyGtk.ButtonImage("backspace")
+                self.labels[id] = Gtk.Button("B") #self._gtk.ButtonImage("backspace")
             elif keys[i][0] == "E":
-                self.labels[id] = KlippyGtk.ButtonImage("complete", None, None, 40, 40)
+                self.labels[id] = Gtk.Button("E") #self._gtk.ButtonImage("complete", None, None, .675, .675)
             else:
                 self.labels[id] = Gtk.Button(keys[i][0])
             self.labels[id].connect('clicked', self.update_entry, keys[i][0])
@@ -140,17 +139,14 @@ class TemperaturePanel(ScreenPanel):
             ctx.add_class(keys[i][1])
             numpad.attach(self.labels[id], i%3, i/3, 1, 1)
 
-        self.labels["keypad"] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=3)
+        self.labels["keypad"] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.labels['entry'] = Gtk.Entry()
         self.labels['entry'].props.xalign = 0.5
         ctx = self.labels['entry'].get_style_context()
-        ctx.add_class('temperature_entry')
 
-        b = KlippyGtk.ButtonImage('back', _('Close'))
+        b = self._gtk.ButtonImage('back', _('Close'))
         b.connect("clicked", self.hide_numpad)
 
-        #numpad.attach(b, 0, 5, 3, 1)
-        #numpad.attach(self.labels['entry'], 0, 0, 3, 1)
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.add(self.labels['entry'])
         box.add(numpad)
@@ -159,7 +155,6 @@ class TemperaturePanel(ScreenPanel):
         self.labels["keypad"] = numpad
 
         self.grid.remove_column(1)
-        #self.grid.attach(self.labels["keypad"], 1, 0, 1, 1)
         self.grid.attach(box, 1, 0, 1, 1)
         self.grid.show_all()
 
