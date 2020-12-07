@@ -48,19 +48,19 @@ logger.info("Config file: " + config)
 
 class KlipperScreen(Gtk.Window):
     """ Class for creating a screen for Klipper via HDMI """
-    currentPanel = None
-    bed_temp_label = None
-    number_tools = 1
-
-    panels = {}
-    load_panel = {}
     _cur_panels = []
+    bed_temp_label = None
+    currentPanel = None
     files = None
     filename = ""
-    subscriptions = []
     last_update = {}
-    shutdown = True
+    load_panel = {}
+    number_tools = 1
+    panels = {}
+    popup_message = None
     printer = None
+    subscriptions = []
+    shutdown = True
 
     def __init__(self):
         Gtk.Window.__init__(self)
@@ -184,6 +184,9 @@ class KlipperScreen(Gtk.Window):
         logger.debug("Current panel hierarchy: %s", str(self._cur_panels))
 
     def show_popup_message(self, message):
+        if self.popup_message != None:
+            self.close_popup_message()
+
         box = Gtk.Box()
         box.get_style_context().add_class("message_popup")
         box.set_size_request(self.width, 50)
@@ -400,6 +403,7 @@ class KlipperScreen(Gtk.Window):
 
     def printer_initializing(self, text=None):
         self.shutdown = True
+        self.close_popup_message()
         self.show_panel('splash_screen',"splash_screen", "Splash Screen", 2)
         if text != None:
             self.panels['splash_screen'].update_text(text)
@@ -461,12 +465,14 @@ class KlipperScreen(Gtk.Window):
             return
 
         self.files.add_timeout()
+        self.close_popup_message()
         self.show_panel('main_panel', "main_menu", "Main Menu", 2, items=self._config.get_menu_items("__main"),
             extrudercount=self.printer.get_extruder_count())
 
     def printer_printing(self):
         self.ws_subscribe()
         self.files.remove_timeout()
+        self.close_popup_message()
         self.show_panel('job_status',"job_status", "Print Status", 2)
 
 def get_software_version():
