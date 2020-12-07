@@ -79,13 +79,13 @@ class BedLevelPanel(ScreenPanel):
             logger.debug("Configured screw locations [x,y]: %s", screws)
 
 
-        self.labels['bl'] = self._gtk.ButtonImage("bed-level-t-l", None, None, )
+        self.labels['bl'] = self._gtk.ButtonImage("bed-level-t-l", None, None, 3, 3)
         self.labels['bl'].connect("clicked", self.go_to_position, self.screws[2])
-        self.labels['br'] = self._gtk.ButtonImage("bed-level-t-r")
+        self.labels['br'] = self._gtk.ButtonImage("bed-level-t-r", None, None, 3, 3)
         self.labels['br'].connect("clicked", self.go_to_position, self.screws[3])
-        self.labels['fl'] = self._gtk.ButtonImage("bed-level-b-l")
+        self.labels['fl'] = self._gtk.ButtonImage("bed-level-b-l", None, None, 3, 3)
         self.labels['fl'].connect("clicked", self.go_to_position, self.screws[0])
-        self.labels['fr'] = self._gtk.ButtonImage("bed-level-b-r")
+        self.labels['fr'] = self._gtk.ButtonImage("bed-level-b-r", None, None, 3, 3)
         self.labels['fr'].connect("clicked", self.go_to_position, self.screws[1])
 
         grid.attach(self.labels['bl'], 1, 0, 1, 1)
