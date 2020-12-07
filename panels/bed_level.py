@@ -45,7 +45,7 @@ class BedLevelPanel(ScreenPanel):
 
             screws = sorted(screws, key=lambda x: (float(x[1]), float(x[0])))
             logger.debug("Bed screw locations [x,y]: %s", screws)
-            if ("bltouch" in self._screen.printer.get_config_section_list() and 
+            if ("bltouch" in self._screen.printer.get_config_section_list() and
                     config_section_name == "screws_tilt_adjust"):
                 x_offset = 0
                 y_offset = 0
@@ -158,7 +158,7 @@ class BedLevelPanel(ScreenPanel):
                         break
                 self.labels[screw_labels[i]].set_label(result.group(4))
                 self.response_count += 1
-                if self.response_count >= len(self.screws-1):
+                if self.response_count >= len(self.screws)-1:
                     self._screen.remove_subscription(self.panel_name)
 
 
