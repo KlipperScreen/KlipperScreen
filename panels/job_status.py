@@ -17,7 +17,10 @@ class JobStatusPanel(ScreenPanel):
 
     def initialize(self, panel_name):
         _ = self.lang.gettext
+        self.layout = Gtk.Layout()
+        self.layout.set_size(self._screen.width, self._screen.height)
         grid = self._gtk.HomogeneousGrid()
+        grid.set_size_request(self._screen.width, self._screen.height)
 
         self.labels['progress'] = self._gtk.ProgressBar("printing-progress-bar")
         self.labels['progress'].set_show_text(False)
@@ -84,7 +87,8 @@ class JobStatusPanel(ScreenPanel):
         self.labels['control'].connect("clicked", self._screen._go_to_submenu, "")
         grid.attach(self.labels['control'], 3, 2, 1, 1)
 
-        self.layout = grid
+        self.grid = grid
+        self.layout.put(grid, 0, 0)
 
         self._screen.add_subscription(panel_name)
 
@@ -180,14 +184,14 @@ class JobStatusPanel(ScreenPanel):
         if "pause_resume" in data:
             if self.is_paused == True and data['pause_resume']['is_paused'] == False:
                 self.is_paused = False
-                self.layout.attach(self.labels['pause'], 0, 2, 1, 1)
-                self.layout.remove(self.labels['resume'])
-                self.layout.show_all()
+                self.grid.attach(self.labels['pause'], 0, 2, 1, 1)
+                self.grid.remove(self.labels['resume'])
+                self.grid.show_all()
             if self.is_paused == False and data['pause_resume']['is_paused'] == True:
                 self.is_paused = True
-                self.layout.attach(self.labels['resume'], 0, 2, 1, 1)
-                self.layout.remove(self.labels['pause'])
-                self.layout.show_all()
+                self.grid.attach(self.labels['resume'], 0, 2, 1, 1)
+                self.grid.remove(self.labels['pause'])
+                self.grid.show_all()
 
     def update_image_text(self, label, text):
         if label in self.labels and 'l' in self.labels[label]:
