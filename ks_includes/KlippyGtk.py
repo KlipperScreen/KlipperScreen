@@ -54,7 +54,8 @@ class KlippyGtk:
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
             "%s/styles/z-bolt/images/%s.svg" % (klipperscreendir, str(image_name)),
             int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
-        image.set_from_pixbuf(pixbuf)
+
+        image = Gtk.Image.new_from_pixbuf(pixbuf)
 
         label = Gtk.Label()
         label.set_text(text)
@@ -74,11 +75,9 @@ class KlippyGtk:
 
         return Gtk.Image.new_from_pixbuf(pixbuf)
 
-    def ImageFromFile(self, filename, style=False, width=None, height=None):
-        if height != -1 or width != -1:
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename, width, height, True)
-        else:
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file(filename)
+    def ImageFromFile(self, filename, style=False, width_scale=1, height_scale=1):
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename,
+            int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
 
         return Gtk.Image.new_from_pixbuf(pixbuf)
 

@@ -20,11 +20,7 @@ class JobStatusPanel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
 
         self.labels['progress'] = self._gtk.ProgressBar("printing-progress-bar")
-        #self.labels['progress'].set_vexpand(True)
-        #self.labels['progress'].set_valign(Gtk.Align.CENTER)
         self.labels['progress'].set_show_text(False)
-        #self.labels['progress'].set_margin_top(10)
-        self.labels['progress'].set_margin_end(20)
         self.labels['progress_text'] = Gtk.Label()
         self.labels['progress_text'].get_style_context().add_class("printing-progress-text")
         overlay = Gtk.Overlay()
