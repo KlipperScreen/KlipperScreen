@@ -51,12 +51,10 @@ button.file-list {
 }
 
 entry {
-	font-size: 1.5em;
+	font-size: 1em;
 	background-color: #20292F;
-	border-radius: 0;
-	padding-left: 1em;
-	margin-left: 1em;
-	padding-right: 1em;
+    border: 0;
+	padding: .25em;
 }
 
 frame {
@@ -186,7 +184,7 @@ scrollbar slider {
   border-left: .15em solid #ccc;
   border-top: .15em solid #ccc;
   margin: 0;
-  padding: 1.5em;
+  padding: 1em;
 }
 
 .numpad_right {
@@ -258,12 +256,6 @@ scrollbar slider {
   border-bottom-left-radius: .7em;
   border-bottom-right-radius: .7em;
   margin-top: 0;
-}
-
-.temperature_entry {
-  border: 0;
-  color: #fff;
-  margin: .5em .25em .25em .25em;
 }
 
 .message {

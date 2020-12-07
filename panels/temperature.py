@@ -143,7 +143,6 @@ class TemperaturePanel(ScreenPanel):
         self.labels['entry'] = Gtk.Entry()
         self.labels['entry'].props.xalign = 0.5
         ctx = self.labels['entry'].get_style_context()
-        ctx.add_class('temperature_entry')
 
         b = self._gtk.ButtonImage('back', _('Close'))
         b.connect("clicked", self.hide_numpad)
