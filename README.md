@@ -13,12 +13,13 @@ Current feature list:
  - [x] Print tuning (Z Babystepping, Speed Control, Flow Control)
  - [x] Manual bed leveling assist
  - [x] Using thumbnails from prusa on job status page
+ - [x] Scale UI based off of resolution
  - [ ] Better system panel
  - [ ] Wifi selection
- - [ ] Scale UI based off of resolution
-
 
 More details to come...
+
+[Changelog](docs/changelog.md)
 
 ### Required Hardware
 KlipperScreen should run on any HDMI touchscreen that you can connect to a computer. The required video driver may
@@ -30,3 +31,14 @@ other resolutions may not be scaled properly at this moment. UI scaling is a fut
 [Installation](docs/Installation.md)
 
 [Configuration](docs/Configuration.md)
+
+[Panels](docs/panels.md)
+
+
+### Sample Panels
+
+Main Menu
+![Main Menu](docs/img/main_panel.png)
+
+Job Status
+![Job Status](docs/img/job_status.png)
