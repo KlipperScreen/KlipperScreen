@@ -223,7 +223,7 @@ trough {
 .printing-filename {
     font-size: 1.75em;
     font-weight: bold;
-    margin: .25em 0 0 0;
+    margin: .25em .25em 0 0;
 }
 
 .printing-info {

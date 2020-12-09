@@ -38,6 +38,8 @@ class JobStatusPanel(ScreenPanel):
         self.labels['file'].set_halign(Gtk.Align.START)
         self.labels['file'].set_vexpand(False)
         self.labels['file'].get_style_context().add_class("printing-filename")
+        self.labels['file'].set_line_wrap(True)
+        self.labels['file'].set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         self.labels['status'] = Gtk.Label()
         self.labels['status'].set_halign(Gtk.Align.START)
         self.labels['status'].set_vexpand(False)
