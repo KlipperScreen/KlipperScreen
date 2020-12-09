@@ -1,5 +1,12 @@
 ## Changelog
 
+#### 2020 12 08
+* Screen Width/Height are now definable in the configuration file
+* Changed job page to allow for more information, display thumbnail of STL
+* Job page will now say a job is complete and timeout to the main menu (time changeable from the config)
+* Job page will now stay on the job page if there is an error.
+* Restart option is available upon a completed/failed job
+
 #### 2020 12 05
 * Added ability to invert Z axis in move panel
 * Fixed problem with metadata being retreived constantly

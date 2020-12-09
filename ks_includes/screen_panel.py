@@ -15,6 +15,7 @@ class ScreenPanel:
     def __init__(self, screen, title, back=True):
         self._screen = screen
         self._config = screen._config
+        self._files = screen.files
         self.lang = self._screen.lang
         self._printer = screen.printer
         self.labels = {}
@@ -62,6 +63,11 @@ class ScreenPanel:
     def get(self):
         return self.layout
 
+    def get_file_image(self, filename, width=1.6, height=1.6):
+        if not self._files.has_thumbnail(filename):
+            return None
+        return self._gtk.PixbufFromFile(self._files.get_thumbnail_location(filename), None, width, height)
+
     def home(self, widget):
         self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
 
@@ -82,6 +88,9 @@ class ScreenPanel:
 
     def set_title(self, title):
         self.title.set_label(title)
+
+    def show_all(self):
+        self._screen.show_all()
 
     def update_image_text(self, label, text):
         if label in self.labels and 'l' in self.labels[label]:

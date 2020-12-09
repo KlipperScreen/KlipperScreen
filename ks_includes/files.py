@@ -14,15 +14,16 @@ class KlippyFiles:
     callbacks = []
     filelist = []
     files = {}
-    timeout = None
     metadata_timeout = {}
+    timeout = None
+    thumbnail_dir = "/tmp/.KS-thumbnails"
 
     def __init__(self, screen):
         self._screen = screen
         self.add_timeout()
 
-        if not os.path.exists('/tmp/.KS-thumbnails'):
-            os.makedirs('/tmp/.KS-thumbnails')
+        if not os.path.exists(self.thumbnail_dir):
+            os.makedirs(self.thumbnail_dir)
         GLib.idle_add(self.ret_files, False)
 
 
@@ -71,7 +72,7 @@ class KlippyFiles:
                 self.files[params['filename']]['thumbnails'].sort(key=lambda x: x['size'], reverse=True)
 
                 for thumbnail in self.files[params['filename']]['thumbnails']:
-                    f = open("/tmp/.KS-thumbnails/%s-%s" % (params['filename'], thumbnail['size']), "wb")
+                    f = open("%s/%s-%s" % (self.thumbnail_dir, params['filename'], thumbnail['size']), "wb")
                     f.write(base64.b64decode(thumbnail['data']))
                     f.close()
             for cb in self.callbacks:
@@ -84,11 +85,33 @@ class KlippyFiles:
         if self.timeout == None:
             self.timeout = GLib.timeout_add(4000, self.ret_files)
 
+    def file_exists(self, filename):
+        return True if filename in self.filelist else False
+
+    def file_metadata_exists(self, filename):
+        if not self.file_exists(filename):
+            return False
+        if "slicer" in self.files[filename]:
+            return True
+        return False
+
+    def get_thumbnail_location(self, filename):
+        if not self.has_thumbnail(filename):
+            return None
+        return "%s/%s-%s" % (self.thumbnail_dir, filename, self.files[filename]['thumbnails'][0]['size'])
+
+    def has_thumbnail(self, filename):
+        if filename not in self.files:
+            return False
+        return "thumbnails" in self.files[filename] and len(self.files[filename]) > 0
+
     def remove_timeout(self):
         if self.timeout != None:
             self.timeout = None
 
     def request_metadata(self, filename):
+        if filename not in self.filelist:
+            return False
         if filename in self.metadata_timeout:
             GLib.source_remove(self.metadata_timeout[filename])
         self.metadata_timeout[filename] = GLib.timeout_add(

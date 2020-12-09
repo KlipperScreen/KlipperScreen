@@ -220,12 +220,38 @@ trough {
   margin: 0 .15em .15em 0;
 }
 
+.printing-filename {
+    font-size: 1.75em;
+    font-weight: bold;
+    margin: .25em 0 0 0;
+}
+
+.printing-info {
+    font-size: 1.2em;
+    margin-left: .25em;
+}
+
+.printing-info-box {
+    padding-left: .25em;
+}
+
+.printing-info-box box {
+    margin-bottom: .5em;
+}
+
+.printing-status {
+    color: #f0f0f0;
+    font-style: italic;
+    margin: 0 0 0 0;
+}
+
 .printing-progress-bar {
 	color: #00C9B4;
 }
 
 .printing-progress-text {
-	font-size: 1.25em;
+	font-size: 1.5em;
+    font-weight: bold;
 	color: #fff;
 }
 

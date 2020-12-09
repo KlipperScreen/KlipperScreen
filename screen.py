@@ -271,6 +271,9 @@ class KlipperScreen(Gtk.Window):
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
 
+    def is_printing(self):
+        return "job_status" in self._cur_panels
+
     def _go_to_submenu(self, widget, name):
         logger.info("#### Go to submenu " + str(name))
         #self._remove_current_panel(False)
@@ -355,10 +358,7 @@ class KlipperScreen(Gtk.Window):
             else:
                 active = self.printer.get_stat('virtual_sdcard','is_active')
                 paused = self.printer.get_stat('pause_resume','is_paused')
-                if "job_status" in self._cur_panels:
-                    if active == False and paused == False:
-                        self.printer_ready()
-                else:
+                if "job_status" not in self._cur_panels:
                     if active == True or paused == True:
                         self.printer_printing()
         elif action == "notify_filelist_changed":
@@ -463,6 +463,9 @@ class KlipperScreen(Gtk.Window):
                 self.printer_initializing(_("Klipper has shutdown"))
             return
         if (data['print_stats']['state'] == "printing" or data['print_stats']['state'] == "paused"):
+            filename = self.printer.get_stat("print_stats","filename")
+            if not self.files.file_metadata_exists(filename):
+                self.files.request_metadata(filename)
             self.printer_printing()
             return
         self.printer_ready()
