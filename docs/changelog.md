@@ -1,5 +1,8 @@
 ## Changelog
 
+#### 2020 12 09
+* Z value in job status now reflects the gcode Z value. This allows people with ABL to have a better understanding of Z
+
 #### 2020 12 08
 * Screen Width/Height are now definable in the configuration file
 * Changed job page to allow for more information, display thumbnail of STL

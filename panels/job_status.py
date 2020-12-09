@@ -350,7 +350,9 @@ class JobStatusPanel(ScreenPanel):
         if "toolhead" in data and "position" in data["toolhead"]:
             self.labels['pos_x'].set_text("X: %.2f" % (data["toolhead"]["position"][0]))
             self.labels['pos_y'].set_text("Y: %.2f" % (data["toolhead"]["position"][1]))
-            self.labels['pos_z'].set_text("Z: %.2f" % (data["toolhead"]["position"][2]))
+        if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
+            self.labels['pos_z'].set_text("Z: %.2f" % (data["gcode_move"]["gcode_position"][2]))
+
         if "gcode_move" in data:
             #if "homing_origin" in data["gcode_move"]:
             #    self.labels['zoffset'].set_text("%.2fmm" % data["gcode_move"]["homing_origin"][2])
