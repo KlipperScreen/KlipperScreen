@@ -70,7 +70,7 @@ class KlippyGtk:
 
     def Image(self, image_name, style=False, width_scale=1, height_scale=1):
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            "%s/styles/z-bolt/images/%s.svg" % (klipperscreendir, str(image_name)),
+            "%s/styles/z-bolt/images/%s" % (klipperscreendir, str(image_name)),
             int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
 
         return Gtk.Image.new_from_pixbuf(pixbuf)

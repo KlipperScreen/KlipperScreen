@@ -83,7 +83,7 @@ class PrintPanel(ScreenPanel):
         file.set_hexpand(True)
         file.set_vexpand(False)
 
-        icon = self._gtk.Image("file", False, 1.6, 1.6)
+        icon = self._gtk.Image("file.svg", False, 1.6, 1.6)
         pixbuf = self.get_file_image(filename)
         if pixbuf != None:
             icon.set_from_pixbuf(pixbuf)
@@ -106,18 +106,6 @@ class PrintPanel(ScreenPanel):
         self.labels['filelist'].insert_row(pos)
         self.labels['filelist'].attach(self.files[filename], 0, pos, 1, 1)
         self.labels['filelist'].show_all()
-
-    def get_file_image(self, filename, width=1.6, height=1.6):
-        fileinfo = self._screen.files.get_file_info(filename)
-        if fileinfo == None:
-            return None
-
-        if "thumbnails" in fileinfo and len(fileinfo["thumbnails"]) > 0:
-            thumbnail = fileinfo['thumbnails'][0]
-            return self._gtk.PixbufFromFile("/tmp/.KS-thumbnails/%s-%s" % (fileinfo['filename'], thumbnail['size']),
-                None, width, height)
-        return None
-
 
     def get_file_info_str(self, filename):
         _ = self.lang.gettext
