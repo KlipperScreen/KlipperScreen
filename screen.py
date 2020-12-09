@@ -479,6 +479,9 @@ class KlipperScreen(Gtk.Window):
         self.close_popup_message()
         self.show_panel('main_panel', "main_menu", "Main Menu", 2, items=self._config.get_menu_items("__main"),
             extrudercount=self.printer.get_extruder_count())
+        if "job_status" in self.panels:
+            self.remove_subscription("job_status")
+            del self.panels["job_status"]
 
     def printer_printing(self):
         self.ws_subscribe()

@@ -385,8 +385,10 @@ class JobStatusPanel(ScreenPanel):
                 timeout = self._config.get_main_config().getint("job_error_timeout", 0)
                 if timeout != 0:
                     GLib.timeout_add(timeout * 1000, self.close_panel)
+            elif ps['state'] == "standby":
+                self.close_panel()
 
-            if "filename" in ps and self.filename != ps['filename']:
+            if self.filename != ps['filename']:
                 if ps['filename'] != "":
                     self.filename = ps['filename']
                     self.file_metadata = None
