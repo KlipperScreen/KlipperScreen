@@ -331,6 +331,11 @@ class JobStatusPanel(ScreenPanel):
         for arg in args:
             self.labels[arg].set_sensitive(False)
 
+    def _callback_metadata(self, newfiles, deletedfiles, modifiedfiles):
+        if self.file_metadata == None and self.filename in modifiedfiles:
+            self.update_file_metadata()
+            self._files.remove_file_callback(self._callback_metadata)
+
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
@@ -399,11 +404,7 @@ class JobStatusPanel(ScreenPanel):
                     file = "Unknown"
                     self.update_text("file", "Unknown file")
 
-            if self.file_metadata == None:
-                if self._files.file_metadata_exists(self.filename):
-                    self.update_file_metadata()
-                    self.add_labels()
-            else:
+            if self.file_metadata != None:
                 if "gcode_start_byte" in self.file_metadata:
                     progress = (max(vsd['file_position'] - self.file_metadata['gcode_start_byte'],0) /
                         (self.file_metadata['gcode_end_byte'] - self.file_metadata['gcode_start_byte']))
@@ -473,10 +474,18 @@ class JobStatusPanel(ScreenPanel):
     def update_file_metadata(self):
         if self._files.file_metadata_exists(self.filename):
             self.file_metadata = self._files.get_file_info(self.filename)
+            logger.debug("Parsing file metadata: %s" % list(self.file_metadata))
             self.update_text("est_time","/ %s" % str(self._gtk.formatTimeString(self.file_metadata['estimated_time'])))
+            if "thumbnails" in self.file_metadata:
+                tmp = self.file_metadata['thumbnails'].copy()
+                for i in tmp:
+                    i['data'] = ""
+                logger.debug("Thumbnails: %s" % list(tmp))
             self.show_file_thumbnail()
         else:
             self.file_metadata = None
+            logger.debug("Cannot find file metadata. Listening for updated metadata")
+            self._screen.files.add_file_callback(self._callback_metadata)
 
     def update_image_text(self, label, text):
         if label in self.labels and 'l' in self.labels[label]:

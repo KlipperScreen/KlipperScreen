@@ -48,7 +48,7 @@ class KlippyFiles:
                 if len(self.callbacks) > 0 and (len(newfiles) > 0 or len(deletedfiles) > 0):
                     logger.debug("Running callbacks...")
                     for cb in self.callbacks:
-                        cb(newfiles, deletedfiles)
+                        cb(newfiles, deletedfiles, [])
 
                 if len(deletedfiles) > 0:
                     logger.debug("Deleted files: %s", deletedfiles)
@@ -76,10 +76,18 @@ class KlippyFiles:
                     f.write(base64.b64decode(thumbnail['data']))
                     f.close()
             for cb in self.callbacks:
+                logger.debug("Running metadata callbacks")
                 cb([], [], [params['filename']])
 
     def add_file_callback(self, callback):
-        self.callbacks.append(callback)
+        try:
+            self.callbacks.append(callback)
+        except:
+            logger.debug("Callback not found: %s" % callback)
+
+    def remove_file_callback(self, callback):
+        if callback in self.callbacks:
+            self.callbacks.pop(self.callbacks.index(callback))
 
     def add_timeout(self):
         if self.timeout == None:
