@@ -454,8 +454,10 @@ class KlipperScreen(Gtk.Window):
         else:
             self.files.add_timeout()
 
-        if printer_info['result']['state'] in ("error","shutdown"):
-            if "FIRMWARE_RESTART" in printer_info['result']['state_message']:
+        if printer_info['result']['state'] in ("error","shutdown","startup"):
+            if printer_info['result']['state'] == "startup":
+                self.printer_initializing(_("Klipper is attempting to start"))
+            elif "FIRMWARE_RESTART" in printer_info['result']['state_message']:
                 self.printer_initializing(
                     _("Klipper has encountered an error.\nIssue a FIRMWARE_RESTART to attempt fixing the issue.")
                 )
