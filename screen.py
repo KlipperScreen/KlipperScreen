@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import argparse
 import gi
 import gettext
 import time
@@ -65,7 +66,17 @@ class KlipperScreen(Gtk.Window):
     def __init__(self):
         self.version = get_software_version()
         logger.info("KlipperScreen version: %s" % self.version)
-        self._config = KlipperScreenConfig()
+
+        parser = argparse.ArgumentParser(description="KlipperScreen - A GUI for Klipper")
+        parser.add_argument(
+            "-c","--configfile", default="~/KlipperScreen.conf", metavar='<configfile>',
+            help="Location of KlipperScreen configuration file"
+        )
+        args = parser.parse_args()
+        configfile = os.path.normpath(os.path.expanduser(args.configfile))
+
+
+        self._config = KlipperScreenConfig(configfile)
         self.printer = Printer({
             "software_version": "Unknown"
         }, {

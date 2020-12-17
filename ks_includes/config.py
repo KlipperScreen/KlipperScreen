@@ -16,10 +16,10 @@ class KlipperScreenConfig:
     config = None
     configfile_name = "KlipperScreen.conf"
 
-    def __init__(self):
+    def __init__(self, configfile):
         self.default_config_path = "%s/ks_includes/%s" % (os.getcwd(), self.configfile_name)
         self.config = configparser.ConfigParser()
-        self.config_path = self.get_config_file_location()
+        self.config_path = self.get_config_file_location(configfile)
 
         try:
             self.config.read(self.default_config_path)
@@ -32,8 +32,7 @@ class KlipperScreenConfig:
         self.get_menu_items("__main")
         #self.build_main_menu(self.config)
 
-    def get_config_file_location(self):
-        file = "%s/%s" % (os.getenv("HOME"), self.configfile_name)
+    def get_config_file_location(self, file):
         if not path.exists(file):
             file = "%s/%s" % (os.getcwd(), self.configfile_name)
             if not path.exists(file):

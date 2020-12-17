@@ -38,3 +38,6 @@ python virtual environment at ${HOME}/.KlipperScreen-env and install a systemd
 service file.
 
 As an option to do development or interact with KlipperScreen from your computer, you may install tigervnc-scraping-server and VNC to your pi instance. Follow tigervnc server setup procedures for details on how to do that.
+
+If you need a custom location for the configuration file, you can add -c or --configfile to the systemd file and specify
+the location of your configuration file.
