@@ -38,13 +38,13 @@ class KlippyWebsocket(threading.Thread):
     callback_table = {}
     timeout = None
 
-    def __init__(self, screen, callback):
+    def __init__(self, screen, callback, host, port):
         threading.Thread.__init__(self)
         self._screen = screen
         self._callback = callback
         self.klippy = MoonrakerApi(self)
 
-        self._url = "127.0.0.1:7125"
+        self._url = "%s:%s" % (host, port)
 
     def connect (self):
         #r = requests.get(

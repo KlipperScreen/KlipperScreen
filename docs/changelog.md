@@ -2,6 +2,7 @@
 
 #### 2020 12 16
 * Config file can now be specified when running from the command line
+* Moonraker host/port can be specified in the configuration file
 
 #### 2020 12 09
 * Z value in job status now reflects the gcode Z value. This allows people with ABL to have a better understanding of Z

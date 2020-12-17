@@ -12,6 +12,10 @@ config is included here: [ks_includes/KlipperScreen.conf](../ks_includes/Klipper
 ## Main Options
 ```
 [main]
+# Define the moonraker host/port if different from 127.0.0.1 and 7125
+moonraker_host: 127.0.0.1
+moonraker_port: 7125
+
 # Invert axis in move panel. Default is False. Change to true to invert
 invert_x: False
 invert_y: False

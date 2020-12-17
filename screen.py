@@ -93,7 +93,9 @@ class KlipperScreen(Gtk.Window):
         self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales')
         _ = self.lang.gettext
 
-        self.apiclient = KlippyRest("127.0.0.1",7125)
+        self.apiclient = KlippyRest(self._config.get_main_config_option("moonraker_host"),
+            self._config.get_main_config_option("moonraker_port"))
+
         Gtk.Window.__init__(self)
         self.width = self._config.get_main_config().getint("width", Gdk.Screen.get_width(Gdk.Screen.get_default()))
         self.height = self._config.get_main_config().getint("height", Gdk.Screen.get_height(Gdk.Screen.get_default()))
@@ -108,11 +110,15 @@ class KlipperScreen(Gtk.Window):
 
         self.printer_initializing(_("Initializing"))
 
-        self._ws = KlippyWebsocket(self, {
-            "on_connect": self.init_printer,
-            "on_message": self._websocket_callback,
-            "on_close": self.printer_initializing
-        })
+        self._ws = KlippyWebsocket(self,
+            {
+                "on_connect": self.init_printer,
+                "on_message": self._websocket_callback,
+                "on_close": self.printer_initializing
+            },
+            self._config.get_main_config_option("moonraker_host"),
+            self._config.get_main_config_option("moonraker_port")
+        )
         self._ws.connect()
 
         # Disable DPMS
