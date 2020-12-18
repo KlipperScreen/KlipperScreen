@@ -90,7 +90,7 @@ class KlipperScreen(Gtk.Window):
                 'is_active': False
             }
         })
-        self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales')
+        self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', fallback=True)
         _ = self.lang.gettext
 
         self.apiclient = KlippyRest(self._config.get_main_config_option("moonraker_host"),
