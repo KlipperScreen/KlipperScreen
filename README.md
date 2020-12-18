@@ -1,5 +1,5 @@
 # KlipperScreen
-KlipperScreen is an idea based from [OctoScreen](https://github.com/Z-Bolt/OctoScreen/), but instead of needing OctoPrint or to compile go, KlipperScreen is python based and interacts directly with Moonraker, Klipper's API service, so that it can be run with no dependencies besides Klipper.
+KlipperScreen is an idea based from [OctoScreen](https://github.com/Z-Bolt/OctoScreen/), but instead of needing OctoPrint or to compile go, KlipperScreen is python based and interacts directly with [Moonraker](https://github.com/arksine/moonraker), Klipper's API service.
 
 Current feature list:
  - [x] Homing
@@ -17,14 +17,15 @@ Current feature list:
  - [ ] Better system panel
  - [ ] Wifi selection
 
-More details to come...
-
 [Changelog](docs/changelog.md)
 
 ### Required Hardware
-KlipperScreen should run on any HDMI touchscreen that you can connect to a computer. The required video driver may
-be slightly different depending on what model you get. I am developing on a 1024x600 resolution screen. Due to this,
-other resolutions may not be scaled properly at this moment. UI scaling is a future development item.
+KlipperScreen should run on any touchscreen that you can connect to a computer. The required video driver may be
+slightly different depending on what model you get. KlipperScreen will scale to the resolution of the screen being used.
+However, three resolutions are tested during development: 1024x600, 800x480, 480x320.
+
+There are no recommended screens, but there are several screens that work with KlipperScreen. They include screens that
+use HDMI/USB, Raspberry Pi GPIO, or the Rapsberry Pi DSI (ribbon cable) port.
 
 ### Links
 
