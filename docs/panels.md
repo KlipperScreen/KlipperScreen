@@ -7,6 +7,7 @@
 * [extrude](#extrude)
 * [fan](#fan)
 * [fine_tune](#finetune)
+* [gcode_macros](#gcode-macros)
 * [move](#move)
 * [network](#network)
 * [preheat](#preheat)
@@ -50,6 +51,10 @@ type: fan
 ### Fine Tune
 type: fine_tune
 ![Fine Tune Panel](img/fine_tune.png)
+
+### Gcode Macros
+type: gcode_macros
+![Gcode Macros Panel](img/gcode_macros.png)
 
 ### Menu
 type: menu

@@ -1,5 +1,8 @@
 ## Changelog
 
+#### 2020 12 18
+* Add gcode_macros panel
+
 #### 2020 12 16
 * Config file can now be specified when running from the command line
 * Moonraker host/port can be specified in the configuration file
