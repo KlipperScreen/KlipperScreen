@@ -122,6 +122,7 @@ class Printer:
     def get_printer_status_data(self):
         data = {
             "printer": {
+                "bltouch": self.section_exists("bltouch"),
                 "gcode_macros": {
                     "count": len(self.get_gcode_macros())
                 },
@@ -129,7 +130,8 @@ class Printer:
                 "pause_resume": self.get_stat("pause_resume").copy(),
                 "power_devices": {
                     "count": len(self.get_power_devices())
-                }
+                },
+                "probe": self.section_exists("probe")
             }
         }
 
@@ -184,6 +186,11 @@ class Printer:
 
     def get_tool_number(self, tool):
         return self.tools.index(tool)
+
+    def section_exists(self, section):
+        if section in self.get_config_section_list():
+            return True
+        return False
 
     def set_dev_stat(self, dev, stat, value):
         if dev not in self.devices:
