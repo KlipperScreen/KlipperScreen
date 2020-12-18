@@ -116,9 +116,15 @@ class Printer:
     def get_data(self):
         return self.data
 
+    def get_gcode_macros(self):
+        return self.get_config_section_list("gcode_macro ")
+
     def get_printer_status_data(self):
         data = {
             "printer": {
+                "gcode_macros": {
+                    "count": len(self.get_gcode_macros())
+                },
                 "idle_timeout": self.get_stat("idle_timeout").copy(),
                 "pause_resume": self.get_stat("pause_resume").copy(),
                 "power_devices": {
@@ -131,7 +137,7 @@ class Printer:
         for section in sections:
             if self.config_section_exists(section):
                 data["printer"][section] = self.get_config_section(section).copy()
-        
+
         return data
 
     def get_klipper_version(self):
