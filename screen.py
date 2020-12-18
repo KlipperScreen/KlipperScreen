@@ -474,10 +474,19 @@ class KlipperScreen(Gtk.Window):
         if printer_info['result']['state'] in ("error","shutdown","startup"):
             if printer_info['result']['state'] == "startup":
                 self.printer_initializing(_("Klipper is attempting to start"))
-            elif "FIRMWARE_RESTART" in printer_info['result']['state_message']:
-                self.printer_initializing(
-                    _("Klipper has encountered an error.\nIssue a FIRMWARE_RESTART to attempt fixing the issue.")
-                )
+            elif printer_info['result']['state'] == "error":
+                if "FIRMWARE_RESTART" in printer_info['result']['state_message']:
+                    self.printer_initializing(
+                        _("Klipper has encountered an error.\nIssue a FIRMWARE_RESTART to attempt fixing the issue.")
+                    )
+                elif "micro-controller" in printer_info['result']['state_message']:
+                    self.printer_initializing(
+                        _("Klipper has encountered an error with the micro-controller.\nPlease recompile and flash.")
+                    )
+                else:
+                    self.printer_initializing(
+                        _("Klipper has encountered an error.")
+                    )
             else:
                 self.printer_initializing(_("Klipper has shutdown"))
             return
