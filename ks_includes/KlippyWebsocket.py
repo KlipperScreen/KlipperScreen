@@ -46,18 +46,19 @@ class KlippyWebsocket(threading.Thread):
 
         self._url = "%s:%s" % (host, port)
 
-    def connect (self):
-        #r = requests.get(
-        #    "http://%s%s" % (self._url, api['oneshot_token']['url']),
-        #    headers={"x-api-key":api_key}
-        #)
-        #if r.status_code != 200:
-        #    logger.info("Failed to retrieve oneshot token")
-        #    return
+    def initial_connect(self):
+        # Enable a timeout so that way if moonraker is not running, it will attempt to reconnect
+        if self.timeout == None:
+            self.timeout = GLib.timeout_add(500, self.reconnect)
 
-        #token = json.loads(r.content)['result']
-        #self.ws_url = "ws://%s/websocket?token=%s" % (self._url, token)
-        self.ws_url = "ws://%s/websocket" % (self._url)
+    def connect (self):
+        try:
+            token = self._screen.apiclient.get_oneshot_token()
+        except:
+            logger.debug("Unable to get oneshot token")
+            return False
+        logger.debug("Token: %s" % token)
+        self.ws_url = "ws://%s/websocket?token=%s" % (self._url, token)
         self.ws = websocket.WebSocketApp(self.ws_url,
             on_message  = lambda ws,msg:    self.on_message(ws, msg),
             on_error    = lambda ws,msg:    self.on_error(ws, msg),
@@ -155,7 +156,16 @@ class KlippyWebsocket(threading.Thread):
 
 
     def on_error(self, ws, error):
-        print(error)
+        logger.debug("Websocket error: %s" % error)
+        if error.status_code == 401:
+            # Check for any pending reconnects and remove. No amount of trying will help
+            if self.timeout != None:
+                GLib.source_remove(self.timeout)
+            Gdk.threads_add_idle(
+                GLib.PRIORITY_HIGH_IDLE,
+                self._callback['on_close'],
+                "Unable to authenticate with moonraker.\nCheck the API key"
+            )
 
 class MoonrakerApi:
     def __init__ (self, ws):

@@ -5,12 +5,19 @@ import logging
 logger = logging.getLogger("KlipperScreen.KlippyRest")
 
 class KlippyRest:
-    def __init__(self, ip, port=7125):
+    def __init__(self, ip, port=7125, api_key=False):
         self.ip = ip
         self.port = port
+        self.api_key = api_key
 
     def get_server_info(self):
         return self.send_request("server/info")
+
+    def get_oneshot_token(self):
+        r = self.send_request("access/oneshot_token")
+        if r == False:
+            return False
+        return r['result']
 
     def get_printer_info(self):
         return self.send_request("printer/info")
@@ -18,7 +25,8 @@ class KlippyRest:
     def send_request(self, method):
         url = "http://%s:%s/%s" % (self.ip, self.port, method)
         logger.debug("Sending request to %s" % url)
-        r = requests.get(url)
+        headers = {} if self.api_key == False else {"x-api-key":self.api_key}
+        r = requests.get(url, headers=headers)
         if r.status_code != 200:
             return False
 

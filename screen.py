@@ -94,7 +94,8 @@ class KlipperScreen(Gtk.Window):
         _ = self.lang.gettext
 
         self.apiclient = KlippyRest(self._config.get_main_config_option("moonraker_host"),
-            self._config.get_main_config_option("moonraker_port"))
+            self._config.get_main_config_option("moonraker_port"),
+            self._config.get_main_config_option("moonraker_api_key", False))
 
         Gtk.Window.__init__(self)
         self.width = self._config.get_main_config().getint("width", Gdk.Screen.get_width(Gdk.Screen.get_default()))
@@ -119,7 +120,7 @@ class KlipperScreen(Gtk.Window):
             self._config.get_main_config_option("moonraker_host"),
             self._config.get_main_config_option("moonraker_port")
         )
-        self._ws.connect()
+        self._ws.initial_connect()
 
         # Disable DPMS
         os.system("/usr/bin/xset -display :0 s off")
