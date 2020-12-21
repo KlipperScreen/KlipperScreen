@@ -143,6 +143,7 @@ trough {
 }
 
 .frame-item {
+    min-height: 4.5em;
     padding: .1em .75em;
 }
 
