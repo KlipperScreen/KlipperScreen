@@ -39,11 +39,14 @@ class MacroPanel(ScreenPanel):
 
         frame = Gtk.Frame()
         frame.set_property("shadow-type",Gtk.ShadowType.NONE)
+        frame.get_style_context().add_class("frame-item")
 
         name = Gtk.Label()
         name.set_markup("<big><b>%s</b></big>" % (macro))
         name.set_hexpand(True)
+        name.set_vexpand(True)
         name.set_halign(Gtk.Align.START)
+        name.set_valign(Gtk.Align.CENTER)
         name.set_line_wrap(True)
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
@@ -56,10 +59,6 @@ class MacroPanel(ScreenPanel):
         labels.add(name)
 
         dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        dev.set_margin_top(10)
-        dev.set_margin_end(15)
-        dev.set_margin_start(15)
-        dev.set_margin_bottom(10)
         dev.set_hexpand(True)
         dev.set_vexpand(False)
 
