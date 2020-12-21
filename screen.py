@@ -135,7 +135,6 @@ class KlipperScreen(Gtk.Window):
             "objects": {
                 "bed_mesh": ["profile_name","mesh_max","mesh_min","probed_matrix"],
                 "configfile": ["config"],
-                "extruder": ["target","temperature","pressure_advance","smooth_time"],
                 "fan": ["speed"],
                 "gcode_move": ["extrude_factor","gcode_position","homing_origin","speed_factor"],
                 "heater_bed": ["target","temperature"],
@@ -146,6 +145,9 @@ class KlipperScreen(Gtk.Window):
                 "webhooks": ["state","state_message"]
             }
         }
+        for extruder in self.printer.get_tools():
+            requested_updates['objects'][extruder] = ["target","temperature","pressure_advance","smooth_time"]
+
         self._ws.klippy.object_subscription(requested_updates)
 
     def _load_panel(self, panel, *args):

@@ -93,12 +93,17 @@ class JobStatusPanel(ScreenPanel):
 
         self.labels['thumbnail'] = self._gtk.Image("file.svg", False, 1.6, 1.6)
 
-        extruder = self._gtk.Image("extruder-1.svg", None, .6, .6)
-        self.labels['extruder'] = Gtk.Label(label="")
-        self.labels['extruder'].get_style_context().add_class("printing-info")
-        extruder_box = Gtk.Box(spacing=0)
-        extruder_box.add(extruder)
-        extruder_box.add(self.labels['extruder'])
+        i = 1
+        for extruder in self._printer.get_tools():
+            self.labels[extruder + '_box'] = Gtk.Box(spacing=0)
+            self.labels[extruder] = Gtk.Label(label="")
+            self.labels[extruder].get_style_context().add_class("printing-info")
+            if i <= 4:
+                ext_img = self._gtk.Image("extruder-%s.svg" % i, None, .6, .6)
+                self.labels[extruder + '_box'].add(ext_img)
+            self.labels[extruder + '_box'].add(self.labels[extruder])
+            i += 1
+
         heater_bed = self._gtk.Image("bed.svg", None, .6, .6)
         self.labels['heater_bed'] = Gtk.Label(label="")
         self.labels['heater_bed'].get_style_context().add_class("printing-info")
@@ -106,7 +111,8 @@ class JobStatusPanel(ScreenPanel):
         heater_bed_box.add(heater_bed)
         heater_bed_box.add(self.labels['heater_bed'])
         temp_grid = self._gtk.HomogeneousGrid()
-        temp_grid.attach(extruder_box, 0, 0, 1, 1)
+        self.current_extruder = self._printer.get_stat("toolhead","extruder")
+        temp_grid.attach(self.labels[self.current_extruder + '_box'], 0, 0, 1, 1)
         temp_grid.attach(heater_bed_box, 1, 0, 1, 1)
         self.labels['temp_grid'] = temp_grid
 
@@ -352,9 +358,17 @@ class JobStatusPanel(ScreenPanel):
             )
 
 
-        if "toolhead" in data and "position" in data["toolhead"]:
-            self.labels['pos_x'].set_text("X: %.2f" % (data["toolhead"]["position"][0]))
-            self.labels['pos_y'].set_text("Y: %.2f" % (data["toolhead"]["position"][1]))
+        if "toolhead" in data:
+            if "extruder" in data["toolhead"]:
+                if data["toolhead"]["extruder"] != self.current_extruder:
+                    self.labels['temp_grid'].remove_column(0)
+                    self.labels['temp_grid'].insert_column(0)
+                    self.current_extruder = data["toolhead"]["extruder"]
+                    self.labels['temp_grid'].attach(self.labels[self.current_extruder + '_box'], 0, 0, 1, 1)
+                    self._screen.show_all()
+            if "position" in data["toolhead"]:
+                self.labels['pos_x'].set_text("X: %.2f" % (data["toolhead"]["position"][0]))
+                self.labels['pos_y'].set_text("Y: %.2f" % (data["toolhead"]["position"][1]))
         if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
             self.labels['pos_z'].set_text("Z: %.2f" % (data["gcode_move"]["gcode_position"][2]))
 

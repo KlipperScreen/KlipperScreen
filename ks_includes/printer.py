@@ -31,6 +31,7 @@ class Printer:
                     "target": 0
                 }
                 self.tools.append(x)
+                self.tools = sorted(self.tools)
                 if "shared_heater" in self.config[x]:
                     self.toolcount += 1
                     continue
