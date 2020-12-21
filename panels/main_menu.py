@@ -28,7 +28,7 @@ class MainPanel(MenuPanel):
         for x in self._printer.get_tools():
             if i > 3:
                 break
-            self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i+1), self._gtk.formatTemperatureString(0, 0))
+            self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0))
             eq_grid.attach(self.labels[x], i%2, i/2, 1, 1)
             i += 1
 

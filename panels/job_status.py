@@ -93,7 +93,7 @@ class JobStatusPanel(ScreenPanel):
 
         self.labels['thumbnail'] = self._gtk.Image("file.svg", False, 1.6, 1.6)
 
-        i = 1
+        i = 0
         for extruder in self._printer.get_tools():
             self.labels[extruder + '_box'] = Gtk.Box(spacing=0)
             self.labels[extruder] = Gtk.Label(label="")

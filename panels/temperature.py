@@ -29,7 +29,7 @@ class TemperaturePanel(ScreenPanel):
                 break
             elif i == 0:
                 primary_tool = x
-            self.labels[x] = self._gtk.ToggleButtonImage("extruder-"+str(i+1), self._gtk.formatTemperatureString(0, 0))
+            self.labels[x] = self._gtk.ToggleButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0))
             self.labels[x].connect('clicked', self.select_heater, x)
             if i == 0:
                 self.labels[x].set_active(True)
