@@ -3,6 +3,7 @@
 #### 2020 12 21
 * KlipperScreen doesn't have to be a trusted client. It can use the Moonraker API key
 * Updates to job_status for multiple extruders. Will now show the current extruder.
+* Updates to extrude panel to show multiple extruders and allow switching between them.
 
 #### 2020 12 18
 * Add gcode_macros panel
