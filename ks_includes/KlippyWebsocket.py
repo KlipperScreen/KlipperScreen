@@ -57,7 +57,7 @@ class KlippyWebsocket(threading.Thread):
         except:
             logger.debug("Unable to get oneshot token")
             return False
-        logger.debug("Token: %s" % token)
+
         self.ws_url = "ws://%s/websocket?token=%s" % (self._url, token)
         self.ws = websocket.WebSocketApp(self.ws_url,
             on_message  = lambda ws,msg:    self.on_message(ws, msg),
