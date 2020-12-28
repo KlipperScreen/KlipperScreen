@@ -397,7 +397,8 @@ class JobStatusPanel(ScreenPanel):
                 self.set_state("complete")
                 self.show_buttons_for_state()
                 timeout = self._config.get_main_config().getint("job_complete_timeout", 30)
-                GLib.timeout_add(timeout * 1000, self.close_panel)
+                if timeout != 0:
+                    GLib.timeout_add(timeout * 1000, self.close_panel)
             elif ps['state'] == "error" and self.state != "error":
                 logger.debug("Error!")
                 self.set_state("error")
@@ -510,7 +511,7 @@ class JobStatusPanel(ScreenPanel):
             self.labels[label].set_text(text)
 
     def update_progress (self):
-        self.labels['progress_text'].set_text("%s%%" % (str(int(self.progress*100))))
+        self.labels['progress_text'].set_text("%s%%" % (str( min(int(self.progress*100),100) )))
 
     #def update_temp(self, dev, temp, target):
     #    if dev in self.labels:
