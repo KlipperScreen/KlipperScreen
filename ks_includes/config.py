@@ -2,6 +2,7 @@ import configparser
 import os
 import logging
 import json
+import re
 
 from io import StringIO
 
@@ -24,11 +25,15 @@ class KlipperScreenConfig:
         try:
             self.config.read(self.default_config_path)
             if self.config_path != self.default_config_path:
+
+                self.defined_config = configparser.ConfigParser()
+                self.defined_config.read(self.config_path)
+                self.log_config(self.defined_config)
+
                 self.config.read(self.config_path)
         except KeyError:
             raise ConfigError(f"Error reading config: {self.config_path}")
 
-        self.log_config(self.config)
         self.get_menu_items("__main")
         #self.build_main_menu(self.config)
 
@@ -88,7 +93,11 @@ class KlipperScreenConfig:
         lines = [
             " "
             "===== Config File =====",
-            self._build_config_string(config),
+            re.sub(
+                r'(moonraker_api_key\s*=\s*\S+)',
+                'moonraker_api_key = [redacted]',
+                self._build_config_string(config)
+            ),
             "======================="
         ]
         logger.info("\n".join(lines))
