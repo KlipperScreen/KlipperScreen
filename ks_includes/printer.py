@@ -7,7 +7,8 @@ class Printer:
     def __init__(self, printer_info, data):
         self.config = data['configfile']['config']
 
-        logging.info("### Reading printer config")
+        logger.info("### Reading printer config")
+        logger.debug("Moonraker object status: %s" % data)
         self.toolcount = 0
         self.extrudercount = 0
         self.tools = []
@@ -22,7 +23,7 @@ class Printer:
         }
 
         for x in self.config.keys():
-            if x.startswith('extruder'):
+            if x[0:8] == "extruder":
                 if x.startswith('extruder_stepper'):
                     continue
 
@@ -32,8 +33,8 @@ class Printer:
                 }
                 self.tools.append(x)
                 self.tools = sorted(self.tools)
+                self.toolcount += 1
                 if "shared_heater" in self.config[x]:
-                    self.toolcount += 1
                     continue
                 self.extrudercount += 1
             if x.startswith('heater_bed'):
