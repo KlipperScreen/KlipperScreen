@@ -90,6 +90,15 @@ class KlipperScreen(Gtk.Window):
                 'is_active': False
             }
         })
+        self.printer.set_callbacks({
+            "disconnected": self.state_disconnected,
+            "error": self.state_error,
+            "printing": self.state_printing,
+            "ready": self.state_ready,
+            "startup": self.state_startup,
+            "shutdown": self.state_shutdown
+        })
+
         self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', fallback=True)
         _ = self.lang.gettext
 
@@ -138,6 +147,7 @@ class KlipperScreen(Gtk.Window):
                 "fan": ["speed"],
                 "gcode_move": ["extrude_factor","gcode_position","homing_origin","speed_factor"],
                 "heater_bed": ["target","temperature"],
+                "idle_timeout": ["state"],
                 "pause_resume": ["is_paused"],
                 "print_stats": ["print_duration","total_duration","filament_used","filename","state","message"],
                 "toolhead": ["homed_axes","estimated_print_time","print_time","position","extruder"],
@@ -353,34 +363,54 @@ class KlipperScreen(Gtk.Window):
                 self.subscriptions.pop(i)
                 return
 
+    def state_disconnected(self):
+        _ = self.lang.gettext
+        logger.debug("### Going to disconnected")
+        self.printer_initializing(_("Klipper has disconnected"))
+
+    def state_error(self):
+        _ = self.lang.gettext
+        msg = self.printer.get_stat("webhooks","state_message")
+        if "FIRMWARE_RESTART" in msg:
+            self.printer_initializing(
+                _("Klipper has encountered an error.\nIssue a FIRMWARE_RESTART to attempt fixing the issue.")
+            )
+        elif "micro-controller" in msg:
+            self.printer_initializing(
+                _("Klipper has encountered an error with the micro-controller.\nPlease recompile and flash.")
+            )
+        else:
+            self.printer_initializing(
+                _("Klipper has encountered an error.")
+            )
+
+    def state_printing(self):
+        self.printer_printing()
+
+    def state_ready(self):
+        # Do not return to main menu if completing a job, timeouts/user input will return
+        if "job_status" in self._cur_panels or "main_menu" in self._cur_panels:
+            return
+        self.printer_ready()
+
+    def state_startup(self):
+        _ = self.lang.gettext
+        self.printer_initializing(_("Klipper is attempting to start"))
+
+    def state_shutdown(self):
+        _ = self.lang.gettext
+        self.printer_initializing(_("Klipper has shutdown"))
+
     def _websocket_callback(self, action, data):
         _ = self.lang.gettext
-        #print(json.dumps([action, data], indent=2))
 
         if action == "notify_klippy_disconnected":
-            logger.info("### Going to disconnected state")
-            self.printer_initializing(_("Klipper has shutdown"))
+            self.printer.change_state("disconnected")
             return
         elif action == "notify_klippy_ready":
-            logger.info("### Going to ready state")
-            self.init_printer()
-        elif action == "notify_status_update" and self.shutdown == False:
+            self.printer.change_state("ready")
+        elif action == "notify_status_update" and self.printer.get_state() != "shutdown":
             self.printer.process_update(data)
-            if "webhooks" in data:
-                print(json.dumps([action, data], indent=2))
-            if "webhooks" in data and "state" in data['webhooks']:
-                if data['webhooks']['state'] == "ready":
-                    logger.info("### Going to ready state")
-                    self.printer_ready()
-                elif data['webhooks']['state'] == "shutdown":
-                    self.shutdown == True
-                    self.printer_initializing(_("Klipper has shutdown"))
-            else:
-                active = self.printer.get_stat('virtual_sdcard','is_active')
-                paused = self.printer.get_stat('pause_resume','is_paused')
-                if "job_status" not in self._cur_panels:
-                    if active == True or paused == True:
-                        self.printer_printing()
         elif action == "notify_filelist_changed":
             logger.debug("Filelist changed: %s", json.dumps(data,indent=2))
             #self.files.add_file()
@@ -389,10 +419,9 @@ class KlipperScreen(Gtk.Window):
         elif action == "notify_power_changed":
             logger.debug("Power status changed: %s", data)
             self.printer.process_power_update(data)
-        elif self.shutdown == False and action == "notify_gcode_response":
+        elif self.printer.get_state() not in ["error","shutdown"] and action == "notify_gcode_response":
             if "Klipper state: Shutdown" in data:
-                self.shutdown == True
-                self.printer_initializing(_("Klipper has shutdown"))
+                self.printer.change_state("shutdown")
 
             if not (data.startswith("B:") and
                 re.search(r'B:[0-9\.]+\s/[0-9\.]+\sT[0-9]+:[0-9\.]+', data)):
@@ -439,7 +468,6 @@ class KlipperScreen(Gtk.Window):
 
     def init_printer(self):
         _ = self.lang.gettext
-        self.shutdown = False
 
         status_objects = [
             'bed_mesh',
@@ -452,18 +480,17 @@ class KlipperScreen(Gtk.Window):
             'print_stats',
             'heater_bed',
             'extruder',
-            'pause_resume'
+            'pause_resume',
+            'webhooks'
         ]
         printer_info = self.apiclient.get_printer_info()
+        logger.debug("Sendingn request %s" % "printer/objects/query?" + "&".join(status_objects))
         data = self.apiclient.send_request("printer/objects/query?" + "&".join(status_objects))
         powerdevs = self.apiclient.send_request("machine/device_power/devices")
-        if printer_info == False or data == False:
-            self.printer_initializing(_("Moonraker error"))
-            return
         data = data['result']['status']
 
         # Reinitialize printer, in case the printer was shut down and anything has changed.
-        self.printer.__init__(printer_info['result'], data)
+        self.printer.reinit(printer_info['result'], data)
         self.ws_subscribe()
 
         if powerdevs != False:
@@ -474,48 +501,16 @@ class KlipperScreen(Gtk.Window):
         else:
             self.files.add_timeout()
 
-        if printer_info['result']['state'] in ("error","shutdown","startup"):
-            if printer_info['result']['state'] == "startup":
-                self.printer_initializing(_("Klipper is attempting to start"))
-            elif printer_info['result']['state'] == "error":
-                if "FIRMWARE_RESTART" in printer_info['result']['state_message']:
-                    self.printer_initializing(
-                        _("Klipper has encountered an error.\nIssue a FIRMWARE_RESTART to attempt fixing the issue.")
-                    )
-                elif "micro-controller" in printer_info['result']['state_message']:
-                    self.printer_initializing(
-                        _("Klipper has encountered an error with the micro-controller.\nPlease recompile and flash.")
-                    )
-                else:
-                    self.printer_initializing(
-                        _("Klipper has encountered an error.")
-                    )
-            else:
-                self.printer_initializing(_("Klipper has shutdown"))
-            return
-        if (data['print_stats']['state'] == "printing" or data['print_stats']['state'] == "paused"):
-            filename = self.printer.get_stat("print_stats","filename")
-            if not self.files.file_metadata_exists(filename):
-                self.files.request_metadata(filename)
-            self.printer_printing()
-            return
-        self.printer_ready()
-
     def printer_ready(self):
-        if self.shutdown == True:
-            self.init_printer()
-            return
-
-        self.files.add_timeout()
         self.close_popup_message()
         self.show_panel('main_panel', "main_menu", "Main Menu", 2, items=self._config.get_menu_items("__main"),
             extrudercount=self.printer.get_extruder_count())
+        self.ws_subscribe()
         if "job_status" in self.panels:
             self.remove_subscription("job_status")
             del self.panels["job_status"]
 
     def printer_printing(self):
-        self.ws_subscribe()
         self.files.remove_timeout()
         self.close_popup_message()
         self.show_panel('job_status',"job_status", "Print Status", 2)

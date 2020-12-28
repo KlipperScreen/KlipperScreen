@@ -3,20 +3,29 @@ import logging
 logger = logging.getLogger("KlipperScreen.Printer")
 
 class Printer:
+    state_callbacks = {
+        "disconnected": None,
+        "error": None,
+        "paused": None,
+        "printing": None,
+        "ready": None,
+        "startup": None,
+        "shutdown": None
+    }
 
     def __init__(self, printer_info, data):
-        self.config = data['configfile']['config']
+        self.state = "disconnected"
+        self.power_devices = {}
 
-        logger.info("### Reading printer config")
+    def reinit(self, printer_info, data):
         logger.debug("Moonraker object status: %s" % data)
+        self.config = data['configfile']['config']
         self.toolcount = 0
         self.extrudercount = 0
         self.tools = []
         self.devices = {}
-        self.state = data['print_stats']['state']
         self.data = data
         self.klipper = {}
-        self.power_devices = {}
 
         self.klipper = {
             "version": printer_info['software_version']
@@ -56,17 +65,6 @@ class Printer:
         logger.info("Klipper version: %s", self.klipper['version'])
         logger.info("### Toolcount: " + str(self.toolcount) + " Heaters: " + str(self.extrudercount))
 
-    def configure_power_devices(self, data):
-        self.power_devices = {}
-
-        logger.debug("Processing power devices: %s" % data)
-        for x in data['devices']:
-            logger.debug(x)
-            self.power_devices[x['device']] = {
-                "status": "on" if x['status'] == "on" else "off"
-            }
-        logger.debug("Power devices: %s" % self.power_devices)
-
     def process_update(self, data):
         keys = [
             'bed_mesh',
@@ -76,7 +74,8 @@ class Printer:
             'pause_resume',
             'print_stats',
             'toolhead',
-            'virtual_sdcard'
+            'virtual_sdcard',
+            'webhooks'
         ]
         for x in keys:
             if x in data:
@@ -100,9 +99,52 @@ class Printer:
                 if "temperature" in d:
                     self.set_dev_stat(x, "temperature", d["temperature"])
 
+        if "webhooks" in data or "idle_timeout" in data or "pause_resume" in data or "print_stats" in data:
+            self.evaluate_state()
+
+    def evaluate_state(self):
+        wh_state = self.data['webhooks']['state'] # possible values: startup, ready, shutdown, error
+        idle_state = self.data['idle_timeout']['state'].lower() # possible values: Idle, printing, ready
+        print_state = self.data['print_stats']['state'] # possible values: complete, paused, printing, standby
+
+        if wh_state == "ready":
+            new_state = "ready"
+            if idle_state == "printing" and print_state != "printing": # Not printing a file, toolhead moving
+                new_state = "busy"
+            elif idle_state == "printing" and print_state == "printing":
+                new_state = "printing"
+            elif print_state == "paused":
+                new_state = "paused"
+
+            if new_state != "busy":
+                self.change_state(new_state)
+        else:
+            self.change_state(wh_state)
+
     def process_power_update(self, data):
         if data['device'] in self.power_devices:
             self.power_devices[data['device']]['status'] = data['status']
+
+    def change_state(self, state):
+        if state == self.state or state not in list(self.state_callbacks):
+            return
+
+        logger.debug("Changing state from '%s' to '%s'" % (self.state, state))
+        self.state = state
+        if self.state_callbacks[state] != None:
+            logger.debug("Running callback for state: %s" % state)
+            self.state_callbacks[state]()
+
+    def configure_power_devices(self, data):
+        self.power_devices = {}
+
+        logger.debug("Processing power devices: %s" % data)
+        for x in data['devices']:
+            logger.debug(x)
+            self.power_devices[x['device']] = {
+                "status": "on" if x['status'] == "on" else "off"
+            }
+        logger.debug("Power devices: %s" % self.power_devices)
 
     def config_section_exists(self, section):
         return section in list(self.config)
@@ -164,6 +206,9 @@ class Printer:
             return None
         return self.data[stat]
 
+    def get_state(self):
+        return self.state
+
     def set_dev_temps(self, dev, temp, target=None):
         if dev in self.devices:
             self.devices[dev]['temperature'] = temp
@@ -193,6 +238,11 @@ class Printer:
         if section in self.get_config_section_list():
             return True
         return False
+
+    def set_callbacks(self, callbacks):
+        for name, cb in callbacks.items():
+            if name in list(self.state_callbacks):
+                self.state_callbacks[name] = cb
 
     def set_dev_stat(self, dev, stat, value):
         if dev not in self.devices:
