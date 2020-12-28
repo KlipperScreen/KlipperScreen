@@ -104,16 +104,17 @@ class JobStatusPanel(ScreenPanel):
             self.labels[extruder + '_box'].add(self.labels[extruder])
             i += 1
 
-        heater_bed = self._gtk.Image("bed.svg", None, .6, .6)
-        self.labels['heater_bed'] = Gtk.Label(label="")
-        self.labels['heater_bed'].get_style_context().add_class("printing-info")
-        heater_bed_box = Gtk.Box(spacing=0)
-        heater_bed_box.add(heater_bed)
-        heater_bed_box.add(self.labels['heater_bed'])
         temp_grid = self._gtk.HomogeneousGrid()
         self.current_extruder = self._printer.get_stat("toolhead","extruder")
         temp_grid.attach(self.labels[self.current_extruder + '_box'], 0, 0, 1, 1)
-        temp_grid.attach(heater_bed_box, 1, 0, 1, 1)
+        if self._printer.has_heated_bed():
+            heater_bed = self._gtk.Image("bed.svg", None, .6, .6)
+            self.labels['heater_bed'] = Gtk.Label(label="")
+            self.labels['heater_bed'].get_style_context().add_class("printing-info")
+            heater_bed_box = Gtk.Box(spacing=0)
+            heater_bed_box.add(heater_bed)
+            heater_bed_box.add(self.labels['heater_bed'])
+            temp_grid.attach(heater_bed_box, 1, 0, 1, 1)
         self.labels['temp_grid'] = temp_grid
 
         # Create time remaining items
@@ -347,10 +348,11 @@ class JobStatusPanel(ScreenPanel):
             return
         _ = self.lang.gettext
 
-        self.update_temp("heater_bed",
-            self._printer.get_dev_stat("heater_bed","temperature"),
-            self._printer.get_dev_stat("heater_bed","target")
-        )
+        if self._printer.has_heated_bed():
+            self.update_temp("heater_bed",
+                self._printer.get_dev_stat("heater_bed","temperature"),
+                self._printer.get_dev_stat("heater_bed","target")
+            )
         for x in self._printer.get_tools():
             self.update_temp(x,
                 self._printer.get_dev_stat(x,"temperature"),

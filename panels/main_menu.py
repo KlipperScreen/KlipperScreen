@@ -32,10 +32,11 @@ class MainPanel(MenuPanel):
             eq_grid.attach(self.labels[x], i%2, i/2, 1, 1)
             i += 1
 
-        self.labels['heater_bed'] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
+        if self._printer.has_heated_bed():
+            self.labels['heater_bed'] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
 
-        width = 2 if i > 1 else 1
-        eq_grid.attach(self.labels['heater_bed'], 0, i/2+1, width, 1)
+            width = 2 if i > 1 else 1
+            eq_grid.attach(self.labels['heater_bed'], 0, i/2+1, width, 1)
 
         grid.attach(eq_grid, 0, 0, 1, 1)
 
