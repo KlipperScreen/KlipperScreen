@@ -72,7 +72,8 @@ class KlippyFiles:
                 self.files[params['filename']]['thumbnails'].sort(key=lambda x: x['size'], reverse=True)
 
                 for thumbnail in self.files[params['filename']]['thumbnails']:
-                    f = open("%s/%s-%s" % (self.thumbnail_dir, params['filename'], thumbnail['size']), "wb")
+                    f = open("%s/%s-%s" % (self.thumbnail_dir, params['filename'].split('/')[-1], thumbnail['size']),
+                        "wb")
                     f.write(base64.b64decode(thumbnail['data']))
                     f.close()
             for cb in self.callbacks:
@@ -106,7 +107,7 @@ class KlippyFiles:
     def get_thumbnail_location(self, filename):
         if not self.has_thumbnail(filename):
             return None
-        return "%s/%s-%s" % (self.thumbnail_dir, filename, self.files[filename]['thumbnails'][0]['size'])
+        return "%s/%s-%s" % (self.thumbnail_dir, filename.split('/')[-1], self.files[filename]['thumbnails'][0]['size'])
 
     def has_thumbnail(self, filename):
         if filename not in self.files:
