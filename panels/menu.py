@@ -42,12 +42,14 @@ class MenuPanel(ScreenPanel):
             if not self.evaluate_enable(item[key]['enable']):
                 continue
 
-            col = i % columns
+            col = i % columns if self._screen.lang_ltr == True else (columns - (i % columns) - 1)
             row = int(i/columns)
             width = 1
 
             if expandLast == True and i+1 == l and l%2 == 1:
                 width = 2
+                if not self._screen.lang_ltr:
+                    col = col - 1
 
             self.grid.attach(self.labels[key], col, row, width, 1)
             i += 1

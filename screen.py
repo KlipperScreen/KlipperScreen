@@ -61,6 +61,7 @@ class KlipperScreen(Gtk.Window):
     panels = {}
     popup_message = None
     printer = None
+    rtl_languages = ['he_il']
     subscriptions = []
     shutdown = True
 
@@ -100,7 +101,15 @@ class KlipperScreen(Gtk.Window):
             "shutdown": self.state_shutdown
         })
 
+        logger.debug("OS Language: %s" % os.getenv('LANG'))
         self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', fallback=True)
+        self.lang_ltr = True
+        for lang in self.rtl_languages:
+            if os.getenv('LANG').lower().startswith(lang):
+                self.lang_ltr = False
+                logger.debug("Enabling RTL mode")
+                break
+
         _ = self.lang.gettext
 
         self.apiclient = KlippyRest(self._config.get_main_config_option("moonraker_host"),
