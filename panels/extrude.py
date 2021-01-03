@@ -19,12 +19,12 @@ class ExtrudePanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
 
-        self.speed = _("Medium")
-        self.speeds = [_("Slow"), _("Medium"), _("Fast")]
+        self.speed = "Medium"
+        self.speeds = ["Slow", "Medium", "Fast"]
         self.speed_trans = {
-            _("Slow"): "300",
-            _("Medium"): "800",
-            _("Fast"): "1400"
+            "Slow": "300",
+            "Medium": "800",
+            "Fast": "1400"
         }
 
         grid = self._gtk.HomogeneousGrid()
@@ -76,7 +76,7 @@ class ExtrudePanel(ScreenPanel):
         speedgrid = Gtk.Grid()
         j = 0;
         for i in self.speeds:
-            self.labels["speed"+str(i)] = self._gtk.ToggleButton(i)
+            self.labels["speed"+str(i)] = self._gtk.ToggleButton(_(i))
             self.labels["speed"+str(i)].connect("clicked", self.change_speed, i)
             ctx = self.labels["speed"+str(i)].get_style_context()
             if j == 0:
