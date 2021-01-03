@@ -4,7 +4,7 @@
 * Updated base language translation files with new phrases
 * Allow translations from KlipperScreen.conf for
 * Update menus for RTL languages
-* Add he_IL language (courtesy of manu7irl)
+* Add fr_FR and he_IL language (courtesy of manu7irl)
 
 #### 2020 12 21
 * KlipperScreen doesn't have to be a trusted client. It can use the Moonraker API key
