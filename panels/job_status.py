@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import gi
 import logging
 import math

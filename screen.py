@@ -18,6 +18,7 @@ import subprocess
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
+from jinja2 import Environment, Template
 
 from ks_includes.KlippyWebsocket import KlippyWebsocket
 from ks_includes.KlippyRest import KlippyRest
@@ -439,6 +440,14 @@ class KlipperScreen(Gtk.Window):
             {"name":_("Continue"), "response": Gtk.ResponseType.OK},
             {"name":_("Cancel"),"response": Gtk.ResponseType.CANCEL}
         ]
+
+        try:
+            env = Environment(extensions=["jinja2.ext.i18n"])
+            env.install_gettext_translations(self.lang)
+            j2_temp = env.from_string(text)
+            text = j2_temp.render()
+        except:
+            logger.debug("Error parsing jinja for confirm_send_action")
 
         label = Gtk.Label()
         label.set_markup(text)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-18 12:37+0000\n"
+"POT-Creation-Date: 2021-01-03 17:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,27 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panels/print.py:229
+#: panels/print.py:229 panels/print.py:197
 msgid "?"
 msgstr ""
 
-#: panels/zcalibrate.py:65
+#: panels/zcalibrate.py:65 panels/zcalibrate.py:70
 msgid "Abort"
 msgstr ""
 
-#: panels/zcalibrate.py:61
+#: panels/zcalibrate.py:61 panels/zcalibrate.py:67
 msgid "Accept"
 msgstr ""
 
-#: panels/print.py:229
+#: ks_includes/KlipperScreen.conf:26
+msgid "Actions"
+msgstr ""
+
+#: panels/print.py:229 panels/print.py:197
 msgid "Are you sure you want to print"
 msgstr ""
 
-#: panels/job_status.py:108
+#: panels/job_status.py:108 panels/job_status.py:305
 msgid "Are you sure you wish to cancel this print?"
 msgstr ""
 
@@ -43,47 +47,79 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: panels/job_status.py:79 panels/print.py:225
+#: ks_includes/KlipperScreen.conf:107
+msgid "Bed Level"
+msgstr ""
+
+#: ks_includes/KlipperScreen.conf:112
+msgid "Bed Mesh"
+msgstr ""
+
+#: panels/job_status.py:79 panels/print.py:225 screen.py:440
+#: panels/job_status.py:267 panels/print.py:193
 msgid "Cancel"
 msgstr ""
 
-#: panels/fan.py:42
+#: panels/fan.py:42 panels/fan.py:45
 msgid "Cancel Change"
 msgstr ""
 
-#: panels/job_status.py:111
+#: panels/job_status.py:111 panels/job_status.py:300
 msgid "Cancel Print"
 msgstr ""
 
-#: panels/temperature.py:146
+#: screen.py:274
+msgid ""
+"Check /tmp/KlipperScreen.log for more information.\n"
+"Please submit an issue on GitHub for help."
+msgstr ""
+
+#: panels/temperature.py:146 panels/bed_mesh.py:172 panels/temperature.py:149
 msgid "Close"
 msgstr ""
 
-#: panels/job_status.py:85
+#: ks_includes/KlipperScreen.conf:30
+msgid "Configuration"
+msgstr ""
+
+#: screen.py:439
+msgid "Continue"
+msgstr ""
+
+#: panels/job_status.py:85 panels/job_status.py:269
 msgid "Control"
 msgstr ""
 
-#: panels/preheat.py:51
+#: panels/preheat.py:51 panels/preheat.py:54
 msgid "Cooldown"
 msgstr ""
 
-#: panels/temperature.py:49
+#: panels/temperature.py:49 panels/temperature.py:53
 msgid "Decrease"
 msgstr ""
 
-#: panels/bed_level.py:79
+#: ks_includes/KlipperScreen.conf:101
+msgid "Disable Motors"
+msgstr ""
+
+#: panels/bed_level.py:79 panels/bed_level.py:101
 msgid "Disable XY"
 msgstr ""
 
-#: panels/zcalibrate.py:57
+#: panels/zcalibrate.py:57 panels/zcalibrate.py:63
 msgid "Distance (mm)"
 msgstr ""
 
-#: panels/bed_level.py:85 panels/job_status.py:82
+#: panels/job_status.py:135
+msgid "Elapsed:"
+msgstr ""
+
+#: panels/bed_level.py:85 panels/job_status.py:82 panels/job_status.py:271
 msgid "Emergency Stop"
 msgstr ""
 
-#: panels/extrude.py:32
+#: panels/extrude.py:32 panels/extrude.py:43 ks_includes/KlipperScreen.conf:74
+#: ks_includes/KlipperScreen.conf:167
 msgid "Extrude"
 msgstr ""
 
@@ -91,15 +127,16 @@ msgstr ""
 msgid "Extrusion"
 msgstr ""
 
-#: panels/fine_tune.py:64
+#: panels/fine_tune.py:64 panels/fine_tune.py:57
 msgid "Extrusion +"
 msgstr ""
 
-#: panels/fine_tune.py:68
+#: panels/fine_tune.py:68 panels/fine_tune.py:61
 msgid "Extrusion -"
 msgstr ""
 
 #: panels/fine_tune.py:46 panels/fine_tune.py:141
+#: ks_includes/KlipperScreen.conf:79 ks_includes/KlipperScreen.conf:162
 msgid "Fan"
 msgstr ""
 
@@ -111,111 +148,238 @@ msgstr ""
 msgid "Fan -"
 msgstr ""
 
-#: panels/fan.py:32
+#: panels/fan.py:32 panels/fan.py:35
 msgid "Fan Off"
 msgstr ""
 
-#: panels/fan.py:35
+#: panels/fan.py:35 panels/fan.py:38
 msgid "Fan On"
 msgstr ""
 
-#: panels/extrude.py:21 panels/extrude.py:25
+#: panels/extrude.py:21 panels/extrude.py:25 panels/extrude.py:23
+#: panels/extrude.py:27
 msgid "Fast"
 msgstr ""
 
-#: panels/system.py:22 panels/splash_screen.py:59
+#: ks_includes/KlipperScreen.conf:157
+msgid "Fine Tuning"
+msgstr ""
+
+#: panels/system.py:22 panels/splash_screen.py:59 panels/splash_screen.py:62
+#: panels/system.py:24
 msgid "Firmware Restart"
 msgstr ""
 
-#: panels/job_status.py:115
+#: panels/job_status.py:115 screen.py:269 panels/job_status.py:301
 msgid "Go Back"
 msgstr ""
 
-#: panels/bed_level.py:76 panels/move.py:38
+#: panels/bed_level.py:76 panels/move.py:38 panels/bed_level.py:98
+#: panels/move.py:40 ks_includes/KlipperScreen.conf:39
 msgid "Home All"
 msgstr ""
 
-#: panels/zcalibrate.py:25
+#: ks_includes/KlipperScreen.conf:45
+msgid "Home X"
+msgstr ""
+
+#: ks_includes/KlipperScreen.conf:63
+msgid "Home XY"
+msgstr ""
+
+#: ks_includes/KlipperScreen.conf:51
+msgid "Home Y"
+msgstr ""
+
+#: ks_includes/KlipperScreen.conf:57
+msgid "Home Z"
+msgstr ""
+
+#: panels/zcalibrate.py:25 panels/zcalibrate.py:29
+#: ks_includes/KlipperScreen.conf:17
 msgid "Homing"
 msgstr ""
 
-#: panels/temperature.py:47
+#: panels/temperature.py:47 panels/temperature.py:51
 msgid "Increase"
+msgstr ""
+
+#. self._load_panels()
+#: screen.py:121
+msgid "Initializing"
 msgstr ""
 
 #: panels/splash_screen.py:23
 msgid "Initializing printer..."
 msgstr ""
 
-#: panels/system.py:20
+#: ks_includes/KlipperScreen.conf:144
+msgid "KS Settings"
+msgstr ""
+
+#: panels/system.py:20 panels/system.py:22
 msgid "Klipper Restart"
 msgstr ""
 
-#: panels/system.py:43 panels/system.py:42
+#: panels/system.py:35
+msgid "Klipper Version"
+msgstr ""
+
+#: screen.py:369
+msgid "Klipper has disconnected"
+msgstr ""
+
+#: screen.py:380
+msgid ""
+"Klipper has encountered an error with the micro-controller.\n"
+"Please recompile and flash."
+msgstr ""
+
+#: screen.py:384
+msgid "Klipper has encountered an error."
+msgstr ""
+
+#: screen.py:376
+msgid ""
+"Klipper has encountered an error.\n"
+"Issue a FIRMWARE_RESTART to attempt fixing the issue."
+msgstr ""
+
+#: screen.py:402
+msgid "Klipper has shutdown"
+msgstr ""
+
+#: screen.py:398
+msgid "Klipper is attempting to start"
+msgstr ""
+
+#: ks_includes/KlipperScreen.conf:141
+msgid "Klipper will reboot"
+msgstr ""
+
+#: panels/system.py:43 panels/system.py:42 panels/system.py:39
 msgid "KlipperScreen Version"
 msgstr ""
 
-#: panels/system.py:62
+#: panels/job_status.py:123
+msgid "Left:"
+msgstr ""
+
+#: panels/system.py:62 panels/system.py:57
 msgid "Load Average"
 msgstr ""
 
-#: panels/zcalibrate.py:34
+#: panels/zcalibrate.py:34 panels/zcalibrate.py:39
 msgid "Lower Nozzle"
 msgstr ""
 
+#: ks_includes/KlipperScreen.conf:89
+msgid "Macros"
+msgstr ""
+
+#: panels/job_status.py:273 ks_includes/KlipperScreen.conf:14
+msgid "Main Menu"
+msgstr ""
+
 #: panels/extrude.py:20 panels/extrude.py:21 panels/extrude.py:24
+#: panels/extrude.py:22 panels/extrude.py:23 panels/extrude.py:26
 msgid "Medium"
 msgstr ""
 
-#: panels/move.py:87
+#: ks_includes/KlipperScreen.conf:69
+msgid "Move"
+msgstr ""
+
+#: panels/move.py:87 panels/move.py:86
 msgid "Move Distance (mm)"
 msgstr ""
 
-#: panels/network.py:28
+#: ks_includes/KlipperScreen.conf:124 ks_includes/KlipperScreen.conf:173
+msgid "Network"
+msgstr ""
+
+#: panels/network.py:28 panels/network.py:31
 msgid "Network Info"
 msgstr ""
 
-#: panels/temperature.py:51
+#: panels/temperature.py:51 panels/temperature.py:55
 msgid "Number Pad"
 msgstr ""
 
-#: panels/job_status.py:70
+#: panels/job_status.py:70 panels/job_status.py:275
 msgid "Pause"
 msgstr ""
 
-#: panels/print.py:224
+#: panels/job_status.py:454
+msgid "Paused"
+msgstr ""
+
+#: ks_includes/KlipperScreen.conf:95
+msgid "Power"
+msgstr ""
+
+#: panels/splash_screen.py:59
+msgid "Power On Printer"
+msgstr ""
+
+#: ks_includes/KlipperScreen.conf:21
+msgid "Preheat"
+msgstr ""
+
+#: panels/print.py:224 panels/print.py:192 ks_includes/KlipperScreen.conf:34
 msgid "Print"
 msgstr ""
 
-#: panels/print.py:154
+#: ks_includes/KlipperScreen.conf:149
+msgid "Print Control"
+msgstr ""
+
+#: panels/print.py:154 panels/print.py:122
 msgid "Print Time"
 msgstr ""
 
-#: panels/zcalibrate.py:32
+#: panels/job_status.py:231
+msgid "Printing"
+msgstr ""
+
+#: panels/zcalibrate.py:32 panels/zcalibrate.py:37
 msgid "Raise Nozzle"
 msgstr ""
 
-#: panels/splash_screen.py:57
+#: panels/splash_screen.py:57 panels/job_status.py:277
+#: panels/splash_screen.py:60
 msgid "Restart"
 msgstr ""
 
-#: panels/job_status.py:68
+#: panels/job_status.py:68 panels/job_status.py:279
 msgid "Resume"
 msgstr ""
 
-#: panels/extrude.py:34
+#: panels/extrude.py:34 panels/extrude.py:45
 msgid "Retract"
 msgstr ""
 
-#: panels/fan.py:39
+#: ks_includes/KlipperScreen.conf:134
+msgid "Save Config"
+msgstr ""
+
+#: ks_includes/KlipperScreen.conf:139
+msgid "Save configuration."
+msgstr ""
+
+#: panels/bed_level.py:108
+msgid "Screws Adjust"
+msgstr ""
+
+#: panels/fan.py:39 panels/fan.py:42
 msgid "Set Speed"
 msgstr ""
 
-#: panels/print.py:152
+#: panels/print.py:152 panels/print.py:120
 msgid "Size"
 msgstr ""
 
-#: panels/extrude.py:21 panels/extrude.py:23
+#: panels/extrude.py:21 panels/extrude.py:23 panels/extrude.py:25
 msgid "Slow"
 msgstr ""
 
@@ -223,19 +387,24 @@ msgstr ""
 msgid "Speed"
 msgstr ""
 
-#: panels/fine_tune.py:54
+#: panels/fine_tune.py:54 panels/fine_tune.py:47
 msgid "Speed +"
 msgstr ""
 
-#: panels/fine_tune.py:58
+#: panels/fine_tune.py:58 panels/fine_tune.py:51
 msgid "Speed -"
+msgstr ""
+
+#: ks_includes/KlipperScreen.conf:129 ks_includes/KlipperScreen.conf:178
+msgid "System"
 msgstr ""
 
 #: panels/system.py:31 panels/system.py:30
 msgid "System Information"
 msgstr ""
 
-#: panels/extrude.py:36
+#: panels/extrude.py:36 panels/extrude.py:47 ks_includes/KlipperScreen.conf:84
+#: ks_includes/KlipperScreen.conf:152
 msgid "Temperature"
 msgstr ""
 
@@ -247,42 +416,53 @@ msgstr ""
 msgid "Time Left"
 msgstr ""
 
+#: panels/extrude.py:35
+msgid "Tool"
+msgstr ""
+
 #: panels/extrude.py:30
 msgid "Tool 1"
 msgstr ""
 
-#: panels/print.py:150
+#: panels/print.py:150 panels/print.py:118
 msgid "Uploaded"
 msgstr ""
 
-#: panels/move.py:23
+#: panels/move.py:23 panels/move.py:25
 msgid "X+"
 msgstr ""
 
-#: panels/move.py:25
+#: panels/move.py:25 panels/move.py:27
 msgid "X-"
 msgstr ""
 
-#: panels/move.py:28
+#: panels/move.py:28 panels/move.py:30
 msgid "Y+"
 msgstr ""
 
-#: panels/move.py:30
+#: panels/move.py:30 panels/move.py:32
 msgid "Y-"
 msgstr ""
 
+#: ks_includes/KlipperScreen.conf:118
+msgid "Z Calibrate"
+msgstr ""
+
 #: panels/fine_tune.py:35 panels/fine_tune.py:131 panels/zcalibrate.py:23
+#: panels/zcalibrate.py:28
 msgid "Z Offset"
 msgstr ""
 
-#: panels/fine_tune.py:33 panels/move.py:33
+#: panels/fine_tune.py:33 panels/move.py:33 panels/fine_tune.py:36
+#: panels/move.py:35
 msgid "Z+"
 msgstr ""
 
-#: panels/fine_tune.py:37 panels/move.py:35
+#: panels/fine_tune.py:37 panels/move.py:35 panels/fine_tune.py:40
+#: panels/move.py:37
 msgid "Z-"
 msgstr ""
 
-#: panels/fine_tune.py:35
+#: panels/fine_tune.py:35 panels/fine_tune.py:38
 msgid "mm"
 msgstr ""

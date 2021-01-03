@@ -1,9 +1,10 @@
+import gettext
 import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
-from jinja2 import Template
+from jinja2 import Environment, Template
 
 from ks_includes.screen_panel import ScreenPanel
 
@@ -57,8 +58,14 @@ class MenuPanel(ScreenPanel):
         for i in range(len(self.items)):
             key = list(self.items[i])[0]
             item = self.items[i][key]
+
+            env = Environment(extensions=["jinja2.ext.i18n"])
+            env.install_gettext_translations(self.lang)
+            j2_temp = env.from_string(item['name'])
+            parsed_name = j2_temp.render()
+
             b = self._gtk.ButtonImage(
-                item['icon'], item['name'], "color"+str((i%4)+1)
+                item['icon'], parsed_name, "color"+str((i%4)+1)
             )
             if item['panel'] != False:
                 b.connect("clicked", self.menu_item_clicked, item['panel'], item)
