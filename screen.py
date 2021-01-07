@@ -77,8 +77,8 @@ class KlipperScreen(Gtk.Window):
         args = parser.parse_args()
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
-
-        self._config = KlipperScreenConfig(configfile)
+        self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', fallback=True)
+        self._config = KlipperScreenConfig(configfile, self.lang)
         self.printer = Printer({
             "software_version": "Unknown"
         }, {
@@ -92,6 +92,7 @@ class KlipperScreen(Gtk.Window):
                 'is_active': False
             }
         })
+
         self.printer.set_callbacks({
             "disconnected": self.state_disconnected,
             "error": self.state_error,
@@ -102,7 +103,7 @@ class KlipperScreen(Gtk.Window):
         })
 
         logger.debug("OS Language: %s" % os.getenv('LANG'))
-        self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', fallback=True)
+
         self.lang_ltr = True
         for lang in self.rtl_languages:
             if os.getenv('LANG').lower().startswith(lang):
@@ -115,6 +116,10 @@ class KlipperScreen(Gtk.Window):
         self.apiclient = KlippyRest(self._config.get_main_config_option("moonraker_host"),
             self._config.get_main_config_option("moonraker_port"),
             self._config.get_main_config_option("moonraker_api_key", False))
+
+        powerdevs = self.apiclient.send_request("machine/device_power/devices")
+        if powerdevs != False:
+            self.printer.configure_power_devices(powerdevs['result'])
 
         Gtk.Window.__init__(self)
         self.width = self._config.get_main_config().getint("width", Gdk.Screen.get_width(Gdk.Screen.get_default()))
