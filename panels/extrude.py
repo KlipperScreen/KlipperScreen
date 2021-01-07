@@ -27,6 +27,9 @@ class ExtrudePanel(ScreenPanel):
             "Fast": "1400"
         }
 
+        # This line for translations only
+        speed_translations = [_("Slow"), _("Medium"), _("Fast")]
+
         grid = self._gtk.HomogeneousGrid()
 
         i = 0
