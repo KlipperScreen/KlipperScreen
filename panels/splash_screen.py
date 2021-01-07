@@ -71,7 +71,6 @@ class SplashScreenPanel(ScreenPanel):
             self.labels['power'].connect("clicked", self.power_on, devices[0])
             self.labels['actions'].add(self.labels['power'])
 
-        self.labels['actions'].add(self.labels['power'])
         self.labels['actions'].add(self.labels['restart'])
         self.labels['actions'].add(self.labels['firmware_restart'])
 
