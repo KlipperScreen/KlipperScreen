@@ -16,6 +16,7 @@ class MacroPanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
         self.macros = {}
+        self.loaded_macros = []
 
         # Create a scroll window for the macros
         scroll = Gtk.ScrolledWindow()
@@ -31,9 +32,11 @@ class MacroPanel(ScreenPanel):
         box.set_vexpand(True)
         box.pack_start(scroll, True, True, 0)
 
-        self.load_gcode_macros()
-
         self.content.add(box)
+
+    def activate(self):
+        self.unload_gcode_macros()
+        self.load_gcode_macros()
 
     def add_gcode_macro(self, macro):
 
@@ -73,6 +76,7 @@ class MacroPanel(ScreenPanel):
         macros = sorted(self.macros)
         pos = macros.index(macro)
 
+        self.loaded_macros.append(macro)
         self.labels['macros'].insert_row(pos)
         self.labels['macros'].attach(self.macros[macro]['row'], 0, pos, 1, 1)
         self.labels['macros'].show_all()
@@ -80,7 +84,23 @@ class MacroPanel(ScreenPanel):
     def load_gcode_macros(self):
         macros = self._screen.printer.get_gcode_macros()
         for x in macros:
-            self.add_gcode_macro(x[12:])
+            macro = x[12:]
+
+            if macro in self.loaded_macros:
+                continue
+
+            if ("displayed_macros" not in self._config.get_config().sections() or
+                    self._config.get_config().getboolean("displayed_macros", macro, fallback=True)):
+                self.add_gcode_macro(macro)
 
     def run_gcode_macro(self, widget, macro):
         self._screen._ws.klippy.gcode_script(macro)
+
+    def unload_gcode_macros(self):
+        for macro in self.loaded_macros:
+            if ("displayed_macros" in self._config.get_config().sections() and
+                    not self._config.get_config().getboolean("displayed_macros", macro, fallback=True)):
+                macros = sorted(self.macros)
+                pos = macros.index(macro)
+                self.labels['macros'].remove_row(pos)
+                self.labels['macros'].show_all()
