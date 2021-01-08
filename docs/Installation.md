@@ -19,6 +19,12 @@ After changing _/boot/config.txt_ you must reboot your raspberry pi. Please also
 
 ### Installation
 
+This install process is meant for Raspbian non-desktop version. If you have installed it on the GUI version, use
+`sudo raspi-config` to set boot to console by choosing the following options in order:
+* 1 System Options
+* S5 Boot / Auto Login
+* B1 Console
+
 Follow the instructions to install klipper and moonraker.
 klipper: https://github.com/KevinOConnor/klipper/
 moonraker: https://github.com/Arksine/moonraker
