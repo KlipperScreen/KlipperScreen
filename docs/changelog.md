@@ -1,5 +1,8 @@
 ## Changelog
 
+#### 2021 01 08
+* Added settings panel. Invert axis and hiding macros can now be configured from within KlipperScreen
+
 #### 2021 01 03
 * Updated base language translation files with new phrases
 * Allow translations from KlipperScreen.conf for

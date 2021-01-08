@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-07 05:48+0000\n"
-"PO-Revision-Date: 2021-01-05 21:32+0200\n"
+"PO-Revision-Date: 2021-01-08 08:21-0500\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
 "Language: he_IL\n"
@@ -369,9 +369,8 @@ msgid "Set Speed"
 msgstr "קבע מהירות"
 
 #: ks_includes/KlipperScreen.conf:144
-#, fuzzy
 msgid "Settings"
-msgstr "הגדרות KS"
+msgstr "הגדרות"
 
 #: panels/print.py:120
 msgid "Size"

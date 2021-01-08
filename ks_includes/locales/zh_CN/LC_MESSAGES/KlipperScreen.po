@@ -371,7 +371,7 @@ msgstr "设定速度"
 #: ks_includes/KlipperScreen.conf:144
 #, fuzzy
 msgid "Settings"
-msgstr "KS设置"
+msgstr "设置"
 
 #: panels/print.py:120
 msgid "Size"
