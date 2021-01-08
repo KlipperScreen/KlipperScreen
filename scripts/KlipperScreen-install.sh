@@ -57,8 +57,14 @@ modify_user()
 
 update_x11()
 {
-    echo "Updating X11 configuration"
-    sudo sed -i 's/allowed_users=console/allowed_users=anybody/g' /etc/X11/Xwrapper.config
+    if [ -e /etc/X11/Xwrapper.conf ]
+    then
+        echo "Updating X11 Xwrapper"
+        sudo sed -i 's/allowed_users=console/allowed_users=anybody/g' /etc/X11/Xwrapper.config
+    else
+        echo "Adding X11 Xwrapper"
+        echo 'allowed_users=anybody' | sudo tee /etc/X11/Xwrapper.config
+    fi
 }
 
 start_KlipperScreen() {
