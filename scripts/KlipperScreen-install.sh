@@ -50,6 +50,11 @@ install_systemd_service()
     sudo systemctl enable KlipperScreen
 }
 
+modify_user()
+{
+    sudo usermod -a -G tty $USER
+}
+
 update_x11()
 {
     echo "Updating X11 configuration"
@@ -62,6 +67,7 @@ start_KlipperScreen() {
 
 install_packages
 create_virtualenv
+modify_user
 install_systemd_service
 update_x11
 start_KlipperScreen
