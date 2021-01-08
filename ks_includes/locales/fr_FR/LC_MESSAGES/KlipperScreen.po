@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-07 05:48+0000\n"
+"POT-Creation-Date: 2021-01-08 16:20+0000\n"
 "PO-Revision-Date: 2021-01-03 23:18+0200\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
@@ -49,6 +49,10 @@ msgstr "Nivelage du plateau"
 #: ks_includes/KlipperScreen.conf:112
 msgid "Bed Mesh"
 msgstr "Grille du plateau"
+
+#: ks_includes/config.py:31
+msgid "Byte Position (Default)"
+msgstr ""
 
 #: screen.py:455 panels/job_status.py:267 panels/print.py:193
 msgid "Cancel"
@@ -110,6 +114,10 @@ msgstr ""
 msgid "Distance (mm)"
 msgstr "Distance (mm)"
 
+#: ks_includes/config.py:32
+msgid "Duration Only"
+msgstr ""
+
 #: panels/job_status.py:135
 msgid "Elapsed:"
 msgstr "Écoulé:"
@@ -118,7 +126,11 @@ msgstr "Écoulé:"
 msgid "Emergency Stop"
 msgstr "Arret d'urgence"
 
-#: panels/extrude.py:45 ks_includes/KlipperScreen.conf:74
+#: ks_includes/config.py:29
+msgid "Estimated Time Method"
+msgstr ""
+
+#: panels/extrude.py:46 ks_includes/KlipperScreen.conf:74
 #: ks_includes/KlipperScreen.conf:167
 msgid "Extrude"
 msgstr "Extruder"
@@ -143,9 +155,13 @@ msgstr "ventilateur éteint"
 msgid "Fan On"
 msgstr "Ventilateur en marche"
 
-#: panels/extrude.py:30
+#: panels/extrude.py:31
 msgid "Fast"
 msgstr "Rapide"
+
+#: ks_includes/config.py:33
+msgid "Filament Used"
+msgstr ""
 
 #: ks_includes/KlipperScreen.conf:157
 msgid "Fine Tuning"
@@ -207,6 +223,11 @@ msgstr ""
 #: ks_includes/config.py:28
 msgid "Invert Z"
 msgstr ""
+
+#: ks_includes/config.py:34
+#, fuzzy
+msgid "Klipper"
+msgstr "Redémarrer klipper"
 
 #: panels/system.py:22
 msgid "Klipper Restart"
@@ -275,7 +296,7 @@ msgstr "Macros"
 msgid "Main Menu"
 msgstr "Menu principal"
 
-#: panels/extrude.py:30
+#: panels/extrude.py:31
 msgid "Medium"
 msgstr "Moyen"
 
@@ -347,7 +368,7 @@ msgstr "Redémarrage"
 msgid "Resume"
 msgstr "Resumer"
 
-#: panels/extrude.py:47
+#: panels/extrude.py:48
 msgid "Retract"
 msgstr "Rétracter"
 
@@ -376,7 +397,12 @@ msgstr "Paramètres"
 msgid "Size"
 msgstr "dimensions"
 
-#: panels/extrude.py:30
+#: ks_includes/config.py:35
+msgid "Slicer"
+msgstr ""
+
+#. This line for translations only
+#: panels/extrude.py:31
 msgid "Slow"
 msgstr "Lent"
 
@@ -392,12 +418,12 @@ msgstr "Vitesse-"
 msgid "System"
 msgstr "Systeme"
 
-#: panels/extrude.py:49 ks_includes/KlipperScreen.conf:84
+#: panels/extrude.py:50 ks_includes/KlipperScreen.conf:84
 #: ks_includes/KlipperScreen.conf:152
 msgid "Temperature"
 msgstr "Temperature"
 
-#: panels/extrude.py:37
+#: panels/extrude.py:38
 msgid "Tool"
 msgstr "outil"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-07 05:48+0000\n"
+"POT-Creation-Date: 2021-01-08 16:20+0000\n"
 "PO-Revision-Date: 2021-01-06 00:35+0200\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
@@ -49,6 +49,10 @@ msgstr "床位"
 #: ks_includes/KlipperScreen.conf:112
 msgid "Bed Mesh"
 msgstr "床网"
+
+#: ks_includes/config.py:31
+msgid "Byte Position (Default)"
+msgstr ""
 
 #: screen.py:455 panels/job_status.py:267 panels/print.py:193
 msgid "Cancel"
@@ -110,6 +114,10 @@ msgstr ""
 msgid "Distance (mm)"
 msgstr "距离（毫米）"
 
+#: ks_includes/config.py:32
+msgid "Duration Only"
+msgstr ""
+
 #: panels/job_status.py:135
 msgid "Elapsed:"
 msgstr "过去"
@@ -118,7 +126,11 @@ msgstr "过去"
 msgid "Emergency Stop"
 msgstr "紧急停止"
 
-#: panels/extrude.py:45 ks_includes/KlipperScreen.conf:74
+#: ks_includes/config.py:29
+msgid "Estimated Time Method"
+msgstr ""
+
+#: panels/extrude.py:46 ks_includes/KlipperScreen.conf:74
 #: ks_includes/KlipperScreen.conf:167
 msgid "Extrude"
 msgstr "拉伸"
@@ -143,9 +155,13 @@ msgstr "散开"
 msgid "Fan On"
 msgstr "扇上"
 
-#: panels/extrude.py:30
+#: panels/extrude.py:31
 msgid "Fast"
 msgstr "快速"
+
+#: ks_includes/config.py:33
+msgid "Filament Used"
+msgstr ""
 
 #: ks_includes/KlipperScreen.conf:157
 msgid "Fine Tuning"
@@ -207,6 +223,11 @@ msgstr ""
 #: ks_includes/config.py:28
 msgid "Invert Z"
 msgstr ""
+
+#: ks_includes/config.py:34
+#, fuzzy
+msgid "Klipper"
+msgstr "快闪重启"
 
 #: panels/system.py:22
 msgid "Klipper Restart"
@@ -276,7 +297,7 @@ msgstr "巨集"
 msgid "Main Menu"
 msgstr "主菜单"
 
-#: panels/extrude.py:30
+#: panels/extrude.py:31
 msgid "Medium"
 msgstr "中"
 
@@ -348,7 +369,7 @@ msgstr "重新开始"
 msgid "Resume"
 msgstr "恢复"
 
-#: panels/extrude.py:47
+#: panels/extrude.py:48
 msgid "Retract"
 msgstr "缩回"
 
@@ -377,7 +398,12 @@ msgstr "设置"
 msgid "Size"
 msgstr "尺寸"
 
-#: panels/extrude.py:30
+#: ks_includes/config.py:35
+msgid "Slicer"
+msgstr ""
+
+#. This line for translations only
+#: panels/extrude.py:31
 msgid "Slow"
 msgstr "慢"
 
@@ -393,12 +419,12 @@ msgstr "速度 -"
 msgid "System"
 msgstr "系统"
 
-#: panels/extrude.py:49 ks_includes/KlipperScreen.conf:84
+#: panels/extrude.py:50 ks_includes/KlipperScreen.conf:84
 #: ks_includes/KlipperScreen.conf:152
 msgid "Temperature"
 msgstr "温度"
 
-#: panels/extrude.py:37
+#: panels/extrude.py:38
 msgid "Tool"
 msgstr "工具"
 

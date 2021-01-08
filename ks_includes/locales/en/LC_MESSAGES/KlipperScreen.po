@@ -30,6 +30,10 @@ msgstr ""
 msgid "Bed Mesh"
 msgstr ""
 
+#: ks_includes/config.py:31
+msgid "Byte Position (Default)"
+msgstr ""
+
 #: screen.py:455 panels/job_status.py:267 panels/print.py:193
 msgid "Cancel"
 msgstr ""
@@ -88,6 +92,10 @@ msgstr ""
 msgid "Distance (mm)"
 msgstr ""
 
+#: ks_includes/config.py:32
+msgid "Duration Only"
+msgstr ""
+
 #: panels/job_status.py:135
 msgid "Elapsed:"
 msgstr ""
@@ -96,7 +104,11 @@ msgstr ""
 msgid "Emergency Stop"
 msgstr ""
 
-#: panels/extrude.py:45 ks_includes/KlipperScreen.conf:74
+#: ks_includes/config.py:29
+msgid "Estimated Time Method"
+msgstr ""
+
+#: panels/extrude.py:46 ks_includes/KlipperScreen.conf:74
 #: ks_includes/KlipperScreen.conf:167
 msgid "Extrude"
 msgstr ""
@@ -121,8 +133,12 @@ msgstr ""
 msgid "Fan On"
 msgstr ""
 
-#: panels/extrude.py:30
+#: panels/extrude.py:31
 msgid "Fast"
+msgstr ""
+
+#: ks_includes/config.py:33
+msgid "Filament Used"
 msgstr ""
 
 #: ks_includes/KlipperScreen.conf:157
@@ -184,6 +200,10 @@ msgstr ""
 
 #: ks_includes/config.py:28
 msgid "Invert Z"
+msgstr ""
+
+#: ks_includes/config.py:34
+msgid "Klipper"
 msgstr ""
 
 #: panels/system.py:22
@@ -250,7 +270,7 @@ msgstr ""
 msgid "Main Menu"
 msgstr ""
 
-#: panels/extrude.py:30
+#: panels/extrude.py:31
 msgid "Medium"
 msgstr ""
 
@@ -322,7 +342,7 @@ msgstr ""
 msgid "Resume"
 msgstr ""
 
-#: panels/extrude.py:47
+#: panels/extrude.py:48
 msgid "Retract"
 msgstr ""
 
@@ -350,7 +370,12 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
-#: panels/extrude.py:30
+#: ks_includes/config.py:35
+msgid "Slicer"
+msgstr ""
+
+#. This line for translations only
+#: panels/extrude.py:31
 msgid "Slow"
 msgstr ""
 
@@ -366,12 +391,12 @@ msgstr ""
 msgid "System"
 msgstr ""
 
-#: panels/extrude.py:49 ks_includes/KlipperScreen.conf:84
+#: panels/extrude.py:50 ks_includes/KlipperScreen.conf:84
 #: ks_includes/KlipperScreen.conf:152
 msgid "Temperature"
 msgstr ""
 
-#: panels/extrude.py:37
+#: panels/extrude.py:38
 msgid "Tool"
 msgstr ""
 
