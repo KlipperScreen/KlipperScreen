@@ -81,12 +81,12 @@ class ScreenPanel:
         self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
 
     def menu_item_clicked(self, widget, panel, item):
-        print("### Creating panel "+ item['panel'])
+        print("### Creating panel "+ item['panel'] + " : %s %s" % (panel, item))
         if "items" in item:
-            self._screen.show_panel(self._screen._cur_panels[-1] + '_' + item['name'], item['panel'], item['name'],
+            self._screen.show_panel(self._screen._cur_panels[-1] + '_' + panel, item['panel'], item['name'],
                 1, False, items=item['items'])
             return
-        self._screen.show_panel(self._screen._cur_panels[-1] + '_' + item['name'], item['panel'], item['name'],
+        self._screen.show_panel(self._screen._cur_panels[-1] + '_' + panel, item['panel'], item['name'],
             1, False)
 
     def menu_return(self, widget, home=False):
