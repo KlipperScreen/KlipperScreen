@@ -29,7 +29,7 @@ class MainPanel(MenuPanel):
             if i > 3:
                 break
             self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0))
-            col = 0 if len(self._printer.get_tools()) == 1 else (i%2 if self._screen.lang_ltr else 1 - i%2)
+            col = 0 if len(self._printer.get_tools()) == 1 else i%2 
             row = i/2
             eq_grid.attach(self.labels[x], col, row, 1, 1)
             i += 1
@@ -47,12 +47,8 @@ class MainPanel(MenuPanel):
         self.grid.set_row_homogeneous(True)
         self.grid.set_column_homogeneous(True)
 
-        if self._screen.lang_ltr:
-            grid.attach(eq_grid, 0, 0, 1, 1)
-            grid.attach(self.arrangeMenuItems(items, 2, True), 1, 0, 1, 1)
-        else:
-            grid.attach(eq_grid, 1, 0, 1, 1)
-            grid.attach(self.arrangeMenuItems(items, 2, True), 0, 0, 1, 1)
+        grid.attach(eq_grid, 0, 0, 1, 1)
+        grid.attach(self.arrangeMenuItems(items, 2, True), 1, 0, 1, 1)
 
         self.grid = grid
 

@@ -108,6 +108,7 @@ class KlipperScreen(Gtk.Window):
         for lang in self.rtl_languages:
             if os.getenv('LANG').lower().startswith(lang):
                 self.lang_ltr = False
+                Gtk.Widget.set_default_direction(Gtk.TextDirection.RTL)
                 logger.debug("Enabling RTL mode")
                 break
 
