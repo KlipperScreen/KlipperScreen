@@ -64,9 +64,11 @@ class ExtrudePanel(ScreenPanel):
             self.labels["dist"+str(i)] = self._gtk.ToggleButton(i)
             self.labels["dist"+str(i)].connect("clicked", self.change_distance, i)
             ctx = self.labels["dist"+str(i)].get_style_context()
-            if j == 0:
+            if ((self._screen.lang_ltr == True and j == 0) or
+                    (self._screen.lang_ltr == False and j == len(self.distances)-1)):
                 ctx.add_class("distbutton_top")
-            elif j == len(self.distances)-1:
+            elif ((self._screen.lang_ltr == False and j == 0) or
+                    (self._screen.lang_ltr == True and j == len(self.distances)-1)):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
@@ -82,9 +84,11 @@ class ExtrudePanel(ScreenPanel):
             self.labels["speed"+str(i)] = self._gtk.ToggleButton(_(i))
             self.labels["speed"+str(i)].connect("clicked", self.change_speed, i)
             ctx = self.labels["speed"+str(i)].get_style_context()
-            if j == 0:
+            if ((self._screen.lang_ltr == True and j == 0) or
+                    (self._screen.lang_ltr == False and j == len(self.speeds)-1)):
                 ctx.add_class("distbutton_top")
-            elif j == len(self.speeds)-1:
+            elif ((self._screen.lang_ltr == False and j == 0) or
+                    (self._screen.lang_ltr == True and j == len(self.speeds)-1)):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
