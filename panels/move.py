@@ -118,7 +118,7 @@ class MovePanel(ScreenPanel):
             self.labels[str(i)].set_active(False)
 
     def move(self, widget, axis, dir):
-        if self._config.get_config().getboolean("main", "invert_%s" % axis.lower(), False):
+        if self._config.get_config()['main'].getboolean("invert_%s" % axis.lower(), False):
             dir = "-" if dir == "+" else "+"
 
         dist = str(self.distance) if dir == "+" else "-" + str(self.distance)
