@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-08 16:20+0000\n"
+"POT-Creation-Date: 2021-01-10 19:17+0000\n"
 "PO-Revision-Date: 2021-01-08 08:21-0500\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
@@ -24,11 +24,11 @@ msgstr ""
 msgid "?"
 msgstr "?"
 
-#: panels/zcalibrate.py:70
+#: panels/zcalibrate.py:71
 msgid "Abort"
 msgstr "בטל"
 
-#: panels/zcalibrate.py:67
+#: panels/zcalibrate.py:68
 msgid "Accept"
 msgstr "אשר"
 
@@ -44,6 +44,16 @@ msgstr "האם אתה בטוח שברצונך להדפיס"
 msgid "Are you sure you wish to cancel this print?"
 msgstr "האם אתה בטוח שברצונך לבטל את ההדפסה?"
 
+#: panels/system.py:29
+#, fuzzy
+msgid "Are you sure you wish to reboot the system?"
+msgstr "האם אתה בטוח שברצונך לבטל את ההדפסה?"
+
+#: panels/system.py:32
+#, fuzzy
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "האם אתה בטוח שברצונך לבטל את ההדפסה?"
+
 #: ks_includes/KlipperScreen.conf:107
 msgid "Bed Level"
 msgstr "פילוס מיטה"
@@ -56,7 +66,7 @@ msgstr "מיפוי מיטה"
 msgid "Byte Position (Default)"
 msgstr ""
 
-#: screen.py:455 panels/job_status.py:267 panels/print.py:193
+#: screen.py:456 panels/job_status.py:267 panels/print.py:193
 msgid "Cancel"
 msgstr "ביטול"
 
@@ -68,7 +78,7 @@ msgstr "בטל שינוי"
 msgid "Cancel Print"
 msgstr "בטל הדפסה"
 
-#: screen.py:289
+#: screen.py:290
 msgid ""
 "Check /tmp/KlipperScreen.log for more information.\n"
 "Please submit an issue on GitHub for help."
@@ -76,7 +86,7 @@ msgstr ""
 "בדוק KlipperScreen.log, בתיקית tmp ליותר פרטים.\n"
 "אנא שלח דוח תקלה ב- GITHUB, לעזרה."
 
-#: panels/bed_mesh.py:172 panels/temperature.py:149
+#: panels/bed_mesh.py:172 panels/temperature.py:150
 msgid "Close"
 msgstr "סגור"
 
@@ -84,7 +94,7 @@ msgstr "סגור"
 msgid "Configuration"
 msgstr "קונפיגורציה"
 
-#: screen.py:454
+#: screen.py:455
 msgid "Continue"
 msgstr "המשך"
 
@@ -104,7 +114,7 @@ msgstr "הקטן"
 msgid "Disable Motors"
 msgstr "בטל מנועים"
 
-#: panels/bed_level.py:101
+#: panels/bed_level.py:107
 msgid "Disable XY"
 msgstr "בטל XY"
 
@@ -112,7 +122,7 @@ msgstr "בטל XY"
 msgid "Displayed Macros"
 msgstr ""
 
-#: panels/zcalibrate.py:63
+#: panels/zcalibrate.py:64
 msgid "Distance (mm)"
 msgstr "מרחק (מ''מ)"
 
@@ -173,11 +183,11 @@ msgstr "כיולים עדינים"
 msgid "Firmware Restart"
 msgstr "התחל קושחה"
 
-#: screen.py:284 panels/job_status.py:301
+#: screen.py:285 panels/job_status.py:301
 msgid "Go Back"
 msgstr "חזרה"
 
-#: panels/bed_level.py:98 panels/move.py:40 ks_includes/KlipperScreen.conf:39
+#: panels/bed_level.py:104 panels/move.py:40 ks_includes/KlipperScreen.conf:39
 msgid "Home All"
 msgstr "איפוס XYZ"
 
@@ -206,7 +216,7 @@ msgid "Increase"
 msgstr "הגדל"
 
 #. self._load_panels()
-#: screen.py:136
+#: screen.py:137
 msgid "Initializing"
 msgstr "מאתחל"
 
@@ -235,25 +245,25 @@ msgstr "אתחול קליפר"
 msgid "Klipper Restart"
 msgstr "אתחול קליפר"
 
-#: panels/system.py:35
+#: panels/system.py:42
 msgid "Klipper Version"
 msgstr "גרסא של קליפר"
 
-#: screen.py:384
+#: screen.py:385
 msgid "Klipper has disconnected"
 msgstr "קליפר התנתק"
 
-#: screen.py:395
+#: screen.py:396
 msgid ""
 "Klipper has encountered an error with the micro-controller.\n"
 "Please recompile and flash."
 msgstr "בעיית תקשורת בין קליפר ללוח בקרה. אנא לקמפל קושחה ולצרובה מחדש. "
 
-#: screen.py:399
+#: screen.py:400
 msgid "Klipper has encountered an error."
 msgstr "קילפר נתקל בבעיה."
 
-#: screen.py:391
+#: screen.py:392
 msgid ""
 "Klipper has encountered an error.\n"
 "Issue a FIRMWARE_RESTART to attempt fixing the issue."
@@ -261,11 +271,11 @@ msgstr ""
 "קליפר נתקל בבעיה. \n"
 "נסה להריץ firmware_restart, כדי לפתור את הבעיה."
 
-#: screen.py:417
+#: screen.py:418
 msgid "Klipper has shutdown"
 msgstr "קליפר נכבה"
 
-#: screen.py:413
+#: screen.py:414
 msgid "Klipper is attempting to start"
 msgstr "קליפר מנסה לרוץ"
 
@@ -273,7 +283,7 @@ msgstr "קליפר מנסה לרוץ"
 msgid "Klipper will reboot"
 msgstr "קליפר יבצע אתחול"
 
-#: panels/system.py:39
+#: panels/system.py:46
 msgid "KlipperScreen Version"
 msgstr "גרסא של KlipperScreen"
 
@@ -281,7 +291,7 @@ msgstr "גרסא של KlipperScreen"
 msgid "Left:"
 msgstr "זמן שנותר:"
 
-#: panels/system.py:57
+#: panels/system.py:66
 msgid "Load Average"
 msgstr "עומס ממוצע"
 
@@ -305,7 +315,7 @@ msgstr "ממוצע"
 msgid "Move"
 msgstr "הזזת צירים"
 
-#: panels/move.py:86
+#: panels/move.py:91
 msgid "Move Distance (mm)"
 msgstr "מרחק הזזה (מ''מ)"
 
@@ -381,7 +391,7 @@ msgstr "שמור קונפיג"
 msgid "Save configuration."
 msgstr "שמור קונפיגורציה"
 
-#: panels/bed_level.py:108
+#: panels/bed_level.py:114
 msgid "Screws Adjust"
 msgstr "סידור ברגים"
 
@@ -417,6 +427,19 @@ msgstr "מהירות -"
 #: ks_includes/KlipperScreen.conf:129 ks_includes/KlipperScreen.conf:178
 msgid "System"
 msgstr "מערכת"
+
+#: panels/system.py:27
+#, fuzzy
+msgid ""
+"System\n"
+"Restart"
+msgstr "אתחל"
+
+#: panels/system.py:30
+msgid ""
+"System\n"
+"Shutdown"
+msgstr ""
 
 #: panels/extrude.py:50 ks_includes/KlipperScreen.conf:84
 #: ks_includes/KlipperScreen.conf:152

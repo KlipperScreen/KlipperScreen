@@ -140,7 +140,6 @@ class Printer:
 
         logger.debug("Processing power devices: %s" % data)
         for x in data['devices']:
-            logger.debug(x)
             self.power_devices[x['device']] = {
                 "status": "on" if x['status'] == "on" else "off"
             }

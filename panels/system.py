@@ -24,6 +24,13 @@ class SystemPanel(ScreenPanel):
         firmrestart = self._gtk.ButtonImage('restart',_('Firmware Restart'),'color2')
         firmrestart.connect("clicked", self.restart_klippy, "firmware")
 
+        reboot = self._gtk.ButtonImage('reboot',_('System\nRestart'),'color3')
+        reboot.connect("clicked", self._screen._confirm_send_action,
+            _("Are you sure you wish to reboot the system?"), "machine.reboot")
+        shutdown = self._gtk.ButtonImage('shutdown',_('System\nShutdown'),'color4')
+        shutdown.connect("clicked", self._screen._confirm_send_action,
+            _("Are you sure you wish to shutdown the system?"), "machine.shutdown")
+
         info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         info.set_vexpand(True)
 
@@ -44,9 +51,11 @@ class SystemPanel(ScreenPanel):
         info.add(self.labels['ks_version'])
 
 
-        grid.attach(info, 0, 0, 4, 2)
+        grid.attach(info, 0, 0, 5, 2)
         grid.attach(restart, 0, 2, 1, 1)
         grid.attach(firmrestart, 1, 2, 1, 1)
+        grid.attach(reboot, 3, 2, 1, 1)
+        grid.attach(shutdown, 4, 2, 1, 1)
 
         self.content.add(grid)
 

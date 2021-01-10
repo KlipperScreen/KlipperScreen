@@ -448,7 +448,7 @@ class KlipperScreen(Gtk.Window):
         for sub in self.subscriptions:
             self.panels[sub].process_update(action, data)
 
-    def _confirm_send_action(self, widget, text, method, params):
+    def _confirm_send_action(self, widget, text, method, params={}):
         _ = self.lang.gettext
 
         buttons = [

@@ -2,11 +2,11 @@
 msgid "?"
 msgstr ""
 
-#: panels/zcalibrate.py:70
+#: panels/zcalibrate.py:71
 msgid "Abort"
 msgstr "Abort"
 
-#: panels/zcalibrate.py:67
+#: panels/zcalibrate.py:68
 msgid "Accept"
 msgstr ""
 
@@ -22,6 +22,14 @@ msgstr ""
 msgid "Are you sure you wish to cancel this print?"
 msgstr ""
 
+#: panels/system.py:29
+msgid "Are you sure you wish to reboot the system?"
+msgstr ""
+
+#: panels/system.py:32
+msgid "Are you sure you wish to shutdown the system?"
+msgstr ""
+
 #: ks_includes/KlipperScreen.conf:107
 msgid "Bed Level"
 msgstr ""
@@ -34,7 +42,7 @@ msgstr ""
 msgid "Byte Position (Default)"
 msgstr ""
 
-#: screen.py:455 panels/job_status.py:267 panels/print.py:193
+#: screen.py:456 panels/job_status.py:267 panels/print.py:193
 msgid "Cancel"
 msgstr ""
 
@@ -46,13 +54,13 @@ msgstr ""
 msgid "Cancel Print"
 msgstr ""
 
-#: screen.py:289
+#: screen.py:290
 msgid ""
 "Check /tmp/KlipperScreen.log for more information.\n"
 "Please submit an issue on GitHub for help."
 msgstr ""
 
-#: panels/bed_mesh.py:172 panels/temperature.py:149
+#: panels/bed_mesh.py:172 panels/temperature.py:150
 msgid "Close"
 msgstr ""
 
@@ -60,7 +68,7 @@ msgstr ""
 msgid "Configuration"
 msgstr ""
 
-#: screen.py:454
+#: screen.py:455
 msgid "Continue"
 msgstr ""
 
@@ -80,7 +88,7 @@ msgstr ""
 msgid "Disable Motors"
 msgstr ""
 
-#: panels/bed_level.py:101
+#: panels/bed_level.py:107
 msgid "Disable XY"
 msgstr ""
 
@@ -88,7 +96,7 @@ msgstr ""
 msgid "Displayed Macros"
 msgstr ""
 
-#: panels/zcalibrate.py:63
+#: panels/zcalibrate.py:64
 msgid "Distance (mm)"
 msgstr ""
 
@@ -149,11 +157,11 @@ msgstr ""
 msgid "Firmware Restart"
 msgstr ""
 
-#: screen.py:284 panels/job_status.py:301
+#: screen.py:285 panels/job_status.py:301
 msgid "Go Back"
 msgstr ""
 
-#: panels/bed_level.py:98 panels/move.py:40 ks_includes/KlipperScreen.conf:39
+#: panels/bed_level.py:104 panels/move.py:40 ks_includes/KlipperScreen.conf:39
 msgid "Home All"
 msgstr ""
 
@@ -182,7 +190,7 @@ msgid "Increase"
 msgstr ""
 
 #. self._load_panels()
-#: screen.py:136
+#: screen.py:137
 msgid "Initializing"
 msgstr ""
 
@@ -210,35 +218,35 @@ msgstr ""
 msgid "Klipper Restart"
 msgstr ""
 
-#: panels/system.py:35
+#: panels/system.py:42
 msgid "Klipper Version"
 msgstr ""
 
-#: screen.py:384
+#: screen.py:385
 msgid "Klipper has disconnected"
 msgstr ""
 
-#: screen.py:395
+#: screen.py:396
 msgid ""
 "Klipper has encountered an error with the micro-controller.\n"
 "Please recompile and flash."
 msgstr ""
 
-#: screen.py:399
+#: screen.py:400
 msgid "Klipper has encountered an error."
 msgstr ""
 
-#: screen.py:391
+#: screen.py:392
 msgid ""
 "Klipper has encountered an error.\n"
 "Issue a FIRMWARE_RESTART to attempt fixing the issue."
 msgstr ""
 
-#: screen.py:417
+#: screen.py:418
 msgid "Klipper has shutdown"
 msgstr ""
 
-#: screen.py:413
+#: screen.py:414
 msgid "Klipper is attempting to start"
 msgstr ""
 
@@ -246,7 +254,7 @@ msgstr ""
 msgid "Klipper will reboot"
 msgstr ""
 
-#: panels/system.py:39
+#: panels/system.py:46
 msgid "KlipperScreen Version"
 msgstr ""
 
@@ -254,7 +262,7 @@ msgstr ""
 msgid "Left:"
 msgstr ""
 
-#: panels/system.py:57
+#: panels/system.py:66
 msgid "Load Average"
 msgstr ""
 
@@ -278,7 +286,7 @@ msgstr ""
 msgid "Move"
 msgstr ""
 
-#: panels/move.py:86
+#: panels/move.py:91
 msgid "Move Distance (mm)"
 msgstr ""
 
@@ -354,7 +362,7 @@ msgstr ""
 msgid "Save configuration."
 msgstr ""
 
-#: panels/bed_level.py:108
+#: panels/bed_level.py:114
 msgid "Screws Adjust"
 msgstr ""
 
@@ -389,6 +397,18 @@ msgstr ""
 
 #: ks_includes/KlipperScreen.conf:129 ks_includes/KlipperScreen.conf:178
 msgid "System"
+msgstr ""
+
+#: panels/system.py:27
+msgid ""
+"System\n"
+"Restart"
+msgstr ""
+
+#: panels/system.py:30
+msgid ""
+"System\n"
+"Shutdown"
 msgstr ""
 
 #: panels/extrude.py:50 ks_includes/KlipperScreen.conf:84

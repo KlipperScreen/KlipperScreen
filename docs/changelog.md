@@ -1,5 +1,12 @@
 ## Changelog
 
+#### 2021 01 10
+* Added system reboot/shutdown buttons to systems panel.
+
+#### 2021 01 09
+* Better RTL support (most panels now properly support RTL)
+* Fixes to install script for latest version of raspbian.
+
 #### 2021 01 08
 * Added settings panel. Invert axis and hiding macros can now be configured from within KlipperScreen
 
