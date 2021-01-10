@@ -113,6 +113,7 @@ class TemperaturePanel(ScreenPanel):
         _ = self.lang.gettext
 
         numpad = self._gtk.HomogeneousGrid()
+        numpad.set_direction(Gtk.TextDirection.LTR)
 
         keys = [
             ['1','numpad_tleft'],

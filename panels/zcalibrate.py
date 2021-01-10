@@ -43,11 +43,12 @@ class ZCalibratePanel(ScreenPanel):
         j = 0;
         for i in self.distances:
             self.labels[i] = self._gtk.ToggleButton(i)
+            self.labels[i].set_direction(Gtk.TextDirection.LTR)
             self.labels[i].connect("clicked", self.change_distance, i)
             ctx = self.labels[i].get_style_context()
-            if j == 0:
+            if (self._screen.lang_ltr and j == 0) or (not self._screen.lang_ltr and j == len(self.distances)-1):
                 ctx.add_class("distbutton_top")
-            elif j == len(self.distances)-1:
+            elif (not self._screen.lang_ltr and j == 0) or (self._screen.lang_ltr and j == len(self.distances)-1):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
