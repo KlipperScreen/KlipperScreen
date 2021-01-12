@@ -16,36 +16,63 @@ def create_panel(*args):
 
 class PrintPanel(ScreenPanel):
     def initialize(self, panel_name):
+        _ = self.lang.gettext
         self.labels['files'] = {}
+        self.sort_items = {
+            "name": _("Name"),
+            "date": _("Date")
+        }
+        self.sort_char = ["↑","↓"]
+
+        sortdir = self._config.get_main_config_option("print_sort_dir","name_asc")
+        sortdir = sortdir.split('_')
+        if sortdir[0] not in ["name","date"] or sortdir[1] not in ["asc","desc"]:
+            sortdir = ["name","asc"]
+        self.sort_current = [sortdir[0], 0 if sortdir[1] == "asc" else 1] # 0 for asc, 1 for desc
 
         scroll = Gtk.ScrolledWindow()
         scroll.set_property("overlay-scrolling", False)
         scroll.set_vexpand(True)
 
+        sort = Gtk.Label()
+        sort.set_text(_("Sort by: "))
+        sbox = Gtk.Box(spacing=0)
+        sbox.set_vexpand(False)
+        sbox.add(sort)
+        i = 1
+        for name, val in self.sort_items.items():
+            s = self._gtk.Button(val, "color%s" % (i%4))
+            s.set_label(val)
+            if name == sortdir[0]:
+                s.set_label("%s %s" % (s.get_label(), self.sort_char[self.sort_current[1]]))
+            s.connect("clicked", self.change_sort, name)
+            self.labels['sort_%s' % name] = s
+            sbox.add(s)
+            i += 1
+        sbox.set_hexpand(True)
+        sbox.set_vexpand(False)
+
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         box.set_vexpand(True)
+        box.pack_start(sbox, False, False, 0)
         box.pack_start(scroll, True, True, 0)
 
         self.labels['filelist'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.labels['filelist'].set_vexpand(True)
 
-        #self.labels['filelist'] = Gtk.Grid(orientation=Gtk.Orientation.VERTICAL)
-        #self.labels['filelist'].set_vexpand(True)
         self.labels['filelist'] = Gtk.Grid()
-
         self.files = {}
-        self.reload_files()
+
+        GLib.idle_add(self.reload_files)
 
         scroll.add(self.labels['filelist'])
-
         self.content.add(box)
-
         self._screen.files.add_file_callback(self._callback)
 
 
         return
 
-    def add_file(self, filename):
+    def add_file(self, filename, show=True):
         fileinfo = self._screen.files.get_file_info(filename)
         if fileinfo == None:
             return
@@ -94,7 +121,13 @@ class PrintPanel(ScreenPanel):
         frame.add(file)
 
         self.files[filename] = frame
-        files = sorted(self.files)
+
+        reverse = False if self.sort_current[1] == 0 else True
+        if self.sort_current[0] == "date":
+            files = sorted(self.files, reverse=reverse,
+                key=lambda item: self._screen.files.get_file_info(item)['modified'])
+        else:
+            files = sorted(self.files, reverse=reverse)
         pos = files.index(filename)
 
         self.labels['files'][filename] = {
@@ -105,7 +138,22 @@ class PrintPanel(ScreenPanel):
 
         self.labels['filelist'].insert_row(pos)
         self.labels['filelist'].attach(self.files[filename], 0, pos, 1, 1)
-        self.labels['filelist'].show_all()
+        if show == True:
+            self.labels['filelist'].show_all()
+
+    def change_sort(self, widget, key):
+        if self.sort_current[0] == key:
+            self.sort_current[1] = (self.sort_current[1] + 1) % 2
+        else:
+            oldkey = self.sort_current[0]
+            logger.info("Changing %s to %s" % ('sort_%s' % oldkey, self.sort_items[self.sort_current[0]]))
+            self.labels['sort_%s' % oldkey].set_label("%s" % self.sort_items[oldkey])
+            self.labels['sort_%s' % oldkey].show_all()
+            self.sort_current = [key, 0]
+        self.labels['sort_%s' % key].set_label("%s %s" % (self.sort_items[key], self.sort_char[self.sort_current[1]]))
+        self.labels['sort_%s' % key].show()
+
+        GLib.idle_add(self.reload_files)
 
     def get_file_info_str(self, filename):
         _ = self.lang.gettext
@@ -172,8 +220,9 @@ class PrintPanel(ScreenPanel):
         self.labels['filelist'].show_all()
 
         for file in self._screen.files.get_file_list():
-            #TODO: Change priority on this
-            GLib.idle_add(self.add_file, file)
+            self.add_file(file, False)
+
+        self.labels['filelist'].show_all()
 
     def _callback(self, newfiles, deletedfiles, updatedfiles=[]):
         logger.debug("newfiles: %s", newfiles)
