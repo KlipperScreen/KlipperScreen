@@ -54,9 +54,9 @@ class SystemPanel(ScreenPanel):
         grid.attach(info, 0, 0, 5, 2)
         grid.attach(restart, 0, 2, 1, 1)
         grid.attach(firmrestart, 1, 2, 1, 1)
-        grid.attach(reboot, 3, 2, 1, 1)
-        grid.attach(shutdown, 4, 2, 1, 1)
-
+        grid.attach(reboot, 2, 2, 1, 1) #change grid
+        grid.attach(shutdown, 3, 2, 1, 1) #change grid
+ 
         self.content.add(grid)
 
     def update_system_load(self):
