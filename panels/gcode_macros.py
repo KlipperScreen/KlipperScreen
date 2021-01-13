@@ -84,13 +84,16 @@ class MacroPanel(ScreenPanel):
     def load_gcode_macros(self):
         macros = self._screen.printer.get_gcode_macros()
         for x in macros:
-            macro = x[12:]
+            macro = x[12:].strip()
 
             if macro in self.loaded_macros:
                 continue
 
+            logger.debug("Evaluating '%s' value '%s'" % (macro.strip().lower(),
+                self._config.get_config().getboolean("displayed_macros", macro.lower(), fallback=True)))
+
             if ("displayed_macros" not in self._config.get_config().sections() or
-                    self._config.get_config().getboolean("displayed_macros", macro, fallback=True)):
+                    self._config.get_config().getboolean("displayed_macros", macro.lower(), fallback=True)):
                 self.add_gcode_macro(macro)
 
     def run_gcode_macro(self, widget, macro):
@@ -98,8 +101,10 @@ class MacroPanel(ScreenPanel):
 
     def unload_gcode_macros(self):
         for macro in self.loaded_macros:
+            logger.debug("Evaluating '%s' value '%s'" % (macro.strip().lower(),
+                self._config.get_config().getboolean("displayed_macros", macro.lower(), fallback=True)))
             if ("displayed_macros" in self._config.get_config().sections() and
-                    not self._config.get_config().getboolean("displayed_macros", macro, fallback=True)):
+                    not self._config.get_config().getboolean("displayed_macros", macro.lower(), fallback=True)):
                 macros = sorted(self.macros)
                 pos = macros.index(macro)
                 self.labels['macros'].remove_row(pos)
