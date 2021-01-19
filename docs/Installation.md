@@ -47,3 +47,12 @@ As an option to do development or interact with KlipperScreen from your computer
 
 If you need a custom location for the configuration file, you can add -c or --configfile to the systemd file and specify
 the location of your configuration file.
+
+#### Touchscreen Calibration
+Most people don't need to calibrate, but if you do need to calibrate your touchscreen, follow this process:
+
+```
+DISPLAY=:0 xinput_calibrator --list
+Device "wch.cn USB2IIC_CTP_CONTROL" id=6
+DISPLAY=:0 xinput_calibrator -v --device <id from last command>
+```
