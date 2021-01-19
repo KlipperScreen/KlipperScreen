@@ -43,9 +43,9 @@ class KlippyGtk:
     def get_font_size(self):
         return self.font_size
 
-    def Label(self, label, style):
+    def Label(self, label, style=None):
         l = Gtk.Label(label)
-        if style != False:
+        if style != None and style != False:
             l.get_style_context().add_class(style)
         return l
 
@@ -108,7 +108,8 @@ class KlippyGtk:
 
         return b
 
-    def ButtonImage(self, image_name, label=None, style=None, width_scale=1, height_scale=1):
+    def ButtonImage(self, image_name, label=None, style=None, width_scale=1, height_scale=1,
+            position=Gtk.PositionType.TOP):
         filename = "%s/styles/z-bolt/images/%s.svg" % (klipperscreendir, str(image_name))
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
             filename,
@@ -124,7 +125,7 @@ class KlippyGtk:
         b.set_hexpand(True)
         b.set_vexpand(True)
         b.set_can_focus(False)
-        b.set_image_position(Gtk.PositionType.TOP)
+        b.set_image_position(position)
         b.set_always_show_image(True)
         b.props.relief = Gtk.ReliefStyle.NONE
 
