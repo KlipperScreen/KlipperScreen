@@ -100,6 +100,9 @@ class Printer:
                     self.set_dev_stat(x, "temperature", d["temperature"])
 
         if "webhooks" in data or "idle_timeout" in data or "pause_resume" in data or "print_stats" in data:
+            logger.debug("Evaluating state: %s" % data)
+            logger.debug("State info: %s %s %s" % (self.data['webhooks'], self.data['idle_timeout'],
+                self.data['print_stats']))
             self.evaluate_state()
 
     def evaluate_state(self):

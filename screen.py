@@ -421,10 +421,11 @@ class KlipperScreen(Gtk.Window):
         _ = self.lang.gettext
 
         if action == "notify_klippy_disconnected":
+            logger.debug("Received notify_klippy_disconnected")
             self.printer.change_state("disconnected")
             return
-        elif action == "notify_klippy_ready":
-            self.printer.change_state("ready")
+        #elif action == "notify_klippy_ready":
+        #    self.printer.change_state("ready")
         elif action == "notify_status_update" and self.printer.get_state() != "shutdown":
             self.printer.process_update(data)
         elif action == "notify_filelist_changed":
@@ -437,6 +438,7 @@ class KlipperScreen(Gtk.Window):
             self.printer.process_power_update(data)
         elif self.printer.get_state() not in ["error","shutdown"] and action == "notify_gcode_response":
             if "Klipper state: Shutdown" in data:
+                logger.debug("Shutdown in gcode response, changing state to shutdown")
                 self.printer.change_state("shutdown")
 
             if not (data.startswith("B:") and
