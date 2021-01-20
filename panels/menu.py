@@ -28,6 +28,9 @@ class MenuPanel(ScreenPanel):
 
     def activate(self):
         self.j2_data = self._printer.get_printer_status_data()
+        self.j2_data.update({
+            'moonraker_connected': self._screen._ws.is_connected()
+        })
         self.arrangeMenuItems(self.items, 4)
 
     def arrangeMenuItems (self, items, columns, expandLast=False):
@@ -87,7 +90,7 @@ class MenuPanel(ScreenPanel):
 
         try:
             logger.debug("Template: '%s'" % enable)
-            logger.debug("Date: %s" % self.j2_data)
+            logger.debug("Data: %s" % self.j2_data)
             j2_temp = Template(enable)
             result = j2_temp.render(self.j2_data)
             if result == 'True':
