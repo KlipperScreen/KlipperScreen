@@ -424,8 +424,8 @@ class KlipperScreen(Gtk.Window):
             logger.debug("Received notify_klippy_disconnected")
             self.printer.change_state("disconnected")
             return
-        #elif action == "notify_klippy_ready":
-        #    self.printer.change_state("ready")
+        elif action == "notify_klippy_ready":
+            self.printer.change_state("ready")
         elif action == "notify_status_update" and self.printer.get_state() != "shutdown":
             self.printer.process_update(data)
         elif action == "notify_filelist_changed":
