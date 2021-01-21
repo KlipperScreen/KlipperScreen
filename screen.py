@@ -326,8 +326,10 @@ class KlipperScreen(Gtk.Window):
 
         # Find current menu item
         panels = list(self._cur_panels)
-        if "job_status" not in self._cur_panels:
+        if "main_panel" in self._cur_panels:
             menu = "__main"
+        elif "splash_screen" in self._cur_panels:
+            menu = "__splashscreen"
         else:
             menu = "__print"
 
@@ -401,6 +403,8 @@ class KlipperScreen(Gtk.Window):
             )
 
     def state_printing(self):
+        if "job_status" in self._cur_panels:
+            return
         self.printer_printing()
 
     def state_ready(self):
@@ -510,10 +514,15 @@ class KlipperScreen(Gtk.Window):
             'webhooks'
         ]
         printer_info = self.apiclient.get_printer_info()
-        logger.debug("Sendingn request %s" % "printer/objects/query?" + "&".join(status_objects))
+        logger.debug("Sending request %s" % "printer/objects/query?" + "&".join(status_objects))
         data = self.apiclient.send_request("printer/objects/query?" + "&".join(status_objects))
         powerdevs = self.apiclient.send_request("machine/device_power/devices")
         data = data['result']['status']
+
+        if self.files == None:
+            self.files = KlippyFiles(self)
+        else:
+            self.files.add_timeout()
 
         # Reinitialize printer, in case the printer was shut down and anything has changed.
         self.printer.reinit(printer_info['result'], data)
@@ -521,11 +530,6 @@ class KlipperScreen(Gtk.Window):
 
         if powerdevs != False:
             self.printer.configure_power_devices(powerdevs['result'])
-
-        if self.files == None:
-            self.files = KlippyFiles(self)
-        else:
-            self.files.add_timeout()
 
     def printer_ready(self):
         self.close_popup_message()
