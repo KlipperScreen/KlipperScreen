@@ -1,5 +1,10 @@
 ## Changelog
 
+#### 2021 01 20
+* Add different time estimation methods to settings panel
+* Job status panel will use time estimation method selected from settings panel
+* Bugfixes to state tracking
+
 #### 2021 01 10
 * Added system reboot/shutdown buttons to systems panel.
 

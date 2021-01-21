@@ -23,16 +23,16 @@ class SettingsPanel(ScreenPanel):
         self.labels['main_box'] = self.create_box('main')
         self.labels['macros_box'] = self.create_box('macros')
 
-        options = self._config.get_configurable_options()
+        options = self._config.get_configurable_options().copy()
+        options.append({"macros": {
+            "name": _("Displayed Macros"),
+            "type": "menu",
+            "menu": "macros"}
+        })
+
         for option in options:
             name =  list(option)[0]
             self.add_option('main', self.settings, name, option[name])
-
-        self.add_option('main', self.settings, "macros", {
-            "name": _("Displayed Macros"),
-            "type": "menu",
-            "menu": "macros"
-        })
 
         for macro in self._printer.get_config_section_list("gcode_macro "):
             macro = macro[12:]
@@ -120,6 +120,19 @@ class SettingsPanel(ScreenPanel):
             switch.set_property("height-request", round(self._gtk.get_image_height()*1.25))
             box.add(switch)
             dev.add(box)
+        elif option['type'] == "dropdown":
+            dropdown = Gtk.ComboBoxText()
+            i = 0
+            for opt in option['options']:
+                dropdown.append(opt['value'], opt['name'])
+                if opt['value'] == self._config.get_config()[option['section']].get(opt_name, option['value']):
+                    dropdown.set_active(i)
+                i += 1
+            dropdown.connect("changed", self.on_dropdown_change, option['section'], opt_name)
+            #dropdown.props.relief = Gtk.ReliefStyle.NONE
+            dropdown.set_entry_text_column(0)
+            dev.add(dropdown)
+            logger.debug("Children: %s" % dropdown.get_children())
         elif option['type'] == "menu":
             open = self._gtk.ButtonImage("open",None,"color3")
             open.connect("clicked", self.load_menu, option['menu'])
@@ -128,12 +141,15 @@ class SettingsPanel(ScreenPanel):
             dev.add(open)
 
         frame.add(dev)
+        frame.show_all()
 
         opt_array[opt_name] = {
+            "name": option['name'],
             "row": frame
         }
 
         opts = sorted(opt_array)
+        opts = sorted(list(opt_array), key=lambda x: opt_array[x]['name'])
         pos = opts.index(opt_name)
 
         self.labels[boxname].insert_row(pos)
@@ -161,6 +177,15 @@ class SettingsPanel(ScreenPanel):
             self.content.remove(child)
         self.content.add(self.labels[self.menu[-1]])
         self.content.show_all()
+
+    def on_dropdown_change(self, combo, section, option):
+        tree_iter = combo.get_active_iter()
+        if tree_iter is not None:
+            model = combo.get_model()
+            value = model[tree_iter][1]
+            logger.debug("[%s] %s changed to %s" % (section, option, value))
+            self._config.set(section, option, value)
+            self._config.save_user_config_options()
 
     def switch_config_option(self, switch, gparam, section, option):
         logger.debug("[%s] %s toggled %s" % (section, option, switch.get_active()))

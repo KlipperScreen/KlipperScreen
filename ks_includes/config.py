@@ -25,7 +25,15 @@ class KlipperScreenConfig:
         self.configurable_options = [
             {"invert_x": {"section": "main", "name": _("Invert X"), "type": "binary", "value": "False"}},
             {"invert_y": {"section": "main", "name": _("Invert Y"), "type": "binary", "value": "False"}},
-            {"invert_z": {"section": "main", "name": _("Invert Z"), "type": "binary", "value": "False"}}
+            {"invert_z": {"section": "main", "name": _("Invert Z"), "type": "binary", "value": "False"}},
+            {"print_estimate_method": {"section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
+                "value": "file","options":[
+                    {"name": _("File Estimation (default)"), "value": "file"},
+                    {"name": _("Duration Only"), "value": "duration"},
+                    {"name": _("Filament Used"), "value": "filament"},
+                    {"name": _("Slicer"), "value": "slicer"}
+            ]}}
+            #{"": {"section": "main", "name": _(""), "type": ""}}
         ]
 
         self.default_config_path = "%s/ks_includes/%s" % (os.getcwd(), self.configfile_name)

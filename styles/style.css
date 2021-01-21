@@ -1,6 +1,7 @@
 * {
     color: #fff;
     font-size: KS_FONT_SIZEpx;
+    -GtkComboBox-appears-as-list: 0;
 }
 
 window {
@@ -50,6 +51,11 @@ button.file-list {
 	margin: 0;
 }
 
+combobox box button {
+    border: .05em solid #cccccc;
+    padding: .5em 1em;
+}
+
 entry {
 	font-size: 1em;
 	background-color: #20292F;
@@ -64,6 +70,18 @@ frame {
 
 label {
     color: white;
+}
+
+menu {
+    background-color: #13181C;
+    border: .1em solid #cccccc;
+}
+
+menuitem {
+    background-color: #13181C;
+    border: .1em solid #cccccc;
+    border-bottom: 0;
+    border-top: 0;
 }
 
 progress, trough {
@@ -95,6 +113,10 @@ scrollbar slider {
 
 trough {
     margin: .5em 1em;
+}
+
+.popup {
+    background-color: #0000ff;
 }
 
 .dialog {

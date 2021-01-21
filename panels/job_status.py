@@ -24,6 +24,7 @@ class JobStatusPanel(ScreenPanel):
         _ = self.lang.gettext
         self.layout = Gtk.Layout()
         self.layout.set_size(self._screen.width, self._screen.height)
+        self.timeleft_type = "file"
 
         self.create_buttons()
 
@@ -322,7 +323,7 @@ class JobStatusPanel(ScreenPanel):
         self.disable_button("pause","resume","cancel")
         self._screen._ws.klippy.print_cancel(self._response_callback)
 
-    def _response_callback(self, response, method, params, func, *args):
+    def _response_callback(self, response, method, params, func=None, *args):
         if func == "enable_button":
             self.enable_button(*args)
 
@@ -435,18 +436,33 @@ class JobStatusPanel(ScreenPanel):
                     self.progress = progress
                     self.labels['darea'].queue_draw()
 
-                if ps['print_duration'] == 0:
-                    time_left = self.file_metadata['estimated_time'] if "estimated_time" in self.file_metadata else 0
-                else:
-                    est_time = self.file_metadata['estimated_time'] if "estimated_time" in self.file_metadata else 0
-                    time_left = max(
-                        est_time - ps['print_duration'] ,
-                        0 #ps['print_duration'] / (vsd['progress'] if vsd['progress'] != 0 else 1)
-                    )
-
                 self.update_text("duration", str(self._gtk.formatTimeString(ps['print_duration'])))
+
+            timeleft_type = self._config.get_config()['main'].get('print_estimate_method','file')
+
+            if timeleft_type != self.timeleft_type:
+                if self.timeleft_type == "duration":
+                    self.labels['it_box'].add(self.labels['est_time'])
+                elif timeleft_type == "duration":
+                    self.labels['it_box'].remove(self.labels['est_time'])
+                self.timeleft_type = timeleft_type
+
+            if timeleft_type in ['filament','file','slicer']:
+                duration = ps['print_duration']
+                if timeleft_type == "filament":
+                    estimated_filament = (self.file_metadata['filament_total'] if "filament_total" in self.file_metadata
+                            else 1)
+                    total_duration = duration / (ps['filament_used'] / estimated_filament)
+                elif timeleft_type == "file":
+                    total_duration = duration / max(self.progress, 0.0001)
+                elif timeleft_type == "slicer":
+                    total_duration = (self.file_metadata['estimated_time'] if "estimated_time" in self.file_metadata
+                            else duration)
+
+                time_left = max(total_duration - duration, 0)
                 self.update_text("time_left", str(self._gtk.formatTimeString(time_left)))
-                self.update_progress()
+
+            self.update_progress()
 
         if "pause_resume" in data and self.state != "complete":
             if self.state == "paused" and data['pause_resume']['is_paused'] == False:
