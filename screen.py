@@ -533,6 +533,8 @@ class KlipperScreen(Gtk.Window):
 
     def printer_ready(self):
         self.close_popup_message()
+        # Force update to printer webhooks state in case the update is missed due to websocket subscribe not yet sent
+        self.printer.process_update({"webhooks":{"state":"ready","state_message": "Printer is ready"}})
         self.show_panel('main_panel', "main_menu", "Main Menu", 2, items=self._config.get_menu_items("__main"),
             extrudercount=self.printer.get_extruder_count())
         self.ws_subscribe()
