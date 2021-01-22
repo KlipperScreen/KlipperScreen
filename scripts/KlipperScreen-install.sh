@@ -20,7 +20,8 @@ install_packages()
         python3-gi-cairo \
         python3-virtualenv \
         gir1.2-gtk-3.0 \
-        virtualenv
+        virtualenv \
+        matchbox-keyboard
 }
 
 create_virtualenv()

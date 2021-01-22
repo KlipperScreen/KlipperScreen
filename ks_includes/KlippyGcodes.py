@@ -63,8 +63,12 @@ class KlippyGcodes:
 
     @staticmethod
     def bed_mesh_load(profile):
-        return "BED_MESH_PROFILE LOAD=%s" % profile
+        return "BED_MESH_PROFILE LOAD='%s'" % profile
+
+    @staticmethod
+    def bed_mesh_remove(profile):
+        return "BED_MESH_PROFILE REMOVE='%s'" % profile
 
     @staticmethod
     def bed_mesh_save(profile):
-        return "BED_MESH_PROFILE SAVE=%s" % profile
+        return "BED_MESH_PROFILE SAVE='%s'" % profile

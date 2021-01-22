@@ -1,5 +1,10 @@
 ## Changelog
 
+#### 2021 01 21
+* !! Important. matchbox-keyboard must be installed. Install script has changed to include this
+* Added onscreen keyboard
+* Can now add bed mesh profiles
+
 #### 2021 01 20
 * Add different time estimation methods to settings panel
 * Job status panel will use time estimation method selected from settings panel

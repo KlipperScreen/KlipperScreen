@@ -13,6 +13,7 @@ import importlib
 import logging
 import os
 import re
+import signal
 import subprocess
 
 
@@ -55,6 +56,8 @@ class KlipperScreen(Gtk.Window):
     currentPanel = None
     files = None
     filename = ""
+    keyboard = None
+    keyboard_height = 200
     last_update = {}
     load_panel = {}
     number_tools = 1
@@ -218,9 +221,6 @@ class KlipperScreen(Gtk.Window):
             if hasattr(self.panels[panel_name],"process_update"):
                 self.panels[panel_name].process_update("notify_status_update", self.printer.get_data())
 
-        if hasattr(self.panels[panel_name],"activate"):
-            self.panels[panel_name].activate()
-
         if remove == 2:
             self._remove_all_panels()
         elif remove == 1:
@@ -228,6 +228,11 @@ class KlipperScreen(Gtk.Window):
 
         self.add(self.panels[panel_name].get())
         self.show_all()
+
+        if hasattr(self.panels[panel_name],"activate"):
+            self.panels[panel_name].activate()
+            self.show_all()
+
         self._cur_panels.append(panel_name)
         logger.debug("Current panel hierarchy: %s", str(self._cur_panels))
 
@@ -360,10 +365,12 @@ class KlipperScreen(Gtk.Window):
 
     def _menu_go_back (self, widget=None):
         logger.info("#### Menu go back")
+        self.remove_keyboard()
         self._remove_current_panel()
 
     def _menu_go_home(self):
         logger.info("#### Menu go home")
+        self.remove_keyboard()
         while len(self._cur_panels) > 1:
             self._remove_current_panel()
 
@@ -546,6 +553,51 @@ class KlipperScreen(Gtk.Window):
         self.files.remove_timeout()
         self.close_popup_message()
         self.show_panel('job_status',"job_status", "Print Status", 2)
+
+    def show_keyboard(self, widget=None):
+        if self.keyboard is not None:
+            return
+
+        env = os.environ.copy()
+        env["MB_KBD_CONFIG"] = "/home/pi/.matchbox/keyboard.xml"
+        env["MB_KBD_CONFIG"] = "ks_includes/locales/keyboard.xml"
+        #p = subprocess.Popen(["matchbox-keyboard", "--xid"], stdout=subprocess.PIPE,
+        #    stderr=subprocess.PIPE, env=env)
+        p = subprocess.Popen(["onboard", "--xid"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        xid = int(p.stdout.readline())
+        logger.debug("XID %s" % xid)
+        logger.debug("PID %s" % p.pid)
+        keyboard = Gtk.Socket()
+        #keyboard.connect("plug-added", self.plug_added)
+        box = Gtk.VBox()
+        box.set_size_request(self.width, self.keyboard_height)
+        box.add(keyboard)
+
+        cur_panel = self.panels[self._cur_panels[-1]]
+        #for i in ['back','estop','home']:
+        #    if i in cur_panel.control:
+        #        cur_panel.control[i].set_sensitive(False)
+        cur_panel.get().put(box, 0, self.height - 200)
+        self.show_all()
+        keyboard.add_id(xid)
+        keyboard.show()
+
+        self.keyboard = {
+            "box": box,
+            "panel": cur_panel.get(),
+            "process": p,
+            "socket": keyboard
+        }
+
+
+    def remove_keyboard(self, widget=None):
+        if self.keyboard is None:
+            return
+
+        self.keyboard['panel'].remove(self.keyboard['box'])
+        os.kill(self.keyboard['process'].pid, signal.SIGTERM)
+        self.keyboard = None
+
 
 def get_software_version():
     prog = ('git', '-C', os.path.dirname(__file__), 'describe', '--always',
