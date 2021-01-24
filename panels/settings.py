@@ -128,7 +128,8 @@ class SettingsPanel(ScreenPanel):
                 if opt['value'] == self._config.get_config()[option['section']].get(opt_name, option['value']):
                     dropdown.set_active(i)
                 i += 1
-            dropdown.connect("changed", self.on_dropdown_change, option['section'], opt_name)
+            dropdown.connect("changed", self.on_dropdown_change, option['section'], opt_name,
+                option['callback'] if "callback" in option else None)
             #dropdown.props.relief = Gtk.ReliefStyle.NONE
             dropdown.set_entry_text_column(0)
             dev.add(dropdown)
@@ -178,7 +179,7 @@ class SettingsPanel(ScreenPanel):
         self.content.add(self.labels[self.menu[-1]])
         self.content.show_all()
 
-    def on_dropdown_change(self, combo, section, option):
+    def on_dropdown_change(self, combo, section, option, callback=None):
         tree_iter = combo.get_active_iter()
         if tree_iter is not None:
             model = combo.get_model()
@@ -186,6 +187,9 @@ class SettingsPanel(ScreenPanel):
             logger.debug("[%s] %s changed to %s" % (section, option, value))
             self._config.set(section, option, value)
             self._config.save_user_config_options()
+            if callback is not None:
+                callback(value)
+
 
     def switch_config_option(self, switch, gparam, section, option):
         logger.debug("[%s] %s toggled %s" % (section, option, switch.get_active()))

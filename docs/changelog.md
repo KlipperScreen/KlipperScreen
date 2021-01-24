@@ -1,6 +1,9 @@
 ## Changelog
 
 #### 2021 01 21
+* Configure screen blanking from settings panel
+
+#### 2021 01 21
 * !! Important. matchbox-keyboard must be installed. Install script has changed to include this
 * Added onscreen keyboard
 * Can now add bed mesh profiles

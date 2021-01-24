@@ -81,7 +81,7 @@ class KlipperScreen(Gtk.Window):
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
         self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', fallback=True)
-        self._config = KlipperScreenConfig(configfile, self.lang)
+        self._config = KlipperScreenConfig(configfile, self.lang, self)
         self.printer = Printer({
             "software_version": "Unknown"
         }, {
@@ -151,12 +151,13 @@ class KlipperScreen(Gtk.Window):
         self._ws.initial_connect()
 
         # Disable DPMS
-        os.system("/usr/bin/xset -display :0 s off")
         os.system("/usr/bin/xset -display :0 -dpms")
-        os.system("/usr/bin/xset -display :0 s noblank")
+        self.set_screenblanking_timeout(self._config.get_main_config_option('screen_blanking'))
+
+        # Change cursor to blank
+        self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.BLANK_CURSOR))
 
         return
-
 
     def ws_subscribe(self):
         requested_updates = {
@@ -203,7 +204,6 @@ class KlipperScreen(Gtk.Window):
             logger.exception(msg)
             raise Exception(msg)
 
-
     def show_panel(self, panel_name, type, title, remove=None, pop=True, **kwargs):
         if panel_name not in self.panels:
             self.panels[panel_name] = self._load_panel(type, self, title)
@@ -215,6 +215,7 @@ class KlipperScreen(Gtk.Window):
                     self.panels[panel_name].initialize(panel_name)
             except:
                 del self.panels[panel_name]
+                logger.exception("Unable to load panel %s" % type)
                 self.show_error_modal("Unable to load panel %s" % type)
                 return
 
@@ -387,6 +388,20 @@ class KlipperScreen(Gtk.Window):
             if self.subscriptions[i] == panel_name:
                 self.subscriptions.pop(i)
                 return
+
+    def set_screenblanking_timeout(self, time):
+        logger.debug("Changing screenblanking to: %s" % time)
+        if time == "off":
+            os.system("/usr/bin/xset -display :0 s off")
+            os.system("/usr/bin/xset -display :0 s noblank")
+            return
+
+        time = int(time)
+        if time < 0:
+            return
+
+        os.system("/usr/bin/xset -display :0 s on")
+        os.system("/usr/bin/xset -display :0 s %s" % time)
 
     def state_disconnected(self):
         _ = self.lang.gettext
@@ -561,9 +576,9 @@ class KlipperScreen(Gtk.Window):
         env = os.environ.copy()
         env["MB_KBD_CONFIG"] = "/home/pi/.matchbox/keyboard.xml"
         env["MB_KBD_CONFIG"] = "ks_includes/locales/keyboard.xml"
-        #p = subprocess.Popen(["matchbox-keyboard", "--xid"], stdout=subprocess.PIPE,
-        #    stderr=subprocess.PIPE, env=env)
-        p = subprocess.Popen(["onboard", "--xid"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        p = subprocess.Popen(["matchbox-keyboard", "--xid"], stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE, env=env)
+        #p = subprocess.Popen(["onboard", "--xid"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         xid = int(p.stdout.readline())
         logger.debug("XID %s" % xid)
         logger.debug("PID %s" % p.pid)
