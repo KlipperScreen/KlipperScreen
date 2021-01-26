@@ -152,7 +152,7 @@ class BedLevelPanel(ScreenPanel):
                 data
             )
             if result:
-                screw_labels = ['fl','fr','br','bl']
+                screw_labels = ['fl','fr','bl','br']
                 x = int(float(result.group(2)) + self.x_offset)
                 y = int(float(result.group(3)) + self.y_offset)
                 logger.debug(data)
