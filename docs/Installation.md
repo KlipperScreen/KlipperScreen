@@ -19,11 +19,14 @@ After changing _/boot/config.txt_ you must reboot your raspberry pi. Please also
 
 ### Installation
 
+#### Setup Raspberry Pi
 This install process is meant for Raspbian non-desktop version. If you have installed it on the GUI version, use
 `sudo raspi-config` to set boot to console by choosing the following options in order:
 * 1 System Options
 * S5 Boot / Auto Login
 * B1 Console
+
+#### Klipper and Moonraker Installation
 
 Follow the instructions to install klipper and moonraker.
 klipper: https://github.com/KevinOConnor/klipper/
@@ -36,12 +39,31 @@ trusted_clients:
   127.0.0.1
 ```
 
-For moonraker, ensure that 127.0.0.1 is a trusted client:
+If you wish to use the update manager feature of moonraker for KlipperScreen, add the following block into the moonraker
+configuration:
+```
+[update_manager client KlipperScreen]
+type: git_repo
+path: /home/pi/KlipperScreen
+origin: https://github.com/jordanruthe/KlipperScreen.git
+env: /home/pi/.KlipperScreen-env/bin/python
+requirements: scripts/KlipperScreen-requirements.txt
+install_script: scripts/KlipperScreen-install.sh
+```
 
-Run _scripts/KlipperScreen-install.sh_
-This script will install packages that are listed under manual install, create a
-python virtual environment at ${HOME}/.KlipperScreen-env and install a systemd
-service file.
+#### KlipperScreen Installation
+After you clone KlipperScreen, run the following commands:
+```
+cd KlipperScreen
+./scripts/KlipperScreen-install.sh
+```
+
+This script will install packages that are listed under manual install, create a python virtual environment at
+${HOME}/.KlipperScreen-env and install a systemd service file.
+
+KlipperScreen will create a log file output at `/tmp/KlipperScreen.log`. If you are having issues and KlipperScreen has
+not gotten to the point where the log file has been created. Run `journalctl -xe -u KlipperScreen` to view the ouput and
+see any issues that may be happening.
 
 As an option to do development or interact with KlipperScreen from your computer, you may install tigervnc-scraping-server and VNC to your pi instance. Follow tigervnc server setup procedures for details on how to do that.
 
