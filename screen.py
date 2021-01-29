@@ -15,6 +15,7 @@ import os
 import re
 import signal
 import subprocess
+import sys
 
 
 gi.require_version("Gtk", "3.0")
@@ -30,6 +31,9 @@ from ks_includes.printer import Printer
 from ks_includes.config import KlipperScreenConfig
 
 # Create logging
+for h in logging.getLogger().handlers:
+    logging.getLogger().removeHandler(h)
+
 logger = logging.getLogger('KlipperScreen')
 logger.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -38,12 +42,16 @@ fh = logging.FileHandler('/tmp/KlipperScreen.log')
 fh.setLevel(logging.DEBUG)
 fh.setFormatter(formatter)
 
-ch = logging.StreamHandler()
-ch.setLevel(logging.ERROR)
+ch = logging.StreamHandler(sys.stdout)
+ch.setLevel(logging.DEBUG)
 ch.setFormatter(formatter)
 
 logger.addHandler(fh)
 logger.addHandler(ch)
+
+def logging_exception_handler(type, value, tb):
+    logger.exception("Uncaught exception %s: %s\nTraceback: %s" % (type, value, "\n".join(traceback.format_tb(tb))))
+sys.excepthook = logging_exception_handler
 
 klipperscreendir = os.getcwd()
 config = klipperscreendir + "/KlipperScreen.config"
