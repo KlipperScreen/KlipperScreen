@@ -417,7 +417,7 @@ class JobStatusPanel(ScreenPanel):
             if self.filename != ps['filename']:
                 if ps['filename'] != "":
                     self.filename = ps['filename']
-                    self.file_metadata = None
+                    self.file_metadata = {}
                     self.update_text("file", self.filename.split("/")[-1])
                 else:
                     file = "Unknown"
