@@ -3,7 +3,7 @@ import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GdkPixbuf, GLib
+from gi.repository import Gtk, Gdk, GdkPixbuf, GLib, Pango
 import os
 klipperscreendir = os.getcwd()
 
@@ -128,6 +128,14 @@ class KlippyGtk:
         b.set_image_position(position)
         b.set_always_show_image(True)
         b.props.relief = Gtk.ReliefStyle.NONE
+
+        try:
+            # Get the label object
+            child = b.get_children()[0].get_children()[0].get_children()[1]
+            child.set_line_wrap(True)
+            child.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        except:
+            pass
 
         if style != None:
             b.get_style_context().add_class(style)
