@@ -53,7 +53,7 @@
 
 #### 2020 12 05
 * Added ability to invert Z axis in move panel
-* Fixed problem with metadata being retreived constantly
+* Fixed problem with metadata being retrieved constantly
 
 #### 2020 12 04
 * Removed fan options from fine tuning
