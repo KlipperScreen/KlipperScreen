@@ -55,7 +55,7 @@ install_script: scripts/KlipperScreen-install.sh
 To clone and install execute the following commands:
 ```
 cd ~/
-git clone https://github.com/meteyou/KlipperScreen.git
+git clone https://github.com/jordanruthe/KlipperScreen.git
 cd ~/KlipperScreen
 ./scripts/KlipperScreen-install.sh
 ```
