@@ -52,9 +52,11 @@ install_script: scripts/KlipperScreen-install.sh
 ```
 
 #### KlipperScreen Installation
-After you clone KlipperScreen, run the following commands:
+To clone and install execute the following commands:
 ```
-cd KlipperScreen
+cd ~/
+git clone https://github.com/meteyou/KlipperScreen.git
+cd ~/KlipperScreen
 ./scripts/KlipperScreen-install.sh
 ```
 
