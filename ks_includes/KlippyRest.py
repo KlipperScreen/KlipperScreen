@@ -26,7 +26,10 @@ class KlippyRest:
         url = "http://%s:%s/%s" % (self.ip, self.port, method)
         logger.debug("Sending request to %s" % url)
         headers = {} if self.api_key == False else {"x-api-key":self.api_key}
-        r = requests.get(url, headers=headers)
+        try:
+            r = requests.get(url, headers=headers)
+        except:
+            return False
         if r.status_code != 200:
             return False
 
