@@ -16,6 +16,7 @@ import re
 import signal
 import subprocess
 import sys
+import traceback
 
 
 gi.require_version("Gtk", "3.0")
