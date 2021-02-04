@@ -129,13 +129,13 @@ class KlippyGtk:
         b.set_always_show_image(True)
         b.props.relief = Gtk.ReliefStyle.NONE
 
-        try:
-            # Get the label object
-            child = b.get_children()[0].get_children()[0].get_children()[1]
-            child.set_line_wrap(True)
-            child.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-        except:
-            pass
+        #try:
+        #    # Get the label object
+        #    child = b.get_children()[0].get_children()[0].get_children()[1]
+        #    child.set_line_wrap(True)
+        #    child.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        #except:
+        #    pass
 
         if style != None:
             b.get_style_context().add_class(style)
