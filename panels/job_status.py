@@ -452,7 +452,7 @@ class JobStatusPanel(ScreenPanel):
                 if timeleft_type == "filament":
                     estimated_filament = (self.file_metadata['filament_total'] if "filament_total" in self.file_metadata
                             else 1)
-                    total_duration = duration / (ps['filament_used'] / estimated_filament)
+                    total_duration = duration / (max(ps['filament_used'],0.0001) / max(estimated_filament, 0.0001))
                 elif timeleft_type == "file":
                     total_duration = duration / max(self.progress, 0.0001)
                 elif timeleft_type == "slicer":
