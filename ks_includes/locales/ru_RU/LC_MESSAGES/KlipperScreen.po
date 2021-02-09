@@ -1,0 +1,492 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-10 19:17+0000\n"
+"PO-Revision-Date: 2021-02-10 00:27+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Language: ru\n"
+
+#: panels/print.py:197
+msgid "?"
+msgstr "?"
+
+#: panels/zcalibrate.py:71
+msgid "Abort"
+msgstr "Сброс"
+
+#: panels/zcalibrate.py:68
+msgid "Accept"
+msgstr "Принять"
+
+#: ks_includes/KlipperScreen.conf:26
+msgid "Actions"
+msgstr "Действия"
+
+#: panels/print.py:197
+msgid "Are you sure you want to print"
+msgstr "Вы хотите это распечатать"
+
+#: panels/job_status.py:305
+msgid "Are you sure you wish to cancel this print?"
+msgstr "Вы хотите отменить эту печать?"
+
+#: panels/system.py:29
+msgid "Are you sure you wish to reboot the system?"
+msgstr "Вы уверены что хотите перезагрузить систему?"
+
+#: panels/system.py:32
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "Вы хотите  выключить систему?"
+
+#: ks_includes/KlipperScreen.conf:107
+msgid "Bed Level"
+msgstr "Калибровка стола"
+
+#: ks_includes/KlipperScreen.conf:112
+msgid "Bed Mesh"
+msgstr "Сетка стола"
+
+#: ks_includes/config.py:31
+msgid "Byte Position (Default)"
+msgstr "Позиция байта (по умолчанию)"
+
+#: screen.py:456 panels/job_status.py:267 panels/print.py:193
+msgid "Cancel"
+msgstr "Отменить"
+
+#: panels/fan.py:45
+msgid "Cancel Change"
+msgstr "Отменить изменения"
+
+#: panels/job_status.py:300
+msgid "Cancel Print"
+msgstr "Отменить печать"
+
+#: screen.py:290
+msgid ""
+"Check /tmp/KlipperScreen.log for more information.\n"
+"Please submit an issue on GitHub for help."
+msgstr ""
+"Проверьте /tmp/KlipperScreen.log для дополнитольной информации.\n"
+"Создайте issues на GitHub что-бы получить помощь."
+
+#: panels/bed_mesh.py:172 panels/temperature.py:150
+msgid "Close"
+msgstr "Закрыть"
+
+#: ks_includes/KlipperScreen.conf:30
+msgid "Configuration"
+msgstr "Конфигурация"
+
+#: screen.py:455
+msgid "Continue"
+msgstr "Продолжить"
+
+#: panels/job_status.py:269
+msgid "Control"
+msgstr "Управление"
+
+#: panels/preheat.py:54
+msgid "Cooldown"
+msgstr "Остудить"
+
+#: panels/temperature.py:53
+msgid "Decrease"
+msgstr "Уменьшить"
+
+#: ks_includes/KlipperScreen.conf:101
+msgid "Disable Motors"
+msgstr "Отключить моторы"
+
+#: panels/bed_level.py:107
+msgid "Disable XY"
+msgstr "Отключить XY"
+
+#: panels/settings.py:32
+msgid "Displayed Macros"
+msgstr "Показать  макросы"
+
+#: panels/zcalibrate.py:64
+msgid "Distance (mm)"
+msgstr "Расстояние (mm)"
+
+#: ks_includes/config.py:32
+msgid "Duration Only"
+msgstr "Длительность печати"
+
+#: panels/job_status.py:135
+msgid "Elapsed:"
+msgstr "Прошло:"
+
+#: panels/job_status.py:271
+msgid "Emergency Stop"
+msgstr "Аварийный стоп"
+
+#: ks_includes/config.py:29
+msgid "Estimated Time Method"
+msgstr "Расчётное время"
+
+#: panels/extrude.py:46 ks_includes/KlipperScreen.conf:74
+#: ks_includes/KlipperScreen.conf:167
+msgid "Extrude"
+msgstr "Выдавить"
+
+#: panels/fine_tune.py:57
+msgid "Extrusion +"
+msgstr "Экструзия +"
+
+#: panels/fine_tune.py:61
+msgid "Extrusion -"
+msgstr "Экструзия -"
+
+#: ks_includes/KlipperScreen.conf:79 ks_includes/KlipperScreen.conf:162
+msgid "Fan"
+msgstr "Обдув"
+
+#: panels/fan.py:35
+msgid "Fan Off"
+msgstr "Вентилятор выкл"
+
+#: panels/fan.py:38
+msgid "Fan On"
+msgstr "Вентилятор вкл"
+
+#: panels/extrude.py:31
+msgid "Fast"
+msgstr "Быстро"
+
+#: ks_includes/config.py:33
+msgid "Filament Used"
+msgstr "Filament Используется"
+
+#: ks_includes/KlipperScreen.conf:157
+msgid "Fine Tuning"
+msgstr "Точная частройка"
+
+#: panels/splash_screen.py:62 panels/system.py:24
+msgid "Firmware Restart"
+msgstr "Перезагрузка прошивки"
+
+#: screen.py:285 panels/job_status.py:301
+msgid "Go Back"
+msgstr "Назад"
+
+#: panels/bed_level.py:104 panels/move.py:40 ks_includes/KlipperScreen.conf:39
+msgid "Home All"
+msgstr "Обнулить все"
+
+#: ks_includes/KlipperScreen.conf:45
+msgid "Home X"
+msgstr "Обнулить X"
+
+#: ks_includes/KlipperScreen.conf:63
+msgid "Home XY"
+msgstr "Обнулить XY"
+
+#: ks_includes/KlipperScreen.conf:51
+msgid "Home Y"
+msgstr "Обнулить Y"
+
+#: ks_includes/KlipperScreen.conf:57
+msgid "Home Z"
+msgstr "Обнулить Z"
+
+#: panels/zcalibrate.py:29 ks_includes/KlipperScreen.conf:17
+msgid "Homing"
+msgstr "Обнуление позиций"
+
+#: panels/temperature.py:51
+msgid "Increase"
+msgstr "Поднять"
+
+#. self._load_panels()
+#: screen.py:137
+msgid "Initializing"
+msgstr "Запуск"
+
+#: panels/splash_screen.py:23
+msgid "Initializing printer..."
+msgstr "Принтер стартует"
+
+#: ks_includes/config.py:26
+msgid "Invert X"
+msgstr "Инвертировать X"
+
+#: ks_includes/config.py:27
+msgid "Invert Y"
+msgstr "Инвертировать Y"
+
+#: ks_includes/config.py:28
+msgid "Invert Z"
+msgstr "Инвертировать Z"
+
+#: ks_includes/config.py:34
+msgid "Klipper"
+msgstr "Klipper"
+
+#: panels/system.py:22
+msgid "Klipper Restart"
+msgstr "Перезагрузка Klipper"
+
+#: panels/system.py:42
+msgid "Klipper Version"
+msgstr "Версия Klipper"
+
+#: screen.py:385
+msgid "Klipper has disconnected"
+msgstr "Нет связи с Klipper"
+
+#: screen.py:396
+msgid ""
+"Klipper has encountered an error with the micro-controller.\n"
+"Please recompile and flash."
+msgstr ""
+"Klipper определил ошибку в микроконтроллере.\n"
+"Прошейте заново."
+
+#: screen.py:400
+msgid "Klipper has encountered an error."
+msgstr "Klipper обнаружил ошибку "
+
+#: screen.py:392
+msgid ""
+"Klipper has encountered an error.\n"
+"Issue a FIRMWARE_RESTART to attempt fixing the issue."
+msgstr ""
+"Klipper обнаружил ошибку.\n"
+"Выполните перезагрузку прошивки, чтобы попытаться исправить проблему"
+
+#: screen.py:418
+msgid "Klipper has shutdown"
+msgstr "Klipper отключился"
+
+#: screen.py:414
+msgid "Klipper is attempting to start"
+msgstr "Klipper готов"
+
+#: ks_includes/KlipperScreen.conf:141
+msgid "Klipper will reboot"
+msgstr "Klipper перезагружается"
+
+#: panels/system.py:46
+msgid "KlipperScreen Version"
+msgstr "Версия KlipperScreen"
+
+#: panels/job_status.py:123
+msgid "Left:"
+msgstr "Осталось:"
+
+#: panels/system.py:66
+msgid "Load Average"
+msgstr "Средняя нагрузка"
+
+#: panels/zcalibrate.py:39
+msgid "Lower Nozzle"
+msgstr "Опустить сопло"
+
+#: ks_includes/KlipperScreen.conf:89
+msgid "Macros"
+msgstr "Макросы"
+
+#: panels/job_status.py:273 ks_includes/KlipperScreen.conf:14
+msgid "Main Menu"
+msgstr "Главное меню"
+
+#: panels/extrude.py:31
+msgid "Medium"
+msgstr "Среднее"
+
+#: ks_includes/KlipperScreen.conf:69
+msgid "Move"
+msgstr "Двигать"
+
+#: panels/move.py:91
+msgid "Move Distance (mm)"
+msgstr "Дистанция перемещения (mm)"
+
+#: ks_includes/KlipperScreen.conf:124 ks_includes/KlipperScreen.conf:173
+msgid "Network"
+msgstr "Сеть"
+
+#: panels/network.py:31
+msgid "Network Info"
+msgstr "Информация о сети"
+
+#: panels/temperature.py:55
+msgid "Number Pad"
+msgstr "Номер блока"
+
+#: panels/job_status.py:275
+msgid "Pause"
+msgstr "Пауза"
+
+#: panels/job_status.py:454
+msgid "Paused"
+msgstr "Приостановлено"
+
+#: ks_includes/KlipperScreen.conf:95
+#, fuzzy
+msgid "Power"
+msgstr "Включено"
+
+#: panels/splash_screen.py:59
+msgid "Power On Printer"
+msgstr "Включить принтер"
+
+#: ks_includes/KlipperScreen.conf:21
+msgid "Preheat"
+msgstr "Нагреть"
+
+#: panels/print.py:192 ks_includes/KlipperScreen.conf:34
+#, fuzzy
+msgid "Print"
+msgstr "Печать"
+
+#: ks_includes/KlipperScreen.conf:149
+msgid "Print Control"
+msgstr "Управление печатью"
+
+#: panels/print.py:122
+msgid "Print Time"
+msgstr "Время печати"
+
+#: panels/job_status.py:231
+msgid "Printing"
+msgstr "Печатается"
+
+#: panels/zcalibrate.py:37
+msgid "Raise Nozzle"
+msgstr "Поднять сопло"
+
+#: panels/job_status.py:277 panels/splash_screen.py:60
+msgid "Restart"
+msgstr "Перезагрузка"
+
+#: panels/job_status.py:279
+msgid "Resume"
+msgstr "Продолжить"
+
+#: panels/extrude.py:48
+msgid "Retract"
+msgstr "Откат"
+
+#: ks_includes/KlipperScreen.conf:134
+msgid "Save Config"
+msgstr "Сохранить настрийки"
+
+#: ks_includes/KlipperScreen.conf:139
+#, fuzzy
+msgid "Save configuration."
+msgstr "Сохраняются"
+
+#: panels/bed_level.py:114
+msgid "Screws Adjust"
+msgstr "Настроить винты"
+
+#: panels/fan.py:42
+msgid "Set Speed"
+msgstr "Скорость"
+
+#: ks_includes/KlipperScreen.conf:144
+msgid "Settings"
+msgstr "Настройки"
+
+#: panels/print.py:120
+msgid "Size"
+msgstr "Размер"
+
+#: ks_includes/config.py:35
+msgid "Slicer"
+msgstr ""
+
+#. This line for translations only
+#: panels/extrude.py:31
+msgid "Slow"
+msgstr "Медленней"
+
+#: panels/fine_tune.py:47
+msgid "Speed +"
+msgstr "Скорость +"
+
+#: panels/fine_tune.py:51
+msgid "Speed -"
+msgstr "Скорость -"
+
+#: ks_includes/KlipperScreen.conf:129 ks_includes/KlipperScreen.conf:178
+msgid "System"
+msgstr "Система"
+
+#: panels/system.py:27
+msgid ""
+"System\n"
+"Restart"
+msgstr ""
+"Перегрузить\n"
+"Систему"
+
+#: panels/system.py:30
+msgid ""
+"System\n"
+"Shutdown"
+msgstr "Выключить"
+
+#: panels/extrude.py:50 ks_includes/KlipperScreen.conf:84
+#: ks_includes/KlipperScreen.conf:152
+msgid "Temperature"
+msgstr "Температура"
+
+#: panels/extrude.py:38
+msgid "Tool"
+msgstr "Инструмент"
+
+#: panels/print.py:118
+msgid "Uploaded"
+msgstr "Загружено"
+
+#: panels/move.py:25
+msgid "X+"
+msgstr "X+"
+
+#: panels/move.py:27
+msgid "X-"
+msgstr "X-"
+
+#: panels/move.py:30
+msgid "Y+"
+msgstr "Y+"
+
+#: panels/move.py:32
+msgid "Y-"
+msgstr "Y-"
+
+#: ks_includes/KlipperScreen.conf:118
+msgid "Z Calibrate"
+msgstr "Калибровка Z"
+
+#: panels/zcalibrate.py:28
+msgid "Z Offset"
+msgstr "Смещение Z"
+
+#: panels/fine_tune.py:36 panels/move.py:35
+msgid "Z+"
+msgstr "Z+"
+
+#: panels/fine_tune.py:40 panels/move.py:37
+msgid "Z-"
+msgstr "Z-"
+
+#: panels/fine_tune.py:38
+msgid "mm"
+msgstr "mm"
