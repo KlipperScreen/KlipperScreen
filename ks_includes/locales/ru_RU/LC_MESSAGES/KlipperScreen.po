@@ -1,44 +1,49 @@
-# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# Jakob Kais <schpuntik@freenet.de>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-10 19:17+0000\n"
-"PO-Revision-Date: 2021-02-10 00:27+0100\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2021-02-11 22:13+0100\n"
+"PO-Revision-Date: 2021-02-12 00:41+0100\n"
+"Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
+"Language-Team: Russian <kde-i18n-de@kde.org>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
-"Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"Language: ru\n"
+"X-Generator: Lokalize 19.12.3\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
+"=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Poedit-Flags-xgettext: --add-comments\n"
 
-#: panels/print.py:197
+#: panels/print.py:247
 msgid "?"
 msgstr "?"
 
 #: panels/zcalibrate.py:71
 msgid "Abort"
-msgstr "Сброс"
+msgstr "Отменить"
 
 #: panels/zcalibrate.py:68
 msgid "Accept"
-msgstr "Принять"
+msgstr "Применить"
 
 #: ks_includes/KlipperScreen.conf:26
 msgid "Actions"
-msgstr "Действия"
+msgstr "Двигать"
 
-#: panels/print.py:197
+#: panels/bed_mesh.py:33
+msgid "Add bed mesh profile"
+msgstr "Добавить профиль сетки стола"
+
+#: panels/print.py:247
 msgid "Are you sure you want to print"
 msgstr "Вы хотите это распечатать"
 
-#: panels/job_status.py:305
+#: panels/job_status.py:306
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Вы хотите отменить эту печать?"
 
@@ -48,21 +53,21 @@ msgstr "Вы уверены что хотите перезагрузить си�
 
 #: panels/system.py:32
 msgid "Are you sure you wish to shutdown the system?"
-msgstr "Вы хотите  выключить систему?"
+msgstr "Вы хотите выключить принтер?"
 
-#: ks_includes/KlipperScreen.conf:107
+#: ks_includes/KlipperScreen.conf:114
 msgid "Bed Level"
-msgstr "Калибровка стола"
+msgstr "Уровень стола"
 
-#: ks_includes/KlipperScreen.conf:112
+#: ks_includes/KlipperScreen.conf:119
 msgid "Bed Mesh"
 msgstr "Сетка стола"
 
-#: ks_includes/config.py:31
-msgid "Byte Position (Default)"
-msgstr "Позиция байта (по умолчанию)"
+#: panels/bed_mesh.py:104
+msgid "Calibrate"
+msgstr "Калибровка"
 
-#: screen.py:456 panels/job_status.py:267 panels/print.py:193
+#: screen.py:493 panels/job_status.py:268 panels/print.py:243
 msgid "Cancel"
 msgstr "Отменить"
 
@@ -70,11 +75,11 @@ msgstr "Отменить"
 msgid "Cancel Change"
 msgstr "Отменить изменения"
 
-#: panels/job_status.py:300
+#: panels/job_status.py:301
 msgid "Cancel Print"
 msgstr "Отменить печать"
 
-#: screen.py:290
+#: screen.py:305
 msgid ""
 "Check /tmp/KlipperScreen.log for more information.\n"
 "Please submit an issue on GitHub for help."
@@ -82,7 +87,7 @@ msgstr ""
 "Проверьте /tmp/KlipperScreen.log для дополнитольной информации.\n"
 "Создайте issues на GitHub что-бы получить помощь."
 
-#: panels/bed_mesh.py:172 panels/temperature.py:150
+#: panels/bed_mesh.py:290 panels/temperature.py:150
 msgid "Close"
 msgstr "Закрыть"
 
@@ -90,11 +95,11 @@ msgstr "Закрыть"
 msgid "Configuration"
 msgstr "Конфигурация"
 
-#: screen.py:455
+#: screen.py:492
 msgid "Continue"
 msgstr "Продолжить"
 
-#: panels/job_status.py:269
+#: panels/job_status.py:270
 msgid "Control"
 msgstr "Управление"
 
@@ -102,11 +107,19 @@ msgstr "Управление"
 msgid "Cooldown"
 msgstr "Остудить"
 
+#: panels/print.py:24
+msgid "Date"
+msgstr "Дата"
+
 #: panels/temperature.py:53
 msgid "Decrease"
 msgstr "Уменьшить"
 
-#: ks_includes/KlipperScreen.conf:101
+#: panels/bed_mesh.py:122
+msgid "Delete"
+msgstr "Удалить"
+
+#: ks_includes/KlipperScreen.conf:108
 msgid "Disable Motors"
 msgstr "Отключить моторы"
 
@@ -114,7 +127,7 @@ msgstr "Отключить моторы"
 msgid "Disable XY"
 msgstr "Отключить XY"
 
-#: panels/settings.py:32
+#: panels/settings.py:28
 msgid "Displayed Macros"
 msgstr "Показать  макросы"
 
@@ -122,26 +135,26 @@ msgstr "Показать  макросы"
 msgid "Distance (mm)"
 msgstr "Расстояние (mm)"
 
-#: ks_includes/config.py:32
+#: ks_includes/config.py:42
 msgid "Duration Only"
 msgstr "Длительность печати"
 
-#: panels/job_status.py:135
+#: panels/job_status.py:136
 msgid "Elapsed:"
 msgstr "Прошло:"
 
-#: panels/job_status.py:271
+#: panels/job_status.py:272
 msgid "Emergency Stop"
 msgstr "Аварийный стоп"
 
-#: ks_includes/config.py:29
+#: ks_includes/config.py:39
 msgid "Estimated Time Method"
 msgstr "Расчётное время"
 
 #: panels/extrude.py:46 ks_includes/KlipperScreen.conf:74
-#: ks_includes/KlipperScreen.conf:167
+#: ks_includes/KlipperScreen.conf:174
 msgid "Extrude"
-msgstr "Выдавить"
+msgstr "Заправить"
 
 #: panels/fine_tune.py:57
 msgid "Extrusion +"
@@ -151,7 +164,7 @@ msgstr "Экструзия +"
 msgid "Extrusion -"
 msgstr "Экструзия -"
 
-#: ks_includes/KlipperScreen.conf:79 ks_includes/KlipperScreen.conf:162
+#: ks_includes/KlipperScreen.conf:79 ks_includes/KlipperScreen.conf:169
 msgid "Fan"
 msgstr "Обдув"
 
@@ -167,88 +180,92 @@ msgstr "Вентилятор вкл"
 msgid "Fast"
 msgstr "Быстро"
 
-#: ks_includes/config.py:33
+#: ks_includes/config.py:43
 msgid "Filament Used"
-msgstr "Filament Используется"
+msgstr "Использование филамента"
 
-#: ks_includes/KlipperScreen.conf:157
+#: ks_includes/config.py:41
+msgid "File Estimation (default)"
+msgstr "По файлу (по умолчанию)"
+
+#: ks_includes/KlipperScreen.conf:164
 msgid "Fine Tuning"
-msgstr "Точная частройка"
+msgstr "Точная настройка"
 
-#: panels/splash_screen.py:62 panels/system.py:24
+#: panels/splash_screen.py:64 panels/system.py:24
 msgid "Firmware Restart"
-msgstr "Перезагрузка прошивки"
+msgstr ""
+"Перезагрузка\n"
+"прошивки"
 
-#: screen.py:285 panels/job_status.py:301
+#: screen.py:300 panels/job_status.py:302
 msgid "Go Back"
 msgstr "Назад"
 
 #: panels/bed_level.py:104 panels/move.py:40 ks_includes/KlipperScreen.conf:39
 msgid "Home All"
-msgstr "Обнулить все"
+msgstr "Парковать все"
 
 #: ks_includes/KlipperScreen.conf:45
 msgid "Home X"
-msgstr "Обнулить X"
+msgstr "Парковать X"
 
 #: ks_includes/KlipperScreen.conf:63
 msgid "Home XY"
-msgstr "Обнулить XY"
+msgstr "Парковать XY"
 
 #: ks_includes/KlipperScreen.conf:51
 msgid "Home Y"
-msgstr "Обнулить Y"
+msgstr "Парковать Y"
 
 #: ks_includes/KlipperScreen.conf:57
 msgid "Home Z"
-msgstr "Обнулить Z"
+msgstr "Парковать Z"
 
 #: panels/zcalibrate.py:29 ks_includes/KlipperScreen.conf:17
 msgid "Homing"
-msgstr "Обнуление позиций"
+msgstr "Парковка"
 
 #: panels/temperature.py:51
 msgid "Increase"
 msgstr "Поднять"
 
 #. self._load_panels()
-#: screen.py:137
+#: screen.py:149
 msgid "Initializing"
 msgstr "Запуск"
 
 #: panels/splash_screen.py:23
 msgid "Initializing printer..."
-msgstr "Принтер стартует"
+msgstr "Принтер стартует..."
 
-#: ks_includes/config.py:26
+#: ks_includes/config.py:36
 msgid "Invert X"
 msgstr "Инвертировать X"
 
-#: ks_includes/config.py:27
+#: ks_includes/config.py:37
 msgid "Invert Y"
 msgstr "Инвертировать Y"
 
-#: ks_includes/config.py:28
+#: ks_includes/config.py:38
 msgid "Invert Z"
 msgstr "Инвертировать Z"
 
-#: ks_includes/config.py:34
-msgid "Klipper"
-msgstr "Klipper"
-
 #: panels/system.py:22
 msgid "Klipper Restart"
-msgstr "Перезагрузка Klipper"
+msgstr ""
+"Перезагрузка\n"
+"Klipper"
 
 #: panels/system.py:42
 msgid "Klipper Version"
 msgstr "Версия Klipper"
 
-#: screen.py:385
+#: screen.py:418
 msgid "Klipper has disconnected"
 msgstr "Нет связи с Klipper"
 
-#: screen.py:396
+#: screen.py:429
 msgid ""
 "Klipper has encountered an error with the micro-controller.\n"
 "Please recompile and flash."
@@ -256,27 +273,27 @@ msgstr ""
 "Klipper определил ошибку в микроконтроллере.\n"
 "Прошейте заново."
 
-#: screen.py:400
+#: screen.py:433
 msgid "Klipper has encountered an error."
-msgstr "Klipper обнаружил ошибку "
+msgstr "Klipper обнаружил ошибку."
 
-#: screen.py:392
+#: screen.py:425
 msgid ""
 "Klipper has encountered an error.\n"
 "Issue a FIRMWARE_RESTART to attempt fixing the issue."
 msgstr ""
 "Klipper обнаружил ошибку.\n"
-"Выполните перезагрузку прошивки, чтобы попытаться исправить проблему"
+"Выполните перезагрузку прошивки, чтобы попытаться исправить проблему."
 
-#: screen.py:418
+#: screen.py:453
 msgid "Klipper has shutdown"
 msgstr "Klipper отключился"
 
-#: screen.py:414
+#: screen.py:449
 msgid "Klipper is attempting to start"
 msgstr "Klipper готов"
 
-#: ks_includes/KlipperScreen.conf:141
+#: ks_includes/KlipperScreen.conf:148
 msgid "Klipper will reboot"
 msgstr "Klipper перезагружается"
 
@@ -284,9 +301,13 @@ msgstr "Klipper перезагружается"
 msgid "KlipperScreen Version"
 msgstr "Версия KlipperScreen"
 
-#: panels/job_status.py:123
+#: panels/job_status.py:124
 msgid "Left:"
 msgstr "Осталось:"
+
+#: panels/bed_mesh.py:98
+msgid "Load"
+msgstr "Загрузить"
 
 #: panels/system.py:66
 msgid "Load Average"
@@ -296,17 +317,21 @@ msgstr "Средняя нагрузка"
 msgid "Lower Nozzle"
 msgstr "Опустить сопло"
 
-#: ks_includes/KlipperScreen.conf:89
+#: ks_includes/KlipperScreen.conf:96
 msgid "Macros"
 msgstr "Макросы"
 
-#: panels/job_status.py:273 ks_includes/KlipperScreen.conf:14
+#: panels/job_status.py:274 ks_includes/KlipperScreen.conf:14
 msgid "Main Menu"
 msgstr "Главное меню"
 
 #: panels/extrude.py:31
 msgid "Medium"
 msgstr "Среднее"
+
+#: panels/splash_screen.py:59 ks_includes/KlipperScreen.conf:202
+msgid "Menu"
+msgstr "Меню"
 
 #: ks_includes/KlipperScreen.conf:69
 msgid "Move"
@@ -316,7 +341,12 @@ msgstr "Двигать"
 msgid "Move Distance (mm)"
 msgstr "Дистанция перемещения (mm)"
 
-#: ks_includes/KlipperScreen.conf:124 ks_includes/KlipperScreen.conf:173
+#: panels/print.py:23
+msgid "Name"
+msgstr "Имя"
+
+#: ks_includes/KlipperScreen.conf:131 ks_includes/KlipperScreen.conf:186
+#: ks_includes/KlipperScreen.conf:211
 msgid "Network"
 msgstr "Сеть"
 
@@ -328,68 +358,86 @@ msgstr "Информация о сети"
 msgid "Number Pad"
 msgstr "Номер блока"
 
-#: panels/job_status.py:275
+#: ks_includes/config.py:48
+msgid "Off"
+msgstr "Выкл"
+
+#: panels/job_status.py:276
 msgid "Pause"
 msgstr "Пауза"
 
-#: panels/job_status.py:454
+#: panels/job_status.py:470
 msgid "Paused"
 msgstr "Приостановлено"
 
-#: ks_includes/KlipperScreen.conf:95
-#, fuzzy
+#: ks_includes/KlipperScreen.conf:102 ks_includes/KlipperScreen.conf:180
+#: ks_includes/KlipperScreen.conf:205
 msgid "Power"
 msgstr "Включено"
 
-#: panels/splash_screen.py:59
+#: panels/splash_screen.py:61
 msgid "Power On Printer"
 msgstr "Включить принтер"
 
 #: ks_includes/KlipperScreen.conf:21
 msgid "Preheat"
-msgstr "Нагреть"
+msgstr "Разогрев"
 
-#: panels/print.py:192 ks_includes/KlipperScreen.conf:34
-#, fuzzy
+#: panels/print.py:242 ks_includes/KlipperScreen.conf:34
 msgid "Print"
 msgstr "Печать"
 
-#: ks_includes/KlipperScreen.conf:149
+#: ks_includes/KlipperScreen.conf:156
 msgid "Print Control"
 msgstr "Управление печатью"
 
-#: panels/print.py:122
+#: panels/print.py:171
 msgid "Print Time"
 msgstr "Время печати"
 
-#: panels/job_status.py:231
+#: panels/job_status.py:232
 msgid "Printing"
 msgstr "Печатается"
+
+#: panels/bed_mesh.py:264
+msgid "Profile Name:"
+msgstr "Имя профиля:"
+
+#: ks_includes/KlipperScreen.conf:89
+msgid "Quad Gantry Level"
+msgstr "Уровень Quad Gantry "
 
 #: panels/zcalibrate.py:37
 msgid "Raise Nozzle"
 msgstr "Поднять сопло"
 
-#: panels/job_status.py:277 panels/splash_screen.py:60
+#: panels/job_status.py:278 panels/splash_screen.py:62
 msgid "Restart"
 msgstr "Перезагрузка"
 
-#: panels/job_status.py:279
+#: panels/job_status.py:280
 msgid "Resume"
 msgstr "Продолжить"
 
 #: panels/extrude.py:48
 msgid "Retract"
-msgstr "Откат"
+msgstr "Выгрузить"
 
-#: ks_includes/KlipperScreen.conf:134
+#: panels/bed_mesh.py:116 panels/bed_mesh.py:269
+msgid "Save"
+msgstr "Сохранить"
+
+#: ks_includes/KlipperScreen.conf:141
 msgid "Save Config"
-msgstr "Сохранить настрийки"
+msgstr "Сохранить настройки"
 
-#: ks_includes/KlipperScreen.conf:139
-#, fuzzy
+#: ks_includes/KlipperScreen.conf:146
 msgid "Save configuration."
-msgstr "Сохраняются"
+msgstr "Настройки сохраняются."
+
+#: ks_includes/config.py:46
+msgid "Screen Blanking Time"
+msgstr "Скрыть экран через"
 
 #: panels/bed_level.py:114
 msgid "Screws Adjust"
@@ -399,22 +447,26 @@ msgstr "Настроить винты"
 msgid "Set Speed"
 msgstr "Скорость"
 
-#: ks_includes/KlipperScreen.conf:144
+#: ks_includes/KlipperScreen.conf:151 ks_includes/KlipperScreen.conf:196
 msgid "Settings"
 msgstr "Настройки"
 
-#: panels/print.py:120
+#: panels/print.py:169
 msgid "Size"
 msgstr "Размер"
 
-#: ks_includes/config.py:35
+#: ks_includes/config.py:44
 msgid "Slicer"
-msgstr ""
+msgstr "Slicer"
 
 #. This line for translations only
 #: panels/extrude.py:31
 msgid "Slow"
-msgstr "Медленней"
+msgstr "Медленно"
+
+#: panels/print.py:39
+msgid "Sort by: "
+msgstr "Сортировать по:"
 
 #: panels/fine_tune.py:47
 msgid "Speed +"
@@ -424,7 +476,8 @@ msgstr "Скорость +"
 msgid "Speed -"
 msgstr "Скорость -"
 
-#: ks_includes/KlipperScreen.conf:129 ks_includes/KlipperScreen.conf:178
+#: ks_includes/KlipperScreen.conf:136 ks_includes/KlipperScreen.conf:191
+#: ks_includes/KlipperScreen.conf:216
 msgid "System"
 msgstr "Система"
 
@@ -443,7 +496,7 @@ msgid ""
 msgstr "Выключить"
 
 #: panels/extrude.py:50 ks_includes/KlipperScreen.conf:84
-#: ks_includes/KlipperScreen.conf:152
+#: ks_includes/KlipperScreen.conf:159
 msgid "Temperature"
 msgstr "Температура"
 
@@ -451,7 +504,7 @@ msgstr "Температура"
 msgid "Tool"
 msgstr "Инструмент"
 
-#: panels/print.py:118
+#: panels/print.py:167
 msgid "Uploaded"
 msgstr "Загружено"
 
@@ -471,13 +524,13 @@ msgstr "Y+"
 msgid "Y-"
 msgstr "Y-"
 
-#: ks_includes/KlipperScreen.conf:118
+#: ks_includes/KlipperScreen.conf:125
 msgid "Z Calibrate"
 msgstr "Калибровка Z"
 
 #: panels/zcalibrate.py:28
 msgid "Z Offset"
-msgstr "Смещение Z"
+msgstr "Офсет Z"
 
 #: panels/fine_tune.py:36 panels/move.py:35
 msgid "Z+"
@@ -487,6 +540,13 @@ msgstr "Z+"
 msgid "Z-"
 msgstr "Z-"
 
+#: ks_includes/config.py:60
+msgid "minutes"
+msgstr "минут"
+
 #: panels/fine_tune.py:38
 msgid "mm"
 msgstr "mm"
+
+#~ msgid "Klipper"
+#~ msgstr "Klipper"
