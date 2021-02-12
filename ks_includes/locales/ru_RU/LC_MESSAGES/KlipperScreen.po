@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-11 22:13+0100\n"
-"PO-Revision-Date: 2021-02-12 01:47+0100\n"
+"PO-Revision-Date: 2021-02-12 02:24+0100\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: Russian <kde-i18n-de@kde.org>\n"
 "Language: ru\n"
@@ -33,7 +33,7 @@ msgstr "Применить"
 
 #: ks_includes/KlipperScreen.conf:26
 msgid "Actions"
-msgstr "Двигать"
+msgstr "Действия"
 
 #: panels/bed_mesh.py:33
 msgid "Add bed mesh profile"
@@ -137,7 +137,7 @@ msgstr "Расстояние (mm)"
 
 #: ks_includes/config.py:42
 msgid "Duration Only"
-msgstr "Длительность печати"
+msgstr "Продолжительность печати"
 
 #: panels/job_status.py:136
 msgid "Elapsed:"
