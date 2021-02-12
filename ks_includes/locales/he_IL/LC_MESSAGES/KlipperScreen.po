@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-10 19:17+0000\n"
+"POT-Creation-Date: 2021-02-11 22:13+0100\n"
 "PO-Revision-Date: 2021-01-08 08:21-0500\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
@@ -20,7 +20,7 @@ msgstr ""
 "2 : 3);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: panels/print.py:197
+#: panels/print.py:247
 msgid "?"
 msgstr "?"
 
@@ -36,11 +36,15 @@ msgstr "אשר"
 msgid "Actions"
 msgstr "פעולות"
 
-#: panels/print.py:197
+#: panels/bed_mesh.py:33
+msgid "Add bed mesh profile"
+msgstr ""
+
+#: panels/print.py:247
 msgid "Are you sure you want to print"
 msgstr "האם אתה בטוח שברצונך להדפיס"
 
-#: panels/job_status.py:305
+#: panels/job_status.py:306
 msgid "Are you sure you wish to cancel this print?"
 msgstr "האם אתה בטוח שברצונך לבטל את ההדפסה?"
 
@@ -54,19 +58,20 @@ msgstr "האם אתה בטוח שברצונך לבטל את ההדפסה?"
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "האם אתה בטוח שברצונך לבטל את ההדפסה?"
 
-#: ks_includes/KlipperScreen.conf:107
+#: ks_includes/KlipperScreen.conf:114
 msgid "Bed Level"
 msgstr "פילוס מיטה"
 
-#: ks_includes/KlipperScreen.conf:112
+#: ks_includes/KlipperScreen.conf:119
 msgid "Bed Mesh"
 msgstr "מיפוי מיטה"
 
-#: ks_includes/config.py:31
-msgid "Byte Position (Default)"
-msgstr ""
+#: panels/bed_mesh.py:104
+#, fuzzy
+msgid "Calibrate"
+msgstr "כיול Z"
 
-#: screen.py:456 panels/job_status.py:267 panels/print.py:193
+#: screen.py:493 panels/job_status.py:268 panels/print.py:243
 msgid "Cancel"
 msgstr "ביטול"
 
@@ -74,11 +79,11 @@ msgstr "ביטול"
 msgid "Cancel Change"
 msgstr "בטל שינוי"
 
-#: panels/job_status.py:300
+#: panels/job_status.py:301
 msgid "Cancel Print"
 msgstr "בטל הדפסה"
 
-#: screen.py:290
+#: screen.py:305
 msgid ""
 "Check /tmp/KlipperScreen.log for more information.\n"
 "Please submit an issue on GitHub for help."
@@ -86,7 +91,7 @@ msgstr ""
 "בדוק KlipperScreen.log, בתיקית tmp ליותר פרטים.\n"
 "אנא שלח דוח תקלה ב- GITHUB, לעזרה."
 
-#: panels/bed_mesh.py:172 panels/temperature.py:150
+#: panels/bed_mesh.py:290 panels/temperature.py:150
 msgid "Close"
 msgstr "סגור"
 
@@ -94,11 +99,11 @@ msgstr "סגור"
 msgid "Configuration"
 msgstr "קונפיגורציה"
 
-#: screen.py:455
+#: screen.py:492
 msgid "Continue"
 msgstr "המשך"
 
-#: panels/job_status.py:269
+#: panels/job_status.py:270
 msgid "Control"
 msgstr "שליטה"
 
@@ -106,11 +111,19 @@ msgstr "שליטה"
 msgid "Cooldown"
 msgstr "קירור"
 
+#: panels/print.py:24
+msgid "Date"
+msgstr ""
+
 #: panels/temperature.py:53
 msgid "Decrease"
 msgstr "הקטן"
 
-#: ks_includes/KlipperScreen.conf:101
+#: panels/bed_mesh.py:122
+msgid "Delete"
+msgstr ""
+
+#: ks_includes/KlipperScreen.conf:108
 msgid "Disable Motors"
 msgstr "בטל מנועים"
 
@@ -118,7 +131,7 @@ msgstr "בטל מנועים"
 msgid "Disable XY"
 msgstr "בטל XY"
 
-#: panels/settings.py:32
+#: panels/settings.py:28
 msgid "Displayed Macros"
 msgstr ""
 
@@ -126,24 +139,24 @@ msgstr ""
 msgid "Distance (mm)"
 msgstr "מרחק (מ''מ)"
 
-#: ks_includes/config.py:32
+#: ks_includes/config.py:42
 msgid "Duration Only"
 msgstr ""
 
-#: panels/job_status.py:135
+#: panels/job_status.py:136
 msgid "Elapsed:"
 msgstr "זמן שעבר:"
 
-#: panels/job_status.py:271
+#: panels/job_status.py:272
 msgid "Emergency Stop"
 msgstr "עצירת חירום"
 
-#: ks_includes/config.py:29
+#: ks_includes/config.py:39
 msgid "Estimated Time Method"
 msgstr ""
 
 #: panels/extrude.py:46 ks_includes/KlipperScreen.conf:74
-#: ks_includes/KlipperScreen.conf:167
+#: ks_includes/KlipperScreen.conf:174
 msgid "Extrude"
 msgstr "אקסטרוזיה"
 
@@ -155,7 +168,7 @@ msgstr "שיחול +"
 msgid "Extrusion -"
 msgstr "שיחול -"
 
-#: ks_includes/KlipperScreen.conf:79 ks_includes/KlipperScreen.conf:162
+#: ks_includes/KlipperScreen.conf:79 ks_includes/KlipperScreen.conf:169
 msgid "Fan"
 msgstr "מאוורר"
 
@@ -171,19 +184,23 @@ msgstr "הפעל מאוורר"
 msgid "Fast"
 msgstr "מהיר"
 
-#: ks_includes/config.py:33
+#: ks_includes/config.py:43
 msgid "Filament Used"
 msgstr ""
 
-#: ks_includes/KlipperScreen.conf:157
+#: ks_includes/config.py:41
+msgid "File Estimation (default)"
+msgstr ""
+
+#: ks_includes/KlipperScreen.conf:164
 msgid "Fine Tuning"
 msgstr "כיולים עדינים"
 
-#: panels/splash_screen.py:62 panels/system.py:24
+#: panels/splash_screen.py:64 panels/system.py:24
 msgid "Firmware Restart"
 msgstr "התחל קושחה"
 
-#: screen.py:285 panels/job_status.py:301
+#: screen.py:300 panels/job_status.py:302
 msgid "Go Back"
 msgstr "חזרה"
 
@@ -216,7 +233,7 @@ msgid "Increase"
 msgstr "הגדל"
 
 #. self._load_panels()
-#: screen.py:137
+#: screen.py:149
 msgid "Initializing"
 msgstr "מאתחל"
 
@@ -224,22 +241,17 @@ msgstr "מאתחל"
 msgid "Initializing printer..."
 msgstr "מאתחל מדפסת..."
 
-#: ks_includes/config.py:26
+#: ks_includes/config.py:36
 msgid "Invert X"
 msgstr ""
 
-#: ks_includes/config.py:27
+#: ks_includes/config.py:37
 msgid "Invert Y"
 msgstr ""
 
-#: ks_includes/config.py:28
+#: ks_includes/config.py:38
 msgid "Invert Z"
 msgstr ""
-
-#: ks_includes/config.py:34
-#, fuzzy
-msgid "Klipper"
-msgstr "אתחול קליפר"
 
 #: panels/system.py:22
 msgid "Klipper Restart"
@@ -249,21 +261,21 @@ msgstr "אתחול קליפר"
 msgid "Klipper Version"
 msgstr "גרסא של קליפר"
 
-#: screen.py:385
+#: screen.py:418
 msgid "Klipper has disconnected"
 msgstr "קליפר התנתק"
 
-#: screen.py:396
+#: screen.py:429
 msgid ""
 "Klipper has encountered an error with the micro-controller.\n"
 "Please recompile and flash."
 msgstr "בעיית תקשורת בין קליפר ללוח בקרה. אנא לקמפל קושחה ולצרובה מחדש. "
 
-#: screen.py:400
+#: screen.py:433
 msgid "Klipper has encountered an error."
 msgstr "קילפר נתקל בבעיה."
 
-#: screen.py:392
+#: screen.py:425
 msgid ""
 "Klipper has encountered an error.\n"
 "Issue a FIRMWARE_RESTART to attempt fixing the issue."
@@ -271,15 +283,15 @@ msgstr ""
 "קליפר נתקל בבעיה. \n"
 "נסה להריץ firmware_restart, כדי לפתור את הבעיה."
 
-#: screen.py:418
+#: screen.py:453
 msgid "Klipper has shutdown"
 msgstr "קליפר נכבה"
 
-#: screen.py:414
+#: screen.py:449
 msgid "Klipper is attempting to start"
 msgstr "קליפר מנסה לרוץ"
 
-#: ks_includes/KlipperScreen.conf:141
+#: ks_includes/KlipperScreen.conf:148
 msgid "Klipper will reboot"
 msgstr "קליפר יבצע אתחול"
 
@@ -287,9 +299,13 @@ msgstr "קליפר יבצע אתחול"
 msgid "KlipperScreen Version"
 msgstr "גרסא של KlipperScreen"
 
-#: panels/job_status.py:123
+#: panels/job_status.py:124
 msgid "Left:"
 msgstr "זמן שנותר:"
+
+#: panels/bed_mesh.py:98
+msgid "Load"
+msgstr ""
 
 #: panels/system.py:66
 msgid "Load Average"
@@ -299,17 +315,22 @@ msgstr "עומס ממוצע"
 msgid "Lower Nozzle"
 msgstr "הנמך דיזה"
 
-#: ks_includes/KlipperScreen.conf:89
+#: ks_includes/KlipperScreen.conf:96
 msgid "Macros"
 msgstr "מקרואים"
 
-#: panels/job_status.py:273 ks_includes/KlipperScreen.conf:14
+#: panels/job_status.py:274 ks_includes/KlipperScreen.conf:14
 msgid "Main Menu"
 msgstr "תפריט ראשי"
 
 #: panels/extrude.py:31
 msgid "Medium"
 msgstr "ממוצע"
+
+#: panels/splash_screen.py:59 ks_includes/KlipperScreen.conf:202
+#, fuzzy
+msgid "Menu"
+msgstr "תפריט ראשי"
 
 #: ks_includes/KlipperScreen.conf:69
 msgid "Move"
@@ -319,7 +340,12 @@ msgstr "הזזת צירים"
 msgid "Move Distance (mm)"
 msgstr "מרחק הזזה (מ''מ)"
 
-#: ks_includes/KlipperScreen.conf:124 ks_includes/KlipperScreen.conf:173
+#: panels/print.py:23
+msgid "Name"
+msgstr ""
+
+#: ks_includes/KlipperScreen.conf:131 ks_includes/KlipperScreen.conf:186
+#: ks_includes/KlipperScreen.conf:211
 msgid "Network"
 msgstr "רשת"
 
@@ -331,19 +357,25 @@ msgstr "מידע על הרשת"
 msgid "Number Pad"
 msgstr "פד נומרי"
 
-#: panels/job_status.py:275
+#: ks_includes/config.py:48
+#, fuzzy
+msgid "Off"
+msgstr "כבה מאוורר"
+
+#: panels/job_status.py:276
 msgid "Pause"
 msgstr "השהיה"
 
-#: panels/job_status.py:454
+#: panels/job_status.py:470
 msgid "Paused"
 msgstr "מושהה"
 
-#: ks_includes/KlipperScreen.conf:95
+#: ks_includes/KlipperScreen.conf:102 ks_includes/KlipperScreen.conf:180
+#: ks_includes/KlipperScreen.conf:205
 msgid "Power"
 msgstr "הפעלה"
 
-#: panels/splash_screen.py:59
+#: panels/splash_screen.py:61
 msgid "Power On Printer"
 msgstr "הפעל מדפסת"
 
@@ -351,31 +383,39 @@ msgstr "הפעל מדפסת"
 msgid "Preheat"
 msgstr "חימום מראש"
 
-#: panels/print.py:192 ks_includes/KlipperScreen.conf:34
+#: panels/print.py:242 ks_includes/KlipperScreen.conf:34
 msgid "Print"
 msgstr "הדפס"
 
-#: ks_includes/KlipperScreen.conf:149
+#: ks_includes/KlipperScreen.conf:156
 msgid "Print Control"
 msgstr "שליטה בהדפסה"
 
-#: panels/print.py:122
+#: panels/print.py:171
 msgid "Print Time"
 msgstr "זמן הדפסה"
 
-#: panels/job_status.py:231
+#: panels/job_status.py:232
 msgid "Printing"
 msgstr "מדפיס"
+
+#: panels/bed_mesh.py:264
+msgid "Profile Name:"
+msgstr ""
+
+#: ks_includes/KlipperScreen.conf:89
+msgid "Quad Gantry Level"
+msgstr ""
 
 #: panels/zcalibrate.py:37
 msgid "Raise Nozzle"
 msgstr "הגבה"
 
-#: panels/job_status.py:277 panels/splash_screen.py:60
+#: panels/job_status.py:278 panels/splash_screen.py:62
 msgid "Restart"
 msgstr "אתחל"
 
-#: panels/job_status.py:279
+#: panels/job_status.py:280
 msgid "Resume"
 msgstr "המשך"
 
@@ -383,13 +423,21 @@ msgstr "המשך"
 msgid "Retract"
 msgstr "שיחול לאחור"
 
-#: ks_includes/KlipperScreen.conf:134
+#: panels/bed_mesh.py:116 panels/bed_mesh.py:269
+msgid "Save"
+msgstr ""
+
+#: ks_includes/KlipperScreen.conf:141
 msgid "Save Config"
 msgstr "שמור קונפיג"
 
-#: ks_includes/KlipperScreen.conf:139
+#: ks_includes/KlipperScreen.conf:146
 msgid "Save configuration."
 msgstr "שמור קונפיגורציה"
+
+#: ks_includes/config.py:46
+msgid "Screen Blanking Time"
+msgstr ""
 
 #: panels/bed_level.py:114
 msgid "Screws Adjust"
@@ -399,15 +447,15 @@ msgstr "סידור ברגים"
 msgid "Set Speed"
 msgstr "קבע מהירות"
 
-#: ks_includes/KlipperScreen.conf:144
+#: ks_includes/KlipperScreen.conf:151 ks_includes/KlipperScreen.conf:196
 msgid "Settings"
 msgstr "הגדרות"
 
-#: panels/print.py:120
+#: panels/print.py:169
 msgid "Size"
 msgstr "גודל"
 
-#: ks_includes/config.py:35
+#: ks_includes/config.py:44
 msgid "Slicer"
 msgstr ""
 
@@ -415,6 +463,10 @@ msgstr ""
 #: panels/extrude.py:31
 msgid "Slow"
 msgstr "האט"
+
+#: panels/print.py:39
+msgid "Sort by: "
+msgstr ""
 
 #: panels/fine_tune.py:47
 msgid "Speed +"
@@ -424,7 +476,8 @@ msgstr "מהירות +"
 msgid "Speed -"
 msgstr "מהירות -"
 
-#: ks_includes/KlipperScreen.conf:129 ks_includes/KlipperScreen.conf:178
+#: ks_includes/KlipperScreen.conf:136 ks_includes/KlipperScreen.conf:191
+#: ks_includes/KlipperScreen.conf:216
 msgid "System"
 msgstr "מערכת"
 
@@ -442,7 +495,7 @@ msgid ""
 msgstr ""
 
 #: panels/extrude.py:50 ks_includes/KlipperScreen.conf:84
-#: ks_includes/KlipperScreen.conf:152
+#: ks_includes/KlipperScreen.conf:159
 msgid "Temperature"
 msgstr "טמפרטורה"
 
@@ -450,7 +503,7 @@ msgstr "טמפרטורה"
 msgid "Tool"
 msgstr "כלי"
 
-#: panels/print.py:118
+#: panels/print.py:167
 msgid "Uploaded"
 msgstr "הועלה"
 
@@ -470,7 +523,7 @@ msgstr "Y+"
 msgid "Y-"
 msgstr "Y-"
 
-#: ks_includes/KlipperScreen.conf:118
+#: ks_includes/KlipperScreen.conf:125
 msgid "Z Calibrate"
 msgstr "כיול Z"
 
@@ -486,9 +539,17 @@ msgstr "Z+"
 msgid "Z-"
 msgstr "Z-"
 
+#: ks_includes/config.py:60
+msgid "minutes"
+msgstr ""
+
 #: panels/fine_tune.py:38
 msgid "mm"
 msgstr "מ''מ"
+
+#, fuzzy
+#~ msgid "Klipper"
+#~ msgstr "אתחול קליפר"
 
 #~ msgid "Back"
 #~ msgstr "חזור"
