@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-11 22:13+0100\n"
-"PO-Revision-Date: 2021-02-12 00:41+0100\n"
+"PO-Revision-Date: 2021-02-12 01:47+0100\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: Russian <kde-i18n-de@kde.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 19.12.3\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
-"=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Poedit-Flags-xgettext: --add-comments\n"
 
 #: panels/print.py:247
@@ -405,7 +405,7 @@ msgstr "Имя профиля:"
 
 #: ks_includes/KlipperScreen.conf:89
 msgid "Quad Gantry Level"
-msgstr "Уровень Quad Gantry "
+msgstr "Уровень Quad Gantry"
 
 #: panels/zcalibrate.py:37
 msgid "Raise Nozzle"
@@ -466,7 +466,7 @@ msgstr "Медленно"
 
 #: panels/print.py:39
 msgid "Sort by: "
-msgstr "Сортировать по:"
+msgstr "Сортировать по: "
 
 #: panels/fine_tune.py:47
 msgid "Speed +"
