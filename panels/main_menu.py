@@ -12,14 +12,15 @@ def create_panel(*args):
     return MainPanel(*args)
 
 class MainPanel(MenuPanel):
+    def __init__(self, screen, title, back=False):
+        super().__init__(screen, title, False)
 
     def initialize(self, panel_name, items, extrudercount):
         print("### Making MainMenu")
 
-        self.layout = Gtk.Layout()
-        self.layout.set_size(self._screen.width, self._screen.height)
         grid = self._gtk.HomogeneousGrid()
-        grid.set_size_request(self._screen.width, self._screen.height)
+        grid.set_hexpand(True)
+        grid.set_vexpand(True)
 
         # Create Extruders and bed icons
         eq_grid = self._gtk.HomogeneousGrid()
@@ -29,7 +30,7 @@ class MainPanel(MenuPanel):
             if i > 3:
                 break
             self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0))
-            col = 0 if len(self._printer.get_tools()) == 1 else i%2 
+            col = 0 if len(self._printer.get_tools()) == 1 else i%2
             row = i/2
             eq_grid.attach(self.labels[x], col, row, 1, 1)
             i += 1
@@ -56,7 +57,9 @@ class MainPanel(MenuPanel):
             "heater_bed": 0,
             "extruder": 0
         }
-        self.layout.put(grid, 0, 0)
+        
+        self.content.add(self.grid)
+        self.layout.show_all()
 
         self._screen.add_subscription(panel_name)
 
