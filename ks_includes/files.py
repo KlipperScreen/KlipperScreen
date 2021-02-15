@@ -4,13 +4,18 @@ import json
 import os
 import base64
 
+from contextlib import suppress
+from threading import Thread
+
 import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
 
 logger = logging.getLogger("KlipperScreen.KlippyFiles")
 
-class KlippyFiles:
+RESCAN_INTERVAL = 4
+
+class KlippyFiles(Thread):
     callbacks = []
     filelist = []
     files = {}
@@ -18,13 +23,42 @@ class KlippyFiles:
     timeout = None
     thumbnail_dir = "/tmp/.KS-thumbnails"
 
-    def __init__(self, screen):
+    def __init__(self, screen, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.loop = None
+        self._poll_task = None
         self._screen = screen
-        self.add_timeout()
 
         if not os.path.exists(self.thumbnail_dir):
             os.makedirs(self.thumbnail_dir)
-        GLib.idle_add(self.ret_files, False)
+
+    def run(self):
+        self.loop = asyncio.new_event_loop()
+        loop = self.loop
+        asyncio.set_event_loop(loop)
+        try:
+            self._poll_task = asyncio.ensure_future(self._poll())
+            loop.run_forever()
+            loop.run_until_complete(loop.shutdown_asyncgens())
+
+            self._poll_task.cancel()
+            with suppress(asyncio.CancelledError):
+                loop.run_until_complete(self._poll_task)
+        finally:
+            loop.close()
+
+    def stop(self):
+        self.loop.call_soon_threadsafe(self.loop.stop)
+
+    async def _poll(self):
+        await self.ret_files()
+        while True:
+            logger.debug("Polling files")
+            try:
+                await self.ret_files()
+            except:
+                logger.exception("Poll files error")
+            await asyncio.sleep(4)
 
 
     def _callback(self, result, method, params):
@@ -62,9 +96,6 @@ class KlippyFiles:
                 return
 
             logger.debug("Got metadata for %s" % (result['result']['filename']))
-            if params['filename'] in self.metadata_timeout:
-                GLib.source_remove(self.metadata_timeout[params['filename']])
-                del self.metadata_timeout[params['filename']]
 
             for x in result['result']:
                 self.files[params['filename']][x] = result['result'][x]
@@ -121,21 +152,13 @@ class KlippyFiles:
     def request_metadata(self, filename):
         if filename not in self.filelist:
             return False
-        if filename in self.metadata_timeout:
-            GLib.source_remove(self.metadata_timeout[filename])
-        self.metadata_timeout[filename] = GLib.timeout_add(
-            6000, self._screen._ws.klippy.get_file_metadata, filename, self._callback
-        )
-        GLib.idle_add(
-            lambda x, y: False if self._screen._ws.klippy.get_file_metadata(x,y) else False,
-            filename, self._callback
-        )
+        self.loop.call_soon(lambda x, y: False if self._screen._ws.klippy.get_file_metadata(x,y) else False,
+            filename, self._callback)
 
-    def ret_files(self, retval=True):
+    async def ret_files(self, retval=True):
+        logger.debug("Scanning for files")
         if not self._screen._ws.klippy.get_file_list(self._callback):
             self.timeout = None
-            return False
-        return retval
 
     def ret_file_data (self, filename):
         print("Getting file info for %s" % (filename))
