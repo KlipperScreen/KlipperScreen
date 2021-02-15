@@ -66,7 +66,8 @@ class SplashScreenPanel(ScreenPanel):
 
         self.clear_action_bar()
 
-        devices = [i for i in self._screen.printer.get_power_devices() if i.lower().startswith('printer')]
+        devices = [i for i in self._printer.get_power_devices() if i.lower().startswith('printer')] if (
+                self._printer is not None) else []
         logger.debug("Power devices: %s" % devices)
         if len(devices) > 0:
             logger.debug("Adding power button")
@@ -76,6 +77,7 @@ class SplashScreenPanel(ScreenPanel):
         self.labels['actions'].add(self.labels['restart'])
         self.labels['actions'].add(self.labels['firmware_restart'])
         self.labels['actions'].add(self.labels['menu'])
+        self.labels['actions'].show()
 
     def firmware_restart(self, widget):
         self._screen._ws.klippy.restart_firmware()
