@@ -1,5 +1,10 @@
 ## Changelog
 
+#### 2021 02 15
+* Added action bar to left side (moves the Back, E-stop, and Home buttons)
+* Added wifi manager. Will show current wifi details in network panel. Will allow switching networks in the future.
+* Show printer name in main menu (user will need to configure the printer)
+
 #### 2021 01 21
 * Configure screen blanking from settings panel
 

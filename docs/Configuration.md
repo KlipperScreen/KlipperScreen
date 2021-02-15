@@ -12,12 +12,6 @@ config is included here: [ks_includes/KlipperScreen.conf](../ks_includes/Klipper
 ## Main Options
 ```
 [main]
-# Define the moonraker host/port if different from 127.0.0.1 and 7125
-moonraker_host: 127.0.0.1
-moonraker_port: 7125
-# Moonraker API key if this is not connecting from a trusted client IP
-moonraker_api_key: False
-
 # Invert axis in move panel. Default is False. Change to true to invert
 invert_x: False
 invert_y: False
@@ -29,6 +23,28 @@ job_complete_timeout: 30
 # Time (seconds) before the Job Status page reverts to main menu after a successful job.
 #   If this option is 0, the user must click on a button to go back to the main menu.
 job_error_timeout: 0
+
+#
+# The following main options are deprecated and will be removed in the near future
+#
+
+# Define the moonraker host/port if different from 127.0.0.1 and 7125
+moonraker_host: 127.0.0.1
+moonraker_port: 7125
+# Moonraker API key if this is not connecting from a trusted client IP
+moonraker_api_key: False
+```
+
+## Printer Options
+Multiple printers can be defined, currently only the first one will be used until an update in the near future.
+```
+# Define printer and name. Name is anything after the first printer word
+[printer Ender 3 Pro]
+# Define the moonraker host/port if different from 127.0.0.1 and 7125
+moonraker_host: 127.0.0.1
+moonraker_port: 7125
+# Moonraker API key if this is not connecting from a trusted client IP
+moonraker_api_key: False
 ```
 
 
