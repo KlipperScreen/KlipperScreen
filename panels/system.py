@@ -19,9 +19,9 @@ class SystemPanel(ScreenPanel):
 
         grid = self._gtk.HomogeneousGrid()
 
-        restart = self._gtk.ButtonImage('reboot',_('Klipper Restart'),'color1')
+        restart = self._gtk.ButtonImage('reboot',"\n".join(_('Klipper Restart').split(' ')),'color1')
         restart.connect("clicked", self.restart_klippy)
-        firmrestart = self._gtk.ButtonImage('restart',_('Firmware Restart'),'color2')
+        firmrestart = self._gtk.ButtonImage('restart',"\n".join(_('Firmware Restart').split(' ')),'color2')
         firmrestart.connect("clicked", self.restart_klippy, "firmware")
 
         reboot = self._gtk.ButtonImage('reboot',_('System\nRestart'),'color3')
