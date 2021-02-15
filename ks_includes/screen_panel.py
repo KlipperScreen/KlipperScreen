@@ -28,7 +28,8 @@ class ScreenPanel:
         left_bar_width = int(self._screen.width * .1)
 
         self.control_grid = self._gtk.HomogeneousGrid()
-        self.control_grid.set_size_request(left_bar_width, self._screen.height)
+        self.control_grid.set_size_request(left_bar_width - 2, self._screen.height)
+        self.control_grid.get_style_context().add_class('action_bar')
 
         button_scale = self._gtk.get_header_image_scale()
         logger.debug("Button scale: %s" % button_scale)

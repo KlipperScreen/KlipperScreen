@@ -119,6 +119,10 @@ trough {
     background-color: #0000ff;
 }
 
+.action_bar {
+    border-right: 2px solid #444;
+}
+
 .dialog {
 	border: .1em solid black;
 	padding: 2.5em;
