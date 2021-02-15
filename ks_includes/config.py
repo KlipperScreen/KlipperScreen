@@ -82,7 +82,28 @@ class KlipperScreenConfig:
         except KeyError:
             raise ConfigError(f"Error reading config: {self.config_path}")
 
-        self.get_menu_items("__main")
+        printers = [i for i in self.config.sections() if i.startswith("printer ")]
+        logger.debug("Printers: %s %s" % (len(printers), printers))
+        self.printers = []
+        for printer in printers:
+            self.printers.append({
+                printer[8:]: {
+                    "moonraker_host": self.config.get(printer, "moonraker_host", fallback="127.0.0.1"),
+                    "moonraker_port": self.config.get(printer, "moonraker_port", fallback="7125"),
+                    "moonraker_api_key": self.config.get(printer, "moonraker_api_key", fallback="")
+                }
+            })
+        if len(printers) <= 0:
+            self.printers.append({
+                "Printer": {
+                    "moonraker_host": self.config.get("main", "moonraker_host", fallback="127.0.0.1"),
+                    "moonraker_port": self.config.get("main", "moonraker_port", fallback="7125"),
+                    "moonraker_api_key": self.config.get("main", "moonraker_api_key", fallback="")
+                }
+            })
+
+        logger.debug("Configured printers: %s" % json.dumps(self.printers, indent=2))
+
         for item in self.configurable_options:
             name = list(item)[0]
             vals = item[name]
@@ -166,6 +187,9 @@ class KlipperScreenConfig:
     def get_printer_power_name(self):
         return self.config['settings'].get("printer_power_name", "printer")
 
+    def get_printers(self):
+        return self.printers
+
     def get_user_saved_config(self):
         if self.config_path != self.default_config_path:
             print("Get")
@@ -222,7 +246,6 @@ class KlipperScreenConfig:
 
     def set(self, section, name, value):
         self.config.set(section, name, value)
-
 
     def log_config(self, config):
         lines = [
