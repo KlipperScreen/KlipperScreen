@@ -53,7 +53,6 @@ class KlippyFiles(Thread):
     async def _poll(self):
         await self.ret_files()
         while True:
-            logger.debug("Polling files")
             try:
                 await self.ret_files()
             except:
@@ -152,8 +151,7 @@ class KlippyFiles(Thread):
     def request_metadata(self, filename):
         if filename not in self.filelist:
             return False
-        self.loop.call_soon(lambda x, y: False if self._screen._ws.klippy.get_file_metadata(x,y) else False,
-            filename, self._callback)
+        self._screen._ws.klippy.get_file_metadata(filename, self._callback)
 
     async def ret_files(self, retval=True):
         logger.debug("Scanning for files")
