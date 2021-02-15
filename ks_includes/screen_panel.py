@@ -25,10 +25,10 @@ class ScreenPanel:
         self.layout = Gtk.Layout()
         self.layout.set_size(self._screen.width, self._screen.height)
 
-        left_bar_width = int(self._screen.width * .1)
+        action_bar_width = self._gtk.get_action_bar_width()
 
         self.control_grid = self._gtk.HomogeneousGrid()
-        self.control_grid.set_size_request(left_bar_width - 2, self._screen.height)
+        self.control_grid.set_size_request(action_bar_width - 2, self._screen.height)
         self.control_grid.get_style_context().add_class('action_bar')
 
         button_scale = self._gtk.get_header_image_scale()
@@ -63,7 +63,7 @@ class ScreenPanel:
             logger.debug("Error parsing jinja for title: %s" % title)
 
         self.title = Gtk.Label()
-        self.title.set_size_request(self._screen.width - left_bar_width, self.title_spacing)
+        self.title.set_size_request(self._screen.width - action_bar_width, self.title_spacing)
         self.title.set_hexpand(True)
         self.title.set_halign(Gtk.Align.CENTER)
         self.title.set_valign(Gtk.Align.CENTER)
@@ -71,11 +71,11 @@ class ScreenPanel:
 
 
         self.content = Gtk.Box(spacing=0)
-        self.content.set_size_request(self._screen.width - left_bar_width, self._screen.height - self.title_spacing)
+        self.content.set_size_request(self._screen.width - action_bar_width, self._screen.height - self.title_spacing)
 
         self.layout.put(self.control_grid, 0, 0)
-        self.layout.put(self.title, left_bar_width, 0)
-        self.layout.put(self.content, left_bar_width, self.title_spacing)
+        self.layout.put(self.title, action_bar_width, 0)
+        self.layout.put(self.content, action_bar_width, self.title_spacing)
 
 
     def initialize(self, panel_name):

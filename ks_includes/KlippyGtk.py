@@ -23,10 +23,20 @@ class KlippyGtk:
         self.header_size = int(round((self.width / self.width_ratio) / 1.33))
         self.img_width = int(round(self.width / self.width_ratio))
         self.img_height = int(round(self.height / self.height_ratio))
+        self.action_bar_width = int(self.width * .1)
         self.header_image_scale_width = 1.2
         self.header_image_scale_height = 1.4
 
         logger.debug("img width: %s height: %s" % (self.img_width, self.img_height))
+
+    def get_action_bar_width(self):
+        return self.action_bar_width
+
+    def get_content_width(self):
+        return self.width - self.action_bar_width
+
+    def get_content_height(self):
+        return self.height - self.header_size
 
     def get_header_size(self):
         return self.header_size

@@ -255,7 +255,7 @@ class BedMeshPanel(ScreenPanel):
             self.labels['create_profile'].set_valign(Gtk.Align.START)
 
             box = Gtk.Box(spacing=5)
-            box.set_size_request(self._screen.width, self._screen.height - self._gtk.get_header_size() -
+            box.set_size_request(self._gtk.get_content_width(), self._gtk.get_content_height() -
                     self._screen.keyboard_height - 20)
             box.set_hexpand(True)
             box.set_vexpand(False)

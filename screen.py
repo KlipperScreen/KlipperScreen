@@ -622,15 +622,18 @@ class KlipperScreen(Gtk.Window):
         logger.debug("PID %s" % p.pid)
         keyboard = Gtk.Socket()
         #keyboard.connect("plug-added", self.plug_added)
+
+        action_bar_width = self.gtk.get_action_bar_width()
+
         box = Gtk.VBox()
-        box.set_size_request(self.width, self.keyboard_height)
+        box.set_size_request(self.width - action_bar_width, self.keyboard_height)
         box.add(keyboard)
 
         cur_panel = self.panels[self._cur_panels[-1]]
         #for i in ['back','estop','home']:
         #    if i in cur_panel.control:
         #        cur_panel.control[i].set_sensitive(False)
-        cur_panel.get().put(box, 0, self.height - 200)
+        cur_panel.get().put(box, action_bar_width, self.height - 200)
         self.show_all()
         keyboard.add_id(xid)
         keyboard.show()
