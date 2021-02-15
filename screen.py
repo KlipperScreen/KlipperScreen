@@ -231,17 +231,22 @@ class KlipperScreen(Gtk.Window):
             if hasattr(self.panels[panel_name],"process_update"):
                 self.panels[panel_name].process_update("notify_status_update", self.printer.get_data())
 
-        if remove == 2:
-            self._remove_all_panels()
-        elif remove == 1:
-            self._remove_current_panel(pop)
+        try:
+            if remove == 2:
+                self._remove_all_panels()
+            elif remove == 1:
+                self._remove_current_panel(pop)
 
-        self.add(self.panels[panel_name].get())
-        self.show_all()
+            logger.debug("Attaching panel %s" % panel_name)
 
-        if hasattr(self.panels[panel_name],"activate"):
-            self.panels[panel_name].activate()
+            self.add(self.panels[panel_name].get())
             self.show_all()
+
+            if hasattr(self.panels[panel_name],"activate"):
+                self.panels[panel_name].activate()
+                self.show_all()
+        except:
+            logger.exception("Error attaching panel")
 
         self._cur_panels.append(panel_name)
         logger.debug("Current panel hierarchy: %s", str(self._cur_panels))
