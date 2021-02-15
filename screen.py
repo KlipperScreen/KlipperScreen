@@ -28,6 +28,7 @@ from ks_includes.KlippyRest import KlippyRest
 from ks_includes.files import KlippyFiles
 from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.printer import Printer
+from ks_includes.wifi import WifiManager
 
 from ks_includes.config import KlipperScreenConfig
 
@@ -109,6 +110,9 @@ class KlipperScreen(Gtk.Window):
         self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', fallback=True)
         self._config = KlipperScreenConfig(configfile, self.lang, self)
 
+        self.wifi = WifiManager()
+        self.wifi.start()
+
         logger.debug("OS Language: %s" % os.getenv('LANG'))
 
         self.lang_ltr = True
@@ -130,8 +134,6 @@ class KlipperScreen(Gtk.Window):
 
         self.gtk = KlippyGtk(self.width, self.height)
         self.init_style()
-
-        #self._load_panels()
 
         self.printer_initializing(_("Initializing"))
 

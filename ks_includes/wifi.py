@@ -38,6 +38,7 @@ class WifiManager(Thread):
         self.read_wpa_supplicant()
 
     def run(self):
+        logger.debug("Setting up wifi event loop")
         self.loop = asyncio.new_event_loop()
         loop = self.loop
         asyncio.set_event_loop(loop)
@@ -60,8 +61,11 @@ class WifiManager(Thread):
 
     async def _poll(self):
         while True:
-            await self.scan()
-            await asyncio.sleep(RESCAN_INTERVAL)
+            try:
+                await self.scan()
+                await asyncio.sleep(RESCAN_INTERVAL)
+            except:
+                logger.exception("Poll wifi error")
 
     def get_current_wifi(self, interface="wlan0"):
         p = subprocess.Popen(["iwconfig",interface], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -156,18 +160,19 @@ class WifiManager(Thread):
         for network in networks:
             self.networks_in_supplicant.append(network)
 
-        async def scan(self, interface='wlan0'):
-            p = subprocess.Popen(["sudo","iwlist",interface,"scan"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            aps = self.parse(p.stdout.read().decode('utf-8'))
-            cur_info = self.get_current_wifi()
+    async def scan(self, interface='wlan0'):
+        logger.debug("Scanning %s" % interface)
+        p = subprocess.Popen(["sudo","iwlist",interface,"scan"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        aps = self.parse(p.stdout.read().decode('utf-8'))
+        cur_info = self.get_current_wifi()
 
 
-            self.networks = {}
-            for ap in aps:
-                self.networks[ap['essid']] = ap
-                if cur_info is not None and cur_info[0] == ap['essid'] and cur_info[1] == ap['mac']:
-                    self.networks[ap['essid']]['connected'] = True
-                    for net in self.networks_in_supplicant:
-                        if ap['essid'] == net['ssid'] and "psk" in net:
-                            ap['psk'] = net['psk']
-                            break
+        self.networks = {}
+        for ap in aps:
+            self.networks[ap['essid']] = ap
+            if cur_info is not None and cur_info[0] == ap['essid'] and cur_info[1] == ap['mac']:
+                self.networks[ap['essid']]['connected'] = True
+                for net in self.networks_in_supplicant:
+                    if ap['essid'] == net['ssid'] and "psk" in net:
+                        ap['psk'] = net['psk']
+                        break
