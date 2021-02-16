@@ -509,7 +509,9 @@ class JobStatusPanel(ScreenPanel):
         if self._files.file_metadata_exists(self.filename):
             self.file_metadata = self._files.get_file_info(self.filename)
             logger.debug("Parsing file metadata: %s" % list(self.file_metadata))
-            self.update_text("est_time","/ %s" % str(self._gtk.formatTimeString(self.file_metadata['estimated_time'])))
+            if "estimated_time" in self.file_metadata:
+                self.update_text("est_time","/ %s" %
+                    str(self._gtk.formatTimeString(self.file_metadata['estimated_time'])))
             if "thumbnails" in self.file_metadata:
                 tmp = self.file_metadata['thumbnails'].copy()
                 for i in tmp:
