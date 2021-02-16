@@ -3,6 +3,9 @@ import logging
 logger = logging.getLogger("KlipperScreen.Printer")
 
 class Printer:
+    data = {}
+    devices = {}
+    power_devices = {}
     state_callbacks = {
         "disconnected": None,
         "error": None,
@@ -12,6 +15,7 @@ class Printer:
         "startup": None,
         "shutdown": None
     }
+    tools = []
 
     def __init__(self, printer_info, data):
         self.state = "disconnected"

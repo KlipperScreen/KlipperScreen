@@ -78,6 +78,7 @@ class KlipperScreen(Gtk.Window):
     """ Class for creating a screen for Klipper via HDMI """
     _cur_panels = []
     bed_temp_label = None
+    connecting = False
     connected_printer = None
     currentPanel = None
     files = None
@@ -182,12 +183,11 @@ class KlipperScreen(Gtk.Window):
             data = printer[pname]
             break
 
-        logger.debug("Printer: %s" % pname)
-        logger.debug("Data: %s" % data)
+        if self._ws is not None:
+            self._ws.close()
+        self.connecting = True
 
-        self.apiclient = KlippyRest(self._config.get_main_config_option("moonraker_host"),
-            self._config.get_main_config_option("moonraker_port"),
-            self._config.get_main_config_option("moonraker_api_key", False))
+        self.apiclient = KlippyRest(data["moonraker_host"], data["moonraker_port"], data["moonraker_api_key"])
 
         self.printer = Printer({
             "software_version": "Unknown"
@@ -205,6 +205,8 @@ class KlipperScreen(Gtk.Window):
 
         self._remove_all_panels()
         panels = list(self.panels)
+        if len(self.subscriptions) > 0:
+            self.subscriptions = []
         for panel in panels:
             del self.panels[panel]
         self.printer_initializing(_("Connecting to %s") % name)
@@ -224,19 +226,17 @@ class KlipperScreen(Gtk.Window):
             self.printer.configure_power_devices(powerdevs['result'])
             self.panels['splash_screen'].show_restart_buttons()
 
-        if self._ws is not None:
-            self._ws.close
-
         self._ws = KlippyWebsocket(self,
             {
                 "on_connect": self.init_printer,
                 "on_message": self._websocket_callback,
                 "on_close": self.printer_initializing
             },
-            self._config.get_main_config_option("moonraker_host"),
-            self._config.get_main_config_option("moonraker_port")
+            data["moonraker_host"],
+            data["moonraker_port"]
         )
         self._ws.initial_connect()
+        self.connecting = False
 
         self.files = KlippyFiles(self)
         self.files.start()
@@ -563,6 +563,9 @@ class KlipperScreen(Gtk.Window):
 
     def _websocket_callback(self, action, data):
         _ = self.lang.gettext
+
+        if self.connecting == True:
+            return
 
         if action == "notify_klippy_disconnected":
             logger.debug("Received notify_klippy_disconnected")

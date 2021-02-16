@@ -50,7 +50,7 @@ class ScreenPanel:
 
             if len(self._config.get_printers()) > 1:
                 self.control['printer_select'] = self._gtk.ButtonImage(
-                    'move-step', None, None, button_scale[0], button_scale[1])
+                    'shuffle', None, None, button_scale[0], button_scale[1])
                 self.control['printer_select'].connect("clicked", self._screen.show_printer_select)
             else:
                 self.control['printer_select'] = Gtk.Label("")
