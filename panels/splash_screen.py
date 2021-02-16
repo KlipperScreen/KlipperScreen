@@ -56,9 +56,11 @@ class SplashScreenPanel(ScreenPanel):
         _ = self.lang.gettext
 
         if "firmware_restart" not in self.labels:
+            self.labels['printer_select'] = self._gtk.ButtonImage("move-step",_("Change Printer"))
+            self.labels['printer_select'].connect("clicked", self._screen.show_printer_select)
             self.labels['menu'] = self._gtk.ButtonImage("control",_("Menu"),"color4")
             self.labels['menu'].connect("clicked", self._screen._go_to_submenu, "")
-            self.labels['power'] = self._gtk.ButtonImage("reboot",_("Power On Printer"),"color3")
+            self.labels['power'] = self._gtk.ButtonImage("shutdown",_("Power On Printer"),"color3")
             self.labels['restart'] = self._gtk.ButtonImage("reboot",_("Restart"),"color1")
             self.labels['restart'].connect("clicked", self.restart)
             self.labels['firmware_restart'] = self._gtk.ButtonImage("restart",_("Firmware Restart"),"color2")
@@ -77,6 +79,7 @@ class SplashScreenPanel(ScreenPanel):
         self.labels['actions'].add(self.labels['restart'])
         self.labels['actions'].add(self.labels['firmware_restart'])
         self.labels['actions'].add(self.labels['menu'])
+        self.labels['actions'].add(self.labels['printer_select'])
         self.labels['actions'].show()
 
     def firmware_restart(self, widget):

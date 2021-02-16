@@ -13,7 +13,7 @@ class ScreenPanel:
     title_spacing = 50
     control = {}
 
-    def __init__(self, screen, title, back=True):
+    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
         self._screen = screen
         self._config = screen._config
         self._files = screen.files
@@ -25,34 +25,41 @@ class ScreenPanel:
         self.layout = Gtk.Layout()
         self.layout.set_size(self._screen.width, self._screen.height)
 
-        action_bar_width = self._gtk.get_action_bar_width()
+        action_bar_width = self._gtk.get_action_bar_width() if action_bar == True else 0
 
-        self.control_grid = self._gtk.HomogeneousGrid()
-        self.control_grid.set_size_request(action_bar_width - 2, self._screen.height)
-        self.control_grid.get_style_context().add_class('action_bar')
+        if action_bar == True:
+            self.control_grid = self._gtk.HomogeneousGrid()
+            self.control_grid.set_size_request(action_bar_width - 2, self._screen.height)
+            self.control_grid.get_style_context().add_class('action_bar')
 
-        button_scale = self._gtk.get_header_image_scale()
-        logger.debug("Button scale: %s" % button_scale)
-        if back == True:
-            self.control['back'] = self._gtk.ButtonImage('back', None, None, button_scale[0], button_scale[1])
-            self.control['back'].connect("clicked", self._screen._menu_go_back)
-            self.control_grid.attach(self.control['back'], 0, 0, 1, 1)
+            button_scale = self._gtk.get_header_image_scale()
+            logger.debug("Button scale: %s" % button_scale)
 
-            self.control['home'] = self._gtk.ButtonImage('home', None, None, button_scale[0], button_scale[1])
-            self.control['home'].connect("clicked", self.menu_return, True)
-            self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
+            if back == True:
+                self.control['back'] = self._gtk.ButtonImage('back', None, None, button_scale[0], button_scale[1])
+                self.control['back'].connect("clicked", self._screen._menu_go_back)
+                self.control_grid.attach(self.control['back'], 0, 0, 1, 1)
 
-            self.control['printer_select'] = Gtk.Label("")
+                self.control['home'] = self._gtk.ButtonImage('home', None, None, button_scale[0], button_scale[1])
+                self.control['home'].connect("clicked", self.menu_return, True)
+                self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
+            else:
+                for i in range(2):
+                    self.control['space%s' % i] = Gtk.Label("")
+                    self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
+
+            if len(self._config.get_printers()) > 1:
+                self.control['printer_select'] = self._gtk.ButtonImage(
+                    'move-step', None, None, button_scale[0], button_scale[1])
+                self.control['printer_select'].connect("clicked", self._screen.show_printer_select)
+            else:
+                self.control['printer_select'] = Gtk.Label("")
             self.control_grid.attach(self.control['printer_select'], 0, 2, 1, 1)
-        else:
-            for i in range(3):
-                self.control['space%s' % i] = Gtk.Label("")
-                self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
 
-        self.control['estop'] = self._gtk.ButtonImage('emergency', None, None, button_scale[0], button_scale[1])
-        self.control['estop'].connect("clicked", self.emergency_stop)
-        self.control_grid.attach(self.control['estop'], 0, 3, 1, 1)
-        #self.layout.put(self.control['estop'], int(self._screen.width/4*3 - button_scale[0]/2), 0)
+            self.control['estop'] = self._gtk.ButtonImage('emergency', None, None, button_scale[0], button_scale[1])
+            self.control['estop'].connect("clicked", self.emergency_stop)
+            self.control_grid.attach(self.control['estop'], 0, 3, 1, 1)
+            #self.layout.put(self.control['estop'], int(self._screen.width/4*3 - button_scale[0]/2), 0)
 
         try:
             env = Environment(extensions=["jinja2.ext.i18n"])
@@ -67,13 +74,16 @@ class ScreenPanel:
         self.title.set_hexpand(True)
         self.title.set_halign(Gtk.Align.CENTER)
         self.title.set_valign(Gtk.Align.CENTER)
-        self.set_title(title)
-
+        if printer_name == True:
+            self.set_title("%s | %s" % (self._screen.connected_printer, title))
+        else:
+            self.set_title(title)
 
         self.content = Gtk.Box(spacing=0)
         self.content.set_size_request(self._screen.width - action_bar_width, self._screen.height - self.title_spacing)
 
-        self.layout.put(self.control_grid, 0, 0)
+        if action_bar == True:
+            self.layout.put(self.control_grid, 0, 0)
         self.layout.put(self.title, action_bar_width, 0)
         self.layout.put(self.content, action_bar_width, self.title_spacing)
 
