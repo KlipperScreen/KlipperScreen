@@ -23,12 +23,23 @@ class SettingsPanel(ScreenPanel):
         self.labels['main_box'] = self.create_box('main')
         self.labels['macros_box'] = self.create_box('macros')
 
+        printbox = Gtk.Box(spacing=0)
+        printbox.set_vexpand(False)
+        self.labels['add_printer_button'] = self._gtk.Button(_("Add Printer"), "color1")
+        #printbox.add(self.labels['add_printer_button'])
+        self.labels['printers_box'] = self.create_box('printers', printbox)
+
         options = self._config.get_configurable_options().copy()
         options.append({"macros": {
             "name": _("Displayed Macros"),
             "type": "menu",
             "menu": "macros"}
         })
+        options.append({"printers": {
+            "name": _("Printer Connections"),
+            "type": "menu",
+            "menu": "printers"
+        }})
 
         for option in options:
             name =  list(option)[0]
@@ -45,7 +56,18 @@ class SettingsPanel(ScreenPanel):
         for macro in list(self.macros):
             self.add_option('macros', self.macros, macro, self.macros[macro])
 
-        logger.debug("Macros: %s" % self.macros)
+        self.printers = {}
+        for printer in self._config.get_printers():
+            logger.debug("Printer: %s" % printer)
+            pname = list(printer)[0]
+            self.printers[pname] = {
+                "name": pname,
+                "section": "printer %s" % pname,
+                "type": "printer",
+                "moonraker_host": printer[pname]['moonraker_host'],
+                "moonraker_port": printer[pname]['moonraker_port'],
+            }
+            self.add_option("printers", self.printers, pname, self.printers[pname])
 
         self.control['back'].disconnect_by_func(self._screen._menu_go_back)
         self.control['back'].connect("clicked", self.back)
@@ -61,7 +83,7 @@ class SettingsPanel(ScreenPanel):
         else:
             self._screen._menu_go_back()
 
-    def create_box(self, name):
+    def create_box(self, name, insert=None):
         # Create a scroll window for the macros
         scroll = Gtk.ScrolledWindow()
         scroll.set_property("overlay-scrolling", False)
@@ -74,6 +96,8 @@ class SettingsPanel(ScreenPanel):
         # Create a box to contain all of the above
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         box.set_vexpand(True)
+        if insert is not None:
+            box.pack_start(insert, False, False, 0)
         box.pack_start(scroll, True, True, 0)
         return box
 
@@ -134,6 +158,15 @@ class SettingsPanel(ScreenPanel):
             dropdown.set_entry_text_column(0)
             dev.add(dropdown)
             logger.debug("Children: %s" % dropdown.get_children())
+        elif option['type'] == "printer":
+            logger.debug("Option: %s" % option)
+            box = Gtk.Box()
+            box.set_vexpand(False)
+            label = Gtk.Label()
+            url = "%s:%s" % (option['moonraker_host'], option['moonraker_port'])
+            label.set_markup("<big>%s</big>\n%s" % (option['name'], url))
+            box.add(label)
+            dev.add(box)
         elif option['type'] == "menu":
             open = self._gtk.ButtonImage("open",None,"color3")
             open.connect("clicked", self.load_menu, option['menu'])
