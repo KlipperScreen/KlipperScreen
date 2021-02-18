@@ -20,7 +20,7 @@ class MovePanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
 
-        grid = self._gtk.HomogeneousGrid()
+        grid = Gtk.Grid()
 
         self.labels['x+'] = self._gtk.ButtonImage("move-x+", _("X+"), "color1")
         self.labels['x+'].connect("clicked", self.move, "X", "+")
