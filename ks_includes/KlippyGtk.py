@@ -119,7 +119,7 @@ class KlippyGtk:
         return b
 
     def ButtonImage(self, image_name, label=None, style=None, width_scale=1, height_scale=1,
-            position=Gtk.PositionType.TOP):
+            position=Gtk.PositionType.TOP, word_wrap=True):
         filename = "%s/styles/z-bolt/images/%s.svg" % (klipperscreendir, str(image_name))
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
             filename,
@@ -139,13 +139,14 @@ class KlippyGtk:
         b.set_always_show_image(True)
         b.props.relief = Gtk.ReliefStyle.NONE
 
-        #try:
-        #    # Get the label object
-        #    child = b.get_children()[0].get_children()[0].get_children()[1]
-        #    child.set_line_wrap(True)
-        #    child.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-        #except:
-        #    pass
+        if word_wrap is True:
+            try:
+                # Get the label object
+                child = b.get_children()[0].get_children()[0].get_children()[1]
+                child.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+                child.set_line_wrap(True)
+            except:
+                pass
 
         if style != None:
             b.get_style_context().add_class(style)
