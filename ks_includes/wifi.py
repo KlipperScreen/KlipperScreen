@@ -1,9 +1,9 @@
-import asyncio
 import os, signal
 import json
 import logging
 import re
 import subprocess
+import threading
 
 from contextlib import suppress
 from threading import Thread
@@ -28,6 +28,7 @@ class WifiManager(Thread):
         "wpa2": re.compile(r"IE:\ IEEE\ 802\.11i/WPA2\ Version\ 1$")
     }
     connected = False
+    _stop_loop = False
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -38,34 +39,20 @@ class WifiManager(Thread):
         self.read_wpa_supplicant()
 
     def run(self):
+        event = threading.Event()
         logger.debug("Setting up wifi event loop")
-        self.loop = asyncio.new_event_loop()
-        loop = self.loop
-        asyncio.set_event_loop(loop)
-        try:
-            self._poll_task = asyncio.ensure_future(self._poll())
-            loop.run_forever()
-            loop.run_until_complete(loop.shutdown_asyncgens())
-
-            self._poll_task.cancel()
-            with suppress(asyncio.CancelledError):
-                loop.run_until_complete(self._poll_task)
-        finally:
-            loop.close()
+        while self._stop_loop == False:
+            try:
+                self.scan()
+                event.wait(RESCAN_INTERVAL)
+            except:
+                logger.exception("Poll wifi error")
 
     def stop(self):
         self.loop.call_soon_threadsafe(self.loop.stop)
 
     def stop_loop(self):
-        loop.stop()
-
-    async def _poll(self):
-        while True:
-            try:
-                await self.scan()
-                await asyncio.sleep(RESCAN_INTERVAL)
-            except:
-                logger.exception("Poll wifi error")
+        self._stop_loop = True
 
     def get_current_wifi(self, interface="wlan0"):
         p = subprocess.Popen(["iwconfig",interface], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -160,7 +147,7 @@ class WifiManager(Thread):
         for network in networks:
             self.networks_in_supplicant.append(network)
 
-    async def scan(self, interface='wlan0'):
+    def scan(self, interface='wlan0'):
         logger.debug("Scanning %s" % interface)
         p = subprocess.Popen(["sudo","iwlist",interface,"scan"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         aps = self.parse(p.stdout.read().decode('utf-8'))
