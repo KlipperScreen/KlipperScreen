@@ -83,7 +83,6 @@ class KlipperScreenConfig:
             raise ConfigError(f"Error reading config: {self.config_path}")
 
         printers = [i for i in self.config.sections() if i.startswith("printer ")]
-        logger.debug("Printers: %s %s" % (len(printers), printers))
         self.printers = []
         for printer in printers:
             self.printers.append({
@@ -102,7 +101,13 @@ class KlipperScreenConfig:
                 }
             })
 
-        logger.debug("Configured printers: %s" % json.dumps(self.printers, indent=2))
+        conf_printers_debug = self.printers.copy()
+        for printer in conf_printers_debug:
+            name = list(printer)[0]
+            item = conf_printers_debug[conf_printers_debug.index(printer)]
+            if item[list(printer)[0]]['moonraker_api_key'] != "":
+                item[list(printer)[0]]['moonraker_api_key'] = "redacted"
+        logger.debug("Configured printers: %s" % json.dumps(conf_printers_debug, indent=2))
 
         for item in self.configurable_options:
             name = list(item)[0]
