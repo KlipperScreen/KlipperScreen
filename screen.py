@@ -182,6 +182,7 @@ class KlipperScreen(Gtk.Window):
         self.printer.set_callbacks({
             "disconnected": self.state_disconnected,
             "error": self.state_error,
+            "paused": self.state_paused,
             "printing": self.state_printing,
             "ready": self.state_ready,
             "startup": self.state_startup,
@@ -483,10 +484,13 @@ class KlipperScreen(Gtk.Window):
                 _("Klipper has encountered an error.")
             )
 
+    def state_paused(self):
+        if "job_status" not in self._cur_panels:
+            self.printer_printing()
+
     def state_printing(self):
-        if "job_status" in self._cur_panels:
-            return
-        self.printer_printing()
+        if "job_status" not in self._cur_panels:
+            self.printer_printing()
 
     def state_ready(self):
         # Do not return to main menu if completing a job, timeouts/user input will return
