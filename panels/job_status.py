@@ -30,6 +30,10 @@ class JobStatusPanel(ScreenPanel):
 
         grid = self._gtk.HomogeneousGrid()
         grid.set_size_request(self._screen.width, self._screen.height)
+        grid.set_row_homogeneous(False)
+
+        self.labels['button_grid'] = self._gtk.HomogeneousGrid()
+        self.labels['button_grid'].set_vexpand(False)
 
         fi_box = Gtk.VBox(spacing=0)
         fi_box.set_hexpand(True)
@@ -55,19 +59,7 @@ class JobStatusPanel(ScreenPanel):
         info.props.valign = Gtk.Align.CENTER
         info.set_hexpand(True)
         info.set_vexpand(True)
-        #info.add(self.labels['file']['b'])
-        #info.add(self.labels['time']['b'])
-        #info.add(self.labels['time_left']['b'])
 
-        #grid.attach(info,2,0,2,1)
-
-        #pbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        #pbox.pack_start(self.labels['file']['b'], False, True, 0)
-        #pbox.pack_end(timegrid, False, False, 0)
-        #pbox.pack_end(self.labels['progress'], False, False, 0)
-        #pbox.pack_end(overlay, False, False, 0)
-
-        #grid.attach(pbox, 0, 0, 4, 3)
         self.labels['darea'] = Gtk.DrawingArea()
         self.labels['darea'].connect("draw", self.on_draw)
 
@@ -84,14 +76,6 @@ class JobStatusPanel(ScreenPanel):
         overlay.set_vexpand(True)
         overlay.add(self.labels['darea'])
         overlay.add_overlay(box)
-
-        #self.labels['extruder'] = self._gtk.ButtonImage("extruder-1", self._gtk.formatTemperatureString(0, 0))
-        #self.labels['extruder'].set_sensitive(False)
-        #grid.attach(self.labels['extruder'], 0, 0, 1, 1)
-
-        #self.labels['heater_bed'] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
-        #self.labels['heater_bed'].set_sensitive(False)
-        #grid.attach(self.labels['heater_bed'], 0, 1, 1, 1)
 
         self.labels['thumbnail'] = self._gtk.Image("file.svg", False, 1.6, 1.6)
 
@@ -192,12 +176,14 @@ class JobStatusPanel(ScreenPanel):
         self.labels['i1_box'].get_style_context().add_class("printing-info-box")
         self.labels['i1_box'].set_valign(Gtk.Align.CENTER)
         self.labels['i2_box'] = Gtk.VBox(spacing=0)
+        self.labels['i2_box'].set_vexpand(True)
         self.labels['i2_box'].get_style_context().add_class("printing-info-box")
 
         grid.attach(overlay, 0, 0, 1, 1)
         grid.attach(fi_box, 1, 0, 3, 1)
         grid.attach(self.labels['i1_box'], 0, 1, 2, 2)
         grid.attach(self.labels['i2_box'], 2, 1, 2, 2)
+        grid.attach(self.labels['button_grid'], 0, 3, 4, 1)
 
         self.add_labels()
 
@@ -233,9 +219,6 @@ class JobStatusPanel(ScreenPanel):
 
         self.filename = self._printer.get_stat('print_stats','filename')
         self.update_file_metadata()
-
-        self.grid.remove_row(3)
-        self.grid.insert_row(3)
 
         ps = self._printer.get_stat("print_stats")
         logger.debug("Act State: %s" % ps['state'])
@@ -468,35 +451,37 @@ class JobStatusPanel(ScreenPanel):
             if self.state == "paused" and data['pause_resume']['is_paused'] == False:
                 self.set_state("printing")
                 self.update_text("status",_("Paused"))
-                self.grid.attach(self.labels['pause'], 0, 3, 1, 1)
-                self.grid.remove(self.labels['resume'])
-                self.grid.show_all()
+                self.labels['button_grid'].attach(self.labels['pause'], 0, 0, 1, 1)
+                self.labels['button_grid'].remove(self.labels['resume'])
+                self.labels['button_grid'].show_all()
             if self.state != "paused" and data['pause_resume']['is_paused'] == True:
                 self.set_state("paused")
-                self.grid.attach(self.labels['resume'], 0, 3, 1, 1)
-                self.grid.remove(self.labels['pause'])
-                self.grid.show_all()
+                self.labels['button_grid'].attach(self.labels['resume'], 0, 0, 1, 1)
+                self.labels['button_grid'].remove(self.labels['pause'])
+                self.labels['button_grid'].show_all()
 
     def set_state(self, state):
         self.state = state
         self.update_text("status",state.capitalize())
 
     def show_buttons_for_state(self):
-        self.grid.remove_row(3)
-        self.grid.insert_row(3)
+        self.labels['button_grid'].remove_row(0)
+        self.labels['button_grid'].insert_row(0)
         if self.state == "printing":
-            self.grid.attach(self.labels['pause'], 0, 3, 1, 1)
-            self.grid.attach(self.labels['cancel'], 1, 3, 1, 1)
-            self.grid.attach(self.labels['estop'], 2, 3, 1, 1)
-            self.grid.attach(self.labels['control'], 3, 3, 1, 1)
+            self.labels['button_grid'].attach(self.labels['pause'], 0, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['cancel'], 1, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['estop'], 2, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
         elif self.state == "paused":
-            self.grid.attach(self.labels['resume'], 0, 3, 1, 1)
-            self.grid.attach(self.labels['cancel'], 1, 3, 1, 1)
-            self.grid.attach(self.labels['estop'], 2, 3, 1, 1)
-            self.grid.attach(self.labels['control'], 3, 3, 1, 1)
+            self.labels['button_grid'].attach(self.labels['resume'], 0, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['cancel'], 1, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['estop'], 2, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
         elif self.state == "error" or self.state == "complete":
-            self.grid.attach(self.labels['restart'], 2, 3, 1, 1)
-            self.grid.attach(self.labels['menu'], 3, 3, 1, 1)
+            self.labels['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
+            self.labels['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['restart'], 2, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['menu'], 3, 0, 1, 1)
         self.show_all()
 
     def show_file_thumbnail(self):
