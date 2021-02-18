@@ -536,8 +536,8 @@ class KlipperScreen(Gtk.Window):
                     self.show_popup_message(data[3:])
                 logger.debug(json.dumps([action, data], indent=2))
 
-        for sub in self.subscriptions:
-            self.panels[sub].process_update(action, data)
+        if self._cur_panels[-1] in self.subscriptions:
+            self.panels[self._cur_panels[-1]].process_update(action, data)
 
     def _confirm_send_action(self, widget, text, method, params={}):
         _ = self.lang.gettext
