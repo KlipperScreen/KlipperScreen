@@ -299,6 +299,7 @@ class KlipperScreenConfig:
         cfg = self.config[name]
         item = {
             "extruder": cfg.getint("extruder", 0),
-            "bed": cfg.getint("bed", 0)
+            "bed": cfg.getint("bed", 0),
+            "heater_generic": cfg.getint("heater_generic", 0)
         }
         return item

@@ -41,6 +41,10 @@ class KlippyGcodes:
         return "%s T%s S%s" % (KlippyGcodes.SET_EXT_TEMP, str(tool), str(temp))
 
     @staticmethod
+    def set_heater_temp(heater, temp):
+        return 'SET_HEATER_TEMPERATURE heater="%s" target=%s' % (heater, str(temp))
+
+    @staticmethod
     def set_fan_speed(speed):
         speed = str( int(float(int(speed) % 101)/100*255) )
         return "%s S%s" % (KlippyGcodes.SET_FAN_SPEED, speed)
