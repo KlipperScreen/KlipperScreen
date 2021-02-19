@@ -1,5 +1,11 @@
 ## Changelog
 
+#### 2021 02 18
+* Add directory support to print panel
+
+#### 2021 02 17
+* Fix issues with word wrapping in different languages
+
 #### 2021 02 15
 * Added action bar to left side (moves the Back, E-stop, and Home buttons)
 * Added wifi manager. Will show current wifi details in network panel. Will allow switching networks in the future.
