@@ -78,6 +78,9 @@ class SettingsPanel(ScreenPanel):
         return box
 
     def add_option(self, boxname, opt_array, opt_name, option):
+        if option['type'] == None:
+            return
+
         frame = Gtk.Frame()
         frame.set_property("shadow-type",Gtk.ShadowType.NONE)
         frame.get_style_context().add_class("frame-item")

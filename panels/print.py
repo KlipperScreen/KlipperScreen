@@ -19,6 +19,7 @@ def create_panel(*args):
 class PrintPanel(ScreenPanel):
     cur_directory = "gcodes"
     dir_panels = {}
+    filelist = {'gcodes':{'directories':[],'files':[]}}
 
     def initialize(self, panel_name):
         _ = self.lang.gettext
@@ -275,8 +276,10 @@ class PrintPanel(ScreenPanel):
             self.sort_current = [key, 0]
         self.labels['sort_%s' % key].set_label("%s %s" % (self.sort_items[key], self.sort_char[self.sort_current[1]]))
         self.labels['sort_%s' % key].show()
-
         GLib.idle_add(self.reload_files)
+
+        self._config.set("main", "print_sort_dir", "%s_%s" % (key, "asc" if self.sort_current[1] == 0 else "desc"))
+        self._config.save_user_config_options()
 
     def confirm_print(self, widget, filename):
         _ = self.lang.gettext

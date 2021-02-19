@@ -36,6 +36,7 @@ class KlipperScreenConfig:
             {"invert_x": {"section": "main", "name": _("Invert X"), "type": "binary", "value": "False"}},
             {"invert_y": {"section": "main", "name": _("Invert Y"), "type": "binary", "value": "False"}},
             {"invert_z": {"section": "main", "name": _("Invert Z"), "type": "binary", "value": "False"}},
+            {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
             {"print_estimate_method": {"section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
                 "value": "file","options":[
                     {"name": _("File Estimation (default)"), "value": "file"},
