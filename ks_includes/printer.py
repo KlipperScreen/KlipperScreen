@@ -162,6 +162,14 @@ class Printer:
     def get_gcode_macros(self):
         return self.get_config_section_list("gcode_macro ")
 
+    def get_heaters(self):
+        heaters = []
+        if self.has_heated_bed():
+            heaters.append("heater_bed")
+        for h in self.get_config_section_list("heater_generic "):
+            heaters.append(h)
+        return heaters
+
     def get_printer_status_data(self):
         data = {
             "printer": {
