@@ -222,7 +222,6 @@ class KlipperScreen(Gtk.Window):
                 "configfile": ["config"],
                 "fan": ["speed"],
                 "gcode_move": ["extrude_factor","gcode_position","homing_origin","speed_factor"],
-                "heater_bed": ["target","temperature"],
                 "idle_timeout": ["state"],
                 "pause_resume": ["is_paused"],
                 "print_stats": ["print_duration","total_duration","filament_used","filename","state","message"],
@@ -233,6 +232,8 @@ class KlipperScreen(Gtk.Window):
         }
         for extruder in self.printer.get_tools():
             requested_updates['objects'][extruder] = ["target","temperature","pressure_advance","smooth_time"]
+        for h in self.printer.get_heaters():
+            requested_updates['objects'][h] = ["target","temperature"]
 
         self._ws.klippy.object_subscription(requested_updates)
 
