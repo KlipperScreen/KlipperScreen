@@ -2,6 +2,7 @@
 
 #### 2021 02 18
 * Add directory support to print panel
+* Add macros to print menu
 
 #### 2021 02 17
 * Fix issues with word wrapping in different languages
