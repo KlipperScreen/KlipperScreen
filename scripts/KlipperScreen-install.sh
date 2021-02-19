@@ -21,7 +21,8 @@ install_packages()
         python3-virtualenv \
         gir1.2-gtk-3.0 \
         virtualenv \
-        matchbox-keyboard
+        matchbox-keyboard \
+        wireless-tools
 }
 
 create_virtualenv()
