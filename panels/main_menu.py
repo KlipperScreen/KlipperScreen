@@ -23,23 +23,32 @@ class MainPanel(MenuPanel):
         grid.set_vexpand(True)
 
         # Create Extruders and bed icons
-        eq_grid = self._gtk.HomogeneousGrid()
+        eq_grid = Gtk.Grid()
+        eq_grid.set_hexpand(True)
+        eq_grid.set_vexpand(True)
+
+        self.heaters = []
 
         i = 0
         for x in self._printer.get_tools():
-            if i > 3:
-                break
             self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0))
-            col = 0 if len(self._printer.get_tools()) == 1 else i%2
-            row = i/2
-            eq_grid.attach(self.labels[x], col, row, 1, 1)
+            self.heaters.append(x)
             i += 1
 
-        if self._printer.has_heated_bed():
-            self.labels['heater_bed'] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
+        add_heaters = self._printer.get_heaters()
+        for h in add_heaters:
+            if h == "heater_bed":
+                self.labels[h] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
+            else:
+                name = " ".join(h.split(" ")[1:])
+                self.labels[h] = self._gtk.ButtonImage("heat-up", name)
+            self.heaters.append(h)
 
-            width = 2 if i > 1 else 1
-            eq_grid.attach(self.labels['heater_bed'], 0, i/2+1, width, 1)
+        i = 0
+        cols = 3 if len(self.heaters) > 4 else (1 if len(self.heaters) <= 2 else 2)
+        for h in self.heaters:
+            eq_grid.attach(self.labels[h], i%cols, int(i/cols), 1, 1)
+            i += 1
 
         self.items = items
         self.create_menu_items()
@@ -57,7 +66,7 @@ class MainPanel(MenuPanel):
             "heater_bed": 0,
             "extruder": 0
         }
-        
+
         self.content.add(self.grid)
         self.layout.show_all()
 
@@ -66,21 +75,19 @@ class MainPanel(MenuPanel):
     def activate(self):
         return
 
-    def update_temp(self, dev, temp, target):
-        if dev in self.labels:
-            self.labels[dev].set_label(self._gtk.formatTemperatureString(temp, target))
-
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
 
-        self.update_temp("heater_bed",
-            self._printer.get_dev_stat("heater_bed","temperature"),
-            self._printer.get_dev_stat("heater_bed","target")
-        )
         for x in self._printer.get_tools():
             self.update_temp(x,
                 self._printer.get_dev_stat(x,"temperature"),
                 self._printer.get_dev_stat(x,"target")
+            )
+        for h in self._printer.get_heaters():
+            self.update_temp(h,
+                self._printer.get_dev_stat(h,"temperature"),
+                self._printer.get_dev_stat(h,"target"),
+                None if h == "heater_bed" else " ".join(h.split(" ")[1:])
             )
         return
