@@ -136,6 +136,8 @@ class KlipperScreen(Gtk.Window):
         self.init_style()
 
         self.printer_initializing(_("Initializing"))
+        # Move mouse to 0,0
+        os.system("/usr/bin/xdotool mousemove 0 0")
 
         # Disable DPMS
         os.system("/usr/bin/xset -display :0 -dpms")

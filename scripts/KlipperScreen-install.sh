@@ -12,6 +12,7 @@ install_packages()
     echo "Installing package dependencies"
     sudo apt install -y \
         xserver-xorg-video-fbturbo \
+        xdotool \
         xinit \
         xinput \
         x11-xserver-utils \
