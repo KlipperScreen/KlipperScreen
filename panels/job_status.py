@@ -8,8 +8,6 @@ from gi.repository import Gtk, Gdk, GLib, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
-logger = logging.getLogger("KlipperScreen.JobStatusPanel")
-
 def create_panel(*args):
     return JobStatusPanel(*args)
 
@@ -221,7 +219,7 @@ class JobStatusPanel(ScreenPanel):
         self.update_file_metadata()
 
         ps = self._printer.get_stat("print_stats")
-        logger.debug("Act State: %s" % ps['state'])
+        logging.debug("Act State: %s" % ps['state'])
         self.set_state(ps['state'])
         self.show_buttons_for_state()
 
@@ -302,7 +300,7 @@ class JobStatusPanel(ScreenPanel):
             self.enable_button("pause","cancel")
             return
 
-        logger.debug("Canceling print")
+        logging.debug("Canceling print")
         self.disable_button("pause","resume","cancel")
         self._screen._ws.klippy.print_cancel(self._response_callback)
 
@@ -387,7 +385,7 @@ class JobStatusPanel(ScreenPanel):
                 if timeout != 0:
                     GLib.timeout_add(timeout * 1000, self.close_panel)
             elif ps['state'] == "error" and self.state != "error":
-                logger.debug("Error!")
+                logging.debug("Error!")
                 self.set_state("error")
                 self.labels['status'].set_text("Error - %s" % ps['message'])
                 self.show_buttons_for_state()
@@ -493,7 +491,7 @@ class JobStatusPanel(ScreenPanel):
     def update_file_metadata(self):
         if self._files.file_metadata_exists(self.filename):
             self.file_metadata = self._files.get_file_info(self.filename)
-            logger.debug("Parsing file metadata: %s" % list(self.file_metadata))
+            logging.debug("Parsing file metadata: %s" % list(self.file_metadata))
             if "estimated_time" in self.file_metadata:
                 self.update_text("est_time","/ %s" %
                     str(self._gtk.formatTimeString(self.file_metadata['estimated_time'])))
@@ -501,11 +499,11 @@ class JobStatusPanel(ScreenPanel):
                 tmp = self.file_metadata['thumbnails'].copy()
                 for i in tmp:
                     i['data'] = ""
-                logger.debug("Thumbnails: %s" % list(tmp))
+                logging.debug("Thumbnails: %s" % list(tmp))
             self.show_file_thumbnail()
         else:
             self.file_metadata = None
-            logger.debug("Cannot find file metadata. Listening for updated metadata")
+            logging.debug("Cannot find file metadata. Listening for updated metadata")
             self._screen.files.add_file_callback(self._callback_metadata)
 
     def update_image_text(self, label, text):

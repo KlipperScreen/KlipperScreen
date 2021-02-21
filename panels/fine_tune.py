@@ -7,8 +7,6 @@ from gi.repository import Gtk, Gdk, GLib
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
-logger = logging.getLogger("KlipperScreen.FineTunePanel")
-
 def create_panel(*args):
     return FineTunePanel(*args)
 
@@ -30,7 +28,7 @@ class FineTunePanel(ScreenPanel):
 
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
-        logger.debug("FineTunePanel")
+        logging.debug("FineTunePanel")
 
 
         self.labels['z+'] = self._gtk.ButtonImage("move-z-", _("Z+"), "color1")

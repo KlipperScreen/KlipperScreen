@@ -7,8 +7,6 @@ from gi.repository import Gtk, Gdk, GLib, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
-logger = logging.getLogger("KlipperScreen.SplashScreenPanel")
-
 def create_panel(*args):
     return SplashScreenPanel(*args)
 
@@ -68,9 +66,9 @@ class SplashScreenPanel(ScreenPanel):
 
         devices = [i for i in self._printer.get_power_devices() if i.lower().startswith('printer')] if (
                 self._printer is not None) else []
-        logger.debug("Power devices: %s" % devices)
+        logging.debug("Power devices: %s" % devices)
         if len(devices) > 0:
-            logger.debug("Adding power button")
+            logging.debug("Adding power button")
             self.labels['power'].connect("clicked", self.power_on, devices[0])
             self.labels['actions'].add(self.labels['power'])
 

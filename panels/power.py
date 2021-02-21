@@ -7,8 +7,6 @@ from gi.repository import Gtk, Gdk, GLib, Pango
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
-logger = logging.getLogger("KlipperScreen.PowerPanel")
-
 def create_panel(*args):
     return PowerPanel(*args)
 
@@ -86,7 +84,7 @@ class PowerPanel(ScreenPanel):
             self.add_device(x)
 
     def on_switch(self, switch, gparam, device):
-        logger.debug("Power toggled %s" % device)
+        logging.debug("Power toggled %s" % device)
         if switch.get_active():
             self._screen._ws.klippy.power_device_on(device)
         else:

@@ -6,8 +6,6 @@ from gi.repository import Gtk, Gdk, GLib
 
 from panels.menu import MenuPanel
 
-logger = logging.getLogger("KlipperScreen.MainMenu")
-
 def create_panel(*args):
     return MainPanel(*args)
 

@@ -1,7 +1,5 @@
 import logging
 
-logger = logging.getLogger("KlipperScreen.Printer")
-
 class Printer:
     state_callbacks = {
         "disconnected": None,
@@ -18,7 +16,7 @@ class Printer:
         self.power_devices = {}
 
     def reinit(self, printer_info, data):
-        logger.debug("Moonraker object status: %s" % data)
+        logging.debug("Moonraker object status: %s" % data)
         self.config = data['configfile']['config']
         self.toolcount = 0
         self.extrudercount = 0
@@ -62,8 +60,8 @@ class Printer:
                 r['points']  = [[float(j.strip()) for j in i.split(",")] for i in r['points'].strip().split("\n")]
         self.process_update(data)
 
-        logger.info("Klipper version: %s", self.klipper['version'])
-        logger.info("### Toolcount: " + str(self.toolcount) + " Heaters: " + str(self.extrudercount))
+        logging.info("Klipper version: %s", self.klipper['version'])
+        logging.info("### Toolcount: " + str(self.toolcount) + " Heaters: " + str(self.extrudercount))
 
     def process_update(self, data):
         keys = [
@@ -121,21 +119,21 @@ class Printer:
         if state == self.state or state not in list(self.state_callbacks):
             return
 
-        logger.debug("Changing state from '%s' to '%s'" % (self.state, state))
+        logging.debug("Changing state from '%s' to '%s'" % (self.state, state))
         self.state = state
         if self.state_callbacks[state] != None:
-            logger.debug("Running callback for state: %s" % state)
+            logging.debug("Running callback for state: %s" % state)
             self.state_callbacks[state]()
 
     def configure_power_devices(self, data):
         self.power_devices = {}
 
-        logger.debug("Processing power devices: %s" % data)
+        logging.debug("Processing power devices: %s" % data)
         for x in data['devices']:
             self.power_devices[x['device']] = {
                 "status": "on" if x['status'] == "on" else "off"
             }
-        logger.debug("Power devices: %s" % self.power_devices)
+        logging.debug("Power devices: %s" % self.power_devices)
 
     def config_section_exists(self, section):
         return section in list(self.config)

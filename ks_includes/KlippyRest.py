@@ -2,8 +2,6 @@ import json
 import requests
 import logging
 
-logger = logging.getLogger("KlipperScreen.KlippyRest")
-
 class KlippyRest:
     def __init__(self, ip, port=7125, api_key=False):
         self.ip = ip
@@ -24,7 +22,7 @@ class KlippyRest:
 
     def send_request(self, method):
         url = "http://%s:%s/%s" % (self.ip, self.port, method)
-        logger.debug("Sending request to %s" % url)
+        logging.debug("Sending request to %s" % url)
         headers = {} if self.api_key == False else {"x-api-key":self.api_key}
         try:
             r = requests.get(url, headers=headers)
@@ -37,7 +35,7 @@ class KlippyRest:
         try:
             data = json.loads(r.content)
         except:
-            logger.exception("Unable to parse response from moonraker:\n %s" % r.content)
+            logging.exception("Unable to parse response from moonraker:\n %s" % r.content)
             return False
 
         return data

@@ -8,8 +8,6 @@ import threading
 from contextlib import suppress
 from threading import Thread
 
-logger = logging.getLogger("KlipperScreen.WifiManager")
-
 RESCAN_INTERVAL = 120
 
 class WifiManager(Thread):
@@ -40,13 +38,13 @@ class WifiManager(Thread):
 
     def run(self):
         event = threading.Event()
-        logger.debug("Setting up wifi event loop")
+        logging.debug("Setting up wifi event loop")
         while self._stop_loop == False:
             try:
                 self.scan()
                 event.wait(RESCAN_INTERVAL)
             except:
-                logger.exception("Poll wifi error")
+                logging.exception("Poll wifi error")
 
     def stop(self):
         self.loop.call_soon_threadsafe(self.loop.stop)
@@ -148,7 +146,7 @@ class WifiManager(Thread):
             self.networks_in_supplicant.append(network)
 
     def scan(self, interface='wlan0'):
-        logger.debug("Scanning %s" % interface)
+        logging.debug("Scanning %s" % interface)
         p = subprocess.Popen(["sudo","iwlist",interface,"scan"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         aps = self.parse(p.stdout.read().decode('utf-8'))
         cur_info = self.get_current_wifi()

@@ -7,8 +7,6 @@ from gi.repository import Gtk, Gdk, GLib, Pango
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
-logger = logging.getLogger("KlipperScreen.Settings")
-
 def create_panel(*args):
     return SettingsPanel(*args)
 
@@ -45,7 +43,7 @@ class SettingsPanel(ScreenPanel):
         for macro in list(self.macros):
             self.add_option('macros', self.macros, macro, self.macros[macro])
 
-        logger.debug("Macros: %s" % self.macros)
+        logging.debug("Macros: %s" % self.macros)
 
         self.control['back'].disconnect_by_func(self._screen._menu_go_back)
         self.control['back'].connect("clicked", self.back)
@@ -136,7 +134,7 @@ class SettingsPanel(ScreenPanel):
             #dropdown.props.relief = Gtk.ReliefStyle.NONE
             dropdown.set_entry_text_column(0)
             dev.add(dropdown)
-            logger.debug("Children: %s" % dropdown.get_children())
+            logging.debug("Children: %s" % dropdown.get_children())
         elif option['type'] == "menu":
             open = self._gtk.ButtonImage("open",None,"color3")
             open.connect("clicked", self.load_menu, option['menu'])
@@ -172,7 +170,7 @@ class SettingsPanel(ScreenPanel):
         self.content.show_all()
 
     def unload_menu(self, widget=None):
-        logger.debug("self.menu: %s" % self.menu)
+        logging.debug("self.menu: %s" % self.menu)
         if len(self.menu) <= 1 or self.menu[-2] not in self.labels:
             return
 
@@ -187,7 +185,7 @@ class SettingsPanel(ScreenPanel):
         if tree_iter is not None:
             model = combo.get_model()
             value = model[tree_iter][1]
-            logger.debug("[%s] %s changed to %s" % (section, option, value))
+            logging.debug("[%s] %s changed to %s" % (section, option, value))
             self._config.set(section, option, value)
             self._config.save_user_config_options()
             if callback is not None:
@@ -195,7 +193,7 @@ class SettingsPanel(ScreenPanel):
 
 
     def switch_config_option(self, switch, gparam, section, option):
-        logger.debug("[%s] %s toggled %s" % (section, option, switch.get_active()))
+        logging.debug("[%s] %s toggled %s" % (section, option, switch.get_active()))
         if section not in self._config.get_config().sections():
             self._config.get_config().add_section(section)
         self._config.set(section, option, "True" if switch.get_active() else "False")

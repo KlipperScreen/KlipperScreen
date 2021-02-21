@@ -7,8 +7,6 @@ from gi.repository import Gtk, Gdk, GdkPixbuf, GLib, Pango
 import os
 klipperscreendir = os.getcwd()
 
-logger = logging.getLogger("KlipperScreen.KlippyGtk")
-
 class KlippyGtk:
     labels = {}
     font_ratio = 51
@@ -27,7 +25,7 @@ class KlippyGtk:
         self.header_image_scale_width = 1.2
         self.header_image_scale_height = 1.4
 
-        logger.debug("img width: %s height: %s" % (self.img_width, self.img_height))
+        logging.debug("img width: %s height: %s" % (self.img_width, self.img_height))
 
     def get_action_bar_width(self):
         return self.action_bar_width

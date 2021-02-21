@@ -11,8 +11,6 @@ from datetime import datetime
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
-logger = logging.getLogger("KlipperScreen.PrintPanel")
-
 def create_panel(*args):
     return PrintPanel(*args)
 
@@ -255,7 +253,7 @@ class PrintPanel(ScreenPanel):
     def change_dir(self, widget, directory):
         if directory not in self.dir_panels:
             return
-        logger.debug("Changing dir to %s" % directory)
+        logging.debug("Changing dir to %s" % directory)
 
         for child in self.scroll.get_children():
             self.scroll.remove(child)
@@ -270,7 +268,7 @@ class PrintPanel(ScreenPanel):
             self.sort_current[1] = (self.sort_current[1] + 1) % 2
         else:
             oldkey = self.sort_current[0]
-            logger.info("Changing %s to %s" % ('sort_%s' % oldkey, self.sort_items[self.sort_current[0]]))
+            logging.info("Changing %s to %s" % ('sort_%s' % oldkey, self.sort_items[self.sort_current[0]]))
             self.labels['sort_%s' % oldkey].set_label("%s" % self.sort_items[oldkey])
             self.labels['sort_%s' % oldkey].show_all()
             self.sort_current = [key, 0]
@@ -408,12 +406,12 @@ class PrintPanel(ScreenPanel):
             self.labels['files'][filename]['icon'].set_from_pixbuf(pixbuf)
 
     def _callback(self, newfiles, deletedfiles, updatedfiles=[]):
-        logger.debug("newfiles: %s", newfiles)
+        logging.debug("newfiles: %s", newfiles)
         for file in newfiles:
             self.add_file(file)
-        logger.debug("deletedfiles: %s", deletedfiles)
+        logging.debug("deletedfiles: %s", deletedfiles)
         for file in deletedfiles:
             self.delete_file(file)
-        logger.debug("updatefiles: %s", updatedfiles)
+        logging.debug("updatefiles: %s", updatedfiles)
         for file in updatedfiles:
             self.update_file(file)

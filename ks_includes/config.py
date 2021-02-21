@@ -8,8 +8,6 @@ from io import StringIO
 
 from os import path
 
-logger = logging.getLogger("KlipperScreen.config")
-
 SCREEN_BLANKING_OPTIONS = [
     "300",    #5 Minutes
     "900",    #15 Minutes
@@ -67,7 +65,7 @@ class KlipperScreenConfig:
         self.default_config_path = "%s/ks_includes/%s" % (os.getcwd(), self.configfile_name)
         self.config = configparser.ConfigParser()
         self.config_path = self.get_config_file_location(configfile)
-        logger.debug("Config path location: %s" % self.config_path)
+        logging.debug("Config path location: %s" % self.config_path)
         self.defined_config = None
 
         try:
@@ -108,7 +106,7 @@ class KlipperScreenConfig:
             item = conf_printers_debug[conf_printers_debug.index(printer)]
             if item[list(printer)[0]]['moonraker_api_key'] != "":
                 item[list(printer)[0]]['moonraker_api_key'] = "redacted"
-        logger.debug("Configured printers: %s" % json.dumps(conf_printers_debug, indent=2))
+        logging.debug("Configured printers: %s" % json.dumps(conf_printers_debug, indent=2))
 
         for item in self.configurable_options:
             name = list(item)[0]
@@ -145,7 +143,7 @@ class KlipperScreenConfig:
             if not path.exists(file):
                 file = self.default_config_path
 
-        logger.info("Found configuration file at: %s" % file)
+        logging.info("Found configuration file at: %s" % file)
         return file
 
     def get_config(self):
@@ -248,7 +246,7 @@ class KlipperScreenConfig:
             file.write(contents)
             file.close()
         except:
-            logger.error("Error writing configuration file")
+            logging.error("Error writing configuration file")
 
     def set(self, section, name, value):
         self.config.set(section, name, value)
@@ -264,7 +262,7 @@ class KlipperScreenConfig:
             ),
             "======================="
         ]
-        logger.info("\n".join(lines))
+        logging.info("\n".join(lines))
 
     def _build_config_string(self, config):
         sfile = StringIO()
@@ -288,7 +286,7 @@ class KlipperScreenConfig:
         try:
             item["params"] = json.loads(cfg.get("params", "{}"))
         except:
-            logger.debug("Unable to parse parameters for [%s]" % name)
+            logging.debug("Unable to parse parameters for [%s]" % name)
             item["params"] = {}
 
         return {name[(len(menu) + 6):]: item}

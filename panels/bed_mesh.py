@@ -7,8 +7,6 @@ from gi.repository import Gtk, Gdk, GLib, Pango
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
-logger = logging.getLogger("KlipperScreen.BedMeshPanel")
-
 def create_panel(*args):
     return BedMeshPanel(*args)
 
@@ -66,7 +64,7 @@ class BedMeshPanel(ScreenPanel):
         if profile == "":
             profile = None
 
-        logger.debug("Activating profile: %s %s" % (self.active_mesh, profile))
+        logging.debug("Activating profile: %s %s" % (self.active_mesh, profile))
         if profile != self.active_mesh:
             if profile not in self.profiles:
                 self.add_profile(profile)
@@ -138,7 +136,7 @@ class BedMeshPanel(ScreenPanel):
         dev.add(labels)
 
         buttons = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        logger.debug("Profile compare: '%s' '%s'" % (self.active_mesh, profile))
+        logging.debug("Profile compare: '%s' '%s'" % (self.active_mesh, profile))
         if self.active_mesh == profile:
             buttons.pack_start(refresh, False, False, 0)
         else:

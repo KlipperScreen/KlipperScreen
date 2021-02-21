@@ -6,8 +6,6 @@ from gi.repository import Gtk, Gdk, GLib
 
 from ks_includes.screen_panel import ScreenPanel
 
-logger = logging.getLogger("KlipperScreen.PreheatPanel")
-
 def create_panel(*args):
     return PreheatPanel(*args)
 
@@ -17,7 +15,7 @@ class PreheatPanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
         self.preheat_options = self._screen._config.get_preheat_options()
-        logger.debug("Preheat options: %s" % self.preheat_options)
+        logging.debug("Preheat options: %s" % self.preheat_options)
 
         grid = self._gtk.HomogeneousGrid()
 

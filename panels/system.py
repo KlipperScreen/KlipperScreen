@@ -8,8 +8,6 @@ from gi.repository import Gtk, Gdk, GLib
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
-logger = logging.getLogger("KlipperScreen.SystemPanel")
-
 def create_panel(*args):
     return SystemPanel(*args)
 

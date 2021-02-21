@@ -8,8 +8,6 @@ from gi.repository import Gtk, Gdk, GLib
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
-logger = logging.getLogger("KlipperScreen.TemperaturePanel")
-
 def create_panel(*args):
     return TemperaturePanel(*args)
 
@@ -207,7 +205,7 @@ class TemperaturePanel(ScreenPanel):
         return
 
     def change_target_temp(self, widget, dir):
-        logger.debug("Dev stats %s: %s" % (self.active_heater, self._printer.get_dev_stats(self.active_heater)))
+        logging.debug("Dev stats %s: %s" % (self.active_heater, self._printer.get_dev_stats(self.active_heater)))
         target = self._printer.get_dev_stat(self.active_heater, "target")
         if dir == "+":
             target += int(self.tempdelta)

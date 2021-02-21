@@ -7,7 +7,6 @@ from jinja2 import Environment, Template
 
 from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.KlippyGcodes import KlippyGcodes
-logger = logging.getLogger("KlipperScreen.ScreenPanel")
 
 class ScreenPanel:
     title_spacing = 50
@@ -32,7 +31,7 @@ class ScreenPanel:
         self.control_grid.get_style_context().add_class('action_bar')
 
         button_scale = self._gtk.get_header_image_scale()
-        logger.debug("Button scale: %s" % button_scale)
+        logging.debug("Button scale: %s" % button_scale)
         if back == True:
             self.control['back'] = self._gtk.ButtonImage('back', None, None, button_scale[0], button_scale[1])
             self.control['back'].connect("clicked", self._screen._menu_go_back)
@@ -60,7 +59,7 @@ class ScreenPanel:
             j2_temp = env.from_string(title)
             title = j2_temp.render()
         except:
-            logger.debug("Error parsing jinja for title: %s" % title)
+            logging.debug("Error parsing jinja for title: %s" % title)
 
         self.title = Gtk.Label()
         self.title.set_size_request(self._screen.width - action_bar_width, self.title_spacing)

@@ -8,8 +8,6 @@ from gi.repository import Gtk, Gdk, GLib
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
-logger = logging.getLogger("KlipperScreen.BedLevelPanel")
-
 def create_panel(*args):
     return BedLevelPanel(*args)
 
@@ -34,7 +32,7 @@ class BedLevelPanel(ScreenPanel):
         if config_section_name != None:
             config_section = self._screen.printer.get_config_section(config_section_name)
             for item in config_section:
-                logger.debug("Screws section: %s" % config_section[item])
+                logging.debug("Screws section: %s" % config_section[item])
                 result = re.match(r"([0-9\.]+)\s*,\s*([0-9\.]+)", config_section[item])
                 if result:
                     screws.append([
@@ -43,7 +41,7 @@ class BedLevelPanel(ScreenPanel):
                     ])
 
             screws = sorted(screws, key=lambda x: (float(x[1]), float(x[0])))
-            logger.debug("Bed screw locations [x,y]: %s", screws)
+            logging.debug("Bed screw locations [x,y]: %s", screws)
             if ("bltouch" in self._screen.printer.get_config_section_list() and
                     config_section_name == "screws_tilt_adjust"):
                 x_offset = 0
@@ -62,10 +60,10 @@ class BedLevelPanel(ScreenPanel):
                 screws = new_screws
 
             self.screws = screws
-            logger.debug("Screws: %s" % screws)
+            logging.debug("Screws: %s" % screws)
 
         if len(screws) < 4:
-            logger.debug("bed_screws not configured, calculating locations")
+            logging.debug("bed_screws not configured, calculating locations")
             xconf = self._screen.printer.get_config_section("stepper_x")
             yconf = self._screen.printer.get_config_section("stepper_y")
             x = int(int(xconf['position_max'])/4)
@@ -76,9 +74,9 @@ class BedLevelPanel(ScreenPanel):
                 [x, y*3],
                 [x*3, y*3],
             ]
-            logger.debug("Calculated screw locations [x,y]: %s", screws)
+            logging.debug("Calculated screw locations [x,y]: %s", screws)
         else:
-            logger.debug("Configured screw locations [x,y]: %s", screws)
+            logging.debug("Configured screw locations [x,y]: %s", screws)
 
 
         self.labels['bl'] = self._gtk.ButtonImage("bed-level-t-l", None, None, 3, 3)
@@ -124,7 +122,7 @@ class BedLevelPanel(ScreenPanel):
         self.labels['fr'].set_label("")
 
     def go_to_position(self, widget, position):
-        logger.debug("Going to position: %s", position)
+        logging.debug("Going to position: %s", position)
         script = [
             "%s" % KlippyGcodes.MOVE_ABSOLUTE,
             "G1 Z7 F800\n",
@@ -155,10 +153,10 @@ class BedLevelPanel(ScreenPanel):
                 screw_labels = ['fl','fr','bl','br']
                 x = int(float(result.group(2)) + self.x_offset)
                 y = int(float(result.group(3)) + self.y_offset)
-                logger.debug(data)
-                logger.debug("X: %s Y: %s" % (x,y))
+                logging.debug(data)
+                logging.debug("X: %s Y: %s" % (x,y))
                 for i in range(len(self.screws)):
-                    logger.debug(self.screws[i])
+                    logging.debug(self.screws[i])
                     if x == int(float(self.screws[i][0])) and y == int(float(self.screws[i][1])):
                         break
                 self.labels[screw_labels[i]].set_label(result.group(4))
