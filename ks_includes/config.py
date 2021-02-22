@@ -188,6 +188,14 @@ class KlipperScreenConfig:
 
         return preheat_options
 
+    def get_printer_config(self, name):
+        if not name.startswith("printer "):
+            name = "printer %s" % name
+
+        if name not in self.config:
+            return None
+        return self.config[name]
+
     def get_printer_power_name(self):
         return self.config['settings'].get("printer_power_name", "printer")
 

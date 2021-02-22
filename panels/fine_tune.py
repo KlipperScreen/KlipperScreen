@@ -1,5 +1,6 @@
 import gi
 import logging
+import re
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
@@ -29,6 +30,17 @@ class FineTunePanel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
         logging.debug("FineTunePanel")
+
+        print_cfg = self._config.get_printer_config(self._screen.connected_printer)
+        if print_cfg is not None:
+            bs = print_cfg.get("z_babystep_values","0.01, 0.05")
+            if re.match(r'^[0-9,\.\s]+$', bs):
+                bs = [str(i.strip()) for i in bs.split(',')]
+                if len(bs) <= 2:
+                    self.bs_deltas = bs
+                else:
+                    self.bs_deltas = [bs[0], bs[-1]]
+                self.bs_delta = self.bs_deltas[0]
 
 
         self.labels['z+'] = self._gtk.ButtonImage("move-z-", _("Z+"), "color1")

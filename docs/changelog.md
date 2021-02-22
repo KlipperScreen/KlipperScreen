@@ -1,6 +1,7 @@
 ## Changelog
 
 #### 2021 02 22
+* Add configurable z_babystep intervals
 * Fixed cursor issue on startup
 * Fixed font ratio for large, but short screens
 * Re-vamped logging system

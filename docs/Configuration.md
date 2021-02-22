@@ -45,6 +45,9 @@ moonraker_host: 127.0.0.1
 moonraker_port: 7125
 # Moonraker API key if this is not connecting from a trusted client IP
 moonraker_api_key: False
+
+# Define the z_babystep intervals in a CSV list. Currently only 2 are supported
+z_babystep_values: 0.01, 0.05
 ```
 
 

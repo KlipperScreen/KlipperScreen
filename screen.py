@@ -126,6 +126,7 @@ class KlipperScreen(Gtk.Window):
         if self.files is not None:
             self.files.stop()
 
+        logging.info("Connecting to printer: %s" % name)
         self.apiclient = KlippyRest(self._config.get_main_config_option("moonraker_host"),
             self._config.get_main_config_option("moonraker_port"),
             self._config.get_main_config_option("moonraker_api_key", False))
