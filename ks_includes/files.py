@@ -77,7 +77,6 @@ class KlippyFiles(Thread):
                         self.request_metadata(item['filename'])
 
                 if len(self.callbacks) > 0 and (len(newfiles) > 0 or len(deletedfiles) > 0):
-                    logging.debug("Running callbacks...")
                     for cb in self.callbacks:
                         cb(newfiles, deletedfiles, [])
 
@@ -152,7 +151,6 @@ class KlippyFiles(Thread):
         self._screen._ws.klippy.get_file_metadata(filename, self._callback)
 
     async def ret_files(self, retval=True):
-        logging.debug("Scanning for files")
         if not self._screen._ws.klippy.get_file_list(self._callback):
             self.timeout = None
 
