@@ -1,5 +1,13 @@
 ## Changelog
 
+#### 2021 02 22
+* Fixed cursor issue on startup
+* Fixed font ratio for large, but short screens
+* Re-vamped logging system
+
+#### 2021 02 19
+* Added support for heater generic
+
 #### 2021 02 18
 * Add directory support to print panel
 * Add macros to print menu
