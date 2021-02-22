@@ -149,6 +149,7 @@ class KlipperScreen(Gtk.Window):
 
         if self.files is not None:
             self.files.stop()
+            self.files = None
 
         for printer in self._config.get_printers():
             pname = list(printer)[0]
