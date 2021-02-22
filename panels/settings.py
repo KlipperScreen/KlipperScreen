@@ -47,7 +47,7 @@ class SettingsPanel(ScreenPanel):
             macro = macro[12:]
             self.macros[macro] = {
                 "name": macro,
-                "section": "displayed_macros",
+                "section": "displayed_macros %s" % self._screen.connected_printer,
                 "type": "macro"
             }
 
@@ -56,7 +56,7 @@ class SettingsPanel(ScreenPanel):
 
         self.printers = {}
         for printer in self._config.get_printers():
-            logger.debug("Printer: %s" % printer)
+            logging.debug("Printer: %s" % printer)
             pname = list(printer)[0]
             self.printers[pname] = {
                 "name": pname,
@@ -158,9 +158,9 @@ class SettingsPanel(ScreenPanel):
             #dropdown.props.relief = Gtk.ReliefStyle.NONE
             dropdown.set_entry_text_column(0)
             dev.add(dropdown)
-            logger.debug("Children: %s" % dropdown.get_children())
+            logging.debug("Children: %s" % dropdown.get_children())
         elif option['type'] == "printer":
-            logger.debug("Option: %s" % option)
+            logging.debug("Option: %s" % option)
             box = Gtk.Box()
             box.set_vexpand(False)
             label = Gtk.Label()

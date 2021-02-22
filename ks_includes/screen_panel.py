@@ -32,7 +32,7 @@ class ScreenPanel:
             self.control_grid.get_style_context().add_class('action_bar')
 
             button_scale = self._gtk.get_header_image_scale()
-            logger.debug("Button scale: %s" % button_scale)
+            logging.debug("Button scale: %s" % button_scale)
 
             if back == True:
                 self.control['back'] = self._gtk.ButtonImage('back', None, None, button_scale[0], button_scale[1])

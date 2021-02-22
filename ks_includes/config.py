@@ -138,6 +138,7 @@ class KlipperScreenConfig:
         return ["\n".join(user_def), None if saved_def == None else "\n".join(saved_def)]
 
     def get_config_file_location(self, file):
+        logging.info("Passed config file: %s" % file)
         if not path.exists(file):
             file = "%s/%s" % (os.getcwd(), self.configfile_name)
             if not path.exists(file):
@@ -219,16 +220,17 @@ class KlipperScreenConfig:
                     save_config.add_section(opt['section'])
                 save_config.set(opt['section'], name, str(curval))
 
-        if "displayed_macros" in self.config.sections():
-                for item in self.config.options('displayed_macros'):
-                    value = self.config['displayed_macros'].getboolean(item, fallback=True)
+        macro_sections = [i for i in self.config.sections() if i.startswith("displayed_macros")]
+        for macro_sec in macro_sections:
+                for item in self.config.options(macro_sec):
+                    value = self.config[macro_sec].getboolean(item, fallback=True)
                     if value == False or (self.defined_config != None and
-                            "displayed_macros" in self.defined_config.sections() and
-                            self.defined_config['displayed_macros'].getboolean(item, fallback=True) == False and
-                            self.defined_config['displayed_macros'].getboolean(item, fallback=True) != value):
-                        if "displayed_macros" not in save_config.sections():
-                            save_config.add_section("displayed_macros")
-                        save_config.set("displayed_macros", item, str(value))
+                            macro_sec in self.defined_config.sections() and
+                            self.defined_config[macro_sec].getboolean(item, fallback=True) == False and
+                            self.defined_config[macro_sec].getboolean(item, fallback=True) != value):
+                        if macro_sec not in save_config.sections():
+                            save_config.add_section(macro_sec)
+                        save_config.set(macro_sec, item, str(value))
 
         save_output = self._build_config_string(save_config).split("\n")
         for i in range(len(save_output)):

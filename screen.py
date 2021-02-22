@@ -122,6 +122,7 @@ class KlipperScreen(Gtk.Window):
             self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.BLANK_CURSOR))
 
         printers = self._config.get_printers()
+        logging.debug("Printers: %s" % printers)
         if len(printers) == 1:
             pname = list(self._config.get_printers()[0])[0]
             self.connect_printer(pname)
@@ -470,7 +471,7 @@ class KlipperScreen(Gtk.Window):
         os.system("/usr/bin/xset -display :0 s %s" % time)
 
     def show_printer_select(self, widget=None):
-        logger.debug("Saving panel: %s" % self._cur_panels[0])
+        logging.debug("Saving panel: %s" % self._cur_panels[0])
         self.printer_select_prepanel = self._cur_panels[0]
         self.show_panel("printer_select","printer_select","Printer Select", 2)
 
