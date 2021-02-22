@@ -9,7 +9,7 @@ klipperscreendir = os.getcwd()
 
 class KlippyGtk:
     labels = {}
-    font_ratio = 51
+    font_ratio = [51, 30]
     width_ratio = 16
     height_ratio = 9.375
 
@@ -17,7 +17,10 @@ class KlippyGtk:
         self.width = width
         self.height = height
 
-        self.font_size = int(round(self.width / self.font_ratio))
+        self.font_size = int(min(
+            self.width / self.font_ratio[0],
+            self.height / self.font_ratio[1]
+        ))
         self.header_size = int(round((self.width / self.width_ratio) / 1.33))
         self.img_width = int(round(self.width / self.width_ratio))
         self.img_height = int(round(self.height / self.height_ratio))
