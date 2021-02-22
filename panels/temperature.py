@@ -223,7 +223,7 @@ class TemperaturePanel(ScreenPanel):
         elif self.active_heater == "heater_bed":
             self._screen._ws.klippy.set_bed_temp(target)
         else:
-            self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), target)
+            self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(self.active_heater), target)
 
     def update_entry(self, widget, digit):
         text = self.labels['entry'].get_text()
