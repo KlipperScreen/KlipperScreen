@@ -11,8 +11,6 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
 
-logger = logging.getLogger("KlipperScreen.KlippyFiles")
-
 RESCAN_INTERVAL = 4
 
 class KlippyFiles(Thread):
@@ -56,7 +54,7 @@ class KlippyFiles(Thread):
             try:
                 await self.ret_files()
             except:
-                logger.exception("Poll files error")
+                logging.exception("Poll files error")
             await asyncio.sleep(4)
 
 
@@ -70,7 +68,7 @@ class KlippyFiles(Thread):
                         deletedfiles.remove(item['filename'])
                     else:
                         newfiles.append(item['filename'])
-                        logger.debug("New file: %s", item['filename'])
+                        logging.debug("New file: %s", item['filename'])
                         self.filelist.append(item['filename'])
                         self.files[item['filename']] = {
                             "size": item['size'],
@@ -79,22 +77,21 @@ class KlippyFiles(Thread):
                         self.request_metadata(item['filename'])
 
                 if len(self.callbacks) > 0 and (len(newfiles) > 0 or len(deletedfiles) > 0):
-                    logger.debug("Running callbacks...")
                     for cb in self.callbacks:
                         cb(newfiles, deletedfiles, [])
 
                 if len(deletedfiles) > 0:
-                    logger.debug("Deleted files: %s", deletedfiles)
+                    logging.debug("Deleted files: %s", deletedfiles)
                     for file in deletedfiles:
                         self.filelist.remove(file)
                         self.files.pop(file, None)
 
         elif method == "server.files.metadata":
             if "error" in result.keys():
-                logger.debug("Error in getting metadata for %s. Retrying in 6 seconds" %(params['filename']))
+                logging.debug("Error in getting metadata for %s. Retrying in 6 seconds" %(params['filename']))
                 return
 
-            logger.debug("Got metadata for %s" % (result['result']['filename']))
+            logging.debug("Got metadata for %s" % (result['result']['filename']))
 
             for x in result['result']:
                 self.files[params['filename']][x] = result['result'][x]
@@ -107,14 +104,14 @@ class KlippyFiles(Thread):
                     f.write(base64.b64decode(thumbnail['data']))
                     f.close()
             for cb in self.callbacks:
-                logger.debug("Running metadata callbacks")
+                logging.debug("Running metadata callbacks")
                 cb([], [], [params['filename']])
 
     def add_file_callback(self, callback):
         try:
             self.callbacks.append(callback)
         except:
-            logger.debug("Callback not found: %s" % callback)
+            logging.debug("Callback not found: %s" % callback)
 
     def remove_file_callback(self, callback):
         if callback in self.callbacks:
@@ -154,7 +151,6 @@ class KlippyFiles(Thread):
         self._screen._ws.klippy.get_file_metadata(filename, self._callback)
 
     async def ret_files(self, retval=True):
-        logger.debug("Scanning for files")
         if not self._screen._ws.klippy.get_file_list(self._callback):
             self.timeout = None
 

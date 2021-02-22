@@ -24,6 +24,9 @@ job_complete_timeout: 30
 #   If this option is 0, the user must click on a button to go back to the main menu.
 job_error_timeout: 0
 
+# Allows the cursor to be displayed on the screen
+show_cursor: False
+
 #
 # The following main options are deprecated and will be removed in the near future
 #
@@ -45,6 +48,9 @@ moonraker_host: 127.0.0.1
 moonraker_port: 7125
 # Moonraker API key if this is not connecting from a trusted client IP
 moonraker_api_key: False
+
+# Define the z_babystep intervals in a CSV list. Currently only 2 are supported
+z_babystep_values: 0.01, 0.05
 ```
 
 

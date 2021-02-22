@@ -7,7 +7,6 @@ from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
 import logging
-logger = logging.getLogger("KlipperScreen.ZCalibratePanel")
 
 def create_panel(*args):
     return ZCalibratePanel(*args)
@@ -116,15 +115,15 @@ class ZCalibratePanel(ScreenPanel):
 
     def move(self, widget, dir):
         dist = str(self.distance) if dir == "+" else "-" + str(self.distance)
-        logger.info("# Moving %s", KlippyGcodes.probe_move(dist))
+        logging.info("# Moving %s", KlippyGcodes.probe_move(dist))
         self._screen._ws.klippy.gcode_script(KlippyGcodes.probe_move(dist))
 
     def abort(self, widget):
-        logger.info("Aborting Z calibrate")
+        logging.info("Aborting Z calibrate")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_ABORT)
         self.menu_return(widget)
 
     def accept(self, widget):
-        logger.info("Accepting Z calibrate")
+        logging.info("Accepting Z calibrate")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_ACCEPT)
         self.menu_return(widget)

@@ -12,6 +12,7 @@ install_packages()
     echo "Installing package dependencies"
     sudo apt install -y \
         xserver-xorg-video-fbturbo \
+        xdotool \
         xinit \
         xinput \
         x11-xserver-utils \
@@ -21,7 +22,8 @@ install_packages()
         python3-virtualenv \
         gir1.2-gtk-3.0 \
         virtualenv \
-        matchbox-keyboard
+        matchbox-keyboard \
+        wireless-tools
 }
 
 create_virtualenv()

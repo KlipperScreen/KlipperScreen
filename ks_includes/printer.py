@@ -1,7 +1,5 @@
 import logging
 
-logger = logging.getLogger("KlipperScreen.Printer")
-
 class Printer:
     data = {}
     devices = {}
@@ -22,7 +20,7 @@ class Printer:
         self.power_devices = {}
 
     def reinit(self, printer_info, data):
-        logger.debug("Moonraker object status: %s" % data)
+        logging.debug("Moonraker object status: %s" % data)
         self.config = data['configfile']['config']
         self.toolcount = 0
         self.extrudercount = 0
@@ -50,7 +48,7 @@ class Printer:
                 if "shared_heater" in self.config[x]:
                     continue
                 self.extrudercount += 1
-            if x.startswith('heater_bed'):
+            if x.startswith('heater_bed') or x.startswith('heater_generic '):
                 self.devices[x] = {
                     "temperature": 0,
                     "target": 0
@@ -66,8 +64,8 @@ class Printer:
                 r['points']  = [[float(j.strip()) for j in i.split(",")] for i in r['points'].strip().split("\n")]
         self.process_update(data)
 
-        logger.info("Klipper version: %s", self.klipper['version'])
-        logger.info("### Toolcount: " + str(self.toolcount) + " Heaters: " + str(self.extrudercount))
+        logging.info("Klipper version: %s", self.klipper['version'])
+        logging.info("### Toolcount: " + str(self.toolcount) + " Heaters: " + str(self.extrudercount))
 
     def process_update(self, data):
         keys = [
@@ -89,19 +87,11 @@ class Printer:
                 for y in data[x]:
                     self.data[x][y] = data[x][y]
 
-        if "heater_bed" in data:
-            d = data["heater_bed"]
-            if "target" in d:
-                self.set_dev_stat("heater_bed", "target", d["target"])
-            if "temperature" in d:
-                self.set_dev_stat("heater_bed", "temperature", d["temperature"])
-        for x in self.get_tools():
+        for x in (self.get_tools() + self.get_heaters()):
             if x in data:
                 d = data[x]
-                if "target" in d:
-                    self.set_dev_stat(x, "target", d["target"])
-                if "temperature" in d:
-                    self.set_dev_stat(x, "temperature", d["temperature"])
+                for i in d:
+                    self.set_dev_stat(x, i, d[i])
 
         if "webhooks" in data or "idle_timeout" in data or "pause_resume" in data or "print_stats" in data:
             self.evaluate_state()
@@ -133,21 +123,21 @@ class Printer:
         if state == self.state or state not in list(self.state_callbacks):
             return
 
-        logger.debug("Changing state from '%s' to '%s'" % (self.state, state))
+        logging.debug("Changing state from '%s' to '%s'" % (self.state, state))
         self.state = state
         if self.state_callbacks[state] != None:
-            logger.debug("Running callback for state: %s" % state)
+            logging.debug("Running callback for state: %s" % state)
             self.state_callbacks[state]()
 
     def configure_power_devices(self, data):
         self.power_devices = {}
 
-        logger.debug("Processing power devices: %s" % data)
+        logging.debug("Processing power devices: %s" % data)
         for x in data['devices']:
             self.power_devices[x['device']] = {
                 "status": "on" if x['status'] == "on" else "off"
             }
-        logger.debug("Power devices: %s" % self.power_devices)
+        logging.debug("Power devices: %s" % self.power_devices)
 
     def config_section_exists(self, section):
         return section in list(self.config)
@@ -165,6 +155,14 @@ class Printer:
 
     def get_gcode_macros(self):
         return self.get_config_section_list("gcode_macro ")
+
+    def get_heaters(self):
+        heaters = []
+        if self.has_heated_bed():
+            heaters.append("heater_bed")
+        for h in self.get_config_section_list("heater_generic "):
+            heaters.append(h)
+        return heaters
 
     def get_printer_status_data(self):
         data = {

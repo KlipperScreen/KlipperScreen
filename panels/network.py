@@ -8,8 +8,6 @@ from gi.repository import Gtk, Gdk, GLib, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
-logger = logging.getLogger("KlipperScreen.NetworkPanel")
-
 def create_panel(*args):
     return NetworkPanel(*args)
 

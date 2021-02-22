@@ -8,8 +8,6 @@ from io import StringIO
 
 from os import path
 
-logger = logging.getLogger("KlipperScreen.config")
-
 SCREEN_BLANKING_OPTIONS = [
     "300",    #5 Minutes
     "900",    #15 Minutes
@@ -36,6 +34,7 @@ class KlipperScreenConfig:
             {"invert_x": {"section": "main", "name": _("Invert X"), "type": "binary", "value": "False"}},
             {"invert_y": {"section": "main", "name": _("Invert Y"), "type": "binary", "value": "False"}},
             {"invert_z": {"section": "main", "name": _("Invert Z"), "type": "binary", "value": "False"}},
+            {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
             {"print_estimate_method": {"section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
                 "value": "file","options":[
                     {"name": _("File Estimation (default)"), "value": "file"},
@@ -66,7 +65,7 @@ class KlipperScreenConfig:
         self.default_config_path = "%s/ks_includes/%s" % (os.getcwd(), self.configfile_name)
         self.config = configparser.ConfigParser()
         self.config_path = self.get_config_file_location(configfile)
-        logger.debug("Config path location: %s" % self.config_path)
+        logging.debug("Config path location: %s" % self.config_path)
         self.defined_config = None
 
         try:
@@ -83,7 +82,6 @@ class KlipperScreenConfig:
             raise ConfigError(f"Error reading config: {self.config_path}")
 
         printers = [i for i in self.config.sections() if i.startswith("printer ")]
-        logger.debug("Printers: %s %s" % (len(printers), printers))
         self.printers = []
         for printer in printers:
             self.printers.append({
@@ -102,7 +100,13 @@ class KlipperScreenConfig:
                 }
             })
 
-        logger.debug("Configured printers: %s" % json.dumps(self.printers, indent=2))
+        conf_printers_debug = self.printers.copy()
+        for printer in conf_printers_debug:
+            name = list(printer)[0]
+            item = conf_printers_debug[conf_printers_debug.index(printer)]
+            if item[list(printer)[0]]['moonraker_api_key'] != "":
+                item[list(printer)[0]]['moonraker_api_key'] = "redacted"
+        logging.debug("Configured printers: %s" % json.dumps(conf_printers_debug, indent=2))
 
         for item in self.configurable_options:
             name = list(item)[0]
@@ -139,7 +143,7 @@ class KlipperScreenConfig:
             if not path.exists(file):
                 file = self.default_config_path
 
-        logger.info("Found configuration file at: %s" % file)
+        logging.info("Found configuration file at: %s" % file)
         return file
 
     def get_config(self):
@@ -183,6 +187,14 @@ class KlipperScreenConfig:
             preheat_options[item] = self._build_preheat_item(index + item)
 
         return preheat_options
+
+    def get_printer_config(self, name):
+        if not name.startswith("printer "):
+            name = "printer %s" % name
+
+        if name not in self.config:
+            return None
+        return self.config[name]
 
     def get_printer_power_name(self):
         return self.config['settings'].get("printer_power_name", "printer")
@@ -242,7 +254,7 @@ class KlipperScreenConfig:
             file.write(contents)
             file.close()
         except:
-            logger.error("Error writing configuration file")
+            logging.error("Error writing configuration file")
 
     def set(self, section, name, value):
         self.config.set(section, name, value)
@@ -258,7 +270,7 @@ class KlipperScreenConfig:
             ),
             "======================="
         ]
-        logger.info("\n".join(lines))
+        logging.info("\n".join(lines))
 
     def _build_config_string(self, config):
         sfile = StringIO()
@@ -282,7 +294,7 @@ class KlipperScreenConfig:
         try:
             item["params"] = json.loads(cfg.get("params", "{}"))
         except:
-            logger.debug("Unable to parse parameters for [%s]" % name)
+            logging.debug("Unable to parse parameters for [%s]" % name)
             item["params"] = {}
 
         return {name[(len(menu) + 6):]: item}
@@ -293,6 +305,7 @@ class KlipperScreenConfig:
         cfg = self.config[name]
         item = {
             "extruder": cfg.getint("extruder", 0),
-            "bed": cfg.getint("bed", 0)
+            "bed": cfg.getint("bed", 0),
+            "heater_generic": cfg.getint("heater_generic", 0)
         }
         return item

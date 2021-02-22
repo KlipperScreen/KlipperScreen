@@ -8,8 +8,6 @@ from jinja2 import Environment, Template
 
 from ks_includes.screen_panel import ScreenPanel
 
-logger = logging.getLogger("KlipperScreen.MenuPanel")
-
 def create_panel(*args):
     return MenuPanel(*args)
 
@@ -41,7 +39,7 @@ class MenuPanel(ScreenPanel):
         i = 0
         for item in items:
             key = list(item)[0]
-            logger.debug("Evaluating item: %s" % key)
+            logging.debug("Evaluating item: %s" % key)
             if not self.evaluate_enable(item[key]['enable']):
                 continue
 
@@ -89,13 +87,13 @@ class MenuPanel(ScreenPanel):
             return False
 
         try:
-            logger.debug("Template: '%s'" % enable)
-            logger.debug("Data: %s" % self.j2_data)
+            logging.debug("Template: '%s'" % enable)
+            logging.debug("Data: %s" % self.j2_data)
             j2_temp = Template(enable)
             result = j2_temp.render(self.j2_data)
             if result == 'True':
                 return True
             return False
         except:
-            logger.debug("Error evaluating enable statement: %s", enable)
+            logging.debug("Error evaluating enable statement: %s", enable)
             return False

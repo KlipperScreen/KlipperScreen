@@ -7,7 +7,6 @@ from jinja2 import Environment, Template
 
 from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.KlippyGcodes import KlippyGcodes
-logger = logging.getLogger("KlipperScreen.ScreenPanel")
 
 class ScreenPanel:
     title_spacing = 50
@@ -67,7 +66,7 @@ class ScreenPanel:
             j2_temp = env.from_string(title)
             title = j2_temp.render()
         except:
-            logger.debug("Error parsing jinja for title: %s" % title)
+            logging.debug("Error parsing jinja for title: %s" % title)
 
         self.title = Gtk.Label()
         self.title.set_size_request(self._screen.width - action_bar_width, self.title_spacing)
@@ -131,6 +130,9 @@ class ScreenPanel:
         if label in self.labels and 'l' in self.labels[label]:
             self.labels[label]['l'].set_text(text)
 
-    def update_temp(self, dev, temp, target):
+    def update_temp(self, dev, temp, target, name=None):
         if dev in self.labels:
-            self.labels[dev].set_label(self._gtk.formatTemperatureString(temp, target))
+            if name == None:
+                self.labels[dev].set_label(self._gtk.formatTemperatureString(temp, target))
+            else:
+                self.labels[dev].set_label("%s\n%s" % (name, self._gtk.formatTemperatureString(temp, target)))

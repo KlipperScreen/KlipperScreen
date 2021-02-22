@@ -120,7 +120,7 @@ trough {
 }
 
 .action_bar {
-    border-right: 2px solid #444;
+    /*border-right: 2px solid #444;*/
 }
 
 .dialog {
@@ -263,7 +263,7 @@ trough {
 }
 
 .printing-info-box box {
-    margin-bottom: .5em;
+    margin-bottom: .25em;
 }
 
 .printing-status {

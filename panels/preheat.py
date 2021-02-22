@@ -6,8 +6,6 @@ from gi.repository import Gtk, Gdk, GLib
 
 from ks_includes.screen_panel import ScreenPanel
 
-logger = logging.getLogger("KlipperScreen.PreheatPanel")
-
 def create_panel(*args):
     return PreheatPanel(*args)
 
@@ -17,27 +15,39 @@ class PreheatPanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
         self.preheat_options = self._screen._config.get_preheat_options()
-        logger.debug("Preheat options: %s" % self.preheat_options)
+        logging.debug("Preheat options: %s" % self.preheat_options)
 
         grid = self._gtk.HomogeneousGrid()
 
-        eq_grid = self._gtk.HomogeneousGrid()
+        eq_grid = Gtk.Grid()
+        eq_grid.set_hexpand(True)
+        eq_grid.set_vexpand(True)
+
+        self.heaters = []
         i = 0
         for x in self._printer.get_tools():
-            if i > 3:
-                break
-            elif i == 0:
+            if i == 0:
                 primary_tool = x
             self.labels[x] = self._gtk.ToggleButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0))
-            self.labels[x].connect('clicked', self.select_heater, x)
-            eq_grid.attach(self.labels[x], i%2, i/2, 1, 1)
+            self.heaters.append(x)
             i += 1
 
-        if self._printer.has_heated_bed():
-            self.labels["heater_bed"] = self._gtk.ToggleButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
-            self.labels["heater_bed"].connect('clicked', self.select_heater, "heater_bed")
-            width = 2 if i > 1 else 1
-            eq_grid.attach(self.labels["heater_bed"], 0, i/2+1, width, 1)
+        add_heaters = self._printer.get_heaters()
+        for h in add_heaters:
+            if h == "heater_bed":
+                self.labels[h] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
+            else:
+                name = " ".join(h.split(" ")[1:])
+                self.labels[h] = self._gtk.ButtonImage("heat-up", name)
+            self.heaters.append(h)
+
+        i = 0
+        cols = 3 if len(self.heaters) > 4 else (1 if len(self.heaters) <= 2 else 2)
+        for h in self.heaters:
+            self.labels[h].connect('clicked', self.select_heater, h)
+            eq_grid.attach(self.labels[h], i%cols, int(i/cols), 1, 1)
+            i += 1
+
 
         self.labels["control_grid"] = self._gtk.HomogeneousGrid()
 
@@ -70,8 +80,9 @@ class PreheatPanel(ScreenPanel):
             if x not in self.active_heaters:
                 self.select_heater(None, x)
 
-        if self._printer.has_heated_bed() and "heater_bed" not in self.active_heaters:
-            self.select_heater(None, "heater_bed")
+        for h in self._printer.get_heaters():
+            if h not in self.active_heaters:
+                self.select_heater(None, h)
 
     def select_heater(self, widget, heater):
         if heater in self.active_heaters:
@@ -86,7 +97,9 @@ class PreheatPanel(ScreenPanel):
         if setting == "cooldown":
             for heater in self.active_heaters:
                 print ("Setting %s to %d" % (heater, 0))
-                if heater.startswith('heater_bed'):
+                if heater.startswith('heater_generic '):
+                    self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), 0)
+                elif heater.startswith('heater_bed'):
                     self._screen._ws.klippy.set_bed_temp(0)
                     self._printer.set_dev_stat(heater,"target", 0)
                 else:
@@ -95,7 +108,11 @@ class PreheatPanel(ScreenPanel):
             return
 
         for heater in self.active_heaters:
-            if heater.startswith('heater_bed'):
+            if heater.startswith('heater_generic '):
+                print ("Setting %s to %d" % (heater, self.preheat_options[setting]['heater_generic']))
+                self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]),
+                    self.preheat_options[setting]["heater_generic"])
+            elif heater.startswith('heater_bed'):
                 print ("Setting %s to %d" % (heater, self.preheat_options[setting]['bed']))
                 self._screen._ws.klippy.set_bed_temp(self.preheat_options[setting]["bed"])
                 self._printer.set_dev_stat(heater,"target", int(self.preheat_options[setting]["bed"]))
@@ -109,13 +126,14 @@ class PreheatPanel(ScreenPanel):
         if action != "notify_status_update":
             return
 
-        if self._printer.has_heated_bed():
-            self.update_temp("heater_bed",
-                self._printer.get_dev_stat("heater_bed","temperature"),
-                self._printer.get_dev_stat("heater_bed","target")
-            )
         for x in self._printer.get_tools():
             self.update_temp(x,
                 self._printer.get_dev_stat(x,"temperature"),
                 self._printer.get_dev_stat(x,"target")
+            )
+        for h in self._printer.get_heaters():
+            self.update_temp(h,
+                self._printer.get_dev_stat(h,"temperature"),
+                self._printer.get_dev_stat(h,"target"),
+                None if h == "heater_bed" else " ".join(h.split(" ")[1:])
             )

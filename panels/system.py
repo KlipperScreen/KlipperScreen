@@ -8,8 +8,6 @@ from gi.repository import Gtk, Gdk, GLib
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
-logger = logging.getLogger("KlipperScreen.SystemPanel")
-
 def create_panel(*args):
     return SystemPanel(*args)
 
@@ -18,6 +16,7 @@ class SystemPanel(ScreenPanel):
         _ = self.lang.gettext
 
         grid = self._gtk.HomogeneousGrid()
+        grid.set_row_homogeneous(False)
 
         restart = self._gtk.ButtonImage('reboot',"\n".join(_('Klipper Restart').split(' ')),'color1')
         restart.connect("clicked", self.restart_klippy)

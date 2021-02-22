@@ -7,11 +7,9 @@ from gi.repository import Gtk, Gdk, GdkPixbuf, GLib, Pango
 import os
 klipperscreendir = os.getcwd()
 
-logger = logging.getLogger("KlipperScreen.KlippyGtk")
-
 class KlippyGtk:
     labels = {}
-    font_ratio = 51
+    font_ratio = [51, 30]
     width_ratio = 16
     height_ratio = 9.375
 
@@ -19,7 +17,10 @@ class KlippyGtk:
         self.width = width
         self.height = height
 
-        self.font_size = int(round(self.width / self.font_ratio))
+        self.font_size = int(min(
+            self.width / self.font_ratio[0],
+            self.height / self.font_ratio[1]
+        ))
         self.header_size = int(round((self.width / self.width_ratio) / 1.33))
         self.img_width = int(round(self.width / self.width_ratio))
         self.img_height = int(round(self.height / self.height_ratio))
@@ -27,7 +28,7 @@ class KlippyGtk:
         self.header_image_scale_width = 1.2
         self.header_image_scale_height = 1.4
 
-        logger.debug("img width: %s height: %s" % (self.img_width, self.img_height))
+        logging.debug("img width: %s height: %s" % (self.img_width, self.img_height))
 
     def get_action_bar_width(self):
         return self.action_bar_width
@@ -119,7 +120,7 @@ class KlippyGtk:
         return b
 
     def ButtonImage(self, image_name, label=None, style=None, width_scale=1, height_scale=1,
-            position=Gtk.PositionType.TOP):
+            position=Gtk.PositionType.TOP, word_wrap=True):
         filename = "%s/styles/z-bolt/images/%s.svg" % (klipperscreendir, str(image_name))
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
             filename,
@@ -139,13 +140,14 @@ class KlippyGtk:
         b.set_always_show_image(True)
         b.props.relief = Gtk.ReliefStyle.NONE
 
-        #try:
-        #    # Get the label object
-        #    child = b.get_children()[0].get_children()[0].get_children()[1]
-        #    child.set_line_wrap(True)
-        #    child.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-        #except:
-        #    pass
+        if word_wrap is True:
+            try:
+                # Get the label object
+                child = b.get_children()[0].get_children()[0].get_children()[1]
+                child.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+                child.set_line_wrap(True)
+            except:
+                pass
 
         if style != None:
             b.get_style_context().add_class(style)

@@ -7,8 +7,6 @@ from gi.repository import Gtk, Gdk, GLib, Pango
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
-logger = logging.getLogger("KlipperScreen.Macro")
-
 def create_panel(*args):
     return MacroPanel(*args)
 
@@ -89,7 +87,7 @@ class MacroPanel(ScreenPanel):
             if macro in self.loaded_macros:
                 continue
 
-            logger.debug("Evaluating '%s' value '%s'" % (macro.strip().lower(),
+            logging.debug("Evaluating '%s' value '%s'" % (macro.strip().lower(),
                 self._config.get_config().getboolean("displayed_macros", macro.lower(), fallback=True)))
 
             if ("displayed_macros" not in self._config.get_config().sections() or
@@ -101,7 +99,7 @@ class MacroPanel(ScreenPanel):
 
     def unload_gcode_macros(self):
         for macro in self.loaded_macros:
-            logger.debug("Evaluating '%s' value '%s'" % (macro.strip().lower(),
+            logging.debug("Evaluating '%s' value '%s'" % (macro.strip().lower(),
                 self._config.get_config().getboolean("displayed_macros", macro.lower(), fallback=True)))
             if ("displayed_macros" in self._config.get_config().sections() and
                     not self._config.get_config().getboolean("displayed_macros", macro.lower(), fallback=True)):
