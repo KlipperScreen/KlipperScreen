@@ -113,7 +113,10 @@ class KlipperScreen(Gtk.Window):
         self.set_screenblanking_timeout(self._config.get_main_config_option('screen_blanking'))
 
         # Change cursor to blank
-        self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.BLANK_CURSOR))
+        if self._config.get_main_config().getboolean("show_cursor", fallback=False):
+            self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.ARROW))
+        else:
+            self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.BLANK_CURSOR))
         pname = list(self._config.get_printers()[0])[0]
         self.connect_printer(pname, self._config.get_printers()[0][pname])
 

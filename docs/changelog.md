@@ -4,6 +4,7 @@
 * Add configurable z_babystep intervals
 * Fixed cursor issue on startup
 * Fixed font ratio for large, but short screens
+* Configurable cursor display
 * Re-vamped logging system
 
 #### 2021 02 19
