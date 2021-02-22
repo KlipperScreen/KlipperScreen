@@ -376,7 +376,7 @@ class JobStatusPanel(ScreenPanel):
             if ps['state'] == "printing" and self.state != "printing":
                 self.set_state("printing")
                 self.show_buttons_for_state()
-            if ps['state'] == "complete" and self.state != "complete":
+            elif ps['state'] == "complete" and self.state != "complete":
                 self.progress = 1
                 self.update_progress()
                 self.set_state("complete")
@@ -387,13 +387,21 @@ class JobStatusPanel(ScreenPanel):
             elif ps['state'] == "error" and self.state != "error":
                 logging.debug("Error!")
                 self.set_state("error")
-                self.labels['status'].set_text("Error - %s" % ps['message'])
+                self.labels['status'].set_text("%s - %s" % (_("Error"), ps['message']))
                 self.show_buttons_for_state()
                 timeout = self._config.get_main_config().getint("job_error_timeout", 0)
                 if timeout != 0:
                     GLib.timeout_add(timeout * 1000, self.close_panel)
             elif ps['state'] == "standby":
-                self.close_panel()
+                # Print was cancelled
+                self.set_state("cancelled")
+                self.show_buttons_for_state()
+                timeout = self._config.get_main_config().getint("job_cancelled_timeout", 0)
+                if timeout != 0:
+                    GLib.timeout_add(timeout * 1000, self.close_panel)
+            elif ps['state'] == "paused":
+                self.set_state("paused")
+                self.show_buttons_for_state()
 
             if self.filename != ps['filename']:
                 if ps['filename'] != "":
@@ -445,22 +453,30 @@ class JobStatusPanel(ScreenPanel):
 
             self.update_progress()
 
-        if "pause_resume" in data and self.state != "complete":
-            if self.state == "paused" and data['pause_resume']['is_paused'] == False:
-                self.set_state("printing")
-                self.update_text("status",_("Paused"))
-                self.labels['button_grid'].attach(self.labels['pause'], 0, 0, 1, 1)
-                self.labels['button_grid'].remove(self.labels['resume'])
-                self.labels['button_grid'].show_all()
-            if self.state != "paused" and data['pause_resume']['is_paused'] == True:
-                self.set_state("paused")
-                self.labels['button_grid'].attach(self.labels['resume'], 0, 0, 1, 1)
-                self.labels['button_grid'].remove(self.labels['pause'])
-                self.labels['button_grid'].show_all()
-
     def set_state(self, state):
+        _ = self.lang.gettext
+
+        if self.state == state:
+            return
+
         self.state = state
-        self.update_text("status",state.capitalize())
+        if state == "paused":
+            self.labels['button_grid'].remove(self.labels['resume'])
+            self.labels['button_grid'].remove(self.labels['pause'])
+            self.labels['button_grid'].attach(self.labels['pause'], 0, 0, 1, 1)
+            self.labels['button_grid'].show_all()
+            self.update_text("status",_("Paused"))
+        elif state == "printing":
+            self.labels['button_grid'].remove(self.labels['resume'])
+            self.labels['button_grid'].remove(self.labels['pause'])
+            self.labels['button_grid'].attach(self.labels['resume'], 0, 0, 1, 1)
+            self.labels['button_grid'].show_all()
+            self.update_text("status",_("Printing"))
+        elif state == "cancelled":
+            self.update_text("status",_("Cancelled"))
+        elif state == "complete":
+            self.update_text("status",_("Complete"))
+
 
     def show_buttons_for_state(self):
         self.labels['button_grid'].remove_row(0)
@@ -475,7 +491,7 @@ class JobStatusPanel(ScreenPanel):
             self.labels['button_grid'].attach(self.labels['cancel'], 1, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['estop'], 2, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
-        elif self.state == "error" or self.state == "complete":
+        elif self.state == "error" or self.state == "complete" or self.state == "cancelled":
             self.labels['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
             self.labels['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['restart'], 2, 0, 1, 1)
