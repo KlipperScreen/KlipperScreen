@@ -242,7 +242,7 @@ class TemperaturePanel(ScreenPanel):
             else:
                 temp = int(text)
                 temp = 0 if temp < 0 or temp > KlippyGcodes.MAX_EXT_TEMP else temp
-                self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), temp)
+                self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(self.active_heater), temp)
             self._printer.set_dev_stat(self.active_heater, "target", temp)
             self.labels['entry'].set_text("")
         else:
