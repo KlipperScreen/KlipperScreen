@@ -2,6 +2,7 @@
 
 #### 2021 02 22
 * Add configurable z_babystep intervals
+* Add QUAD_GANTRY_LEVEL and Z_TILT_ADJUST to Homing menu
 * Fixed cursor issue on startup
 * Fixed font ratio for large, but short screens
 * Configurable cursor display
