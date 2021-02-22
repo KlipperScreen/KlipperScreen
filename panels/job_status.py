@@ -18,16 +18,16 @@ class JobStatusPanel(ScreenPanel):
     progress = 0
     state = "printing"
 
+    def __init__(self, screen, title, back=False):
+        super().__init__(screen, title, False)
+
     def initialize(self, panel_name):
         _ = self.lang.gettext
-        self.layout = Gtk.Layout()
-        self.layout.set_size(self._screen.width, self._screen.height)
         self.timeleft_type = "file"
 
         self.create_buttons()
 
         grid = self._gtk.HomogeneousGrid()
-        grid.set_size_request(self._screen.width, self._screen.height)
         grid.set_row_homogeneous(False)
 
         self.labels['button_grid'] = self._gtk.HomogeneousGrid()
@@ -170,23 +170,27 @@ class JobStatusPanel(ScreenPanel):
         sfe_grid.attach(fan_box, 2, 0, 1, 1)
         self.labels['sfe_grid'] = sfe_grid
 
-        self.labels['i1_box'] = Gtk.VBox(spacing=0)
+        self.labels['i1_box'] = Gtk.HBox(spacing=0)
+        self.labels['i1_box'].set_vexpand(True)
         self.labels['i1_box'].get_style_context().add_class("printing-info-box")
         self.labels['i1_box'].set_valign(Gtk.Align.CENTER)
         self.labels['i2_box'] = Gtk.VBox(spacing=0)
         self.labels['i2_box'].set_vexpand(True)
         self.labels['i2_box'].get_style_context().add_class("printing-info-box")
+        self.labels['i2_box'].set_valign(Gtk.Align.CENTER)
+        self.labels['info_grid'] = self._gtk.HomogeneousGrid()
+        self.labels['info_grid'].attach(self.labels['i1_box'], 0, 0, 1, 1)
+        self.labels['info_grid'].attach(self.labels['i2_box'], 1, 0, 1, 1)
 
         grid.attach(overlay, 0, 0, 1, 1)
         grid.attach(fi_box, 1, 0, 3, 1)
-        grid.attach(self.labels['i1_box'], 0, 1, 2, 2)
-        grid.attach(self.labels['i2_box'], 2, 1, 2, 2)
+        grid.attach(self.labels['info_grid'], 0, 1, 4, 2)
         grid.attach(self.labels['button_grid'], 0, 3, 4, 1)
 
         self.add_labels()
 
         self.grid = grid
-        self.layout.put(grid, 0, 0)
+        self.content.add(grid)
 
         self._screen.add_subscription(panel_name)
 
@@ -250,8 +254,6 @@ class JobStatusPanel(ScreenPanel):
         self.labels['cancel'].connect("clicked", self.cancel)
         self.labels['control'] = self._gtk.ButtonImage("control",_("Control"),"color3")
         self.labels['control'].connect("clicked", self._screen._go_to_submenu, "")
-        self.labels['estop'] = self._gtk.ButtonImage("emergency",_("Emergency Stop"),"color4")
-        self.labels['estop'].connect("clicked", self.emergency_stop)
         self.labels['menu'] = self._gtk.ButtonImage("complete",_("Main Menu"),"color4")
         self.labels['menu'].connect("clicked", self.close_panel)
         self.labels['pause'] = self._gtk.ButtonImage("pause",_("Pause"),"color1" )
@@ -468,12 +470,12 @@ class JobStatusPanel(ScreenPanel):
         if self.state == "printing":
             self.labels['button_grid'].attach(self.labels['pause'], 0, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['cancel'], 1, 0, 1, 1)
-            self.labels['button_grid'].attach(self.labels['estop'], 2, 0, 1, 1)
+            self.labels['button_grid'].attach(Gtk.Label(""), 2, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
         elif self.state == "paused":
             self.labels['button_grid'].attach(self.labels['resume'], 0, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['cancel'], 1, 0, 1, 1)
-            self.labels['button_grid'].attach(self.labels['estop'], 2, 0, 1, 1)
+            self.labels['button_grid'].attach(Gtk.Label(""), 2, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
         elif self.state == "error" or self.state == "complete":
             self.labels['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
