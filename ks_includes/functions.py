@@ -43,7 +43,7 @@ class KlipperScreenLoggingHandler(logging.handlers.TimedRotatingFileHandler):
         self.rollover_info[name] = item
 
     def doRollover(self):
-        super(MoonrakerLoggingHandler, self).doRollover()
+        super(KlipperScreenLoggingHandler, self).doRollover()
         lines = [line for line in self.rollover_info.values() if line]
         if self.stream is not None:
             self.stream.write("\n".join(lines) + "\n")
