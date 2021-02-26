@@ -54,7 +54,7 @@ class SplashScreenPanel(ScreenPanel):
         _ = self.lang.gettext
 
         if "firmware_restart" not in self.labels:
-            self.labels['printer_select'] = self._gtk.ButtonImage("move-step",_("Change Printer"))
+            self.labels['printer_select'] = self._gtk.ButtonImage("shuffle",_("Change Printer"))
             self.labels['printer_select'].connect("clicked", self._screen.show_printer_select)
             self.labels['menu'] = self._gtk.ButtonImage("control",_("Menu"),"color4")
             self.labels['menu'].connect("clicked", self._screen._go_to_submenu, "")
