@@ -1,4 +1,4 @@
-xgettext --keyword=_ --language=Python --add-comments --sort-output \
+xgettext --keyword=_ --language=Python --no-location --sort-output \
     -o ks_includes/locales/KlipperScreen.pot \
     *.py \
     ks_includes/*.py \
