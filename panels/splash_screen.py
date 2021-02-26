@@ -13,6 +13,12 @@ def create_panel(*args):
 class SplashScreenPanel(ScreenPanel):
     box = None
 
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
+
+        self.layout = Gtk.Layout()
+        self.layout.set_size(self._screen.width, self._screen.height)
+
     def initialize(self, panel_name):
         _ = self.lang.gettext
 
@@ -39,8 +45,9 @@ class SplashScreenPanel(ScreenPanel):
 
         box = Gtk.VBox()
         box.add(main)
+        box.set_size_request(self._screen.width, self._screen.height)
 
-        self.layout = box
+        self.layout.put(box, 0, 0)
 
     def update_text(self, text):
         self.labels['text'].set_text(text)
