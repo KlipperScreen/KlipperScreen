@@ -146,7 +146,6 @@ class WifiManager(Thread):
             self.networks_in_supplicant.append(network)
 
     def scan(self, interface='wlan0'):
-        logging.debug("Scanning %s" % interface)
         p = subprocess.Popen(["sudo","iwlist",interface,"scan"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         aps = self.parse(p.stdout.read().decode('utf-8'))
         cur_info = self.get_current_wifi()
