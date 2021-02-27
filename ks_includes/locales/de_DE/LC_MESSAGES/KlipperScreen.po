@@ -1,20 +1,21 @@
+# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-# Jakob Kais <schpuntik@freenet.de>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-26 15:56+0000\n"
-"PO-Revision-Date: 2021-02-12 02:02+0100\n"
-"Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
-"Language-Team: Russian <kde-i18n-de@kde.org>\n"
+"PO-Revision-Date: 2021-02-27 00:51+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "?"
@@ -30,7 +31,7 @@ msgid "Actions"
 msgstr "Aktionen"
 
 msgid "Add bed mesh profile"
-msgstr "Druckbett Mesh Profil hinzufügen"
+msgstr "Mesh-Level Profil hinzufügen"
 
 msgid "Are you sure you want to print"
 msgstr "Möchten Sie wirklich drucken"
@@ -51,7 +52,7 @@ msgid "Bed Mesh"
 msgstr "Druckbett Mesh-Level"
 
 msgid "Calibrate"
-msgstr "Kalibrieren"
+msgstr "Höheneinstellung"
 
 msgid "Cancel"
 msgstr "Abbruch"
@@ -62,12 +63,11 @@ msgstr "Änderung abbrechen"
 msgid "Cancel Print"
 msgstr "Druck abbrechen"
 
-#, fuzzy
 msgid "Cancelled"
-msgstr "Abbruch"
+msgstr "Abgebrochen"
 
 msgid "Channel"
-msgstr ""
+msgstr "Kanal"
 
 msgid ""
 "Check /tmp/KlipperScreen.log for more information.\n"
@@ -80,17 +80,17 @@ msgid "Close"
 msgstr "Schließen"
 
 msgid "Complete"
-msgstr ""
+msgstr "Fertiggestellt"
 
 msgid "Configuration"
 msgstr "Einstellungen"
 
 msgid "Connected"
-msgstr ""
+msgstr "Verbunden"
 
 #, python-format
 msgid "Connecting to %s"
-msgstr ""
+msgstr "Verbinden zu %s"
 
 msgid "Continue"
 msgstr "Fortsetzen"
@@ -117,7 +117,7 @@ msgid "Disable XY"
 msgstr "Achse XY deaktivieren"
 
 msgid "Disconnect"
-msgstr ""
+msgstr "Nicht verbunden"
 
 msgid "Displayed Macros"
 msgstr "Aktive Macros"
@@ -135,7 +135,7 @@ msgid "Emergency Stop"
 msgstr "NOT-STOP"
 
 msgid "Error"
-msgstr ""
+msgstr "Fehler"
 
 msgid "Estimated Time Method"
 msgstr "Druckzeit"
@@ -165,15 +165,13 @@ msgid "Filament Used"
 msgstr "Filamentverbrauch"
 
 msgid "File Estimation (default)"
-msgstr "Dateischätzung (Standard)"
+msgstr "Dateischätzung"
 
 msgid "Fine Tuning"
 msgstr "Feintuning"
 
 msgid "Firmware Restart"
-msgstr ""
-"Firmware\n"
-" neustarten"
+msgstr "Firmware neustarten"
 
 msgid "Go Back"
 msgstr "Zurück"
@@ -207,13 +205,13 @@ msgid "Homing"
 msgstr "Grundposition"
 
 msgid "Hostname"
-msgstr ""
+msgstr "Hostname"
 
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 msgid "IPv6"
-msgstr ""
+msgstr "IPv6"
 
 msgid "Increase"
 msgstr "Erhöhen"
@@ -225,7 +223,7 @@ msgid "Initializing printer..."
 msgstr "Drucker wird initialisiert..."
 
 msgid "Interface"
-msgstr ""
+msgstr "Interface"
 
 msgid "Invert X"
 msgstr "Achse X invertieren"
@@ -237,9 +235,7 @@ msgid "Invert Z"
 msgstr "Achse Z invertieren"
 
 msgid "Klipper Restart"
-msgstr ""
-"Klipper\n"
-" neustarten"
+msgstr "Klipper neustarten"
 
 msgid "Klipper Version"
 msgstr "Klipper Version"
@@ -280,7 +276,7 @@ msgid "Left:"
 msgstr "Restzeit:"
 
 msgid "Load"
-msgstr "Belastung"
+msgstr "Last"
 
 msgid "Load Average"
 msgstr "Durchschnittslast"
@@ -301,7 +297,7 @@ msgid "Menu"
 msgstr "Menü"
 
 msgid "Modified"
-msgstr ""
+msgstr "Modifiziert"
 
 msgid "Move"
 msgstr "Bewegen"
@@ -319,7 +315,7 @@ msgid "Number Pad"
 msgstr "Nummernblock"
 
 msgid "Off"
-msgstr "Ausschalten"
+msgstr "Aus"
 
 msgid "Pause"
 msgstr "Pause"
@@ -349,7 +345,7 @@ msgid "Printing"
 msgstr "Drucken"
 
 msgid "Profile Name:"
-msgstr "Profil Name:"
+msgstr "Profilname:"
 
 msgid "Quad Gantry Level"
 msgstr "Quad Gantry Level"
@@ -376,10 +372,10 @@ msgid "Save configuration."
 msgstr "Speichere Einstellungen."
 
 msgid "Screen Power Off Time"
-msgstr ""
+msgstr "Bildschirm abschalten in"
 
 msgid "Screen will show in less than one second"
-msgstr ""
+msgstr "Der Bildschirm wird in weniger als einer Sekunde angezeigt"
 
 msgid "Screws Adjust"
 msgstr "Schrauben Einstellen"
@@ -400,7 +396,7 @@ msgid "Slow"
 msgstr "Langsam"
 
 msgid "Sort by: "
-msgstr "Sortieren nach: "
+msgstr "Sortierung:"
 
 msgid "Speed +"
 msgstr "Geschwindigkeit +"
@@ -452,8 +448,8 @@ msgstr "Höhe Kalibrieren"
 msgid "Z Offset"
 msgstr "Z Offset"
 
-msgid "Z Tilt Adjust"
-msgstr ""
+msgid "Z Tilt"
+msgstr "Z-Achse ausrichten"
 
 msgid "Z+"
 msgstr "Z+"
@@ -462,19 +458,10 @@ msgid "Z-"
 msgstr "Z-"
 
 msgid "dBm"
-msgstr ""
+msgstr "dBm"
 
 msgid "minutes"
 msgstr "Minuten"
 
 msgid "mm"
 msgstr "mm"
-
-#~ msgid "Network Info"
-#~ msgstr "Netzwerkinfo"
-
-#~ msgid "Screen Blanking Time"
-#~ msgstr "Bildschirm  Ausblenden in"
-
-#~ msgid "Klipper"
-#~ msgstr "Klipper"
