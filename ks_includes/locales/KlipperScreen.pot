@@ -427,7 +427,7 @@ msgstr ""
 msgid "Z Offset"
 msgstr ""
 
-msgid "Z Tilt Adjust"
+msgid "Z Tilt"
 msgstr ""
 
 msgid "Z+"
