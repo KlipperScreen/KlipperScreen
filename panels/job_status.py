@@ -322,7 +322,7 @@ class JobStatusPanel(ScreenPanel):
             self.labels[arg].set_sensitive(False)
 
     def _callback_metadata(self, newfiles, deletedfiles, modifiedfiles):
-        if self.file_metadata == None and self.filename in modifiedfiles:
+        if bool(self.file_metadata) == False and self.filename in modifiedfiles:
             self.update_file_metadata()
             self._files.remove_file_callback(self._callback_metadata)
 
@@ -412,20 +412,20 @@ class JobStatusPanel(ScreenPanel):
                     file = "Unknown"
                     self.update_text("file", "Unknown file")
 
-            if self.file_metadata != None:
-                if "gcode_start_byte" in self.file_metadata:
-                    progress = (max(vsd['file_position'] - self.file_metadata['gcode_start_byte'],0) /
-                        (self.file_metadata['gcode_end_byte'] - self.file_metadata['gcode_start_byte']))
-                else:
-                    progress = 0 if self._printer.get_stat('virtual_sdcard','progress') == 0 else (ps['print_duration']/
-                        self._printer.get_stat('virtual_sdcard','progress') - ps['print_duration'])
-                progress = round(progress,2)
 
-                if progress != self.progress:
-                    self.progress = progress
-                    self.labels['darea'].queue_draw()
+            if "gcode_start_byte" in self.file_metadata:
+                progress = (max(vsd['file_position'] - self.file_metadata['gcode_start_byte'],0) /
+                    (self.file_metadata['gcode_end_byte'] - self.file_metadata['gcode_start_byte']))
+            else:
+                progress = 0 if self._printer.get_stat('virtual_sdcard','progress') == 0 else (ps['print_duration']/
+                    self._printer.get_stat('virtual_sdcard','progress') - ps['print_duration'])
+            progress = round(progress,2)
 
-                self.update_text("duration", str(self._gtk.formatTimeString(ps['print_duration'])))
+            if progress != self.progress:
+                self.progress = progress
+                self.labels['darea'].queue_draw()
+
+            self.update_text("duration", str(self._gtk.formatTimeString(ps['print_duration'])))
 
             timeleft_type = self._config.get_config()['main'].get('print_estimate_method','file')
 
@@ -518,7 +518,7 @@ class JobStatusPanel(ScreenPanel):
                 logging.debug("Thumbnails: %s" % list(tmp))
             self.show_file_thumbnail()
         else:
-            self.file_metadata = None
+            self.file_metadata = {}
             logging.debug("Cannot find file metadata. Listening for updated metadata")
             self._screen.files.add_file_callback(self._callback_metadata)
 
