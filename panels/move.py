@@ -129,5 +129,6 @@ class MovePanel(ScreenPanel):
 
         print("%s\n%s %s%s" % (KlippyGcodes.MOVE_RELATIVE, KlippyGcodes.MOVE, axis, dist))
         self._screen._ws.klippy.gcode_script(
-            "%s\n%s %s%s" % (KlippyGcodes.MOVE_RELATIVE, KlippyGcodes.MOVE, axis, dist)
+            "%s\n%s %s%s%s" % (KlippyGcodes.MOVE_RELATIVE, KlippyGcodes.MOVE, axis, dist,
+                "\nG90" if self._printer.get_stat("gcode_move", "absolute_coordinates") == True else "")
         )
