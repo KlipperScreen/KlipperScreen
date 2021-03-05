@@ -85,7 +85,7 @@ class SplashScreenPanel(ScreenPanel):
         self.labels['actions'].add(self.labels['firmware_restart'])
         self.labels['actions'].add(self.labels['menu'])
         self.labels['actions'].add(self.labels['printer_select'])
-        self.labels['actions'].show()
+        self.labels['actions'].show_all()
 
     def firmware_restart(self, widget):
         self._screen._ws.klippy.restart_firmware()
