@@ -152,6 +152,8 @@ class Printer:
         return section in list(self.config)
 
     def get_config_section_list(self, search=""):
+        if not hasattr(self, "config"):
+            return []
         return [i for i in list(self.config) if i.startswith(search)]
 
     def get_config_section(self, section):
