@@ -75,6 +75,7 @@ class KlippyWebsocket(threading.Thread):
 
     def close(self):
         self.closing = True
+        self.ws.close()
 
     def is_connected(self):
         return self.connected
