@@ -75,6 +75,7 @@ class KlipperScreen(Gtk.Window):
     _ws = None
 
     def __init__(self, args, version):
+        self.dpms_timeout = None
         self.version = version
 
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
@@ -108,13 +109,11 @@ class KlipperScreen(Gtk.Window):
         self.init_style()
 
         self.printer_initializing(_("Initializing"))
-        # Move mouse to 0,0
-        os.system("/usr/bin/xdotool mousemove 0 0")
 
-        # Disable DPMS
-        os.system("/usr/bin/xset -display :0 -dpms")
         self.set_screenblanking_timeout(self._config.get_main_config_option('screen_blanking'))
 
+        # Move mouse to 0,0
+        os.system("/usr/bin/xdotool mousemove 0 0")
         # Change cursor to blank
         if self._config.get_main_config().getboolean("show_cursor", fallback=False):
             self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.ARROW))
@@ -457,19 +456,39 @@ class KlipperScreen(Gtk.Window):
                 self.subscriptions.pop(i)
                 return
 
+    def check_dpms_state(self):
+        state = functions.get_DPMS_state()
+        if state == functions.DPMS_State.Off and "screensaver" not in self._cur_panels:
+            logging.info("### Creating screensaver panel")
+            self.show_panel("screensaver", "screensaver", "Screen Saver", 1, False)
+        elif state == functions.DPMS_State.On and "screensaver" in self._cur_panels:
+            logging.info("### Remove screensaver panel")
+            self._menu_go_back()
+        return True
+
     def set_screenblanking_timeout(self, time):
-        logging.debug("Changing screenblanking to: %s" % time)
+        # Disable screen blanking
+        os.system("xset -display :0 s off")
+        os.system("xset -display :0 s noblank")
+
+        if functions.dpms_loaded == False:
+            logging.info("DPMS functions not loaded. Unable to protect on button click when DPMS is enabled.")
+
+
+        logging.debug("Changing power save to: %s" % time)
         if time == "off":
-            os.system("/usr/bin/xset -display :0 s off")
-            os.system("/usr/bin/xset -display :0 s noblank")
+            if self.dpms_timeout != None:
+                GLib.source_remove(self.dpms_timeout)
+                self.dpms_timeout = None
+            os.system("xset -display :0 -dpms")
             return
 
         time = int(time)
         if time < 0:
             return
-
-        os.system("/usr/bin/xset -display :0 s on")
-        os.system("/usr/bin/xset -display :0 s %s" % time)
+        os.system("xset -display :0 dpms 0 %s 0" % time)
+        if self.dpms_timeout == None and functions.dpms_loaded == True:
+            self.dpms_timeout = GLib.timeout_add(1000, self.check_dpms_state)
 
     def show_printer_select(self, widget=None):
         logging.debug("Saving panel: %s" % self._cur_panels[0])

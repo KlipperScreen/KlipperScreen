@@ -1,4 +1,10 @@
+import gi
 import logging
+
+gi.require_version("Gtk", "3.0")
+from gi.repository import  Gdk, GLib
+from ks_includes.KlippyGcodes import KlippyGcodes
+
 
 class Printer:
     data = {}
@@ -126,8 +132,11 @@ class Printer:
         logging.debug("Changing state from '%s' to '%s'" % (self.state, state))
         self.state = state
         if self.state_callbacks[state] != None:
-            logging.debug("Running callback for state: %s" % state)
-            self.state_callbacks[state]()
+            logging.debug("Adding callback for state: %s" % state)
+            Gdk.threads_add_idle(
+                GLib.PRIORITY_HIGH_IDLE,
+                self.state_callbacks[state]
+            )
 
     def configure_power_devices(self, data):
         self.power_devices = {}
@@ -180,7 +189,7 @@ class Printer:
             }
         }
 
-        sections = ["bed_mesh","bltouch","probe","quad_gantry_level"]
+        sections = ["bed_mesh","bltouch","probe","quad_gantry_level","z_tilt"]
         for section in sections:
             if self.config_section_exists(section):
                 data["printer"][section] = self.get_config_section(section).copy()

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-11 22:13+0100\n"
+"POT-Creation-Date: 2021-02-26 15:56+0000\n"
 "PO-Revision-Date: 2021-01-06 00:35+0200\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
@@ -18,70 +18,61 @@ msgstr ""
 "X-Generator: Poedit 2.4.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: panels/print.py:247
 msgid "?"
 msgstr "?"
 
-#: panels/zcalibrate.py:71
 msgid "Abort"
 msgstr "中止"
 
-#: panels/zcalibrate.py:68
 msgid "Accept"
 msgstr "接受"
 
-#: ks_includes/KlipperScreen.conf:26
 msgid "Actions"
 msgstr "动作"
 
-#: panels/bed_mesh.py:33
 msgid "Add bed mesh profile"
 msgstr ""
 
-#: panels/print.py:247
 msgid "Are you sure you want to print"
 msgstr "您确定要打印吗"
 
-#: panels/job_status.py:306
 msgid "Are you sure you wish to cancel this print?"
 msgstr "您要取消此打印吗？"
 
-#: panels/system.py:29
 #, fuzzy
 msgid "Are you sure you wish to reboot the system?"
 msgstr "您要取消此打印吗？"
 
-#: panels/system.py:32
 #, fuzzy
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "您要取消此打印吗？"
 
-#: ks_includes/KlipperScreen.conf:114
 msgid "Bed Level"
 msgstr "床位"
 
-#: ks_includes/KlipperScreen.conf:119
 msgid "Bed Mesh"
 msgstr "床网"
 
-#: panels/bed_mesh.py:104
 #, fuzzy
 msgid "Calibrate"
 msgstr "Z校准"
 
-#: screen.py:493 panels/job_status.py:268 panels/print.py:243
 msgid "Cancel"
 msgstr "取消"
 
-#: panels/fan.py:45
 msgid "Cancel Change"
 msgstr "取消变更"
 
-#: panels/job_status.py:301
 msgid "Cancel Print"
 msgstr "取消列印"
 
-#: screen.py:305
+#, fuzzy
+msgid "Cancelled"
+msgstr "取消"
+
+msgid "Channel"
+msgstr ""
+
 msgid ""
 "Check /tmp/KlipperScreen.log for more information.\n"
 "Please submit an issue on GitHub for help."
@@ -89,181 +80,163 @@ msgstr ""
 "检查/tmp/KlipperScreen.log以获取更多信息。\n"
 "请在GitHub上提交问题以寻求帮助。"
 
-#: panels/bed_mesh.py:290 panels/temperature.py:150
 msgid "Close"
 msgstr "关"
 
-#: ks_includes/KlipperScreen.conf:30
+msgid "Complete"
+msgstr ""
+
 msgid "Configuration"
 msgstr "组态"
 
-#: screen.py:492
+msgid "Connected"
+msgstr ""
+
+#, python-format
+msgid "Connecting to %s"
+msgstr ""
+
 msgid "Continue"
 msgstr "继续"
 
-#: panels/job_status.py:270
 msgid "Control"
 msgstr "控制"
 
-#: panels/preheat.py:54
 msgid "Cooldown"
 msgstr "冷却"
 
-#: panels/print.py:24
 msgid "Date"
 msgstr ""
 
-#: panels/temperature.py:53
 msgid "Decrease"
 msgstr "减少"
 
-#: panels/bed_mesh.py:122
 msgid "Delete"
 msgstr ""
 
-#: ks_includes/KlipperScreen.conf:108
 msgid "Disable Motors"
 msgstr "禁用马达"
 
-#: panels/bed_level.py:107
 msgid "Disable XY"
 msgstr "禁用XY"
 
-#: panels/settings.py:28
+msgid "Disconnect"
+msgstr ""
+
 msgid "Displayed Macros"
 msgstr ""
 
-#: panels/zcalibrate.py:64
 msgid "Distance (mm)"
 msgstr "距离（毫米）"
 
-#: ks_includes/config.py:42
 msgid "Duration Only"
 msgstr ""
 
-#: panels/job_status.py:136
 msgid "Elapsed:"
 msgstr "过去"
 
-#: panels/job_status.py:272
 msgid "Emergency Stop"
 msgstr "紧急停止"
 
-#: ks_includes/config.py:39
+msgid "Error"
+msgstr ""
+
 msgid "Estimated Time Method"
 msgstr ""
 
-#: panels/extrude.py:46 ks_includes/KlipperScreen.conf:74
-#: ks_includes/KlipperScreen.conf:174
 msgid "Extrude"
 msgstr "拉伸"
 
-#: panels/fine_tune.py:57
 msgid "Extrusion +"
 msgstr "挤压+"
 
-#: panels/fine_tune.py:61
 msgid "Extrusion -"
 msgstr "挤压-"
 
-#: ks_includes/KlipperScreen.conf:79 ks_includes/KlipperScreen.conf:169
 msgid "Fan"
 msgstr "风扇"
 
-#: panels/fan.py:35
 msgid "Fan Off"
 msgstr "散开"
 
-#: panels/fan.py:38
 msgid "Fan On"
 msgstr "扇上"
 
-#: panels/extrude.py:31
 msgid "Fast"
 msgstr "快速"
 
-#: ks_includes/config.py:43
 msgid "Filament Used"
 msgstr ""
 
-#: ks_includes/config.py:41
 msgid "File Estimation (default)"
 msgstr ""
 
-#: ks_includes/KlipperScreen.conf:164
 msgid "Fine Tuning"
 msgstr "微调"
 
-#: panels/splash_screen.py:64 panels/system.py:24
 msgid "Firmware Restart"
 msgstr "固件重启"
 
-#: screen.py:300 panels/job_status.py:302
 msgid "Go Back"
 msgstr "回去"
 
-#: panels/bed_level.py:104 panels/move.py:40 ks_includes/KlipperScreen.conf:39
 msgid "Home All"
 msgstr "全部回家"
 
-#: ks_includes/KlipperScreen.conf:45
 msgid "Home X"
 msgstr "X家庭"
 
-#: ks_includes/KlipperScreen.conf:63
 msgid "Home XY"
 msgstr "XY首页"
 
-#: ks_includes/KlipperScreen.conf:51
 msgid "Home Y"
 msgstr "Y家"
 
-#: ks_includes/KlipperScreen.conf:57
 msgid "Home Z"
 msgstr "Z家"
 
-#: panels/zcalibrate.py:29 ks_includes/KlipperScreen.conf:17
 msgid "Homing"
 msgstr "归巢"
 
-#: panels/temperature.py:51
+msgid "Hostname"
+msgstr ""
+
+msgid "IPv4"
+msgstr ""
+
+msgid "IPv6"
+msgstr ""
+
 msgid "Increase"
 msgstr "增加"
 
-#. self._load_panels()
-#: screen.py:149
 msgid "Initializing"
 msgstr "Initializing"
 
-#: panels/splash_screen.py:23
 msgid "Initializing printer..."
 msgstr "初始化打印机..."
 
-#: ks_includes/config.py:36
+msgid "Interface"
+msgstr ""
+
 msgid "Invert X"
 msgstr ""
 
-#: ks_includes/config.py:37
 msgid "Invert Y"
 msgstr ""
 
-#: ks_includes/config.py:38
 msgid "Invert Z"
 msgstr ""
 
-#: panels/system.py:22
 msgid "Klipper Restart"
 msgstr "快闪重启"
 
-#: panels/system.py:42
 msgid "Klipper Version"
 msgstr "快艇版本"
 
-#: screen.py:418
 msgid "Klipper has disconnected"
 msgstr "Klipper已断开连接"
 
-#: screen.py:429
 msgid ""
 "Klipper has encountered an error with the micro-controller.\n"
 "Please recompile and flash."
@@ -271,11 +244,9 @@ msgstr ""
 "Klipper的微控制器出错。\n"
 "请重新编译并刷新。"
 
-#: screen.py:433
 msgid "Klipper has encountered an error."
 msgstr "Klipper遇到错误。"
 
-#: screen.py:425
 msgid ""
 "Klipper has encountered an error.\n"
 "Issue a FIRMWARE_RESTART to attempt fixing the issue."
@@ -283,270 +254,214 @@ msgstr ""
 "Klipper遇到错误。\n"
 "发出FIRMWARE_RESTART尝试解决此问题。"
 
-#: screen.py:453
 msgid "Klipper has shutdown"
 msgstr "Klipper已关闭"
 
-#: screen.py:449
 msgid "Klipper is attempting to start"
 msgstr "Klipper正在尝试启动"
 
-#: ks_includes/KlipperScreen.conf:148
 msgid "Klipper will reboot"
 msgstr "Klipper将重新启动"
 
-#: panels/system.py:46
 msgid "KlipperScreen Version"
 msgstr "KlipperScreen版本"
 
-#: panels/job_status.py:124
 msgid "Left:"
 msgstr "剩下的时间"
 
-#: panels/bed_mesh.py:98
 msgid "Load"
 msgstr ""
 
-#: panels/system.py:66
 msgid "Load Average"
 msgstr "平均负载"
 
-#: panels/zcalibrate.py:39
 msgid "Lower Nozzle"
 msgstr "下喷嘴"
 
-#: ks_includes/KlipperScreen.conf:96
 msgid "Macros"
 msgstr "巨集"
 
-#: panels/job_status.py:274 ks_includes/KlipperScreen.conf:14
 msgid "Main Menu"
 msgstr "主菜单"
 
-#: panels/extrude.py:31
 msgid "Medium"
 msgstr "中"
 
-#: panels/splash_screen.py:59 ks_includes/KlipperScreen.conf:202
 #, fuzzy
 msgid "Menu"
 msgstr "主菜单"
 
-#: ks_includes/KlipperScreen.conf:69
+msgid "Modified"
+msgstr ""
+
 msgid "Move"
 msgstr "移动"
 
-#: panels/move.py:91
 msgid "Move Distance (mm)"
 msgstr "移动距离（mm）"
 
-#: panels/print.py:23
 msgid "Name"
 msgstr ""
 
-#: ks_includes/KlipperScreen.conf:131 ks_includes/KlipperScreen.conf:186
-#: ks_includes/KlipperScreen.conf:211
 msgid "Network"
 msgstr "网络"
 
-#: panels/network.py:31
-msgid "Network Info"
-msgstr "网络信息"
-
-#: panels/temperature.py:55
 msgid "Number Pad"
 msgstr "数字键盘"
 
-#: ks_includes/config.py:48
 #, fuzzy
 msgid "Off"
 msgstr "散开"
 
-#: panels/job_status.py:276
 msgid "Pause"
 msgstr "暂停"
 
-#: panels/job_status.py:470
 msgid "Paused"
 msgstr "已暂停"
 
-#: ks_includes/KlipperScreen.conf:102 ks_includes/KlipperScreen.conf:180
-#: ks_includes/KlipperScreen.conf:205
 msgid "Power"
 msgstr "功率"
 
-#: panels/splash_screen.py:61
 msgid "Power On Printer"
 msgstr "开启打印机电源"
 
-#: ks_includes/KlipperScreen.conf:21
 msgid "Preheat"
 msgstr "预热"
 
-#: panels/print.py:242 ks_includes/KlipperScreen.conf:34
 msgid "Print"
 msgstr "打印"
 
-#: ks_includes/KlipperScreen.conf:156
 msgid "Print Control"
 msgstr "打印控制"
 
-#: panels/print.py:171
 msgid "Print Time"
 msgstr "打印时间"
 
-#: panels/job_status.py:232
 msgid "Printing"
 msgstr "印刷"
 
-#: panels/bed_mesh.py:264
 msgid "Profile Name:"
 msgstr ""
 
-#: ks_includes/KlipperScreen.conf:89
 msgid "Quad Gantry Level"
 msgstr ""
 
-#: panels/zcalibrate.py:37
 msgid "Raise Nozzle"
 msgstr "升高喷嘴"
 
-#: panels/job_status.py:278 panels/splash_screen.py:62
 msgid "Restart"
 msgstr "重新开始"
 
-#: panels/job_status.py:280
 msgid "Resume"
 msgstr "恢复"
 
-#: panels/extrude.py:48
 msgid "Retract"
 msgstr "缩回"
 
-#: panels/bed_mesh.py:116 panels/bed_mesh.py:269
 msgid "Save"
 msgstr ""
 
-#: ks_includes/KlipperScreen.conf:141
 msgid "Save Config"
 msgstr "保存配置"
 
-#: ks_includes/KlipperScreen.conf:146
 msgid "Save configuration."
 msgstr "保存配置"
 
-#: ks_includes/config.py:46
-msgid "Screen Blanking Time"
+msgid "Screen Power Off Time"
 msgstr ""
 
-#: panels/bed_level.py:114
+msgid "Screen will show in less than one second"
+msgstr ""
+
 msgid "Screws Adjust"
 msgstr "螺丝调整"
 
-#: panels/fan.py:42
 msgid "Set Speed"
 msgstr "设定速度"
 
-#: ks_includes/KlipperScreen.conf:151 ks_includes/KlipperScreen.conf:196
 #, fuzzy
 msgid "Settings"
 msgstr "设置"
 
-#: panels/print.py:169
 msgid "Size"
 msgstr "尺寸"
 
-#: ks_includes/config.py:44
 msgid "Slicer"
 msgstr ""
 
-#. This line for translations only
-#: panels/extrude.py:31
 msgid "Slow"
 msgstr "慢"
 
-#: panels/print.py:39
 msgid "Sort by: "
 msgstr ""
 
-#: panels/fine_tune.py:47
 msgid "Speed +"
 msgstr "速度 +"
 
-#: panels/fine_tune.py:51
 msgid "Speed -"
 msgstr "速度 -"
 
-#: ks_includes/KlipperScreen.conf:136 ks_includes/KlipperScreen.conf:191
-#: ks_includes/KlipperScreen.conf:216
 msgid "System"
 msgstr "系统"
 
-#: panels/system.py:27
 #, fuzzy
 msgid ""
 "System\n"
 "Restart"
 msgstr "重新开始"
 
-#: panels/system.py:30
 msgid ""
 "System\n"
 "Shutdown"
 msgstr ""
 
-#: panels/extrude.py:50 ks_includes/KlipperScreen.conf:84
-#: ks_includes/KlipperScreen.conf:159
 msgid "Temperature"
 msgstr "温度"
 
-#: panels/extrude.py:38
 msgid "Tool"
 msgstr "工具"
 
-#: panels/print.py:167
 msgid "Uploaded"
 msgstr "已上传"
 
-#: panels/move.py:25
 msgid "X+"
 msgstr "X+"
 
-#: panels/move.py:27
 msgid "X-"
 msgstr "X-"
 
-#: panels/move.py:30
 msgid "Y+"
 msgstr "Y ="
 
-#: panels/move.py:32
 msgid "Y-"
 msgstr "Y-"
 
-#: ks_includes/KlipperScreen.conf:125
 msgid "Z Calibrate"
 msgstr "Z校准"
 
-#: panels/zcalibrate.py:28
 msgid "Z Offset"
 msgstr "Z偏移"
 
-#: panels/fine_tune.py:36 panels/move.py:35
+msgid "Z Tilt Adjust"
+msgstr ""
+
 msgid "Z+"
 msgstr "Z+"
 
-#: panels/fine_tune.py:40 panels/move.py:37
 msgid "Z-"
 msgstr "Z-"
 
-#: ks_includes/config.py:60
+msgid "dBm"
+msgstr ""
+
 msgid "minutes"
 msgstr ""
 
-#: panels/fine_tune.py:38
 msgid "mm"
 msgstr "毫米"
+
+#~ msgid "Network Info"
+#~ msgstr "网络信息"
 
 #, fuzzy
 #~ msgid "Klipper"

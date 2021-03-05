@@ -3,8 +3,48 @@ import logging.handlers
 import os
 import subprocess
 import sys
+import traceback
 from queue import SimpleQueue as Queue
 
+import ctypes
+import struct
+
+dpms_loaded = False
+try:
+    ctypes.cdll.LoadLibrary('libXext.so.6')
+    libXext = ctypes.CDLL('libXext.so.6')
+
+    class DPMS_State:
+        Fail = -1
+        On = 0
+        Standby = 1
+        Suspend = 2
+        Off = 3
+
+    def get_DPMS_state(display_name_in_byte_string=b':0'):
+        state = DPMS_State.Fail
+        if not isinstance(display_name_in_byte_string, bytes):
+            raise TypeError
+        display_name = ctypes.c_char_p()
+        display_name.value = display_name_in_byte_string
+        libXext.XOpenDisplay.restype = ctypes.c_void_p
+        display = ctypes.c_void_p(libXext.XOpenDisplay(display_name))
+        dummy1_i_p = ctypes.create_string_buffer(8)
+        dummy2_i_p = ctypes.create_string_buffer(8)
+        if display.value:
+            if libXext.DPMSQueryExtension(display, dummy1_i_p, dummy2_i_p)\
+               and libXext.DPMSCapable(display):
+                onoff_p = ctypes.create_string_buffer(1)
+                state_p = ctypes.create_string_buffer(2)
+                if libXext.DPMSInfo(display, state_p, onoff_p):
+                    onoff = struct.unpack('B', onoff_p.raw)[0]
+                    if onoff:
+                        state = struct.unpack('H', state_p.raw)[0]
+            libXext.XCloseDisplay(display)
+        return state
+    dpms_loaded = True
+except:
+    pass
 
 
 def get_software_version():
@@ -42,7 +82,7 @@ class KlipperScreenLoggingHandler(logging.handlers.TimedRotatingFileHandler):
         self.rollover_info[name] = item
 
     def doRollover(self):
-        super(MoonrakerLoggingHandler, self).doRollover()
+        super(KlipperScreenLoggingHandler, self).doRollover()
         lines = [line for line in self.rollover_info.values() if line]
         if self.stream is not None:
             self.stream.write("\n".join(lines) + "\n")
