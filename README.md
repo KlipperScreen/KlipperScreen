@@ -1,21 +1,9 @@
 # KlipperScreen
-KlipperScreen is an idea based from [OctoScreen](https://github.com/Z-Bolt/OctoScreen/), but instead of needing OctoPrint or to compile go, KlipperScreen is python based and interacts directly with [Moonraker](https://github.com/arksine/moonraker), Klipper's API service.
 
-Current feature list:
- - [x] Homing
- - [x] Preheating
- - [x] Job Status and control
- - [x] Temperature control
- - [x] Extrude control
- - [x] Fan control
- - [x] Disable steppers
- - [x] Configure Z Offset using PROBE_CALIBRATE
- - [x] Print tuning (Z Babystepping, Speed Control, Flow Control)
- - [x] Manual bed leveling assist
- - [x] Using thumbnails from prusa on job status page
- - [x] Scale UI based off of resolution
- - [ ] Better system panel
- - [ ] Wifi selection
+KlipperScreen is touchscreen GUI for Klipper based 3D printers. KlipperScreen interfaces with [Klipper](https://github.com/KevinOConner/klipper) via [Moonraker](https://github.com/arksine/moonraker).
+
+Multiple printers update is here! Please check the configuration information for specifying several printers.
+
 
 [Changelog](docs/changelog.md)
 
@@ -43,3 +31,8 @@ Main Menu
 
 Job Status
 ![Job Status](docs/img/job_status.png)
+
+
+### Inspiration
+KlipperScreen was inspired by [OctoScreen](https://github.com/Z-Bolt/OctoScreen/) and the need for a touchscreen GUI that
+will natively work with [Klipper](https://github.com/KevinOConner/klipper) and [Moonraker](https://github.com/arksine/moonraker).

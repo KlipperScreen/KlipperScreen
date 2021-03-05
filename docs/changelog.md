@@ -1,5 +1,8 @@
 ## Changelog
 
+#### 2021 03 05
+* Multiple printers are now available in the main branch.
+
 #### 2021 02 22
 * Add configurable z_babystep intervals
 * Add QUAD_GANTRY_LEVEL and Z_TILT_ADJUST to Homing menu

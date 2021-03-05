@@ -81,28 +81,27 @@ class MacroPanel(ScreenPanel):
 
     def load_gcode_macros(self):
         macros = self._screen.printer.get_gcode_macros()
+        section_name = "displayed_macros %s" % self._screen.connected_printer
+        logging.info("Macro section name [%s]"  % section_name)
+
         for x in macros:
             macro = x[12:].strip()
 
             if macro in self.loaded_macros:
                 continue
 
-            logging.debug("Evaluating '%s' value '%s'" % (macro.strip().lower(),
-                self._config.get_config().getboolean("displayed_macros", macro.lower(), fallback=True)))
-
-            if ("displayed_macros" not in self._config.get_config().sections() or
-                    self._config.get_config().getboolean("displayed_macros", macro.lower(), fallback=True)):
+            if (section_name not in self._config.get_config().sections() or
+                    self._config.get_config().getboolean(section_name, macro.lower(), fallback=True)):
                 self.add_gcode_macro(macro)
 
     def run_gcode_macro(self, widget, macro):
         self._screen._ws.klippy.gcode_script(macro)
 
     def unload_gcode_macros(self):
+        section_name = "displayed_macros %s" % self._screen.connected_printer
         for macro in self.loaded_macros:
-            logging.debug("Evaluating '%s' value '%s'" % (macro.strip().lower(),
-                self._config.get_config().getboolean("displayed_macros", macro.lower(), fallback=True)))
-            if ("displayed_macros" in self._config.get_config().sections() and
-                    not self._config.get_config().getboolean("displayed_macros", macro.lower(), fallback=True)):
+            if (section_name in self._config.get_config().sections() and
+                    not self._config.get_config().getboolean(section_name, macro.lower(), fallback=True)):
                 macros = sorted(self.macros)
                 pos = macros.index(macro)
                 self.labels['macros'].remove_row(pos)

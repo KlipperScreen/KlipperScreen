@@ -7,6 +7,9 @@ from ks_includes.KlippyGcodes import KlippyGcodes
 
 
 class Printer:
+    data = {}
+    devices = {}
+    power_devices = {}
     state_callbacks = {
         "disconnected": None,
         "error": None,
@@ -16,6 +19,7 @@ class Printer:
         "startup": None,
         "shutdown": None
     }
+    tools = []
 
     def __init__(self, printer_info, data):
         self.state = "disconnected"
@@ -148,6 +152,8 @@ class Printer:
         return section in list(self.config)
 
     def get_config_section_list(self, search=""):
+        if not hasattr(self, "config"):
+            return []
         return [i for i in list(self.config) if i.startswith(search)]
 
     def get_config_section(self, section):

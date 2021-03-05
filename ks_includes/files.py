@@ -14,11 +14,6 @@ from gi.repository import Gtk, Gdk, GLib
 RESCAN_INTERVAL = 4
 
 class KlippyFiles(Thread):
-    callbacks = []
-    filelist = []
-    files = {}
-    metadata_timeout = {}
-    timeout = None
     thumbnail_dir = "/tmp/.KS-thumbnails"
 
     def __init__(self, screen, *args, **kwargs):
@@ -26,6 +21,12 @@ class KlippyFiles(Thread):
         self.loop = None
         self._poll_task = None
         self._screen = screen
+        self.callbacks = []
+        self.files = {}
+        self.filelist = []
+        self.metadata_timeout = {}
+
+        logging.info("")
 
         if not os.path.exists(self.thumbnail_dir):
             os.makedirs(self.thumbnail_dir)
@@ -43,9 +44,11 @@ class KlippyFiles(Thread):
             with suppress(asyncio.CancelledError):
                 loop.run_until_complete(self._poll_task)
         finally:
+            logging.info("Closing loop")
             loop.close()
 
     def stop(self):
+        logging.info("Trying to stop loop2")
         self.loop.call_soon_threadsafe(self.loop.stop)
 
     async def _poll(self):
@@ -117,10 +120,6 @@ class KlippyFiles(Thread):
         if callback in self.callbacks:
             self.callbacks.pop(self.callbacks.index(callback))
 
-    def add_timeout(self):
-        if self.timeout == None:
-            self.timeout = GLib.timeout_add(4000, self.ret_files)
-
     def file_exists(self, filename):
         return True if filename in self.filelist else False
 
@@ -141,18 +140,13 @@ class KlippyFiles(Thread):
             return False
         return "thumbnails" in self.files[filename] and len(self.files[filename]) > 0
 
-    def remove_timeout(self):
-        if self.timeout != None:
-            self.timeout = None
-
     def request_metadata(self, filename):
         if filename not in self.filelist:
             return False
         self._screen._ws.klippy.get_file_metadata(filename, self._callback)
 
     async def ret_files(self, retval=True):
-        if not self._screen._ws.klippy.get_file_list(self._callback):
-            self.timeout = None
+        self._screen._ws.klippy.get_file_list(self._callback)
 
     def ret_file_data (self, filename):
         print("Getting file info for %s" % (filename))
