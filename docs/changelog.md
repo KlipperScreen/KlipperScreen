@@ -1,5 +1,8 @@
 ## Changelog
 
+### 2021 03 06
+* Added ability to include configuration files
+
 #### 2021 03 05
 * Multiple printers are now available in the main branch.
 

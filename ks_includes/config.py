@@ -74,14 +74,22 @@ class KlipperScreenConfig:
                 user_def, saved_def = self.separate_saved_config(self.config_path)
                 self.defined_config = configparser.ConfigParser()
                 self.defined_config.read_string(user_def)
+
+                includes = [i[8:] for i in self.defined_config.sections() if i.startswith("include ")]
+                for include in includes:
+                    self._include_config("/".join(self.config_path.split("/")[:-1]),include)
+
                 self.log_config(self.defined_config)
                 self.config.read_string(user_def)
                 if saved_def != None:
                     self.config.read_string(saved_def)
+                    logging.info("====== Saved Def ======\n%s\n=======================" % saved_def)
         except KeyError:
             raise ConfigError(f"Error reading config: {self.config_path}")
+        except:
+            logging.exception("Unknown error with config")
 
-        printers = [i for i in self.config.sections() if i.startswith("printer ")]
+        printers = sorted([i for i in self.config.sections() if i.startswith("printer ")])
         self.printers = []
         for printer in printers:
             self.printers.append({
@@ -116,6 +124,37 @@ class KlipperScreenConfig:
             if name not in list(self.config[vals['section']]):
                 self.config.set(vals['section'], name, vals['value'])
         #self.build_main_menu(self.config)
+
+    def _include_config(self, dir, path):
+        full_path = path if path[0] == "/" else "%s/%s" % (dir, path)
+        parse_files = []
+
+        if "*" in full_path:
+            parent_dir = "/".join(full_path.split("/")[:-1])
+            file = full_path.split("/")[-1]
+            if not os.path.exists(parent_dir):
+                logging.info("Config Error: Directory %s does not exist" % parent_dir)
+                return
+            files = os.listdir(parent_dir)
+            regex = "^%s$" % file.replace('*','.*')
+            for file in files:
+                if re.match(regex, file):
+                    parse_files.append(os.path.join(parent_dir, file))
+        else:
+            if not os.path.exists(os.path.join(full_path)):
+                logging.info("Config Error: %s does not exist" % full_path)
+                return
+            parse_files.append(full_path)
+
+        logging.info("Parsing files: %s" % parse_files)
+        for file in parse_files:
+            config = configparser.ConfigParser()
+            config.read(file)
+            includes = [i[8:] for i in config.sections() if i.startswith("include ")]
+            for include in includes:
+                self._include_config("/".join(full_path.split("/")[:-1]), include)
+            self.config.read(file)
+            self.defined_config.read(file)
 
     def separate_saved_config(self, config_path):
         user_def = []

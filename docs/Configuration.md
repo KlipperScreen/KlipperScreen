@@ -9,6 +9,13 @@ If one of those files are found, it will be used over the default configuration.
 merged with the custom configuration, so if you do not define any menus the default menus will be used.The default
 config is included here: [ks_includes/KlipperScreen.conf](../ks_includes/KlipperScreen.conf)
 
+## Include files
+```
+[include conf.d/*.conf]
+# Include another configuration file. Wildcards (*) will expand to match anything.
+```
+
+
 ## Main Options
 ```
 [main]
