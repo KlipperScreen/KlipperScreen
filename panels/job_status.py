@@ -254,6 +254,9 @@ class JobStatusPanel(ScreenPanel):
         self.labels['cancel'].connect("clicked", self.cancel)
         self.labels['control'] = self._gtk.ButtonImage("control",_("Control"),"color3")
         self.labels['control'].connect("clicked", self._screen._go_to_submenu, "")
+        self.labels['fine_tune'] = self._gtk.ButtonImage("fine-tune",_("Fine Tuning"),"color4")
+        self.labels['fine_tune'].connect("clicked", self.menu_item_clicked, "fine_tune",{
+            "panel": "fine_tune", "name": _("Fine Tuning")})
         self.labels['menu'] = self._gtk.ButtonImage("complete",_("Main Menu"),"color4")
         self.labels['menu'].connect("clicked", self.close_panel)
         self.labels['pause'] = self._gtk.ButtonImage("pause",_("Pause"),"color1" )
@@ -486,12 +489,12 @@ class JobStatusPanel(ScreenPanel):
         if self.state == "printing":
             self.labels['button_grid'].attach(self.labels['pause'], 0, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['cancel'], 1, 0, 1, 1)
-            self.labels['button_grid'].attach(Gtk.Label(""), 2, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['fine_tune'], 2, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
         elif self.state == "paused":
             self.labels['button_grid'].attach(self.labels['resume'], 0, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['cancel'], 1, 0, 1, 1)
-            self.labels['button_grid'].attach(Gtk.Label(""), 2, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['fine_tune'], 2, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
         elif self.state == "error" or self.state == "complete" or self.state == "cancelled":
             self.labels['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
