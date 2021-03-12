@@ -23,6 +23,9 @@ class SystemPanel(ScreenPanel):
         firmrestart = self._gtk.ButtonImage('restart',"\n".join(_('Firmware Restart').split(' ')),'color2')
         firmrestart.connect("clicked", self.restart_klippy, "firmware")
 
+        ks_restart = self._gtk.ButtonImage('reboot',"\n".join(_('Restart Klipper Screen').split(' ')))
+        ks_restart.connect("clicked", self.restart_ks)
+
         reboot = self._gtk.ButtonImage('reboot',_('System\nRestart'),'color3')
         reboot.connect("clicked", self._screen._confirm_send_action,
             _("Are you sure you wish to reboot the system?"), "machine.reboot")
@@ -53,6 +56,7 @@ class SystemPanel(ScreenPanel):
         grid.attach(info, 0, 0, 5, 2)
         grid.attach(restart, 0, 2, 1, 1)
         grid.attach(firmrestart, 1, 2, 1, 1)
+        grid.attach(ks_restart, 2, 2, 1, 1)
         grid.attach(reboot, 3, 2, 1, 1)
         grid.attach(shutdown, 4, 2, 1, 1)
 
@@ -73,3 +77,6 @@ class SystemPanel(ScreenPanel):
             self._screen._ws.klippy.restart_firmware()
         else:
             self._screen._ws.klippy.restart()
+
+    def restart_ks(self, widget):
+        os.system("sudo systemctl restart KlipperScreen")
