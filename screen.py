@@ -391,7 +391,7 @@ class KlipperScreen(Gtk.Window):
         )
 
     def is_printing(self):
-        return "job_status" in self._cur_panels
+        return self.printer.get_state() == "printing"
 
     def _go_to_submenu(self, widget, name):
         logging.info("#### Go to submenu " + str(name))

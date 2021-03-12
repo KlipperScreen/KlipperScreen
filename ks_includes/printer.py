@@ -99,7 +99,7 @@ class Printer:
                 for i in d:
                     self.set_dev_stat(x, i, d[i])
 
-        if "webhooks" in data or "idle_timeout" in data or "pause_resume" in data or "print_stats" in data:
+        if "webhooks" in data or "idle_timeout" in data or "print_stats" in data:
             self.evaluate_state()
 
     def evaluate_state(self):
@@ -111,10 +111,13 @@ class Printer:
             new_state = "ready"
             if print_state == "paused":
                 new_state = "paused"
-            elif idle_state == "printing" and print_state != "printing": # Not printing a file, toolhead moving
-                new_state = "busy"
             elif idle_state == "printing":
-                new_state = "printing"
+                if print_state == "complete":
+                    new_state = "ready"
+                elif print_state != "printing": # Not printing a file, toolhead moving
+                    new_state = "busy"
+                else:
+                    new_state = "printing"
 
             if new_state != "busy":
                 self.change_state(new_state)

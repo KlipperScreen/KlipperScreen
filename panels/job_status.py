@@ -24,6 +24,8 @@ class JobStatusPanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
         self.timeleft_type = "file"
+        self.timeout = None
+        self.close_timeouts = []
 
         self.create_buttons()
 
@@ -227,6 +229,9 @@ class JobStatusPanel(ScreenPanel):
         self.set_state(ps['state'])
         self.show_buttons_for_state()
 
+        if self.timeout == None:
+            GLib.timeout_add(500, self.state_check)
+
     def add_labels(self):
         for child in self.labels['i1_box'].get_children():
             self.labels['i1_box'].remove(child)
@@ -269,6 +274,12 @@ class JobStatusPanel(ScreenPanel):
     def restart(self, widget):
         if self.filename != "none":
             self._screen._ws.klippy.print_start(self.filename)
+
+            for to in self.close_timeouts:
+                GLib.source_remove(to)
+                self.close_timeouts.remove(to)
+            if self.timeout == None:
+                self.timeout = GLib.timeout_add(500, self.state_check)
 
     def resume(self, widget):
         #self.disable_button("resume","cancel")
@@ -314,8 +325,12 @@ class JobStatusPanel(ScreenPanel):
             self.enable_button(*args)
 
     def close_panel(self, widget=None):
-        if self._screen.is_printing():
-            self._screen.printer_ready()
+        logging.debug("Closing job_status panel")
+        for to in self.close_timeouts:
+            GLib.source_remove(to)
+            self.close_timeouts.remove(to)
+
+        self._screen.printer_ready()
         return False
 
     def enable_button(self, *args):
@@ -332,7 +347,13 @@ class JobStatusPanel(ScreenPanel):
             self._files.remove_file_callback(self._callback_metadata)
 
     def process_update(self, action, data):
-        if action != "notify_status_update":
+        if action == "notify_gcode_response":
+            if "action:cancel" in data:
+                self.set_state("cancelling")
+            elif "action:paused" in data:
+                self.set_state("paused")
+            return
+        elif action != "notify_status_update":
             return
         _ = self.lang.gettext
 
@@ -347,6 +368,8 @@ class JobStatusPanel(ScreenPanel):
                 self._printer.get_dev_stat(x,"target")
             )
 
+        ps = self._printer.get_stat("print_stats")
+        vsd = self._printer.get_stat("virtual_sdcard")
 
         if "toolhead" in data:
             if "extruder" in data["toolhead"]:
@@ -371,92 +394,93 @@ class JobStatusPanel(ScreenPanel):
             if "speed_factor" in data["gcode_move"]:
                 self.speed = int(data["gcode_move"]["speed_factor"]*100)
                 self.labels['speed'].set_text("%3d%%" % self.speed)
+
         if "fan" in data and "speed" in data['fan']:
             self.fan = int(round(data['fan']['speed'],2)*100)
             self.labels['fan'].set_text("%3d%%" % self.fan)
 
-        if "print_stats" in data or "virtual_sdcard" in data:
-            ps = self._printer.get_stat("print_stats")
-            vsd = self._printer.get_stat("virtual_sdcard")
-            if ps['state'] == "printing" and self.state != "printing":
-                self.set_state("printing")
-                self.show_buttons_for_state()
-            elif ps['state'] == "complete" and self.state != "complete":
-                self.progress = 1
-                self.update_progress()
-                self.set_state("complete")
-                self.show_buttons_for_state()
-                timeout = self._config.get_main_config().getint("job_complete_timeout", 30)
-                if timeout != 0:
-                    GLib.timeout_add(timeout * 1000, self.close_panel)
-            elif ps['state'] == "error" and self.state != "error":
-                logging.debug("Error!")
-                self.set_state("error")
-                self.labels['status'].set_text("%s - %s" % (_("Error"), ps['message']))
-                self.show_buttons_for_state()
-                timeout = self._config.get_main_config().getint("job_error_timeout", 0)
-                if timeout != 0:
-                    GLib.timeout_add(timeout * 1000, self.close_panel)
-            elif ps['state'] == "standby":
-                # Print was cancelled
-                self.set_state("cancelled")
-                self.show_buttons_for_state()
-                timeout = self._config.get_main_config().getint("job_cancelled_timeout", 0)
-                if timeout != 0:
-                    GLib.timeout_add(timeout * 1000, self.close_panel)
-            elif ps['state'] == "paused":
-                self.set_state("paused")
-                self.show_buttons_for_state()
+        if "gcode_start_byte" in self.file_metadata:
+            progress = (max(vsd['file_position'] - self.file_metadata['gcode_start_byte'],0) /
+                (self.file_metadata['gcode_end_byte'] - self.file_metadata['gcode_start_byte']))
+        else:
+            progress = 0 if self._printer.get_stat('virtual_sdcard','progress') == 0 else (ps['print_duration']/
+                self._printer.get_stat('virtual_sdcard','progress') - ps['print_duration'])
+        progress = round(progress,2)
 
-            if self.filename != ps['filename']:
-                if ps['filename'] != "":
-                    self.filename = ps['filename']
-                    self.file_metadata = {}
-                    self.update_text("file", self.filename.split("/")[-1])
-                else:
-                    file = "Unknown"
-                    self.update_text("file", "Unknown file")
-
-
-            if "gcode_start_byte" in self.file_metadata:
-                progress = (max(vsd['file_position'] - self.file_metadata['gcode_start_byte'],0) /
-                    (self.file_metadata['gcode_end_byte'] - self.file_metadata['gcode_start_byte']))
-            else:
-                progress = 0 if self._printer.get_stat('virtual_sdcard','progress') == 0 else (ps['print_duration']/
-                    self._printer.get_stat('virtual_sdcard','progress') - ps['print_duration'])
-            progress = round(progress,2)
-
-            if progress != self.progress:
-                self.progress = progress
-                self.labels['darea'].queue_draw()
-
-            self.update_text("duration", str(self._gtk.formatTimeString(ps['print_duration'])))
-
-            timeleft_type = self._config.get_config()['main'].get('print_estimate_method','file')
-
-            if timeleft_type != self.timeleft_type:
-                if self.timeleft_type == "duration":
-                    self.labels['it_box'].add(self.labels['est_time'])
-                elif timeleft_type == "duration":
-                    self.labels['it_box'].remove(self.labels['est_time'])
-                self.timeleft_type = timeleft_type
-
-            if timeleft_type in ['filament','file','slicer']:
-                duration = ps['print_duration']
-                if timeleft_type == "filament":
-                    estimated_filament = (self.file_metadata['filament_total'] if "filament_total" in self.file_metadata
-                            else 1)
-                    total_duration = duration / (max(ps['filament_used'],0.0001) / max(estimated_filament, 0.0001))
-                elif timeleft_type == "file":
-                    total_duration = duration / max(self.progress, 0.0001)
-                elif timeleft_type == "slicer":
-                    total_duration = (self.file_metadata['estimated_time'] if "estimated_time" in self.file_metadata
-                            else duration)
-
-                time_left = max(total_duration - duration, 0)
-                self.update_text("time_left", str(self._gtk.formatTimeString(time_left)))
-
+        if progress != self.progress:
+            self.progress = progress
+            self.labels['darea'].queue_draw()
             self.update_progress()
+
+        self.update_text("duration", str(self._gtk.formatTimeString(ps['print_duration'])))
+
+        timeleft_type = self._config.get_config()['main'].get('print_estimate_method','file')
+        if timeleft_type != self.timeleft_type:
+            if self.timeleft_type == "duration":
+                self.labels['it_box'].add(self.labels['est_time'])
+            elif timeleft_type == "duration":
+                self.labels['it_box'].remove(self.labels['est_time'])
+            self.timeleft_type = timeleft_type
+
+        if timeleft_type in ['filament','file','slicer']:
+            duration = ps['print_duration']
+            if timeleft_type == "filament":
+                estimated_filament = (self.file_metadata['filament_total'] if "filament_total" in self.file_metadata
+                        else 1)
+                total_duration = duration / (max(ps['filament_used'],0.0001) / max(estimated_filament, 0.0001))
+            elif timeleft_type == "file":
+                total_duration = duration / max(self.progress, 0.0001)
+            elif timeleft_type == "slicer":
+                total_duration = (self.file_metadata['estimated_time'] if "estimated_time" in self.file_metadata
+                        else duration)
+            time_left = max(total_duration - duration, 0)
+            self.update_text("time_left", str(self._gtk.formatTimeString(time_left)))
+
+    def state_check(self):
+        ps = self._printer.get_stat("print_stats")
+        if ps['state'] == self.state:
+            return True
+
+        if ps['state'] == "printing" and self.state != "printing" and self.state != "cancelling":
+            self.set_state("printing")
+        elif ps['state'] == "complete" and self.state != "complete":
+            self.progress = 1
+            self.update_progress()
+            self.set_state("complete")
+            timeout = self._config.get_main_config().getint("job_complete_timeout", 30)
+            if timeout != 0:
+                self.close_timeouts.append(GLib.timeout_add(timeout * 1000, self.close_panel))
+            return False
+        elif ps['state'] == "error" and self.state != "error":
+            logging.debug("Error!")
+            self.set_state("error")
+            self.labels['status'].set_text("%s - %s" % (_("Error"), ps['message']))
+            timeout = self._config.get_main_config().getint("job_error_timeout", 0)
+            if timeout != 0:
+                self.close_timeouts.append(GLib.timeout_add(timeout * 1000, self.close_panel))
+            return False
+        elif ps['state'] == "standby":
+            # Print was cancelled
+            self.set_state("cancelled")
+            timeout = self._config.get_main_config().getint("job_cancelled_timeout", 0)
+            if timeout != 0:
+                self.close_timeouts.append(GLib.timeout_add(timeout * 1000, self.close_panel))
+            return False
+        elif ps['state'] == "paused":
+            self.set_state("paused")
+            self.show_buttons_for_state()
+
+        # TODO: Remove this in the future
+        if self.filename != ps['filename']:
+            if ps['filename'] != "":
+                self.filename = ps['filename']
+                self.file_metadata = {}
+                self.update_text("file", self.filename.split("/")[-1])
+            else:
+                file = "Unknown"
+                self.update_text("file", "Unknown file")
+
+        return True
 
     def set_state(self, state):
         _ = self.lang.gettext
@@ -464,6 +488,7 @@ class JobStatusPanel(ScreenPanel):
         if self.state == state:
             return
 
+        logging.debug("Changing job_status state from '%s' to '%s'" % (self.state, state))
         self.state = state
         if state == "paused":
             self.labels['button_grid'].remove(self.labels['resume'])
@@ -477,10 +502,13 @@ class JobStatusPanel(ScreenPanel):
             self.labels['button_grid'].attach(self.labels['resume'], 0, 0, 1, 1)
             self.labels['button_grid'].show_all()
             self.update_text("status",_("Printing"))
+        elif state == "cancelling":
+            self.update_text("status",_("Cancelling"))
         elif state == "cancelled":
             self.update_text("status",_("Cancelled"))
         elif state == "complete":
             self.update_text("status",_("Complete"))
+        self.show_buttons_for_state()
 
 
     def show_buttons_for_state(self):
@@ -494,6 +522,11 @@ class JobStatusPanel(ScreenPanel):
         elif self.state == "paused":
             self.labels['button_grid'].attach(self.labels['resume'], 0, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['cancel'], 1, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['fine_tune'], 2, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
+        elif self.state == "cancelling":
+            self.labels['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
+            self.labels['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['fine_tune'], 2, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
         elif self.state == "error" or self.state == "complete" or self.state == "cancelled":
