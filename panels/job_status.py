@@ -407,6 +407,9 @@ class JobStatusPanel(ScreenPanel):
                 self._printer.get_stat('virtual_sdcard','progress') - ps['print_duration'])
         progress = round(progress,2)
 
+        if self.state in ["cancelling","cancelled","complete","error"]:
+            return
+
         if progress != self.progress:
             self.progress = progress
             self.labels['darea'].queue_draw()
@@ -435,6 +438,7 @@ class JobStatusPanel(ScreenPanel):
                         else duration)
             time_left = max(total_duration - duration, 0)
             self.update_text("time_left", str(self._gtk.formatTimeString(time_left)))
+            self.update_text("est_time","/ %s" % str(self._gtk.formatTimeString(total_duration)))
 
     def state_check(self):
         ps = self._printer.get_stat("print_stats")
@@ -546,7 +550,7 @@ class JobStatusPanel(ScreenPanel):
         if self._files.file_metadata_exists(self.filename):
             self.file_metadata = self._files.get_file_info(self.filename)
             logging.debug("Parsing file metadata: %s" % list(self.file_metadata))
-            if "estimated_time" in self.file_metadata:
+            if "estimated_time" in self.file_metadata and self.timeleft_type == "slicer":
                 self.update_text("est_time","/ %s" %
                     str(self._gtk.formatTimeString(self.file_metadata['estimated_time'])))
             if "thumbnails" in self.file_metadata:
