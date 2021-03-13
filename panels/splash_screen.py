@@ -84,7 +84,8 @@ class SplashScreenPanel(ScreenPanel):
         self.labels['actions'].add(self.labels['restart'])
         self.labels['actions'].add(self.labels['firmware_restart'])
         self.labels['actions'].add(self.labels['menu'])
-        self.labels['actions'].add(self.labels['printer_select'])
+        if len(self._config.get_printers()) > 1:
+            self.labels['actions'].add(self.labels['printer_select'])
         self.labels['actions'].show_all()
 
     def firmware_restart(self, widget):
