@@ -1,0 +1,10 @@
+site_name: KlipperScreen
+nav:
+    - Installation.md
+    - Configuration.md
+    - changelog.md
+    - panels.md
+theme: readthedocs
+repo_url: https://github.com/jordanruthe/KlipperScreen/
+plugins:
+    - search

@@ -1,24 +1,4 @@
-## Panels
-
-### Index
-* [Main menu](#main-menu)
-* [Job Status](#job-status)
-* [bed_level](#bed-level)
-* [bed_mesh](#bed-mesh)
-* [extrude](#extrude)
-* [fan](#fan)
-* [fine_tune](#finetune)
-* [gcode_macros](#gcode-macros)
-* [move](#move)
-* [network](#network)
-* [power](#power)
-* [preheat](#preheat)
-* [print](#print)
-* [settings](#settings)
-* [system](#system)
-* [temperature](#temperature)
-* [zcalibrate](#zcalibrate)
-
+# Panels
 
 ### Main Menu
 ![Main Menu](img/main_panel.png)

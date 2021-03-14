@@ -1,3 +1,5 @@
+# Installation
+
 ### Required Hardware
 KlipperScreen should run on any HDMI touchscreen that you can connect to a computer. The required video driver may
 be slightly different depending on what model you get. I am developing on a 1024x600 resolution screen. Due to this,
