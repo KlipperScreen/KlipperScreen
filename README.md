@@ -8,14 +8,7 @@ Multiple printers update is here! Please check the configuration information for
 
 [Click here to access the documentation.](https://jordanruthe.github.io/KlipperScreen/Installation/)
 
-### Sample Panels
-
-Main Menu
-![Main Menu](docs/img/main_panel.png)
-
-Job Status
-![Job Status](docs/img/job_status.png)
-
+Screenshots are included in the documentation.
 
 ### Inspiration
 KlipperScreen was inspired by [OctoScreen](https://github.com/Z-Bolt/OctoScreen/) and the need for a touchscreen GUI that
