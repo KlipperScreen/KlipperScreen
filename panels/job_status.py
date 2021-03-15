@@ -444,7 +444,8 @@ class JobStatusPanel(ScreenPanel):
         ps = self._printer.get_stat("print_stats")
         if ps['state'] == self.state:
             return True
-
+        _ = self.lang.gettext
+        
         if ps['state'] == "printing" and self.state != "printing" and self.state != "cancelling":
             self.set_state("printing")
         elif ps['state'] == "complete" and self.state != "complete":
