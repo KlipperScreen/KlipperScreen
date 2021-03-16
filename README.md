@@ -6,7 +6,7 @@ Multiple printers update is here! Please check the configuration information for
 
 ### Documentation
 
-[Click here to access the documentation.](https://jordanruthe.github.io/KlipperScreen/Installation/)
+[Click here to access the documentation.](https://jordanruthe.github.io/KlipperScreen/)
 
 Screenshots are included in the documentation.
 
