@@ -222,6 +222,7 @@ class JobStatusPanel(ScreenPanel):
         self.update_text("status",_("Printing"))
 
         self.filename = self._printer.get_stat('print_stats','filename')
+        self.update_text("file", self._printer.get_stat('print_stats','filename'))
         self.update_file_metadata()
 
         ps = self._printer.get_stat("print_stats")
