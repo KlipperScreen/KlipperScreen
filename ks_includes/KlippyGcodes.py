@@ -13,7 +13,7 @@ class KlippyGcodes:
     EXTRUDE_REL     = "M83"
 
     SET_EXT_TEMP    = "M104"
-    MAX_EXT_TEMP    = 300
+    MAX_EXT_TEMP    = 450
 
     SET_BED_TEMP    = "M140"
     MAX_BED_TEMP    = 150
