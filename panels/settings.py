@@ -159,6 +159,14 @@ class SettingsPanel(ScreenPanel):
             dropdown.set_entry_text_column(0)
             dev.add(dropdown)
             logging.debug("Children: %s" % dropdown.get_children())
+        elif option['type'] == "scale":
+            val = int(self._config.get_config().get(option['section'], opt_name, fallback=option['value']))
+            adj = Gtk.Adjustment(val, option['range'][0], option['range'][1], option['step'], option['step']*5)
+            scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
+            scale.set_hexpand(True)
+            scale.set_digits(0)
+            scale.connect("value-changed", self.scale_moved, option['section'], opt_name)
+            dev.add(scale)
         elif option['type'] == "printer":
             logging.debug("Option: %s" % option)
             box = Gtk.Box()
@@ -224,6 +232,12 @@ class SettingsPanel(ScreenPanel):
             if callback is not None:
                 callback(value)
 
+    def scale_moved(self, widget, section, option):
+        logging.debug("[%s] %s changed to %s" % (section, option, widget.get_value()))
+        if section not in self._config.get_config().sections():
+            self._config.get_config().add_section(section)
+        self._config.set(section, option, str(int(widget.get_value())))
+        self._config.save_user_config_options()
 
     def switch_config_option(self, switch, gparam, section, option):
         logging.debug("[%s] %s toggled %s" % (section, option, switch.get_active()))

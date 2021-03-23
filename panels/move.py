@@ -125,10 +125,9 @@ class MovePanel(ScreenPanel):
             dir = "-" if dir == "+" else "+"
 
         dist = str(self.distance) if dir == "+" else "-" + str(self.distance)
-        logging.info("# Moving " + axis + " " + dist + "mm")
-
-        print("%s\n%s %s%s" % (KlippyGcodes.MOVE_RELATIVE, KlippyGcodes.MOVE, axis, dist))
+        speed = self._config.get_config()['main'].getint("move_speed", 20)
+        speed = min(max(1,speed),200) # Cap movement speed between 1-200mm/s
         self._screen._ws.klippy.gcode_script(
-            "%s\n%s %s%s%s" % (KlippyGcodes.MOVE_RELATIVE, KlippyGcodes.MOVE, axis, dist,
+            "%s\n%s %s%s F%s%s" % (KlippyGcodes.MOVE_RELATIVE, KlippyGcodes.MOVE, axis, dist, speed*60,
                 "\nG90" if self._printer.get_stat("gcode_move", "absolute_coordinates") == True else "")
         )

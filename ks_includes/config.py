@@ -34,6 +34,9 @@ class KlipperScreenConfig:
             {"invert_x": {"section": "main", "name": _("Invert X"), "type": "binary", "value": "False"}},
             {"invert_y": {"section": "main", "name": _("Invert Y"), "type": "binary", "value": "False"}},
             {"invert_z": {"section": "main", "name": _("Invert Z"), "type": "binary", "value": "False"}},
+            {"move_speed": {"section": "main", "name": _("Move Speed (mm/s)"), "type": "scale", "value": "20",
+                "range": [5,100], "step": 1
+            }},
             {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
             {"print_estimate_method": {"section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
                 "value": "file","options":[
