@@ -214,8 +214,7 @@ class JobStatusPanel(ScreenPanel):
 
     def activate(self):
         _ = self.lang.gettext
-        self.progress = self._printer.get_stat('virtual_sdcard','progress')
-        self.update_progress()
+        self.progress = 0
         self.enable_button("pause","cancel","resume")
 
         state = "printing"
@@ -223,6 +222,7 @@ class JobStatusPanel(ScreenPanel):
 
         self.filename = self._printer.get_stat('print_stats','filename')
         self.update_text("file", self._printer.get_stat('print_stats','filename'))
+        self.update_percent_complete()
         self.update_file_metadata()
 
         ps = self._printer.get_stat("print_stats")
@@ -400,22 +400,10 @@ class JobStatusPanel(ScreenPanel):
             self.fan = int(round(data['fan']['speed'],2)*100)
             self.labels['fan'].set_text("%3d%%" % self.fan)
 
-        if "gcode_start_byte" in self.file_metadata:
-            progress = (max(vsd['file_position'] - self.file_metadata['gcode_start_byte'],0) /
-                (self.file_metadata['gcode_end_byte'] - self.file_metadata['gcode_start_byte']))
-        else:
-            progress = 0 if self._printer.get_stat('virtual_sdcard','progress') == 0 else (ps['print_duration']/
-                self._printer.get_stat('virtual_sdcard','progress') - ps['print_duration'])
-        progress = round(progress,2)
-
         if self.state in ["cancelling","cancelled","complete","error"]:
             return
 
-        if progress != self.progress:
-            self.progress = progress
-            self.labels['darea'].queue_draw()
-            self.update_progress()
-
+        self.update_percent_complete()
         self.update_text("duration", str(self._gtk.formatTimeString(ps['print_duration'])))
 
         timeleft_type = self._config.get_config()['main'].get('print_estimate_method','file')
@@ -569,6 +557,23 @@ class JobStatusPanel(ScreenPanel):
     def update_image_text(self, label, text):
         if label in self.labels and 'l' in self.labels[label]:
             self.labels[label]['l'].set_text(text)
+
+    def update_percent_complete(self):
+        if self.state in ["cancelling","cancelled","complete","error"]:
+            return
+
+        if "gcode_start_byte" in self.file_metadata:
+            progress = (max(self._printer.get_stat('virtual_sdcard','file_position') -
+                self.file_metadata['gcode_start_byte'],0) / (self.file_metadata['gcode_end_byte'] -
+                self.file_metadata['gcode_start_byte']))
+        else:
+            progress = self._printer.get_stat('virtual_sdcard','progress')
+        progress = round(progress,2)
+
+        if progress != self.progress:
+            self.progress = progress
+            self.labels['darea'].queue_draw()
+            self.update_progress()
 
     def update_text(self, label, text):
         if label in self.labels:
