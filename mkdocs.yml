@@ -1,5 +1,6 @@
 site_name: KlipperScreen
 nav:
+    - Hardware.md
     - Installation.md
     - Configuration.md
     - changelog.md
