@@ -33,6 +33,10 @@ from ks_includes.wifi import WifiManager
 
 from ks_includes.config import KlipperScreenConfig
 
+logging.getLogger('matplotlib').setLevel(logging.WARNING)
+import numpy
+import matplotlib.pyplot
+
 PRINTER_BASE_STATUS_OBJECTS = [
     'bed_mesh',
     'idle_timeout',

@@ -1,8 +1,16 @@
 import gi
 import logging
+import numpy as np
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
+
+import matplotlib.pyplot as plt
+from matplotlib import cm
+from matplotlib import rc
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.backends.backend_gtk3cairo import FigureCanvasGTK3Cairo as FigureCanvas
+from matplotlib.ticker import LinearLocator
 
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
@@ -105,6 +113,12 @@ class BedMeshPanel(ScreenPanel):
         refresh.set_hexpand(False)
         refresh.set_halign(Gtk.Align.END)
 
+        view = self._gtk.ButtonImage("refresh",_("View Mesh"),"color1")
+        view.connect("clicked", self.show_mesh, profile)
+        view.set_size_request(60,0)
+        view.set_hexpand(False)
+        view.set_halign(Gtk.Align.END)
+
         info = self._gtk.ButtonImage("info",None,"color3")
         info.connect("clicked", self.show_mesh, profile)
         info.set_size_request(60,0)
@@ -146,6 +160,7 @@ class BedMeshPanel(ScreenPanel):
         if profile != "default":
             buttons.pack_end(save, False, False, 0)
             buttons.pack_end(delete, False, False, 0)
+        buttons.pack_end(view, False, False, 0)
 
         dev.add(buttons)
         frame.add(dev)
@@ -156,7 +171,8 @@ class BedMeshPanel(ScreenPanel):
             "row": frame,
             "load": load,
             "refresh": refresh,
-            "save": save
+            "save": save,
+            "view": view,
         }
 
         l = list(self.profiles)
@@ -284,10 +300,81 @@ class BedMeshPanel(ScreenPanel):
     def show_mesh(self, widget, profile):
         _ = self.lang.gettext
 
+        bm = self._printer.get_config_section("bed_mesh %s" % profile)
+        if bm == False:
+            logging.info("Unable to load profile: %s" % profile)
+            return
+
+        if profile == self.active_mesh:
+            abm = self._printer.get_stat("bed_mesh")
+            if abm == None:
+                logging.info("Unable to load active mesh: %s" % profile)
+                return
+            x_range = [int(abm['mesh_min'][0]), int(abm['mesh_max'][0])]
+            y_range = [int(abm['mesh_min'][1]), int(abm['mesh_max'][1])]
+            z_range = [min(min(abm['mesh_matrix'])), max(max(abm['mesh_matrix']))]
+            counts = [len(abm['mesh_matrix'][0]), len(abm['mesh_matrix'])]
+            deltas = [(x_range[1] - x_range[0] )/ (counts[0]-1), (y_range[1] - y_range[0]) / (counts[1]-1)]
+            x = [(i*deltas[0])+x_range[0] for i in range(counts[0])]
+            y = [(i*deltas[0])+y_range[0] for i in range(counts[1])]
+            x, y = np.meshgrid(x, y)
+            z = np.asarray(abm['mesh_matrix'])
+        else:
+            x_range = [int(bm['min_x']), int(bm['max_x'])]
+            y_range = [int(bm['min_y']), int(bm['max_y'])]
+            z_range = [min(min(bm['points'])), max(max(bm['points']))]
+            deltas = [(x_range[1] - x_range[0] )/ (int(bm['x_count'])-1), (y_range[1] - y_range[0]) / (int(bm['y_count'])-1)]
+            x = [(i*deltas[0])+x_range[0] for i in range(bm['x_count'])]
+            y = [(i*deltas[0])+y_range[0] for i in range(bm['y_count'])]
+            x, y = np.meshgrid(x, y)
+            z = np.asarray(bm['points'])
+
+        rc('axes', edgecolor="#fff", labelcolor="#fff")
+        rc(('xtick','ytick'), color="#fff")
+        fig = plt.figure()
+        fig.patch.set_facecolor("black")
+        ax = Axes3D(fig, auto_add_to_figure=False)
+
+        ax.set_facecolor("black")
+        ax.set(title=profile, xlabel="X", ylabel="Y")
+        ax.spines['bottom'].set_color("#fff")
+
+        fig.add_axes(ax)
+        surf = ax.plot_surface(x, y, z, rstride=1, cstride=1, cmap=cm.coolwarm)
+
+        ax.set_zlim(z_range[0], z_range[1])
+        ax.zaxis.set_major_locator(LinearLocator(10))
+        # A StrMethodFormatter is used automatically
+        ax.zaxis.set_major_formatter('{x:.02f}')
+        fig.colorbar(surf, shrink=0.5, aspect=5)
+
+        box = Gtk.VBox()
+        box.set_hexpand(True)
+        box.set_vexpand(True)
+
+        title = Gtk.Label()
+        title.set_markup("<b>%s</b>" % profile)
+        title.set_hexpand(True)
+        title.set_halign(Gtk.Align.CENTER)
+
+        canvas_box = Gtk.Box()
+        canvas_box.set_hexpand(True)
+        canvas_box.set_vexpand(True)
+
+        box.add(title)
+        box.add(canvas_box)
+
         buttons = [
             {"name": _("Close"), "response": Gtk.ResponseType.CANCEL}
         ]
-        dialog = self._gtk.Dialog(self._screen, buttons, self.graphs[profile], self._close_dialog)
+        dialog = self._gtk.Dialog(self._screen, buttons, box, self._close_dialog)
+
+        alloc = canvas_box.get_allocation()
+        canvas = FigureCanvas(fig)
+        canvas.set_size_request(alloc.width, self._screen.height/3*2)
+        canvas_box.add(canvas)
+        canvas_box.show_all()
+
 
     def _close_dialog(self, widget, response):
         widget.destroy()
