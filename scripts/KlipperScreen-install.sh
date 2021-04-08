@@ -23,7 +23,8 @@ install_packages()
         gir1.2-gtk-3.0 \
         virtualenv \
         matchbox-keyboard \
-        wireless-tools
+        wireless-tools \
+        libatlas-base-dev
 }
 
 create_virtualenv()
