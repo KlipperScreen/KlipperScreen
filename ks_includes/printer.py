@@ -102,6 +102,11 @@ class Printer:
         if "webhooks" in data or "idle_timeout" in data or "print_stats" in data:
             self.evaluate_state()
 
+    def get_updates(self):
+        updates = self.data.copy()
+        updates.update(self.devices)
+        return updates
+
     def evaluate_state(self):
         wh_state = self.data['webhooks']['state'].lower() # possible values: startup, ready, shutdown, error
         idle_state = self.data['idle_timeout']['state'].lower() # possible values: Idle, printing, ready
