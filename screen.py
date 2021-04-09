@@ -301,7 +301,6 @@ class KlipperScreen(Gtk.Window):
             self.show_all()
 
             if hasattr(self.panels[panel_name],"process_update"):
-                logging.info("Debug: %s" % self.printer.get_updates())
                 self.panels[panel_name].process_update("notify_status_update", self.printer.get_updates())
             if hasattr(self.panels[panel_name],"activate"):
                 self.panels[panel_name].activate()
