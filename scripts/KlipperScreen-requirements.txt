@@ -4,3 +4,4 @@ matplotlib==3.4.1
 requests==2.25.1
 vext==0.7.6
 websocket-client==0.58.0
+python-vlc==3.0.12117

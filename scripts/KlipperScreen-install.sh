@@ -7,6 +7,7 @@ KSENV="${HOME}/.KlipperScreen-env"
 PKGLIST="xserver-xorg-video-fbturbo xdotool xinit xinput x11-xserver-utils python3-distutils python3-gi"
 PKGLIST="${PKGLIST} python3-gi-cairo python3-virtualenv gir1.2-gtk-3.0 virtualenv matchbox-keyboard wireless-tools"
 PKGLIST="${PKGLIST} libatlas-base-dev"
+PKGLIST="${PKGLIST} python3-gst-1.0 vlc"
 
 install_packages()
 {
