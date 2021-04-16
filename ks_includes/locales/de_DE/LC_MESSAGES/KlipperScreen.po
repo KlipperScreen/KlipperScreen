@@ -129,7 +129,7 @@ msgid "Duration Only"
 msgstr "Reine Druckzeit"
 
 msgid "Elapsed:"
-msgstr "Verstrichene Zeit:"
+msgstr "Druckzeit:"
 
 msgid "Emergency Stop"
 msgstr "NOT-STOP"
