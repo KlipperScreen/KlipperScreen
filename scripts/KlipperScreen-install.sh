@@ -29,6 +29,10 @@ create_virtualenv()
 
 install_systemd_service()
 {
+    if [ -f "/etc/systemd/system/KlipperScreen.service" ]; then
+        echo "KlipperScreen unit file already installed"
+        return
+    fi
     echo "Installing KlipperScreen unit file"
 
     SERVICE=$(<$SCRIPTPATH/KlipperScreen.service)
