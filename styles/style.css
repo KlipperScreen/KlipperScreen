@@ -19,8 +19,8 @@ button {
 	-gtk-icon-shadow: none;
 }
 
-button:active {
-	background-color: #304C62;
+button:active { /* When pressed */
+	background-color: #cb4b16;
 }
 
 .button_active {
@@ -135,8 +135,8 @@ trough {
 	border-bottom: .4em solid #009384;
 }
 
-.distbutton_active {
-  background-color: #20303D;
+.distbutton_active { /* multiple-choice buttons */
+  background-color: #cb4b16;
 }
 
 .distbutton_top {
