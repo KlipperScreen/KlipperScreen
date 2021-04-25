@@ -1,0 +1,456 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-26 15:56+0000\n"
+"PO-Revision-Date: 2021-04-25 11:23-0300\n"
+"Last-Translator: alfrix\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+
+msgid "?"
+msgstr "?"
+
+msgid "Abort"
+msgstr "Cancelar"
+
+msgid "Accept"
+msgstr "Aceptar"
+
+msgid "Actions"
+msgstr "Acciones"
+
+msgid "Add bed mesh profile"
+msgstr "Agregar pefil de malla de cama"
+
+msgid "Are you sure you want to print"
+msgstr "Está seguro que desea imprimir"
+
+msgid "Are you sure you wish to cancel this print?"
+msgstr "Está seguro que desea cancelar esta impresión?"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "Está seguro que desea reiniciar el sistema?"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "Está seguro que desea apagar el sistema?"
+
+msgid "Bed Level"
+msgstr "Nivelar cama"
+
+msgid "Bed Mesh"
+msgstr "Malla de cama"
+
+msgid "Calibrate"
+msgstr "Calibrar"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Cancel Change"
+msgstr "Cancelar Cambio"
+
+msgid "Cancel Print"
+msgstr "Cancelar Impresión"
+
+msgid "Cancelled"
+msgstr "Cancelado"
+
+msgid "Channel"
+msgstr "Canal"
+
+msgid ""
+"Check /tmp/KlipperScreen.log for more information.\n"
+"Please submit an issue on GitHub for help."
+msgstr ""
+"Revise /tmp/KlipperScreen.log para mas información.\n"
+"Por favor crear un 'issue' en GitHub para ser ayudado."
+
+msgid "Close"
+msgstr "Cerrar"
+
+msgid "Complete"
+msgstr "Completado"
+
+msgid "Configuration"
+msgstr "Configuración"
+
+msgid "Connected"
+msgstr "Conectado"
+
+#, python-format
+msgid "Connecting to %s"
+msgstr "Conectando a %s"
+
+msgid "Continue"
+msgstr "Continuar"
+
+msgid "Control"
+msgstr "Control"
+
+msgid "Cooldown"
+msgstr "Enfriar"
+
+msgid "Date"
+msgstr "Fecha"
+
+msgid "Decrease"
+msgstr "Disminuir"
+
+msgid "Delete"
+msgstr "Borrar"
+
+msgid "Disable Motors"
+msgstr "Desactivar Motores"
+
+msgid "Disable XY"
+msgstr "Desactivar XY"
+
+msgid "Disconnect"
+msgstr "Desconectar"
+
+msgid "Displayed Macros"
+msgstr "Macros Mostrados"
+
+msgid "Distance (mm)"
+msgstr "Distancia (mm)"
+
+msgid "Duration Only"
+msgstr "Duración Solamente"
+
+msgid "Elapsed:"
+msgstr "Transcurrido:"
+
+msgid "Emergency Stop"
+msgstr "Parada de Emergencia"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Estimated Time Method"
+msgstr "Metodo para Tiempo Estimado"
+
+msgid "Extrude"
+msgstr "Extruir"
+
+msgid "Extrusion +"
+msgstr "Extrusor +"
+
+msgid "Extrusion -"
+msgstr "Extrusor -"
+
+msgid "Fan"
+msgstr "Ventilador"
+
+msgid "Fan Off"
+msgstr "Apagar Ventilador"
+
+msgid "Fan On"
+msgstr "Encender Ventilador"
+
+msgid "Fast"
+msgstr "Rápido"
+
+msgid "Filament Used"
+msgstr "Filamento Usado"
+
+msgid "File Estimation (default)"
+msgstr "Estimación de Archivo (por defecto)"
+
+msgid "Fine Tuning"
+msgstr "Ajuste Fino"
+
+msgid "Firmware Restart"
+msgstr "Reiniciar Firmware"
+
+msgid "Go Back"
+msgstr "Volver"
+
+msgid "Home All"
+msgstr "Llevar al origen"
+
+msgid "Home X"
+msgstr "Origen X"
+
+msgid "Home XY"
+msgstr "Origen XY"
+
+msgid "Home Y"
+msgstr "Origen Y"
+
+msgid "Home Z"
+msgstr "Origen Z"
+
+msgid "Homing"
+msgstr "Llevar al origen"
+
+msgid "Hostname"
+msgstr "Hostname"
+
+msgid "IPv4"
+msgstr "IPv4"
+
+msgid "IPv6"
+msgstr "IPv6"
+
+msgid "Increase"
+msgstr "Aumentar"
+
+msgid "Initializing"
+msgstr "Iniciando"
+
+msgid "Initializing printer..."
+msgstr "Iniciando Impresora..."
+
+msgid "Interface"
+msgstr "Interfaz"
+
+msgid "Invert X"
+msgstr "Invertir X"
+
+msgid "Invert Y"
+msgstr "Invertir Y"
+
+msgid "Invert Z"
+msgstr "Invertir Z"
+
+msgid "Klipper Restart"
+msgstr "Reiniciar Klipper"
+
+msgid "Klipper Version"
+msgstr "Versión de Klipper"
+
+msgid "Klipper has disconnected"
+msgstr "Klipper se desconectó"
+
+msgid ""
+"Klipper has encountered an error with the micro-controller.\n"
+"Please recompile and flash."
+msgstr ""
+"Klipper encontró un error en el microcontrolador.\n"
+"Por favor recompile y flasheelo."
+
+msgid "Klipper has encountered an error."
+msgstr "Klipper encontró un error."
+
+msgid ""
+"Klipper has encountered an error.\n"
+"Issue a FIRMWARE_RESTART to attempt fixing the issue."
+msgstr ""
+"Klipper encontró un error.\n"
+"Ejecute FIRMWARE_RESTART para tratar de arreglarlo."
+
+msgid "Klipper has shutdown"
+msgstr "Klipper se apagó"
+
+msgid "Klipper is attempting to start"
+msgstr "Klipper está intentando iniciar"
+
+msgid "Klipper will reboot"
+msgstr "Klipper se reiniciará"
+
+msgid "KlipperScreen Version"
+msgstr "Versión de KlipperScreen"
+
+msgid "Left:"
+msgstr "Restante:"
+
+msgid "Load"
+msgstr "Cargar"
+
+msgid "Load Average"
+msgstr "Carga media"
+
+msgid "Lower Nozzle"
+msgstr "Bajar Boquilla"
+
+msgid "Macros"
+msgstr "Macros"
+
+msgid "Main Menu"
+msgstr "Menú Principal"
+
+msgid "Medium"
+msgstr "Medio"
+
+msgid "Menu"
+msgstr "Menú"
+
+msgid "Modified"
+msgstr "Modificado"
+
+msgid "Move"
+msgstr "Mover"
+
+msgid "Move Distance (mm)"
+msgstr "Mover Distancia (mm)"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Network"
+msgstr "Red"
+
+msgid "Number Pad"
+msgstr "Teclado Númerico"
+
+msgid "Off"
+msgstr "Apagar"
+
+msgid "Pause"
+msgstr "Pausar"
+
+msgid "Paused"
+msgstr "Pausado"
+
+msgid "Power"
+msgstr "Energía"
+
+msgid "Power On Printer"
+msgstr "Encender Impresora"
+
+msgid "Preheat"
+msgstr "Precalentar"
+
+msgid "Print"
+msgstr "Imprimir"
+
+msgid "Print Control"
+msgstr "Control de impresión"
+
+msgid "Print Time"
+msgstr "Tiempo de impresión"
+
+msgid "Printing"
+msgstr "Imprimiendo"
+
+msgid "Profile Name:"
+msgstr "Nombre del perfil:"
+
+msgid "Quad Gantry Level"
+msgstr "Nivelación cuádruple"
+
+msgid "Raise Nozzle"
+msgstr "Levantar Boquilla"
+
+msgid "Restart"
+msgstr "Reiniciar"
+
+msgid "Resume"
+msgstr "Continuar"
+
+msgid "Retract"
+msgstr "Retraer"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Save Config"
+msgstr "Guardar Config"
+
+msgid "Save configuration."
+msgstr "Guardar Configuración."
+
+msgid "Screen Power Off Time"
+msgstr "Apagar pantalla tras"
+
+msgid "Screen will show in less than one second"
+msgstr "La pantalla se mostrará en menos de un segundo"
+
+msgid "Screws Adjust"
+msgstr "Ajustar Tornillos"
+
+msgid "Set Speed"
+msgstr "Establecer Velocidad"
+
+msgid "Settings"
+msgstr "Opciones"
+
+msgid "Size"
+msgstr "Tamaño"
+
+msgid "Slicer"
+msgstr "Slicer"
+
+msgid "Slow"
+msgstr "Lento"
+
+msgid "Sort by: "
+msgstr "Ordenar por:"
+
+msgid "Speed +"
+msgstr "Velocidad +"
+
+msgid "Speed -"
+msgstr "Velocidad -"
+
+msgid "System"
+msgstr "Sistema"
+
+msgid ""
+"System\n"
+"Restart"
+msgstr ""
+"Reiniciar\n"
+"Sistema"
+
+msgid ""
+"System\n"
+"Shutdown"
+msgstr ""
+"Apagar\n"
+"Sistema"
+
+msgid "Temperature"
+msgstr "Temperatura"
+
+msgid "Tool"
+msgstr "Herrmienta"
+
+msgid "Uploaded"
+msgstr "Subido"
+
+msgid "X+"
+msgstr "X+"
+
+msgid "X-"
+msgstr "X-"
+
+msgid "Y+"
+msgstr "Y+"
+
+msgid "Y-"
+msgstr "Y-"
+
+msgid "Z Calibrate"
+msgstr "Calibrar Z"
+
+msgid "Z Offset"
+msgstr "Desfase Z"
+
+msgid "Z Tilt"
+msgstr "Inclinación Z"
+
+msgid "Z+"
+msgstr "Z+"
+
+msgid "Z-"
+msgstr "Z-"
+
+msgid "dBm"
+msgstr "dBm"
+
+msgid "minutes"
+msgstr "minutos"
+
+msgid "mm"
+msgstr "mm"
