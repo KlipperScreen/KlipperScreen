@@ -33,7 +33,7 @@ class BedLevelPanel(ScreenPanel):
             config_section = self._screen.printer.get_config_section(config_section_name)
             for item in config_section:
                 logging.debug("Screws section: %s" % config_section[item])
-                result = re.match(r"([0-9\.]+)\s*,\s*([0-9\.]+)", config_section[item])
+                result = re.match(r"([\-0-9\.]+)\s*,\s*([\-0-9\.]+)", config_section[item])
                 if result:
                     screws.append([
                         round(float(result.group(1)),2),
