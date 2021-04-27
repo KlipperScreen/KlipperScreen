@@ -146,7 +146,7 @@ class BedLevelPanel(ScreenPanel):
     def process_update(self, action, data):
         if action == "notify_gcode_response":
             result = re.match(
-                "^// (.*) : X ([0-9\.]+), Y ([0-9\.]+), Z [0-9\.]+ : Adjust -> ([CW]+ [0-9:]+)",
+                "^// (.*) : X ([\-0-9\.]+), Y ([\-0-9\.]+), Z [\-0-9\.]+ : Adjust -> ([CW]+ [0-9:]+)",
                 data
             )
             if result:
