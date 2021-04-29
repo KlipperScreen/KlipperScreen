@@ -116,7 +116,7 @@ class SettingsPanel(ScreenPanel):
         name.set_line_wrap(True)
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        #open = self._gtk.ButtonImage("open",None,"color3")
+        #open = self._gtk.ButtonImage("resume",None,"color3")
         #open.connect("clicked", self.run_gcode_macro, macro)
         #open.set_hexpand(False)
         #open.set_halign(Gtk.Align.END)
@@ -177,7 +177,7 @@ class SettingsPanel(ScreenPanel):
             box.add(label)
             dev.add(box)
         elif option['type'] == "menu":
-            open = self._gtk.ButtonImage("open",None,"color3")
+            open = self._gtk.ButtonImage("settings",None,"color3")
             open.connect("clicked", self.load_menu, option['menu'])
             open.set_hexpand(False)
             open.set_halign(Gtk.Align.END)

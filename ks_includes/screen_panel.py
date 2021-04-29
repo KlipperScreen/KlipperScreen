@@ -39,7 +39,7 @@ class ScreenPanel:
                 self.control['back'].connect("clicked", self._screen._menu_go_back)
                 self.control_grid.attach(self.control['back'], 0, 0, 1, 1)
 
-                self.control['home'] = self._gtk.ButtonImage('home', None, None, button_scale[0], button_scale[1])
+                self.control['home'] = self._gtk.ButtonImage('main', None, None, button_scale[0], button_scale[1])
                 self.control['home'].connect("clicked", self.menu_return, True)
                 self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
             else:

@@ -122,7 +122,7 @@ class PrintPanel(ScreenPanel):
             labels.set_valign(Gtk.Align.CENTER)
             labels.set_halign(Gtk.Align.START)
 
-            actions = self._gtk.ButtonImage("open",None,"color3")
+            actions = self._gtk.ButtonImage("load",None,"color3")
             actions.connect("clicked", self.change_dir, directory)
             actions.set_hexpand(False)
             actions.set_halign(Gtk.Align.END)

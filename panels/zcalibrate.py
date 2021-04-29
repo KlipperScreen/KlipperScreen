@@ -33,9 +33,9 @@ class ZCalibratePanel(ScreenPanel):
         box.add(label)
         box.add(self.labels['zposition'])
 
-        zpos = self._gtk.ButtonImage('z-offset-decrease',_("Raise Nozzle"))
+        zpos = self._gtk.ButtonImage('z-farther',_("Raise Nozzle"))
         zpos.connect("clicked", self.move, "+")
-        zneg = self._gtk.ButtonImage('z-offset-increase',_("Lower Nozzle"))
+        zneg = self._gtk.ButtonImage('z-closer',_("Lower Nozzle"))
         zneg.connect("clicked", self.move, "-")
 
         distgrid = Gtk.Grid()
@@ -64,10 +64,10 @@ class ZCalibratePanel(ScreenPanel):
         space_grid.attach(distgrid,0,1,1,1)
         space_grid.attach(Gtk.Label(" "),0,2,1,1)
 
-        complete = self._gtk.ButtonImage('complete',_('Accept'),'color2')
+        complete = self._gtk.ButtonImage('complete',_('Accept'),'color4')
         complete.connect("clicked", self.accept)
 
-        b = self._gtk.ButtonImage('back', _('Abort'))
+        b = self._gtk.ButtonImage('cancel', _('Abort'),'color2')
         b.connect("clicked", self.abort)
 
 
