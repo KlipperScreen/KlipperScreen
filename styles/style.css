@@ -13,7 +13,6 @@ button {
 	background-image: none;
 	background-color: #002b36; /*base03*/
 	margin: .25em;
-	margin-bottom: .5em;
 	border-radius: 0;
     border: 0 solid #000;
 	-gtk-icon-shadow: none;
