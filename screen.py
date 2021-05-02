@@ -745,6 +745,8 @@ def main():
         version
     )
 
+    functions.patch_threading_excepthook()
+
     logging.info("KlipperScreen version: %s" % version)
 
 

@@ -1,8 +1,11 @@
 import logging
 import logging.handlers
 import os
+import re
 import subprocess
 import sys
+import threading
+import time
 import traceback
 from queue import SimpleQueue as Queue
 
@@ -66,6 +69,24 @@ def get_software_version():
         logging.exception("Error runing git describe")
     return "?"
 
+def patch_threading_excepthook():
+    """Installs our exception handler into the threading modules Thread object
+    Inspired by https://bugs.python.org/issue1230540
+    """
+    old_init = threading.Thread.__init__
+    def new_init(self, *args, **kwargs):
+        old_init(self, *args, **kwargs)
+        old_run = self.run
+        def run_with_excepthook(*args, **kwargs):
+            try:
+                old_run(*args, **kwargs)
+            except (KeyboardInterrupt, SystemExit):
+                raise
+            except:
+                sys.excepthook(*sys.exc_info(), thread_identifier=threading.get_ident())
+        self.run = run_with_excepthook
+    threading.Thread.__init__ = new_init
+
 # Timed rotating file handler based on Klipper and Moonraker's implementation
 class KlipperScreenLoggingHandler(logging.handlers.TimedRotatingFileHandler):
     def __init__(self, software_version, filename, **kwargs):
@@ -113,8 +134,9 @@ def setup_logging(log_file, software_version):
             queue, stdout_hdlr)
     listener.start()
 
-    def logging_exception_handler(type, value, tb):
+    def logging_exception_handler(type, value, tb, thread_identifier=None):
         logging.exception("Uncaught exception %s: %s\nTraceback: %s" % (type, value, "\n".join(traceback.format_tb(tb))))
     sys.excepthook = logging_exception_handler
+    logging.captureWarnings(True)
 
     return listener, fh
