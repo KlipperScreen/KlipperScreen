@@ -35,6 +35,7 @@ class SystemPanel(ScreenPanel):
 
         info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         info.set_vexpand(True)
+        info.set_valign(Gtk.Align.CENTER)
 
         self.labels['loadavg'] = Gtk.Label("temp")
         self.update_system_load()
