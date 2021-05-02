@@ -88,8 +88,12 @@ class KlipperScreen(Gtk.Window):
         self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', fallback=True)
         self._config = KlipperScreenConfig(configfile, self.lang, self)
 
-        self.wifi = WifiManager()
-        self.wifi.start()
+        self.network_interfaces = functions.get_network_interfaces()
+        self.wireless_interfaces = functions.get_wireless_interfaces()
+        if len(self.wireless_interfaces) > 0:
+            logging.info("Found wireless interfaces: %s" % self.wireless_interfaces)
+            self.wifi = WifiManager(self.wireless_interfaces[0])
+            self.wifi.start()
 
         logging.debug("OS Language: %s" % os.getenv('LANG'))
 
