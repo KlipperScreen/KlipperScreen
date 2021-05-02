@@ -7,27 +7,27 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="77px"
-   height="80px"
-   viewBox="0 0 77 80"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
    version="1.1"
-   id="svg57"
+   id="svg10"
    sodipodi:docname="extruder-3.svg"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)">
   <metadata
-     id="metadata63">
+     id="metadata16">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title>extruder-3</dc:title>
+        <dc:title>folder</dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <defs
-     id="defs61" />
+     id="defs14" />
   <sodipodi:namedview
      pagecolor="#bfbfbf"
      bordercolor="#666666"
@@ -39,165 +39,53 @@
      inkscape:pageshadow="2"
      inkscape:window-width="1600"
      inkscape:window-height="837"
-     id="namedview59"
+     id="namedview12"
      showgrid="false"
-     inkscape:zoom="7.85"
-     inkscape:cx="38.5"
-     inkscape:cy="40"
+     inkscape:pagecheckerboard="false"
+     inkscape:zoom="5.4137931"
+     inkscape:cx="38.196925"
+     inkscape:cy="43.755812"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg57"
+     inkscape:current-layer="svg10"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-edge-midpoints="true"
      inkscape:document-rotation="0" />
   <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
   <title
-     id="title2">extruder-3</title>
+     id="title2">folder</title>
   <desc
      id="desc4">Created with Sketch.</desc>
-  <path
-     d="M 10.5,9.5 16,6.5"
-     id="Line"
-     style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 16,6.5 h 8.5"
-     id="Line-2"
-     style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 24.5,6.5 3,4"
-     id="Line-3"
-     stroke-linejoin="round"
-     style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 10.5,9.5 v 12"
-     id="Line-5"
-     style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 27.5,10.5 h 12"
-     id="Line-4"
-     style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 10.5,21.5 3.5,6"
-     id="Line-6"
-     style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 14,53.5 -3.5,5"
-     id="Line-8"
-     style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 10.5,58.5 v 14"
-     id="Line-9"
-     style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 14,27.5 v 26"
-     id="Line-7"
-     style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 10.5,72.5 13,2.5"
-     id="Line-10"
-     style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 23.5,75 4,-4.5"
-     id="Line-11"
-     style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 27.5,70.5 h 12"
-     id="Line-12"
-     style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="M 66.5,9.5 61,6.5"
-     id="path19"
-     style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="M 61,6.5 H 52.5"
-     id="path21"
-     style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 52.5,6.5 -3,4"
-     id="path23"
-     stroke-linejoin="round"
-     style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 66.5,9.5 v 12"
-     id="path25"
-     style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 49.5,10.5 h -12"
-     id="path27"
-     style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 66.5,21.5 -3.5,6"
-     id="path29"
-     style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 63,53.5 3.5,5"
-     id="path31"
-     style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 66.5,58.5 v 14"
-     id="path33"
-     style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 63,27.5 v 26"
-     id="path35"
-     style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="M 66.5,72.5 53.5,75"
-     id="path37"
-     style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 53.5,75 -4,-4.5"
-     id="path39"
-     style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <path
-     d="m 49.5,70.5 h -12"
-     id="path41"
-     style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round" />
-  <circle
+  <ellipse
      id="Oval"
      stroke="#ffffff"
      stroke-width="2"
-     cx="38.5"
-     cy="35.5"
-     r="19.5"
-     style="fill:none;fill-rule:evenodd" />
-  <circle
-     id="circle46"
-     stroke="#000000"
-     stroke-width="0.5"
-     fill="#ffffff"
-     cx="38.5"
-     cy="35.5"
-     r="21"
-     style="fill-rule:evenodd" />
+     cx="32"
+     cy="26.143875"
+     style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none"
+     rx="15.174833"
+     ry="15.226054" />
+  <path
+     style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 20.327052,56.986395 10.210495,55.034337 V 44.102811 l 2.723688,-3.904116 V 19.897289 l -2.723688,-4.68494 V 5.8424699 L 14.490576,3.5 h 6.614672 l 2.33459,3.1232932 H 40.560162 L 42.894752,3.5 h 6.614672 l 4.280081,2.3424699 v 9.3698791 l -2.723688,4.68494 v 20.301406 l 2.723688,3.904116 V 55.034337 L 43.672948,56.986395 40.560162,53.472691 H 23.439838 l -3.112786,3.513704"
+     id="path943" />
+  <path
+     style="fill:#000000;fill-opacity:0;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 24.996231,58.377 H 39.003769"
+     id="path945" />
+  <path
+     style="fill:#000000;fill-opacity:0;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 29.66541,58.377 32,61.500293 34.334589,58.377"
+     id="path947" />
   <g
      aria-label="3"
      id="3"
-     style="font-weight:500;font-size:26px;font-family:OpenSans-SemiBold, 'Open Sans';fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:0.757575"
-     transform="matrix(1.32,0,0,1.32,-12.32,-11.36)">
+     style="font-weight:500;font-size:26px;font-family:OpenSans-SemiBold, 'Open Sans';fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:0.941991"
+     transform="matrix(1.0615799,0,0,1.0615799,-8.8708261,-11.542211)">
     <path
        d="m 38.645996,44.919922 q -1.574219,0 -2.792969,-0.571289 -1.206054,-0.583985 -1.942382,-1.675781 -0.723633,-1.091797 -0.888672,-2.62793 v 0 h 2.881836 v 0 q 0.101562,0.723633 0.444336,1.206055 0.355468,0.482421 0.901367,0.723632 0.558593,0.241211 1.307617,0.241211 1.206055,0 1.878906,-0.647461 0.672852,-0.660156 0.672852,-1.84082 v -0.533203 q 0,-1.307617 -0.622071,-2.005859 -0.609375,-0.710938 -1.739257,-0.710938 h -1.371094 v -2.691406 h 1.371094 q 0.977539,0 1.510742,-0.609375 0.545898,-0.609375 0.545898,-1.726563 v -0.507812 q 0,-1.028321 -0.571289,-1.586914 -0.571289,-0.571289 -1.625,-0.571289 -0.609375,0 -1.104492,0.253906 -0.482422,0.241211 -0.825195,0.749023 -0.330078,0.495118 -0.482422,1.231446 v 0 H 33.32666 v 0 q 0.228516,-1.548828 0.939453,-2.666016 0.723633,-1.117187 1.828125,-1.688477 1.117188,-0.583984 2.539063,-0.583984 2.412109,0 3.719726,1.256836 1.320313,1.256836 1.320313,3.541992 v 0.368164 q 0,1.358399 -0.723633,2.374024 -0.723633,1.002929 -2.056641,1.472656 1.472657,0.330078 2.272461,1.472656 0.8125,1.129883 0.8125,2.894531 v 0.368165 q 0,1.612304 -0.634765,2.754882 -0.622071,1.142578 -1.81543,1.739258 -1.193359,0.59668 -2.881836,0.59668 z"
        id="path862"
-       style="stroke-width:0.757575" />
+       style="stroke-width:0.941991" />
   </g>
-  <path
-     d="m 35.5,73.5 3,4"
-     id="Line-16"
-     stroke="#ffffff"
-     stroke-width="2"
-     stroke-linecap="round"
-     style="fill:none;fill-rule:evenodd" />
-  <path
-     d="m 38.5,77.5 3,-4"
-     id="Line-17"
-     stroke="#ffffff"
-     stroke-width="2"
-     stroke-linecap="round"
-     style="fill:none;fill-rule:evenodd" />
-  <path
-     d="m 29.5,73.5 h 18"
-     id="Line-14"
-     stroke="#ffffff"
-     stroke-width="2"
-     stroke-linecap="round"
-     style="fill:none;fill-rule:evenodd" />
 </svg>

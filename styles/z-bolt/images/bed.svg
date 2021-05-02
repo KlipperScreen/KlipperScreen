@@ -1,27 +1,116 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="70px" height="65px" viewBox="0 0 70 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
-    <title>bed</title>
-    <desc>Created with Sketch.</desc>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Artboard" transform="translate(-67.000000, -348.000000)" stroke="#FFFFFF">
-            <g id="bed" transform="translate(67.000000, 348.000000)">
-                <path d="M9.58823529,53.4117647 L12.8823529,45.7254902" id="Path" stroke-linecap="round"></path>
-                <path d="M17.2745098,53.4117647 L20.5686275,45.7254902" id="Path" stroke-linecap="round"></path>
-                <path d="M24.9607843,53.4117647 L28.254902,45.7254902" id="Path" stroke-linecap="round"></path>
-                <path d="M32.6470588,53.4117647 L35.9411765,45.7254902" id="Path" stroke-linecap="round"></path>
-                <path d="M40.3333333,53.4117647 L43.627451,45.7254902" id="Path" stroke-linecap="round"></path>
-                <path d="M48.0196078,53.4117647 L51.3137255,45.7254902" id="Path" stroke-linecap="round"></path>
-                <path d="M55.7058824,53.4117647 L59,45.7254902" id="Path" stroke-linecap="round"></path>
-                <path d="M66.6862745,48.9537255 C66.6862745,47.1858824 65.2457516,45.7254902 63.5019608,45.7254902 L6.18431373,45.7254902 C4.44052288,45.7254902 3,47.1858824 3,48.9537255 L3,50.1835294 C3,51.9513725 4.44052288,53.4117647 6.18431373,53.4117647 L63.5019608,53.4117647 C65.2457516,53.4117647 66.6862745,51.9513725 66.6862745,50.1835294 L66.6862745,48.9537255 Z" id="Path" stroke-width="3" fill="#FFFFFF" stroke-linecap="round"></path>
-                <polyline id="Path" stroke-width="3" stroke-linejoin="round" points="8.49019608 55.6078431 8.49019608 60 15.0784314 60 15.0784314 55.6078431"></polyline>
-                <polyline id="Path" stroke-width="3" stroke-linejoin="round" points="54.6078431 55.6078431 54.6078431 60 61.1960784 60 61.1960784 55.6078431"></polyline>
-                <path d="M34.8431373,41.3333333 C34.8431373,41.3333333 38.1372549,32.2421823 38.1372549,28.8888889 C38.1372549,25.3120426 31.5490196,20.170326 31.5490196,16.4444444 C31.5490196,13.091151 34.8431373,4 34.8431373,4" id="Path" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                <path d="M46.9215686,41.3333333 C46.9215686,41.3333333 50.2156863,32.2421823 50.2156863,28.8888889 C50.2156863,25.3120426 43.627451,20.170326 43.627451,16.4444444 C43.627451,13.091151 46.9215686,4 46.9215686,4" id="Path" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                <path d="M22.7647059,41.3333333 C22.7647059,41.3333333 26.0588235,32.2421823 26.0588235,28.8888889 C26.0588235,25.3120426 19.4705882,20.170326 19.4705882,16.4444444 C19.4705882,13.091151 22.7647059,4 22.7647059,4" id="Path" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                <path d="M59,41.3333333 C59,41.3333333 62.2941176,32.2421823 62.2941176,28.8888889 C62.2941176,25.3120426 55.7058824,20.170326 55.7058824,16.4444444 C55.7058824,13.091151 59,4 59,4" id="Path" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                <path d="M10.6862745,41.3333333 C10.6862745,41.3333333 13.9803922,32.2421823 13.9803922,28.8888889 C13.9803922,25.3120426 7.39215686,20.170326 7.39215686,16.4444444 C7.39215686,13.091151 10.6862745,4 10.6862745,4" id="Path" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="bed.svg"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)">
+  <metadata
+     id="metadata16">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>folder</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     pagecolor="#bfbfbf"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="837"
+     id="namedview12"
+     showgrid="false"
+     inkscape:pagecheckerboard="false"
+     inkscape:zoom="7.6562596"
+     inkscape:cx="33.160784"
+     inkscape:cy="32.028182"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg10"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:document-rotation="0" />
+  <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title2">folder</title>
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <path
+     d="m 60.5,47.162805 c 0,-1.581095 -1.289285,-2.887217 -2.849999,-2.887217 H 6.3500004 c -1.5607143,0 -2.85,1.306122 -2.85,2.887217 v 1.099893 c 0,1.581095 1.2892857,2.887218 2.85,2.887218 H 57.650001 c 1.560714,0 2.849999,-1.306123 2.849999,-2.887218 z"
+     id="path19"
+     stroke-width="3"
+     fill="#ffffff"
+     stroke-linecap="round"
+     style="fill-rule:evenodd;stroke:#ffffff;fill:none" />
+  <polyline
+     id="polyline21"
+     stroke-width="3.35312"
+     stroke-linejoin="round"
+     points="8.49019608 55.6078431 8.49019608 60 15.0784314 60 15.0784314 55.6078431"
+     style="fill:none;fill-rule:evenodd;stroke:#ffffff"
+     transform="matrix(0.89501232,0,0,0.89436406,0.81496344,3.3803529)" />
+  <polyline
+     id="polyline23"
+     stroke-width="3.35312"
+     stroke-linejoin="round"
+     points="54.6078431 55.6078431 54.6078431 60 61.1960784 60 61.1960784 55.6078431"
+     style="fill:none;fill-rule:evenodd;stroke:#ffffff"
+     transform="matrix(0.89501232,0,0,0.89436406,0.81496344,3.3803529)" />
+  <path
+     d="m 32,40.3474 c 0,0 2.948277,-8.130798 2.948277,-11.129863 0,-3.199003 -5.896552,-7.797569 -5.896552,-11.129864 C 29.051725,15.088608 32,6.9578091 32,6.9578091"
+     id="path25"
+     stroke-width="3"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="fill:none;fill-rule:evenodd;stroke:#ffffff" />
+  <path
+     d="m 42.810346,40.3474 c 0,0 2.948275,-8.130798 2.948275,-11.129863 0,-3.199003 -5.896551,-7.797569 -5.896551,-11.129864 0,-2.999065 2.948276,-11.1298639 2.948276,-11.1298639"
+     id="path27"
+     stroke-width="3"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="fill:none;fill-rule:evenodd;stroke:#ffffff" />
+  <path
+     d="m 21.189656,40.3474 c 0,0 2.948275,-8.130798 2.948275,-11.129863 0,-3.199003 -5.896551,-7.797569 -5.896551,-11.129864 0,-2.999065 2.948276,-11.1298639 2.948276,-11.1298639"
+     id="path29"
+     stroke-width="3"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="fill:none;fill-rule:evenodd;stroke:#ffffff" />
+  <path
+     d="m 53.62069,40.3474 c 0,0 2.948277,-8.130798 2.948277,-11.129863 0,-3.199003 -5.896553,-7.797569 -5.896553,-11.129864 0,-2.999065 2.948276,-11.1298639 2.948276,-11.1298639"
+     id="path31"
+     stroke-width="3"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="fill:none;fill-rule:evenodd;stroke:#ffffff" />
+  <path
+     d="m 10.379311,40.3474 c 0,0 2.948276,-8.130798 2.948276,-11.129863 0,-3.199003 -5.8965521,-7.797569 -5.8965521,-11.129864 0,-2.999065 2.9482761,-11.1298639 2.9482761,-11.1298639"
+     id="path33"
+     stroke-width="3"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="fill:none;fill-rule:evenodd;stroke:#ffffff" />
 </svg>
