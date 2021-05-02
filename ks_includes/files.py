@@ -71,7 +71,7 @@ class KlippyFiles(Thread):
                         deletedfiles.remove(item['filename'])
                     else:
                         newfiles.append(item['filename'])
-                        logging.debug("New file: %s", item['filename'])
+                        #logging.debug("New file: %s", item['filename'])
                         self.filelist.append(item['filename'])
                         self.files[item['filename']] = {
                             "size": item['size'],
@@ -84,7 +84,7 @@ class KlippyFiles(Thread):
                         cb(newfiles, deletedfiles, [])
 
                 if len(deletedfiles) > 0:
-                    logging.debug("Deleted files: %s", deletedfiles)
+                    #logging.debug("Deleted files: %s", deletedfiles)
                     for file in deletedfiles:
                         self.filelist.remove(file)
                         self.files.pop(file, None)
@@ -94,7 +94,7 @@ class KlippyFiles(Thread):
                 logging.debug("Error in getting metadata for %s. Retrying in 6 seconds" %(params['filename']))
                 return
 
-            logging.debug("Got metadata for %s" % (result['result']['filename']))
+            #logging.debug("Got metadata for %s" % (result['result']['filename']))
 
             for x in result['result']:
                 self.files[params['filename']][x] = result['result'][x]

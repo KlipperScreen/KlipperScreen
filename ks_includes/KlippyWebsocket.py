@@ -206,7 +206,7 @@ class MoonrakerApi:
         )
 
     def get_file_metadata(self, filename, callback=None, *args):
-        logging.debug("Sending server.files.metadata: %s", filename)
+        #logging.debug("Sending server.files.metadata: %s", filename)
         return self._ws.send_method(
             "server.files.metadata",
             {"filename": filename},
