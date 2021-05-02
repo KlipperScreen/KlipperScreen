@@ -379,7 +379,7 @@ class KlipperScreen(Gtk.Window):
         style_provider = Gtk.CssProvider()
 
 
-        css = open(klipperscreendir + "/styles/style.css")
+        css = open(klipperscreendir + "/styles/%s/style.css" % (self._config.get_main_config_option("theme","colorized")))
         css_data = css.read()
         css.close()
         css_data = css_data.replace("KS_FONT_SIZE",str(self.gtk.get_font_size()))
