@@ -41,13 +41,14 @@
      inkscape:window-height="837"
      id="namedview59"
      showgrid="false"
-     inkscape:zoom="7.85"
-     inkscape:cx="38.5"
-     inkscape:cy="40"
+     inkscape:zoom="11.101576"
+     inkscape:cx="44.52251"
+     inkscape:cy="36.039903"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg57" />
+     inkscape:current-layer="svg57"
+     inkscape:document-rotation="0" />
   <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
   <title
      id="title2">extruder-4</title>
@@ -168,18 +169,10 @@
      cy="35.5"
      r="21"
      style="fill-rule:evenodd" />
-  <text
-     id="4"
-     font-family="OpenSans-SemiBold, 'Open Sans'"
-     font-size="26px"
-     font-weight="500"
-     fill="#000000"
-     style="fill-rule:evenodd;stroke:none;stroke-width:1"
-     x="-16.704319"
-     y="13.716797"><tspan
-       x="30.914551"
-       y="44.716797"
-       id="tspan48">4</tspan></text>
+  <path
+     d="m 30.581934,40.644649 8.010234,-17.327578 h 3.938087 L 34.721113,40.443555 H 46.418066 V 43.92918 H 30.581934 Z m 10.339571,-7.306407 h 3.653202 v 14.344687 h -3.653202 z"
+     id="path862"
+     style="font-weight:500;font-size:26px;font-family:OpenSans-SemiBold, 'Open Sans';fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:1" />
   <path
      d="m 35.5,73.5 3,4"
      id="Line-16"

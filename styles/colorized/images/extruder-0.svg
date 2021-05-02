@@ -27,13 +27,13 @@
      inkscape:window-height="837"
      id="namedview17"
      showgrid="false"
-     inkscape:zoom="9.8125"
-     inkscape:cx="31.538717"
-     inkscape:cy="28.059065"
+     inkscape:zoom="6.9384853"
+     inkscape:cx="32.518828"
+     inkscape:cy="27.894751"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg57"
+     inkscape:current-layer="path844"
      inkscape:document-rotation="0" />
   <metadata
      id="metadata63">
@@ -95,30 +95,27 @@
      height="10"
      x="9.5755444"
      y="4.4178715" />
+  <circle
+     id="circle46"
+     stroke="#000000"
+     stroke-width="0.5"
+     fill="#ffffff"
+     cx="32"
+     cy="15.75"
+     style="fill-rule:evenodd;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none"
+     r="15.75" />
   <g
-     id="g843"
-     transform="translate(-12.25,-4)">
-    <circle
-       id="circle46"
-       stroke="#000000"
-       stroke-width="0.5"
-       fill="#ffffff"
-       cx="44.25"
-       cy="19.75"
-       style="fill-rule:evenodd;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none"
-       r="15.75" />
-    <text
-       id="1"
-       font-family="OpenSans-SemiBold, 'Open Sans'"
-       font-size="19.5px"
-       font-weight="500"
-       fill="#000000"
-       style="font-size:21.3333px;fill:#073642;fill-opacity:1;fill-rule:evenodd;stroke:#073642;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="2.6504307"
-       y="4.0885277"><tspan
-         x="38.364586"
-         y="27.338531"
-         id="tspan48"
-         style="font-size:21.3333px;fill:#073642;fill-opacity:1;stroke:#073642;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">0</tspan></text>
+     aria-label="0"
+     id="1"
+     style="font-weight:500;font-size:21.3333px;font-family:OpenSans-SemiBold, 'Open Sans';fill:#073642;fill-opacity:1;fill-rule:evenodd;stroke:#073642;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+    <g
+       id="path844"
+       style="opacity:1">
+      <path
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.3333px;line-height:normal;font-family:OpenSans-SemiBold, 'Open Sans';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#073642;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
+         d="m 32,5.1695896 c -1.937021,0 -3.627638,0.5444752 -4.80455,1.7322853 -1.156672,1.1674801 -1.6992,2.8145306 -1.6992,4.6816601 v 8.332929 c 0,1.859856 0.542683,3.505979 1.694473,4.679298 1.171034,1.192921 2.864893,1.734648 4.809277,1.734648 1.935055,0 3.621719,-0.536146 4.792735,-1.718105 1.16272,-1.173489 1.711015,-2.826654 1.711015,-4.695841 v -8.332929 c 0,-1.8744136 -0.541214,-3.5270328 -1.6992,-4.69584 C 35.632208,5.7043965 33.942426,5.1695896 32,5.1695896 Z m 0,5.0786914 c 0.642281,0 0.849746,0.135544 0.978398,0.28832 l 0.0024,0.0047 0.0047,0.0024 c 0.157832,0.184135 0.311955,0.546851 0.311955,1.254902 v 7.902813 c 0,0.704246 -0.153742,1.06893 -0.32377,1.266718 h -0.0024 c -0.127715,0.148961 -0.335657,0.283546 -0.971302,0.283546 -0.629664,0 -0.845128,-0.135167 -0.983125,-0.290684 -0.162854,-0.198252 -0.314328,-0.560845 -0.314328,-1.25964 v -7.902762 c 0,-0.708053 0.154123,-1.070768 0.311954,-1.254902 l 0.0047,-0.0024 0.0024,-0.0047 c 0.128603,-0.152728 0.336068,-0.288272 0.978349,-0.288272 z"
+         id="path851"
+         sodipodi:nodetypes="scsssscssssscccssccscsscccs" />
+    </g>
   </g>
 </svg>

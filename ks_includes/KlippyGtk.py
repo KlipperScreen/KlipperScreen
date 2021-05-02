@@ -6,6 +6,8 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GdkPixbuf, Gio, GLib, Pango
 import os
 klipperscreendir = os.getcwd()
+theme = "colorized"
+#theme = self._config.get_main_config_option("theme","colorized")
 
 class KlippyGtk:
     labels = {}
@@ -64,7 +66,7 @@ class KlippyGtk:
     def ImageLabel(self, image_name, text, size=20, style=False, width_scale=.32, height_scale=.32):
         box1 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=15)
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            "%s/styles/colorized/images/%s.svg" % (klipperscreendir, str(image_name)),
+            "%s/styles/%s/images/%s.svg" % (klipperscreendir, theme, str(image_name)),
             int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
 
         image = Gtk.Image.new_from_pixbuf(pixbuf)
@@ -82,7 +84,7 @@ class KlippyGtk:
 
     def Image(self, image_name, style=False, width_scale=1, height_scale=1):
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            "%s/styles/colorized/images/%s" % (klipperscreendir, str(image_name)),
+            "%s/styles/%s/images/%s" % (klipperscreendir, theme, str(image_name)),
             int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
 
         return Gtk.Image.new_from_pixbuf(pixbuf)
@@ -132,7 +134,7 @@ class KlippyGtk:
 
     def ButtonImage(self, image_name, label=None, style=None, width_scale=1, height_scale=1,
             position=Gtk.PositionType.TOP, word_wrap=True):
-        filename = "%s/styles/colorized/images/%s.svg" % (klipperscreendir, str(image_name))
+        filename = "%s/styles/%s/images/%s.svg" % (klipperscreendir, theme, str(image_name))
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
             filename,
             int(round(self.img_width * width_scale)),
@@ -198,7 +200,7 @@ class KlippyGtk:
 
 
     def ToggleButtonImage(self, image_name, label, style=False, width_scale=1, height_scale=1):
-        filename = "%s/styles/colorized/images/%s.svg" % (klipperscreendir, str(image_name))
+        filename = "%s/styles/%s/images/%s.svg" % (klipperscreendir, theme, str(image_name))
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
             filename,
             int(round(self.img_width * width_scale)),

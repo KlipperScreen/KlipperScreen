@@ -115,7 +115,7 @@ trough {
 }
 
 .popup {
-    background-color: #002b36; /*base03*/
+    background-color: #268bd2; /*solarized-cyan*/
 }
 
 .action_bar {
@@ -173,12 +173,12 @@ trough {
 }
 
 .message_popup {
-    background-color: #073642; /*base02*/
+    background-color: #dc322f; /*solarazed-red*/
     border-bottom: .1em solid #fdf6e3; /*base3*/
 }
 
 .message_popup button {
-    background-color: #073642; /*base02*/
+    background-color:  #dc322f; /*solarazed-red*/
 }
 
 .numpad_tleft {

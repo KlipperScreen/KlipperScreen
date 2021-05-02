@@ -47,7 +47,8 @@
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg57" />
+     inkscape:current-layer="svg57"
+     inkscape:document-rotation="0" />
   <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
   <title
      id="title2">extruder1</title>
@@ -159,31 +160,19 @@
      cy="35.5"
      r="19.5"
      style="fill:none;fill-rule:evenodd" />
-  <g
-     id="g1017"
-     transform="translate(-15.735668,-1.1496811)">
-    <circle
-       id="circle46"
-       stroke="#000000"
-       stroke-width="0.5"
-       fill="#ffffff"
-       cx="54.235668"
-       cy="36.649681"
-       r="21"
-       style="fill-rule:evenodd" />
-    <text
-       id="1"
-       font-family="OpenSans-SemiBold, 'Open Sans'"
-       font-size="26px"
-       font-weight="500"
-       fill="#000000"
-       style="fill-rule:evenodd;stroke:none;stroke-width:1"
-       x="-0.76433122"
-       y="14.649681"><tspan
-         x="46.854538"
-         y="45.649681"
-         id="tspan48">0</tspan></text>
-  </g>
+  <circle
+     id="circle46"
+     stroke="#000000"
+     stroke-width="0.5"
+     fill="#ffffff"
+     cx="38.5"
+     cy="35.5"
+     r="21"
+     style="fill-rule:evenodd" />
+  <path
+     d="m 38.499999,47.959434 q -3.452109,0 -5.245194,-1.826602 -1.793087,-1.826602 -1.793087,-5.094375 V 29.961543 q 0,-3.284531 1.793087,-5.094375 1.809842,-1.826602 5.245194,-1.826602 3.45211,0 5.245196,1.809844 1.793087,1.809842 1.793087,5.111133 v 11.076914 q 0,3.284531 -1.809845,5.111132 -1.793087,1.809845 -5.228438,1.809845 z m 0,-3.535899 q 1.709297,0 2.513672,-0.938438 0.821134,-0.955195 0.821134,-2.731524 V 30.246425 q 0,-1.776328 -0.804375,-2.714765 -0.804375,-0.955196 -2.530431,-0.955196 -1.726054,0 -2.530429,0.955196 -0.804375,0.938437 -0.804375,2.714765 v 10.507148 q 0,1.776329 0.804375,2.731524 0.821132,0.938438 2.530429,0.938438 z"
+     id="path866"
+     style="font-weight:500;font-size:26px;font-family:OpenSans-SemiBold, 'Open Sans';fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:1" />
   <path
      d="m 35.5,73.5 3,4"
      id="Line-16"

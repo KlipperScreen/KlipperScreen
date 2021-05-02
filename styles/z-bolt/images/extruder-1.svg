@@ -47,7 +47,8 @@
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg57" />
+     inkscape:current-layer="svg57"
+     inkscape:document-rotation="0" />
   <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
   <title
      id="title2">extruder1</title>
@@ -168,18 +169,16 @@
      cy="35.5"
      r="21"
      style="fill-rule:evenodd" />
-  <text
+  <g
+     aria-label="1"
      id="1"
-     font-family="OpenSans-SemiBold, 'Open Sans'"
-     font-size="26px"
-     font-weight="500"
-     fill="#000000"
-     style="fill-rule:evenodd;stroke:none;stroke-width:1"
-     x="-12.870335"
-     y="13.729492"><tspan
-       x="34.748535"
-       y="44.729492"
-       id="tspan48">1</tspan></text>
+     style="font-weight:500;font-size:26px;font-family:OpenSans-SemiBold, 'Open Sans';fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:0.757575"
+     transform="matrix(1.32,0,0,1.32,-12.32,-11.36)">
+    <path
+       d="M 41.172363,44.729492 H 38.366699 V 29.40625 l -2.539062,1.421875 v -2.932617 l 2.666015,-1.625 h 2.678711 z"
+       id="path862"
+       style="stroke-width:0.757575" />
+  </g>
   <path
      d="m 35.5,73.5 3,4"
      id="Line-16"
