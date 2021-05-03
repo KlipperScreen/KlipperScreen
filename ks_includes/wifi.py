@@ -191,7 +191,9 @@ class WifiManager(Thread):
             if prev_ssid != self.connected_ssid:
                 logging.info("Launching callbacks: %s" % self._callbacks['connected'])
                 for cb in self._callbacks['connected']:
-                    cb(self.connected_ssid, prev_ssid)
+                    Gdk.threads_add_idle(
+                        GLib.PRIORITY_DEFAULT_IDLE,
+                        cb, self.connected_ssid, prev_ssid)
             return [vars['ssid'], vars['bssid']]
         else:
             logging.info("Resetting connected_ssid")
@@ -202,7 +204,9 @@ class WifiManager(Thread):
             if prev_ssid != self.connected_ssid:
                 logging.info("Launching callbacks: %s" % self._callbacks['connected'])
                 for cb in self._callbacks['connected']:
-                    cb(self.connected_ssid, prev_ssid)
+                    Gdk.threads_add_idle(
+                        GLib.PRIORITY_DEFAULT_IDLE,
+                        cb, self.connected_ssid, prev_ssid)
             return None
 
     def get_network_info(self, ssid=None, mac=None):
@@ -377,7 +381,9 @@ class WifiManager(Thread):
                 new_networks.append(net)
         if len(new_networks) > 0 or len(deleted_networks) > 0:
             for cb in self._callbacks['scan_results']:
-                cb(new_networks, deleted_networks)
+                Gdk.threads_add_idle(
+                    GLib.PRIORITY_DEFAULT_IDLE,
+                    cb, new_networks, deleted_networks)
         logging.debug("New networks: %s" % new_networks)
         logging.debug("Deleted networks: %s" % deleted_networks)
 
