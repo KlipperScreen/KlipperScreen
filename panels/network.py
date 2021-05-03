@@ -1,6 +1,7 @@
 import gi
 import json
 import logging
+import netifaces
 import os
 import re
 
@@ -26,8 +27,11 @@ class NetworkPanel(ScreenPanel):
         stream = os.popen('hostname -A')
         hostname = stream.read()
         # Get IP Address
-        stream = os.popen('hostname -I')
-        ip = stream.read()
+        res = netifaces.ifaddresses(self.interface)
+        if netifaces.AF_INET in res and len(res[netifaces.AF_INET]) > 0:
+            ip = res[netifaces.AF_INET][0]['addr']
+        else:
+            ip = "0.0.0.0"
 
         # Get active interface
         stream = os.popen("route | grep ^'default' | grep -o '[^ ]*$'")
@@ -76,6 +80,8 @@ class NetworkPanel(ScreenPanel):
         self._screen.wifi.add_callback("connected", self.connected_callback)
         self._screen.wifi.add_callback("scan_results", self.scan_callback)
 
+        self.timeout = GLib.timeout_add_seconds(5, self.update_all_networks)
+
     def load_networks(self):
         networks = self._screen.wifi.get_networks()
         logging.debug("Networks: %s" % json.dumps(networks, indent=2))
@@ -88,10 +94,19 @@ class NetworkPanel(ScreenPanel):
         for net in networks:
             self.add_network(net, False)
 
+        self.update_all_networks()
         self.content.show_all()
 
     def add_network(self, ssid, show=True):
         _ = self.lang.gettext
+
+        if ssid == None:
+            return
+        ssid = ssid.strip()
+
+        if ssid in list(self.networks):
+            logging.info("SSID already listed")
+            return
 
         netinfo = self._screen.wifi.get_network_info(ssid)
         if netinfo == None:
@@ -117,35 +132,9 @@ class NetworkPanel(ScreenPanel):
         name.set_line_wrap(True)
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        stream = os.popen('ip add show dev %s' % self.interface)
-        content = stream.read()
-        ipv4_re = re.compile(r'inet ([0-9\.]+)/[0-9]+', re.MULTILINE)
-        ipv6_re = re.compile(r'inet6 ([a-fA-F0-9:\.]+)/[0-9+]', re.MULTILINE)
-        match = ipv4_re.search(content)
-        ipv4 = ""
-        if match:
-            ipv4 = "<b>%s:</b> %s " % (_("IPv4"), match.group(1))
-        match = ipv6_re.search(content)
-        ipv6 = ""
-        if match:
-            ipv6 = "<b>%s:</b> %s " % (_("IPv6"), match.group(1))
-
-
-        stream = os.popen('hostname -f')
-        hostname = stream.read().strip()
-
         logging.debug("netinfo: %s" % netinfo)
-        connected = ""
-        if netinfo['connected'] == True:
-            connected = "<b>%s</b>\n<b>%s:</b> %s\n%s%s\n" % (_("Connected"),_("Hostname"),hostname, ipv4, ipv6)
-        elif "psk" in netinfo:
-            connected = "Password saved."
-        freq = "2.4 GHz" if netinfo['frequency'][0:1] == "2" else "5 Ghz"
+
         info = Gtk.Label()
-        info.set_markup("%s%s <small>%s %s %s  %s%s</small>" % ( connected,
-            "" if netinfo['encryption'] == "off" else netinfo['encryption'].upper(),
-            freq, _("Channel"), netinfo['channel'], netinfo['signal_level_dBm'], _("dBm")
-            ))
         info.set_halign(Gtk.Align.START)
         #info.set_markup(self.get_file_info_str(ssid))
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -160,7 +149,7 @@ class NetworkPanel(ScreenPanel):
         connect.set_hexpand(False)
         connect.set_halign(Gtk.Align.END)
 
-        delete = self._gtk.ButtonImage("decrease",_("Delete"),"color3")
+        delete = self._gtk.ButtonImage("delete","","color3")
         delete.connect("clicked", self.remove_wifi_network, ssid)
         delete.set_size_request(60,0)
         delete.set_hexpand(False)
@@ -220,12 +209,49 @@ class NetworkPanel(ScreenPanel):
         if show == True:
             logging.info("Showing row")
             self.labels['networklist'].show()
-        logging.info("Showing network info")
+        #logging.info("Showing network info")
 
         i = 0
-        while self.labels['networklist'].get_child_at(0, i) != None:
-            logging.info("%s: %s" % (i, self.labels['networklist'].get_child_at(0, i)))
-            i = i+1
+        #while self.labels['networklist'].get_child_at(0, i) != None:
+        #    logging.info("%s: %s" % (i, self.labels['networklist'].get_child_at(0, i)))
+        #    i = i+1
+
+    def update_all_networks(self):
+        for network in list(self.networks):
+            self.update_network_info(network)
+        return True
+
+    def update_network_info(self, ssid):
+        _ = self.lang.gettext
+
+        if ssid not in self.networks or ssid not in self.labels['networks']:
+            return
+        netinfo = self._screen.wifi.get_network_info(ssid)
+        if netinfo == None:
+            logging.debug("Couldn't get netinfo for %s" % ssid)
+            return
+
+        connected = ""
+        if netinfo['connected'] == True:
+            stream = os.popen('hostname -f')
+            hostname = stream.read().strip()
+            ifadd = netifaces.ifaddresses(self.interface)
+            ipv4 = ""
+            ipv6 = ""
+            if netifaces.AF_INET in ifadd and len(ifadd[netifaces.AF_INET]) > 0:
+                ipv4 = "<b>%s:</b> %s " % (_("IPv4"), ifadd[netifaces.AF_INET][0]['addr'])
+            if netifaces.AF_INET6 in ifadd and len(ifadd[netifaces.AF_INET6]) > 0:
+                ipv6 = ipv6 = "<b>%s:</b> %s " % (_("IPv6"), ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0])
+            connected = "<b>%s</b>\n<b>%s:</b> %s\n%s%s\n" % (_("Connected"),_("Hostname"),hostname, ipv4, ipv6)
+        elif "psk" in netinfo:
+            connected = "Password saved."
+        freq = "2.4 GHz" if netinfo['frequency'][0:1] == "2" else "5 Ghz"
+
+        self.labels['networks'][ssid]['info'].set_markup("%s%s <small>%s %s %s  %s%s</small>" % ( connected,
+            "" if netinfo['encryption'] == "off" else netinfo['encryption'].upper(),
+            freq, _("Channel"), netinfo['channel'], netinfo['signal_level_dBm'], _("dBm")
+            ))
+        self.labels['networks'][ssid]['info'].show_all()
 
     def remove_network_wid(self, widget, ssid):
         self.remove_network(ssid)
@@ -234,11 +260,13 @@ class NetworkPanel(ScreenPanel):
         if ssid not in self.networks:
             return
 
+        logging.info("Removing network %s" % ssid)
         i = 0
         while self.labels['networklist'].get_child_at(0, i) != None:
             logging.info("%s: %s %s" % (i, self.labels['networklist'].get_child_at(0, i), self.networks[ssid]))
             if self.networks[ssid] == self.labels['networklist'].get_child_at(0, i):
                 self.labels['networklist'].remove_row(i)
+                self.labels['networklist'].show()
                 del self.networks[ssid]
                 del self.labels['networks'][ssid]
                 logging.info("Found, returning")
@@ -272,6 +300,7 @@ class NetworkPanel(ScreenPanel):
         logging.info("Check missing networks (scan, displayed): %s %s" % (networks, list(self.networks)))
         for net in networks:
             self.add_network(net)
+        self.labels['networklist'].show_all()
 
     def connect_network(self, widget, ssid, showadd=True):
         _ = self.lang.gettext
@@ -320,7 +349,7 @@ class NetworkPanel(ScreenPanel):
             self.remove_network(ssid)
         if prev_ssid != None:
             self.remove_network(prev_ssid)
-            
+
         self.check_missing_networks()
 
     def connecting_status_callback(self, msg):
@@ -338,11 +367,12 @@ class NetworkPanel(ScreenPanel):
 
 
     def scan_callback(self, new_networks, old_networks):
-        for net in new_networks:
-            self.add_network(net, False)
         for net in old_networks:
             self.remove_network(net, False)
+        for net in new_networks:
+            self.add_network(net, False)
         self.content.show_all()
+        logging.info("Showing all content")
 
     def close_add_network(self, widget, ssid):
         for child in self.content.get_children():

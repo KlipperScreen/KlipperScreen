@@ -7,6 +7,7 @@ import time
 import threading
 
 import json
+import netifaces
 import requests
 import websocket
 import importlib
@@ -88,8 +89,8 @@ class KlipperScreen(Gtk.Window):
         self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', fallback=True)
         self._config = KlipperScreenConfig(configfile, self.lang, self)
 
-        self.network_interfaces = functions.get_network_interfaces()
-        self.wireless_interfaces = functions.get_wireless_interfaces()
+        self.network_interfaces = netifaces.interfaces()
+        self.wireless_interfaces = [int for int in self.network_interfaces if int.startswith('w')]
         if len(self.wireless_interfaces) > 0:
             logging.info("Found wireless interfaces: %s" % self.wireless_interfaces)
             self.wifi = WifiManager(self.wireless_interfaces[0])
