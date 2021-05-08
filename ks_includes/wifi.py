@@ -255,7 +255,7 @@ class WifiManager(Thread):
             return False
         return True
 
-    def delete_network(ssid):
+    def delete_network(self, ssid):
         id = None
         for i in list(self.supplicant_networks):
             if self.supplicant_networks[i]['ssid'] == ssid:
@@ -267,6 +267,11 @@ class WifiManager(Thread):
             return
         logging.debug("Deleting network %s" % (id))
         self.wpa_cli("REMOVE_NETWORK %s" % id)
+
+        for id in list(self.supplicant_networks):
+            if self.supplicant_networks[id]['ssid'] == ssid:
+                del self.supplicant_networks[id]
+                break
 
     def connect(self, ssid):
         id = None
