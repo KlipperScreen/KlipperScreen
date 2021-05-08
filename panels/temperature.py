@@ -49,7 +49,8 @@ class TemperaturePanel(ScreenPanel):
         i = 0
         cols = 3 if len(self.heaters) > 4 else (1 if len(self.heaters) <= 2 else 2)
         for h in self.heaters:
-            self.labels[h].connect('clicked', self.select_heater, h)
+            if not (h.startswith("temperature_sensor")):
+                self.labels[h].connect('clicked', self.select_heater, h)
             eq_grid.attach(self.labels[h], i%cols, int(i/cols), 1, 1)
             i += 1
 
