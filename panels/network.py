@@ -281,7 +281,7 @@ class NetworkPanel(ScreenPanel):
         psk = self.labels['network_psk'].get_text()
         result = self._screen.wifi.add_network(ssid, psk)
 
-        self.close_add_network()
+        self.close_add_network(widget, ssid)
 
         if connect == True:
             if result == True:
