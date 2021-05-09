@@ -38,10 +38,11 @@ class KlippyFiles():
                 newfiles = []
                 deletedfiles = self.filelist.copy()
                 for item in result['result']:
-                    if item['filename'] in self.files:
-                        deletedfiles.remove(item['filename'])
+                    file = item['filename'] if "filename" in item else item['path']
+                    if file in self.files:
+                        deletedfiles.remove(file)
                     else:
-                        newfiles.append(item['filename'])
+                        newfiles.append(file)
                         self.add_file(item, False)
 
                 if len(newfiles) > 0 or len(deletedfiles) > 0:
