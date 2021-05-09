@@ -221,11 +221,11 @@ class Printer:
 
     def get_stat(self, stat, substat = None):
         if stat not in self.data:
-            return None
+            return {}
         if substat != None:
             if substat in self.data[stat]:
                 return self.data[stat][substat]
-            return None
+            return {}
         return self.data[stat]
 
     def get_state(self):
