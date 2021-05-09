@@ -54,6 +54,10 @@ class PrintPanel(ScreenPanel):
             self.labels['sort_%s' % name] = s
             sbox.add(s)
             i += 1
+
+        refresh = self._gtk.ButtonImage("refresh", None, None, .5, .5)
+        refresh.connect('clicked', self._refresh_files)
+        sbox.add(refresh)
         sbox.set_hexpand(True)
         sbox.set_vexpand(False)
 
@@ -415,3 +419,6 @@ class PrintPanel(ScreenPanel):
         logging.debug("updatefiles: %s", updatedfiles)
         for file in updatedfiles:
             self.update_file(file)
+
+    def _refresh_files(self, widget):
+        self._files.refresh_files()
