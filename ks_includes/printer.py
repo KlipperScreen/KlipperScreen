@@ -55,12 +55,10 @@ class Printer:
                     continue
                 self.extrudercount += 1
             if x == 'heater_bed' or x.startswith('heater_generic ') or x.startswith('temperature_sensor '):
-                logging.info("X: %s" % x)
                 self.devices[x] = {
                     "temperature": 0,
                     "target": 0
                 }
-                logging.info("self.devices: %s" % self.devices)
             if x.startswith('bed_mesh '):
                 r = self.config[x]
                 r['x_count'] = int(r['x_count'])
