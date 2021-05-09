@@ -541,6 +541,8 @@ class KlipperScreen(Gtk.Window):
 
         if "job_status" not in self._cur_panels:
             self.printer_printing()
+        else:
+            self.panels["job_status"].new_print()
 
     def state_ready(self):
         if "printer_select" in self._cur_panels:

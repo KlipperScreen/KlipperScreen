@@ -220,14 +220,10 @@ class JobStatusPanel(ScreenPanel):
         state = "printing"
         self.update_text("status",_("Printing"))
 
-        self.filename = self._printer.get_stat('print_stats','filename')
-        self.update_text("file", self._printer.get_stat('print_stats','filename'))
-        self.update_percent_complete()
-        self.update_file_metadata()
-
         ps = self._printer.get_stat("print_stats")
         logging.debug("Act State: %s" % ps['state'])
         self.set_state(ps['state'])
+
         self.show_buttons_for_state()
 
         if self.timeout == None:
@@ -347,6 +343,15 @@ class JobStatusPanel(ScreenPanel):
             self.update_file_metadata()
             self._files.remove_file_callback(self._callback_metadata)
 
+    def new_print(self):
+        if self.state in ["cancelled","complete","error"]:
+            for to in self.close_timeouts:
+                GLib.source_remove(to)
+                self.close_timeouts.remove(to)
+            if self.timeout == None:
+                GLib.timeout_add(500, self.state_check)
+            self.state_check()
+
     def process_update(self, action, data):
         if action == "notify_gcode_response":
             if "action:cancel" in data:
@@ -371,6 +376,11 @@ class JobStatusPanel(ScreenPanel):
 
         ps = self._printer.get_stat("print_stats")
         vsd = self._printer.get_stat("virtual_sdcard")
+
+        if "print_stats" in data and "filename" in data['print_stats']:
+            if data['print_stats']['filename'] != self.filename and self.state not in  ["cancelling","cancelled","complete"]:
+                logging.debug("filename: '%s' '%s' status: %s" % (self.filename, data['print_stats']['filename'], self.state))
+                self.update_filename()
 
         if "toolhead" in data:
             if "extruder" in data["toolhead"]:
@@ -434,7 +444,7 @@ class JobStatusPanel(ScreenPanel):
         if ps['state'] == self.state:
             return True
         _ = self.lang.gettext
-        
+
         if ps['state'] == "printing" and self.state != "printing" and self.state != "cancelling":
             self.set_state("printing")
         elif ps['state'] == "complete" and self.state != "complete":
@@ -462,7 +472,6 @@ class JobStatusPanel(ScreenPanel):
             return False
         elif ps['state'] == "paused":
             self.set_state("paused")
-            self.show_buttons_for_state()
 
         # TODO: Remove this in the future
         if self.filename != ps['filename']:
@@ -485,16 +494,8 @@ class JobStatusPanel(ScreenPanel):
         logging.debug("Changing job_status state from '%s' to '%s'" % (self.state, state))
         self.state = state
         if state == "paused":
-            self.labels['button_grid'].remove(self.labels['resume'])
-            self.labels['button_grid'].remove(self.labels['pause'])
-            self.labels['button_grid'].attach(self.labels['pause'], 0, 0, 1, 1)
-            self.labels['button_grid'].show_all()
             self.update_text("status",_("Paused"))
         elif state == "printing":
-            self.labels['button_grid'].remove(self.labels['resume'])
-            self.labels['button_grid'].remove(self.labels['pause'])
-            self.labels['button_grid'].attach(self.labels['resume'], 0, 0, 1, 1)
-            self.labels['button_grid'].show_all()
             self.update_text("status",_("Printing"))
         elif state == "cancelling":
             self.update_text("status",_("Cancelling"))
@@ -535,6 +536,12 @@ class JobStatusPanel(ScreenPanel):
             pixbuf = self.get_file_image(self.filename, 7, 3.25)
             if pixbuf != None:
                 self.labels['thumbnail'].set_from_pixbuf(pixbuf)
+
+    def update_filename(self):
+        self.filename = self._printer.get_stat('print_stats','filename')
+        self.update_text("file", self._printer.get_stat('print_stats','filename'))
+        self.update_percent_complete()
+        self.update_file_metadata()
 
     def update_file_metadata(self):
         if self._files.file_metadata_exists(self.filename):
