@@ -83,6 +83,8 @@ class PreheatPanel(ScreenPanel):
                 self.select_heater(None, x)
 
         for h in self._printer.get_heaters():
+            if h.startswith("temperature_sensor "):
+                continue
             if h not in self.active_heaters:
                 self.select_heater(None, h)
 
