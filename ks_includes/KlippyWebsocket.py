@@ -50,6 +50,7 @@ class KlippyWebsocket(threading.Thread):
         # Enable a timeout so that way if moonraker is not running, it will attempt to reconnect
         if self.timeout == None:
             self.timeout = GLib.timeout_add(500, self.reconnect)
+        self.connect()
 
     def connect (self):
         try:
@@ -125,7 +126,9 @@ class KlippyWebsocket(threading.Thread):
         logging.info("Moonraker Websocket Open")
         logging.info("Self.connected = %s" % self.is_connected())
         self.connected = True
-        self.timeout = None
+        if self.timeout != None:
+            GLib.source_remove(self.timeout)
+            self.timeout = None
         if "on_connect" in self._callback:
             Gdk.threads_add_idle(
                 GLib.PRIORITY_HIGH_IDLE,
@@ -155,11 +158,11 @@ class KlippyWebsocket(threading.Thread):
             )
 
     def reconnect(self):
-        logging.debug("Attempting to reconnect")
         if self.is_connected():
             logging.debug("Reconnected")
             return False
 
+        logging.debug("Attempting to reconnect")
         self.connect()
         return True
 
@@ -197,7 +200,7 @@ class MoonrakerApi:
 
     def get_file_list(self, callback=None, *args):
         #Commenting this log for being too noisy
-        #logging.debug("Sending server.files.list")
+        logging.debug("Sending server.files.list")
         return self._ws.send_method(
             "server.files.list",
             {},
