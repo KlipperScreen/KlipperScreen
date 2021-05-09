@@ -151,7 +151,6 @@ class KlipperScreen(Gtk.Window):
         self.printer_select_prepanel = None
 
         if self.files is not None:
-            self.files.stop()
             self.files = None
 
         for printer in self._config.get_printers():
@@ -216,11 +215,9 @@ class KlipperScreen(Gtk.Window):
             data["moonraker_host"],
             data["moonraker_port"]
         )
+        self.files = KlippyFiles(self)
         self._ws.initial_connect()
         self.connecting = False
-
-        self.files = KlippyFiles(self)
-        self.files.start()
 
         self.connected_printer = name
         logging.debug("Connected to printer: %s" % name)
@@ -660,6 +657,8 @@ class KlipperScreen(Gtk.Window):
         # Reinitialize printer, in case the printer was shut down and anything has changed.
         self.printer.reinit(printer_info['result'], data)
         self.ws_subscribe()
+
+        self.files.refresh_files()
 
         if powerdevs != False:
             self.printer.configure_power_devices(powerdevs['result'])

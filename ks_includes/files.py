@@ -1,23 +1,16 @@
 import logging
-import asyncio
 import json
 import os
 import base64
-
-from contextlib import suppress
-from threading import Thread
 
 import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
 
-RESCAN_INTERVAL = 4
-
-class KlippyFiles(Thread):
+class KlippyFiles():
     thumbnail_dir = "/tmp/.KS-thumbnails"
 
-    def __init__(self, screen, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, screen):
         self.loop = None
         self._poll_task = None
         self._screen = screen
@@ -26,40 +19,8 @@ class KlippyFiles(Thread):
         self.filelist = []
         self.metadata_timeout = {}
 
-        logging.info("")
-
         if not os.path.exists(self.thumbnail_dir):
             os.makedirs(self.thumbnail_dir)
-
-    def run(self):
-        self.loop = asyncio.new_event_loop()
-        loop = self.loop
-        asyncio.set_event_loop(loop)
-        try:
-            self._poll_task = asyncio.ensure_future(self._poll())
-            loop.run_forever()
-            loop.run_until_complete(loop.shutdown_asyncgens())
-
-            self._poll_task.cancel()
-            with suppress(asyncio.CancelledError):
-                loop.run_until_complete(self._poll_task)
-        finally:
-            logging.info("Closing loop")
-            loop.close()
-
-    def stop(self):
-        logging.info("Trying to stop loop2")
-        self.loop.call_soon_threadsafe(self.loop.stop)
-
-    async def _poll(self):
-        await self.ret_files()
-        while True:
-            try:
-                await self.ret_files()
-            except:
-                logging.exception("Poll files error")
-            await asyncio.sleep(4)
-
 
     def _callback(self, result, method, params):
         if method == "server.files.list":
@@ -145,7 +106,7 @@ class KlippyFiles(Thread):
             return False
         self._screen._ws.klippy.get_file_metadata(filename, self._callback)
 
-    async def ret_files(self, retval=True):
+    def refresh_files(self):
         self._screen._ws.klippy.get_file_list(self._callback)
 
     def ret_file_data (self, filename):
