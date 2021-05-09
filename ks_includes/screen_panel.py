@@ -100,7 +100,15 @@ class ScreenPanel:
     def get_file_image(self, filename, width=1.6, height=1.6):
         if not self._files.has_thumbnail(filename):
             return None
-        return self._gtk.PixbufFromFile(self._files.get_thumbnail_location(filename), None, width, height)
+
+        loc = self._files.get_thumbnail_location(filename)
+        if loc == None:
+            return None
+        if loc[0] == "file":
+            return self._gtk.PixbufFromFile(loc[1], None, width, height)
+        if loc[0] == "http":
+            return self._gtk.PixbufFromHttp(loc[1], None, width, height)
+        return None
 
     def home(self, widget):
         self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)

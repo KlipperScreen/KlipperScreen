@@ -3,7 +3,7 @@ import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GdkPixbuf, GLib, Pango
+from gi.repository import Gtk, Gdk, GdkPixbuf, Gio, GLib, Pango
 import os
 klipperscreendir = os.getcwd()
 
@@ -13,7 +13,8 @@ class KlippyGtk:
     width_ratio = 16
     height_ratio = 9.375
 
-    def __init__(self, width, height):
+    def __init__(self, screen, width, height):
+        self.screen = screen
         self.width = width
         self.height = height
 
@@ -94,6 +95,16 @@ class KlippyGtk:
 
     def PixbufFromFile(self, filename, style=False, width_scale=1, height_scale=1):
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename, int(round(self.img_width * width_scale)),
+            int(round(self.img_height * height_scale)), True)
+
+        return pixbuf
+
+    def PixbufFromHttp(self, resource, style=False, width_scale=1, height_scale=1):
+        response = self.screen.apiclient.get_thumbnail_stream(resource)
+        if response == False:
+            return None
+        stream = Gio.MemoryInputStream.new_from_data(response, None)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(stream, int(round(self.img_width * width_scale)),
             int(round(self.img_height * height_scale)), True)
 
         return pixbuf

@@ -394,8 +394,9 @@ class PrintPanel(ScreenPanel):
             for child in self.dir_panels[dirpan].get_children():
                 self.dir_panels[dirpan].remove(child)
 
-        for file in self._screen.files.get_file_list():
-            self.add_file(file)
+        flist = sorted(self._screen.files.get_file_list(), key=lambda item: '/' in item)
+        for file in flist:
+            GLib.idle_add(self.add_file, file)
 
     def update_file(self, filename):
         if filename not in self.labels['files']:

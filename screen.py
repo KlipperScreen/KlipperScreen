@@ -109,7 +109,7 @@ class KlipperScreen(Gtk.Window):
         self.set_resizable(False)
         logging.info("Screen resolution: %sx%s" % (self.width, self.height))
 
-        self.gtk = KlippyGtk(self.width, self.height)
+        self.gtk = KlippyGtk(self, self.width, self.height)
         self.init_style()
 
         self.printer_initializing(_("Initializing"))
@@ -586,7 +586,8 @@ class KlipperScreen(Gtk.Window):
             self.printer.process_update(data)
         elif action == "notify_filelist_changed":
             logging.debug("Filelist changed: %s", json.dumps(data,indent=2))
-            #self.files.add_file()
+            if self.files != None:
+                self.files.process_update(data)
         elif action == "notify_metadata_update":
             self.files.request_metadata(data['filename'])
         elif action == "notify_power_changed":
@@ -652,7 +653,13 @@ class KlipperScreen(Gtk.Window):
         _ = self.lang.gettext
 
         printer_info = self.apiclient.get_printer_info()
+        if printer_info == False:
+            logging.info("Unable to get printer info from moonraker")
+            return False
         data = self.apiclient.send_request("printer/objects/query?" + "&".join(PRINTER_BASE_STATUS_OBJECTS))
+        if data == False:
+            logging.info("Error getting printer object data")
+            return False
         powerdevs = self.apiclient.send_request("machine/device_power/devices")
         data = data['result']['status']
 
@@ -660,6 +667,7 @@ class KlipperScreen(Gtk.Window):
         self.printer.reinit(printer_info['result'], data)
         self.ws_subscribe()
 
+        self.files.initialize()
         self.files.refresh_files()
 
         if powerdevs != False:
