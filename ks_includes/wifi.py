@@ -298,7 +298,8 @@ class WifiManager():
                     break
 
     def wpa_cli(self, command, wait=True):
-        logging.info("wpa_cmd: %s" % command)
+        if not ("psk" in command):
+            logging.info("wpa_cmd: %s" % command)
         if wait == False:
             self.wpa_thread.skip_command()
         self.soc.send(command.encode())
@@ -309,7 +310,7 @@ class WifiManager():
 
     def wpa_cli_batch(self, commands):
         for cmd in commands:
-            logging.debug("wpa_cli %s: %s" % (cmd, self.wpa_cli(cmd)))
+            self.wpa_cli(cmd)
 
     def get_supplicant_networks(self):
         return self.supplicant_networks
