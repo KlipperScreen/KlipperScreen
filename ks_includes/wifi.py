@@ -17,23 +17,18 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
 
-RESCAN_INTERVAL = 300
-
-import signal
-
-def sigint_handler(signal, frame):
-    logging.exception("SIGINT received", frame)
-
-signal.signal(signal.SIGINT, sigint_handler)
+RESCAN_INTERVAL = 180
+KS_SOCKET_FILE = "/tmp/.KS_wpa_supplicant"
 
 class WpaSocket(Thread):
-    def __init__ (self, soc, queue, callback):
+    def __init__ (self, wm, queue, callback):
         super().__init__()
         self.queue = queue
         self.callback = callback
-        self.soc = soc
+        self.soc = wm.soc
         self._stop_loop = False
         self.skip_commands = 0
+        self.wm = wm
 
     def skip_command(self):
         self.skip_commands = self.skip_commands + 1
@@ -52,40 +47,35 @@ class WpaSocket(Thread):
                 logging.debug("wpasock: %s" % msg)
                 if "CTRL-EVENT-SCAN-RESULTS" in msg:
                     logging.info("Adding scan_results to callbacks")
-                    self.callback("add_item", "scan_results")
+                    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.wm.scan_results)
                 elif "CTRL-EVENT-DISCONNECTED" in msg:
                     self.callback("connecting_status", msg)
                     match = re.match('<3>CTRL-EVENT-DISCONNECTED bssid=(\S+) reason=3 locally_generated=1', msg)
                     if match:
-                        self.callback("disconnected", match.group(1))
-                    #self.connecting_info.append("WiFi Disconnconnected")
-                    #logging.info("Info: %s" % self.connecting_info)
+                        for net in self.wm.networks:
+                            if self.wm.networks[net]['mac'] == match.group(1):
+                                self.wm.networks[net]['connected'] = False
+                                break
                 elif "Trying to associate" in msg:
                     self.callback("connecting_status", msg)
-                    #self.connecting_info.append("Trying to associate with SSID ")
-                    #logging.info("Info: %s" % self.connecting_info)
                 elif "CTRL-EVENT-REGDOM-CHANGE" in msg:
                     self.callback("connecting_status", msg)
                 elif "CTRL-EVENT-CONNECTED" in msg:
-                    #self.connecting_info.append("WiFi Connected")
-                    self.callback("add_item", "get_current_wifi")
+                    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.wm.get_current_wifi_idle_add)
                     self.callback("connecting_status", msg)
-                    #logging.info("Info: %s" % self.connecting_info)
             else:
                 if self.skip_commands > 0:
-                    #logging.info("wpasock: Skipping: %s" % msg)
                     self.skip_commands = self.skip_commands - 1
                     logging.info("-Skip commands: %s" % self.skip_commands)
                 else:
-                    #logging.debug("wpasock: %s" % msg)
-                    #self.queue.put_nowait(msg)
                     self.queue.put(msg)
+        logging.info("Wifi event loop ended")
 
 
     def stop(self):
         self._stop_loop = True
 
-class WifiManager(Thread):
+class WifiManager():
     networks_in_supplicant = []
     connected = False
     _stop_loop = False
@@ -106,63 +96,60 @@ class WifiManager(Thread):
         self.connected_ssid = None
         self.connecting_info = []
         self.event = threading.Event()
+        self.initialized = False
         self.interface = interface
         self.networks = {}
         self.supplicant_networks = {}
         self.queue = Queue()
         self.tasks = []
+        self.timeout = None
         self.scan_time = 0
 
-        if os.path.exists("/tmp/.KS_wpa_supplicant"):
-            os.remove("/tmp/.KS_wpa_supplicant")
-        self.soc = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
-        self.soc.bind("/tmp/.KS_wpa_supplicant")
-        self.soc.connect("/var/run/wpa_supplicant/wlan0")
-        self.soc.settimeout(.01)
+        if os.path.exists(KS_SOCKET_FILE):
+            os.remove(KS_SOCKET_FILE)
 
-        self.queue = Queue()
-        self.wpa_thread = WpaSocket(self.soc, self.queue, self.callback)
+        try:
+            self.soc = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
+            self.soc.bind(KS_SOCKET_FILE)
+            self.soc.connect("/var/run/wpa_supplicant/%s" % interface)
+            self.soc.settimeout(.01)
+        except:
+            logging.info("Error connecting to wifi socket: %s" % interface)
+            return
+
+        self.wpa_thread = WpaSocket(self, self.queue, self.callback)
         self.wpa_thread.start()
+        self.initialized = True
 
         self.wpa_cli("ATTACH", False)
         self.wpa_cli("SCAN", False)
-        self.tasks.append([self.read_wpa_supplicant, []])
+        GLib.idle_add(self.read_wpa_supplicant)
+        self.timeout = GLib.timeout_add_seconds(RESCAN_INTERVAL, self.rescan)
 
-    def run(self):
-        while self._stop_loop == False:
-            while len(self.tasks) > 0:
-                logging.info("Running self.tasks %s" % self.tasks[0])
-                task = self.tasks.pop(0)
-                task[0](*task[1])
+    def rescan(self):
+        self.wpa_cli("SCAN", False)
+        return True
 
-            self.event.wait(1)
-            if int(time.time()) > self.scan_time + RESCAN_INTERVAL:
-                self.scan_time = int(time.time())
-                self.wpa_cli("SCAN", False)
+    #def run(self):
+    #    while self._stop_loop == False:
+    #        while len(self.tasks) > 0:
+    #            logging.info("Running self.tasks %s" % self.tasks[0])
+    #            task = self.tasks.pop(0)
+    #            task[0](*task[1])
+    #
+    #        self.event.wait(1)
+    #        if int(time.time()) > self.scan_time + RESCAN_INTERVAL:
+    #            self.scan_time = int(time.time())
+    #            self.wpa_cli("SCAN", False)
 
     def callback(self, type, msg):
-        if type == "add_item":
-            if msg == "get_current_wifi":
-                self.tasks.append([self.get_current_wifi,[]])
-            elif msg == "scan_results":
-                self.tasks.append([self.scan_results,[]])
-            logging.info("Setting event. Tasks: %s" % self.tasks)
-            self.event.set()
-        elif type == "disconnected":
-            for net in self.networks:
-                if self.networks[net]['mac'] == msg:
-                    self.networks[net]['connected'] = False
-                    break
-        elif type in self._callbacks:
+        if type in self._callbacks:
             for cb in self._callbacks[type]:
                 Gdk.threads_add_idle(
                     GLib.PRIORITY_DEFAULT_IDLE,
                     cb,
                     msg)
 
-    def stop(self):
-        logging.info("Trying to stop WiFi asyncio loop")
-        self._stop_loop = True
 
     def add_callback(self, name, callback):
         if name in self._callbacks and callback not in self._callbacks[name]:
@@ -209,6 +196,10 @@ class WifiManager(Thread):
                         cb, self.connected_ssid, prev_ssid)
             return None
 
+    def get_current_wifi_idle_add(self):
+        self.get_current_wifi()
+        return False
+
     def get_network_info(self, ssid=None, mac=None):
         if ssid is not None and ssid in self.networks:
             return self.networks[ssid]
@@ -223,6 +214,9 @@ class WifiManager(Thread):
 
     def is_connected(self):
         return self.connected
+
+    def is_initialized(self):
+        return self.initialized
 
     def get_connected_ssid(self):
         return self.connected_ssid

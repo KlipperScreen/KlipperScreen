@@ -91,10 +91,10 @@ class KlipperScreen(Gtk.Window):
 
         self.network_interfaces = netifaces.interfaces()
         self.wireless_interfaces = [int for int in self.network_interfaces if int.startswith('w')]
+        self.wifi = None
         if len(self.wireless_interfaces) > 0:
             logging.info("Found wireless interfaces: %s" % self.wireless_interfaces)
             self.wifi = WifiManager(self.wireless_interfaces[0])
-            self.wifi.start()
 
         logging.debug("OS Language: %s" % os.getenv('LANG'))
 
