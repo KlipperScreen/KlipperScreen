@@ -50,7 +50,7 @@ class JobStatusPanel(ScreenPanel):
         self.labels['status'].set_halign(Gtk.Align.START)
         self.labels['status'].set_vexpand(False)
         self.labels['status'].get_style_context().add_class("printing-status")
-        self.labels['lcdmessage'] = Gtk.Label()
+        self.labels['lcdmessage'] = Gtk.Label("")
         self.labels['lcdmessage'].set_halign(Gtk.Align.START)
         self.labels['lcdmessage'].set_vexpand(False)
         self.labels['lcdmessage'].get_style_context().add_class("printing-status")
@@ -595,9 +595,10 @@ class JobStatusPanel(ScreenPanel):
 
     def update_progress (self):
         self.labels['progress_text'].set_text("%s%%" % (str( min(int(self.progress*100),100) )))
+
     def update_message (self):
-        msg = self._printer.get_stat("display_status")
-        self.labels['lcdmessage'].set_text("%s" % (msg['message']))
+        msg = self._printer.get_stat("display_status", "message")
+        self.labels['lcdmessage'].set_text("" if msg == None else msg)
 
     #def update_temp(self, dev, temp, target):
     #    if dev in self.labels:
