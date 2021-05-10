@@ -381,7 +381,7 @@ class JobStatusPanel(ScreenPanel):
 
         ps = self._printer.get_stat("print_stats")
         vsd = self._printer.get_stat("virtual_sdcard")
-        if data['display_status']['message'] is not None:
+        if 'display_status' in data and 'message' in data['display_status']:
                 self.update_message()
 
         if "print_stats" in data and "filename" in data['print_stats']:
