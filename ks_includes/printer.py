@@ -76,6 +76,7 @@ class Printer:
     def process_update(self, data):
         keys = [
             'bed_mesh',
+            'display_status',
             'fan',
             'gcode_move',
             'idle_timeout',

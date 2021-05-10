@@ -50,9 +50,14 @@ class JobStatusPanel(ScreenPanel):
         self.labels['status'].set_halign(Gtk.Align.START)
         self.labels['status'].set_vexpand(False)
         self.labels['status'].get_style_context().add_class("printing-status")
+        self.labels['lcdmessage'] = Gtk.Label("")
+        self.labels['lcdmessage'].set_halign(Gtk.Align.START)
+        self.labels['lcdmessage'].set_vexpand(False)
+        self.labels['lcdmessage'].get_style_context().add_class("printing-status")
 
         fi_box.add(self.labels['file']) #, True, True, 0)
         fi_box.add(self.labels['status']) #, True, True, 0)
+        fi_box.add(self.labels['lcdmessage']) #, True, True, 0)
         fi_box.set_valign(Gtk.Align.CENTER)
 
         info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -376,6 +381,8 @@ class JobStatusPanel(ScreenPanel):
 
         ps = self._printer.get_stat("print_stats")
         vsd = self._printer.get_stat("virtual_sdcard")
+        if 'display_status' in data and 'message' in data['display_status']:
+                self.update_message()
 
         if "print_stats" in data and "filename" in data['print_stats']:
             if data['print_stats']['filename'] != self.filename and self.state not in  ["cancelling","cancelled","complete"]:
@@ -588,6 +595,10 @@ class JobStatusPanel(ScreenPanel):
 
     def update_progress (self):
         self.labels['progress_text'].set_text("%s%%" % (str( min(int(self.progress*100),100) )))
+
+    def update_message (self):
+        msg = self._printer.get_stat("display_status", "message")
+        self.labels['lcdmessage'].set_text("" if msg == None else msg)
 
     #def update_temp(self, dev, temp, target):
     #    if dev in self.labels:

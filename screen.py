@@ -41,6 +41,7 @@ PRINTER_BASE_STATUS_OBJECTS = [
     'bed_mesh',
     'idle_timeout',
     'configfile',
+    'display_status',
     'gcode_move',
     'fan',
     'toolhead',
@@ -227,6 +228,7 @@ class KlipperScreen(Gtk.Window):
             "objects": {
                 "bed_mesh": ["profile_name","mesh_max","mesh_min","probed_matrix"],
                 "configfile": ["config"],
+                "display_status": ["progress","message"],
                 "fan": ["speed"],
                 "gcode_move": ["extrude_factor","gcode_position","homing_origin","speed_factor"],
                 "idle_timeout": ["state"],
