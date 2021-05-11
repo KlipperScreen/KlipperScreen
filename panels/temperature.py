@@ -49,7 +49,8 @@ class TemperaturePanel(ScreenPanel):
         i = 0
         cols = 3 if len(self.heaters) > 4 else (1 if len(self.heaters) <= 2 else 2)
         for h in self.heaters:
-            self.labels[h].connect('clicked', self.select_heater, h)
+            if not (h.startswith("temperature_sensor")):
+                self.labels[h].connect('clicked', self.select_heater, h)
             eq_grid.attach(self.labels[h], i%cols, int(i/cols), 1, 1)
             i += 1
 
@@ -59,7 +60,7 @@ class TemperaturePanel(ScreenPanel):
         self.labels["increase"].connect("clicked",self.change_target_temp, "+")
         self.labels["decrease"] = self._gtk.ButtonImage("decrease", _("Decrease"), "color3")
         self.labels["decrease"].connect("clicked",self.change_target_temp, "-")
-        self.labels["npad"] = self._gtk.ButtonImage("settings", _("Number Pad"), "color2")
+        self.labels["npad"] = self._gtk.ButtonImage("hashtag", _("Number Pad"), "color2")
         self.labels["npad"].connect("clicked", self.show_numpad)
 
         tempgrid = Gtk.Grid()
@@ -139,9 +140,9 @@ class TemperaturePanel(ScreenPanel):
         for i in range(len(keys)):
             id = 'button_' + str(keys[i][0])
             if keys[i][0] == "B":
-                self.labels[id] = Gtk.Button("B") #self._gtk.ButtonImage("backspace")
+                self.labels[id] = self._gtk.ButtonImage("backspace")
             elif keys[i][0] == "E":
-                self.labels[id] = Gtk.Button("E") #self._gtk.ButtonImage("complete", None, None, .675, .675)
+                self.labels[id] = self._gtk.ButtonImage("complete")
             else:
                 self.labels[id] = Gtk.Button(keys[i][0])
             self.labels[id].connect('clicked', self.update_entry, keys[i][0])
@@ -154,7 +155,7 @@ class TemperaturePanel(ScreenPanel):
         self.labels['entry'].props.xalign = 0.5
         ctx = self.labels['entry'].get_style_context()
 
-        b = self._gtk.ButtonImage('back', _('Close'))
+        b = self._gtk.ButtonImage('cancel', _('Close'))
         b.connect("clicked", self.hide_numpad)
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)

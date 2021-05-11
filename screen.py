@@ -41,6 +41,7 @@ PRINTER_BASE_STATUS_OBJECTS = [
     'bed_mesh',
     'idle_timeout',
     'configfile',
+    'display_status',
     'gcode_move',
     'fan',
     'toolhead',
@@ -109,7 +110,8 @@ class KlipperScreen(Gtk.Window):
         self.set_resizable(False)
         logging.info("Screen resolution: %sx%s" % (self.width, self.height))
 
-        self.gtk = KlippyGtk(self.width, self.height)
+        self.theme = self._config.get_main_config_option('theme')
+        self.gtk = KlippyGtk(self, self.width, self.height, self.theme)
         self.init_style()
 
         self.printer_initializing(_("Initializing"))
@@ -151,7 +153,6 @@ class KlipperScreen(Gtk.Window):
         self.printer_select_prepanel = None
 
         if self.files is not None:
-            self.files.stop()
             self.files = None
 
         for printer in self._config.get_printers():
@@ -216,11 +217,9 @@ class KlipperScreen(Gtk.Window):
             data["moonraker_host"],
             data["moonraker_port"]
         )
+        self.files = KlippyFiles(self)
         self._ws.initial_connect()
         self.connecting = False
-
-        self.files = KlippyFiles(self)
-        self.files.start()
 
         self.connected_printer = name
         logging.debug("Connected to printer: %s" % name)
@@ -230,6 +229,7 @@ class KlipperScreen(Gtk.Window):
             "objects": {
                 "bed_mesh": ["profile_name","mesh_max","mesh_min","probed_matrix"],
                 "configfile": ["config"],
+                "display_status": ["progress","message"],
                 "fan": ["speed"],
                 "gcode_move": ["extrude_factor","gcode_position","homing_origin","speed_factor"],
                 "idle_timeout": ["state"],
@@ -382,7 +382,7 @@ class KlipperScreen(Gtk.Window):
         style_provider = Gtk.CssProvider()
 
 
-        css = open(klipperscreendir + "/styles/style.css")
+        css = open(klipperscreendir + "/styles/%s/style.css" % (self.theme))
         css_data = css.read()
         css.close()
         css_data = css_data.replace("KS_FONT_SIZE",str(self.gtk.get_font_size()))
@@ -544,6 +544,8 @@ class KlipperScreen(Gtk.Window):
 
         if "job_status" not in self._cur_panels:
             self.printer_printing()
+        else:
+            self.panels["job_status"].new_print()
 
     def state_ready(self):
         if "printer_select" in self._cur_panels:
@@ -587,7 +589,8 @@ class KlipperScreen(Gtk.Window):
             self.printer.process_update(data)
         elif action == "notify_filelist_changed":
             logging.debug("Filelist changed: %s", json.dumps(data,indent=2))
-            #self.files.add_file()
+            if self.files != None:
+                self.files.process_update(data)
         elif action == "notify_metadata_update":
             self.files.request_metadata(data['filename'])
         elif action == "notify_power_changed":
@@ -653,13 +656,22 @@ class KlipperScreen(Gtk.Window):
         _ = self.lang.gettext
 
         printer_info = self.apiclient.get_printer_info()
+        if printer_info == False:
+            logging.info("Unable to get printer info from moonraker")
+            return False
         data = self.apiclient.send_request("printer/objects/query?" + "&".join(PRINTER_BASE_STATUS_OBJECTS))
+        if data == False:
+            logging.info("Error getting printer object data")
+            return False
         powerdevs = self.apiclient.send_request("machine/device_power/devices")
         data = data['result']['status']
 
         # Reinitialize printer, in case the printer was shut down and anything has changed.
         self.printer.reinit(printer_info['result'], data)
         self.ws_subscribe()
+
+        self.files.initialize()
+        self.files.refresh_files()
 
         if powerdevs != False:
             self.printer.configure_power_devices(powerdevs['result'])
@@ -744,6 +756,8 @@ def main():
         os.path.normpath(os.path.expanduser(args.logfile)),
         version
     )
+
+    functions.patch_threading_excepthook()
 
     logging.info("KlipperScreen version: %s" % version)
 

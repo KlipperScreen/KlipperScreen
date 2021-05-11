@@ -54,7 +54,7 @@ class Printer:
                 if "shared_heater" in self.config[x]:
                     continue
                 self.extrudercount += 1
-            if x.startswith('heater_bed') or x.startswith('heater_generic '):
+            if x == 'heater_bed' or x.startswith('heater_generic ') or x.startswith('temperature_sensor '):
                 self.devices[x] = {
                     "temperature": 0,
                     "target": 0
@@ -76,6 +76,7 @@ class Printer:
     def process_update(self, data):
         keys = [
             'bed_mesh',
+            'display_status',
             'fan',
             'gcode_move',
             'idle_timeout',
@@ -181,6 +182,8 @@ class Printer:
             heaters.append("heater_bed")
         for h in self.get_config_section_list("heater_generic "):
             heaters.append(h)
+        for h in self.get_config_section_list("temperature_sensor "):
+            heaters.append(h)
         return heaters
 
     def get_printer_status_data(self):
@@ -219,11 +222,11 @@ class Printer:
 
     def get_stat(self, stat, substat = None):
         if stat not in self.data:
-            return None
+            return {}
         if substat != None:
             if substat in self.data[stat]:
                 return self.data[stat][substat]
-            return None
+            return {}
         return self.data[stat]
 
     def get_state(self):

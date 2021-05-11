@@ -34,6 +34,8 @@ class PreheatPanel(ScreenPanel):
 
         add_heaters = self._printer.get_heaters()
         for h in add_heaters:
+            if h.startswith("temperature_sensor "):
+                continue
             if h == "heater_bed":
                 self.labels[h] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
             else:
@@ -81,6 +83,8 @@ class PreheatPanel(ScreenPanel):
                 self.select_heater(None, x)
 
         for h in self._printer.get_heaters():
+            if h.startswith("temperature_sensor "):
+                continue
             if h not in self.active_heaters:
                 self.select_heater(None, h)
 

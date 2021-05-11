@@ -48,6 +48,11 @@ class KlipperScreenConfig:
             {"screen_blanking": {"section": "main", "name": _("Screen Power Off Time"), "type": "dropdown",
                 "value": "3600", "callback": screen.set_screenblanking_timeout, "options":[
                     {"name": _("Off"), "value": "off"}
+            ]}},
+            {"theme": {"section": "main", "name": _("Icon Theme"), "type": "dropdown",
+                "value": "z-bolt","options":[
+                    {"name": _("Z-bolt (default)"), "value": "z-bolt"},
+                    {"name": _("Colorized"), "value": "colorized"}
             ]}}
             #{"": {"section": "main", "name": _(""), "type": ""}}
         ]

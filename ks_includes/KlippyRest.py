@@ -20,6 +20,14 @@ class KlippyRest:
     def get_printer_info(self):
         return self.send_request("printer/info")
 
+    def get_thumbnail_stream(self, thumbnail):
+        url = "http://%s:%s/server/files/gcodes/%s" % (self.ip, self.port, thumbnail)
+        response = requests.get(url, stream=True)
+        if response.status_code == 200:
+            response.raw.decode_content = True
+            return response.content
+        return False
+
     def send_request(self, method):
         url = "http://%s:%s/%s" % (self.ip, self.port, method)
         logging.debug("Sending request to %s" % url)
