@@ -43,32 +43,32 @@ class FineTunePanel(ScreenPanel):
                 self.bs_delta = self.bs_deltas[0]
 
 
-        self.labels['z+'] = self._gtk.ButtonImage("move-z-", _("Z+"), "color1")
+        self.labels['z+'] = self._gtk.ButtonImage("z-farther", _("Z+"), "color1")
         self.labels['z+'].connect("clicked", self.change_babystepping, "+")
         self.labels['zoffset'] = Gtk.Label("0.00" + _("mm"))
         self.labels['zoffset'].get_style_context().add_class('temperature_entry')
-        self.labels['z-'] = self._gtk.ButtonImage("move-z+", _("Z-"), "color1")
+        self.labels['z-'] = self._gtk.ButtonImage("z-closer", _("Z-"), "color1")
         self.labels['z-'].connect("clicked", self.change_babystepping, "-")
 
         grid.attach(self.labels['z+'], 0, 0, 1, 1)
         grid.attach(self.labels['zoffset'], 0, 1, 1, 1)
         grid.attach(self.labels['z-'], 0, 2, 1, 1)
 
-        self.labels['speed+'] = self._gtk.ButtonImage("speed-step", _("Speed +"), "color3")
+        self.labels['speed+'] = self._gtk.ButtonImage("speed+", _("Speed +"), "color3")
         self.labels['speed+'].connect("clicked", self.change_speed, "+")
         self.labels['speedfactor'] = Gtk.Label("100%")
         self.labels['speedfactor'].get_style_context().add_class('temperature_entry')
-        self.labels['speed-'] = self._gtk.ButtonImage("speed-step", _("Speed -"), "color3")
+        self.labels['speed-'] = self._gtk.ButtonImage("speed-", _("Speed -"), "color3")
         self.labels['speed-'].connect("clicked", self.change_speed, "-")
         grid.attach(self.labels['speed+'], 1, 0, 1, 1)
         grid.attach(self.labels['speedfactor'], 1, 1, 1, 1)
         grid.attach(self.labels['speed-'], 1, 2, 1, 1)
 
-        self.labels['extrude+'] = self._gtk.ButtonImage("extrude", _("Extrusion +"), "color4")
+        self.labels['extrude+'] = self._gtk.ButtonImage("flow+", _("Extrusion +"), "color4")
         self.labels['extrude+'].connect("clicked", self.change_extrusion, "+")
         self.labels['extrudefactor'] = Gtk.Label("100%")
         self.labels['extrudefactor'].get_style_context().add_class('temperature_entry')
-        self.labels['extrude-'] = self._gtk.ButtonImage("retract", _("Extrusion -"), "color4")
+        self.labels['extrude-'] = self._gtk.ButtonImage("flow-", _("Extrusion -"), "color4")
         self.labels['extrude-'].connect("clicked", self.change_extrusion, "-")
         grid.attach(self.labels['extrude+'], 2, 0, 1, 1)
         grid.attach(self.labels['extrudefactor'], 2, 1, 1, 1)

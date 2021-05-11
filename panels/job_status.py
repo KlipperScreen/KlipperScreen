@@ -152,7 +152,7 @@ class JobStatusPanel(ScreenPanel):
         pos_box.add(posgrid)
         self.labels['pos_box'] = pos_box
 
-        speed = self._gtk.Image("speed-step.svg", None, .6, .6)
+        speed = self._gtk.Image("speed+.svg", None, .6, .6)
         self.labels['speed'] = Gtk.Label(label="")
         self.labels['speed'].get_style_context().add_class("printing-info")
         speed_box = Gtk.Box(spacing=0)
@@ -259,7 +259,7 @@ class JobStatusPanel(ScreenPanel):
         _ = self.lang.gettext
         self.labels['cancel'] = self._gtk.ButtonImage("stop",_("Cancel"),"color2")
         self.labels['cancel'].connect("clicked", self.cancel)
-        self.labels['control'] = self._gtk.ButtonImage("control",_("Control"),"color3")
+        self.labels['control'] = self._gtk.ButtonImage("settings",_("Settings"),"color3")
         self.labels['control'].connect("clicked", self._screen._go_to_submenu, "")
         self.labels['fine_tune'] = self._gtk.ButtonImage("fine-tune",_("Fine Tuning"),"color4")
         self.labels['fine_tune'].connect("clicked", self.menu_item_clicked, "fine_tune",{
@@ -268,7 +268,7 @@ class JobStatusPanel(ScreenPanel):
         self.labels['menu'].connect("clicked", self.close_panel)
         self.labels['pause'] = self._gtk.ButtonImage("pause",_("Pause"),"color1" )
         self.labels['pause'].connect("clicked",self.pause)
-        self.labels['restart'] = self._gtk.ButtonImage("restart",_("Restart"),"color3")
+        self.labels['restart'] = self._gtk.ButtonImage("refresh",_("Restart"),"color3")
         self.labels['restart'].connect("clicked", self.restart)
         self.labels['resume'] = self._gtk.ButtonImage("resume",_("Resume"),"color1")
         self.labels['resume'].connect("clicked",self.resume)
