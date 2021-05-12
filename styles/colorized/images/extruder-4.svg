@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="svg57"
+   sodipodi:docname="extruder-4.svg"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)">
+  <metadata
+     id="metadata63">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>extruder1</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs61" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="837"
+     id="namedview59"
+     showgrid="false"
+     inkscape:pagecheckerboard="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:zoom="7.6799999"
+     inkscape:cx="22.090129"
+     inkscape:cy="11.474631"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="path845"
+     inkscape:document-rotation="0" />
+  <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title2">extruder1</title>
+  <rect
+     style="opacity:0.998;fill:#839496;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+     id="rect1033"
+     width="50"
+     height="18"
+     x="6.9999995"
+     y="32.41787" />
+  <rect
+     style="opacity:0.998;fill:#93a1a1;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+     id="rect1035"
+     width="25"
+     height="18"
+     x="19.575544"
+     y="32.41787" />
+  <path
+     style="fill:#586e75;fill-opacity:1;stroke:none;stroke-width:0.999995px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 19.5,50.41787 h 25 l -8.336909,10 h -8.326182 z"
+     id="path1037"
+     sodipodi:nodetypes="ccccc" />
+  <rect
+     style="opacity:0.998;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+     id="rect1039"
+     width="32"
+     height="10"
+     x="16.075544"
+     y="22.417871" />
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <rect
+     style="opacity:0.998;fill:#586e75;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+     id="rect1055"
+     width="45"
+     height="10"
+     x="9.5755444"
+     y="12.417871"
+     ry="2"
+     rx="2" />
+  <rect
+     style="opacity:0.998;fill:#586e75;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+     id="rect1065"
+     width="45"
+     height="10"
+     x="9.5755444"
+     y="4.4178715" />
+  <g
+     id="g1017"
+     transform="translate(12.25,-12.25)">
+    <circle
+       id="circle46"
+       stroke="#000000"
+       stroke-width="0.5"
+       fill="#ffffff"
+       cx="19.75"
+       cy="28"
+       style="fill-rule:evenodd;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none"
+       r="15.75" />
+    <g
+       aria-label="4"
+       id="1"
+       style="font-weight:500;font-size:21.3333px;font-family:OpenSans-SemiBold, 'Open Sans';fill:#073642;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none">
+      <g
+         id="path845"
+         style="opacity:1">
+        <path
+           style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.3333px;line-height:normal;font-family:OpenSans-SemiBold, 'Open Sans';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#073642;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
+           d="m 19.045743,17.627557 -6.461211,13.976446 v 0.264688 3.681992 h 7.777558 v 2.82176 h 5.166134 v -2.82176 h 1.387245 v -5.043241 h -1.387245 v -5.343379 h -4.301172 l 3.436209,-7.536505 z m 1.316347,9.431855 v 3.448029 h -1.571581 z"
+           id="path852"
+           sodipodi:nodetypes="ccccccccccccccccccc" />
+      </g>
+    </g>
+  </g>
+</svg>

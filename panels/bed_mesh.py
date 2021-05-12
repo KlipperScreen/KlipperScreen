@@ -113,7 +113,7 @@ class BedMeshPanel(ScreenPanel):
         refresh.set_hexpand(False)
         refresh.set_halign(Gtk.Align.END)
 
-        view = self._gtk.ButtonImage("refresh",_("View Mesh"),"color1")
+        view = self._gtk.ButtonImage("bed-level",_("View Mesh"),"color1")
         view.connect("clicked", self.show_mesh, profile)
         view.set_size_request(60,0)
         view.set_hexpand(False)
@@ -131,7 +131,7 @@ class BedMeshPanel(ScreenPanel):
         save.set_hexpand(False)
         save.set_halign(Gtk.Align.END)
 
-        delete = self._gtk.ButtonImage("decrease",_("Delete"),"color3")
+        delete = self._gtk.ButtonImage("cancel",_("Delete"),"color3")
         delete.connect("clicked", self.send_remove_mesh, profile)
         delete.set_size_request(60,0)
         delete.set_hexpand(False)
