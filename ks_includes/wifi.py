@@ -20,61 +20,6 @@ from gi.repository import Gtk, Gdk, GLib
 RESCAN_INTERVAL = 180
 KS_SOCKET_FILE = "/tmp/.KS_wpa_supplicant"
 
-class WpaSocket(Thread):
-    def __init__ (self, wm, queue, callback):
-        super().__init__()
-        self.queue = queue
-        self.callback = callback
-        self.soc = wm.soc
-        self._stop_loop = False
-        self.skip_commands = 0
-        self.wm = wm
-
-    def skip_command(self):
-        self.skip_commands = self.skip_commands + 1
-        logging.info("Adding to skip commands: %s" % self.skip_commands)
-
-    def run(self):
-        event = threading.Event()
-        logging.debug("Setting up wifi event loop")
-        while self._stop_loop == False:
-            try:
-                msg = self.soc.recv(4096).decode().strip()
-            except:
-                # TODO: Socket error
-                continue
-            if msg.startswith("<"):
-                logging.debug("wpasock: %s" % msg)
-                if "CTRL-EVENT-SCAN-RESULTS" in msg:
-                    logging.info("Adding scan_results to callbacks")
-                    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.wm.scan_results)
-                elif "CTRL-EVENT-DISCONNECTED" in msg:
-                    self.callback("connecting_status", msg)
-                    match = re.match('<3>CTRL-EVENT-DISCONNECTED bssid=(\S+) reason=3 locally_generated=1', msg)
-                    if match:
-                        for net in self.wm.networks:
-                            if self.wm.networks[net]['mac'] == match.group(1):
-                                self.wm.networks[net]['connected'] = False
-                                break
-                elif "Trying to associate" in msg:
-                    self.callback("connecting_status", msg)
-                elif "CTRL-EVENT-REGDOM-CHANGE" in msg:
-                    self.callback("connecting_status", msg)
-                elif "CTRL-EVENT-CONNECTED" in msg:
-                    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.wm.get_current_wifi_idle_add)
-                    self.callback("connecting_status", msg)
-            else:
-                if self.skip_commands > 0:
-                    self.skip_commands = self.skip_commands - 1
-                    logging.info("-Skip commands: %s" % self.skip_commands)
-                else:
-                    self.queue.put(msg)
-        logging.info("Wifi event loop ended")
-
-
-    def stop(self):
-        self._stop_loop = True
-
 class WifiManager():
     networks_in_supplicant = []
     connected = False
@@ -112,7 +57,6 @@ class WifiManager():
             self.soc = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
             self.soc.bind(KS_SOCKET_FILE)
             self.soc.connect("/var/run/wpa_supplicant/%s" % interface)
-            self.soc.settimeout(.01)
         except:
             logging.info("Error connecting to wifi socket: %s" % interface)
             return
@@ -126,103 +70,11 @@ class WifiManager():
         GLib.idle_add(self.read_wpa_supplicant)
         self.timeout = GLib.timeout_add_seconds(RESCAN_INTERVAL, self.rescan)
 
-    def rescan(self):
-        self.wpa_cli("SCAN", False)
-        return True
-
-    #def run(self):
-    #    while self._stop_loop == False:
-    #        while len(self.tasks) > 0:
-    #            logging.info("Running self.tasks %s" % self.tasks[0])
-    #            task = self.tasks.pop(0)
-    #            task[0](*task[1])
-    #
-    #        self.event.wait(1)
-    #        if int(time.time()) > self.scan_time + RESCAN_INTERVAL:
-    #            self.scan_time = int(time.time())
-    #            self.wpa_cli("SCAN", False)
-
-    def callback(self, type, msg):
-        if type in self._callbacks:
-            for cb in self._callbacks[type]:
-                Gdk.threads_add_idle(
-                    GLib.PRIORITY_DEFAULT_IDLE,
-                    cb,
-                    msg)
-
-
     def add_callback(self, name, callback):
         if name in self._callbacks and callback not in self._callbacks[name]:
             self._callbacks[name].append(callback)
 
-    def get_current_wifi(self, interface="wlan0"):
-        logging.info("Getting current wifi information")
-        logging.info("self.connnected_ssid: %s %s" % (self.connected, self.connected_ssid))
-        status = self.wpa_cli("STATUS").split('\n')
-        vars = {}
-        for line in status:
-            arr = line.split('=')
-            vars[arr[0]] = "=".join(arr[1:])
-
-        prev_ssid = self.connected_ssid
-        if "ssid" in vars and "bssid" in vars:
-            self.connected = True
-            self.connected_ssid = vars['ssid']
-            logging.info("self.connnected_ssid: %s %s" % (self.connected, self.connected_ssid))
-            for ssid, val in self.networks.items():
-                if ssid == vars['ssid']:
-                    self.networks[ssid]['connected'] = True
-                else:
-                    self.networks[ssid]['connected'] = False
-            logging.info("Updated connection: %s to %s" % (prev_ssid, self.connected_ssid))
-            if prev_ssid != self.connected_ssid:
-                logging.info("Launching callbacks: %s" % self._callbacks['connected'])
-                for cb in self._callbacks['connected']:
-                    Gdk.threads_add_idle(
-                        GLib.PRIORITY_DEFAULT_IDLE,
-                        cb, self.connected_ssid, prev_ssid)
-            return [vars['ssid'], vars['bssid']]
-        else:
-            logging.info("Resetting connected_ssid")
-            self.connected = False
-            self.connected_ssid = None
-            for ssid, val in self.networks.items():
-                self.networks[ssid]['connected'] = False
-            if prev_ssid != self.connected_ssid:
-                logging.info("Launching callbacks: %s" % self._callbacks['connected'])
-                for cb in self._callbacks['connected']:
-                    Gdk.threads_add_idle(
-                        GLib.PRIORITY_DEFAULT_IDLE,
-                        cb, self.connected_ssid, prev_ssid)
-            return None
-
-    def get_current_wifi_idle_add(self):
-        self.get_current_wifi()
-        return False
-
-    def get_network_info(self, ssid=None, mac=None):
-        if ssid is not None and ssid in self.networks:
-            return self.networks[ssid]
-        if mac is not None and ssid is None:
-            for net in self.networks:
-                if mac == net['mac']:
-                    return net
-        return None
-
-    def get_networks(self):
-        return list(self.networks)
-
-    def is_connected(self):
-        return self.connected
-
-    def is_initialized(self):
-        return self.initialized
-
-    def get_connected_ssid(self):
-        return self.connected_ssid
-
     def add_network(self, ssid, psk):
-        logging.debug("Adding network %s %s" % (ssid, psk))
         for id in list(self.supplicant_networks):
             if self.supplicant_networks[id]['ssid'] == ssid:
                 #Modify network
@@ -247,25 +99,17 @@ class WifiManager():
         if id == None:
             logging.info("Error adding network")
             return False
+
+        self.save_wpa_conf()
         return True
 
-    def delete_network(self, ssid):
-        id = None
-        for i in list(self.supplicant_networks):
-            if self.supplicant_networks[i]['ssid'] == ssid:
-                id = i
-                break
-
-        if id == None:
-            logging.debug("Unable to find network in wpa_supplicant")
-            return
-        logging.debug("Deleting network %s" % (id))
-        self.wpa_cli("REMOVE_NETWORK %s" % id)
-
-        for id in list(self.supplicant_networks):
-            if self.supplicant_networks[id]['ssid'] == ssid:
-                del self.supplicant_networks[id]
-                break
+    def callback(self, type, msg):
+        if type in self._callbacks:
+            for cb in self._callbacks[type]:
+                Gdk.threads_add_idle(
+                    GLib.PRIORITY_DEFAULT_IDLE,
+                    cb,
+                    msg)
 
     def connect(self, ssid):
         id = None
@@ -281,44 +125,94 @@ class WifiManager():
         logging.info("Attempting to connect to wifi: %s" % id)
         self.connecting_info = ["Attempting to connect to %s" % ssid]
         self.wpa_cli("SELECT_NETWORK %s" % id)
+        self.save_wpa_conf()
 
+    def delete_network(self, ssid):
+        id = None
+        for i in list(self.supplicant_networks):
+            if self.supplicant_networks[i]['ssid'] == ssid:
+                id = i
+                break
 
-    def remove_callback(self, name, callback):
-        if name in self._callbacks and callback in self._callbacks[name]:
-            self._callbacks[name].remove(callback)
+        if id == None:
+            logging.debug("Unable to find network in wpa_supplicant")
+            return
+        self.wpa_cli("REMOVE_NETWORK %s" % id)
 
-    def remove_network(self, ssid):
-        results = self.wpa_cli("list_networks").split('\n')
-        if len(results) > 1:
-            results.pop(0)
-            id = -1
-            for net in [n.split('\t') for n in results]:
-                if net[1] == ssid:
-                    self.wpa_cli("remove_network %s" % net[0])
-                    break
+        for id in list(self.supplicant_networks):
+            if self.supplicant_networks[id]['ssid'] == ssid:
+                del self.supplicant_networks[id]
+                break
 
-    def wpa_cli(self, command, wait=True):
-        if not ("psk" in command):
-            logging.info("wpa_cmd: %s" % command)
-        if wait == False:
-            self.wpa_thread.skip_command()
-        self.soc.send(command.encode())
-        if wait == True:
-            resp = self.queue.get()
-            logging.info("wpa_rsp: %s" % resp)
-            return resp
+        self.save_wpa_conf()
 
-    def wpa_cli_batch(self, commands):
-        for cmd in commands:
-            self.wpa_cli(cmd)
+    def get_connected_ssid(self):
+        return self.connected_ssid
+
+    def get_current_wifi(self, interface="wlan0"):
+        logging.info("Getting current wifi information")
+        status = self.wpa_cli("STATUS").split('\n')
+        vars = {}
+        for line in status:
+            arr = line.split('=')
+            vars[arr[0]] = "=".join(arr[1:])
+
+        prev_ssid = self.connected_ssid
+        if "ssid" in vars and "bssid" in vars:
+            self.connected = True
+            self.connected_ssid = vars['ssid']
+            for ssid, val in self.networks.items():
+                if ssid == vars['ssid']:
+                    self.networks[ssid]['connected'] = True
+                else:
+                    self.networks[ssid]['connected'] = False
+            if prev_ssid != self.connected_ssid:
+                for cb in self._callbacks['connected']:
+                    Gdk.threads_add_idle(
+                        GLib.PRIORITY_DEFAULT_IDLE,
+                        cb, self.connected_ssid, prev_ssid)
+            return [vars['ssid'], vars['bssid']]
+        else:
+            logging.info("Resetting connected_ssid")
+            self.connected = False
+            self.connected_ssid = None
+            for ssid, val in self.networks.items():
+                self.networks[ssid]['connected'] = False
+            if prev_ssid != self.connected_ssid:
+                for cb in self._callbacks['connected']:
+                    Gdk.threads_add_idle(
+                        GLib.PRIORITY_DEFAULT_IDLE,
+                        cb, self.connected_ssid, prev_ssid)
+            return None
+
+    def get_current_wifi_idle_add(self):
+        self.get_current_wifi()
+        return False
+
+    def get_network_info(self, ssid=None, mac=None):
+        if ssid is not None and ssid in self.networks:
+            return self.networks[ssid]
+        if mac is not None and ssid is None:
+            for net in self.networks:
+                if mac == net['mac']:
+                    return net
+        return None
+
+    def get_networks(self):
+        return list(self.networks)
 
     def get_supplicant_networks(self):
         return self.supplicant_networks
 
+    def is_connected(self):
+        return self.connected
+
+    def is_initialized(self):
+        return self.initialized
+
     def read_wpa_supplicant(self):
         results = self.wpa_cli("LIST_NETWORKS").split('\n')
         results.pop(0)
-        logging.debug("wpa_supp_nets: %s" % results)
         self.supplicant_networks = {}
         self.networks_in_supplicant = []
         for net in [n.split('\t') for n in results]:
@@ -329,13 +223,23 @@ class WifiManager():
             }
             self.networks_in_supplicant.append(self.supplicant_networks[net[0]])
 
-        logging.debug("Networks: %s" % self.supplicant_networks)
+    def remove_callback(self, name, callback):
+        if name in self._callbacks and callback in self._callbacks[name]:
+            self._callbacks[name].remove(callback)
+
+    def rescan(self):
+        self.wpa_cli("SCAN", False)
+        return True
+
+    def save_wpa_conf(self):
+        logging.info("Saving WPA config")
+        self.wpa_cli("SAVE_CONFIG")
 
     def scan_results(self, interface='wlan0'):
         new_networks = []
         deleted_networks = list(self.networks)
 
-        logging.info("Trying to get results")
+        logging.info("Trying to get scan results")
         results = self.wpa_cli("SCAN_RESULTS").split('\n')
         results.pop(0)
 
@@ -363,7 +267,6 @@ class WifiManager():
                 else:
                     net['encryption'] = "off"
 
-                #if ""
                 aps.append(net)
 
         cur_info = self.get_current_wifi()
@@ -373,7 +276,6 @@ class WifiManager():
             if cur_info is not None and cur_info[0] == ap['ssid'] and cur_info[1].lower() == ap['mac'].lower():
                 self.networks[ap['ssid']]['connected'] = True
 
-        logging.info("Networks: %s" % self.networks)
         for net in list(self.networks):
             if net in deleted_networks:
                 deleted_networks.remove(net)
@@ -384,8 +286,71 @@ class WifiManager():
                 Gdk.threads_add_idle(
                     GLib.PRIORITY_DEFAULT_IDLE,
                     cb, new_networks, deleted_networks)
-        logging.debug("New networks: %s" % new_networks)
-        logging.debug("Deleted networks: %s" % deleted_networks)
+
+    def wpa_cli(self, command, wait=True):
+        if wait == False:
+            self.wpa_thread.skip_command()
+        self.soc.send(command.encode())
+        if wait == True:
+            resp = self.queue.get()
+            return resp
+
+    def wpa_cli_batch(self, commands):
+        for cmd in commands:
+            self.wpa_cli(cmd)
+
+
+class WpaSocket(Thread):
+    def __init__ (self, wm, queue, callback):
+        super().__init__()
+        self.queue = queue
+        self.callback = callback
+        self.soc = wm.soc
+        self._stop_loop = False
+        self.skip_commands = 0
+        self.wm = wm
+
+    def run(self):
+        event = threading.Event()
+        logging.debug("Setting up wifi event loop")
+        while self._stop_loop == False:
+            try:
+                msg = self.soc.recv(4096).decode().strip()
+            except:
+                # TODO: Socket error
+                continue
+            if msg.startswith("<"):
+                if "CTRL-EVENT-SCAN-RESULTS" in msg:
+                    logging.info("Adding scan_results to callbacks")
+                    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.wm.scan_results)
+                elif "CTRL-EVENT-DISCONNECTED" in msg:
+                    self.callback("connecting_status", msg)
+                    match = re.match('<3>CTRL-EVENT-DISCONNECTED bssid=(\S+) reason=3 locally_generated=1', msg)
+                    if match:
+                        for net in self.wm.networks:
+                            if self.wm.networks[net]['mac'] == match.group(1):
+                                self.wm.networks[net]['connected'] = False
+                                break
+                elif "Trying to associate" in msg:
+                    self.callback("connecting_status", msg)
+                elif "CTRL-EVENT-REGDOM-CHANGE" in msg:
+                    self.callback("connecting_status", msg)
+                elif "CTRL-EVENT-CONNECTED" in msg:
+                    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.wm.get_current_wifi_idle_add)
+                    self.callback("connecting_status", msg)
+            else:
+                if self.skip_commands > 0:
+                    self.skip_commands = self.skip_commands - 1
+                else:
+                    self.queue.put(msg)
+        logging.info("Wifi event loop ended")
+
+    def skip_command(self):
+        self.skip_commands = self.skip_commands + 1
+
+    def stop(self):
+        self._stop_loop = True
+
 
 class WifiChannels:
     @staticmethod

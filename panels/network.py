@@ -87,7 +87,6 @@ class NetworkPanel(ScreenPanel):
 
     def load_networks(self):
         networks = self._screen.wifi.get_networks()
-        logging.debug("Networks: %s" % json.dumps(networks, indent=2))
 
         conn_ssid = self._screen.wifi.get_connected_ssid()
         if conn_ssid in networks:
@@ -113,9 +112,8 @@ class NetworkPanel(ScreenPanel):
 
         netinfo = self._screen.wifi.get_network_info(ssid)
         if netinfo == None:
-            logging.debug("Couldn't get netinfo for %s" % ssid)
+            logging.debug("Couldn't get netinfo")
             return
-        logging.debug("Adding network %s" % ssid)
 
         configured_networks = self._screen.wifi.get_supplicant_networks()
         network_id = -1
@@ -145,7 +143,7 @@ class NetworkPanel(ScreenPanel):
         labels.set_valign(Gtk.Align.CENTER)
         labels.set_halign(Gtk.Align.START)
 
-        connect = self._gtk.ButtonImage("open",None,"color3")
+        connect = self._gtk.ButtonImage("load",None,"color3")
         connect.connect("clicked", self.connect_network, ssid)
         connect.set_hexpand(False)
         connect.set_halign(Gtk.Align.END)
@@ -202,80 +200,6 @@ class NetworkPanel(ScreenPanel):
         if show == True:
             self.labels['networklist'].show()
 
-    def update_all_networks(self):
-        for network in list(self.networks):
-            self.update_network_info(network)
-        return True
-
-    def update_network_info(self, ssid):
-        _ = self.lang.gettext
-
-        if ssid not in self.networks or ssid not in self.labels['networks']:
-            return
-        netinfo = self._screen.wifi.get_network_info(ssid)
-        if netinfo == None:
-            logging.debug("Couldn't get netinfo for %s" % ssid)
-            return
-
-        connected = ""
-        if netinfo['connected'] == True:
-            stream = os.popen('hostname -f')
-            hostname = stream.read().strip()
-            ifadd = netifaces.ifaddresses(self.interface)
-            ipv4 = ""
-            ipv6 = ""
-            if netifaces.AF_INET in ifadd and len(ifadd[netifaces.AF_INET]) > 0:
-                ipv4 = "<b>%s:</b> %s " % (_("IPv4"), ifadd[netifaces.AF_INET][0]['addr'])
-            if netifaces.AF_INET6 in ifadd and len(ifadd[netifaces.AF_INET6]) > 0:
-                ipv6 = ipv6 = "<b>%s:</b> %s " % (_("IPv6"), ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0])
-            connected = "<b>%s</b>\n<b>%s:</b> %s\n%s%s\n" % (_("Connected"),_("Hostname"),hostname, ipv4, ipv6)
-        elif "psk" in netinfo:
-            connected = "Password saved."
-        freq = "2.4 GHz" if netinfo['frequency'][0:1] == "2" else "5 Ghz"
-
-        self.labels['networks'][ssid]['info'].set_markup("%s%s <small>%s %s %s  %s%s</small>" % ( connected,
-            "" if netinfo['encryption'] == "off" else netinfo['encryption'].upper(),
-            freq, _("Channel"), netinfo['channel'], netinfo['signal_level_dBm'], _("dBm")
-            ))
-        self.labels['networks'][ssid]['info'].show_all()
-
-    def update_single_network_info(self):
-        _ = self.lang.gettext
-
-        stream = os.popen('hostname -f')
-        hostname = stream.read().strip()
-        ifadd = netifaces.ifaddresses(self.interface)
-        ipv4 = ""
-        ipv6 = ""
-        if netifaces.AF_INET in ifadd and len(ifadd[netifaces.AF_INET]) > 0:
-            ipv4 = "<b>%s:</b> %s " % (_("IPv4"), ifadd[netifaces.AF_INET][0]['addr'])
-        if netifaces.AF_INET6 in ifadd and len(ifadd[netifaces.AF_INET6]) > 0:
-            ipv6 = ipv6 = "<b>%s:</b> %s " % (_("IPv6"), ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0])
-        connected = "<b>%s</b>\n\n<small><b>%s</b></small>\n<b>%s:</b> %s\n%s\n%s\n" % (self.interface, _("Connected"),_("Hostname"),
-            hostname, ipv4, ipv6)
-
-        self.labels['networkinfo'].set_markup(connected)
-        self.labels['networkinfo'].show_all()
-
-    def remove_network_wid(self, widget, ssid):
-        self.remove_network(ssid)
-
-    def remove_network(self, ssid, show=True):
-        if ssid not in self.networks:
-            return
-
-        logging.info("Removing network %s" % ssid)
-        i = 0
-        while self.labels['networklist'].get_child_at(0, i) != None:
-            if self.networks[ssid] == self.labels['networklist'].get_child_at(0, i):
-                self.labels['networklist'].remove_row(i)
-                self.labels['networklist'].show()
-                del self.networks[ssid]
-                del self.labels['networks'][ssid]
-                return
-            i = i+1
-        return
-
     def add_new_network(self, widget, ssid, connect=False):
         networks = self._screen.wifi.get_networks()
         psk = self.labels['network_psk'].get_text()
@@ -289,9 +213,7 @@ class NetworkPanel(ScreenPanel):
             else:
                 self._screen.show_popup_message("Error adding network %s" % ssid)
 
-
     def check_missing_networks(self):
-        logging.info("Checking missing networks")
         networks = self._screen.wifi.get_networks()
         for net in list(self.networks):
             if net in networks:
@@ -300,6 +222,24 @@ class NetworkPanel(ScreenPanel):
         for net in networks:
             self.add_network(net)
         self.labels['networklist'].show_all()
+
+    def close_add_network(self, widget, ssid):
+        for child in self.content.get_children():
+            self.content.remove(child)
+        self.content.add(self.labels['main_box'])
+        self.content.show()
+
+    def close_dialog(self, widget, response_id):
+        widget.destroy()
+
+    def connected_callback(self, ssid, prev_ssid):
+        logging.info("Now connected to a new network")
+        if ssid != None:
+            self.remove_network(ssid)
+        if prev_ssid != None:
+            self.remove_network(prev_ssid)
+
+        self.check_missing_networks()
 
     def connect_network(self, widget, ssid, showadd=True):
         _ = self.lang.gettext
@@ -342,27 +282,32 @@ class NetworkPanel(ScreenPanel):
         self._screen.wifi.add_callback("connecting_status", self.connecting_status_callback)
         self._screen.wifi.connect(ssid)
 
-    def connected_callback(self, ssid, prev_ssid):
-        logging.info("Now connected to '%s' from '%s'" % (ssid, prev_ssid))
-        if ssid != None:
-            self.remove_network(ssid)
-        if prev_ssid != None:
-            self.remove_network(prev_ssid)
-
-        self.check_missing_networks()
-
     def connecting_status_callback(self, msg):
         self.labels['connecting_info'].set_text(self.labels['connecting_info'].get_text() + "\n" + msg)
         self.labels['connecting_info'].show_all()
 
-    def close_dialog(self, widget, response_id):
-        widget.destroy()
+    def remove_network(self, ssid, show=True):
+        if ssid not in self.networks:
+            return
 
-        #self.add_network(self.prev_network)
-        #cur_ssid = self._screen.wifi.get_connected_ssid()
-        #self.add_network()
+        i = 0
+        while self.labels['networklist'].get_child_at(0, i) != None:
+            if self.networks[ssid] == self.labels['networklist'].get_child_at(0, i):
+                self.labels['networklist'].remove_row(i)
+                self.labels['networklist'].show()
+                del self.networks[ssid]
+                del self.labels['networks'][ssid]
+                return
+            i = i+1
+        return
 
+    def remove_network_wid(self, widget, ssid):
+        self.remove_network(ssid)
 
+    def remove_wifi_network(self, widget, ssid):
+        self._screen.wifi.delete_network(ssid)
+        self.remove_network(ssid)
+        self.check_missing_networks()
 
     def scan_callback(self, new_networks, old_networks):
         for net in old_networks:
@@ -371,20 +316,8 @@ class NetworkPanel(ScreenPanel):
             self.add_network(net, False)
         self.content.show_all()
 
-    def close_add_network(self, widget, ssid):
-        for child in self.content.get_children():
-            self.content.remove(child)
-        self.content.add(self.labels['main_box'])
-        self.content.show()
-
-    def remove_wifi_network(self, widget, ssid):
-        self._screen.wifi.delete_network(ssid)
-        self.remove_network(ssid)
-        self.check_missing_networks()
-
     def show_add_network(self, widget, ssid):
         _ = self.lang.gettext
-        logging.debug("Adding show network for %s" % ssid)
         for child in self.content.get_children():
             self.content.remove(child)
 
@@ -420,6 +353,60 @@ class NetworkPanel(ScreenPanel):
         self.labels['network_psk'].set_text('')
         self.content.add(self.labels['add_network'])
         self.content.show()
-        logging.debug("Showing keyboard")
         self._screen.show_keyboard()
         self.labels['network_psk'].grab_focus_without_selecting()
+
+    def update_all_networks(self):
+        for network in list(self.networks):
+            self.update_network_info(network)
+        return True
+
+    def update_network_info(self, ssid):
+        _ = self.lang.gettext
+
+        if ssid not in self.networks or ssid not in self.labels['networks']:
+            return
+        netinfo = self._screen.wifi.get_network_info(ssid)
+        if netinfo == None:
+            logging.debug("Couldn't get netinfo for update")
+            return
+
+        connected = ""
+        if netinfo['connected'] == True:
+            stream = os.popen('hostname -f')
+            hostname = stream.read().strip()
+            ifadd = netifaces.ifaddresses(self.interface)
+            ipv4 = ""
+            ipv6 = ""
+            if netifaces.AF_INET in ifadd and len(ifadd[netifaces.AF_INET]) > 0:
+                ipv4 = "<b>%s:</b> %s " % (_("IPv4"), ifadd[netifaces.AF_INET][0]['addr'])
+            if netifaces.AF_INET6 in ifadd and len(ifadd[netifaces.AF_INET6]) > 0:
+                ipv6 = ipv6 = "<b>%s:</b> %s " % (_("IPv6"), ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0])
+            connected = "<b>%s</b>\n<b>%s:</b> %s\n%s%s\n" % (_("Connected"),_("Hostname"),hostname, ipv4, ipv6)
+        elif "psk" in netinfo:
+            connected = "Password saved."
+        freq = "2.4 GHz" if netinfo['frequency'][0:1] == "2" else "5 Ghz"
+
+        self.labels['networks'][ssid]['info'].set_markup("%s%s <small>%s %s %s  %s%s</small>" % ( connected,
+            "" if netinfo['encryption'] == "off" else netinfo['encryption'].upper(),
+            freq, _("Channel"), netinfo['channel'], netinfo['signal_level_dBm'], _("dBm")
+            ))
+        self.labels['networks'][ssid]['info'].show_all()
+
+    def update_single_network_info(self):
+        _ = self.lang.gettext
+
+        stream = os.popen('hostname -f')
+        hostname = stream.read().strip()
+        ifadd = netifaces.ifaddresses(self.interface)
+        ipv4 = ""
+        ipv6 = ""
+        if netifaces.AF_INET in ifadd and len(ifadd[netifaces.AF_INET]) > 0:
+            ipv4 = "<b>%s:</b> %s " % (_("IPv4"), ifadd[netifaces.AF_INET][0]['addr'])
+        if netifaces.AF_INET6 in ifadd and len(ifadd[netifaces.AF_INET6]) > 0:
+            ipv6 = ipv6 = "<b>%s:</b> %s " % (_("IPv6"), ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0])
+        connected = "<b>%s</b>\n\n<small><b>%s</b></small>\n<b>%s:</b> %s\n%s\n%s\n" % (self.interface, _("Connected"),_("Hostname"),
+            hostname, ipv4, ipv6)
+
+        self.labels['networkinfo'].set_markup(connected)
+        self.labels['networkinfo'].show_all()
