@@ -509,7 +509,7 @@ class KlipperScreen(Gtk.Window):
         self.printer_select_prepanel = self._cur_panels[0]
         self.show_panel("printer_select","printer_select","Printer Select", 2)
 
-    def state_disconnected(self):
+    def state_disconnected(self, prev_state):
         if "printer_select" in self._cur_panels:
             self.printer_select_callbacks = [self.state_disconnected]
             return
@@ -518,7 +518,7 @@ class KlipperScreen(Gtk.Window):
         logging.debug("### Going to disconnected")
         self.printer_initializing(_("Klipper has disconnected"))
 
-    def state_error(self):
+    def state_error(self, prev_state):
         if "printer_select" in self._cur_panels:
             self.printer_select_callbacks = [self.state_error]
             return
@@ -538,11 +538,11 @@ class KlipperScreen(Gtk.Window):
                 _("Klipper has encountered an error.")
             )
 
-    def state_paused(self):
+    def state_paused(self, prev_state):
         if "job_status" not in self._cur_panels:
             self.printer_printing()
 
-    def state_printing(self):
+    def state_printing(self, prev_state):
         if "printer_select" in self._cur_panels:
             self.printer_select_callbacks = [self.state_printing]
             return
@@ -552,7 +552,7 @@ class KlipperScreen(Gtk.Window):
         else:
             self.panels["job_status"].new_print()
 
-    def state_ready(self):
+    def state_ready(self, prev_state):
         if "printer_select" in self._cur_panels:
             self.printer_select_callbacks = [self.state_ready]
             return
@@ -560,9 +560,13 @@ class KlipperScreen(Gtk.Window):
         # Do not return to main menu if completing a job, timeouts/user input will return
         if "job_status" in self._cur_panels or "main_menu" in self._cur_panels:
             return
+
+        if prev_state not in ['paused','printing']:
+            self.init_printer()
+
         self.printer_ready()
 
-    def state_startup(self):
+    def state_startup(self, prev_state):
         if "printer_select" in self._cur_panels:
             self.printer_select_callbacks = [self.state_startup]
             return
@@ -570,7 +574,7 @@ class KlipperScreen(Gtk.Window):
         _ = self.lang.gettext
         self.printer_initializing(_("Klipper is attempting to start"))
 
-    def state_shutdown(self):
+    def state_shutdown(self, prev_state):
         if "printer_select" in self._cur_panels:
             self.printer_select_callbacks = [self.state_shutdown]
             return

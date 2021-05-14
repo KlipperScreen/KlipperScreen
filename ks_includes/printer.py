@@ -139,12 +139,14 @@ class Printer:
             return
 
         logging.debug("Changing state from '%s' to '%s'" % (self.state, state))
+        prev_state = self.state
         self.state = state
         if self.state_callbacks[state] != None:
             logging.debug("Adding callback for state: %s" % state)
             Gdk.threads_add_idle(
                 GLib.PRIORITY_HIGH_IDLE,
-                self.state_callbacks[state]
+                self.state_callbacks[state],
+                prev_state
             )
 
     def configure_power_devices(self, data):
