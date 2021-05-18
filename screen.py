@@ -33,6 +33,7 @@ from ks_includes.printer import Printer
 from ks_includes.wifi import WifiManager
 
 from ks_includes.config import KlipperScreenConfig
+from panels.base_panel import BasePanel
 
 logging.getLogger('matplotlib').setLevel(logging.WARNING)
 import numpy
@@ -118,6 +119,9 @@ class KlipperScreen(Gtk.Window):
         self.theme = self._config.get_main_config_option('theme')
         self.gtk = KlippyGtk(self, self.width, self.height, self.theme)
         self.init_style()
+
+        self.base_panel = BasePanel(self, "Base Panel", False)
+        self.add(self.base_panel.get())
 
         self.printer_initializing(_("Initializing"))
 
@@ -301,8 +305,13 @@ class KlipperScreen(Gtk.Window):
                 self._remove_current_panel(pop)
 
             logging.debug("Attaching panel %s" % panel_name)
+            self.base_panel.add_content(self.panels[panel_name])
 
-            self.add(self.panels[panel_name].get())
+            logging.debug("Showing back. count: %s" % len(self._cur_panels))
+            if len(self._cur_panels) == 0:
+                self.base_panel.show_back(False)
+            else:
+                self.base_panel.show_back(True)
             self.show_all()
 
             if hasattr(self.panels[panel_name],"process_update"):
@@ -424,7 +433,7 @@ class KlipperScreen(Gtk.Window):
             logging.info("No items in menu, returning.")
             return
 
-        self.show_panel(self._cur_panels[-1] + '_' + name, "menu", disname, 1, False, display_name=disname,
+        self.show_panel(self._cur_panels[-1] + '_menu', "menu", disname, 1, False, display_name=disname,
             items=menuitems)
 
     def _remove_all_panels(self):
@@ -434,11 +443,12 @@ class KlipperScreen(Gtk.Window):
 
     def _remove_current_panel(self, pop=True, show=True):
         if len(self._cur_panels) > 0:
-            self.remove(self.panels[self._cur_panels[-1]].get())
+            self.base_panel.remove(self.panels[self._cur_panels[-1]].get_content())
             if pop == True:
                 self._cur_panels.pop()
                 if len(self._cur_panels) > 0:
-                    self.add(self.panels[self._cur_panels[-1]].get())
+                    self.base_panel.add_content(self.panels[self._cur_panels[-1]])
+                    self.base_panel.show_back(False if len(self._cur_panels) == 1 else True)
                     if hasattr(self.panels[self._cur_panels[-1]], "process_update"):
                         self.panels[self._cur_panels[-1]].process_update("notify_status_update",
                             self.printer.get_updates())
