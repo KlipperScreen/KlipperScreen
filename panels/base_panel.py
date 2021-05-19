@@ -1,3 +1,4 @@
+import datetime
 import gi
 import logging
 
@@ -13,6 +14,8 @@ class BasePanel(ScreenPanel):
     def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
         super().__init__(screen, title, back, action_bar, printer_name)
         self.current_panel = None
+        self.time_min = -1
+        self.time_format = self._config.get_main_config_option("24htime")
 
         self.buttons_showing = {
             'back': False if back else True
@@ -75,12 +78,42 @@ class BasePanel(ScreenPanel):
 
         if action_bar == True:
             self.layout.put(self.control_grid, 0, 0)
+
+        self.control['time_box'] = Gtk.Box()
+        self.control['time_box'].set_halign(Gtk.Align.END)
+        self.control['time_box'].set_size_request(0, self.title_spacing)
+        self.control['time'] = Gtk.Label("00:00 AM")
+        self.control['time'].set_size_request(0, self.title_spacing)
+        self.control['time'].set_halign(Gtk.Align.END)
+        self.control['time'].set_valign(Gtk.Align.CENTER)
+        self.control['time_box'].pack_end(self.control['time'], True, 0, 0)
+
+        self.layout.put(self.control['time_box'], action_bar_width, 0)
         self.layout.put(self.titlelbl, action_bar_width, 0)
         self.layout.put(self.content, action_bar_width, self.title_spacing)
 
     def initialize(self, panel_name):
         # Create gtk items here
         return
+
+    def activate(self):
+        size = self.control['time_box'].get_allocation().width
+        self.layout.remove(self.control['time_box'])
+        self.control['time_box'].set_size_request(size, self.title_spacing)
+        self.layout.put(self.control['time_box'], self._screen.width - size - 5, 0)
+
+        GLib.timeout_add_seconds(1, self.update_time)
+        self.update_time()
+
+    def update_time(self):
+        now = datetime.datetime.now()
+        confopt = self._config.get_main_config_option("24htime")
+        if now.minute != self.time_min or self.time_format != confopt:
+            if confopt == "True":
+                self.control['time'].set_text(now.strftime("%H:%M"))
+            else:
+                self.control['time'].set_text(now.strftime("%I:%M %p"))
+        return True
 
     def add_content(self, panel):
         self.current_panel = panel

@@ -53,7 +53,8 @@ class KlipperScreenConfig:
                 "value": "z-bolt","options":[
                     {"name": _("Z-bolt (default)"), "value": "z-bolt"},
                     {"name": _("Colorized"), "value": "colorized"}
-            ]}}
+            ]}},
+            {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
             #{"": {"section": "main", "name": _(""), "type": ""}}
         ]
 
