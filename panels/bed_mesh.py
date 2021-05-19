@@ -55,8 +55,6 @@ class BedMeshPanel(ScreenPanel):
         self.load_meshes()
 
         self.labels['main_box'] = box
-        self.control['back'].disconnect_by_func(self._screen._menu_go_back)
-        self.control['back'].connect("clicked", self.back)
         self.content.add(self.labels['main_box'])
         self._screen.add_subscription(panel_name)
 
@@ -185,13 +183,11 @@ class BedMeshPanel(ScreenPanel):
         self.labels['profiles'].attach(self.profiles[profile]['row'], 0, pos, 1, 1)
         self.labels['profiles'].show_all()
 
-        #Gdk.threads_add_idle(GLib.PRIORITY_LOW, self.create_graph, profile)
-
-    def back(self, widget):
+    def back(self):
         if self.show_create == True:
             self.remove_create()
-        else:
-            self._screen._menu_go_back()
+            return True
+        return False
 
     def create_profile(self, widget):
         name = self.labels['profile_name'].get_text()

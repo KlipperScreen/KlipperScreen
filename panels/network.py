@@ -19,6 +19,8 @@ class NetworkPanel(ScreenPanel):
 
     def initialize(self, menu):
         _ = self.lang.gettext
+        self.show_add = False
+
         grid = self._gtk.HomogeneousGrid()
         grid.set_hexpand(True)
 
@@ -205,13 +207,19 @@ class NetworkPanel(ScreenPanel):
         psk = self.labels['network_psk'].get_text()
         result = self._screen.wifi.add_network(ssid, psk)
 
-        self.close_add_network(widget, ssid)
+        self.close_add_network()
 
         if connect == True:
             if result == True:
                 self.connect_network(widget, ssid, False)
             else:
                 self._screen.show_popup_message("Error adding network %s" % ssid)
+
+    def back(self):
+        if self.show_add == True:
+            self.close_add_network()
+            return True
+        return False
 
     def check_missing_networks(self):
         networks = self._screen.wifi.get_networks()
@@ -223,11 +231,18 @@ class NetworkPanel(ScreenPanel):
             self.add_network(net)
         self.labels['networklist'].show_all()
 
-    def close_add_network(self, widget, ssid):
+    def close_add_network(self):
+        if self.show_add == False:
+            return
+
         for child in self.content.get_children():
             self.content.remove(child)
         self.content.add(self.labels['main_box'])
         self.content.show()
+        for i in ['add_network','network_psk']:
+            if i in self.labels:
+                del self.labels[i]
+        self.show_add = False
 
     def close_dialog(self, widget, response_id):
         widget.destroy()
@@ -317,6 +332,9 @@ class NetworkPanel(ScreenPanel):
         self.content.show_all()
 
     def show_add_network(self, widget, ssid):
+        if self.show_add == True:
+            return
+
         _ = self.lang.gettext
         for child in self.content.get_children():
             self.content.remove(child)
@@ -352,9 +370,10 @@ class NetworkPanel(ScreenPanel):
         self.show_create = True
         self.labels['network_psk'].set_text('')
         self.content.add(self.labels['add_network'])
-        self.content.show()
         self._screen.show_keyboard()
         self.labels['network_psk'].grab_focus_without_selecting()
+        self.content.show_all()
+        self.show_add = True
 
     def update_all_networks(self):
         for network in list(self.networks):

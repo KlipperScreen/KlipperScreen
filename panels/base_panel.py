@@ -12,6 +12,7 @@ from ks_includes.screen_panel import ScreenPanel
 class BasePanel(ScreenPanel):
     def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
         super().__init__(screen, title, back, action_bar, printer_name)
+        self.current_panel = None
 
         self.buttons_showing = {
             'back': False if back else True
@@ -30,7 +31,7 @@ class BasePanel(ScreenPanel):
         logging.debug("Button scale: %s" % button_scale)
 
         self.control['back'] = self._gtk.ButtonImage('back', None, None, button_scale[0], button_scale[1])
-        self.control['back'].connect("clicked", self._screen._menu_go_back)
+        self.control['back'].connect("clicked", self.back)
         self.control['home'] = self._gtk.ButtonImage('main', None, None, button_scale[0], button_scale[1])
         self.control['home'].connect("clicked", self.menu_return, True)
 
@@ -82,8 +83,19 @@ class BasePanel(ScreenPanel):
         return
 
     def add_content(self, panel):
+        self.current_panel = panel
         self.set_title(panel.get_title())
         self.content.add(panel.get_content())
+
+    def back(self, widget):
+        if self.current_panel == None:
+            return
+
+        if hasattr(self.current_panel, "back"):
+            if not self.current_panel.back():
+                self._screen._menu_go_back()
+        else:
+            self._screen._menu_go_back()
 
     def get(self):
         return self.layout

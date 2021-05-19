@@ -82,8 +82,6 @@ class PrintPanel(ScreenPanel):
 
         scroll.add(self.dir_panels['gcodes'])
         self.scroll = scroll
-        self.control['back'].disconnect_by_func(self._screen._menu_go_back)
-        self.control['back'].connect("clicked", self.back)
         self.content.add(box)
         self._screen.files.add_file_callback(self._callback)
 
@@ -248,11 +246,11 @@ class PrintPanel(ScreenPanel):
         if show == True:
             self.dir_panels[directory].show_all()
 
-    def back(self, widget):
+    def back(self):
         if len(self.cur_directory.split('/')) > 1:
             self.change_dir(None, '/'.join(self.cur_directory.split('/')[:-1]))
-        else:
-            self._screen._menu_go_back()
+            return True
+        return False
 
     def change_dir(self, widget, directory):
         if directory not in self.dir_panels:

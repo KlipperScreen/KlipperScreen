@@ -122,6 +122,8 @@ class KlipperScreen(Gtk.Window):
 
         self.base_panel = BasePanel(self, "Base Panel", False)
         self.add(self.base_panel.get())
+        self.show_all()
+        self.base_panel.activate()
 
         self.printer_initializing(_("Initializing"))
 
@@ -433,7 +435,7 @@ class KlipperScreen(Gtk.Window):
             logging.info("No items in menu, returning.")
             return
 
-        self.show_panel(self._cur_panels[-1] + '_menu', "menu", disname, 1, False, display_name=disname,
+        self.show_panel(self._cur_panels[-1] + '_' + name, "menu", disname, 1, False, display_name=disname,
             items=menuitems)
 
     def _remove_all_panels(self):
@@ -737,14 +739,14 @@ class KlipperScreen(Gtk.Window):
         #for i in ['back','estop','home']:
         #    if i in cur_panel.control:
         #        cur_panel.control[i].set_sensitive(False)
-        cur_panel.get().put(box, action_bar_width, self.height - 200)
+        self.base_panel.get().put(box, action_bar_width, self.height - 200)
         self.show_all()
         keyboard.add_id(xid)
         keyboard.show()
 
         self.keyboard = {
             "box": box,
-            "panel": cur_panel.get(),
+            #"panel": cur_panel.get(),
             "process": p,
             "socket": keyboard
         }
@@ -753,7 +755,7 @@ class KlipperScreen(Gtk.Window):
         if self.keyboard is None:
             return
 
-        self.keyboard['panel'].remove(self.keyboard['box'])
+        self.base_panel.get().remove(self.keyboard['box'])
         os.kill(self.keyboard['process'].pid, signal.SIGTERM)
         self.keyboard = None
 
