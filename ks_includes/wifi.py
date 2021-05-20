@@ -150,7 +150,6 @@ class WifiManager():
         return self.connected_ssid
 
     def get_current_wifi(self, interface="wlan0"):
-        logging.info("Getting current wifi information")
         status = self.wpa_cli("STATUS").split('\n')
         vars = {}
         for line in status:
@@ -239,7 +238,6 @@ class WifiManager():
         new_networks = []
         deleted_networks = list(self.networks)
 
-        logging.info("Trying to get scan results")
         results = self.wpa_cli("SCAN_RESULTS").split('\n')
         results.pop(0)
 
@@ -321,7 +319,6 @@ class WpaSocket(Thread):
                 continue
             if msg.startswith("<"):
                 if "CTRL-EVENT-SCAN-RESULTS" in msg:
-                    logging.info("Adding scan_results to callbacks")
                     Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.wm.scan_results)
                 elif "CTRL-EVENT-DISCONNECTED" in msg:
                     self.callback("connecting_status", msg)
