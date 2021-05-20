@@ -575,6 +575,8 @@ class KlipperScreen(Gtk.Window):
 
         if prev_state not in ['paused','printing']:
             self.init_printer()
+            self.base_panel._printer = self.printer
+            self.base_panel.show_heaters()
 
         self.printer_ready()
 
@@ -628,6 +630,7 @@ class KlipperScreen(Gtk.Window):
                     self.show_popup_message(data[3:])
                 logging.debug(json.dumps([action, data], indent=2))
 
+        self.base_panel.process_update(action, data)
         if self._cur_panels[-1] in self.subscriptions:
             self.panels[self._cur_panels[-1]].process_update(action, data)
 
