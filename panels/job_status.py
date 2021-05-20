@@ -521,16 +521,18 @@ class JobStatusPanel(ScreenPanel):
             self.labels['button_grid'].attach(self.labels['cancel'], 1, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['fine_tune'], 2, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
+            self.enable_button("pause","cancel")
         elif self.state == "paused":
             self.labels['button_grid'].attach(self.labels['resume'], 0, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['cancel'], 1, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['fine_tune'], 2, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
+            self.enable_button("resume","cancel")
         elif self.state == "cancelling":
             self.labels['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
             self.labels['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
-            self.labels['button_grid'].attach(self.labels['fine_tune'], 2, 0, 1, 1)
-            self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['restart'], 2, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['menu'], 3, 0, 1, 1)
         elif self.state == "error" or self.state == "complete" or self.state == "cancelled":
             self.labels['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
             self.labels['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
