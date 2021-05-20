@@ -530,6 +530,11 @@ class KlipperScreen(Gtk.Window):
         logging.debug("### Going to disconnected")
         self.printer_initializing(_("Klipper has disconnected"))
 
+        for panel in list(self.panels):
+            if panel in ["printer_select","splash_screen"]:
+                continue
+            del self.panels[panel]
+
     def state_error(self, prev_state):
         if "printer_select" in self._cur_panels:
             self.printer_select_callbacks = [self.state_error]
@@ -549,6 +554,11 @@ class KlipperScreen(Gtk.Window):
             self.printer_initializing(
                 _("Klipper has encountered an error.")
             )
+
+        for panel in list(self.panels):
+            if panel in ["printer_select","splash_screen"]:
+                continue
+            del self.panels[panel]
 
     def state_paused(self, prev_state):
         if "job_status" not in self._cur_panels:
