@@ -49,6 +49,31 @@ try:
 except:
     pass
 
+def get_network_interfaces():
+    stream = os.popen("ip addr | grep ^'[0-9]' | cut -d ' ' -f 2 | grep -o '[a-zA-Z0-9\.]*'")
+    return [i for i in stream.read().strip().split('\n') if not i.startswith('lo')]
+
+def get_wireless_interfaces():
+    p = subprocess.Popen(["which","iwconfig"], stdout=subprocess.PIPE)
+
+    while p.poll() is None:
+        time.sleep(.1)
+    if p.poll() != 0:
+        return None
+
+    try:
+        p = subprocess.Popen(["iwconfig"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        result = p.stdout.read().decode('ascii').split('\n')
+    except:
+        logging.info("Error with running iwconfig command")
+        return None
+    interfaces = []
+    for line in result:
+        match = re.search('^(\S+)\s+.*$', line)
+        if match:
+            interfaces.append(match.group(1))
+
+    return interfaces
 
 def get_software_version():
     prog = ('git', '-C', os.path.dirname(__file__), 'describe', '--always',

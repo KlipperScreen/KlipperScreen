@@ -27,15 +27,16 @@ class TemperaturePanel(ScreenPanel):
 
         self.heaters = []
         i = 0
-        for x in self._printer.get_tools():
-            if i == 0:
-                primary_tool = x
+        tools = self._printer.get_tools()
+        for x in tools:
             self.labels[x] = self._gtk.ToggleButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0))
             if i == 0:
                 self.labels[x].set_active(True)
             self.heaters.append(x)
             i += 1
-        self.labels[primary_tool].get_style_context().add_class('button_active')
+
+        if len(tools) > 0:
+            self.labels[tools[0]].get_style_context().add_class('button_active')
 
         add_heaters = self._printer.get_heaters()
         for h in add_heaters:

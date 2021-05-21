@@ -53,7 +53,8 @@ class KlipperScreenConfig:
                 "value": "z-bolt","options":[
                     {"name": _("Z-bolt (default)"), "value": "z-bolt"},
                     {"name": _("Colorized"), "value": "colorized"}
-            ]}}
+            ]}},
+            {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
             #{"": {"section": "main", "name": _(""), "type": ""}}
         ]
 
@@ -86,6 +87,14 @@ class KlipperScreenConfig:
                 includes = [i[8:] for i in self.defined_config.sections() if i.startswith("include ")]
                 for include in includes:
                     self._include_config("/".join(self.config_path.split("/")[:-1]),include)
+
+                for i in ['menu __main','menu __print','menu __splashscreen','preheat']:
+                    for j in self.defined_config.sections():
+                        if j.startswith(i):
+                            for k in list(self.config.sections()):
+                                if k.startswith(i):
+                                    del self.config[k]
+                            break
 
                 self.log_config(self.defined_config)
                 self.config.read_string(user_def)

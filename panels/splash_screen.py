@@ -22,7 +22,7 @@ class SplashScreenPanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
 
-        image = self._gtk.Image("klipper.svg", None, 4, 4)
+        image = self._gtk.Image("klipper.svg", None, 4, 3)
 
         self.labels['text'] = Gtk.Label(_("Initializing printer..."))
         self.labels['text'].set_line_wrap(True)
@@ -42,12 +42,8 @@ class SplashScreenPanel(ScreenPanel):
         main.pack_end(self.labels['actions'], False, False, 10)
         main.pack_end(self.labels['text'], True, True, 10)
 
-
-        box = Gtk.VBox()
-        box.add(main)
-        box.set_size_request(self._screen.width, self._screen.height)
-
-        self.layout.put(box, 0, 0)
+        self.content.add(main)
+        #self.layout.put(box, 0, 0)
 
     def update_text(self, text):
         self.labels['text'].set_text(text)

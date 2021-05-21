@@ -349,7 +349,7 @@ class JobStatusPanel(ScreenPanel):
             self._files.remove_file_callback(self._callback_metadata)
 
     def new_print(self):
-        if self.state in ["cancelled","complete","error"]:
+        if self.state in ["cancelled","cancelling","complete","error"]:
             for to in self.close_timeouts:
                 GLib.source_remove(to)
                 self.close_timeouts.remove(to)
@@ -521,16 +521,18 @@ class JobStatusPanel(ScreenPanel):
             self.labels['button_grid'].attach(self.labels['cancel'], 1, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['fine_tune'], 2, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
+            self.enable_button("pause","cancel")
         elif self.state == "paused":
             self.labels['button_grid'].attach(self.labels['resume'], 0, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['cancel'], 1, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['fine_tune'], 2, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
+            self.enable_button("resume","cancel")
         elif self.state == "cancelling":
             self.labels['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
             self.labels['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
-            self.labels['button_grid'].attach(self.labels['fine_tune'], 2, 0, 1, 1)
-            self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['restart'], 2, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['menu'], 3, 0, 1, 1)
         elif self.state == "error" or self.state == "complete" or self.state == "cancelled":
             self.labels['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
             self.labels['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
@@ -553,7 +555,7 @@ class JobStatusPanel(ScreenPanel):
     def update_file_metadata(self):
         if self._files.file_metadata_exists(self.filename):
             self.file_metadata = self._files.get_file_info(self.filename)
-            logging.debug("Parsing file metadata: %s" % list(self.file_metadata))
+            logging.info("Update Metadata. File: %s Size: %s" % (self.filename, self.file_metadata['size']))
             if "estimated_time" in self.file_metadata and self.timeleft_type == "slicer":
                 self.update_text("est_time","/ %s" %
                     str(self._gtk.formatTimeString(self.file_metadata['estimated_time'])))
@@ -561,7 +563,6 @@ class JobStatusPanel(ScreenPanel):
                 tmp = self.file_metadata['thumbnails'].copy()
                 for i in tmp:
                     i['data'] = ""
-                logging.debug("Thumbnails: %s" % list(tmp))
             self.show_file_thumbnail()
         else:
             self.file_metadata = {}
