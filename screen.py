@@ -242,11 +242,11 @@ class KlipperScreen(Gtk.Window):
                 "configfile": ["config"],
                 "display_status": ["progress","message"],
                 "fan": ["speed"],
-                "gcode_move": ["extrude_factor","gcode_position","homing_origin","speed_factor"],
+                "gcode_move": ["extrude_factor","gcode_position","homing_origin","speed_factor","speed"],
                 "idle_timeout": ["state"],
                 "pause_resume": ["is_paused"],
                 "print_stats": ["print_duration","total_duration","filament_used","filename","state","message"],
-                "toolhead": ["homed_axes","estimated_print_time","print_time","position","extruder"],
+                "toolhead": ["homed_axes","estimated_print_time","print_time","position","extruder","max_accel"],
                 "virtual_sdcard": ["file_position","is_active","progress"],
                 "webhooks": ["state","state_message"]
             }
