@@ -156,7 +156,7 @@ class BasePanel(ScreenPanel):
         return self.layout
 
     def process_update(self, action, data):
-        if action != "notify_status_update":
+        if action != "notify_status_update" or self._printer == None:
             return
 
         if self._printer.has_heated_bed():
