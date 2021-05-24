@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-26 15:56+0000\n"
-"PO-Revision-Date: 2021-04-25 11:23-0300\n"
+"PO-Revision-Date: 2021-05-23 23:13-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -57,7 +57,7 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 msgid "Cancel Change"
-msgstr "Cancelar Cambio"
+msgstr "Cancelar"
 
 msgid "Cancel Print"
 msgstr "Cancelar Impresión"
@@ -152,10 +152,10 @@ msgid "Fan"
 msgstr "Ventilador"
 
 msgid "Fan Off"
-msgstr "Apagar Ventilador"
+msgstr "Apagar"
 
 msgid "Fan On"
-msgstr "Encender Ventilador"
+msgstr "Encender"
 
 msgid "Fast"
 msgstr "Rápido"
@@ -176,7 +176,7 @@ msgid "Go Back"
 msgstr "Volver"
 
 msgid "Home All"
-msgstr "Llevar al origen"
+msgstr "Origen XYZ"
 
 msgid "Home X"
 msgstr "Origen X"
@@ -191,7 +191,7 @@ msgid "Home Z"
 msgstr "Origen Z"
 
 msgid "Homing"
-msgstr "Llevar al origen"
+msgstr "Origen"
 
 msgid "Hostname"
 msgstr "Hostname"
@@ -277,7 +277,7 @@ msgid "Macros"
 msgstr "Macros"
 
 msgid "Main Menu"
-msgstr "Menú Principal"
+msgstr "Menú"
 
 msgid "Medium"
 msgstr "Medio"
@@ -292,7 +292,7 @@ msgid "Move"
 msgstr "Mover"
 
 msgid "Move Distance (mm)"
-msgstr "Mover Distancia (mm)"
+msgstr "Mover (mm)"
 
 msgid "Name"
 msgstr "Nombre"
@@ -301,7 +301,7 @@ msgid "Network"
 msgstr "Red"
 
 msgid "Number Pad"
-msgstr "Teclado Númerico"
+msgstr "Teclado"
 
 msgid "Off"
 msgstr "Apagar"
@@ -370,7 +370,7 @@ msgid "Screws Adjust"
 msgstr "Ajustar Tornillos"
 
 msgid "Set Speed"
-msgstr "Establecer Velocidad"
+msgstr "Establecer"
 
 msgid "Settings"
 msgstr "Opciones"
