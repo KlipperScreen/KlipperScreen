@@ -50,7 +50,7 @@ class KlipperScreenConfig:
                     {"name": _("Off"), "value": "off"}
             ]}},
             {"theme": {"section": "main", "name": _("Icon Theme"), "type": "dropdown",
-                "value": "z-bolt","options":[
+                "value": "z-bolt", "callback": screen.restart_warning, "options":[
                     {"name": _("Z-bolt (default)"), "value": "z-bolt"},
                     {"name": _("Colorized"), "value": "colorized"}
             ]}},
