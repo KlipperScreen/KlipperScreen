@@ -394,6 +394,30 @@ class KlipperScreen(Gtk.Window):
     def error_modal_response(self, widget, response_id):
         widget.destroy()
 
+    def restart_warning(self, value):
+        _ = self.lang.gettext
+        logging.debug("Showing restart warning because: %s" % value)
+
+        buttons = [
+            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL},
+            {"name": _("Restart"), "response": Gtk.ResponseType.OK}
+        ]
+
+        label = Gtk.Label()
+        label.set_markup(_("To apply %s KlipperScreen needs to be restarted" % value))
+        label.set_hexpand(True)
+        label.set_halign(Gtk.Align.CENTER)
+        label.set_line_wrap(True)
+        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+
+        dialog = self.gtk.Dialog(self,  buttons, label, self.restart_ks)
+
+    def restart_ks(self, widget, response_id):
+        if response_id == Gtk.ResponseType.OK:
+            logging.debug("Restarting")
+            os.system("sudo systemctl restart KlipperScreen")
+        widget.destroy()
+
     def init_style(self):
         style_provider = Gtk.CssProvider()
 
