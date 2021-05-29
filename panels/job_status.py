@@ -136,7 +136,7 @@ class JobStatusPanel(ScreenPanel):
         self.labels['it_box'] = it_box
 
         position = self._gtk.Image("move.svg", None, .6, .6)
-        self.labels['pos_z'] = Gtk.Label(label="X: 0")
+        self.labels['pos_z'] = Gtk.Label(label="Z: 0")
         self.labels['pos_z'].get_style_context().add_class("printing-info")
         extrusion = self._gtk.Image("extrude.svg", None, .6, .6)
         self.labels['extrusion'] = Gtk.Label(label="")
