@@ -1,4 +1,4 @@
-humanize==3.5.0
+humanize==3.6.0
 jinja2==3.0.1
 matplotlib==3.4.2
 netifaces==0.10.9
