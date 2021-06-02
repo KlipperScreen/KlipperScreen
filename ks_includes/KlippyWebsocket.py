@@ -53,6 +53,15 @@ class KlippyWebsocket(threading.Thread):
         self.connect()
 
     def connect (self):
+        def ws_on_close(ws, a=None, b=None):
+            self.on_close(ws)
+        def ws_on_error(ws, msg):
+            self.on_error(ws, msg)
+        def ws_on_message(ws, msg):
+            self.on_message(ws, msg)
+        def ws_on_open(ws):
+            self.on_open(ws)
+
         try:
             token = self._screen.apiclient.get_oneshot_token()
         except:
@@ -61,10 +70,10 @@ class KlippyWebsocket(threading.Thread):
 
         self.ws_url = "ws://%s/websocket?token=%s" % (self._url, token)
         self.ws = websocket.WebSocketApp(self.ws_url,
-            on_message  = lambda ws,msg:    self.on_message(ws, msg),
-            on_error    = lambda ws,msg:    self.on_error(ws, msg),
-            on_close    = lambda ws:        self.on_close(ws),
-            on_open     = lambda ws:        self.on_open(ws)
+            on_close    = ws_on_close,
+            on_error    = ws_on_error,
+            on_message  = ws_on_message,
+            on_open     = ws_on_open
         )
 
         self._wst = threading.Thread(target=self.ws.run_forever)
@@ -166,18 +175,8 @@ class KlippyWebsocket(threading.Thread):
         self.connect()
         return True
 
-
     def on_error(self, ws, error):
         logging.debug("Websocket error: %s" % error)
-        if error.status_code == 401:
-            # Check for any pending reconnects and remove. No amount of trying will help
-            if self.timeout != None:
-                GLib.source_remove(self.timeout)
-            Gdk.threads_add_idle(
-                GLib.PRIORITY_HIGH_IDLE,
-                self._callback['on_close'],
-                "Unable to authenticate with moonraker.\nCheck the API key"
-            )
 
 class MoonrakerApi:
     def __init__ (self, ws):
