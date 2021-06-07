@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import gi
 import logging
+import os
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GdkPixbuf, Gio, GLib, Pango
@@ -134,17 +135,22 @@ class KlippyGtk:
     def ButtonImage(self, image_name, label=None, style=None, width_scale=1, height_scale=1,
             position=Gtk.PositionType.TOP, word_wrap=True):
         filename = "%s/styles/%s/images/%s.svg" % (klipperscreendir, self.theme, str(image_name))
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            filename,
-            int(round(self.img_width * width_scale)),
-            int(round(self.img_height * height_scale)),
-            True
-        )
-
-        img = Gtk.Image.new_from_pixbuf(pixbuf)
+        if not os.path.exists(filename):
+            logging.error("Unable to find button image (theme, image): (%s, %s)" % (self.theme, str(image_name)))
+            filename = "%s/styles/%s/images/%s.svg" % (klipperscreendir, self.theme, "warning")
 
         b = Gtk.Button(label=label)
-        b.set_image(img)
+
+        if os.path.exists(filename):
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+                filename,
+                int(round(self.img_width * width_scale)),
+                int(round(self.img_height * height_scale)),
+                True
+            )
+            img = Gtk.Image.new_from_pixbuf(pixbuf)
+            b.set_image(img)
+
         b.set_hexpand(True)
         b.set_vexpand(True)
         b.set_can_focus(False)
