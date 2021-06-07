@@ -40,7 +40,7 @@ class FanPanel(ScreenPanel):
         self.labels["apply"] = self._gtk.ButtonImage("complete", _("Set Speed"))
         self.labels["apply"].get_style_context().add_class("color4")
         self.labels["apply"].connect("clicked", self.set_fan_speed)
-        self.labels["cancel"] = self._gtk.ButtonImage("cancel", _("Cancel Change"))
+        self.labels["cancel"] = self._gtk.ButtonImage("cancel", _("Cancel"))
         self.labels["cancel"].get_style_context().add_class("color2")
         self.labels["cancel"].connect("clicked", self.cancel_select_fan_speed)
         self.labels["cancel"].hide()
