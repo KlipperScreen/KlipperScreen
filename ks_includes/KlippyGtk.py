@@ -185,23 +185,20 @@ class KlippyGtk:
         dialog.connect("response", callback, *args)
         dialog.get_style_context().add_class("dialog")
 
-        grid = Gtk.Grid()
-        grid.set_size_request(screen.width - 60, -1)
-        grid.set_vexpand(True)
-        grid.set_halign(Gtk.Align.CENTER)
-        grid.set_valign(Gtk.Align.CENTER)
-        grid.add(content)
+        box = Gtk.Box()
+        box.set_size_request(screen.width - 60, 0)
+        box.set_vexpand(True)
 
         content_area = dialog.get_content_area()
         content_area.set_margin_start(15)
         content_area.set_margin_end(15)
         content_area.set_margin_top(15)
         content_area.set_margin_bottom(15)
-        content_area.add(grid)
+        content_area.add(content)
 
         dialog.show_all()
 
-        return dialog, grid
+        return dialog
 
 
     def ToggleButtonImage(self, image_name, label, style=False, width_scale=1, height_scale=1):
