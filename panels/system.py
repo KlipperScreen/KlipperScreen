@@ -83,7 +83,7 @@ class SystemPanel(ScreenPanel):
                 self.labels["%s_status" % prog].connect("clicked", self.update_program, prog)
                 self.labels["%s_box" % prog] = Gtk.Box()
                 self.labels["%s_box" % prog].set_hexpand(False)
-                self.labels["%s_info" % prog] = self._gtk.ButtonImage("information",None, None, .7, .7)
+                self.labels["%s_info" % prog] = self._gtk.ButtonImage("info",None, None, .7, .7)
                 self.labels["%s_info" % prog].connect("clicked", self.show_commit_history, prog)
 
                 self.labels["%s_box" % prog].pack_end(self.labels["%s_status" % prog], True, 0, 0)
