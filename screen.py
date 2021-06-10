@@ -79,6 +79,8 @@ class KlipperScreen(Gtk.Window):
     rtl_languages = ['he_il']
     subscriptions = []
     shutdown = True
+    updating = False
+    update_queue = []
     _ws = None
 
     def __init__(self, args, version):
@@ -193,7 +195,7 @@ class KlipperScreen(Gtk.Window):
             'virtual_sdcard': {
                 'is_active': False
             }
-        })
+        }, self.state_execute)
 
         self._remove_all_panels()
         panels = list(self.panels)
@@ -439,6 +441,9 @@ class KlipperScreen(Gtk.Window):
     def is_printing(self):
         return self.printer.get_state() == "printing"
 
+    def is_updating(self):
+        return self.updating
+
     def _go_to_submenu(self, widget, name):
         logging.info("#### Go to submenu " + str(name))
         #self._remove_current_panel(False)
@@ -540,10 +545,25 @@ class KlipperScreen(Gtk.Window):
         if self.dpms_timeout == None and functions.dpms_loaded == True:
             self.dpms_timeout = GLib.timeout_add(1000, self.check_dpms_state)
 
+    def set_updating(self, updating=False):
+        if self.updating == True and updating == False:
+            if len(self.update_queue) > 0:
+                i = self.update_queue.pop()
+                self.update_queue = []
+                i[0](i[1])
+
+        self.updating = updating
+
     def show_printer_select(self, widget=None):
         logging.debug("Saving panel: %s" % self._cur_panels[0])
         self.printer_select_prepanel = self._cur_panels[0]
         self.show_panel("printer_select","printer_select","Printer Select", 2)
+
+    def state_execute(self, callback, prev_state):
+        if self.is_updating():
+            self.update_queue.append([callback, prev_state])
+        else:
+            callback(prev_state)
 
     def state_disconnected(self, prev_state):
         if "printer_select" in self._cur_panels:
@@ -557,7 +577,7 @@ class KlipperScreen(Gtk.Window):
         for panel in list(self.panels):
             if panel in ["printer_select","splash_screen"]:
                 continue
-            del self.panels[panel]
+            #del self.panels[panel]
 
     def state_error(self, prev_state):
         if "printer_select" in self._cur_panels:
@@ -650,6 +670,8 @@ class KlipperScreen(Gtk.Window):
                 self.files.process_update(data)
         elif action == "notify_metadata_update":
             self.files.request_metadata(data['filename'])
+        elif action == "notify_update_response":
+            logging.info("%s: %s" % (action,data))
         elif action == "notify_power_changed":
             logging.debug("Power status changed: %s", data)
             self.printer.process_power_update(data)

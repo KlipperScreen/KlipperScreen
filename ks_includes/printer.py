@@ -21,8 +21,9 @@ class Printer:
     }
     tools = []
 
-    def __init__(self, printer_info, data):
+    def __init__(self, printer_info, data, state_execute_cb):
         self.state = "disconnected"
+        self.state_cb = state_execute_cb
         self.power_devices = {}
 
     def reinit(self, printer_info, data):
@@ -145,6 +146,7 @@ class Printer:
             logging.debug("Adding callback for state: %s" % state)
             Gdk.threads_add_idle(
                 GLib.PRIORITY_HIGH_IDLE,
+                self.state_cb,
                 self.state_callbacks[state],
                 prev_state
             )
