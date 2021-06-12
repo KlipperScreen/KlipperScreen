@@ -111,6 +111,15 @@ scrollbar slider {
 	background-color: #404E57;
 }
 
+textview, textview text {
+    background: transparent;
+    font-family: Free Mono;
+}
+
+textview .time {
+    color: grey;
+}
+
 trough {
     margin: .5em 1em;
 }

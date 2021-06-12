@@ -27,8 +27,6 @@ class ScreenPanel:
 
         action_bar_width = self._gtk.get_action_bar_width() if action_bar == True else 0
         self.content = Gtk.Box(spacing=0)
-        self.content.set_size_request(self._screen.width - action_bar_width, self._screen.height - self.title_spacing)
-
 
     def initialize(self, panel_name):
         # Create gtk items here
