@@ -14,17 +14,17 @@ def create_panel(*args):
 
 COLORS = {
     "command": "#bad8ff",
-    "response": "#cccccc",
-    "time": "grey"
+    "error": "#ff6975",
+    "response": "#b8b8b8",
+    "time": "grey",
+    "warning": "#c9c9c9"
 }
 
 class ConsolePanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
 
-
         gcodes = self._screen._ws.send_method("server.gcode_store",{"count": 100}, self.gcode_response)
-
 
         vbox = Gtk.VBox()
         vbox.set_hexpand(True)
@@ -72,9 +72,16 @@ class ConsolePanel(ScreenPanel):
 
     def add_gcode(self, type, time, message):
         if type == "command":
-            message = '<span color="%s">$ %s</span>' % (COLORS['command'], message)
+            color = COLORS['command']
+            message = '$ %s' % message
+        elif message.startswith("!!"):
+            color = COLORS['error']
+        elif message.startswith("//"):
+            color = COLORS['warning']
         else:
-            message = '<span color="%s">%s</span>' % (COLORS['response'], message)
+            color = COLORS['response']
+
+        message = '<span color="%s">%s</span>' % (color, message)
 
         message = message.replace('\n','\n         ')
 
@@ -86,7 +93,6 @@ class ConsolePanel(ScreenPanel):
         if method != "server.gcode_store":
             return
 
-        logging.info("Gcodes: %s " % result)
         for resp in result['result']['gcode_store']:
             self.add_gcode(resp['type'], resp['time'], resp['message'])
 
