@@ -286,15 +286,16 @@ class KlipperScreen(Gtk.Window):
 
     def show_panel(self, panel_name, type, title, remove=None, pop=True, **kwargs):
         if panel_name not in self.panels:
-            self.panels[panel_name] = self._load_panel(type, self, title)
-
             try:
+                self.panels[panel_name] = self._load_panel(type, self, title)
+
                 if kwargs != {}:
                     self.panels[panel_name].initialize(panel_name, **kwargs)
                 else:
                     self.panels[panel_name].initialize(panel_name)
             except:
-                del self.panels[panel_name]
+                if panel_name in self.panels:
+                    del self.panels[panel_name]
                 logging.exception("Unable to load panel %s" % type)
                 self.show_error_modal("Unable to load panel %s" % type)
                 return
@@ -437,6 +438,11 @@ class KlipperScreen(Gtk.Window):
             style_provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
+
+    def is_keyboard_showing(self):
+        if self.keyboard == None:
+            return False
+        return True
 
     def is_printing(self):
         return self.printer.get_state() == "printing"
@@ -781,24 +787,21 @@ class KlipperScreen(Gtk.Window):
         env["MB_KBD_CONFIG"] = "ks_includes/locales/keyboard.xml"
         p = subprocess.Popen(["matchbox-keyboard", "--xid"], stdout=subprocess.PIPE,
             stderr=subprocess.PIPE, env=env)
-        #p = subprocess.Popen(["onboard", "--xid"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
         xid = int(p.stdout.readline())
         logging.debug("XID %s" % xid)
         logging.debug("PID %s" % p.pid)
         keyboard = Gtk.Socket()
-        #keyboard.connect("plug-added", self.plug_added)
 
         action_bar_width = self.gtk.get_action_bar_width()
 
         box = Gtk.VBox()
+        box.set_vexpand(False)
         box.set_size_request(self.width - action_bar_width, self.keyboard_height)
         box.add(keyboard)
 
-        cur_panel = self.panels[self._cur_panels[-1]]
-        #for i in ['back','estop','home']:
-        #    if i in cur_panel.control:
-        #        cur_panel.control[i].set_sensitive(False)
-        self.base_panel.get().put(box, action_bar_width, self.height - 200)
+        self.base_panel.get_content().pack_end(box, False, 0, 0)
+
         self.show_all()
         keyboard.add_id(xid)
         keyboard.show()
@@ -814,7 +817,7 @@ class KlipperScreen(Gtk.Window):
         if self.keyboard is None:
             return
 
-        self.base_panel.get().remove(self.keyboard['box'])
+        self.base_panel.get_content().remove(self.keyboard['box'])
         os.kill(self.keyboard['process'].pid, signal.SIGTERM)
         self.keyboard = None
 
