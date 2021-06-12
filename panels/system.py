@@ -12,6 +12,8 @@ from ks_includes.screen_panel import ScreenPanel
 def create_panel(*args):
     return SystemPanel(*args)
 
+ALLOWED_SERVICES = ["KlipperScreen","MoonCord","klipper","moonraker"]
+
 class SystemPanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
@@ -25,10 +27,6 @@ class SystemPanel(ScreenPanel):
         firmrestart = self._gtk.ButtonImage('refresh',"\n".join(_('Firmware Restart').split(' ')),'color2')
         firmrestart.connect("clicked", self.restart_klippy, "firmware")
         firmrestart.set_vexpand(False)
-
-        ks_restart = self._gtk.ButtonImage('refresh',"\n".join(_('Restart Klipper Screen').split(' ')))
-        ks_restart.set_vexpand(False)
-        ks_restart.connect("clicked", self.restart_ks)
 
         reboot = self._gtk.ButtonImage('refresh',_('System\nRestart'),'color3')
         reboot.connect("clicked", self._screen._confirm_send_action,
@@ -86,6 +84,11 @@ class SystemPanel(ScreenPanel):
                 self.labels["%s_info" % prog] = self._gtk.ButtonImage("info",None, None, .7, .7)
                 self.labels["%s_info" % prog].connect("clicked", self.show_commit_history, prog)
 
+                if prog in ALLOWED_SERVICES:
+                    self.labels["%s_restart" % prog] = self._gtk.ButtonImage("refresh",None, None, .7, .7)
+                    self.labels["%s_restart" % prog].connect("clicked", self.restart, prog)
+                    self.labels["%s_box" % prog].pack_start(self.labels["%s_restart" % prog], True, 0, 0)
+
                 self.labels["%s_box" % prog].pack_end(self.labels["%s_status" % prog], True, 0, 0)
                 logging.info("Updating program: %s " % prog)
                 self.update_program_info(prog)
@@ -100,7 +103,6 @@ class SystemPanel(ScreenPanel):
         grid.attach(scroll, 0, 0, 5, 2)
         grid.attach(restart, 0, 2, 1, 1)
         grid.attach(firmrestart, 1, 2, 1, 1)
-        grid.attach(ks_restart, 2, 2, 1, 1)
         grid.attach(reboot, 3, 2, 1, 1)
         grid.attach(shutdown, 4, 2, 1, 1)
 
@@ -141,6 +143,13 @@ class SystemPanel(ScreenPanel):
 
                 if data['complete'] == True:
                     self.update_dialog.set_response_sensitive(Gtk.ResponseType.CANCEL, True)
+
+    def restart(self, widget, program):
+        if program not in ALLOWED_SERVICES:
+            return
+
+        logging.info("Restarting service: %s" % program)
+        self._screen._ws.send_method("machine.services.restart", {"service": program})
 
     def show_commit_history(self, widget, program):
         _ = self.lang.gettext
