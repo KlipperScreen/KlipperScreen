@@ -11,6 +11,7 @@ klipperscreendir = os.getcwd()
 class KlippyGtk:
     labels = {}
     font_ratio = [51, 30]
+    keyboard_ratio = .22
     width_ratio = 16
     height_ratio = 9.375
 
@@ -42,6 +43,9 @@ class KlippyGtk:
     def get_content_height(self):
         return self.height - self.header_size
 
+    def get_font_size(self):
+        return self.font_size
+
     def get_header_size(self):
         return self.header_size
 
@@ -54,8 +58,8 @@ class KlippyGtk:
     def get_image_height(self):
         return self.img_height
 
-    def get_font_size(self):
-        return self.font_size
+    def get_keyboard_height(self):
+        return (self.width - self.get_action_bar_width()) * self.keyboard_ratio
 
     def Label(self, label, style=None):
         l = Gtk.Label(label)
