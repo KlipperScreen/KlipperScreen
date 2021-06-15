@@ -120,6 +120,7 @@ class KlipperScreen(Gtk.Window):
 
         self.theme = self._config.get_main_config_option('theme')
         self.gtk = KlippyGtk(self, self.width, self.height, self.theme)
+        self.keyboard_height = self.gtk.get_keyboard_height()
         self.init_style()
 
         self.base_panel = BasePanel(self, "Base Panel", False)
