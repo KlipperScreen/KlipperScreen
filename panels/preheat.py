@@ -100,7 +100,7 @@ class PreheatPanel(ScreenPanel):
     def set_temperature(self, widget, setting):
         if setting == "cooldown":
             for heater in self.active_heaters:
-                print ("Setting %s to %d" % (heater, 0))
+                logging.info("Setting %s to %d" % (heater, 0))
                 if heater.startswith('heater_generic '):
                     self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), 0)
                 elif heater.startswith('heater_bed'):
@@ -113,15 +113,15 @@ class PreheatPanel(ScreenPanel):
 
         for heater in self.active_heaters:
             if heater.startswith('heater_generic '):
-                print ("Setting %s to %d" % (heater, self.preheat_options[setting]['heater_generic']))
+                logging.info("Setting %s to %d" % (heater, self.preheat_options[setting]['heater_generic']))
                 self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]),
                     self.preheat_options[setting]["heater_generic"])
             elif heater.startswith('heater_bed'):
-                print ("Setting %s to %d" % (heater, self.preheat_options[setting]['bed']))
+                logging.info("Setting %s to %d" % (heater, self.preheat_options[setting]['bed']))
                 self._screen._ws.klippy.set_bed_temp(self.preheat_options[setting]["bed"])
                 self._printer.set_dev_stat(heater,"target", int(self.preheat_options[setting]["bed"]))
             else:
-                print ("Setting %s to %d" % (heater, self.preheat_options[setting]['extruder']))
+                logging.info("Setting %s to %d" % (heater, self.preheat_options[setting]['extruder']))
                 self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater),
                     self.preheat_options[setting]["extruder"])
                 self._printer.set_dev_stat(heater,"target", int(self.preheat_options[setting]["extruder"]))
