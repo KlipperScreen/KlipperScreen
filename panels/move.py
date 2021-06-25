@@ -12,7 +12,7 @@ def create_panel(*args):
 
 class MovePanel(ScreenPanel):
     distance = 1
-    distances = ['.1','.5','1','5','10','25']
+    distances = ['.1','.5','1','5','10','25','50']
 
 
     def initialize(self, panel_name):
@@ -90,7 +90,7 @@ class MovePanel(ScreenPanel):
         box.pack_start(self.labels['move_dist'], True, True, 0)
         box.pack_start(distgrid, True, True, 0)
 
-        grid.attach(box, 0, 2, 3, 1)
+        grid.attach(box, 0, 2, 4, 1)
 
         self.content.add(grid)
         self._screen.add_subscription(panel_name)
