@@ -272,6 +272,9 @@ class JobStatusPanel(ScreenPanel):
         self.labels['restart'].connect("clicked", self.restart)
         self.labels['resume'] = self._gtk.ButtonImage("resume",_("Resume"),"color1")
         self.labels['resume'].connect("clicked",self.resume)
+        self.labels['temperature'] = self._gtk.ButtonImage("heat-up",_("Temp."),"color1")
+        self.labels['temperature'].connect("clicked", self.menu_item_clicked, "temperature", {
+            "panel": "temperature", "name": _("Temperature")})
 
     def restart(self, widget):
         if self.filename != "none":
@@ -520,13 +523,15 @@ class JobStatusPanel(ScreenPanel):
             self.labels['button_grid'].attach(self.labels['pause'], 0, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['cancel'], 1, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['fine_tune'], 2, 0, 1, 1)
-            self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['temperature'], 3, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['control'], 4, 0, 1, 1)
             self.enable_button("pause","cancel")
         elif self.state == "paused":
             self.labels['button_grid'].attach(self.labels['resume'], 0, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['cancel'], 1, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['fine_tune'], 2, 0, 1, 1)
-            self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['temperature'], 3, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['control'], 4, 0, 1, 1)
             self.enable_button("resume","cancel")
         elif self.state == "cancelling":
             self.labels['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
