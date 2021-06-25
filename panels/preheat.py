@@ -69,6 +69,13 @@ class PreheatPanel(ScreenPanel):
         row = int(i/2) if i%2 == 0 else int(i/2)+1
         self.labels["control_grid"].attach(cooldown, i%2, int(i/2), 1, 1)
 
+        i += 1
+        temperature = self._gtk.ButtonImage('heat-up', _('Temperature'))
+        temperature.connect("clicked", self.menu_item_clicked, "temperature", {
+            "name": "Temperature",
+            "panel": "temperature"
+        })
+        self.labels["control_grid"].attach(temperature, i%2, int(i/2), 1, 1)
 
         grid.attach(eq_grid, 0, 0, 1, 1)
         grid.attach(self.labels["control_grid"], 1, 0, 1, 1)
