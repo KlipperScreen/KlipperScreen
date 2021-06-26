@@ -186,8 +186,8 @@ class JobStatusPanel(ScreenPanel):
         self.labels['i2_box'].get_style_context().add_class("printing-info-box")
         self.labels['i2_box'].set_valign(Gtk.Align.CENTER)
         self.labels['info_grid'] = self._gtk.HomogeneousGrid()
-        self.labels['info_grid'].attach(self.labels['i1_box'], 0, 0, 1, 1)
-        self.labels['info_grid'].attach(self.labels['i2_box'], 1, 0, 1, 1)
+        self.labels['info_grid'].attach(self.labels['i1_box'], 0, 0, 2, 1)
+        self.labels['info_grid'].attach(self.labels['i2_box'], 2, 0, 3, 1)
 
         grid.attach(overlay, 0, 0, 1, 1)
         grid.attach(fi_box, 1, 0, 3, 1)
