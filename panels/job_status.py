@@ -305,6 +305,8 @@ class JobStatusPanel(ScreenPanel):
         label.set_markup(_("Are you sure you wish to cancel this print?"))
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
+        label.set_vexpand(True)
+        label.set_valign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
