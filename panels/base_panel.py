@@ -73,7 +73,7 @@ class BasePanel(ScreenPanel):
         self.titlelbl.set_valign(Gtk.Align.CENTER)
         self.set_title(title)
 
-        self.content = Gtk.Box(spacing=0)
+        self.content = Gtk.VBox(spacing=0)
         self.content.set_size_request(self._screen.width - action_bar_width, self._screen.height - self.title_spacing)
 
         if action_bar == True:
@@ -145,6 +145,9 @@ class BasePanel(ScreenPanel):
     def back(self, widget):
         if self.current_panel == None:
             return
+
+        if self._screen.is_keyboard_showing():
+            self._screen.remove_keyboard()
 
         if hasattr(self.current_panel, "back"):
             if not self.current_panel.back():

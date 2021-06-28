@@ -197,6 +197,15 @@ class MoonrakerApi:
             *args
         )
 
+    def get_file_dir(self, path='gcodes', callback=None, *args):
+        logging.debug("Sending server.files.directory")
+        return self._ws.send_method(
+            "server.files.list",
+            {"path": path},
+            callback,
+            *args
+        )
+
     def get_file_list(self, callback=None, *args):
         #Commenting this log for being too noisy
         logging.debug("Sending server.files.list")

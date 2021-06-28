@@ -51,7 +51,20 @@ class KlippyFiles():
                 if len(deletedfiles) > 0:
                     for file in deletedfiles:
                         self.remove_file(file)
+        elif method == "server.files.directory":
+            if "result" in result:
+                dir = params['path'][7:] if params['path'].startswith('gcodes/') else params['path']
+                if dir[-1] == '/':
+                    dir = dir[:-1]
 
+                newfiles = []
+                for file in result['result']['files']:
+                    fullpath = "%s/%s" % (dir, file['filename'])
+                    if fullpath not in self.filelist:
+                        newfiles.append(fullpath)
+
+                if len(newfiles) > 0:
+                    self.run_callbacks(newfiles)
         elif method == "server.files.metadata":
             if "error" in result.keys():
                 logging.debug("Error in getting metadata for %s. Retrying in 6 seconds" %(params['filename']))
@@ -105,7 +118,9 @@ class KlippyFiles():
         if 'item' in data and data['item']['root'] != 'gcodes':
             return
 
-        if data['action'] == "create_file":
+        if data['action'] == "create_dir":
+            self._screen._ws.klippy.get_file_dir("gcodes/%s" % data['item']['path'], self._callback)
+        elif data['action'] == "create_file":
             self.add_file(data['item'])
         elif data['action'] == "delete_file":
             self.remove_file(data['item']['path'])

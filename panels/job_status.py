@@ -191,8 +191,8 @@ class JobStatusPanel(ScreenPanel):
         self.labels['i2_box'].get_style_context().add_class("printing-info-box")
         self.labels['i2_box'].set_valign(Gtk.Align.CENTER)
         self.labels['info_grid'] = self._gtk.HomogeneousGrid()
-        self.labels['info_grid'].attach(self.labels['i1_box'], 0, 0, 1, 1)
-        self.labels['info_grid'].attach(self.labels['i2_box'], 1, 0, 1, 1)
+        self.labels['info_grid'].attach(self.labels['i1_box'], 0, 0, 2, 1)
+        self.labels['info_grid'].attach(self.labels['i2_box'], 2, 0, 3, 1)
 
         grid.attach(overlay, 0, 0, 1, 1)
         grid.attach(fi_box, 1, 0, 3, 1)
@@ -310,6 +310,8 @@ class JobStatusPanel(ScreenPanel):
         label.set_markup(_("Are you sure you wish to cancel this print?"))
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
+        label.set_vexpand(True)
+        label.set_valign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 

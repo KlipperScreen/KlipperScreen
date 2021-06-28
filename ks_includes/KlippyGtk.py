@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import gi
 import logging
+import os
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GdkPixbuf, Gio, GLib, Pango
@@ -10,6 +11,7 @@ klipperscreendir = os.getcwd()
 class KlippyGtk:
     labels = {}
     font_ratio = [51, 30]
+    keyboard_ratio = .22
     width_ratio = 16
     height_ratio = 9.375
 
@@ -41,6 +43,9 @@ class KlippyGtk:
     def get_content_height(self):
         return self.height - self.header_size
 
+    def get_font_size(self):
+        return self.font_size
+
     def get_header_size(self):
         return self.header_size
 
@@ -53,8 +58,8 @@ class KlippyGtk:
     def get_image_height(self):
         return self.img_height
 
-    def get_font_size(self):
-        return self.font_size
+    def get_keyboard_height(self):
+        return (self.width - self.get_action_bar_width()) * self.keyboard_ratio
 
     def Label(self, label, style=None):
         l = Gtk.Label(label)
@@ -134,17 +139,22 @@ class KlippyGtk:
     def ButtonImage(self, image_name, label=None, style=None, width_scale=1, height_scale=1,
             position=Gtk.PositionType.TOP, word_wrap=True):
         filename = "%s/styles/%s/images/%s.svg" % (klipperscreendir, self.theme, str(image_name))
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            filename,
-            int(round(self.img_width * width_scale)),
-            int(round(self.img_height * height_scale)),
-            True
-        )
-
-        img = Gtk.Image.new_from_pixbuf(pixbuf)
+        if not os.path.exists(filename):
+            logging.error("Unable to find button image (theme, image): (%s, %s)" % (self.theme, str(image_name)))
+            filename = "%s/styles/%s/images/%s.svg" % (klipperscreendir, self.theme, "warning")
 
         b = Gtk.Button(label=label)
-        b.set_image(img)
+
+        if os.path.exists(filename):
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+                filename,
+                int(round(self.img_width * width_scale)),
+                int(round(self.img_height * height_scale)),
+                True
+            )
+            img = Gtk.Image.new_from_pixbuf(pixbuf)
+            b.set_image(img)
+
         b.set_hexpand(True)
         b.set_vexpand(True)
         b.set_can_focus(False)
@@ -179,23 +189,20 @@ class KlippyGtk:
         dialog.connect("response", callback, *args)
         dialog.get_style_context().add_class("dialog")
 
-        grid = Gtk.Grid()
-        grid.set_size_request(screen.width - 60, -1)
-        grid.set_vexpand(True)
-        grid.set_halign(Gtk.Align.CENTER)
-        grid.set_valign(Gtk.Align.CENTER)
-        grid.add(content)
+        box = Gtk.Box()
+        box.set_size_request(screen.width - 60, 0)
+        box.set_vexpand(True)
 
         content_area = dialog.get_content_area()
         content_area.set_margin_start(15)
         content_area.set_margin_end(15)
         content_area.set_margin_top(15)
         content_area.set_margin_bottom(15)
-        content_area.add(grid)
+        content_area.add(content)
 
         dialog.show_all()
 
-        return dialog, grid
+        return dialog
 
 
     def ToggleButtonImage(self, image_name, label, style=False, width_scale=1, height_scale=1):

@@ -22,12 +22,13 @@ class SplashScreenPanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
 
-        image = self._gtk.Image("klipper.svg", None, 4, 3)
+        image = self._gtk.Image("klipper.svg", None, 3.2, 3.2)
 
         self.labels['text'] = Gtk.Label(_("Initializing printer..."))
         self.labels['text'].set_line_wrap(True)
         self.labels['text'].set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         self.labels['text'].set_halign(Gtk.Align.CENTER)
+        self.labels['text'].set_valign(Gtk.Align.CENTER)
 
 
         self.labels['actions'] = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
@@ -37,10 +38,10 @@ class SplashScreenPanel(ScreenPanel):
         self.labels['actions'].set_margin_end(20)
 
 
-        main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=15)
-        main.pack_start(image, True, True, 10)
-        main.pack_end(self.labels['actions'], False, False, 10)
-        main.pack_end(self.labels['text'], True, True, 10)
+        main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        main.pack_start(image, True, True, 0)
+        main.pack_end(self.labels['actions'], False, False, 0)
+        main.pack_end(self.labels['text'], True, True, 0)
 
         self.content.add(main)
         #self.layout.put(box, 0, 0)
