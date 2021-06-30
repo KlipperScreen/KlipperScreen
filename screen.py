@@ -353,10 +353,8 @@ class KlipperScreen(Gtk.Window):
         box.set_halign(Gtk.Align.CENTER)
 
         cur_panel = self.panels[self._cur_panels[-1]]
-        for i in ['back','estop','home']:
-            if i in cur_panel.control:
-                cur_panel.control[i].set_sensitive(False)
-        cur_panel.get().put(box, 0,0)
+
+        self.base_panel.get().put(box, 0,0)
 
         self.show_all()
         self.popup_message = box
@@ -369,11 +367,7 @@ class KlipperScreen(Gtk.Window):
         if self.popup_message == None:
             return
 
-        cur_panel = self.panels[self._cur_panels[-1]]
-        for i in ['back','estop','home']:
-            if i in cur_panel.control:
-                cur_panel.control[i].set_sensitive(True)
-        cur_panel.get().remove(self.popup_message)
+        self.base_panel.get().remove(self.popup_message)
         self.popup_message = None
         self.show_all()
 
@@ -496,11 +490,13 @@ class KlipperScreen(Gtk.Window):
     def _menu_go_back (self, widget=None):
         logging.info("#### Menu go back")
         self.remove_keyboard()
+        self.close_popup_message()
         self._remove_current_panel()
 
     def _menu_go_home(self):
         logging.info("#### Menu go home")
         self.remove_keyboard()
+        self.close_popup_message()
         while len(self._cur_panels) > 1:
             self._remove_current_panel()
 
