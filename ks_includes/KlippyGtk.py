@@ -10,7 +10,7 @@ klipperscreendir = os.getcwd()
 
 class KlippyGtk:
     labels = {}
-    font_ratio = [51, 30]
+    font_ratio = [43, 29]
     keyboard_ratio = .22
     width_ratio = 16
     height_ratio = 9.375
@@ -136,7 +136,7 @@ class KlippyGtk:
 
         return b
 
-    def ButtonImage(self, image_name, label=None, style=None, width_scale=1, height_scale=1,
+    def ButtonImage(self, image_name, label=None, style=None, width_scale=1.38, height_scale=1.38,
             position=Gtk.PositionType.TOP, word_wrap=True):
         filename = "%s/styles/%s/images/%s.svg" % (klipperscreendir, self.theme, str(image_name))
         if not os.path.exists(filename):
@@ -205,7 +205,7 @@ class KlippyGtk:
         return dialog
 
 
-    def ToggleButtonImage(self, image_name, label, style=False, width_scale=1, height_scale=1):
+    def ToggleButtonImage(self, image_name, label, style=False, width_scale=1.38, height_scale=1.38):
         filename = "%s/styles/%s/images/%s.svg" % (klipperscreendir, self.theme, str(image_name))
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
             filename,
