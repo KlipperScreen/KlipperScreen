@@ -384,6 +384,8 @@ class KlipperScreen(Gtk.Window):
             _("Check /tmp/KlipperScreen.log for more information.\nPlease submit an issue on GitHub for help."))
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
+        label.set_vexpand(True)
+        label.set_valign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
@@ -405,6 +407,8 @@ class KlipperScreen(Gtk.Window):
         label.set_markup(_("To apply %s KlipperScreen needs to be restarted" % value))
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
+        label.set_vexpand(True)
+        label.set_valign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
@@ -713,6 +717,8 @@ class KlipperScreen(Gtk.Window):
         label.set_markup(text)
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
+        label.set_vexpand(True)
+        label.set_valign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
