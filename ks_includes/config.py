@@ -125,7 +125,7 @@ class KlipperScreenConfig:
                 }
             })
 
-        conf_printers_debug = self.printers.copy()
+        conf_printers_debug = self.printers.deepcopy()
         for printer in conf_printers_debug:
             name = list(printer)[0]
             item = conf_printers_debug[conf_printers_debug.index(printer)]
