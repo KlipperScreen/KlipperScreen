@@ -289,9 +289,11 @@ class PrintPanel(ScreenPanel):
         ]
 
         label = Gtk.Label()
-        label.set_markup("%s <b>%s</b>%s" % (_("Are you sure you want to print"), filename, _("?")))
+        label.set_markup("<b>%s</b>\n" % (filename))
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
+        label.set_vexpand(True)
+        label.set_valign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
