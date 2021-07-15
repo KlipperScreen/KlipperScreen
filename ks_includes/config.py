@@ -3,6 +3,7 @@ import os
 import logging
 import json
 import re
+import copy
 
 from io import StringIO
 
@@ -125,7 +126,7 @@ class KlipperScreenConfig:
                 }
             })
 
-        conf_printers_debug = self.printers.copy()
+        conf_printers_debug = copy.deepcopy(self.printers)
         for printer in conf_printers_debug:
             name = list(printer)[0]
             item = conf_printers_debug[conf_printers_debug.index(printer)]
