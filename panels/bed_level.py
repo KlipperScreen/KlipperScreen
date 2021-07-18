@@ -146,7 +146,7 @@ class BedLevelPanel(ScreenPanel):
     def process_update(self, action, data):
         if action == "notify_gcode_response":
             result = re.match(
-                "^// (.*) : X ([\-0-9\.]+), Y ([\-0-9\.]+), Z [\-0-9\.]+ : Adjust -> ([CW]+ [0-9:]+)",
+                "^// (.*) : [xX= ]+([\-0-9\.]+), [yY= ]+([\-0-9\.]+), [zZ= ]+[\-0-9\.]+ : (Adjust ->|adjust) ([CW]+ [0-9:]+)",
                 data
             )
             if result:
@@ -159,7 +159,7 @@ class BedLevelPanel(ScreenPanel):
                     logging.debug(self.screws[i])
                     if x == int(float(self.screws[i][0])) and y == int(float(self.screws[i][1])):
                         break
-                self.labels[screw_labels[i]].set_label(result.group(4))
+                self.labels[screw_labels[i]].set_label(result.group(5))
                 self.response_count += 1
                 if self.response_count >= len(self.screws)-1:
                     self._screen.remove_subscription(self.panel_name)
