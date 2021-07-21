@@ -99,7 +99,7 @@ Device '<screen name>':
 You can verify by checking that the 'Coordinate Transformation Matrix' or 'libinput Calibration Matrix'.
 
 You can test a change by running:
-`xinput set-props "<screen name>" 'Coordinate Transformation Matrix' <matrix>`
+`xinput set-prop "<screen name>" 'Coordinate Transformation Matrix' <matrix>`
 Replace matrix with one of the options above, such as: `1 0 0 0 1 0 0 0 1`
 
 To make this permanent, modify the file `/etc/udev/rules.d/51-touchscreen.rules` and put the following line in:
