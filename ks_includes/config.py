@@ -92,7 +92,7 @@ class KlipperScreenConfig:
         logging.debug("Configured printers: %s" % json.dumps(conf_printers_debug, indent=2))
 
         lang = self.get_main_config_option("language", None)
-        lang = [lang] if lang != None else lang
+        lang = [lang] if lang != None and lang != "default" else None
         logging.info("Detected language: %s" % lang)
         self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', languages=lang,
             fallback=True)
@@ -107,6 +107,10 @@ class KlipperScreenConfig:
             {"invert_x": {"section": "main", "name": _("Invert X"), "type": "binary", "value": "False"}},
             {"invert_y": {"section": "main", "name": _("Invert Y"), "type": "binary", "value": "False"}},
             {"invert_z": {"section": "main", "name": _("Invert Z"), "type": "binary", "value": "False"}},
+            {"language": {"section": "main", "name": _("Language"), "type": "dropdown", "value": "system_lang",
+                "callback": screen.restart_warning, "options":[
+                    {"name": "System Default", "value": "system_lang"}
+            ]}},
             {"move_speed": {"section": "main", "name": _("Move Speed (mm/s)"), "type": "scale", "value": "20",
                 "range": [5,100], "step": 1
             }},
@@ -130,6 +134,14 @@ class KlipperScreenConfig:
             {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
             #{"": {"section": "main", "name": _(""), "type": ""}}
         ]
+
+        lang_path = os.path.join(os.getcwd(), 'ks_includes/locales')
+        langs = [d for d in os.listdir(lang_path) if not os.path.isfile(os.path.join(lang_path,d))]
+        langs.sort()
+        lang_opt = self.configurable_options[3]['language']['options']
+
+        for l in langs:
+            lang_opt.append({"name": l, "value": l})
 
         index = self.configurable_options.index(
             [i for i in self.configurable_options if list(i)[0]=="screen_blanking"][0])
