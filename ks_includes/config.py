@@ -1,4 +1,5 @@
 import configparser
+import gettext
 import os
 import logging
 import json
@@ -27,51 +28,7 @@ class KlipperScreenConfig:
     do_not_edit_line = "#~# --- Do not edit below this line. This section is auto generated --- #~#"
     do_not_edit_prefix = "#~#"
 
-    def __init__(self, configfile, lang=None, screen=None):
-        _ = lang.gettext
-        _n = lang.ngettext
-
-        self.configurable_options = [
-            {"invert_x": {"section": "main", "name": _("Invert X"), "type": "binary", "value": "False"}},
-            {"invert_y": {"section": "main", "name": _("Invert Y"), "type": "binary", "value": "False"}},
-            {"invert_z": {"section": "main", "name": _("Invert Z"), "type": "binary", "value": "False"}},
-            {"move_speed": {"section": "main", "name": _("Move Speed (mm/s)"), "type": "scale", "value": "20",
-                "range": [5,100], "step": 1
-            }},
-            {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
-            {"print_estimate_method": {"section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
-                "value": "file","options":[
-                    {"name": _("File Estimation (default)"), "value": "file"},
-                    {"name": _("Duration Only"), "value": "duration"},
-                    {"name": _("Filament Used"), "value": "filament"},
-                    {"name": _("Slicer"), "value": "slicer"}
-            ]}},
-            {"screen_blanking": {"section": "main", "name": _("Screen Power Off Time"), "type": "dropdown",
-                "value": "3600", "callback": screen.set_screenblanking_timeout, "options":[
-                    {"name": _("Off"), "value": "off"}
-            ]}},
-            {"theme": {"section": "main", "name": _("Icon Theme"), "type": "dropdown",
-                "value": "z-bolt", "callback": screen.restart_warning, "options":[
-                    {"name": _("Z-bolt (default)"), "value": "z-bolt"},
-                    {"name": _("Colorized"), "value": "colorized"}
-            ]}},
-            {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
-            #{"": {"section": "main", "name": _(""), "type": ""}}
-        ]
-
-        index = self.configurable_options.index(
-            [i for i in self.configurable_options if list(i)[0]=="screen_blanking"][0])
-        for num in SCREEN_BLANKING_OPTIONS:
-            hour = int(int(num)/3600)
-            if hour > 0:
-                name = str(hour) + " " + _n("hour","hours", hour)
-            else:
-                name = str(int(int(num)/60)) + " " + _("minutes")
-            self.configurable_options[index]['screen_blanking']['options'].append({
-                "name": name,
-                "value": num
-            })
-
+    def __init__(self, configfile, screen=None):
         self.default_config_path = "%s/ks_includes/%s" % (os.getcwd(), self.configfile_name)
         self.config = configparser.ConfigParser()
         self.config_path = self.get_config_file_location(configfile)
@@ -134,6 +91,59 @@ class KlipperScreenConfig:
                 item[list(printer)[0]]['moonraker_api_key'] = "redacted"
         logging.debug("Configured printers: %s" % json.dumps(conf_printers_debug, indent=2))
 
+        lang = self.get_main_config_option("language", None)
+        lang = [lang] if lang != None else lang
+        logging.info("Detected language: %s" % lang)
+        self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', languages=lang,
+            fallback=True)
+
+        self._create_configurable_options(screen)
+
+    def _create_configurable_options(self, screen):
+        _ = self.lang.gettext
+        _n = self.lang.ngettext
+
+        self.configurable_options = [
+            {"invert_x": {"section": "main", "name": _("Invert X"), "type": "binary", "value": "False"}},
+            {"invert_y": {"section": "main", "name": _("Invert Y"), "type": "binary", "value": "False"}},
+            {"invert_z": {"section": "main", "name": _("Invert Z"), "type": "binary", "value": "False"}},
+            {"move_speed": {"section": "main", "name": _("Move Speed (mm/s)"), "type": "scale", "value": "20",
+                "range": [5,100], "step": 1
+            }},
+            {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
+            {"print_estimate_method": {"section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
+                "value": "file","options":[
+                    {"name": _("File Estimation (default)"), "value": "file"},
+                    {"name": _("Duration Only"), "value": "duration"},
+                    {"name": _("Filament Used"), "value": "filament"},
+                    {"name": _("Slicer"), "value": "slicer"}
+            ]}},
+            {"screen_blanking": {"section": "main", "name": _("Screen Power Off Time"), "type": "dropdown",
+                "value": "3600", "callback": screen.set_screenblanking_timeout, "options":[
+                    {"name": _("Off"), "value": "off"}
+            ]}},
+            {"theme": {"section": "main", "name": _("Icon Theme"), "type": "dropdown",
+                "value": "z-bolt", "callback": screen.restart_warning, "options":[
+                    {"name": _("Z-bolt (default)"), "value": "z-bolt"},
+                    {"name": _("Colorized"), "value": "colorized"}
+            ]}},
+            {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
+            #{"": {"section": "main", "name": _(""), "type": ""}}
+        ]
+
+        index = self.configurable_options.index(
+            [i for i in self.configurable_options if list(i)[0]=="screen_blanking"][0])
+        for num in SCREEN_BLANKING_OPTIONS:
+            hour = int(int(num)/3600)
+            if hour > 0:
+                name = str(hour) + " " + _n("hour","hours", hour)
+            else:
+                name = str(int(int(num)/60)) + " " + _("minutes")
+            self.configurable_options[index]['screen_blanking']['options'].append({
+                "name": name,
+                "value": num
+            })
+
         for item in self.configurable_options:
             name = list(item)[0]
             vals = item[name]
@@ -141,7 +151,6 @@ class KlipperScreenConfig:
                 self.config.add_section(vals['section'])
             if name not in list(self.config[vals['section']]):
                 self.config.set(vals['section'], name, vals['value'])
-        #self.build_main_menu(self.config)
 
     def _include_config(self, dir, path):
         full_path = path if path[0] == "/" else "%s/%s" % (dir, path)
@@ -209,6 +218,9 @@ class KlipperScreenConfig:
 
     def get_configurable_options(self):
         return self.configurable_options
+
+    def get_lang(self):
+        return self.lang
 
     def get_main_config(self):
         return self.config['main']

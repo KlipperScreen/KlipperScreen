@@ -89,8 +89,8 @@ class KlipperScreen(Gtk.Window):
 
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
-        self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', fallback=True)
-        self._config = KlipperScreenConfig(configfile, self.lang, self)
+        self._config = KlipperScreenConfig(configfile, self)
+        self.lang = self._config.get_lang()
 
         self.network_interfaces = netifaces.interfaces()
         self.wireless_interfaces = [int for int in self.network_interfaces if int.startswith('w')]
@@ -480,7 +480,7 @@ class KlipperScreen(Gtk.Window):
     def _remove_current_panel(self, pop=True, show=True):
         if len(self._cur_panels) > 0:
             self.base_panel.remove(self.panels[self._cur_panels[-1]].get_content())
-            if pop == True:
+            if pop ==True:
                 self._cur_panels.pop()
                 if len(self._cur_panels) > 0:
                     self.base_panel.add_content(self.panels[self._cur_panels[-1]])

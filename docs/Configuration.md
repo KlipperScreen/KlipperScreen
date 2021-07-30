@@ -31,6 +31,10 @@ job_complete_timeout: 30
 #   If this option is 0, the user must click on a button to go back to the main menu.
 job_error_timeout: 0
 
+# Specify the language
+#   The language can be specified here instead of using the system default language.
+language: en
+
 # Allows the cursor to be displayed on the screen
 show_cursor: False
 
