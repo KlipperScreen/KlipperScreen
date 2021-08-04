@@ -400,9 +400,10 @@ class PrintPanel(ScreenPanel):
 
     def update_file(self, filename):
         if filename not in self.labels['files']:
+            logging.debug("Cannot update file, file not in labels: %s" % filename)
             return
 
-        print("Updating file %s" % filename)
+        logging.info("Updating file %s" % filename)
         self.labels['files'][filename]['info'].set_markup(self.get_file_info_str(filename))
 
         # Update icon

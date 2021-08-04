@@ -97,6 +97,8 @@ class KlippyFiles():
         filename = item['path'] if "path" in item else item['filename']
         if filename in self.filelist:
             logging.info("File already exists: %s" % filename)
+            self.request_metadata(filename)
+            GLib.timeout_add(1000, self.run_callbacks, mods=[filename])
             return
 
         self.filelist.append(filename)
@@ -185,6 +187,8 @@ class KlippyFiles():
 
         for cb in self.callbacks:
             GLib.idle_add(cb, newfiles, deletedfiles, mods)
+
+        return False
 
     def get_file_list(self):
         return self.filelist
