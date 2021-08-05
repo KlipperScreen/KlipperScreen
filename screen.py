@@ -691,7 +691,7 @@ class KlipperScreen(Gtk.Window):
                 re.search(r'B:[0-9\.]+\s/[0-9\.]+\sT[0-9]+:[0-9\.]+', data)):
                 if data.startswith("!! "):
                     self.show_popup_message(data[3:])
-                logging.debug(json.dumps([action, data], indent=2))
+                #logging.debug(json.dumps([action, data], indent=2))
 
         self.base_panel.process_update(action, data)
         if self._cur_panels[-1] in self.subscriptions:
