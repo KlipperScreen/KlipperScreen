@@ -4,4 +4,4 @@ matplotlib==3.4.3
 netifaces==0.11.0
 requests==2.25.1
 vext==0.7.6
-websocket-client==1.1.0
+websocket-client==1.2.1
