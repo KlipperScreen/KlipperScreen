@@ -2,6 +2,6 @@ humanize==3.11.0
 jinja2==3.0.1
 matplotlib==3.4.3
 netifaces==0.11.0
-requests==2.25.1
+requests==2.26.0
 vext==0.7.6
 websocket-client==1.2.1
