@@ -7,19 +7,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-11 22:13+0100\n"
+"POT-Creation-Date: 2021-08-16 10:25-0300\n"
 "PO-Revision-Date: 2021-05-18 10:49+0800\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.3\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_CN\n"
 
-msgid "?"
-msgstr "?"
+msgid "..."
+msgstr ""
+
+msgid "24 Hour Time"
+msgstr ""
 
 msgid "Abort"
 msgstr "终止"
@@ -30,11 +33,12 @@ msgstr "接受"
 msgid "Actions"
 msgstr "动作"
 
+#, fuzzy
+msgid "Add Printer"
+msgstr "打印"
+
 msgid "Add bed mesh profile"
 msgstr "添加网格床"
-
-msgid "Are you sure you want to print"
-msgstr "您确定要开始打印吗"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "您确定要取消打印吗？"
@@ -57,14 +61,19 @@ msgstr "校准"
 msgid "Cancel"
 msgstr "取消"
 
-msgid "Cancel Change"
-msgstr "取消变更"
-
 msgid "Cancel Print"
 msgstr "取消打印"
 
 msgid "Cancelled"
 msgstr "取消"
+
+#, fuzzy
+msgid "Cancelling"
+msgstr "取消"
+
+#, fuzzy
+msgid "Change Printer"
+msgstr "取消打印"
 
 msgid "Channel"
 msgstr "通道"
@@ -79,6 +88,12 @@ msgstr ""
 msgid "Close"
 msgstr "关闭"
 
+msgid "Colorized"
+msgstr ""
+
+msgid "Commited"
+msgstr ""
+
 msgid "Complete"
 msgstr "完成"
 
@@ -92,11 +107,11 @@ msgstr "连接"
 msgid "Connecting to %s"
 msgstr "连接到 %s"
 
+msgid "Console"
+msgstr ""
+
 msgid "Continue"
 msgstr "继续"
-
-msgid "Control"
-msgstr "控制"
 
 msgid "Cooldown"
 msgstr "冷却"
@@ -122,17 +137,11 @@ msgstr "断开"
 msgid "Displayed Macros"
 msgstr "显示宏命令"
 
-msgid "Distance (mm)"
-msgstr "距离(mm)"
-
 msgid "Duration Only"
 msgstr "仅持续时间"
 
 msgid "Elapsed:"
 msgstr "过去："
-
-msgid "Emergency Stop"
-msgstr "紧急停止"
 
 msgid "Error"
 msgstr "错误"
@@ -170,11 +179,18 @@ msgstr "文件估计（默认）"
 msgid "Fine Tuning"
 msgstr "微调"
 
+msgid "Finish"
+msgstr ""
+
 msgid "Firmware Restart"
 msgstr "框架重启"
 
 msgid "Go Back"
 msgstr "返回"
+
+#, fuzzy
+msgid "Home"
+msgstr "归零 X"
 
 msgid "Home All"
 msgstr "归零全部"
@@ -202,6 +218,9 @@ msgstr ""
 
 msgid "IPv6"
 msgstr ""
+
+msgid "Icon Theme"
+msgstr "图标 主题"
 
 msgid "Increase"
 msgstr "增加"
@@ -262,14 +281,14 @@ msgstr "Klipper 将重新启动"
 msgid "KlipperScreen Version"
 msgstr "KlipperScreen 版本"
 
+msgid "Language"
+msgstr ""
+
 msgid "Left:"
 msgstr "左:"
 
 msgid "Load"
 msgstr "加载"
-
-msgid "Load Average"
-msgstr "平均负载"
 
 msgid "Lower Nozzle"
 msgstr "降低喷嘴"
@@ -280,7 +299,6 @@ msgstr "宏"
 msgid "Main Menu"
 msgstr "主菜单"
 
-#: panels/extrude.py:31
 msgid "Medium"
 msgstr "中"
 
@@ -296,20 +314,23 @@ msgstr "移动"
 msgid "Move Distance (mm)"
 msgstr "移动距离（mm）"
 
+msgid "Move Speed (mm/s)"
+msgstr "移动速度 (mm/s)"
+
 msgid "Name"
 msgstr "名称"
 
 msgid "Network"
 msgstr "网络"
 
-msgid "Network Info"
-msgstr "网络信息"
-
 msgid "Number Pad"
 msgstr "数字键盘"
 
 msgid "Off"
 msgstr "关闭"
+
+msgid "PSK for"
+msgstr ""
 
 msgid "Pause"
 msgstr "暂停"
@@ -334,6 +355,9 @@ msgstr "打印控制"
 
 msgid "Print Time"
 msgstr "打印时间"
+
+msgid "Printer Connections"
+msgstr "连接打印机"
 
 msgid "Printing"
 msgstr "打印中"
@@ -364,9 +388,6 @@ msgstr "保存配置"
 
 msgid "Save configuration."
 msgstr "保存配置文件."
-
-msgid "Screen Blanking Time"
-msgstr "屏幕关闭时间"
 
 msgid "Screen Power Off Time"
 msgstr "屏幕关闭时间"
@@ -401,6 +422,12 @@ msgstr "速度 +"
 msgid "Speed -"
 msgstr "速度 -"
 
+msgid "Starting WiFi Re-association"
+msgstr ""
+
+msgid "Starting update for"
+msgstr ""
+
 msgid "System"
 msgstr "系统"
 
@@ -417,11 +444,25 @@ msgstr "关闭系统"
 msgid "Temperature"
 msgstr "温度"
 
+#, python-format
+msgid "To apply %s KlipperScreen needs to be restarted"
+msgstr ""
+
 msgid "Tool"
 msgstr "工具"
 
+msgid "Up To Date"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
 msgid "Uploaded"
 msgstr "已上传"
+
+#, fuzzy
+msgid "View Mesh"
+msgstr "网格床"
 
 msgid "X+"
 msgstr ""
@@ -441,10 +482,19 @@ msgstr "Z 校准"
 msgid "Z Offset"
 msgstr "Z 间隙"
 
+msgid "Z Tilt"
+msgstr ""
+
 msgid "Z+"
 msgstr ""
 
 msgid "Z-"
+msgstr ""
+
+msgid "Z-bolt (default)"
+msgstr ""
+
+msgid "dBm"
 msgstr ""
 
 msgid "minutes"
@@ -453,14 +503,29 @@ msgstr "分钟"
 msgid "mm"
 msgstr ""
 
-msgid "Move Speed (mm/s)"
-msgstr "移动速度 (mm/s)"
+#~ msgid "?"
+#~ msgstr "?"
 
-msgid "Icon Theme"
-msgstr "图标 主题"
+#~ msgid "Are you sure you want to print"
+#~ msgstr "您确定要开始打印吗"
 
-msgid "Printer Connections"
-msgstr "连接打印机"
+#~ msgid "Cancel Change"
+#~ msgstr "取消变更"
 
-msgid "dBm"
-msgstr ""
+#~ msgid "Control"
+#~ msgstr "控制"
+
+#~ msgid "Distance (mm)"
+#~ msgstr "距离(mm)"
+
+#~ msgid "Emergency Stop"
+#~ msgstr "紧急停止"
+
+#~ msgid "Load Average"
+#~ msgstr "平均负载"
+
+#~ msgid "Network Info"
+#~ msgstr "网络信息"
+
+#~ msgid "Screen Blanking Time"
+#~ msgstr "屏幕关闭时间"
