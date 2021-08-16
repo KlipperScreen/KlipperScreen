@@ -528,6 +528,10 @@ class KlipperScreen(Gtk.Window):
             self._menu_go_back()
         return True
 
+    def wake_screen(self):
+        # Wake the screen (it will go to standby as configured)
+        os.system("xset -display :0 dpms force on")
+
     def set_screenblanking_timeout(self, time):
         # Disable screen blanking
         os.system("xset -display :0 s off")
