@@ -100,11 +100,11 @@ class SystemPanel(ScreenPanel):
 
         scroll.add(infogrid)
 
-        grid.attach(scroll, 0, 0, 5, 2)
+        grid.attach(scroll, 0, 0, 4, 2)
         grid.attach(restart, 0, 2, 1, 1)
         grid.attach(firmrestart, 1, 2, 1, 1)
-        grid.attach(reboot, 3, 2, 1, 1)
-        grid.attach(shutdown, 4, 2, 1, 1)
+        grid.attach(reboot, 2, 2, 1, 1)
+        grid.attach(shutdown, 3, 2, 1, 1)
 
         self.content.add(grid)
         self._screen.add_subscription(panel_name)

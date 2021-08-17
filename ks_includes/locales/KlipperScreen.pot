@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-26 15:56+0000\n"
+"POT-Creation-Date: 2021-08-16 10:25-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "?"
+msgid "..."
+msgstr ""
+
+msgid "24 Hour Time"
 msgstr ""
 
 msgid "Abort"
@@ -29,10 +32,10 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-msgid "Add bed mesh profile"
+msgid "Add Printer"
 msgstr ""
 
-msgid "Are you sure you want to print"
+msgid "Add bed mesh profile"
 msgstr ""
 
 msgid "Are you sure you wish to cancel this print?"
@@ -56,13 +59,16 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-msgid "Cancel Change"
-msgstr ""
-
 msgid "Cancel Print"
 msgstr ""
 
 msgid "Cancelled"
+msgstr ""
+
+msgid "Cancelling"
+msgstr ""
+
+msgid "Change Printer"
 msgstr ""
 
 msgid "Channel"
@@ -74,6 +80,12 @@ msgid ""
 msgstr ""
 
 msgid "Close"
+msgstr ""
+
+msgid "Colorized"
+msgstr ""
+
+msgid "Commited"
 msgstr ""
 
 msgid "Complete"
@@ -89,10 +101,10 @@ msgstr ""
 msgid "Connecting to %s"
 msgstr ""
 
-msgid "Continue"
+msgid "Console"
 msgstr ""
 
-msgid "Control"
+msgid "Continue"
 msgstr ""
 
 msgid "Cooldown"
@@ -119,16 +131,10 @@ msgstr ""
 msgid "Displayed Macros"
 msgstr ""
 
-msgid "Distance (mm)"
-msgstr ""
-
 msgid "Duration Only"
 msgstr ""
 
 msgid "Elapsed:"
-msgstr ""
-
-msgid "Emergency Stop"
 msgstr ""
 
 msgid "Error"
@@ -167,10 +173,16 @@ msgstr ""
 msgid "Fine Tuning"
 msgstr ""
 
+msgid "Finish"
+msgstr ""
+
 msgid "Firmware Restart"
 msgstr ""
 
 msgid "Go Back"
+msgstr ""
+
+msgid "Home"
 msgstr ""
 
 msgid "Home All"
@@ -198,6 +210,9 @@ msgid "IPv4"
 msgstr ""
 
 msgid "IPv6"
+msgstr ""
+
+msgid "Icon Theme"
 msgstr ""
 
 msgid "Increase"
@@ -255,13 +270,13 @@ msgstr ""
 msgid "KlipperScreen Version"
 msgstr ""
 
+msgid "Language"
+msgstr ""
+
 msgid "Left:"
 msgstr ""
 
 msgid "Load"
-msgstr ""
-
-msgid "Load Average"
 msgstr ""
 
 msgid "Lower Nozzle"
@@ -288,6 +303,9 @@ msgstr ""
 msgid "Move Distance (mm)"
 msgstr ""
 
+msgid "Move Speed (mm/s)"
+msgstr ""
+
 msgid "Name"
 msgstr ""
 
@@ -298,6 +316,9 @@ msgid "Number Pad"
 msgstr ""
 
 msgid "Off"
+msgstr ""
+
+msgid "PSK for"
 msgstr ""
 
 msgid "Pause"
@@ -322,6 +343,9 @@ msgid "Print Control"
 msgstr ""
 
 msgid "Print Time"
+msgstr ""
+
+msgid "Printer Connections"
 msgstr ""
 
 msgid "Printing"
@@ -387,6 +411,12 @@ msgstr ""
 msgid "Speed -"
 msgstr ""
 
+msgid "Starting WiFi Re-association"
+msgstr ""
+
+msgid "Starting update for"
+msgstr ""
+
 msgid "System"
 msgstr ""
 
@@ -403,10 +433,23 @@ msgstr ""
 msgid "Temperature"
 msgstr ""
 
+#, python-format
+msgid "To apply %s KlipperScreen needs to be restarted"
+msgstr ""
+
 msgid "Tool"
 msgstr ""
 
+msgid "Up To Date"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
 msgid "Uploaded"
+msgstr ""
+
+msgid "View Mesh"
 msgstr ""
 
 msgid "X+"
@@ -434,6 +477,9 @@ msgid "Z+"
 msgstr ""
 
 msgid "Z-"
+msgstr ""
+
+msgid "Z-bolt (default)"
 msgstr ""
 
 msgid "dBm"
