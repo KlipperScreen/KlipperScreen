@@ -2,6 +2,7 @@
 import gi
 import logging
 import math
+import os
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
@@ -550,7 +551,7 @@ class JobStatusPanel(ScreenPanel):
 
     def update_filename(self):
         self.filename = self._printer.get_stat('print_stats','filename')
-        self.update_text("file", self._printer.get_stat('print_stats','filename'))
+        self.update_text("file", os.path.splitext(self._printer.get_stat('print_stats','filename'))[0])
         self.update_percent_complete()
         self.update_file_metadata()
 
