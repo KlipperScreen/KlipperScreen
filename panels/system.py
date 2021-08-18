@@ -78,24 +78,22 @@ class SystemPanel(ScreenPanel):
 
                 self.labels["%s_status" % prog] = self._gtk.Button()
                 self.labels["%s_status" % prog].set_hexpand(False)
-                self.labels["%s_status" % prog].connect("clicked", self.update_program, prog)
-                self.labels["%s_box" % prog] = Gtk.Box()
-                self.labels["%s_box" % prog].set_hexpand(False)
+                self.labels["%s_status" % prog].connect("clicked", self.show_commit_history, prog)
                 self.labels["%s_info" % prog] = self._gtk.ButtonImage("info",None, None, .7, .7)
                 self.labels["%s_info" % prog].connect("clicked", self.show_commit_history, prog)
 
                 if prog in ALLOWED_SERVICES:
                     self.labels["%s_restart" % prog] = self._gtk.ButtonImage("refresh",None, None, .7, .7)
                     self.labels["%s_restart" % prog].connect("clicked", self.restart, prog)
-                    self.labels["%s_box" % prog].pack_start(self.labels["%s_restart" % prog], True, 0, 0)
+                    infogrid.attach(self.labels["%s_restart" % prog], 0, i, 1, 1)
 
-                self.labels["%s_box" % prog].pack_end(self.labels["%s_status" % prog], True, 0, 0)
+                #infogrid.attach(self.labels["%s_info" % prog], 2, i, 1, 1)
+                infogrid.attach(self.labels["%s_status" % prog], 2, i, 1, 1)
                 logging.info("Updating program: %s " % prog)
                 self.update_program_info(prog)
 
 
-                infogrid.attach(self.labels["%s_box" % prog], 1, i, 1, 1)
-                infogrid.attach(self.labels[prog], 0, i, 1, 1)
+                infogrid.attach(self.labels[prog], 1, i, 1, 1)
                 i = i + 1
 
         scroll.add(infogrid)
@@ -162,6 +160,7 @@ class SystemPanel(ScreenPanel):
             return
 
         buttons = [
+            {"name":_("Update"), "response": Gtk.ResponseType.OK},
             {"name":_("Go Back"), "response": Gtk.ResponseType.CANCEL}
         ]
 
@@ -191,7 +190,13 @@ class SystemPanel(ScreenPanel):
 
         scroll.add(grid)
 
-        dialog = self._gtk.Dialog(self._screen, buttons, scroll, self.destroy_widget)
+        dialog = self._gtk.Dialog(self._screen, buttons, scroll, self.update_confirm, program)
+
+    def update_confirm(self, widget, response_id, program):
+        if response_id == Gtk.ResponseType.OK:
+            logging.debug("Updating %s" % program)
+            self.update_program(self, program)
+        widget.destroy()
 
     def update_program(self, widget, program):
         if self._screen.is_updating():
@@ -255,14 +260,10 @@ class SystemPanel(ScreenPanel):
                 self.labels[p].set_markup("<b>%s</b>\n%s" % (p, version))
                 self.labels["%s_status" % p].set_label(_("Up To Date"))
                 self.labels["%s_status" % p].set_sensitive(False)
-                if self.labels["%s_info" % p] in self.labels["%s_box" % p].get_children():
-                    self.labels["%s_box" % p].remove(self.labels["%s_info" % p])
             else:
                 self.labels[p].set_markup("<b>%s</b>\n%s -> %s" % (p, version, info['remote_version']))
                 self.labels["%s_status" % p].set_label(_("Update"))
                 self.labels["%s_status" % p].set_sensitive(True)
-                if not self.labels["%s_info" % p] in self.labels["%s_box" % p].get_children():
-                    self.labels["%s_box" % p].pack_start(self.labels["%s_info" % p], True, 0, 0)
         else:
             self.labels[p].set_markup("<b>System</b>")
             if info['package_count'] == 0:
