@@ -358,6 +358,7 @@ class JobStatusPanel(ScreenPanel):
                 self.close_timeouts.remove(to)
             if self.timeout == None:
                 GLib.timeout_add(500, self.state_check)
+            self._screen.wake_screen()
             self.state_check()
 
     def process_update(self, action, data):
