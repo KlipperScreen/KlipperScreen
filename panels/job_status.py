@@ -201,6 +201,7 @@ class JobStatusPanel(ScreenPanel):
         self.content.add(grid)
 
         self._screen.add_subscription(panel_name)
+        self._screen.wake_screen()
 
     def on_draw(self, da, ctx):
         w = da.get_allocated_width()
@@ -358,6 +359,7 @@ class JobStatusPanel(ScreenPanel):
                 self.close_timeouts.remove(to)
             if self.timeout == None:
                 GLib.timeout_add(500, self.state_check)
+            self._screen.wake_screen()
             self.state_check()
 
     def process_update(self, action, data):
@@ -461,6 +463,7 @@ class JobStatusPanel(ScreenPanel):
             self.progress = 1
             self.update_progress()
             self.set_state("complete")
+            self._screen.wake_screen()
             timeout = self._config.get_main_config().getint("job_complete_timeout", 30)
             if timeout != 0:
                 self.close_timeouts.append(GLib.timeout_add(timeout * 1000, self.close_panel))
@@ -469,6 +472,7 @@ class JobStatusPanel(ScreenPanel):
             logging.debug("Error!")
             self.set_state("error")
             self.labels['status'].set_text("%s - %s" % (_("Error"), ps['message']))
+            self._screen.wake_screen()
             timeout = self._config.get_main_config().getint("job_error_timeout", 0)
             if timeout != 0:
                 self.close_timeouts.append(GLib.timeout_add(timeout * 1000, self.close_panel))
@@ -476,6 +480,7 @@ class JobStatusPanel(ScreenPanel):
         elif ps['state'] == "standby":
             # Print was cancelled
             self.set_state("cancelled")
+            self._screen.wake_screen()
             timeout = self._config.get_main_config().getint("job_cancelled_timeout", 0)
             if timeout != 0:
                 self.close_timeouts.append(GLib.timeout_add(timeout * 1000, self.close_panel))
