@@ -132,6 +132,7 @@ class KlipperScreenConfig:
                     {"name": _("Colorized"), "value": "colorized"}
             ]}},
             {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
+            {"side_macro_shortcut": {"section": "main", "name": _("Macro shortcut on sidebar"), "type": "binary", "value": "True"}},
             #{"": {"section": "main", "name": _(""), "type": ""}}
         ]
 

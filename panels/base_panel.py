@@ -50,13 +50,16 @@ class BasePanel(ScreenPanel):
             self.control['printer_select'] = self._gtk.ButtonImage(
                 'shuffle', None, None, button_scale[0], button_scale[1])
             self.control['printer_select'].connect("clicked", self._screen.show_printer_select)
-        else:
+        elif self._config.get_main_config_option('side_macro_shortcut') == "True":
             self.control['printer_select'] = self._gtk.ButtonImage(
                 'custom-script', None, None, button_scale[0], button_scale[1])
             self.control['printer_select'].connect("clicked", self.menu_item_clicked, "gcode_macros", {
             "name": "Macros",
             "panel": "gcode_macros"
             })
+        else:
+            self.control['printer_select'] = Gtk.Label("")
+
         self.control_grid.attach(self.control['printer_select'], 0, 2, 1, 1)
 
         self.control['estop'] = self._gtk.ButtonImage('emergency', None, None, button_scale[0], button_scale[1])
