@@ -529,8 +529,11 @@ class KlipperScreen(Gtk.Window):
         return True
 
     def wake_screen(self):
+        self.time = self._config.get_main_config_option('screen_blanking')
         # Wake the screen (it will go to standby as configured)
-        os.system("xset -display :0 dpms force on")
+        if self.time != "off":
+            logging.debug("Screen wake up")
+            os.system("xset -display :0 dpms force on")
 
     def set_screenblanking_timeout(self, time):
         # Disable screen blanking
