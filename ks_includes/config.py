@@ -221,7 +221,9 @@ class KlipperScreenConfig:
         if not path.exists(file):
             file = "%s/%s" % (os.getcwd(), self.configfile_name)
             if not path.exists(file):
-                file = self.default_config_path
+                file = os.path.expanduser("~/") + "klipper_config/%s" % (self.configfile_name)
+                if not path.exists(file):
+                    file = self.default_config_path
 
         logging.info("Found configuration file at: %s" % file)
         return file
@@ -331,14 +333,18 @@ class KlipperScreenConfig:
         if self.config_path != self.default_config_path:
             path = self.config_path
         else:
-            path =  os.path.expanduser("~/KlipperScreen.conf")
+            path = os.path.expanduser("~/")
+            if os.path.exists(path+"klipper_config/"):
+                path =  path + "klipper_config/KlipperScreen.conf"
+            else:
+                path =  path + "KlipperScreen.conf"
 
         try:
             file = open(path, 'w')
             file.write(contents)
             file.close()
         except:
-            logging.error("Error writing configuration file")
+            logging.error("Error writing configuration file in %s" % path)
 
     def set(self, section, name, value):
         self.config.set(section, name, value)
