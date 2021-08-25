@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-26 15:56+0000\n"
-"PO-Revision-Date: 2021-08-16 10:32-0300\n"
+"POT-Creation-Date: 2021-08-16 10:25-0300\n"
+"PO-Revision-Date: 2021-08-24 22:37-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,8 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
 
-msgid "?"
-msgstr "?"
+msgid "..."
+msgstr "..."
+
+msgid "24 Hour Time"
+msgstr "Formato 24 Horas"
 
 msgid "Abort"
 msgstr "Cancelar"
@@ -29,11 +32,11 @@ msgstr "Aceptar"
 msgid "Actions"
 msgstr "Acciones"
 
+msgid "Add Printer"
+msgstr "Agregar impresora"
+
 msgid "Add bed mesh profile"
 msgstr "Agregar pefil de malla de cama"
-
-msgid "Are you sure you want to print"
-msgstr "Está seguro que desea imprimir"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Está seguro que desea cancelar esta impresión?"
@@ -56,14 +59,17 @@ msgstr "Calibrar"
 msgid "Cancel"
 msgstr "Cancelar"
 
-msgid "Cancel Change"
-msgstr "Cancelar"
-
 msgid "Cancel Print"
-msgstr "Cancelar Impresión"
+msgstr "Cancelar impresión"
 
 msgid "Cancelled"
 msgstr "Cancelado"
+
+msgid "Cancelling"
+msgstr "Cancelando"
+
+msgid "Change Printer"
+msgstr "Cambiar impresora"
 
 msgid "Channel"
 msgstr "Canal"
@@ -78,6 +84,12 @@ msgstr ""
 msgid "Close"
 msgstr "Cerrar"
 
+msgid "Colorized"
+msgstr "Colorized"
+
+msgid "Commited"
+msgstr "Commited"
+
 msgid "Complete"
 msgstr "Completado"
 
@@ -91,11 +103,11 @@ msgstr "Conectado"
 msgid "Connecting to %s"
 msgstr "Conectando a %s"
 
+msgid "Console"
+msgstr "Consola"
+
 msgid "Continue"
 msgstr "Continuar"
-
-msgid "Control"
-msgstr "Control"
 
 msgid "Cooldown"
 msgstr "Enfriar"
@@ -119,25 +131,19 @@ msgid "Disconnect"
 msgstr "Desconectar"
 
 msgid "Displayed Macros"
-msgstr "Macros Mostrados"
-
-msgid "Distance (mm)"
-msgstr "Distancia (mm)"
+msgstr "Macros mostrados"
 
 msgid "Duration Only"
-msgstr "Duración Solamente"
+msgstr "Duración"
 
 msgid "Elapsed:"
-msgstr "Transcurrido:"
-
-msgid "Emergency Stop"
-msgstr "Parada de Emergencia"
+msgstr "Tiempo:"
 
 msgid "Error"
 msgstr "Error"
 
 msgid "Estimated Time Method"
-msgstr "Metodo para Tiempo Estimado"
+msgstr "Método para estimar tiempo"
 
 msgid "Extrude"
 msgstr "Extruir"
@@ -164,16 +170,22 @@ msgid "Filament Used"
 msgstr "Filamento Usado"
 
 msgid "File Estimation (default)"
-msgstr "Estimación de Archivo (por defecto)"
+msgstr "Archivo (por defecto)"
 
 msgid "Fine Tuning"
 msgstr "Ajuste Fino"
+
+msgid "Finish"
+msgstr "Cerrar"
 
 msgid "Firmware Restart"
 msgstr "Reiniciar Firmware"
 
 msgid "Go Back"
 msgstr "Volver"
+
+msgid "Home"
+msgstr "Inicio"
 
 msgid "Home All"
 msgstr "Origen XYZ"
@@ -201,6 +213,9 @@ msgstr "IPv4"
 
 msgid "IPv6"
 msgstr "IPv6"
+
+msgid "Icon Theme"
+msgstr "Tema de Iconos"
 
 msgid "Increase"
 msgstr "Aumentar"
@@ -261,14 +276,14 @@ msgstr "Klipper se reiniciará"
 msgid "KlipperScreen Version"
 msgstr "Versión de KlipperScreen"
 
+msgid "Language"
+msgstr "Idioma"
+
 msgid "Left:"
 msgstr "Restante:"
 
 msgid "Load"
 msgstr "Cargar"
-
-msgid "Load Average"
-msgstr "Carga media"
 
 msgid "Lower Nozzle"
 msgstr "Bajar Boquilla"
@@ -292,7 +307,10 @@ msgid "Move"
 msgstr "Mover"
 
 msgid "Move Distance (mm)"
-msgstr "Mover (mm)"
+msgstr "Mover Distancia (mm)"
+
+msgid "Move Speed (mm/s)"
+msgstr "Velocidad (mm/s)"
 
 msgid "Name"
 msgstr "Nombre"
@@ -305,6 +323,9 @@ msgstr "Teclado"
 
 msgid "Off"
 msgstr "Apagar"
+
+msgid "PSK for"
+msgstr "PSK para"
 
 msgid "Pause"
 msgstr "Pausar"
@@ -329,6 +350,9 @@ msgstr "Control de impresión"
 
 msgid "Print Time"
 msgstr "Tiempo de impresión"
+
+msgid "Printer Connections"
+msgstr "Conexiones a impresoras"
 
 msgid "Printing"
 msgstr "Imprimiendo"
@@ -385,13 +409,19 @@ msgid "Slow"
 msgstr "Lento"
 
 msgid "Sort by: "
-msgstr "Ordenar por:"
+msgstr "Ordenar por: "
 
 msgid "Speed +"
 msgstr "Velocidad +"
 
 msgid "Speed -"
 msgstr "Velocidad -"
+
+msgid "Starting WiFi Re-association"
+msgstr "Comenzando re-asociación"
+
+msgid "Starting update for"
+msgstr "Actualizando"
 
 msgid "System"
 msgstr "Sistema"
@@ -413,11 +443,24 @@ msgstr ""
 msgid "Temperature"
 msgstr "Temperatura"
 
+#, python-format
+msgid "To apply %s KlipperScreen needs to be restarted"
+msgstr "Para aplicar %s KlipperScreen necesita reiniciarse"
+
 msgid "Tool"
 msgstr "Herrmienta"
 
+msgid "Up To Date"
+msgstr "Actualizado"
+
+msgid "Update"
+msgstr "Actualizar"
+
 msgid "Uploaded"
 msgstr "Subido"
+
+msgid "View Mesh"
+msgstr "Ver Malla"
 
 msgid "X+"
 msgstr "X+"
@@ -446,6 +489,9 @@ msgstr "Z+"
 msgid "Z-"
 msgstr "Z-"
 
+msgid "Z-bolt (default)"
+msgstr "Z-bolt (por defecto)"
+
 msgid "dBm"
 msgstr "dBm"
 
@@ -454,3 +500,24 @@ msgstr "minutos"
 
 msgid "mm"
 msgstr "mm"
+
+#~ msgid "?"
+#~ msgstr "?"
+
+#~ msgid "Are you sure you want to print"
+#~ msgstr "Está seguro que desea imprimir"
+
+#~ msgid "Cancel Change"
+#~ msgstr "Cancelar"
+
+#~ msgid "Control"
+#~ msgstr "Control"
+
+#~ msgid "Distance (mm)"
+#~ msgstr "Distancia (mm)"
+
+#~ msgid "Emergency Stop"
+#~ msgstr "Parada de Emergencia"
+
+#~ msgid "Load Average"
+#~ msgstr "Carga media"
