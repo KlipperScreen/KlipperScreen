@@ -1,71 +1,53 @@
 * {
     color: white;
-    font-size: KS_FONT_SIZEpx;
-    -GtkComboBox-appears-as-list: 0;
 }
 
 window {
-	background-color: #13181C;
-	-gtk-icon-shadow: none;
+    background-color: #13181C;
 }
 
 button {
-	background-image: none;
-	background-color: #13181C;
-	margin: .25em;
-	margin-bottom: .5em;
-	border-radius: 0;
-	border: 0;
-	-gtk-icon-shadow: none;
+    background-color: #13181C;
 }
 
 button:active {
-	background-color: #304C62;
+    background-color: #304C62;
 }
 
 .button_active {
-  background-color: #20303D;
+    background-color: #20303D;
 }
 
 button.color1 {
-	border-bottom: .4em solid #ED6500;
+    border-bottom-color: #ED6500;
 }
 
 button.color2 {
-	border-bottom: .4em solid #B10080;
+    border-bottom-color: #B10080;
 }
 
 button.color3 {
-	border-bottom: .4em solid #009384;
+    border-bottom-color: #009384;
 }
 
 button.color4 {
-	border-bottom: .4em solid #A7E100;
+    border-bottom-color: #A7E100;
 }
 
 button.active {
-	background-color: #20303D;
-}
-
-button.file-list {
-	margin: 0;
+    background-color: #20303D;
 }
 
 combobox box button {
-    border: .05em solid #cccccc;
-    padding: .5em 1em;
+    border-color: #cccccc;
 }
 
 entry {
-	font-size: 1em;
-	background-color: #20292F;
-    border: 0;
-	padding: .25em;
+    background-color: #20292F;
 }
 
 frame {
-    color: white;
-    border-bottom: 1px solid #444;
+    border-bottom-color: #444;
 }
 
 label {
@@ -74,284 +56,130 @@ label {
 
 menu {
     background-color: #13181C;
-    border: .1em solid #cccccc;
+    border-color: #cccccc;
 }
 
 menuitem {
     background-color: #13181C;
-    border: .1em solid #cccccc;
-    border-bottom: 0;
-    border-top: 0;
+    border-color: #cccccc;
 }
 
 trough {
-	min-height: 2em;
     background-color: #404E57;
     color: white;
-    border: 1px solid black;
+    border-color: black;
 }
 
 trough highlight, trough progress {
-	min-height: 2em;
     background-color: #3584e4;
     color: white;
-    border: 1px solid black;
+    border-color: black;
 }
 
-trough progress.left {
-    border: 0px;
-}
-
-scale mark {
-  margin-top: 1em;
-  color: white;
+scale-mark {
+    color: white;
 }
 
 scrollbar, scrollbar button, scrollbar trough {
-	border: none;
-	background-color: #13181C;
+    background-color: #13181C;
 }
 
 scrollbar slider {
-	min-width: 3em;
-	border-radius: .7em;
-	background-color: #404E57;
-}
-
-textview, textview text {
-    background: transparent;
-    font-family: Free Mono;
+    background-color: #404E57;
 }
 
 textview .time {
     color: grey;
 }
 
-trough {
-    margin: .5em 1em;
-}
-
 .popup {
     background-color: black;
 }
 
-.action_bar {
-    /*border-right: 2px solid #444;*/
-}
-
 .dialog {
-	border: .1em solid black;
-	padding: 2.5em;
-	background-color: black;
-    margin: 1em;
+    border: black;
+    background-color: black;
 }
 
 .dialog button {
-	padding: 1.5em 2.5em 1.5em 2.5em;
-	border-bottom: .4em solid #009384;
+    border-bottom-color: #009384;
 }
 
 .distbutton_active {
-  background-color: #20303D;
+    background-color: #20303D;
 }
 
 .distbutton_top {
-  border: .15em solid white;
-  border-right: 0;
-  border-top-left-radius: .75em;
-  border-bottom-left-radius: .75em;
-  margin-right: 0;
+    border-color: white;
 }
 
 .distbutton {
-  border: .15em solid white;
-  border-left: .15em solid #ccc;
-  border-right: 0;
-  margin-left: 0;
-  margin-right: 0;
+    border-color: white;
+    border-left-color: #ccc;
 }
 
 .distbutton_bottom {
-  border: .15em solid white;
-  border-left: .15em solid #ccc;
-  border-top-right-radius: .7em;
-  border-bottom-right-radius: .7em;
-  margin-left: 0;
+    border-color: white;
+    border-left-color: #ccc;
 }
 
 .fan_slider {
-  margin: 0 1em 0 1em;
-  color: white;
-}
-
-.frame-item {
-    min-height: 4.5em;
-    padding: .1em .75em;
+    color: white;
 }
 
 .message_popup {
     background-color: #367554;
-    border-bottom: .1em solid white;
+    border-bottom-color: white;
 }
 
 .message_popup button {
     background-color: #367554;
 }
 
-.numpad_tleft {
-  border: .15em solid white;
-  border-bottom: 0;
-  border-right: 0;
-  border-top-left-radius: .7em;
-  margin: .15em 0 0 .15em;
-}
-
-.numpad_top {
-  border: .15em solid white;
-  border-bottom: 0;
-  border-right: 0;
-  margin: .15em 0 0 0;
-}
-
-.numpad_tright {
-  border: .15em solid white;
-  border-bottom: 0;
-  border-top-right-radius: .7em;
-  margin: .15em .15em 0 0;
-}
-
-.numpad_left {
-  border: .15em solid white;
-  border-right: 0;
-  border-bottom: 0;
-  margin: 0 0 0 .15em;
-}
-
-.numpad_button {
-  border: .15em solid white;
-  border-right: 0;
-  border-bottom: 0;
-  margin: 0;
-}
-
-.numpad_right {
-  border: .15em solid white;
-  border-bottom: 0;
-  margin: 0 .15em 0 0;
-}
-
-.numpad_bleft {
-  border: .15em solid white;
-  border-right: 0;
-  border-bottom-left-radius: .7em;
-  margin: 0 0 .15em .15em;
-}
-
-.numpad_bottom {
-  border: .15em solid white;
-  border-right: 0;
-  margin: 0 0 .15em 0;
-}
-
-.numpad_bright {
-  border: .15em solid white;
-  border-bottom-right-radius: .7em;
-  margin: 0 .15em .15em 0;
-}
-
-.printing-filename {
-    font-size: 1.75em;
-    font-weight: bold;
-    margin: .25em .25em 0 0;
-}
-
-.printing-info {
-    font-size: 1.2em;
-    margin-left: .25em;
-}
-
-.printing-info-box {
-    padding-left: .25em;
-}
-
-.printing-info-box box {
-    margin-bottom: .25em;
+.numpad_tleft, .numpad_top, .numpad_tright, .numpad_left, .numpad_button, .numpad_right, .numpad_bleft, .numpad_bottom, .numpad_bright {
+    border-color: white;
 }
 
 .printing-status {
     color: #f0f0f0;
-    font-style: italic;
-    margin: 0 0 0 0;
 }
 
 .printing-progress-bar {
-	color: #00C9B4;
+    color: #00C9B4;
 }
 
 .printing-progress-text {
-	font-size: 1.5em;
-    font-weight: bold;
-	color: white;
+    color: white;
 }
 
 .printing-status-label {
-	padding-top: .25em;
-	padding-bottom: .15em;
     color: #ccc;
-	font-size: 1.25em;
 }
 
 .tempbutton_top {
-  border: .15em solid white;
-  border-bottom: 0;
-  border-top-left-radius: .75em;
-  border-top-right-radius: .75em;
-  margin-bottom: 0;
+    border-color: white;
 }
 
-.tempbutton {
-  border: .15em solid white;
-  border-top: .15em solid #ccc;
-  border-bottom: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.tempbutton_bottom {
-  border: .15em solid white;
-  border-top: .15em solid #ccc;
-  border-bottom-left-radius: .7em;
-  border-bottom-right-radius: .7em;
-  margin-top: 0;
+.tempbutton, .tempbutton_bottom {
+    border-color: white;
+    border-top-color: #ccc;
 }
 
 .message {
-	border: .1em solid #981E1F;
-	font-size: 1em;
-	padding: 2.5em;
-	color: white;
-	background-color: #981E1F;
+    border-color: #981E1F;
+    color: white;
+    background-color: #981E1F;
 }
 
 .message button {
-	background-color: white;
-	color: black;
-	padding: 2em 2.5em 2em 2.5em;
+    background-color: white;
+    color: black;
 }
-
-.notification {
-	background-clip: padding-box;
-	padding: .25em;
-	border-radius: 0 0 .25em .25em;
-	opacity: 0.8;
-}
-
-.system-program-grid
 
 .warning {
-	background-color: rgba(30, 204, 39, 0.7);
+    background-color: rgba(30, 204, 39, 0.7);
 }
 
 .error {
-	background-color: rgba(204, 30, 30, 0.7);
+    background-color: rgba(204, 30, 30, 0.7);
 }
