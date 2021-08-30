@@ -1,13 +1,27 @@
 # Configuration
 
-KlipperScreen has some configuration options which are outlined below. KlipperScreen will search for a configuration
-file in the following order:
-_${HOME}/KlipperScreen.conf_
-_${KlipperScreen_Directory}/KlipperScreen.conf_
+The configuration options are outlined below:
+
+KlipperScreen will search for a configuration file in the following order:
+
+1. _${HOME}/KlipperScreen.conf_
+2. _${KlipperScreen_Directory}/KlipperScreen.conf_
+3. _${HOME}/klipper_config/KlipperScreen.conf_
 
 If one of those files are found, it will be used over the default configuration. The default configuration will be
-merged with the custom configuration, so if you do not define any menus the default menus will be used.The default
-config is included here: [ks_includes/KlipperScreen.conf](/ks_includes/KlipperScreen.conf)
+merged with the custom configuration, so if you do not define any menus the default menus will be used.
+
+The default config is included here: (do not edit use as reference)
+
+[ks_includes/KlipperScreen.conf](/ks_includes/KlipperScreen.conf)
+
+If no config file is found then a new configuration file will be created in:
+
+_${HOME}/klipper_config/KlipperScreen.conf_
+
+if _klipper_config_ isn't available then:
+
+_${HOME}/KlipperScreen.conf_
 
 ## Include files
 ```
@@ -50,7 +64,7 @@ moonraker_api_key: False
 ```
 
 ## Printer Options
-Multiple printers can be defined, currently only the first one will be used until an update in the near future.
+Multiple printers can be defined
 ```
 # Define printer and name. Name is anything after the first printer word
 [printer Ender 3 Pro]
