@@ -793,8 +793,11 @@ class KlipperScreen(Gtk.Window):
             return
 
         env = os.environ.copy()
-        env["MB_KBD_CONFIG"] = "/home/pi/.matchbox/keyboard.xml"
-        env["MB_KBD_CONFIG"] = "ks_includes/locales/keyboard.xml"
+        usrkbd = "/home/pi/.matchbox/keyboard.xml"
+        if os.path.isfile(usrkbd):
+            env["MB_KBD_CONFIG"] = usrkbd
+        else:
+            env["MB_KBD_CONFIG"] = "ks_includes/locales/keyboard.xml"
         p = subprocess.Popen(["matchbox-keyboard", "--xid"], stdout=subprocess.PIPE,
             stderr=subprocess.PIPE, env=env)
 
