@@ -9,7 +9,6 @@ from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.KlippyGcodes import KlippyGcodes
 
 class ScreenPanel:
-    title_spacing = 50
 
     def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
         self._screen = screen
