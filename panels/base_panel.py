@@ -19,7 +19,8 @@ class BasePanel(ScreenPanel):
         self.title_spacing = self._screen.font_size * 2
 
         self.buttons_showing = {
-            'back': False if back else True
+            'back': False if back else True,
+            'macros_shortcut': False
         }
 
         self.layout = Gtk.Layout()
@@ -39,33 +40,43 @@ class BasePanel(ScreenPanel):
         self.control['home'] = self._gtk.ButtonImage('main', None, None, button_scale[0], button_scale[1])
         self.control['home'].connect("clicked", self.menu_return, True)
 
-        #if back == True:
-        #    self.control_grid.attach(self.control['back'], 0, 0, 1, 1)
-        #    self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
-        #else:
-        for i in range(2):
-            self.control['space%s' % i] = Gtk.Label("")
-            self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
-
         if len(self._config.get_printers()) > 1:
             self.control['printer_select'] = self._gtk.ButtonImage(
                 'shuffle', None, None, button_scale[0], button_scale[1])
             self.control['printer_select'].connect("clicked", self._screen.show_printer_select)
-        elif self._config.get_main_config_option('side_macro_shortcut') == "True":
-            self.control['printer_select'] = self._gtk.ButtonImage(
-                'custom-script', None, None, button_scale[0], button_scale[1])
-            self.control['printer_select'].connect("clicked", self.menu_item_clicked, "gcode_macros", {
+
+        self.control['macro_shortcut'] = self._gtk.ButtonImage(
+            'custom-script', None, None, button_scale[0], button_scale[1])
+        self.control['macro_shortcut'].connect("clicked", self.menu_item_clicked, "gcode_macros", {
             "name": "Macros",
             "panel": "gcode_macros"
-            })
-        else:
-            self.control['printer_select'] = Gtk.Label("")
-
-        self.control_grid.attach(self.control['printer_select'], 0, 2, 1, 1)
+        })
 
         self.control['estop'] = self._gtk.ButtonImage('emergency', None, None, button_scale[0], button_scale[1])
         self.control['estop'].connect("clicked", self.emergency_stop)
-        self.control_grid.attach(self.control['estop'], 0, 3, 1, 1)
+
+        self.locations = {
+            'macro_shortcut': 2
+        }
+        button_range = 3
+        if len(self._config.get_printers()) > 1:
+            self.locations['macro_shortcut'] = 3
+            if self._config.get_main_config_option('side_macro_shortcut') == "True":
+                button_range = 4
+
+        for i in range(button_range):
+            self.control['space%s' % i] = Gtk.Label("")
+            self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
+
+        if len(self._config.get_printers()) > 1:
+            self.control_grid.remove(self.control_grid.get_child_at(0,2))
+            self.control_grid.attach(self.control['printer_select'], 0, 2, 1, 1)
+        # If there's only one printer, show the macros shortcut if enabled. Otherwise, wait until the printer has
+        # been selected to show
+        elif self._config.get_main_config_option('side_macro_shortcut') == "True":
+            self.control_grid.remove(self.control_grid.get_child_at(0,self.locations['macro_shortcut']))
+            self.control_grid.attach(self.control['macro_shortcut'], 0, self.locations['macro_shortcut'], 1, 1)
+        self.control_grid.attach(self.control['estop'], 0, 4, 1, 1)
 
         try:
             env = Environment(extensions=["jinja2.ext.i18n"])
@@ -200,6 +211,36 @@ class BasePanel(ScreenPanel):
                 self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
             self.buttons_showing['back'] = False
         self.control_grid.show()
+
+    def show_macro_shortcut(self, show=True, mod_row=False):
+        if show == "True":
+            show = True
+
+        if show == True and self.buttons_showing['macros_shortcut'] == False:
+            if len(self._config.get_printers()) > 1 and mod_row == True:
+                self.control_grid.insert_row(self.locations['macro_shortcut'])
+            else:
+                self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['macro_shortcut']))
+            if 'space%s' % self.locations['macro_shortcut'] in self.control:
+                self.control_grid.remove(self.control['space%s' % self.locations['macro_shortcut']])
+            self.control_grid.attach(self.control['macro_shortcut'], 0, self.locations['macro_shortcut'], 1, 1)
+            self.buttons_showing['macros_shortcut'] = True
+            self._screen.show_all()
+        elif show != True and self.buttons_showing['macros_shortcut'] == True:
+            if ('space%s' % self.locations['macro_shortcut']) not in self.control:
+                self.control['space%s' % self.locations['macro_shortcut']] = Gtk.Label("")
+            if len(self._config.get_printers()) > 1 and mod_row == True:
+                self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['macro_shortcut']))
+                self.control_grid.remove(self.control['macro_shortcut'])
+                self.control_grid.remove_row(self.locations['macro_shortcut'])
+            else:
+                self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['macro_shortcut']))
+            if ('space%s' % self.locations['macro_shortcut']) not in self.control:
+                self.control['space%s' % self.locations['macro_shortcut']] = Gtk.Label("")
+            self.control_grid.attach(self.control['space%s' % self.locations['macro_shortcut']],
+                0, self.locations['macro_shortcut'], 1, 1)
+            self.buttons_showing['macros_shortcut'] = False
+            self._screen.show_all()
 
     def set_title(self, title):
         try:

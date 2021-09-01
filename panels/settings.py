@@ -138,7 +138,8 @@ class SettingsPanel(ScreenPanel):
                 switch.set_active(self._config.get_config().getboolean(option['section'], opt_name, fallback=True))
             else:
                 switch.set_active(self._config.get_config().getboolean(option['section'], opt_name))
-            switch.connect("notify::active", self.switch_config_option, option['section'], opt_name)
+            switch.connect("notify::active", self.switch_config_option, option['section'], opt_name,
+                option['callback'] if "callback" in option else None)
             switch.set_property("width-request", round(self._gtk.get_image_width()*2.5))
             switch.set_property("height-request", round(self._gtk.get_image_height()*1.25))
             box.add(switch)
@@ -237,12 +238,14 @@ class SettingsPanel(ScreenPanel):
         self._config.set(section, option, str(int(widget.get_value())))
         self._config.save_user_config_options()
 
-    def switch_config_option(self, switch, gparam, section, option):
+    def switch_config_option(self, switch, gparam, section, option, callback=None):
         logging.debug("[%s] %s toggled %s" % (section, option, switch.get_active()))
         if section not in self._config.get_config().sections():
             self._config.get_config().add_section(section)
         self._config.set(section, option, "True" if switch.get_active() else "False")
         self._config.save_user_config_options()
+        if callback is not None:
+            callback(switch.get_active())
 
     def add_gcode_option(self):
         macros = self._screen.printer.get_gcode_macros()
