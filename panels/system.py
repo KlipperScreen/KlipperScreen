@@ -178,6 +178,7 @@ class SystemPanel(ScreenPanel):
                 date = ndate
                 label = Gtk.Label("")
                 label.set_markup("<b>%s</b>\n" % date)
+                label.set_halign(Gtk.Align.START)
                 grid.attach(label, 0, i, 1, 1)
                 i = i + 1
 
