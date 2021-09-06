@@ -15,13 +15,13 @@
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
   <sodipodi:namedview
-     pagecolor="#ffffff"
+     pagecolor="#002b36"
      bordercolor="#666666"
      borderopacity="1"
      objecttolerance="10"
      gridtolerance="10"
      guidetolerance="10"
-     inkscape:pageopacity="0"
+     inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:window-width="1600"
      inkscape:window-height="826"
@@ -35,7 +35,7 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="svg4160"
      inkscape:document-rotation="0"
-     inkscape:pagecheckerboard="1" />
+     inkscape:pagecheckerboard="false" />
   <defs
      id="defs4162" />
   <metadata
@@ -55,7 +55,7 @@
     </rdf:RDF>
   </metadata>
   <rect
-     style="opacity:0.998;fill:#002b36;fill-opacity:1;stroke:#586e75;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+     style="opacity:0.998;fill:#073642;fill-opacity:1;stroke:#586e75;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
      id="rect831"
      width="45"
      height="45"
@@ -65,7 +65,8 @@
      ry="2" />
   <g
      id="g5071"
-     transform="matrix(-0.64,0,0,0.64,38.914918,-4.8380121)">
+     transform="matrix(-0.64,0,0,0.64,38.914918,-4.8380121)"
+     style="fill:#eee8d5">
     <rect
        style="display:inline;opacity:0.998;fill:#eee8d5;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
        id="rect854"
