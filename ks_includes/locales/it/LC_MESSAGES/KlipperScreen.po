@@ -147,7 +147,7 @@ msgid "Extrusion +"
 msgstr "Estrusione +"
 
 msgid "Extrusion -"
-msgstr "Estrusuine -"
+msgstr "Estrusione -"
 
 msgid "Fan"
 msgstr "Ventola"
