@@ -5,7 +5,7 @@ import os
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GdkPixbuf, Gio, GLib, Pango
-import os
+
 klipperscreendir = os.getcwd()
 
 class KlippyGtk:
@@ -15,9 +15,8 @@ class KlippyGtk:
     width_ratio = 16
     height_ratio = 9.375
 
-    def __init__(self, screen, width, height, theme):
+    def __init__(self, screen, width, height, theme, cursor):
         self.screen = screen
-
         self.width = width
         self.height = height
         self.theme = theme
@@ -31,6 +30,7 @@ class KlippyGtk:
         self.action_bar_width = int(self.width * .1)
         self.header_image_scale_width = 1.2
         self.header_image_scale_height = 1.4
+        self.cursor = cursor
 
         logging.debug("img width: %s height: %s" % (self.img_width, self.img_height))
 
@@ -178,7 +178,7 @@ class KlippyGtk:
 
     def Dialog(self, screen, buttons, content, callback=None, *args):
         dialog = Gtk.Dialog()
-        dialog.set_default_size(screen.width - 15, screen.height - 15)
+        dialog.set_default_size(screen.width, screen.height)
         dialog.set_resizable(False)
         dialog.set_transient_for(screen)
         dialog.set_modal(True)
@@ -201,6 +201,11 @@ class KlippyGtk:
         content_area.add(content)
 
         dialog.show_all()
+        # Change cursor to blank
+        if self.cursor:
+            dialog.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.ARROW))
+        else:
+            dialog.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.BLANK_CURSOR))
 
         return dialog
 

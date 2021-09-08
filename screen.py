@@ -119,7 +119,7 @@ class KlipperScreen(Gtk.Window):
         logging.info("Screen resolution: %sx%s" % (self.width, self.height))
 
         self.theme = self._config.get_main_config_option('theme')
-        self.gtk = KlippyGtk(self, self.width, self.height, self.theme)
+        self.gtk = KlippyGtk(self, self.width, self.height, self.theme, self._config.get_main_config().getboolean("show_cursor", fallback=False))
         self.keyboard_height = self.gtk.get_keyboard_height()
         self.init_style()
 
