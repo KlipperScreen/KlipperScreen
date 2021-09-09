@@ -150,6 +150,7 @@ trough {
 .dialog button {
     padding: 1.5em 2.5em 1.5em 2.5em;
     border-bottom: .4em solid #009384;
+    margin-top: 1em;
 }
 
 .distbutton_active {
@@ -347,7 +348,11 @@ trough {
     opacity: 0.8;
 }
 
-.system-program-grid
+.system-program-grid {
+    padding: 0.25em;
+    padding-right: 1em;
+    padding-bottom: 0;
+}
 
 .warning {
     background-color: rgba(30, 204, 39, 0.7);
