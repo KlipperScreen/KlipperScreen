@@ -56,6 +56,20 @@ button.file-list {
     margin: 0;
 }
 
+button.update {
+    background: #009384;
+    border: .4em solid #009384;
+    border-radius: 0.4em;
+    font-weight: bold;
+}
+
+button.invalid {
+    background: #e61e1e;
+    border: .4em solid #e61e1e;
+    border-radius: 0.4em;
+    font-weight: bold;
+}
+
 combobox box button {
     border: .05em solid #cccccc;
     padding: .5em 1em;

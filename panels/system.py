@@ -65,7 +65,7 @@ class SystemPanel(ScreenPanel):
         update_resp = self._screen.apiclient.send_request("machine/update/status")
         self.update_status = False
 
-        if update_resp is False:
+        if not update_resp:
             logging.info("No update manager configured")
         else:
             self.update_status = update_resp['result']
@@ -79,9 +79,7 @@ class SystemPanel(ScreenPanel):
 
                 self.labels["%s_status" % prog] = self._gtk.Button()
                 self.labels["%s_status" % prog].set_hexpand(False)
-                self.labels["%s_status" % prog].connect("clicked", self.show_commit_history, prog)
-                self.labels["%s_info" % prog] = self._gtk.ButtonImage("info", None, None, .7, .7)
-                self.labels["%s_info" % prog].connect("clicked", self.show_commit_history, prog)
+                self.labels["%s_status" % prog].connect("clicked", self.show_update_info, prog)
 
                 if prog in ALLOWED_SERVICES:
                     self.labels["%s_restart" % prog] = self._gtk.ButtonImage("refresh", None, None, .7, .7)
@@ -119,7 +117,7 @@ class SystemPanel(ScreenPanel):
 
     def get_updates(self):
         update_resp = self._screen.apiclient.send_request("machine/update/status")
-        if update_resp is False:
+        if not update_resp:
             logging.info("No update manager configured")
         else:
             self.update_status = update_resp['result']
@@ -138,7 +136,7 @@ class SystemPanel(ScreenPanel):
                 adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size())
                 adjustment = self.labels['update_scroll'].show_all()
 
-                if data['complete'] is True:
+                if data['complete']:
                     self.update_dialog.set_response_sensitive(Gtk.ResponseType.CANCEL, True)
 
     def restart(self, widget, program):
@@ -148,48 +146,85 @@ class SystemPanel(ScreenPanel):
         logging.info("Restarting service: %s" % program)
         self._screen._ws.send_method("machine.services.restart", {"service": program})
 
-    def show_commit_history(self, widget, program):
+    def show_update_info(self, widget, program):
         _ = self.lang.gettext
 
-        if self.update_status is False or program not in self.update_status['version_info']:
+        if not self.update_status or program not in self.update_status['version_info']:
             return
 
         info = self.update_status['version_info'][program]
-        if info['version'] == info['remote_version']:
-            return
-
-        buttons = [
-            {"name": _("Update"), "response": Gtk.ResponseType.OK},
-            {"name": _("Go Back"), "response": Gtk.ResponseType.CANCEL}
-        ]
 
         scroll = Gtk.ScrolledWindow()
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
 
         grid = Gtk.Grid()
-        grid.set_halign(Gtk.Align.START)
+        grid.set_column_homogeneous(True)
+        grid.set_halign(Gtk.Align.CENTER)
+        grid.set_valign(Gtk.Align.CENTER)
         i = 0
-        date = ""
-        for c in info['commits_behind']:
-            ndate = datetime.fromtimestamp(int(c['date'])).strftime("%b %d")
-            if date != ndate:
-                date = ndate
-                label = Gtk.Label("")
-                label.set_markup("<b>%s</b>\n" % date)
-                label.set_halign(Gtk.Align.START)
+        label = Gtk.Label()
+        label.set_hexpand(True)
+        if "configured_type" in info:
+            if not info['is_valid']:
+                label.set_markup("Do you want to restore?")
                 grid.attach(label, 0, i, 1, 1)
-                i = i + 1
+                scroll.add(grid)
+                resetbuttons = [
+                    {"name": _("Reset"), "response": Gtk.ResponseType.OK},
+                    {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
+                ]
+                dialog = self._gtk.Dialog(self._screen, resetbuttons, scroll, self.reset_confirm, program)
+                return
+            else:
+                if info['version'] == info['remote_version']:
+                    return
+                if info['configured_type'] == 'git_repo':
+                    label.set_markup("<b>Outdated by %d commits:</b>\n" % len(info['commits_behind']))
+                    grid.attach(label, 0, i, 1, 1)
+                    i = i + 1
+                    date = ""
+                    for c in info['commits_behind']:
+                        ndate = datetime.fromtimestamp(int(c['date'])).strftime("%b %d")
+                        if date != ndate:
+                            date = ndate
+                            label = Gtk.Label()
+                            label.set_markup("<b>%s</b>\n" % date)
+                            label.set_halign(Gtk.Align.START)
+                            grid.attach(label, 0, i, 1, 1)
+                            i = i + 1
 
-            label = Gtk.Label()
-            label.set_markup("%s\n<i>%s</i> %s %s\n" % (c['subject'], c['author'], _("Commited"), "2 days ago"))
-            label.set_hexpand(True)
-            label.set_halign(Gtk.Align.START)
-            grid.attach(label, 0, i, 1, 1)
+                        label = Gtk.Label()
+                        label.set_markup("%s\n<i>%s</i>\n" % (c['subject'], c['author']))
+                        label.set_halign(Gtk.Align.START)
+                        grid.attach(label, 0, i, 1, 1)
+                        i = i + 1
+                else:
+                    label.set_markup("<b>%s will be updated to version: %s</b>" % (program, info['remote_version']))
+                    grid.attach(label, 0, i, 1, 1)
+                    i = i + 1
+        if "package_count" in info:
+            label.set_markup("<b>%d Packages will be updated:</b>\n" % info['package_count'])
+            label.set_halign(Gtk.Align.CENTER)
+            grid.attach(label, 0, i, 4, 1)
             i = i + 1
+            j = 0
+            for c in info["package_list"]:
+                label = Gtk.Label()
+                label.set_markup(c)
+                label.set_halign(Gtk.Align.START)
+                pos = (j % 4)
+                grid.attach(label, pos, i, 1, 1)
+                j = j + 1
+                if (pos == 3):
+                    i = i + 1
 
         scroll.add(grid)
 
+        buttons = [
+            {"name": _("Update"), "response": Gtk.ResponseType.OK},
+            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
+        ]
         dialog = self._gtk.Dialog(self._screen, buttons, scroll, self.update_confirm, program)
 
     def update_confirm(self, widget, response_id, program):
@@ -198,13 +233,22 @@ class SystemPanel(ScreenPanel):
             self.update_program(self, program)
         widget.destroy()
 
+    def reset_confirm(self, widget, response_id, program):
+        if response_id == Gtk.ResponseType.OK:
+            logging.debug("Resetting %s" % program)
+            self.reset_repo(self, program)
+        widget.destroy()
+
+    def reset_repo(self, widget, program):
+        return
+
     def update_program(self, widget, program):
         if self._screen.is_updating():
             return
 
         _ = self.lang.gettext
 
-        if self.update_status is False or program not in self.update_status['version_info']:
+        if not self.update_status or program not in self.update_status['version_info']:
             return
 
         info = self.update_status['version_info'][program]
@@ -224,7 +268,7 @@ class SystemPanel(ScreenPanel):
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
 
-        self.labels['update_progress'] = Gtk.Label("%s %s%s" % (_("Starting update for"), program, _("...")))
+        self.labels['update_progress'] = Gtk.Label("%s %s..." % (_("Starting update for"), program))
         self.labels['update_progress'].set_halign(Gtk.Align.START)
         self.labels['update_progress'].set_valign(Gtk.Align.START)
         scroll.add(self.labels['update_progress'])
@@ -253,17 +297,40 @@ class SystemPanel(ScreenPanel):
 
         info = self.update_status['version_info'][p]
         logging.info("%s: %s" % (p, info))
+
         if p != "system":
             version = (info['full_version_string'] if "full_version_string" in info else info['version'])
-
-            if info['version'] == info['remote_version']:
-                self.labels[p].set_markup("<b>%s</b>\n%s" % (p, version))
-                self.labels["%s_status" % p].set_label(_("Up To Date"))
-                self.labels["%s_status" % p].set_sensitive(False)
+            if info['configured_type'] == 'git_repo':
+                if info['is_valid']:
+                    if info['version'] == info['remote_version']:
+                        self.labels[p].set_markup("<b>%s</b>\n%s" % (p, version))
+                        self.labels["%s_status" % p].set_label(_("Up To Date"))
+                        self.labels["%s_status" % p].get_style_context().remove_class('update')
+                        self.labels["%s_status" % p].get_style_context().remove_class('invalid')
+                        self.labels["%s_status" % p].set_sensitive(False)
+                    else:
+                        self.labels[p].set_markup("<b>%s</b>\n%s -> %s" % (p, version, info['remote_version']))
+                        self.labels["%s_status" % p].set_label(_("Update"))
+                        self.labels["%s_status" % p].get_style_context().add_class('update')
+                        self.labels["%s_status" % p].set_sensitive(True)
+                else:
+                    self.labels[p].set_markup("<b>%s</b>\n%s" % (p, version))
+                    self.labels["%s_status" % p].set_label(_("Invalid"))
+                    self.labels["%s_status" % p].get_style_context().add_class('invalid')
+                    self.labels["%s_status" % p].set_sensitive(True)
             else:
-                self.labels[p].set_markup("<b>%s</b>\n%s -> %s" % (p, version, info['remote_version']))
-                self.labels["%s_status" % p].set_label(_("Update"))
-                self.labels["%s_status" % p].set_sensitive(True)
+                if info['version'] == info['remote_version']:
+                    self.labels[p].set_markup("<b>%s</b>\n%s" % (p, version))
+                    self.labels["%s_status" % p].set_label(_("Up To Date"))
+                    self.labels["%s_status" % p].get_style_context().remove_class('update')
+                    self.labels["%s_status" % p].set_sensitive(False)
+                else:
+                    self.labels[p].set_markup("<b>%s</b>\n%s -> %s" % (p, version, info['remote_version']))
+                    self.labels["%s_status" % p].set_label(_("Update"))
+                    self.labels["%s_status" % p].get_style_context().add_class('update')
+                    self.labels["%s_status" % p].set_sensitive(True)
+
+
         else:
             self.labels[p].set_markup("<b>System</b>")
             if info['package_count'] == 0:
@@ -271,6 +338,7 @@ class SystemPanel(ScreenPanel):
                 self.labels["%s_status" % p].set_sensitive(False)
             else:
                 self.labels["%s_status" % p].set_label(_("Update"))
+                self.labels["%s_status" % p].get_style_context().add_class('update')
                 self.labels["%s_status" % p].set_sensitive(True)
 
     def restart_klippy(self, widget, type=None):

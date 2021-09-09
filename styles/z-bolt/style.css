@@ -38,6 +38,16 @@ button.active {
     background-color: #20303D;
 }
 
+button.update {
+    background: #009384;
+    border-color: #009384;
+}
+
+button.invalid {
+    background: #e61e1e;
+    border-color: #e61e1e;
+}
+
 combobox box button {
     border-color: #cccccc;
 }

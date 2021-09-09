@@ -54,6 +54,16 @@ button.active {
     background-color: #cb4b16; /*solarized-orange*/
 }
 
+button.update {
+    background: #859900; /*solarized-green*/
+    border-color: #859900; /*solarized-green*/
+}
+
+button.invalid {
+    background: #dc322f; /*solarized-red*/
+    border-color: #dc322f; /*solarized-red*/
+}
+
 combobox box button {
     background-color: #073642; /*base02*/
     border-color: #002b36; /*base03*/
