@@ -589,6 +589,7 @@ class KlipperScreen(Gtk.Window):
 
         _ = self.lang.gettext
         logging.debug("### Going to disconnected")
+        self.base_panel.show_macro_shortcut(False)
         self.printer_initializing(_("Klipper has disconnected"))
 
         for panel in list(self.panels):
@@ -602,6 +603,7 @@ class KlipperScreen(Gtk.Window):
             return
 
         _ = self.lang.gettext
+        self.base_panel.show_macro_shortcut(False)
         msg = self.printer.get_stat("webhooks","state_message")
         if "FIRMWARE_RESTART" in msg:
             self.printer_initializing(
