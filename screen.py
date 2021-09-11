@@ -41,17 +41,17 @@ import matplotlib.pyplot
 
 PRINTER_BASE_STATUS_OBJECTS = [
     'bed_mesh',
-    'idle_timeout',
     'configfile',
     'display_status',
-    'gcode_move',
+    'extruder',
     'fan',
+    'gcode_move',
+    'heater_bed',
+    'idle_timeout',
+    'pause_resume',
+    'print_stats',
     'toolhead',
     'virtual_sdcard',
-    'print_stats',
-    'heater_bed',
-    'extruder',
-    'pause_resume',
     'webhooks'
 ]
 
@@ -259,6 +259,8 @@ class KlipperScreen(Gtk.Window):
             requested_updates['objects'][extruder] = ["target","temperature","pressure_advance","smooth_time"]
         for h in self.printer.get_heaters():
             requested_updates['objects'][h] = ["target","temperature"]
+        for f in self.printer.get_fans():
+            requested_updates['objects'][f] = ["speed"]
 
         self._ws.klippy.object_subscription(requested_updates)
 
@@ -775,9 +777,30 @@ class KlipperScreen(Gtk.Window):
         powerdevs = self.apiclient.send_request("machine/device_power/devices")
         data = data['result']['status']
 
+        config = self.apiclient.send_request("printer/objects/query?configfile")
+        if config == False:
+            logging.info("Error getting printer config data")
+            return False
+
         # Reinitialize printer, in case the printer was shut down and anything has changed.
-        self.printer.reinit(printer_info['result'], data)
+        self.printer.reinit(printer_info['result'], config['result']['status'])
+
         self.ws_subscribe()
+        extra_items = []
+        for extruder in self.printer.get_tools():
+            extra_items.append(extruder)
+        for h in self.printer.get_heaters():
+            extra_items.append(h)
+        for f in self.printer.get_fans():
+            extra_items.append(f)
+
+        data = self.apiclient.send_request("printer/objects/query?" + "&".join(PRINTER_BASE_STATUS_OBJECTS +
+            extra_items))
+        if data == False:
+            logging.info("Error getting printer object data")
+            return False
+        logging.info("Startup data: %s" % data['result']['status'])
+        self.printer.process_update(data['result']['status'])
 
         self.files.initialize()
         self.files.refresh_files()

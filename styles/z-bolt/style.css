@@ -84,15 +84,22 @@ menuitem {
     border-top: 0;
 }
 
-progress, trough {
+trough {
 	min-height: 2em;
     background-color: #404E57;
     color: white;
     border: 1px solid black;
 }
 
-progress {
-	background-color: #d47b00;
+trough highlight, trough progress {
+	min-height: 2em;
+    background-color: #3584e4;
+    color: white;
+    border: 1px solid black;
+}
+
+trough progress.left {
+    border: 0px;
 }
 
 scale mark {

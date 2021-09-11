@@ -87,19 +87,18 @@ class Printer:
             'virtual_sdcard',
             'webhooks'
         ]
-        for x in keys:
-            if x in data:
-                if x not in self.data:
-                    self.data[x] = {}
-
-                for y in data[x]:
-                    self.data[x][y] = data[x][y]
 
         for x in (self.get_tools() + self.get_heaters()):
             if x in data:
-                d = data[x]
-                for i in d:
-                    self.set_dev_stat(x, i, d[i])
+                for i in data[x]:
+                    self.set_dev_stat(x, i, data[x][i])
+
+        for x in data:
+            if x == "configfile":
+                continue
+            if x not in self.data:
+                self.data[x] = {}
+            self.data[x].update(data[x])
 
         if "webhooks" in data or "idle_timeout" in data or "print_stats" in data:
             self.evaluate_state()
@@ -176,6 +175,14 @@ class Printer:
 
     def get_data(self):
         return self.data
+
+    def get_fans(self):
+        fans = ["fan"] if len(self.get_config_section_list("fan")) > 0 else []
+        fan_types = ["controller_fan", "fan_generic", "heater_fan", "temperature_fan"]
+        for type in fan_types:
+            for f in self.get_config_section_list("%s " % type):
+                fans.append(f)
+        return fans
 
     def get_gcode_macros(self):
         return self.get_config_section_list("gcode_macro ")
