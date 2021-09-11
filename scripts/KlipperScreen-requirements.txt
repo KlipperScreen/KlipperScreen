@@ -1,7 +1,8 @@
-humanize==3.5.0
-jinja2==2.11.3
-matplotlib==3.4.1
+humanize==3.11.0
+jinja2==3.0.1
+matplotlib==3.4.3
+netifaces==0.11.0
 python-vlc==3.0.12117
-requests==2.25.1
+requests==2.26.0
 vext==0.7.6
 websocket-client==1.2.1
