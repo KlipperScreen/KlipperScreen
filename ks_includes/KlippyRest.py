@@ -13,7 +13,7 @@ class KlippyRest:
 
     def get_oneshot_token(self):
         r = self.send_request("access/oneshot_token")
-        if r == False:
+        if r is False:
             return False
         return r['result']
 
@@ -31,18 +31,18 @@ class KlippyRest:
     def send_request(self, method):
         url = "http://%s:%s/%s" % (self.ip, self.port, method)
         logging.debug("Sending request to %s" % url)
-        headers = {} if self.api_key == False else {"x-api-key":self.api_key}
+        headers = {} if self.api_key is False else {"x-api-key": self.api_key}
         try:
             r = requests.get(url, headers=headers)
-        except:
+        except Exception:
             return False
         if r.status_code != 200:
             return False
 
-        #TODO: Try/except
+        # TODO: Try/except
         try:
             data = json.loads(r.content)
-        except:
+        except Exception:
             logging.exception("Unable to parse response from moonraker:\n %s" % r.content)
             return False
 

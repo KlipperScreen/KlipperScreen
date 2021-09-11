@@ -15,14 +15,14 @@ class ZCalibratePanel(ScreenPanel):
     _screen = None
     labels = {}
     distance = 1
-    distances = ['.01','.05','.1','.5','1','5']
+    distances = ['.01', '.05', '.1', '.5', '1', '5']
 
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, False)
 
     def initialize(self, panel_name):
         _ = self.lang.gettext
-        grid = self._gtk.HomogeneousGrid()
+        grid = Gtk.Grid()
 
         label = Gtk.Label(_("Z Offset") + ": \n")
         self.labels['zposition'] = Gtk.Label(_("Homing"))
@@ -33,13 +33,13 @@ class ZCalibratePanel(ScreenPanel):
         box.add(label)
         box.add(self.labels['zposition'])
 
-        zpos = self._gtk.ButtonImage('z-farther',_("Raise Nozzle"))
+        zpos = self._gtk.ButtonImage('z-farther', _("Raise Nozzle"))
         zpos.connect("clicked", self.move, "+")
-        zneg = self._gtk.ButtonImage('z-closer',_("Lower Nozzle"))
+        zneg = self._gtk.ButtonImage('z-closer', _("Lower Nozzle"))
         zneg.connect("clicked", self.move, "-")
 
         distgrid = Gtk.Grid()
-        j = 0;
+        j = 0
         for i in self.distances:
             self.labels[i] = self._gtk.ToggleButton(i)
             self.labels[i].set_direction(Gtk.TextDirection.LTR)
@@ -58,33 +58,32 @@ class ZCalibratePanel(ScreenPanel):
 
         self.labels["1"].set_active(True)
 
-        space_grid = self._gtk.HomogeneousGrid()
-        space_grid.set_row_homogeneous(False)
-        space_grid.attach(Gtk.Label(_("Distance (mm)") + ":"),0,0,1,1)
-        space_grid.attach(distgrid,0,1,1,1)
-        space_grid.attach(Gtk.Label(" "),0,2,1,1)
+        bottombox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.labels['move_dist'] = Gtk.Label(_("Move Distance (mm)"))
+        bottombox.pack_start(self.labels['move_dist'], True, True, 0)
+        bottombox.pack_start(distgrid, True, True, 0)
 
-        complete = self._gtk.ButtonImage('complete',_('Accept'),'color4')
+        complete = self._gtk.ButtonImage('complete', _('Accept'), 'color4')
         complete.connect("clicked", self.accept)
 
-        b = self._gtk.ButtonImage('cancel', _('Abort'),'color2')
+        b = self._gtk.ButtonImage('cancel', _('Abort'), 'color2')
         b.connect("clicked", self.abort)
 
 
-        #grid.set_row_homogeneous(False)
+        grid.set_column_homogeneous(True)
         grid.attach(zpos, 0, 0, 1, 1)
         grid.attach(box, 1, 0, 2, 2)
         grid.attach(zneg, 0, 1, 1, 1)
         grid.attach(complete, 3, 0, 1, 1)
-        grid.attach(space_grid, 0, 2, 3, 1)
-        grid.attach(b, 3, 2, 1, 1)
+        grid.attach(bottombox, 0, 2, 4, 1)
+        grid.attach(b, 3, 1, 1, 1)
 
 
         self.content.add(grid)
         self._screen.add_subscription(panel_name)
 
     def activate(self):
-        if self._screen.printer.get_stat("toolhead","homed_axes") != "xyz":
+        if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
             self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
         self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_CALIBRATE)
 
@@ -96,7 +95,7 @@ class ZCalibratePanel(ScreenPanel):
             self.updatePosition(data['toolhead']['position'])
 
     def updatePosition(self, position):
-        self.labels['zposition'].set_text(str(round(position[2],2)))
+        self.labels['zposition'].set_text(str(round(position[2], 2)))
 
     def change_distance(self, widget, distance):
         if self.distance == distance:

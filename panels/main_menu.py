@@ -45,7 +45,7 @@ class MainPanel(MenuPanel):
         i = 0
         cols = 3 if len(self.heaters) > 4 else (1 if len(self.heaters) <= 2 else 2)
         for h in self.heaters:
-            eq_grid.attach(self.labels[h], i%cols, int(i/cols), 1, 1)
+            eq_grid.attach(self.labels[h], i % cols, int(i/cols), 1, 1)
             i += 1
 
         self.items = items
@@ -78,14 +78,16 @@ class MainPanel(MenuPanel):
             return
 
         for x in self._printer.get_tools():
-            self.update_temp(x,
-                self._printer.get_dev_stat(x,"temperature"),
-                self._printer.get_dev_stat(x,"target")
+            self.update_temp(
+                x,
+                self._printer.get_dev_stat(x, "temperature"),
+                self._printer.get_dev_stat(x, "target")
             )
         for h in self._printer.get_heaters():
-            self.update_temp(h,
-                self._printer.get_dev_stat(h,"temperature"),
-                self._printer.get_dev_stat(h,"target"),
+            self.update_temp(
+                h,
+                self._printer.get_dev_stat(h, "temperature"),
+                self._printer.get_dev_stat(h, "target"),
                 None if h == "heater_bed" else " ".join(h.split(" ")[1:])
             )
         return

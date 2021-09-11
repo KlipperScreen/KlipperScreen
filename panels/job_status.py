@@ -2,6 +2,7 @@
 import gi
 import logging
 import math
+import os
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
@@ -44,8 +45,9 @@ class JobStatusPanel(ScreenPanel):
         self.labels['file'].set_halign(Gtk.Align.START)
         self.labels['file'].set_vexpand(False)
         self.labels['file'].get_style_context().add_class("printing-filename")
-        self.labels['file'].set_line_wrap(True)
-        self.labels['file'].set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        self.labels['file'].set_max_width_chars(26)
+        self.labels['file'].set_ellipsize(True)
+        self.labels['file'].set_ellipsize(Pango.EllipsizeMode.END)
         self.labels['status'] = Gtk.Label()
         self.labels['status'].set_halign(Gtk.Align.START)
         self.labels['status'].set_vexpand(False)
@@ -54,10 +56,13 @@ class JobStatusPanel(ScreenPanel):
         self.labels['lcdmessage'].set_halign(Gtk.Align.START)
         self.labels['lcdmessage'].set_vexpand(False)
         self.labels['lcdmessage'].get_style_context().add_class("printing-status")
+        self.labels['lcdmessage'].set_max_width_chars(43)
+        self.labels['lcdmessage'].set_ellipsize(True)
+        self.labels['lcdmessage'].set_ellipsize(Pango.EllipsizeMode.END)
 
-        fi_box.add(self.labels['file']) #, True, True, 0)
-        fi_box.add(self.labels['status']) #, True, True, 0)
-        fi_box.add(self.labels['lcdmessage']) #, True, True, 0)
+        fi_box.add(self.labels['file'])
+        fi_box.add(self.labels['status'])
+        fi_box.add(self.labels['lcdmessage'])
         fi_box.set_valign(Gtk.Align.CENTER)
 
         info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -96,7 +101,7 @@ class JobStatusPanel(ScreenPanel):
             i += 1
 
         temp_grid = self._gtk.HomogeneousGrid()
-        self.current_extruder = self._printer.get_stat("toolhead","extruder")
+        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
         temp_grid.attach(self.labels[self.current_extruder + '_box'], 0, 0, 1, 1)
         if self._printer.has_heated_bed():
             heater_bed = self._gtk.Image("bed.svg", None, .6, .6)
@@ -186,8 +191,8 @@ class JobStatusPanel(ScreenPanel):
         self.labels['i2_box'].get_style_context().add_class("printing-info-box")
         self.labels['i2_box'].set_valign(Gtk.Align.CENTER)
         self.labels['info_grid'] = self._gtk.HomogeneousGrid()
-        self.labels['info_grid'].attach(self.labels['i1_box'], 0, 0, 1, 1)
-        self.labels['info_grid'].attach(self.labels['i2_box'], 1, 0, 1, 1)
+        self.labels['info_grid'].attach(self.labels['i1_box'], 0, 0, 2, 1)
+        self.labels['info_grid'].attach(self.labels['i2_box'], 2, 0, 3, 1)
 
         grid.attach(overlay, 0, 0, 1, 1)
         grid.attach(fi_box, 1, 0, 3, 1)
@@ -200,11 +205,12 @@ class JobStatusPanel(ScreenPanel):
         self.content.add(grid)
 
         self._screen.add_subscription(panel_name)
+        self._screen.wake_screen()
 
     def on_draw(self, da, ctx):
         w = da.get_allocated_width()
         h = da.get_allocated_height()
-        r = min(w,h)*.4
+        r = min(w, h)*.4
 
         ctx.set_source_rgb(0.6, 0.6, 0.6)
         ctx.set_line_width(self._gtk.get_font_size() * .75)
@@ -220,10 +226,10 @@ class JobStatusPanel(ScreenPanel):
     def activate(self):
         _ = self.lang.gettext
         self.progress = 0
-        self.enable_button("pause","cancel","resume")
+        self.enable_button("pause", "cancel", "resume")
 
         state = "printing"
-        self.update_text("status",_("Printing"))
+        self.update_text("status", _("Printing"))
 
         ps = self._printer.get_stat("print_stats")
         logging.debug("Act State: %s" % ps['state'])
@@ -231,7 +237,7 @@ class JobStatusPanel(ScreenPanel):
 
         self.show_buttons_for_state()
 
-        if self.timeout == None:
+        if self.timeout is None:
             GLib.timeout_add(500, self.state_check)
 
     def add_labels(self):
@@ -240,13 +246,6 @@ class JobStatusPanel(ScreenPanel):
         for child in self.labels['i2_box'].get_children():
             self.labels['i2_box'].remove(child)
 
-        #if self.file_metadata == None:
-        #    self.labels['i1_box'].add(self.labels['temp_grid'])
-        #    self.labels['i1_box'].add(self.labels['pos_box'])
-        #    self.labels['i1_box'].add(self.labels['sfe_grid'])
-        #    self.labels['i2_box'].add(self.labels['it_box'])
-        #    self.labels['i2_box'].add(self.labels['itl_box'])
-        #else:
         self.labels['i1_box'].add(self.labels['thumbnail'])
         self.labels['i2_box'].add(self.labels['temp_grid'])
         self.labels['i2_box'].add(self.labels['pos_box'])
@@ -257,21 +256,21 @@ class JobStatusPanel(ScreenPanel):
 
     def create_buttons(self):
         _ = self.lang.gettext
-        self.labels['cancel'] = self._gtk.ButtonImage("stop",_("Cancel"),"color2")
+        self.labels['cancel'] = self._gtk.ButtonImage("stop", _("Cancel"), "color2")
         self.labels['cancel'].connect("clicked", self.cancel)
-        self.labels['control'] = self._gtk.ButtonImage("settings",_("Settings"),"color3")
+        self.labels['control'] = self._gtk.ButtonImage("settings", _("Settings"), "color3")
         self.labels['control'].connect("clicked", self._screen._go_to_submenu, "")
-        self.labels['fine_tune'] = self._gtk.ButtonImage("fine-tune",_("Fine Tuning"),"color4")
-        self.labels['fine_tune'].connect("clicked", self.menu_item_clicked, "fine_tune",{
+        self.labels['fine_tune'] = self._gtk.ButtonImage("fine-tune", _("Fine Tuning"), "color4")
+        self.labels['fine_tune'].connect("clicked", self.menu_item_clicked, "fine_tune", {
             "panel": "fine_tune", "name": _("Fine Tuning")})
-        self.labels['menu'] = self._gtk.ButtonImage("complete",_("Main Menu"),"color4")
+        self.labels['menu'] = self._gtk.ButtonImage("complete", _("Main Menu"), "color4")
         self.labels['menu'].connect("clicked", self.close_panel)
-        self.labels['pause'] = self._gtk.ButtonImage("pause",_("Pause"),"color1" )
-        self.labels['pause'].connect("clicked",self.pause)
-        self.labels['restart'] = self._gtk.ButtonImage("refresh",_("Restart"),"color3")
+        self.labels['pause'] = self._gtk.ButtonImage("pause", _("Pause"), "color1")
+        self.labels['pause'].connect("clicked", self.pause)
+        self.labels['restart'] = self._gtk.ButtonImage("refresh", _("Restart"), "color3")
         self.labels['restart'].connect("clicked", self.restart)
-        self.labels['resume'] = self._gtk.ButtonImage("resume",_("Resume"),"color1")
-        self.labels['resume'].connect("clicked",self.resume)
+        self.labels['resume'] = self._gtk.ButtonImage("resume", _("Resume"), "color1")
+        self.labels['resume'].connect("clicked", self.resume)
 
     def restart(self, widget):
         if self.filename != "none":
@@ -280,16 +279,14 @@ class JobStatusPanel(ScreenPanel):
             for to in self.close_timeouts:
                 GLib.source_remove(to)
                 self.close_timeouts.remove(to)
-            if self.timeout == None:
+            if self.timeout is None:
                 self.timeout = GLib.timeout_add(500, self.state_check)
 
     def resume(self, widget):
-        #self.disable_button("resume","cancel")
         self._screen._ws.klippy.print_resume(self._response_callback, "enable_button", "pause", "cancel")
         self._screen.show_all()
 
     def pause(self, widget):
-        #self.disable_button("pause","cancel")
         self._screen._ws.klippy.print_pause(self._response_callback, "enable_button", "resume", "cancel")
         self._screen.show_all()
 
@@ -305,21 +302,23 @@ class JobStatusPanel(ScreenPanel):
         label.set_markup(_("Are you sure you wish to cancel this print?"))
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
+        label.set_vexpand(True)
+        label.set_valign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
         dialog = self._gtk.Dialog(self._screen, buttons, label, self.cancel_confirm)
-        self.disable_button("pause","cancel")
+        self.disable_button("pause", "cancel")
 
     def cancel_confirm(self, widget, response_id):
         widget.destroy()
 
         if response_id == Gtk.ResponseType.CANCEL:
-            self.enable_button("pause","cancel")
+            self.enable_button("pause", "cancel")
             return
 
         logging.debug("Canceling print")
-        self.disable_button("pause","resume","cancel")
+        self.disable_button("pause", "resume", "cancel")
         self._screen._ws.klippy.print_cancel(self._response_callback)
 
     def _response_callback(self, response, method, params, func=None, *args):
@@ -344,17 +343,18 @@ class JobStatusPanel(ScreenPanel):
             self.labels[arg].set_sensitive(False)
 
     def _callback_metadata(self, newfiles, deletedfiles, modifiedfiles):
-        if bool(self.file_metadata) == False and self.filename in modifiedfiles:
+        if bool(self.file_metadata) is False and self.filename in modifiedfiles:
             self.update_file_metadata()
             self._files.remove_file_callback(self._callback_metadata)
 
     def new_print(self):
-        if self.state in ["cancelled","complete","error"]:
+        if self.state in ["cancelled", "cancelling", "complete", "error"]:
             for to in self.close_timeouts:
                 GLib.source_remove(to)
                 self.close_timeouts.remove(to)
-            if self.timeout == None:
+            if self.timeout is None:
                 GLib.timeout_add(500, self.state_check)
+            self._screen.wake_screen()
             self.state_check()
 
     def process_update(self, action, data):
@@ -369,24 +369,28 @@ class JobStatusPanel(ScreenPanel):
         _ = self.lang.gettext
 
         if self._printer.has_heated_bed():
-            self.update_temp("heater_bed",
-                self._printer.get_dev_stat("heater_bed","temperature"),
-                self._printer.get_dev_stat("heater_bed","target")
+            self.update_temp(
+                "heater_bed",
+                self._printer.get_dev_stat("heater_bed", "temperature"),
+                self._printer.get_dev_stat("heater_bed", "target")
             )
         for x in self._printer.get_tools():
-            self.update_temp(x,
-                self._printer.get_dev_stat(x,"temperature"),
-                self._printer.get_dev_stat(x,"target")
+            self.update_temp(
+                x,
+                self._printer.get_dev_stat(x, "temperature"),
+                self._printer.get_dev_stat(x, "target")
             )
 
         ps = self._printer.get_stat("print_stats")
         vsd = self._printer.get_stat("virtual_sdcard")
         if 'display_status' in data and 'message' in data['display_status']:
-                self.update_message()
+            self.update_message()
 
         if "print_stats" in data and "filename" in data['print_stats']:
-            if data['print_stats']['filename'] != self.filename and self.state not in  ["cancelling","cancelled","complete"]:
-                logging.debug("filename: '%s' '%s' status: %s" % (self.filename, data['print_stats']['filename'], self.state))
+            if data['print_stats']['filename'] != self.filename and (
+                    self.state not in ["cancelling", "cancelled", "complete"]):
+                logging.debug("filename: '%s' '%s' status: %s" %
+                              (self.filename, data['print_stats']['filename'], self.state))
                 self.update_filename()
 
         if "toolhead" in data:
@@ -404,8 +408,6 @@ class JobStatusPanel(ScreenPanel):
             self.labels['pos_z'].set_text("Z: %.2f" % (data["gcode_move"]["gcode_position"][2]))
 
         if "gcode_move" in data:
-            #if "homing_origin" in data["gcode_move"]:
-            #    self.labels['zoffset'].set_text("%.2fmm" % data["gcode_move"]["homing_origin"][2])
             if "extrude_factor" in data["gcode_move"]:
                 self.extrusion = int(data["gcode_move"]["extrude_factor"]*100)
                 self.labels['extrusion'].set_text("%3d%%" % self.extrusion)
@@ -414,16 +416,16 @@ class JobStatusPanel(ScreenPanel):
                 self.labels['speed'].set_text("%3d%%" % self.speed)
 
         if "fan" in data and "speed" in data['fan']:
-            self.fan = int(round(data['fan']['speed'],2)*100)
+            self.fan = int(round(data['fan']['speed'], 2)*100)
             self.labels['fan'].set_text("%3d%%" % self.fan)
 
-        if self.state in ["cancelling","cancelled","complete","error"]:
+        if self.state in ["cancelling", "cancelled", "complete", "error"]:
             return
 
         self.update_percent_complete()
         self.update_text("duration", str(self._gtk.formatTimeString(ps['print_duration'])))
 
-        timeleft_type = self._config.get_config()['main'].get('print_estimate_method','file')
+        timeleft_type = self._config.get_config()['main'].get('print_estimate_method', 'file')
         if timeleft_type != self.timeleft_type:
             if self.timeleft_type == "duration":
                 self.labels['it_box'].add(self.labels['est_time'])
@@ -431,20 +433,20 @@ class JobStatusPanel(ScreenPanel):
                 self.labels['it_box'].remove(self.labels['est_time'])
             self.timeleft_type = timeleft_type
 
-        if timeleft_type in ['filament','file','slicer']:
+        if timeleft_type in ['filament', 'file', 'slicer']:
             duration = ps['print_duration']
             if timeleft_type == "filament":
                 estimated_filament = (self.file_metadata['filament_total'] if "filament_total" in self.file_metadata
-                        else 1)
-                total_duration = duration / (max(ps['filament_used'],0.0001) / max(estimated_filament, 0.0001))
+                                      else 1)
+                total_duration = duration / (max(ps['filament_used'], 0.0001) / max(estimated_filament, 0.0001))
             elif timeleft_type == "file":
                 total_duration = duration / max(self.progress, 0.0001)
             elif timeleft_type == "slicer":
                 total_duration = (self.file_metadata['estimated_time'] if "estimated_time" in self.file_metadata
-                        else duration)
+                                  else duration)
             time_left = max(total_duration - duration, 0)
             self.update_text("time_left", str(self._gtk.formatTimeString(time_left)))
-            self.update_text("est_time","/ %s" % str(self._gtk.formatTimeString(total_duration)))
+            self.update_text("est_time", "/ %s" % str(self._gtk.formatTimeString(total_duration)))
 
     def state_check(self):
         ps = self._printer.get_stat("print_stats")
@@ -458,6 +460,7 @@ class JobStatusPanel(ScreenPanel):
             self.progress = 1
             self.update_progress()
             self.set_state("complete")
+            self._screen.wake_screen()
             timeout = self._config.get_main_config().getint("job_complete_timeout", 30)
             if timeout != 0:
                 self.close_timeouts.append(GLib.timeout_add(timeout * 1000, self.close_panel))
@@ -466,6 +469,7 @@ class JobStatusPanel(ScreenPanel):
             logging.debug("Error!")
             self.set_state("error")
             self.labels['status'].set_text("%s - %s" % (_("Error"), ps['message']))
+            self._screen.wake_screen()
             timeout = self._config.get_main_config().getint("job_error_timeout", 0)
             if timeout != 0:
                 self.close_timeouts.append(GLib.timeout_add(timeout * 1000, self.close_panel))
@@ -473,6 +477,7 @@ class JobStatusPanel(ScreenPanel):
         elif ps['state'] == "standby":
             # Print was cancelled
             self.set_state("cancelled")
+            self._screen.wake_screen()
             timeout = self._config.get_main_config().getint("job_cancelled_timeout", 0)
             if timeout != 0:
                 self.close_timeouts.append(GLib.timeout_add(timeout * 1000, self.close_panel))
@@ -501,15 +506,15 @@ class JobStatusPanel(ScreenPanel):
         logging.debug("Changing job_status state from '%s' to '%s'" % (self.state, state))
         self.state = state
         if state == "paused":
-            self.update_text("status",_("Paused"))
+            self.update_text("status", _("Paused"))
         elif state == "printing":
-            self.update_text("status",_("Printing"))
+            self.update_text("status", _("Printing"))
         elif state == "cancelling":
-            self.update_text("status",_("Cancelling"))
+            self.update_text("status", _("Cancelling"))
         elif state == "cancelled":
-            self.update_text("status",_("Cancelled"))
+            self.update_text("status", _("Cancelled"))
         elif state == "complete":
-            self.update_text("status",_("Complete"))
+            self.update_text("status", _("Complete"))
         self.show_buttons_for_state()
 
 
@@ -521,16 +526,18 @@ class JobStatusPanel(ScreenPanel):
             self.labels['button_grid'].attach(self.labels['cancel'], 1, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['fine_tune'], 2, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
+            self.enable_button("pause", "cancel")
         elif self.state == "paused":
             self.labels['button_grid'].attach(self.labels['resume'], 0, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['cancel'], 1, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['fine_tune'], 2, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
+            self.enable_button("resume", "cancel")
         elif self.state == "cancelling":
             self.labels['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
             self.labels['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
-            self.labels['button_grid'].attach(self.labels['fine_tune'], 2, 0, 1, 1)
-            self.labels['button_grid'].attach(self.labels['control'], 3, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['restart'], 2, 0, 1, 1)
+            self.labels['button_grid'].attach(self.labels['menu'], 3, 0, 1, 1)
         elif self.state == "error" or self.state == "complete" or self.state == "cancelled":
             self.labels['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
             self.labels['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
@@ -541,27 +548,26 @@ class JobStatusPanel(ScreenPanel):
     def show_file_thumbnail(self):
         if self._files.has_thumbnail(self.filename):
             pixbuf = self.get_file_image(self.filename, 7, 3.25)
-            if pixbuf != None:
+            if pixbuf is not None:
                 self.labels['thumbnail'].set_from_pixbuf(pixbuf)
 
     def update_filename(self):
-        self.filename = self._printer.get_stat('print_stats','filename')
-        self.update_text("file", self._printer.get_stat('print_stats','filename'))
+        self.filename = self._printer.get_stat('print_stats', 'filename')
+        self.update_text("file", os.path.splitext(self._printer.get_stat('print_stats', 'filename'))[0])
         self.update_percent_complete()
         self.update_file_metadata()
 
     def update_file_metadata(self):
         if self._files.file_metadata_exists(self.filename):
             self.file_metadata = self._files.get_file_info(self.filename)
-            logging.debug("Parsing file metadata: %s" % list(self.file_metadata))
+            logging.info("Update Metadata. File: %s Size: %s" % (self.filename, self.file_metadata['size']))
             if "estimated_time" in self.file_metadata and self.timeleft_type == "slicer":
-                self.update_text("est_time","/ %s" %
-                    str(self._gtk.formatTimeString(self.file_metadata['estimated_time'])))
+                self.update_text("est_time", "/ %s" %
+                                 str(self._gtk.formatTimeString(self.file_metadata['estimated_time'])))
             if "thumbnails" in self.file_metadata:
                 tmp = self.file_metadata['thumbnails'].copy()
                 for i in tmp:
                     i['data'] = ""
-                logging.debug("Thumbnails: %s" % list(tmp))
             self.show_file_thumbnail()
         else:
             self.file_metadata = {}
@@ -573,16 +579,16 @@ class JobStatusPanel(ScreenPanel):
             self.labels[label]['l'].set_text(text)
 
     def update_percent_complete(self):
-        if self.state in ["cancelling","cancelled","complete","error"]:
+        if self.state in ["cancelling", "cancelled", "complete", "error"]:
             return
 
         if "gcode_start_byte" in self.file_metadata:
-            progress = (max(self._printer.get_stat('virtual_sdcard','file_position') -
-                self.file_metadata['gcode_start_byte'],0) / (self.file_metadata['gcode_end_byte'] -
-                self.file_metadata['gcode_start_byte']))
+            progress = (max(self._printer.get_stat('virtual_sdcard', 'file_position') -
+                        self.file_metadata['gcode_start_byte'], 0) / (self.file_metadata['gcode_end_byte'] -
+                        self.file_metadata['gcode_start_byte']))
         else:
-            progress = self._printer.get_stat('virtual_sdcard','progress')
-        progress = round(progress,2)
+            progress = self._printer.get_stat('virtual_sdcard', 'progress')
+        progress = round(progress, 2)
 
         if progress != self.progress:
             self.progress = progress
@@ -593,16 +599,12 @@ class JobStatusPanel(ScreenPanel):
         if label in self.labels:
             self.labels[label].set_text(text)
 
-    def update_progress (self):
-        self.labels['progress_text'].set_text("%s%%" % (str( min(int(self.progress*100),100) )))
+    def update_progress(self):
+        self.labels['progress_text'].set_text("%s%%" % (str(min(int(self.progress*100), 100))))
 
-    def update_message (self):
+    def update_message(self):
         msg = self._printer.get_stat("display_status", "message")
-        self.labels['lcdmessage'].set_text("" if msg == None else msg)
-
-    #def update_temp(self, dev, temp, target):
-    #    if dev in self.labels:
-    #        self.labels[dev].set_label(self._gtk.formatTemperatureString(temp, target))
+        self.labels['lcdmessage'].set_text("" if msg is None else msg)
 
     def update_temp(self, x, temp, target):
         self.labels[x].set_markup(

@@ -12,7 +12,7 @@ def create_panel(*args):
 
 class ExtrudePanel(ScreenPanel):
     distance = 1
-    distances = ['1','5','10','25']
+    distances = ['1', '5', '10', '25']
 
     def initialize(self, panel_name):
         _ = self.lang.gettext
@@ -31,9 +31,9 @@ class ExtrudePanel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
 
         i = 0
-        self.current_extruder = self._printer.get_stat("toolhead","extruder")
+        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
         for extruder in self._printer.get_tools():
-            self.labels[extruder] = self._gtk.ButtonImage("extruder-%s" % i,_("Tool") + " %s" %str(i),"color1")
+            self.labels[extruder] = self._gtk.ButtonImage("extruder-%s" % i, _("Tool") + " %s" % str(i), "color1")
             self.labels[extruder].connect("clicked", self.change_extruder, extruder)
             if extruder == self.current_extruder:
                 self.labels[extruder].get_style_context().add_class("button_active")
@@ -41,11 +41,11 @@ class ExtrudePanel(ScreenPanel):
                 grid.attach(self.labels[extruder], i, 0, 1, 1)
             i += 1
 
-        self.labels['extrude'] = self._gtk.ButtonImage("extrude",_("Extrude"),"color3")
+        self.labels['extrude'] = self._gtk.ButtonImage("extrude", _("Extrude"), "color3")
         self.labels['extrude'].connect("clicked", self.extrude, "+")
-        self.labels['retract'] = self._gtk.ButtonImage("retract",_("Retract"),"color2")
+        self.labels['retract'] = self._gtk.ButtonImage("retract", _("Retract"), "color2")
         self.labels['retract'].connect("clicked", self.extrude, "-")
-        self.labels['temperature'] = self._gtk.ButtonImage("heat-up",_("Temperature"),"color4")
+        self.labels['temperature'] = self._gtk.ButtonImage("heat-up", _("Temperature"), "color4")
         self.labels['temperature'].connect("clicked", self.menu_item_clicked, "temperature", {
             "name": "Temperature",
             "panel": "temperature"
@@ -57,16 +57,16 @@ class ExtrudePanel(ScreenPanel):
 
 
         distgrid = Gtk.Grid()
-        j = 0;
+        j = 0
         for i in self.distances:
             self.labels["dist"+str(i)] = self._gtk.ToggleButton(i)
             self.labels["dist"+str(i)].connect("clicked", self.change_distance, i)
             ctx = self.labels["dist"+str(i)].get_style_context()
-            if ((self._screen.lang_ltr == True and j == 0) or
-                    (self._screen.lang_ltr == False and j == len(self.distances)-1)):
+            if ((self._screen.lang_ltr is True and j == 0) or
+                    (self._screen.lang_ltr is False and j == len(self.distances)-1)):
                 ctx.add_class("distbutton_top")
-            elif ((self._screen.lang_ltr == False and j == 0) or
-                    (self._screen.lang_ltr == True and j == len(self.distances)-1)):
+            elif ((self._screen.lang_ltr is False and j == 0) or
+                    (self._screen.lang_ltr is True and j == len(self.distances)-1)):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
@@ -77,16 +77,16 @@ class ExtrudePanel(ScreenPanel):
         self.labels["dist1"].set_active(True)
 
         speedgrid = Gtk.Grid()
-        j = 0;
+        j = 0
         for i in self.speeds:
             self.labels["speed"+str(i)] = self._gtk.ToggleButton(_(i))
             self.labels["speed"+str(i)].connect("clicked", self.change_speed, i)
             ctx = self.labels["speed"+str(i)].get_style_context()
-            if ((self._screen.lang_ltr == True and j == 0) or
-                    (self._screen.lang_ltr == False and j == len(self.speeds)-1)):
+            if ((self._screen.lang_ltr is True and j == 0) or
+                    (self._screen.lang_ltr is False and j == len(self.speeds)-1)):
                 ctx.add_class("distbutton_top")
-            elif ((self._screen.lang_ltr == False and j == 0) or
-                    (self._screen.lang_ltr == True and j == len(self.speeds)-1)):
+            elif ((self._screen.lang_ltr is False and j == 0) or
+                    (self._screen.lang_ltr is True and j == len(self.speeds)-1)):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
@@ -110,9 +110,10 @@ class ExtrudePanel(ScreenPanel):
             return
 
         for x in self._printer.get_tools():
-            self.update_temp(x,
-                self._printer.get_dev_stat(x,"temperature"),
-                self._printer.get_dev_stat(x,"target")
+            self.update_temp(
+                x,
+                self._printer.get_dev_stat(x, "temperature"),
+                self._printer.get_dev_stat(x, "target")
             )
 
         if ("toolhead" in data and "extruder" in data["toolhead"] and

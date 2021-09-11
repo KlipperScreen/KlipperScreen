@@ -1,5 +1,5 @@
 * {
-    color: #fff;
+    color: white;
     font-size: KS_FONT_SIZEpx;
     -GtkComboBox-appears-as-list: 0;
 }
@@ -15,7 +15,7 @@ button {
 	margin: .25em;
 	margin-bottom: .5em;
 	border-radius: 0;
-    border: 0 solid #000;
+	border: 0;
 	-gtk-icon-shadow: none;
 }
 
@@ -64,7 +64,7 @@ entry {
 }
 
 frame {
-    color: #fff;
+    color: white;
     border-bottom: 1px solid #444;
 }
 
@@ -84,20 +84,27 @@ menuitem {
     border-top: 0;
 }
 
-progress, trough {
+trough {
 	min-height: 2em;
     background-color: #404E57;
-    color: #fff;
-    border: #000 1px solid;
+    color: white;
+    border: 1px solid black;
 }
 
-progress {
-	background-color: #d47b00;
+trough highlight, trough progress {
+	min-height: 2em;
+    background-color: #3584e4;
+    color: white;
+    border: 1px solid black;
+}
+
+trough progress.left {
+    border: 0px;
 }
 
 scale mark {
   margin-top: 1em;
-  color: #fff;
+  color: white;
 }
 
 scrollbar, scrollbar button, scrollbar trough {
@@ -111,12 +118,21 @@ scrollbar slider {
 	background-color: #404E57;
 }
 
+textview, textview text {
+    background: transparent;
+    font-family: Free Mono;
+}
+
+textview .time {
+    color: grey;
+}
+
 trough {
     margin: .5em 1em;
 }
 
 .popup {
-    background-color: #0000ff;
+    background-color: black;
 }
 
 .action_bar {
@@ -126,7 +142,7 @@ trough {
 .dialog {
 	border: .1em solid black;
 	padding: 2.5em;
-	background-color: #000;
+	background-color: black;
     margin: 1em;
 }
 
@@ -140,7 +156,7 @@ trough {
 }
 
 .distbutton_top {
-  border: .15em solid #fff;
+  border: .15em solid white;
   border-right: 0;
   border-top-left-radius: .75em;
   border-bottom-left-radius: .75em;
@@ -148,7 +164,7 @@ trough {
 }
 
 .distbutton {
-  border: .15em solid #fff;
+  border: .15em solid white;
   border-left: .15em solid #ccc;
   border-right: 0;
   margin-left: 0;
@@ -156,7 +172,7 @@ trough {
 }
 
 .distbutton_bottom {
-  border: .15em solid #fff;
+  border: .15em solid white;
   border-left: .15em solid #ccc;
   border-top-right-radius: .7em;
   border-bottom-right-radius: .7em;
@@ -164,8 +180,8 @@ trough {
 }
 
 .fan_slider {
-  margin: 1em;
-  color: #fff;
+  margin: 0 1em 0 1em;
+  color: white;
 }
 
 .frame-item {
@@ -175,7 +191,7 @@ trough {
 
 .message_popup {
     background-color: #367554;
-    border-bottom: .1em solid #fff;
+    border-bottom: .1em solid white;
 }
 
 .message_popup button {
@@ -183,66 +199,62 @@ trough {
 }
 
 .numpad_tleft {
-  border-left: .15em solid #fff;
-  border-top: .15em solid #fff;
+  border: .15em solid white;
+  border-bottom: 0;
+  border-right: 0;
   border-top-left-radius: .7em;
   margin: .15em 0 0 .15em;
 }
 
 .numpad_top {
-  border-left: .15em solid #ccc;
-  border-top: .15em solid #fff;
+  border: .15em solid white;
+  border-bottom: 0;
+  border-right: 0;
   margin: .15em 0 0 0;
 }
 
 .numpad_tright {
-  border-left: .15em solid #fff;
-  border-right: .15em solid #fff;
-  border-top: .15em solid #fff;
+  border: .15em solid white;
+  border-bottom: 0;
   border-top-right-radius: .7em;
   margin: .15em .15em 0 0;
 }
 
 .numpad_left {
-  border-left: .15em solid #fff;
-  border-top: .15em solid #ccc;
+  border: .15em solid white;
+  border-right: 0;
+  border-bottom: 0;
   margin: 0 0 0 .15em;
 }
 
 .numpad_button {
-  border-left: .15em solid #ccc;
-  border-top: .15em solid #ccc;
+  border: .15em solid white;
+  border-right: 0;
+  border-bottom: 0;
   margin: 0;
-  padding: 1em;
 }
 
 .numpad_right {
-  border-right: .15em solid #fff;
-  border-left: .15em solid #ccc;
-  border-top: .15em solid #ccc;
+  border: .15em solid white;
+  border-bottom: 0;
   margin: 0 .15em 0 0;
 }
 
 .numpad_bleft {
-  border-left: .15em solid #fff;
-  border-bottom: .15em solid #fff;
-  border-top: .15em solid #ccc;
+  border: .15em solid white;
+  border-right: 0;
   border-bottom-left-radius: .7em;
   margin: 0 0 .15em .15em;
 }
 
 .numpad_bottom {
-  border-left: .15em solid #ccc;
-  border-bottom: .15em solid #fff;
-  border-top: .15em solid #ccc;
+  border: .15em solid white;
+  border-right: 0;
   margin: 0 0 .15em 0;
 }
 
 .numpad_bright {
-  border-left: .15em solid #ccc;
-  border-bottom: .15em solid #fff;
-  border-top: .15em solid #ccc;
-  border-right: .15em solid #ccc;
+  border: .15em solid white;
   border-bottom-right-radius: .7em;
   margin: 0 .15em .15em 0;
 }
@@ -279,7 +291,7 @@ trough {
 .printing-progress-text {
 	font-size: 1.5em;
     font-weight: bold;
-	color: #fff;
+	color: white;
 }
 
 .printing-status-label {
@@ -290,7 +302,7 @@ trough {
 }
 
 .tempbutton_top {
-  border: .15em solid #fff;
+  border: .15em solid white;
   border-bottom: 0;
   border-top-left-radius: .75em;
   border-top-right-radius: .75em;
@@ -298,7 +310,7 @@ trough {
 }
 
 .tempbutton {
-  border: .15em solid #fff;
+  border: .15em solid white;
   border-top: .15em solid #ccc;
   border-bottom: 0;
   margin-top: 0;
@@ -306,7 +318,7 @@ trough {
 }
 
 .tempbutton_bottom {
-  border: .15em solid #fff;
+  border: .15em solid white;
   border-top: .15em solid #ccc;
   border-bottom-left-radius: .7em;
   border-bottom-right-radius: .7em;
@@ -317,13 +329,13 @@ trough {
 	border: .1em solid #981E1F;
 	font-size: 1em;
 	padding: 2.5em;
-	color: #FFF;
+	color: white;
 	background-color: #981E1F;
 }
 
 .message button {
-	background-color: #FFF;
-	color: #000;
+	background-color: white;
+	color: black;
 	padding: 2em 2.5em 2em 2.5em;
 }
 
@@ -333,6 +345,8 @@ trough {
 	border-radius: 0 0 .25em .25em;
 	opacity: 0.8;
 }
+
+.system-program-grid
 
 .warning {
 	background-color: rgba(30, 204, 39, 0.7);

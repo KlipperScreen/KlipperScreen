@@ -19,8 +19,8 @@ class ScreenSaverPanel(ScreenPanel):
         box.set_vexpand(True)
         box.set_halign(Gtk.Align.CENTER)
 
-        l = Gtk.Label(_("Screen will show in less than one second"))
-        box.add(l)
+        label = Gtk.Label(_("Screen will show in less than one second"))
+        box.add(label)
 
 
         self.layout = box

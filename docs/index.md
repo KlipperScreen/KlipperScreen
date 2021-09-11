@@ -15,15 +15,6 @@ However, three resolutions are tested during development: 1024x600, 800x480, 480
 There are no recommended screens, but there are several screens that work with KlipperScreen. They include screens that
 use HDMI/USB, Raspberry Pi GPIO, or the Rapsberry Pi DSI (ribbon cable) port.
 
-### Links
-
-[Installation](Installation.md)
-
-[Configuration](Configuration.md)
-
-[Panels](panels.md)
-
-
 ### Sample Panels
 
 Main Menu

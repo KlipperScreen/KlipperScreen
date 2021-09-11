@@ -34,7 +34,7 @@ class KlippyFiles():
 
     def _callback(self, result, method, params):
         if method == "server.files.list":
-            if "result" in result and isinstance(result['result'],list):
+            if "result" in result and isinstance(result['result'], list):
                 newfiles = []
                 deletedfiles = self.filelist.copy()
                 for item in result['result']:
@@ -51,10 +51,23 @@ class KlippyFiles():
                 if len(deletedfiles) > 0:
                     for file in deletedfiles:
                         self.remove_file(file)
+        elif method == "server.files.directory":
+            if "result" in result:
+                dir = params['path'][7:] if params['path'].startswith('gcodes/') else params['path']
+                if dir[-1] == '/':
+                    dir = dir[:-1]
 
+                newfiles = []
+                for file in result['result']['files']:
+                    fullpath = "%s/%s" % (dir, file['filename'])
+                    if fullpath not in self.filelist:
+                        newfiles.append(fullpath)
+
+                if len(newfiles) > 0:
+                    self.run_callbacks(newfiles)
         elif method == "server.files.metadata":
             if "error" in result.keys():
-                logging.debug("Error in getting metadata for %s. Retrying in 6 seconds" %(params['filename']))
+                logging.debug("Error in getting metadata for %s. Retrying in 6 seconds" % (params['filename']))
                 return
 
             for x in result['result']:
@@ -64,14 +77,14 @@ class KlippyFiles():
 
                 for thumbnail in self.files[params['filename']]['thumbnails']:
                     thumbnail['local'] = False
-                    if self.gcodes_path != None:
+                    if self.gcodes_path is not None:
                         fpath = os.path.join(self.gcodes_path, params['filename'])
                         fdir = os.path.dirname(fpath)
                         path = os.path.join(fdir, thumbnail['relative_path'])
                         if os.access(path, os.R_OK):
                             thumbnail['local'] = True
                             thumbnail['path'] = path
-                    if thumbnail['local'] == False:
+                    if thumbnail['local'] is False:
                         fdir = os.path.dirname(params['filename'])
                         thumbnail['path'] = os.path.join(fdir, thumbnail['relative_path'])
             self.run_callbacks(mods=[params['filename']])
@@ -84,6 +97,8 @@ class KlippyFiles():
         filename = item['path'] if "path" in item else item['filename']
         if filename in self.filelist:
             logging.info("File already exists: %s" % filename)
+            self.request_metadata(filename)
+            GLib.timeout_add(1000, self.run_callbacks, mods=[filename])
             return
 
         self.filelist.append(filename)
@@ -92,20 +107,22 @@ class KlippyFiles():
             "modified": item['modified']
         }
         self.request_metadata(filename)
-        if notify == True:
+        if notify is True:
             self.run_callbacks(newfiles=[filename])
 
     def add_file_callback(self, callback):
         try:
             self.callbacks.append(callback)
-        except:
+        except Exception:
             logging.debug("Callback not found: %s" % callback)
 
     def process_update(self, data):
         if 'item' in data and data['item']['root'] != 'gcodes':
             return
 
-        if data['action'] == "create_file":
+        if data['action'] == "create_dir":
+            self._screen._ws.klippy.get_file_dir("gcodes/%s" % data['item']['path'], self._callback)
+        elif data['action'] == "create_file":
             self.add_file(data['item'])
         elif data['action'] == "delete_file":
             self.remove_file(data['item']['path'])
@@ -133,7 +150,7 @@ class KlippyFiles():
             return None
 
         thumb = self.files[filename]['thumbnails'][0]
-        if thumb['local'] == False:
+        if thumb['local'] is False:
             return ['http', thumb['path']]
         return ['file', thumb['path']]
 
@@ -157,10 +174,10 @@ class KlippyFiles():
         self.filelist.remove(filename)
         self.files.pop(filename, None)
 
-        if notify == True:
+        if notify is True:
             self.run_callbacks(deletedfiles=[filename])
 
-    def ret_file_data (self, filename):
+    def ret_file_data(self, filename):
         print("Getting file info for %s" % (filename))
         self._screen._ws.klippy.get_file_metadata(filename, self._callback)
 
@@ -171,11 +188,13 @@ class KlippyFiles():
         for cb in self.callbacks:
             GLib.idle_add(cb, newfiles, deletedfiles, mods)
 
+        return False
+
     def get_file_list(self):
         return self.filelist
 
     def get_file_info(self, filename):
         if filename not in self.files:
-            return {"path":None,"modified":0,"size":0}
+            return {"path": None, "modified": 0, "size": 0}
 
         return self.files[filename]

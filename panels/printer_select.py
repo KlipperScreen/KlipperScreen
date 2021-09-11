@@ -27,7 +27,7 @@ class PrinterSelect(ScreenPanel):
         i = 1
         for printer in printers:
             name = list(printer)[0]
-            self.labels[name] = self._gtk.ButtonImage("extruder",name,"color%s" % (i%4))
+            self.labels[name] = self._gtk.ButtonImage("extruder", name, "color%s" % (i % 4))
             self.labels[name].connect("clicked", self._screen.connect_printer_widget, name)
             box.add(self.labels[name])
             i += 1

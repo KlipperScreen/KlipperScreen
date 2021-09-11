@@ -29,15 +29,15 @@ class BedLevelPanel(ScreenPanel):
         elif "bed_screws" in self._screen.printer.get_config_section_list():
             config_section_name = "bed_screws"
 
-        if config_section_name != None:
+        if config_section_name is not None:
             config_section = self._screen.printer.get_config_section(config_section_name)
             for item in config_section:
                 logging.debug("Screws section: %s" % config_section[item])
                 result = re.match(r"([\-0-9\.]+)\s*,\s*([\-0-9\.]+)", config_section[item])
                 if result:
                     screws.append([
-                        round(float(result.group(1)),2),
-                        round(float(result.group(2)),2)
+                        round(float(result.group(1)), 2),
+                        round(float(result.group(2)), 2)
                     ])
 
             screws = sorted(screws, key=lambda x: (float(x[1]), float(x[0])))
@@ -54,8 +54,8 @@ class BedLevelPanel(ScreenPanel):
                 new_screws = []
                 for screw in screws:
                     new_screws.append([
-                        round(float(screw[0]) + self.x_offset,2),
-                        round(float(screw[1]) + self.y_offset,2)
+                        round(float(screw[0]) + self.x_offset, 2),
+                        round(float(screw[1]) + self.y_offset, 2)
                     ])
                 screws = new_screws
 
@@ -99,7 +99,7 @@ class BedLevelPanel(ScreenPanel):
             grid.attach(self.labels['fl'], 2, 1, 1, 1)
             grid.attach(self.labels['fr'], 1, 1, 1, 1)
 
-        self.labels['home'] = self._gtk.ButtonImage("home",_("Home All"),"color2")
+        self.labels['home'] = self._gtk.ButtonImage("home", _("Home All"), "color2")
         self.labels['home'].connect("clicked", self.home)
 
         self.labels['dm'] = self._gtk.ButtonImage("motor-off", _("Disable XY"), "color3")
@@ -109,7 +109,7 @@ class BedLevelPanel(ScreenPanel):
         grid.attach(self.labels['dm'], 0, 1, 1, 1)
 
         if self._printer.config_section_exists("screws_tilt_adjust"):
-            self.labels['screws'] = self._gtk.ButtonImage("refresh",_("Screws Adjust"),"color4")
+            self.labels['screws'] = self._gtk.ButtonImage("refresh", _("Screws Adjust"), "color4")
             self.labels['screws'].connect("clicked", self.screws_tilt_calculate)
             grid.attach(self.labels['screws'], 3, 0, 1, 1)
 
@@ -140,26 +140,27 @@ class BedLevelPanel(ScreenPanel):
 
     def disable_motors(self, widget):
         self._screen._ws.klippy.gcode_script(
-            "M18" # Disable motors
+            "M18"  # Disable motors
         )
 
     def process_update(self, action, data):
         if action == "notify_gcode_response":
             result = re.match(
-                "^// (.*) : X ([\-0-9\.]+), Y ([\-0-9\.]+), Z [\-0-9\.]+ : Adjust -> ([CW]+ [0-9:]+)",
+                "^// (.*) : [xX= ]+([\\-0-9\\.]+), [yY= ]+([\\-0-9\\.]+), [zZ= ]+[\\-0-9\\.]+ :" +
+                " (Adjust ->|adjust) ([CW]+ [0-9:]+)",
                 data
             )
             if result:
-                screw_labels = ['fl','fr','bl','br']
+                screw_labels = ['fl', 'fr', 'bl', 'br']
                 x = int(float(result.group(2)) + self.x_offset)
                 y = int(float(result.group(3)) + self.y_offset)
                 logging.debug(data)
-                logging.debug("X: %s Y: %s" % (x,y))
+                logging.debug("X: %s Y: %s" % (x, y))
                 for i in range(len(self.screws)):
                     logging.debug(self.screws[i])
                     if x == int(float(self.screws[i][0])) and y == int(float(self.screws[i][1])):
                         break
-                self.labels[screw_labels[i]].set_label(result.group(4))
+                self.labels[screw_labels[i]].set_label(result.group(5))
                 self.response_count += 1
                 if self.response_count >= len(self.screws)-1:
                     self._screen.remove_subscription(self.panel_name)

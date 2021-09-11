@@ -17,7 +17,7 @@ def create_panel(*args):
 class PrintPanel(ScreenPanel):
     cur_directory = "gcodes"
     dir_panels = {}
-    filelist = {'gcodes':{'directories':[],'files':[]}}
+    filelist = {'gcodes': {'directories': [], 'files': []}}
 
     def initialize(self, panel_name):
         _ = self.lang.gettext
@@ -27,13 +27,13 @@ class PrintPanel(ScreenPanel):
             "name": _("Name"),
             "date": _("Date")
         }
-        self.sort_char = ["↑","↓"]
+        self.sort_char = ["↑", "↓"]
 
-        sortdir = self._config.get_main_config_option("print_sort_dir","name_asc")
+        sortdir = self._config.get_main_config_option("print_sort_dir", "name_asc")
         sortdir = sortdir.split('_')
-        if sortdir[0] not in ["name","date"] or sortdir[1] not in ["asc","desc"]:
-            sortdir = ["name","asc"]
-        self.sort_current = [sortdir[0], 0 if sortdir[1] == "asc" else 1] # 0 for asc, 1 for desc
+        if sortdir[0] not in ["name", "date"] or sortdir[1] not in ["asc", "desc"]:
+            sortdir = ["name", "asc"]
+        self.sort_current = [sortdir[0], 0 if sortdir[1] == "asc" else 1]  # 0 for asc, 1 for desc
 
         scroll = Gtk.ScrolledWindow()
         scroll.set_property("overlay-scrolling", False)
@@ -46,7 +46,7 @@ class PrintPanel(ScreenPanel):
         sbox.add(sort)
         i = 1
         for name, val in self.sort_items.items():
-            s = self._gtk.Button(val, "color%s" % (i%4))
+            s = self._gtk.Button(val, "color%s" % (i % 4))
             s.set_label(val)
             if name == sortdir[0]:
                 s.set_label("%s %s" % (s.get_label(), self.sort_char[self.sort_current[1]]))
@@ -82,8 +82,6 @@ class PrintPanel(ScreenPanel):
 
         scroll.add(self.dir_panels['gcodes'])
         self.scroll = scroll
-        self.control['back'].disconnect_by_func(self._screen._menu_go_back)
-        self.control['back'].connect("clicked", self.back)
         self.content.add(box)
         self._screen.files.add_file_callback(self._callback)
 
@@ -97,12 +95,12 @@ class PrintPanel(ScreenPanel):
     def add_directory(self, directory, show=True):
         parent_dir = '/'.join(directory.split('/')[:-1])
         if directory not in self.filelist:
-            self.filelist[directory] = {'directories':[],'files':[],'modified': 0}
+            self.filelist[directory] = {'directories': [], 'files': [], 'modified': 0}
             self.filelist[parent_dir]['directories'].append(directory)
 
         if directory not in self.labels['directories']:
             frame = Gtk.Frame()
-            frame.set_property("shadow-type",Gtk.ShadowType.NONE)
+            frame.set_property("shadow-type", Gtk.ShadowType.NONE)
             frame.get_style_context().add_class("frame-item")
 
             name = Gtk.Label()
@@ -122,7 +120,7 @@ class PrintPanel(ScreenPanel):
             labels.set_valign(Gtk.Align.CENTER)
             labels.set_halign(Gtk.Align.START)
 
-            actions = self._gtk.ButtonImage("load",None,"color3")
+            actions = self._gtk.ButtonImage("load", None, "color3")
             actions.connect("clicked", self.change_dir, directory)
             actions.set_hexpand(False)
             actions.set_halign(Gtk.Align.END)
@@ -151,21 +149,21 @@ class PrintPanel(ScreenPanel):
         reverse = False if self.sort_current[1] == 0 else True
         if self.sort_current[0] == "date":
             dirs = sorted(self.filelist[parent_dir]['directories'], reverse=reverse,
-                key=lambda item: self.filelist[item]['modified'])
+                          key=lambda item: self.filelist[item]['modified'])
         else:
             dirs = sorted(self.filelist[parent_dir]['directories'], reverse=reverse)
         pos = dirs.index(directory)
 
         self.dir_panels[parent_dir].insert_row(pos)
         self.dir_panels[parent_dir].attach(self.directories[directory], 0, pos, 1, 1)
-        if show == True:
+        if show is True:
             self.dir_panels[parent_dir].show_all()
 
     def add_file(self, filepath, show=True):
         _ = self.lang.gettext
 
         fileinfo = self._screen.files.get_file_info(filepath)
-        if fileinfo == None:
+        if fileinfo is None:
             return
 
         dir = ("gcodes/%s" % filepath).split('/')[:-1]
@@ -182,13 +180,14 @@ class PrintPanel(ScreenPanel):
                 curdir = "/".join(dir[0:i+1])
                 if curdir != "gcodes" and fileinfo['modified'] > self.filelist[curdir]['modified']:
                     self.filelist[curdir]['modified'] = fileinfo['modified']
-                    self.labels['directories'][curdir]['info'].set_markup("<small>%s: <b>%s</b></small>" %
+                    self.labels['directories'][curdir]['info'].set_markup(
+                        "<small>%s: <b>%s</b></small>" %
                         (_("Modified"), datetime.fromtimestamp(fileinfo['modified']).strftime("%Y-%m-%d %H:%M")))
             self.filelist[directory]['files'].append(filename)
 
         if filepath not in self.files:
             frame = Gtk.Frame()
-            frame.set_property("shadow-type",Gtk.ShadowType.NONE)
+            frame.set_property("shadow-type", Gtk.ShadowType.NONE)
             frame.get_style_context().add_class("frame-item")
 
             name = Gtk.Label()
@@ -208,7 +207,7 @@ class PrintPanel(ScreenPanel):
             labels.set_valign(Gtk.Align.CENTER)
             labels.set_halign(Gtk.Align.START)
 
-            actions = self._gtk.ButtonImage("print",None,"color3")
+            actions = self._gtk.ButtonImage("print", None, "color3")
             actions.connect("clicked", self.confirm_print, filepath)
             actions.set_hexpand(False)
             actions.set_halign(Gtk.Align.END)
@@ -219,7 +218,7 @@ class PrintPanel(ScreenPanel):
 
             icon = self._gtk.Image("file.svg", False, 1.6, 1.6)
             pixbuf = self.get_file_image(filepath)
-            if pixbuf != None:
+            if pixbuf is not None:
                 icon.set_from_pixbuf(pixbuf)
 
             file.add(icon)
@@ -236,8 +235,10 @@ class PrintPanel(ScreenPanel):
 
         reverse = False if self.sort_current[1] == 0 else True
         if self.sort_current[0] == "date":
-            files = sorted(self.filelist[directory]['files'], reverse=reverse,
-                key=lambda item: self._screen.files.get_file_info(("%s/%s" %(directory,item))[7:])['modified'])
+            files = sorted(
+                self.filelist[directory]['files'], reverse=reverse,
+                key=lambda item: self._screen.files.get_file_info(("%s/%s" % (directory, item))[7:])['modified']
+            )
         else:
             files = sorted(self.filelist[directory]['files'], reverse=reverse)
         pos = files.index(filename)
@@ -245,14 +246,14 @@ class PrintPanel(ScreenPanel):
 
         self.dir_panels[directory].insert_row(pos)
         self.dir_panels[directory].attach(self.files[filepath], 0, pos, 1, 1)
-        if show == True:
+        if show is True:
             self.dir_panels[directory].show_all()
 
-    def back(self, widget):
+    def back(self):
         if len(self.cur_directory.split('/')) > 1:
             self.change_dir(None, '/'.join(self.cur_directory.split('/')[:-1]))
-        else:
-            self._screen._menu_go_back()
+            return True
+        return False
 
     def change_dir(self, widget, directory):
         if directory not in self.dir_panels:
@@ -286,14 +287,16 @@ class PrintPanel(ScreenPanel):
     def confirm_print(self, widget, filename):
         _ = self.lang.gettext
         buttons = [
-            {"name":_("Print"), "response": Gtk.ResponseType.OK},
-            {"name":_("Cancel"),"response": Gtk.ResponseType.CANCEL}
+            {"name": _("Print"), "response": Gtk.ResponseType.OK},
+            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
         ]
 
         label = Gtk.Label()
-        label.set_markup("%s <b>%s</b>%s" % (_("Are you sure you want to print"), filename, _("?")))
+        label.set_markup("<b>%s</b>\n" % (filename))
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
+        label.set_vexpand(True)
+        label.set_valign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
@@ -302,16 +305,15 @@ class PrintPanel(ScreenPanel):
         grid.set_size_request(self._screen.width - 60, -1)
 
         pixbuf = self.get_file_image(filename, 8, 3.2)
-        if pixbuf != None:
+        if pixbuf is not None:
             image = Gtk.Image.new_from_pixbuf(pixbuf)
             grid.attach_next_to(image, label, Gtk.PositionType.BOTTOM, 1, 3)
 
-        #table.attach(label, 0, 1, 0, 1, Gtk.AttachOptions.SHRINK | Gtk.AttachOptions.FILL)
         grid.set_vexpand(True)
         grid.set_halign(Gtk.Align.CENTER)
         grid.set_valign(Gtk.Align.CENTER)
 
-        dialog = self._gtk.Dialog(self._screen, buttons, grid, self.confirm_print_response,  filename)
+        dialog = self._gtk.Dialog(self._screen, buttons, grid, self.confirm_print_response, filename)
 
     def confirm_print_response(self, widget, response_id, filename):
         widget.destroy()
@@ -352,7 +354,7 @@ class PrintPanel(ScreenPanel):
         _ = self.lang.gettext
 
         fileinfo = self._screen.files.get_file_info(filename)
-        if fileinfo == None:
+        if fileinfo is None:
             return
 
         return "<small>%s: <b>%s</b> - %s: <b>%s</b>\n%s: <b>%s</b></small>" % (
@@ -364,9 +366,9 @@ class PrintPanel(ScreenPanel):
             self.get_print_time(filename)
         )
 
-    def get_print_time (self, filename):
+    def get_print_time(self, filename):
         fileinfo = self._screen.files.get_file_info(filename)
-        if fileinfo == None:
+        if fileinfo is None:
             return
 
         if "estimated_time" in fileinfo:
@@ -379,17 +381,17 @@ class PrintPanel(ScreenPanel):
                 print_str = "%sd " % print_val
 
             # Take remainder from days and divide by hours
-            print_val = int((print_time%86400)/3600)
+            print_val = int((print_time % 86400)/3600)
             if print_val > 0:
                 print_str = "%s%sh " % (print_str, print_val)
 
-            print_val = int(((print_time%86400)%3600)/60)
+            print_val = int(((print_time % 86400) % 3600)/60)
             print_str = "%s%sm" % (print_str, print_val)
             return print_str
         return "Unavailable"
 
     def reload_files(self, widget=None):
-        self.filelist = {'gcodes':{'directories':[],'files':[]}}
+        self.filelist = {'gcodes': {'directories': [], 'files': []}}
         for dirpan in self.dir_panels:
             for child in self.dir_panels[dirpan].get_children():
                 self.dir_panels[dirpan].remove(child)
@@ -400,14 +402,15 @@ class PrintPanel(ScreenPanel):
 
     def update_file(self, filename):
         if filename not in self.labels['files']:
+            logging.debug("Cannot update file, file not in labels: %s" % filename)
             return
 
-        print("Updating file %s" % filename)
+        logging.info("Updating file %s" % filename)
         self.labels['files'][filename]['info'].set_markup(self.get_file_info_str(filename))
 
         # Update icon
         pixbuf = self.get_file_image(filename)
-        if pixbuf != None:
+        if pixbuf is not None:
             self.labels['files'][filename]['icon'].set_from_pixbuf(pixbuf)
 
     def _callback(self, newfiles, deletedfiles, updatedfiles=[]):

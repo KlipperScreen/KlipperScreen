@@ -1,35 +1,35 @@
 class KlippyGcodes:
 
-    HOME            = "G28"
-    HOME_X          = "G28 X"
-    HOME_Y          = "G28 Y"
-    HOME_Z          = "G28 Z"
+    HOME = "G28"
+    HOME_X = "G28 X"
+    HOME_Y = "G28 Y"
+    HOME_Z = "G28 Z"
 
-    MOVE            = "G1"
-    MOVE_ABSOLUTE   = "G90"
-    MOVE_RELATIVE   = "G91"
+    MOVE = "G1"
+    MOVE_ABSOLUTE = "G90"
+    MOVE_RELATIVE = "G91"
 
-    EXTRUDE_ABS     = "M82"
-    EXTRUDE_REL     = "M83"
+    EXTRUDE_ABS = "M82"
+    EXTRUDE_REL = "M83"
 
-    SET_EXT_TEMP    = "M104"
-    MAX_EXT_TEMP    = 450
+    SET_EXT_TEMP = "M104"
+    MAX_EXT_TEMP = 450
 
-    SET_BED_TEMP    = "M140"
-    MAX_BED_TEMP    = 150
+    SET_BED_TEMP = "M140"
+    MAX_BED_TEMP = 150
 
-    SET_EXT_FACTOR  = "M221"
-    SET_FAN_SPEED   = "M106"
-    SET_SPD_FACTOR  = "M220"
+    SET_EXT_FACTOR = "M221"
+    SET_FAN_SPEED = "M106"
+    SET_SPD_FACTOR = "M220"
 
     PROBE_CALIBRATE = "PROBE_CALIBRATE"
-    PROBE_MOVE      = "TESTZ Z="
-    PROBE_ABORT     = "ABORT"
-    PROBE_ACCEPT    = "ACCEPT"
+    PROBE_MOVE = "TESTZ Z="
+    PROBE_ABORT = "ABORT"
+    PROBE_ACCEPT = "ACCEPT"
 
-    SAVE_CONFIG     = "SAVE_CONFIG"
-    RESTART         = "RESTART"
-    FIRMWARE_RESTART= "FIRMWARE_RESTART"
+    SAVE_CONFIG = "SAVE_CONFIG"
+    RESTART = "RESTART"
+    FIRMWARE_RESTART = "FIRMWARE_RESTART"
 
 
     @staticmethod
@@ -46,7 +46,7 @@ class KlippyGcodes:
 
     @staticmethod
     def set_fan_speed(speed):
-        speed = str( int(float(int(speed) % 101)/100*255) )
+        speed = str(int(float(int(speed) % 101)/100*255))
         return "%s S%s" % (KlippyGcodes.SET_FAN_SPEED, speed)
 
     @staticmethod

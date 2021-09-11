@@ -31,11 +31,11 @@ class MenuPanel(ScreenPanel):
         })
         self.arrangeMenuItems(self.items, 4)
 
-    def arrangeMenuItems (self, items, columns, expandLast=False):
+    def arrangeMenuItems(self, items, columns, expandLast=False):
         for child in self.grid.get_children():
             self.grid.remove(child)
 
-        l = len(items)
+        length = len(items)
         i = 0
         for item in items:
             key = list(item)[0]
@@ -47,7 +47,7 @@ class MenuPanel(ScreenPanel):
             row = int(i/columns)
             width = 1
 
-            if expandLast == True and i+1 == l and l%2 == 1:
+            if expandLast is True and i+1 == length and length % 2 == 1:
                 width = 2
 
             self.grid.attach(self.labels[key], col, row, width, 1)
@@ -66,13 +66,13 @@ class MenuPanel(ScreenPanel):
             parsed_name = j2_temp.render()
 
             b = self._gtk.ButtonImage(
-                item['icon'], parsed_name, "color"+str((i%4)+1)
+                item['icon'], parsed_name, "color"+str((i % 4)+1)
             )
-            if item['panel'] != False:
+            if item['panel'] is not False:
                 b.connect("clicked", self.menu_item_clicked, item['panel'], item)
-            elif item['method'] != False:
-                params = item['params'] if item['params'] != False else {}
-                if item['confirm'] != False:
+            elif item['method'] is not False:
+                params = item['params'] if item['params'] is not False else {}
+                if item['confirm'] is not False:
                     b.connect("clicked", self._screen._confirm_send_action, item['confirm'], item['method'], params)
                 else:
                     b.connect("clicked", self._screen._send_action, item['method'], params)
@@ -81,9 +81,9 @@ class MenuPanel(ScreenPanel):
             self.labels[key] = b
 
     def evaluate_enable(self, enable):
-        if enable == True:
+        if enable is True:
             return True
-        if enable == False:
+        if enable is False:
             return False
 
         try:
@@ -94,6 +94,6 @@ class MenuPanel(ScreenPanel):
             if result == 'True':
                 return True
             return False
-        except:
+        except Exception:
             logging.debug("Error evaluating enable statement: %s", enable)
             return False

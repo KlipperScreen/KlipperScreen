@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="64"
    height="64"
    viewBox="0 0 63.999997 64"
    id="svg4160"
    version="1.1"
    sodipodi:docname="backspace.svg"
-   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)">
+   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <sodipodi:namedview
-     pagecolor="#ffffff"
+     pagecolor="#002b36"
      bordercolor="#666666"
      borderopacity="1"
      objecttolerance="10"
      gridtolerance="10"
      guidetolerance="10"
-     inkscape:pageopacity="0"
+     inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:window-width="1600"
-     inkscape:window-height="837"
+     inkscape:window-height="826"
      id="namedview8"
-     showgrid="true"
-     inkscape:zoom="5.2333335"
-     inkscape:cx="18.847826"
-     inkscape:cy="23.569119"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     showgrid="false"
+     inkscape:zoom="7.4010512"
+     inkscape:cx="19.591811"
+     inkscape:cy="33.30608"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer2"
-     inkscape:document-rotation="0">
+     inkscape:document-rotation="0"
+     inkscape:pagecheckerboard="false">
     <inkscape:grid
        type="xygrid"
        id="grid832" />
@@ -49,7 +50,6 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -58,12 +58,12 @@
      style="display:inline;stroke:none"
      transform="translate(-3.5328446,2.2636422)">
     <g
-       id="g837"
-       transform="translate(2.0000002,2)">
+       id="g4020"
+       style="display:inline;stroke:none">
       <path
          id="rect838"
-         style="opacity:0.998;fill:#fdf6e3;fill-opacity:1;stroke:#fdf6e3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-         d="m 8.532829,27.736358 16,19 h 34 V 8.7363577 h -34 z"
+         style="opacity:0.998;fill:#eee8d5;fill-opacity:1;stroke:#eee8d5;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+         d="m 10.532829,29.736358 16,19 h 34 v -38 h -34 z"
          sodipodi:nodetypes="cccccc" />
       <rect
          style="opacity:0.998;fill:#073642;stroke-width:1.99999;stroke-linecap:round;stroke-linejoin:round"
@@ -71,7 +71,7 @@
          width="30"
          height="10"
          x="-8.0728378"
-         y="41.152298"
+         y="43.980724"
          rx="2"
          ry="2"
          transform="rotate(-45)" />
@@ -80,7 +80,7 @@
          id="rect852-6"
          width="30"
          height="10"
-         x="-61.152298"
+         x="-63.980724"
          y="-11.92716"
          rx="2"
          ry="2"
