@@ -76,6 +76,14 @@ moonraker_api_key: False
 
 # Define the z_babystep intervals in a CSV list. Currently only 2 are supported
 z_babystep_values: 0.01, 0.05
+
+# Define webcam properties
+# Protocol for webcam, could be http, https (anything that will work in VLC)
+webcam_protocol: http
+webcam_host: # Defaults to moonraker_host
+webcam_port: 80 # Port to access stream on
+# URL to append
+webcam_url: webcam/?action=stream
 ```
 
 

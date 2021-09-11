@@ -205,7 +205,7 @@ class KlipperScreen(Gtk.Window):
         if len(self.subscriptions) > 0:
             self.subscriptions = []
         for panel in panels:
-            del self.panels[panel]
+            self._del_panel(panel)
         self.printer_initializing(_("Connecting to %s") % name)
 
         self.printer.set_callbacks({
@@ -265,6 +265,15 @@ class KlipperScreen(Gtk.Window):
 
         self._ws.klippy.object_subscription(requested_updates)
 
+    def _del_panel(self, panel):
+        if panel not in self.panels:
+            return
+
+        if hasattr(self.panels[panel], "destroy"):
+            self.panels[panel].destroy()
+
+        del self.panels[panel]
+
     def _load_panel(self, panel, *args):
         if panel not in self.load_panel:
             logging.debug("Loading panel: %s" % panel)
@@ -300,7 +309,7 @@ class KlipperScreen(Gtk.Window):
                     self.panels[panel_name].initialize(panel_name)
             except Exception:
                 if panel_name in self.panels:
-                    del self.panels[panel_name]
+                    self._del_panel(panel_name)
                 logging.exception("Unable to load panel %s" % type)
                 self.show_error_modal("Unable to load panel %s" % type)
                 return
@@ -494,6 +503,8 @@ class KlipperScreen(Gtk.Window):
         if len(self._cur_panels) > 0:
             self.base_panel.remove(self.panels[self._cur_panels[-1]].get_content())
             if pop is True:
+                if hasattr(self.panels[self._cur_panels[-1]], "deactivate"):
+                    self.panels[self._cur_panels[-1]].deactivate()
                 self._cur_panels.pop()
                 if len(self._cur_panels) > 0:
                     self.base_panel.add_content(self.panels[self._cur_panels[-1]])
@@ -606,7 +617,7 @@ class KlipperScreen(Gtk.Window):
         for panel in list(self.panels):
             if panel in ["printer_select", "splash_screen"]:
                 continue
-            # del self.panels[panel]
+            # self._del_panel(panel)
 
     def state_error(self, prev_state):
         if "printer_select" in self._cur_panels:
@@ -632,7 +643,7 @@ class KlipperScreen(Gtk.Window):
         for panel in list(self.panels):
             if panel in ["printer_select", "splash_screen"]:
                 continue
-            del self.panels[panel]
+            self._del_panel(panel)
 
     def state_paused(self, prev_state):
         if "job_status" not in self._cur_panels:
@@ -827,7 +838,7 @@ class KlipperScreen(Gtk.Window):
         self.ws_subscribe()
         if "job_status" in self.panels:
             self.remove_subscription("job_status")
-            del self.panels["job_status"]
+            self._del_panel("job_status")
 
     def printer_printing(self):
         self.close_popup_message()
