@@ -134,6 +134,12 @@ class KlipperScreenConfig:
             {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
             {"side_macro_shortcut": {"section": "main", "name": _("Macro shortcut on sidebar"), "type": "binary",
                 "value": "True", "callback": screen.toggle_macro_shortcut}},
+            {"font_size": {"section": "main", "name": _("Font Size"), "type": "dropdown",
+                "value": "medium", "callback": screen.restart_warning, "options":[
+                    {"name": _("Small"), "value": "small"},
+                    {"name": _("Medium (default)"), "value": "medium"},
+                    {"name": _("Large"), "value": "large"},
+            ]}},
             #{"": {"section": "main", "name": _(""), "type": ""}}
         ]
 

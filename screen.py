@@ -430,7 +430,14 @@ class KlipperScreen(Gtk.Window):
         css = open(klipperscreendir + "/styles/%s/style.css" % (self.theme))
         css_data = css.read()
         css.close()
+
         self.font_size = self.gtk.get_font_size()
+        fontsize_type = self._config.get_main_config_option("font_size","medium")
+        if fontsize_type != "medium":
+            if fontsize_type == "small":
+                self.font_size = round(self.font_size * 0.91)
+            elif (fontsize_type == "large"):
+                self.font_size = round(self.font_size * 1.09)
         css_data = css_data.replace("KS_FONT_SIZE",str(self.font_size))
 
         style_provider = Gtk.CssProvider()
