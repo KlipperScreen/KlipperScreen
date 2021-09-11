@@ -14,4 +14,4 @@ jobs:
           use-black: false
           use-mypy: false
           use-isort: false
-          extra-pycodestyle-options: "--ignore=E226,E301,E302,E303,E402,W503,W504 --max-line-length=120 --max-doc-length=80"
+          extra-pycodestyle-options: "--ignore=E226,E301,E302,E303,E402,W503,W504 --max-line-length=120 --max-doc-length=120"
