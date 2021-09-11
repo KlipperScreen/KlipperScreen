@@ -36,10 +36,10 @@ class BedMeshPanel(ScreenPanel):
         scroll.add(self.labels['profiles'])
 
 
-        addprofile = self._gtk.ButtonImage("increase","  %s" % _("Add bed mesh profile"),
-                "color1", .5, .5, Gtk.PositionType.LEFT, False)
+        addprofile = self._gtk.ButtonImage("increase", "  %s" % _("Add bed mesh profile"),
+                                           "color1", .5, .5, Gtk.PositionType.LEFT, False)
         addprofile.connect("clicked", self.show_create_profile)
-        addprofile.set_size_request(60,0)
+        addprofile.set_size_request(60, 0)
         addprofile.set_hexpand(False)
         addprofile.set_halign(Gtk.Align.END)
         abox = Gtk.Box(spacing=0)
@@ -63,7 +63,7 @@ class BedMeshPanel(ScreenPanel):
             self.content.remove(child)
         self.content.add(self.labels['main_box'])
 
-        am = self._screen.printer.get_stat("bed_mesh","profile_name")
+        am = self._screen.printer.get_stat("bed_mesh", "profile_name")
         self.activate_mesh(am)
 
     def activate_mesh(self, profile):
@@ -74,12 +74,12 @@ class BedMeshPanel(ScreenPanel):
         if profile != self.active_mesh:
             if profile not in self.profiles:
                 self.add_profile(profile)
-            if self.active_mesh != None and self.active_mesh in self.profiles:
+            if self.active_mesh is not None and self.active_mesh in self.profiles:
                 a = self.profiles[self.active_mesh]
                 a['buttons'].remove(a['refresh'])
                 a['buttons'].pack_start(a['load'], False, False, 0)
             self.active_mesh = profile
-            if self.active_mesh != None:
+            if self.active_mesh is not None:
                 a = self.profiles[profile]
                 a['buttons'].remove(a['load'])
                 a['buttons'].pack_start(a['refresh'], False, False, 0)
@@ -89,7 +89,7 @@ class BedMeshPanel(ScreenPanel):
         _ = self.lang.gettext
 
         frame = Gtk.Frame()
-        frame.set_property("shadow-type",Gtk.ShadowType.NONE)
+        frame.set_property("shadow-type", Gtk.ShadowType.NONE)
 
         name = Gtk.Label()
         name.set_markup("<big><b>%s</b></big>" % (profile))
@@ -99,39 +99,39 @@ class BedMeshPanel(ScreenPanel):
         name.set_line_wrap(True)
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        load = self._gtk.ButtonImage("load",_("Load"),"color2")
+        load = self._gtk.ButtonImage("load", _("Load"), "color2")
         load.connect("clicked", self.send_load_mesh, profile)
-        load.set_size_request(60,0)
+        load.set_size_request(60, 0)
         load.set_hexpand(False)
         load.set_halign(Gtk.Align.END)
 
-        refresh = self._gtk.ButtonImage("refresh",_("Calibrate"),"color4")
+        refresh = self._gtk.ButtonImage("refresh", _("Calibrate"), "color4")
         refresh.connect("clicked", self.calibrate_mesh)
-        refresh.set_size_request(60,0)
+        refresh.set_size_request(60, 0)
         refresh.set_hexpand(False)
         refresh.set_halign(Gtk.Align.END)
 
-        view = self._gtk.ButtonImage("bed-level",_("View Mesh"),"color1")
+        view = self._gtk.ButtonImage("bed-level", _("View Mesh"), "color1")
         view.connect("clicked", self.show_mesh, profile)
-        view.set_size_request(60,0)
+        view.set_size_request(60, 0)
         view.set_hexpand(False)
         view.set_halign(Gtk.Align.END)
 
-        info = self._gtk.ButtonImage("info",None,"color3")
+        info = self._gtk.ButtonImage("info", None, "color3")
         info.connect("clicked", self.show_mesh, profile)
-        info.set_size_request(60,0)
+        info.set_size_request(60, 0)
         info.set_hexpand(False)
         info.set_halign(Gtk.Align.END)
 
-        save = self._gtk.ButtonImage("sd",_("Save"),"color3")
+        save = self._gtk.ButtonImage("sd", _("Save"), "color3")
         save.connect("clicked", self.send_save_mesh, profile)
-        save.set_size_request(60,0)
+        save.set_size_request(60, 0)
         save.set_hexpand(False)
         save.set_halign(Gtk.Align.END)
 
-        delete = self._gtk.ButtonImage("cancel",_("Delete"),"color3")
+        delete = self._gtk.ButtonImage("cancel", _("Delete"), "color3")
         delete.connect("clicked", self.send_remove_mesh, profile)
-        delete.set_size_request(60,0)
+        delete.set_size_request(60, 0)
         delete.set_hexpand(False)
         delete.set_halign(Gtk.Align.END)
 
@@ -153,7 +153,7 @@ class BedMeshPanel(ScreenPanel):
             buttons.pack_start(refresh, False, False, 0)
         else:
             buttons.pack_start(load, False, False, 0)
-        #buttons.pack_end(info, False, False, 0)
+        # buttons.pack_end(info, False, False, 0)
 
         if profile != "default":
             buttons.pack_end(save, False, False, 0)
@@ -173,10 +173,10 @@ class BedMeshPanel(ScreenPanel):
             "view": view,
         }
 
-        l = list(self.profiles)
-        if "default" in l:
-            l.remove('default')
-        profiles = sorted(l)
+        pl = list(self.profiles)
+        if "default" in pl:
+            pl.remove('default')
+        profiles = sorted(pl)
         pos = profiles.index(profile)+1 if profile != "default" else 0
 
         self.labels['profiles'].insert_row(pos)
@@ -184,7 +184,7 @@ class BedMeshPanel(ScreenPanel):
         self.labels['profiles'].show_all()
 
     def back(self):
-        if self.show_create == True:
+        if self.show_create is True:
             self.remove_create()
             return True
         return False
@@ -215,7 +215,7 @@ class BedMeshPanel(ScreenPanel):
                     self.activate_mesh(data['bed_mesh']['profile_name'])
 
     def remove_create(self):
-        if self.show_create == False:
+        if self.show_create is False:
             return
 
         self._screen.remove_keyboard()
@@ -230,10 +230,10 @@ class BedMeshPanel(ScreenPanel):
         if profile not in self.profiles:
             return
 
-        l = list(self.profiles)
-        if "default" in l:
-            l.remove('default')
-        profiles = sorted(l)
+        pl = list(self.profiles)
+        if "default" in pl:
+            pl.remove('default')
+        profiles = sorted(pl)
         pos = profiles.index(profile)+1 if profile != "default" else 0
         self.labels['profiles'].remove_row(pos)
         del self.profiles[profile]
@@ -266,23 +266,23 @@ class BedMeshPanel(ScreenPanel):
 
             box = Gtk.Box(spacing=5)
             box.set_size_request(self._gtk.get_content_width(), self._gtk.get_content_height() -
-                    self._screen.keyboard_height - 20)
+                                 self._screen.keyboard_height - 20)
             box.set_hexpand(True)
             box.set_vexpand(False)
             self.labels['create_profile'].add(box)
 
-            l = self._gtk.Label(_("Profile Name:"))
-            l.set_hexpand(False)
+            pl = self._gtk.Label(_("Profile Name:"))
+            pl.set_hexpand(False)
             entry = Gtk.Entry()
             entry.set_hexpand(True)
 
-            save = self._gtk.ButtonImage("sd",_("Save"),"color3")
+            save = self._gtk.ButtonImage("sd", _("Save"), "color3")
             save.set_hexpand(False)
             save.connect("clicked", self.create_profile)
 
 
             self.labels['profile_name'] = entry
-            box.pack_start(l, False, False, 5)
+            box.pack_start(pl, False, False, 5)
             box.pack_start(entry, True, True, 5)
             box.pack_start(save, False, False, 5)
 
@@ -297,20 +297,20 @@ class BedMeshPanel(ScreenPanel):
         _ = self.lang.gettext
 
         bm = self._printer.get_config_section("bed_mesh %s" % profile)
-        if bm == False:
+        if bm is False:
             logging.info("Unable to load profile: %s" % profile)
             return
 
         if profile == self.active_mesh:
             abm = self._printer.get_stat("bed_mesh")
-            if abm == None:
+            if abm is None:
                 logging.info("Unable to load active mesh: %s" % profile)
                 return
             x_range = [int(abm['mesh_min'][0]), int(abm['mesh_max'][0])]
             y_range = [int(abm['mesh_min'][1]), int(abm['mesh_max'][1])]
             z_range = [min(min(abm['mesh_matrix'])), max(max(abm['mesh_matrix']))]
             counts = [len(abm['mesh_matrix'][0]), len(abm['mesh_matrix'])]
-            deltas = [(x_range[1] - x_range[0] )/ (counts[0]-1), (y_range[1] - y_range[0]) / (counts[1]-1)]
+            deltas = [(x_range[1] - x_range[0]) / (counts[0]-1), (y_range[1] - y_range[0]) / (counts[1]-1)]
             x = [(i*deltas[0])+x_range[0] for i in range(counts[0])]
             y = [(i*deltas[0])+y_range[0] for i in range(counts[1])]
             x, y = np.meshgrid(x, y)
@@ -319,14 +319,15 @@ class BedMeshPanel(ScreenPanel):
             x_range = [int(bm['min_x']), int(bm['max_x'])]
             y_range = [int(bm['min_y']), int(bm['max_y'])]
             z_range = [min(min(bm['points'])), max(max(bm['points']))]
-            deltas = [(x_range[1] - x_range[0] )/ (int(bm['x_count'])-1), (y_range[1] - y_range[0]) / (int(bm['y_count'])-1)]
+            deltas = [(x_range[1] - x_range[0]) / (int(bm['x_count'])-1),
+                      (y_range[1] - y_range[0]) / (int(bm['y_count'])-1)]
             x = [(i*deltas[0])+x_range[0] for i in range(bm['x_count'])]
             y = [(i*deltas[0])+y_range[0] for i in range(bm['y_count'])]
             x, y = np.meshgrid(x, y)
             z = np.asarray(bm['points'])
 
         rc('axes', edgecolor="#fff", labelcolor="#fff")
-        rc(('xtick','ytick'), color="#fff")
+        rc(('xtick', 'ytick'), color="#fff")
         fig = plt.figure()
         fig.patch.set_facecolor("black")
         ax = Axes3D(fig, auto_add_to_figure=False)

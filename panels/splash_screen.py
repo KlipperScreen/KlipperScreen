@@ -44,7 +44,6 @@ class SplashScreenPanel(ScreenPanel):
         main.pack_end(self.labels['text'], True, True, 0)
 
         self.content.add(main)
-        #self.layout.put(box, 0, 0)
 
     def update_text(self, text):
         self.labels['text'].set_text(text)
@@ -58,20 +57,20 @@ class SplashScreenPanel(ScreenPanel):
         _ = self.lang.gettext
 
         if "firmware_restart" not in self.labels:
-            self.labels['printer_select'] = self._gtk.ButtonImage("shuffle",_("Change Printer"))
+            self.labels['printer_select'] = self._gtk.ButtonImage("shuffle", _("Change Printer"))
             self.labels['printer_select'].connect("clicked", self._screen.show_printer_select)
-            self.labels['menu'] = self._gtk.ButtonImage("settings",_("Menu"),"color4")
+            self.labels['menu'] = self._gtk.ButtonImage("settings", _("Menu"), "color4")
             self.labels['menu'].connect("clicked", self._screen._go_to_submenu, "")
-            self.labels['power'] = self._gtk.ButtonImage("shutdown",_("Power On Printer"),"color3")
-            self.labels['restart'] = self._gtk.ButtonImage("refresh",_("Restart"),"color1")
+            self.labels['power'] = self._gtk.ButtonImage("shutdown", _("Power On Printer"), "color3")
+            self.labels['restart'] = self._gtk.ButtonImage("refresh", _("Restart"), "color1")
             self.labels['restart'].connect("clicked", self.restart)
-            self.labels['firmware_restart'] = self._gtk.ButtonImage("refresh",_("Firmware Restart"),"color2")
+            self.labels['firmware_restart'] = self._gtk.ButtonImage("refresh", _("Firmware Restart"), "color2")
             self.labels['firmware_restart'].connect("clicked", self.firmware_restart)
 
         self.clear_action_bar()
 
         devices = [i for i in self._printer.get_power_devices() if i.lower().startswith('printer')] if (
-                self._printer is not None) else []
+            self._printer is not None) else []
         logging.debug("Power devices: %s" % devices)
         if len(devices) > 0:
             logging.debug("Adding power button")

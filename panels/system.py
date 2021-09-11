@@ -12,7 +12,8 @@ from ks_includes.screen_panel import ScreenPanel
 def create_panel(*args):
     return SystemPanel(*args)
 
-ALLOWED_SERVICES = ["KlipperScreen","MoonCord","klipper","moonraker"]
+
+ALLOWED_SERVICES = ["KlipperScreen", "MoonCord", "klipper", "moonraker"]
 
 class SystemPanel(ScreenPanel):
     def initialize(self, panel_name):
@@ -21,20 +22,20 @@ class SystemPanel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
 
-        restart = self._gtk.ButtonImage('refresh',"\n".join(_('Klipper Restart').split(' ')),'color1')
+        restart = self._gtk.ButtonImage('refresh', "\n".join(_('Klipper Restart').split(' ')), 'color1')
         restart.connect("clicked", self.restart_klippy)
         restart.set_vexpand(False)
-        firmrestart = self._gtk.ButtonImage('refresh',"\n".join(_('Firmware Restart').split(' ')),'color2')
+        firmrestart = self._gtk.ButtonImage('refresh', "\n".join(_('Firmware Restart').split(' ')), 'color2')
         firmrestart.connect("clicked", self.restart_klippy, "firmware")
         firmrestart.set_vexpand(False)
 
-        reboot = self._gtk.ButtonImage('refresh',_('System\nRestart'),'color3')
+        reboot = self._gtk.ButtonImage('refresh', _('System\nRestart'), 'color3')
         reboot.connect("clicked", self._screen._confirm_send_action,
-            _("Are you sure you wish to reboot the system?"), "machine.reboot")
+                       _("Are you sure you wish to reboot the system?"), "machine.reboot")
         reboot.set_vexpand(False)
-        shutdown = self._gtk.ButtonImage('shutdown',_('System\nShutdown'),'color4')
+        shutdown = self._gtk.ButtonImage('shutdown', _('System\nShutdown'), 'color4')
         shutdown.connect("clicked", self._screen._confirm_send_action,
-            _("Are you sure you wish to shutdown the system?"), "machine.shutdown")
+                         _("Are you sure you wish to shutdown the system?"), "machine.shutdown")
         shutdown.set_vexpand(False)
 
         info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -42,9 +43,9 @@ class SystemPanel(ScreenPanel):
         info.set_valign(Gtk.Align.CENTER)
 
         self.labels['loadavg'] = Gtk.Label("temp")
-        #self.system_timeout = GLib.timeout_add(1000, self.update_system_load)
 
-        self.labels['klipper_version'] = Gtk.Label(_("Klipper Version") +
+        self.labels['klipper_version'] = Gtk.Label(
+            _("Klipper Version") +
             (": %s" % self._screen.printer.get_klipper_version()))
         self.labels['klipper_version'].set_margin_top(15)
 
@@ -64,7 +65,7 @@ class SystemPanel(ScreenPanel):
         update_resp = self._screen.apiclient.send_request("machine/update/status")
         self.update_status = False
 
-        if update_resp == False:
+        if update_resp is False:
             logging.info("No update manager configured")
         else:
             self.update_status = update_resp['result']
@@ -79,15 +80,14 @@ class SystemPanel(ScreenPanel):
                 self.labels["%s_status" % prog] = self._gtk.Button()
                 self.labels["%s_status" % prog].set_hexpand(False)
                 self.labels["%s_status" % prog].connect("clicked", self.show_commit_history, prog)
-                self.labels["%s_info" % prog] = self._gtk.ButtonImage("info",None, None, .7, .7)
+                self.labels["%s_info" % prog] = self._gtk.ButtonImage("info", None, None, .7, .7)
                 self.labels["%s_info" % prog].connect("clicked", self.show_commit_history, prog)
 
                 if prog in ALLOWED_SERVICES:
-                    self.labels["%s_restart" % prog] = self._gtk.ButtonImage("refresh",None, None, .7, .7)
+                    self.labels["%s_restart" % prog] = self._gtk.ButtonImage("refresh", None, None, .7, .7)
                     self.labels["%s_restart" % prog].connect("clicked", self.restart, prog)
                     infogrid.attach(self.labels["%s_restart" % prog], 0, i, 1, 1)
 
-                #infogrid.attach(self.labels["%s_info" % prog], 2, i, 1, 1)
                 infogrid.attach(self.labels["%s_status" % prog], 2, i, 1, 1)
                 logging.info("Updating program: %s " % prog)
                 self.update_program_info(prog)
@@ -120,7 +120,7 @@ class SystemPanel(ScreenPanel):
 
     def get_updates(self):
         update_resp = self._screen.apiclient.send_request("machine/update/status")
-        if update_resp == False:
+        if update_resp is False:
             logging.info("No update manager configured")
         else:
             self.update_status = update_resp['result']
@@ -134,12 +134,12 @@ class SystemPanel(ScreenPanel):
             logging.info("Update: %s" % data)
             if 'application' in data and data['application'] == self.update_prog:
                 self.labels['update_progress'].set_text(self.labels['update_progress'].get_text().strip() + "\n" +
-                    data['message'] + "\n")
+                                                        data['message'] + "\n")
                 adjustment = self.labels['update_scroll'].get_vadjustment()
-                adjustment.set_value( adjustment.get_upper() - adjustment.get_page_size() )
+                adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size())
                 adjustment = self.labels['update_scroll'].show_all()
 
-                if data['complete'] == True:
+                if data['complete'] is True:
                     self.update_dialog.set_response_sensitive(Gtk.ResponseType.CANCEL, True)
 
     def restart(self, widget, program):
@@ -152,7 +152,7 @@ class SystemPanel(ScreenPanel):
     def show_commit_history(self, widget, program):
         _ = self.lang.gettext
 
-        if self.update_status == False or program not in self.update_status['version_info']:
+        if self.update_status is False or program not in self.update_status['version_info']:
             return
 
         info = self.update_status['version_info'][program]
@@ -160,8 +160,8 @@ class SystemPanel(ScreenPanel):
             return
 
         buttons = [
-            {"name":_("Update"), "response": Gtk.ResponseType.OK},
-            {"name":_("Go Back"), "response": Gtk.ResponseType.CANCEL}
+            {"name": _("Update"), "response": Gtk.ResponseType.OK},
+            {"name": _("Go Back"), "response": Gtk.ResponseType.CANCEL}
         ]
 
         scroll = Gtk.ScrolledWindow()
@@ -183,7 +183,7 @@ class SystemPanel(ScreenPanel):
                 i = i + 1
 
             label = Gtk.Label()
-            label.set_markup("%s\n<i>%s</i> %s %s\n" % (c['subject'], c['author'], _("Commited"),"2 days ago"))
+            label.set_markup("%s\n<i>%s</i> %s %s\n" % (c['subject'], c['author'], _("Commited"), "2 days ago"))
             label.set_hexpand(True)
             label.set_halign(Gtk.Align.START)
             grid.attach(label, 0, i, 1, 1)
@@ -205,7 +205,7 @@ class SystemPanel(ScreenPanel):
 
         _ = self.lang.gettext
 
-        if self.update_status == False or program not in self.update_status['version_info']:
+        if self.update_status is False or program not in self.update_status['version_info']:
             return
 
         info = self.update_status['version_info'][program]
@@ -218,7 +218,7 @@ class SystemPanel(ScreenPanel):
                 return
 
         buttons = [
-            {"name":_("Finish"), "response": Gtk.ResponseType.CANCEL}
+            {"name": _("Finish"), "response": Gtk.ResponseType.CANCEL}
         ]
 
         scroll = Gtk.ScrolledWindow()
@@ -237,7 +237,7 @@ class SystemPanel(ScreenPanel):
         self.update_prog = program
         self.update_dialog = dialog
 
-        if program in ['klipper','moonraker','system']:
+        if program in ['klipper', 'moonraker', 'system']:
             logging.info("Sending machine.update.%s" % program)
             self._screen._ws.send_method("machine.update.%s" % program)
         else:

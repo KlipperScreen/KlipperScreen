@@ -24,7 +24,6 @@ class SettingsPanel(ScreenPanel):
         printbox = Gtk.Box(spacing=0)
         printbox.set_vexpand(False)
         self.labels['add_printer_button'] = self._gtk.Button(_("Add Printer"), "color1")
-        #printbox.add(self.labels['add_printer_button'])
         self.labels['printers_box'] = self.create_box('printers', printbox)
 
         options = self._config.get_configurable_options().copy()
@@ -40,7 +39,7 @@ class SettingsPanel(ScreenPanel):
         }})
 
         for option in options:
-            name =  list(option)[0]
+            name = list(option)[0]
             self.add_option('main', self.settings, name, option[name])
 
         for macro in self._printer.get_config_section_list("gcode_macro "):
@@ -98,11 +97,11 @@ class SettingsPanel(ScreenPanel):
         return box
 
     def add_option(self, boxname, opt_array, opt_name, option):
-        if option['type'] == None:
+        if option['type'] is None:
             return
 
         frame = Gtk.Frame()
-        frame.set_property("shadow-type",Gtk.ShadowType.NONE)
+        frame.set_property("shadow-type", Gtk.ShadowType.NONE)
         frame.get_style_context().add_class("frame-item")
 
         name = Gtk.Label()
@@ -113,11 +112,6 @@ class SettingsPanel(ScreenPanel):
         name.set_valign(Gtk.Align.CENTER)
         name.set_line_wrap(True)
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-
-        #open = self._gtk.ButtonImage("resume",None,"color3")
-        #open.connect("clicked", self.run_gcode_macro, macro)
-        #open.set_hexpand(False)
-        #open.set_halign(Gtk.Align.END)
 
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)
@@ -139,7 +133,7 @@ class SettingsPanel(ScreenPanel):
             else:
                 switch.set_active(self._config.get_config().getboolean(option['section'], opt_name))
             switch.connect("notify::active", self.switch_config_option, option['section'], opt_name,
-                option['callback'] if "callback" in option else None)
+                           option['callback'] if "callback" in option else None)
             switch.set_property("width-request", round(self._gtk.get_image_width()*2.5))
             switch.set_property("height-request", round(self._gtk.get_image_height()*1.25))
             box.add(switch)
@@ -153,8 +147,7 @@ class SettingsPanel(ScreenPanel):
                     dropdown.set_active(i)
                 i += 1
             dropdown.connect("changed", self.on_dropdown_change, option['section'], opt_name,
-                option['callback'] if "callback" in option else None)
-            #dropdown.props.relief = Gtk.ReliefStyle.NONE
+                             option['callback'] if "callback" in option else None)
             dropdown.set_entry_text_column(0)
             dev.add(dropdown)
             logging.debug("Children: %s" % dropdown.get_children())
@@ -176,7 +169,7 @@ class SettingsPanel(ScreenPanel):
             box.add(label)
             dev.add(box)
         elif option['type'] == "menu":
-            open = self._gtk.ButtonImage("settings",None,"color3")
+            open = self._gtk.ButtonImage("settings", None, "color3")
             open.connect("clicked", self.load_menu, option['menu'])
             open.set_hexpand(False)
             open.set_halign(Gtk.Align.END)

@@ -10,7 +10,8 @@ from ks_includes.screen_panel import ScreenPanel
 def create_panel(*args):
     return FanPanel(*args)
 
-CHANGEABLE_FANS = ["fan","fan_generic"]
+
+CHANGEABLE_FANS = ["fan", "fan_generic"]
 
 class FanPanel(ScreenPanel):
     fan_speed = {}
@@ -50,7 +51,7 @@ class FanPanel(ScreenPanel):
     def update_fan_speed(self, fan, speed):
         if fan not in self.devices:
             return
-        if self.devices[fan]['changeable'] == True:
+        if self.devices[fan]['changeable'] is True:
             if self.devices[fan]['scale'].has_grab():
                 return
             self.fan_speed[fan] = round(float(speed) * 100)
@@ -70,7 +71,7 @@ class FanPanel(ScreenPanel):
                 break
 
         frame = Gtk.Frame()
-        frame.set_property("shadow-type",Gtk.ShadowType.NONE)
+        frame.set_property("shadow-type", Gtk.ShadowType.NONE)
         frame.get_style_context().add_class("frame-item")
 
         try:
@@ -92,7 +93,7 @@ class FanPanel(ScreenPanel):
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
         adj = Gtk.Adjustment(0, 0, 100, 1, 5, 0)
-        if changeable == True:
+        if changeable is True:
             self.fan_speed[fan] = round(self.fan_speed[fan] * 100)
             scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
             scale.set_value(self.fan_speed[fan])
@@ -106,7 +107,7 @@ class FanPanel(ScreenPanel):
             scale.set_fraction(self.fan_speed[fan])
             scale.set_show_text(True)
             scale.set_hexpand(True)
-            #scale.get_style_context().add_class("fan_slider")
+            # scale.get_style_context().add_class("fan_slider")
 
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)
@@ -149,4 +150,4 @@ class FanPanel(ScreenPanel):
             self._screen._ws.klippy.gcode_script(KlippyGcodes.set_fan_speed(value))
         else:
             f = " ".join(fan.split(" ")[1:])
-            self._screen._ws.klippy.gcode_script("SET_FAN_SPEED FAN=%s SPEED=%s" % (f,  float(value)/100))
+            self._screen._ws.klippy.gcode_script("SET_FAN_SPEED FAN=%s SPEED=%s" % (f, float(value)/100))

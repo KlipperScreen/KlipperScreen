@@ -39,7 +39,7 @@ class MacroPanel(ScreenPanel):
     def add_gcode_macro(self, macro):
 
         frame = Gtk.Frame()
-        frame.set_property("shadow-type",Gtk.ShadowType.NONE)
+        frame.set_property("shadow-type", Gtk.ShadowType.NONE)
         frame.get_style_context().add_class("frame-item")
 
         name = Gtk.Label()
@@ -51,7 +51,7 @@ class MacroPanel(ScreenPanel):
         name.set_line_wrap(True)
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        open = self._gtk.ButtonImage("resume",None,"color3")
+        open = self._gtk.ButtonImage("resume", None, "color3")
         open.connect("clicked", self.run_gcode_macro, macro)
         open.set_hexpand(False)
         open.set_halign(Gtk.Align.END)
@@ -82,7 +82,7 @@ class MacroPanel(ScreenPanel):
     def load_gcode_macros(self):
         macros = self._screen.printer.get_gcode_macros()
         section_name = "displayed_macros %s" % self._screen.connected_printer
-        logging.info("Macro section name [%s]"  % section_name)
+        logging.info("Macro section name [%s]" % section_name)
 
         for x in macros:
             macro = x[12:].strip()

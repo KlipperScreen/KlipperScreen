@@ -2,7 +2,7 @@ import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import  Gdk, GLib
+from gi.repository import Gdk, GLib
 from ks_includes.KlippyGcodes import KlippyGcodes
 
 
@@ -68,7 +68,7 @@ class Printer:
                 r['min_x'] = float(r['min_x'])
                 r['max_y'] = float(r['max_y'])
                 r['min_y'] = float(r['min_y'])
-                r['points']  = [[float(j.strip()) for j in i.split(",")] for i in r['points'].strip().split("\n")]
+                r['points'] = [[float(j.strip()) for j in i.split(",")] for i in r['points'].strip().split("\n")]
         self.process_update(data)
 
         logging.info("Klipper version: %s", self.klipper['version'])
@@ -109,9 +109,9 @@ class Printer:
         return updates
 
     def evaluate_state(self):
-        wh_state = self.data['webhooks']['state'].lower() # possible values: startup, ready, shutdown, error
-        idle_state = self.data['idle_timeout']['state'].lower() # possible values: Idle, printing, ready
-        print_state = self.data['print_stats']['state'].lower() # possible values: complete, paused, printing, standby
+        wh_state = self.data['webhooks']['state'].lower()  # possible values: startup, ready, shutdown, error
+        idle_state = self.data['idle_timeout']['state'].lower()  # possible values: Idle, printing, ready
+        print_state = self.data['print_stats']['state'].lower()  # possible values: complete, paused, printing, standby
 
         if wh_state == "ready":
             new_state = "ready"
@@ -120,7 +120,7 @@ class Printer:
             elif idle_state == "printing":
                 if print_state == "complete":
                     new_state = "ready"
-                elif print_state != "printing": # Not printing a file, toolhead moving
+                elif print_state != "printing":  # Not printing a file, toolhead moving
                     new_state = "busy"
                 else:
                     new_state = "printing"
@@ -141,7 +141,7 @@ class Printer:
         logging.debug("Changing state from '%s' to '%s'" % (self.state, state))
         prev_state = self.state
         self.state = state
-        if self.state_callbacks[state] != None:
+        if self.state_callbacks[state] is not None:
             logging.debug("Adding callback for state: %s" % state)
             Gdk.threads_add_idle(
                 GLib.PRIORITY_HIGH_IDLE,
@@ -213,7 +213,7 @@ class Printer:
             }
         }
 
-        sections = ["bed_mesh","bltouch","probe","quad_gantry_level","z_tilt"]
+        sections = ["bed_mesh", "bltouch", "probe", "quad_gantry_level", "z_tilt"]
         for section in sections:
             if self.config_section_exists(section):
                 data["printer"][section] = self.get_config_section(section).copy()
@@ -231,10 +231,10 @@ class Printer:
             return
         return self.power_devices[device]['status']
 
-    def get_stat(self, stat, substat = None):
+    def get_stat(self, stat, substat=None):
         if stat not in self.data:
             return {}
-        if substat != None:
+        if substat is not None:
             if substat in self.data[stat]:
                 return self.data[stat][substat]
             return {}
@@ -246,7 +246,7 @@ class Printer:
     def set_dev_temps(self, dev, temp, target=None):
         if dev in self.devices:
             self.devices[dev]['temperature'] = temp
-            if target != None:
+            if target is not None:
                 self.devices[dev]['target'] = target
 
     def get_dev_stats(self, dev):

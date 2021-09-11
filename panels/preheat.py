@@ -47,35 +47,35 @@ class PreheatPanel(ScreenPanel):
         cols = 3 if len(self.heaters) > 4 else (1 if len(self.heaters) <= 2 else 2)
         for h in self.heaters:
             self.labels[h].connect('clicked', self.select_heater, h)
-            eq_grid.attach(self.labels[h], i%cols, int(i/cols), 1, 1)
+            eq_grid.attach(self.labels[h], i % cols, int(i/cols), 1, 1)
             i += 1
 
 
         self.labels["control_grid"] = self._gtk.HomogeneousGrid()
 
         i = 0
-        for option in  self.preheat_options:
-            self.labels[option] = self._gtk.Button(option, "color%d" % ((i%4)+1))
+        for option in self.preheat_options:
+            self.labels[option] = self._gtk.Button(option, "color%d" % ((i % 4)+1))
             self.labels[option].connect("clicked", self.set_temperature, option)
             self.labels['control_grid'].attach(
                 self.labels[option],
-                i%2, int(i/2), 1, 1)
+                i % 2, int(i/2), 1, 1)
             i += 1
 
 
-        cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'), "color%d" % ((i%4)+1))
+        cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'), "color%d" % ((i % 4)+1))
         cooldown.connect("clicked", self.set_temperature, "cooldown")
 
-        row = int(i/2) if i%2 == 0 else int(i/2)+1
-        self.labels["control_grid"].attach(cooldown, i%2, int(i/2), 1, 1)
+        row = int(i/2) if i % 2 == 0 else int(i/2)+1
+        self.labels["control_grid"].attach(cooldown, i % 2, int(i/2), 1, 1)
 
         i += 1
-        temperature = self._gtk.ButtonImage('heat-up', _('Temperature'), "color%d" % ((i%4)+1))
+        temperature = self._gtk.ButtonImage('heat-up', _('Temperature'), "color%d" % ((i % 4)+1))
         temperature.connect("clicked", self.menu_item_clicked, "temperature", {
             "name": "Temperature",
             "panel": "temperature"
         })
-        self.labels["control_grid"].attach(temperature, i%2, int(i/2), 1, 1)
+        self.labels["control_grid"].attach(temperature, i % 2, int(i/2), 1, 1)
 
         grid.attach(eq_grid, 0, 0, 1, 1)
         grid.attach(self.labels["control_grid"], 1, 0, 1, 1)
@@ -112,39 +112,41 @@ class PreheatPanel(ScreenPanel):
                     self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), 0)
                 elif heater.startswith('heater_bed'):
                     self._screen._ws.klippy.set_bed_temp(0)
-                    self._printer.set_dev_stat(heater,"target", 0)
+                    self._printer.set_dev_stat(heater, "target", 0)
                 else:
                     self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), 0)
-                    self._printer.set_dev_stat(heater,"target", 0)
+                    self._printer.set_dev_stat(heater, "target", 0)
             return
 
         for heater in self.active_heaters:
             if heater.startswith('heater_generic '):
                 logging.info("Setting %s to %d" % (heater, self.preheat_options[setting]['heater_generic']))
                 self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]),
-                    self.preheat_options[setting]["heater_generic"])
+                                                        self.preheat_options[setting]["heater_generic"])
             elif heater.startswith('heater_bed'):
                 logging.info("Setting %s to %d" % (heater, self.preheat_options[setting]['bed']))
                 self._screen._ws.klippy.set_bed_temp(self.preheat_options[setting]["bed"])
-                self._printer.set_dev_stat(heater,"target", int(self.preheat_options[setting]["bed"]))
+                self._printer.set_dev_stat(heater, "target", int(self.preheat_options[setting]["bed"]))
             else:
                 logging.info("Setting %s to %d" % (heater, self.preheat_options[setting]['extruder']))
                 self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater),
-                    self.preheat_options[setting]["extruder"])
-                self._printer.set_dev_stat(heater,"target", int(self.preheat_options[setting]["extruder"]))
+                                                      self.preheat_options[setting]["extruder"])
+                self._printer.set_dev_stat(heater, "target", int(self.preheat_options[setting]["extruder"]))
 
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
 
         for x in self._printer.get_tools():
-            self.update_temp(x,
-                self._printer.get_dev_stat(x,"temperature"),
-                self._printer.get_dev_stat(x,"target")
+            self.update_temp(
+                x,
+                self._printer.get_dev_stat(x, "temperature"),
+                self._printer.get_dev_stat(x, "target")
             )
         for h in self._printer.get_heaters():
-            self.update_temp(h,
-                self._printer.get_dev_stat(h,"temperature"),
-                self._printer.get_dev_stat(h,"target"),
+            self.update_temp(
+                h,
+                self._printer.get_dev_stat(h, "temperature"),
+                self._printer.get_dev_stat(h, "target"),
                 None if h == "heater_bed" else " ".join(h.split(" ")[1:])
             )

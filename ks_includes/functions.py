@@ -46,15 +46,15 @@ try:
             libXext.XCloseDisplay(display)
         return state
     dpms_loaded = True
-except:
+except Exception:
     pass
 
 def get_network_interfaces():
-    stream = os.popen("ip addr | grep ^'[0-9]' | cut -d ' ' -f 2 | grep -o '[a-zA-Z0-9\.]*'")
+    stream = os.popen("ip addr | grep ^'[0-9]' | cut -d ' ' -f 2 | grep -o '[a-zA-Z0-9\\.]*'")
     return [i for i in stream.read().strip().split('\n') if not i.startswith('lo')]
 
 def get_wireless_interfaces():
-    p = subprocess.Popen(["which","iwconfig"], stdout=subprocess.PIPE)
+    p = subprocess.Popen(["which", "iwconfig"], stdout=subprocess.PIPE)
 
     while p.poll() is None:
         time.sleep(.1)
@@ -64,12 +64,12 @@ def get_wireless_interfaces():
     try:
         p = subprocess.Popen(["iwconfig"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         result = p.stdout.read().decode('ascii').split('\n')
-    except:
+    except Exception:
         logging.info("Error with running iwconfig command")
         return None
     interfaces = []
     for line in result:
-        match = re.search('^(\S+)\s+.*$', line)
+        match = re.search('^(\\S+)\\s+.*$', line)
         if match:
             interfaces.append(match.group(1))
 
@@ -99,15 +99,17 @@ def patch_threading_excepthook():
     Inspired by https://bugs.python.org/issue1230540
     """
     old_init = threading.Thread.__init__
+
     def new_init(self, *args, **kwargs):
         old_init(self, *args, **kwargs)
         old_run = self.run
+
         def run_with_excepthook(*args, **kwargs):
             try:
                 old_run(*args, **kwargs)
             except (KeyboardInterrupt, SystemExit):
                 raise
-            except:
+            except Exception:
                 sys.excepthook(*sys.exc_info(), thread_identifier=threading.get_ident())
         self.run = run_with_excepthook
     threading.Thread.__init__ = new_init
@@ -160,7 +162,8 @@ def setup_logging(log_file, software_version):
     listener.start()
 
     def logging_exception_handler(type, value, tb, thread_identifier=None):
-        logging.exception("Uncaught exception %s: %s\nTraceback: %s" % (type, value, "\n".join(traceback.format_tb(tb))))
+        logging.exception(
+            "Uncaught exception %s: %s\nTraceback: %s" % (type, value, "\n".join(traceback.format_tb(tb))))
     sys.excepthook = logging_exception_handler
     logging.captureWarnings(True)
 

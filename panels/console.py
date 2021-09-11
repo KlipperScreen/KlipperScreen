@@ -12,6 +12,7 @@ from ks_includes.screen_panel import ScreenPanel
 def create_panel(*args):
     return ConsolePanel(*args)
 
+
 COLORS = {
     "command": "#bad8ff",
     "error": "#ff6975",
@@ -24,7 +25,7 @@ class ConsolePanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
 
-        gcodes = self._screen._ws.send_method("server.gcode_store",{"count": 100}, self.gcode_response)
+        gcodes = self._screen._ws.send_method("server.gcode_store", {"count": 100}, self.gcode_response)
 
         vbox = Gtk.VBox()
         vbox.set_hexpand(True)
@@ -53,10 +54,10 @@ class ConsolePanel(ScreenPanel):
 
         enter = self._gtk.Button("Send")
         enter.set_hexpand(False)
-        enter.connect("clicked",self._send_command)
+        enter.connect("clicked", self._send_command)
 
-        ebox.add(entry) #, True, 0, 0)
-        ebox.add(enter) #, True, 0, 0)
+        ebox.add(entry)  # , True, 0, 0)
+        ebox.add(enter)  # , True, 0, 0)
 
         self.labels.update({
             "entry": entry,
@@ -83,11 +84,13 @@ class ConsolePanel(ScreenPanel):
 
         message = '<span color="%s">%s</span>' % (color, message)
 
-        message = message.replace('\n','\n         ')
+        message = message.replace('\n', '\n         ')
 
-        self.labels['tb'].insert_markup(self.labels['tb'].get_end_iter(),
+        self.labels['tb'].insert_markup(
+            self.labels['tb'].get_end_iter(),
             '\n<span color="%s">%s</span> %s' % (COLORS['time'], datetime.fromtimestamp(time).strftime("%H:%M:%S"),
-             message), -1)
+                                                 message), -1
+        )
 
     def gcode_response(self, result, method, params):
         if method != "server.gcode_store":
