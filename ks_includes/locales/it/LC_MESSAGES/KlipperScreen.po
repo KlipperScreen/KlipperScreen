@@ -13,13 +13,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "..."
-msgstr ""
+msgstr "..."
 
 msgid "24 Hour Time"
 msgstr "24H"
 
 msgid "Abort"
-msgstr "Abort"
+msgstr "Annulla"
 
 msgid "Accept"
 msgstr "Accetta"
@@ -31,7 +31,7 @@ msgid "Add Printer"
 msgstr "Aggiungi Stampante"
 
 msgid "Add bed mesh profile"
-msgstr "Aggiungi  Profilo Mesh"
+msgstr "Aggiungi Profilo Mesh"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Cancellare la Stampa?"
@@ -80,7 +80,7 @@ msgid "Close"
 msgstr "Chiudi"
 
 msgid "Colorized"
-msgstr "Colora"
+msgstr "Colorato"
 
 msgid "Commited"
 msgstr "Impegnato"
@@ -89,7 +89,7 @@ msgid "Complete"
 msgstr "Completo"
 
 msgid "Configuration"
-msgstr "Configurazione"
+msgstr "Configuraz."
 
 msgid "Connected"
 msgstr "Connesso"
@@ -117,10 +117,10 @@ msgid "Delete"
 msgstr "Elimina"
 
 msgid "Disable Motors"
-msgstr "Disabilita Motori"
+msgstr "Disab. Motori"
 
 msgid "Disable XY"
-msgstr "Disabilita XY"
+msgstr "Disab. XY"
 
 msgid "Disconnect"
 msgstr "Sconnetti"
@@ -138,16 +138,16 @@ msgid "Error"
 msgstr "Errore"
 
 msgid "Estimated Time Method"
-msgstr "Metodo tempo stimato"
+msgstr "Tempo stimato"
 
 msgid "Extrude"
 msgstr "Estrudi"
 
 msgid "Extrusion +"
-msgstr "Estrusione +"
+msgstr "Estrudi +"
 
 msgid "Extrusion -"
-msgstr "Estrusione -"
+msgstr "Estrudi -"
 
 msgid "Fan"
 msgstr "Ventola"
@@ -165,10 +165,10 @@ msgid "Filament Used"
 msgstr "Filamento Usato"
 
 msgid "File Estimation (default)"
-msgstr "Stima file (predefinito)"
+msgstr "Stima file (predef.)"
 
 msgid "Fine Tuning"
-msgstr "Fine Tuning"
+msgstr "Messa a Punto"
 
 msgid "Finish"
 msgstr "Finito"
@@ -183,7 +183,7 @@ msgid "Home"
 msgstr ""
 
 msgid "Home All"
-msgstr "Home tutti"
+msgstr "Home XYZ"
 
 msgid "Home X"
 msgstr ""
@@ -240,7 +240,7 @@ msgid "Klipper Version"
 msgstr "Versione Klipper"
 
 msgid "Klipper has disconnected"
-msgstr "Klipper disconnesso"
+msgstr "Klipper è disconnesso"
 
 msgid ""
 "Klipper has encountered an error with the micro-controller.\n"
@@ -284,7 +284,7 @@ msgid "Lower Nozzle"
 msgstr "Abbassa ugello"
 
 msgid "Macros"
-msgstr ""
+msgstr "Macros"
 
 msgid "Main Menu"
 msgstr "Menu Principale"
@@ -311,13 +311,13 @@ msgid "Name"
 msgstr "Nome"
 
 msgid "Network"
-msgstr ""
+msgstr "Rete"
 
 msgid "Number Pad"
 msgstr "Tastierino"
 
 msgid "Off"
-msgstr ""
+msgstr "Off"
 
 msgid "PSK for"
 msgstr "PSK per"
@@ -329,13 +329,13 @@ msgid "Paused"
 msgstr "In Pausa"
 
 msgid "Power"
-msgstr ""
+msgstr "Power"
 
 msgid "Power On Printer"
-msgstr "Accnedi Stampante"
+msgstr "Accendi Stampante"
 
 msgid "Preheat"
-msgstr "Preriscalda"
+msgstr "Riscalda"
 
 msgid "Print"
 msgstr "Stampa"
@@ -356,7 +356,7 @@ msgid "Profile Name:"
 msgstr "Nome Profilo:"
 
 msgid "Quad Gantry Level"
-msgstr ""
+msgstr "Quad Gantry Level"
 
 msgid "Raise Nozzle"
 msgstr "Alza Ugello"
@@ -380,10 +380,10 @@ msgid "Save configuration."
 msgstr "Salva configurazione."
 
 msgid "Screen Power Off Time"
-msgstr "Tempo Spegnimento Schermo"
+msgstr "Tempo Spegnim. Schermo"
 
 msgid "Screen will show in less than one second"
-msgstr "Lo schermo verrà visualizzato in meno di un secondo"
+msgstr "Lo schermo verrà visualizzato a breve"
 
 msgid "Screws Adjust"
 msgstr "Calibra Screws"
@@ -407,10 +407,10 @@ msgid "Sort by: "
 msgstr "Ordine: "
 
 msgid "Speed +"
-msgstr "Velocità +"
+msgstr "Velocità+"
 
 msgid "Speed -"
-msgstr "Velocità -"
+msgstr "Velocità-"
 
 msgid "Starting WiFi Re-association"
 msgstr "Riassocia WiFi"
@@ -424,22 +424,26 @@ msgstr "Sistema"
 msgid ""
 "System\n"
 "Restart"
-msgstr "Riavvia Sistema"
+msgstr ""
+"Riavvia\n"
+"Sistema"
 
 msgid ""
 "System\n"
 "Shutdown"
-msgstr "Spegni Sistema"
+msgstr ""
+"Spegni\n"
+"Sistema"
 
 msgid "Temperature"
 msgstr "Temperatura"
 
 #, python-format
 msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr "Per applicare %s KlipperScreen deve essere riavviato"
+msgstr "Riavvia KlipperScreen per applicare %s "
 
 msgid "Tool"
-msgstr "Strumnti"
+msgstr "Strumenti"
 
 msgid "Up To Date"
 msgstr "Aggiornato"
@@ -451,7 +455,7 @@ msgid "Uploaded"
 msgstr "Caricato"
 
 msgid "View Mesh"
-msgstr "Visualizza Mesh"
+msgstr "Visual. Mesh"
 
 msgid "X+"
 msgstr ""
