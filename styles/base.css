@@ -2,6 +2,7 @@
     color: white;
     font-size: KS_FONT_SIZEpx;
     -GtkComboBox-appears-as-list: 0;
+    text-shadow: none;
 }
 
 window {
