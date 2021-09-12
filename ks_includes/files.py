@@ -126,6 +126,8 @@ class KlippyFiles():
             self.add_file(data['item'])
         elif data['action'] == "delete_file":
             self.remove_file(data['item']['path'])
+        elif data['action'] == "modify_file":
+            self.request_metadata(data['item']['path'])
         elif data['action'] == "move_file":
             self.add_file(data['item'], False)
             self.remove_file(data['source_item']['path'], False)
