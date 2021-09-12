@@ -26,7 +26,7 @@ class BasePanel(ScreenPanel):
         self.layout = Gtk.Layout()
         self.layout.set_size(self._screen.width, self._screen.height)
 
-        action_bar_width = self._gtk.get_action_bar_width() if action_bar == True else 0
+        action_bar_width = self._gtk.get_action_bar_width() if action_bar is True else 0
 
         self.control_grid = self._gtk.HomogeneousGrid()
         self.control_grid.set_size_request(action_bar_width - 2, self._screen.height)
@@ -69,13 +69,8 @@ class BasePanel(ScreenPanel):
             self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
 
         if len(self._config.get_printers()) > 1:
-            self.control_grid.remove(self.control_grid.get_child_at(0,2))
+            self.control_grid.remove(self.control_grid.get_child_at(0, 2))
             self.control_grid.attach(self.control['printer_select'], 0, 2, 1, 1)
-        # If there's only one printer, show the macros shortcut if enabled. Otherwise, wait until the printer has
-        # been selected to show
-        elif self._config.get_main_config_option('side_macro_shortcut') == "True":
-            self.control_grid.remove(self.control_grid.get_child_at(0,self.locations['macro_shortcut']))
-            self.control_grid.attach(self.control['macro_shortcut'], 0, self.locations['macro_shortcut'], 1, 1)
         self.control_grid.attach(self.control['estop'], 0, 4, 1, 1)
 
         try:
@@ -83,7 +78,7 @@ class BasePanel(ScreenPanel):
             env.install_gettext_translations(self.lang)
             j2_temp = env.from_string(title)
             title = j2_temp.render()
-        except:
+        except Exception:
             logging.debug("Error parsing jinja for title: %s" % title)
 
         self.titlelbl = Gtk.Label()
@@ -96,7 +91,7 @@ class BasePanel(ScreenPanel):
         self.content = Gtk.VBox(spacing=0)
         self.content.set_size_request(self._screen.width - action_bar_width, self._screen.height - self.title_spacing)
 
-        if action_bar == True:
+        if action_bar is True:
             self.layout.put(self.control_grid, 0, 0)
 
         self.control['time_box'] = Gtk.Box()
@@ -129,19 +124,19 @@ class BasePanel(ScreenPanel):
         for extruder in self._printer.get_tools():
             self.labels[extruder + '_box'] = Gtk.Box(spacing=0)
             self.labels[extruder] = Gtk.Label(label="")
-            #self.labels[extruder].get_style_context().add_class("printing-info")
+            # self.labels[extruder].get_style_context().add_class("printing-info")
             if i <= 4:
                 ext_img = self._gtk.Image("extruder-%s.svg" % i, None, .4, .4)
                 self.labels[extruder + '_box'].pack_start(ext_img, True, 3, 3)
             self.labels[extruder + '_box'].pack_start(self.labels[extruder], True, 3, 3)
             i += 1
-        self.current_extruder = self._printer.get_stat("toolhead","extruder")
+        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
         self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, 5, 5)
 
         if self._printer.has_heated_bed():
             heater_bed = self._gtk.Image("bed.svg", None, .4, .4)
             self.labels['heater_bed'] = Gtk.Label(label="20 C")
-            #self.labels['heater_bed'].get_style_context().add_class("printing-info")
+            # self.labels['heater_bed'].get_style_context().add_class("printing-info")
             heater_bed_box = Gtk.Box(spacing=0)
             heater_bed_box.pack_start(heater_bed, True, 5, 5)
             heater_bed_box.pack_start(self.labels['heater_bed'], True, 3, 3)
@@ -163,7 +158,7 @@ class BasePanel(ScreenPanel):
         self.content.add(panel.get_content())
 
     def back(self, widget):
-        if self.current_panel == None:
+        if self.current_panel is None:
             return
 
         if self._screen.is_keyboard_showing():
@@ -179,13 +174,13 @@ class BasePanel(ScreenPanel):
         return self.layout
 
     def process_update(self, action, data):
-        if action != "notify_status_update" or self._printer == None:
+        if action != "notify_status_update" or self._printer is None:
             return
 
         if self._printer.has_heated_bed():
-            self.labels["heater_bed"].set_label("%02d°" % self._printer.get_dev_stat("heater_bed","temperature"))
+            self.labels["heater_bed"].set_label("%02d°" % self._printer.get_dev_stat("heater_bed", "temperature"))
         for x in self._printer.get_tools():
-            self.labels[x].set_label("%02d°" % self._printer.get_dev_stat(x,"temperature"))
+            self.labels[x].set_label("%02d°" % self._printer.get_dev_stat(x, "temperature"))
 
         if "toolhead" in data and "extruder" in data["toolhead"]:
             if data["toolhead"]["extruder"] != self.current_extruder:
@@ -199,15 +194,15 @@ class BasePanel(ScreenPanel):
         self.content.remove(widget)
 
     def show_back(self, show=True):
-        if show == True and self.buttons_showing['back'] == False:
-            self.control_grid.remove(self.control_grid.get_child_at(0,0))
+        if show is True and self.buttons_showing['back'] is False:
+            self.control_grid.remove(self.control_grid.get_child_at(0, 0))
             self.control_grid.attach(self.control['back'], 0, 0, 1, 1)
-            self.control_grid.remove(self.control_grid.get_child_at(0,1))
+            self.control_grid.remove(self.control_grid.get_child_at(0, 1))
             self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
             self.buttons_showing['back'] = True
-        elif show == False and self.buttons_showing['back'] == True:
-            for i in range(0,2):
-                self.control_grid.remove(self.control_grid.get_child_at(0,i))
+        elif show is False and self.buttons_showing['back'] is True:
+            for i in range(0, 2):
+                self.control_grid.remove(self.control_grid.get_child_at(0, i))
                 self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
             self.buttons_showing['back'] = False
         self.control_grid.show()
@@ -216,8 +211,8 @@ class BasePanel(ScreenPanel):
         if show == "True":
             show = True
 
-        if show == True and self.buttons_showing['macros_shortcut'] == False:
-            if len(self._config.get_printers()) > 1 and mod_row == True:
+        if show is True and self.buttons_showing['macros_shortcut'] is False:
+            if len(self._config.get_printers()) > 1 and mod_row is True:
                 self.control_grid.insert_row(self.locations['macro_shortcut'])
             else:
                 self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['macro_shortcut']))
@@ -225,11 +220,10 @@ class BasePanel(ScreenPanel):
                 self.control_grid.remove(self.control['space%s' % self.locations['macro_shortcut']])
             self.control_grid.attach(self.control['macro_shortcut'], 0, self.locations['macro_shortcut'], 1, 1)
             self.buttons_showing['macros_shortcut'] = True
-            self._screen.show_all()
-        elif show != True and self.buttons_showing['macros_shortcut'] == True:
+        elif show is not True and self.buttons_showing['macros_shortcut'] is True:
             if ('space%s' % self.locations['macro_shortcut']) not in self.control:
                 self.control['space%s' % self.locations['macro_shortcut']] = Gtk.Label("")
-            if len(self._config.get_printers()) > 1 and mod_row == True:
+            if len(self._config.get_printers()) > 1 and mod_row is True:
                 self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['macro_shortcut']))
                 self.control_grid.remove(self.control['macro_shortcut'])
                 self.control_grid.remove_row(self.locations['macro_shortcut'])
@@ -238,9 +232,9 @@ class BasePanel(ScreenPanel):
             if ('space%s' % self.locations['macro_shortcut']) not in self.control:
                 self.control['space%s' % self.locations['macro_shortcut']] = Gtk.Label("")
             self.control_grid.attach(self.control['space%s' % self.locations['macro_shortcut']],
-                0, self.locations['macro_shortcut'], 1, 1)
+                                     0, self.locations['macro_shortcut'], 1, 1)
             self.buttons_showing['macros_shortcut'] = False
-            self._screen.show_all()
+        self._screen.show_all()
 
     def set_title(self, title):
         try:
@@ -248,7 +242,7 @@ class BasePanel(ScreenPanel):
             env.install_gettext_translations(self.lang)
             j2_temp = env.from_string(title)
             title = j2_temp.render()
-        except:
+        except Exception:
             logging.debug("Error parsing jinja for title: %s" % title)
 
         self.titlelbl.set_label("%s | %s" % (self._screen.connected_printer, title))

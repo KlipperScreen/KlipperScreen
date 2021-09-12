@@ -12,7 +12,7 @@ def create_panel(*args):
 
 class MovePanel(ScreenPanel):
     distance = 1
-    distances = ['.1','.5','1','5','10','25','50']
+    distances = ['.1', '.5', '1', '5', '10', '25', '50']
 
 
     def initialize(self, panel_name):
@@ -52,7 +52,7 @@ class MovePanel(ScreenPanel):
         grid.attach(self.labels['home'], 0, 0, 1, 1)
 
         distgrid = Gtk.Grid()
-        j = 0;
+        j = 0
         for i in self.distances:
             self.labels[i] = self._gtk.ToggleButton(i)
             self.labels[i].set_direction(Gtk.TextDirection.LTR)
@@ -71,10 +71,6 @@ class MovePanel(ScreenPanel):
 
         self.labels["1"].set_active(True)
 
-        #space_grid = self._gtk.HomogeneousGrid()
-        #space_grid.attach(Gtk.Label("Distance (mm):"),0,0,1,1)
-        #space_grid.attach(distgrid,0,1,1,1)
-        #space_grid.attach(Gtk.Label(" "),0,2,1,1)
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 
         bottomgrid = self._gtk.HomogeneousGrid()
@@ -126,8 +122,10 @@ class MovePanel(ScreenPanel):
 
         dist = str(self.distance) if dir == "+" else "-" + str(self.distance)
         speed = self._config.get_config()['main'].getint("move_speed", 20)
-        speed = min(max(1,speed),200) # Cap movement speed between 1-200mm/s
+        speed = min(max(1, speed), 200)  # Cap movement speed between 1-200mm/s
         self._screen._ws.klippy.gcode_script(
-            "%s\n%s %s%s F%s%s" % (KlippyGcodes.MOVE_RELATIVE, KlippyGcodes.MOVE, axis, dist, speed*60,
-                "\nG90" if self._printer.get_stat("gcode_move", "absolute_coordinates") == True else "")
+            "%s\n%s %s%s F%s%s" % (
+                KlippyGcodes.MOVE_RELATIVE, KlippyGcodes.MOVE, axis, dist, speed*60,
+                "\nG90" if self._printer.get_stat("gcode_move", "absolute_coordinates") is True else ""
+            )
         )

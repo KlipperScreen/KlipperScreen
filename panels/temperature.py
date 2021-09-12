@@ -13,7 +13,7 @@ def create_panel(*args):
 
 class TemperaturePanel(ScreenPanel):
     active_heater = "extruder"
-    tempdeltas = ["1","5","10","25"]
+    tempdeltas = ["1", "5", "10", "25"]
     tempdelta = "10"
 
     def initialize(self, panel_name):
@@ -52,24 +52,24 @@ class TemperaturePanel(ScreenPanel):
         for h in self.heaters:
             if not (h.startswith("temperature_sensor")):
                 self.labels[h].connect('clicked', self.select_heater, h)
-            eq_grid.attach(self.labels[h], i%cols, int(i/cols), 1, 1)
+            eq_grid.attach(self.labels[h], i % cols, int(i/cols), 1, 1)
             i += 1
 
         self.labels["control_grid"] = self._gtk.HomogeneousGrid()
 
         self.labels["increase"] = self._gtk.ButtonImage("increase", _("Increase"), "color1")
-        self.labels["increase"].connect("clicked",self.change_target_temp, "+")
+        self.labels["increase"].connect("clicked", self.change_target_temp, "+")
         self.labels["decrease"] = self._gtk.ButtonImage("decrease", _("Decrease"), "color3")
-        self.labels["decrease"].connect("clicked",self.change_target_temp, "-")
+        self.labels["decrease"].connect("clicked", self.change_target_temp, "-")
         self.labels["npad"] = self._gtk.ButtonImage("hashtag", _("Number Pad"), "color2")
         self.labels["npad"].connect("clicked", self.show_numpad)
 
         tempgrid = Gtk.Grid()
-        j = 0;
+        j = 0
         for i in self.tempdeltas:
-            self.labels['deg'+ i] = self._gtk.ToggleButton(i)
-            self.labels['deg'+ i].connect("clicked", self.change_temp_delta, i)
-            ctx = self.labels['deg'+ i].get_style_context()
+            self.labels['deg' + i] = self._gtk.ToggleButton(i)
+            self.labels['deg' + i].connect("clicked", self.change_temp_delta, i)
+            ctx = self.labels['deg' + i].get_style_context()
             if j == 0:
                 ctx.add_class("tempbutton_top")
             elif j == len(self.tempdeltas)-1:
@@ -78,7 +78,7 @@ class TemperaturePanel(ScreenPanel):
                 ctx.add_class("tempbutton")
             if i == "10":
                 ctx.add_class("distbutton_active")
-            tempgrid.attach(self.labels['deg'+ i], 0, j, 1, 1)
+            tempgrid.attach(self.labels['deg' + i], 0, j, 1, 1)
             j += 1
 
         self.labels["deg" + self.tempdelta].set_active(True)
@@ -100,7 +100,7 @@ class TemperaturePanel(ScreenPanel):
 
         self._screen.add_subscription(panel_name)
 
-        self.update_temp("heater_bed",35,40)
+        self.update_temp("heater_bed", 35, 40)
 
     def change_temp_delta(self, widget, tempdelta):
         if self.tempdelta == tempdelta:
@@ -125,18 +125,18 @@ class TemperaturePanel(ScreenPanel):
         numpad.set_direction(Gtk.TextDirection.LTR)
 
         keys = [
-            ['1','numpad_tleft'],
-            ['2','numpad_top'],
-            ['3','numpad_tright'],
-            ['4','numpad_left'],
-            ['5','numpad_button'],
-            ['6','numpad_right'],
-            ['7','numpad_left'],
-            ['8','numpad_button'],
-            ['9','numpad_right'],
-            ['B','numpad_bleft'],
-            ['0','numpad_bottom'],
-            ['E','numpad_bright']
+            ['1', 'numpad_tleft'],
+            ['2', 'numpad_top'],
+            ['3', 'numpad_tright'],
+            ['4', 'numpad_left'],
+            ['5', 'numpad_button'],
+            ['6', 'numpad_right'],
+            ['7', 'numpad_left'],
+            ['8', 'numpad_button'],
+            ['9', 'numpad_right'],
+            ['B', 'numpad_bleft'],
+            ['0', 'numpad_bottom'],
+            ['E', 'numpad_bright']
         ]
         for i in range(len(keys)):
             id = 'button_' + str(keys[i][0])
@@ -147,9 +147,9 @@ class TemperaturePanel(ScreenPanel):
             else:
                 self.labels[id] = Gtk.Button(keys[i][0])
             self.labels[id].connect('clicked', self.update_entry, keys[i][0])
-            ctx=self.labels[id].get_style_context()
+            ctx = self.labels[id].get_style_context()
             ctx.add_class(keys[i][1])
-            numpad.attach(self.labels[id], i%3, i/3, 1, 1)
+            numpad.attach(self.labels[id], i % 3, i/3, 1, 1)
 
         self.labels["keypad"] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.labels['entry'] = Gtk.Entry()
@@ -176,7 +176,7 @@ class TemperaturePanel(ScreenPanel):
         self.grid.show_all()
 
 
-    def select_heater (self, widget, heater):
+    def select_heater(self, widget, heater):
         if self.active_heater == heater:
             return
 
@@ -194,14 +194,16 @@ class TemperaturePanel(ScreenPanel):
             return
 
         for x in self._printer.get_tools():
-            self.update_temp(x,
-                self._printer.get_dev_stat(x,"temperature"),
-                self._printer.get_dev_stat(x,"target")
+            self.update_temp(
+                x,
+                self._printer.get_dev_stat(x, "temperature"),
+                self._printer.get_dev_stat(x, "target")
             )
         for h in self._printer.get_heaters():
-            self.update_temp(h,
-                self._printer.get_dev_stat(h,"temperature"),
-                self._printer.get_dev_stat(h,"target"),
+            self.update_temp(
+                h,
+                self._printer.get_dev_stat(h, "temperature"),
+                self._printer.get_dev_stat(h, "target"),
                 None if h == "heater_bed" else " ".join(h.split(" ")[1:])
             )
         return

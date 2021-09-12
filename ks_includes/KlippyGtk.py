@@ -62,10 +62,10 @@ class KlippyGtk:
         return (self.width - self.get_action_bar_width()) * self.keyboard_ratio
 
     def Label(self, label, style=None):
-        l = Gtk.Label(label)
-        if style != None and style != False:
-            l.get_style_context().add_class(style)
-        return l
+        la = Gtk.Label(label)
+        if style is not None and style is not False:
+            la.get_style_context().add_class(style)
+        return la
 
     def ImageLabel(self, image_name, text, size=20, style=False, width_scale=.32, height_scale=.32):
         box1 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=15)
@@ -80,7 +80,7 @@ class KlippyGtk:
         box1.add(image)
         box1.add(label)
 
-        if style != False:
+        if style is not False:
             ctx = box1.get_style_context()
             ctx.add_class(style)
 
@@ -94,31 +94,31 @@ class KlippyGtk:
         return Gtk.Image.new_from_pixbuf(pixbuf)
 
     def ImageFromFile(self, filename, style=False, width_scale=1, height_scale=1):
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename,
-            int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+            filename, int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
 
         return Gtk.Image.new_from_pixbuf(pixbuf)
 
     def PixbufFromFile(self, filename, style=False, width_scale=1, height_scale=1):
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename, int(round(self.img_width * width_scale)),
-            int(round(self.img_height * height_scale)), True)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+            filename, int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
 
         return pixbuf
 
     def PixbufFromHttp(self, resource, style=False, width_scale=1, height_scale=1):
         response = self.screen.apiclient.get_thumbnail_stream(resource)
-        if response == False:
+        if response is False:
             return None
         stream = Gio.MemoryInputStream.new_from_data(response, None)
-        pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(stream, int(round(self.img_width * width_scale)),
-            int(round(self.img_height * height_scale)), True)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
+            stream, int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
 
         return pixbuf
 
     def ProgressBar(self, style=False):
         bar = Gtk.ProgressBar()
 
-        if style != False:
+        if style is not False:
             ctx = bar.get_style_context()
             ctx.add_class(style)
 
@@ -131,13 +131,13 @@ class KlippyGtk:
         b.set_can_focus(False)
         b.props.relief = Gtk.ReliefStyle.NONE
 
-        if style != None:
+        if style is not None:
             b.get_style_context().add_class(style)
 
         return b
 
     def ButtonImage(self, image_name, label=None, style=None, width_scale=1.38, height_scale=1.38,
-            position=Gtk.PositionType.TOP, word_wrap=True):
+                    position=Gtk.PositionType.TOP, word_wrap=True):
         filename = "%s/styles/%s/images/%s.svg" % (klipperscreendir, self.theme, str(image_name))
         if not os.path.exists(filename):
             logging.error("Unable to find button image (theme, image): (%s, %s)" % (self.theme, str(image_name)))
@@ -168,10 +168,10 @@ class KlippyGtk:
                 child = b.get_children()[0].get_children()[0].get_children()[1]
                 child.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
                 child.set_line_wrap(True)
-            except:
+            except Exception:
                 pass
 
-        if style != None:
+        if style is not None:
             b.get_style_context().add_class(style)
 
         return b
@@ -222,7 +222,6 @@ class KlippyGtk:
         img = Gtk.Image.new_from_pixbuf(pixbuf)
 
         b = Gtk.ToggleButton(label=label)
-        #b.props.relief = Gtk.RELIEF_NONE
         b.set_image(img)
         b.set_hexpand(True)
         b.set_vexpand(True)
@@ -231,7 +230,7 @@ class KlippyGtk:
         b.set_always_show_image(True)
         b.props.relief = Gtk.ReliefStyle.NONE
 
-        if style != False:
+        if style is not False:
             ctx = b.get_style_context()
             ctx.add_class(style)
 
@@ -241,7 +240,7 @@ class KlippyGtk:
         g = Gtk.Grid()
         g.set_row_homogeneous(True)
         g.set_column_homogeneous(True)
-        if width != None and height != None:
+        if width is not None and height is not None:
             g.set_size_request(width, height)
         return g
 
@@ -263,12 +262,12 @@ class KlippyGtk:
     def formatTimeString(self, seconds):
         time = int(seconds)
         text = ""
-        if int(time/3600) !=0:
+        if int(time/3600) != 0:
             text += str(int(time/3600))+"h "
-        text += str(int(time/60)%60)+"m "+str(time%60)+"s"
+        text += str(int(time/60) % 60)+"m "+str(time % 60)+"s"
         return text
 
     def formatTemperatureString(self, temp, target):
-        if (target > temp-2 and target < temp+2) or round(target,0) == 0:
-            return str(round(temp,1)) + "°C" #°C →"
+        if (target > temp-2 and target < temp+2) or round(target, 0) == 0:
+            return str(round(temp, 1)) + "°C"  # °C →"
         return str(round(temp)) + " → " + str(round(target)) + "°C"

@@ -7,7 +7,6 @@ import re
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
-
 from ks_includes.screen_panel import ScreenPanel
 
 def create_panel(*args):
@@ -54,7 +53,7 @@ class NetworkPanel(ScreenPanel):
         sbox.set_hexpand(True)
         sbox.set_vexpand(False)
         sbox.add(self.labels['interface'])
-        #sbox.add(self.labels['disconnect'])
+        # sbox.add(self.labels['disconnect'])
 
 
         scroll = Gtk.ScrolledWindow()
@@ -67,7 +66,7 @@ class NetworkPanel(ScreenPanel):
         self.labels['networklist'] = Gtk.Grid()
         self.files = {}
 
-        if self._screen.wifi != None and self._screen.wifi.is_initialized():
+        if self._screen.wifi is not None and self._screen.wifi.is_initialized():
             box.pack_start(sbox, False, False, 0)
             box.pack_start(scroll, True, True, 0)
 
@@ -104,7 +103,7 @@ class NetworkPanel(ScreenPanel):
     def add_network(self, ssid, show=True):
         _ = self.lang.gettext
 
-        if ssid == None:
+        if ssid is None:
             return
         ssid = ssid.strip()
 
@@ -113,7 +112,7 @@ class NetworkPanel(ScreenPanel):
             return
 
         netinfo = self._screen.wifi.get_network_info(ssid)
-        if netinfo == None:
+        if netinfo is None:
             logging.debug("Couldn't get netinfo")
             return
 
@@ -124,7 +123,7 @@ class NetworkPanel(ScreenPanel):
                 network_id = net
 
         frame = Gtk.Frame()
-        frame.set_property("shadow-type",Gtk.ShadowType.NONE)
+        frame.set_property("shadow-type", Gtk.ShadowType.NONE)
         frame.get_style_context().add_class("frame-item")
 
 
@@ -137,7 +136,7 @@ class NetworkPanel(ScreenPanel):
 
         info = Gtk.Label()
         info.set_halign(Gtk.Align.START)
-        #info.set_markup(self.get_file_info_str(ssid))
+        # info.set_markup(self.get_file_info_str(ssid))
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)
         labels.add(info)
@@ -145,14 +144,14 @@ class NetworkPanel(ScreenPanel):
         labels.set_valign(Gtk.Align.CENTER)
         labels.set_halign(Gtk.Align.START)
 
-        connect = self._gtk.ButtonImage("load",None,"color3")
+        connect = self._gtk.ButtonImage("load", None, "color3")
         connect.connect("clicked", self.connect_network, ssid)
         connect.set_hexpand(False)
         connect.set_halign(Gtk.Align.END)
 
-        delete = self._gtk.ButtonImage("delete","","color3")
+        delete = self._gtk.ButtonImage("delete", "", "color3")
         delete.connect("clicked", self.remove_wifi_network, ssid)
-        delete.set_size_request(60,0)
+        delete.set_size_request(60, 0)
         delete.set_hexpand(False)
         delete.set_halign(Gtk.Align.END)
 
@@ -165,7 +164,7 @@ class NetworkPanel(ScreenPanel):
         buttons = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
         if network_id != -1:
             buttons.pack_end(delete, False, False, 0)
-        if netinfo['connected'] == False:
+        if netinfo['connected'] is False:
             buttons.pack_end(connect, False, False, 0)
 
         network.add(buttons)
@@ -176,17 +175,17 @@ class NetworkPanel(ScreenPanel):
         reverse = False
 
         pos = 0
-        if netinfo['connected'] == True:
+        if netinfo['connected'] is True:
             pos = 0
         else:
             connected_ssid = self._screen.wifi.get_connected_ssid()
             nets = list(self.networks)
-            if connected_ssid != None:
+            if connected_ssid is not None:
                 if connected_ssid in nets:
                     nets.remove(connected_ssid)
             nets = sorted(nets, reverse=reverse)
             pos = nets.index(ssid)
-            if connected_ssid != None:
+            if connected_ssid is not None:
                 pos += 1
 
         self.labels['networks'][ssid] = {
@@ -199,7 +198,7 @@ class NetworkPanel(ScreenPanel):
 
         self.labels['networklist'].insert_row(pos)
         self.labels['networklist'].attach(self.networks[ssid], 0, pos, 1, 1)
-        if show == True:
+        if show is True:
             self.labels['networklist'].show()
 
     def add_new_network(self, widget, ssid, connect=False):
@@ -209,14 +208,14 @@ class NetworkPanel(ScreenPanel):
 
         self.close_add_network()
 
-        if connect == True:
-            if result == True:
+        if connect is True:
+            if result is True:
                 self.connect_network(widget, ssid, False)
             else:
                 self._screen.show_popup_message("Error adding network %s" % ssid)
 
     def back(self):
-        if self.show_add == True:
+        if self.show_add is True:
             self.close_add_network()
             return True
         return False
@@ -232,14 +231,14 @@ class NetworkPanel(ScreenPanel):
         self.labels['networklist'].show_all()
 
     def close_add_network(self):
-        if self.show_add == False:
+        if self.show_add is False:
             return
 
         for child in self.content.get_children():
             self.content.remove(child)
         self.content.add(self.labels['main_box'])
         self.content.show()
-        for i in ['add_network','network_psk']:
+        for i in ['add_network', 'network_psk']:
             if i in self.labels:
                 del self.labels[i]
         self.show_add = False
@@ -249,9 +248,9 @@ class NetworkPanel(ScreenPanel):
 
     def connected_callback(self, ssid, prev_ssid):
         logging.info("Now connected to a new network")
-        if ssid != None:
+        if ssid is not None:
             self.remove_network(ssid)
-        if prev_ssid != None:
+        if prev_ssid is not None:
             self.remove_network(prev_ssid)
 
         self.check_missing_networks()
@@ -266,8 +265,8 @@ class NetworkPanel(ScreenPanel):
                 isdef = True
                 break
 
-        if isdef == False:
-            if showadd == True:
+        if isdef is False:
+            if showadd is True:
                 self.show_add_network(widget, ssid)
             return
         self.prev_network = self._screen.wifi.get_connected_ssid()
@@ -280,7 +279,7 @@ class NetworkPanel(ScreenPanel):
         scroll.set_property("overlay-scrolling", False)
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
-        scroll.set_size_request(800,400)
+        scroll.set_size_request(800, 400)
         self.labels['connecting_info'] = Gtk.Label(_("Starting WiFi Re-association"))
         self.labels['connecting_info'].set_halign(Gtk.Align.START)
         self.labels['connecting_info'].set_valign(Gtk.Align.START)
@@ -292,7 +291,7 @@ class NetworkPanel(ScreenPanel):
             self.remove_network(ssid)
         if self.prev_network in self.networks:
             self.remove_network(self.prev_network)
-            #GLib.timeout_add(500, self.add_network, self.prev_network)
+            # GLib.timeout_add(500, self.add_network, self.prev_network)
 
         self._screen.wifi.add_callback("connecting_status", self.connecting_status_callback)
         self._screen.wifi.connect(ssid)
@@ -306,7 +305,7 @@ class NetworkPanel(ScreenPanel):
             return
 
         i = 0
-        while self.labels['networklist'].get_child_at(0, i) != None:
+        while self.labels['networklist'].get_child_at(0, i) is not None:
             if self.networks[ssid] == self.labels['networklist'].get_child_at(0, i):
                 self.labels['networklist'].remove_row(i)
                 self.labels['networklist'].show()
@@ -332,7 +331,7 @@ class NetworkPanel(ScreenPanel):
         self.content.show_all()
 
     def show_add_network(self, widget, ssid):
-        if self.show_add == True:
+        if self.show_add is True:
             return
 
         _ = self.lang.gettext
@@ -347,23 +346,23 @@ class NetworkPanel(ScreenPanel):
 
         box = Gtk.Box(spacing=5)
         box.set_size_request(self._gtk.get_content_width(), self._gtk.get_content_height() -
-                self._screen.keyboard_height - 20)
+                             self._screen.keyboard_height - 20)
         box.set_hexpand(True)
         box.set_vexpand(False)
         self.labels['add_network'].add(box)
 
-        l = self._gtk.Label("%s %s:" % (_("PSK for"), ssid))
-        l.set_hexpand(False)
+        label = self._gtk.Label("%s %s:" % (_("PSK for"), ssid))
+        label.set_hexpand(False)
         entry = Gtk.Entry()
         entry.set_hexpand(True)
 
-        save = self._gtk.ButtonImage("sd",_("Save"),"color3")
+        save = self._gtk.ButtonImage("sd", _("Save"), "color3")
         save.set_hexpand(False)
         save.connect("clicked", self.add_new_network, ssid, True)
 
 
         self.labels['network_psk'] = entry
-        box.pack_start(l, False, False, 5)
+        box.pack_start(label, False, False, 5)
         box.pack_start(entry, True, True, 5)
         box.pack_start(save, False, False, 5)
 
@@ -386,12 +385,12 @@ class NetworkPanel(ScreenPanel):
         if ssid not in self.networks or ssid not in self.labels['networks']:
             return
         netinfo = self._screen.wifi.get_network_info(ssid)
-        if netinfo == None:
+        if netinfo is None:
             logging.debug("Couldn't get netinfo for update")
             return
 
         connected = ""
-        if netinfo['connected'] == True:
+        if netinfo['connected'] is True:
             stream = os.popen('hostname -f')
             hostname = stream.read().strip()
             ifadd = netifaces.ifaddresses(self.interface)
@@ -401,15 +400,15 @@ class NetworkPanel(ScreenPanel):
                 ipv4 = "<b>%s:</b> %s " % (_("IPv4"), ifadd[netifaces.AF_INET][0]['addr'])
             if netifaces.AF_INET6 in ifadd and len(ifadd[netifaces.AF_INET6]) > 0:
                 ipv6 = ipv6 = "<b>%s:</b> %s " % (_("IPv6"), ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0])
-            connected = "<b>%s</b>\n<b>%s:</b> %s\n%s%s\n" % (_("Connected"),_("Hostname"),hostname, ipv4, ipv6)
+            connected = "<b>%s</b>\n<b>%s:</b> %s\n%s%s\n" % (_("Connected"), _("Hostname"), hostname, ipv4, ipv6)
         elif "psk" in netinfo:
             connected = "Password saved."
         freq = "2.4 GHz" if netinfo['frequency'][0:1] == "2" else "5 Ghz"
 
-        self.labels['networks'][ssid]['info'].set_markup("%s%s <small>%s %s %s  %s%s</small>" % ( connected,
-            "" if netinfo['encryption'] == "off" else netinfo['encryption'].upper(),
+        self.labels['networks'][ssid]['info'].set_markup("%s%s <small>%s %s %s  %s%s</small>" % (
+            connected, "" if netinfo['encryption'] == "off" else netinfo['encryption'].upper(),
             freq, _("Channel"), netinfo['channel'], netinfo['signal_level_dBm'], _("dBm")
-            ))
+        ))
         self.labels['networks'][ssid]['info'].show_all()
 
     def update_single_network_info(self):
@@ -424,8 +423,8 @@ class NetworkPanel(ScreenPanel):
             ipv4 = "<b>%s:</b> %s " % (_("IPv4"), ifadd[netifaces.AF_INET][0]['addr'])
         if netifaces.AF_INET6 in ifadd and len(ifadd[netifaces.AF_INET6]) > 0:
             ipv6 = ipv6 = "<b>%s:</b> %s " % (_("IPv6"), ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0])
-        connected = "<b>%s</b>\n\n<small><b>%s</b></small>\n<b>%s:</b> %s\n%s\n%s\n" % (self.interface, _("Connected"),_("Hostname"),
-            hostname, ipv4, ipv6)
+        connected = "<b>%s</b>\n\n<small><b>%s</b></small>\n<b>%s:</b> %s\n%s\n%s\n" % (
+            self.interface, _("Connected"), _("Hostname"), hostname, ipv4, ipv6)
 
         self.labels['networkinfo'].set_markup(connected)
         self.labels['networkinfo'].show_all()

@@ -16,9 +16,9 @@ class FineTunePanel(ScreenPanel):
 
     bs = 0
     bs_delta = "0.05"
-    bs_deltas = ["0.01","0.05"]
+    bs_deltas = ["0.01", "0.05"]
     percent_delta = 1
-    percent_deltas = ['1','5','10','25']
+    percent_deltas = ['1', '5', '10', '25']
     fan = 100
 
     extrusion = 0
@@ -33,7 +33,7 @@ class FineTunePanel(ScreenPanel):
 
         print_cfg = self._config.get_printer_config(self._screen.connected_printer)
         if print_cfg is not None:
-            bs = print_cfg.get("z_babystep_values","0.01, 0.05")
+            bs = print_cfg.get("z_babystep_values", "0.01, 0.05")
             if re.match(r'^[0-9,\.\s]+$', bs):
                 bs = [str(i.strip()) for i in bs.split(',')]
                 if len(bs) <= 2:
@@ -77,7 +77,7 @@ class FineTunePanel(ScreenPanel):
 
         # babystepping grid
         bsgrid = Gtk.Grid()
-        j = 0;
+        j = 0
         for i in self.bs_deltas:
             self.labels[i] = self._gtk.ToggleButton(i)
             self.labels[i].connect("clicked", self.change_bs_delta, i)
@@ -96,7 +96,7 @@ class FineTunePanel(ScreenPanel):
 
         # Grid for percentage
         deltgrid = Gtk.Grid()
-        j = 0;
+        j = 0
         for i in self.percent_deltas:
             self.labels[i] = self._gtk.ToggleButton("%s%%" % i)
             self.labels[i].connect("clicked", self.change_percent_delta, i)
@@ -116,7 +116,7 @@ class FineTunePanel(ScreenPanel):
 
         grid.attach(deltgrid, 1, 3, 2, 1)
 
-        #self.panel = grid
+        # self.panel = grid
         self.content.add(grid)
         self._screen.add_subscription(panel_name)
 

@@ -15,7 +15,7 @@ class ZCalibratePanel(ScreenPanel):
     _screen = None
     labels = {}
     distance = 1
-    distances = ['.01','.05','.1','.5','1','5']
+    distances = ['.01', '.05', '.1', '.5', '1', '5']
 
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, False)
@@ -33,13 +33,13 @@ class ZCalibratePanel(ScreenPanel):
         box.add(label)
         box.add(self.labels['zposition'])
 
-        zpos = self._gtk.ButtonImage('z-farther',_("Raise Nozzle"))
+        zpos = self._gtk.ButtonImage('z-farther', _("Raise Nozzle"))
         zpos.connect("clicked", self.move, "+")
-        zneg = self._gtk.ButtonImage('z-closer',_("Lower Nozzle"))
+        zneg = self._gtk.ButtonImage('z-closer', _("Lower Nozzle"))
         zneg.connect("clicked", self.move, "-")
 
         distgrid = Gtk.Grid()
-        j = 0;
+        j = 0
         for i in self.distances:
             self.labels[i] = self._gtk.ToggleButton(i)
             self.labels[i].set_direction(Gtk.TextDirection.LTR)
@@ -63,10 +63,10 @@ class ZCalibratePanel(ScreenPanel):
         bottombox.pack_start(self.labels['move_dist'], True, True, 0)
         bottombox.pack_start(distgrid, True, True, 0)
 
-        complete = self._gtk.ButtonImage('complete',_('Accept'),'color4')
+        complete = self._gtk.ButtonImage('complete', _('Accept'), 'color4')
         complete.connect("clicked", self.accept)
 
-        b = self._gtk.ButtonImage('cancel', _('Abort'),'color2')
+        b = self._gtk.ButtonImage('cancel', _('Abort'), 'color2')
         b.connect("clicked", self.abort)
 
 
@@ -83,7 +83,7 @@ class ZCalibratePanel(ScreenPanel):
         self._screen.add_subscription(panel_name)
 
     def activate(self):
-        if self._screen.printer.get_stat("toolhead","homed_axes") != "xyz":
+        if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
             self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
         self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_CALIBRATE)
 
@@ -95,7 +95,7 @@ class ZCalibratePanel(ScreenPanel):
             self.updatePosition(data['toolhead']['position'])
 
     def updatePosition(self, position):
-        self.labels['zposition'].set_text(str(round(position[2],2)))
+        self.labels['zposition'].set_text(str(round(position[2], 2)))
 
     def change_distance(self, widget, distance):
         if self.distance == distance:

@@ -14,12 +14,10 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
 from ks_includes.KlippyGcodes import KlippyGcodes
 
-#f = open("/home/pi/.moonraker_api_key", "r")
-api_key = "" #f.readline()
-#f.close()
+api_key = ""
 
 api = {
-     "printer_info": {
+    "printer_info": {
         "url": "/printer/info",
         "method": "get_printer_info"
     },
@@ -48,33 +46,32 @@ class KlippyWebsocket(threading.Thread):
 
     def initial_connect(self):
         # Enable a timeout so that way if moonraker is not running, it will attempt to reconnect
-        if self.timeout == None:
+        if self.timeout is None:
             self.timeout = GLib.timeout_add(500, self.reconnect)
         self.connect()
 
-    def connect (self):
+    def connect(self):
         def ws_on_close(ws, a=None, b=None):
             self.on_close(ws)
+
         def ws_on_error(ws, msg):
             self.on_error(ws, msg)
+
         def ws_on_message(ws, msg):
             self.on_message(ws, msg)
+
         def ws_on_open(ws):
             self.on_open(ws)
 
         try:
             token = self._screen.apiclient.get_oneshot_token()
-        except:
+        except Exception:
             logging.debug("Unable to get oneshot token")
             return False
 
         self.ws_url = "ws://%s/websocket?token=%s" % (self._url, token)
-        self.ws = websocket.WebSocketApp(self.ws_url,
-            on_close    = ws_on_close,
-            on_error    = ws_on_error,
-            on_message  = ws_on_message,
-            on_open     = ws_on_open
-        )
+        self.ws = websocket.WebSocketApp(
+            self.ws_url, on_close=ws_on_close, on_error=ws_on_error, on_message=ws_on_message, on_open=ws_on_open)
 
         self._wst = threading.Thread(target=self.ws.run_forever)
         self._wst.daemon = True
@@ -115,11 +112,11 @@ class KlippyWebsocket(threading.Thread):
         return
 
     def send_method(self, method, params={}, callback=None, *args):
-        if self.is_connected() == False:
+        if self.is_connected() is False:
             return False
 
         self._req_id += 1
-        if callback != None:
+        if callback is not None:
             self.callback_table[self._req_id] = [callback, method, params, [*args]]
 
         data = {
@@ -135,7 +132,7 @@ class KlippyWebsocket(threading.Thread):
         logging.info("Moonraker Websocket Open")
         logging.info("Self.connected = %s" % self.is_connected())
         self.connected = True
-        if self.timeout != None:
+        if self.timeout is not None:
             GLib.source_remove(self.timeout)
             self.timeout = None
         if "on_connect" in self._callback:
@@ -145,18 +142,18 @@ class KlippyWebsocket(threading.Thread):
             )
 
     def on_close(self, ws):
-        if self.is_connected() == False:
+        if self.is_connected() is False:
             logging.debug("Connection already closed")
             return
 
-        if self.closing == True:
+        if self.closing is True:
             logging.debug("Closing websocket")
             self.ws.stop()
             return
 
         logging.info("Moonraker Websocket Closed")
         self.connected = False
-        if self.timeout == None:
+        if self.timeout is None:
             self.timeout = GLib.timeout_add(500, self.reconnect)
 
         if "on_close" in self._callback:
@@ -179,7 +176,7 @@ class KlippyWebsocket(threading.Thread):
         logging.debug("Websocket error: %s" % error)
 
 class MoonrakerApi:
-    def __init__ (self, ws):
+    def __init__(self, ws):
         self._ws = ws
 
     def emergency_stop(self):
@@ -207,7 +204,6 @@ class MoonrakerApi:
         )
 
     def get_file_list(self, callback=None, *args):
-        #Commenting this log for being too noisy
         logging.debug("Sending server.files.list")
         return self._ws.send_method(
             "server.files.list",
@@ -217,7 +213,6 @@ class MoonrakerApi:
         )
 
     def get_file_metadata(self, filename, callback=None, *args):
-        #logging.debug("Sending server.files.metadata: %s", filename)
         return self._ws.send_method(
             "server.files.metadata",
             {"filename": filename},
@@ -300,13 +295,14 @@ class MoonrakerApi:
                 *args
             )
         else:
-            logging.debug("Sending printer.gcode.script: %s",
-                KlippyGcodes.set_ext_temp(target, heater.replace("tool","")))
-            #TODO: Add max/min limits
+            logging.debug(
+                "Sending printer.gcode.script: %s",
+                KlippyGcodes.set_ext_temp(target, heater.replace("tool", "")))
+            # TODO: Add max/min limits
             return self._ws.send_method(
                 "printer.gcode.script",
                 {
-                    "script": KlippyGcodes.set_ext_temp(target, heater.replace("tool",""))
+                    "script": KlippyGcodes.set_ext_temp(target, heater.replace("tool", ""))
                 },
                 callback,
                 *args

@@ -24,7 +24,7 @@ class ScreenPanel:
         self.layout = Gtk.Layout()
         self.layout.set_size(self._screen.width, self._screen.height)
 
-        action_bar_width = self._gtk.get_action_bar_width() if action_bar == True else 0
+        action_bar_width = self._gtk.get_action_bar_width() if action_bar is True else 0
         self.content = Gtk.Box(spacing=0)
 
     def initialize(self, panel_name):
@@ -45,7 +45,7 @@ class ScreenPanel:
             return None
 
         loc = self._files.get_thumbnail_location(filename)
-        if loc == None:
+        if loc is None:
             return None
         if loc[0] == "file":
             return self._gtk.PixbufFromFile(loc[1], None, width, height)
@@ -60,23 +60,22 @@ class ScreenPanel:
         self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
 
     def menu_item_clicked(self, widget, panel, item):
-        print("### Creating panel "+ item['panel'] + " : %s %s" % (panel, item))
+        print("### Creating panel " + item['panel'] + " : %s %s" % (panel, item))
         if "items" in item:
             self._screen.show_panel(self._screen._cur_panels[-1] + '_' + panel, item['panel'], item['name'],
-                1, False, items=item['items'])
+                                    1, False, items=item['items'])
             return
         self._screen.show_panel(self._screen._cur_panels[-1] + '_' + panel, item['panel'], item['name'],
-            1, False)
+                                1, False)
 
     def menu_return(self, widget, home=False):
-        if home == False:
+        if home is False:
             self._screen._menu_go_back()
             return
         self._screen._menu_go_home()
 
     def set_title(self, title):
         self.title = title
-        #self.title.set_label(title)
 
     def show_all(self):
         self._screen.show_all()
@@ -87,7 +86,7 @@ class ScreenPanel:
 
     def update_temp(self, dev, temp, target, name=None):
         if dev in self.labels:
-            if name == None:
+            if name is None:
                 self.labels[dev].set_label(self._gtk.formatTemperatureString(temp, target))
             else:
                 self.labels[dev].set_label("%s\n%s" % (name, self._gtk.formatTemperatureString(temp, target)))

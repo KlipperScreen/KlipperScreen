@@ -11,12 +11,12 @@ from io import StringIO
 from os import path
 
 SCREEN_BLANKING_OPTIONS = [
-    "300",    #5 Minutes
-    "900",    #15 Minutes
-    "1800",   #30 Minutes
-    "3600",   #1 Hour
-    "7200",   #2 Hours
-    "14400",  #4 Hours
+    "300",    # 5 Minutes
+    "900",    # 15 Minutes
+    "1800",   # 30 Minutes
+    "3600",   # 1 Hour
+    "7200",   # 2 Hours
+    "14400",  # 4 Hours
 ]
 
 class ConfigError(Exception):
@@ -44,9 +44,9 @@ class KlipperScreenConfig:
 
                 includes = [i[8:] for i in self.defined_config.sections() if i.startswith("include ")]
                 for include in includes:
-                    self._include_config("/".join(self.config_path.split("/")[:-1]),include)
+                    self._include_config("/".join(self.config_path.split("/")[:-1]), include)
 
-                for i in ['menu __main','menu __print','menu __splashscreen','preheat']:
+                for i in ['menu __main', 'menu __print', 'menu __splashscreen', 'preheat']:
                     for j in self.defined_config.sections():
                         if j.startswith(i):
                             for k in list(self.config.sections()):
@@ -56,12 +56,12 @@ class KlipperScreenConfig:
 
                 self.log_config(self.defined_config)
                 self.config.read_string(user_def)
-                if saved_def != None:
+                if saved_def is not None:
                     self.config.read_string(saved_def)
                     logging.info("====== Saved Def ======\n%s\n=======================" % saved_def)
         except KeyError:
             raise ConfigError(f"Error reading config: {self.config_path}")
-        except:
+        except Exception:
             logging.exception("Unknown error with config")
 
         printers = sorted([i for i in self.config.sections() if i.startswith("printer ")])
@@ -92,10 +92,10 @@ class KlipperScreenConfig:
         logging.debug("Configured printers: %s" % json.dumps(conf_printers_debug, indent=2))
 
         lang = self.get_main_config_option("language", None)
-        lang = [lang] if lang != None and lang != "default" else None
+        lang = [lang] if lang is not None and lang != "default" else None
         logging.info("Detected language: %s" % lang)
         self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', languages=lang,
-            fallback=True)
+                                        fallback=True)
 
         self._create_configurable_options(screen)
 
@@ -108,49 +108,57 @@ class KlipperScreenConfig:
             {"invert_y": {"section": "main", "name": _("Invert Y"), "type": "binary", "value": "False"}},
             {"invert_z": {"section": "main", "name": _("Invert Z"), "type": "binary", "value": "False"}},
             {"language": {"section": "main", "name": _("Language"), "type": "dropdown", "value": "system_lang",
-                "callback": screen.restart_warning, "options":[
-                    {"name": "System Default", "value": "system_lang"}
+                          "callback": screen.restart_warning, "options": [
+                              {"name": "System Default", "value": "system_lang"}
             ]}},
-            {"move_speed": {"section": "main", "name": _("Move Speed (mm/s)"), "type": "scale", "value": "20",
-                "range": [5,100], "step": 1
-            }},
+            {"move_speed": {
+                "section": "main", "name": _("Move Speed (mm/s)"), "type": "scale", "value": "20",
+                "range": [5, 100], "step": 1}},
             {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
-            {"print_estimate_method": {"section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
-                "value": "file","options":[
+            {"print_estimate_method": {
+                "section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
+                "value": "file", "options": [
                     {"name": _("File Estimation (default)"), "value": "file"},
                     {"name": _("Duration Only"), "value": "duration"},
                     {"name": _("Filament Used"), "value": "filament"},
-                    {"name": _("Slicer"), "value": "slicer"}
-            ]}},
-            {"screen_blanking": {"section": "main", "name": _("Screen Power Off Time"), "type": "dropdown",
-                "value": "3600", "callback": screen.set_screenblanking_timeout, "options":[
-                    {"name": _("Off"), "value": "off"}
-            ]}},
-            {"theme": {"section": "main", "name": _("Icon Theme"), "type": "dropdown",
-                "value": "z-bolt", "callback": screen.restart_warning, "options":[
+                    {"name": _("Slicer"), "value": "slicer"}]}},
+            {"screen_blanking": {
+                "section": "main", "name": _("Screen Power Off Time"), "type": "dropdown",
+                "value": "3600", "callback": screen.set_screenblanking_timeout, "options": [
+                    {"name": _("Off"), "value": "off"}]
+            }},
+            {"theme": {
+                "section": "main", "name": _("Icon Theme"), "type": "dropdown",
+                "value": "z-bolt", "callback": screen.restart_warning, "options": [
                     {"name": _("Z-bolt (default)"), "value": "z-bolt"},
-                    {"name": _("Colorized"), "value": "colorized"}
-            ]}},
+                    {"name": _("Colorized"), "value": "colorized"}]}},
             {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
-            {"side_macro_shortcut": {"section": "main", "name": _("Macro shortcut on sidebar"), "type": "binary",
+            {"side_macro_shortcut": {
+                "section": "main", "name": _("Macro shortcut on sidebar"), "type": "binary",
                 "value": "True", "callback": screen.toggle_macro_shortcut}},
-            #{"": {"section": "main", "name": _(""), "type": ""}}
+            {"font_size": {
+                "section": "main", "name": _("Font Size"), "type": "dropdown",
+                "value": "medium", "callback": screen.restart_warning, "options": [
+                    {"name": _("Small"), "value": "small"},
+                    {"name": _("Medium (default)"), "value": "medium"},
+                    {"name": _("Large"), "value": "large"}]}},
+            # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
 
         lang_path = os.path.join(os.getcwd(), 'ks_includes/locales')
-        langs = [d for d in os.listdir(lang_path) if not os.path.isfile(os.path.join(lang_path,d))]
+        langs = [d for d in os.listdir(lang_path) if not os.path.isfile(os.path.join(lang_path, d))]
         langs.sort()
         lang_opt = self.configurable_options[3]['language']['options']
 
-        for l in langs:
-            lang_opt.append({"name": l, "value": l})
+        for lang in langs:
+            lang_opt.append({"name": lang, "value": lang})
 
         index = self.configurable_options.index(
-            [i for i in self.configurable_options if list(i)[0]=="screen_blanking"][0])
+            [i for i in self.configurable_options if list(i)[0] == "screen_blanking"][0])
         for num in SCREEN_BLANKING_OPTIONS:
             hour = int(int(num)/3600)
             if hour > 0:
-                name = str(hour) + " " + _n("hour","hours", hour)
+                name = str(hour) + " " + _n("hour", "hours", hour)
             else:
                 name = str(int(int(num)/60)) + " " + _("minutes")
             self.configurable_options[index]['screen_blanking']['options'].append({
@@ -177,7 +185,7 @@ class KlipperScreenConfig:
                 logging.info("Config Error: Directory %s does not exist" % parent_dir)
                 return
             files = os.listdir(parent_dir)
-            regex = "^%s$" % file.replace('*','.*')
+            regex = "^%s$" % file.replace('*', '.*')
             for file in files:
                 if re.match(regex, file):
                     parse_files.append(os.path.join(parent_dir, file))
@@ -205,17 +213,17 @@ class KlipperScreenConfig:
             return [None, None]
         with open(config_path) as file:
             for line in file:
-                line = line.replace('\n','')
+                line = line.replace('\n', '')
                 if line == self.do_not_edit_line:
                     found_saved = True
                     saved_def = []
                     continue
-                if found_saved == False:
-                    user_def.append(line.replace('\n',''))
+                if found_saved is False:
+                    user_def.append(line.replace('\n', ''))
                 else:
                     if line.startswith(self.do_not_edit_prefix):
                         saved_def.append(line[(len(self.do_not_edit_prefix)+1):])
-        return ["\n".join(user_def), None if saved_def == None else "\n".join(saved_def)]
+        return ["\n".join(user_def), None if saved_def is None else "\n".join(saved_def)]
 
     def get_config_file_location(self, file):
         logging.info("Passed config file: %s" % file)
@@ -299,23 +307,23 @@ class KlipperScreenConfig:
             opt = item[name]
             curval = self.config[opt['section']].get(name)
             if curval != opt["value"] or (
-                    self.defined_config != None and opt['section'] in self.defined_config.sections() and
-                    self.defined_config[opt['section']].get(name,None) not in (None, curval)):
+                    self.defined_config is not None and opt['section'] in self.defined_config.sections() and
+                    self.defined_config[opt['section']].get(name, None) not in (None, curval)):
                 if opt['section'] not in save_config.sections():
                     save_config.add_section(opt['section'])
                 save_config.set(opt['section'], name, str(curval))
 
         macro_sections = [i for i in self.config.sections() if i.startswith("displayed_macros")]
         for macro_sec in macro_sections:
-                for item in self.config.options(macro_sec):
-                    value = self.config[macro_sec].getboolean(item, fallback=True)
-                    if value == False or (self.defined_config != None and
-                            macro_sec in self.defined_config.sections() and
-                            self.defined_config[macro_sec].getboolean(item, fallback=True) == False and
-                            self.defined_config[macro_sec].getboolean(item, fallback=True) != value):
-                        if macro_sec not in save_config.sections():
-                            save_config.add_section(macro_sec)
-                        save_config.set(macro_sec, item, str(value))
+            for item in self.config.options(macro_sec):
+                value = self.config[macro_sec].getboolean(item, fallback=True)
+                if value is False or (self.defined_config is not None and
+                                      macro_sec in self.defined_config.sections() and
+                                      self.defined_config[macro_sec].getboolean(item, fallback=True) is False and
+                                      self.defined_config[macro_sec].getboolean(item, fallback=True) != value):
+                    if macro_sec not in save_config.sections():
+                        save_config.add_section(macro_sec)
+                    save_config.set(macro_sec, item, str(value))
 
         save_output = self._build_config_string(save_config).split("\n")
         for i in range(len(save_output)):
@@ -327,24 +335,25 @@ class KlipperScreenConfig:
         else:
             user_def, saved_def = self.separate_saved_config(self.config_path)
 
-        extra_lb = "\n" if saved_def != None else ""
-        contents = "%s\n%s%s\n%s\n%s\n%s\n" % (user_def, self.do_not_edit_line, extra_lb,
-            self.do_not_edit_prefix, "\n".join(save_output), self.do_not_edit_prefix)
+        extra_lb = "\n" if saved_def is not None else ""
+        contents = "%s\n%s%s\n%s\n%s\n%s\n" % (
+            user_def, self.do_not_edit_line, extra_lb, self.do_not_edit_prefix, "\n".join(save_output),
+            self.do_not_edit_prefix)
 
         if self.config_path != self.default_config_path:
             path = self.config_path
         else:
             path = os.path.expanduser("~/")
             if os.path.exists(path+"klipper_config/"):
-                path =  path + "klipper_config/KlipperScreen.conf"
+                path = path + "klipper_config/KlipperScreen.conf"
             else:
-                path =  path + "KlipperScreen.conf"
+                path = path + "KlipperScreen.conf"
 
         try:
             file = open(path, 'w')
             file.write(contents)
             file.close()
-        except:
+        except Exception:
             logging.error("Error writing configuration file in %s" % path)
 
     def set(self, section, name, value):
@@ -384,7 +393,7 @@ class KlipperScreenConfig:
 
         try:
             item["params"] = json.loads(cfg.get("params", "{}"))
-        except:
+        except Exception:
             logging.debug("Unable to parse parameters for [%s]" % name)
             item["params"] = {}
 
