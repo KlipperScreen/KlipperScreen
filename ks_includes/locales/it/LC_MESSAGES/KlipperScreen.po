@@ -424,7 +424,8 @@ msgstr "Sistema"
 msgid ""
 "System\n"
 "Restart"
-msgstr "" 
+
+msgstr ""
 "Riavvia\n"
 "Sistema"
 
