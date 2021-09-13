@@ -1,0 +1,507 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-16 10:25-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "..."
+msgstr ""
+
+msgid "24 Hour Time"
+msgstr ""
+
+msgid "Abort"
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Add Printer"
+msgstr ""
+
+msgid "Add bed mesh profile"
+msgstr ""
+
+msgid "Are you sure you wish to cancel this print?"
+msgstr ""
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr ""
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr ""
+
+msgid "Bed Level"
+msgstr ""
+
+msgid "Bed Mesh"
+msgstr ""
+
+msgid "Calibrate"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Cancel Print"
+msgstr ""
+
+msgid "Cancelled"
+msgstr ""
+
+msgid "Cancelling"
+msgstr ""
+
+msgid "Change Printer"
+msgstr ""
+
+msgid "Channel"
+msgstr ""
+
+msgid ""
+"Check /tmp/KlipperScreen.log for more information.\n"
+"Please submit an issue on GitHub for help."
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Colorized"
+msgstr ""
+
+msgid "Commited"
+msgstr ""
+
+msgid "Complete"
+msgstr ""
+
+msgid "Configuration"
+msgstr ""
+
+msgid "Connected"
+msgstr ""
+
+#, python-format
+msgid "Connecting to %s"
+msgstr ""
+
+msgid "Console"
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
+msgid "Cooldown"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Decrease"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Disable Motors"
+msgstr ""
+
+msgid "Disable XY"
+msgstr ""
+
+msgid "Disconnect"
+msgstr ""
+
+msgid "Displayed Macros"
+msgstr ""
+
+msgid "Duration Only"
+msgstr ""
+
+msgid "Elapsed:"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Estimated Time Method"
+msgstr ""
+
+msgid "Extrude"
+msgstr ""
+
+msgid "Extrusion +"
+msgstr ""
+
+msgid "Extrusion -"
+msgstr ""
+
+msgid "Fan"
+msgstr ""
+
+msgid "Fan Off"
+msgstr ""
+
+msgid "Fan On"
+msgstr ""
+
+msgid "Fast"
+msgstr ""
+
+msgid "Filament Used"
+msgstr ""
+
+msgid "File Estimation (default)"
+msgstr ""
+
+msgid "Fine Tuning"
+msgstr ""
+
+msgid "Finish"
+msgstr ""
+
+msgid "Firmware Restart"
+msgstr ""
+
+msgid "Go Back"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Home All"
+msgstr ""
+
+msgid "Home X"
+msgstr ""
+
+msgid "Home XY"
+msgstr ""
+
+msgid "Home Y"
+msgstr ""
+
+msgid "Home Z"
+msgstr ""
+
+msgid "Homing"
+msgstr ""
+
+msgid "Hostname"
+msgstr ""
+
+msgid "IPv4"
+msgstr ""
+
+msgid "IPv6"
+msgstr ""
+
+msgid "Icon Theme"
+msgstr ""
+
+msgid "Increase"
+msgstr ""
+
+msgid "Initializing"
+msgstr ""
+
+msgid "Initializing printer..."
+msgstr ""
+
+msgid "Interface"
+msgstr ""
+
+msgid "Invert X"
+msgstr ""
+
+msgid "Invert Y"
+msgstr ""
+
+msgid "Invert Z"
+msgstr ""
+
+msgid "Klipper Restart"
+msgstr ""
+
+msgid "Klipper Version"
+msgstr ""
+
+msgid "Klipper has disconnected"
+msgstr ""
+
+msgid ""
+"Klipper has encountered an error with the micro-controller.\n"
+"Please recompile and flash."
+msgstr ""
+
+msgid "Klipper has encountered an error."
+msgstr ""
+
+msgid ""
+"Klipper has encountered an error.\n"
+"Issue a FIRMWARE_RESTART to attempt fixing the issue."
+msgstr ""
+
+msgid "Klipper has shutdown"
+msgstr ""
+
+msgid "Klipper is attempting to start"
+msgstr ""
+
+msgid "Klipper will reboot"
+msgstr ""
+
+msgid "KlipperScreen Version"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Left:"
+msgstr ""
+
+msgid "Load"
+msgstr ""
+
+msgid "Lower Nozzle"
+msgstr ""
+
+msgid "Macros"
+msgstr ""
+
+msgid "Main Menu"
+msgstr ""
+
+msgid "Medium"
+msgstr ""
+
+msgid "Menu"
+msgstr ""
+
+msgid "Modified"
+msgstr ""
+
+msgid "Move"
+msgstr ""
+
+msgid "Move Distance (mm)"
+msgstr ""
+
+msgid "Move Speed (mm/s)"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Network"
+msgstr ""
+
+msgid "Number Pad"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "PSK for"
+msgstr ""
+
+msgid "Pause"
+msgstr ""
+
+msgid "Paused"
+msgstr ""
+
+msgid "Power"
+msgstr ""
+
+msgid "Power On Printer"
+msgstr ""
+
+msgid "Preheat"
+msgstr ""
+
+msgid "Print"
+msgstr ""
+
+msgid "Print Control"
+msgstr ""
+
+msgid "Print Time"
+msgstr ""
+
+msgid "Printer Connections"
+msgstr ""
+
+msgid "Printing"
+msgstr ""
+
+msgid "Profile Name:"
+msgstr ""
+
+msgid "Quad Gantry Level"
+msgstr ""
+
+msgid "Raise Nozzle"
+msgstr ""
+
+msgid "Restart"
+msgstr ""
+
+msgid "Resume"
+msgstr ""
+
+msgid "Retract"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Save Config"
+msgstr ""
+
+msgid "Save configuration."
+msgstr ""
+
+msgid "Screen Power Off Time"
+msgstr ""
+
+msgid "Screen will show in less than one second"
+msgstr ""
+
+msgid "Screws Adjust"
+msgstr ""
+
+msgid "Set Speed"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "Slicer"
+msgstr ""
+
+msgid "Slow"
+msgstr ""
+
+msgid "Sort by: "
+msgstr ""
+
+msgid "Speed +"
+msgstr ""
+
+msgid "Speed -"
+msgstr ""
+
+msgid "Starting WiFi Re-association"
+msgstr ""
+
+msgid "Starting update for"
+msgstr ""
+
+msgid "System"
+msgstr ""
+
+msgid ""
+"System\n"
+"Restart"
+msgstr ""
+
+msgid ""
+"System\n"
+"Shutdown"
+msgstr ""
+
+msgid "Temperature"
+msgstr ""
+
+#, python-format
+msgid "To apply %s KlipperScreen needs to be restarted"
+msgstr ""
+
+msgid "Tool"
+msgstr ""
+
+msgid "Up To Date"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Uploaded"
+msgstr ""
+
+msgid "View Mesh"
+msgstr ""
+
+msgid "X+"
+msgstr ""
+
+msgid "X-"
+msgstr ""
+
+msgid "Y+"
+msgstr ""
+
+msgid "Y-"
+msgstr ""
+
+msgid "Z Calibrate"
+msgstr ""
+
+msgid "Z Offset"
+msgstr ""
+
+msgid "Z Tilt"
+msgstr ""
+
+msgid "Z+"
+msgstr ""
+
+msgid "Z-"
+msgstr ""
+
+msgid "Z-bolt (default)"
+msgstr ""
+
+msgid "dBm"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "mm"
+msgstr ""
+
+msgid "Macro shortcut on sidebar"
+msgstr ""
+
+msgid "Font Size"
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Medium (default)"
+msgstr ""
+
+msgid "Large"
+msgstr ""
