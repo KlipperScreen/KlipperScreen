@@ -490,18 +490,3 @@ msgstr ""
 
 msgid "mm"
 msgstr ""
-
-msgid "Macro shortcut on sidebar"
-msgstr ""
-
-msgid "Font Size"
-msgstr ""
-
-msgid "Small"
-msgstr ""
-
-msgid "Medium (default)"
-msgstr ""
-
-msgid "Large"
-msgstr ""
