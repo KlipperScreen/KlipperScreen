@@ -44,6 +44,7 @@ combobox box button {
 
 entry {
     background-color: #20292F;
+    border-color: #13181C;
 }
 
 frame {

@@ -14,7 +14,6 @@ button {
     background-image: none;
     background-color: #13181C;
     margin: .25em;
-    margin-bottom: .5em;
     padding: 0 .5em;
     border-radius: 0;
     border: 0;
@@ -31,18 +30,22 @@ button:active {
 
 button.color1 {
     border-bottom: .4em solid #ED6500;
+    margin: .3em;
 }
 
 button.color2 {
     border-bottom: .4em solid #B10080;
+    margin: .3em;
 }
 
 button.color3 {
     border-bottom: .4em solid #009384;
+    margin: .3em;
 }
 
 button.color4 {
     border-bottom: .4em solid #A7E100;
+    margin: .3em;
 }
 
 button.active {
@@ -61,7 +64,7 @@ combobox box button {
 entry {
     font-size: 1em;
     background-color: #20292F;
-    border: 0;
+    border: 1em solid #13181C;
     padding: .25em;
 }
 
@@ -115,7 +118,7 @@ scrollbar, scrollbar button, scrollbar trough {
 }
 
 scrollbar slider {
-    min-width: 3em;
+    min-width: 2.5em;
     border-radius: .7em;
     background-color: #404E57;
 }
@@ -189,7 +192,7 @@ trough {
 
 .frame-item {
     min-height: 4.5em;
-    padding: .1em .75em;
+    padding: .1em .4em;
 }
 
 .message_popup {
