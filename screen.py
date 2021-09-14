@@ -101,6 +101,9 @@ class KlipperScreen(Gtk.Window):
 
         logging.debug("OS Language: %s" % os.getenv('LANG'))
 
+        settings = Gtk.Settings.get_default()
+        logging.info("Font settings: %s" % settings.get_property('gtk-font-name'))
+
         self.lang_ltr = True
         for lang in self.rtl_languages:
             if os.getenv('LANG').lower().startswith(lang):
