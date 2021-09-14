@@ -27,8 +27,7 @@ class ExtrudePanel(ScreenPanel):
         i = 0
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
         for extruder in self._printer.get_tools():
-            self.labels[extruder] = self._gtk.ButtonImage(
-                "extruder-%s" % i, _("Tool") + " %s" % str(i), "color" + "%s" % str(i + 1))
+            self.labels[extruder] = self._gtk.ButtonImage("extruder-%s" % i, _("Tool") + " %s" % str(i))
             self.labels[extruder].connect("clicked", self.change_extruder, extruder)
             if extruder == self.current_extruder:
                 self.labels[extruder].get_style_context().add_class("button_active")
