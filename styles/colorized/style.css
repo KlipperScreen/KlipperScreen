@@ -46,6 +46,10 @@ button.color4 {
     border-radius: 1em;
 }
 
+button.color1:active, button.color2:active, button.color3:active, button.color4:active {
+    border-style: none;
+}
+
 button.active {
     background-color: #cb4b16; /*solarized-orange*/
 }
