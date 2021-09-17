@@ -13,7 +13,7 @@ merged with the custom configuration, so if you do not define any menus the defa
 
 The default config is included here: (do not edit use as reference)
 
-[ks_includes/KlipperScreen.conf](/ks_includes/KlipperScreen.conf)
+[ks_includes/KlipperScreen.conf](/ks_includes/default.conf)
 
 If no config file is found then a new configuration file will be created in:
 
