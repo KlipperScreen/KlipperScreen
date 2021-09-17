@@ -46,7 +46,7 @@ button.color4 {
     border-radius: 1em;
 }
 
-button.color1:active, button.color2:active, button.color3:active, button.color4:active, button.update:active, button.invalid:active {
+button.color1:active, button.color2:active, button.color3:active, button.color4:active, button.update:active, button.invalid:active, .dialog button:active {
     border-style: none;
 }
 
