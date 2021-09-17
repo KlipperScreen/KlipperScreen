@@ -169,6 +169,11 @@ class Printer:
         return [i for i in list(self.config) if i.startswith(search)]
 
     def get_config_section(self, section):
+        if section in self.config:
+            return self.config[section]
+        return False
+
+    def get_config_section(self, section):
         if section not in self.config:
             return False
         return self.config[section]
