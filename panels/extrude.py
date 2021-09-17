@@ -11,29 +11,23 @@ def create_panel(*args):
     return ExtrudePanel(*args)
 
 class ExtrudePanel(ScreenPanel):
-    distance = 1
-    distances = ['1', '5', '10', '25']
+    distance = 5
+    distances = ['5', '10', '15', '25']
 
     def initialize(self, panel_name):
         _ = self.lang.gettext
 
-        self.speed = "Medium"
-        self.speeds = ["Slow", "Medium", "Fast"]
-        self.speed_trans = {
-            "Slow": "300",
-            "Medium": "800",
-            "Fast": "1400"
-        }
+        self.load_filament = self.unload_filament = False
+        self.find_gcode_macros()
+        self.speed = 1
+        self.speeds = ['1', '2', '5', '25']
 
-        # This line for translations only
-        speed_translations = [_("Slow"), _("Medium"), _("Fast")]
-
-        grid = self._gtk.HomogeneousGrid()
+        grid = Gtk.Grid()
 
         i = 0
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
         for extruder in self._printer.get_tools():
-            self.labels[extruder] = self._gtk.ButtonImage("extruder-%s" % i, _("Tool") + " %s" % str(i), "color1")
+            self.labels[extruder] = self._gtk.ButtonImage("extruder-%s" % i, _("Tool") + " %s" % str(i))
             self.labels[extruder].connect("clicked", self.change_extruder, extruder)
             if extruder == self.current_extruder:
                 self.labels[extruder].get_style_context().add_class("button_active")
@@ -41,9 +35,13 @@ class ExtrudePanel(ScreenPanel):
                 grid.attach(self.labels[extruder], i, 0, 1, 1)
             i += 1
 
-        self.labels['extrude'] = self._gtk.ButtonImage("extrude", _("Extrude"), "color3")
+        self.labels['extrude'] = self._gtk.ButtonImage("extrude", _("Extrude"), "color4")
         self.labels['extrude'].connect("clicked", self.extrude, "+")
-        self.labels['retract'] = self._gtk.ButtonImage("retract", _("Retract"), "color2")
+        self.labels['load'] = self._gtk.ButtonImage("arrow-down", _("Load"), "color3")
+        self.labels['load'].connect("clicked", self.load_unload, "+")
+        self.labels['unload'] = self._gtk.ButtonImage("arrow-up", _("Unload"), "color2")
+        self.labels['unload'].connect("clicked", self.load_unload, "-")
+        self.labels['retract'] = self._gtk.ButtonImage("retract", _("Retract"), "color1")
         self.labels['retract'].connect("clicked", self.extrude, "-")
         self.labels['temperature'] = self._gtk.ButtonImage("heat-up", _("Temperature"), "color4")
         self.labels['temperature'].connect("clicked", self.menu_item_clicked, "temperature", {
@@ -51,10 +49,14 @@ class ExtrudePanel(ScreenPanel):
             "panel": "temperature"
         })
 
+        if i < 4:
+            grid.attach(self.labels['temperature'], 3, 0, 1, 1)
         grid.attach(self.labels['extrude'], 0, 1, 1, 1)
+        if self.load_filament:
+            grid.attach(self.labels['load'], 1, 1, 1, 1)
+        if self.unload_filament:
+            grid.attach(self.labels['unload'], 2, 1, 1, 1)
         grid.attach(self.labels['retract'], 3, 1, 1, 1)
-        grid.attach(self.labels['temperature'], 0, 2, 1, 1)
-
 
         distgrid = Gtk.Grid()
         j = 0
@@ -70,11 +72,11 @@ class ExtrudePanel(ScreenPanel):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
-            if i == "1":
+            if i == "5":
                 ctx.add_class("distbutton_active")
             distgrid.attach(self.labels["dist"+str(i)], j, 0, 1, 1)
             j += 1
-        self.labels["dist1"].set_active(True)
+        self.labels["dist5"].set_active(True)
 
         speedgrid = Gtk.Grid()
         j = 0
@@ -90,17 +92,24 @@ class ExtrudePanel(ScreenPanel):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
-            if i == "Medium":
+            if i == "2":
                 ctx.add_class("distbutton_active")
-            speedgrid.attach(self.labels["speed"+str(i)], j, 0, 1, 1)
+            speedgrid.attach(self.labels["speed" + str(i)], j, 0, 1, 1)
             j += 1
-        self.labels["speedMedium"].set_active(True)
+        self.labels["speed2"].set_active(True)
 
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        box.add(distgrid)
-        box.add(speedgrid)
+        distbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.labels['extrude_dist'] = Gtk.Label(_("Distance (mm)"))
+        distbox.pack_start(self.labels['extrude_dist'], True, True, 0)
+        distbox.add(distgrid)
+        speedbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.labels['extrude_speed'] = Gtk.Label(_("Speed (mm/s)"))
+        speedbox.pack_start(self.labels['extrude_speed'], True, True, 0)
+        speedbox.add(speedgrid)
 
-        grid.attach(box, 1, 2, 2, 1)
+        grid.set_column_homogeneous(True)
+        grid.attach(distbox, 0, 2, 2, 1)
+        grid.attach(speedbox, 2, 2, 2, 1)
 
         self.content.add(grid)
         self._screen.add_subscription(panel_name)
@@ -161,8 +170,26 @@ class ExtrudePanel(ScreenPanel):
 
     def extrude(self, widget, dir):
         dist = str(self.distance) if dir == "+" else "-" + str(self.distance)
-        speed = self.speed_trans[self.speed]
+        speed = str(int(self.speed) * 60)
         print(KlippyGcodes.extrude(dist, speed))
 
         self._screen._ws.klippy.gcode_script(KlippyGcodes.EXTRUDE_REL)
         self._screen._ws.klippy.gcode_script(KlippyGcodes.extrude(dist, speed))
+
+    def load_unload(self, widget, dir):
+        if dir == "-":
+            self._screen._ws.klippy.gcode_script("UNLOAD_FILAMENT")
+        if dir == "+":
+            self._screen._ws.klippy.gcode_script("LOAD_FILAMENT")
+
+    def find_gcode_macros(self):
+        macros = self._screen.printer.get_gcode_macros()
+        for x in macros:
+            macro = x[12:].strip()
+            macro = macro.upper()
+            if macro == "LOAD_FILAMENT":
+                logging.info("Found %s" % macro)
+                self.load_filament = True
+            if macro == "UNLOAD_FILAMENT":
+                logging.info("Found %s" % macro)
+                self.unload_filament = True
