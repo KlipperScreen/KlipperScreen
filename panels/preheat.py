@@ -131,6 +131,9 @@ class PreheatPanel(ScreenPanel):
                                                       self.preheat_options[setting]["extruder"])
                 self._printer.set_dev_stat(heater, "target", int(self.preheat_options[setting]["extruder"]))
 
+        if self.preheat_options[setting]['gcode']:
+            self._screen._ws.klippy.gcode_script(self.preheat_options[setting]['gcode'])
+
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
