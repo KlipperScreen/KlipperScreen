@@ -80,7 +80,6 @@ class ZCalibratePanel(ScreenPanel):
 
 
         self.content.add(grid)
-        self._screen.add_subscription(panel_name)
 
     def activate(self):
         if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":

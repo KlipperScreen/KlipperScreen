@@ -105,7 +105,6 @@ class SystemPanel(ScreenPanel):
         grid.attach(shutdown, 3, 2, 1, 1)
 
         self.content.add(grid)
-        self._screen.add_subscription(panel_name)
 
     def activate(self):
         self.get_updates()

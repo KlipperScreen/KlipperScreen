@@ -69,7 +69,6 @@ class ConsolePanel(ScreenPanel):
         vbox.add(sw)
         vbox.pack_end(ebox, False, 0, 0)
         self.content.add(vbox)
-        self._screen.add_subscription(panel_name)
 
     def add_gcode(self, type, time, message):
         if type == "command":

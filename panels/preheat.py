@@ -82,8 +82,6 @@ class PreheatPanel(ScreenPanel):
 
         self.content.add(grid)
 
-        self._screen.add_subscription(panel_name)
-
     def activate(self):
         for x in self._printer.get_tools():
             if x not in self.active_heaters:

@@ -118,7 +118,6 @@ class FineTunePanel(ScreenPanel):
 
         # self.panel = grid
         self.content.add(grid)
-        self._screen.add_subscription(panel_name)
 
     def process_update(self, action, data):
         _ = self.lang.gettext

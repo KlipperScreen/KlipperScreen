@@ -33,8 +33,6 @@ class PowerPanel(ScreenPanel):
 
         self.content.add(box)
 
-        self._screen.add_subscription(panel_name)
-
     def add_device(self, device):
         frame = Gtk.Frame()
         frame.set_property("shadow-type", Gtk.ShadowType.NONE)

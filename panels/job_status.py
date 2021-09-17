@@ -203,8 +203,6 @@ class JobStatusPanel(ScreenPanel):
 
         self.grid = grid
         self.content.add(grid)
-
-        self._screen.add_subscription(panel_name)
         self._screen.wake_screen()
 
     def on_draw(self, da, ctx):

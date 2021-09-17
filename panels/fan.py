@@ -38,8 +38,6 @@ class FanPanel(ScreenPanel):
 
         self.content.add(box)
 
-        self._screen.add_subscription(panel_name)
-
     def process_update(self, action, data):
         if (action != "notify_status_update"):
             return

@@ -98,8 +98,6 @@ class TemperaturePanel(ScreenPanel):
         self.grid = grid
         self.content.add(grid)
 
-        self._screen.add_subscription(panel_name)
-
         self.update_temp("heater_bed", 35, 40)
 
     def change_temp_delta(self, widget, tempdelta):

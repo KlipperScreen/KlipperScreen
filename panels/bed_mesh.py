@@ -56,7 +56,6 @@ class BedMeshPanel(ScreenPanel):
 
         self.labels['main_box'] = box
         self.content.add(self.labels['main_box'])
-        self._screen.add_subscription(panel_name)
 
     def activate(self):
         for child in self.content.get_children():

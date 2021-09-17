@@ -168,5 +168,4 @@ class BedLevelPanel(ScreenPanel):
 
     def screws_tilt_calculate(self, widget):
         self.response_count = 0
-        self._screen.add_subscription(self.panel_name)
         self._screen._ws.klippy.gcode_script("SCREWS_TILT_CALCULATE")

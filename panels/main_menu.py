@@ -68,8 +68,6 @@ class MainPanel(MenuPanel):
         self.content.add(self.grid)
         self.layout.show_all()
 
-        self._screen.add_subscription(panel_name)
-
     def activate(self):
         return
 
