@@ -113,6 +113,22 @@ class JobStatusPanel(ScreenPanel):
             temp_grid.attach(heater_bed_box, 1, 0, 1, 1)
         self.labels['temp_grid'] = temp_grid
 
+        thermometer = self._gtk.Image('heat-up.svg', None, .6, .6)
+        self.labels['temperature_sensor_box'] = Gtk.Box()
+        self.labels['temperature_sensor_box'].add(thermometer)
+        devices_grid = Gtk.Grid()
+        devices_grid.set_column_spacing(10)
+        devices_count = 0
+        for name in self._printer.devices:
+            if name.startswith('temperature_sensor'):
+                self.labels[name] = Gtk.Label(label="")
+                self.labels[name].get_style_context().add_class('printing-info')
+                devices_grid.attach(self.labels[name], devices_count, 0, 1, 1)
+                devices_count+=1
+        self.labels['temperature_sensor_box'].add(devices_grid)
+        if devices_count:
+            temp_grid.attach(self.labels['temperature_sensor_box'], 0, 1, 2, 1)
+
         # Create time remaining items
         hourglass = self._gtk.Image("hourglass.svg", None, .6, .6)
         self.labels['left'] = Gtk.Label(label=_("Left:"))
@@ -378,6 +394,10 @@ class JobStatusPanel(ScreenPanel):
                 self._printer.get_dev_stat(x, "temperature"),
                 self._printer.get_dev_stat(x, "target")
             )
+
+        for name, device in self._printer.devices.items():
+            if name.startswith('temperature_sensor '):
+             self.labels[name].set_markup('%s %0.1f °C' % (name.split(' ',maxsplit=1)[1], device['temperature']))
 
         ps = self._printer.get_stat("print_stats")
         vsd = self._printer.get_stat("virtual_sdcard")
