@@ -123,7 +123,8 @@ trough highlight, trough progress {
     background-color: #6c71c4; /*solarized-violet*/
     color: #fdf6e3; /*base3*/
     border-color: #002b36; /*base03*/
-    border-radius: 1em;
+    border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
 }
 
 scale-mark {

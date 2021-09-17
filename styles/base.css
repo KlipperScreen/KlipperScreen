@@ -75,6 +75,10 @@ combobox box button {
     padding: .5em 1em;
 }
 
+combobox arrow {
+    min-width: 1em;
+}
+
 entry {
     font-size: 1em;
     background-color: #20292F;
@@ -124,6 +128,11 @@ trough progress.left {
 scale mark {
     margin-top: 1em;
     color: white;
+}
+
+scale trough slider {
+    min-height: 2em;
+    min-width: 2em;
 }
 
 scrollbar, scrollbar button, scrollbar trough {
