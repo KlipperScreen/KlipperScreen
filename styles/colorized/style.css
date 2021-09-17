@@ -57,7 +57,7 @@ button.active {
 button.update {
     background-color: #073642; /*base02*/
     border: 0;
-    border-bottom: .4em solid;
+    border-bottom: .3em solid;
     border-bottom-color: #859900; /*solarized-green*/
     border-radius: .75em;
 }
@@ -65,7 +65,7 @@ button.update {
 button.invalid {
     background-color: #073642; /*base02*/
     border: 0;
-    border-bottom: .4em solid;
+    border-bottom: .3em solid;
     border-bottom-color: #dc322f; /*solarized-red*/
     border-radius: .75em;
 }
@@ -76,9 +76,18 @@ combobox box button {
 }
 
 switch {
-    /* background-color: #073642; base02 */
+    background-color: #073642; /* base02 */
+    border-color: #073642; /* base02 */
+    border-radius: 3em;
 }
 
+switch:checked {
+    background-color: #859900; /*solarized-green*/
+}
+
+switch slider {
+    border: 0;
+}
 entry {
     background-color: #073642; /*base02*/
     border-color: #002b36; /*base03*/
@@ -126,7 +135,7 @@ scrollbar, scrollbar button, scrollbar trough {
 }
 
 scrollbar slider {
-    background-color: #586e75; /*base01*/
+    background-color: #073642; /*base02*/
 }
 
 textview .time {
@@ -148,6 +157,13 @@ textview .time {
     border-radius: .75em;
 }
 
+.dialog button:nth-child(1) {
+    border-bottom-color: #859900; /*solarized-green*/
+}
+
+.dialog button:nth-child(2) {
+    border-bottom-color: #dc322f; /*solarazed-red*/
+}
 .tempbutton_top, .tempbutton, .tempbutton_bottom, .distbutton_top, .distbutton, .distbutton_bottom  {
     border-color: #002b36; /*base03*/
     background-color: #073642; /*base02*/
