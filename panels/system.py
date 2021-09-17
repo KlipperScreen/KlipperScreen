@@ -164,7 +164,6 @@ class SystemPanel(ScreenPanel):
         grid.set_valign(Gtk.Align.CENTER)
         i = 0
         label = Gtk.Label()
-        label.set_hexpand(True)
         if "configured_type" in info:
             if not info['is_valid']:
                 label.set_markup("Do you want to restore?")
@@ -206,17 +205,17 @@ class SystemPanel(ScreenPanel):
         if "package_count" in info:
             label.set_markup("<b>%d Packages will be updated:</b>\n" % info['package_count'])
             label.set_halign(Gtk.Align.CENTER)
-            grid.attach(label, 0, i, 4, 1)
+            grid.attach(label, 0, i, 3, 1)
             i = i + 1
             j = 0
             for c in info["package_list"]:
                 label = Gtk.Label()
-                label.set_markup(c)
+                label.set_markup("  %s  " % c)
                 label.set_halign(Gtk.Align.START)
-                pos = (j % 4)
+                pos = (j % 3)
                 grid.attach(label, pos, i, 1, 1)
                 j = j + 1
-                if (pos == 3):
+                if (pos == 2):
                     i = i + 1
 
         scroll.add(grid)

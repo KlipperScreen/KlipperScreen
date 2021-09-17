@@ -46,7 +46,7 @@ button.color4 {
     border-radius: 1em;
 }
 
-button.color1:active, button.color2:active, button.color3:active, button.color4:active {
+button.color1:active, button.color2:active, button.color3:active, button.color4:active, button.update:active, button.invalid:active {
     border-style: none;
 }
 
@@ -55,13 +55,19 @@ button.active {
 }
 
 button.update {
-    background: #859900; /*solarized-green*/
-    border-color: #859900; /*solarized-green*/
+    background-color: #073642; /*base02*/
+    border: 0;
+    border-bottom: .4em solid;
+    border-bottom-color: #859900; /*solarized-green*/
+    border-radius: .75em;
 }
 
 button.invalid {
-    background: #dc322f; /*solarized-red*/
-    border-color: #dc322f; /*solarized-red*/
+    background-color: #073642; /*base02*/
+    border: 0;
+    border-bottom: .4em solid;
+    border-bottom-color: #dc322f; /*solarized-red*/
+    border-radius: .75em;
 }
 
 combobox box button {
@@ -137,7 +143,9 @@ textview .time {
 }
 
 .dialog button {
+    background-color: #073642; /*base02*/
     border-bottom-color: #268bd2; /*solarized-cyan*/
+    border-radius: .75em;
 }
 
 .tempbutton_top, .tempbutton, .tempbutton_bottom, .distbutton_top, .distbutton, .distbutton_bottom  {
