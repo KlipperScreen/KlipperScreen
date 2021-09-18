@@ -74,7 +74,7 @@ class LimitsPanel(ScreenPanel):
         if conf is False or option not in conf:
             return
 
-        value = int(conf[option])
+        value = int(float(conf[option]))
 
         name = Gtk.Label()
         name.set_markup("<big><b>%s</b></big>" % (optname))
