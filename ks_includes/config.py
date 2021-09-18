@@ -406,6 +406,7 @@ class KlipperScreenConfig:
         item = {
             "extruder": cfg.getint("extruder", 0),
             "bed": cfg.getint("bed", 0),
-            "heater_generic": cfg.getint("heater_generic", 0)
+            "heater_generic": cfg.getint("heater_generic", 0),
+            "gcode": cfg.get("gcode", None)
         }
         return item

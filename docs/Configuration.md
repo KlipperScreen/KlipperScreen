@@ -86,6 +86,8 @@ z_babystep_values: 0.01, 0.05
 bed: 40
 # Temperature for the tools
 extruder: 195
+# optional GCode to run when the option is selected
+gcode: MY_HEATSOAK_MACRO
 ```
 
 ## Menu
