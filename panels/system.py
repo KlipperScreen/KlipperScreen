@@ -129,7 +129,7 @@ class SystemPanel(ScreenPanel):
     def process_update(self, action, data):
         if action == "notify_update_response":
             logging.info("Update: %s" % data)
-            if 'application' in data and data['application'] == self.update_prog:
+            if 'application' in data:
                 self.labels['update_progress'].set_text(self.labels['update_progress'].get_text().strip() + "\n" +
                                                         data['message'] + "\n")
                 adjustment = self.labels['update_scroll'].get_vadjustment()
@@ -166,14 +166,15 @@ class SystemPanel(ScreenPanel):
         label = Gtk.Label()
         if "configured_type" in info:
             if not info['is_valid']:
-                label.set_markup("Do you want to restore?")
+                label.set_markup("Do you want to recover %s?" % program)
                 grid.attach(label, 0, i, 1, 1)
                 scroll.add(grid)
-                resetbuttons = [
-                    {"name": _("Reset"), "response": Gtk.ResponseType.OK},
+                recoverybuttons = [
+                    {"name": _("Recover Hard"), "response": Gtk.ResponseType.OK},
+                    {"name": _("Recover Soft"), "response": Gtk.ResponseType.APPLY},
                     {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
                 ]
-                dialog = self._gtk.Dialog(self._screen, resetbuttons, scroll, self.reset_confirm, program)
+                dialog = self._gtk.Dialog(self._screen, recoverybuttons, scroll, self.reset_confirm, program)
                 return
             else:
                 if info['version'] == info['remote_version']:
@@ -234,12 +235,45 @@ class SystemPanel(ScreenPanel):
 
     def reset_confirm(self, widget, response_id, program):
         if response_id == Gtk.ResponseType.OK:
-            logging.debug("Resetting %s" % program)
-            self.reset_repo(self, program)
+            logging.debug("Recovering hard %s" % program)
+            self.reset_repo(self, program, True)
+        if response_id == Gtk.ResponseType.APPLY:
+            logging.debug("Recovering soft %s" % program)
+            self.reset_repo(self, program, False)
         widget.destroy()
 
-    def reset_repo(self, widget, program):
-        return
+    def reset_repo(self, widget, program, hard):
+        if self._screen.is_updating():
+            return
+
+        _ = self.lang.gettext
+
+        buttons = [
+            {"name": _("Finish"), "response": Gtk.ResponseType.CANCEL}
+        ]
+
+        scroll = Gtk.ScrolledWindow()
+        scroll.set_hexpand(True)
+        scroll.set_vexpand(True)
+
+        self.labels['update_progress'] = Gtk.Label("%s %s..." % (_("Starting recovery for"), program))
+        self.labels['update_progress'].set_halign(Gtk.Align.START)
+        self.labels['update_progress'].set_valign(Gtk.Align.START)
+        scroll.add(self.labels['update_progress'])
+        self.labels['update_scroll'] = scroll
+
+        dialog = self._gtk.Dialog(self._screen, buttons, scroll, self.finish_updating)
+        dialog.set_response_sensitive(Gtk.ResponseType.CANCEL, False)
+
+        self.update_prog = program
+        self.update_dialog = dialog
+
+        logging.info("Sending machine.update.recover name: %s" % program)
+        if hard:
+            self._screen._ws.send_method("machine.update.recover", {"name": program, "hard": "true"})
+        else:
+            self._screen._ws.send_method("machine.update.recover", {"name": program, "hard": "false"})
+        self._screen.set_updating(True)
 
     def update_program(self, widget, program):
         if self._screen.is_updating():
