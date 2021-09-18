@@ -3,9 +3,9 @@ xgettext --keyword=_ --language=Python --no-location --sort-output \
     *.py \
     ks_includes/*.py \
     panels/*.py \
-    ks_includes/KlipperScreen.conf
+    ks_includes/defaults.conf
 
-langs=(de_DE en fr_FR he_IL ru_RU zh_CN)
+langs=(de_DE en es fr_FR he_IL it ru_RU zh_CN)
 for lang in ${langs[@]}; do
     msgmerge ks_includes/locales/$lang/LC_MESSAGES/KlipperScreen.po \
              ks_includes/locales/KlipperScreen.pot \

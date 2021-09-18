@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-16 10:25-0300\n"
+"POT-Creation-Date: 2021-09-18 09:54-0400\n"
 "PO-Revision-Date: 2021-08-16 12:29-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -137,6 +137,9 @@ msgstr "Nicht verbunden"
 msgid "Displayed Macros"
 msgstr "Aktive Macros"
 
+msgid "Distance (mm)"
+msgstr "Entfernung (mm)"
+
 msgid "Duration Only"
 msgstr "Reine Druckzeit"
 
@@ -161,15 +164,6 @@ msgstr "Extrusion -"
 msgid "Fan"
 msgstr "Lüfter"
 
-msgid "Fan Off"
-msgstr "Lüfter Aus"
-
-msgid "Fan On"
-msgstr "Lüfter An"
-
-msgid "Fast"
-msgstr "Schnell"
-
 msgid "Filament Used"
 msgstr "Filamentverbrauch"
 
@@ -184,6 +178,10 @@ msgstr ""
 
 msgid "Firmware Restart"
 msgstr "Firmware neustarten"
+
+#, fuzzy
+msgid "Font Size"
+msgstr "Größe"
 
 msgid "Go Back"
 msgstr "Zurück"
@@ -296,8 +294,14 @@ msgstr "KlipperScreen Version"
 msgid "Language"
 msgstr ""
 
+msgid "Large"
+msgstr ""
+
 msgid "Left:"
 msgstr "Restzeit:"
+
+msgid "Limits"
+msgstr ""
 
 msgid "Load"
 msgstr "Last"
@@ -305,14 +309,27 @@ msgstr "Last"
 msgid "Lower Nozzle"
 msgstr "Düse absenken"
 
+msgid "Macro shortcut on sidebar"
+msgstr ""
+
 msgid "Macros"
 msgstr "Makros"
 
 msgid "Main Menu"
 msgstr "Hauptmenü"
 
-msgid "Medium"
-msgstr "Mittel"
+msgid "Max Accelation"
+msgstr ""
+
+msgid "Max Acceleration to Deceleration"
+msgstr ""
+
+msgid "Max Velocity"
+msgstr ""
+
+#, fuzzy
+msgid "Medium (default)"
+msgstr "Dateischätzung"
 
 msgid "Menu"
 msgstr "Menü"
@@ -410,9 +427,6 @@ msgstr "Der Bildschirm wird in weniger als einer Sekunde angezeigt"
 msgid "Screws Adjust"
 msgstr "Schrauben Einstellen"
 
-msgid "Set Speed"
-msgstr "Eingestellter"
-
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -422,17 +436,24 @@ msgstr "Größe"
 msgid "Slicer"
 msgstr "Slicer"
 
-msgid "Slow"
-msgstr "Langsam"
+msgid "Small"
+msgstr ""
 
 msgid "Sort by: "
 msgstr "Sortierung:"
+
+#, fuzzy
+msgid "Speed (mm/s)"
+msgstr "Bewegungsgeschwindigkeit (mm/s)"
 
 msgid "Speed +"
 msgstr "Geschwindigkeit +"
 
 msgid "Speed -"
 msgstr "Geschwindigkeit -"
+
+msgid "Square Corner Velocity"
+msgstr ""
 
 msgid "Starting WiFi Re-association"
 msgstr ""
@@ -466,6 +487,10 @@ msgstr ""
 
 msgid "Tool"
 msgstr "Druckkopf"
+
+#, fuzzy
+msgid "Unload"
+msgstr "Hochgeladen"
 
 msgid "Up To Date"
 msgstr ""
@@ -519,6 +544,30 @@ msgstr "Minuten"
 msgid "mm"
 msgstr "mm"
 
+msgid "mm/s"
+msgstr ""
+
+msgid "mm/s^2"
+msgstr ""
+
+#~ msgid "Fan Off"
+#~ msgstr "Lüfter Aus"
+
+#~ msgid "Fan On"
+#~ msgstr "Lüfter An"
+
+#~ msgid "Fast"
+#~ msgstr "Schnell"
+
+#~ msgid "Medium"
+#~ msgstr "Mittel"
+
+#~ msgid "Set Speed"
+#~ msgstr "Eingestellter"
+
+#~ msgid "Slow"
+#~ msgstr "Langsam"
+
 #~ msgid "?"
 #~ msgstr "?"
 
@@ -530,9 +579,6 @@ msgstr "mm"
 
 #~ msgid "Control"
 #~ msgstr "Steuerung"
-
-#~ msgid "Distance (mm)"
-#~ msgstr "Entfernung (mm)"
 
 #~ msgid "Emergency Stop"
 #~ msgstr "NOT-STOP"

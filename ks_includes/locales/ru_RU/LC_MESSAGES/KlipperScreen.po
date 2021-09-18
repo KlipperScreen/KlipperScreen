@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-16 10:25-0300\n"
+"POT-Creation-Date: 2021-09-18 09:54-0400\n"
 "PO-Revision-Date: 2021-08-16 13:12-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: Russian <kde-i18n-de@kde.org>\n"
@@ -136,6 +136,9 @@ msgstr "Отключить"
 msgid "Displayed Macros"
 msgstr "Показать  макросы"
 
+msgid "Distance (mm)"
+msgstr "Расстояние (mm)"
+
 msgid "Duration Only"
 msgstr "Продолжительность печати"
 
@@ -160,15 +163,6 @@ msgstr "Экструзия -"
 msgid "Fan"
 msgstr "Обдув"
 
-msgid "Fan Off"
-msgstr "Bыключить"
-
-msgid "Fan On"
-msgstr "Bключи"
-
-msgid "Fast"
-msgstr "Быстро"
-
 msgid "Filament Used"
 msgstr "Использование филамента"
 
@@ -185,6 +179,10 @@ msgid "Firmware Restart"
 msgstr ""
 "Перезагрузка\n"
 "прошивки"
+
+#, fuzzy
+msgid "Font Size"
+msgstr "Размер"
 
 msgid "Go Back"
 msgstr "Назад"
@@ -286,8 +284,14 @@ msgstr "Версия KlipperScreen"
 msgid "Language"
 msgstr ""
 
+msgid "Large"
+msgstr ""
+
 msgid "Left:"
 msgstr "Осталось:"
+
+msgid "Limits"
+msgstr ""
 
 msgid "Load"
 msgstr "Загрузить"
@@ -295,14 +299,27 @@ msgstr "Загрузить"
 msgid "Lower Nozzle"
 msgstr "Опустить сопло"
 
+msgid "Macro shortcut on sidebar"
+msgstr ""
+
 msgid "Macros"
 msgstr "Макросы"
 
 msgid "Main Menu"
 msgstr "Главное меню"
 
-msgid "Medium"
-msgstr "Среднее"
+msgid "Max Accelation"
+msgstr ""
+
+msgid "Max Acceleration to Deceleration"
+msgstr ""
+
+msgid "Max Velocity"
+msgstr ""
+
+#, fuzzy
+msgid "Medium (default)"
+msgstr "По файлу (по умолчанию)"
 
 msgid "Menu"
 msgstr "Меню"
@@ -401,9 +418,6 @@ msgstr "Экран отобразится менее чем через одну 
 msgid "Screws Adjust"
 msgstr "Настроить винты"
 
-msgid "Set Speed"
-msgstr "Скорость"
-
 msgid "Settings"
 msgstr "Настройки"
 
@@ -413,17 +427,24 @@ msgstr "Размер"
 msgid "Slicer"
 msgstr "Slicer"
 
-msgid "Slow"
-msgstr "Mедленно"
+msgid "Small"
+msgstr ""
 
 msgid "Sort by: "
 msgstr "Сортировать по: "
+
+#, fuzzy
+msgid "Speed (mm/s)"
+msgstr "Дистанция перемещения (mm)"
 
 msgid "Speed +"
 msgstr "Скорость +"
 
 msgid "Speed -"
 msgstr "Скорость -"
+
+msgid "Square Corner Velocity"
+msgstr ""
 
 msgid "Starting WiFi Re-association"
 msgstr ""
@@ -455,6 +476,10 @@ msgstr ""
 
 msgid "Tool"
 msgstr "Инструмент"
+
+#, fuzzy
+msgid "Unload"
+msgstr "Загружено"
 
 msgid "Up To Date"
 msgstr ""
@@ -508,6 +533,30 @@ msgstr "минут"
 msgid "mm"
 msgstr "mm"
 
+msgid "mm/s"
+msgstr ""
+
+msgid "mm/s^2"
+msgstr ""
+
+#~ msgid "Fan Off"
+#~ msgstr "Bыключить"
+
+#~ msgid "Fan On"
+#~ msgstr "Bключи"
+
+#~ msgid "Fast"
+#~ msgstr "Быстро"
+
+#~ msgid "Medium"
+#~ msgstr "Среднее"
+
+#~ msgid "Set Speed"
+#~ msgstr "Скорость"
+
+#~ msgid "Slow"
+#~ msgstr "Mедленно"
+
 #~ msgid "?"
 #~ msgstr "?"
 
@@ -519,9 +568,6 @@ msgstr "mm"
 
 #~ msgid "Control"
 #~ msgstr "Управление"
-
-#~ msgid "Distance (mm)"
-#~ msgstr "Расстояние (mm)"
 
 #~ msgid "Load Average"
 #~ msgstr "Средняя нагрузка"

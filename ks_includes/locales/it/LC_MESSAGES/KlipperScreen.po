@@ -1,14 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-18 09:54-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pappicio\n"
 "Language-Team: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
 "X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -111,7 +112,7 @@ msgid "Date"
 msgstr "Data"
 
 msgid "Decrease"
-msgstr "Diminuire"
+msgstr "Diminuisci"
 
 msgid "Delete"
 msgstr "Elimina"
@@ -128,6 +129,10 @@ msgstr "Sconnetti"
 msgid "Displayed Macros"
 msgstr "Mostra Macros"
 
+#, fuzzy
+msgid "Distance (mm)"
+msgstr "Distanza Movimento (mm)"
+
 msgid "Duration Only"
 msgstr "Solo Durata"
 
@@ -138,7 +143,7 @@ msgid "Error"
 msgstr "Errore"
 
 msgid "Estimated Time Method"
-msgstr "Tempo stimato"
+msgstr "Metodo Tempo stimato"
 
 msgid "Extrude"
 msgstr "Estrudi"
@@ -151,15 +156,6 @@ msgstr "Estrudi -"
 
 msgid "Fan"
 msgstr "Ventola"
-
-msgid "Fan Off"
-msgstr "Ventola OFF"
-
-msgid "Fan On"
-msgstr "Ventola ON"
-
-msgid "Fast"
-msgstr "Veloce"
 
 msgid "Filament Used"
 msgstr "Filamento Usato"
@@ -175,6 +171,10 @@ msgstr "Finito"
 
 msgid "Firmware Restart"
 msgstr "Riavvia Firmware"
+
+#, fuzzy
+msgid "Font Size"
+msgstr "Grandezza Font"
 
 msgid "Go Back"
 msgstr "Indietro"
@@ -274,8 +274,14 @@ msgstr "Versione KlipperScreen"
 msgid "Language"
 msgstr "Lingua"
 
+msgid "Large"
+msgstr "Grande"
+
 msgid "Left:"
 msgstr "Restante:"
+
+msgid "Limits"
+msgstr ""
 
 msgid "Load"
 msgstr "Carica"
@@ -283,14 +289,27 @@ msgstr "Carica"
 msgid "Lower Nozzle"
 msgstr "Abbassa ugello"
 
+msgid "Macro shortcut on sidebar"
+msgstr "Macros sulla barra laterale"
+
 msgid "Macros"
 msgstr "Macros"
 
 msgid "Main Menu"
 msgstr "Menu Principale"
 
-msgid "Medium"
-msgstr "Medio"
+msgid "Max Accelation"
+msgstr ""
+
+msgid "Max Acceleration to Deceleration"
+msgstr ""
+
+msgid "Max Velocity"
+msgstr ""
+
+#, fuzzy
+msgid "Medium (default)"
+msgstr "Media (predef.)"
 
 msgid "Menu"
 msgstr ""
@@ -388,9 +407,6 @@ msgstr "Lo schermo verrà visualizzato a breve"
 msgid "Screws Adjust"
 msgstr "Calibra Screws"
 
-msgid "Set Speed"
-msgstr "Imposta"
-
 msgid "Settings"
 msgstr "Impostazioni"
 
@@ -400,17 +416,24 @@ msgstr "Grandezza"
 msgid "Slicer"
 msgstr ""
 
-msgid "Slow"
-msgstr "Lento"
+msgid "Small"
+msgstr "Piccola"
 
 msgid "Sort by: "
 msgstr "Ordine: "
+
+#, fuzzy
+msgid "Speed (mm/s)"
+msgstr "Velocità Movimento (mm/s)"
 
 msgid "Speed +"
 msgstr "Velocità+"
 
 msgid "Speed -"
 msgstr "Velocità-"
+
+msgid "Square Corner Velocity"
+msgstr ""
 
 msgid "Starting WiFi Re-association"
 msgstr "Riassocia WiFi"
@@ -424,7 +447,6 @@ msgstr "Sistema"
 msgid ""
 "System\n"
 "Restart"
-
 msgstr ""
 "Riavvia\n"
 "Sistema"
@@ -445,6 +467,10 @@ msgstr "Riavvia KlipperScreen per applicare %s "
 
 msgid "Tool"
 msgstr "Strumenti"
+
+#, fuzzy
+msgid "Unload"
+msgstr "Caricato"
 
 msgid "Up To Date"
 msgstr "Aggiornato"
@@ -496,3 +522,27 @@ msgstr "minuti"
 
 msgid "mm"
 msgstr "mm"
+
+msgid "mm/s"
+msgstr ""
+
+msgid "mm/s^2"
+msgstr ""
+
+#~ msgid "Fan Off"
+#~ msgstr "Ventola OFF"
+
+#~ msgid "Fan On"
+#~ msgstr "Ventola ON"
+
+#~ msgid "Fast"
+#~ msgstr "Veloce"
+
+#~ msgid "Medium"
+#~ msgstr "Medio"
+
+#~ msgid "Set Speed"
+#~ msgstr "Imposta"
+
+#~ msgid "Slow"
+#~ msgstr "Lento"

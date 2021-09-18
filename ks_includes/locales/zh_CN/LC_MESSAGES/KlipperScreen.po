@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-16 10:25-0300\n"
+"POT-Creation-Date: 2021-09-18 09:54-0400\n"
 "PO-Revision-Date: 2021-05-18 10:49+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -137,6 +137,9 @@ msgstr "断开"
 msgid "Displayed Macros"
 msgstr "显示宏命令"
 
+msgid "Distance (mm)"
+msgstr "距离(mm)"
+
 msgid "Duration Only"
 msgstr "仅持续时间"
 
@@ -161,15 +164,6 @@ msgstr "挤出 -"
 msgid "Fan"
 msgstr "风扇"
 
-msgid "Fan Off"
-msgstr "关闭风扇"
-
-msgid "Fan On"
-msgstr "打开风扇"
-
-msgid "Fast"
-msgstr "快速"
-
 msgid "Filament Used"
 msgstr "已经消耗的耗材"
 
@@ -184,6 +178,10 @@ msgstr ""
 
 msgid "Firmware Restart"
 msgstr "框架重启"
+
+#, fuzzy
+msgid "Font Size"
+msgstr "大小"
 
 msgid "Go Back"
 msgstr "返回"
@@ -284,8 +282,14 @@ msgstr "KlipperScreen 版本"
 msgid "Language"
 msgstr ""
 
+msgid "Large"
+msgstr ""
+
 msgid "Left:"
 msgstr "左:"
+
+msgid "Limits"
+msgstr ""
 
 msgid "Load"
 msgstr "加载"
@@ -293,14 +297,27 @@ msgstr "加载"
 msgid "Lower Nozzle"
 msgstr "降低喷嘴"
 
+msgid "Macro shortcut on sidebar"
+msgstr ""
+
 msgid "Macros"
 msgstr "宏"
 
 msgid "Main Menu"
 msgstr "主菜单"
 
-msgid "Medium"
-msgstr "中"
+msgid "Max Accelation"
+msgstr ""
+
+msgid "Max Acceleration to Deceleration"
+msgstr ""
+
+msgid "Max Velocity"
+msgstr ""
+
+#, fuzzy
+msgid "Medium (default)"
+msgstr "文件估计（默认）"
 
 msgid "Menu"
 msgstr "菜单"
@@ -398,9 +415,6 @@ msgstr "屏幕将在1秒内显示"
 msgid "Screws Adjust"
 msgstr "Screws 调整"
 
-msgid "Set Speed"
-msgstr "设置速度"
-
 msgid "Settings"
 msgstr "设置"
 
@@ -410,17 +424,24 @@ msgstr "大小"
 msgid "Slicer"
 msgstr "切片机"
 
-msgid "Slow"
-msgstr "慢"
+msgid "Small"
+msgstr ""
 
 msgid "Sort by: "
 msgstr "排序: "
+
+#, fuzzy
+msgid "Speed (mm/s)"
+msgstr "移动速度 (mm/s)"
 
 msgid "Speed +"
 msgstr "速度 +"
 
 msgid "Speed -"
 msgstr "速度 -"
+
+msgid "Square Corner Velocity"
+msgstr ""
 
 msgid "Starting WiFi Re-association"
 msgstr ""
@@ -450,6 +471,10 @@ msgstr ""
 
 msgid "Tool"
 msgstr "工具"
+
+#, fuzzy
+msgid "Unload"
+msgstr "已上传"
 
 msgid "Up To Date"
 msgstr ""
@@ -503,6 +528,30 @@ msgstr "分钟"
 msgid "mm"
 msgstr ""
 
+msgid "mm/s"
+msgstr ""
+
+msgid "mm/s^2"
+msgstr ""
+
+#~ msgid "Fan Off"
+#~ msgstr "关闭风扇"
+
+#~ msgid "Fan On"
+#~ msgstr "打开风扇"
+
+#~ msgid "Fast"
+#~ msgstr "快速"
+
+#~ msgid "Medium"
+#~ msgstr "中"
+
+#~ msgid "Set Speed"
+#~ msgstr "设置速度"
+
+#~ msgid "Slow"
+#~ msgstr "慢"
+
 #~ msgid "?"
 #~ msgstr "?"
 
@@ -514,9 +563,6 @@ msgstr ""
 
 #~ msgid "Control"
 #~ msgstr "控制"
-
-#~ msgid "Distance (mm)"
-#~ msgstr "距离(mm)"
 
 #~ msgid "Emergency Stop"
 #~ msgstr "紧急停止"

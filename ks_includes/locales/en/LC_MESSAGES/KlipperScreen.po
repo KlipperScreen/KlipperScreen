@@ -112,6 +112,9 @@ msgstr ""
 msgid "Displayed Macros"
 msgstr ""
 
+msgid "Distance (mm)"
+msgstr ""
+
 msgid "Duration Only"
 msgstr ""
 
@@ -136,15 +139,6 @@ msgstr ""
 msgid "Fan"
 msgstr ""
 
-msgid "Fan Off"
-msgstr ""
-
-msgid "Fan On"
-msgstr ""
-
-msgid "Fast"
-msgstr ""
-
 msgid "Filament Used"
 msgstr ""
 
@@ -158,6 +152,9 @@ msgid "Finish"
 msgstr ""
 
 msgid "Firmware Restart"
+msgstr ""
+
+msgid "Font Size"
 msgstr ""
 
 msgid "Go Back"
@@ -254,7 +251,13 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
+msgid "Large"
+msgstr ""
+
 msgid "Left:"
+msgstr ""
+
+msgid "Limits"
 msgstr ""
 
 msgid "Load"
@@ -263,13 +266,25 @@ msgstr ""
 msgid "Lower Nozzle"
 msgstr ""
 
+msgid "Macro shortcut on sidebar"
+msgstr ""
+
 msgid "Macros"
 msgstr ""
 
 msgid "Main Menu"
 msgstr ""
 
-msgid "Medium"
+msgid "Max Accelation"
+msgstr ""
+
+msgid "Max Acceleration to Deceleration"
+msgstr ""
+
+msgid "Max Velocity"
+msgstr ""
+
+msgid "Medium (default)"
 msgstr ""
 
 msgid "Menu"
@@ -368,9 +383,6 @@ msgstr ""
 msgid "Screws Adjust"
 msgstr ""
 
-msgid "Set Speed"
-msgstr ""
-
 msgid "Settings"
 msgstr ""
 
@@ -380,16 +392,22 @@ msgstr ""
 msgid "Slicer"
 msgstr ""
 
-msgid "Slow"
+msgid "Small"
 msgstr ""
 
 msgid "Sort by: "
+msgstr ""
+
+msgid "Speed (mm/s)"
 msgstr ""
 
 msgid "Speed +"
 msgstr ""
 
 msgid "Speed -"
+msgstr ""
+
+msgid "Square Corner Velocity"
 msgstr ""
 
 msgid "Starting WiFi Re-association"
@@ -419,6 +437,9 @@ msgid "To apply %s KlipperScreen needs to be restarted"
 msgstr ""
 
 msgid "Tool"
+msgstr ""
+
+msgid "Unload"
 msgstr ""
 
 msgid "Up To Date"
@@ -470,4 +491,10 @@ msgid "minutes"
 msgstr ""
 
 msgid "mm"
+msgstr ""
+
+msgid "mm/s"
+msgstr ""
+
+msgid "mm/s^2"
 msgstr ""

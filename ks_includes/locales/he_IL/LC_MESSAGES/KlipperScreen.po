@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-16 10:25-0300\n"
+"POT-Creation-Date: 2021-09-18 09:54-0400\n"
 "PO-Revision-Date: 2021-01-08 08:21-0500\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
@@ -143,6 +143,9 @@ msgstr ""
 msgid "Displayed Macros"
 msgstr ""
 
+msgid "Distance (mm)"
+msgstr "מרחק (מ''מ)"
+
 msgid "Duration Only"
 msgstr ""
 
@@ -167,15 +170,6 @@ msgstr "שיחול -"
 msgid "Fan"
 msgstr "מאוורר"
 
-msgid "Fan Off"
-msgstr "כבה מאוורר"
-
-msgid "Fan On"
-msgstr "הפעל מאוורר"
-
-msgid "Fast"
-msgstr "מהיר"
-
 msgid "Filament Used"
 msgstr ""
 
@@ -190,6 +184,10 @@ msgstr ""
 
 msgid "Firmware Restart"
 msgstr "התחל קושחה"
+
+#, fuzzy
+msgid "Font Size"
+msgstr "גודל"
 
 msgid "Go Back"
 msgstr "חזרה"
@@ -288,8 +286,14 @@ msgstr "גרסא של KlipperScreen"
 msgid "Language"
 msgstr ""
 
+msgid "Large"
+msgstr ""
+
 msgid "Left:"
 msgstr "זמן שנותר:"
+
+msgid "Limits"
+msgstr ""
 
 msgid "Load"
 msgstr ""
@@ -297,14 +301,26 @@ msgstr ""
 msgid "Lower Nozzle"
 msgstr "הנמך דיזה"
 
+msgid "Macro shortcut on sidebar"
+msgstr ""
+
 msgid "Macros"
 msgstr "מקרואים"
 
 msgid "Main Menu"
 msgstr "תפריט ראשי"
 
-msgid "Medium"
-msgstr "ממוצע"
+msgid "Max Accelation"
+msgstr ""
+
+msgid "Max Acceleration to Deceleration"
+msgstr ""
+
+msgid "Max Velocity"
+msgstr ""
+
+msgid "Medium (default)"
+msgstr ""
 
 #, fuzzy
 msgid "Menu"
@@ -406,9 +422,6 @@ msgstr ""
 msgid "Screws Adjust"
 msgstr "סידור ברגים"
 
-msgid "Set Speed"
-msgstr "קבע מהירות"
-
 msgid "Settings"
 msgstr "הגדרות"
 
@@ -418,17 +431,24 @@ msgstr "גודל"
 msgid "Slicer"
 msgstr ""
 
-msgid "Slow"
-msgstr "האט"
+msgid "Small"
+msgstr ""
 
 msgid "Sort by: "
 msgstr ""
+
+#, fuzzy
+msgid "Speed (mm/s)"
+msgstr "מרחק הזזה (מ''מ)"
 
 msgid "Speed +"
 msgstr "מהירות +"
 
 msgid "Speed -"
 msgstr "מהירות -"
+
+msgid "Square Corner Velocity"
+msgstr ""
 
 msgid "Starting WiFi Re-association"
 msgstr ""
@@ -459,6 +479,10 @@ msgstr ""
 
 msgid "Tool"
 msgstr "כלי"
+
+#, fuzzy
+msgid "Unload"
+msgstr "הועלה"
 
 msgid "Up To Date"
 msgstr ""
@@ -512,6 +536,30 @@ msgstr ""
 msgid "mm"
 msgstr "מ''מ"
 
+msgid "mm/s"
+msgstr ""
+
+msgid "mm/s^2"
+msgstr ""
+
+#~ msgid "Fan Off"
+#~ msgstr "כבה מאוורר"
+
+#~ msgid "Fan On"
+#~ msgstr "הפעל מאוורר"
+
+#~ msgid "Fast"
+#~ msgstr "מהיר"
+
+#~ msgid "Medium"
+#~ msgstr "ממוצע"
+
+#~ msgid "Set Speed"
+#~ msgstr "קבע מהירות"
+
+#~ msgid "Slow"
+#~ msgstr "האט"
+
 #~ msgid "?"
 #~ msgstr "?"
 
@@ -523,9 +571,6 @@ msgstr "מ''מ"
 
 #~ msgid "Control"
 #~ msgstr "שליטה"
-
-#~ msgid "Distance (mm)"
-#~ msgstr "מרחק (מ''מ)"
 
 #~ msgid "Emergency Stop"
 #~ msgstr "עצירת חירום"
