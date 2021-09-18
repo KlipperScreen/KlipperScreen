@@ -15,7 +15,7 @@ class KlippyGtk:
     width_ratio = 16
     height_ratio = 9.375
 
-    def __init__(self, screen, width, height, theme, cursor):
+    def __init__(self, screen, width, height, theme, cursor, fontsize_type):
         self.screen = screen
         self.width = width
         self.height = height
@@ -24,6 +24,10 @@ class KlippyGtk:
             self.width / self.font_ratio[0],
             self.height / self.font_ratio[1]
         ))
+        if fontsize_type == "small":
+            self.font_size = round(self.font_size * 0.91)
+        elif (fontsize_type == "large"):
+            self.font_size = round(self.font_size * 1.09)
         self.header_size = int(round((self.width / self.width_ratio) / 1.33))
         self.img_width = int(round(self.width / self.width_ratio))
         self.img_height = int(round(self.height / self.height_ratio))

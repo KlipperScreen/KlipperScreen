@@ -123,7 +123,8 @@ class KlipperScreen(Gtk.Window):
 
         self.theme = self._config.get_main_config_option('theme')
         self.gtk = KlippyGtk(self, self.width, self.height, self.theme,
-                             self._config.get_main_config().getboolean("show_cursor", fallback=False))
+                             self._config.get_main_config().getboolean("show_cursor", fallback=False),
+                             self._config.get_main_config_option("font_size", "medium"))
         self.keyboard_height = self.gtk.get_keyboard_height()
         self.init_style()
 
@@ -440,14 +441,7 @@ class KlipperScreen(Gtk.Window):
         css_data = css_base_data + css.read()
         css.close()
 
-        self.font_size = self.gtk.get_font_size()
-        fontsize_type = self._config.get_main_config_option("font_size", "medium")
-        if fontsize_type != "medium":
-            if fontsize_type == "small":
-                self.font_size = round(self.font_size * 0.91)
-            elif (fontsize_type == "large"):
-                self.font_size = round(self.font_size * 1.09)
-        css_data = css_data.replace("KS_FONT_SIZE", str(self.font_size))
+        css_data = css_data.replace("KS_FONT_SIZE", str(self.gtk.get_font_size()))
 
         style_provider = Gtk.CssProvider()
         style_provider.load_from_data(css_data.encode())
