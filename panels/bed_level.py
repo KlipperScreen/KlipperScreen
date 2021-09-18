@@ -120,6 +120,7 @@ class BedLevelPanel(ScreenPanel):
         self.labels['br'].set_label("")
         self.labels['fl'].set_label("")
         self.labels['fr'].set_label("")
+        self.labels['screws'].set_sensitive(True)
 
     def go_to_position(self, widget, position):
         logging.debug("Going to position: %s", position)
@@ -163,9 +164,10 @@ class BedLevelPanel(ScreenPanel):
                 self.labels[screw_labels[i]].set_label(result.group(5))
                 self.response_count += 1
                 if self.response_count >= len(self.screws)-1:
-                    self._screen.remove_subscription(self.panel_name)
+                    self.labels['screws'].set_sensitive(True)
 
 
     def screws_tilt_calculate(self, widget):
         self.response_count = 0
+        self.labels['screws'].set_sensitive(False)
         self._screen._ws.klippy.gcode_script("SCREWS_TILT_CALCULATE")
