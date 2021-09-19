@@ -45,7 +45,6 @@ class JobStatusPanel(ScreenPanel):
         self.labels['file'].set_halign(Gtk.Align.START)
         self.labels['file'].set_vexpand(False)
         self.labels['file'].get_style_context().add_class("printing-filename")
-        self.labels['file'].set_max_width_chars(26)
         self.labels['file'].set_ellipsize(True)
         self.labels['file'].set_ellipsize(Pango.EllipsizeMode.END)
         self.labels['status'] = Gtk.Label()
@@ -56,7 +55,6 @@ class JobStatusPanel(ScreenPanel):
         self.labels['lcdmessage'].set_halign(Gtk.Align.START)
         self.labels['lcdmessage'].set_vexpand(False)
         self.labels['lcdmessage'].get_style_context().add_class("printing-status")
-        self.labels['lcdmessage'].set_max_width_chars(43)
         self.labels['lcdmessage'].set_ellipsize(True)
         self.labels['lcdmessage'].set_ellipsize(Pango.EllipsizeMode.END)
 
