@@ -165,7 +165,7 @@ class SystemPanel(ScreenPanel):
         i = 0
         label = Gtk.Label()
         if "configured_type" in info:
-            if not info['is_valid']:
+            if not info['is_valid'] or info['is_dirty']:
                 label.set_markup("Do you want to recover %s?" % program)
                 grid.attach(label, 0, i, 1, 1)
                 scroll.add(grid)
@@ -334,7 +334,7 @@ class SystemPanel(ScreenPanel):
         if p != "system":
             version = (info['full_version_string'] if "full_version_string" in info else info['version'])
             if info['configured_type'] == 'git_repo':
-                if info['is_valid']:
+                if info['is_valid'] and not info['is_dirty']:
                     if info['version'] == info['remote_version']:
                         self.labels[p].set_markup("<b>%s</b>\n%s" % (p, version))
                         self.labels["%s_status" % p].set_label(_("Up To Date"))
