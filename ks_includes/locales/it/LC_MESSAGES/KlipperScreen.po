@@ -38,7 +38,7 @@ msgid "Are you sure you wish to cancel this print?"
 msgstr "Cancellare la Stampa?"
 
 msgid "Are you sure you wish to reboot the system?"
-msgstr "Riavviare il SIstema?"
+msgstr "Riavviare il Sistema?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Spegnere il Sistema?"
@@ -127,11 +127,11 @@ msgid "Disconnect"
 msgstr "Sconnetti"
 
 msgid "Displayed Macros"
-msgstr "Mostra Macros"
+msgstr "Mostra/Nascondi Macros"
 
 #, fuzzy
 msgid "Distance (mm)"
-msgstr "Distanza Movimento (mm)"
+msgstr "Distanza (mm)"
 
 msgid "Duration Only"
 msgstr "Solo Durata"
@@ -180,7 +180,7 @@ msgid "Go Back"
 msgstr "Indietro"
 
 msgid "Home"
-msgstr ""
+msgstr "Menù Princ."
 
 msgid "Home All"
 msgstr "Home XYZ"
@@ -219,7 +219,7 @@ msgid "Initializing"
 msgstr "Inizializzo"
 
 msgid "Initializing printer..."
-msgstr "Inizializzo stampante…."
+msgstr "Inizializzo stampante..."
 
 msgid "Interface"
 msgstr "Interfaccia"
@@ -281,7 +281,7 @@ msgid "Left:"
 msgstr "Restante:"
 
 msgid "Limits"
-msgstr ""
+msgstr "Imp. Limiti"
 
 msgid "Load"
 msgstr "Carica"
@@ -299,13 +299,13 @@ msgid "Main Menu"
 msgstr "Menu Principale"
 
 msgid "Max Accelation"
-msgstr ""
+msgstr "Acceleraz. Massima"
 
 msgid "Max Acceleration to Deceleration"
-msgstr ""
+msgstr "Da acceleraz. Massima a Deceleraz. Massima"
 
 msgid "Max Velocity"
-msgstr ""
+msgstr "Velocità Massima"
 
 #, fuzzy
 msgid "Medium (default)"
@@ -354,7 +354,7 @@ msgid "Power On Printer"
 msgstr "Accendi Stampante"
 
 msgid "Preheat"
-msgstr "Riscalda"
+msgstr "Preriscalda"
 
 msgid "Print"
 msgstr "Stampa"
@@ -424,7 +424,7 @@ msgstr "Ordine: "
 
 #, fuzzy
 msgid "Speed (mm/s)"
-msgstr "Velocità Movimento (mm/s)"
+msgstr "Velocità (mm/s)"
 
 msgid "Speed +"
 msgstr "Velocità+"
@@ -433,7 +433,7 @@ msgid "Speed -"
 msgstr "Velocità-"
 
 msgid "Square Corner Velocity"
-msgstr ""
+msgstr "Velocità Square Corner"
 
 msgid "Starting WiFi Re-association"
 msgstr "Riassocia WiFi"
@@ -470,7 +470,7 @@ msgstr "Strumenti"
 
 #, fuzzy
 msgid "Unload"
-msgstr "Caricato"
+msgstr "Scarica"
 
 msgid "Up To Date"
 msgstr "Aggiornato"
@@ -528,21 +528,3 @@ msgstr ""
 
 msgid "mm/s^2"
 msgstr ""
-
-#~ msgid "Fan Off"
-#~ msgstr "Ventola OFF"
-
-#~ msgid "Fan On"
-#~ msgstr "Ventola ON"
-
-#~ msgid "Fast"
-#~ msgstr "Veloce"
-
-#~ msgid "Medium"
-#~ msgstr "Medio"
-
-#~ msgid "Set Speed"
-#~ msgstr "Imposta"
-
-#~ msgid "Slow"
-#~ msgstr "Lento"
