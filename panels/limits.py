@@ -31,17 +31,27 @@ class LimitsPanel(ScreenPanel):
         box.set_vexpand(True)
         box.pack_start(scroll, True, True, 0)
 
+        conf = self._printer.get_config_section("printer")
         self.options = [
-            {"name": _("Max Accelation"), "units": _("mm/s^2"), "option": "max_accel"},
-            {"name": _("Max Acceleration to Deceleration"), "units": _("mm/s^2"), "option": "max_accel_to_decel"},
-            {"name": _("Max Velocity"), "units": _("mm/s"), "option": "max_velocity"},
-            {"name": _("Square Corner Velocity"), "units": _("mm/s"), "option": "square_corner_velocity"}
+            {"name": _("Max Accelation"), "units": _("mm/s^2"), "option": "max_accel",
+                "value": self.stn(conf['max_accel'])},
+            {"name": _("Max Acceleration to Deceleration"), "units": _("mm/s^2"), "option": "max_accel_to_decel",
+                "value": self.stn(conf['max_accel_to_decel']) if "max_accel_to_decel" in conf else
+                rount(self.stn(conf['max_accel'])/2)},
+            {"name": _("Max Velocity"), "units": _("mm/s"), "option": "max_velocity",
+                "value": self.stn(conf["max_velocity"])},
+            {"name": _("Square Corner Velocity"), "units": _("mm/s"), "option": "square_corner_velocity",
+                "value": self.stn(conf['square_corner_velocity']) if "square_corner_velocity" in conf else 5}
         ]
 
         for opt in self.options:
-            self.add_option(opt['option'], opt['name'], opt['units'])
+            self.add_option(opt['option'], opt['name'], opt['units'], opt['value'])
 
         self.content.add(box)
+        self.content.show_all()
+
+    def stn(self, str):
+        return int(float(str))
 
     def process_update(self, action, data):
         if (action != "notify_status_update"):
@@ -63,18 +73,12 @@ class LimitsPanel(ScreenPanel):
         self.devices[option]['scale'].set_value(self.values[option])
         self.devices[option]['scale'].connect("value-changed", self.set_opt_value, option)
 
-    def add_option(self, option, optname, units):
+    def add_option(self, option, optname, units, value):
         logging.info("Adding option: %s" % option)
 
         frame = Gtk.Frame()
         frame.set_property("shadow-type", Gtk.ShadowType.NONE)
         frame.get_style_context().add_class("frame-item")
-
-        conf = self._printer.get_config_section("printer")
-        if conf is False or option not in conf:
-            return
-
-        value = int(float(conf[option]))
 
         name = Gtk.Label()
         name.set_markup("<big><b>%s</b></big>" % (optname))
