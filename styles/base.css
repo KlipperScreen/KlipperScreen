@@ -180,6 +180,14 @@ trough {
     margin-top: 1em;
 }
 
+.dialog button:nth-child(1) {
+    border-bottom-color: green;
+}
+
+.dialog button:nth-child(2) {
+    border-bottom-color: red;
+}
+
 .distbutton_active {
     background-color: #20303D;
 }

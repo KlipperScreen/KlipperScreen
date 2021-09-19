@@ -116,6 +116,14 @@ textview .time {
     border-bottom-color: #009384;
 }
 
+.dialog button:nth-child(1) {
+    border-bottom-color: #A7E100;
+}
+
+.dialog button:nth-child(2) {
+    border-bottom-color: #cc1e1e;
+}
+
 .distbutton_active {
     background-color: #20303D;
 }
