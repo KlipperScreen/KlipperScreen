@@ -85,9 +85,6 @@ switch:checked {
     background-color: #859900; /*solarized-green*/
 }
 
-switch slider {
-    border: 0;
-}
 entry {
     background-color: #073642; /*base02*/
     border-color: #002b36; /*base03*/
