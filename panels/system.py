@@ -3,7 +3,7 @@ import logging
 import os
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib
+from gi.repository import Gtk, Gdk, GLib, Pango
 from datetime import datetime
 
 from ks_includes.KlippyGcodes import KlippyGcodes
@@ -59,6 +59,7 @@ class SystemPanel(ScreenPanel):
         scroll = Gtk.ScrolledWindow()
         scroll.set_property("overlay-scrolling", False)
         scroll.set_vexpand(True)
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
         infogrid = Gtk.Grid()
         infogrid.get_style_context().add_class("system-program-grid")
@@ -132,6 +133,8 @@ class SystemPanel(ScreenPanel):
             if 'application' in data:
                 self.labels['update_progress'].set_text(self.labels['update_progress'].get_text().strip() + "\n" +
                                                         data['message'] + "\n")
+                self.labels['update_progress'].set_ellipsize(True)
+                self.labels['update_progress'].set_ellipsize(Pango.EllipsizeMode.END)
                 adjustment = self.labels['update_scroll'].get_vadjustment()
                 adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size())
                 adjustment = self.labels['update_scroll'].show_all()
@@ -155,8 +158,10 @@ class SystemPanel(ScreenPanel):
         info = self.update_status['version_info'][program]
 
         scroll = Gtk.ScrolledWindow()
+        scroll.set_property("overlay-scrolling", False)
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
         grid = Gtk.Grid()
         grid.set_column_homogeneous(True)
@@ -165,21 +170,21 @@ class SystemPanel(ScreenPanel):
         i = 0
         label = Gtk.Label()
         if "configured_type" in info:
-            if not info['is_valid'] or info['is_dirty']:
-                label.set_markup("Do you want to recover %s?" % program)
-                grid.attach(label, 0, i, 1, 1)
-                scroll.add(grid)
-                recoverybuttons = [
-                    {"name": _("Recover Hard"), "response": Gtk.ResponseType.OK},
-                    {"name": _("Recover Soft"), "response": Gtk.ResponseType.APPLY},
-                    {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
-                ]
-                dialog = self._gtk.Dialog(self._screen, recoverybuttons, scroll, self.reset_confirm, program)
-                return
-            else:
-                if info['version'] == info['remote_version']:
+            if info['configured_type'] == 'git_repo':
+                if not info['is_valid'] or info['is_dirty']:
+                    label.set_markup("Do you want to recover %s?" % program)
+                    grid.attach(label, 0, i, 1, 1)
+                    scroll.add(grid)
+                    recoverybuttons = [
+                        {"name": _("Recover Hard"), "response": Gtk.ResponseType.OK},
+                        {"name": _("Recover Soft"), "response": Gtk.ResponseType.APPLY},
+                        {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
+                    ]
+                    dialog = self._gtk.Dialog(self._screen, recoverybuttons, scroll, self.reset_confirm, program)
                     return
-                if info['configured_type'] == 'git_repo':
+                else:
+                    if info['version'] == info['remote_version']:
+                        return
                     label.set_markup("<b>Outdated by %d commits:</b>\n" % len(info['commits_behind']))
                     grid.attach(label, 0, i, 1, 1)
                     i = i + 1
@@ -195,14 +200,16 @@ class SystemPanel(ScreenPanel):
                             i = i + 1
 
                         label = Gtk.Label()
+                        label.set_ellipsize(True)
+                        label.set_ellipsize(Pango.EllipsizeMode.END)
                         label.set_markup("%s\n<i>%s</i>\n" % (c['subject'], c['author']))
                         label.set_halign(Gtk.Align.START)
                         grid.attach(label, 0, i, 1, 1)
                         i = i + 1
-                else:
-                    label.set_markup("<b>%s will be updated to version: %s</b>" % (program, info['remote_version']))
-                    grid.attach(label, 0, i, 1, 1)
-                    i = i + 1
+            else:
+                label.set_markup("<b>%s will be updated to version: %s</b>" % (program.capitalize(), info['remote_version']))
+                grid.attach(label, 0, i, 1, 1)
+                i = i + 1
         if "package_count" in info:
             label.set_markup("<b>%d Packages will be updated:</b>\n" % info['package_count'])
             label.set_halign(Gtk.Align.CENTER)
@@ -213,6 +220,8 @@ class SystemPanel(ScreenPanel):
                 label = Gtk.Label()
                 label.set_markup("  %s  " % c)
                 label.set_halign(Gtk.Align.START)
+                label.set_ellipsize(True)
+                label.set_ellipsize(Pango.EllipsizeMode.END)
                 pos = (j % 3)
                 grid.attach(label, pos, i, 1, 1)
                 j = j + 1
@@ -253,8 +262,10 @@ class SystemPanel(ScreenPanel):
         ]
 
         scroll = Gtk.ScrolledWindow()
+        scroll.set_property("overlay-scrolling", False)
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
         self.labels['update_progress'] = Gtk.Label("%s %s..." % (_("Starting recovery for"), program))
         self.labels['update_progress'].set_halign(Gtk.Align.START)
@@ -269,10 +280,8 @@ class SystemPanel(ScreenPanel):
         self.update_dialog = dialog
 
         logging.info("Sending machine.update.recover name: %s" % program)
-        if hard:
-            self._screen._ws.send_method("machine.update.recover", {"name": program, "hard": "true"})
-        else:
-            self._screen._ws.send_method("machine.update.recover", {"name": program, "hard": "false"})
+
+        self._screen._ws.send_method("machine.update.recover", {"name": program, "hard": str(hard)})
         self._screen.set_updating(True)
 
     def update_program(self, widget, program):
@@ -298,8 +307,10 @@ class SystemPanel(ScreenPanel):
         ]
 
         scroll = Gtk.ScrolledWindow()
+        scroll.set_property("overlay-scrolling", False)
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
         self.labels['update_progress'] = Gtk.Label("%s %s..." % (_("Starting update for"), program))
         self.labels['update_progress'].set_halign(Gtk.Align.START)

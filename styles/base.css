@@ -377,7 +377,7 @@ trough {
 
 .system-program-grid {
     padding: 0.25em;
-    padding-right: 1em;
+    padding-right: .5em;
     padding-bottom: 0;
 }
 

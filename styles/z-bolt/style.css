@@ -108,8 +108,8 @@ textview .time {
 }
 
 .dialog {
-    border: black;
-    background-color: black;
+    border: #13181C;
+    background-color: #13181C;
 }
 
 .dialog button {
