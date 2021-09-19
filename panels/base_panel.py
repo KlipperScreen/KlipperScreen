@@ -21,7 +21,8 @@ class BasePanel(ScreenPanel):
 
         self.buttons_showing = {
             'back': False if back else True,
-            'macros_shortcut': False
+            'macros_shortcut': False,
+            'printer_select': False
         }
 
         self.layout = Gtk.Layout()
@@ -57,7 +58,8 @@ class BasePanel(ScreenPanel):
         self.control['estop'].connect("clicked", self.emergency_stop)
 
         self.locations = {
-            'macro_shortcut': 2
+            'macro_shortcut': 2,
+            'printer_select': 2
         }
         button_range = 3
         if len(self._config.get_printers()) > 1:
@@ -69,9 +71,6 @@ class BasePanel(ScreenPanel):
             self.control['space%s' % i] = Gtk.Label("")
             self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
 
-        if len(self._config.get_printers()) > 1:
-            self.control_grid.remove(self.control_grid.get_child_at(0, 2))
-            self.control_grid.attach(self.control['printer_select'], 0, 2, 1, 1)
         self.control_grid.attach(self.control['estop'], 0, 4, 1, 1)
 
         try:
@@ -117,9 +116,12 @@ class BasePanel(ScreenPanel):
         # Create gtk items here
         return
 
-    def show_heaters(self):
+    def show_heaters(self, show=True):
         for child in self.control['temp_box'].get_children():
             self.control['temp_box'].remove(child)
+
+        if show is False:
+            return
 
         i = 0
         for extruder in self._printer.get_tools():
@@ -179,9 +181,10 @@ class BasePanel(ScreenPanel):
             return
 
         if self._printer.has_heated_bed():
-            self.labels["heater_bed"].set_label("%02d°" % self._printer.get_dev_stat("heater_bed", "temperature"))
+            self.labels["heater_bed"].set_label(
+                "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature")))
         for x in self._printer.get_tools():
-            self.labels[x].set_label("%02d°" % self._printer.get_dev_stat(x, "temperature"))
+            self.labels[x].set_label("%02d°" % round(self._printer.get_dev_stat(x, "temperature")))
 
         if "toolhead" in data and "extruder" in data["toolhead"]:
             if data["toolhead"]["extruder"] != self.current_extruder:
@@ -235,6 +238,23 @@ class BasePanel(ScreenPanel):
             self.control_grid.attach(self.control['space%s' % self.locations['macro_shortcut']],
                                      0, self.locations['macro_shortcut'], 1, 1)
             self.buttons_showing['macros_shortcut'] = False
+        self._screen.show_all()
+
+    def show_printer_select(self, show=True):
+        if len(self._config.get_printers()) <= 1:
+            return
+
+        if show and self.buttons_showing['printer_select'] is False:
+            logging.info("Turning on printer_select button")
+            self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['printer_select']))
+            self.control_grid.attach(self.control['printer_select'], 0, self.locations['printer_select'], 1, 1)
+            self.buttons_showing['printer_select'] = True
+        elif show is False and self.buttons_showing['printer_select']:
+            logging.info("Turning off printer_select button")
+            self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['printer_select']))
+            self.control_grid.attach(self.control['space%s' % self.locations['printer_select']],
+                                     0, self.locations['printer_select'], 1, 1)
+            self.buttons_showing['printer_select'] = False
         self._screen.show_all()
 
     def set_title(self, title):
