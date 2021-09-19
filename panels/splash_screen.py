@@ -34,9 +34,8 @@ class SplashScreenPanel(ScreenPanel):
         self.labels['actions'] = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         self.labels['actions'].set_hexpand(True)
         self.labels['actions'].set_vexpand(False)
-        self.labels['actions'].set_halign(Gtk.Align.END)
-        self.labels['actions'].set_margin_end(20)
-
+        self.labels['actions'].set_halign(Gtk.Align.CENTER)
+        self.labels['actions'].set_homogeneous(True)
 
         main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         main.pack_start(image, True, True, 0)
@@ -57,8 +56,6 @@ class SplashScreenPanel(ScreenPanel):
         _ = self.lang.gettext
 
         if "firmware_restart" not in self.labels:
-            self.labels['printer_select'] = self._gtk.ButtonImage("shuffle", _("Change Printer"))
-            self.labels['printer_select'].connect("clicked", self._screen.show_printer_select)
             self.labels['menu'] = self._gtk.ButtonImage("settings", _("Menu"), "color4")
             self.labels['menu'].connect("clicked", self._screen._go_to_submenu, "")
             self.labels['power'] = self._gtk.ButtonImage("shutdown", _("Power On Printer"), "color3")
@@ -80,8 +77,6 @@ class SplashScreenPanel(ScreenPanel):
         self.labels['actions'].add(self.labels['restart'])
         self.labels['actions'].add(self.labels['firmware_restart'])
         self.labels['actions'].add(self.labels['menu'])
-        if len(self._config.get_printers()) > 1:
-            self.labels['actions'].add(self.labels['printer_select'])
         self.labels['actions'].show_all()
 
     def firmware_restart(self, widget):
