@@ -52,6 +52,15 @@ combobox box button {
     border-color: #cccccc;
 }
 
+switch {
+    background-color: #20292F;
+    border: 0;
+}
+
+switch:checked {
+    background-color: #3584e4;
+}
+
 entry {
     background-color: #20292F;
     border-color: #13181C;
