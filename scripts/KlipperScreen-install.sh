@@ -6,7 +6,7 @@ KSENV="${HOME}/.KlipperScreen-env"
 
 PKGLIST="xserver-xorg-video-fbturbo xdotool xinit xinput x11-xserver-utils libopenjp2-7 python3-distutils python3-gi"
 PKGLIST="${PKGLIST} python3-gi-cairo python3-virtualenv gir1.2-gtk-3.0 virtualenv matchbox-keyboard wireless-tools"
-PKGLIST="${PKGLIST} libatlas-base-dev"
+PKGLIST="${PKGLIST} libatlas-base-dev fonts-freefont-ttf"
 
 DGRAY='\033[1;30m'
 NC='\033[0m'
