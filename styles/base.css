@@ -56,9 +56,27 @@ button.file-list {
     margin: 0;
 }
 
+button.update {
+    background: #009384;
+    border: .4em solid #009384;
+    border-radius: 0.4em;
+    font-weight: bold;
+}
+
+button.invalid {
+    background: #e61e1e;
+    border: .4em solid #e61e1e;
+    border-radius: 0.4em;
+    font-weight: bold;
+}
+
 combobox box button {
     border: .05em solid #cccccc;
     padding: .5em 1em;
+}
+
+combobox arrow {
+    min-width: 1em;
 }
 
 entry {
@@ -110,6 +128,11 @@ trough progress.left {
 scale mark {
     margin-top: 1em;
     color: white;
+}
+
+scale trough slider {
+    min-height: 2em;
+    min-width: 2em;
 }
 
 scrollbar, scrollbar button, scrollbar trough {
@@ -354,7 +377,7 @@ trough {
 
 .system-program-grid {
     padding: 0.25em;
-    padding-right: 1em;
+    padding-right: .5em;
     padding-bottom: 0;
 }
 

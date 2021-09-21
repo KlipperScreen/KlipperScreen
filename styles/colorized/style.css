@@ -46,12 +46,28 @@ button.color4 {
     border-radius: 1em;
 }
 
-button.color1:active, button.color2:active, button.color3:active, button.color4:active {
+button.color1:active, button.color2:active, button.color3:active, button.color4:active, button.update:active, button.invalid:active, .dialog button:active {
     border-style: none;
 }
 
 button.active {
     background-color: #cb4b16; /*solarized-orange*/
+}
+
+button.update {
+    background-color: #073642; /*base02*/
+    border: 0;
+    border-bottom: .3em solid;
+    border-bottom-color: #859900; /*solarized-green*/
+    border-radius: .75em;
+}
+
+button.invalid {
+    background-color: #073642; /*base02*/
+    border: 0;
+    border-bottom: .3em solid;
+    border-bottom-color: #dc322f; /*solarized-red*/
+    border-radius: .75em;
 }
 
 combobox box button {
@@ -60,9 +76,18 @@ combobox box button {
 }
 
 switch {
-    /* background-color: #073642; base02 */
+    background-color: #073642; /* base02 */
+    border-color: #073642; /* base02 */
+    border-radius: 3em;
 }
 
+switch:checked {
+    background-color: #859900; /*solarized-green*/
+}
+
+switch slider {
+    border: 0;
+}
 entry {
     background-color: #073642; /*base02*/
     border-color: #002b36; /*base03*/
@@ -98,7 +123,8 @@ trough highlight, trough progress {
     background-color: #6c71c4; /*solarized-violet*/
     color: #fdf6e3; /*base3*/
     border-color: #002b36; /*base03*/
-    border-radius: 1em;
+    border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
 }
 
 scale-mark {
@@ -110,7 +136,7 @@ scrollbar, scrollbar button, scrollbar trough {
 }
 
 scrollbar slider {
-    background-color: #586e75; /*base01*/
+    background-color: #073642; /*base02*/
 }
 
 textview .time {
@@ -127,9 +153,18 @@ textview .time {
 }
 
 .dialog button {
+    background-color: #073642; /*base02*/
     border-bottom-color: #268bd2; /*solarized-cyan*/
+    border-radius: .75em;
 }
 
+.dialog button:nth-child(1) {
+    border-bottom-color: #859900; /*solarized-green*/
+}
+
+.dialog button:nth-child(2) {
+    border-bottom-color: #dc322f; /*solarazed-red*/
+}
 .tempbutton_top, .tempbutton, .tempbutton_bottom, .distbutton_top, .distbutton, .distbutton_bottom  {
     border-color: #002b36; /*base03*/
     background-color: #073642; /*base02*/
