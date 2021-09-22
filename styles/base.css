@@ -230,6 +230,11 @@ trough {
     padding: .2em .3em;
 }
 
+.updater-item {
+    min-height: 3em;
+    padding: .2em;
+}
+
 .message_popup {
     background-color: #367554;
     border-bottom: .1em solid white;
