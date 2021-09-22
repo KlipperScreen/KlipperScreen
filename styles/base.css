@@ -146,7 +146,7 @@ scrollbar, scrollbar button, scrollbar trough {
 }
 
 scrollbar slider {
-    min-width: 2.5em;
+    min-width: 1.5em;
     border-radius: .7em;
     background-color: #404E57;
 }
@@ -221,6 +221,18 @@ trough {
     margin-left: 0;
 }
 
+.extruder-0 {
+    color: #ff0000;
+}
+
+.extruder-1 {
+    color: #00ff00;
+}
+
+.extruder-2 {
+    color: #0000ff;
+}
+
 .fan_slider {
     margin: 0 1em 0 1em;
     color: white;
@@ -231,9 +243,13 @@ trough {
     padding: .2em .3em;
 }
 
-.updater-item {
-    min-height: 3em;
-    padding: .2em;
+.heatergraph {
+    min-height: 350px;
+}
+
+.heater-grid label {
+    margin-top: .3em;
+    margin-bottom: .3em;
 }
 
 .message_popup {
@@ -373,6 +389,11 @@ trough {
     border-bottom-left-radius: .7em;
     border-bottom-right-radius: .7em;
     margin-top: 0;
+}
+
+.updater-item {
+    min-height: 3em;
+    padding: .2em;
 }
 
 .message {

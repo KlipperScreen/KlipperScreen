@@ -501,12 +501,16 @@ class KlipperScreen(Gtk.Window):
     def _remove_current_panel(self, pop=True, show=True):
         if len(self._cur_panels) > 0:
             self.base_panel.remove(self.panels[self._cur_panels[-1]].get_content())
+            if hasattr(self.panels[self._cur_panels[-1]], "deactivate"):
+                self.panels[self._cur_panels[-1]].deactivate()
             self.remove_subscription(self._cur_panels[-1])
             if pop is True:
                 self._cur_panels.pop()
                 if len(self._cur_panels) > 0:
                     self.base_panel.add_content(self.panels[self._cur_panels[-1]])
                     self.base_panel.show_back(False if len(self._cur_panels) == 1 else True)
+                    if hasattr(self.panels[self._cur_panels[-1]], "activate"):
+                        self.panels[self._cur_panels[-1]].activate()
                     if hasattr(self.panels[self._cur_panels[-1]], "process_update"):
                         self.panels[self._cur_panels[-1]].process_update("notify_status_update",
                                                                          self.printer.get_updates())
@@ -842,7 +846,10 @@ class KlipperScreen(Gtk.Window):
         if data is False:
             logging.info("Error getting printer object data")
             return False
-        logging.info("Startup data: %s" % data['result']['status'])
+
+        tempstore = self.apiclient.send_request("server/temperature_store")
+        if tempstore is not False:
+            self.printer.init_temp_store(tempstore['result'])
         self.printer.process_update(data['result']['status'])
 
         self.files.initialize()
