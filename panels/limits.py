@@ -37,7 +37,7 @@ class LimitsPanel(ScreenPanel):
                 "value": self.stn(conf['max_accel'])},
             {"name": _("Max Acceleration to Deceleration"), "units": _("mm/s^2"), "option": "max_accel_to_decel",
                 "value": self.stn(conf['max_accel_to_decel']) if "max_accel_to_decel" in conf else
-                rount(self.stn(conf['max_accel'])/2)},
+                round(self.stn(conf['max_accel'])/2)},
             {"name": _("Max Velocity"), "units": _("mm/s"), "option": "max_velocity",
                 "value": self.stn(conf["max_velocity"])},
             {"name": _("Square Corner Velocity"), "units": _("mm/s"), "option": "square_corner_velocity",
