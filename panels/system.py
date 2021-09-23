@@ -209,7 +209,7 @@ class SystemPanel(ScreenPanel):
                         i = i + 1
             else:
                 label.set_markup("<b>" + _("%s will be updated to version") + ": %s</b>" % (
-                                program.capitalize(), info['remote_version']))
+                    program.capitalize(), info['remote_version']))
                 grid.attach(label, 0, i, 1, 1)
                 i = i + 1
         if "package_count" in info:
