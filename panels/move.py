@@ -19,6 +19,7 @@ class MovePanel(ScreenPanel):
         _ = self.lang.gettext
 
         grid = Gtk.Grid()
+        grid.set_column_homogeneous(True)
 
         self.labels['x+'] = self._gtk.ButtonImage("arrow-right", _("X+"), "color1")
         self.labels['x+'].connect("clicked", self.move, "X", "+")
@@ -35,7 +36,7 @@ class MovePanel(ScreenPanel):
         self.labels['z-'] = self._gtk.ButtonImage("z-closer", _("Z-"), "color3")
         self.labels['z-'].connect("clicked", self.move, "Z", "-")
 
-        self.labels['home'] = self._gtk.ButtonImage("home", _("Home All"))
+        self.labels['home'] = self._gtk.ButtonImage("home", _("Home All"), "color4")
         self.labels['home'].connect("clicked", self.home)
 
         if self._screen.lang_ltr:

@@ -79,6 +79,10 @@ combobox arrow {
     min-width: 1em;
 }
 
+switch slider {
+    border: 0;
+}
+
 entry {
     font-size: 1em;
     background-color: #20292F;
@@ -180,6 +184,14 @@ trough {
     margin-top: 1em;
 }
 
+.dialog button:nth-child(1) {
+    border-bottom-color: green;
+}
+
+.dialog button:nth-child(2) {
+    border-bottom-color: red;
+}
+
 .distbutton_active {
     background-color: #20303D;
 }
@@ -216,6 +228,11 @@ trough {
 .frame-item {
     min-height: 4.5em;
     padding: .2em .3em;
+}
+
+.updater-item {
+    min-height: 3em;
+    padding: .2em;
 }
 
 .message_popup {

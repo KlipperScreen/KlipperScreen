@@ -48,6 +48,7 @@ button.color4 {
 
 button.color1:active, button.color2:active, button.color3:active, button.color4:active, button.update:active, button.invalid:active, .dialog button:active {
     border-style: none;
+    margin-top: .5em;
 }
 
 button.active {
@@ -85,9 +86,6 @@ switch:checked {
     background-color: #859900; /*solarized-green*/
 }
 
-switch slider {
-    border: 0;
-}
 entry {
     background-color: #073642; /*base02*/
     border-color: #002b36; /*base03*/

@@ -52,6 +52,15 @@ combobox box button {
     border-color: #cccccc;
 }
 
+switch {
+    background-color: #20292F;
+    border: 0;
+}
+
+switch:checked {
+    background-color: #3584e4;
+}
+
 entry {
     background-color: #20292F;
     border-color: #13181C;
@@ -114,6 +123,14 @@ textview .time {
 
 .dialog button {
     border-bottom-color: #009384;
+}
+
+.dialog button:nth-child(1) {
+    border-bottom-color: #A7E100;
+}
+
+.dialog button:nth-child(2) {
+    border-bottom-color: #cc1e1e;
 }
 
 .distbutton_active {

@@ -93,6 +93,7 @@ class SystemPanel(ScreenPanel):
 
 
                 infogrid.attach(self.labels[prog], 1, i, 1, 1)
+                self.labels[prog].get_style_context().add_class('updater-item')
                 i = i + 1
 
         scroll.add(infogrid)
