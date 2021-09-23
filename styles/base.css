@@ -179,7 +179,7 @@ trough {
 }
 
 .dialog button {
-    padding: 1.5em 2.5em 1.5em 2.5em;
+    padding: 1.5em;
     border-bottom: .4em solid #009384;
     margin-top: 1em;
 }

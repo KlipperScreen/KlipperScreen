@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-23 13:30-0300\n"
-"PO-Revision-Date: 2021-09-23 13:51-0300\n"
+"PO-Revision-Date: 2021-09-23 14:58-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -165,7 +165,9 @@ msgid "Finish"
 msgstr "Beende"
 
 msgid "Firmware Restart"
-msgstr "Firmware neustarten"
+msgstr ""
+"Firmware\n"
+"Neustarten"
 
 msgid "Font Size"
 msgstr "Textgröße"
@@ -243,7 +245,9 @@ msgid "Invert Z"
 msgstr "Achse Z invertieren"
 
 msgid "Klipper Restart"
-msgstr "Klipper neustarten"
+msgstr ""
+"Klipper\n"
+"Neustarten"
 
 msgid "Klipper Version"
 msgstr "Klipper Version"
@@ -434,10 +438,10 @@ msgid "Small"
 msgstr "Klein"
 
 msgid "Sort by: "
-msgstr "Sortieren:"
+msgstr "Auftrag: "
 
 msgid "Speed (mm/s)"
-msgstr "Geschwindigkeit (mm/s) "
+msgstr "Geschwindigkeit (mm/s)"
 
 msgid "Speed +"
 msgstr "Geschwindigkeit +"
@@ -479,7 +483,7 @@ msgstr "Temperatur"
 
 #, python-format
 msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr "Um %s anzuwenden muss KlipperScreen neu gestartet werden "
+msgstr "Um %s anzuwenden muss KlipperScreen neu gestartet werden"
 
 msgid "Tool"
 msgstr "Druckkopf"
@@ -488,13 +492,13 @@ msgid "Unload"
 msgstr "Entladen"
 
 msgid "Up To Date"
-msgstr "Auf dem neusten Stand"
+msgstr "Aktualisiert"
 
 msgid "Update"
 msgstr "Aktualisieren"
 
 msgid "Uploaded"
-msgstr "Hochgeladen"
+msgstr "Datum"
 
 msgid "View Mesh"
 msgstr "Mesh anzeigen"

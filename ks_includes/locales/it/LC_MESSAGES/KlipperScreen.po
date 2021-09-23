@@ -160,7 +160,9 @@ msgid "Finish"
 msgstr "Finito"
 
 msgid "Firmware Restart"
-msgstr "Riavvia Firmware"
+msgstr ""
+"Riavvia\n"
+"Firmware"
 
 msgid "Font Size"
 msgstr "Dimensione del testo"
@@ -226,7 +228,9 @@ msgid "Invert Z"
 msgstr "Inverti Z"
 
 msgid "Klipper Restart"
-msgstr "Riavvia Klipper"
+msgstr ""
+"Riavvia\n"
+"Klipper"
 
 msgid "Klipper Version"
 msgstr "Versione Klipper"
