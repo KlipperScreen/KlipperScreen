@@ -1,3 +1,11 @@
+#, python-format
+msgid "%d Packages will be updated"
+msgstr ""
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr ""
+
 msgid "24 Hour Time"
 msgstr ""
 
@@ -104,6 +112,10 @@ msgid "Displayed Macros"
 msgstr ""
 
 msgid "Distance (mm)"
+msgstr ""
+
+#, python-format
+msgid "Do you want to recover %s?"
 msgstr ""
 
 msgid "Duration Only"
@@ -306,6 +318,10 @@ msgid "Number Pad"
 msgstr ""
 
 msgid "Off"
+msgstr ""
+
+#, python-format
+msgid "Outdated by %d commits:"
 msgstr ""
 
 msgid "PSK for"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-23 13:30-0300\n"
-"PO-Revision-Date: 2021-09-23 14:29-0300\n"
+"POT-Creation-Date: 2021-09-23 15:20-0300\n"
+"PO-Revision-Date: 2021-09-23 15:31-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#, python-format
+msgid "%d Packages will be updated"
+msgstr "%d 个软件包将被更新"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s 将更新到版本"
 
 msgid "24 Hour Time"
 msgstr "24 小时制"
@@ -127,6 +135,10 @@ msgstr "显示宏命令"
 
 msgid "Distance (mm)"
 msgstr "距离(mm)"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "您想恢复 %s 吗？"
 
 msgid "Duration Only"
 msgstr "仅持续时间"
@@ -333,6 +345,10 @@ msgstr "数字键盘"
 
 msgid "Off"
 msgstr "关闭"
+
+#, python-format
+msgid "Outdated by %d commits:"
+msgstr "已过时 %d 次提交："
 
 msgid "PSK for"
 msgstr "PSK 用于"

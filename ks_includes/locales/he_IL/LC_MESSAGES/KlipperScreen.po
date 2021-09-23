@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-23 13:30-0300\n"
-"PO-Revision-Date: 2021-09-23 14:21-0300\n"
+"POT-Creation-Date: 2021-09-23 15:20-0300\n"
+"PO-Revision-Date: 2021-09-23 15:27-0300\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
 "Language: he_IL\n"
@@ -19,6 +19,14 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
 "2 : 3);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
+#, python-format
+msgid "%d Packages will be updated"
+msgstr "%d חבילות יעודכנו"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s יעודכן לגרסה"
 
 msgid "24 Hour Time"
 msgstr "זמן 24 שעות"
@@ -129,6 +137,10 @@ msgstr "מוצגים מאקרו"
 
 msgid "Distance (mm)"
 msgstr "מרחק (מ\"מ)"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "האם ברצונך לשחזר %s?"
 
 msgid "Duration Only"
 msgstr "משך הזמן בלבד"
@@ -336,6 +348,10 @@ msgstr "פד נומרי"
 msgid "Off"
 msgstr "כבוי"
 
+#, python-format
+msgid "Outdated by %d commits:"
+msgstr "מיושן ב- %d מתחייב:"
+
 msgid "PSK for"
 msgstr "PSK עבור"
 
@@ -400,7 +416,7 @@ msgid "Save Config"
 msgstr "שמור קונפיג"
 
 msgid "Save configuration."
-msgstr "שמור תצורה"
+msgstr "שמור תצורה."
 
 msgid "Screen Power Off Time"
 msgstr "זמן כיבוי מסך"
@@ -424,7 +440,7 @@ msgid "Small"
 msgstr "קָטָן"
 
 msgid "Sort by: "
-msgstr "מיין לפי:"
+msgstr "מיין לפי: "
 
 msgid "Speed (mm/s)"
 msgstr "מהירות (מ\"מ/שניות)"
@@ -508,7 +524,7 @@ msgid "Z Offset"
 msgstr "הפרז גובה Z"
 
 msgid "Z Tilt"
-msgstr "z הטיה"
+msgstr "הטיה Z"
 
 msgid "Z+"
 msgstr "Z+"

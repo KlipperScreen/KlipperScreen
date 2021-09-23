@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-23 13:30-0300\n"
-"PO-Revision-Date: 2021-09-23 14:58-0300\n"
+"POT-Creation-Date: 2021-09-23 15:20-0300\n"
+"PO-Revision-Date: 2021-09-23 15:23-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, python-format
+msgid "%d Packages will be updated"
+msgstr "%d Pakete werden aktualisiert"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s wird auf Version aktualisiert"
 
 msgid "24 Hour Time"
 msgstr "24-Stunden-Zeit"
@@ -127,6 +135,10 @@ msgstr "Aktive Macros"
 
 msgid "Distance (mm)"
 msgstr "Entfernung (mm)"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "Möchten Sie %s wiederherstellen?"
 
 msgid "Duration Only"
 msgstr "Reine Druckzeit"
@@ -349,6 +361,10 @@ msgstr "Tastenfeld"
 
 msgid "Off"
 msgstr "Aus"
+
+#, python-format
+msgid "Outdated by %d commits:"
+msgstr "Veraltet von %d Commits:"
 
 msgid "PSK for"
 msgstr "PSK für"

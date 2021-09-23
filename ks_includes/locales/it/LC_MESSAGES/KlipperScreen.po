@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-23 13:30-0300\n"
+"POT-Creation-Date: 2021-09-23 15:20-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pappicio\n"
 "Language-Team: \n"
@@ -12,6 +12,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, python-format
+msgid "%d Packages will be updated"
+msgstr "%d pacchetti verranno aggiornati"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s verrà aggiornato alla versione"
 
 msgid "24 Hour Time"
 msgstr "24H"
@@ -121,7 +129,11 @@ msgid "Displayed Macros"
 msgstr "Mostra/Nascondi Macros"
 
 msgid "Distance (mm)"
-msgstr "Distanza (mm) "
+msgstr "Distanza (mm)"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "Vuoi recuperare %s?"
 
 msgid "Duration Only"
 msgstr "Solo Durata"
@@ -333,6 +345,10 @@ msgstr "Tastierino"
 msgid "Off"
 msgstr "Off"
 
+#, python-format
+msgid "Outdated by %d commits:"
+msgstr "Obsoleto da %d commit:"
+
 msgid "PSK for"
 msgstr "PSK per"
 
@@ -439,7 +455,7 @@ msgid "Starting WiFi Re-association"
 msgstr "Riassocia WiFi"
 
 msgid "Starting recovery for"
-msgstr "Inizio del recupero per "
+msgstr "Inizio del recupero per"
 
 msgid "Starting update for"
 msgstr "Avvio aggiornamento per"
