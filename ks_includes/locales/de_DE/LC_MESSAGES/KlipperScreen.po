@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 09:54-0400\n"
-"PO-Revision-Date: 2021-08-16 12:29-0300\n"
+"POT-Creation-Date: 2021-09-23 13:30-0300\n"
+"PO-Revision-Date: 2021-09-23 13:51-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -18,11 +18,8 @@ msgstr ""
 "X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "..."
-msgstr ""
-
 msgid "24 Hour Time"
-msgstr ""
+msgstr "24-Stunden-Zeit"
 
 msgid "Abort"
 msgstr "Abbrechen"
@@ -33,9 +30,8 @@ msgstr "OK"
 msgid "Actions"
 msgstr "Aktionen"
 
-#, fuzzy
 msgid "Add Printer"
-msgstr "Druck"
+msgstr "Drucker hinzufügen"
 
 msgid "Add bed mesh profile"
 msgstr "Mesh-Level Profil hinzufügen"
@@ -67,13 +63,8 @@ msgstr "Druck abbrechen"
 msgid "Cancelled"
 msgstr "Abgebrochen"
 
-#, fuzzy
 msgid "Cancelling"
-msgstr "Abbruch"
-
-#, fuzzy
-msgid "Change Printer"
-msgstr "Druck abbrechen"
+msgstr "Stornieren"
 
 msgid "Channel"
 msgstr "Kanal"
@@ -89,10 +80,7 @@ msgid "Close"
 msgstr "Schließen"
 
 msgid "Colorized"
-msgstr ""
-
-msgid "Commited"
-msgstr ""
+msgstr "Colorized"
 
 msgid "Complete"
 msgstr "Fertiggestellt"
@@ -174,22 +162,20 @@ msgid "Fine Tuning"
 msgstr "Feintuning"
 
 msgid "Finish"
-msgstr ""
+msgstr "Beende"
 
 msgid "Firmware Restart"
 msgstr "Firmware neustarten"
 
-#, fuzzy
 msgid "Font Size"
-msgstr "Größe"
+msgstr "Textgröße"
 
 msgid "Go Back"
 msgstr "Zurück"
 
-#, fuzzy
 msgid "Home"
 msgstr ""
-"Achse X\n"
+"Achse\n"
 "zurücksetzen"
 
 msgid "Home All"
@@ -230,7 +216,7 @@ msgid "IPv6"
 msgstr "IPv6"
 
 msgid "Icon Theme"
-msgstr ""
+msgstr "Symbolthema"
 
 msgid "Increase"
 msgstr "Erhöhen"
@@ -243,6 +229,9 @@ msgstr "Drucker wird initialisiert..."
 
 msgid "Interface"
 msgstr "Interface"
+
+msgid "Invalid"
+msgstr "Ungültig"
 
 msgid "Invert X"
 msgstr "Achse X invertieren"
@@ -292,16 +281,16 @@ msgid "KlipperScreen Version"
 msgstr "KlipperScreen Version"
 
 msgid "Language"
-msgstr ""
+msgstr "Sprache"
 
 msgid "Large"
-msgstr ""
+msgstr "Groß"
 
 msgid "Left:"
 msgstr "Restzeit:"
 
 msgid "Limits"
-msgstr ""
+msgstr "Grenzen"
 
 msgid "Load"
 msgstr "Last"
@@ -310,7 +299,7 @@ msgid "Lower Nozzle"
 msgstr "Düse absenken"
 
 msgid "Macro shortcut on sidebar"
-msgstr ""
+msgstr "Makroverknüpfung in der Seitenleiste"
 
 msgid "Macros"
 msgstr "Makros"
@@ -319,17 +308,16 @@ msgid "Main Menu"
 msgstr "Hauptmenü"
 
 msgid "Max Accelation"
-msgstr ""
+msgstr "Max. Beschleunigung"
 
 msgid "Max Acceleration to Deceleration"
-msgstr ""
+msgstr "Max. Beschleunigung bis Verzögerung"
 
 msgid "Max Velocity"
-msgstr ""
+msgstr "Max. Geschwindigkeit"
 
-#, fuzzy
 msgid "Medium (default)"
-msgstr "Dateischätzung"
+msgstr "Mittel (Standard)"
 
 msgid "Menu"
 msgstr "Menü"
@@ -359,7 +347,7 @@ msgid "Off"
 msgstr "Aus"
 
 msgid "PSK for"
-msgstr ""
+msgstr "PSK für"
 
 msgid "Pause"
 msgstr "Pause"
@@ -400,6 +388,12 @@ msgstr "Quad Gantry Level"
 msgid "Raise Nozzle"
 msgstr "Düse anheben"
 
+msgid "Recover Hard"
+msgstr "Genesen Hard"
+
+msgid "Recover Soft"
+msgstr "Genesen Soft"
+
 msgid "Restart"
 msgstr "Neustart"
 
@@ -437,14 +431,13 @@ msgid "Slicer"
 msgstr "Slicer"
 
 msgid "Small"
-msgstr ""
+msgstr "Klein"
 
 msgid "Sort by: "
-msgstr "Sortierung:"
+msgstr "Sortieren:"
 
-#, fuzzy
 msgid "Speed (mm/s)"
-msgstr "Bewegungsgeschwindigkeit (mm/s)"
+msgstr "Geschwindigkeit (mm/s) "
 
 msgid "Speed +"
 msgstr "Geschwindigkeit +"
@@ -453,13 +446,16 @@ msgid "Speed -"
 msgstr "Geschwindigkeit -"
 
 msgid "Square Corner Velocity"
-msgstr ""
+msgstr "Quadratische Eckgeschwindigkeit"
 
 msgid "Starting WiFi Re-association"
-msgstr ""
+msgstr "Starten der WLAN-Neuverbindung"
+
+msgid "Starting recovery for"
+msgstr "Beginn der Wiederherstellung für"
 
 msgid "Starting update for"
-msgstr ""
+msgstr "Start-Update für"
 
 msgid "System"
 msgstr "System"
@@ -483,27 +479,25 @@ msgstr "Temperatur"
 
 #, python-format
 msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr ""
+msgstr "Um %s anzuwenden muss KlipperScreen neu gestartet werden "
 
 msgid "Tool"
 msgstr "Druckkopf"
 
-#, fuzzy
 msgid "Unload"
-msgstr "Hochgeladen"
+msgstr "Entladen"
 
 msgid "Up To Date"
-msgstr ""
+msgstr "Auf dem neusten Stand"
 
 msgid "Update"
-msgstr ""
+msgstr "Aktualisieren"
 
 msgid "Uploaded"
 msgstr "Hochgeladen"
 
-#, fuzzy
 msgid "View Mesh"
-msgstr "Druckbett Mesh-Level"
+msgstr "Mesh anzeigen"
 
 msgid "X+"
 msgstr "X+"
@@ -533,7 +527,7 @@ msgid "Z-"
 msgstr "Z-"
 
 msgid "Z-bolt (default)"
-msgstr ""
+msgstr "Z-bolt (default)"
 
 msgid "dBm"
 msgstr "dBm"
@@ -545,10 +539,14 @@ msgid "mm"
 msgstr "mm"
 
 msgid "mm/s"
-msgstr ""
+msgstr "mm/s"
 
 msgid "mm/s^2"
-msgstr ""
+msgstr "mm/s^2"
+
+#, fuzzy
+#~ msgid "Change Printer"
+#~ msgstr "Druck abbrechen"
 
 #~ msgid "Fan Off"
 #~ msgstr "Lüfter Aus"

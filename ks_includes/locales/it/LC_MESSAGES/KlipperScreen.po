@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 09:54-0400\n"
+"POT-Creation-Date: 2021-09-23 13:30-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pappicio\n"
 "Language-Team: \n"
@@ -12,9 +12,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-msgid "..."
-msgstr "..."
 
 msgid "24 Hour Time"
 msgstr "24H"
@@ -44,10 +41,10 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "Spegnere il Sistema?"
 
 msgid "Bed Level"
-msgstr ""
+msgstr "Livello del letto"
 
 msgid "Bed Mesh"
-msgstr ""
+msgstr "Rete letto"
 
 msgid "Calibrate"
 msgstr "Calibra"
@@ -63,9 +60,6 @@ msgstr "Annullato"
 
 msgid "Cancelling"
 msgstr "Annullamento"
-
-msgid "Change Printer"
-msgstr "Cambia Stampante"
 
 msgid "Channel"
 msgstr "Canale"
@@ -83,14 +77,11 @@ msgstr "Chiudi"
 msgid "Colorized"
 msgstr "Colorato"
 
-msgid "Commited"
-msgstr "Impegnato"
-
 msgid "Complete"
 msgstr "Completo"
 
 msgid "Configuration"
-msgstr "Configuraz."
+msgstr "Impostazioni"
 
 msgid "Connected"
 msgstr "Connesso"
@@ -129,9 +120,8 @@ msgstr "Sconnetti"
 msgid "Displayed Macros"
 msgstr "Mostra/Nascondi Macros"
 
-#, fuzzy
 msgid "Distance (mm)"
-msgstr "Distanza (mm)"
+msgstr "Distanza (mm) "
 
 msgid "Duration Only"
 msgstr "Solo Durata"
@@ -172,42 +162,41 @@ msgstr "Finito"
 msgid "Firmware Restart"
 msgstr "Riavvia Firmware"
 
-#, fuzzy
 msgid "Font Size"
-msgstr "Grandezza Font"
+msgstr "Dimensione del testo"
 
 msgid "Go Back"
 msgstr "Indietro"
 
 msgid "Home"
-msgstr "Menù Princ."
+msgstr "Inizio"
 
 msgid "Home All"
 msgstr "Home XYZ"
 
 msgid "Home X"
-msgstr ""
+msgstr "Home X"
 
 msgid "Home XY"
-msgstr ""
+msgstr "Home XY"
 
 msgid "Home Y"
-msgstr ""
+msgstr "Home Y"
 
 msgid "Home Z"
-msgstr ""
+msgstr "Home Z"
 
 msgid "Homing"
-msgstr ""
+msgstr "Homing"
 
 msgid "Hostname"
-msgstr ""
+msgstr "Hostname"
 
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 msgid "IPv6"
-msgstr ""
+msgstr "IPv6"
 
 msgid "Icon Theme"
 msgstr "Tema Icone"
@@ -223,6 +212,9 @@ msgstr "Inizializzo stampante..."
 
 msgid "Interface"
 msgstr "Interfaccia"
+
+msgid "Invalid"
+msgstr "Non valido"
 
 msgid "Invert X"
 msgstr "Inverti X"
@@ -307,12 +299,11 @@ msgstr "Da acceleraz. Massima a Deceleraz. Massima"
 msgid "Max Velocity"
 msgstr "Velocità Massima"
 
-#, fuzzy
 msgid "Medium (default)"
 msgstr "Media (predef.)"
 
 msgid "Menu"
-msgstr ""
+msgstr "Menù"
 
 msgid "Modified"
 msgstr "Modificato"
@@ -380,6 +371,12 @@ msgstr "Quad Gantry Level"
 msgid "Raise Nozzle"
 msgstr "Alza Ugello"
 
+msgid "Recover Hard"
+msgstr "Recuperare Hard"
+
+msgid "Recover Soft"
+msgstr "Recuperare Soft"
+
 msgid "Restart"
 msgstr "Riavvia"
 
@@ -414,7 +411,7 @@ msgid "Size"
 msgstr "Grandezza"
 
 msgid "Slicer"
-msgstr ""
+msgstr "Slicer"
 
 msgid "Small"
 msgstr "Piccola"
@@ -422,7 +419,6 @@ msgstr "Piccola"
 msgid "Sort by: "
 msgstr "Ordine: "
 
-#, fuzzy
 msgid "Speed (mm/s)"
 msgstr "Velocità (mm/s)"
 
@@ -437,6 +433,9 @@ msgstr "Velocità Square Corner"
 
 msgid "Starting WiFi Re-association"
 msgstr "Riassocia WiFi"
+
+msgid "Starting recovery for"
+msgstr "Inizio del recupero per "
 
 msgid "Starting update for"
 msgstr "Avvio aggiornamento per"
@@ -463,14 +462,13 @@ msgstr "Temperatura"
 
 #, python-format
 msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr "Riavvia KlipperScreen per applicare %s "
+msgstr "Riavvia KlipperScreen per applicare %s"
 
 msgid "Tool"
 msgstr "Strumenti"
 
-#, fuzzy
 msgid "Unload"
-msgstr "Scarica"
+msgstr "Scaricare"
 
 msgid "Up To Date"
 msgstr "Aggiornato"
@@ -485,16 +483,16 @@ msgid "View Mesh"
 msgstr "Visual. Mesh"
 
 msgid "X+"
-msgstr ""
+msgstr "X+"
 
 msgid "X-"
-msgstr ""
+msgstr "X-"
 
 msgid "Y+"
-msgstr ""
+msgstr "Y+"
 
 msgid "Y-"
-msgstr ""
+msgstr "Y-"
 
 msgid "Z Calibrate"
 msgstr "Calibra Z"
@@ -503,19 +501,19 @@ msgid "Z Offset"
 msgstr "Offset Z"
 
 msgid "Z Tilt"
-msgstr ""
+msgstr "Z Tilt"
 
 msgid "Z+"
-msgstr ""
+msgstr "Z+"
 
 msgid "Z-"
-msgstr ""
+msgstr "Z-"
 
 msgid "Z-bolt (default)"
-msgstr ""
+msgstr "Z-bolt (default)"
 
 msgid "dBm"
-msgstr ""
+msgstr "dBm"
 
 msgid "minutes"
 msgstr "minuti"
@@ -524,7 +522,16 @@ msgid "mm"
 msgstr "mm"
 
 msgid "mm/s"
-msgstr ""
+msgstr "mm/s"
 
 msgid "mm/s^2"
-msgstr ""
+msgstr "mm/s^2"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "Change Printer"
+#~ msgstr "Cambia Stampante"
+
+#~ msgid "Commited"
+#~ msgstr "Impegnato"

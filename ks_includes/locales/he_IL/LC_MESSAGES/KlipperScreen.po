@@ -7,24 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 09:54-0400\n"
-"PO-Revision-Date: 2021-01-08 08:21-0500\n"
+"POT-Creation-Date: 2021-09-23 13:30-0300\n"
+"PO-Revision-Date: 2021-09-23 14:21-0300\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
 "Language: he_IL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
 "2 : 3);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-msgid "..."
-msgstr ""
-
 msgid "24 Hour Time"
-msgstr ""
+msgstr "זמן 24 שעות"
 
 msgid "Abort"
 msgstr "בטל"
@@ -35,23 +32,20 @@ msgstr "אשר"
 msgid "Actions"
 msgstr "פעולות"
 
-#, fuzzy
 msgid "Add Printer"
-msgstr "הדפס"
+msgstr "הוסף מדפסת"
 
 msgid "Add bed mesh profile"
-msgstr ""
+msgstr "הוסף פרופיל רשת למיטה"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "האם אתה בטוח שברצונך לבטל את ההדפסה?"
 
-#, fuzzy
 msgid "Are you sure you wish to reboot the system?"
-msgstr "האם אתה בטוח שברצונך לבטל את ההדפסה?"
+msgstr "האם אתה בטוח שברצונך לאתחל את המערכת?"
 
-#, fuzzy
 msgid "Are you sure you wish to shutdown the system?"
-msgstr "האם אתה בטוח שברצונך לבטל את ההדפסה?"
+msgstr "האם אתה בטוח שברצונך לסגור את המערכת?"
 
 msgid "Bed Level"
 msgstr "פילוס מיטה"
@@ -59,9 +53,8 @@ msgstr "פילוס מיטה"
 msgid "Bed Mesh"
 msgstr "מיפוי מיטה"
 
-#, fuzzy
 msgid "Calibrate"
-msgstr "כיול Z"
+msgstr "לְדַרֵג"
 
 msgid "Cancel"
 msgstr "ביטול"
@@ -69,20 +62,14 @@ msgstr "ביטול"
 msgid "Cancel Print"
 msgstr "בטל הדפסה"
 
-#, fuzzy
 msgid "Cancelled"
-msgstr "ביטול"
+msgstr "מבוטל"
 
-#, fuzzy
 msgid "Cancelling"
-msgstr "ביטול"
-
-#, fuzzy
-msgid "Change Printer"
-msgstr "בטל הדפסה"
+msgstr "מבטל"
 
 msgid "Channel"
-msgstr ""
+msgstr "עָרוּץ"
 
 msgid ""
 "Check /tmp/KlipperScreen.log for more information.\n"
@@ -95,68 +82,65 @@ msgid "Close"
 msgstr "סגור"
 
 msgid "Colorized"
-msgstr ""
-
-msgid "Commited"
-msgstr ""
+msgstr "Colorized"
 
 msgid "Complete"
-msgstr ""
+msgstr "לְהַשְׁלִים"
 
 msgid "Configuration"
 msgstr "קונפיגורציה"
 
 msgid "Connected"
-msgstr ""
+msgstr "מְחוּבָּר"
 
 #, python-format
 msgid "Connecting to %s"
-msgstr ""
+msgstr "מתחבר ל- %s"
 
 msgid "Console"
-msgstr ""
+msgstr "לְנַחֵם"
 
 msgid "Continue"
-msgstr "המשך"
+msgstr "לְהַמשִׁיך"
 
 msgid "Cooldown"
-msgstr "קירור"
+msgstr "תירגע"
 
 msgid "Date"
-msgstr ""
+msgstr "תַאֲרִיך"
 
 msgid "Decrease"
-msgstr "הקטן"
+msgstr "לְהַקְטִין"
 
 msgid "Delete"
-msgstr ""
+msgstr "לִמְחוֹק"
 
 msgid "Disable Motors"
-msgstr "בטל מנועים"
+msgstr "השבת מנועים"
 
 msgid "Disable XY"
-msgstr "בטל XY"
+msgstr "השבת את XY"
 
 msgid "Disconnect"
-msgstr ""
+msgstr "לְנַתֵק"
 
 msgid "Displayed Macros"
-msgstr ""
+msgstr "מוצגים מאקרו"
 
 msgid "Distance (mm)"
-msgstr "מרחק (מ''מ)"
+msgstr "מרחק (מ\"מ)"
 
 msgid "Duration Only"
-msgstr ""
+msgstr "משך הזמן בלבד"
 
 msgid "Elapsed:"
 msgstr "זמן שעבר:"
 
 msgid "Error"
-msgstr ""
+msgstr "שְׁגִיאָה"
 
 msgid "Estimated Time Method"
-msgstr ""
+msgstr "שיטת זמן משוערת"
 
 msgid "Extrude"
 msgstr "אקסטרוזיה"
@@ -171,30 +155,28 @@ msgid "Fan"
 msgstr "מאוורר"
 
 msgid "Filament Used"
-msgstr ""
+msgstr "נימה בשימוש"
 
 msgid "File Estimation (default)"
-msgstr ""
+msgstr "קובץ (ברירת מחדל)"
 
 msgid "Fine Tuning"
-msgstr "כיולים עדינים"
+msgstr "כוונון עדין"
 
 msgid "Finish"
-msgstr ""
+msgstr "סיים"
 
 msgid "Firmware Restart"
-msgstr "התחל קושחה"
+msgstr "הפעלה מחדש של הקושחה"
 
-#, fuzzy
 msgid "Font Size"
-msgstr "גודל"
+msgstr "גודל טקסט"
 
 msgid "Go Back"
 msgstr "חזרה"
 
-#, fuzzy
 msgid "Home"
-msgstr "איפוס X"
+msgstr "איפוס"
 
 msgid "Home All"
 msgstr "איפוס XYZ"
@@ -215,16 +197,16 @@ msgid "Homing"
 msgstr "איפוס צירים"
 
 msgid "Hostname"
-msgstr ""
+msgstr "Hostname"
 
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 msgid "IPv6"
-msgstr ""
+msgstr "IPv6"
 
 msgid "Icon Theme"
-msgstr ""
+msgstr "נושא אייקון"
 
 msgid "Increase"
 msgstr "הגדל"
@@ -236,16 +218,19 @@ msgid "Initializing printer..."
 msgstr "מאתחל מדפסת..."
 
 msgid "Interface"
-msgstr ""
+msgstr "מִמְשָׁק"
+
+msgid "Invalid"
+msgstr "לא חוקי"
 
 msgid "Invert X"
-msgstr ""
+msgstr "הפוך את X"
 
 msgid "Invert Y"
-msgstr ""
+msgstr "הפוך את Y"
 
 msgid "Invert Z"
-msgstr ""
+msgstr "הפוך את Z"
 
 msgid "Klipper Restart"
 msgstr "אתחול קליפר"
@@ -259,7 +244,9 @@ msgstr "קליפר התנתק"
 msgid ""
 "Klipper has encountered an error with the micro-controller.\n"
 "Please recompile and flash."
-msgstr "בעיית תקשורת בין קליפר ללוח בקרה. אנא לקמפל קושחה ולצרובה מחדש. "
+msgstr ""
+"קליפר נתקל בשגיאה בבקר המיקרו.\n"
+"אנא הידור מחדש והבהב."
 
 msgid "Klipper has encountered an error."
 msgstr "קילפר נתקל בבעיה."
@@ -284,25 +271,25 @@ msgid "KlipperScreen Version"
 msgstr "גרסא של KlipperScreen"
 
 msgid "Language"
-msgstr ""
+msgstr "שפה"
 
 msgid "Large"
-msgstr ""
+msgstr "גָדוֹל"
 
 msgid "Left:"
 msgstr "זמן שנותר:"
 
 msgid "Limits"
-msgstr ""
+msgstr "גבולות"
 
 msgid "Load"
-msgstr ""
+msgstr "לִטעוֹן"
 
 msgid "Lower Nozzle"
 msgstr "הנמך דיזה"
 
 msgid "Macro shortcut on sidebar"
-msgstr ""
+msgstr "קיצור מקרו בסרגל הצד"
 
 msgid "Macros"
 msgstr "מקרואים"
@@ -311,23 +298,22 @@ msgid "Main Menu"
 msgstr "תפריט ראשי"
 
 msgid "Max Accelation"
-msgstr ""
+msgstr "האצה מרבית"
 
 msgid "Max Acceleration to Deceleration"
-msgstr ""
+msgstr "האצה מרבית להאטה"
 
 msgid "Max Velocity"
-msgstr ""
+msgstr "מהירות מרבית"
 
 msgid "Medium (default)"
-msgstr ""
+msgstr "בינוני (ברירת מחדל)"
 
-#, fuzzy
 msgid "Menu"
-msgstr "תפריט ראשי"
+msgstr "תַפרִיט"
 
 msgid "Modified"
-msgstr ""
+msgstr "שונה"
 
 msgid "Move"
 msgstr "הזזת צירים"
@@ -335,12 +321,11 @@ msgstr "הזזת צירים"
 msgid "Move Distance (mm)"
 msgstr "מרחק הזזה (מ''מ)"
 
-#, fuzzy
 msgid "Move Speed (mm/s)"
-msgstr "מרחק הזזה (מ''מ)"
+msgstr "מהירות הזזה (מ\"מ/שניות)"
 
 msgid "Name"
-msgstr ""
+msgstr "שֵׁם"
 
 msgid "Network"
 msgstr "רשת"
@@ -348,12 +333,11 @@ msgstr "רשת"
 msgid "Number Pad"
 msgstr "פד נומרי"
 
-#, fuzzy
 msgid "Off"
-msgstr "כבה מאוורר"
+msgstr "כבוי"
 
 msgid "PSK for"
-msgstr ""
+msgstr "PSK עבור"
 
 msgid "Pause"
 msgstr "השהיה"
@@ -379,21 +363,26 @@ msgstr "שליטה בהדפסה"
 msgid "Print Time"
 msgstr "זמן הדפסה"
 
-#, fuzzy
 msgid "Printer Connections"
-msgstr "שליטה בהדפסה"
+msgstr "חיבורי מדפסת"
 
 msgid "Printing"
 msgstr "מדפיס"
 
 msgid "Profile Name:"
-msgstr ""
+msgstr "שם פרופיל:"
 
 msgid "Quad Gantry Level"
-msgstr ""
+msgstr "רמת מרפסת גנטרי"
 
 msgid "Raise Nozzle"
 msgstr "הגבה"
+
+msgid "Recover Hard"
+msgstr "לְהַחלִים Hard"
+
+msgid "Recover Soft"
+msgstr "לְהַחלִים Soft"
 
 msgid "Restart"
 msgstr "אתחל"
@@ -405,19 +394,19 @@ msgid "Retract"
 msgstr "שיחול לאחור"
 
 msgid "Save"
-msgstr ""
+msgstr "להציל"
 
 msgid "Save Config"
 msgstr "שמור קונפיג"
 
 msgid "Save configuration."
-msgstr "שמור קונפיגורציה"
+msgstr "שמור תצורה"
 
 msgid "Screen Power Off Time"
-msgstr ""
+msgstr "זמן כיבוי מסך"
 
 msgid "Screen will show in less than one second"
-msgstr ""
+msgstr "המסך יופיע תוך פחות משנייה אחת"
 
 msgid "Screws Adjust"
 msgstr "סידור ברגים"
@@ -429,17 +418,16 @@ msgid "Size"
 msgstr "גודל"
 
 msgid "Slicer"
-msgstr ""
+msgstr "Slicer"
 
 msgid "Small"
-msgstr ""
+msgstr "קָטָן"
 
 msgid "Sort by: "
-msgstr ""
+msgstr "מיין לפי:"
 
-#, fuzzy
 msgid "Speed (mm/s)"
-msgstr "מרחק הזזה (מ''מ)"
+msgstr "מהירות (מ\"מ/שניות)"
 
 msgid "Speed +"
 msgstr "מהירות +"
@@ -448,54 +436,58 @@ msgid "Speed -"
 msgstr "מהירות -"
 
 msgid "Square Corner Velocity"
-msgstr ""
+msgstr "מהירות פינה מרובעת"
 
 msgid "Starting WiFi Re-association"
-msgstr ""
+msgstr "התחלת שיוך מחדש ל- WiFi"
+
+msgid "Starting recovery for"
+msgstr "החל התאוששות עבור"
 
 msgid "Starting update for"
-msgstr ""
+msgstr "מתחיל עדכון עבור"
 
 msgid "System"
 msgstr "מערכת"
 
-#, fuzzy
 msgid ""
 "System\n"
 "Restart"
-msgstr "אתחל"
+msgstr ""
+"מערכת\n"
+"אתחול"
 
 msgid ""
 "System\n"
 "Shutdown"
 msgstr ""
+"מערכת\n"
+"לכבות"
 
 msgid "Temperature"
 msgstr "טמפרטורה"
 
 #, python-format
 msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr ""
+msgstr "כדי ליישם %s צריך להפעיל מחדש את KlipperScreen"
 
 msgid "Tool"
 msgstr "כלי"
 
-#, fuzzy
 msgid "Unload"
-msgstr "הועלה"
+msgstr "לִפְרוֹק"
 
 msgid "Up To Date"
-msgstr ""
+msgstr "עדכני"
 
 msgid "Update"
-msgstr ""
+msgstr "עדכון"
 
 msgid "Uploaded"
 msgstr "הועלה"
 
-#, fuzzy
 msgid "View Mesh"
-msgstr "מיפוי מיטה"
+msgstr "צפה ברשת"
 
 msgid "X+"
 msgstr "X+"
@@ -516,7 +508,7 @@ msgid "Z Offset"
 msgstr "הפרז גובה Z"
 
 msgid "Z Tilt"
-msgstr ""
+msgstr "z הטיה"
 
 msgid "Z+"
 msgstr "Z+"
@@ -525,22 +517,26 @@ msgid "Z-"
 msgstr "Z-"
 
 msgid "Z-bolt (default)"
-msgstr ""
+msgstr "Z-bolt (default)"
 
 msgid "dBm"
-msgstr ""
+msgstr "dBm"
 
 msgid "minutes"
-msgstr ""
+msgstr "דקות"
 
 msgid "mm"
 msgstr "מ''מ"
 
 msgid "mm/s"
-msgstr ""
+msgstr "מ\"מ/ש"
 
 msgid "mm/s^2"
-msgstr ""
+msgstr "mm/s^2"
+
+#, fuzzy
+#~ msgid "Change Printer"
+#~ msgstr "בטל הדפסה"
 
 #~ msgid "Fan Off"
 #~ msgstr "כבה מאוורר"

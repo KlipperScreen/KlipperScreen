@@ -1,6 +1,3 @@
-msgid "..."
-msgstr ""
-
 msgid "24 Hour Time"
 msgstr ""
 
@@ -49,9 +46,6 @@ msgstr ""
 msgid "Cancelling"
 msgstr ""
 
-msgid "Change Printer"
-msgstr ""
-
 msgid "Channel"
 msgstr ""
 
@@ -64,9 +58,6 @@ msgid "Close"
 msgstr ""
 
 msgid "Colorized"
-msgstr ""
-
-msgid "Commited"
 msgstr ""
 
 msgid "Complete"
@@ -203,6 +194,9 @@ msgid "Initializing printer..."
 msgstr ""
 
 msgid "Interface"
+msgstr ""
+
+msgid "Invalid"
 msgstr ""
 
 msgid "Invert X"
@@ -356,6 +350,12 @@ msgstr ""
 msgid "Raise Nozzle"
 msgstr ""
 
+msgid "Recover Hard"
+msgstr ""
+
+msgid "Recover Soft"
+msgstr ""
+
 msgid "Restart"
 msgstr ""
 
@@ -411,6 +411,9 @@ msgid "Square Corner Velocity"
 msgstr ""
 
 msgid "Starting WiFi Re-association"
+msgstr ""
+
+msgid "Starting recovery for"
 msgstr ""
 
 msgid "Starting update for"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 09:54-0400\n"
-"PO-Revision-Date: 2021-09-11 11:31-0300\n"
+"POT-Creation-Date: 2021-09-23 13:30-0300\n"
+"PO-Revision-Date: 2021-09-23 13:38-0300\n"
 "Last-Translator: Bahoue & alfrix\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -17,9 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-msgid "..."
-msgstr "..."
 
 msgid "24 Hour Time"
 msgstr "Format 24 heures"
@@ -40,7 +37,7 @@ msgid "Add bed mesh profile"
 msgstr "Ajouter  un profil de maillage"
 
 msgid "Are you sure you wish to cancel this print?"
-msgstr "Es-tu sûr de vouloir annuler cette impression?"
+msgstr "Êtes-vous sûr de vouloir annuler cette impression?"
 
 msgid "Are you sure you wish to reboot the system?"
 msgstr "Êtes-vous sûr de vouloir redémarrer le système?"
@@ -67,13 +64,10 @@ msgid "Cancelled"
 msgstr "Annulé"
 
 msgid "Cancelling"
-msgstr "Annuler"
-
-msgid "Change Printer"
-msgstr "Changer d'imprimante"
+msgstr "Annulation"
 
 msgid "Channel"
-msgstr ""
+msgstr "Canal"
 
 msgid ""
 "Check /tmp/KlipperScreen.log for more information.\n"
@@ -87,9 +81,6 @@ msgstr "Fermer"
 
 msgid "Colorized"
 msgstr "Colorisé"
-
-msgid "Commited"
-msgstr ""
 
 msgid "Complete"
 msgstr "Finalisé"
@@ -178,9 +169,8 @@ msgstr ""
 "Redémarrer\n"
 "Firmware"
 
-#, fuzzy
 msgid "Font Size"
-msgstr "Dimension"
+msgstr "Taille de police"
 
 msgid "Go Back"
 msgstr "Retourner"
@@ -207,13 +197,13 @@ msgid "Homing"
 msgstr "Origine"
 
 msgid "Hostname"
-msgstr ""
+msgstr "Hostname"
 
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 msgid "IPv6"
-msgstr ""
+msgstr "IPv6"
 
 msgid "Icon Theme"
 msgstr "Thème icônes"
@@ -229,6 +219,9 @@ msgstr "Démarrage de l'imprimante..."
 
 msgid "Interface"
 msgstr "Interface"
+
+msgid "Invalid"
+msgstr "Invalide"
 
 msgid "Invert X"
 msgstr "Inverser X"
@@ -283,13 +276,13 @@ msgid "Language"
 msgstr "Langue"
 
 msgid "Large"
-msgstr ""
+msgstr "Grand"
 
 msgid "Left:"
 msgstr "Restant:"
 
 msgid "Limits"
-msgstr ""
+msgstr "Limites"
 
 msgid "Load"
 msgstr "Charge"
@@ -298,7 +291,7 @@ msgid "Lower Nozzle"
 msgstr "Rapprocher la buse"
 
 msgid "Macro shortcut on sidebar"
-msgstr ""
+msgstr "Raccourci macro sur la barre latérale"
 
 msgid "Macros"
 msgstr "Macros"
@@ -307,17 +300,16 @@ msgid "Main Menu"
 msgstr "Menu principal"
 
 msgid "Max Accelation"
-msgstr ""
+msgstr "Accélération maximale"
 
 msgid "Max Acceleration to Deceleration"
-msgstr ""
+msgstr "Accélération maximale à décélération"
 
 msgid "Max Velocity"
-msgstr ""
+msgstr "Vélocité maximale"
 
-#, fuzzy
 msgid "Medium (default)"
-msgstr "Fichier (défaut)"
+msgstr "Moyen (défaut)"
 
 msgid "Menu"
 msgstr "Menu"
@@ -335,7 +327,7 @@ msgid "Move Speed (mm/s)"
 msgstr "Vitesse de déplacement (mm/s)"
 
 msgid "Name"
-msgstr "Nome"
+msgstr "Nom"
 
 msgid "Network"
 msgstr "Réseau"
@@ -359,7 +351,7 @@ msgid "Power"
 msgstr "Energie"
 
 msgid "Power On Printer"
-msgstr "Allumer l'imrimante"
+msgstr "Allumer l'imprimante"
 
 msgid "Preheat"
 msgstr "Préchauffer"
@@ -368,7 +360,7 @@ msgid "Print"
 msgstr "Imprimer"
 
 msgid "Print Control"
-msgstr "Controle de l'imprimante"
+msgstr "Contrôle de l'impression"
 
 msgid "Print Time"
 msgstr "Temps d'impression"
@@ -377,16 +369,22 @@ msgid "Printer Connections"
 msgstr "Connexions de l'imprimante"
 
 msgid "Printing"
-msgstr "Imprimer"
+msgstr "Impression"
 
 msgid "Profile Name:"
 msgstr "Nom de profil:"
 
 msgid "Quad Gantry Level"
-msgstr ""
+msgstr "Portique à quatre niveaux"
 
 msgid "Raise Nozzle"
 msgstr "Éloigner la buse"
+
+msgid "Recover Hard"
+msgstr "Récupérer Hard"
+
+msgid "Recover Soft"
+msgstr "Récupérer Soft"
 
 msgid "Restart"
 msgstr "Redémarrage"
@@ -404,7 +402,7 @@ msgid "Save Config"
 msgstr "Enregistrer la config"
 
 msgid "Save configuration."
-msgstr "Enregistrer la configuration"
+msgstr "Enregistrer la configuration."
 
 msgid "Screen Power Off Time"
 msgstr "Extinction de l'écran"
@@ -425,12 +423,11 @@ msgid "Slicer"
 msgstr "Trancheur"
 
 msgid "Small"
-msgstr ""
+msgstr "Petit"
 
 msgid "Sort by: "
-msgstr "Trier par:"
+msgstr "Trier par: "
 
-#, fuzzy
 msgid "Speed (mm/s)"
 msgstr "Vitesse de déplacement (mm/s)"
 
@@ -441,16 +438,19 @@ msgid "Speed -"
 msgstr "Vitesse-"
 
 msgid "Square Corner Velocity"
-msgstr ""
+msgstr "Vélocité du coin carré"
 
 msgid "Starting WiFi Re-association"
 msgstr "Démarrage de la re-association WiFi"
+
+msgid "Starting recovery for"
+msgstr "Démarrage de la récupération pour"
 
 msgid "Starting update for"
 msgstr "Démarrage de la mise à jour pour"
 
 msgid "System"
-msgstr "Systeme"
+msgstr "Système"
 
 msgid ""
 "System\n"
@@ -465,7 +465,7 @@ msgid ""
 msgstr "Arrêt du Système"
 
 msgid "Temperature"
-msgstr "Temperature"
+msgstr "Température"
 
 #, python-format
 msgid "To apply %s KlipperScreen needs to be restarted"
@@ -474,18 +474,17 @@ msgstr "Pour appliquer %s KlipperScreen doit être redémarré"
 msgid "Tool"
 msgstr "Outil"
 
-#, fuzzy
 msgid "Unload"
-msgstr "Telecharger"
+msgstr "Déchargez"
 
 msgid "Up To Date"
-msgstr "A jour"
+msgstr "À jour"
 
 msgid "Update"
 msgstr "Mise à jour"
 
 msgid "Uploaded"
-msgstr "Telecharger"
+msgstr "Téléchargé"
 
 msgid "View Mesh"
 msgstr "Voir le maillage"
@@ -521,19 +520,25 @@ msgid "Z-bolt (default)"
 msgstr "Z-bolt (défaut)"
 
 msgid "dBm"
-msgstr ""
+msgstr "dBm"
 
 msgid "minutes"
-msgstr ""
+msgstr "minutes"
 
 msgid "mm"
 msgstr "mm"
 
 msgid "mm/s"
-msgstr ""
+msgstr "mm/s"
 
 msgid "mm/s^2"
-msgstr ""
+msgstr "mm/s^2"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "Change Printer"
+#~ msgstr "Changer d'imprimante"
 
 #~ msgid "Fan Off"
 #~ msgstr "Arrêter "
