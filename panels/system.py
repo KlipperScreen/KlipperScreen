@@ -213,7 +213,7 @@ class SystemPanel(ScreenPanel):
                 grid.attach(label, 0, i, 1, 1)
                 i = i + 1
         if "package_count" in info:
-            label.set_markup("<b>" + _("%d Packages will be updated") % info['package_count'] + ":</b>\n" )
+            label.set_markup("<b>" + _("%d Packages will be updated") % info['package_count'] + ":</b>\n")
             label.set_halign(Gtk.Align.CENTER)
             grid.attach(label, 0, i, 3, 1)
             i = i + 1
