@@ -419,7 +419,7 @@ class KlipperScreen(Gtk.Window):
         ]
 
         label = Gtk.Label()
-        label.set_markup(_("To apply %s KlipperScreen needs to be restarted" % value))
+        label.set_markup(_("To apply %s KlipperScreen needs to be restarted") % value)
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
         label.set_vexpand(True)
