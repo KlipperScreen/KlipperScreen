@@ -172,9 +172,7 @@ msgid "Finish"
 msgstr "Finito"
 
 msgid "Firmware Restart"
-msgstr ""
-"Riavvia\n"
-"Firmware"
+msgstr "Riavvia Firmware"
 
 msgid "Font Size"
 msgstr "Dimensione del testo"
