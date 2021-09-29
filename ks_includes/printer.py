@@ -53,10 +53,6 @@ class Printer:
                     "temperature": 0,
                     "target": 0
                 }
-                self.tempstore[x] = {
-                    "temperatures": [0 for x in range(1200)],
-                    "targets": [0 for x in range(1200)]
-                }
                 self.tools.append(x)
                 self.tools = sorted(self.tools)
                 self.toolcount += 1
@@ -67,10 +63,6 @@ class Printer:
                 self.devices[x] = {
                     "temperature": 0,
                     "target": 0
-                }
-                self.tempstore[x] = {
-                    "temperatures": [0 for x in range(1200)],
-                    "targets": [0 for x in range(1200)]
                 }
             if x.startswith('bed_mesh '):
                 r = self.config[x]
@@ -279,6 +271,15 @@ class Printer:
     def get_extruder_count(self):
         return self.extrudercount
 
+    def get_temp_store_devices(self):
+        return list(self.tempstore)
+
+    def get_temp_store_device_has_target(self, device):
+        if device in self.tempstore:
+            if "targets" in self.tempstore[device]:
+                return True
+        return False
+
     def get_temp_store(self, device, section=False, results=0):
         if device not in self.tempstore:
             return False
@@ -309,11 +310,12 @@ class Printer:
 
     def init_temp_store(self, result):
         for dev in result:
-            if dev in self.tempstore:
-                if "targets" in result[dev]:
-                    self.tempstore[dev]["targets"] = result[dev]["targets"]
-                if "temperatures" in result[dev]:
-                    self.tempstore[dev]["temperatures"] = result[dev]["temperatures"]
+            self.tempstore[dev] = {}
+            if "targets" in result[dev]:
+                self.tempstore[dev]["targets"] = result[dev]["targets"]
+            if "temperatures" in result[dev]:
+                self.tempstore[dev]["temperatures"] = result[dev]["temperatures"]
+        logging.info("Temp store: %s" % list(self.tempstore))
 
     def section_exists(self, section):
         if section in self.get_config_section_list():

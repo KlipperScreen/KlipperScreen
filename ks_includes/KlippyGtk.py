@@ -36,6 +36,32 @@ class KlippyGtk:
         self.header_image_scale_height = 1.4
         self.cursor = cursor
 
+        self.color_list = {
+            "extruder": {
+                "base": 'ff5252',
+                "hsplit": int('20', 16),
+                "state": 0
+            },
+            "bed": {
+                "base": '1fb0ff',
+                "hsplit": int('20', 16),
+                "state": 0
+            },
+            "fan": {
+                "colors": ['3DC25A', '58FC7C', '10EB40', '7EF297'],
+                "state": 0
+            },
+            "sensor": {
+                "colors": ['D67600', '830EE3', 'B366F2', 'E06573', 'E38819'],
+                "state": 0
+            }
+        }
+
+        for key in self.color_list:
+            if "base" in self.color_list[key]:
+                rgb = [int(self.color_list[key]['base'][i:i+2], 16) for i in range(0, 6, 2)]
+                self.color_list[key]['rgb'] = rgb
+
         logging.debug("img width: %s height: %s" % (self.img_width, self.img_height))
 
     def get_action_bar_width(self):
@@ -65,6 +91,29 @@ class KlippyGtk:
     def get_keyboard_height(self):
         return (self.width - self.get_action_bar_width()) * self.keyboard_ratio
 
+    def get_temp_color(self, device):
+        if device not in self.color_list:
+            return False, False
+
+        if 'base' in self.color_list[device]:
+            rgb = self.color_list[device]['rgb'].copy()
+            if self.color_list[device]['state'] > 0:
+                rgb[1] = rgb[1] + self.color_list[device]['hsplit'] * self.color_list[device]['state']
+            self.color_list[device]['state'] += 1
+            color = '{:02X}{:02X}{:02X}'.format(rgb[0], rgb[1], rgb[2])
+            rgb = [x/255 for x in rgb]
+        else:
+            colors = self.color_list[device]['colors']
+            color = colors[self.color_list[device]['state'] % len(colors)]
+            rgb = [int(color[i:i+2], 16)/255 for i in range(0, 6, 2)]
+
+        return rgb, color
+
+    def reset_temp_color(self):
+        for key in self.color_list:
+            self.color_list[key]['state'] = 0
+
+
     def Label(self, label, style=None):
         la = Gtk.Label(label)
         if style is not None and style is not False:
@@ -80,7 +129,7 @@ class KlippyGtk:
         image = Gtk.Image.new_from_pixbuf(pixbuf)
 
         label = Gtk.Label()
-        label.set_text(text)
+        label.set_markup(text)
         box1.add(image)
         box1.add(label)
 
@@ -89,6 +138,25 @@ class KlippyGtk:
             ctx.add_class(style)
 
         return {"l": label, "b": box1}
+
+    def ImageMenuButton(self, image_name, text, size=20, style=False, width_scale=.32, height_scale=.32, popover=False):
+        box1 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=15)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+            "%s/styles/%s/images/%s.svg" % (klipperscreendir, self.theme, str(image_name)),
+            int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
+
+        image = Gtk.Image.new_from_pixbuf(pixbuf)
+
+        mb = Gtk.MenuButton(label="", popover=popover)
+        label = mb.get_label()
+        box1.add(image)
+        box1.add(mb)
+
+        if style is not False:
+            ctx = box1.get_style_context()
+            ctx.add_class(style)
+
+        return {"l": label, "mb": mb, "b": box1}
 
     def Image(self, image_name, style=False, width_scale=1, height_scale=1):
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(

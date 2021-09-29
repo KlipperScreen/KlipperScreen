@@ -20,7 +20,7 @@ class HeaterGraph(Gtk.DrawingArea):
 
     def add_object(self, name, type, rgb=[0, 0, 0], dashed=False, fill=False):
         if name not in self.store:
-            self.store.update({name: {}})
+            self.store.update({name: {"show": True}})
         self.store[name].update({type: {
             "dashed": dashed,
             "fill": fill,
@@ -32,6 +32,8 @@ class HeaterGraph(Gtk.DrawingArea):
         mnum = []
         for x in self.store:
             for t in self.store[x]:
+                if t == "show":
+                    continue
                 mnum.append(max(self.printer.get_temp_store(x, t, data_points)))
         return max(mnum)
 
@@ -63,8 +65,10 @@ class HeaterGraph(Gtk.DrawingArea):
             [g_width, g_height]
         ]
 
-        points_per_pixel = 2
+
+        points_per_pixel = self.max_length / (gsize[1][0]-gsize[0][0])
         data_points = (gsize[1][0]-gsize[0][0]) * points_per_pixel
+        logging.info("aa: %s %s" % (points_per_pixel, data_points))
         max_num = math.ceil(self.get_max_num(data_points) * 1.1 / 10) * 10
         d_width = 1 / points_per_pixel
 
@@ -72,6 +76,8 @@ class HeaterGraph(Gtk.DrawingArea):
         self.graph_time(ctx, gsize, points_per_pixel)
 
         for name in self.store:
+            if not self.store[name]['show']:
+                continue
             for type in self.store[name]:
                 d = self.printer.get_temp_store(name, type, data_points)
                 if d is False:
@@ -163,3 +169,13 @@ class HeaterGraph(Gtk.DrawingArea):
             ctx.show_text("%02d:%02d" % (hour, min))
             ctx.stroke()
             i += 1
+
+    def is_showing(self, device):
+        if device not in self.store:
+            return False
+        return self.store[device]['show']
+
+    def set_showing(self, device, show=True):
+        if device not in self.store:
+            return
+        self.store[device]['show'] = show
