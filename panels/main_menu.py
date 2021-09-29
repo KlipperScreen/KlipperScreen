@@ -64,19 +64,45 @@ class MainPanel(MenuPanel):
                 if d.startswith('extruder'):
                     i += 1
             image = "extruder-%s" % i
+            class_name = "graph_label_%s" % device
+            rgb, color = self._gtk.get_temp_color("extruder")
         elif device == "heater_bed":
             image = "bed"
             devname = "Heater Bed"
+            class_name = "graph_label_heater_bed"
+            rgb = [1, 0, 0]
+            rgb, color = self._gtk.get_temp_color("bed")
         else:
+            s = 1
+            for d in self.devices:
+                if "sensor" in d:
+                    s += 1
             image = "heat-up"
+            class_name = "graph_label_sensor_%s" % s
+            rgb = [1, 0, 0]
+            rgb, color = self._gtk.get_temp_color("sensor")
 
-        name = self._gtk.ImageLabel(image, devname.capitalize(), 20, False, .5, .5)
-        name['b'].set_hexpand(True)
+
+        can_target = self._printer.get_temp_store_device_has_target(device)
+        self.labels['da'].add_object(device, "temperatures", rgb, False, True)
+        if can_target:
+            self.labels['da'].add_object(device, "targets", rgb, True, False)
+
+        text = "<span underline='double' underline_color='#%s'>%s</span>" % (color, devname.capitalize())
+        name = self._gtk.ButtonImage(image, devname.capitalize(), None, .5, .5, Gtk.PositionType.LEFT, False)
+        # name['b'].set_hexpand(True)
+        name.connect('clicked', self.on_popover_clicked, device)
+        name.set_alignment(0, .5)
+        name.get_style_context().add_class(class_name)
+        logging.info("DClass %s %s" % (device, class_name))
+
 
         temp = Gtk.Label("")
         temp.set_markup(self.format_temp(self._printer.get_dev_stat(device, "temperature")))
-        target = Gtk.Label("")
-        target.set_markup(self.format_target(self._printer.get_dev_stat(device, "target")))
+
+        if can_target:
+            target = Gtk.Label("")
+            target.set_markup(self.format_target(self._printer.get_dev_stat(device, "target")))
 
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 
@@ -87,19 +113,44 @@ class MainPanel(MenuPanel):
 
         self.devices[device] = {
             "name": name,
-            "target": target,
-            "temp": temp,
-
+            "temp": temp
         }
+        if can_target:
+            self.devices[device]["target"] = target
 
         devices = sorted(self.devices)
         pos = devices.index(device) + 1
 
         self.labels['devices'].insert_row(pos)
-        self.labels['devices'].attach(name['b'], 0, pos, 1, 1)
+        # self.labels['devices'].attach(name['b'], 0, pos, 1, 1)
+        self.labels['devices'].attach(name, 0, pos, 1, 1)
         self.labels['devices'].attach(temp, 1, pos, 1, 1)
-        self.labels['devices'].attach(target, 2, pos, 1, 1)
+        if can_target:
+            self.labels['devices'].attach(target, 2, pos, 1, 1)
         self.labels['devices'].show_all()
+
+    def on_popover_clicked(self, widget, device):
+        self.popover_device = device
+        po = self.labels['popover']
+        po.set_relative_to(widget)
+        self.popover_populate_menu()
+        po.show_all()
+
+    def popover_populate_menu(self):
+        pobox = self.labels['popover_vbox']
+        for child in pobox.get_children():
+            pobox.remove(child)
+        if self.labels['da'].is_showing(self.popover_device):
+            pobox.pack_start(self.labels['graph_hide'], True, True, 5)
+        else:
+            pobox.pack_start(self.labels['graph_show'], True, True, 5)
+
+    def graph_show_device(self, widget, show=True):
+        logging.info("Graph show: %s %s" % (self.popover_device, show))
+        self.labels['da'].set_showing(self.popover_device, show)
+        self.labels['da'].queue_draw()
+        self.popover_populate_menu()
+        self.labels['popover'].show_all()
 
     def create_left_panel(self):
         _ = self.lang.gettext
@@ -117,19 +168,8 @@ class MainPanel(MenuPanel):
         self.labels['devices'].attach(temp, 1, 0, 1, 1)
         self.labels['devices'].attach(target, 2, 0, 1, 1)
 
-        rgbs = [
-            [0, 1, 0],
-            [1, 0, 0],
-            [0, 0, 1]
-        ]
-        heaters = ['heater_bed', 'extruder']
-        i = 0
         da = HeaterGraph(self._printer)
         da.set_vexpand(True)
-        for h in heaters:
-            da.add_object(h, "temperatures", rgbs[i], False, True)
-            da.add_object(h, "targets", rgbs[i], True, False)
-            i += 1
         self.labels['da'] = da
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
@@ -137,31 +177,24 @@ class MainPanel(MenuPanel):
         box.add(self.labels['devices'])
         box.add(da)
 
-        self.load_devices()
+
+        self.labels['graph_hide'] = self._gtk.Button(label="Hide")
+        self.labels['graph_hide'].connect("clicked", self.graph_show_device, False)
+        self.labels['graph_show'] = self._gtk.Button(label="Show")
+        self.labels['graph_show'].connect("clicked", self.graph_show_device)
+
+        popover = Gtk.Popover()
+        self.labels['popover_vbox'] = Gtk.VBox()
+        # vbox.pack_start(Gtk.Button(label="Hide"), False, True, 10)
+        # vbox.pack_start(Gtk.Label(label="Item 2"), False, True, 10)
+        popover.add(self.labels['popover_vbox'])
+        popover.set_position(Gtk.PositionType.BOTTOM)
+        self.labels['popover'] = popover
+
+        for d in self._printer.get_temp_store_devices():
+            self.add_device(d)
 
         return box
-
-    def load_devices(self):
-        self.heaters = []
-
-        i = 0
-        for x in self._printer.get_tools():
-            self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0))
-            self.heaters.append(x)
-            i += 1
-
-        add_heaters = self._printer.get_heaters()
-        for h in add_heaters:
-            if h == "heater_bed":
-                self.labels[h] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
-            else:
-                name = " ".join(h.split(" ")[1:])
-                self.labels[h] = self._gtk.ButtonImage("heat-up", name)
-            self.heaters.append(h)
-
-        for d in self.heaters:
-            self.add_device(d)
-        logging.info("Heaters: %s" % self.heaters)
 
     def process_update(self, action, data):
         if action != "notify_status_update":
