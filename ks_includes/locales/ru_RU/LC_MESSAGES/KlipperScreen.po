@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-23 15:20-0300\n"
-"PO-Revision-Date: 2021-09-23 23:46-0300\n"
+"POT-Creation-Date: 2021-09-29 11:44-0300\n"
+"PO-Revision-Date: 2021-09-29 11:33-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: Russian <kde-i18n-de@kde.org>\n"
 "Language: ru\n"
@@ -26,6 +26,9 @@ msgstr "% d пакеты будут обновлены"
 #, python-format
 msgid "%s will be updated to version"
 msgstr "% s будет обновлен до версии"
+
+msgid "(default)"
+msgstr "(дефолт)"
 
 msgid "24 Hour Time"
 msgstr "24-часовой формат"
@@ -168,8 +171,8 @@ msgstr "Обдув"
 msgid "Filament Used"
 msgstr "Использование филамента"
 
-msgid "File Estimation (default)"
-msgstr "По файлу (по умолчанию)"
+msgid "File"
+msgstr "Файл"
 
 msgid "Fine Tuning"
 msgstr "Точная настройка"
@@ -319,8 +322,8 @@ msgstr "Ускорения торможения"
 msgid "Max Velocity"
 msgstr "Скорость"
 
-msgid "Medium (default)"
-msgstr "Средний (по умолчанию)"
+msgid "Medium"
+msgstr "Среднее"
 
 msgid "Menu"
 msgstr "Меню"
@@ -531,9 +534,6 @@ msgstr "Z+"
 msgid "Z-"
 msgstr "Z-"
 
-msgid "Z-bolt (default)"
-msgstr "Z-bolt (default)"
-
 msgid "dBm"
 msgstr "dBm"
 
@@ -548,6 +548,15 @@ msgstr "мм/с"
 
 msgid "mm/s^2"
 msgstr "мм/с^2"
+
+#~ msgid "Z-bolt (default)"
+#~ msgstr "Z-bolt (default)"
+
+#~ msgid "Medium (default)"
+#~ msgstr "Средний (по умолчанию)"
+
+#~ msgid "File Estimation (default)"
+#~ msgstr "По файлу (по умолчанию)"
 
 #~ msgid "..."
 #~ msgstr "..."
@@ -566,9 +575,6 @@ msgstr "мм/с^2"
 
 #~ msgid "Fast"
 #~ msgstr "Быстро"
-
-#~ msgid "Medium"
-#~ msgstr "Среднее"
 
 #~ msgid "Set Speed"
 #~ msgstr "Скорость"

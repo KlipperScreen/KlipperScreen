@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-23 15:20-0300\n"
-"PO-Revision-Date: 2021-09-23 23:44-0300\n"
+"POT-Creation-Date: 2021-09-29 11:44-0300\n"
+"PO-Revision-Date: 2021-09-29 10:51-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -25,6 +25,9 @@ msgstr "%d Pakete werden aktualisiert"
 #, python-format
 msgid "%s will be updated to version"
 msgstr "%s wird auf Version aktualisiert"
+
+msgid "(default)"
+msgstr "(Standard)"
 
 msgid "24 Hour Time"
 msgstr "24-Stunden-Zeit"
@@ -167,8 +170,8 @@ msgstr "Lüfter"
 msgid "Filament Used"
 msgstr "Filamentverbrauch"
 
-msgid "File Estimation (default)"
-msgstr "Dateischätzung"
+msgid "File"
+msgstr "Datei"
 
 msgid "Fine Tuning"
 msgstr "Feintuning"
@@ -330,8 +333,8 @@ msgstr "Max. Beschleunigung bis Verzögerung"
 msgid "Max Velocity"
 msgstr "Max. Geschwindigkeit"
 
-msgid "Medium (default)"
-msgstr "Mittel (Standard)"
+msgid "Medium"
+msgstr "Mittel"
 
 msgid "Menu"
 msgstr "Menü"
@@ -544,9 +547,6 @@ msgstr "Z+"
 msgid "Z-"
 msgstr "Z-"
 
-msgid "Z-bolt (default)"
-msgstr "Z-bolt (default)"
-
 msgid "dBm"
 msgstr "dBm"
 
@@ -562,6 +562,15 @@ msgstr "mm/s"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
+#~ msgid "Z-bolt (default)"
+#~ msgstr "Z-bolt (default)"
+
+#~ msgid "Medium (default)"
+#~ msgstr "Mittel (Standard)"
+
+#~ msgid "File Estimation (default)"
+#~ msgstr "Dateischätzung"
+
 #, fuzzy
 #~ msgid "Change Printer"
 #~ msgstr "Druck abbrechen"
@@ -574,9 +583,6 @@ msgstr "mm/s^2"
 
 #~ msgid "Fast"
 #~ msgstr "Schnell"
-
-#~ msgid "Medium"
-#~ msgstr "Mittel"
 
 #~ msgid "Set Speed"
 #~ msgstr "Eingestellter"

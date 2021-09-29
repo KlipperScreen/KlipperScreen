@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-23 15:20-0300\n"
-"PO-Revision-Date: 2021-09-23 15:31-0300\n"
+"POT-Creation-Date: 2021-09-29 11:44-0300\n"
+"PO-Revision-Date: 2021-09-29 11:35-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -25,6 +25,9 @@ msgstr "%d 个软件包将被更新"
 #, python-format
 msgid "%s will be updated to version"
 msgstr "%s 将更新到版本"
+
+msgid "(default)"
+msgstr "（默认"
 
 msgid "24 Hour Time"
 msgstr "24 小时制"
@@ -167,8 +170,8 @@ msgstr "风扇"
 msgid "Filament Used"
 msgstr "已经消耗的耗材"
 
-msgid "File Estimation (default)"
-msgstr "文件估计（默认）"
+msgid "File"
+msgstr "文件"
 
 msgid "Fine Tuning"
 msgstr "微调"
@@ -316,8 +319,8 @@ msgstr "最大加速到减速"
 msgid "Max Velocity"
 msgstr "最大速度"
 
-msgid "Medium (default)"
-msgstr "中（默认"
+msgid "Medium"
+msgstr "中"
 
 msgid "Menu"
 msgstr "菜单"
@@ -526,9 +529,6 @@ msgstr "Z+"
 msgid "Z-"
 msgstr "Z-"
 
-msgid "Z-bolt (default)"
-msgstr "Z-bolt (default)"
-
 msgid "dBm"
 msgstr "dBm"
 
@@ -544,6 +544,15 @@ msgstr "mm/s"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
+#~ msgid "Z-bolt (default)"
+#~ msgstr "Z-bolt (default)"
+
+#~ msgid "Medium (default)"
+#~ msgstr "中（默认"
+
+#~ msgid "File Estimation (default)"
+#~ msgstr "文件估计（默认）"
+
 #, fuzzy
 #~ msgid "Change Printer"
 #~ msgstr "取消打印"
@@ -556,9 +565,6 @@ msgstr "mm/s^2"
 
 #~ msgid "Fast"
 #~ msgstr "快速"
-
-#~ msgid "Medium"
-#~ msgstr "中"
 
 #~ msgid "Set Speed"
 #~ msgstr "设置速度"

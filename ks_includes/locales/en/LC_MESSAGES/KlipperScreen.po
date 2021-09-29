@@ -6,6 +6,9 @@ msgstr ""
 msgid "%s will be updated to version"
 msgstr ""
 
+msgid "(default)"
+msgstr ""
+
 msgid "24 Hour Time"
 msgstr ""
 
@@ -145,7 +148,7 @@ msgstr ""
 msgid "Filament Used"
 msgstr ""
 
-msgid "File Estimation (default)"
+msgid "File"
 msgstr ""
 
 msgid "Fine Tuning"
@@ -290,7 +293,7 @@ msgstr ""
 msgid "Max Velocity"
 msgstr ""
 
-msgid "Medium (default)"
+msgid "Medium"
 msgstr ""
 
 msgid "Menu"
@@ -498,9 +501,6 @@ msgid "Z+"
 msgstr ""
 
 msgid "Z-"
-msgstr ""
-
-msgid "Z-bolt (default)"
 msgstr ""
 
 msgid "dBm"

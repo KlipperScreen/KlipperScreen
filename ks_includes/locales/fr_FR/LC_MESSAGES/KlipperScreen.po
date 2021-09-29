@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-23 15:20-0300\n"
-"PO-Revision-Date: 2021-09-26 13:18-0300\n"
+"POT-Creation-Date: 2021-09-29 11:44-0300\n"
+"PO-Revision-Date: 2021-09-29 10:54-0300\n"
 "Last-Translator: Bahoue & alfrix\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -25,6 +25,9 @@ msgstr "%d packages seront mis à jour"
 #, python-format
 msgid "%s will be updated to version"
 msgstr "%s sera mis à jour vers la version"
+
+msgid "(default)"
+msgstr "(défaut)"
 
 msgid "24 Hour Time"
 msgstr "Format 24 heures"
@@ -167,8 +170,8 @@ msgstr "Ventilateur"
 msgid "Filament Used"
 msgstr "Filament utilisé"
 
-msgid "File Estimation (default)"
-msgstr "Fichier (défaut)"
+msgid "File"
+msgstr "Fichier"
 
 msgid "Fine Tuning"
 msgstr "Réglages fins"
@@ -318,8 +321,8 @@ msgstr "Accélération maximale à décélération"
 msgid "Max Velocity"
 msgstr "Vélocité maximale"
 
-msgid "Medium (default)"
-msgstr "Moyen (défaut)"
+msgid "Medium"
+msgstr "Moyen"
 
 msgid "Menu"
 msgstr "Menu"
@@ -530,9 +533,6 @@ msgstr "Z+"
 msgid "Z-"
 msgstr "Z-"
 
-msgid "Z-bolt (default)"
-msgstr "Z-bolt (défaut)"
-
 msgid "dBm"
 msgstr "dBm"
 
@@ -548,6 +548,15 @@ msgstr "mm/s"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
+#~ msgid "Z-bolt (default)"
+#~ msgstr "Z-bolt (défaut)"
+
+#~ msgid "Medium (default)"
+#~ msgstr "Moyen (défaut)"
+
+#~ msgid "File Estimation (default)"
+#~ msgstr "Fichier (défaut)"
+
 #~ msgid "..."
 #~ msgstr "..."
 
@@ -562,9 +571,6 @@ msgstr "mm/s^2"
 
 #~ msgid "Fast"
 #~ msgstr "Rapide"
-
-#~ msgid "Medium"
-#~ msgstr "Moyen"
 
 #~ msgid "Set Speed"
 #~ msgstr "Définir"
