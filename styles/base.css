@@ -246,6 +246,10 @@ trough {
     min-height: 350px;
 }
 
+.heater-grid {
+    margin-right: .5em;
+}
+
 .heater-grid label {
     margin-top: .3em;
     margin-bottom: .3em;

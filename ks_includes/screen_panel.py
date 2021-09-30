@@ -35,10 +35,8 @@ class ScreenPanel:
         self._screen._ws.klippy.emergency_stop()
 
     def format_target(self, temp):
-        _ = self.lang.gettext
-
         if temp <= 0:
-            return _("Off")
+            return ""
         else:
             return self.format_temp(temp, 0)
 
