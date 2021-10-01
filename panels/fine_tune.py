@@ -88,7 +88,7 @@ class FineTunePanel(ScreenPanel):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
-            if i == "0.05":
+            if i == self.bs_delta:
                 ctx.add_class("distbutton_active")
             bsgrid.attach(self.labels[i], j, 0, 1, 1)
             j += 1
