@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 09:54-0400\n"
+"POT-Creation-Date: 2021-09-29 11:44-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "..."
+#, python-format
+msgid "%d Packages will be updated"
+msgstr ""
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr ""
+
+msgid "(default)"
 msgstr ""
 
 msgid "24 Hour Time"
@@ -68,9 +76,6 @@ msgstr ""
 msgid "Cancelling"
 msgstr ""
 
-msgid "Change Printer"
-msgstr ""
-
 msgid "Channel"
 msgstr ""
 
@@ -83,9 +88,6 @@ msgid "Close"
 msgstr ""
 
 msgid "Colorized"
-msgstr ""
-
-msgid "Commited"
 msgstr ""
 
 msgid "Complete"
@@ -134,6 +136,10 @@ msgstr ""
 msgid "Distance (mm)"
 msgstr ""
 
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr ""
+
 msgid "Duration Only"
 msgstr ""
 
@@ -161,7 +167,7 @@ msgstr ""
 msgid "Filament Used"
 msgstr ""
 
-msgid "File Estimation (default)"
+msgid "File"
 msgstr ""
 
 msgid "Fine Tuning"
@@ -222,6 +228,9 @@ msgid "Initializing printer..."
 msgstr ""
 
 msgid "Interface"
+msgstr ""
+
+msgid "Invalid"
 msgstr ""
 
 msgid "Invert X"
@@ -303,7 +312,7 @@ msgstr ""
 msgid "Max Velocity"
 msgstr ""
 
-msgid "Medium (default)"
+msgid "Medium"
 msgstr ""
 
 msgid "Menu"
@@ -331,6 +340,10 @@ msgid "Number Pad"
 msgstr ""
 
 msgid "Off"
+msgstr ""
+
+#, python-format
+msgid "Outdated by %d commits:"
 msgstr ""
 
 msgid "PSK for"
@@ -373,6 +386,12 @@ msgid "Quad Gantry Level"
 msgstr ""
 
 msgid "Raise Nozzle"
+msgstr ""
+
+msgid "Recover Hard"
+msgstr ""
+
+msgid "Recover Soft"
 msgstr ""
 
 msgid "Restart"
@@ -430,6 +449,9 @@ msgid "Square Corner Velocity"
 msgstr ""
 
 msgid "Starting WiFi Re-association"
+msgstr ""
+
+msgid "Starting recovery for"
 msgstr ""
 
 msgid "Starting update for"
@@ -498,9 +520,6 @@ msgid "Z+"
 msgstr ""
 
 msgid "Z-"
-msgstr ""
-
-msgid "Z-bolt (default)"
 msgstr ""
 
 msgid "dBm"

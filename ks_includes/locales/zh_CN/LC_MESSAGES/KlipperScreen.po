@@ -7,22 +7,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 09:54-0400\n"
-"PO-Revision-Date: 2021-05-18 10:49+0800\n"
+"POT-Creation-Date: 2021-09-29 11:44-0300\n"
+"PO-Revision-Date: 2021-09-29 11:35-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "..."
-msgstr ""
+#, python-format
+msgid "%d Packages will be updated"
+msgstr "%d 个软件包将被更新"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s 将更新到版本"
+
+msgid "(default)"
+msgstr "（默认"
 
 msgid "24 Hour Time"
-msgstr ""
+msgstr "24 小时制"
 
 msgid "Abort"
 msgstr "终止"
@@ -33,9 +41,8 @@ msgstr "接受"
 msgid "Actions"
 msgstr "动作"
 
-#, fuzzy
 msgid "Add Printer"
-msgstr "打印"
+msgstr "添加打印机"
 
 msgid "Add bed mesh profile"
 msgstr "添加网格床"
@@ -67,13 +74,8 @@ msgstr "取消打印"
 msgid "Cancelled"
 msgstr "取消"
 
-#, fuzzy
 msgid "Cancelling"
 msgstr "取消"
-
-#, fuzzy
-msgid "Change Printer"
-msgstr "取消打印"
 
 msgid "Channel"
 msgstr "通道"
@@ -89,10 +91,7 @@ msgid "Close"
 msgstr "关闭"
 
 msgid "Colorized"
-msgstr ""
-
-msgid "Commited"
-msgstr ""
+msgstr "Colorized"
 
 msgid "Complete"
 msgstr "完成"
@@ -108,7 +107,7 @@ msgid "Connecting to %s"
 msgstr "连接到 %s"
 
 msgid "Console"
-msgstr ""
+msgstr "安慰"
 
 msgid "Continue"
 msgstr "继续"
@@ -140,6 +139,10 @@ msgstr "显示宏命令"
 msgid "Distance (mm)"
 msgstr "距离(mm)"
 
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "您想恢复 %s 吗？"
+
 msgid "Duration Only"
 msgstr "仅持续时间"
 
@@ -167,28 +170,26 @@ msgstr "风扇"
 msgid "Filament Used"
 msgstr "已经消耗的耗材"
 
-msgid "File Estimation (default)"
-msgstr "文件估计（默认）"
+msgid "File"
+msgstr "文件"
 
 msgid "Fine Tuning"
 msgstr "微调"
 
 msgid "Finish"
-msgstr ""
+msgstr "结束"
 
 msgid "Firmware Restart"
 msgstr "框架重启"
 
-#, fuzzy
 msgid "Font Size"
-msgstr "大小"
+msgstr "字体大小"
 
 msgid "Go Back"
 msgstr "返回"
 
-#, fuzzy
 msgid "Home"
-msgstr "归零 X"
+msgstr "归零"
 
 msgid "Home All"
 msgstr "归零全部"
@@ -212,10 +213,10 @@ msgid "Hostname"
 msgstr "主机名称"
 
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 msgid "IPv6"
-msgstr ""
+msgstr "IPv6"
 
 msgid "Icon Theme"
 msgstr "图标 主题"
@@ -231,6 +232,9 @@ msgstr "初始化打印机中.."
 
 msgid "Interface"
 msgstr "接口"
+
+msgid "Invalid"
+msgstr "无效的"
 
 msgid "Invert X"
 msgstr "翻转 X"
@@ -280,16 +284,16 @@ msgid "KlipperScreen Version"
 msgstr "KlipperScreen 版本"
 
 msgid "Language"
-msgstr ""
+msgstr "语"
 
 msgid "Large"
-msgstr ""
+msgstr "大的"
 
 msgid "Left:"
 msgstr "左:"
 
 msgid "Limits"
-msgstr ""
+msgstr "限制"
 
 msgid "Load"
 msgstr "加载"
@@ -298,7 +302,7 @@ msgid "Lower Nozzle"
 msgstr "降低喷嘴"
 
 msgid "Macro shortcut on sidebar"
-msgstr ""
+msgstr "侧边栏上的宏快捷方式"
 
 msgid "Macros"
 msgstr "宏"
@@ -307,17 +311,16 @@ msgid "Main Menu"
 msgstr "主菜单"
 
 msgid "Max Accelation"
-msgstr ""
+msgstr "最大加速度"
 
 msgid "Max Acceleration to Deceleration"
-msgstr ""
+msgstr "最大加速到减速"
 
 msgid "Max Velocity"
-msgstr ""
+msgstr "最大速度"
 
-#, fuzzy
-msgid "Medium (default)"
-msgstr "文件估计（默认）"
+msgid "Medium"
+msgstr "中"
 
 msgid "Menu"
 msgstr "菜单"
@@ -346,8 +349,12 @@ msgstr "数字键盘"
 msgid "Off"
 msgstr "关闭"
 
+#, python-format
+msgid "Outdated by %d commits:"
+msgstr "已过时 %d 次提交："
+
 msgid "PSK for"
-msgstr ""
+msgstr "PSK 用于"
 
 msgid "Pause"
 msgstr "暂停"
@@ -388,6 +395,12 @@ msgstr "龙门调平"
 msgid "Raise Nozzle"
 msgstr "升高喷嘴"
 
+msgid "Recover Hard"
+msgstr "恢复 Hard"
+
+msgid "Recover Soft"
+msgstr "恢复 Soft"
+
 msgid "Restart"
 msgstr "重启"
 
@@ -425,14 +438,13 @@ msgid "Slicer"
 msgstr "切片机"
 
 msgid "Small"
-msgstr ""
+msgstr "小的"
 
 msgid "Sort by: "
 msgstr "排序: "
 
-#, fuzzy
 msgid "Speed (mm/s)"
-msgstr "移动速度 (mm/s)"
+msgstr "速度（mm/s）"
 
 msgid "Speed +"
 msgstr "速度 +"
@@ -441,13 +453,16 @@ msgid "Speed -"
 msgstr "速度 -"
 
 msgid "Square Corner Velocity"
-msgstr ""
+msgstr "方角速度"
 
 msgid "Starting WiFi Re-association"
-msgstr ""
+msgstr "启动 WiFi 重新关联"
+
+msgid "Starting recovery for"
+msgstr "开始恢复"
 
 msgid "Starting update for"
-msgstr ""
+msgstr "开始更新"
 
 msgid "System"
 msgstr "系统"
@@ -467,39 +482,37 @@ msgstr "温度"
 
 #, python-format
 msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr ""
+msgstr "要应用 %s，需要重新启动 KlipperScreen"
 
 msgid "Tool"
 msgstr "工具"
 
-#, fuzzy
 msgid "Unload"
-msgstr "已上传"
+msgstr "卸下"
 
 msgid "Up To Date"
-msgstr ""
+msgstr "最新"
 
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 msgid "Uploaded"
 msgstr "已上传"
 
-#, fuzzy
 msgid "View Mesh"
-msgstr "网格床"
+msgstr "查看网格"
 
 msgid "X+"
-msgstr ""
+msgstr "X+"
 
 msgid "X-"
-msgstr ""
+msgstr "X-"
 
 msgid "Y+"
-msgstr ""
+msgstr "Y+"
 
 msgid "Y-"
-msgstr ""
+msgstr "Y-"
 
 msgid "Z Calibrate"
 msgstr "Z 校准"
@@ -508,31 +521,41 @@ msgid "Z Offset"
 msgstr "Z 间隙"
 
 msgid "Z Tilt"
-msgstr ""
+msgstr "Z Tilt"
 
 msgid "Z+"
-msgstr ""
+msgstr "Z+"
 
 msgid "Z-"
-msgstr ""
-
-msgid "Z-bolt (default)"
-msgstr ""
+msgstr "Z-"
 
 msgid "dBm"
-msgstr ""
+msgstr "dBm"
 
 msgid "minutes"
 msgstr "分钟"
 
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 msgid "mm/s"
-msgstr ""
+msgstr "mm/s"
 
 msgid "mm/s^2"
-msgstr ""
+msgstr "mm/s^2"
+
+#~ msgid "Z-bolt (default)"
+#~ msgstr "Z-bolt (default)"
+
+#~ msgid "Medium (default)"
+#~ msgstr "中（默认"
+
+#~ msgid "File Estimation (default)"
+#~ msgstr "文件估计（默认）"
+
+#, fuzzy
+#~ msgid "Change Printer"
+#~ msgstr "取消打印"
 
 #~ msgid "Fan Off"
 #~ msgstr "关闭风扇"
@@ -542,9 +565,6 @@ msgstr ""
 
 #~ msgid "Fast"
 #~ msgstr "快速"
-
-#~ msgid "Medium"
-#~ msgstr "中"
 
 #~ msgid "Set Speed"
 #~ msgstr "设置速度"

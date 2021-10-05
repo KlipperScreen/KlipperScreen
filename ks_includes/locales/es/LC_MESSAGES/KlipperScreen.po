@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 09:54-0400\n"
-"PO-Revision-Date: 2021-08-24 22:37-0300\n"
+"POT-Creation-Date: 2021-09-29 11:44-0300\n"
+"PO-Revision-Date: 2021-09-29 10:52-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,8 +17,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
 
-msgid "..."
-msgstr "..."
+#, python-format
+msgid "%d Packages will be updated"
+msgstr "%d Paquetes serán actualizados"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s será actualizado a la versión"
+
+msgid "(default)"
+msgstr "(por defecto)"
 
 msgid "24 Hour Time"
 msgstr "Formato 24 Horas"
@@ -68,9 +76,6 @@ msgstr "Cancelado"
 msgid "Cancelling"
 msgstr "Cancelando"
 
-msgid "Change Printer"
-msgstr "Cambiar impresora"
-
 msgid "Channel"
 msgstr "Canal"
 
@@ -86,9 +91,6 @@ msgstr "Cerrar"
 
 msgid "Colorized"
 msgstr "Colorized"
-
-msgid "Commited"
-msgstr "Commited"
 
 msgid "Complete"
 msgstr "Completado"
@@ -136,6 +138,10 @@ msgstr "Macros mostrados"
 msgid "Distance (mm)"
 msgstr "Distancia (mm)"
 
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "Desea recuperar %s?"
+
 msgid "Duration Only"
 msgstr "Duración"
 
@@ -163,8 +169,8 @@ msgstr "Ventilador"
 msgid "Filament Used"
 msgstr "Filamento Usado"
 
-msgid "File Estimation (default)"
-msgstr "Archivo (por defecto)"
+msgid "File"
+msgstr "Archivo"
 
 msgid "Fine Tuning"
 msgstr "Ajuste Fino"
@@ -175,9 +181,8 @@ msgstr "Cerrar"
 msgid "Firmware Restart"
 msgstr "Reiniciar Firmware"
 
-#, fuzzy
 msgid "Font Size"
-msgstr "Tamaño"
+msgstr "Tamaño del texto"
 
 msgid "Go Back"
 msgstr "Volver"
@@ -227,6 +232,9 @@ msgstr "Iniciando Impresora..."
 msgid "Interface"
 msgstr "Interfaz"
 
+msgid "Invalid"
+msgstr "Invalido"
+
 msgid "Invert X"
 msgstr "Invertir X"
 
@@ -237,7 +245,9 @@ msgid "Invert Z"
 msgstr "Invertir Z"
 
 msgid "Klipper Restart"
-msgstr "Reiniciar Klipper"
+msgstr ""
+"Reiniciar\n"
+"Klipper"
 
 msgid "Klipper Version"
 msgstr "Versión de Klipper"
@@ -278,13 +288,13 @@ msgid "Language"
 msgstr "Idioma"
 
 msgid "Large"
-msgstr ""
+msgstr "Grande"
 
 msgid "Left:"
 msgstr "Restante:"
 
 msgid "Limits"
-msgstr ""
+msgstr "Limites"
 
 msgid "Load"
 msgstr "Cargar"
@@ -293,7 +303,7 @@ msgid "Lower Nozzle"
 msgstr "Bajar Boquilla"
 
 msgid "Macro shortcut on sidebar"
-msgstr ""
+msgstr "Atajo a Macros en el lateral"
 
 msgid "Macros"
 msgstr "Macros"
@@ -302,17 +312,16 @@ msgid "Main Menu"
 msgstr "Menú"
 
 msgid "Max Accelation"
-msgstr ""
+msgstr "Max. Aceleración"
 
 msgid "Max Acceleration to Deceleration"
-msgstr ""
+msgstr "Max. Aceleración a Desaceleración"
 
 msgid "Max Velocity"
-msgstr ""
+msgstr "Max. Velocidad"
 
-#, fuzzy
-msgid "Medium (default)"
-msgstr "Archivo (por defecto)"
+msgid "Medium"
+msgstr "Medio"
 
 msgid "Menu"
 msgstr "Menú"
@@ -340,6 +349,10 @@ msgstr "Teclado"
 
 msgid "Off"
 msgstr "Apagar"
+
+#, python-format
+msgid "Outdated by %d commits:"
+msgstr "Desactualizado por %d commits:"
 
 msgid "PSK for"
 msgstr "PSK para"
@@ -383,6 +396,12 @@ msgstr "Nivelación cuádruple"
 msgid "Raise Nozzle"
 msgstr "Levantar Boquilla"
 
+msgid "Recover Hard"
+msgstr "Recuperar Hard"
+
+msgid "Recover Soft"
+msgstr "Recuperar Soft"
+
 msgid "Restart"
 msgstr "Reiniciar"
 
@@ -420,12 +439,11 @@ msgid "Slicer"
 msgstr "Slicer"
 
 msgid "Small"
-msgstr ""
+msgstr "Pequeño"
 
 msgid "Sort by: "
 msgstr "Ordenar por: "
 
-#, fuzzy
 msgid "Speed (mm/s)"
 msgstr "Velocidad (mm/s)"
 
@@ -436,13 +454,16 @@ msgid "Speed -"
 msgstr "Velocidad -"
 
 msgid "Square Corner Velocity"
-msgstr ""
+msgstr "Velocidad de esquina"
 
 msgid "Starting WiFi Re-association"
 msgstr "Comenzando re-asociación"
 
+msgid "Starting recovery for"
+msgstr "Iniciando recuperación de"
+
 msgid "Starting update for"
-msgstr "Actualizando"
+msgstr "Iniciando actualización de"
 
 msgid "System"
 msgstr "Sistema"
@@ -471,9 +492,8 @@ msgstr "Para aplicar %s KlipperScreen necesita reiniciarse"
 msgid "Tool"
 msgstr "Herrmienta"
 
-#, fuzzy
 msgid "Unload"
-msgstr "Subido"
+msgstr "Descargar"
 
 msgid "Up To Date"
 msgstr "Actualizado"
@@ -514,9 +534,6 @@ msgstr "Z+"
 msgid "Z-"
 msgstr "Z-"
 
-msgid "Z-bolt (default)"
-msgstr "Z-bolt (por defecto)"
-
 msgid "dBm"
 msgstr "dBm"
 
@@ -527,10 +544,28 @@ msgid "mm"
 msgstr "mm"
 
 msgid "mm/s"
-msgstr ""
+msgstr "mm/s"
 
 msgid "mm/s^2"
-msgstr ""
+msgstr "mm/s^2"
+
+#~ msgid "Z-bolt (default)"
+#~ msgstr "Z-bolt (por defecto)"
+
+#~ msgid "Medium (default)"
+#~ msgstr "Medio (por defecto)"
+
+#~ msgid "File Estimation (default)"
+#~ msgstr "Archivo (por defecto)"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "Change Printer"
+#~ msgstr "Cambiar impresora"
+
+#~ msgid "Commited"
+#~ msgstr "Commited"
 
 #~ msgid "Fan Off"
 #~ msgstr "Apagar"
@@ -540,9 +575,6 @@ msgstr ""
 
 #~ msgid "Fast"
 #~ msgstr "Rápido"
-
-#~ msgid "Medium"
-#~ msgstr "Medio"
 
 #~ msgid "Set Speed"
 #~ msgstr "Establecer"

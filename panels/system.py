@@ -173,7 +173,7 @@ class SystemPanel(ScreenPanel):
         if "configured_type" in info:
             if info['configured_type'] == 'git_repo':
                 if not info['is_valid'] or info['is_dirty']:
-                    label.set_markup("Do you want to recover %s?" % program)
+                    label.set_markup(_("Do you want to recover %s?") % program)
                     grid.attach(label, 0, i, 1, 1)
                     scroll.add(grid)
                     recoverybuttons = [
@@ -186,7 +186,7 @@ class SystemPanel(ScreenPanel):
                 else:
                     if info['version'] == info['remote_version']:
                         return
-                    label.set_markup("<b>Outdated by %d commits:</b>\n" % len(info['commits_behind']))
+                    label.set_markup("<b>" + _("Outdated by %d commits:") % len(info['commits_behind']) + "</b>\n")
                     grid.attach(label, 0, i, 1, 1)
                     i = i + 1
                     date = ""
@@ -208,12 +208,12 @@ class SystemPanel(ScreenPanel):
                         grid.attach(label, 0, i, 1, 1)
                         i = i + 1
             else:
-                label.set_markup("<b>%s will be updated to version: %s</b>" % (program.capitalize(),
-                                                                               info['remote_version']))
+                label.set_markup("<b>" + _("%s will be updated to version") % program.capitalize() +
+                                 ": %s</b>" % (info['remote_version']))
                 grid.attach(label, 0, i, 1, 1)
                 i = i + 1
         if "package_count" in info:
-            label.set_markup("<b>%d Packages will be updated:</b>\n" % info['package_count'])
+            label.set_markup("<b>" + _("%d Packages will be updated") % info['package_count'] + ":</b>\n")
             label.set_halign(Gtk.Align.CENTER)
             grid.attach(label, 0, i, 3, 1)
             i = i + 1
@@ -381,6 +381,7 @@ class SystemPanel(ScreenPanel):
             self.labels[p].set_markup("<b>System</b>")
             if info['package_count'] == 0:
                 self.labels["%s_status" % p].set_label(_("Up To Date"))
+                self.labels["%s_status" % p].get_style_context().remove_class('update')
                 self.labels["%s_status" % p].set_sensitive(False)
             else:
                 self.labels["%s_status" % p].set_label(_("Update"))

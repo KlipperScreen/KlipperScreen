@@ -109,7 +109,7 @@ class KlipperScreenConfig:
             {"invert_z": {"section": "main", "name": _("Invert Z"), "type": "binary", "value": "False"}},
             {"language": {"section": "main", "name": _("Language"), "type": "dropdown", "value": "system_lang",
                           "callback": screen.restart_warning, "options": [
-                              {"name": "System Default", "value": "system_lang"}
+                              {"name": _("System") + " " + _("(default)"), "value": "system_lang"}
             ]}},
             {"move_speed": {
                 "section": "main", "name": _("Move Speed (mm/s)"), "type": "scale", "value": "20",
@@ -118,7 +118,7 @@ class KlipperScreenConfig:
             {"print_estimate_method": {
                 "section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
                 "value": "file", "options": [
-                    {"name": _("File Estimation (default)"), "value": "file"},
+                    {"name": _("File") + " " + _("(default)"), "value": "file"},
                     {"name": _("Duration Only"), "value": "duration"},
                     {"name": _("Filament Used"), "value": "filament"},
                     {"name": _("Slicer"), "value": "slicer"}]}},
@@ -139,7 +139,7 @@ class KlipperScreenConfig:
                 "section": "main", "name": _("Font Size"), "type": "dropdown",
                 "value": "medium", "callback": screen.restart_warning, "options": [
                     {"name": _("Small"), "value": "small"},
-                    {"name": _("Medium (default)"), "value": "medium"},
+                    {"name": _("Medium") + " " + _("(default)"), "value": "medium"},
                     {"name": _("Large"), "value": "large"}]}},
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
