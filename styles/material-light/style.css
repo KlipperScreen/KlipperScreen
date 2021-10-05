@@ -1,0 +1,255 @@
+/* Material-light theme created by Alfredo Monclus 2021 */
+
+* {
+    color: black;
+}
+
+window {
+    background-color: #FAFAFA;
+}
+
+button {
+    background-color: #FAFAFA;
+}
+
+button label{
+    color: black;
+}
+
+button:active {
+    background-color: #FFA726;
+}
+
+.button_active {
+    border-color: #BDBDBD;
+    border-style: solid;
+    border-width: .25em;
+    background-color: white;
+    box-shadow: .1em .1em #BDBDBD;
+    border-radius: 1em;
+}
+
+button.color1 label, button.color2 label, button.color3 label, button.color4 label {
+    color: black;
+}
+
+button.color1 {
+    background-color: #FFF59D;
+    border-color: #FFF59D;
+    box-shadow: .1em .1em #BDBDBD;
+    border-radius: 1em;
+}
+
+button.color2 {
+    background-color: #F48FB1;
+    border-color: #F48FB1;
+    box-shadow: .1em .1em #BDBDBD;
+    border-radius: 1em;
+}
+
+button.color3 {
+    background-color: #C5E1A5;
+    border-color: #C5E1A5;
+    box-shadow: .1em .1em #BDBDBD;
+    border-radius: 1em;
+}
+
+button.color4 {
+    background-color: #80DEEA;
+    border-color: #80DEEA;
+    box-shadow: .1em .1em #BDBDBD;
+    border-radius: 1em;
+}
+
+button.color1:active, button.color2:active, button.color3:active, button.color4:active, button.update:active, button.invalid:active, .dialog button:active {
+    border-style: none;
+}
+
+button.active {
+    background-color: #FFA726;
+}
+
+button.update {
+    background-color: #C5E1A5;
+    border-color: #C5E1A5;
+}
+
+button.invalid {
+    background-color: #EF9A9A;
+    border-color: #EF9A9A;
+}
+
+combobox window.popup {
+    background-color: white;
+}
+
+combobox box button {
+    background-color: white;
+    border-color: #BDBDBD;
+}
+
+switch {
+    background-color: #BDBDBD;
+    border-radius: 2em;
+    border-color: #BDBDBD
+}
+
+switch:checked {
+    background-color: #C5E1A5;
+}
+
+switch slider {
+    border-color: #BDBDBD;
+}
+
+entry {
+    border-color: #F5F5F5;
+    background-color: #F5F5F5;
+}
+
+frame {
+    border-bottom-color: #BDBDBD;
+}
+
+label {
+    color: black;
+}
+
+menu {
+    background-color: #FAFAFA;
+    border-color: #BDBDBD;
+}
+
+menuitem {
+    background-color: #FAFAFA;
+    border-color: #BDBDBD;
+}
+
+trough {
+    background-color: transparent;
+    color: #BDBDBD;
+    border-radius: 1em;
+}
+
+trough highlight, trough progress {
+    background-color: #F48FB1;
+    color: #e2e2e2;
+    border-color: #121212;
+    border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
+}
+
+scale-mark {
+    color: #e2e2e2;
+}
+
+scrollbar, scrollbar button, scrollbar trough {
+    background-color: transparent;
+}
+
+scrollbar slider {
+    background-color: #BDBDBD;
+}
+
+textview {
+    background-color: #212121;
+}
+
+textview .time {
+    color: #9E9E9E;
+}
+
+.popup {
+    background-color: #006064;
+}
+
+.dialog {
+    border: #121212;
+    background-color: #FAFAFA;
+}
+
+.dialog button {
+    background-color: #80CBC4;
+    border-bottom-color: #80CBC4;
+    border-radius: .75em;
+}
+
+.dialog button:nth-child(1) {
+    background-color: #C5E1A5;
+    border-bottom-color: #C5E1A5;
+}
+
+.dialog button:nth-child(2) {
+    background-color: #EF9A9A;
+    border-bottom-color: #EF9A9A;
+}
+
+.dialog button:nth-child(1) label , .dialog button:nth-child(2) label {
+    color: black;
+}
+
+.tempbutton_top, .tempbutton, .tempbutton_bottom, .distbutton_top, .distbutton, .distbutton_bottom  {
+    border-color: #BDBDBD;
+    background-color: #F5F5F5;
+}
+
+.distbutton_active {
+    background-color: #FFAB91;
+}
+
+.distbutton_active label {
+    color: black;
+}
+
+.fan_slider {
+    color: #e2e2e2;
+}
+
+.message_popup {
+    background-color: #EF9A9A;
+    border-bottom-color: #e2e2e2;
+}
+
+.message_popup button {
+    background-color: #EF9A9A;
+}
+
+.numpad_tleft, .numpad_top, .numpad_tright, .numpad_left, .numpad_button, .numpad_right, .numpad_bleft, .numpad_bottom, .numpad_bright {
+    border-color: #BDBDBD;
+    background-color: #F5F5F5;
+}
+
+.printing-status {
+    color: black;
+}
+
+.printing-progress-bar {
+    color: #F48FB1;
+}
+
+.printing-progress-text {
+    color: black;
+}
+
+.printing-status-label {
+    color: black;
+}
+
+.message {
+    border-color: #EF9A9A;
+    color: #e2e2e2;
+    background-color: #EF9A9A;
+}
+
+.message button {
+    background-color: #e2e2e2;
+    color: #121212;
+}
+
+.warning {
+    background-color: #FFE082;
+}
+
+.error {
+    background-color: #EF9A9A;
+}
