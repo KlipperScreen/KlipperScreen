@@ -1,26 +1,81 @@
 # Hardware
 
-KlipperScreen should run on any touchscreen that you can connect to a computer. The required video driver may
-be slightly different depending on what model you get. I am developing on a 1024x600 resolution screen. Due to this,
-other resolutions may not be scaled properly at this moment. UI scaling is a future development item.
+There are no recommended screens, but here are some guidelines:
 
-#### Configure Hardware
-
-Add the following to _/boot/config.txt_. You can alter the hdmi_cvt to your screen specifications. This example is setup
-for a resolution of 1024x600 and a refresh rate of 60hz.
-```
-hdmi_cvt=1024 600 60 6 0 0 0
-hdmi_group=2
-hdmi_mode=87
-hdmi_drive=2
-```
-* Development has been using 1024x600 for a screen resolution. Other resolutions may have issues currently
-
-After changing _/boot/config.txt_ you must reboot your raspberry pi. Please also ensure you followed setting up your screen via the screen instructions. This will likely have a xorg.conf.d file for input from the touchscreen that you need to create.
+* There is no support for vertical/portrait mode, only widescreen
+* Minimum resolution of 480x320
 
 #### Hardware known to work
 
-[Click here](https://klipper.discourse.group/t/hardware-known-to-work-with-klipperscreen/35) to go to a post on the Klipper discourse server for known hardware or see the below list.
+* [BTT PI TFT50](https://www.biqu.equipment/collections/lcd/products/bigtreetech-pi-tft50-v1-0-tft-display-for-raspberry-pi-3d-printer-part)
+* [Raspberry PI 7" Touchscreen](https://www.raspberrypi.org/products/raspberry-pi-touch-display/)
+* [Hyperpixel 4](https://shop.pimoroni.com/products/hyperpixel-4)
+* [3.5" Elegoo](https://www.elegoo.com/de/products/elegoo-3-5-inch-tft-lcd-screen)
+* [3.5" RPi Display](http://www.lcdwiki.com/3.5inch_RPi_Display)
+* [5" HDMI Display-B](http://lcdwiki.com/5inch_HDMI_Display-B)
+* [VoCore](https://klipper.discourse.group/t/hardware-known-to-work-with-klipperscreen/35/7)
+* [Android Phone](https://klipper.discourse.group/t/hardware-known-to-work-with-klipperscreen/35/8)
+* [WAVESHARE 4.3 inch DSI LCD](https://www.waveshare.com/4.3inch-dsi-lcd.htm)
+* [DFrobot DFR0550](https://wiki.dfrobot.com/5%27%27TFT-Display_with_Touchscreen_V1.0_SKU_DFR0550)
 
-[BTT PI TFT50](https://www.biqu.equipment/collections/lcd/products/bigtreetech-pi-tft50-v1-0-tft-display-for-raspberry-pi-3d-printer-part)
-[Raspberry PI 7" Touchscreen](https://www.raspberrypi.org/products/raspberry-pi-touch-display/)
+* [More known hardware in the klipper discourse](https://klipper.discourse.group/t/hardware-known-to-work-with-klipperscreen/35)
+
+#### Configuration
+
+Follow the manufacturer instructions on how to install your screen. In general if you see a white screen, then it's not properly installed, ensure that you at least see a console, Then ![install](Installation.md) KlipperScreen, if you are having troubles refer to the ![troubleshooting page](Troubleshooting.md) for further information.
+
+#### Touchscreen Calibration
+Most people don't need to calibrate, but if you do need to calibrate your touchscreen, follow the below steps.
+
+Run this command:
+```
+DISPLAY=:0 xinput_calibrator --list
+```
+It will output something such as:
+```
+Device "wch.cn USB2IIC_CTP_CONTROL" id=6
+```
+
+Find the ID of your display and put it in the following command:
+```
+DISPLAY=:0 xinput_calibrator -v --device <id from last command>
+```
+
+#### Touchscreen touch rotation
+If your touchscreen isn't registering touches properly after the screen has been rotated, you will need to apply a
+transformation matrix. You can have the matrix be one of the following:
+
+* 0°: `1 0 0 0 1 0 0 0 1`
+* 90° Clockwise: `0 -1 1 1 0 0 0 0 1`
+* 90° Counter-Clockwise: `0 1 0 -1 0 1 0 0 1`
+* 180°: `-1 0 1 0 -1 1 0 0 1`
+
+To check the current matrix, you will need your `<screen name>`
+(which can be found via the last section, ex: "wch.cn USB2IIC_CTP_CONTROL").
+Run the following command: `xinput list-props "wch.cn USB2IIC_CTP_CONTROL"`
+
+It will output something such as:
+```
+Device '<screen name>':
+        Device Enabled (115):   1
+        Coordinate Transformation Matrix (116): 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
+        libinput Calibration Matrix (247):      -1.000000, 0.000000, 1.000000, 0.000000, -1.000000, 1.000000, 0.000000, 0.000000, 1.000000
+        libinput Calibration Matrix Default (248):      -1.000000, 0.000000, 1.000000, 0.000000, -1.000000, 1.000000, 0.000000, 0.000000, 1.000000
+        libinput Send Events Modes Available (249):     1, 0
+        libinput Send Events Mode Enabled (250):        0, 0
+        libinput Send Events Mode Enabled Default (251):        0, 0
+        Device Node (252):      "/dev/input/event0"
+        Device Product ID (253):        6790, 58083
+```
+
+You can verify by checking that the 'Coordinate Transformation Matrix' or 'libinput Calibration Matrix'.
+
+You can test a change by running: `xinput set-prop "<screen name>" 'Coordinate Transformation Matrix' <matrix>`
+
+Replace matrix with one of the options above, such as: `1 0 0 0 1 0 0 0 1`
+
+To make this permanent, modify the file `/etc/udev/rules.d/51-touchscreen.rules` and add following line:
+
+```
+ACTION=="add", ATTRS{name}=="<screen name>", ENV{LIBINPUT_CALIBRATION_MATRIX}="<matrix>"
+```
