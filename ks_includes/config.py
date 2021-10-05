@@ -130,8 +130,7 @@ class KlipperScreenConfig:
             {"theme": {
                 "section": "main", "name": _("Icon Theme"), "type": "dropdown",
                 "value": "z-bolt", "callback": screen.restart_warning, "options": [
-                    {"name": "Z-bolt" + " " + _("(default)"), "value": "z-bolt"},
-                    {"name": _("Colorized"), "value": "colorized"}]}},
+                    {"name": "Z-bolt" + " " + _("(default)"), "value": "z-bolt"}]}},
             {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
             {"side_macro_shortcut": {
                 "section": "main", "name": _("Macro shortcut on sidebar"), "type": "binary",
@@ -152,6 +151,14 @@ class KlipperScreenConfig:
 
         for lang in langs:
             lang_opt.append({"name": lang, "value": lang})
+
+        t_path = os.path.join(os.getcwd(), 'styles')
+        themes = [d for d in os.listdir(t_path) if (not os.path.isfile(os.path.join(t_path, d)) and d != "z-bolt")]
+        themes.sort()
+        theme_opt = self.configurable_options[8]['theme']['options']
+
+        for theme in themes:
+            theme_opt.append({"name": theme, "value": theme})
 
         index = self.configurable_options.index(
             [i for i in self.configurable_options if list(i)[0] == "screen_blanking"][0])
