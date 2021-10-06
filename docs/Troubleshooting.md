@@ -42,3 +42,7 @@ Run the command `cat /usr/share/X11/xorg.conf.d/99-fbturbo.conf | grep /dev/fb`.
 previous command (i.e. `/dev/fb1`).
 
 Once you have saved that file, restart KlipperScreen and it should show up on your display.
+
+#### Screen is all white or blank
+
+Improperly installed screen, follow the manufacturer instructions on how to physically connect the screen and install the proper drivers.

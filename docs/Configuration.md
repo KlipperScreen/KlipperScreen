@@ -4,24 +4,18 @@ The configuration options are outlined below:
 
 KlipperScreen will search for a configuration file in the following order:
 
-1. _${HOME}/KlipperScreen.conf_
+1. _~/KlipperScreen.conf_
 2. _${KlipperScreen_Directory}/KlipperScreen.conf_
-3. _${HOME}/klipper_config/KlipperScreen.conf_
+3. _~/klipper_config/KlipperScreen.conf_
 
 If one of those files are found, it will be used over the default configuration. The default configuration will be
 merged with the custom configuration, so if you do not define any menus the default menus will be used.
 
 The default config is included here: (do not edit use as reference)
-
-[ks_includes/KlipperScreen.conf](/ks_includes/default.conf)
+_${KlipperScreen_Directory}/ks_includes/default.conf_
 
 If no config file is found then a new configuration file will be created in:
-
-_${HOME}/klipper_config/KlipperScreen.conf_
-
-if _klipper_config_ isn't available then:
-
-_${HOME}/KlipperScreen.conf_
+_~/klipper_config/KlipperScreen.conf_ Or _~/KlipperScreen.conf_
 
 ## Include files
 ```
@@ -51,16 +45,6 @@ language: en
 
 # Allows the cursor to be displayed on the screen
 show_cursor: False
-
-#
-# The following main options are deprecated and will be removed in the near future
-#
-
-# Define the moonraker host/port if different from 127.0.0.1 and 7125
-moonraker_host: 127.0.0.1
-moonraker_port: 7125
-# Moonraker API key if this is not connecting from a trusted client IP
-moonraker_api_key: False
 ```
 
 ## Printer Options

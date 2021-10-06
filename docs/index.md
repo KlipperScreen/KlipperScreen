@@ -1,19 +1,12 @@
 # KlipperScreen
 
-KlipperScreen is touchscreen GUI for Klipper based 3D printers. KlipperScreen interfaces with [Klipper](https://github.com/kevinOConnor/klipper) via [Moonraker](https://github.com/arksine/moonraker).
-
-Multiple printers update is here! Please check the configuration information for specifying several printers.
-
-
-[Changelog](changelog.md)
+KlipperScreen is a touchscreen GUI that interfaces with [Klipper](https://github.com/kevinOConnor/klipper) via [Moonraker](https://github.com/arksine/moonraker). It can switch between multiple printers to access them from a single location, and it doesn't even need to run on the same host, you can install it on another device and configure the IP address to access the printer.
 
 ### Required Hardware
-KlipperScreen should run on any touchscreen that you can connect to a computer. The required video driver may be
-slightly different depending on what model you get. KlipperScreen will scale to the resolution of the screen being used.
-However, three resolutions are tested during development: 1024x600, 800x480, 480x320.
 
-There are no recommended screens, but there are several screens that work with KlipperScreen. They include screens that
-use HDMI/USB, Raspberry Pi GPIO, or the Rapsberry Pi DSI (ribbon cable) port.
+KlipperScreen should run on any touchscreen that you can connect to a host (Raspberry, PC, Tablet), but not screens that connect directly to the printer MCU board.
+
+A physical touchscreen is not strictly required, for example you may install a remote desktop server like tigervnc-scraping-server and connect from a client device, ![check out the hardware page for further information.](Hardware.md)
 
 ### Sample Panels
 
@@ -26,4 +19,6 @@ Job Status
 
 ### Inspiration
 KlipperScreen was inspired by [OctoScreen](https://github.com/Z-Bolt/OctoScreen/) and the need for a touchscreen GUI that
-will natively work with [Klipper](https://github.com/kevinOConnor/klipper) and [Moonraker](https://github.com/arksine/moonraker).
+will natively work with [Klipper](https://github.com/klipper3d/klipper) and [Moonraker](https://github.com/arksine/moonraker).
+
+[Changelog](changelog.md)
