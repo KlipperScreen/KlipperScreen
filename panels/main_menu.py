@@ -94,6 +94,9 @@ class MainPanel(MenuPanel):
         name.connect('clicked', self.on_popover_clicked, device)
         name.set_alignment(0, .5)
         name.get_style_context().add_class(class_name)
+        child = name.get_children()[0].get_children()[0].get_children()[1]
+        child.set_ellipsize(True)
+        child.set_ellipsize(Pango.EllipsizeMode.END)
         logging.info("DClass %s %s" % (device, class_name))
 
 
