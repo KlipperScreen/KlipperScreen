@@ -42,8 +42,8 @@ class HeaterGraph(Gtk.DrawingArea):
         height = da.get_allocated_height()
 
         g_width_start = 30
-        g_width = width - 5
-        g_height_start = 5
+        g_width = width - 15
+        g_height_start = 15
         g_height = height - 30
 
         ctx.set_source_rgb(.5, .5, .5)
@@ -66,8 +66,11 @@ class HeaterGraph(Gtk.DrawingArea):
         ]
 
 
-        points_per_pixel = self.max_length / (gsize[1][0]-gsize[0][0])
-        data_points = (gsize[1][0]-gsize[0][0]) * points_per_pixel
+        graph_width = gsize[1][0] - gsize[0][0]
+        points_per_pixel = self.max_length / graph_width
+        if points_per_pixel > 3:
+            points_per_pixel = 3
+        data_points = graph_width * points_per_pixel
         logging.info("aa: %s %s" % (points_per_pixel, data_points))
         max_num = math.ceil(self.get_max_num(data_points) * 1.1 / 10) * 10
         d_width = 1 / points_per_pixel
@@ -130,7 +133,7 @@ class HeaterGraph(Gtk.DrawingArea):
         for i in range(r):
             ctx.set_source_rgb(.5, .5, .5)
             lheight = gsize[1][1] - nscale*i*hscale
-            ctx.move_to(10, lheight + 3)
+            ctx.move_to(6, lheight + 3)
             ctx.show_text(str(nscale*i).rjust(3, " "))
             ctx.stroke()
             ctx.set_source_rgba(.5, .5, .5, .2)
@@ -156,7 +159,7 @@ class HeaterGraph(Gtk.DrawingArea):
             ctx.stroke()
 
             ctx.set_source_rgb(.5, .5, .5)
-            ctx.move_to(x - 15, gsize[1][1] + 10)
+            ctx.move_to(x - 15, gsize[1][1] + 15)
 
             hour = now.hour
             min = now.minute - (now.minute % 2) - i*2
