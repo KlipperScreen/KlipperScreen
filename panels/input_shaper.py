@@ -107,9 +107,12 @@ class InputShaperPanel(ScreenPanel):
         grid.attach(self.calibrate_btn, 0, 2, 1, 1)
 
         self.status = Gtk.Label('Latest status:')
-        grid.attach(self.status, 0, 3, 1, 1)
         self.status.set_hexpand(True)
         self.status.set_halign(Gtk.Align.START)
+        self.status.set_line_wrap(True)
+        self.status.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+
+        grid.attach(self.status, 0, 3, 1, 1)
 
         self.content.add(grid)
         self._screen._ws.send_method("server.gcode_store", {"count": 100}, self.gcode_response)
@@ -148,7 +151,7 @@ class InputShaperPanel(ScreenPanel):
 
     def process_update(self, action, data):
         if action == "notify_gcode_response":
-            self.status.set_text('Status: {}'.format(data))
+            self.status.set_text('Status: {}'.format(data.replace('shaper_', '').replace('damping_', '')))
             if 'adxl345 values' in data.lower():
                 self.has_sensor = True
                 self.calibrate_btn.set_sensitive(True)
