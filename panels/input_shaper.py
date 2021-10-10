@@ -42,7 +42,8 @@ class InputShaperPanel(ScreenPanel):
         input_grid.attach(manual_calibration_label, 0, 0, 1, 1)
 
         disclaimer = Gtk.Label()
-        disclaimer.set_markup('<small>NOTE: Manual calibration will only be used in runtime. Edit your printer.cfg to persist manual calibration changes.</small>')
+        disclaimer.set_markup('<small>NOTE: Manual calibration will only be used in runtime. Edit your printer.cfg to '
+                              'persist manual calibration changes.</small>')
         disclaimer.set_line_wrap(True)
         disclaimer.set_hexpand(True)
         disclaimer.set_vexpand(False)
@@ -111,7 +112,8 @@ class InputShaperPanel(ScreenPanel):
         auto_grid.attach(auto_calibration_label, 0, 0, 1, 1)
 
         disclaimer = Gtk.Label('')
-        disclaimer.set_markup('<small>NOTE: Autocalibration will autosave your changes. Your printer will restart at the end of calibration.</small>')
+        disclaimer.set_markup('<small>NOTE: Autocalibration will autosave your changes. Your printer will restart at '
+                              'the end of calibration.</small>')
         disclaimer.set_line_wrap(True)
         disclaimer.set_hexpand(True)
         disclaimer.set_vexpand(False)
@@ -183,7 +185,8 @@ class InputShaperPanel(ScreenPanel):
                 self.calibrate_btn.set_sensitive(True)
                 self.calibrate_btn.set_label(self.CALIBRATE_TEXT)
             if 'Recommended shaper_type_' in data:
-                results = re.search(r'shaper_type_(?P<axis>[xy])\s*=\s*(?P<shaper_type>.*?), shaper_freq_.\s*=\s*(?P<shaper_freq>[0-9.]+)', data).groupdict()
+                results = re.search(r'shaper_type_(?P<axis>[xy])\s*=\s*(?P<shaper_type>.*?), shaper_freq_.\s*=\s*('
+                                    r'?P<shaper_freq>[0-9.]+)', data).groupdict()
                 self.freq_xy_adj['shaper_freq_' + results['axis']].set_value(float(results['shaper_freq']))
                 self.freq_xy_combo['shaper_type_' + results['axis']].set_active(SHAPERS.index(results['shaper_type']))
                 if results['axis'] == 'y':
