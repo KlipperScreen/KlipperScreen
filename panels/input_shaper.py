@@ -134,7 +134,7 @@ class InputShaperPanel(ScreenPanel):
         self.status.set_max_width_chars(68)
         self.status.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        grid.attach(self.status, 0, 2, 1, 1)
+        grid.attach(self.status, 0, 2, 2, 1)
 
         self.content.add(grid)
 
