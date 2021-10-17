@@ -11,11 +11,14 @@ KlipperScreen will search for a configuration file in the following order:
 If one of those files are found, it will be used over the default configuration. The default configuration will be
 merged with the custom configuration, so if you do not define any menus the default menus will be used.
 
-The default config is included here: (do not edit use as reference)
-_${KlipperScreen_Directory}/ks_includes/default.conf_
+The default config is included here: (do not edit use as reference):
+`${KlipperScreen_Directory}/ks_includes/default.conf`
 
 If no config file is found then a new configuration file will be created in:
-_~/klipper_config/KlipperScreen.conf_ Or _~/KlipperScreen.conf_
+`~/klipper_config/KlipperScreen.conf` or `~/KlipperScreen.conf`
+
+If for some reason you cannot find a `KlipperScreen.conf` in the directories mentioned above, you can copy the
+`${KlipperScreen_Directory}/ks_includes/default.conf` to one of the directories above and rename it to `KlipperScreen.conf`.
 
 ## Include files
 ```
