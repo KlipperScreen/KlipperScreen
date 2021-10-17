@@ -115,6 +115,7 @@ class MainPanel(MenuPanel):
         dev.add(labels)
 
         self.devices[device] = {
+            "class": class_name,
             "name": name,
             "temp": temp
         }
@@ -151,6 +152,14 @@ class MainPanel(MenuPanel):
     def graph_show_device(self, widget, show=True):
         logging.info("Graph show: %s %s" % (self.popover_device, show))
         self.labels['da'].set_showing(self.popover_device, show)
+        if show:
+            self.devices[self.popover_device]['name'].get_style_context().remove_class("graph_label_hidden")
+            self.devices[self.popover_device]['name'].get_style_context().add_class(
+                self.devices[self.popover_device]['class'])
+        else:
+            self.devices[self.popover_device]['name'].get_style_context().remove_class(
+                self.devices[self.popover_device]['class'])
+            self.devices[self.popover_device]['name'].get_style_context().add_class("graph_label_hidden")
         self.labels['da'].queue_draw()
         self.popover_populate_menu()
         self.labels['popover'].show_all()
