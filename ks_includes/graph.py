@@ -17,6 +17,10 @@ class HeaterGraph(Gtk.DrawingArea):
         self.store = {}
         self.max_length = 0
         self.connect('draw', self.draw_graph)
+        self.add_events(Gdk.EventMask.TOUCH_MASK)
+        self.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        self.connect('touch-event', self.event_cb)
+        self.connect('button_press_event', self.event_cb)
 
     def add_object(self, name, type, rgb=[0, 0, 0], dashed=False, fill=False):
         if name not in self.store:
@@ -27,6 +31,28 @@ class HeaterGraph(Gtk.DrawingArea):
             "rgb": rgb
         }})
         self.max_length = max(self.max_length, len(self.printer.get_temp_store(name, type)))
+
+    def event_cb(self, da, ev):
+        if ev.get_source_device().get_source() == Gdk.InputSource.MOUSE:
+            if ev.type == Gdk.EventType.BUTTON_PRESS:
+                x = ev.x
+                y = ev.y
+
+        if ev.get_source_device().get_source() == Gdk.InputSource.TOUCHSCREEN:
+            if ev.touch.type == Gdk.EventType.TOUCH_BEGIN:
+                x = ev.touch.x
+                y = ev.touch.y
+
+        logging.info("Drawing area clicked: %s %s" % (x, y))
+
+
+    def get_max_length(self):
+        n = []
+        for name in self.store:
+            if "temperatures" not in self.store[name]:
+                continue
+            n.append(len(self.printer.get_temp_store(name, "temperatures")))
+        return max(n)
 
     def get_max_num(self, data_points=0):
         mnum = []
@@ -65,15 +91,17 @@ class HeaterGraph(Gtk.DrawingArea):
             [g_width, g_height]
         ]
 
-
+        self.max_length = self.get_max_length()
         graph_width = gsize[1][0] - gsize[0][0]
         points_per_pixel = self.max_length / graph_width
         if points_per_pixel > 3:
             points_per_pixel = 3
         data_points = graph_width * points_per_pixel
+        logging.info("Max length: %s PPP: %s" % (self.max_length, points_per_pixel))
         logging.info("aa: %s %s" % (points_per_pixel, data_points))
         max_num = math.ceil(self.get_max_num(data_points) * 1.1 / 10) * 10
         d_width = 1 / points_per_pixel
+
 
         d_height_scale = self.graph_lines(ctx, gsize, max_num)
         self.graph_time(ctx, gsize, points_per_pixel)

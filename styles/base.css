@@ -444,6 +444,7 @@ popover button {
 }
 
 /* Hardcoded values until creation of dynamic CSS updates */
+.graph_label_hidden {padding-left: .9em;} /* .4em on top of normal button padding */
 .graph_label_extruder {border-left: .4em solid  #ff5252;}
 .graph_label_extruder2 {border-left: .4em solid  #ff7252;}
 .graph_label_heater_bed {border-left: .4em solid  #1fb0ff;}
