@@ -310,7 +310,7 @@ msgid "Limits"
 msgstr "Grenzen"
 
 msgid "Load"
-msgstr "Last"
+msgstr "Laden"
 
 msgid "Lower Nozzle"
 msgstr "Düse absenken"
