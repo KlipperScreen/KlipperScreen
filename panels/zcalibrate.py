@@ -86,8 +86,8 @@ class ZCalibratePanel(ScreenPanel):
             self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
         x_position = self._config.get_config()['z_calibrate_position'].getint("calibrate_x_position", 0)
         y_position = self._config.get_config()['z_calibrate_position'].getint("calibrate_y_position", 0)
-        if x_position > 0 and y_position  > 0:
-            self._screen._ws.klippy.gcode_script('G0 X%d Y%d F3000' % (x_position,y_position)) 
+        if x_position > 0 and y_position > 0:
+            self._screen._ws.klippy.gcode_script('G0 X%d Y%d F3000' % (x_position, y_position))
         self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_CALIBRATE)
 
     def process_update(self, action, data):
