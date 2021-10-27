@@ -33,8 +33,11 @@ class NetworkPanel(ScreenPanel):
         else:
             ints = netifaces.interfaces()
             if 'lo' in ints:
-                ints.pop('lo')
-            self.interfaces = ints[0]
+                ints.pop(ints.index('lo'))
+            if (len(ints) > 0):
+                self.interface = ints[0]
+            else:
+                self.interface = 'lo'
 
         res = netifaces.ifaddresses(self.interface)
         if netifaces.AF_INET in res and len(res[netifaces.AF_INET]) > 0:
