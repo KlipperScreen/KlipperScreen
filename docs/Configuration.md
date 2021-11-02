@@ -62,6 +62,15 @@ moonraker_api_key: False
 z_babystep_values: 0.01, 0.05
 ```
 
+## Z probe calibrate Option
+If for any reason the XYZ home position is not suitable for calibrating the probe Z offset, you can enter the coordinates for the desired position here.
+```
+[z_calibrate_position]
+# The specified positions must be> 0 otherwise this option is ignored.
+# the center of the print bed is a good value
+calibrate_x_position: 100
+calibrate_y_position: 100
+```
 
 ## Preheat Options
 ```
