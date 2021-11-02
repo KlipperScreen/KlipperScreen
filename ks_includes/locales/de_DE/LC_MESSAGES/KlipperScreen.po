@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-26 15:56+0000\n"
-"PO-Revision-Date: 2021-11-02 22:57+0100\n"
+"POT-Creation-Date: 2021-09-29 11:44-0300\n"
+"PO-Revision-Date: 2021-11-02 23:22+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -18,8 +18,19 @@ msgstr ""
 "X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "?"
-msgstr "?"
+#, python-format
+msgid "%d Packages will be updated"
+msgstr "%d Pakete werden aktualisiert"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s wird aktualisiert auf Version"
+
+msgid "(default)"
+msgstr "(Standard)"
+
+msgid "24 Hour Time"
+msgstr "24h-Zeit"
 
 msgid "Abort"
 msgstr "Abbrechen"
@@ -30,11 +41,11 @@ msgstr "OK"
 msgid "Actions"
 msgstr "Aktionen"
 
+msgid "Add Printer"
+msgstr "Drucker hinzufügen"
+
 msgid "Add bed mesh profile"
 msgstr "Mesh-Level Profil hinzufügen"
-
-msgid "Are you sure you want to print"
-msgstr "Möchten Sie wirklich drucken"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Möchten Sie diesen Druck wirklich abbrechen?"
@@ -57,14 +68,16 @@ msgstr "Höheneinstellung"
 msgid "Cancel"
 msgstr "Abbruch"
 
-msgid "Cancel Change"
-msgstr "Änderung abbrechen"
-
 msgid "Cancel Print"
 msgstr "Druck abbrechen"
 
 msgid "Cancelled"
 msgstr "Abgebrochen"
+
+#, fuzzy
+#| msgid "Cancel"
+msgid "Cancelling"
+msgstr "Abbruch"
 
 msgid "Channel"
 msgstr "Kanal"
@@ -79,6 +92,9 @@ msgstr ""
 msgid "Close"
 msgstr "Schließen"
 
+msgid "Colorized"
+msgstr "Colorized"
+
 msgid "Complete"
 msgstr "Fertiggestellt"
 
@@ -92,11 +108,11 @@ msgstr "Verbunden"
 msgid "Connecting to %s"
 msgstr "Verbinden zu %s"
 
+msgid "Console"
+msgstr "Konsole"
+
 msgid "Continue"
 msgstr "Fortsetzen"
-
-msgid "Control"
-msgstr "Steuerung"
 
 msgid "Cooldown"
 msgstr "Abkühlen"
@@ -125,14 +141,15 @@ msgstr "Aktive Macros"
 msgid "Distance (mm)"
 msgstr "Entfernung (mm)"
 
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "Möchtest du zurück zu %s?"
+
 msgid "Duration Only"
 msgstr "Reine Druckzeit"
 
 msgid "Elapsed:"
 msgstr "Druckzeit:"
-
-msgid "Emergency Stop"
-msgstr "NOT-STOP"
 
 msgid "Error"
 msgstr "Fehler"
@@ -152,29 +169,29 @@ msgstr "Extrusion -"
 msgid "Fan"
 msgstr "Lüfter"
 
-msgid "Fan Off"
-msgstr "Lüfter Aus"
-
-msgid "Fan On"
-msgstr "Lüfter An"
-
-msgid "Fast"
-msgstr "Schnell"
-
 msgid "Filament Used"
 msgstr "Filamentverbrauch"
 
-msgid "File Estimation (default)"
-msgstr "Dateischätzung"
+msgid "File"
+msgstr "Datei"
 
 msgid "Fine Tuning"
 msgstr "Feintuning"
 
+msgid "Finish"
+msgstr "Ziel"
+
 msgid "Firmware Restart"
 msgstr "Firmware neustarten"
 
+msgid "Font Size"
+msgstr "Schriftgröße"
+
 msgid "Go Back"
 msgstr "Zurück"
+
+msgid "Home"
+msgstr "Grundposition"
 
 msgid "Home All"
 msgstr ""
@@ -213,6 +230,9 @@ msgstr "IPv4"
 msgid "IPv6"
 msgstr "IPv6"
 
+msgid "Icon Theme"
+msgstr "Icon Theme"
+
 msgid "Increase"
 msgstr "Erhöhen"
 
@@ -224,6 +244,9 @@ msgstr "Drucker wird initialisiert..."
 
 msgid "Interface"
 msgstr "Interface"
+
+msgid "Invalid"
+msgstr "ungültig"
 
 msgid "Invert X"
 msgstr "Achse X invertieren"
@@ -272,23 +295,41 @@ msgstr "Klipper startet neu"
 msgid "KlipperScreen Version"
 msgstr "KlipperScreen Version"
 
+msgid "Language"
+msgstr "Sprache"
+
+msgid "Large"
+msgstr "Groß"
+
 msgid "Left:"
 msgstr "Restzeit:"
+
+msgid "Limits"
+msgstr "Grenzwerte:"
 
 msgid "Load"
 msgstr "Laden"
 
-msgid "Load Average"
-msgstr "Durchschnittslast"
-
 msgid "Lower Nozzle"
 msgstr "Düse absenken"
+
+msgid "Macro shortcut on sidebar"
+msgstr "Makro Verknüpfung in Sidebar"
 
 msgid "Macros"
 msgstr "Makros"
 
 msgid "Main Menu"
 msgstr "Hauptmenü"
+
+msgid "Max Accelation"
+msgstr "Max Beschleunigung"
+
+msgid "Max Acceleration to Deceleration"
+msgstr "Max Verzögerung"
+
+msgid "Max Velocity"
+msgstr "Max Geschwindigkeit"
 
 msgid "Medium"
 msgstr "Mittel"
@@ -305,6 +346,9 @@ msgstr "Bewegen"
 msgid "Move Distance (mm)"
 msgstr "Bewegungsdistanz (mm)"
 
+msgid "Move Speed (mm/s)"
+msgstr "Bewegungsgeschwindigkeit (mm/s)"
+
 msgid "Name"
 msgstr "Name"
 
@@ -316,6 +360,13 @@ msgstr "Nummernblock"
 
 msgid "Off"
 msgstr "Aus"
+
+#, python-format
+msgid "Outdated by %d commits:"
+msgstr "Veraltet bis %d Commits:"
+
+msgid "PSK for"
+msgstr "PSK für"
 
 msgid "Pause"
 msgstr "Pause"
@@ -341,6 +392,9 @@ msgstr "Druck Steuerung"
 msgid "Print Time"
 msgstr "Druckzeit"
 
+msgid "Printer Connections"
+msgstr "Drucker Verbindungen"
+
 msgid "Printing"
 msgstr "Drucken"
 
@@ -352,6 +406,12 @@ msgstr "Quad Gantry Level"
 
 msgid "Raise Nozzle"
 msgstr "Düse anheben"
+
+msgid "Recover Hard"
+msgstr "Wiederherstellung Hart"
+
+msgid "Recover Soft"
+msgstr "Wiederherstellung Soft"
 
 msgid "Restart"
 msgstr "Neustart"
@@ -380,9 +440,6 @@ msgstr "Der Bildschirm wird in weniger als einer Sekunde angezeigt"
 msgid "Screws Adjust"
 msgstr "Schrauben Einstellen"
 
-msgid "Set Speed"
-msgstr "Geschwindigkeit einstellen"
-
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -392,17 +449,32 @@ msgstr "Größe"
 msgid "Slicer"
 msgstr "Slicer"
 
-msgid "Slow"
-msgstr "Langsam"
+msgid "Small"
+msgstr "Klein"
 
 msgid "Sort by: "
 msgstr "Sortierung:"
+
+msgid "Speed (mm/s)"
+msgstr "Geschwindigkeit (mm/s)"
 
 msgid "Speed +"
 msgstr "Geschwindigkeit +"
 
 msgid "Speed -"
 msgstr "Geschwindigkeit -"
+
+msgid "Square Corner Velocity"
+msgstr "Eckgeschwindigkeit"
+
+msgid "Starting WiFi Re-association"
+msgstr "Starte WiFi Verbindung"
+
+msgid "Starting recovery for"
+msgstr "Starte Wiederherstellung für "
+
+msgid "Starting update for"
+msgstr "Starte Update für"
 
 msgid "System"
 msgstr "System"
@@ -424,11 +496,27 @@ msgstr ""
 msgid "Temperature"
 msgstr "Temperatur"
 
+#, python-format
+msgid "To apply %s KlipperScreen needs to be restarted"
+msgstr "Zum Übernehmen von %s benötigt Klipperscreen einen Neustart"
+
 msgid "Tool"
 msgstr "Druckkopf"
 
+msgid "Unload"
+msgstr "Entladen"
+
+msgid "Up To Date"
+msgstr "Kein Update verfügbar"
+
+msgid "Update"
+msgstr "Update"
+
 msgid "Uploaded"
 msgstr "Hochgeladen"
+
+msgid "View Mesh"
+msgstr "Mesh anzeigen"
 
 msgid "X+"
 msgstr "X+"
@@ -465,3 +553,45 @@ msgstr "Minuten"
 
 msgid "mm"
 msgstr "mm"
+
+msgid "mm/s"
+msgstr "mm/s"
+
+msgid "mm/s^2"
+msgstr "mm/s^2"
+
+#~ msgid "?"
+#~ msgstr "?"
+
+#~ msgid "Are you sure you want to print"
+#~ msgstr "Möchten Sie wirklich drucken"
+
+#~ msgid "Cancel Change"
+#~ msgstr "Änderung abbrechen"
+
+#~ msgid "Control"
+#~ msgstr "Steuerung"
+
+#~ msgid "Emergency Stop"
+#~ msgstr "NOT-STOP"
+
+#~ msgid "Fan Off"
+#~ msgstr "Lüfter Aus"
+
+#~ msgid "Fan On"
+#~ msgstr "Lüfter An"
+
+#~ msgid "Fast"
+#~ msgstr "Schnell"
+
+#~ msgid "File Estimation (default)"
+#~ msgstr "Dateischätzung"
+
+#~ msgid "Load Average"
+#~ msgstr "Durchschnittslast"
+
+#~ msgid "Set Speed"
+#~ msgstr "Geschwindigkeit einstellen"
+
+#~ msgid "Slow"
+#~ msgstr "Langsam"
