@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 11:44-0300\n"
+"POT-Creation-Date: 2021-10-20 05:33+0200\n"
 "PO-Revision-Date: 2021-09-29 10:51-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -89,9 +89,6 @@ msgstr ""
 
 msgid "Close"
 msgstr "Schließen"
-
-msgid "Colorized"
-msgstr "Colorized"
 
 msgid "Complete"
 msgstr "Fertiggestellt"
@@ -310,7 +307,7 @@ msgid "Limits"
 msgstr "Grenzen"
 
 msgid "Load"
-msgstr "Last"
+msgstr "Laden"
 
 msgid "Lower Nozzle"
 msgstr "Düse absenken"
@@ -561,6 +558,9 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Colorized"
+#~ msgstr "Colorized"
 
 #~ msgid "Z-bolt (default)"
 #~ msgstr "Z-bolt (default)"
