@@ -12,7 +12,7 @@ from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
 class BasePanel(ScreenPanel):
-    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
+    def __init__(self, screen, title, back=True, printer_name=True): #action_bar=True,
         super().__init__(screen, title, back, action_bar, printer_name)
         self.current_panel = None
         self.time_min = -1
