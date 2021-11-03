@@ -7,7 +7,7 @@ window {
 }
 
 window { 
-    background-image: url("/home/pi/KlipperScreen/styles/material-dark/background.svg");
+    background-image: url("/home/pi/mainsail/img/background.svg");
 }
 button {
     background-color: rgba(0,0,0,0); border-radius:2em;
