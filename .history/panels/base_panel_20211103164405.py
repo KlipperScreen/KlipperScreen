@@ -57,15 +57,15 @@ class BasePanel(ScreenPanel):
         self.control['estop'] = self._gtk.ButtonImage('emergency', None, None, button_scale[0], button_scale[1])
         self.control['estop'].connect("clicked", self.emergency_stop)
 
-        ##self.locations = {
-        #    'macro_shortcut': 2,
-        #    'printer_select': 2
-        #}
-        #button_range = 3
-        #if len(self._config.get_printers()) > 1:
-        #    self.locations['macro_shortcut'] = 3
-        #    if self._config.get_main_config_option('side_macro_shortcut') == "True":
-        #        button_range = 4
+        self.locations = {
+            'macro_shortcut': 2,
+            'printer_select': 2
+        }
+        button_range = 3
+        if len(self._config.get_printers()) > 1:
+            self.locations['macro_shortcut'] = 3
+            if self._config.get_main_config_option('side_macro_shortcut') == "True":
+                button_range = 4
 
         for i in range(button_range):
             self.control['space%s' % i] = Gtk.Label("")
