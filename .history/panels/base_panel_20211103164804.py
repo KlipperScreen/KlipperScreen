@@ -58,7 +58,7 @@ class BasePanel(ScreenPanel):
         self.control['estop'].connect("clicked", self.emergency_stop)
 
         self.locations = {
-            #'macro_shortcut': 2,
+            'macro_shortcut': 2,
             'printer_select': 2
         }
         button_range = 3
