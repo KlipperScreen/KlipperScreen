@@ -409,7 +409,8 @@ class NetworkPanel(ScreenPanel):
         freq = "2.4 GHz" if netinfo['frequency'][0:1] == "2" else "5 Ghz"
 
         self.labels['networks'][ssid]['info'].set_markup("%s%s <small>%s</small>" % (
-            connected, "" if netinfo['encryption'] == "off" else netinfo['encryption'].upper(), freq
+            connected, "" if netinfo['encryption'] == "off" else netinfo['encryption'].upper(),
+            freq
         ))
 
 #        self.labels['networks'][ssid]['info'].set_markup("%s%s <small>%s %s %s  %s%s</small>" % (
