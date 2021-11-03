@@ -427,7 +427,7 @@ class NetworkPanel(ScreenPanel):
         ipv4 = ""
         ipv6 = ""
         if netifaces.AF_INET in ifadd and len(ifadd[netifaces.AF_INET]) > 0:
-            ipv4 = "<b>%s:</b> %s " % (_("IP"), ifadd[netifaces.AF_INET][0]['addr'])
+            ipv4 = "<b>%s:</b> %s " % (_("IPv4"), ifadd[netifaces.AF_INET][0]['addr'])
         if netifaces.AF_INET6 in ifadd and len(ifadd[netifaces.AF_INET6]) > 0:
             ipv6 = ipv6 = "<b>%s:</b> %s " % (_("IPv6"), ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0])
         connected = "<b>%s</b>\n\n<small><b>%s</b></small>\n<b>%s:</b> %s\n%s\n%s\n" % (
