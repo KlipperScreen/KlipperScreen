@@ -67,9 +67,9 @@ class BasePanel(ScreenPanel):
             if self._config.get_main_config_option('side_macro_shortcut') == "True":
                 button_range = 4
 
-        #for i in range(button_range):
-        #    self.control['space%s' % i] = Gtk.Label("")
-        #    self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
+        for i in range(button_range):
+            self.control['space%s' % i] = Gtk.Label("")
+            self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
 
         #self.control_grid.attach(self.control['estop'], 0, 4, 1, 1)
 
