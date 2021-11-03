@@ -3,9 +3,14 @@
 }
 
 window {
-    background-color: #121212;
-    background-image: url("./styles/material-dark/background.svg");
-    background-size: cover;
+    background-color: #13181C;
+}
+
+window { 
+    background-image: url("/home/pi/KlipperScreen/styles/material-dark/background.svg");
+}
+button {
+    background-color: rgba(0,0,0,0); border-radius:2em;
 }
 
 button {
