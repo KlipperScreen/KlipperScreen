@@ -71,7 +71,7 @@ class BasePanel(ScreenPanel):
             self.control['space%s' % i] = Gtk.Label("")
             self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
 
-        #self.control_grid.attach(self.control['estop'], 0, 4, 1, 1)
+        self.control_grid.attach(self.control['estop'], 0, 4, 1, 1)
 
         try:
             env = Environment(extensions=["jinja2.ext.i18n"])
