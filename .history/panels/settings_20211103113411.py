@@ -26,9 +26,6 @@ class SettingsPanel(ScreenPanel):
         self.labels['add_printer_button'] = self._gtk.Button(_("Add Printer"), "color1")
         self.labels['printers_box'] = self.create_box('printers', printbox)
 
-        ##############Interface mode###################
-        ###############################################
-
         options = self._config.get_configurable_options().copy()
         options.append({"macros": {
             "name": _("Displayed Macros"),
