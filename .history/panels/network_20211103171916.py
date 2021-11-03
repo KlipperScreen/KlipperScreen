@@ -403,7 +403,7 @@ class NetworkPanel(ScreenPanel):
                 ipv4 = "<b>%s:</b> %s " % (_("IPv4"), ifadd[netifaces.AF_INET][0]['addr'])
 #           if netifaces.AF_INET6 in ifadd and len(ifadd[netifaces.AF_INET6]) > 0:
 #                ipv6 = ipv6 = "<b>%s:</b> %s " % (_("IPv6"), ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0])
-            connected = "<b>%s</b>\n%s%s\n" % (_("Подключено"), ipv4, ipv6)
+            connected = "<b>%s</b>\n<b>%s:</b> %s\n%s%s\n" % (_("Подключено"), _("Hostname"), hostname, ipv4, ipv6)
         elif "psk" in netinfo:
             connected = "Password saved."
         freq = "2.4 GHz" if netinfo['frequency'][0:1] == "2" else "5 Ghz"
