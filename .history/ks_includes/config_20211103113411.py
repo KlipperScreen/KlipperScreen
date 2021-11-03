@@ -29,16 +29,15 @@ class KlipperScreenConfig:
     do_not_edit_prefix = "#~#"
 
     def __init__(self, configfile, screen=None):
-        self.default_simple_config_path = "%s/ks_includes/%s" % (os.getcwd(), "defaults_simple.conf")
-        self.default_expert_config_path = "%s/ks_includes/%s" % (os.getcwd(), "defaults_expert.conf")
+        self.default_config_path = "%s/ks_includes/%s" % (os.getcwd(), "defaults.conf")
         self.config = configparser.ConfigParser()
         self.config_path = self.get_config_file_location(configfile)
         logging.debug("Config path location: %s" % self.config_path)
         self.defined_config = None
 
         try:
-            self.config.read(self.default_simple_config_path)
-            if self.config_path != self.default_simple_config_path:
+            self.config.read(self.default_config_path)
+            if self.config_path != self.default_config_path:
                 user_def, saved_def = self.separate_saved_config(self.config_path)
                 self.defined_config = configparser.ConfigParser()
                 self.defined_config.read_string(user_def)
@@ -240,7 +239,7 @@ class KlipperScreenConfig:
             if not path.exists(file):
                 file = os.path.expanduser("~/") + "klipper_config/%s" % (self.configfile_name)
                 if not path.exists(file):
-                    file = self.default_simple_config_path
+                    file = self.default_config_path
 
         logging.info("Found configuration file at: %s" % file)
         return file
@@ -305,7 +304,7 @@ class KlipperScreenConfig:
         return self.printers
 
     def get_user_saved_config(self):
-        if self.config_path != self.default_simple_config_path:
+        if self.config_path != self.default_config_path:
             print("Get")
 
     def save_user_config_options(self):
@@ -337,7 +336,7 @@ class KlipperScreenConfig:
         for i in range(len(save_output)):
             save_output[i] = "%s %s" % (self.do_not_edit_prefix, save_output[i])
 
-        if self.config_path == self.default_simple_config_path:
+        if self.config_path == self.default_config_path:
             user_def = ""
             saved_def = None
         else:
@@ -348,7 +347,7 @@ class KlipperScreenConfig:
             user_def, self.do_not_edit_line, extra_lb, self.do_not_edit_prefix, "\n".join(save_output),
             self.do_not_edit_prefix)
 
-        if self.config_path != self.default_simple_config_path:
+        if self.config_path != self.default_config_path:
             path = self.config_path
         else:
             path = os.path.expanduser("~/")
