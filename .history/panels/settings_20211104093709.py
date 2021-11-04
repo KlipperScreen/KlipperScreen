@@ -27,18 +27,13 @@ class SettingsPanel(ScreenPanel):
         self.labels['printers_box'] = self.create_box('printers', printbox)
 
         ##############Interface mode###################
-
+        
         ###############################################
 
         options = self._config.get_configurable_options().copy()
         options.append({"macros": {
             "name": _("Displayed Macros"),
             "type": "menu",
-            "menu": "macros"}
-        })
-        options.append({"usermode": {
-            "name": _("Режим эксперта"),
-            "type": "mode",
             "menu": "macros"}
         })
         options.append({"printers": {
@@ -129,24 +124,6 @@ class SettingsPanel(ScreenPanel):
         dev.set_hexpand(True)
         dev.set_vexpand(False)
         dev.set_valign(Gtk.Align.CENTER)
-
-        ##############Interface mode###################
-        dev.add(labels)
-            if option['type'] == "mode"
-                box = Gtk.Box()
-                box.set_vexpand(False)
-                switch = Gtk.Switch()
-                switch.set_hexpand(False)
-                switch.set_vexpand(False)
-            else:
-                switch.set_active(self._config.get_config().getboolean(option['section'], opt_name))
-            switch.connect("notify::active", self.switch_config_option, option['section'], opt_name,
-                           option['callback'] if "callback" in option else None)
-            switch.set_property("width-request", round(self._gtk.get_image_width()*2.5))
-            switch.set_property("height-request", round(self._gtk.get_image_height()*1.25))
-            box.add(switch)
-            dev.add(box)
-        ###############################################
 
         dev.add(labels)
         if option['type'] == "binary" or option['type'] == "macro":

@@ -132,12 +132,14 @@ class SettingsPanel(ScreenPanel):
 
         ##############Interface mode###################
         dev.add(labels)
-            if option['type'] == "mode"
+            if option['type'] == "binary" or option['type'] == "macro":
                 box = Gtk.Box()
                 box.set_vexpand(False)
                 switch = Gtk.Switch()
                 switch.set_hexpand(False)
                 switch.set_vexpand(False)
+            if option['type'] == "macro":
+                switch.set_active(self._config.get_config().getboolean(option['section'], opt_name, fallback=True))
             else:
                 switch.set_active(self._config.get_config().getboolean(option['section'], opt_name))
             switch.connect("notify::active", self.switch_config_option, option['section'], opt_name,
