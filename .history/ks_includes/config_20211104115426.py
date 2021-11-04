@@ -185,7 +185,7 @@ class KlipperScreenConfig:
                 name = str(select_mod) + " " + _n("Expert")
             self.configurable_options[interface_mode]['interface']['options'].append({
                 "name": name,
-                "value": mod
+                "value": num
             })
 
         for item in self.configurable_options:

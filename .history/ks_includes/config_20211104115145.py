@@ -141,7 +141,7 @@ class KlipperScreenConfig:
             {"interface": {
                 "section": "main", "name": _("Mode interface"), "type": "dropdown",
                 "value": "defaults_simple.conf", "options": [
-                    {"name": _("Simple"), "value": "defaults_simple.conf"}
+                    {"name": _("Simple"), "value": "defaults_simple.conf"},
             }},
             {"theme": {
                 "section": "main", "name": _("Icon Theme"), "type": "dropdown",
@@ -179,13 +179,13 @@ class KlipperScreenConfig:
             [i for i in self.configurable_options if list(i)[0] == "interface"][0])
         for mod in INTERFACE_MODE:
             select_mod = int(int(num))
-            if select_mod == defaults_simple.conf:
-                name = str(select_mod) + " " + _n("Simple")
+            if hour == defaults_simple.conf:
+                name = str(hour) + " " + _n("hour", "hours", hour)
             else:
-                name = str(select_mod) + " " + _n("Expert")
+                name = str(int(int(num)/60)) + " " + _("minutes")
             self.configurable_options[interface_mode]['interface']['options'].append({
                 "name": name,
-                "value": mod
+                "value": num
             })
 
         for item in self.configurable_options:

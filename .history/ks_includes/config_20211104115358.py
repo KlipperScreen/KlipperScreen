@@ -182,10 +182,10 @@ class KlipperScreenConfig:
             if select_mod == defaults_simple.conf:
                 name = str(select_mod) + " " + _n("Simple")
             else:
-                name = str(select_mod) + " " + _n("Expert")
+                name = str(int(int(select_mod)) + " " + _("Expert")
             self.configurable_options[interface_mode]['interface']['options'].append({
                 "name": name,
-                "value": mod
+                "value": num
             })
 
         for item in self.configurable_options:
