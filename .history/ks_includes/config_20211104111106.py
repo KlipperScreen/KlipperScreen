@@ -112,6 +112,9 @@ class KlipperScreenConfig:
                           "callback": screen.restart_warning, "options": [
                               {"name": _("System") + " " + _("(default)"), "value": "system_lang"}
             ]}},
+            {"usermod": {
+                "section": "main", "name": _("Usermod"), "type": "binary",
+                "value": "True", "callback": screen.toggle_macro_shortcut}},
             {"move_speed": {
                 "section": "main", "name": _("Move Speed (mm/s)"), "type": "scale", "value": "20",
                 "range": [5, 100], "step": 1}},

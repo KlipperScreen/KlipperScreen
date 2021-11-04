@@ -627,7 +627,7 @@ class KlipperScreen(Gtk.Window):
             return
 
         _ = self.lang.gettext
-        self.base_panel.show_usermod(False)
+        self.base_panel.show_macro_shortcut(False)
         msg = self.printer.get_stat("webhooks", "state_message")
         if "FIRMWARE_RESTART" in msg:
             self.printer_initializing(
