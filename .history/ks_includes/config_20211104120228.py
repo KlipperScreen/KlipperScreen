@@ -25,7 +25,6 @@ class ConfigError(Exception):
 class KlipperScreenConfig:
     config = None
     configfile_name = "KlipperScreen.conf"
-    interface = defaults_simple.conf
     do_not_edit_line = "#~# --- Do not edit below this line. This section is auto generated --- #~#"
     do_not_edit_prefix = "#~#"
 
