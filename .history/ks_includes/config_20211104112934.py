@@ -161,7 +161,7 @@ class KlipperScreenConfig:
             lang_opt.append({"name": lang, "value": lang})
 
         in_path = os.path.join(os.getcwd(), 'ks_includes')
-        interfaces = [d for d in os.listdir(in_path) if (not os.path.isfile(os.path.join(in_path, d)) and d != "defaults_simple.conf")]
+        interfaces = [d for d in os.listdir(t_path) if (not os.path.isfile(os.path.join(t_path, d)) and d != "z-bolt")]
         interfaces.sort()
         interface_opt = self.configurable_options[8]['interface']['options']
 

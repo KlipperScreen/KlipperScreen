@@ -108,12 +108,10 @@ class KlipperScreenConfig:
             {"invert_x": {"section": "main", "name": _("Invert X"), "type": "binary", "value": "False"}},
             {"invert_y": {"section": "main", "name": _("Invert Y"), "type": "binary", "value": "False"}},
             {"invert_z": {"section": "main", "name": _("Invert Z"), "type": "binary", "value": "False"}},
-            {"interface": {"section": "main", "name": _("Interface"), "type": "dropdown", "value": "Easy", 
-                "callback": screen.restart_warning, "options": [
-                 {"name": _("Простой") + " " + _("(default)"), "value": "defaults_simple.conf"},
-                 {"name": _("Эксперт"), "value": "defaults_expert.conf"}
-                ]
-            }},
+            {"interface": {"section": "main", "name": _("Interface"), "type": "dropdown", "value": "Easy", "callback": screen.restart_warning, "options": [
+                {"name": _("Easy"), "value": "easy"},
+                {"name": _("Expert"), "value": "expert"}
+            ]}},
 
             {"language": {"section": "main", "name": _("Language"), "type": "dropdown", "value": "system_lang",
                           "callback": screen.restart_warning, "options": [
@@ -159,15 +157,6 @@ class KlipperScreenConfig:
 
         for lang in langs:
             lang_opt.append({"name": lang, "value": lang})
-
-        in_path = os.path.join(os.getcwd(), 'ks_includes')
-        interfaces = [d for d in os.listdir(in_path) if (not os.path.isfile(os.path.join(in_path, d)) and d != "defaults_simple.conf")]
-        interfaces.sort()
-        interface_opt = self.configurable_options[8]['interface']['options']
-
-        for interface in interfaces:
-            interface_opt.append({"name": interface, "value": interface})
-
 
         t_path = os.path.join(os.getcwd(), 'styles')
         themes = [d for d in os.listdir(t_path) if (not os.path.isfile(os.path.join(t_path, d)) and d != "z-bolt")]
