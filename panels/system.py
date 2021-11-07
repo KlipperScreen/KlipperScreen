@@ -101,9 +101,8 @@ class SystemPanel(ScreenPanel):
         grid.attach(scroll, 0, 0, 4, 2)
         grid.attach(restart, 0, 2, 1, 1)
         grid.attach(firmrestart, 1, 2, 1, 1)
-        grid.attach(reboot, 2, 2, 1, 1) #change grid
-        grid.attach(shutdown, 3, 2, 1, 1) #change grid
- 
+        grid.attach(reboot, 2, 2, 1, 1)
+        grid.attach(shutdown, 3, 2, 1, 1)
         self.content.add(grid)
 
     def activate(self):
