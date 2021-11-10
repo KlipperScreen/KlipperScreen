@@ -329,7 +329,7 @@ class MoonrakerApi:
             callback,
             *args
         )
-    
+
     def set_temp_fan_temp(self, temp_fan, target, callback=None, *args):
         logging.debug("Sending temperature fan %s to temp: %s", temp_fan, target)
         return self._ws.send_method(
