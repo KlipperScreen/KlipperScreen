@@ -64,11 +64,11 @@ class FineTunePanel(ScreenPanel):
         grid.attach(self.labels['speedfactor'], 1, 1, 1, 1)
         grid.attach(self.labels['speed-'], 1, 2, 1, 1)
 
-        self.labels['extrude+'] = self._gtk.ButtonImage("flow+", _("Увеличить поток"), "color4")
+        self.labels['extrude+'] = self._gtk.ButtonImage("flow+", _("Поток больше"), "color4")
         self.labels['extrude+'].connect("clicked", self.change_extrusion, "+")
         self.labels['extrudefactor'] = Gtk.Label("100%")
         self.labels['extrudefactor'].get_style_context().add_class('temperature_entry')
-        self.labels['extrude-'] = self._gtk.ButtonImage("flow-", _("Уменьшить поток"), "color4")
+        self.labels['extrude-'] = self._gtk.ButtonImage("flow-", _("Поток меньше"), "color4")
         self.labels['extrude-'].connect("clicked", self.change_extrusion, "-")
         grid.attach(self.labels['extrude+'], 2, 0, 1, 1)
         grid.attach(self.labels['extrudefactor'], 2, 1, 1, 1)
