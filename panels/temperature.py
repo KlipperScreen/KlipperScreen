@@ -224,6 +224,8 @@ class TemperaturePanel(ScreenPanel):
             self._screen._ws.klippy.set_heater_temp(" ".join(self.active_heater.split(" ")[1:]), target)
         elif self.active_heater == "heater_bed":
             self._screen._ws.klippy.set_bed_temp(target)
+        elif self.active_heater.startswith("temperature_fan "):
+            self._screen._ws.klippy.set_temp_fan_temp(" ".join(self.active_heater.split(" ")[1:]), target)
         else:
             self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(self.active_heater), target)
 
@@ -241,6 +243,9 @@ class TemperaturePanel(ScreenPanel):
                 temp = int(text)
                 temp = 0 if temp < 0 or temp > KlippyGcodes.MAX_BED_TEMP else temp
                 self._screen._ws.klippy.set_bed_temp(temp)
+            elif self.active_heater.startswith("temperature_fan "):
+                temp = int(text)
+                self._screen._ws.klippy.set_temp_fan_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
             else:
                 temp = int(text)
                 temp = 0 if temp < 0 or temp > KlippyGcodes.MAX_EXT_TEMP else temp
