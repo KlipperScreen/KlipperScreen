@@ -55,8 +55,8 @@ class Printer:
                 if "shared_heater" in self.config[x]:
                     continue
                 self.extrudercount += 1
-            if x == 'heater_bed' or x.startswith('heater_generic ') \
-                or x.startswith('temperature_sensor ') or x.startswith('temperature_fan '):
+            if x == 'heater_bed' or x.startswith('heater_generic ') or x.startswith('temperature_sensor ') \
+                    or x.startswith('temperature_fan '):
                 self.devices[x] = {
                     "temperature": 0,
                     "target": 0
