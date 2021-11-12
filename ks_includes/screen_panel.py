@@ -59,6 +59,15 @@ class ScreenPanel:
     def home(self, widget):
         self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
 
+    def homexy(self, widget):
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME_XY)
+
+    def z_tilt(self, widget):
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_TILT)
+
+    def quad_gantry_level(self, widget):
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.QUAD_GANTRY_LEVEL)
+
     def menu_item_clicked(self, widget, panel, item):
         print("### Creating panel " + item['panel'] + " : %s %s" % (panel, item))
         if "items" in item:
