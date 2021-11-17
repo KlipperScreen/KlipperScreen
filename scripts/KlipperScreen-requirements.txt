@@ -5,3 +5,4 @@ netifaces==0.11.0
 requests==2.26.0
 vext==0.7.6
 websocket-client==1.2.1
+vext.gi==0.7.4 --prefer-binary
