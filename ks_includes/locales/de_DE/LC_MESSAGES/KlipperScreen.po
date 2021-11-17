@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 05:33+0200\n"
-"PO-Revision-Date: 2021-09-29 10:51-0300\n"
+"POT-Creation-Date: 2021-09-29 11:44-0300\n"
+"PO-Revision-Date: 2021-11-02 23:22+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -24,13 +24,13 @@ msgstr "%d Pakete werden aktualisiert"
 
 #, python-format
 msgid "%s will be updated to version"
-msgstr "%s wird auf Version aktualisiert"
+msgstr "%s wird aktualisiert auf Version"
 
 msgid "(default)"
 msgstr "(Standard)"
 
 msgid "24 Hour Time"
-msgstr "24-Stunden-Zeit"
+msgstr "24h-Zeit"
 
 msgid "Abort"
 msgstr "Abbrechen"
@@ -74,8 +74,10 @@ msgstr "Druck abbrechen"
 msgid "Cancelled"
 msgstr "Abgebrochen"
 
+#, fuzzy
+#| msgid "Cancel"
 msgid "Cancelling"
-msgstr "Stornieren"
+msgstr "Abbruch"
 
 msgid "Channel"
 msgstr "Kanal"
@@ -89,6 +91,9 @@ msgstr ""
 
 msgid "Close"
 msgstr "Schließen"
+
+msgid "Colorized"
+msgstr "Colorized"
 
 msgid "Complete"
 msgstr "Fertiggestellt"
@@ -138,7 +143,7 @@ msgstr "Entfernung (mm)"
 
 #, python-format
 msgid "Do you want to recover %s?"
-msgstr "Möchten Sie %s wiederherstellen?"
+msgstr "Möchtest du zurück zu %s?"
 
 msgid "Duration Only"
 msgstr "Reine Druckzeit"
@@ -174,21 +179,19 @@ msgid "Fine Tuning"
 msgstr "Feintuning"
 
 msgid "Finish"
-msgstr "Beende"
+msgstr "Ziel"
 
 msgid "Firmware Restart"
-msgstr "Firmware Neustarten"
+msgstr "Firmware neustarten"
 
 msgid "Font Size"
-msgstr "Textgröße"
+msgstr "Schriftgröße"
 
 msgid "Go Back"
 msgstr "Zurück"
 
 msgid "Home"
-msgstr ""
-"Achse\n"
-"zurücksetzen"
+msgstr "Grundposition"
 
 msgid "Home All"
 msgstr ""
@@ -216,7 +219,7 @@ msgstr ""
 "zurücksetzen"
 
 msgid "Homing"
-msgstr "Nullpunkt"
+msgstr "Grundposition"
 
 msgid "Hostname"
 msgstr "Hostname"
@@ -228,7 +231,7 @@ msgid "IPv6"
 msgstr "IPv6"
 
 msgid "Icon Theme"
-msgstr "Symbolthema"
+msgstr "Icon Theme"
 
 msgid "Increase"
 msgstr "Erhöhen"
@@ -243,7 +246,7 @@ msgid "Interface"
 msgstr "Interface"
 
 msgid "Invalid"
-msgstr "Ungültig"
+msgstr "ungültig"
 
 msgid "Invert X"
 msgstr "Achse X invertieren"
@@ -255,9 +258,7 @@ msgid "Invert Z"
 msgstr "Achse Z invertieren"
 
 msgid "Klipper Restart"
-msgstr ""
-"Klipper\n"
-"Neustarten"
+msgstr "Klipper neustarten"
 
 msgid "Klipper Version"
 msgstr "Klipper Version"
@@ -304,7 +305,7 @@ msgid "Left:"
 msgstr "Restzeit:"
 
 msgid "Limits"
-msgstr "Grenzen"
+msgstr "Grenzwerte:"
 
 msgid "Load"
 msgstr "Laden"
@@ -313,7 +314,7 @@ msgid "Lower Nozzle"
 msgstr "Düse absenken"
 
 msgid "Macro shortcut on sidebar"
-msgstr "Makroverknüpfung in der Seitenleiste"
+msgstr "Makro Verknüpfung in Sidebar"
 
 msgid "Macros"
 msgstr "Makros"
@@ -322,13 +323,13 @@ msgid "Main Menu"
 msgstr "Hauptmenü"
 
 msgid "Max Accelation"
-msgstr "Max. Beschleunigung"
+msgstr "Max Beschleunigung"
 
 msgid "Max Acceleration to Deceleration"
-msgstr "Max. Beschleunigung bis Verzögerung"
+msgstr "Max Verzögerung"
 
 msgid "Max Velocity"
-msgstr "Max. Geschwindigkeit"
+msgstr "Max Geschwindigkeit"
 
 msgid "Medium"
 msgstr "Mittel"
@@ -355,14 +356,14 @@ msgid "Network"
 msgstr "Netzwerk"
 
 msgid "Number Pad"
-msgstr "Tastenfeld"
+msgstr "Nummernblock"
 
 msgid "Off"
 msgstr "Aus"
 
 #, python-format
 msgid "Outdated by %d commits:"
-msgstr "Veraltet von %d Commits:"
+msgstr "Veraltet bis %d Commits:"
 
 msgid "PSK for"
 msgstr "PSK für"
@@ -392,7 +393,7 @@ msgid "Print Time"
 msgstr "Druckzeit"
 
 msgid "Printer Connections"
-msgstr "Druckeranschlüsse"
+msgstr "Drucker Verbindungen"
 
 msgid "Printing"
 msgstr "Drucken"
@@ -407,10 +408,10 @@ msgid "Raise Nozzle"
 msgstr "Düse anheben"
 
 msgid "Recover Hard"
-msgstr "Genesen Hard"
+msgstr "Wiederherstellung Hart"
 
 msgid "Recover Soft"
-msgstr "Genesen Soft"
+msgstr "Wiederherstellung Soft"
 
 msgid "Restart"
 msgstr "Neustart"
@@ -452,7 +453,7 @@ msgid "Small"
 msgstr "Klein"
 
 msgid "Sort by: "
-msgstr "Auftrag: "
+msgstr "Sortierung:"
 
 msgid "Speed (mm/s)"
 msgstr "Geschwindigkeit (mm/s)"
@@ -464,16 +465,16 @@ msgid "Speed -"
 msgstr "Geschwindigkeit -"
 
 msgid "Square Corner Velocity"
-msgstr "Quadratische Eckgeschwindigkeit"
+msgstr "Eckgeschwindigkeit"
 
 msgid "Starting WiFi Re-association"
-msgstr "Starten der WLAN-Neuverbindung"
+msgstr "Starte WiFi Verbindung"
 
 msgid "Starting recovery for"
-msgstr "Beginn der Wiederherstellung für"
+msgstr "Starte Wiederherstellung für "
 
 msgid "Starting update for"
-msgstr "Start-Update für"
+msgstr "Starte Update für"
 
 msgid "System"
 msgstr "System"
@@ -497,7 +498,7 @@ msgstr "Temperatur"
 
 #, python-format
 msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr "Um %s anzuwenden muss KlipperScreen neu gestartet werden"
+msgstr "Zum Übernehmen von %s benötigt Klipperscreen einen Neustart"
 
 msgid "Tool"
 msgstr "Druckkopf"
@@ -506,13 +507,13 @@ msgid "Unload"
 msgstr "Entladen"
 
 msgid "Up To Date"
-msgstr "Aktualisiert"
+msgstr "Kein Update verfügbar"
 
 msgid "Update"
-msgstr "Aktualisieren"
+msgstr "Update"
 
 msgid "Uploaded"
-msgstr "Datum"
+msgstr "Hochgeladen"
 
 msgid "View Mesh"
 msgstr "Mesh anzeigen"
@@ -559,37 +560,6 @@ msgstr "mm/s"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
-#~ msgid "Colorized"
-#~ msgstr "Colorized"
-
-#~ msgid "Z-bolt (default)"
-#~ msgstr "Z-bolt (default)"
-
-#~ msgid "Medium (default)"
-#~ msgstr "Mittel (Standard)"
-
-#~ msgid "File Estimation (default)"
-#~ msgstr "Dateischätzung"
-
-#, fuzzy
-#~ msgid "Change Printer"
-#~ msgstr "Druck abbrechen"
-
-#~ msgid "Fan Off"
-#~ msgstr "Lüfter Aus"
-
-#~ msgid "Fan On"
-#~ msgstr "Lüfter An"
-
-#~ msgid "Fast"
-#~ msgstr "Schnell"
-
-#~ msgid "Set Speed"
-#~ msgstr "Eingestellter"
-
-#~ msgid "Slow"
-#~ msgstr "Langsam"
-
 #~ msgid "?"
 #~ msgstr "?"
 
@@ -605,5 +575,23 @@ msgstr "mm/s^2"
 #~ msgid "Emergency Stop"
 #~ msgstr "NOT-STOP"
 
+#~ msgid "Fan Off"
+#~ msgstr "Lüfter Aus"
+
+#~ msgid "Fan On"
+#~ msgstr "Lüfter An"
+
+#~ msgid "Fast"
+#~ msgstr "Schnell"
+
+#~ msgid "File Estimation (default)"
+#~ msgstr "Dateischätzung"
+
 #~ msgid "Load Average"
 #~ msgstr "Durchschnittslast"
+
+#~ msgid "Set Speed"
+#~ msgstr "Geschwindigkeit einstellen"
+
+#~ msgid "Slow"
+#~ msgstr "Langsam"
