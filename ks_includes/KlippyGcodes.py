@@ -27,9 +27,9 @@ class KlippyGcodes:
 
     PROBE_CALIBRATE = "PROBE_CALIBRATE"
     Z_ENDSTOP_CALIBRATE = "Z_ENDSTOP_CALIBRATE"
-    PROBE_MOVE = "TESTZ Z="
-    PROBE_ABORT = "ABORT"
-    PROBE_ACCEPT = "ACCEPT"
+    TESTZ = "TESTZ Z="
+    ABORT = "ABORT"
+    ACCEPT = "ACCEPT"
 
     SAVE_CONFIG = "SAVE_CONFIG"
     RESTART = "RESTART"
@@ -66,8 +66,8 @@ class KlippyGcodes:
         return "%s S%s" % (KlippyGcodes.SET_SPD_FACTOR, rate)
 
     @staticmethod
-    def probe_move(dist):
-        return KlippyGcodes.PROBE_MOVE + dist
+    def testz_move(dist):
+        return KlippyGcodes.TESTZ + dist
 
     @staticmethod
     def extrude(dist, speed=500):

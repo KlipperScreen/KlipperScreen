@@ -133,12 +133,12 @@ class ZCalibratePanel(ScreenPanel):
 
     def move(self, widget, dir):
         dist = str(self.distance) if dir == "+" else "-" + str(self.distance)
-        logging.info("# Moving %s", KlippyGcodes.probe_move(dist))
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.probe_move(dist))
+        logging.info("# Moving %s", KlippyGcodes.testz_move(dist))
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.testz_move(dist))
 
     def abort(self, widget):
         logging.info("Aborting Z calibrate")
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_ABORT)
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.ABORT)
 
         self.widgets['start'].get_style_context().add_class('color3')
         self.widgets['zpos'].set_sensitive(False)
@@ -152,5 +152,5 @@ class ZCalibratePanel(ScreenPanel):
 
     def accept(self, widget):
         logging.info("Accepting Z calibrate")
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_ACCEPT)
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.ACCEPT)
         self.menu_return(widget)
