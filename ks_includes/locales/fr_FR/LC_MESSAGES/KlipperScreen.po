@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 11:44-0300\n"
-"PO-Revision-Date: 2021-09-29 10:54-0300\n"
+"POT-Creation-Date: 2021-11-17 23:05-0300\n"
+"PO-Revision-Date: 2021-11-17 23:05-0300\n"
 "Last-Translator: Bahoue & alfrix\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -89,9 +89,6 @@ msgstr ""
 
 msgid "Close"
 msgstr "Fermer"
-
-msgid "Colorized"
-msgstr "Colorisé"
 
 msgid "Complete"
 msgstr "Finalisé"
@@ -298,7 +295,7 @@ msgid "Limits"
 msgstr "Limites"
 
 msgid "Load"
-msgstr "Charge"
+msgstr "Charger"
 
 msgid "Lower Nozzle"
 msgstr "Rapprocher la buse"
@@ -492,7 +489,7 @@ msgid "Tool"
 msgstr "Outil"
 
 msgid "Unload"
-msgstr "Déchargez"
+msgstr "Décharger"
 
 msgid "Up To Date"
 msgstr "À jour"
@@ -547,6 +544,9 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Colorized"
+#~ msgstr "Colorisé"
 
 #~ msgid "Z-bolt (default)"
 #~ msgstr "Z-bolt (défaut)"
