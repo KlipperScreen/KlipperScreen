@@ -44,8 +44,13 @@ create_virtualenv()
     echo_text "Creating virtual environment"
     [ ! -d ${KSENV} ] && virtualenv -p /usr/bin/python3 ${KSENV}
 
-    ${KSENV}/bin/pip install -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
+    source ${KSENV}/bin/activate
+    ${KSENV}/bin/pip install -U pip
+    while read requirements; do
+        pip install $requirements
+    done < ${KSPATH}/scripts/KlipperScreen-requirements.txt
     ${KSENV}/bin/vext -e
+    deactivate
 }
 
 install_systemd_service()
