@@ -45,11 +45,11 @@ create_virtualenv()
     [ ! -d ${KSENV} ] && virtualenv -p /usr/bin/python3 ${KSENV}
 
     source ${KSENV}/bin/activate
-    ${KSENV}/bin/pip install -U pip
+    pip install -U pip
     while read requirements; do
         pip install $requirements
     done < ${KSPATH}/scripts/KlipperScreen-requirements.txt
-    ${KSENV}/bin/vext -e
+    vext -e
     deactivate
 }
 
