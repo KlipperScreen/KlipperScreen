@@ -60,6 +60,12 @@ create_virtualenv()
     pip install -U pip
     while read requirements; do
         pip install $requirements
+        if [ $? -gt 0 ]; then
+            echo "Error: pip install exited with status code $?"
+            echo "Unable to install dependencies, aborting install."
+            deactivate
+            exit
+        fi
     done < ${KSPATH}/scripts/KlipperScreen-requirements.txt
     vext -e
     deactivate
