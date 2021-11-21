@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 11:44-0300\n"
-"PO-Revision-Date: 2021-11-02 23:22+0100\n"
+"POT-Creation-Date: 2021-11-18 11:29-0300\n"
+"PO-Revision-Date: 2021-11-18 11:32-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -467,6 +467,9 @@ msgstr "Geschwindigkeit -"
 msgid "Square Corner Velocity"
 msgstr "Eckgeschwindigkeit"
 
+msgid "Start"
+msgstr "Starten"
+
 msgid "Starting WiFi Re-association"
 msgstr "Starte WiFi Verbindung"
 
@@ -572,26 +575,5 @@ msgstr "mm/s^2"
 #~ msgid "Control"
 #~ msgstr "Steuerung"
 
-#~ msgid "Emergency Stop"
-#~ msgstr "NOT-STOP"
-
-#~ msgid "Fan Off"
-#~ msgstr "Lüfter Aus"
-
-#~ msgid "Fan On"
-#~ msgstr "Lüfter An"
-
-#~ msgid "Fast"
-#~ msgstr "Schnell"
-
-#~ msgid "File Estimation (default)"
-#~ msgstr "Dateischätzung"
-
 #~ msgid "Load Average"
 #~ msgstr "Durchschnittslast"
-
-#~ msgid "Set Speed"
-#~ msgstr "Geschwindigkeit einstellen"
-
-#~ msgid "Slow"
-#~ msgstr "Langsam"

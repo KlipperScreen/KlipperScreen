@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 11:44-0300\n"
-"PO-Revision-Date: 2021-09-29 10:52-0300\n"
+"POT-Creation-Date: 2021-11-18 11:29-0300\n"
+"PO-Revision-Date: 2021-11-18 11:33-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -88,9 +88,6 @@ msgstr ""
 
 msgid "Close"
 msgstr "Cerrar"
-
-msgid "Colorized"
-msgstr "Colorized"
 
 msgid "Complete"
 msgstr "Completado"
@@ -456,6 +453,9 @@ msgstr "Velocidad -"
 msgid "Square Corner Velocity"
 msgstr "Velocidad de esquina"
 
+msgid "Start"
+msgstr "Iniciar"
+
 msgid "Starting WiFi Re-association"
 msgstr "Comenzando re-asociación"
 
@@ -548,9 +548,6 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
-
-#~ msgid "Z-bolt (default)"
-#~ msgstr "Z-bolt (por defecto)"
 
 #~ msgid "Medium (default)"
 #~ msgstr "Medio (por defecto)"

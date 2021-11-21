@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 11:44-0300\n"
+"POT-Creation-Date: 2021-11-18 11:29-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pappicio\n"
 "Language-Team: \n"
@@ -84,9 +84,6 @@ msgstr ""
 
 msgid "Close"
 msgstr "Chiudi"
-
-msgid "Colorized"
-msgstr "Colorato"
 
 msgid "Complete"
 msgstr "Completo"
@@ -452,6 +449,9 @@ msgstr "Velocità-"
 msgid "Square Corner Velocity"
 msgstr "Velocità Square Corner"
 
+msgid "Start"
+msgstr "Iniziare"
+
 msgid "Starting WiFi Re-association"
 msgstr "Riassocia WiFi"
 
@@ -544,9 +544,6 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
-
-#~ msgid "Z-bolt (default)"
-#~ msgstr "Z-bolt (default)"
 
 #~ msgid "Medium (default)"
 #~ msgstr "Media (predef.)"

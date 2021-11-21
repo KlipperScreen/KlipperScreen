@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 11:44-0300\n"
-"PO-Revision-Date: 2021-09-29 11:33-0300\n"
+"POT-Creation-Date: 2021-11-18 11:29-0300\n"
+"PO-Revision-Date: 2021-11-18 11:36-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: Russian <kde-i18n-de@kde.org>\n"
 "Language: ru\n"
@@ -90,9 +90,6 @@ msgstr ""
 
 msgid "Close"
 msgstr "Закрыть"
-
-msgid "Colorized"
-msgstr "Цветная"
 
 msgid "Complete"
 msgstr "Готово"
@@ -458,6 +455,9 @@ msgstr "Скорость -"
 msgid "Square Corner Velocity"
 msgstr "Квадратная угловая скорость"
 
+msgid "Start"
+msgstr "Hачать"
+
 msgid "Starting WiFi Re-association"
 msgstr "WiFi реконенект"
 
@@ -548,9 +548,6 @@ msgstr "мм/с"
 
 msgid "mm/s^2"
 msgstr "мм/с^2"
-
-#~ msgid "Z-bolt (default)"
-#~ msgstr "Z-bolt (default)"
 
 #~ msgid "Medium (default)"
 #~ msgstr "Средний (по умолчанию)"

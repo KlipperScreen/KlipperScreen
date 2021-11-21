@@ -1,3 +1,6 @@
+msgid ""
+msgstr ""
+
 #, python-format
 msgid "%d Packages will be updated"
 msgstr ""
@@ -13,7 +16,7 @@ msgid "24 Hour Time"
 msgstr ""
 
 msgid "Abort"
-msgstr "Abort"
+msgstr ""
 
 msgid "Accept"
 msgstr ""
@@ -66,9 +69,6 @@ msgid ""
 msgstr ""
 
 msgid "Close"
-msgstr ""
-
-msgid "Colorized"
 msgstr ""
 
 msgid "Complete"
@@ -427,6 +427,9 @@ msgid "Speed -"
 msgstr ""
 
 msgid "Square Corner Velocity"
+msgstr ""
+
+msgid "Start"
 msgstr ""
 
 msgid "Starting WiFi Re-association"
