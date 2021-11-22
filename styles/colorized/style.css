@@ -180,11 +180,18 @@ textview .time {
 }
 
 .message_popup {
-    background-color: #dc322f; /*solarazed-red*/
     border-bottom-color: #fdf6e3; /*base3*/
 }
 
 .message_popup button {
+    background-color: #dc322f; /*solarazed-red*/
+}
+
+.message_popup_echo, .message_popup_echo button {
+    background-color: #859900; /*solarized-green*/
+}
+
+.message_popup_error, .message_popup_error button {
     background-color: #dc322f; /*solarazed-red*/
 }
 
