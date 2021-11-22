@@ -4,6 +4,9 @@ class KlippyGcodes:
     HOME_X = "G28 X"
     HOME_Y = "G28 Y"
     HOME_Z = "G28 Z"
+    HOME_XY = "G28 X Y"
+    Z_TILT = "Z_TILT_ADJUST"
+    QUAD_GANTRY_LEVEL = "QUAD_GANTRY_LEVEL"
 
     MOVE = "G1"
     MOVE_ABSOLUTE = "G90"
@@ -23,9 +26,10 @@ class KlippyGcodes:
     SET_SPD_FACTOR = "M220"
 
     PROBE_CALIBRATE = "PROBE_CALIBRATE"
-    PROBE_MOVE = "TESTZ Z="
-    PROBE_ABORT = "ABORT"
-    PROBE_ACCEPT = "ACCEPT"
+    Z_ENDSTOP_CALIBRATE = "Z_ENDSTOP_CALIBRATE"
+    TESTZ = "TESTZ Z="
+    ABORT = "ABORT"
+    ACCEPT = "ACCEPT"
 
     SAVE_CONFIG = "SAVE_CONFIG"
     RESTART = "RESTART"
@@ -45,6 +49,10 @@ class KlippyGcodes:
         return 'SET_HEATER_TEMPERATURE heater="%s" target=%s' % (heater, str(temp))
 
     @staticmethod
+    def set_temp_fan_temp(temp_fan, temp):
+        return 'SET_TEMPERATURE_FAN_TARGET temperature_fan="%s" target=%s' % (temp_fan, str(temp))
+
+    @staticmethod
     def set_fan_speed(speed):
         speed = str(int(float(int(speed) % 101)/100*255))
         return "%s S%s" % (KlippyGcodes.SET_FAN_SPEED, speed)
@@ -58,8 +66,8 @@ class KlippyGcodes:
         return "%s S%s" % (KlippyGcodes.SET_SPD_FACTOR, rate)
 
     @staticmethod
-    def probe_move(dist):
-        return KlippyGcodes.PROBE_MOVE + dist
+    def testz_move(dist):
+        return KlippyGcodes.TESTZ + dist
 
     @staticmethod
     def extrude(dist, speed=500):

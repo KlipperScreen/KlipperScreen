@@ -64,6 +64,12 @@ class KlippyWebsocket(threading.Thread):
             self.on_open(ws)
 
         try:
+            state = self._screen.apiclient.get_server_info()
+            if state is False or state['result']['klippy_connected'] is False:
+                return False
+            printer_info = self._screen.apiclient.get_printer_info()
+            if printer_info is False:
+                return False
             token = self._screen.apiclient.get_oneshot_token()
         except Exception:
             logging.debug("Unable to get oneshot token")
@@ -160,7 +166,8 @@ class KlippyWebsocket(threading.Thread):
             Gdk.threads_add_idle(
                 GLib.PRIORITY_HIGH_IDLE,
                 self._callback['on_close'],
-                "Lost Connection to Moonraker"
+                "Lost Connection to Moonraker",
+                True
             )
 
     def reconnect(self):
@@ -325,6 +332,17 @@ class MoonrakerApi:
             "printer.gcode.script",
             {
                 "script": KlippyGcodes.set_heater_temp(heater, target)
+            },
+            callback,
+            *args
+        )
+
+    def set_temp_fan_temp(self, temp_fan, target, callback=None, *args):
+        logging.debug("Sending temperature fan %s to temp: %s", temp_fan, target)
+        return self._ws.send_method(
+            "printer.gcode.script",
+            {
+                "script": KlippyGcodes.set_temp_fan_temp(temp_fan, target)
             },
             callback,
             *args

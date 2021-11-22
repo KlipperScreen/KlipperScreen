@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 11:44-0300\n"
-"PO-Revision-Date: 2021-09-29 11:35-0300\n"
+"POT-Creation-Date: 2021-11-18 11:29-0300\n"
+"PO-Revision-Date: 2021-11-18 11:36-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -89,9 +89,6 @@ msgstr ""
 
 msgid "Close"
 msgstr "关闭"
-
-msgid "Colorized"
-msgstr "Colorized"
 
 msgid "Complete"
 msgstr "完成"
@@ -455,6 +452,9 @@ msgstr "速度 -"
 msgid "Square Corner Velocity"
 msgstr "方角速度"
 
+msgid "Start"
+msgstr "開始"
+
 msgid "Starting WiFi Re-association"
 msgstr "启动 WiFi 重新关联"
 
@@ -544,18 +544,11 @@ msgstr "mm/s"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
-#~ msgid "Z-bolt (default)"
-#~ msgstr "Z-bolt (default)"
-
 #~ msgid "Medium (default)"
 #~ msgstr "中（默认"
 
 #~ msgid "File Estimation (default)"
 #~ msgstr "文件估计（默认）"
-
-#, fuzzy
-#~ msgid "Change Printer"
-#~ msgstr "取消打印"
 
 #~ msgid "Fan Off"
 #~ msgstr "关闭风扇"

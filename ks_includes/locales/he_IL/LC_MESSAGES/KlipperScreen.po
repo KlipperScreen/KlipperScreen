@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 11:44-0300\n"
-"PO-Revision-Date: 2021-09-29 10:57-0300\n"
+"POT-Creation-Date: 2021-11-18 11:29-0300\n"
+"PO-Revision-Date: 2021-11-18 11:34-0300\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
 "Language: he_IL\n"
@@ -91,9 +91,6 @@ msgstr ""
 
 msgid "Close"
 msgstr "סגור"
-
-msgid "Colorized"
-msgstr "Colorized"
 
 msgid "Complete"
 msgstr "לְהַשְׁלִים"
@@ -457,6 +454,9 @@ msgstr "מהירות -"
 msgid "Square Corner Velocity"
 msgstr "מהירות פינה מרובעת"
 
+msgid "Start"
+msgstr "הַתחָלָה"
+
 msgid "Starting WiFi Re-association"
 msgstr "התחלת שיוך מחדש ל- WiFi"
 
@@ -550,18 +550,11 @@ msgstr "מ\"מ/ש"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
-#~ msgid "Z-bolt (default)"
-#~ msgstr "Z-bolt (default)"
-
 #~ msgid "Medium (default)"
 #~ msgstr "בינוני (ברירת מחדל)"
 
 #~ msgid "File Estimation (default)"
 #~ msgstr "קובץ (ברירת מחדל)"
-
-#, fuzzy
-#~ msgid "Change Printer"
-#~ msgstr "בטל הדפסה"
 
 #~ msgid "Fan Off"
 #~ msgstr "כבה מאוורר"
@@ -598,10 +591,6 @@ msgstr "mm/s^2"
 
 #~ msgid "Network Info"
 #~ msgstr "מידע על הרשת"
-
-#, fuzzy
-#~ msgid "Klipper"
-#~ msgstr "אתחול קליפר"
 
 #~ msgid "Back"
 #~ msgstr "חזור"

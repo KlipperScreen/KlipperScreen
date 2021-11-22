@@ -345,12 +345,18 @@ class KlipperScreen(Gtk.Window):
         self._cur_panels.append(panel_name)
         logging.debug("Current panel hierarchy: %s", str(self._cur_panels))
 
-    def show_popup_message(self, message):
+    def show_popup_message(self, message, level=2):
         if self.popup_message is not None:
             self.close_popup_message()
 
         box = Gtk.Box()
         box.get_style_context().add_class("message_popup")
+
+        if level == 1:
+            box.get_style_context().add_class("message_popup_echo")
+        else:
+            box.get_style_context().add_class("message_popup_error")
+
         box.set_size_request(self.width, self.gtk.get_header_size())
         label = Gtk.Label()
         if "must home axis first" in message.lower():
@@ -730,9 +736,11 @@ class KlipperScreen(Gtk.Window):
 
             if not (data.startswith("B:") and
                     re.search(r'B:[0-9\.]+\s/[0-9\.]+\sT[0-9]+:[0-9\.]+', data)):
+                if data.startswith("echo: "):
+                    self.show_popup_message(data[6:], 1)
                 if data.startswith("!! "):
-                    self.show_popup_message(data[3:])
-                # logging.debug(json.dumps([action, data], indent=2))
+                    self.show_popup_message(data[3:], 2)
+                logging.debug(json.dumps([action, data], indent=2))
 
         self.base_panel.process_update(action, data)
         if self._cur_panels[-1] in self.subscriptions:
@@ -774,10 +782,12 @@ class KlipperScreen(Gtk.Window):
     def _send_action(self, widget, method, params):
         self._ws.send_method(method, params)
 
-    def printer_initializing(self, text=None):
+    def printer_initializing(self, text=None, disconnect=False):
         self.shutdown = True
         self.close_popup_message()
         self.show_panel('splash_screen', "splash_screen", "Splash Screen", 2)
+        if disconnect is True and self.printer is not None:
+            self.printer.state = "disconnected"
         if text is not None:
             self.panels['splash_screen'].update_text(text)
             self.panels['splash_screen'].show_restart_buttons()

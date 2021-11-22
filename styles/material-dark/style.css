@@ -182,11 +182,14 @@ textview .time {
 }
 
 .message_popup {
-    background-color: #B71C1C;
     border-bottom-color: #e2e2e2;
 }
 
-.message_popup button {
+.message_popup_echo, .message_popup_echo button {
+    background-color: #006412;
+}
+
+.message_popup_error, .message_popup_error button {
     background-color: #B71C1C;
 }
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 11:44-0300\n"
-"PO-Revision-Date: 2021-09-29 10:54-0300\n"
+"POT-Creation-Date: 2021-11-18 11:29-0300\n"
+"PO-Revision-Date: 2021-11-18 11:33-0300\n"
 "Last-Translator: Bahoue & alfrix\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -89,9 +89,6 @@ msgstr ""
 
 msgid "Close"
 msgstr "Fermer"
-
-msgid "Colorized"
-msgstr "Colorisé"
 
 msgid "Complete"
 msgstr "Finalisé"
@@ -298,7 +295,7 @@ msgid "Limits"
 msgstr "Limites"
 
 msgid "Load"
-msgstr "Charge"
+msgstr "Charger"
 
 msgid "Lower Nozzle"
 msgstr "Rapprocher la buse"
@@ -457,6 +454,9 @@ msgstr "Vitesse -"
 msgid "Square Corner Velocity"
 msgstr "Vélocité des angles droits"
 
+msgid "Start"
+msgstr "Démarrer"
+
 msgid "Starting WiFi Re-association"
 msgstr "Démarrage de la re-association WiFi"
 
@@ -492,7 +492,7 @@ msgid "Tool"
 msgstr "Outil"
 
 msgid "Unload"
-msgstr "Déchargez"
+msgstr "Décharger"
 
 msgid "Up To Date"
 msgstr "À jour"
@@ -548,9 +548,6 @@ msgstr "mm/s"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
-#~ msgid "Z-bolt (default)"
-#~ msgstr "Z-bolt (défaut)"
-
 #~ msgid "Medium (default)"
 #~ msgstr "Moyen (défaut)"
 
@@ -598,10 +595,6 @@ msgstr "mm/s^2"
 
 #~ msgid "Network Info"
 #~ msgstr "Information réseau "
-
-#, fuzzy
-#~ msgid "Klipper"
-#~ msgstr "Redémarrer klipper"
 
 #~ msgid "Back"
 #~ msgstr "Retour"
