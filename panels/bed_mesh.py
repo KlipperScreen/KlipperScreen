@@ -307,7 +307,14 @@ class BedMeshPanel(ScreenPanel):
                 return
             x_range = [int(abm['mesh_min'][0]), int(abm['mesh_max'][0])]
             y_range = [int(abm['mesh_min'][1]), int(abm['mesh_max'][1])]
-            z_range = [-0.5, 0.5]
+            minz_mesh = min(min(abm['mesh_matrix']))
+            maxz_mesh = max(max(abm['mesh_matrix']))
+            # Do not use a very small zscale, because that could be misleading
+            if minz_mesh > -0.5:
+                minz_mesh = -0.5
+            if maxz_mesh < 0.5:
+                maxz_mesh = 0.5
+            z_range = [minz_mesh, maxz_mesh]
             counts = [len(abm['mesh_matrix'][0]), len(abm['mesh_matrix'])]
             deltas = [(x_range[1] - x_range[0]) / (counts[0]-1), (y_range[1] - y_range[0]) / (counts[1]-1)]
             x = [(i*deltas[0])+x_range[0] for i in range(counts[0])]
