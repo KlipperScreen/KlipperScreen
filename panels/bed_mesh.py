@@ -307,7 +307,7 @@ class BedMeshPanel(ScreenPanel):
                 return
             x_range = [int(abm['mesh_min'][0]), int(abm['mesh_max'][0])]
             y_range = [int(abm['mesh_min'][1]), int(abm['mesh_max'][1])]
-            z_range = [min(min(abm['mesh_matrix'])), max(max(abm['mesh_matrix']))]
+            z_range = [-0.5, 0.5]
             counts = [len(abm['mesh_matrix'][0]), len(abm['mesh_matrix'])]
             deltas = [(x_range[1] - x_range[0]) / (counts[0]-1), (y_range[1] - y_range[0]) / (counts[1]-1)]
             x = [(i*deltas[0])+x_range[0] for i in range(counts[0])]
@@ -325,24 +325,23 @@ class BedMeshPanel(ScreenPanel):
             x, y = np.meshgrid(x, y)
             z = np.asarray(bm['points'])
 
-        rc('axes', edgecolor="#fff", labelcolor="#fff")
-        rc(('xtick', 'ytick'), color="#fff")
-        fig = plt.figure()
-        fig.patch.set_facecolor("black")
-        ax = Axes3D(fig, auto_add_to_figure=False)
-
-        ax.set_facecolor("black")
-        ax.set(title=profile, xlabel="X", ylabel="Y")
-        ax.spines['bottom'].set_color("#fff")
-
+        rc('axes', edgecolor="#e2e2e2", labelcolor="#e2e2e2")
+        rc(('xtick', 'ytick'), color="#e2e2e2")
+        fig = plt.figure(facecolor='#12121277')
+        ax = Axes3D(fig, azim=245, elev=23)
+        ax.set(title=profile, xlabel="X", ylabel="Y", facecolor='none')
+        ax.spines['bottom'].set_color("#e2e2e2")
         fig.add_axes(ax)
-        surf = ax.plot_surface(x, y, z, rstride=1, cstride=1, cmap=cm.coolwarm)
+        surf = ax.plot_surface(x, y, z, cmap=cm.coolwarm, vmin=-0.1, vmax=0.1)
+
+        chartBox = ax.get_position()
+        ax.set_position([chartBox.x0, chartBox.y0+0.1, chartBox.width, chartBox.height])
 
         ax.set_zlim(z_range[0], z_range[1])
-        ax.zaxis.set_major_locator(LinearLocator(10))
+        ax.zaxis.set_major_locator(LinearLocator(5))
         # A StrMethodFormatter is used automatically
         ax.zaxis.set_major_formatter('{x:.02f}')
-        fig.colorbar(surf, shrink=0.5, aspect=5)
+        fig.colorbar(surf, shrink=0.7, aspect=5, pad=0.25)
 
         box = Gtk.VBox()
         box.set_hexpand(True)
@@ -370,6 +369,11 @@ class BedMeshPanel(ScreenPanel):
         canvas.set_size_request(alloc.width, self._screen.height/3*2)
         canvas_box.add(canvas)
         canvas_box.show_all()
+        # Remove the "matplotlib-canvas" class which forces a white background.
+        # https://github.com/matplotlib/matplotlib/commit/3c832377fb4c4b32fcbdbc60fdfedb57296bc8c0
+        style_ctx = canvas.get_style_context()
+        for css_class in style_ctx.list_classes():
+            style_ctx.remove_class(css_class)
 
 
     def _close_dialog(self, widget, response):
