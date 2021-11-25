@@ -553,6 +553,7 @@ class KlipperScreen(Gtk.Window):
             logging.info("DPMS State Off -> Hiding")
             self.hide()
             os.system("xsetroot  -cursor_name  watch")
+            self.touch_ready = False
         elif state == functions.DPMS_State.On and not visible:
             if self.touch_ready:
                 logging.info("DPMS State On -> Showing KlipperScreen")
