@@ -132,6 +132,7 @@ class KlipperScreen(Gtk.Window):
         self.add(self.base_panel.get())
         self.show_all()
         self.base_panel.activate()
+        self.touch_ready = True
 
         self.printer_initializing(_("Initializing"))
 
@@ -546,12 +547,22 @@ class KlipperScreen(Gtk.Window):
 
     def check_dpms_state(self):
         state = functions.get_DPMS_state()
-        if state == functions.DPMS_State.Off and "screensaver" not in self._cur_panels:
-            logging.info("### Creating screensaver panel")
-            self.show_panel("screensaver", "screensaver", "Screen Saver", 1, False)
-        elif state == functions.DPMS_State.On and "screensaver" in self._cur_panels:
-            logging.info("### Remove screensaver panel")
-            self._menu_go_back()
+
+        visible = self.get_property("visible")
+        if state == functions.DPMS_State.Off and visible:
+            logging.info("DPMS State Off -> Hiding")
+            self.hide()
+            os.system("xsetroot  -cursor_name  watch")
+        elif state == functions.DPMS_State.On and not visible:
+            if self.touch_ready:
+                logging.info("DPMS State On -> Showing KlipperScreen")
+                self.show()
+                os.system("xsetroot  -cursor_name  arrow")
+            else:
+                logging.info("DPMS State On -> Screen touched")
+                self.touch_ready = True
+        else:
+            self.touch_ready = False
         return True
 
     def wake_screen(self):
@@ -583,7 +594,7 @@ class KlipperScreen(Gtk.Window):
             return
         os.system("xset -display :0 dpms 0 %s 0" % time)
         if self.dpms_timeout is None and functions.dpms_loaded is True:
-            self.dpms_timeout = GLib.timeout_add(1000, self.check_dpms_state)
+            self.dpms_timeout = GLib.timeout_add(500, self.check_dpms_state)
 
     def set_updating(self, updating=False):
         if self.updating is True and updating is False:
