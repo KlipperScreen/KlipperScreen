@@ -115,8 +115,9 @@ class KlipperScreen(Gtk.Window):
         _ = self.lang.gettext
 
         Gtk.Window.__init__(self)
-        self.width = self._config.get_main_config().getint("width", Gdk.Screen.get_width(Gdk.Screen.get_default()))
-        self.height = self._config.get_main_config().getint("height", Gdk.Screen.get_height(Gdk.Screen.get_default()))
+        monitor = Gdk.Display.get_default().get_primary_monitor()
+        self.width = self._config.get_main_config().getint("width", monitor.get_geometry().width)
+        self.height = self._config.get_main_config().getint("height", monitor.get_geometry().height)
         self.set_default_size(self.width, self.height)
         self.set_resizable(False)
         logging.info("Screen resolution: %sx%s" % (self.width, self.height))
