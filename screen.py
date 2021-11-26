@@ -141,10 +141,14 @@ class KlipperScreen(Gtk.Window):
         # Move mouse to 0,0
         os.system("/usr/bin/xdotool mousemove 0 0")
         # Change cursor to blank
-        if self._config.get_main_config().getboolean("show_cursor", fallback=False):
+        self.show_cursor = self._config.get_main_config().getboolean("show_cursor", fallback=False)
+        if self.show_cursor:
             self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.ARROW))
+            os.system("xsetroot  -cursor_name  arrow")
+
         else:
             self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.BLANK_CURSOR))
+            os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
 
         printers = self._config.get_printers()
         logging.debug("Printers: %s" % printers)
@@ -558,7 +562,10 @@ class KlipperScreen(Gtk.Window):
             if self.touch_ready:
                 logging.info("DPMS State On -> Showing KlipperScreen")
                 self.show()
-                os.system("xsetroot  -cursor_name  arrow")
+                if self.show_cursor:
+                    os.system("xsetroot  -cursor_name  arrow")
+                else:
+                    os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
             else:
                 logging.info("DPMS State On -> Screen touched")
                 self.touch_ready = True
