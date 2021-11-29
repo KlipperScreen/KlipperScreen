@@ -15,13 +15,14 @@ Follow the instructions to install Klipper and Moonraker.
 * klipper: https://www.klipper3d.org/Installation.html
 * moonraker: https://moonraker.readthedocs.io/en/latest/installation/
 
-Ensure that 127.0.0.1 is a trusted client for moonraker, such as in this example:
+In moonraker.conf ensure that 127.0.0.1 is a trusted client for moonraker, such as in this example:
 ```
 [authorization]
 trusted_clients:
   127.0.0.1
 ```
-Warning: `force_logins: true` is not supported
+
+Note: `force_logins: true` requires the moonraker api key in [KlipperScreen.conf](Configuration.md)
 
 If you wish to use the update manager feature of moonraker for KlipperScreen, add the following block into the moonraker
 configuration:
