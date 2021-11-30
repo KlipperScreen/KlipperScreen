@@ -120,10 +120,9 @@ class KlipperScreen(Gtk.Window):
         self.set_default_size(self.width, self.height)
         self.set_resizable(False)
         logging.info("Screen resolution: %sx%s" % (self.width, self.height))
-
         self.theme = self._config.get_main_config_option('theme')
-        self.gtk = KlippyGtk(self, self.width, self.height, self.theme,
-                             self._config.get_main_config().getboolean("show_cursor", fallback=False),
+        self.show_cursor = self._config.get_main_config().getboolean("show_cursor", fallback=False)
+        self.gtk = KlippyGtk(self, self.width, self.height, self.theme, self.show_cursor,
                              self._config.get_main_config_option("font_size", "medium"))
         self.keyboard_height = self.gtk.get_keyboard_height()
         self.init_style()
@@ -140,15 +139,7 @@ class KlipperScreen(Gtk.Window):
 
         # Move mouse to 0,0
         os.system("/usr/bin/xdotool mousemove 0 0")
-        # Change cursor to blank
-        self.show_cursor = self._config.get_main_config().getboolean("show_cursor", fallback=False)
-        if self.show_cursor:
-            self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.ARROW))
-            os.system("xsetroot  -cursor_name  arrow")
-
-        else:
-            self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.BLANK_CURSOR))
-            os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
+        self.change_cursor()
 
         printers = self._config.get_printers()
         logging.debug("Printers: %s" % printers)
@@ -556,16 +547,13 @@ class KlipperScreen(Gtk.Window):
         if state == functions.DPMS_State.Off and visible:
             logging.info("DPMS State Off -> Hiding")
             self.hide()
-            os.system("xsetroot  -cursor_name  watch")
+            self.change_cursor("watch")
             self.touch_ready = False
         elif state == functions.DPMS_State.On and not visible:
             if self.touch_ready:
                 logging.info("DPMS State On -> Showing KlipperScreen")
                 self.show()
-                if self.show_cursor:
-                    os.system("xsetroot  -cursor_name  arrow")
-                else:
-                    os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
+                self.change_cursor()
             else:
                 logging.info("DPMS State On -> Screen touched")
                 self.touch_ready = True
@@ -917,6 +905,17 @@ class KlipperScreen(Gtk.Window):
         self.base_panel.get_content().remove(self.keyboard['box'])
         os.kill(self.keyboard['process'].pid, signal.SIGTERM)
         self.keyboard = None
+
+    def change_cursor(self, cursortype=None):
+        if cursortype == "watch":
+            os.system("xsetroot  -cursor_name  watch")
+        elif self.show_cursor:
+            self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.ARROW))
+            os.system("xsetroot  -cursor_name  arrow")
+        else:
+            self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.BLANK_CURSOR))
+            os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
+        return
 
 def main():
 
