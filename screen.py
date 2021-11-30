@@ -543,9 +543,15 @@ class KlipperScreen(Gtk.Window):
     def check_dpms_state(self):
         state = functions.get_DPMS_state()
 
+        if state == functions.DPMS_State.Fail:
+            logging.info("DPMS State FAIL -> Showing KlipperScreen, Stopping DPMS Check")
+            self.show()
+            self.change_cursor()
+            return False
+
         visible = self.get_property("visible")
-        if state == functions.DPMS_State.Off and visible:
-            logging.info("DPMS State Off -> Hiding")
+        if state != functions.DPMS_State.On and visible:
+            logging.info("DPMS State %s -> Hiding", state)
             self.hide()
             self.change_cursor("watch")
             self.touch_ready = False
