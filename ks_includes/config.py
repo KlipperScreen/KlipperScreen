@@ -141,6 +141,8 @@ class KlipperScreenConfig:
                     {"name": _("Small"), "value": "small"},
                     {"name": _("Medium") + " " + _("(default)"), "value": "medium"},
                     {"name": _("Large"), "value": "large"}]}},
+            {"confirm_estop": {"section": "main", "name": "Confirm Emergency Stop", "type": "binary",
+                               "value": "False"}},
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
 

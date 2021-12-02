@@ -1,21 +1,8 @@
 # Configuration
 
-The configuration options are outlined below:
+Create a blank file in `~/klipper_config/KlipperScreen.conf_`, if the file already exist then just edit it.
 
-KlipperScreen will search for a configuration file in the following order:
-
-1. _~/KlipperScreen.conf_
-2. _${KlipperScreen_Directory}/KlipperScreen.conf_
-3. _~/klipper_config/KlipperScreen.conf_
-
-If one of those files are found, it will be used over the default configuration. The default configuration will be
-merged with the custom configuration, so if you do not define any menus the default menus will be used.
-
-The default config is included here: (do not edit use as reference)
-_${KlipperScreen_Directory}/ks_includes/default.conf_
-
-If no config file is found then a new configuration file will be created in:
-_~/klipper_config/KlipperScreen.conf_ Or _~/KlipperScreen.conf_
+Write in the file only the options that need to be changed.
 
 ## Include files
 ```
@@ -143,3 +130,24 @@ icon: home
 method: printer.gcode.script
 params: {"script":"G28"}
 ```
+
+## KlipperScreen behaviour towards configuration
+
+KlipperScreen will search for a configuration file in the following order:
+
+1. _~/KlipperScreen.conf_
+2. _${KlipperScreen_Directory}/KlipperScreen.conf_
+3. _~/klipper_config/KlipperScreen.conf_
+
+If you need a custom location for the configuration file, you can add -c or --configfile to the systemd file and specify
+the location of your configuration file.
+
+If one of those files are found, it will be used over the default configuration. The default configuration will be
+merged with the custom configuration, so if you do not define any menus the default menus will be used.
+
+The default config is included here: (do not edit use as reference)
+_${KlipperScreen_Directory}/ks_includes/default.conf_
+
+Preferably *do not* copy the entire default.conf file, just configure the settings needed.
+
+If no config file is found, then when a setting is changed in the settings panel, a new configuration file will be created automatically.

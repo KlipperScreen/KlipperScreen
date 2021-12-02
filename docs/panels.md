@@ -23,11 +23,11 @@ for _Screws Calibrate_ will appear. This button runs the SCREWS_TILT_CALCULATE c
 panel.
 
 ### Bed Mesh
-type: bed_mesh
+type: bed_mesh theme:material-dark
 ![Bed Mesh](img/bed_mesh.png)
 
 ### Extrude
-type: extrude
+type: extrude theme:material-dark
 ![Extrude](img/extrude.png)
 
 ### Fan
@@ -35,11 +35,11 @@ type: fan
 ![Fan](img/fan.png)
 
 ### Fine Tune
-type: fine_tune
+type: fine_tune theme:custom
 ![Fine Tune Panel](img/fine_tune.png)
 
 ### Gcode Macros
-type: gcode_macros
+type: gcode_macros theme: material-darker
 ![Gcode Macros Panel](img/gcode_macros.png)
 
 ### Menu
@@ -67,7 +67,7 @@ type: print
 ![Print Panel](img/print.png)
 
 ### Settings
-type: settings
+type: settings theme:colorized
 ![Settings](img/settings.png)
 
 ### System
@@ -75,9 +75,13 @@ type: system
 ![System Panel](img/system.png)
 
 ### Temperature
-type: temperature
+type: temperature theme:material-light
 ![Temperature](img/temperature.png)
 
 ### Z Calibrate
 type: zcalibrate
 ![Z Calibrate](img/zcalibrate.png)
+
+### Limits
+type: limits theme: material-dark
+![Limits](img/limits.png)
