@@ -33,6 +33,14 @@ class PowerPanel(ScreenPanel):
 
         self.content.add(box)
 
+    def activate(self):
+        devices = self._screen.printer.get_power_devices()
+        for x in devices:
+            self.devices[x]['switch'].disconnect_by_func(self.on_switch)
+            self.devices[x]['switch'].set_active(True if self._screen.printer.get_power_device_status(x) == "on"
+                                                 else False)
+            self.devices[x]['switch'].connect("notify::active", self.on_switch, x)
+
     def add_device(self, device):
         frame = Gtk.Frame()
         frame.set_property("shadow-type", Gtk.ShadowType.NONE)
