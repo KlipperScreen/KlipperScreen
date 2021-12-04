@@ -6,7 +6,10 @@ import logging
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
 from panels.menu import MenuPanel
+
+from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.widgets.graph import HeaterGraph
+from ks_includes.widgets.keypad import Keypad
 
 def create_panel(*args):
     return MainPanel(*args)
@@ -16,6 +19,7 @@ class MainPanel(MenuPanel):
         super().__init__(screen, title, False)
         self.devices = {}
         self.graph_update = None
+        self.active_heater = None
 
     def initialize(self, panel_name, items, extrudercount):
         print("### Making MainMenu")
@@ -33,7 +37,8 @@ class MainPanel(MenuPanel):
 
         leftpanel = self.create_left_panel()
         grid.attach(leftpanel, 0, 0, 1, 1)
-        grid.attach(self.arrangeMenuItems(items, 2, True), 1, 0, 1, 1)
+        self.labels['menu'] = self.arrangeMenuItems(items, 2, True)
+        grid.attach(self.labels['menu'], 1, 0, 1, 1)
 
         self.grid = grid
 
@@ -125,43 +130,22 @@ class MainPanel(MenuPanel):
         pos = devices.index(device) + 1
 
         self.labels['devices'].insert_row(pos)
-        # self.labels['devices'].attach(name['b'], 0, pos, 1, 1)
         self.labels['devices'].attach(name, 0, pos, 1, 1)
         self.labels['devices'].attach(temp, 1, pos, 1, 1)
         if can_target:
             self.labels['devices'].attach(target, 2, pos, 1, 1)
         self.labels['devices'].show_all()
 
-    def on_popover_clicked(self, widget, device):
-        self.popover_device = device
-        po = self.labels['popover']
-        po.set_relative_to(widget)
-        self.popover_populate_menu()
-        po.show_all()
-
-    def popover_populate_menu(self):
-        pobox = self.labels['popover_vbox']
-        for child in pobox.get_children():
-            pobox.remove(child)
-        if self.labels['da'].is_showing(self.popover_device):
-            pobox.pack_start(self.labels['graph_hide'], True, True, 5)
+    def change_target_temp(self, temp):
+        if self.active_heater.startswith('heater_generic '):
+            self._screen._ws.klippy.set_heater_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
+        elif self.active_heater == "heater_bed":
+            temp = 0 if temp < 0 or temp > KlippyGcodes.MAX_BED_TEMP else temp
+            self._screen._ws.klippy.set_bed_temp(temp)
         else:
-            pobox.pack_start(self.labels['graph_show'], True, True, 5)
-
-    def graph_show_device(self, widget, show=True):
-        logging.info("Graph show: %s %s" % (self.popover_device, show))
-        self.labels['da'].set_showing(self.popover_device, show)
-        if show:
-            self.devices[self.popover_device]['name'].get_style_context().remove_class("graph_label_hidden")
-            self.devices[self.popover_device]['name'].get_style_context().add_class(
-                self.devices[self.popover_device]['class'])
-        else:
-            self.devices[self.popover_device]['name'].get_style_context().remove_class(
-                self.devices[self.popover_device]['class'])
-            self.devices[self.popover_device]['name'].get_style_context().add_class("graph_label_hidden")
-        self.labels['da'].queue_draw()
-        self.popover_populate_menu()
-        self.labels['popover'].show_all()
+            temp = 0 if temp < 0 or temp > KlippyGcodes.MAX_EXT_TEMP else temp
+            self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(self.active_heater), temp)
+        self._printer.set_dev_stat(self.active_heater, "target", temp)
 
     def create_left_panel(self):
         _ = self.lang.gettext
@@ -189,9 +173,11 @@ class MainPanel(MenuPanel):
         box.add(da)
 
 
-        self.labels['graph_hide'] = self._gtk.Button(label="Hide")
+        self.labels['graph_settemp'] = self._gtk.Button(label=_("Set Temp"))
+        self.labels['graph_settemp'].connect("clicked", self.show_numpad)
+        self.labels['graph_hide'] = self._gtk.Button(label=_("Hide"))
         self.labels['graph_hide'].connect("clicked", self.graph_show_device, False)
-        self.labels['graph_show'] = self._gtk.Button(label="Show")
+        self.labels['graph_show'] = self._gtk.Button(label=_("Show"))
         self.labels['graph_show'].connect("clicked", self.graph_show_device)
 
         popover = Gtk.Popover()
@@ -206,6 +192,48 @@ class MainPanel(MenuPanel):
             self.add_device(d)
 
         return box
+
+    def graph_show_device(self, widget, show=True):
+        logging.info("Graph show: %s %s" % (self.popover_device, show))
+        self.labels['da'].set_showing(self.popover_device, show)
+        if show:
+            self.devices[self.popover_device]['name'].get_style_context().remove_class("graph_label_hidden")
+            self.devices[self.popover_device]['name'].get_style_context().add_class(
+                self.devices[self.popover_device]['class'])
+        else:
+            self.devices[self.popover_device]['name'].get_style_context().remove_class(
+                self.devices[self.popover_device]['class'])
+            self.devices[self.popover_device]['name'].get_style_context().add_class("graph_label_hidden")
+        self.labels['da'].queue_draw()
+        self.popover_populate_menu()
+        self.labels['popover'].show_all()
+
+    def hide_numpad(self, widget):
+        self.devices[self.active_heater]['name'].get_style_context().remove_class("active_device")
+        self.active_heater = None
+
+        self.grid.remove_column(1)
+        self.grid.attach(self.labels['menu'], 1, 0, 1, 1)
+        self.grid.show_all()
+
+    def on_popover_clicked(self, widget, device):
+        self.popover_device = device
+        po = self.labels['popover']
+        po.set_relative_to(widget)
+        self.popover_populate_menu()
+        po.show_all()
+
+    def popover_populate_menu(self):
+        pobox = self.labels['popover_vbox']
+        for child in pobox.get_children():
+            pobox.remove(child)
+
+        if self.labels['da'].is_showing(self.popover_device):
+            pobox.pack_start(self.labels['graph_hide'], True, True, 5)
+            pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
+        else:
+            pobox.pack_start(self.labels['graph_show'], True, True, 5)
+            pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
 
     def process_update(self, action, data):
         if action != "notify_status_update":
@@ -224,6 +252,24 @@ class MainPanel(MenuPanel):
                 self._printer.get_dev_stat(h, "target"),
             )
         return
+
+    def show_numpad(self, widget):
+        _ = self.lang.gettext
+
+        if self.active_heater is not None:
+            self.devices[self.active_heater]['name'].get_style_context().remove_class("active_device")
+        self.active_heater = self.popover_device
+        self.devices[self.active_heater]['name'].get_style_context().add_class("active_device")
+
+        if "keypad" not in self.labels:
+            self.labels["keypad"] = Keypad(self._screen, self.change_target_temp, self.hide_numpad)
+        self.labels["keypad"].clear()
+
+        self.grid.remove_column(1)
+        self.grid.attach(self.labels["keypad"], 1, 0, 1, 1)
+        self.grid.show_all()
+
+        self.labels['popover'].popdown()
 
     def update_graph(self):
         self.labels['da'].queue_draw()
