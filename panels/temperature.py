@@ -7,6 +7,7 @@ from gi.repository import Gtk, Gdk, GLib
 
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.widgets.keypad import Keypad
 
 def create_panel(*args):
     return TemperaturePanel(*args)
@@ -58,9 +59,9 @@ class TemperaturePanel(ScreenPanel):
         self.labels["control_grid"] = self._gtk.HomogeneousGrid()
 
         self.labels["increase"] = self._gtk.ButtonImage("increase", _("Increase"), "color1")
-        self.labels["increase"].connect("clicked", self.change_target_temp, "+")
+        self.labels["increase"].connect("clicked", self.change_target_temp_incremental, "+")
         self.labels["decrease"] = self._gtk.ButtonImage("decrease", _("Decrease"), "color3")
-        self.labels["decrease"].connect("clicked", self.change_target_temp, "-")
+        self.labels["decrease"].connect("clicked", self.change_target_temp_incremental, "-")
         self.labels["npad"] = self._gtk.ButtonImage("hashtag", _("Number Pad"), "color2")
         self.labels["npad"].connect("clicked", self.show_numpad)
 
@@ -119,53 +120,12 @@ class TemperaturePanel(ScreenPanel):
     def show_numpad(self, widget):
         _ = self.lang.gettext
 
-        numpad = self._gtk.HomogeneousGrid()
-        numpad.set_direction(Gtk.TextDirection.LTR)
-
-        keys = [
-            ['1', 'numpad_tleft'],
-            ['2', 'numpad_top'],
-            ['3', 'numpad_tright'],
-            ['4', 'numpad_left'],
-            ['5', 'numpad_button'],
-            ['6', 'numpad_right'],
-            ['7', 'numpad_left'],
-            ['8', 'numpad_button'],
-            ['9', 'numpad_right'],
-            ['B', 'numpad_bleft'],
-            ['0', 'numpad_bottom'],
-            ['E', 'numpad_bright']
-        ]
-        for i in range(len(keys)):
-            id = 'button_' + str(keys[i][0])
-            if keys[i][0] == "B":
-                self.labels[id] = self._gtk.ButtonImage("backspace", None, None, 1, 1)
-            elif keys[i][0] == "E":
-                self.labels[id] = self._gtk.ButtonImage("complete", None, None, 1, 1)
-            else:
-                self.labels[id] = Gtk.Button(keys[i][0])
-            self.labels[id].connect('clicked', self.update_entry, keys[i][0])
-            ctx = self.labels[id].get_style_context()
-            ctx.add_class(keys[i][1])
-            numpad.attach(self.labels[id], i % 3, i/3, 1, 1)
-
-        self.labels["keypad"] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        self.labels['entry'] = Gtk.Entry()
-        self.labels['entry'].props.xalign = 0.5
-        ctx = self.labels['entry'].get_style_context()
-
-        b = self._gtk.ButtonImage('cancel', _('Close'), None, 1, 1)
-        b.connect("clicked", self.hide_numpad)
-
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        box.add(self.labels['entry'])
-        box.add(numpad)
-        box.add(b)
-
-        self.labels["keypad"] = numpad
+        if "keypad" not in self.labels:
+            self.labels["keypad"] = Keypad(self._screen, self.change_target_temp, self.hide_numpad)
+        self.labels["keypad"].clear()
 
         self.grid.remove_column(1)
-        self.grid.attach(box, 1, 0, 1, 1)
+        self.grid.attach(self.labels["keypad"], 1, 0, 1, 1)
         self.grid.show_all()
 
     def hide_numpad(self, widget):
@@ -206,7 +166,18 @@ class TemperaturePanel(ScreenPanel):
             )
         return
 
-    def change_target_temp(self, widget, dir):
+    def change_target_temp(self, temp):
+        if self.active_heater.startswith('heater_generic '):
+            self._screen._ws.klippy.set_heater_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
+        elif self.active_heater == "heater_bed":
+            temp = 0 if temp < 0 or temp > KlippyGcodes.MAX_BED_TEMP else temp
+            self._screen._ws.klippy.set_bed_temp(temp)
+        else:
+            temp = 0 if temp < 0 or temp > KlippyGcodes.MAX_EXT_TEMP else temp
+            self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(self.active_heater), temp)
+        self._printer.set_dev_stat(self.active_heater, "target", temp)
+
+    def change_target_temp_incremental(self, widget, dir):
         logging.debug("Dev stats %s: %s" % (self.active_heater, self._printer.get_dev_stats(self.active_heater)))
         target = self._printer.get_dev_stat(self.active_heater, "target")
         if dir == "+":
@@ -228,31 +199,3 @@ class TemperaturePanel(ScreenPanel):
             self._screen._ws.klippy.set_temp_fan_temp(" ".join(self.active_heater.split(" ")[1:]), target)
         else:
             self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(self.active_heater), target)
-
-    def update_entry(self, widget, digit):
-        text = self.labels['entry'].get_text()
-        if digit == 'B':
-            if len(text) < 1:
-                return
-            self.labels['entry'].set_text(text[0:-1])
-        elif digit == 'E':
-            if self.active_heater.startswith('heater_generic '):
-                temp = int(text)
-                self._screen._ws.klippy.set_heater_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
-            elif self.active_heater == "heater_bed":
-                temp = int(text)
-                temp = 0 if temp < 0 or temp > KlippyGcodes.MAX_BED_TEMP else temp
-                self._screen._ws.klippy.set_bed_temp(temp)
-            elif self.active_heater.startswith("temperature_fan "):
-                temp = int(text)
-                self._screen._ws.klippy.set_temp_fan_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
-            else:
-                temp = int(text)
-                temp = 0 if temp < 0 or temp > KlippyGcodes.MAX_EXT_TEMP else temp
-                self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(self.active_heater), temp)
-            self._printer.set_dev_stat(self.active_heater, "target", temp)
-            self.labels['entry'].set_text("")
-        else:
-            if len(text) >= 3:
-                return
-            self.labels['entry'].set_text(text + digit)
