@@ -19,11 +19,6 @@ SCREEN_BLANKING_OPTIONS = [
     "14400",  # 4 Hours
 ]
 
-INTERFACE_MODE = [
-    "defaults_simple.conf", # упращенный интерфейс ks
-    "defaults_expert.conf" # стандартный интерфейс ks, причесанный z-bolt
-]
-
 class ConfigError(Exception):
     pass
 
@@ -34,7 +29,7 @@ class KlipperScreenConfig:
     do_not_edit_prefix = "#~#"
 
     def __init__(self, configfile, screen=None):
-        self.default_simple_config_path = "%s/ks_includes/%s" % (os.getcwd(), "defaults_simple.conf")
+        self.default_config_path = "%s/ks_includes/%s" % (os.getcwd(), "defaults_simple.conf")
         self.default_expert_config_path = "%s/ks_includes/%s" % (os.getcwd(), "defaults_expert.conf")
         self.config = configparser.ConfigParser()
         self.config_path = self.get_config_file_location(configfile)
@@ -42,8 +37,8 @@ class KlipperScreenConfig:
         self.defined_config = None
 
         try:
-            self.config.read(self.default_simple_config_path)
-            if self.config_path != self.default_simple_config_path:
+            self.config.read(self.default_config_path)
+            if self.config_path != self.default_config_path:
                 user_def, saved_def = self.separate_saved_config(self.config_path)
                 self.defined_config = configparser.ConfigParser()
                 self.defined_config.read_string(user_def)
@@ -113,12 +108,6 @@ class KlipperScreenConfig:
             {"invert_x": {"section": "main", "name": _("Invert X"), "type": "binary", "value": "False"}},
             {"invert_y": {"section": "main", "name": _("Invert Y"), "type": "binary", "value": "False"}},
             {"invert_z": {"section": "main", "name": _("Invert Z"), "type": "binary", "value": "False"}},
-            #{"interface": {"section": "main", "name": _("Interface"), "type": "dropdown", "value": "defaults_simple.conf", 
-            #    "callback": screen.restart_warning, "options": [
-            #     {"name": _("Easy"), "value": "defaults_simple.conf"},
-            #     {"name": _("God"), "value": "defaults_expert.conf"}
-            #    ]
-            #}},
             {"language": {"section": "main", "name": _("Language"), "type": "dropdown", "value": "system_lang",
                           "callback": screen.restart_warning, "options": [
                               {"name": _("System") + " " + _("(default)"), "value": "system_lang"}
@@ -138,10 +127,6 @@ class KlipperScreenConfig:
                 "section": "main", "name": _("Screen Power Off Time"), "type": "dropdown",
                 "value": "3600", "callback": screen.set_screenblanking_timeout, "options": [
                     {"name": _("Off"), "value": "off"}]
-            {"interface": {
-                "section": "main", "name": _("Mode interface"), "type": "dropdown",
-                "value": "defaults_simple.conf", "options": [
-                    {"name": _("Simple"), "value": "defaults_simple.conf"}
             }},
             {"theme": {
                 "section": "main", "name": _("Icon Theme"), "type": "dropdown",
@@ -157,6 +142,8 @@ class KlipperScreenConfig:
                     {"name": _("Small"), "value": "small"},
                     {"name": _("Medium") + " " + _("(default)"), "value": "medium"},
                     {"name": _("Large"), "value": "large"}]}},
+            {"confirm_estop": {"section": "main", "name": "Подтверждение при экстренном стопе", "type": "binary",
+                               "value": "False"}},
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
 
@@ -167,36 +154,6 @@ class KlipperScreenConfig:
 
         for lang in langs:
             lang_opt.append({"name": lang, "value": lang})
-
-#        in_path = os.path.join(os.getcwd(), 'ks_includes')
-#        interfaces = [d for d in os.listdir(in_path) if (not os.path.isfile(os.path.join(in_path, d)) and d != "defaults_simple.conf")]
-#        interfaces.sort()
-#        interface_opt = self.configurable_options[2]['interface']['options']
-
-#        for interface in interfaces:
-#            interface_opt.append({"name": interface, "value": interface})
-        interface_mode = self.configurable_options.interface_mode(
-            [i for i in self.configurable_options if list(i)[0] == "interface"][0])
-        for mod in INTERFACE_MODE:
-            select_mod = int(int(num))
-            if select_mod == defaults_simple.conf:
-                name = str(select_mod) + " " + _n("Simple")
-            else:
-                name = str(select_mod) + " " + _n("Expert")
-            self.configurable_options[interface_mode]['interface']['options'].append({
-                "name": name,
-                "value": mod
-            })
-
-        for item in self.configurable_options:
-            name = list(item)[0]
-            vals = item[name]
-            if vals['section'] not in self.config.sections():
-                self.config.add_section(vals['section'])
-            if name not in list(self.config[vals['section']]):
-                self.config.set(vals['section'], name, vals['value'])
-
-
 
         t_path = os.path.join(os.getcwd(), 'styles')
         themes = [d for d in os.listdir(t_path) if (not os.path.isfile(os.path.join(t_path, d)) and d != "z-bolt")]
@@ -285,7 +242,7 @@ class KlipperScreenConfig:
             if not path.exists(file):
                 file = os.path.expanduser("~/") + "klipper_config/%s" % (self.configfile_name)
                 if not path.exists(file):
-                    file = self.default_simple_config_path
+                    file = self.default_config_path
 
         logging.info("Found configuration file at: %s" % file)
         return file
@@ -350,7 +307,7 @@ class KlipperScreenConfig:
         return self.printers
 
     def get_user_saved_config(self):
-        if self.config_path != self.default_simple_config_path:
+        if self.config_path != self.default_config_path:
             print("Get")
 
     def save_user_config_options(self):
@@ -382,7 +339,7 @@ class KlipperScreenConfig:
         for i in range(len(save_output)):
             save_output[i] = "%s %s" % (self.do_not_edit_prefix, save_output[i])
 
-        if self.config_path == self.default_simple_config_path:
+        if self.config_path == self.default_config_path:
             user_def = ""
             saved_def = None
         else:
@@ -393,7 +350,7 @@ class KlipperScreenConfig:
             user_def, self.do_not_edit_line, extra_lb, self.do_not_edit_prefix, "\n".join(save_output),
             self.do_not_edit_prefix)
 
-        if self.config_path != self.default_simple_config_path:
+        if self.config_path != self.default_config_path:
             path = self.config_path
         else:
             path = os.path.expanduser("~/")

@@ -35,7 +35,7 @@ class ScreenPanel:
         _ = self.lang.gettext
 
         if self._config.get_main_config_option('confirm_estop') == "True":
-            self._screen._confirm_send_action(widget, _("Вы точно хотите экстренно остановить принтер?"),
+            self._screen._confirm_send_action(widget, _("Are you sure you want to run Emergency Stop?"),
                                               "printer.emergency_stop")
         else:
             self._screen._ws.klippy.emergency_stop()
