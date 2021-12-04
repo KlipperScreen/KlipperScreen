@@ -6,7 +6,7 @@ import logging
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
 from panels.menu import MenuPanel
-from ks_includes.graph import HeaterGraph
+from ks_includes.widgets.graph import HeaterGraph
 
 def create_panel(*args):
     return MainPanel(*args)
@@ -97,7 +97,6 @@ class MainPanel(MenuPanel):
         child = name.get_children()[0].get_children()[0].get_children()[1]
         child.set_ellipsize(True)
         child.set_ellipsize(Pango.EllipsizeMode.END)
-        logging.info("DClass %s %s" % (device, class_name))
 
 
         temp = Gtk.Label("")
@@ -229,9 +228,7 @@ class MainPanel(MenuPanel):
     def update_graph(self):
         self.labels['da'].queue_draw()
         alloc = self.labels['devices'].get_allocation()
-        logging.info("Devices height: %s" % alloc.height)
         alloc = self.labels['da'].get_allocation()
-        logging.info("DA height: %s" % alloc.height)
         return True
 
     def update_temp(self, device, temp, target):
