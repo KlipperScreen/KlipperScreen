@@ -1,0 +1,6 @@
+#define emptyCursor_width 1
+#define emptyCursor_height 1
+#define emptyCursor_x_hot 0
+#define emptyCursor_y_hot 0
+static unsigned char emptyCursor_bits[] = {
+0x00};
