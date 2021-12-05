@@ -202,9 +202,14 @@ class SystemPanel(ScreenPanel):
                         label = Gtk.Label()
                         label.set_ellipsize(True)
                         label.set_ellipsize(Pango.EllipsizeMode.END)
-                        label.set_markup("%s\n<i>%s</i>\n" % (c['subject'], c['author']))
+                        label.set_markup("<b>%s</b>\n<i>%s</i>\n" % (c['subject'], c['author']))
                         label.set_halign(Gtk.Align.START)
                         grid.attach(label, 0, i, 1, 1)
+                        i = i + 1
+
+                        details = Gtk.Label(label=c['message']+"\n\n\n")
+                        details.set_halign(Gtk.Align.START)
+                        grid.attach(details, 0, i, 1, 1)
                         i = i + 1
             else:
                 label.set_markup("<b>" + _("%s will be updated to version") % program.capitalize() +

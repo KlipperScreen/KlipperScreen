@@ -115,15 +115,15 @@ class KlipperScreen(Gtk.Window):
         _ = self.lang.gettext
 
         Gtk.Window.__init__(self)
-        self.width = self._config.get_main_config().getint("width", Gdk.Screen.get_width(Gdk.Screen.get_default()))
-        self.height = self._config.get_main_config().getint("height", Gdk.Screen.get_height(Gdk.Screen.get_default()))
+        monitor = Gdk.Display.get_default().get_primary_monitor()
+        self.width = self._config.get_main_config().getint("width", monitor.get_geometry().width)
+        self.height = self._config.get_main_config().getint("height", monitor.get_geometry().height)
         self.set_default_size(self.width, self.height)
         self.set_resizable(False)
         logging.info("Screen resolution: %sx%s" % (self.width, self.height))
-
         self.theme = self._config.get_main_config_option('theme')
-        self.gtk = KlippyGtk(self, self.width, self.height, self.theme,
-                             self._config.get_main_config().getboolean("show_cursor", fallback=False),
+        self.show_cursor = self._config.get_main_config().getboolean("show_cursor", fallback=False)
+        self.gtk = KlippyGtk(self, self.width, self.height, self.theme, self.show_cursor,
                              self._config.get_main_config_option("font_size", "medium"))
         self.keyboard_height = self.gtk.get_keyboard_height()
         self.init_style()
@@ -132,6 +132,7 @@ class KlipperScreen(Gtk.Window):
         self.add(self.base_panel.get())
         self.show_all()
         self.base_panel.activate()
+        self.touch_ready = True
 
         self.printer_initializing(_("Initializing"))
 
@@ -139,11 +140,7 @@ class KlipperScreen(Gtk.Window):
 
         # Move mouse to 0,0
         os.system("/usr/bin/xdotool mousemove 0 0")
-        # Change cursor to blank
-        if self._config.get_main_config().getboolean("show_cursor", fallback=False):
-            self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.ARROW))
-        else:
-            self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.BLANK_CURSOR))
+        self.change_cursor()
 
         printers = self._config.get_printers()
         logging.debug("Printers: %s" % printers)
@@ -546,12 +543,29 @@ class KlipperScreen(Gtk.Window):
 
     def check_dpms_state(self):
         state = functions.get_DPMS_state()
-        if state == functions.DPMS_State.Off and "screensaver" not in self._cur_panels:
-            logging.info("### Creating screensaver panel")
-            self.show_panel("screensaver", "screensaver", "Screen Saver", 1, False)
-        elif state == functions.DPMS_State.On and "screensaver" in self._cur_panels:
-            logging.info("### Remove screensaver panel")
-            self._menu_go_back()
+
+        if state == functions.DPMS_State.Fail:
+            logging.info("DPMS State FAIL -> Showing KlipperScreen, Stopping DPMS Check")
+            self.show()
+            self.change_cursor()
+            return False
+
+        visible = self.get_property("visible")
+        if state != functions.DPMS_State.On and visible:
+            logging.info("DPMS State %s -> Hiding", state)
+            self.hide()
+            self.change_cursor("watch")
+            self.touch_ready = False
+        elif state == functions.DPMS_State.On and not visible:
+            if self.touch_ready:
+                logging.info("DPMS State On -> Showing KlipperScreen")
+                self.show()
+                self.change_cursor()
+            else:
+                logging.info("DPMS State On -> Screen touched")
+                self.touch_ready = True
+        else:
+            self.touch_ready = False
         return True
 
     def wake_screen(self):
@@ -583,7 +597,7 @@ class KlipperScreen(Gtk.Window):
             return
         os.system("xset -display :0 dpms 0 %s 0" % time)
         if self.dpms_timeout is None and functions.dpms_loaded is True:
-            self.dpms_timeout = GLib.timeout_add(1000, self.check_dpms_state)
+            self.dpms_timeout = GLib.timeout_add(500, self.check_dpms_state)
 
     def set_updating(self, updating=False):
         if self.updating is True and updating is False:
@@ -898,6 +912,17 @@ class KlipperScreen(Gtk.Window):
         self.base_panel.get_content().remove(self.keyboard['box'])
         os.kill(self.keyboard['process'].pid, signal.SIGTERM)
         self.keyboard = None
+
+    def change_cursor(self, cursortype=None):
+        if cursortype == "watch":
+            os.system("xsetroot  -cursor_name  watch")
+        elif self.show_cursor:
+            self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.ARROW))
+            os.system("xsetroot  -cursor_name  arrow")
+        else:
+            self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.BLANK_CURSOR))
+            os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
+        return
 
 def main():
 
