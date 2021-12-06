@@ -449,15 +449,15 @@ popover button {
 
 /* Hardcoded values until creation of dynamic CSS updates */
 .graph_label_hidden {padding-left: .9em;} /* .4em on top of normal button padding */
-.graph_label_extruder {border-left: .4em solid  #ff5252;}
-.graph_label_extruder2 {border-left: .4em solid  #ff7252;}
-.graph_label_heater_bed {border-left: .4em solid  #1fb0ff;}
-.graph_label_fan_1 {border-left: .4em solid  #3DC25A;}
-.graph_label_fan_2 {border-left: .4em solid  #58FC7C;}
-.graph_label_fan_3 {border-left: .4em solid  #10EB40;}
-.graph_label_fan_4 {border-left: .4em solid  #7EF297;}
-.graph_label_sensor_1 {border-left: .4em solid  #D67600;}
-.graph_label_sensor_2 {border-left: .4em solid  #830EE3;}
-.graph_label_sensor_3 {border-left: .4em solid  #B366F2;}
-.graph_label_sensor_4 {border-left: .4em solid  #E06573;}
-.graph_label_sensor_5 {border-left: .4em solid  #E38819;}
+.graph_label_extruder {border-left-width: .4em; border-left-style: solid;}
+.graph_label_extruder2 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_heater_bed {border-left-width: .4em; border-left-style: solid;}
+.graph_label_fan_1 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_fan_2 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_fan_3 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_fan_4 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_sensor_1 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_sensor_2 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_sensor_3 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_sensor_4 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_sensor_5 {border-left-width: .4em; border-left-style: solid;}
