@@ -75,7 +75,6 @@ class MainPanel(MenuPanel):
             image = "bed"
             devname = "Heater Bed"
             class_name = "graph_label_heater_bed"
-            rgb = [1, 0, 0]
             rgb, color = self._gtk.get_temp_color("bed")
         else:
             s = 1
@@ -84,7 +83,6 @@ class MainPanel(MenuPanel):
                     s += 1
             image = "heat-up"
             class_name = "graph_label_sensor_%s" % s
-            rgb = [1, 0, 0]
             rgb, color = self._gtk.get_temp_color("sensor")
 
 

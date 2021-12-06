@@ -96,7 +96,7 @@ class HeaterGraph(Gtk.DrawingArea):
         points_per_pixel = self.max_length / graph_width
         if points_per_pixel > 3:
             points_per_pixel = 3
-        data_points = graph_width * points_per_pixel
+        data_points = int(round(graph_width * points_per_pixel, 0))
         max_num = math.ceil(self.get_max_num(data_points) * 1.1 / 10) * 10
         d_width = 1 / points_per_pixel
 

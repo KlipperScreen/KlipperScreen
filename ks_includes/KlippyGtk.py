@@ -36,26 +36,7 @@ class KlippyGtk:
         self.header_image_scale_height = 1.4
         self.cursor = cursor
 
-        self.color_list = {
-            "extruder": {
-                "base": 'ff5252',
-                "hsplit": int('20', 16),
-                "state": 0
-            },
-            "bed": {
-                "base": '1fb0ff',
-                "hsplit": int('20', 16),
-                "state": 0
-            },
-            "fan": {
-                "colors": ['3DC25A', '58FC7C', '10EB40', '7EF297'],
-                "state": 0
-            },
-            "sensor": {
-                "colors": ['D67600', '830EE3', 'B366F2', 'E06573', 'E38819'],
-                "state": 0
-            }
-        }
+        self.color_list = {}  # This is set by screen.py init_style()
 
         for key in self.color_list:
             if "base" in self.color_list[key]:
@@ -92,6 +73,7 @@ class KlippyGtk:
         return (self.width - self.get_action_bar_width()) * self.keyboard_ratio
 
     def get_temp_color(self, device):
+        logging.debug("Color list %s" % self.color_list)
         if device not in self.color_list:
             return False, False
 
@@ -102,10 +84,15 @@ class KlippyGtk:
             self.color_list[device]['state'] += 1
             color = '{:02X}{:02X}{:02X}'.format(rgb[0], rgb[1], rgb[2])
             rgb = [x/255 for x in rgb]
+            logging.debug("Assigning color: %s %s %s" % (device, rgb, color))
         else:
             colors = self.color_list[device]['colors']
+            if self.color_list[device]['state'] >= len(colors):
+                self.color_list[device]['state'] = 0
             color = colors[self.color_list[device]['state'] % len(colors)]
             rgb = [int(color[i:i+2], 16)/255 for i in range(0, 6, 2)]
+            self.color_list[device]['state'] += 1
+            logging.debug("Assigning color: %s %s %s" % (device, rgb, color))
 
         return rgb, color
 
