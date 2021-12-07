@@ -70,12 +70,12 @@ class MainPanel(MenuPanel):
                     i += 1
             image = "extruder-%s" % i
             class_name = "graph_label_%s" % device
-            rgb, color = self._gtk.get_temp_color("extruder")
+            type = "extruder"
         elif device == "heater_bed":
             image = "bed"
             devname = "Heater Bed"
             class_name = "graph_label_heater_bed"
-            rgb, color = self._gtk.get_temp_color("bed")
+            type = "bed"
         else:
             s = 1
             for d in self.devices:
@@ -83,8 +83,9 @@ class MainPanel(MenuPanel):
                     s += 1
             image = "heat-up"
             class_name = "graph_label_sensor_%s" % s
-            rgb, color = self._gtk.get_temp_color("sensor")
+            type = "sensor"
 
+        rgb, color = self._gtk.get_temp_color(type)
 
         can_target = self._printer.get_temp_store_device_has_target(device)
         self.labels['da'].add_object(device, "temperatures", rgb, False, True)
@@ -118,6 +119,7 @@ class MainPanel(MenuPanel):
 
         self.devices[device] = {
             "class": class_name,
+            "type": type,
             "name": name,
             "temp": temp
         }
@@ -228,10 +230,12 @@ class MainPanel(MenuPanel):
 
         if self.labels['da'].is_showing(self.popover_device):
             pobox.pack_start(self.labels['graph_hide'], True, True, 5)
-            pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
+            if self.devices[self.popover_device]['type'] != "sensor":
+                pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
         else:
             pobox.pack_start(self.labels['graph_show'], True, True, 5)
-            pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
+            if self.devices[self.popover_device]['type'] != "sensor":
+                pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
 
     def process_update(self, action, data):
         if action != "notify_status_update":
