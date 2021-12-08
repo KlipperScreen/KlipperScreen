@@ -452,8 +452,6 @@ class KlipperScreen(Gtk.Window):
         style_options = json.load(f)
         f.close()
 
-        self.gtk.color_list = style_options['graph_colors']
-
         if os.path.exists(klipperscreendir + "/styles/%s/style.conf" % (self.theme)):
             try:
                 f = open(klipperscreendir + "/styles/%s/style.conf" % (self.theme))
@@ -461,6 +459,8 @@ class KlipperScreen(Gtk.Window):
                 f.close()
             except Exception:
                 logging.error("Unable to parse custom template conf file.")
+
+        self.gtk.color_list = style_options['graph_colors']
 
         for i in range(len(style_options['graph_colors']['extruder']['colors'])):
             num = "" if i == 0 else i+1
