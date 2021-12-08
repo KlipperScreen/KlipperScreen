@@ -27,9 +27,9 @@ xf86OpenConsole: Cannot open virtual console 2 (Permission denied)
 * Check /etc/X11/Xwrapper.conf
 This should have the line `allowed_users=anybody` in it
 * Check /etc/group
-Run the command `cat /etc/group | grep tty`. If you username is not listed under that line, you need to add it with the
-following command (if you username is not 'pi' change 'pi' to your username):
-`usermode -a -G tty pi`
+Run the command `cat /etc/group | grep tty`. If your username is not listed under that line, you need to add it with the
+following command (if your username is not 'pi' change 'pi' to your username):
+`usermod -a -G tty pi`
 
 
 ### Problems occurring with the log file

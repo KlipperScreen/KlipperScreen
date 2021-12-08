@@ -40,6 +40,19 @@ class ScreenPanel:
         else:
             self._screen._ws.klippy.emergency_stop()
 
+    def format_target(self, temp):
+        if temp <= 0:
+            return ""
+        else:
+            return self.format_temp(temp, 0)
+
+    def format_temp(self, temp, places=1):
+        if places == 0:
+            n = int(temp)
+        else:
+            n = round(temp, places)
+        return "%s<small>°C</small>" % str(n)
+
     def get(self):
         return self.layout
 

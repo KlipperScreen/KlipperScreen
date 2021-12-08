@@ -25,6 +25,7 @@ class Printer:
         self.state = "disconnected"
         self.state_cb = state_execute_cb
         self.power_devices = {}
+        self.store_timeout = False
 
     def reinit(self, printer_info, data):
         logging.debug("Moonraker object status: %s" % data)
@@ -35,6 +36,9 @@ class Printer:
         self.devices = {}
         self.data = data
         self.klipper = {}
+        self.tempstore = {}
+        if self.store_timeout is False:
+            GLib.timeout_add_seconds(1, self._update_temp_store)
 
         self.klipper = {
             "version": printer_info['software_version']
@@ -270,6 +274,33 @@ class Printer:
     def get_extruder_count(self):
         return self.extrudercount
 
+    def get_temp_store_devices(self):
+        return list(self.tempstore)
+
+    def get_temp_store_device_has_target(self, device):
+        if device in self.tempstore:
+            if "targets" in self.tempstore[device]:
+                return True
+        return False
+
+    def get_temp_store(self, device, section=False, results=0):
+        if device not in self.tempstore:
+            return False
+
+        if section is not False:
+            if section not in self.tempstore[device]:
+                return False
+            if results == 0 or results >= len(self.tempstore[device][section]):
+                return self.tempstore[device][section]
+            return self.tempstore[device][section][-results:]
+
+        temp = {}
+        for section in self.tempstore[device]:
+            if results == 0 or results >= len(self.tempstore[device][section]):
+                temp[section] = self.tempstore[device][section]
+            temp[section] = self.tempstore[device][section][-results:]
+        return temp
+
     def get_tools(self):
         return self.tools
 
@@ -279,6 +310,15 @@ class Printer:
     def has_heated_bed(self):
         if "heater_bed" in self.devices:
             return True
+
+    def init_temp_store(self, result):
+        for dev in result:
+            self.tempstore[dev] = {}
+            if "targets" in result[dev]:
+                self.tempstore[dev]["targets"] = result[dev]["targets"]
+            if "temperatures" in result[dev]:
+                self.tempstore[dev]["temperatures"] = result[dev]["temperatures"]
+        logging.info("Temp store: %s" % list(self.tempstore))
 
     def section_exists(self, section):
         if section in self.get_config_section_list():
@@ -295,3 +335,11 @@ class Printer:
             return
 
         self.devices[dev][stat] = value
+
+    def _update_temp_store(self):
+        for device in self.tempstore:
+            for x in self.tempstore[device]:
+                if len(self.tempstore[device][x]) >= 1200:
+                    self.tempstore[device][x].pop(0)
+                self.tempstore[device][x].append(round(self.get_dev_stat(device, x[:-1]), 2))
+        return True

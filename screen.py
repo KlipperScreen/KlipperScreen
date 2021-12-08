@@ -448,6 +448,42 @@ class KlipperScreen(Gtk.Window):
         css_data = css_base_data + css.read()
         css.close()
 
+        f = open(klipperscreendir + "/styles/base.conf")
+        style_options = json.load(f)
+        f.close()
+
+        if os.path.exists(klipperscreendir + "/styles/%s/style.conf" % (self.theme)):
+            try:
+                f = open(klipperscreendir + "/styles/%s/style.conf" % (self.theme))
+                style_options.update(json.load(f))
+                f.close()
+            except Exception:
+                logging.error("Unable to parse custom template conf file.")
+
+        self.gtk.color_list = style_options['graph_colors']
+
+        for i in range(len(style_options['graph_colors']['extruder']['colors'])):
+            num = "" if i == 0 else i+1
+            css_data += "\n.graph_label_extruder%s {border-left-color: #%s}" % (
+                num,
+                style_options['graph_colors']['extruder']['colors'][i]
+            )
+        for i in range(len(style_options['graph_colors']['bed']['colors'])):
+            css_data += "\n.graph_label_heater_bed%s {border-left-color: #%s}" % (
+                "" if i+1 == 1 else i+1,
+                style_options['graph_colors']['bed']['colors'][i]
+            )
+        for i in range(len(style_options['graph_colors']['fan']['colors'])):
+            css_data += "\n.graph_label_fan_%s {border-left-color: #%s}" % (
+                i+1,
+                style_options['graph_colors']['fan']['colors'][i]
+            )
+        for i in range(len(style_options['graph_colors']['sensor']['colors'])):
+            css_data += "\n.graph_label_sensor_%s {border-left-color: #%s}" % (
+                i+1,
+                style_options['graph_colors']['sensor']['colors'][i]
+            )
+
         css_data = css_data.replace("KS_FONT_SIZE", str(self.gtk.get_font_size()))
 
         style_provider = Gtk.CssProvider()
@@ -501,12 +537,16 @@ class KlipperScreen(Gtk.Window):
     def _remove_current_panel(self, pop=True, show=True):
         if len(self._cur_panels) > 0:
             self.base_panel.remove(self.panels[self._cur_panels[-1]].get_content())
+            if hasattr(self.panels[self._cur_panels[-1]], "deactivate"):
+                self.panels[self._cur_panels[-1]].deactivate()
             self.remove_subscription(self._cur_panels[-1])
             if pop is True:
                 self._cur_panels.pop()
                 if len(self._cur_panels) > 0:
                     self.base_panel.add_content(self.panels[self._cur_panels[-1]])
                     self.base_panel.show_back(False if len(self._cur_panels) == 1 else True)
+                    if hasattr(self.panels[self._cur_panels[-1]], "activate"):
+                        self.panels[self._cur_panels[-1]].activate()
                     if hasattr(self.panels[self._cur_panels[-1]], "process_update"):
                         self.panels[self._cur_panels[-1]].process_update("notify_status_update",
                                                                          self.printer.get_updates())
@@ -842,7 +882,10 @@ class KlipperScreen(Gtk.Window):
         if data is False:
             logging.info("Error getting printer object data")
             return False
-        logging.info("Startup data: %s" % data['result']['status'])
+
+        tempstore = self.apiclient.send_request("server/temperature_store")
+        if tempstore is not False:
+            self.printer.init_temp_store(tempstore['result'])
         self.printer.process_update(data['result']['status'])
 
         self.files.initialize()
