@@ -177,9 +177,9 @@ class ExtrudePanel(ScreenPanel):
 
     def load_unload(self, widget, dir):
         if dir == "-":
-            self._screen._ws.klippy.gcode_script("UNLOAD_FILAMENT")
+            self._screen._ws.klippy.gcode_script("UNLOAD_FILAMENT SPEED=" + str(int(self.speed) * 60))
         if dir == "+":
-            self._screen._ws.klippy.gcode_script("LOAD_FILAMENT")
+            self._screen._ws.klippy.gcode_script("LOAD_FILAMENT SPEED=" + str(int(self.speed) * 60))
 
     def find_gcode_macros(self):
         macros = self._screen.printer.get_gcode_macros()
