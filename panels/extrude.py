@@ -38,9 +38,9 @@ class ExtrudePanel(ScreenPanel):
         self.labels['extrude'] = self._gtk.ButtonImage("extrude", _("Extrude"), "color4")
         self.labels['extrude'].connect("clicked", self.extrude, "+")
         self.labels['load'] = self._gtk.ButtonImage("arrow-down", _("Load"), "color3")
-        self.labels['load'].connect("clicked", self.load_unload, "+")
+        self.labels['load'].connect("clicked", self.load_unload, "+", self.load_filament)
         self.labels['unload'] = self._gtk.ButtonImage("arrow-up", _("Unload"), "color2")
-        self.labels['unload'].connect("clicked", self.load_unload, "-")
+        self.labels['unload'].connect("clicked", self.load_unload, "-", self.unload_filament)
         self.labels['retract'] = self._gtk.ButtonImage("retract", _("Retract"), "color1")
         self.labels['retract'].connect("clicked", self.extrude, "-")
         self.labels['temperature'] = self._gtk.ButtonImage("heat-up", _("Temperature"), "color4")
@@ -52,10 +52,8 @@ class ExtrudePanel(ScreenPanel):
         if i < 4:
             grid.attach(self.labels['temperature'], 3, 0, 1, 1)
         grid.attach(self.labels['extrude'], 0, 1, 1, 1)
-        if self.load_filament:
-            grid.attach(self.labels['load'], 1, 1, 1, 1)
-        if self.unload_filament:
-            grid.attach(self.labels['unload'], 2, 1, 1, 1)
+        grid.attach(self.labels['load'], 1, 1, 1, 1)
+        grid.attach(self.labels['unload'], 2, 1, 1, 1)
         grid.attach(self.labels['retract'], 3, 1, 1, 1)
 
         distgrid = Gtk.Grid()
@@ -175,11 +173,17 @@ class ExtrudePanel(ScreenPanel):
         self._screen._ws.klippy.gcode_script(KlippyGcodes.EXTRUDE_REL)
         self._screen._ws.klippy.gcode_script(KlippyGcodes.extrude(dist, speed))
 
-    def load_unload(self, widget, dir):
+    def load_unload(self, widget, dir, found):
         if dir == "-":
-            self._screen._ws.klippy.gcode_script("UNLOAD_FILAMENT")
+            if not found:
+                self._screen.show_popup_message("Macro UNLOAD_FILAMENT not found")
+            else:
+                self._screen._ws.klippy.gcode_script("UNLOAD_FILAMENT")
         if dir == "+":
-            self._screen._ws.klippy.gcode_script("LOAD_FILAMENT")
+            if not found:
+                self._screen.show_popup_message("Macro LOAD_FILAMENT not found")
+            else:
+                self._screen._ws.klippy.gcode_script("LOAD_FILAMENT")
 
     def find_gcode_macros(self):
         macros = self._screen.printer.get_gcode_macros()
