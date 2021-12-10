@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 from matplotlib import rc
 from mpl_toolkits.mplot3d import Axes3D
-from matplotlib.backends.backend_gtk3cairo import FigureCanvasGTK3Cairo as FigureCanvas
+from matplotlib.backends.backend_gtk3agg import FigureCanvasGTK3Agg as FigureCanvas
 from matplotlib.ticker import LinearLocator
 
 from ks_includes.KlippyGcodes import KlippyGcodes
