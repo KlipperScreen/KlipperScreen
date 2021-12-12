@@ -1,8 +1,6 @@
 # KlipperScreen
 
-KlipperScreen is touchscreen GUI for Klipper based 3D printers. KlipperScreen interfaces with [Klipper](https://github.com/kevinOConnor/klipper) via [Moonraker](https://github.com/arksine/moonraker).
-
-Multiple printers update is here! Please check the configuration information for specifying several printers.
+KlipperScreen is a touchscreen GUI that interfaces with [Klipper](https://github.com/kevinOConnor/klipper) via [Moonraker](https://github.com/arksine/moonraker). It can switch between multiple printers to access them from a single location, and it doesn't even need to run on the same host, you can install it on another device and configure the IP address to access the printer.
 
 ### Documentation
 
