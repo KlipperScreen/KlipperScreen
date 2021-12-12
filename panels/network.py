@@ -187,7 +187,10 @@ class NetworkPanel(ScreenPanel):
                 if connected_ssid in nets:
                     nets.remove(connected_ssid)
             nets = sorted(nets, reverse=reverse)
-            pos = nets.index(ssid)
+            try:
+                pos = nets.index(ssid)
+            except Exception:
+                pass
             if connected_ssid is not None:
                 pos += 1
 
