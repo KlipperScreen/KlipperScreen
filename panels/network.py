@@ -205,6 +205,7 @@ class NetworkPanel(ScreenPanel):
             self.labels['networklist'].show()
 
     def add_new_network(self, widget, ssid, connect=False):
+        self._screen.remove_keyboard()
         networks = self._screen.wifi.get_networks()
         psk = self.labels['network_psk'].get_text()
         result = self._screen.wifi.add_network(ssid, psk)
