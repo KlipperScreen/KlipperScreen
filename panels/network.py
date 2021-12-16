@@ -283,7 +283,6 @@ class NetworkPanel(ScreenPanel):
         scroll.set_property("overlay-scrolling", False)
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
-        scroll.set_size_request(800, 400)
         self.labels['connecting_info'] = Gtk.Label(_("Starting WiFi Re-association"))
         self.labels['connecting_info'].set_halign(Gtk.Align.START)
         self.labels['connecting_info'].set_valign(Gtk.Align.START)
