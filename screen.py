@@ -18,7 +18,7 @@ import signal
 import subprocess
 import sys
 import traceback
-
+import pathlib
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
@@ -55,7 +55,7 @@ PRINTER_BASE_STATUS_OBJECTS = [
     'webhooks'
 ]
 
-klipperscreendir = os.getcwd()
+klipperscreendir = pathlib.Path(__file__).parent.resolve()
 
 class KlipperScreen(Gtk.Window):
     """ Class for creating a screen for Klipper via HDMI """
@@ -440,21 +440,21 @@ class KlipperScreen(Gtk.Window):
 
     def init_style(self):
         style_provider = Gtk.CssProvider()
-
-        css = open(klipperscreendir + "/styles/base.css")
+        css = open(os.path.join(klipperscreendir, "styles", "base.css"))
         css_base_data = css.read()
         css.close()
-        css = open(klipperscreendir + "/styles/%s/style.css" % (self.theme))
+        css = open(os.path.join(klipperscreendir, "styles", self.theme, "style.css"))
         css_data = css_base_data + css.read()
         css.close()
 
-        f = open(klipperscreendir + "/styles/base.conf")
+        f = open(os.path.join(klipperscreendir, "styles", "base.conf"))
         style_options = json.load(f)
         f.close()
 
-        if os.path.exists(klipperscreendir + "/styles/%s/style.conf" % (self.theme)):
+        theme_style_conf = os.path.join(klipperscreendir, "styles", self.theme, "style.conf")
+        if os.path.exists(theme_style_conf):
             try:
-                f = open(klipperscreendir + "/styles/%s/style.conf" % (self.theme))
+                f = open(theme_style_conf)
                 style_options.update(json.load(f))
                 f.close()
             except Exception:

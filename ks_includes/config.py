@@ -5,6 +5,7 @@ import logging
 import json
 import re
 import copy
+import pathlib
 
 from io import StringIO
 
@@ -19,6 +20,8 @@ SCREEN_BLANKING_OPTIONS = [
     "14400",  # 4 Hours
 ]
 
+klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
+
 class ConfigError(Exception):
     pass
 
@@ -29,7 +32,7 @@ class KlipperScreenConfig:
     do_not_edit_prefix = "#~#"
 
     def __init__(self, configfile, screen=None):
-        self.default_config_path = "%s/ks_includes/%s" % (os.getcwd(), "defaults.conf")
+        self.default_config_path = os.path.join(klipperscreendir, "ks_includes", "defaults.conf")
         self.config = configparser.ConfigParser()
         self.config_path = self.get_config_file_location(configfile)
         logging.debug("Config path location: %s" % self.config_path)
@@ -146,7 +149,7 @@ class KlipperScreenConfig:
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
 
-        lang_path = os.path.join(os.getcwd(), 'ks_includes/locales')
+        lang_path = os.path.join(klipperscreendir, "ks_includes", "locales")
         langs = [d for d in os.listdir(lang_path) if not os.path.isfile(os.path.join(lang_path, d))]
         langs.sort()
         lang_opt = self.configurable_options[3]['language']['options']
@@ -154,7 +157,7 @@ class KlipperScreenConfig:
         for lang in langs:
             lang_opt.append({"name": lang, "value": lang})
 
-        t_path = os.path.join(os.getcwd(), 'styles')
+        t_path = os.path.join(klipperscreendir, 'styles')
         themes = [d for d in os.listdir(t_path) if (not os.path.isfile(os.path.join(t_path, d)) and d != "z-bolt")]
         themes.sort()
         theme_opt = self.configurable_options[8]['theme']['options']
@@ -237,7 +240,7 @@ class KlipperScreenConfig:
     def get_config_file_location(self, file):
         logging.info("Passed config file: %s" % file)
         if not path.exists(file):
-            file = "%s/%s" % (os.getcwd(), self.configfile_name)
+            file = os.path.join(klipperscreendir, self.configfile_name)
             if not path.exists(file):
                 file = os.path.expanduser("~/") + "klipper_config/%s" % (self.configfile_name)
                 if not path.exists(file):
