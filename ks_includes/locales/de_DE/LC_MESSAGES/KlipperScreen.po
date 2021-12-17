@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-18 11:29-0300\n"
-"PO-Revision-Date: 2021-11-18 11:32-0300\n"
+"PO-Revision-Date: 2021-12-12 08:45-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -74,10 +74,8 @@ msgstr "Druck abbrechen"
 msgid "Cancelled"
 msgstr "Abgebrochen"
 
-#, fuzzy
-#| msgid "Cancel"
 msgid "Cancelling"
-msgstr "Abbruch"
+msgstr "Abbrechen"
 
 msgid "Channel"
 msgstr "Kanal"
@@ -246,7 +244,7 @@ msgid "Interface"
 msgstr "Interface"
 
 msgid "Invalid"
-msgstr "ungültig"
+msgstr "Ungültig"
 
 msgid "Invert X"
 msgstr "Achse X invertieren"
@@ -305,7 +303,7 @@ msgid "Left:"
 msgstr "Restzeit:"
 
 msgid "Limits"
-msgstr "Grenzwerte:"
+msgstr "Grenzwerte"
 
 msgid "Load"
 msgstr "Laden"
@@ -355,8 +353,9 @@ msgstr "Name"
 msgid "Network"
 msgstr "Netzwerk"
 
+# Nummernblock is 2 character too long and currently doesn't fit
 msgid "Number Pad"
-msgstr "Nummernblock"
+msgstr "Tastenfeld"
 
 msgid "Off"
 msgstr "Aus"
@@ -407,11 +406,15 @@ msgstr "Quad Gantry Level"
 msgid "Raise Nozzle"
 msgstr "Düse anheben"
 
+# Respect the number of characters!
+# english text barely fits in small screens
 msgid "Recover Hard"
-msgstr "Wiederherstellung Hart"
+msgstr "Recover Hard"
 
+# Respect the number of characters!
+# english text barely fits in small screens
 msgid "Recover Soft"
-msgstr "Wiederherstellung Soft"
+msgstr "Recover Soft"
 
 msgid "Restart"
 msgstr "Neustart"
@@ -474,7 +477,7 @@ msgid "Starting WiFi Re-association"
 msgstr "Starte WiFi Verbindung"
 
 msgid "Starting recovery for"
-msgstr "Starte Wiederherstellung für "
+msgstr "Starte Wiederherstellung für"
 
 msgid "Starting update for"
 msgstr "Starte Update für"
@@ -509,14 +512,17 @@ msgstr "Druckkopf"
 msgid "Unload"
 msgstr "Entladen"
 
+# Respect the number of characters
+# english text barely fits in small screens
 msgid "Up To Date"
-msgstr "Kein Update verfügbar"
+msgstr "Aktualisiert"
 
 msgid "Update"
 msgstr "Update"
 
+# Hochgeladen doesn't fit in small screens
 msgid "Uploaded"
-msgstr "Hochgeladen"
+msgstr "Datum"
 
 msgid "View Mesh"
 msgstr "Mesh anzeigen"
