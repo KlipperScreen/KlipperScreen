@@ -51,4 +51,7 @@ This script will install packages that are listed under manual install, create a
 If you need a custom location for the configuration file, you can add -c or --configfile to the systemd file and specify
 the location of your configuration file.
 
-At this point KlipperScreen should be working, check out the [hardware page](Hardware.md) if you still haven't installed the screen, or head to the [troubleshooting page](Troubleshooting.md) if you are having problems
+If your screen needs additional software, proceed with the manufacturer instructions if they are provided
+and check out the [hardware page](Hardware.md)
+
+At this point KlipperScreen should be working, if it doesn't start then go to the [troubleshooting page](Troubleshooting.md)

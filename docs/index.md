@@ -11,11 +11,14 @@ A physical touchscreen is not strictly required, for example you may install a r
 ### Sample Panels
 
 Main Menu
+
 ![Main Menu](img/main_panel.png)
 
 Job Status
+
 ![Job Status](img/job_status.png)
 
+[More](panels.md)
 
 ### Inspiration
 KlipperScreen was inspired by [OctoScreen](https://github.com/Z-Bolt/OctoScreen/) and the need for a touchscreen GUI that

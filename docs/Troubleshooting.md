@@ -45,4 +45,19 @@ Once you have saved that file, restart KlipperScreen and it should show up on yo
 
 #### Screen is all white or blank
 
-Improperly installed screen, follow the manufacturer instructions on how to physically connect the screen and install the proper drivers.
+Improperly installed screen, follow the manufacturer instructions on how to physically connect the screen and install
+the proper drivers.
+
+### Touch not working on debian Bullseye
+
+Some dsi screens have issues where touch doesn't work with debian bullseye, the current fix
+(at least until upstream is fixed) consist in editing `/boot/config.txt` and changing:
+
+`dtoverlay=vc4-kms-v3d`
+
+to:
+
+`dtoverlay=vc4-fkms-v3d`
+
+and reboot. That should make the touch work, if your screen is rotated 180 degrees, then you may need to adjust
+[the touch rotation](Hardware.md) as described in the Hardware page.
