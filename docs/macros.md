@@ -27,3 +27,18 @@ gcode:
     G92
 ```
 
+this could be interesting to tweak the purge speed, this would be one Example Macro from alfrix:
+
+```
+[gcode_macro LOAD_FILAMENT]
+gcode:
+{% set speed = params.SPEED|default(300) %}
+{% set max_velocity = printer.configfile.settings['extruder'].max_extrude_only_velocity %}
+M300 # beep
+G91
+G92 E0
+G1 E350 F{max_velocity}
+G1 E25 F{speed} #purge
+M300
+M300
+```
