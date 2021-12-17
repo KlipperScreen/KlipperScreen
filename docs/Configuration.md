@@ -1,6 +1,6 @@
 # Configuration
 
-Create a blank file in `~/klipper_config/KlipperScreen.conf_`, if the file already exist then just edit it.
+Create a blank file in `~/klipper_config/KlipperScreen.conf`, if the file already exist then just edit it.
 
 Write in the file only the options that need to be changed.
 
