@@ -178,12 +178,12 @@ class ExtrudePanel(ScreenPanel):
             if not found:
                 self._screen.show_popup_message("Macro UNLOAD_FILAMENT not found")
             else:
-                self._screen._ws.klippy.gcode_script("UNLOAD_FILAMENT")
+                self._screen._ws.klippy.gcode_script("UNLOAD_FILAMENT SPEED=" + str(int(self.speed) * 60))
         if dir == "+":
             if not found:
                 self._screen.show_popup_message("Macro LOAD_FILAMENT not found")
             else:
-                self._screen._ws.klippy.gcode_script("LOAD_FILAMENT")
+                self._screen._ws.klippy.gcode_script("LOAD_FILAMENT SPEED=" + str(int(self.speed) * 60))
 
     def find_gcode_macros(self):
         macros = self._screen.printer.get_gcode_macros()

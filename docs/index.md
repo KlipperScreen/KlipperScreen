@@ -19,6 +19,8 @@ Job Status
 ![Job Status](img/job_status.png)
 
 [More](panels.md)
+### Supported Macros
+[More](macros.md)
 
 ### Inspiration
 KlipperScreen was inspired by [OctoScreen](https://github.com/Z-Bolt/OctoScreen/) and the need for a touchscreen GUI that
