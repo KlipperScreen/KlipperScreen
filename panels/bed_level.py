@@ -102,7 +102,7 @@ class BedLevelPanel(ScreenPanel):
         self.labels['home'] = self._gtk.ButtonImage("home", _("Home All"), "color2")
         self.labels['home'].connect("clicked", self.home)
 
-        self.labels['dm'] = self._gtk.ButtonImage("motor-off", _("Disable XY"), "color3")
+        self.labels['dm'] = self._gtk.ButtonImage("motor-off", _("Отключить моторы"), "color3")
         self.labels['dm'].connect("clicked", self.disable_motors)
 
         grid.attach(self.labels['home'], 0, 0, 1, 1)

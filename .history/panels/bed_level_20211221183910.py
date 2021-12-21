@@ -66,13 +66,13 @@ class BedLevelPanel(ScreenPanel):
             logging.debug("bed_screws not configured, calculating locations")
             xconf = self._screen.printer.get_config_section("stepper_x")
             yconf = self._screen.printer.get_config_section("stepper_y")
-            x = int(int(xconf['position_max'])/10)
-            y = int(int(yconf['position_max'])/10)
+            x = int(int(xconf['position_max'])/20)
+            y = int(int(yconf['position_max'])/20)
             self.screws = [
                 [x, y],
-                [x*9, y],
-                [x, y*9],
-                [x*9, y*9],
+                [x*19, y],
+                [x, y*19],
+                [x*19, y*19],
             ]
             logging.debug("Calculated screw locations [x,y]: %s", screws)
         else:
@@ -102,7 +102,7 @@ class BedLevelPanel(ScreenPanel):
         self.labels['home'] = self._gtk.ButtonImage("home", _("Home All"), "color2")
         self.labels['home'].connect("clicked", self.home)
 
-        self.labels['dm'] = self._gtk.ButtonImage("motor-off", _("Disable XY"), "color3")
+        self.labels['dm'] = self._gtk.ButtonImage("motor-off", _("Отключить моторы"), "color3")
         self.labels['dm'].connect("clicked", self.disable_motors)
 
         grid.attach(self.labels['home'], 0, 0, 1, 1)
