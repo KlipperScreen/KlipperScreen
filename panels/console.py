@@ -52,7 +52,7 @@ class ConsolePanel(ScreenPanel):
         entry.set_vexpand(False)
         entry.connect("focus-in-event", self._show_keyboard)
         entry.connect("activate", self._send_command)
-        
+
         enter = self._gtk.Button("Send")
         enter.set_hexpand(False)
         enter.connect("clicked", self._send_command)
