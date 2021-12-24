@@ -165,9 +165,10 @@ class NetworkPanel(ScreenPanel):
         network.add(labels)
 
         buttons = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        if network_id != -1:
+        if network_id != -1 or netinfo['connected']:
             buttons.pack_end(delete, False, False, 0)
-        if netinfo['connected'] is False:
+        connected_ssid = self._screen.wifi.get_connected_ssid()
+        if ssid != connected_ssid or not netinfo['connected']:
             buttons.pack_end(connect, False, False, 0)
 
         network.add(buttons)
@@ -175,21 +176,14 @@ class NetworkPanel(ScreenPanel):
         self.networks[ssid] = frame
         frame.add(network)
 
-        reverse = False
-
-        pos = 0
-        if netinfo['connected'] is True:
+        nets = sorted(list(self.networks), reverse=False)
+        if connected_ssid == ssid:
             pos = 0
+        elif nets.index(ssid) is not None:
+            pos = nets.index(ssid) + 1
         else:
-            connected_ssid = self._screen.wifi.get_connected_ssid()
-            nets = list(self.networks)
-            if connected_ssid is not None:
-                if connected_ssid in nets:
-                    nets.remove(connected_ssid)
-            nets = sorted(nets, reverse=reverse)
-            pos = nets.index(ssid)
-            if connected_ssid is not None:
-                pos += 1
+            logging.info("Error: SSID not in nets")
+            return
 
         self.labels['networks'][ssid] = {
             "connect": connect,
@@ -201,24 +195,25 @@ class NetworkPanel(ScreenPanel):
 
         self.labels['networklist'].insert_row(pos)
         self.labels['networklist'].attach(self.networks[ssid], 0, pos, 1, 1)
-        if show is True:
+        if show:
             self.labels['networklist'].show()
 
     def add_new_network(self, widget, ssid, connect=False):
+        self._screen.remove_keyboard()
         networks = self._screen.wifi.get_networks()
         psk = self.labels['network_psk'].get_text()
         result = self._screen.wifi.add_network(ssid, psk)
 
         self.close_add_network()
 
-        if connect is True:
-            if result is True:
+        if connect:
+            if result:
                 self.connect_network(widget, ssid, False)
             else:
                 self._screen.show_popup_message("Error adding network %s" % ssid)
 
     def back(self):
-        if self.show_add is True:
+        if self.show_add:
             self.close_add_network()
             return True
         return False
@@ -230,11 +225,11 @@ class NetworkPanel(ScreenPanel):
                 networks.remove(net)
 
         for net in networks:
-            self.add_network(net)
+            self.add_network(net, False)
         self.labels['networklist'].show_all()
 
     def close_add_network(self):
-        if self.show_add is False:
+        if not self.show_add:
             return
 
         for child in self.content.get_children():
@@ -268,8 +263,8 @@ class NetworkPanel(ScreenPanel):
                 isdef = True
                 break
 
-        if isdef is False:
-            if showadd is True:
+        if not isdef:
+            if showadd:
                 self.show_add_network(widget, ssid)
             return
         self.prev_network = self._screen.wifi.get_connected_ssid()
@@ -282,7 +277,6 @@ class NetworkPanel(ScreenPanel):
         scroll.set_property("overlay-scrolling", False)
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
-        scroll.set_size_request(800, 400)
         self.labels['connecting_info'] = Gtk.Label(_("Starting WiFi Re-association"))
         self.labels['connecting_info'].set_halign(Gtk.Align.START)
         self.labels['connecting_info'].set_valign(Gtk.Align.START)
@@ -307,19 +301,13 @@ class NetworkPanel(ScreenPanel):
         if ssid not in self.networks:
             return
 
-        i = 0
-        while self.labels['networklist'].get_child_at(0, i) is not None:
+        for i, network in enumerate(self.labels['networklist']):
             if self.networks[ssid] == self.labels['networklist'].get_child_at(0, i):
                 self.labels['networklist'].remove_row(i)
                 self.labels['networklist'].show()
                 del self.networks[ssid]
                 del self.labels['networks'][ssid]
                 return
-            i = i+1
-        return
-
-    def remove_network_wid(self, widget, ssid):
-        self.remove_network(ssid)
 
     def remove_wifi_network(self, widget, ssid):
         self._screen.wifi.delete_network(ssid)
@@ -334,7 +322,7 @@ class NetworkPanel(ScreenPanel):
         self.content.show_all()
 
     def show_add_network(self, widget, ssid):
-        if self.show_add is True:
+        if self.show_add:
             return
 
         _ = self.lang.gettext
@@ -389,11 +377,10 @@ class NetworkPanel(ScreenPanel):
             return
         netinfo = self._screen.wifi.get_network_info(ssid)
         if netinfo is None:
-            logging.debug("Couldn't get netinfo for update")
             return
 
         connected = ""
-        if netinfo['connected'] is True:
+        if netinfo['connected']:
             stream = os.popen('hostname -f')
             hostname = stream.read().strip()
             ifadd = netifaces.ifaddresses(self.interface)
