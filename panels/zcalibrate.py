@@ -32,20 +32,17 @@ class ZCalibratePanel(ScreenPanel):
         pos.add(label)
         pos.add(self.widgets['zposition'])
 
-        self.widgets['zpos'] = self._gtk.ButtonImage('z-farther', _("Raise Nozzle"))
+        self.widgets['zpos'] = self._gtk.ButtonImage('z-farther', _("Raise Nozzle"), 'color4')
         self.widgets['zpos'].connect("clicked", self.move, "+")
-        self.widgets['zpos'].set_sensitive(False)
-        self.widgets['zneg'] = self._gtk.ButtonImage('z-closer', _("Lower Nozzle"))
+        self.widgets['zneg'] = self._gtk.ButtonImage('z-closer', _("Lower Nozzle"), 'color1')
         self.widgets['zneg'].connect("clicked", self.move, "-")
-        self.widgets['zneg'].set_sensitive(False)
         self.widgets['start'] = self._gtk.ButtonImage('resume', _("Start"), 'color3')
         self.widgets['start'].connect("clicked", self.start_calibration)
 
-        self.widgets['complete'] = self._gtk.ButtonImage('complete', _('Accept'))
+        self.widgets['complete'] = self._gtk.ButtonImage('complete', _('Accept'), 'color3')
         self.widgets['complete'].connect("clicked", self.accept)
-        self.widgets['complete'].set_sensitive(False)
-        cancel = self._gtk.ButtonImage('cancel', _('Abort'), 'color2')
-        cancel.connect("clicked", self.abort)
+        self.widgets['cancel'] = self._gtk.ButtonImage('cancel', _('Abort'), 'color2')
+        self.widgets['cancel'].connect("clicked", self.abort)
 
         distgrid = Gtk.Grid()
         j = 0
@@ -79,7 +76,7 @@ class ZCalibratePanel(ScreenPanel):
         grid.attach(self.widgets['zneg'], 0, 1, 1, 1)
         grid.attach(self.widgets['complete'], 2, 0, 1, 1)
         grid.attach(distances, 0, 2, 3, 1)
-        grid.attach(cancel, 2, 1, 1, 1)
+        grid.attach(self.widgets['cancel'], 2, 1, 1, 1)
 
         self.content.add(grid)
 
@@ -97,14 +94,6 @@ class ZCalibratePanel(ScreenPanel):
             self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_CALIBRATE)
         else:
             self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_ENDSTOP_CALIBRATE)
-
-        self.widgets['start'].get_style_context().remove_class('color3')
-        self.widgets['zpos'].set_sensitive(True)
-        self.widgets['zpos'].get_style_context().add_class('color4')
-        self.widgets['zneg'].set_sensitive(True)
-        self.widgets['zneg'].get_style_context().add_class('color1')
-        self.widgets['complete'].set_sensitive(True)
-        self.widgets['complete'].get_style_context().add_class('color3')
 
     def process_update(self, action, data):
         if action != "notify_status_update":
@@ -139,18 +128,35 @@ class ZCalibratePanel(ScreenPanel):
     def abort(self, widget):
         logging.info("Aborting Z calibrate")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.ABORT)
+        self.menu_return(widget)
 
+    def accept(self, widget):
+        logging.info("Accepting Z calibrate")
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.ACCEPT)
+
+    # We need to track if the machine is calibrating or not to activate the appropriate buttons
+    def buttons_calibrating(self):
+        self.widgets['start'].get_style_context().remove_class('color3')
+        self.widgets['start'].set_sensitive(False)
+
+        self.widgets['zpos'].set_sensitive(True)
+        self.widgets['zpos'].get_style_context().add_class('color4')
+        self.widgets['zneg'].set_sensitive(True)
+        self.widgets['zneg'].get_style_context().add_class('color1')
+        self.widgets['complete'].set_sensitive(True)
+        self.widgets['complete'].get_style_context().add_class('color3')
+        self.widgets['cancel'].set_sensitive(True)
+        self.widgets['cancel'].get_style_context().add_class('color2')
+
+    def buttons_not_calibrating(self):
         self.widgets['start'].get_style_context().add_class('color3')
+        self.widgets['start'].set_sensitive(True)
+
         self.widgets['zpos'].set_sensitive(False)
         self.widgets['zpos'].get_style_context().remove_class('color4')
         self.widgets['zneg'].set_sensitive(False)
         self.widgets['zneg'].get_style_context().remove_class('color1')
         self.widgets['complete'].set_sensitive(False)
         self.widgets['complete'].get_style_context().remove_class('color3')
-
-        self.menu_return(widget)
-
-    def accept(self, widget):
-        logging.info("Accepting Z calibrate")
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.ACCEPT)
-        self.menu_return(widget)
+        self.widgets['cancel'].set_sensitive(False)
+        self.widgets['cancel'].get_style_context().remove_class('color2')

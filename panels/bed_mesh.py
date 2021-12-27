@@ -204,6 +204,9 @@ class BedMeshPanel(ScreenPanel):
             "BED_MESH_CALIBRATE"
         )
 
+        if not (self._printer.config_section_exists("probe") or self._printer.config_section_exists("bltouch")):
+             self.menu_item_clicked(widget, "refresh", {"name": "Mesh calibrate", "panel": "zcalibrate"})
+
     def load_meshes(self):
         bm_profiles = self._screen.printer.get_config_section_list("bed_mesh ")
         self.profiles = {}
