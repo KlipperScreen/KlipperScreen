@@ -197,6 +197,9 @@ class BedMeshPanel(ScreenPanel):
         self.remove_create()
 
     def calibrate_mesh(self, widget):
+        if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
+            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+
         self._screen._ws.klippy.gcode_script(
             "BED_MESH_CALIBRATE"
         )
