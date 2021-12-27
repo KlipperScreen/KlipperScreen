@@ -58,6 +58,10 @@ class MainPanel(MenuPanel):
     def add_device(self, device):
         logging.info("Adding device: %s" % device)
 
+        temperature = self._printer.get_dev_stat(device, "temperature")
+        if temperature is None:
+            return
+
         if not (device.startswith("extruder") or device.startswith("heater_bed")):
             devname = " ".join(device.split(" ")[1:])
         else:
@@ -104,8 +108,7 @@ class MainPanel(MenuPanel):
 
 
         temp = Gtk.Label("")
-        temperature = self._printer.get_dev_stat(device, "temperature")
-        temp.set_markup(self.format_temp(temperature if temperature is not None else 0))
+        temp.set_markup(self.format_temp(temperature))
 
         if can_target:
             target = Gtk.Label("")
