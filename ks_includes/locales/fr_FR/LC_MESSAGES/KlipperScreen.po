@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-18 11:29-0300\n"
-"PO-Revision-Date: 2021-11-18 11:33-0300\n"
-"Last-Translator: Bahoue & alfrix\n"
+"PO-Revision-Date: 2021-12-27 18:10+0100\n"
+"Last-Translator: O. Robardet\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #, python-format
@@ -84,8 +84,8 @@ msgid ""
 "Check /tmp/KlipperScreen.log for more information.\n"
 "Please submit an issue on GitHub for help."
 msgstr ""
-"Vérifier /tmp/KlipperScreen.log pour plus d'informations.\n"
-"SVP envoyez une requête sur GITHUB pour obtenir de l'aide."
+"Vérifiez /tmp/KlipperScreen.log pour plus d'informations.\n"
+"SVP envoyez une requête sur GitHub pour obtenir de l'aide."
 
 msgid "Close"
 msgstr "Fermer"
@@ -177,7 +177,7 @@ msgid "Finish"
 msgstr "Fin"
 
 msgid "Firmware Restart"
-msgstr "Redémarrer Firmware"
+msgstr "Redémarrer le firmware"
 
 msgid "Font Size"
 msgstr "Taille de police"
@@ -186,22 +186,22 @@ msgid "Go Back"
 msgstr "Retourner"
 
 msgid "Home"
-msgstr "Réinitialiser"
+msgstr "Accueil"
 
 msgid "Home All"
-msgstr "Réinitialiser XYZ"
+msgstr "Origine XYZ"
 
 msgid "Home X"
-msgstr "Réinitialiser X"
+msgstr "Origine X"
 
 msgid "Home XY"
-msgstr "Réinitialiser XY"
+msgstr "Origine XY"
 
 msgid "Home Y"
-msgstr "Réinitialiser Y"
+msgstr "Origine Y"
 
 msgid "Home Z"
-msgstr "Réinitialiser Z"
+msgstr "Origine Z"
 
 msgid "Homing"
 msgstr "Origine"
@@ -350,7 +350,7 @@ msgstr "Éteindre"
 
 #, python-format
 msgid "Outdated by %d commits:"
-msgstr "Obsolète par %d commits :"
+msgstr "En retard de %d commits :"
 
 msgid "PSK for"
 msgstr "PSK pour"
@@ -362,7 +362,7 @@ msgid "Paused"
 msgstr "En pause"
 
 msgid "Power"
-msgstr "Energie"
+msgstr "Alimentation"
 
 msgid "Power On Printer"
 msgstr "Allumer l'imprimante"
@@ -380,7 +380,7 @@ msgid "Print Time"
 msgstr "Temps d'impression"
 
 msgid "Printer Connections"
-msgstr "Connexions de l'imprimante"
+msgstr "Connexions aux imprimantes"
 
 msgid "Printing"
 msgstr "Impression"
@@ -395,16 +395,16 @@ msgid "Raise Nozzle"
 msgstr "Éloigner la buse"
 
 msgid "Recover Hard"
-msgstr "Récupérer Hard"
+msgstr "Récupération \"--hard\""
 
 msgid "Recover Soft"
-msgstr "Récupérer Soft"
+msgstr "Récupérer \"--soft\""
 
 msgid "Restart"
-msgstr "Redémarrage"
+msgstr "Redémarrer"
 
 msgid "Resume"
-msgstr "Resumer"
+msgstr "Reprendre"
 
 msgid "Retract"
 msgstr "Rétracter"
@@ -419,7 +419,7 @@ msgid "Save configuration."
 msgstr "Enregistrer la configuration."
 
 msgid "Screen Power Off Time"
-msgstr "Extinction de l'écran"
+msgstr "Délai d'extinction de l'écran"
 
 msgid "Screen will show in less than one second"
 msgstr "L'écran s'affichera en moins d'une seconde"
@@ -474,7 +474,7 @@ msgid ""
 "Restart"
 msgstr ""
 "Redémarrer\n"
-"Système"
+"le système"
 
 msgid ""
 "System\n"
@@ -548,6 +548,9 @@ msgstr "mm/s"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
+msgid "Confirm Emergency Stop"
+msgstr "Confirmer l'arrêt d'urgence"
+
 #~ msgid "Medium (default)"
 #~ msgstr "Moyen (défaut)"
 
@@ -586,9 +589,6 @@ msgstr "mm/s^2"
 
 #~ msgid "Control"
 #~ msgstr "Controle"
-
-#~ msgid "Emergency Stop"
-#~ msgstr "Arret d'urgence"
 
 #~ msgid "Load Average"
 #~ msgstr "Charge moyenne"
