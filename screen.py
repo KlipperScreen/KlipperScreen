@@ -689,14 +689,16 @@ class KlipperScreen(Gtk.Window):
         if "FIRMWARE_RESTART" in msg:
             self.printer_initializing(
                 _("Klipper has encountered an error.\nIssue a FIRMWARE_RESTART to attempt fixing the issue.")
+                + "\n\n" + msg
             )
         elif "micro-controller" in msg:
             self.printer_initializing(
                 _("Klipper has encountered an error with the micro-controller.\nPlease recompile and flash.")
+                + "\n\n" + msg
             )
         else:
             self.printer_initializing(
-                _("Klipper has encountered an error.")
+                _("Klipper has encountered an error.") + "\n\n" + msg
             )
 
         for panel in list(self.panels):

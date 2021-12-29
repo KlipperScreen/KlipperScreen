@@ -37,10 +37,20 @@ class SplashScreenPanel(ScreenPanel):
         self.labels['actions'].set_halign(Gtk.Align.CENTER)
         self.labels['actions'].set_homogeneous(True)
 
+        scroll = Gtk.ScrolledWindow()
+        scroll.set_property("overlay-scrolling", False)
+        scroll.set_hexpand(True)
+        scroll.set_vexpand(True)
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add(self.labels['text'])
+
+        info = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
+        info.pack_start(image, False, True, 8)
+        info.pack_end(scroll, True, True, 8)
+
         main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        main.pack_start(image, True, True, 0)
+        main.pack_start(info, True, True, 8)
         main.pack_end(self.labels['actions'], False, False, 0)
-        main.pack_end(self.labels['text'], True, True, 0)
 
         self.content.add(main)
 
