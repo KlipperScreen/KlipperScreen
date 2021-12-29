@@ -126,12 +126,12 @@ class ZCalibratePanel(ScreenPanel):
         self._screen._ws.klippy.gcode_script(KlippyGcodes.testz_move(dist))
 
     def abort(self, widget):
-        logging.info("Aborting Z calibrate")
+        logging.info("Aborting calibration")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.ABORT)
         self.menu_return(widget)
 
     def accept(self, widget):
-        logging.info("Accepting Z calibrate")
+        logging.info("Accepting Z position")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.ACCEPT)
 
     # We need to track if the machine is calibrating or not to activate the appropriate buttons
