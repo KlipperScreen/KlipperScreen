@@ -115,11 +115,11 @@ class Printer:
 
     def evaluate_state(self):
         wh_state = self.data['webhooks']['state'].lower()  # possible values: startup, ready, shutdown, error
-        idle_state = self.data['idle_timeout']['state'].lower()  # possible values: Idle, printing, ready
-        print_state = self.data['print_stats']['state'].lower()  # possible values: complete, paused, printing, standby
 
         if wh_state == "ready":
             new_state = "ready"
+            print_state = self.data['print_stats']['state'].lower()  # complete, paused, printing, standby
+            idle_state = self.data['idle_timeout']['state'].lower()  # idle, printing, ready
             if print_state == "paused":
                 new_state = "paused"
             elif idle_state == "printing":
