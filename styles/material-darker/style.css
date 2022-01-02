@@ -23,6 +23,7 @@ button:active {
     border-style: solid;
     border-width: .25em;
     background-color: rgba(0,0,0,0.5);
+    border-radius: 1em;
 }
 
 button.color1, button.color2, button.color3, button.color4 {

@@ -16,6 +16,7 @@ button:active {
 
 .button_active {
     background-color: #20303D;
+    border-radius: 1em;
 }
 
 button.color1 {
