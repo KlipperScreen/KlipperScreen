@@ -5,9 +5,11 @@ xgettext --keyword=_ --language=Python --no-location --sort-output \
     panels/*.py \
     ks_includes/defaults.conf
 
-langs=(de_DE en es fr_FR he_IL it ru_RU zh_CN)
-for lang in ${langs[@]}; do
-    msgmerge ks_includes/locales/$lang/LC_MESSAGES/KlipperScreen.po \
-             ks_includes/locales/KlipperScreen.pot \
-          -o ks_includes/locales/$lang/LC_MESSAGES/KlipperScreen.po
+for FILE in ks_includes/locales/*; do
+    if [ -d $FILE ]; then
+        echo $FILE
+        msgmerge $FILE/LC_MESSAGES/KlipperScreen.po \
+                 ks_includes/locales/KlipperScreen.pot \
+              -o $FILE/LC_MESSAGES/KlipperScreen.po
+    fi
 done
