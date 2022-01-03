@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR Elektrickser@gmail.com, 2021
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
@@ -89,9 +89,6 @@ msgstr ""
 
 msgid "Close"
 msgstr "Schließen"
-
-msgid "Colorized"
-msgstr "Colorized"
 
 msgid "Complete"
 msgstr "Fertiggestellt"
@@ -568,6 +565,9 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Colorized"
+#~ msgstr "Colorized"
 
 #~ msgid "?"
 #~ msgstr "?"
