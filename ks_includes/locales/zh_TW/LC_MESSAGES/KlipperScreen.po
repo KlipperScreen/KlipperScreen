@@ -1,0 +1,590 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-18 11:29-0300\n"
+"PO-Revision-Date: 2022-01-03 01:25+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#, python-format
+msgid "%d Packages will be updated"
+msgstr "%d 個組件包將被更新"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s 將更新到版本"
+
+msgid "(default)"
+msgstr "(預設)"
+
+msgid "24 Hour Time"
+msgstr "24 小時制"
+
+msgid "Abort"
+msgstr "中止"
+
+msgid "Accept"
+msgstr "接受"
+
+msgid "Actions"
+msgstr "動作"
+
+msgid "Add Printer"
+msgstr "新增列印機"
+
+msgid "Add bed mesh profile"
+msgstr "新增網床輪廓"
+
+msgid "Are you sure you wish to cancel this print?"
+msgstr "您確定要取消列印嗎?"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "您確定要重新啟動系統嗎?"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "您確定要關閉系統嗎?"
+
+msgid "Bed Level"
+msgstr "熱床調平"
+
+msgid "Bed Mesh"
+msgstr "網格床"
+
+msgid "Calibrate"
+msgstr "校正"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Cancel Print"
+msgstr "取消列印"
+
+msgid "Cancelled"
+msgstr "已取消"
+
+msgid "Cancelling"
+msgstr "取消"
+
+msgid "Channel"
+msgstr "通道"
+
+msgid ""
+"Check /tmp/KlipperScreen.log for more information.\n"
+"Please submit an issue on GitHub for help."
+msgstr ""
+"檢查/tmp/KlipperScreen.log 日誌檔以了解更多訊息。\n"
+"請在GitHub上提交問題以尋求幫助。"
+
+msgid "Close"
+msgstr "關閉"
+
+msgid "Complete"
+msgstr "完成"
+
+msgid "Configuration"
+msgstr "配置"
+
+msgid "Connected"
+msgstr "連接"
+
+#, python-format
+msgid "Connecting to %s"
+msgstr "連接到 %s"
+
+msgid "Console"
+msgstr "控制台"
+
+msgid "Continue"
+msgstr "繼續"
+
+msgid "Cooldown"
+msgstr "冷卻"
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Decrease"
+msgstr "減少"
+
+msgid "Delete"
+msgstr "刪除"
+
+msgid "Disable Motors"
+msgstr "禁用步進電機"
+
+msgid "Disable XY"
+msgstr "禁用 XY"
+
+msgid "Disconnect"
+msgstr "斷開"
+
+msgid "Displayed Macros"
+msgstr "顯示巨集"
+
+msgid "Distance (mm)"
+msgstr "距離(mm)"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "您想恢復 %s 嗎?"
+
+msgid "Duration Only"
+msgstr "僅持續時間"
+
+msgid "Elapsed:"
+msgstr "已耗時間："
+
+msgid "Error"
+msgstr "錯誤"
+
+msgid "Estimated Time Method"
+msgstr "預估時間方法"
+
+msgid "Extrude"
+msgstr "擠出機"
+
+msgid "Extrusion +"
+msgstr "擠出 +"
+
+msgid "Extrusion -"
+msgstr "擠出 -"
+
+msgid "Fan"
+msgstr "風扇"
+
+msgid "Filament Used"
+msgstr "已消耗的耗材"
+
+msgid "File"
+msgstr "檔案"
+
+msgid "Fine Tuning"
+msgstr "微調"
+
+msgid "Finish"
+msgstr "完成"
+
+msgid "Firmware Restart"
+msgstr "框架重啟"
+
+msgid "Font Size"
+msgstr "字體大小"
+
+msgid "Go Back"
+msgstr "返回"
+
+msgid "Home"
+msgstr "歸零"
+
+msgid "Home All"
+msgstr "歸零全部"
+
+msgid "Home X"
+msgstr "歸零 X"
+
+msgid "Home XY"
+msgstr "歸零 XY"
+
+msgid "Home Y"
+msgstr "歸零 Y"
+
+msgid "Home Z"
+msgstr "歸零 Z"
+
+msgid "Homing"
+msgstr "歸零中"
+
+msgid "Hostname"
+msgstr "主機名稱"
+
+msgid "IPv4"
+msgstr "IPv4"
+
+msgid "IPv6"
+msgstr "IPv6"
+
+msgid "Icon Theme"
+msgstr "圖標主題"
+
+msgid "Increase"
+msgstr "增加"
+
+msgid "Initializing"
+msgstr "初始化中"
+
+msgid "Initializing printer..."
+msgstr "初始化列印機中.."
+
+msgid "Interface"
+msgstr "介面"
+
+msgid "Invalid"
+msgstr "無效的"
+
+msgid "Invert X"
+msgstr "反轉 X"
+
+msgid "Invert Y"
+msgstr "反轉 Y"
+
+msgid "Invert Z"
+msgstr "反轉 Z"
+
+msgid "Klipper Restart"
+msgstr "Klipper 重新啟動"
+
+msgid "Klipper Version"
+msgstr "Klipper 版本"
+
+msgid "Klipper has disconnected"
+msgstr "Klipper 已斷開連結"
+
+msgid ""
+"Klipper has encountered an error with the micro-controller.\n"
+"Please recompile and flash."
+msgstr ""
+"Klipper遇到微控制器錯誤。\n"
+"請重新編譯並刷新。"
+
+msgid "Klipper has encountered an error."
+msgstr "Klipper遇到一個錯誤。"
+
+msgid ""
+"Klipper has encountered an error.\n"
+"Issue a FIRMWARE_RESTART to attempt fixing the issue."
+msgstr ""
+"Klipper遇到錯誤。\n"
+"發出 FIRMWARE_RESTART 嘗試解決這個問題。"
+
+msgid "Klipper has shutdown"
+msgstr "Klipper 已經關閉"
+
+msgid "Klipper is attempting to start"
+msgstr "Klipper 正在嘗試重新啟動"
+
+msgid "Klipper will reboot"
+msgstr "Klipper 將重新啟動"
+
+msgid "KlipperScreen Version"
+msgstr "KlipperScreen 版本"
+
+msgid "Language"
+msgstr "語言"
+
+msgid "Large"
+msgstr "大的"
+
+msgid "Left:"
+msgstr "左邊:"
+
+msgid "Limits"
+msgstr "限制"
+
+msgid "Load"
+msgstr "載入"
+
+msgid "Lower Nozzle"
+msgstr "降低噴嘴"
+
+msgid "Macro shortcut on sidebar"
+msgstr "側邊欄上的巨集快捷方式"
+
+msgid "Macros"
+msgstr "巨集"
+
+msgid "Main Menu"
+msgstr "主選單"
+
+msgid "Max Accelation"
+msgstr "最大加速度"
+
+msgid "Max Acceleration to Deceleration"
+msgstr "最大加速到減速"
+
+msgid "Max Velocity"
+msgstr "最大速度"
+
+msgid "Medium"
+msgstr "中"
+
+msgid "Menu"
+msgstr "選單"
+
+msgid "Modified"
+msgstr "修改"
+
+msgid "Move"
+msgstr "移動"
+
+msgid "Move Distance (mm)"
+msgstr "移動距離（mm）"
+
+msgid "Move Speed (mm/s)"
+msgstr "移動速度 (mm/s)"
+
+msgid "Name"
+msgstr "名稱"
+
+msgid "Network"
+msgstr "網路"
+
+msgid "Number Pad"
+msgstr "數字鍵盤"
+
+msgid "Off"
+msgstr "關閉"
+
+#, python-format
+msgid "Outdated by %d commits:"
+msgstr "已過時 %d 次提交："
+
+msgid "PSK for"
+msgstr "PSK 用於"
+
+msgid "Pause"
+msgstr "暫停"
+
+msgid "Paused"
+msgstr "已暫停"
+
+msgid "Power"
+msgstr "電源"
+
+msgid "Power On Printer"
+msgstr "啟動列印機"
+
+msgid "Preheat"
+msgstr "預熱"
+
+msgid "Print"
+msgstr "列印"
+
+msgid "Print Control"
+msgstr "列印控制"
+
+msgid "Print Time"
+msgstr "列印時間"
+
+msgid "Printer Connections"
+msgstr "連接列印機"
+
+msgid "Printing"
+msgstr "列印中"
+
+msgid "Profile Name:"
+msgstr "配置檔案名稱:"
+
+msgid "Quad Gantry Level"
+msgstr "龍門調平"
+
+msgid "Raise Nozzle"
+msgstr "上升噴嘴"
+
+msgid "Recover Hard"
+msgstr "恢復 Hard"
+
+msgid "Recover Soft"
+msgstr "恢復 Soft"
+
+msgid "Restart"
+msgstr "重新啟動"
+
+msgid "Resume"
+msgstr "恢復"
+
+msgid "Retract"
+msgstr "回抽"
+
+msgid "Save"
+msgstr "儲存"
+
+msgid "Save Config"
+msgstr "儲存設定"
+
+msgid "Save configuration."
+msgstr "儲存設定檔案."
+
+msgid "Screen Power Off Time"
+msgstr "螢幕關閉時間"
+
+msgid "Screen will show in less than one second"
+msgstr "螢幕將在1秒內顯示"
+
+msgid "Screws Adjust"
+msgstr "Screws 調整"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Size"
+msgstr "大小"
+
+msgid "Slicer"
+msgstr "切片"
+
+msgid "Small"
+msgstr "小的"
+
+msgid "Sort by: "
+msgstr "排序: "
+
+msgid "Speed (mm/s)"
+msgstr "速度（mm/s）"
+
+msgid "Speed +"
+msgstr "速度 +"
+
+msgid "Speed -"
+msgstr "速度 -"
+
+msgid "Square Corner Velocity"
+msgstr "方角速度"
+
+msgid "Start"
+msgstr "開始"
+
+msgid "Starting WiFi Re-association"
+msgstr "啟動 WiFi 重新關聯"
+
+msgid "Starting recovery for"
+msgstr "開始恢復"
+
+msgid "Starting update for"
+msgstr "開始更新"
+
+msgid "System"
+msgstr "系統"
+
+msgid ""
+"System\n"
+"Restart"
+msgstr "系統重新啟動"
+
+msgid ""
+"System\n"
+"Shutdown"
+msgstr "關閉系統"
+
+msgid "Temperature"
+msgstr "溫度"
+
+#, python-format
+msgid "To apply %s KlipperScreen needs to be restarted"
+msgstr "要應用 %s，需要重新啟動 KlipperScreen"
+
+msgid "Tool"
+msgstr "工具"
+
+msgid "Unload"
+msgstr "卸載"
+
+msgid "Up To Date"
+msgstr "最新"
+
+msgid "Update"
+msgstr "更新"
+
+msgid "Uploaded"
+msgstr "已上傳"
+
+msgid "View Mesh"
+msgstr "檢視網格"
+
+msgid "X+"
+msgstr "X+"
+
+msgid "X-"
+msgstr "X-"
+
+msgid "Y+"
+msgstr "Y+"
+
+msgid "Y-"
+msgstr "Y-"
+
+msgid "Z Calibrate"
+msgstr "Z 校準"
+
+msgid "Z Offset"
+msgstr "Z 間隙"
+
+msgid "Z Tilt"
+msgstr "Z 傾斜"
+
+msgid "Z+"
+msgstr "Z+"
+
+msgid "Z-"
+msgstr "Z-"
+
+msgid "dBm"
+msgstr "dBm"
+
+msgid "minutes"
+msgstr "分鐘"
+
+msgid "mm"
+msgstr "mm"
+
+msgid "mm/s"
+msgstr "mm/s"
+
+msgid "mm/s^2"
+msgstr "mm/s^2"
+
+#~ msgid "Medium (default)"
+#~ msgstr "中（默认"
+
+#~ msgid "File Estimation (default)"
+#~ msgstr "文件估计（默认）"
+
+#~ msgid "Fan Off"
+#~ msgstr "关闭风扇"
+
+#~ msgid "Fan On"
+#~ msgstr "打开风扇"
+
+#~ msgid "Fast"
+#~ msgstr "快速"
+
+#~ msgid "Set Speed"
+#~ msgstr "设置速度"
+
+#~ msgid "Slow"
+#~ msgstr "慢"
+
+#~ msgid "?"
+#~ msgstr "?"
+
+#~ msgid "Are you sure you want to print"
+#~ msgstr "您确定要开始打印吗"
+
+#~ msgid "Cancel Change"
+#~ msgstr "取消变更"
+
+#~ msgid "Control"
+#~ msgstr "控制"
+
+#~ msgid "Emergency Stop"
+#~ msgstr "紧急停止"
+
+#~ msgid "Load Average"
+#~ msgstr "平均负载"
+
+#~ msgid "Network Info"
+#~ msgstr "网络信息"
+
+#~ msgid "Screen Blanking Time"
+#~ msgstr "屏幕关闭时间"
