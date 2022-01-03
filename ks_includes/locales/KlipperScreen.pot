@@ -536,3 +536,6 @@ msgstr ""
 
 msgid "mm/s^2"
 msgstr ""
+
+msgid "Confirm Emergency Stop"
+msgstr ""
