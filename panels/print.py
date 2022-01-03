@@ -195,7 +195,7 @@ class PrintPanel(ScreenPanel):
             name.set_hexpand(True)
             name.set_halign(Gtk.Align.START)
             name.set_line_wrap(True)
-            name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+            name.set_line_wrap_mode(Pango.WrapMode.CHAR)
 
             info = Gtk.Label()
             info.set_halign(Gtk.Align.START)
@@ -357,7 +357,7 @@ class PrintPanel(ScreenPanel):
         if fileinfo is None:
             return
 
-        return "<small>%s: <b>%s</b> - %s: <b>%s</b>\n%s: <b>%s</b></small>" % (
+        return "<small>%s: <b>%s</b>\n%s: <b>%s</b>\n%s: <b>%s</b></small>" % (
             _("Uploaded"),
             datetime.fromtimestamp(fileinfo['modified']).strftime("%Y-%m-%d %H:%M"),
             _("Size"),

@@ -243,15 +243,15 @@ class KlippyGtk:
         dialog.set_transient_for(screen)
         dialog.set_modal(True)
 
-        for button in buttons:
+        for i, button in enumerate(buttons):
             dialog.add_button(button_text=button['name'], response_id=button['response'])
+            button = dialog.get_children()[0].get_children()[0].get_children()[0].get_children()[i]
+            button.get_child().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+            button.get_child().set_line_wrap(True)
+            button.set_size_request((screen.width-30)/3, screen.height/5)
 
         dialog.connect("response", callback, *args)
         dialog.get_style_context().add_class("dialog")
-
-        box = Gtk.Box()
-        box.set_size_request(screen.width - 60, 0)
-        box.set_vexpand(True)
 
         content_area = dialog.get_content_area()
         content_area.set_margin_start(15)
