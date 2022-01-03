@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-18 11:29-0300\n"
-"PO-Revision-Date: 2022-01-03 01:25+0800\n"
+"PO-Revision-Date: 2022-01-04 00:44+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -186,7 +186,7 @@ msgid "Go Back"
 msgstr "返回"
 
 msgid "Home"
-msgstr "歸零"
+msgstr "首頁"
 
 msgid "Home All"
 msgstr "歸零全部"
@@ -204,7 +204,7 @@ msgid "Home Z"
 msgstr "歸零 Z"
 
 msgid "Homing"
-msgstr "歸零中"
+msgstr "歸零"
 
 msgid "Hostname"
 msgstr "主機名稱"
@@ -287,7 +287,7 @@ msgid "Large"
 msgstr "大的"
 
 msgid "Left:"
-msgstr "左邊:"
+msgstr "剩下時間："
 
 msgid "Limits"
 msgstr "限制"
@@ -299,7 +299,7 @@ msgid "Lower Nozzle"
 msgstr "降低噴嘴"
 
 msgid "Macro shortcut on sidebar"
-msgstr "側邊欄上的巨集快捷方式"
+msgstr "在側邊欄上顯示巨集快捷鍵"
 
 msgid "Macros"
 msgstr "巨集"
@@ -497,7 +497,7 @@ msgid "Update"
 msgstr "更新"
 
 msgid "Uploaded"
-msgstr "已上傳"
+msgstr "上傳時間"
 
 msgid "View Mesh"
 msgstr "檢視網格"
@@ -544,47 +544,8 @@ msgstr "mm/s"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
-#~ msgid "Medium (default)"
-#~ msgstr "中（默认"
+msgid "Temp"
+msgstr "目前溫度"
 
-#~ msgid "File Estimation (default)"
-#~ msgstr "文件估计（默认）"
-
-#~ msgid "Fan Off"
-#~ msgstr "关闭风扇"
-
-#~ msgid "Fan On"
-#~ msgstr "打开风扇"
-
-#~ msgid "Fast"
-#~ msgstr "快速"
-
-#~ msgid "Set Speed"
-#~ msgstr "设置速度"
-
-#~ msgid "Slow"
-#~ msgstr "慢"
-
-#~ msgid "?"
-#~ msgstr "?"
-
-#~ msgid "Are you sure you want to print"
-#~ msgstr "您确定要开始打印吗"
-
-#~ msgid "Cancel Change"
-#~ msgstr "取消变更"
-
-#~ msgid "Control"
-#~ msgstr "控制"
-
-#~ msgid "Emergency Stop"
-#~ msgstr "紧急停止"
-
-#~ msgid "Load Average"
-#~ msgstr "平均负载"
-
-#~ msgid "Network Info"
-#~ msgstr "网络信息"
-
-#~ msgid "Screen Blanking Time"
-#~ msgstr "屏幕关闭时间"
+msgid "Target"
+msgstr "目標溫度"
