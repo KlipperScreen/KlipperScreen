@@ -197,9 +197,15 @@ class BedMeshPanel(ScreenPanel):
         self.remove_create()
 
     def calibrate_mesh(self, widget):
+        if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
+            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+
         self._screen._ws.klippy.gcode_script(
             "BED_MESH_CALIBRATE"
         )
+
+        if not (self._printer.config_section_exists("probe") or self._printer.config_section_exists("bltouch")):
+            self.menu_item_clicked(widget, "refresh", {"name": "Mesh calibrate", "panel": "zcalibrate"})
 
     def load_meshes(self):
         bm_profiles = self._screen.printer.get_config_section_list("bed_mesh ")
