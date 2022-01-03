@@ -58,8 +58,6 @@ class PreheatPanel(ScreenPanel):
     def activate(self):
         if self.graph_update is None:
             self.graph_update = GLib.timeout_add_seconds(1, self.update_graph)
-        return
-
         for x in self._printer.get_tools():
             if x not in self.active_heaters:
                 self.select_heater(None, x)
