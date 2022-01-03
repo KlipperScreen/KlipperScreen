@@ -357,7 +357,7 @@ class PrintPanel(ScreenPanel):
         if fileinfo is None:
             return
 
-        return "<small>%s: <b>%s</b> - %s: <b>%s</b>\n%s: <b>%s</b></small>" % (
+        return "<small>%s: <b>%s</b>\n%s: <b>%s</b>\n%s: <b>%s</b></small>" % (
             _("Uploaded"),
             datetime.fromtimestamp(fileinfo['modified']).strftime("%Y-%m-%d %H:%M"),
             _("Size"),
