@@ -88,7 +88,6 @@ class PreheatPanel(ScreenPanel):
         if setting == "cooldown":
             for heater in self.active_heaters:
                 logging.info("Setting %s to %d" % (heater, 0))
-                self.devices[heater]["target"] = 0
                 if heater.startswith('heater_generic '):
                     self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), 0)
                 elif heater.startswith('heater_bed'):
@@ -115,7 +114,6 @@ class PreheatPanel(ScreenPanel):
                 self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater),
                                                       target)
                 self._printer.set_dev_stat(heater, "target", int(target))
-            self.devices[heater]["target"] = target
 
         if self.preheat_options[setting]['gcode']:
             self._screen._ws.klippy.gcode_script(self.preheat_options[setting]['gcode'])
