@@ -214,8 +214,7 @@ class PreheatPanel(ScreenPanel):
                 else:
                     target = self.preheat_options[setting]['extruder']
                     logging.info("Setting %s to %d" % (heater, target))
-                    self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater),
-                                                        target)
+                    self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), target)
                     self._printer.set_dev_stat(heater, "target", int(target))
             if self.preheat_options[setting]['gcode']:
                 self._screen._ws.klippy.gcode_script(self.preheat_options[setting]['gcode'])
