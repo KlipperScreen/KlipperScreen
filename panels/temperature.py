@@ -167,12 +167,16 @@ class PreheatPanel(ScreenPanel):
             self.graph_update = None
 
     def select_heater(self, widget, device):
+        _ = self.lang.gettext
+
         if self._printer.get_temp_store_device_has_target(device):
             if device in self.active_heaters:
                 self.active_heaters.pop(self.active_heaters.index(device))
                 self.devices[device]['name'].get_style_context().remove_class("active_device")
+                self.labels['select'].set_label(_("Select"))
                 return
 
+            self.labels['select'].set_label(_("Deselect"))
             self.active_heaters.append(device)
             self.devices[device]['name'].get_style_context().add_class("active_device")
 
@@ -337,6 +341,7 @@ class PreheatPanel(ScreenPanel):
         self.labels['graph_hide'].connect("clicked", self.graph_show_device, False)
         self.labels['graph_show'] = self._gtk.Button(label=_("Show"))
         self.labels['graph_show'].connect("clicked", self.graph_show_device)
+        self.labels['select'] = self._gtk.Button(label=_("Select"))
 
         popover = Gtk.Popover()
         self.labels['popover_vbox'] = Gtk.VBox()
@@ -389,6 +394,8 @@ class PreheatPanel(ScreenPanel):
             pobox.pack_start(self.labels['graph_hide'], True, True, 5)
             if self.devices[self.popover_device]['type'] != "sensor":
                 pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
+                pobox.pack_end(self.labels['select'], True, True, 5)
+                self.labels['select'].connect("clicked", self.select_heater, self.popover_device)
         else:
             pobox.pack_start(self.labels['graph_show'], True, True, 5)
             if self.devices[self.popover_device]['type'] != "sensor":
