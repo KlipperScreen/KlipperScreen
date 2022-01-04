@@ -24,6 +24,7 @@ class PreheatPanel(ScreenPanel):
         self.preheat_options = self._screen._config.get_preheat_options()
         logging.debug("Preheat options: %s" % self.preheat_options)
         self.show_preheat = True
+        self._gtk.reset_temp_color()
         self.grid = self._gtk.HomogeneousGrid()
         self.grid.attach(self.create_left_panel(), 0, 0, 1, 1)
         self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
@@ -45,11 +46,11 @@ class PreheatPanel(ScreenPanel):
             right.attach(self.delta_adjust(), 0, 1, 3, 4)
 
         cooldown.connect("clicked", self.set_temperature, "cooldown")
-        adjust.connect("clicked", self.switch_preheat_adjust, right)
+        adjust.connect("clicked", self.switch_preheat_adjust)
 
         return right
 
-    def switch_preheat_adjust(self, widget, right):
+    def switch_preheat_adjust(self, widget):
         self.show_preheat ^= True
         self.grid.remove_column(1)
         self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
