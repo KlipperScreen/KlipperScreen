@@ -23,7 +23,7 @@ class PreheatPanel(ScreenPanel):
     def initialize(self, panel_name):
         self.preheat_options = self._screen._config.get_preheat_options()
         logging.debug("Preheat options: %s" % self.preheat_options)
-
+        self.show_preheat = True
         self.grid = self._gtk.HomogeneousGrid()
         self.grid.attach(self.create_left_panel(), 0, 0, 1, 1)
         self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
@@ -34,26 +34,120 @@ class PreheatPanel(ScreenPanel):
         _ = self.lang.gettext
 
         cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'), "color4", 1, 1, Gtk.PositionType.LEFT, False)
-        cooldown.connect("clicked", self.set_temperature, "cooldown")
+        adjust = self._gtk.ButtonImage('fine-tune', '', "color3", 1, 1, Gtk.PositionType.LEFT, False)
 
+        right = self._gtk.HomogeneousGrid()
+        right.attach(cooldown, 0, 0, 2, 1)
+        right.attach(adjust, 2, 0, 1, 1)
+        if self.show_preheat:
+            right.attach(self.preheat(), 0, 1, 3, 4)
+        else:
+            right.attach(self.delta_adjust(), 0, 1, 3, 4)
+
+        cooldown.connect("clicked", self.set_temperature, "cooldown")
+        adjust.connect("clicked", self.switch_preheat_adjust, right)
+
+        return right
+
+    def switch_preheat_adjust(self, widget, right):
+        self.show_preheat ^= True
+        self.grid.remove_column(1)
+        self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
+        self.grid.show_all()
+
+    def preheat(self):
         self.labels["preheat_grid"] = self._gtk.HomogeneousGrid()
         for i, option in enumerate(self.preheat_options):
             self.labels[option] = self._gtk.Button(option, "color%d" % ((i % 4)+1))
             self.labels[option].connect("clicked", self.set_temperature, option)
             self.labels['preheat_grid'].attach(self.labels[option], (i % 2), int(i/2), 1, 1)
-
         scroll = Gtk.ScrolledWindow()
         scroll.set_property("overlay-scrolling", False)
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(self.labels["preheat_grid"])
+        return scroll
 
-        right = self._gtk.HomogeneousGrid()
-        right.attach(cooldown, 0, 0, 1, 1)
-        right.attach(scroll, 0, 1, 1, 4)
+    def delta_adjust(self):
+        _ = self.lang.gettext
+        self.tempdeltas = ["1", "5", "10", "25"]
+        self.tempdelta = "10"
 
-        return right
+        deltagrid = self._gtk.HomogeneousGrid()
+        self.labels["increase"] = self._gtk.ButtonImage("increase", _("Increase"), "color1")
+        self.labels["increase"].connect("clicked", self.change_target_temp_incremental, "+")
+        self.labels["decrease"] = self._gtk.ButtonImage("decrease", _("Decrease"), "color3")
+        self.labels["decrease"].connect("clicked", self.change_target_temp_incremental, "-")
+
+        tempgrid = Gtk.Grid()
+        j = 0
+        for i in self.tempdeltas:
+            self.labels['deg' + i] = self._gtk.ToggleButton(i)
+            self.labels['deg' + i].connect("clicked", self.change_temp_delta, i)
+            ctx = self.labels['deg' + i].get_style_context()
+            if j == 0:
+                ctx.add_class("distbutton_top")
+            elif j == len(self.tempdeltas)-1:
+                ctx.add_class("distbutton_bottom")
+            else:
+                ctx.add_class("distbutton")
+            if i == "10":
+                ctx.add_class("distbutton_active")
+            tempgrid.attach(self.labels['deg' + i], j, 0, 1, 1)
+            j += 1
+
+        self.labels["deg" + self.tempdelta].set_active(True)
+
+        vbox = Gtk.VBox()
+        vbox.pack_start(Gtk.Label("Temp °C"), False, False, 8)
+        vbox.pack_end(tempgrid, True, True, 2)
+
+        deltagrid.attach(vbox, 0, 3, 2, 2)
+        deltagrid.attach(self.labels["decrease"], 0, 0, 1, 3)
+        deltagrid.attach(self.labels["increase"], 1, 0, 1, 3)
+        return deltagrid
+
+    def change_temp_delta(self, widget, tempdelta):
+        if self.tempdelta == tempdelta:
+            return
+        logging.info("### tempdelta " + str(tempdelta))
+
+        ctx = self.labels["deg" + str(self.tempdelta)].get_style_context()
+        ctx.remove_class("distbutton_active")
+
+        self.tempdelta = tempdelta
+        ctx = self.labels["deg" + self.tempdelta].get_style_context()
+        ctx.add_class("distbutton_active")
+        for i in self.tempdeltas:
+            if i == self.tempdeltas:
+                continue
+            self.labels["deg" + str(i)].set_active(False)
+
+    def change_target_temp_incremental(self, widget, dir):
+        for heater in self.active_heaters:
+            target = self._printer.get_dev_stat(heater, "target")
+            if dir == "+":
+                target += int(self.tempdelta)
+            else:
+                target -= int(self.tempdelta)
+                if target < 0:
+                    target = 0
+            if heater.startswith('heater_generic '):
+                logging.info("Setting %s to %d" % (heater, target))
+                self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), target)
+            elif heater.startswith('heater_bed'):
+                if target > KlippyGcodes.MAX_BED_TEMP:
+                    target = KlippyGcodes.MAX_BED_TEMP
+                logging.info("Setting %s to %d" % (heater, target))
+                self._screen._ws.klippy.set_bed_temp(target)
+                self._printer.set_dev_stat(heater, "target", int(target))
+            else:
+                if target > KlippyGcodes.MAX_EXT_TEMP:
+                    target = KlippyGcodes.MAX_EXT_TEMP
+                logging.info("Setting %s to %d" % (heater, target))
+                self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), target)
+                self._printer.set_dev_stat(heater, "target", int(target))
 
     def activate(self):
         if self.graph_update is None:
