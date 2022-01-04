@@ -100,7 +100,7 @@ class PreheatPanel(ScreenPanel):
         self.labels["deg" + self.tempdelta].set_active(True)
 
         vbox = Gtk.VBox()
-        vbox.pack_start(Gtk.Label(_("Temperature") + "(ºC)"), False, False, 8)
+        vbox.pack_start(Gtk.Label(_("Temperature") + " (°C)"), False, False, 8)
         vbox.pack_end(tempgrid, True, True, 2)
 
         deltagrid.attach(vbox, 0, 3, 2, 2)
