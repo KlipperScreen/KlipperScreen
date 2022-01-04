@@ -178,12 +178,12 @@ class PreheatPanel(ScreenPanel):
             if device in self.active_heaters:
                 self.active_heaters.pop(self.active_heaters.index(device))
                 self.devices[device]['name'].get_style_context().remove_class("active_device")
-                self.labels['select'].set_label(_("Select"))
+                self.devices[device]['select'].set_label(_("Select"))
                 return
 
-            self.labels['select'].set_label(_("Deselect"))
             self.active_heaters.append(device)
             self.devices[device]['name'].get_style_context().add_class("active_device")
+            self.devices[device]['select'].set_label(_("Deselect"))
 
     def set_temperature(self, widget, setting):
         _ = self.lang.gettext
@@ -221,6 +221,7 @@ class PreheatPanel(ScreenPanel):
                 self._screen._ws.klippy.gcode_script(self.preheat_options[setting]['gcode'])
 
     def add_device(self, device):
+        _ = self.lang.gettext
         logging.info("Adding device: %s" % device)
 
         temperature = self._printer.get_dev_stat(device, "temperature")
@@ -293,6 +294,7 @@ class PreheatPanel(ScreenPanel):
         if can_target:
             target.get_child().set_markup(self.format_target(self._printer.get_dev_stat(device, "target")))
             self.devices[device]["target"] = target
+            self.devices[device]['select'] = self._gtk.Button(label=_("Select"))
 
         devices = sorted(self.devices)
         pos = devices.index(device) + 1
@@ -347,7 +349,6 @@ class PreheatPanel(ScreenPanel):
         self.labels['graph_hide'].connect("clicked", self.graph_show_device, False)
         self.labels['graph_show'] = self._gtk.Button(label=_("Show"))
         self.labels['graph_show'].connect("clicked", self.graph_show_device)
-        self.labels['select'] = self._gtk.Button(label=_("Select"))
 
         popover = Gtk.Popover()
         self.labels['popover_vbox'] = Gtk.VBox()
@@ -400,8 +401,8 @@ class PreheatPanel(ScreenPanel):
             pobox.pack_start(self.labels['graph_hide'], True, True, 5)
             if self.devices[self.popover_device]['type'] != "sensor":
                 pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
-                pobox.pack_end(self.labels['select'], True, True, 5)
-                self.labels['select'].connect("clicked", self.select_heater, self.popover_device)
+                pobox.pack_end(self.devices[self.popover_device]['select'], True, True, 5)
+                self.devices[self.popover_device]['select'].connect("clicked", self.select_heater, self.popover_device)
         else:
             pobox.pack_start(self.labels['graph_show'], True, True, 5)
             if self.devices[self.popover_device]['type'] != "sensor":
