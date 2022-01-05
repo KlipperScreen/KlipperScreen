@@ -272,7 +272,7 @@ class PreheatPanel(ScreenPanel):
         child.set_ellipsize(Pango.EllipsizeMode.END)
 
         temp = self._gtk.Button("")
-        temp.get_child().set_markup(self.format_temp(temperature))
+        temp.get_child().set_label("%.1f" % temperature)
         temp.connect('clicked', self.select_heater, device)
 
         target = self._gtk.Button("")
@@ -325,7 +325,7 @@ class PreheatPanel(ScreenPanel):
         self.labels['devices'].set_vexpand(False)
 
         name = Gtk.Label("")
-        temp = Gtk.Label(_("Temp"))
+        temp = Gtk.Label(_("Temp (°C)"))
         temp.set_size_request(round(self._gtk.get_font_size() * 5.5), 0)
         target = Gtk.Label(_("Target"))
 
@@ -453,6 +453,6 @@ class PreheatPanel(ScreenPanel):
         if device not in self.devices:
             return
 
-        self.devices[device]["temp"].get_child().set_markup(self.format_temp(temp))
+        self.devices[device]["temp"].get_child().set_label("%.1f" % temp)
         if "target" in self.devices[device]:
             self.devices[device]["target"].get_child().set_markup(self.format_target(target))
