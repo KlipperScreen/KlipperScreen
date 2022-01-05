@@ -272,11 +272,7 @@ class PreheatPanel(ScreenPanel):
         child.set_ellipsize(Pango.EllipsizeMode.END)
 
         temp = self._gtk.Button("")
-        temp.get_child().set_label("%.1f" % temperature)
         temp.connect('clicked', self.select_heater, device)
-
-        target = self._gtk.Button("")
-        target.connect('clicked', self.select_heater, device)
 
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 
@@ -291,10 +287,13 @@ class PreheatPanel(ScreenPanel):
             "name": name,
             "temp": temp
         }
+
         if can_target:
-            target.get_child().set_markup(self.format_target(self._printer.get_dev_stat(device, "target")))
-            self.devices[device]["target"] = target
+            temp.get_child().set_label("%.1f %s" %
+                                       (temperature, self.format_target(self._printer.get_dev_stat(device, "target"))))
             self.devices[device]['select'] = self._gtk.Button(label=_("Select"))
+        else:
+            temp.get_child().set_label("%.1f" % temperature)
 
         devices = sorted(self.devices)
         pos = devices.index(device) + 1
@@ -302,8 +301,6 @@ class PreheatPanel(ScreenPanel):
         self.labels['devices'].insert_row(pos)
         self.labels['devices'].attach(name, 0, pos, 1, 1)
         self.labels['devices'].attach(temp, 1, pos, 1, 1)
-        if can_target:
-            self.labels['devices'].attach(target, 2, pos, 1, 1)
         self.labels['devices'].show_all()
 
     def change_target_temp(self, temp):
@@ -327,11 +324,9 @@ class PreheatPanel(ScreenPanel):
         name = Gtk.Label("")
         temp = Gtk.Label(_("Temp (°C)"))
         temp.set_size_request(round(self._gtk.get_font_size() * 5.5), 0)
-        target = Gtk.Label(_("Target"))
 
         self.labels['devices'].attach(name, 0, 0, 1, 1)
         self.labels['devices'].attach(temp, 1, 0, 1, 1)
-        self.labels['devices'].attach(target, 2, 0, 1, 1)
 
         da = HeaterGraph(self._printer)
         da.set_vexpand(True)
@@ -453,6 +448,7 @@ class PreheatPanel(ScreenPanel):
         if device not in self.devices:
             return
 
-        self.devices[device]["temp"].get_child().set_label("%.1f" % temp)
-        if "target" in self.devices[device]:
-            self.devices[device]["target"].get_child().set_markup(self.format_target(target))
+        if self._printer.get_temp_store_device_has_target(device):
+            self.devices[device]["temp"].get_child().set_label("%.1f %s" % (temp, self.format_target(target)))
+        else:
+            self.devices[device]["temp"].get_child().set_label("%.1f" % temp)
