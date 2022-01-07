@@ -154,7 +154,7 @@ class KlippyWebsocket(threading.Thread):
 
         if self.closing is True:
             logging.debug("Closing websocket")
-            self.ws.stop()
+            self.ws.close()
             return
 
         logging.info("Moonraker Websocket Closed")
