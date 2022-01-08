@@ -98,7 +98,7 @@ class KlippyFiles():
         if filename in self.filelist:
             logging.info("File already exists: %s" % filename)
             self.request_metadata(filename)
-            GLib.timeout_add(1000, self.run_callbacks, mods=[filename])
+            GLib.timeout_add_seconds(1, self.run_callbacks, mods=[filename])
             return
 
         self.filelist.append(filename)
