@@ -133,6 +133,7 @@ class ZCalibratePanel(ScreenPanel):
     def accept(self, widget):
         logging.info("Accepting Z position")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.ACCEPT)
+        self.menu_return(widget)
 
     # We need to track if the machine is calibrating or not to activate the appropriate buttons
     def buttons_calibrating(self):
