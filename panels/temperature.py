@@ -163,6 +163,8 @@ class PreheatPanel(ScreenPanel):
         for h in self._printer.get_heaters():
             if h.startswith("temperature_sensor "):
                 continue
+            if h.startswith("temperature_fan "):
+                continue
             if h not in self.active_heaters:
                 self.select_heater(None, h)
 
@@ -174,7 +176,7 @@ class PreheatPanel(ScreenPanel):
     def select_heater(self, widget, device):
         _ = self.lang.gettext
 
-        if self._printer.get_temp_store_device_has_target(device):
+        if self._printer.get_temp_store_device_has_target(device) and not device.startswith("temperature_fan"):
             if device in self.active_heaters:
                 self.active_heaters.pop(self.active_heaters.index(device))
                 self.devices[device]['name'].get_style_context().remove_class("active_device")
@@ -257,7 +259,7 @@ class PreheatPanel(ScreenPanel):
 
         rgb, color = self._gtk.get_temp_color(type)
 
-        can_target = self._printer.get_temp_store_device_has_target(device)
+        can_target = self._printer.get_temp_store_device_has_target(device) and not device.startswith("temperature_fan")
         self.labels['da'].add_object(device, "temperatures", rgb, False, True)
         if can_target:
             self.labels['da'].add_object(device, "targets", rgb, True, False)
