@@ -248,6 +248,14 @@ class PreheatPanel(ScreenPanel):
             devname = "Heater Bed"
             class_name = "graph_label_heater_bed"
             type = "bed"
+        elif device.startswith("temperature_fan"):
+            f = 1
+            for d in self.devices:
+                if "temperature_fan" in d:
+                    f += 1
+            image = "fan"
+            class_name = "graph_label_fan_%s" % f
+            type = "fan"
         else:
             s = 1
             for d in self.devices:
@@ -393,16 +401,18 @@ class PreheatPanel(ScreenPanel):
         pobox = self.labels['popover_vbox']
         for child in pobox.get_children():
             pobox.remove(child)
+        dtype = self.devices[self.popover_device]['type']
+        can_target = dtype != "sensor" and dtype != "fan"
 
         if self.labels['da'].is_showing(self.popover_device):
             pobox.pack_start(self.labels['graph_hide'], True, True, 5)
-            if self.devices[self.popover_device]['type'] != "sensor":
+            if can_target:
                 pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
                 pobox.pack_end(self.devices[self.popover_device]['select'], True, True, 5)
                 self.devices[self.popover_device]['select'].connect("clicked", self.select_heater, self.popover_device)
         else:
             pobox.pack_start(self.labels['graph_show'], True, True, 5)
-            if self.devices[self.popover_device]['type'] != "sensor":
+            if can_target:
                 pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
 
     def process_update(self, action, data):
