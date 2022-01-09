@@ -178,7 +178,7 @@ class PreheatPanel(ScreenPanel):
     def select_heater(self, widget, device):
         _ = self.lang.gettext
 
-        if  self.devices[device]["can_target"]:
+        if self.devices[device]["can_target"]:
             if device in self.active_heaters:
                 self.active_heaters.pop(self.active_heaters.index(device))
                 self.devices[device]['name'].get_style_context().remove_class("active_device")
@@ -467,7 +467,7 @@ class PreheatPanel(ScreenPanel):
         if device not in self.devices:
             return
 
-        if  self.devices[device]["can_target"]:
+        if self.devices[device]["can_target"]:
             self.devices[device]["temp"].get_child().set_label("%.1f %s" % (temp, self.format_target(target)))
         else:
             self.devices[device]["temp"].get_child().set_label("%.1f" % temp)
