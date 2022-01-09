@@ -178,16 +178,16 @@ class PreheatPanel(ScreenPanel):
     def select_heater(self, widget, device):
         _ = self.lang.gettext
 
-        if self._printer.get_temp_store_device_has_target(device) and not device.startswith("temperature_fan"):
+        if  self.devices[device]["can_target"]:
             if device in self.active_heaters:
                 self.active_heaters.pop(self.active_heaters.index(device))
                 self.devices[device]['name'].get_style_context().remove_class("active_device")
                 self.devices[device]['select'].set_label(_("Select"))
                 return
-
             self.active_heaters.append(device)
             self.devices[device]['name'].get_style_context().add_class("active_device")
             self.devices[device]['select'].set_label(_("Deselect"))
+        return
 
     def set_temperature(self, widget, setting):
         _ = self.lang.gettext
@@ -297,13 +297,15 @@ class PreheatPanel(ScreenPanel):
             "class": class_name,
             "type": type,
             "name": name,
-            "temp": temp
+            "temp": temp,
+            "can_target": can_target
         }
 
-        if can_target:
+        if self.devices[device]["can_target"]:
             temp.get_child().set_label("%.1f %s" %
                                        (temperature, self.format_target(self._printer.get_dev_stat(device, "target"))))
             self.devices[device]['select'] = self._gtk.Button(label=_("Select"))
+            self.devices[device]['select'].connect('clicked', self.select_heater, device)
         else:
             temp.get_child().set_label("%.1f" % temperature)
 
@@ -411,19 +413,14 @@ class PreheatPanel(ScreenPanel):
         pobox = self.labels['popover_vbox']
         for child in pobox.get_children():
             pobox.remove(child)
-        dtype = self.devices[self.popover_device]['type']
-        can_target = dtype != "sensor" and dtype != "fan"
 
         if self.labels['da'].is_showing(self.popover_device):
             pobox.pack_start(self.labels['graph_hide'], True, True, 5)
-            if can_target:
-                pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
-                pobox.pack_end(self.devices[self.popover_device]['select'], True, True, 5)
-                self.devices[self.popover_device]['select'].connect("clicked", self.select_heater, self.popover_device)
         else:
             pobox.pack_start(self.labels['graph_show'], True, True, 5)
-            if can_target:
-                pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
+        if self.devices[self.popover_device]["can_target"]:
+            pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
+            pobox.pack_end(self.devices[self.popover_device]['select'], True, True, 5)
 
     def process_update(self, action, data):
         if action != "notify_status_update":
@@ -470,7 +467,7 @@ class PreheatPanel(ScreenPanel):
         if device not in self.devices:
             return
 
-        if self._printer.get_temp_store_device_has_target(device):
+        if  self.devices[device]["can_target"]:
             self.devices[device]["temp"].get_child().set_label("%.1f %s" % (temp, self.format_target(target)))
         else:
             self.devices[device]["temp"].get_child().set_label("%.1f" % temp)
