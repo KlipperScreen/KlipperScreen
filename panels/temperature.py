@@ -142,14 +142,16 @@ class PreheatPanel(ScreenPanel):
                     logging.info("Setting %s to %d" % (heater, target))
                     self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), target)
                 elif heater.startswith('heater_bed'):
-                    if target > KlippyGcodes.MAX_BED_TEMP:
-                        target = KlippyGcodes.MAX_BED_TEMP
+                    MAX_BED_TEMP = int(self._printer.get_config_section('heater_bed')['max_temp'])
+                    if target > MAX_BED_TEMP:
+                        target = MAX_BED_TEMP
                     logging.info("Setting %s to %d" % (heater, target))
                     self._screen._ws.klippy.set_bed_temp(target)
                     self._printer.set_dev_stat(heater, "target", int(target))
-                else:
-                    if target > KlippyGcodes.MAX_EXT_TEMP:
-                        target = KlippyGcodes.MAX_EXT_TEMP
+                elif heater.startswith('extruder'):
+                    MAX_EXT_TEMP = int(self._printer.get_config_section('extruder')['max_temp'])
+                    if target > MAX_EXT_TEMP:
+                        target = MAX_EXT_TEMP
                     logging.info("Setting %s to %d" % (heater, target))
                     self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), target)
                     self._printer.set_dev_stat(heater, "target", int(target))
@@ -314,13 +316,21 @@ class PreheatPanel(ScreenPanel):
         self.labels['devices'].show_all()
 
     def change_target_temp(self, temp):
+        _ = self.lang.gettext
+
         if self.active_heater.startswith('heater_generic '):
             self._screen._ws.klippy.set_heater_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
         elif self.active_heater == "heater_bed":
-            temp = 0 if temp < 0 or temp > KlippyGcodes.MAX_BED_TEMP else temp
+            MAX_BED_TEMP = int(self._printer.get_config_section('heater_bed')['max_temp'])
+            if temp > MAX_BED_TEMP:
+                self._screen.show_popup_message(_("Temperature above maximum"))
+            temp = 0 if temp < 0 or temp > MAX_BED_TEMP else temp
             self._screen._ws.klippy.set_bed_temp(temp)
         else:
-            temp = 0 if temp < 0 or temp > KlippyGcodes.MAX_EXT_TEMP else temp
+            MAX_EXT_TEMP = int(self._printer.get_config_section('extruder')['max_temp'])
+            if temp > MAX_EXT_TEMP:
+                self._screen.show_popup_message(_("Temperature above maximum"))
+            temp = 0 if temp < 0 or temp > MAX_EXT_TEMP else temp
             self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(self.active_heater), temp)
         self._printer.set_dev_stat(self.active_heater, "target", temp)
 
