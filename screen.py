@@ -435,7 +435,7 @@ class KlipperScreen(Gtk.Window):
     def restart_ks(self, widget, response_id):
         if response_id == Gtk.ResponseType.OK:
             logging.debug("Restarting")
-            os.system("sudo systemctl restart KlipperScreen")
+            os.system("sudo systemctl restart %s" % self._config.get_main_config_option('service'))
         widget.destroy()
 
     def init_style(self):
