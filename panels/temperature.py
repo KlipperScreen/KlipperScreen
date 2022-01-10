@@ -12,9 +12,9 @@ from ks_includes.widgets.graph import HeaterGraph
 from ks_includes.widgets.keypad import Keypad
 
 def create_panel(*args):
-    return PreheatPanel(*args)
+    return TemperaturePanel(*args)
 
-class PreheatPanel(ScreenPanel):
+class TemperaturePanel(ScreenPanel):
     active_heaters = []
     devices = {}
     graph_update = None
