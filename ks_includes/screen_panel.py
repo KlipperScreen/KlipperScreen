@@ -44,7 +44,7 @@ class ScreenPanel:
         if temp <= 0:
             return ""
         else:
-            return self.format_temp(temp, 0)
+            return ("(%s)" % str(int(temp)))
 
     def format_temp(self, temp, places=1):
         if places == 0:

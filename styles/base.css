@@ -32,21 +32,25 @@ button:active {
 button.color1 {
     border-bottom: .4em solid #ED6500;
     margin: .3em;
+    min-height: 3em;
 }
 
 button.color2 {
     border-bottom: .4em solid #B10080;
     margin: .3em;
+    min-height: 3em;
 }
 
 button.color3 {
     border-bottom: .4em solid #009384;
     margin: .3em;
+    min-height: 3em;
 }
 
 button.color4 {
     border-bottom: .4em solid #A7E100;
     margin: .3em;
+    min-height: 3em;
 }
 
 button.active {

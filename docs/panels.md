@@ -68,11 +68,6 @@ type: power
 
 ![Power](img/power.png)
 
-### Preheat
-type: preheat
-
-![Preheat Panel](img/preheat.png)
-
 ### Print
 type: print
 
@@ -89,7 +84,7 @@ type: system
 ![System Panel](img/system.png)
 
 ### Temperature
-type: temperature theme:material-light
+type: temperature theme:custom
 
 ![Temperature](img/temperature.png)
 
