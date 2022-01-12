@@ -262,6 +262,7 @@ trough {
 .heater-grid label {
     margin-top: .3em;
     margin-bottom: .3em;
+    min-height: 2em;
 }
 
 .message_popup {

@@ -358,10 +358,17 @@ class TemperaturePanel(ScreenPanel):
         da.set_vexpand(True)
         self.labels['da'] = da
 
+        scroll = Gtk.ScrolledWindow()
+        scroll.set_property("overlay-scrolling", False)
+        scroll.set_hexpand(True)
+        scroll.set_vexpand(True)
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add(self.labels['devices'])
+
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         box.set_vexpand(True)
-        box.add(self.labels['devices'])
-        box.add(da)
+        box.add(scroll)
+        box.add(self.labels['da'])
 
 
         self.labels['graph_settemp'] = self._gtk.Button(label=_("Set Temp"))
@@ -377,9 +384,10 @@ class TemperaturePanel(ScreenPanel):
         popover.set_position(Gtk.PositionType.BOTTOM)
         self.labels['popover'] = popover
 
-        for d in self._printer.get_temp_store_devices():
+        for i, d in enumerate(self._printer.get_temp_store_devices(), start=3):
             self.add_device(d)
-
+        graph_height = max(0, self._screen.height - (i * 6 * self._gtk.get_font_size()))
+        self.labels['da'].set_size_request(0, graph_height)
         return box
 
 
