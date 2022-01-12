@@ -235,6 +235,9 @@ class TemperaturePanel(ScreenPanel):
 
         if not (device.startswith("extruder") or device.startswith("heater_bed")):
             devname = " ".join(device.split(" ")[1:])
+            # Support for hiding devices by name
+            if devname.startswith("_"):
+                return
         else:
             devname = device
 

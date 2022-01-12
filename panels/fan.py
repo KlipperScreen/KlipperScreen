@@ -139,6 +139,10 @@ class FanPanel(ScreenPanel):
     def load_fans(self):
         fans = self._printer.get_fans()
         for fan in fans:
+            # Support for hiding devices by name
+            name = " ".join(fan.split(" ")[1:]) if not (fan == "fan") else fan
+            if name.startswith("_"):
+                continue
             self.add_fan(fan)
 
     def set_fan_speed(self, widget, fan):

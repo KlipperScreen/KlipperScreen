@@ -44,6 +44,9 @@ class SettingsPanel(ScreenPanel):
 
         for macro in self._printer.get_config_section_list("gcode_macro "):
             macro = macro[12:]
+            # Support for hiding macros by name
+            if macro.startswith("_"):
+                continue
             self.macros[macro] = {
                 "name": macro,
                 "section": "displayed_macros %s" % self._screen.connected_printer,
