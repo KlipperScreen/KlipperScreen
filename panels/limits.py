@@ -73,7 +73,7 @@ class LimitsPanel(ScreenPanel):
         self.values[option] = int(value)
         self.devices[option]['scale'].disconnect_by_func(self.set_opt_value)
         self.devices[option]['scale'].set_value(self.values[option])
-        self.devices[option]['scale'].connect("value-changed", self.set_opt_value, option)
+        self.devices[option]['scale'].connect("button-release-event", self.set_opt_value, option)
 
     def add_option(self, option, optname, units, value):
         logging.info("Adding option: %s" % option)
@@ -99,7 +99,7 @@ class LimitsPanel(ScreenPanel):
         scale.set_hexpand(True)
         scale.set_has_origin(True)
         scale.get_style_context().add_class("option_slider")
-        scale.connect("value-changed", self.set_opt_value, option)
+        scale.connect("button-release-event", self.set_opt_value, option)
 
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)
@@ -123,7 +123,7 @@ class LimitsPanel(ScreenPanel):
         self.labels['devices'].attach(self.devices[option]['row'], 0, pos, 1, 1)
         self.labels['devices'].show_all()
 
-    def set_opt_value(self, widget, opt):
+    def set_opt_value(self, widget, event, opt):
         value = self.devices[opt]['scale'].get_value()
 
         if opt == "max_accel":

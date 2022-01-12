@@ -162,7 +162,7 @@ class SettingsPanel(ScreenPanel):
             scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
             scale.set_hexpand(True)
             scale.set_digits(0)
-            scale.connect("value-changed", self.scale_moved, option['section'], opt_name)
+            scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
             dev.add(scale)
         elif option['type'] == "printer":
             logging.debug("Option: %s" % option)
@@ -229,7 +229,7 @@ class SettingsPanel(ScreenPanel):
             if callback is not None:
                 callback(value)
 
-    def scale_moved(self, widget, section, option):
+    def scale_moved(self, widget, event, section, option):
         logging.debug("[%s] %s changed to %s" % (section, option, widget.get_value()))
         if section not in self._config.get_config().sections():
             self._config.get_config().add_section(section)
