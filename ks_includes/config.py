@@ -242,9 +242,14 @@ class KlipperScreenConfig:
         if not path.exists(file):
             file = os.path.join(klipperscreendir, self.configfile_name)
             if not path.exists(file):
-                file = os.path.expanduser("~/") + "klipper_config/%s" % (self.configfile_name)
+                file = self.configfile_name.lower()
                 if not path.exists(file):
-                    file = self.default_config_path
+                    klipper_config = os.path.join(os.path.expanduser("~/"), "klipper_config")
+                    file = os.path.join(klipper_config, self.configfile_name)
+                    if not path.exists(file):
+                        file = os.path.join(klipper_config, self.configfile_name.lower())
+                        if not path.exists(file):
+                            file = self.default_config_path
 
         logging.info("Found configuration file at: %s" % file)
         return file
@@ -356,10 +361,11 @@ class KlipperScreenConfig:
             path = self.config_path
         else:
             path = os.path.expanduser("~/")
-            if os.path.exists(path+"klipper_config/"):
-                path = path + "klipper_config/KlipperScreen.conf"
+            klipper_config = os.path.join(path, "klipper_config")
+            if os.path.exists(klipper_config):
+                path = os.path.join(klipper_config, "KlipperScreen.conf")
             else:
-                path = path + "KlipperScreen.conf"
+                path = os.path.join(path, "KlipperScreen.conf")
 
         try:
             file = open(path, 'w')
