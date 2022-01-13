@@ -33,6 +33,9 @@ language: en
 
 # Allows the cursor to be displayed on the screen
 show_cursor: False
+
+# Allows to define custom systemctl command for restart like xrdp
+service: KlipperScreen
 ```
 
 ## Printer Options
