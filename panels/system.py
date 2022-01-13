@@ -399,4 +399,4 @@ class SystemPanel(ScreenPanel):
             self._screen._ws.klippy.restart()
 
     def restart_ks(self, widget):
-        os.system("sudo systemctl restart KlipperScreen")
+        os.system("sudo systemctl restart %s" % self._config.get_main_config_option('service'))
