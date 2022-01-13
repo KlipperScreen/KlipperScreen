@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 11:29-0300\n"
+"POT-Creation-Date: 2022-01-13 08:24-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
-"Language: Dansk\n"
+"Language: dansk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.0\n"
 
 #, python-format
 msgid "%d Packages will be updated"
@@ -39,7 +39,10 @@ msgid "Add Printer"
 msgstr "Tilføj printer"
 
 msgid "Add bed mesh profile"
-msgstr "Tilføj "bed-mesh" profil"
+msgstr "Tilføj \"bed-mesh\" profil"
+
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "Er du sikker på, at du vil køre nødstop?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Er du sikker på du vil annullere det igangværende print?"
@@ -58,6 +61,12 @@ msgstr "Bed-mesh"
 
 msgid "Calibrate"
 msgstr "Kalibrér"
+
+msgid "Calibrated, save configuration to make it permanent"
+msgstr "Kalibreret, gem konfiguration for at gøre den permanent"
+
+msgid "Can't set above the maximum:"
+msgstr "Kan ikke indstilles over maksimum:"
 
 msgid "Cancel"
 msgstr "Annuller"
@@ -79,7 +88,7 @@ msgid ""
 "Please submit an issue on GitHub for help."
 msgstr ""
 "Tjek /tmp/KlipperScreen.log for mere information.\n"
-"Indsend venligst et "Issue" på GitHub for hjælp."
+"Indsend venligst et \"Issue\" på GitHub for hjælp."
 
 msgid "Close"
 msgstr "Luk"
@@ -89,6 +98,9 @@ msgstr "Færdig"
 
 msgid "Configuration"
 msgstr "Konfiguration"
+
+msgid "Confirm Emergency Stop"
+msgstr "Bekræft Nødstop"
 
 msgid "Connected"
 msgstr "Forbundet"
@@ -114,6 +126,9 @@ msgstr "Formindsk"
 
 msgid "Delete"
 msgstr "Slet"
+
+msgid "Deselect"
+msgstr "Fravælg"
 
 msgid "Disable Motors"
 msgstr "Deaktivér motorer"
@@ -155,6 +170,9 @@ msgstr "Ekstrudering +"
 msgid "Extrusion -"
 msgstr "Ekstrudering -"
 
+msgid "Failed, adjust position first"
+msgstr "Mislykkedes, juster først positionen"
+
 msgid "Fan"
 msgstr "Blæser"
 
@@ -178,6 +196,9 @@ msgstr "Skriftstørrelse"
 
 msgid "Go Back"
 msgstr "Gå tilbage"
+
+msgid "Hide"
+msgstr "Skjule"
 
 msgid "Home"
 msgstr "Home"
@@ -260,7 +281,7 @@ msgid ""
 "Issue a FIRMWARE_RESTART to attempt fixing the issue."
 msgstr ""
 "Klipper har fundet en fejl.\n"
-"Tryk på "Genstart alt" for at forsøge at udbedre fejlen."
+"Tryk på \"Genstart alt\" for at forsøge at udbedre fejlen."
 
 msgid "Klipper has shutdown"
 msgstr "Klipper er lukket ned"
@@ -281,7 +302,7 @@ msgid "Large"
 msgstr "Stor"
 
 msgid "Left:"
-msgstr "Venstre"
+msgstr "Venstre:"
 
 msgid "Limits"
 msgstr "Grænser"
@@ -301,7 +322,7 @@ msgstr "Makroer"
 msgid "Main Menu"
 msgstr "Hovedmenu"
 
-msgid "Max Acceleration"
+msgid "Max Accelation"
 msgstr "Maks. acceleration"
 
 msgid "Max Acceleration to Deceleration"
@@ -334,15 +355,15 @@ msgstr "Navn"
 msgid "Network"
 msgstr "Netværk"
 
-msgid "Number Pad"
-msgstr "Nummeriske taster"
+msgid "Nothing selected"
+msgstr "Intet valgt"
 
 msgid "Off"
 msgstr "Sluk"
 
 #, python-format
 msgid "Outdated by %d commits:"
-msgstr "%d "commits" bagud"
+msgstr "%d \"commits\" bagud:"
 
 msgid "PSK for"
 msgstr "PSK for"
@@ -358,9 +379,6 @@ msgstr "Strømstyring"
 
 msgid "Power On Printer"
 msgstr "Tænd printer"
-
-msgid "Preheat"
-msgstr "Forvarm"
 
 msgid "Print"
 msgstr "Print"
@@ -407,20 +425,26 @@ msgstr "Gem"
 msgid "Save Config"
 msgstr "Gem Konfiguration"
 
-msgid "Save configuration."
+msgid "Save configuration"
 msgstr "Gem Konfiguration"
 
 msgid "Screen Power Off Time"
 msgstr "Skærm timeout"
 
-msgid "Screen will show in less than one second"
-msgstr "Skærm vises om under 1 sekund"
-
 msgid "Screws Adjust"
 msgstr "Skruejustering"
 
+msgid "Select"
+msgstr "Vælg"
+
+msgid "Set Temp"
+msgstr "Indstil Temp"
+
 msgid "Settings"
 msgstr "Indstillinger"
+
+msgid "Show"
+msgstr "At vise"
 
 msgid "Size"
 msgstr "Størrelse"
@@ -475,6 +499,15 @@ msgstr ""
 "System\n"
 "Luk ned"
 
+msgid "Target"
+msgstr "Mål"
+
+msgid "Temp"
+msgstr "Temp"
+
+msgid "Temp (°C)"
+msgstr "Temp (°C)"
+
 msgid "Temperature"
 msgstr "Temperatur"
 
@@ -485,11 +518,17 @@ msgstr "KlipperScreen skal genstartes for at anvende %s"
 msgid "Tool"
 msgstr "Ekstruder"
 
+msgid "Unknown Heater"
+msgstr "Ukendt varmelegeme"
+
+msgid "Unknown Heater "
+msgstr "Ukendt varmelegeme "
+
 msgid "Unload"
 msgstr "Tilbagetræk"
 
 msgid "Up To Date"
-msgstr "up-to-date"
+msgstr "Up-to-Date"
 
 msgid "Update"
 msgstr "Opdater"
@@ -542,5 +581,11 @@ msgstr "mm/s"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
-msgid "Confirm Emergency Stop"
-msgstr "Bekræft Nødstop"
+#~ msgid "Number Pad"
+#~ msgstr "Nummeriske taster"
+
+#~ msgid "Preheat"
+#~ msgstr "Forvarm"
+
+#~ msgid "Screen will show in less than one second"
+#~ msgstr "Skærm vises om under 1 sekund"

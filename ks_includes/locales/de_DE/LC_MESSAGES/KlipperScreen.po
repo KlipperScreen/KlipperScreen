@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR Elektrickser@gmail.com, 2021
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 11:29-0300\n"
-"PO-Revision-Date: 2021-12-12 08:45-0300\n"
+"POT-Creation-Date: 2022-01-13 08:24-0300\n"
+"PO-Revision-Date: 2022-01-13 08:28-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -47,6 +47,9 @@ msgstr "Drucker hinzufügen"
 msgid "Add bed mesh profile"
 msgstr "Mesh-Level Profil hinzufügen"
 
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "Sind Sie sicher, dass Sie Not-Aus ausführen möchten?"
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Möchten Sie diesen Druck wirklich abbrechen?"
 
@@ -64,6 +67,12 @@ msgstr "Druckbett Mesh-Level"
 
 msgid "Calibrate"
 msgstr "Höheneinstellung"
+
+msgid "Calibrated, save configuration to make it permanent"
+msgstr "Kalibriert, Konfiguration speichern, um sie dauerhaft zu machen"
+
+msgid "Can't set above the maximum:"
+msgstr "Kann nicht über dem Maximum eingestellt werden:"
 
 msgid "Cancel"
 msgstr "Abbruch"
@@ -96,6 +105,9 @@ msgstr "Fertiggestellt"
 msgid "Configuration"
 msgstr "Einstellungen"
 
+msgid "Confirm Emergency Stop"
+msgstr "Not-Aus bestätigen"
+
 msgid "Connected"
 msgstr "Verbunden"
 
@@ -120,6 +132,9 @@ msgstr "Verringern"
 
 msgid "Delete"
 msgstr "Löschen"
+
+msgid "Deselect"
+msgstr "Abwählen"
 
 msgid "Disable Motors"
 msgstr "Motoren deaktivieren"
@@ -161,6 +176,9 @@ msgstr "Extrusion +"
 msgid "Extrusion -"
 msgstr "Extrusion -"
 
+msgid "Failed, adjust position first"
+msgstr "Fehlgeschlagen, Position zuerst anpassen"
+
 msgid "Fan"
 msgstr "Lüfter"
 
@@ -184,6 +202,9 @@ msgstr "Schriftgröße"
 
 msgid "Go Back"
 msgstr "Zurück"
+
+msgid "Hide"
+msgstr "Verstecken"
 
 msgid "Home"
 msgstr "Grundposition"
@@ -350,9 +371,8 @@ msgstr "Name"
 msgid "Network"
 msgstr "Netzwerk"
 
-# Nummernblock is 2 character too long and currently doesn't fit
-msgid "Number Pad"
-msgstr "Tastenfeld"
+msgid "Nothing selected"
+msgstr "Nichts ausgewählt"
 
 msgid "Off"
 msgstr "Aus"
@@ -375,9 +395,6 @@ msgstr "Ein"
 
 msgid "Power On Printer"
 msgstr "Drucker einschalten"
-
-msgid "Preheat"
-msgstr "Vorheizen"
 
 msgid "Print"
 msgstr "Druck"
@@ -428,20 +445,26 @@ msgstr "Speichern"
 msgid "Save Config"
 msgstr "Einstellungen speichern"
 
-msgid "Save configuration."
-msgstr "Speichere Einstellungen."
+msgid "Save configuration"
+msgstr "Speichere Einstellungen"
 
 msgid "Screen Power Off Time"
 msgstr "Bildschirm abschalten in"
 
-msgid "Screen will show in less than one second"
-msgstr "Der Bildschirm wird in weniger als einer Sekunde angezeigt"
-
 msgid "Screws Adjust"
 msgstr "Schrauben Einstellen"
 
+msgid "Select"
+msgstr "Wählen"
+
+msgid "Set Temp"
+msgstr "Temp. einstellen"
+
 msgid "Settings"
 msgstr "Einstellungen"
+
+msgid "Show"
+msgstr "Zeigen"
 
 msgid "Size"
 msgstr "Größe"
@@ -453,7 +476,7 @@ msgid "Small"
 msgstr "Klein"
 
 msgid "Sort by: "
-msgstr "Sortierung:"
+msgstr "Sortierung: "
 
 msgid "Speed (mm/s)"
 msgstr "Geschwindigkeit (mm/s)"
@@ -496,6 +519,15 @@ msgstr ""
 "Drucker\n"
 "Ausschalten"
 
+msgid "Target"
+msgstr "Ziel"
+
+msgid "Temp"
+msgstr "Temp"
+
+msgid "Temp (°C)"
+msgstr "Temp (°C)"
+
 msgid "Temperature"
 msgstr "Temperatur"
 
@@ -505,6 +537,12 @@ msgstr "Zum Übernehmen von %s benötigt Klipperscreen einen Neustart"
 
 msgid "Tool"
 msgstr "Druckkopf"
+
+msgid "Unknown Heater"
+msgstr "Unbekannte Heizung"
+
+msgid "Unknown Heater "
+msgstr "Unbekannte Heizung "
 
 msgid "Unload"
 msgstr "Entladen"
@@ -517,9 +555,8 @@ msgstr "Aktualisiert"
 msgid "Update"
 msgstr "Update"
 
-# Hochgeladen doesn't fit in small screens
 msgid "Uploaded"
-msgstr "Datum"
+msgstr "Hochgeladen"
 
 msgid "View Mesh"
 msgstr "Mesh anzeigen"
@@ -566,14 +603,21 @@ msgstr "mm/s"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
+# Nummernblock is 2 character too long and currently doesn't fit
+#~ msgid "Number Pad"
+#~ msgstr "Tastenfeld"
+
+#~ msgid "Preheat"
+#~ msgstr "Vorheizen"
+
+#~ msgid "Screen will show in less than one second"
+#~ msgstr "Der Bildschirm wird in weniger als einer Sekunde angezeigt"
+
 #~ msgid "Colorized"
 #~ msgstr "Colorized"
 
 #~ msgid "?"
 #~ msgstr "?"
-
-#~ msgid "Are you sure you want to print"
-#~ msgstr "Möchten Sie wirklich drucken"
 
 #~ msgid "Cancel Change"
 #~ msgstr "Änderung abbrechen"
