@@ -36,9 +36,15 @@ class ZCalibratePanel(ScreenPanel):
         self.widgets['zpos'].connect("clicked", self.move, "+")
         self.widgets['zneg'] = self._gtk.ButtonImage('z-closer', _("Lower Nozzle"), 'color1')
         self.widgets['zneg'].connect("clicked", self.move, "-")
-        self.widgets['start'] = self._gtk.ButtonImage('resume', _("Start"), 'color3')
-        self.widgets['start'].connect("clicked", self.start_calibration)
-
+        if (self._printer.config_section_exists("probe") or self._printer.config_section_exists("bltouch")):
+            self.widgets['start'] = self._gtk.ButtonImage('resume', _("Start") + "\n(Probe)", 'color3')
+            self.widgets['start'].connect("clicked", self.start_calibration)
+        elif "Mesh" in self.title:
+            self.widgets['start'] = self._gtk.ButtonImage('resume', _("Start") + "\n(Mesh)", 'color3')
+            self.widgets['start'].connect("clicked", self.start_mesh)
+        else:
+            self.widgets['start'] = self._gtk.ButtonImage('resume', _("Start") + "\n(Endstop)", 'color3')
+            self.widgets['start'].connect("clicked", self.start_calibration)
         self.widgets['complete'] = self._gtk.ButtonImage('complete', _('Accept'), 'color3')
         self.widgets['complete'].connect("clicked", self.accept)
         self.widgets['cancel'] = self._gtk.ButtonImage('cancel', _('Abort'), 'color2')
@@ -77,8 +83,14 @@ class ZCalibratePanel(ScreenPanel):
         grid.attach(self.widgets['complete'], 2, 0, 1, 1)
         grid.attach(distances, 0, 2, 3, 1)
         grid.attach(self.widgets['cancel'], 2, 1, 1, 1)
-
+        self.buttons_not_calibrating()
         self.content.add(grid)
+
+    def start_mesh(self, widget):
+        if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
+            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+
+        self._screen._ws.klippy.gcode_script("BED_MESH_CALIBRATE")
 
     def start_calibration(self, widget):
         if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
@@ -96,11 +108,26 @@ class ZCalibratePanel(ScreenPanel):
             self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_ENDSTOP_CALIBRATE)
 
     def process_update(self, action, data):
-        if action != "notify_status_update":
-            return
+        _ = self.lang.gettext
 
-        if "toolhead" in data and "position" in data['toolhead']:
-            self.updatePosition(data['toolhead']['position'])
+        if action == "notify_status_update":
+            if "toolhead" in data and "position" in data['toolhead']:
+                self.updatePosition(data['toolhead']['position'])
+        elif action == "notify_gcode_response":
+            if "unknown" in data.lower():
+                self.buttons_not_calibrating()
+            elif "save_config" in data.lower():
+                self.buttons_not_calibrating()
+                self._screen.show_popup_message(_("Calibrated, save configuration to make it permanent"), level=1)
+            elif "out of range" in data.lower():
+                self._screen.show_popup_message("%s" % data)
+                self.buttons_not_calibrating()
+            elif "fail" in data.lower() and "use testz" in data.lower():
+                self._screen.show_popup_message(_("Failed, adjust position first"))
+                self.buttons_not_calibrating()
+            elif "use testz" in data.lower() or "use abort" in data.lower() or "z position" in data.lower():
+                self.buttons_calibrating()
+        return
 
     def updatePosition(self, position):
         self.widgets['zposition'].set_text(str(round(position[2], 2)))
@@ -128,13 +155,13 @@ class ZCalibratePanel(ScreenPanel):
     def abort(self, widget):
         logging.info("Aborting calibration")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.ABORT)
+        self.buttons_not_calibrating()
         self.menu_return(widget)
 
     def accept(self, widget):
         logging.info("Accepting Z position")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.ACCEPT)
 
-    # We need to track if the machine is calibrating or not to activate the appropriate buttons
     def buttons_calibrating(self):
         self.widgets['start'].get_style_context().remove_class('color3')
         self.widgets['start'].set_sensitive(False)
