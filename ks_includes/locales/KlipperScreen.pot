@@ -8,13 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 11:29-0300\n"
+"POT-Creation-Date: 2022-01-13 08:24-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #, python-format
@@ -46,6 +46,9 @@ msgstr ""
 msgid "Add bed mesh profile"
 msgstr ""
 
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr ""
 
@@ -62,6 +65,12 @@ msgid "Bed Mesh"
 msgstr ""
 
 msgid "Calibrate"
+msgstr ""
+
+msgid "Calibrated, save configuration to make it permanent"
+msgstr ""
+
+msgid "Can't set above the maximum:"
 msgstr ""
 
 msgid "Cancel"
@@ -93,6 +102,9 @@ msgstr ""
 msgid "Configuration"
 msgstr ""
 
+msgid "Confirm Emergency Stop"
+msgstr ""
+
 msgid "Connected"
 msgstr ""
 
@@ -116,6 +128,9 @@ msgid "Decrease"
 msgstr ""
 
 msgid "Delete"
+msgstr ""
+
+msgid "Deselect"
 msgstr ""
 
 msgid "Disable Motors"
@@ -158,6 +173,9 @@ msgstr ""
 msgid "Extrusion -"
 msgstr ""
 
+msgid "Failed, adjust position first"
+msgstr ""
+
 msgid "Fan"
 msgstr ""
 
@@ -180,6 +198,9 @@ msgid "Font Size"
 msgstr ""
 
 msgid "Go Back"
+msgstr ""
+
+msgid "Hide"
 msgstr ""
 
 msgid "Home"
@@ -333,7 +354,7 @@ msgstr ""
 msgid "Network"
 msgstr ""
 
-msgid "Number Pad"
+msgid "Nothing selected"
 msgstr ""
 
 msgid "Off"
@@ -356,9 +377,6 @@ msgid "Power"
 msgstr ""
 
 msgid "Power On Printer"
-msgstr ""
-
-msgid "Preheat"
 msgstr ""
 
 msgid "Print"
@@ -406,19 +424,25 @@ msgstr ""
 msgid "Save Config"
 msgstr ""
 
-msgid "Save configuration."
+msgid "Save configuration"
 msgstr ""
 
 msgid "Screen Power Off Time"
 msgstr ""
 
-msgid "Screen will show in less than one second"
-msgstr ""
-
 msgid "Screws Adjust"
 msgstr ""
 
+msgid "Select"
+msgstr ""
+
+msgid "Set Temp"
+msgstr ""
+
 msgid "Settings"
+msgstr ""
+
+msgid "Show"
 msgstr ""
 
 msgid "Size"
@@ -470,6 +494,15 @@ msgid ""
 "Shutdown"
 msgstr ""
 
+msgid "Target"
+msgstr ""
+
+msgid "Temp"
+msgstr ""
+
+msgid "Temp (°C)"
+msgstr ""
+
 msgid "Temperature"
 msgstr ""
 
@@ -478,6 +511,12 @@ msgid "To apply %s KlipperScreen needs to be restarted"
 msgstr ""
 
 msgid "Tool"
+msgstr ""
+
+msgid "Unknown Heater"
+msgstr ""
+
+msgid "Unknown Heater "
 msgstr ""
 
 msgid "Unload"
@@ -535,7 +574,4 @@ msgid "mm/s"
 msgstr ""
 
 msgid "mm/s^2"
-msgstr ""
-
-msgid "Confirm Emergency Stop"
 msgstr ""

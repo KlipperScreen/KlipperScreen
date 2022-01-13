@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 11:29-0300\n"
+"POT-Creation-Date: 2022-01-13 08:24-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pappicio\n"
 "Language-Team: \n"
@@ -42,6 +42,9 @@ msgstr "Aggiungi Stampante"
 msgid "Add bed mesh profile"
 msgstr "Aggiungi Profilo Mesh"
 
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "Sei sicuro di voler eseguire l'arresto di emergenza?"
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Cancellare la Stampa?"
 
@@ -59,6 +62,12 @@ msgstr "Rete letto"
 
 msgid "Calibrate"
 msgstr "Calibra"
+
+msgid "Calibrated, save configuration to make it permanent"
+msgstr "Calibrato, salva la configurazione per renderla permanente"
+
+msgid "Can't set above the maximum:"
+msgstr "Impossibile impostare al di sopra del massimo:"
 
 msgid "Cancel"
 msgstr "Annulla"
@@ -91,6 +100,9 @@ msgstr "Completo"
 msgid "Configuration"
 msgstr "Impostazioni"
 
+msgid "Confirm Emergency Stop"
+msgstr "Conferma arresto di emergenza"
+
 msgid "Connected"
 msgstr "Connesso"
 
@@ -115,6 +127,9 @@ msgstr "Diminuisci"
 
 msgid "Delete"
 msgstr "Elimina"
+
+msgid "Deselect"
+msgstr "Deseleziona"
 
 msgid "Disable Motors"
 msgstr "Disab. Motori"
@@ -156,6 +171,9 @@ msgstr "Estrudi +"
 msgid "Extrusion -"
 msgstr "Estrudi -"
 
+msgid "Failed, adjust position first"
+msgstr "Fallito, regolare prima la posizione"
+
 msgid "Fan"
 msgstr "Ventola"
 
@@ -179,6 +197,9 @@ msgstr "Dimensione del testo"
 
 msgid "Go Back"
 msgstr "Indietro"
+
+msgid "Hide"
+msgstr "Nascondere"
 
 msgid "Home"
 msgstr "Inizio"
@@ -314,7 +335,7 @@ msgid "Max Velocity"
 msgstr "Velocità Massima"
 
 msgid "Medium"
-msgstr ""
+msgstr "Medio"
 
 msgid "Menu"
 msgstr "Menù"
@@ -337,8 +358,8 @@ msgstr "Nome"
 msgid "Network"
 msgstr "Rete"
 
-msgid "Number Pad"
-msgstr "Tastierino"
+msgid "Nothing selected"
+msgstr "Niente selezionato"
 
 msgid "Off"
 msgstr "Off"
@@ -361,9 +382,6 @@ msgstr "Power"
 
 msgid "Power On Printer"
 msgstr "Accendi Stampante"
-
-msgid "Preheat"
-msgstr "Preriscalda"
 
 msgid "Print"
 msgstr "Stampa"
@@ -410,20 +428,26 @@ msgstr "Salva"
 msgid "Save Config"
 msgstr "Salva Config"
 
-msgid "Save configuration."
-msgstr "Salva configurazione."
+msgid "Save configuration"
+msgstr "Salva configurazione"
 
 msgid "Screen Power Off Time"
 msgstr "Tempo Spegnim. Schermo"
 
-msgid "Screen will show in less than one second"
-msgstr "Lo schermo verrà visualizzato a breve"
-
 msgid "Screws Adjust"
 msgstr "Calibra Screws"
 
+msgid "Select"
+msgstr "Selezionare"
+
+msgid "Set Temp"
+msgstr "Imposta temp"
+
 msgid "Settings"
 msgstr "Impostazioni"
+
+msgid "Show"
+msgstr "Mostrare"
 
 msgid "Size"
 msgstr "Grandezza"
@@ -478,6 +502,15 @@ msgstr ""
 "Spegni\n"
 "Sistema"
 
+msgid "Target"
+msgstr "Obbiettivo"
+
+msgid "Temp"
+msgstr "Temp"
+
+msgid "Temp (°C)"
+msgstr "Temp (°C)"
+
 msgid "Temperature"
 msgstr "Temperatura"
 
@@ -487,6 +520,12 @@ msgstr "Riavvia KlipperScreen per applicare %s"
 
 msgid "Tool"
 msgstr "Strumenti"
+
+msgid "Unknown Heater"
+msgstr "Riscaldatore sconosciuto"
+
+msgid "Unknown Heater "
+msgstr "Riscaldatore sconosciuto "
 
 msgid "Unload"
 msgstr "Scaricare"
@@ -544,6 +583,15 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Number Pad"
+#~ msgstr "Tastierino"
+
+#~ msgid "Preheat"
+#~ msgstr "Preriscalda"
+
+#~ msgid "Screen will show in less than one second"
+#~ msgstr "Lo schermo verrà visualizzato a breve"
 
 #~ msgid "Medium (default)"
 #~ msgstr "Media (predef.)"

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 11:29-0300\n"
-"PO-Revision-Date: 2021-12-27 18:10+0100\n"
+"POT-Creation-Date: 2022-01-13 08:24-0300\n"
+"PO-Revision-Date: 2022-01-13 08:28-0300\n"
 "Last-Translator: O. Robardet\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #, python-format
@@ -47,6 +47,9 @@ msgstr "Ajouter une imprimante"
 msgid "Add bed mesh profile"
 msgstr "Ajouter un profil de maillage"
 
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "Êtes-vous sûr de vouloir exécuter l'arrêt d'urgence?"
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Êtes-vous sûr de vouloir annuler cette impression?"
 
@@ -64,6 +67,12 @@ msgstr "Maillage du plateau"
 
 msgid "Calibrate"
 msgstr "Étalonner"
+
+msgid "Calibrated, save configuration to make it permanent"
+msgstr "Calibré, enregistrez la configuration pour la rendre permanente"
+
+msgid "Can't set above the maximum:"
+msgstr "Impossible de définir au-dessus du maximum:"
 
 msgid "Cancel"
 msgstr "Annuler"
@@ -96,6 +105,9 @@ msgstr "Finalisé"
 msgid "Configuration"
 msgstr "Configuration"
 
+msgid "Confirm Emergency Stop"
+msgstr "Confirmer l'arrêt d'urgence"
+
 msgid "Connected"
 msgstr "Connecté"
 
@@ -120,6 +132,9 @@ msgstr "Diminuer"
 
 msgid "Delete"
 msgstr "Effacer"
+
+msgid "Deselect"
+msgstr "Désélectionner"
 
 msgid "Disable Motors"
 msgstr "Désactiver les moteurs"
@@ -161,6 +176,9 @@ msgstr "Extrusion +"
 msgid "Extrusion -"
 msgstr "Extrusion -"
 
+msgid "Failed, adjust position first"
+msgstr "Échec, ajustez d'abord la position"
+
 msgid "Fan"
 msgstr "Ventilateur"
 
@@ -184,6 +202,9 @@ msgstr "Taille de police"
 
 msgid "Go Back"
 msgstr "Retourner"
+
+msgid "Hide"
+msgstr "Cacher"
 
 msgid "Home"
 msgstr "Accueil"
@@ -342,8 +363,8 @@ msgstr "Nom"
 msgid "Network"
 msgstr "Réseau"
 
-msgid "Number Pad"
-msgstr "Clavier"
+msgid "Nothing selected"
+msgstr "Rien de sélectionné"
 
 msgid "Off"
 msgstr "Éteindre"
@@ -366,9 +387,6 @@ msgstr "Alimentation"
 
 msgid "Power On Printer"
 msgstr "Allumer l'imprimante"
-
-msgid "Preheat"
-msgstr "Préchauffer"
 
 msgid "Print"
 msgstr "Imprimer"
@@ -415,20 +433,26 @@ msgstr "Enregistrer"
 msgid "Save Config"
 msgstr "Enregistrer la config"
 
-msgid "Save configuration."
-msgstr "Enregistrer la configuration."
+msgid "Save configuration"
+msgstr "Enregistrer la configuration"
 
 msgid "Screen Power Off Time"
 msgstr "Délai d'extinction de l'écran"
 
-msgid "Screen will show in less than one second"
-msgstr "L'écran s'affichera en moins d'une seconde"
-
 msgid "Screws Adjust"
 msgstr "Ajuster les vis"
 
+msgid "Select"
+msgstr "Sélectionner"
+
+msgid "Set Temp"
+msgstr "Régler la temp"
+
 msgid "Settings"
 msgstr "Paramètres"
+
+msgid "Show"
+msgstr "Montrer"
 
 msgid "Size"
 msgstr "Dimension"
@@ -481,6 +505,15 @@ msgid ""
 "Shutdown"
 msgstr "Arrêt du Système"
 
+msgid "Target"
+msgstr "Cibler"
+
+msgid "Temp"
+msgstr "Temp"
+
+msgid "Temp (°C)"
+msgstr "Temp (°C)"
+
 msgid "Temperature"
 msgstr "Température"
 
@@ -490,6 +523,12 @@ msgstr "Pour appliquer %s KlipperScreen doit être redémarré"
 
 msgid "Tool"
 msgstr "Outil"
+
+msgid "Unknown Heater"
+msgstr "Chauffage inconnu"
+
+msgid "Unknown Heater "
+msgstr "Chauffage inconnu "
 
 msgid "Unload"
 msgstr "Décharger"
@@ -548,8 +587,14 @@ msgstr "mm/s"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
-msgid "Confirm Emergency Stop"
-msgstr "Confirmer l'arrêt d'urgence"
+#~ msgid "Number Pad"
+#~ msgstr "Clavier"
+
+#~ msgid "Preheat"
+#~ msgstr "Préchauffer"
+
+#~ msgid "Screen will show in less than one second"
+#~ msgstr "L'écran s'affichera en moins d'une seconde"
 
 #~ msgid "Medium (default)"
 #~ msgstr "Moyen (défaut)"
@@ -580,9 +625,6 @@ msgstr "Confirmer l'arrêt d'urgence"
 
 #~ msgid "?"
 #~ msgstr "?"
-
-#~ msgid "Are you sure you want to print"
-#~ msgstr "Es tu sure de vouloir imprimer"
 
 #~ msgid "Cancel Change"
 #~ msgstr "Annuler le changement"

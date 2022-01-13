@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 11:29-0300\n"
-"PO-Revision-Date: 2022-01-03 01:25+0800\n"
+"POT-Creation-Date: 2022-01-13 08:37-0300\n"
+"PO-Revision-Date: 2022-01-13 08:39-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.0\n"
 
 #, python-format
 msgid "%d Packages will be updated"
@@ -47,6 +47,9 @@ msgstr "新增列印機"
 msgid "Add bed mesh profile"
 msgstr "新增網床輪廓"
 
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "您確定要運行緊急停止嗎？"
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "您確定要取消列印嗎?"
 
@@ -64,6 +67,12 @@ msgstr "網格床"
 
 msgid "Calibrate"
 msgstr "校正"
+
+msgid "Calibrated, save configuration to make it permanent"
+msgstr "校準，保存配置以使其永久化"
+
+msgid "Can't set above the maximum:"
+msgstr "不能設置超過最大值："
 
 msgid "Cancel"
 msgstr "取消"
@@ -96,6 +105,9 @@ msgstr "完成"
 msgid "Configuration"
 msgstr "配置"
 
+msgid "Confirm Emergency Stop"
+msgstr "確認緊急停止"
+
 msgid "Connected"
 msgstr "連接"
 
@@ -120,6 +132,9 @@ msgstr "減少"
 
 msgid "Delete"
 msgstr "刪除"
+
+msgid "Deselect"
+msgstr "取消選擇"
 
 msgid "Disable Motors"
 msgstr "禁用步進電機"
@@ -161,6 +176,9 @@ msgstr "擠出 +"
 msgid "Extrusion -"
 msgstr "擠出 -"
 
+msgid "Failed, adjust position first"
+msgstr "失敗，先調整位置"
+
 msgid "Fan"
 msgstr "風扇"
 
@@ -185,8 +203,11 @@ msgstr "字體大小"
 msgid "Go Back"
 msgstr "返回"
 
+msgid "Hide"
+msgstr "隱藏"
+
 msgid "Home"
-msgstr "歸零"
+msgstr "首頁"
 
 msgid "Home All"
 msgstr "歸零全部"
@@ -204,7 +225,7 @@ msgid "Home Z"
 msgstr "歸零 Z"
 
 msgid "Homing"
-msgstr "歸零中"
+msgstr "歸零"
 
 msgid "Hostname"
 msgstr "主機名稱"
@@ -287,7 +308,7 @@ msgid "Large"
 msgstr "大的"
 
 msgid "Left:"
-msgstr "左邊:"
+msgstr "剩下時間："
 
 msgid "Limits"
 msgstr "限制"
@@ -299,7 +320,7 @@ msgid "Lower Nozzle"
 msgstr "降低噴嘴"
 
 msgid "Macro shortcut on sidebar"
-msgstr "側邊欄上的巨集快捷方式"
+msgstr "在側邊欄上顯示巨集快捷鍵"
 
 msgid "Macros"
 msgstr "巨集"
@@ -340,8 +361,8 @@ msgstr "名稱"
 msgid "Network"
 msgstr "網路"
 
-msgid "Number Pad"
-msgstr "數字鍵盤"
+msgid "Nothing selected"
+msgstr "未選擇任何內容"
 
 msgid "Off"
 msgstr "關閉"
@@ -364,9 +385,6 @@ msgstr "電源"
 
 msgid "Power On Printer"
 msgstr "啟動列印機"
-
-msgid "Preheat"
-msgstr "預熱"
 
 msgid "Print"
 msgstr "列印"
@@ -413,20 +431,26 @@ msgstr "儲存"
 msgid "Save Config"
 msgstr "儲存設定"
 
-msgid "Save configuration."
-msgstr "儲存設定檔案."
+msgid "Save configuration"
+msgstr "儲存設定檔案"
 
 msgid "Screen Power Off Time"
 msgstr "螢幕關閉時間"
 
-msgid "Screen will show in less than one second"
-msgstr "螢幕將在1秒內顯示"
-
 msgid "Screws Adjust"
 msgstr "Screws 調整"
 
+msgid "Select"
+msgstr "選擇"
+
+msgid "Set Temp"
+msgstr "設定溫度"
+
 msgid "Settings"
 msgstr "設定"
+
+msgid "Show"
+msgstr "展示"
 
 msgid "Size"
 msgstr "大小"
@@ -477,6 +501,15 @@ msgid ""
 "Shutdown"
 msgstr "關閉系統"
 
+msgid "Target"
+msgstr "目標溫度"
+
+msgid "Temp"
+msgstr "目前溫度"
+
+msgid "Temp (°C)"
+msgstr "溫度（°C）"
+
 msgid "Temperature"
 msgstr "溫度"
 
@@ -486,6 +519,12 @@ msgstr "要應用 %s，需要重新啟動 KlipperScreen"
 
 msgid "Tool"
 msgstr "工具"
+
+msgid "Unknown Heater"
+msgstr "未知加熱器"
+
+msgid "Unknown Heater "
+msgstr "未知加熱器 "
 
 msgid "Unload"
 msgstr "卸載"
@@ -497,7 +536,7 @@ msgid "Update"
 msgstr "更新"
 
 msgid "Uploaded"
-msgstr "已上傳"
+msgstr "上傳時間"
 
 msgid "View Mesh"
 msgstr "檢視網格"
@@ -544,47 +583,11 @@ msgstr "mm/s"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
-#~ msgid "Medium (default)"
-#~ msgstr "中（默认"
+#~ msgid "Number Pad"
+#~ msgstr "數字鍵盤"
 
-#~ msgid "File Estimation (default)"
-#~ msgstr "文件估计（默认）"
+#~ msgid "Preheat"
+#~ msgstr "預熱"
 
-#~ msgid "Fan Off"
-#~ msgstr "关闭风扇"
-
-#~ msgid "Fan On"
-#~ msgstr "打开风扇"
-
-#~ msgid "Fast"
-#~ msgstr "快速"
-
-#~ msgid "Set Speed"
-#~ msgstr "设置速度"
-
-#~ msgid "Slow"
-#~ msgstr "慢"
-
-#~ msgid "?"
-#~ msgstr "?"
-
-#~ msgid "Are you sure you want to print"
-#~ msgstr "您确定要开始打印吗"
-
-#~ msgid "Cancel Change"
-#~ msgstr "取消变更"
-
-#~ msgid "Control"
-#~ msgstr "控制"
-
-#~ msgid "Emergency Stop"
-#~ msgstr "紧急停止"
-
-#~ msgid "Load Average"
-#~ msgstr "平均负载"
-
-#~ msgid "Network Info"
-#~ msgstr "网络信息"
-
-#~ msgid "Screen Blanking Time"
-#~ msgstr "屏幕关闭时间"
+#~ msgid "Screen will show in less than one second"
+#~ msgstr "螢幕將在1秒內顯示"

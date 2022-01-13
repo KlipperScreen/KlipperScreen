@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 11:29-0300\n"
-"PO-Revision-Date: 2021-11-18 11:36-0300\n"
+"POT-Creation-Date: 2022-01-13 08:24-0300\n"
+"PO-Revision-Date: 2022-01-13 08:32-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.0\n"
 
 #, python-format
 msgid "%d Packages will be updated"
@@ -47,6 +47,9 @@ msgstr "添加打印机"
 msgid "Add bed mesh profile"
 msgstr "添加网格床"
 
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "您确定要运行紧急停止吗？"
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "您确定要取消打印吗？"
 
@@ -64,6 +67,12 @@ msgstr "网格床"
 
 msgid "Calibrate"
 msgstr "校准"
+
+msgid "Calibrated, save configuration to make it permanent"
+msgstr "校准，保存配置以使其永久化"
+
+msgid "Can't set above the maximum:"
+msgstr "不能设置超过最大值："
 
 msgid "Cancel"
 msgstr "取消"
@@ -96,6 +105,9 @@ msgstr "完成"
 msgid "Configuration"
 msgstr "配置"
 
+msgid "Confirm Emergency Stop"
+msgstr "确认紧急停止"
+
 msgid "Connected"
 msgstr "连接"
 
@@ -104,7 +116,7 @@ msgid "Connecting to %s"
 msgstr "连接到 %s"
 
 msgid "Console"
-msgstr "安慰"
+msgstr "控制台"
 
 msgid "Continue"
 msgstr "继续"
@@ -120,6 +132,9 @@ msgstr "减少"
 
 msgid "Delete"
 msgstr "删除"
+
+msgid "Deselect"
+msgstr "取消选择"
 
 msgid "Disable Motors"
 msgstr "禁用步进电机"
@@ -144,7 +159,7 @@ msgid "Duration Only"
 msgstr "仅持续时间"
 
 msgid "Elapsed:"
-msgstr "过去："
+msgstr "已打印："
 
 msgid "Error"
 msgstr "错误"
@@ -160,6 +175,9 @@ msgstr "挤出 +"
 
 msgid "Extrusion -"
 msgstr "挤出 -"
+
+msgid "Failed, adjust position first"
+msgstr "失败，先调整位置"
 
 msgid "Fan"
 msgstr "风扇"
@@ -177,13 +195,16 @@ msgid "Finish"
 msgstr "结束"
 
 msgid "Firmware Restart"
-msgstr "框架重启"
+msgstr "固件重启"
 
 msgid "Font Size"
 msgstr "字体大小"
 
 msgid "Go Back"
 msgstr "返回"
+
+msgid "Hide"
+msgstr "隐藏"
 
 msgid "Home"
 msgstr "归零"
@@ -281,13 +302,13 @@ msgid "KlipperScreen Version"
 msgstr "KlipperScreen 版本"
 
 msgid "Language"
-msgstr "语"
+msgstr "语言"
 
 msgid "Large"
-msgstr "大的"
+msgstr "大"
 
 msgid "Left:"
-msgstr "左:"
+msgstr "打印剩余时间："
 
 msgid "Limits"
 msgstr "限制"
@@ -340,8 +361,8 @@ msgstr "名称"
 msgid "Network"
 msgstr "网络"
 
-msgid "Number Pad"
-msgstr "数字键盘"
+msgid "Nothing selected"
+msgstr "未选择任何内容"
 
 msgid "Off"
 msgstr "关闭"
@@ -364,9 +385,6 @@ msgstr "电源"
 
 msgid "Power On Printer"
 msgstr "开启打印机"
-
-msgid "Preheat"
-msgstr "预热"
 
 msgid "Print"
 msgstr "打印"
@@ -413,20 +431,26 @@ msgstr "保存"
 msgid "Save Config"
 msgstr "保存配置"
 
-msgid "Save configuration."
-msgstr "保存配置文件."
+msgid "Save configuration"
+msgstr "保存配置文件"
 
 msgid "Screen Power Off Time"
 msgstr "屏幕关闭时间"
 
-msgid "Screen will show in less than one second"
-msgstr "屏幕将在1秒内显示"
-
 msgid "Screws Adjust"
 msgstr "Screws 调整"
 
+msgid "Select"
+msgstr "选择"
+
+msgid "Set Temp"
+msgstr "设定温度"
+
 msgid "Settings"
 msgstr "设置"
+
+msgid "Show"
+msgstr "展示"
 
 msgid "Size"
 msgstr "大小"
@@ -435,7 +459,7 @@ msgid "Slicer"
 msgstr "切片机"
 
 msgid "Small"
-msgstr "小的"
+msgstr "小"
 
 msgid "Sort by: "
 msgstr "排序: "
@@ -453,10 +477,10 @@ msgid "Square Corner Velocity"
 msgstr "方角速度"
 
 msgid "Start"
-msgstr "開始"
+msgstr "开始"
 
 msgid "Starting WiFi Re-association"
-msgstr "启动 WiFi 重新关联"
+msgstr "启动 WiFi 重新连接"
 
 msgid "Starting recovery for"
 msgstr "开始恢复"
@@ -477,6 +501,15 @@ msgid ""
 "Shutdown"
 msgstr "关闭系统"
 
+msgid "Target"
+msgstr "目标"
+
+msgid "Temp"
+msgstr "温度"
+
+msgid "Temp (°C)"
+msgstr "温度 (°C)"
+
 msgid "Temperature"
 msgstr "温度"
 
@@ -486,6 +519,12 @@ msgstr "要应用 %s，需要重新启动 KlipperScreen"
 
 msgid "Tool"
 msgstr "工具"
+
+msgid "Unknown Heater"
+msgstr "未知加热器"
+
+msgid "Unknown Heater "
+msgstr "未知加热器 "
 
 msgid "Unload"
 msgstr "卸下"
@@ -544,6 +583,15 @@ msgstr "mm/s"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
+#~ msgid "Number Pad"
+#~ msgstr "数字键盘"
+
+#~ msgid "Preheat"
+#~ msgstr "预热"
+
+#~ msgid "Screen will show in less than one second"
+#~ msgstr "屏幕将在1秒内显示"
+
 #~ msgid "Medium (default)"
 #~ msgstr "中（默认"
 
@@ -568,17 +616,11 @@ msgstr "mm/s^2"
 #~ msgid "?"
 #~ msgstr "?"
 
-#~ msgid "Are you sure you want to print"
-#~ msgstr "您确定要开始打印吗"
-
 #~ msgid "Cancel Change"
 #~ msgstr "取消变更"
 
 #~ msgid "Control"
 #~ msgstr "控制"
-
-#~ msgid "Emergency Stop"
-#~ msgstr "紧急停止"
 
 #~ msgid "Load Average"
 #~ msgstr "平均负载"

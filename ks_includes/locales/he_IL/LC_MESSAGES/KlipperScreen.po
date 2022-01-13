@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 11:29-0300\n"
-"PO-Revision-Date: 2021-11-18 11:34-0300\n"
+"POT-Creation-Date: 2022-01-13 08:24-0300\n"
+"PO-Revision-Date: 2022-01-13 08:29-0300\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
 "Language: he_IL\n"
@@ -49,6 +49,10 @@ msgstr "הוסף מדפסת"
 msgid "Add bed mesh profile"
 msgstr "הוסף פרופיל רשת למיטה"
 
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr ""
+"האם אתה בטוח שברצונך להדפיסהאם אתה בטוח שברצונך להפעיל את עצירת החירום?"
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "האם אתה בטוח שברצונך לבטל את ההדפסה?"
 
@@ -66,6 +70,12 @@ msgstr "מיפוי מיטה"
 
 msgid "Calibrate"
 msgstr "לְדַרֵג"
+
+msgid "Calibrated, save configuration to make it permanent"
+msgstr "מכויל, שמור את התצורה כדי שהיא תהיה קבועה"
+
+msgid "Can't set above the maximum:"
+msgstr "לא ניתן להגדיר מעל המקסימום:"
 
 msgid "Cancel"
 msgstr "ביטול"
@@ -98,6 +108,9 @@ msgstr "לְהַשְׁלִים"
 msgid "Configuration"
 msgstr "קונפיגורציה"
 
+msgid "Confirm Emergency Stop"
+msgstr "אשר עצירת חירום"
+
 msgid "Connected"
 msgstr "מְחוּבָּר"
 
@@ -122,6 +135,9 @@ msgstr "לְהַקְטִין"
 
 msgid "Delete"
 msgstr "לִמְחוֹק"
+
+msgid "Deselect"
+msgstr ""
 
 msgid "Disable Motors"
 msgstr "השבת מנועים"
@@ -163,6 +179,9 @@ msgstr "שיחול +"
 msgid "Extrusion -"
 msgstr "שיחול -"
 
+msgid "Failed, adjust position first"
+msgstr "נכשל, תחילה התאם את המיקום"
+
 msgid "Fan"
 msgstr "מאוורר"
 
@@ -186,6 +205,9 @@ msgstr "גודל טקסט"
 
 msgid "Go Back"
 msgstr "חזרה"
+
+msgid "Hide"
+msgstr "להתחבא"
 
 msgid "Home"
 msgstr "איפוס"
@@ -342,8 +364,8 @@ msgstr "שֵׁם"
 msgid "Network"
 msgstr "רשת"
 
-msgid "Number Pad"
-msgstr "פד נומרי"
+msgid "Nothing selected"
+msgstr "שום דבר לא נבחר"
 
 msgid "Off"
 msgstr "כבוי"
@@ -366,9 +388,6 @@ msgstr "הפעלה"
 
 msgid "Power On Printer"
 msgstr "הפעל מדפסת"
-
-msgid "Preheat"
-msgstr "חימום מראש"
 
 msgid "Print"
 msgstr "הדפס"
@@ -415,20 +434,26 @@ msgstr "להציל"
 msgid "Save Config"
 msgstr "שמור קונפיג"
 
-msgid "Save configuration."
-msgstr "שמור תצורה."
+msgid "Save configuration"
+msgstr "שמור תצורה"
 
 msgid "Screen Power Off Time"
 msgstr "זמן כיבוי מסך"
 
-msgid "Screen will show in less than one second"
-msgstr "המסך יופיע תוך פחות משנייה אחת"
-
 msgid "Screws Adjust"
 msgstr "סידור ברגים"
 
+msgid "Select"
+msgstr ""
+
+msgid "Set Temp"
+msgstr "הגדר טמפ'"
+
 msgid "Settings"
 msgstr "הגדרות"
+
+msgid "Show"
+msgstr "הופעה"
 
 msgid "Size"
 msgstr "גודל"
@@ -483,6 +508,15 @@ msgstr ""
 "מערכת\n"
 "לכבות"
 
+msgid "Target"
+msgstr "יַעַד"
+
+msgid "Temp"
+msgstr "טמפ'"
+
+msgid "Temp (°C)"
+msgstr "טמפ' (°C)"
+
 msgid "Temperature"
 msgstr "טמפרטורה"
 
@@ -492,6 +526,12 @@ msgstr "כדי ליישם %s צריך להפעיל מחדש את KlipperScreen"
 
 msgid "Tool"
 msgstr "כלי"
+
+msgid "Unknown Heater"
+msgstr "מחמם לא ידוע"
+
+msgid "Unknown Heater "
+msgstr "מחמם לא ידוע "
 
 msgid "Unload"
 msgstr "לִפְרוֹק"
@@ -550,6 +590,15 @@ msgstr "מ\"מ/ש"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
+#~ msgid "Number Pad"
+#~ msgstr "פד נומרי"
+
+#~ msgid "Preheat"
+#~ msgstr "חימום מראש"
+
+#~ msgid "Screen will show in less than one second"
+#~ msgstr "המסך יופיע תוך פחות משנייה אחת"
+
 #~ msgid "Medium (default)"
 #~ msgstr "בינוני (ברירת מחדל)"
 
@@ -574,17 +623,11 @@ msgstr "mm/s^2"
 #~ msgid "?"
 #~ msgstr "?"
 
-#~ msgid "Are you sure you want to print"
-#~ msgstr "האם אתה בטוח שברצונך להדפיס"
-
 #~ msgid "Cancel Change"
 #~ msgstr "בטל שינוי"
 
 #~ msgid "Control"
 #~ msgstr "שליטה"
-
-#~ msgid "Emergency Stop"
-#~ msgstr "עצירת חירום"
 
 #~ msgid "Load Average"
 #~ msgstr "עומס ממוצע"

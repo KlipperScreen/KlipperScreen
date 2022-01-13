@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 11:29-0300\n"
-"PO-Revision-Date: 2021-11-18 11:36-0300\n"
+"POT-Creation-Date: 2022-01-13 08:24-0300\n"
+"PO-Revision-Date: 2022-01-13 08:32-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: Russian <kde-i18n-de@kde.org>\n"
 "Language: ru\n"
@@ -48,6 +48,9 @@ msgstr "Добавить принтер"
 msgid "Add bed mesh profile"
 msgstr "Добавить профиль сетки стола"
 
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "Вы уверены, что хотите запустить аварийную остановку?"
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Вы хотите отменить эту печать?"
 
@@ -65,6 +68,12 @@ msgstr "Сетка стола"
 
 msgid "Calibrate"
 msgstr "Калибровка"
+
+msgid "Calibrated, save configuration to make it permanent"
+msgstr ""
+
+msgid "Can't set above the maximum:"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Отменить"
@@ -97,6 +106,9 @@ msgstr "Готово"
 msgid "Configuration"
 msgstr "Параметр"
 
+msgid "Confirm Emergency Stop"
+msgstr "Подтвердить аварийную остановку"
+
 msgid "Connected"
 msgstr "Соединенный"
 
@@ -121,6 +133,9 @@ msgstr "Уменьшить"
 
 msgid "Delete"
 msgstr "Удалить"
+
+msgid "Deselect"
+msgstr "Отменить выбор"
 
 msgid "Disable Motors"
 msgstr "Откл. моторы"
@@ -162,6 +177,9 @@ msgstr "Экструзия +"
 msgid "Extrusion -"
 msgstr "Экструзия -"
 
+msgid "Failed, adjust position first"
+msgstr "Ошибка. Сначала измените положение"
+
 msgid "Fan"
 msgstr "Обдув"
 
@@ -185,6 +203,9 @@ msgstr "Размер шрифта"
 
 msgid "Go Back"
 msgstr "Назад"
+
+msgid "Hide"
+msgstr "Скрывать"
 
 msgid "Home"
 msgstr "Парковка"
@@ -343,8 +364,8 @@ msgstr "Имя"
 msgid "Network"
 msgstr "Сеть"
 
-msgid "Number Pad"
-msgstr "Клавиатура"
+msgid "Nothing selected"
+msgstr "Ничего не выбрано"
 
 msgid "Off"
 msgstr "Выкл"
@@ -367,9 +388,6 @@ msgstr "Включено"
 
 msgid "Power On Printer"
 msgstr "Включить принтер"
-
-msgid "Preheat"
-msgstr "Разогрев"
 
 msgid "Print"
 msgstr "Печать"
@@ -416,20 +434,26 @@ msgstr "Сохранить"
 msgid "Save Config"
 msgstr "Сохр. Конфиг"
 
-msgid "Save configuration."
-msgstr "Настройки сохраняются."
+msgid "Save configuration"
+msgstr "Настройки сохраняются"
 
 msgid "Screen Power Off Time"
 msgstr "Время выключения экрана"
 
-msgid "Screen will show in less than one second"
-msgstr "Экран отобразится через одну секунду"
-
 msgid "Screws Adjust"
 msgstr "Настроить винты"
 
+msgid "Select"
+msgstr "Выбирать"
+
+msgid "Set Temp"
+msgstr "Заданная температура"
+
 msgid "Settings"
 msgstr "Настройки"
+
+msgid "Show"
+msgstr "Показывать"
 
 msgid "Size"
 msgstr "Размер"
@@ -482,6 +506,15 @@ msgid ""
 "Shutdown"
 msgstr "Выключить"
 
+msgid "Target"
+msgstr "Цель"
+
+msgid "Temp"
+msgstr "Темп"
+
+msgid "Temp (°C)"
+msgstr "Темп  (°С)"
+
 msgid "Temperature"
 msgstr "Tемпература"
 
@@ -491,6 +524,12 @@ msgstr "Чтобы применить %s необходимо перезапус
 
 msgid "Tool"
 msgstr "Инструмент"
+
+msgid "Unknown Heater"
+msgstr "Неизвестный обогреватель"
+
+msgid "Unknown Heater "
+msgstr "Неизвестный обогреватель "
 
 msgid "Unload"
 msgstr "Загружено"
@@ -549,6 +588,15 @@ msgstr "мм/с"
 msgid "mm/s^2"
 msgstr "мм/с^2"
 
+#~ msgid "Number Pad"
+#~ msgstr "Клавиатура"
+
+#~ msgid "Preheat"
+#~ msgstr "Разогрев"
+
+#~ msgid "Screen will show in less than one second"
+#~ msgstr "Экран отобразится через одну секунду"
+
 #~ msgid "Medium (default)"
 #~ msgstr "Средний (по умолчанию)"
 
@@ -581,9 +629,6 @@ msgstr "мм/с^2"
 
 #~ msgid "?"
 #~ msgstr "?"
-
-#~ msgid "Are you sure you want to print"
-#~ msgstr "Вы хотите это распечатать"
 
 #~ msgid "Cancel Change"
 #~ msgstr "Отменить изменения"
