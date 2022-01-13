@@ -143,7 +143,15 @@ class MovePanel(ScreenPanel):
         dist = str(self.distance) if dir == "+" else "-" + str(self.distance)
         config_key = "move_speed_z" if axis == AXIS_Z else "move_speed_xy"
 
-        speed = self._config.get_config()['main'].getint(config_key, 20)
+        speed = None
+        printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
+
+        if printer_cfg is not None:
+            speed = printer_cfg.getint(config_key, None)
+        
+        if speed is None:
+            speed = self._config.get_config()['main'].getint(config_key, 20)
+
         speed = max(1, speed)
 
         self._screen._ws.klippy.gcode_script(
