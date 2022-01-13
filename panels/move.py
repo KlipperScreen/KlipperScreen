@@ -148,7 +148,7 @@ class MovePanel(ScreenPanel):
 
         if printer_cfg is not None:
             speed = printer_cfg.getint(config_key, None)
-        
+
         if speed is None:
             speed = self._config.get_config()['main'].getint(config_key, 20)
 
