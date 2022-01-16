@@ -6,10 +6,13 @@ KlipperScreen is a touchscreen GUI that interfaces with [Klipper](https://github
 
 [Click here to access the documentation.](https://klipperscreen.readthedocs.io/en/latest/)
 
-Screenshots are included in the documentation.
 
 ### Inspiration
 KlipperScreen was inspired by [OctoScreen](https://github.com/Z-Bolt/OctoScreen/) and the need for a touchscreen GUI that
 will natively work with [Klipper](https://github.com/kevinOConnor/klipper) and [Moonraker](https://github.com/arksine/moonraker).
 
-![Main Menu](docs/img/main_panel.png)
+
+![Main Menu](docs/img/panels/main_panel.png)
+
+
+[More Screenshots](https://klipperscreen.readthedocs.io/en/latest/panels/)

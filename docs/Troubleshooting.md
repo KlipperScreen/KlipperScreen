@@ -51,13 +51,10 @@ the proper drivers.
 ### Touch not working on debian Bullseye
 
 Some dsi screens have issues where touch doesn't work with debian bullseye, the current fix
-(at least until upstream is fixed) consist in editing `/boot/config.txt` and changing:
+(at least until upstream is fixed) consist in runnig `raspi-config`> go to Advanced > GL Driver
+select G2 and reboot.
 
-`dtoverlay=vc4-kms-v3d`
+![config](img/troubleshooting/gldriver.png)
 
-to:
-
-`dtoverlay=vc4-fkms-v3d`
-
-and reboot. That should make the touch work, if your screen is rotated 180 degrees, then you may need to adjust
+That should make the touch work, if your screen is rotated 180 degrees, then you may need to adjust
 [the touch rotation](Hardware.md) as described in the Hardware page.

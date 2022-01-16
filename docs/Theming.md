@@ -29,5 +29,5 @@ window { background-image: url("/home/pi/mainsail/img/background.svg");}
 button {background-color: rgba(0,0,0,0); border-radius:2em;}
 ```
 
-![Custom theme example with background](img/theme_example.png)
+![Custom theme example with background](img/theming/theme_example.png)
 

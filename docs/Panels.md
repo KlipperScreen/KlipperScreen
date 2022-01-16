@@ -1,15 +1,15 @@
 # Panels
 
 ### Main Menu
-![Main Menu](img/main_panel.png)
+![Main Menu](img/panels/main_panel.png)
 
 ### Job Status
-![Job Status](img/job_status.png)
+![Job Status](img/panels/job_status.png)
 
 ### Bed Level
 type: bed_level
 
-![Bed Level](img/bed_level.png)
+![Bed Level](img/panels/bed_level.png)
 
 The bed level panel has the ability to have preset locations from Klipper. Please see documentation on the following
 Klipper Sections:
@@ -26,74 +26,74 @@ panel.
 ### Bed Mesh
 type: bed_mesh theme:material-dark
 
-![Bed Mesh](img/bed_mesh.png)
+![Bed Mesh](img/panels/bed_mesh.png)
 
 ### Extrude
 type: extrude theme:material-dark
 
-![Extrude](img/extrude.png)
+![Extrude](img/panels/extrude.png)
 
 ### Fan
 type: fan
 
-![Fan](img/fan.png)
+![Fan](img/panels/fan.png)
 
 ### Fine Tune
 type: fine_tune theme:custom
 
-![Fine Tune Panel](img/fine_tune.png)
+![Fine Tune Panel](img/panels/fine_tune.png)
 
 ### Gcode Macros
 type: gcode_macros theme: material-darker
 
-![Gcode Macros Panel](img/gcode_macros.png)
+![Gcode Macros Panel](img/panels/gcode_macros.png)
 
 ### Menu
 type: menu
 
-![Menu Panel](img/menu.png)
+![Menu Panel](img/panels/menu.png)
 
 ### Move
 type: move
 
-![Move Panel](img/move.png)
+![Move Panel](img/panels/move.png)
 
 ### Network
 type: network
 
-![Network Panel](img/network.png)
+![Network Panel](img/panels/network.png)
 
 ### Power
 type: power
 
-![Power](img/power.png)
+![Power](img/panels/power.png)
 
 ### Print
 type: print
 
-![Print Panel](img/print.png)
+![Print Panel](img/panels/print.png)
 
 ### Settings
 type: settings theme:colorized
 
-![Settings](img/settings.png)
+![Settings](img/panels/settings.png)
 
 ### System
 type: system
 
-![System Panel](img/system.png)
+![System Panel](img/panels/system.png)
 
 ### Temperature
 type: temperature theme:custom
 
-![Temperature](img/temperature.png)
+![Temperature](img/panels/temperature.png)
 
 ### Z Calibrate
 type: zcalibrate
 
-![Z Calibrate](img/zcalibrate.png)
+![Z Calibrate](img/panels/zcalibrate.png)
 
 ### Limits
 type: limits theme: material-dark
 
-![Limits](img/limits.png)
+![Limits](img/panels/limits.png)
