@@ -4,12 +4,12 @@ This page will have common problems and common solutions to those problems.
 
 ## First Steps
 
-The first step to troubleshooting any problem is getting the cause of the error. KlipperScreen log output will occur
-in two places. Check for the file `/tmp/KlipperScreen.log` and look at the contents by running
-`cat /tmp/KlipperScreen.log` or grabbing the file over WinSCP or another scp program.
+The first step to troubleshooting any problem is getting the cause of the error.
+Check for the file `/tmp/KlipperScreen.log` and look at the contents by running
+`cat /tmp/KlipperScreen.log` or grab the file over WinSCP or another sftp program.
 
-If that file is non-existent, there is a problem in KlipperScreen starting up. To get the error output in this case,
-run `journalctl -xe -u KlipperScreen`.
+If that file is non-existent, run `journalctl -xe -u KlipperScreen` and check `/var/log/Xorg.0.log`
+where you can find issues with the X server.
 
 
 ## Common Errors
