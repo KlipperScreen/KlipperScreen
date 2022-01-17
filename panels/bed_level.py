@@ -20,7 +20,6 @@ class BedLevelPanel(ScreenPanel):
         self.panel_name = panel_name
         self.screws = None
         grid = self._gtk.HomogeneousGrid()
-        self.disabled_motors = False
 
         screws = []
         config_section_name = None
@@ -41,29 +40,11 @@ class BedLevelPanel(ScreenPanel):
                     ])
 
             screws = sorted(screws, key=lambda x: (float(x[1]), float(x[0])))
-            logging.debug("Bed screw locations [x,y]: %s", screws)
-            if ("bltouch" in self._screen.printer.get_config_section_list() and
-                    config_section_name == "screws_tilt_adjust"):
-                x_offset = 0
-                y_offset = 0
-                bltouch = self._screen.printer.get_config_section("bltouch")
-                if "x_offset" in bltouch:
-                    self.x_offset = float(bltouch['x_offset'])
-                if "y_offset" in bltouch:
-                    self.y_offset = float(bltouch['y_offset'])
-                new_screws = []
-                for screw in screws:
-                    new_screws.append([
-                        round(float(screw[0]) + self.x_offset, 2),
-                        round(float(screw[1]) + self.y_offset, 2)
-                    ])
-                screws = new_screws
 
-            self.screws = screws
-            logging.debug("Screws: %s" % screws)
-
-        if len(screws) < 4:
-            logging.debug("bed_screws not configured, calculating locations")
+        supported = [4, 6, 8]
+        nscrews = len(screws)
+        if nscrews not in supported:
+            logging.debug("%d bed_screws not supported: calculating 4 locations", nscrews)
             xconf = self._screen.printer.get_config_section("stepper_x")
             yconf = self._screen.printer.get_config_section("stepper_y")
             x = int(int(xconf['position_max'])/4)
@@ -74,64 +55,139 @@ class BedLevelPanel(ScreenPanel):
                 [x, y*3],
                 [x*3, y*3],
             ]
-            logging.debug("Calculated screw locations [x,y]: %s", self.screws)
         else:
-            logging.debug("Configured %d-screw locations [x,y]: %s", len(self.screws), self.screws)
+            self.screws = screws
 
-        # min_x, min_y
-        fl = sorted(self.screws)[0]
-        # max_x, max_y
-        br = sorted(self.screws)[-1]
-        # min_x, max_y
-        bl = [min(dict(self.screws).keys()), max(dict(self.screws).values())]
-        # max_x, min_y
-        fr = [max(dict(self.screws).keys()), min(dict(self.screws[::-1]).values())]
+        if (("bltouch" in self._screen.printer.get_config_section_list() or
+            "probe" in self._screen.printer.get_config_section_list()) and
+                config_section_name == "screws_tilt_adjust"):
+            x_offset = 0
+            y_offset = 0
+            if "bltouch" in self._screen.printer.get_config_section_list():
+                bltouch = self._screen.printer.get_config_section("bltouch")
+                if "x_offset" in bltouch:
+                    self.x_offset = float(bltouch['x_offset'])
+                if "y_offset" in bltouch:
+                    self.y_offset = float(bltouch['y_offset'])
+                logging.debug("Bltouch found substracted offset X: %.0f Y: %.0f", self.x_offset, self.y_offset)
+                self._screen.show_popup_message(_("Bltouch found applied offset"), level=1)
+            elif "probe" in self._screen.printer.get_config_section_list():
+                probe = self._screen.printer.get_config_section("probe")
+                if "x_offset" in probe:
+                    self.x_offset = float(probe['x_offset'])
+                if "y_offset" in probe:
+                    self.y_offset = float(probe['y_offset'])
+                logging.debug("Probe found substracting offset X: %.0f Y: %.0f", self.x_offset, self.y_offset)
+                self._screen.show_popup_message(_("Probe found applied offset"), level=1)
+            new_screws = []
+            for screw in self.screws:
+                new_screws.append([
+                    max(0, round(float(screw[0]) - self.x_offset, 2)),
+                    max(0, round(float(screw[1]) - self.y_offset, 2))
+                ])
+            self.screws = new_screws
 
-        self.labels['bl'] = self._gtk.ButtonImage("bed-level-t-l", None, None, 3, 3)
-        self.labels['bl'].connect("clicked", self.go_to_position, bl)
-        self.labels['br'] = self._gtk.ButtonImage("bed-level-t-r", None, None, 3, 3)
-        self.labels['br'].connect("clicked", self.go_to_position, br)
-        self.labels['fl'] = self._gtk.ButtonImage("bed-level-b-l", None, None, 3, 3)
-        self.labels['fl'].connect("clicked", self.go_to_position, fl)
-        self.labels['fr'] = self._gtk.ButtonImage("bed-level-b-r", None, None, 3, 3)
-        self.labels['fr'].connect("clicked", self.go_to_position, fr)
+        # get dimensions
+        self.x_cnt = len(list(dict.fromkeys([int(x[0]) for x in self.screws])))
+        self.y_cnt = len(list(dict.fromkeys([int(x[1]) for x in self.screws])))
 
+        min_x = min(dict(self.screws).keys())
+        max_x = max(dict(self.screws).keys())
+        min_y = min(dict(self.screws[::-1]).values())
+        max_y = max(dict(self.screws).values())
+
+        self.fl = [min_x, min_y]
+        self.bl = [min_x, max_y]
+        self.br = [max_x, max_y]
+        self.fr = [max_x, min_y]
+
+        logging.debug("Using %d-screw locations [x,y] [%dx%d]", len(self.screws), self.x_cnt, self.y_cnt)
+        if self.x_cnt == 3:
+            mid_x = [x for x in list(zip(*self.screws))[0] if x not in (min_x, max_x)][0]
+            self.fm = [mid_x, min_y]
+            self.bm = [mid_x, max_y]
+            logging.debug("[%3.0f, %3.0f][%3.0f, %3.0f][%3.0f, %3.0f]", min_x, max_y, mid_x, max_y, max_x, max_y)
+        else:
+            self.fm = self.bm = mid_x = None
+            logging.debug("[%3.0f, %3.0f][%3.0f, %3.0f]", min_x, max_y, max_x, max_y)
+        if self.y_cnt == 3:
+            mid_y = [y for y in list(zip(*self.screws))[1] if y not in (min_y, max_y)][0]
+            self.lm = [min_x, mid_y]
+            self.rm = [max_x, mid_y]
+            logging.debug("[%3.0f, %3.0f]          [%3.0f, %3.0f]", min_x, mid_y, max_x, mid_y)
+        else:
+            self.lm = self.rm = mid_y = None
+
+        if self.x_cnt == 3:
+            logging.debug("[%3.0f, %3.0f][%3.0f, %3.0f][%3.0f, %3.0f]", min_x, min_y, mid_x, min_y, max_x, min_y)
+        else:
+            logging.debug("[%3.0f, %3.0f][%3.0f, %3.0f]", min_x, min_y, max_x, min_y)
+
+        self.labels['bl'] = self._gtk.ButtonImage("bed-level-t-l", None, None, 2.5, 2.5)
+        self.labels['bl'].connect("clicked", self.go_to_position, self.bl)
+        self.labels['br'] = self._gtk.ButtonImage("bed-level-t-r", None, None, 2.5, 2.5)
+        self.labels['br'].connect("clicked", self.go_to_position, self.br)
+        self.labels['fl'] = self._gtk.ButtonImage("bed-level-b-l", None, None, 2.5, 2.5)
+        self.labels['fl'].connect("clicked", self.go_to_position, self.fl)
+        self.labels['fr'] = self._gtk.ButtonImage("bed-level-b-r", None, None, 2.5, 2.5)
+        self.labels['fr'].connect("clicked", self.go_to_position, self.fr)
+        self.labels['bm'] = self._gtk.ButtonImage("bed-level-t-m", None, None, 2.5, 2.5)
+        self.labels['bm'].connect("clicked", self.go_to_position, self.bm)
+        self.labels['fm'] = self._gtk.ButtonImage("bed-level-b-m", None, None, 2.5, 2.5)
+        self.labels['fm'].connect("clicked", self.go_to_position, self.fm)
+        self.labels['lm'] = self._gtk.ButtonImage("bed-level-l-m", None, None, 2.5, 2.5)
+        self.labels['lm'].connect("clicked", self.go_to_position, self.lm)
+        self.labels['rm'] = self._gtk.ButtonImage("bed-level-r-m", None, None, 2.5, 2.5)
+        self.labels['rm'].connect("clicked", self.go_to_position, self.rm)
+
+        bedgrid = Gtk.Grid()
         if self._screen.lang_ltr:
-            grid.attach(self.labels['bl'], 1, 0, 1, 1)
-            grid.attach(self.labels['br'], 2, 0, 1, 1)
-            grid.attach(self.labels['fl'], 1, 1, 1, 1)
-            grid.attach(self.labels['fr'], 2, 1, 1, 1)
+            bedgrid.attach(self.labels['bl'], 1, 0, 1, 1)
+            bedgrid.attach(self.labels['br'], 3, 0, 1, 1)
+            bedgrid.attach(self.labels['fl'], 1, 2, 1, 1)
+            bedgrid.attach(self.labels['fr'], 3, 2, 1, 1)
         else:
-            grid.attach(self.labels['bl'], 2, 0, 1, 1)
-            grid.attach(self.labels['br'], 1, 0, 1, 1)
-            grid.attach(self.labels['fl'], 2, 1, 1, 1)
-            grid.attach(self.labels['fr'], 1, 1, 1, 1)
+            bedgrid.attach(self.labels['bl'], 3, 0, 1, 1)
+            bedgrid.attach(self.labels['br'], 1, 0, 1, 1)
+            bedgrid.attach(self.labels['fl'], 3, 2, 1, 1)
+            bedgrid.attach(self.labels['fr'], 1, 2, 1, 1)
 
-        self.labels['home'] = self._gtk.ButtonImage("home", _("Home All"), "color2")
-        self.labels['home'].connect("clicked", self.home)
+        if mid_x:
+            bedgrid.attach(self.labels['bm'], 2, 0, 1, 1)
+            bedgrid.attach(self.labels['fm'], 2, 2, 1, 1)
+        if mid_y:
+            bedgrid.attach(self.labels['lm'], 1, 1, 1, 1)
+            bedgrid.attach(self.labels['rm'], 3, 1, 1, 1)
+
+        grid.attach(bedgrid, 1, 0, 3, 2)
 
         self.labels['dm'] = self._gtk.ButtonImage("motor-off", _("Disable XY"), "color3")
         self.labels['dm'].connect("clicked", self.disable_motors)
 
-        grid.attach(self.labels['home'], 0, 0, 1, 1)
-        grid.attach(self.labels['dm'], 0, 1, 1, 1)
+        grid.attach(self.labels['dm'], 0, 0, 1, 1)
 
         if self._printer.config_section_exists("screws_tilt_adjust"):
             self.labels['screws'] = self._gtk.ButtonImage("refresh", _("Screws Adjust"), "color4")
             self.labels['screws'].connect("clicked", self.screws_tilt_calculate)
-            grid.attach(self.labels['screws'], 3, 0, 1, 1)
+            grid.attach(self.labels['screws'], 0, 1, 1, 1)
 
         self.content.add(grid)
 
     def activate(self):
-        self.labels['bl'].set_label("")
-        self.labels['br'].set_label("")
-        self.labels['fl'].set_label("")
-        self.labels['fr'].set_label("")
+        self.labels['bl'].set_label(str(self.bl))
+        self.labels['br'].set_label(str(self.br))
+        self.labels['fl'].set_label(str(self.fl))
+        self.labels['fr'].set_label(str(self.fr))
+        self.labels['lm'].set_label(str(self.lm))
+        self.labels['rm'].set_label(str(self.rm))
+        self.labels['bm'].set_label(str(self.bm))
+        self.labels['fm'].set_label(str(self.fm))
         if self._printer.config_section_exists("screws_tilt_adjust"):
             self.labels['screws'].set_sensitive(True)
 
     def go_to_position(self, widget, position):
+        if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
+            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
         logging.debug("Going to position: %s", position)
         script = [
             "%s" % KlippyGcodes.MOVE_ABSOLUTE,
@@ -139,10 +195,6 @@ class BedLevelPanel(ScreenPanel):
             "G1 X%s Y%s F3600\n" % (position[0], position[1]),
             "G1 Z.1 F300\n"
         ]
-
-        if self.disabled_motors:
-            self.disabled_motors = False
-            script.insert(0, "G28")
 
         self._screen._ws.klippy.gcode_script(
             "\n".join(script)
@@ -155,6 +207,10 @@ class BedLevelPanel(ScreenPanel):
 
     def process_update(self, action, data):
         if action == "notify_gcode_response":
+            if data.startswith('!!'):
+                self.response_count = 0
+                self.labels['screws'].set_sensitive(True)
+                return
             result = re.match(
                 "^// (.*) : [xX= ]+([\\-0-9\\.]+), [yY= ]+([\\-0-9\\.]+), [zZ= ]+[\\-0-9\\.]+ :" +
                 " (Adjust ->|adjust) ([CW]+ [0-9:]+)",
@@ -162,8 +218,14 @@ class BedLevelPanel(ScreenPanel):
             )
             if result:
                 screw_labels = ['fl', 'fr', 'bl', 'br']
-                x = int(float(result.group(2)) + self.x_offset)
-                y = int(float(result.group(3)) + self.y_offset)
+                if self.x_cnt == 3:
+                    screw_labels.append('fm')
+                    screw_labels.append('bm')
+                if self.y_cnt == 3:
+                    screw_labels.append('lm')
+                    screw_labels.append('rm')
+                x = int(float(result.group(2)) - self.x_offset)
+                y = int(float(result.group(3)) - self.y_offset)
                 logging.debug(data)
                 logging.debug("X: %s Y: %s" % (x, y))
                 for i in range(len(self.screws)):
@@ -177,6 +239,8 @@ class BedLevelPanel(ScreenPanel):
 
 
     def screws_tilt_calculate(self, widget):
+        if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
+            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
         self.response_count = 0
         self.labels['screws'].set_sensitive(False)
         self._screen._ws.klippy.gcode_script("SCREWS_TILT_CALCULATE")
