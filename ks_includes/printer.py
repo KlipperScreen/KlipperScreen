@@ -188,7 +188,7 @@ class Printer:
 
     def get_fans(self):
         fans = ["fan"] if len(self.get_config_section_list("fan")) > 0 else []
-        fan_types = ["controller_fan", "fan_generic", "heater_fan", "temperature_fan"]
+        fan_types = ["controller_fan", "fan_generic", "heater_fan"]
         for type in fan_types:
             for f in self.get_config_section_list("%s " % type):
                 fans.append(f)
