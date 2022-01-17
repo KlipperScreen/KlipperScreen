@@ -24,17 +24,6 @@ class ExtrudePanel(ScreenPanel):
 
         grid = Gtk.Grid()
 
-        i = 0
-        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-        for extruder in self._printer.get_tools():
-            self.labels[extruder] = self._gtk.ButtonImage("extruder-%s" % i, _("Tool") + " %s" % str(i))
-            self.labels[extruder].connect("clicked", self.change_extruder, extruder)
-            if extruder == self.current_extruder:
-                self.labels[extruder].get_style_context().add_class("button_active")
-            if i <= 3:
-                grid.attach(self.labels[extruder], i, 0, 1, 1)
-            i += 1
-
         self.labels['extrude'] = self._gtk.ButtonImage("extrude", _("Extrude"), "color4")
         self.labels['extrude'].connect("clicked", self.extrude, "+")
         self.labels['load'] = self._gtk.ButtonImage("arrow-down", _("Load"), "color3")
@@ -49,8 +38,19 @@ class ExtrudePanel(ScreenPanel):
             "panel": "temperature"
         })
 
-        if i < 4:
-            grid.attach(self.labels['temperature'], 3, 0, 1, 1)
+        extgrid = Gtk.Grid()
+        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+        for i, extruder in enumerate(self._printer.get_tools()):
+            self.labels[extruder] = self._gtk.ButtonImage("extruder-%s" % i, _("Tool") + " %s" % str(i))
+            self.labels[extruder].connect("clicked", self.change_extruder, extruder)
+            if extruder == self.current_extruder:
+                self.labels[extruder].get_style_context().add_class("button_active")
+            if i < 5:
+                extgrid.attach(self.labels[extruder], i, 0, 1, 1)
+        if i < 3:
+            extgrid.attach(self.labels['temperature'], i+1, 0, 1, 1)
+
+        grid.attach(extgrid, 0, 0, 4, 1)
         grid.attach(self.labels['extrude'], 0, 1, 1, 1)
         grid.attach(self.labels['load'], 1, 1, 1, 1)
         grid.attach(self.labels['unload'], 2, 1, 1, 1)
