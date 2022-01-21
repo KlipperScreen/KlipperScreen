@@ -18,10 +18,10 @@ Job Status
 
 ![Job Status](img/panels/job_status.png)
 
-[More](panels.md)
+[More](Panels.md)
 
 ### Inspiration
 KlipperScreen was inspired by [OctoScreen](https://github.com/Z-Bolt/OctoScreen/) and the need for a touchscreen GUI that
 will natively work with [Klipper](https://github.com/klipper3d/klipper) and [Moonraker](https://github.com/arksine/moonraker).
 
-[Changelog](changelog.md)
+[Changelog](Changelog.md)

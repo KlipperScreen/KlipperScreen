@@ -56,5 +56,13 @@ select G2 and reboot.
 
 ![config](img/troubleshooting/gldriver.png)
 
-That should make the touch work, if your screen is rotated 180 degrees, then you may need to adjust
+Or manually edit `/boot/config.txt` and change:
+
+`dtoverlay=vc4-kms-v3d`
+
+to:
+
+`dtoverlay=vc4-fkms-v3d`
+
+and reboot, that should make the touch work, if your screen is rotated 180 degrees, then you may need to adjust
 [the touch rotation](Hardware.md) as described in the Hardware page.
