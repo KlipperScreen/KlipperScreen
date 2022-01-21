@@ -169,6 +169,7 @@ class SystemPanel(ScreenPanel):
         grid.set_valign(Gtk.Align.CENTER)
         i = 0
         label = Gtk.Label()
+        label.set_line_wrap(True)
         if "configured_type" in info:
             if info['configured_type'] == 'git_repo':
                 if not info['is_valid'] or info['is_dirty']:
@@ -194,20 +195,21 @@ class SystemPanel(ScreenPanel):
                         if date != ndate:
                             date = ndate
                             label = Gtk.Label()
+                            label.set_line_wrap(True)
                             label.set_markup("<b>%s</b>\n" % date)
                             label.set_halign(Gtk.Align.START)
                             grid.attach(label, 0, i, 1, 1)
                             i = i + 1
 
                         label = Gtk.Label()
-                        label.set_ellipsize(True)
-                        label.set_ellipsize(Pango.EllipsizeMode.END)
+                        label.set_line_wrap(True)
                         label.set_markup("<b>%s</b>\n<i>%s</i>\n" % (c['subject'], c['author']))
                         label.set_halign(Gtk.Align.START)
                         grid.attach(label, 0, i, 1, 1)
                         i = i + 1
 
                         details = Gtk.Label(label=c['message']+"\n\n\n")
+                        details.set_line_wrap(True)
                         details.set_halign(Gtk.Align.START)
                         grid.attach(details, 0, i, 1, 1)
                         i = i + 1
