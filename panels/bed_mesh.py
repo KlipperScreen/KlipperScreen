@@ -67,7 +67,7 @@ class BedMeshPanel(ScreenPanel):
 
     def activate_mesh(self, profile):
         if profile == "":
-            profile = None
+            profile = "default"
 
         logging.debug("Activating profile: %s %s" % (self.active_mesh, profile))
         if profile != self.active_mesh:
