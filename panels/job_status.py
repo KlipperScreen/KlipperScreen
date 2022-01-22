@@ -417,6 +417,8 @@ class JobStatusPanel(ScreenPanel):
             self.fan = int(round(data['fan']['speed'], 2)*100)
             self.labels['fan'].set_text("%3d%%" % self.fan)
 
+        if ps['state'] != self.state:
+            self.state_check()
         if self.state in ["cancelling", "cancelled", "complete", "error"]:
             return
 
