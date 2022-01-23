@@ -3,10 +3,12 @@ nav:
     - Hardware.md
     - Installation.md
     - Configuration.md
+    - Quicktips.md
     - Theming.md
     - Troubleshooting.md
-    - changelog.md
-    - panels.md
+    - Translations.md
+    - Changelog.md
+    - Panels.md
     - Contact.md
 theme: readthedocs
 repo_url: https://github.com/jordanruthe/KlipperScreen/

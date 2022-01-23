@@ -60,6 +60,8 @@ class SystemPanel(ScreenPanel):
         scroll.set_property("overlay-scrolling", False)
         scroll.set_vexpand(True)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
 
         infogrid = Gtk.Grid()
         infogrid.get_style_context().add_class("system-program-grid")
@@ -162,6 +164,8 @@ class SystemPanel(ScreenPanel):
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
 
         grid = Gtk.Grid()
         grid.set_column_homogeneous(True)
@@ -169,6 +173,7 @@ class SystemPanel(ScreenPanel):
         grid.set_valign(Gtk.Align.CENTER)
         i = 0
         label = Gtk.Label()
+        label.set_line_wrap(True)
         if "configured_type" in info:
             if info['configured_type'] == 'git_repo':
                 if not info['is_valid'] or info['is_dirty']:
@@ -194,20 +199,21 @@ class SystemPanel(ScreenPanel):
                         if date != ndate:
                             date = ndate
                             label = Gtk.Label()
+                            label.set_line_wrap(True)
                             label.set_markup("<b>%s</b>\n" % date)
                             label.set_halign(Gtk.Align.START)
                             grid.attach(label, 0, i, 1, 1)
                             i = i + 1
 
                         label = Gtk.Label()
-                        label.set_ellipsize(True)
-                        label.set_ellipsize(Pango.EllipsizeMode.END)
+                        label.set_line_wrap(True)
                         label.set_markup("<b>%s</b>\n<i>%s</i>\n" % (c['subject'], c['author']))
                         label.set_halign(Gtk.Align.START)
                         grid.attach(label, 0, i, 1, 1)
                         i = i + 1
 
                         details = Gtk.Label(label=c['message']+"\n\n\n")
+                        details.set_line_wrap(True)
                         details.set_halign(Gtk.Align.START)
                         grid.attach(details, 0, i, 1, 1)
                         i = i + 1
@@ -272,6 +278,8 @@ class SystemPanel(ScreenPanel):
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
 
         self.labels['update_progress'] = Gtk.Label("%s %s..." % (_("Starting recovery for"), program))
         self.labels['update_progress'].set_halign(Gtk.Align.START)
@@ -317,6 +325,8 @@ class SystemPanel(ScreenPanel):
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
 
         self.labels['update_progress'] = Gtk.Label("%s %s..." % (_("Starting update for"), program))
         self.labels['update_progress'].set_halign(Gtk.Align.START)

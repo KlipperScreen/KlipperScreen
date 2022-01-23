@@ -38,6 +38,8 @@ class PrintPanel(ScreenPanel):
         scroll = Gtk.ScrolledWindow()
         scroll.set_property("overlay-scrolling", False)
         scroll.set_vexpand(True)
+        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
 
         sort = Gtk.Label()
         sort.set_text(_("Sort by: "))
@@ -426,3 +428,9 @@ class PrintPanel(ScreenPanel):
 
     def _refresh_files(self, widget):
         self._files.refresh_files()
+
+    def process_update(self, action, data):
+        if action == "notify_gcode_response":
+            if "unknown" in data.lower():
+                self._screen.show_popup_message("%s" % data)
+        return

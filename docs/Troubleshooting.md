@@ -4,12 +4,12 @@ This page will have common problems and common solutions to those problems.
 
 ## First Steps
 
-The first step to troubleshooting any problem is getting the cause of the error. KlipperScreen log output will occur
-in two places. Check for the file `/tmp/KlipperScreen.log` and look at the contents by running
-`cat /tmp/KlipperScreen.log` or grabbing the file over WinSCP or another scp program.
+The first step to troubleshooting any problem is getting the cause of the error.
+Check for the file `/tmp/KlipperScreen.log` and look at the contents by running
+`cat /tmp/KlipperScreen.log` or grab the file over WinSCP or another sftp program.
 
-If that file is non-existent, there is a problem in KlipperScreen starting up. To get the error output in this case,
-run `journalctl -xe -u KlipperScreen`.
+If that file is non-existent, run `journalctl -xe -u KlipperScreen` and check `/var/log/Xorg.0.log`
+where you can find issues with the X server.
 
 
 ## Common Errors
@@ -51,7 +51,12 @@ the proper drivers.
 ### Touch not working on debian Bullseye
 
 Some dsi screens have issues where touch doesn't work with debian bullseye, the current fix
-(at least until upstream is fixed) consist in editing `/boot/config.txt` and changing:
+(at least until upstream is fixed) consist in runnig `raspi-config`> go to Advanced > GL Driver
+select G2 and reboot.
+
+![config](img/troubleshooting/gldriver.png)
+
+Or manually edit `/boot/config.txt` and change:
 
 `dtoverlay=vc4-kms-v3d`
 
@@ -59,5 +64,5 @@ to:
 
 `dtoverlay=vc4-fkms-v3d`
 
-and reboot. That should make the touch work, if your screen is rotated 180 degrees, then you may need to adjust
+and reboot, that should make the touch work, if your screen is rotated 180 degrees, then you may need to adjust
 [the touch rotation](Hardware.md) as described in the Hardware page.
