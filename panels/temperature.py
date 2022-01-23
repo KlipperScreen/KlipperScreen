@@ -376,6 +376,8 @@ class TemperaturePanel(ScreenPanel):
         scroll.set_property("overlay-scrolling", False)
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
+        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(self.labels['devices'])
 

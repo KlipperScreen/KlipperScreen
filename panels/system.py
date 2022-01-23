@@ -164,6 +164,8 @@ class SystemPanel(ScreenPanel):
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
 
         grid = Gtk.Grid()
         grid.set_column_homogeneous(True)
@@ -276,6 +278,8 @@ class SystemPanel(ScreenPanel):
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
 
         self.labels['update_progress'] = Gtk.Label("%s %s..." % (_("Starting recovery for"), program))
         self.labels['update_progress'].set_halign(Gtk.Align.START)
@@ -321,6 +325,8 @@ class SystemPanel(ScreenPanel):
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
 
         self.labels['update_progress'] = Gtk.Label("%s %s..." % (_("Starting update for"), program))
         self.labels['update_progress'].set_halign(Gtk.Align.START)
