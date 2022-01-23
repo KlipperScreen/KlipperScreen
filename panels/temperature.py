@@ -16,7 +16,6 @@ def create_panel(*args):
 
 class TemperaturePanel(ScreenPanel):
     active_heaters = []
-    devices = {}
     graph_update = None
     active_heater = None
 

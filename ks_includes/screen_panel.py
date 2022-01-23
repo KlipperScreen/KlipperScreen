@@ -20,6 +20,7 @@ class ScreenPanel:
         self._gtk = screen.gtk
         self.control = {}
         self.title = title
+        self.devices = {}
 
         self.layout = Gtk.Layout()
         self.layout.set_size(self._screen.width, self._screen.height)
