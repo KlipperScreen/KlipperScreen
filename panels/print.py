@@ -428,3 +428,9 @@ class PrintPanel(ScreenPanel):
 
     def _refresh_files(self, widget):
         self._files.refresh_files()
+
+    def process_update(self, action, data):
+        if action == "notify_gcode_response":
+            if "unknown" in data.lower():
+                self._screen.show_popup_message("%s" % data)
+        return
