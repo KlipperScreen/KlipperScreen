@@ -68,7 +68,6 @@ create_virtualenv()
             exit
         fi
     done < ${KSPATH}/scripts/KlipperScreen-requirements.txt
-    vext -e
     deactivate
     echo_ok "Virtual enviroment created"
 }
