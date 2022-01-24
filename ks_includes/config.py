@@ -147,7 +147,7 @@ class KlipperScreenConfig:
             {"confirm_estop": {"section": "main", "name": _("Confirm Emergency Stop"), "type": "binary",
                                "value": "False"}},
             {"only_heaters": {"section": "main", "name": _("Show Only Heaters in Temp."), "type": "binary",
-                    "value": "False", "callback": screen.restart_warning}},
+                               "value": "False", "callback": screen.restart_warning}},
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
 

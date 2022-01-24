@@ -285,7 +285,7 @@ class TemperaturePanel(ScreenPanel):
             s = 1
             try:
                 s += h
-            except:
+            except Exception:
                 pass
             for d in self.devices:
                 if "sensor" in d:
