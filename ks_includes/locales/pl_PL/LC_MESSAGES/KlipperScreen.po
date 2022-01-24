@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-13 08:24-0300\n"
-"PO-Revision-Date: 2022-01-23 23:03-0500\n"
+"PO-Revision-Date: 2022-01-24 00:12-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -30,7 +30,7 @@ msgid "(default)"
 msgstr "(domyślny)"
 
 msgid "24 Hour Time"
-msgstr "24 godzinny czas"
+msgstr "Zegar 24-godzinny"
 
 msgid "Abort"
 msgstr "Odwołaj"
@@ -305,7 +305,7 @@ msgid "Language"
 msgstr "Język"
 
 msgid "Large"
-msgstr "Duża"
+msgstr "Duży"
 
 msgid "Left:"
 msgstr "Lewo:"
@@ -338,7 +338,7 @@ msgid "Max Velocity"
 msgstr "Maks Prędkość"
 
 msgid "Medium"
-msgstr "Średnia"
+msgstr "Średni"
 
 msgid "Menu"
 msgstr "Menu"
@@ -459,7 +459,7 @@ msgid "Slicer"
 msgstr "Slicer"
 
 msgid "Small"
-msgstr "Mała"
+msgstr "Mały"
 
 msgid "Sort by: "
 msgstr "Sortuj wg: "
@@ -576,7 +576,7 @@ msgid "dBm"
 msgstr "dBm"
 
 msgid "minutes"
-msgstr "minuty"
+msgstr "minut"
 
 msgid "mm"
 msgstr "mm"
