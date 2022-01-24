@@ -256,12 +256,13 @@ trough {
 }
 
 .heater-grid {
-    margin-right: .5em;
+    margin-right: .1em;
 }
 
 .heater-grid label {
-    margin-top: .3em;
-    margin-bottom: .3em;
+    margin-top: .2em;
+    margin-bottom: .2em;
+    min-height: 2em;
 }
 
 .message_popup {

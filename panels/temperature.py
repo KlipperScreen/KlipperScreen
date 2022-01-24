@@ -67,6 +67,8 @@ class TemperaturePanel(ScreenPanel):
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
         scroll.add(self.labels["preheat_grid"])
         return scroll
 
@@ -205,23 +207,32 @@ class TemperaturePanel(ScreenPanel):
                 return
 
             for heater in self.active_heaters:
+                MAX_TEMP = int(self._printer.get_config_section(heater)['max_temp'])
                 if heater.startswith('extruder'):
                     target = self.preheat_options[setting]["extruder"]
-                    self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), target)
+                    if target > 0 and target <= MAX_TEMP:
+                        self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), target)
                 elif heater.startswith('heater_bed'):
                     target = self.preheat_options[setting]["bed"]
-                    self._screen._ws.klippy.set_bed_temp(target)
+                    if target > 0 and target <= MAX_TEMP:
+                        self._screen._ws.klippy.set_bed_temp(target)
                 elif heater.startswith('heater_generic '):
                     target = self.preheat_options[setting]["heater_generic"]
-                    self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), target)
+                    if target > 0 and target <= MAX_TEMP:
+                        self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), target)
                 elif heater.startswith('temperature_fan '):
                     target = self.preheat_options[setting]["temperature_fan"]
-                    self._screen._ws.klippy.set_temp_fan_temp(" ".join(heater.split(" ")[1:]), target)
+                    if target > 0 and target <= MAX_TEMP:
+                        self._screen._ws.klippy.set_temp_fan_temp(" ".join(heater.split(" ")[1:]), target)
                 else:
                     logging.info("Unknown heater: %s" % heater)
                     self._screen.show_popup_message(_("Unknown Heater") + heater)
-                self._printer.set_dev_stat(heater, "target", int(target))
-                logging.info("Setting %s to %d" % (heater, target))
+                if target <= MAX_TEMP:
+                    if target > 0:
+                        self._printer.set_dev_stat(heater, "target", int(target))
+                        logging.info("Setting %s to %d" % (heater, target))
+                else:
+                    self._screen.show_popup_message(_("Can't set above the maximum:") + (" %s" % MAX_TEMP))
             if self.preheat_options[setting]['gcode']:
                 self._screen._ws.klippy.gcode_script(self.preheat_options[setting]['gcode'])
 
@@ -340,7 +351,7 @@ class TemperaturePanel(ScreenPanel):
             self._screen._ws.klippy.set_temp_fan_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
         else:
             logging.info("Unknown heater: %s" % self.active_heater)
-            self._screen.show_popup_message(_("Unknown Heater ") + self.active_heater)
+            self._screen.show_popup_message(_("Unknown Heater") + self.active_heater)
         self._printer.set_dev_stat(self.active_heater, "target", temp)
 
     def create_left_panel(self):
@@ -361,10 +372,19 @@ class TemperaturePanel(ScreenPanel):
         da.set_vexpand(True)
         self.labels['da'] = da
 
+        scroll = Gtk.ScrolledWindow()
+        scroll.set_property("overlay-scrolling", False)
+        scroll.set_hexpand(True)
+        scroll.set_vexpand(True)
+        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add(self.labels['devices'])
+
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         box.set_vexpand(True)
-        box.add(self.labels['devices'])
-        box.add(da)
+        box.add(scroll)
+        box.add(self.labels['da'])
 
 
         self.labels['graph_settemp'] = self._gtk.Button(label=_("Set Temp"))
@@ -380,9 +400,10 @@ class TemperaturePanel(ScreenPanel):
         popover.set_position(Gtk.PositionType.BOTTOM)
         self.labels['popover'] = popover
 
-        for d in self._printer.get_temp_store_devices():
+        for i, d in enumerate(self._printer.get_temp_store_devices(), start=3):
             self.add_device(d)
-
+        graph_height = max(0, self._screen.height - (i * 6 * self._gtk.get_font_size()))
+        self.labels['da'].set_size_request(0, graph_height)
         return box
 
 

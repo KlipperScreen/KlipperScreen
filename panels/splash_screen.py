@@ -42,6 +42,8 @@ class SplashScreenPanel(ScreenPanel):
         scroll.set_hexpand(True)
         scroll.set_vexpand(True)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
         scroll.add(self.labels['text'])
 
         info = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)

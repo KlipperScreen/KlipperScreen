@@ -51,6 +51,7 @@ class JobStatusPanel(ScreenPanel):
         self.labels['status'].set_halign(Gtk.Align.START)
         self.labels['status'].set_vexpand(False)
         self.labels['status'].get_style_context().add_class("printing-status")
+        self.labels['status'].set_line_wrap(True)
         self.labels['lcdmessage'] = Gtk.Label("")
         self.labels['lcdmessage'].set_halign(Gtk.Align.START)
         self.labels['lcdmessage'].set_vexpand(False)
@@ -359,6 +360,8 @@ class JobStatusPanel(ScreenPanel):
                 self.set_state("cancelling")
             elif "action:paused" in data:
                 self.set_state("paused")
+            elif "action:resumed" in data:
+                self.set_state("printing")
             return
         elif action != "notify_status_update":
             return
@@ -415,6 +418,8 @@ class JobStatusPanel(ScreenPanel):
             self.fan = int(round(data['fan']['speed'], 2)*100)
             self.labels['fan'].set_text("%3d%%" % self.fan)
 
+        if ps['state'] != self.state:
+            self.state_check()
         if self.state in ["cancelling", "cancelled", "complete", "error"]:
             return
 
@@ -446,6 +451,7 @@ class JobStatusPanel(ScreenPanel):
 
     def state_check(self):
         ps = self._printer.get_stat("print_stats")
+
         if ps['state'] == self.state:
             return True
         _ = self.lang.gettext
@@ -454,6 +460,7 @@ class JobStatusPanel(ScreenPanel):
             if self.state == "cancelling":
                 return True
             self.set_state("printing")
+            self.update_filename()
         elif ps['state'] == "complete":
             self.progress = 1
             self.update_progress()
@@ -482,17 +489,6 @@ class JobStatusPanel(ScreenPanel):
             return False
         elif ps['state'] == "paused":
             self.set_state("paused")
-
-        # TODO: Remove this in the future
-        if self.filename != ps['filename']:
-            if ps['filename'] != "":
-                self.filename = ps['filename']
-                self.file_metadata = {}
-                self.update_text("file", self.filename.split("/")[-1])
-            else:
-                file = "Unknown"
-                self.update_text("file", "Unknown file")
-
         return True
 
     def set_state(self, state):

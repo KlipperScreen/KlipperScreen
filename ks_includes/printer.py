@@ -118,17 +118,19 @@ class Printer:
 
         if wh_state == "ready":
             new_state = "ready"
-            print_state = self.data['print_stats']['state'].lower()  # complete, paused, printing, standby
-            idle_state = self.data['idle_timeout']['state'].lower()  # idle, printing, ready
-            if print_state == "paused":
-                new_state = "paused"
-            elif idle_state == "printing":
-                if print_state == "complete":
-                    new_state = "ready"
-                elif print_state != "printing":  # Not printing a file, toolhead moving
-                    new_state = "busy"
-                else:
-                    new_state = "printing"
+            if self.data['print_stats']:
+                print_state = self.data['print_stats']['state'].lower()  # complete, error, paused, printing, standby
+                if print_state == "paused":
+                    new_state = "paused"
+                if self.data['idle_timeout']:
+                    idle_state = self.data['idle_timeout']['state'].lower()  # idle, printing, ready
+                    if idle_state == "printing":
+                        if print_state == "complete":
+                            new_state = "ready"
+                        elif print_state != "printing":  # Not printing a file, toolhead moving
+                            new_state = "busy"
+                        else:
+                            new_state = "printing"
 
             if new_state != "busy":
                 self.change_state(new_state)
@@ -188,7 +190,7 @@ class Printer:
 
     def get_fans(self):
         fans = ["fan"] if len(self.get_config_section_list("fan")) > 0 else []
-        fan_types = ["controller_fan", "fan_generic", "heater_fan", "temperature_fan"]
+        fan_types = ["controller_fan", "fan_generic", "heater_fan"]
         for type in fan_types:
             for f in self.get_config_section_list("%s " % type):
                 fans.append(f)
