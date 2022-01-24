@@ -22,7 +22,6 @@ class TemperaturePanel(ScreenPanel):
         self.preheat_options = self._screen._config.get_preheat_options()
         logging.debug("Preheat options: %s" % self.preheat_options)
         self.show_preheat = True
-        self._gtk.reset_temp_color()
         self.grid = self._gtk.HomogeneousGrid()
         self.grid.attach(self.create_left_panel(), 0, 0, 1, 1)
         self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
@@ -241,13 +240,13 @@ class TemperaturePanel(ScreenPanel):
 
         temperature = self._printer.get_dev_stat(device, "temperature")
         if temperature is None:
-            return
+            return False
 
         if not (device.startswith("extruder") or device.startswith("heater_bed")):
             devname = " ".join(device.split(" ")[1:])
             # Support for hiding devices by name
             if devname.startswith("_"):
-                return
+                return False
         else:
             devname = device
 
@@ -264,6 +263,16 @@ class TemperaturePanel(ScreenPanel):
             devname = "Heater Bed"
             class_name = "graph_label_heater_bed"
             type = "bed"
+        elif device.startswith("heater_generic"):
+            h = 1
+            for d in self.devices:
+                if "heater_generic" in d:
+                    h += 1
+            image = "heat-up"
+            class_name = "graph_label_sensor_%s" % h
+            type = "sensor"
+        elif self._config.get_main_config_option('only_heaters') == "True":
+            return False
         elif device.startswith("temperature_fan"):
             f = 1
             for d in self.devices:
@@ -274,6 +283,10 @@ class TemperaturePanel(ScreenPanel):
             type = "fan"
         else:
             s = 1
+            try:
+                s += h
+            except:
+                pass
             for d in self.devices:
                 if "sensor" in d:
                     s += 1
@@ -330,6 +343,7 @@ class TemperaturePanel(ScreenPanel):
         self.labels['devices'].attach(name, 0, pos, 1, 1)
         self.labels['devices'].attach(temp, 1, pos, 1, 1)
         self.labels['devices'].show_all()
+        return True
 
     def change_target_temp(self, temp):
         _ = self.lang.gettext
@@ -362,7 +376,7 @@ class TemperaturePanel(ScreenPanel):
 
         name = Gtk.Label("")
         temp = Gtk.Label(_("Temp (°C)"))
-        temp.set_size_request(round(self._gtk.get_font_size() * 5.5), 0)
+        temp.set_size_request(round(self._gtk.get_font_size() * 7.7), 0)
 
         self.labels['devices'].attach(name, 0, 0, 1, 1)
         self.labels['devices'].attach(temp, 1, 0, 1, 1)
@@ -399,9 +413,11 @@ class TemperaturePanel(ScreenPanel):
         popover.set_position(Gtk.PositionType.BOTTOM)
         self.labels['popover'] = popover
 
-        for i, d in enumerate(self._printer.get_temp_store_devices(), start=3):
-            self.add_device(d)
-        graph_height = max(0, self._screen.height - (i * 6 * self._gtk.get_font_size()))
+        i = 2
+        for d in self._printer.get_temp_store_devices():
+            if self.add_device(d):
+                i += 1
+        graph_height = max(0, self._screen.height - (i * 5 * self._gtk.get_font_size()))
         self.labels['da'].set_size_request(0, graph_height)
         return box
 
