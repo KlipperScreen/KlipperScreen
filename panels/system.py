@@ -359,38 +359,35 @@ class SystemPanel(ScreenPanel):
         logging.info("%s: %s" % (p, info))
 
         if p != "system":
-            version = (info['full_version_string'] if "full_version_string" in info else info['version'])
             if info['configured_type'] == 'git_repo':
                 if info['is_valid'] and not info['is_dirty']:
                     if info['version'] == info['remote_version']:
-                        self.labels[p].set_markup("<b>%s</b>\n%s" % (p, version))
+                        self.labels[p].set_markup("<b>%s</b>\n%s" % (p, info['version']))
                         self.labels["%s_status" % p].set_label(_("Up To Date"))
                         self.labels["%s_status" % p].get_style_context().remove_class('update')
                         self.labels["%s_status" % p].get_style_context().remove_class('invalid')
                         self.labels["%s_status" % p].set_sensitive(False)
                     else:
-                        self.labels[p].set_markup("<b>%s</b>\n%s -> %s" % (p, version, info['remote_version']))
+                        self.labels[p].set_markup("<b>%s</b>\n%s -> %s" % (p, info['version'], info['remote_version']))
                         self.labels["%s_status" % p].set_label(_("Update"))
                         self.labels["%s_status" % p].get_style_context().add_class('update')
                         self.labels["%s_status" % p].set_sensitive(True)
                 else:
-                    self.labels[p].set_markup("<b>%s</b>\n%s" % (p, version))
+                    self.labels[p].set_markup("<b>%s</b>\n%s" % (p, info['version']))
                     self.labels["%s_status" % p].set_label(_("Invalid"))
                     self.labels["%s_status" % p].get_style_context().add_class('invalid')
                     self.labels["%s_status" % p].set_sensitive(True)
             else:
                 if info['version'] == info['remote_version']:
-                    self.labels[p].set_markup("<b>%s</b>\n%s" % (p, version))
+                    self.labels[p].set_markup("<b>%s</b>\n%s" % (p, info['version']))
                     self.labels["%s_status" % p].set_label(_("Up To Date"))
                     self.labels["%s_status" % p].get_style_context().remove_class('update')
                     self.labels["%s_status" % p].set_sensitive(False)
                 else:
-                    self.labels[p].set_markup("<b>%s</b>\n%s -> %s" % (p, version, info['remote_version']))
+                    self.labels[p].set_markup("<b>%s</b>\n%s -> %s" % (p, info['version'], info['remote_version']))
                     self.labels["%s_status" % p].set_label(_("Update"))
                     self.labels["%s_status" % p].get_style_context().add_class('update')
                     self.labels["%s_status" % p].set_sensitive(True)
-
-
         else:
             self.labels[p].set_markup("<b>System</b>")
             if info['package_count'] == 0:
