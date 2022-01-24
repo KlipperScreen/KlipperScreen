@@ -1,18 +1,22 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-22 22:56-0500\n"
-"PO-Revision-Date: 2022-01-22 23:03-0500\n"
-"Last-Translator: Adam Polkosnik <apolkosnik@gmail.com>\n"
+"POT-Creation-Date: 2022-01-13 08:24-0300\n"
+"PO-Revision-Date: 2022-01-23 23:03-0500\n"
+"Last-Translator: \n"
 "Language-Team: \n"
-"Language: pl_PL\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.0.1\n"
-"X-Poedit-SourceCharset: UTF-8\n"
 
 #, python-format
 msgid "%d Packages will be updated"
@@ -20,7 +24,7 @@ msgstr "%d Paczek będzie uaktualnionych"
 
 #, python-format
 msgid "%s will be updated to version"
-msgstr "%s będzie uaktualnionych do versji"
+msgstr "%s będzie uaktualnionych do wersji"
 
 msgid "(default)"
 msgstr "(domyślny)"
@@ -41,7 +45,7 @@ msgid "Add Printer"
 msgstr "Dodaj drukarkę"
 
 msgid "Add bed mesh profile"
-msgstr "Dodaj profil powierzchni"
+msgstr "Dodaj profil siatki stołu"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Czy na pewno chcesz Awaryjnie Zatrzymać?"
@@ -56,10 +60,10 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "Czy na pewno chcesz wyłączyć system?"
 
 msgid "Bed Level"
-msgstr "Poziom łoża"
+msgstr "Poziom stołu"
 
 msgid "Bed Mesh"
-msgstr "Poziom siatki łoża"
+msgstr "Poziom siatki stołu"
 
 msgid "Calibrate"
 msgstr "Kalibracja"
@@ -96,7 +100,7 @@ msgid "Close"
 msgstr "Zamknij"
 
 msgid "Complete"
-msgstr "Zakończono"
+msgstr "Kompletna"
 
 msgid "Configuration"
 msgstr "Konfiguracja"
@@ -173,10 +177,10 @@ msgid "Extrusion -"
 msgstr "Ekstruzja -"
 
 msgid "Failed, adjust position first"
-msgstr "Nie udało się najpierw ustaw pozycję"
+msgstr "Nie udało się, najpierw ustaw pozycję"
 
 msgid "Fan"
-msgstr "Wiatraczek"
+msgstr "Wentylator"
 
 msgid "Filament Used"
 msgstr "Filament w Użytku"
@@ -194,7 +198,7 @@ msgid "Firmware Restart"
 msgstr "Firmware Restart"
 
 msgid "Font Size"
-msgstr "Wielkość znaków"
+msgstr "Rozmiar trzcionki"
 
 msgid "Go Back"
 msgstr "Powróć"
@@ -203,25 +207,25 @@ msgid "Hide"
 msgstr "Schowaj"
 
 msgid "Home"
-msgstr "Pozycja wyjściowa"
+msgstr "Baza"
 
 msgid "Home All"
-msgstr "Pozycja wyjściowa wszystkich osi"
+msgstr "Baza Wszystkich"
 
 msgid "Home X"
-msgstr "Pozycja wyjściowa X"
+msgstr "Baza X"
 
 msgid "Home XY"
-msgstr "Pozycja wyjściowa XY"
+msgstr "Baza XY"
 
 msgid "Home Y"
-msgstr "Pozycja wyjściowa Y"
+msgstr "Baza Y"
 
 msgid "Home Z"
-msgstr "Pozycja wyjściowa Z"
+msgstr "Baza Z"
 
 msgid "Homing"
-msgstr "Naprowadzanie do Pozycji wyjściowej"
+msgstr "Bazowanie"
 
 msgid "Hostname"
 msgstr "Nazwa hosta"
@@ -260,7 +264,7 @@ msgid "Invert Z"
 msgstr "Odwróć Z"
 
 msgid "Klipper Restart"
-msgstr "Uruchom ponownie Klipper"
+msgstr "Restart Klippera"
 
 msgid "Klipper Version"
 msgstr "Wersja Klippera"
@@ -301,7 +305,7 @@ msgid "Language"
 msgstr "Język"
 
 msgid "Large"
-msgstr "Wielki"
+msgstr "Duża"
 
 msgid "Left:"
 msgstr "Lewo:"
@@ -316,7 +320,7 @@ msgid "Lower Nozzle"
 msgstr "Obniż  dyszę"
 
 msgid "Macro shortcut on sidebar"
-msgstr "Skrót do makra na pasku bocznym"
+msgstr "Skrót do makr na pasku bocznym"
 
 msgid "Macros"
 msgstr "Makro"
@@ -334,7 +338,7 @@ msgid "Max Velocity"
 msgstr "Maks Prędkość"
 
 msgid "Medium"
-msgstr "Średnii rozmiar"
+msgstr "Średnia"
 
 msgid "Menu"
 msgstr "Menu"
@@ -343,13 +347,13 @@ msgid "Modified"
 msgstr "Zmodyfikowane"
 
 msgid "Move"
-msgstr "Przesuń"
+msgstr "Ruch"
 
 msgid "Move Distance (mm)"
-msgstr "Przesuń Odległość (mm)"
+msgstr "Odległość Ruchu (mm)"
 
 msgid "Move Speed (mm/s)"
-msgstr "Przesuń z Prędkością (mm/s)"
+msgstr "Prędkość Ruchu (mm/s)"
 
 msgid "Name"
 msgstr "Nazwa"
@@ -392,7 +396,7 @@ msgid "Print Time"
 msgstr "Czas Druku"
 
 msgid "Printer Connections"
-msgstr "Połączenia do Drukarki"
+msgstr "Połączenia Drukarki"
 
 msgid "Printing"
 msgstr "Drukujemy"
@@ -431,7 +435,7 @@ msgid "Save configuration"
 msgstr "Zapisz konfigurację"
 
 msgid "Screen Power Off Time"
-msgstr "Czas samo wyłączenia"
+msgstr "Czas wygaszania ekranu"
 
 msgid "Screws Adjust"
 msgstr "Popraw śruby"
@@ -440,13 +444,13 @@ msgid "Select"
 msgstr "Zaznacz"
 
 msgid "Set Temp"
-msgstr "Ustaw Temperature"
+msgstr "Ustaw Temperaturę"
 
 msgid "Settings"
 msgstr "Ustawienia"
 
 msgid "Show"
-msgstr "Pokarz"
+msgstr "Pokaż"
 
 msgid "Size"
 msgstr "Rozmiar"
@@ -455,10 +459,10 @@ msgid "Slicer"
 msgstr "Slicer"
 
 msgid "Small"
-msgstr "Małe"
+msgstr "Mała"
 
 msgid "Sort by: "
-msgstr "Sortuj Przez: "
+msgstr "Sortuj wg: "
 
 msgid "Speed (mm/s)"
 msgstr "Prędkość (mm/s)"
@@ -560,7 +564,7 @@ msgid "Z Offset"
 msgstr "Przesunięcie Z"
 
 msgid "Z Tilt"
-msgstr "Przechł Z"
+msgstr "Przechył Z"
 
 msgid "Z+"
 msgstr "Z+"
@@ -582,3 +586,9 @@ msgstr "mm/s^2"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "godzina"
+msgstr[1] "godziny"
+msgstr[2] "godzin"
