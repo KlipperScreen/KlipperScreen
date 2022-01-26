@@ -116,6 +116,10 @@ start_KlipperScreen()
     sudo systemctl start KlipperScreen
 }
 
+if [ "$EUID" == 0 ]
+    then echo_error "Plaease do not run this script as root"
+    exit
+fi
 install_packages
 create_virtualenv
 modify_user
