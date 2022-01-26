@@ -76,6 +76,9 @@ install_systemd_service()
 {
     if [ -f "/etc/systemd/system/KlipperScreen.service" ]; then
         echo_text "KlipperScreen unit file already installed"
+        sudo systemctl unmask KlipperScreen.service
+        sudo systemctl daemon-reload
+        sudo systemctl enable KlipperScreen
         return
     fi
     echo_text "Installing KlipperScreen unit file"
@@ -115,7 +118,6 @@ start_KlipperScreen()
     echo_text "Starting service..."
     sudo systemctl start KlipperScreen
 }
-
 if [ "$EUID" == 0 ]
     then echo_error "Plaease do not run this script as root"
     exit
