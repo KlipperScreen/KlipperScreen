@@ -25,7 +25,7 @@ class TemperaturePanel(ScreenPanel):
         self.grid.attach(self.create_left_panel(), 0, 0, 1, 1)
 
         for x in self._printer.get_tools():
-            if x not in self.active_heaters:
+            if x not in self.active_heaters and x in self._printer.get_temp_store_devices():
                 self.select_heater(None, x)
         # When printing start in temp_delta mode and only select tools
         logging.info(self._printer.get_state())
