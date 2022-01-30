@@ -58,7 +58,6 @@ create_virtualenv()
     [ ! -d ${KSENV} ] && virtualenv -p /usr/bin/python3 ${KSENV}
 
     source ${KSENV}/bin/activate
-    pip install -U pip
     while read requirements; do
         pip install $requirements
         if [ $? -gt 0 ]; then
