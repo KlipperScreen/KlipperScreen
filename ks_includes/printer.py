@@ -245,7 +245,7 @@ class Printer:
             }
         }
 
-        sections = ["bed_mesh", "bltouch", "probe", "quad_gantry_level", "z_tilt"]
+        sections = ["bed_mesh", "bltouch", "probe", "quad_gantry_level", "z_tilt", "printer"]
         for section in sections:
             if self.config_section_exists(section):
                 data["printer"][section] = self.get_config_section(section).copy()

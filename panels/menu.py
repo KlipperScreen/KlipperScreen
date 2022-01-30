@@ -14,6 +14,7 @@ def create_panel(*args):
 class MenuPanel(ScreenPanel):
     i = 0
     j2_data = None
+
     def initialize(self, panel_name, display_name, items):
         _ = self.lang.gettext
 

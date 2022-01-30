@@ -22,8 +22,7 @@ class MovePanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
 
-        grid = Gtk.Grid()
-        grid.set_column_homogeneous(True)
+        grid = self._gtk.HomogeneousGrid()
 
         self.labels['x+'] = self._gtk.ButtonImage("arrow-right", _("X+"), "color1")
         self.labels['x+'].connect("clicked", self.move, AXIS_X, "+")
@@ -40,17 +39,22 @@ class MovePanel(ScreenPanel):
         self.labels['z-'] = self._gtk.ButtonImage("z-closer", _("Z-"), "color3")
         self.labels['z-'].connect("clicked", self.move, AXIS_Z, "-")
 
-        self.labels['home'] = self._gtk.ButtonImage("home", _("Home All"), "color4")
-        self.labels['home'].connect("clicked", self.home)
+        self.labels['home'] = self._gtk.ButtonImage("home", _("Home"), "color4")
 
-        self.labels['home-xy'] = self._gtk.ButtonImage("home", _("Home XY"), "color4")
-        self.labels['home-xy'].connect("clicked", self.homexy)
+        data = self._printer.get_printer_status_data()
+        if "delta" in data["printer"]["printer"]["kinematics"]:
+            self.labels['home'].connect("clicked", self.home)
+        else:
+            self.labels['home'].connect("clicked", self.menu_item_clicked, "homing", {
+                "name": "Homing",
+                "panel": "homing"
+            })
 
-        self.labels['z_tilt'] = self._gtk.ButtonImage("z-tilt", _("Z Tilt"), "color4")
-        self.labels['z_tilt'].connect("clicked", self.z_tilt)
-
-        self.labels['quad_gantry_level'] = self._gtk.ButtonImage("z-tilt", _("Quad Gantry Level"), "color4")
-        self.labels['quad_gantry_level'].connect("clicked", self.quad_gantry_level)
+        self.labels['motors-off'] = self._gtk.ButtonImage("motor-off", _("Disable Motors"), "color4")
+        script = {"script": "M18"}
+        self.labels['motors-off'].connect("clicked", self._screen._confirm_send_action,
+                                          _("Are you sure you wish to disable motors?"),
+                                          "printer.gcode.script", script)
 
         if self._screen.lang_ltr:
             grid.attach(self.labels['x+'], 2, 1, 1, 1)
@@ -65,12 +69,7 @@ class MovePanel(ScreenPanel):
 
         grid.attach(self.labels['home'], 0, 0, 1, 1)
 
-        if self._printer.config_section_exists("z_tilt"):
-            grid.attach(self.labels['z_tilt'], 2, 0, 1, 1)
-        elif self._printer.config_section_exists("quad_gantry_level"):
-            grid.attach(self.labels['quad_gantry_level'], 2, 0, 1, 1)
-        else:
-            grid.attach(self.labels['home-xy'], 2, 0, 1, 1)
+        grid.attach(self.labels['motors-off'], 2, 0, 1, 1)
 
         distgrid = Gtk.Grid()
         j = 0
@@ -92,7 +91,6 @@ class MovePanel(ScreenPanel):
 
         self.labels["1"].set_active(True)
 
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 
         bottomgrid = self._gtk.HomogeneousGrid()
         bottomgrid.set_direction(Gtk.TextDirection.LTR)
@@ -102,23 +100,43 @@ class MovePanel(ScreenPanel):
         bottomgrid.attach(self.labels['pos_x'], 0, 0, 1, 1)
         bottomgrid.attach(self.labels['pos_y'], 1, 0, 1, 1)
         bottomgrid.attach(self.labels['pos_z'], 2, 0, 1, 1)
-        box.pack_start(bottomgrid, True, True, 0)
         self.labels['move_dist'] = Gtk.Label(_("Move Distance (mm)"))
+
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        box.pack_start(grid, True, True, 0)
+        box.pack_start(bottomgrid, True, True, 0)
         box.pack_start(self.labels['move_dist'], True, True, 0)
         box.pack_start(distgrid, True, True, 0)
 
-        grid.attach(box, 0, 2, 4, 1)
 
-        self.content.add(grid)
+        self.content.add(box)
 
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
 
-        if "toolhead" in data and "position" in data["toolhead"]:
-            self.labels['pos_x'].set_text("X: %.2f" % (data["toolhead"]["position"][0]))
-            self.labels['pos_y'].set_text("Y: %.2f" % (data["toolhead"]["position"][1]))
-            self.labels['pos_z'].set_text("Z: %.2f" % (data["toolhead"]["position"][2]))
+        homed_axes = self._screen.printer.get_stat("toolhead", "homed_axes")
+        if homed_axes == "xyz":
+            if "toolhead" in data and "position" in data["toolhead"]:
+                self.labels['pos_x'].set_text("X: %.2f" % (data["toolhead"]["position"][0]))
+                self.labels['pos_y'].set_text("Y: %.2f" % (data["toolhead"]["position"][1]))
+                self.labels['pos_z'].set_text("Z: %.2f" % (data["toolhead"]["position"][2]))
+        else:
+            if "x" in homed_axes:
+                if "toolhead" in data and "position" in data["toolhead"]:
+                    self.labels['pos_x'].set_text("X: %.2f" % (data["toolhead"]["position"][0]))
+            else:
+                self.labels['pos_x'].set_text("X: ?")
+            if "y" in homed_axes:
+                if "toolhead" in data and "position" in data["toolhead"]:
+                    self.labels['pos_y'].set_text("Y: %.2f" % (data["toolhead"]["position"][1]))
+            else:
+                self.labels['pos_y'].set_text("Y: ?")
+            if "z" in homed_axes:
+                if "toolhead" in data and "position" in data["toolhead"]:
+                    self.labels['pos_z'].set_text("Z: %.2f" % (data["toolhead"]["position"][2]))
+            else:
+                self.labels['pos_z'].set_text("Z: ?")
 
     def change_distance(self, widget, distance):
         if self.distance == distance:

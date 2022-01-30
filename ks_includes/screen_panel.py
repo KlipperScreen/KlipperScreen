@@ -80,8 +80,17 @@ class ScreenPanel:
     def home(self, widget):
         self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
 
+    def homex(self, widget):
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME_X)
+
+    def homey(self, widget):
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME_Y)
+
     def homexy(self, widget):
         self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME_XY)
+
+    def homez(self, widget):
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME_Z)
 
     def z_tilt(self, widget):
         self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_TILT)
