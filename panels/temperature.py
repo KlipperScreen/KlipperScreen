@@ -307,7 +307,8 @@ class TemperaturePanel(ScreenPanel):
             self.labels['da'].add_object(device, "targets", rgb, True, False)
 
         text = "<span underline='double' underline_color='#%s'>%s</span>" % (color, devname.capitalize())
-        name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "), None, .5, .5, Gtk.PositionType.LEFT, False)
+        name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "),
+                                     None, .5, .5, Gtk.PositionType.LEFT, False)
         name.connect('clicked', self.on_popover_clicked, device)
         name.set_alignment(0, .5)
         name.get_style_context().add_class(class_name)
