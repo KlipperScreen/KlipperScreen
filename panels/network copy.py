@@ -48,14 +48,13 @@ class NetworkPanel(ScreenPanel):
         self.labels['networks'] = {}
 
         self.labels['interface'] = Gtk.Label()
-        self.labels['interface'].set_text(" %s: %s            %s: %s" % (_("Interface"), self.interface,_("IP"), ip))
+        self.labels['interface'].set_text(" %s: %s" % (_("Interface"), self.interface))
         self.labels['disconnect'] = self._gtk.Button(_("Disconnect"), "color2")
 
 
         sbox = Gtk.Box()
         sbox.set_hexpand(True)
         sbox.set_vexpand(False)
-        sbox.set_halign(Gtk.Align.CENTER)
         sbox.add(self.labels['interface'])
         # sbox.add(self.labels['disconnect'])
 
@@ -367,7 +366,7 @@ class NetworkPanel(ScreenPanel):
 
         self.labels['network_psk'] = entry
         box.pack_start(label, False, False, 5)
-        box.pack_start(entry, True, True, 2)
+        box.pack_start(entry, True, True, 5)
         box.pack_start(save, False, False, 5)
 
         self.show_create = True
@@ -404,7 +403,7 @@ class NetworkPanel(ScreenPanel):
                 ipv4 = "<b>%s:</b> %s " % (_("IP"), ifadd[netifaces.AF_INET][0]['addr'])
 #           if netifaces.AF_INET6 in ifadd and len(ifadd[netifaces.AF_INET6]) > 0:
 #                ipv6 = ipv6 = "<b>%s:</b> %s " % (_("IPv6"), ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0])
-            connected = "<b>%s</b>\n%s%s\n" % (_("Connected"), ipv4, ipv6)
+            connected = "<b>%s</b>\n%s%s\n" % (_("Подключено"), ipv4, ipv6)
         elif "psk" in netinfo:
             connected = "Password saved."
         freq = "2.4 GHz" if netinfo['frequency'][0:1] == "2" else "5 Ghz"
