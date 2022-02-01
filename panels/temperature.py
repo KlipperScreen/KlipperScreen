@@ -237,7 +237,13 @@ class TemperaturePanel(ScreenPanel):
                 else:
                     self._screen.show_popup_message(_("Can't set above the maximum:") + (" %s" % MAX_TEMP))
             if self.preheat_options[setting]['gcode']:
-                self._screen._ws.klippy.gcode_script(self.preheat_options[setting]['gcode'])
+                # This small delay is needed to properly update the target if the user configured something above
+                # and then changed the target again using the preheat gcode
+                GLib.timeout_add(250, self.preheat_gcode, setting)
+
+    def preheat_gcode(self, setting):
+        self._screen._ws.klippy.gcode_script(self.preheat_options[setting]['gcode'])
+        return False
 
     def add_device(self, device):
         _ = self.lang.gettext
