@@ -114,9 +114,12 @@ class KlipperScreenConfig:
                           "callback": screen.restart_warning, "options": [
                               {"name": _("System") + " " + _("(default)"), "value": "system_lang"}
             ]}},
-            {"move_speed": {
-                "section": "main", "name": _("Move Speed (mm/s)"), "type": "scale", "value": "20",
-                "range": [5, 100], "step": 1}},
+            {"move_speed_xy": {
+                "section": "main", "name": _("XY Move Speed (mm/s)"), "type": "scale", "value": "20",
+                "range": [5, 200], "step": 1}},
+            {"move_speed_z": {
+                "section": "main", "name": _("Z Move Speed (mm/s)"), "type": "scale", "value": "20",
+                "range": [5, 200], "step": 1}},
             {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
             {"print_estimate_method": {
                 "section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
@@ -162,7 +165,7 @@ class KlipperScreenConfig:
         t_path = os.path.join(klipperscreendir, 'styles')
         themes = [d for d in os.listdir(t_path) if (not os.path.isfile(os.path.join(t_path, d)) and d != "z-bolt")]
         themes.sort()
-        theme_opt = self.configurable_options[8]['theme']['options']
+        theme_opt = self.configurable_options[9]['theme']['options']
 
         for theme in themes:
             theme_opt.append({"name": theme, "value": theme})

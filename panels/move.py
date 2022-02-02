@@ -7,6 +7,10 @@ from gi.repository import Gtk, Gdk, GLib
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
+AXIS_X = "X"
+AXIS_Y = "Y"
+AXIS_Z = "Z"
+
 def create_panel(*args):
     return MovePanel(*args)
 
@@ -22,19 +26,19 @@ class MovePanel(ScreenPanel):
         grid.set_column_homogeneous(True)
 
         self.labels['x+'] = self._gtk.ButtonImage("arrow-right", _("X+"), "color1")
-        self.labels['x+'].connect("clicked", self.move, "X", "+")
+        self.labels['x+'].connect("clicked", self.move, AXIS_X, "+")
         self.labels['x-'] = self._gtk.ButtonImage("arrow-left", _("X-"), "color1")
-        self.labels['x-'].connect("clicked", self.move, "X", "-")
+        self.labels['x-'].connect("clicked", self.move, AXIS_X, "-")
 
         self.labels['y+'] = self._gtk.ButtonImage("arrow-up", _("Y+"), "color2")
-        self.labels['y+'].connect("clicked", self.move, "Y", "+")
+        self.labels['y+'].connect("clicked", self.move, AXIS_Y, "+")
         self.labels['y-'] = self._gtk.ButtonImage("arrow-down", _("Y-"), "color2")
-        self.labels['y-'].connect("clicked", self.move, "Y", "-")
+        self.labels['y-'].connect("clicked", self.move, AXIS_Y, "-")
 
         self.labels['z+'] = self._gtk.ButtonImage("z-farther", _("Z+"), "color3")
-        self.labels['z+'].connect("clicked", self.move, "Z", "+")
+        self.labels['z+'].connect("clicked", self.move, AXIS_Z, "+")
         self.labels['z-'] = self._gtk.ButtonImage("z-closer", _("Z-"), "color3")
-        self.labels['z-'].connect("clicked", self.move, "Z", "-")
+        self.labels['z-'].connect("clicked", self.move, AXIS_Z, "-")
 
         self.labels['home'] = self._gtk.ButtonImage("home", _("Home All"), "color4")
         self.labels['home'].connect("clicked", self.home)
@@ -137,8 +141,19 @@ class MovePanel(ScreenPanel):
             dir = "-" if dir == "+" else "+"
 
         dist = str(self.distance) if dir == "+" else "-" + str(self.distance)
-        speed = self._config.get_config()['main'].getint("move_speed", 20)
-        speed = min(max(1, speed), 200)  # Cap movement speed between 1-200mm/s
+        config_key = "move_speed_z" if axis == AXIS_Z else "move_speed_xy"
+
+        speed = None
+        printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
+
+        if printer_cfg is not None:
+            speed = printer_cfg.getint(config_key, None)
+
+        if speed is None:
+            speed = self._config.get_config()['main'].getint(config_key, 20)
+
+        speed = max(1, speed)
+
         self._screen._ws.klippy.gcode_script(
             "%s\n%s %s%s F%s%s" % (
                 KlippyGcodes.MOVE_RELATIVE, KlippyGcodes.MOVE, axis, dist, speed*60,
