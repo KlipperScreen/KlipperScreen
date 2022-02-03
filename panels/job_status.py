@@ -17,7 +17,7 @@ class JobStatusPanel(ScreenPanel):
     filename = None
     file_metadata = {}
     progress = 0
-    state = "printing"
+    state = "standby"
 
     def __init__(self, screen, title, back=False):
         super().__init__(screen, title, False)
@@ -262,12 +262,7 @@ class JobStatusPanel(ScreenPanel):
     def restart(self, widget):
         if self.filename != "none":
             self._screen._ws.klippy.print_start(self.filename)
-
-            for to in self.close_timeouts:
-                GLib.source_remove(to)
-                self.close_timeouts.remove(to)
-            if self.timeout is None:
-                self.timeout = GLib.timeout_add_seconds(1, self.state_check)
+            self.new_print()
 
     def resume(self, widget):
         self._screen._ws.klippy.print_resume(self._response_callback, "enable_button", "pause", "cancel")
@@ -314,12 +309,15 @@ class JobStatusPanel(ScreenPanel):
 
     def close_panel(self, widget=None):
         logging.debug("Closing job_status panel")
+        self.remove_close_timeout()
+        if self.state not in ["printing", "paused"]:
+            self._screen.printer_ready()
+        return False
+
+    def remove_close_timeout(self):
         for to in self.close_timeouts:
             GLib.source_remove(to)
             self.close_timeouts.remove(to)
-
-        self._screen.printer_ready()
-        return False
 
     def enable_button(self, *args):
         for arg in args:
@@ -335,14 +333,11 @@ class JobStatusPanel(ScreenPanel):
             self._files.remove_file_callback(self._callback_metadata)
 
     def new_print(self):
-        if self.state not in ["printing", "paused"]:
-            for to in self.close_timeouts:
-                GLib.source_remove(to)
-                self.close_timeouts.remove(to)
-            if self.timeout is None:
-                GLib.timeout_add_seconds(1, self.state_check)
-            self._screen.wake_screen()
-            self.state_check()
+        self.remove_close_timeout()
+        if self.timeout is None:
+            GLib.timeout_add_seconds(1, self.state_check)
+        self._screen.wake_screen()
+        self.state_check()
 
     def process_update(self, action, data):
         if action == "notify_gcode_response":
@@ -452,6 +447,7 @@ class JobStatusPanel(ScreenPanel):
             self.update_progress()
             self.set_state("complete")
             self._screen.wake_screen()
+            self.remove_close_timeout()
             timeout = self._config.get_main_config().getint("job_complete_timeout", 30)
             if timeout != 0:
                 self.close_timeouts.append(GLib.timeout_add_seconds(timeout, self.close_panel))
@@ -461,6 +457,7 @@ class JobStatusPanel(ScreenPanel):
             self.set_state("error")
             self.labels['status'].set_text("%s - %s" % (_("Error"), ps['message']))
             self._screen.wake_screen()
+            self.remove_close_timeout()
             timeout = self._config.get_main_config().getint("job_error_timeout", 0)
             if timeout != 0:
                 self.close_timeouts.append(GLib.timeout_add_seconds(timeout, self.close_panel))
@@ -469,6 +466,7 @@ class JobStatusPanel(ScreenPanel):
             # Print was cancelled
             self.set_state("cancelled")
             self._screen.wake_screen()
+            self.remove_close_timeout()
             timeout = self._config.get_main_config().getint("job_cancelled_timeout", 0)
             if timeout != 0:
                 self.close_timeouts.append(GLib.timeout_add_seconds(timeout, self.close_panel))
