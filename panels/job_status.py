@@ -310,7 +310,9 @@ class JobStatusPanel(ScreenPanel):
     def close_panel(self, widget=None):
         logging.debug("Closing job_status panel")
         self.remove_close_timeout()
-        self._screen.printer_ready()
+        self.state_check()
+        if self.state not in ["printing", "paused"]:
+            self._screen.printer_ready()
         return False
 
     def remove_close_timeout(self):
@@ -461,7 +463,7 @@ class JobStatusPanel(ScreenPanel):
             if timeout != 0:
                 self.close_timeouts.append(GLib.timeout_add_seconds(timeout, self.close_panel))
             return False
-        elif ps['state'] == "cancelled" or ps['state'] == "standby":
+        elif ps['state'] == "cancelled":
             # Print was cancelled
             self.set_state("cancelled")
             self._screen.wake_screen()
@@ -472,6 +474,8 @@ class JobStatusPanel(ScreenPanel):
             return False
         elif ps['state'] == "paused":
             self.set_state("paused")
+        elif ps['state'] == "standby":
+            self.set_state("standby")
         return True
 
     def set_state(self, state):
