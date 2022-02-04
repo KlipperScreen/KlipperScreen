@@ -575,7 +575,8 @@ class JobStatusPanel(ScreenPanel):
 
     def update_message(self):
         msg = self._printer.get_stat("display_status", "message")
-        self.labels['lcdmessage'].set_text("" if msg is None else msg)
+        if type(msg) == str:
+            self.labels['lcdmessage'].set_text(msg)
 
     def update_temp(self, x, temp, target):
         self.labels[x].set_markup(
