@@ -310,6 +310,7 @@ class JobStatusPanel(ScreenPanel):
     def close_panel(self, widget=None):
         logging.debug("Closing job_status panel")
         self.remove_close_timeout()
+        self.state_check()
         if self.state not in ["printing", "paused"]:
             self._screen.printer_ready()
         return False
