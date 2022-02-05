@@ -21,13 +21,23 @@ class PrinterSelect(ScreenPanel):
 
         printers = self._config.get_printers()
 
-        box = Gtk.Box()
-        self.content.add(box)
+        grid =  self._gtk.HomogeneousGrid()
+        self.content.add(grid)
 
-        i = 1
-        for printer in printers:
+        length = len(printers)
+        if length == 4:
+            # Arrange 2 x 2
+            columns = 2
+        elif length > 4 and length <= 6:
+            # Arrange 3 x 2
+            columns = 3
+        else:
+            columns = 4
+
+        for i, printer in enumerate(printers):
             name = list(printer)[0]
-            self.labels[name] = self._gtk.ButtonImage("extruder", name, "color%s" % (i % 4))
+            self.labels[name] = self._gtk.ButtonImage("extruder", name, "color%s" % (1 + i % 4))
             self.labels[name].connect("clicked", self._screen.connect_printer_widget, name)
-            box.add(self.labels[name])
-            i += 1
+            col = i % columns
+            row = int(i/columns)
+            grid.attach(self.labels[name], col, row, 1, 1)
