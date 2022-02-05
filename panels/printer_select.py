@@ -21,7 +21,7 @@ class PrinterSelect(ScreenPanel):
 
         printers = self._config.get_printers()
 
-        grid =  self._gtk.HomogeneousGrid()
+        grid = self._gtk.HomogeneousGrid()
         self.content.add(grid)
 
         length = len(printers)
