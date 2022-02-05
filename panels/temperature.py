@@ -21,6 +21,7 @@ class TemperaturePanel(ScreenPanel):
     def initialize(self, panel_name):
         self.preheat_options = self._screen._config.get_preheat_options()
         logging.debug("Preheat options: %s" % self.preheat_options)
+        self._gtk.reset_temp_color()
         self.grid = self._gtk.HomogeneousGrid()
         self.grid.attach(self.create_left_panel(), 0, 0, 1, 1)
 
@@ -346,7 +347,7 @@ class TemperaturePanel(ScreenPanel):
             self.devices[device]['select'] = self._gtk.Button(label=_("Select"))
             self.devices[device]['select'].connect('clicked', self.select_heater, device)
         else:
-            temp.get_child().set_label("%.1f" % temperature)
+            temp.get_child().set_label("%.1f " % temperature)
 
         devices = sorted(self.devices)
         pos = devices.index(device) + 1
@@ -493,6 +494,7 @@ class TemperaturePanel(ScreenPanel):
                 self._printer.get_dev_stat(h, "temperature"),
                 self._printer.get_dev_stat(h, "target")
             )
+        return
 
     def show_numpad(self, widget):
         _ = self.lang.gettext
@@ -525,4 +527,4 @@ class TemperaturePanel(ScreenPanel):
         if self.devices[device]["can_target"]:
             self.devices[device]["temp"].get_child().set_label("%.1f %s" % (temp, self.format_target(target)))
         else:
-            self.devices[device]["temp"].get_child().set_label("%.1f" % temp)
+            self.devices[device]["temp"].get_child().set_label("%.1f " % temp)

@@ -56,10 +56,18 @@ class MainPanel(MenuPanel):
             self.graph_update = None
 
     def add_device(self, device):
+        _ = self.lang.gettext
         logging.info("Adding device: %s" % device)
+
+        temperature = self._printer.get_dev_stat(device, "temperature")
+        if temperature is None:
+            return False
 
         if not (device.startswith("extruder") or device.startswith("heater_bed")):
             devname = " ".join(device.split(" ")[1:])
+            # Support for hiding devices by name
+            if devname.startswith("_"):
+                return False
         else:
             devname = device
 
@@ -76,8 +84,30 @@ class MainPanel(MenuPanel):
             devname = "Heater Bed"
             class_name = "graph_label_heater_bed"
             type = "bed"
+        elif device.startswith("heater_generic"):
+            h = 1
+            for d in self.devices:
+                if "heater_generic" in d:
+                    h += 1
+            image = "heat-up"
+            class_name = "graph_label_sensor_%s" % h
+            type = "sensor"
+        elif self._config.get_main_config_option('only_heaters') == "True":
+            return False
+        elif device.startswith("temperature_fan"):
+            f = 1
+            for d in self.devices:
+                if "temperature_fan" in d:
+                    f += 1
+            image = "fan"
+            class_name = "graph_label_fan_%s" % f
+            type = "fan"
         else:
             s = 1
+            try:
+                s += h
+            except Exception:
+                pass
             for d in self.devices:
                 if "sensor" in d:
                     s += 1
@@ -93,8 +123,8 @@ class MainPanel(MenuPanel):
             self.labels['da'].add_object(device, "targets", rgb, True, False)
 
         text = "<span underline='double' underline_color='#%s'>%s</span>" % (color, devname.capitalize())
-        name = self._gtk.ButtonImage(image, devname.capitalize(), None, .5, .5, Gtk.PositionType.LEFT, False)
-        # name['b'].set_hexpand(True)
+        name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "),
+                                     None, .5, .5, Gtk.PositionType.LEFT, False)
         name.connect('clicked', self.on_popover_clicked, device)
         name.set_alignment(0, .5)
         name.get_style_context().add_class(class_name)
@@ -102,14 +132,8 @@ class MainPanel(MenuPanel):
         child.set_ellipsize(True)
         child.set_ellipsize(Pango.EllipsizeMode.END)
 
-
-        temp = Gtk.Label("")
-        temperature = self._printer.get_dev_stat(device, "temperature")
-        temp.set_markup(self.format_temp(temperature if temperature is not None else 0))
-
-        if can_target:
-            target = Gtk.Label("")
-            target.set_markup(self.format_target(self._printer.get_dev_stat(device, "target")))
+        temp = self._gtk.Button("")
+        temp.connect('clicked', self.on_popover_clicked, device)
 
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 
@@ -122,10 +146,15 @@ class MainPanel(MenuPanel):
             "class": class_name,
             "type": type,
             "name": name,
-            "temp": temp
+            "temp": temp,
+            "can_target": can_target
         }
-        if can_target:
-            self.devices[device]["target"] = target
+
+        if self.devices[device]["can_target"]:
+            temp.get_child().set_label("%.1f %s" %
+                                       (temperature, self.format_target(self._printer.get_dev_stat(device, "target"))))
+        else:
+            temp.get_child().set_label("%.1f " % temperature)
 
         devices = sorted(self.devices)
         pos = devices.index(device) + 1
@@ -133,14 +162,13 @@ class MainPanel(MenuPanel):
         self.labels['devices'].insert_row(pos)
         self.labels['devices'].attach(name, 0, pos, 1, 1)
         self.labels['devices'].attach(temp, 1, pos, 1, 1)
-        if can_target:
-            self.labels['devices'].attach(target, 2, pos, 1, 1)
         self.labels['devices'].show_all()
+        return True
 
     def change_target_temp(self, temp):
         _ = self.lang.gettext
 
-        MAX_TEMP = int(self._printer.get_config_section(self.active_heater)['max_temp'])
+        MAX_TEMP = int(float(self._printer.get_config_section(self.active_heater)['max_temp']))
         if temp > MAX_TEMP:
             self._screen.show_popup_message(_("Can't set above the maximum:") + (" %s" % MAX_TEMP))
             return
@@ -167,22 +195,29 @@ class MainPanel(MenuPanel):
         self.labels['devices'].set_vexpand(False)
 
         name = Gtk.Label("")
-        temp = Gtk.Label(_("Temp"))
-        temp.set_size_request(round(self._gtk.get_font_size() * 5.5), 0)
-        target = Gtk.Label(_("Target"))
+        temp = Gtk.Label(_("Temp (°C)"))
+        temp.set_size_request(round(self._gtk.get_font_size() * 7.7), 0)
 
         self.labels['devices'].attach(name, 0, 0, 1, 1)
         self.labels['devices'].attach(temp, 1, 0, 1, 1)
-        self.labels['devices'].attach(target, 2, 0, 1, 1)
 
         da = HeaterGraph(self._printer)
         da.set_vexpand(True)
         self.labels['da'] = da
 
+        scroll = Gtk.ScrolledWindow()
+        scroll.set_property("overlay-scrolling", False)
+        scroll.set_hexpand(True)
+        scroll.set_vexpand(True)
+        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add(self.labels['devices'])
+
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         box.set_vexpand(True)
-        box.add(self.labels['devices'])
-        box.add(da)
+        box.add(scroll)
+        box.add(self.labels['da'])
 
 
         self.labels['graph_settemp'] = self._gtk.Button(label=_("Set Temp"))
@@ -194,15 +229,16 @@ class MainPanel(MenuPanel):
 
         popover = Gtk.Popover()
         self.labels['popover_vbox'] = Gtk.VBox()
-        # vbox.pack_start(Gtk.Button(label="Hide"), False, True, 10)
-        # vbox.pack_start(Gtk.Label(label="Item 2"), False, True, 10)
         popover.add(self.labels['popover_vbox'])
         popover.set_position(Gtk.PositionType.BOTTOM)
         self.labels['popover'] = popover
 
+        i = 2
         for d in self._printer.get_temp_store_devices():
-            self.add_device(d)
-
+            if self.add_device(d):
+                i += 1
+        graph_height = max(0, self._screen.height - (i * 5 * self._gtk.get_font_size()))
+        self.labels['da'].set_size_request(0, graph_height)
         return box
 
     def graph_show_device(self, widget, show=True):
@@ -295,6 +331,7 @@ class MainPanel(MenuPanel):
         if device not in self.devices:
             return
 
-        self.devices[device]["temp"].set_markup(self.format_temp(temp))
-        if "target" in self.devices[device]:
-            self.devices[device]["target"].set_markup(self.format_target(target))
+        if self.devices[device]["can_target"]:
+            self.devices[device]["temp"].get_child().set_label("%.1f %s" % (temp, self.format_target(target)))
+        else:
+            self.devices[device]["temp"].get_child().set_label("%.1f " % temp)
