@@ -147,7 +147,7 @@ class TemperaturePanel(ScreenPanel):
                 target = self._printer.get_dev_stat(heater, "target")
                 if dir == "+":
                     target += int(self.tempdelta)
-                    MAX_TEMP = int(self._printer.get_config_section(heater)['max_temp'])
+                    MAX_TEMP = int(float(self._printer.get_config_section(heater)['max_temp']))
                     if target > MAX_TEMP:
                         target = MAX_TEMP
                         self._screen.show_popup_message(_("Can't set above the maximum:") + (" %s" % MAX_TEMP))
@@ -210,7 +210,7 @@ class TemperaturePanel(ScreenPanel):
                 return
 
             for heater in self.active_heaters:
-                MAX_TEMP = int(self._printer.get_config_section(heater)['max_temp'])
+                MAX_TEMP = int(float(self._printer.get_config_section(heater)['max_temp']))
                 if heater.startswith('extruder'):
                     target = self.preheat_options[setting]["extruder"]
                     if target > 0 and target <= MAX_TEMP:
@@ -360,7 +360,7 @@ class TemperaturePanel(ScreenPanel):
     def change_target_temp(self, temp):
         _ = self.lang.gettext
 
-        MAX_TEMP = int(self._printer.get_config_section(self.active_heater)['max_temp'])
+        MAX_TEMP = int(float(self._printer.get_config_section(self.active_heater)['max_temp']))
         if temp > MAX_TEMP:
             self._screen.show_popup_message(_("Can't set above the maximum:") + (" %s" % MAX_TEMP))
             return
