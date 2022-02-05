@@ -84,6 +84,11 @@ combobox arrow {
     min-width: 1em;
 }
 
+switch {
+    border: 0;
+    border-radius: 3em;
+}
+
 switch slider {
     border: 0;
 }

@@ -55,7 +55,6 @@ combobox box button {
 
 switch {
     background-color: #20292F;
-    border: 0;
 }
 
 switch:checked {

@@ -90,8 +90,6 @@ combobox box button {
 
 switch {
     background-color: #BDBDBD;
-    border-radius: 2em;
-    border-color: #BDBDBD
 }
 
 switch:checked {
@@ -99,7 +97,7 @@ switch:checked {
 }
 
 switch slider {
-    border-color: #BDBDBD;
+    border: .1em solid #BDBDBD;
 }
 
 entry {

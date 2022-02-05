@@ -81,8 +81,6 @@ combobox box button {
 
 switch {
     background-color: #073642; /* base02 */
-    border-color: #073642; /* base02 */
-    border-radius: 3em;
 }
 
 switch:checked {
