@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 08:24-0300\n"
+"POT-Creation-Date: 2022-02-05 12:33-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -341,9 +341,6 @@ msgstr ""
 msgid "Move Distance (mm)"
 msgstr ""
 
-msgid "Move Speed (mm/s)"
-msgstr ""
-
 msgid "Name"
 msgstr ""
 
@@ -441,6 +438,9 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
+msgid "Show Only Heaters in Temp."
+msgstr ""
+
 msgid "Size"
 msgstr ""
 
@@ -490,12 +490,6 @@ msgid ""
 "Shutdown"
 msgstr ""
 
-msgid "Target"
-msgstr ""
-
-msgid "Temp"
-msgstr ""
-
 msgid "Temp (°C)"
 msgstr ""
 
@@ -536,6 +530,9 @@ msgstr ""
 msgid "X-"
 msgstr ""
 
+msgid "XY Move Speed (mm/s)"
+msgstr ""
+
 msgid "Y+"
 msgstr ""
 
@@ -543,6 +540,9 @@ msgid "Y-"
 msgstr ""
 
 msgid "Z Calibrate"
+msgstr ""
+
+msgid "Z Move Speed (mm/s)"
 msgstr ""
 
 msgid "Z Offset"
@@ -571,8 +571,3 @@ msgstr ""
 
 msgid "mm/s^2"
 msgstr ""
-
-msgid "hour"
-msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""

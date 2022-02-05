@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-22 13:52-0300\n"
+"POT-Creation-Date: 2022-02-05 12:33-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
@@ -346,9 +346,6 @@ msgstr "Flytning"
 msgid "Move Distance (mm)"
 msgstr "Flyt længde (mm)"
 
-msgid "Move Speed (mm/s)"
-msgstr "Flyt hastighed (mm/s)"
-
 msgid "Name"
 msgstr "Navn"
 
@@ -446,6 +443,9 @@ msgstr "Indstillinger"
 msgid "Show"
 msgstr "At vise"
 
+msgid "Show Only Heaters in Temp."
+msgstr "Vis kun varmelegemer i Temp."
+
 msgid "Size"
 msgstr "Størrelse"
 
@@ -499,12 +499,6 @@ msgstr ""
 "Luk\n"
 "system ned"
 
-msgid "Target"
-msgstr "Mål"
-
-msgid "Temp"
-msgstr "Temp"
-
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
 
@@ -545,6 +539,9 @@ msgstr "X+"
 msgid "X-"
 msgstr "X-"
 
+msgid "XY Move Speed (mm/s)"
+msgstr "XY Flyt hastighed (mm/s)"
+
 msgid "Y+"
 msgstr "Y+"
 
@@ -553,6 +550,9 @@ msgstr "Y-"
 
 msgid "Z Calibrate"
 msgstr "Kalibrér Z"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "Z Flyt hastighed (mm/s)"
 
 msgid "Z Offset"
 msgstr "Z-offset"
@@ -580,3 +580,9 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Target"
+#~ msgstr "Mål"
+
+#~ msgid "Temp"
+#~ msgstr "Temp"

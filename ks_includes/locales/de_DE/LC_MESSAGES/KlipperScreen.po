@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 08:24-0300\n"
-"PO-Revision-Date: 2022-01-13 08:28-0300\n"
+"POT-Creation-Date: 2022-02-05 12:33-0300\n"
+"PO-Revision-Date: 2022-02-05 12:39-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -362,9 +362,6 @@ msgstr "Bewegen"
 msgid "Move Distance (mm)"
 msgstr "Bewegungsdistanz (mm)"
 
-msgid "Move Speed (mm/s)"
-msgstr "Bewegungsgeschwindigkeit (mm/s)"
-
 msgid "Name"
 msgstr "Name"
 
@@ -466,6 +463,9 @@ msgstr "Einstellungen"
 msgid "Show"
 msgstr "Zeigen"
 
+msgid "Show Only Heaters in Temp."
+msgstr "Nur Heizungen in Temp anzeigen."
+
 msgid "Size"
 msgstr "Größe"
 
@@ -519,12 +519,6 @@ msgstr ""
 "Drucker\n"
 "Ausschalten"
 
-msgid "Target"
-msgstr "Ziel"
-
-msgid "Temp"
-msgstr "Temp"
-
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
 
@@ -567,6 +561,9 @@ msgstr "X+"
 msgid "X-"
 msgstr "X-"
 
+msgid "XY Move Speed (mm/s)"
+msgstr "XY Bewegungsgeschwindigkeit (mm/s)"
+
 msgid "Y+"
 msgstr "Y+"
 
@@ -575,6 +572,9 @@ msgstr "Y-"
 
 msgid "Z Calibrate"
 msgstr "Höhe Kalibrieren"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "Z Bewegungsgeschwindigkeit (mm/s)"
 
 msgid "Z Offset"
 msgstr "Z Offset"
@@ -602,6 +602,12 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Target"
+#~ msgstr "Ziel"
+
+#~ msgid "Temp"
+#~ msgstr "Temp"
 
 # Nummernblock is 2 character too long and currently doesn't fit
 #~ msgid "Number Pad"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 08:24-0300\n"
+"POT-Creation-Date: 2022-02-05 12:33-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pappicio\n"
 "Language-Team: \n"
@@ -349,9 +349,6 @@ msgstr "Muovi"
 msgid "Move Distance (mm)"
 msgstr "Distanza Movimento (mm)"
 
-msgid "Move Speed (mm/s)"
-msgstr "Velocità Movimento (mm/s)"
-
 msgid "Name"
 msgstr "Nome"
 
@@ -449,6 +446,9 @@ msgstr "Impostazioni"
 msgid "Show"
 msgstr "Mostrare"
 
+msgid "Show Only Heaters in Temp."
+msgstr "Mostra solo riscaldatori in temp."
+
 msgid "Size"
 msgstr "Grandezza"
 
@@ -502,12 +502,6 @@ msgstr ""
 "Spegni\n"
 "Sistema"
 
-msgid "Target"
-msgstr "Obbiettivo"
-
-msgid "Temp"
-msgstr "Temp"
-
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
 
@@ -548,6 +542,9 @@ msgstr "X+"
 msgid "X-"
 msgstr "X-"
 
+msgid "XY Move Speed (mm/s)"
+msgstr "Velocità di spostamento XY (mm/s)"
+
 msgid "Y+"
 msgstr "Y+"
 
@@ -556,6 +553,9 @@ msgstr "Y-"
 
 msgid "Z Calibrate"
 msgstr "Calibra Z"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "Velocità di spostamento Z (mm/s) "
 
 msgid "Z Offset"
 msgstr "Offset Z"
@@ -583,6 +583,12 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Target"
+#~ msgstr "Obbiettivo"
+
+#~ msgid "Temp"
+#~ msgstr "Temp"
 
 #~ msgid "Number Pad"
 #~ msgstr "Tastierino"

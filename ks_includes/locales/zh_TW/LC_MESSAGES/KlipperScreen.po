@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 08:37-0300\n"
-"PO-Revision-Date: 2022-01-13 08:39-0300\n"
+"POT-Creation-Date: 2022-02-05 12:33-0300\n"
+"PO-Revision-Date: 2022-02-05 12:50-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -352,9 +352,6 @@ msgstr "移動"
 msgid "Move Distance (mm)"
 msgstr "移動距離（mm）"
 
-msgid "Move Speed (mm/s)"
-msgstr "移動速度 (mm/s)"
-
 msgid "Name"
 msgstr "名稱"
 
@@ -452,6 +449,9 @@ msgstr "設定"
 msgid "Show"
 msgstr "展示"
 
+msgid "Show Only Heaters in Temp."
+msgstr "僅顯示溫度下的加熱器"
+
 msgid "Size"
 msgstr "大小"
 
@@ -501,12 +501,6 @@ msgid ""
 "Shutdown"
 msgstr "關閉系統"
 
-msgid "Target"
-msgstr "目標溫度"
-
-msgid "Temp"
-msgstr "目前溫度"
-
 msgid "Temp (°C)"
 msgstr "溫度（°C）"
 
@@ -547,6 +541,9 @@ msgstr "X+"
 msgid "X-"
 msgstr "X-"
 
+msgid "XY Move Speed (mm/s)"
+msgstr "XY 移動速度 (mm/s)"
+
 msgid "Y+"
 msgstr "Y+"
 
@@ -555,6 +552,9 @@ msgstr "Y-"
 
 msgid "Z Calibrate"
 msgstr "Z 校準"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "Z 移動速度 (mm/s)"
 
 msgid "Z Offset"
 msgstr "Z 間隙"
@@ -582,6 +582,12 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Target"
+#~ msgstr "目標溫度"
+
+#~ msgid "Temp"
+#~ msgstr "目前溫度"
 
 #~ msgid "Number Pad"
 #~ msgstr "數字鍵盤"

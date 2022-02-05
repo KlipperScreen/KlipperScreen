@@ -7,16 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 08:24-0300\n"
-"PO-Revision-Date: 2022-01-24 00:12-0500\n"
+"POT-Creation-Date: 2022-02-05 12:33-0300\n"
+"PO-Revision-Date: 2022-02-05 12:46-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.0.1\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
+"|| n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0\n"
 
 #, python-format
 msgid "%d Packages will be updated"
@@ -352,9 +353,6 @@ msgstr "Ruch"
 msgid "Move Distance (mm)"
 msgstr "Odległość Ruchu (mm)"
 
-msgid "Move Speed (mm/s)"
-msgstr "Prędkość Ruchu (mm/s)"
-
 msgid "Name"
 msgstr "Nazwa"
 
@@ -452,6 +450,9 @@ msgstr "Ustawienia"
 msgid "Show"
 msgstr "Pokaż"
 
+msgid "Show Only Heaters in Temp."
+msgstr "Pokaż tylko grzejniki w temp."
+
 msgid "Size"
 msgstr "Rozmiar"
 
@@ -505,12 +506,6 @@ msgstr ""
 "Wyłączanie\n"
 " systemu"
 
-msgid "Target"
-msgstr "Cel"
-
-msgid "Temp"
-msgstr "Temp"
-
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
 
@@ -551,6 +546,9 @@ msgstr "X+"
 msgid "X-"
 msgstr "X-"
 
+msgid "XY Move Speed (mm/s)"
+msgstr "Prędkość ruchu XY (mm/s)"
+
 msgid "Y+"
 msgstr "Y+"
 
@@ -559,6 +557,9 @@ msgstr "Y0"
 
 msgid "Z Calibrate"
 msgstr "Kalibracja Z"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "Prędkość ruchu Z (mm/s) "
 
 msgid "Z Offset"
 msgstr "Przesunięcie Z"
@@ -587,8 +588,14 @@ msgstr "mm/s^2"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
-msgid "hour"
-msgid_plural "hours"
-msgstr[0] "godzina"
-msgstr[1] "godziny"
-msgstr[2] "godzin"
+#~ msgid "Target"
+#~ msgstr "Cel"
+
+#~ msgid "Temp"
+#~ msgstr "Temp"
+
+#~ msgid "hour"
+#~ msgid_plural "hours"
+#~ msgstr[0] "godzina"
+#~ msgstr[1] "godziny"
+#~ msgstr[2] "godzin"
