@@ -3,6 +3,7 @@ import gi
 import json
 import humanize
 import logging
+import os
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
@@ -193,7 +194,7 @@ class PrintPanel(ScreenPanel):
             frame.get_style_context().add_class("frame-item")
 
             name = Gtk.Label()
-            name.set_markup("<big><b>%s</b></big>" % (filename))
+            name.set_markup("<big><b>%s</b></big>" % (os.path.splitext(filename)[0]))
             name.set_hexpand(True)
             name.set_halign(Gtk.Align.START)
             name.set_line_wrap(True)
