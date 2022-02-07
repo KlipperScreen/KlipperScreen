@@ -44,7 +44,7 @@ class ExtrudePanel(ScreenPanel):
             "panel": "temperature"
         })
 
-        extgrid = Gtk.Grid()
+        extgrid = self._gtk.HomogeneousGrid()
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
         for i, extruder in enumerate(self._printer.get_tools()):
             self.labels[extruder] = self._gtk.ButtonImage("extruder-%s" % i, _("Tool") + " %s" % str(i))
@@ -57,10 +57,16 @@ class ExtrudePanel(ScreenPanel):
             extgrid.attach(self.labels['temperature'], i+1, 0, 1, 1)
 
         grid.attach(extgrid, 0, 0, 4, 1)
-        grid.attach(self.labels['extrude'], 0, 1, 1, 1)
-        grid.attach(self.labels['load'], 1, 1, 1, 1)
-        grid.attach(self.labels['unload'], 2, 1, 1, 1)
-        grid.attach(self.labels['retract'], 3, 1, 1, 1)
+        if self._screen.vertical_mode:
+            grid.attach(self.labels['extrude'], 0, 1, 2, 1)
+            grid.attach(self.labels['retract'], 2, 1, 2, 1)
+            grid.attach(self.labels['load'], 0, 2, 2, 1)
+            grid.attach(self.labels['unload'], 2, 2, 2, 1)
+        else:
+            grid.attach(self.labels['extrude'], 0, 1, 1, 1)
+            grid.attach(self.labels['load'], 1, 1, 1, 1)
+            grid.attach(self.labels['unload'], 2, 1, 1, 1)
+            grid.attach(self.labels['retract'], 3, 1, 1, 1)
 
         distgrid = Gtk.Grid()
         j = 0
@@ -112,8 +118,12 @@ class ExtrudePanel(ScreenPanel):
         speedbox.add(speedgrid)
 
         grid.set_column_homogeneous(True)
-        grid.attach(distbox, 0, 2, 2, 1)
-        grid.attach(speedbox, 2, 2, 2, 1)
+        if self._screen.vertical_mode:
+            grid.attach(distbox, 0, 3, 4, 1)
+            grid.attach(speedbox, 0, 4, 4, 1)
+        else:
+            grid.attach(distbox, 0, 2, 2, 1)
+            grid.attach(speedbox, 2, 2, 2, 1)
 
         self.content.add(grid)
 

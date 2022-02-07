@@ -11,7 +11,6 @@ klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
 
 class KlippyGtk:
     labels = {}
-    font_ratio = [43, 29]
     keyboard_ratio = .22
     width_ratio = 16
     height_ratio = 9.375
@@ -21,6 +20,10 @@ class KlippyGtk:
         self.width = width
         self.height = height
         self.theme = theme
+        if self.screen.vertical_mode:
+            self.font_ratio = [33, 49]
+        else:
+            self.font_ratio = [43, 29]
         self.font_size = int(min(
             self.width / self.font_ratio[0],
             self.height / self.font_ratio[1]

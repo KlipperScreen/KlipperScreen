@@ -51,8 +51,12 @@ class FineTunePanel(ScreenPanel):
         self.labels['z-'].connect("clicked", self.change_babystepping, "-")
 
         grid.attach(self.labels['z+'], 0, 0, 1, 1)
-        grid.attach(self.labels['zoffset'], 0, 1, 1, 1)
-        grid.attach(self.labels['z-'], 0, 2, 1, 1)
+        if self._screen.vertical_mode:
+            grid.attach(self.labels['zoffset'], 2, 0, 1, 1)
+            grid.attach(self.labels['z-'], 1, 0, 1, 1)
+        else:
+            grid.attach(self.labels['zoffset'], 0, 1, 1, 1)
+            grid.attach(self.labels['z-'], 0, 2, 1, 1)
 
         self.labels['speed+'] = self._gtk.ButtonImage("speed+", _("Speed +"), "color3")
         self.labels['speed+'].connect("clicked", self.change_speed, "+")
@@ -60,9 +64,14 @@ class FineTunePanel(ScreenPanel):
         self.labels['speedfactor'].get_style_context().add_class('temperature_entry')
         self.labels['speed-'] = self._gtk.ButtonImage("speed-", _("Speed -"), "color3")
         self.labels['speed-'].connect("clicked", self.change_speed, "-")
-        grid.attach(self.labels['speed+'], 1, 0, 1, 1)
-        grid.attach(self.labels['speedfactor'], 1, 1, 1, 1)
-        grid.attach(self.labels['speed-'], 1, 2, 1, 1)
+        if self._screen.vertical_mode:
+            grid.attach(self.labels['speed+'], 1, 2, 1, 1)
+            grid.attach(self.labels['speedfactor'], 2, 2, 1, 1)
+            grid.attach(self.labels['speed-'], 0, 2, 1, 1)
+        else:
+            grid.attach(self.labels['speed+'], 1, 0, 1, 1)
+            grid.attach(self.labels['speedfactor'], 1, 1, 1, 1)
+            grid.attach(self.labels['speed-'], 1, 2, 1, 1)
 
         self.labels['extrude+'] = self._gtk.ButtonImage("flow+", _("Extrusion +"), "color4")
         self.labels['extrude+'].connect("clicked", self.change_extrusion, "+")
@@ -70,10 +79,14 @@ class FineTunePanel(ScreenPanel):
         self.labels['extrudefactor'].get_style_context().add_class('temperature_entry')
         self.labels['extrude-'] = self._gtk.ButtonImage("flow-", _("Extrusion -"), "color4")
         self.labels['extrude-'].connect("clicked", self.change_extrusion, "-")
-        grid.attach(self.labels['extrude+'], 2, 0, 1, 1)
-        grid.attach(self.labels['extrudefactor'], 2, 1, 1, 1)
-        grid.attach(self.labels['extrude-'], 2, 2, 1, 1)
-
+        if self._screen.vertical_mode:
+            grid.attach(self.labels['extrude+'], 1, 3, 1, 1)
+            grid.attach(self.labels['extrudefactor'], 2, 3, 1, 1)
+            grid.attach(self.labels['extrude-'], 0, 3, 1, 1)
+        else:
+            grid.attach(self.labels['extrude+'], 2, 0, 1, 1)
+            grid.attach(self.labels['extrudefactor'], 2, 1, 1, 1)
+            grid.attach(self.labels['extrude-'], 2, 2, 1, 1)
 
         # babystepping grid
         bsgrid = Gtk.Grid()
@@ -92,7 +105,10 @@ class FineTunePanel(ScreenPanel):
                 ctx.add_class("distbutton_active")
             bsgrid.attach(self.labels[i], j, 0, 1, 1)
             j += 1
-        grid.attach(bsgrid, 0, 3, 1, 1)
+        if self._screen.vertical_mode:
+            grid.attach(bsgrid, 0, 1, 3, 1)
+        else:
+            grid.attach(bsgrid, 0, 3, 1, 1)
 
         # Grid for percentage
         deltgrid = Gtk.Grid()
@@ -114,7 +130,10 @@ class FineTunePanel(ScreenPanel):
 
         self.labels["1"].set_active(True)
 
-        grid.attach(deltgrid, 1, 3, 2, 1)
+        if self._screen.vertical_mode:
+            grid.attach(deltgrid, 0, 4, 3, 1)
+        else:
+            grid.attach(deltgrid, 1, 3, 2, 1)
 
         # self.panel = grid
         self.content.add(grid)

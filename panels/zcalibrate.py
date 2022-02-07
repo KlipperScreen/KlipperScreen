@@ -76,13 +76,23 @@ class ZCalibratePanel(ScreenPanel):
         distances.pack_start(distgrid, True, True, 0)
 
         grid.set_column_homogeneous(True)
-        grid.attach(self.widgets['zpos'], 0, 0, 1, 1)
-        grid.attach(self.widgets['start'], 1, 0, 1, 1)
-        grid.attach(pos, 1, 1, 1, 1)
-        grid.attach(self.widgets['zneg'], 0, 1, 1, 1)
-        grid.attach(self.widgets['complete'], 2, 0, 1, 1)
-        grid.attach(distances, 0, 2, 3, 1)
-        grid.attach(self.widgets['cancel'], 2, 1, 1, 1)
+        if self._screen.vertical_mode:
+            grid.attach(self.widgets['zpos'], 0, 1, 1, 1)
+            grid.attach(self.widgets['zneg'], 0, 2, 1, 1)
+            grid.attach(self.widgets['start'], 0, 0, 1, 1)
+            grid.attach(pos, 1, 0, 1, 1)
+            grid.attach(self.widgets['complete'], 1, 1, 1, 1)
+            grid.attach(self.widgets['cancel'], 1, 2, 1, 1)
+            grid.attach(distances, 0, 3, 2, 1)
+        else:
+            grid.attach(self.widgets['zpos'], 0, 0, 1, 1)
+            grid.attach(self.widgets['zneg'], 0, 1, 1, 1)
+            grid.attach(self.widgets['start'], 1, 0, 1, 1)
+            grid.attach(pos, 1, 1, 1, 1)
+            grid.attach(self.widgets['complete'], 2, 0, 1, 1)
+            grid.attach(self.widgets['cancel'], 2, 1, 1, 1)
+            grid.attach(distances, 0, 2, 3, 1)
+
         self.buttons_not_calibrating()
         self.content.add(grid)
 

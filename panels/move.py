@@ -52,16 +52,31 @@ class MovePanel(ScreenPanel):
         self.labels['quad_gantry_level'] = self._gtk.ButtonImage("z-tilt", _("Quad Gantry Level"), "color4")
         self.labels['quad_gantry_level'].connect("clicked", self.quad_gantry_level)
 
-        if self._screen.lang_ltr:
-            grid.attach(self.labels['x+'], 2, 1, 1, 1)
-            grid.attach(self.labels['x-'], 0, 1, 1, 1)
+        if self._screen.vertical_mode:
+            if self._screen.lang_ltr:
+                grid.attach(self.labels['x+'], 2, 1, 1, 1)
+                grid.attach(self.labels['x-'], 0, 1, 1, 1)
+                grid.attach(self.labels['z+'], 2, 2, 1, 1)
+                grid.attach(self.labels['z-'], 0, 2, 1, 1)
+            else:
+                grid.attach(self.labels['x+'], 0, 1, 1, 1)
+                grid.attach(self.labels['x-'], 2, 1, 1, 1)
+                grid.attach(self.labels['z+'], 0, 2, 1, 1)
+                grid.attach(self.labels['z-'], 2, 2, 1, 1)
+            grid.attach(self.labels['y+'], 1, 0, 1, 1)
+            grid.attach(self.labels['y-'], 1, 1, 1, 1)
+
         else:
-            grid.attach(self.labels['x+'], 0, 1, 1, 1)
-            grid.attach(self.labels['x-'], 2, 1, 1, 1)
-        grid.attach(self.labels['y+'], 1, 0, 1, 1)
-        grid.attach(self.labels['y-'], 1, 1, 1, 1)
-        grid.attach(self.labels['z+'], 3, 0, 1, 1)
-        grid.attach(self.labels['z-'], 3, 1, 1, 1)
+            if self._screen.lang_ltr:
+                grid.attach(self.labels['x+'], 2, 1, 1, 1)
+                grid.attach(self.labels['x-'], 0, 1, 1, 1)
+            else:
+                grid.attach(self.labels['x+'], 0, 1, 1, 1)
+                grid.attach(self.labels['x-'], 2, 1, 1, 1)
+            grid.attach(self.labels['y+'], 1, 0, 1, 1)
+            grid.attach(self.labels['y-'], 1, 1, 1, 1)
+            grid.attach(self.labels['z+'], 3, 0, 1, 1)
+            grid.attach(self.labels['z-'], 3, 1, 1, 1)
 
         grid.attach(self.labels['home'], 0, 0, 1, 1)
 
@@ -107,7 +122,10 @@ class MovePanel(ScreenPanel):
         box.pack_start(self.labels['move_dist'], True, True, 0)
         box.pack_start(distgrid, True, True, 0)
 
-        grid.attach(box, 0, 2, 4, 1)
+        if self._screen.vertical_mode:
+            grid.attach(box, 0, 3, 3, 1)
+        else:
+            grid.attach(box, 0, 2, 4, 1)
 
         self.content.add(grid)
 

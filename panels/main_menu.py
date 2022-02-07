@@ -38,7 +38,10 @@ class MainPanel(MenuPanel):
         leftpanel = self.create_left_panel()
         grid.attach(leftpanel, 0, 0, 1, 1)
         self.labels['menu'] = self.arrangeMenuItems(items, 2, True)
-        grid.attach(self.labels['menu'], 1, 0, 1, 1)
+        if self._screen.vertical_mode:
+            grid.attach(self.labels['menu'], 0, 1, 1, 1)
+        else:
+            grid.attach(self.labels['menu'], 1, 0, 1, 1)
 
         self.grid = grid
 
@@ -260,8 +263,12 @@ class MainPanel(MenuPanel):
         self.devices[self.active_heater]['name'].get_style_context().remove_class("active_device")
         self.active_heater = None
 
-        self.grid.remove_column(1)
-        self.grid.attach(self.labels['menu'], 1, 0, 1, 1)
+        if self._screen.vertical_mode:
+            self.grid.remove_row(1)
+            self.grid.attach(self.labels['menu'], 0, 1, 1, 1)
+        else:
+            self.grid.remove_column(1)
+            self.grid.attach(self.labels['menu'], 1, 0, 1, 1)
         self.grid.show_all()
 
     def on_popover_clicked(self, widget, device):
@@ -315,8 +322,12 @@ class MainPanel(MenuPanel):
             self.labels["keypad"] = Keypad(self._screen, self.change_target_temp, self.hide_numpad)
         self.labels["keypad"].clear()
 
-        self.grid.remove_column(1)
-        self.grid.attach(self.labels["keypad"], 1, 0, 1, 1)
+        if self._screen.vertical_mode:
+            self.grid.remove_row(1)
+            self.grid.attach(self.labels["keypad"], 0, 1, 1, 1)
+        else:
+            self.grid.remove_column(1)
+            self.grid.attach(self.labels["keypad"], 1, 0, 1, 1)
         self.grid.show_all()
 
         self.labels['popover'].popdown()

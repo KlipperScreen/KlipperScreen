@@ -55,12 +55,20 @@ class MenuPanel(ScreenPanel):
 
             col = i % columns
             row = int(i/columns)
-            width = 1
 
+            width = height = 1
             if expandLast is True and i+1 == length and length % 2 == 1:
-                width = 2
+                if self._screen.vertical_mode:
+                    height = 2
+                else:
+                    width = 2
 
-            self.grid.attach(self.labels[key], col, row, width, 1)
+            if self._screen.vertical_mode:
+                aux = col
+                col = row
+                row = aux
+
+            self.grid.attach(self.labels[key], col, row, width, height)
             i += 1
 
         return self.grid
