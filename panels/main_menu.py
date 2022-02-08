@@ -92,8 +92,6 @@ class MainPanel(MenuPanel):
             image = "heat-up"
             class_name = "graph_label_sensor_%s" % h
             type = "sensor"
-        elif self._config.get_main_config_option('only_heaters') == "True":
-            return False
         elif device.startswith("temperature_fan"):
             f = 1
             for d in self.devices:
@@ -102,6 +100,8 @@ class MainPanel(MenuPanel):
             image = "fan"
             class_name = "graph_label_fan_%s" % f
             type = "fan"
+        elif self._config.get_main_config_option('only_heaters') == "True":
+            return False
         else:
             s = 1
             try:

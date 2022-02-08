@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-05 12:33-0300\n"
+"POT-Creation-Date: 2022-02-08 13:36-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -197,6 +197,9 @@ msgid "Go Back"
 msgstr ""
 
 msgid "Hide"
+msgstr ""
+
+msgid "Hide sensors in Temp."
 msgstr ""
 
 msgid "Home"
@@ -436,9 +439,6 @@ msgid "Settings"
 msgstr ""
 
 msgid "Show"
-msgstr ""
-
-msgid "Show Only Heaters in Temp."
 msgstr ""
 
 msgid "Size"

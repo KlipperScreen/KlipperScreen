@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-05 12:33-0300\n"
-"PO-Revision-Date: 2022-02-05 12:49-0300\n"
+"POT-Creation-Date: 2022-02-08 13:36-0300\n"
+"PO-Revision-Date: 2022-02-08 13:42-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -205,6 +205,9 @@ msgstr "返回"
 
 msgid "Hide"
 msgstr "隐藏"
+
+msgid "Hide sensors in Temp."
+msgstr "在温度中隐藏传感器。"
 
 msgid "Home"
 msgstr "归零"
@@ -428,7 +431,7 @@ msgstr "保存"
 msgid "Save Config"
 msgstr "保存配置"
 
-msgid "Save configuration."
+msgid "Save configuration"
 msgstr "即将保存配置文件"
 
 msgid "Screen Power Off Time"
@@ -448,9 +451,6 @@ msgstr "设置"
 
 msgid "Show"
 msgstr "显示"
-
-msgid "Show Only Heaters in Temp."
-msgstr "仅显示使用中的加热器"
 
 msgid "Size"
 msgstr "文件大小"
@@ -582,6 +582,9 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Show Only Heaters in Temp."
+#~ msgstr "仅显示使用中的加热器"
 
 #~ msgid "Target"
 #~ msgstr "目标"

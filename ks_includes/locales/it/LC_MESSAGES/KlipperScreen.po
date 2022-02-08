@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-05 12:33-0300\n"
+"POT-Creation-Date: 2022-02-08 13:36-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pappicio\n"
 "Language-Team: \n"
@@ -200,6 +200,9 @@ msgstr "Indietro"
 
 msgid "Hide"
 msgstr "Nascondere"
+
+msgid "Hide sensors in Temp."
+msgstr "Nascondi sensori in Temp."
 
 msgid "Home"
 msgstr "Inizio"
@@ -446,9 +449,6 @@ msgstr "Impostazioni"
 msgid "Show"
 msgstr "Mostrare"
 
-msgid "Show Only Heaters in Temp."
-msgstr "Mostra solo riscaldatori in temp."
-
 msgid "Size"
 msgstr "Grandezza"
 
@@ -583,6 +583,9 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Show Only Heaters in Temp."
+#~ msgstr "Mostra solo riscaldatori in temp."
 
 #~ msgid "Target"
 #~ msgstr "Obbiettivo"

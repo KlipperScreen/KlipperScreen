@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-05 12:33-0300\n"
-"PO-Revision-Date: 2022-02-05 12:46-0300\n"
+"POT-Creation-Date: 2022-02-08 13:36-0300\n"
+"PO-Revision-Date: 2022-02-08 13:41-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -206,6 +206,9 @@ msgstr "Powróć"
 
 msgid "Hide"
 msgstr "Schowaj"
+
+msgid "Hide sensors in Temp."
+msgstr "Ukryj czujniki w Temp."
 
 msgid "Home"
 msgstr "Baza"
@@ -450,9 +453,6 @@ msgstr "Ustawienia"
 msgid "Show"
 msgstr "Pokaż"
 
-msgid "Show Only Heaters in Temp."
-msgstr "Pokaż tylko grzejniki w temp."
-
 msgid "Size"
 msgstr "Rozmiar"
 
@@ -587,6 +587,9 @@ msgstr "mm/s^2"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Show Only Heaters in Temp."
+#~ msgstr "Pokaż tylko grzejniki w temp."
 
 #~ msgid "Target"
 #~ msgstr "Cel"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-05 12:33-0300\n"
+"POT-Creation-Date: 2022-02-08 13:36-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
@@ -199,6 +199,9 @@ msgstr "Gå tilbage"
 
 msgid "Hide"
 msgstr "Skjule"
+
+msgid "Hide sensors in Temp."
+msgstr "Skjul sensorer i Temp."
 
 msgid "Home"
 msgstr "Home"
@@ -443,9 +446,6 @@ msgstr "Indstillinger"
 msgid "Show"
 msgstr "At vise"
 
-msgid "Show Only Heaters in Temp."
-msgstr "Vis kun varmelegemer i Temp."
-
 msgid "Size"
 msgstr "Størrelse"
 
@@ -580,6 +580,9 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Show Only Heaters in Temp."
+#~ msgstr "Vis kun varmelegemer i Temp."
 
 #~ msgid "Target"
 #~ msgstr "Mål"

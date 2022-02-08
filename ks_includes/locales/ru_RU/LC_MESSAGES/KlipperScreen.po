@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-05 12:33-0300\n"
-"PO-Revision-Date: 2022-02-05 12:48-0300\n"
+"POT-Creation-Date: 2022-02-08 13:36-0300\n"
+"PO-Revision-Date: 2022-02-08 13:42-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: Russian <kde-i18n-de@kde.org>\n"
 "Language: ru\n"
@@ -70,8 +70,7 @@ msgid "Calibrate"
 msgstr "Калибровка"
 
 msgid "Calibrated, save configuration to make it permanent"
-msgstr ""
-"Откалибровано, сохраните конфигурацию, чтобы сделать ее постоянной "
+msgstr "Откалибровано, сохраните конфигурацию, чтобы сделать ее постоянной "
 
 msgid "Can't set above the maximum:"
 msgstr "Невозможно установить выше максимума:"
@@ -207,6 +206,9 @@ msgstr "Назад"
 
 msgid "Hide"
 msgstr "Скрывать"
+
+msgid "Hide sensors in Temp."
+msgstr "Скрыть датчики в Temp."
 
 msgid "Home"
 msgstr "Парковка"
@@ -453,9 +455,6 @@ msgstr "Настройки"
 msgid "Show"
 msgstr "Показывать"
 
-msgid "Show Only Heaters in Temp."
-msgstr "Показать только нагреватели в темп."
-
 msgid "Size"
 msgstr "Размер"
 
@@ -588,6 +587,9 @@ msgstr "мм/с"
 
 msgid "mm/s^2"
 msgstr "мм/с^2"
+
+#~ msgid "Show Only Heaters in Temp."
+#~ msgstr "Показать только нагреватели в темп."
 
 #~ msgid "Target"
 #~ msgstr "Цель"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-05 12:33-0300\n"
-"PO-Revision-Date: 2022-02-05 12:44-0300\n"
+"POT-Creation-Date: 2022-02-08 13:36-0300\n"
+"PO-Revision-Date: 2022-02-08 13:40-0300\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
 "Language: he_IL\n"
@@ -208,6 +208,9 @@ msgstr "חזרה"
 
 msgid "Hide"
 msgstr "להתחבא"
+
+msgid "Hide sensors in Temp."
+msgstr "הסתר חיישנים בטמפ'."
 
 msgid "Home"
 msgstr "איפוס"
@@ -452,9 +455,6 @@ msgstr "הגדרות"
 msgid "Show"
 msgstr "הופעה"
 
-msgid "Show Only Heaters in Temp."
-msgstr "הצג רק מחממים בטמפ'."
-
 msgid "Size"
 msgstr "גודל"
 
@@ -589,6 +589,9 @@ msgstr "מ\"מ/ש"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Show Only Heaters in Temp."
+#~ msgstr "הצג רק מחממים בטמפ'."
 
 #~ msgid "Target"
 #~ msgstr "יַעַד"
