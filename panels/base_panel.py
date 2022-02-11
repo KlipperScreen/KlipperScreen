@@ -88,8 +88,10 @@ class BasePanel(ScreenPanel):
         self.titlelbl.set_valign(Gtk.Align.CENTER)
         self.set_title(title)
 
+        self.hmargin = 5
         self.content = Gtk.VBox(spacing=0)
-        self.content.set_size_request(self._screen.width - action_bar_width, self._screen.height - self.title_spacing)
+        self.content.set_size_request(self._screen.width - action_bar_width - self.hmargin,
+                                      self._screen.height - self.title_spacing)
 
         if action_bar is True:
             self.layout.put(self.control_grid, 0, 0)
@@ -110,7 +112,7 @@ class BasePanel(ScreenPanel):
         self.layout.put(self.control['temp_box'], action_bar_width, 0)
         self.layout.put(self.titlelbl, action_bar_width, 0)
         self.layout.put(self.control['time_box'], action_bar_width, 0)
-        self.layout.put(self.content, action_bar_width, self.title_spacing)
+        self.layout.put(self.content, action_bar_width + self.hmargin, self.title_spacing)
 
     def initialize(self, panel_name):
         # Create gtk items here
@@ -147,7 +149,7 @@ class BasePanel(ScreenPanel):
         size = self.control['time_box'].get_allocation().width
         self.layout.remove(self.control['time_box'])
         self.control['time_box'].set_size_request(size, self.title_spacing)
-        self.layout.put(self.control['time_box'], self._screen.width - size - 5, 0)
+        self.layout.put(self.control['time_box'], self._screen.width - size - self.hmargin, 0)
 
         GLib.timeout_add_seconds(1, self.update_time)
         self.update_time()
