@@ -57,7 +57,7 @@ class FanPanel(ScreenPanel):
             self.fan_speed[fan] = round(float(speed) * 100)
             self.devices[fan]['scale'].disconnect_by_func(self.set_fan_speed)
             self.devices[fan]['scale'].set_value(self.fan_speed[fan])
-            self.devices[fan]['scale'].connect("value-changed", self.set_fan_speed, fan)
+            self.devices[fan]['scale'].connect("button-release-event", self.set_fan_speed, fan)
         else:
             self.fan_speed[fan] = float(speed)
             self.devices[fan]['scale'].set_fraction(self.fan_speed[fan])
@@ -101,7 +101,7 @@ class FanPanel(ScreenPanel):
             scale.set_hexpand(True)
             scale.set_has_origin(True)
             scale.get_style_context().add_class("fan_slider")
-            scale.connect("value-changed", self.set_fan_speed, fan)
+            scale.connect("button-release-event", self.set_fan_speed, fan)
         else:
             scale = Gtk.ProgressBar()
             scale.set_fraction(self.fan_speed[fan])
@@ -147,7 +147,7 @@ class FanPanel(ScreenPanel):
                 continue
             self.add_fan(fan)
 
-    def set_fan_speed(self, widget, fan):
+    def set_fan_speed(self, widget, event, fan):
         value = self.devices[fan]['scale'].get_value()
 
         if fan == "fan":
