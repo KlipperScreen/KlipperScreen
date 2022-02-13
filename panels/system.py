@@ -174,54 +174,48 @@ class SystemPanel(ScreenPanel):
         i = 0
         label = Gtk.Label()
         label.set_line_wrap(True)
-        if "configured_type" in info:
-            if info['configured_type'] == 'git_repo':
-                if not info['is_valid'] or info['is_dirty']:
-                    label.set_markup(_("Do you want to recover %s?") % program)
-                    grid.attach(label, 0, i, 1, 1)
-                    scroll.add(grid)
-                    recoverybuttons = [
-                        {"name": _("Recover Hard"), "response": Gtk.ResponseType.OK},
-                        {"name": _("Recover Soft"), "response": Gtk.ResponseType.APPLY},
-                        {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
-                    ]
-                    dialog = self._gtk.Dialog(self._screen, recoverybuttons, scroll, self.reset_confirm, program)
+        if 'configured_type' in info and info['configured_type'] == 'git_repo':
+            if not info['is_valid'] or info['is_dirty']:
+                label.set_markup(_("Do you want to recover %s?") % program)
+                grid.attach(label, 0, i, 1, 1)
+                scroll.add(grid)
+                recoverybuttons = [
+                    {"name": _("Recover Hard"), "response": Gtk.ResponseType.OK},
+                    {"name": _("Recover Soft"), "response": Gtk.ResponseType.APPLY},
+                    {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
+                ]
+                dialog = self._gtk.Dialog(self._screen, recoverybuttons, scroll, self.reset_confirm, program)
+                return
+            else:
+                if info['version'] == info['remote_version']:
                     return
-                else:
-                    if info['version'] == info['remote_version']:
-                        return
-                    label.set_markup("<b>" + _("Outdated by %d commits:") % len(info['commits_behind']) + "</b>\n")
-                    grid.attach(label, 0, i, 1, 1)
-                    i = i + 1
-                    date = ""
-                    for c in info['commits_behind']:
-                        ndate = datetime.fromtimestamp(int(c['date'])).strftime("%b %d")
-                        if date != ndate:
-                            date = ndate
-                            label = Gtk.Label()
-                            label.set_line_wrap(True)
-                            label.set_markup("<b>%s</b>\n" % date)
-                            label.set_halign(Gtk.Align.START)
-                            grid.attach(label, 0, i, 1, 1)
-                            i = i + 1
-
+                label.set_markup("<b>" + _("Outdated by %d commits:") % len(info['commits_behind']) + "</b>\n")
+                grid.attach(label, 0, i, 1, 1)
+                i = i + 1
+                date = ""
+                for c in info['commits_behind']:
+                    ndate = datetime.fromtimestamp(int(c['date'])).strftime("%b %d")
+                    if date != ndate:
+                        date = ndate
                         label = Gtk.Label()
                         label.set_line_wrap(True)
-                        label.set_markup("<b>%s</b>\n<i>%s</i>\n" % (c['subject'], c['author']))
+                        label.set_markup("<b>%s</b>\n" % date)
                         label.set_halign(Gtk.Align.START)
                         grid.attach(label, 0, i, 1, 1)
                         i = i + 1
 
-                        details = Gtk.Label(label=c['message']+"\n\n\n")
-                        details.set_line_wrap(True)
-                        details.set_halign(Gtk.Align.START)
-                        grid.attach(details, 0, i, 1, 1)
-                        i = i + 1
-            else:
-                label.set_markup("<b>" + _("%s will be updated to version") % program.capitalize() +
-                                 ": %s</b>" % (info['remote_version']))
-                grid.attach(label, 0, i, 1, 1)
-                i = i + 1
+                    label = Gtk.Label()
+                    label.set_line_wrap(True)
+                    label.set_markup("<b>%s</b>\n<i>%s</i>\n" % (c['subject'], c['author']))
+                    label.set_halign(Gtk.Align.START)
+                    grid.attach(label, 0, i, 1, 1)
+                    i = i + 1
+
+                    details = Gtk.Label(label=c['message']+"\n\n\n")
+                    details.set_line_wrap(True)
+                    details.set_halign(Gtk.Align.START)
+                    grid.attach(details, 0, i, 1, 1)
+                    i = i + 1
         if "package_count" in info:
             label.set_markup("<b>" + _("%d Packages will be updated") % info['package_count'] + ":</b>\n")
             label.set_halign(Gtk.Align.CENTER)
@@ -239,6 +233,11 @@ class SystemPanel(ScreenPanel):
                 j = j + 1
                 if (pos == 2):
                     i = i + 1
+        else:
+            label.set_markup("<b>" + _("%s will be updated to version") % program.capitalize() +
+                             ": %s</b>" % (info['remote_version']))
+            grid.attach(label, 0, i, 1, 1)
+            i = i + 1
 
         scroll.add(grid)
 
@@ -359,7 +358,7 @@ class SystemPanel(ScreenPanel):
         logging.info("%s: %s" % (p, info))
 
         if p != "system":
-            if info['configured_type'] == 'git_repo':
+            if 'configured_type' in info and info['configured_type'] == 'git_repo':
                 if info['is_valid'] and not info['is_dirty']:
                     if info['version'] == info['remote_version']:
                         self.labels[p].set_markup("<b>%s</b>\n%s" % (p, info['version']))
@@ -378,7 +377,7 @@ class SystemPanel(ScreenPanel):
                     self.labels["%s_status" % p].get_style_context().add_class('invalid')
                     self.labels["%s_status" % p].set_sensitive(True)
             else:
-                if info['version'] == info['remote_version']:
+                if 'version' in info and info['version'] == info['remote_version']:
                     self.labels[p].set_markup("<b>%s</b>\n%s" % (p, info['version']))
                     self.labels["%s_status" % p].set_label(_("Up To Date"))
                     self.labels["%s_status" % p].get_style_context().remove_class('update')
