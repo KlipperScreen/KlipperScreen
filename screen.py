@@ -463,7 +463,7 @@ class KlipperScreen(Gtk.Window):
         self.gtk.color_list = style_options['graph_colors']
 
         for i in range(len(style_options['graph_colors']['extruder']['colors'])):
-            num = "" if i == 0 else i+1
+            num = "" if i == 0 else i
             css_data += "\n.graph_label_extruder%s {border-left-color: #%s}" % (
                 num,
                 style_options['graph_colors']['extruder']['colors'][i]
