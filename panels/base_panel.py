@@ -41,7 +41,11 @@ class BasePanel(ScreenPanel):
         self.control['back'].connect("clicked", self.back)
         self.control['home'] = self._gtk.ButtonImage('main', None, None, button_scale[0], button_scale[1])
         self.control['home'].connect("clicked", self.menu_return, True)
-
+        
+        # light toggle button
+        self.control['light'] = self._gtk.ButtonImage('light', None, None, button_scale[0], button_scale[1])
+        self.control['light'].connect("clicked", self.light_toggle)
+        
         if len(self._config.get_printers()) > 1:
             self.control['printer_select'] = self._gtk.ButtonImage(
                 'shuffle', None, None, button_scale[0], button_scale[1])
@@ -171,6 +175,25 @@ class BasePanel(ScreenPanel):
                 self._screen._menu_go_back()
         else:
             self._screen._menu_go_back()
+            
+    def light_toggle(self, widget):
+        lights = [i for i in self._printer.get_power_devices() if i.lower().startswith('light')]
+        logging.debug("Light devices: %s" % lights)
+        light1 = None
+        light1_stat = None
+        for _light in lights:
+            _light_stat = self._printer.power_devices[_light]['status']
+            logging.debug("Light device status: %s" % _light_stat)
+            # get current state only for 1st light device
+            if light1 == None:
+                light1 = _light
+                light1_stat = _light_stat
+        # swith all light devices to toggled state of device 1
+        for _light in lights:    
+            if light1_stat == "on":
+                self._screen._ws.klippy.power_device_off(_light)
+            else:
+                self._screen._ws.klippy.power_device_on(_light)
 
     def get(self):
         return self.layout
@@ -207,6 +230,14 @@ class BasePanel(ScreenPanel):
             for i in range(0, 2):
                 self.control_grid.remove(self.control_grid.get_child_at(0, i))
                 self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
+            
+            # light toggle button
+            lights_available = [i for i in self._printer.get_power_devices() if i.lower().startswith('light')]
+            logging.debug("Light devices: %s" % lights_available)
+            if lights_available:
+                logging.debug("adding light button")
+                self.control_grid.attach(self.control['light'], 0, 0, 1, 1)
+            
             self.buttons_showing['back'] = False
         self.control_grid.show()
 
