@@ -32,6 +32,8 @@ class Printer:
         self.config = data['configfile']['config']
         self.toolcount = 0
         self.extrudercount = 0
+        self.tempdevcount = 0
+        self.fancount = 0
         self.tools = []
         self.devices = {}
         self.data = data
@@ -65,6 +67,10 @@ class Printer:
                     "temperature": 0,
                     "target": 0
                 }
+                self.tempdevcount += 1
+            if x == 'fan' or x.startswith('controller_fan ') or x.startswith('heater_fan ') \
+                    or x.startswith('fan_generic '):
+                self.fancount += 1
             if x.startswith('bed_mesh '):
                 r = self.config[x]
                 r['x_count'] = int(r['x_count'])
@@ -77,7 +83,10 @@ class Printer:
         self.process_update(data)
 
         logging.info("Klipper version: %s", self.klipper['version'])
-        logging.info("### Toolcount: " + str(self.toolcount) + " Heaters: " + str(self.extrudercount))
+        logging.info("# Toolcount: %s", str(self.toolcount))
+        logging.info("# Extruders: %s", str(self.extrudercount))
+        logging.info("# Temperature devices: %s", str(self.tempdevcount))
+        logging.info("# Fans: %s", str(self.fancount))
 
     def process_update(self, data):
         keys = [
@@ -214,6 +223,15 @@ class Printer:
     def get_printer_status_data(self):
         data = {
             "printer": {
+                "extruders": {
+                    "count": self.extrudercount
+                },
+                "temperature_devices": {
+                    "count": self.tempdevcount
+                },
+                "fans": {
+                    "count": self.fancount
+                },
                 "bltouch": self.section_exists("bltouch"),
                 "gcode_macros": {
                     "count": len(self.get_gcode_macros())

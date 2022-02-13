@@ -69,8 +69,8 @@ class HeaterGraph(Gtk.DrawingArea):
 
         g_width_start = 30
         g_width = width - 15
-        g_height_start = 15
-        g_height = height - 30
+        g_height_start = 10
+        g_height = height - 20
 
         ctx.set_source_rgb(.5, .5, .5)
         ctx.set_line_width(1)
@@ -144,14 +144,9 @@ class HeaterGraph(Gtk.DrawingArea):
             ctx.fill()
 
     def graph_lines(self, ctx, gsize, max_num):
-        if max_num <= 30:
-            nscale = 5
-        elif max_num <= 60:
-            nscale = 10
-        elif max_num <= 130:
-            nscale = 25
-        else:
-            nscale = 50
+        nscale = 10
+        while (max_num / nscale) > 5:
+            nscale += 10
         # nscale = math.floor((max_num / 10) / 4) * 10
         r = int(max_num/nscale) + 1
         hscale = (gsize[1][1] - gsize[0][1]) / (r * nscale)

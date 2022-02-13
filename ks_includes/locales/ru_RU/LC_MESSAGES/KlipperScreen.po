@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 08:24-0300\n"
-"PO-Revision-Date: 2022-01-13 08:32-0300\n"
+"POT-Creation-Date: 2022-02-08 13:36-0300\n"
+"PO-Revision-Date: 2022-02-08 13:42-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: Russian <kde-i18n-de@kde.org>\n"
 "Language: ru\n"
@@ -70,10 +70,10 @@ msgid "Calibrate"
 msgstr "Калибровка"
 
 msgid "Calibrated, save configuration to make it permanent"
-msgstr ""
+msgstr "Откалибровано, сохраните конфигурацию, чтобы сделать ее постоянной "
 
 msgid "Can't set above the maximum:"
-msgstr ""
+msgstr "Невозможно установить выше максимума:"
 
 msgid "Cancel"
 msgstr "Отменить"
@@ -206,6 +206,9 @@ msgstr "Назад"
 
 msgid "Hide"
 msgstr "Скрывать"
+
+msgid "Hide sensors in Temp."
+msgstr "Скрыть датчики в Temp."
 
 msgid "Home"
 msgstr "Парковка"
@@ -355,9 +358,6 @@ msgstr "Двигать"
 msgid "Move Distance (mm)"
 msgstr "Дистанция перемещения (мм)"
 
-msgid "Move Speed (mm/s)"
-msgstr "Скорость перемещения (мм/с)"
-
 msgid "Name"
 msgstr "Имя"
 
@@ -506,12 +506,6 @@ msgid ""
 "Shutdown"
 msgstr "Выключить"
 
-msgid "Target"
-msgstr "Цель"
-
-msgid "Temp"
-msgstr "Темп"
-
 msgid "Temp (°C)"
 msgstr "Темп  (°С)"
 
@@ -552,6 +546,9 @@ msgstr "X+"
 msgid "X-"
 msgstr "X-"
 
+msgid "XY Move Speed (mm/s)"
+msgstr "Скорость перемещения по осям XY (мм/с)"
+
 msgid "Y+"
 msgstr "Y+"
 
@@ -560,6 +557,9 @@ msgstr "Y-"
 
 msgid "Z Calibrate"
 msgstr "Калибр. Z"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "Скорость перемещения по оси Z (мм/с) "
 
 msgid "Z Offset"
 msgstr "Офсет Z"
@@ -587,6 +587,15 @@ msgstr "мм/с"
 
 msgid "mm/s^2"
 msgstr "мм/с^2"
+
+#~ msgid "Show Only Heaters in Temp."
+#~ msgstr "Показать только нагреватели в темп."
+
+#~ msgid "Target"
+#~ msgstr "Цель"
+
+#~ msgid "Temp"
+#~ msgstr "Темп"
 
 #~ msgid "Number Pad"
 #~ msgstr "Клавиатура"

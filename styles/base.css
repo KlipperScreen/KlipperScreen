@@ -84,6 +84,11 @@ combobox arrow {
     min-width: 1em;
 }
 
+switch {
+    border: 0;
+    border-radius: 3em;
+}
+
 switch slider {
     border: 0;
 }
@@ -455,7 +460,10 @@ popover button {
 /* Hardcoded values until creation of dynamic CSS updates */
 .graph_label_hidden {padding-left: .9em;} /* .4em on top of normal button padding */
 .graph_label_extruder {border-left-width: .4em; border-left-style: solid;}
+.graph_label_extruder1 {border-left-width: .4em; border-left-style: solid;}
 .graph_label_extruder2 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_extruder3 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_extruder4 {border-left-width: .4em; border-left-style: solid;}
 .graph_label_heater_bed {border-left-width: .4em; border-left-style: solid;}
 .graph_label_fan_1 {border-left-width: .4em; border-left-style: solid;}
 .graph_label_fan_2 {border-left-width: .4em; border-left-style: solid;}

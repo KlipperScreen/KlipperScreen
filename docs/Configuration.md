@@ -51,6 +51,12 @@ moonraker_api_key: False
 
 # Define the z_babystep intervals in a CSV list. Currently only 2 are supported
 z_babystep_values: 0.01, 0.05
+
+# Override the movement speed and set a specific for this printer.
+# These setting overrides the settings configured in the UI. If specified,
+# the values configured in the UI will not be used.
+move_speed_xy: 500
+move_speed_z: 300
 ```
 
 ## Z probe calibrate Option

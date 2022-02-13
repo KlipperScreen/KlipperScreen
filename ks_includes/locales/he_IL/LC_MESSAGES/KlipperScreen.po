@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 08:24-0300\n"
-"PO-Revision-Date: 2022-01-13 08:29-0300\n"
+"POT-Creation-Date: 2022-02-08 13:36-0300\n"
+"PO-Revision-Date: 2022-02-08 13:40-0300\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
 "Language: he_IL\n"
@@ -209,6 +209,9 @@ msgstr "חזרה"
 msgid "Hide"
 msgstr "להתחבא"
 
+msgid "Hide sensors in Temp."
+msgstr "הסתר חיישנים בטמפ'."
+
 msgid "Home"
 msgstr "איפוס"
 
@@ -354,9 +357,6 @@ msgstr "הזזת צירים"
 
 msgid "Move Distance (mm)"
 msgstr "מרחק הזזה (מ''מ)"
-
-msgid "Move Speed (mm/s)"
-msgstr "מהירות הזזה (מ\"מ/שניות)"
 
 msgid "Name"
 msgstr "שֵׁם"
@@ -508,12 +508,6 @@ msgstr ""
 "מערכת\n"
 "לכבות"
 
-msgid "Target"
-msgstr "יַעַד"
-
-msgid "Temp"
-msgstr "טמפ'"
-
 msgid "Temp (°C)"
 msgstr "טמפ' (°C)"
 
@@ -554,6 +548,9 @@ msgstr "X+"
 msgid "X-"
 msgstr "X-"
 
+msgid "XY Move Speed (mm/s)"
+msgstr "מהירות תנועה XY (מ\"מ/שנייה)"
+
 msgid "Y+"
 msgstr "Y+"
 
@@ -562,6 +559,9 @@ msgstr "Y-"
 
 msgid "Z Calibrate"
 msgstr "כיול Z"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "מהירות תנועה Z (מ\"מ/שניות)"
 
 msgid "Z Offset"
 msgstr "הפרז גובה Z"
@@ -589,6 +589,15 @@ msgstr "מ\"מ/ש"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Show Only Heaters in Temp."
+#~ msgstr "הצג רק מחממים בטמפ'."
+
+#~ msgid "Target"
+#~ msgstr "יַעַד"
+
+#~ msgid "Temp"
+#~ msgstr "טמפ'"
 
 #~ msgid "Number Pad"
 #~ msgstr "פד נומרי"

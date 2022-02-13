@@ -13,6 +13,7 @@ def create_panel(*args):
 
 class MenuPanel(ScreenPanel):
     i = 0
+    j2_data = None
     def initialize(self, panel_name, display_name, items):
         _ = self.lang.gettext
 
@@ -25,7 +26,8 @@ class MenuPanel(ScreenPanel):
         self.content.add(self.grid)
 
     def activate(self):
-        self.j2_data = self._printer.get_printer_status_data()
+        if not self.j2_data:
+            self.j2_data = self._printer.get_printer_status_data()
         self.j2_data.update({
             'moonraker_connected': self._screen._ws.is_connected()
         })
@@ -94,6 +96,8 @@ class MenuPanel(ScreenPanel):
         if enable is False:
             return False
 
+        if not self.j2_data:
+            self.j2_data = self._printer.get_printer_status_data()
         try:
             logging.debug("Template: '%s'" % enable)
             logging.debug("Data: %s" % self.j2_data)

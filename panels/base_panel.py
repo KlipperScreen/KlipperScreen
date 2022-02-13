@@ -88,8 +88,10 @@ class BasePanel(ScreenPanel):
         self.titlelbl.set_valign(Gtk.Align.CENTER)
         self.set_title(title)
 
+        self.hmargin = 5
         self.content = Gtk.VBox(spacing=0)
-        self.content.set_size_request(self._screen.width - action_bar_width, self._screen.height - self.title_spacing)
+        self.content.set_size_request(self._screen.width - action_bar_width - self.hmargin,
+                                      self._screen.height - self.title_spacing)
 
         if action_bar is True:
             self.layout.put(self.control_grid, 0, 0)
@@ -110,7 +112,7 @@ class BasePanel(ScreenPanel):
         self.layout.put(self.control['temp_box'], action_bar_width, 0)
         self.layout.put(self.titlelbl, action_bar_width, 0)
         self.layout.put(self.control['time_box'], action_bar_width, 0)
-        self.layout.put(self.content, action_bar_width, self.title_spacing)
+        self.layout.put(self.content, action_bar_width + self.hmargin, self.title_spacing)
 
     def initialize(self, panel_name):
         # Create gtk items here
@@ -123,23 +125,20 @@ class BasePanel(ScreenPanel):
         if show is False:
             return
 
-        i = 0
-        for extruder in self._printer.get_tools():
-            self.labels[extruder + '_box'] = Gtk.Box(spacing=0)
-            self.labels[extruder] = Gtk.Label(label="")
-            # self.labels[extruder].get_style_context().add_class("printing-info")
-            if i <= 4:
-                ext_img = self._gtk.Image("extruder-%s.svg" % i, None, .4, .4)
-                self.labels[extruder + '_box'].pack_start(ext_img, True, 3, 3)
-            self.labels[extruder + '_box'].pack_start(self.labels[extruder], True, 3, 3)
-            i += 1
-        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-        self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, 5, 5)
+        if self._printer.get_tools():
+            for i, extruder in enumerate(self._printer.get_tools()):
+                self.labels[extruder + '_box'] = Gtk.Box(spacing=0)
+                self.labels[extruder] = Gtk.Label(label="")
+                if i <= 4:
+                    ext_img = self._gtk.Image("extruder-%s.svg" % i, None, .4, .4)
+                    self.labels[extruder + '_box'].pack_start(ext_img, True, 3, 3)
+                self.labels[extruder + '_box'].pack_start(self.labels[extruder], True, 3, 3)
+            self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+            self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, 5, 5)
 
         if self._printer.has_heated_bed():
             heater_bed = self._gtk.Image("bed.svg", None, .4, .4)
             self.labels['heater_bed'] = Gtk.Label(label="20 C")
-            # self.labels['heater_bed'].get_style_context().add_class("printing-info")
             heater_bed_box = Gtk.Box(spacing=0)
             heater_bed_box.pack_start(heater_bed, True, 5, 5)
             heater_bed_box.pack_start(self.labels['heater_bed'], True, 3, 3)
@@ -150,7 +149,7 @@ class BasePanel(ScreenPanel):
         size = self.control['time_box'].get_allocation().width
         self.layout.remove(self.control['time_box'])
         self.control['time_box'].set_size_request(size, self.title_spacing)
-        self.layout.put(self.control['time_box'], self._screen.width - size - 5, 0)
+        self.layout.put(self.control['time_box'], self._screen.width - size - self.hmargin, 0)
 
         GLib.timeout_add_seconds(1, self.update_time)
         self.update_time()

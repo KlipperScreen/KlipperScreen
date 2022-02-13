@@ -55,10 +55,15 @@ install_packages()
 create_virtualenv()
 {
     echo_text "Creating virtual environment"
-    [ ! -d ${KSENV} ] && virtualenv -p /usr/bin/python3 ${KSENV}
+    if [ ! -d ${KSENV} ]; then
+        GET_PIP="${HOME}/get-pip.py"
+        virtualenv --no-pip -p /usr/bin/python3 ${KSENV}
+        curl https://bootstrap.pypa.io/pip/3.6/get-pip.py -o ${GET_PIP}
+        ${KSENV}/bin/python ${GET_PIP}
+        rm ${GET_PIP}
+    fi
 
     source ${KSENV}/bin/activate
-    pip install -U pip
     while read requirements; do
         pip install $requirements
         if [ $? -gt 0 ]; then
@@ -76,6 +81,9 @@ install_systemd_service()
 {
     if [ -f "/etc/systemd/system/KlipperScreen.service" ]; then
         echo_text "KlipperScreen unit file already installed"
+        sudo systemctl unmask KlipperScreen.service
+        sudo systemctl daemon-reload
+        sudo systemctl enable KlipperScreen
         return
     fi
     echo_text "Installing KlipperScreen unit file"
@@ -115,7 +123,10 @@ start_KlipperScreen()
     echo_text "Starting service..."
     sudo systemctl start KlipperScreen
 }
-
+if [ "$EUID" == 0 ]
+    then echo_error "Plaease do not run this script as root"
+    exit
+fi
 install_packages
 create_virtualenv
 modify_user

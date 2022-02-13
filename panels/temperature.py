@@ -21,21 +21,27 @@ class TemperaturePanel(ScreenPanel):
     def initialize(self, panel_name):
         self.preheat_options = self._screen._config.get_preheat_options()
         logging.debug("Preheat options: %s" % self.preheat_options)
-        self.show_preheat = True
+        self._gtk.reset_temp_color()
         self.grid = self._gtk.HomogeneousGrid()
         self.grid.attach(self.create_left_panel(), 0, 0, 1, 1)
+
+        for x in self._printer.get_tools():
+            if x not in self.active_heaters and x in self._printer.get_temp_store_devices():
+                self.select_heater(None, x)
+        # When printing start in temp_delta mode and only select tools
+        logging.info(self._printer.get_state())
+        if self._printer.get_state() not in ["printing", "paused"]:
+            self.show_preheat = True
+            for h in self._printer.get_heaters():
+                if h.startswith("temperature_sensor "):
+                    continue
+                if h not in self.active_heaters:
+                    self.select_heater(None, h)
+        else:
+            self.show_preheat = False
         self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
         self.content.add(self.grid)
         self.layout.show_all()
-
-        for x in self._printer.get_tools():
-            if x not in self.active_heaters:
-                self.select_heater(None, x)
-        for h in self._printer.get_heaters():
-            if h.startswith("temperature_sensor "):
-                continue
-            if h not in self.active_heaters:
-                self.select_heater(None, h)
 
     def create_right_panel(self):
         _ = self.lang.gettext
@@ -142,7 +148,7 @@ class TemperaturePanel(ScreenPanel):
                 target = self._printer.get_dev_stat(heater, "target")
                 if dir == "+":
                     target += int(self.tempdelta)
-                    MAX_TEMP = int(self._printer.get_config_section(heater)['max_temp'])
+                    MAX_TEMP = int(float(self._printer.get_config_section(heater)['max_temp']))
                     if target > MAX_TEMP:
                         target = MAX_TEMP
                         self._screen.show_popup_message(_("Can't set above the maximum:") + (" %s" % MAX_TEMP))
@@ -205,7 +211,7 @@ class TemperaturePanel(ScreenPanel):
                 return
 
             for heater in self.active_heaters:
-                MAX_TEMP = int(self._printer.get_config_section(heater)['max_temp'])
+                MAX_TEMP = int(float(self._printer.get_config_section(heater)['max_temp']))
                 if heater.startswith('extruder'):
                     target = self.preheat_options[setting]["extruder"]
                     if target > 0 and target <= MAX_TEMP:
@@ -232,7 +238,13 @@ class TemperaturePanel(ScreenPanel):
                 else:
                     self._screen.show_popup_message(_("Can't set above the maximum:") + (" %s" % MAX_TEMP))
             if self.preheat_options[setting]['gcode']:
-                self._screen._ws.klippy.gcode_script(self.preheat_options[setting]['gcode'])
+                # This small delay is needed to properly update the target if the user configured something above
+                # and then changed the target again using the preheat gcode
+                GLib.timeout_add(250, self.preheat_gcode, setting)
+
+    def preheat_gcode(self, setting):
+        self._screen._ws.klippy.gcode_script(self.preheat_options[setting]['gcode'])
+        return False
 
     def add_device(self, device):
         _ = self.lang.gettext
@@ -271,8 +283,6 @@ class TemperaturePanel(ScreenPanel):
             image = "heat-up"
             class_name = "graph_label_sensor_%s" % h
             type = "sensor"
-        elif self._config.get_main_config_option('only_heaters') == "True":
-            return False
         elif device.startswith("temperature_fan"):
             f = 1
             for d in self.devices:
@@ -281,6 +291,8 @@ class TemperaturePanel(ScreenPanel):
             image = "fan"
             class_name = "graph_label_fan_%s" % f
             type = "fan"
+        elif self._config.get_main_config_option('only_heaters') == "True":
+            return False
         else:
             s = 1
             try:
@@ -302,7 +314,8 @@ class TemperaturePanel(ScreenPanel):
             self.labels['da'].add_object(device, "targets", rgb, True, False)
 
         text = "<span underline='double' underline_color='#%s'>%s</span>" % (color, devname.capitalize())
-        name = self._gtk.ButtonImage(image, devname.capitalize(), None, .5, .5, Gtk.PositionType.LEFT, False)
+        name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "),
+                                     None, .5, .5, Gtk.PositionType.LEFT, False)
         name.connect('clicked', self.on_popover_clicked, device)
         name.set_alignment(0, .5)
         name.get_style_context().add_class(class_name)
@@ -334,7 +347,7 @@ class TemperaturePanel(ScreenPanel):
             self.devices[device]['select'] = self._gtk.Button(label=_("Select"))
             self.devices[device]['select'].connect('clicked', self.select_heater, device)
         else:
-            temp.get_child().set_label("%.1f" % temperature)
+            temp.get_child().set_label("%.1f " % temperature)
 
         devices = sorted(self.devices)
         pos = devices.index(device) + 1
@@ -348,7 +361,7 @@ class TemperaturePanel(ScreenPanel):
     def change_target_temp(self, temp):
         _ = self.lang.gettext
 
-        MAX_TEMP = int(self._printer.get_config_section(self.active_heater)['max_temp'])
+        MAX_TEMP = int(float(self._printer.get_config_section(self.active_heater)['max_temp']))
         if temp > MAX_TEMP:
             self._screen.show_popup_message(_("Can't set above the maximum:") + (" %s" % MAX_TEMP))
             return
@@ -481,6 +494,7 @@ class TemperaturePanel(ScreenPanel):
                 self._printer.get_dev_stat(h, "temperature"),
                 self._printer.get_dev_stat(h, "target")
             )
+        return
 
     def show_numpad(self, widget):
         _ = self.lang.gettext
@@ -513,4 +527,4 @@ class TemperaturePanel(ScreenPanel):
         if self.devices[device]["can_target"]:
             self.devices[device]["temp"].get_child().set_label("%.1f %s" % (temp, self.format_target(target)))
         else:
-            self.devices[device]["temp"].get_child().set_label("%.1f" % temp)
+            self.devices[device]["temp"].get_child().set_label("%.1f " % temp)

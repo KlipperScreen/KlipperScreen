@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 08:24-0300\n"
-"PO-Revision-Date: 2022-01-13 08:32-0300\n"
+"POT-Creation-Date: 2022-02-08 13:36-0300\n"
+"PO-Revision-Date: 2022-02-08 13:42-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -24,13 +24,13 @@ msgstr "%d 个软件包将被更新"
 
 #, python-format
 msgid "%s will be updated to version"
-msgstr "%s 将更新到版本"
+msgstr "更新 %s 到版本"
 
 msgid "(default)"
-msgstr "（默认"
+msgstr "（默认)"
 
 msgid "24 Hour Time"
-msgstr "24 小时制"
+msgstr "使用 24 小时制"
 
 msgid "Abort"
 msgstr "终止"
@@ -39,16 +39,16 @@ msgid "Accept"
 msgstr "接受"
 
 msgid "Actions"
-msgstr "动作"
+msgstr "工具"
 
 msgid "Add Printer"
 msgstr "添加打印机"
 
 msgid "Add bed mesh profile"
-msgstr "添加网格床"
+msgstr "添加热床网格"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr "您确定要运行紧急停止吗？"
+msgstr "您确定要紧急停止吗？"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "您确定要取消打印吗？"
@@ -63,16 +63,16 @@ msgid "Bed Level"
 msgstr "热床调平"
 
 msgid "Bed Mesh"
-msgstr "网格床"
+msgstr "热床网格"
 
 msgid "Calibrate"
 msgstr "校准"
 
 msgid "Calibrated, save configuration to make it permanent"
-msgstr "校准，保存配置以使其永久化"
+msgstr "已校准，保存配置后生效"
 
 msgid "Can't set above the maximum:"
-msgstr "不能设置超过最大值："
+msgstr "设置值超出最大值："
 
 msgid "Cancel"
 msgstr "取消"
@@ -81,13 +81,13 @@ msgid "Cancel Print"
 msgstr "取消打印"
 
 msgid "Cancelled"
-msgstr "取消"
+msgstr "已取消"
 
 msgid "Cancelling"
-msgstr "取消"
+msgstr "正在取消"
 
 msgid "Channel"
-msgstr "通道"
+msgstr "更新通道"
 
 msgid ""
 "Check /tmp/KlipperScreen.log for more information.\n"
@@ -109,7 +109,7 @@ msgid "Confirm Emergency Stop"
 msgstr "确认紧急停止"
 
 msgid "Connected"
-msgstr "连接"
+msgstr "已连接"
 
 #, python-format
 msgid "Connecting to %s"
@@ -122,10 +122,10 @@ msgid "Continue"
 msgstr "继续"
 
 msgid "Cooldown"
-msgstr "冷却"
+msgstr "降温"
 
 msgid "Date"
-msgstr "日期"
+msgstr "上传日期"
 
 msgid "Decrease"
 msgstr "减少"
@@ -140,50 +140,50 @@ msgid "Disable Motors"
 msgstr "禁用步进电机"
 
 msgid "Disable XY"
-msgstr "禁用 XY"
+msgstr "关闭 XY 电机"
 
 msgid "Disconnect"
 msgstr "断开"
 
 msgid "Displayed Macros"
-msgstr "显示宏命令"
+msgstr "宏命令显示开关"
 
 msgid "Distance (mm)"
-msgstr "距离(mm)"
+msgstr "挤出距离(mm)"
 
 #, python-format
 msgid "Do you want to recover %s?"
 msgstr "您想恢复 %s 吗？"
 
 msgid "Duration Only"
-msgstr "仅持续时间"
+msgstr "持续时间"
 
 msgid "Elapsed:"
-msgstr "已打印："
+msgstr "已用时间："
 
 msgid "Error"
 msgstr "错误"
 
 msgid "Estimated Time Method"
-msgstr "预估时间方法"
+msgstr "估算剩余时间方式"
 
 msgid "Extrude"
-msgstr "挤出机"
+msgstr "挤出"
 
 msgid "Extrusion +"
-msgstr "挤出 +"
+msgstr "挤出流量 +"
 
 msgid "Extrusion -"
-msgstr "挤出 -"
+msgstr "挤出流量 -"
 
 msgid "Failed, adjust position first"
-msgstr "失败，先调整位置"
+msgstr "失败，请先调整位置"
 
 msgid "Fan"
 msgstr "风扇"
 
 msgid "Filament Used"
-msgstr "已经消耗的耗材"
+msgstr "已用耗材"
 
 msgid "File"
 msgstr "文件"
@@ -195,7 +195,7 @@ msgid "Finish"
 msgstr "结束"
 
 msgid "Firmware Restart"
-msgstr "固件重启"
+msgstr "重启Firmware"
 
 msgid "Font Size"
 msgstr "字体大小"
@@ -206,11 +206,14 @@ msgstr "返回"
 msgid "Hide"
 msgstr "隐藏"
 
+msgid "Hide sensors in Temp."
+msgstr "在温度中隐藏传感器。"
+
 msgid "Home"
 msgstr "归零"
 
 msgid "Home All"
-msgstr "归零全部"
+msgstr "全部归零"
 
 msgid "Home X"
 msgstr "归零 X"
@@ -228,16 +231,16 @@ msgid "Homing"
 msgstr "归零"
 
 msgid "Hostname"
-msgstr "主机名称"
+msgstr "主机名"
 
 msgid "IPv4"
-msgstr "IPv4"
+msgstr "IPv4 地址"
 
 msgid "IPv6"
-msgstr "IPv6"
+msgstr "IPv6 地址"
 
 msgid "Icon Theme"
-msgstr "图标 主题"
+msgstr "主题风格"
 
 msgid "Increase"
 msgstr "增加"
@@ -246,25 +249,25 @@ msgid "Initializing"
 msgstr "初始化中"
 
 msgid "Initializing printer..."
-msgstr "初始化打印机中.."
+msgstr "初始化打印机中..."
 
 msgid "Interface"
 msgstr "接口"
 
 msgid "Invalid"
-msgstr "无效的"
+msgstr "无效"
 
 msgid "Invert X"
-msgstr "翻转 X"
+msgstr "反转 X"
 
 msgid "Invert Y"
-msgstr "翻转 Y"
+msgstr "反转 Y"
 
 msgid "Invert Z"
-msgstr "翻转 Z"
+msgstr "反转 Z"
 
 msgid "Klipper Restart"
-msgstr "Klipper 重启"
+msgstr "重启Klipper"
 
 msgid "Klipper Version"
 msgstr "Klipper 版本"
@@ -276,8 +279,8 @@ msgid ""
 "Klipper has encountered an error with the micro-controller.\n"
 "Please recompile and flash."
 msgstr ""
-"Klipper的微控制器发生错误。\n"
-"请重新编译并刷新。"
+"Klipper与MCU通讯错误。\n"
+"请为主板重新烧录固件。"
 
 msgid "Klipper has encountered an error."
 msgstr "Klipper遇到一个错误。"
@@ -286,41 +289,41 @@ msgid ""
 "Klipper has encountered an error.\n"
 "Issue a FIRMWARE_RESTART to attempt fixing the issue."
 msgstr ""
-"Klipper遇到错误。\n"
-"发出 FIRMWARE_RESTART 尝试解决此问题。"
+"Klipper 遇到错误。\n"
+"使用 重启Firmware 命令尝试解决此问题。"
 
 msgid "Klipper has shutdown"
-msgstr "Klipper 已经关闭"
+msgstr "Klipper 已关闭"
 
 msgid "Klipper is attempting to start"
 msgstr "Klipper 正在尝试启动"
 
 msgid "Klipper will reboot"
-msgstr "Klipper 将重新启动"
+msgstr "并重新启动Klipper"
 
 msgid "KlipperScreen Version"
 msgstr "KlipperScreen 版本"
 
 msgid "Language"
-msgstr "语言"
+msgstr "界面语言"
 
 msgid "Large"
 msgstr "大"
 
 msgid "Left:"
-msgstr "打印剩余时间："
+msgstr "剩余时间:"
 
 msgid "Limits"
-msgstr "限制"
+msgstr "打印机限制"
 
 msgid "Load"
-msgstr "加载"
+msgstr "载入耗材"
 
 msgid "Lower Nozzle"
 msgstr "降低喷嘴"
 
 msgid "Macro shortcut on sidebar"
-msgstr "侧边栏上的宏快捷方式"
+msgstr "显示侧边栏宏快捷方式"
 
 msgid "Macros"
 msgstr "宏"
@@ -329,13 +332,13 @@ msgid "Main Menu"
 msgstr "主菜单"
 
 msgid "Max Accelation"
-msgstr "最大加速度"
+msgstr "加速度"
 
 msgid "Max Acceleration to Deceleration"
-msgstr "最大加速到减速"
+msgstr "加速到减速度"
 
 msgid "Max Velocity"
-msgstr "最大速度"
+msgstr "速度"
 
 msgid "Medium"
 msgstr "中"
@@ -352,11 +355,8 @@ msgstr "移动"
 msgid "Move Distance (mm)"
 msgstr "移动距离（mm）"
 
-msgid "Move Speed (mm/s)"
-msgstr "移动速度 (mm/s)"
-
 msgid "Name"
-msgstr "名称"
+msgstr "文件名称"
 
 msgid "Network"
 msgstr "网络"
@@ -369,10 +369,10 @@ msgstr "关闭"
 
 #, python-format
 msgid "Outdated by %d commits:"
-msgstr "已过时 %d 次提交："
+msgstr "已错过 %d 次提交："
 
 msgid "PSK for"
-msgstr "PSK 用于"
+msgstr "网络密码PSK"
 
 msgid "Pause"
 msgstr "暂停"
@@ -381,10 +381,10 @@ msgid "Paused"
 msgstr "已暂停"
 
 msgid "Power"
-msgstr "电源"
+msgstr "电源开关"
 
 msgid "Power On Printer"
-msgstr "开启打印机"
+msgstr "启动打印机"
 
 msgid "Print"
 msgstr "打印"
@@ -393,31 +393,31 @@ msgid "Print Control"
 msgstr "打印控制"
 
 msgid "Print Time"
-msgstr "打印时间"
+msgstr "打印用时"
 
 msgid "Printer Connections"
-msgstr "连接打印机"
+msgstr "打印机列表"
 
 msgid "Printing"
-msgstr "打印中"
+msgstr "正在打印..."
 
 msgid "Profile Name:"
 msgstr "配置文件名称:"
 
 msgid "Quad Gantry Level"
-msgstr "龙门调平"
+msgstr "龙门架调平"
 
 msgid "Raise Nozzle"
 msgstr "升高喷嘴"
 
 msgid "Recover Hard"
-msgstr "恢复 Hard"
+msgstr "重置(Hard)"
 
 msgid "Recover Soft"
-msgstr "恢复 Soft"
+msgstr "重置(Soft)"
 
 msgid "Restart"
-msgstr "重启"
+msgstr "重启Klipper"
 
 msgid "Resume"
 msgstr "恢复"
@@ -432,13 +432,13 @@ msgid "Save Config"
 msgstr "保存配置"
 
 msgid "Save configuration"
-msgstr "保存配置文件"
+msgstr "即将保存配置文件"
 
 msgid "Screen Power Off Time"
-msgstr "屏幕关闭时间"
+msgstr "关闭屏幕"
 
 msgid "Screws Adjust"
-msgstr "Screws 调整"
+msgstr "平台螺丝调整"
 
 msgid "Select"
 msgstr "选择"
@@ -450,13 +450,13 @@ msgid "Settings"
 msgstr "设置"
 
 msgid "Show"
-msgstr "展示"
+msgstr "显示"
 
 msgid "Size"
-msgstr "大小"
+msgstr "文件大小"
 
 msgid "Slicer"
-msgstr "切片机"
+msgstr "切片软件"
 
 msgid "Small"
 msgstr "小"
@@ -474,13 +474,13 @@ msgid "Speed -"
 msgstr "速度 -"
 
 msgid "Square Corner Velocity"
-msgstr "方角速度"
+msgstr "转角速度"
 
 msgid "Start"
 msgstr "开始"
 
 msgid "Starting WiFi Re-association"
-msgstr "启动 WiFi 重新连接"
+msgstr "重新连接无线网络"
 
 msgid "Starting recovery for"
 msgstr "开始恢复"
@@ -494,28 +494,22 @@ msgstr "系统"
 msgid ""
 "System\n"
 "Restart"
-msgstr "系统重启"
+msgstr "重启系统"
 
 msgid ""
 "System\n"
 "Shutdown"
 msgstr "关闭系统"
 
-msgid "Target"
-msgstr "目标"
-
-msgid "Temp"
-msgstr "温度"
-
 msgid "Temp (°C)"
 msgstr "温度 (°C)"
 
 msgid "Temperature"
-msgstr "温度"
+msgstr "设置温度"
 
 #, python-format
 msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr "要应用 %s，需要重新启动 KlipperScreen"
+msgstr "要应用 %s 主题，需要重新启动 KlipperScreen"
 
 msgid "Tool"
 msgstr "工具"
@@ -527,7 +521,7 @@ msgid "Unknown Heater "
 msgstr "未知加热器 "
 
 msgid "Unload"
-msgstr "卸下"
+msgstr "退出耗材"
 
 msgid "Up To Date"
 msgstr "最新"
@@ -536,16 +530,19 @@ msgid "Update"
 msgstr "更新"
 
 msgid "Uploaded"
-msgstr "已上传"
+msgstr "上传时间"
 
 msgid "View Mesh"
-msgstr "查看网格"
+msgstr "查看热床网格"
 
 msgid "X+"
 msgstr "X+"
 
 msgid "X-"
 msgstr "X-"
+
+msgid "XY Move Speed (mm/s)"
+msgstr "XY 移动速度 (mm/s)"
 
 msgid "Y+"
 msgstr "Y+"
@@ -556,11 +553,14 @@ msgstr "Y-"
 msgid "Z Calibrate"
 msgstr "Z 校准"
 
+msgid "Z Move Speed (mm/s)"
+msgstr "Z 移动速度 (mm/s)"
+
 msgid "Z Offset"
-msgstr "Z 间隙"
+msgstr "Z 偏移"
 
 msgid "Z Tilt"
-msgstr "Z Tilt"
+msgstr "Z 倾斜校准"
 
 msgid "Z+"
 msgstr "Z+"
@@ -583,6 +583,15 @@ msgstr "mm/s"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
+#~ msgid "Show Only Heaters in Temp."
+#~ msgstr "仅显示使用中的加热器"
+
+#~ msgid "Target"
+#~ msgstr "目标"
+
+#~ msgid "Temp"
+#~ msgstr "温度"
+
 #~ msgid "Number Pad"
 #~ msgstr "数字键盘"
 
@@ -593,10 +602,10 @@ msgstr "mm/s^2"
 #~ msgstr "屏幕将在1秒内显示"
 
 #~ msgid "Medium (default)"
-#~ msgstr "中（默认"
+#~ msgstr "中 (默认)"
 
 #~ msgid "File Estimation (default)"
-#~ msgstr "文件估计（默认）"
+#~ msgstr "文件 (默认)"
 
 #~ msgid "Fan Off"
 #~ msgstr "关闭风扇"
@@ -605,19 +614,19 @@ msgstr "mm/s^2"
 #~ msgstr "打开风扇"
 
 #~ msgid "Fast"
-#~ msgstr "快速"
+#~ msgstr "加速"
 
 #~ msgid "Set Speed"
 #~ msgstr "设置速度"
 
 #~ msgid "Slow"
-#~ msgstr "慢"
+#~ msgstr "减速"
 
 #~ msgid "?"
 #~ msgstr "?"
 
 #~ msgid "Cancel Change"
-#~ msgstr "取消变更"
+#~ msgstr "取消改动"
 
 #~ msgid "Control"
 #~ msgstr "控制"
@@ -629,4 +638,4 @@ msgstr "mm/s^2"
 #~ msgstr "网络信息"
 
 #~ msgid "Screen Blanking Time"
-#~ msgstr "屏幕关闭时间"
+#~ msgstr "关闭屏幕"

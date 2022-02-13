@@ -81,15 +81,10 @@ combobox box button {
 
 switch {
     background-color: #1f1f1f;
-    border-color: #121212;
 }
 
 switch:checked {
     background-color: #849900;
-}
-
-switch slider {
-    border: 0;
 }
 
 entry {

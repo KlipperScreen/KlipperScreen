@@ -2,230 +2,231 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 13:36-0300\n"
+"POT-Creation-Date: 2022-02-12 20:45-0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: SRBJ\n"
+"Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
-"Language: dansk\n"
+"Language: hu_HU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0\n"
 
 #, python-format
 msgid "%d Packages will be updated"
-msgstr "%d Pakker vil blive opdateret"
+msgstr "%d A csomag frissítésre kerül"
 
 #, python-format
 msgid "%s will be updated to version"
-msgstr "%s vil blive opdateret til version"
+msgstr "%s verzió frissítése"
 
 msgid "(default)"
-msgstr "(standard)"
+msgstr "(alapértelmezett)"
 
 msgid "24 Hour Time"
-msgstr "24-timers visning"
+msgstr "24 Óra Idő"
 
 msgid "Abort"
-msgstr "Annuller"
+msgstr "Megszakítás"
 
 msgid "Accept"
-msgstr "OK"
+msgstr "Elfogad"
 
 msgid "Actions"
-msgstr "Muligheder"
+msgstr "Műveletek"
 
 msgid "Add Printer"
-msgstr "Tilføj printer"
+msgstr "Nyomtató hozzáadása"
 
 msgid "Add bed mesh profile"
-msgstr "Tilføj \"bed-mesh\" profil"
+msgstr "Ágyháló profil hozzáadása"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr "Er du sikker på, at du vil køre nødstop?"
+msgstr "Biztosan Vészleállítást végez?"
 
 msgid "Are you sure you wish to cancel this print?"
-msgstr "Er du sikker på du vil annullere det igangværende print?"
+msgstr "Biztosan megszakítja ezt a nyomtatást?"
 
 msgid "Are you sure you wish to reboot the system?"
-msgstr "Er du sikker på du vil genstarte systemet?"
+msgstr "Biztos benne, hogy újra akarja indítani a rendszert?"
 
 msgid "Are you sure you wish to shutdown the system?"
-msgstr "Er du sikker på du vil lukke systemet?"
+msgstr "Biztos, hogy le szeretné állítani a rendszert?"
 
 msgid "Bed Level"
-msgstr "Bed-Level"
+msgstr "Ágyszint"
 
 msgid "Bed Mesh"
-msgstr "Bed-mesh"
+msgstr "Ágyháló"
 
 msgid "Calibrate"
-msgstr "Kalibrér"
+msgstr "Kalibrálás"
 
 msgid "Calibrated, save configuration to make it permanent"
-msgstr "Kalibreret, gem konfiguration for at gøre den permanent"
+msgstr "Kalibrálva! Mentse el a konfigurációt, hogy az állandó legyen"
 
 msgid "Can't set above the maximum:"
-msgstr "Kan ikke indstilles over maksimum:"
+msgstr "Nem állítható a maximum fölé:"
 
 msgid "Cancel"
-msgstr "Annuller"
+msgstr "Mégse"
 
 msgid "Cancel Print"
-msgstr "Annuller print"
+msgstr "Nyomtatás megszakítása"
 
 msgid "Cancelled"
-msgstr "Annulleret"
+msgstr "Törölve"
 
 msgid "Cancelling"
-msgstr "Annullerer"
+msgstr "Törlés"
 
 msgid "Channel"
-msgstr "Kanal"
+msgstr "Csatorna"
 
 msgid ""
 "Check /tmp/KlipperScreen.log for more information.\n"
 "Please submit an issue on GitHub for help."
 msgstr ""
-"Tjek /tmp/KlipperScreen.log for mere information.\n"
-"Indsend venligst et \"Issue\" på GitHub for hjælp."
+"Check /tmp/KlipperScreen.log további információért.\n"
+"Segítségért küldjön be egy hibajegyet a GitHubon."
 
 msgid "Close"
-msgstr "Luk"
+msgstr "Bezárás"
 
 msgid "Complete"
-msgstr "Færdig"
+msgstr "Befejezve"
 
 msgid "Configuration"
-msgstr "Konfiguration"
+msgstr "Konfiguráció"
 
 msgid "Confirm Emergency Stop"
-msgstr "Bekræft Nødstop"
+msgstr "Erősítse meg a Vészleállítást"
 
 msgid "Connected"
-msgstr "Forbundet"
+msgstr "Csatlakoztatva"
 
 #, python-format
 msgid "Connecting to %s"
-msgstr "Forbinder til %s"
+msgstr "Csatlakozás %s"
 
 msgid "Console"
-msgstr "Terminal"
+msgstr "Konzol"
 
 msgid "Continue"
-msgstr "Fortsæt"
+msgstr "Folytat"
 
 msgid "Cooldown"
-msgstr "Afkøling"
+msgstr "Lehűtés"
 
 msgid "Date"
-msgstr "Dato"
+msgstr "Dátum"
 
 msgid "Decrease"
-msgstr "Formindsk"
+msgstr "Csökken"
 
 msgid "Delete"
-msgstr "Slet"
+msgstr "Töröl"
 
 msgid "Deselect"
-msgstr "Fravælg"
+msgstr "Kijelölés törlése"
 
 msgid "Disable Motors"
-msgstr "Deaktivér motorer"
+msgstr "Motorok letiltása"
 
 msgid "Disable XY"
-msgstr "Deaktivér XY"
+msgstr "XY Letiltása"
 
 msgid "Disconnect"
-msgstr "Afbryd forbindelse"
+msgstr "Leválasztás"
 
 msgid "Displayed Macros"
-msgstr "Viste makroer"
+msgstr "Megjelenített makrók"
 
 msgid "Distance (mm)"
-msgstr "Længde (mm)"
+msgstr "Távolság (mm)"
 
 #, python-format
 msgid "Do you want to recover %s?"
-msgstr "Vil du gendanne %s?"
+msgstr "Vissza akarja állítani %s-t?"
 
 msgid "Duration Only"
-msgstr "Kun varighed"
+msgstr "Csak időtartam"
 
 msgid "Elapsed:"
-msgstr "Tid:"
+msgstr "Eltelt:"
 
 msgid "Error"
-msgstr "Fejl"
+msgstr "Hiba"
 
 msgid "Estimated Time Method"
-msgstr "Metode til beregning af tid"
+msgstr "Becsült idő módszer"
 
 msgid "Extrude"
-msgstr "Ekstrudér"
+msgstr "Kinyom"
 
 msgid "Extrusion +"
-msgstr "Ekstrudering +"
+msgstr "Extrudálás +"
 
 msgid "Extrusion -"
-msgstr "Ekstrudering -"
+msgstr "Extrudálás -"
 
 msgid "Failed, adjust position first"
-msgstr "Mislykkedes, juster først positionen"
+msgstr "Sikertelen! Előbb állítsd be a pozíciót"
 
 msgid "Fan"
-msgstr "Blæser"
+msgstr "Hűtés"
 
 msgid "Filament Used"
-msgstr "Filament forbrug"
+msgstr "Használt nyomtatószál"
 
 msgid "File"
-msgstr "Fil"
+msgstr "Fájl"
 
 msgid "Fine Tuning"
-msgstr "Finjustering"
+msgstr "Finomhangolás"
 
 msgid "Finish"
-msgstr "Færdig"
+msgstr "Befejezve"
 
 msgid "Firmware Restart"
-msgstr "Genstart alt"
+msgstr "Firmware újraindítás"
 
 msgid "Font Size"
-msgstr "Skriftstørrelse"
+msgstr "Betűméret"
 
 msgid "Go Back"
-msgstr "Gå tilbage"
+msgstr "Menj vissza"
 
 msgid "Hide"
-msgstr "Skjule"
+msgstr "Elrejt"
 
 msgid "Hide sensors in Temp."
-msgstr "Skjul sensorer i Temp."
+msgstr "Hőérzékelők elrejtése."
 
 msgid "Home"
-msgstr "Home"
+msgstr "Kezdőpont"
 
 msgid "Home All"
-msgstr "Home alle"
+msgstr "Kezdőpont X-Y-Z"
 
 msgid "Home X"
-msgstr "Home X"
+msgstr "Kezdőpont X"
 
 msgid "Home XY"
-msgstr "Home XY"
+msgstr "Kezdőpont XY"
 
 msgid "Home Y"
-msgstr "Home Y"
+msgstr "Kezdőpont Y"
 
 msgid "Home Z"
-msgstr "Home Z"
+msgstr "Kezdőpont Z"
 
 msgid "Homing"
-msgstr "Homing"
+msgstr "Kezdőpont"
 
 msgid "Hostname"
-msgstr "Værtsnavn"
+msgstr "Gazdanév"
 
 msgid "IPv4"
 msgstr "IPv4"
@@ -234,304 +235,304 @@ msgid "IPv6"
 msgstr "IPv6"
 
 msgid "Icon Theme"
-msgstr "Ikon-tema"
+msgstr "Ikon téma"
 
 msgid "Increase"
-msgstr "Forøg"
+msgstr "Növelés"
 
 msgid "Initializing"
-msgstr "Initialiserer"
+msgstr "Inicializálás"
 
 msgid "Initializing printer..."
-msgstr "Initialiserer printer..."
+msgstr "Nyomtató inicializálása..."
 
 msgid "Interface"
-msgstr "Interface"
+msgstr "Felület"
 
 msgid "Invalid"
-msgstr "Ugyldig"
+msgstr "Érvénytelen"
 
 msgid "Invert X"
-msgstr "Invertér X"
+msgstr "Fordított X"
 
 msgid "Invert Y"
-msgstr "Invertér Y"
+msgstr "Fordított Y"
 
 msgid "Invert Z"
-msgstr "Invertér Z"
+msgstr "Fordított Z"
 
 msgid "Klipper Restart"
-msgstr "Genstart Klipper"
+msgstr "Klipper újraindítása"
 
 msgid "Klipper Version"
-msgstr "Klipper version"
+msgstr "Klipper verzió"
 
 msgid "Klipper has disconnected"
-msgstr "Klipper er frokoblet"
+msgstr "Klipper szétkapcsolt"
 
 msgid ""
 "Klipper has encountered an error with the micro-controller.\n"
 "Please recompile and flash."
 msgstr ""
-"Klipper har fundet en fejl med mcu.\n"
-"Kompilér og flash venligst firmware på ny."
+"A Klipper hibát észlelt a mikrovezérlővel kapcsolatban.\n"
+"Fordítsa újra és töltse fel."
 
 msgid "Klipper has encountered an error."
-msgstr "Klipper har fundet en fejl."
+msgstr "A Klipper hibát észlelt."
 
 msgid ""
 "Klipper has encountered an error.\n"
 "Issue a FIRMWARE_RESTART to attempt fixing the issue."
 msgstr ""
-"Klipper har fundet en fejl.\n"
-"Tryk på \"Genstart alt\" for at forsøge at udbedre fejlen."
+"A Klipper hibát észlelt.\n"
+"A probléma megoldásához küldjön ki egy FIRMWARE_RESTART-ot."
 
 msgid "Klipper has shutdown"
-msgstr "Klipper er lukket ned"
+msgstr "A Klipper leállt"
 
 msgid "Klipper is attempting to start"
-msgstr "Klipper forsøger at starte"
+msgstr "Klipper megpróbálja elindítani"
 
 msgid "Klipper will reboot"
-msgstr "Klipper vil genstarte"
+msgstr "A Klipper újraindul"
 
 msgid "KlipperScreen Version"
-msgstr "KlipperScreen version"
+msgstr "KlipperScreen verzió"
 
 msgid "Language"
-msgstr "Sprog"
+msgstr "Nyelv"
 
 msgid "Large"
-msgstr "Stor"
+msgstr "Nagy"
 
 msgid "Left:"
-msgstr "Resterende:"
+msgstr "Bal:"
 
 msgid "Limits"
-msgstr "Grænser"
+msgstr "Korlátok"
 
 msgid "Load"
-msgstr "Indlæs"
+msgstr "Betöltés"
 
 msgid "Lower Nozzle"
-msgstr "Sænk Nozzle"
+msgstr "Alsó fúvóka"
 
 msgid "Macro shortcut on sidebar"
-msgstr "Makrogenvej på sidelinjen"
+msgstr "Makró parancsikon az oldalsávon"
 
 msgid "Macros"
-msgstr "Makroer"
+msgstr "Makrók"
 
 msgid "Main Menu"
-msgstr "Hovedmenu"
+msgstr "Főmenü"
 
 msgid "Max Accelation"
-msgstr "Maks. acceleration"
+msgstr "Max gyorsulás"
 
 msgid "Max Acceleration to Deceleration"
-msgstr "Maks. acceleration til decceleration"
+msgstr "Max gyorsulás a lassulásig"
 
 msgid "Max Velocity"
-msgstr "Maks. hastighed"
+msgstr "Max sebesség"
 
 msgid "Medium"
-msgstr "Mellem"
+msgstr "Közepes"
 
 msgid "Menu"
-msgstr "Menu"
+msgstr "Menü"
 
 msgid "Modified"
-msgstr "Ændret"
+msgstr "Módosított"
 
 msgid "Move"
-msgstr "Flytning"
+msgstr "Mozog"
 
 msgid "Move Distance (mm)"
-msgstr "Flyt længde (mm)"
+msgstr "Mozgási távolság (mm)"
 
 msgid "Name"
-msgstr "Navn"
+msgstr "Név"
 
 msgid "Network"
-msgstr "Netværk"
+msgstr "Hálózat"
 
 msgid "Nothing selected"
-msgstr "Intet valgt"
+msgstr "Nincs kiválasztva"
 
 msgid "Off"
-msgstr "Sluk"
+msgstr "Ki"
 
 #, python-format
 msgid "Outdated by %d commits:"
-msgstr "%d \"commits\" bagud:"
+msgstr "%d véglegesítés miatt elavult:"
 
 msgid "PSK for"
-msgstr "PSK for"
+msgstr "PSK-nak"
 
 msgid "Pause"
-msgstr "Pause"
+msgstr "Szünet"
 
 msgid "Paused"
-msgstr "På pause"
+msgstr "Szüneteltetve"
 
 msgid "Power"
-msgstr "Strømstyring"
+msgstr "Bekapcsolás"
 
 msgid "Power On Printer"
-msgstr "Tænd printer"
+msgstr "Nyomtató bekapcsolása"
 
 msgid "Print"
-msgstr "Print"
+msgstr "Nyomtatás"
 
 msgid "Print Control"
-msgstr "Print styring"
+msgstr "Nyomtatásvezérlés"
 
 msgid "Print Time"
-msgstr "Printtid"
+msgstr "Nyomtatási idő"
 
 msgid "Printer Connections"
-msgstr "Printer forbindelser"
+msgstr "Nyomtató csatlakozások"
 
 msgid "Printing"
-msgstr "Printer"
+msgstr "Nyomtatás"
 
 msgid "Profile Name:"
-msgstr "Profilnavn:"
+msgstr "Profil név:"
 
 msgid "Quad Gantry Level"
-msgstr "Justering af 4-søjlers konstruktion"
+msgstr "Quad Gantry Szint"
 
 msgid "Raise Nozzle"
-msgstr "Hæv Nozzle"
+msgstr "Fúvóka felemelése"
 
 msgid "Recover Hard"
-msgstr "Nulstil alt"
+msgstr "Hárdver visszaállítása"
 
 msgid "Recover Soft"
-msgstr "Nulstil"
+msgstr "Program visszaállítása"
 
 msgid "Restart"
-msgstr "Genstart"
+msgstr "Újraindít"
 
 msgid "Resume"
-msgstr "Genoptag"
+msgstr "Folytat"
 
 msgid "Retract"
-msgstr "Retract"
+msgstr "Visszahúz"
 
 msgid "Save"
-msgstr "Gem"
+msgstr "Mentés"
 
 msgid "Save Config"
-msgstr "Gem Konfiguration"
+msgstr "Konfiguráció mentése"
 
 msgid "Save configuration"
-msgstr "Gem Konfiguration"
+msgstr "Konfiguráció mentése"
 
 msgid "Screen Power Off Time"
-msgstr "Skærm timeout"
+msgstr "Kijelző kikapcsolási ideje"
 
 msgid "Screws Adjust"
-msgstr "Skruejustering"
+msgstr "Csavarok beállítása"
 
 msgid "Select"
-msgstr "Vælg"
+msgstr "Kiválasztás"
 
 msgid "Set Temp"
-msgstr "Indstil Temp"
+msgstr "Beállított hőfok"
 
 msgid "Settings"
-msgstr "Indstillinger"
+msgstr "Beállítások"
 
 msgid "Show"
-msgstr "At vise"
+msgstr "Mutat"
 
 msgid "Size"
-msgstr "Størrelse"
+msgstr "Méret"
 
 msgid "Slicer"
-msgstr "Slicer"
+msgstr "Szeletelő"
 
 msgid "Small"
-msgstr "Lille"
+msgstr "Kicsi"
 
 msgid "Sort by: "
-msgstr "Sortér efter: "
+msgstr "Sorrend: "
 
 msgid "Speed (mm/s)"
-msgstr "Hastighed (mm/s)"
+msgstr "Sebesség (mm/s)"
 
 msgid "Speed +"
-msgstr "Hastighed +"
+msgstr "Sebesség +"
 
 msgid "Speed -"
-msgstr "Hastighed -"
+msgstr "Sebesség -"
 
 msgid "Square Corner Velocity"
-msgstr "Hastighed for 90° hjørne"
+msgstr "Négyzet saroksebesség"
 
 msgid "Start"
-msgstr "Start"
+msgstr "Indítás"
 
 msgid "Starting WiFi Re-association"
-msgstr "Gendanner forbindelse til WiFi"
+msgstr "Wi-Fi újratársítás indítása"
 
 msgid "Starting recovery for"
-msgstr "Gendanner"
+msgstr "Helyreállítás megkezdése"
 
 msgid "Starting update for"
-msgstr "Opdaterer"
+msgstr "Frissítés indítása"
 
 msgid "System"
-msgstr "System"
+msgstr "Rendszer"
 
 msgid ""
 "System\n"
 "Restart"
 msgstr ""
-"Genstart\n"
-"system"
+"Rendszer\n"
+"Újraindítása"
 
 msgid ""
 "System\n"
 "Shutdown"
 msgstr ""
-"Luk\n"
-"system ned"
+"Rendszer\n"
+"Leállitás"
 
 msgid "Temp (°C)"
-msgstr "Temp (°C)"
+msgstr "Hőmérséklet (°C)"
 
 msgid "Temperature"
-msgstr "Temperatur"
+msgstr "Hőfok"
 
 #, python-format
 msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr "KlipperScreen skal genstartes for at anvende %s"
+msgstr "A %s KlipperScreen alkalmazásához újra kell indítani"
 
 msgid "Tool"
-msgstr "Ekstruder"
+msgstr "Eszköz"
 
 msgid "Unknown Heater"
-msgstr "Ukendt varmelegeme"
+msgstr "Ismeretlen melegítő"
 
 msgid "Unknown Heater "
-msgstr "Ukendt varmelegeme "
+msgstr "Ismeretlen melegítő "
 
 msgid "Unload"
-msgstr "Tilbagetræk"
+msgstr "Kirak"
 
 msgid "Up To Date"
-msgstr "Up-to-Date"
+msgstr "Naprakész"
 
 msgid "Update"
-msgstr "Opdater"
+msgstr "Frissítés"
 
 msgid "Uploaded"
-msgstr "Uploadet"
+msgstr "Feltöltve"
 
 msgid "View Mesh"
-msgstr "Vis mesh"
+msgstr "Háló nézet"
 
 msgid "X+"
 msgstr "X+"
@@ -540,7 +541,7 @@ msgid "X-"
 msgstr "X-"
 
 msgid "XY Move Speed (mm/s)"
-msgstr "XY Flyt hastighed (mm/s)"
+msgstr "XY Mozgási sebesség (mm/s)"
 
 msgid "Y+"
 msgstr "Y+"
@@ -549,16 +550,16 @@ msgid "Y-"
 msgstr "Y-"
 
 msgid "Z Calibrate"
-msgstr "Kalibrér Z"
+msgstr "Z Kalibrálás"
 
 msgid "Z Move Speed (mm/s)"
-msgstr "Z Flyt hastighed (mm/s)"
+msgstr "Z Mozgási sebesség (mm/s)"
 
 msgid "Z Offset"
-msgstr "Z-offset"
+msgstr "Z Eltolás"
 
 msgid "Z Tilt"
-msgstr "Z-tilt"
+msgstr "Z Dönt"
 
 msgid "Z+"
 msgstr "Z+"
@@ -570,7 +571,7 @@ msgid "dBm"
 msgstr "dBm"
 
 msgid "minutes"
-msgstr "minutter"
+msgstr "percek"
 
 msgid "mm"
 msgstr "mm"
@@ -580,12 +581,3 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
-
-#~ msgid "Show Only Heaters in Temp."
-#~ msgstr "Vis kun varmelegemer i Temp."
-
-#~ msgid "Target"
-#~ msgstr "Mål"
-
-#~ msgid "Temp"
-#~ msgstr "Temp"

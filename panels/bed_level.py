@@ -74,19 +74,27 @@ class BedLevelPanel(ScreenPanel):
                 [x, y*3],
                 [x*3, y*3],
             ]
-            logging.debug("Calculated screw locations [x,y]: %s", screws)
+            logging.debug("Calculated screw locations [x,y]: %s", self.screws)
         else:
-            logging.debug("Configured screw locations [x,y]: %s", screws)
+            logging.debug("Configured %d-screw locations [x,y]: %s", len(self.screws), self.screws)
 
+        # min_x, min_y
+        fl = sorted(self.screws)[0]
+        # max_x, max_y
+        br = sorted(self.screws)[-1]
+        # min_x, max_y
+        bl = [min(dict(self.screws).keys()), max(dict(self.screws).values())]
+        # max_x, min_y
+        fr = [max(dict(self.screws).keys()), min(dict(self.screws[::-1]).values())]
 
         self.labels['bl'] = self._gtk.ButtonImage("bed-level-t-l", None, None, 3, 3)
-        self.labels['bl'].connect("clicked", self.go_to_position, self.screws[2])
+        self.labels['bl'].connect("clicked", self.go_to_position, bl)
         self.labels['br'] = self._gtk.ButtonImage("bed-level-t-r", None, None, 3, 3)
-        self.labels['br'].connect("clicked", self.go_to_position, self.screws[3])
+        self.labels['br'].connect("clicked", self.go_to_position, br)
         self.labels['fl'] = self._gtk.ButtonImage("bed-level-b-l", None, None, 3, 3)
-        self.labels['fl'].connect("clicked", self.go_to_position, self.screws[0])
+        self.labels['fl'].connect("clicked", self.go_to_position, fl)
         self.labels['fr'] = self._gtk.ButtonImage("bed-level-b-r", None, None, 3, 3)
-        self.labels['fr'].connect("clicked", self.go_to_position, self.screws[1])
+        self.labels['fr'].connect("clicked", self.go_to_position, fr)
 
         if self._screen.lang_ltr:
             grid.attach(self.labels['bl'], 1, 0, 1, 1)
@@ -120,7 +128,8 @@ class BedLevelPanel(ScreenPanel):
         self.labels['br'].set_label("")
         self.labels['fl'].set_label("")
         self.labels['fr'].set_label("")
-        self.labels['screws'].set_sensitive(True)
+        if self._printer.config_section_exists("screws_tilt_adjust"):
+            self.labels['screws'].set_sensitive(True)
 
     def go_to_position(self, widget, position):
         logging.debug("Going to position: %s", position)
