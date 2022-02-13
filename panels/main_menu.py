@@ -240,7 +240,11 @@ class MainPanel(MenuPanel):
         for d in self._printer.get_temp_store_devices():
             if self.add_device(d):
                 i += 1
-        graph_height = max(0, self._screen.height - (i * 5 * self._gtk.get_font_size()))
+        if self._screen.vertical_mode:
+            aux = 1.5
+        else:
+            aux = 1
+        graph_height = max(0, self._screen.height / aux - (i * 5 * self._gtk.get_font_size()))
         self.labels['da'].set_size_request(0, graph_height)
         return box
 
