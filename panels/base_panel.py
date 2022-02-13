@@ -100,7 +100,7 @@ class BasePanel(ScreenPanel):
         self.hmargin = 5
         self.content = Gtk.VBox(spacing=0)
         if self._screen.vertical_mode:
-            self.content.set_size_request(self._screen.width - self.hmargin,
+            self.content.set_size_request(self._screen.width - self.hmargin * 2,
                                           self._screen.height - self.title_spacing - action_bar_height)
         else:
             self.content.set_size_request(self._screen.width - action_bar_width - self.hmargin,
