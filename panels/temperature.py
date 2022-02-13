@@ -438,7 +438,7 @@ class TemperaturePanel(ScreenPanel):
             if self.add_device(d):
                 i += 1
         if self._screen.vertical_mode:
-            aux = 1.55
+            aux = 1.38
         else:
             aux = 1
         graph_height = max(0, self._screen.height / aux - (i * 5 * self._gtk.get_font_size()))

@@ -29,9 +29,10 @@ class BasePanel(ScreenPanel):
         self.layout.set_size(self._screen.width, self._screen.height)
 
         action_bar_width = self._gtk.get_action_bar_width() if action_bar is True else 0
+        action_bar_height = self._gtk.get_action_bar_height() if action_bar is True else 0
 
         self.control_grid = self._gtk.HomogeneousGrid()
-        self.control_grid.set_size_request(action_bar_width - 2, self._screen.height)
+        self.control_grid.set_size_request(action_bar_width, action_bar_height)
         self.control_grid.get_style_context().add_class('action_bar')
 
         button_scale = self._gtk.get_header_image_scale()
@@ -69,9 +70,14 @@ class BasePanel(ScreenPanel):
 
         for i in range(button_range):
             self.control['space%s' % i] = Gtk.Label("")
-            self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
-
-        self.control_grid.attach(self.control['estop'], 0, 4, 1, 1)
+            if self._screen.vertical_mode:
+                self.control_grid.attach(self.control['space%s' % i], i, 0, 1, 1)
+            else:
+                self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
+        if self._screen.vertical_mode:
+            self.control_grid.attach(self.control['estop'], 4, 0, 1, 1)
+        else:
+            self.control_grid.attach(self.control['estop'], 0, 4, 1, 1)
 
         try:
             env = Environment(extensions=["jinja2.ext.i18n"])
@@ -82,7 +88,10 @@ class BasePanel(ScreenPanel):
             logging.debug("Error parsing jinja for title: %s" % title)
 
         self.titlelbl = Gtk.Label()
-        self.titlelbl.set_size_request(self._screen.width - action_bar_width, self.title_spacing)
+        if self._screen.vertical_mode:
+            self.titlelbl.set_size_request(self._screen.width, self.title_spacing)
+        else:
+            self.titlelbl.set_size_request(self._screen.width - action_bar_width, self.title_spacing)
         self.titlelbl.set_hexpand(True)
         self.titlelbl.set_halign(Gtk.Align.CENTER)
         self.titlelbl.set_valign(Gtk.Align.CENTER)
@@ -90,11 +99,18 @@ class BasePanel(ScreenPanel):
 
         self.hmargin = 5
         self.content = Gtk.VBox(spacing=0)
-        self.content.set_size_request(self._screen.width - action_bar_width - self.hmargin,
-                                      self._screen.height - self.title_spacing)
+        if self._screen.vertical_mode:
+            self.content.set_size_request(self._screen.width - self.hmargin,
+                                        self._screen.height - self.title_spacing - action_bar_height)
+        else:
+            self.content.set_size_request(self._screen.width - action_bar_width - self.hmargin,
+                                        self._screen.height - self.title_spacing)
 
         if action_bar is True:
-            self.layout.put(self.control_grid, 0, 0)
+            if self._screen.vertical_mode:
+                self.layout.put(self.control_grid, 0, self._screen.height - action_bar_height)
+            else:
+                self.layout.put(self.control_grid, 0, 0)
 
         self.control['time_box'] = Gtk.Box()
         self.control['time_box'].set_halign(Gtk.Align.END)
@@ -109,10 +125,16 @@ class BasePanel(ScreenPanel):
         self.control['temp_box'].set_vexpand(True)
         self.control['temp_box'].set_size_request(0, self.title_spacing)
 
-        self.layout.put(self.control['temp_box'], action_bar_width, 0)
-        self.layout.put(self.titlelbl, action_bar_width, 0)
-        self.layout.put(self.control['time_box'], action_bar_width, 0)
-        self.layout.put(self.content, action_bar_width + self.hmargin, self.title_spacing)
+        if self._screen.vertical_mode:
+            self.layout.put(self.control['temp_box'], 0, 0)
+            self.layout.put(self.titlelbl, 0, 0)
+            self.layout.put(self.control['time_box'], 0, 0)
+            self.layout.put(self.content, self.hmargin, self.title_spacing)
+        else:
+            self.layout.put(self.control['temp_box'], action_bar_width, 0)
+            self.layout.put(self.titlelbl, action_bar_width, 0)
+            self.layout.put(self.control['time_box'], action_bar_width, 0)
+            self.layout.put(self.content, action_bar_width + self.hmargin, self.title_spacing)
 
     def initialize(self, panel_name):
         # Create gtk items here
@@ -200,13 +222,21 @@ class BasePanel(ScreenPanel):
         if show is True and self.buttons_showing['back'] is False:
             self.control_grid.remove(self.control_grid.get_child_at(0, 0))
             self.control_grid.attach(self.control['back'], 0, 0, 1, 1)
-            self.control_grid.remove(self.control_grid.get_child_at(0, 1))
-            self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
+            if self._screen.vertical_mode:
+                self.control_grid.remove(self.control_grid.get_child_at(1, 0))
+                self.control_grid.attach(self.control['home'], 1, 0, 1, 1)
+            else:
+                self.control_grid.remove(self.control_grid.get_child_at(0, 1))
+                self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
             self.buttons_showing['back'] = True
         elif show is False and self.buttons_showing['back'] is True:
             for i in range(0, 2):
-                self.control_grid.remove(self.control_grid.get_child_at(0, i))
-                self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
+                if self._screen.vertical_mode:
+                        self.control_grid.remove(self.control_grid.get_child_at(i, 0))
+                        self.control_grid.attach(self.control['space%s' % i], i, 0, 1, 1)
+                else:
+                        self.control_grid.remove(self.control_grid.get_child_at(0, i))
+                        self.control_grid.attach(self.control['space%s' % i], 0, i, 1, 1)
             self.buttons_showing['back'] = False
         self.control_grid.show()
 
@@ -216,26 +246,46 @@ class BasePanel(ScreenPanel):
 
         if show is True and self.buttons_showing['macros_shortcut'] is False:
             if len(self._config.get_printers()) > 1 and mod_row is True:
-                self.control_grid.insert_row(self.locations['macro_shortcut'])
+                if self._screen.vertical_mode:
+                    self.control_grid.insert_column(self.locations['macro_shortcut'])
+                else:
+                    self.control_grid.insert_row(self.locations['macro_shortcut'])
             else:
-                self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['macro_shortcut']))
+                if self._screen.vertical_mode:
+                    self.control_grid.remove(self.control_grid.get_child_at(self.locations['macro_shortcut'], 0))
+                else:
+                    self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['macro_shortcut']))
             if 'space%s' % self.locations['macro_shortcut'] in self.control:
                 self.control_grid.remove(self.control['space%s' % self.locations['macro_shortcut']])
-            self.control_grid.attach(self.control['macro_shortcut'], 0, self.locations['macro_shortcut'], 1, 1)
+            if self._screen.vertical_mode:
+                self.control_grid.attach(self.control['macro_shortcut'], self.locations['macro_shortcut'], 0, 1, 1)
+            else:
+                self.control_grid.attach(self.control['macro_shortcut'], 0, self.locations['macro_shortcut'], 1, 1)
             self.buttons_showing['macros_shortcut'] = True
         elif show is not True and self.buttons_showing['macros_shortcut'] is True:
             if ('space%s' % self.locations['macro_shortcut']) not in self.control:
                 self.control['space%s' % self.locations['macro_shortcut']] = Gtk.Label("")
             if len(self._config.get_printers()) > 1 and mod_row is True:
-                self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['macro_shortcut']))
+                if self._screen.vertical_mode:
+                    self.control_grid.remove(self.control_grid.get_child_at(self.locations['macro_shortcut'], 0))
+                    self.control_grid.remove_column(self.locations['macro_shortcut'])
+                else:
+                    self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['macro_shortcut']))
+                    self.control_grid.remove_row(self.locations['macro_shortcut'])
                 self.control_grid.remove(self.control['macro_shortcut'])
-                self.control_grid.remove_row(self.locations['macro_shortcut'])
             else:
-                self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['macro_shortcut']))
+                if self._screen.vertical_mode:
+                    self.control_grid.remove(self.control_grid.get_child_at(self.locations['macro_shortcut'], 0))
+                else:
+                    self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['macro_shortcut']))
             if ('space%s' % self.locations['macro_shortcut']) not in self.control:
                 self.control['space%s' % self.locations['macro_shortcut']] = Gtk.Label("")
-            self.control_grid.attach(self.control['space%s' % self.locations['macro_shortcut']],
-                                     0, self.locations['macro_shortcut'], 1, 1)
+            if self._screen.vertical_mode:
+                self.control_grid.attach(self.control['space%s' % self.locations['macro_shortcut']],
+                                        self.locations['macro_shortcut'], 0, 1, 1)
+            else:
+                self.control_grid.attach(self.control['space%s' % self.locations['macro_shortcut']],
+                                        0, self.locations['macro_shortcut'], 1, 1)
             self.buttons_showing['macros_shortcut'] = False
         self._screen.show_all()
 
@@ -245,14 +295,24 @@ class BasePanel(ScreenPanel):
 
         if show and self.buttons_showing['printer_select'] is False:
             logging.info("Turning on printer_select button")
-            self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['printer_select']))
-            self.control_grid.attach(self.control['printer_select'], 0, self.locations['printer_select'], 1, 1)
+            if self._screen.vertical_mode:
+                self.control_grid.remove(self.control_grid.get_child_at(self.locations['printer_select'], 0))
+                self.control_grid.attach(self.control['printer_select'], self.locations['printer_select'], 0, 1, 1)
+            else:
+                self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['printer_select']))
+                self.control_grid.attach(self.control['printer_select'], 0, self.locations['printer_select'], 1, 1)
             self.buttons_showing['printer_select'] = True
         elif show is False and self.buttons_showing['printer_select']:
             logging.info("Turning off printer_select button")
-            self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['printer_select']))
-            self.control_grid.attach(self.control['space%s' % self.locations['printer_select']],
-                                     0, self.locations['printer_select'], 1, 1)
+            if self._screen.vertical_mode:
+                self.control_grid.remove(self.control_grid.get_child_at(self.locations['printer_select'], 0))
+                self.control_grid.attach(self.control['space%s' % self.locations['printer_select']],
+                                        self.locations['printer_select'], 0, 1, 1)
+            else:
+                self.control_grid.remove(self.control_grid.get_child_at(0, self.locations['printer_select']))
+                self.control_grid.attach(self.control['space%s' % self.locations['printer_select']],
+                                        0, self.locations['printer_select'], 1, 1)
+
             self.buttons_showing['printer_select'] = False
         self._screen.show_all()
 
@@ -269,7 +329,10 @@ class BasePanel(ScreenPanel):
 
     def show_back_buttons(self):
         self.control_grid.attach(self.control['back'], 0, 0, 1, 1)
-        self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
+        if self._screen.vertical_mode:
+            self.control_grid.attach(self.control['home'], 1, 0, 1, 1)
+        else:
+            self.control_grid.attach(self.control['home'], 0, 1, 1, 1)
 
     def update_time(self):
         now = datetime.datetime.now()
