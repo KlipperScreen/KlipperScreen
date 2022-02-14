@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import gi
 import json
-import humanize
 import logging
 import os
 
@@ -364,10 +363,18 @@ class PrintPanel(ScreenPanel):
             _("Uploaded"),
             datetime.fromtimestamp(fileinfo['modified']).strftime("%Y-%m-%d %H:%M"),
             _("Size"),
-            humanize.naturalsize(fileinfo['size']),
+            self.formatsize(fileinfo['size']),
             _("Print Time"),
             self.get_print_time(filename)
         )
+
+    def formatsize(self, size):
+        size = float(size)
+        suffixes = ["kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+        for i, suffix in enumerate(suffixes, start=2):
+            unit = 1024 ** i
+            if size < unit:
+                return ("%.1f %s") % ((1024 * size / unit), suffix)
 
     def get_print_time(self, filename):
         fileinfo = self._screen.files.get_file_info(filename)
