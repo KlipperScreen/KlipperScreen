@@ -345,7 +345,7 @@ msgid "Modified"
 msgstr "Módosított"
 
 msgid "Move"
-msgstr "Mozog"
+msgstr "Mozgatás"
 
 msgid "Move Distance (mm)"
 msgstr "Mozgási távolság (mm)"
@@ -436,7 +436,7 @@ msgid "Screws Adjust"
 msgstr "Csavarok beállítása"
 
 msgid "Select"
-msgstr "Kiválasztás"
+msgstr "Kijelölés"
 
 msgid "Set Temp"
 msgstr "Hőfok megadás"
@@ -541,9 +541,7 @@ msgid "X-"
 msgstr "X-"
 
 msgid "XY Move Speed (mm/s)"
-msgstr ""
-"XY Mozgási sebesség\n"
-"(mm/s)"
+msgstr "XY Mozgási sebesség (mm/s)"
 
 msgid "Y+"
 msgstr "Y+"
@@ -555,9 +553,7 @@ msgid "Z Calibrate"
 msgstr "Z Kalibrálás"
 
 msgid "Z Move Speed (mm/s)"
-msgstr ""
-"Z Mozgási sebesség\n"
-"(mm/s)"
+msgstr "Z Mozgási sebesség (mm/s)"
 
 msgid "Z Offset"
 msgstr "Z Eltolás"
