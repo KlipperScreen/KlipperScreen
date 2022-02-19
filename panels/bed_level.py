@@ -125,110 +125,128 @@ class BedLevelPanel(ScreenPanel):
         self.labels['fm'] = self._gtk.ButtonImage("bed-level-b-m", None, None, 2.5, 2.5)
         self.labels['bm'] = self._gtk.ButtonImage("bed-level-t-m", None, None, 2.5, 2.5)
 
-        # bl bm br
-        # lm    rm
-        # fl fm fr
-        self.labels['bl'].connect("clicked", self.go_to_position, bl)
-        self.labels['bm'].connect("clicked", self.go_to_position, bm)
-        self.labels['br'].connect("clicked", self.go_to_position, br)
-        self.labels['rm'].connect("clicked", self.go_to_position, rm)
-        self.labels['fr'].connect("clicked", self.go_to_position, fr)
-        self.labels['fm'].connect("clicked", self.go_to_position, fm)
-        self.labels['fl'].connect("clicked", self.go_to_position, fl)
-        self.labels['lm'].connect("clicked", self.go_to_position, lm)
-        self.screw_dict = {
-            'bl': bl,
-            'bm': bm,
-            'br': br,
-            'rm': rm,
-            'fr': fr,
-            'fm': fm,
-            'fl': fl,
-            'lm': lm
-        }
-
-        if 'bed_screws' in self._config.get_config():
-            rotation = self._config.get_config()['bed_screws'].getint("rotation", 0)
-            logging.debug("Rotation: %d", rotation)
-            if rotation == 90:
-                # fl lm bl
-                # fm    bm
-                # fr rm br
-                self.labels['bl'].connect("clicked", self.go_to_position, fl)
-                self.labels['bm'].connect("clicked", self.go_to_position, lm)
-                self.labels['br'].connect("clicked", self.go_to_position, bl)
-                self.labels['rm'].connect("clicked", self.go_to_position, bm)
-                self.labels['fr'].connect("clicked", self.go_to_position, br)
-                self.labels['fm'].connect("clicked", self.go_to_position, rm)
-                self.labels['fl'].connect("clicked", self.go_to_position, fr)
-                self.labels['lm'].connect("clicked", self.go_to_position, fm)
-                self.screw_dict = {
-                    'bl': fl,
-                    'bm': lm,
-                    'br': bl,
-                    'rm': bm,
-                    'fr': br,
-                    'fm': rm,
-                    'fl': fr,
-                    'lm': fm
-                }
-            if rotation == 180:
-                # fr fm fl
-                # rm    lm
-                # br bm bl
-                self.labels['bl'].connect("clicked", self.go_to_position, fr)
-                self.labels['bm'].connect("clicked", self.go_to_position, fm)
-                self.labels['br'].connect("clicked", self.go_to_position, fl)
-                self.labels['rm'].connect("clicked", self.go_to_position, lm)
-                self.labels['fr'].connect("clicked", self.go_to_position, bl)
-                self.labels['fm'].connect("clicked", self.go_to_position, bm)
-                self.labels['fl'].connect("clicked", self.go_to_position, br)
-                self.labels['lm'].connect("clicked", self.go_to_position, rm)
-                self.screw_dict = {
-                    'bl': fr,
-                    'bm': fm,
-                    'br': fl,
-                    'rm': lm,
-                    'fr': bl,
-                    'fm': bm,
-                    'fl': br,
-                    'lm': rm
-                }
-            if rotation == 270:
-                # br rm fr
-                # bm    fm
-                # bl lm fl
-                self.labels['bl'].connect("clicked", self.go_to_position, br)
-                self.labels['bm'].connect("clicked", self.go_to_position, rm)
-                self.labels['br'].connect("clicked", self.go_to_position, fr)
-                self.labels['rm'].connect("clicked", self.go_to_position, fm)
-                self.labels['fr'].connect("clicked", self.go_to_position, fl)
-                self.labels['fm'].connect("clicked", self.go_to_position, lm)
-                self.labels['fl'].connect("clicked", self.go_to_position, bl)
-                self.labels['lm'].connect("clicked", self.go_to_position, bm)
-                self.screw_dict = {
-                    'bl': br,
-                    'bm': rm,
-                    'br': fr,
-                    'rm': fm,
-                    'fr': fl,
-                    'fm': lm,
-                    'fl': bl,
-                    'lm': bm
-                }
-
         bedgrid = Gtk.Grid()
         bedgrid.attach(self.labels['bl'], 1, 0, 1, 1)
         bedgrid.attach(self.labels['fl'], 1, 2, 1, 1)
         bedgrid.attach(self.labels['fr'], 3, 2, 1, 1)
         bedgrid.attach(self.labels['br'], 3, 0, 1, 1)
 
-        if self.x_cnt == 3:
-            bedgrid.attach(self.labels['bm'], 2, 0, 1, 1)
-            bedgrid.attach(self.labels['fm'], 2, 2, 1, 1)
-        if self.y_cnt == 3:
-            bedgrid.attach(self.labels['lm'], 1, 1, 1, 1)
-            bedgrid.attach(self.labels['rm'], 3, 1, 1, 1)
+        rotation = 0
+        if 'bed_screws' in self._config.get_config():
+            rotation = self._config.get_config()['bed_screws'].getint("rotation", 0)
+            logging.debug("Rotation: %d", rotation)
+        if rotation == 90:
+            # fl lm bl
+            # fm    bm
+            # fr rm br
+            if self.y_cnt == 3:
+                bedgrid.attach(self.labels['bm'], 2, 0, 1, 1)
+                bedgrid.attach(self.labels['fm'], 2, 2, 1, 1)
+            if self.x_cnt == 3:
+                bedgrid.attach(self.labels['lm'], 1, 1, 1, 1)
+                bedgrid.attach(self.labels['rm'], 3, 1, 1, 1)
+            self.labels['bl'].connect("clicked", self.go_to_position, fl)
+            self.labels['bm'].connect("clicked", self.go_to_position, lm)
+            self.labels['br'].connect("clicked", self.go_to_position, bl)
+            self.labels['rm'].connect("clicked", self.go_to_position, bm)
+            self.labels['fr'].connect("clicked", self.go_to_position, br)
+            self.labels['fm'].connect("clicked", self.go_to_position, rm)
+            self.labels['fl'].connect("clicked", self.go_to_position, fr)
+            self.labels['lm'].connect("clicked", self.go_to_position, fm)
+            self.screw_dict = {
+                'bl': fl,
+                'bm': lm,
+                'br': bl,
+                'rm': bm,
+                'fr': br,
+                'fm': rm,
+                'fl': fr,
+                'lm': fm
+            }
+        elif rotation == 180:
+            # fr fm fl
+            # rm    lm
+            # br bm bl
+            if self.x_cnt == 3:
+                bedgrid.attach(self.labels['bm'], 2, 0, 1, 1)
+                bedgrid.attach(self.labels['fm'], 2, 2, 1, 1)
+            if self.y_cnt == 3:
+                bedgrid.attach(self.labels['lm'], 1, 1, 1, 1)
+                bedgrid.attach(self.labels['rm'], 3, 1, 1, 1)
+            self.labels['bl'].connect("clicked", self.go_to_position, fr)
+            self.labels['bm'].connect("clicked", self.go_to_position, fm)
+            self.labels['br'].connect("clicked", self.go_to_position, fl)
+            self.labels['rm'].connect("clicked", self.go_to_position, lm)
+            self.labels['fr'].connect("clicked", self.go_to_position, bl)
+            self.labels['fm'].connect("clicked", self.go_to_position, bm)
+            self.labels['fl'].connect("clicked", self.go_to_position, br)
+            self.labels['lm'].connect("clicked", self.go_to_position, rm)
+            self.screw_dict = {
+                'bl': fr,
+                'bm': fm,
+                'br': fl,
+                'rm': lm,
+                'fr': bl,
+                'fm': bm,
+                'fl': br,
+                'lm': rm
+            }
+        elif rotation == 270:
+            # br rm fr
+            # bm    fm
+            # bl lm fl
+            if self.y_cnt == 3:
+                bedgrid.attach(self.labels['bm'], 2, 0, 1, 1)
+                bedgrid.attach(self.labels['fm'], 2, 2, 1, 1)
+            if self.x_cnt == 3:
+                bedgrid.attach(self.labels['lm'], 1, 1, 1, 1)
+                bedgrid.attach(self.labels['rm'], 3, 1, 1, 1)
+            self.labels['bl'].connect("clicked", self.go_to_position, br)
+            self.labels['bm'].connect("clicked", self.go_to_position, rm)
+            self.labels['br'].connect("clicked", self.go_to_position, fr)
+            self.labels['rm'].connect("clicked", self.go_to_position, fm)
+            self.labels['fr'].connect("clicked", self.go_to_position, fl)
+            self.labels['fm'].connect("clicked", self.go_to_position, lm)
+            self.labels['fl'].connect("clicked", self.go_to_position, bl)
+            self.labels['lm'].connect("clicked", self.go_to_position, bm)
+            self.screw_dict = {
+                'bl': br,
+                'bm': rm,
+                'br': fr,
+                'rm': fm,
+                'fr': fl,
+                'fm': lm,
+                'fl': bl,
+                'lm': bm
+            }
+        else:
+            # bl bm br
+            # lm    rm
+            # fl fm fr
+            self.labels['bl'].connect("clicked", self.go_to_position, bl)
+            self.labels['bm'].connect("clicked", self.go_to_position, bm)
+            self.labels['br'].connect("clicked", self.go_to_position, br)
+            self.labels['rm'].connect("clicked", self.go_to_position, rm)
+            self.labels['fr'].connect("clicked", self.go_to_position, fr)
+            self.labels['fm'].connect("clicked", self.go_to_position, fm)
+            self.labels['fl'].connect("clicked", self.go_to_position, fl)
+            self.labels['lm'].connect("clicked", self.go_to_position, lm)
+            self.screw_dict = {
+                'bl': bl,
+                'bm': bm,
+                'br': br,
+                'rm': rm,
+                'fr': fr,
+                'fm': fm,
+                'fl': fl,
+                'lm': lm
+            }
+            if self.x_cnt == 3:
+                bedgrid.attach(self.labels['bm'], 2, 0, 1, 1)
+                bedgrid.attach(self.labels['fm'], 2, 2, 1, 1)
+            if self.y_cnt == 3:
+                bedgrid.attach(self.labels['lm'], 1, 1, 1, 1)
+                bedgrid.attach(self.labels['rm'], 3, 1, 1, 1)
 
         grid.attach(bedgrid, 1, 0, 3, 2)
 
