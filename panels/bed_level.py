@@ -145,7 +145,7 @@ class BedLevelPanel(ScreenPanel):
             'fm': fm,
             'fl': fl,
             'lm': lm
-            }
+        }
 
         if 'bed_screws' in self._config.get_config():
             rotation = self._config.get_config()['bed_screws'].getint("rotation", 0)
@@ -287,9 +287,9 @@ class BedLevelPanel(ScreenPanel):
                 y = self.apply_offset(result.group(3), self.y_offset)
                 for key, value in self.screw_dict.items():
                     if value and x == value[0] and y == value[1]:
-                            logging.debug("X: %s Y: %s Adjust: %s Pos: %s" % (x, y, result.group(5), key))
-                            self.labels[key].set_label(result.group(5))
-                            break
+                        logging.debug("X: %s Y: %s Adjust: %s Pos: %s" % (x, y, result.group(5), key))
+                        self.labels[key].set_label(result.group(5))
+                        break
                 self.response_count += 1
                 if self.response_count >= len(self.screws)-1:
                     self.labels['screws'].set_sensitive(True)
