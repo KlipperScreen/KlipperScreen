@@ -616,13 +616,9 @@ class KlipperScreen(Gtk.Window):
             os.system("xset -display :0 dpms force on")
 
     def set_screenblanking_timeout(self, time):
-        # Disable screen blanking
-        os.system("xset -display :0 s off")
-        os.system("xset -display :0 s noblank")
-
-        if functions.dpms_loaded is False:
-            logging.info("DPMS functions not loaded. Unable to protect on button click when DPMS is enabled.")
-
+        # The 'blank' flag sets the preference to blank the video (if the hardware can do so)
+        # rather than display a background pattern
+        os.system("xset -display :0 s blank")
 
         logging.debug("Changing power save to: %s" % time)
         if time == "off":
@@ -630,14 +626,20 @@ class KlipperScreen(Gtk.Window):
                 GLib.source_remove(self.dpms_timeout)
                 self.dpms_timeout = None
             os.system("xset -display :0 -dpms")
+            os.system("xset -display :0 s off")
             return
 
         time = int(time)
         if time < 0:
             return
-        os.system("xset -display :0 dpms 0 %s 0" % time)
-        if self.dpms_timeout is None and functions.dpms_loaded is True:
+        if functions.dpms_loaded is False:
+            logging.info("DPMS functions not loaded. Unable to protect on button press while the screen is blank")
+            os.system("xset -display :0 s %s" % time)
+            return
+        elif self.dpms_timeout is None and functions.dpms_loaded is True:
             self.dpms_timeout = GLib.timeout_add(500, self.check_dpms_state)
+        os.system("xset -display :0 s off")
+        os.system("xset -display :0 dpms 0 %s 0" % time)
 
     def set_updating(self, updating=False):
         if self.updating is True and updating is False:
