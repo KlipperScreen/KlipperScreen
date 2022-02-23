@@ -1,0 +1,602 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: KlipperScreen_2.x\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-08 13:36-0300\n"
+"PO-Revision-Date: 2022-02-23 19:27-0300\n"
+"Last-Translator: \n"
+"Language-Team: KomAndr\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#, python-format
+msgid "%d Packages will be updated"
+msgstr "%d пакетів буде оновлено"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s буде оновлено до версії"
+
+msgid "(default)"
+msgstr "(за замовчуванням)"
+
+msgid "24 Hour Time"
+msgstr "24-годинний час"
+
+msgid "Abort"
+msgstr "Перервати"
+
+msgid "Accept"
+msgstr "Прийняти"
+
+msgid "Actions"
+msgstr "Керування"
+
+msgid "Add Printer"
+msgstr "Додати принтер"
+
+msgid "Add bed mesh profile"
+msgstr "Додати сітку столу"
+
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "Ви впевнені, що хочете запустити аварійну зупинку?"
+
+msgid "Are you sure you wish to cancel this print?"
+msgstr "Ви впевнені, що хочете скасувати цей друк?"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "Ви впевнені, що хочете перезавантажити систему?"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "Ви впевнені, що хочете вимкнути систему?"
+
+msgid "Bed Level"
+msgstr "Вирівнювання столу"
+
+msgid "Bed Mesh"
+msgstr "Сітка столу"
+
+msgid "Calibrate"
+msgstr "Калібрування"
+
+msgid "Calibrated, save configuration to make it permanent"
+msgstr "Відкалібровано, збережіть конфігурацію, щоб зробити її постійною"
+
+msgid "Can't set above the maximum:"
+msgstr "Не встановити вище макс.:"
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+msgid "Cancel Print"
+msgstr "Скасувати друк"
+
+msgid "Cancelled"
+msgstr "Скасовано"
+
+msgid "Cancelling"
+msgstr "Скасування"
+
+msgid "Channel"
+msgstr "Канал"
+
+msgid ""
+"Check /tmp/KlipperScreen.log for more information.\n"
+"Please submit an issue on GitHub for help."
+msgstr ""
+"Перевірте /tmp/KlipperScreen.log для отримання додаткової інформації.\n"
+"Будь ласка, надішліть проблему на GitHub, щоб отримати допомогу."
+
+msgid "Close"
+msgstr "Закрити"
+
+msgid "Complete"
+msgstr "Завершено"
+
+msgid "Configuration"
+msgstr "Конфігурація"
+
+msgid "Confirm Emergency Stop"
+msgstr "Підтверджувати АВАРІЙНУ ЗУПИНКУ"
+
+msgid "Connected"
+msgstr "Підключено"
+
+#, python-format
+msgid "Connecting to %s"
+msgstr "Підключення до %s"
+
+msgid "Console"
+msgstr "Консоль"
+
+msgid "Continue"
+msgstr "Продовжити"
+
+msgid "Cooldown"
+msgstr "Охолодження"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Decrease"
+msgstr "Зменшити"
+
+msgid "Delete"
+msgstr "Видалити"
+
+msgid "Deselect"
+msgstr "Відміна"
+
+msgid "Disable Motors"
+msgstr "Вимкнути мотори"
+
+msgid "Disable XY"
+msgstr "Вимкнути XY"
+
+msgid "Disconnect"
+msgstr "Відключати"
+
+msgid "Displayed Macros"
+msgstr "Відображення Макросів"
+
+msgid "Distance (mm)"
+msgstr "Відстань (мм)"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "Ви хочете відновити %s?"
+
+msgid "Duration Only"
+msgstr "Тільки тривалість"
+
+msgid "Elapsed:"
+msgstr "Минуло:"
+
+msgid "Error"
+msgstr "Помилка"
+
+msgid "Estimated Time Method"
+msgstr "Метод розрахунку часу"
+
+msgid "Extrude"
+msgstr "Видавити"
+
+msgid "Extrusion +"
+msgstr "Екструзія+"
+
+msgid "Extrusion -"
+msgstr "Екструзія -"
+
+msgid "Failed, adjust position first"
+msgstr "Помилка, спочатку хоумінг"
+
+msgid "Fan"
+msgstr "Вентилятор"
+
+msgid "Filament Used"
+msgstr "Філамент"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Fine Tuning"
+msgstr "Підправити"
+
+msgid "Finish"
+msgstr "Фініш"
+
+msgid "Firmware Restart"
+msgstr "Рестарт прошивки"
+
+msgid "Font Size"
+msgstr "Розмір шрифту"
+
+msgid "Go Back"
+msgstr "Назад"
+
+msgid "Hide"
+msgstr "Сховати"
+
+msgid "Hide sensors in Temp."
+msgstr "Приховати датчики темп."
+
+msgid "Home"
+msgstr "Домашня сторінка"
+
+msgid "Home All"
+msgstr "Дім Всі"
+
+msgid "Home X"
+msgstr "Дім Х"
+
+msgid "Home XY"
+msgstr "Дім XY"
+
+msgid "Home Y"
+msgstr "Дім Y"
+
+msgid "Home Z"
+msgstr "Дім Z"
+
+msgid "Homing"
+msgstr "До дому"
+
+msgid "Hostname"
+msgstr "Назва хоста"
+
+msgid "IPv4"
+msgstr "IPv4"
+
+msgid "IPv6"
+msgstr "IPv6"
+
+msgid "Icon Theme"
+msgstr "Тема оформлення"
+
+msgid "Increase"
+msgstr "Збільшити"
+
+msgid "Initializing"
+msgstr "Ініціалізація"
+
+msgid "Initializing printer..."
+msgstr "Ініціалізація принтера..."
+
+msgid "Interface"
+msgstr "Інтерфейс"
+
+msgid "Invalid"
+msgstr "Недійсний"
+
+msgid "Invert X"
+msgstr "Інвертувати X"
+
+msgid "Invert Y"
+msgstr "Інвертувати Y"
+
+msgid "Invert Z"
+msgstr "Інвертувати Z"
+
+msgid "Klipper Restart"
+msgstr "Перезапуск Klipper"
+
+msgid "Klipper Version"
+msgstr "Версія Klipper"
+
+msgid "Klipper has disconnected"
+msgstr "Klipper відключився"
+
+msgid ""
+"Klipper has encountered an error with the micro-controller.\n"
+"Please recompile and flash."
+msgstr ""
+"Klipper зіткнувся з помилкою мікроконтролера.\n"
+"Будь ласка, перекомпілюйте та перепрошийте."
+
+msgid "Klipper has encountered an error."
+msgstr "У Klipper сталася помилка."
+
+msgid ""
+"Klipper has encountered an error.\n"
+"Issue a FIRMWARE_RESTART to attempt fixing the issue."
+msgstr ""
+"У Klipper сталася помилка.\n"
+"РЕСТАРТ_ПОШИВКИ, щоб спробувати вирішити проблему."
+
+msgid "Klipper has shutdown"
+msgstr "Klipper вимкнувся"
+
+msgid "Klipper is attempting to start"
+msgstr "Кліппер намагається стартувати"
+
+msgid "Klipper will reboot"
+msgstr "Klipper перезавантажиться"
+
+msgid "KlipperScreen Version"
+msgstr "Версія KlipperScreen"
+
+msgid "Language"
+msgstr "Мова"
+
+msgid "Large"
+msgstr "Великий"
+
+msgid "Left:"
+msgstr "Залишилось:"
+
+msgid "Limits"
+msgstr "Ліміти"
+
+msgid "Load"
+msgstr "Завантажити"
+
+msgid "Lower Nozzle"
+msgstr "Низ сопла"
+
+msgid "Macro shortcut on sidebar"
+msgstr "Ярлик макросу на бічній панелі"
+
+msgid "Macros"
+msgstr "Макрос"
+
+msgid "Main Menu"
+msgstr "Main Menu"
+
+msgid "Max Accelation"
+msgstr "Макс. прискорення"
+
+msgid "Max Acceleration to Deceleration"
+msgstr "Макс. прискорення до гальмування"
+
+msgid "Max Velocity"
+msgstr "Макс. швидкість"
+
+msgid "Medium"
+msgstr "Середній"
+
+msgid "Menu"
+msgstr "Меню"
+
+msgid "Modified"
+msgstr "Змінено"
+
+msgid "Move"
+msgstr "Рухатися"
+
+msgid "Move Distance (mm)"
+msgstr "Переміщення (мм)"
+
+msgid "Name"
+msgstr "Ім'я"
+
+msgid "Network"
+msgstr "Сітка"
+
+msgid "Nothing selected"
+msgstr "Не вибрано"
+
+msgid "Off"
+msgstr "Вимк"
+
+#, python-format
+msgid "Outdated by %d commits:"
+msgstr "Застаріло %d комітів:"
+
+msgid "PSK for"
+msgstr "PSK для"
+
+msgid "Pause"
+msgstr "Пауза"
+
+msgid "Paused"
+msgstr "Призупинено"
+
+msgid "Power"
+msgstr "Живлення"
+
+msgid "Power On Printer"
+msgstr "Увімкнути принтер"
+
+msgid "Print"
+msgstr "Друк"
+
+msgid "Print Control"
+msgstr "Контроль друку"
+
+msgid "Print Time"
+msgstr "Час друку"
+
+msgid "Printer Connections"
+msgstr "Підключення принтера"
+
+msgid "Printing"
+msgstr "Друкування"
+
+msgid "Profile Name:"
+msgstr "Ім'я профілю:"
+
+msgid "Quad Gantry Level"
+msgstr "Портальне вирівнювання"
+
+msgid "Raise Nozzle"
+msgstr "Підняти сопло"
+
+msgid "Recover Hard"
+msgstr "Відновити все"
+
+msgid "Recover Soft"
+msgstr "Відновити легко"
+
+msgid "Restart"
+msgstr "Перезапуск"
+
+msgid "Resume"
+msgstr "Відновити"
+
+msgid "Retract"
+msgstr "Ретракт"
+
+msgid "Save"
+msgstr "Зберегти"
+
+msgid "Save Config"
+msgstr "Зберегти конфіг"
+
+msgid "Save configuration"
+msgstr "Зберегти конфігурацію"
+
+msgid "Screen Power Off Time"
+msgstr "Вимкнути екран через"
+
+msgid "Screws Adjust"
+msgstr "Регулювання гвинтів"
+
+msgid "Select"
+msgstr "Вибрати"
+
+msgid "Set Temp"
+msgstr "Встановити t°"
+
+msgid "Settings"
+msgstr "Налаштування"
+
+msgid "Show"
+msgstr "Показати"
+
+msgid "Size"
+msgstr "Розмір"
+
+msgid "Slicer"
+msgstr "Слайсер"
+
+msgid "Small"
+msgstr "Малий"
+
+msgid "Sort by: "
+msgstr "Сортувати за: "
+
+msgid "Speed (mm/s)"
+msgstr "Швидкість (мм/с)"
+
+msgid "Speed +"
+msgstr "Швидкість +"
+
+msgid "Speed -"
+msgstr "Швидкість -"
+
+msgid "Square Corner Velocity"
+msgstr "Квадратна кутова швидкість"
+
+msgid "Start"
+msgstr "Старт"
+
+msgid "Starting WiFi Re-association"
+msgstr "Запуск повторної асоціації WiFi"
+
+msgid "Starting recovery for"
+msgstr "Початок відновлення для"
+
+msgid "Starting update for"
+msgstr "Початок оновлення для"
+
+msgid "System"
+msgstr "Системна"
+
+msgid ""
+"System\n"
+"Restart"
+msgstr ""
+"Рестарт\n"
+"Малини"
+
+msgid ""
+"System\n"
+"Shutdown"
+msgstr ""
+"Вимкнути\n"
+"Малину"
+
+msgid "Temp (°C)"
+msgstr "Teмп (°C)"
+
+msgid "Temperature"
+msgstr "Температура"
+
+#, python-format
+msgid "To apply %s KlipperScreen needs to be restarted"
+msgstr "Щоб застосувати %s, потрібно перезапустити KlipperScreen"
+
+msgid "Tool"
+msgstr "Інструмент"
+
+msgid "Unknown Heater"
+msgstr "Невідомий нагрівач"
+
+msgid "Unknown Heater "
+msgstr "Невідомий нагрівач "
+
+msgid "Unload"
+msgstr "Вийняти"
+
+msgid "Up To Date"
+msgstr "Оновити"
+
+msgid "Update"
+msgstr "Оновлення"
+
+msgid "Uploaded"
+msgstr "Завантажено"
+
+msgid "View Mesh"
+msgstr "Показати сітку"
+
+msgid "X+"
+msgstr "X+"
+
+msgid "X-"
+msgstr "X-"
+
+msgid "XY Move Speed (mm/s)"
+msgstr "Швидкість XY (мм/с)"
+
+msgid "Y+"
+msgstr "Y+"
+
+msgid "Y-"
+msgstr "Y-"
+
+msgid "Z Calibrate"
+msgstr "Калібровка Z"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "Швидкість Z (мм/с)"
+
+msgid "Z Offset"
+msgstr "Зміщення Z"
+
+msgid "Z Tilt"
+msgstr "Z Нахил"
+
+msgid "Z+"
+msgstr "Бебістеп Z+"
+
+msgid "Z-"
+msgstr "Бебістеп Z-"
+
+msgid "dBm"
+msgstr "dBm"
+
+msgid "minutes"
+msgstr "хвилин"
+
+msgid "mm"
+msgstr "мм"
+
+msgid "mm/s"
+msgstr "мм/с"
+
+msgid "mm/s^2"
+msgstr "мм/с²"
+
+#~ msgid "h"
+#~ msgstr "г"
+
+#~ msgid "m"
+#~ msgstr "м"
+
+#~ msgid "s"
+#~ msgstr "с"
+
+#~ msgid "hour"
+#~ msgstr "години"
