@@ -41,6 +41,20 @@ Find the ID of your display and put it in the following command:
 DISPLAY=:0 xinput_calibrator -v --device <id from last command>
 ```
 
+It will output somehting like:
+```
+Section "InputClass"
+        Identifier      "calibration"
+        MatchProduct    "ADS7846 Touchscreen"
+        Option  "Calibration"   "3951 242 190 3885"
+        Option  "SwapAxes"      "1"
+EndSection
+```
+paste that into `sudo nano /etc/X11/xorg.conf.d/99-calibration.conf` replace the contents if necessary
+
+restart KlipperScreen
+
+
 #### Touchscreen touch rotation
 If your touchscreen isn't registering touches properly after the screen has been rotated, you will need to apply a
 transformation matrix. You can have the matrix be one of the following:
