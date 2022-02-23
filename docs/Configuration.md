@@ -84,6 +84,14 @@ temperature_fan: 40
 gcode: MY_HEATSOAK_MACRO
 ```
 
+## Bed Screws
+```
+[bed_screws]
+# Rotation is useful if the screen is not directly in front of the machine.
+# Valid values are 0 90 180 270
+rotation: 0
+```
+
 ## Menu
 This allows a custom configuration for the menu displayed while the printer is idle. You can use sub-menus to group
 different items and there are several panel options available. It is possible to have a gcode script run on a menu
