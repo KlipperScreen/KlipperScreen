@@ -276,7 +276,7 @@ class BasePanel(ScreenPanel):
         confopt = self._config.get_main_config_option("24htime")
         if now.minute != self.time_min or self.time_format != confopt:
             if confopt == "True":
-                self.control['time'].set_text(now.strftime("%H:%M"))
+                self.control['time'].set_text(now.strftime("     %H:%M"))
             else:
                 self.control['time'].set_text(now.strftime("%I:%M %p"))
         return True
