@@ -30,6 +30,7 @@ class MainPanel(MenuPanel):
 
         self.items = items
         self.create_menu_items()
+        self._gtk.reset_temp_color()
 
         self.grid = Gtk.Grid()
         self.grid.set_row_homogeneous(True)
