@@ -11,7 +11,6 @@ klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
 
 class KlippyGtk:
     labels = {}
-    font_ratio = [43, 29]
     keyboard_ratio = .22
     width_ratio = 16
     height_ratio = 9.375
@@ -21,6 +20,10 @@ class KlippyGtk:
         self.width = width
         self.height = height
         self.theme = theme
+        if self.screen.vertical_mode:
+            self.font_ratio = [33, 49]
+        else:
+            self.font_ratio = [43, 29]
         self.font_size = int(min(
             self.width / self.font_ratio[0],
             self.height / self.font_ratio[1]
@@ -32,7 +35,12 @@ class KlippyGtk:
         self.header_size = int(round((self.width / self.width_ratio) / 1.33))
         self.img_width = int(round(self.width / self.width_ratio))
         self.img_height = int(round(self.height / self.height_ratio))
-        self.action_bar_width = int(self.width * .1)
+        if self.screen.vertical_mode:
+            self.action_bar_width = int(self.width)
+            self.action_bar_height = int(self.height * .1)
+        else:
+            self.action_bar_width = int(self.width * .1)
+            self.action_bar_height = int(self.height)
         self.header_image_scale_width = 1.2
         self.header_image_scale_height = 1.4
         self.cursor = cursor
@@ -48,6 +56,9 @@ class KlippyGtk:
 
     def get_action_bar_width(self):
         return self.action_bar_width
+
+    def get_action_bar_height(self):
+        return self.action_bar_height
 
     def get_content_width(self):
         return self.width - self.action_bar_width

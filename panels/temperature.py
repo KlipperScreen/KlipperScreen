@@ -39,7 +39,10 @@ class TemperaturePanel(ScreenPanel):
                     self.select_heater(None, h)
         else:
             self.show_preheat = False
-        self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
+        if self._screen.vertical_mode:
+            self.grid.attach(self.create_right_panel(), 0, 1, 1, 1)
+        else:
+            self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
         self.content.add(self.grid)
         self.layout.show_all()
 
@@ -64,8 +67,12 @@ class TemperaturePanel(ScreenPanel):
 
     def switch_preheat_adjust(self, widget):
         self.show_preheat ^= True
-        self.grid.remove_column(1)
-        self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
+        if self._screen.vertical_mode:
+            self.grid.remove_row(1)
+            self.grid.attach(self.create_right_panel(), 0, 1, 1, 1)
+        else:
+            self.grid.remove_column(1)
+            self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
         self.grid.show_all()
 
     def preheat(self):
@@ -430,7 +437,11 @@ class TemperaturePanel(ScreenPanel):
         for d in self._printer.get_temp_store_devices():
             if self.add_device(d):
                 i += 1
-        graph_height = max(0, self._screen.height - (i * 5 * self._gtk.get_font_size()))
+        if self._screen.vertical_mode:
+            aux = 1.38
+        else:
+            aux = 1
+        graph_height = max(0, self._screen.height / aux - (i * 5 * self._gtk.get_font_size()))
         self.labels['da'].set_size_request(0, graph_height)
         return box
 
@@ -454,8 +465,12 @@ class TemperaturePanel(ScreenPanel):
         self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")
         self.active_heater = None
 
-        self.grid.remove_column(1)
-        self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
+        if self._screen.vertical_mode:
+            self.grid.remove_row(1)
+            self.grid.attach(self.create_right_panel(), 0, 1, 1, 1)
+        else:
+            self.grid.remove_column(1)
+            self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
         self.grid.show_all()
 
     def on_popover_clicked(self, widget, device):
@@ -508,8 +523,12 @@ class TemperaturePanel(ScreenPanel):
             self.labels["keypad"] = Keypad(self._screen, self.change_target_temp, self.hide_numpad)
         self.labels["keypad"].clear()
 
-        self.grid.remove_column(1)
-        self.grid.attach(self.labels["keypad"], 1, 0, 1, 1)
+        if self._screen.vertical_mode:
+            self.grid.remove_row(1)
+            self.grid.attach(self.labels["keypad"], 0, 1, 1, 1)
+        else:
+            self.grid.remove_column(1)
+            self.grid.attach(self.labels["keypad"], 1, 0, 1, 1)
         self.grid.show_all()
 
         self.labels['popover'].popdown()

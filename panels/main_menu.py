@@ -39,7 +39,10 @@ class MainPanel(MenuPanel):
         leftpanel = self.create_left_panel()
         grid.attach(leftpanel, 0, 0, 1, 1)
         self.labels['menu'] = self.arrangeMenuItems(items, 2, True)
-        grid.attach(self.labels['menu'], 1, 0, 1, 1)
+        if self._screen.vertical_mode:
+            grid.attach(self.labels['menu'], 0, 1, 1, 1)
+        else:
+            grid.attach(self.labels['menu'], 1, 0, 1, 1)
 
         self.grid = grid
 
@@ -238,7 +241,11 @@ class MainPanel(MenuPanel):
         for d in self._printer.get_temp_store_devices():
             if self.add_device(d):
                 i += 1
-        graph_height = max(0, self._screen.height - (i * 5 * self._gtk.get_font_size()))
+        if self._screen.vertical_mode:
+            aux = 1.38
+        else:
+            aux = 1
+        graph_height = max(0, self._screen.height / aux - (i * 5 * self._gtk.get_font_size()))
         self.labels['da'].set_size_request(0, graph_height)
         return box
 
@@ -261,8 +268,12 @@ class MainPanel(MenuPanel):
         self.devices[self.active_heater]['name'].get_style_context().remove_class("active_device")
         self.active_heater = None
 
-        self.grid.remove_column(1)
-        self.grid.attach(self.labels['menu'], 1, 0, 1, 1)
+        if self._screen.vertical_mode:
+            self.grid.remove_row(1)
+            self.grid.attach(self.labels['menu'], 0, 1, 1, 1)
+        else:
+            self.grid.remove_column(1)
+            self.grid.attach(self.labels['menu'], 1, 0, 1, 1)
         self.grid.show_all()
 
     def on_popover_clicked(self, widget, device):
@@ -316,8 +327,12 @@ class MainPanel(MenuPanel):
             self.labels["keypad"] = Keypad(self._screen, self.change_target_temp, self.hide_numpad)
         self.labels["keypad"].clear()
 
-        self.grid.remove_column(1)
-        self.grid.attach(self.labels["keypad"], 1, 0, 1, 1)
+        if self._screen.vertical_mode:
+            self.grid.remove_row(1)
+            self.grid.attach(self.labels["keypad"], 0, 1, 1, 1)
+        else:
+            self.grid.remove_column(1)
+            self.grid.attach(self.labels["keypad"], 1, 0, 1, 1)
         self.grid.show_all()
 
         self.labels['popover'].popdown()
