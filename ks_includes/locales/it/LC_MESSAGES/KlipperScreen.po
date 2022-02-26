@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 13:36-0300\n"
+"POT-Creation-Date: 2022-02-26 15:48-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pappicio\n"
 "Language-Team: \n"
@@ -12,10 +12,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#, python-format
-msgid "%d Packages will be updated"
-msgstr "%d pacchetti verranno aggiornati"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -59,6 +55,9 @@ msgstr "Livello del letto"
 
 msgid "Bed Mesh"
 msgstr "Rete letto"
+
+msgid "Bltouch found applied offset"
+msgstr "Bltouch ha trovato l'offset applicato"
 
 msgid "Calibrate"
 msgstr "Calibra"
@@ -365,11 +364,16 @@ msgid "Off"
 msgstr "Off"
 
 #, python-format
-msgid "Outdated by %d commits:"
-msgstr "Obsoleto da %d commit:"
+msgid "Outdated by %d"
+msgstr "Obsoleto di %d"
 
 msgid "PSK for"
 msgstr "PSK per"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "Pacchetto verrà aggiornato"
+msgstr[1] "I pacchetti verranno aggiornati"
 
 msgid "Pause"
 msgstr "Pausa"
@@ -398,6 +402,9 @@ msgstr "Connessioni Stampante"
 msgid "Printing"
 msgstr "In Stampa"
 
+msgid "Probe found applied offset"
+msgstr "Probe ha trovato l'offset applicato"
+
 msgid "Profile Name:"
 msgstr "Nome Profilo:"
 
@@ -412,6 +419,9 @@ msgstr "Recuperare Hard"
 
 msgid "Recover Soft"
 msgstr "Recuperare Soft"
+
+msgid "Reference"
+msgstr "Riferimento"
 
 msgid "Restart"
 msgstr "Riavvia"
@@ -555,7 +565,7 @@ msgid "Z Calibrate"
 msgstr "Calibra Z"
 
 msgid "Z Move Speed (mm/s)"
-msgstr "Velocità di spostamento Z (mm/s) "
+msgstr "Velocità di spostamento Z (mm/s)"
 
 msgid "Z Offset"
 msgstr "Offset Z"
@@ -569,8 +579,18 @@ msgstr "Z+"
 msgid "Z-"
 msgstr "Z-"
 
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "cambio"
+msgstr[1] "modifiche"
+
 msgid "dBm"
 msgstr "dBm"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "ora"
+msgstr[1] "ore"
 
 msgid "minutes"
 msgstr "minuti"
@@ -613,6 +633,3 @@ msgstr "mm/s^2"
 
 #~ msgid "Change Printer"
 #~ msgstr "Cambia Stampante"
-
-#~ msgid "Commited"
-#~ msgstr "Impegnato"

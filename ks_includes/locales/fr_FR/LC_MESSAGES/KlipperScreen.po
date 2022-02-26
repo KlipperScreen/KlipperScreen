@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 13:36-0300\n"
-"PO-Revision-Date: 2022-02-08 13:39-0300\n"
+"POT-Creation-Date: 2022-02-26 15:48-0300\n"
+"PO-Revision-Date: 2022-02-26 15:16-0300\n"
 "Last-Translator: O. Robardet\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -17,10 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-#, python-format
-msgid "%d Packages will be updated"
-msgstr "%d packages seront mis à jour"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -64,6 +60,9 @@ msgstr "Nivelage du plateau"
 
 msgid "Bed Mesh"
 msgstr "Maillage du plateau"
+
+msgid "Bltouch found applied offset"
+msgstr "Bltouch a trouvé le décalage appliqué"
 
 msgid "Calibrate"
 msgstr "Étalonner"
@@ -370,11 +369,16 @@ msgid "Off"
 msgstr "Éteindre"
 
 #, python-format
-msgid "Outdated by %d commits:"
-msgstr "En retard de %d commits :"
+msgid "Outdated by %d"
+msgstr "Obsolète de %d"
 
 msgid "PSK for"
 msgstr "PSK pour"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "Le paquet sera mis à jour"
+msgstr[1] "Forfaits seront mis à jour"
 
 msgid "Pause"
 msgstr "Pause"
@@ -403,6 +407,9 @@ msgstr "Connexions aux imprimantes"
 msgid "Printing"
 msgstr "Impression"
 
+msgid "Probe found applied offset"
+msgstr "Probe a trouvé le décalage appliqué"
+
 msgid "Profile Name:"
 msgstr "Nom de profil:"
 
@@ -417,6 +424,9 @@ msgstr "Récupération \"--hard\""
 
 msgid "Recover Soft"
 msgstr "Récupérer \"--soft\""
+
+msgid "Reference"
+msgstr "Référence"
 
 msgid "Restart"
 msgstr "Redémarrer"
@@ -572,8 +582,18 @@ msgstr "Z+"
 msgid "Z-"
 msgstr "Z-"
 
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "changement"
+msgstr[1] "changements"
+
 msgid "dBm"
 msgstr "dBm"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "heur"
+msgstr[1] "heures"
 
 msgid "minutes"
 msgstr "minutes"

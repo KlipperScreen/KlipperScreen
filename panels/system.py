@@ -153,6 +153,7 @@ class SystemPanel(ScreenPanel):
 
     def show_update_info(self, widget, program):
         _ = self.lang.gettext
+        _n = self.lang.ngettext
 
         if not self.update_status or program not in self.update_status['version_info']:
             return
@@ -189,7 +190,11 @@ class SystemPanel(ScreenPanel):
             else:
                 if info['version'] == info['remote_version']:
                     return
-                label.set_markup("<b>" + _("Outdated by %d commits:") % len(info['commits_behind']) + "</b>\n")
+                ncommits = len(info['commits_behind'])
+                label.set_markup("<b>" +
+                                 _("Outdated by %d") % ncommits +
+                                 " " + _n("commit", "commits", ncommits) +
+                                 ":</b>\n")
                 grid.attach(label, 0, i, 1, 1)
                 i = i + 1
                 date = ""
@@ -217,7 +222,9 @@ class SystemPanel(ScreenPanel):
                     grid.attach(details, 0, i, 1, 1)
                     i = i + 1
         if "package_count" in info:
-            label.set_markup("<b>" + _("%d Packages will be updated") % info['package_count'] + ":</b>\n")
+            label.set_markup("<b>%d " % info['package_count'] +
+                             _n("Package will be updated", "Packages will be updated", info['package_count']) +
+                             ":</b>\n")
             label.set_halign(Gtk.Align.CENTER)
             grid.attach(label, 0, i, 3, 1)
             i = i + 1

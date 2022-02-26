@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 13:36-0300\n"
-"PO-Revision-Date: 2022-02-08 13:39-0300\n"
+"POT-Creation-Date: 2022-02-26 15:48-0300\n"
+"PO-Revision-Date: 2022-02-26 14:57-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,10 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
-
-#, python-format
-msgid "%d Packages will be updated"
-msgstr "%d Paquetes serán actualizados"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -63,6 +60,9 @@ msgstr "Nivelar cama"
 
 msgid "Bed Mesh"
 msgstr "Malla de cama"
+
+msgid "Bltouch found applied offset"
+msgstr "Encontrado Bltouch aplicado desfase"
 
 msgid "Calibrate"
 msgstr "Calibrar"
@@ -369,11 +369,16 @@ msgid "Off"
 msgstr "Apagar"
 
 #, python-format
-msgid "Outdated by %d commits:"
-msgstr "Desactualizado por %d commits:"
+msgid "Outdated by %d"
+msgstr "Desactualizado por %d"
 
 msgid "PSK for"
 msgstr "PSK para"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "Paquete será actualizado"
+msgstr[1] "Paquetes serán actualizados"
 
 msgid "Pause"
 msgstr "Pausar"
@@ -402,6 +407,9 @@ msgstr "Conexiones a impresoras"
 msgid "Printing"
 msgstr "Imprimiendo"
 
+msgid "Probe found applied offset"
+msgstr "Encontrado Probe aplicado desfase"
+
 msgid "Profile Name:"
 msgstr "Nombre del perfil:"
 
@@ -416,6 +424,9 @@ msgstr "Recuperar Hard"
 
 msgid "Recover Soft"
 msgstr "Recuperar Soft"
+
+msgid "Reference"
+msgstr "Referencia"
 
 msgid "Restart"
 msgstr "Reiniciar"
@@ -573,8 +584,18 @@ msgstr "Z+"
 msgid "Z-"
 msgstr "Z-"
 
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "cambio"
+msgstr[1] "cambios"
+
 msgid "dBm"
 msgstr "dBm"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "hora"
+msgstr[1] "horas"
 
 msgid "minutes"
 msgstr "minutos"
@@ -617,9 +638,6 @@ msgstr "mm/s^2"
 
 #~ msgid "Change Printer"
 #~ msgstr "Cambiar impresora"
-
-#~ msgid "Commited"
-#~ msgstr "Commited"
 
 #~ msgid "Fan Off"
 #~ msgstr "Apagar"

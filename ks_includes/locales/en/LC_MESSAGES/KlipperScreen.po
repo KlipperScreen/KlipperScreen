@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 13:36-0300\n"
+"POT-Creation-Date: 2022-02-26 15:48-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,11 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
-
-#, python-format
-msgid "%d Packages will be updated"
-msgstr ""
+"X-Generator: Poedit 3.0\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -58,6 +54,9 @@ msgid "Bed Level"
 msgstr ""
 
 msgid "Bed Mesh"
+msgstr ""
+
+msgid "Bltouch found applied offset"
 msgstr ""
 
 msgid "Calibrate"
@@ -357,11 +356,16 @@ msgid "Off"
 msgstr ""
 
 #, python-format
-msgid "Outdated by %d commits:"
+msgid "Outdated by %d"
 msgstr ""
 
 msgid "PSK for"
 msgstr ""
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "Pause"
 msgstr ""
@@ -390,6 +394,9 @@ msgstr ""
 msgid "Printing"
 msgstr ""
 
+msgid "Probe found applied offset"
+msgstr ""
+
 msgid "Profile Name:"
 msgstr ""
 
@@ -403,6 +410,9 @@ msgid "Recover Hard"
 msgstr ""
 
 msgid "Recover Soft"
+msgstr ""
+
+msgid "Reference"
 msgstr ""
 
 msgid "Restart"
@@ -557,8 +567,18 @@ msgstr ""
 msgid "Z-"
 msgstr ""
 
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "dBm"
 msgstr ""
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "minutes"
 msgstr ""

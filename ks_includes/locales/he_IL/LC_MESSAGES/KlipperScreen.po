@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 13:36-0300\n"
-"PO-Revision-Date: 2022-02-08 13:40-0300\n"
+"POT-Creation-Date: 2022-02-26 15:48-0300\n"
+"PO-Revision-Date: 2022-02-26 15:22-0300\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
 "Language: he_IL\n"
@@ -19,10 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
 "2 : 3);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-
-#, python-format
-msgid "%d Packages will be updated"
-msgstr "%d חבילות יעודכנו"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -67,6 +63,9 @@ msgstr "פילוס מיטה"
 
 msgid "Bed Mesh"
 msgstr "מיפוי מיטה"
+
+msgid "Bltouch found applied offset"
+msgstr "Bltouch נמצא היסט מוחל"
 
 msgid "Calibrate"
 msgstr "לְדַרֵג"
@@ -137,7 +136,7 @@ msgid "Delete"
 msgstr "לִמְחוֹק"
 
 msgid "Deselect"
-msgstr ""
+msgstr "בטל את הבחירה"
 
 msgid "Disable Motors"
 msgstr "השבת מנועים"
@@ -371,11 +370,18 @@ msgid "Off"
 msgstr "כבוי"
 
 #, python-format
-msgid "Outdated by %d commits:"
-msgstr "מיושן ב- %d מתחייב:"
+msgid "Outdated by %d"
+msgstr "מיושן על ידי %d"
 
 msgid "PSK for"
 msgstr "PSK עבור"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "חבילה אחת תעודכן"
+msgstr[1] "חבילות יעודכנו"
+msgstr[2] "חבילות יעודכנו"
+msgstr[3] "חבילות יעודכנו"
 
 msgid "Pause"
 msgstr "השהיה"
@@ -404,6 +410,9 @@ msgstr "חיבורי מדפסת"
 msgid "Printing"
 msgstr "מדפיס"
 
+msgid "Probe found applied offset"
+msgstr "Probe נמצא היסט מוחל"
+
 msgid "Profile Name:"
 msgstr "שם פרופיל:"
 
@@ -418,6 +427,9 @@ msgstr "לְהַחלִים Hard"
 
 msgid "Recover Soft"
 msgstr "לְהַחלִים Soft"
+
+msgid "Reference"
+msgstr "התייחסות"
 
 msgid "Restart"
 msgstr "אתחל"
@@ -444,7 +456,7 @@ msgid "Screws Adjust"
 msgstr "סידור ברגים"
 
 msgid "Select"
-msgstr ""
+msgstr "בחר"
 
 msgid "Set Temp"
 msgstr "הגדר טמפ'"
@@ -575,8 +587,22 @@ msgstr "Z+"
 msgid "Z-"
 msgstr "Z-"
 
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "שינוי"
+msgstr[1] "שינויים"
+msgstr[2] "שינויים"
+msgstr[3] "שינויים"
+
 msgid "dBm"
 msgstr "dBm"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "שעה"
+msgstr[1] "שעות"
+msgstr[2] "שעות"
+msgstr[3] "שעות"
 
 msgid "minutes"
 msgstr "דקות"

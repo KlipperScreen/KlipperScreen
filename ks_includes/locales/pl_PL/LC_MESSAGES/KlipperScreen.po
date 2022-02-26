@@ -5,23 +5,19 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 13:36-0300\n"
-"PO-Revision-Date: 2022-02-08 13:41-0300\n"
+"POT-Creation-Date: 2022-02-26 15:48-0300\n"
+"PO-Revision-Date: 2022-02-26 15:30-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: pl\n"
+"Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
 "|| n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.0\n"
-
-#, python-format
-msgid "%d Packages will be updated"
-msgstr "%d Paczek będzie uaktualnionych"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -65,6 +61,9 @@ msgstr "Poziom stołu"
 
 msgid "Bed Mesh"
 msgstr "Poziom siatki stołu"
+
+msgid "Bltouch found applied offset"
+msgstr "Bltouch znalazł zastosowane przesunięcie"
 
 msgid "Calibrate"
 msgstr "Kalibracja"
@@ -369,11 +368,17 @@ msgid "Off"
 msgstr "Wyłącz"
 
 #, python-format
-msgid "Outdated by %d commits:"
-msgstr "Nieaktualne o %d commitów:"
+msgid "Outdated by %d"
+msgstr "Nieaktualne przez %d"
 
 msgid "PSK for"
 msgstr "PSK dla"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "Pakiet zostanie zaktualizowany"
+msgstr[1] "Pakiety zostaną zaktualizowane"
+msgstr[2] "Pakiety zostaną zaktualizowane"
 
 msgid "Pause"
 msgstr "Pauza"
@@ -402,6 +407,9 @@ msgstr "Połączenia Drukarki"
 msgid "Printing"
 msgstr "Drukujemy"
 
+msgid "Probe found applied offset"
+msgstr "Probe znalazł zastosowane przesunięcie"
+
 msgid "Profile Name:"
 msgstr "Nazwa Profilu:"
 
@@ -416,6 +424,9 @@ msgstr "Odzyskaj Twardo"
 
 msgid "Recover Soft"
 msgstr "Odzyskaj Miękko"
+
+msgid "Reference"
+msgstr "Sprawdzenie"
 
 msgid "Restart"
 msgstr "Restartuj"
@@ -559,7 +570,7 @@ msgid "Z Calibrate"
 msgstr "Kalibracja Z"
 
 msgid "Z Move Speed (mm/s)"
-msgstr "Prędkość ruchu Z (mm/s) "
+msgstr "Prędkość ruchu Z (mm/s)"
 
 msgid "Z Offset"
 msgstr "Przesunięcie Z"
@@ -573,8 +584,20 @@ msgstr "Z+"
 msgid "Z-"
 msgstr "Z-"
 
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "zmiana"
+msgstr[1] "zmiany"
+msgstr[2] "zmiany"
+
 msgid "dBm"
 msgstr "dBm"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "godzina"
+msgstr[1] "godziny"
+msgstr[2] "godzin"
 
 msgid "minutes"
 msgstr "minut"
@@ -596,9 +619,3 @@ msgstr "mm/s^2"
 
 #~ msgid "Temp"
 #~ msgstr "Temp"
-
-#~ msgid "hour"
-#~ msgid_plural "hours"
-#~ msgstr[0] "godzina"
-#~ msgstr[1] "godziny"
-#~ msgstr[2] "godzin"

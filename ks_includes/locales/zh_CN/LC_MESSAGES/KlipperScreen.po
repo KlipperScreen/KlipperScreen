@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 13:36-0300\n"
-"PO-Revision-Date: 2022-02-08 13:42-0300\n"
+"POT-Creation-Date: 2022-02-26 15:48-0300\n"
+"PO-Revision-Date: 2022-02-26 15:47-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -17,10 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.0\n"
-
-#, python-format
-msgid "%d Packages will be updated"
-msgstr "%d 个软件包将被更新"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -64,6 +60,9 @@ msgstr "热床调平"
 
 msgid "Bed Mesh"
 msgstr "热床网格"
+
+msgid "Bltouch found applied offset"
+msgstr "Bltouch 发现应用的偏移量"
 
 msgid "Calibrate"
 msgstr "校准"
@@ -368,11 +367,15 @@ msgid "Off"
 msgstr "关闭"
 
 #, python-format
-msgid "Outdated by %d commits:"
-msgstr "已错过 %d 次提交："
+msgid "Outdated by %d"
+msgstr "已过时 %d"
 
 msgid "PSK for"
 msgstr "网络密码PSK"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "包将被更新"
 
 msgid "Pause"
 msgstr "暂停"
@@ -399,7 +402,10 @@ msgid "Printer Connections"
 msgstr "打印机列表"
 
 msgid "Printing"
-msgstr "正在打印..."
+msgstr "印刷"
+
+msgid "Probe found applied offset"
+msgstr "Probe 发现应用的偏移量"
 
 msgid "Profile Name:"
 msgstr "配置文件名称:"
@@ -415,6 +421,9 @@ msgstr "重置(Hard)"
 
 msgid "Recover Soft"
 msgstr "重置(Soft)"
+
+msgid "Reference"
+msgstr "参考"
 
 msgid "Restart"
 msgstr "重启Klipper"
@@ -568,8 +577,16 @@ msgstr "Z+"
 msgid "Z-"
 msgstr "Z-"
 
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "改变"
+
 msgid "dBm"
 msgstr "dBm"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "小时"
 
 msgid "minutes"
 msgstr "分钟"
