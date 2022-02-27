@@ -202,7 +202,7 @@ msgid "Hide"
 msgstr "Elrejt"
 
 msgid "Hide sensors in Temp."
-msgstr "Érzékelők elrejtése Hőm."
+msgstr "Szenzorok elrejtése Hőfok."
 
 msgid "Home"
 msgstr "Kezdőpont"
@@ -330,7 +330,7 @@ msgid "Max Accelation"
 msgstr "Max gyorsulás"
 
 msgid "Max Acceleration to Deceleration"
-msgstr "Max gyorsulás a lassulásig"
+msgstr "Lassulás max gyorsulása"
 
 msgid "Max Velocity"
 msgstr "Max sebesség"
@@ -469,7 +469,7 @@ msgid "Speed -"
 msgstr "Sebesség -"
 
 msgid "Square Corner Velocity"
-msgstr "Négyzet saroksebesség"
+msgstr "Sebesség a sarkokban"
 
 msgid "Start"
 msgstr "Indítás"
@@ -541,7 +541,7 @@ msgid "X-"
 msgstr "X-"
 
 msgid "XY Move Speed (mm/s)"
-msgstr "XY Mozgási sebesség (mm/s)"
+msgstr "XY Mozgási seb. (mm/s)"
 
 msgid "Y+"
 msgstr "Y+"
@@ -553,7 +553,7 @@ msgid "Z Calibrate"
 msgstr "Z Kalibrálás"
 
 msgid "Z Move Speed (mm/s)"
-msgstr "Z Mozgási sebesség (mm/s)"
+msgstr "Z Mozgási seb. (mm/s)"
 
 msgid "Z Offset"
 msgstr "Z Eltolás"
@@ -571,7 +571,7 @@ msgid "dBm"
 msgstr "dBm"
 
 msgid "minutes"
-msgstr "percek"
+msgstr "perc"
 
 msgid "mm"
 msgstr "mm"
