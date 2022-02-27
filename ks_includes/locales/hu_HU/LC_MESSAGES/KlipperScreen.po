@@ -4,14 +4,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-26 15:48-0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
 "Language: hu_HU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -87,8 +87,8 @@ msgid ""
 "Check /tmp/KlipperScreen.log for more information.\n"
 "Please submit an issue on GitHub for help."
 msgstr ""
-"Check /tmp/KlipperScreen.log további információért.\n"
-"Segítségért küldjön be egy hibajegyet a GitHubon."
+"Nézd a /tmp/KlipperScreen.log további információért.\n"
+"Segítségért küldj be egy hibajegyet a GitHubon."
 
 msgid "Close"
 msgstr "Bezárás"
@@ -201,7 +201,7 @@ msgid "Hide"
 msgstr "Elrejt"
 
 msgid "Hide sensors in Temp."
-msgstr "Érzékelők elrejtése Hőm."
+msgstr "Szenzorok elrejtése Hőfok."
 
 msgid "Home"
 msgstr "Kezdőpont"
@@ -329,7 +329,7 @@ msgid "Max Accelation"
 msgstr "Max gyorsulás"
 
 msgid "Max Acceleration to Deceleration"
-msgstr "Max gyorsulás a lassulásig"
+msgstr "Lassulás max gyorsulása"
 
 msgid "Max Velocity"
 msgstr "Max sebesség"
@@ -401,13 +401,13 @@ msgid "Printing"
 msgstr "Nyomtatás"
 
 msgid "Probe found applied offset"
-msgstr "A Probe alkalmazott eltolást talált"
+msgstr "A szonda alkalmazott eltolást talált"
 
 msgid "Profile Name:"
 msgstr "Profil név:"
 
 msgid "Quad Gantry Level"
-msgstr "Quad Gantry Szint"
+msgstr "Négy állású szint"
 
 msgid "Raise Nozzle"
 msgstr "Fúvóka fel"
@@ -479,7 +479,7 @@ msgid "Speed -"
 msgstr "Sebesség -"
 
 msgid "Square Corner Velocity"
-msgstr "Négyzet saroksebesség"
+msgstr "Sebesség a sarkokban"
 
 msgid "Start"
 msgstr "Indítás"
@@ -551,7 +551,7 @@ msgid "X-"
 msgstr "X-"
 
 msgid "XY Move Speed (mm/s)"
-msgstr "XY Mozgási sebesség (mm/s)"
+msgstr "XY Mozgási seb. (mm/s)"
 
 msgid "Y+"
 msgstr "Y+"
@@ -563,7 +563,7 @@ msgid "Z Calibrate"
 msgstr "Z Kalibrálás"
 
 msgid "Z Move Speed (mm/s)"
-msgstr "Z Mozgási sebesség (mm/s)"
+msgstr "Z Mozgási seb. (mm/s)"
 
 msgid "Z Offset"
 msgstr "Z Eltolás"
@@ -591,7 +591,7 @@ msgstr[0] "óra"
 msgstr[1] "óra"
 
 msgid "minutes"
-msgstr "percek"
+msgstr "perc"
 
 msgid "mm"
 msgstr "mm"
