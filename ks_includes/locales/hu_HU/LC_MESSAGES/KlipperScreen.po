@@ -88,7 +88,7 @@ msgid ""
 "Check /tmp/KlipperScreen.log for more information.\n"
 "Please submit an issue on GitHub for help."
 msgstr ""
-"Check /tmp/KlipperScreen.log további információért.\n"
+"Nézze a /tmp/KlipperScreen.log további információért.\n"
 "Segítségért küldjön be egy hibajegyet a GitHubon."
 
 msgid "Close"
