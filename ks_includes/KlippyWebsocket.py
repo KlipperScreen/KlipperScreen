@@ -41,6 +41,7 @@ class KlippyWebsocket(threading.Thread):
         self._callback = callback
         self.klippy = MoonrakerApi(self)
         self.closing = False
+        self.ws = None
 
         self._url = "%s:%s" % (host, port)
 
@@ -87,6 +88,8 @@ class KlippyWebsocket(threading.Thread):
 
     def close(self):
         self.closing = True
+        if self.ws is not None:
+            self.ws.close()
 
     def is_connected(self):
         return self.connected
@@ -155,7 +158,8 @@ class KlippyWebsocket(threading.Thread):
 
         if self.closing is True:
             logging.debug("Closing websocket")
-            self.ws.close()
+            self.ws.keep_running = False
+            self.close()
             self.closing = False
             return
 
