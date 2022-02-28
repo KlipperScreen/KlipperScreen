@@ -25,7 +25,7 @@ class JobStatusPanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
         self.timeleft_type = "file"
-        self.timeout = None
+        self.state_timeout = None
         self.close_timeouts = []
 
         self.create_buttons()
@@ -228,8 +228,8 @@ class JobStatusPanel(ScreenPanel):
         _ = self.lang.gettext
         ps = self._printer.get_stat("print_stats")
         self.set_state(ps['state'])
-        if self.timeout is None:
-            GLib.timeout_add_seconds(1, self.state_check)
+        if self.state_timeout is None:
+            self.state_timeout = GLib.timeout_add_seconds(1, self.state_check)
 
     def add_labels(self):
         for child in self.labels['i1_box'].get_children():
@@ -304,6 +304,7 @@ class JobStatusPanel(ScreenPanel):
             return
 
         logging.debug("Canceling print")
+        self.set_state("cancelling")
         self.disable_button("pause", "resume", "cancel")
         self._screen._ws.klippy.print_cancel(self._response_callback)
 
@@ -339,8 +340,8 @@ class JobStatusPanel(ScreenPanel):
 
     def new_print(self):
         self.remove_close_timeout()
-        if self.timeout is None:
-            GLib.timeout_add_seconds(1, self.state_check)
+        if self.state_timeout is None:
+            self.state_timeout = GLib.timeout_add_seconds(1, self.state_check)
         self._screen.wake_screen()
         self.state_check()
 
@@ -487,17 +488,17 @@ class JobStatusPanel(ScreenPanel):
 
         if self.state != state:
             logging.debug("Changing job_status state from '%s' to '%s'" % (self.state, state))
-        self.state = state
         if state == "paused":
             self.update_text("status", _("Paused"))
         elif state == "printing":
             self.update_text("status", _("Printing"))
         elif state == "cancelling":
             self.update_text("status", _("Cancelling"))
-        elif state == "cancelled":
+        elif state == "cancelled" or (state == "standby" and self.state == "cancelling"):
             self.update_text("status", _("Cancelled"))
         elif state == "complete":
             self.update_text("status", _("Complete"))
+        self.state = state
         self.show_buttons_for_state()
 
 
