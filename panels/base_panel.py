@@ -18,7 +18,7 @@ class BasePanel(ScreenPanel):
         self.time_min = -1
         self.time_format = self._config.get_main_config_option("24htime")
         self.title_spacing = self._gtk.font_size * 2
-
+        self.time_update = None
         self.buttons_showing = {
             'back': False if back else True,
             'macros_shortcut': False,
@@ -88,13 +88,8 @@ class BasePanel(ScreenPanel):
             logging.debug("Error parsing jinja for title: %s" % title)
 
         self.titlelbl = Gtk.Label()
-        if self._screen.vertical_mode:
-            self.titlelbl.set_size_request(self._screen.width, self.title_spacing)
-        else:
-            self.titlelbl.set_size_request(self._screen.width - action_bar_width, self.title_spacing)
         self.titlelbl.set_hexpand(True)
         self.titlelbl.set_halign(Gtk.Align.CENTER)
-        self.titlelbl.set_valign(Gtk.Align.CENTER)
         self.set_title(title)
 
         self.hmargin = 5
@@ -114,30 +109,32 @@ class BasePanel(ScreenPanel):
 
         self.control['time_box'] = Gtk.Box()
         self.control['time_box'].set_halign(Gtk.Align.END)
-        self.control['time_box'].set_size_request(0, self.title_spacing)
         self.control['time'] = Gtk.Label("00:00 AM")
-        self.control['time'].set_size_request(0, self.title_spacing)
-        self.control['time'].set_halign(Gtk.Align.END)
-        self.control['time'].set_valign(Gtk.Align.CENTER)
-        self.control['time_box'].pack_end(self.control['time'], True, 0, 0)
+        self.control['time_box'].pack_end(self.control['time'], True, True, 0)
 
         self.control['temp_box'] = Gtk.Box()
-        self.control['temp_box'].set_vexpand(True)
-        self.control['temp_box'].set_size_request(0, self.title_spacing)
+
+        self.titlebar = Gtk.Grid()
+        self.titlelbl.set_vexpand(True)
+        self.titlebar.set_valign(Gtk.Align.CENTER)
+        if self._screen.vertical_mode:
+            self.titlebar.set_size_request(self._screen.width - self.hmargin, self.title_spacing)
+        else:
+            self.titlebar.set_size_request(self._screen.width - action_bar_width - self.hmargin, self.title_spacing)
+        self.titlebar.attach(self.control['temp_box'], 0, 0, 1, 1)
+        self.titlebar.attach(self.titlelbl, 1, 0, 1, 1)
+        self.titlebar.attach(self.control['time_box'], 2, 0, 1, 1)
 
         if self._screen.vertical_mode:
-            self.layout.put(self.control['temp_box'], 0, 0)
-            self.layout.put(self.titlelbl, 0, 0)
-            self.layout.put(self.control['time_box'], 0, 0)
+            self.layout.put(self.titlebar, self.hmargin, 0)
             self.layout.put(self.content, self.hmargin, self.title_spacing)
         else:
-            self.layout.put(self.control['temp_box'], action_bar_width, 0)
-            self.layout.put(self.titlelbl, action_bar_width, 0)
-            self.layout.put(self.control['time_box'], action_bar_width, 0)
+            self.layout.put(self.titlebar, action_bar_width, 0)
             self.layout.put(self.content, action_bar_width + self.hmargin, self.title_spacing)
 
+
     def initialize(self, panel_name):
-        # Create gtk items here
+        self.update_time()
         return
 
     def show_heaters(self, show=True):
@@ -147,34 +144,47 @@ class BasePanel(ScreenPanel):
         if show is False:
             return
 
+        h = 0
         if self._printer.get_tools():
             for i, extruder in enumerate(self._printer.get_tools()):
                 self.labels[extruder + '_box'] = Gtk.Box(spacing=0)
-                self.labels[extruder] = Gtk.Label(label="")
+                self.labels[extruder] = Gtk.Label(label="200º")
                 if i <= 4:
                     ext_img = self._gtk.Image("extruder-%s.svg" % i, None, .4, .4)
-                    self.labels[extruder + '_box'].pack_start(ext_img, True, 3, 3)
-                self.labels[extruder + '_box'].pack_start(self.labels[extruder], True, 3, 3)
+                    self.labels[extruder + '_box'].pack_start(ext_img, True, True, 3)
+                self.labels[extruder + '_box'].pack_start(self.labels[extruder], True, True, 0)
             self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-            self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, 5, 5)
+            self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, True, 3)
+            h += 1
 
         if self._printer.has_heated_bed():
             heater_bed = self._gtk.Image("bed.svg", None, .4, .4)
-            self.labels['heater_bed'] = Gtk.Label(label="20 C")
+            self.labels['heater_bed'] = Gtk.Label(label="100º")
             heater_bed_box = Gtk.Box(spacing=0)
-            heater_bed_box.pack_start(heater_bed, True, 5, 5)
-            heater_bed_box.pack_start(self.labels['heater_bed'], True, 3, 3)
-            self.control['temp_box'].pack_end(heater_bed_box, True, 3, 3)
+            heater_bed_box.pack_start(heater_bed, True, True, 5)
+            heater_bed_box.pack_start(self.labels['heater_bed'], True, True, 0)
+            self.control['temp_box'].pack_end(heater_bed_box, True, True, 3)
+            h += 1
 
+        heater_gen_img = self._gtk.Image("heat-up.svg", None, .4, .4)
+        for heater in self._printer.get_heaters():
+            if h > 3 and self._screen.width <= 480:
+                break
+            elif h > 4 and self._screen.width <= 800:
+                break
+            elif h > 5:
+                break
+            elif heater.startswith("heater_generic"):
+                self.labels[heater + '_box'] = Gtk.Box(spacing=0)
+                self.labels[heater] = Gtk.Label(label="100º")
+                self.labels[heater + '_box'].pack_start(heater_gen_img, True, True, 3)
+                self.labels[heater + '_box'].pack_start(self.labels[heater], True, True, 0)
+                self.control['temp_box'].pack_start(self.labels["%s_box" % heater], True, True, 3)
+                h += 1
 
     def activate(self):
-        size = self.control['time_box'].get_allocation().width
-        self.layout.remove(self.control['time_box'])
-        self.control['time_box'].set_size_request(size, self.title_spacing)
-        self.layout.put(self.control['time_box'], self._screen.width - size - self.hmargin, 0)
-
-        GLib.timeout_add_seconds(1, self.update_time)
-        self.update_time()
+        if self.time_update is None:
+            self.time_update = GLib.timeout_add_seconds(1, self.update_time)
 
     def add_content(self, panel):
         self.current_panel = panel
@@ -201,17 +211,17 @@ class BasePanel(ScreenPanel):
         if action != "notify_status_update" or self._printer is None:
             return
 
-        if self._printer.has_heated_bed():
-            self.labels["heater_bed"].set_label(
-                "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature")))
         for x in self._printer.get_tools():
-            self.labels[x].set_label("%02d°" % round(self._printer.get_dev_stat(x, "temperature")))
+            self.labels[x].set_label("%d°" % round(self._printer.get_dev_stat(x, "temperature")))
+        for heater in self._printer.get_heaters():
+            if heater == "heater_bed" or heater.startswith("heater_generic"):
+                self.labels[heater].set_label("%d°" % round(self._printer.get_dev_stat(heater, "temperature")))
 
         if "toolhead" in data and "extruder" in data["toolhead"]:
             if data["toolhead"]["extruder"] != self.current_extruder:
                 self.control['temp_box'].remove(self.labels["%s_box" % self.current_extruder])
                 self.current_extruder = data["toolhead"]["extruder"]
-                self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, 3, 3)
+                self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, True, 3)
                 self.control['temp_box'].show_all()
 
 
@@ -339,7 +349,7 @@ class BasePanel(ScreenPanel):
         confopt = self._config.get_main_config_option("24htime")
         if now.minute != self.time_min or self.time_format != confopt:
             if confopt == "True":
-                self.control['time'].set_text(now.strftime("     %H:%M"))
+                self.control['time'].set_text(now.strftime("%H:%M"))
             else:
                 self.control['time'].set_text(now.strftime("%I:%M %p"))
         return True
