@@ -242,18 +242,6 @@ class KlipperScreen(Gtk.Window):
         if powerdevs is not False:
             self.printer.configure_power_devices(powerdevs['result'])
             self.panels['splash_screen'].show_restart_buttons()
-            # Printer auto power on during initial connect
-            # it should be manual on reinit because the user could be turning it off on purpose
-            #devices = self.printer.get_power_devices()
-            #for device in devices:
-                #if name == device:
-                    #logging.info("Found %s in power devices", name)
-                    #if self.printer.get_power_device_status(device) == "off":
-                        #logging.info("Printer is OFF, sending Power ON")
-                        #self._ws.klippy.power_device_on(device)
-                    #break
-                #else:
-                    #logging.info("%s not found in power devices", name)
 
         self.files = KlippyFiles(self)
         self._ws.initial_connect()
