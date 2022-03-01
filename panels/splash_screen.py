@@ -70,7 +70,7 @@ class SplashScreenPanel(ScreenPanel):
         if "firmware_restart" not in self.labels:
             self.labels['menu'] = self._gtk.ButtonImage("settings", _("Menu"), "color4")
             self.labels['menu'].connect("clicked", self._screen._go_to_submenu, "")
-            self.labels['power'] = self._gtk.ButtonImage("shutdown", _("Power On Printer"), "color3")
+            self.labels['power'] = self._gtk.ButtonImage("shutdown", _("Power"), "color3")
             self.labels['restart'] = self._gtk.ButtonImage("refresh", _("Restart"), "color1")
             self.labels['restart'].connect("clicked", self.restart)
             self.labels['firmware_restart'] = self._gtk.ButtonImage("refresh", _("Firmware Restart"), "color2")
@@ -78,13 +78,16 @@ class SplashScreenPanel(ScreenPanel):
 
         self.clear_action_bar()
 
-        devices = [i for i in self._printer.get_power_devices() if i.lower().startswith('printer')] if (
-            self._printer is not None) else []
-        logging.debug("Power devices: %s" % devices)
-        if len(devices) > 0:
-            logging.debug("Adding power button")
-            self.labels['power'].connect("clicked", self.power_on, devices)
-            self.labels['actions'].add(self.labels['power'])
+        if self._printer is not None:
+            devices = [i for i in self._printer.get_power_devices()]
+            logging.debug("Power devices: %s" % devices)
+            if len(devices) > 0:
+                logging.debug("Adding power button")
+                self.labels['power'].connect("clicked", self.menu_item_clicked, "power", {
+                    "name": "Power",
+                    "panel": "power"
+                })
+                self.labels['actions'].add(self.labels['power'])
 
         self.labels['actions'].add(self.labels['restart'])
         self.labels['actions'].add(self.labels['firmware_restart'])
@@ -93,10 +96,6 @@ class SplashScreenPanel(ScreenPanel):
 
     def firmware_restart(self, widget):
         self._screen._ws.klippy.restart_firmware()
-
-    def power_on(self, widget, devices):
-        for device in devices:
-            self._screen._ws.klippy.power_device_on(device)
 
     def restart(self, widget):
         self._screen._ws.klippy.restart()
