@@ -38,24 +38,6 @@ class SystemPanel(ScreenPanel):
                          _("Are you sure you wish to shutdown the system?"), "machine.shutdown")
         shutdown.set_vexpand(False)
 
-        info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        info.set_vexpand(True)
-        info.set_valign(Gtk.Align.CENTER)
-
-        self.labels['loadavg'] = Gtk.Label("temp")
-
-        self.labels['klipper_version'] = Gtk.Label(
-            _("Klipper Version") +
-            (": %s" % self._screen.printer.get_klipper_version()))
-        self.labels['klipper_version'].set_margin_top(15)
-
-        self.labels['ks_version'] = Gtk.Label(_("KlipperScreen Version") + (": %s" % self._screen.version))
-        self.labels['ks_version'].set_margin_top(15)
-
-        info.add(self.labels['loadavg'])
-        info.add(self.labels['klipper_version'])
-        info.add(self.labels['ks_version'])
-
         scroll = Gtk.ScrolledWindow()
         scroll.set_property("overlay-scrolling", False)
         scroll.set_vexpand(True)

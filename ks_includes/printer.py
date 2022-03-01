@@ -20,6 +20,10 @@ class Printer:
         "shutdown": None
     }
     tools = []
+    toolcount = 0
+    extrudercount = 0
+    tempdevcount = 0
+    fancount = 0
 
     def __init__(self, printer_info, data, state_execute_cb):
         self.state = "disconnected"
@@ -176,9 +180,6 @@ class Printer:
             }
         logging.debug("Power devices: %s" % self.power_devices)
 
-    def config_section_exists(self, section):
-        return section in list(self.config)
-
     def get_config_section_list(self, search=""):
         if not hasattr(self, "config"):
             return []
@@ -232,7 +233,7 @@ class Printer:
                 "fans": {
                     "count": self.fancount
                 },
-                "bltouch": self.section_exists("bltouch"),
+                "bltouch": self.config_section_exists("bltouch"),
                 "gcode_macros": {
                     "count": len(self.get_gcode_macros())
                 },
@@ -241,7 +242,7 @@ class Printer:
                 "power_devices": {
                     "count": len(self.get_power_devices())
                 },
-                "probe": self.section_exists("probe")
+                "probe": self.config_section_exists("probe")
             }
         }
 
@@ -340,7 +341,7 @@ class Printer:
                 self.tempstore[dev]["temperatures"] = result[dev]["temperatures"]
         logging.info("Temp store: %s" % list(self.tempstore))
 
-    def section_exists(self, section):
+    def config_section_exists(self, section):
         if section in self.get_config_section_list():
             return True
         return False
