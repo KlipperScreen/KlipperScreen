@@ -4,7 +4,7 @@ import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib
+from gi.repository import Gtk, Gdk, GLib, Pango
 from jinja2 import Environment, Template
 
 from ks_includes.KlippyGtk import KlippyGtk
@@ -19,6 +19,7 @@ class BasePanel(ScreenPanel):
         self.time_format = self._config.get_main_config_option("24htime")
         self.title_spacing = self._gtk.font_size * 2
         self.time_update = None
+        self.titlebar_name_type = None
         self.buttons_showing = {
             'back': False if back else True,
             'macros_shortcut': False,
@@ -89,7 +90,10 @@ class BasePanel(ScreenPanel):
 
         self.titlelbl = Gtk.Label()
         self.titlelbl.set_hexpand(True)
+        self.titlelbl.set_vexpand(True)
         self.titlelbl.set_halign(Gtk.Align.CENTER)
+        self.titlelbl.set_ellipsize(True)
+        self.titlelbl.set_ellipsize(Pango.EllipsizeMode.END)
         self.set_title(title)
 
         self.hmargin = 5
@@ -110,23 +114,23 @@ class BasePanel(ScreenPanel):
         self.control['time_box'] = Gtk.Box()
         self.control['time_box'].set_halign(Gtk.Align.END)
         self.control['time'] = Gtk.Label("00:00 AM")
-        self.control['time_box'].pack_end(self.control['time'], True, True, 0)
+        self.control['time_box'].pack_end(self.control['time'], True, True, self.hmargin)
 
         self.control['temp_box'] = Gtk.Box()
 
         self.titlebar = Gtk.Grid()
-        self.titlelbl.set_vexpand(True)
         self.titlebar.set_valign(Gtk.Align.CENTER)
+        self.titlebar.set_property("column-spacing", 5)
         if self._screen.vertical_mode:
-            self.titlebar.set_size_request(self._screen.width - self.hmargin, self.title_spacing)
+            self.titlebar.set_size_request(self._screen.width, self.title_spacing)
         else:
-            self.titlebar.set_size_request(self._screen.width - action_bar_width - self.hmargin, self.title_spacing)
+            self.titlebar.set_size_request(self._screen.width - action_bar_width, self.title_spacing)
         self.titlebar.attach(self.control['temp_box'], 0, 0, 1, 1)
         self.titlebar.attach(self.titlelbl, 1, 0, 1, 1)
         self.titlebar.attach(self.control['time_box'], 2, 0, 1, 1)
 
         if self._screen.vertical_mode:
-            self.layout.put(self.titlebar, self.hmargin, 0)
+            self.layout.put(self.titlebar, 0, 0)
             self.layout.put(self.content, self.hmargin, self.title_spacing)
         else:
             self.layout.put(self.titlebar, action_bar_width, 0)
@@ -144,43 +148,77 @@ class BasePanel(ScreenPanel):
         if show is False:
             return
 
-        h = 0
+        for device in self._printer.get_temp_store_devices():
+            self.labels[device + '_box'] = Gtk.Box(spacing=0)
+            self.labels[device] = Gtk.Label(label="100º")
+            self.labels[device].set_ellipsize(True)
+            self.labels[device].set_ellipsize(Pango.EllipsizeMode.START)
+            if device.startswith("extruder"):
+                if device == "extruder":
+                    ext_img = self._gtk.Image("extruder-0.svg", None, .5, .5)
+                else:
+                    ext_img = self._gtk.Image("extruder-%s.svg" % device[8:], None, .5, .5)
+                self.labels[device + '_box'].pack_start(ext_img, True, True, 3)
+            elif device.startswith("heater_bed"):
+                bed_img = self._gtk.Image("bed.svg", None, .5, .5)
+                self.labels[device + '_box'].pack_start(bed_img, True, True, 3)
+            elif device.startswith("temperature_fan"):
+                fan_img = self._gtk.Image("fan.svg", None, .5, .5)
+                self.labels[device + '_box'].pack_start(fan_img, True, True, 3)
+            else:
+                temp_img = self._gtk.Image("heat-up.svg", None, .5, .5)
+                self.labels[device + '_box'].pack_start(temp_img, True, True, 3)
+            self.labels[device + '_box'].pack_start(self.labels[device], True, True, 0)
+
+        if self._screen.width <= 480:
+            nlimit = 3
+        elif self._screen.width <= 800:
+            nlimit = 4
+        else:
+            nlimit = 5
+
+        n = 0
         if self._printer.get_tools():
-            for i, extruder in enumerate(self._printer.get_tools()):
-                self.labels[extruder + '_box'] = Gtk.Box(spacing=0)
-                self.labels[extruder] = Gtk.Label(label="200º")
-                if i <= 4:
-                    ext_img = self._gtk.Image("extruder-%s.svg" % i, None, .4, .4)
-                    self.labels[extruder + '_box'].pack_start(ext_img, True, True, 3)
-                self.labels[extruder + '_box'].pack_start(self.labels[extruder], True, True, 0)
             self.current_extruder = self._printer.get_stat("toolhead", "extruder")
             self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, True, 3)
-            h += 1
+            n += 1
 
         if self._printer.has_heated_bed():
-            heater_bed = self._gtk.Image("bed.svg", None, .4, .4)
-            self.labels['heater_bed'] = Gtk.Label(label="100º")
-            heater_bed_box = Gtk.Box(spacing=0)
-            heater_bed_box.pack_start(heater_bed, True, True, 5)
-            heater_bed_box.pack_start(self.labels['heater_bed'], True, True, 0)
-            self.control['temp_box'].pack_end(heater_bed_box, True, True, 3)
-            h += 1
+            self.control['temp_box'].pack_start(self.labels['heater_bed_box'], True, True, 3)
+            n += 1
 
-        heater_gen_img = self._gtk.Image("heat-up.svg", None, .4, .4)
-        for heater in self._printer.get_heaters():
-            if h > 3 and self._screen.width <= 480:
+        # Options in the config have priority
+        printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
+        logging.info("printer_cfg: %s", printer_cfg)
+        if printer_cfg is not None:
+            titlebar_items = printer_cfg.get("titlebar_items", "")
+            titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
+            logging.info("Titlebar items: %s", titlebar_items)
+            self.titlebar_name_type = printer_cfg.get("titlebar_name_type", None)
+            logging.info("Titlebar name type: %s", self.titlebar_name_type)
+        else:
+            titlebar_items = None
+        for device in self._printer.get_temp_store_devices():
+            # Users can fill the bar if they want
+            if n >= nlimit + 1:
                 break
-            elif h > 4 and self._screen.width <= 800:
+            if not (device.startswith("extruder") or device.startswith("heater_bed")):
+                name = device.split(" ")[1:][0]
+            else:
+                name = device
+            for item in titlebar_items:
+                if name == item:
+                    self.control['temp_box'].pack_start(self.labels["%s_box" % device], True, True, 3)
+                    n += 1
+                    break
+
+        # If there is enough space fill with heater_generic
+        for device in self._printer.get_temp_store_devices():
+            if n >= nlimit:
                 break
-            elif h > 5:
-                break
-            elif heater.startswith("heater_generic"):
-                self.labels[heater + '_box'] = Gtk.Box(spacing=0)
-                self.labels[heater] = Gtk.Label(label="100º")
-                self.labels[heater + '_box'].pack_start(heater_gen_img, True, True, 3)
-                self.labels[heater + '_box'].pack_start(self.labels[heater], True, True, 0)
-                self.control['temp_box'].pack_start(self.labels["%s_box" % heater], True, True, 3)
-                h += 1
+            if device.startswith("heater_generic"):
+                self.control['temp_box'].pack_start(self.labels["%s_box" % device], True, True, 3)
+                n += 1
 
     def activate(self):
         if self.time_update is None:
@@ -211,17 +249,21 @@ class BasePanel(ScreenPanel):
         if action != "notify_status_update" or self._printer is None:
             return
 
-        for x in self._printer.get_tools():
-            self.labels[x].set_label("%d°" % round(self._printer.get_dev_stat(x, "temperature")))
-        for heater in self._printer.get_heaters():
-            if heater == "heater_bed" or heater.startswith("heater_generic"):
-                self.labels[heater].set_label("%d°" % round(self._printer.get_dev_stat(heater, "temperature")))
+        for device in self._printer.get_temp_store_devices():
+            name = ""
+            if not (device.startswith("extruder") or device.startswith("heater_bed")):
+                if self.titlebar_name_type == "full":
+                    name = device.split(" ")[1:][0].capitalize().replace("_", " ") + ": "
+                elif self.titlebar_name_type == "short":
+                    name = device.split(" ")[1:][0][:1].upper() + ": "
+            self.labels[device].set_label("%s%d°" % (name, round(self._printer.get_dev_stat(device, "temperature"))))
 
         if "toolhead" in data and "extruder" in data["toolhead"]:
             if data["toolhead"]["extruder"] != self.current_extruder:
                 self.control['temp_box'].remove(self.labels["%s_box" % self.current_extruder])
                 self.current_extruder = data["toolhead"]["extruder"]
                 self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, True, 3)
+                self.control['temp_box'].reorder_child(self.labels["%s_box" % self.current_extruder], 0)
                 self.control['temp_box'].show_all()
 
 
@@ -335,7 +377,7 @@ class BasePanel(ScreenPanel):
         except Exception:
             logging.debug("Error parsing jinja for title: %s" % title)
 
-        self.titlelbl.set_label("%s | %s" % (self._screen.connected_printer, title))
+        self.titlelbl.set_label("%s | %s" % (self._screen.connecting_to_printer, title))
 
     def show_back_buttons(self):
         self.control_grid.attach(self.control['back'], 0, 0, 1, 1)

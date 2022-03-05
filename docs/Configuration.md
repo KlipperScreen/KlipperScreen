@@ -61,6 +61,15 @@ move_speed_z: 300
 # Define one or more moonraker power devices that turn on this printer (CSV list)
 # Default is the printer name
 power_devices: example1, example2
+
+# Define what items should be shown in titlebar besides the extruder and bed
+# the name must be the same as defined in the klipper config
+# valid options are temperature_sensors or temperature_fans, or heater_generic
+titlebar_items: chamber, MCU, Pi
+
+# The style of the user defined items in the titlebar
+# Can be 'full' indicating that the full name is shown, 'short' for the first letter, or None (default) for no name
+titlebar_name_type: None
 ```
 
 ## Z probe calibrate Option
