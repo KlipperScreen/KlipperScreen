@@ -77,39 +77,48 @@ class SplashScreenPanel(ScreenPanel):
             self.labels['power'] = self._gtk.ButtonImage("shutdown", _("Power On Printer"), "color3")
 
         self.clear_action_bar()
-
-        if self._printer is not None:
-            logging.debug("Connected to %s", self._screen.connected_printer)
-            connecting = self._screen.connecting_to_printer
-            if connecting is not None:
-                printer = connecting
-            else:
-                printer = None
-            logging.debug("Connecting to %s", connecting)
-            devices = self._printer.get_power_devices()
-            logging.debug("Power devices: %s", devices)
-            for device in devices:
-                if printer == device:
-                    logging.info("Found %s in power devices, Adding power button", printer)
-                    self.labels['actions'].add(self.labels['power'])
-                    self.labels['power'].connect("clicked", self.power_on, device)
-                    if self._screen.printer.get_power_device_status(device) == "off":
-                        logging.info("Printer is OFF")
-                    else:
-                        logging.info("Printer is ON")
-                    break
-                else:
-                    logging.info("%s not found in power devices", printer)
+        self.search_power_devices()
 
         self.labels['actions'].add(self.labels['restart'])
         self.labels['actions'].add(self.labels['firmware_restart'])
         self.labels['actions'].add(self.labels['menu'])
         self.labels['actions'].show_all()
 
-    def power_on(self, widget, device):
+    def search_power_devices(self):
+        if self._printer is not None:
+            power_devices = found_devices = []
+            printer = self._screen.connecting_to_printer
+            logging.info("Connecting to %s", printer)
+            printer_cfg = self._config.get_printer_config(printer)
+            if printer_cfg is not None:
+                power_devices = printer_cfg.get("power_devices", "")
+                power_devices = [str(i.strip()) for i in power_devices.split(',')]
+                logging.info("%s associated power devices: %s", printer, power_devices)
+            devices = self._printer.get_power_devices()
+            logging.debug("Power devices: %s", devices)
+            if devices is not None:
+                for device in devices:
+                    if device == printer:
+                        found_devices.append(printer)
+                    for power_device in power_devices:
+                        if device == power_device:
+                            found_devices.append(power_device)
+            if found_devices:
+                logging.info("Found %s, Adding power button", found_devices)
+                self.labels['actions'].add(self.labels['power'])
+                self.labels['power'].connect("clicked", self.power_on, found_devices)
+            else:
+                logging.info("%s power devices not found", printer)
+
+    def power_on(self, widget, devices):
         _ = self.lang.gettext
-        self._screen.show_popup_message(_("Sending Power ON signal"), level=1)
-        self._screen._ws.klippy.power_device_on(device)
+        self._screen.show_popup_message(_("Sending Power ON signal to: %s") % devices, level=1)
+        for device in devices:
+            if self._screen.printer.get_power_device_status(device) == "off":
+                logging.info("%s is OFF, Sending Power ON signal", device)
+                self._screen._ws.klippy.power_device_on(device)
+            elif self._screen.printer.get_power_device_status(device) == "on":
+                logging.info("%s is ON", device)
 
     def firmware_restart(self, widget):
         self._screen._ws.klippy.restart_firmware()

@@ -57,6 +57,10 @@ z_babystep_values: 0.01, 0.05
 # the values configured in the UI will not be used.
 move_speed_xy: 500
 move_speed_z: 300
+
+# Define one or more moonraker power devices that turn on this printer (CSV list)
+# Default is the printer name
+power_devices: example1, example2
 ```
 
 ## Z probe calibrate Option
