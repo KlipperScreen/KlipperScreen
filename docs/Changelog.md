@@ -12,7 +12,7 @@ The "Power" panel will be in the Menu if there are power devices found
 
 Remove preheat panel from your Klipperscreen.conf or replace the occurrences of preheat with temperature
 
-#### [2021 05 20](https://github.com/jordanruthe/KlipperScreen/commit/8a8c6c064cc6d097b1b34a5c42b4001367e545a6)
+#### [2021 05 20](https://github.com/jordanruthe/KlipperScreen/commit/eb801486928bf02709033dcbc5f0a45ca43b23c1)
 * Default configuration is not merged if a user configuration is set for a specific option
 
 For instance, if `menu __main` is user defined, the main menu will not have any defaults.
