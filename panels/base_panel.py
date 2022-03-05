@@ -194,24 +194,22 @@ class BasePanel(ScreenPanel):
             titlebar_items = printer_cfg.get("titlebar_items", "")
             if titlebar_items is not None:
                 titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
-            logging.info("Titlebar items: %s", titlebar_items)
-            self.titlebar_name_type = printer_cfg.get("titlebar_name_type", None)
-            logging.info("Titlebar name type: %s", self.titlebar_name_type)
-        else:
-            titlebar_items = None
-        for device in self._printer.get_temp_store_devices():
-            # Users can fill the bar if they want
-            if n >= nlimit + 1:
-                break
-            if not (device.startswith("extruder") or device.startswith("heater_bed")):
-                name = device.split(" ")[1:][0]
-            else:
-                name = device
-            for item in titlebar_items:
-                if name == item:
-                    self.control['temp_box'].pack_start(self.labels["%s_box" % device], True, True, 3)
-                    n += 1
-                    break
+                logging.info("Titlebar items: %s", titlebar_items)
+                self.titlebar_name_type = printer_cfg.get("titlebar_name_type", None)
+                logging.info("Titlebar name type: %s", self.titlebar_name_type)
+                for device in self._printer.get_temp_store_devices():
+                    # Users can fill the bar if they want
+                    if n >= nlimit + 1:
+                        break
+                    if not (device.startswith("extruder") or device.startswith("heater_bed")):
+                        name = device.split(" ")[1:][0]
+                    else:
+                        name = device
+                    for item in titlebar_items:
+                        if name == item:
+                            self.control['temp_box'].pack_start(self.labels["%s_box" % device], True, True, 3)
+                            n += 1
+                            break
 
         # If there is enough space fill with heater_generic
         for device in self._printer.get_temp_store_devices():
