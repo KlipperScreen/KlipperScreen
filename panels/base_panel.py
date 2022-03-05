@@ -192,7 +192,8 @@ class BasePanel(ScreenPanel):
         logging.info("printer_cfg: %s", printer_cfg)
         if printer_cfg is not None:
             titlebar_items = printer_cfg.get("titlebar_items", "")
-            titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
+            if titlebar_items is not None:
+                titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
             logging.info("Titlebar items: %s", titlebar_items)
             self.titlebar_name_type = printer_cfg.get("titlebar_name_type", None)
             logging.info("Titlebar name type: %s", self.titlebar_name_type)
