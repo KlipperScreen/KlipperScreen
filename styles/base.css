@@ -457,6 +457,14 @@ popover button {
     background-color: #222;
 }
 
+.screensaver {
+    background-color: black;
+}
+
+.screensaver button:active {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 /* Hardcoded values until creation of dynamic CSS updates */
 .graph_label_hidden {padding-left: .9em;} /* .4em on top of normal button padding */
 .graph_label_extruder {border-left-width: .4em; border-left-style: solid;}
