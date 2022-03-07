@@ -151,6 +151,7 @@ class KlipperScreenConfig:
                                "value": "False"}},
             {"only_heaters": {"section": "main", "name": _("Hide sensors in Temp."), "type": "binary",
                               "value": "False", "callback": screen.restart_warning}},
+            {"use_dpms": {"section": "main", "name": _("Screen DPMS"), "type": "binary", "value": "True"}},
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
 
