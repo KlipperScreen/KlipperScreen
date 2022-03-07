@@ -74,6 +74,7 @@ class KlipperScreen(Gtk.Window):
     number_tools = 1
     panels = {}
     popup_message = None
+    screensaver = None
     printer = None
     printer_select_callbacks = []
     printer_select_prepanel = None
@@ -586,65 +587,92 @@ class KlipperScreen(Gtk.Window):
                 self.subscriptions.pop(i)
                 return
 
+    def show_screensaver(self):
+        logging.debug("Showing Screensaver")
+        if self.screensaver is not None:
+            self.close_screensaver()
+
+        close = Gtk.Button()
+        close.connect("clicked", self.close_screensaver)
+
+        box = Gtk.Box()
+        box.set_size_request(self.width, self.height)
+        box.pack_start(close, True, True, 0)
+        box.set_halign(Gtk.Align.CENTER)
+        box.get_style_context().add_class("screensaver")
+
+        cur_panel = self.panels[self._cur_panels[-1]]
+        self.base_panel.get().put(box, 0, 0)
+        self.show_all()
+        self.screensaver = box
+
+    def close_screensaver(self, widget=None):
+        if self.screensaver is None:
+            return False
+        logging.debug("Closing Screensaver")
+        self.base_panel.get().remove(self.screensaver)
+        self.screensaver = None
+        if self.use_dpms:
+            self.wake_screen()
+        self.show_all()
+        return False
+
     def check_dpms_state(self):
         state = functions.get_DPMS_state()
 
         if state == functions.DPMS_State.Fail:
-            logging.info("DPMS State FAIL -> Showing KlipperScreen, Stopping DPMS Check")
-            self.show()
-            self.change_cursor()
+            logging.info("DPMS State FAIL: Stopping DPMS Check")
+            os.system("xset -display :0 s %s" % self.blanking_time)
             return False
-
-        visible = self.get_property("visible")
-        if state != functions.DPMS_State.On and visible:
-            logging.info("DPMS State %s -> Hiding", state)
-            self.hide()
-            self.change_cursor("watch")
-            self.touch_ready = False
-        elif state == functions.DPMS_State.On and not visible:
-            if self.touch_ready:
-                logging.info("DPMS State On -> Showing KlipperScreen")
-                self.show()
-                self.change_cursor()
-            else:
-                logging.info("DPMS State On -> Screen touched")
-                self.touch_ready = True
-        else:
-            self.touch_ready = False
+        elif state != functions.DPMS_State.On:
+            if self.screensaver is None:
+                self.show_screensaver()
         return True
 
     def wake_screen(self):
-        self.time = self._config.get_main_config_option('screen_blanking')
         # Wake the screen (it will go to standby as configured)
-        if self.time != "off":
+        if self._config.get_main_config_option('screen_blanking') != "off":
             logging.debug("Screen wake up")
             os.system("xset -display :0 dpms force on")
+            self.close_screensaver()
+
+    def set_dpms(self, use_dpms):
+        self.use_dpms = use_dpms
+        logging.info("DPMS set to: %s" % self.use_dpms)
+        self.set_screenblanking_timeout(self._config.get_main_config_option('screen_blanking'))
 
     def set_screenblanking_timeout(self, time):
-        # The 'blank' flag sets the preference to blank the video (if the hardware can do so)
+        # The 'blank' flag sets the preference to blank the video
         # rather than display a background pattern
         os.system("xset -display :0 s blank")
+        self.use_dpms = self._config.get_main_config().getboolean("use_dpms", fallback=True)
 
-        logging.debug("Changing power save to: %s" % time)
         if time == "off":
+            logging.debug("Screen blanking: %s" % time)
             if self.dpms_timeout is not None:
                 GLib.source_remove(self.dpms_timeout)
                 self.dpms_timeout = None
-            os.system("xset -display :0 -dpms")
+            os.system("xset -display :0 dpms 0 0 0")
             os.system("xset -display :0 s off")
             return
 
-        time = int(time)
-        if time < 0:
-            return
-        if functions.dpms_loaded is False:
-            logging.info("DPMS functions not loaded. Unable to protect on button press while the screen is blank")
-            os.system("xset -display :0 s %s" % time)
-            return
-        elif self.dpms_timeout is None and functions.dpms_loaded is True:
-            self.dpms_timeout = GLib.timeout_add(500, self.check_dpms_state)
-        os.system("xset -display :0 s off")
-        os.system("xset -display :0 dpms 0 %s 0" % time)
+        self.blanking_time = abs(int(time))
+        logging.debug("Changing screen blanking to: %d" % self.blanking_time)
+        if self.use_dpms and functions.dpms_loaded is True:
+            os.system("xset -display :0 +dpms")
+            if functions.get_DPMS_state() == functions.DPMS_State.Fail:
+                logging.info("DPMS State FAIL")
+            else:
+                logging.debug("Using DPMS")
+                os.system("xset -display :0 s off")
+                os.system("xset -display :0 dpms 0 %s 0" % self.blanking_time)
+                if self.dpms_timeout is None:
+                    self.dpms_timeout = GLib.timeout_add_seconds(1, self.check_dpms_state)
+                return
+        # Without dpms just blank the screen
+        logging.debug("Not using DPMS")
+        os.system("xset -display :0 dpms 0 0 0")
+        os.system("xset -display :0 s %s" % self.blanking_time)
 
     def set_updating(self, updating=False):
         if self.updating is True and updating is False:
