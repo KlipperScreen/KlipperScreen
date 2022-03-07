@@ -636,6 +636,11 @@ class KlipperScreen(Gtk.Window):
             os.system("xset -display :0 dpms force on")
             self.close_screensaver()
 
+    def set_dpms(self, use_dpms):
+        self.use_dpms = use_dpms
+        logging.info("DPMS set to: %s" % self.use_dpms)
+        self.set_screenblanking_timeout(self._config.get_main_config_option('screen_blanking'))
+
     def set_screenblanking_timeout(self, time):
         # The 'blank' flag sets the preference to blank the video
         # rather than display a background pattern
