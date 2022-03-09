@@ -333,9 +333,14 @@ class KlippyGtk:
     def formatTimeString(self, seconds):
         time = int(seconds)
         text = ""
+        if int(time/86400) != 0:
+            text += str(int(time/86400))+"d "
         if int(time/3600) != 0:
-            text += str(int(time/3600))+"h "
-        text += str(int(time/60) % 60)+"m "+str(time % 60)+"s"
+            text += str(int(time/3600) % 24)+"h "
+        if int(time/60) != 0:
+            text += str(int(time/60) % 60)+"m "
+        else:
+            text = str(time % 60)+"s"
         return text
 
     def formatTemperatureString(self, temp, target):
