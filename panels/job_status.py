@@ -567,7 +567,6 @@ class JobStatusPanel(ScreenPanel):
                         self.file_metadata['gcode_start_byte']))
         else:
             progress = self._printer.get_stat('virtual_sdcard', 'progress')
-        progress = round(progress, 2)
 
         if progress != self.progress:
             self.progress = progress
@@ -579,7 +578,7 @@ class JobStatusPanel(ScreenPanel):
             self.labels[label].set_text(text)
 
     def update_progress(self):
-        self.labels['progress_text'].set_text("%s%%" % (str(min(int(self.progress*100), 100))))
+        self.labels['progress_text'].set_text("%s%%" % (str(min(int(round(self.progress, 2)*100), 100))))
 
     def update_message(self):
         msg = self._printer.get_stat("display_status", "message")
