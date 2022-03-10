@@ -98,8 +98,6 @@ class SplashScreenPanel(ScreenPanel):
             logging.debug("Power devices: %s", devices)
             if devices is not None:
                 for device in devices:
-                    if device == printer:
-                        found_devices.append(printer)
                     for power_device in power_devices:
                         if device == power_device:
                             found_devices.append(power_device)
