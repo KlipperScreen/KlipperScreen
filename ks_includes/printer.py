@@ -44,7 +44,7 @@ class Printer:
         self.klipper = {}
         self.tempstore = {}
         if self.store_timeout is False:
-            GLib.timeout_add_seconds(1, self._update_temp_store)
+            self.store_timeout = GLib.timeout_add_seconds(1, self._update_temp_store)
 
         self.klipper = {
             "version": printer_info['software_version']

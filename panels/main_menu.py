@@ -205,7 +205,7 @@ class MainPanel(MenuPanel):
         self.labels['devices'].attach(name, 0, 0, 1, 1)
         self.labels['devices'].attach(temp, 1, 0, 1, 1)
 
-        da = HeaterGraph(self._printer)
+        da = HeaterGraph(self._printer, self._gtk.get_font_size())
         da.set_vexpand(True)
         self.labels['da'] = da
 

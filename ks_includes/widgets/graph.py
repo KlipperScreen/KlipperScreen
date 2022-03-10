@@ -8,7 +8,7 @@ from gi.repository import Gtk, Gdk, GLib, Pango
 
 
 class HeaterGraph(Gtk.DrawingArea):
-    def __init__(self, printer):
+    def __init__(self, printer, font_size):
         super().__init__()
         self.set_hexpand(True)
         self.set_vexpand(True)
@@ -21,6 +21,7 @@ class HeaterGraph(Gtk.DrawingArea):
         self.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
         self.connect('touch-event', self.event_cb)
         self.connect('button_press_event', self.event_cb)
+        self.font_size = round(font_size * 0.75)
 
     def add_object(self, name, type, rgb=[0, 0, 0], dashed=False, fill=False):
         if name not in self.store:
@@ -44,7 +45,7 @@ class HeaterGraph(Gtk.DrawingArea):
             if "temperatures" not in self.store[name]:
                 continue
             n.append(len(self.printer.get_temp_store(name, "temperatures")))
-        return max(n)
+        return min(n)
 
     def get_max_num(self, data_points=0):
         mnum = []
@@ -59,10 +60,10 @@ class HeaterGraph(Gtk.DrawingArea):
         width = da.get_allocated_width()
         height = da.get_allocated_height()
 
-        g_width_start = 30
+        g_width_start = round(self.font_size * 2.75)
         g_width = width - 15
         g_height_start = 10
-        g_height = height - 20
+        g_height = height - self.font_size * 2
 
         ctx.set_source_rgb(.5, .5, .5)
         ctx.set_line_width(1)
@@ -86,8 +87,6 @@ class HeaterGraph(Gtk.DrawingArea):
         self.max_length = self.get_max_length()
         graph_width = gsize[1][0] - gsize[0][0]
         points_per_pixel = self.max_length / graph_width
-        if points_per_pixel > 3:
-            points_per_pixel = 3
         data_points = int(round(graph_width * points_per_pixel, 0))
         max_num = math.ceil(self.get_max_num(data_points) * 1.1 / 10) * 10
         d_width = 1 / points_per_pixel
@@ -147,6 +146,7 @@ class HeaterGraph(Gtk.DrawingArea):
             ctx.set_source_rgb(.5, .5, .5)
             lheight = gsize[1][1] - nscale*i*hscale
             ctx.move_to(6, lheight + 3)
+            ctx.set_font_size(self.font_size)
             ctx.show_text(str(nscale*i).rjust(3, " "))
             ctx.stroke()
             ctx.set_source_rgba(.5, .5, .5, .2)
@@ -159,11 +159,12 @@ class HeaterGraph(Gtk.DrawingArea):
         glen = gsize[1][0] - gsize[0][0]
 
         now = datetime.datetime.now()
-        first = gsize[1][0] - ((now.second + ((now.minute % 2) * 60)) / points_per_pixel)
+        first = gsize[1][0] - (now.second + ((now.minute % 2) * 60)) / points_per_pixel
         steplen = 120 / points_per_pixel  # For 120s
+
         i = 0
         while True:
-            x = first - i*steplen
+            x = first - i * steplen
             if x < gsize[0][0]:
                 break
             ctx.set_source_rgba(.5, .5, .5, .2)
@@ -172,19 +173,22 @@ class HeaterGraph(Gtk.DrawingArea):
             ctx.stroke()
 
             ctx.set_source_rgb(.5, .5, .5)
-            ctx.move_to(x - 15, gsize[1][1] + 15)
+            ctx.move_to(x - round(self.font_size * 1.5), gsize[1][1] + round(self.font_size * 1.5))
 
             hour = now.hour
-            min = now.minute - (now.minute % 2) - i*2
+            min = now.minute - (now.minute % 2) - i * 2
             if min < 0:
                 hour -= 1
                 min = 60 + min
                 if hour < 0:
                     hour += 24
-
+            ctx.set_font_size(self.font_size)
             ctx.show_text("%02d:%02d" % (hour, min))
             ctx.stroke()
-            i += 1
+            if self.max_length < 600:
+                i += 1
+            else:
+                i += 2
 
     def is_showing(self, device):
         if device not in self.store:
