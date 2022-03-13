@@ -33,18 +33,10 @@ class HeaterGraph(Gtk.DrawingArea):
         self.max_length = max(self.max_length, len(self.printer.get_temp_store(name, type)))
 
     def event_cb(self, da, ev):
-        if ev.get_source_device().get_source() == Gdk.InputSource.MOUSE:
-            if ev.type == Gdk.EventType.BUTTON_PRESS:
-                x = ev.x
-                y = ev.y
-                # logging.info("Drawing area clicked: %s %s" % (x, y))
-
-        if ev.get_source_device().get_source() == Gdk.InputSource.TOUCHSCREEN:
-            if ev.touch.type == Gdk.EventType.TOUCH_BEGIN:
-                x = ev.touch.x
-                y = ev.touch.y
-                # logging.info("Drawing area clicked: %s %s" % (x, y))
-
+        if ev.type == Gdk.EventType.BUTTON_PRESS:
+            x = ev.x
+            y = ev.y
+            logging.info("Graph area: %s %s" % (x, y))
 
     def get_max_length(self):
         n = []
