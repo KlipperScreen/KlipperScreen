@@ -405,7 +405,7 @@ class JobStatusPanel(ScreenPanel):
                 self.labels['speed'].set_text("%3d%%" % self.speed)
 
         if "fan" in data and "speed" in data['fan']:
-            self.fan = int(round(data['fan']['speed'], 2)*100)
+            self.fan = int(round(self._printer.get_fan_speed("fan", data['fan']['speed']), 2)*100)
             self.labels['fan'].set_text("%3d%%" % self.fan)
 
         self.state_check()
