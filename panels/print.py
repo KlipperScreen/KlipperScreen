@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import gi
-import json
 import logging
 import os
 
@@ -8,7 +7,6 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
 from datetime import datetime
 
-from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
 def create_panel(*args):

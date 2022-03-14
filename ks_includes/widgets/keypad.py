@@ -1,10 +1,7 @@
-import datetime
 import gi
-import logging
-import math
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib, Pango
+from gi.repository import Gtk
 
 
 class Keypad(Gtk.Box):

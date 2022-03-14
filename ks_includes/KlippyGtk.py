@@ -5,7 +5,7 @@ import os
 import pathlib
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GdkPixbuf, Gio, GLib, Pango
+from gi.repository import Gdk, GdkPixbuf, Gio, Gtk, Pango
 
 klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
 

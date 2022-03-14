@@ -1,13 +1,10 @@
-import datetime
 import gi
-import math
 import logging
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
 from panels.menu import MenuPanel
 
-from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.widgets.graph import HeaterGraph
 from ks_includes.widgets.keypad import Keypad
 
