@@ -1,22 +1,16 @@
 import os
-import signal
-import json
 import logging
 import re
 import socket
-import subprocess
 import threading
-import time
 
-from contextlib import suppress
 from threading import Thread
 
-from subprocess import PIPE, Popen, STDOUT
-from queue import Queue, Empty
+from queue import Queue
 
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib
+from gi.repository import GLib, Gdk
 
 RESCAN_INTERVAL = 180
 KS_SOCKET_FILE = "/tmp/.KS_wpa_supplicant"

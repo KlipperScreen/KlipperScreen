@@ -2,27 +2,20 @@
 
 import argparse
 import gi
-import gettext
-import time
-import threading
 
 import json
 import netifaces
-import requests
-import websocket
 import importlib
 import logging
 import os
 import re
 import signal
 import subprocess
-import sys
-import traceback
 import pathlib
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
-from jinja2 import Environment, Template
+from jinja2 import Environment
 
 from ks_includes import functions
 from ks_includes.KlippyWebsocket import KlippyWebsocket
@@ -36,7 +29,7 @@ from ks_includes.config import KlipperScreenConfig
 from panels.base_panel import BasePanel
 
 logging.getLogger('matplotlib').setLevel(logging.WARNING)
-import numpy
+# This is here to avoid performance issues opening bed_mesh
 import matplotlib.pyplot
 
 PRINTER_BASE_STATUS_OBJECTS = [
