@@ -368,8 +368,6 @@ class KlipperScreen(Gtk.Window):
         box.pack_end(close, False, False, 0)
         box.set_halign(Gtk.Align.CENTER)
 
-        cur_panel = self.panels[self._cur_panels[-1]]
-
         self.base_panel.get().put(box, 0, 0)
 
         self.show_all()
@@ -406,7 +404,7 @@ class KlipperScreen(Gtk.Window):
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        dialog = self.gtk.Dialog(self, buttons, label, self.error_modal_response)
+        self.gtk.Dialog(self, buttons, label, self.error_modal_response)
 
     def error_modal_response(self, widget, response_id):
         widget.destroy()
@@ -429,7 +427,7 @@ class KlipperScreen(Gtk.Window):
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        dialog = self.gtk.Dialog(self, buttons, label, self.restart_ks)
+        self.gtk.Dialog(self, buttons, label, self.restart_ks)
 
     def restart_ks(self, widget, response_id):
         if response_id == Gtk.ResponseType.OK:
@@ -510,7 +508,6 @@ class KlipperScreen(Gtk.Window):
         # self._remove_current_panel(False)
 
         # Find current menu item
-        panels = list(self._cur_panels)
         if "main_panel" in self._cur_panels:
             menu = "__main"
         elif "splash_screen" in self._cur_panels:
@@ -567,7 +564,6 @@ class KlipperScreen(Gtk.Window):
             self._remove_current_panel()
 
     def add_subscription(self, panel_name):
-        add = True
         for sub in self.subscriptions:
             if sub == panel_name:
                 return
@@ -594,7 +590,6 @@ class KlipperScreen(Gtk.Window):
         box.set_halign(Gtk.Align.CENTER)
         box.get_style_context().add_class("screensaver")
 
-        cur_panel = self.panels[self._cur_panels[-1]]
         self.base_panel.get().put(box, 0, 0)
         self.show_all()
         self.screensaver = box
@@ -852,7 +847,7 @@ class KlipperScreen(Gtk.Window):
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        dialog = self.gtk.Dialog(self, buttons, label, self._confirm_send_action_response, method, params)
+        self.gtk.Dialog(self, buttons, label, self._confirm_send_action_response, method, params)
 
     def _confirm_send_action_response(self, widget, response_id, method, params):
         if response_id == Gtk.ResponseType.OK:

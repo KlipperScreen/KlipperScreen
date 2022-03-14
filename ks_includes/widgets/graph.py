@@ -156,7 +156,6 @@ class HeaterGraph(Gtk.DrawingArea):
         return hscale
 
     def graph_time(self, ctx, gsize, points_per_pixel):
-        glen = gsize[1][0] - gsize[0][0]
 
         now = datetime.datetime.now()
         first = gsize[1][0] - (now.second + ((now.minute % 2) * 60)) / points_per_pixel

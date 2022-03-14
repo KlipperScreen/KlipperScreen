@@ -377,7 +377,7 @@ class BedMeshPanel(ScreenPanel):
         buttons = [
             {"name": _("Close"), "response": Gtk.ResponseType.CANCEL}
         ]
-        dialog = self._gtk.Dialog(self._screen, buttons, box, self._close_dialog)
+        self._gtk.Dialog(self._screen, buttons, box, self._close_dialog)
 
         alloc = canvas_box.get_allocation()
         canvas = FigureCanvas(fig)

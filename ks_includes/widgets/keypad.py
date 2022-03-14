@@ -46,7 +46,6 @@ class Keypad(Gtk.Box):
         self.labels["keypad"] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.labels['entry'] = Gtk.Entry()
         self.labels['entry'].props.xalign = 0.5
-        ctx = self.labels['entry'].get_style_context()
 
         b = self._gtk.ButtonImage('cancel', _('Close'), None, 1, 1)
         b.connect("clicked", close_function)
