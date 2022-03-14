@@ -313,7 +313,7 @@ class PrintPanel(ScreenPanel):
         grid.set_halign(Gtk.Align.CENTER)
         grid.set_valign(Gtk.Align.CENTER)
 
-        dialog = self._gtk.Dialog(self._screen, buttons, grid, self.confirm_print_response, filename)
+        self._gtk.Dialog(self._screen, buttons, grid, self.confirm_print_response, filename)
 
     def confirm_print_response(self, widget, response_id, filename):
         widget.destroy()

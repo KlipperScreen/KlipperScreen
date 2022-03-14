@@ -90,8 +90,8 @@ class KlipperScreenConfig:
         for printer in conf_printers_debug:
             name = list(printer)[0]
             item = conf_printers_debug[conf_printers_debug.index(printer)]
-            if item[list(printer)[0]]['moonraker_api_key'] != "":
-                item[list(printer)[0]]['moonraker_api_key'] = "redacted"
+            if item[name]['moonraker_api_key'] != "":
+                item[name]['moonraker_api_key'] = "redacted"
         logging.debug("Configured printers: %s" % json.dumps(conf_printers_debug, indent=2))
 
         lang = self.get_main_config_option("language", None)

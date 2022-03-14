@@ -532,8 +532,6 @@ class TemperaturePanel(ScreenPanel):
 
     def update_graph(self):
         self.labels['da'].queue_draw()
-        alloc = self.labels['devices'].get_allocation()
-        alloc = self.labels['da'].get_allocation()
         return True
 
     def update_temp(self, device, temp, target):

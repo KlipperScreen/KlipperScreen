@@ -300,7 +300,7 @@ class JobStatusPanel(ScreenPanel):
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        dialog = self._gtk.Dialog(self._screen, buttons, label, self.cancel_confirm)
+        self._gtk.Dialog(self._screen, buttons, label, self.cancel_confirm)
         self.disable_button("pause", "cancel")
 
     def cancel_confirm(self, widget, response_id):
@@ -379,7 +379,6 @@ class JobStatusPanel(ScreenPanel):
             )
 
         ps = self._printer.get_stat("print_stats")
-        vsd = self._printer.get_stat("virtual_sdcard")
         self.update_message()
 
         if "toolhead" in data:
