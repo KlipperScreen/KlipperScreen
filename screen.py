@@ -144,7 +144,7 @@ class KlipperScreen(Gtk.Window):
 
         printers = self._config.get_printers()
         default_printer = self._config.get_main_config().get('default_printer')
-        logging.debug("Printers: %s, Default: %s" % (printers, default_printer))
+        logging.debug("Default printer: %s" % default_printer)
         if [True for p in printers if default_printer in p]:
             self.connect_printer(default_printer)
         elif len(printers) == 1:
