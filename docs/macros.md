@@ -45,11 +45,12 @@ gcode:
 ```
 [gcode_macro UNLOAD_FILAMENT]
 gcode:
+    {% set speed = params.SPEED|default(300) %}
     {% set max_velocity = printer.configfile.settings['extruder'].max_extrude_only_velocity %}
     G91
     M300 # beep
     G92 E0
-    G1 E{speed} F300 # purge
+    G1 E25 F{speed} # purge
     G1 E-420 F{max_velocity}
     M300
     M300
