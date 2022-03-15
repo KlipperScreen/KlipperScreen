@@ -12,6 +12,7 @@ import re
 import signal
 import subprocess
 import pathlib
+import traceback  # noqa
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
@@ -30,7 +31,7 @@ from panels.base_panel import BasePanel
 
 logging.getLogger('matplotlib').setLevel(logging.WARNING)
 # This is here to avoid performance issues opening bed_mesh
-import matplotlib.pyplot
+import matplotlib.pyplot  # noqa
 
 PRINTER_BASE_STATUS_OBJECTS = [
     'bed_mesh',
