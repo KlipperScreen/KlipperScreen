@@ -24,12 +24,23 @@ COLORS = {
 class ConsolePanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
+        self.autoscroll = True
 
         gcodes = self._screen._ws.send_method("server.gcode_store", {"count": 100}, self.gcode_response)
 
-        vbox = Gtk.VBox()
-        vbox.set_hexpand(True)
-        vbox.set_vexpand(True)
+        o1_lbl = Gtk.Label(_("Auto-scroll"))
+        o1_lbl.set_halign(Gtk.Align.END)
+        o1_switch = Gtk.Switch()
+        o1_switch.set_property("width-request", round(self._gtk.get_font_size()*6))
+        o1_switch.set_property("height-request", round(self._gtk.get_font_size()*3))
+        o1_switch.set_active(self.autoscroll)
+        o1_switch.connect("notify::active", self.set_autoscroll)
+
+        options = Gtk.HBox()
+        options.set_hexpand(True)
+        options.set_vexpand(False)
+        options.add(o1_lbl)
+        options.pack_start(o1_switch, False, 0, 5)
 
         sw = Gtk.ScrolledWindow()
         sw.set_hexpand(True)
@@ -38,7 +49,8 @@ class ConsolePanel(ScreenPanel):
         tb = Gtk.TextBuffer()
         tv = Gtk.TextView()
         tv.set_buffer(tb)
-        tv.set_sensitive(False)
+        tv.set_editable(False)
+        tv.set_cursor_visible(False)
         tv.connect("size-allocate", self._autoscroll)
 
         sw.add(tv)
@@ -51,14 +63,16 @@ class ConsolePanel(ScreenPanel):
         entry.set_hexpand(True)
         entry.set_vexpand(False)
         entry.connect("focus-in-event", self._show_keyboard)
+        entry.connect("focus-out-event", self._remove_keyboard)
         entry.connect("activate", self._send_command)
 
-        enter = self._gtk.Button("Send")
+        enter = self._gtk.Button(_("Send"))
         enter.set_hexpand(False)
         enter.connect("clicked", self._send_command)
 
-        ebox.add(entry)  # , True, 0, 0)
-        ebox.add(enter)  # , True, 0, 0)
+
+        ebox.add(entry)
+        ebox.add(enter)
 
         self.labels.update({
             "entry": entry,
@@ -67,9 +81,11 @@ class ConsolePanel(ScreenPanel):
             "tv": tv
         })
 
-        vbox.add(sw)
-        vbox.pack_end(ebox, False, 0, 0)
-        self.content.add(vbox)
+        content_box = Gtk.VBox()
+        content_box.pack_start(options, False, 0, 0)
+        content_box.add(sw)
+        content_box.pack_end(ebox, False, 0, 0)
+        self.content.add(content_box)
 
     def add_gcode(self, type, time, message):
         if type == "command":
@@ -103,12 +119,20 @@ class ConsolePanel(ScreenPanel):
         if action == "notify_gcode_response":
             self.add_gcode("response", time.time(), data)
 
+    def set_autoscroll(self, *args):
+        self.autoscroll ^= True
+        logging.debug(self.autoscroll)
+
     def _autoscroll(self, *args):
-        adj = self.labels['sw'].get_vadjustment()
-        adj.set_value(adj.get_upper() - adj.get_page_size())
+        if self.autoscroll:
+            adj = self.labels['sw'].get_vadjustment()
+            adj.set_value(adj.get_upper() - adj.get_page_size())
 
     def _show_keyboard(self, *args):
         self._screen.show_keyboard()
+
+    def _remove_keyboard(self, *args):
+        self._screen.remove_keyboard()
 
     def _send_command(self, *args):
         cmd = self.labels['entry'].get_text()
