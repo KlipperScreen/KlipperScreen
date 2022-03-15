@@ -24,7 +24,7 @@ msgid "24 Hour Time"
 msgstr "24 Órás Idő"
 
 msgid "Abort"
-msgstr "Megszakítás"
+msgstr "Megszakít"
 
 msgid "Accept"
 msgstr "Elfogad"
@@ -100,7 +100,7 @@ msgid "Configuration"
 msgstr "Konfiguráció"
 
 msgid "Confirm Emergency Stop"
-msgstr "Erősítse meg a Vészleállítást"
+msgstr "Erősítse meg a vészleállítást"
 
 msgid "Connected"
 msgstr "Csatlakoztatva"
@@ -162,7 +162,7 @@ msgid "Estimated Time Method"
 msgstr "Becsült idő módszer"
 
 msgid "Extrude"
-msgstr "Kinyom"
+msgstr "Száladagolás"
 
 msgid "Extrusion +"
 msgstr "Extrudálás +"
@@ -189,7 +189,7 @@ msgid "Finish"
 msgstr "Befejezve"
 
 msgid "Firmware Restart"
-msgstr "Firmware újraindítás"
+msgstr "Firmware Újraindítás"
 
 msgid "Font Size"
 msgstr "Betűméret"
@@ -204,22 +204,22 @@ msgid "Hide sensors in Temp."
 msgstr "Szenzorok elrejtése Hőfok."
 
 msgid "Home"
-msgstr "Kezdőpont"
+msgstr "Kezdőpontok"
 
 msgid "Home All"
-msgstr "Kezdőpont X-Y-Z"
+msgstr "X-Y-Z kezdőpont"
 
 msgid "Home X"
-msgstr "Kezdőpont X"
+msgstr "X kezdőpont"
 
 msgid "Home XY"
-msgstr "Kezdőpont XY"
+msgstr "XY kezdőpont"
 
 msgid "Home Y"
-msgstr "Kezdőpont Y"
+msgstr "Y kezdőpont"
 
 msgid "Home Z"
-msgstr "Kezdőpont Z"
+msgstr "Z kezdőpont"
 
 msgid "Homing"
 msgstr "Kezdőpont"
@@ -237,7 +237,7 @@ msgid "Icon Theme"
 msgstr "Ikon téma"
 
 msgid "Increase"
-msgstr "Növelés"
+msgstr "Növel"
 
 msgid "Initializing"
 msgstr "Inicializálás"
@@ -261,7 +261,7 @@ msgid "Invert Z"
 msgstr "Fordított Z"
 
 msgid "Klipper Restart"
-msgstr "Klipper újraindítása"
+msgstr "Klipper Újraindítása"
 
 msgid "Klipper Version"
 msgstr "Klipper verzió"
@@ -422,7 +422,7 @@ msgid "Reference"
 msgstr "Referencia"
 
 msgid "Restart"
-msgstr "Újraindít"
+msgstr "Újraindítás"
 
 msgid "Resume"
 msgstr "Folytat"
