@@ -132,7 +132,6 @@ class KlipperScreen(Gtk.Window):
         self.add(self.base_panel.get())
         self.show_all()
         self.base_panel.activate()
-        self.touch_ready = True
 
         self.printer_initializing(_("Initializing"))
 
@@ -141,7 +140,9 @@ class KlipperScreen(Gtk.Window):
         # Move mouse to 0,0
         os.system("/usr/bin/xdotool mousemove 0 0")
         self.change_cursor()
+        self.initial_connection()
 
+    def initial_connection(self):
         printers = self._config.get_printers()
         default_printer = self._config.get_main_config().get('default_printer')
         logging.debug("Default printer: %s" % default_printer)
@@ -159,6 +160,7 @@ class KlipperScreen(Gtk.Window):
     def connect_printer(self, name):
         _ = self.lang.gettext
         self.connecting_to_printer = name
+
         if self.connected_printer == name:
             if self.printer_select_prepanel is not None:
                 self.show_panel(self.printer_select_prepanel, "", "", 2)
@@ -177,10 +179,8 @@ class KlipperScreen(Gtk.Window):
 
         if self.files is not None:
             self.files = None
-
         for printer in self._config.get_printers():
             pname = list(printer)[0]
-
             if pname != name:
                 continue
             data = printer[pname]
@@ -208,12 +208,12 @@ class KlipperScreen(Gtk.Window):
         }, self.state_execute)
 
         self._remove_all_panels()
-        panels = list(self.panels)
-        if len(self.subscriptions) > 0:
-            self.subscriptions = []
-        for panel in panels:
-            del self.panels[panel]
+        self.subscriptions = []
+        for panel in list(self.panels):
+            if panel not in ["printer_select", "splash_screen"]:
+                del self.panels[panel]
         self.base_panel.show_printer_select(True)
+
         self.printer_initializing(_("Connecting to %s") % name)
 
         self.printer.set_callbacks({
@@ -699,9 +699,14 @@ class KlipperScreen(Gtk.Window):
         logging.debug("### Going to disconnected")
         self.base_panel.show_macro_shortcut(False)
         self.printer_initializing(_("Klipper has disconnected"))
-        for panel in list(self.panels):
-            if panel not in ["printer_select", "splash_screen"]:
-                del self.panels[panel]
+        self.wake_screen()
+        if self.connected_printer is not None:
+            self.connecting_to_printer = self.connected_printer
+            self.connected_printer = None
+            # Try to reconnect
+            self.connect_printer(self.connecting_to_printer)
+        else:
+            self.initial_connection()
 
     def state_error(self, prev_state):
         if "printer_select" in self._cur_panels:
@@ -713,17 +718,27 @@ class KlipperScreen(Gtk.Window):
         msg = self.printer.get_stat("webhooks", "state_message")
         if "FIRMWARE_RESTART" in msg:
             self.printer_initializing(
-                _("Klipper has encountered an error.\nIssue a FIRMWARE_RESTART to attempt fixing the issue.")
-                + "\n\n" + msg
+                "<b>" +
+                _("Klipper has encountered an error.\nIssue a FIRMWARE_RESTART to attempt fixing the issue.") +
+                "</b>" +
+                "\n\n" +
+                msg
             )
         elif "micro-controller" in msg:
             self.printer_initializing(
-                _("Klipper has encountered an error with the micro-controller.\nPlease recompile and flash.")
-                + "\n\n" + msg
+                "<b>" +
+                _("Klipper has encountered an error with the micro-controller.\nPlease recompile and flash.") +
+                "</b>" +
+                "\n\n" +
+                msg
             )
         else:
             self.printer_initializing(
-                _("Klipper has encountered an error.") + "\n\n" + msg
+                "<b>" +
+                _("Klipper has encountered an error.") +
+                "</b>" +
+                "\n\n" +
+                msg
             )
 
         for panel in list(self.panels):

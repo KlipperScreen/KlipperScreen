@@ -377,5 +377,8 @@ class Printer:
             for x in self.tempstore[device]:
                 if len(self.tempstore[device][x]) >= 1200:
                     self.tempstore[device][x].pop(0)
-                self.tempstore[device][x].append(round(self.get_dev_stat(device, x[:-1]), 2))
+                temp = self.get_dev_stat(device, x[:-1])
+                if temp is None:
+                    temp = 0
+                self.tempstore[device][x].append(round(temp))
         return True
