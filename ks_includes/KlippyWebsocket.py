@@ -51,6 +51,7 @@ class KlippyWebsocket(threading.Thread):
 
     def connect(self):
         _ = self._screen.lang.gettext
+
         def ws_on_close(ws, a=None, b=None):
             self.on_close(ws)
 
@@ -66,16 +67,17 @@ class KlippyWebsocket(threading.Thread):
         try:
             state = self._screen.apiclient.get_server_info()
             if state is False:
-                if self.reconnect_count == 4:
+                if self.reconnect_count > 3:
                     self._screen.printer_initializing(_("Cannot connect to Moonraker") +
                                                        ("\n\n%s\n\n") % self._url +
                                                       _("Retry #%s") % self.reconnect_count)
 
                 return False
             if state['result']['klippy_connected'] is False:
-                self._screen.printer_initializing(_("Moonraker: connected") +
-                                                   ("\n\nKlipper: %s\n\n") % state['result']['klippy_state'] +
-                                                  _("Retry #%s") % self.reconnect_count)
+                if self.reconnect_count > 3:
+                    self._screen.printer_initializing(_("Moonraker: connected") +
+                                                       ("\n\nKlipper: %s\n\n") % state['result']['klippy_state'] +
+                                                      _("Retry #%s") % self.reconnect_count)
                 return False
             printer_info = self._screen.apiclient.get_printer_info()
             if printer_info is False:

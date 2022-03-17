@@ -179,8 +179,10 @@ class KlipperScreen(Gtk.Window):
 
         if self.files is not None:
             self.files = None
+
         for printer in self._config.get_printers():
             pname = list(printer)[0]
+
             if pname != name:
                 continue
             data = printer[pname]
@@ -213,7 +215,6 @@ class KlipperScreen(Gtk.Window):
             if panel not in ["printer_select", "splash_screen"]:
                 del self.panels[panel]
         self.base_panel.show_printer_select(True)
-
         self.printer_initializing(_("Connecting to %s") % name)
 
         self.printer.set_callbacks({
@@ -698,10 +699,9 @@ class KlipperScreen(Gtk.Window):
         _ = self.lang.gettext
         logging.debug("### Going to disconnected")
         self.base_panel.show_macro_shortcut(False)
-        self.printer_initializing(_("Klipper has disconnected"))
         self.wake_screen()
+        self.printer_initializing(_("Klipper has disconnected"))
         if self.connected_printer is not None:
-            self.connecting_to_printer = self.connected_printer
             self.connected_printer = None
             # Try to reconnect
             self.connect_printer(self.connecting_to_printer)
@@ -715,31 +715,19 @@ class KlipperScreen(Gtk.Window):
 
         _ = self.lang.gettext
         self.base_panel.show_macro_shortcut(False)
+        self.wake_screen()
         msg = self.printer.get_stat("webhooks", "state_message")
         if "FIRMWARE_RESTART" in msg:
-            self.printer_initializing(
-                "<b>" +
-                _("Klipper has encountered an error.\nIssue a FIRMWARE_RESTART to attempt fixing the issue.") +
-                "</b>" +
-                "\n\n" +
-                msg
-            )
+            self.printer_initializing("<b>" + _("Klipper has encountered an error.") + "\n" +
+                                      _("A FIRMWARE_RESTART may fix the issue.") +
+                                      "</b>" + "\n\n" + msg)
         elif "micro-controller" in msg:
-            self.printer_initializing(
-                "<b>" +
-                _("Klipper has encountered an error with the micro-controller.\nPlease recompile and flash.") +
-                "</b>" +
-                "\n\n" +
-                msg
-            )
+            self.printer_initializing("<b>" + _("Klipper has encountered an error.") +
+                                      _("Please recompile and flash the micro-controller.") +
+                                      "</b>" + "\n\n" + msg)
         else:
-            self.printer_initializing(
-                "<b>" +
-                _("Klipper has encountered an error.") +
-                "</b>" +
-                "\n\n" +
-                msg
-            )
+            self.printer_initializing("<b>" + _("Klipper has encountered an error.") +
+                                      "</b>" + "\n\n" + msg)
 
         for panel in list(self.panels):
             if panel not in ["printer_select", "splash_screen"]:
@@ -791,7 +779,10 @@ class KlipperScreen(Gtk.Window):
 
         _ = self.lang.gettext
         self.base_panel.show_macro_shortcut(False)
-        self.printer_initializing(_("Klipper has shutdown"))
+        self.wake_screen()
+        msg = self.printer.get_stat("webhooks", "state_message")
+        self.printer_initializing("<b>" + _("Klipper has shutdown") +
+                                  "</b>" + "\n\n" + msg)
 
     def toggle_macro_shortcut(self, value):
         if value is True:
