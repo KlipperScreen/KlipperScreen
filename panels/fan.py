@@ -46,7 +46,7 @@ class FanPanel(ScreenPanel):
 
         for fan in self.devices:
             if fan in data and "speed" in data[fan]:
-                self.update_fan_speed(fan, data[fan]["speed"])
+                self.update_fan_speed(fan, self._printer.get_fan_speed(fan, data[fan]["speed"]))
 
     def update_fan_speed(self, fan, speed):
         if fan not in self.devices:
@@ -74,10 +74,7 @@ class FanPanel(ScreenPanel):
         frame.set_property("shadow-type", Gtk.ShadowType.NONE)
         frame.get_style_context().add_class("frame-item")
 
-        try:
-            self.fan_speed[fan] = float(self._printer.get_data()[fan]["speed"])
-        except Exception:
-            self.fan_speed[fan] = 0
+        self.fan_speed[fan] = float(self._printer.get_fan_speed(fan))
 
         name = Gtk.Label()
         if fan == "fan":
@@ -155,3 +152,9 @@ class FanPanel(ScreenPanel):
         else:
             f = " ".join(fan.split(" ")[1:])
             self._screen._ws.klippy.gcode_script("SET_FAN_SPEED FAN=%s SPEED=%s" % (f, float(value)/100))
+        # Check the speed in case it wasn't applied
+        GLib.timeout_add_seconds(1, self.check_fan_speed, fan)
+
+    def check_fan_speed(self, fan):
+        self.update_fan_speed(fan, self._printer.get_fan_speed(fan))
+        return False

@@ -3,7 +3,7 @@ import logging
 import numpy as np
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib, Pango
+from gi.repository import Gdk, Gtk, Pango
 
 import matplotlib.pyplot as plt
 from matplotlib import cm
@@ -377,7 +377,7 @@ class BedMeshPanel(ScreenPanel):
         buttons = [
             {"name": _("Close"), "response": Gtk.ResponseType.CANCEL}
         ]
-        dialog = self._gtk.Dialog(self._screen, buttons, box, self._close_dialog)
+        self._gtk.Dialog(self._screen, buttons, box, self._close_dialog)
 
         alloc = canvas_box.get_allocation()
         canvas = FigureCanvas(fig)

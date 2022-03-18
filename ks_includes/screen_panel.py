@@ -1,11 +1,8 @@
 import gi
-import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib
-from jinja2 import Environment, Template
+from gi.repository import Gtk
 
-from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.KlippyGcodes import KlippyGcodes
 
 class ScreenPanel:
@@ -26,7 +23,6 @@ class ScreenPanel:
         self.layout = Gtk.Layout()
         self.layout.set_size(self._screen.width, self._screen.height)
 
-        action_bar_width = self._gtk.get_action_bar_width() if action_bar is True else 0
         self.content = Gtk.Box(spacing=0)
 
     def initialize(self, panel_name):

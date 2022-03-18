@@ -2,27 +2,21 @@
 
 import argparse
 import gi
-import gettext
-import time
-import threading
 
 import json
 import netifaces
-import requests
-import websocket
 import importlib
 import logging
 import os
 import re
 import signal
 import subprocess
-import sys
-import traceback
 import pathlib
+import traceback  # noqa
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
-from jinja2 import Environment, Template
+from jinja2 import Environment
 
 from ks_includes import functions
 from ks_includes.KlippyWebsocket import KlippyWebsocket
@@ -36,8 +30,8 @@ from ks_includes.config import KlipperScreenConfig
 from panels.base_panel import BasePanel
 
 logging.getLogger('matplotlib').setLevel(logging.WARNING)
-import numpy
-import matplotlib.pyplot
+# This is here to avoid performance issues opening bed_mesh
+import matplotlib.pyplot  # noqa
 
 PRINTER_BASE_STATUS_OBJECTS = [
     'bed_mesh',
@@ -149,9 +143,12 @@ class KlipperScreen(Gtk.Window):
         self.change_cursor()
 
         printers = self._config.get_printers()
-        logging.debug("Printers: %s" % printers)
-        if len(printers) == 1:
-            pname = list(self._config.get_printers()[0])[0]
+        default_printer = self._config.get_main_config().get('default_printer')
+        logging.debug("Default printer: %s" % default_printer)
+        if [True for p in printers if default_printer in p]:
+            self.connect_printer(default_printer)
+        elif len(printers) == 1:
+            pname = list(printers[0])[0]
             self.connect_printer(pname)
         else:
             self.show_panel("printer_select", "printer_select", "Printer Select", 2)
@@ -375,8 +372,6 @@ class KlipperScreen(Gtk.Window):
         box.pack_end(close, False, False, 0)
         box.set_halign(Gtk.Align.CENTER)
 
-        cur_panel = self.panels[self._cur_panels[-1]]
-
         self.base_panel.get().put(box, 0, 0)
 
         self.show_all()
@@ -413,7 +408,7 @@ class KlipperScreen(Gtk.Window):
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        dialog = self.gtk.Dialog(self, buttons, label, self.error_modal_response)
+        self.gtk.Dialog(self, buttons, label, self.error_modal_response)
 
     def error_modal_response(self, widget, response_id):
         widget.destroy()
@@ -436,7 +431,7 @@ class KlipperScreen(Gtk.Window):
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        dialog = self.gtk.Dialog(self, buttons, label, self.restart_ks)
+        self.gtk.Dialog(self, buttons, label, self.restart_ks)
 
     def restart_ks(self, widget, response_id):
         if response_id == Gtk.ResponseType.OK:
@@ -517,7 +512,6 @@ class KlipperScreen(Gtk.Window):
         # self._remove_current_panel(False)
 
         # Find current menu item
-        panels = list(self._cur_panels)
         if "main_panel" in self._cur_panels:
             menu = "__main"
         elif "splash_screen" in self._cur_panels:
@@ -574,7 +568,6 @@ class KlipperScreen(Gtk.Window):
             self._remove_current_panel()
 
     def add_subscription(self, panel_name):
-        add = True
         for sub in self.subscriptions:
             if sub == panel_name:
                 return
@@ -601,7 +594,6 @@ class KlipperScreen(Gtk.Window):
         box.set_halign(Gtk.Align.CENTER)
         box.get_style_context().add_class("screensaver")
 
-        cur_panel = self.panels[self._cur_panels[-1]]
         self.base_panel.get().put(box, 0, 0)
         self.show_all()
         self.screensaver = box
@@ -859,7 +851,7 @@ class KlipperScreen(Gtk.Window):
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        dialog = self.gtk.Dialog(self, buttons, label, self._confirm_send_action_response, method, params)
+        self.gtk.Dialog(self, buttons, label, self._confirm_send_action_response, method, params)
 
     def _confirm_send_action_response(self, widget, response_id, method, params):
         if response_id == Gtk.ResponseType.OK:

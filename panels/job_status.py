@@ -5,7 +5,7 @@ import math
 import os
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib, Pango
+from gi.repository import GLib, Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
@@ -300,7 +300,7 @@ class JobStatusPanel(ScreenPanel):
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        dialog = self._gtk.Dialog(self._screen, buttons, label, self.cancel_confirm)
+        self._gtk.Dialog(self._screen, buttons, label, self.cancel_confirm)
         self.disable_button("pause", "cancel")
 
     def cancel_confirm(self, widget, response_id):
@@ -379,7 +379,6 @@ class JobStatusPanel(ScreenPanel):
             )
 
         ps = self._printer.get_stat("print_stats")
-        vsd = self._printer.get_stat("virtual_sdcard")
         self.update_message()
 
         if "toolhead" in data:
@@ -405,7 +404,7 @@ class JobStatusPanel(ScreenPanel):
                 self.labels['speed'].set_text("%3d%%" % self.speed)
 
         if "fan" in data and "speed" in data['fan']:
-            self.fan = int(round(data['fan']['speed'], 2)*100)
+            self.fan = int(round(self._printer.get_fan_speed("fan", data['fan']['speed']), 2)*100)
             self.labels['fan'].set_text("%3d%%" % self.fan)
 
         self.state_check()

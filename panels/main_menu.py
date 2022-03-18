@@ -1,13 +1,10 @@
-import datetime
 import gi
-import math
 import logging
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
 from panels.menu import MenuPanel
 
-from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.widgets.graph import HeaterGraph
 from ks_includes.widgets.keypad import Keypad
 
@@ -339,8 +336,6 @@ class MainPanel(MenuPanel):
 
     def update_graph(self):
         self.labels['da'].queue_draw()
-        alloc = self.labels['devices'].get_allocation()
-        alloc = self.labels['da'].get_allocation()
         return True
 
     def update_temp(self, device, temp, target):

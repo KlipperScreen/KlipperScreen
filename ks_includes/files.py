@@ -1,11 +1,9 @@
 import logging
-import json
 import os
-import base64
 
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib
+from gi.repository import GLib
 
 class KlippyFiles():
     thumbnail_dir = "/tmp/.KS-thumbnails"

@@ -36,10 +36,10 @@ KlipperScreen can display thumbnails in the file browser and as previews in the 
 ![Job Status](img/panels/job_status.png)
 
 
-* [PrusaSlicer](#PrusaSlicer)
-* [SuperSlicer](#SuperSlicer)
-* [Cura](#Cura)
-* [ideaMaker](#ideaMaker)
+* [PrusaSlicer](#prusaslicer)
+* [SuperSlicer](#superslicer)
+* [Cura](#cura)
+* [ideaMaker](#ideamaker)
 
 ### PrusaSlicer
 In “Expert” mode PrusaSlicer has an option in the “Printer Settings” tab to activate previews.
@@ -67,7 +67,7 @@ The Cura plugin [“Cura2Moonraker”](https://github.com/emtrax-ltd/Cura2Moonra
 To enable thumbnails, open the Advanced tab in the printer settings, enable the GCode Thumbnails for Octoprint and Mainsail option and enter your prefered square format image size in the Resolution fields (e.g. 400 X 400). It’s necessary that the thumbnail width and height resolution is equal.
 
 
-![IdeaMaker4](img/quicktips/IdeaMaker-thumbnails.png)
+![ideaMaker](img/quicktips/IdeaMaker-thumbnails.png)
 
 
 ## Supported Macros

@@ -3,7 +3,7 @@ import logging
 import re
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib
+from gi.repository import Gtk
 
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
@@ -61,8 +61,6 @@ class BedLevelPanel(ScreenPanel):
         if (("bltouch" in self._screen.printer.get_config_section_list() or
             "probe" in self._screen.printer.get_config_section_list()) and
                 config_section_name == "screws_tilt_adjust"):
-            x_offset = 0
-            y_offset = 0
             if "bltouch" in self._screen.printer.get_config_section_list():
                 bltouch = self._screen.printer.get_config_section("bltouch")
                 if "x_offset" in bltouch:

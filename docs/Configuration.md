@@ -36,6 +36,9 @@ show_cursor: False
 
 # Allows to define custom systemctl command for restart like xrdp
 service: KlipperScreen
+
+# If multiple printers are defined, this can be set the name of the one to show at startup.
+default_printer: Ender 3 Pro
 ```
 
 ## Printer Options
@@ -128,7 +131,7 @@ params: {"script":"G28 X"}
 #   Available variables are listed below.
 enable: {{ printer.power_devices.count > 0 }}
 ```
-Available panels are listed here: [docs/panels.md](panels.md)
+Available panels are listed here: [docs/panels.md](Panels.md)
 
 Certain variables are available for conditional testing of the enable statement:
 ```
