@@ -22,24 +22,32 @@ class TemperaturePanel(ScreenPanel):
         self.grid = self._gtk.HomogeneousGrid()
         self.grid.attach(self.create_left_panel(), 0, 0, 1, 1)
 
-        for x in self._printer.get_tools():
-            if x not in self.active_heaters and x in self._printer.get_temp_store_devices():
-                self.select_heater(None, x)
         # When printing start in temp_delta mode and only select tools
-        logging.info(self._printer.get_state())
-        if self._printer.get_state() not in ["printing", "paused"]:
+        state = self._printer.get_state()
+        logging.info(state)
+        if state not in ["printing", "paused"]:
             self.show_preheat = True
-            for h in self._printer.get_heaters():
-                if h.startswith("temperature_sensor "):
-                    continue
-                if h not in self.active_heaters:
-                    self.select_heater(None, h)
+            selection = self._printer.get_tools() + self._printer.get_heaters()
         else:
             self.show_preheat = False
+            selection = self._printer.get_tools()
+
+        # Select heaters
+        for h in selection:
+            if h.startswith("temperature_sensor "):
+                continue
+            name = " ".join(h.split(" ")[1:])
+            # Support for hiding devices by name
+            if name.startswith("_"):
+                continue
+            if h not in self.active_heaters:
+                self.select_heater(None, h)
+
         if self._screen.vertical_mode:
             self.grid.attach(self.create_right_panel(), 0, 1, 1, 1)
         else:
             self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
+
         self.content.add(self.grid)
         self.layout.show_all()
 
