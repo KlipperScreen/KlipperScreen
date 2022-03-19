@@ -48,7 +48,8 @@ class MainPanel(MenuPanel):
 
     def activate(self):
         if self.graph_update is None:
-            self.graph_update = GLib.timeout_add_seconds(1, self.update_graph)
+            # This has a high impact on load
+            self.graph_update = GLib.timeout_add_seconds(5, self.update_graph)
         return
 
     def deactivate(self):

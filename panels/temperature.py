@@ -184,7 +184,8 @@ class TemperaturePanel(ScreenPanel):
 
     def activate(self):
         if self.graph_update is None:
-            self.graph_update = GLib.timeout_add_seconds(1, self.update_graph)
+            # This has a high impact on load
+            self.graph_update = GLib.timeout_add_seconds(5, self.update_graph)
 
     def deactivate(self):
         if self.graph_update is not None:
