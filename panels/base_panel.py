@@ -143,7 +143,7 @@ class BasePanel(ScreenPanel):
         for child in self.control['temp_box'].get_children():
             self.control['temp_box'].remove(child)
 
-        if show is False:
+        if show is False or self._printer.get_temp_store_devices() is None:
             return
 
         for device in self._printer.get_temp_store_devices():

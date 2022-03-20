@@ -165,11 +165,15 @@ class KlipperScreen(Gtk.Window):
             self.base_panel.show_macro_shortcut(self._config.get_main_config_option('side_macro_shortcut'))
             return
 
+        # Cleanup
         self.printer_select_callbacks = []
         self.printer_select_prepanel = None
-
         if self.files is not None:
+            self.files.reset()
             self.files = None
+        if self.printer is not None:
+            self.printer.reset()
+            self.printer = None
 
         for printer in self._config.get_printers():
             pname = list(printer)[0]
