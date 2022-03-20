@@ -56,7 +56,7 @@ class SplashScreenPanel(ScreenPanel):
         self.content.add(main)
 
     def update_text(self, text):
-        self.labels['text'].set_text(text)
+        self.labels['text'].set_markup("%s" % text)
         self.clear_action_bar()
 
     def clear_action_bar(self):

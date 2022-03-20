@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-26 15:48-0300\n"
+"POT-Creation-Date: 2022-03-20 10:15-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
@@ -22,6 +22,9 @@ msgstr "(standard)"
 
 msgid "24 Hour Time"
 msgstr "24-timers visning"
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr ""
 
 msgid "Abort"
 msgstr "Annuller"
@@ -49,6 +52,12 @@ msgstr "Er du sikker på du vil genstarte systemet?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Er du sikker på du vil lukke systemet?"
+
+msgid "Auto"
+msgstr ""
+
+msgid "Auto-scroll"
+msgstr ""
 
 msgid "Bed Level"
 msgstr "Bed-Level"
@@ -79,6 +88,9 @@ msgstr "Annulleret"
 
 msgid "Cancelling"
 msgstr "Annullerer"
+
+msgid "Cannot connect to Moonraker"
+msgstr ""
 
 msgid "Channel"
 msgstr "Kanal"
@@ -136,9 +148,6 @@ msgstr "Deaktivér motorer"
 msgid "Disable XY"
 msgstr "Deaktivér XY"
 
-msgid "Disconnect"
-msgstr "Afbryd forbindelse"
-
 msgid "Displayed Macros"
 msgstr "Viste makroer"
 
@@ -148,9 +157,6 @@ msgstr "Længde (mm)"
 #, python-format
 msgid "Do you want to recover %s?"
 msgstr "Vil du gendanne %s?"
-
-msgid "Duration Only"
-msgstr "Kun varighed"
 
 msgid "Elapsed:"
 msgstr "Tid:"
@@ -263,28 +269,11 @@ msgstr "Invertér Z"
 msgid "Klipper Restart"
 msgstr "Genstart Klipper"
 
-msgid "Klipper Version"
-msgstr "Klipper version"
-
 msgid "Klipper has disconnected"
 msgstr "Klipper er frokoblet"
 
-msgid ""
-"Klipper has encountered an error with the micro-controller.\n"
-"Please recompile and flash."
-msgstr ""
-"Klipper har fundet en fejl med mcu.\n"
-"Kompilér og flash venligst firmware på ny."
-
 msgid "Klipper has encountered an error."
 msgstr "Klipper har fundet en fejl."
-
-msgid ""
-"Klipper has encountered an error.\n"
-"Issue a FIRMWARE_RESTART to attempt fixing the issue."
-msgstr ""
-"Klipper har fundet en fejl.\n"
-"Tryk på \"Genstart alt\" for at forsøge at udbedre fejlen."
 
 msgid "Klipper has shutdown"
 msgstr "Klipper er lukket ned"
@@ -294,9 +283,6 @@ msgstr "Klipper forsøger at starte"
 
 msgid "Klipper will reboot"
 msgstr "Klipper vil genstarte"
-
-msgid "KlipperScreen Version"
-msgstr "KlipperScreen version"
 
 msgid "Language"
 msgstr "Sprog"
@@ -343,6 +329,9 @@ msgstr "Menu"
 msgid "Modified"
 msgstr "Ændret"
 
+msgid "Moonraker: connected"
+msgstr ""
+
 msgid "Move"
 msgstr "Flytning"
 
@@ -373,11 +362,17 @@ msgid_plural "Packages will be updated"
 msgstr[0] "Pakken vil blive opdateret"
 msgstr[1] "Pakker vil blive opdateret"
 
+msgid "Password saved"
+msgstr ""
+
 msgid "Pause"
 msgstr "Pause"
 
 msgid "Paused"
 msgstr "På pause"
+
+msgid "Please recompile and flash the micro-controller."
+msgstr ""
 
 msgid "Power"
 msgstr "Strømstyring"
@@ -430,6 +425,10 @@ msgstr "Genoptag"
 msgid "Retract"
 msgstr "Retract"
 
+#, python-format
+msgid "Retry #%s"
+msgstr ""
+
 msgid "Save"
 msgstr "Gem"
 
@@ -439,6 +438,9 @@ msgstr "Gem Konfiguration"
 msgid "Save configuration"
 msgstr "Gem Konfiguration"
 
+msgid "Screen DPMS"
+msgstr ""
+
 msgid "Screen Power Off Time"
 msgstr "Skærm timeout"
 
@@ -447,6 +449,13 @@ msgstr "Skruejustering"
 
 msgid "Select"
 msgstr "Vælg"
+
+msgid "Send"
+msgstr ""
+
+#, python-format
+msgid "Sending Power ON signal to: %s"
+msgstr ""
 
 msgid "Set Temp"
 msgstr "Indstil Temp"
@@ -462,6 +471,9 @@ msgstr "Størrelse"
 
 msgid "Slicer"
 msgstr "Slicer"
+
+msgid "Slicer Time correction (%)"
+msgstr ""
 
 msgid "Small"
 msgstr "Lille"
@@ -523,11 +535,11 @@ msgstr "KlipperScreen skal genstartes for at anvende %s"
 msgid "Tool"
 msgstr "Ekstruder"
 
+msgid "Total:"
+msgstr ""
+
 msgid "Unknown Heater"
 msgstr "Ukendt varmelegeme"
-
-msgid "Unknown Heater "
-msgstr "Ukendt varmelegeme "
 
 msgid "Unload"
 msgstr "Tilbagetræk"
@@ -601,6 +613,35 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Unknown Heater "
+#~ msgstr "Ukendt varmelegeme "
+
+#~ msgid "Disconnect"
+#~ msgstr "Afbryd forbindelse"
+
+#~ msgid "Duration Only"
+#~ msgstr "Kun varighed"
+
+#~ msgid "Klipper Version"
+#~ msgstr "Klipper version"
+
+#~ msgid ""
+#~ "Klipper has encountered an error with the micro-controller.\n"
+#~ "Please recompile and flash."
+#~ msgstr ""
+#~ "Klipper har fundet en fejl med mcu.\n"
+#~ "Kompilér og flash venligst firmware på ny."
+
+#~ msgid ""
+#~ "Klipper has encountered an error.\n"
+#~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
+#~ msgstr ""
+#~ "Klipper har fundet en fejl.\n"
+#~ "Tryk på \"Genstart alt\" for at forsøge at udbedre fejlen."
+
+#~ msgid "KlipperScreen Version"
+#~ msgstr "KlipperScreen version"
 
 #~ msgid "Show Only Heaters in Temp."
 #~ msgstr "Vis kun varmelegemer i Temp."

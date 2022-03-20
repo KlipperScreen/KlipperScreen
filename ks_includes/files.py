@@ -6,16 +6,12 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import GLib
 
 class KlippyFiles():
-    thumbnail_dir = "/tmp/.KS-thumbnails"
-
     def __init__(self, screen):
-        self.loop = None
-        self._poll_task = None
         self._screen = screen
         self.callbacks = []
         self.files = {}
         self.filelist = []
-        self.metadata_timeout = {}
+        self.thumbnail_dir = "/tmp/.KS-thumbnails"
 
         if not os.path.exists(self.thumbnail_dir):
             os.makedirs(self.thumbnail_dir)
@@ -29,6 +25,15 @@ class KlippyFiles():
             if "path" in vsd:
                 self.gcodes_path = vsd['path']
         logging.info("Gcodes path: %s" % self.gcodes_path)
+
+    def reset(self):
+        self.run_callbacks()
+        self.callbacks = None
+        self.files = None
+        self.filelist = None
+        self.thumbnail_dir = None
+        self.gcodes_path = None
+        self._screen = None
 
     def _callback(self, result, method, params):
         if method == "server.files.list":
@@ -183,11 +188,9 @@ class KlippyFiles():
 
     def run_callbacks(self, newfiles=[], deletedfiles=[], mods=[]):
         if len(self.callbacks) <= 0:
-            return
-
+            return False
         for cb in self.callbacks:
             GLib.idle_add(cb, newfiles, deletedfiles, mods)
-
         return False
 
     def get_file_list(self):
@@ -196,5 +199,4 @@ class KlippyFiles():
     def get_file_info(self, filename):
         if filename not in self.files:
             return {"path": None, "modified": 0, "size": 0}
-
         return self.files[filename]

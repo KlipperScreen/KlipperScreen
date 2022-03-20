@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-26 15:48-0300\n"
+"POT-Creation-Date: 2022-03-20 10:15-0300\n"
 "PO-Revision-Date: 2022-02-26 15:22-0300\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
@@ -29,6 +29,9 @@ msgstr "(בְּרִירַת מֶחדָל)"
 
 msgid "24 Hour Time"
 msgstr "זמן 24 שעות"
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr ""
 
 msgid "Abort"
 msgstr "בטל"
@@ -57,6 +60,12 @@ msgstr "האם אתה בטוח שברצונך לאתחל את המערכת?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "האם אתה בטוח שברצונך לסגור את המערכת?"
+
+msgid "Auto"
+msgstr ""
+
+msgid "Auto-scroll"
+msgstr ""
 
 msgid "Bed Level"
 msgstr "פילוס מיטה"
@@ -87,6 +96,9 @@ msgstr "מבוטל"
 
 msgid "Cancelling"
 msgstr "מבטל"
+
+msgid "Cannot connect to Moonraker"
+msgstr ""
 
 msgid "Channel"
 msgstr "עָרוּץ"
@@ -144,9 +156,6 @@ msgstr "השבת מנועים"
 msgid "Disable XY"
 msgstr "השבת את XY"
 
-msgid "Disconnect"
-msgstr "לְנַתֵק"
-
 msgid "Displayed Macros"
 msgstr "מוצגים מאקרו"
 
@@ -156,9 +165,6 @@ msgstr "מרחק (מ\"מ)"
 #, python-format
 msgid "Do you want to recover %s?"
 msgstr "האם ברצונך לשחזר %s?"
-
-msgid "Duration Only"
-msgstr "משך הזמן בלבד"
 
 msgid "Elapsed:"
 msgstr "זמן שעבר:"
@@ -271,28 +277,11 @@ msgstr "הפוך את Z"
 msgid "Klipper Restart"
 msgstr "אתחול קליפר"
 
-msgid "Klipper Version"
-msgstr "גרסא של קליפר"
-
 msgid "Klipper has disconnected"
 msgstr "קליפר התנתק"
 
-msgid ""
-"Klipper has encountered an error with the micro-controller.\n"
-"Please recompile and flash."
-msgstr ""
-"קליפר נתקל בשגיאה בבקר המיקרו.\n"
-"אנא הידור מחדש והבהב."
-
 msgid "Klipper has encountered an error."
 msgstr "קילפר נתקל בבעיה."
-
-msgid ""
-"Klipper has encountered an error.\n"
-"Issue a FIRMWARE_RESTART to attempt fixing the issue."
-msgstr ""
-"קליפר נתקל בבעיה. \n"
-"נסה להריץ firmware_restart, כדי לפתור את הבעיה."
 
 msgid "Klipper has shutdown"
 msgstr "קליפר נכבה"
@@ -302,9 +291,6 @@ msgstr "קליפר מנסה לרוץ"
 
 msgid "Klipper will reboot"
 msgstr "קליפר יבצע אתחול"
-
-msgid "KlipperScreen Version"
-msgstr "גרסא של KlipperScreen"
 
 msgid "Language"
 msgstr "שפה"
@@ -351,6 +337,9 @@ msgstr "תַפרִיט"
 msgid "Modified"
 msgstr "שונה"
 
+msgid "Moonraker: connected"
+msgstr ""
+
 msgid "Move"
 msgstr "הזזת צירים"
 
@@ -383,11 +372,17 @@ msgstr[1] "חבילות יעודכנו"
 msgstr[2] "חבילות יעודכנו"
 msgstr[3] "חבילות יעודכנו"
 
+msgid "Password saved"
+msgstr ""
+
 msgid "Pause"
 msgstr "השהיה"
 
 msgid "Paused"
 msgstr "מושהה"
+
+msgid "Please recompile and flash the micro-controller."
+msgstr ""
 
 msgid "Power"
 msgstr "הפעלה"
@@ -440,6 +435,10 @@ msgstr "המשך"
 msgid "Retract"
 msgstr "שיחול לאחור"
 
+#, python-format
+msgid "Retry #%s"
+msgstr ""
+
 msgid "Save"
 msgstr "להציל"
 
@@ -449,6 +448,9 @@ msgstr "שמור קונפיג"
 msgid "Save configuration"
 msgstr "שמור תצורה"
 
+msgid "Screen DPMS"
+msgstr ""
+
 msgid "Screen Power Off Time"
 msgstr "זמן כיבוי מסך"
 
@@ -457,6 +459,13 @@ msgstr "סידור ברגים"
 
 msgid "Select"
 msgstr "בחר"
+
+msgid "Send"
+msgstr ""
+
+#, python-format
+msgid "Sending Power ON signal to: %s"
+msgstr ""
 
 msgid "Set Temp"
 msgstr "הגדר טמפ'"
@@ -472,6 +481,9 @@ msgstr "גודל"
 
 msgid "Slicer"
 msgstr "Slicer"
+
+msgid "Slicer Time correction (%)"
+msgstr ""
 
 msgid "Small"
 msgstr "קָטָן"
@@ -533,11 +545,11 @@ msgstr "כדי ליישם %s צריך להפעיל מחדש את KlipperScreen"
 msgid "Tool"
 msgstr "כלי"
 
+msgid "Total:"
+msgstr ""
+
 msgid "Unknown Heater"
 msgstr "מחמם לא ידוע"
-
-msgid "Unknown Heater "
-msgstr "מחמם לא ידוע "
 
 msgid "Unload"
 msgstr "לִפְרוֹק"
@@ -615,6 +627,35 @@ msgstr "מ\"מ/ש"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Unknown Heater "
+#~ msgstr "מחמם לא ידוע "
+
+#~ msgid "Disconnect"
+#~ msgstr "לְנַתֵק"
+
+#~ msgid "Duration Only"
+#~ msgstr "משך הזמן בלבד"
+
+#~ msgid "Klipper Version"
+#~ msgstr "גרסא של קליפר"
+
+#~ msgid ""
+#~ "Klipper has encountered an error with the micro-controller.\n"
+#~ "Please recompile and flash."
+#~ msgstr ""
+#~ "קליפר נתקל בשגיאה בבקר המיקרו.\n"
+#~ "אנא הידור מחדש והבהב."
+
+#~ msgid ""
+#~ "Klipper has encountered an error.\n"
+#~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
+#~ msgstr ""
+#~ "קליפר נתקל בבעיה. \n"
+#~ "נסה להריץ firmware_restart, כדי לפתור את הבעיה."
+
+#~ msgid "KlipperScreen Version"
+#~ msgstr "גרסא של KlipperScreen"
 
 #~ msgid "Show Only Heaters in Temp."
 #~ msgstr "הצג רק מחממים בטמפ'."

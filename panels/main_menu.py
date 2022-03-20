@@ -48,7 +48,8 @@ class MainPanel(MenuPanel):
 
     def activate(self):
         if self.graph_update is None:
-            self.graph_update = GLib.timeout_add_seconds(1, self.update_graph)
+            # This has a high impact on load
+            self.graph_update = GLib.timeout_add_seconds(5, self.update_graph)
         return
 
     def deactivate(self):
@@ -185,7 +186,7 @@ class MainPanel(MenuPanel):
             self._screen._ws.klippy.set_temp_fan_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
         else:
             logging.info("Unknown heater: %s" % self.active_heater)
-            self._screen.show_popup_message(_("Unknown Heater") + self.active_heater)
+            self._screen.show_popup_message(_("Unknown Heater") + " " + self.active_heater)
         self._printer.set_dev_stat(self.active_heater, "target", temp)
 
     def create_left_panel(self):

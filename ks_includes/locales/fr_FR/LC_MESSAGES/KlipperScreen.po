@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-26 15:48-0300\n"
+"POT-Creation-Date: 2022-03-20 10:15-0300\n"
 "PO-Revision-Date: 2022-02-26 15:16-0300\n"
 "Last-Translator: O. Robardet\n"
 "Language-Team: \n"
@@ -27,6 +27,9 @@ msgstr "(défaut)"
 
 msgid "24 Hour Time"
 msgstr "Format 24 heures"
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr ""
 
 msgid "Abort"
 msgstr "Annuler"
@@ -54,6 +57,12 @@ msgstr "Êtes-vous sûr de vouloir redémarrer le système?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Êtes-vous sûr de vouloir arrêter le système?"
+
+msgid "Auto"
+msgstr ""
+
+msgid "Auto-scroll"
+msgstr ""
 
 msgid "Bed Level"
 msgstr "Nivelage du plateau"
@@ -84,6 +93,9 @@ msgstr "Annulé"
 
 msgid "Cancelling"
 msgstr "Annulation"
+
+msgid "Cannot connect to Moonraker"
+msgstr ""
 
 msgid "Channel"
 msgstr "Canal"
@@ -141,9 +153,6 @@ msgstr "Désactiver les moteurs"
 msgid "Disable XY"
 msgstr "Désactiver XY"
 
-msgid "Disconnect"
-msgstr "Déconnecter"
-
 msgid "Displayed Macros"
 msgstr "Macros affichées"
 
@@ -153,9 +162,6 @@ msgstr "Distance (mm)"
 #, python-format
 msgid "Do you want to recover %s?"
 msgstr "Voulez-vous récupérer %s ?"
-
-msgid "Duration Only"
-msgstr "Durée seulement"
 
 msgid "Elapsed:"
 msgstr "Écoulé:"
@@ -270,28 +276,11 @@ msgstr ""
 "Redémarrer\n"
 "Klipper"
 
-msgid "Klipper Version"
-msgstr "Version de Klipper"
-
 msgid "Klipper has disconnected"
 msgstr "Klipper s'est déconnecté"
 
-msgid ""
-"Klipper has encountered an error with the micro-controller.\n"
-"Please recompile and flash."
-msgstr ""
-"Klipper a rencontré une erreur avec le micro-contrôleur.\n"
-"Veuillez recompiler et reflasher."
-
 msgid "Klipper has encountered an error."
 msgstr "Klipper a rencontré une erreur."
-
-msgid ""
-"Klipper has encountered an error.\n"
-"Issue a FIRMWARE_RESTART to attempt fixing the issue."
-msgstr ""
-"Klipper a rencontré une erreur. \n"
-"Taper FIRMWARE_RESTART pour fixer l'erreur."
 
 msgid "Klipper has shutdown"
 msgstr "Klipper s'est arrêté"
@@ -301,9 +290,6 @@ msgstr "Klipper tente de démarrer"
 
 msgid "Klipper will reboot"
 msgstr "Klipper va redémarrer"
-
-msgid "KlipperScreen Version"
-msgstr "Version de KlipperScreen"
 
 msgid "Language"
 msgstr "Langue"
@@ -350,6 +336,9 @@ msgstr "Menu"
 msgid "Modified"
 msgstr "Modifié"
 
+msgid "Moonraker: connected"
+msgstr ""
+
 msgid "Move"
 msgstr "Mouvement"
 
@@ -380,11 +369,17 @@ msgid_plural "Packages will be updated"
 msgstr[0] "Le paquet sera mis à jour"
 msgstr[1] "Forfaits seront mis à jour"
 
+msgid "Password saved"
+msgstr ""
+
 msgid "Pause"
 msgstr "Pause"
 
 msgid "Paused"
 msgstr "En pause"
+
+msgid "Please recompile and flash the micro-controller."
+msgstr ""
 
 msgid "Power"
 msgstr "Alimentation"
@@ -437,6 +432,10 @@ msgstr "Reprendre"
 msgid "Retract"
 msgstr "Rétracter"
 
+#, python-format
+msgid "Retry #%s"
+msgstr ""
+
 msgid "Save"
 msgstr "Enregistrer"
 
@@ -446,6 +445,9 @@ msgstr "Enregistrer la config"
 msgid "Save configuration"
 msgstr "Enregistrer la configuration"
 
+msgid "Screen DPMS"
+msgstr ""
+
 msgid "Screen Power Off Time"
 msgstr "Délai d'extinction de l'écran"
 
@@ -454,6 +456,13 @@ msgstr "Ajuster les vis"
 
 msgid "Select"
 msgstr "Sélectionner"
+
+msgid "Send"
+msgstr ""
+
+#, python-format
+msgid "Sending Power ON signal to: %s"
+msgstr ""
 
 msgid "Set Temp"
 msgstr "Régler la temp"
@@ -469,6 +478,9 @@ msgstr "Dimension"
 
 msgid "Slicer"
 msgstr "Trancheur"
+
+msgid "Slicer Time correction (%)"
+msgstr ""
 
 msgid "Small"
 msgstr "Petit"
@@ -528,11 +540,11 @@ msgstr "Pour appliquer %s KlipperScreen doit être redémarré"
 msgid "Tool"
 msgstr "Outil"
 
+msgid "Total:"
+msgstr ""
+
 msgid "Unknown Heater"
 msgstr "Chauffage inconnu"
-
-msgid "Unknown Heater "
-msgstr "Chauffage inconnu "
 
 msgid "Unload"
 msgstr "Décharger"
@@ -606,6 +618,35 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Unknown Heater "
+#~ msgstr "Chauffage inconnu "
+
+#~ msgid "Disconnect"
+#~ msgstr "Déconnecter"
+
+#~ msgid "Duration Only"
+#~ msgstr "Durée seulement"
+
+#~ msgid "Klipper Version"
+#~ msgstr "Version de Klipper"
+
+#~ msgid ""
+#~ "Klipper has encountered an error with the micro-controller.\n"
+#~ "Please recompile and flash."
+#~ msgstr ""
+#~ "Klipper a rencontré une erreur avec le micro-contrôleur.\n"
+#~ "Veuillez recompiler et reflasher."
+
+#~ msgid ""
+#~ "Klipper has encountered an error.\n"
+#~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
+#~ msgstr ""
+#~ "Klipper a rencontré une erreur. \n"
+#~ "Taper FIRMWARE_RESTART pour fixer l'erreur."
+
+#~ msgid "KlipperScreen Version"
+#~ msgstr "Version de KlipperScreen"
 
 #~ msgid "Show Only Heaters in Temp."
 #~ msgstr "Afficher uniquement les éléments chauffants en temp."

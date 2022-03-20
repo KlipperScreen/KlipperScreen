@@ -30,6 +30,24 @@ class Printer:
         self.power_devices = {}
         self.store_timeout = False
 
+    def reset(self):
+        self.state = None
+        self.state_cb = None
+        self.data = None
+        self.devices = None
+        self.power_devices = None
+        self.state_callbacks = None
+        self.tools = None
+        self.toolcount = None
+        self.extrudercount = None
+        self.tempdevcount = None
+        self.fancount = None
+        GLib.source_remove(self.store_timeout)
+        self.store_timeout = None
+        self.config = None
+        self.klipper = None
+        self.tempstore = None
+
     def reinit(self, printer_info, data):
         logging.debug("Moonraker object status: %s" % data)
         self.config = data['configfile']['config']
@@ -377,5 +395,8 @@ class Printer:
             for x in self.tempstore[device]:
                 if len(self.tempstore[device][x]) >= 1200:
                     self.tempstore[device][x].pop(0)
-                self.tempstore[device][x].append(round(self.get_dev_stat(device, x[:-1]), 2))
+                temp = self.get_dev_stat(device, x[:-1])
+                if temp is None:
+                    temp = 0
+                self.tempstore[device][x].append(round(temp))
         return True
