@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-26 15:48-0300\n"
+"POT-Creation-Date: 2022-03-20 10:15-0300\n"
 "PO-Revision-Date: 2022-02-26 15:47-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -27,6 +27,9 @@ msgstr "（默认)"
 
 msgid "24 Hour Time"
 msgstr "使用 24 小时制"
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr ""
 
 msgid "Abort"
 msgstr "终止"
@@ -54,6 +57,12 @@ msgstr "您确定要重启系统吗?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "您确定要关闭系统吗?"
+
+msgid "Auto"
+msgstr ""
+
+msgid "Auto-scroll"
+msgstr ""
 
 msgid "Bed Level"
 msgstr "热床调平"
@@ -84,6 +93,9 @@ msgstr "已取消"
 
 msgid "Cancelling"
 msgstr "正在取消"
+
+msgid "Cannot connect to Moonraker"
+msgstr ""
 
 msgid "Channel"
 msgstr "更新通道"
@@ -141,9 +153,6 @@ msgstr "禁用步进电机"
 msgid "Disable XY"
 msgstr "关闭 XY 电机"
 
-msgid "Disconnect"
-msgstr "断开"
-
 msgid "Displayed Macros"
 msgstr "宏命令显示开关"
 
@@ -153,9 +162,6 @@ msgstr "挤出距离(mm)"
 #, python-format
 msgid "Do you want to recover %s?"
 msgstr "您想恢复 %s 吗？"
-
-msgid "Duration Only"
-msgstr "持续时间"
 
 msgid "Elapsed:"
 msgstr "已用时间："
@@ -268,28 +274,11 @@ msgstr "反转 Z"
 msgid "Klipper Restart"
 msgstr "重启Klipper"
 
-msgid "Klipper Version"
-msgstr "Klipper 版本"
-
 msgid "Klipper has disconnected"
 msgstr "Klipper 已断开连接"
 
-msgid ""
-"Klipper has encountered an error with the micro-controller.\n"
-"Please recompile and flash."
-msgstr ""
-"Klipper与MCU通讯错误。\n"
-"请为主板重新烧录固件。"
-
 msgid "Klipper has encountered an error."
 msgstr "Klipper遇到一个错误。"
-
-msgid ""
-"Klipper has encountered an error.\n"
-"Issue a FIRMWARE_RESTART to attempt fixing the issue."
-msgstr ""
-"Klipper 遇到错误。\n"
-"使用 重启Firmware 命令尝试解决此问题。"
 
 msgid "Klipper has shutdown"
 msgstr "Klipper 已关闭"
@@ -299,9 +288,6 @@ msgstr "Klipper 正在尝试启动"
 
 msgid "Klipper will reboot"
 msgstr "并重新启动Klipper"
-
-msgid "KlipperScreen Version"
-msgstr "KlipperScreen 版本"
 
 msgid "Language"
 msgstr "界面语言"
@@ -348,6 +334,9 @@ msgstr "菜单"
 msgid "Modified"
 msgstr "修改"
 
+msgid "Moonraker: connected"
+msgstr ""
+
 msgid "Move"
 msgstr "移动"
 
@@ -377,11 +366,17 @@ msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "包将被更新"
 
+msgid "Password saved"
+msgstr ""
+
 msgid "Pause"
 msgstr "暂停"
 
 msgid "Paused"
 msgstr "已暂停"
+
+msgid "Please recompile and flash the micro-controller."
+msgstr ""
 
 msgid "Power"
 msgstr "电源开关"
@@ -434,6 +429,10 @@ msgstr "恢复"
 msgid "Retract"
 msgstr "回抽"
 
+#, python-format
+msgid "Retry #%s"
+msgstr ""
+
 msgid "Save"
 msgstr "保存"
 
@@ -443,6 +442,9 @@ msgstr "保存配置"
 msgid "Save configuration"
 msgstr "即将保存配置文件"
 
+msgid "Screen DPMS"
+msgstr ""
+
 msgid "Screen Power Off Time"
 msgstr "关闭屏幕"
 
@@ -451,6 +453,13 @@ msgstr "平台螺丝调整"
 
 msgid "Select"
 msgstr "选择"
+
+msgid "Send"
+msgstr ""
+
+#, python-format
+msgid "Sending Power ON signal to: %s"
+msgstr ""
 
 msgid "Set Temp"
 msgstr "设定温度"
@@ -466,6 +475,9 @@ msgstr "文件大小"
 
 msgid "Slicer"
 msgstr "切片软件"
+
+msgid "Slicer Time correction (%)"
+msgstr ""
 
 msgid "Small"
 msgstr "小"
@@ -523,11 +535,11 @@ msgstr "要应用 %s 主题，需要重新启动 KlipperScreen"
 msgid "Tool"
 msgstr "工具"
 
+msgid "Total:"
+msgstr ""
+
 msgid "Unknown Heater"
 msgstr "未知加热器"
-
-msgid "Unknown Heater "
-msgstr "未知加热器 "
 
 msgid "Unload"
 msgstr "退出耗材"
@@ -599,6 +611,35 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Unknown Heater "
+#~ msgstr "未知加热器 "
+
+#~ msgid "Disconnect"
+#~ msgstr "断开"
+
+#~ msgid "Duration Only"
+#~ msgstr "持续时间"
+
+#~ msgid "Klipper Version"
+#~ msgstr "Klipper 版本"
+
+#~ msgid ""
+#~ "Klipper has encountered an error with the micro-controller.\n"
+#~ "Please recompile and flash."
+#~ msgstr ""
+#~ "Klipper与MCU通讯错误。\n"
+#~ "请为主板重新烧录固件。"
+
+#~ msgid ""
+#~ "Klipper has encountered an error.\n"
+#~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
+#~ msgstr ""
+#~ "Klipper 遇到错误。\n"
+#~ "使用 重启Firmware 命令尝试解决此问题。"
+
+#~ msgid "KlipperScreen Version"
+#~ msgstr "KlipperScreen 版本"
 
 #~ msgid "Show Only Heaters in Temp."
 #~ msgstr "仅显示使用中的加热器"

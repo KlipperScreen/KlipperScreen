@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-26 15:48-0300\n"
+"POT-Creation-Date: 2022-03-20 10:15-0300\n"
 "PO-Revision-Date: 2022-03-05 23:08+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -27,6 +27,9 @@ msgstr "(Standard)"
 
 msgid "24 Hour Time"
 msgstr "24h-Zeit"
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr ""
 
 msgid "Abort"
 msgstr "Abbrechen"
@@ -54,6 +57,12 @@ msgstr "Möchten Sie das System wirklich neu starten?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Möchten Sie das System wirklich herunterfahren?"
+
+msgid "Auto"
+msgstr ""
+
+msgid "Auto-scroll"
+msgstr ""
 
 msgid "Bed Level"
 msgstr "Druckbett leveln"
@@ -84,6 +93,9 @@ msgstr "Abgebrochen"
 
 msgid "Cancelling"
 msgstr "Wird unterbrochen"
+
+msgid "Cannot connect to Moonraker"
+msgstr ""
 
 msgid "Channel"
 msgstr "Kanal"
@@ -141,9 +153,6 @@ msgstr "Motoren deaktivieren"
 msgid "Disable XY"
 msgstr "Achse XY deaktivieren"
 
-msgid "Disconnect"
-msgstr "Nicht verbunden"
-
 msgid "Displayed Macros"
 msgstr "Aktive Macros"
 
@@ -153,9 +162,6 @@ msgstr "Entfernung (mm)"
 #, python-format
 msgid "Do you want to recover %s?"
 msgstr "Möchtest du zurück zu %s?"
-
-msgid "Duration Only"
-msgstr "Reine Druckzeit"
 
 msgid "Elapsed:"
 msgstr "Druckzeit:"
@@ -278,28 +284,11 @@ msgstr "Achse Z invertieren"
 msgid "Klipper Restart"
 msgstr "Klipper neustarten"
 
-msgid "Klipper Version"
-msgstr "Klipper Version"
-
 msgid "Klipper has disconnected"
 msgstr "Klipper nicht verbunden"
 
-msgid ""
-"Klipper has encountered an error with the micro-controller.\n"
-"Please recompile and flash."
-msgstr ""
-"Klipper hat einen Fehler mit dem Mainboard festgestellt.\n"
-"Bitte Mainboard neu programmieren."
-
 msgid "Klipper has encountered an error."
 msgstr "Klipper hat einen Fehler festgestellt."
-
-msgid ""
-"Klipper has encountered an error.\n"
-"Issue a FIRMWARE_RESTART to attempt fixing the issue."
-msgstr ""
-"Klipper hat einen Fehler festgestellt.\n"
-"Führe einen FIRMWARE_RESTART durch um den Fehler zu beheben."
 
 msgid "Klipper has shutdown"
 msgstr "Klipper abgeschaltet"
@@ -309,9 +298,6 @@ msgstr "Klipper ist startbereit"
 
 msgid "Klipper will reboot"
 msgstr "Klipper startet neu"
-
-msgid "KlipperScreen Version"
-msgstr "KlipperScreen Version"
 
 msgid "Language"
 msgstr "Sprache"
@@ -358,6 +344,9 @@ msgstr "Menü"
 msgid "Modified"
 msgstr "Modifiziert"
 
+msgid "Moonraker: connected"
+msgstr ""
+
 msgid "Move"
 msgstr "Bewegen"
 
@@ -388,11 +377,17 @@ msgid_plural "Packages will be updated"
 msgstr[0] "Paket wird aktualisiert"
 msgstr[1] "Pakete werden aktualisiert"
 
+msgid "Password saved"
+msgstr ""
+
 msgid "Pause"
 msgstr "Pause"
 
 msgid "Paused"
 msgstr "Pausiert"
+
+msgid "Please recompile and flash the micro-controller."
+msgstr ""
 
 msgid "Power"
 msgstr "Ein"
@@ -449,6 +444,10 @@ msgstr "Fortsetzen"
 msgid "Retract"
 msgstr "Zurückziehen"
 
+#, python-format
+msgid "Retry #%s"
+msgstr ""
+
 msgid "Save"
 msgstr "Speichern"
 
@@ -458,6 +457,9 @@ msgstr "Einstellungen speichern"
 msgid "Save configuration"
 msgstr "Speichere Einstellungen"
 
+msgid "Screen DPMS"
+msgstr ""
+
 msgid "Screen Power Off Time"
 msgstr "Bildschirm abschalten in"
 
@@ -466,6 +468,13 @@ msgstr "Schrauben Einstellen"
 
 msgid "Select"
 msgstr "Wählen"
+
+msgid "Send"
+msgstr ""
+
+#, python-format
+msgid "Sending Power ON signal to: %s"
+msgstr ""
 
 msgid "Set Temp"
 msgstr "Temp. einstellen"
@@ -481,6 +490,9 @@ msgstr "Größe"
 
 msgid "Slicer"
 msgstr "Slicer"
+
+msgid "Slicer Time correction (%)"
+msgstr ""
 
 msgid "Small"
 msgstr "Klein"
@@ -542,11 +554,11 @@ msgstr "Zum Übernehmen von %s benötigt Klipperscreen einen Neustart"
 msgid "Tool"
 msgstr "Druckkopf"
 
+msgid "Total:"
+msgstr ""
+
 msgid "Unknown Heater"
 msgstr "Unbekannte Heizung"
-
-msgid "Unknown Heater "
-msgstr "Unbekannte Heizung "
 
 msgid "Unload"
 msgstr "Entladen"
@@ -622,6 +634,35 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Unknown Heater "
+#~ msgstr "Unbekannte Heizung "
+
+#~ msgid "Disconnect"
+#~ msgstr "Nicht verbunden"
+
+#~ msgid "Duration Only"
+#~ msgstr "Reine Druckzeit"
+
+#~ msgid "Klipper Version"
+#~ msgstr "Klipper Version"
+
+#~ msgid ""
+#~ "Klipper has encountered an error with the micro-controller.\n"
+#~ "Please recompile and flash."
+#~ msgstr ""
+#~ "Klipper hat einen Fehler mit dem Mainboard festgestellt.\n"
+#~ "Bitte Mainboard neu programmieren."
+
+#~ msgid ""
+#~ "Klipper has encountered an error.\n"
+#~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
+#~ msgstr ""
+#~ "Klipper hat einen Fehler festgestellt.\n"
+#~ "Führe einen FIRMWARE_RESTART durch um den Fehler zu beheben."
+
+#~ msgid "KlipperScreen Version"
+#~ msgstr "KlipperScreen Version"
 
 #~ msgid "Show Only Heaters in Temp."
 #~ msgstr "Nur Heizungen in Temp anzeigen."

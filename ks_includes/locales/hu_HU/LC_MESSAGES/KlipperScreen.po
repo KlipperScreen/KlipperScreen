@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-26 15:48-0300\n"
+"POT-Creation-Date: 2022-03-20 10:15-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -22,6 +22,9 @@ msgstr "(alapértelmezett)"
 
 msgid "24 Hour Time"
 msgstr "24 Órás Idő"
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr ""
 
 msgid "Abort"
 msgstr "Megszakít"
@@ -49,6 +52,12 @@ msgstr "Biztos benne, hogy újra akarja indítani a rendszert?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Biztos, hogy le szeretné állítani a rendszert?"
+
+msgid "Auto"
+msgstr ""
+
+msgid "Auto-scroll"
+msgstr ""
 
 msgid "Bed Level"
 msgstr "Ágyszint"
@@ -79,6 +88,9 @@ msgstr "Törölve"
 
 msgid "Cancelling"
 msgstr "Törlés"
+
+msgid "Cannot connect to Moonraker"
+msgstr ""
 
 msgid "Channel"
 msgstr "Csatorna"
@@ -136,9 +148,6 @@ msgstr "Motorok letiltása"
 msgid "Disable XY"
 msgstr "XY Letiltása"
 
-msgid "Disconnect"
-msgstr "Leválasztás"
-
 msgid "Displayed Macros"
 msgstr "Megjelenített makrók"
 
@@ -148,9 +157,6 @@ msgstr "Távolság (mm)"
 #, python-format
 msgid "Do you want to recover %s?"
 msgstr "Vissza akarja állítani %s-t?"
-
-msgid "Duration Only"
-msgstr "Csak időtartam"
 
 msgid "Elapsed:"
 msgstr "Eltelt:"
@@ -263,28 +269,11 @@ msgstr "Fordított Z"
 msgid "Klipper Restart"
 msgstr "Klipper Újraindítása"
 
-msgid "Klipper Version"
-msgstr "Klipper verzió"
-
 msgid "Klipper has disconnected"
 msgstr "Klipper szétkapcsolt"
 
-msgid ""
-"Klipper has encountered an error with the micro-controller.\n"
-"Please recompile and flash."
-msgstr ""
-"A Klipper hibát észlelt a mikrovezérlővel kapcsolatban.\n"
-"Fordítsa újra és töltse fel."
-
 msgid "Klipper has encountered an error."
 msgstr "A Klipper hibát észlelt."
-
-msgid ""
-"Klipper has encountered an error.\n"
-"Issue a FIRMWARE_RESTART to attempt fixing the issue."
-msgstr ""
-"A Klipper hibát észlelt.\n"
-"A probléma megoldásához küldjön ki egy FIRMWARE_RESTART-ot."
 
 msgid "Klipper has shutdown"
 msgstr "A Klipper leállt"
@@ -294,9 +283,6 @@ msgstr "Klipper megpróbálja elindítani"
 
 msgid "Klipper will reboot"
 msgstr "A Klipper újraindul"
-
-msgid "KlipperScreen Version"
-msgstr "KlipperScreen verzió"
 
 msgid "Language"
 msgstr "Nyelv"
@@ -343,6 +329,9 @@ msgstr "Menü"
 msgid "Modified"
 msgstr "Módosított"
 
+msgid "Moonraker: connected"
+msgstr ""
+
 msgid "Move"
 msgstr "Mozgatás"
 
@@ -373,11 +362,17 @@ msgid_plural "Packages will be updated"
 msgstr[0] "A csomag frissítésre kerül"
 msgstr[1] "Csomag frissül"
 
+msgid "Password saved"
+msgstr ""
+
 msgid "Pause"
 msgstr "Szünet"
 
 msgid "Paused"
 msgstr "Szüneteltetve"
+
+msgid "Please recompile and flash the micro-controller."
+msgstr ""
 
 msgid "Power"
 msgstr "Bekapcsolás"
@@ -430,6 +425,10 @@ msgstr "Folytat"
 msgid "Retract"
 msgstr "Visszahúz"
 
+#, python-format
+msgid "Retry #%s"
+msgstr ""
+
 msgid "Save"
 msgstr "Mentés"
 
@@ -439,6 +438,9 @@ msgstr "Konfiguráció mentése"
 msgid "Save configuration"
 msgstr "Konfiguráció mentése"
 
+msgid "Screen DPMS"
+msgstr ""
+
 msgid "Screen Power Off Time"
 msgstr "Kijelző kikapcsolási ideje"
 
@@ -447,6 +449,13 @@ msgstr "Csavarok beállítása"
 
 msgid "Select"
 msgstr "Kijelölés"
+
+msgid "Send"
+msgstr ""
+
+#, python-format
+msgid "Sending Power ON signal to: %s"
+msgstr ""
 
 msgid "Set Temp"
 msgstr "Hőfok megadás"
@@ -462,6 +471,9 @@ msgstr "Méret"
 
 msgid "Slicer"
 msgstr "Szeletelő"
+
+msgid "Slicer Time correction (%)"
+msgstr ""
 
 msgid "Small"
 msgstr "Kicsi"
@@ -523,11 +535,11 @@ msgstr "A %s KlipperScreen alkalmazásához újra kell indítani"
 msgid "Tool"
 msgstr "Eszköz"
 
+msgid "Total:"
+msgstr ""
+
 msgid "Unknown Heater"
 msgstr "Ismeretlen melegítő"
-
-msgid "Unknown Heater "
-msgstr "Ismeretlen melegítő "
 
 msgid "Unload"
 msgstr "Kiadás"
@@ -601,3 +613,32 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Unknown Heater "
+#~ msgstr "Ismeretlen melegítő "
+
+#~ msgid "Disconnect"
+#~ msgstr "Leválasztás"
+
+#~ msgid "Duration Only"
+#~ msgstr "Csak időtartam"
+
+#~ msgid "Klipper Version"
+#~ msgstr "Klipper verzió"
+
+#~ msgid ""
+#~ "Klipper has encountered an error with the micro-controller.\n"
+#~ "Please recompile and flash."
+#~ msgstr ""
+#~ "A Klipper hibát észlelt a mikrovezérlővel kapcsolatban.\n"
+#~ "Fordítsa újra és töltse fel."
+
+#~ msgid ""
+#~ "Klipper has encountered an error.\n"
+#~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
+#~ msgstr ""
+#~ "A Klipper hibát észlelt.\n"
+#~ "A probléma megoldásához küldjön ki egy FIRMWARE_RESTART-ot."
+
+#~ msgid "KlipperScreen Version"
+#~ msgstr "KlipperScreen verzió"

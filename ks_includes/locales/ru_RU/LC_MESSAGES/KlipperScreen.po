@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-26 15:48-0300\n"
+"POT-Creation-Date: 2022-03-20 10:15-0300\n"
 "PO-Revision-Date: 2022-02-26 15:33-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: \n"
@@ -28,6 +28,9 @@ msgstr "(дефолт)"
 
 msgid "24 Hour Time"
 msgstr "24-часовой формат"
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr ""
 
 msgid "Abort"
 msgstr "Отменить"
@@ -55,6 +58,12 @@ msgstr "Вы уверены что хотите перезагрузить си�
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Вы хотите выключить принтер?"
+
+msgid "Auto"
+msgstr ""
+
+msgid "Auto-scroll"
+msgstr ""
 
 msgid "Bed Level"
 msgstr "Уровень стола"
@@ -85,6 +94,9 @@ msgstr "Отменено"
 
 msgid "Cancelling"
 msgstr "Отменить"
+
+msgid "Cannot connect to Moonraker"
+msgstr ""
 
 msgid "Channel"
 msgstr "Канал"
@@ -142,9 +154,6 @@ msgstr "Откл. моторы"
 msgid "Disable XY"
 msgstr "Отключить XY"
 
-msgid "Disconnect"
-msgstr "Отключить"
-
 msgid "Displayed Macros"
 msgstr "Показать  макросы"
 
@@ -154,9 +163,6 @@ msgstr "Расстояние (mm)"
 #, python-format
 msgid "Do you want to recover %s?"
 msgstr "Вы хотите восстановить% s?"
-
-msgid "Duration Only"
-msgstr "Продолжительность печати"
 
 msgid "Elapsed:"
 msgstr "Прошло:"
@@ -271,28 +277,11 @@ msgstr ""
 "Рестарт\n"
 "Klipper"
 
-msgid "Klipper Version"
-msgstr "Версия Klipper"
-
 msgid "Klipper has disconnected"
 msgstr "Нет связи с Klipper"
 
-msgid ""
-"Klipper has encountered an error with the micro-controller.\n"
-"Please recompile and flash."
-msgstr ""
-"Klipper определил ошибку в микроконтроллере.\n"
-"Прошейте заново."
-
 msgid "Klipper has encountered an error."
 msgstr "Klipper обнаружил ошибку."
-
-msgid ""
-"Klipper has encountered an error.\n"
-"Issue a FIRMWARE_RESTART to attempt fixing the issue."
-msgstr ""
-"Klipper обнаружил ошибку.\n"
-"Выполните перезагрузку прошивки, чтобы попытаться исправить проблему."
 
 msgid "Klipper has shutdown"
 msgstr "Klipper отключился"
@@ -302,9 +291,6 @@ msgstr "Klipper готов"
 
 msgid "Klipper will reboot"
 msgstr "Klipper перезагружается"
-
-msgid "KlipperScreen Version"
-msgstr "Версия KlipperScreen"
 
 msgid "Language"
 msgstr "Язык"
@@ -351,6 +337,9 @@ msgstr "Меню"
 msgid "Modified"
 msgstr "Изменено"
 
+msgid "Moonraker: connected"
+msgstr ""
+
 msgid "Move"
 msgstr "Двигать"
 
@@ -382,11 +371,17 @@ msgstr[0] "Пакет будет обновлен"
 msgstr[1] "Пакеты будут обновлены "
 msgstr[2] "Пакеты будут обновлены "
 
+msgid "Password saved"
+msgstr ""
+
 msgid "Pause"
 msgstr "Пауза"
 
 msgid "Paused"
 msgstr "Приостановлено"
+
+msgid "Please recompile and flash the micro-controller."
+msgstr ""
 
 msgid "Power"
 msgstr "Включено"
@@ -439,6 +434,10 @@ msgstr "Продолжить"
 msgid "Retract"
 msgstr "Втянуть"
 
+#, python-format
+msgid "Retry #%s"
+msgstr ""
+
 msgid "Save"
 msgstr "Сохранить"
 
@@ -448,6 +447,9 @@ msgstr "Сохр. Конфиг"
 msgid "Save configuration"
 msgstr "Настройки сохраняются"
 
+msgid "Screen DPMS"
+msgstr ""
+
 msgid "Screen Power Off Time"
 msgstr "Время выключения экрана"
 
@@ -456,6 +458,13 @@ msgstr "Настроить винты"
 
 msgid "Select"
 msgstr "Выбирать"
+
+msgid "Send"
+msgstr ""
+
+#, python-format
+msgid "Sending Power ON signal to: %s"
+msgstr ""
 
 msgid "Set Temp"
 msgstr "Заданная температура"
@@ -471,6 +480,9 @@ msgstr "Размер"
 
 msgid "Slicer"
 msgstr "Слайсер"
+
+msgid "Slicer Time correction (%)"
+msgstr ""
 
 msgid "Small"
 msgstr "Маленький"
@@ -530,11 +542,11 @@ msgstr "Чтобы применить %s необходимо перезапус
 msgid "Tool"
 msgstr "Инструмент"
 
+msgid "Total:"
+msgstr ""
+
 msgid "Unknown Heater"
 msgstr "Неизвестный обогреватель"
-
-msgid "Unknown Heater "
-msgstr "Неизвестный обогреватель "
 
 msgid "Unload"
 msgstr "Загружено"
@@ -610,6 +622,35 @@ msgstr "мм/с"
 
 msgid "mm/s^2"
 msgstr "мм/с^2"
+
+#~ msgid "Unknown Heater "
+#~ msgstr "Неизвестный обогреватель "
+
+#~ msgid "Disconnect"
+#~ msgstr "Отключить"
+
+#~ msgid "Duration Only"
+#~ msgstr "Продолжительность печати"
+
+#~ msgid "Klipper Version"
+#~ msgstr "Версия Klipper"
+
+#~ msgid ""
+#~ "Klipper has encountered an error with the micro-controller.\n"
+#~ "Please recompile and flash."
+#~ msgstr ""
+#~ "Klipper определил ошибку в микроконтроллере.\n"
+#~ "Прошейте заново."
+
+#~ msgid ""
+#~ "Klipper has encountered an error.\n"
+#~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
+#~ msgstr ""
+#~ "Klipper обнаружил ошибку.\n"
+#~ "Выполните перезагрузку прошивки, чтобы попытаться исправить проблему."
+
+#~ msgid "KlipperScreen Version"
+#~ msgstr "Версия KlipperScreen"
 
 #~ msgid "Show Only Heaters in Temp."
 #~ msgstr "Показать только нагреватели в темп."

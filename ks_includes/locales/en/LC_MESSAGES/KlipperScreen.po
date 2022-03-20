@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-26 15:48-0300\n"
+"POT-Creation-Date: 2022-03-20 10:15-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -21,6 +21,9 @@ msgid "(default)"
 msgstr ""
 
 msgid "24 Hour Time"
+msgstr ""
+
+msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr ""
 
 msgid "Abort"
@@ -48,6 +51,12 @@ msgid "Are you sure you wish to reboot the system?"
 msgstr ""
 
 msgid "Are you sure you wish to shutdown the system?"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Auto-scroll"
 msgstr ""
 
 msgid "Bed Level"
@@ -78,6 +87,9 @@ msgid "Cancelled"
 msgstr ""
 
 msgid "Cancelling"
+msgstr ""
+
+msgid "Cannot connect to Moonraker"
 msgstr ""
 
 msgid "Channel"
@@ -134,9 +146,6 @@ msgstr ""
 msgid "Disable XY"
 msgstr ""
 
-msgid "Disconnect"
-msgstr ""
-
 msgid "Displayed Macros"
 msgstr ""
 
@@ -145,9 +154,6 @@ msgstr ""
 
 #, python-format
 msgid "Do you want to recover %s?"
-msgstr ""
-
-msgid "Duration Only"
 msgstr ""
 
 msgid "Elapsed:"
@@ -261,23 +267,10 @@ msgstr ""
 msgid "Klipper Restart"
 msgstr ""
 
-msgid "Klipper Version"
-msgstr ""
-
 msgid "Klipper has disconnected"
 msgstr ""
 
-msgid ""
-"Klipper has encountered an error with the micro-controller.\n"
-"Please recompile and flash."
-msgstr ""
-
 msgid "Klipper has encountered an error."
-msgstr ""
-
-msgid ""
-"Klipper has encountered an error.\n"
-"Issue a FIRMWARE_RESTART to attempt fixing the issue."
 msgstr ""
 
 msgid "Klipper has shutdown"
@@ -287,9 +280,6 @@ msgid "Klipper is attempting to start"
 msgstr ""
 
 msgid "Klipper will reboot"
-msgstr ""
-
-msgid "KlipperScreen Version"
 msgstr ""
 
 msgid "Language"
@@ -337,6 +327,9 @@ msgstr ""
 msgid "Modified"
 msgstr ""
 
+msgid "Moonraker: connected"
+msgstr ""
+
 msgid "Move"
 msgstr ""
 
@@ -367,10 +360,16 @@ msgid_plural "Packages will be updated"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "Password saved"
+msgstr ""
+
 msgid "Pause"
 msgstr ""
 
 msgid "Paused"
+msgstr ""
+
+msgid "Please recompile and flash the micro-controller."
 msgstr ""
 
 msgid "Power"
@@ -424,6 +423,10 @@ msgstr ""
 msgid "Retract"
 msgstr ""
 
+#, python-format
+msgid "Retry #%s"
+msgstr ""
+
 msgid "Save"
 msgstr ""
 
@@ -433,6 +436,9 @@ msgstr ""
 msgid "Save configuration"
 msgstr ""
 
+msgid "Screen DPMS"
+msgstr ""
+
 msgid "Screen Power Off Time"
 msgstr ""
 
@@ -440,6 +446,13 @@ msgid "Screws Adjust"
 msgstr ""
 
 msgid "Select"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+#, python-format
+msgid "Sending Power ON signal to: %s"
 msgstr ""
 
 msgid "Set Temp"
@@ -455,6 +468,9 @@ msgid "Size"
 msgstr ""
 
 msgid "Slicer"
+msgstr ""
+
+msgid "Slicer Time correction (%)"
 msgstr ""
 
 msgid "Small"
@@ -513,10 +529,10 @@ msgstr ""
 msgid "Tool"
 msgstr ""
 
-msgid "Unknown Heater"
+msgid "Total:"
 msgstr ""
 
-msgid "Unknown Heater "
+msgid "Unknown Heater"
 msgstr ""
 
 msgid "Unload"
