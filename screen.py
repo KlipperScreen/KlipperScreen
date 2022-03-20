@@ -4,7 +4,6 @@ import argparse
 import gi
 
 import json
-import netifaces
 import importlib
 import logging
 import os
@@ -24,7 +23,6 @@ from ks_includes.KlippyRest import KlippyRest
 from ks_includes.files import KlippyFiles
 from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.printer import Printer
-from ks_includes.wifi import WifiManager
 
 from ks_includes.config import KlipperScreenConfig
 from panels.base_panel import BasePanel
@@ -87,13 +85,6 @@ class KlipperScreen(Gtk.Window):
 
         self._config = KlipperScreenConfig(configfile, self)
         self.lang = self._config.get_lang()
-
-        self.network_interfaces = netifaces.interfaces()
-        self.wireless_interfaces = [int for int in self.network_interfaces if int.startswith('w')]
-        self.wifi = None
-        if len(self.wireless_interfaces) > 0:
-            logging.info("Found wireless interfaces: %s" % self.wireless_interfaces)
-            self.wifi = WifiManager(self.wireless_interfaces[0])
 
         logging.debug("OS Language: %s" % os.getenv('LANG'))
 
