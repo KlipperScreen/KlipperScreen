@@ -387,6 +387,8 @@ class NetworkPanel(ScreenPanel):
             netinfo = []
         if "connected" in netinfo:
             connected = netinfo['connected']
+        else:
+            connected = False
 
         if connected or self.wifi.get_connected_ssid() == ssid:
             stream = os.popen('hostname -f')
