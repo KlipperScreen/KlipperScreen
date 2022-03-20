@@ -24,7 +24,7 @@ msgid "24 Hour Time"
 msgstr "24 Órás Idő"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr ""
+msgstr "A FIRMWARE_RESTART javíthatja a problémát."
 
 msgid "Abort"
 msgstr "Megszakít"
@@ -54,10 +54,10 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "Biztos, hogy le szeretné állítani a rendszert?"
 
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 msgid "Auto-scroll"
-msgstr ""
+msgstr "Automatikus görgetés"
 
 msgid "Bed Level"
 msgstr "Ágyszint"
@@ -90,7 +90,7 @@ msgid "Cancelling"
 msgstr "Törlés"
 
 msgid "Cannot connect to Moonraker"
-msgstr ""
+msgstr "Nem lehet csatlakozni a Moonrakerhez"
 
 msgid "Channel"
 msgstr "Csatorna"
@@ -330,7 +330,7 @@ msgid "Modified"
 msgstr "Módosított"
 
 msgid "Moonraker: connected"
-msgstr ""
+msgstr "Moonraker: csatlakoztatva"
 
 msgid "Move"
 msgstr "Mozgatás"
@@ -363,7 +363,7 @@ msgstr[0] "A csomag frissítésre kerül"
 msgstr[1] "Csomag frissül"
 
 msgid "Password saved"
-msgstr ""
+msgstr "Jelszó mentve"
 
 msgid "Pause"
 msgstr "Szünet"
@@ -372,7 +372,7 @@ msgid "Paused"
 msgstr "Szüneteltetve"
 
 msgid "Please recompile and flash the micro-controller."
-msgstr ""
+msgstr "Fordítsa újra és frissítse a mikrovezérlőt."
 
 msgid "Power"
 msgstr "Bekapcsolás"
@@ -427,7 +427,7 @@ msgstr "Visszahúz"
 
 #, python-format
 msgid "Retry #%s"
-msgstr ""
+msgstr "Újra #%s"
 
 msgid "Save"
 msgstr "Mentés"
@@ -439,7 +439,7 @@ msgid "Save configuration"
 msgstr "Konfiguráció mentése"
 
 msgid "Screen DPMS"
-msgstr ""
+msgstr "Képernyő DPMS"
 
 msgid "Screen Power Off Time"
 msgstr "Kijelző kikapcsolási ideje"
@@ -451,11 +451,11 @@ msgid "Select"
 msgstr "Kijelölés"
 
 msgid "Send"
-msgstr ""
+msgstr "Küldés"
 
 #, python-format
 msgid "Sending Power ON signal to: %s"
-msgstr ""
+msgstr "Bekapcsolási jel küldése ide: %s"
 
 msgid "Set Temp"
 msgstr "Hőfok megadás"
@@ -473,7 +473,7 @@ msgid "Slicer"
 msgstr "Szeletelő"
 
 msgid "Slicer Time correction (%)"
-msgstr ""
+msgstr "Szeletelő idő korrekciója (%)"
 
 msgid "Small"
 msgstr "Kicsi"
@@ -536,7 +536,7 @@ msgid "Tool"
 msgstr "Eszköz"
 
 msgid "Total:"
-msgstr ""
+msgstr "Teljes:"
 
 msgid "Unknown Heater"
 msgstr "Ismeretlen melegítő"
