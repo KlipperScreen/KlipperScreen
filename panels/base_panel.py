@@ -246,14 +246,16 @@ class BasePanel(ScreenPanel):
         if action != "notify_status_update" or self._printer is None:
             return
 
-        for device in self._printer.get_temp_store_devices():
-            name = ""
-            if not (device.startswith("extruder") or device.startswith("heater_bed")):
-                if self.titlebar_name_type == "full":
-                    name = device.split(" ")[1:][0].capitalize().replace("_", " ") + ": "
-                elif self.titlebar_name_type == "short":
-                    name = device.split(" ")[1:][0][:1].upper() + ": "
-            self.labels[device].set_label("%s%d°" % (name, round(self._printer.get_dev_stat(device, "temperature"))))
+        devices = self._printer.get_temp_store_devices()
+        if devices is not None:
+            for device in devices:
+                name = ""
+                if not (device.startswith("extruder") or device.startswith("heater_bed")):
+                    if self.titlebar_name_type == "full":
+                        name = device.split(" ")[1:][0].capitalize().replace("_", " ") + ": "
+                    elif self.titlebar_name_type == "short":
+                        name = device.split(" ")[1:][0][:1].upper() + ": "
+                self.labels[device].set_label("%s%d°" % (name, round(self._printer.get_dev_stat(device, "temperature"))))
 
         if "toolhead" in data and "extruder" in data["toolhead"]:
             if data["toolhead"]["extruder"] != self.current_extruder:
