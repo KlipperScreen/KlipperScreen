@@ -27,6 +27,7 @@ from ks_includes.printer import Printer
 from ks_includes.config import KlipperScreenConfig
 from panels.base_panel import BasePanel
 
+logging.getLogger("urllib3").setLevel(logging.WARNING)
 logging.getLogger('matplotlib').setLevel(logging.WARNING)
 # This is here to avoid performance issues opening bed_mesh
 import matplotlib.pyplot  # noqa
