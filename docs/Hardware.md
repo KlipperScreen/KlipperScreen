@@ -24,36 +24,6 @@ There are no recommended screens, but here are some guidelines:
 
 Follow the manufacturer instructions on how to install your screen. In general if you see a white screen, then it's not properly installed, ensure that you at least see a console, Then ![install](Installation.md) KlipperScreen, if you are having troubles refer to the ![troubleshooting page](Troubleshooting.md) for further information.
 
-#### Touchscreen Calibration
-Most people don't need to calibrate, but if you do need to calibrate your touchscreen, follow the below steps.
-
-Run this command:
-```
-DISPLAY=:0 xinput_calibrator --list
-```
-It will output something such as:
-```
-Device "wch.cn USB2IIC_CTP_CONTROL" id=6
-```
-
-Find the ID of your display and put it in the following command:
-```
-DISPLAY=:0 xinput_calibrator -v --device <id from last command>
-```
-
-It will output somehting like:
-```
-Section "InputClass"
-        Identifier      "calibration"
-        MatchProduct    "ADS7846 Touchscreen"
-        Option  "Calibration"   "3951 242 190 3885"
-        Option  "SwapAxes"      "1"
-EndSection
-```
-paste that into `sudo nano /etc/X11/xorg.conf.d/99-calibration.conf` replace the contents if necessary
-
-restart KlipperScreen
-
 
 #### Touchscreen touch rotation
 If your touchscreen isn't registering touches properly after the screen has been rotated, you will need to apply a
