@@ -41,8 +41,6 @@ class KlippyGtk:
         else:
             self.action_bar_width = int(self.width * .1)
             self.action_bar_height = int(self.height)
-        self.header_image_scale_width = 1.2
-        self.header_image_scale_height = 1.4
         self.cursor = cursor
 
         self.color_list = {}  # This is set by screen.py init_style()
@@ -71,9 +69,6 @@ class KlippyGtk:
 
     def get_header_size(self):
         return self.header_size
-
-    def get_header_image_scale(self):
-        return [self.header_image_scale_width, self.header_image_scale_height]
 
     def get_image_width(self):
         return self.img_width
