@@ -34,27 +34,24 @@ class BasePanel(ScreenPanel):
         self.control_grid.set_size_request(action_bar_width, action_bar_height)
         self.control_grid.get_style_context().add_class('action_bar')
 
-        button_scale = self._gtk.get_header_image_scale()
-        logging.debug("Button scale: %s" % button_scale)
-
-        self.control['back'] = self._gtk.ButtonImage('back', None, None, button_scale[0], button_scale[1])
+        self.control['back'] = self._gtk.ButtonImage('back', None, None, 1, 1)
         self.control['back'].connect("clicked", self.back)
-        self.control['home'] = self._gtk.ButtonImage('main', None, None, button_scale[0], button_scale[1])
+        self.control['home'] = self._gtk.ButtonImage('main', None, None, 1, 1)
         self.control['home'].connect("clicked", self.menu_return, True)
 
         if len(self._config.get_printers()) > 1:
             self.control['printer_select'] = self._gtk.ButtonImage(
-                'shuffle', None, None, button_scale[0], button_scale[1])
+                'shuffle', None, None, 1, 1)
             self.control['printer_select'].connect("clicked", self._screen.show_printer_select)
 
         self.control['macro_shortcut'] = self._gtk.ButtonImage(
-            'custom-script', None, None, button_scale[0], button_scale[1])
+            'custom-script', None, None, 1, 1)
         self.control['macro_shortcut'].connect("clicked", self.menu_item_clicked, "gcode_macros", {
             "name": "Macros",
             "panel": "gcode_macros"
         })
 
-        self.control['estop'] = self._gtk.ButtonImage('emergency', None, None, button_scale[0], button_scale[1])
+        self.control['estop'] = self._gtk.ButtonImage('emergency', None, None, 1, 1)
         self.control['estop'].connect("clicked", self.emergency_stop)
 
         self.locations = {
@@ -187,7 +184,6 @@ class BasePanel(ScreenPanel):
 
         # Options in the config have priority
         printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
-        logging.info("printer_cfg: %s", printer_cfg)
         if printer_cfg is not None:
             titlebar_items = printer_cfg.get("titlebar_items", "")
             if titlebar_items is not None:
@@ -246,14 +242,17 @@ class BasePanel(ScreenPanel):
         if action != "notify_status_update" or self._printer is None:
             return
 
-        for device in self._printer.get_temp_store_devices():
-            name = ""
-            if not (device.startswith("extruder") or device.startswith("heater_bed")):
-                if self.titlebar_name_type == "full":
-                    name = device.split(" ")[1:][0].capitalize().replace("_", " ") + ": "
-                elif self.titlebar_name_type == "short":
-                    name = device.split(" ")[1:][0][:1].upper() + ": "
-            self.labels[device].set_label("%s%d°" % (name, round(self._printer.get_dev_stat(device, "temperature"))))
+        devices = self._printer.get_temp_store_devices()
+        if devices is not None:
+            for device in devices:
+                name = ""
+                if not (device.startswith("extruder") or device.startswith("heater_bed")):
+                    if self.titlebar_name_type == "full":
+                        name = device.split(" ")[1:][0].capitalize().replace("_", " ") + ": "
+                    elif self.titlebar_name_type == "short":
+                        name = device.split(" ")[1:][0][:1].upper() + ": "
+                self.labels[device].set_label("%s%d°" % (name,
+                                                         round(self._printer.get_dev_stat(device, "temperature"))))
 
         if "toolhead" in data and "extruder" in data["toolhead"]:
             if data["toolhead"]["extruder"] != self.current_extruder:

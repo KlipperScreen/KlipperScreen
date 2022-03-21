@@ -154,7 +154,6 @@ class SettingsPanel(ScreenPanel):
                              option['callback'] if "callback" in option else None)
             dropdown.set_entry_text_column(0)
             dev.add(dropdown)
-            logging.debug("Children: %s" % dropdown.get_children())
         elif option['type'] == "scale":
             val = int(self._config.get_config().get(option['section'], opt_name, fallback=option['value']))
             adj = Gtk.Adjustment(val, option['range'][0], option['range'][1], option['step'], option['step']*5)
