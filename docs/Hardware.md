@@ -54,6 +54,7 @@ Where the matrix can be one of the following options:
 * invert X: `-1 0 1 0 1 0 0 0 1`
 
 For example:
+
 `DISPLAY=:0 xinput set-prop "ADS7846 Touchscreen" 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1`
 
 To make this permanent, modify the file `/etc/udev/rules.d/51-touchscreen.rules` and add following line:
@@ -63,5 +64,5 @@ ACTION=="add", ATTRS{name}=="<device name>", ENV{LIBINPUT_CALIBRATION_MATRIX}="<
 ```
 More info about input transformation can be found in:
 
-[Ubuntu wiki InputCoordinateTransformation]("https://wiki.ubuntu.com/X/InputCoordinateTransformation")
-[Libinput docs]("https://wayland.freedesktop.org/libinput/doc/1.9.0/absolute_axes.html")
+* [Ubuntu wiki InputCoordinateTransformation]("https://wiki.ubuntu.com/X/InputCoordinateTransformation")
+* [Libinput docs]("https://wayland.freedesktop.org/libinput/doc/1.9.0/absolute_axes.html")
