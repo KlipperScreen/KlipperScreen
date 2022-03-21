@@ -1,9 +1,6 @@
 # Hardware
 
-There are no recommended screens, but here are some guidelines:
-
-* There is no support for vertical/portrait mode, only widescreen
-* Minimum resolution of 480x320
+There are no recommended screens, but the minimum supported resolution is 480x320
 
 #### Hardware known to work
 
