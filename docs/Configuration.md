@@ -39,6 +39,11 @@ service: KlipperScreen
 
 # If multiple printers are defined, this can be set the name of the one to show at startup.
 default_printer: Ender 3 Pro
+
+# To define a full set of custom menues (instead of merging user entries with default entries)
+# set this to False. See Menu section below.
+use_default_menu: True
+
 ```
 
 ## Printer Options
@@ -178,8 +183,9 @@ KlipperScreen will search for a configuration file in the following order:
 If you need a custom location for the configuration file, you can add -c or --configfile to the systemd file and specify
 the location of your configuration file.
 
-If one of those files are found, it will be used over the default configuration. The default configuration will be
-merged with the custom configuration, so if you do not define any menus the default menus will be used.
+If one of those files are found, it will be merged with the default configuration.
+Default Preheat options will be discarded if a custom preheat is found.
+If include files are defined then, they will be merged first.
 
 The default config is included here: (do not edit use as reference)
 _${KlipperScreen_Directory}/ks_includes/default.conf_

@@ -49,19 +49,15 @@ class KlipperScreenConfig:
                 for include in includes:
                     self._include_config("/".join(self.config_path.split("/")[:-1]), include)
 
-                for i in ['menu __main', 'menu __print', 'menu __splashscreen', 'preheat']:
-                    for j in self.defined_config.sections():
-                        if j.startswith(i):
-                            for k in list(self.config.sections()):
-                                if k.startswith(i):
-                                    del self.config[k]
-                            break
+                self.exclude_from_config(self.defined_config)
 
                 self.log_config(self.defined_config)
                 self.config.read_string(user_def)
                 if saved_def is not None:
                     self.config.read_string(saved_def)
                     logging.info("====== Saved Def ======\n%s\n=======================" % saved_def)
+                # This is the final config
+                # self.log_config(self.config)
         except KeyError:
             raise ConfigError(f"Error reading config: {self.config_path}")
         except Exception:
@@ -196,6 +192,20 @@ class KlipperScreenConfig:
             if name not in list(self.config[vals['section']]):
                 self.config.set(vals['section'], name, vals['value'])
 
+    def exclude_from_config(self, config):
+        exclude_list = ['preheat']
+        if not self.defined_config.getboolean('main', "use_default_menu", fallback=True):
+            logging.info("Using custom menu, removing default menu entries.")
+            exclude_list.append('menu __main')
+            exclude_list.append('menu __print')
+            exclude_list.append('menu __splashscreen')
+        for i in exclude_list:
+            for j in config.sections():
+                if j.startswith(i):
+                    for k in list(self.config.sections()):
+                        if k.startswith(i):
+                            del self.config[k]
+
     def _include_config(self, dir, path):
         full_path = path if path[0] == "/" else "%s/%s" % (dir, path)
         parse_files = []
@@ -224,8 +234,9 @@ class KlipperScreenConfig:
             includes = [i[8:] for i in config.sections() if i.startswith("include ")]
             for include in includes:
                 self._include_config("/".join(full_path.split("/")[:-1]), include)
+            self.exclude_from_config(config)
+            self.log_config(config)
             self.config.read(file)
-            self.defined_config.read(file)
 
     def separate_saved_config(self, config_path):
         user_def = []
