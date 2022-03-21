@@ -184,7 +184,6 @@ class BasePanel(ScreenPanel):
 
         # Options in the config have priority
         printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
-        logging.info("printer_cfg: %s", printer_cfg)
         if printer_cfg is not None:
             titlebar_items = printer_cfg.get("titlebar_items", "")
             if titlebar_items is not None:
@@ -252,7 +251,8 @@ class BasePanel(ScreenPanel):
                         name = device.split(" ")[1:][0].capitalize().replace("_", " ") + ": "
                     elif self.titlebar_name_type == "short":
                         name = device.split(" ")[1:][0][:1].upper() + ": "
-                self.labels[device].set_label("%s%d°" % (name, round(self._printer.get_dev_stat(device, "temperature"))))
+                self.labels[device].set_label("%s%d°" % (name,
+                                                         round(self._printer.get_dev_stat(device, "temperature"))))
 
         if "toolhead" in data and "extruder" in data["toolhead"]:
             if data["toolhead"]["extruder"] != self.current_extruder:
