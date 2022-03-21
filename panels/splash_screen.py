@@ -84,7 +84,7 @@ class SplashScreenPanel(ScreenPanel):
         self.labels['actions'].show_all()
 
     def search_power_devices(self):
-        if self._printer is not None:
+        if self._screen.printer is not None:
             power_devices = found_devices = []
             printer = self._screen.connecting_to_printer
             logging.info("Connecting to %s", printer)
@@ -93,7 +93,7 @@ class SplashScreenPanel(ScreenPanel):
                 power_devices = printer_cfg.get("power_devices", "")
                 power_devices = [str(i.strip()) for i in power_devices.split(',')]
                 logging.info("%s associated power devices: %s", printer, power_devices)
-            devices = self._printer.get_power_devices()
+            devices = self._screen.printer.get_power_devices()
             logging.debug("Power devices: %s", devices)
             if devices is not None:
                 for device in devices:
