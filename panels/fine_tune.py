@@ -148,10 +148,10 @@ class FineTunePanel(ScreenPanel):
             if "homing_origin" in data["gcode_move"]:
                 self.labels['zoffset'].set_text("%.2fmm" % data["gcode_move"]["homing_origin"][2])
             if "extrude_factor" in data["gcode_move"]:
-                self.extrusion = int(data["gcode_move"]["extrude_factor"]*100)
+                self.extrusion = int(round(data["gcode_move"]["extrude_factor"]*100))
                 self.labels['extrudefactor'].set_text("%3d%%" % self.extrusion)
             if "speed_factor" in data["gcode_move"]:
-                self.speed = int(data["gcode_move"]["speed_factor"]*100)
+                self.speed = int(round(data["gcode_move"]["speed_factor"]*100))
                 self.labels['speedfactor'].set_text("%3d%%" % self.speed)
 
     def change_babystepping(self, widget, dir):
