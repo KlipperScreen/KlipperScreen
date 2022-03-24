@@ -53,11 +53,12 @@ class SplashScreenPanel(ScreenPanel):
         main.pack_start(info, True, True, 8)
         main.pack_end(self.labels['actions'], False, False, 0)
 
+        self.show_restart_buttons()
+
         self.content.add(main)
 
     def update_text(self, text):
         self.labels['text'].set_markup("%s" % text)
-        self.clear_action_bar()
 
     def clear_action_bar(self):
         for child in self.labels['actions'].get_children():
@@ -98,12 +99,12 @@ class SplashScreenPanel(ScreenPanel):
             if devices is not None:
                 for device in devices:
                     for power_device in power_devices:
-                        if device == power_device:
+                        if device == power_device and power_device not in found_devices:
                             found_devices.append(power_device)
-            if found_devices:
+            if len(found_devices) > 0:
                 logging.info("Found %s, Adding power button", found_devices)
-                self.labels['actions'].add(self.labels['power'])
                 self.labels['power'].connect("clicked", self.power_on, found_devices)
+                self.labels['actions'].add(self.labels['power'])
             else:
                 logging.info("%s power devices not found", printer)
 
@@ -116,6 +117,7 @@ class SplashScreenPanel(ScreenPanel):
                 self._screen._ws.klippy.power_device_on(device)
             elif self._screen.printer.get_power_device_status(device) == "on":
                 logging.info("%s is ON", device)
+
 
     def firmware_restart(self, widget):
         self._screen._ws.klippy.restart_firmware()
