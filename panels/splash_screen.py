@@ -1,5 +1,6 @@
 import gi
 import logging
+import os
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gdk, Gtk, Pango
@@ -35,6 +36,7 @@ class SplashScreenPanel(ScreenPanel):
         self.labels['actions'].set_vexpand(False)
         self.labels['actions'].set_halign(Gtk.Align.CENTER)
         self.labels['actions'].set_homogeneous(True)
+        self.labels['actions'].set_size_request(self._screen.base_panel.content.get_allocation().width, 0)
 
         scroll = Gtk.ScrolledWindow()
         scroll.set_property("overlay-scrolling", False)
@@ -70,43 +72,52 @@ class SplashScreenPanel(ScreenPanel):
         if "firmware_restart" not in self.labels:
             self.labels['menu'] = self._gtk.ButtonImage("settings", _("Menu"), "color4")
             self.labels['menu'].connect("clicked", self._screen._go_to_submenu, "")
-            self.labels['restart'] = self._gtk.ButtonImage("refresh", _("Restart"), "color1")
+            self.labels['restart'] = self._gtk.ButtonImage("refresh", _("Restart") + "\n" + "Klipper", "color1")
             self.labels['restart'].connect("clicked", self.restart)
-            self.labels['firmware_restart'] = self._gtk.ButtonImage("refresh", _("Firmware Restart"), "color2")
+            self.labels['firmware_restart'] = self._gtk.ButtonImage("refresh", _("Firmware\nRestart"), "color2")
             self.labels['firmware_restart'].connect("clicked", self.firmware_restart)
             self.labels['power'] = self._gtk.ButtonImage("shutdown", _("Power On Printer"), "color3")
+            self.labels['restart_system'] = self._gtk.ButtonImage("refresh", _("Restart\nSystem"), "color1")
+            self.labels['restart_system'].connect("clicked", self.restart_system)
+            self.labels['shutdown'] = self._gtk.ButtonImage("shutdown", _('System\nShutdown'), "color2")
+            self.labels['shutdown'].connect("clicked", self.shutdown)
 
         self.clear_action_bar()
-        self.search_power_devices()
 
-        self.labels['actions'].add(self.labels['restart'])
-        self.labels['actions'].add(self.labels['firmware_restart'])
-        self.labels['actions'].add(self.labels['menu'])
+        if self._screen.printer is not None and self._screen.printer.state != "disconnected":
+            self.search_power_devices()
+            self.labels['actions'].add(self.labels['restart'])
+            self.labels['actions'].add(self.labels['firmware_restart'])
+            self.labels['actions'].add(self.labels['menu'])
+        else:
+            self.labels['actions'].add(self.labels['restart_system'])
+            self.labels['actions'].add(self.labels['shutdown'])
+            self.labels['actions'].add(self.labels['menu'])
+
         self.labels['actions'].show_all()
 
     def search_power_devices(self):
-        if self._screen.printer is not None:
-            power_devices = found_devices = []
-            printer = self._screen.connecting_to_printer
-            logging.info("Connecting to %s", printer)
-            printer_cfg = self._config.get_printer_config(printer)
-            if printer_cfg is not None:
-                power_devices = printer_cfg.get("power_devices", "")
-                power_devices = [str(i.strip()) for i in power_devices.split(',')]
-                logging.info("%s associated power devices: %s", printer, power_devices)
-            devices = self._screen.printer.get_power_devices()
-            logging.debug("Power devices: %s", devices)
-            if devices is not None:
-                for device in devices:
-                    for power_device in power_devices:
-                        if device == power_device and power_device not in found_devices:
-                            found_devices.append(power_device)
-            if len(found_devices) > 0:
-                logging.info("Found %s, Adding power button", found_devices)
-                self.labels['power'].connect("clicked", self.power_on, found_devices)
-                self.labels['actions'].add(self.labels['power'])
-            else:
-                logging.info("%s power devices not found", printer)
+        power_devices = found_devices = []
+        printer = self._screen.connecting_to_printer
+        logging.info("Connecting to %s", printer)
+        printer_cfg = self._config.get_printer_config(printer)
+        if printer_cfg is not None:
+            power_devices = printer_cfg.get("power_devices", "")
+            power_devices = [str(i.strip()) for i in power_devices.split(',')]
+            logging.info("%s associated power devices: %s", printer, power_devices)
+        devices = self._screen.printer.get_power_devices()
+        logging.debug("Power devices: %s", devices)
+        if devices is not None:
+            for device in devices:
+                for power_device in power_devices:
+                    if device == power_device and power_device not in found_devices:
+                        found_devices.append(power_device)
+        if len(found_devices) > 0:
+            logging.info("Found %s, Adding power button", found_devices)
+            self.labels['power'].connect("clicked", self.power_on, found_devices)
+            self.labels['actions'].add(self.labels['power'])
+        else:
+            logging.info("%s power devices not found", printer)
 
     def power_on(self, widget, devices):
         _ = self.lang.gettext
@@ -124,3 +135,10 @@ class SplashScreenPanel(ScreenPanel):
 
     def restart(self, widget):
         self._screen._ws.klippy.restart()
+
+
+    def shutdown(self, widget):
+        os.system("sudo shutdown -P now")
+
+    def restart_system(self, widget):
+        os.system("sudo reboot now")
