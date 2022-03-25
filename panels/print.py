@@ -85,9 +85,6 @@ class PrintPanel(ScreenPanel):
         self.content.add(box)
         self._screen.files.add_file_callback(self._callback)
 
-
-        return
-
     def activate(self):
         if self.cur_directory != "gcodes":
             self.change_dir(None, "gcodes")
@@ -100,7 +97,6 @@ class PrintPanel(ScreenPanel):
 
         if directory not in self.labels['directories']:
             frame = Gtk.Frame()
-            frame.set_property("shadow-type", Gtk.ShadowType.NONE)
             frame.get_style_context().add_class("frame-item")
 
             name = Gtk.Label()
@@ -187,11 +183,10 @@ class PrintPanel(ScreenPanel):
 
         if filepath not in self.files:
             frame = Gtk.Frame()
-            frame.set_property("shadow-type", Gtk.ShadowType.NONE)
             frame.get_style_context().add_class("frame-item")
 
             name = Gtk.Label()
-            name.set_markup("<big><b>%s</b></big>" % (os.path.splitext(filename)[0]))
+            name.set_markup("<big><b>%s</b></big>" % (os.path.splitext(filename)[0].replace("_", " ")))
             name.set_hexpand(True)
             name.set_halign(Gtk.Align.START)
             name.set_line_wrap(True)
@@ -216,14 +211,17 @@ class PrintPanel(ScreenPanel):
             file.set_hexpand(True)
             file.set_vexpand(False)
 
-            icon = self._gtk.Image("file.svg", False, 1.6, 1.6)
+            icon = Gtk.Image()
             pixbuf = self.get_file_image(filepath)
             if pixbuf is not None:
                 icon.set_from_pixbuf(pixbuf)
+            else:
+                icon = self._gtk.Image("file.svg", False, 1.6, 1.6)
 
             file.add(icon)
             file.add(labels)
-            file.add(actions)
+            if os.path.splitext(filename)[1] in [".gcode", ".g", ".gco"]:
+                file.add(actions)
             frame.add(file)
 
             self.files[filepath] = frame
