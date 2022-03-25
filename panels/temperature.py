@@ -130,9 +130,14 @@ class TemperaturePanel(ScreenPanel):
         vbox.pack_start(Gtk.Label(_("Temperature") + " (°C)"), False, False, 8)
         vbox.pack_end(tempgrid, True, True, 2)
 
-        deltagrid.attach(vbox, 0, 3, 2, 2)
-        deltagrid.attach(self.labels["decrease"], 0, 0, 1, 3)
-        deltagrid.attach(self.labels["increase"], 1, 0, 1, 3)
+        if self._screen.vertical_mode:
+            deltagrid.attach(self.labels["decrease"], 0, 0, 1, 2)
+            deltagrid.attach(self.labels["increase"], 1, 0, 1, 2)
+            deltagrid.attach(vbox, 0, 2, 2, 2)
+        else:
+            deltagrid.attach(self.labels["decrease"], 0, 0, 1, 3)
+            deltagrid.attach(self.labels["increase"], 1, 0, 1, 3)
+            deltagrid.attach(vbox, 0, 3, 2, 2)
         return deltagrid
 
     def change_temp_delta(self, widget, tempdelta):

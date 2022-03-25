@@ -35,10 +35,11 @@ class MainPanel(MenuPanel):
 
         leftpanel = self.create_left_panel()
         grid.attach(leftpanel, 0, 0, 1, 1)
-        self.labels['menu'] = self.arrangeMenuItems(items, 2, True)
         if self._screen.vertical_mode:
+            self.labels['menu'] = self.arrangeMenuItems(items, 3, True)
             grid.attach(self.labels['menu'], 0, 1, 1, 1)
         else:
+            self.labels['menu'] = self.arrangeMenuItems(items, 2, True)
             grid.attach(self.labels['menu'], 1, 0, 1, 1)
 
         self.grid = grid
