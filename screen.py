@@ -777,6 +777,8 @@ class KlipperScreen(Gtk.Window):
         self.base_panel.show_macro_shortcut(False)
         self.wake_screen()
         msg = self.printer.get_stat("webhooks", "state_message")
+        if "ready" in msg:
+            msg = ""
         self.printer_initializing("<b>" + _("Klipper has shutdown") +
                                   "</b>" + "\n\n" + msg)
 
