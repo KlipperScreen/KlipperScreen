@@ -22,8 +22,7 @@ class MovePanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
 
-        grid = Gtk.Grid()
-        grid.set_column_homogeneous(True)
+        grid = self._gtk.HomogeneousGrid()
 
         self.labels['x+'] = self._gtk.ButtonImage("arrow-right", _("X+"), "color1")
         self.labels['x+'].connect("clicked", self.move, AXIS_X, "+")
@@ -51,6 +50,12 @@ class MovePanel(ScreenPanel):
 
         self.labels['quad_gantry_level'] = self._gtk.ButtonImage("z-tilt", _("Quad Gantry Level"), "color4")
         self.labels['quad_gantry_level'].connect("clicked", self.quad_gantry_level)
+
+        self.labels['motors-off'] = self._gtk.ButtonImage("motor-off", _("Disable Motors"), "color4")
+        script = {"script": "M18"}
+        self.labels['motors-off'].connect("clicked", self._screen._confirm_send_action,
+                                          _("Are you sure you wish to disable motors?"),
+                                          "printer.gcode.script", script)
 
         if self._screen.vertical_mode:
             if self._screen.lang_ltr:
@@ -85,7 +90,10 @@ class MovePanel(ScreenPanel):
         elif self._printer.config_section_exists("quad_gantry_level"):
             grid.attach(self.labels['quad_gantry_level'], 2, 0, 1, 1)
         else:
-            grid.attach(self.labels['home-xy'], 2, 0, 1, 1)
+            if "delta" in self._screen.printer.get_config_section("printer")['kinematics']:
+                grid.attach(self.labels['motors-off'], 2, 0, 1, 1)
+            else:
+                grid.attach(self.labels['home-xy'], 2, 0, 1, 1)
 
         distgrid = Gtk.Grid()
         j = 0
@@ -107,8 +115,6 @@ class MovePanel(ScreenPanel):
 
         self.labels["1"].set_active(True)
 
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-
         bottomgrid = self._gtk.HomogeneousGrid()
         bottomgrid.set_direction(Gtk.TextDirection.LTR)
         self.labels['pos_x'] = Gtk.Label("X: 0")
@@ -117,26 +123,42 @@ class MovePanel(ScreenPanel):
         bottomgrid.attach(self.labels['pos_x'], 0, 0, 1, 1)
         bottomgrid.attach(self.labels['pos_y'], 1, 0, 1, 1)
         bottomgrid.attach(self.labels['pos_z'], 2, 0, 1, 1)
-        box.pack_start(bottomgrid, True, True, 0)
         self.labels['move_dist'] = Gtk.Label(_("Move Distance (mm)"))
+
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        box.pack_start(grid, True, True, 0)
+        box.pack_start(bottomgrid, True, True, 0)
         box.pack_start(self.labels['move_dist'], True, True, 0)
         box.pack_start(distgrid, True, True, 0)
 
-        if self._screen.vertical_mode:
-            grid.attach(box, 0, 3, 3, 1)
-        else:
-            grid.attach(box, 0, 2, 4, 1)
-
-        self.content.add(grid)
+        self.content.add(box)
 
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
 
-        if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
-            self.labels['pos_x'].set_text("X: %.2f" % (data["gcode_move"]["gcode_position"][0]))
-            self.labels['pos_y'].set_text("Y: %.2f" % (data["gcode_move"]["gcode_position"][1]))
-            self.labels['pos_z'].set_text("Z: %.2f" % (data["gcode_move"]["gcode_position"][2]))
+        homed_axes = self._screen.printer.get_stat("toolhead", "homed_axes")
+        if homed_axes == "xyz":
+            if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
+                self.labels['pos_x'].set_text("X: %.2f" % (data["gcode_move"]["gcode_position"][0]))
+                self.labels['pos_y'].set_text("Y: %.2f" % (data["gcode_move"]["gcode_position"][1]))
+                self.labels['pos_z'].set_text("Z: %.2f" % (data["gcode_move"]["gcode_position"][2]))
+        else:
+            if "x" in homed_axes:
+                if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
+                    self.labels['pos_x'].set_text("X: %.2f" % (data["gcode_move"]["gcode_position"][0]))
+            else:
+                self.labels['pos_x'].set_text("X: ?")
+            if "y" in homed_axes:
+                if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
+                    self.labels['pos_y'].set_text("Y: %.2f" % (data["gcode_move"]["gcode_position"][1]))
+            else:
+                self.labels['pos_y'].set_text("Y: ?")
+            if "z" in homed_axes:
+                if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
+                    self.labels['pos_z'].set_text("Z: %.2f" % (data["gcode_move"]["gcode_position"][2]))
+            else:
+                self.labels['pos_z'].set_text("Z: ?")
 
     def change_distance(self, widget, distance):
         if self.distance == distance:
