@@ -349,7 +349,7 @@ class BedMeshPanel(ScreenPanel):
         surf = ax.plot_surface(x, y, z, cmap=cm.coolwarm, vmin=-0.1, vmax=0.1)
 
         chartBox = ax.get_position()
-        ax.set_position([chartBox.x0, chartBox.y0+0.1, chartBox.width, chartBox.height])
+        ax.set_position([chartBox.x0, chartBox.y0+0.1, chartBox.width*.92, chartBox.height])
 
         ax.set_zlim(z_range[0], z_range[1])
         ax.zaxis.set_major_locator(LinearLocator(5))
