@@ -42,7 +42,6 @@ class MacroPanel(ScreenPanel):
         if macro.startswith("_"):
             return
         frame = Gtk.Frame()
-        frame.set_property("shadow-type", Gtk.ShadowType.NONE)
         frame.get_style_context().add_class("frame-item")
 
         name = Gtk.Label()

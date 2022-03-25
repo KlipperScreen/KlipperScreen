@@ -90,7 +90,6 @@ class BedMeshPanel(ScreenPanel):
         _ = self.lang.gettext
 
         frame = Gtk.Frame()
-        frame.set_property("shadow-type", Gtk.ShadowType.NONE)
 
         name = Gtk.Label()
         name.set_markup("<big><b>%s</b></big>" % (profile))
