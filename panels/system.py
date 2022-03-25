@@ -21,10 +21,10 @@ class SystemPanel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
 
-        restart = self._gtk.ButtonImage('refresh', "\n".join(_('Klipper Restart').split(' ')), 'color1')
-        restart.connect("clicked", self.restart_klippy)
-        restart.set_vexpand(False)
-        firmrestart = self._gtk.ButtonImage('refresh', "\n".join(_('Firmware Restart').split(' ')), 'color2')
+        update_all = self._gtk.ButtonImage('refresh', "\n".join(_('Full\nUpdate').split(' ')), 'color1')
+        update_all.connect("clicked", self.show_update_info, "full")
+        update_all.set_vexpand(False)
+        firmrestart = self._gtk.ButtonImage('refresh', "\n".join(_('Firmware\nRestart').split(' ')), 'color2')
         firmrestart.connect("clicked", self.restart_klippy, "firmware")
         firmrestart.set_vexpand(False)
 
@@ -82,7 +82,7 @@ class SystemPanel(ScreenPanel):
         scroll.add(infogrid)
 
         grid.attach(scroll, 0, 0, 4, 2)
-        grid.attach(restart, 0, 2, 1, 1)
+        grid.attach(update_all, 0, 2, 1, 1)
         grid.attach(firmrestart, 1, 2, 1, 1)
         grid.attach(reboot, 2, 2, 1, 1)
         grid.attach(shutdown, 3, 2, 1, 1)
@@ -136,10 +136,12 @@ class SystemPanel(ScreenPanel):
         _ = self.lang.gettext
         _n = self.lang.ngettext
 
-        if not self.update_status or program not in self.update_status['version_info']:
+        if not self.update_status:
             return
-
-        info = self.update_status['version_info'][program]
+        if program in self.update_status['version_info']:
+            info = self.update_status['version_info'][program]
+        else:
+            info = ["full"]
 
         scroll = Gtk.ScrolledWindow()
         scroll.set_property("overlay-scrolling", False)
@@ -221,6 +223,10 @@ class SystemPanel(ScreenPanel):
                 j = j + 1
                 if (pos == 2):
                     i = i + 1
+        elif "full" in info:
+            label.set_markup("<b>" + _("Perform a full upgrade?") + "</b>")
+            grid.attach(label, 0, i, 1, 1)
+            i = i + 1
         else:
             label.set_markup("<b>" + _("%s will be updated to version") % program.capitalize() +
                              ": %s</b>" % (info['remote_version']))
@@ -291,15 +297,20 @@ class SystemPanel(ScreenPanel):
 
         _ = self.lang.gettext
 
-        if not self.update_status or program not in self.update_status['version_info']:
+        if not self.update_status:
             return
 
-        info = self.update_status['version_info'][program]
-        logging.info("program: %s" % info)
+        if program in self.update_status['version_info']:
+            info = self.update_status['version_info'][program]
+            logging.info("program: %s" % info)
+        else:
+            info = ["full"]
+            logging.info("full upgrade")
+
         if "package_count" in info:
             if info['package_count'] == 0:
                 return
-        else:
+        elif "version" in info:
             if info['version'] == info['remote_version']:
                 return
 
@@ -315,7 +326,10 @@ class SystemPanel(ScreenPanel):
         scroll.add_events(Gdk.EventMask.TOUCH_MASK)
         scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
 
-        self.labels['update_progress'] = Gtk.Label("%s %s..." % (_("Starting update for"), program))
+        if "full" in info:
+            self.labels['update_progress'] = Gtk.Label("%s\n" % _("Updating"))
+        else:
+            self.labels['update_progress'] = Gtk.Label("%s %s..." % (_("Starting update for"), program))
         self.labels['update_progress'].set_halign(Gtk.Align.START)
         self.labels['update_progress'].set_valign(Gtk.Align.START)
         scroll.add(self.labels['update_progress'])
@@ -327,7 +341,7 @@ class SystemPanel(ScreenPanel):
         self.update_prog = program
         self.update_dialog = dialog
 
-        if program in ['klipper', 'moonraker', 'system']:
+        if program in ['klipper', 'moonraker', 'system', 'full']:
             logging.info("Sending machine.update.%s" % program)
             self._screen._ws.send_method("machine.update.%s" % program)
         else:
