@@ -19,10 +19,16 @@ class MenuPanel(ScreenPanel):
         self.items = items
         self.create_menu_items()
 
-        self.grid = Gtk.Grid()
-        self.grid.set_row_homogeneous(True)
-        self.grid.set_column_homogeneous(True)
-        self.content.add(self.grid)
+        self.grid = self._gtk.HomogeneousGrid()
+
+        scroll = Gtk.ScrolledWindow()
+        scroll.set_property("overlay-scrolling", False)
+        scroll.set_hexpand(True)
+        scroll.set_vexpand(True)
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add(self.grid)
+
+        self.content.add(scroll)
 
     def activate(self):
         if not self.j2_data:
