@@ -281,6 +281,7 @@ class BedMeshPanel(ScreenPanel):
             pl.set_hexpand(False)
             entry = Gtk.Entry()
             entry.set_hexpand(True)
+            entry.connect("activate", self.create_profile)
 
             save = self._gtk.ButtonImage("sd", _("Save"), "color3")
             save.set_hexpand(False)
