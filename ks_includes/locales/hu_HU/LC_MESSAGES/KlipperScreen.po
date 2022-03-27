@@ -473,7 +473,7 @@ msgid "Slicer"
 msgstr "Szeletelő"
 
 msgid "Slicer Time correction (%)"
-msgstr "Szeletelő idő korrekciója (%)"
+msgstr "Szeletelő idő javítása (%)"
 
 msgid "Small"
 msgstr "Kicsi"
