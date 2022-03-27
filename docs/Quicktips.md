@@ -70,5 +70,12 @@ To enable thumbnails, open the Advanced tab in the printer settings, enable the 
 ![ideaMaker](img/quicktips/IdeaMaker-thumbnails.png)
 
 
+## Layer Progress
+PrusaSlicer/SuperSlicer > Printer Settings > Custom Gcode > After layer change Gcode
+
+`M117 Layer {layer_num+1}/[total_layer_count] : {filament_settings_id[0]}`
+
+![Layer_progress](img/quicktips/PS_SS_Layer_progress.png)
+
 ## Supported Macros
 [Macros](macros.md)

@@ -19,8 +19,8 @@ Check the file `/var/log/Xorg.0.log` where you can find issues with the X server
 xf86OpenConsole: Cannot open virtual console 2 (Permission denied)
 ```
 
-* Check /etc/X11/Xwrapper.conf
-Run `cat /etc/X11/Xwrapper.conf`
+* Check /etc/X11/Xwrapper.config
+Run `cat /etc/X11/Xwrapper.config`
 
 This should have the line `allowed_users=anybody` in it
 
