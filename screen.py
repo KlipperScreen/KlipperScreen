@@ -78,9 +78,10 @@ class KlipperScreen(Gtk.Window):
     update_queue = []
     _ws = None
     init_printer_timeout = None
+    dpms_timeout = None
+    screensaver_timeout = None
 
     def __init__(self, args, version):
-        self.dpms_timeout = None
         self.version = version
 
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
@@ -573,6 +574,11 @@ class KlipperScreen(Gtk.Window):
                 self.subscriptions.pop(i)
                 return
 
+    def reset_screensaver_timeout(self, widget=None):
+        if self.screensaver_timeout is not None:
+            GLib.source_remove(self.screensaver_timeout)
+            self.screensaver_timeout = GLib.timeout_add_seconds(self.blanking_time, self.show_screensaver)
+
     def show_screensaver(self):
         logging.debug("Showing Screensaver")
         if self.screensaver is not None:
@@ -590,6 +596,7 @@ class KlipperScreen(Gtk.Window):
         self.base_panel.get().put(box, 0, 0)
         self.show_all()
         self.screensaver = box
+        return False
 
     def close_screensaver(self, widget=None):
         if self.screensaver is None:
@@ -599,6 +606,8 @@ class KlipperScreen(Gtk.Window):
         self.screensaver = None
         if self.use_dpms:
             self.wake_screen()
+        else:
+            self.screensaver_timeout = GLib.timeout_add_seconds(self.blanking_time, self.show_screensaver)
         self.show_all()
         return False
 
@@ -607,7 +616,8 @@ class KlipperScreen(Gtk.Window):
 
         if state == functions.DPMS_State.Fail:
             logging.info("DPMS State FAIL: Stopping DPMS Check")
-            os.system("xset -display :0 s %s" % self.blanking_time)
+            if self.screensaver_timeout is None:
+                self.set_dpms(False)
             return False
         elif state != functions.DPMS_State.On:
             if self.screensaver is None:
@@ -627,9 +637,8 @@ class KlipperScreen(Gtk.Window):
         self.set_screenblanking_timeout(self._config.get_main_config_option('screen_blanking'))
 
     def set_screenblanking_timeout(self, time):
-        # The 'blank' flag sets the preference to blank the video
-        # rather than display a background pattern
-        os.system("xset -display :0 s blank")
+        os.system("xset -display :0 s noblank")
+        os.system("xset -display :0 s off")
         self.use_dpms = self._config.get_main_config().getboolean("use_dpms", fallback=True)
 
         if time == "off":
@@ -637,8 +646,9 @@ class KlipperScreen(Gtk.Window):
             if self.dpms_timeout is not None:
                 GLib.source_remove(self.dpms_timeout)
                 self.dpms_timeout = None
+            if self.screensaver_timeout is not None:
+                GLib.source_remove(self.screensaver_timeout)
             os.system("xset -display :0 dpms 0 0 0")
-            os.system("xset -display :0 s off")
             return
 
         self.blanking_time = abs(int(time))
@@ -656,8 +666,13 @@ class KlipperScreen(Gtk.Window):
                 return
         # Without dpms just blank the screen
         logging.debug("Not using DPMS")
+        if self.dpms_timeout is not None:
+            GLib.source_remove(self.dpms_timeout)
+            self.dpms_timeout = None
         os.system("xset -display :0 dpms 0 0 0")
-        os.system("xset -display :0 s %s" % self.blanking_time)
+        if self.screensaver_timeout is None:
+            self.screensaver_timeout = GLib.timeout_add_seconds(self.blanking_time, self.show_screensaver)
+        return
 
     def set_updating(self, updating=False):
         if self.updating is True and updating is False:
