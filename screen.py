@@ -610,6 +610,11 @@ class KlipperScreen(Gtk.Window):
         else:
             self.screensaver_timeout = GLib.timeout_add_seconds(self.blanking_time, self.show_screensaver)
         self.show_all()
+        wakeup_devices = self.config.get_printer_config(self.connected_printer).get("wakeup_devices", "")
+        wakeup_devices = [str(i.strip()) for i in wakeup_devices.split(',')]
+        wakeup_devices = self.search_power_devices(wakeup_devices)
+        if wakeup_devices is not None:
+            self.power_on(wakeup_devices)
         return False
 
     def check_dpms_state(self):
