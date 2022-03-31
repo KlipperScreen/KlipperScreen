@@ -149,10 +149,13 @@ class BasePanel(ScreenPanel):
             self.labels[device].set_ellipsize(True)
             self.labels[device].set_ellipsize(Pango.EllipsizeMode.START)
             if device.startswith("extruder"):
-                if device == "extruder":
-                    ext_img = self._gtk.Image("extruder-0.svg", None, .5, .5)
+                if self._printer.extrudercount > 1:
+                    if device == "extruder":
+                        ext_img = self._gtk.Image("extruder-0.svg", None, .5, .5)
+                    else:
+                        ext_img = self._gtk.Image("extruder-%s.svg" % device[8:], None, .5, .5)
                 else:
-                    ext_img = self._gtk.Image("extruder-%s.svg" % device[8:], None, .5, .5)
+                    ext_img = self._gtk.Image("extruder.svg", None, .5, .5)
                 self.labels[device + '_box'].pack_start(ext_img, True, True, 3)
             elif device.startswith("heater_bed"):
                 bed_img = self._gtk.Image("bed.svg", None, .5, .5)
