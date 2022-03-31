@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-20 10:15-0300\n"
+"POT-Creation-Date: 2022-03-31 11:25-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -24,7 +24,7 @@ msgid "24 Hour Time"
 msgstr "24-timers visning"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr ""
+msgstr "En FIRMWARE_RESTART kan løse problemet."
 
 msgid "Abort"
 msgstr "Annuller"
@@ -47,6 +47,9 @@ msgstr "Er du sikker på, at du vil køre nødstop?"
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Er du sikker på du vil annullere det igangværende print?"
 
+msgid "Are you sure you wish to disable motors?"
+msgstr "Er du sikker på, at du vil deaktivere motorer?"
+
 msgid "Are you sure you wish to reboot the system?"
 msgstr "Er du sikker på du vil genstarte systemet?"
 
@@ -54,10 +57,10 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "Er du sikker på du vil lukke systemet?"
 
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 msgid "Auto-scroll"
-msgstr ""
+msgstr "Auto-scroll"
 
 msgid "Bed Level"
 msgstr "Bed-Level"
@@ -90,7 +93,7 @@ msgid "Cancelling"
 msgstr "Annullerer"
 
 msgid "Cannot connect to Moonraker"
-msgstr ""
+msgstr "Kan ikke oprette forbindelse til Moonraker"
 
 msgid "Channel"
 msgstr "Kanal"
@@ -194,14 +197,28 @@ msgstr "Finjustering"
 msgid "Finish"
 msgstr "Færdig"
 
-msgid "Firmware Restart"
-msgstr "Genstart alt"
+msgid ""
+"Firmware\n"
+"Restart"
+msgstr ""
+"Firmware\n"
+"Genstart"
 
 msgid "Font Size"
 msgstr "Skriftstørrelse"
 
+msgid ""
+"Full\n"
+"Update"
+msgstr ""
+"Fuld\n"
+"Opdatering"
+
 msgid "Go Back"
 msgstr "Gå tilbage"
+
+msgid "Hidden"
+msgstr "Skjult"
 
 msgid "Hide"
 msgstr "Skjule"
@@ -233,12 +250,6 @@ msgstr "Homing"
 msgid "Hostname"
 msgstr "Værtsnavn"
 
-msgid "IPv4"
-msgstr "IPv4"
-
-msgid "IPv6"
-msgstr "IPv6"
-
 msgid "Icon Theme"
 msgstr "Ikon-tema"
 
@@ -266,8 +277,12 @@ msgstr "Invertér Y"
 msgid "Invert Z"
 msgstr "Invertér Z"
 
-msgid "Klipper Restart"
-msgstr "Genstart Klipper"
+msgid ""
+"Klipper\n"
+"Restart"
+msgstr ""
+"Klipper\n"
+"Genstart"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper er frokoblet"
@@ -330,7 +345,7 @@ msgid "Modified"
 msgstr "Ændret"
 
 msgid "Moonraker: connected"
-msgstr ""
+msgstr "Moonraker: tilsluttet"
 
 msgid "Move"
 msgstr "Flytning"
@@ -363,7 +378,7 @@ msgstr[0] "Pakken vil blive opdateret"
 msgstr[1] "Pakker vil blive opdateret"
 
 msgid "Password saved"
-msgstr ""
+msgstr "Adgangskode gemt"
 
 msgid "Pause"
 msgstr "Pause"
@@ -371,8 +386,11 @@ msgstr "Pause"
 msgid "Paused"
 msgstr "På pause"
 
+msgid "Perform a full upgrade?"
+msgstr "Vil du udføre en fuld opgradering?"
+
 msgid "Please recompile and flash the micro-controller."
-msgstr ""
+msgstr "Genkompilér og flash mikrocontrolleren."
 
 msgid "Power"
 msgstr "Strømstyring"
@@ -427,7 +445,7 @@ msgstr "Retract"
 
 #, python-format
 msgid "Retry #%s"
-msgstr ""
+msgstr "Prøv igen #%s"
 
 msgid "Save"
 msgstr "Gem"
@@ -439,7 +457,7 @@ msgid "Save configuration"
 msgstr "Gem Konfiguration"
 
 msgid "Screen DPMS"
-msgstr ""
+msgstr "Skærm DPMS"
 
 msgid "Screen Power Off Time"
 msgstr "Skærm timeout"
@@ -451,11 +469,11 @@ msgid "Select"
 msgstr "Vælg"
 
 msgid "Send"
-msgstr ""
+msgstr "Sende"
 
 #, python-format
 msgid "Sending Power ON signal to: %s"
-msgstr ""
+msgstr "Sender Power ON-signal til: %s"
 
 msgid "Set Temp"
 msgstr "Indstil Temp"
@@ -473,7 +491,7 @@ msgid "Slicer"
 msgstr "Slicer"
 
 msgid "Slicer Time correction (%)"
-msgstr ""
+msgstr "Slicer Tidskorrektion (%)"
 
 msgid "Small"
 msgstr "Lille"
@@ -496,8 +514,8 @@ msgstr "Hastighed for 90° hjørne"
 msgid "Start"
 msgstr "Start"
 
-msgid "Starting WiFi Re-association"
-msgstr "Gendanner forbindelse til WiFi"
+msgid "Starting WiFi Association"
+msgstr "Starter WiFi Association"
 
 msgid "Starting recovery for"
 msgstr "Gendanner"
@@ -536,7 +554,7 @@ msgid "Tool"
 msgstr "Ekstruder"
 
 msgid "Total:"
-msgstr ""
+msgstr "Total:"
 
 msgid "Unknown Heater"
 msgstr "Ukendt varmelegeme"
@@ -549,6 +567,9 @@ msgstr "Up-to-Date"
 
 msgid "Update"
 msgstr "Opdater"
+
+msgid "Updating"
+msgstr "Opdatering"
 
 msgid "Uploaded"
 msgstr "Uploadet"
@@ -577,8 +598,8 @@ msgstr "Kalibrér Z"
 msgid "Z Move Speed (mm/s)"
 msgstr "Z Flyt hastighed (mm/s)"
 
-msgid "Z Offset"
-msgstr "Z-offset"
+msgid "Z Position"
+msgstr "Z-position"
 
 msgid "Z Tilt"
 msgstr "Z-tilt"
@@ -613,6 +634,15 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "IPv4"
+#~ msgstr "IPv4"
+
+#~ msgid "IPv6"
+#~ msgstr "IPv6"
+
+#~ msgid "Z Offset"
+#~ msgstr "Z-offset"
 
 #~ msgid "Unknown Heater "
 #~ msgstr "Ukendt varmelegeme "

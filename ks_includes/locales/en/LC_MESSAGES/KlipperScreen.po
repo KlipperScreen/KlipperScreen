@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-20 10:15-0300\n"
+"POT-Creation-Date: 2022-03-31 11:25-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -45,6 +45,9 @@ msgid "Are you sure you want to run Emergency Stop?"
 msgstr ""
 
 msgid "Are you sure you wish to cancel this print?"
+msgstr ""
+
+msgid "Are you sure you wish to disable motors?"
 msgstr ""
 
 msgid "Are you sure you wish to reboot the system?"
@@ -192,13 +195,23 @@ msgstr ""
 msgid "Finish"
 msgstr ""
 
-msgid "Firmware Restart"
+msgid ""
+"Firmware\n"
+"Restart"
 msgstr ""
 
 msgid "Font Size"
 msgstr ""
 
+msgid ""
+"Full\n"
+"Update"
+msgstr ""
+
 msgid "Go Back"
+msgstr ""
+
+msgid "Hidden"
 msgstr ""
 
 msgid "Hide"
@@ -231,12 +244,6 @@ msgstr ""
 msgid "Hostname"
 msgstr ""
 
-msgid "IPv4"
-msgstr ""
-
-msgid "IPv6"
-msgstr ""
-
 msgid "Icon Theme"
 msgstr ""
 
@@ -264,7 +271,9 @@ msgstr ""
 msgid "Invert Z"
 msgstr ""
 
-msgid "Klipper Restart"
+msgid ""
+"Klipper\n"
+"Restart"
 msgstr ""
 
 msgid "Klipper has disconnected"
@@ -367,6 +376,9 @@ msgid "Pause"
 msgstr ""
 
 msgid "Paused"
+msgstr ""
+
+msgid "Perform a full upgrade?"
 msgstr ""
 
 msgid "Please recompile and flash the micro-controller."
@@ -494,7 +506,7 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-msgid "Starting WiFi Re-association"
+msgid "Starting WiFi Association"
 msgstr ""
 
 msgid "Starting recovery for"
@@ -544,6 +556,9 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
+msgid "Updating"
+msgstr ""
+
 msgid "Uploaded"
 msgstr ""
 
@@ -571,7 +586,7 @@ msgstr ""
 msgid "Z Move Speed (mm/s)"
 msgstr ""
 
-msgid "Z Offset"
+msgid "Z Position"
 msgstr ""
 
 msgid "Z Tilt"

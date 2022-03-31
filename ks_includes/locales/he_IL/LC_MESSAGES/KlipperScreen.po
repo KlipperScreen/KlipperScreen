@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-20 10:15-0300\n"
-"PO-Revision-Date: 2022-02-26 15:22-0300\n"
+"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"PO-Revision-Date: 2022-03-31 10:54-0300\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
 "Language: he_IL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
 "2 : 3);\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #, python-format
@@ -31,7 +31,7 @@ msgid "24 Hour Time"
 msgstr "זמן 24 שעות"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr ""
+msgstr "FIRMWARE_RESTART עשוי לפתור את הבעיה."
 
 msgid "Abort"
 msgstr "בטל"
@@ -55,6 +55,9 @@ msgstr ""
 msgid "Are you sure you wish to cancel this print?"
 msgstr "האם אתה בטוח שברצונך לבטל את ההדפסה?"
 
+msgid "Are you sure you wish to disable motors?"
+msgstr "האם אתה בטוח שברצונך להשבית מנועים?"
+
 msgid "Are you sure you wish to reboot the system?"
 msgstr "האם אתה בטוח שברצונך לאתחל את המערכת?"
 
@@ -62,10 +65,10 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "האם אתה בטוח שברצונך לסגור את המערכת?"
 
 msgid "Auto"
-msgstr ""
+msgstr "אוטומטי"
 
 msgid "Auto-scroll"
-msgstr ""
+msgstr "גלילה אוטומטית"
 
 msgid "Bed Level"
 msgstr "פילוס מיטה"
@@ -98,7 +101,7 @@ msgid "Cancelling"
 msgstr "מבטל"
 
 msgid "Cannot connect to Moonraker"
-msgstr ""
+msgstr "לא ניתן להתחבר ל-Moonraker"
 
 msgid "Channel"
 msgstr "עָרוּץ"
@@ -202,14 +205,28 @@ msgstr "כוונון עדין"
 msgid "Finish"
 msgstr "סיים"
 
-msgid "Firmware Restart"
-msgstr "הפעלה מחדש של הקושחה"
+msgid ""
+"Firmware\n"
+"Restart"
+msgstr ""
+"קושחה\n"
+"איתחול"
 
 msgid "Font Size"
 msgstr "גודל טקסט"
 
+msgid ""
+"Full\n"
+"Update"
+msgstr ""
+"מלא\n"
+"עדכון"
+
 msgid "Go Back"
 msgstr "חזרה"
+
+msgid "Hidden"
+msgstr "מוּסתָר"
 
 msgid "Hide"
 msgstr "להתחבא"
@@ -241,12 +258,6 @@ msgstr "איפוס צירים"
 msgid "Hostname"
 msgstr "Hostname"
 
-msgid "IPv4"
-msgstr "IPv4"
-
-msgid "IPv6"
-msgstr "IPv6"
-
 msgid "Icon Theme"
 msgstr "נושא אייקון"
 
@@ -274,8 +285,12 @@ msgstr "הפוך את Y"
 msgid "Invert Z"
 msgstr "הפוך את Z"
 
-msgid "Klipper Restart"
-msgstr "אתחול קליפר"
+msgid ""
+"Klipper\n"
+"Restart"
+msgstr ""
+"קליפר\n"
+"איתחול"
 
 msgid "Klipper has disconnected"
 msgstr "קליפר התנתק"
@@ -338,7 +353,7 @@ msgid "Modified"
 msgstr "שונה"
 
 msgid "Moonraker: connected"
-msgstr ""
+msgstr "Moonraker: מחובר"
 
 msgid "Move"
 msgstr "הזזת צירים"
@@ -373,7 +388,7 @@ msgstr[2] "חבילות יעודכנו"
 msgstr[3] "חבילות יעודכנו"
 
 msgid "Password saved"
-msgstr ""
+msgstr "הסיסמה נשמרה"
 
 msgid "Pause"
 msgstr "השהיה"
@@ -381,8 +396,11 @@ msgstr "השהיה"
 msgid "Paused"
 msgstr "מושהה"
 
+msgid "Perform a full upgrade?"
+msgstr "לבצע שדרוג מלא?"
+
 msgid "Please recompile and flash the micro-controller."
-msgstr ""
+msgstr "אנא הידור מחדש והבזק את המיקרו-בקר."
 
 msgid "Power"
 msgstr "הפעלה"
@@ -437,7 +455,7 @@ msgstr "שיחול לאחור"
 
 #, python-format
 msgid "Retry #%s"
-msgstr ""
+msgstr "נסה שוב #%s"
 
 msgid "Save"
 msgstr "להציל"
@@ -449,7 +467,7 @@ msgid "Save configuration"
 msgstr "שמור תצורה"
 
 msgid "Screen DPMS"
-msgstr ""
+msgstr "DPMS מסך"
 
 msgid "Screen Power Off Time"
 msgstr "זמן כיבוי מסך"
@@ -461,11 +479,11 @@ msgid "Select"
 msgstr "בחר"
 
 msgid "Send"
-msgstr ""
+msgstr "לִשְׁלוֹחַ"
 
 #, python-format
 msgid "Sending Power ON signal to: %s"
-msgstr ""
+msgstr "שולח אות הפעלה אל: %s"
 
 msgid "Set Temp"
 msgstr "הגדר טמפ'"
@@ -483,7 +501,7 @@ msgid "Slicer"
 msgstr "Slicer"
 
 msgid "Slicer Time correction (%)"
-msgstr ""
+msgstr "תיקון זמן פריסה (%)"
 
 msgid "Small"
 msgstr "קָטָן"
@@ -506,8 +524,8 @@ msgstr "מהירות פינה מרובעת"
 msgid "Start"
 msgstr "הַתחָלָה"
 
-msgid "Starting WiFi Re-association"
-msgstr "התחלת שיוך מחדש ל- WiFi"
+msgid "Starting WiFi Association"
+msgstr "מתחיל איגוד WiFi"
 
 msgid "Starting recovery for"
 msgstr "החל התאוששות עבור"
@@ -546,7 +564,7 @@ msgid "Tool"
 msgstr "כלי"
 
 msgid "Total:"
-msgstr ""
+msgstr "סך הכל:"
 
 msgid "Unknown Heater"
 msgstr "מחמם לא ידוע"
@@ -559,6 +577,9 @@ msgstr "עדכני"
 
 msgid "Update"
 msgstr "עדכון"
+
+msgid "Updating"
+msgstr "עִדכּוּן"
 
 msgid "Uploaded"
 msgstr "הועלה"
@@ -587,8 +608,8 @@ msgstr "כיול Z"
 msgid "Z Move Speed (mm/s)"
 msgstr "מהירות תנועה Z (מ\"מ/שניות)"
 
-msgid "Z Offset"
-msgstr "הפרז גובה Z"
+msgid "Z Position"
+msgstr "מיקום Z"
 
 msgid "Z Tilt"
 msgstr "הטיה Z"
@@ -627,6 +648,15 @@ msgstr "מ\"מ/ש"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "IPv4"
+#~ msgstr "IPv4"
+
+#~ msgid "IPv6"
+#~ msgstr "IPv6"
+
+#~ msgid "Z Offset"
+#~ msgstr "הפרז גובה Z"
 
 #~ msgid "Unknown Heater "
 #~ msgstr "מחמם לא ידוע "

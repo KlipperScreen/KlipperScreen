@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-20 10:15-0300\n"
-"PO-Revision-Date: 2022-02-26 15:30-0300\n"
+"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"PO-Revision-Date: 2022-03-31 11:06-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
 "|| n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -30,7 +30,7 @@ msgid "24 Hour Time"
 msgstr "Zegar 24-godzinny"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr ""
+msgstr "FIRMWARE_RESTART może rozwiązać problem."
 
 msgid "Abort"
 msgstr "Odwołaj"
@@ -53,6 +53,9 @@ msgstr "Czy na pewno chcesz Awaryjnie Zatrzymać?"
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Czy na pewno chcesz odwołać drukowanie?"
 
+msgid "Are you sure you wish to disable motors?"
+msgstr "Czy na pewno chcesz wyłączyć silniki?"
+
 msgid "Are you sure you wish to reboot the system?"
 msgstr "Czy na pewno chcesz ponownie uruchomić system?"
 
@@ -60,10 +63,10 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "Czy na pewno chcesz wyłączyć system?"
 
 msgid "Auto"
-msgstr ""
+msgstr "Automatyczny"
 
 msgid "Auto-scroll"
-msgstr ""
+msgstr "Auto-scroll"
 
 msgid "Bed Level"
 msgstr "Poziom stołu"
@@ -96,7 +99,7 @@ msgid "Cancelling"
 msgstr "Odwoływanie trwa"
 
 msgid "Cannot connect to Moonraker"
-msgstr ""
+msgstr "Nie można połączyć się z Moonrakerem"
 
 msgid "Channel"
 msgstr "Kanał"
@@ -200,14 +203,27 @@ msgstr "Regulacja Precyzyjna"
 msgid "Finish"
 msgstr "Zakończ"
 
-msgid "Firmware Restart"
+#, fuzzy
+msgid ""
+"Firmware\n"
+"Restart"
 msgstr "Firmware Restart"
 
 msgid "Font Size"
 msgstr "Rozmiar trzcionki"
 
+msgid ""
+"Full\n"
+"Update"
+msgstr ""
+"Pełny\n"
+"Aktualizacja"
+
 msgid "Go Back"
 msgstr "Powróć"
+
+msgid "Hidden"
+msgstr "Ukryty"
 
 msgid "Hide"
 msgstr "Schowaj"
@@ -239,12 +255,6 @@ msgstr "Bazowanie"
 msgid "Hostname"
 msgstr "Nazwa hosta"
 
-msgid "IPv4"
-msgstr "IPv4"
-
-msgid "IPv6"
-msgstr "IPv6"
-
 msgid "Icon Theme"
 msgstr "Motyw Ikon"
 
@@ -272,7 +282,10 @@ msgstr "Odwróć Y"
 msgid "Invert Z"
 msgstr "Odwróć Z"
 
-msgid "Klipper Restart"
+#, fuzzy
+msgid ""
+"Klipper\n"
+"Restart"
 msgstr "Restart Klippera"
 
 msgid "Klipper has disconnected"
@@ -336,7 +349,7 @@ msgid "Modified"
 msgstr "Zmodyfikowane"
 
 msgid "Moonraker: connected"
-msgstr ""
+msgstr "Moonraker: podłączony"
 
 msgid "Move"
 msgstr "Ruch"
@@ -370,7 +383,7 @@ msgstr[1] "Pakiety zostaną zaktualizowane"
 msgstr[2] "Pakiety zostaną zaktualizowane"
 
 msgid "Password saved"
-msgstr ""
+msgstr "Hasło zostało zapisane"
 
 msgid "Pause"
 msgstr "Pauza"
@@ -378,8 +391,11 @@ msgstr "Pauza"
 msgid "Paused"
 msgstr "Zapauzowane"
 
+msgid "Perform a full upgrade?"
+msgstr "Przeprowadzić pełną aktualizację?"
+
 msgid "Please recompile and flash the micro-controller."
-msgstr ""
+msgstr "Proszę przekompilować i sflashować mikrokontroler."
 
 msgid "Power"
 msgstr "Zasilanie"
@@ -434,7 +450,7 @@ msgstr "Cofnij"
 
 #, python-format
 msgid "Retry #%s"
-msgstr ""
+msgstr "Spróbuj ponownie #%s"
 
 msgid "Save"
 msgstr "Zapisz"
@@ -446,7 +462,7 @@ msgid "Save configuration"
 msgstr "Zapisz konfigurację"
 
 msgid "Screen DPMS"
-msgstr ""
+msgstr "Ekran DPMS"
 
 msgid "Screen Power Off Time"
 msgstr "Czas wygaszania ekranu"
@@ -458,11 +474,11 @@ msgid "Select"
 msgstr "Zaznacz"
 
 msgid "Send"
-msgstr ""
+msgstr "Wysłać"
 
 #, python-format
 msgid "Sending Power ON signal to: %s"
-msgstr ""
+msgstr "Wysyłam sygnał włączenia do: %s"
 
 msgid "Set Temp"
 msgstr "Ustaw Temperaturę"
@@ -480,7 +496,7 @@ msgid "Slicer"
 msgstr "Slicer"
 
 msgid "Slicer Time correction (%)"
-msgstr ""
+msgstr "Korekta czasu krajalnicy (%)"
 
 msgid "Small"
 msgstr "Mały"
@@ -503,8 +519,8 @@ msgstr "Prędkość w narożniku kwadratowym"
 msgid "Start"
 msgstr "Start"
 
-msgid "Starting WiFi Re-association"
-msgstr "Uruchamianie ponownej asocjacji WiFi"
+msgid "Starting WiFi Association"
+msgstr "Rozpoczęcie stowarzyszenia WiFi"
 
 msgid "Starting recovery for"
 msgstr "Rozpoczęcie odzyskiwania dla"
@@ -543,7 +559,7 @@ msgid "Tool"
 msgstr "Narzędzie"
 
 msgid "Total:"
-msgstr ""
+msgstr "Całkowity:"
 
 msgid "Unknown Heater"
 msgstr "Nieznany Podgrzewacz"
@@ -556,6 +572,9 @@ msgstr "Aktualne"
 
 msgid "Update"
 msgstr "Uaktualnienie"
+
+msgid "Updating"
+msgstr "Aktualizacja"
 
 msgid "Uploaded"
 msgstr "Przesłane"
@@ -584,8 +603,8 @@ msgstr "Kalibracja Z"
 msgid "Z Move Speed (mm/s)"
 msgstr "Prędkość ruchu Z (mm/s)"
 
-msgid "Z Offset"
-msgstr "Przesunięcie Z"
+msgid "Z Position"
+msgstr "Pozycja Z"
 
 msgid "Z Tilt"
 msgstr "Przechył Z"
@@ -622,6 +641,15 @@ msgstr "mm/s^2"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "IPv4"
+#~ msgstr "IPv4"
+
+#~ msgid "IPv6"
+#~ msgstr "IPv6"
+
+#~ msgid "Z Offset"
+#~ msgstr "Przesunięcie Z"
 
 #~ msgid "Unknown Heater "
 #~ msgstr "Nieznany Podgrzewacz "

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-21 10:26-0300\n"
-"PO-Revision-Date: 2022-03-21 10:25-0300\n"
+"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"PO-Revision-Date: 2022-03-31 11:18-0300\n"
 "Last-Translator: \n"
 "Language-Team: Andrii Komarovskiy\n"
 "Language: uk_UA\n"
@@ -52,6 +52,9 @@ msgstr "Ви впевнені, що хочете запустити аварій
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Ви впевнені, що хочете скасувати цей друк?"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "Ви впевнені, що хочете відключити двигуни?"
 
 msgid "Are you sure you wish to reboot the system?"
 msgstr "Ви впевнені, що хочете перезавантажити систему?"
@@ -200,14 +203,28 @@ msgstr "Підправити"
 msgid "Finish"
 msgstr "Фініш"
 
-msgid "Firmware Restart"
-msgstr "Рестарт прошивки"
+msgid ""
+"Firmware\n"
+"Restart"
+msgstr ""
+"Firmware\n"
+"Перезавантажте"
 
 msgid "Font Size"
 msgstr "Розмір шрифту"
 
+msgid ""
+"Full\n"
+"Update"
+msgstr ""
+"Повний\n"
+"Оновлення"
+
 msgid "Go Back"
 msgstr "Назад"
+
+msgid "Hidden"
+msgstr "Оновлення"
 
 msgid "Hide"
 msgstr "Сховати"
@@ -239,12 +256,6 @@ msgstr "До дому"
 msgid "Hostname"
 msgstr "Назва хоста"
 
-msgid "IPv4"
-msgstr "IPv4"
-
-msgid "IPv6"
-msgstr "IPv6"
-
 msgid "Icon Theme"
 msgstr "Тема оформлення"
 
@@ -272,8 +283,12 @@ msgstr "Інвертувати Y"
 msgid "Invert Z"
 msgstr "Інвертувати Z"
 
-msgid "Klipper Restart"
-msgstr "Перезапуск pper"
+msgid ""
+"Klipper\n"
+"Restart"
+msgstr ""
+"Klipper\n"
+"Перезавантажте"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper відключився"
@@ -377,6 +392,9 @@ msgstr "Пауза"
 
 msgid "Paused"
 msgstr "Пауза"
+
+msgid "Perform a full upgrade?"
+msgstr "Виконати повне оновлення?"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Будь ласка, перекомпілюйте та перепрошійте мікроконтролер."
@@ -503,8 +521,8 @@ msgstr "Квадратна кутова швидкість"
 msgid "Start"
 msgstr "Старт"
 
-msgid "Starting WiFi Re-association"
-msgstr "Запуск повторної асоціації WiFi"
+msgid "Starting WiFi Association"
+msgstr "Запуск асоціації WiFi"
 
 msgid "Starting recovery for"
 msgstr "Початок відновлення для"
@@ -557,6 +575,10 @@ msgstr "Оновити"
 msgid "Update"
 msgstr "Оновлення"
 
+#, fuzzy
+msgid "Updating"
+msgstr "Оновлення"
+
 msgid "Uploaded"
 msgstr "Завантажено"
 
@@ -584,8 +606,8 @@ msgstr "Калібровка Z"
 msgid "Z Move Speed (mm/s)"
 msgstr "Швидкість Z (мм/с)"
 
-msgid "Z Offset"
-msgstr "Зміщення Z"
+msgid "Z Position"
+msgstr "Позиція Z"
 
 msgid "Z Tilt"
 msgstr "Z Нахил"
@@ -622,3 +644,12 @@ msgstr "мм/с"
 
 msgid "mm/s^2"
 msgstr "мм/с²"
+
+#~ msgid "IPv4"
+#~ msgstr "IPv4"
+
+#~ msgid "IPv6"
+#~ msgstr "IPv6"
+
+#~ msgid "Z Offset"
+#~ msgstr "Зміщення Z"
