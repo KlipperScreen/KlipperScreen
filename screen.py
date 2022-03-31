@@ -80,6 +80,7 @@ class KlipperScreen(Gtk.Window):
     init_printer_timeout = None
     dpms_timeout = None
     screensaver_timeout = None
+    reinit_count = 0
 
     def __init__(self, args, version):
         self.version = version
@@ -922,8 +923,10 @@ class KlipperScreen(Gtk.Window):
             return False
         else:
             # Moonraker is ready, set a loop to init the printer
+            self.reinit_count += 1
             self.init_printer_timeout = GLib.timeout_add_seconds(3, self.init_printer)
 
+        self.shutdown = False
         powerdevs = self.apiclient.send_request("machine/device_power/devices")
         if powerdevs is not False:
             self.printer.configure_power_devices(powerdevs['result'])
@@ -931,7 +934,8 @@ class KlipperScreen(Gtk.Window):
         if state['result']['klippy_connected'] is False:
             self.panels['splash_screen'].update_text(
                 _("Moonraker: connected") +
-                ("\n\nKlipper: %s\n\n") % state['result']['klippy_state'])
+                ("\n\nKlipper: %s\n\n") % state['result']['klippy_state'] +
+                _("Retry #%s") % self.reinit_count)
             return False
 
         printer_info = self.apiclient.get_printer_info()
@@ -985,6 +989,7 @@ class KlipperScreen(Gtk.Window):
 
         logging.info("Printer initialized")
         GLib.source_remove(self.init_printer_timeout)
+        self.reinit_count = 0
         return False
 
     def printer_ready(self):

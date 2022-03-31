@@ -82,7 +82,7 @@ class SplashScreenPanel(ScreenPanel):
 
         self.clear_action_bar()
         printer = self._screen.connected_printer
-        if printer is not None:
+        if printer is not None and not self._screen.shutdown:
             printer_cfg = self._config.get_printer_config(printer)
             if printer_cfg is not None:
                 power_devices = printer_cfg.get("power_devices", "")
