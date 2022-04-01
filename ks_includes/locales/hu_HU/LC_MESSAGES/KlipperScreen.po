@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-27 12:47-0300\n"
+"POT-Creation-Date: 2022-03-31 11:25-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -46,6 +46,9 @@ msgstr "Biztosan Vészleállítást végez?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Biztosan megszakítja ezt a nyomtatást?"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "Biztos benne, hogy le szeretné tiltani a motorokat?"
 
 msgid "Are you sure you wish to reboot the system?"
 msgstr "Biztos benne, hogy újra akarja indítani a rendszert?"
@@ -194,14 +197,28 @@ msgstr "Finomhangolás"
 msgid "Finish"
 msgstr "Befejezve"
 
-msgid "Firmware Restart"
-msgstr "Firmware Újraindítás"
+msgid ""
+"Firmware\n"
+"Restart"
+msgstr ""
+"Firmware\n"
+"Újrakezd"
 
 msgid "Font Size"
 msgstr "Betűméret"
 
+msgid ""
+"Full\n"
+"Update"
+msgstr ""
+"Teljes\n"
+"Frissítés"
+
 msgid "Go Back"
 msgstr "Menj vissza"
+
+msgid "Hidden"
+msgstr "Rejtett"
 
 msgid "Hide"
 msgstr "Elrejt"
@@ -233,12 +250,6 @@ msgstr "Kezdőpont"
 msgid "Hostname"
 msgstr "Gazdanév"
 
-msgid "IPv4"
-msgstr "IPv4"
-
-msgid "IPv6"
-msgstr "IPv6"
-
 msgid "Icon Theme"
 msgstr "Ikon téma"
 
@@ -266,8 +277,12 @@ msgstr "Fordított Y"
 msgid "Invert Z"
 msgstr "Fordított Z"
 
-msgid "Klipper Restart"
-msgstr "Klipper Újraindítása"
+msgid ""
+"Klipper\n"
+"Restart"
+msgstr ""
+"Klipper\n"
+"Újrakezd"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper szétkapcsolt"
@@ -370,6 +385,9 @@ msgstr "Szünet"
 
 msgid "Paused"
 msgstr "Szüneteltetve"
+
+msgid "Perform a full upgrade?"
+msgstr "Teljes frissítést hajt végre?"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Fordítsa újra és frissítse a mikrovezérlőt."
@@ -496,8 +514,8 @@ msgstr "Sebesség a sarkokban"
 msgid "Start"
 msgstr "Indítás"
 
-msgid "Starting WiFi Re-association"
-msgstr "Wi-Fi újratársítás indítása"
+msgid "Starting WiFi Association"
+msgstr "A WiFi Egyesület elindítása"
 
 msgid "Starting recovery for"
 msgstr "Helyreállítás megkezdése"
@@ -550,6 +568,10 @@ msgstr "Naprakész"
 msgid "Update"
 msgstr "Frissítés"
 
+#, fuzzy
+msgid "Updating"
+msgstr "Frissítés"
+
 msgid "Uploaded"
 msgstr "Feltöltve"
 
@@ -577,8 +599,8 @@ msgstr "Z Kalibrálás"
 msgid "Z Move Speed (mm/s)"
 msgstr "Z Mozgási seb. (mm/s)"
 
-msgid "Z Offset"
-msgstr "Z Eltolás"
+msgid "Z Position"
+msgstr "Z Pozíció"
 
 msgid "Z Tilt"
 msgstr "Z Dönt"
@@ -613,6 +635,15 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "IPv4"
+#~ msgstr "IPv4"
+
+#~ msgid "IPv6"
+#~ msgstr "IPv6"
+
+#~ msgid "Z Offset"
+#~ msgstr "Z Eltolás"
 
 #~ msgid "Unknown Heater "
 #~ msgstr "Ismeretlen melegítő "

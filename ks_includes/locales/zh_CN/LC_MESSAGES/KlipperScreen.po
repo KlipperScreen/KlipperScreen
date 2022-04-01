@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-20 10:15-0300\n"
-"PO-Revision-Date: 2022-02-26 15:47-0300\n"
+"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"PO-Revision-Date: 2022-03-31 11:21-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -29,7 +29,7 @@ msgid "24 Hour Time"
 msgstr "使用 24 小时制"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr ""
+msgstr "FIRMWARE_RESTART 可能会解决此问题。"
 
 msgid "Abort"
 msgstr "终止"
@@ -52,6 +52,9 @@ msgstr "您确定要紧急停止吗？"
 msgid "Are you sure you wish to cancel this print?"
 msgstr "您确定要取消打印吗？"
 
+msgid "Are you sure you wish to disable motors?"
+msgstr "您确定要禁用电机吗？"
+
 msgid "Are you sure you wish to reboot the system?"
 msgstr "您确定要重启系统吗?"
 
@@ -59,10 +62,10 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "您确定要关闭系统吗?"
 
 msgid "Auto"
-msgstr ""
+msgstr "汽车"
 
 msgid "Auto-scroll"
-msgstr ""
+msgstr "自动滚屏"
 
 msgid "Bed Level"
 msgstr "热床调平"
@@ -95,7 +98,7 @@ msgid "Cancelling"
 msgstr "正在取消"
 
 msgid "Cannot connect to Moonraker"
-msgstr ""
+msgstr "无法连接到 Moonraker"
 
 msgid "Channel"
 msgstr "更新通道"
@@ -199,14 +202,28 @@ msgstr "微调"
 msgid "Finish"
 msgstr "结束"
 
-msgid "Firmware Restart"
-msgstr "重启Firmware"
+msgid ""
+"Firmware\n"
+"Restart"
+msgstr ""
+"重启\n"
+"Firmware"
 
 msgid "Font Size"
 msgstr "字体大小"
 
+msgid ""
+"Full\n"
+"Update"
+msgstr ""
+"满的\n"
+"更新"
+
 msgid "Go Back"
 msgstr "返回"
+
+msgid "Hidden"
+msgstr "隐"
 
 msgid "Hide"
 msgstr "隐藏"
@@ -238,12 +255,6 @@ msgstr "归零"
 msgid "Hostname"
 msgstr "主机名"
 
-msgid "IPv4"
-msgstr "IPv4 地址"
-
-msgid "IPv6"
-msgstr "IPv6 地址"
-
 msgid "Icon Theme"
 msgstr "主题风格"
 
@@ -271,8 +282,12 @@ msgstr "反转 Y"
 msgid "Invert Z"
 msgstr "反转 Z"
 
-msgid "Klipper Restart"
-msgstr "重启Klipper"
+msgid ""
+"Klipper\n"
+"Restart"
+msgstr ""
+"重启\n"
+"Klipper"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper 已断开连接"
@@ -335,7 +350,7 @@ msgid "Modified"
 msgstr "修改"
 
 msgid "Moonraker: connected"
-msgstr ""
+msgstr "Moonraker：已连接"
 
 msgid "Move"
 msgstr "移动"
@@ -367,7 +382,7 @@ msgid_plural "Packages will be updated"
 msgstr[0] "包将被更新"
 
 msgid "Password saved"
-msgstr ""
+msgstr "密码已保存"
 
 msgid "Pause"
 msgstr "暂停"
@@ -375,8 +390,11 @@ msgstr "暂停"
 msgid "Paused"
 msgstr "已暂停"
 
+msgid "Perform a full upgrade?"
+msgstr "执行全面升级？"
+
 msgid "Please recompile and flash the micro-controller."
-msgstr ""
+msgstr "请重新编译并刷写微控制器。"
 
 msgid "Power"
 msgstr "电源开关"
@@ -431,7 +449,7 @@ msgstr "回抽"
 
 #, python-format
 msgid "Retry #%s"
-msgstr ""
+msgstr "重试 #%s"
 
 msgid "Save"
 msgstr "保存"
@@ -443,7 +461,7 @@ msgid "Save configuration"
 msgstr "即将保存配置文件"
 
 msgid "Screen DPMS"
-msgstr ""
+msgstr "屏幕DPMS"
 
 msgid "Screen Power Off Time"
 msgstr "关闭屏幕"
@@ -455,11 +473,11 @@ msgid "Select"
 msgstr "选择"
 
 msgid "Send"
-msgstr ""
+msgstr "发送"
 
 #, python-format
 msgid "Sending Power ON signal to: %s"
-msgstr ""
+msgstr "正在发送通电信号到：%s"
 
 msgid "Set Temp"
 msgstr "设定温度"
@@ -477,7 +495,7 @@ msgid "Slicer"
 msgstr "切片软件"
 
 msgid "Slicer Time correction (%)"
-msgstr ""
+msgstr "切片器时间校正 (%)"
 
 msgid "Small"
 msgstr "小"
@@ -500,8 +518,8 @@ msgstr "转角速度"
 msgid "Start"
 msgstr "开始"
 
-msgid "Starting WiFi Re-association"
-msgstr "重新连接无线网络"
+msgid "Starting WiFi Association"
+msgstr "启动 WiFi 关联"
 
 msgid "Starting recovery for"
 msgstr "开始恢复"
@@ -536,7 +554,7 @@ msgid "Tool"
 msgstr "工具"
 
 msgid "Total:"
-msgstr ""
+msgstr "全部的："
 
 msgid "Unknown Heater"
 msgstr "未知加热器"
@@ -548,6 +566,10 @@ msgid "Up To Date"
 msgstr "最新"
 
 msgid "Update"
+msgstr "更新"
+
+#, fuzzy
+msgid "Updating"
 msgstr "更新"
 
 msgid "Uploaded"
@@ -577,8 +599,8 @@ msgstr "Z 校准"
 msgid "Z Move Speed (mm/s)"
 msgstr "Z 移动速度 (mm/s)"
 
-msgid "Z Offset"
-msgstr "Z 偏移"
+msgid "Z Position"
+msgstr "Z 位置"
 
 msgid "Z Tilt"
 msgstr "Z 倾斜校准"
@@ -611,6 +633,15 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "IPv4"
+#~ msgstr "IPv4 地址"
+
+#~ msgid "IPv6"
+#~ msgstr "IPv6 地址"
+
+#~ msgid "Z Offset"
+#~ msgstr "Z 偏移"
 
 #~ msgid "Unknown Heater "
 #~ msgstr "未知加热器 "

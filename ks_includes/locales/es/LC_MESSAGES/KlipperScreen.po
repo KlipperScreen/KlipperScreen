@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-20 10:15-0300\n"
-"PO-Revision-Date: 2022-03-20 10:10-0300\n"
+"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"PO-Revision-Date: 2022-03-31 10:46-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -51,6 +51,9 @@ msgstr "¿Parada de emergencia?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Está seguro que desea cancelar esta impresión?"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "¿Está seguro que desea desactivar los motores?"
 
 msgid "Are you sure you wish to reboot the system?"
 msgstr "Está seguro que desea reiniciar el sistema?"
@@ -199,14 +202,28 @@ msgstr "Ajuste Fino"
 msgid "Finish"
 msgstr "Cerrar"
 
-msgid "Firmware Restart"
-msgstr "Reiniciar Firmware"
+msgid ""
+"Firmware\n"
+"Restart"
+msgstr ""
+"Reiniciar\n"
+"Firmware"
 
 msgid "Font Size"
 msgstr "Tamaño del texto"
 
+msgid ""
+"Full\n"
+"Update"
+msgstr ""
+"Actualizar\n"
+"Todo"
+
 msgid "Go Back"
 msgstr "Volver"
+
+msgid "Hidden"
+msgstr "Oculto"
 
 msgid "Hide"
 msgstr "Ocultar"
@@ -238,12 +255,6 @@ msgstr "Origen"
 msgid "Hostname"
 msgstr "Hostname"
 
-msgid "IPv4"
-msgstr "IPv4"
-
-msgid "IPv6"
-msgstr "IPv6"
-
 msgid "Icon Theme"
 msgstr "Tema de Iconos"
 
@@ -271,7 +282,9 @@ msgstr "Invertir Y"
 msgid "Invert Z"
 msgstr "Invertir Z"
 
-msgid "Klipper Restart"
+msgid ""
+"Klipper\n"
+"Restart"
 msgstr ""
 "Reiniciar\n"
 "Klipper"
@@ -377,6 +390,9 @@ msgstr "Pausar"
 
 msgid "Paused"
 msgstr "Pausado"
+
+msgid "Perform a full upgrade?"
+msgstr " ¿Actualizar Todo?"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Por favor recompile y flashee el micro-controlador."
@@ -503,8 +519,8 @@ msgstr "Velocidad de esquina"
 msgid "Start"
 msgstr "Iniciar"
 
-msgid "Starting WiFi Re-association"
-msgstr "Comenzando re-asociación"
+msgid "Starting WiFi Association"
+msgstr "Iniciando asociación WiFi"
 
 msgid "Starting recovery for"
 msgstr "Iniciando recuperación de"
@@ -557,6 +573,9 @@ msgstr "Actualizado"
 msgid "Update"
 msgstr "Actualizar"
 
+msgid "Updating"
+msgstr "Actualizando"
+
 msgid "Uploaded"
 msgstr "Subido"
 
@@ -584,8 +603,8 @@ msgstr "Calibrar Z"
 msgid "Z Move Speed (mm/s)"
 msgstr "Velocidad Z  (mm/s)"
 
-msgid "Z Offset"
-msgstr "Desfase Z"
+msgid "Z Position"
+msgstr "Posición Z"
 
 msgid "Z Tilt"
 msgstr "Inclinación Z"
@@ -620,6 +639,15 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "IPv4"
+#~ msgstr "IPv4"
+
+#~ msgid "IPv6"
+#~ msgstr "IPv6"
+
+#~ msgid "Z Offset"
+#~ msgstr "Desfase Z"
 
 #~ msgid "Unknown Heater "
 #~ msgstr "Calentador Desconocido "

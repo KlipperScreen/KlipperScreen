@@ -199,7 +199,7 @@ class KlippyGtk:
 
         if style is not None:
             b.get_style_context().add_class(style)
-
+        b.connect("clicked", self.screen.reset_screensaver_timeout)
         return b
 
     def ButtonImage(self, image_name, label=None, style=None, width_scale=1.38, height_scale=1.38,
@@ -239,7 +239,7 @@ class KlippyGtk:
 
         if style is not None:
             b.get_style_context().add_class(style)
-
+        b.connect("clicked", self.screen.reset_screensaver_timeout)
         return b
 
     def Dialog(self, screen, buttons, content, callback=None, *args):
@@ -300,6 +300,7 @@ class KlippyGtk:
             ctx = b.get_style_context()
             ctx.add_class(style)
 
+        b.connect("clicked", self.screen.reset_screensaver_timeout)
         return b
 
     def HomogeneousGrid(self, width=None, height=None):
@@ -315,6 +316,7 @@ class KlippyGtk:
         b.props.relief = Gtk.ReliefStyle.NONE
         b.set_hexpand(True)
         b.set_vexpand(True)
+        b.connect("clicked", self.screen.reset_screensaver_timeout)
         return b
 
     def formatFileName(self, name):

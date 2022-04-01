@@ -77,9 +77,12 @@ class KlipperScreen(Gtk.Window):
     updating = False
     update_queue = []
     _ws = None
+    init_printer_timeout = None
+    dpms_timeout = None
+    screensaver_timeout = None
+    reinit_count = 0
 
     def __init__(self, args, version):
-        self.dpms_timeout = None
         self.version = version
 
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
@@ -232,11 +235,6 @@ class KlipperScreen(Gtk.Window):
                                    data["moonraker_host"],
                                    data["moonraker_port"]
                                    )
-
-        powerdevs = self.apiclient.send_request("machine/device_power/devices")
-        if powerdevs is not False:
-            self.printer.configure_power_devices(powerdevs['result'])
-            self.panels['splash_screen'].show_restart_buttons()
 
         self.files = KlippyFiles(self)
         self._ws.initial_connect()
@@ -577,6 +575,11 @@ class KlipperScreen(Gtk.Window):
                 self.subscriptions.pop(i)
                 return
 
+    def reset_screensaver_timeout(self, widget=None):
+        if self.screensaver_timeout is not None:
+            GLib.source_remove(self.screensaver_timeout)
+            self.screensaver_timeout = GLib.timeout_add_seconds(self.blanking_time, self.show_screensaver)
+
     def show_screensaver(self):
         logging.debug("Showing Screensaver")
         if self.screensaver is not None:
@@ -594,6 +597,7 @@ class KlipperScreen(Gtk.Window):
         self.base_panel.get().put(box, 0, 0)
         self.show_all()
         self.screensaver = box
+        return False
 
     def close_screensaver(self, widget=None):
         if self.screensaver is None:
@@ -603,6 +607,8 @@ class KlipperScreen(Gtk.Window):
         self.screensaver = None
         if self.use_dpms:
             self.wake_screen()
+        else:
+            self.screensaver_timeout = GLib.timeout_add_seconds(self.blanking_time, self.show_screensaver)
         self.show_all()
         return False
 
@@ -611,7 +617,8 @@ class KlipperScreen(Gtk.Window):
 
         if state == functions.DPMS_State.Fail:
             logging.info("DPMS State FAIL: Stopping DPMS Check")
-            os.system("xset -display :0 s %s" % self.blanking_time)
+            if self.screensaver_timeout is None:
+                self.set_dpms(False)
             return False
         elif state != functions.DPMS_State.On:
             if self.screensaver is None:
@@ -631,9 +638,8 @@ class KlipperScreen(Gtk.Window):
         self.set_screenblanking_timeout(self._config.get_main_config_option('screen_blanking'))
 
     def set_screenblanking_timeout(self, time):
-        # The 'blank' flag sets the preference to blank the video
-        # rather than display a background pattern
-        os.system("xset -display :0 s blank")
+        os.system("xset -display :0 s noblank")
+        os.system("xset -display :0 s off")
         self.use_dpms = self._config.get_main_config().getboolean("use_dpms", fallback=True)
 
         if time == "off":
@@ -641,8 +647,9 @@ class KlipperScreen(Gtk.Window):
             if self.dpms_timeout is not None:
                 GLib.source_remove(self.dpms_timeout)
                 self.dpms_timeout = None
+            if self.screensaver_timeout is not None:
+                GLib.source_remove(self.screensaver_timeout)
             os.system("xset -display :0 dpms 0 0 0")
-            os.system("xset -display :0 s off")
             return
 
         self.blanking_time = abs(int(time))
@@ -660,8 +667,13 @@ class KlipperScreen(Gtk.Window):
                 return
         # Without dpms just blank the screen
         logging.debug("Not using DPMS")
+        if self.dpms_timeout is not None:
+            GLib.source_remove(self.dpms_timeout)
+            self.dpms_timeout = None
         os.system("xset -display :0 dpms 0 0 0")
-        os.system("xset -display :0 s %s" % self.blanking_time)
+        if self.screensaver_timeout is None:
+            self.screensaver_timeout = GLib.timeout_add_seconds(self.blanking_time, self.show_screensaver)
+        return
 
     def set_updating(self, updating=False):
         if self.updating is True and updating is False:
@@ -777,6 +789,8 @@ class KlipperScreen(Gtk.Window):
         self.base_panel.show_macro_shortcut(False)
         self.wake_screen()
         msg = self.printer.get_stat("webhooks", "state_message")
+        if "ready" in msg:
+            msg = ""
         self.printer_initializing("<b>" + _("Klipper has shutdown") +
                                   "</b>" + "\n\n" + msg)
 
@@ -811,6 +825,7 @@ class KlipperScreen(Gtk.Window):
         elif action == "notify_power_changed":
             logging.debug("Power status changed: %s", data)
             self.printer.process_power_update(data)
+            self.panels['splash_screen'].check_power_status()
         elif self.printer.get_state() not in ["error", "shutdown"] and action == "notify_gcode_response":
             if "Klipper state: Shutdown" in data:
                 logging.debug("Shutdown in gcode response, changing state to shutdown")
@@ -872,25 +887,76 @@ class KlipperScreen(Gtk.Window):
             self.printer.state = "disconnected"
         if text is not None:
             self.panels['splash_screen'].update_text(text)
-            self.panels['splash_screen'].show_restart_buttons()
+
+    def search_power_devices(self, power_devices):
+        if self.connected_printer is not None:
+            found_devices = []
+            devices = self.printer.get_power_devices()
+            logging.debug("Power devices: %s", devices)
+            if devices is not None:
+                for device in devices:
+                    for power_device in power_devices:
+                        if device == power_device and power_device not in found_devices:
+                            found_devices.append(power_device)
+            if len(found_devices) > 0:
+                logging.info("Found %s", found_devices)
+                return found_devices
+            else:
+                logging.info("Power devices not found")
+                return None
+
+    def power_on(self, widget, devices):
+        _ = self.lang.gettext
+        for device in devices:
+            if self.printer.get_power_device_status(device) == "off":
+                self.show_popup_message(_("Sending Power ON signal to: %s") % devices, level=1)
+                logging.info("%s is OFF, Sending Power ON signal", device)
+                self._ws.klippy.power_device_on(device)
+            elif self.printer.get_power_device_status(device) == "on":
+                logging.info("%s is ON", device)
 
     def init_printer(self):
         _ = self.lang.gettext
 
+        state = self.apiclient.get_server_info()
+        if state is False:
+            return False
+        else:
+            # Moonraker is ready, set a loop to init the printer
+            self.reinit_count += 1
+            self.init_printer_timeout = GLib.timeout_add_seconds(3, self.init_printer)
+
+        self.shutdown = False
+        powerdevs = self.apiclient.send_request("machine/device_power/devices")
+        if powerdevs is not False:
+            self.printer.configure_power_devices(powerdevs['result'])
+
+        if state['result']['klippy_connected'] is False:
+            self.panels['splash_screen'].update_text(
+                _("Moonraker: connected") +
+                ("\n\nKlipper: %s\n\n") % state['result']['klippy_state'] +
+                _("Retry #%s") % self.reinit_count)
+            return False
+
         printer_info = self.apiclient.get_printer_info()
         if printer_info is False:
-            logging.info("Unable to get printer info from moonraker")
+            msg = "Unable to get printer info from moonraker"
+            logging.info(msg)
+            self.panels['splash_screen'].update_text(msg)
             return False
         data = self.apiclient.send_request("printer/objects/query?" + "&".join(PRINTER_BASE_STATUS_OBJECTS))
         if data is False:
-            logging.info("Error getting printer object data")
+            msg = "Error getting printer object data"
+            logging.info(msg)
+            self.panels['splash_screen'].update_text(msg)
             return False
-        powerdevs = self.apiclient.send_request("machine/device_power/devices")
         data = data['result']['status']
 
         config = self.apiclient.send_request("printer/objects/query?configfile")
         if config is False:
-            logging.info("Error getting printer config data")
+            msg = "Error getting printer config data"
+            logging.info(msg)
+            self.panels['splash_screen'].update_text(msg)
             return False
 
         # Reinitialize printer, in case the printer was shut down and anything has changed.
@@ -908,7 +974,9 @@ class KlipperScreen(Gtk.Window):
         data = self.apiclient.send_request("printer/objects/query?" + "&".join(PRINTER_BASE_STATUS_OBJECTS +
                                            extra_items))
         if data is False:
-            logging.info("Error getting printer object data")
+            msg = "Error getting printer object data with extra items"
+            logging.info(msg)
+            self.panels['splash_screen'].update_text(msg)
             return False
 
         tempstore = self.apiclient.send_request("server/temperature_store")
@@ -919,9 +987,10 @@ class KlipperScreen(Gtk.Window):
         self.files.initialize()
         self.files.refresh_files()
 
-        if powerdevs is not False:
-            self.printer.configure_power_devices(powerdevs['result'])
-            self.panels['splash_screen'].show_restart_buttons()
+        logging.info("Printer initialized")
+        GLib.source_remove(self.init_printer_timeout)
+        self.reinit_count = 0
+        return False
 
     def printer_ready(self):
         _ = self.lang.gettext

@@ -46,6 +46,7 @@ class Keypad(Gtk.Box):
         self.labels["keypad"] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.labels['entry'] = Gtk.Entry()
         self.labels['entry'].props.xalign = 0.5
+        self.labels['entry'].connect("activate", self.update_entry, "E")
 
         b = self._gtk.ButtonImage('cancel', _('Close'), None, 1, 1)
         b.connect("clicked", close_function)
@@ -66,7 +67,10 @@ class Keypad(Gtk.Box):
                 return
             self.labels['entry'].set_text(text[0:-1])
         elif digit == 'E':
-            temp = int(text)
+            try:
+                temp = int(text)
+            except ValueError:
+                temp = 0
             self.change_temp(temp)
             self.labels['entry'].set_text("")
         else:

@@ -329,7 +329,8 @@ class Printer:
         return self.extrudercount
 
     def get_temp_store_devices(self):
-        return list(self.tempstore)
+        if self.tempstore is not None:
+            return list(self.tempstore)
 
     def get_temp_store_device_has_target(self, device):
         if device in self.tempstore:
@@ -398,5 +399,5 @@ class Printer:
                 temp = self.get_dev_stat(device, x[:-1])
                 if temp is None:
                     temp = 0
-                self.tempstore[device][x].append(round(temp))
+                self.tempstore[device][x].append(round(temp, 2))
         return True

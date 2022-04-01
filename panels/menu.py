@@ -19,10 +19,16 @@ class MenuPanel(ScreenPanel):
         self.items = items
         self.create_menu_items()
 
-        self.grid = Gtk.Grid()
-        self.grid.set_row_homogeneous(True)
-        self.grid.set_column_homogeneous(True)
-        self.content.add(self.grid)
+        self.grid = self._gtk.HomogeneousGrid()
+
+        scroll = Gtk.ScrolledWindow()
+        scroll.set_property("overlay-scrolling", False)
+        scroll.set_hexpand(True)
+        scroll.set_vexpand(True)
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add(self.grid)
+
+        self.content.add(scroll)
 
     def activate(self):
         if not self.j2_data:
@@ -30,7 +36,10 @@ class MenuPanel(ScreenPanel):
         self.j2_data.update({
             'moonraker_connected': self._screen._ws.is_connected()
         })
-        self.arrangeMenuItems(self.items, 4)
+        if self._screen.vertical_mode:
+            self.arrangeMenuItems(self.items, 3)
+        else:
+            self.arrangeMenuItems(self.items, 4)
 
     def arrangeMenuItems(self, items, columns, expandLast=False):
         for child in self.grid.get_children():
@@ -52,19 +61,12 @@ class MenuPanel(ScreenPanel):
                     # Arrange 3 x 2
                     columns = 3
 
-            if self._screen.vertical_mode:
-                row = i % columns
-                col = int(i/columns)
-            else:
-                col = i % columns
-                row = int(i/columns)
+            col = i % columns
+            row = int(i/columns)
 
             width = height = 1
             if expandLast is True and i+1 == length and length % 2 == 1:
-                if self._screen.vertical_mode:
-                    height = 2
-                else:
-                    width = 2
+                width = 2
 
             self.grid.attach(self.labels[key], col, row, width, height)
             i += 1
