@@ -78,16 +78,17 @@ titlebar_items: chamber, MCU, Pi
 # The style of the user defined items in the titlebar
 # Can be 'full' indicating that the full name is shown, 'short' for the first letter, or None (default) for no name
 titlebar_name_type: None
-```
 
-## Z probe calibrate Option
-If for any reason the XYZ home position is not suitable for calibrating the probe Z offset, you can enter the coordinates for the desired position here.
-```
-[z_calibrate_position]
-# The specified positions must be> 0 otherwise this option is ignored.
-# the center of the print bed is a good value
+# Z probe calibrate position
+# By default is the middle of the bed
 calibrate_x_position: 100
 calibrate_y_position: 100
+
+# Screen DPMS
+# By default DPMS is used to turn off the screen, this should prevent burn-in and save power.
+# However if you find that your screen doesn't turn off because it doesn't support it
+# Setting this to false will just turn the screen black.
+use_dpms: True
 ```
 
 ## Preheat Options

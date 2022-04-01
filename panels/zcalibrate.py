@@ -148,6 +148,7 @@ class ZCalibratePanel(ScreenPanel):
                 x_position = printer_cfg.getint("calibrate_x_position", 0)
                 y_position = printer_cfg.getint("calibrate_y_position", 0)
             elif 'z_calibrate_position' in self._config.get_config():
+                # OLD global way, this should be deprecated
                 x_position = self._config.get_config()['z_calibrate_position'].getint("calibrate_x_position", 0)
                 y_position = self._config.get_config()['z_calibrate_position'].getint("calibrate_y_position", 0)
 
