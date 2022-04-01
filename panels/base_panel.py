@@ -161,6 +161,9 @@ class BasePanel(ScreenPanel):
             elif device.startswith("temperature_fan"):
                 fan_img = self._gtk.Image("fan", .5)
                 self.labels[device + '_box'].pack_start(fan_img, True, True, 3)
+            elif device.startswith("heater_generic"):
+                heat_img = self._gtk.Image("heater", .5)
+                self.labels[device + '_box'].pack_start(heat_img, True, True, 3)
             else:
                 temp_img = self._gtk.Image("heat-up", .5)
                 self.labels[device + '_box'].pack_start(temp_img, True, True, 3)

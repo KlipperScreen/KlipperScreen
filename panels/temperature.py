@@ -301,7 +301,7 @@ class TemperaturePanel(ScreenPanel):
             for d in self.devices:
                 if "heater_generic" in d:
                     h += 1
-            image = "heat-up"
+            image = "heater"
             class_name = "graph_label_sensor_%s" % h
             type = "sensor"
         elif device.startswith("temperature_fan"):
