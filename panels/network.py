@@ -145,12 +145,14 @@ class NetworkPanel(ScreenPanel):
             logging.debug("Couldn't get netinfo")
             if connected_ssid == ssid:
                 netinfo = {'connected': True}
-                display_name += " " + _("Connected")
             else:
                 netinfo = {'connected': False}
 
+        if connected_ssid == ssid:
+            display_name += " (" + _("Connected") + ")"
+
         name = Gtk.Label("")
-        name.set_markup("<big><b>%s</b></big>" % (ssid))
+        name.set_markup("<big><b>%s</b></big>" % (display_name))
         name.set_hexpand(True)
         name.set_halign(Gtk.Align.START)
         name.set_line_wrap(True)
