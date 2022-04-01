@@ -39,7 +39,7 @@ class BedMeshPanel(ScreenPanel):
 
 
         addprofile = self._gtk.ButtonImage("increase", "  %s" % _("Add bed mesh profile"),
-                                           "color1", .5, .5, Gtk.PositionType.LEFT, False)
+                                           "color1", .5, Gtk.PositionType.LEFT, False)
         addprofile.connect("clicked", self.show_create_profile)
         addprofile.set_size_request(60, 0)
         addprofile.set_hexpand(False)

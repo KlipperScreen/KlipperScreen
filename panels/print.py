@@ -55,7 +55,7 @@ class PrintPanel(ScreenPanel):
             sbox.add(s)
             i += 1
 
-        refresh = self._gtk.ButtonImage("refresh", None, None, .5, .5)
+        refresh = self._gtk.ButtonImage("refresh", None, None, .5)
         refresh.connect('clicked', self._refresh_files)
         sbox.add(refresh)
         sbox.set_hexpand(True)
@@ -125,7 +125,7 @@ class PrintPanel(ScreenPanel):
             file.set_hexpand(True)
             file.set_vexpand(False)
 
-            icon = self._gtk.Image("folder.svg", False, 1, 1)
+            icon = self._gtk.Image("folder", 1)
 
             file.add(icon)
             file.add(labels)
@@ -216,7 +216,7 @@ class PrintPanel(ScreenPanel):
             if pixbuf is not None:
                 icon.set_from_pixbuf(pixbuf)
             else:
-                icon = self._gtk.Image("file.svg", False, 1.6, 1.6)
+                icon = self._gtk.Image("file", 1.6)
 
             file.add(icon)
             file.add(labels)

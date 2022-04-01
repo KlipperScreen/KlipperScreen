@@ -151,9 +151,6 @@ class KlippyFiles():
         return False
 
     def get_thumbnail_location(self, filename):
-        if not self.has_thumbnail(filename):
-            return None
-
         thumb = self.files[filename]['thumbnails'][0]
         if thumb['local'] is False:
             return ['http', thumb['path']]

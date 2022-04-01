@@ -7,8 +7,6 @@ import pathlib
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gdk, GdkPixbuf, Gio, Gtk, Pango
 
-klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
-
 class KlippyGtk:
     labels = {}
     keyboard_ratio = .22
@@ -19,7 +17,8 @@ class KlippyGtk:
         self.screen = screen
         self.width = width
         self.height = height
-        self.theme = theme
+        self.themedir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles", theme, "images")
+
         if self.screen.vertical_mode:
             self.font_ratio = [33, 49]
         else:
@@ -114,61 +113,23 @@ class KlippyGtk:
             la.get_style_context().add_class(style)
         return la
 
-    def ImageLabel(self, image_name, text, size=20, style=False, width_scale=.32, height_scale=.32):
-        box1 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=15)
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            os.path.join(klipperscreendir, "styles", self.theme, "images", str(image_name) + ".svg"),
-            int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
-
-        image = Gtk.Image.new_from_pixbuf(pixbuf)
-
-        label = Gtk.Label()
-        label.set_markup(text)
-        box1.add(image)
-        box1.add(label)
-
-        if style is not False:
-            ctx = box1.get_style_context()
-            ctx.add_class(style)
-
-        return {"l": label, "b": box1}
-
-    def ImageMenuButton(self, image_name, text, size=20, style=False, width_scale=.32, height_scale=.32, popover=False):
-        box1 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=15)
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            os.path.join(klipperscreendir, "styles", self.theme, "images", str(image_name) + ".svg"),
-            int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
-
-        image = Gtk.Image.new_from_pixbuf(pixbuf)
-
-        mb = Gtk.MenuButton(label="", popover=popover)
-        label = mb.get_label()
-        box1.add(image)
-        box1.add(mb)
-
-        if style is not False:
-            ctx = box1.get_style_context()
-            ctx.add_class(style)
-
-        return {"l": label, "mb": mb, "b": box1}
-
-    def Image(self, image_name, style=False, width_scale=1, height_scale=1):
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            os.path.join(klipperscreendir, "styles", self.theme, "images", str(image_name)),
-            int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
-
-        return Gtk.Image.new_from_pixbuf(pixbuf)
-
-    def ImageFromFile(self, filename, style=False, width_scale=1, height_scale=1):
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            filename, int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
-
-        return Gtk.Image.new_from_pixbuf(pixbuf)
+    def Image(self, image_name, scale=1):
+        filename = os.path.join(self.themedir, str(image_name) + ".svg")
+        if os.path.exists(filename):
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename,
+                                                             int(round(self.img_width * scale)),
+                                                             int(round(self.img_height * scale)),
+                                                             True)
+            return Gtk.Image.new_from_pixbuf(pixbuf)
+        else:
+            logging.error("Unable to find image %s", filename)
+            return Gtk.Image()
 
     def PixbufFromFile(self, filename, style=False, width_scale=1, height_scale=1):
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            filename, int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
-
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename,
+                                                         int(round(self.img_width * width_scale)),
+                                                         int(round(self.img_height * height_scale)),
+                                                         True)
         return pixbuf
 
     def PixbufFromHttp(self, resource, style=False, width_scale=1, height_scale=1):
@@ -176,9 +137,10 @@ class KlippyGtk:
         if response is False:
             return None
         stream = Gio.MemoryInputStream.new_from_data(response, None)
-        pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
-            stream, int(round(self.img_width * width_scale)), int(round(self.img_height * height_scale)), True)
-
+        pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(stream,
+                                                           int(round(self.img_width * width_scale)),
+                                                           int(round(self.img_height * height_scale)),
+                                                           True)
         return pixbuf
 
     def ProgressBar(self, style=False):
@@ -202,31 +164,16 @@ class KlippyGtk:
         b.connect("clicked", self.screen.reset_screensaver_timeout)
         return b
 
-    def ButtonImage(self, image_name, label=None, style=None, width_scale=1.38, height_scale=1.38,
+    def ButtonImage(self, image_name, label=None, style=None, scale=1.38,
                     position=Gtk.PositionType.TOP, word_wrap=True):
-        filename = os.path.join(klipperscreendir, "styles", self.theme, "images", str(image_name) + ".svg")
-        if not os.path.exists(filename):
-            logging.error("Unable to find button image (theme, image): (%s, %s)" % (self.theme, str(image_name)))
-            filename = os.path.join(klipperscreendir, "styles", self.theme, "images", "warning.svg")
 
         b = Gtk.Button(label=label)
-
-        if os.path.exists(filename):
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-                filename,
-                int(round(self.img_width * width_scale)),
-                int(round(self.img_height * height_scale)),
-                True
-            )
-            img = Gtk.Image.new_from_pixbuf(pixbuf)
-            b.set_image(img)
-
         b.set_hexpand(True)
         b.set_vexpand(True)
         b.set_can_focus(False)
+        b.set_image(self.Image(image_name, scale))
         b.set_image_position(position)
         b.set_always_show_image(True)
-        b.props.relief = Gtk.ReliefStyle.NONE
 
         if word_wrap is True:
             try:
@@ -276,25 +223,15 @@ class KlippyGtk:
         return dialog
 
 
-    def ToggleButtonImage(self, image_name, label, style=False, width_scale=1.38, height_scale=1.38):
-        filename = os.path.join(klipperscreendir, "styles", self.theme, "images", str(image_name) + ".svg")
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            filename,
-            int(round(self.img_width * width_scale)),
-            int(round(self.img_height * height_scale)),
-            True
-        )
-
-        img = Gtk.Image.new_from_pixbuf(pixbuf)
+    def ToggleButtonImage(self, image_name, label, style=False, scale=1.38):
 
         b = Gtk.ToggleButton(label=label)
-        b.set_image(img)
         b.set_hexpand(True)
         b.set_vexpand(True)
         b.set_can_focus(False)
+        b.set_image(self.Image(image_name, scale))
         b.set_image_position(Gtk.PositionType.TOP)
         b.set_always_show_image(True)
-        b.props.relief = Gtk.ReliefStyle.NONE
 
         if style is not False:
             ctx = b.get_style_context()

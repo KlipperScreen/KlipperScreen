@@ -86,7 +86,7 @@ class JobStatusPanel(ScreenPanel):
         overlay.add(self.labels['darea'])
         overlay.add_overlay(box)
 
-        self.labels['thumbnail'] = self._gtk.Image("file.svg", False, 1.6, 1.6)
+        self.labels['thumbnail'] = self._gtk.Image("file", 2)
 
         i = 0
         for extruder in self._printer.get_tools():
@@ -94,7 +94,7 @@ class JobStatusPanel(ScreenPanel):
             self.labels[extruder] = Gtk.Label(label="")
             self.labels[extruder].get_style_context().add_class("printing-info")
             if i <= 4:
-                ext_img = self._gtk.Image("extruder-%s.svg" % i, None, .6, .6)
+                ext_img = self._gtk.Image("extruder-%s" % i, .6)
                 self.labels[extruder + '_box'].add(ext_img)
             self.labels[extruder + '_box'].add(self.labels[extruder])
             i += 1
@@ -103,7 +103,7 @@ class JobStatusPanel(ScreenPanel):
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
         temp_grid.attach(self.labels[self.current_extruder + '_box'], 0, 0, 1, 1)
         if self._printer.has_heated_bed():
-            heater_bed = self._gtk.Image("bed.svg", None, .6, .6)
+            heater_bed = self._gtk.Image("bed", .6)
             self.labels['heater_bed'] = Gtk.Label(label="")
             self.labels['heater_bed'].get_style_context().add_class("printing-info")
             heater_bed_box = Gtk.Box(spacing=0)
@@ -113,7 +113,7 @@ class JobStatusPanel(ScreenPanel):
         self.labels['temp_grid'] = temp_grid
 
         # Create time remaining items
-        hourglass = self._gtk.Image("hourglass.svg", None, .6, .6)
+        hourglass = self._gtk.Image("hourglass", .6)
         self.labels['left'] = Gtk.Label(label=_("Left:"))
         self.labels['left'].get_style_context().add_class("printing-info")
         self.labels['time_left'] = Gtk.Label(label="0s")
@@ -125,7 +125,7 @@ class JobStatusPanel(ScreenPanel):
         self.labels['itl_box'] = itl_box
 
         # Create overall items
-        clock = self._gtk.Image("clock.svg", None, .6, .6)
+        clock = self._gtk.Image("clock", .6)
         self.labels['elapsed'] = Gtk.Label(label=_("Elapsed:"))
         self.labels['elapsed'].get_style_context().add_class("printing-info")
         self.labels['duration'] = Gtk.Label(label="0s")
@@ -146,7 +146,7 @@ class JobStatusPanel(ScreenPanel):
         timegrid.attach(it2_box, 1, 1, 1, 1)
         self.labels['timegrid'] = timegrid
 
-        position = self._gtk.Image("move.svg", None, .6, .6)
+        position = self._gtk.Image("move", .6)
         self.labels['pos_x'] = Gtk.Label(label="X: 0")
         self.labels['pos_x'].get_style_context().add_class("printing-info")
         self.labels['pos_y'] = Gtk.Label(label="Y: 0")
@@ -163,19 +163,19 @@ class JobStatusPanel(ScreenPanel):
         pos_box.add(posgrid)
         self.labels['pos_box'] = pos_box
 
-        speed = self._gtk.Image("speed+.svg", None, .6, .6)
+        speed = self._gtk.Image("speed+", .6)
         self.labels['speed'] = Gtk.Label(label="")
         self.labels['speed'].get_style_context().add_class("printing-info")
         speed_box = Gtk.Box(spacing=0)
         speed_box.add(speed)
         speed_box.add(self.labels['speed'])
-        extrusion = self._gtk.Image("extrude.svg", None, .6, .6)
+        extrusion = self._gtk.Image("extrude", .6)
         self.labels['extrusion'] = Gtk.Label(label="")
         self.labels['extrusion'].get_style_context().add_class("printing-info")
         extrusion_box = Gtk.Box(spacing=0)
         extrusion_box.add(extrusion)
         extrusion_box.add(self.labels['extrusion'])
-        fan = self._gtk.Image("fan.svg", None, .6, .6)
+        fan = self._gtk.Image("fan", .6)
         self.labels['fan'] = Gtk.Label(label="")
         self.labels['fan'].get_style_context().add_class("printing-info")
         fan_box = Gtk.Box(spacing=0)

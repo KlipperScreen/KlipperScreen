@@ -34,24 +34,22 @@ class BasePanel(ScreenPanel):
         self.control_grid.set_size_request(action_bar_width, action_bar_height)
         self.control_grid.get_style_context().add_class('action_bar')
 
-        self.control['back'] = self._gtk.ButtonImage('back', None, None, 1, 1)
+        self.control['back'] = self._gtk.ButtonImage('back', None, None, 1)
         self.control['back'].connect("clicked", self.back)
-        self.control['home'] = self._gtk.ButtonImage('main', None, None, 1, 1)
+        self.control['home'] = self._gtk.ButtonImage('main', None, None, 1)
         self.control['home'].connect("clicked", self.menu_return, True)
 
         if len(self._config.get_printers()) > 1:
-            self.control['printer_select'] = self._gtk.ButtonImage(
-                'shuffle', None, None, 1, 1)
+            self.control['printer_select'] = self._gtk.ButtonImage('shuffle', None, None, 1)
             self.control['printer_select'].connect("clicked", self._screen.show_printer_select)
 
-        self.control['macro_shortcut'] = self._gtk.ButtonImage(
-            'custom-script', None, None, 1, 1)
+        self.control['macro_shortcut'] = self._gtk.ButtonImage('custom-script', None, None, 1)
         self.control['macro_shortcut'].connect("clicked", self.menu_item_clicked, "gcode_macros", {
             "name": "Macros",
             "panel": "gcode_macros"
         })
 
-        self.control['estop'] = self._gtk.ButtonImage('emergency', None, None, 1, 1)
+        self.control['estop'] = self._gtk.ButtonImage('emergency', None, None, 1)
         self.control['estop'].connect("clicked", self.emergency_stop)
 
         self.locations = {
@@ -151,20 +149,20 @@ class BasePanel(ScreenPanel):
             if device.startswith("extruder"):
                 if self._printer.extrudercount > 1:
                     if device == "extruder":
-                        ext_img = self._gtk.Image("extruder-0.svg", None, .5, .5)
+                        ext_img = self._gtk.Image("extruder-0", .5)
                     else:
-                        ext_img = self._gtk.Image("extruder-%s.svg" % device[8:], None, .5, .5)
+                        ext_img = self._gtk.Image("extruder-%s" % device[8:], .5)
                 else:
-                    ext_img = self._gtk.Image("extruder.svg", None, .5, .5)
+                    ext_img = self._gtk.Image("extruder", .5)
                 self.labels[device + '_box'].pack_start(ext_img, True, True, 3)
             elif device.startswith("heater_bed"):
-                bed_img = self._gtk.Image("bed.svg", None, .5, .5)
+                bed_img = self._gtk.Image("bed", .5)
                 self.labels[device + '_box'].pack_start(bed_img, True, True, 3)
             elif device.startswith("temperature_fan"):
-                fan_img = self._gtk.Image("fan.svg", None, .5, .5)
+                fan_img = self._gtk.Image("fan", .5)
                 self.labels[device + '_box'].pack_start(fan_img, True, True, 3)
             else:
-                temp_img = self._gtk.Image("heat-up.svg", None, .5, .5)
+                temp_img = self._gtk.Image("heat-up", .5)
                 self.labels[device + '_box'].pack_start(temp_img, True, True, 3)
             self.labels[device + '_box'].pack_start(self.labels[device], True, True, 0)
 

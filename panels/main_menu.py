@@ -130,7 +130,7 @@ class MainPanel(MenuPanel):
 
         text = "<span underline='double' underline_color='#%s'>%s</span>" % (color, devname.capitalize())
         name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "),
-                                     None, .5, .5, Gtk.PositionType.LEFT, False)
+                                     None, .5, Gtk.PositionType.LEFT, False)
         name.connect('clicked', self.on_popover_clicked, device)
         name.set_alignment(0, .5)
         name.get_style_context().add_class(class_name)
