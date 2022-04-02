@@ -297,12 +297,12 @@ class TemperaturePanel(ScreenPanel):
             class_name = "graph_label_heater_bed"
             type = "bed"
         elif device.startswith("heater_generic"):
-            h = 1
+            self.h = 1
             for d in self.devices:
                 if "heater_generic" in d:
-                    h += 1
+                    self.h += 1
             image = "heater"
-            class_name = "graph_label_sensor_%s" % h
+            class_name = "graph_label_sensor_%s" % self.h
             type = "sensor"
         elif device.startswith("temperature_fan"):
             f = 1
@@ -317,7 +317,7 @@ class TemperaturePanel(ScreenPanel):
         else:
             s = 1
             try:
-                s += h
+                s += self.h
             except Exception:
                 pass
             for d in self.devices:
