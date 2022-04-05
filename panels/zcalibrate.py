@@ -42,7 +42,7 @@ class ZCalibratePanel(ScreenPanel):
         self.widgets['cancel'] = self._gtk.ButtonImage('cancel', _('Abort'), 'color2')
         self.widgets['cancel'].connect("clicked", self.abort)
 
-        functions = ["endstop", "probe", "mesh", "delta"]
+        functions = ["endstop", "probe", "mesh", "delta", "delta_manual"]
         pobox = Gtk.VBox()
         if not self._screen.printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"):
             endstop = self._gtk.Button(label="Endstop")
@@ -67,11 +67,19 @@ class ZCalibratePanel(ScreenPanel):
                 functions.remove("mesh")
 
         if "delta" in self._screen.printer.get_config_section("printer")['kinematics']:
-            delta = self._gtk.Button(label="Delta")
-            delta.connect("clicked", self.start_calibration, "delta")
-            pobox.pack_start(delta, True, True, 5)
+            if (self._printer.config_section_exists("probe") or self._printer.config_section_exists("bltouch")):
+                delta = self._gtk.Button(label="Delta Automatic")
+                delta.connect("clicked", self.start_calibration, "delta")
+                pobox.pack_start(delta, True, True, 5)
+            else:
+                functions.remove("delta")
+            delta_manual = self._gtk.Button(label="Delta Manual")
+            delta_manual.connect("clicked", self.start_calibration, "delta_manual")
+            pobox.pack_start(delta_manual, True, True, 5)
         else:
             functions.remove("delta")
+            functions.remove("delta_manual")
+
         logging.info("Available functions: %s" % functions)
 
         self.labels['popover'] = Gtk.Popover()
@@ -191,6 +199,8 @@ class ZCalibratePanel(ScreenPanel):
             self._screen._ws.klippy.gcode_script("BED_MESH_CALIBRATE")
         elif method == "delta":
             self._screen._ws.klippy.gcode_script("DELTA_CALIBRATE")
+        elif method == "delta_manual":
+            self._screen._ws.klippy.gcode_script("DELTA_CALIBRATE METHOD=manual")
         elif method == "endstop":
             self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_ENDSTOP_CALIBRATE)
 
