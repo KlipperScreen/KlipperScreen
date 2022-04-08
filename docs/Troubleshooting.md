@@ -19,13 +19,11 @@ Check the file `/var/log/Xorg.0.log` where you can find issues with the X server
 xf86OpenConsole: Cannot open virtual console 2 (Permission denied)
 ```
 
-* Check /etc/X11/Xwrapper.config
-Run `cat /etc/X11/Xwrapper.config`
+* Run `cat /etc/X11/Xwrapper.config`
 
 This should have the line `allowed_users=anybody` in it
 
-* Check /etc/group
-Run `cat /etc/group | grep tty`
+* Run `cat /etc/group | grep tty`
 
 If your username is not listed under that line, you need to add it with the following command:
 
@@ -33,6 +31,7 @@ If your username is not listed under that line, you need to add it with the foll
 
 If it's still failing, try: `sudo apt install xserver-xorg-legacy`
 
+As a last resort add `needs_root_rights=yes` to `/etc/X11/Xwrapper.config`
 
 ## Screen shows console instead of KlipperScreen
 
