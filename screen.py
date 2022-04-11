@@ -437,17 +437,21 @@ class KlipperScreen(Gtk.Window):
     def init_style(self):
         style_provider = Gtk.CssProvider()
         css = open(os.path.join(klipperscreendir, "styles", "base.css"))
-        css_base_data = css.read()
+        css_data = css.read()
         css.close()
-        css = open(os.path.join(klipperscreendir, "styles", self.theme, "style.css"))
-        css_data = css_base_data + css.read()
-        css.close()
-
         f = open(os.path.join(klipperscreendir, "styles", "base.conf"))
         style_options = json.load(f)
         f.close()
 
-        theme_style_conf = os.path.join(klipperscreendir, "styles", self.theme, "style.conf")
+        # Load custom theme
+        theme = os.path.join(klipperscreendir, "styles", self.theme)
+        theme_style = os.path.join(theme, "style.css")
+        theme_style_conf = os.path.join(theme, "style.conf")
+
+        if os.path.exists(theme_style):
+            css = open(theme_style)
+            css_data += css.read()
+            css.close()
         if os.path.exists(theme_style_conf):
             try:
                 f = open(theme_style_conf)
