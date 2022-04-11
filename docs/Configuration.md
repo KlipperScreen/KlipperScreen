@@ -106,6 +106,14 @@ temperature_fan: 40
 gcode: MY_HEATSOAK_MACRO
 ```
 
+There is an special preheat setting named cooldown to do additional things when the _cooldown_ button is pressed
+for example:
+
+```
+[preheat cooldown]
+gcode: M107
+```
+
 ## Bed Screws
 ```
 [bed_screws]
