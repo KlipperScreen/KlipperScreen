@@ -74,6 +74,10 @@ to:
 and reboot, that should make the touch work, if your screen is rotated 180 degrees, then you may need to adjust
 [the touch rotation](Hardware.md) as described in the Hardware page.
 
+## OctoPrint
+
+KlipperScreen was never intended to be used with OctoPrint, and there is no support for it.
+
 ## Other issues
 
 If you found an issue not listed here, or can't make it work, please provide all the log files
