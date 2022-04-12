@@ -120,7 +120,8 @@ class Printer:
             'print_stats',
             'toolhead',
             'virtual_sdcard',
-            'webhooks'
+            'webhooks',
+            'fimware_retraction'
         ]
 
         for x in (self.get_tools() + self.get_heaters()):
@@ -259,7 +260,8 @@ class Printer:
                 "power_devices": {
                     "count": len(self.get_power_devices())
                 },
-                "probe": self.config_section_exists("probe")
+                "probe": self.config_section_exists("probe"),
+                "firmware_retraction": self.config_section_exists("firmware_retraction")
             }
         }
 
