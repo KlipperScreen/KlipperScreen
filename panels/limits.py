@@ -81,7 +81,7 @@ class LimitsPanel(ScreenPanel):
         frame.get_style_context().add_class("frame-item")
 
         name = Gtk.Label()
-        name.set_markup("<big><b>%s</b></big>" % (optname))
+        name.set_markup("<big><b>%s</b></big> (%s)" % (optname, units))
         name.set_hexpand(True)
         name.set_vexpand(True)
         name.set_halign(Gtk.Align.START)
