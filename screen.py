@@ -773,7 +773,7 @@ class KlipperScreen(Gtk.Window):
         if prev_state not in ['paused', 'printing']:
             self.init_printer()
             self.base_panel._printer = self.printer
-            self.base_panel.show_heaters()
+        self.base_panel.show_heaters(True)
 
         self.printer_ready()
 
@@ -1012,6 +1012,7 @@ class KlipperScreen(Gtk.Window):
     def printer_printing(self):
         self.close_popup_message()
         self.show_panel('job_status', "job_status", "Print Status", 2)
+        self.base_panel.show_heaters(True)
 
     def show_keyboard(self, widget=None):
         if self.keyboard is not None:

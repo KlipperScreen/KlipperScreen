@@ -138,16 +138,17 @@ class BasePanel(ScreenPanel):
         for child in self.control['temp_box'].get_children():
             self.control['temp_box'].remove(child)
 
-        if show is False or self._printer.get_temp_store_devices() is None:
+        if (not show or self._screen.printer.get_temp_store_devices() is None):
             return
 
-        for device in self._printer.get_temp_store_devices():
+        for device in self._screen.printer.get_temp_store_devices():
+            logging.info(device)
             self.labels[device + '_box'] = Gtk.Box(spacing=0)
             self.labels[device] = Gtk.Label(label="100º")
             self.labels[device].set_ellipsize(True)
             self.labels[device].set_ellipsize(Pango.EllipsizeMode.START)
             if device.startswith("extruder"):
-                if self._printer.extrudercount > 1:
+                if self._screen.printer.extrudercount > 1:
                     if device == "extruder":
                         ext_img = self._gtk.Image("extruder-0", .5)
                     else:
@@ -177,12 +178,12 @@ class BasePanel(ScreenPanel):
             nlimit = 5
 
         n = 0
-        if self._printer.get_tools():
-            self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+        if self._screen.printer.get_tools():
+            self.current_extruder = self._screen.printer.get_stat("toolhead", "extruder")
             self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, True, 3)
             n += 1
 
-        if self._printer.has_heated_bed():
+        if self._screen.printer.has_heated_bed():
             self.control['temp_box'].pack_start(self.labels['heater_bed_box'], True, True, 3)
             n += 1
 
@@ -195,7 +196,7 @@ class BasePanel(ScreenPanel):
                 logging.info("Titlebar items: %s", titlebar_items)
                 self.titlebar_name_type = printer_cfg.get("titlebar_name_type", None)
                 logging.info("Titlebar name type: %s", self.titlebar_name_type)
-                for device in self._printer.get_temp_store_devices():
+                for device in self._screen.printer.get_temp_store_devices():
                     # Users can fill the bar if they want
                     if n >= nlimit + 1:
                         break
@@ -210,12 +211,13 @@ class BasePanel(ScreenPanel):
                             break
 
         # If there is enough space fill with heater_generic
-        for device in self._printer.get_temp_store_devices():
+        for device in self._screen.printer.get_temp_store_devices():
             if n >= nlimit:
                 break
             if device.startswith("heater_generic"):
                 self.control['temp_box'].pack_start(self.labels["%s_box" % device], True, True, 3)
                 n += 1
+        self.control['temp_box'].show_all()
 
     def activate(self):
         if self.time_update is None:
@@ -243,10 +245,10 @@ class BasePanel(ScreenPanel):
         return self.layout
 
     def process_update(self, action, data):
-        if action != "notify_status_update" or self._printer is None:
+        if action != "notify_status_update" or self._screen.printer is None:
             return
 
-        devices = self._printer.get_temp_store_devices()
+        devices = self._screen.printer.get_temp_store_devices()
         if devices is not None:
             for device in devices:
                 name = ""
@@ -255,7 +257,7 @@ class BasePanel(ScreenPanel):
                         name = device.split(" ")[1:][0].capitalize().replace("_", " ") + ": "
                     elif self.titlebar_name_type == "short":
                         name = device.split(" ")[1:][0][:1].upper() + ": "
-                temp = self._printer.get_dev_stat(device, "temperature")
+                temp = self._screen.printer.get_dev_stat(device, "temperature")
                 if temp is not None:
                     self.labels[device].set_label("%s%d°" % (name, round(temp)))
 
