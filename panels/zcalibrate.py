@@ -44,7 +44,9 @@ class ZCalibratePanel(ScreenPanel):
 
         functions = ["endstop", "probe", "mesh", "delta", "delta_manual"]
         pobox = Gtk.VBox()
-        if not self._screen.printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"):
+        endstop = (self._printer.config_section_exists("stepper_z") and
+                   not self._screen.printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"))
+        if endstop:
             endstop = self._gtk.Button(label="Endstop")
             endstop.connect("clicked", self.start_calibration, "endstop")
             pobox.pack_start(endstop, True, True, 5)
