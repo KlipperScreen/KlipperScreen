@@ -31,9 +31,6 @@ class JobStatusPanel(ScreenPanel):
 
         self.create_buttons()
 
-        grid = self._gtk.HomogeneousGrid()
-        grid.set_row_homogeneous(False)
-
         self.labels['button_grid'] = self._gtk.HomogeneousGrid()
         self.labels['button_grid'].set_vexpand(False)
 
@@ -42,18 +39,19 @@ class JobStatusPanel(ScreenPanel):
         fi_box.set_vexpand(False)
         fi_box.set_halign(Gtk.Align.START)
 
-        self.labels['file'] = Gtk.Label(label="file")
+        self.labels['file'] = Gtk.Label("Filename")
         self.labels['file'].set_halign(Gtk.Align.START)
         self.labels['file'].set_vexpand(False)
         self.labels['file'].get_style_context().add_class("printing-filename")
         self.labels['file'].set_ellipsize(True)
         self.labels['file'].set_ellipsize(Pango.EllipsizeMode.END)
-        self.labels['status'] = Gtk.Label()
+        self.labels['status'] = Gtk.Label("Status")
         self.labels['status'].set_halign(Gtk.Align.START)
         self.labels['status'].set_vexpand(False)
         self.labels['status'].get_style_context().add_class("printing-status")
-        self.labels['status'].set_line_wrap(True)
-        self.labels['lcdmessage'] = Gtk.Label("")
+        self.labels['status'].set_ellipsize(True)
+        self.labels['status'].set_ellipsize(Pango.EllipsizeMode.END)
+        self.labels['lcdmessage'] = Gtk.Label("Message")
         self.labels['lcdmessage'].set_halign(Gtk.Align.START)
         self.labels['lcdmessage'].set_vexpand(False)
         self.labels['lcdmessage'].get_style_context().add_class("printing-status")
@@ -65,11 +63,6 @@ class JobStatusPanel(ScreenPanel):
         fi_box.add(self.labels['lcdmessage'])
         fi_box.set_valign(Gtk.Align.CENTER)
 
-        info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        info.props.valign = Gtk.Align.CENTER
-        info.set_hexpand(True)
-        info.set_vexpand(True)
-
         self.labels['darea'] = Gtk.DrawingArea()
         self.labels['darea'].connect("draw", self.on_draw)
 
@@ -77,7 +70,7 @@ class JobStatusPanel(ScreenPanel):
         box.set_hexpand(True)
         box.set_vexpand(True)
         box.set_halign(Gtk.Align.CENTER)
-        self.labels['progress_text'] = Gtk.Label()
+        self.labels['progress_text'] = Gtk.Label("0 %")
         self.labels['progress_text'].get_style_context().add_class("printing-progress-text")
         box.add(self.labels['progress_text'])
 
@@ -88,133 +81,238 @@ class JobStatusPanel(ScreenPanel):
         overlay.add_overlay(box)
 
         self.labels['thumbnail'] = self._gtk.Image("file", 2)
+        self.labels['thumbnail'].set_size_request(self._screen.width/3, 0)
 
-        i = 0
-        for extruder in self._printer.get_tools():
-            self.labels[extruder + '_box'] = Gtk.Box(spacing=0)
-            self.labels[extruder] = Gtk.Label(label="")
-            self.labels[extruder].get_style_context().add_class("printing-info")
-            if i <= 4:
-                ext_img = self._gtk.Image("extruder-%s" % i, .6)
-                self.labels[extruder + '_box'].add(ext_img)
-            self.labels[extruder + '_box'].add(self.labels[extruder])
-            i += 1
+        self.labels['heater_bed'] = Gtk.Label("-/-")
+        self.labels['left'] = Gtk.Label(_("Left:"))
+        self.labels['left'].set_halign(Gtk.Align.START)
+        self.labels['time_left'] = Gtk.Label("-")
+        self.labels['elapsed'] = Gtk.Label(_("Elapsed:"))
+        self.labels['elapsed'].set_halign(Gtk.Align.START)
+        self.labels['duration'] = Gtk.Label("-")
+        self.labels['total'] = Gtk.Label(_("Total:"))
+        self.labels['total'].set_halign(Gtk.Align.START)
+        self.labels['est_time'] = Gtk.Label("-")
+        self.labels['total'] = Gtk.Label(_("Total:"))
+        self.labels['total'].set_halign(Gtk.Align.START)
+        self.labels['slicer'] = Gtk.Label(_("Slicer:"))
+        self.labels['slicer'].set_halign(Gtk.Align.START)
+        self.labels['slicer_time'] = Gtk.Label("-")
+        self.labels['file_tlbl'] = Gtk.Label(_("File:"))
+        self.labels['file_tlbl'].set_halign(Gtk.Align.START)
+        self.labels['file_time'] = Gtk.Label("-")
+        self.labels['fila_tlbl'] = Gtk.Label(_("Filament:"))
+        self.labels['fila_tlbl'].set_halign(Gtk.Align.START)
+        self.labels['filament_time'] = Gtk.Label("-")
+        self.labels['pos_x'] = Gtk.Label("X: -")
+        self.labels['pos_y'] = Gtk.Label("Y: -")
+        self.labels['pos_z'] = Gtk.Label("Z: -")
+        self.labels['speed_lbl'] = Gtk.Label(_("Speed:"))
+        self.labels['speed_lbl'].set_halign(Gtk.Align.START)
+        self.labels['speed'] = Gtk.Label("-")
+        self.labels['cur_speed'] = Gtk.Label("-")
+        self.labels['accel_lbl'] = Gtk.Label(_("Acceleration:"))
+        self.labels['accel_lbl'].set_halign(Gtk.Align.START)
+        self.labels['max_accel'] = Gtk.Label("-")
+        self.labels['flow'] = Gtk.Label(_("Flow:"))
+        self.labels['flow'].set_halign(Gtk.Align.START)
+        self.labels['extrusion'] = Gtk.Label("-")
+        self.labels['flowrate'] = Gtk.Label(_("Flowrate:"))
+        self.labels['flowrate'].set_halign(Gtk.Align.START)
+        self.labels['fan'] = Gtk.Label("-")
+        self.labels['zoffset_lbl'] = Gtk.Label(_("Z offset:"))
+        self.labels['zoffset_lbl'].set_halign(Gtk.Align.START)
+        self.labels['zoffset'] = Gtk.Label("-")
+        self.labels['layer_lbl'] = Gtk.Label(_("Layer:"))
+        self.labels['layer_lbl'].set_halign(Gtk.Align.START)
+        self.labels['layer'] = Gtk.Label("-")
+        self.labels['layer'].set_halign(Gtk.Align.START)
+        self.labels['fila_used_lbl'] = Gtk.Label("Filament used:")
+        self.labels['fila_used_lbl'].set_halign(Gtk.Align.START)
+        self.labels['filament_used'] = Gtk.Label("-")
+        self.labels['filament_used'].set_halign(Gtk.Align.START)
+        self.labels['pa_lbl'] = Gtk.Label("Pressure Advance:")
+        self.labels['pa_lbl'].set_halign(Gtk.Align.START)
+        self.labels['advance'] = Gtk.Label("-")
+        self.labels['advance'].set_halign(Gtk.Align.START)
 
-        temp_grid = self._gtk.HomogeneousGrid()
-        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-        temp_grid.attach(self.labels[self.current_extruder + '_box'], 0, 0, 1, 1)
-        if self._printer.has_heated_bed():
-            heater_bed = self._gtk.Image("bed", .6)
-            self.labels['heater_bed'] = Gtk.Label(label="")
-            self.labels['heater_bed'].get_style_context().add_class("printing-info")
-            heater_bed_box = Gtk.Box(spacing=0)
-            heater_bed_box.add(heater_bed)
-            heater_bed_box.add(self.labels['heater_bed'])
-            temp_grid.attach(heater_bed_box, 1, 0, 1, 1)
-        self.labels['temp_grid'] = temp_grid
-
-        # Create time remaining items
-        hourglass = self._gtk.Image("hourglass", .6)
-        self.labels['left'] = Gtk.Label(label=_("Left:"))
-        self.labels['left'].get_style_context().add_class("printing-info")
-        self.labels['time_left'] = Gtk.Label(label="0s")
-        self.labels['time_left'].get_style_context().add_class("printing-info")
-        itl_box = Gtk.Box(spacing=0)
-        itl_box.add(hourglass)
-        itl_box.add(self.labels['left'])
-        itl_box.add(self.labels['time_left'])
-        self.labels['itl_box'] = itl_box
-
-        # Create overall items
-        clock = self._gtk.Image("clock", .6)
-        self.labels['elapsed'] = Gtk.Label(label=_("Elapsed:"))
-        self.labels['elapsed'].get_style_context().add_class("printing-info")
-        self.labels['duration'] = Gtk.Label(label="0s")
-        self.labels['duration'].get_style_context().add_class("printing-info")
-        self.labels['total'] = Gtk.Label(label=_("Total:"))
-        self.labels['total'].get_style_context().add_class("printing-info")
-        self.labels['est_time'] = Gtk.Label(label="0s")
-        self.labels['est_time'].get_style_context().add_class("printing-info")
-        timegrid = Gtk.Grid()
-        it1_box = Gtk.Box(spacing=0)
-        it1_box.add(self.labels['elapsed'])
-        it1_box.add(self.labels['duration'])
-        it2_box = Gtk.Box(spacing=0)
-        it2_box.add(self.labels['total'])
-        it2_box.add(self.labels['est_time'])
-        timegrid.attach(clock, 0, 0, 1, 2)
-        timegrid.attach(it1_box, 1, 0, 1, 1)
-        timegrid.attach(it2_box, 1, 1, 1, 1)
-        self.labels['timegrid'] = timegrid
-
-        position = self._gtk.Image("move", .6)
-        self.labels['pos_x'] = Gtk.Label(label="X: 0")
-        self.labels['pos_x'].get_style_context().add_class("printing-info")
-        self.labels['pos_y'] = Gtk.Label(label="Y: 0")
-        self.labels['pos_y'].get_style_context().add_class("printing-info")
-        self.labels['pos_z'] = Gtk.Label(label="Z: 0")
-        self.labels['pos_z'].get_style_context().add_class("printing-info")
-        pos_box = Gtk.Box(spacing=0)
-        posgrid = self._gtk.HomogeneousGrid()
-        posgrid.set_hexpand(True)
-        posgrid.attach(self.labels['pos_x'], 0, 0, 1, 1)
-        posgrid.attach(self.labels['pos_y'], 1, 0, 1, 1)
-        posgrid.attach(self.labels['pos_z'], 2, 0, 1, 1)
-        pos_box.add(position)
-        pos_box.add(posgrid)
-        self.labels['pos_box'] = pos_box
-
-        speed = self._gtk.Image("speed+", .6)
-        self.labels['speed'] = Gtk.Label(label="")
-        self.labels['speed'].get_style_context().add_class("printing-info")
-        speed_box = Gtk.Box(spacing=0)
-        speed_box.add(speed)
-        speed_box.add(self.labels['speed'])
-        extrusion = self._gtk.Image("extrude", .6)
-        self.labels['extrusion'] = Gtk.Label(label="")
-        self.labels['extrusion'].get_style_context().add_class("printing-info")
-        extrusion_box = Gtk.Box(spacing=0)
-        extrusion_box.add(extrusion)
-        extrusion_box.add(self.labels['extrusion'])
-        fan = self._gtk.Image("fan", .6)
-        self.labels['fan'] = Gtk.Label(label="")
-        self.labels['fan'].get_style_context().add_class("printing-info")
-        fan_box = Gtk.Box(spacing=0)
-        fan_box.add(fan)
-        fan_box.add(self.labels['fan'])
-        sfe_grid = self._gtk.HomogeneousGrid()
-        sfe_grid.set_hexpand(True)
-        sfe_grid.attach(speed_box, 0, 0, 1, 1)
-        sfe_grid.attach(extrusion_box, 1, 0, 1, 1)
-        sfe_grid.attach(fan_box, 2, 0, 1, 1)
-        self.labels['sfe_grid'] = sfe_grid
-
-        self.labels['i1_box'] = Gtk.HBox(spacing=0)
-        self.labels['i1_box'].set_vexpand(True)
-        self.labels['i1_box'].get_style_context().add_class("printing-info-box")
-        self.labels['i1_box'].set_valign(Gtk.Align.CENTER)
-        self.labels['i2_box'] = Gtk.VBox(spacing=0)
-        self.labels['i2_box'].set_vexpand(True)
-        self.labels['i2_box'].get_style_context().add_class("printing-info-box")
-        self.labels['i2_box'].set_valign(Gtk.Align.CENTER)
-        self.labels['info_grid'] = self._gtk.HomogeneousGrid()
+        self.labels['info_grid'] = Gtk.Grid()
         if self._screen.vertical_mode:
-            self.labels['info_grid'].attach(self.labels['i1_box'], 0, 0, 1, 1)
-            self.labels['info_grid'].attach(self.labels['i2_box'], 0, 1, 1, 1)
+            self.labels['info_grid'].attach(self.labels['thumbnail'], 0, 0, 1, 1)
+            self.labels['info_grid'].attach(info, 0, 1, 1, 1)
         else:
-            self.labels['info_grid'].attach(self.labels['i1_box'], 0, 0, 2, 1)
-            self.labels['info_grid'].attach(self.labels['i2_box'], 2, 0, 3, 1)
+            self.labels['info_grid'].attach(self.labels['thumbnail'], 0, 0, 1, 1)
+            self.create_status_grid()
 
+        grid = self._gtk.HomogeneousGrid()
+        grid.set_row_homogeneous(False)
         grid.attach(overlay, 0, 0, 1, 1)
         grid.attach(fi_box, 1, 0, 3, 1)
         grid.attach(self.labels['info_grid'], 0, 1, 4, 2)
         grid.attach(self.labels['button_grid'], 0, 3, 4, 1)
 
-        self.add_labels()
-
         self.grid = grid
         self.content.add(grid)
         self._screen.wake_screen()
+
+    def create_status_grid(self, widget=None):
+        self.labels['info_grid'].remove_column(1)
+        temp = self._gtk.ButtonImage("heat-up", None, None, .6)
+        position = self._gtk.ButtonImage("move", None, None, .6)
+        position.connect("clicked", self.create_speed_grid)
+        clock = self._gtk.ButtonImage("clock", None, None, .6)
+        clock.connect("clicked", self.create_time_grid)
+        hourglass = self._gtk.ButtonImage("hourglass", None, None, .6)
+        hourglass.connect("clicked", self.create_time_grid)
+
+        i = 0
+        for extruder in self._printer.get_tools():
+            self.labels[extruder + '_box'] = Gtk.Box(spacing=0)
+            self.labels[extruder] = Gtk.Label("0/0")
+            if i <= 4:
+                ext_img = self._gtk.Image("extruder-%s" % i, .6)
+                self.labels[extruder + '_box'].add(ext_img)
+            self.labels[extruder + '_box'].add(self.labels[extruder])
+            i += 1
+        temp_grid = self._gtk.HomogeneousGrid()
+        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+        temp_grid.attach(self.labels[self.current_extruder + '_box'], 1, 0, 1, 1)
+        if self._printer.has_heated_bed():
+            heater_bed = self._gtk.Image("bed", .6)
+            heater_bed_box = Gtk.Box(spacing=0)
+            heater_bed_box.add(heater_bed)
+            heater_bed_box.add(self.labels['heater_bed'])
+            temp_grid.attach(heater_bed_box, 2, 0, 1, 1)
+        self.labels['temp_grid'] = temp_grid
+
+        posgrid = self._gtk.HomogeneousGrid()
+        posgrid.set_hexpand(True)
+        posgrid.attach(self.labels['pos_x'], 0, 0, 1, 1)
+        posgrid.attach(self.labels['pos_y'], 1, 0, 1, 1)
+        posgrid.attach(self.labels['pos_z'], 2, 0, 1, 1)
+
+        speed = self._gtk.ButtonImage("speed+", None, None, .6)
+        speed.connect("clicked", self.create_speed_grid)
+        speed_box = Gtk.Box(spacing=0)
+        speed_box.add(speed)
+        speed_box.add(self.labels['speed'])
+        extrusion = self._gtk.ButtonImage("extrude", None, None, .6)
+        extrusion.connect("clicked", self.create_extrusion_grid)
+        extrusion_box = Gtk.Box(spacing=0)
+        extrusion_box.add(extrusion)
+        extrusion_box.add(self.labels['extrusion'])
+        fan = self._gtk.ButtonImage("fan", None, None, .6)
+        fan_box = Gtk.Box(spacing=0)
+        fan_box.add(fan)
+        fan_box.add(self.labels['fan'])
+
+        sfe_grid = self._gtk.HomogeneousGrid()
+        sfe_grid.set_hexpand(True)
+        sfe_grid.attach(speed_box, 0, 0, 1, 1)
+        sfe_grid.attach(extrusion_box, 1, 0, 1, 1)
+        sfe_grid.attach(fan_box, 2, 0, 1, 1)
+
+        itl_box = Gtk.Box(spacing=0)
+        itl_box.add(self.labels['left'])
+        itl_box.add(self.labels['time_left'])
+
+        it1_box = Gtk.Box(spacing=0)
+        it1_box.add(self.labels['elapsed'])
+        it1_box.add(self.labels['duration'])
+
+        info = Gtk.Grid()
+        info.set_hexpand(True)
+        info.set_vexpand(True)
+        info.get_style_context().add_class("printing-info-box")
+        info.set_valign(Gtk.Align.CENTER)
+        info.attach(temp, 0, 0, 1, 1)
+        info.attach(self.labels['temp_grid'], 1, 0, 1, 1)
+        info.attach(position, 0, 1, 1, 1)
+        info.attach(posgrid, 1, 1, 1, 1)
+        info.attach(sfe_grid, 0, 2, 2, 1)
+        info.attach(clock, 0, 3, 1, 1)
+        info.attach(it1_box, 1, 3, 1, 1)
+        info.attach(hourglass, 0, 4, 1, 1)
+        info.attach(itl_box, 1, 4, 1, 1)
+        self.labels['info_grid'].attach(info, 1, 0, 1, 1)
+        self.labels['info_grid'].show_all()
+
+    def create_extrusion_grid(self, widget=None):
+        self.labels['info_grid'].remove_column(1)
+        goback = self._gtk.ButtonImage("back")
+        goback.connect("clicked", self.create_status_grid)
+        info = Gtk.Grid()
+        info.set_hexpand(True)
+        info.set_vexpand(True)
+        info.set_halign(Gtk.Align.START)
+        info.get_style_context().add_class("printing-info-box")
+        info.attach(self.labels['flow'], 1, 0, 1, 1)
+        info.attach(self.labels['extrusion'], 2, 0, 1, 1)
+        info.attach(self.labels['flowrate'], 1, 1, 1, 1)
+        info.attach(Gtk.Label("- mm3/s"), 2, 1, 1, 1)
+        info.attach(self.labels['pa_lbl'], 1, 2, 1, 1)
+        info.attach(self.labels['advance'], 2, 2, 1, 1)
+        info.attach(self.labels['fila_used_lbl'], 1, 3, 1, 1)
+        info.attach(self.labels['filament_used'], 2, 3, 1, 1)
+        info.attach(goback, 0, 0, 1, 6)
+        self.labels['info_grid'].attach(info, 1, 0, 1, 1)
+        self.labels['info_grid'].show_all()
+
+    def create_speed_grid(self, widget=None):
+        self.labels['info_grid'].remove_column(1)
+        goback = self._gtk.ButtonImage("back")
+        goback.connect("clicked", self.create_status_grid)
+
+        posgrid = self._gtk.HomogeneousGrid()
+        posgrid.set_hexpand(True)
+        posgrid.attach(self.labels['pos_x'], 0, 0, 1, 1)
+        posgrid.attach(self.labels['pos_y'], 1, 0, 1, 1)
+        posgrid.attach(self.labels['pos_z'], 2, 0, 1, 1)
+
+        info = Gtk.Grid()
+        info.set_hexpand(True)
+        info.set_vexpand(True)
+        info.set_halign(Gtk.Align.START)
+        info.get_style_context().add_class("printing-info-box")
+        info.attach(self.labels['speed_lbl'], 1, 0, 1, 1)
+        info.attach(self.labels['cur_speed'], 2, 0, 1, 1)
+        info.attach(self.labels['accel_lbl'], 1, 1, 1, 1)
+        info.attach(self.labels['max_accel'], 2, 1, 1, 1)
+        info.attach(posgrid, 1, 2, 2, 1)
+        info.attach(self.labels['layer_lbl'], 1, 3, 1, 1)
+        info.attach(self.labels['layer'], 2, 3, 1, 1)
+        info.attach(self.labels['zoffset_lbl'], 1, 4, 1, 1)
+        info.attach(self.labels['zoffset'], 2, 4, 1, 1)
+        info.attach(goback, 0, 0, 1, 6)
+        self.labels['info_grid'].attach(info, 1, 0, 1, 1)
+        self.labels['info_grid'].show_all()
+
+    def create_time_grid(self, widget=None):
+        self.labels['info_grid'].remove_column(1)
+        goback = self._gtk.ButtonImage("back")
+        goback.connect("clicked", self.create_status_grid)
+        info = Gtk.Grid()
+        info.set_hexpand(True)
+        info.set_vexpand(True)
+        info.set_halign(Gtk.Align.START)
+        info.get_style_context().add_class("printing-info-box")
+        info.attach(self._gtk.Image("clock", .6), 1, 0, 1, 1)
+        info.attach(self.labels['elapsed'], 2, 0, 1, 1)
+        info.attach(self.labels['duration'], 3, 0, 1, 1)
+        info.attach(self.labels['total'], 2, 1, 1, 1)
+        info.attach(self.labels['est_time'], 3, 1, 1, 1)
+        info.attach(self._gtk.Image("hourglass", .6), 1, 2, 1, 1)
+        info.attach(self.labels['left'], 2, 2, 1, 1)
+        info.attach(self.labels['time_left'], 3, 2, 1, 1)
+        info.attach(self.labels['slicer'], 2, 3, 1, 1)
+        info.attach(self.labels['slicer_time'], 3, 3, 1, 1)
+        info.attach(self.labels['file_tlbl'], 2, 4, 1, 1)
+        info.attach(self.labels['file_time'], 3, 4, 1, 1)
+        info.attach(self.labels['fila_tlbl'], 2, 5, 1, 1)
+        info.attach(self.labels['filament_time'], 3, 5, 1, 1)
+        info.attach(goback, 0, 0, 1, 6)
+        self.labels['info_grid'].attach(info, 1, 0, 1, 1)
+        self.labels['info_grid'].show_all()
 
     def on_draw(self, da, ctx):
         w = da.get_allocated_width()
@@ -231,27 +329,12 @@ class JobStatusPanel(ScreenPanel):
         ctx.arc(0, 0, r, 3/2*math.pi, 3/2*math.pi+(self.progress*2*math.pi))
         ctx.stroke()
 
-
     def activate(self):
         _ = self.lang.gettext
         ps = self._printer.get_stat("print_stats")
         self.set_state(ps['state'])
         if self.state_timeout is None:
             self.state_timeout = GLib.timeout_add_seconds(1, self.state_check)
-
-    def add_labels(self):
-        for child in self.labels['i1_box'].get_children():
-            self.labels['i1_box'].remove(child)
-        for child in self.labels['i2_box'].get_children():
-            self.labels['i2_box'].remove(child)
-
-        self.labels['i1_box'].add(self.labels['thumbnail'])
-        self.labels['i2_box'].add(self.labels['temp_grid'])
-        self.labels['i2_box'].add(self.labels['pos_box'])
-        self.labels['i2_box'].add(self.labels['sfe_grid'])
-        self.labels['i2_box'].add(self.labels['timegrid'])
-        self.labels['i2_box'].add(self.labels['itl_box'])
-
 
     def create_buttons(self):
         _ = self.lang.gettext
@@ -393,6 +476,7 @@ class JobStatusPanel(ScreenPanel):
 
         ps = self._printer.get_stat("print_stats")
         self.update_message()
+        logging.info(data)
 
         if "toolhead" in data:
             if "extruder" in data["toolhead"]:
@@ -402,6 +486,8 @@ class JobStatusPanel(ScreenPanel):
                     self.current_extruder = data["toolhead"]["extruder"]
                     self.labels['temp_grid'].attach(self.labels[self.current_extruder + '_box'], 0, 0, 1, 1)
                     self._screen.show_all()
+                if "max_accel" in data["toolhead"]:
+                    self.labels['max_accel'].set_text("%d mm/s2" % (data["toolhead"]["max_accel"]))
 
         if "gcode_move" in data:
             if "gcode_position" in data["gcode_move"]:
@@ -416,6 +502,15 @@ class JobStatusPanel(ScreenPanel):
                 self.labels['speed'].set_text("%3d%%" % self.speed)
             if "homing_origin" in data["gcode_move"]:
                 self.zoffset = data["gcode_move"]["homing_origin"][2]
+                self.labels['zoffset'].set_text("%.2f" % self.zoffset)
+            if "speed" in data["gcode_move"]:
+                self.cur_speed = int(data["gcode_move"]["speed"]/60)
+                self.labels['cur_speed'].set_text("%d mm/s" % self.cur_speed)
+
+
+        self.labels['filament_used'].set_text("%.1f" % ps['filament_used'])
+        if "extruder" in data:
+             self.labels['advance'].set_text("%.2f" % data['extruder']['pressure_advance'])
 
         if "fan" in data and "speed" in data['fan']:
             self.fan = int(round(self._printer.get_fan_speed("fan", data['fan']['speed']), 2)*100)
@@ -482,6 +577,12 @@ class JobStatusPanel(ScreenPanel):
         if total_duration is None:
             return "-"
         self.update_text("est_time", str(self._gtk.formatTimeString(total_duration)))
+        if slicer_time is not None:
+            self.update_text("slicer_time", str(self._gtk.formatTimeString(slicer_time)))
+        if file_time is not None:
+            self.update_text("file_time", str(self._gtk.formatTimeString(file_time)))
+        if filament_time is not None:
+            self.update_text("filament_time", str(self._gtk.formatTimeString(filament_time)))
         return str(self._gtk.formatTimeString((total_duration - duration)))
 
     def state_check(self):
