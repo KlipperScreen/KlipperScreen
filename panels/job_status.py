@@ -567,7 +567,9 @@ class JobStatusPanel(ScreenPanel):
             self.enable_button("resume", "cancel")
         else:
             if self.zoffset != 0:
-                if not self._screen.printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"):
+                endstop = (self._screen.printer.config_section_exists("stepper_z") and
+                           not self._screen.printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"))
+                if endstop:
                     self.labels['button_grid'].attach(self.labels["save_offset_endstop"], 0, 0, 1, 1)
                 else:
                     self.labels['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
