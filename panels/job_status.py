@@ -165,25 +165,29 @@ class JobStatusPanel(ScreenPanel):
         hourglass = self._gtk.ButtonImage("hourglass", None, None, .6)
         hourglass.connect("clicked", self.create_time_grid)
 
-        i = 0
-        for extruder in self._printer.get_tools():
-            self.labels[extruder + '_box'] = Gtk.Box(spacing=0)
-            self.labels[extruder] = Gtk.Label("0/0")
-            if i <= 4:
-                ext_img = self._gtk.Image("extruder-%s" % i, .6)
-                self.labels[extruder + '_box'].add(ext_img)
-            self.labels[extruder + '_box'].add(self.labels[extruder])
-            i += 1
-        temp_grid = self._gtk.HomogeneousGrid()
-        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-        temp_grid.attach(self.labels[self.current_extruder + '_box'], 1, 0, 1, 1)
+        self.labels['temp_grid'] = self._gtk.HomogeneousGrid()
+
+        if self._screen.printer.get_tools():
+            i = 0
+            for extruder in self._printer.get_tools():
+                self.labels[extruder + '_box'] = Gtk.Box(spacing=0)
+                self.labels[extruder] = Gtk.Label("0/0")
+                if i <= 4:
+                    ext_img = self._gtk.Image("extruder-%s" % i, .6)
+                    self.labels[extruder + '_box'].add(ext_img)
+                self.labels[extruder + '_box'].add(self.labels[extruder])
+                i += 1
+                self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+                self.labels['temp_grid'].attach(self.labels[self.current_extruder + '_box'], 1, 0, 1, 1)
+        else:
+            self.current_extruder = None
+
         if self._printer.has_heated_bed():
             heater_bed = self._gtk.Image("bed", .6)
             heater_bed_box = Gtk.Box(spacing=0)
             heater_bed_box.add(heater_bed)
             heater_bed_box.add(self.labels['heater_bed'])
-            temp_grid.attach(heater_bed_box, 2, 0, 1, 1)
-        self.labels['temp_grid'] = temp_grid
+            self.labels['temp_grid'].attach(heater_bed_box, 2, 0, 1, 1)
 
         posgrid = self._gtk.HomogeneousGrid()
         posgrid.set_hexpand(True)
@@ -474,20 +478,20 @@ class JobStatusPanel(ScreenPanel):
                 self._printer.get_dev_stat(x, "target")
             )
 
-        ps = self._printer.get_stat("print_stats")
         self.update_message()
-        logging.info(data)
 
-        if "toolhead" in data:
-            if "extruder" in data["toolhead"]:
-                if data["toolhead"]["extruder"] != self.current_extruder:
-                    self.labels['temp_grid'].remove_column(0)
-                    self.labels['temp_grid'].insert_column(0)
-                    self.current_extruder = data["toolhead"]["extruder"]
-                    self.labels['temp_grid'].attach(self.labels[self.current_extruder + '_box'], 0, 0, 1, 1)
-                    self._screen.show_all()
-                if "max_accel" in data["toolhead"]:
-                    self.labels['max_accel'].set_text("%d mm/s2" % (data["toolhead"]["max_accel"]))
+        if "toolhead" in data and "extruder" in data["toolhead"]:
+            if self.current_extruder is not None and data["toolhead"]["extruder"] != self.current_extruder:
+                self.labels['temp_grid'].remove_column(0)
+                self.labels['temp_grid'].insert_column(0)
+                self.current_extruder = data["toolhead"]["extruder"]
+                self.labels['temp_grid'].attach(self.labels[self.current_extruder + '_box'], 0, 0, 1, 1)
+                self._screen.show_all()
+            if "max_accel" in data["toolhead"]:
+                self.labels['max_accel'].set_text("%d mm/s2" % (data["toolhead"]["max_accel"]))
+
+        if "extruder" in data and "pressure_advance" in data['extruder']:
+            self.labels['advance'].set_text("%.2f" % data['extruder']['pressure_advance'])
 
         if "gcode_move" in data:
             if "gcode_position" in data["gcode_move"]:
@@ -507,11 +511,6 @@ class JobStatusPanel(ScreenPanel):
                 self.cur_speed = int(data["gcode_move"]["speed"]/60)
                 self.labels['cur_speed'].set_text("%d mm/s" % self.cur_speed)
 
-
-        self.labels['filament_used'].set_text("%.1f" % ps['filament_used'])
-        if "extruder" in data:
-             self.labels['advance'].set_text("%.2f" % data['extruder']['pressure_advance'])
-
         if "fan" in data and "speed" in data['fan']:
             self.fan = int(round(self._printer.get_fan_speed("fan", data['fan']['speed']), 2)*100)
             self.labels['fan'].set_text("%3d%%" % self.fan)
@@ -520,12 +519,14 @@ class JobStatusPanel(ScreenPanel):
         if self.state not in ["printing", "paused"]:
             return
 
-        if ps['filename'] and (ps['filename'] != self.filename):
+        ps = self._printer.get_stat("print_stats")
+        if 'filament_used' in ps:
+            self.labels['filament_used'].set_text("%.1f" % ps['filament_used'])
+        if 'filename' in ps and (ps['filename'] != self.filename):
             logging.debug("Changing filename: '%s' to '%s'" % (self.filename, ps['filename']))
             self.update_filename()
         else:
             self.update_percent_complete()
-
         self.update_text("duration", str(self._gtk.formatTimeString(ps['print_duration'])))
         self.update_text("time_left", self.calculate_time_left(ps['print_duration'], ps['filament_used']))
 
