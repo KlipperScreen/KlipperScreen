@@ -97,7 +97,7 @@ class ConsolePanel(ScreenPanel):
         })
 
         content_box = Gtk.VBox()
-        content_box.pack_start(options, False, 0, 0)
+        content_box.pack_start(options, False, 0, 5)
         content_box.add(sw)
         content_box.pack_end(ebox, False, 0, 0)
         self.content.add(content_box)
@@ -118,7 +118,7 @@ class ConsolePanel(ScreenPanel):
         else:
             color = COLORS['response']
 
-        message = '<span color="%s">%s</span>' % (color, message)
+        message = '<span color="%s"><b>%s</b></span>' % (color, message)
 
         message = message.replace('\n', '\n         ')
 
