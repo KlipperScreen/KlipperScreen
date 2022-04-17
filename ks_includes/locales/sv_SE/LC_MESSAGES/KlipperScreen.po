@@ -1,0 +1,673 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"PO-Revision-Date: 2022-04-15 17:25+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s uppdateras till version"
+
+msgid "(default)"
+msgstr "(standard)"
+
+msgid "24 Hour Time"
+msgstr "24 timmars tid"
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr "En FIRMWARE_RESTART kan lösa problemet."
+
+msgid "Abort"
+msgstr "Avbryt"
+
+msgid "Accept"
+msgstr "Godkänn"
+
+msgid "Actions"
+msgstr "Åtgärder"
+
+msgid "Add Printer"
+msgstr "Lägg till skrivare"
+
+msgid "Add bed mesh profile"
+msgstr "Lägg till mesh profil"
+
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "Är du säker på att du vill köra Nödstopp?"
+
+msgid "Are you sure you wish to cancel this print?"
+msgstr "Är du säker på att du vill avbryta denna utskrift?"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "Är du säker på att du vill inaktivera motorer?"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "Är du säker på att du vill starta om systemet?"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "Är du säker på att du vill stänga av systemet?"
+
+msgid "Auto"
+msgstr "Automatisk"
+
+msgid "Auto-scroll"
+msgstr "Auto-scrolla"
+
+#, fuzzy
+msgid "Bed Level"
+msgstr "Bed Level"
+
+#, fuzzy
+msgid "Bed Mesh"
+msgstr "Bed Mesh"
+
+msgid "Bltouch found applied offset"
+msgstr "Bltouch hittade tillämpad offset"
+
+msgid "Calibrate"
+msgstr "Kalibrera"
+
+msgid "Calibrated, save configuration to make it permanent"
+msgstr "Kalibrerad, spara konfiguration för att göra den permanent"
+
+msgid "Can't set above the maximum:"
+msgstr "Kan inte ställa in över maxgränsen:"
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Cancel Print"
+msgstr "Avbryt utskrift"
+
+msgid "Cancelled"
+msgstr "Avbruten"
+
+msgid "Cancelling"
+msgstr "Avbryter"
+
+msgid "Cannot connect to Moonraker"
+msgstr "Kan inte ansluta till Moonraker"
+
+#, fuzzy
+msgid "Channel"
+msgstr "Kanal"
+
+msgid ""
+"Check /tmp/KlipperScreen.log for more information.\n"
+"Please submit an issue on GitHub for help."
+msgstr ""
+"Kontrollera /tmp/KlipperScreen.log för mer information.\n"
+"Skicka in ett problem på GitHub för hjälp."
+
+msgid "Close"
+msgstr "Stäng"
+
+msgid "Complete"
+msgstr "Färdig"
+
+msgid "Configuration"
+msgstr "Konfiguration"
+
+msgid "Confirm Emergency Stop"
+msgstr "Bekräfta nödstopp"
+
+msgid "Connected"
+msgstr "Ansluten"
+
+#, python-format
+msgid "Connecting to %s"
+msgstr "Ansluter till %s"
+
+msgid "Console"
+msgstr "Konsol"
+
+msgid "Continue"
+msgstr "Fortsätt"
+
+msgid "Cooldown"
+msgstr "Nedkylning"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Decrease"
+msgstr "Minska"
+
+msgid "Delete"
+msgstr "Radera"
+
+msgid "Deselect"
+msgstr "Avmarkera"
+
+msgid "Disable Motors"
+msgstr "Inaktivera motorer"
+
+msgid "Disable XY"
+msgstr "Inaktivera XY"
+
+msgid "Displayed Macros"
+msgstr "Makron visas"
+
+msgid "Distance (mm)"
+msgstr "Avstånd (mm)"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "Vill du återställa %s?"
+
+msgid "Elapsed:"
+msgstr "Förfluten:"
+
+msgid "Error"
+msgstr "Fel"
+
+#, fuzzy
+msgid "Estimated Time Method"
+msgstr "Uppskattad tid metod"
+
+msgid "Extrude"
+msgstr "Extrudera"
+
+msgid "Extrusion +"
+msgstr "Extrudering +"
+
+msgid "Extrusion -"
+msgstr "Extrudering -"
+
+msgid "Failed, adjust position first"
+msgstr "Misslyckades, justera positionen först"
+
+msgid "Fan"
+msgstr "Fläkt"
+
+#, fuzzy
+msgid "Filament Used"
+msgstr "Filament använt"
+
+msgid "File"
+msgstr "Fil"
+
+msgid "Fine Tuning"
+msgstr "Finjustering"
+
+msgid "Finish"
+msgstr "Slutför"
+
+msgid ""
+"Firmware\n"
+"Restart"
+msgstr ""
+"Firmware\n"
+"Omstart"
+
+msgid "Font Size"
+msgstr "Textstorlek"
+
+msgid ""
+"Full\n"
+"Update"
+msgstr ""
+"Fullständig\n"
+"Uppdatering"
+
+msgid "Go Back"
+msgstr "Gå tillbaka"
+
+msgid "Hidden"
+msgstr "Dold"
+
+msgid "Hide"
+msgstr "Dölj"
+
+msgid "Hide sensors in Temp."
+msgstr "Dölj sensorer i Temp."
+
+msgid "Home"
+msgstr "Hem"
+
+msgid "Home All"
+msgstr "Hem Alla"
+
+msgid "Home X"
+msgstr "Hem X"
+
+msgid "Home XY"
+msgstr "Hem XY"
+
+msgid "Home Y"
+msgstr "Hem Y"
+
+msgid "Home Z"
+msgstr "Hem Z"
+
+#, fuzzy
+msgid "Homing"
+msgstr "Homing"
+
+msgid "Hostname"
+msgstr "Värdnamn"
+
+msgid "Icon Theme"
+msgstr "Ikon tema"
+
+msgid "Increase"
+msgstr "Öka"
+
+msgid "Initializing"
+msgstr "Initierar"
+
+msgid "Initializing printer..."
+msgstr "Initierar skrivaren..."
+
+msgid "Interface"
+msgstr "Gränssnitt"
+
+msgid "Invalid"
+msgstr "Ogiltig"
+
+msgid "Invert X"
+msgstr "Invertera X"
+
+msgid "Invert Y"
+msgstr "Invertera Y"
+
+msgid "Invert Z"
+msgstr "Invertera Z"
+
+msgid ""
+"Klipper\n"
+"Restart"
+msgstr ""
+"Klipper\n"
+"Omstart"
+
+#, fuzzy
+msgid "Klipper has disconnected"
+msgstr "Klipper har kopplat från"
+
+msgid "Klipper has encountered an error."
+msgstr "Klipper har stött på ett fel."
+
+msgid "Klipper has shutdown"
+msgstr "Klipper har stängts av"
+
+msgid "Klipper is attempting to start"
+msgstr "Klipper försöker starta"
+
+msgid "Klipper will reboot"
+msgstr "Klipper kommer att starta om"
+
+msgid "Language"
+msgstr "Språk"
+
+msgid "Large"
+msgstr "Stor"
+
+msgid "Left:"
+msgstr "Återstående:"
+
+msgid "Limits"
+msgstr "Begränsningar"
+
+msgid "Load"
+msgstr "Ladda"
+
+msgid "Lower Nozzle"
+msgstr "Sänk munstycket"
+
+msgid "Macro shortcut on sidebar"
+msgstr "Makro genväg på sidofältet"
+
+msgid "Macros"
+msgstr "Makron"
+
+msgid "Main Menu"
+msgstr "Huvudmeny"
+
+#, fuzzy
+msgid "Max Accelation"
+msgstr "Maximal acceleration"
+
+#, fuzzy
+msgid "Max Acceleration to Deceleration"
+msgstr "Maximal acceleration till inbromsning"
+
+#, fuzzy
+msgid "Max Velocity"
+msgstr "Maximal hastighet"
+
+msgid "Medium"
+msgstr "Medium"
+
+msgid "Menu"
+msgstr "Meny"
+
+msgid "Modified"
+msgstr "Ändrad"
+
+msgid "Moonraker: connected"
+msgstr "Moonraker: ansluten"
+
+msgid "Move"
+msgstr "Flytta"
+
+msgid "Move Distance (mm)"
+msgstr "Förflyttningsavstånd (mm)"
+
+msgid "Name"
+msgstr "Namn"
+
+msgid "Network"
+msgstr "Nätverk"
+
+msgid "Nothing selected"
+msgstr "Inget valt"
+
+msgid "Off"
+msgstr "Avstängd"
+
+#, fuzzy, python-format
+msgid "Outdated by %d"
+msgstr "Föråldrad med %d"
+
+msgid "PSK for"
+msgstr "PSK för"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "Paketet kommer att uppdateras"
+msgstr[1] "Paketen kommer att uppdateras"
+
+msgid "Password saved"
+msgstr "Lösenordet har sparats"
+
+msgid "Pause"
+msgstr "Pausa"
+
+msgid "Paused"
+msgstr "Pausad"
+
+msgid "Perform a full upgrade?"
+msgstr "Utför en fullständig uppgradering?"
+
+msgid "Please recompile and flash the micro-controller."
+msgstr "Vänligen kompilera om och flasha mikrokontrollern."
+
+msgid "Power"
+msgstr "Ström"
+
+msgid "Power On Printer"
+msgstr "Slå på skrivaren"
+
+msgid "Print"
+msgstr "Skriv ut"
+
+msgid "Print Control"
+msgstr "Utskriftskontroll"
+
+#, fuzzy
+msgid "Print Time"
+msgstr "Tid för utskrift"
+
+#, fuzzy
+msgid "Printer Connections"
+msgstr "Skrivaranslutningar"
+
+msgid "Printing"
+msgstr "Skriver ut"
+
+#, fuzzy
+msgid "Probe found applied offset"
+msgstr "Sond hittat tillämpad offset"
+
+msgid "Profile Name:"
+msgstr "Profilens namn:"
+
+#, fuzzy
+msgid "Quad Gantry Level"
+msgstr "Quad Gantry nivå"
+
+#, fuzzy
+msgid "Raise Nozzle"
+msgstr "Höj munstycket"
+
+#, fuzzy
+msgid "Recover Hard"
+msgstr "Återhämta Hårt"
+
+#, fuzzy
+msgid "Recover Soft"
+msgstr "Återhämta Mjukt"
+
+msgid "Reference"
+msgstr "Referens"
+
+msgid "Restart"
+msgstr "Starta om"
+
+msgid "Resume"
+msgstr "Återuppta"
+
+#, fuzzy
+msgid "Retract"
+msgstr "Dra tillbaka"
+
+#, fuzzy, python-format
+msgid "Retry #%s"
+msgstr "Försök #%s"
+
+msgid "Save"
+msgstr "Spara"
+
+msgid "Save Config"
+msgstr "Spara konfiguration"
+
+msgid "Save configuration"
+msgstr "Spara konfigurationen"
+
+#, fuzzy
+msgid "Screen DPMS"
+msgstr "DPMS för skärm"
+
+msgid "Screen Power Off Time"
+msgstr "Avstängningstid för skärmen"
+
+#, fuzzy
+msgid "Screws Adjust"
+msgstr "Justera skruvar"
+
+msgid "Select"
+msgstr "Välj"
+
+msgid "Send"
+msgstr "Skicka"
+
+#, python-format
+msgid "Sending Power ON signal to: %s"
+msgstr "Skickar ström PÅ-signal till: %s"
+
+#, fuzzy
+msgid "Set Temp"
+msgstr "Ställ in temp"
+
+msgid "Settings"
+msgstr "Inställningar"
+
+msgid "Show"
+msgstr "Visa"
+
+msgid "Size"
+msgstr "Storlek"
+
+#, fuzzy
+msgid "Slicer"
+msgstr "Slicer"
+
+#, fuzzy
+msgid "Slicer Time correction (%)"
+msgstr "Slicer Tidskorrigering (%)"
+
+msgid "Small"
+msgstr "Liten"
+
+msgid "Sort by: "
+msgstr "Sortera efter: "
+
+msgid "Speed (mm/s)"
+msgstr "Hastighet (mm/s)"
+
+msgid "Speed +"
+msgstr "Hastighet +"
+
+msgid "Speed -"
+msgstr "Hastighet -"
+
+#, fuzzy
+msgid "Square Corner Velocity"
+msgstr "Fyrkantig hörnhastighet"
+
+msgid "Start"
+msgstr "Starta"
+
+#, fuzzy
+msgid "Starting WiFi Association"
+msgstr "Startar WiFi Association"
+
+#, fuzzy
+msgid "Starting recovery for"
+msgstr "Startar återhämtning för"
+
+#, fuzzy
+msgid "Starting update for"
+msgstr "Startar uppdatering för"
+
+msgid "System"
+msgstr "System"
+
+msgid ""
+"System\n"
+"Restart"
+msgstr ""
+"System\n"
+"Omstart"
+
+msgid ""
+"System\n"
+"Shutdown"
+msgstr ""
+"System\n"
+"Avstängning"
+
+msgid "Temp (°C)"
+msgstr "Temperatur (°C)"
+
+msgid "Temperature"
+msgstr "Temperatur"
+
+#, python-format
+msgid "To apply %s KlipperScreen needs to be restarted"
+msgstr "För att tillämpa %s måste KlipperScreen startas om"
+
+msgid "Tool"
+msgstr "Verktyg"
+
+#, fuzzy
+msgid "Total:"
+msgstr "Sammanlagt:"
+
+msgid "Unknown Heater"
+msgstr "Okänt värmeelement"
+
+#, fuzzy
+msgid "Unload"
+msgstr "Lasta av"
+
+msgid "Up To Date"
+msgstr "Aktuellt"
+
+msgid "Update"
+msgstr "Uppdatera"
+
+msgid "Updating"
+msgstr "Uppdaterar"
+
+msgid "Uploaded"
+msgstr "Uppladdad"
+
+#, fuzzy
+msgid "View Mesh"
+msgstr "Visa Mesh"
+
+msgid "X+"
+msgstr "X+"
+
+msgid "X-"
+msgstr "X-"
+
+msgid "XY Move Speed (mm/s)"
+msgstr "XY rörelsehastighet (mm/s)"
+
+msgid "Y+"
+msgstr "Y+"
+
+msgid "Y-"
+msgstr "Y-"
+
+msgid "Z Calibrate"
+msgstr "Z Kalibrering"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "Z rörelsehastighet (mm/s)"
+
+msgid "Z Position"
+msgstr "Z Position"
+
+#, fuzzy
+msgid "Z Tilt"
+msgstr "Z Lutning"
+
+msgid "Z+"
+msgstr "Z+"
+
+msgid "Z-"
+msgstr "Z-"
+
+#, fuzzy
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "commit"
+msgstr[1] "commits"
+
+msgid "dBm"
+msgstr "dBm"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "timme"
+msgstr[1] "timmar"
+
+msgid "minutes"
+msgstr "minuter"
+
+msgid "mm"
+msgstr "mm"
+
+msgid "mm/s"
+msgstr "mm/s"
+
+msgid "mm/s^2"
+msgstr "mm/s^2"
