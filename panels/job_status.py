@@ -683,7 +683,8 @@ class JobStatusPanel(ScreenPanel):
                 self.labels['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
                 self.labels['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
 
-            self.labels['button_grid'].attach(self.labels['restart'], 2, 0, 1, 1)
+            if self.filename is not None:
+                self.labels['button_grid'].attach(self.labels['restart'], 2, 0, 1, 1)
             self.labels['button_grid'].attach(self.labels['menu'], 3, 0, 1, 1)
         self.show_all()
 
