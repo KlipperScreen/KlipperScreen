@@ -357,16 +357,17 @@ trough {
     margin: .25em .25em 0 0;
 }
 
-.printing-info-box {
-    padding: .1em;
+.printing-info {
+    margin-right: .25em;
+}
+.printing-info button {
+    margin: 0 0 0 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: .5em;
 }
 
-.printing-info-box box {
-    margin-bottom: .25em;
-}
-
-.printing-info-box label {
-    margin-left: .5em;
+.printing-info-secondary label {
+    margin-left: .75em;
 }
 
 .printing-status {
@@ -380,7 +381,7 @@ trough {
 }
 
 .printing-progress-text {
-    font-size: 1.5em;
+    font-size: 1.25em;
     font-weight: bold;
     color: white;
 }
