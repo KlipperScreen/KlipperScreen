@@ -124,7 +124,7 @@ class JobStatusPanel(ScreenPanel):
         self.grid.attach(overlay, 0, 0, 1, 1)
         self.grid.attach(fi_box, 1, 0, 3, 1)
         self.grid.attach(self.labels['info_grid'], 0, 1, 4, 2)
-        self.grid.attach(self.buttons['button_grid']  , 0, 3, 4, 1)
+        self.grid.attach(self.buttons['button_grid'], 0, 3, 4, 1)
 
         self.content.add(self.grid)
         self._screen.wake_screen()
@@ -174,11 +174,11 @@ class JobStatusPanel(ScreenPanel):
                 break
             if device.startswith("heater_generic"):
                 self.heater_button[device] = self._gtk.ButtonImage("heater",
-                                                                    None, None, .6, Gtk.PositionType.LEFT)
+                                                                   None, None, .6, Gtk.PositionType.LEFT)
                 self.labels[device] = Gtk.Label("-")
                 self.heater_button[device].set_label(self.labels[device].get_text())
                 self.heater_button[device].connect("clicked", self.menu_item_clicked, "temperature",
-                                                        {"panel": "temperature", "name": _("Temperature")})
+                                                   {"panel": "temperature", "name": _("Temperature")})
                 self.heater_button[device].set_halign(Gtk.Align.START)
                 self.labels['temp_grid'].attach(self.heater_button[device], n, 0, 1, 1)
                 n += 1
@@ -187,11 +187,11 @@ class JobStatusPanel(ScreenPanel):
                 break
             if device.startswith("temperature_sensor"):
                 self.heater_button[device] = self._gtk.ButtonImage("heat-up",
-                                                                    None, None, .6, Gtk.PositionType.LEFT)
+                                                                   None, None, .6, Gtk.PositionType.LEFT)
                 self.labels[device] = Gtk.Label("-")
                 self.heater_button[device].set_label(self.labels[device].get_text())
                 self.heater_button[device].connect("clicked", self.menu_item_clicked, "temperature",
-                                                        {"panel": "temperature", "name": _("Temperature")})
+                                                   {"panel": "temperature", "name": _("Temperature")})
                 self.heater_button[device].set_halign(Gtk.Align.START)
                 self.labels['temp_grid'].attach(self.heater_button[device], n, 0, 1, 1)
                 n += 1
@@ -216,7 +216,7 @@ class JobStatusPanel(ScreenPanel):
         self.fan_button.connect("clicked", self.menu_item_clicked, "fan", {"panel": "fan", "name": _("Fan")})
         self.fan_button.set_halign(Gtk.Align.START)
 
-        elapsed_label = self.labels['elapsed'].get_text() + "  " +self.labels['duration'].get_text()
+        elapsed_label = self.labels['elapsed'].get_text() + "  " + self.labels['duration'].get_text()
         self.elapsed_button = self._gtk.ButtonImage("clock", elapsed_label, None, .6, Gtk.PositionType.LEFT, False)
         self.elapsed_button.connect("clicked", self.create_time_grid)
         self.elapsed_button.set_halign(Gtk.Align.START)
@@ -358,18 +358,16 @@ class JobStatusPanel(ScreenPanel):
     def create_buttons(self):
         _ = self.lang.gettext
         self.buttons = {
-                        'cancel': self._gtk.ButtonImage("stop", _("Cancel"), "color2"),
-                        'control': self._gtk.ButtonImage("settings", _("Settings"), "color3"),
-                        'fine_tune': self._gtk.ButtonImage("fine-tune", _("Fine Tuning"), "color4"),
-                        'menu': self._gtk.ButtonImage("complete", _("Main Menu"), "color4"),
-                        'pause': self._gtk.ButtonImage("pause", _("Pause"), "color1"),
-                        'restart': self._gtk.ButtonImage("refresh", _("Restart"), "color3"),
-                        'resume': self._gtk.ButtonImage("resume", _("Resume"), "color1"),
-                        'save_offset_probe': self._gtk.ButtonImage("home-z",
-                                                                   _("Save Z") + "\n" + "Probe", "color1"),
-                        'save_offset_endstop': self._gtk.ButtonImage("home-z",
-                                                                     _("Save Z") + "\n" + "Endstop", "color2"),
-                        }
+            'cancel': self._gtk.ButtonImage("stop", _("Cancel"), "color2"),
+            'control': self._gtk.ButtonImage("settings", _("Settings"), "color3"),
+            'fine_tune': self._gtk.ButtonImage("fine-tune", _("Fine Tuning"), "color4"),
+            'menu': self._gtk.ButtonImage("complete", _("Main Menu"), "color4"),
+            'pause': self._gtk.ButtonImage("pause", _("Pause"), "color1"),
+            'restart': self._gtk.ButtonImage("refresh", _("Restart"), "color3"),
+            'resume': self._gtk.ButtonImage("resume", _("Resume"), "color1"),
+            'save_offset_probe': self._gtk.ButtonImage("home-z", _("Save Z") + "\n" + "Probe", "color1"),
+            'save_offset_endstop': self._gtk.ButtonImage("home-z", _("Save Z") + "\n" + "Endstop", "color2"),
+        }
         self.buttons['cancel'].connect("clicked", self.cancel)
         self.buttons['control'].connect("clicked", self._screen._go_to_submenu, "")
         self.buttons['fine_tune'].connect("clicked", self.menu_item_clicked, "fine_tune", {
@@ -577,7 +575,7 @@ class JobStatusPanel(ScreenPanel):
             if self.state == "printing":
                 self.speed_button.set_label("%3d%%  " % self.speed + "%3d mm/s" % self.req_speed)
             else:
-                self.speed_button.set_label("%3d%%" % self.speed )
+                self.speed_button.set_label("%3d%%" % self.speed)
             self.z_button.set_label(self.labels['pos_z'].get_text() + " mm")
             self.fan_button.set_label(self.labels['fan'].get_text())
             elapsed_label = self.labels['elapsed'].get_text() + "  " + self.labels['duration'].get_text()
