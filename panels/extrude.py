@@ -52,7 +52,7 @@ class ExtrudePanel(ScreenPanel):
         })
 
         if i < 4:
-            grid.attach(self.labels['temperature'], 3, 1, 1, 1)
+            grid.attach(self.labels['temperature'], 4, 0, 1, 1)
         grid.attach(self.labels['extrude'], 0, 1, 1, 1)
         if self.load_filament:
             grid.attach(self.labels['load'], 1, 1, 1, 1)
