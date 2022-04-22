@@ -41,6 +41,7 @@ class JobStatusPanel(ScreenPanel):
 
         for item in data:
             self.labels[item] = Gtk.Label("-")
+            self.labels[item].set_vexpand(True)
             self.labels[item].set_hexpand(True)
 
         self.labels['left'] = Gtk.Label(_("Left:"))
@@ -113,7 +114,10 @@ class JobStatusPanel(ScreenPanel):
         overlay.add_overlay(box)
 
         self.labels['thumbnail'] = self._gtk.Image("file", 2)
-        self.labels['thumbnail'].set_size_request(self._screen.width/3, 0)
+        if self._screen.vertical_mode:
+            self.labels['thumbnail'].set_size_request(0, self._screen.height/4)
+        else:
+            self.labels['thumbnail'].set_size_request(self._screen.width/3, 0)
 
         self.labels['info_grid'] = Gtk.Grid()
         self.labels['info_grid'].attach(self.labels['thumbnail'], 0, 0, 1, 1)
@@ -133,18 +137,11 @@ class JobStatusPanel(ScreenPanel):
         _ = self.lang.gettext
         self.main_status_displayed = True
 
-        if self._screen.vertical_mode:
-            self.labels['info_grid'].remove_row(2)
-        else:
-            self.labels['info_grid'].remove_column(1)
-
         self.labels['temp_grid'] = Gtk.Grid()
         if self._screen.width <= 480:
             nlimit = 2
-        elif self._screen.width <= 800:
-            nlimit = 3
         else:
-            nlimit = 4
+            nlimit = 3
         n = 0
         if self._screen.printer.get_tools():
             for i, extruder in enumerate(self._printer.get_tools()):
@@ -182,19 +179,34 @@ class JobStatusPanel(ScreenPanel):
                 self.heater_button[device].set_halign(Gtk.Align.START)
                 self.labels['temp_grid'].attach(self.heater_button[device], n, 0, 1, 1)
                 n += 1
-        for device in self._screen.printer.get_heaters():
-            if n >= nlimit:
-                break
-            if device.startswith("temperature_sensor"):
-                self.heater_button[device] = self._gtk.ButtonImage("heat-up",
-                                                                   None, None, .6, Gtk.PositionType.LEFT)
-                self.labels[device] = Gtk.Label("-")
-                self.heater_button[device].set_label(self.labels[device].get_text())
-                self.heater_button[device].connect("clicked", self.menu_item_clicked, "temperature",
-                                                   {"panel": "temperature", "name": _("Temperature")})
-                self.heater_button[device].set_halign(Gtk.Align.START)
-                self.labels['temp_grid'].attach(self.heater_button[device], n, 0, 1, 1)
-                n += 1
+
+        printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
+        if printer_cfg is not None:
+            titlebar_items = printer_cfg.get("titlebar_items", "")
+            if titlebar_items is not None:
+                titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
+                logging.info("Titlebar items: %s", titlebar_items)
+                self.titlebar_name_type = printer_cfg.get("titlebar_name_type", None)
+                logging.info("Titlebar name type: %s", self.titlebar_name_type)
+                for device in self._screen.printer.get_heaters():
+                    if n >= nlimit:
+                        break
+                    if not (device.startswith("extruder") or device.startswith("heater_bed")):
+                        name = device.split(" ")[1:][0]
+                    else:
+                        name = device
+                    for item in titlebar_items:
+                        if name == item:
+                            self.heater_button[device] = self._gtk.ButtonImage("heat-up",
+                                                                            None, None, .6, Gtk.PositionType.LEFT)
+                            self.labels[device] = Gtk.Label("-")
+                            self.heater_button[device].set_label(self.labels[device].get_text())
+                            self.heater_button[device].connect("clicked", self.menu_item_clicked, "temperature",
+                                                            {"panel": "temperature", "name": _("Temperature")})
+                            self.heater_button[device].set_halign(Gtk.Align.START)
+                            self.labels['temp_grid'].attach(self.heater_button[device], n, 0, 1, 1)
+                            n += 1
+                            break
 
         self.z_button = self._gtk.ButtonImage("home-z", None, None, .6, Gtk.PositionType.LEFT)
         self.z_button.set_label(self.labels['pos_z'].get_text())
@@ -241,13 +253,10 @@ class JobStatusPanel(ScreenPanel):
         info.add(ef_box)
         info.add(self.elapsed_button)
         info.add(self.left_button)
-
-        self.labels['info_grid'].attach(info, 1, 0, 1, 1)
-        self.labels['info_grid'].show_all()
+        self.switch_info(info)
 
     def create_extrusion_grid(self, widget=None):
         self.main_status_displayed = False
-        self.labels['info_grid'].remove_column(1)
         goback = self._gtk.ButtonImage("back", None, "color1", .66, Gtk.PositionType.TOP, False)
         goback.connect("clicked", self.create_status_grid)
         goback.set_hexpand(False)
@@ -269,12 +278,10 @@ class JobStatusPanel(ScreenPanel):
         info.attach(self.labels['filament_used'], 2, 3, 1, 1)
         info.attach(self.labels['fila_total_lbl'], 1, 4, 1, 1)
         info.attach(self.labels['filament_total'], 2, 4, 1, 1)
-        self.labels['info_grid'].attach(info, 1, 0, 1, 1)
-        self.labels['info_grid'].show_all()
+        self.switch_info(info)
 
     def create_move_grid(self, widget=None):
         self.main_status_displayed = False
-        self.labels['info_grid'].remove_column(1)
         goback = self._gtk.ButtonImage("back", None, "color2", .66, Gtk.PositionType.TOP, False)
         goback.connect("clicked", self.create_status_grid)
         goback.set_hexpand(False)
@@ -302,12 +309,10 @@ class JobStatusPanel(ScreenPanel):
         info.attach(self.labels['height'], 2, 4, 1, 1)
         info.attach(self.labels['layer_lbl'], 1, 5, 1, 1)
         info.attach(self.labels['layer'], 2, 5, 1, 1)
-        self.labels['info_grid'].attach(info, 1, 0, 1, 1)
-        self.labels['info_grid'].show_all()
+        self.switch_info(info)
 
     def create_time_grid(self, widget=None):
         self.main_status_displayed = False
-        self.labels['info_grid'].remove_column(1)
         goback = self._gtk.ButtonImage("back", None, "color3", .66, Gtk.PositionType.TOP, False)
         goback.connect("clicked", self.create_status_grid)
         goback.set_hexpand(False)
@@ -327,7 +332,15 @@ class JobStatusPanel(ScreenPanel):
         info.attach(self.labels['file_time'], 2, 4, 1, 1)
         info.attach(self.labels['fila_tlbl'], 1, 5, 1, 1)
         info.attach(self.labels['filament_time'], 2, 5, 1, 1)
-        self.labels['info_grid'].attach(info, 1, 0, 1, 1)
+        self.switch_info(info)
+
+    def switch_info(self, info):
+        if self._screen.vertical_mode:
+            self.labels['info_grid'].remove_row(1)
+            self.labels['info_grid'].attach(info, 0, 1, 1, 1)
+        else:
+            self.labels['info_grid'].remove_column(1)
+            self.labels['info_grid'].attach(info, 1, 0, 1, 1)
         self.labels['info_grid'].show_all()
 
     def on_draw(self, da, ctx):
@@ -523,9 +536,9 @@ class JobStatusPanel(ScreenPanel):
 
         if "gcode_move" in data:
             if "gcode_position" in data["gcode_move"]:
-                self.labels['pos_x'].set_text("X: %.2f" % (data["gcode_move"]["gcode_position"][0]))
-                self.labels['pos_y'].set_text("Y: %.2f" % (data["gcode_move"]["gcode_position"][1]))
-                self.labels['pos_z'].set_text("Z: %.2f" % (data["gcode_move"]["gcode_position"][2]))
+                self.labels['pos_x'].set_text("X: %3.2f" % (data["gcode_move"]["gcode_position"][0]))
+                self.labels['pos_y'].set_text("Y: %3.2f" % (data["gcode_move"]["gcode_position"][1]))
+                self.labels['pos_z'].set_text("Z: %3.2f" % (data["gcode_move"]["gcode_position"][2]))
                 self.pos_z = data["gcode_move"]["gcode_position"][2]
             if "extrude_factor" in data["gcode_move"]:
                 self.extrusion = int(round(data["gcode_move"]["extrude_factor"] * 100))
@@ -852,6 +865,6 @@ class JobStatusPanel(ScreenPanel):
 
     def update_temp(self, x, temp, target):
         if target > 0:
-            self.labels[x].set_markup("%.1f<big>/</big>%.0f °C" % (temp, target))
+            self.labels[x].set_label("%3d/%3d°" % (temp, target))
         else:
-            self.labels[x].set_markup("%.1f °C" % (temp))
+            self.labels[x].set_label("%3d°" % (temp))
