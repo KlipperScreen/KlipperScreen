@@ -59,7 +59,7 @@ class ExtrudePanel(ScreenPanel):
         if self.unload_filament:
             grid.attach(self.labels['unload'], 2, 1, 1, 1)
         grid.attach(self.labels['retract'], 3, 1, 1, 1)
-        grid.attach(self.labels['refract1'], 3,1,1,1)
+        grid.attach(self.labels['refract1'], 4,1,1,1)
         distgrid = Gtk.Grid()
         j = 0
         for i in self.distances:
