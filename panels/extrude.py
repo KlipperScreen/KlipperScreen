@@ -44,6 +44,8 @@ class ExtrudePanel(ScreenPanel):
         self.labels['retract'] = self._gtk.ButtonImage("retract", _("Втянуть"), "color1")
         self.labels['retract'].connect("clicked", self.extrude, "-")
         self.labels['temperature'] = self._gtk.ButtonImage("heat-up", _("Temperature"), "color4")
+        self.labels['retract'].connect("clicked", self.extrude, "-")
+        self.labels['temperature'] = self._gtk.ButtonImage("heat-up", _("Temperature"), "color5")
         self.labels['temperature'].connect("clicked", self.menu_item_clicked, "temperature", {
             "name": "Temperature",
             "panel": "temperature"
