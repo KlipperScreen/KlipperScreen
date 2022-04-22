@@ -43,8 +43,8 @@ class ExtrudePanel(ScreenPanel):
         self.labels['unload'].connect("clicked", self.load_unload, "-")
         self.labels['retract'] = self._gtk.ButtonImage("retract", _("Втянуть"), "color1")
         self.labels['retract'].connect("clicked", self.extrude, "-")
-        self.labels['sopl'] = self._gtk.ButtonImage("fan", _("lol"), "color3")
-        self.labels['sopl'].connect("clicked", self.extrude, "-")
+        self.labels['refract1'] = self._gtk.ButtonImage("fan", _("lol"), "color3")
+        self.labels['refract1'].connect("clicked", self.extrude, "-")
         self.labels['temperature'] = self._gtk.ButtonImage("heat-up", _("Temperature"), "color4")
         self.labels['temperature'].connect("clicked", self.menu_item_clicked, "temperature", {
             "name": "Temperature",
@@ -59,7 +59,7 @@ class ExtrudePanel(ScreenPanel):
         if self.unload_filament:
             grid.attach(self.labels['unload'], 2, 1, 1, 1)
         grid.attach(self.labels['retract'], 3, 1, 1, 1)
-
+        grid.attach(self.labels['refract1'], 3,1,1,1)
         distgrid = Gtk.Grid()
         j = 0
         for i in self.distances:
