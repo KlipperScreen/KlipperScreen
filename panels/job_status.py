@@ -34,7 +34,7 @@ class JobStatusPanel(ScreenPanel):
         self.close_timeouts = []
         self.labels = {}
 
-        data = ['heater_bed', 'pos_x', 'pos_y', 'pos_z', 'time_left', 'duration', 'slicer_time', 'file_time',
+        data = ['pos_x', 'pos_y', 'pos_z', 'time_left', 'duration', 'slicer_time', 'file_time',
                 'filament_time', 'est_time', 'speed_factor', 'req_speed', 'max_accel', 'extrude_factor', 'zoffset',
                 'zoffset', 'filament_used', 'filament_total', 'advance', 'fan', 'layer', 'total_layers', 'height',
                 'flowrate']
@@ -143,10 +143,10 @@ class JobStatusPanel(ScreenPanel):
         else:
             nlimit = 3
         n = 0
+        self.extruder_button = {}
         if self._screen.printer.get_tools():
             for i, extruder in enumerate(self._printer.get_tools()):
                 self.labels[extruder] = Gtk.Label("-")
-                self.extruder_button = {}
                 self.extruder_button[extruder] = self._gtk.ButtonImage("extruder-%s" % i,
                                                                        None, None, .6, Gtk.PositionType.LEFT)
                 self.extruder_button[extruder].set_label(self.labels[extruder].get_text())
@@ -158,14 +158,17 @@ class JobStatusPanel(ScreenPanel):
                 n += 1
         else:
             self.current_extruder = None
-        if self._printer.has_heated_bed():
-            self.bed_button = self._gtk.ButtonImage("bed", None, None, .6, Gtk.PositionType.LEFT)
-            self.labels['heater_bed'].get_text()
-            self.bed_button.connect("clicked", self.menu_item_clicked, "temperature",
-                                    {"panel": "temperature", "name": _("Temperature")})
-            self.labels['temp_grid'].attach(self.bed_button, n, 0, 1, 1)
-            n += 1
         self.heater_button = {}
+        if self._printer.has_heated_bed():
+            self.heater_button['heater_bed'] = self._gtk.ButtonImage("bed",
+                                                                None, None, .6, Gtk.PositionType.LEFT)
+            self.labels['heater_bed'] = Gtk.Label("-")
+            self.heater_button['heater_bed'].set_label(self.labels['heater_bed'].get_text())
+            self.heater_button['heater_bed'].connect("clicked", self.menu_item_clicked, "temperature",
+                                                {"panel": "temperature", "name": _("Temperature")})
+            self.heater_button['heater_bed'].set_halign(Gtk.Align.START)
+            self.labels['temp_grid'].attach(self.heater_button['heater_bed'], n, 0, 1, 1)
+            n += 1
         for device in self._screen.printer.get_heaters():
             if n >= nlimit:
                 break
@@ -496,13 +499,6 @@ class JobStatusPanel(ScreenPanel):
         _ = self.lang.gettext
 
         if self.main_status_displayed:
-            if self._printer.has_heated_bed():
-                self.update_temp(
-                    "heater_bed",
-                    self._printer.get_dev_stat("heater_bed", "temperature"),
-                    self._printer.get_dev_stat("heater_bed", "target")
-                )
-                self.bed_button.set_label(self.labels['heater_bed'].get_text())
             for x in self._printer.get_tools():
                 self.update_temp(
                     x,
@@ -511,7 +507,7 @@ class JobStatusPanel(ScreenPanel):
                 )
                 self.extruder_button[x].set_label(self.labels[x].get_text())
             for x in self._printer.get_heaters():
-                if x in self.labels and x != 'heater_bed':
+                if x in self.labels:
                     self.update_temp(
                         x,
                         self._printer.get_dev_stat(x, "temperature"),
@@ -536,13 +532,17 @@ class JobStatusPanel(ScreenPanel):
 
         if "gcode_move" in data:
             if "gcode_position" in data["gcode_move"]:
-                self.labels['pos_x'].set_text("X: %3.2f" % (data["gcode_move"]["gcode_position"][0]))
-                self.labels['pos_y'].set_text("Y: %3.2f" % (data["gcode_move"]["gcode_position"][1]))
-                self.labels['pos_z'].set_text("Z: %3.2f" % (data["gcode_move"]["gcode_position"][2]))
+                self.labels['pos_x'].set_text("X: %6.2f" % (data["gcode_move"]["gcode_position"][0]))
+                self.labels['pos_y'].set_text("Y: %6.2f" % (data["gcode_move"]["gcode_position"][1]))
+                self.labels['pos_z'].set_text("Z: %6.2f" % (data["gcode_move"]["gcode_position"][2]))
                 self.pos_z = data["gcode_move"]["gcode_position"][2]
+                if self.main_status_displayed:
+                    self.z_button.set_label(self.labels['pos_z'].get_text())
             if "extrude_factor" in data["gcode_move"]:
                 self.extrusion = int(round(data["gcode_move"]["extrude_factor"] * 100))
                 self.labels['extrude_factor'].set_text("%3d%%" % self.extrusion)
+                if self.main_status_displayed:
+                    self.extrusion_button.set_label("%3d%%" % self.extrusion)
             if "speed_factor" in data["gcode_move"]:
                 self.speed = int(round(data["gcode_move"]["speed_factor"] * 100))
                 self.speed_factor = float(data["gcode_move"]["speed_factor"])
@@ -550,6 +550,11 @@ class JobStatusPanel(ScreenPanel):
             if "speed" in data["gcode_move"]:
                 self.req_speed = int(round(data["gcode_move"]["speed"] / 60 * self.speed_factor))
                 self.labels['req_speed'].set_text("%d mm/s" % self.req_speed)
+                if self.main_status_displayed:
+                    if self.state == "printing":
+                        self.speed_button.set_label("%3d%% " % self.speed + "%3d mm/s" % self.req_speed)
+                    else:
+                        self.speed_button.set_label("%3d%%" % self.speed)
             if "homing_origin" in data["gcode_move"]:
                 self.zoffset = data["gcode_move"]["homing_origin"][2]
                 self.labels['zoffset'].set_text("%.2f" % self.zoffset)
@@ -563,7 +568,11 @@ class JobStatusPanel(ScreenPanel):
             fan_label += self.fans[fan]['name'] + self.fans[fan]['speed'] + " "
         self.labels['fan'].set_text(fan_label[:12])
 
-        self.update_status_buttons()
+        if "layer_height" in self.file_metadata:
+            layer_label = str(1 + round((self.pos_z - self.f_layer_h) / self.layer_h))
+            layer_label += " / " + self.labels['total_layers'].get_text()
+            self.labels['layer'].set_label(layer_label)
+
         self.state_check()
         if self.state not in ["printing", "paused"]:
             return
@@ -583,24 +592,12 @@ class JobStatusPanel(ScreenPanel):
         self.update_text("duration", str(self._gtk.formatTimeString(ps['print_duration'])))
         self.update_text("time_left", self.calculate_time_left(ps['print_duration'], ps['filament_used']))
 
-    def update_status_buttons(self):
         if self.main_status_displayed:
-            if self.state == "printing":
-                self.speed_button.set_label("%3d%%  " % self.speed + "%3d mm/s" % self.req_speed)
-            else:
-                self.speed_button.set_label("%3d%%" % self.speed)
-            self.z_button.set_label(self.labels['pos_z'].get_text() + " mm")
             self.fan_button.set_label(self.labels['fan'].get_text())
             elapsed_label = self.labels['elapsed'].get_text() + "  " + self.labels['duration'].get_text()
             self.elapsed_button.set_label(elapsed_label)
             remaining_label = self.labels['left'].get_text() + "  " + self.labels['time_left'].get_text()
             self.left_button.set_label(remaining_label)
-            if "layer_height" in self.file_metadata:
-                layer_label = str(1 + round((self.pos_z - self.f_layer_h) / self.layer_h))
-                layer_label += " / " + self.labels['total_layers'].get_text()
-                self.labels['layer'].set_label(layer_label)
-            if self.flow_timeout is None:
-                self.extrusion_button.set_label("%3d%%" % self.extrusion)
 
     def flow_calculate(self):
         ps = self._printer.get_stat("print_stats")
@@ -623,11 +620,13 @@ class JobStatusPanel(ScreenPanel):
             else:
                 self.labels['flowrate'].set_label("%2.1f" % self.flowrate + " mm3/s")
             if self.main_status_displayed:
-                self.extrusion_button.set_label("%3d%%  " % self.extrusion + self.labels['flowrate'].get_text())
+                self.extrusion_button.set_label("%3d%% " % self.extrusion + self.labels['flowrate'].get_text())
             self.prev_filament = fila_used
             return True
         else:
             logging.info("Stopped calculating Flowrate")
+            if self.main_status_displayed:
+                self.extrusion_button.set_label("%3d%%" % self.extrusion)
             self.flow_timeout = None
 
     def calculate_time_left(self, duration=0, filament_used=0):
@@ -791,7 +790,7 @@ class JobStatusPanel(ScreenPanel):
 
     def show_file_thumbnail(self):
         if self._files.has_thumbnail(self.filename):
-            pixbuf = self.get_file_image(self.filename, 7, 3.25)
+            pixbuf = self.get_file_image(self.filename, 5.2, 5.2)
             if pixbuf is not None:
                 self.labels['thumbnail'].set_from_pixbuf(pixbuf)
 
