@@ -161,11 +161,11 @@ class JobStatusPanel(ScreenPanel):
         self.heater_button = {}
         if self._printer.has_heated_bed():
             self.heater_button['heater_bed'] = self._gtk.ButtonImage("bed",
-                                                                None, None, .6, Gtk.PositionType.LEFT)
+                                                                     None, None, .6, Gtk.PositionType.LEFT)
             self.labels['heater_bed'] = Gtk.Label("-")
             self.heater_button['heater_bed'].set_label(self.labels['heater_bed'].get_text())
             self.heater_button['heater_bed'].connect("clicked", self.menu_item_clicked, "temperature",
-                                                {"panel": "temperature", "name": _("Temperature")})
+                                                     {"panel": "temperature", "name": _("Temperature")})
             self.heater_button['heater_bed'].set_halign(Gtk.Align.START)
             self.labels['temp_grid'].attach(self.heater_button['heater_bed'], n, 0, 1, 1)
             n += 1
