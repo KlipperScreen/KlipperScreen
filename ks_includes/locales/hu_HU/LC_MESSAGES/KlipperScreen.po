@@ -202,7 +202,7 @@ msgid ""
 "Restart"
 msgstr ""
 "Firmware\n"
-"Újrakezd"
+"Újraindítása"
 
 msgid "Font Size"
 msgstr "Betűméret"
@@ -215,7 +215,7 @@ msgstr ""
 "Frissítés"
 
 msgid "Go Back"
-msgstr "Menj vissza"
+msgstr "Visszalépés"
 
 msgid "Hidden"
 msgstr "Rejtett"
@@ -282,7 +282,7 @@ msgid ""
 "Restart"
 msgstr ""
 "Klipper\n"
-"Újrakezd"
+"Újraindítása"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper szétkapcsolt"
@@ -566,9 +566,8 @@ msgid "Up To Date"
 msgstr "Naprakész"
 
 msgid "Update"
-msgstr "Frissítés"
+msgstr "Frissít"
 
-#, fuzzy
 msgid "Updating"
 msgstr "Frissítés"
 
@@ -603,7 +602,7 @@ msgid "Z Position"
 msgstr "Z Pozíció"
 
 msgid "Z Tilt"
-msgstr "Z Dönt"
+msgstr "Z Dőlés"
 
 msgid "Z+"
 msgstr "Z+"
