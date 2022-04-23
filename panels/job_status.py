@@ -198,11 +198,11 @@ class JobStatusPanel(ScreenPanel):
                     for item in titlebar_items:
                         if name == item:
                             self.heater_button[device] = self._gtk.ButtonImage("heat-up",
-                                                                            None, None, .6, Gtk.PositionType.LEFT)
+                                                                               None, None, .6, Gtk.PositionType.LEFT)
                             self.labels[device] = Gtk.Label("-")
                             self.heater_button[device].set_label(self.labels[device].get_text())
                             self.heater_button[device].connect("clicked", self.menu_item_clicked, "temperature",
-                                                            {"panel": "temperature", "name": _("Temperature")})
+                                                               {"panel": "temperature", "name": _("Temperature")})
                             self.heater_button[device].set_halign(Gtk.Align.START)
                             self.labels['temp_grid'].attach(self.heater_button[device], n, 0, 1, 1)
                             n += 1
