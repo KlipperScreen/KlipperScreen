@@ -5,7 +5,7 @@ import os
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Pango
-from math import sqrt, pi
+from numpy import sqrt, pi
 from ks_includes.screen_panel import ScreenPanel
 
 def create_panel(*args):
@@ -19,8 +19,9 @@ class JobStatusPanel(ScreenPanel):
     state = "standby"
     zoffset = 0
     prev_filament = 0
+    flowrate = 0
     flow_timeout = None
-    flow_calc_interval = 2
+    flow_calc_interval = 1
     additional_interval = 0
     main_status_displayed = True
 
@@ -582,7 +583,7 @@ class JobStatusPanel(ScreenPanel):
             fila_used = float(ps['filament_used']) / 1000
             self.labels['filament_used'].set_text("%.1f m" % fila_used)
             if self.flow_timeout is None:
-                self.flow_timeout = GLib.timeout_add_seconds(self.flow_calc_interval, self.flow_calculate)
+                self.flow_timeout = GLib.timeout_add(self.flow_calc_interval * 1000, self.flow_calculate)
                 logging.info("Started calculating Flowrate")
         if 'filename' in ps and (ps['filename'] != self.filename):
             logging.debug("Changing filename: '%s' to '%s'" % (self.filename, ps['filename']))
@@ -606,15 +607,14 @@ class JobStatusPanel(ScreenPanel):
             if self.prev_filament == 0:
                 self.prev_filament = fila_used
                 return True
-            if fila_used < self.prev_filament:
-                # retraction?
+            if fila_used <= self.prev_filament:
                 self.additional_interval += self.flow_calc_interval
                 return True
             diameter = float(self._printer.get_config_section(self.current_extruder)['filament_diameter'])
             fila_section = pi * (diameter / 2) ** 2
             velocity = (fila_used - self.prev_filament) / (self.flow_calc_interval + self.additional_interval)
             self.additional_interval = 0
-            self.flowrate = fila_section * velocity
+            self.flowrate = ((fila_section * velocity) + self.flowrate) / 2
             if self.flowrate > 999:
                 self.labels['flowrate'].set_label("%2.1f" % (self.flowrate / 1000) + " cm3/s")
             else:
