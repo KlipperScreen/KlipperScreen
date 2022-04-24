@@ -163,7 +163,7 @@ class KlippyFiles():
         w = 400 / width
         h = 300 / height
         factor = min(w, h)
-        logging.info("Thumb scale w:%.2f h:%.2f final:%.2f" %(w, h, factor))
+        logging.info("Thumb scale w:%.2f h:%.2f final:%.2f" % (w, h, factor))
         return factor
 
     def has_thumbnail(self, filename):
