@@ -153,9 +153,9 @@ class JobStatusPanel(ScreenPanel):
                 self.extruder_button[extruder].connect("clicked", self.menu_item_clicked, "temperature",
                                                        {"panel": "temperature", "name": _("Temperature")})
                 self.extruder_button[extruder].set_halign(Gtk.Align.START)
-                self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-                self.labels['temp_grid'].attach(self.extruder_button[self.current_extruder], n, 0, 1, 1)
-                n += 1
+            self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+            self.labels['temp_grid'].attach(self.extruder_button[self.current_extruder], n, 0, 1, 1)
+            n += 1
         else:
             self.current_extruder = None
         self.heater_button = {}
@@ -182,7 +182,7 @@ class JobStatusPanel(ScreenPanel):
                 self.heater_button[device].set_halign(Gtk.Align.START)
                 self.labels['temp_grid'].attach(self.heater_button[device], n, 0, 1, 1)
                 n += 1
-
+        extra_item = True
         printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
         if printer_cfg is not None:
             titlebar_items = printer_cfg.get("titlebar_items", "")
@@ -192,14 +192,17 @@ class JobStatusPanel(ScreenPanel):
                 self.titlebar_name_type = printer_cfg.get("titlebar_name_type", None)
                 logging.info("Titlebar name type: %s", self.titlebar_name_type)
                 for device in self._screen.printer.get_heaters():
-                    if n >= nlimit:
-                        break
                     if not (device.startswith("extruder") or device.startswith("heater_bed")):
                         name = device.split(" ")[1:][0]
                     else:
                         name = device
                     for item in titlebar_items:
                         if name == item:
+                            if device.startswith("temperature_sensor") and extra_item:
+                                extra_item = False
+                                nlimit += 1
+                            if n >= nlimit:
+                                break
                             self.heater_button[device] = self._gtk.ButtonImage("heat-up",
                                                                                None, None, .6, Gtk.PositionType.LEFT)
                             self.labels[device] = Gtk.Label("-")
@@ -210,6 +213,8 @@ class JobStatusPanel(ScreenPanel):
                             self.labels['temp_grid'].attach(self.heater_button[device], n, 0, 1, 1)
                             n += 1
                             break
+                    if n >= nlimit:
+                        break
 
         self.z_button = self._gtk.ButtonImage("home-z", None, None, .6, Gtk.PositionType.LEFT)
         self.z_button.set_label(self.labels['pos_z'].get_text())
