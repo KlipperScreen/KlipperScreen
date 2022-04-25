@@ -14,13 +14,12 @@ def create_panel(*args):
 
 class JobStatusPanel(ScreenPanel):
     is_paused = False
-    filename = time = state_timeout = None
+    filename = time = state_timeout = prev_pos = None
     file_metadata = labels = {}
     state = "standby"
     timeleft_type = "file"
     progress = zoffset = flowrate = 0
     main_status_displayed = True
-    prev_pos = [0, 0, 0, 0]
     close_timeouts = []
 
     def __init__(self, screen, title, back=False):
@@ -246,19 +245,17 @@ class JobStatusPanel(ScreenPanel):
         self.left_button.connect("clicked", self.create_time_grid)
         self.left_button.set_halign(Gtk.Align.START)
 
-        sz_box = Gtk.HBox(spacing=5)
-        sz_box.add(self.speed_button)
-        sz_box.add(self.z_button)
+        szfe = Gtk.Grid()
+        szfe.attach(self.speed_button, 0, 0, 1, 1)
+        szfe.attach(self.z_button, 1, 0, 1, 1)
+        szfe.attach(self.extrusion_button, 0, 1, 1, 1)
+        szfe.attach(self.fan_button, 1, 1, 1, 1)
 
-        ef_box = Gtk.HBox(spacing=5)
-        ef_box.add(self.extrusion_button)
-        ef_box.add(self.fan_button)
 
         info = Gtk.VBox(spacing=0)
         info.get_style_context().add_class("printing-info")
         info.add(self.labels['temp_grid'])
-        info.add(sz_box)
-        info.add(ef_box)
+        info.add(szfe)
         info.add(self.elapsed_button)
         info.add(self.left_button)
         self.switch_info(info)
@@ -567,22 +564,22 @@ class JobStatusPanel(ScreenPanel):
                 if self.time is not None:
                     later = datetime.now()
                     pos = data["motion_report"]["live_position"]
-                    interval = (later - self.time).total_seconds()
-                    self.time = later
-                    # Calculate Flowrate
-                    evelocity = (pos[3] - self.prev_pos[3]) / interval
-                    self.flowrate = ((self.fila_section * evelocity) + self.flowrate) / 2
-                    # Calculate Velocity
-                    vector = sqrt(sum(i**2 for i in [pos[0], pos[1], pos[2]]))
-                    prev_vector = sqrt(sum(i**2 for i in [self.prev_pos[0], self.prev_pos[1], self.prev_pos[2]]))
-                    vel_mag = abs((vector - prev_vector) / interval)
+                    if self.prev_pos is not None:
+                        interval = (later - self.time).total_seconds()
+                        self.time = later
+                        # Calculate Flowrate
+                        evelocity = (pos[3] - self.prev_pos[3]) / interval
+                        self.flowrate = ((self.fila_section * evelocity) + self.flowrate) / 2
+                        # Calculate Velocity
+                        vel = [(pos[0] - self.prev_pos[0]), (pos[1] - self.prev_pos[1]), (pos[2] - self.prev_pos[2])]
+                        vel_mag = abs(sqrt(sum(i**2 for i in [vel[0], vel[1], vel[2]])) / interval)
+                        self.labels['flowrate'].set_label("%5.1f" % self.flowrate + " mm3/s")
+                        self.labels['req_speed'].set_text("%d/%d mm/s" % (vel_mag, self.req_speed))
+                        if self.main_status_displayed:
+                            self.extrusion_button.set_label("%3d%% " % self.extrusion +
+                                                            self.labels['flowrate'].get_text())
+                            self.speed_button.set_label("%3d%% " % self.speed + "%5d mm/s" % vel_mag)
                     self.prev_pos = pos
-
-                    self.labels['flowrate'].set_label("%2.1f" % self.flowrate + " mm3/s")
-                    self.labels['req_speed'].set_text("%d/%d mm/s" % (vel_mag, self.req_speed))
-                    if self.main_status_displayed:
-                        self.extrusion_button.set_label("%3d%% " % self.extrusion + self.labels['flowrate'].get_text())
-                        self.speed_button.set_label("%3d%% " % self.speed + "%3d mm/s" % vel_mag)
                 else:
                     self.time = datetime.now()
 
