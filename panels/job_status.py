@@ -18,9 +18,9 @@ class JobStatusPanel(ScreenPanel):
     file_metadata = labels = {}
     state = "standby"
     timeleft_type = "file"
-    progress = zoffset = flowrate = vel_mag = 0
+    progress = zoffset = flowrate = 0
     main_status_displayed = True
-    prev_pos = [0,0,0,0]
+    prev_pos = [0, 0, 0, 0]
     close_timeouts = []
 
     def __init__(self, screen, title, back=False):
@@ -81,7 +81,7 @@ class JobStatusPanel(ScreenPanel):
         self.labels['file'].set_hexpand(True)
         self.labels['status'] = Gtk.Label("Status")
         self.labels['status'].get_style_context().add_class("printing-status")
-        self.labels['lcdmessage'] = Gtk.Label("Message")
+        self.labels['lcdmessage'] = Gtk.Label("")
         self.labels['lcdmessage'].get_style_context().add_class("printing-status")
 
         for label in self.labels:
@@ -575,14 +575,14 @@ class JobStatusPanel(ScreenPanel):
                     # Calculate Velocity
                     vector = sqrt(sum(i**2 for i in [pos[0], pos[1], pos[2]]))
                     prev_vector = sqrt(sum(i**2 for i in [self.prev_pos[0], self.prev_pos[1], self.prev_pos[2]]))
-                    self.vel_mag = (abs((vector - prev_vector) / interval) + self.vel_mag) / 2
+                    vel_mag = abs((vector - prev_vector) / interval)
                     self.prev_pos = pos
 
                     self.labels['flowrate'].set_label("%2.1f" % self.flowrate + " mm3/s")
-                    self.labels['req_speed'].set_text("%d/%d mm/s" % (self.vel_mag, self.req_speed))
+                    self.labels['req_speed'].set_text("%d/%d mm/s" % (vel_mag, self.req_speed))
                     if self.main_status_displayed:
                         self.extrusion_button.set_label("%3d%% " % self.extrusion + self.labels['flowrate'].get_text())
-                        self.speed_button.set_label("%3d%% " % self.speed + "%3d mm/s" % self.vel_mag)
+                        self.speed_button.set_label("%3d%% " % self.speed + "%3d mm/s" % vel_mag)
                 else:
                     self.time = datetime.now()
 
@@ -766,11 +766,11 @@ class JobStatusPanel(ScreenPanel):
                 endstop = (self._screen.printer.config_section_exists("stepper_z") and
                            not self._screen.printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"))
                 if endstop:
-                    self.buttons['button_grid'].attach(self.labels["save_offset_endstop"], 0, 0, 1, 1)
+                    self.buttons['button_grid'].attach(self.buttons["save_offset_endstop"], 0, 0, 1, 1)
                 else:
                     self.buttons['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
                 if (self._printer.config_section_exists("probe") or self._printer.config_section_exists("bltouch")):
-                    self.buttons['button_grid'].attach(self.labels["save_offset_probe"], 1, 0, 1, 1)
+                    self.buttons['button_grid'].attach(self.buttons["save_offset_probe"], 1, 0, 1, 1)
                 else:
                     self.buttons['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
             else:
