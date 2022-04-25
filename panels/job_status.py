@@ -813,7 +813,7 @@ class JobStatusPanel(ScreenPanel):
                         self.f_layer_h = self.file_metadata['first_layer_height']
                     else:
                         self.f_layer_h = layer_h
-                    self.labels['total_layers'].set_label(str(int((self.height - self.f_layer_h) / self.layer_h)))
+                    self.labels['total_layers'].set_label(str(int((self.height - self.f_layer_h) / self.layer_h) + 1))
             if "filament_total" in self.file_metadata:
                 filament_total = float(self.file_metadata['filament_total']) / 1000
                 self.labels['filament_total'].set_text("%.1f m" % filament_total)
