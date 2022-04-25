@@ -7,33 +7,27 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Pango
 from numpy import sqrt, pi
 from ks_includes.screen_panel import ScreenPanel
+from datetime import datetime
 
 def create_panel(*args):
     return JobStatusPanel(*args)
 
 class JobStatusPanel(ScreenPanel):
     is_paused = False
-    filename = None
-    file_metadata = {}
-    progress = 0
+    filename = time = state_timeout = None
+    file_metadata = labels = {}
     state = "standby"
-    zoffset = 0
-    prev_filament = 0
-    flowrate = 0
-    flow_timeout = None
-    flow_calc_interval = 1
-    additional_interval = 0
+    timeleft_type = "file"
+    progress = zoffset = flowrate = vel_mag = 0
     main_status_displayed = True
+    prev_pos = [0,0,0,0]
+    close_timeouts = []
 
     def __init__(self, screen, title, back=False):
         super().__init__(screen, title, False)
 
     def initialize(self, panel_name):
         _ = self.lang.gettext
-        self.timeleft_type = "file"
-        self.state_timeout = None
-        self.close_timeouts = []
-        self.labels = {}
 
         data = ['pos_x', 'pos_y', 'pos_z', 'time_left', 'duration', 'slicer_time', 'file_time',
                 'filament_time', 'est_time', 'speed_factor', 'req_speed', 'max_accel', 'extrude_factor', 'zoffset',
@@ -133,6 +127,11 @@ class JobStatusPanel(ScreenPanel):
 
         self.content.add(self.grid)
         self._screen.wake_screen()
+
+        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+        # the diameter may change with extruders but is highly unusual
+        diameter = float(self._printer.get_config_section(self.current_extruder)['filament_diameter'])
+        self.fila_section = pi * ((diameter / 2) ** 2)
 
     def create_status_grid(self, widget=None):
         _ = self.lang.gettext
@@ -559,6 +558,28 @@ class JobStatusPanel(ScreenPanel):
             if "homing_origin" in data["gcode_move"]:
                 self.zoffset = data["gcode_move"]["homing_origin"][2]
                 self.labels['zoffset'].set_text("%.2f" % self.zoffset)
+            if "motion_report" in data and 'live_position' in data["motion_report"]:
+                if self.time is not None:
+                    later = datetime.now()
+                    pos = data["motion_report"]["live_position"]
+                    interval = (later - self.time).total_seconds()
+                    self.time = later
+                    # Calculate Flowrate
+                    evelocity = (pos[3] - self.prev_pos[3]) / interval
+                    self.flowrate = ((self.fila_section * evelocity) + self.flowrate) / 2
+                    # Calculate Velocity
+                    vector = sqrt(sum(i**2 for i in [pos[0], pos[1], pos[2]]))
+                    prev_vector = sqrt(sum(i**2 for i in [self.prev_pos[0], self.prev_pos[1], self.prev_pos[2]]))
+                    self.vel_mag = (abs((vector - prev_vector) / interval) + self.vel_mag) / 2
+                    self.prev_pos = pos
+
+                    self.labels['flowrate'].set_label("%2.1f" % self.flowrate + " mm3/s")
+                    self.labels['req_speed'].set_text("%d/%d mm/s" % (self.vel_mag, self.req_speed))
+                    if self.main_status_displayed:
+                        self.extrusion_button.set_label("%3d%% " % self.extrusion + self.labels['flowrate'].get_text())
+                        self.speed_button.set_label("%3d%% " % self.speed + "%3d mm/s" % self.vel_mag)
+                else:
+                    self.time = datetime.now()
 
         for fan in self.fans:
             if fan in data and "speed" in data[fan]:
@@ -582,9 +603,6 @@ class JobStatusPanel(ScreenPanel):
         if 'filament_used' in ps:
             fila_used = float(ps['filament_used']) / 1000
             self.labels['filament_used'].set_text("%.1f m" % fila_used)
-            if self.flow_timeout is None:
-                self.flow_timeout = GLib.timeout_add(self.flow_calc_interval * 1000, self.flow_calculate)
-                logging.info("Started calculating Flowrate")
         if 'filename' in ps and (ps['filename'] != self.filename):
             logging.debug("Changing filename: '%s' to '%s'" % (self.filename, ps['filename']))
             self.update_filename()
@@ -599,35 +617,6 @@ class JobStatusPanel(ScreenPanel):
             self.elapsed_button.set_label(elapsed_label)
             remaining_label = self.labels['left'].get_text() + "  " + self.labels['time_left'].get_text()
             self.left_button.set_label(remaining_label)
-
-    def flow_calculate(self):
-        ps = self._printer.get_stat("print_stats")
-        if 'filament_used' in ps:
-            fila_used = float(ps['filament_used'])
-            if self.prev_filament == 0:
-                self.prev_filament = fila_used
-                return True
-            if fila_used <= self.prev_filament:
-                self.additional_interval += self.flow_calc_interval
-                return True
-            diameter = float(self._printer.get_config_section(self.current_extruder)['filament_diameter'])
-            fila_section = pi * (diameter / 2) ** 2
-            velocity = (fila_used - self.prev_filament) / (self.flow_calc_interval + self.additional_interval)
-            self.additional_interval = 0
-            self.flowrate = ((fila_section * velocity) + self.flowrate) / 2
-            if self.flowrate > 999:
-                self.labels['flowrate'].set_label("%2.1f" % (self.flowrate / 1000) + " cm3/s")
-            else:
-                self.labels['flowrate'].set_label("%2.1f" % self.flowrate + " mm3/s")
-            if self.main_status_displayed:
-                self.extrusion_button.set_label("%3d%% " % self.extrusion + self.labels['flowrate'].get_text())
-            self.prev_filament = fila_used
-            return True
-        else:
-            logging.info("Stopped calculating Flowrate")
-            if self.main_status_displayed:
-                self.extrusion_button.set_label("%3d%%" % self.extrusion)
-            self.flow_timeout = None
 
     def calculate_time_left(self, duration=0, filament_used=0):
         total_duration = None
