@@ -198,12 +198,12 @@ class JobStatusPanel(ScreenPanel):
                                     nlimit += 1
                                 if n >= nlimit:
                                     break
-                                self.heater_button[device] = self._gtk.ButtonImage("heat-up",
-                                                                                None, None, .6, Gtk.PositionType.LEFT)
+                                self.heater_button[device] = self._gtk.ButtonImage("heat-up", None, None, .6,
+                                                                                   Gtk.PositionType.LEFT)
                                 self.labels[device] = Gtk.Label("-")
                                 self.heater_button[device].set_label(self.labels[device].get_text())
                                 self.heater_button[device].connect("clicked", self.menu_item_clicked, "temperature",
-                                                                {"panel": "temperature", "name": _("Temperature")})
+                                                                   {"panel": "temperature", "name": _("Temperature")})
                                 self.heater_button[device].set_halign(Gtk.Align.START)
                                 self.labels['temp_grid'].attach(self.heater_button[device], n, 0, 1, 1)
                                 n += 1
@@ -540,8 +540,8 @@ class JobStatusPanel(ScreenPanel):
                     interval = now - self.prev_gpos[1]
                     # Calculate Velocity
                     vel = [(pos[0] - self.prev_gpos[0][0]),
-                        (pos[1] - self.prev_gpos[0][1]),
-                        (pos[2] - self.prev_gpos[0][2])]
+                           (pos[1] - self.prev_gpos[0][1]),
+                           (pos[2] - self.prev_gpos[0][2])]
                     vel = array(vel)
                     self.vel = ((sqrt(vel.dot(vel)) / interval) + self.vel) / 2
                 self.prev_gpos = [pos, now]
@@ -576,8 +576,8 @@ class JobStatusPanel(ScreenPanel):
                         self.flowrate = (self.fila_section * evelocity + self.flowrate) / 2
                         # Calculate Velocity
                         vel = [(pos[0] - self.prev_pos[0][0]),
-                            (pos[1] - self.prev_pos[0][1]),
-                            (pos[2] - self.prev_pos[0][2])]
+                               (pos[1] - self.prev_pos[0][1]),
+                               (pos[2] - self.prev_pos[0][2])]
                         vel = array(vel)
                         self.vel = ((sqrt(vel.dot(vel)) / interval) + self.vel) / 2
                     self.prev_pos = [pos, now]
