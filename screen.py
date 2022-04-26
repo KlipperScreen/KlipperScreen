@@ -260,7 +260,7 @@ class KlipperScreen(Gtk.Window):
                 "virtual_sdcard": ["file_position", "is_active", "progress"],
                 "webhooks": ["state", "state_message"],
                 "firmware_retraction": ["retract_length", "retract_speed", "unretract_extra_length", "unretract_speed"],
-                "motion_report": ["live_position"]
+                "motion_report": ["live_position", "live_velocity", "live_extruder_velocity"]
             }
         }
         for extruder in self.printer.get_tools():
