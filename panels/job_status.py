@@ -6,7 +6,7 @@ import time
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Pango
-from numpy import sqrt, pi, dot, array
+from numpy import sqrt, pi, dot, array, median
 from ks_includes.screen_panel import ScreenPanel
 
 def create_panel(*args):
@@ -14,13 +14,13 @@ def create_panel(*args):
 
 class JobStatusPanel(ScreenPanel):
     is_paused = False
-    filename = state_timeout = prev_pos = prev_gpos = None
+    filename = state_timeout = prev_pos = prev_gpos = vel_timeout = None
     file_metadata = labels = {}
     state = "standby"
     timeleft_type = "file"
     progress = zoffset = flowrate = vel = 0
     main_status_displayed = True
-    close_timeouts = []
+    close_timeouts = velstore = flowstore = []
 
     def __init__(self, screen, title, back=False):
         super().__init__(screen, title, False)
@@ -352,10 +352,7 @@ class JobStatusPanel(ScreenPanel):
         ctx.translate(w / 2, h / 2)
         ctx.arc(0, 0, r, 0, 2*pi)
         ctx.stroke()
-        if self.progress < 1:
-            ctx.set_source_rgb(0.718, 0.110, 0.110)
-        else:
-            ctx.set_source_rgb(0.2, 0.411, 0.118)
+        ctx.set_source_rgb(0.718, 0.110, 0.110)
         ctx.arc(0, 0, r, 3/2*pi, 3/2*pi+(self.progress*2*pi))
         ctx.stroke()
 
@@ -543,7 +540,7 @@ class JobStatusPanel(ScreenPanel):
                            (pos[1] - self.prev_gpos[0][1]),
                            (pos[2] - self.prev_gpos[0][2])]
                     vel = array(vel)
-                    self.vel = ((sqrt(vel.dot(vel)) / interval) + self.vel) / 2
+                    self.velstore.append(sqrt(vel.dot(vel)) / interval)
                 self.prev_gpos = [pos, now]
             if "extrude_factor" in data["gcode_move"]:
                 self.extrusion = int(round(data["gcode_move"]["extrude_factor"] * 100))
@@ -557,11 +554,6 @@ class JobStatusPanel(ScreenPanel):
             if "speed" in data["gcode_move"]:
                 self.req_speed = int(round(data["gcode_move"]["speed"] / 60 * self.speed_factor))
                 self.labels['req_speed'].set_text("%d mm/s" % self.req_speed)
-                if self.main_status_displayed:
-                    if self.state == "printing":
-                        self.speed_button.set_label("%3d%% " % self.speed + "%3d mm/s" % self.req_speed)
-                    else:
-                        self.speed_button.set_label("%3d%%" % self.speed)
             if "homing_origin" in data["gcode_move"]:
                 self.zoffset = data["gcode_move"]["homing_origin"][2]
                 self.labels['zoffset'].set_text("%.2f" % self.zoffset)
@@ -573,23 +565,18 @@ class JobStatusPanel(ScreenPanel):
                         interval = (now - self.prev_pos[1])
                         # Calculate Flowrate
                         evelocity = (pos[3] - self.prev_pos[0][3]) / interval
-                        self.flowrate = (self.fila_section * evelocity + self.flowrate) / 2
+                        self.flowstore.append(self.fila_section * evelocity)
                         # Calculate Velocity
                         vel = [(pos[0] - self.prev_pos[0][0]),
                                (pos[1] - self.prev_pos[0][1]),
                                (pos[2] - self.prev_pos[0][2])]
                         vel = array(vel)
-                        self.vel = ((sqrt(vel.dot(vel)) / interval) + self.vel) / 2
+                        self.velstore.append(sqrt(vel.dot(vel)) / interval)
                     self.prev_pos = [pos, now]
                 if "live_velocity" in data["motion_report"]:
-                    self.vel = data["motion_report"]["live_velocity"]
+                    self.velstore.append(data["motion_report"]["live_velocity"])
                 if "live_extruder_velocity" in data["motion_report"]:
-                    self.flowrate = self.fila_section * data["motion_report"]["live_extruder_velocity"]
-                self.labels['req_speed'].set_text("%d/%d mm/s" % (self.vel, self.req_speed))
-                self.labels['flowrate'].set_label("%5.1f mm3/s" % self.flowrate)
-                if self.main_status_displayed:
-                    self.speed_button.set_label("%3d%% %5d mm/s" % (self.speed, self.vel))
-                    self.extrusion_button.set_label("%3d%% %5.1f mm3/s" % (self.extrusion, self.flowrate))
+                    self.flowstore.append(self.flowrate)
 
         for fan in self.fans:
             if fan in data and "speed" in data[fan]:
@@ -610,6 +597,11 @@ class JobStatusPanel(ScreenPanel):
             return
 
         ps = self._printer.get_stat("print_stats")
+        if int(ps['print_duration']) == 0 and self.progress > 0.001:
+            # Print duration remains at 0 when using No-extusion tests
+            duration = ps['total_duration']
+        else:
+            duration = ps['print_duration']
         if 'filament_used' in ps:
             fila_used = float(ps['filament_used'])
             self.labels['filament_used'].set_text("%.1f m" % (fila_used / 1000))
@@ -618,8 +610,8 @@ class JobStatusPanel(ScreenPanel):
             self.update_filename()
         else:
             self.update_percent_complete()
-        self.update_text("duration", str(self._gtk.formatTimeString(ps['print_duration'])))
-        self.update_text("time_left", self.calculate_time_left(ps['print_duration'], ps['filament_used']))
+        self.update_text("duration", str(self._gtk.formatTimeString(duration)))
+        self.update_text("time_left", self.calculate_time_left(duration, ps['filament_used']))
 
         if self.main_status_displayed:
             self.fan_button.set_label(self.labels['fan'].get_text())
@@ -627,6 +619,22 @@ class JobStatusPanel(ScreenPanel):
             self.elapsed_button.set_label(elapsed_label)
             remaining_label = self.labels['left'].get_text() + "  " + self.labels['time_left'].get_text()
             self.left_button.set_label(remaining_label)
+        if self.vel_timeout is None:
+            self.vel_timeout = GLib.timeout_add_seconds(1, self.update_velocity)
+
+    def update_velocity(self):
+        if len(self.velstore) > 0:
+            self.vel = (self.vel + median(array(self.velstore))) / 2
+            self.labels['req_speed'].set_text("%d/%d mm/s" % (self.vel, self.req_speed))
+            self.velstore = []
+        if len(self.flowstore) > 0:
+            self.flowrate = (self.flowrate + median(array(self.flowstore))) / 2
+            self.labels['flowrate'].set_label("%.1f mm3/s" % self.flowrate)
+            self.flowstore = []
+        if self.main_status_displayed:
+            self.speed_button.set_label("%3d%% %5d mm/s" % (self.speed, self.vel))
+            self.extrusion_button.set_label("%3d%% %5.1f mm3/s" % (self.extrusion, self.flowrate))
+        return True
 
     def calculate_time_left(self, duration=0, filament_used=0):
         total_duration = None
@@ -855,7 +863,10 @@ class JobStatusPanel(ScreenPanel):
             self.labels[label].set_text(text)
 
     def update_progress(self):
-        self.labels['progress_text'].set_text("%s%%" % (str(min(int(self.progress*100), 100))))
+        if self.progress < 1:
+            self.labels['progress_text'].set_text("%s%%" % (str((int(self.progress*100)))))
+        else:
+            self.labels['progress_text'].set_text("100")
 
     def update_message(self):
         msg = self._printer.get_stat("display_status", "message")
