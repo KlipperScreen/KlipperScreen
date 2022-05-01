@@ -127,6 +127,9 @@ class ConsolePanel(ScreenPanel):
             '\n<span color="%s">%s</span> %s' % (COLORS['time'], datetime.fromtimestamp(time).strftime("%H:%M:%S"),
                                                  message), -1
         )
+        # Limit the length
+        if self.labels['tb'].get_line_count() > 999:
+            self.labels['tb'].delete(self.labels['tb'].get_iter_at_line(0), self.labels['tb'].get_iter_at_line(1))
 
     def gcode_response(self, result, method, params):
         if method != "server.gcode_store":
