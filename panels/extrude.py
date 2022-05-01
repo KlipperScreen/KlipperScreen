@@ -46,6 +46,7 @@ class ExtrudePanel(ScreenPanel):
 
         extgrid = self._gtk.HomogeneousGrid()
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+        limit = 5
         for i, extruder in enumerate(self._printer.get_tools()):
             if self._printer.extrudercount > 1:
                 self.labels[extruder] = self._gtk.ButtonImage("extruder-%s" % i, _("Tool") + " %s" % str(i))
@@ -54,10 +55,10 @@ class ExtrudePanel(ScreenPanel):
             self.labels[extruder].connect("clicked", self.change_extruder, extruder)
             if extruder == self.current_extruder:
                 self.labels[extruder].get_style_context().add_class("button_active")
-            if i < 5:
+            if i < limit:
                 extgrid.attach(self.labels[extruder], i, 0, 1, 1)
-            if i < 3:
-                extgrid.attach(self.labels['temperature'], i+1, 0, 1, 1)
+        if i < (limit - 1):
+            extgrid.attach(self.labels['temperature'], i+1, 0, 1, 1)
 
 
         grid.attach(extgrid, 0, 0, 4, 1)
