@@ -121,7 +121,8 @@ class Printer:
             'toolhead',
             'virtual_sdcard',
             'webhooks',
-            'fimware_retraction'
+            'fimware_retraction',
+            'motion_report'
         ]
 
         for x in (self.get_tools() + self.get_heaters()):

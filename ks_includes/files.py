@@ -156,6 +156,16 @@ class KlippyFiles():
             return ['http', thumb['path']]
         return ['file', thumb['path']]
 
+    def get_thumbnail_scale(self, filename):
+        width = self.files[filename]['thumbnails'][0]['width']
+        height = self.files[filename]['thumbnails'][0]['height']
+        logging.info("Thumb size: %d %d" % (width, height))
+        w = 400 / width
+        h = 300 / height
+        factor = min(w, h)
+        logging.info("Thumb scale w:%.2f h:%.2f final:%.2f" % (w, h, factor))
+        return factor
+
     def has_thumbnail(self, filename):
         if filename not in self.files:
             return False
