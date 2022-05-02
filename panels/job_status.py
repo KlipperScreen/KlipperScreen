@@ -17,7 +17,7 @@ class JobStatusPanel(ScreenPanel):
     filename = state_timeout = prev_pos = prev_gpos = vel_timeout = None
     file_metadata = labels = {}
     state = "standby"
-    timeleft_type = "file"
+    timeleft_type = "auto"
     progress = zoffset = flowrate = vel = 0
     main_status_displayed = True
     close_timeouts = velstore = flowstore = []
@@ -553,7 +553,6 @@ class JobStatusPanel(ScreenPanel):
                 self.labels['speed_factor'].set_text("%3d%%" % self.speed)
             if "speed" in data["gcode_move"]:
                 self.req_speed = int(round(data["gcode_move"]["speed"] / 60 * self.speed_factor))
-                self.labels['req_speed'].set_text("%d mm/s" % self.req_speed)
             if "homing_origin" in data["gcode_move"]:
                 self.zoffset = data["gcode_move"]["homing_origin"][2]
                 self.labels['zoffset'].set_text("%.2f" % self.zoffset)
@@ -625,12 +624,13 @@ class JobStatusPanel(ScreenPanel):
     def update_velocity(self):
         if len(self.velstore) > 0:
             self.vel = (self.vel + median(array(self.velstore))) / 2
-            self.labels['req_speed'].set_text("%d/%d mm/s" % (self.vel, self.req_speed))
             self.velstore = []
         if len(self.flowstore) > 0:
             self.flowrate = (self.flowrate + median(array(self.flowstore))) / 2
-            self.labels['flowrate'].set_label("%.1f mm3/s" % self.flowrate)
             self.flowstore = []
+
+        self.labels['flowrate'].set_label("%.1f mm3/s" % self.flowrate)
+        self.labels['req_speed'].set_text("%d/%d mm/s" % (self.vel, self.req_speed))
         if self.main_status_displayed:
             self.speed_button.set_label("%3d%% %5d mm/s" % (self.speed, self.vel))
             self.extrusion_button.set_label("%3d%% %5.1f mm3/s" % (self.extrusion, self.flowrate))
