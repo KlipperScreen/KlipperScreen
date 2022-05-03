@@ -34,7 +34,7 @@ class LimitsPanel(ScreenPanel):
 
         conf = self._printer.get_config_section("printer")
         self.options = [
-            {"name": _("Max Accelation"), "units": _("mm/s^2"), "option": "max_accel",
+            {"name": _("Max Acceleration"), "units": _("mm/s^2"), "option": "max_accel",
                 "value": self.stn(conf['max_accel'])},
             {"name": _("Max Acceleration to Deceleration"), "units": _("mm/s^2"), "option": "max_accel_to_decel",
                 "value": self.stn(conf['max_accel_to_decel']) if "max_accel_to_decel" in conf else
