@@ -45,7 +45,8 @@ PRINTER_BASE_STATUS_OBJECTS = [
     'print_stats',
     'toolhead',
     'virtual_sdcard',
-    'webhooks'
+    'webhooks',
+    'motion_report'
 ]
 
 klipperscreendir = pathlib.Path(__file__).parent.resolve()
@@ -250,7 +251,7 @@ class KlipperScreen(Gtk.Window):
                 "configfile": ["config"],
                 "display_status": ["progress", "message"],
                 "fan": ["speed"],
-                "gcode_move": ["extrude_factor", "gcode_position", "homing_origin", "speed_factor"],
+                "gcode_move": ["extrude_factor", "gcode_position", "homing_origin", "speed_factor", "speed"],
                 "idle_timeout": ["state"],
                 "pause_resume": ["is_paused"],
                 "print_stats": ["print_duration", "total_duration", "filament_used", "filename", "state", "message"],
@@ -258,7 +259,8 @@ class KlipperScreen(Gtk.Window):
                              "max_accel", "max_accel_to_decel", "max_velocity", "square_corner_velocity"],
                 "virtual_sdcard": ["file_position", "is_active", "progress"],
                 "webhooks": ["state", "state_message"],
-                "firmware_retraction": ["retract_length", "retract_speed", "unretract_extra_length", "unretract_speed"]
+                "firmware_retraction": ["retract_length", "retract_speed", "unretract_extra_length", "unretract_speed"],
+                "motion_report": ["live_position", "live_velocity", "live_extruder_velocity"]
             }
         }
         for extruder in self.printer.get_tools():

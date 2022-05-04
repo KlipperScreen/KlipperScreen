@@ -54,6 +54,10 @@ button.color4 {
     min-height: 3em;
 }
 
+button.status {
+    background-color: #13181C;
+}
+
 button.active {
     background-color: #20303D;
 }
@@ -354,16 +358,15 @@ trough {
 }
 
 .printing-info {
-    font-size: 1.2em;
-    margin-left: .25em;
+    margin-right: .25em;
+}
+.printing-info button {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: .5em;
 }
 
-.printing-info-box {
-    padding-left: .25em;
-}
-
-.printing-info-box box {
-    margin-bottom: .25em;
+.printing-info-secondary label {
+    margin-left: .75em;
 }
 
 .printing-status {
@@ -377,7 +380,7 @@ trough {
 }
 
 .printing-progress-text {
-    font-size: 1.5em;
+    font-size: 1.25em;
     font-weight: bold;
     color: white;
 }

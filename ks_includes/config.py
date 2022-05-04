@@ -119,7 +119,7 @@ class KlipperScreenConfig:
             {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
             {"print_estimate_method": {
                 "section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
-                "value": "file", "options": [
+                "value": "auto", "options": [
                     {"name": _("Auto") + " " + _("(default)"), "value": "auto"},
                     {"name": _("File"), "value": "file"},
                     {"name": _("Filament Used"), "value": "filament"},
