@@ -22,15 +22,27 @@ class ZCalibratePanel(ScreenPanel):
 
     def initialize(self, panel_name):
         _ = self.lang.gettext
-        grid = Gtk.Grid()
 
-        pos_label = Gtk.Label(_("Z Position") + ": \n")
-        self.widgets['zposition'] = Gtk.Label("?")
-        pos = Gtk.VBox()
-        pos.set_vexpand(False)
-        pos.set_valign(Gtk.Align.CENTER)
-        pos.add(pos_label)
-        pos.add(self.widgets['zposition'])
+        if self._printer.config_section_exists("probe"):
+            self.z_offset = self._screen.printer.get_config_section("probe")['z_offset']
+        elif self._printer.config_section_exists("bltouch"):
+            self.z_offset = self._screen.printer.get_config_section("bltouch")['z_offset']
+        elif self._printer.config_section_exists("smart_effector"):
+            self.z_offset = self._screen.printer.get_config_section("smart_effector")['z_offset']
+        else:
+            self.z_offset = None
+
+        self.widgets['zposition'] = Gtk.Label("Z: ?")
+
+        pos = self._gtk.HomogeneousGrid()
+        pos.attach(self.widgets['zposition'], 0, 1, 2, 1)
+        if self.z_offset is not None:
+            self.widgets['zoffset'] = Gtk.Label("?")
+            pos.attach(Gtk.Label(_("Probe Offset") + ": "), 0, 2, 2, 1)
+            pos.attach(Gtk.Label(_("Saved")), 0, 3, 1, 1)
+            pos.attach(Gtk.Label(_("New")), 1, 3, 1, 1)
+            pos.attach(Gtk.Label(str(round(float(self.z_offset), 2))), 0, 4, 1, 1)
+            pos.attach(self.widgets['zoffset'], 1, 4, 1, 1)
 
         self.widgets['zpos'] = self._gtk.ButtonImage('z-farther', _("Raise Nozzle"), 'color4')
         self.widgets['zpos'].connect("clicked", self.move, "+")
@@ -118,6 +130,7 @@ class ZCalibratePanel(ScreenPanel):
         distances.pack_start(self.widgets['move_dist'], True, True, 0)
         distances.pack_start(distgrid, True, True, 0)
 
+        grid = Gtk.Grid()
         grid.set_column_homogeneous(True)
         if self._screen.vertical_mode:
             grid.attach(self.widgets['zpos'], 0, 1, 1, 1)
@@ -214,27 +227,31 @@ class ZCalibratePanel(ScreenPanel):
 
         if action == "notify_status_update":
             if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
-                self.widgets['zposition'].set_text("?")
+                self.widgets['zposition'].set_text("Z: ?")
             elif "toolhead" in data and "position" in data['toolhead']:
                 self.updatePosition(data['toolhead']['position'])
         elif action == "notify_gcode_response":
-            if "unknown" in data.lower():
+            data = data.lower()
+            logging.info(data)
+            if "unknown" in data:
                 self.buttons_not_calibrating()
-            elif "save_config" in data.lower():
+            elif "save_config" in data:
                 self.buttons_not_calibrating()
                 self._screen.show_popup_message(_("Calibrated, save configuration to make it permanent"), level=1)
-            elif "out of range" in data.lower():
+            elif "out of range" in data:
                 self._screen.show_popup_message("%s" % data)
                 self.buttons_not_calibrating()
-            elif "fail" in data.lower() and "use testz" in data.lower():
+            elif "fail" in data and "use testz" in data:
                 self._screen.show_popup_message(_("Failed, adjust position first"))
                 self.buttons_not_calibrating()
-            elif "use testz" in data.lower() or "use abort" in data.lower() or "z position" in data.lower():
+            elif "use testz" in data or "use abort" in data or "z position" in data:
                 self.buttons_calibrating()
         return
 
     def updatePosition(self, position):
-        self.widgets['zposition'].set_text(str(round(position[2], 2)))
+        self.widgets['zposition'].set_text("Z: " + str(round(position[2], 2)))
+        if self.z_offset is not None:
+            self.widgets['zoffset'].set_text(str(round(position[2] + float(self.z_offset), 2)))
 
     def change_distance(self, widget, distance):
         if self.distance == distance:
