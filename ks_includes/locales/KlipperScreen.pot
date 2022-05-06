@@ -323,7 +323,7 @@ msgstr ""
 msgid "Main Menu"
 msgstr ""
 
-msgid "Max Accelation"
+msgid "Max Acceleration"
 msgstr ""
 
 msgid "Max Acceleration to Deceleration"
