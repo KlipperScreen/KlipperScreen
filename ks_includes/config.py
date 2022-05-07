@@ -443,10 +443,10 @@ class KlipperScreenConfig:
             return False
         cfg = self.config[name]
         item = {
-            "extruder": cfg.getint("extruder", 0),
-            "bed": cfg.getint("bed", 0),
-            "heater_generic": cfg.getint("heater_generic", 0),
-            "temperature_fan": cfg.getint("temperature_fan", 0),
+            "extruder": cfg.getint("extruder", None),
+            "bed": cfg.getint("bed", None),
+            "heater_generic": cfg.getint("heater_generic", None),
+            "temperature_fan": cfg.getint("temperature_fan", None),
             "gcode": cfg.get("gcode", None)
         }
         return item

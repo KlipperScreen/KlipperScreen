@@ -232,26 +232,28 @@ class TemperaturePanel(ScreenPanel):
                     MAX_TEMP = int(float(self._printer.get_config_section(heater)['max_temp']))
                     if heater.startswith('extruder'):
                         target = self.preheat_options[setting]["extruder"]
-                        if target > 0 and target <= MAX_TEMP:
+                        if target is not None and target >= 0 and target <= MAX_TEMP:
                             self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), target)
                     elif heater.startswith('heater_bed'):
                         target = self.preheat_options[setting]["bed"]
-                        if target > 0 and target <= MAX_TEMP:
+                        if target is not None and target >= 0 and target <= MAX_TEMP:
                             self._screen._ws.klippy.set_bed_temp(target)
                     elif heater.startswith('heater_generic '):
                         target = self.preheat_options[setting]["heater_generic"]
-                        if target > 0 and target <= MAX_TEMP:
+                        if target is not None and target >= 0 and target <= MAX_TEMP:
                             self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), target)
                     elif heater.startswith('temperature_fan '):
                         target = self.preheat_options[setting]["temperature_fan"]
-                        if target > 0 and target <= MAX_TEMP:
+                        if target is not None and target >= 0 and target <= MAX_TEMP:
                             self._screen._ws.klippy.set_temp_fan_temp(" ".join(heater.split(" ")[1:]), target)
                     else:
                         logging.info("Unknown heater: %s" % heater)
                         self._screen.show_popup_message(_("Unknown Heater") + " " + heater)
+                    if target is None:
+                        continue
                     if target <= MAX_TEMP:
-                        if target > 0:
-                            self._printer.set_dev_stat(heater, "target", int(target))
+                        if target >= 0:
+                            self._printer.set_dev_stat(heater, "target", target)
                             logging.info("Setting %s to %d" % (heater, target))
                     else:
                         self._screen.show_popup_message(_("Can't set above the maximum:") + (" %s" % MAX_TEMP))
