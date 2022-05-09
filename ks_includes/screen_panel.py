@@ -57,11 +57,11 @@ class ScreenPanel:
     def get_content(self):
         return self.content
 
-    def get_file_image(self, filename, width=1.6, height=1.6):
+    def get_file_image(self, filename, width=1, height=1, small=False):
         if not self._files.has_thumbnail(filename):
             return None
 
-        loc = self._files.get_thumbnail_location(filename)
+        loc = self._files.get_thumbnail_location(filename, small)
         if loc is None:
             return None
         if loc[0] == "file":
