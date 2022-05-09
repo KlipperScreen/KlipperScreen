@@ -11,11 +11,6 @@ class KlippyFiles():
         self.callbacks = []
         self.files = {}
         self.filelist = []
-        self.thumbnail_dir = "/tmp/.KS-thumbnails"
-
-        if not os.path.exists(self.thumbnail_dir):
-            os.makedirs(self.thumbnail_dir)
-
         self.gcodes_path = None
 
     def initialize(self):
@@ -23,7 +18,7 @@ class KlippyFiles():
         if "virtual_sdcard" in self._screen.printer.get_config_section_list():
             vsd = self._screen.printer.get_config_section("virtual_sdcard")
             if "path" in vsd:
-                self.gcodes_path = vsd['path']
+                self.gcodes_path = os.path.expanduser(vsd['path'])
         logging.info("Gcodes path: %s" % self.gcodes_path)
 
     def reset(self):
@@ -31,7 +26,6 @@ class KlippyFiles():
         self.callbacks = None
         self.files = None
         self.filelist = None
-        self.thumbnail_dir = None
         self.gcodes_path = None
         self._screen = None
 
