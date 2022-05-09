@@ -150,8 +150,11 @@ class KlippyFiles():
             return True
         return False
 
-    def get_thumbnail_location(self, filename):
+    def get_thumbnail_location(self, filename, small=False):
         thumb = self.files[filename]['thumbnails'][0]
+        if small and len(self.files[filename]['thumbnails']) > 1:
+            if self.files[filename]['thumbnails'][0]['width'] > self.files[filename]['thumbnails'][1]['width']:
+                thumb = self.files[filename]['thumbnails'][1]
         if thumb['local'] is False:
             return ['http', thumb['path']]
         return ['file', thumb['path']]

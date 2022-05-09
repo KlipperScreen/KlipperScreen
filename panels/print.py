@@ -212,7 +212,7 @@ class PrintPanel(ScreenPanel):
             file.set_vexpand(False)
 
             icon = Gtk.Image()
-            pixbuf = self.get_file_image(filepath)
+            pixbuf = self.get_file_image(filepath, small=True)
             if pixbuf is not None:
                 icon.set_from_pixbuf(pixbuf)
             else:
