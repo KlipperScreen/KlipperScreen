@@ -70,7 +70,6 @@ class FWRetractionPanel(ScreenPanel):
                 if opt in data["firmware_retraction"]:
                     self.update_option(opt, data["firmware_retraction"][opt])
         elif action == "notify_gcode_response":
-            logging.info("data")
             # // RETRACT_LENGTH=0.00000 RETRACT_SPEED=20.00000 UNRETRACT_EXTRA_LENGTH=0.00000 UNRETRACT_SPEED=10.00000
             result = re.match(
                 "^// [RETRACT_LENGTH= ]+([\\-0-9\\.]+)" +
@@ -99,8 +98,6 @@ class FWRetractionPanel(ScreenPanel):
 
     def add_option(self, option, optname, units, value, digits, maxval):
         logging.info("Adding option: %s" % option)
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
 
         name = Gtk.Label()
         name.set_markup("<big><b>%s</b></big> (%s)" % (optname, units))
@@ -110,11 +107,12 @@ class FWRetractionPanel(ScreenPanel):
         name.set_valign(Gtk.Align.CENTER)
         name.set_line_wrap(True)
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-
-        adj = Gtk.Adjustment(0, 0, value, 1, 5, 0)
+        if option in ["retract_speed", "unretract_speed"]:
+            adj = Gtk.Adjustment(0, 1, maxval, 1, 5, 0)
+        else:
+            adj = Gtk.Adjustment(0, 0, maxval, 1, 5, 0)
         self.values[option] = value
         scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
-        scale.set_range(0, maxval)
         scale.set_value(self.values[option])
         scale.set_digits(digits)
         scale.set_hexpand(True)
@@ -122,15 +120,18 @@ class FWRetractionPanel(ScreenPanel):
         scale.get_style_context().add_class("option_slider")
         scale.connect("button-release-event", self.set_opt_value, option)
 
-        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        labels.add(name)
-        labels.add(scale)
+        reset = self._gtk.ButtonImage("refresh", None, "color1")
+        reset.connect("clicked", self.reset_value, option)
+        reset.set_hexpand(False)
 
-        dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        dev.set_hexpand(True)
-        dev.set_vexpand(False)
-        dev.add(labels)
-        frame.add(dev)
+        item = Gtk.Grid()
+        item.attach(name, 0, 0, 2, 1)
+        item.attach(scale, 0, 1, 1, 1)
+        item.attach(reset, 1, 1, 1, 1)
+
+        frame = Gtk.Frame()
+        frame.get_style_context().add_class("frame-item")
+        frame.add(item)
 
         self.list[option] = {
             "row": frame,
@@ -140,6 +141,12 @@ class FWRetractionPanel(ScreenPanel):
         pos = sorted(self.list).index(option)
         self.grid.attach(self.list[option]['row'], 0, pos, 1, 1)
         self.grid.show_all()
+
+    def reset_value(self, widget, option):
+        for x in self.options:
+            if x["option"] == option:
+                self.update_option(option, x["value"])
+        self.set_opt_value(None, None, option)
 
     def set_opt_value(self, widget, event, opt):
         value = self.list[opt]['scale'].get_value()
