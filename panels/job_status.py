@@ -14,7 +14,7 @@ def create_panel(*args):
 
 class JobStatusPanel(ScreenPanel):
     is_paused = False
-    filename = state_timeout = prev_pos = prev_gpos = vel_timeout = None
+    filename = state_timeout = prev_pos = prev_gpos = vel_timeout = animation_timeout = None
     file_metadata = labels = {}
     state = "standby"
     timeleft_type = "auto"
@@ -803,9 +803,34 @@ class JobStatusPanel(ScreenPanel):
 
     def update_filename(self):
         self.filename = self._printer.get_stat('print_stats', 'filename')
-        self.update_text("file", os.path.splitext(self._printer.get_stat('print_stats', 'filename'))[0])
+        self.update_text("file", os.path.splitext(self.filename)[0])
+        self.filename_label = {
+            "complete": self.labels['file'].get_label(),
+            "current": self.labels['file'].get_label(),
+            "position": 0,
+            "limit": 24,
+            "length": len(self.labels['file'].get_label())
+        }
+
+        if self.animation_timeout is None:
+            # if self.labels['file'].is_ellipsized(): <- currently this doesn't work
+            if (self.filename_label['length'] - self.filename_label['limit']) > 0:
+                self.animation_timeout = GLib.timeout_add_seconds(1, self.animate_label)
         self.update_percent_complete()
         self.update_file_metadata()
+
+    def animate_label(self):
+        pos = self.filename_label['position']
+        current = self.filename_label['current']
+        complete = self.filename_label['complete']
+
+        if pos > (self.filename_label['length'] - self.filename_label['limit']):
+            self.filename_label['position'] = 0
+            self.labels['file'].set_label(complete)
+        else:
+            self.labels['file'].set_label(current[pos:self.filename_label['length']])
+            self.filename_label['position'] += 1
+        return True
 
     def update_file_metadata(self):
         if self._files.file_metadata_exists(self.filename):
