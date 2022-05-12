@@ -269,6 +269,8 @@ class KlipperScreen(Gtk.Window):
             requested_updates['objects'][h] = ["target", "temperature"]
         for f in self.printer.get_fans():
             requested_updates['objects'][f] = ["speed"]
+        for f in self.printer.get_filament_sensors():
+            requested_updates['objects'][f] = ["enabled", "filament_detected"]
 
         self._ws.klippy.object_subscription(requested_updates)
 
@@ -970,13 +972,11 @@ class KlipperScreen(Gtk.Window):
         self.printer.reinit(printer_info['result'], config['result']['status'])
 
         self.ws_subscribe()
-        extra_items = []
-        for extruder in self.printer.get_tools():
-            extra_items.append(extruder)
-        for h in self.printer.get_heaters():
-            extra_items.append(h)
-        for f in self.printer.get_fans():
-            extra_items.append(f)
+        extra_items = (self.printer.get_tools()
+                       + self.printer.get_heaters()
+                       + self.printer.get_fans()
+                       + self.printer.get_filament_sensors()
+                       )
 
         data = self.apiclient.send_request("printer/objects/query?" + "&".join(PRINTER_BASE_STATUS_OBJECTS +
                                            extra_items))

@@ -476,6 +476,17 @@ popover button {
     background-color: darkred;
 }
 
+.filament_sensor {
+    border-radius: 3em;
+}
+.filament_sensor_detected {
+    background-color: darkgreen;
+}
+
+.filament_sensor_empty {
+    background-color: darkred;
+}
+
 /* Hardcoded values until creation of dynamic CSS updates */
 .graph_label_hidden {padding-left: .9em;} /* .4em on top of normal button padding */
 .graph_label_extruder {border-left-width: .4em; border-left-style: solid;}
