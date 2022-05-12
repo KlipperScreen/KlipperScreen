@@ -2,7 +2,7 @@ import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, Pango
 
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
@@ -21,8 +21,6 @@ class ExtrudePanel(ScreenPanel):
         self.find_gcode_macros()
         self.speed = 1
         self.speeds = ['1', '2', '5', '25']
-
-        grid = Gtk.Grid()
 
         self.labels['extrude'] = self._gtk.ButtonImage("extrude", _("Extrude"), "color4")
         self.labels['extrude'].connect("clicked", self.extrude, "+")
@@ -59,19 +57,7 @@ class ExtrudePanel(ScreenPanel):
                 extgrid.attach(self.labels[extruder], i, 0, 1, 1)
         if i < (limit - 1):
             extgrid.attach(self.labels['temperature'], i+1, 0, 1, 1)
-
-
-        grid.attach(extgrid, 0, 0, 4, 1)
-        if self._screen.vertical_mode:
-            grid.attach(self.labels['extrude'], 0, 1, 2, 1)
-            grid.attach(self.labels['retract'], 2, 1, 2, 1)
-            grid.attach(self.labels['load'], 0, 2, 2, 1)
-            grid.attach(self.labels['unload'], 2, 2, 2, 1)
-        else:
-            grid.attach(self.labels['extrude'], 0, 1, 1, 1)
-            grid.attach(self.labels['load'], 1, 1, 1, 1)
-            grid.attach(self.labels['unload'], 2, 1, 1, 1)
-            grid.attach(self.labels['retract'], 3, 1, 1, 1)
+        i += 1
 
         distgrid = Gtk.Grid()
         j = 0
@@ -122,13 +108,62 @@ class ExtrudePanel(ScreenPanel):
         speedbox.pack_start(self.labels['extrude_speed'], True, True, 0)
         speedbox.add(speedgrid)
 
+        filament_sensors = self._printer.get_filament_sensors()
+        if len(filament_sensors) > 0:
+            sensors = Gtk.Grid()
+            sensors.set_column_spacing(5)
+            sensors.set_row_spacing(5)
+            sensors.set_halign(Gtk.Align.CENTER)
+            sensors.set_valign(Gtk.Align.CENTER)
+            for s, x in enumerate(filament_sensors):
+                if s > (limit):
+                    break
+                name = x[23:].strip()
+                self.labels[x] = {
+                    'label': Gtk.Label(name.capitalize().replace('_', ' ')),
+                    'switch': Gtk.Switch(),
+                    'box': Gtk.Box()
+                }
+                self.labels[x]['label'].set_halign(Gtk.Align.CENTER)
+                self.labels[x]['label'].set_hexpand(True)
+                self.labels[x]['label'].set_ellipsize(True)
+                self.labels[x]['label'].set_ellipsize(Pango.EllipsizeMode.END)
+                self.labels[x]['switch'].set_property("width-request", round(self._gtk.get_font_size()*2))
+                self.labels[x]['switch'].set_property("height-request", round(self._gtk.get_font_size()))
+                self.labels[x]['switch'].set_active(self._printer.get_dev_stat(x, "enabled"))
+                self.labels[x]['switch'].connect("notify::active", self.enable_disable_fs, name, x)
+                self.labels[x]['box'].pack_start(self.labels[x]['label'], True, True, 5)
+                self.labels[x]['box'].pack_start(self.labels[x]['switch'], False, False, 5)
+                self.labels[x]['box'].get_style_context().add_class("filament_sensor")
+                self.labels[x]['box'].set_hexpand(True)
+                if self._printer.get_dev_stat(x, "filament_detected"):
+                    self.labels[x]['box'].get_style_context().add_class("filament_sensor_detected")
+                else:
+                    self.labels[x]['box'].get_style_context().add_class("filament_sensor_empty")
+                sensors.attach(self.labels[x]['box'], s, 0, 1, 1)
+
+        grid = Gtk.Grid()
         grid.set_column_homogeneous(True)
+        grid.attach(extgrid, 0, 0, 4, 1)
+
         if self._screen.vertical_mode:
+            grid.attach(self.labels['extrude'], 0, 1, 2, 1)
+            grid.attach(self.labels['retract'], 2, 1, 2, 1)
+            grid.attach(self.labels['load'], 0, 2, 2, 1)
+            grid.attach(self.labels['unload'], 2, 2, 2, 1)
             grid.attach(distbox, 0, 3, 4, 1)
             grid.attach(speedbox, 0, 4, 4, 1)
+            if len(filament_sensors) > 0:
+                grid.attach(sensors, 0, 5, 4, 1)
         else:
-            grid.attach(distbox, 0, 2, 2, 1)
-            grid.attach(speedbox, 2, 2, 2, 1)
+            grid.attach(self.labels['extrude'], 0, 2, 1, 1)
+            grid.attach(self.labels['load'], 1, 2, 1, 1)
+            grid.attach(self.labels['unload'], 2, 2, 1, 1)
+            grid.attach(self.labels['retract'], 3, 2, 1, 1)
+            grid.attach(distbox, 0, 3, 2, 1)
+            grid.attach(speedbox, 2, 3, 2, 1)
+            if len(filament_sensors) > 0:
+                grid.attach(sensors, 0, 4, 4, 1)
 
         self.content.add(grid)
 
@@ -149,6 +184,22 @@ class ExtrudePanel(ScreenPanel):
                 self.labels[extruder].get_style_context().remove_class("button_active")
             self.current_extruder = data["toolhead"]["extruder"]
             self.labels[self.current_extruder].get_style_context().add_class("button_active")
+
+        for x in self._printer.get_filament_sensors():
+            if x in data:
+                if 'enabled' in data[x]:
+                    self._printer.set_dev_stat(x, "enabled", data[x]['enabled'])
+                    self.labels[x]['switch'].set_active(data[x]['enabled'])
+                    logging.info("%s Enabled: %s" % (x, data[x]['enabled']))
+                if 'filament_detected' in data[x]:
+                    self._printer.set_dev_stat(x, "filament_detected", data[x]['filament_detected'])
+                    if data[x]['filament_detected']:
+                        self.labels[x]['box'].get_style_context().remove_class("filament_sensor_empty")
+                        self.labels[x]['box'].get_style_context().add_class("filament_sensor_detected")
+                    else:
+                        self.labels[x]['box'].get_style_context().remove_class("filament_sensor_detected")
+                        self.labels[x]['box'].get_style_context().add_class("filament_sensor_empty")
+                    logging.info("%s: Filament detected: %s" % (x, data[x]['filament_detected']))
 
     def change_distance(self, widget, distance):
         if self.distance == distance:
@@ -217,3 +268,13 @@ class ExtrudePanel(ScreenPanel):
             if macro == "UNLOAD_FILAMENT":
                 logging.info("Found %s" % macro)
                 self.unload_filament = True
+
+    def enable_disable_fs(self, switch, gparams, name, x):
+        if switch.get_active():
+            self._printer.set_dev_stat(x, "enabled", True)
+            self._screen._ws.klippy.gcode_script("SET_FILAMENT_SENSOR SENSOR=" + name + " ENABLE=1")
+        else:
+            self._printer.set_dev_stat(x, "enabled", False)
+            self._screen._ws.klippy.gcode_script("SET_FILAMENT_SENSOR SENSOR=" + name + " ENABLE=0")
+            self.labels[x]['box'].get_style_context().remove_class("filament_sensor_empty")
+            self.labels[x]['box'].get_style_context().remove_class("filament_sensor_detected")
