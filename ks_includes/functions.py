@@ -64,7 +64,8 @@ def get_wireless_interfaces():
     try:
         p = subprocess.Popen(["iwconfig"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         result = p.stdout.read().decode('ascii').split('\n')
-    except Exception:
+    except Exception as e:
+        logging.critical(e, exc_info=True)
         logging.info("Error with running iwconfig command")
         return None
     interfaces = []

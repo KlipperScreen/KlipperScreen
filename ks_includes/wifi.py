@@ -50,8 +50,9 @@ class WifiManager():
             self.soc = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
             self.soc.bind(KS_SOCKET_FILE)
             self.soc.connect("/var/run/wpa_supplicant/%s" % interface)
-        except Exception:
-            logging.info("Error connecting to wifi socket: %s" % interface)
+        except Exception as e:
+            logging.critical(e, exc_info=True)
+            logging.error("Error connecting to wifi socket: %s" % interface)
             return
 
         self.wpa_thread = WpaSocket(self, self.queue, self.callback)
@@ -324,7 +325,8 @@ class WpaSocket(Thread):
         while self._stop_loop is False:
             try:
                 msg = self.soc.recv(4096).decode().strip()
-            except Exception:
+            except Exception as e:
+                logging.critical(e, exc_info=True)
                 # TODO: Socket error
                 continue
             if msg.startswith("<"):
