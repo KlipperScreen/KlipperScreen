@@ -74,7 +74,8 @@ class KlippyWebsocket(threading.Thread):
                         _("Retry #%s") % self.reconnect_count)
                 return False
             token = self._screen.apiclient.get_oneshot_token()
-        except Exception:
+        except Exception as e:
+            logging.critical(e, exc_info=True)
             logging.debug("Unable to get oneshot token")
             return False
 
@@ -86,7 +87,8 @@ class KlippyWebsocket(threading.Thread):
         try:
             logging.debug("Starting websocket thread")
             self._wst.start()
-        except Exception:
+        except Exception as e:
+            logging.critical(e, exc_info=True)
             logging.debug("Error starting web socket")
 
     def close(self):
