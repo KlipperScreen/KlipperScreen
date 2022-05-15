@@ -104,6 +104,10 @@ class MenuPanel(ScreenPanel):
         if enable is False:
             return False
 
+        if enable == "{{ moonraker_connected }}":
+            logging.info("moonraker is_connected %s", self._screen._ws.is_connected())
+            return self._screen._ws.is_connected()
+
         if not self.j2_data:
             self.j2_data = self._printer.get_printer_status_data()
         try:
