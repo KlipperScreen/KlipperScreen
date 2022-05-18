@@ -2,7 +2,7 @@ import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gdk, Gtk, Pango
 
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
@@ -21,6 +21,7 @@ class MovePanel(ScreenPanel):
 
     def initialize(self, panel_name):
         _ = self.lang.gettext
+        self.settings = {}
 
         grid = self._gtk.HomogeneousGrid()
 
@@ -115,23 +116,55 @@ class MovePanel(ScreenPanel):
 
         self.labels["1"].set_active(True)
 
-        bottomgrid = self._gtk.HomogeneousGrid()
-        bottomgrid.set_direction(Gtk.TextDirection.LTR)
         self.labels['pos_x'] = Gtk.Label("X: 0")
         self.labels['pos_y'] = Gtk.Label("Y: 0")
         self.labels['pos_z'] = Gtk.Label("Z: 0")
+        adjust = self._gtk.ButtonImage("settings", None, "color2", 1, Gtk.PositionType.LEFT, False)
+        adjust.connect("clicked", self.load_menu, 'options')
+        adjust.set_hexpand(False)
+        self.labels['move_dist'] = Gtk.Label(_("Move Distance (mm)"))
+
+        bottomgrid = self._gtk.HomogeneousGrid()
+        bottomgrid.set_direction(Gtk.TextDirection.LTR)
         bottomgrid.attach(self.labels['pos_x'], 0, 0, 1, 1)
         bottomgrid.attach(self.labels['pos_y'], 1, 0, 1, 1)
         bottomgrid.attach(self.labels['pos_z'], 2, 0, 1, 1)
-        self.labels['move_dist'] = Gtk.Label(_("Move Distance (mm)"))
+        bottomgrid.attach(self.labels['move_dist'], 0, 1, 3, 1)
+        bottomgrid.attach(adjust, 3, 0, 1, 2)
 
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        box.pack_start(grid, True, True, 0)
-        box.pack_start(bottomgrid, True, True, 0)
-        box.pack_start(self.labels['move_dist'], True, True, 0)
-        box.pack_start(distgrid, True, True, 0)
+        self.labels['main_box'] = Gtk.VBox()
+        self.labels['main_box'].set_vexpand(True)
+        self.labels['main_box'].pack_start(grid, True, True, 0)
+        self.labels['main_box'].pack_start(bottomgrid, True, True, 0)
+        self.labels['main_box'].pack_start(distgrid, True, True, 0)
 
-        self.content.add(box)
+        self.menu = ['main_box']
+        self.content.add(self.labels['main_box'])
+
+        self.labels['options_box'] = self.create_box('options')
+
+        printer_cfg = self._printer.get_config_section("printer")
+        max_velocity = int(float(printer_cfg["max_velocity"]))
+        if "max_z_velocity" in printer_cfg:
+            max_z_velocity = int(float(printer_cfg["max_z_velocity"]))
+        else:
+            max_z_velocity = max_velocity
+
+        configurable_options = [
+            {"invert_x": {"section": "main", "name": _("Invert X"), "type": "binary", "value": "False"}},
+            {"invert_y": {"section": "main", "name": _("Invert Y"), "type": "binary", "value": "False"}},
+            {"invert_z": {"section": "main", "name": _("Invert Z"), "type": "binary", "value": "False"}},
+            {"move_speed_xy": {
+                "section": "main", "name": _("XY Speed (mm/s)"), "type": "scale", "value": "50",
+                "range": [1, max_velocity], "step": 1}},
+            {"move_speed_z": {
+                "section": "main", "name": _("Z Speed (mm/s)"), "type": "scale", "value": "10",
+                "range": [1, max_z_velocity], "step": 1}}
+        ]
+
+        for option in configurable_options:
+            name = list(option)[0]
+            self.add_option('options', self.settings, name, option[name])
 
     def process_update(self, action, data):
         if action != "notify_status_update":
@@ -200,3 +233,120 @@ class MovePanel(ScreenPanel):
                 "\nG90" if self._printer.get_stat("gcode_move", "absolute_coordinates") is True else ""
             )
         )
+
+    def add_option(self, boxname, opt_array, opt_name, option):
+        name = Gtk.Label()
+        name.set_markup("<big><b>%s</b></big>" % (option['name']))
+        name.set_hexpand(True)
+        name.set_vexpand(True)
+        name.set_halign(Gtk.Align.START)
+        name.set_valign(Gtk.Align.CENTER)
+        name.set_line_wrap(True)
+        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+
+        dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        dev.set_hexpand(True)
+        dev.set_vexpand(False)
+        dev.set_valign(Gtk.Align.CENTER)
+        dev.add(name)
+
+        if option['type'] == "binary":
+            box = Gtk.Box()
+            box.set_vexpand(False)
+            switch = Gtk.Switch()
+            switch.set_hexpand(False)
+            switch.set_vexpand(False)
+            switch.set_active(self._config.get_config().getboolean(option['section'], opt_name))
+            switch.connect("notify::active", self.switch_config_option, option['section'], opt_name)
+            switch.set_property("width-request", round(self._gtk.get_font_size()*7))
+            switch.set_property("height-request", round(self._gtk.get_font_size()*3.5))
+            box.add(switch)
+            dev.add(box)
+        elif option['type'] == "scale":
+            dev.set_orientation(Gtk.Orientation.VERTICAL)
+            val = int(self._config.get_config().get(option['section'], opt_name, fallback=option['value']))
+            adj = Gtk.Adjustment(val, option['range'][0], option['range'][1], option['step'], option['step']*5)
+            scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
+            scale.set_hexpand(True)
+            scale.set_digits(0)
+            scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
+            scale.set_property("width-request", round(self._screen.width/2.2))
+            dev.add(scale)
+
+        frame = Gtk.Frame()
+        frame.get_style_context().add_class("frame-item")
+        frame.add(dev)
+        frame.show_all()
+
+        opt_array[opt_name] = {
+            "name": option['name'],
+            "row": frame
+        }
+
+        opts = sorted(opt_array)
+        opts = sorted(list(opt_array), key=lambda x: opt_array[x]['name'])
+        pos = opts.index(opt_name)
+
+        self.labels[boxname].insert_row(pos)
+        self.labels[boxname].attach(opt_array[opt_name]['row'], 0, pos, 1, 1)
+        self.labels[boxname].show_all()
+
+    def load_menu(self, widget, name):
+        if ("%s_box" % name) not in self.labels:
+            return
+
+        for child in self.content.get_children():
+            self.content.remove(child)
+
+        self.menu.append('%s_box' % name)
+        self.content.add(self.labels[self.menu[-1]])
+        self.content.show_all()
+
+    def unload_menu(self, widget=None):
+        logging.debug("self.menu: %s" % self.menu)
+        if len(self.menu) <= 1 or self.menu[-2] not in self.labels:
+            return
+
+        self.menu.pop()
+        for child in self.content.get_children():
+            self.content.remove(child)
+        self.content.add(self.labels[self.menu[-1]])
+        self.content.show_all()
+
+    def create_box(self, name):
+        # Create a scroll window for the options
+        scroll = Gtk.ScrolledWindow()
+        scroll.set_property("overlay-scrolling", False)
+        scroll.set_vexpand(True)
+        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+
+        # Create a grid for all options
+        self.labels[name] = Gtk.Grid()
+        scroll.add(self.labels[name])
+
+        # Create a box to contain all of the above
+        box = Gtk.VBox(spacing=0)
+        box.set_vexpand(True)
+        box.pack_start(scroll, True, True, 0)
+        return box
+
+    def back(self):
+        if len(self.menu) > 1:
+            self.unload_menu()
+            return True
+        return False
+
+    def switch_config_option(self, switch, gparam, section, option):
+        logging.debug("[%s] %s toggled %s" % (section, option, switch.get_active()))
+        if section not in self._config.get_config().sections():
+            self._config.get_config().add_section(section)
+        self._config.set(section, option, "True" if switch.get_active() else "False")
+        self._config.save_user_config_options()
+
+    def scale_moved(self, widget, event, section, option):
+        logging.debug("[%s] %s changed to %s" % (section, option, widget.get_value()))
+        if section not in self._config.get_config().sections():
+            self._config.get_config().add_section(section)
+        self._config.set(section, option, str(int(widget.get_value())))
+        self._config.save_user_config_options()
