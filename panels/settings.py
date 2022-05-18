@@ -13,12 +13,10 @@ class SettingsPanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
         self.settings = {}
-        self.macros = {}
         self.menu_cur = 'main_box'
         self.menu = ['main_box']
 
         self.labels['main_box'] = self.create_box('main')
-        self.labels['macros_box'] = self.create_box('macros')
 
         printbox = Gtk.Box(spacing=0)
         printbox.set_vexpand(False)
@@ -26,11 +24,6 @@ class SettingsPanel(ScreenPanel):
         self.labels['printers_box'] = self.create_box('printers', printbox)
 
         options = self._config.get_configurable_options().copy()
-        options.append({"macros": {
-            "name": _("Displayed Macros"),
-            "type": "menu",
-            "menu": "macros"}
-        })
         options.append({"printers": {
             "name": _("Printer Connections"),
             "type": "menu",
@@ -40,20 +33,6 @@ class SettingsPanel(ScreenPanel):
         for option in options:
             name = list(option)[0]
             self.add_option('main', self.settings, name, option[name])
-
-        for macro in self._printer.get_config_section_list("gcode_macro "):
-            macro = macro[12:]
-            # Support for hiding macros by name
-            if macro.startswith("_"):
-                continue
-            self.macros[macro] = {
-                "name": macro,
-                "section": "displayed_macros %s" % self._screen.connected_printer,
-                "type": "macro"
-            }
-
-        for macro in list(self.macros):
-            self.add_option('macros', self.macros, macro, self.macros[macro])
 
         self.printers = {}
         for printer in self._config.get_printers():
@@ -81,14 +60,14 @@ class SettingsPanel(ScreenPanel):
         return False
 
     def create_box(self, name, insert=None):
-        # Create a scroll window for the macros
+        # Create a scroll window for the options
         scroll = Gtk.ScrolledWindow()
         scroll.set_property("overlay-scrolling", False)
         scroll.set_vexpand(True)
         scroll.add_events(Gdk.EventMask.TOUCH_MASK)
         scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
 
-        # Create a grid for all macros
+        # Create a grid for all options
         self.labels[name] = Gtk.Grid()
         scroll.add(self.labels[name])
 
@@ -125,16 +104,13 @@ class SettingsPanel(ScreenPanel):
         dev.set_valign(Gtk.Align.CENTER)
 
         dev.add(labels)
-        if option['type'] == "binary" or option['type'] == "macro":
+        if option['type'] == "binary":
             box = Gtk.Box()
             box.set_vexpand(False)
             switch = Gtk.Switch()
             switch.set_hexpand(False)
             switch.set_vexpand(False)
-            if option['type'] == "macro":
-                switch.set_active(self._config.get_config().getboolean(option['section'], opt_name, fallback=True))
-            else:
-                switch.set_active(self._config.get_config().getboolean(option['section'], opt_name))
+            switch.set_active(self._config.get_config().getboolean(option['section'], opt_name))
             switch.connect("notify::active", self.switch_config_option, option['section'], opt_name,
                            option['callback'] if "callback" in option else None)
             switch.set_property("width-request", round(self._gtk.get_font_size()*7))
@@ -242,14 +218,3 @@ class SettingsPanel(ScreenPanel):
         self._config.save_user_config_options()
         if callback is not None:
             callback(switch.get_active())
-
-    def add_gcode_option(self):
-        macros = self._screen.printer.get_gcode_macros()
-        for x in macros:
-            self.add_gcode_macro("macros", self.macros, x, {
-                "name": x[12:],
-                "type": binary
-            })
-
-    def run_gcode_macro(self, widget, macro):
-        self._screen._ws.klippy.gcode_script(macro)
