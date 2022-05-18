@@ -103,20 +103,14 @@ class KlipperScreenConfig:
         _n = self.lang.ngettext
 
         self.configurable_options = [
-            {"invert_x": {"section": "main", "name": _("Invert X"), "type": "binary", "value": "False"}},
-            {"invert_y": {"section": "main", "name": _("Invert Y"), "type": "binary", "value": "False"}},
-            {"invert_z": {"section": "main", "name": _("Invert Z"), "type": "binary", "value": "False"}},
             {"language": {"section": "main", "name": _("Language"), "type": "dropdown", "value": "system_lang",
                           "callback": screen.restart_warning, "options": [
                               {"name": _("System") + " " + _("(default)"), "value": "system_lang"}
             ]}},
-            {"move_speed_xy": {
-                "section": "main", "name": _("XY Move Speed (mm/s)"), "type": "scale", "value": "20",
-                "range": [5, 200], "step": 1}},
-            {"move_speed_z": {
-                "section": "main", "name": _("Z Move Speed (mm/s)"), "type": "scale", "value": "20",
-                "range": [5, 200], "step": 1}},
-            {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
+            {"theme": {
+                "section": "main", "name": _("Icon Theme"), "type": "dropdown",
+                "value": "z-bolt", "callback": screen.restart_warning, "options": [
+                    {"name": "Z-bolt" + " " + _("(default)"), "value": "z-bolt"}]}},
             {"print_estimate_method": {
                 "section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
                 "value": "auto", "options": [
@@ -129,10 +123,6 @@ class KlipperScreenConfig:
                 "value": "3600", "callback": screen.set_screenblanking_timeout, "options": [
                     {"name": _("Off"), "value": "off"}]
             }},
-            {"theme": {
-                "section": "main", "name": _("Icon Theme"), "type": "dropdown",
-                "value": "z-bolt", "callback": screen.restart_warning, "options": [
-                    {"name": "Z-bolt" + " " + _("(default)"), "value": "z-bolt"}]}},
             {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
             {"side_macro_shortcut": {
                 "section": "main", "name": _("Macro shortcut on sidebar"), "type": "binary",
@@ -152,13 +142,26 @@ class KlipperScreenConfig:
             {"print_estimate_compensation": {
                 "section": "main", "name": _("Slicer Time correction (%)"), "type": "scale", "value": "100",
                 "range": [50, 150], "step": 1}},
+
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
+
+        # Options that are in panels and shouldn't be added to the main settings
+        panel_options = [
+            {"invert_x": {"section": "main", "name": _("Invert X"), "type": None, "value": "False"}},
+            {"invert_y": {"section": "main", "name": _("Invert Y"), "type": None, "value": "False"}},
+            {"invert_z": {"section": "main", "name": _("Invert Z"), "type": None, "value": "False"}},
+            {"move_speed_xy": {"section": "main", "name": _("XY Move Speed (mm/s)"), "type": None, "value": "50"}},
+            {"move_speed_z": {"section": "main", "name": _("Z Move Speed (mm/s)"), "type": None, "value": "10"}},
+            {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
+        ]
+
+        self.configurable_options.extend(panel_options)
 
         lang_path = os.path.join(klipperscreendir, "ks_includes", "locales")
         langs = [d for d in os.listdir(lang_path) if not os.path.isfile(os.path.join(lang_path, d))]
         langs.sort()
-        lang_opt = self.configurable_options[3]['language']['options']
+        lang_opt = self.configurable_options[0]['language']['options']
 
         for lang in langs:
             lang_opt.append({"name": lang, "value": lang})
@@ -166,7 +169,7 @@ class KlipperScreenConfig:
         t_path = os.path.join(klipperscreendir, 'styles')
         themes = [d for d in os.listdir(t_path) if (not os.path.isfile(os.path.join(t_path, d)) and d != "z-bolt")]
         themes.sort()
-        theme_opt = self.configurable_options[9]['theme']['options']
+        theme_opt = self.configurable_options[1]['theme']['options']
 
         for theme in themes:
             theme_opt.append({"name": theme, "value": theme})
