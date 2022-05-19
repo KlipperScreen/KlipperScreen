@@ -132,6 +132,7 @@ class SettingsPanel(ScreenPanel):
             dropdown.set_entry_text_column(0)
             dev.add(dropdown)
         elif option['type'] == "scale":
+            dev.set_orientation(Gtk.Orientation.VERTICAL)
             val = int(self._config.get_config().get(option['section'], opt_name, fallback=option['value']))
             adj = Gtk.Adjustment(val, option['range'][0], option['range'][1], option['step'], option['step'] * 5)
             scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
