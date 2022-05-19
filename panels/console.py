@@ -109,11 +109,12 @@ class ConsolePanel(ScreenPanel):
     def add_gcode(self, type, time, message):
         if type == "command":
             color = COLORS['command']
-            message = '$ %s' % message
         elif message.startswith("!!"):
             color = COLORS['error']
+            message = message.replace("!! ", "")
         elif message.startswith("//"):
             color = COLORS['warning']
+            message = message.replace("// ", "")
         elif self.hidetemps and re.match('^(?:ok\\s+)?(B|C|T\\d*):', message):
             return
         else:
