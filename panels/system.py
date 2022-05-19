@@ -8,11 +8,13 @@ from datetime import datetime
 
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return SystemPanel(*args)
 
 
 ALLOWED_SERVICES = ["KlipperScreen", "MoonCord", "klipper", "moonraker"]
+
 
 class SystemPanel(ScreenPanel):
     def initialize(self, panel_name):
@@ -74,7 +76,6 @@ class SystemPanel(ScreenPanel):
                 logging.info("Updating program: %s " % prog)
                 self.update_program_info(prog)
 
-
                 infogrid.attach(self.labels[prog], 1, i, 1, 1)
                 self.labels[prog].get_style_context().add_class('updater-item')
                 i = i + 1
@@ -116,7 +117,6 @@ class SystemPanel(ScreenPanel):
             if 'application' in data:
                 self.labels['update_progress'].set_text(self.labels['update_progress'].get_text().strip() + "\n" +
                                                         data['message'] + "\n")
-                self.labels['update_progress'].set_ellipsize(True)
                 self.labels['update_progress'].set_ellipsize(Pango.EllipsizeMode.END)
                 adjustment = self.labels['update_scroll'].get_vadjustment()
                 adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size())
@@ -199,7 +199,7 @@ class SystemPanel(ScreenPanel):
                     grid.attach(label, 0, i, 1, 1)
                     i = i + 1
 
-                    details = Gtk.Label(label=c['message']+"\n\n\n")
+                    details = Gtk.Label(label=c['message'] + "\n\n\n")
                     details.set_line_wrap(True)
                     details.set_halign(Gtk.Align.START)
                     grid.attach(details, 0, i, 1, 1)
@@ -216,12 +216,11 @@ class SystemPanel(ScreenPanel):
                 label = Gtk.Label()
                 label.set_markup("  %s  " % c)
                 label.set_halign(Gtk.Align.START)
-                label.set_ellipsize(True)
                 label.set_ellipsize(Pango.EllipsizeMode.END)
                 pos = (j % 3)
                 grid.attach(label, pos, i, 1, 1)
                 j = j + 1
-                if (pos == 2):
+                if pos == 2:
                     i = i + 1
         elif "full" in info:
             label.set_markup("<b>" + _("Perform a full upgrade?") + "</b>")

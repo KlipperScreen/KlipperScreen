@@ -106,7 +106,7 @@ temperature_fan: 40
 gcode: MY_HEATSOAK_MACRO
 ```
 
-There is an special preheat setting named cooldown to do additional things when the _cooldown_ button is pressed
+There is a special preheat setting named cooldown to do additional things when the _cooldown_ button is pressed
 for example:
 
 ```

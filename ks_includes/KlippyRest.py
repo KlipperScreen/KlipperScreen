@@ -2,6 +2,7 @@ import json
 import requests
 import logging
 
+
 class KlippyRest:
     def __init__(self, ip, port=7125, api_key=False):
         self.ip = ip

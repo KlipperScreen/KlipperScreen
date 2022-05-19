@@ -8,8 +8,10 @@ from gi.repository import Gtk
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return BedLevelPanel(*args)
+
 
 class BedLevelPanel(ScreenPanel):
     x_offset = 0
@@ -47,19 +49,19 @@ class BedLevelPanel(ScreenPanel):
             logging.debug("%d bed_screws not supported: calculating 4 locations", nscrews)
             xconf = self._screen.printer.get_config_section("stepper_x")
             yconf = self._screen.printer.get_config_section("stepper_y")
-            x = int(int(xconf['position_max'])/4)
-            y = int(int(yconf['position_max'])/4)
+            x = int(int(xconf['position_max']) / 4)
+            y = int(int(yconf['position_max']) / 4)
             self.screws = [
                 [x, y],
-                [x*3, y],
-                [x, y*3],
-                [x*3, y*3],
+                [x * 3, y],
+                [x, y * 3],
+                [x * 3, y * 3],
             ]
         else:
             self.screws = screws
 
         if (("bltouch" in self._screen.printer.get_config_section_list() or
-            "probe" in self._screen.printer.get_config_section_list()) and
+             "probe" in self._screen.printer.get_config_section_list()) and
                 config_section_name == "screws_tilt_adjust"):
             if "bltouch" in self._screen.printer.get_config_section_list():
                 bltouch = self._screen.printer.get_config_section("bltouch")
@@ -307,7 +309,7 @@ class BedLevelPanel(ScreenPanel):
                         self.labels[key].set_label(result.group(5))
                         break
                 self.response_count += 1
-                if self.response_count >= len(self.screws)-1:
+                if self.response_count >= len(self.screws) - 1:
                     self.labels['screws'].set_sensitive(True)
             else:
                 result = re.match(

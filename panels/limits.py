@@ -6,6 +6,7 @@ from gi.repository import Gdk, Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return LimitsPanel(*args)
 
@@ -30,14 +31,14 @@ class LimitsPanel(ScreenPanel):
         conf = self._printer.get_config_section("printer")
         self.options = [
             {"name": _("Max Acceleration"), "units": _("mm/s^2"), "option": "max_accel",
-                "max": self.stn(conf['max_accel'])},
+             "max": self.stn(conf['max_accel'])},
             {"name": _("Max Acceleration to Deceleration"), "units": _("mm/s^2"), "option": "max_accel_to_decel",
-                "max": self.stn(conf['max_accel_to_decel']) if "max_accel_to_decel" in conf else
-                round(self.stn(conf['max_accel'])/2)},
+             "max": self.stn(conf['max_accel_to_decel']) if "max_accel_to_decel" in conf else
+             round(self.stn(conf['max_accel']) / 2)},
             {"name": _("Max Velocity"), "units": _("mm/s"), "option": "max_velocity",
-                "max": self.stn(conf["max_velocity"])},
+             "max": self.stn(conf["max_velocity"])},
             {"name": _("Square Corner Velocity"), "units": _("mm/s"), "option": "square_corner_velocity",
-                "max": self.stn(conf['square_corner_velocity']) if "square_corner_velocity" in conf else 5}
+             "max": self.stn(conf['square_corner_velocity']) if "square_corner_velocity" in conf else 5}
         ]
 
         for opt in self.options:
@@ -50,7 +51,7 @@ class LimitsPanel(ScreenPanel):
         return int(float(str))
 
     def process_update(self, action, data):
-        if (action != "notify_status_update"):
+        if action != "notify_status_update":
             return
 
         for opt in self.limits:
@@ -132,10 +133,10 @@ class LimitsPanel(ScreenPanel):
         value = self.limits[opt]['scale'].get_value()
 
         if opt == "max_accel":
-            self._screen._ws.klippy.gcode_script("SET_VELOCITY_LIMIT ACCEL=%s" % (value))
+            self._screen._ws.klippy.gcode_script("SET_VELOCITY_LIMIT ACCEL=%s" % value)
         elif opt == "max_accel_to_decel":
-            self._screen._ws.klippy.gcode_script("SET_VELOCITY_LIMIT ACCEL_TO_DECEL=%s" % (value))
+            self._screen._ws.klippy.gcode_script("SET_VELOCITY_LIMIT ACCEL_TO_DECEL=%s" % value)
         elif opt == "max_velocity":
-            self._screen._ws.klippy.gcode_script("SET_VELOCITY_LIMIT VELOCITY=%s" % (value))
+            self._screen._ws.klippy.gcode_script("SET_VELOCITY_LIMIT VELOCITY=%s" % value)
         elif opt == "square_corner_velocity":
-            self._screen._ws.klippy.gcode_script("SET_VELOCITY_LIMIT SQUARE_CORNER_VELOCITY=%s" % (value))
+            self._screen._ws.klippy.gcode_script("SET_VELOCITY_LIMIT SQUARE_CORNER_VELOCITY=%s" % value)

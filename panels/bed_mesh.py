@@ -15,8 +15,10 @@ from matplotlib.ticker import LinearLocator
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return BedMeshPanel(*args)
+
 
 class BedMeshPanel(ScreenPanel):
     active_mesh = None
@@ -36,7 +38,6 @@ class BedMeshPanel(ScreenPanel):
         # Create a grid for all profiles
         self.labels['profiles'] = Gtk.Grid()
         scroll.add(self.labels['profiles'])
-
 
         addprofile = self._gtk.ButtonImage("increase", "  %s" % _("Add bed mesh profile"),
                                            "color1", .5, Gtk.PositionType.LEFT, False)
@@ -92,7 +93,7 @@ class BedMeshPanel(ScreenPanel):
         frame = Gtk.Frame()
 
         name = Gtk.Label()
-        name.set_markup("<big><b>%s</b></big>" % (profile))
+        name.set_markup("<big><b>%s</b></big>" % profile)
         name.set_hexpand(True)
         name.set_vexpand(True)
         name.set_halign(Gtk.Align.START)
@@ -177,7 +178,7 @@ class BedMeshPanel(ScreenPanel):
         if "default" in pl:
             pl.remove('default')
         profiles = sorted(pl)
-        pos = profiles.index(profile)+1 if profile != "default" else 0
+        pos = profiles.index(profile) + 1 if profile != "default" else 0
 
         self.labels['profiles'].insert_row(pos)
         self.labels['profiles'].attach(self.profiles[profile]['row'], 0, pos, 1, 1)
@@ -240,7 +241,7 @@ class BedMeshPanel(ScreenPanel):
         if "default" in pl:
             pl.remove('default')
         profiles = sorted(pl)
-        pos = profiles.index(profile)+1 if profile != "default" else 0
+        pos = profiles.index(profile) + 1 if profile != "default" else 0
         self.labels['profiles'].remove_row(pos)
         del self.profiles[profile]
 
@@ -287,7 +288,6 @@ class BedMeshPanel(ScreenPanel):
             save.set_hexpand(False)
             save.connect("clicked", self.create_profile)
 
-
             self.labels['profile_name'] = entry
             box.pack_start(pl, False, False, 5)
             box.pack_start(entry, True, True, 5)
@@ -324,19 +324,19 @@ class BedMeshPanel(ScreenPanel):
                 maxz_mesh = 0.5
             z_range = [minz_mesh, maxz_mesh]
             counts = [len(abm['mesh_matrix'][0]), len(abm['mesh_matrix'])]
-            deltas = [(x_range[1] - x_range[0]) / (counts[0]-1), (y_range[1] - y_range[0]) / (counts[1]-1)]
-            x = [(i*deltas[0])+x_range[0] for i in range(counts[0])]
-            y = [(i*deltas[0])+y_range[0] for i in range(counts[1])]
+            deltas = [(x_range[1] - x_range[0]) / (counts[0] - 1), (y_range[1] - y_range[0]) / (counts[1] - 1)]
+            x = [(i * deltas[0]) + x_range[0] for i in range(counts[0])]
+            y = [(i * deltas[0]) + y_range[0] for i in range(counts[1])]
             x, y = np.meshgrid(x, y)
             z = np.asarray(abm['mesh_matrix'])
         else:
             x_range = [int(bm['min_x']), int(bm['max_x'])]
             y_range = [int(bm['min_y']), int(bm['max_y'])]
             z_range = [min(min(bm['points'])), max(max(bm['points']))]
-            deltas = [(x_range[1] - x_range[0]) / (int(bm['x_count'])-1),
-                      (y_range[1] - y_range[0]) / (int(bm['y_count'])-1)]
-            x = [(i*deltas[0])+x_range[0] for i in range(bm['x_count'])]
-            y = [(i*deltas[0])+y_range[0] for i in range(bm['y_count'])]
+            deltas = [(x_range[1] - x_range[0]) / (int(bm['x_count']) - 1),
+                      (y_range[1] - y_range[0]) / (int(bm['y_count']) - 1)]
+            x = [(i * deltas[0]) + x_range[0] for i in range(bm['x_count'])]
+            y = [(i * deltas[0]) + y_range[0] for i in range(bm['y_count'])]
             x, y = np.meshgrid(x, y)
             z = np.asarray(bm['points'])
 
@@ -349,8 +349,8 @@ class BedMeshPanel(ScreenPanel):
         fig.add_axes(ax)
         surf = ax.plot_surface(x, y, z, cmap=cm.coolwarm, vmin=-0.1, vmax=0.1)
 
-        chartBox = ax.get_position()
-        ax.set_position([chartBox.x0, chartBox.y0+0.1, chartBox.width*.92, chartBox.height])
+        chartbox = ax.get_position()
+        ax.set_position([chartbox.x0, chartbox.y0 + 0.1, chartbox.width * .92, chartbox.height])
 
         ax.set_zlim(z_range[0], z_range[1])
         ax.zaxis.set_major_locator(LinearLocator(5))
@@ -381,7 +381,7 @@ class BedMeshPanel(ScreenPanel):
 
         alloc = canvas_box.get_allocation()
         canvas = FigureCanvas(fig)
-        canvas.set_size_request(alloc.width, self._screen.height/3*2)
+        canvas.set_size_request(alloc.width, self._screen.height / 3 * 2)
         canvas_box.add(canvas)
         canvas_box.show_all()
         # Remove the "matplotlib-canvas" class which forces a white background.
@@ -389,7 +389,6 @@ class BedMeshPanel(ScreenPanel):
         style_ctx = canvas.get_style_context()
         for css_class in style_ctx.list_classes():
             style_ctx.remove_class(css_class)
-
 
     def _close_dialog(self, widget, response):
         widget.destroy()

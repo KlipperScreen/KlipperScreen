@@ -1,6 +1,6 @@
 ## Create Translations
 
-You can use a editor such as [poedit](https://poedit.net/) to assist in translations. This guide will assume that you
+You can use an editor such as [poedit](https://poedit.net/) to assist in translations. This guide will assume that you
 will be using poedit.
 
 This guide will refer to `language designation`. This can be found from running `echo $LANG` on your pi, as long as you

@@ -5,6 +5,7 @@ from gi.repository import Gtk
 
 from ks_includes.KlippyGcodes import KlippyGcodes
 
+
 class ScreenPanel:
 
     def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
@@ -42,7 +43,7 @@ class ScreenPanel:
         if temp <= 0:
             return ""
         else:
-            return ("(%s)" % str(int(temp)))
+            return "(%s)" % str(int(temp))
 
     def format_temp(self, temp, places=1):
         if places == 0:

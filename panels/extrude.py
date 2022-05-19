@@ -7,8 +7,10 @@ from gi.repository import Gtk, Pango
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return ExtrudePanel(*args)
+
 
 class ExtrudePanel(ScreenPanel):
     distance = 5
@@ -56,40 +58,40 @@ class ExtrudePanel(ScreenPanel):
             if i < limit:
                 extgrid.attach(self.labels[extruder], i, 0, 1, 1)
         if i < (limit - 1):
-            extgrid.attach(self.labels['temperature'], i+1, 0, 1, 1)
+            extgrid.attach(self.labels['temperature'], i + 1, 0, 1, 1)
         i += 1
 
         distgrid = Gtk.Grid()
         j = 0
         for i in self.distances:
-            self.labels["dist"+str(i)] = self._gtk.ToggleButton(i)
-            self.labels["dist"+str(i)].connect("clicked", self.change_distance, i)
-            ctx = self.labels["dist"+str(i)].get_style_context()
+            self.labels["dist" + str(i)] = self._gtk.ToggleButton(i)
+            self.labels["dist" + str(i)].connect("clicked", self.change_distance, i)
+            ctx = self.labels["dist" + str(i)].get_style_context()
             if ((self._screen.lang_ltr is True and j == 0) or
-                    (self._screen.lang_ltr is False and j == len(self.distances)-1)):
+                    (self._screen.lang_ltr is False and j == len(self.distances) - 1)):
                 ctx.add_class("distbutton_top")
             elif ((self._screen.lang_ltr is False and j == 0) or
-                    (self._screen.lang_ltr is True and j == len(self.distances)-1)):
+                  (self._screen.lang_ltr is True and j == len(self.distances) - 1)):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
             if i == "5":
                 ctx.add_class("distbutton_active")
-            distgrid.attach(self.labels["dist"+str(i)], j, 0, 1, 1)
+            distgrid.attach(self.labels["dist" + str(i)], j, 0, 1, 1)
             j += 1
         self.labels["dist5"].set_active(True)
 
         speedgrid = Gtk.Grid()
         j = 0
         for i in self.speeds:
-            self.labels["speed"+str(i)] = self._gtk.ToggleButton(_(i))
-            self.labels["speed"+str(i)].connect("clicked", self.change_speed, i)
-            ctx = self.labels["speed"+str(i)].get_style_context()
+            self.labels["speed" + str(i)] = self._gtk.ToggleButton(_(i))
+            self.labels["speed" + str(i)].connect("clicked", self.change_speed, i)
+            ctx = self.labels["speed" + str(i)].get_style_context()
             if ((self._screen.lang_ltr is True and j == 0) or
-                    (self._screen.lang_ltr is False and j == len(self.speeds)-1)):
+                    (self._screen.lang_ltr is False and j == len(self.speeds) - 1)):
                 ctx.add_class("distbutton_top")
             elif ((self._screen.lang_ltr is False and j == 0) or
-                    (self._screen.lang_ltr is True and j == len(self.speeds)-1)):
+                  (self._screen.lang_ltr is True and j == len(self.speeds) - 1)):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
@@ -116,7 +118,7 @@ class ExtrudePanel(ScreenPanel):
             sensors.set_halign(Gtk.Align.CENTER)
             sensors.set_valign(Gtk.Align.CENTER)
             for s, x in enumerate(filament_sensors):
-                if s > (limit):
+                if s > limit:
                     break
                 name = x[23:].strip()
                 self.labels[x] = {
@@ -126,9 +128,8 @@ class ExtrudePanel(ScreenPanel):
                 }
                 self.labels[x]['label'].set_halign(Gtk.Align.CENTER)
                 self.labels[x]['label'].set_hexpand(True)
-                self.labels[x]['label'].set_ellipsize(True)
                 self.labels[x]['label'].set_ellipsize(Pango.EllipsizeMode.END)
-                self.labels[x]['switch'].set_property("width-request", round(self._gtk.get_font_size()*2))
+                self.labels[x]['switch'].set_property("width-request", round(self._gtk.get_font_size() * 2))
                 self.labels[x]['switch'].set_property("height-request", round(self._gtk.get_font_size()))
                 self.labels[x]['switch'].set_active(self._printer.get_dev_stat(x, "enabled"))
                 self.labels[x]['switch'].connect("notify::active", self.enable_disable_fs, name, x)
@@ -206,16 +207,16 @@ class ExtrudePanel(ScreenPanel):
             return
         logging.info("### Distance " + str(distance))
 
-        ctx = self.labels["dist"+str(self.distance)].get_style_context()
+        ctx = self.labels["dist" + str(self.distance)].get_style_context()
         ctx.remove_class("distbutton_active")
 
         self.distance = distance
-        ctx = self.labels["dist"+self.distance].get_style_context()
+        ctx = self.labels["dist" + self.distance].get_style_context()
         ctx.add_class("distbutton_active")
         for i in self.distances:
             if i == self.distance:
                 continue
-            self.labels["dist"+str(i)].set_active(False)
+            self.labels["dist" + str(i)].set_active(False)
 
     def change_extruder(self, widget, extruder):
         if extruder == self.current_extruder:

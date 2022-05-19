@@ -8,8 +8,10 @@ from ks_includes.screen_panel import ScreenPanel
 
 import logging
 
+
 def create_panel(*args):
     return ZCalibratePanel(*args)
+
 
 class ZCalibratePanel(ScreenPanel):
     _screen = None
@@ -65,7 +67,7 @@ class ZCalibratePanel(ScreenPanel):
         else:
             functions.remove("endstop")
 
-        if (self._printer.config_section_exists("probe") or self._printer.config_section_exists("bltouch")):
+        if self._printer.config_section_exists("probe") or self._printer.config_section_exists("bltouch"):
             probe = self._gtk.Button(label="Probe")
             probe.connect("clicked", self.start_calibration, "probe")
             pobox.pack_start(probe, True, True, 5)
@@ -81,7 +83,7 @@ class ZCalibratePanel(ScreenPanel):
                 functions.remove("mesh")
 
         if "delta" in self._screen.printer.get_config_section("printer")['kinematics']:
-            if (self._printer.config_section_exists("probe") or self._printer.config_section_exists("bltouch")):
+            if self._printer.config_section_exists("probe") or self._printer.config_section_exists("bltouch"):
                 delta = self._gtk.Button(label="Delta Automatic")
                 delta.connect("clicked", self.start_calibration, "delta")
                 pobox.pack_start(delta, True, True, 5)
@@ -112,9 +114,9 @@ class ZCalibratePanel(ScreenPanel):
             self.widgets[i].set_direction(Gtk.TextDirection.LTR)
             self.widgets[i].connect("clicked", self.change_distance, i)
             ctx = self.widgets[i].get_style_context()
-            if (self._screen.lang_ltr and j == 0) or (not self._screen.lang_ltr and j == len(self.distances)-1):
+            if (self._screen.lang_ltr and j == 0) or (not self._screen.lang_ltr and j == len(self.distances) - 1):
                 ctx.add_class("distbutton_top")
-            elif (not self._screen.lang_ltr and j == 0) or (self._screen.lang_ltr and j == len(self.distances)-1):
+            elif (not self._screen.lang_ltr and j == 0) or (self._screen.lang_ltr and j == len(self.distances) - 1):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
@@ -184,8 +186,8 @@ class ZCalibratePanel(ScreenPanel):
                 self._screen._ws.klippy.gcode_script('G0 X%d Y%d F3000' % (0, 0))
             else:
                 logging.debug("Position not configured, probing the middle of the bed")
-                x_position = int(int(self._screen.printer.get_config_section("stepper_x")['position_max'])/2)
-                y_position = int(int(self._screen.printer.get_config_section("stepper_y")['position_max'])/2)
+                x_position = int(int(self._screen.printer.get_config_section("stepper_x")['position_max']) / 2)
+                y_position = int(int(self._screen.printer.get_config_section("stepper_y")['position_max']) / 2)
 
                 # Find probe offset
                 klipper_cfg = self._screen.printer.get_config_section_list()

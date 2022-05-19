@@ -9,8 +9,10 @@ from gi.repository import GLib, Gtk, Pango
 from numpy import sqrt, pi, dot, array, median
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return JobStatusPanel(*args)
+
 
 class JobStatusPanel(ScreenPanel):
     is_paused = False
@@ -85,10 +87,9 @@ class JobStatusPanel(ScreenPanel):
 
         for label in self.labels:
             self.labels[label].set_halign(Gtk.Align.START)
-            self.labels[label].set_ellipsize(True)
             self.labels[label].set_ellipsize(Pango.EllipsizeMode.END)
 
-        fi_box = Gtk.VBox(spacing=0)
+        fi_box = Gtk.VBox()
         fi_box.add(self.labels['file'])
         fi_box.add(self.labels['status'])
         fi_box.add(self.labels['lcdmessage'])
@@ -109,9 +110,9 @@ class JobStatusPanel(ScreenPanel):
 
         self.labels['thumbnail'] = self._gtk.Image("file", 2)
         if self._screen.vertical_mode:
-            self.labels['thumbnail'].set_size_request(0, self._screen.height/4)
+            self.labels['thumbnail'].set_size_request(0, self._screen.height / 4)
         else:
-            self.labels['thumbnail'].set_size_request(self._screen.width/3, 0)
+            self.labels['thumbnail'].set_size_request(self._screen.width / 3, 0)
 
         self.labels['info_grid'] = Gtk.Grid()
         self.labels['info_grid'].attach(self.labels['thumbnail'], 0, 0, 1, 1)
@@ -245,8 +246,7 @@ class JobStatusPanel(ScreenPanel):
         szfe.attach(self.extrusion_button, 0, 1, 1, 1)
         szfe.attach(self.fan_button, 1, 1, 1, 1)
 
-
-        info = Gtk.VBox(spacing=0)
+        info = Gtk.VBox()
         info.get_style_context().add_class("printing-info")
         info.add(self.labels['temp_grid'])
         info.add(szfe)
@@ -345,15 +345,15 @@ class JobStatusPanel(ScreenPanel):
     def on_draw(self, da, ctx):
         w = da.get_allocated_width()
         h = da.get_allocated_height()
-        r = min(w, h)*.42
+        r = min(w, h) * .42
 
         ctx.set_source_rgb(0.13, 0.13, 0.13)
         ctx.set_line_width(self._gtk.get_font_size() * .75)
         ctx.translate(w / 2, h / 2)
-        ctx.arc(0, 0, r, 0, 2*pi)
+        ctx.arc(0, 0, r, 0, 2 * pi)
         ctx.stroke()
         ctx.set_source_rgb(0.718, 0.110, 0.110)
-        ctx.arc(0, 0, r, 3/2*pi, 3/2*pi+(self.progress*2*pi))
+        ctx.arc(0, 0, r, 3 / 2 * pi, 3 / 2 * pi + (self.progress * 2 * pi))
         ctx.stroke()
 
     def activate(self):
@@ -391,23 +391,23 @@ class JobStatusPanel(ScreenPanel):
     def save_offset(self, widget, device):
         _ = self.lang.gettext
 
-        save_offset = "?"
+        saved_z_offset = 0
         if self._printer.config_section_exists("probe"):
             saved_z_offset = float(self._screen.printer.get_config_section("probe")['z_offset'])
         elif self._printer.config_section_exists("bltouch"):
             saved_z_offset = float(self._screen.printer.get_config_section("bltouch")['z_offset'])
 
         if self.zoffset > 0:
-            sign = "-"
-        else:
             sign = "+"
-
+        else:
+            sign = "-"
+        label = Gtk.Label()
         if device == "probe":
-            label = Gtk.Label(_("Apply %s%.2f offset to Probe?") % (sign, abs(self.zoffset))
-                              + "\n\n"
-                              + _("Saved offset: %s") % (saved_z_offset))
-        if device == "endstop":
-            label = Gtk.Label(_("Apply %.2f offset to Endstop?") % (self.zoffset))
+            label.set_text(_("Apply %s%.2f offset to Probe?") % (sign, abs(self.zoffset))
+                           + "\n\n"
+                           + _("Saved offset: %s") % saved_z_offset)
+        elif device == "endstop":
+            label.set_text(_("Apply %.2f offset to Endstop?") % self.zoffset)
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
         label.set_vexpand(True)
@@ -615,7 +615,7 @@ class JobStatusPanel(ScreenPanel):
 
         for fan in self.fans:
             if fan in data and "speed" in data[fan]:
-                fan_speed = int(round(self._printer.get_fan_speed(fan, data[fan]["speed"]), 2)*100)
+                fan_speed = int(round(self._printer.get_fan_speed(fan, data[fan]["speed"]), 2) * 100)
                 self.fans[fan]['speed'] = ("%3d%%" % fan_speed)
         fan_label = ""
         for fan in self.fans:
@@ -686,6 +686,9 @@ class JobStatusPanel(ScreenPanel):
                     slicer_time = (self.file_metadata['estimated_time'] * slicer_correction) / spdcomp
                     if slicer_time < duration:
                         slicer_time = None
+                        self.update_text("slicer_time", "-")
+                    else:
+                        self.update_text("slicer_time", str(self._gtk.formatTimeString(slicer_time)))
 
             if "filament_total" in self.file_metadata:
                 if self.file_metadata['filament_total'] > 0 and filament_used > 0:
@@ -693,9 +696,15 @@ class JobStatusPanel(ScreenPanel):
                         filament_time = duration / (filament_used / self.file_metadata['filament_total'])
                         if filament_time < duration:
                             filament_time = None
+                        self.update_text("filament_time", "-")
+                    else:
+                        self.update_text("filament_time", str(self._gtk.formatTimeString(slicer_time)))
 
             if self.progress > 0:
                 file_time = duration / self.progress
+                self.update_text("file_time", str(self._gtk.formatTimeString(file_time)))
+            else:
+                self.update_text("file_time", "-")
 
             if timeleft_type == "file" and file_time is not None:
                 total_duration = file_time
@@ -717,16 +726,11 @@ class JobStatusPanel(ScreenPanel):
                 else:
                     total_duration = file_time
 
-        if total_duration is None:
+        if total_duration is not None:
+            self.update_text("est_time", str(self._gtk.formatTimeString(total_duration)))
+            return str(self._gtk.formatTimeString((total_duration - duration)))
+        else:
             return "-"
-        self.update_text("est_time", str(self._gtk.formatTimeString(total_duration)))
-        if slicer_time is not None:
-            self.update_text("slicer_time", str(self._gtk.formatTimeString(slicer_time)))
-        if file_time is not None:
-            self.update_text("file_time", str(self._gtk.formatTimeString(file_time)))
-        if filament_time is not None:
-            self.update_text("filament_time", str(self._gtk.formatTimeString(filament_time)))
-        return str(self._gtk.formatTimeString((total_duration - duration)))
 
     def state_check(self):
         ps = self._printer.get_stat("print_stats")
@@ -794,7 +798,6 @@ class JobStatusPanel(ScreenPanel):
         self.state = state
         self.show_buttons_for_state()
 
-
     def show_buttons_for_state(self):
         self.buttons['button_grid'].remove_row(0)
         self.buttons['button_grid'].insert_row(0)
@@ -818,7 +821,7 @@ class JobStatusPanel(ScreenPanel):
                     self.buttons['button_grid'].attach(self.buttons["save_offset_endstop"], 0, 0, 1, 1)
                 else:
                     self.buttons['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
-                if (self._printer.config_section_exists("probe") or self._printer.config_section_exists("bltouch")):
+                if self._printer.config_section_exists("probe") or self._printer.config_section_exists("bltouch"):
                     self.buttons['button_grid'].attach(self.buttons["save_offset_probe"], 1, 0, 1, 1)
                 else:
                     self.buttons['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
@@ -888,7 +891,7 @@ class JobStatusPanel(ScreenPanel):
                     if "first_layer_height" in self.file_metadata:
                         self.f_layer_h = self.file_metadata['first_layer_height']
                     else:
-                        self.f_layer_h = layer_h
+                        self.f_layer_h = self.layer_h
                     self.labels['total_layers'].set_label(str(int((self.height - self.f_layer_h) / self.layer_h) + 1))
             if "filament_total" in self.file_metadata:
                 filament_total = float(self.file_metadata['filament_total']) / 1000
@@ -908,8 +911,8 @@ class JobStatusPanel(ScreenPanel):
 
         if "gcode_start_byte" in self.file_metadata:
             progress = (max(self._printer.get_stat('virtual_sdcard', 'file_position') -
-                        self.file_metadata['gcode_start_byte'], 0) / (self.file_metadata['gcode_end_byte'] -
-                        self.file_metadata['gcode_start_byte']))
+                            self.file_metadata['gcode_start_byte'], 0) / (self.file_metadata['gcode_end_byte'] -
+                                                                          self.file_metadata['gcode_start_byte']))
         else:
             progress = self._printer.get_stat('virtual_sdcard', 'progress')
 
@@ -924,7 +927,7 @@ class JobStatusPanel(ScreenPanel):
 
     def update_progress(self):
         if self.progress < 1:
-            self.labels['progress_text'].set_text("%s%%" % (str((int(self.progress*100)))))
+            self.labels['progress_text'].set_text("%s%%" % (str((int(self.progress * 100)))))
         else:
             self.labels['progress_text'].set_text("100")
 
@@ -938,4 +941,4 @@ class JobStatusPanel(ScreenPanel):
         if target > 0:
             self.labels[x].set_label("%3d/%3d°" % (temp, target))
         else:
-            self.labels[x].set_label("%3d°" % (temp))
+            self.labels[x].set_label("%3d°" % temp)

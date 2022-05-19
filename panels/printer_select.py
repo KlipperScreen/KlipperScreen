@@ -7,8 +7,10 @@ from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.PrinterSelect")
 
+
 def create_panel(*args):
     return PrinterSelect(*args)
+
 
 class PrinterSelect(ScreenPanel):
     def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
@@ -32,7 +34,7 @@ class PrinterSelect(ScreenPanel):
         if length == 4:
             # Arrange 2 x 2
             columns = 2
-        elif length > 4 and length <= 6:
+        elif 4 < length <= 6:
             # Arrange 3 x 2
             columns = 3
         else:
@@ -44,8 +46,8 @@ class PrinterSelect(ScreenPanel):
             self.labels[name].connect("clicked", self._screen.connect_printer_widget, name)
             if self._screen.vertical_mode:
                 row = i % columns
-                col = int(i/columns)
+                col = int(i / columns)
             else:
                 col = i % columns
-                row = int(i/columns)
+                row = int(i / columns)
             grid.attach(self.labels[name], col, row, 1, 1)

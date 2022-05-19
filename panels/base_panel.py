@@ -9,6 +9,7 @@ from jinja2 import Environment
 
 from ks_includes.screen_panel import ScreenPanel
 
+
 class BasePanel(ScreenPanel):
     def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
         super().__init__(screen, title, back, action_bar, printer_name)
@@ -85,7 +86,6 @@ class BasePanel(ScreenPanel):
         self.titlelbl.set_hexpand(True)
         self.titlelbl.set_vexpand(True)
         self.titlelbl.set_halign(Gtk.Align.CENTER)
-        self.titlelbl.set_ellipsize(True)
         self.titlelbl.set_ellipsize(Pango.EllipsizeMode.END)
         self.set_title(title)
 
@@ -129,7 +129,6 @@ class BasePanel(ScreenPanel):
             self.layout.put(self.titlebar, action_bar_width, 0)
             self.layout.put(self.content, action_bar_width + self.hmargin, self.title_spacing)
 
-
     def initialize(self, panel_name):
         self.update_time()
         return
@@ -138,14 +137,13 @@ class BasePanel(ScreenPanel):
         for child in self.control['temp_box'].get_children():
             self.control['temp_box'].remove(child)
 
-        if (not show or self._screen.printer.get_temp_store_devices() is None):
+        if not show or self._screen.printer.get_temp_store_devices() is None:
             return
 
         for device in self._screen.printer.get_temp_store_devices():
             logging.info(device)
             self.labels[device + '_box'] = Gtk.Box(spacing=0)
             self.labels[device] = Gtk.Label(label="100º")
-            self.labels[device].set_ellipsize(True)
             self.labels[device].set_ellipsize(Pango.EllipsizeMode.START)
             if device.startswith("extruder"):
                 if self._screen.printer.extrudercount > 1:
@@ -268,7 +266,6 @@ class BasePanel(ScreenPanel):
                 self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, True, 3)
                 self.control['temp_box'].reorder_child(self.labels["%s_box" % self.current_extruder], 0)
                 self.control['temp_box'].show_all()
-
 
     def remove(self, widget):
         self.content.remove(widget)

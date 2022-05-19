@@ -7,6 +7,7 @@ from gi.repository import Gdk, Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return FWRetractionPanel(*args)
 
@@ -26,26 +27,26 @@ class FWRetractionPanel(ScreenPanel):
              "units": _("mm"),
              "option": "retract_length",
              "value": float(conf['retract_length']) if 'retract_length' in conf else 0,
-             "digits":2,
-             "maxval":4},
+             "digits": 2,
+             "maxval": 4},
             {"name": _("Retraction Speed"),
              "units": _("mm/s"),
              "option": "retract_speed",
              "value": int(float((conf['retract_speed']))) if 'retract_speed' in conf else 20,
-             "digits":0,
-             "maxval":100},
+             "digits": 0,
+             "maxval": 100},
             {"name": _("Unretract Extra Length"),
              "units": _("mm"),
              "option": "unretract_extra_length",
              "value": float(conf['unretract_extra_length']) if 'unretract_extra_length' in conf else 0,
-             "digits":2,
-             "maxval":15},
+             "digits": 2,
+             "maxval": 15},
             {"name": _("Unretract Speed"),
              "units": _("mm/s"),
              "option": "unretract_speed",
              "value": int(float((conf['unretract_speed']))) if 'unretract_speed' in conf else 10,
-             "digits":0,
-             "maxval":60}
+             "digits": 0,
+             "maxval": 60}
         ]
 
         for opt in self.options:
@@ -152,10 +153,10 @@ class FWRetractionPanel(ScreenPanel):
         value = self.list[opt]['scale'].get_value()
 
         if opt == "retract_speed":
-            self._screen._ws.klippy.gcode_script("SET_RETRACTION RETRACT_SPEED=%s" % (value))
+            self._screen._ws.klippy.gcode_script("SET_RETRACTION RETRACT_SPEED=%s" % value)
         elif opt == "retract_length":
-            self._screen._ws.klippy.gcode_script("SET_RETRACTION RETRACT_LENGTH=%s" % (value))
+            self._screen._ws.klippy.gcode_script("SET_RETRACTION RETRACT_LENGTH=%s" % value)
         elif opt == "unretract_extra_length":
-            self._screen._ws.klippy.gcode_script("SET_RETRACTION UNRETRACT_EXTRA_LENGTH=%s" % (value))
+            self._screen._ws.klippy.gcode_script("SET_RETRACTION UNRETRACT_EXTRA_LENGTH=%s" % value)
         elif opt == "unretract_speed":
-            self._screen._ws.klippy.gcode_script("SET_RETRACTION UNRETRACT_SPEED=%s" % (value))
+            self._screen._ws.klippy.gcode_script("SET_RETRACTION UNRETRACT_SPEED=%s" % value)

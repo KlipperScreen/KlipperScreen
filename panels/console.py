@@ -9,6 +9,7 @@ from gi.repository import Gtk
 from datetime import datetime
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return ConsolePanel(*args)
 
@@ -21,6 +22,7 @@ COLORS = {
     "warning": "#c9c9c9"
 }
 
+
 class ConsolePanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
@@ -32,16 +34,16 @@ class ConsolePanel(ScreenPanel):
         o1_lbl = Gtk.Label(_("Auto-scroll"))
         o1_lbl.set_halign(Gtk.Align.END)
         o1_switch = Gtk.Switch()
-        o1_switch.set_property("width-request", round(self._gtk.get_font_size()*5))
-        o1_switch.set_property("height-request", round(self._gtk.get_font_size()*2.5))
+        o1_switch.set_property("width-request", round(self._gtk.get_font_size() * 5))
+        o1_switch.set_property("height-request", round(self._gtk.get_font_size() * 2.5))
         o1_switch.set_active(self.autoscroll)
         o1_switch.connect("notify::active", self.set_autoscroll)
 
         o2_lbl = Gtk.Label(_("Hide temp."))
         o2_lbl.set_halign(Gtk.Align.END)
         o2_switch = Gtk.Switch()
-        o2_switch.set_property("width-request", round(self._gtk.get_font_size()*5))
-        o2_switch.set_property("height-request", round(self._gtk.get_font_size()*2.5))
+        o2_switch.set_property("width-request", round(self._gtk.get_font_size() * 5))
+        o2_switch.set_property("height-request", round(self._gtk.get_font_size() * 2.5))
         o2_switch.set_active(self.hidetemps)
         o2_switch.connect("notify::active", self.hide_temps)
 
@@ -84,7 +86,6 @@ class ConsolePanel(ScreenPanel):
         enter = self._gtk.ButtonImage("resume", " " + _('Send') + " ", None, .66, Gtk.PositionType.RIGHT, False)
         enter.set_hexpand(False)
         enter.connect("clicked", self._send_command)
-
 
         ebox.add(entry)
         ebox.add(enter)

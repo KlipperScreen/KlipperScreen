@@ -7,8 +7,10 @@ from gi.repository import Gdk, Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return SplashScreenPanel(*args)
+
 
 class SplashScreenPanel(ScreenPanel):
     box = None
@@ -128,7 +130,6 @@ class SplashScreenPanel(ScreenPanel):
 
     def restart(self, widget):
         self._screen._ws.klippy.restart()
-
 
     def shutdown(self, widget):
         _ = self.lang.gettext

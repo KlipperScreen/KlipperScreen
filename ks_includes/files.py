@@ -2,10 +2,12 @@ import logging
 import os
 
 import gi
+
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib
 
-class KlippyFiles():
+
+class KlippyFiles:
     def __init__(self, screen):
         self._screen = screen
         self.callbacks = []
@@ -177,7 +179,7 @@ class KlippyFiles():
             self.run_callbacks(deletedfiles=[filename])
 
     def ret_file_data(self, filename):
-        print("Getting file info for %s" % (filename))
+        print("Getting file info for %s" % filename)
         self._screen._ws.klippy.get_file_metadata(filename, self._callback)
 
     def run_callbacks(self, newfiles=[], deletedfiles=[], mods=[]):

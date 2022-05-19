@@ -91,7 +91,6 @@ class HeaterGraph(Gtk.DrawingArea):
         max_num = math.ceil(self.get_max_num(data_points) * 1.1 / 10) * 10
         d_width = 1 / points_per_pixel
 
-
         d_height_scale = self.graph_lines(ctx, gsize, max_num)
         self.graph_time(ctx, gsize, points_per_pixel)
 
@@ -115,10 +114,10 @@ class HeaterGraph(Gtk.DrawingArea):
             ctx.set_dash([1, 0])
         d_len = len(data) - 1
         for d in data:
-            p_x = i*swidth + gsize[0][0] if i != d_len else gsize[1][0] - 1
-            p_y = gsize[1][1] - 1 - (d*hscale)
+            p_x = i * swidth + gsize[0][0] if i != d_len else gsize[1][0] - 1
+            p_y = gsize[1][1] - 1 - (d * hscale)
             if i == 0:
-                ctx.move_to(gsize[0][0]+1, p_y)
+                ctx.move_to(gsize[0][0] + 1, p_y)
                 i += 1
                 continue
             ctx.line_to(p_x, p_y)
@@ -139,15 +138,15 @@ class HeaterGraph(Gtk.DrawingArea):
         while (max_num / nscale) > 5:
             nscale += 10
         # nscale = math.floor((max_num / 10) / 4) * 10
-        r = int(max_num/nscale) + 1
+        r = int(max_num / nscale) + 1
         hscale = (gsize[1][1] - gsize[0][1]) / (r * nscale)
 
         for i in range(r):
             ctx.set_source_rgb(.5, .5, .5)
-            lheight = gsize[1][1] - nscale*i*hscale
+            lheight = gsize[1][1] - nscale * i * hscale
             ctx.move_to(6, lheight + 3)
             ctx.set_font_size(self.font_size)
-            ctx.show_text(str(nscale*i).rjust(3, " "))
+            ctx.show_text(str(nscale * i).rjust(3, " "))
             ctx.stroke()
             ctx.set_source_rgba(.5, .5, .5, .2)
             ctx.move_to(gsize[0][0], lheight)
