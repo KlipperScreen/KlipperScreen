@@ -209,11 +209,6 @@ class Printer:
             return self.config[section]
         return False
 
-    def get_config_section(self, section):
-        if section not in self.config:
-            return False
-        return self.config[section]
-
     def get_data(self):
         return self.data
 

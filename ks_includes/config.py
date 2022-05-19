@@ -12,18 +12,20 @@ from io import StringIO
 from os import path
 
 SCREEN_BLANKING_OPTIONS = [
-    "300",    # 5 Minutes
-    "900",    # 15 Minutes
-    "1800",   # 30 Minutes
-    "3600",   # 1 Hour
-    "7200",   # 2 Hours
+    "300",  # 5 Minutes
+    "900",  # 15 Minutes
+    "1800",  # 30 Minutes
+    "3600",  # 1 Hour
+    "7200",  # 2 Hours
     "14400",  # 4 Hours
 ]
 
 klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
 
+
 class ConfigError(Exception):
     pass
+
 
 class KlipperScreenConfig:
     config = None
@@ -103,10 +105,10 @@ class KlipperScreenConfig:
         _n = self.lang.ngettext
 
         self.configurable_options = [
-            {"language": {"section": "main", "name": _("Language"), "type": "dropdown", "value": "system_lang",
-                          "callback": screen.restart_warning, "options": [
-                              {"name": _("System") + " " + _("(default)"), "value": "system_lang"}
-            ]}},
+            {"language": {
+                "section": "main", "name": _("Language"), "type": "dropdown", "value": "system_lang",
+                "callback": screen.restart_warning, "options": [
+                    {"name": _("System") + " " + _("(default)"), "value": "system_lang"}]}},
             {"theme": {
                 "section": "main", "name": _("Icon Theme"), "type": "dropdown",
                 "value": "z-bolt", "callback": screen.restart_warning, "options": [
@@ -177,11 +179,11 @@ class KlipperScreenConfig:
         index = self.configurable_options.index(
             [i for i in self.configurable_options if list(i)[0] == "screen_blanking"][0])
         for num in SCREEN_BLANKING_OPTIONS:
-            hour = int(int(num)/3600)
+            hour = int(int(num) / 3600)
             if hour > 0:
                 name = str(hour) + " " + _n("hour", "hours", hour)
             else:
-                name = str(int(int(num)/60)) + " " + _("minutes")
+                name = str(int(int(num) / 60)) + " " + _("minutes")
             self.configurable_options[index]['screen_blanking']['options'].append({
                 "name": name,
                 "value": num
@@ -258,7 +260,7 @@ class KlipperScreenConfig:
                     user_def.append(line.replace('\n', ''))
                 else:
                     if line.startswith(self.do_not_edit_prefix):
-                        saved_def.append(line[(len(self.do_not_edit_prefix)+1):])
+                        saved_def.append(line[(len(self.do_not_edit_prefix) + 1):])
         return ["\n".join(user_def), None if saved_def is None else "\n".join(saved_def)]
 
     def get_config_file_location(self, file):
@@ -311,7 +313,6 @@ class KlipperScreenConfig:
         if name not in self.config:
             return False
         return self.config[name].get('name')
-
 
     def get_preheat_options(self):
         index = "preheat "

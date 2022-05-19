@@ -7,11 +7,13 @@ from gi.repository import Gtk, Gdk, GLib, Pango
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return FanPanel(*args)
 
 
 CHANGEABLE_FANS = ["fan", "fan_generic"]
+
 
 class FanPanel(ScreenPanel):
     fan_speed = {}
@@ -41,7 +43,7 @@ class FanPanel(ScreenPanel):
         self.content.add(box)
 
     def process_update(self, action, data):
-        if (action != "notify_status_update"):
+        if action != "notify_status_update":
             return
 
         for fan in self.devices:
@@ -80,7 +82,7 @@ class FanPanel(ScreenPanel):
             fan_name = "Part Fan"
         else:
             fan_name = " ".join(fan.split(" ")[1:])
-        name.set_markup("<big><b>%s</b></big>" % (fan_name))
+        name.set_markup("<big><b>%s</b></big>" % fan_name)
         name.set_hexpand(True)
         name.set_vexpand(True)
         name.set_halign(Gtk.Align.START)
@@ -150,7 +152,7 @@ class FanPanel(ScreenPanel):
             self._screen._ws.klippy.gcode_script(KlippyGcodes.set_fan_speed(value))
         else:
             f = " ".join(fan.split(" ")[1:])
-            self._screen._ws.klippy.gcode_script("SET_FAN_SPEED FAN=%s SPEED=%s" % (f, float(value)/100))
+            self._screen._ws.klippy.gcode_script("SET_FAN_SPEED FAN=%s SPEED=%s" % (f, float(value) / 100))
         # Check the speed in case it wasn't applied
         GLib.timeout_add_seconds(1, self.check_fan_speed, fan)
 

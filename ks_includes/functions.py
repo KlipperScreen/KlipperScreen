@@ -17,12 +17,14 @@ try:
     ctypes.cdll.LoadLibrary('libXext.so.6')
     libXext = ctypes.CDLL('libXext.so.6')
 
+
     class DPMS_State:
         Fail = -1
         On = 0
         Standby = 1
         Suspend = 2
         Off = 3
+
 
     def get_DPMS_state(display_name_in_byte_string=b':0'):
         state = DPMS_State.Fail
@@ -35,8 +37,8 @@ try:
         dummy1_i_p = ctypes.create_string_buffer(8)
         dummy2_i_p = ctypes.create_string_buffer(8)
         if display.value:
-            if libXext.DPMSQueryExtension(display, dummy1_i_p, dummy2_i_p)\
-               and libXext.DPMSCapable(display):
+            if libXext.DPMSQueryExtension(display, dummy1_i_p, dummy2_i_p) \
+                    and libXext.DPMSCapable(display):
                 onoff_p = ctypes.create_string_buffer(1)
                 state_p = ctypes.create_string_buffer(2)
                 if libXext.DPMSInfo(display, state_p, onoff_p):
@@ -45,13 +47,17 @@ try:
                         state = struct.unpack('H', state_p.raw)[0]
             libXext.XCloseDisplay(display)
         return state
+
+
     dpms_loaded = True
 except Exception:
     pass
 
+
 def get_network_interfaces():
     stream = os.popen("ip addr | grep ^'[0-9]' | cut -d ' ' -f 2 | grep -o '[a-zA-Z0-9\\.]*'")
     return [i for i in stream.read().strip().split('\n') if not i.startswith('lo')]
+
 
 def get_wireless_interfaces():
     p = subprocess.Popen(["which", "iwconfig"], stdout=subprocess.PIPE)
@@ -76,6 +82,7 @@ def get_wireless_interfaces():
 
     return interfaces
 
+
 def get_software_version():
     prog = ('git', '-C', os.path.dirname(__file__), 'describe', '--always',
             '--tags', '--long', '--dirty')
@@ -95,6 +102,7 @@ def get_software_version():
         logging.exception("Error runing git describe")
     return "?"
 
+
 def patch_threading_excepthook():
     """Installs our exception handler into the threading modules Thread object
     Inspired by https://bugs.python.org/issue1230540
@@ -112,15 +120,18 @@ def patch_threading_excepthook():
                 raise
             except Exception:
                 sys.excepthook(*sys.exc_info(), thread_identifier=threading.get_ident())
+
         self.run = run_with_excepthook
+
     threading.Thread.__init__ = new_init
+
 
 # Timed rotating file handler based on Klipper and Moonraker's implementation
 class KlipperScreenLoggingHandler(logging.handlers.TimedRotatingFileHandler):
     def __init__(self, software_version, filename, **kwargs):
         super(KlipperScreenLoggingHandler, self).__init__(filename, **kwargs)
         self.rollover_info = {
-            'header': f"{'-'*20}KlipperScreen Log Start{'-'*20}",
+            'header': f"{'-' * 20}KlipperScreen Log Start{'-' * 20}",
             'version': f"Git Version: {software_version}",
         }
         lines = [line for line in self.rollover_info.values() if line]
@@ -135,6 +146,7 @@ class KlipperScreenLoggingHandler(logging.handlers.TimedRotatingFileHandler):
         lines = [line for line in self.rollover_info.values() if line]
         if self.stream is not None:
             self.stream.write("\n".join(lines) + "\n")
+
 
 # Logging based on Arksine's logging setup
 def setup_logging(log_file, software_version):
@@ -165,6 +177,7 @@ def setup_logging(log_file, software_version):
     def logging_exception_handler(type, value, tb, thread_identifier=None):
         logging.exception(
             "Uncaught exception %s: %s\nTraceback: %s" % (type, value, "\n".join(traceback.format_tb(tb))))
+
     sys.excepthook = logging_exception_handler
     logging.captureWarnings(True)
 

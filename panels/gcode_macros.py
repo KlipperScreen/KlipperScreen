@@ -6,8 +6,10 @@ from gi.repository import Gdk, Gtk, GLib, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return MacroPanel(*args)
+
 
 class MacroPanel(ScreenPanel):
     def initialize(self, panel_name):
@@ -55,7 +57,7 @@ class MacroPanel(ScreenPanel):
             return
 
         name = Gtk.Label()
-        name.set_markup("<big><b>%s</b></big>" % (macro))
+        name.set_markup("<big><b>%s</b></big>" % macro)
         name.set_hexpand(True)
         name.set_vexpand(True)
         name.set_halign(Gtk.Align.START)
@@ -158,8 +160,8 @@ class MacroPanel(ScreenPanel):
         switch.set_vexpand(False)
         switch.set_active(self._config.get_config().getboolean(option['section'], opt_name, fallback=True))
         switch.connect("notify::active", self.switch_config_option, option['section'], opt_name)
-        switch.set_property("width-request", round(self._gtk.get_font_size()*7))
-        switch.set_property("height-request", round(self._gtk.get_font_size()*3.5))
+        switch.set_property("width-request", round(self._gtk.get_font_size() * 7))
+        switch.set_property("height-request", round(self._gtk.get_font_size() * 3.5))
         box.add(switch)
 
         dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)

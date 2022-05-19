@@ -5,8 +5,10 @@ from gi.repository import Gtk
 
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return ExamplePanel(*args)
+
 
 class ExamplePanel(ScreenPanel):
     def initialize(self, panel_name):

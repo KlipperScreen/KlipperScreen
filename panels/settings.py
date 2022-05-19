@@ -6,8 +6,10 @@ from gi.repository import Gdk, Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return SettingsPanel(*args)
+
 
 class SettingsPanel(ScreenPanel):
     def initialize(self, panel_name):
@@ -113,8 +115,8 @@ class SettingsPanel(ScreenPanel):
             switch.set_active(self._config.get_config().getboolean(option['section'], opt_name))
             switch.connect("notify::active", self.switch_config_option, option['section'], opt_name,
                            option['callback'] if "callback" in option else None)
-            switch.set_property("width-request", round(self._gtk.get_font_size()*7))
-            switch.set_property("height-request", round(self._gtk.get_font_size()*3.5))
+            switch.set_property("width-request", round(self._gtk.get_font_size() * 7))
+            switch.set_property("height-request", round(self._gtk.get_font_size() * 3.5))
             box.add(switch)
             dev.add(box)
         elif option['type'] == "dropdown":
@@ -131,12 +133,12 @@ class SettingsPanel(ScreenPanel):
             dev.add(dropdown)
         elif option['type'] == "scale":
             val = int(self._config.get_config().get(option['section'], opt_name, fallback=option['value']))
-            adj = Gtk.Adjustment(val, option['range'][0], option['range'][1], option['step'], option['step']*5)
+            adj = Gtk.Adjustment(val, option['range'][0], option['range'][1], option['step'], option['step'] * 5)
             scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
             scale.set_hexpand(True)
             scale.set_digits(0)
             scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
-            scale.set_property("width-request", round(self._screen.width/2.2))
+            scale.set_property("width-request", round(self._screen.width / 2.2))
             dev.add(scale)
         elif option['type'] == "printer":
             logging.debug("Option: %s" % option)

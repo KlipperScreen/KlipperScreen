@@ -6,8 +6,10 @@ from gi.repository import Gdk, Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return PowerPanel(*args)
+
 
 class PowerPanel(ScreenPanel):
     def initialize(self, panel_name):
@@ -47,7 +49,7 @@ class PowerPanel(ScreenPanel):
         frame.get_style_context().add_class("frame-item")
 
         name = Gtk.Label()
-        name.set_markup("<big><b>%s</b></big>" % (device))
+        name.set_markup("<big><b>%s</b></big>" % device)
         name.set_hexpand(True)
         name.set_vexpand(True)
         name.set_halign(Gtk.Align.START)
@@ -59,8 +61,8 @@ class PowerPanel(ScreenPanel):
         switch.set_hexpand(False)
         switch.set_active(True if self._screen.printer.get_power_device_status(device) == "on" else False)
         switch.connect("notify::active", self.on_switch, device)
-        switch.set_property("width-request", round(self._gtk.get_font_size()*7))
-        switch.set_property("height-request", round(self._gtk.get_font_size()*3.5))
+        switch.set_property("width-request", round(self._gtk.get_font_size() * 7))
+        switch.set_property("height-request", round(self._gtk.get_font_size() * 3.5))
 
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)

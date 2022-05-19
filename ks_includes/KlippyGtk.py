@@ -7,6 +7,7 @@ import pathlib
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gdk, GdkPixbuf, Gio, Gtk, Pango
 
+
 class KlippyGtk:
     labels = {}
     keyboard_ratio = .22
@@ -29,7 +30,7 @@ class KlippyGtk:
         ))
         if fontsize_type == "small":
             self.font_size = round(self.font_size * 0.91)
-        elif (fontsize_type == "large"):
+        elif fontsize_type == "large":
             self.font_size = round(self.font_size * 1.09)
         self.header_size = int(round((self.width / self.width_ratio) / 1.33))
         self.img_width = int(round(self.width / self.width_ratio))
@@ -46,7 +47,7 @@ class KlippyGtk:
 
         for key in self.color_list:
             if "base" in self.color_list[key]:
-                rgb = [int(self.color_list[key]['base'][i:i+2], 16) for i in range(0, 6, 2)]
+                rgb = [int(self.color_list[key]['base'][i:i + 2], 16) for i in range(0, 6, 2)]
                 self.color_list[key]['rgb'] = rgb
 
         logging.debug("img width: %s height: %s" % (self.img_width, self.img_height))
@@ -89,14 +90,14 @@ class KlippyGtk:
                 rgb[1] = rgb[1] + self.color_list[device]['hsplit'] * self.color_list[device]['state']
             self.color_list[device]['state'] += 1
             color = '{:02X}{:02X}{:02X}'.format(rgb[0], rgb[1], rgb[2])
-            rgb = [x/255 for x in rgb]
+            rgb = [x / 255 for x in rgb]
             # logging.debug("Assigning color: %s %s %s" % (device, rgb, color))
         else:
             colors = self.color_list[device]['colors']
             if self.color_list[device]['state'] >= len(colors):
                 self.color_list[device]['state'] = 0
             color = colors[self.color_list[device]['state'] % len(colors)]
-            rgb = [int(color[i:i+2], 16)/255 for i in range(0, 6, 2)]
+            rgb = [int(color[i:i + 2], 16) / 255 for i in range(0, 6, 2)]
             self.color_list[device]['state'] += 1
             # logging.debug("Assigning color: %s %s %s" % (device, rgb, color))
 
@@ -106,14 +107,13 @@ class KlippyGtk:
         for key in self.color_list:
             self.color_list[key]['state'] = 0
 
-
     def Label(self, label, style=None):
         la = Gtk.Label(label)
         if style is not None and style is not False:
             la.get_style_context().add_class(style)
         return la
 
-    def Image(self, image_name, scale=1):
+    def Image(self, image_name, scale=1.0):
         filename = os.path.join(self.themedir, str(image_name) + ".svg")
         if os.path.exists(filename):
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename,
@@ -201,7 +201,7 @@ class KlippyGtk:
             button = dialog.get_children()[0].get_children()[0].get_children()[0].get_children()[i]
             button.get_child().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
             button.get_child().set_line_wrap(True)
-            button.set_size_request((screen.width-30)/3, screen.height/5)
+            button.set_size_request((screen.width - 30) / 3, screen.height / 5)
 
         dialog.connect("response", callback, *args)
         dialog.get_style_context().add_class("dialog")
@@ -221,7 +221,6 @@ class KlippyGtk:
             dialog.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.BLANK_CURSOR))
 
         return dialog
-
 
     def ToggleButtonImage(self, image_name, label, style=False, scale=1.38):
 
@@ -263,21 +262,20 @@ class KlippyGtk:
             return name[0:25] + "\n" + name[25:50]
         return name
 
-
     def formatTimeString(self, seconds):
         time = int(seconds)
         text = ""
-        if int(time/86400) != 0:
-            text += str(int(time/86400))+"d "
-        if int(time/3600) != 0:
-            text += str(int(time/3600) % 24)+"h "
-        if int(time/60) != 0:
-            text += str(int(time/60) % 60)+"m "
+        if int(time / 86400) != 0:
+            text += str(int(time / 86400)) + "d "
+        if int(time / 3600) != 0:
+            text += str(int(time / 3600) % 24) + "h "
+        if int(time / 60) != 0:
+            text += str(int(time / 60) % 60) + "m "
         else:
-            text = str(time % 60)+"s"
+            text = str(time % 60) + "s"
         return text
 
     def formatTemperatureString(self, temp, target):
-        if (target > temp-2 and target < temp+2) or round(target, 0) == 0:
+        if (temp - 2 < target < temp + 2) or round(target, 0) == 0:
             return str(round(temp, 1)) + "°C"  # °C →"
         return str(round(temp)) + " °C\n(" + str(round(target)) + ")"

@@ -7,6 +7,7 @@ from gi.repository import Gtk, Pango
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return InputShaperPanel(*args)
 
@@ -17,6 +18,7 @@ XY_FREQ = [
     {'name': 'Y', 'config': 'shaper_freq_y', 'min': 0, 'max': 133},
 ]
 SHAPERS = ['zv', 'mzv', 'zvd', 'ei', '2hump_ei', '3hump_ei']
+
 
 class InputShaperPanel(ScreenPanel):
     def initialize(self, panel_name):

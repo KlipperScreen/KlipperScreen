@@ -47,7 +47,7 @@ If you have another fb, try changing it:
 
 for example: change `/dev/fb0` to `/dev/fb1`
 
-Once you have saved that file, restart KlipperScreen and it should show up on your display.
+Once you have saved that file, restart KlipperScreen.
 
 ## Screen is all white or blank or no signal
 
