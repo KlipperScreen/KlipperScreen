@@ -160,7 +160,7 @@ scrollbar, scrollbar button, scrollbar trough {
 }
 
 scrollbar slider {
-    min-width: 1.5em;
+    min-width: 2em;
     border-radius: .7em;
     background-color: #404E57;
 }
@@ -175,7 +175,7 @@ textview .time {
 }
 
 trough {
-    margin: .5em 1em;
+    margin: .5em .5em;
 }
 
 .popup {
