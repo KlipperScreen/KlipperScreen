@@ -20,11 +20,11 @@ invert_x: False
 invert_y: False
 invert_z: False
 
-# Time (seconds) before the Job Status page reverts to main menu after a successful job
-job_complete_timeout: 30
+# Time in seconds before the Job Status page closes itself after a successful job/print
+# 0 means disabled
+job_complete_timeout: 0
 
-# Time (seconds) before the Job Status page reverts to main menu after a successful job.
-#   If this option is 0, the user must click on a button to go back to the main menu.
+# Time in seconds before the Job Status closes itself if an error is encountered
 job_error_timeout: 0
 
 # Specify the language

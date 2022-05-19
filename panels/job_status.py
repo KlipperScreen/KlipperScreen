@@ -16,13 +16,13 @@ def create_panel(*args):
 
 class JobStatusPanel(ScreenPanel):
     is_paused = False
-    filename = state_timeout = prev_pos = prev_gpos = vel_timeout = animation_timeout = None
+    filename = state_timeout = prev_pos = prev_gpos = vel_timeout = animation_timeout = close_timeout = None
     file_metadata = labels = {}
     state = "standby"
     timeleft_type = "auto"
     progress = zoffset = flowrate = vel = 0
     main_status_displayed = True
-    close_timeouts = velstore = flowstore = []
+    velstore = flowstore = []
 
     def __init__(self, screen, title, back=False):
         super().__init__(screen, title, False)
@@ -490,9 +490,9 @@ class JobStatusPanel(ScreenPanel):
         return False
 
     def remove_close_timeout(self):
-        for to in self.close_timeouts:
-            GLib.source_remove(to)
-            self.close_timeouts.remove(to)
+        if self.close_timeout is not None:
+            GLib.source_remove(self.close_timeout)
+            self.close_timeout = None
 
     def enable_button(self, *args):
         for arg in args:
@@ -750,9 +750,9 @@ class JobStatusPanel(ScreenPanel):
             self.set_state("complete")
             self._screen.wake_screen()
             self.remove_close_timeout()
-            timeout = self._config.get_main_config().getint("job_complete_timeout", 30)
+            timeout = self._config.get_main_config().getint("job_complete_timeout", 0)
             if timeout != 0:
-                self.close_timeouts.append(GLib.timeout_add_seconds(timeout, self.close_panel))
+                self.close_timeout = GLib.timeout_add_seconds(timeout, self.close_panel)
             return False
         elif ps['state'] == "error":
             logging.debug("Error!")
@@ -763,7 +763,7 @@ class JobStatusPanel(ScreenPanel):
             self.remove_close_timeout()
             timeout = self._config.get_main_config().getint("job_error_timeout", 0)
             if timeout != 0:
-                self.close_timeouts.append(GLib.timeout_add_seconds(timeout, self.close_panel))
+                self.close_timeout = GLib.timeout_add_seconds(timeout, self.close_panel)
             return False
         elif ps['state'] == "cancelled":
             # Print was cancelled
@@ -772,7 +772,7 @@ class JobStatusPanel(ScreenPanel):
             self.remove_close_timeout()
             timeout = self._config.get_main_config().getint("job_cancelled_timeout", 0)
             if timeout != 0:
-                self.close_timeouts.append(GLib.timeout_add_seconds(timeout, self.close_panel))
+                self.close_timeout = GLib.timeout_add_seconds(timeout, self.close_panel)
             return False
         elif ps['state'] == "paused":
             self.set_state("paused")
