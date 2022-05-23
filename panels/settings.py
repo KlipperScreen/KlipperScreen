@@ -15,15 +15,9 @@ class SettingsPanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
         self.settings = {}
-        self.menu_cur = 'main_box'
-        self.menu = ['main_box']
+        self.menu = ['settings_menu']
 
-        self.labels['main_box'] = self.create_box('main')
-
-        printbox = Gtk.Box(spacing=0)
-        printbox.set_vexpand(False)
         self.labels['add_printer_button'] = self._gtk.Button(_("Add Printer"), "color1")
-        self.labels['printers_box'] = self.create_box('printers', printbox)
 
         options = self._config.get_configurable_options().copy()
         options.append({"printers": {
@@ -32,10 +26,16 @@ class SettingsPanel(ScreenPanel):
             "menu": "printers"
         }})
 
+        self.labels['settings_menu'] = self._gtk.ScrolledWindow()
+        self.labels['settings'] = Gtk.Grid()
+        self.labels['settings_menu'].add(self.labels['settings'])
         for option in options:
             name = list(option)[0]
-            self.add_option('main', self.settings, name, option[name])
+            self.add_option('settings', self.settings, name, option[name])
 
+        self.labels['printers_menu'] = self._gtk.ScrolledWindow()
+        self.labels['printers'] = Gtk.Grid()
+        self.labels['printers_menu'].add(self.labels['printers'])
         self.printers = {}
         for printer in self._config.get_printers():
             logging.debug("Printer: %s" % printer)
@@ -49,7 +49,7 @@ class SettingsPanel(ScreenPanel):
             }
             self.add_option("printers", self.printers, pname, self.printers[pname])
 
-        self.content.add(self.labels['main_box'])
+        self.content.add(self.labels['settings_menu'])
 
     def activate(self):
         while len(self.menu) > 1:
@@ -60,26 +60,6 @@ class SettingsPanel(ScreenPanel):
             self.unload_menu()
             return True
         return False
-
-    def create_box(self, name, insert=None):
-        # Create a scroll window for the options
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_vexpand(True)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-
-        # Create a grid for all options
-        self.labels[name] = Gtk.Grid()
-        scroll.add(self.labels[name])
-
-        # Create a box to contain all of the above
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        box.set_vexpand(True)
-        if insert is not None:
-            box.pack_start(insert, False, False, 0)
-        box.pack_start(scroll, True, True, 0)
-        return box
 
     def add_option(self, boxname, opt_array, opt_name, option):
         if option['type'] is None:
@@ -172,52 +152,3 @@ class SettingsPanel(ScreenPanel):
         self.labels[boxname].insert_row(pos)
         self.labels[boxname].attach(opt_array[opt_name]['row'], 0, pos, 1, 1)
         self.labels[boxname].show_all()
-
-    def load_menu(self, widget, name):
-        if ("%s_box" % name) not in self.labels:
-            return
-
-        for child in self.content.get_children():
-            self.content.remove(child)
-
-        self.menu.append('%s_box' % name)
-        self.content.add(self.labels[self.menu[-1]])
-        self.content.show_all()
-
-    def unload_menu(self, widget=None):
-        logging.debug("self.menu: %s" % self.menu)
-        if len(self.menu) <= 1 or self.menu[-2] not in self.labels:
-            return
-
-        self.menu.pop()
-        for child in self.content.get_children():
-            self.content.remove(child)
-        self.content.add(self.labels[self.menu[-1]])
-        self.content.show_all()
-
-    def on_dropdown_change(self, combo, section, option, callback=None):
-        tree_iter = combo.get_active_iter()
-        if tree_iter is not None:
-            model = combo.get_model()
-            value = model[tree_iter][1]
-            logging.debug("[%s] %s changed to %s" % (section, option, value))
-            self._config.set(section, option, value)
-            self._config.save_user_config_options()
-            if callback is not None:
-                callback(value)
-
-    def scale_moved(self, widget, event, section, option):
-        logging.debug("[%s] %s changed to %s" % (section, option, widget.get_value()))
-        if section not in self._config.get_config().sections():
-            self._config.get_config().add_section(section)
-        self._config.set(section, option, str(int(widget.get_value())))
-        self._config.save_user_config_options()
-
-    def switch_config_option(self, switch, gparam, section, option, callback=None):
-        logging.debug("[%s] %s toggled %s" % (section, option, switch.get_active()))
-        if section not in self._config.get_config().sections():
-            self._config.get_config().add_section(section)
-        self._config.set(section, option, "True" if switch.get_active() else "False")
-        self._config.save_user_config_options()
-        if callback is not None:
-            callback(switch.get_active())

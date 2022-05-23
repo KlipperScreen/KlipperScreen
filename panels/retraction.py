@@ -52,11 +52,7 @@ class FWRetractionPanel(ScreenPanel):
         for opt in self.options:
             self.add_option(opt['option'], opt['name'], opt['units'], opt['value'], opt['digits'], opt["maxval"])
 
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_vexpand(True)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        scroll = self._gtk.ScrolledWindow()
         scroll.add(self.grid)
 
         self.content.add(scroll)

@@ -89,13 +89,8 @@ class TemperaturePanel(ScreenPanel):
                 self.labels[option] = self._gtk.Button(option, "color%d" % ((i % 4) + 1))
                 self.labels[option].connect("clicked", self.set_temperature, option)
                 self.labels['preheat_grid'].attach(self.labels[option], (i % 2), int(i / 2), 1, 1)
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_hexpand(True)
-        scroll.set_vexpand(True)
+        scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
         scroll.add(self.labels["preheat_grid"])
         return scroll
 

@@ -18,11 +18,7 @@ class LimitsPanel(ScreenPanel):
         _ = self.lang.gettext
         self.limits = {}
 
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_vexpand(True)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        scroll = self._gtk.ScrolledWindow()
 
         # Create a grid for all limits
         self.grid = Gtk.Grid()

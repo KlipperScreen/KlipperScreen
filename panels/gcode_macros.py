@@ -18,9 +18,7 @@ class MacroPanel(ScreenPanel):
         self.loaded_macros = []
         self.sort_char = [" ↑", " ↓"]
         self.sort_reverse = False
-
-        macros_box = self.create_box('macros')
-        self.labels['shown_box'] = self.create_box('shown')
+        self.menu = ['macros_menu']
 
         sort = Gtk.Label(_("Sort:"))
         sort.set_hexpand(False)
@@ -29,7 +27,7 @@ class MacroPanel(ScreenPanel):
         self.sort_btn.connect("clicked", self.change_sort)
         self.sort_btn.set_hexpand(True)
         adjust = self._gtk.ButtonImage("settings", None, "color2", 1, Gtk.PositionType.LEFT, False)
-        adjust.connect("clicked", self.load_menu, 'shown')
+        adjust.connect("clicked", self.load_menu, 'options')
         adjust.set_hexpand(False)
 
         sbox = Gtk.HBox()
@@ -38,13 +36,19 @@ class MacroPanel(ScreenPanel):
         sbox.pack_start(self.sort_btn, True, True, 5)
         sbox.pack_start(adjust, True, True, 5)
 
-        self.labels['main_box'] = Gtk.VBox()
-        self.labels['main_box'].set_vexpand(True)
-        self.labels['main_box'].pack_start(sbox, False, False, 0)
-        self.labels['main_box'].pack_start(macros_box, True, True, 0)
+        self.labels['macros_list'] = self._gtk.ScrolledWindow()
+        self.labels['macros'] = Gtk.Grid()
+        self.labels['macros_list'].add(self.labels['macros'])
 
-        self.menu = ['main_box']
-        self.content.add(self.labels['main_box'])
+        self.labels['macros_menu'] = Gtk.VBox()
+        self.labels['macros_menu'].set_vexpand(True)
+        self.labels['macros_menu'].pack_start(sbox, False, False, 0)
+        self.labels['macros_menu'].pack_start(self.labels['macros_list'], True, True, 0)
+
+        self.content.add(self.labels['macros_menu'])
+        self.labels['options_menu'] = self._gtk.ScrolledWindow()
+        self.labels['options'] = Gtk.Grid()
+        self.labels['options_menu'].add(self.labels['options'])
 
     def activate(self):
         while len(self.menu) > 1:
@@ -110,7 +114,7 @@ class MacroPanel(ScreenPanel):
         self.macros = {}
         self.loaded_macros = []
         self.allmacros = {}
-        self.labels['shown'].remove_column(0)
+        self.labels['options'].remove_column(0)
         self.load_gcode_macros()
 
     def load_gcode_macros(self):
@@ -139,7 +143,7 @@ class MacroPanel(ScreenPanel):
                 "section": "displayed_macros %s" % self._screen.connected_printer,
             }
         for macro in list(self.allmacros):
-            self.add_option('shown', self.allmacros, macro, self.allmacros[macro])
+            self.add_option('options', self.allmacros, macro, self.allmacros[macro])
 
         self.labels['macros'].show_all()
 
@@ -187,56 +191,9 @@ class MacroPanel(ScreenPanel):
         self.labels[boxname].attach(opt_array[opt_name]['row'], 0, pos, 1, 1)
         self.labels[boxname].show_all()
 
-    def load_menu(self, widget, name):
-        if ("%s_box" % name) not in self.labels:
-            return
-
-        for child in self.content.get_children():
-            self.content.remove(child)
-
-        self.menu.append('%s_box' % name)
-        self.content.add(self.labels[self.menu[-1]])
-        self.content.show_all()
-
-    def unload_menu(self, widget=None):
-        logging.debug("self.menu: %s" % self.menu)
-        if len(self.menu) <= 1 or self.menu[-2] not in self.labels:
-            return
-
-        self.menu.pop()
-        for child in self.content.get_children():
-            self.content.remove(child)
-        self.content.add(self.labels[self.menu[-1]])
-        self.content.show_all()
-
-    def create_box(self, name):
-        # Create a scroll window for the macros
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_vexpand(True)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-
-        # Create a grid for all macros
-        self.labels[name] = Gtk.Grid()
-        scroll.add(self.labels[name])
-
-        # Create a box to contain all of the above
-        box = Gtk.VBox(spacing=0)
-        box.set_vexpand(True)
-        box.pack_start(scroll, True, True, 0)
-        return box
-
     def back(self):
         if len(self.menu) > 1:
             self.unload_menu()
             self.reload_macros()
             return True
         return False
-
-    def switch_config_option(self, switch, gparam, section, option):
-        logging.debug("[%s] %s toggled %s" % (section, option, switch.get_active()))
-        if section not in self._config.get_config().sections():
-            self._config.get_config().add_section(section)
-        self._config.set(section, option, "True" if switch.get_active() else "False")
-        self._config.save_user_config_options()

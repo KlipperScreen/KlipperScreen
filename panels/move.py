@@ -23,6 +23,7 @@ class MovePanel(ScreenPanel):
     def initialize(self, panel_name):
         _ = self.lang.gettext
         self.settings = {}
+        self.menu = ['move_menu']
 
         grid = self._gtk.HomogeneousGrid()
 
@@ -133,16 +134,13 @@ class MovePanel(ScreenPanel):
         bottomgrid.attach(self.labels['move_dist'], 0, 1, 3, 1)
         bottomgrid.attach(adjust, 3, 0, 1, 2)
 
-        self.labels['main_box'] = Gtk.VBox()
-        self.labels['main_box'].set_vexpand(True)
-        self.labels['main_box'].pack_start(grid, True, True, 0)
-        self.labels['main_box'].pack_start(bottomgrid, True, True, 0)
-        self.labels['main_box'].pack_start(distgrid, True, True, 0)
+        self.labels['move_menu'] = Gtk.VBox()
+        self.labels['move_menu'].set_vexpand(True)
+        self.labels['move_menu'].pack_start(grid, True, True, 0)
+        self.labels['move_menu'].pack_start(bottomgrid, True, True, 0)
+        self.labels['move_menu'].pack_start(distgrid, True, True, 0)
 
-        self.menu = ['main_box']
-        self.content.add(self.labels['main_box'])
-
-        self.labels['options_box'] = self.create_box('options')
+        self.content.add(self.labels['move_menu'])
 
         printer_cfg = self._printer.get_config_section("printer")
         max_velocity = int(float(printer_cfg["max_velocity"]))
@@ -163,6 +161,9 @@ class MovePanel(ScreenPanel):
                 "range": [1, max_z_velocity], "step": 1}}
         ]
 
+        self.labels['options_menu'] = self._gtk.ScrolledWindow()
+        self.labels['options'] = Gtk.Grid()
+        self.labels['options_menu'].add(self.labels['options'])
         for option in configurable_options:
             name = list(option)[0]
             self.add_option('options', self.settings, name, option[name])
@@ -292,62 +293,8 @@ class MovePanel(ScreenPanel):
         self.labels[boxname].attach(opt_array[opt_name]['row'], 0, pos, 1, 1)
         self.labels[boxname].show_all()
 
-    def load_menu(self, widget, name):
-        if ("%s_box" % name) not in self.labels:
-            return
-
-        for child in self.content.get_children():
-            self.content.remove(child)
-
-        self.menu.append('%s_box' % name)
-        self.content.add(self.labels[self.menu[-1]])
-        self.content.show_all()
-
-    def unload_menu(self, widget=None):
-        logging.debug("self.menu: %s" % self.menu)
-        if len(self.menu) <= 1 or self.menu[-2] not in self.labels:
-            return
-
-        self.menu.pop()
-        for child in self.content.get_children():
-            self.content.remove(child)
-        self.content.add(self.labels[self.menu[-1]])
-        self.content.show_all()
-
-    def create_box(self, name):
-        # Create a scroll window for the options
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_vexpand(True)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-
-        # Create a grid for all options
-        self.labels[name] = Gtk.Grid()
-        scroll.add(self.labels[name])
-
-        # Create a box to contain all of the above
-        box = Gtk.VBox(spacing=0)
-        box.set_vexpand(True)
-        box.pack_start(scroll, True, True, 0)
-        return box
-
     def back(self):
         if len(self.menu) > 1:
             self.unload_menu()
             return True
         return False
-
-    def switch_config_option(self, switch, gparam, section, option):
-        logging.debug("[%s] %s toggled %s" % (section, option, switch.get_active()))
-        if section not in self._config.get_config().sections():
-            self._config.get_config().add_section(section)
-        self._config.set(section, option, "True" if switch.get_active() else "False")
-        self._config.save_user_config_options()
-
-    def scale_moved(self, widget, event, section, option):
-        logging.debug("[%s] %s changed to %s" % (section, option, widget.get_value()))
-        if section not in self._config.get_config().sections():
-            self._config.get_config().add_section(section)
-        self._config.set(section, option, str(int(widget.get_value())))
-        self._config.save_user_config_options()
