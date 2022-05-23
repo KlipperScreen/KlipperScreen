@@ -255,6 +255,14 @@ class KlippyGtk:
         b.connect("clicked", self.screen.reset_screensaver_timeout)
         return b
 
+    def ScrolledWindow(self):
+        scroll = Gtk.ScrolledWindow()
+        scroll.set_property("overlay-scrolling", False)
+        scroll.set_vexpand(True)
+        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        return scroll
+
     def formatFileName(self, name):
         name = name.split('/')[-1] if "/" in name else name
         name = name.split('.gcod')[0] if ".gcode" in name else name

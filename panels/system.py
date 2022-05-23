@@ -39,12 +39,8 @@ class SystemPanel(ScreenPanel):
                          _("Are you sure you wish to shutdown the system?"), "machine.shutdown")
         shutdown.set_vexpand(False)
 
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_vexpand(True)
+        scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
 
         infogrid = Gtk.Grid()
         infogrid.get_style_context().add_class("system-program-grid")

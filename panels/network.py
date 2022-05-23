@@ -71,11 +71,7 @@ class NetworkPanel(ScreenPanel):
             sbox.add(self.labels['ip'])
         sbox.add(reload_networks)
 
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_vexpand(True)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        scroll = self._gtk.ScrolledWindow()
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         box.set_vexpand(True)
