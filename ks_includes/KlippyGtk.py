@@ -109,7 +109,7 @@ class KlippyGtk:
 
     def Label(self, label, style=None):
         la = Gtk.Label(label)
-        if style is not None and style is not False:
+        if style is not None:
             la.get_style_context().add_class(style)
         return la
 
@@ -125,14 +125,14 @@ class KlippyGtk:
             logging.error("Unable to find image %s", filename)
             return Gtk.Image()
 
-    def PixbufFromFile(self, filename, style=False, width_scale=1, height_scale=1):
+    def PixbufFromFile(self, filename, width_scale=1, height_scale=1):
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename,
                                                          int(round(self.img_width * width_scale)),
                                                          int(round(self.img_height * height_scale)),
                                                          True)
         return pixbuf
 
-    def PixbufFromHttp(self, resource, style=False, width_scale=1, height_scale=1):
+    def PixbufFromHttp(self, resource, width_scale=1, height_scale=1):
         response = self.screen.apiclient.get_thumbnail_stream(resource)
         if response is False:
             return None
@@ -143,10 +143,10 @@ class KlippyGtk:
                                                            True)
         return pixbuf
 
-    def ProgressBar(self, style=False):
+    def ProgressBar(self, style=None):
         bar = Gtk.ProgressBar()
 
-        if style is not False:
+        if style is not None:
             ctx = bar.get_style_context()
             ctx.add_class(style)
 
@@ -222,7 +222,7 @@ class KlippyGtk:
 
         return dialog
 
-    def ToggleButtonImage(self, image_name, label, style=False, scale=1.38):
+    def ToggleButtonImage(self, image_name, label, style=None, scale=1.38):
 
         b = Gtk.ToggleButton(label=label)
         b.set_hexpand(True)
@@ -232,7 +232,7 @@ class KlippyGtk:
         b.set_image_position(Gtk.PositionType.TOP)
         b.set_always_show_image(True)
 
-        if style is not False:
+        if style is not None:
             ctx = b.get_style_context()
             ctx.add_class(style)
 
