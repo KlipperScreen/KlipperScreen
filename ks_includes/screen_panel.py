@@ -67,9 +67,9 @@ class ScreenPanel:
         if loc is None:
             return None
         if loc[0] == "file":
-            return self._gtk.PixbufFromFile(loc[1], None, width, height)
+            return self._gtk.PixbufFromFile(loc[1], width, height)
         if loc[0] == "http":
-            return self._gtk.PixbufFromHttp(loc[1], None, width, height)
+            return self._gtk.PixbufFromHttp(loc[1], width, height)
         return None
 
     def get_title(self):
