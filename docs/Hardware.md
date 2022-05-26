@@ -64,5 +64,5 @@ ACTION=="add", ATTRS{name}=="<device name>", ENV{LIBINPUT_CALIBRATION_MATRIX}="<
 ```
 More info about input transformation can be found in:
 
-* [Ubuntu wiki InputCoordinateTransformation]("https://wiki.ubuntu.com/X/InputCoordinateTransformation")
-* [Libinput docs]("https://wayland.freedesktop.org/libinput/doc/1.9.0/absolute_axes.html")
+* [Ubuntu wiki InputCoordinateTransformation](https://wiki.ubuntu.com/X/InputCoordinateTransformation)
+* [Libinput docs](https://wayland.freedesktop.org/libinput/doc/1.9.0/absolute_axes.html)
