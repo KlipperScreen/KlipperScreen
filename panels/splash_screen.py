@@ -18,9 +18,6 @@ class SplashScreenPanel(ScreenPanel):
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, back)
 
-        self.layout = Gtk.Layout()
-        self.layout.set_size(self._screen.width, self._screen.height)
-
     def initialize(self, panel_name):
         _ = self.lang.gettext
 

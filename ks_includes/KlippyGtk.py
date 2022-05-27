@@ -33,6 +33,7 @@ class KlippyGtk:
         elif fontsize_type == "large":
             self.font_size = round(self.font_size * 1.09)
         self.header_size = int(round((self.width / self.width_ratio) / 1.33))
+        self.titlebar_height = self.font_size * 2
         self.img_width = int(round(self.width / self.width_ratio))
         self.img_height = int(round(self.height / self.height_ratio))
         if self.screen.vertical_mode:
@@ -62,10 +63,16 @@ class KlippyGtk:
         return self.width - self.action_bar_width
 
     def get_content_height(self):
-        return self.height - self.header_size
+        if self.screen.vertical_mode:
+            return self.height - self.titlebar_height - self.action_bar_height
+        else:
+            return self.height - self.titlebar_height
 
     def get_font_size(self):
         return self.font_size
+
+    def get_titlebar_height(self):
+        return self.titlebar_height
 
     def get_header_size(self):
         return self.header_size

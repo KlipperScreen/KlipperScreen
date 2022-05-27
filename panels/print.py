@@ -298,7 +298,6 @@ class PrintPanel(ScreenPanel):
 
         grid = Gtk.Grid()
         grid.add(label)
-        grid.set_size_request(self._screen.width - 60, -1)
 
         pixbuf = self.get_file_image(filename, 8, 3.2)
         if pixbuf is not None:
