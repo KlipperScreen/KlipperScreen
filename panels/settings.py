@@ -16,7 +16,6 @@ class SettingsPanel(ScreenPanel):
         _ = self.lang.gettext
         self.settings = {}
         self.menu = ['settings_menu']
-
         self.labels['add_printer_button'] = self._gtk.Button(_("Add Printer"), "color1")
 
         options = self._config.get_configurable_options().copy()
@@ -119,7 +118,6 @@ class SettingsPanel(ScreenPanel):
             scale.set_hexpand(True)
             scale.set_digits(0)
             scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
-            scale.set_property("width-request", round(self._screen.width / 2.2))
             dev.add(scale)
         elif option['type'] == "printer":
             logging.debug("Option: %s" % option)

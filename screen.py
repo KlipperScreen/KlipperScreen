@@ -125,7 +125,7 @@ class KlipperScreen(Gtk.Window):
         self.keyboard_height = self.gtk.get_keyboard_height()
         self.init_style()
 
-        self.base_panel = BasePanel(self, "Base Panel", False)
+        self.base_panel = BasePanel(self, title="Base Panel", back=False)
         self.add(self.base_panel.get())
         self.show_all()
         self.base_panel.activate()
@@ -1034,18 +1034,20 @@ class KlipperScreen(Gtk.Window):
         logging.debug("PID %s" % p.pid)
         keyboard = Gtk.Socket()
 
-        action_bar_width = self.gtk.get_action_bar_width()
 
         box = Gtk.VBox()
         box.set_vexpand(False)
-        box.set_size_request(self.width - action_bar_width, self.keyboard_height)
+        if self._screen.vertical_mode:
+            box.set_size_request(self.width, self.keyboard_height)
+        else:
+            action_bar_width = self.gtk.get_action_bar_width()
+            box.set_size_request(self.width - action_bar_width, self.keyboard_height)
         box.add(keyboard)
 
         self.base_panel.get_content().pack_end(box, False, 0, 0)
 
         self.show_all()
         keyboard.add_id(xid)
-        keyboard.show()
 
         self.keyboard = {
             "box": box,

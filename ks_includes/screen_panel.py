@@ -25,7 +25,9 @@ class ScreenPanel:
         self.layout = Gtk.Layout()
         self.layout.set_size(self._screen.width, self._screen.height)
 
-        self.content = Gtk.Box(spacing=0)
+        self.content = Gtk.VBox(spacing=0)
+        self.content.set_hexpand(True)
+        self.content.set_vexpand(True)
 
     def initialize(self, panel_name):
         # Create gtk items here
