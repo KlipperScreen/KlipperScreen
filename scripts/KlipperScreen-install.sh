@@ -9,7 +9,7 @@ FBTURBO="xserver-xorg-video-fbturbo"
 FBDEV="xserver-xorg-video-fbdev"
 PYTHON="python3-virtualenv virtualenv python3-distutils"
 PYGOBJECT="libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0"
-MISC="libopenjp2-7 libatlas-base-dev fonts-freefont-ttf matchbox-keyboard wireless-tools"
+MISC="libopenjp2-7 libatlas-base-dev fonts-freefont-ttf fonts-nanum matchbox-keyboard wireless-tools"
 OPTIONAL="xserver-xorg-legacy"
 
 Red='\033[0;31m'

@@ -1,0 +1,633 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: KlipperScreen\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: NSteven\n"
+"Language-Team: NSteven\n"
+"Language: ko_KR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s 버전으로 업데이트될 것입니다"
+
+msgid "(default)"
+msgstr "(기본)"
+
+msgid "24 Hour Time"
+msgstr "24시간제"
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr "펌웨어 재시작을 사용하여 문제를 해결할 수 있습니다."
+
+msgid "Abort"
+msgstr "중단"
+
+msgid "Accept"
+msgstr "수락"
+
+msgid "Actions"
+msgstr "동작"
+
+msgid "Add Printer"
+msgstr "프린터 추가"
+
+msgid "Add bed mesh profile"
+msgstr "배드 메시 프로필 추가"
+
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "비상정지를 실행하시겠습니까?"
+
+msgid "Are you sure you wish to cancel this print?"
+msgstr "이 출력을 취소하시겠습니까?"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "모터를 비활성화하시겠습니까?"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "시스템을 재시작하시겠습니까?"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "시스템을 종료하시겠습니까?"
+
+msgid "Auto"
+msgstr "자동"
+
+msgid "Auto-scroll"
+msgstr "자동스크롤"
+
+msgid "Bed Level"
+msgstr "배드 레벨"
+
+msgid "Bed Mesh"
+msgstr "배드 메시"
+
+msgid "Bltouch found applied offset"
+msgstr "Bltouch가 오프셋을 찾음"
+
+msgid "Calibrate"
+msgstr "교정"
+
+msgid "Calibrated, save configuration to make it permanent"
+msgstr "교정됨, 설정을 영구적으로 저장합니다"
+
+msgid "Can't set above the maximum:"
+msgstr "최대값보다 높게 설정할 수 없습니다:"
+
+msgid "Cancel"
+msgstr "취소"
+
+msgid "Cancel Print"
+msgstr "출력 취소"
+
+msgid "Cancelled"
+msgstr "취소됨"
+
+msgid "Cancelling"
+msgstr "취소중"
+
+msgid "Cannot connect to Moonraker"
+msgstr "Moonraker에 연결할 수 없음"
+
+msgid "Channel"
+msgstr "채널"
+
+msgid ""
+"Check /tmp/KlipperScreen.log for more information.\n"
+"Please submit an issue on GitHub for help."
+msgstr ""
+"자세한 내용은 /tmp/KlipperScreen.log를 참조하십시오.\n"
+"GitHub에 현재 발생한 이슈를 제출하여 도움을 요청하십시오."
+
+msgid "Close"
+msgstr "닫기"
+
+msgid "Complete"
+msgstr "완료"
+
+msgid "Configuration"
+msgstr "환경설정"
+
+msgid "Confirm Emergency Stop"
+msgstr "비상정지 확인"
+
+msgid "Connected"
+msgstr "연결됨"
+
+#, python-format
+msgid "Connecting to %s"
+msgstr "%s에 연결중"
+
+msgid "Console"
+msgstr "콘솔"
+
+msgid "Continue"
+msgstr "계속"
+
+msgid "Cooldown"
+msgstr "냉각"
+
+msgid "Date"
+msgstr "날짜"
+
+msgid "Decrease"
+msgstr "감소"
+
+msgid "Delete"
+msgstr "삭제"
+
+msgid "Deselect"
+msgstr "선택해제"
+
+msgid "Disable Motors"
+msgstr "모터 비활성화"
+
+msgid "Disable XY"
+msgstr "XY 비활성화"
+
+msgid "Displayed Macros"
+msgstr "표시할 매크로"
+
+msgid "Distance (mm)"
+msgstr "거리 (mm)"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "%s을(를) 복구하시겠습니까?"
+
+msgid "Elapsed:"
+msgstr "경과:"
+
+msgid "Error"
+msgstr "오류"
+
+msgid "Estimated Time Method"
+msgstr "예상시간 표기"
+
+msgid "Extrude"
+msgstr "압출"
+
+msgid "Extrusion +"
+msgstr "압출 +"
+
+msgid "Extrusion -"
+msgstr "압출 -"
+
+msgid "Failed, adjust position first"
+msgstr "실패, 먼저 위치를 조정하십시오."
+
+msgid "Fan"
+msgstr "팬"
+
+msgid "Filament Used"
+msgstr "필라멘트 사용된 양"
+
+msgid "File"
+msgstr "파일"
+
+msgid "Fine Tuning"
+msgstr "미세 조정"
+
+msgid "Finish"
+msgstr "완료됨"
+
+msgid ""
+"Firmware\n"
+"Restart"
+msgstr ""
+"펌웨어\n"
+"재시작"
+
+msgid "Font Size"
+msgstr "폰트 크기"
+
+msgid ""
+"Full\n"
+"Update"
+msgstr ""
+"전체\n"
+"업데이트"
+
+msgid "Go Back"
+msgstr "뒤로"
+
+msgid "Hidden"
+msgstr "숨김"
+
+msgid "Hide"
+msgstr "가리기"
+
+msgid "Hide sensors in Temp."
+msgstr "온도에서 센서들 가리기"
+
+msgid "Home"
+msgstr "홈"
+
+msgid "Home All"
+msgstr "전체 홈"
+
+msgid "Home X"
+msgstr "X축 홈"
+
+msgid "Home XY"
+msgstr "XY축 홈"
+
+msgid "Home Y"
+msgstr "Y축 홈"
+
+msgid "Home Z"
+msgstr "Z축 홈"
+
+msgid "Homing"
+msgstr "호밍"
+
+msgid "Hostname"
+msgstr "호스트 이름"
+
+msgid "Icon Theme"
+msgstr "아이콘 테마"
+
+msgid "Increase"
+msgstr "증가"
+
+msgid "Initializing"
+msgstr "초기화중"
+
+msgid "Initializing printer..."
+msgstr "프린터 초기화중…"
+
+msgid "Interface"
+msgstr "인터페이스"
+
+msgid "Invalid"
+msgstr "올바르지 않음"
+
+msgid "Invert X"
+msgstr "X축 반전"
+
+msgid "Invert Y"
+msgstr "Y축 반전"
+
+msgid "Invert Z"
+msgstr "Z축 반전"
+
+msgid ""
+"Klipper\n"
+"Restart"
+msgstr ""
+"Klipper\n"
+"재시작"
+
+msgid "Klipper has disconnected"
+msgstr "Klipper와 연결이 끊어졌습니다"
+
+msgid "Klipper has encountered an error."
+msgstr "Klipper에 오류가 발생했습니다."
+
+msgid "Klipper has shutdown"
+msgstr "Klipper가 종료되었습니다"
+
+msgid "Klipper is attempting to start"
+msgstr "Klipper 시작하는 중"
+
+msgid "Klipper will reboot"
+msgstr "Klipper를 다시 시작합니다"
+
+msgid "Language"
+msgstr "언어"
+
+msgid "Large"
+msgstr "크게"
+
+msgid "Left:"
+msgstr "남음:"
+
+msgid "Limits"
+msgstr "제한"
+
+msgid "Load"
+msgstr "로드"
+
+msgid "Lower Nozzle"
+msgstr "노즐 낮춤"
+
+msgid "Macro shortcut on sidebar"
+msgstr "사이드바 매크로 바로가기"
+
+msgid "Macros"
+msgstr "매크로"
+
+msgid "Main Menu"
+msgstr "메인메뉴"
+
+msgid "Max Accelation"
+msgstr "최대 가속"
+
+msgid "Max Acceleration to Deceleration"
+msgstr "최대 가속에서 감속까지"
+
+msgid "Max Velocity"
+msgstr "최대 속도"
+
+msgid "Medium"
+msgstr "중간"
+
+msgid "Menu"
+msgstr "메뉴"
+
+msgid "Modified"
+msgstr "수정됨"
+
+msgid "Moonraker: connected"
+msgstr "Moonraker: 연결됨"
+
+msgid "Move"
+msgstr "이동"
+
+msgid "Move Distance (mm)"
+msgstr "이동 거리 (mm)"
+
+msgid "Name"
+msgstr "이름"
+
+msgid "Network"
+msgstr "네트워크"
+
+msgid "Nothing selected"
+msgstr "아무것도 선택되지않음"
+
+msgid "Off"
+msgstr "끔"
+
+#, python-format
+msgid "Outdated by %d"
+msgstr "%d에 의해 오래된 커밋"
+
+msgid "PSK for"
+msgstr "PSK 비번:"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "패키지가 업데이트됩니다"
+
+msgid "Password saved"
+msgstr "비번 저장됨"
+
+msgid "Pause"
+msgstr "일시정지"
+
+msgid "Paused"
+msgstr "일시정지됨"
+
+msgid "Perform a full upgrade?"
+msgstr "전체 업그레이드를 수행하겠습니까?"
+
+msgid "Please recompile and flash the micro-controller."
+msgstr "마이크로 컨트롤러를 다시 컴파일하고 플래시하십시오."
+
+msgid "Power"
+msgstr "전"
+
+msgid "Power On Printer"
+msgstr "프린터 전원 켜기"
+
+msgid "Print"
+msgstr "출력"
+
+msgid "Print Control"
+msgstr "출력 제어"
+
+msgid "Print Time"
+msgstr "출력 시간"
+
+msgid "Printer Connections"
+msgstr "프린터 연결"
+
+msgid "Printing"
+msgstr "출력중"
+
+msgid "Probe found applied offset"
+msgstr "프로브가 오프셋을 찾았습니다"
+
+msgid "Profile Name:"
+msgstr "프로파일 이름:"
+
+msgid "Quad Gantry Level"
+msgstr "쿼드 갠트리 레벨"
+
+msgid "Raise Nozzle"
+msgstr "노즐 높임"
+
+msgid "Recover Hard"
+msgstr "하드하게 복원"
+
+msgid "Recover Soft"
+msgstr "부드럽게 복원"
+
+msgid "Reference"
+msgstr "레퍼런스"
+
+msgid "Restart"
+msgstr "재시작"
+
+msgid "Resume"
+msgstr "재개"
+
+msgid "Retract"
+msgstr "철회"
+
+#, python-format
+msgid "Retry #%s"
+msgstr "재시도 #%s"
+
+msgid "Save"
+msgstr "저장"
+
+msgid "Save Config"
+msgstr "설정 저장"
+
+msgid "Save configuration"
+msgstr "설\b정을 저장합니다"
+
+msgid "Screen DPMS"
+msgstr "화면 DPMS"
+
+msgid "Screen Power Off Time"
+msgstr "화면이 꺼지는 시간"
+
+msgid "Screws Adjust"
+msgstr "스크류 조정"
+
+msgid "Select"
+msgstr "선택"
+
+msgid "Send"
+msgstr "보내기"
+
+#, python-format
+msgid "Sending Power ON signal to: %s"
+msgstr "전원 켜기 신호를 보내는 중: %s"
+
+msgid "Set Temp"
+msgstr "온도 설정"
+
+msgid "Settings"
+msgstr "설정"
+
+msgid "Show"
+msgstr "보기"
+
+msgid "Size"
+msgstr "크기"
+
+msgid "Slicer"
+msgstr "슬라이서"
+
+msgid "Slicer Time correction (%)"
+msgstr "슬라이서 시간 보정(%)"
+
+msgid "Small"
+msgstr "작은"
+
+msgid "Sort by: "
+msgstr "분류 기준:"
+
+msgid "Speed (mm/s)"
+msgstr "속도 (mm/s)"
+
+msgid "Speed +"
+msgstr "속도 +"
+
+msgid "Speed -"
+msgstr "속도 -"
+
+msgid "Square Corner Velocity"
+msgstr "사각 모서리 속도"
+
+msgid "Start"
+msgstr "시작"
+
+msgid "Starting WiFi Association"
+msgstr "WiFi 연결을 시작하는 중"
+
+msgid "Starting recovery for"
+msgstr "복구 시작 중:"
+
+msgid "Starting update for"
+msgstr "업데이트 시작 중:"
+
+msgid "System"
+msgstr "시스템"
+
+msgid ""
+"System\n"
+"Restart"
+msgstr ""
+"시스템\n"
+"재시작"
+
+msgid ""
+"System\n"
+"Shutdown"
+msgstr ""
+"시스템\n"
+"종료"
+
+msgid "Temp (°C)"
+msgstr "온도 (°C)"
+
+msgid "Temperature"
+msgstr "온도"
+
+#, python-format
+msgid "To apply %s KlipperScreen needs to be restarted"
+msgstr "%s을(를) 적용하려면 KlipperScreen을(를) 다시 시작해야 합니다."
+
+msgid "Tool"
+msgstr "툴"
+
+msgid "Total:"
+msgstr "총:"
+
+msgid "Unknown Heater"
+msgstr "알 수 없는 히터"
+
+msgid "Unload"
+msgstr "언로드"
+
+msgid "Up To Date"
+msgstr "최신버전"
+
+msgid "Update"
+msgstr "업데이트"
+
+msgid "Updating"
+msgstr "업데이트중"
+
+msgid "Uploaded"
+msgstr "업로드됨"
+
+msgid "View Mesh"
+msgstr "메쉬 보기"
+
+msgid "X+"
+msgstr "X+"
+
+msgid "X-"
+msgstr "X-"
+
+msgid "XY Move Speed (mm/s)"
+msgstr "XY 이동 속도 (mm/s)"
+
+msgid "Y+"
+msgstr "Y+"
+
+msgid "Y-"
+msgstr "Y-"
+
+msgid "Z Calibrate"
+msgstr "Z 교정"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "Z 이동 속도 (mm/s)"
+
+msgid "Z Position"
+msgstr "Z 위치"
+
+msgid "Z Tilt"
+msgstr "Z 기울기"
+
+msgid "Z+"
+msgstr "Z+"
+
+msgid "Z-"
+msgstr "Z-"
+
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "결정"
+
+msgid "dBm"
+msgstr "dBm"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "시간"
+
+msgid "minutes"
+msgstr "분"
+
+msgid "mm"
+msgstr "mm"
+
+msgid "mm/s"
+msgstr "mm/s"
+
+msgid "mm/s^2"
+msgstr "mm/s^2"
