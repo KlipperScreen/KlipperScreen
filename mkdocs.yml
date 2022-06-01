@@ -1,16 +1,57 @@
 site_name: KlipperScreen
-nav:
-    - Hardware.md
-    - Installation.md
-    - Configuration.md
-    - Quicktips.md
-    - Theming.md
-    - Troubleshooting.md
-    - Translations.md
-    - Changelog.md
-    - Panels.md
-    - Contact.md
-theme: readthedocs
+site_url: https://klipperscreen.readthedocs.io
+site_description: >-
+  KlipperScreen documentation.
+
+repo_name: jordanruthe/KlipperScreen/
 repo_url: https://github.com/jordanruthe/KlipperScreen/
+nav:
+    - Home: index.md
+    - Setup:
+      - Hardware.md
+      - Installation.md
+      - Configuration.md
+      - Quicktips.md
+      - Macros: macros.md
+    - Troubleshooting.md
+    - Theming.md
+    - Translations.md
+    - Breaking Changes: Changelog.md
+    - Screenshots: Panels.md
+    - Contact.md
+theme:
+  name: material
+  language: en
+  features:
+    - content.code.annotate
+    - content.tooltips
+    - navigation.indexes
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+  palette:
+    - scheme: slate
+      primary: deep purple
+
 plugins:
     - search
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+extra:
+    social:
+      - icon: fontawesome/brands/github
+        link: https://github.com/jordanruthe/klipperScreen/
+      - icon: fontawesome/brands/discord
+        link: https://discord.klipper3d.org/
+      - icon: fontawesome/brands/python

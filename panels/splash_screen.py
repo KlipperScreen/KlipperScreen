@@ -7,8 +7,10 @@ from gi.repository import Gdk, Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return SplashScreenPanel(*args)
+
 
 class SplashScreenPanel(ScreenPanel):
     box = None
@@ -129,9 +131,22 @@ class SplashScreenPanel(ScreenPanel):
     def restart(self, widget):
         self._screen._ws.klippy.restart()
 
-
     def shutdown(self, widget):
-        os.system("sudo shutdown -P now")
+        _ = self.lang.gettext
+        if self._screen._ws.is_connected():
+            self._screen._confirm_send_action(widget,
+                                              _("Are you sure you wish to shutdown the system?"),
+                                              "machine.shutdown")
+        else:
+            logging.info("OS Shutdown")
+            os.system("systemctl poweroff")
 
     def restart_system(self, widget):
-        os.system("sudo reboot now")
+        _ = self.lang.gettext
+        if self._screen._ws.is_connected():
+            self._screen._confirm_send_action(widget,
+                                              _("Are you sure you wish to reboot the system?"),
+                                              "machine.reboot")
+        else:
+            logging.info("OS Reboot")
+            os.system("systemctl reboot")

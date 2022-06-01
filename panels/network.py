@@ -8,8 +8,10 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return NetworkPanel(*args)
+
 
 class NetworkPanel(ScreenPanel):
     initialized = False
@@ -38,7 +40,7 @@ class NetworkPanel(ScreenPanel):
             ints = netifaces.interfaces()
             if 'lo' in ints:
                 ints.pop(ints.index('lo'))
-            if (len(ints) > 0):
+            if len(ints) > 0:
                 self.interface = ints[0]
             else:
                 self.interface = 'lo'
@@ -69,12 +71,7 @@ class NetworkPanel(ScreenPanel):
             sbox.add(self.labels['ip'])
         sbox.add(reload_networks)
 
-
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_vexpand(True)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        scroll = self._gtk.ScrolledWindow()
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         box.set_vexpand(True)
@@ -151,7 +148,7 @@ class NetworkPanel(ScreenPanel):
             display_name += " (" + _("Connected") + ")"
 
         name = Gtk.Label("")
-        name.set_markup("<big><b>%s</b></big>" % (display_name))
+        name.set_markup("<big><b>%s</b></big>" % display_name)
         name.set_hexpand(True)
         name.set_halign(Gtk.Align.START)
         name.set_line_wrap(True)
@@ -372,7 +369,6 @@ class NetworkPanel(ScreenPanel):
         save.set_hexpand(False)
         save.connect("clicked", self.add_new_network, ssid, True)
 
-
         self.labels['network_psk'] = entry
         box.pack_start(label, False, False, 5)
         box.pack_start(entry, True, True, 5)
@@ -428,7 +424,7 @@ class NetworkPanel(ScreenPanel):
             lvl = netinfo['signal_level_dBm'] + " " + _("dBm")
 
         self.labels['networks'][ssid]['info'].set_markup("%s <small>%s  %s  %s  %s</small>" % (
-                                                         info, encr, freq, chan, lvl))
+            info, encr, freq, chan, lvl))
         self.labels['networks'][ssid]['info'].show_all()
 
     def update_single_network_info(self):

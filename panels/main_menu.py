@@ -8,8 +8,10 @@ from panels.menu import MenuPanel
 from ks_includes.widgets.graph import HeaterGraph
 from ks_includes.widgets.keypad import Keypad
 
+
 def create_panel(*args):
     return MainPanel(*args)
+
 
 class MainPanel(MenuPanel):
     def __init__(self, screen, title, back=False):
@@ -135,7 +137,6 @@ class MainPanel(MenuPanel):
         name.set_alignment(0, .5)
         name.get_style_context().add_class(class_name)
         child = name.get_children()[0].get_children()[0].get_children()[1]
-        child.set_ellipsize(True)
         child.set_ellipsize(Pango.EllipsizeMode.END)
 
         temp = self._gtk.Button("")
@@ -211,12 +212,7 @@ class MainPanel(MenuPanel):
         da.set_vexpand(True)
         self.labels['da'] = da
 
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_hexpand(True)
-        scroll.set_vexpand(True)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(self.labels['devices'])
 
@@ -224,7 +220,6 @@ class MainPanel(MenuPanel):
         box.set_vexpand(True)
         box.add(scroll)
         box.add(self.labels['da'])
-
 
         self.labels['graph_settemp'] = self._gtk.Button(label=_("Set Temp"))
         self.labels['graph_settemp'].connect("clicked", self.show_numpad)

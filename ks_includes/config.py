@@ -12,18 +12,20 @@ from io import StringIO
 from os import path
 
 SCREEN_BLANKING_OPTIONS = [
-    "300",    # 5 Minutes
-    "900",    # 15 Minutes
-    "1800",   # 30 Minutes
-    "3600",   # 1 Hour
-    "7200",   # 2 Hours
+    "300",  # 5 Minutes
+    "900",  # 15 Minutes
+    "1800",  # 30 Minutes
+    "3600",  # 1 Hour
+    "7200",  # 2 Hours
     "14400",  # 4 Hours
 ]
 
 klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
 
+
 class ConfigError(Exception):
     pass
+
 
 class KlipperScreenConfig:
     config = None
@@ -103,20 +105,14 @@ class KlipperScreenConfig:
         _n = self.lang.ngettext
 
         self.configurable_options = [
-            {"invert_x": {"section": "main", "name": _("Invert X"), "type": "binary", "value": "False"}},
-            {"invert_y": {"section": "main", "name": _("Invert Y"), "type": "binary", "value": "False"}},
-            {"invert_z": {"section": "main", "name": _("Invert Z"), "type": "binary", "value": "False"}},
-            {"language": {"section": "main", "name": _("Language"), "type": "dropdown", "value": "system_lang",
-                          "callback": screen.restart_warning, "options": [
-                              {"name": _("System") + " " + _("(default)"), "value": "system_lang"}
-            ]}},
-            {"move_speed_xy": {
-                "section": "main", "name": _("XY Move Speed (mm/s)"), "type": "scale", "value": "20",
-                "range": [5, 200], "step": 1}},
-            {"move_speed_z": {
-                "section": "main", "name": _("Z Move Speed (mm/s)"), "type": "scale", "value": "20",
-                "range": [5, 200], "step": 1}},
-            {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
+            {"language": {
+                "section": "main", "name": _("Language"), "type": "dropdown", "value": "system_lang",
+                "callback": screen.restart_warning, "options": [
+                    {"name": _("System") + " " + _("(default)"), "value": "system_lang"}]}},
+            {"theme": {
+                "section": "main", "name": _("Icon Theme"), "type": "dropdown",
+                "value": "z-bolt", "callback": screen.restart_warning, "options": [
+                    {"name": "Z-bolt" + " " + _("(default)"), "value": "z-bolt"}]}},
             {"print_estimate_method": {
                 "section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
                 "value": "auto", "options": [
@@ -129,10 +125,6 @@ class KlipperScreenConfig:
                 "value": "3600", "callback": screen.set_screenblanking_timeout, "options": [
                     {"name": _("Off"), "value": "off"}]
             }},
-            {"theme": {
-                "section": "main", "name": _("Icon Theme"), "type": "dropdown",
-                "value": "z-bolt", "callback": screen.restart_warning, "options": [
-                    {"name": "Z-bolt" + " " + _("(default)"), "value": "z-bolt"}]}},
             {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
             {"side_macro_shortcut": {
                 "section": "main", "name": _("Macro shortcut on sidebar"), "type": "binary",
@@ -152,13 +144,26 @@ class KlipperScreenConfig:
             {"print_estimate_compensation": {
                 "section": "main", "name": _("Slicer Time correction (%)"), "type": "scale", "value": "100",
                 "range": [50, 150], "step": 1}},
+
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
+
+        # Options that are in panels and shouldn't be added to the main settings
+        panel_options = [
+            {"invert_x": {"section": "main", "name": _("Invert X"), "type": None, "value": "False"}},
+            {"invert_y": {"section": "main", "name": _("Invert Y"), "type": None, "value": "False"}},
+            {"invert_z": {"section": "main", "name": _("Invert Z"), "type": None, "value": "False"}},
+            {"move_speed_xy": {"section": "main", "name": _("XY Move Speed (mm/s)"), "type": None, "value": "50"}},
+            {"move_speed_z": {"section": "main", "name": _("Z Move Speed (mm/s)"), "type": None, "value": "10"}},
+            {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
+        ]
+
+        self.configurable_options.extend(panel_options)
 
         lang_path = os.path.join(klipperscreendir, "ks_includes", "locales")
         langs = [d for d in os.listdir(lang_path) if not os.path.isfile(os.path.join(lang_path, d))]
         langs.sort()
-        lang_opt = self.configurable_options[3]['language']['options']
+        lang_opt = self.configurable_options[0]['language']['options']
 
         for lang in langs:
             lang_opt.append({"name": lang, "value": lang})
@@ -166,7 +171,7 @@ class KlipperScreenConfig:
         t_path = os.path.join(klipperscreendir, 'styles')
         themes = [d for d in os.listdir(t_path) if (not os.path.isfile(os.path.join(t_path, d)) and d != "z-bolt")]
         themes.sort()
-        theme_opt = self.configurable_options[9]['theme']['options']
+        theme_opt = self.configurable_options[1]['theme']['options']
 
         for theme in themes:
             theme_opt.append({"name": theme, "value": theme})
@@ -174,11 +179,11 @@ class KlipperScreenConfig:
         index = self.configurable_options.index(
             [i for i in self.configurable_options if list(i)[0] == "screen_blanking"][0])
         for num in SCREEN_BLANKING_OPTIONS:
-            hour = int(int(num)/3600)
+            hour = int(int(num) / 3600)
             if hour > 0:
                 name = str(hour) + " " + _n("hour", "hours", hour)
             else:
-                name = str(int(int(num)/60)) + " " + _("minutes")
+                name = str(int(int(num) / 60)) + " " + _("minutes")
             self.configurable_options[index]['screen_blanking']['options'].append({
                 "name": name,
                 "value": num
@@ -255,7 +260,7 @@ class KlipperScreenConfig:
                     user_def.append(line.replace('\n', ''))
                 else:
                     if line.startswith(self.do_not_edit_prefix):
-                        saved_def.append(line[(len(self.do_not_edit_prefix)+1):])
+                        saved_def.append(line[(len(self.do_not_edit_prefix) + 1):])
         return ["\n".join(user_def), None if saved_def is None else "\n".join(saved_def)]
 
     def get_config_file_location(self, file):
@@ -308,7 +313,6 @@ class KlipperScreenConfig:
         if name not in self.config:
             return False
         return self.config[name].get('name')
-
 
     def get_preheat_options(self):
         index = "preheat "
@@ -443,10 +447,10 @@ class KlipperScreenConfig:
             return False
         cfg = self.config[name]
         item = {
-            "extruder": cfg.getint("extruder", 0),
-            "bed": cfg.getint("bed", 0),
-            "heater_generic": cfg.getint("heater_generic", 0),
-            "temperature_fan": cfg.getint("temperature_fan", 0),
+            "extruder": cfg.getint("extruder", None),
+            "bed": cfg.getint("bed", None),
+            "heater_generic": cfg.getint("heater_generic", None),
+            "temperature_fan": cfg.getint("temperature_fan", None),
             "gcode": cfg.get("gcode", None)
         }
         return item

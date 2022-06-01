@@ -2,6 +2,7 @@ import json
 import requests
 import logging
 
+
 class KlippyRest:
     def __init__(self, ip, port=7125, api_key=False):
         self.ip = ip
@@ -34,7 +35,8 @@ class KlippyRest:
         headers = {} if self.api_key is False else {"x-api-key": self.api_key}
         try:
             r = requests.get(url, headers=headers)
-        except Exception:
+        except Exception as e:
+            logging.critical(e, exc_info=True)
             return False
         if r.status_code != 200:
             return False
@@ -42,7 +44,8 @@ class KlippyRest:
         # TODO: Try/except
         try:
             data = json.loads(r.content)
-        except Exception:
+        except Exception as e:
+            logging.critical(e, exc_info=True)
             logging.exception("Unable to parse response from moonraker:\n %s" % r.content)
             return False
 

@@ -9,10 +9,12 @@ from threading import Thread
 from queue import Queue
 
 import gi
+
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gdk
 
-class WifiManager():
+
+class WifiManager:
     networks_in_supplicant = []
     connected = False
     _stop_loop = False
@@ -50,8 +52,9 @@ class WifiManager():
             self.soc = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
             self.soc.bind(KS_SOCKET_FILE)
             self.soc.connect("/var/run/wpa_supplicant/%s" % interface)
-        except Exception:
-            logging.info("Error connecting to wifi socket: %s" % interface)
+        except Exception as e:
+            logging.critical(e, exc_info=True)
+            logging.error("Error connecting to wifi socket: %s" % interface)
             return
 
         self.wpa_thread = WpaSocket(self, self.queue, self.callback)
@@ -76,7 +79,7 @@ class WifiManager():
         # TODO: Add wpa_cli error checking
         network_id = self.wpa_cli("ADD_NETWORK")
         commands = [
-            'ENABLE_NETWORK %s' % (network_id),
+            'ENABLE_NETWORK %s' % network_id,
             'SET_NETWORK %s ssid "%s"' % (network_id, ssid.replace('"', '\"')),
             'SET_NETWORK %s psk "%s"' % (network_id, psk.replace('"', '\"'))
         ]
@@ -324,7 +327,8 @@ class WpaSocket(Thread):
         while self._stop_loop is False:
             try:
                 msg = self.soc.recv(4096).decode().strip()
-            except Exception:
+            except Exception as e:
+                logging.critical(e, exc_info=True)
                 # TODO: Socket error
                 continue
             if msg.startswith("<"):
@@ -363,117 +367,117 @@ class WifiChannels:
     @staticmethod
     def lookup(freq):
         if freq == "2412":
-            return ("2.4", "1")
+            return "2.4", "1"
         if freq == "2417":
-            return ("2.4", "2")
+            return "2.4", "2"
         if freq == "2422":
-            return ("2.4", "3")
+            return "2.4", "3"
         if freq == "2427":
-            return ("2.4", "4")
+            return "2.4", "4"
         if freq == "2432":
-            return ("2.4", "5")
+            return "2.4", "5"
         if freq == "2437":
-            return ("2.4", "6")
+            return "2.4", "6"
         if freq == "2442":
-            return ("2.4", "7")
+            return "2.4", "7"
         if freq == "2447":
-            return ("2.4", "8")
+            return "2.4", "8"
         if freq == "2452":
-            return ("2.4", "9")
+            return "2.4", "9"
         if freq == "2457":
-            return ("2.4", "10")
+            return "2.4", "10"
         if freq == "2462":
-            return ("2.4", "11")
+            return "2.4", "11"
         if freq == "2467":
-            return ("2.4", "12")
+            return "2.4", "12"
         if freq == "2472":
-            return ("2.4", "13")
+            return "2.4", "13"
         if freq == "2484":
-            return ("2.4", "14")
+            return "2.4", "14"
         if freq == "5035":
-            return ("5", "7")
+            return "5", "7"
         if freq == "5040":
-            return ("5", "8")
+            return "5", "8"
         if freq == "5045":
-            return ("5", "9")
+            return "5", "9"
         if freq == "5055":
-            return ("5", "11")
+            return "5", "11"
         if freq == "5060":
-            return ("5", "12")
+            return "5", "12"
         if freq == "5080":
-            return ("5", "16")
+            return "5", "16"
         if freq == "5170":
-            return ("5", "34")
+            return "5", "34"
         if freq == "5180":
-            return ("5", "36")
+            return "5", "36"
         if freq == "5190":
-            return ("5", "38")
+            return "5", "38"
         if freq == "5200":
-            return ("5", "40")
+            return "5", "40"
         if freq == "5210":
-            return ("5", "42")
+            return "5", "42"
         if freq == "5220":
-            return ("5", "44")
+            return "5", "44"
         if freq == "5230":
-            return ("5", "46")
+            return "5", "46"
         if freq == "5240":
-            return ("5", "48")
+            return "5", "48"
         if freq == "5260":
-            return ("5", "52")
+            return "5", "52"
         if freq == "5280":
-            return ("5", "56")
+            return "5", "56"
         if freq == "5300":
-            return ("5", "60")
+            return "5", "60"
         if freq == "5320":
-            return ("5", "64")
+            return "5", "64"
         if freq == "5500":
-            return ("5", "100")
+            return "5", "100"
         if freq == "5520":
-            return ("5", "104")
+            return "5", "104"
         if freq == "5540":
-            return ("5", "108")
+            return "5", "108"
         if freq == "5560":
-            return ("5", "112")
+            return "5", "112"
         if freq == "5580":
-            return ("5", "116")
+            return "5", "116"
         if freq == "5600":
-            return ("5", "120")
+            return "5", "120"
         if freq == "5620":
-            return ("5", "124")
+            return "5", "124"
         if freq == "5640":
-            return ("5", "128")
+            return "5", "128"
         if freq == "5660":
-            return ("5", "132")
+            return "5", "132"
         if freq == "5680":
-            return ("5", "136")
+            return "5", "136"
         if freq == "5700":
-            return ("5", "140")
+            return "5", "140"
         if freq == "5720":
-            return ("5", "144")
+            return "5", "144"
         if freq == "5745":
-            return ("5", "149")
+            return "5", "149"
         if freq == "5765":
-            return ("5", "153")
+            return "5", "153"
         if freq == "5785":
-            return ("5", "157")
+            return "5", "157"
         if freq == "5805":
-            return ("5", "161")
+            return "5", "161"
         if freq == "5825":
-            return ("5", "165")
+            return "5", "165"
         if freq == "4915":
-            return ("5", "183")
+            return "5", "183"
         if freq == "4920":
-            return ("5", "184")
+            return "5", "184"
         if freq == "4925":
-            return ("5", "185")
+            return "5", "185"
         if freq == "4935":
-            return ("5", "187")
+            return "5", "187"
         if freq == "4940":
-            return ("5", "188")
+            return "5", "188"
         if freq == "4945":
-            return ("5", "189")
+            return "5", "189"
         if freq == "4960":
-            return ("5", "192")
+            return "5", "192"
         if freq == "4980":
-            return ("5", "196")
+            return "5", "196"
         return None

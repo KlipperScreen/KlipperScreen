@@ -7,12 +7,15 @@ from jinja2 import Environment, Template
 
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return MenuPanel(*args)
+
 
 class MenuPanel(ScreenPanel):
     i = 0
     j2_data = None
+
     def initialize(self, panel_name, display_name, items):
         _ = self.lang.gettext
 
@@ -21,18 +24,14 @@ class MenuPanel(ScreenPanel):
 
         self.grid = self._gtk.HomogeneousGrid()
 
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_hexpand(True)
-        scroll.set_vexpand(True)
+        scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(self.grid)
 
         self.content.add(scroll)
 
     def activate(self):
-        if not self.j2_data:
-            self.j2_data = self._printer.get_printer_status_data()
+        self.j2_data = self._printer.get_printer_status_data()
         self.j2_data.update({
             'moonraker_connected': self._screen._ws.is_connected()
         })
@@ -57,15 +56,15 @@ class MenuPanel(ScreenPanel):
                 if length <= 4:
                     # Arrange 2 x 2
                     columns = 2
-                elif length > 4 and length <= 6:
+                elif 4 < length <= 6:
                     # Arrange 3 x 2
                     columns = 3
 
             col = i % columns
-            row = int(i/columns)
+            row = int(i / columns)
 
             width = height = 1
-            if expandLast is True and i+1 == length and length % 2 == 1:
+            if expandLast is True and i + 1 == length and length % 2 == 1:
                 width = 2
 
             self.grid.attach(self.labels[key], col, row, width, height)
@@ -84,7 +83,7 @@ class MenuPanel(ScreenPanel):
             parsed_name = j2_temp.render()
 
             b = self._gtk.ButtonImage(
-                item['icon'], parsed_name, "color"+str((i % 4)+1)
+                item['icon'], parsed_name, "color" + str((i % 4) + 1)
             )
             if item['panel'] is not False:
                 b.connect("clicked", self.menu_item_clicked, item['panel'], item)
@@ -104,8 +103,11 @@ class MenuPanel(ScreenPanel):
         if enable is False:
             return False
 
-        if not self.j2_data:
-            self.j2_data = self._printer.get_printer_status_data()
+        if enable == "{{ moonraker_connected }}":
+            logging.info("moonraker is_connected %s", self._screen._ws.is_connected())
+            return self._screen._ws.is_connected()
+
+        self.j2_data = self._printer.get_printer_status_data()
         try:
             logging.debug("Template: '%s'" % enable)
             logging.debug("Data: %s" % self.j2_data)

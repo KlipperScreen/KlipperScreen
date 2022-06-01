@@ -1,5 +1,4 @@
 class KlippyGcodes:
-
     HOME = "G28"
     HOME_X = "G28 X"
     HOME_Y = "G28 Y"
@@ -33,7 +32,6 @@ class KlippyGcodes:
     RESTART = "RESTART"
     FIRMWARE_RESTART = "FIRMWARE_RESTART"
 
-
     @staticmethod
     def set_bed_temp(temp):
         return "%s S%s" % (KlippyGcodes.SET_BED_TEMP, str(temp))
@@ -52,7 +50,7 @@ class KlippyGcodes:
 
     @staticmethod
     def set_fan_speed(speed):
-        speed = str(int(float(int(speed) % 101)/100*255))
+        speed = str(int(float(int(speed) % 101) / 100 * 255))
         return "%s S%s" % (KlippyGcodes.SET_FAN_SPEED, speed)
 
     @staticmethod

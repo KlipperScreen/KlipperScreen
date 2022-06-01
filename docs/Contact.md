@@ -8,6 +8,4 @@ You may submit a GitHub issue request for any problems you are having.
 
 ## Klipper Community Discord
 
-The invite link: https://discord.klipper3d.org/
-
-Look for the channel `#klipper-screen`
+[Look for the channel `#klipper-screen`](https://discord.klipper3d.org/)

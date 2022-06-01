@@ -6,7 +6,7 @@ quick tips, without much explanation
 As you probably already noticed, you can show and hide the gcode macros in the interface settings,
 but you can also hide gcode macros by prefixing the name with an underscore.
 
-```
+```py
 [gcode_macro MY_AWESOME_GCODE]
 gcode:
     _MY_HELPER_CODE
@@ -21,7 +21,7 @@ Another example:
 
 Lets hide a temperature_fan:
 
-```
+```py
 [temperature_fan fan1]
 [temperature_fan _fan2]
 ```

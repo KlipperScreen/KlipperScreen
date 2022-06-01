@@ -26,6 +26,7 @@ api = {
     }
 }
 
+
 class KlippyWebsocket(threading.Thread):
     _req_id = 0
     connected = False
@@ -70,11 +71,12 @@ class KlippyWebsocket(threading.Thread):
                 if self.reconnect_count > 3:
                     self._screen.panels['splash_screen'].update_text(
                         _("Cannot connect to Moonraker") +
-                        ("\n\n%s\n\n") % self._url +
+                        "\n\n%s\n\n" % self._url +
                         _("Retry #%s") % self.reconnect_count)
                 return False
             token = self._screen.apiclient.get_oneshot_token()
-        except Exception:
+        except Exception as e:
+            logging.critical(e, exc_info=True)
             logging.debug("Unable to get oneshot token")
             return False
 
@@ -86,7 +88,8 @@ class KlippyWebsocket(threading.Thread):
         try:
             logging.debug("Starting websocket thread")
             self._wst.start()
-        except Exception:
+        except Exception as e:
+            logging.critical(e, exc_info=True)
             logging.debug("Error starting web socket")
 
     def close(self):
@@ -192,6 +195,7 @@ class KlippyWebsocket(threading.Thread):
 
     def on_error(self, ws, error):
         logging.debug("Websocket error: %s" % error)
+
 
 class MoonrakerApi:
     def __init__(self, ws):

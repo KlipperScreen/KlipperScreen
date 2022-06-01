@@ -17,21 +17,23 @@ There are no recommended screens, but the minimum supported resolution is 480x32
 
 * [More known hardware in the klipper discourse](https://klipper.discourse.group/t/hardware-known-to-work-with-klipperscreen/35)
 
-#### Configuration
+### Configuration
 
 Follow the manufacturer instructions on how to install your screen. In general if you see a white screen, then it's not properly installed, ensure that you at least see a console, Then ![install](Installation.md) KlipperScreen, if you are having troubles refer to the ![troubleshooting page](Troubleshooting.md) for further information.
 
 
-#### Touchscreen touch rotation
+## Touchscreen touch rotation
 If your touchscreen isn't registering touches properly after the screen has been rotated, you will need to apply a
 transformation matrix.
 
-First you will need your device name.
+First you will need your device name, on a terminal run:
 
-Run: `DISPLAY=:0 xinput`
-
-Output
+```sh
+DISPLAY=:0 xinput
 ```
+
+Output:
+```sh
 ⎡ Virtual core pointer                          id=2    [master pointer  (3)]
 ⎜   ↳ Virtual core XTEST pointer                id=4    [slave  pointer  (2)]
 ⎜   ↳ ADS7846 Touchscreen                       id=6    [slave  pointer  (2)]
@@ -42,7 +44,9 @@ In this case the device is the ADS7846 Touchscreen, yours may be different
 
 You can test a change by running:
 
-`DISPLAY=:0 xinput set-prop "<device name>" 'Coordinate Transformation Matrix' <matrix>`
+```sh
+DISPLAY=:0 xinput set-prop "<device name>" 'Coordinate Transformation Matrix' <matrix>
+```
 
 Where the matrix can be one of the following options:
 
@@ -55,14 +59,16 @@ Where the matrix can be one of the following options:
 
 For example:
 
-`DISPLAY=:0 xinput set-prop "ADS7846 Touchscreen" 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1`
+```sh
+DISPLAY=:0 xinput set-prop "ADS7846 Touchscreen" 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1
+```
 
 To make this permanent, modify the file `/etc/udev/rules.d/51-touchscreen.rules` and add following line:
 
-```
+```sh
 ACTION=="add", ATTRS{name}=="<device name>", ENV{LIBINPUT_CALIBRATION_MATRIX}="<matrix>"
 ```
 More info about input transformation can be found in:
 
-* [Ubuntu wiki InputCoordinateTransformation]("https://wiki.ubuntu.com/X/InputCoordinateTransformation")
-* [Libinput docs]("https://wayland.freedesktop.org/libinput/doc/1.9.0/absolute_axes.html")
+* [Ubuntu wiki InputCoordinateTransformation](https://wiki.ubuntu.com/X/InputCoordinateTransformation)
+* [Libinput docs](https://wayland.freedesktop.org/libinput/doc/1.9.0/absolute_axes.html)

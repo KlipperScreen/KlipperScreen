@@ -8,8 +8,10 @@ from ks_includes.screen_panel import ScreenPanel
 from ks_includes.widgets.graph import HeaterGraph
 from ks_includes.widgets.keypad import Keypad
 
+
 def create_panel(*args):
     return TemperaturePanel(*args)
+
 
 class TemperaturePanel(ScreenPanel):
     graph_update = None
@@ -84,16 +86,11 @@ class TemperaturePanel(ScreenPanel):
         self.labels["preheat_grid"] = self._gtk.HomogeneousGrid()
         for i, option in enumerate(self.preheat_options):
             if option != "cooldown":
-                self.labels[option] = self._gtk.Button(option, "color%d" % ((i % 4)+1))
+                self.labels[option] = self._gtk.Button(option, "color%d" % ((i % 4) + 1))
                 self.labels[option].connect("clicked", self.set_temperature, option)
-                self.labels['preheat_grid'].attach(self.labels[option], (i % 2), int(i/2), 1, 1)
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_hexpand(True)
-        scroll.set_vexpand(True)
+                self.labels['preheat_grid'].attach(self.labels[option], (i % 2), int(i / 2), 1, 1)
+        scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
         scroll.add(self.labels["preheat_grid"])
         return scroll
 
@@ -116,7 +113,7 @@ class TemperaturePanel(ScreenPanel):
             ctx = self.labels['deg' + i].get_style_context()
             if j == 0:
                 ctx.add_class("distbutton_top")
-            elif j == len(self.tempdeltas)-1:
+            elif j == len(self.tempdeltas) - 1:
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
@@ -232,26 +229,28 @@ class TemperaturePanel(ScreenPanel):
                     MAX_TEMP = int(float(self._printer.get_config_section(heater)['max_temp']))
                     if heater.startswith('extruder'):
                         target = self.preheat_options[setting]["extruder"]
-                        if target > 0 and target <= MAX_TEMP:
+                        if target is not None and target >= 0 and target <= MAX_TEMP:
                             self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), target)
                     elif heater.startswith('heater_bed'):
                         target = self.preheat_options[setting]["bed"]
-                        if target > 0 and target <= MAX_TEMP:
+                        if target is not None and target >= 0 and target <= MAX_TEMP:
                             self._screen._ws.klippy.set_bed_temp(target)
                     elif heater.startswith('heater_generic '):
                         target = self.preheat_options[setting]["heater_generic"]
-                        if target > 0 and target <= MAX_TEMP:
+                        if target is not None and target >= 0 and target <= MAX_TEMP:
                             self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), target)
                     elif heater.startswith('temperature_fan '):
                         target = self.preheat_options[setting]["temperature_fan"]
-                        if target > 0 and target <= MAX_TEMP:
+                        if target is not None and target >= 0 and target <= MAX_TEMP:
                             self._screen._ws.klippy.set_temp_fan_temp(" ".join(heater.split(" ")[1:]), target)
                     else:
                         logging.info("Unknown heater: %s" % heater)
                         self._screen.show_popup_message(_("Unknown Heater") + " " + heater)
+                    if target is None:
+                        continue
                     if target <= MAX_TEMP:
-                        if target > 0:
-                            self._printer.set_dev_stat(heater, "target", int(target))
+                        if target >= 0:
+                            self._printer.set_dev_stat(heater, "target", target)
                             logging.info("Setting %s to %d" % (heater, target))
                     else:
                         self._screen.show_popup_message(_("Can't set above the maximum:") + (" %s" % MAX_TEMP))
@@ -341,7 +340,6 @@ class TemperaturePanel(ScreenPanel):
         name.set_alignment(0, .5)
         name.get_style_context().add_class(class_name)
         child = name.get_children()[0].get_children()[0].get_children()[1]
-        child.set_ellipsize(True)
         child.set_ellipsize(Pango.EllipsizeMode.END)
 
         temp = self._gtk.Button("")
@@ -433,7 +431,6 @@ class TemperaturePanel(ScreenPanel):
         box.add(scroll)
         box.add(self.labels['da'])
 
-
         self.labels['graph_settemp'] = self._gtk.Button(label=_("Set Temp"))
         self.labels['graph_settemp'].connect("clicked", self.show_numpad)
         self.labels['graph_hide'] = self._gtk.Button(label=_("Hide"))
@@ -458,7 +455,6 @@ class TemperaturePanel(ScreenPanel):
         graph_height = max(0, self._screen.height / aux - (i * 5 * self._gtk.get_font_size()))
         self.labels['da'].set_size_request(0, graph_height)
         return box
-
 
     def graph_show_device(self, widget, show=True):
         logging.info("Graph show: %s %s" % (self.popover_device, show))
