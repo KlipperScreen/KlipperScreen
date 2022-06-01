@@ -8,7 +8,7 @@ To edit colors and styles, create a css file named `style.css` you can use the c
 
 ### Example 1
 
-```
+```sh
 cd ~/KlipperScreen/styles
 mkdir -p mytheme/images
 cd mytheme
@@ -24,7 +24,7 @@ At this point `mytheme` should be on the list of themes, and when you select it 
 
 Creating a custom background from Mainsail sidebar and this css using Z-bolt icons
 
-```
+```css
 window { background-image: url("/home/pi/mainsail/img/background.svg");}
 button {background-color: rgba(0,0,0,0); border-radius:2em;}
 ```

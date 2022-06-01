@@ -7,7 +7,7 @@ Load and Unload Filament macros are used in the Extrude-Panel if it is available
 The selected speed is transferred to this macro.
 The following example macros show how this can be used in the macro.
 
-```
+```py
 [gcode_macro LOAD_FILAMENT]
 gcode:
     {% set speed = params.SPEED|default(500) %}
@@ -16,7 +16,7 @@ gcode:
     G1 E50 F{speed}
     G92
 ```
-```
+```py
 [gcode_macro UNLOAD_FILAMENT]
 gcode:
     {% set speed = params.SPEED|default(500) %}
@@ -28,7 +28,7 @@ gcode:
 
 this could be interesting to tweak the purge speed, this would be one Example Macro from alfrix:
 
-```
+```py
 [gcode_macro LOAD_FILAMENT]
 gcode:
     {% set speed = params.SPEED|default(300) %}
@@ -42,7 +42,7 @@ gcode:
     M300
 ```
 
-```
+```py
 [gcode_macro UNLOAD_FILAMENT]
 gcode:
     {% set speed = params.SPEED|default(300) %}
