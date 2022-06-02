@@ -76,6 +76,11 @@ sudo service KlipperScreen restart
 If the screen never shows the console even during startup, Then it's tipically an improperly installed screen,
 follow the manufacturer instructions on how to physically connect the screen and install the proper drivers.
 
+## The screen starts flashing colors or stays all blue/white or shows 'No signal' when idle
+
+In KliperrScreen settings find 'Screen DPMS' and turn it off.
+Your screen doesn't seem to support turning off via software, the best you can do is to turn it all black.
+
 ## Touch not working on debian Bullseye
 
 Some dsi screens have issues where touch doesn't work with debian bullseye, the current fix
