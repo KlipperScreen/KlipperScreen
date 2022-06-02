@@ -78,7 +78,7 @@ follow the manufacturer instructions on how to physically connect the screen and
 
 ## The screen starts flashing colors or stays all blue/white or shows 'No signal' when idle
 
-In KliperrScreen settings find 'Screen DPMS' and turn it off.
+In KliperScreen settings find 'Screen DPMS' and turn it off.
 Your screen doesn't seem to support turning off via software, the best you can do is to turn it all black.
 
 ## Touch not working on debian Bullseye

@@ -113,3 +113,15 @@ panel: zcalibrate
 panel: limits
 ```
 ![Limits](img/panels/limits.png)
+
+### Retraction
+```py
+panel: retraction
+```
+![Limits](img/panels/retraction.png)
+
+### Input Shapers
+```py
+panel: input_shaper
+```
+![Limits](img/panels/input_shaper.png)
