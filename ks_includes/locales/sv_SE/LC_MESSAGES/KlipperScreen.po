@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"POT-Creation-Date: 2022-06-02 14:53-0300\n"
 "PO-Revision-Date: 2022-04-15 17:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -31,8 +31,14 @@ msgstr "24 timmars tid"
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "En FIRMWARE_RESTART kan lösa problemet."
 
+msgid "ADXL Not Configured"
+msgstr ""
+
 msgid "Abort"
 msgstr "Avbryt"
+
+msgid "Acceleration:"
+msgstr ""
 
 msgid "Accept"
 msgstr "Godkänn"
@@ -45,6 +51,17 @@ msgstr "Lägg till skrivare"
 
 msgid "Add bed mesh profile"
 msgstr "Lägg till mesh profil"
+
+msgid "Apply"
+msgstr ""
+
+#, python-format
+msgid "Apply %.2f offset to Endstop?"
+msgstr ""
+
+#, python-format
+msgid "Apply %s%.2f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Är du säker på att du vill köra Nödstopp?"
@@ -64,16 +81,17 @@ msgstr "Är du säker på att du vill stänga av systemet?"
 msgid "Auto"
 msgstr "Automatisk"
 
+msgid "Auto-calibrate"
+msgstr ""
+
 msgid "Auto-scroll"
 msgstr "Auto-scrolla"
 
-#, fuzzy
 msgid "Bed Level"
-msgstr "Bed Level"
+msgstr ""
 
-#, fuzzy
 msgid "Bed Mesh"
-msgstr "Bed Mesh"
+msgstr ""
 
 msgid "Bltouch found applied offset"
 msgstr "Bltouch hittade tillämpad offset"
@@ -81,8 +99,14 @@ msgstr "Bltouch hittade tillämpad offset"
 msgid "Calibrate"
 msgstr "Kalibrera"
 
+msgid "Calibrated"
+msgstr ""
+
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "Kalibrerad, spara konfiguration för att göra den permanent"
+
+msgid "Calibrating..."
+msgstr ""
 
 msgid "Can't set above the maximum:"
 msgstr "Kan inte ställa in över maxgränsen:"
@@ -102,9 +126,8 @@ msgstr "Avbryter"
 msgid "Cannot connect to Moonraker"
 msgstr "Kan inte ansluta till Moonraker"
 
-#, fuzzy
 msgid "Channel"
-msgstr "Kanal"
+msgstr ""
 
 msgid ""
 "Check /tmp/KlipperScreen.log for more information.\n"
@@ -112,6 +135,12 @@ msgid ""
 msgstr ""
 "Kontrollera /tmp/KlipperScreen.log för mer information.\n"
 "Skicka in ett problem på GitHub för hjälp."
+
+msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
 
 msgid "Close"
 msgstr "Stäng"
@@ -159,9 +188,6 @@ msgstr "Inaktivera motorer"
 msgid "Disable XY"
 msgstr "Inaktivera XY"
 
-msgid "Displayed Macros"
-msgstr "Makron visas"
-
 msgid "Distance (mm)"
 msgstr "Avstånd (mm)"
 
@@ -175,9 +201,8 @@ msgstr "Förfluten:"
 msgid "Error"
 msgstr "Fel"
 
-#, fuzzy
 msgid "Estimated Time Method"
-msgstr "Uppskattad tid metod"
+msgstr ""
 
 msgid "Extrude"
 msgstr "Extrudera"
@@ -194,12 +219,26 @@ msgstr "Misslyckades, justera positionen först"
 msgid "Fan"
 msgstr "Fläkt"
 
-#, fuzzy
 msgid "Filament Used"
-msgstr "Filament använt"
+msgstr ""
+
+msgid "Filament total:"
+msgstr ""
+
+msgid "Filament used:"
+msgstr ""
+
+msgid "Filament:"
+msgstr ""
 
 msgid "File"
 msgstr "Fil"
+
+msgid "File:"
+msgstr ""
+
+msgid "Finding ADXL"
+msgstr ""
 
 msgid "Fine Tuning"
 msgstr "Finjustering"
@@ -214,6 +253,12 @@ msgstr ""
 "Firmware\n"
 "Omstart"
 
+msgid "Flow:"
+msgstr ""
+
+msgid "Flowrate:"
+msgstr ""
+
 msgid "Font Size"
 msgstr "Textstorlek"
 
@@ -227,6 +272,9 @@ msgstr ""
 msgid "Go Back"
 msgstr "Gå tillbaka"
 
+msgid "Height:"
+msgstr ""
+
 msgid "Hidden"
 msgstr "Dold"
 
@@ -235,6 +283,9 @@ msgstr "Dölj"
 
 msgid "Hide sensors in Temp."
 msgstr "Dölj sensorer i Temp."
+
+msgid "Hide temp."
+msgstr ""
 
 msgid "Home"
 msgstr "Hem"
@@ -254,9 +305,8 @@ msgstr "Hem Y"
 msgid "Home Z"
 msgstr "Hem Z"
 
-#, fuzzy
 msgid "Homing"
-msgstr "Homing"
+msgstr ""
 
 msgid "Hostname"
 msgstr "Värdnamn"
@@ -272,6 +322,9 @@ msgstr "Initierar"
 
 msgid "Initializing printer..."
 msgstr "Initierar skrivaren..."
+
+msgid "Input Shaper"
+msgstr ""
 
 msgid "Interface"
 msgstr "Gränssnitt"
@@ -295,9 +348,8 @@ msgstr ""
 "Klipper\n"
 "Omstart"
 
-#, fuzzy
 msgid "Klipper has disconnected"
-msgstr "Klipper har kopplat från"
+msgstr ""
 
 msgid "Klipper has encountered an error."
 msgstr "Klipper har stött på ett fel."
@@ -316,6 +368,9 @@ msgstr "Språk"
 
 msgid "Large"
 msgstr "Stor"
+
+msgid "Layer:"
+msgstr ""
 
 msgid "Left:"
 msgstr "Återstående:"
@@ -338,17 +393,23 @@ msgstr "Makron"
 msgid "Main Menu"
 msgstr "Huvudmeny"
 
-#, fuzzy
-msgid "Max Accelation"
-msgstr "Maximal acceleration"
+msgid "Max Acceleration"
+msgstr ""
 
-#, fuzzy
 msgid "Max Acceleration to Deceleration"
-msgstr "Maximal acceleration till inbromsning"
+msgstr ""
 
-#, fuzzy
 msgid "Max Velocity"
-msgstr "Maximal hastighet"
+msgstr ""
+
+msgid "Measure Both"
+msgstr ""
+
+msgid "Measure X"
+msgstr ""
+
+msgid "Measure Y"
+msgstr ""
 
 msgid "Medium"
 msgstr "Medium"
@@ -374,15 +435,18 @@ msgstr "Namn"
 msgid "Network"
 msgstr "Nätverk"
 
+msgid "New"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "Inget valt"
 
 msgid "Off"
 msgstr "Avstängd"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Outdated by %d"
-msgstr "Föråldrad med %d"
+msgstr ""
 
 msgid "PSK for"
 msgstr "PSK för"
@@ -413,45 +477,44 @@ msgstr "Ström"
 msgid "Power On Printer"
 msgstr "Slå på skrivaren"
 
+msgid "Pressure Advance:"
+msgstr ""
+
 msgid "Print"
 msgstr "Skriv ut"
 
 msgid "Print Control"
 msgstr "Utskriftskontroll"
 
-#, fuzzy
 msgid "Print Time"
-msgstr "Tid för utskrift"
+msgstr ""
 
-#, fuzzy
 msgid "Printer Connections"
-msgstr "Skrivaranslutningar"
+msgstr ""
 
 msgid "Printing"
 msgstr "Skriver ut"
 
-#, fuzzy
+msgid "Probe Offset"
+msgstr ""
+
 msgid "Probe found applied offset"
-msgstr "Sond hittat tillämpad offset"
+msgstr ""
 
 msgid "Profile Name:"
 msgstr "Profilens namn:"
 
-#, fuzzy
 msgid "Quad Gantry Level"
-msgstr "Quad Gantry nivå"
+msgstr ""
 
-#, fuzzy
 msgid "Raise Nozzle"
-msgstr "Höj munstycket"
+msgstr ""
 
-#, fuzzy
 msgid "Recover Hard"
-msgstr "Återhämta Hårt"
+msgstr ""
 
-#, fuzzy
 msgid "Recover Soft"
-msgstr "Återhämta Mjukt"
+msgstr ""
 
 msgid "Reference"
 msgstr "Referens"
@@ -462,13 +525,21 @@ msgstr "Starta om"
 msgid "Resume"
 msgstr "Återuppta"
 
-#, fuzzy
 msgid "Retract"
-msgstr "Dra tillbaka"
+msgstr ""
 
-#, fuzzy, python-format
+msgid "Retraction"
+msgstr ""
+
+msgid "Retraction Length"
+msgstr ""
+
+msgid "Retraction Speed"
+msgstr ""
+
+#, python-format
 msgid "Retry #%s"
-msgstr "Försök #%s"
+msgstr ""
 
 msgid "Save"
 msgstr "Spara"
@@ -476,19 +547,27 @@ msgstr "Spara"
 msgid "Save Config"
 msgstr "Spara konfiguration"
 
-msgid "Save configuration"
-msgstr "Spara konfigurationen"
+msgid "Save Z"
+msgstr ""
 
-#, fuzzy
+msgid "Save configuration?"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr ""
+
 msgid "Screen DPMS"
-msgstr "DPMS för skärm"
+msgstr ""
 
 msgid "Screen Power Off Time"
 msgstr "Avstängningstid för skärmen"
 
-#, fuzzy
 msgid "Screws Adjust"
-msgstr "Justera skruvar"
+msgstr ""
 
 msgid "Select"
 msgstr "Välj"
@@ -500,9 +579,8 @@ msgstr "Skicka"
 msgid "Sending Power ON signal to: %s"
 msgstr "Skickar ström PÅ-signal till: %s"
 
-#, fuzzy
 msgid "Set Temp"
-msgstr "Ställ in temp"
+msgstr ""
 
 msgid "Settings"
 msgstr "Inställningar"
@@ -513,19 +591,23 @@ msgstr "Visa"
 msgid "Size"
 msgstr "Storlek"
 
-#, fuzzy
 msgid "Slicer"
-msgstr "Slicer"
+msgstr ""
 
-#, fuzzy
 msgid "Slicer Time correction (%)"
-msgstr "Slicer Tidskorrigering (%)"
+msgstr ""
+
+msgid "Slicer:"
+msgstr ""
 
 msgid "Small"
 msgstr "Liten"
 
 msgid "Sort by: "
 msgstr "Sortera efter: "
+
+msgid "Sort:"
+msgstr ""
 
 msgid "Speed (mm/s)"
 msgstr "Hastighet (mm/s)"
@@ -536,24 +618,23 @@ msgstr "Hastighet +"
 msgid "Speed -"
 msgstr "Hastighet -"
 
-#, fuzzy
+msgid "Speed:"
+msgstr ""
+
 msgid "Square Corner Velocity"
-msgstr "Fyrkantig hörnhastighet"
+msgstr ""
 
 msgid "Start"
 msgstr "Starta"
 
-#, fuzzy
 msgid "Starting WiFi Association"
-msgstr "Startar WiFi Association"
+msgstr ""
 
-#, fuzzy
 msgid "Starting recovery for"
-msgstr "Startar återhämtning för"
+msgstr ""
 
-#, fuzzy
 msgid "Starting update for"
-msgstr "Startar uppdatering för"
+msgstr ""
 
 msgid "System"
 msgstr "System"
@@ -585,16 +666,20 @@ msgstr "För att tillämpa %s måste KlipperScreen startas om"
 msgid "Tool"
 msgstr "Verktyg"
 
-#, fuzzy
 msgid "Total:"
-msgstr "Sammanlagt:"
+msgstr ""
 
 msgid "Unknown Heater"
 msgstr "Okänt värmeelement"
 
-#, fuzzy
 msgid "Unload"
-msgstr "Lasta av"
+msgstr ""
+
+msgid "Unretract Extra Length"
+msgstr ""
+
+msgid "Unretract Speed"
+msgstr ""
 
 msgid "Up To Date"
 msgstr "Aktuellt"
@@ -608,9 +693,8 @@ msgstr "Uppdaterar"
 msgid "Uploaded"
 msgstr "Uppladdad"
 
-#, fuzzy
 msgid "View Mesh"
-msgstr "Visa Mesh"
+msgstr ""
 
 msgid "X+"
 msgstr "X+"
@@ -620,6 +704,9 @@ msgstr "X-"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY rörelsehastighet (mm/s)"
+
+msgid "XY Speed (mm/s)"
+msgstr ""
 
 msgid "Y+"
 msgstr "Y+"
@@ -633,12 +720,14 @@ msgstr "Z Kalibrering"
 msgid "Z Move Speed (mm/s)"
 msgstr "Z rörelsehastighet (mm/s)"
 
-msgid "Z Position"
-msgstr "Z Position"
+msgid "Z Speed (mm/s)"
+msgstr ""
 
-#, fuzzy
 msgid "Z Tilt"
-msgstr "Z Lutning"
+msgstr ""
+
+msgid "Z offset:"
+msgstr ""
 
 msgid "Z+"
 msgstr "Z+"
@@ -646,11 +735,10 @@ msgstr "Z+"
 msgid "Z-"
 msgstr "Z-"
 
-#, fuzzy
 msgid "commit"
 msgid_plural "commits"
-msgstr[0] "commit"
-msgstr[1] "commits"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "dBm"
 msgstr "dBm"
@@ -671,3 +759,9 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Displayed Macros"
+#~ msgstr "Makron visas"
+
+#~ msgid "Z Position"
+#~ msgstr "Z Position"

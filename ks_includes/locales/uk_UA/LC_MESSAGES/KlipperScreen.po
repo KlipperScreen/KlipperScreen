@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"POT-Creation-Date: 2022-06-02 14:53-0300\n"
 "PO-Revision-Date: 2022-03-31 11:18-0300\n"
 "Last-Translator: \n"
 "Language-Team: Andrii Komarovskiy\n"
@@ -32,8 +32,14 @@ msgstr "24-годинний час"
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "РЕСТАРТ ПРОШИВКИ може вирішити проблему."
 
+msgid "ADXL Not Configured"
+msgstr ""
+
 msgid "Abort"
 msgstr "Перервати"
+
+msgid "Acceleration:"
+msgstr ""
 
 msgid "Accept"
 msgstr "Прийняти"
@@ -46,6 +52,17 @@ msgstr "Додати принтер"
 
 msgid "Add bed mesh profile"
 msgstr "Додати сітку столу"
+
+msgid "Apply"
+msgstr ""
+
+#, python-format
+msgid "Apply %.2f offset to Endstop?"
+msgstr ""
+
+#, python-format
+msgid "Apply %s%.2f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Ви впевнені, що хочете запустити аварійну зупинку?"
@@ -65,6 +82,9 @@ msgstr "Ви впевнені, що хочете вимкнути систему
 msgid "Auto"
 msgstr "Автоматично"
 
+msgid "Auto-calibrate"
+msgstr ""
+
 msgid "Auto-scroll"
 msgstr "Автоматична прокрутка"
 
@@ -80,8 +100,14 @@ msgstr "Зонд знайшов застосоване зміщення"
 msgid "Calibrate"
 msgstr "Калібрування"
 
+msgid "Calibrated"
+msgstr ""
+
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "Відкалібровано, збережіть конфігурацію, щоб зробити її постійною"
+
+msgid "Calibrating..."
+msgstr ""
 
 msgid "Can't set above the maximum:"
 msgstr "Не встановити вище макс.:"
@@ -110,6 +136,12 @@ msgid ""
 msgstr ""
 "Перевірте /tmp/KlipperScreen.log для отримання додаткової інформації.\n"
 "Будь ласка, надішліть проблему на GitHub, щоб отримати допомогу."
+
+msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
 
 msgid "Close"
 msgstr "Закрити"
@@ -157,9 +189,6 @@ msgstr "Вимкнути мотори"
 msgid "Disable XY"
 msgstr "Вимкнути XY"
 
-msgid "Displayed Macros"
-msgstr "Відображення Макросів"
-
 msgid "Distance (mm)"
 msgstr "Відстань (мм)"
 
@@ -194,8 +223,23 @@ msgstr "Вентилятор"
 msgid "Filament Used"
 msgstr "Філамент"
 
+msgid "Filament total:"
+msgstr ""
+
+msgid "Filament used:"
+msgstr ""
+
+msgid "Filament:"
+msgstr ""
+
 msgid "File"
 msgstr "Файл"
+
+msgid "File:"
+msgstr ""
+
+msgid "Finding ADXL"
+msgstr ""
 
 msgid "Fine Tuning"
 msgstr "Підправити"
@@ -210,6 +254,12 @@ msgstr ""
 "Firmware\n"
 "Перезавантажте"
 
+msgid "Flow:"
+msgstr ""
+
+msgid "Flowrate:"
+msgstr ""
+
 msgid "Font Size"
 msgstr "Розмір шрифту"
 
@@ -223,6 +273,9 @@ msgstr ""
 msgid "Go Back"
 msgstr "Назад"
 
+msgid "Height:"
+msgstr ""
+
 msgid "Hidden"
 msgstr "Оновлення"
 
@@ -231,6 +284,9 @@ msgstr "Сховати"
 
 msgid "Hide sensors in Temp."
 msgstr "Сховати датчик темп."
+
+msgid "Hide temp."
+msgstr ""
 
 msgid "Home"
 msgstr "Домашня сторінка"
@@ -267,6 +323,9 @@ msgstr "Ініціалізація"
 
 msgid "Initializing printer..."
 msgstr "Ініціалізація принтера..."
+
+msgid "Input Shaper"
+msgstr ""
 
 msgid "Interface"
 msgstr "Інтерфейс"
@@ -311,6 +370,9 @@ msgstr "Мова"
 msgid "Large"
 msgstr "Великий"
 
+msgid "Layer:"
+msgstr ""
+
 msgid "Left:"
 msgstr "Залишилось:"
 
@@ -332,14 +394,23 @@ msgstr "Макрос"
 msgid "Main Menu"
 msgstr "Main Menu"
 
-msgid "Max Accelation"
-msgstr "Макс. прискорення"
+msgid "Max Acceleration"
+msgstr ""
 
 msgid "Max Acceleration to Deceleration"
 msgstr "Макс. прискорення до гальмування"
 
 msgid "Max Velocity"
 msgstr "Макс. швидкість"
+
+msgid "Measure Both"
+msgstr ""
+
+msgid "Measure X"
+msgstr ""
+
+msgid "Measure Y"
+msgstr ""
 
 msgid "Medium"
 msgstr "Середній"
@@ -364,6 +435,9 @@ msgstr "Ім'я"
 
 msgid "Network"
 msgstr "Сітка"
+
+msgid "New"
+msgstr ""
 
 msgid "Nothing selected"
 msgstr "Не вибрано"
@@ -405,6 +479,9 @@ msgstr "Живлення"
 msgid "Power On Printer"
 msgstr "Увімкнути принтер"
 
+msgid "Pressure Advance:"
+msgstr ""
+
 msgid "Print"
 msgstr "Друк"
 
@@ -419,6 +496,9 @@ msgstr "Підключення принтера"
 
 msgid "Printing"
 msgstr "Друк"
+
+msgid "Probe Offset"
+msgstr ""
 
 msgid "Probe found applied offset"
 msgstr "Зонд знайшов застосоване зміщення"
@@ -450,6 +530,15 @@ msgstr "Відновити"
 msgid "Retract"
 msgstr "Ретракт"
 
+msgid "Retraction"
+msgstr ""
+
+msgid "Retraction Length"
+msgstr ""
+
+msgid "Retraction Speed"
+msgstr ""
+
 #, python-format
 msgid "Retry #%s"
 msgstr "Повторіть #%s"
@@ -460,8 +549,18 @@ msgstr "Зберегти"
 msgid "Save Config"
 msgstr "Зберегти конфіг"
 
-msgid "Save configuration"
-msgstr "Зберегти конфігурацію"
+msgid "Save Z"
+msgstr ""
+
+msgid "Save configuration?"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr ""
 
 msgid "Screen DPMS"
 msgstr "Екран DPMS"
@@ -500,11 +599,17 @@ msgstr "Слайсер"
 msgid "Slicer Time correction (%)"
 msgstr "Виправлення часу слайсера (%)"
 
+msgid "Slicer:"
+msgstr ""
+
 msgid "Small"
 msgstr "Малий"
 
 msgid "Sort by: "
 msgstr "Сортувати за: "
+
+msgid "Sort:"
+msgstr ""
 
 msgid "Speed (mm/s)"
 msgstr "Швидкість (мм/с)"
@@ -514,6 +619,9 @@ msgstr "Швидкість +"
 
 msgid "Speed -"
 msgstr "Швидкість -"
+
+msgid "Speed:"
+msgstr ""
 
 msgid "Square Corner Velocity"
 msgstr "Квадратна кутова швидкість"
@@ -569,15 +677,20 @@ msgstr "Невідомий нагрівач"
 msgid "Unload"
 msgstr "Вийняти"
 
+msgid "Unretract Extra Length"
+msgstr ""
+
+msgid "Unretract Speed"
+msgstr ""
+
 msgid "Up To Date"
 msgstr "Оновити"
 
 msgid "Update"
 msgstr "Оновлення"
 
-#, fuzzy
 msgid "Updating"
-msgstr "Оновлення"
+msgstr ""
 
 msgid "Uploaded"
 msgstr "Завантажено"
@@ -594,6 +707,9 @@ msgstr "X-"
 msgid "XY Move Speed (mm/s)"
 msgstr "Швидкість XY (мм/с)"
 
+msgid "XY Speed (mm/s)"
+msgstr ""
+
 msgid "Y+"
 msgstr "Y+"
 
@@ -606,11 +722,14 @@ msgstr "Калібровка Z"
 msgid "Z Move Speed (mm/s)"
 msgstr "Швидкість Z (мм/с)"
 
-msgid "Z Position"
-msgstr "Позиція Z"
+msgid "Z Speed (mm/s)"
+msgstr ""
 
 msgid "Z Tilt"
 msgstr "Z Нахил"
+
+msgid "Z offset:"
+msgstr ""
 
 msgid "Z+"
 msgstr "Бебістеп Z+"
@@ -645,11 +764,14 @@ msgstr "мм/с"
 msgid "mm/s^2"
 msgstr "мм/с²"
 
+#~ msgid "Displayed Macros"
+#~ msgstr "Відображення Макросів"
+
+#~ msgid "Z Position"
+#~ msgstr "Позиція Z"
+
 #~ msgid "IPv4"
 #~ msgstr "IPv4"
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6"
-
-#~ msgid "Z Offset"
-#~ msgstr "Зміщення Z"

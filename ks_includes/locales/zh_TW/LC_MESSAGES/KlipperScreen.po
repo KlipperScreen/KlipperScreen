@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"POT-Creation-Date: 2022-06-02 14:53-0300\n"
 "PO-Revision-Date: 2022-03-31 11:25-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -31,8 +31,14 @@ msgstr "24 小時制"
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr ""
 
+msgid "ADXL Not Configured"
+msgstr ""
+
 msgid "Abort"
 msgstr "中止"
+
+msgid "Acceleration:"
+msgstr ""
 
 msgid "Accept"
 msgstr "接受"
@@ -45,6 +51,17 @@ msgstr "新增列印機"
 
 msgid "Add bed mesh profile"
 msgstr "新增網床輪廓"
+
+msgid "Apply"
+msgstr ""
+
+#, python-format
+msgid "Apply %.2f offset to Endstop?"
+msgstr ""
+
+#, python-format
+msgid "Apply %s%.2f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "您確定要運行緊急停止嗎？"
@@ -64,6 +81,9 @@ msgstr "您確定要關閉系統嗎?"
 msgid "Auto"
 msgstr "汽車"
 
+msgid "Auto-calibrate"
+msgstr ""
+
 msgid "Auto-scroll"
 msgstr "自動滾屏"
 
@@ -79,8 +99,14 @@ msgstr "Bltouch 發現應用的偏移量"
 msgid "Calibrate"
 msgstr "校正"
 
+msgid "Calibrated"
+msgstr ""
+
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "校準，保存配置以使其永久化"
+
+msgid "Calibrating..."
+msgstr ""
 
 msgid "Can't set above the maximum:"
 msgstr "不能設置超過最大值："
@@ -109,6 +135,12 @@ msgid ""
 msgstr ""
 "檢查/tmp/KlipperScreen.log 日誌檔以了解更多訊息。\n"
 "請在GitHub上提交問題以尋求幫助。"
+
+msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
 
 msgid "Close"
 msgstr "關閉"
@@ -156,9 +188,6 @@ msgstr "禁用步進電機"
 msgid "Disable XY"
 msgstr "禁用 XY"
 
-msgid "Displayed Macros"
-msgstr "顯示巨集"
-
 msgid "Distance (mm)"
 msgstr "距離(mm)"
 
@@ -193,8 +222,23 @@ msgstr "風扇"
 msgid "Filament Used"
 msgstr "已消耗的耗材"
 
+msgid "Filament total:"
+msgstr ""
+
+msgid "Filament used:"
+msgstr ""
+
+msgid "Filament:"
+msgstr ""
+
 msgid "File"
 msgstr "檔案"
+
+msgid "File:"
+msgstr ""
+
+msgid "Finding ADXL"
+msgstr ""
 
 msgid "Fine Tuning"
 msgstr "微調"
@@ -209,6 +253,12 @@ msgstr ""
 "Firmware\n"
 "重新啟動"
 
+msgid "Flow:"
+msgstr ""
+
+msgid "Flowrate:"
+msgstr ""
+
 msgid "Font Size"
 msgstr "字體大小"
 
@@ -222,6 +272,9 @@ msgstr ""
 msgid "Go Back"
 msgstr "返回"
 
+msgid "Height:"
+msgstr ""
+
 msgid "Hidden"
 msgstr "隱"
 
@@ -230,6 +283,9 @@ msgstr "隱藏"
 
 msgid "Hide sensors in Temp."
 msgstr "在溫度中隱藏傳感器。"
+
+msgid "Hide temp."
+msgstr ""
 
 msgid "Home"
 msgstr "首頁"
@@ -266,6 +322,9 @@ msgstr "初始化中"
 
 msgid "Initializing printer..."
 msgstr "初始化列印機中.."
+
+msgid "Input Shaper"
+msgstr ""
 
 msgid "Interface"
 msgstr "介面"
@@ -310,6 +369,9 @@ msgstr "語言"
 msgid "Large"
 msgstr "大的"
 
+msgid "Layer:"
+msgstr ""
+
 msgid "Left:"
 msgstr "剩下時間："
 
@@ -331,14 +393,23 @@ msgstr "巨集"
 msgid "Main Menu"
 msgstr "主選單"
 
-msgid "Max Accelation"
-msgstr "最大加速度"
+msgid "Max Acceleration"
+msgstr ""
 
 msgid "Max Acceleration to Deceleration"
 msgstr "最大加速到減速"
 
 msgid "Max Velocity"
 msgstr "最大速度"
+
+msgid "Measure Both"
+msgstr ""
+
+msgid "Measure X"
+msgstr ""
+
+msgid "Measure Y"
+msgstr ""
 
 msgid "Medium"
 msgstr "中"
@@ -363,6 +434,9 @@ msgstr "名稱"
 
 msgid "Network"
 msgstr "網路"
+
+msgid "New"
+msgstr ""
 
 msgid "Nothing selected"
 msgstr "未選擇任何內容"
@@ -402,6 +476,9 @@ msgstr "電源"
 msgid "Power On Printer"
 msgstr "啟動列印機"
 
+msgid "Pressure Advance:"
+msgstr ""
+
 msgid "Print"
 msgstr "列印"
 
@@ -416,6 +493,9 @@ msgstr "連接列印機"
 
 msgid "Printing"
 msgstr "列印中"
+
+msgid "Probe Offset"
+msgstr ""
 
 msgid "Probe found applied offset"
 msgstr "Probe 發現應用的偏移量"
@@ -447,6 +527,15 @@ msgstr "恢復"
 msgid "Retract"
 msgstr "回抽"
 
+msgid "Retraction"
+msgstr ""
+
+msgid "Retraction Length"
+msgstr ""
+
+msgid "Retraction Speed"
+msgstr ""
+
 #, python-format
 msgid "Retry #%s"
 msgstr "重試 #%s"
@@ -457,8 +546,18 @@ msgstr "儲存"
 msgid "Save Config"
 msgstr "儲存設定"
 
-msgid "Save configuration"
-msgstr "儲存設定檔案"
+msgid "Save Z"
+msgstr ""
+
+msgid "Save configuration?"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr ""
 
 msgid "Screen DPMS"
 msgstr "屏幕DPMS"
@@ -497,11 +596,17 @@ msgstr "切片"
 msgid "Slicer Time correction (%)"
 msgstr "切片器時間校正 (%)"
 
+msgid "Slicer:"
+msgstr ""
+
 msgid "Small"
 msgstr "小的"
 
 msgid "Sort by: "
 msgstr "排序: "
+
+msgid "Sort:"
+msgstr ""
 
 msgid "Speed (mm/s)"
 msgstr "速度（mm/s）"
@@ -511,6 +616,9 @@ msgstr "速度 +"
 
 msgid "Speed -"
 msgstr "速度 -"
+
+msgid "Speed:"
+msgstr ""
 
 msgid "Square Corner Velocity"
 msgstr "方角速度"
@@ -562,6 +670,12 @@ msgstr "未知加熱器"
 msgid "Unload"
 msgstr "卸載"
 
+msgid "Unretract Extra Length"
+msgstr ""
+
+msgid "Unretract Speed"
+msgstr ""
+
 msgid "Up To Date"
 msgstr "最新"
 
@@ -586,6 +700,9 @@ msgstr "X-"
 msgid "XY Move Speed (mm/s)"
 msgstr "XY 移動速度 (mm/s)"
 
+msgid "XY Speed (mm/s)"
+msgstr ""
+
 msgid "Y+"
 msgstr "Y+"
 
@@ -598,11 +715,14 @@ msgstr "Z 校準"
 msgid "Z Move Speed (mm/s)"
 msgstr "Z 移動速度 (mm/s)"
 
-msgid "Z Position"
-msgstr "Z 位置"
+msgid "Z Speed (mm/s)"
+msgstr ""
 
 msgid "Z Tilt"
 msgstr "Z 傾斜"
+
+msgid "Z offset:"
+msgstr ""
 
 msgid "Z+"
 msgstr "Z+"
@@ -633,14 +753,17 @@ msgstr "mm/s"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
+#~ msgid "Displayed Macros"
+#~ msgstr "顯示巨集"
+
+#~ msgid "Z Position"
+#~ msgstr "Z 位置"
+
 #~ msgid "IPv4"
 #~ msgstr "IPv4"
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6"
-
-#~ msgid "Z Offset"
-#~ msgstr "Z 間隙"
 
 #~ msgid "Unknown Heater "
 #~ msgstr "未知加熱器 "

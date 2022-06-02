@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"POT-Creation-Date: 2022-06-02 14:53-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: NSteven\n"
 "Language-Team: NSteven\n"
@@ -26,8 +26,14 @@ msgstr "24시간제"
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "펌웨어 재시작을 사용하여 문제를 해결할 수 있습니다."
 
+msgid "ADXL Not Configured"
+msgstr ""
+
 msgid "Abort"
 msgstr "중단"
+
+msgid "Acceleration:"
+msgstr "가속:"
 
 msgid "Accept"
 msgstr "수락"
@@ -40,6 +46,17 @@ msgstr "프린터 추가"
 
 msgid "Add bed mesh profile"
 msgstr "배드 메시 프로필 추가"
+
+msgid "Apply"
+msgstr ""
+
+#, python-format
+msgid "Apply %.2f offset to Endstop?"
+msgstr ""
+
+#, python-format
+msgid "Apply %s%.2f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "비상정지를 실행하시겠습니까?"
@@ -59,6 +76,9 @@ msgstr "시스템을 종료하시겠습니까?"
 msgid "Auto"
 msgstr "자동"
 
+msgid "Auto-calibrate"
+msgstr "자동 보정"
+
 msgid "Auto-scroll"
 msgstr "자동스크롤"
 
@@ -74,8 +94,14 @@ msgstr "Bltouch가 오프셋을 찾음"
 msgid "Calibrate"
 msgstr "교정"
 
+msgid "Calibrated"
+msgstr "보정됨"
+
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "교정됨, 설정을 영구적으로 저장합니다"
+
+msgid "Calibrating..."
+msgstr "보정 중..."
 
 msgid "Can't set above the maximum:"
 msgstr "최대값보다 높게 설정할 수 없습니다:"
@@ -104,6 +130,12 @@ msgid ""
 msgstr ""
 "자세한 내용은 /tmp/KlipperScreen.log를 참조하십시오.\n"
 "GitHub에 현재 발생한 이슈를 제출하여 도움을 요청하십시오."
+
+msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
 
 msgid "Close"
 msgstr "닫기"
@@ -151,9 +183,6 @@ msgstr "모터 비활성화"
 msgid "Disable XY"
 msgstr "XY 비활성화"
 
-msgid "Displayed Macros"
-msgstr "표시할 매크로"
-
 msgid "Distance (mm)"
 msgstr "거리 (mm)"
 
@@ -180,16 +209,31 @@ msgid "Extrusion -"
 msgstr "압출 -"
 
 msgid "Failed, adjust position first"
-msgstr "실패, 먼저 위치를 조정하십시오."
+msgstr "실패, 먼저 위치를 조정하십시오"
 
 msgid "Fan"
 msgstr "팬"
 
 msgid "Filament Used"
-msgstr "필라멘트 사용된 양"
+msgstr "사용된 필라멘트"
+
+msgid "Filament total:"
+msgstr "필라멘트 총계:"
+
+msgid "Filament used:"
+msgstr "사용된 필라멘트:"
+
+msgid "Filament:"
+msgstr "필라멘트:"
 
 msgid "File"
 msgstr "파일"
+
+msgid "File:"
+msgstr "파일:"
+
+msgid "Finding ADXL"
+msgstr ""
 
 msgid "Fine Tuning"
 msgstr "미세 조정"
@@ -204,6 +248,12 @@ msgstr ""
 "펌웨어\n"
 "재시작"
 
+msgid "Flow:"
+msgstr ""
+
+msgid "Flowrate:"
+msgstr ""
+
 msgid "Font Size"
 msgstr "폰트 크기"
 
@@ -217,6 +267,9 @@ msgstr ""
 msgid "Go Back"
 msgstr "뒤로"
 
+msgid "Height:"
+msgstr ""
+
 msgid "Hidden"
 msgstr "숨김"
 
@@ -225,6 +278,9 @@ msgstr "가리기"
 
 msgid "Hide sensors in Temp."
 msgstr "온도에서 센서들 가리기"
+
+msgid "Hide temp."
+msgstr ""
 
 msgid "Home"
 msgstr "홈"
@@ -261,6 +317,9 @@ msgstr "초기화중"
 
 msgid "Initializing printer..."
 msgstr "프린터 초기화중…"
+
+msgid "Input Shaper"
+msgstr ""
 
 msgid "Interface"
 msgstr "인터페이스"
@@ -305,6 +364,9 @@ msgstr "언어"
 msgid "Large"
 msgstr "크게"
 
+msgid "Layer:"
+msgstr ""
+
 msgid "Left:"
 msgstr "남음:"
 
@@ -326,7 +388,7 @@ msgstr "매크로"
 msgid "Main Menu"
 msgstr "메인메뉴"
 
-msgid "Max Accelation"
+msgid "Max Acceleration"
 msgstr "최대 가속"
 
 msgid "Max Acceleration to Deceleration"
@@ -334,6 +396,15 @@ msgstr "최대 가속에서 감속까지"
 
 msgid "Max Velocity"
 msgstr "최대 속도"
+
+msgid "Measure Both"
+msgstr ""
+
+msgid "Measure X"
+msgstr ""
+
+msgid "Measure Y"
+msgstr ""
 
 msgid "Medium"
 msgstr "중간"
@@ -359,6 +430,9 @@ msgstr "이름"
 msgid "Network"
 msgstr "네트워크"
 
+msgid "New"
+msgstr "새로운"
+
 msgid "Nothing selected"
 msgstr "아무것도 선택되지않음"
 
@@ -370,7 +444,7 @@ msgid "Outdated by %d"
 msgstr "%d에 의해 오래된 커밋"
 
 msgid "PSK for"
-msgstr "PSK 비번:"
+msgstr "PSK 비번"
 
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
@@ -397,6 +471,9 @@ msgstr "전"
 msgid "Power On Printer"
 msgstr "프린터 전원 켜기"
 
+msgid "Pressure Advance:"
+msgstr ""
+
 msgid "Print"
 msgstr "출력"
 
@@ -411,6 +488,9 @@ msgstr "프린터 연결"
 
 msgid "Printing"
 msgstr "출력중"
+
+msgid "Probe Offset"
+msgstr ""
 
 msgid "Probe found applied offset"
 msgstr "프로브가 오프셋을 찾았습니다"
@@ -442,6 +522,15 @@ msgstr "재개"
 msgid "Retract"
 msgstr "철회"
 
+msgid "Retraction"
+msgstr "취소"
+
+msgid "Retraction Length"
+msgstr "후퇴 길이"
+
+msgid "Retraction Speed"
+msgstr "후퇴 속도"
+
 #, python-format
 msgid "Retry #%s"
 msgstr "재시도 #%s"
@@ -452,8 +541,18 @@ msgstr "저장"
 msgid "Save Config"
 msgstr "설정 저장"
 
-msgid "Save configuration"
-msgstr "설\b정을 저장합니다"
+msgid "Save Z"
+msgstr "Z 저장"
+
+msgid "Save configuration?"
+msgstr "구성을 저장하시겠습니까?"
+
+msgid "Saved"
+msgstr "저장됨"
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr ""
 
 msgid "Screen DPMS"
 msgstr "화면 DPMS"
@@ -492,11 +591,17 @@ msgstr "슬라이서"
 msgid "Slicer Time correction (%)"
 msgstr "슬라이서 시간 보정(%)"
 
+msgid "Slicer:"
+msgstr "슬라이서:"
+
 msgid "Small"
 msgstr "작은"
 
 msgid "Sort by: "
-msgstr "분류 기준:"
+msgstr "분류 기준: "
+
+msgid "Sort:"
+msgstr "종류:"
 
 msgid "Speed (mm/s)"
 msgstr "속도 (mm/s)"
@@ -506,6 +611,9 @@ msgstr "속도 +"
 
 msgid "Speed -"
 msgstr "속도 -"
+
+msgid "Speed:"
+msgstr "속도:"
 
 msgid "Square Corner Velocity"
 msgstr "사각 모서리 속도"
@@ -517,10 +625,10 @@ msgid "Starting WiFi Association"
 msgstr "WiFi 연결을 시작하는 중"
 
 msgid "Starting recovery for"
-msgstr "복구 시작 중:"
+msgstr "에 대한 복구 시작"
 
 msgid "Starting update for"
-msgstr "업데이트 시작 중:"
+msgstr "업데이트 시작 중"
 
 msgid "System"
 msgstr "시스템"
@@ -547,7 +655,7 @@ msgstr "온도"
 
 #, python-format
 msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr "%s을(를) 적용하려면 KlipperScreen을(를) 다시 시작해야 합니다."
+msgstr "%s을(를) 적용하려면 KlipperScreen을(를) 다시 시작해야 합니다"
 
 msgid "Tool"
 msgstr "툴"
@@ -560,6 +668,12 @@ msgstr "알 수 없는 히터"
 
 msgid "Unload"
 msgstr "언로드"
+
+msgid "Unretract Extra Length"
+msgstr ""
+
+msgid "Unretract Speed"
+msgstr ""
 
 msgid "Up To Date"
 msgstr "최신버전"
@@ -585,6 +699,9 @@ msgstr "X-"
 msgid "XY Move Speed (mm/s)"
 msgstr "XY 이동 속도 (mm/s)"
 
+msgid "XY Speed (mm/s)"
+msgstr "XY 속도 (mm/s)"
+
 msgid "Y+"
 msgstr "Y+"
 
@@ -597,11 +714,14 @@ msgstr "Z 교정"
 msgid "Z Move Speed (mm/s)"
 msgstr "Z 이동 속도 (mm/s)"
 
-msgid "Z Position"
-msgstr "Z 위치"
+msgid "Z Speed (mm/s)"
+msgstr "Z 속도 (mm/s)"
 
 msgid "Z Tilt"
 msgstr "Z 기울기"
+
+msgid "Z offset:"
+msgstr ""
 
 msgid "Z+"
 msgstr "Z+"
@@ -631,3 +751,9 @@ msgstr "mm/s"
 
 msgid "mm/s^2"
 msgstr "mm/s^2"
+
+#~ msgid "Displayed Macros"
+#~ msgstr "표시할 매크로"
+
+#~ msgid "Z Position"
+#~ msgstr "Z 위치"

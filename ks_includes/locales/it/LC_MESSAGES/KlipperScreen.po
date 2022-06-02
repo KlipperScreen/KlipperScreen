@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"POT-Creation-Date: 2022-06-02 14:53-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pappicio\n"
 "Language-Team: \n"
@@ -26,8 +26,14 @@ msgstr "24H"
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "Un FIRMWARE_RESTART potrebbe risolvere il problema."
 
+msgid "ADXL Not Configured"
+msgstr ""
+
 msgid "Abort"
 msgstr "Annulla"
+
+msgid "Acceleration:"
+msgstr ""
 
 msgid "Accept"
 msgstr "Accetta"
@@ -40,6 +46,17 @@ msgstr "Aggiungi Stampante"
 
 msgid "Add bed mesh profile"
 msgstr "Aggiungi Profilo Mesh"
+
+msgid "Apply"
+msgstr ""
+
+#, python-format
+msgid "Apply %.2f offset to Endstop?"
+msgstr ""
+
+#, python-format
+msgid "Apply %s%.2f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Sei sicuro di voler eseguire l'arresto di emergenza?"
@@ -59,6 +76,9 @@ msgstr "Spegnere il Sistema?"
 msgid "Auto"
 msgstr "Auto"
 
+msgid "Auto-calibrate"
+msgstr ""
+
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
 
@@ -74,8 +94,14 @@ msgstr "Bltouch ha trovato l'offset applicato"
 msgid "Calibrate"
 msgstr "Calibra"
 
+msgid "Calibrated"
+msgstr ""
+
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "Calibrato, salva la configurazione per renderla permanente"
+
+msgid "Calibrating..."
+msgstr ""
 
 msgid "Can't set above the maximum:"
 msgstr "Impossibile impostare al di sopra del massimo:"
@@ -104,6 +130,12 @@ msgid ""
 msgstr ""
 "Verifica /tmp/KlipperScreen.log per info.\n"
 "Aggiungi un problema sul GitHub."
+
+msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
 
 msgid "Close"
 msgstr "Chiudi"
@@ -151,9 +183,6 @@ msgstr "Disab. Motori"
 msgid "Disable XY"
 msgstr "Disab. XY"
 
-msgid "Displayed Macros"
-msgstr "Mostra/Nascondi Macros"
-
 msgid "Distance (mm)"
 msgstr "Distanza (mm)"
 
@@ -188,8 +217,23 @@ msgstr "Ventola"
 msgid "Filament Used"
 msgstr "Filamento Usato"
 
+msgid "Filament total:"
+msgstr ""
+
+msgid "Filament used:"
+msgstr ""
+
+msgid "Filament:"
+msgstr ""
+
 msgid "File"
 msgstr "File"
+
+msgid "File:"
+msgstr ""
+
+msgid "Finding ADXL"
+msgstr ""
 
 msgid "Fine Tuning"
 msgstr "Messa a Punto"
@@ -204,6 +248,12 @@ msgstr ""
 "Firmware\n"
 "Riavvio"
 
+msgid "Flow:"
+msgstr ""
+
+msgid "Flowrate:"
+msgstr ""
+
 msgid "Font Size"
 msgstr "Dimensione del testo"
 
@@ -217,6 +267,9 @@ msgstr ""
 msgid "Go Back"
 msgstr "Indietro"
 
+msgid "Height:"
+msgstr ""
+
 msgid "Hidden"
 msgstr "Nascosto"
 
@@ -225,6 +278,9 @@ msgstr "Nascondere"
 
 msgid "Hide sensors in Temp."
 msgstr "Nascondi sensori in Temp."
+
+msgid "Hide temp."
+msgstr ""
 
 msgid "Home"
 msgstr "Inizio"
@@ -261,6 +317,9 @@ msgstr "Inizializzo"
 
 msgid "Initializing printer..."
 msgstr "Inizializzo stampante..."
+
+msgid "Input Shaper"
+msgstr ""
 
 msgid "Interface"
 msgstr "Interfaccia"
@@ -305,6 +364,9 @@ msgstr "Lingua"
 msgid "Large"
 msgstr "Grande"
 
+msgid "Layer:"
+msgstr ""
+
 msgid "Left:"
 msgstr "Restante:"
 
@@ -326,14 +388,23 @@ msgstr "Macros"
 msgid "Main Menu"
 msgstr "Menu Principale"
 
-msgid "Max Accelation"
-msgstr "Acceleraz. Massima"
+msgid "Max Acceleration"
+msgstr ""
 
 msgid "Max Acceleration to Deceleration"
 msgstr "Da acceleraz. Massima a Deceleraz. Massima"
 
 msgid "Max Velocity"
 msgstr "Velocità Massima"
+
+msgid "Measure Both"
+msgstr ""
+
+msgid "Measure X"
+msgstr ""
+
+msgid "Measure Y"
+msgstr ""
 
 msgid "Medium"
 msgstr "Medio"
@@ -358,6 +429,9 @@ msgstr "Nome"
 
 msgid "Network"
 msgstr "Rete"
+
+msgid "New"
+msgstr ""
 
 msgid "Nothing selected"
 msgstr "Niente selezionato"
@@ -398,6 +472,9 @@ msgstr "Power"
 msgid "Power On Printer"
 msgstr "Accendi Stampante"
 
+msgid "Pressure Advance:"
+msgstr ""
+
 msgid "Print"
 msgstr "Stampa"
 
@@ -412,6 +489,9 @@ msgstr "Connessioni Stampante"
 
 msgid "Printing"
 msgstr "In Stampa"
+
+msgid "Probe Offset"
+msgstr ""
 
 msgid "Probe found applied offset"
 msgstr "Probe ha trovato l'offset applicato"
@@ -443,6 +523,15 @@ msgstr "Riprendi"
 msgid "Retract"
 msgstr "Ritrai"
 
+msgid "Retraction"
+msgstr ""
+
+msgid "Retraction Length"
+msgstr ""
+
+msgid "Retraction Speed"
+msgstr ""
+
 #, python-format
 msgid "Retry #%s"
 msgstr "Riprova #%s"
@@ -453,8 +542,18 @@ msgstr "Salva"
 msgid "Save Config"
 msgstr "Salva Config"
 
-msgid "Save configuration"
-msgstr "Salva configurazione"
+msgid "Save Z"
+msgstr ""
+
+msgid "Save configuration?"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr ""
 
 msgid "Screen DPMS"
 msgstr "Schermo DPMS"
@@ -493,11 +592,17 @@ msgstr "Slicer"
 msgid "Slicer Time correction (%)"
 msgstr "Affettatrice Correzione del tempo (%)"
 
+msgid "Slicer:"
+msgstr ""
+
 msgid "Small"
 msgstr "Piccola"
 
 msgid "Sort by: "
 msgstr "Ordine: "
+
+msgid "Sort:"
+msgstr ""
 
 msgid "Speed (mm/s)"
 msgstr "Velocità (mm/s)"
@@ -507,6 +612,9 @@ msgstr "Velocità+"
 
 msgid "Speed -"
 msgstr "Velocità-"
+
+msgid "Speed:"
+msgstr ""
 
 msgid "Square Corner Velocity"
 msgstr "Velocità Square Corner"
@@ -562,6 +670,12 @@ msgstr "Riscaldatore sconosciuto"
 msgid "Unload"
 msgstr "Scaricare"
 
+msgid "Unretract Extra Length"
+msgstr ""
+
+msgid "Unretract Speed"
+msgstr ""
+
 msgid "Up To Date"
 msgstr "Aggiornato"
 
@@ -586,6 +700,9 @@ msgstr "X-"
 msgid "XY Move Speed (mm/s)"
 msgstr "Velocità di spostamento XY (mm/s)"
 
+msgid "XY Speed (mm/s)"
+msgstr ""
+
 msgid "Y+"
 msgstr "Y+"
 
@@ -598,11 +715,14 @@ msgstr "Calibra Z"
 msgid "Z Move Speed (mm/s)"
 msgstr "Velocità di spostamento Z (mm/s)"
 
-msgid "Z Position"
-msgstr "Posizione Z"
+msgid "Z Speed (mm/s)"
+msgstr ""
 
 msgid "Z Tilt"
 msgstr "Z Tilt"
+
+msgid "Z offset:"
+msgstr ""
 
 msgid "Z+"
 msgstr "Z+"
@@ -635,14 +755,17 @@ msgstr "mm/s"
 msgid "mm/s^2"
 msgstr "mm/s^2"
 
+#~ msgid "Displayed Macros"
+#~ msgstr "Mostra/Nascondi Macros"
+
+#~ msgid "Z Position"
+#~ msgstr "Posizione Z"
+
 #~ msgid "IPv4"
 #~ msgstr "IPv4"
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6"
-
-#~ msgid "Z Offset"
-#~ msgstr "Offset Z"
 
 #~ msgid "Unknown Heater "
 #~ msgstr "Riscaldatore sconosciuto "
