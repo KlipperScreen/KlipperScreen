@@ -22,31 +22,38 @@ class FWRetractionPanel(ScreenPanel):
 
         conf = self._printer.get_config_section("firmware_retraction")
 
+        retract_length = float(conf['retract_length']) if 'retract_length' in conf else 0
+        retract_speed = int(float((conf['retract_speed']))) if 'retract_speed' in conf else 20
+        unretract_extra_length = float(conf['unretract_extra_length']) if 'unretract_extra_length' in conf else 0
+        unretract_speed = int(float((conf['unretract_speed']))) if 'unretract_speed' in conf else 10
+        maxlength = retract_length * 1.2 if retract_length >= 6 else 6
+        maxspeed = retract_speed * 1.2 if retract_speed >= 100 else 100
+
         self.options = [
             {"name": _("Retraction Length"),
              "units": _("mm"),
              "option": "retract_length",
-             "value": float(conf['retract_length']) if 'retract_length' in conf else 0,
+             "value": retract_length,
              "digits": 2,
-             "maxval": 4},
+             "maxval": maxlength},
             {"name": _("Retraction Speed"),
              "units": _("mm/s"),
              "option": "retract_speed",
-             "value": int(float((conf['retract_speed']))) if 'retract_speed' in conf else 20,
+             "value": retract_speed,
              "digits": 0,
-             "maxval": 100},
+             "maxval": maxspeed},
             {"name": _("Unretract Extra Length"),
              "units": _("mm"),
              "option": "unretract_extra_length",
-             "value": float(conf['unretract_extra_length']) if 'unretract_extra_length' in conf else 0,
+             "value": unretract_extra_length,
              "digits": 2,
-             "maxval": 15},
+             "maxval": maxlength},
             {"name": _("Unretract Speed"),
              "units": _("mm/s"),
              "option": "unretract_speed",
-             "value": int(float((conf['unretract_speed']))) if 'unretract_speed' in conf else 10,
+             "value": unretract_speed,
              "digits": 0,
-             "maxval": 60}
+             "maxval": maxspeed}
         ]
 
         for opt in self.options:
