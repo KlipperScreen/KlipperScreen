@@ -759,7 +759,7 @@ msgstr "мм"
 msgid "mm/s"
 msgstr "мм/с"
 
-msgid "mm/s^2"
+msgid "mm/s²"
 msgstr "мм/с^2"
 
 #~ msgid "Displayed Macros"

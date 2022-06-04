@@ -740,5 +740,5 @@ msgstr ""
 msgid "mm/s"
 msgstr ""
 
-msgid "mm/s^2"
+msgid "mm/s²"
 msgstr ""

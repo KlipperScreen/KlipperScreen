@@ -752,8 +752,8 @@ msgstr "mm"
 msgid "mm/s"
 msgstr "mm/s"
 
-msgid "mm/s^2"
-msgstr "mm/s^2"
+msgid "mm/s²"
+msgstr "mm/s²"
 
 #~ msgid "Displayed Macros"
 #~ msgstr "Mostra/Nascondi Macros"
