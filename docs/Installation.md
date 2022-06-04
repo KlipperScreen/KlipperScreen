@@ -73,6 +73,7 @@ origin: https://github.com/jordanruthe/KlipperScreen.git
 env: ~/.KlipperScreen-env/bin/python
 requirements: scripts/KlipperScreen-requirements.txt
 install_script: scripts/KlipperScreen-install.sh
+managed_services: KlipperScreen
 ```
 !!! note
     If you see warnings in other UIs ignore them until KlipperScreen finishes installing.
