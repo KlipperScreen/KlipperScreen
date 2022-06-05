@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-06-02 14:53-0300\n"
-"PO-Revision-Date: 2022-06-01 22:55+0300\n"
+"PO-Revision-Date: 2022-06-05 21:11+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: tr_TR\n"
@@ -32,13 +32,13 @@ msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "Bir FIRMWARE_RESTART sorunu çözebilir."
 
 msgid "ADXL Not Configured"
-msgstr ""
+msgstr "ADXL Yapılandırılmadı"
 
 msgid "Abort"
 msgstr "İptal et"
 
 msgid "Acceleration:"
-msgstr ""
+msgstr "Hızlanma:"
 
 msgid "Accept"
 msgstr "Kabul et"
@@ -53,15 +53,15 @@ msgid "Add bed mesh profile"
 msgstr "Tabla Örgüsü profili ekle"
 
 msgid "Apply"
-msgstr ""
+msgstr "Uygula"
 
 #, python-format
 msgid "Apply %.2f offset to Endstop?"
-msgstr ""
+msgstr "Sonlandırıcı için %.2f ofset uygula?"
 
 #, python-format
 msgid "Apply %s%.2f offset to Probe?"
-msgstr ""
+msgstr "Prob için %s%.2f ofset uygula?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Acil Durdurma'yı çalıştırmak istediğinizden emin misiniz?"
@@ -82,7 +82,7 @@ msgid "Auto"
 msgstr "Otomatik"
 
 msgid "Auto-calibrate"
-msgstr ""
+msgstr "Otomatik-Kalibrasyon"
 
 msgid "Auto-scroll"
 msgstr "Otomatik kaydırma"
@@ -100,13 +100,13 @@ msgid "Calibrate"
 msgstr "Kalibre et"
 
 msgid "Calibrated"
-msgstr ""
+msgstr "Kalibre Edildi"
 
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "Kalibre edildi, kalıcı hale getirmek için yapılandırmayı kaydedin"
 
 msgid "Calibrating..."
-msgstr ""
+msgstr "Kalibre Ediliyor..."
 
 msgid "Can't set above the maximum:"
 msgstr "Maksimumun üzerine ayarlanamaz:"
@@ -137,10 +137,10 @@ msgstr ""
 "Lütfen yardım için GitHub'da bir sorun gönderin."
 
 msgid "Check ADXL Wiring"
-msgstr ""
+msgstr "ADXL Bağlantılarını Kontrol Et"
 
 msgid "Clear"
-msgstr ""
+msgstr "Temizle"
 
 msgid "Close"
 msgstr "Kapat"
@@ -223,22 +223,22 @@ msgid "Filament Used"
 msgstr "Kullanılan Filament"
 
 msgid "Filament total:"
-msgstr ""
+msgstr "Toplam Filament:"
 
 msgid "Filament used:"
-msgstr ""
+msgstr "Kullanılan Filament:"
 
 msgid "Filament:"
-msgstr ""
+msgstr "Filament:"
 
 msgid "File"
 msgstr "Dosya"
 
 msgid "File:"
-msgstr ""
+msgstr "Dosya:"
 
 msgid "Finding ADXL"
-msgstr ""
+msgstr "ADXL Bulunuyor"
 
 msgid "Fine Tuning"
 msgstr "İnce Ayar"
@@ -254,10 +254,10 @@ msgstr ""
 "Yeniden Başlat"
 
 msgid "Flow:"
-msgstr ""
+msgstr "Akış:"
 
 msgid "Flowrate:"
-msgstr ""
+msgstr "Akış oranı:"
 
 msgid "Font Size"
 msgstr "Yazı boyutu"
@@ -273,7 +273,7 @@ msgid "Go Back"
 msgstr "Geri git"
 
 msgid "Height:"
-msgstr ""
+msgstr "Yükseklik:"
 
 msgid "Hidden"
 msgstr "Gizli"
@@ -285,7 +285,7 @@ msgid "Hide sensors in Temp."
 msgstr "Sıcaklıktaki sensörleri gizleyin."
 
 msgid "Hide temp."
-msgstr ""
+msgstr "Sıcaklığı gizle."
 
 msgid "Home"
 msgstr "Ana Ekran"
@@ -324,7 +324,7 @@ msgid "Initializing printer..."
 msgstr "Yazıcı başlatılıyor..."
 
 msgid "Input Shaper"
-msgstr ""
+msgstr "İvme Düzenleyicisi"
 
 msgid "Interface"
 msgstr "Arayüz"
@@ -370,7 +370,7 @@ msgid "Large"
 msgstr "Büyük"
 
 msgid "Layer:"
-msgstr ""
+msgstr "Katman:"
 
 msgid "Left:"
 msgstr "Kalan:"
@@ -403,13 +403,13 @@ msgid "Max Velocity"
 msgstr "Maksimum Hız"
 
 msgid "Measure Both"
-msgstr ""
+msgstr "İkisini de ölçüle"
 
 msgid "Measure X"
-msgstr ""
+msgstr "X Ölçüle"
 
 msgid "Measure Y"
-msgstr ""
+msgstr "Y Ölçüle"
 
 msgid "Medium"
 msgstr "Orta"
@@ -436,7 +436,7 @@ msgid "Network"
 msgstr "Ağ"
 
 msgid "New"
-msgstr ""
+msgstr "Yeni"
 
 msgid "Nothing selected"
 msgstr "Hiçbir şey seçilmedi"
@@ -478,7 +478,7 @@ msgid "Power On Printer"
 msgstr "Yazıcıya Güç Ver (aç)"
 
 msgid "Pressure Advance:"
-msgstr ""
+msgstr "Akış Dengeleme:"
 
 msgid "Print"
 msgstr "Yazdır"
@@ -496,7 +496,7 @@ msgid "Printing"
 msgstr "Yazdırılıyor"
 
 msgid "Probe Offset"
-msgstr ""
+msgstr "Prob ofseti"
 
 msgid "Probe found applied offset"
 msgstr "Prob uygulanmış ofset bulundu"
@@ -529,13 +529,13 @@ msgid "Retract"
 msgstr "Geri çek"
 
 msgid "Retraction"
-msgstr ""
+msgstr "Geri Çekme"
 
 msgid "Retraction Length"
-msgstr ""
+msgstr "Geri Çekme Uzunluğu"
 
 msgid "Retraction Speed"
-msgstr ""
+msgstr "Geri Çekme Hızı"
 
 #, python-format
 msgid "Retry #%s"
@@ -548,17 +548,17 @@ msgid "Save Config"
 msgstr "Yapılandırma Kayıt"
 
 msgid "Save Z"
-msgstr ""
+msgstr "Z Kaydet"
 
 msgid "Save configuration?"
-msgstr ""
+msgstr "Yapılandırmayı kaydet?"
 
 msgid "Saved"
-msgstr ""
+msgstr "Kaydedildi"
 
 #, python-format
 msgid "Saved offset: %s"
-msgstr ""
+msgstr "Kaydedilen ofset: %s"
 
 msgid "Screen DPMS"
 msgstr "Ekran DPMS"
@@ -598,7 +598,7 @@ msgid "Slicer Time correction (%)"
 msgstr "Dilimleme Zamanı doğrulama (%)"
 
 msgid "Slicer:"
-msgstr ""
+msgstr "Dilimleyici:"
 
 msgid "Small"
 msgstr "Küçük"
@@ -607,7 +607,7 @@ msgid "Sort by: "
 msgstr "Sırala: "
 
 msgid "Sort:"
-msgstr ""
+msgstr "Sırala:"
 
 msgid "Speed (mm/s)"
 msgstr "Hız  (mm/s)"
@@ -619,7 +619,7 @@ msgid "Speed -"
 msgstr "Hız -"
 
 msgid "Speed:"
-msgstr ""
+msgstr "Hız:"
 
 msgid "Square Corner Velocity"
 msgstr "Kare Köşe Hızı"
@@ -676,10 +676,10 @@ msgid "Unload"
 msgstr "Boşalt"
 
 msgid "Unretract Extra Length"
-msgstr ""
+msgstr "İleri İtme Ekstra Uzunluk"
 
 msgid "Unretract Speed"
-msgstr ""
+msgstr "İleri itme Hızı"
 
 msgid "Up To Date"
 msgstr "Güncel"
@@ -706,7 +706,7 @@ msgid "XY Move Speed (mm/s)"
 msgstr "XY Hareket hızı (mm/s)"
 
 msgid "XY Speed (mm/s)"
-msgstr ""
+msgstr "XY Hızı (mm/s)"
 
 msgid "Y+"
 msgstr "Y+"
@@ -721,13 +721,13 @@ msgid "Z Move Speed (mm/s)"
 msgstr "Z Hareket hızı (mm/s)"
 
 msgid "Z Speed (mm/s)"
-msgstr ""
+msgstr "Z Hızı (mm/s)"
 
 msgid "Z Tilt"
 msgstr "Z Eğim"
 
 msgid "Z offset:"
-msgstr ""
+msgstr "Z ofset:"
 
 msgid "Z+"
 msgstr "Z+"
