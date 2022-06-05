@@ -766,8 +766,8 @@ msgstr "מ''מ"
 msgid "mm/s"
 msgstr "מ\"מ/ש"
 
-msgid "mm/s^2"
-msgstr "mm/s^2"
+msgid "mm/s²"
+msgstr "mm/s²"
 
 #~ msgid "Displayed Macros"
 #~ msgstr "מוצגים מאקרו"

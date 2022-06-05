@@ -554,7 +554,7 @@ class JobStatusPanel(ScreenPanel):
                 self.labels['temp_grid'].attach(self.extruder_button[self.current_extruder], 0, 0, 1, 1)
                 self._screen.show_all()
             if "max_accel" in data["toolhead"]:
-                self.labels['max_accel'].set_text("%d mm/s2" % (data["toolhead"]["max_accel"]))
+                self.labels['max_accel'].set_text("%d mm/s²" % (data["toolhead"]["max_accel"]))
 
         if "extruder" in data and "pressure_advance" in data['extruder']:
             self.labels['advance'].set_text("%.2f" % data['extruder']['pressure_advance'])
@@ -665,11 +665,11 @@ class JobStatusPanel(ScreenPanel):
             self.flowrate = (self.flowrate + median(array(self.flowstore))) / 2
             self.flowstore = []
 
-        self.labels['flowrate'].set_label("%.1f mm3/s" % self.flowrate)
+        self.labels['flowrate'].set_label("%.1f mm³/s" % self.flowrate)
         self.labels['req_speed'].set_text("%d/%d mm/s" % (self.vel, self.req_speed))
         if self.main_status_displayed:
             self.speed_button.set_label("%3d%% %5d mm/s" % (self.speed, self.vel))
-            self.extrusion_button.set_label("%3d%% %5.1f mm3/s" % (self.extrusion, self.flowrate))
+            self.extrusion_button.set_label("%3d%% %5.1f mm³/s" % (self.extrusion, self.flowrate))
         return True
 
     def calculate_time_left(self, duration=0, filament_used=0):
