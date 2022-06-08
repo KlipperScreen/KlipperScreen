@@ -4,8 +4,6 @@ import os
 import gi
 import netifaces
 
-from ks_includes.wifi import WifiManager
-
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
 from ks_includes.screen_panel import ScreenPanel
@@ -28,9 +26,16 @@ class NetworkPanel(ScreenPanel):
         self.network_interfaces = netifaces.interfaces()
         self.wireless_interfaces = [iface for iface in self.network_interfaces if iface.startswith('w')]
         self.wifi = None
+
+        self.use_network_manager = os.system('systemctl is-active --quiet NetworkManager.service') == 0
         if len(self.wireless_interfaces) > 0:
             logging.info(f"Found wireless interfaces: {self.wireless_interfaces}")
-            self.wifi = WifiManager(self.wireless_interfaces[0])
+            if self.use_network_manager:
+                from ks_includes.wifi_nm import WifiManagerNM
+                self.wifi = WifiManagerNM(self.wireless_interfaces[0])
+            else:
+                from ks_includes.wifi import WifiManager
+                self.wifi = WifiManager(self.wireless_interfaces[0])
 
         # Get IP Address
         gws = netifaces.gateways()
