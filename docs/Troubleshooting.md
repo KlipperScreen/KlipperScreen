@@ -71,6 +71,8 @@ Once you have saved that file, restart KlipperScreen.
 sudo service KlipperScreen restart
 ```
 
+If you have multiple hdmi ports try the other one
+
 ## Screen is all white or blank or no signal
 
 If the screen never shows the console even during startup, Then it's tipically an improperly installed screen,
