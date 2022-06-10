@@ -264,37 +264,35 @@ class BedMeshPanel(ScreenPanel):
             self.content.remove(child)
 
         if "create_profile" not in self.labels:
-            self.labels['create_profile'] = Gtk.VBox()
-            self.labels['create_profile'].set_valign(Gtk.Align.START)
-
-            box = Gtk.Box(spacing=5)
-            box.set_size_request(self._gtk.get_content_width(), self._gtk.get_content_height() -
-                                 self._screen.keyboard_height - 20)
-            box.set_hexpand(True)
-            box.set_vexpand(False)
-            self.labels['create_profile'].add(box)
-
             pl = self._gtk.Label(_("Profile Name:"))
             pl.set_hexpand(False)
             entry = Gtk.Entry()
+            entry.set_text('')
             entry.set_hexpand(True)
             entry.connect("activate", self.create_profile)
+            entry.connect("focus-in-event", self._show_keyboard)
+            entry.connect("focus-out-event", self._remove_keyboard)
 
             save = self._gtk.ButtonImage("sd", _("Save"), "color3")
             save.set_hexpand(False)
             save.connect("clicked", self.create_profile)
 
-            self.labels['profile_name'] = entry
-            box.pack_start(pl, False, False, 5)
+            box = Gtk.HBox()
             box.pack_start(entry, True, True, 5)
             box.pack_start(save, False, False, 5)
 
-        self.show_create = True
-        self.labels['profile_name'].set_text('')
+            self.labels['create_profile'] = Gtk.VBox(spacing=5)
+            self.labels['create_profile'].set_valign(Gtk.Align.CENTER)
+            self.labels['create_profile'].set_hexpand(True)
+            self.labels['create_profile'].set_vexpand(True)
+            self.labels['create_profile'].pack_start(pl, True, True, 5)
+            self.labels['create_profile'].pack_start(box, True, True, 5)
+
         self.content.add(self.labels['create_profile'])
-        self.content.show()
         self._screen.show_keyboard()
+        self.labels['profile_name'] = entry
         self.labels['profile_name'].grab_focus_without_selecting()
+        self.show_create = True
 
     def show_mesh(self, widget, profile):
         _ = self.lang.gettext
