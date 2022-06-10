@@ -63,7 +63,6 @@ class KlipperScreen(Gtk.Window):
     files = None
     filename = ""
     keyboard = None
-    keyboard_height = 200
     last_update = {}
     load_panel = {}
     number_tools = 1
@@ -122,7 +121,6 @@ class KlipperScreen(Gtk.Window):
         self.show_cursor = self._config.get_main_config().getboolean("show_cursor", fallback=False)
         self.gtk = KlippyGtk(self, self.width, self.height, self.theme, self.show_cursor,
                              self._config.get_main_config_option("font_size", "medium"))
-        self.keyboard_height = self.gtk.get_keyboard_height()
         self.init_style()
 
         self.base_panel = BasePanel(self, title="Base Panel", back=False)
@@ -500,11 +498,6 @@ class KlipperScreen(Gtk.Window):
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
 
-    def is_keyboard_showing(self):
-        if self.keyboard is None:
-            return False
-        return True
-
     def is_printing(self):
         return self.printer.get_state() == "printing"
 
@@ -593,6 +586,7 @@ class KlipperScreen(Gtk.Window):
         logging.debug("Showing Screensaver")
         if self.screensaver is not None:
             self.close_screensaver()
+        self.remove_keyboard()
 
         close = Gtk.Button()
         close.connect("clicked", self.close_screensaver)
@@ -1037,11 +1031,7 @@ class KlipperScreen(Gtk.Window):
 
         box = Gtk.VBox()
         box.set_vexpand(False)
-        if self._screen.vertical_mode:
-            box.set_size_request(self.width, self.keyboard_height)
-        else:
-            action_bar_width = self.gtk.get_action_bar_width()
-            box.set_size_request(self.width - action_bar_width, self.keyboard_height)
+        box.set_size_request(self.gtk.get_content_width(), self.gtk.get_keyboard_height())
         box.add(keyboard)
 
         self.base_panel.get_content().pack_end(box, False, 0, 0)

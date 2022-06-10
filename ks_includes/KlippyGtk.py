@@ -10,7 +10,6 @@ from gi.repository import Gdk, GdkPixbuf, Gio, Gtk, Pango
 
 class KlippyGtk:
     labels = {}
-    keyboard_ratio = .22
     width_ratio = 16
     height_ratio = 9.375
 
@@ -22,8 +21,10 @@ class KlippyGtk:
 
         if self.screen.vertical_mode:
             self.font_ratio = [33, 49]
+            self.keyboard_ratio = .25
         else:
             self.font_ratio = [43, 29]
+            self.keyboard_ratio = .33
         self.font_size = int(min(
             self.width / self.font_ratio[0],
             self.height / self.font_ratio[1]
@@ -84,7 +85,7 @@ class KlippyGtk:
         return self.img_height
 
     def get_keyboard_height(self):
-        return (self.width - self.get_action_bar_width()) * self.keyboard_ratio
+        return self.get_content_height() * self.keyboard_ratio
 
     def get_temp_color(self, device):
         # logging.debug("Color list %s" % self.color_list)
