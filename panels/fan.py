@@ -44,34 +44,34 @@ class FanPanel(ScreenPanel):
 
         for fan in self.devices:
             if fan in data and "speed" in data[fan]:
-                self.update_fan_speed(fan, self._printer.get_fan_speed(fan, data[fan]["speed"]))
+                self.update_fan_speed(None, fan, self._printer.get_fan_speed(fan, data[fan]["speed"]))
 
-    def update_fan_speed(self, fan, speed):
+    def update_fan_speed(self, widget, fan, speed):
         if fan not in self.devices:
             return
+
         if self.devices[fan]['changeable'] is True:
             if self.devices[fan]['scale'].has_grab():
                 return
-            self.fan_speed[fan] = round(float(speed) * 100)
+            self.devices[fan]["speed"] = round(float(speed) * 100)
             self.devices[fan]['scale'].disconnect_by_func(self.set_fan_speed)
-            self.devices[fan]['scale'].set_value(self.fan_speed[fan])
+            self.devices[fan]['scale'].set_value(self.devices[fan]["speed"])
             self.devices[fan]['scale'].connect("button-release-event", self.set_fan_speed, fan)
         else:
-            self.fan_speed[fan] = float(speed)
-            self.devices[fan]['scale'].set_fraction(self.fan_speed[fan])
+            self.devices[fan]["speed"] = float(speed)
+            self.devices[fan]['scale'].set_fraction(self.devices[fan]["speed"])
+        if widget is not None:
+            self.set_fan_speed(None, None, fan)
 
     def add_fan(self, fan):
+        _ = self.lang.gettext
+
         logging.info("Adding fan: %s" % fan)
         changeable = False
         for x in CHANGEABLE_FANS:
             if fan.startswith(x) or fan == x:
                 changeable = True
                 break
-
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-
-        self.fan_speed[fan] = float(self._printer.get_fan_speed(fan))
 
         name = Gtk.Label()
         if fan == "fan":
@@ -87,36 +87,51 @@ class FanPanel(ScreenPanel):
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
         adj = Gtk.Adjustment(0, 0, 100, 1, 5, 0)
+        fan_col = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        fan_col.set_hexpand(True)
+        fan_col.set_vexpand(False)
+        stop_btn = self._gtk.ButtonImage("cancel", None, "color1", 1)
+        stop_btn.set_hexpand(False)
+        stop_btn.connect("clicked", self.update_fan_speed, fan, 0)
+        max_btn = self._gtk.ButtonImage("fan-on", _("Max"), "color2", 1)
+        max_btn.set_hexpand(False)
+        max_btn.connect("clicked", self.update_fan_speed, fan, 100)
+
+        speed = float(self._printer.get_fan_speed(fan))
         if changeable is True:
-            self.fan_speed[fan] = round(self.fan_speed[fan] * 100)
+            speed = round(speed * 100)
             scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
-            scale.set_value(self.fan_speed[fan])
+            scale.set_value(speed)
             scale.set_digits(0)
             scale.set_hexpand(True)
             scale.set_has_origin(True)
             scale.get_style_context().add_class("fan_slider")
             scale.connect("button-release-event", self.set_fan_speed, fan)
+            fan_col.add(stop_btn)
+            fan_col.add(scale)
+            fan_col.add(max_btn)
         else:
             scale = Gtk.ProgressBar()
-            scale.set_fraction(self.fan_speed[fan])
+            scale.set_fraction(speed)
             scale.set_show_text(True)
             scale.set_hexpand(True)
-            # scale.get_style_context().add_class("fan_slider")
+            fan_col.pack_start(scale, True, True, 10)
 
-        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        labels.add(name)
-        labels.add(scale)
+        fan_row = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+        fan_row.set_hexpand(True)
+        fan_row.set_vexpand(False)
+        fan_row.add(name)
+        fan_row.add(fan_col)
 
-        dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        dev.set_hexpand(True)
-        dev.set_vexpand(False)
-        dev.add(labels)
-        frame.add(dev)
+        frame = Gtk.Frame()
+        frame.get_style_context().add_class("frame-item")
+        frame.add(fan_row)
 
         self.devices[fan] = {
             "changeable": changeable,
             "row": frame,
             "scale": scale,
+            "speed": speed,
         }
 
         devices = sorted(self.devices)
@@ -153,5 +168,5 @@ class FanPanel(ScreenPanel):
         GLib.timeout_add_seconds(1, self.check_fan_speed, fan)
 
     def check_fan_speed(self, fan):
-        self.update_fan_speed(fan, self._printer.get_fan_speed(fan))
+        self.update_fan_speed(None, fan, self._printer.get_fan_speed(fan))
         return False
