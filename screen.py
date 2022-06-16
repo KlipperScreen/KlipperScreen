@@ -344,7 +344,7 @@ class KlipperScreen(Gtk.Window):
         self._cur_panels.append(panel_name)
         logging.debug("Current panel hierarchy: %s", str(self._cur_panels))
 
-    def show_popup_message(self, message, level=2):
+    def show_popup_message(self, message, level=3):
         if self.popup_message is not None:
             self.close_popup_message()
 
@@ -353,6 +353,8 @@ class KlipperScreen(Gtk.Window):
 
         if level == 1:
             box.get_style_context().add_class("message_popup_echo")
+        elif level == 2:
+            box.get_style_context().add_class("message_popup_warning")
         else:
             box.get_style_context().add_class("message_popup_error")
 
@@ -839,7 +841,7 @@ class KlipperScreen(Gtk.Window):
                 if data.startswith("echo: "):
                     self.show_popup_message(data[6:], 1)
                 if data.startswith("!! "):
-                    self.show_popup_message(data[3:], 2)
+                    self.show_popup_message(data[3:], 3)
                 logging.debug(json.dumps([action, data], indent=2))
 
         self.base_panel.process_update(action, data)

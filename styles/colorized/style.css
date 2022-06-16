@@ -189,6 +189,10 @@ textview .time {
     background-color: #859900; /*solarized-green*/
 }
 
+.message_popup_warning, .message_popup_warning button {
+    background-color: #b58900; /*solarazed-yellow*/
+}
+
 .message_popup_error, .message_popup_error button {
     background-color: #dc322f; /*solarazed-red*/
 }
