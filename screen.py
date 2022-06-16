@@ -345,6 +345,8 @@ class KlipperScreen(Gtk.Window):
         logging.debug("Current panel hierarchy: %s", str(self._cur_panels))
 
     def show_popup_message(self, message, level=3):
+        if self.screensaver is not None:
+            self.wake_screen()
         if self.popup_message is not None:
             self.close_popup_message()
 
@@ -601,6 +603,8 @@ class KlipperScreen(Gtk.Window):
 
         self.base_panel.get().put(box, 0, 0)
         self.show_all()
+        # Avoid leaving a cursor-handle
+        close.grab_focus()
         self.screensaver = box
         return False
 
