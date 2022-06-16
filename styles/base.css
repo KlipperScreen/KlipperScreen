@@ -286,6 +286,10 @@ trough {
     background-color: #367554;
 }
 
+.message_popup_warning, .message_popup_warning button {
+    background-color: #f9a825;
+}
+
 .message_popup_error, .message_popup_error button {
     background-color: #9e2f3a;
 }
