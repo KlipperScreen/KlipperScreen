@@ -12,6 +12,7 @@ class KlippyGtk:
     labels = {}
     width_ratio = 16
     height_ratio = 9.375
+    keyboard_ratio = .5
 
     def __init__(self, screen, width, height, theme, cursor, fontsize_type):
         self.screen = screen
@@ -21,10 +22,8 @@ class KlippyGtk:
 
         if self.screen.vertical_mode:
             self.font_ratio = [33, 49]
-            self.keyboard_ratio = .25
         else:
             self.font_ratio = [43, 29]
-            self.keyboard_ratio = .33
         self.font_size = int(min(
             self.width / self.font_ratio[0],
             self.height / self.font_ratio[1]
