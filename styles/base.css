@@ -190,6 +190,10 @@ trough {
     background-color: #20303D;
 }
 
+.content {
+    margin: 0 .1em;
+}
+
 .dialog {
     border: .1em solid black;
     padding: 2.5em;
