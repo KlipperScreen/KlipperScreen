@@ -266,19 +266,19 @@ class BedMeshPanel(ScreenPanel):
         if "create_profile" not in self.labels:
             pl = self._gtk.Label(_("Profile Name:"))
             pl.set_hexpand(False)
-            entry = Gtk.Entry()
-            entry.set_text('')
-            entry.set_hexpand(True)
-            entry.connect("activate", self.create_profile)
-            entry.connect("focus-in-event", self._show_keyboard)
-            entry.connect("focus-out-event", self._remove_keyboard)
+            self.labels['profile_name'] = Gtk.Entry()
+            self.labels['profile_name'].set_text('')
+            self.labels['profile_name'].set_hexpand(True)
+            self.labels['profile_name'].connect("activate", self.create_profile)
+            self.labels['profile_name'].connect("focus-in-event", self._screen.show_keyboard)
+            self.labels['profile_name'].grab_focus_without_selecting()
 
             save = self._gtk.ButtonImage("sd", _("Save"), "color3")
             save.set_hexpand(False)
             save.connect("clicked", self.create_profile)
 
             box = Gtk.HBox()
-            box.pack_start(entry, True, True, 5)
+            box.pack_start(self.labels['profile_name'], True, True, 5)
             box.pack_start(save, False, False, 5)
 
             self.labels['create_profile'] = Gtk.VBox(spacing=5)
@@ -290,8 +290,6 @@ class BedMeshPanel(ScreenPanel):
 
         self.content.add(self.labels['create_profile'])
         self._screen.show_keyboard()
-        self.labels['profile_name'] = entry
-        self.labels['profile_name'].grab_focus_without_selecting()
         self.show_create = True
 
     def show_mesh(self, widget, profile):

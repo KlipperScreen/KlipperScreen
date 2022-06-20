@@ -101,7 +101,7 @@ switch slider {
 entry {
     font-size: 1em;
     background-color: #20292F;
-    border: 1em solid #13181C;
+    border: .2em solid #13181C;
     padding: .25em;
 }
 
@@ -278,6 +278,10 @@ trough {
     min-height: 2em;
 }
 
+.keyboard_box {
+    margin-top: 42px;
+}
+
 .message_popup {
     border-bottom: .1em solid white;
 }
@@ -292,6 +296,10 @@ trough {
 
 .message_popup_error, .message_popup_error button {
     background-color: #9e2f3a;
+}
+
+.numpad{
+    margin-top: 30px;
 }
 
 .numpad_tleft {

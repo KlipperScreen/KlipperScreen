@@ -1016,7 +1016,7 @@ class KlipperScreen(Gtk.Window):
         self.show_panel('job_status', "job_status", "Print Status", 2)
         self.base_panel.show_heaters(True)
 
-    def show_keyboard(self, widget=None):
+    def show_keyboard(self, widget=None, event=None):
         if self.keyboard is not None:
             return
 
@@ -1038,9 +1038,10 @@ class KlipperScreen(Gtk.Window):
         box = Gtk.VBox()
         box.set_vexpand(False)
         box.set_size_request(self.gtk.get_content_width(), self.gtk.get_keyboard_height())
+        box.get_style_context().add_class("keyboard_box")
         box.add(keyboard)
 
-        self.base_panel.get_content().pack_end(box, False, 0, 0)
+        self.base_panel.get_content().pack_end(box, True, True, 0)
 
         self.show_all()
         keyboard.add_id(xid)
@@ -1052,7 +1053,7 @@ class KlipperScreen(Gtk.Window):
             "socket": keyboard
         }
 
-    def remove_keyboard(self, widget=None):
+    def remove_keyboard(self, widget=None, event=None):
         if self.keyboard is None:
             return
 

@@ -69,6 +69,7 @@ class ConsolePanel(ScreenPanel):
         tv.set_editable(False)
         tv.set_cursor_visible(False)
         tv.connect("size-allocate", self._autoscroll)
+        tv.connect("focus-in-event", self._screen.remove_keyboard)
 
         sw.add(tv)
 
@@ -79,9 +80,10 @@ class ConsolePanel(ScreenPanel):
         entry = Gtk.Entry()
         entry.set_hexpand(True)
         entry.set_vexpand(False)
-        entry.connect("focus-in-event", self._show_keyboard)
-        entry.connect("focus-out-event", self._remove_keyboard)
+        entry.connect("button-press-event", self._screen.show_keyboard)
+        entry.connect("focus-in-event", self._screen.show_keyboard)
         entry.connect("activate", self._send_command)
+        entry.grab_focus_without_selecting()
 
         enter = self._gtk.ButtonImage("resume", " " + _('Send') + " ", None, .66, Gtk.PositionType.RIGHT, False)
         enter.set_hexpand(False)
@@ -98,9 +100,9 @@ class ConsolePanel(ScreenPanel):
         })
 
         content_box = Gtk.VBox()
-        content_box.pack_start(options, False, 0, 5)
+        content_box.pack_start(options, False, False, 5)
         content_box.add(sw)
-        content_box.pack_end(ebox, False, 0, 0)
+        content_box.pack_end(ebox, False, False, 0)
         self.content.add(content_box)
 
     def clear(self, widget):
@@ -155,15 +157,10 @@ class ConsolePanel(ScreenPanel):
             adj = self.labels['sw'].get_vadjustment()
             adj.set_value(adj.get_upper() - adj.get_page_size())
 
-    def _show_keyboard(self, *args):
-        self._screen.show_keyboard()
-
-    def _remove_keyboard(self, *args):
-        self._screen.remove_keyboard()
-
     def _send_command(self, *args):
         cmd = self.labels['entry'].get_text()
         self.labels['entry'].set_text('')
+        self._screen.remove_keyboard()
 
         self.add_gcode("command", time.time(), cmd)
         self._screen._ws.klippy.gcode_script(cmd)

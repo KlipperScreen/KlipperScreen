@@ -351,19 +351,19 @@ class NetworkPanel(ScreenPanel):
 
         label = self._gtk.Label("%s %s:" % (_("PSK for"), ssid))
         label.set_hexpand(False)
-        entry = Gtk.Entry()
-        entry.set_text('')
-        entry.set_hexpand(True)
-        entry.connect("activate", self.add_new_network, ssid, True)
-        entry.connect("focus-in-event", self._show_keyboard)
-        entry.connect("focus-out-event", self._remove_keyboard)
+        self.labels['network_psk'] = Gtk.Entry()
+        self.labels['network_psk'].set_text('')
+        self.labels['network_psk'].set_hexpand(True)
+        self.labels['network_psk'].connect("activate", self.add_new_network, ssid, True)
+        self.labels['network_psk'].connect("focus-in-event", self._screen.show_keyboard)
+        self.labels['network_psk'].grab_focus_without_selecting()
 
         save = self._gtk.ButtonImage("sd", _("Save"), "color3")
         save.set_hexpand(False)
         save.connect("clicked", self.add_new_network, ssid, True)
 
         box = Gtk.HBox()
-        box.pack_start(entry, True, True, 5)
+        box.pack_start(self.labels['network_psk'], True, True, 5)
         box.pack_start(save, False, False, 5)
 
         self.labels['add_network'] = Gtk.VBox(spacing=5)
@@ -375,8 +375,6 @@ class NetworkPanel(ScreenPanel):
 
         self.content.add(self.labels['add_network'])
         self._screen.show_keyboard()
-        self.labels['network_psk'] = entry
-        self.labels['network_psk'].grab_focus_without_selecting()
         self.content.show_all()
         self.show_add = True
 
