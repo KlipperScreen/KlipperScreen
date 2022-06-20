@@ -6,8 +6,6 @@
 
 window {
     background-color: #121212;
-    background-image: url("./styles/material-dark/background.svg");
-    background-size: cover;
 }
 
 button {
@@ -145,8 +143,6 @@ textview .time {
 .dialog {
     border: #121212;
     background-color: #121212;
-    background-image: url("./styles/material-dark/background.svg");
-    background-size: cover;
 }
 
 .dialog button {

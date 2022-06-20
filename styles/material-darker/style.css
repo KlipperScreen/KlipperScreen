@@ -6,7 +6,6 @@
 
 window {
     background-color: #121212;
-    background-image: url("./styles/material-dark/background.svg");
     background-size: cover;
 }
 
@@ -67,7 +66,7 @@ switch:checked {
 
 entry {
     background-color: #1e1e1e;
-    border-color: #303030;
+    border-color: #1e1e1e;
 }
 
 frame {
