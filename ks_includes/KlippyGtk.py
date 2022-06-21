@@ -291,6 +291,11 @@ class KlippyGtk:
         return text
 
     def formatTemperatureString(self, temp, target):
+        if temp is None:
+            logging.debug("Temp is none")
+            return
+        if target is None:
+            target = 0
         if (temp - 2 < target < temp + 2) or round(target, 0) == 0:
             return str(round(temp, 1)) + "°C"  # °C →"
         return str(round(temp)) + " °C\n(" + str(round(target)) + ")"
