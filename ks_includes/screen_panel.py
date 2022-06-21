@@ -116,7 +116,7 @@ class ScreenPanel:
             self.labels[label]['l'].set_text(text)
 
     def update_temp(self, dev, temp, target, name=None):
-        if dev in self.labels:
+        if dev in self.labels and temp is not None:
             if name is None:
                 self.labels[dev].set_label(self._gtk.formatTemperatureString(temp, target))
             else:

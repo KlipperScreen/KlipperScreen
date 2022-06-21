@@ -27,12 +27,14 @@ class TemperaturePanel(ScreenPanel):
         # When printing start in temp_delta mode and only select tools
         state = self._printer.get_state()
         logging.info(state)
+        selection = []
+        if "extruder" in self._printer.get_tools():
+            selection.append("extruder")
         if state not in ["printing", "paused"]:
             self.show_preheat = True
-            selection = self._printer.get_tools() + self._printer.get_heaters()
+            selection.extend(self._printer.get_heaters())
         else:
             self.show_preheat = False
-            selection = self._printer.get_tools()
 
         # Select heaters
         for h in selection:

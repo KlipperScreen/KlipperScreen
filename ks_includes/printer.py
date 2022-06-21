@@ -19,7 +19,6 @@ class Printer:
         "shutdown": None
     }
     tools = []
-    toolcount = 0
     extrudercount = 0
     tempdevcount = 0
     fancount = 0
@@ -38,7 +37,6 @@ class Printer:
         self.power_devices = None
         self.state_callbacks = None
         self.tools = None
-        self.toolcount = None
         self.extrudercount = None
         self.tempdevcount = None
         self.fancount = None
@@ -51,7 +49,6 @@ class Printer:
     def reinit(self, printer_info, data):
         logging.debug("Moonraker object status: %s" % data)
         self.config = data['configfile']['config']
-        self.toolcount = 0
         self.extrudercount = 0
         self.tempdevcount = 0
         self.fancount = 0
@@ -69,19 +66,15 @@ class Printer:
 
         for x in self.config.keys():
             if x[0:8] == "extruder":
+                self.tools.append(x)
+                self.tools = sorted(self.tools)
+                self.extrudercount += 1
                 if x.startswith('extruder_stepper'):
                     continue
-
                 self.devices[x] = {
                     "temperature": 0,
                     "target": 0
                 }
-                self.tools.append(x)
-                self.tools = sorted(self.tools)
-                self.toolcount += 1
-                if "shared_heater" in self.config[x]:
-                    continue
-                self.extrudercount += 1
             if x == 'heater_bed' or x.startswith('heater_generic ') or x.startswith('temperature_sensor ') \
                     or x.startswith('temperature_fan '):
                 self.devices[x] = {
@@ -104,7 +97,6 @@ class Printer:
         self.process_update(data)
 
         logging.info("Klipper version: %s", self.klipper['version'])
-        logging.info("# Toolcount: %s", str(self.toolcount))
         logging.info("# Extruders: %s", str(self.extrudercount))
         logging.info("# Temperature devices: %s", str(self.tempdevcount))
         logging.info("# Fans: %s", str(self.fancount))
