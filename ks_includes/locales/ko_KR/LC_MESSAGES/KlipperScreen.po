@@ -77,13 +77,13 @@ msgid "Auto"
 msgstr "오토"
 
 msgid "Auto-calibrate"
-msgstr "오토 캘리브레이셔"
+msgstr "자동 교정"
 
 msgid "Auto-scroll"
 msgstr "오토 스크롤"
 
 msgid "Bed Level"
-msgstr "베드 레베"
+msgstr "베드 레벨"
 
 msgid "Bed Mesh"
 msgstr "배드 메시"
@@ -144,7 +144,7 @@ msgid "Complete"
 msgstr "완료"
 
 msgid "Configuration"
-msgstr "환경설정"
+msgstr "환경 설정"
 
 msgid "Confirm Emergency Stop"
 msgstr "비상정지 확인창 표시"
@@ -709,7 +709,7 @@ msgid "Y-"
 msgstr "Y-"
 
 msgid "Z Calibrate"
-msgstr "Z 옵셋 교저"
+msgstr "Z 옵셋 교정"
 
 msgid "Z Move Speed (mm/s)"
 msgstr "Z 이동 속도 (mm/s)"
