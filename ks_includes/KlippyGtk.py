@@ -171,14 +171,15 @@ class KlippyGtk:
         b.connect("clicked", self.screen.reset_screensaver_timeout)
         return b
 
-    def ButtonImage(self, image_name, label=None, style=None, scale=1.38,
+    def ButtonImage(self, image_name=None, label=None, style=None, scale=1.38,
                     position=Gtk.PositionType.TOP, word_wrap=True):
 
         b = Gtk.Button(label=label)
         b.set_hexpand(True)
         b.set_vexpand(True)
         b.set_can_focus(False)
-        b.set_image(self.Image(image_name, scale))
+        if image_name is not None:
+            b.set_image(self.Image(image_name, scale))
         b.set_image_position(position)
         b.set_always_show_image(True)
 
