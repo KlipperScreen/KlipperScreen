@@ -10,7 +10,7 @@ FBDEV="xserver-xorg-video-fbdev"
 PYTHON="python3-virtualenv virtualenv python3-distutils"
 PYGOBJECT="libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0"
 MISC="librsvg2-common libopenjp2-7 libatlas-base-dev matchbox-keyboard wireless-tools"
-OPTIONAL="xserver-xorg-legacy fonts-nanum fonts-freefont-ttf"
+OPTIONAL="xserver-xorg-legacy fonts-nanum"
 
 Red='\033[0;31m'
 Green='\033[0;32m'
