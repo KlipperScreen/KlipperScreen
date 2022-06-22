@@ -33,7 +33,7 @@ msgid "Abort"
 msgstr "취소"
 
 msgid "Acceleration:"
-msgstr "가속ㄷ:"
+msgstr "가속도:"
 
 msgid "Accept"
 msgstr "확인"
@@ -83,7 +83,7 @@ msgid "Auto-scroll"
 msgstr "오토 스크롤"
 
 msgid "Bed Level"
-msgstr "베드 레벨"
+msgstr "베드 레베"
 
 msgid "Bed Mesh"
 msgstr "배드 메시"
@@ -200,7 +200,7 @@ msgid "Estimated Time Method"
 msgstr "예상시간 옵션"
 
 msgid "Extrude"
-msgstr "필라 압출 제어"
+msgstr "압출 "
 
 msgid "Extrusion +"
 msgstr "압출 +"
@@ -419,7 +419,7 @@ msgid "Moonraker: connected"
 msgstr "문래커: 연결됨"
 
 msgid "Move"
-msgstr "툴헤드 이도"
+msgstr "툴헤드 이동"
 
 msgid "Move Distance (mm)"
 msgstr "이동 거리 (mm)"
