@@ -439,7 +439,12 @@ class KlipperScreen(Gtk.Window):
     def restart_ks(self, widget, response_id):
         if response_id == Gtk.ResponseType.OK:
             logging.debug("Restarting")
-            os.system("sudo systemctl restart %s" % self._config.get_main_config().get('service'))
+            # This can be removed after a grace period
+            service = self._config.get_main_config_option('service')
+            if service is not None and service != "KlipperScreen":
+                self.show_popup_message("Error: option \"service\" is not supported anymore")
+            # ^^^
+            self._ws.send_method("machine.services.restart", {"service": "KlipperScreen"})
         widget.destroy()
 
     def init_style(self):
