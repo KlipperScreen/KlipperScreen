@@ -39,7 +39,7 @@ msgid "Accept"
 msgstr "확인"
 
 msgid "Actions"
-msgstr "툴헤드 제어"
+msgstr "툴 헤드 제어"
 
 msgid "Add Printer"
 msgstr "프린터 추가"
@@ -419,7 +419,7 @@ msgid "Moonraker: connected"
 msgstr "문래커: 연결됨"
 
 msgid "Move"
-msgstr "툴헤드 이동"
+msgstr "툴 헤드 이동"
 
 msgid "Move Distance (mm)"
 msgstr "이동 거리 (mm)"
