@@ -171,12 +171,12 @@ class ZCalibratePanel(ScreenPanel):
             printer_cfg = self._config.get_printer_config(printer)
             logging.info(printer_cfg)
             if printer_cfg is not None:
-                x_position = printer_cfg.getint("calibrate_x_position", 0)
-                y_position = printer_cfg.getint("calibrate_y_position", 0)
+                x_position = printer_cfg.getfloat("calibrate_x_position", 0)
+                y_position = printer_cfg.getfloat("calibrate_y_position", 0)
             elif 'z_calibrate_position' in self._config.get_config():
                 # OLD global way, this should be deprecated
-                x_position = self._config.get_config()['z_calibrate_position'].getint("calibrate_x_position", 0)
-                y_position = self._config.get_config()['z_calibrate_position'].getint("calibrate_y_position", 0)
+                x_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_x_position", 0)
+                y_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_y_position", 0)
 
             if x_position > 0 and y_position > 0:
                 logging.debug("Configured probing position X: %.0f Y: %.0f", x_position, y_position)
