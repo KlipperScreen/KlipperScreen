@@ -15,7 +15,7 @@ class BasePanel(ScreenPanel):
         super().__init__(screen, title, back, action_bar, printer_name)
         self.current_panel = None
         self.time_min = -1
-        self.time_format = self._config.get_main_config_option("24htime")
+        self.time_format = self._config.get_main_config().getboolean("24htime", True)
         self.time_update = None
         self.titlebar_name_type = None
         self.buttons_showing = {
@@ -298,9 +298,9 @@ class BasePanel(ScreenPanel):
 
     def update_time(self):
         now = datetime.datetime.now()
-        confopt = self._config.get_main_config_option("24htime")
+        confopt = self._config.get_main_config().getboolean("24htime", True)
         if now.minute != self.time_min or self.time_format != confopt:
-            if confopt == "True":
+            if confopt:
                 self.control['time'].set_text(now.strftime("%H:%M"))
             else:
                 self.control['time'].set_text(now.strftime("%I:%M %p"))

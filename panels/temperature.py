@@ -313,7 +313,7 @@ class TemperaturePanel(ScreenPanel):
             image = "fan"
             class_name = "graph_label_fan_%s" % f
             type = "fan"
-        elif self._config.get_main_config_option('only_heaters') == "True":
+        elif self._config.get_main_config().getboolean("only_heaters", False):
             return False
         else:
             s = 1

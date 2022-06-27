@@ -117,10 +117,10 @@ class KlipperScreen(Gtk.Window):
         else:
             self.vertical_mode = False
         logging.info("Screen resolution: %sx%s" % (self.width, self.height))
-        self.theme = self._config.get_main_config_option('theme')
+        self.theme = self._config.get_main_config().get('theme')
         self.show_cursor = self._config.get_main_config().getboolean("show_cursor", fallback=False)
         self.gtk = KlippyGtk(self, self.width, self.height, self.theme, self.show_cursor,
-                             self._config.get_main_config_option("font_size", "medium"))
+                             self._config.get_main_config().get("font_size", "medium"))
         self.init_style()
 
         self.base_panel = BasePanel(self, title="Base Panel", back=False)
@@ -130,7 +130,7 @@ class KlipperScreen(Gtk.Window):
 
         self.printer_initializing(_("Initializing"))
 
-        self.set_screenblanking_timeout(self._config.get_main_config_option('screen_blanking'))
+        self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
 
         # Move mouse to 0,0
         os.system("/usr/bin/xdotool mousemove 0 0")
@@ -166,7 +166,7 @@ class KlipperScreen(Gtk.Window):
             if self.printer.get_state() not in ["disconnected", "error", "startup", "shutdown"]:
                 self.base_panel.show_heaters(True)
             self.base_panel.show_printer_select(True)
-            self.base_panel.show_macro_shortcut(self._config.get_main_config_option('side_macro_shortcut'))
+            self.base_panel.show_macro_shortcut(self._config.get_main_config().get('side_macro_shortcut'))
             return
 
         # Cleanup
@@ -439,7 +439,7 @@ class KlipperScreen(Gtk.Window):
     def restart_ks(self, widget, response_id):
         if response_id == Gtk.ResponseType.OK:
             logging.debug("Restarting")
-            os.system("sudo systemctl restart %s" % self._config.get_main_config_option('service'))
+            os.system("sudo systemctl restart %s" % self._config.get_main_config().get('service'))
         widget.destroy()
 
     def init_style(self):
@@ -636,7 +636,7 @@ class KlipperScreen(Gtk.Window):
 
     def wake_screen(self):
         # Wake the screen (it will go to standby as configured)
-        if self._config.get_main_config_option('screen_blanking') != "off":
+        if self._config.get_main_config().get('screen_blanking') != "off":
             logging.debug("Screen wake up")
             os.system("xset -display :0 dpms force on")
             self.close_screensaver()
@@ -644,7 +644,7 @@ class KlipperScreen(Gtk.Window):
     def set_dpms(self, use_dpms):
         self.use_dpms = use_dpms
         logging.info("DPMS set to: %s" % self.use_dpms)
-        self.set_screenblanking_timeout(self._config.get_main_config_option('screen_blanking'))
+        self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
 
     def set_screenblanking_timeout(self, time):
         os.system("xset -display :0 s noblank")
@@ -773,7 +773,7 @@ class KlipperScreen(Gtk.Window):
         if "job_status" in self._cur_panels or "main_menu" in self._cur_panels:
             return
 
-        self.base_panel.show_macro_shortcut(self._config.get_main_config_option('side_macro_shortcut'))
+        self.base_panel.show_macro_shortcut(self._config.get_main_config().get('side_macro_shortcut'))
         if prev_state not in ['paused', 'printing']:
             self.init_printer()
             self.base_panel._printer = self.printer

@@ -37,7 +37,7 @@ class ScreenPanel:
     def emergency_stop(self, widget):
         _ = self.lang.gettext
 
-        if self._config.get_main_config_option('confirm_estop') == "True":
+        if self._config.get_main_config().getboolean('confirm_estop'):
             self._screen._confirm_send_action(widget, _("Are you sure you want to run Emergency Stop?"),
                                               "printer.emergency_stop")
         else:
