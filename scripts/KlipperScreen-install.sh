@@ -124,13 +124,6 @@ create_virtualenv()
 
 install_systemd_service()
 {
-    if [ -f "/etc/systemd/system/KlipperScreen.service" ]; then
-        echo_text "KlipperScreen unit file already installed"
-        sudo systemctl unmask KlipperScreen.service
-        sudo systemctl daemon-reload
-        sudo systemctl enable KlipperScreen
-        return
-    fi
     echo_text "Installing KlipperScreen unit file"
 
     SERVICE=$(<$SCRIPTPATH/KlipperScreen.service)
@@ -142,6 +135,7 @@ install_systemd_service()
     SERVICE=$(sed "s/KS_DIR/$KSPATH_ESC/g" <<< $SERVICE)
 
     echo "$SERVICE" | sudo tee /etc/systemd/system/KlipperScreen.service > /dev/null
+    sudo systemctl unmask KlipperScreen.service
     sudo systemctl daemon-reload
     sudo systemctl enable KlipperScreen
 }
