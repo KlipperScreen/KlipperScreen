@@ -92,7 +92,7 @@ class KlipperScreenConfig:
                 item[name]['moonraker_api_key'] = "redacted"
         logging.debug("Configured printers: %s" % json.dumps(conf_printers_debug, indent=2))
 
-        lang = self.get_main_config_option("language", None)
+        lang = self.get_main_config().get("language", None)
         lang = [lang] if lang is not None and lang != "default" else None
         logging.info("Detected language: %s" % lang)
         self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', languages=lang,
@@ -291,9 +291,6 @@ class KlipperScreenConfig:
 
     def get_main_config(self):
         return self.config['main']
-
-    def get_main_config_option(self, option, default=None):
-        return self.config['main'].get(option, default)
 
     def get_menu_items(self, menu="__main", subsection=""):
         if subsection != "":
