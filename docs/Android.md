@@ -70,7 +70,7 @@ done
 echo ""
 if [ $timeout -lt 60 ]
 then
-    DISPLAY=:100 /home/pi/.KlipperScreen-env/bin/python3 /home/pi/KlipperScreen/screen.py
+    DISPLAY=:100 $KS_XCLIENT
     exit 0
 else
     exit 1
@@ -91,7 +91,7 @@ nano launch_klipperscreen.sh
 
 * Paste this into the script (edit the IP for example: 192.168.1.2:0)
 ```bash
-DISPLAY=(ip address from blue screen):0 /home/pi/.KlipperScreen-env/bin/python3 /home/pi/KlipperScreen/screen.py
+DISPLAY=(ip address from blue screen):0 $KS_XCLIENT
 ```
 
 !!! important
