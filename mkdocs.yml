@@ -13,6 +13,7 @@ nav:
       - Configuration.md
       - Quicktips.md
       - Macros: macros.md
+      - Android.md
     - Troubleshooting.md
     - Theming.md
     - Translations.md
