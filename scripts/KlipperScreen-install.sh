@@ -160,6 +160,7 @@ update_x11()
 start_KlipperScreen()
 {
     echo_text "Starting service..."
+    sudo systemctl stop KlipperScreen
     sudo systemctl start KlipperScreen
 }
 if [ "$EUID" == 0 ]
