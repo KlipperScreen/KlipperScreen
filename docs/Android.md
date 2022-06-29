@@ -24,58 +24,14 @@ sudo apt-get install android-tools-adb
 Usually it involves enabling developer mode and "USB debugging" but this varies on different vendors and versions of the device
 search "how to enable android debugging on device-model-and-brand"
 
-* Create a launcher script
+* Copy the launcher script
 
 ```bash
-cd ~/KlipperScreen
-touch launch_klipperscreen.sh
-chmod +x launch_klipperscreen.sh
-nano launch_klipperscreen.sh
+cd ~/KlipperScreen/scripts
+cp android-adb.sh launch_KlipperScreen
+chmod +x launch_KlipperScreen
 ```
 
-* Paste this into the script
-```bash
-#!/bin/bash
-# forward local display :100 to remote display :0
-adb forward tcp:6100 tcp:6000
-
-adb shell dumpsys nfc | grep 'mScreenState=' | grep OFF_LOCKED > /dev/null 2>&1
-if [ $? -lt 1 ]
-then
-    echo "Screen is OFF and Locked. Turning screen on..."
-    adb shell input keyevent 26
-fi
-
-adb shell dumpsys nfc | grep 'mScreenState=' | grep ON_LOCKED> /dev/null 2>&1
-if [ $? -lt 1 ]
-then
-    echo "Screen is Locked. Unlocking..."
-    adb shell input keyevent 82
-fi
-
-# start xsdl
-adb shell am start-activity x.org.server/.MainActivity
-
-ret=1
-timeout=0
-echo -n "Waiting for x-server to be ready "
-while [ $ret -gt 0 ] && [ $timeout -lt 60 ]
-do
-    xset -display :100 -q > /dev/null 2>&1
-    ret=$?
-    timeout=$( expr $timeout + 1 )
-    echo -n "."
-    sleep 1
-done
-echo ""
-if [ $timeout -lt 60 ]
-then
-    DISPLAY=:100 $KS_XCLIENT
-    exit 0
-else
-    exit 1
-fi
-```
 * Go to [Startup](#startup)
 
 ### WIFI
@@ -83,10 +39,10 @@ fi
 * Create a launcher script
 
 ```bash
-cd ~/KlipperScreen
-touch launch_klipperscreen.sh
-chmod +x launch_klipperscreen.sh
-nano launch_klipperscreen.sh
+cd ~/KlipperScreen/scripts
+touch launch_KlipperScreen.sh
+chmod +x launch_KlipperScreen
+nano launch_KlipperScreen
 ```
 
 * Paste this into the script (edit the IP for example: 192.168.1.2:0)
@@ -117,6 +73,22 @@ sudo service KlipperScreen stop
 sudo service KlipperScreen start
 ```
 
-## Discourse
+## Migration from other tutorials
 
-[it has old instructions but you may get some help if needed](https://klipper.discourse.group/t/how-to-klipperscreen-on-android-smart-phones/1196)
+KlipperScreen says error option "service" is not supported anymore.
+
+Stop the other service and Remove it, for example if the service is `KlippyScreenAndroid`:
+
+```bash
+sudo service KlippyScreenAndroid stop
+sudo rm /etc/systemd/system/KlippyScreenAndroid.service
+```
+
+Follow this guide on how to setup the new launcher script with [USB(ADB)](#adb) or [WIFI](#wifi) and restart KS.
+
+## Help
+
+[The Discourse thread has old instructions but you may get some help if needed](https://klipper.discourse.group/t/how-to-klipperscreen-on-android-smart-phones/1196)
+
+[#klipper-screen channel on Discord](https://discord.klipper3d.org/)
+
