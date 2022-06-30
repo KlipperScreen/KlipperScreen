@@ -175,6 +175,8 @@ class FineTunePanel(ScreenPanel):
             gcode = "SET_GCODE_OFFSET Z_ADJUST=-%s MOVE=1" % self.bs_delta
         elif dir == "reset":
             gcode = "SET_GCODE_OFFSET Z=0 MOVE=1"
+        else:
+            gcode = ""
 
         self._screen._ws.klippy.gcode_script(gcode)
 

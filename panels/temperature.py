@@ -227,6 +227,7 @@ class TemperaturePanel(ScreenPanel):
                     logging.info("Setting %s to %d" % (heater, 0))
                     self._printer.set_dev_stat(heater, "target", 0)
             else:
+                target = None
                 for heater in self.active_heaters:
                     MAX_TEMP = int(float(self._printer.get_config_section(heater)['max_temp']))
                     if heater.startswith('extruder'):

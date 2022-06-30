@@ -54,9 +54,9 @@ class ConsolePanel(ScreenPanel):
         options.set_hexpand(True)
         options.set_vexpand(False)
         options.add(o1_lbl)
-        options.pack_start(o1_switch, False, 0, 5)
+        options.pack_start(o1_switch, False, False, 5)
         options.add(o2_lbl)
-        options.pack_start(o2_switch, False, 0, 5)
+        options.pack_start(o2_switch, False, False, 5)
         options.add(o3_button)
 
         sw = Gtk.ScrolledWindow()

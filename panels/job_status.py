@@ -884,12 +884,12 @@ class JobStatusPanel(ScreenPanel):
                     i['data'] = ""
             self.show_file_thumbnail()
             if "object_height" in self.file_metadata:
-                self.height = self.file_metadata['object_height']
+                self.height = float(self.file_metadata['object_height'])
                 self.labels['height'].set_label(str(self.height) + " mm")
                 if "layer_height" in self.file_metadata:
-                    self.layer_h = self.file_metadata['layer_height']
+                    self.layer_h = float(self.file_metadata['layer_height'])
                     if "first_layer_height" in self.file_metadata:
-                        self.f_layer_h = self.file_metadata['first_layer_height']
+                        self.f_layer_h = float(self.file_metadata['first_layer_height'])
                     else:
                         self.f_layer_h = self.layer_h
                     self.labels['total_layers'].set_label(str(int((self.height - self.f_layer_h) / self.layer_h) + 1))
