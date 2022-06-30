@@ -57,7 +57,7 @@ class ZCalibratePanel(ScreenPanel):
         self.widgets['cancel'].connect("clicked", self.abort)
 
         functions = ["endstop", "probe", "mesh", "delta", "delta_manual"]
-        pobox = Gtk.VBox()
+        pobox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         endstop = (self._printer.config_section_exists("stepper_z") and
                    not self._screen.printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"))
         if endstop:

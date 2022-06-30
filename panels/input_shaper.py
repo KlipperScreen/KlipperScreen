@@ -87,14 +87,14 @@ class InputShaperPanel(ScreenPanel):
         self.status.set_halign(Gtk.Align.START)
         self.status.set_ellipsize(Pango.EllipsizeMode.END)
 
-        box = Gtk.VBox()
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.add(auto_grid)
         box.add(input_grid)
         box.add(self.status)
 
         self.content.add(box)
 
-        pobox = Gtk.VBox()
+        pobox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         test_x = self._gtk.Button(_("Measure X"))
         test_x.connect("clicked", self.start_calibration, "x")
         pobox.pack_start(test_x, True, True, 5)

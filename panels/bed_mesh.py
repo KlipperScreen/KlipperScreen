@@ -277,11 +277,11 @@ class BedMeshPanel(ScreenPanel):
             save.set_hexpand(False)
             save.connect("clicked", self.create_profile)
 
-            box = Gtk.HBox()
+            box = Gtk.Box()
             box.pack_start(self.labels['profile_name'], True, True, 5)
             box.pack_start(save, False, False, 5)
 
-            self.labels['create_profile'] = Gtk.VBox(spacing=5)
+            self.labels['create_profile'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
             self.labels['create_profile'].set_valign(Gtk.Align.CENTER)
             self.labels['create_profile'].set_hexpand(True)
             self.labels['create_profile'].set_vexpand(True)
@@ -350,7 +350,7 @@ class BedMeshPanel(ScreenPanel):
         ax.zaxis.set_major_formatter('{x:.02f}')
         fig.colorbar(surf, shrink=0.7, aspect=5, pad=0.25)
 
-        box = Gtk.VBox()
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.set_hexpand(True)
         box.set_vexpand(True)
 

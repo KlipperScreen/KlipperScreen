@@ -126,7 +126,7 @@ class TemperaturePanel(ScreenPanel):
 
         self.labels["deg" + self.tempdelta].set_active(True)
 
-        vbox = Gtk.VBox()
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         vbox.pack_start(Gtk.Label(_("Temperature") + " (°C)"), False, False, 8)
         vbox.pack_end(tempgrid, True, True, 2)
 
@@ -441,7 +441,7 @@ class TemperaturePanel(ScreenPanel):
         self.labels['graph_show'].connect("clicked", self.graph_show_device)
 
         popover = Gtk.Popover()
-        self.labels['popover_vbox'] = Gtk.VBox()
+        self.labels['popover_vbox'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         popover.add(self.labels['popover_vbox'])
         popover.set_position(Gtk.PositionType.BOTTOM)
         self.labels['popover'] = popover

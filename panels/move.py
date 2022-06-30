@@ -134,7 +134,7 @@ class MovePanel(ScreenPanel):
         bottomgrid.attach(self.labels['move_dist'], 0, 1, 3, 1)
         bottomgrid.attach(adjust, 3, 0, 1, 2)
 
-        self.labels['move_menu'] = Gtk.VBox()
+        self.labels['move_menu'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.labels['move_menu'].set_vexpand(True)
         self.labels['move_menu'].pack_start(grid, True, True, 0)
         self.labels['move_menu'].pack_start(bottomgrid, True, True, 0)

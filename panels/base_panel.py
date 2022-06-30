@@ -45,7 +45,7 @@ class BasePanel(ScreenPanel):
         self.control['estop'].connect("clicked", self.emergency_stop)
 
         # Action bar
-        self.action_bar = Gtk.VBox(spacing=5)
+        self.action_bar = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
         if self._screen.vertical_mode:
             self.action_bar.set_hexpand(True)
             self.action_bar.set_vexpand(False)
@@ -79,7 +79,7 @@ class BasePanel(ScreenPanel):
         self.control['time_box'].set_halign(Gtk.Align.END)
         self.control['time_box'].pack_end(self.control['time'], True, True, 5)
 
-        self.titlebar = Gtk.HBox(spacing=5)
+        self.titlebar = Gtk.Box(spacing=5)
         self.titlebar.set_size_request(0, self._gtk.get_titlebar_height())
         self.titlebar.set_valign(Gtk.Align.CENTER)
         self.titlebar.add(self.control['temp_box'])

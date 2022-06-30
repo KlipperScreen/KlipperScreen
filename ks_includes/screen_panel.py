@@ -25,7 +25,7 @@ class ScreenPanel:
         self.layout = Gtk.Layout()
         self.layout.set_size(self._screen.width, self._screen.height)
 
-        self.content = Gtk.VBox()
+        self.content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.content.get_style_context().add_class("content")
         self.content.set_hexpand(True)
         self.content.set_vexpand(True)

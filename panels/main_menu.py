@@ -229,7 +229,7 @@ class MainPanel(MenuPanel):
         self.labels['graph_show'].connect("clicked", self.graph_show_device)
 
         popover = Gtk.Popover()
-        self.labels['popover_vbox'] = Gtk.VBox()
+        self.labels['popover_vbox'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         popover.add(self.labels['popover_vbox'])
         popover.set_position(Gtk.PositionType.BOTTOM)
         self.labels['popover'] = popover
