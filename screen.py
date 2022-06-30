@@ -166,7 +166,7 @@ class KlipperScreen(Gtk.Window):
             if self.printer.get_state() not in ["disconnected", "error", "startup", "shutdown"]:
                 self.base_panel.show_heaters(True)
             self.base_panel.show_printer_select(True)
-            self.base_panel.show_macro_shortcut(self._config.get_main_config().get('side_macro_shortcut'))
+            self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut'))
             return
 
         # Cleanup
@@ -773,7 +773,7 @@ class KlipperScreen(Gtk.Window):
         if "job_status" in self._cur_panels or "main_menu" in self._cur_panels:
             return
 
-        self.base_panel.show_macro_shortcut(self._config.get_main_config().get('side_macro_shortcut'))
+        self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut'))
         if prev_state not in ['paused', 'printing']:
             self.init_printer()
             self.base_panel._printer = self.printer
@@ -804,10 +804,7 @@ class KlipperScreen(Gtk.Window):
                                   "</b>" + "\n\n" + msg)
 
     def toggle_macro_shortcut(self, value):
-        if value is True:
-            self.base_panel.show_macro_shortcut(True, True)
-        else:
-            self.base_panel.show_macro_shortcut(False, True)
+        self.base_panel.show_macro_shortcut(value)
 
     def _websocket_callback(self, action, data):
         _ = self.lang.gettext
