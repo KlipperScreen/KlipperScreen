@@ -29,7 +29,7 @@ class MacroPanel(ScreenPanel):
         adjust.connect("clicked", self.load_menu, 'options')
         adjust.set_hexpand(False)
 
-        sbox = Gtk.HBox()
+        sbox = Gtk.Box()
         sbox.set_vexpand(False)
         sbox.pack_start(sort, False, False, 5)
         sbox.pack_start(self.sort_btn, True, True, 5)
@@ -39,7 +39,7 @@ class MacroPanel(ScreenPanel):
         self.labels['macros'] = Gtk.Grid()
         self.labels['macros_list'].add(self.labels['macros'])
 
-        self.labels['macros_menu'] = Gtk.VBox()
+        self.labels['macros_menu'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.labels['macros_menu'].set_vexpand(True)
         self.labels['macros_menu'].pack_start(sbox, False, False, 0)
         self.labels['macros_menu'].pack_start(self.labels['macros_list'], True, True, 0)
@@ -73,10 +73,10 @@ class MacroPanel(ScreenPanel):
         btn.set_hexpand(False)
         btn.set_halign(Gtk.Align.END)
 
-        labels = Gtk.VBox()
+        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)
 
-        dev = Gtk.HBox(spacing=5)
+        dev = Gtk.Box(spacing=5)
         dev.add(labels)
         dev.add(btn)
 

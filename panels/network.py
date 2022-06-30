@@ -362,11 +362,11 @@ class NetworkPanel(ScreenPanel):
         save.set_hexpand(False)
         save.connect("clicked", self.add_new_network, ssid, True)
 
-        box = Gtk.HBox()
+        box = Gtk.Box()
         box.pack_start(self.labels['network_psk'], True, True, 5)
         box.pack_start(save, False, False, 5)
 
-        self.labels['add_network'] = Gtk.VBox(spacing=5)
+        self.labels['add_network'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
         self.labels['add_network'].set_valign(Gtk.Align.CENTER)
         self.labels['add_network'].set_hexpand(True)
         self.labels['add_network'].set_vexpand(True)

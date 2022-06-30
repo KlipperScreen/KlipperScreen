@@ -89,7 +89,7 @@ class JobStatusPanel(ScreenPanel):
             self.labels[label].set_halign(Gtk.Align.START)
             self.labels[label].set_ellipsize(Pango.EllipsizeMode.END)
 
-        fi_box = Gtk.VBox()
+        fi_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         fi_box.add(self.labels['file'])
         fi_box.add(self.labels['status'])
         fi_box.add(self.labels['lcdmessage'])
@@ -246,7 +246,7 @@ class JobStatusPanel(ScreenPanel):
         szfe.attach(self.extrusion_button, 0, 1, 1, 1)
         szfe.attach(self.fan_button, 1, 1, 1, 1)
 
-        info = Gtk.VBox()
+        info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         info.get_style_context().add_class("printing-info")
         info.add(self.labels['temp_grid'])
         info.add(szfe)
@@ -286,7 +286,7 @@ class JobStatusPanel(ScreenPanel):
         goback.set_hexpand(False)
         goback.get_style_context().add_class("printing-info")
 
-        pos_box = Gtk.HBox(spacing=5)
+        pos_box = Gtk.Box(spacing=5)
         pos_box.add(self.labels['pos_x'])
         pos_box.add(self.labels['pos_y'])
         pos_box.add(self.labels['pos_z'])

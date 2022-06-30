@@ -50,7 +50,7 @@ class ConsolePanel(ScreenPanel):
         o3_button = self._gtk.ButtonImage("refresh", _('Clear') + " ", None, .66, Gtk.PositionType.RIGHT, False)
         o3_button.connect("clicked", self.clear)
 
-        options = Gtk.HBox()
+        options = Gtk.Box()
         options.set_hexpand(True)
         options.set_vexpand(False)
         options.add(o1_lbl)
@@ -99,7 +99,7 @@ class ConsolePanel(ScreenPanel):
             "tv": tv
         })
 
-        content_box = Gtk.VBox()
+        content_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         content_box.pack_start(options, False, False, 5)
         content_box.add(sw)
         content_box.pack_end(ebox, False, False, 0)
