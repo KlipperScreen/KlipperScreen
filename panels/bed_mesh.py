@@ -3,7 +3,7 @@ import logging
 import numpy as np
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gdk, Gtk, Pango
+from gi.repository import Gtk, Pango
 
 import matplotlib.pyplot as plt
 from matplotlib import cm
