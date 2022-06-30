@@ -1031,12 +1031,10 @@ class KlipperScreen(Gtk.Window):
         logging.debug("PID %s" % p.pid)
         keyboard = Gtk.Socket()
 
-
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        box.set_vexpand(False)
         box.set_size_request(self.gtk.get_content_width(), self.gtk.get_keyboard_height())
         box.get_style_context().add_class("keyboard_box")
-        box.add(keyboard)
+        box.pack_start(keyboard, True, True, 0)
 
         self.base_panel.get_content().pack_end(box, True, True, 0)
 
