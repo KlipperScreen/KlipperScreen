@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 14:53-0300\n"
+"POT-Creation-Date: 2022-07-02 13:43-0300\n"
 "PO-Revision-Date: 2022-04-15 17:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -393,6 +393,9 @@ msgstr "Makron"
 msgid "Main Menu"
 msgstr "Huvudmeny"
 
+msgid "Max"
+msgstr ""
+
 msgid "Max Acceleration"
 msgstr ""
 
@@ -663,9 +666,6 @@ msgstr "Temperatur"
 msgid "To apply %s KlipperScreen needs to be restarted"
 msgstr "För att tillämpa %s måste KlipperScreen startas om"
 
-msgid "Tool"
-msgstr "Verktyg"
-
 msgid "Total:"
 msgstr ""
 
@@ -759,6 +759,9 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Tool"
+#~ msgstr "Verktyg"
 
 #~ msgid "Displayed Macros"
 #~ msgstr "Makron visas"

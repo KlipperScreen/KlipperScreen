@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 14:53-0300\n"
+"POT-Creation-Date: 2022-07-02 13:43-0300\n"
 "PO-Revision-Date: 2022-03-31 10:54-0300\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
@@ -396,6 +396,9 @@ msgstr "מקרואים"
 msgid "Main Menu"
 msgstr "תפריט ראשי"
 
+msgid "Max"
+msgstr ""
+
 msgid "Max Acceleration"
 msgstr ""
 
@@ -668,9 +671,6 @@ msgstr "טמפרטורה"
 msgid "To apply %s KlipperScreen needs to be restarted"
 msgstr "כדי ליישם %s צריך להפעיל מחדש את KlipperScreen"
 
-msgid "Tool"
-msgstr "כלי"
-
 msgid "Total:"
 msgstr "סך הכל:"
 
@@ -768,6 +768,9 @@ msgstr "מ\"מ/ש"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Tool"
+#~ msgstr "כלי"
 
 #~ msgid "Displayed Macros"
 #~ msgstr "מוצגים מאקרו"

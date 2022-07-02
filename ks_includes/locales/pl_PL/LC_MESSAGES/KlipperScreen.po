@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 14:53-0300\n"
+"POT-Creation-Date: 2022-07-02 13:43-0300\n"
 "PO-Revision-Date: 2022-03-31 11:06-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -390,6 +390,9 @@ msgstr "Makro"
 msgid "Main Menu"
 msgstr "Główne Menu"
 
+msgid "Max"
+msgstr ""
+
 msgid "Max Acceleration"
 msgstr ""
 
@@ -661,9 +664,6 @@ msgstr "Temperatura"
 msgid "To apply %s KlipperScreen needs to be restarted"
 msgstr "Aby zastosować %s KlipperScreen musi zostać ponownie uruchomiony"
 
-msgid "Tool"
-msgstr "Narzędzie"
-
 msgid "Total:"
 msgstr "Całkowity:"
 
@@ -759,6 +759,9 @@ msgstr "mm/s²"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Tool"
+#~ msgstr "Narzędzie"
 
 #~ msgid "Displayed Macros"
 #~ msgstr "Wyświetlone Makra"

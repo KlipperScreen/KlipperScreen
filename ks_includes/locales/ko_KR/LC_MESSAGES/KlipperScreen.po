@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 14:53-0300\n"
+"POT-Creation-Date: 2022-07-02 13:43-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: NSteven\n"
 "Language-Team: NSteven\n"
@@ -388,6 +388,9 @@ msgstr "매크로"
 msgid "Main Menu"
 msgstr "메인 메뉴"
 
+msgid "Max"
+msgstr ""
+
 msgid "Max Acceleration"
 msgstr "최대 가속"
 
@@ -657,9 +660,6 @@ msgstr "온도 제어"
 msgid "To apply %s KlipperScreen needs to be restarted"
 msgstr "%s을(를) 적용하려면 클리퍼 스크린을 다시 시작해야 합니다"
 
-msgid "Tool"
-msgstr "툴"
-
 msgid "Total:"
 msgstr "총:"
 
@@ -751,6 +751,9 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Tool"
+#~ msgstr "툴"
 
 #~ msgid "Displayed Macros"
 #~ msgstr "표시할 매크로"
