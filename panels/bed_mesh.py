@@ -25,7 +25,6 @@ class BedMeshPanel(ScreenPanel):
     graphs = {}
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
 
         self.show_create = False
 
@@ -84,7 +83,6 @@ class BedMeshPanel(ScreenPanel):
             self._screen.show_all()
 
     def add_profile(self, profile):
-        _ = self.lang.gettext
 
         frame = Gtk.Frame()
 
@@ -258,7 +256,6 @@ class BedMeshPanel(ScreenPanel):
         self.remove_profile(profile)
 
     def show_create_profile(self, widget):
-        _ = self.lang.gettext
 
         for child in self.content.get_children():
             self.content.remove(child)
@@ -293,7 +290,6 @@ class BedMeshPanel(ScreenPanel):
         self.show_create = True
 
     def show_mesh(self, widget, profile):
-        _ = self.lang.gettext
 
         bm = self._printer.get_config_section("bed_mesh %s" % profile)
         if bm is False:

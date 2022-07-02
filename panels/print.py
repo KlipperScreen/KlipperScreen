@@ -20,7 +20,7 @@ class PrintPanel(ScreenPanel):
     filelist = {'gcodes': {'directories': [], 'files': []}}
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.labels['directories'] = {}
         self.labels['files'] = {}
         self.sort_items = {
@@ -153,7 +153,6 @@ class PrintPanel(ScreenPanel):
             self.dir_panels[parent_dir].show_all()
 
     def add_file(self, filepath, show=True):
-        _ = self.lang.gettext
 
         fileinfo = self._screen.files.get_file_info(filepath)
         if fileinfo is None:
@@ -280,7 +279,7 @@ class PrintPanel(ScreenPanel):
         self._config.save_user_config_options()
 
     def confirm_print(self, widget, filename):
-        _ = self.lang.gettext
+
         buttons = [
             {"name": _("Print"), "response": Gtk.ResponseType.OK},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
@@ -345,7 +344,6 @@ class PrintPanel(ScreenPanel):
         self.files.pop(filename)
 
     def get_file_info_str(self, filename):
-        _ = self.lang.gettext
 
         fileinfo = self._screen.files.get_file_info(filename)
         if fileinfo is None:

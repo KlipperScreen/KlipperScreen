@@ -104,7 +104,7 @@ class KlipperScreen(Gtk.Window):
                 logging.debug("Enabling RTL mode")
                 break
 
-        _ = self.lang.gettext
+
 
         Gtk.Window.__init__(self)
         monitor = Gdk.Display.get_default().get_primary_monitor()
@@ -153,7 +153,7 @@ class KlipperScreen(Gtk.Window):
         self.connect_printer(name)
 
     def connect_printer(self, name):
-        _ = self.lang.gettext
+
         self.connecting_to_printer = name
 
         if self.connected_printer == name:
@@ -393,7 +393,7 @@ class KlipperScreen(Gtk.Window):
         self.show_all()
 
     def show_error_modal(self, err):
-        _ = self.lang.gettext
+
         logging.exception("Showing error modal: %s", err)
 
         buttons = [
@@ -417,7 +417,7 @@ class KlipperScreen(Gtk.Window):
         widget.destroy()
 
     def restart_warning(self, value):
-        _ = self.lang.gettext
+
         logging.debug("Showing restart warning because: %s" % value)
 
         buttons = [
@@ -713,7 +713,7 @@ class KlipperScreen(Gtk.Window):
             self.printer_select_callbacks = [self.state_disconnected]
             return
 
-        _ = self.lang.gettext
+
         logging.debug("### Going to disconnected")
         self.base_panel.show_macro_shortcut(False)
         self.wake_screen()
@@ -730,7 +730,7 @@ class KlipperScreen(Gtk.Window):
             self.printer_select_callbacks = [self.state_error]
             return
 
-        _ = self.lang.gettext
+
         self.base_panel.show_macro_shortcut(False)
         self.wake_screen()
         msg = self.printer.get_stat("webhooks", "state_message")
@@ -786,7 +786,7 @@ class KlipperScreen(Gtk.Window):
             self.printer_select_callbacks = [self.state_startup]
             return
 
-        _ = self.lang.gettext
+
         self.printer_initializing(_("Klipper is attempting to start"))
 
     def state_shutdown(self, prev_state):
@@ -794,7 +794,7 @@ class KlipperScreen(Gtk.Window):
             self.printer_select_callbacks = [self.state_shutdown]
             return
 
-        _ = self.lang.gettext
+
         self.base_panel.show_macro_shortcut(False)
         self.wake_screen()
         msg = self.printer.get_stat("webhooks", "state_message")
@@ -807,7 +807,7 @@ class KlipperScreen(Gtk.Window):
         self.base_panel.show_macro_shortcut(value)
 
     def _websocket_callback(self, action, data):
-        _ = self.lang.gettext
+
 
         if self.connecting is True:
             return
@@ -850,7 +850,7 @@ class KlipperScreen(Gtk.Window):
             self.panels[self._cur_panels[-1]].process_update(action, data)
 
     def _confirm_send_action(self, widget, text, method, params={}):
-        _ = self.lang.gettext
+
 
         buttons = [
             {"name": _("Continue"), "response": Gtk.ResponseType.OK},
@@ -912,7 +912,7 @@ class KlipperScreen(Gtk.Window):
                 return None
 
     def power_on(self, widget, devices):
-        _ = self.lang.gettext
+
         for device in devices:
             if self.printer.get_power_device_status(device) == "off":
                 self.show_popup_message(_("Sending Power ON signal to: %s") % devices, level=1)
@@ -922,7 +922,7 @@ class KlipperScreen(Gtk.Window):
                 logging.info("%s is ON", device)
 
     def init_printer(self):
-        _ = self.lang.gettext
+
 
         state = self.apiclient.get_server_info()
         if state is False:
@@ -997,7 +997,7 @@ class KlipperScreen(Gtk.Window):
         return False
 
     def printer_ready(self):
-        _ = self.lang.gettext
+
         self.close_popup_message()
         # Force an update to printer webhooks state in case the update is missed due to websocket subscribe not yet sent
         self.printer.process_update({"webhooks": {"state": "ready", "state_message": "Printer is ready"}})

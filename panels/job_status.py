@@ -28,7 +28,6 @@ class JobStatusPanel(ScreenPanel):
         super().__init__(screen, title, False)
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
 
         data = ['pos_x', 'pos_y', 'pos_z', 'time_left', 'duration', 'slicer_time', 'file_time',
                 'filament_time', 'est_time', 'speed_factor', 'req_speed', 'max_accel', 'extrude_factor', 'zoffset',
@@ -134,7 +133,7 @@ class JobStatusPanel(ScreenPanel):
         self.fila_section = pi * ((diameter / 2) ** 2)
 
     def create_status_grid(self, widget=None):
-        _ = self.lang.gettext
+
         self.main_status_displayed = True
 
         self.labels['temp_grid'] = Gtk.Grid()
@@ -357,7 +356,7 @@ class JobStatusPanel(ScreenPanel):
         ctx.stroke()
 
     def activate(self):
-        _ = self.lang.gettext
+
         ps = self._printer.get_stat("print_stats")
         self.set_state(ps['state'])
         if self.state_timeout is None:
@@ -365,7 +364,7 @@ class JobStatusPanel(ScreenPanel):
         self.create_status_grid()
 
     def create_buttons(self):
-        _ = self.lang.gettext
+
         self.buttons = {
             'cancel': self._gtk.ButtonImage("stop", _("Cancel"), "color2"),
             'control': self._gtk.ButtonImage("settings", _("Settings"), "color3"),
@@ -389,7 +388,6 @@ class JobStatusPanel(ScreenPanel):
         self.buttons['save_offset_endstop'].connect("clicked", self.save_offset, "endstop")
 
     def save_offset(self, widget, device):
-        _ = self.lang.gettext
 
         saved_z_offset = 0
         if self._printer.config_section_exists("probe"):
@@ -446,7 +444,6 @@ class JobStatusPanel(ScreenPanel):
         self._screen.show_all()
 
     def cancel(self, widget):
-        _ = self.lang.gettext
 
         buttons = [
             {"name": _("Cancel Print"), "response": Gtk.ResponseType.OK},
@@ -525,7 +522,6 @@ class JobStatusPanel(ScreenPanel):
             return
         elif action != "notify_status_update":
             return
-        _ = self.lang.gettext
 
         if self.main_status_displayed:
             for x in self._printer.get_tools():
@@ -737,7 +733,6 @@ class JobStatusPanel(ScreenPanel):
 
         if ps['state'] == self.state:
             return True
-        _ = self.lang.gettext
 
         if ps['state'] == "printing":
             if self.state == "cancelling":
@@ -781,7 +776,6 @@ class JobStatusPanel(ScreenPanel):
         return True
 
     def set_state(self, state):
-        _ = self.lang.gettext
 
         if self.state != state:
             logging.debug("Changing job_status state from '%s' to '%s'" % (self.state, state))

@@ -23,7 +23,6 @@ class ZCalibratePanel(ScreenPanel):
         super().__init__(screen, title, False)
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
 
         if self._printer.config_section_exists("probe"):
             self.z_offset = self._screen.printer.get_config_section("probe")['z_offset']
@@ -225,7 +224,6 @@ class ZCalibratePanel(ScreenPanel):
         return max(0, int(float(pos) - offset))
 
     def process_update(self, action, data):
-        _ = self.lang.gettext
 
         if action == "notify_status_update":
             if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":

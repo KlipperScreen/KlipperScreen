@@ -25,7 +25,6 @@ class FineTunePanel(ScreenPanel):
     speed = 100
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
 
         logging.debug("FineTunePanel")
 
@@ -149,7 +148,6 @@ class FineTunePanel(ScreenPanel):
         self.content.add(grid)
 
     def process_update(self, action, data):
-        _ = self.lang.gettext
 
         if action != "notify_status_update":
             return

@@ -17,7 +17,6 @@ class ExtrudePanel(ScreenPanel):
     distances = ['5', '10', '15', '25']
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
 
         self.load_filament = self.unload_filament = False
         self.find_gcode_macros()

@@ -21,7 +21,7 @@ class MovePanel(ScreenPanel):
     distances = ['.1', '.5', '1', '5', '10', '25', '50']
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.settings = {}
         self.menu = ['move_menu']
 

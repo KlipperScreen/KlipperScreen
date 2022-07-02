@@ -17,7 +17,6 @@ class PrinterSelect(ScreenPanel):
         super().__init__(screen, title, False, False, False)
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
 
         printers = self._config.get_printers()
 

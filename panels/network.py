@@ -17,7 +17,7 @@ class NetworkPanel(ScreenPanel):
     initialized = False
 
     def initialize(self, menu):
-        _ = self.lang.gettext
+
         self.show_add = False
         self.networks = {}
         self.update_timeout = None
@@ -114,7 +114,6 @@ class NetworkPanel(ScreenPanel):
         self.content.show_all()
 
     def add_network(self, ssid, show=True):
-        _ = self.lang.gettext
 
         if ssid is None:
             logging.info("SSID is None")
@@ -270,7 +269,6 @@ class NetworkPanel(ScreenPanel):
         self.check_missing_networks()
 
     def connect_network(self, widget, ssid, showadd=True):
-        _ = self.lang.gettext
 
         snets = self.wifi.get_supplicant_networks()
         isdef = False
@@ -342,7 +340,6 @@ class NetworkPanel(ScreenPanel):
         if self.show_add:
             return
 
-        _ = self.lang.gettext
         for child in self.content.get_children():
             self.content.remove(child)
 
@@ -384,7 +381,7 @@ class NetworkPanel(ScreenPanel):
         return True
 
     def update_network_info(self, ssid):
-        _ = self.lang.gettext
+
         info = freq = encr = chan = lvl = ipv4 = ipv6 = ""
 
         if ssid not in list(self.networks) or ssid not in self.labels['networks']:
@@ -424,7 +421,6 @@ class NetworkPanel(ScreenPanel):
         self.labels['networks'][ssid]['info'].show_all()
 
     def update_single_network_info(self):
-        _ = self.lang.gettext
 
         stream = os.popen('hostname -f')
         hostname = stream.read().strip()
