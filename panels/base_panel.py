@@ -230,7 +230,7 @@ class BasePanel(ScreenPanel):
         if devices is not None:
             for device in devices:
                 temp = self._screen.printer.get_dev_stat(device, "temperature")
-                if temp is not None:
+                if temp is not None and device in self.labels:
                     name = ""
                     if not (device.startswith("extruder") or device.startswith("heater_bed")):
                         if self.titlebar_name_type == "full":

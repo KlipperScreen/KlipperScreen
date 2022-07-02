@@ -932,7 +932,8 @@ class JobStatusPanel(ScreenPanel):
         self.labels['lcdmessage'].set_text(str(msg))
 
     def update_temp(self, x, temp, target):
-        if target > 0:
-            self.labels[x].set_label("%3d/%3d°" % (temp, target))
-        else:
-            self.labels[x].set_label("%3d°" % temp)
+        if x in self.labels and temp is not None:
+            if target is not None and target > 0:
+                self.labels[x].set_label("%3d/%3d°" % (temp, target))
+            else:
+                self.labels[x].set_label("%3d°" % temp)
