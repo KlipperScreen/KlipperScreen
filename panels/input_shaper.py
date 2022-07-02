@@ -22,7 +22,7 @@ SHAPERS = ['zv', 'mzv', 'zvd', 'ei', '2hump_ei', '3hump_ei']
 
 class InputShaperPanel(ScreenPanel):
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.has_sensor = False
         self.calibrating_axis = None
 
@@ -140,7 +140,7 @@ class InputShaperPanel(ScreenPanel):
         )
 
     def save_config(self):
-        _ = self.lang.gettext
+
         script = {"script": "SAVE_CONFIG"}
         self._screen._confirm_send_action(
             None,
@@ -164,7 +164,7 @@ class InputShaperPanel(ScreenPanel):
         )
 
     def process_update(self, action, data):
-        _ = self.lang.gettext
+
         if action == "notify_gcode_response":
             self.status.set_text('{}'.format(data.replace('shaper_', '').replace('damping_', '')))
             data = data.lower()

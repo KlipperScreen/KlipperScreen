@@ -97,12 +97,11 @@ class KlipperScreenConfig:
         logging.info("Detected language: %s" % lang)
         self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', languages=lang,
                                         fallback=True)
+        self.lang.install(names=['gettext', 'ngettext'])
 
         self._create_configurable_options(screen)
 
     def _create_configurable_options(self, screen):
-        _ = self.lang.gettext
-        _n = self.lang.ngettext
 
         self.configurable_options = [
             {"language": {
@@ -181,7 +180,7 @@ class KlipperScreenConfig:
         for num in SCREEN_BLANKING_OPTIONS:
             hour = int(int(num) / 3600)
             if hour > 0:
-                name = str(hour) + " " + _n("hour", "hours", hour)
+                name = str(hour) + " " + ngettext("hour", "hours", hour)
             else:
                 name = str(int(int(num) / 60)) + " " + _("minutes")
             self.configurable_options[index]['screen_blanking']['options'].append({

@@ -20,7 +20,7 @@ class FanPanel(ScreenPanel):
     user_selecting = False
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.devices = {}
 
         scroll = self._gtk.ScrolledWindow()
@@ -64,7 +64,6 @@ class FanPanel(ScreenPanel):
             self.set_fan_speed(None, None, fan)
 
     def add_fan(self, fan):
-        _ = self.lang.gettext
 
         logging.info("Adding fan: %s" % fan)
         changeable = False

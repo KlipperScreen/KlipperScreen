@@ -17,7 +17,6 @@ ALLOWED_SERVICES = ["KlipperScreen", "MoonCord", "klipper", "moonraker"]
 
 class SystemPanel(ScreenPanel):
     def initialize(self, panel_name):
-        _ = self.lang.gettext
 
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
@@ -128,8 +127,6 @@ class SystemPanel(ScreenPanel):
         self._screen._ws.send_method("machine.services.restart", {"service": program})
 
     def show_update_info(self, widget, program):
-        _ = self.lang.gettext
-        _n = self.lang.ngettext
 
         if not self.update_status:
             return
@@ -171,7 +168,7 @@ class SystemPanel(ScreenPanel):
                 ncommits = len(info['commits_behind'])
                 label.set_markup("<b>" +
                                  _("Outdated by %d") % ncommits +
-                                 " " + _n("commit", "commits", ncommits) +
+                                 " " + ngettext("commit", "commits", ncommits) +
                                  ":</b>\n")
                 grid.attach(label, 0, i, 1, 1)
                 i = i + 1
@@ -201,7 +198,7 @@ class SystemPanel(ScreenPanel):
                     i = i + 1
         if "package_count" in info:
             label.set_markup("<b>%d " % info['package_count'] +
-                             _n("Package will be updated", "Packages will be updated", info['package_count']) +
+                             ngettext("Package will be updated", "Packages will be updated", info['package_count']) +
                              ":</b>\n")
             label.set_halign(Gtk.Align.CENTER)
             grid.attach(label, 0, i, 3, 1)
@@ -254,8 +251,6 @@ class SystemPanel(ScreenPanel):
         if self._screen.is_updating():
             return
 
-        _ = self.lang.gettext
-
         buttons = [
             {"name": _("Finish"), "response": Gtk.ResponseType.CANCEL}
         ]
@@ -288,8 +283,6 @@ class SystemPanel(ScreenPanel):
     def update_program(self, widget, program):
         if self._screen.is_updating():
             return
-
-        _ = self.lang.gettext
 
         if not self.update_status:
             return
@@ -344,7 +337,6 @@ class SystemPanel(ScreenPanel):
         self._screen.set_updating(True)
 
     def update_program_info(self, p):
-        _ = self.lang.gettext
 
         logging.info("Updating program: %s " % p)
         if 'version_info' not in self.update_status or p not in self.update_status['version_info']:

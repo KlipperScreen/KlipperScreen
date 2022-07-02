@@ -61,7 +61,7 @@ class MainPanel(MenuPanel):
             self.graph_update = None
 
     def add_device(self, device):
-        _ = self.lang.gettext
+
         logging.info("Adding device: %s" % device)
 
         temperature = self._printer.get_dev_stat(device, "temperature")
@@ -173,7 +173,6 @@ class MainPanel(MenuPanel):
         return True
 
     def change_target_temp(self, temp):
-        _ = self.lang.gettext
 
         MAX_TEMP = int(float(self._printer.get_config_section(self.active_heater)['max_temp']))
         if temp > MAX_TEMP:
@@ -195,7 +194,6 @@ class MainPanel(MenuPanel):
         self._printer.set_dev_stat(self.active_heater, "target", temp)
 
     def create_left_panel(self):
-        _ = self.lang.gettext
 
         self.labels['devices'] = Gtk.Grid()
         self.labels['devices'].get_style_context().add_class('heater-grid')
@@ -313,7 +311,6 @@ class MainPanel(MenuPanel):
         return
 
     def show_numpad(self, widget):
-        _ = self.lang.gettext
 
         if self.active_heater is not None:
             self.devices[self.active_heater]['name'].get_style_context().remove_class("active_device")

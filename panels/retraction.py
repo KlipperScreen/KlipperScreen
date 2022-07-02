@@ -17,7 +17,7 @@ class FWRetractionPanel(ScreenPanel):
     list = {}
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.grid = Gtk.Grid()
 
         conf = self._printer.get_config_section("firmware_retraction")

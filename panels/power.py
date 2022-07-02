@@ -13,7 +13,7 @@ def create_panel(*args):
 
 class PowerPanel(ScreenPanel):
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.devices = {}
 
         # Create a scroll window for the power devices

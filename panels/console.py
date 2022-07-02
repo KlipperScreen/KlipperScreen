@@ -25,7 +25,7 @@ COLORS = {
 
 class ConsolePanel(ScreenPanel):
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.autoscroll = True
         self.hidetemps = True
 

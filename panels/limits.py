@@ -15,7 +15,7 @@ class LimitsPanel(ScreenPanel):
     values = {}
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.limits = {}
 
         scroll = self._gtk.ScrolledWindow()

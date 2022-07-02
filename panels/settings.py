@@ -13,7 +13,7 @@ def create_panel(*args):
 
 class SettingsPanel(ScreenPanel):
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.settings = {}
         self.menu = ['settings_menu']
         self.labels['add_printer_button'] = self._gtk.Button(_("Add Printer"), "color1")

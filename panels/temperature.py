@@ -56,7 +56,6 @@ class TemperaturePanel(ScreenPanel):
         self.layout.show_all()
 
     def create_right_panel(self):
-        _ = self.lang.gettext
 
         cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'), "color4", 1, Gtk.PositionType.LEFT, False)
         adjust = self._gtk.ButtonImage('fine-tune', '', "color3", 1, Gtk.PositionType.LEFT, False)
@@ -97,7 +96,7 @@ class TemperaturePanel(ScreenPanel):
         return scroll
 
     def delta_adjust(self):
-        _ = self.lang.gettext
+
         self.tempdeltas = ["1", "5", "10", "25"]
         self.tempdelta = "10"
 
@@ -157,7 +156,7 @@ class TemperaturePanel(ScreenPanel):
             self.labels["deg" + str(i)].set_active(False)
 
     def change_target_temp_incremental(self, widget, dir):
-        _ = self.lang.gettext
+
         if len(self.active_heaters) == 0:
             self._screen.show_popup_message(_("Nothing selected"))
         else:
@@ -198,7 +197,6 @@ class TemperaturePanel(ScreenPanel):
             self.graph_update = None
 
     def select_heater(self, widget, device):
-        _ = self.lang.gettext
 
         if self.devices[device]["can_target"]:
             if device in self.active_heaters:
@@ -212,7 +210,7 @@ class TemperaturePanel(ScreenPanel):
         return
 
     def set_temperature(self, widget, setting):
-        _ = self.lang.gettext
+
         if len(self.active_heaters) == 0:
             self._screen.show_popup_message(_("Nothing selected"))
         else:
@@ -267,7 +265,7 @@ class TemperaturePanel(ScreenPanel):
         return False
 
     def add_device(self, device):
-        _ = self.lang.gettext
+
         logging.info("Adding device: %s" % device)
 
         temperature = self._printer.get_dev_stat(device, "temperature")
@@ -381,7 +379,6 @@ class TemperaturePanel(ScreenPanel):
         return True
 
     def change_target_temp(self, temp):
-        _ = self.lang.gettext
 
         MAX_TEMP = int(float(self._printer.get_config_section(self.active_heater)['max_temp']))
         if temp > MAX_TEMP:
@@ -403,7 +400,6 @@ class TemperaturePanel(ScreenPanel):
         self._printer.set_dev_stat(self.active_heater, "target", temp)
 
     def create_left_panel(self):
-        _ = self.lang.gettext
 
         self.labels['devices'] = Gtk.Grid()
         self.labels['devices'].get_style_context().add_class('heater-grid')
@@ -525,7 +521,6 @@ class TemperaturePanel(ScreenPanel):
         return
 
     def show_numpad(self, widget):
-        _ = self.lang.gettext
 
         if self.active_heater is not None:
             self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")

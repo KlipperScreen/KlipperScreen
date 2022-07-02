@@ -13,7 +13,7 @@ def create_panel(*args):
 
 class MacroPanel(ScreenPanel):
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.macros = {}
         self.loaded_macros = []
         self.sort_reverse = False
