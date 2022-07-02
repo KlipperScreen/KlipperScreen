@@ -35,7 +35,6 @@ class BasePanel(ScreenPanel):
             self.control['printer_select'].connect("clicked", self._screen.show_printer_select)
 
         self.control['macros_shortcut'] = self._gtk.ButtonImage('custom-script', None, None, 1)
-        self.control['macros_shortcut'].connect("clicked", self._screen.remove_keyboard)
         self.control['macros_shortcut'].connect("clicked", self.menu_item_clicked, "gcode_macros", {
             "name": "Macros",
             "panel": "gcode_macros"
@@ -43,6 +42,10 @@ class BasePanel(ScreenPanel):
 
         self.control['estop'] = self._gtk.ButtonImage('emergency', None, None, 1)
         self.control['estop'].connect("clicked", self.emergency_stop)
+
+        # Any action bar button should close the keyboard
+        for item in self.control:
+            self.control[item].connect("clicked", self._screen.remove_keyboard)
 
         # Action bar
         self.action_bar = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
