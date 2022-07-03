@@ -618,7 +618,7 @@ class JobStatusPanel(ScreenPanel):
             fan_label += self.fans[fan]['name'] + self.fans[fan]['speed'] + " "
         self.labels['fan'].set_text(fan_label[:12])
 
-        if "layer_height" in self.file_metadata:
+        if "layer_height" in self.file_metadata and "object_height" in self.file_metadata:
             layer_label = str(1 + round((self.pos_z - self.f_layer_h) / self.layer_h))
             layer_label += " / " + self.labels['total_layers'].get_text()
             self.labels['layer'].set_label(layer_label)
