@@ -115,7 +115,10 @@ class BasePanel(ScreenPanel):
 
     def show_heaters(self, show=True):
         printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
-        self.titlebar_name_type = printer_cfg.get("titlebar_name_type", None)
+        if printer_cfg is not None:
+            self.titlebar_name_type = printer_cfg.get("titlebar_name_type", None)
+        else:
+            self.titlebar_name_type = None
         logging.info("Titlebar name type: %s", self.titlebar_name_type)
 
         for child in self.control['temp_box'].get_children():
