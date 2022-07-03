@@ -28,8 +28,8 @@ search "how to enable android debugging on device-model-and-brand"
 
 ```bash
 cd ~/KlipperScreen/scripts
-cp android-adb.sh launch_KlipperScreen
-chmod +x launch_KlipperScreen
+cp android-adb.sh launch_KlipperScreen.sh
+chmod +x launch_KlipperScreen.sh
 ```
 
 * Go to [Startup](#startup)
@@ -41,8 +41,8 @@ chmod +x launch_KlipperScreen
 ```bash
 cd ~/KlipperScreen/scripts
 touch launch_KlipperScreen.sh
-chmod +x launch_KlipperScreen
-nano launch_KlipperScreen
+chmod +x launch_KlipperScreen.sh
+nano launch_KlipperScreen.sh
 ```
 
 * Paste this into the script (edit the IP for example: 192.168.1.2:0)
