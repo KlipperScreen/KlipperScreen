@@ -458,6 +458,9 @@ msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "包将被更新"
 
+msgid "Part Fan"
+msgstr ""
+
 msgid "Password saved"
 msgstr "密码已保存"
 
@@ -469,6 +472,9 @@ msgstr "已暂停"
 
 msgid "Perform a full upgrade?"
 msgstr "是否全部升级？"
+
+msgid "Pins"
+msgstr ""
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "请重新编译并烧录微控制器。"
@@ -542,6 +548,9 @@ msgstr "回抽速度"
 #, python-format
 msgid "Retry #%s"
 msgstr "重试 #%s"
+
+msgid "Retrying"
+msgstr ""
 
 msgid "Save"
 msgstr "保存"

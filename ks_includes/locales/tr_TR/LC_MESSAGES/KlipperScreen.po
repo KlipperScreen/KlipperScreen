@@ -459,6 +459,9 @@ msgid_plural "Packages will be updated"
 msgstr[0] "Paket yükseltilecek"
 msgstr[1] "Paketler yükseltilecek"
 
+msgid "Part Fan"
+msgstr ""
+
 msgid "Password saved"
 msgstr "Şifre kaydedildi"
 
@@ -470,6 +473,9 @@ msgstr "Duraklatıldı"
 
 msgid "Perform a full upgrade?"
 msgstr "Tam yükseltme yap?"
+
+msgid "Pins"
+msgstr ""
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Lütfen mikro denetleyiciyi yeniden derleyin ve flaşlayın."
@@ -543,6 +549,9 @@ msgstr "Geri Çekme Hızı"
 #, python-format
 msgid "Retry #%s"
 msgstr "Yeniden Dene #%s"
+
+msgid "Retrying"
+msgstr ""
 
 msgid "Save"
 msgstr "Kaydet"

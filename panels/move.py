@@ -20,11 +20,12 @@ class MovePanel(ScreenPanel):
     distance = 1
     distances = ['.1', '.5', '1', '5', '10', '25', '50']
 
-    def initialize(self, panel_name):
-
+    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
+        super().__init__(screen, title, back, action_bar, printer_name)
         self.settings = {}
         self.menu = ['move_menu']
 
+    def initialize(self, panel_name):
         grid = self._gtk.HomogeneousGrid()
 
         self.labels['x+'] = self._gtk.ButtonImage("arrow-right", _("X+"), "color1")
@@ -92,15 +93,13 @@ class MovePanel(ScreenPanel):
             grid.attach(self.labels['z_tilt'], 2, 0, 1, 1)
         elif self._printer.config_section_exists("quad_gantry_level"):
             grid.attach(self.labels['quad_gantry_level'], 2, 0, 1, 1)
+        elif "delta" in self._screen.printer.get_config_section("printer")['kinematics']:
+            grid.attach(self.labels['motors-off'], 2, 0, 1, 1)
         else:
-            if "delta" in self._screen.printer.get_config_section("printer")['kinematics']:
-                grid.attach(self.labels['motors-off'], 2, 0, 1, 1)
-            else:
-                grid.attach(self.labels['home-xy'], 2, 0, 1, 1)
+            grid.attach(self.labels['home-xy'], 2, 0, 1, 1)
 
         distgrid = Gtk.Grid()
-        j = 0
-        for i in self.distances:
+        for j, i in enumerate(self.distances):
             self.labels[i] = self._gtk.ToggleButton(i)
             self.labels[i].set_direction(Gtk.TextDirection.LTR)
             self.labels[i].connect("clicked", self.change_distance, i)
@@ -114,8 +113,6 @@ class MovePanel(ScreenPanel):
             if i == "1":
                 ctx.add_class("distbutton_active")
             distgrid.attach(self.labels[i], j, 0, 1, 1)
-            j += 1
-
         self.labels["1"].set_active(True)
 
         self.labels['pos_x'] = Gtk.Label("X: 0")
@@ -143,6 +140,7 @@ class MovePanel(ScreenPanel):
         self.content.add(self.labels['move_menu'])
 
         printer_cfg = self._printer.get_config_section("printer")
+        # The max_velocity parameter is not optional in klipper config.
         max_velocity = int(float(printer_cfg["max_velocity"]))
         if "max_z_velocity" in printer_cfg:
             max_z_velocity = int(float(printer_cfg["max_z_velocity"]))
@@ -175,32 +173,32 @@ class MovePanel(ScreenPanel):
         homed_axes = self._screen.printer.get_stat("toolhead", "homed_axes")
         if homed_axes == "xyz":
             if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
-                self.labels['pos_x'].set_text("X: %.2f" % (data["gcode_move"]["gcode_position"][0]))
-                self.labels['pos_y'].set_text("Y: %.2f" % (data["gcode_move"]["gcode_position"][1]))
-                self.labels['pos_z'].set_text("Z: %.2f" % (data["gcode_move"]["gcode_position"][2]))
+                self.labels['pos_x'].set_text(f"X: {data['gcode_move']['gcode_position'][0]:.2f}")
+                self.labels['pos_y'].set_text(f"Y: {data['gcode_move']['gcode_position'][1]:.2f}")
+                self.labels['pos_z'].set_text(f"Z: {data['gcode_move']['gcode_position'][2]:.2f}")
         else:
             if "x" in homed_axes:
                 if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
-                    self.labels['pos_x'].set_text("X: %.2f" % (data["gcode_move"]["gcode_position"][0]))
+                    self.labels['pos_x'].set_text(f"X: {data['gcode_move']['gcode_position'][0]:.2f}")
             else:
                 self.labels['pos_x'].set_text("X: ?")
             if "y" in homed_axes:
                 if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
-                    self.labels['pos_y'].set_text("Y: %.2f" % (data["gcode_move"]["gcode_position"][1]))
+                    self.labels['pos_y'].set_text(f"Y: {data['gcode_move']['gcode_position'][1]:.2f}")
             else:
                 self.labels['pos_y'].set_text("Y: ?")
             if "z" in homed_axes:
                 if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
-                    self.labels['pos_z'].set_text("Z: %.2f" % (data["gcode_move"]["gcode_position"][2]))
+                    self.labels['pos_z'].set_text(f"Z: {data['gcode_move']['gcode_position'][2]:.2f}")
             else:
                 self.labels['pos_z'].set_text("Z: ?")
 
     def change_distance(self, widget, distance):
         if self.distance == distance:
             return
-        logging.info("### Distance " + str(distance))
+        logging.info(f"### Distance {distance}")
 
-        ctx = self.labels[str(self.distance)].get_style_context()
+        ctx = self.labels[f"{self.distance}"].get_style_context()
         ctx.remove_class("distbutton_active")
 
         self.distance = distance
@@ -209,36 +207,28 @@ class MovePanel(ScreenPanel):
         for i in self.distances:
             if i == self.distance:
                 continue
-            self.labels[str(i)].set_active(False)
+            self.labels[f"{i}"].set_active(False)
 
-    def move(self, widget, axis, dir):
-        if self._config.get_config()['main'].getboolean("invert_%s" % axis.lower(), False):
-            dir = "-" if dir == "+" else "+"
+    def move(self, widget, axis, direction):
+        if self._config.get_config()['main'].getboolean(f"invert_{axis.lower()}", False):
+            direction = "-" if direction == "+" else "+"
 
-        dist = str(self.distance) if dir == "+" else "-" + str(self.distance)
+        dist = f"{direction}{self.distance}"
         config_key = "move_speed_z" if axis == AXIS_Z else "move_speed_xy"
 
-        speed = None
-        printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
-
-        if printer_cfg is not None:
-            speed = printer_cfg.getint(config_key, None)
-
+        speed = self._config.get_printer_config(self._screen.connected_printer).getint(config_key, None)
         if speed is None:
             speed = self._config.get_config()['main'].getint(config_key, 20)
 
-        speed = max(1, speed)
+        speed = 60 * max(1, speed)
 
-        self._screen._ws.klippy.gcode_script(
-            "%s\n%s %s%s F%s%s" % (
-                KlippyGcodes.MOVE_RELATIVE, KlippyGcodes.MOVE, axis, dist, speed * 60,
-                "\nG90" if self._printer.get_stat("gcode_move", "absolute_coordinates") is True else ""
-            )
-        )
+        self._screen._ws.klippy.gcode_script(f"{KlippyGcodes.MOVE_RELATIVE}\n{KlippyGcodes.MOVE} {axis}{dist} F{speed}")
+        if self._printer.get_stat("gcode_move", "absolute_coordinates"):
+            self._screen._ws.klippy.gcode_script("G90")
 
     def add_option(self, boxname, opt_array, opt_name, option):
         name = Gtk.Label()
-        name.set_markup("<big><b>%s</b></big>" % (option['name']))
+        name.set_markup(f"<big><b>{option['name']}</b></big>")
         name.set_hexpand(True)
         name.set_vexpand(True)
         name.set_halign(Gtk.Align.START)
@@ -266,10 +256,10 @@ class MovePanel(ScreenPanel):
             dev.add(box)
         elif option['type'] == "scale":
             dev.set_orientation(Gtk.Orientation.VERTICAL)
-            val = int(self._config.get_config().get(option['section'], opt_name, fallback=option['value']))
-            adj = Gtk.Adjustment(val, option['range'][0], option['range'][1], option['step'], option['step'] * 5)
-            scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
+            scale = Gtk.Scale.new_with_range(orientation=Gtk.Orientation.HORIZONTAL,
+                                             min=option['range'][0], max=option['range'][1], step=option['step'])
             scale.set_hexpand(True)
+            scale.set_value(int(self._config.get_config().get(option['section'], opt_name, fallback=option['value'])))
             scale.set_digits(0)
             scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
             dev.add(scale)
@@ -284,7 +274,6 @@ class MovePanel(ScreenPanel):
             "row": frame
         }
 
-        opts = sorted(opt_array)
         opts = sorted(list(opt_array), key=lambda x: opt_array[x]['name'])
         pos = opts.index(opt_name)
 

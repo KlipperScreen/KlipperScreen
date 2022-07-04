@@ -242,18 +242,6 @@ trough {
     min-height: 3em;
 }
 
-.extruder-0 {
-    color: #ff0000;
-}
-
-.extruder-1 {
-    color: #00ff00;
-}
-
-.extruder-2 {
-    color: #0000ff;
-}
-
 .fan_slider {
     margin: 0 1em 0 1em;
     color: white;

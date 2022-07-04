@@ -16,26 +16,25 @@ def create_panel(*args):
 class MainPanel(MenuPanel):
     def __init__(self, screen, title, back=False):
         super().__init__(screen, title, False)
+        self.popover_device = None
+        self.items = None
+        self.grid = self._gtk.HomogeneousGrid()
+        self.grid.set_hexpand(True)
+        self.grid.set_vexpand(True)
         self.devices = {}
         self.graph_update = None
         self.active_heater = None
+        self.h = 1
 
     def initialize(self, panel_name, items, extrudercount):
-        print("### Making MainMenu")
-
-        grid = self._gtk.HomogeneousGrid()
-        grid.set_hexpand(True)
-        grid.set_vexpand(True)
+        logging.info("### Making MainMenu")
 
         self.items = items
         self.create_menu_items()
         self._gtk.reset_temp_color()
 
-        self.grid = Gtk.Grid()
-        self.grid.set_row_homogeneous(True)
-        self.grid.set_column_homogeneous(True)
-
         leftpanel = self.create_left_panel()
+        grid = self._gtk.HomogeneousGrid()
         grid.attach(leftpanel, 0, 0, 1, 1)
         if self._screen.vertical_mode:
             self.labels['menu'] = self.arrangeMenuItems(items, 3, True)
@@ -43,9 +42,7 @@ class MainPanel(MenuPanel):
         else:
             self.labels['menu'] = self.arrangeMenuItems(items, 2, True)
             grid.attach(self.labels['menu'], 1, 0, 1, 1)
-
         self.grid = grid
-
         self.content.add(self.grid)
         self.layout.show_all()
 
@@ -62,7 +59,7 @@ class MainPanel(MenuPanel):
 
     def add_device(self, device):
 
-        logging.info("Adding device: %s" % device)
+        logging.info(f"Adding device: {device}")
 
         temperature = self._printer.get_dev_stat(device, "temperature")
         if temperature is None:
@@ -77,60 +74,40 @@ class MainPanel(MenuPanel):
             devname = device
 
         if device.startswith("extruder"):
-            i = 0
-            for d in self.devices:
-                if d.startswith('extruder'):
-                    i += 1
-            if self._printer.extrudercount > 1:
-                image = "extruder-%s" % i
-            else:
-                image = "extruder"
-            class_name = "graph_label_%s" % device
-            type = "extruder"
+            i = sum(d.startswith('extruder') for d in self.devices)
+            image = f"extruder-{i}" if self._printer.extrudercount > 1 else "extruder"
+            class_name = f"graph_label_{device}"
+            dev_type = "extruder"
         elif device == "heater_bed":
             image = "bed"
             devname = "Heater Bed"
             class_name = "graph_label_heater_bed"
-            type = "bed"
+            dev_type = "bed"
         elif device.startswith("heater_generic"):
-            self.h = 1
-            for d in self.devices:
-                if "heater_generic" in d:
-                    self.h += 1
+            self.h = sum("heater_generic" in d for d in self.devices)
             image = "heater"
-            class_name = "graph_label_sensor_%s" % self.h
-            type = "sensor"
+            class_name = f"graph_label_sensor_{self.h}"
+            dev_type = "sensor"
         elif device.startswith("temperature_fan"):
-            f = 1
-            for d in self.devices:
-                if "temperature_fan" in d:
-                    f += 1
+            f = 1 + sum("temperature_fan" in d for d in self.devices)
             image = "fan"
-            class_name = "graph_label_fan_%s" % f
-            type = "fan"
+            class_name = f"graph_label_fan_{f}"
+            dev_type = "fan"
         elif self._config.get_main_config().getboolean("only_heaters", False):
             return False
         else:
-            s = 1
-            try:
-                s += self.h
-            except Exception:
-                pass
-            for d in self.devices:
-                if "sensor" in d:
-                    s += 1
+            self.h += sum("sensor" in d for d in self.devices)
             image = "heat-up"
-            class_name = "graph_label_sensor_%s" % s
-            type = "sensor"
+            class_name = f"graph_label_sensor_{self.h}"
+            dev_type = "sensor"
 
-        rgb, color = self._gtk.get_temp_color(type)
+        rgb = self._gtk.get_temp_color(dev_type)
 
         can_target = self._printer.get_temp_store_device_has_target(device)
         self.labels['da'].add_object(device, "temperatures", rgb, False, True)
         if can_target:
             self.labels['da'].add_object(device, "targets", rgb, True, False)
 
-        text = "<span underline='double' underline_color='#%s'>%s</span>" % (color, devname.capitalize())
         name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "),
                                      None, .5, Gtk.PositionType.LEFT, False)
         name.connect('clicked', self.on_popover_clicked, device)
@@ -151,17 +128,10 @@ class MainPanel(MenuPanel):
 
         self.devices[device] = {
             "class": class_name,
-            "type": type,
             "name": name,
             "temp": temp,
             "can_target": can_target
         }
-
-        if self.devices[device]["can_target"]:
-            temp.get_child().set_label("%.1f %s" %
-                                       (temperature, self.format_target(self._printer.get_dev_stat(device, "target"))))
-        else:
-            temp.get_child().set_label("%.1f " % temperature)
 
         devices = sorted(self.devices)
         pos = devices.index(device) + 1
@@ -174,11 +144,11 @@ class MainPanel(MenuPanel):
 
     def change_target_temp(self, temp):
 
-        MAX_TEMP = int(float(self._printer.get_config_section(self.active_heater)['max_temp']))
-        if temp > MAX_TEMP:
-            self._screen.show_popup_message(_("Can't set above the maximum:") + (" %s" % MAX_TEMP))
+        max_temp = int(float(self._printer.get_config_section(self.active_heater)['max_temp']))
+        if temp > max_temp:
+            self._screen.show_popup_message(_("Can't set above the maximum:") + f' {max_temp}')
             return
-        temp = 0 if temp < 0 else temp
+        temp = max(temp, 0)
 
         if self.active_heater.startswith('extruder'):
             self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(self.active_heater), temp)
@@ -189,7 +159,7 @@ class MainPanel(MenuPanel):
         elif self.active_heater.startswith('temperature_fan '):
             self._screen._ws.klippy.set_temp_fan_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
         else:
-            logging.info("Unknown heater: %s" % self.active_heater)
+            logging.info(f"Unknown heater: {self.active_heater}")
             self._screen.show_popup_message(_("Unknown Heater") + " " + self.active_heater)
         self._printer.set_dev_stat(self.active_heater, "target", temp)
 
@@ -232,16 +202,14 @@ class MainPanel(MenuPanel):
         popover.set_position(Gtk.PositionType.BOTTOM)
         self.labels['popover'] = popover
 
-        i = 0
-        for d in self._printer.get_temp_store_devices():
-            if self.add_device(d):
-                i += 1
+        i = sum(1 for d in self._printer.get_temp_store_devices() if self.add_device(d))
+
         graph_height = (self._gtk.get_content_height() / 2) - ((i + 2) * 4 * self._gtk.get_font_size())
         self.labels['da'].set_size_request(-1, graph_height)
         return box
 
     def graph_show_device(self, widget, show=True):
-        logging.info("Graph show: %s %s" % (self.popover_device, show))
+        logging.info(f"Graph show: {self.popover_device} {show}")
         self.labels['da'].set_showing(self.popover_device, show)
         if show:
             self.devices[self.popover_device]['name'].get_style_context().remove_class("graph_label_hidden")
@@ -281,12 +249,10 @@ class MainPanel(MenuPanel):
 
         if self.labels['da'].is_showing(self.popover_device):
             pobox.pack_start(self.labels['graph_hide'], True, True, 5)
-            if self.devices[self.popover_device]['type'] != "sensor":
-                pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
         else:
             pobox.pack_start(self.labels['graph_show'], True, True, 5)
-            if self.devices[self.popover_device]['type'] != "sensor":
-                pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
+        if self.devices[self.popover_device]["can_target"]:
+            pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
 
     def process_update(self, action, data):
         if action != "notify_status_update":
@@ -334,8 +300,7 @@ class MainPanel(MenuPanel):
     def update_temp(self, device, temp, target):
         if device not in self.devices:
             return
-
-        if self.devices[device]["can_target"]:
-            self.devices[device]["temp"].get_child().set_label("%.1f %s" % (temp, self.format_target(target)))
+        if self.devices[device]["can_target"] and target > 0:
+            self.devices[device]["temp"].get_child().set_label(f"{temp:.1f} / {target:.0f}")
         else:
-            self.devices[device]["temp"].get_child().set_label("%.1f " % temp)
+            self.devices[device]["temp"].get_child().set_label(f"{temp:.1f}")

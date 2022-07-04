@@ -34,32 +34,31 @@ class KlippyGcodes:
 
     @staticmethod
     def set_bed_temp(temp):
-        return "%s S%s" % (KlippyGcodes.SET_BED_TEMP, str(temp))
+        return f"{KlippyGcodes.SET_BED_TEMP} S{temp}"
 
     @staticmethod
     def set_ext_temp(temp, tool=0):
-        return "%s T%s S%s" % (KlippyGcodes.SET_EXT_TEMP, str(tool), str(temp))
+        return f"{KlippyGcodes.SET_EXT_TEMP} T{tool} S{temp}"
 
     @staticmethod
     def set_heater_temp(heater, temp):
-        return 'SET_HEATER_TEMPERATURE heater="%s" target=%s' % (heater, str(temp))
+        return f'SET_HEATER_TEMPERATURE heater="{heater}" target={temp}'
 
     @staticmethod
     def set_temp_fan_temp(temp_fan, temp):
-        return 'SET_TEMPERATURE_FAN_TARGET temperature_fan="%s" target=%s' % (temp_fan, str(temp))
+        return f'SET_TEMPERATURE_FAN_TARGET temperature_fan="{temp_fan}" target={temp}'
 
     @staticmethod
     def set_fan_speed(speed):
-        speed = str(int(float(int(speed) % 101) / 100 * 255))
-        return "%s S%s" % (KlippyGcodes.SET_FAN_SPEED, speed)
+        return f"{KlippyGcodes.SET_FAN_SPEED} S{speed * 2.55:.0f}"
 
     @staticmethod
     def set_extrusion_rate(rate):
-        return "%s S%s" % (KlippyGcodes.SET_EXT_FACTOR, rate)
+        return f"{KlippyGcodes.SET_EXT_FACTOR} S{rate}"
 
     @staticmethod
     def set_speed_rate(rate):
-        return "%s S%s" % (KlippyGcodes.SET_SPD_FACTOR, rate)
+        return f"{KlippyGcodes.SET_SPD_FACTOR} S{rate}"
 
     @staticmethod
     def testz_move(dist):
@@ -67,16 +66,16 @@ class KlippyGcodes:
 
     @staticmethod
     def extrude(dist, speed=500):
-        return "%s E%s F%s" % (KlippyGcodes.MOVE, dist, speed)
+        return f"{KlippyGcodes.MOVE} E{dist} F{speed}"
 
     @staticmethod
     def bed_mesh_load(profile):
-        return "BED_MESH_PROFILE LOAD='%s'" % profile
+        return f"BED_MESH_PROFILE LOAD='{profile}'"
 
     @staticmethod
     def bed_mesh_remove(profile):
-        return "BED_MESH_PROFILE REMOVE='%s'" % profile
+        return f"BED_MESH_PROFILE REMOVE='{profile}'"
 
     @staticmethod
     def bed_mesh_save(profile):
-        return "BED_MESH_PROFILE SAVE='%s'" % profile
+        return f"BED_MESH_PROFILE SAVE='{profile}'"

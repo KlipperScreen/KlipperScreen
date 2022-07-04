@@ -6,30 +6,34 @@ from gi.repository import Gdk, GLib
 
 
 class Printer:
-    data = {}
-    devices = {}
-    power_devices = {}
-    state_callbacks = {
-        "disconnected": None,
-        "error": None,
-        "paused": None,
-        "printing": None,
-        "ready": None,
-        "startup": None,
-        "shutdown": None
-    }
-    tools = []
-    extrudercount = 0
-    tempdevcount = 0
-    fancount = 0
-
     def __init__(self, printer_info, data, state_execute_cb):
+        self.klipper = {"version": printer_info['software_version']}
+        self.tempstore = None
+        self.config = None
         self.state = "disconnected"
         self.state_cb = state_execute_cb
         self.power_devices = {}
         self.store_timeout = False
+        self.data = data
+        self.devices = {}
+        self.power_devices = {}
+        self.state_callbacks = {
+            "disconnected": None,
+            "error": None,
+            "paused": None,
+            "printing": None,
+            "ready": None,
+            "startup": None,
+            "shutdown": None
+        }
+        self.tools = []
+        self.extrudercount = 0
+        self.tempdevcount = 0
+        self.fancount = 0
 
     def reset(self):
+        GLib.source_remove(self.store_timeout)
+        self.store_timeout = None
         self.state = None
         self.state_cb = None
         self.data = None
@@ -40,14 +44,12 @@ class Printer:
         self.extrudercount = None
         self.tempdevcount = None
         self.fancount = None
-        GLib.source_remove(self.store_timeout)
-        self.store_timeout = None
         self.config = None
         self.klipper = None
         self.tempstore = None
 
     def reinit(self, printer_info, data):
-        logging.debug("Moonraker object status: %s" % data)
+        logging.debug(f"Moonraker object status: {data}")
         self.config = data['configfile']['config']
         self.extrudercount = 0
         self.tempdevcount = 0
@@ -57,7 +59,7 @@ class Printer:
         self.data = data
         self.klipper = {}
         self.tempstore = {}
-        if self.store_timeout is False:
+        if not self.store_timeout:
             self.store_timeout = GLib.timeout_add_seconds(1, self._update_temp_store)
 
         self.klipper = {
@@ -65,7 +67,7 @@ class Printer:
         }
 
         for x in self.config.keys():
-            if x[0:8] == "extruder":
+            if x[:8] == "extruder":
                 self.tools.append(x)
                 self.tools = sorted(self.tools)
                 self.extrudercount += 1
@@ -75,16 +77,24 @@ class Printer:
                     "temperature": 0,
                     "target": 0
                 }
-            if x == 'heater_bed' or x.startswith('heater_generic ') or x.startswith('temperature_sensor ') \
+            if x == 'heater_bed' \
+                    or x.startswith('heater_generic ') \
+                    or x.startswith('temperature_sensor ') \
                     or x.startswith('temperature_fan '):
                 self.devices[x] = {
                     "temperature": 0,
                     "target": 0
                 }
-                self.tempdevcount += 1
-            if x == 'fan' or x.startswith('controller_fan ') or x.startswith('heater_fan ') \
+                # Support for hiding devices by name
+                if not " ".join(x.split(" ")[1:]).startswith("_"):
+                    self.tempdevcount += 1
+            if x == 'fan' \
+                    or x.startswith('controller_fan ') \
+                    or x.startswith('heater_fan ') \
                     or x.startswith('fan_generic '):
-                self.fancount += 1
+                # Support for hiding devices by name
+                if not " ".join(x.split(" ")[1:]).startswith("_"):
+                    self.fancount += 1
             if x.startswith('bed_mesh '):
                 r = self.config[x]
                 r['x_count'] = int(r['x_count'])
@@ -96,27 +106,12 @@ class Printer:
                 r['points'] = [[float(j.strip()) for j in i.split(",")] for i in r['points'].strip().split("\n")]
         self.process_update(data)
 
-        logging.info("Klipper version: %s", self.klipper['version'])
-        logging.info("# Extruders: %s", str(self.extrudercount))
-        logging.info("# Temperature devices: %s", str(self.tempdevcount))
-        logging.info("# Fans: %s", str(self.fancount))
+        logging.info(f"Klipper version: {self.klipper['version']}")
+        logging.info(f"# Extruders: {self.extrudercount}")
+        logging.info(f"# Temperature devices: {self.tempdevcount}")
+        logging.info(f"# Fans: {self.fancount}")
 
     def process_update(self, data):
-        keys = [
-            'bed_mesh',
-            'display_status',
-            'fan',
-            'gcode_move',
-            'idle_timeout',
-            'pause_resume',
-            'print_stats',
-            'toolhead',
-            'virtual_sdcard',
-            'webhooks',
-            'fimware_retraction',
-            'motion_report'
-        ]
-
         for x in (self.get_tools() + self.get_heaters() + self.get_filament_sensors()):
             if x in data:
                 for i in data[x]:
@@ -171,11 +166,11 @@ class Printer:
         if state == self.state or state not in list(self.state_callbacks):
             return
 
-        logging.debug("Changing state from '%s' to '%s'" % (self.state, state))
+        logging.debug(f"Changing state from '{self.state}' to '{state}'")
         prev_state = self.state
         self.state = state
         if self.state_callbacks[state] is not None:
-            logging.debug("Adding callback for state: %s" % state)
+            logging.debug(f"Adding callback for state: {state}")
             Gdk.threads_add_idle(
                 GLib.PRIORITY_HIGH_IDLE,
                 self.state_cb,
@@ -186,22 +181,18 @@ class Printer:
     def configure_power_devices(self, data):
         self.power_devices = {}
 
-        logging.debug("Processing power devices: %s" % data)
+        logging.debug(f"Processing power devices: {data}")
         for x in data['devices']:
             self.power_devices[x['device']] = {
                 "status": "on" if x['status'] == "on" else "off"
             }
-        logging.debug("Power devices: %s" % self.power_devices)
+        logging.debug(f"Power devices: {self.power_devices}")
 
     def get_config_section_list(self, search=""):
-        if not hasattr(self, "config"):
-            return []
-        return [i for i in list(self.config) if i.startswith(search)]
+        return [i for i in list(self.config) if i.startswith(search)] if hasattr(self, "config") else []
 
     def get_config_section(self, section):
-        if section in self.config:
-            return self.config[section]
-        return False
+        return self.config[section] if section in self.config else False
 
     def get_data(self):
         return self.data
@@ -211,9 +202,8 @@ class Printer:
         if self.config_section_exists("fan"):
             fans.append("fan")
         fan_types = ["controller_fan", "fan_generic", "heater_fan"]
-        for type in fan_types:
-            for f in self.get_config_section_list("%s " % type):
-                fans.append(f)
+        for fan_type in fan_types:
+            fans.extend(iter(self.get_config_section_list(f"{fan_type} ")))
         return fans
 
     def get_gcode_macros(self):
@@ -223,45 +213,27 @@ class Printer:
         heaters = []
         if self.has_heated_bed():
             heaters.append("heater_bed")
-        for h in self.get_config_section_list("heater_generic "):
-            heaters.append(h)
-        for h in self.get_config_section_list("temperature_sensor "):
-            heaters.append(h)
-        for h in self.get_config_section_list("temperature_fan "):
-            heaters.append(h)
+        heaters.extend(iter(self.get_config_section_list("heater_generic ")))
+        heaters.extend(iter(self.get_config_section_list("temperature_sensor ")))
+        heaters.extend(iter(self.get_config_section_list("temperature_fan ")))
         return heaters
 
     def get_filament_sensors(self):
-        sensors = []
-        for s in self.get_config_section_list("filament_switch_sensor "):
-            sensors.append(s)
-        for s in self.get_config_section_list("filament_motion_sensor "):
-            sensors.append(s)
+        sensors = list(self.get_config_section_list("filament_switch_sensor "))
+        sensors.extend(iter(self.get_config_section_list("filament_motion_sensor ")))
         return sensors
 
     def get_printer_status_data(self):
         data = {
             "printer": {
-                "extruders": {
-                    "count": self.extrudercount
-                },
-                "temperature_devices": {
-                    "count": self.tempdevcount
-                },
-                "fans": {
-                    "count": self.fancount
-                },
+                "extruders": {"count": self.extrudercount},
+                "temperature_devices": {"count": self.tempdevcount},
+                "fans": {"count": self.fancount},
                 "bltouch": self.config_section_exists("bltouch"),
-                "gcode_macros": {
-                    "count": len(self.get_gcode_macros())
-                },
+                "gcode_macros": {"count": len(self.get_gcode_macros())},
                 "idle_timeout": self.get_stat("idle_timeout").copy(),
-                "pause_resume": {
-                    "is_paused": True if self.state == "paused" else False
-                },
-                "power_devices": {
-                    "count": len(self.get_power_devices())
-                },
+                "pause_resume": {"is_paused": self.state == "paused"},
+                "power_devices": {"count": len(self.get_power_devices())},
                 "probe": self.config_section_exists("probe"),
                 "firmware_retraction": self.config_section_exists("firmware_retraction"),
                 "input_shaper": self.config_section_exists("input_shaper")
@@ -287,12 +259,10 @@ class Printer:
         return self.power_devices[device]['status']
 
     def get_stat(self, stat, substat=None):
-        if stat not in self.data:
+        if self.data is None or stat not in self.data:
             return {}
         if substat is not None:
-            if substat in self.data[stat]:
-                return self.data[stat][substat]
-            return {}
+            return self.data[stat][substat] if substat in self.data[stat] else {}
         return self.data[stat]
 
     def get_state(self):
@@ -305,9 +275,7 @@ class Printer:
                 self.devices[dev]['target'] = target
 
     def get_dev_stats(self, dev):
-        if dev in self.devices:
-            return self.devices[dev]
-        return None
+        return self.devices[dev] if dev in self.devices else None
 
     def get_dev_stat(self, dev, stat):
         if dev in self.devices and stat in self.devices[dev]:
@@ -316,7 +284,7 @@ class Printer:
 
     def get_fan_speed(self, fan="fan", speed=None):
         if fan not in self.config or fan not in self.data:
-            logging.debug("Error getting %s config", fan)
+            logging.debug(f"Error getting {fan} config")
             return speed if speed is not None else 0
         if speed is None and "speed" in self.data[fan]:
             speed = self.data[fan]["speed"]
@@ -338,10 +306,7 @@ class Printer:
             return list(self.tempstore)
 
     def get_temp_store_device_has_target(self, device):
-        if device in self.tempstore:
-            if "targets" in self.tempstore[device]:
-                return True
-        return False
+        return device in self.tempstore and "targets" in self.tempstore[device]
 
     def get_temp_store(self, device, section=False, results=0):
         if device not in self.tempstore:
@@ -378,12 +343,10 @@ class Printer:
                 self.tempstore[dev]["targets"] = result[dev]["targets"]
             if "temperatures" in result[dev]:
                 self.tempstore[dev]["temperatures"] = result[dev]["temperatures"]
-        logging.info("Temp store: %s" % list(self.tempstore))
+        logging.info(f"Temp store: {list(self.tempstore)}")
 
     def config_section_exists(self, section):
-        if section in self.get_config_section_list():
-            return True
-        return False
+        return section in self.get_config_section_list()
 
     def set_callbacks(self, callbacks):
         for name, cb in callbacks.items():

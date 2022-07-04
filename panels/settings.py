@@ -12,10 +12,13 @@ def create_panel(*args):
 
 
 class SettingsPanel(ScreenPanel):
+    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
+        super().__init__(screen, title, back, action_bar, printer_name)
+        self.printers = self.settings = {}
+        self.menu = ['settings_menu']
+
     def initialize(self, panel_name):
 
-        self.settings = {}
-        self.menu = ['settings_menu']
         self.labels['add_printer_button'] = self._gtk.Button(_("Add Printer"), "color1")
 
         options = self._config.get_configurable_options().copy()
@@ -35,13 +38,12 @@ class SettingsPanel(ScreenPanel):
         self.labels['printers_menu'] = self._gtk.ScrolledWindow()
         self.labels['printers'] = Gtk.Grid()
         self.labels['printers_menu'].add(self.labels['printers'])
-        self.printers = {}
         for printer in self._config.get_printers():
-            logging.debug("Printer: %s" % printer)
+            logging.debug(f"Printer: {printer}")
             pname = list(printer)[0]
             self.printers[pname] = {
                 "name": pname,
-                "section": "printer %s" % pname,
+                "section": f"printer {pname}",
                 "type": "printer",
                 "moonraker_host": printer[pname]['moonraker_host'],
                 "moonraker_port": printer[pname]['moonraker_port'],
@@ -68,7 +70,7 @@ class SettingsPanel(ScreenPanel):
         frame.get_style_context().add_class("frame-item")
 
         name = Gtk.Label()
-        name.set_markup("<big><b>%s</b></big>" % (option['name']))
+        name.set_markup(f"<big><b>{option['name']}</b></big>")
         name.set_hexpand(True)
         name.set_vexpand(True)
         name.set_halign(Gtk.Align.START)
@@ -112,28 +114,28 @@ class SettingsPanel(ScreenPanel):
             dev.add(dropdown)
         elif option['type'] == "scale":
             dev.set_orientation(Gtk.Orientation.VERTICAL)
-            val = int(self._config.get_config().get(option['section'], opt_name, fallback=option['value']))
-            adj = Gtk.Adjustment(val, option['range'][0], option['range'][1], option['step'], option['step'] * 5)
-            scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
+            scale = Gtk.Scale.new_with_range(orientation=Gtk.Orientation.HORIZONTAL,
+                                             min=option['range'][0], max=option['range'][1], step=option['step'])
             scale.set_hexpand(True)
+            scale.set_value(int(self._config.get_config().get(option['section'], opt_name, fallback=option['value'])))
             scale.set_digits(0)
             scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
             dev.add(scale)
         elif option['type'] == "printer":
-            logging.debug("Option: %s" % option)
+            logging.debug(f"Option: {option}")
             box = Gtk.Box()
             box.set_vexpand(False)
             label = Gtk.Label()
-            url = "%s:%s" % (option['moonraker_host'], option['moonraker_port'])
-            label.set_markup("<big>%s</big>\n%s" % (option['name'], url))
+            url = f"{option['moonraker_host']}:{option['moonraker_port']}"
+            label.set_markup(f"<big>{option['name']}</big>\n{url}")
             box.add(label)
             dev.add(box)
         elif option['type'] == "menu":
-            open = self._gtk.ButtonImage("settings", None, "color3")
-            open.connect("clicked", self.load_menu, option['menu'])
-            open.set_hexpand(False)
-            open.set_halign(Gtk.Align.END)
-            dev.add(open)
+            open_menu = self._gtk.ButtonImage("settings", None, "color3")
+            open_menu.connect("clicked", self.load_menu, option['menu'])
+            open_menu.set_hexpand(False)
+            open_menu.set_halign(Gtk.Align.END)
+            dev.add(open_menu)
 
         frame.add(dev)
         frame.show_all()
@@ -143,7 +145,6 @@ class SettingsPanel(ScreenPanel):
             "row": frame
         }
 
-        opts = sorted(opt_array)
         opts = sorted(list(opt_array), key=lambda x: opt_array[x]['name'])
         pos = opts.index(opt_name)
 

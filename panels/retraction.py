@@ -13,12 +13,15 @@ def create_panel(*args):
 
 
 class FWRetractionPanel(ScreenPanel):
-    values = {}
-    list = {}
+
+    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
+        super().__init__(screen, title, back, action_bar, printer_name)
+        self.options = None
+        self.grid = Gtk.Grid()
+        self.values = {}
+        self.list = {}
 
     def initialize(self, panel_name):
-
-        self.grid = Gtk.Grid()
 
         conf = self._printer.get_config_section("firmware_retraction")
 
@@ -83,10 +86,10 @@ class FWRetractionPanel(ScreenPanel):
                 data
             )
             if result:
-                self.update_option('retract_length', result.group(1))
-                self.update_option('retract_speed', result.group(2))
-                self.update_option('unretract_extra_length', result.group(3))
-                self.update_option('unretract_speed', result.group(4))
+                self.update_option('retract_length', result[1])
+                self.update_option('retract_speed', result[2])
+                self.update_option('unretract_extra_length', result[3])
+                self.update_option('unretract_speed', result[4])
 
     def update_option(self, option, value):
         if option not in self.list:
@@ -101,22 +104,19 @@ class FWRetractionPanel(ScreenPanel):
         self.list[option]['scale'].connect("button-release-event", self.set_opt_value, option)
 
     def add_option(self, option, optname, units, value, digits, maxval):
-        logging.info("Adding option: %s" % option)
+        logging.info(f"Adding option: {option}")
 
         name = Gtk.Label()
-        name.set_markup("<big><b>%s</b></big> (%s)" % (optname, units))
+        name.set_markup(f"<big><b>{optname}</b></big> ({units})")
         name.set_hexpand(True)
         name.set_vexpand(True)
         name.set_halign(Gtk.Align.START)
         name.set_valign(Gtk.Align.CENTER)
         name.set_line_wrap(True)
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-        if option in ["retract_speed", "unretract_speed"]:
-            adj = Gtk.Adjustment(0, 1, maxval, 1, 5, 0)
-        else:
-            adj = Gtk.Adjustment(0, 0, maxval, 1, 5, 0)
+        minimum = 1 if option in ["retract_speed", "unretract_speed"] else 0
         self.values[option] = value
-        scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
+        scale = Gtk.Scale.new_with_range(orientation=Gtk.Orientation.HORIZONTAL, min=minimum, max=maxval, step=1)
         scale.set_value(self.values[option])
         scale.set_digits(digits)
         scale.set_hexpand(True)
@@ -156,10 +156,10 @@ class FWRetractionPanel(ScreenPanel):
         value = self.list[opt]['scale'].get_value()
 
         if opt == "retract_speed":
-            self._screen._ws.klippy.gcode_script("SET_RETRACTION RETRACT_SPEED=%s" % value)
+            self._screen._ws.klippy.gcode_script(f"SET_RETRACTION RETRACT_SPEED={value}")
         elif opt == "retract_length":
-            self._screen._ws.klippy.gcode_script("SET_RETRACTION RETRACT_LENGTH=%s" % value)
+            self._screen._ws.klippy.gcode_script(f"SET_RETRACTION RETRACT_LENGTH={value}")
         elif opt == "unretract_extra_length":
-            self._screen._ws.klippy.gcode_script("SET_RETRACTION UNRETRACT_EXTRA_LENGTH=%s" % value)
+            self._screen._ws.klippy.gcode_script(f"SET_RETRACTION UNRETRACT_EXTRA_LENGTH={value}")
         elif opt == "unretract_speed":
-            self._screen._ws.klippy.gcode_script("SET_RETRACTION UNRETRACT_SPEED=%s" % value)
+            self._screen._ws.klippy.gcode_script(f"SET_RETRACTION UNRETRACT_SPEED={value}")

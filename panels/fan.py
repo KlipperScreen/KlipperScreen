@@ -16,27 +16,21 @@ CHANGEABLE_FANS = ["fan", "fan_generic"]
 
 
 class FanPanel(ScreenPanel):
-    fan_speed = {}
-    user_selecting = False
 
     def initialize(self, panel_name):
-
+        self.fan_speed = {}
+        self.user_selecting = False
         self.devices = {}
-
-        scroll = self._gtk.ScrolledWindow()
-
         # Create a grid for all devices
         self.labels['devices'] = Gtk.Grid()
-        scroll.add(self.labels['devices'])
-
-        # Create a box to contain all of the above
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        box.set_vexpand(True)
-        box.pack_start(scroll, True, True, 0)
+        self.labels['devices'].set_valign(Gtk.Align.CENTER)
 
         self.load_fans()
 
-        self.content.add(box)
+        scroll = self._gtk.ScrolledWindow()
+        scroll.add(self.labels['devices'])
+
+        self.content.add(scroll)
 
     def process_update(self, action, data):
         if action != "notify_status_update":
@@ -65,19 +59,11 @@ class FanPanel(ScreenPanel):
 
     def add_fan(self, fan):
 
-        logging.info("Adding fan: %s" % fan)
-        changeable = False
-        for x in CHANGEABLE_FANS:
-            if fan.startswith(x) or fan == x:
-                changeable = True
-                break
-
+        logging.info(f"Adding fan: {fan}")
+        changeable = any(fan.startswith(x) or fan == x for x in CHANGEABLE_FANS)
         name = Gtk.Label()
-        if fan == "fan":
-            fan_name = "Part Fan"
-        else:
-            fan_name = " ".join(fan.split(" ")[1:])
-        name.set_markup("<big><b>%s</b></big>" % fan_name)
+        fan_name = _("Part Fan") if fan == "fan" else " ".join(fan.split(" ")[1:])
+        name.set_markup(f"\n<big><b>{fan_name}</b></big>\n")
         name.set_hexpand(True)
         name.set_vexpand(True)
         name.set_halign(Gtk.Align.START)
@@ -85,10 +71,7 @@ class FanPanel(ScreenPanel):
         name.set_line_wrap(True)
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        adj = Gtk.Adjustment(0, 0, 100, 1, 5, 0)
         fan_col = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        fan_col.set_hexpand(True)
-        fan_col.set_vexpand(False)
         stop_btn = self._gtk.ButtonImage("cancel", None, "color1", 1)
         stop_btn.set_hexpand(False)
         stop_btn.connect("clicked", self.update_fan_speed, fan, 0)
@@ -97,9 +80,9 @@ class FanPanel(ScreenPanel):
         max_btn.connect("clicked", self.update_fan_speed, fan, 100)
 
         speed = float(self._printer.get_fan_speed(fan))
-        if changeable is True:
+        if changeable:
             speed = round(speed * 100)
-            scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
+            scale = Gtk.Scale.new_with_range(orientation=Gtk.Orientation.HORIZONTAL, min=0, max=100, step=1)
             scale.set_value(speed)
             scale.set_digits(0)
             scale.set_hexpand(True)
@@ -116,9 +99,7 @@ class FanPanel(ScreenPanel):
             scale.set_hexpand(True)
             fan_col.pack_start(scale, True, True, 10)
 
-        fan_row = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-        fan_row.set_hexpand(True)
-        fan_row.set_vexpand(False)
+        fan_row = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         fan_row.add(name)
         fan_row.add(fan_col)
 
@@ -128,7 +109,6 @@ class FanPanel(ScreenPanel):
 
         self.devices[fan] = {
             "changeable": changeable,
-            "row": frame,
             "scale": scale,
             "speed": speed,
         }
@@ -143,17 +123,20 @@ class FanPanel(ScreenPanel):
             pos = devices.index(fan)
 
         self.labels['devices'].insert_row(pos)
-        self.labels['devices'].attach(self.devices[fan]['row'], 0, pos, 1, 1)
+        self.labels['devices'].attach(frame, 0, pos, 1, 1)
         self.labels['devices'].show_all()
 
     def load_fans(self):
         fans = self._printer.get_fans()
         for fan in fans:
             # Support for hiding devices by name
-            name = " ".join(fan.split(" ")[1:]) if not (fan == "fan") else fan
+            name = " ".join(fan.split(" ")[1:]) if fan != "fan" else fan
             if name.startswith("_"):
                 continue
             self.add_fan(fan)
+        frame = Gtk.Frame()
+        frame.set_vexpand(False)
+        self.labels['devices'].attach(frame, 0, -1, 1, 1)
 
     def set_fan_speed(self, widget, event, fan):
         value = self.devices[fan]['scale'].get_value()
@@ -162,7 +145,7 @@ class FanPanel(ScreenPanel):
             self._screen._ws.klippy.gcode_script(KlippyGcodes.set_fan_speed(value))
         else:
             f = " ".join(fan.split(" ")[1:])
-            self._screen._ws.klippy.gcode_script("SET_FAN_SPEED FAN=%s SPEED=%s" % (f, float(value) / 100))
+            self._screen._ws.klippy.gcode_script(f"SET_FAN_SPEED FAN={f} SPEED={float(value) / 100}")
         # Check the speed in case it wasn't applied
         GLib.timeout_add_seconds(1, self.check_fan_speed, fan)
 

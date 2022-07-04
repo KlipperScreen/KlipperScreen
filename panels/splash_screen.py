@@ -68,7 +68,7 @@ class SplashScreenPanel(ScreenPanel):
         self.content.add(main)
 
     def update_text(self, text):
-        self.labels['text'].set_markup("%s" % text)
+        self.labels['text'].set_markup(f"{text}")
         self.show_restart_buttons()
 
     def clear_action_bar(self):
@@ -84,18 +84,16 @@ class SplashScreenPanel(ScreenPanel):
             if printer_cfg is not None:
                 power_devices = printer_cfg.get("power_devices", "")
                 power_devices = [str(i.strip()) for i in power_devices.split(',')]
-                logging.info("Associated power devices: %s", power_devices)
+                logging.info(f"Associated power devices: {power_devices}")
                 self.add_power_button(self._screen.search_power_devices(power_devices))
 
         if self._screen.printer is not None and self._screen.printer.state != "disconnected":
             self.labels['actions'].add(self.labels['restart'])
             self.labels['actions'].add(self.labels['firmware_restart'])
-            self.labels['actions'].add(self.labels['menu'])
         else:
             self.labels['actions'].add(self.labels['restart_system'])
             self.labels['actions'].add(self.labels['shutdown'])
-            self.labels['actions'].add(self.labels['menu'])
-
+        self.labels['actions'].add(self.labels['menu'])
         self.labels['actions'].show_all()
 
     def add_power_button(self, powerdevs):

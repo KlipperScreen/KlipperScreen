@@ -78,7 +78,7 @@ def get_wireless_interfaces():
     for line in result:
         match = re.search('^(\\S+)\\s+.*$', line)
         if match:
-            interfaces.append(match.group(1))
+            interfaces.append(match[1])
 
     return interfaces
 
@@ -174,9 +174,11 @@ def setup_logging(log_file, software_version):
             queue, stdout_hdlr)
     listener.start()
 
-    def logging_exception_handler(type, value, tb, thread_identifier=None):
+    def logging_exception_handler(ex_type, value, tb, thread_identifier=None):
         logging.exception(
-            "Uncaught exception %s: %s\nTraceback: %s" % (type, value, "\n".join(traceback.format_tb(tb))))
+            f'Uncaught exception {ex_type}: {value}\n'
+            f'Traceback: {traceback.format_tb(tb)}'
+        )
 
     sys.excepthook = logging_exception_handler
     logging.captureWarnings(True)
