@@ -201,11 +201,11 @@ class TemperaturePanel(ScreenPanel):
         if self.devices[device]["can_target"]:
             if device in self.active_heaters:
                 self.active_heaters.pop(self.active_heaters.index(device))
-                self.devices[device]['name'].get_style_context().remove_class("active_device")
+                self.devices[device]['name'].get_style_context().remove_class("button_active")
                 self.devices[device]['select'].set_label(_("Select"))
                 return
             self.active_heaters.append(device)
-            self.devices[device]['name'].get_style_context().add_class("active_device")
+            self.devices[device]['name'].get_style_context().add_class("button_active")
             self.devices[device]['select'].set_label(_("Deselect"))
         return
 

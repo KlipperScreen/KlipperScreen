@@ -186,10 +186,6 @@ trough {
     /*border-right: 2px solid #444;*/
 }
 
-.active_device {
-    background-color: #20303D;
-}
-
 .content {
     margin: 0 .1em;
 }

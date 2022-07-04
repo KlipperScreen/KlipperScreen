@@ -260,7 +260,7 @@ class MainPanel(MenuPanel):
         self.labels['popover'].show_all()
 
     def hide_numpad(self, widget):
-        self.devices[self.active_heater]['name'].get_style_context().remove_class("active_device")
+        self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")
         self.active_heater = None
 
         if self._screen.vertical_mode:
@@ -313,9 +313,9 @@ class MainPanel(MenuPanel):
     def show_numpad(self, widget):
 
         if self.active_heater is not None:
-            self.devices[self.active_heater]['name'].get_style_context().remove_class("active_device")
+            self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")
         self.active_heater = self.popover_device
-        self.devices[self.active_heater]['name'].get_style_context().add_class("active_device")
+        self.devices[self.active_heater]['name'].get_style_context().add_class("button_active")
 
         if "keypad" not in self.labels:
             self.labels["keypad"] = Keypad(self._screen, self.change_target_temp, self.hide_numpad)
