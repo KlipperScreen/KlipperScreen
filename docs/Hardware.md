@@ -22,6 +22,37 @@ There are no recommended screens, but the minimum supported resolution is 480x32
 
 Follow the manufacturer instructions on how to install your screen. In general if you see a white screen, then it's not properly installed, ensure that you at least see a console, Then [install](Installation.md) KlipperScreen, if you are having troubles refer to the [troubleshooting page](Troubleshooting.md) for further information.
 
+## Screen rotation
+Currently there is no support for rotation at runtime, do not use xrandr to rotate the screen.
+Configure the server to start in the desired orientation, there are many ways to achieve this, here is one:
+
+
+Create /etc/X11/xorg.conf.d/90-monitor.conf
+```bash
+sudo nano /etc/X11/xorg.conf.d/90-monitor.conf
+```
+
+Paste this section modifying the options to suit your needs:
+```
+Section "Monitor"
+    Identifier "DPI-1"
+    # This identifier would be the same as the name of the connector printed by xrandr.
+    # it can be "HDMI-0" "DisplayPort-0", "DSI-0", "DVI-0", "DPI-0" etc
+
+    Option "Rotate" "left"
+    # Valid rotation options are normal,inverted,left,right
+
+
+    Option "PreferredMode" "1920x1080"
+    # May be necesary if you are not getting your prefered resolution.
+EndSection
+```
+Save the file and restart KlipperScreen.
+
+```bash
+sudo service KlipperScreen restart
+```
+
 
 ## Touchscreen touch rotation
 If your touchscreen isn't registering touches properly after the screen has been rotated, you will need to apply a
