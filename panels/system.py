@@ -133,7 +133,7 @@ class SystemPanel(ScreenPanel):
         if program in self.update_status['version_info']:
             info = self.update_status['version_info'][program]
         else:
-            info = ["full"]
+            info = {"full"}
 
         scroll = Gtk.ScrolledWindow()
         scroll.set_property("overlay-scrolling", False)
@@ -170,6 +170,7 @@ class SystemPanel(ScreenPanel):
                                  _("Outdated by %d") % ncommits +
                                  " " + ngettext("commit", "commits", ncommits) +
                                  ":</b>\n")
+
                 grid.attach(label, 0, i, 1, 1)
                 i = i + 1
                 date = ""
@@ -221,6 +222,7 @@ class SystemPanel(ScreenPanel):
         else:
             label.set_markup("<b>" + _("%s will be updated to version") % program.capitalize() +
                              ": %s</b>" % (info['remote_version']))
+            
             grid.attach(label, 0, i, 1, 1)
             i = i + 1
 
@@ -345,49 +347,41 @@ class SystemPanel(ScreenPanel):
         info = self.update_status['version_info'][p]
         logging.info("%s: %s" % (p, info))
 
-        if p != "system":
-            if 'configured_type' in info and info['configured_type'] == 'git_repo':
-                if info['is_valid'] and not info['is_dirty']:
-                    if info['version'] == info['remote_version']:
-                        self.labels[p].set_markup("<b>%s</b>\n%s" % (p, info['version']))
-                        self.labels["%s_status" % p].set_label(_("Up To Date"))
-                        self.labels["%s_status" % p].get_style_context().remove_class('update')
-                        self.labels["%s_status" % p].get_style_context().remove_class('invalid')
-                        self.labels["%s_status" % p].set_sensitive(False)
-                    else:
-                        self.labels[p].set_markup("<b>%s</b>\n%s -> %s" % (p, info['version'], info['remote_version']))
-                        self.labels["%s_status" % p].set_label(_("Update"))
-                        self.labels["%s_status" % p].get_style_context().add_class('update')
-                        self.labels["%s_status" % p].set_sensitive(True)
-                else:
-                    self.labels[p].set_markup("<b>%s</b>\n%s" % (p, info['version']))
-                    self.labels["%s_status" % p].set_label(_("Invalid"))
-                    self.labels["%s_status" % p].get_style_context().add_class('invalid')
-                    self.labels["%s_status" % p].set_sensitive(True)
-            else:
-                if 'version' in info and info['version'] == info['remote_version']:
-                    self.labels[p].set_markup("<b>%s</b>\n%s" % (p, info['version']))
-                    self.labels["%s_status" % p].set_label(_("Up To Date"))
-                    self.labels["%s_status" % p].get_style_context().remove_class('update')
-                    self.labels["%s_status" % p].set_sensitive(False)
-                else:
-                    self.labels[p].set_markup("<b>%s</b>\n%s -> %s" % (p, info['version'], info['remote_version']))
-                    self.labels["%s_status" % p].set_label(_("Update"))
-                    self.labels["%s_status" % p].get_style_context().add_class('update')
-                    self.labels["%s_status" % p].set_sensitive(True)
-        else:
+        if p == "system":
             self.labels[p].set_markup("<b>System</b>")
             if info['package_count'] == 0:
                 self.labels["%s_status" % p].set_label(_("Up To Date"))
                 self.labels["%s_status" % p].get_style_context().remove_class('update')
                 self.labels["%s_status" % p].set_sensitive(False)
             else:
-                self.labels["%s_status" % p].set_label(_("Update"))
-                self.labels["%s_status" % p].get_style_context().add_class('update')
-                self.labels["%s_status" % p].set_sensitive(True)
+                self._needs_update(p, "Update", 'update')
 
-    def restart_klippy(self, widget, type=None):
-        if type == "firmware":
-            self._screen._ws.klippy.restart_firmware()
+        elif 'configured_type' in info and info['configured_type'] == 'git_repo':
+            if info['is_valid'] and not info['is_dirty']:
+                if info['version'] == info['remote_version']:
+                    self._already_updated(p, info)
+                    self.labels[f"{p}_status"].get_style_context().remove_class('invalid')
+                else:
+                    self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']} -> {info['remote_version']}")
+                    self._needs_update(p)
+            else:
+                self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
+                self.labels[f"{p}_status"].set_label(_("Invalid"))
+                self.labels[f"{p}_status"].get_style_context().add_class('invalid')
+                self.labels[f"{p}_status"].set_sensitive(True)
+        elif 'version' in info and info['version'] == info['remote_version']:
+            self._already_updated(p, info)
         else:
-            self._screen._ws.klippy.restart()
+            self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']} -> {info['remote_version']}")
+            self._needs_update(p)
+
+    def _already_updated(self, p, info):
+        self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
+        self.labels[f"{p}_status"].set_label(_("Up To Date"))
+        self.labels[f"{p}_status"].get_style_context().remove_class('update')
+        self.labels[f"{p}_status"].set_sensitive(False)
+
+    def _needs_update(self, p):
+        self.labels[f"{p}_status"].set_label(_("Update"))
+        self.labels[f"{p}_status"].get_style_context().add_class('update')
+        self.labels[f"{p}_status"].set_sensitive(True)
