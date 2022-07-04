@@ -13,14 +13,14 @@ There are no recommended screens, but the minimum supported resolution is 480x32
 * [VoCore](https://klipper.discourse.group/t/hardware-known-to-work-with-klipperscreen/35/7)
 * [WAVESHARE 4.3 inch DSI LCD](https://www.waveshare.com/4.3inch-dsi-lcd.htm)
 * [DFrobot DFR0550](https://wiki.dfrobot.com/5%27%27TFT-Display_with_Touchscreen_V1.0_SKU_DFR0550)
-* ![Android phone](Android.md)
+* [Android phone](Android.md)
 
 
 * [More known hardware in the klipper discourse](https://klipper.discourse.group/t/hardware-known-to-work-with-klipperscreen/35)
 
 ### Configuration
 
-Follow the manufacturer instructions on how to install your screen. In general if you see a white screen, then it's not properly installed, ensure that you at least see a console, Then ![install](Installation.md) KlipperScreen, if you are having troubles refer to the ![troubleshooting page](Troubleshooting.md) for further information.
+Follow the manufacturer instructions on how to install your screen. In general if you see a white screen, then it's not properly installed, ensure that you at least see a console, Then [install](Installation.md) KlipperScreen, if you are having troubles refer to the [troubleshooting page](Troubleshooting.md) for further information.
 
 
 ## Touchscreen touch rotation
