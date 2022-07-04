@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-02 13:43-0300\n"
+"POT-Creation-Date: 2022-07-12 22:17-0300\n"
 "PO-Revision-Date: 2022-03-31 10:54-0300\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
@@ -464,6 +464,9 @@ msgstr[1] "חבילות יעודכנו"
 msgstr[2] "חבילות יעודכנו"
 msgstr[3] "חבילות יעודכנו"
 
+msgid "Part Fan"
+msgstr ""
+
 msgid "Password saved"
 msgstr "הסיסמה נשמרה"
 
@@ -475,6 +478,9 @@ msgstr "מושהה"
 
 msgid "Perform a full upgrade?"
 msgstr "לבצע שדרוג מלא?"
+
+msgid "Pins"
+msgstr ""
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "אנא הידור מחדש והבזק את המיקרו-בקר."
@@ -548,6 +554,9 @@ msgstr ""
 #, python-format
 msgid "Retry #%s"
 msgstr "נסה שוב #%s"
+
+msgid "Retrying"
+msgstr ""
 
 msgid "Save"
 msgstr "להציל"

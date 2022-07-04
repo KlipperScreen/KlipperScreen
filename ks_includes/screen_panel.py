@@ -10,6 +10,7 @@ from ks_includes.KlippyGcodes import KlippyGcodes
 class ScreenPanel:
 
     def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
+        self.menu = None
         self._screen = screen
         self._config = screen._config
         self._files = screen.files
@@ -41,19 +42,6 @@ class ScreenPanel:
                                               "printer.emergency_stop")
         else:
             self._screen._ws.klippy.emergency_stop()
-
-    def format_target(self, temp):
-        if temp <= 0:
-            return ""
-        else:
-            return "(%s)" % str(int(temp))
-
-    def format_temp(self, temp, places=1):
-        if places == 0:
-            n = int(temp)
-        else:
-            n = round(temp, places)
-        return "%s<small>°C</small>" % str(n)
 
     def get(self):
         return self.layout
@@ -90,13 +78,12 @@ class ScreenPanel:
         self._screen._ws.klippy.gcode_script(KlippyGcodes.QUAD_GANTRY_LEVEL)
 
     def menu_item_clicked(self, widget, panel, item):
-        print("### Creating panel " + item['panel'] + " : %s %s" % (panel, item))
+        logging.info(f"### Creating panel {item['panel']} : {panel} {item}")
         if "items" in item:
-            self._screen.show_panel(self._screen._cur_panels[-1] + '_' + panel, item['panel'], item['name'],
-                                    1, False, items=item['items'])
+            self._screen.show_panel(f'{self._screen._cur_panels[-1]}_{panel}',
+                                    item['panel'], item['name'], 1, False, items=item['items'])
             return
-        self._screen.show_panel(self._screen._cur_panels[-1] + '_' + panel, item['panel'], item['name'],
-                                1, False)
+        self._screen.show_panel(f'{self._screen._cur_panels[-1]}_{panel}', item['panel'], item['name'], 1, False)
 
     def menu_return(self, widget, home=False):
         if home is False:
@@ -114,26 +101,19 @@ class ScreenPanel:
         if label in self.labels and 'l' in self.labels[label]:
             self.labels[label]['l'].set_text(text)
 
-    def update_temp(self, dev, temp, target, name=None):
-        if dev in self.labels and temp is not None:
-            if name is None:
-                self.labels[dev].set_label(self._gtk.formatTemperatureString(temp, target))
-            else:
-                self.labels[dev].set_label("%s\n%s" % (name, self._gtk.formatTemperatureString(temp, target)))
-
     def load_menu(self, widget, name):
-        if ("%s_menu" % name) not in self.labels:
+        if f"{name}_menu" not in self.labels:
             return
 
         for child in self.content.get_children():
             self.content.remove(child)
 
-        self.menu.append('%s_menu' % name)
+        self.menu.append(f'{name}_menu')
         self.content.add(self.labels[self.menu[-1]])
         self.content.show_all()
 
     def unload_menu(self, widget=None):
-        logging.debug("self.menu: %s" % self.menu)
+        logging.debug(f"self.menu: {self.menu}")
         if len(self.menu) <= 1 or self.menu[-2] not in self.labels:
             return
 
@@ -148,24 +128,49 @@ class ScreenPanel:
         if tree_iter is not None:
             model = combo.get_model()
             value = model[tree_iter][1]
-            logging.debug("[%s] %s changed to %s" % (section, option, value))
+            logging.debug(f"[{section}] {option} changed to {value}")
             self._config.set(section, option, value)
             self._config.save_user_config_options()
             if callback is not None:
                 callback(value)
 
     def scale_moved(self, widget, event, section, option):
-        logging.debug("[%s] %s changed to %s" % (section, option, widget.get_value()))
+        logging.debug(f"[{section}] {option} changed to {widget.get_value()}")
         if section not in self._config.get_config().sections():
             self._config.get_config().add_section(section)
         self._config.set(section, option, str(int(widget.get_value())))
         self._config.save_user_config_options()
 
     def switch_config_option(self, switch, gparam, section, option, callback=None):
-        logging.debug("[%s] %s toggled %s" % (section, option, switch.get_active()))
+        logging.debug(f"[{section}] {option} toggled {switch.get_active()}")
         if section not in self._config.get_config().sections():
             self._config.get_config().add_section(section)
         self._config.set(section, option, "True" if switch.get_active() else "False")
         self._config.save_user_config_options()
         if callback is not None:
             callback(switch.get_active())
+
+    @staticmethod
+    def format_time(seconds):
+        if seconds is None or seconds <= 0:
+            return "-"
+        seconds = int(seconds)
+        days = seconds // 86400
+        seconds %= 86400
+        hours = seconds // 3600
+        seconds %= 3600
+        minutes = seconds // 60
+        seconds %= 60
+        return f"{f'{days:2.0f}d ' if days > 0 else ''}" \
+               f"{f'{hours:2.0f}h ' if hours > 0 else ''}" \
+               f"{f'{minutes:2.0f}m ' if minutes > 0 else ''}" \
+               f"{f'{seconds:2.0f}s' if days == 0 and hours == 0 and minutes == 0 else ''}"
+
+    @staticmethod
+    def format_size(size):
+        size = float(size)
+        suffixes = ["kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+        for i, suffix in enumerate(suffixes, start=2):
+            unit = 1024 ** i
+            if size < unit:
+                return f"{(1024 * size / unit):.1f} {suffix}"

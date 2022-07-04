@@ -33,16 +33,12 @@ class FineTunePanel(ScreenPanel):
             bs = print_cfg.get("z_babystep_values", "0.01, 0.05")
             if re.match(r'^[0-9,\.\s]+$', bs):
                 bs = [str(i.strip()) for i in bs.split(',')]
-                if len(bs) <= 2:
-                    self.bs_deltas = bs
-                else:
-                    self.bs_deltas = [bs[0], bs[-1]]
+                self.bs_deltas = bs if len(bs) <= 2 else [bs[0], bs[-1]]
                 self.bs_delta = self.bs_deltas[0]
 
         # babystepping grid
         bsgrid = Gtk.Grid()
-        j = 0
-        for i in self.bs_deltas:
+        for j, i in enumerate(self.bs_deltas):
             self.labels[i] = self._gtk.ToggleButton(i)
             self.labels[i].connect("clicked", self.change_bs_delta, i)
             ctx = self.labels[i].get_style_context()
@@ -55,13 +51,10 @@ class FineTunePanel(ScreenPanel):
             if i == self.bs_delta:
                 ctx.add_class("distbutton_active")
             bsgrid.attach(self.labels[i], j, 0, 1, 1)
-            j += 1
-
         # Grid for percentage
         deltgrid = Gtk.Grid()
-        j = 0
-        for i in self.percent_deltas:
-            self.labels[i] = self._gtk.ToggleButton("%s%%" % i)
+        for j, i in enumerate(self.percent_deltas):
+            self.labels[i] = self._gtk.ToggleButton(f"{i}%")
             self.labels[i].connect("clicked", self.change_percent_delta, i)
             ctx = self.labels[i].get_style_context()
             if j == 0:
@@ -73,8 +66,6 @@ class FineTunePanel(ScreenPanel):
             if i == "1":
                 ctx.add_class("distbutton_active")
             deltgrid.attach(self.labels[i], j, 0, 1, 1)
-            j += 1
-
         self.labels["1"].set_active(True)
 
         grid = self._gtk.HomogeneousGrid()
@@ -154,36 +145,26 @@ class FineTunePanel(ScreenPanel):
 
         if "gcode_move" in data:
             if "homing_origin" in data["gcode_move"]:
-                self.labels['zoffset'].set_label("  %.2fmm" % data["gcode_move"]["homing_origin"][2])
+                self.labels['zoffset'].set_label(f'  {data["gcode_move"]["homing_origin"][2]:.2f}mm')
             if "extrude_factor" in data["gcode_move"]:
                 self.extrusion = int(round(data["gcode_move"]["extrude_factor"] * 100))
-                self.labels['extrudefactor'].set_label("  %3d%%" % self.extrusion)
+                self.labels['extrudefactor'].set_label(f"  {self.extrusion:3}%")
             if "speed_factor" in data["gcode_move"]:
                 self.speed = int(round(data["gcode_move"]["speed_factor"] * 100))
-                self.labels['speedfactor'].set_label("  %3d%%" % self.speed)
+                self.labels['speedfactor'].set_label(f"  {self.speed:3}%")
 
-    def change_babystepping(self, widget, dir):
-        if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen.show_popup_message("Must home first")
-            return
-
-        if dir == "+":
-            gcode = "SET_GCODE_OFFSET Z_ADJUST=%s MOVE=1" % self.bs_delta
-        elif dir == "-":
-            gcode = "SET_GCODE_OFFSET Z_ADJUST=-%s MOVE=1" % self.bs_delta
-        elif dir == "reset":
-            gcode = "SET_GCODE_OFFSET Z=0 MOVE=1"
-        else:
-            gcode = ""
-
-        self._screen._ws.klippy.gcode_script(gcode)
+    def change_babystepping(self, widget, direction):
+        if direction == "reset":
+            self._screen._ws.klippy.gcode_script("SET_GCODE_OFFSET Z=0 MOVE=1")
+        elif direction in ["+", "-"]:
+            self._screen._ws.klippy.gcode_script(f"SET_GCODE_OFFSET Z_ADJUST={direction}{self.bs_delta} MOVE=1")
 
     def change_bs_delta(self, widget, bs):
         if self.bs_delta == bs:
             return
-        logging.info("### BabyStepping " + str(bs))
+        logging.info(f"### BabyStepping {bs}")
 
-        ctx = self.labels[str(self.bs_delta)].get_style_context()
+        ctx = self.labels[f"{self.bs_delta}"].get_style_context()
         ctx.remove_class("distbutton_active")
 
         self.bs_delta = bs
@@ -194,38 +175,34 @@ class FineTunePanel(ScreenPanel):
                 continue
             self.labels[i].set_active(False)
 
-    def change_extrusion(self, widget, dir):
-        if dir == "+":
+    def change_extrusion(self, widget, direction):
+        if direction == "+":
             self.extrusion += int(self.percent_delta)
-        elif dir == "-":
+        elif direction == "-":
             self.extrusion -= int(self.percent_delta)
-        elif dir == "reset":
+        elif direction == "reset":
             self.extrusion = 100
 
-        if self.extrusion < 1:
-            self.extrusion = 1
-
+        self.extrusion = max(self.extrusion, 1)
         self._screen._ws.klippy.gcode_script(KlippyGcodes.set_extrusion_rate(self.extrusion))
 
-    def change_speed(self, widget, dir):
-        if dir == "+":
+    def change_speed(self, widget, direction):
+        if direction == "+":
             self.speed += int(self.percent_delta)
-        elif dir == "-":
+        elif direction == "-":
             self.speed -= int(self.percent_delta)
-        elif dir == "reset":
+        elif direction == "reset":
             self.speed = 100
 
-        if self.speed < 1:
-            self.speed = 1
-
+        self.speed = max(self.speed, 1)
         self._screen._ws.klippy.gcode_script(KlippyGcodes.set_speed_rate(self.speed))
 
     def change_percent_delta(self, widget, delta):
         if self.percent_delta == delta:
             return
-        logging.info("### Delta " + str(delta))
+        logging.info(f"### Delta {delta}")
 
-        ctx = self.labels[str(self.percent_delta)].get_style_context()
+        ctx = self.labels[f"{self.percent_delta}"].get_style_context()
         ctx.remove_class("distbutton_active")
 
         self.percent_delta = delta
@@ -234,4 +211,4 @@ class FineTunePanel(ScreenPanel):
         for i in self.percent_deltas:
             if i == self.percent_delta:
                 continue
-            self.labels[str(i)].set_active(False)
+            self.labels[f"{i}"].set_active(False)

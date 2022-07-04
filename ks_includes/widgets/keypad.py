@@ -33,16 +33,16 @@ class Keypad(Gtk.Box):
             ['E', 'numpad_bright']
         ]
         for i in range(len(keys)):
-            id = 'button_' + str(keys[i][0])
+            k_id = f'button_{str(keys[i][0])}'
             if keys[i][0] == "B":
-                self.labels[id] = self._gtk.ButtonImage("backspace", None, None, 1)
+                self.labels[k_id] = self._gtk.ButtonImage("backspace", None, None, 1)
             elif keys[i][0] == "E":
-                self.labels[id] = self._gtk.ButtonImage("complete", None, None, 1)
+                self.labels[k_id] = self._gtk.ButtonImage("complete", None, None, 1)
             else:
-                self.labels[id] = Gtk.Button(keys[i][0])
-            self.labels[id].connect('clicked', self.update_entry, keys[i][0])
-            self.labels[id].get_style_context().add_class(keys[i][1])
-            numpad.attach(self.labels[id], i % 3, i/3, 1, 1)
+                self.labels[k_id] = Gtk.Button(keys[i][0])
+            self.labels[k_id].connect('clicked', self.update_entry, keys[i][0])
+            self.labels[k_id].get_style_context().add_class(keys[i][1])
+            numpad.attach(self.labels[k_id], i % 3, i / 3, 1, 1)
 
         self.labels["keypad"] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.labels['entry'] = Gtk.Entry()
@@ -66,7 +66,7 @@ class Keypad(Gtk.Box):
         if digit == 'B':
             if len(text) < 1:
                 return
-            self.labels['entry'].set_text(text[0:-1])
+            self.labels['entry'].set_text(text[:-1])
         elif digit == 'E':
             try:
                 temp = int(text)
@@ -74,7 +74,7 @@ class Keypad(Gtk.Box):
                 temp = 0
             self.change_temp(temp)
             self.labels['entry'].set_text("")
+        elif len(text) >= 3:
+            return
         else:
-            if len(text) >= 3:
-                return
             self.labels['entry'].set_text(text + digit)

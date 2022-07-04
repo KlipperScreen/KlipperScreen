@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-02 13:43-0300\n"
+"POT-Creation-Date: 2022-07-12 22:17-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: NSteven\n"
 "Language-Team: NSteven\n"
@@ -453,6 +453,9 @@ msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "패키지가 업데이트 됩니다"
 
+msgid "Part Fan"
+msgstr ""
+
 msgid "Password saved"
 msgstr "비밀번호 저장됨"
 
@@ -464,6 +467,9 @@ msgstr "일시정지됨"
 
 msgid "Perform a full upgrade?"
 msgstr "전체 업그레이드를 실행합니까?"
+
+msgid "Pins"
+msgstr ""
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "MCU 펌웨어를 다시 컴파일 한 다음 플래싱 해주세요"
@@ -537,6 +543,9 @@ msgstr "퇴출 속도"
 #, python-format
 msgid "Retry #%s"
 msgstr "재시도 #%s"
+
+msgid "Retrying"
+msgstr ""
 
 msgid "Save"
 msgstr "저장"

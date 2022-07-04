@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  2022-06-02 14:53-0300\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-02 13:43-0300\n"
+"POT-Creation-Date: 2022-07-12 22:17-0300\n"
 "PO-Revision-Date: 2022-06-03 10:02+0300\n"
 "Last-Translator: \n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -462,6 +462,9 @@ msgstr[0] "Пакет буде оновлено"
 msgstr[1] "Пакет оновлено"
 msgstr[2] "Пакет оновлено"
 
+msgid "Part Fan"
+msgstr ""
+
 msgid "Password saved"
 msgstr "Пароль збережено"
 
@@ -473,6 +476,9 @@ msgstr "ПАУЗА"
 
 msgid "Perform a full upgrade?"
 msgstr "Виконати повне оновлення?"
+
+msgid "Pins"
+msgstr ""
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Будь ласка, перекомпілюйте та перепрошійте мікроконтролер."
@@ -546,6 +552,9 @@ msgstr "Швидкість втягування"
 #, python-format
 msgid "Retry #%s"
 msgstr "Повторіть #%s"
+
+msgid "Retrying"
+msgstr ""
 
 msgid "Save"
 msgstr "Зберегти"

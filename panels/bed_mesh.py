@@ -1,5 +1,6 @@
 import gi
 import logging
+import contextlib
 import numpy as np
 
 gi.require_version("Gtk", "3.0")
@@ -24,17 +25,19 @@ class BedMeshPanel(ScreenPanel):
     active_mesh = None
     graphs = {}
 
-    def initialize(self, panel_name):
-
+    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
+        super().__init__(screen, title, back, action_bar, printer_name)
+        self.profiles = {}
         self.show_create = False
 
+    def initialize(self, panel_name):
         scroll = self._gtk.ScrolledWindow()
 
         # Create a grid for all profiles
         self.labels['profiles'] = Gtk.Grid()
         scroll.add(self.labels['profiles'])
 
-        addprofile = self._gtk.ButtonImage("increase", "  %s" % _("Add bed mesh profile"),
+        addprofile = self._gtk.ButtonImage("increase", _("Add bed mesh profile"),
                                            "color1", .5, Gtk.PositionType.LEFT, False)
         addprofile.connect("clicked", self.show_create_profile)
         addprofile.set_size_request(60, 0)
@@ -67,7 +70,7 @@ class BedMeshPanel(ScreenPanel):
         if profile == "":
             profile = "default"
 
-        logging.debug("Activating profile: %s %s" % (self.active_mesh, profile))
+        logging.debug(f"Activating profile: {self.active_mesh} {profile}")
         if profile != self.active_mesh:
             if profile not in self.profiles:
                 self.add_profile(profile)
@@ -87,7 +90,7 @@ class BedMeshPanel(ScreenPanel):
         frame = Gtk.Frame()
 
         name = Gtk.Label()
-        name.set_markup("<big><b>%s</b></big>" % profile)
+        name.set_markup(f"<big><b>{profile}</b></big>")
         name.set_hexpand(True)
         name.set_vexpand(True)
         name.set_halign(Gtk.Align.START)
@@ -143,7 +146,7 @@ class BedMeshPanel(ScreenPanel):
         dev.add(labels)
 
         buttons = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        logging.debug("Profile compare: '%s' '%s'" % (self.active_mesh, profile))
+        logging.debug(f"Profile compare: '{self.active_mesh}' '{profile}'")
         if self.active_mesh == profile:
             buttons.pack_start(refresh, False, False, 0)
         else:
@@ -187,9 +190,9 @@ class BedMeshPanel(ScreenPanel):
     def create_profile(self, widget):
         name = self.labels['profile_name'].get_text()
         if " " in name:
-            name = '"%s"' % name
+            name = f'"{name}"'
 
-        self._screen._ws.klippy.gcode_script("BED_MESH_PROFILE SAVE=%s" % name)
+        self._screen._ws.klippy.gcode_script(f"BED_MESH_PROFILE SAVE={name}")
         self.remove_create()
 
     def calibrate_mesh(self, widget):
@@ -205,13 +208,12 @@ class BedMeshPanel(ScreenPanel):
 
     def load_meshes(self):
         bm_profiles = self._screen.printer.get_config_section_list("bed_mesh ")
-        self.profiles = {}
         for prof in bm_profiles:
             self.add_profile(prof[9:])
 
     def process_update(self, action, data):
         if action == "notify_status_update":
-            if "bed_mesh" in data and "profile_name" in data['bed_mesh']:
+            with contextlib.suppress(KeyError):
                 if data['bed_mesh']['profile_name'] != self.active_mesh:
                     self.activate_mesh(data['bed_mesh']['profile_name'])
 
@@ -291,25 +293,23 @@ class BedMeshPanel(ScreenPanel):
 
     def show_mesh(self, widget, profile):
 
-        bm = self._printer.get_config_section("bed_mesh %s" % profile)
+        bm = self._printer.get_config_section(f"bed_mesh {profile}")
         if bm is False:
-            logging.info("Unable to load profile: %s" % profile)
+            logging.info(f"Unable to load profile: {profile}")
             return
 
         if profile == self.active_mesh:
             abm = self._printer.get_stat("bed_mesh")
             if abm is None:
-                logging.info("Unable to load active mesh: %s" % profile)
+                logging.info(f"Unable to load active mesh: {profile}")
                 return
             x_range = [int(abm['mesh_min'][0]), int(abm['mesh_max'][0])]
             y_range = [int(abm['mesh_min'][1]), int(abm['mesh_max'][1])]
             minz_mesh = min(min(abm['mesh_matrix']))
             maxz_mesh = max(max(abm['mesh_matrix']))
             # Do not use a very small zscale, because that could be misleading
-            if minz_mesh > -0.5:
-                minz_mesh = -0.5
-            if maxz_mesh < 0.5:
-                maxz_mesh = 0.5
+            minz_mesh = min(minz_mesh, -0.5)
+            maxz_mesh = max(maxz_mesh, 0.5)
             z_range = [minz_mesh, maxz_mesh]
             counts = [len(abm['mesh_matrix'][0]), len(abm['mesh_matrix'])]
             deltas = [(x_range[1] - x_range[0]) / (counts[0] - 1), (y_range[1] - y_range[0]) / (counts[1] - 1)]
@@ -351,7 +351,7 @@ class BedMeshPanel(ScreenPanel):
         box.set_vexpand(True)
 
         title = Gtk.Label()
-        title.set_markup("<b>%s</b>" % profile)
+        title.set_markup(f"<b>{profile}</b>")
         title.set_hexpand(True)
         title.set_halign(Gtk.Align.CENTER)
 
@@ -378,5 +378,6 @@ class BedMeshPanel(ScreenPanel):
         for css_class in style_ctx.list_classes():
             style_ctx.remove_class(css_class)
 
-    def _close_dialog(self, widget, response):
+    @staticmethod
+    def _close_dialog(widget, response):
         widget.destroy()

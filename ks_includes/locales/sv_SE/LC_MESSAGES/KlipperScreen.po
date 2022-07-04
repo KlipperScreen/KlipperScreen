@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-02 13:43-0300\n"
+"POT-Creation-Date: 2022-07-12 22:17-0300\n"
 "PO-Revision-Date: 2022-04-15 17:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -459,6 +459,9 @@ msgid_plural "Packages will be updated"
 msgstr[0] "Paketet kommer att uppdateras"
 msgstr[1] "Paketen kommer att uppdateras"
 
+msgid "Part Fan"
+msgstr ""
+
 msgid "Password saved"
 msgstr "Lösenordet har sparats"
 
@@ -470,6 +473,9 @@ msgstr "Pausad"
 
 msgid "Perform a full upgrade?"
 msgstr "Utför en fullständig uppgradering?"
+
+msgid "Pins"
+msgstr ""
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Vänligen kompilera om och flasha mikrokontrollern."
@@ -542,6 +548,9 @@ msgstr ""
 
 #, python-format
 msgid "Retry #%s"
+msgstr ""
+
+msgid "Retrying"
 msgstr ""
 
 msgid "Save"

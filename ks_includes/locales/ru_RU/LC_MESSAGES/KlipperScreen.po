@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-02 13:43-0300\n"
+"POT-Creation-Date: 2022-07-12 22:17-0300\n"
 "PO-Revision-Date: 2022-06-03 20:25-0500\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: \n"
@@ -461,6 +461,9 @@ msgstr[0] "Пакет будет обновлен"
 msgstr[1] "Пакеты будут обновляться"
 msgstr[2] "Пакеты будут обновляться"
 
+msgid "Part Fan"
+msgstr ""
+
 msgid "Password saved"
 msgstr "Пароль сохранен"
 
@@ -472,6 +475,9 @@ msgstr "Приостановлено"
 
 msgid "Perform a full upgrade?"
 msgstr "Выполнить полное обновление?"
+
+msgid "Pins"
+msgstr ""
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Пожалуйста, перекомпилируйте и прошейте микроконтроллер."
@@ -545,6 +551,9 @@ msgstr ""
 #, python-format
 msgid "Retry #%s"
 msgstr "Повторить #%s"
+
+msgid "Retrying"
+msgstr ""
 
 msgid "Save"
 msgstr "Сохранить"
