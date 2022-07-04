@@ -440,7 +440,7 @@ class KlipperScreen(Gtk.Window):
         if response_id == Gtk.ResponseType.OK:
             logging.debug("Restarting")
             # This can be removed after a grace period
-            service = self._config.get_main_config_option('service')
+            service = self._config.get_main_config().get('service')
             if service is not None and service != "KlipperScreen":
                 self.show_popup_message("Error: option \"service\" is not supported anymore")
             # ^^^
