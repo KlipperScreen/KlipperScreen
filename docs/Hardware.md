@@ -27,9 +27,9 @@ Currently there is no support for rotation at runtime, do not use xrandr to rota
 Configure the server to start in the desired orientation, there are many ways to achieve this, here is one:
 
 
-Create /etc/X11/xorg.conf.d/90-monitor.conf
+Create /usr/share/X11/xorg.conf.d/90-monitor.conf
 ```bash
-sudo nano /etc/X11/xorg.conf.d/90-monitor.conf
+sudo nano /usr/share/X11/xorg.conf.d/90-monitor.conf
 ```
 
 Paste this section modifying the options to suit your needs:
