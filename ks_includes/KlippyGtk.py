@@ -12,7 +12,6 @@ class KlippyGtk:
     labels = {}
     width_ratio = 16
     height_ratio = 9.375
-    keyboard_ratio = .5
 
     def __init__(self, screen, width, height, theme, cursor, fontsize_type):
         self.screen = screen
@@ -84,7 +83,11 @@ class KlippyGtk:
         return self.img_height
 
     def get_keyboard_height(self):
-        return self.get_content_height() * self.keyboard_ratio
+        if (self.height / self.width) >= 3:
+            # Ultra-tall
+            return self.get_content_height() * 0.25
+        else:
+            return self.get_content_height() * 0.5
 
     def get_temp_color(self, device):
         # logging.debug("Color list %s" % self.color_list)

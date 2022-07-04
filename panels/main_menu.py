@@ -232,16 +232,12 @@ class MainPanel(MenuPanel):
         popover.set_position(Gtk.PositionType.BOTTOM)
         self.labels['popover'] = popover
 
-        i = 2
+        i = 0
         for d in self._printer.get_temp_store_devices():
             if self.add_device(d):
                 i += 1
-        if self._screen.vertical_mode:
-            aux = 1.38
-        else:
-            aux = 1
-        graph_height = max(0, self._screen.height / aux - (i * 5 * self._gtk.get_font_size()))
-        self.labels['da'].set_size_request(0, graph_height)
+        graph_height = (self._gtk.get_content_height() / 2) - ((i + 2) * 4 * self._gtk.get_font_size())
+        self.labels['da'].set_size_request(-1, graph_height)
         return box
 
     def graph_show_device(self, widget, show=True):
