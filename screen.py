@@ -1041,7 +1041,7 @@ class KlipperScreen(Gtk.Window):
         box.get_style_context().add_class("keyboard_box")
         box.pack_start(keyboard, True, True, 0)
 
-        self.base_panel.get_content().pack_end(box, True, True, 0)
+        self.base_panel.get_content().pack_end(box, False, False, 0)
 
         self.show_all()
         keyboard.add_id(xid)
