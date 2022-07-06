@@ -70,12 +70,6 @@
     </row>
     <row>
         <key obey-caps='true'>
-            <default display="Caps" action="modifier:caps" />
-            <shifted display="Caps" action="modifier:caps" />
-            <mod1    display="@" />
-            <mod2    display="£" />
-        </key>
-        <key obey-caps='true'>
             <default display="a" />
             <shifted display="A" />
             <mod1    display="#" />
@@ -129,10 +123,16 @@
             <mod1    display="/" />
             <mod2    display="\" />
         </key>
+        <key obey-caps='true'>
+            <default display="ñ" />
+            <shifted display="Ñ" />
+            <mod1    display="@" />
+            <mod2    display="£" />
+        </key>
     </row>
     <row>
         <key obey-caps='true'>
-            <default display="↑" action="modifier:shift" />
+            <default display="image:shift.png" action="modifier:shift" />
         </key>
         <key obey-caps='true'>
             <default display="z" />
@@ -162,7 +162,7 @@
             <default display="b" />
             <shifted display="B" />
             <mod1    display=";" />
-            <mod2    display="✓" />
+            <mod2    display="¿" />
         </key>
         <key obey-caps='true'>
             <default display="n" />
@@ -177,30 +177,26 @@
             <mod2    display="]" />
         </key>
         <key obey-caps='true'>
-            <default display="⌫" action="backspace" />
+            <default display="image:arrow.png" action="backspace" />
         </key>
     </row>
     <row>
-        <key>
-              <default display="?123" action="modifier:mod1" />
+        <key width="2000" fill="false">
+              <default display="123" action="modifier:mod1" />
         </key>
-        <key>
+        <key width="2000" fill="false">
             <default display="=\&lt;" action="modifier:mod2"  />
         </key>
-        <key>
+        <key fill="false">
               <default display="," />
               <mod2    display="&lt;" />
         </key>
-        <key width="6000" fill="true">
+        <key width="3000" fill="true">
               <default display=" " action="space" />
         </key>
-        <key>
+        <key fill="false">
               <default display="." />
               <mod2    display="&gt;" />
-        </key>
-        <key width="1000">
-              <!-- <default display="◀┛" action="return"/> -->
-              <default display="◀┛" action="return"/>
         </key>
     </row>
 </layout>

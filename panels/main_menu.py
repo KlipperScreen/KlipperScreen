@@ -2,14 +2,16 @@ import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib, Pango
+from gi.repository import Gtk, GLib, Pango
 from panels.menu import MenuPanel
 
 from ks_includes.widgets.graph import HeaterGraph
 from ks_includes.widgets.keypad import Keypad
 
+
 def create_panel(*args):
     return MainPanel(*args)
+
 
 class MainPanel(MenuPanel):
     def __init__(self, screen, title, back=False):
@@ -59,7 +61,7 @@ class MainPanel(MenuPanel):
             self.graph_update = None
 
     def add_device(self, device):
-        _ = self.lang.gettext
+
         logging.info("Adding device: %s" % device)
 
         temperature = self._printer.get_dev_stat(device, "temperature")
@@ -106,7 +108,7 @@ class MainPanel(MenuPanel):
             image = "fan"
             class_name = "graph_label_fan_%s" % f
             type = "fan"
-        elif self._config.get_main_config_option('only_heaters') == "True":
+        elif self._config.get_main_config().getboolean("only_heaters", False):
             return False
         else:
             s = 1
@@ -135,7 +137,6 @@ class MainPanel(MenuPanel):
         name.set_alignment(0, .5)
         name.get_style_context().add_class(class_name)
         child = name.get_children()[0].get_children()[0].get_children()[1]
-        child.set_ellipsize(True)
         child.set_ellipsize(Pango.EllipsizeMode.END)
 
         temp = self._gtk.Button("")
@@ -172,7 +173,6 @@ class MainPanel(MenuPanel):
         return True
 
     def change_target_temp(self, temp):
-        _ = self.lang.gettext
 
         MAX_TEMP = int(float(self._printer.get_config_section(self.active_heater)['max_temp']))
         if temp > MAX_TEMP:
@@ -194,7 +194,6 @@ class MainPanel(MenuPanel):
         self._printer.set_dev_stat(self.active_heater, "target", temp)
 
     def create_left_panel(self):
-        _ = self.lang.gettext
 
         self.labels['devices'] = Gtk.Grid()
         self.labels['devices'].get_style_context().add_class('heater-grid')
@@ -211,12 +210,7 @@ class MainPanel(MenuPanel):
         da.set_vexpand(True)
         self.labels['da'] = da
 
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_hexpand(True)
-        scroll.set_vexpand(True)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(self.labels['devices'])
 
@@ -224,7 +218,6 @@ class MainPanel(MenuPanel):
         box.set_vexpand(True)
         box.add(scroll)
         box.add(self.labels['da'])
-
 
         self.labels['graph_settemp'] = self._gtk.Button(label=_("Set Temp"))
         self.labels['graph_settemp'].connect("clicked", self.show_numpad)
@@ -234,21 +227,17 @@ class MainPanel(MenuPanel):
         self.labels['graph_show'].connect("clicked", self.graph_show_device)
 
         popover = Gtk.Popover()
-        self.labels['popover_vbox'] = Gtk.VBox()
+        self.labels['popover_vbox'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         popover.add(self.labels['popover_vbox'])
         popover.set_position(Gtk.PositionType.BOTTOM)
         self.labels['popover'] = popover
 
-        i = 2
+        i = 0
         for d in self._printer.get_temp_store_devices():
             if self.add_device(d):
                 i += 1
-        if self._screen.vertical_mode:
-            aux = 1.38
-        else:
-            aux = 1
-        graph_height = max(0, self._screen.height / aux - (i * 5 * self._gtk.get_font_size()))
-        self.labels['da'].set_size_request(0, graph_height)
+        graph_height = (self._gtk.get_content_height() / 2) - ((i + 2) * 4 * self._gtk.get_font_size())
+        self.labels['da'].set_size_request(-1, graph_height)
         return box
 
     def graph_show_device(self, widget, show=True):
@@ -267,7 +256,7 @@ class MainPanel(MenuPanel):
         self.labels['popover'].show_all()
 
     def hide_numpad(self, widget):
-        self.devices[self.active_heater]['name'].get_style_context().remove_class("active_device")
+        self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")
         self.active_heater = None
 
         if self._screen.vertical_mode:
@@ -318,12 +307,11 @@ class MainPanel(MenuPanel):
         return
 
     def show_numpad(self, widget):
-        _ = self.lang.gettext
 
         if self.active_heater is not None:
-            self.devices[self.active_heater]['name'].get_style_context().remove_class("active_device")
+            self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")
         self.active_heater = self.popover_device
-        self.devices[self.active_heater]['name'].get_style_context().add_class("active_device")
+        self.devices[self.active_heater]['name'].get_style_context().add_class("button_active")
 
         if "keypad" not in self.labels:
             self.labels["keypad"] = Keypad(self._screen, self.change_target_temp, self.hide_numpad)

@@ -4,13 +4,15 @@ import logging
 import os
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib, Pango
+from gi.repository import Gtk, GLib, Pango
 from datetime import datetime
 
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return PrintPanel(*args)
+
 
 class PrintPanel(ScreenPanel):
     cur_directory = "gcodes"
@@ -18,26 +20,22 @@ class PrintPanel(ScreenPanel):
     filelist = {'gcodes': {'directories': [], 'files': []}}
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.labels['directories'] = {}
         self.labels['files'] = {}
         self.sort_items = {
             "name": _("Name"),
             "date": _("Date")
         }
-        self.sort_char = ["↑", "↓"]
+        self.sort_icon = ["arrow-up", "arrow-down"]
 
-        sortdir = self._config.get_main_config_option("print_sort_dir", "name_asc")
+        sortdir = self._config.get_main_config().get("print_sort_dir", "name_asc")
         sortdir = sortdir.split('_')
         if sortdir[0] not in ["name", "date"] or sortdir[1] not in ["asc", "desc"]:
             sortdir = ["name", "asc"]
         self.sort_current = [sortdir[0], 0 if sortdir[1] == "asc" else 1]  # 0 for asc, 1 for desc
 
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_vexpand(True)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        scroll = self._gtk.ScrolledWindow()
 
         sort = Gtk.Label()
         sort.set_text(_("Sort by: "))
@@ -46,10 +44,9 @@ class PrintPanel(ScreenPanel):
         sbox.add(sort)
         i = 1
         for name, val in self.sort_items.items():
-            s = self._gtk.Button(val, "color%s" % (i % 4))
-            s.set_label(val)
+            s = self._gtk.ButtonImage(None, val, "color%s" % (i % 4), .66, Gtk.PositionType.RIGHT, False)
             if name == sortdir[0]:
-                s.set_label("%s %s" % (s.get_label(), self.sort_char[self.sort_current[1]]))
+                s.set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], .66))
             s.connect("clicked", self.change_sort, name)
             self.labels['sort_%s' % name] = s
             sbox.add(s)
@@ -156,7 +153,6 @@ class PrintPanel(ScreenPanel):
             self.dir_panels[parent_dir].show_all()
 
     def add_file(self, filepath, show=True):
-        _ = self.lang.gettext
 
         fileinfo = self._screen.files.get_file_info(filepath)
         if fileinfo is None:
@@ -167,13 +163,13 @@ class PrintPanel(ScreenPanel):
         filename = filepath.split('/')[-1]
         for i in range(1, len(dir)):
             curdir = "/".join(dir[0:i])
-            newdir = "/".join(dir[0:i+1])
+            newdir = "/".join(dir[0:i + 1])
             if newdir not in self.filelist[curdir]['directories']:
                 self.add_directory(newdir)
 
         if filename not in self.filelist[directory]['files']:
             for i in range(1, len(dir)):
-                curdir = "/".join(dir[0:i+1])
+                curdir = "/".join(dir[0:i + 1])
                 if curdir != "gcodes" and fileinfo['modified'] > self.filelist[curdir]['modified']:
                     self.filelist[curdir]['modified'] = fileinfo['modified']
                     self.labels['directories'][curdir]['info'].set_markup(
@@ -212,7 +208,7 @@ class PrintPanel(ScreenPanel):
             file.set_vexpand(False)
 
             icon = Gtk.Image()
-            pixbuf = self.get_file_image(filepath)
+            pixbuf = self.get_file_image(filepath, small=True)
             if pixbuf is not None:
                 icon.set_from_pixbuf(pixbuf)
             else:
@@ -272,10 +268,10 @@ class PrintPanel(ScreenPanel):
         else:
             oldkey = self.sort_current[0]
             logging.info("Changing %s to %s" % ('sort_%s' % oldkey, self.sort_items[self.sort_current[0]]))
-            self.labels['sort_%s' % oldkey].set_label("%s" % self.sort_items[oldkey])
+            self.labels['sort_%s' % oldkey].set_image(None)
             self.labels['sort_%s' % oldkey].show_all()
             self.sort_current = [key, 0]
-        self.labels['sort_%s' % key].set_label("%s %s" % (self.sort_items[key], self.sort_char[self.sort_current[1]]))
+        self.labels['sort_%s' % key].set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], .66))
         self.labels['sort_%s' % key].show()
         GLib.idle_add(self.reload_files)
 
@@ -283,14 +279,14 @@ class PrintPanel(ScreenPanel):
         self._config.save_user_config_options()
 
     def confirm_print(self, widget, filename):
-        _ = self.lang.gettext
+
         buttons = [
             {"name": _("Print"), "response": Gtk.ResponseType.OK},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
         ]
 
         label = Gtk.Label()
-        label.set_markup("<b>%s</b>\n" % (filename))
+        label.set_markup("<b>%s</b>\n" % filename)
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
         label.set_vexpand(True)
@@ -300,7 +296,6 @@ class PrintPanel(ScreenPanel):
 
         grid = Gtk.Grid()
         grid.add(label)
-        grid.set_size_request(self._screen.width - 60, -1)
 
         pixbuf = self.get_file_image(filename, 8, 3.2)
         if pixbuf is not None:
@@ -319,7 +314,7 @@ class PrintPanel(ScreenPanel):
         if response_id == Gtk.ResponseType.CANCEL:
             return
 
-        logging.info("Starting print: %s" % (filename))
+        logging.info("Starting print: %s" % filename)
         self._screen._ws.klippy.print_start(filename)
 
     def delete_file(self, filename):
@@ -349,7 +344,6 @@ class PrintPanel(ScreenPanel):
         self.files.pop(filename)
 
     def get_file_info_str(self, filename):
-        _ = self.lang.gettext
 
         fileinfo = self._screen.files.get_file_info(filename)
         if fileinfo is None:
@@ -370,7 +364,7 @@ class PrintPanel(ScreenPanel):
         for i, suffix in enumerate(suffixes, start=2):
             unit = 1024 ** i
             if size < unit:
-                return ("%.1f %s") % ((1024 * size / unit), suffix)
+                return "%.1f %s" % ((1024 * size / unit), suffix)
 
     def get_print_time(self, filename):
         fileinfo = self._screen.files.get_file_info(filename)
@@ -382,16 +376,16 @@ class PrintPanel(ScreenPanel):
             print_str = ""
 
             # Figure out how many days
-            print_val = int(print_time/86400)
+            print_val = int(print_time / 86400)
             if print_val > 0:
                 print_str = "%sd " % print_val
 
             # Take remainder from days and divide by hours
-            print_val = int((print_time % 86400)/3600)
+            print_val = int((print_time % 86400) / 3600)
             if print_val > 0:
                 print_str = "%s%sh " % (print_str, print_val)
 
-            print_val = int(((print_time % 86400) % 3600)/60)
+            print_val = int(((print_time % 86400) % 3600) / 60)
             print_str = "%s%sm" % (print_str, print_val)
             return print_str
         return "Unavailable"

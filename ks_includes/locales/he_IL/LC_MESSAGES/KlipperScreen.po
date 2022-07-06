@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"POT-Creation-Date: 2022-07-02 13:43-0300\n"
 "PO-Revision-Date: 2022-03-31 10:54-0300\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
@@ -33,8 +33,14 @@ msgstr "זמן 24 שעות"
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "FIRMWARE_RESTART עשוי לפתור את הבעיה."
 
+msgid "ADXL Not Configured"
+msgstr ""
+
 msgid "Abort"
 msgstr "בטל"
+
+msgid "Acceleration:"
+msgstr ""
 
 msgid "Accept"
 msgstr "אשר"
@@ -47,6 +53,17 @@ msgstr "הוסף מדפסת"
 
 msgid "Add bed mesh profile"
 msgstr "הוסף פרופיל רשת למיטה"
+
+msgid "Apply"
+msgstr ""
+
+#, python-format
+msgid "Apply %.2f offset to Endstop?"
+msgstr ""
+
+#, python-format
+msgid "Apply %s%.2f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr ""
@@ -67,6 +84,9 @@ msgstr "האם אתה בטוח שברצונך לסגור את המערכת?"
 msgid "Auto"
 msgstr "אוטומטי"
 
+msgid "Auto-calibrate"
+msgstr ""
+
 msgid "Auto-scroll"
 msgstr "גלילה אוטומטית"
 
@@ -82,8 +102,14 @@ msgstr "Bltouch נמצא היסט מוחל"
 msgid "Calibrate"
 msgstr "לְדַרֵג"
 
+msgid "Calibrated"
+msgstr ""
+
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "מכויל, שמור את התצורה כדי שהיא תהיה קבועה"
+
+msgid "Calibrating..."
+msgstr ""
 
 msgid "Can't set above the maximum:"
 msgstr "לא ניתן להגדיר מעל המקסימום:"
@@ -112,6 +138,12 @@ msgid ""
 msgstr ""
 "בדוק KlipperScreen.log, בתיקית tmp ליותר פרטים.\n"
 "אנא שלח דוח תקלה ב- GITHUB, לעזרה."
+
+msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
 
 msgid "Close"
 msgstr "סגור"
@@ -159,9 +191,6 @@ msgstr "השבת מנועים"
 msgid "Disable XY"
 msgstr "השבת את XY"
 
-msgid "Displayed Macros"
-msgstr "מוצגים מאקרו"
-
 msgid "Distance (mm)"
 msgstr "מרחק (מ\"מ)"
 
@@ -196,8 +225,23 @@ msgstr "מאוורר"
 msgid "Filament Used"
 msgstr "נימה בשימוש"
 
+msgid "Filament total:"
+msgstr ""
+
+msgid "Filament used:"
+msgstr ""
+
+msgid "Filament:"
+msgstr ""
+
 msgid "File"
 msgstr "קוֹבֶץ"
+
+msgid "File:"
+msgstr ""
+
+msgid "Finding ADXL"
+msgstr ""
 
 msgid "Fine Tuning"
 msgstr "כוונון עדין"
@@ -212,6 +256,12 @@ msgstr ""
 "קושחה\n"
 "איתחול"
 
+msgid "Flow:"
+msgstr ""
+
+msgid "Flowrate:"
+msgstr ""
+
 msgid "Font Size"
 msgstr "גודל טקסט"
 
@@ -225,6 +275,9 @@ msgstr ""
 msgid "Go Back"
 msgstr "חזרה"
 
+msgid "Height:"
+msgstr ""
+
 msgid "Hidden"
 msgstr "מוּסתָר"
 
@@ -233,6 +286,9 @@ msgstr "להתחבא"
 
 msgid "Hide sensors in Temp."
 msgstr "הסתר חיישנים בטמפ'."
+
+msgid "Hide temp."
+msgstr ""
 
 msgid "Home"
 msgstr "איפוס"
@@ -269,6 +325,9 @@ msgstr "מאתחל"
 
 msgid "Initializing printer..."
 msgstr "מאתחל מדפסת..."
+
+msgid "Input Shaper"
+msgstr ""
 
 msgid "Interface"
 msgstr "מִמְשָׁק"
@@ -313,6 +372,9 @@ msgstr "שפה"
 msgid "Large"
 msgstr "גָדוֹל"
 
+msgid "Layer:"
+msgstr ""
+
 msgid "Left:"
 msgstr "זמן שנותר:"
 
@@ -334,14 +396,26 @@ msgstr "מקרואים"
 msgid "Main Menu"
 msgstr "תפריט ראשי"
 
-msgid "Max Accelation"
-msgstr "האצה מרבית"
+msgid "Max"
+msgstr ""
+
+msgid "Max Acceleration"
+msgstr ""
 
 msgid "Max Acceleration to Deceleration"
 msgstr "האצה מרבית להאטה"
 
 msgid "Max Velocity"
 msgstr "מהירות מרבית"
+
+msgid "Measure Both"
+msgstr ""
+
+msgid "Measure X"
+msgstr ""
+
+msgid "Measure Y"
+msgstr ""
 
 msgid "Medium"
 msgstr "ממוצע"
@@ -366,6 +440,9 @@ msgstr "שֵׁם"
 
 msgid "Network"
 msgstr "רשת"
+
+msgid "New"
+msgstr ""
 
 msgid "Nothing selected"
 msgstr "שום דבר לא נבחר"
@@ -408,6 +485,9 @@ msgstr "הפעלה"
 msgid "Power On Printer"
 msgstr "הפעל מדפסת"
 
+msgid "Pressure Advance:"
+msgstr ""
+
 msgid "Print"
 msgstr "הדפס"
 
@@ -422,6 +502,9 @@ msgstr "חיבורי מדפסת"
 
 msgid "Printing"
 msgstr "מדפיס"
+
+msgid "Probe Offset"
+msgstr ""
 
 msgid "Probe found applied offset"
 msgstr "Probe נמצא היסט מוחל"
@@ -453,6 +536,15 @@ msgstr "המשך"
 msgid "Retract"
 msgstr "שיחול לאחור"
 
+msgid "Retraction"
+msgstr ""
+
+msgid "Retraction Length"
+msgstr ""
+
+msgid "Retraction Speed"
+msgstr ""
+
 #, python-format
 msgid "Retry #%s"
 msgstr "נסה שוב #%s"
@@ -463,8 +555,18 @@ msgstr "להציל"
 msgid "Save Config"
 msgstr "שמור קונפיג"
 
-msgid "Save configuration"
-msgstr "שמור תצורה"
+msgid "Save Z"
+msgstr ""
+
+msgid "Save configuration?"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr ""
 
 msgid "Screen DPMS"
 msgstr "DPMS מסך"
@@ -503,11 +605,17 @@ msgstr "Slicer"
 msgid "Slicer Time correction (%)"
 msgstr "תיקון זמן פריסה (%)"
 
+msgid "Slicer:"
+msgstr ""
+
 msgid "Small"
 msgstr "קָטָן"
 
 msgid "Sort by: "
 msgstr "מיין לפי: "
+
+msgid "Sort:"
+msgstr ""
 
 msgid "Speed (mm/s)"
 msgstr "מהירות (מ\"מ/שניות)"
@@ -517,6 +625,9 @@ msgstr "מהירות +"
 
 msgid "Speed -"
 msgstr "מהירות -"
+
+msgid "Speed:"
+msgstr ""
 
 msgid "Square Corner Velocity"
 msgstr "מהירות פינה מרובעת"
@@ -560,9 +671,6 @@ msgstr "טמפרטורה"
 msgid "To apply %s KlipperScreen needs to be restarted"
 msgstr "כדי ליישם %s צריך להפעיל מחדש את KlipperScreen"
 
-msgid "Tool"
-msgstr "כלי"
-
 msgid "Total:"
 msgstr "סך הכל:"
 
@@ -571,6 +679,12 @@ msgstr "מחמם לא ידוע"
 
 msgid "Unload"
 msgstr "לִפְרוֹק"
+
+msgid "Unretract Extra Length"
+msgstr ""
+
+msgid "Unretract Speed"
+msgstr ""
 
 msgid "Up To Date"
 msgstr "עדכני"
@@ -596,6 +710,9 @@ msgstr "X-"
 msgid "XY Move Speed (mm/s)"
 msgstr "מהירות תנועה XY (מ\"מ/שנייה)"
 
+msgid "XY Speed (mm/s)"
+msgstr ""
+
 msgid "Y+"
 msgstr "Y+"
 
@@ -608,11 +725,14 @@ msgstr "כיול Z"
 msgid "Z Move Speed (mm/s)"
 msgstr "מהירות תנועה Z (מ\"מ/שניות)"
 
-msgid "Z Position"
-msgstr "מיקום Z"
+msgid "Z Speed (mm/s)"
+msgstr ""
 
 msgid "Z Tilt"
 msgstr "הטיה Z"
+
+msgid "Z offset:"
+msgstr ""
 
 msgid "Z+"
 msgstr "Z+"
@@ -646,17 +766,23 @@ msgstr "מ''מ"
 msgid "mm/s"
 msgstr "מ\"מ/ש"
 
-msgid "mm/s^2"
-msgstr "mm/s^2"
+msgid "mm/s²"
+msgstr "mm/s²"
+
+#~ msgid "Tool"
+#~ msgstr "כלי"
+
+#~ msgid "Displayed Macros"
+#~ msgstr "מוצגים מאקרו"
+
+#~ msgid "Z Position"
+#~ msgstr "מיקום Z"
 
 #~ msgid "IPv4"
 #~ msgstr "IPv4"
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6"
-
-#~ msgid "Z Offset"
-#~ msgstr "הפרז גובה Z"
 
 #~ msgid "Unknown Heater "
 #~ msgstr "מחמם לא ידוע "
@@ -720,9 +846,6 @@ msgstr "mm/s^2"
 #~ msgid "Fast"
 #~ msgstr "מהיר"
 
-#~ msgid "Set Speed"
-#~ msgstr "קבע מהירות"
-
 #~ msgid "Slow"
 #~ msgstr "האט"
 
@@ -752,9 +875,6 @@ msgstr "mm/s^2"
 
 #~ msgid "Fan -"
 #~ msgstr "מאוורר -"
-
-#~ msgid "Speed"
-#~ msgstr "מהירות"
 
 #~ msgid "System Information"
 #~ msgstr "מידע אודות המערכת"

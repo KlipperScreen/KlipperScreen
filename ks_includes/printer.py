@@ -19,7 +19,6 @@ class Printer:
         "shutdown": None
     }
     tools = []
-    toolcount = 0
     extrudercount = 0
     tempdevcount = 0
     fancount = 0
@@ -38,7 +37,6 @@ class Printer:
         self.power_devices = None
         self.state_callbacks = None
         self.tools = None
-        self.toolcount = None
         self.extrudercount = None
         self.tempdevcount = None
         self.fancount = None
@@ -51,7 +49,6 @@ class Printer:
     def reinit(self, printer_info, data):
         logging.debug("Moonraker object status: %s" % data)
         self.config = data['configfile']['config']
-        self.toolcount = 0
         self.extrudercount = 0
         self.tempdevcount = 0
         self.fancount = 0
@@ -69,19 +66,15 @@ class Printer:
 
         for x in self.config.keys():
             if x[0:8] == "extruder":
+                self.tools.append(x)
+                self.tools = sorted(self.tools)
+                self.extrudercount += 1
                 if x.startswith('extruder_stepper'):
                     continue
-
                 self.devices[x] = {
                     "temperature": 0,
                     "target": 0
                 }
-                self.tools.append(x)
-                self.tools = sorted(self.tools)
-                self.toolcount += 1
-                if "shared_heater" in self.config[x]:
-                    continue
-                self.extrudercount += 1
             if x == 'heater_bed' or x.startswith('heater_generic ') or x.startswith('temperature_sensor ') \
                     or x.startswith('temperature_fan '):
                 self.devices[x] = {
@@ -104,7 +97,6 @@ class Printer:
         self.process_update(data)
 
         logging.info("Klipper version: %s", self.klipper['version'])
-        logging.info("# Toolcount: %s", str(self.toolcount))
         logging.info("# Extruders: %s", str(self.extrudercount))
         logging.info("# Temperature devices: %s", str(self.tempdevcount))
         logging.info("# Fans: %s", str(self.fancount))
@@ -125,7 +117,7 @@ class Printer:
             'motion_report'
         ]
 
-        for x in (self.get_tools() + self.get_heaters()):
+        for x in (self.get_tools() + self.get_heaters() + self.get_filament_sensors()):
             if x in data:
                 for i in data[x]:
                     self.set_dev_stat(x, i, data[x][i])
@@ -137,7 +129,7 @@ class Printer:
                 self.data[x] = {}
             self.data[x].update(data[x])
 
-        if "webhooks" in data or "idle_timeout" in data or "print_stats" in data:
+        if "webhooks" in data or "idle_timeout" in data or "print_stats" in data or "pause_resume" in data:
             self.evaluate_state()
 
     def get_updates(self):
@@ -150,7 +142,9 @@ class Printer:
 
         if wh_state == "ready":
             new_state = "ready"
-            if self.data['print_stats']:
+            if self.data['pause_resume']['is_paused']:
+                new_state = "paused"
+            elif self.data['print_stats']:
                 print_state = self.data['print_stats']['state'].lower()  # complete, error, paused, printing, standby
                 if print_state == "paused":
                     new_state = "paused"
@@ -209,11 +203,6 @@ class Printer:
             return self.config[section]
         return False
 
-    def get_config_section(self, section):
-        if section not in self.config:
-            return False
-        return self.config[section]
-
     def get_data(self):
         return self.data
 
@@ -242,6 +231,14 @@ class Printer:
             heaters.append(h)
         return heaters
 
+    def get_filament_sensors(self):
+        sensors = []
+        for s in self.get_config_section_list("filament_switch_sensor "):
+            sensors.append(s)
+        for s in self.get_config_section_list("filament_motion_sensor "):
+            sensors.append(s)
+        return sensors
+
     def get_printer_status_data(self):
         data = {
             "printer": {
@@ -259,12 +256,15 @@ class Printer:
                     "count": len(self.get_gcode_macros())
                 },
                 "idle_timeout": self.get_stat("idle_timeout").copy(),
-                "pause_resume": self.get_stat("pause_resume").copy(),
+                "pause_resume": {
+                    "is_paused": True if self.state == "paused" else False
+                },
                 "power_devices": {
                     "count": len(self.get_power_devices())
                 },
                 "probe": self.config_section_exists("probe"),
-                "firmware_retraction": self.config_section_exists("firmware_retraction")
+                "firmware_retraction": self.config_section_exists("firmware_retraction"),
+                "input_shaper": self.config_section_exists("input_shaper")
             }
         }
 

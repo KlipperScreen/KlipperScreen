@@ -5,39 +5,39 @@
 }
 
 window {
-    background-color: #121212;
-    background-image: url("./styles/material-dark/background.svg");
-    background-size: cover;
+    background-color: black;
+}
+
+
+.active_device {
+    background-color: #1c1c1c;
 }
 
 button {
-    background-color: rgba(0,0,0,0);
+    background-color: black;
 }
 
 button:active {
-    background-color: rgba(0,0,0,0.5);
+    background-color: #282828;
 }
 
 .button_active {
-    border-color: rgba(0,0,0,0.0);
+    border-color: #282828;
     border-style: solid;
     border-width: .25em;
-    background-color: rgba(0,0,0,0.5);
+    background-color: #282828;
     border-radius: 1em;
 }
 
 button.color1, button.color2, button.color3, button.color4 {
-    background-color: rgba(0,0,0,0.75);
-    border-color: rgba(0,0,0,0);
+    background-color: #111111;
+    border-color: #111111;
     border-radius: 1em;
 }
 
 button.color1:active, button.color2:active, button.color3:active, button.color4:active, button.update:active, button.invalid:active, .dialog button:active {
     border-style: none;
-}
-
-button.active {
-    background-color: #E65100;
+    background-color: #282828;
 }
 
 button.update {
@@ -47,18 +47,18 @@ button.update {
 }
 
 button.invalid {
-    background-color: #ff5252;
-    border-color: #ff5252;
+    background-color: #B71C1C;
+    border-color: #B71C1C;
     border-radius: 1em;
 }
 
 combobox box button {
-    background-color: #1e1e1e;
-    border-color: #303030;
+    background-color: #111111;
+    border-color: #111111;
 }
 
 switch {
-    background-color: #1e1e1e;
+    background-color: #1c1c1c;
 }
 
 switch:checked {
@@ -66,13 +66,13 @@ switch:checked {
 }
 
 entry {
-    background-color: #1e1e1e;
-    border-color: #303030;
+    background-color: #1c1c1c;
+    border-color: #1c1c1c;
 }
 
 frame {
     color: #e2e2e2;
-    border-bottom-color: rgba(0,0,0,0.5);;
+    border-bottom-color: #111111;
 }
 
 label {
@@ -80,22 +80,22 @@ label {
 }
 
 menu {
-    background-color: #121212;
+    background-color: black;
     border-color: #a2a2a2;
 }
 
 menuitem {
-    background-color: #121212;
-    border-color: #a2a2a2;
+    background-color: black;
+    border-color: #282828;
 }
 
 trough {
-    background-color: #1e1e1e;
+    background-color: #111111;
     color: #e2e2e2;
 }
 
 trough highlight, trough progress {
-    background-color: #B71C1C;
+    background-color: #2f5631;
     color: #e2e2e2;
 }
 
@@ -104,11 +104,11 @@ scale-mark {
 }
 
 scrollbar, scrollbar button, scrollbar trough {
-    background-color: rgba(0,0,0,0);
+    background-color: black;
 }
 
 scrollbar slider {
-    background-color: #2f2f2f;
+    background-color: #1c1c1c;
 }
 
 textview .time {
@@ -120,23 +120,31 @@ textview .time {
 }
 
 .dialog {
-    border: #121212;
-    background-color: #121212;
+    border: 0;
+    background-color: black;
 }
 
 .dialog button {
-    background-color: #1e1e1e;
-    border-bottom-color: #1e1e1e;
+    background-color: #111111;
+    border-bottom-color: #111111;
     border-radius: .75em;
 }
 
+.dialog button:nth-child(1) {
+    border-bottom-color: #2f5631;
+}
+
+.dialog button:nth-child(2) {
+    border-bottom-color: #B71C1C;
+}
+
 .tempbutton_top, .tempbutton, .tempbutton_bottom, .distbutton_top, .distbutton, .distbutton_bottom  {
-    border-color: #1e1e1e;
-    background-color: rgba(0,0,0,0.75);
+    border-color: black;
+    background-color: #111111;
 }
 
 .distbutton_active {
-    background-color: rgba(128,128,128,0.5);
+    background-color: #282828;
 }
 
 .fan_slider {
@@ -151,13 +159,21 @@ textview .time {
     background-color: #006412;
 }
 
+.message_popup_warning, .message_popup_warning button {
+    background-color: #EF6C00;
+}
+
 .message_popup_error, .message_popup_error button {
     background-color: #B71C1C;
 }
 
 .numpad_tleft, .numpad_top, .numpad_tright, .numpad_left, .numpad_button, .numpad_right, .numpad_bleft, .numpad_bottom, .numpad_bright {
-    border-color: #383838;
-    background-color: #252525;
+    border-color: #111111;
+    background-color: #111111;
+}
+
+.printing-info button{
+    background-color: #111111;
 }
 
 .printing-status {
@@ -184,7 +200,7 @@ textview .time {
 
 .message button {
     background-color: #e2e2e2;
-    color: #121212;
+    color: black;
 }
 
 .warning {

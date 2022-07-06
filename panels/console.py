@@ -9,6 +9,7 @@ from gi.repository import Gtk
 from datetime import datetime
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return ConsolePanel(*args)
 
@@ -21,9 +22,10 @@ COLORS = {
     "warning": "#c9c9c9"
 }
 
+
 class ConsolePanel(ScreenPanel):
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.autoscroll = True
         self.hidetemps = True
 
@@ -32,29 +34,29 @@ class ConsolePanel(ScreenPanel):
         o1_lbl = Gtk.Label(_("Auto-scroll"))
         o1_lbl.set_halign(Gtk.Align.END)
         o1_switch = Gtk.Switch()
-        o1_switch.set_property("width-request", round(self._gtk.get_font_size()*5))
-        o1_switch.set_property("height-request", round(self._gtk.get_font_size()*2.5))
+        o1_switch.set_property("width-request", round(self._gtk.get_font_size() * 5))
+        o1_switch.set_property("height-request", round(self._gtk.get_font_size() * 2.5))
         o1_switch.set_active(self.autoscroll)
         o1_switch.connect("notify::active", self.set_autoscroll)
 
         o2_lbl = Gtk.Label(_("Hide temp."))
         o2_lbl.set_halign(Gtk.Align.END)
         o2_switch = Gtk.Switch()
-        o2_switch.set_property("width-request", round(self._gtk.get_font_size()*5))
-        o2_switch.set_property("height-request", round(self._gtk.get_font_size()*2.5))
+        o2_switch.set_property("width-request", round(self._gtk.get_font_size() * 5))
+        o2_switch.set_property("height-request", round(self._gtk.get_font_size() * 2.5))
         o2_switch.set_active(self.hidetemps)
         o2_switch.connect("notify::active", self.hide_temps)
 
         o3_button = self._gtk.ButtonImage("refresh", _('Clear') + " ", None, .66, Gtk.PositionType.RIGHT, False)
         o3_button.connect("clicked", self.clear)
 
-        options = Gtk.HBox()
+        options = Gtk.Box()
         options.set_hexpand(True)
         options.set_vexpand(False)
         options.add(o1_lbl)
-        options.pack_start(o1_switch, False, 0, 5)
+        options.pack_start(o1_switch, False, False, 5)
         options.add(o2_lbl)
-        options.pack_start(o2_switch, False, 0, 5)
+        options.pack_start(o2_switch, False, False, 5)
         options.add(o3_button)
 
         sw = Gtk.ScrolledWindow()
@@ -67,6 +69,7 @@ class ConsolePanel(ScreenPanel):
         tv.set_editable(False)
         tv.set_cursor_visible(False)
         tv.connect("size-allocate", self._autoscroll)
+        tv.connect("focus-in-event", self._screen.remove_keyboard)
 
         sw.add(tv)
 
@@ -77,14 +80,14 @@ class ConsolePanel(ScreenPanel):
         entry = Gtk.Entry()
         entry.set_hexpand(True)
         entry.set_vexpand(False)
-        entry.connect("focus-in-event", self._show_keyboard)
-        entry.connect("focus-out-event", self._remove_keyboard)
+        entry.connect("button-press-event", self._screen.show_keyboard)
+        entry.connect("focus-in-event", self._screen.show_keyboard)
         entry.connect("activate", self._send_command)
+        entry.grab_focus_without_selecting()
 
         enter = self._gtk.ButtonImage("resume", " " + _('Send') + " ", None, .66, Gtk.PositionType.RIGHT, False)
         enter.set_hexpand(False)
         enter.connect("clicked", self._send_command)
-
 
         ebox.add(entry)
         ebox.add(enter)
@@ -96,10 +99,10 @@ class ConsolePanel(ScreenPanel):
             "tv": tv
         })
 
-        content_box = Gtk.VBox()
-        content_box.pack_start(options, False, 0, 5)
+        content_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        content_box.pack_start(options, False, False, 5)
         content_box.add(sw)
-        content_box.pack_end(ebox, False, 0, 0)
+        content_box.pack_end(ebox, False, False, 0)
         self.content.add(content_box)
 
     def clear(self, widget):
@@ -108,11 +111,12 @@ class ConsolePanel(ScreenPanel):
     def add_gcode(self, type, time, message):
         if type == "command":
             color = COLORS['command']
-            message = '$ %s' % message
         elif message.startswith("!!"):
             color = COLORS['error']
+            message = message.replace("!! ", "")
         elif message.startswith("//"):
             color = COLORS['warning']
+            message = message.replace("// ", "")
         elif self.hidetemps and re.match('^(?:ok\\s+)?(B|C|T\\d*):', message):
             return
         else:
@@ -153,15 +157,10 @@ class ConsolePanel(ScreenPanel):
             adj = self.labels['sw'].get_vadjustment()
             adj.set_value(adj.get_upper() - adj.get_page_size())
 
-    def _show_keyboard(self, *args):
-        self._screen.show_keyboard()
-
-    def _remove_keyboard(self, *args):
-        self._screen.remove_keyboard()
-
     def _send_command(self, *args):
         cmd = self.labels['entry'].get_text()
         self.labels['entry'].set_text('')
+        self._screen.remove_keyboard()
 
         self.add_gcode("command", time.time(), cmd)
         self._screen._ws.klippy.gcode_script(cmd)

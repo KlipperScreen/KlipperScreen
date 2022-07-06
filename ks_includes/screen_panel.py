@@ -1,9 +1,11 @@
 import gi
+import logging
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 from ks_includes.KlippyGcodes import KlippyGcodes
+
 
 class ScreenPanel:
 
@@ -23,16 +25,18 @@ class ScreenPanel:
         self.layout = Gtk.Layout()
         self.layout.set_size(self._screen.width, self._screen.height)
 
-        self.content = Gtk.Box(spacing=0)
+        self.content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.content.get_style_context().add_class("content")
+        self.content.set_hexpand(True)
+        self.content.set_vexpand(True)
 
     def initialize(self, panel_name):
         # Create gtk items here
         return
 
     def emergency_stop(self, widget):
-        _ = self.lang.gettext
 
-        if self._config.get_main_config_option('confirm_estop') == "True":
+        if self._config.get_main_config().getboolean('confirm_estop'):
             self._screen._confirm_send_action(widget, _("Are you sure you want to run Emergency Stop?"),
                                               "printer.emergency_stop")
         else:
@@ -42,7 +46,7 @@ class ScreenPanel:
         if temp <= 0:
             return ""
         else:
-            return ("(%s)" % str(int(temp)))
+            return "(%s)" % str(int(temp))
 
     def format_temp(self, temp, places=1):
         if places == 0:
@@ -57,17 +61,17 @@ class ScreenPanel:
     def get_content(self):
         return self.content
 
-    def get_file_image(self, filename, width=1.6, height=1.6):
+    def get_file_image(self, filename, width=1, height=1, small=False):
         if not self._files.has_thumbnail(filename):
             return None
 
-        loc = self._files.get_thumbnail_location(filename)
+        loc = self._files.get_thumbnail_location(filename, small)
         if loc is None:
             return None
         if loc[0] == "file":
-            return self._gtk.PixbufFromFile(loc[1], None, width, height)
+            return self._gtk.PixbufFromFile(loc[1], width, height)
         if loc[0] == "http":
-            return self._gtk.PixbufFromHttp(loc[1], None, width, height)
+            return self._gtk.PixbufFromHttp(loc[1], width, height)
         return None
 
     def get_title(self):
@@ -111,8 +115,57 @@ class ScreenPanel:
             self.labels[label]['l'].set_text(text)
 
     def update_temp(self, dev, temp, target, name=None):
-        if dev in self.labels:
+        if dev in self.labels and temp is not None:
             if name is None:
                 self.labels[dev].set_label(self._gtk.formatTemperatureString(temp, target))
             else:
                 self.labels[dev].set_label("%s\n%s" % (name, self._gtk.formatTemperatureString(temp, target)))
+
+    def load_menu(self, widget, name):
+        if ("%s_menu" % name) not in self.labels:
+            return
+
+        for child in self.content.get_children():
+            self.content.remove(child)
+
+        self.menu.append('%s_menu' % name)
+        self.content.add(self.labels[self.menu[-1]])
+        self.content.show_all()
+
+    def unload_menu(self, widget=None):
+        logging.debug("self.menu: %s" % self.menu)
+        if len(self.menu) <= 1 or self.menu[-2] not in self.labels:
+            return
+
+        self.menu.pop()
+        for child in self.content.get_children():
+            self.content.remove(child)
+        self.content.add(self.labels[self.menu[-1]])
+        self.content.show_all()
+
+    def on_dropdown_change(self, combo, section, option, callback=None):
+        tree_iter = combo.get_active_iter()
+        if tree_iter is not None:
+            model = combo.get_model()
+            value = model[tree_iter][1]
+            logging.debug("[%s] %s changed to %s" % (section, option, value))
+            self._config.set(section, option, value)
+            self._config.save_user_config_options()
+            if callback is not None:
+                callback(value)
+
+    def scale_moved(self, widget, event, section, option):
+        logging.debug("[%s] %s changed to %s" % (section, option, widget.get_value()))
+        if section not in self._config.get_config().sections():
+            self._config.get_config().add_section(section)
+        self._config.set(section, option, str(int(widget.get_value())))
+        self._config.save_user_config_options()
+
+    def switch_config_option(self, switch, gparam, section, option, callback=None):
+        logging.debug("[%s] %s toggled %s" % (section, option, switch.get_active()))
+        if section not in self._config.get_config().sections():
+            self._config.get_config().add_section(section)
+        self._config.set(section, option, "True" if switch.get_active() else "False")
+        self._config.save_user_config_options()
+        if callback is not None:
+            callback(switch.get_active())

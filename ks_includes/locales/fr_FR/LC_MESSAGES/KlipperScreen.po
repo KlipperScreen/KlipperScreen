@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"POT-Creation-Date: 2022-07-02 13:43-0300\n"
 "PO-Revision-Date: 2022-03-31 10:50-0300\n"
 "Last-Translator: O. Robardet\n"
 "Language-Team: \n"
@@ -31,8 +31,14 @@ msgstr "Format 24 heures"
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "Un FIRMWARE_RESTART peut résoudre le problème."
 
+msgid "ADXL Not Configured"
+msgstr ""
+
 msgid "Abort"
 msgstr "Annuler"
+
+msgid "Acceleration:"
+msgstr "Accélération:"
 
 msgid "Accept"
 msgstr "Accepter"
@@ -45,6 +51,17 @@ msgstr "Ajouter une imprimante"
 
 msgid "Add bed mesh profile"
 msgstr "Ajouter un profil de maillage"
+
+msgid "Apply"
+msgstr ""
+
+#, python-format
+msgid "Apply %.2f offset to Endstop?"
+msgstr ""
+
+#, python-format
+msgid "Apply %s%.2f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Êtes-vous sûr de vouloir exécuter l'arrêt d'urgence?"
@@ -64,6 +81,9 @@ msgstr "Êtes-vous sûr de vouloir arrêter le système?"
 msgid "Auto"
 msgstr "Auto"
 
+msgid "Auto-calibrate"
+msgstr "Calibrage automatique"
+
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
 
@@ -79,8 +99,14 @@ msgstr "Bltouch a trouvé le décalage appliqué"
 msgid "Calibrate"
 msgstr "Étalonner"
 
+msgid "Calibrated"
+msgstr "Calibré"
+
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "Calibré, enregistrez la configuration pour la rendre permanente"
+
+msgid "Calibrating..."
+msgstr "Calibrage..."
 
 msgid "Can't set above the maximum:"
 msgstr "Impossible de définir au-dessus du maximum:"
@@ -109,6 +135,12 @@ msgid ""
 msgstr ""
 "Vérifiez /tmp/KlipperScreen.log pour plus d'informations.\n"
 "SVP envoyez une requête sur GitHub pour obtenir de l'aide."
+
+msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
 
 msgid "Close"
 msgstr "Fermer"
@@ -156,9 +188,6 @@ msgstr "Désactiver les moteurs"
 msgid "Disable XY"
 msgstr "Désactiver XY"
 
-msgid "Displayed Macros"
-msgstr "Macros affichées"
-
 msgid "Distance (mm)"
 msgstr "Distance (mm)"
 
@@ -193,8 +222,23 @@ msgstr "Ventilateur"
 msgid "Filament Used"
 msgstr "Filament utilisé"
 
+msgid "Filament total:"
+msgstr "Total de filaments:"
+
+msgid "Filament used:"
+msgstr "Filament utilisé:"
+
+msgid "Filament:"
+msgstr "Filament:"
+
 msgid "File"
 msgstr "Fichier"
+
+msgid "File:"
+msgstr "Fichier:"
+
+msgid "Finding ADXL"
+msgstr ""
 
 msgid "Fine Tuning"
 msgstr "Réglages fins"
@@ -209,6 +253,12 @@ msgstr ""
 "Micrologiciel\n"
 "Redémarrage"
 
+msgid "Flow:"
+msgstr ""
+
+msgid "Flowrate:"
+msgstr ""
+
 msgid "Font Size"
 msgstr "Taille de police"
 
@@ -222,6 +272,9 @@ msgstr ""
 msgid "Go Back"
 msgstr "Retourner"
 
+msgid "Height:"
+msgstr ""
+
 msgid "Hidden"
 msgstr "Caché"
 
@@ -230,6 +283,9 @@ msgstr "Cacher"
 
 msgid "Hide sensors in Temp."
 msgstr "Masquer les capteurs dans Temp."
+
+msgid "Hide temp."
+msgstr ""
 
 msgid "Home"
 msgstr "Accueil"
@@ -266,6 +322,9 @@ msgstr "Initialisation"
 
 msgid "Initializing printer..."
 msgstr "Démarrage de l'imprimante..."
+
+msgid "Input Shaper"
+msgstr ""
 
 msgid "Interface"
 msgstr "Interface"
@@ -310,6 +369,9 @@ msgstr "Langue"
 msgid "Large"
 msgstr "Grand"
 
+msgid "Layer:"
+msgstr ""
+
 msgid "Left:"
 msgstr "Restant:"
 
@@ -331,14 +393,26 @@ msgstr "Macros"
 msgid "Main Menu"
 msgstr "Menu principal"
 
-msgid "Max Accelation"
-msgstr "Accélération maximale"
+msgid "Max"
+msgstr ""
+
+msgid "Max Acceleration"
+msgstr "Accélération Max"
 
 msgid "Max Acceleration to Deceleration"
 msgstr "Accélération maximale à décélération"
 
 msgid "Max Velocity"
 msgstr "Vélocité maximale"
+
+msgid "Measure Both"
+msgstr ""
+
+msgid "Measure X"
+msgstr ""
+
+msgid "Measure Y"
+msgstr ""
 
 msgid "Medium"
 msgstr "Moyen"
@@ -363,6 +437,9 @@ msgstr "Nom"
 
 msgid "Network"
 msgstr "Réseau"
+
+msgid "New"
+msgstr "Nouveau"
 
 msgid "Nothing selected"
 msgstr "Rien de sélectionné"
@@ -403,6 +480,9 @@ msgstr "Alimentation"
 msgid "Power On Printer"
 msgstr "Allumer l'imprimante"
 
+msgid "Pressure Advance:"
+msgstr ""
+
 msgid "Print"
 msgstr "Imprimer"
 
@@ -417,6 +497,9 @@ msgstr "Connexions aux imprimantes"
 
 msgid "Printing"
 msgstr "Impression"
+
+msgid "Probe Offset"
+msgstr ""
 
 msgid "Probe found applied offset"
 msgstr "Probe a trouvé le décalage appliqué"
@@ -448,6 +531,15 @@ msgstr "Reprendre"
 msgid "Retract"
 msgstr "Rétracter"
 
+msgid "Retraction"
+msgstr "Rétraction"
+
+msgid "Retraction Length"
+msgstr "Longueur de rétraction"
+
+msgid "Retraction Speed"
+msgstr "Vitesse de rétraction"
+
 #, python-format
 msgid "Retry #%s"
 msgstr "Réessayez #%s"
@@ -458,8 +550,18 @@ msgstr "Enregistrer"
 msgid "Save Config"
 msgstr "Enregistrer la config"
 
-msgid "Save configuration"
-msgstr "Enregistrer la configuration"
+msgid "Save Z"
+msgstr "Enregistrer Z"
+
+msgid "Save configuration?"
+msgstr "Enregistrer la configuration?"
+
+msgid "Saved"
+msgstr "Enregistré"
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr ""
 
 msgid "Screen DPMS"
 msgstr "Écran DPMS"
@@ -498,11 +600,17 @@ msgstr "Trancheur"
 msgid "Slicer Time correction (%)"
 msgstr "Correction du temps de trancheuse (%)"
 
+msgid "Slicer:"
+msgstr ""
+
 msgid "Small"
 msgstr "Petit"
 
 msgid "Sort by: "
 msgstr "Trier par: "
+
+msgid "Sort:"
+msgstr "Trier:"
 
 msgid "Speed (mm/s)"
 msgstr "Vitesse de déplacement (mm/s)"
@@ -512,6 +620,9 @@ msgstr "Vitesse +"
 
 msgid "Speed -"
 msgstr "Vitesse -"
+
+msgid "Speed:"
+msgstr "Vitesse:"
 
 msgid "Square Corner Velocity"
 msgstr "Vélocité des angles droits"
@@ -553,9 +664,6 @@ msgstr "Température"
 msgid "To apply %s KlipperScreen needs to be restarted"
 msgstr "Pour appliquer %s KlipperScreen doit être redémarré"
 
-msgid "Tool"
-msgstr "Outil"
-
 msgid "Total:"
 msgstr "Total:"
 
@@ -565,13 +673,18 @@ msgstr "Chauffage inconnu"
 msgid "Unload"
 msgstr "Décharger"
 
+msgid "Unretract Extra Length"
+msgstr ""
+
+msgid "Unretract Speed"
+msgstr ""
+
 msgid "Up To Date"
 msgstr "À jour"
 
 msgid "Update"
 msgstr "Mise à jour"
 
-#, fuzzy
 msgid "Updating"
 msgstr "Mise à jour"
 
@@ -590,6 +703,9 @@ msgstr "X-"
 msgid "XY Move Speed (mm/s)"
 msgstr "Vitesse de déplacement XY (mm/s)"
 
+msgid "XY Speed (mm/s)"
+msgstr "Vitesse XY (mm/s)"
+
 msgid "Y+"
 msgstr "Y+"
 
@@ -602,11 +718,14 @@ msgstr "Calibration Z"
 msgid "Z Move Speed (mm/s)"
 msgstr "Vitesse de déplacement Z (mm/s)"
 
-msgid "Z Position"
-msgstr "Position Z"
+msgid "Z Speed (mm/s)"
+msgstr "Vitesse Z (mm/s)"
 
 msgid "Z Tilt"
 msgstr "Z Tilt"
+
+msgid "Z offset:"
+msgstr "Décalage Z"
 
 msgid "Z+"
 msgstr "Z+"
@@ -636,17 +755,23 @@ msgstr "mm"
 msgid "mm/s"
 msgstr "mm/s"
 
-msgid "mm/s^2"
-msgstr "mm/s^2"
+msgid "mm/s²"
+msgstr "mm/s²"
+
+#~ msgid "Tool"
+#~ msgstr "Outil"
+
+#~ msgid "Displayed Macros"
+#~ msgstr "Macros affichées"
+
+#~ msgid "Z Position"
+#~ msgstr "Position Z"
 
 #~ msgid "IPv4"
 #~ msgstr "IPv4"
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6"
-
-#~ msgid "Z Offset"
-#~ msgstr "Décalage Z"
 
 #~ msgid "Unknown Heater "
 #~ msgstr "Chauffage inconnu "
@@ -716,9 +841,6 @@ msgstr "mm/s^2"
 #~ msgid "Fast"
 #~ msgstr "Rapide"
 
-#~ msgid "Set Speed"
-#~ msgstr "Définir"
-
 #~ msgid "Slow"
 #~ msgstr "Lent"
 
@@ -748,9 +870,6 @@ msgstr "mm/s^2"
 
 #~ msgid "Fan -"
 #~ msgstr "Ventilateur-"
-
-#~ msgid "Speed"
-#~ msgstr "Vitesse"
 
 #~ msgid "System Information"
 #~ msgstr "Info systeme"

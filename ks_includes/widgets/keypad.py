@@ -16,6 +16,7 @@ class Keypad(Gtk.Box):
 
         numpad = self._gtk.HomogeneousGrid()
         numpad.set_direction(Gtk.TextDirection.LTR)
+        numpad.get_style_context().add_class('numpad')
 
         keys = [
             ['1', 'numpad_tleft'],
@@ -48,7 +49,7 @@ class Keypad(Gtk.Box):
         self.labels['entry'].props.xalign = 0.5
         self.labels['entry'].connect("activate", self.update_entry, "E")
 
-        b = self._gtk.ButtonImage('cancel', _('Close'), None, 1)
+        b = self._gtk.ButtonImage('cancel', _('Close'), None, .66, Gtk.PositionType.LEFT, False)
         b.connect("clicked", close_function)
 
         self.add(self.labels['entry'])

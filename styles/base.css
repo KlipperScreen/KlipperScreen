@@ -101,7 +101,7 @@ switch slider {
 entry {
     font-size: 1em;
     background-color: #20292F;
-    border: 1em solid #13181C;
+    border: .2em solid #13181C;
     padding: .25em;
 }
 
@@ -160,7 +160,7 @@ scrollbar, scrollbar button, scrollbar trough {
 }
 
 scrollbar slider {
-    min-width: 1.5em;
+    min-width: 2em;
     border-radius: .7em;
     background-color: #404E57;
 }
@@ -175,7 +175,7 @@ textview .time {
 }
 
 trough {
-    margin: .5em 1em;
+    margin: .5em .5em;
 }
 
 .popup {
@@ -186,8 +186,8 @@ trough {
     /*border-right: 2px solid #444;*/
 }
 
-.active_device {
-    background-color: #20303D;
+.content {
+    margin: 0 .1em;
 }
 
 .dialog {
@@ -278,6 +278,10 @@ trough {
     min-height: 2em;
 }
 
+.keyboard_box {
+    margin-top: 42px;
+}
+
 .message_popup {
     border-bottom: .1em solid white;
 }
@@ -286,8 +290,16 @@ trough {
     background-color: #367554;
 }
 
+.message_popup_warning, .message_popup_warning button {
+    background-color: #f9a825;
+}
+
 .message_popup_error, .message_popup_error button {
     background-color: #9e2f3a;
+}
+
+.numpad{
+    margin-top: 30px;
 }
 
 .numpad_tleft {
@@ -361,6 +373,7 @@ trough {
     margin-right: .25em;
 }
 .printing-info button {
+    margin: .15em;
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: .5em;
 }
@@ -470,6 +483,21 @@ popover button {
 
 .screensaver button:active {
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+.option_slider_max trough highlight, trough progress {
+    background-color: darkred;
+}
+
+.filament_sensor {
+    border-radius: 3em;
+}
+.filament_sensor_detected {
+    background-color: darkgreen;
+}
+
+.filament_sensor_empty {
+    background-color: darkred;
 }
 
 /* Hardcoded values until creation of dynamic CSS updates */

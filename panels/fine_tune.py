@@ -8,8 +8,10 @@ from gi.repository import Gtk
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return FineTunePanel(*args)
+
 
 class FineTunePanel(ScreenPanel):
     user_selecting = False
@@ -23,7 +25,6 @@ class FineTunePanel(ScreenPanel):
     speed = 100
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
 
         logging.debug("FineTunePanel")
 
@@ -47,7 +48,7 @@ class FineTunePanel(ScreenPanel):
             ctx = self.labels[i].get_style_context()
             if j == 0:
                 ctx.add_class("distbutton_top")
-            elif j == len(self.bs_deltas)-1:
+            elif j == len(self.bs_deltas) - 1:
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
@@ -65,7 +66,7 @@ class FineTunePanel(ScreenPanel):
             ctx = self.labels[i].get_style_context()
             if j == 0:
                 ctx.add_class("distbutton_top")
-            elif j == len(self.percent_deltas)-1:
+            elif j == len(self.percent_deltas) - 1:
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
@@ -147,7 +148,6 @@ class FineTunePanel(ScreenPanel):
         self.content.add(grid)
 
     def process_update(self, action, data):
-        _ = self.lang.gettext
 
         if action != "notify_status_update":
             return
@@ -156,10 +156,10 @@ class FineTunePanel(ScreenPanel):
             if "homing_origin" in data["gcode_move"]:
                 self.labels['zoffset'].set_label("  %.2fmm" % data["gcode_move"]["homing_origin"][2])
             if "extrude_factor" in data["gcode_move"]:
-                self.extrusion = int(round(data["gcode_move"]["extrude_factor"]*100))
+                self.extrusion = int(round(data["gcode_move"]["extrude_factor"] * 100))
                 self.labels['extrudefactor'].set_label("  %3d%%" % self.extrusion)
             if "speed_factor" in data["gcode_move"]:
-                self.speed = int(round(data["gcode_move"]["speed_factor"]*100))
+                self.speed = int(round(data["gcode_move"]["speed_factor"] * 100))
                 self.labels['speedfactor'].set_label("  %3d%%" % self.speed)
 
     def change_babystepping(self, widget, dir):
@@ -173,6 +173,8 @@ class FineTunePanel(ScreenPanel):
             gcode = "SET_GCODE_OFFSET Z_ADJUST=-%s MOVE=1" % self.bs_delta
         elif dir == "reset":
             gcode = "SET_GCODE_OFFSET Z=0 MOVE=1"
+        else:
+            gcode = ""
 
         self._screen._ws.klippy.gcode_script(gcode)
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"POT-Creation-Date: 2022-07-02 13:43-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
@@ -26,8 +26,14 @@ msgstr "24-timers visning"
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "En FIRMWARE_RESTART kan løse problemet."
 
+msgid "ADXL Not Configured"
+msgstr ""
+
 msgid "Abort"
 msgstr "Annuller"
+
+msgid "Acceleration:"
+msgstr "Acceleration:"
 
 msgid "Accept"
 msgstr "OK"
@@ -40,6 +46,17 @@ msgstr "Tilføj printer"
 
 msgid "Add bed mesh profile"
 msgstr "Tilføj \"bed-mesh\" profil"
+
+msgid "Apply"
+msgstr ""
+
+#, python-format
+msgid "Apply %.2f offset to Endstop?"
+msgstr ""
+
+#, python-format
+msgid "Apply %s%.2f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Er du sikker på, at du vil køre nødstop?"
@@ -59,6 +76,9 @@ msgstr "Er du sikker på du vil lukke systemet?"
 msgid "Auto"
 msgstr "Auto"
 
+msgid "Auto-calibrate"
+msgstr "Automatisk kalibrering"
+
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
 
@@ -74,8 +94,14 @@ msgstr "Bltouch fundet anvendt offset"
 msgid "Calibrate"
 msgstr "Kalibrér"
 
+msgid "Calibrated"
+msgstr "Kalibreret"
+
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "Kalibreret, gem konfiguration for at gøre den permanent"
+
+msgid "Calibrating..."
+msgstr "Kalibrerer..."
 
 msgid "Can't set above the maximum:"
 msgstr "Kan ikke indstilles over maksimum:"
@@ -104,6 +130,12 @@ msgid ""
 msgstr ""
 "Tjek /tmp/KlipperScreen.log for mere information.\n"
 "Indsend venligst et \"Issue\" på GitHub for hjælp."
+
+msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
 
 msgid "Close"
 msgstr "Luk"
@@ -151,9 +183,6 @@ msgstr "Deaktivér motorer"
 msgid "Disable XY"
 msgstr "Deaktivér XY"
 
-msgid "Displayed Macros"
-msgstr "Viste makroer"
-
 msgid "Distance (mm)"
 msgstr "Længde (mm)"
 
@@ -188,8 +217,23 @@ msgstr "Blæser"
 msgid "Filament Used"
 msgstr "Filament forbrug"
 
+msgid "Filament total:"
+msgstr "Filament i alt:"
+
+msgid "Filament used:"
+msgstr "Filament brugt:"
+
+msgid "Filament:"
+msgstr "Filament:"
+
 msgid "File"
 msgstr "Fil"
+
+msgid "File:"
+msgstr "Fil:"
+
+msgid "Finding ADXL"
+msgstr "At finde ADXL"
 
 msgid "Fine Tuning"
 msgstr "Finjustering"
@@ -204,6 +248,12 @@ msgstr ""
 "Firmware\n"
 "Genstart"
 
+msgid "Flow:"
+msgstr ""
+
+msgid "Flowrate:"
+msgstr ""
+
 msgid "Font Size"
 msgstr "Skriftstørrelse"
 
@@ -217,6 +267,9 @@ msgstr ""
 msgid "Go Back"
 msgstr "Gå tilbage"
 
+msgid "Height:"
+msgstr ""
+
 msgid "Hidden"
 msgstr "Skjult"
 
@@ -225,6 +278,9 @@ msgstr "Skjule"
 
 msgid "Hide sensors in Temp."
 msgstr "Skjul sensorer i Temp."
+
+msgid "Hide temp."
+msgstr ""
 
 msgid "Home"
 msgstr "Home"
@@ -261,6 +317,9 @@ msgstr "Initialiserer"
 
 msgid "Initializing printer..."
 msgstr "Initialiserer printer..."
+
+msgid "Input Shaper"
+msgstr ""
 
 msgid "Interface"
 msgstr "Interface"
@@ -305,6 +364,9 @@ msgstr "Sprog"
 msgid "Large"
 msgstr "Stor"
 
+msgid "Layer:"
+msgstr ""
+
 msgid "Left:"
 msgstr "Resterende:"
 
@@ -326,14 +388,26 @@ msgstr "Makroer"
 msgid "Main Menu"
 msgstr "Hovedmenu"
 
-msgid "Max Accelation"
-msgstr "Maks. acceleration"
+msgid "Max"
+msgstr ""
+
+msgid "Max Acceleration"
+msgstr "Maks. Acceleration"
 
 msgid "Max Acceleration to Deceleration"
 msgstr "Maks. acceleration til decceleration"
 
 msgid "Max Velocity"
 msgstr "Maks. hastighed"
+
+msgid "Measure Both"
+msgstr ""
+
+msgid "Measure X"
+msgstr ""
+
+msgid "Measure Y"
+msgstr ""
 
 msgid "Medium"
 msgstr "Mellem"
@@ -358,6 +432,9 @@ msgstr "Navn"
 
 msgid "Network"
 msgstr "Netværk"
+
+msgid "New"
+msgstr "Ny"
 
 msgid "Nothing selected"
 msgstr "Intet valgt"
@@ -398,6 +475,9 @@ msgstr "Strømstyring"
 msgid "Power On Printer"
 msgstr "Tænd printer"
 
+msgid "Pressure Advance:"
+msgstr ""
+
 msgid "Print"
 msgstr "Print"
 
@@ -412,6 +492,9 @@ msgstr "Printer forbindelser"
 
 msgid "Printing"
 msgstr "Printer"
+
+msgid "Probe Offset"
+msgstr ""
 
 msgid "Probe found applied offset"
 msgstr "Probe fundet anvendt offset"
@@ -443,6 +526,15 @@ msgstr "Genoptag"
 msgid "Retract"
 msgstr "Retract"
 
+msgid "Retraction"
+msgstr ""
+
+msgid "Retraction Length"
+msgstr ""
+
+msgid "Retraction Speed"
+msgstr ""
+
 #, python-format
 msgid "Retry #%s"
 msgstr "Prøv igen #%s"
@@ -453,8 +545,18 @@ msgstr "Gem"
 msgid "Save Config"
 msgstr "Gem Konfiguration"
 
-msgid "Save configuration"
+msgid "Save Z"
+msgstr "Gem Z"
+
+msgid "Save configuration?"
 msgstr "Gem Konfiguration"
+
+msgid "Saved"
+msgstr "Gemt"
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr ""
 
 msgid "Screen DPMS"
 msgstr "Skærm DPMS"
@@ -493,11 +595,17 @@ msgstr "Slicer"
 msgid "Slicer Time correction (%)"
 msgstr "Slicer Tidskorrektion (%)"
 
+msgid "Slicer:"
+msgstr ""
+
 msgid "Small"
 msgstr "Lille"
 
 msgid "Sort by: "
 msgstr "Sortér efter: "
+
+msgid "Sort:"
+msgstr "Sortere: "
 
 msgid "Speed (mm/s)"
 msgstr "Hastighed (mm/s)"
@@ -507,6 +615,9 @@ msgstr "Hastighed +"
 
 msgid "Speed -"
 msgstr "Hastighed -"
+
+msgid "Speed:"
+msgstr "Hastighed"
 
 msgid "Square Corner Velocity"
 msgstr "Hastighed for 90° hjørne"
@@ -550,9 +661,6 @@ msgstr "Temperatur"
 msgid "To apply %s KlipperScreen needs to be restarted"
 msgstr "KlipperScreen skal genstartes for at anvende %s"
 
-msgid "Tool"
-msgstr "Ekstruder"
-
 msgid "Total:"
 msgstr "Total:"
 
@@ -561,6 +669,12 @@ msgstr "Ukendt varmelegeme"
 
 msgid "Unload"
 msgstr "Tilbagetræk"
+
+msgid "Unretract Extra Length"
+msgstr ""
+
+msgid "Unretract Speed"
+msgstr ""
 
 msgid "Up To Date"
 msgstr "Up-to-Date"
@@ -586,6 +700,9 @@ msgstr "X-"
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Flyt hastighed (mm/s)"
 
+msgid "XY Speed (mm/s)"
+msgstr "XY Hastighed (mm/s)"
+
 msgid "Y+"
 msgstr "Y+"
 
@@ -598,11 +715,14 @@ msgstr "Kalibrér Z"
 msgid "Z Move Speed (mm/s)"
 msgstr "Z Flyt hastighed (mm/s)"
 
-msgid "Z Position"
-msgstr "Z-position"
+msgid "Z Speed (mm/s)"
+msgstr "Z Hastighed (mm/s)"
 
 msgid "Z Tilt"
 msgstr "Z-tilt"
+
+msgid "Z offset:"
+msgstr ""
 
 msgid "Z+"
 msgstr "Z+"
@@ -632,17 +752,23 @@ msgstr "mm"
 msgid "mm/s"
 msgstr "mm/s"
 
-msgid "mm/s^2"
-msgstr "mm/s^2"
+msgid "mm/s²"
+msgstr "mm/s²"
+
+#~ msgid "Tool"
+#~ msgstr "Ekstruder"
+
+#~ msgid "Displayed Macros"
+#~ msgstr "Viste makroer"
+
+#~ msgid "Z Position"
+#~ msgstr "Z-position"
 
 #~ msgid "IPv4"
 #~ msgstr "IPv4"
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6"
-
-#~ msgid "Z Offset"
-#~ msgstr "Z-offset"
 
 #~ msgid "Unknown Heater "
 #~ msgstr "Ukendt varmelegeme "

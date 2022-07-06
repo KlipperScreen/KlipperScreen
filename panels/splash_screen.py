@@ -7,8 +7,10 @@ from gi.repository import Gdk, Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return SplashScreenPanel(*args)
+
 
 class SplashScreenPanel(ScreenPanel):
     box = None
@@ -16,11 +18,7 @@ class SplashScreenPanel(ScreenPanel):
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, back)
 
-        self.layout = Gtk.Layout()
-        self.layout.set_size(self._screen.width, self._screen.height)
-
     def initialize(self, panel_name):
-        _ = self.lang.gettext
 
         image = self._gtk.Image("klipper", 3.2)
 
@@ -78,7 +76,6 @@ class SplashScreenPanel(ScreenPanel):
             self.labels['actions'].remove(child)
 
     def show_restart_buttons(self):
-        _ = self.lang.gettext
 
         self.clear_action_bar()
         printer = self._screen.connected_printer
@@ -103,7 +100,6 @@ class SplashScreenPanel(ScreenPanel):
 
     def add_power_button(self, powerdevs):
         if powerdevs is not None:
-            _ = self.lang.gettext
             self.labels['power'] = self._gtk.ButtonImage("shutdown", _("Power On Printer"), "color3")
             self.labels['power'].connect("clicked", self._screen.power_on, powerdevs)
             self.check_power_status()
@@ -129,9 +125,22 @@ class SplashScreenPanel(ScreenPanel):
     def restart(self, widget):
         self._screen._ws.klippy.restart()
 
-
     def shutdown(self, widget):
-        os.system("sudo shutdown -P now")
+
+        if self._screen._ws.is_connected():
+            self._screen._confirm_send_action(widget,
+                                              _("Are you sure you wish to shutdown the system?"),
+                                              "machine.shutdown")
+        else:
+            logging.info("OS Shutdown")
+            os.system("systemctl poweroff")
 
     def restart_system(self, widget):
-        os.system("sudo reboot now")
+
+        if self._screen._ws.is_connected():
+            self._screen._confirm_send_action(widget,
+                                              _("Are you sure you wish to reboot the system?"),
+                                              "machine.reboot")
+        else:
+            logging.info("OS Reboot")
+            os.system("systemctl reboot")

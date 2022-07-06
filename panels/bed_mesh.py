@@ -3,7 +3,7 @@ import logging
 import numpy as np
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gdk, Gtk, Pango
+from gi.repository import Gtk, Pango
 
 import matplotlib.pyplot as plt
 from matplotlib import cm
@@ -15,28 +15,24 @@ from matplotlib.ticker import LinearLocator
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
+
 def create_panel(*args):
     return BedMeshPanel(*args)
+
 
 class BedMeshPanel(ScreenPanel):
     active_mesh = None
     graphs = {}
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
 
         self.show_create = False
 
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_vexpand(True)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        scroll = self._gtk.ScrolledWindow()
 
         # Create a grid for all profiles
         self.labels['profiles'] = Gtk.Grid()
         scroll.add(self.labels['profiles'])
-
 
         addprofile = self._gtk.ButtonImage("increase", "  %s" % _("Add bed mesh profile"),
                                            "color1", .5, Gtk.PositionType.LEFT, False)
@@ -87,12 +83,11 @@ class BedMeshPanel(ScreenPanel):
             self._screen.show_all()
 
     def add_profile(self, profile):
-        _ = self.lang.gettext
 
         frame = Gtk.Frame()
 
         name = Gtk.Label()
-        name.set_markup("<big><b>%s</b></big>" % (profile))
+        name.set_markup("<big><b>%s</b></big>" % profile)
         name.set_hexpand(True)
         name.set_vexpand(True)
         name.set_halign(Gtk.Align.START)
@@ -177,7 +172,7 @@ class BedMeshPanel(ScreenPanel):
         if "default" in pl:
             pl.remove('default')
         profiles = sorted(pl)
-        pos = profiles.index(profile)+1 if profile != "default" else 0
+        pos = profiles.index(profile) + 1 if profile != "default" else 0
 
         self.labels['profiles'].insert_row(pos)
         self.labels['profiles'].attach(self.profiles[profile]['row'], 0, pos, 1, 1)
@@ -240,7 +235,7 @@ class BedMeshPanel(ScreenPanel):
         if "default" in pl:
             pl.remove('default')
         profiles = sorted(pl)
-        pos = profiles.index(profile)+1 if profile != "default" else 0
+        pos = profiles.index(profile) + 1 if profile != "default" else 0
         self.labels['profiles'].remove_row(pos)
         del self.profiles[profile]
 
@@ -261,47 +256,40 @@ class BedMeshPanel(ScreenPanel):
         self.remove_profile(profile)
 
     def show_create_profile(self, widget):
-        _ = self.lang.gettext
 
         for child in self.content.get_children():
             self.content.remove(child)
 
         if "create_profile" not in self.labels:
-            self.labels['create_profile'] = Gtk.VBox()
-            self.labels['create_profile'].set_valign(Gtk.Align.START)
-
-            box = Gtk.Box(spacing=5)
-            box.set_size_request(self._gtk.get_content_width(), self._gtk.get_content_height() -
-                                 self._screen.keyboard_height - 20)
-            box.set_hexpand(True)
-            box.set_vexpand(False)
-            self.labels['create_profile'].add(box)
-
             pl = self._gtk.Label(_("Profile Name:"))
             pl.set_hexpand(False)
-            entry = Gtk.Entry()
-            entry.set_hexpand(True)
-            entry.connect("activate", self.create_profile)
+            self.labels['profile_name'] = Gtk.Entry()
+            self.labels['profile_name'].set_text('')
+            self.labels['profile_name'].set_hexpand(True)
+            self.labels['profile_name'].connect("activate", self.create_profile)
+            self.labels['profile_name'].connect("focus-in-event", self._screen.show_keyboard)
+            self.labels['profile_name'].grab_focus_without_selecting()
 
             save = self._gtk.ButtonImage("sd", _("Save"), "color3")
             save.set_hexpand(False)
             save.connect("clicked", self.create_profile)
 
-
-            self.labels['profile_name'] = entry
-            box.pack_start(pl, False, False, 5)
-            box.pack_start(entry, True, True, 5)
+            box = Gtk.Box()
+            box.pack_start(self.labels['profile_name'], True, True, 5)
             box.pack_start(save, False, False, 5)
 
-        self.show_create = True
-        self.labels['profile_name'].set_text('')
+            self.labels['create_profile'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+            self.labels['create_profile'].set_valign(Gtk.Align.CENTER)
+            self.labels['create_profile'].set_hexpand(True)
+            self.labels['create_profile'].set_vexpand(True)
+            self.labels['create_profile'].pack_start(pl, True, True, 5)
+            self.labels['create_profile'].pack_start(box, True, True, 5)
+
         self.content.add(self.labels['create_profile'])
-        self.content.show()
         self._screen.show_keyboard()
-        self.labels['profile_name'].grab_focus_without_selecting()
+        self.show_create = True
 
     def show_mesh(self, widget, profile):
-        _ = self.lang.gettext
 
         bm = self._printer.get_config_section("bed_mesh %s" % profile)
         if bm is False:
@@ -324,19 +312,19 @@ class BedMeshPanel(ScreenPanel):
                 maxz_mesh = 0.5
             z_range = [minz_mesh, maxz_mesh]
             counts = [len(abm['mesh_matrix'][0]), len(abm['mesh_matrix'])]
-            deltas = [(x_range[1] - x_range[0]) / (counts[0]-1), (y_range[1] - y_range[0]) / (counts[1]-1)]
-            x = [(i*deltas[0])+x_range[0] for i in range(counts[0])]
-            y = [(i*deltas[0])+y_range[0] for i in range(counts[1])]
+            deltas = [(x_range[1] - x_range[0]) / (counts[0] - 1), (y_range[1] - y_range[0]) / (counts[1] - 1)]
+            x = [(i * deltas[0]) + x_range[0] for i in range(counts[0])]
+            y = [(i * deltas[0]) + y_range[0] for i in range(counts[1])]
             x, y = np.meshgrid(x, y)
             z = np.asarray(abm['mesh_matrix'])
         else:
             x_range = [int(bm['min_x']), int(bm['max_x'])]
             y_range = [int(bm['min_y']), int(bm['max_y'])]
             z_range = [min(min(bm['points'])), max(max(bm['points']))]
-            deltas = [(x_range[1] - x_range[0]) / (int(bm['x_count'])-1),
-                      (y_range[1] - y_range[0]) / (int(bm['y_count'])-1)]
-            x = [(i*deltas[0])+x_range[0] for i in range(bm['x_count'])]
-            y = [(i*deltas[0])+y_range[0] for i in range(bm['y_count'])]
+            deltas = [(x_range[1] - x_range[0]) / (int(bm['x_count']) - 1),
+                      (y_range[1] - y_range[0]) / (int(bm['y_count']) - 1)]
+            x = [(i * deltas[0]) + x_range[0] for i in range(bm['x_count'])]
+            y = [(i * deltas[0]) + y_range[0] for i in range(bm['y_count'])]
             x, y = np.meshgrid(x, y)
             z = np.asarray(bm['points'])
 
@@ -349,8 +337,8 @@ class BedMeshPanel(ScreenPanel):
         fig.add_axes(ax)
         surf = ax.plot_surface(x, y, z, cmap=cm.coolwarm, vmin=-0.1, vmax=0.1)
 
-        chartBox = ax.get_position()
-        ax.set_position([chartBox.x0, chartBox.y0+0.1, chartBox.width*.92, chartBox.height])
+        chartbox = ax.get_position()
+        ax.set_position([chartbox.x0, chartbox.y0 + 0.1, chartbox.width * .92, chartbox.height])
 
         ax.set_zlim(z_range[0], z_range[1])
         ax.zaxis.set_major_locator(LinearLocator(5))
@@ -358,7 +346,7 @@ class BedMeshPanel(ScreenPanel):
         ax.zaxis.set_major_formatter('{x:.02f}')
         fig.colorbar(surf, shrink=0.7, aspect=5, pad=0.25)
 
-        box = Gtk.VBox()
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.set_hexpand(True)
         box.set_vexpand(True)
 
@@ -381,7 +369,7 @@ class BedMeshPanel(ScreenPanel):
 
         alloc = canvas_box.get_allocation()
         canvas = FigureCanvas(fig)
-        canvas.set_size_request(alloc.width, self._screen.height/3*2)
+        canvas.set_size_request(alloc.width, self._screen.height / 3 * 2)
         canvas_box.add(canvas)
         canvas_box.show_all()
         # Remove the "matplotlib-canvas" class which forces a white background.
@@ -389,7 +377,6 @@ class BedMeshPanel(ScreenPanel):
         style_ctx = canvas.get_style_context()
         for css_class in style_ctx.list_classes():
             style_ctx.remove_class(css_class)
-
 
     def _close_dialog(self, widget, response):
         widget.destroy()

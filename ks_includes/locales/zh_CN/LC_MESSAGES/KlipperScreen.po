@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-31 11:25-0300\n"
+"POT-Creation-Date: 2022-07-02 13:43-0300\n"
 "PO-Revision-Date: 2022-03-31 11:21-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -31,8 +31,14 @@ msgstr "使用 24 小时制"
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "FIRMWARE_RESTART 可能会解决此问题。"
 
+msgid "ADXL Not Configured"
+msgstr ""
+
 msgid "Abort"
 msgstr "终止"
+
+msgid "Acceleration:"
+msgstr ""
 
 msgid "Accept"
 msgstr "接受"
@@ -45,6 +51,17 @@ msgstr "添加打印机"
 
 msgid "Add bed mesh profile"
 msgstr "添加热床网格"
+
+msgid "Apply"
+msgstr ""
+
+#, python-format
+msgid "Apply %.2f offset to Endstop?"
+msgstr ""
+
+#, python-format
+msgid "Apply %s%.2f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "您确定要紧急停止吗？"
@@ -64,6 +81,9 @@ msgstr "您确定要关闭系统吗?"
 msgid "Auto"
 msgstr "汽车"
 
+msgid "Auto-calibrate"
+msgstr ""
+
 msgid "Auto-scroll"
 msgstr "自动滚屏"
 
@@ -79,8 +99,14 @@ msgstr "Bltouch 发现应用的偏移量"
 msgid "Calibrate"
 msgstr "校准"
 
+msgid "Calibrated"
+msgstr ""
+
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "已校准，保存配置后生效"
+
+msgid "Calibrating..."
+msgstr ""
 
 msgid "Can't set above the maximum:"
 msgstr "设置值超出最大值："
@@ -109,6 +135,12 @@ msgid ""
 msgstr ""
 "检查/tmp/KlipperScreen.log以获取更多信息。\n"
 "请在GitHub上提交问题以寻求帮助。"
+
+msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
 
 msgid "Close"
 msgstr "关闭"
@@ -156,9 +188,6 @@ msgstr "禁用步进电机"
 msgid "Disable XY"
 msgstr "关闭 XY 电机"
 
-msgid "Displayed Macros"
-msgstr "宏命令显示开关"
-
 msgid "Distance (mm)"
 msgstr "挤出距离(mm)"
 
@@ -193,8 +222,23 @@ msgstr "风扇"
 msgid "Filament Used"
 msgstr "已用耗材"
 
+msgid "Filament total:"
+msgstr ""
+
+msgid "Filament used:"
+msgstr ""
+
+msgid "Filament:"
+msgstr ""
+
 msgid "File"
 msgstr "文件"
+
+msgid "File:"
+msgstr ""
+
+msgid "Finding ADXL"
+msgstr ""
 
 msgid "Fine Tuning"
 msgstr "微调"
@@ -209,6 +253,12 @@ msgstr ""
 "重启\n"
 "Firmware"
 
+msgid "Flow:"
+msgstr ""
+
+msgid "Flowrate:"
+msgstr ""
+
 msgid "Font Size"
 msgstr "字体大小"
 
@@ -222,6 +272,9 @@ msgstr ""
 msgid "Go Back"
 msgstr "返回"
 
+msgid "Height:"
+msgstr ""
+
 msgid "Hidden"
 msgstr "隐"
 
@@ -230,6 +283,9 @@ msgstr "隐藏"
 
 msgid "Hide sensors in Temp."
 msgstr "在温度中隐藏传感器。"
+
+msgid "Hide temp."
+msgstr ""
 
 msgid "Home"
 msgstr "归零"
@@ -266,6 +322,9 @@ msgstr "初始化中"
 
 msgid "Initializing printer..."
 msgstr "初始化打印机中..."
+
+msgid "Input Shaper"
+msgstr ""
 
 msgid "Interface"
 msgstr "接口"
@@ -310,6 +369,9 @@ msgstr "界面语言"
 msgid "Large"
 msgstr "大"
 
+msgid "Layer:"
+msgstr ""
+
 msgid "Left:"
 msgstr "剩余时间:"
 
@@ -331,14 +393,26 @@ msgstr "宏"
 msgid "Main Menu"
 msgstr "主菜单"
 
-msgid "Max Accelation"
-msgstr "加速度"
+msgid "Max"
+msgstr ""
+
+msgid "Max Acceleration"
+msgstr ""
 
 msgid "Max Acceleration to Deceleration"
 msgstr "加速到减速度"
 
 msgid "Max Velocity"
 msgstr "速度"
+
+msgid "Measure Both"
+msgstr ""
+
+msgid "Measure X"
+msgstr ""
+
+msgid "Measure Y"
+msgstr ""
 
 msgid "Medium"
 msgstr "中"
@@ -363,6 +437,9 @@ msgstr "文件名称"
 
 msgid "Network"
 msgstr "网络"
+
+msgid "New"
+msgstr ""
 
 msgid "Nothing selected"
 msgstr "未选择任何内容"
@@ -402,6 +479,9 @@ msgstr "电源开关"
 msgid "Power On Printer"
 msgstr "启动打印机"
 
+msgid "Pressure Advance:"
+msgstr ""
+
 msgid "Print"
 msgstr "打印"
 
@@ -416,6 +496,9 @@ msgstr "打印机列表"
 
 msgid "Printing"
 msgstr "印刷"
+
+msgid "Probe Offset"
+msgstr ""
 
 msgid "Probe found applied offset"
 msgstr "Probe 发现应用的偏移量"
@@ -447,6 +530,15 @@ msgstr "恢复"
 msgid "Retract"
 msgstr "回抽"
 
+msgid "Retraction"
+msgstr ""
+
+msgid "Retraction Length"
+msgstr ""
+
+msgid "Retraction Speed"
+msgstr ""
+
 #, python-format
 msgid "Retry #%s"
 msgstr "重试 #%s"
@@ -457,8 +549,18 @@ msgstr "保存"
 msgid "Save Config"
 msgstr "保存配置"
 
-msgid "Save configuration"
-msgstr "即将保存配置文件"
+msgid "Save Z"
+msgstr ""
+
+msgid "Save configuration?"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr ""
 
 msgid "Screen DPMS"
 msgstr "屏幕DPMS"
@@ -497,11 +599,17 @@ msgstr "切片软件"
 msgid "Slicer Time correction (%)"
 msgstr "切片器时间校正 (%)"
 
+msgid "Slicer:"
+msgstr ""
+
 msgid "Small"
 msgstr "小"
 
 msgid "Sort by: "
 msgstr "排序: "
+
+msgid "Sort:"
+msgstr ""
 
 msgid "Speed (mm/s)"
 msgstr "速度（mm/s）"
@@ -511,6 +619,9 @@ msgstr "速度 +"
 
 msgid "Speed -"
 msgstr "速度 -"
+
+msgid "Speed:"
+msgstr ""
 
 msgid "Square Corner Velocity"
 msgstr "转角速度"
@@ -550,9 +661,6 @@ msgstr "设置温度"
 msgid "To apply %s KlipperScreen needs to be restarted"
 msgstr "要应用 %s 主题，需要重新启动 KlipperScreen"
 
-msgid "Tool"
-msgstr "工具"
-
 msgid "Total:"
 msgstr "全部的："
 
@@ -562,15 +670,20 @@ msgstr "未知加热器"
 msgid "Unload"
 msgstr "退出耗材"
 
+msgid "Unretract Extra Length"
+msgstr ""
+
+msgid "Unretract Speed"
+msgstr ""
+
 msgid "Up To Date"
 msgstr "最新"
 
 msgid "Update"
 msgstr "更新"
 
-#, fuzzy
 msgid "Updating"
-msgstr "更新"
+msgstr ""
 
 msgid "Uploaded"
 msgstr "上传时间"
@@ -587,6 +700,9 @@ msgstr "X-"
 msgid "XY Move Speed (mm/s)"
 msgstr "XY 移动速度 (mm/s)"
 
+msgid "XY Speed (mm/s)"
+msgstr ""
+
 msgid "Y+"
 msgstr "Y+"
 
@@ -599,11 +715,14 @@ msgstr "Z 校准"
 msgid "Z Move Speed (mm/s)"
 msgstr "Z 移动速度 (mm/s)"
 
-msgid "Z Position"
-msgstr "Z 位置"
+msgid "Z Speed (mm/s)"
+msgstr ""
 
 msgid "Z Tilt"
 msgstr "Z 倾斜校准"
+
+msgid "Z offset:"
+msgstr ""
 
 msgid "Z+"
 msgstr "Z+"
@@ -631,17 +750,23 @@ msgstr "mm"
 msgid "mm/s"
 msgstr "mm/s"
 
-msgid "mm/s^2"
-msgstr "mm/s^2"
+msgid "mm/s²"
+msgstr "mm/s²"
+
+#~ msgid "Tool"
+#~ msgstr "工具"
+
+#~ msgid "Displayed Macros"
+#~ msgstr "宏命令显示开关"
+
+#~ msgid "Z Position"
+#~ msgstr "Z 位置"
 
 #~ msgid "IPv4"
 #~ msgstr "IPv4 地址"
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6 地址"
-
-#~ msgid "Z Offset"
-#~ msgstr "Z 偏移"
 
 #~ msgid "Unknown Heater "
 #~ msgstr "未知加热器 "
@@ -704,9 +829,6 @@ msgstr "mm/s^2"
 
 #~ msgid "Fast"
 #~ msgstr "加速"
-
-#~ msgid "Set Speed"
-#~ msgstr "设置速度"
 
 #~ msgid "Slow"
 #~ msgstr "减速"

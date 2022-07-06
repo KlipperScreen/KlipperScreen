@@ -2,20 +2,17 @@ import logging
 import os
 
 import gi
+
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib
 
-class KlippyFiles():
+
+class KlippyFiles:
     def __init__(self, screen):
         self._screen = screen
         self.callbacks = []
         self.files = {}
         self.filelist = []
-        self.thumbnail_dir = "/tmp/.KS-thumbnails"
-
-        if not os.path.exists(self.thumbnail_dir):
-            os.makedirs(self.thumbnail_dir)
-
         self.gcodes_path = None
 
     def initialize(self):
@@ -23,7 +20,7 @@ class KlippyFiles():
         if "virtual_sdcard" in self._screen.printer.get_config_section_list():
             vsd = self._screen.printer.get_config_section("virtual_sdcard")
             if "path" in vsd:
-                self.gcodes_path = vsd['path']
+                self.gcodes_path = os.path.expanduser(vsd['path'])
         logging.info("Gcodes path: %s" % self.gcodes_path)
 
     def reset(self):
@@ -31,7 +28,6 @@ class KlippyFiles():
         self.callbacks = None
         self.files = None
         self.filelist = None
-        self.thumbnail_dir = None
         self.gcodes_path = None
         self._screen = None
 
@@ -150,8 +146,11 @@ class KlippyFiles():
             return True
         return False
 
-    def get_thumbnail_location(self, filename):
+    def get_thumbnail_location(self, filename, small=False):
         thumb = self.files[filename]['thumbnails'][0]
+        if small and len(self.files[filename]['thumbnails']) > 1:
+            if self.files[filename]['thumbnails'][0]['width'] > self.files[filename]['thumbnails'][1]['width']:
+                thumb = self.files[filename]['thumbnails'][1]
         if thumb['local'] is False:
             return ['http', thumb['path']]
         return ['file', thumb['path']]
@@ -180,7 +179,7 @@ class KlippyFiles():
             self.run_callbacks(deletedfiles=[filename])
 
     def ret_file_data(self, filename):
-        print("Getting file info for %s" % (filename))
+        print("Getting file info for %s" % filename)
         self._screen._ws.klippy.get_file_metadata(filename, self._callback)
 
     def run_callbacks(self, newfiles=[], deletedfiles=[], mods=[]):

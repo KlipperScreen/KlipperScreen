@@ -4,11 +4,15 @@
 ![Main Menu](img/panels/main_panel.png)
 
 ### Job Status
+```py
+panel: job_status
+```
 ![Job Status](img/panels/job_status.png)
 
 ### Bed Level
-type: bed_level
-
+```py
+panel: bed_level
+```
 ![Bed Level](img/panels/bed_level.png)
 
 The bed level panel has the ability to have preset locations from Klipper. Please see documentation on the following
@@ -24,76 +28,100 @@ for _Screws Calibrate_ will appear. This button runs the SCREWS_TILT_CALCULATE c
 panel.
 
 ### Bed Mesh
-type: bed_mesh theme:material-dark
-
+```py
+panel: bed_mesh
+```
 ![Bed Mesh](img/panels/bed_mesh.png)
 
 ### Extrude
-type: extrude theme:material-dark
-
+```py
+panel: extrude theme:material-dark
+```
 ![Extrude](img/panels/extrude.png)
 
 ### Fan
-type: fan
-
+```py
+panel: fan
+```
 ![Fan](img/panels/fan.png)
 
 ### Fine Tune
-type: fine_tune theme:custom
-
+```py
+panel: fine_tune
+```
 ![Fine Tune Panel](img/panels/fine_tune.png)
 
 ### Gcode Macros
-type: gcode_macros theme: material-darker
-
+```py
+panel: gcode_macros
+```
 ![Gcode Macros Panel](img/panels/gcode_macros.png)
 
 ### Menu
-type: menu
-
 ![Menu Panel](img/panels/menu.png)
 
 ### Move
-type: move
-
+```py
+panel: move
+```
 ![Move Panel](img/panels/move.png)
 
 ### Network
-type: network
-
+```py
+panel: network
+```
 ![Network Panel](img/panels/network.png)
 
 ### Power
-type: power
-
+```py
+panel: power
+```
 ![Power](img/panels/power.png)
 
 ### Print
-type: print
-
+```py
+panel: print
+```
 ![Print Panel](img/panels/print.png)
 
 ### Settings
-type: settings theme:colorized
-
+```py
+panel: settings
+```
 ![Settings](img/panels/settings.png)
 
 ### System
-type: system
-
+```py
+panel: system
+```
 ![System Panel](img/panels/system.png)
 
 ### Temperature
-type: temperature theme:custom
-
+```py
+panel: temperature
+```
 ![Temperature](img/panels/temperature.png)
 
 ### Z Calibrate
-type: zcalibrate
-
+```py
+panel: zcalibrate
+```
 ![Z Calibrate](img/panels/zcalibrate.png)
 
 ### Limits
-type: limits theme: material-dark
-
+```py
+panel: limits
+```
 ![Limits](img/panels/limits.png)
+
+### Retraction
+```py
+panel: retraction
+```
+![Limits](img/panels/retraction.png)
+
+### Input Shapers
+```py
+panel: input_shaper
+```
+![Limits](img/panels/input_shaper.png)
