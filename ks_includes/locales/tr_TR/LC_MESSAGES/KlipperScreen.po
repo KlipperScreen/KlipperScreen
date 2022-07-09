@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 14:53-0300\n"
+"POT-Creation-Date: 2022-07-02 13:43-0300\n"
 "PO-Revision-Date: 2022-06-05 21:11+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -393,6 +393,9 @@ msgstr "Makrolar"
 msgid "Main Menu"
 msgstr "Ana Menü"
 
+msgid "Max"
+msgstr ""
+
 msgid "Max Acceleration"
 msgstr "Maksimum Hızlanma"
 
@@ -663,9 +666,6 @@ msgstr "Sıcaklık"
 msgid "To apply %s KlipperScreen needs to be restarted"
 msgstr "Uygulamak için %s KlipperScreen yeniden başlatılmalı"
 
-msgid "Tool"
-msgstr "Araç"
-
 msgid "Total:"
 msgstr "Toplam:"
 
@@ -759,6 +759,9 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Tool"
+#~ msgstr "Araç"
 
 #~ msgid "Displayed Macros"
 #~ msgstr "Görüntülenen Makrolar"

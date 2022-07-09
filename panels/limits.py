@@ -2,7 +2,7 @@ import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gdk, Gtk, Pango
+from gi.repository import Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
@@ -15,7 +15,7 @@ class LimitsPanel(ScreenPanel):
     values = {}
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.limits = {}
 
         scroll = self._gtk.ScrolledWindow()

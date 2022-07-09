@@ -3,7 +3,7 @@ import logging
 import numpy as np
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gdk, Gtk, Pango
+from gi.repository import Gtk, Pango
 
 import matplotlib.pyplot as plt
 from matplotlib import cm
@@ -25,7 +25,6 @@ class BedMeshPanel(ScreenPanel):
     graphs = {}
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
 
         self.show_create = False
 
@@ -84,7 +83,6 @@ class BedMeshPanel(ScreenPanel):
             self._screen.show_all()
 
     def add_profile(self, profile):
-        _ = self.lang.gettext
 
         frame = Gtk.Frame()
 
@@ -258,46 +256,40 @@ class BedMeshPanel(ScreenPanel):
         self.remove_profile(profile)
 
     def show_create_profile(self, widget):
-        _ = self.lang.gettext
 
         for child in self.content.get_children():
             self.content.remove(child)
 
         if "create_profile" not in self.labels:
-            self.labels['create_profile'] = Gtk.VBox()
-            self.labels['create_profile'].set_valign(Gtk.Align.START)
-
-            box = Gtk.Box(spacing=5)
-            box.set_size_request(self._gtk.get_content_width(), self._gtk.get_content_height() -
-                                 self._screen.keyboard_height - 20)
-            box.set_hexpand(True)
-            box.set_vexpand(False)
-            self.labels['create_profile'].add(box)
-
             pl = self._gtk.Label(_("Profile Name:"))
             pl.set_hexpand(False)
-            entry = Gtk.Entry()
-            entry.set_hexpand(True)
-            entry.connect("activate", self.create_profile)
+            self.labels['profile_name'] = Gtk.Entry()
+            self.labels['profile_name'].set_text('')
+            self.labels['profile_name'].set_hexpand(True)
+            self.labels['profile_name'].connect("activate", self.create_profile)
+            self.labels['profile_name'].connect("focus-in-event", self._screen.show_keyboard)
+            self.labels['profile_name'].grab_focus_without_selecting()
 
             save = self._gtk.ButtonImage("sd", _("Save"), "color3")
             save.set_hexpand(False)
             save.connect("clicked", self.create_profile)
 
-            self.labels['profile_name'] = entry
-            box.pack_start(pl, False, False, 5)
-            box.pack_start(entry, True, True, 5)
+            box = Gtk.Box()
+            box.pack_start(self.labels['profile_name'], True, True, 5)
             box.pack_start(save, False, False, 5)
 
-        self.show_create = True
-        self.labels['profile_name'].set_text('')
+            self.labels['create_profile'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+            self.labels['create_profile'].set_valign(Gtk.Align.CENTER)
+            self.labels['create_profile'].set_hexpand(True)
+            self.labels['create_profile'].set_vexpand(True)
+            self.labels['create_profile'].pack_start(pl, True, True, 5)
+            self.labels['create_profile'].pack_start(box, True, True, 5)
+
         self.content.add(self.labels['create_profile'])
-        self.content.show()
         self._screen.show_keyboard()
-        self.labels['profile_name'].grab_focus_without_selecting()
+        self.show_create = True
 
     def show_mesh(self, widget, profile):
-        _ = self.lang.gettext
 
         bm = self._printer.get_config_section("bed_mesh %s" % profile)
         if bm is False:
@@ -354,7 +346,7 @@ class BedMeshPanel(ScreenPanel):
         ax.zaxis.set_major_formatter('{x:.02f}')
         fig.colorbar(surf, shrink=0.7, aspect=5, pad=0.25)
 
-        box = Gtk.VBox()
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.set_hexpand(True)
         box.set_vexpand(True)
 

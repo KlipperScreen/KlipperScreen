@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  2022-06-02 14:53-0300\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 14:53-0300\n"
+"POT-Creation-Date: 2022-07-02 13:43-0300\n"
 "PO-Revision-Date: 2022-06-03 10:02+0300\n"
 "Last-Translator: \n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -15,7 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.0.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -394,6 +395,9 @@ msgstr "Макрос"
 msgid "Main Menu"
 msgstr "Main Menu"
 
+msgid "Max"
+msgstr ""
+
 msgid "Max Acceleration"
 msgstr "Макс. прискорення"
 
@@ -665,9 +669,6 @@ msgstr "Температура"
 msgid "To apply %s KlipperScreen needs to be restarted"
 msgstr "Щоб застосувати %s, потрібно перезапустити KlipperScreen"
 
-msgid "Tool"
-msgstr "Інструмент"
-
 msgid "Total:"
 msgstr "Всього:"
 
@@ -763,3 +764,6 @@ msgstr "мм/с"
 
 msgid "mm/s²"
 msgstr "мм/с²"
+
+#~ msgid "Tool"
+#~ msgstr "Інструмент"

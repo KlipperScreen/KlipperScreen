@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 14:53-0300\n"
+"POT-Creation-Date: 2022-07-02 13:43-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -27,13 +27,13 @@ msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "A FIRMWARE_RESTART javíthatja a problémát."
 
 msgid "ADXL Not Configured"
-msgstr ""
+msgstr "ADXL nincs konfigurálva"
 
 msgid "Abort"
 msgstr "Megszakít"
 
 msgid "Acceleration:"
-msgstr ""
+msgstr "Gyorsulás:"
 
 msgid "Accept"
 msgstr "Elfogad"
@@ -48,15 +48,15 @@ msgid "Add bed mesh profile"
 msgstr "Ágyháló profil hozzáadása"
 
 msgid "Apply"
-msgstr ""
+msgstr "Alkalmaz"
 
 #, python-format
 msgid "Apply %.2f offset to Endstop?"
-msgstr ""
+msgstr "Alkalmaz %.2f eltolást az Endstopra?"
 
 #, python-format
 msgid "Apply %s%.2f offset to Probe?"
-msgstr ""
+msgstr "Alkalmaz %s%.2f eltolást a szondára?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Biztosan Vészleállítást végez?"
@@ -77,7 +77,7 @@ msgid "Auto"
 msgstr "Auto"
 
 msgid "Auto-calibrate"
-msgstr ""
+msgstr "Automatikus kalibrálás"
 
 msgid "Auto-scroll"
 msgstr "Automatikus görgetés"
@@ -95,13 +95,13 @@ msgid "Calibrate"
 msgstr "Kalibrálás"
 
 msgid "Calibrated"
-msgstr ""
+msgstr "Kalibrálva"
 
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "Kalibrálva! Mentse el a konfigurációt, hogy az állandó legyen"
 
 msgid "Calibrating..."
-msgstr ""
+msgstr "Kalibrálás..."
 
 msgid "Can't set above the maximum:"
 msgstr "Nem állítható a maximum fölé:"
@@ -132,10 +132,10 @@ msgstr ""
 "Segítségért küldj be egy hibajegyet a GitHubon."
 
 msgid "Check ADXL Wiring"
-msgstr ""
+msgstr "Ellenőrizze az ADXL kábelezést"
 
 msgid "Clear"
-msgstr ""
+msgstr "Egyértelmű"
 
 msgid "Close"
 msgstr "Bezárás"
@@ -218,22 +218,22 @@ msgid "Filament Used"
 msgstr "Használt nyomtatószál"
 
 msgid "Filament total:"
-msgstr ""
+msgstr "Összes nyomtatószál:"
 
 msgid "Filament used:"
-msgstr ""
+msgstr "Használt nyomtatószál:"
 
 msgid "Filament:"
-msgstr ""
+msgstr "Nyomtatószál:"
 
 msgid "File"
 msgstr "Fájl"
 
 msgid "File:"
-msgstr ""
+msgstr "Fájl:"
 
 msgid "Finding ADXL"
-msgstr ""
+msgstr "ADXL keresése"
 
 msgid "Fine Tuning"
 msgstr "Finomhangolás"
@@ -249,10 +249,10 @@ msgstr ""
 "Újraindítása"
 
 msgid "Flow:"
-msgstr ""
+msgstr "Folyam:"
 
 msgid "Flowrate:"
-msgstr ""
+msgstr "Áramlás:"
 
 msgid "Font Size"
 msgstr "Betűméret"
@@ -268,7 +268,7 @@ msgid "Go Back"
 msgstr "Visszalépés"
 
 msgid "Height:"
-msgstr ""
+msgstr "Magasság:"
 
 msgid "Hidden"
 msgstr "Rejtett"
@@ -280,7 +280,7 @@ msgid "Hide sensors in Temp."
 msgstr "Szenzorok elrejtése Hőfok."
 
 msgid "Hide temp."
-msgstr ""
+msgstr "Hőfok elrejtése"
 
 msgid "Home"
 msgstr "Kezdőpontok"
@@ -319,7 +319,7 @@ msgid "Initializing printer..."
 msgstr "Nyomtató inicializálása..."
 
 msgid "Input Shaper"
-msgstr ""
+msgstr "Bemeneti alakító"
 
 msgid "Interface"
 msgstr "Felület"
@@ -365,7 +365,7 @@ msgid "Large"
 msgstr "Nagy"
 
 msgid "Layer:"
-msgstr ""
+msgstr "Réteg:"
 
 msgid "Left:"
 msgstr "Bal:"
@@ -388,8 +388,11 @@ msgstr "Makrók"
 msgid "Main Menu"
 msgstr "Főmenü"
 
+msgid "Max"
+msgstr "Max"
+
 msgid "Max Acceleration"
-msgstr ""
+msgstr "Max gyorsulás"
 
 msgid "Max Acceleration to Deceleration"
 msgstr "Lassulás max gyorsulása"
@@ -398,13 +401,13 @@ msgid "Max Velocity"
 msgstr "Max sebesség"
 
 msgid "Measure Both"
-msgstr ""
+msgstr "Mindkettő mérése"
 
 msgid "Measure X"
-msgstr ""
+msgstr "X mérése"
 
 msgid "Measure Y"
-msgstr ""
+msgstr "Y mérése"
 
 msgid "Medium"
 msgstr "Közepes"
@@ -431,7 +434,7 @@ msgid "Network"
 msgstr "Hálózat"
 
 msgid "New"
-msgstr ""
+msgstr "Új"
 
 msgid "Nothing selected"
 msgstr "Nincs kiválasztva"
@@ -473,7 +476,7 @@ msgid "Power On Printer"
 msgstr "Nyomtató bekapcsolása"
 
 msgid "Pressure Advance:"
-msgstr ""
+msgstr "Nyomás előtolás:"
 
 msgid "Print"
 msgstr "Nyomtatás"
@@ -491,7 +494,7 @@ msgid "Printing"
 msgstr "Nyomtatás"
 
 msgid "Probe Offset"
-msgstr ""
+msgstr "Szonda eltolás"
 
 msgid "Probe found applied offset"
 msgstr "A szonda alkalmazott eltolást talált"
@@ -524,13 +527,13 @@ msgid "Retract"
 msgstr "Visszahúz"
 
 msgid "Retraction"
-msgstr ""
+msgstr "Visszahúzás"
 
 msgid "Retraction Length"
-msgstr ""
+msgstr "Visszahúzási hossz"
 
 msgid "Retraction Speed"
-msgstr ""
+msgstr "Visszahúzási sebesség"
 
 #, python-format
 msgid "Retry #%s"
@@ -543,17 +546,17 @@ msgid "Save Config"
 msgstr "Konfiguráció mentése"
 
 msgid "Save Z"
-msgstr ""
+msgstr "Z mentése"
 
 msgid "Save configuration?"
-msgstr ""
+msgstr "Menti a konfigurációt?"
 
 msgid "Saved"
-msgstr ""
+msgstr "Mentve"
 
 #, python-format
 msgid "Saved offset: %s"
-msgstr ""
+msgstr "Eltolás mentve: %s"
 
 msgid "Screen DPMS"
 msgstr "Képernyő DPMS"
@@ -593,7 +596,7 @@ msgid "Slicer Time correction (%)"
 msgstr "Szeletelő idő javítása (%)"
 
 msgid "Slicer:"
-msgstr ""
+msgstr "Szeletelő:"
 
 msgid "Small"
 msgstr "Kicsi"
@@ -602,10 +605,10 @@ msgid "Sort by: "
 msgstr "Sorrend: "
 
 msgid "Sort:"
-msgstr ""
+msgstr "Fajta:"
 
 msgid "Speed (mm/s)"
-msgstr "Sebesség (mm/s)"
+msgstr "Sebesség (mm/mp)"
 
 msgid "Speed +"
 msgstr "Sebesség +"
@@ -614,7 +617,7 @@ msgid "Speed -"
 msgstr "Sebesség -"
 
 msgid "Speed:"
-msgstr ""
+msgstr "Sebesség:"
 
 msgid "Square Corner Velocity"
 msgstr "Sebesség a sarkokban"
@@ -658,9 +661,6 @@ msgstr "Hőfok"
 msgid "To apply %s KlipperScreen needs to be restarted"
 msgstr "A %s KlipperScreen alkalmazásához újra kell indítani"
 
-msgid "Tool"
-msgstr "Eszköz"
-
 msgid "Total:"
 msgstr "Teljes:"
 
@@ -671,10 +671,10 @@ msgid "Unload"
 msgstr "Kiadás"
 
 msgid "Unretract Extra Length"
-msgstr ""
+msgstr "Extra hossz visszahúzása"
 
 msgid "Unretract Speed"
-msgstr ""
+msgstr "Visszahúzási sebesség"
 
 msgid "Up To Date"
 msgstr "Naprakész"
@@ -698,10 +698,10 @@ msgid "X-"
 msgstr "X-"
 
 msgid "XY Move Speed (mm/s)"
-msgstr "XY Mozgási seb. (mm/s)"
+msgstr "XY Mozgási seb. (mm/mp)"
 
 msgid "XY Speed (mm/s)"
-msgstr ""
+msgstr "XY Sebesség (mm/mp)"
 
 msgid "Y+"
 msgstr "Y+"
@@ -713,16 +713,16 @@ msgid "Z Calibrate"
 msgstr "Z Kalibrálás"
 
 msgid "Z Move Speed (mm/s)"
-msgstr "Z Mozgási seb. (mm/s)"
+msgstr "Z Mozgási seb. (mm/mp)"
 
 msgid "Z Speed (mm/s)"
-msgstr ""
+msgstr "Z Sebesség (mm/mp)"
 
 msgid "Z Tilt"
 msgstr "Z Dőlés"
 
 msgid "Z offset:"
-msgstr ""
+msgstr "Z eltolás:"
 
 msgid "Z+"
 msgstr "Z+"
@@ -732,8 +732,8 @@ msgstr "Z-"
 
 msgid "commit"
 msgid_plural "commits"
-msgstr[0] "változás"
-msgstr[1] "változás"
+msgstr[0] "ajánlás"
+msgstr[1] "ajánlások"
 
 msgid "dBm"
 msgstr "dBm"
@@ -741,7 +741,7 @@ msgstr "dBm"
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "óra"
-msgstr[1] "óra"
+msgstr[1] "órák"
 
 msgid "minutes"
 msgstr "perc"
@@ -750,10 +750,13 @@ msgid "mm"
 msgstr "mm"
 
 msgid "mm/s"
-msgstr "mm/s"
+msgstr "mm/mp"
 
 msgid "mm/s²"
-msgstr "mm/s²"
+msgstr "mm/mp²"
+
+#~ msgid "Tool"
+#~ msgstr "Eszköz"
 
 #~ msgid "Displayed Macros"
 #~ msgstr "Megjelenített makrók"

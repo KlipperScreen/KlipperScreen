@@ -23,7 +23,6 @@ class ZCalibratePanel(ScreenPanel):
         super().__init__(screen, title, False)
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
 
         if self._printer.config_section_exists("probe"):
             self.z_offset = self._screen.printer.get_config_section("probe")['z_offset']
@@ -57,7 +56,7 @@ class ZCalibratePanel(ScreenPanel):
         self.widgets['cancel'].connect("clicked", self.abort)
 
         functions = ["endstop", "probe", "mesh", "delta", "delta_manual"]
-        pobox = Gtk.VBox()
+        pobox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         endstop = (self._printer.config_section_exists("stepper_z") and
                    not self._screen.printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"))
         if endstop:
@@ -171,12 +170,12 @@ class ZCalibratePanel(ScreenPanel):
             printer_cfg = self._config.get_printer_config(printer)
             logging.info(printer_cfg)
             if printer_cfg is not None:
-                x_position = printer_cfg.getint("calibrate_x_position", 0)
-                y_position = printer_cfg.getint("calibrate_y_position", 0)
+                x_position = printer_cfg.getfloat("calibrate_x_position", 0)
+                y_position = printer_cfg.getfloat("calibrate_y_position", 0)
             elif 'z_calibrate_position' in self._config.get_config():
                 # OLD global way, this should be deprecated
-                x_position = self._config.get_config()['z_calibrate_position'].getint("calibrate_x_position", 0)
-                y_position = self._config.get_config()['z_calibrate_position'].getint("calibrate_y_position", 0)
+                x_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_x_position", 0)
+                y_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_y_position", 0)
 
             if x_position > 0 and y_position > 0:
                 logging.debug("Configured probing position X: %.0f Y: %.0f", x_position, y_position)
@@ -225,7 +224,6 @@ class ZCalibratePanel(ScreenPanel):
         return max(0, int(float(pos) - offset))
 
     def process_update(self, action, data):
-        _ = self.lang.gettext
 
         if action == "notify_status_update":
             if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":

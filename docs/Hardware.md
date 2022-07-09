@@ -11,15 +11,47 @@ There are no recommended screens, but the minimum supported resolution is 480x32
 * [3.5" RPi Display](http://www.lcdwiki.com/3.5inch_RPi_Display)
 * [5" HDMI Display-B](http://lcdwiki.com/5inch_HDMI_Display-B)
 * [VoCore](https://klipper.discourse.group/t/hardware-known-to-work-with-klipperscreen/35/7)
-* [Android Phone](https://klipper.discourse.group/t/how-to-klipperscreen-on-android-smart-phones/1196)
 * [WAVESHARE 4.3 inch DSI LCD](https://www.waveshare.com/4.3inch-dsi-lcd.htm)
 * [DFrobot DFR0550](https://wiki.dfrobot.com/5%27%27TFT-Display_with_Touchscreen_V1.0_SKU_DFR0550)
+* [Android phone](Android.md)
+
 
 * [More known hardware in the klipper discourse](https://klipper.discourse.group/t/hardware-known-to-work-with-klipperscreen/35)
 
 ### Configuration
 
-Follow the manufacturer instructions on how to install your screen. In general if you see a white screen, then it's not properly installed, ensure that you at least see a console, Then ![install](Installation.md) KlipperScreen, if you are having troubles refer to the ![troubleshooting page](Troubleshooting.md) for further information.
+Follow the manufacturer instructions on how to install your screen. In general if you see a white screen, then it's not properly installed, ensure that you at least see a console, Then [install](Installation.md) KlipperScreen, if you are having troubles refer to the [troubleshooting page](Troubleshooting.md) for further information.
+
+## Screen rotation
+Currently there is no support for rotation at runtime, do not use xrandr to rotate the screen.
+Configure the server to start in the desired orientation, there are many ways to achieve this, here is one:
+
+
+Create /usr/share/X11/xorg.conf.d/90-monitor.conf
+```bash
+sudo nano /usr/share/X11/xorg.conf.d/90-monitor.conf
+```
+
+Paste this section modifying the options to suit your needs:
+```
+Section "Monitor"
+    Identifier "DPI-1"
+    # This identifier would be the same as the name of the connector printed by xrandr.
+    # it can be "HDMI-0" "DisplayPort-0", "DSI-0", "DVI-0", "DPI-0" etc
+
+    Option "Rotate" "left"
+    # Valid rotation options are normal,inverted,left,right
+
+
+    Option "PreferredMode" "1920x1080"
+    # May be necesary if you are not getting your prefered resolution.
+EndSection
+```
+Save the file and restart KlipperScreen.
+
+```bash
+sudo service KlipperScreen restart
+```
 
 
 ## Touchscreen touch rotation

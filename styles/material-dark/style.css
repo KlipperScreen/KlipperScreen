@@ -6,12 +6,10 @@
 
 window {
     background-color: #121212;
-    background-image: url("./styles/material-dark/background.svg");
-    background-size: cover;
 }
 
 button {
-    background-color: rgba(0,0,0,0);
+    background-color: #121212;
 }
 
 button:active {
@@ -19,7 +17,7 @@ button:active {
 }
 
 .button_active {
-    background-color: rgba(0,0,0,0);
+    background-color: #000000;
     border-color: #d81549;
     border-style: dashed;
     border-width: .25em;
@@ -27,25 +25,25 @@ button:active {
 }
 
 button.color1 {
-    background-color: rgba(0,0,0,0.5);
+    background-color: #090909;
     border-color: #d46900;
     border-radius: 1em;
 }
 
 button.color2 {
-    background-color: rgba(0,0,0,0.5);
+    background-color: #090909;
     border-color: #ed3c63;
     border-radius: 1em;
 }
 
 button.color3 {
-    background-color: rgba(0,0,0,0.5);
+    background-color: #090909;
     border-color: #849900;
     border-radius: 1em;
 }
 
 button.color4 {
-    background-color: rgba(0,0,0,0.5);
+    background-color: #090909;
     border-color: #007db4;
     border-radius: 1em;
 }
@@ -59,7 +57,7 @@ button.active {
 }
 
 button.update {
-    background-color: rgba(0,0,0,0.5);
+    background-color: #090909;
     border: 0;
     border-bottom: .3em solid;
     border-bottom-color: #849900;
@@ -67,7 +65,7 @@ button.update {
 }
 
 button.invalid {
-    background-color: rgba(0,0,0,0.5);
+    background-color: #090909;
     border: 0;
     border-bottom: .3em solid;
     border-bottom-color: #B71C1C;
@@ -89,7 +87,7 @@ switch:checked {
 
 entry {
     background-color: #1f1f1f;
-    border-color: rgba(0,0,0,0);
+    border-color: #1f1f1f;
 }
 
 frame {
@@ -127,7 +125,7 @@ scale-mark {
 }
 
 scrollbar, scrollbar button, scrollbar trough {
-    background-color: rgba(0,0,0,0);
+    background-color: #121212;
 }
 
 scrollbar slider {
@@ -145,12 +143,10 @@ textview .time {
 .dialog {
     border: #121212;
     background-color: #121212;
-    background-image: url("./styles/material-dark/background.svg");
-    background-size: cover;
 }
 
 .dialog button {
-    background-color: rgba(0,0,0,0.5);
+    background-color: #090909;
     border-bottom-color: #1f1f1f;
     border-radius: .75em;
 }
@@ -165,7 +161,7 @@ textview .time {
 
 .tempbutton_top, .tempbutton, .tempbutton_bottom, .distbutton_top, .distbutton, .distbutton_bottom  {
     border-color: #121212;
-    background-color: rgba(0,0,0,0.5);
+    background-color: #090909;
 }
 
 .distbutton_active {
@@ -184,13 +180,17 @@ textview .time {
     background-color: #006412;
 }
 
+.message_popup_warning, .message_popup_warning button {
+    background-color: #EF6C00;
+}
+
 .message_popup_error, .message_popup_error button {
     background-color: #B71C1C;
 }
 
 .numpad_tleft, .numpad_top, .numpad_tright, .numpad_left, .numpad_button, .numpad_right, .numpad_bleft, .numpad_bottom, .numpad_bright {
     border-color: #121212;
-    background-color: rgba(0,0,0,0.5);
+    background-color: #090909;
 }
 
 .printing-status {

@@ -2,7 +2,7 @@ import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gdk, Gtk, GLib, Pango
+from gi.repository import Gtk, GLib, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
@@ -13,24 +13,23 @@ def create_panel(*args):
 
 class MacroPanel(ScreenPanel):
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.macros = {}
         self.loaded_macros = []
-        self.sort_char = [" ↑", " ↓"]
         self.sort_reverse = False
         self.menu = ['macros_menu']
 
         sort = Gtk.Label(_("Sort:"))
         sort.set_hexpand(False)
         self.sort_lbl = _("Name")
-        self.sort_btn = self._gtk.Button(self.sort_lbl + self.sort_char[0], "color1")
+        self.sort_btn = self._gtk.ButtonImage("arrow-up", self.sort_lbl, "color1", .66, Gtk.PositionType.RIGHT, False)
         self.sort_btn.connect("clicked", self.change_sort)
         self.sort_btn.set_hexpand(True)
         adjust = self._gtk.ButtonImage("settings", None, "color2", 1, Gtk.PositionType.LEFT, False)
         adjust.connect("clicked", self.load_menu, 'options')
         adjust.set_hexpand(False)
 
-        sbox = Gtk.HBox()
+        sbox = Gtk.Box()
         sbox.set_vexpand(False)
         sbox.pack_start(sort, False, False, 5)
         sbox.pack_start(self.sort_btn, True, True, 5)
@@ -40,7 +39,7 @@ class MacroPanel(ScreenPanel):
         self.labels['macros'] = Gtk.Grid()
         self.labels['macros_list'].add(self.labels['macros'])
 
-        self.labels['macros_menu'] = Gtk.VBox()
+        self.labels['macros_menu'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.labels['macros_menu'].set_vexpand(True)
         self.labels['macros_menu'].pack_start(sbox, False, False, 0)
         self.labels['macros_menu'].pack_start(self.labels['macros_list'], True, True, 0)
@@ -74,10 +73,10 @@ class MacroPanel(ScreenPanel):
         btn.set_hexpand(False)
         btn.set_halign(Gtk.Align.END)
 
-        labels = Gtk.VBox()
+        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)
 
-        dev = Gtk.HBox(spacing=5)
+        dev = Gtk.Box(spacing=5)
         dev.add(labels)
         dev.add(btn)
 
@@ -102,9 +101,9 @@ class MacroPanel(ScreenPanel):
     def change_sort(self, widget):
         self.sort_reverse ^= True
         if self.sort_reverse:
-            self.sort_btn.set_label(self.sort_lbl + self.sort_char[1])
+            self.sort_btn.set_image(self._gtk.Image("arrow-down", .66))
         else:
-            self.sort_btn.set_label(self.sort_lbl + self.sort_char[0])
+            self.sort_btn.set_image(self._gtk.Image("arrow-up", .66))
         self.sort_btn.show()
 
         GLib.idle_add(self.reload_macros)

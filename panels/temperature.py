@@ -27,12 +27,14 @@ class TemperaturePanel(ScreenPanel):
         # When printing start in temp_delta mode and only select tools
         state = self._printer.get_state()
         logging.info(state)
+        selection = []
+        if "extruder" in self._printer.get_tools():
+            selection.append("extruder")
         if state not in ["printing", "paused"]:
             self.show_preheat = True
-            selection = self._printer.get_tools() + self._printer.get_heaters()
+            selection.extend(self._printer.get_heaters())
         else:
             self.show_preheat = False
-            selection = self._printer.get_tools()
 
         # Select heaters
         for h in selection:
@@ -54,7 +56,6 @@ class TemperaturePanel(ScreenPanel):
         self.layout.show_all()
 
     def create_right_panel(self):
-        _ = self.lang.gettext
 
         cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'), "color4", 1, Gtk.PositionType.LEFT, False)
         adjust = self._gtk.ButtonImage('fine-tune', '', "color3", 1, Gtk.PositionType.LEFT, False)
@@ -95,7 +96,7 @@ class TemperaturePanel(ScreenPanel):
         return scroll
 
     def delta_adjust(self):
-        _ = self.lang.gettext
+
         self.tempdeltas = ["1", "5", "10", "25"]
         self.tempdelta = "10"
 
@@ -124,7 +125,7 @@ class TemperaturePanel(ScreenPanel):
 
         self.labels["deg" + self.tempdelta].set_active(True)
 
-        vbox = Gtk.VBox()
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         vbox.pack_start(Gtk.Label(_("Temperature") + " (°C)"), False, False, 8)
         vbox.pack_end(tempgrid, True, True, 2)
 
@@ -155,7 +156,7 @@ class TemperaturePanel(ScreenPanel):
             self.labels["deg" + str(i)].set_active(False)
 
     def change_target_temp_incremental(self, widget, dir):
-        _ = self.lang.gettext
+
         if len(self.active_heaters) == 0:
             self._screen.show_popup_message(_("Nothing selected"))
         else:
@@ -196,21 +197,20 @@ class TemperaturePanel(ScreenPanel):
             self.graph_update = None
 
     def select_heater(self, widget, device):
-        _ = self.lang.gettext
 
         if self.devices[device]["can_target"]:
             if device in self.active_heaters:
                 self.active_heaters.pop(self.active_heaters.index(device))
-                self.devices[device]['name'].get_style_context().remove_class("active_device")
+                self.devices[device]['name'].get_style_context().remove_class("button_active")
                 self.devices[device]['select'].set_label(_("Select"))
                 return
             self.active_heaters.append(device)
-            self.devices[device]['name'].get_style_context().add_class("active_device")
+            self.devices[device]['name'].get_style_context().add_class("button_active")
             self.devices[device]['select'].set_label(_("Deselect"))
         return
 
     def set_temperature(self, widget, setting):
-        _ = self.lang.gettext
+
         if len(self.active_heaters) == 0:
             self._screen.show_popup_message(_("Nothing selected"))
         else:
@@ -225,6 +225,7 @@ class TemperaturePanel(ScreenPanel):
                     logging.info("Setting %s to %d" % (heater, 0))
                     self._printer.set_dev_stat(heater, "target", 0)
             else:
+                target = None
                 for heater in self.active_heaters:
                     MAX_TEMP = int(float(self._printer.get_config_section(heater)['max_temp']))
                     if heater.startswith('extruder'):
@@ -264,7 +265,7 @@ class TemperaturePanel(ScreenPanel):
         return False
 
     def add_device(self, device):
-        _ = self.lang.gettext
+
         logging.info("Adding device: %s" % device)
 
         temperature = self._printer.get_dev_stat(device, "temperature")
@@ -311,7 +312,7 @@ class TemperaturePanel(ScreenPanel):
             image = "fan"
             class_name = "graph_label_fan_%s" % f
             type = "fan"
-        elif self._config.get_main_config_option('only_heaters') == "True":
+        elif self._config.get_main_config().getboolean("only_heaters", False):
             return False
         else:
             s = 1
@@ -378,7 +379,6 @@ class TemperaturePanel(ScreenPanel):
         return True
 
     def change_target_temp(self, temp):
-        _ = self.lang.gettext
 
         MAX_TEMP = int(float(self._printer.get_config_section(self.active_heater)['max_temp']))
         if temp > MAX_TEMP:
@@ -400,7 +400,6 @@ class TemperaturePanel(ScreenPanel):
         self._printer.set_dev_stat(self.active_heater, "target", temp)
 
     def create_left_panel(self):
-        _ = self.lang.gettext
 
         self.labels['devices'] = Gtk.Grid()
         self.labels['devices'].get_style_context().add_class('heater-grid')
@@ -439,21 +438,17 @@ class TemperaturePanel(ScreenPanel):
         self.labels['graph_show'].connect("clicked", self.graph_show_device)
 
         popover = Gtk.Popover()
-        self.labels['popover_vbox'] = Gtk.VBox()
+        self.labels['popover_vbox'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         popover.add(self.labels['popover_vbox'])
         popover.set_position(Gtk.PositionType.BOTTOM)
         self.labels['popover'] = popover
 
-        i = 2
+        i = 0
         for d in self._printer.get_temp_store_devices():
             if self.add_device(d):
                 i += 1
-        if self._screen.vertical_mode:
-            aux = 1.38
-        else:
-            aux = 1
-        graph_height = max(0, self._screen.height / aux - (i * 5 * self._gtk.get_font_size()))
-        self.labels['da'].set_size_request(0, graph_height)
+        graph_height = (self._gtk.get_content_height() / 2) - ((i + 2) * 4 * self._gtk.get_font_size())
+        self.labels['da'].set_size_request(-1, graph_height)
         return box
 
     def graph_show_device(self, widget, show=True):
@@ -522,7 +517,6 @@ class TemperaturePanel(ScreenPanel):
         return
 
     def show_numpad(self, widget):
-        _ = self.lang.gettext
 
         if self.active_heater is not None:
             self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")

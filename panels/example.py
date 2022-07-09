@@ -12,7 +12,7 @@ def create_panel(*args):
 
 class ExamplePanel(ScreenPanel):
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         # Create gtk items here
 
         self.content.add(Gtk.Box())

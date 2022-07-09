@@ -25,16 +25,18 @@ class ScreenPanel:
         self.layout = Gtk.Layout()
         self.layout.set_size(self._screen.width, self._screen.height)
 
-        self.content = Gtk.Box(spacing=0)
+        self.content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.content.get_style_context().add_class("content")
+        self.content.set_hexpand(True)
+        self.content.set_vexpand(True)
 
     def initialize(self, panel_name):
         # Create gtk items here
         return
 
     def emergency_stop(self, widget):
-        _ = self.lang.gettext
 
-        if self._config.get_main_config_option('confirm_estop') == "True":
+        if self._config.get_main_config().getboolean('confirm_estop'):
             self._screen._confirm_send_action(widget, _("Are you sure you want to run Emergency Stop?"),
                                               "printer.emergency_stop")
         else:
@@ -113,7 +115,7 @@ class ScreenPanel:
             self.labels[label]['l'].set_text(text)
 
     def update_temp(self, dev, temp, target, name=None):
-        if dev in self.labels:
+        if dev in self.labels and temp is not None:
             if name is None:
                 self.labels[dev].set_label(self._gtk.formatTemperatureString(temp, target))
             else:

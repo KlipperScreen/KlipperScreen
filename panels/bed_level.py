@@ -18,7 +18,7 @@ class BedLevelPanel(ScreenPanel):
     y_offset = 0
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.panel_name = panel_name
         self.screws = None
         grid = self._gtk.HomogeneousGrid()
@@ -289,7 +289,7 @@ class BedLevelPanel(ScreenPanel):
         )
 
     def process_update(self, action, data):
-        _ = self.lang.gettext
+
         if action == "notify_gcode_response":
             if data.startswith('!!'):
                 self.response_count = 0

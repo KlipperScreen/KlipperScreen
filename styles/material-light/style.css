@@ -211,6 +211,10 @@ textview .time {
     background-color: #a1ef9a;
 }
 
+.message_popup_warning, .message_popup_warning button {
+    background-color: #FFE082;
+}
+
 .message_popup_error, .message_popup_error button {
     background-color: #EF9A9A;
 }

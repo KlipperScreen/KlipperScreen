@@ -92,17 +92,16 @@ class KlipperScreenConfig:
                 item[name]['moonraker_api_key'] = "redacted"
         logging.debug("Configured printers: %s" % json.dumps(conf_printers_debug, indent=2))
 
-        lang = self.get_main_config_option("language", None)
+        lang = self.get_main_config().get("language", None)
         lang = [lang] if lang is not None and lang != "default" else None
         logging.info("Detected language: %s" % lang)
         self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', languages=lang,
                                         fallback=True)
+        self.lang.install(names=['gettext', 'ngettext'])
 
         self._create_configurable_options(screen)
 
     def _create_configurable_options(self, screen):
-        _ = self.lang.gettext
-        _n = self.lang.ngettext
 
         self.configurable_options = [
             {"language": {
@@ -181,7 +180,7 @@ class KlipperScreenConfig:
         for num in SCREEN_BLANKING_OPTIONS:
             hour = int(int(num) / 3600)
             if hour > 0:
-                name = str(hour) + " " + _n("hour", "hours", hour)
+                name = str(hour) + " " + ngettext("hour", "hours", hour)
             else:
                 name = str(int(int(num) / 60)) + " " + _("minutes")
             self.configurable_options[index]['screen_blanking']['options'].append({
@@ -291,9 +290,6 @@ class KlipperScreenConfig:
 
     def get_main_config(self):
         return self.config['main']
-
-    def get_main_config_option(self, option, default=None):
-        return self.config['main'].get(option, default)
 
     def get_menu_items(self, menu="__main", subsection=""):
         if subsection != "":

@@ -17,7 +17,6 @@ class ExtrudePanel(ScreenPanel):
     distances = ['5', '10', '15', '25']
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
 
         self.load_filament = self.unload_filament = False
         self.find_gcode_macros()
@@ -47,19 +46,21 @@ class ExtrudePanel(ScreenPanel):
         extgrid = self._gtk.HomogeneousGrid()
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
         limit = 5
-        for i, extruder in enumerate(self._printer.get_tools()):
+        i = 0
+        for extruder in self._printer.get_tools():
             if self._printer.extrudercount > 1:
-                self.labels[extruder] = self._gtk.ButtonImage("extruder-%s" % i, _("Tool") + " %s" % str(i))
+                self.labels[extruder] = self._gtk.ButtonImage("extruder-%s" % i,
+                                                              "T%s" % self._printer.get_tool_number(extruder))
             else:
-                self.labels[extruder] = self._gtk.ButtonImage("extruder", _("Tool"))
+                self.labels[extruder] = self._gtk.ButtonImage("extruder", "")
             self.labels[extruder].connect("clicked", self.change_extruder, extruder)
             if extruder == self.current_extruder:
                 self.labels[extruder].get_style_context().add_class("button_active")
             if i < limit:
                 extgrid.attach(self.labels[extruder], i, 0, 1, 1)
+                i += 1
         if i < (limit - 1):
             extgrid.attach(self.labels['temperature'], i + 1, 0, 1, 1)
-        i += 1
 
         distgrid = Gtk.Grid()
         j = 0
@@ -218,8 +219,10 @@ class ExtrudePanel(ScreenPanel):
             self.labels["dist" + str(i)].set_active(False)
 
     def change_extruder(self, widget, extruder):
-        if extruder == self.current_extruder:
-            return
+        logging.info("Changing extruder to %s", extruder)
+        for tool in self._printer.get_tools():
+            self.labels[tool].get_style_context().remove_class("button_active")
+        self.labels[extruder].get_style_context().add_class("button_active")
 
         self._screen._ws.klippy.gcode_script("T%s" % self._printer.get_tool_number(extruder))
 

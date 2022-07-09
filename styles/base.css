@@ -101,7 +101,7 @@ switch slider {
 entry {
     font-size: 1em;
     background-color: #20292F;
-    border: 1em solid #13181C;
+    border: .2em solid #13181C;
     padding: .25em;
 }
 
@@ -186,8 +186,8 @@ trough {
     /*border-right: 2px solid #444;*/
 }
 
-.active_device {
-    background-color: #20303D;
+.content {
+    margin: 0 .1em;
 }
 
 .dialog {
@@ -278,6 +278,10 @@ trough {
     min-height: 2em;
 }
 
+.keyboard_box {
+    margin-top: 42px;
+}
+
 .message_popup {
     border-bottom: .1em solid white;
 }
@@ -286,8 +290,16 @@ trough {
     background-color: #367554;
 }
 
+.message_popup_warning, .message_popup_warning button {
+    background-color: #f9a825;
+}
+
 .message_popup_error, .message_popup_error button {
     background-color: #9e2f3a;
+}
+
+.numpad{
+    margin-top: 30px;
 }
 
 .numpad_tleft {

@@ -28,7 +28,6 @@ class JobStatusPanel(ScreenPanel):
         super().__init__(screen, title, False)
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
 
         data = ['pos_x', 'pos_y', 'pos_z', 'time_left', 'duration', 'slicer_time', 'file_time',
                 'filament_time', 'est_time', 'speed_factor', 'req_speed', 'max_accel', 'extrude_factor', 'zoffset',
@@ -89,7 +88,7 @@ class JobStatusPanel(ScreenPanel):
             self.labels[label].set_halign(Gtk.Align.START)
             self.labels[label].set_ellipsize(Pango.EllipsizeMode.END)
 
-        fi_box = Gtk.VBox()
+        fi_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         fi_box.add(self.labels['file'])
         fi_box.add(self.labels['status'])
         fi_box.add(self.labels['lcdmessage'])
@@ -134,7 +133,7 @@ class JobStatusPanel(ScreenPanel):
         self.fila_section = pi * ((diameter / 2) ** 2)
 
     def create_status_grid(self, widget=None):
-        _ = self.lang.gettext
+
         self.main_status_displayed = True
 
         self.labels['temp_grid'] = Gtk.Grid()
@@ -246,7 +245,7 @@ class JobStatusPanel(ScreenPanel):
         szfe.attach(self.extrusion_button, 0, 1, 1, 1)
         szfe.attach(self.fan_button, 1, 1, 1, 1)
 
-        info = Gtk.VBox()
+        info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         info.get_style_context().add_class("printing-info")
         info.add(self.labels['temp_grid'])
         info.add(szfe)
@@ -286,7 +285,7 @@ class JobStatusPanel(ScreenPanel):
         goback.set_hexpand(False)
         goback.get_style_context().add_class("printing-info")
 
-        pos_box = Gtk.HBox(spacing=5)
+        pos_box = Gtk.Box(spacing=5)
         pos_box.add(self.labels['pos_x'])
         pos_box.add(self.labels['pos_y'])
         pos_box.add(self.labels['pos_z'])
@@ -357,7 +356,7 @@ class JobStatusPanel(ScreenPanel):
         ctx.stroke()
 
     def activate(self):
-        _ = self.lang.gettext
+
         ps = self._printer.get_stat("print_stats")
         self.set_state(ps['state'])
         if self.state_timeout is None:
@@ -365,7 +364,7 @@ class JobStatusPanel(ScreenPanel):
         self.create_status_grid()
 
     def create_buttons(self):
-        _ = self.lang.gettext
+
         self.buttons = {
             'cancel': self._gtk.ButtonImage("stop", _("Cancel"), "color2"),
             'control': self._gtk.ButtonImage("settings", _("Settings"), "color3"),
@@ -389,7 +388,6 @@ class JobStatusPanel(ScreenPanel):
         self.buttons['save_offset_endstop'].connect("clicked", self.save_offset, "endstop")
 
     def save_offset(self, widget, device):
-        _ = self.lang.gettext
 
         saved_z_offset = 0
         if self._printer.config_section_exists("probe"):
@@ -446,7 +444,6 @@ class JobStatusPanel(ScreenPanel):
         self._screen.show_all()
 
     def cancel(self, widget):
-        _ = self.lang.gettext
 
         buttons = [
             {"name": _("Cancel Print"), "response": Gtk.ResponseType.OK},
@@ -525,7 +522,6 @@ class JobStatusPanel(ScreenPanel):
             return
         elif action != "notify_status_update":
             return
-        _ = self.lang.gettext
 
         if self.main_status_displayed:
             for x in self._printer.get_tools():
@@ -622,7 +618,7 @@ class JobStatusPanel(ScreenPanel):
             fan_label += self.fans[fan]['name'] + self.fans[fan]['speed'] + " "
         self.labels['fan'].set_text(fan_label[:12])
 
-        if "layer_height" in self.file_metadata:
+        if "layer_height" in self.file_metadata and "object_height" in self.file_metadata:
             layer_label = str(1 + round((self.pos_z - self.f_layer_h) / self.layer_h))
             layer_label += " / " + self.labels['total_layers'].get_text()
             self.labels['layer'].set_label(layer_label)
@@ -737,7 +733,6 @@ class JobStatusPanel(ScreenPanel):
 
         if ps['state'] == self.state:
             return True
-        _ = self.lang.gettext
 
         if ps['state'] == "printing":
             if self.state == "cancelling":
@@ -781,7 +776,6 @@ class JobStatusPanel(ScreenPanel):
         return True
 
     def set_state(self, state):
-        _ = self.lang.gettext
 
         if self.state != state:
             logging.debug("Changing job_status state from '%s' to '%s'" % (self.state, state))
@@ -884,12 +878,12 @@ class JobStatusPanel(ScreenPanel):
                     i['data'] = ""
             self.show_file_thumbnail()
             if "object_height" in self.file_metadata:
-                self.height = self.file_metadata['object_height']
+                self.height = float(self.file_metadata['object_height'])
                 self.labels['height'].set_label(str(self.height) + " mm")
                 if "layer_height" in self.file_metadata:
-                    self.layer_h = self.file_metadata['layer_height']
+                    self.layer_h = float(self.file_metadata['layer_height'])
                     if "first_layer_height" in self.file_metadata:
-                        self.f_layer_h = self.file_metadata['first_layer_height']
+                        self.f_layer_h = float(self.file_metadata['first_layer_height'])
                     else:
                         self.f_layer_h = self.layer_h
                     self.labels['total_layers'].set_label(str(int((self.height - self.f_layer_h) / self.layer_h) + 1))
@@ -938,7 +932,8 @@ class JobStatusPanel(ScreenPanel):
         self.labels['lcdmessage'].set_text(str(msg))
 
     def update_temp(self, x, temp, target):
-        if target > 0:
-            self.labels[x].set_label("%3d/%3d°" % (temp, target))
-        else:
-            self.labels[x].set_label("%3d°" % temp)
+        if x in self.labels and temp is not None:
+            if target is not None and target > 0:
+                self.labels[x].set_label("%3d/%3d°" % (temp, target))
+            else:
+                self.labels[x].set_label("%3d°" % temp)

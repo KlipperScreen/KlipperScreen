@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 14:53-0300\n"
+"POT-Creation-Date: 2022-07-02 13:43-0300\n"
 "PO-Revision-Date: 2022-03-31 11:25-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -393,6 +393,9 @@ msgstr "巨集"
 msgid "Main Menu"
 msgstr "主選單"
 
+msgid "Max"
+msgstr ""
+
 msgid "Max Acceleration"
 msgstr ""
 
@@ -658,9 +661,6 @@ msgstr "溫度"
 msgid "To apply %s KlipperScreen needs to be restarted"
 msgstr "要應用 %s，需要重新啟動 KlipperScreen"
 
-msgid "Tool"
-msgstr "工具"
-
 msgid "Total:"
 msgstr "全部的："
 
@@ -752,6 +752,9 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Tool"
+#~ msgstr "工具"
 
 #~ msgid "Displayed Macros"
 #~ msgstr "顯示巨集"

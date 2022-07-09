@@ -2,7 +2,7 @@ import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gdk, Gtk, Pango
+from gi.repository import Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
@@ -13,10 +13,9 @@ def create_panel(*args):
 
 class SettingsPanel(ScreenPanel):
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.settings = {}
         self.menu = ['settings_menu']
-
         self.labels['add_printer_button'] = self._gtk.Button(_("Add Printer"), "color1")
 
         options = self._config.get_configurable_options().copy()
@@ -119,7 +118,6 @@ class SettingsPanel(ScreenPanel):
             scale.set_hexpand(True)
             scale.set_digits(0)
             scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
-            scale.set_property("width-request", round(self._screen.width / 2.2))
             dev.add(scale)
         elif option['type'] == "printer":
             logging.debug("Option: %s" % option)

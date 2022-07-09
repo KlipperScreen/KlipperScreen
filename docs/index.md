@@ -6,7 +6,7 @@ KlipperScreen is a touchscreen GUI that interfaces with [Klipper](https://github
 
 KlipperScreen should run on any touchscreen that you can connect to a host (Raspberry, PC, Tablet), but not screens that connect directly to the printer MCU board.
 
-A physical touchscreen is not strictly required, for example you may install a remote desktop server like tigervnc-scraping-server and connect from a client device, ![check out the hardware page for further information.](Hardware.md)
+A physical touchscreen is not strictly required, for example you may install a remote desktop server like tigervnc-scraping-server and connect from a client device, [check out the hardware page for further information.](Hardware.md)
 
 ### Sample Panels
 

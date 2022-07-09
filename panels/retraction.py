@@ -3,7 +3,7 @@ import logging
 import re
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gdk, Gtk, Pango
+from gi.repository import Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
@@ -17,7 +17,7 @@ class FWRetractionPanel(ScreenPanel):
     list = {}
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.grid = Gtk.Grid()
 
         conf = self._printer.get_config_section("firmware_retraction")

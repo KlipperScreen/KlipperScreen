@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 14:53-0300\n"
+"POT-Creation-Date: 2022-07-02 13:43-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -385,6 +385,9 @@ msgstr ""
 msgid "Main Menu"
 msgstr ""
 
+msgid "Max"
+msgstr ""
+
 msgid "Max Acceleration"
 msgstr ""
 
@@ -649,9 +652,6 @@ msgstr ""
 
 #, python-format
 msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr ""
-
-msgid "Tool"
 msgstr ""
 
 msgid "Total:"

@@ -10,7 +10,7 @@ FBDEV="xserver-xorg-video-fbdev"
 PYTHON="python3-virtualenv virtualenv python3-distutils"
 PYGOBJECT="libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0"
 MISC="librsvg2-common libopenjp2-7 libatlas-base-dev matchbox-keyboard wireless-tools"
-OPTIONAL="xserver-xorg-legacy fonts-nanum fonts-freefont-ttf"
+OPTIONAL="xserver-xorg-legacy fonts-nanum"
 
 Red='\033[0;31m'
 Green='\033[0;32m'
@@ -124,13 +124,6 @@ create_virtualenv()
 
 install_systemd_service()
 {
-    if [ -f "/etc/systemd/system/KlipperScreen.service" ]; then
-        echo_text "KlipperScreen unit file already installed"
-        sudo systemctl unmask KlipperScreen.service
-        sudo systemctl daemon-reload
-        sudo systemctl enable KlipperScreen
-        return
-    fi
     echo_text "Installing KlipperScreen unit file"
 
     SERVICE=$(<$SCRIPTPATH/KlipperScreen.service)
@@ -142,6 +135,7 @@ install_systemd_service()
     SERVICE=$(sed "s/KS_DIR/$KSPATH_ESC/g" <<< $SERVICE)
 
     echo "$SERVICE" | sudo tee /etc/systemd/system/KlipperScreen.service > /dev/null
+    sudo systemctl unmask KlipperScreen.service
     sudo systemctl daemon-reload
     sudo systemctl enable KlipperScreen
 }
@@ -166,6 +160,7 @@ update_x11()
 start_KlipperScreen()
 {
     echo_text "Starting service..."
+    sudo systemctl stop KlipperScreen
     sudo systemctl start KlipperScreen
 }
 if [ "$EUID" == 0 ]

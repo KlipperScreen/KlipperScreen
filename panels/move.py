@@ -2,7 +2,7 @@ import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gdk, Gtk, Pango
+from gi.repository import Gtk, Pango
 
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
@@ -21,7 +21,7 @@ class MovePanel(ScreenPanel):
     distances = ['.1', '.5', '1', '5', '10', '25', '50']
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.settings = {}
         self.menu = ['move_menu']
 
@@ -134,7 +134,7 @@ class MovePanel(ScreenPanel):
         bottomgrid.attach(self.labels['move_dist'], 0, 1, 3, 1)
         bottomgrid.attach(adjust, 3, 0, 1, 2)
 
-        self.labels['move_menu'] = Gtk.VBox()
+        self.labels['move_menu'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.labels['move_menu'].set_vexpand(True)
         self.labels['move_menu'].pack_start(grid, True, True, 0)
         self.labels['move_menu'].pack_start(bottomgrid, True, True, 0)
@@ -272,7 +272,6 @@ class MovePanel(ScreenPanel):
             scale.set_hexpand(True)
             scale.set_digits(0)
             scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
-            scale.set_property("width-request", round(self._screen.width / 2.2))
             dev.add(scale)
 
         frame = Gtk.Frame()

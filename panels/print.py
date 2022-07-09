@@ -4,7 +4,7 @@ import logging
 import os
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib, Pango
+from gi.repository import Gtk, GLib, Pango
 from datetime import datetime
 
 from ks_includes.screen_panel import ScreenPanel
@@ -20,16 +20,16 @@ class PrintPanel(ScreenPanel):
     filelist = {'gcodes': {'directories': [], 'files': []}}
 
     def initialize(self, panel_name):
-        _ = self.lang.gettext
+
         self.labels['directories'] = {}
         self.labels['files'] = {}
         self.sort_items = {
             "name": _("Name"),
             "date": _("Date")
         }
-        self.sort_char = ["↑", "↓"]
+        self.sort_icon = ["arrow-up", "arrow-down"]
 
-        sortdir = self._config.get_main_config_option("print_sort_dir", "name_asc")
+        sortdir = self._config.get_main_config().get("print_sort_dir", "name_asc")
         sortdir = sortdir.split('_')
         if sortdir[0] not in ["name", "date"] or sortdir[1] not in ["asc", "desc"]:
             sortdir = ["name", "asc"]
@@ -44,10 +44,9 @@ class PrintPanel(ScreenPanel):
         sbox.add(sort)
         i = 1
         for name, val in self.sort_items.items():
-            s = self._gtk.Button(val, "color%s" % (i % 4))
-            s.set_label(val)
+            s = self._gtk.ButtonImage(None, val, "color%s" % (i % 4), .66, Gtk.PositionType.RIGHT, False)
             if name == sortdir[0]:
-                s.set_label("%s %s" % (s.get_label(), self.sort_char[self.sort_current[1]]))
+                s.set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], .66))
             s.connect("clicked", self.change_sort, name)
             self.labels['sort_%s' % name] = s
             sbox.add(s)
@@ -154,7 +153,6 @@ class PrintPanel(ScreenPanel):
             self.dir_panels[parent_dir].show_all()
 
     def add_file(self, filepath, show=True):
-        _ = self.lang.gettext
 
         fileinfo = self._screen.files.get_file_info(filepath)
         if fileinfo is None:
@@ -270,10 +268,10 @@ class PrintPanel(ScreenPanel):
         else:
             oldkey = self.sort_current[0]
             logging.info("Changing %s to %s" % ('sort_%s' % oldkey, self.sort_items[self.sort_current[0]]))
-            self.labels['sort_%s' % oldkey].set_label("%s" % self.sort_items[oldkey])
+            self.labels['sort_%s' % oldkey].set_image(None)
             self.labels['sort_%s' % oldkey].show_all()
             self.sort_current = [key, 0]
-        self.labels['sort_%s' % key].set_label("%s %s" % (self.sort_items[key], self.sort_char[self.sort_current[1]]))
+        self.labels['sort_%s' % key].set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], .66))
         self.labels['sort_%s' % key].show()
         GLib.idle_add(self.reload_files)
 
@@ -281,7 +279,7 @@ class PrintPanel(ScreenPanel):
         self._config.save_user_config_options()
 
     def confirm_print(self, widget, filename):
-        _ = self.lang.gettext
+
         buttons = [
             {"name": _("Print"), "response": Gtk.ResponseType.OK},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
@@ -298,7 +296,6 @@ class PrintPanel(ScreenPanel):
 
         grid = Gtk.Grid()
         grid.add(label)
-        grid.set_size_request(self._screen.width - 60, -1)
 
         pixbuf = self.get_file_image(filename, 8, 3.2)
         if pixbuf is not None:
@@ -347,7 +344,6 @@ class PrintPanel(ScreenPanel):
         self.files.pop(filename)
 
     def get_file_info_str(self, filename):
-        _ = self.lang.gettext
 
         fileinfo = self._screen.files.get_file_info(filename)
         if fileinfo is None:
