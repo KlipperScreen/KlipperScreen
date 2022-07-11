@@ -49,7 +49,7 @@ class KlippyWebsocket(threading.Thread):
     def initial_connect(self):
         # Enable a timeout so that way if moonraker is not running, it will attempt to reconnect
         if self.reconnect_timeout is None:
-            self.reconnect_timeout = GLib.timeout_add_seconds(3, self.reconnect)
+            self.reconnect_timeout = GLib.timeout_add_seconds(6, self.reconnect)
         self.connect()
 
     def connect(self):
