@@ -270,6 +270,8 @@ class KlipperScreen(Gtk.Window):
             requested_updates['objects'][f] = ["speed"]
         for f in self.printer.get_filament_sensors():
             requested_updates['objects'][f] = ["enabled", "filament_detected"]
+        for p in self.printer.get_output_pins():
+            requested_updates['objects'][p] = ["value"]
 
         self._ws.klippy.object_subscription(requested_updates)
 
