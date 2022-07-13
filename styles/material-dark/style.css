@@ -19,8 +19,8 @@ button:active {
 .button_active {
     background-color: #000000;
     border-color: #d81549;
+    border-width: .15em;
     border-style: dashed;
-    border-width: .25em;
     border-radius: 1em;
 }
 

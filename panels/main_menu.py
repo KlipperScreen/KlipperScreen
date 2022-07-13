@@ -119,13 +119,6 @@ class MainPanel(MenuPanel):
         temp = self._gtk.Button("")
         temp.connect('clicked', self.on_popover_clicked, device)
 
-        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-
-        dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        dev.set_hexpand(True)
-        dev.set_vexpand(False)
-        dev.add(labels)
-
         self.devices[device] = {
             "class": class_name,
             "name": name,
@@ -171,21 +164,19 @@ class MainPanel(MenuPanel):
 
         name = Gtk.Label("")
         temp = Gtk.Label(_("Temp (°C)"))
-        temp.set_size_request(round(self._gtk.get_font_size() * 7.7), 0)
+        temp.set_size_request(round(self._gtk.get_font_size() * 7.7), -1)
 
         self.labels['devices'].attach(name, 0, 0, 1, 1)
         self.labels['devices'].attach(temp, 1, 0, 1, 1)
 
-        da = HeaterGraph(self._printer, self._gtk.get_font_size())
-        da.set_vexpand(True)
-        self.labels['da'] = da
+        self.labels['da'] = HeaterGraph(self._printer, self._gtk.get_font_size())
+        self.labels['da'].set_vexpand(True)
 
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(self.labels['devices'])
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        box.set_vexpand(True)
         box.add(scroll)
         box.add(self.labels['da'])
 
@@ -202,10 +193,9 @@ class MainPanel(MenuPanel):
         popover.set_position(Gtk.PositionType.BOTTOM)
         self.labels['popover'] = popover
 
-        i = sum(1 for d in self._printer.get_temp_store_devices() if self.add_device(d))
+        for d in self._printer.get_temp_store_devices():
+            self.add_device(d)
 
-        graph_height = (self._gtk.get_content_height() / 2) - ((i + 2) * 4 * self._gtk.get_font_size())
-        self.labels['da'].set_size_request(-1, graph_height)
         return box
 
     def graph_show_device(self, widget, show=True):

@@ -21,7 +21,6 @@ button:active {
     border-color: #073642; /*base02*/
     border-style: solid;
     border-radius: 1em;
-    border-width: .25em;
     background-color: #073642; /*base02*/
 }
 
