@@ -30,6 +30,7 @@ class Printer:
         self.extrudercount = 0
         self.tempdevcount = 0
         self.fancount = 0
+        self.output_pin_count = 0
 
     def reset(self):
         GLib.source_remove(self.store_timeout)
@@ -47,6 +48,7 @@ class Printer:
         self.config = None
         self.klipper = None
         self.tempstore = None
+        self.output_pin_count = None
 
     def reinit(self, printer_info, data):
         logging.debug(f"Moonraker object status: {data}")
@@ -54,6 +56,7 @@ class Printer:
         self.extrudercount = 0
         self.tempdevcount = 0
         self.fancount = 0
+        self.output_pin_count = 0
         self.tools = []
         self.devices = {}
         self.data = data
@@ -95,6 +98,10 @@ class Printer:
                 # Support for hiding devices by name
                 if not " ".join(x.split(" ")[1:]).startswith("_"):
                     self.fancount += 1
+            if x.startswith('output_pin '):
+                # Support for hiding devices by name
+                if not " ".join(x.split(" ")[1:]).startswith("_"):
+                    self.output_pin_count += 1
             if x.startswith('bed_mesh '):
                 r = self.config[x]
                 r['x_count'] = int(r['x_count'])
@@ -110,6 +117,7 @@ class Printer:
         logging.info(f"# Extruders: {self.extrudercount}")
         logging.info(f"# Temperature devices: {self.tempdevcount}")
         logging.info(f"# Fans: {self.fancount}")
+        logging.info(f"# Output pins: {self.output_pin_count}")
 
     def process_update(self, data):
         for x in (self.get_tools() + self.get_heaters() + self.get_filament_sensors()):
@@ -206,6 +214,12 @@ class Printer:
             fans.extend(iter(self.get_config_section_list(f"{fan_type} ")))
         return fans
 
+    def get_output_pins(self):
+        output_pins = []
+        output_pins.extend(iter(self.get_config_section_list("output_pin ")))
+        logging.debug(f"{output_pins}")
+        return output_pins
+
     def get_gcode_macros(self):
         return self.get_config_section_list("gcode_macro ")
 
@@ -229,6 +243,7 @@ class Printer:
                 "extruders": {"count": self.extrudercount},
                 "temperature_devices": {"count": self.tempdevcount},
                 "fans": {"count": self.fancount},
+                "output_pins": {"count": self.output_pin_count},
                 "bltouch": self.config_section_exists("bltouch"),
                 "gcode_macros": {"count": len(self.get_gcode_macros())},
                 "idle_timeout": self.get_stat("idle_timeout").copy(),
@@ -297,6 +312,9 @@ class Printer:
             if speed < off_below:
                 speed = 0
         return speed
+
+    def get_pin_value(self, pin):
+        return self.data[pin]["value"] if pin in self.data else 0
 
     def get_extruder_count(self):
         return self.extrudercount

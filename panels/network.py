@@ -30,7 +30,6 @@ class NetworkPanel(ScreenPanel):
             logging.info(f"Found wireless interfaces: {self.wireless_interfaces}")
             self.wifi = WifiManager(self.wireless_interfaces[0])
 
-
     def initialize(self, menu):
         grid = self._gtk.HomogeneousGrid()
         grid.set_hexpand(True)
