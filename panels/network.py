@@ -60,7 +60,7 @@ class NetworkPanel(ScreenPanel):
         self.labels['interface'].set_hexpand(True)
         self.labels['ip'] = Gtk.Label()
         self.labels['ip'].set_hexpand(True)
-        reload_networks = self._gtk.ButtonImage("refresh", None, "color1")
+        reload_networks = self._gtk.ButtonImage("refresh", None, "color1", .66)
         reload_networks.connect("clicked", self.reload_networks)
         reload_networks.set_hexpand(False)
 
@@ -165,7 +165,7 @@ class NetworkPanel(ScreenPanel):
         connect.set_hexpand(False)
         connect.set_halign(Gtk.Align.END)
 
-        delete = self._gtk.ButtonImage("delete", "", "color3")
+        delete = self._gtk.ButtonImage("delete", None, "color3")
         delete.connect("clicked", self.remove_wifi_network, ssid)
         delete.set_size_request(60, 0)
         delete.set_hexpand(False)
