@@ -24,7 +24,6 @@ button:active {
 .button_active {
     border-color: #282828;
     border-style: solid;
-    border-width: .25em;
     background-color: #282828;
     border-radius: 1em;
 }
