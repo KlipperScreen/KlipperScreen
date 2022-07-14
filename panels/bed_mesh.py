@@ -37,7 +37,7 @@ class BedMeshPanel(ScreenPanel):
         self.labels['profiles'] = Gtk.Grid()
         scroll.add(self.labels['profiles'])
 
-        addprofile = self._gtk.ButtonImage("increase", _("Add bed mesh profile"),
+        addprofile = self._gtk.ButtonImage("increase", " " + _("Add bed mesh profile"),
                                            "color1", .5, Gtk.PositionType.LEFT, False)
         addprofile.connect("clicked", self.show_create_profile)
         addprofile.set_size_request(60, 0)
@@ -68,7 +68,7 @@ class BedMeshPanel(ScreenPanel):
 
     def activate_mesh(self, profile):
         if profile == "":
-            profile = "default"
+            profile = "current"
 
         logging.debug(f"Activating profile: {self.active_mesh} {profile}")
         if profile != self.active_mesh:
