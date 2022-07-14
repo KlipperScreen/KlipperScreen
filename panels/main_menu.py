@@ -31,11 +31,13 @@ class MainPanel(MenuPanel):
 
         self.items = items
         self.create_menu_items()
-        self._gtk.reset_temp_color()
-
-        leftpanel = self.create_left_panel()
+        stats = self._printer.get_printer_status_data()["printer"]
         grid = self._gtk.HomogeneousGrid()
-        grid.attach(leftpanel, 0, 0, 1, 1)
+        if stats["temperature_devices"]["count"] > 0 or stats["extruders"]["count"] > 0:
+            self._gtk.reset_temp_color()
+            grid.attach(self.create_left_panel(), 0, 0, 1, 1)
+        else:
+            self.graph_update = False
         if self._screen.vertical_mode:
             self.labels['menu'] = self.arrangeMenuItems(items, 3, True)
             grid.attach(self.labels['menu'], 0, 1, 1, 1)
@@ -47,13 +49,14 @@ class MainPanel(MenuPanel):
         self.layout.show_all()
 
     def activate(self):
+        # For this case False != None
         if self.graph_update is None:
             # This has a high impact on load
             self.graph_update = GLib.timeout_add_seconds(5, self.update_graph)
         return
 
     def deactivate(self):
-        if self.graph_update is not None:
+        if self.graph_update:
             GLib.source_remove(self.graph_update)
             self.graph_update = None
 
