@@ -274,6 +274,10 @@ trough {
     border-bottom: .1em solid white;
 }
 
+.message_popup button{
+    padding: 1em;
+}
+
 .message_popup_echo, .message_popup_echo button {
     background-color: #367554;
 }
