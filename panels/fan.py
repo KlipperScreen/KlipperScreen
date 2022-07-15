@@ -62,7 +62,7 @@ class FanPanel(ScreenPanel):
         logging.info(f"Adding fan: {fan}")
         changeable = any(fan.startswith(x) or fan == x for x in CHANGEABLE_FANS)
         name = Gtk.Label()
-        fan_name = _("Part Fan") if fan == "fan" else " ".join(fan.split(" ")[1:])
+        fan_name = _("Part Fan") if fan == "fan" else fan.split()[1]
         name.set_markup(f"\n<big><b>{fan_name}</b></big>\n")
         name.set_hexpand(True)
         name.set_vexpand(True)
@@ -130,7 +130,7 @@ class FanPanel(ScreenPanel):
         fans = self._printer.get_fans()
         for fan in fans:
             # Support for hiding devices by name
-            name = " ".join(fan.split(" ")[1:]) if fan != "fan" else fan
+            name = fan.split()[1] if len(fan.split()) > 1 else fan
             if name.startswith("_"):
                 continue
             self.add_fan(fan)
@@ -144,8 +144,7 @@ class FanPanel(ScreenPanel):
         if fan == "fan":
             self._screen._ws.klippy.gcode_script(KlippyGcodes.set_fan_speed(value))
         else:
-            f = " ".join(fan.split(" ")[1:])
-            self._screen._ws.klippy.gcode_script(f"SET_FAN_SPEED FAN={f} SPEED={float(value) / 100}")
+            self._screen._ws.klippy.gcode_script(f"SET_FAN_SPEED FAN={fan.split()[1]} SPEED={float(value) / 100}")
         # Check the speed in case it wasn't applied
         GLib.timeout_add_seconds(1, self.check_fan_speed, fan)
 

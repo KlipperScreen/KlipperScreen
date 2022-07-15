@@ -31,7 +31,7 @@ class OutputPinPanel(ScreenPanel):
         output_pins = self._printer.get_output_pins()
         for pin in output_pins:
             # Support for hiding devices by name
-            name = " ".join(pin.split(" ")[1:])
+            name = pin.split()[1]
             if name.startswith("_"):
                 continue
             self.add_pin(pin)

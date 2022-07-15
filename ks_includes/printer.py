@@ -89,18 +89,20 @@ class Printer:
                     "target": 0
                 }
                 # Support for hiding devices by name
-                if not " ".join(x.split(" ")[1:]).startswith("_"):
+                name = x.split()[1] if len(x.split()) > 1 else x
+                if not name.startswith("_"):
                     self.tempdevcount += 1
             if x == 'fan' \
                     or x.startswith('controller_fan ') \
                     or x.startswith('heater_fan ') \
                     or x.startswith('fan_generic '):
                 # Support for hiding devices by name
-                if not " ".join(x.split(" ")[1:]).startswith("_"):
+                name = x.split()[1] if len(x.split()) > 1 else x
+                if not name.startswith("_"):
                     self.fancount += 1
             if x.startswith('output_pin '):
                 # Support for hiding devices by name
-                if not " ".join(x.split(" ")[1:]).startswith("_"):
+                if not x.split()[1].startswith("_"):
                     self.output_pin_count += 1
             if x.startswith('bed_mesh '):
                 r = self.config[x]

@@ -186,8 +186,7 @@ class BasePanel(ScreenPanel):
                     # Users can fill the bar if they want
                     if n >= nlimit + 1:
                         break
-                    name = device if (device.startswith("extruder") or device.startswith("heater_bed")) \
-                        else " ".join(device.split(" ")[1:])
+                    name = device.split()[1] if len(device.split()) > 1 else device
                     for item in titlebar_items:
                         if name == item:
                             self.control['temp_box'].add(self.labels[f"{device}_box"])
@@ -235,9 +234,11 @@ class BasePanel(ScreenPanel):
                     name = ""
                     if not (device.startswith("extruder") or device.startswith("heater_bed")):
                         if self.titlebar_name_type == "full":
-                            name = " ".join(device.split(" ")[1:]).capitalize().replace("_", " ") + ": "
+                            name = device.split()[1] if len(device.split()) > 1 else device
+                            name = f'{name.capitalize().replace("_", " ")}: '
                         elif self.titlebar_name_type == "short":
-                            name = " ".join(device.split(" ")[1:])[:1].upper() + ": "
+                            name = device.split()[1] if len(device.split()) > 1 else device
+                            name = f"{name[:1].upper()}: "
                     self.labels[device].set_label(f"{name}{int(temp)}°")
 
         with contextlib.suppress(KeyError):
