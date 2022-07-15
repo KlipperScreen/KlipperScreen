@@ -244,14 +244,10 @@ class Printer:
                 "temperature_devices": {"count": self.tempdevcount},
                 "fans": {"count": self.fancount},
                 "output_pins": {"count": self.output_pin_count},
-                "bltouch": self.config_section_exists("bltouch"),
                 "gcode_macros": {"count": len(self.get_gcode_macros())},
                 "idle_timeout": self.get_stat("idle_timeout").copy(),
                 "pause_resume": {"is_paused": self.state == "paused"},
                 "power_devices": {"count": len(self.get_power_devices())},
-                "probe": self.config_section_exists("probe"),
-                "firmware_retraction": self.config_section_exists("firmware_retraction"),
-                "input_shaper": self.config_section_exists("input_shaper")
             }
         }
 
@@ -259,6 +255,10 @@ class Printer:
         for section in sections:
             if self.config_section_exists(section):
                 data["printer"][section] = self.get_config_section(section).copy()
+
+        sections = ["firmware_retraction", "input_shaper", "bed_screws", "screws_tilt_adjust"]
+        for section in sections:
+            data["printer"][section] = self.config_section_exists(section)
 
         return data
 

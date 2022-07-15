@@ -20,12 +20,12 @@ Klipper Sections:
 * [bed_screws](https://www.klipper3d.org/Config_Reference.html#bed_screws)
 * [screws_tilt_adjust](https://www.klipper3d.org/Config_Reference.html#screws_tilt_adjust)
 
-_Important Note: Due to Klipper using the bltouch/probe offsets in screws_tilt_adjust, if a bltouch/probe is enabled_
-_KlipperScreen will add the offset to the defined screw values. This will not occur if bed_screws section is used._
+!!! important:
+    `[bed_screws]` uses Nozzle positions and `[screws_tilt_adjust]` uses Probe positions
 
-This panel will favor screws_tilt_adjust over the bed_screws section. If screws_tilt_adjust is defined, an extra button
-for _Screws Calibrate_ will appear. This button runs the SCREWS_TILT_CALCULATE command and shows the results on the
-panel.
+This panel will favor `[bed_screws]` but if it's not defined,
+the probe offset will be applied to the defined screw values in `[screws_tilt_adjust]`,
+this way the position buttons behave like if `[bed_screws]` was defined.
 
 ### Bed Mesh
 ```py
