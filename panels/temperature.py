@@ -46,7 +46,7 @@ class TemperaturePanel(ScreenPanel):
         for h in selection:
             if h.startswith("temperature_sensor "):
                 continue
-            name = " ".join(h.split(" ")[1:])
+            name = h.split()[1] if len(h.split()) > 1 else h
             # Support for hiding devices by name
             if name.startswith("_"):
                 continue
@@ -157,6 +157,7 @@ class TemperaturePanel(ScreenPanel):
         else:
             for heater in self.active_heaters:
                 target = self._printer.get_dev_stat(heater, "target")
+                name = heater.split()[1] if len(heater.split()) > 1 else heater
                 if direction == "+":
                     target += int(self.tempdelta)
                     max_temp = int(float(self._printer.get_config_section(heater)['max_temp']))
@@ -172,9 +173,9 @@ class TemperaturePanel(ScreenPanel):
                 elif heater.startswith('heater_bed'):
                     self._screen._ws.klippy.set_bed_temp(target)
                 elif heater.startswith('heater_generic '):
-                    self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), target)
+                    self._screen._ws.klippy.set_heater_temp(name, target)
                 elif heater.startswith("temperature_fan "):
-                    self._screen._ws.klippy.set_temp_fan_temp(" ".join(heater.split(" ")[1:]), target)
+                    self._screen._ws.klippy.set_temp_fan_temp(name, target)
                 else:
                     logging.info(f"Unknown heater: {heater}")
                     self._screen.show_popup_message(_("Unknown Heater") + " " + heater)
@@ -267,13 +268,10 @@ class TemperaturePanel(ScreenPanel):
         if temperature is None:
             return False
 
-        if not (device.startswith("extruder") or device.startswith("heater_bed")):
-            devname = " ".join(device.split(" ")[1:])
-            # Support for hiding devices by name
-            if devname.startswith("_"):
-                return False
-        else:
-            devname = device
+        devname = device.split()[1] if len(device.split()) > 1 else device
+        # Support for hiding devices by name
+        if devname.startswith("_"):
+            return False
 
         if device.startswith("extruder"):
             i = sum(d.startswith('extruder') for d in self.devices)
@@ -342,7 +340,7 @@ class TemperaturePanel(ScreenPanel):
         return True
 
     def change_target_temp(self, temp):
-
+        name = self.active_heater.split()[1] if len(self.active_heater.split()) > 1 else self.active_heater
         max_temp = int(float(self._printer.get_config_section(self.active_heater)['max_temp']))
         if temp > max_temp:
             self._screen.show_popup_message(_("Can't set above the maximum:") + f' {max_temp}')
@@ -354,9 +352,9 @@ class TemperaturePanel(ScreenPanel):
         elif self.active_heater == "heater_bed":
             self._screen._ws.klippy.set_bed_temp(temp)
         elif self.active_heater.startswith('heater_generic '):
-            self._screen._ws.klippy.set_heater_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
+            self._screen._ws.klippy.set_heater_temp(name, temp)
         elif self.active_heater.startswith('temperature_fan '):
-            self._screen._ws.klippy.set_temp_fan_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
+            self._screen._ws.klippy.set_temp_fan_temp(name, temp)
         else:
             logging.info(f"Unknown heater: {self.active_heater}")
             self._screen.show_popup_message(_("Unknown Heater") + " " + self.active_heater)

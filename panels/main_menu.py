@@ -68,13 +68,10 @@ class MainPanel(MenuPanel):
         if temperature is None:
             return False
 
-        if not (device.startswith("extruder") or device.startswith("heater_bed")):
-            devname = " ".join(device.split(" ")[1:])
-            # Support for hiding devices by name
-            if devname.startswith("_"):
-                return False
-        else:
-            devname = device
+        devname = device.split()[1] if len(device.split()) > 1 else device
+        # Support for hiding devices by name
+        if devname.startswith("_"):
+            return False
 
         if device.startswith("extruder"):
             i = sum(d.startswith('extruder') for d in self.devices)
@@ -145,15 +142,16 @@ class MainPanel(MenuPanel):
             self._screen.show_popup_message(_("Can't set above the maximum:") + f' {max_temp}')
             return
         temp = max(temp, 0)
+        name = self.active_heater.split()[1] if len(self.active_heater.split()) > 1 else self.active_heater
 
         if self.active_heater.startswith('extruder'):
             self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(self.active_heater), temp)
         elif self.active_heater == "heater_bed":
             self._screen._ws.klippy.set_bed_temp(temp)
         elif self.active_heater.startswith('heater_generic '):
-            self._screen._ws.klippy.set_heater_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
+            self._screen._ws.klippy.set_heater_temp(name, temp)
         elif self.active_heater.startswith('temperature_fan '):
-            self._screen._ws.klippy.set_temp_fan_temp(" ".join(self.active_heater.split(" ")[1:]), temp)
+            self._screen._ws.klippy.set_temp_fan_temp(name, temp)
         else:
             logging.info(f"Unknown heater: {self.active_heater}")
             self._screen.show_popup_message(_("Unknown Heater") + " " + self.active_heater)
