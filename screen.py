@@ -382,7 +382,8 @@ class KlipperScreen(Gtk.Window):
         self.show_all()
         self.popup_message = box
 
-        GLib.timeout_add_seconds(10, self.close_popup_message)
+        if self._config.get_main_config().getboolean('autoclose_popups'):
+            GLib.timeout_add_seconds(10, self.close_popup_message)
 
         return False
 

@@ -141,6 +141,8 @@ class KlipperScreenConfig:
             {"print_estimate_compensation": {
                 "section": "main", "name": _("Slicer Time correction (%)"), "type": "scale", "value": "100",
                 "range": [50, 150], "step": 1}},
+            {"autoclose_popups": {"section": "main", "name": _("Auto-close notifications"), "type": "binary",
+                               "value": "True"}},
 
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]

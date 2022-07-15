@@ -27,6 +27,9 @@ job_complete_timeout: 0
 # Time in seconds before the Job Status closes itself if an error is encountered
 job_error_timeout: 0
 
+# Autoclose popups, this includes various notifications and M118
+autoclose_popups: True
+
 # Specify the language
 #   The language can be specified here instead of using the system default language.
 language: en
@@ -43,6 +46,7 @@ default_printer: Ender 3 Pro
 # To define a full set of custom menues (instead of merging user entries with default entries)
 # set this to False. See Menu section below.
 use_default_menu: True
+
 
 ```
 
