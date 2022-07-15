@@ -12,7 +12,7 @@ def create_panel(*args):
     return SystemPanel(*args)
 
 
-ALLOWED_SERVICES = ["KlipperScreen", "MoonCord", "klipper", "moonraker"]
+ALLOWED_SERVICES = ["KlipperScreen", "MoonCord", "klipper", "moonraker", "webcamd"]
 
 
 class SystemPanel(ScreenPanel):
