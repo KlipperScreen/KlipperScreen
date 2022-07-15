@@ -14,84 +14,51 @@ def create_panel(*args):
 
 
 class BedLevelPanel(ScreenPanel):
+    supported = (4, 6, 8)
+
     def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
         super().__init__(screen, title, back, action_bar, printer_name)
-        self.response_count = None
-        self.panel_name = None
-        self.screw_dict = None
-        self.screws = None
-        self.y_cnt = None
-        self.x_cnt = None
+        self.response_count = 0
+        self.panel_name = ""
+        self.screw_dict = {}
+        self.screws = []
+        self.y_cnt = 0
+        self.x_cnt = 0
         self.x_offset = 0
         self.y_offset = 0
 
     def initialize(self, panel_name):
         self.panel_name = panel_name
+        self.labels['dm'] = self._gtk.ButtonImage("motor-off", _("Disable XY"), "color3")
+        self.labels['dm'].connect("clicked", self.disable_motors)
+
         grid = self._gtk.HomogeneousGrid()
+        grid.attach(self.labels['dm'], 0, 0, 1, 1)
 
-        screws = []
-        config_section_name = None
-        if "screws_tilt_adjust" in self._screen.printer.get_config_section_list():
-            config_section_name = "screws_tilt_adjust"
-        elif "bed_screws" in self._screen.printer.get_config_section_list():
-            config_section_name = "bed_screws"
+        if "bed_screws" in self._screen.printer.get_config_section_list():
+            self.screws = self._get_screws("bed_screws")
+        elif "screws_tilt_adjust" in self._screen.printer.get_config_section_list():
+            self.screws = self._get_screws("screws_tilt_adjust")
+            self.labels['screws'] = self._gtk.ButtonImage("refresh", _("Screws Adjust"), "color4")
+            self.labels['screws'].connect("clicked", self.screws_tilt_calculate)
+            grid.attach(self.labels['screws'], 0, 1, 1, 1)
 
-        if config_section_name is not None:
-            config_section = self._screen.printer.get_config_section(config_section_name)
-            for item in config_section:
-                logging.debug(f"Screws section: {config_section[item]}")
-                result = re.match(r"([\-0-9\.]+)\s*,\s*([\-0-9\.]+)", config_section[item])
-                if result:
-                    screws.append([
-                        round(float(result.group(1)), 2),
-                        round(float(result.group(2)), 2)
-                    ])
-
-            screws = sorted(screws, key=lambda s: (float(s[1]), float(s[0])))
-
-        supported = [4, 6, 8]
-        nscrews = len(screws)
-        if nscrews not in supported:
-            logging.debug(f"{nscrews} bed_screws not supported: calculating 4 locations")
-            xconf = self._screen.printer.get_config_section("stepper_x")
-            yconf = self._screen.printer.get_config_section("stepper_y")
-            x = int(int(xconf['position_max']) / 4)
-            y = int(int(yconf['position_max']) / 4)
-            self.screws = [
-                [x, y],
-                [x * 3, y],
-                [x, y * 3],
-                [x * 3, y * 3],
-            ]
-        else:
-            self.screws = screws
-
-        if (("bltouch" in self._screen.printer.get_config_section_list() or
-             "probe" in self._screen.printer.get_config_section_list()) and
-                config_section_name == "screws_tilt_adjust"):
-            if "bltouch" in self._screen.printer.get_config_section_list():
-                bltouch = self._screen.printer.get_config_section("bltouch")
-                if "x_offset" in bltouch:
-                    self.x_offset = float(bltouch['x_offset'])
-                if "y_offset" in bltouch:
-                    self.y_offset = float(bltouch['y_offset'])
-                logging.debug(f"Bltouch found substracted offset X: {self.x_offset} Y: {self.y_offset}")
-                self._screen.show_popup_message(_("Bltouch found applied offset"), level=1)
-            elif "probe" in self._screen.printer.get_config_section_list():
-                probe = self._screen.printer.get_config_section("probe")
-                if "x_offset" in probe:
-                    self.x_offset = float(probe['x_offset'])
-                if "y_offset" in probe:
-                    self.y_offset = float(probe['y_offset'])
-                logging.debug(f"Probe found substracting offset X: {self.x_offset} Y: {self.y_offset}")
-                self._screen.show_popup_message(_("Probe found applied offset"), level=1)
-            new_screws = []
-            for screw in self.screws:
-                new_screws.append([
-                    self.apply_offset(screw[0], self.x_offset),
-                    self.apply_offset(screw[1], self.y_offset)
-                ])
-            self.screws = new_screws
+        nscrews = len(self.screws)
+        if nscrews not in self.supported:
+            logging.debug(f"{nscrews} bed_screws not supported.")
+            label = Gtk.Label(
+                _("Bed screw configuration not supported:") + f" {nscrews}\n\n"
+                + _("Supported number of screws:") + f" {self.supported}"
+            )
+            grid.attach(label, 1, 0, 3, 2)
+            # Take the user to the console to see results
+            if 'screws' in self.labels:
+                self.labels['screws'].connect("clicked", self.menu_item_clicked, "console", {
+                    "name": "Console",
+                    "panel": "console"
+                })
+            self.content.add(grid)
+            return
 
         # get dimensions
         self.x_cnt = len(list(dict.fromkeys([int(x[0]) for x in self.screws])))
@@ -256,16 +223,6 @@ class BedLevelPanel(ScreenPanel):
 
         grid.attach(bedgrid, 1, 0, 3, 2)
 
-        self.labels['dm'] = self._gtk.ButtonImage("motor-off", _("Disable XY"), "color3")
-        self.labels['dm'].connect("clicked", self.disable_motors)
-
-        grid.attach(self.labels['dm'], 0, 0, 1, 1)
-
-        if self._printer.config_section_exists("screws_tilt_adjust"):
-            self.labels['screws'] = self._gtk.ButtonImage("refresh", _("Screws Adjust"), "color4")
-            self.labels['screws'].connect("clicked", self.screws_tilt_calculate)
-            grid.attach(self.labels['screws'], 0, 1, 1, 1)
-
         self.content.add(grid)
 
     def activate(self):
@@ -296,40 +253,75 @@ class BedLevelPanel(ScreenPanel):
 
     def process_update(self, action, data):
 
-        if action == "notify_gcode_response":
-            if data.startswith('!!'):
-                self.response_count = 0
+        if action != "notify_gcode_response":
+            return
+        if data.startswith('!!'):
+            self.response_count = 0
+            self.labels['screws'].set_sensitive(True)
+            return
+        result = re.match(
+            "^// (.*) : [xX= ]+([\\-0-9\\.]+), [yY= ]+([\\-0-9\\.]+), [zZ= ]+[\\-0-9\\.]+ :" +
+            " (Adjust ->|adjust) ([CW]+ [0-9:]+)",
+            data
+        )
+        if result:
+            x = self.apply_offset(result[2], self.x_offset)
+            y = self.apply_offset(result[3], self.y_offset)
+            for key, value in self.screw_dict.items():
+                if value and x == value[0] and y == value[1]:
+                    logging.debug(f"X: {x} Y: {y} Adjust: {result[5]} Pos: {key}")
+                    self.labels[key].set_label(result[5])
+                    break
+            self.response_count += 1
+            if self.response_count >= len(self.screws) - 1:
                 self.labels['screws'].set_sensitive(True)
-                return
+        else:
             result = re.match(
-                "^// (.*) : [xX= ]+([\\-0-9\\.]+), [yY= ]+([\\-0-9\\.]+), [zZ= ]+[\\-0-9\\.]+ :" +
-                " (Adjust ->|adjust) ([CW]+ [0-9:]+)",
+                "^// (.*) : [xX= ]+([\\-0-9\\.]+), [yY= ]+([\\-0-9\\.]+), [zZ= ]+[\\-0-9\\.]",
                 data
             )
-            if result:
-                x = self.apply_offset(result.group(2), self.x_offset)
-                y = self.apply_offset(result.group(3), self.y_offset)
+            if result and re.search('base', result[1]):
+                x = self.apply_offset(result[2], self.x_offset)
+                y = self.apply_offset(result[3], self.y_offset)
+                logging.debug(f"X: {x} Y: {y} is the reference")
                 for key, value in self.screw_dict.items():
                     if value and x == value[0] and y == value[1]:
-                        logging.debug(f"X: {x} Y: {y} Adjust: {result.group(5)} Pos: {key}")
-                        self.labels[key].set_label(result.group(5))
-                        break
-                self.response_count += 1
-                if self.response_count >= len(self.screws) - 1:
-                    self.labels['screws'].set_sensitive(True)
-            else:
-                result = re.match(
-                    "^// (.*) : [xX= ]+([\\-0-9\\.]+), [yY= ]+([\\-0-9\\.]+), [zZ= ]+[\\-0-9\\.]",
-                    data
-                )
-                if result and re.search('base', result.group(1)):
-                    x = self.apply_offset(result.group(2), self.x_offset)
-                    y = self.apply_offset(result.group(3), self.y_offset)
-                    logging.debug(f"X: {x} Y: {y} is the reference")
-                    for key, value in self.screw_dict.items():
-                        if value and x == value[0] and y == value[1]:
-                            logging.debug(f"X: {x} Y: {y} Pos: {key}")
-                            self.labels[key].set_label(_("Reference"))
+                        logging.debug(f"X: {x} Y: {y} Pos: {key}")
+                        self.labels[key].set_label(_("Reference"))
+
+    def _get_screws(self, config_section_name):
+        screws = []
+        config_section = self._screen.printer.get_config_section(config_section_name)
+        for item in config_section:
+            logging.debug(f"Screws section: {config_section[item]}")
+            result = re.match(r"([\-0-9\.]+)\s*,\s*([\-0-9\.]+)", config_section[item])
+            if result:
+                screws.append([
+                    round(float(result[1]), 2),
+                    round(float(result[2]), 2)
+                ])
+        screws = sorted(screws, key=lambda s: (float(s[1]), float(s[0])))
+        logging.info(f"Defined Screws: {config_section_name} {screws}")
+        # bed_screws uses NOZZLE positions
+        # screws_tilt_adjust uses PROBE positions and to be offseted for the buttons to work equal to bed_screws
+        if config_section_name == "screws_tilt_adjust":
+            if "bltouch" in self._screen.printer.get_config_section_list():
+                self._get_offsets("bltouch")
+            elif "probe" in self._screen.printer.get_config_section_list():
+                self._get_offsets("probe")
+            for screw in screws:
+                screw[0] = self.apply_offset(screw[0], self.x_offset)
+                screw[1] = self.apply_offset(screw[1], self.y_offset)
+            logging.info(f"Screws with probe offsets: {screws}")
+        return screws
+
+    def _get_offsets(self, section):
+        probe = self._screen.printer.get_config_section(section)
+        if "x_offset" in probe:
+            self.x_offset = float(probe['x_offset'])
+        if "y_offset" in probe:
+            self.y_offset = float(probe['y_offset'])
+        logging.debug(f"{section} offset X: {self.x_offset} Y: {self.y_offset}")
 
     @staticmethod
     def apply_offset(pos, offset):
