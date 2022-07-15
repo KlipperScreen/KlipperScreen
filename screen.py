@@ -352,9 +352,24 @@ class KlipperScreen(Gtk.Window):
         if self.popup_message is not None:
             self.close_popup_message()
 
-        box = Gtk.Box()
-        box.get_style_context().add_class("message_popup")
+        msg = Gtk.Button(label=f"{message}")
+        msg.set_hexpand(True)
+        msg.set_vexpand(True)
+        msg.get_child().set_line_wrap(True)
+        msg.get_child().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        msg.connect("clicked", self.close_popup_message)
 
+        close = Gtk.Button(label="<b><big>X</big></b>")
+        close.set_hexpand(False)
+        close.set_vexpand(True)
+        close.get_child().set_use_markup(True)
+        close.set_can_focus(False)
+        close.connect("clicked", self.close_popup_message)
+
+        box = Gtk.Box()
+        box.set_size_request(self.width, -1)
+        box.set_halign(Gtk.Align.CENTER)
+        box.get_style_context().add_class("message_popup")
         if level == 1:
             box.get_style_context().add_class("message_popup_echo")
         elif level == 2:
@@ -362,20 +377,8 @@ class KlipperScreen(Gtk.Window):
         else:
             box.get_style_context().add_class("message_popup_error")
 
-        box.set_size_request(self.width, self.gtk.get_header_size())
-        label = Gtk.Label()
-        if "must home axis first" in message.lower():
-            message = "Must home all axis first."
-        label.set_text(message)
-
-        close = Gtk.Button.new_with_label("X")
-        close.set_can_focus(False)
-        close.props.relief = Gtk.ReliefStyle.NONE
-        close.connect("clicked", self.close_popup_message)
-
-        box.pack_start(label, True, True, 0)
-        box.pack_end(close, False, False, 0)
-        box.set_halign(Gtk.Align.CENTER)
+        box.add(msg)
+        box.add(close)
 
         self.base_panel.get().put(box, 0, 0)
 
@@ -564,7 +567,8 @@ class KlipperScreen(Gtk.Window):
     def _menu_go_back(self, widget=None):
         logging.info("#### Menu go back")
         self.remove_keyboard()
-        self.close_popup_message()
+        if self._config.get_main_config().getboolean('autoclose_popups'):
+            self.close_popup_message()
         self._remove_current_panel()
 
     def _menu_go_home(self):
