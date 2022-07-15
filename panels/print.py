@@ -229,7 +229,11 @@ class PrintPanel(ScreenPanel):
         else:
             icon = self._gtk.Image("file", 1.6)
 
-        file.add(icon)
+        img = Gtk.Button()
+        img.set_image(icon)
+        img.connect("clicked", self.confirm_delete_file, f"gcodes/{filepath}")
+
+        file.add(img)
         file.add(labels)
         if os.path.splitext(filename)[1] in [".gcode", ".g", ".gco"]:
             file.add(actions)
@@ -241,6 +245,16 @@ class PrintPanel(ScreenPanel):
             "info": info,
             "name": name
         }
+
+    def confirm_delete_file(self, widget, filepath):
+        logging.debug(f"Sending delete_file {filepath}")
+        params = {"path": f"{filepath}"}
+        self._screen._confirm_send_action(
+            None,
+            _("Delete File?") + "\n\n" + filepath,
+            "server.files.delete_file",
+            params
+        )
 
     def back(self):
         if len(self.cur_directory.split('/')) > 1:
@@ -352,7 +366,8 @@ class PrintPanel(ScreenPanel):
         if "size" in fileinfo:
             info += _("Size") + f': <b>{self.format_size(fileinfo["size"])}</b>\n'
         if "estimated_time" in fileinfo:
-            info += _("Print Time") + f': <b>{self.format_time(fileinfo["estimated_time"])}</b></small>'
+            info += _("Print Time") + f': <b>{self.format_time(fileinfo["estimated_time"])}</b>'
+        info += "</small>"
 
         return info
 
