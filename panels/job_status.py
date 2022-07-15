@@ -27,10 +27,8 @@ class JobStatusPanel(ScreenPanel):
         self.req_speed = 0
         self.f_layer_h = self.layer_h = 1
         self.oheight = 0
-        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-        # the diameter may change with extruders but is highly unusual
-        diameter = float(self._printer.get_config_section(self.current_extruder)['filament_diameter'])
-        self.fila_section = pi * ((diameter / 2) ** 2)
+        self.current_extruder = None
+        self.fila_section = 0
         self.buttons = None
         self.is_paused = False
         self.filename_label = self.filename = self.prev_pos = self.prev_gpos = None
@@ -129,6 +127,10 @@ class JobStatusPanel(ScreenPanel):
 
         self.labels['info_grid'] = Gtk.Grid()
         self.labels['info_grid'].attach(self.labels['thumbnail'], 0, 0, 1, 1)
+        if self._screen.printer.get_tools():
+            self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+            diameter = float(self._printer.get_config_section(self.current_extruder)['filament_diameter'])
+            self.fila_section = pi * ((diameter / 2) ** 2)
         self.create_status_grid()
 
         self.grid.attach(overlay, 0, 0, 1, 1)
@@ -245,8 +247,10 @@ class JobStatusPanel(ScreenPanel):
         szfe = Gtk.Grid()
         szfe.attach(self.speed_button, 0, 0, 1, 1)
         szfe.attach(self.z_button, 1, 0, 1, 1)
-        szfe.attach(self.extrusion_button, 0, 1, 1, 1)
-        szfe.attach(self.fan_button, 1, 1, 1, 1)
+        if self._screen.printer.get_tools():
+            szfe.attach(self.extrusion_button, 0, 1, 1, 1)
+        if self._screen.printer.get_fans():
+            szfe.attach(self.fan_button, 1, 1, 1, 1)
 
         info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         info.get_style_context().add_class("printing-info")
@@ -359,12 +363,18 @@ class JobStatusPanel(ScreenPanel):
         ctx.stroke()
 
     def activate(self):
-
         ps = self._printer.get_stat("print_stats")
         self.set_state(ps['state'])
         if self.state_timeout is None:
             self.state_timeout = GLib.timeout_add_seconds(1, self.state_check)
         self.create_status_grid()
+        if self.vel_timeout is None:
+            self.vel_timeout = GLib.timeout_add_seconds(1, self.update_velocity)
+
+    def deactivate(self):
+        if self.vel_timeout is not None:
+            GLib.source_remove(self.vel_timeout)
+            self.vel_timeout = None
 
     def create_buttons(self):
 
@@ -648,17 +658,16 @@ class JobStatusPanel(ScreenPanel):
             self.elapsed_button.set_label(elapsed_label)
             remaining_label = f"{self.labels['left'].get_text()}  {self.labels['time_left'].get_text()}"
             self.left_button.set_label(remaining_label)
-        if self.vel_timeout is None:
-            self.vel_timeout = GLib.timeout_add_seconds(1, self.update_velocity)
 
     def update_velocity(self):
-        if len(self.velstore) > 0:
-            self.vel = (self.vel + median(array(self.velstore))) / 2
-            self.velstore = []
-        if len(self.flowstore) > 0:
-            self.flowrate = (self.flowrate + median(array(self.flowstore))) / 2
-            self.flowstore = []
-
+        if not self.velstore:
+            self.velstore.append(0)
+        if not self.flowstore:
+            self.flowstore.append(0)
+        self.flowrate = median(array(self.flowstore))
+        self.vel = median(array(self.velstore))
+        self.velstore = []
+        self.flowstore = []
         self.labels['flowrate'].set_label(f"{self.flowrate:.1f} mm³/s")
         self.labels['req_speed'].set_text(f"{self.vel:.0f}/{self.req_speed:.0f} mm/s")
         if self.main_status_displayed:
