@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-02 13:43-0300\n"
+"POT-Creation-Date: 2022-07-16 14:02-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -608,7 +608,7 @@ msgid "Sort:"
 msgstr "Fajta:"
 
 msgid "Speed (mm/s)"
-msgstr "Sebesség (mm/mp)"
+msgstr "Sebesség (mm/s)"
 
 msgid "Speed +"
 msgstr "Sebesség +"
@@ -698,10 +698,10 @@ msgid "X-"
 msgstr "X-"
 
 msgid "XY Move Speed (mm/s)"
-msgstr "XY Mozgási seb. (mm/mp)"
+msgstr "XY Mozgási seb. (mm/s)"
 
 msgid "XY Speed (mm/s)"
-msgstr "XY Sebesség (mm/mp)"
+msgstr "XY Sebesség (mm/s)"
 
 msgid "Y+"
 msgstr "Y+"
@@ -713,10 +713,10 @@ msgid "Z Calibrate"
 msgstr "Z Kalibrálás"
 
 msgid "Z Move Speed (mm/s)"
-msgstr "Z Mozgási seb. (mm/mp)"
+msgstr "Z Mozgási seb. (mm/s)"
 
 msgid "Z Speed (mm/s)"
-msgstr "Z Sebesség (mm/mp)"
+msgstr "Z Sebesség (mm/s)"
 
 msgid "Z Tilt"
 msgstr "Z Dőlés"
@@ -750,51 +750,7 @@ msgid "mm"
 msgstr "mm"
 
 msgid "mm/s"
-msgstr "mm/mp"
+msgstr "mm/s"
 
 msgid "mm/s²"
-msgstr "mm/mp²"
-
-#~ msgid "Tool"
-#~ msgstr "Eszköz"
-
-#~ msgid "Displayed Macros"
-#~ msgstr "Megjelenített makrók"
-
-#~ msgid "Z Position"
-#~ msgstr "Z Pozíció"
-
-#~ msgid "IPv4"
-#~ msgstr "IPv4"
-
-#~ msgid "IPv6"
-#~ msgstr "IPv6"
-
-#~ msgid "Unknown Heater "
-#~ msgstr "Ismeretlen melegítő "
-
-#~ msgid "Disconnect"
-#~ msgstr "Leválasztás"
-
-#~ msgid "Duration Only"
-#~ msgstr "Csak időtartam"
-
-#~ msgid "Klipper Version"
-#~ msgstr "Klipper verzió"
-
-#~ msgid ""
-#~ "Klipper has encountered an error with the micro-controller.\n"
-#~ "Please recompile and flash."
-#~ msgstr ""
-#~ "A Klipper hibát észlelt a mikrovezérlővel kapcsolatban.\n"
-#~ "Fordítsa újra és töltse fel."
-
-#~ msgid ""
-#~ "Klipper has encountered an error.\n"
-#~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
-#~ msgstr ""
-#~ "A Klipper hibát észlelt.\n"
-#~ "A probléma megoldásához küldjön ki egy FIRMWARE_RESTART-ot."
-
-#~ msgid "KlipperScreen Version"
-#~ msgstr "KlipperScreen verzió"
+msgstr "mm/s²"
