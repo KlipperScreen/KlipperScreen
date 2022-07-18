@@ -131,8 +131,8 @@
         </key>
     </row>
     <row>
-        <key obey-caps='true'>
-            <default display="image:shift.png" action="modifier:shift" />
+        <key obey-caps='true' fill="true">
+            <default display="Shift" action="modifier:shift" />
         </key>
         <key obey-caps='true'>
             <default display="z" />
@@ -177,7 +177,7 @@
             <mod2    display="]" />
         </key>
         <key obey-caps='true'>
-            <default display="image:arrow.png" action="backspace" />
+            <default display="&lt;x" action="backspace" />
         </key>
     </row>
     <row>
