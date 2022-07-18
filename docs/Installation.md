@@ -6,19 +6,17 @@ Install the screen, following the instructions provided by the manufacturer, Som
 It's strongly recommended to test it and ensure your hardware is working with Raspbian, Ubuntu or any distro you like.
 Once you stablished that the screen is working, then proceed installing KlipperScreen.
 
-## Setup Raspberry Pi
-This install process is meant for Raspbian non-desktop version aka Raspbian Lite, but it works on other versions.
+## Setup
+This install process is meant for a non-desktop version of the OS for example Raspbian Lite, but it should work on other versions.
 
-If you want to use it on Raspbian desktop (GUI version), then use `sudo raspi-config` to set boot to console by choosing the following options in order:
+If you want to use it on a desktop (GUI version), then do `sudo systemctl set-default multi-user.target`
+if it's a Raspberry Pi, you can use `sudo raspi-config` to set boot to console by choosing the following options in order:
 
 ```sh
 1System Options
 └──S5 Boot / Auto Login
    └──B1 Console
 ```
-
-!!! note
-    Other distros will be different on how to boot to console.
 
 ## Auto install
 
