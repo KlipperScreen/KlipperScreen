@@ -267,7 +267,17 @@ trough {
 }
 
 .keyboard_box {
+    margin-top: 35px;
+}
+
+.keyboard_matchbox {
     margin-top: 42px;
+}
+
+.keyboard_pad {
+    margin: 0.05em;
+    padding: 0.0em;
+    border-radius: 0.7em;
 }
 
 .message_popup {

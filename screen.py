@@ -23,7 +23,7 @@ from ks_includes.KlippyRest import KlippyRest
 from ks_includes.files import KlippyFiles
 from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.printer import Printer
-
+from ks_includes.widgets.keyboard import Keyboard
 from ks_includes.config import KlipperScreenConfig
 from panels.base_panel import BasePanel
 
@@ -1020,47 +1020,59 @@ class KlipperScreen(Gtk.Window):
         self.show_panel('job_status', "job_status", "Print Status", 2)
         self.base_panel.show_heaters(True)
 
-    def show_keyboard(self, widget=None, event=None):
+    def show_keyboard(self, widget=None, event=None, entry=None):
         if self.keyboard is not None:
             return
 
-        env = os.environ.copy()
-        usrkbd = "/home/pi/.matchbox/keyboard.xml"
-        if os.path.isfile(usrkbd):
-            env["MB_KBD_CONFIG"] = usrkbd
-        else:
-            env["MB_KBD_CONFIG"] = "ks_includes/locales/keyboard.xml"
-        p = subprocess.Popen(["matchbox-keyboard", "--xid"], stdout=subprocess.PIPE,
-                             stderr=subprocess.PIPE, env=env)
-
-        xid = int(p.stdout.readline())
-        logging.debug(f"XID {xid}")
-        logging.debug(f"PID {p.pid}")
-        keyboard = Gtk.Socket()
-
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.set_size_request(self.gtk.get_content_width(), self.gtk.get_keyboard_height())
+
+        if self._config.get_main_config().getboolean("use-matchbox-keyboard", False):
+            env = os.environ.copy()
+            usrkbd = os.path.expanduser("~/.matchbox/keyboard.xml")
+            if os.path.isfile(usrkbd):
+                env["MB_KBD_CONFIG"] = usrkbd
+            else:
+                env["MB_KBD_CONFIG"] = "ks_includes/locales/keyboard.xml"
+            p = subprocess.Popen(["matchbox-keyboard", "--xid"], stdout=subprocess.PIPE,
+                                 stderr=subprocess.PIPE, env=env)
+            xid = int(p.stdout.readline())
+            logging.debug(f"XID {xid}")
+            logging.debug(f"PID {p.pid}")
+
+            keyboard = Gtk.Socket()
+            box.get_style_context().add_class("keyboard_matchbox")
+            box.pack_start(keyboard, True, True, 0)
+            self.base_panel.get_content().pack_end(box, False, False, 0)
+
+            self.show_all()
+            keyboard.add_id(xid)
+
+            self.keyboard = {
+                "box": box,
+                "process": p,
+                "socket": keyboard
+            }
+            return
+        if entry is None:
+            logging.debug("Error: no entry provided for keyboard")
+            return
         box.get_style_context().add_class("keyboard_box")
-        box.pack_start(keyboard, True, True, 0)
-
-        self.base_panel.get_content().pack_end(box, False, False, 0)
-
-        self.show_all()
-        keyboard.add_id(xid)
-
+        box.add(Keyboard(self, self.remove_keyboard, entry=entry))
         self.keyboard = {
-            "box": box,
-            # "panel": cur_panel.get(),
-            "process": p,
-            "socket": keyboard
+            "entry": entry,
+            "box": box
         }
+        self.base_panel.get_content().pack_end(box, False, False, 0)
+        self.base_panel.get_content().show_all()
 
     def remove_keyboard(self, widget=None, event=None):
         if self.keyboard is None:
             return
 
+        if 'process' in self.keyboard:
+            os.kill(self.keyboard['process'].pid, signal.SIGTERM)
         self.base_panel.get_content().remove(self.keyboard['box'])
-        os.kill(self.keyboard['process'].pid, signal.SIGTERM)
         self.keyboard = None
 
     def change_cursor(self, cursortype=None):

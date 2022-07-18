@@ -19,8 +19,8 @@ button:active {
 .button_active {
     background-color: #000000;
     border-color: #d81549;
-    border-width: .15em;
     border-style: dashed;
+    border-width: .25em;
     border-radius: 1em;
 }
 
@@ -226,4 +226,8 @@ textview .time {
 
 .error {
     background-color: #B71C1C;
+}
+
+.keyboard_pad {
+    background-color: #090909; /*base02*/
 }
