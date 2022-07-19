@@ -23,9 +23,9 @@ Klipper Sections:
 !!! important:
     `[bed_screws]` uses Nozzle positions and `[screws_tilt_adjust]` uses Probe positions
 
-This panel will favor `[bed_screws]` but if it's not defined,
-the probe offset will be applied to the defined screw values in `[screws_tilt_adjust]`,
-this way the position buttons behave like if `[bed_screws]` was defined.
+This panel will use `[bed_screws]` if `[screws_tilt_adjust]` is not defined,
+the probe offset will be applied to the defined screw values in `[screws_tilt_adjust]`
+so the buttons will move the nozzle above the screws like in `[bed_screws]`
 
 ### Bed Mesh
 ```py

@@ -88,6 +88,16 @@ titlebar_name_type: None
 calibrate_x_position: 100
 calibrate_y_position: 100
 
+# Bed Screws
+# define the screw positons required for odd number of screws in a comma separated list
+# possible values are: bl, br, bm, fl, fr, fm, lm, rm
+# they correspond to back-left, back-right, back-middle, front-left, front-right, front-middle, left-middle, left-right
+screw_positions: ""
+
+# Rotation is useful if the screen is not directly in front of the machine.
+# Valid values are 0 90 180 270
+screw_rotation: 0
+
 # Screen DPMS
 # By default DPMS is used to turn off the screen, this should prevent burn-in and save power.
 # However if you find that your screen doesn't turn off because it doesn't support it
@@ -116,14 +126,6 @@ for example:
 ```py
 [preheat cooldown]
 gcode: M107
-```
-
-## Bed Screws
-```py
-[bed_screws]
-# Rotation is useful if the screen is not directly in front of the machine.
-# Valid values are 0 90 180 270
-rotation: 0
 ```
 
 ## Menu

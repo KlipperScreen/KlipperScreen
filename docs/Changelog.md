@@ -2,9 +2,6 @@
 
 Breaking changes will be listed here.
 
-#### [2022 08](https://github.com/jordanruthe/KlipperScreen/)
-* The bed level panel will use `[bed_screws]` if defined else`[screws_tilt_calculate]`
-
 #### [2022 03 21](https://github.com/jordanruthe/KlipperScreen/commit/bc34b3c8d6761c27a0b0c62fc4dfa11442b417f6)
 * Default configuration is now merged again.
 Fixing [2021 05 20](https://github.com/jordanruthe/KlipperScreen/commit/eb801486928bf02709033dcbc5f0a45ca43b23c1)
