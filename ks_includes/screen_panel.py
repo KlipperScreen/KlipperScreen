@@ -9,7 +9,7 @@ from ks_includes.KlippyGcodes import KlippyGcodes
 
 class ScreenPanel:
 
-    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
+    def __init__(self, screen, title, back=True):
         self.menu = None
         self._screen = screen
         self._config = screen._config

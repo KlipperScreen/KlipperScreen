@@ -21,8 +21,8 @@ SHAPERS = ['zv', 'mzv', 'zvd', 'ei', '2hump_ei', '3hump_ei']
 
 
 class InputShaperPanel(ScreenPanel):
-    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
-        super().__init__(screen, title, back, action_bar, printer_name)
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
         self.freq_xy_adj = {}
         self.freq_xy_combo = {}
         self.calibrate_btn = self._gtk.ButtonImage("move", _('Finding ADXL'), "color1", word_wrap=False)

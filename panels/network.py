@@ -16,8 +16,8 @@ def create_panel(*args):
 class NetworkPanel(ScreenPanel):
     initialized = False
 
-    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
-        super().__init__(screen, title, back, action_bar, printer_name)
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
         self.show_add = False
         self.networks = {}
         self.interface = None

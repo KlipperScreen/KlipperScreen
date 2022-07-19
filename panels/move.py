@@ -20,8 +20,8 @@ class MovePanel(ScreenPanel):
     distance = 1
     distances = ['.1', '.5', '1', '5', '10', '25', '50']
 
-    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
-        super().__init__(screen, title, back, action_bar, printer_name)
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
         self.settings = {}
         self.menu = ['move_menu']
 

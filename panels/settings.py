@@ -12,8 +12,8 @@ def create_panel(*args):
 
 
 class SettingsPanel(ScreenPanel):
-    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
-        super().__init__(screen, title, back, action_bar, printer_name)
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
         self.printers = self.settings = {}
         self.menu = ['settings_menu']
 

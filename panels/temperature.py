@@ -17,8 +17,8 @@ class TemperaturePanel(ScreenPanel):
     graph_update = None
     active_heater = None
 
-    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
-        super().__init__(screen, title, back, action_bar, printer_name)
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
         self.popover_device = None
         self.h = 1
         self.tempdeltas = ["1", "5", "10", "25"]

@@ -14,8 +14,8 @@ def create_panel(*args):
 
 class ExtrudePanel(ScreenPanel):
 
-    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
-        super().__init__(screen, title, back, action_bar, printer_name)
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
         self.speeds = ['1', '2', '5', '25']
         self.speed = 1
