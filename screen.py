@@ -777,15 +777,16 @@ class KlipperScreen(Gtk.Window):
             self.printer_select_callbacks = [self.state_ready]
             return
 
+        self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut'))
+        self.base_panel.show_heaters(True)
+
         # Do not return to main menu if completing a job, timeouts/user input will return
         if "job_status" in self._cur_panels or "main_menu" in self._cur_panels:
             return
 
-        self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut'))
         if prev_state not in ['paused', 'printing']:
             self.init_printer()
             self.base_panel._printer = self.printer
-        self.base_panel.show_heaters(True)
 
         self.printer_ready()
 
@@ -1019,6 +1020,7 @@ class KlipperScreen(Gtk.Window):
         self.close_popup_message()
         self.show_panel('job_status', "job_status", "Print Status", 2)
         self.base_panel.show_heaters(True)
+        self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut'))
 
     def show_keyboard(self, widget=None, event=None, entry=None):
         if self.keyboard is not None:
