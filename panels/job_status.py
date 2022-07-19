@@ -830,7 +830,7 @@ class JobStatusPanel(ScreenPanel):
 
     def show_file_thumbnail(self):
         if self._files.has_thumbnail(self.filename):
-            pixbuf = self.get_file_image(self.filename, 5, 5)
+            pixbuf = self.get_file_image(self.filename, 5, 4)
             if pixbuf is not None:
                 self.labels['thumbnail'].set_from_pixbuf(pixbuf)
 
