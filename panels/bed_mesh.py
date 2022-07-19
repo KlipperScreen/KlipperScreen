@@ -23,8 +23,8 @@ def create_panel(*args):
 
 class BedMeshPanel(ScreenPanel):
 
-    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
-        super().__init__(screen, title, back, action_bar, printer_name)
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
         self.profiles = {}
         self.show_create = False
         self.active_mesh = None

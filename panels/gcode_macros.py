@@ -12,8 +12,8 @@ def create_panel(*args):
 
 
 class MacroPanel(ScreenPanel):
-    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
-        super().__init__(screen, title, back, action_bar, printer_name)
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
         self.sort_reverse = False
         self.sort_lbl = _("Name")
         self.sort_btn = self._gtk.ButtonImage("arrow-up", self.sort_lbl, "color1", .66, Gtk.PositionType.RIGHT, False)
