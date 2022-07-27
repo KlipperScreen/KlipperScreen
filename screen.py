@@ -88,6 +88,7 @@ class KlipperScreen(Gtk.Window):
         self.use_dpms = True
         self.apiclient = None
         self.version = version
+        self.dialogs = []
 
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
@@ -213,6 +214,8 @@ class KlipperScreen(Gtk.Window):
         for panel in list(self.panels):
             if panel not in ["printer_select", "splash_screen"]:
                 del self.panels[panel]
+        for dialog in self.dialogs:
+            dialog.destroy()
         self.base_panel.show_printer_select(True)
         self.printer_initializing(_("Connecting to %s") % name)
 
@@ -757,6 +760,8 @@ class KlipperScreen(Gtk.Window):
         for panel in list(self.panels):
             if panel not in ["printer_select", "splash_screen"]:
                 del self.panels[panel]
+        if dialog in self.dialogs:
+            dialog.destroy()
 
     def state_paused(self, prev_state):
         if "job_status" not in self._cur_panels:

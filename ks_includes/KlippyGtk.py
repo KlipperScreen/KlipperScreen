@@ -218,6 +218,7 @@ class KlippyGtk:
         else:
             dialog.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.BLANK_CURSOR))
 
+        self.screen.dialogs.append(dialog)
         return dialog
 
     def ToggleButtonImage(self, image_name, label, style=None, scale=1.38):
