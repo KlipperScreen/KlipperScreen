@@ -1,5 +1,6 @@
 import gi
 import logging
+import contextlib
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib, Pango
@@ -199,65 +200,68 @@ class TemperaturePanel(ScreenPanel):
                 self.active_heaters.pop(self.active_heaters.index(device))
                 self.devices[device]['name'].get_style_context().remove_class("button_active")
                 self.devices[device]['select'].set_label(_("Select"))
+                logging.info(f"Deselecting {device}")
                 return
             self.active_heaters.append(device)
             self.devices[device]['name'].get_style_context().add_class("button_active")
             self.devices[device]['select'].set_label(_("Deselect"))
+            logging.info(f"Seselecting {device}")
         return
 
     def set_temperature(self, widget, setting):
-
         if len(self.active_heaters) == 0:
             self._screen.show_popup_message(_("Nothing selected"))
         else:
-            if setting == "cooldown":
-                for heater in self.active_heaters:
-                    if heater.startswith('extruder'):
-                        self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), 0)
-                    elif heater.startswith('heater_bed'):
-                        self._screen._ws.klippy.set_bed_temp(0)
-                    elif heater.startswith('heater_generic '):
-                        self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), 0)
-                    logging.info(f"Setting {heater} to 0")
-                    self._printer.set_dev_stat(heater, "target", 0)
-            else:
-                target = None
-                for heater in self.active_heaters:
-                    max_temp = int(float(self._printer.get_config_section(heater)['max_temp']))
-                    if heater.startswith('extruder'):
-                        target = self.preheat_options[setting]["extruder"]
-                        if target is not None and 0 <= target <= max_temp:
-                            self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), target)
-                    elif heater.startswith('heater_bed'):
-                        target = self.preheat_options[setting]["bed"]
-                        if target is not None and 0 <= target <= max_temp:
-                            self._screen._ws.klippy.set_bed_temp(target)
-                    elif heater.startswith('heater_generic '):
-                        target = self.preheat_options[setting]["heater_generic"]
-                        if target is not None and 0 <= target <= max_temp:
-                            self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), target)
-                    elif heater.startswith('temperature_fan '):
-                        target = self.preheat_options[setting]["temperature_fan"]
-                        if target is not None and 0 <= target <= max_temp:
-                            self._screen._ws.klippy.set_temp_fan_temp(" ".join(heater.split(" ")[1:]), target)
-                    else:
-                        logging.info(f"Unknown heater: {heater}")
-                        self._screen.show_popup_message(_("Unknown Heater") + " " + heater)
+            target = 0 if setting == "cooldown" else None
+            for heater in self.active_heaters:
+                max_temp = float(self._printer.get_config_section(heater)['max_temp'])
+                name = heater.split()[1] if len(heater.split()) > 1 else heater
+                if target is None:
+                    for i in self.preheat_options[setting]:
+                        logging.info(f"{self.preheat_options[setting]}")
+                        if i == name:
+                            # Assign the specific target if available
+                            target = self.preheat_options[setting][name]
+                        elif i == heater:
+                            target = self.preheat_options[setting][heater]
+                if heater.startswith('extruder'):
+                    if self.validate(heater, target, max_temp):
+                        self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), target)
+                elif heater.startswith('heater_bed'):
                     if target is None:
-                        continue
-                    if target <= max_temp:
-                        if target >= 0:
-                            self._printer.set_dev_stat(heater, "target", target)
-                            logging.info(f"Setting {heater} to {target}")
-                    else:
-                        self._screen.show_popup_message(_("Can't set above the maximum:") + f' {max_temp}')
-            if setting in self.preheat_options and self.preheat_options[setting]['gcode']:
-                # This small delay is needed to properly update the target if the user configured something above
-                # and then changed the target again using preheat gcode
-                GLib.timeout_add(250, self.preheat_gcode, setting)
+                        with contextlib.suppress(KeyError):
+                            target = self.preheat_options[setting]["bed"]
+                    if self.validate(heater, target, max_temp):
+                        self._screen._ws.klippy.set_bed_temp(target)
+                elif heater.startswith('heater_generic '):
+                    if target is None:
+                        with contextlib.suppress(KeyError):
+                            target = self.preheat_options[setting]["heater_generic"]
+                    if self.validate(heater, target, max_temp):
+                        self._screen._ws.klippy.set_heater_temp(name, target)
+                elif heater.startswith('temperature_fan '):
+                    if target is None:
+                        with contextlib.suppress(KeyError):
+                            target = self.preheat_options[setting]["temperature_fan"]
+                    if self.validate(heater, target, max_temp):
+                        self._screen._ws.klippy.set_temp_fan_temp(name, target)
+            # This small delay is needed to properly update the target if the user configured something above
+            # and then changed the target again using preheat gcode
+            GLib.timeout_add(250, self.preheat_gcode, setting)
+
+    def validate(self, heater, target=None, max_temp=None):
+        if target is not None and max_temp is not None:
+            if 0 <= target <= max_temp:
+                self._printer.set_dev_stat(heater, "target", target)
+                return True
+            elif target > max_temp:
+                self._screen.show_popup_message(_("Can't set above the maximum:") + f' {max_temp}')
+                return False
+        return False
 
     def preheat_gcode(self, setting):
-        self._screen._ws.klippy.gcode_script(self.preheat_options[setting]['gcode'])
+        with contextlib.suppress(KeyError):
+            self._screen._ws.klippy.gcode_script(self.preheat_options[setting]['gcode'])
         return False
 
     def add_device(self, device):
