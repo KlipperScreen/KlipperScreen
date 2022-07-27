@@ -309,8 +309,14 @@ class KlipperScreenConfig:
     def get_preheat_options(self):
         index = "preheat "
         items = [i[len(index):] for i in self.config.sections() if i.startswith(index)]
-
         return {item: self._build_preheat_item(index + item) for item in items}
+
+    def _build_preheat_item(self, name):
+        if name not in self.config:
+            return False
+        cfg = self.config[name]
+        return {opt: cfg.get("gcode", None) if opt == "gcode" else cfg.getint(opt, None) for opt in cfg}
+
 
     def get_printer_config(self, name):
         if not name.startswith("printer "):
@@ -425,15 +431,3 @@ class KlipperScreenConfig:
             item["params"] = {}
 
         return {name[(len(menu) + 6):]: item}
-
-    def _build_preheat_item(self, name):
-        if name not in self.config:
-            return False
-        cfg = self.config[name]
-        return {
-            "extruder": cfg.getint("extruder", None),
-            "bed": cfg.getint("bed", None),
-            "heater_generic": cfg.getint("heater_generic", None),
-            "temperature_fan": cfg.getint("temperature_fan", None),
-            "gcode": cfg.get("gcode", None)
-        }

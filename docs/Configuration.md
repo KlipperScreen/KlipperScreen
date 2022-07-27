@@ -108,14 +108,16 @@ use_dpms: True
 ## Preheat Options
 ```py
 [preheat my_temp_setting]
-# Temperature for the heated bed
-bed: 40
-# Temperature for the tools
 extruder: 195
-# Temperature for generic heaters
-heater_generic: 40
-# Temperature controlled fans (temperature_fan in klipper config)
+extruder1: 60
+heater_bed: 40
+# Use the name
+chamber: 60
+# or the full name
+heater_generic chamber: 60
+# or for example apply the same temp to devices of the same type
 temperature_fan: 40
+heater_generic: 60
 # optional GCode to run when the option is selected
 gcode: MY_HEATSOAK_MACRO
 ```
