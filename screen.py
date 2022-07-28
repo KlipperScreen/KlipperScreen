@@ -89,6 +89,7 @@ class KlipperScreen(Gtk.Window):
         self.apiclient = None
         self.version = version
         self.dialogs = []
+        self.confirm = None
 
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
@@ -894,7 +895,10 @@ class KlipperScreen(Gtk.Window):
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        self.gtk.Dialog(self, buttons, label, self._confirm_send_action_response, method, params)
+        if self.confirm is not None:
+            self.confirm.destroy()
+        self.confirm = self.gtk.Dialog(self, buttons, label, self._confirm_send_action_response, method, params)
+
 
     def _confirm_send_action_response(self, widget, response_id, method, params):
         if response_id == Gtk.ResponseType.OK:
