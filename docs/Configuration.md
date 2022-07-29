@@ -47,7 +47,11 @@ default_printer: Ender 3 Pro
 # set this to False. See Menu section below.
 use_default_menu: True
 
-
+# Screen DPMS
+# By default DPMS is used to turn off the screen, this should prevent burn-in and save power.
+# However if you find that your screen doesn't turn off because it doesn't support it
+# Setting this to false will just turn the screen black.
+use_dpms: True
 ```
 
 ## Printer Options
@@ -97,12 +101,6 @@ screw_positions: ""
 # Rotation is useful if the screen is not directly in front of the machine.
 # Valid values are 0 90 180 270
 screw_rotation: 0
-
-# Screen DPMS
-# By default DPMS is used to turn off the screen, this should prevent burn-in and save power.
-# However if you find that your screen doesn't turn off because it doesn't support it
-# Setting this to false will just turn the screen black.
-use_dpms: True
 ```
 
 ## Preheat Options
