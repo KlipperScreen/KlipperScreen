@@ -2,7 +2,7 @@ import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Pango
+from gi.repository import Gtk, Pango, GLib
 from datetime import datetime
 
 from ks_includes.screen_panel import ScreenPanel
@@ -27,12 +27,12 @@ class SystemPanel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
 
-        update_all = self._gtk.ButtonImage('refresh', _('Full\nUpdate'), 'color1')
+        update_all = self._gtk.ButtonImage('arrow-up', _('Full\nUpdate'), 'color1')
         update_all.connect("clicked", self.show_update_info, "full")
         update_all.set_vexpand(False)
-        firmrestart = self._gtk.ButtonImage('refresh', _('Firmware\nRestart'), 'color2')
-        firmrestart.connect("clicked", self._screen._ws.klippy.restart_firmware)
-        firmrestart.set_vexpand(False)
+        self.refresh = self._gtk.ButtonImage('refresh', _('Refresh'), 'color2')
+        self.refresh.connect("clicked", self.refresh_updates)
+        self.refresh.set_vexpand(False)
 
         reboot = self._gtk.ButtonImage('refresh', _('System\nRestart'), 'color3')
         reboot.connect("clicked", self._screen._confirm_send_action,
@@ -83,7 +83,7 @@ class SystemPanel(ScreenPanel):
 
         grid.attach(scroll, 0, 0, 4, 2)
         grid.attach(update_all, 0, 2, 1, 1)
-        grid.attach(firmrestart, 1, 2, 1, 1)
+        grid.attach(self.refresh, 1, 2, 1, 1)
         grid.attach(reboot, 2, 2, 1, 1)
         grid.attach(shutdown, 3, 2, 1, 1)
         self.content.add(grid)
@@ -96,8 +96,13 @@ class SystemPanel(ScreenPanel):
         self._screen.set_updating(False)
         self.get_updates()
 
-    def get_updates(self):
-        update_resp = self._screen.apiclient.send_request("machine/update/status")
+    def refresh_updates(self, widget=None):
+        self.refresh.set_sensitive(False)
+        self._screen.show_popup_message(_("Checking for updates, please wait..."), level=1)
+        GLib.timeout_add_seconds(1, self.get_updates, "true")
+
+    def get_updates(self, refresh="false"):
+        update_resp = self._screen.apiclient.send_request(f"machine/update/status?refresh={refresh}")
         if not update_resp:
             logging.info("No update manager configured")
         else:
@@ -106,6 +111,7 @@ class SystemPanel(ScreenPanel):
             items = sorted(list(vi))
             for prog in items:
                 self.update_program_info(prog)
+        self.refresh.set_sensitive(True)
 
     def process_update(self, action, data):
         if action == "notify_update_response":
