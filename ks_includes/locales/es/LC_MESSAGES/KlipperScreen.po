@@ -196,7 +196,7 @@ msgid "Do you want to recover %s?"
 msgstr "Desea recuperar %s?"
 
 msgid "Elapsed:"
-msgstr "Tiempo:"
+msgstr "Transcurrido:"
 
 msgid "Error"
 msgstr "Error"
