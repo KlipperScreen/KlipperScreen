@@ -17,9 +17,7 @@ button:active {
 }
 
 .button_active {
-    background-color: #000000;
-    border-color: #d81549;
-    border-style: dashed;
+    background-color: #282828;
     border-width: .25em;
     border-radius: 1em;
 }

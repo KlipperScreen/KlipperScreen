@@ -2,59 +2,61 @@
 
 * {
     color: #e2e2e2;
+    font-family: RobotoMedium;
 }
 
 window {
-    background-color: black;
+    background-color: #121212;
 }
-
 
 .active_device {
     background-color: #1c1c1c;
 }
 
 button {
-    background-color: black;
+    background-color: #121212;
 }
 
 button:active {
-    background-color: #282828;
+    background-color: #424242;
 }
 
 .button_active {
-    border-color: #282828;
+    border-color: #424242;
     border-style: solid;
-    border-width: .25em;
-    background-color: #282828;
-    border-radius: 1em;
+    background-color: #424242;
 }
 
 button.color1, button.color2, button.color3, button.color4 {
-    background-color: #111111;
-    border-color: #111111;
-    border-radius: 1em;
+    background-color: #252525;
+    border-color: #252525;
+    border-radius: .25em;
 }
 
 button.color1:active, button.color2:active, button.color3:active, button.color4:active, button.update:active, button.invalid:active, .dialog button:active {
     border-style: none;
-    background-color: #282828;
+    background-color: #424242;
 }
 
 button.update {
-    background-color: #2f5631;
-    border-color: #2f5631;
-    border-radius: 1em;
+    color: #2196f3;
+    background-color: #121212;
+    border-color: #2196f3;
+    border-radius: .5em;
+    border-width: .1em;
 }
 
 button.invalid {
-    background-color: #B71C1C;
-    border-color: #B71C1C;
-    border-radius: 1em;
+    color: #fb8c00;
+    background-color: #121212;
+    border-color: #fb8c00;
+    border-radius: .5em;
+    border-width: .1em;
 }
 
 combobox box button {
-    background-color: #111111;
-    border-color: #111111;
+    background-color: #121212;
+    border-color: #121212;
 }
 
 switch {
@@ -72,7 +74,7 @@ entry {
 
 frame {
     color: #e2e2e2;
-    border-bottom-color: #111111;
+    border-bottom-color: #121212;
 }
 
 label {
@@ -80,17 +82,17 @@ label {
 }
 
 menu {
-    background-color: black;
+    background-color: #121212;
     border-color: #a2a2a2;
 }
 
 menuitem {
-    background-color: black;
+    background-color: #121212;
     border-color: #282828;
 }
 
 trough {
-    background-color: #111111;
+    background-color: #121212;
     color: #e2e2e2;
 }
 
@@ -104,7 +106,7 @@ scale-mark {
 }
 
 scrollbar, scrollbar button, scrollbar trough {
-    background-color: black;
+    background-color: #121212;
 }
 
 scrollbar slider {
@@ -121,13 +123,13 @@ textview .time {
 
 .dialog {
     border: 0;
-    background-color: black;
+    background-color: #121212;
 }
 
 .dialog button {
-    background-color: #111111;
-    border-bottom-color: #111111;
-    border-radius: .75em;
+    background-color: #252525;
+    border-bottom-color: #252525;
+    border-radius: .25em;
 }
 
 .dialog button:nth-child(1) {
@@ -139,12 +141,13 @@ textview .time {
 }
 
 .tempbutton_top, .tempbutton, .tempbutton_bottom, .distbutton_top, .distbutton, .distbutton_bottom  {
-    border-color: black;
-    background-color: #111111;
+    border-color: #545454;
+    border-width: .1em;
+    background-color: #252525;
 }
 
 .distbutton_active {
-    background-color: #282828;
+    background-color: #545454;
 }
 
 .fan_slider {
@@ -168,12 +171,8 @@ textview .time {
 }
 
 .numpad_tleft, .numpad_top, .numpad_tright, .numpad_left, .numpad_button, .numpad_right, .numpad_bleft, .numpad_bottom, .numpad_bright {
-    border-color: #111111;
-    background-color: #111111;
-}
-
-.printing-info button{
-    background-color: #111111;
+    border-color: #545454;
+    background-color: #252525;
 }
 
 .printing-status {
@@ -200,7 +199,7 @@ textview .time {
 
 .message button {
     background-color: #e2e2e2;
-    color: black;
+    color: #121212;
 }
 
 .warning {
