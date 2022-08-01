@@ -638,19 +638,22 @@ class JobStatusPanel(ScreenPanel):
             return
 
         ps = self._printer.get_stat("print_stats")
-        if int(ps['print_duration']) == 0 and self.progress > 0.001:
-            # Print duration remains at 0 when using No-extusion tests
-            duration = ps['total_duration']
-        else:
-            duration = ps['print_duration']
-        if 'filament_used' in ps:
-            self.labels['filament_used'].set_text(f"{float(ps['filament_used']) / 1000:.1f} m")
         if 'filename' in ps and (ps['filename'] != self.filename):
             logging.debug(f"Changing filename: '{self.filename}' to '{ps['filename']}'")
             self.update_filename()
         else:
             self.update_percent_complete()
-        self.update_time_left(duration, ps['filament_used'])
+        if 'print_duration' in ps:
+            if int(ps['print_duration']) == 0 and self.progress > 0.001:
+                # Print duration remains at 0 when using No-extusion tests
+                duration = ps['total_duration']
+            else:
+                duration = ps['print_duration']
+            if 'filament_used' in ps:
+                self.labels['filament_used'].set_text(f"{float(ps['filament_used']) / 1000:.1f} m")
+                self.update_time_left(duration, ps['filament_used'])
+            else:
+                self.update_time_left(duration)
 
         if self.main_status_displayed:
             self.fan_button.set_label(self.labels['fan'].get_text())
@@ -718,7 +721,8 @@ class JobStatusPanel(ScreenPanel):
                     total_duration = file_time
         self.update_text("duration", self.format_time(duration))
         self.update_text("est_time", self.format_time(total_duration))
-        self.update_text("time_left", self.format_time(total_duration - duration))
+        if total_duration is not None:
+            self.update_text("time_left", self.format_time(total_duration - duration))
 
     def state_check(self):
         ps = self._printer.get_stat("print_stats")
