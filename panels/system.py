@@ -112,6 +112,7 @@ class SystemPanel(ScreenPanel):
             for prog in items:
                 self.update_program_info(prog)
         self.refresh.set_sensitive(True)
+        self._screen.close_popup_message()
 
     def process_update(self, action, data):
         if action == "notify_update_response":
