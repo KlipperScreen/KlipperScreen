@@ -216,15 +216,16 @@ class TemperaturePanel(ScreenPanel):
                 target = None
                 max_temp = float(self._printer.get_config_section(heater)['max_temp'])
                 name = heater.split()[1] if len(heater.split()) > 1 else heater
-                for i in self.preheat_options[setting]:
-                    logging.info(f"{self.preheat_options[setting]}")
-                    if i == name:
-                        # Assign the specific target if available
-                        target = self.preheat_options[setting][name]
-                        logging.info(f"name match {name}")
-                    elif i == heater:
-                        target = self.preheat_options[setting][heater]
-                        logging.info(f"heater match {heater}")
+                with contextlib.suppress(KeyError):
+                    for i in self.preheat_options[setting]:
+                        logging.info(f"{self.preheat_options[setting]}")
+                        if i == name:
+                            # Assign the specific target if available
+                            target = self.preheat_options[setting][name]
+                            logging.info(f"name match {name}")
+                        elif i == heater:
+                            target = self.preheat_options[setting][heater]
+                            logging.info(f"heater match {heater}")
                 if target is None and setting == "cooldown":
                     target = 0
                 if heater.startswith('extruder'):
