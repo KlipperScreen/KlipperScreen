@@ -212,18 +212,21 @@ class TemperaturePanel(ScreenPanel):
         if len(self.active_heaters) == 0:
             self._screen.show_popup_message(_("Nothing selected"))
         else:
-            target = 0 if setting == "cooldown" else None
             for heater in self.active_heaters:
+                target = None
                 max_temp = float(self._printer.get_config_section(heater)['max_temp'])
                 name = heater.split()[1] if len(heater.split()) > 1 else heater
-                if target is None:
-                    for i in self.preheat_options[setting]:
-                        logging.info(f"{self.preheat_options[setting]}")
-                        if i == name:
-                            # Assign the specific target if available
-                            target = self.preheat_options[setting][name]
-                        elif i == heater:
-                            target = self.preheat_options[setting][heater]
+                for i in self.preheat_options[setting]:
+                    logging.info(f"{self.preheat_options[setting]}")
+                    if i == name:
+                        # Assign the specific target if available
+                        target = self.preheat_options[setting][name]
+                        logging.info(f"name match {name}")
+                    elif i == heater:
+                        target = self.preheat_options[setting][heater]
+                        logging.info(f"heater match {heater}")
+                if target is None and setting == "cooldown":
+                    target = 0
                 if heater.startswith('extruder'):
                     if self.validate(heater, target, max_temp):
                         self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), target)
