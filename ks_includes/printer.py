@@ -316,7 +316,11 @@ class Printer:
         return speed
 
     def get_pin_value(self, pin):
-        return self.data[pin]["value"] if pin in self.data else 0
+        if pin in self.data:
+            return self.data[pin]["value"]
+        elif pin in self.config and 'value' in self.config[pin]:
+            return self.config[pin]["value"]
+        return 0
 
     def get_extruder_count(self):
         return self.extrudercount
