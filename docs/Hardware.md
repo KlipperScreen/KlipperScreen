@@ -100,6 +100,22 @@ To make this permanent, modify the file `/etc/udev/rules.d/51-touchscreen.rules`
 ```sh
 ACTION=="add", ATTRS{name}=="<device name>", ENV{LIBINPUT_CALIBRATION_MATRIX}="<matrix>"
 ```
+
+As an alternative if the above doesn't work:
+
+edit /usr/share/X11/xorg.conf.d/40-libinput.conf
+
+for example:
+```sh
+Section "InputClass"
+        Identifier "libinput touchscreen catchall"
+        MatchIsTouchscreen "on"
+        MatchDevicePath "/dev/input/event*"
+        Driver "libinput"
+        Option "TransformationMatrix" "0 -1 1 1 0 0 0 0 1"
+EndSection
+```
+
 More info about input transformation can be found in:
 
 * [Ubuntu wiki InputCoordinateTransformation](https://wiki.ubuntu.com/X/InputCoordinateTransformation)
