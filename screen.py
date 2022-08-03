@@ -856,7 +856,7 @@ class KlipperScreen(Gtk.Window):
                 elif data.startswith("!! "):
                     self.show_popup_message(data[3:], 3)
                     logging.debug(json.dumps([action, data], indent=2))
-                if "SAVE_CONFIG" in data:
+                if "SAVE_CONFIG" in data and self.printer.get_state() == "ready":
                     script = {"script": "SAVE_CONFIG"}
                     self._confirm_send_action(
                         None,
