@@ -312,11 +312,11 @@ class KlipperScreen(Gtk.Window):
                     self.panels[panel_name].initialize(panel_name, **kwargs)
                 else:
                     self.panels[panel_name].initialize(panel_name)
-            except Exception:
+            except Exception as e:
                 if panel_name in self.panels:
                     del self.panels[panel_name]
                 logging.exception(f"Unable to load panel {panel_type}")
-                self.show_error_modal(f"Unable to load panel {panel_type}")
+                self.show_error_modal(f"Unable to load panel {panel_type}", e)
                 return
 
             if hasattr(self.panels[panel_name], "process_update"):
@@ -402,27 +402,35 @@ class KlipperScreen(Gtk.Window):
         self.popup_message = None
         self.show_all()
 
-    def show_error_modal(self, err):
+    def show_error_modal(self, err, e=""):
+        logging.exception(f"Showing error modal: {err}")
 
-        logging.exception("Showing error modal: %s", err)
+        title = Gtk.Label()
+        title.set_markup(f"<b>{err}</b>\n\n")
+        title.set_line_wrap(True)
+        title.set_halign(Gtk.Align.START)
+        message = Gtk.Label()
+        message.set_markup(
+            "Provide /tmp/KlipperScreen.log when asking for help.\n\n"
+            + f"KlipperScreen: {self.version}\n"
+            + f"<i>{e}</i>\n"
+        )
+        message.set_line_wrap(True)
+
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        vbox.set_halign(Gtk.Align.CENTER)
+        vbox.set_valign(Gtk.Align.CENTER)
+        vbox.add(title)
+        vbox.add(message)
+
+        scroll = self.gtk.ScrolledWindow()
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add(vbox)
 
         buttons = [
             {"name": _("Go Back"), "response": Gtk.ResponseType.CANCEL}
         ]
-
-        label = Gtk.Label()
-        label.set_markup(
-            f"{err} \n\n" +
-            _("Check /tmp/KlipperScreen.log for more information.\nPlease submit an issue on GitHub for help.")
-        )
-        label.set_hexpand(True)
-        label.set_halign(Gtk.Align.CENTER)
-        label.set_vexpand(True)
-        label.set_valign(Gtk.Align.CENTER)
-        label.set_line_wrap(True)
-        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-
-        self.gtk.Dialog(self, buttons, label, self.error_modal_response)
+        self.gtk.Dialog(self, buttons, scroll, self.error_modal_response)
 
     @staticmethod
     def error_modal_response(widget, response_id):
