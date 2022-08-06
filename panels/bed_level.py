@@ -3,7 +3,7 @@ import logging
 import re
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, Pango
 
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
@@ -158,6 +158,8 @@ class BedLevelPanel(ScreenPanel):
                 _("Bed screw configuration:") + f" {nscrews}\n\n"
                 + _("Not supported for auto-detection, it needs to be configured in klipperscreen.conf")
             )
+            label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+            label.set_line_wrap(True)
             grid.attach(label, 1, 0, 3, 2)
             self.content.add(grid)
             return
@@ -257,7 +259,7 @@ class BedLevelPanel(ScreenPanel):
 
     def activate(self):
         for key, value in self.screw_dict.items():
-            self.labels[key].set_label(str(value))
+            self.labels[key].set_label(f"{value}")
         if self._printer.config_section_exists("screws_tilt_adjust"):
             self.labels['screws'].set_sensitive(True)
 
@@ -297,8 +299,8 @@ class BedLevelPanel(ScreenPanel):
         # screws_tilt_adjust uses PROBE positions and was offseted for the buttons to work equal to bed_screws
         # for the result we need to undo the offset
         if result:
-            x = float(result[2]) + self.x_offset
-            y = float(result[3]) + self.y_offset
+            x = round(float(result[2]) + self.x_offset, 1)
+            y = round(float(result[3]) + self.y_offset, 1)
             for key, value in self.screw_dict.items():
                 if value and x == value[0] and y == value[1]:
                     logging.debug(f"X: {x} Y: {y} Adjust: {result[5]} Pos: {key}")
@@ -315,8 +317,8 @@ class BedLevelPanel(ScreenPanel):
             # screws_tilt_adjust uses PROBE positions and was offseted for the buttons to work equal to bed_screws
             # for the result we need to undo the offset
             if result and re.search('base', result[1]):
-                x = float(result[2]) + self.x_offset
-                y = float(result[3]) + self.y_offset
+                x = round(float(result[2]) + self.x_offset, 1)
+                y = round(float(result[3]) + self.y_offset, 1)
                 logging.debug(f"X: {x} Y: {y} is the reference")
                 for key, value in self.screw_dict.items():
                     if value and x == value[0] and y == value[1]:
@@ -331,17 +333,17 @@ class BedLevelPanel(ScreenPanel):
             result = re.match(r"([\-0-9\.]+)\s*,\s*([\-0-9\.]+)", config_section[item])
             if result:
                 screws.append([
-                    round(float(result[1]), 2),
-                    round(float(result[2]), 2)
+                    round(float(result[1]), 1),
+                    round(float(result[2]), 1)
                 ])
         return sorted(screws, key=lambda s: (float(s[1]), float(s[0])))
 
     def _get_offsets(self, section):
         probe = self._screen.printer.get_config_section(section)
         if "x_offset" in probe:
-            self.x_offset = float(probe['x_offset'])
+            self.x_offset = round(float(probe['x_offset']), 1)
         if "y_offset" in probe:
-            self.y_offset = float(probe['y_offset'])
+            self.y_offset = round(float(probe['y_offset']), 1)
         logging.debug(f"{section} offset X: {self.x_offset} Y: {self.y_offset}")
 
     def screws_tilt_calculate(self, widget):
