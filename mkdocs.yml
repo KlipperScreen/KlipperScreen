@@ -7,6 +7,7 @@ repo_name: jordanruthe/KlipperScreen/
 repo_url: https://github.com/jordanruthe/KlipperScreen/
 nav:
     - Home: index.md
+    - Bed Level/Screws: Screws.md
     - Setup:
       - Hardware.md
       - Installation.md

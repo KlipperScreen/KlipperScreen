@@ -15,18 +15,6 @@ panel: bed_level
 ```
 ![Bed Level](img/panels/bed_level.png)
 
-The bed level panel has the ability to have preset locations from Klipper. Please see documentation on the following
-Klipper Sections:
-* [bed_screws](https://www.klipper3d.org/Config_Reference.html#bed_screws)
-* [screws_tilt_adjust](https://www.klipper3d.org/Config_Reference.html#screws_tilt_adjust)
-
-!!! important:
-    `[bed_screws]` uses Nozzle positions and `[screws_tilt_adjust]` uses Probe positions
-
-This panel will use `[bed_screws]` if `[screws_tilt_adjust]` is not defined,
-the probe offset will be applied to the defined screw values in `[screws_tilt_adjust]`
-so the buttons will move the nozzle above the screws like in `[bed_screws]`
-
 ### Bed Mesh
 ```py
 panel: bed_mesh
