@@ -44,6 +44,7 @@ class SystemPanel(ScreenPanel):
         shutdown.set_vexpand(False)
 
         scroll = self._gtk.ScrolledWindow()
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
         infogrid = Gtk.Grid()
         infogrid.get_style_context().add_class("system-program-grid")
@@ -142,19 +143,19 @@ class SystemPanel(ScreenPanel):
             info = {"full": True}
 
         scroll = self._gtk.ScrolledWindow()
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
-        grid = Gtk.Grid()
-        grid.set_column_homogeneous(True)
-        grid.set_halign(Gtk.Align.CENTER)
-        grid.set_valign(Gtk.Align.CENTER)
-        i = 0
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        vbox.set_halign(Gtk.Align.CENTER)
+        vbox.set_valign(Gtk.Align.CENTER)
+
         label = Gtk.Label()
         label.set_line_wrap(True)
         if 'configured_type' in info and info['configured_type'] == 'git_repo':
             if not info['is_valid'] or info['is_dirty']:
                 label.set_markup(_("Do you want to recover %s?") % program)
-                grid.attach(label, 0, i, 1, 1)
-                scroll.add(grid)
+                vbox.add(label)
+                scroll.add(vbox)
                 recoverybuttons = [
                     {"name": _("Recover Hard"), "response": Gtk.ResponseType.OK},
                     {"name": _("Recover Soft"), "response": Gtk.ResponseType.APPLY},
@@ -170,33 +171,27 @@ class SystemPanel(ScreenPanel):
                                  _("Outdated by %d") % ncommits +
                                  " " + ngettext("commit", "commits", ncommits) +
                                  ":</b>\n")
+                vbox.add(label)
 
-                grid.attach(label, 0, i, 1, 1)
-                i += 1
-                date = ""
                 for c in info['commits_behind']:
-                    ndate = datetime.fromtimestamp(int(c['date'])).strftime("%b %d")
-                    if date != ndate:
-                        date = ndate
-                        label = Gtk.Label()
-                        label.set_line_wrap(True)
-                        label.set_markup(f"<b>{date}</b>\n")
-                        label.set_halign(Gtk.Align.START)
-                        grid.attach(label, 0, i, 1, 1)
-                        i += 1
+                    commit_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+                    title = Gtk.Label()
+                    title.set_line_wrap(True)
+                    title.set_line_wrap_mode(Pango.WrapMode.CHAR)
+                    title.set_markup(f"\n<b>{c['subject']}</b>\n<i>{c['author']}</i>\n")
+                    title.set_halign(Gtk.Align.START)
+                    commit_box.add(title)
 
-                    label = Gtk.Label()
-                    label.set_line_wrap(True)
-                    label.set_markup(f"<b>{c['subject']}</b>\n<i>{c['author']}</i>\n")
-                    label.set_halign(Gtk.Align.START)
-                    grid.attach(label, 0, i, 1, 1)
-                    i += 1
-
-                    details = Gtk.Label(label=f"{c['message']}\n\n\n")
+                    details = Gtk.Label(label=f"{c['message']}\n")
                     details.set_line_wrap(True)
                     details.set_halign(Gtk.Align.START)
-                    grid.attach(details, 0, i, 1, 1)
-                    i += 1
+                    commit_box.add(details)
+
+                    frame = Gtk.Frame()
+                    frame.get_style_context().add_class("frame-item")
+                    frame.add(commit_box)
+                    vbox.add(frame)
+
         if "package_count" in info:
             label.set_markup((
                 f'<b>{info["package_count"]} '
@@ -204,8 +199,12 @@ class SystemPanel(ScreenPanel):
                 + f':</b>\n'
             ))
             label.set_halign(Gtk.Align.CENTER)
-            grid.attach(label, 0, i, 3, 1)
-            i += 1
+            vbox.add(label)
+            grid = Gtk.Grid()
+            grid.set_column_homogeneous(True)
+            grid.set_halign(Gtk.Align.CENTER)
+            grid.set_valign(Gtk.Align.CENTER)
+            i = 0
             for j, c in enumerate(info["package_list"]):
                 label = Gtk.Label()
                 label.set_markup(f"  {c}  ")
@@ -215,19 +214,18 @@ class SystemPanel(ScreenPanel):
                 grid.attach(label, pos, i, 1, 1)
                 if pos == 2:
                     i += 1
+            vbox.add(grid)
         elif "full" in info:
             label.set_markup('<b>' + _("Perform a full upgrade?") + '</b>')
-            grid.attach(label, 0, i, 1, 1)
-            i += 1
+            vbox.add(label)
         else:
             label.set_markup(
                 "<b>" + _("%s will be updated to version") % program.capitalize()
                 + f": {info['remote_version']}</b>"
             )
+            vbox.add(label)
 
-            grid.attach(label, 0, i, 1, 1)
-
-        scroll.add(grid)
+        scroll.add(vbox)
 
         buttons = [
             {"name": _("Update"), "response": Gtk.ResponseType.OK},
@@ -259,11 +257,13 @@ class SystemPanel(ScreenPanel):
         ]
 
         scroll = self._gtk.ScrolledWindow()
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
         self.labels['update_progress'] = Gtk.Label(_("Starting recovery for") + f' {program}...')
         self.labels['update_progress'].set_halign(Gtk.Align.START)
         self.labels['update_progress'].set_valign(Gtk.Align.START)
         self.labels['update_progress'].set_ellipsize(Pango.EllipsizeMode.END)
+        self.labels['update_progress'].connect("size-allocate", self._autoscroll)
         scroll.add(self.labels['update_progress'])
         self.labels['update_scroll'] = scroll
 
@@ -300,6 +300,7 @@ class SystemPanel(ScreenPanel):
         ]
 
         scroll = self._gtk.ScrolledWindow()
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
         if "full" in info:
             self.labels['update_progress'] = Gtk.Label(_("Updating") + '\n')
@@ -307,6 +308,7 @@ class SystemPanel(ScreenPanel):
             self.labels['update_progress'] = Gtk.Label(_("Starting update for") + f' {program}...')
         self.labels['update_progress'].set_halign(Gtk.Align.START)
         self.labels['update_progress'].set_valign(Gtk.Align.START)
+        self.labels['update_progress'].connect("size-allocate", self._autoscroll)
         scroll.add(self.labels['update_progress'])
         self.labels['update_scroll'] = scroll
 
@@ -371,3 +373,7 @@ class SystemPanel(ScreenPanel):
         self.labels[f"{p}_status"].set_label(_("Update"))
         self.labels[f"{p}_status"].get_style_context().add_class('update')
         self.labels[f"{p}_status"].set_sensitive(True)
+
+    def _autoscroll(self, *args):
+        adj = self.labels['update_scroll'].get_vadjustment()
+        adj.set_value(adj.get_upper() - adj.get_page_size())
