@@ -182,7 +182,7 @@ class SystemPanel(ScreenPanel):
                     title.set_halign(Gtk.Align.START)
                     commit_box.add(title)
 
-                    details = Gtk.Label(label=f"{c['message']}\n")
+                    details = Gtk.Label(label=f"{c['message']}")
                     details.set_line_wrap(True)
                     details.set_halign(Gtk.Align.START)
                     commit_box.add(details)
