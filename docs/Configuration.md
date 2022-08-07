@@ -37,9 +37,6 @@ language: en
 # Allows the cursor to be displayed on the screen
 show_cursor: False
 
-# Allows to define custom systemctl command for restart like xrdp
-service: KlipperScreen
-
 # If multiple printers are defined, this can be set the name of the one to show at startup.
 default_printer: Ender 3 Pro
 
@@ -155,12 +152,27 @@ Available panels are listed here: [docs/panels.md](Panels.md)
 
 Certain variables are available for conditional testing of the enable statement:
 ```py
-printer.bltouch # Available if bltouch section defined in config
+printer.extruders.count # Number of extruders
+printer.temperature_devices.count # Number of temperature related devices that are not extruders
+printer.fans.count # Number of fans
+printer.power_devices.count # Number of power devices configured in Moonraker
 printer.gcode_macros.count # Number of gcode macros
+printer.output_pins.count # Number of fans
+
+printer.bltouch # Available if bltouch section defined in config
+printer.probe # Available if probe section defined in config
+printer.bed_mesh # Available if bed_mesh section defined in config
+printer.quad_gantry_level # Available if quad_gantry_level section defined in config
+printer.z_tilt # Available if z_tilt section defined in config
+
+printer.firmware_retraction # True if defined in config
+printer.input_shaper # True if defined in config
+printer.bed_screws # True if defined in config
+printer.screws_tilt_adjust # True if defined in config
+
 printer.idle_timeout # Idle timeout section
 printer.pause_resume # Pause resume section of Klipper
-printer.probe # Available if probe section defined in config
-printer.power_devices.count # Number of power devices configured in Moonraker
+
 ```
 
 
