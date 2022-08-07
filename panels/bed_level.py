@@ -52,7 +52,7 @@ class BedLevelPanel(ScreenPanel):
             # bed_screws uses NOZZLE positions
             # screws_tilt_adjust uses PROBE positions and to be offseted for the buttons to work equal to bed_screws
             for screw in self.screws:
-                new_screws.append([screw[0] + self.x_offset, screw[1] + self.y_offset])
+                new_screws.append([round(screw[0] + self.x_offset, 1), round(screw[1] + self.y_offset, 1)])
             self.screws = new_screws
             logging.info(f"screws with offset: {self.screws}")
         elif "bed_screws" in self._screen.printer.get_config_section_list():
