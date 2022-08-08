@@ -996,6 +996,7 @@ class KlipperScreen(Gtk.Window):
                        + self.printer.get_heaters()
                        + self.printer.get_fans()
                        + self.printer.get_filament_sensors()
+                       + self.printer.get_output_pins()
                        )
 
         data = self.apiclient.send_request("printer/objects/query?" + "&".join(PRINTER_BASE_STATUS_OBJECTS +
