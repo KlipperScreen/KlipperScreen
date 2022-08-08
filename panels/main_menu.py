@@ -16,7 +16,6 @@ def create_panel(*args):
 class MainPanel(MenuPanel):
     def __init__(self, screen, title, back=False):
         super().__init__(screen, title, False)
-        self.popover_device = None
         self.items = None
         self.grid = self._gtk.HomogeneousGrid()
         self.grid.set_hexpand(True)
@@ -110,20 +109,22 @@ class MainPanel(MenuPanel):
 
         name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "),
                                      None, .5, Gtk.PositionType.LEFT, False)
-        name.connect('clicked', self.on_popover_clicked, device)
+        name.connect("clicked", self.toggle_visibility, device)
         name.set_alignment(0, .5)
         name.get_style_context().add_class(class_name)
         child = name.get_children()[0].get_children()[0].get_children()[1]
         child.set_ellipsize(Pango.EllipsizeMode.END)
 
         temp = self._gtk.Button("")
-        temp.connect('clicked', self.on_popover_clicked, device)
+        if can_target:
+            temp.connect("clicked", self.show_numpad, device)
 
         self.devices[device] = {
             "class": class_name,
             "name": name,
             "temp": temp,
-            "can_target": can_target
+            "can_target": can_target,
+            "visible_graph": True
         }
 
         devices = sorted(self.devices)
@@ -134,6 +135,21 @@ class MainPanel(MenuPanel):
         self.labels['devices'].attach(temp, 1, pos, 1, 1)
         self.labels['devices'].show_all()
         return True
+
+    def toggle_visibility(self, widget, device):
+        self.devices[device]['visible_graph'] ^= True
+        logging.info(f"Graph show {self.devices[device]['visible_graph']}: {device}")
+
+        self.labels['da'].set_showing(device, self.devices[device]['visible_graph'])
+        if self.devices[device]['visible_graph']:
+            self.devices[device]['name'].get_style_context().remove_class("graph_label_hidden")
+            self.devices[device]['name'].get_style_context().add_class(
+                self.devices[device]['class'])
+        else:
+            self.devices[device]['name'].get_style_context().remove_class(
+                self.devices[device]['class'])
+            self.devices[device]['name'].get_style_context().add_class("graph_label_hidden")
+        self.labels['da'].queue_draw()
 
     def change_target_temp(self, temp):
 
@@ -181,38 +197,10 @@ class MainPanel(MenuPanel):
         box.add(scroll)
         box.add(self.labels['da'])
 
-        self.labels['graph_settemp'] = self._gtk.Button(label=_("Set Temp"))
-        self.labels['graph_settemp'].connect("clicked", self.show_numpad)
-        self.labels['graph_hide'] = self._gtk.Button(label=_("Hide"))
-        self.labels['graph_hide'].connect("clicked", self.graph_show_device, False)
-        self.labels['graph_show'] = self._gtk.Button(label=_("Show"))
-        self.labels['graph_show'].connect("clicked", self.graph_show_device)
-
-        popover = Gtk.Popover()
-        self.labels['popover_vbox'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        popover.add(self.labels['popover_vbox'])
-        popover.set_position(Gtk.PositionType.BOTTOM)
-        self.labels['popover'] = popover
-
         for d in self._printer.get_temp_store_devices():
             self.add_device(d)
 
         return box
-
-    def graph_show_device(self, widget, show=True):
-        logging.info(f"Graph show: {self.popover_device} {show}")
-        self.labels['da'].set_showing(self.popover_device, show)
-        if show:
-            self.devices[self.popover_device]['name'].get_style_context().remove_class("graph_label_hidden")
-            self.devices[self.popover_device]['name'].get_style_context().add_class(
-                self.devices[self.popover_device]['class'])
-        else:
-            self.devices[self.popover_device]['name'].get_style_context().remove_class(
-                self.devices[self.popover_device]['class'])
-            self.devices[self.popover_device]['name'].get_style_context().add_class("graph_label_hidden")
-        self.labels['da'].queue_draw()
-        self.popover_populate_menu()
-        self.labels['popover'].show_all()
 
     def hide_numpad(self, widget):
         self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")
@@ -225,25 +213,6 @@ class MainPanel(MenuPanel):
             self.grid.remove_column(1)
             self.grid.attach(self.labels['menu'], 1, 0, 1, 1)
         self.grid.show_all()
-
-    def on_popover_clicked(self, widget, device):
-        self.popover_device = device
-        po = self.labels['popover']
-        po.set_relative_to(widget)
-        self.popover_populate_menu()
-        po.show_all()
-
-    def popover_populate_menu(self):
-        pobox = self.labels['popover_vbox']
-        for child in pobox.get_children():
-            pobox.remove(child)
-
-        if self.labels['da'].is_showing(self.popover_device):
-            pobox.pack_start(self.labels['graph_hide'], True, True, 5)
-        else:
-            pobox.pack_start(self.labels['graph_show'], True, True, 5)
-        if self.devices[self.popover_device]["can_target"]:
-            pobox.pack_start(self.labels['graph_settemp'], True, True, 5)
 
     def process_update(self, action, data):
         if action != "notify_status_update":
@@ -263,11 +232,11 @@ class MainPanel(MenuPanel):
             )
         return
 
-    def show_numpad(self, widget):
+    def show_numpad(self, widget, device):
 
         if self.active_heater is not None:
             self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")
-        self.active_heater = self.popover_device
+        self.active_heater = device
         self.devices[self.active_heater]['name'].get_style_context().add_class("button_active")
 
         if "keypad" not in self.labels:
@@ -281,8 +250,6 @@ class MainPanel(MenuPanel):
             self.grid.remove_column(1)
             self.grid.attach(self.labels["keypad"], 1, 0, 1, 1)
         self.grid.show_all()
-
-        self.labels['popover'].popdown()
 
     def update_graph(self):
         self.labels['da'].queue_draw()
