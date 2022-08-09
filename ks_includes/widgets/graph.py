@@ -23,37 +23,33 @@ class HeaterGraph(Gtk.DrawingArea):
         self.connect('button_press_event', self.event_cb)
         self.font_size = round(font_size * 0.75)
 
-    def add_object(self, name, type, rgb=[0, 0, 0], dashed=False, fill=False):
+    def add_object(self, name, ev_type, rgb=None, dashed=False, fill=False):
+        if rgb is None:
+            rgb = [0, 0, 0]
         if name not in self.store:
             self.store.update({name: {"show": True}})
-        self.store[name].update({type: {
+        self.store[name].update({ev_type: {
             "dashed": dashed,
             "fill": fill,
             "rgb": rgb
         }})
-        self.max_length = max(self.max_length, len(self.printer.get_temp_store(name, type)))
+        self.max_length = max(self.max_length, len(self.printer.get_temp_store(name, ev_type)))
 
-    def event_cb(self, da, ev):
-        if ev.type == Gdk.EventType.BUTTON_PRESS:
+    @staticmethod
+    def event_cb(da, ev):
+        if ev.ev_type == Gdk.EventType.BUTTON_PRESS:
             x = ev.x
             y = ev.y
-            logging.info("Graph area: %s %s" % (x, y))
+            logging.info(f"Graph area: {x} {y}")
 
     def get_max_length(self):
-        n = []
-        for name in self.store:
-            if "temperatures" not in self.store[name]:
-                continue
-            n.append(len(self.printer.get_temp_store(name, "temperatures")))
-        return min(n)
+        return min(len(self.printer.get_temp_store(name, "temperatures"))
+                   for name in self.store if "temperatures" in self.store[name])
 
     def get_max_num(self, data_points=0):
         mnum = []
         for x in self.store:
-            for t in self.store[x]:
-                if t == "show":
-                    continue
-                mnum.append(max(self.printer.get_temp_store(x, t, data_points)))
+            mnum.extend(max(self.printer.get_temp_store(x, t, data_points)) for t in self.store[x] if t != "show")
         return max(mnum)
 
     def draw_graph(self, da, ctx):
@@ -97,14 +93,15 @@ class HeaterGraph(Gtk.DrawingArea):
         for name in self.store:
             if not self.store[name]['show']:
                 continue
-            for type in self.store[name]:
-                d = self.printer.get_temp_store(name, type, data_points)
+            for dev_type in self.store[name]:
+                d = self.printer.get_temp_store(name, dev_type, data_points)
                 if d is False:
                     continue
-                self.graph_data(ctx, d, gsize, d_height_scale, d_width, self.store[name][type]["rgb"],
-                                self.store[name][type]["dashed"], self.store[name][type]["fill"])
+                self.graph_data(ctx, d, gsize, d_height_scale, d_width, self.store[name][dev_type]["rgb"],
+                                self.store[name][dev_type]["dashed"], self.store[name][dev_type]["fill"])
 
-    def graph_data(self, ctx, data, gsize, hscale, swidth, rgb, dashed=False, fill=False):
+    @staticmethod
+    def graph_data(ctx, data, gsize, hscale, swidth, rgb, dashed=False, fill=False):
         i = 0
         ctx.set_source_rgba(rgb[0], rgb[1], rgb[2], 1)
         ctx.move_to(gsize[0][0] + 1, gsize[0][1] - 1)
@@ -173,25 +170,20 @@ class HeaterGraph(Gtk.DrawingArea):
             ctx.set_source_rgb(.5, .5, .5)
             ctx.move_to(x - round(self.font_size * 1.5), gsize[1][1] + round(self.font_size * 1.5))
 
-            hour = now.hour
-            min = now.minute - (now.minute % 2) - i * 2
-            if min < 0:
-                hour -= 1
-                min = 60 + min
-                if hour < 0:
-                    hour += 24
+            h = now.hour
+            m = now.minute - (now.minute % 2) - i * 2
+            if m < 0:
+                h -= 1
+                m += 60
+                if h < 0:
+                    h += 24
             ctx.set_font_size(self.font_size)
-            ctx.show_text("%02d:%02d" % (hour, min))
+            ctx.show_text(f"{h:2}:{m:02}")
             ctx.stroke()
-            if self.max_length < 600:
-                i += 1
-            else:
-                i += 2
+            i += 1 if self.max_length < 600 else 2
 
     def is_showing(self, device):
-        if device not in self.store:
-            return False
-        return self.store[device]['show']
+        return False if device not in self.store else self.store[device]['show']
 
     def set_showing(self, device, show=True):
         if device not in self.store:

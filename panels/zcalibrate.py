@@ -21,15 +21,16 @@ class ZCalibratePanel(ScreenPanel):
 
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, False)
+        self.z_offset = None
 
     def initialize(self, panel_name):
 
         if self._printer.config_section_exists("probe"):
-            self.z_offset = self._screen.printer.get_config_section("probe")['z_offset']
+            self.z_offset = float(self._screen.printer.get_config_section("probe")['z_offset'])
         elif self._printer.config_section_exists("bltouch"):
-            self.z_offset = self._screen.printer.get_config_section("bltouch")['z_offset']
+            self.z_offset = float(self._screen.printer.get_config_section("bltouch")['z_offset'])
         elif self._printer.config_section_exists("smart_effector"):
-            self.z_offset = self._screen.printer.get_config_section("smart_effector")['z_offset']
+            self.z_offset = float(self._screen.printer.get_config_section("smart_effector")['z_offset'])
         else:
             self.z_offset = None
 
@@ -42,7 +43,7 @@ class ZCalibratePanel(ScreenPanel):
             pos.attach(Gtk.Label(_("Probe Offset") + ": "), 0, 2, 2, 1)
             pos.attach(Gtk.Label(_("Saved")), 0, 3, 1, 1)
             pos.attach(Gtk.Label(_("New")), 1, 3, 1, 1)
-            pos.attach(Gtk.Label(str(round(float(self.z_offset), 2))), 0, 4, 1, 1)
+            pos.attach(Gtk.Label(f"{self.z_offset:.2f}"), 0, 4, 1, 1)
             pos.attach(self.widgets['zoffset'], 1, 4, 1, 1)
 
         self.widgets['zpos'] = self._gtk.ButtonImage('z-farther', _("Raise Nozzle"), 'color4')
@@ -55,47 +56,28 @@ class ZCalibratePanel(ScreenPanel):
         self.widgets['cancel'] = self._gtk.ButtonImage('cancel', _('Abort'), 'color2')
         self.widgets['cancel'].connect("clicked", self.abort)
 
-        functions = ["endstop", "probe", "mesh", "delta", "delta_manual"]
+        functions = []
         pobox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        endstop = (self._printer.config_section_exists("stepper_z") and
-                   not self._screen.printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"))
-        if endstop:
-            endstop = self._gtk.Button(label="Endstop")
-            endstop.connect("clicked", self.start_calibration, "endstop")
-            pobox.pack_start(endstop, True, True, 5)
-        else:
-            functions.remove("endstop")
-
+        if self._printer.config_section_exists("stepper_z") \
+                and not self._screen.printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"):
+            self._add_button("Endstop", "endstop", pobox)
+            functions.append("endstop")
         if self._printer.config_section_exists("probe") or self._printer.config_section_exists("bltouch"):
-            probe = self._gtk.Button(label="Probe")
-            probe.connect("clicked", self.start_calibration, "probe")
-            pobox.pack_start(probe, True, True, 5)
-            functions.remove("mesh")
-        else:
-            functions.remove("probe")
+            self._add_button("Probe", "probe", pobox)
+            functions.append("probe")
+        if self._printer.config_section_exists("bed_mesh") and "probe" not in functions:
             # This is used to do a manual bed mesh if there is no probe
-            if self._printer.config_section_exists("bed_mesh"):
-                mesh = self._gtk.Button(label="Bed mesh")
-                mesh.connect("clicked", self.start_calibration, "mesh")
-                pobox.pack_start(mesh, True, True, 5)
-            else:
-                functions.remove("mesh")
-
+            self._add_button("Bed mesh", "mesh", pobox)
+            functions.append("mesh")
         if "delta" in self._screen.printer.get_config_section("printer")['kinematics']:
-            if self._printer.config_section_exists("probe") or self._printer.config_section_exists("bltouch"):
-                delta = self._gtk.Button(label="Delta Automatic")
-                delta.connect("clicked", self.start_calibration, "delta")
-                pobox.pack_start(delta, True, True, 5)
-            else:
-                functions.remove("delta")
-            delta_manual = self._gtk.Button(label="Delta Manual")
-            delta_manual.connect("clicked", self.start_calibration, "delta_manual")
-            pobox.pack_start(delta_manual, True, True, 5)
-        else:
-            functions.remove("delta")
-            functions.remove("delta_manual")
+            if "probe" in functions:
+                self._add_button("Delta Automatic", "delta", pobox)
+                functions.append("delta")
+            # Since probes may not be accturate enough for deltas, always show the manual method
+            self._add_button("Delta Manual", "delta_manual", pobox)
+            functions.append("delta_manual")
 
-        logging.info("Available functions: %s" % functions)
+        logging.info(f"Available functions for calibration: {functions}")
 
         self.labels['popover'] = Gtk.Popover()
         self.labels['popover'].add(pobox)
@@ -107,8 +89,7 @@ class ZCalibratePanel(ScreenPanel):
             self.widgets['start'].connect("clicked", self.start_calibration, functions[0])
 
         distgrid = Gtk.Grid()
-        j = 0
-        for i in self.distances:
+        for j, i in enumerate(self.distances):
             self.widgets[i] = self._gtk.ToggleButton(i)
             self.widgets[i].set_direction(Gtk.TextDirection.LTR)
             self.widgets[i].connect("clicked", self.change_distance, i)
@@ -122,12 +103,10 @@ class ZCalibratePanel(ScreenPanel):
             if i == "1":
                 ctx.add_class("distbutton_active")
             distgrid.attach(self.widgets[i], j, 0, 1, 1)
-            j += 1
-
         self.widgets["1"].set_active(True)
 
-        distances = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.widgets['move_dist'] = Gtk.Label(_("Move Distance (mm)"))
+        distances = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         distances.pack_start(self.widgets['move_dist'], True, True, 0)
         distances.pack_start(distgrid, True, True, 0)
 
@@ -149,67 +128,25 @@ class ZCalibratePanel(ScreenPanel):
             grid.attach(self.widgets['complete'], 2, 0, 1, 1)
             grid.attach(self.widgets['cancel'], 2, 1, 1, 1)
             grid.attach(distances, 0, 2, 3, 1)
-
         self.buttons_not_calibrating()
-
         self.content.add(grid)
+
+    def _add_button(self, label, method, pobox):
+        popover_button = self._gtk.Button(label=label)
+        popover_button.connect("clicked", self.start_calibration, method)
+        pobox.pack_start(popover_button, True, True, 5)
 
     def on_popover_clicked(self, widget):
         self.labels['popover'].set_relative_to(widget)
         self.labels['popover'].show_all()
 
     def start_calibration(self, widget, method):
-        x_position = y_position = 0
         self.labels['popover'].popdown()
         if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
             self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
 
         if method == "probe":
-            # Get position from config
-            printer = self._screen.connected_printer
-            printer_cfg = self._config.get_printer_config(printer)
-            logging.info(printer_cfg)
-            if printer_cfg is not None:
-                x_position = printer_cfg.getfloat("calibrate_x_position", 0)
-                y_position = printer_cfg.getfloat("calibrate_y_position", 0)
-            elif 'z_calibrate_position' in self._config.get_config():
-                # OLD global way, this should be deprecated
-                x_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_x_position", 0)
-                y_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_y_position", 0)
-
-            if x_position > 0 and y_position > 0:
-                logging.debug("Configured probing position X: %.0f Y: %.0f", x_position, y_position)
-                self._screen._ws.klippy.gcode_script('G0 X%d Y%d F3000' % (x_position, y_position))
-            elif "delta" in self._screen.printer.get_config_section("printer")['kinematics']:
-                logging.info("Detected delta kinematics calibrating at 0,0")
-                self._screen._ws.klippy.gcode_script('G0 X%d Y%d F3000' % (0, 0))
-            else:
-                logging.debug("Position not configured, probing the middle of the bed")
-                x_position = int(int(self._screen.printer.get_config_section("stepper_x")['position_max']) / 2)
-                y_position = int(int(self._screen.printer.get_config_section("stepper_y")['position_max']) / 2)
-
-                # Find probe offset
-                klipper_cfg = self._screen.printer.get_config_section_list()
-                x_offset = y_offset = 0
-                if "bltouch" in klipper_cfg:
-                    bltouch = self._screen.printer.get_config_section("bltouch")
-                    if "x_offset" in bltouch:
-                        x_offset = float(bltouch['x_offset'])
-                    if "y_offset" in bltouch:
-                        y_offset = float(bltouch['y_offset'])
-                elif "probe" in klipper_cfg:
-                    probe = self._screen.printer.get_config_section("probe")
-                    if "x_offset" in probe:
-                        x_offset = float(probe['x_offset'])
-                    if "y_offset" in probe:
-                        y_offset = float(probe['y_offset'])
-                if x_offset > 0 or y_offset > 0:
-                    logging.debug("Substracting probe offset X: %.0f Y: %.0f", x_offset, y_offset)
-                    x_position = self.apply_probe_offset(x_position, x_offset)
-                    y_position = self.apply_probe_offset(y_position, y_offset)
-                # Move
-                self._screen._ws.klippy.gcode_script('G0 X%d Y%d F3000' % (x_position, y_position))
-
+            self._move_to_position()
             self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_CALIBRATE)
         elif method == "mesh":
             self._screen._ws.klippy.gcode_script("BED_MESH_CALIBRATE")
@@ -220,8 +157,62 @@ class ZCalibratePanel(ScreenPanel):
         elif method == "endstop":
             self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_ENDSTOP_CALIBRATE)
 
-    def apply_probe_offset(self, pos, offset):
-        return max(0, int(float(pos) - offset))
+    def _move_to_position(self):
+        # Get position from config
+        x_position = y_position = None
+        printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
+        logging.info(printer_cfg)
+        if printer_cfg is not None:
+            x_position = printer_cfg.getfloat("calibrate_x_position", None)
+            y_position = printer_cfg.getfloat("calibrate_y_position", None)
+        elif 'z_calibrate_position' in self._config.get_config():
+            # OLD global way, this should be deprecated
+            x_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_x_position", None)
+            y_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_y_position", None)
+
+        if x_position is not None and y_position is not None:
+            logging.debug(f"Configured probing position X: {x_position} Y: {y_position}")
+            self._screen._ws.klippy.gcode_script(f'G0 X{x_position} Y{y_position} F3000')
+        elif "delta" in self._screen.printer.get_config_section("printer")['kinematics']:
+            logging.info("Detected delta kinematics calibrating at 0,0")
+            self._screen._ws.klippy.gcode_script('G0 X0 Y0 F3000')
+        else:
+            self._calculate_position()
+
+    def _calculate_position(self):
+        logging.debug("Position not configured, probing the middle of the bed")
+        try:
+            xmax = float(self._screen.printer.get_config_section("stepper_x")['position_max'])
+            ymax = float(self._screen.printer.get_config_section("stepper_y")['position_max'])
+        except KeyError:
+            logging.error("Couldn't get max position from stepper_x and stepper_y")
+            return
+        x_position = xmax / 2
+        y_position = ymax / 2
+        logging.info(f"Center position X:{x_position} Y:{y_position}")
+
+        # Find probe offset
+        klipper_cfg = self._screen.printer.get_config_section_list()
+        x_offset = y_offset = None
+        if "bltouch" in klipper_cfg:
+            bltouch = self._screen.printer.get_config_section("bltouch")
+            if "x_offset" in bltouch:
+                x_offset = float(bltouch['x_offset'])
+            if "y_offset" in bltouch:
+                y_offset = float(bltouch['y_offset'])
+        elif "probe" in klipper_cfg:
+            probe = self._screen.printer.get_config_section("probe")
+            if "x_offset" in probe:
+                x_offset = float(probe['x_offset'])
+            if "y_offset" in probe:
+                y_offset = float(probe['y_offset'])
+        if x_offset is not None and y_offset is not None:
+            logging.info(f"Probe offset X:{x_offset} Y:{y_offset}")
+            x_position = x_position - x_offset
+            y_position = y_position - y_offset
+
+        logging.info(f"Moving to X:{x_position} Y:{y_position}")
+        self._screen._ws.klippy.gcode_script(f'G0 X{x_position} Y{y_position} F3000')
 
     def process_update(self, action, data):
 
@@ -229,35 +220,37 @@ class ZCalibratePanel(ScreenPanel):
             if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
                 self.widgets['zposition'].set_text("Z: ?")
             elif "toolhead" in data and "position" in data['toolhead']:
-                self.updatePosition(data['toolhead']['position'])
+                self.update_position(data['toolhead']['position'])
         elif action == "notify_gcode_response":
             data = data.lower()
-            logging.info(data)
             if "unknown" in data:
                 self.buttons_not_calibrating()
+                logging.info(data)
             elif "save_config" in data:
                 self.buttons_not_calibrating()
                 self._screen.show_popup_message(_("Calibrated, save configuration to make it permanent"), level=1)
             elif "out of range" in data:
-                self._screen.show_popup_message("%s" % data)
+                self._screen.show_popup_message(data)
                 self.buttons_not_calibrating()
+                logging.info(data)
             elif "fail" in data and "use testz" in data:
                 self._screen.show_popup_message(_("Failed, adjust position first"))
                 self.buttons_not_calibrating()
+                logging.info(data)
             elif "use testz" in data or "use abort" in data or "z position" in data:
                 self.buttons_calibrating()
         return
 
-    def updatePosition(self, position):
-        self.widgets['zposition'].set_text("Z: " + str(round(position[2], 2)))
+    def update_position(self, position):
+        self.widgets['zposition'].set_text(f"Z: {position[2]:.2f}")
         if self.z_offset is not None:
-            self.widgets['zoffset'].set_text(str(round(position[2] + float(self.z_offset), 2)))
+            self.widgets['zoffset'].set_text(f"{position[2] - self.z_offset:.2f}")
 
     def change_distance(self, widget, distance):
         if self.distance == distance:
             return
 
-        ctx = self.widgets[str(self.distance)].get_style_context()
+        ctx = self.widgets[f'{self.distance}'].get_style_context()
         ctx.remove_class("distbutton_active")
 
         self.distance = distance
@@ -266,11 +259,11 @@ class ZCalibratePanel(ScreenPanel):
         for i in self.distances:
             if i == self.distance:
                 continue
-            self.widgets[str(i)].set_active(False)
+            self.widgets[f"{i}"].set_active(False)
 
-    def move(self, widget, dir):
-        dist = str(self.distance) if dir == "+" else "-" + str(self.distance)
-        logging.info("# Moving %s", KlippyGcodes.testz_move(dist))
+    def move(self, widget, direction):
+        dist = f"{direction}{self.distance}"
+        logging.info(f"# Moving {KlippyGcodes.testz_move(dist)}")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.testz_move(dist))
 
     def abort(self, widget):

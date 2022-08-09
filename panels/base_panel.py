@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import contextlib
 import datetime
 import gi
 import logging
@@ -11,19 +12,19 @@ from ks_includes.screen_panel import ScreenPanel
 
 
 class BasePanel(ScreenPanel):
-    def __init__(self, screen, title, back=True, action_bar=True, printer_name=True):
-        super().__init__(screen, title, back, action_bar, printer_name)
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
         self.current_panel = None
         self.time_min = -1
         self.time_format = self._config.get_main_config().getboolean("24htime", True)
         self.time_update = None
         self.titlebar_name_type = None
         self.buttons_showing = {
-            'back': not(back),
+            'back': not back,
             'macros_shortcut': False,
             'printer_select': False
         }
-
+        self.current_extruder = None
         # Action bar buttons
         self.control['back'] = self._gtk.ButtonImage('back', None, None, 1)
         self.control['back'].connect("clicked", self.back)
@@ -119,7 +120,7 @@ class BasePanel(ScreenPanel):
             self.titlebar_name_type = printer_cfg.get("titlebar_name_type", None)
         else:
             self.titlebar_name_type = None
-        logging.info("Titlebar name type: %s", self.titlebar_name_type)
+        logging.info(f"Titlebar name type: {self.titlebar_name_type}")
 
         for child in self.control['temp_box'].get_children():
             self.control['temp_box'].remove(child)
@@ -133,7 +134,7 @@ class BasePanel(ScreenPanel):
                     if device == "extruder":
                         icon = self._gtk.Image("extruder-0", .5)
                     else:
-                        icon = self._gtk.Image("extruder-%s" % device[8:], .5)
+                        icon = self._gtk.Image(f"extruder-{device[8:]}", .5)
                 else:
                     icon = self._gtk.Image("extruder", .5)
             elif device.startswith("heater_bed"):
@@ -152,10 +153,10 @@ class BasePanel(ScreenPanel):
             self.labels[device] = Gtk.Label(label="100º")
             self.labels[device].set_ellipsize(Pango.EllipsizeMode.START)
 
-            self.labels[device + '_box'] = Gtk.Box()
+            self.labels[f'{device}_box'] = Gtk.Box()
             if icon is not None:
-                self.labels[device + '_box'].pack_start(icon, False, False, 3)
-            self.labels[device + '_box'].pack_start(self.labels[device], False, False, 0)
+                self.labels[f'{device}_box'].pack_start(icon, False, False, 3)
+            self.labels[f'{device}_box'].pack_start(self.labels[device], False, False, 0)
 
         # Limit the number of items according to resolution
         if self._screen.width <= 480:
@@ -168,7 +169,7 @@ class BasePanel(ScreenPanel):
         n = 0
         if self._screen.printer.get_tools():
             self.current_extruder = self._screen.printer.get_stat("toolhead", "extruder")
-            self.control['temp_box'].add(self.labels["%s_box" % self.current_extruder])
+            self.control['temp_box'].add(self.labels[f"{self.current_extruder}_box"])
             n += 1
 
         if self._screen.printer.has_heated_bed():
@@ -180,18 +181,15 @@ class BasePanel(ScreenPanel):
             titlebar_items = printer_cfg.get("titlebar_items", "")
             if titlebar_items is not None:
                 titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
-                logging.info("Titlebar items: %s", titlebar_items)
+                logging.info(f"Titlebar items: {titlebar_items}")
                 for device in self._screen.printer.get_temp_store_devices():
                     # Users can fill the bar if they want
                     if n >= nlimit + 1:
                         break
-                    if not (device.startswith("extruder") or device.startswith("heater_bed")):
-                        name = device.split(" ")[1:][0]
-                    else:
-                        name = device
+                    name = device.split()[1] if len(device.split()) > 1 else device
                     for item in titlebar_items:
                         if name == item:
-                            self.control['temp_box'].add(self.labels["%s_box" % device])
+                            self.control['temp_box'].add(self.labels[f"{device}_box"])
                             n += 1
                             break
 
@@ -200,7 +198,7 @@ class BasePanel(ScreenPanel):
             if n >= nlimit:
                 break
             if device.startswith("heater_generic"):
-                self.control['temp_box'].add(self.labels["%s_box" % device])
+                self.control['temp_box'].add(self.labels[f"{device}_box"])
                 n += 1
         self.control['temp_box'].show_all()
 
@@ -219,10 +217,9 @@ class BasePanel(ScreenPanel):
 
         self._screen.remove_keyboard()
 
-        if hasattr(self.current_panel, "back"):
-            if not self.current_panel.back():
-                self._screen._menu_go_back()
-        else:
+        if hasattr(self.current_panel, "back") \
+                and not self.current_panel.back() \
+                or not hasattr(self.current_panel, "back"):
             self._screen._menu_go_back()
 
     def process_update(self, action, data):
@@ -237,17 +234,19 @@ class BasePanel(ScreenPanel):
                     name = ""
                     if not (device.startswith("extruder") or device.startswith("heater_bed")):
                         if self.titlebar_name_type == "full":
-                            name = device.split(" ")[1:][0].capitalize().replace("_", " ") + ": "
+                            name = device.split()[1] if len(device.split()) > 1 else device
+                            name = f'{name.capitalize().replace("_", " ")}: '
                         elif self.titlebar_name_type == "short":
-                            name = device.split(" ")[1:][0][:1].upper() + ": "
-                    self.labels[device].set_label("%s%d°" % (name, round(temp)))
+                            name = device.split()[1] if len(device.split()) > 1 else device
+                            name = f"{name[:1].upper()}: "
+                    self.labels[device].set_label(f"{name}{int(temp)}°")
 
-        if "toolhead" in data and "extruder" in data["toolhead"]:
+        with contextlib.suppress(KeyError):
             if data["toolhead"]["extruder"] != self.current_extruder:
-                self.control['temp_box'].remove(self.labels["%s_box" % self.current_extruder])
+                self.control['temp_box'].remove(self.labels[f"{self.current_extruder}_box"])
                 self.current_extruder = data["toolhead"]["extruder"]
-                self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, True, 3)
-                self.control['temp_box'].reorder_child(self.labels["%s_box" % self.current_extruder], 0)
+                self.control['temp_box'].pack_start(self.labels[f"{self.current_extruder}_box"], True, True, 3)
+                self.control['temp_box'].reorder_child(self.labels[f"{self.current_extruder}_box"], 0)
                 self.control['temp_box'].show_all()
 
     def remove(self, widget):
@@ -290,21 +289,21 @@ class BasePanel(ScreenPanel):
 
     def set_title(self, title):
         try:
-            env = Environment(extensions=["jinja2.ext.i18n"])
+            env = Environment(extensions=["jinja2.ext.i18n"], autoescape=True)
             env.install_gettext_translations(self.lang)
             j2_temp = env.from_string(title)
             title = j2_temp.render()
         except Exception:
-            logging.debug("Error parsing jinja for title: %s" % title)
+            logging.debug(f"Error parsing jinja for title: {title}")
 
-        self.titlelbl.set_label("%s | %s" % (self._screen.connecting_to_printer, title))
+        self.titlelbl.set_label(f"{self._screen.connecting_to_printer} | {title}")
 
     def update_time(self):
         now = datetime.datetime.now()
         confopt = self._config.get_main_config().getboolean("24htime", True)
         if now.minute != self.time_min or self.time_format != confopt:
             if confopt:
-                self.control['time'].set_text(now.strftime("%H:%M"))
+                self.control['time'].set_text(f'{now:%H:%M}')
             else:
-                self.control['time'].set_text(now.strftime("%I:%M %p"))
+                self.control['time'].set_text(f'{now:%I:%M %p}')
         return True

@@ -11,8 +11,8 @@
    width="24"
    height="24"
    viewBox="0 0 24 24"
-   id="svg957"
-   sodipodi:docname="emergency.svg"
+   id="svg4"
+   sodipodi:docname="bed-mesh.svg"
    inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)">
   <metadata
      id="metadata6">
@@ -26,9 +26,9 @@
     </rdf:RDF>
   </metadata>
   <defs
-     id="defs961" />
+     id="defs8" />
   <sodipodi:namedview
-     id="namedview959"
+     id="namedview6"
      pagecolor="#505050"
      bordercolor="#ffffff"
      borderopacity="1"
@@ -37,18 +37,17 @@
      inkscape:pagecheckerboard="1"
      showgrid="false"
      inkscape:zoom="26"
-     inkscape:cx="9"
-     inkscape:cy="12.442308"
+     inkscape:cx="12"
+     inkscape:cy="8.9423077"
      inkscape:window-width="1920"
      inkscape:window-height="1018"
      inkscape:window-x="-6"
      inkscape:window-y="-6"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg957"
+     inkscape:current-layer="svg4"
      inkscape:document-rotation="0" />
   <path
-     d="m 11,15 h 2 v 2 h -2 v -2 m 0,-8 h 2 v 6 H 11 V 7 m 1,-4 c -4.9705627,0 -9,4.0294373 -9,9 0,4.970563 4.0294373,9 9,9 4.970563,0 9,-4.029437 9,-9 0,-4.9705627 -4.029437,-9 -9,-9 m 0,16 C 8.14,19 5,15.86 5,12 5,8.14 8.14,5 12,5 c 3.86,0 7,3.14 7,7 0,3.86 -3.14,7 -7,7"
-     id="path955"
-     style="fill:#f14f4f;fill-opacity:1"
-     sodipodi:nodetypes="cccccccccccsssccsssc" />
+     d="m 10.4,5.6000001 v 3.1999998 h 3.2 V 5.6000001 h -3.2 m 4.8,0 v 3.1999998 h 3.2 V 5.6000001 H 15.2 M 15.2,10.4 v 3.2 h 3.2 v -3.2 h -3.2 m 0,4.8 v 3.2 h 3.2 v -3.2 h -3.2 m -1.6,3.2 v -3.2 h -3.2 v 3.2 h 3.2 m -4.7999999,0 v -3.2 h -3.2 v 3.2 h 3.2 m 0,-4.8 v -3.2 h -3.2 v 3.2 h 3.2 m 0,-4.8000001 V 5.6000001 h -3.2 v 3.1999998 h 3.2 M 10.4,13.6 h 3.2 v -3.2 h -3.2 v 3.2 M 5.6000001,4.0000001 H 18.4 a 1.6,1.6 0 0 1 1.6,1.6 V 18.4 A 1.6,1.6 0 0 1 18.4,20 H 5.6000001 C 4.736,20 4,19.28 4,18.4 V 5.6000001 a 1.6,1.6 0 0 1 1.6000001,-1.6 z"
+     id="path2-8"
+     style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1" />
 </svg>

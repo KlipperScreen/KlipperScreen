@@ -21,6 +21,21 @@ SHAPERS = ['zv', 'mzv', 'zvd', 'ei', '2hump_ei', '3hump_ei']
 
 
 class InputShaperPanel(ScreenPanel):
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
+        self.freq_xy_adj = {}
+        self.freq_xy_combo = {}
+        self.calibrate_btn = self._gtk.ButtonImage("move", _('Finding ADXL'), "color1", word_wrap=False)
+        self.calibrate_btn.connect("clicked", self.on_popover_clicked)
+        self.calibrate_btn.set_sensitive(False)
+        self.status = Gtk.Label("")
+        self.status.set_hexpand(True)
+        self.status.set_vexpand(False)
+        self.status.set_halign(Gtk.Align.START)
+        self.status.set_ellipsize(Pango.EllipsizeMode.END)
+        self.calibrating_axis = None
+        self.has_sensor = False
+
     def initialize(self, panel_name):
 
         self.has_sensor = False
@@ -29,10 +44,6 @@ class InputShaperPanel(ScreenPanel):
         auto_calibration_label = Gtk.Label()
         auto_calibration_label.set_markup('<big><b>Auto Calibration</b></big>')
         auto_calibration_label.set_hexpand(True)
-
-        self.calibrate_btn = self._gtk.ButtonImage("move", _('Finding ADXL'), "color1", word_wrap=False)
-        self.calibrate_btn.connect("clicked", self.on_popover_clicked)
-        self.calibrate_btn.set_sensitive(False)
 
         auto_grid = Gtk.Grid()
         auto_grid.attach(auto_calibration_label, 0, 0, 1, 1)
@@ -51,11 +62,9 @@ class InputShaperPanel(ScreenPanel):
         input_grid.attach(manual_calibration_label, 0, 0, 3, 1)
         input_grid.attach(disclaimer, 0, 1, 3, 1)
 
-        self.freq_xy_adj = {}
-        self.freq_xy_combo = {}
         for i, dim_freq in enumerate(XY_FREQ):
             axis_lbl = Gtk.Label()
-            axis_lbl.set_markup("<b>{}</b>".format(dim_freq['name']))
+            axis_lbl.set_markup(f"<b>{dim_freq['name']}</b>")
             axis_lbl.set_hexpand(False)
             axis_lbl.set_vexpand(True)
             axis_lbl.set_halign(Gtk.Align.START)
@@ -80,12 +89,6 @@ class InputShaperPanel(ScreenPanel):
             input_grid.attach(axis_lbl, 0, i + 2, 1, 1)
             input_grid.attach(scale, 1, i + 2, 1, 1)
             input_grid.attach(self.freq_xy_combo[shaper_slug], 2, i + 2, 1, 1)
-
-        self.status = Gtk.Label("")
-        self.status.set_hexpand(True)
-        self.status.set_vexpand(False)
-        self.status.set_halign(Gtk.Align.START)
-        self.status.set_ellipsize(Pango.EllipsizeMode.END)
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.add(auto_grid)
@@ -134,9 +137,11 @@ class InputShaperPanel(ScreenPanel):
         shaper_type_y = self.freq_xy_combo['shaper_type_y'].get_active_text()
 
         self._screen._ws.klippy.gcode_script(
-            'SET_INPUT_SHAPER SHAPER_FREQ_X={} SHAPER_TYPE_X={} SHAPER_FREQ_Y={} SHAPER_TYPE_Y={}'.format(
-                shaper_freq_x, shaper_type_x, shaper_freq_y, shaper_type_y
-            )
+            f'SET_INPUT_SHAPER '
+            f'SHAPER_FREQ_X={shaper_freq_x} '
+            f'SHAPER_TYPE_X={shaper_type_x} '
+            f'SHAPER_FREQ_Y={shaper_freq_y} '
+            f'SHAPER_TYPE_Y={shaper_type_y}'
         )
 
     def save_config(self):
@@ -166,7 +171,7 @@ class InputShaperPanel(ScreenPanel):
     def process_update(self, action, data):
 
         if action == "notify_gcode_response":
-            self.status.set_text('{}'.format(data.replace('shaper_', '').replace('damping_', '')))
+            self.status.set_text(f"{data.replace('shaper_', '').replace('damping_', '')}")
             data = data.lower()
             if 'got 0' in data:
                 self.calibrate_btn.set_label(_('Check ADXL Wiring'))
@@ -184,11 +189,8 @@ class InputShaperPanel(ScreenPanel):
                                     r'?P<shaper_freq>[0-9.]+)', data).groupdict()
                 self.freq_xy_adj['shaper_freq_' + results['axis']].set_value(float(results['shaper_freq']))
                 self.freq_xy_combo['shaper_type_' + results['axis']].set_active(SHAPERS.index(results['shaper_type']))
-                if self.calibrating_axis == results['axis']:
-                    self.calibrate_btn.set_sensitive(True)
-                    self.calibrate_btn.set_label(_('Calibrated'))
-                    self.save_config()
-                elif self.calibrating_axis == "both" and results['axis'] == 'y':
+                if self.calibrating_axis == results['axis'] \
+                        or (self.calibrating_axis == "both" and results['axis'] == 'y'):
                     self.calibrate_btn.set_sensitive(True)
                     self.calibrate_btn.set_label(_('Calibrated'))
                     self.save_config()

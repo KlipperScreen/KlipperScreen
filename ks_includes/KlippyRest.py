@@ -22,7 +22,7 @@ class KlippyRest:
         return self.send_request("printer/info")
 
     def get_thumbnail_stream(self, thumbnail):
-        url = "http://%s:%s/server/files/gcodes/%s" % (self.ip, self.port, thumbnail)
+        url = f"http://{self.ip}:{self.port}/server/files/gcodes/{thumbnail}"
         response = requests.get(url, stream=True)
         if response.status_code == 200:
             response.raw.decode_content = True
@@ -30,8 +30,8 @@ class KlippyRest:
         return False
 
     def send_request(self, method):
-        url = "http://%s:%s/%s" % (self.ip, self.port, method)
-        logging.debug("Sending request to %s" % url)
+        url = f"http://{self.ip}:{self.port}/{method}"
+        logging.debug(f"Sending request to {url}")
         headers = {} if self.api_key is False else {"x-api-key": self.api_key}
         try:
             r = requests.get(url, headers=headers)
@@ -46,7 +46,7 @@ class KlippyRest:
             data = json.loads(r.content)
         except Exception as e:
             logging.critical(e, exc_info=True)
-            logging.exception("Unable to parse response from moonraker:\n %s" % r.content)
+            logging.exception(f"Unable to parse response from moonraker:\n {r.content}")
             return False
 
         return data

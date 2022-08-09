@@ -12,12 +12,12 @@ from io import StringIO
 from os import path
 
 SCREEN_BLANKING_OPTIONS = [
-    "300",  # 5 Minutes
-    "900",  # 15 Minutes
-    "1800",  # 30 Minutes
-    "3600",  # 1 Hour
-    "7200",  # 2 Hours
-    "14400",  # 4 Hours
+    300,  # 5 Minutes
+    900,  # 15 Minutes
+    1800,  # 30 Minutes
+    3600,  # 1 Hour
+    7200,  # 2 Hours
+    14400,  # 4 Hours
 ]
 
 klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
@@ -37,7 +37,7 @@ class KlipperScreenConfig:
         self.default_config_path = os.path.join(klipperscreendir, "ks_includes", "defaults.conf")
         self.config = configparser.ConfigParser()
         self.config_path = self.get_config_file_location(configfile)
-        logging.debug("Config path location: %s" % self.config_path)
+        logging.debug(f"Config path location: {self.config_path}")
         self.defined_config = None
 
         try:
@@ -57,24 +57,22 @@ class KlipperScreenConfig:
                 self.config.read_string(user_def)
                 if saved_def is not None:
                     self.config.read_string(saved_def)
-                    logging.info("====== Saved Def ======\n%s\n=======================" % saved_def)
+                    logging.info(f"====== Saved Def ======\n{saved_def}\n=======================")
                 # This is the final config
                 # self.log_config(self.config)
-        except KeyError:
-            raise ConfigError(f"Error reading config: {self.config_path}")
+        except KeyError as e:
+            raise ConfigError(f"Error reading config: {self.config_path}") from e
         except Exception:
             logging.exception("Unknown error with config")
 
         printers = sorted([i for i in self.config.sections() if i.startswith("printer ")])
-        self.printers = []
-        for printer in printers:
-            self.printers.append({
-                printer[8:]: {
-                    "moonraker_host": self.config.get(printer, "moonraker_host", fallback="127.0.0.1"),
-                    "moonraker_port": self.config.get(printer, "moonraker_port", fallback="7125"),
-                    "moonraker_api_key": self.config.get(printer, "moonraker_api_key", fallback=False)
-                }
-            })
+        self.printers = [
+            {printer[8:]: {
+                "moonraker_host": self.config.get(printer, "moonraker_host", fallback="127.0.0.1"),
+                "moonraker_port": self.config.get(printer, "moonraker_port", fallback="7125"),
+                "moonraker_api_key": self.config.get(printer, "moonraker_api_key", fallback=False)
+            }} for printer in printers]
+
         if len(printers) <= 0:
             self.printers.append({
                 "Printer": {
@@ -90,11 +88,11 @@ class KlipperScreenConfig:
             item = conf_printers_debug[conf_printers_debug.index(printer)]
             if item[name]['moonraker_api_key'] != "":
                 item[name]['moonraker_api_key'] = "redacted"
-        logging.debug("Configured printers: %s" % json.dumps(conf_printers_debug, indent=2))
+        logging.debug(f"Configured printers: {json.dumps(conf_printers_debug, indent=2)}")
 
         lang = self.get_main_config().get("language", None)
         lang = [lang] if lang is not None and lang != "default" else None
-        logging.info("Detected language: %s" % lang)
+        logging.info(f"Detected language: {lang}")
         self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', languages=lang,
                                         fallback=True)
         self.lang.install(names=['gettext', 'ngettext'])
@@ -143,6 +141,8 @@ class KlipperScreenConfig:
             {"print_estimate_compensation": {
                 "section": "main", "name": _("Slicer Time correction (%)"), "type": "scale", "value": "100",
                 "range": [50, 150], "step": 1}},
+            {"autoclose_popups": {"section": "main", "name": _("Auto-close notifications"), "type": "binary",
+                                  "value": "True"}},
 
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
@@ -178,14 +178,14 @@ class KlipperScreenConfig:
         index = self.configurable_options.index(
             [i for i in self.configurable_options if list(i)[0] == "screen_blanking"][0])
         for num in SCREEN_BLANKING_OPTIONS:
-            hour = int(int(num) / 3600)
+            hour = num // 3600
             if hour > 0:
-                name = str(hour) + " " + ngettext("hour", "hours", hour)
+                name = f'{hour} ' + ngettext("hour", "hours", hour)
             else:
-                name = str(int(int(num) / 60)) + " " + _("minutes")
+                name = f'{num / 60:.0f} ' + _("minutes")
             self.configurable_options[index]['screen_blanking']['options'].append({
                 "name": name,
-                "value": num
+                "value": f"{num}"
             })
 
         for item in self.configurable_options:
@@ -200,9 +200,7 @@ class KlipperScreenConfig:
         exclude_list = ['preheat']
         if not self.defined_config.getboolean('main', "use_default_menu", fallback=True):
             logging.info("Using custom menu, removing default menu entries.")
-            exclude_list.append('menu __main')
-            exclude_list.append('menu __print')
-            exclude_list.append('menu __splashscreen')
+            exclude_list.extend(('menu __main', 'menu __print', 'menu __splashscreen'))
         for i in exclude_list:
             for j in config.sections():
                 if j.startswith(i):
@@ -210,28 +208,27 @@ class KlipperScreenConfig:
                         if k.startswith(i):
                             del self.config[k]
 
-    def _include_config(self, dir, path):
-        full_path = path if path[0] == "/" else "%s/%s" % (dir, path)
+    def _include_config(self, directory, filepath):
+        full_path = filepath if filepath[0] == "/" else f"{directory}/{filepath}"
         parse_files = []
 
         if "*" in full_path:
             parent_dir = "/".join(full_path.split("/")[:-1])
             file = full_path.split("/")[-1]
             if not os.path.exists(parent_dir):
-                logging.info("Config Error: Directory %s does not exist" % parent_dir)
+                logging.info(f"Config Error: Directory {parent_dir} does not exist")
                 return
             files = os.listdir(parent_dir)
-            regex = "^%s$" % file.replace('*', '.*')
-            for file in files:
-                if re.match(regex, file):
-                    parse_files.append(os.path.join(parent_dir, file))
+            regex = f"^{file.replace('*', '.*')}$"
+            parse_files.extend(os.path.join(parent_dir, file) for file in files if re.match(regex, file))
+
         else:
             if not os.path.exists(os.path.join(full_path)):
-                logging.info("Config Error: %s does not exist" % full_path)
+                logging.info(f"Config Error: {full_path} does not exist")
                 return
             parse_files.append(full_path)
 
-        logging.info("Parsing files: %s" % parse_files)
+        logging.info(f"Parsing files: {parse_files}")
         for file in parse_files:
             config = configparser.ConfigParser()
             config.read(file)
@@ -244,7 +241,7 @@ class KlipperScreenConfig:
 
     def separate_saved_config(self, config_path):
         user_def = []
-        saved_def = None
+        saved_def = []
         found_saved = False
         if not path.exists(config_path):
             return [None, None]
@@ -257,13 +254,12 @@ class KlipperScreenConfig:
                     continue
                 if found_saved is False:
                     user_def.append(line.replace('\n', ''))
-                else:
-                    if line.startswith(self.do_not_edit_prefix):
-                        saved_def.append(line[(len(self.do_not_edit_prefix) + 1):])
+                elif line.startswith(self.do_not_edit_prefix):
+                    saved_def.append(line[(len(self.do_not_edit_prefix) + 1):])
         return ["\n".join(user_def), None if saved_def is None else "\n".join(saved_def)]
 
     def get_config_file_location(self, file):
-        logging.info("Passed config file: %s" % file)
+        logging.info(f"Passed config file: {file}")
         if not path.exists(file):
             file = os.path.join(klipperscreendir, self.configfile_name)
             if not path.exists(file):
@@ -276,7 +272,7 @@ class KlipperScreenConfig:
                         if not path.exists(file):
                             file = self.default_config_path
 
-        logging.info("Found configuration file at: %s" % file)
+        logging.info(f"Found configuration file at: {file}")
         return file
 
     def get_config(self):
@@ -293,8 +289,8 @@ class KlipperScreenConfig:
 
     def get_menu_items(self, menu="__main", subsection=""):
         if subsection != "":
-            subsection = subsection + " "
-        index = "menu %s %s" % (menu, subsection)
+            subsection = f"{subsection} "
+        index = f"menu {menu} {subsection}"
         items = [i[len(index):] for i in self.config.sections() if i.startswith(index)]
         menu_items = []
         for item in items:
@@ -305,7 +301,7 @@ class KlipperScreenConfig:
         return menu_items
 
     def get_menu_name(self, menu="__main", subsection=""):
-        name = ("menu %s %s" % (menu, subsection)) if subsection != "" else ("menu %s" % menu)
+        name = f"menu {menu} {subsection}" if subsection != "" else f"menu {menu}"
         if name not in self.config:
             return False
         return self.config[name].get('name')
@@ -313,16 +309,18 @@ class KlipperScreenConfig:
     def get_preheat_options(self):
         index = "preheat "
         items = [i[len(index):] for i in self.config.sections() if i.startswith(index)]
+        return {item: self._build_preheat_item(index + item) for item in items}
 
-        preheat_options = {}
-        for item in items:
-            preheat_options[item] = self._build_preheat_item(index + item)
+    def _build_preheat_item(self, name):
+        if name not in self.config:
+            return False
+        cfg = self.config[name]
+        return {opt: cfg.get("gcode", None) if opt == "gcode" else cfg.getint(opt, None) for opt in cfg}
 
-        return preheat_options
 
     def get_printer_config(self, name):
         if not name.startswith("printer "):
-            name = "printer %s" % name
+            name = f"printer {name}"
 
         if name not in self.config:
             return None
@@ -333,10 +331,6 @@ class KlipperScreenConfig:
 
     def get_printers(self):
         return self.printers
-
-    def get_user_saved_config(self):
-        if self.config_path != self.default_config_path:
-            print("Get")
 
     def save_user_config_options(self):
         save_config = configparser.ConfigParser()
@@ -365,7 +359,7 @@ class KlipperScreenConfig:
 
         save_output = self._build_config_string(save_config).split("\n")
         for i in range(len(save_output)):
-            save_output[i] = "%s %s" % (self.do_not_edit_prefix, save_output[i])
+            save_output[i] = f"{self.do_not_edit_prefix} {save_output[i]}"
 
         if self.config_path == self.default_config_path:
             user_def = ""
@@ -379,21 +373,20 @@ class KlipperScreenConfig:
             self.do_not_edit_prefix)
 
         if self.config_path != self.default_config_path:
-            path = self.config_path
+            filepath = self.config_path
         else:
-            path = os.path.expanduser("~/")
-            klipper_config = os.path.join(path, "klipper_config")
+            filepath = os.path.expanduser("~/")
+            klipper_config = os.path.join(filepath, "klipper_config")
             if os.path.exists(klipper_config):
-                path = os.path.join(klipper_config, "KlipperScreen.conf")
+                filepath = os.path.join(klipper_config, "KlipperScreen.conf")
             else:
-                path = os.path.join(path, "KlipperScreen.conf")
+                filepath = os.path.join(filepath, "KlipperScreen.conf")
 
         try:
-            file = open(path, 'w')
-            file.write(contents)
-            file.close()
+            with open(filepath, 'w') as file:
+                file.write(contents)
         except Exception:
-            logging.error("Error writing configuration file in %s" % path)
+            logging.error(f"Error writing configuration file in {filepath}")
 
     def set(self, section, name, value):
         self.config.set(section, name, value)
@@ -411,7 +404,8 @@ class KlipperScreenConfig:
         ]
         logging.info("\n".join(lines))
 
-    def _build_config_string(self, config):
+    @staticmethod
+    def _build_config_string(config):
         sfile = StringIO()
         config.write(sfile)
         sfile.seek(0)
@@ -433,20 +427,7 @@ class KlipperScreenConfig:
         try:
             item["params"] = json.loads(cfg.get("params", "{}"))
         except Exception:
-            logging.debug("Unable to parse parameters for [%s]" % name)
+            logging.debug(f"Unable to parse parameters for [{name}]")
             item["params"] = {}
 
         return {name[(len(menu) + 6):]: item}
-
-    def _build_preheat_item(self, name):
-        if name not in self.config:
-            return False
-        cfg = self.config[name]
-        item = {
-            "extruder": cfg.getint("extruder", None),
-            "bed": cfg.getint("bed", None),
-            "heater_generic": cfg.getint("heater_generic", None),
-            "temperature_fan": cfg.getint("temperature_fan", None),
-            "gcode": cfg.get("gcode", None)
-        }
-        return item

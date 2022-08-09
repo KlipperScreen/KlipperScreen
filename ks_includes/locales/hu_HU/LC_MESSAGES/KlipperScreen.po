@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-16 14:02-0300\n"
+"POT-Creation-Date: 2022-07-12 22:17-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -454,6 +454,9 @@ msgid_plural "Packages will be updated"
 msgstr[0] "A csomag frissítésre kerül"
 msgstr[1] "Csomag frissül"
 
+msgid "Part Fan"
+msgstr ""
+
 msgid "Password saved"
 msgstr "Jelszó mentve"
 
@@ -465,6 +468,9 @@ msgstr "Szüneteltetve"
 
 msgid "Perform a full upgrade?"
 msgstr "Teljes frissítést hajt végre?"
+
+msgid "Pins"
+msgstr ""
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Fordítsa újra és frissítse a mikrovezérlőt."
@@ -538,6 +544,9 @@ msgstr "Visszahúzási sebesség"
 #, python-format
 msgid "Retry #%s"
 msgstr "Újra #%s"
+
+msgid "Retrying"
+msgstr ""
 
 msgid "Save"
 msgstr "Mentés"
