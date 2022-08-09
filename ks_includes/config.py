@@ -60,10 +60,10 @@ class KlipperScreenConfig:
                     logging.info(f"====== Saved Def ======\n{saved_def}\n=======================")
                 # This is the final config
                 # self.log_config(self.config)
-        except KeyError as e:
-            raise ConfigError(f"Error reading config: {self.config_path}") from e
-        except Exception:
-            logging.exception("Unknown error with config")
+        except KeyError as Kerror:
+            raise ConfigError(f"Error reading config: {self.config_path}\n{Kerror}") from Kerror
+        except Exception as e:
+            logging.exception(f"Unknown error with config:\n{e}")
 
         printers = sorted([i for i in self.config.sections() if i.startswith("printer ")])
         self.printers = [
@@ -317,7 +317,6 @@ class KlipperScreenConfig:
         cfg = self.config[name]
         return {opt: cfg.get("gcode", None) if opt == "gcode" else cfg.getint(opt, None) for opt in cfg}
 
-
     def get_printer_config(self, name):
         if not name.startswith("printer "):
             name = f"printer {name}"
@@ -385,8 +384,8 @@ class KlipperScreenConfig:
         try:
             with open(filepath, 'w') as file:
                 file.write(contents)
-        except Exception:
-            logging.error(f"Error writing configuration file in {filepath}")
+        except Exception as e:
+            logging.error(f"Error writing configuration file in {filepath}:\n{e}")
 
     def set(self, section, name, value):
         self.config.set(section, name, value)
@@ -426,8 +425,8 @@ class KlipperScreenConfig:
 
         try:
             item["params"] = json.loads(cfg.get("params", "{}"))
-        except Exception:
-            logging.debug(f"Unable to parse parameters for [{name}]")
+        except Exception as e:
+            logging.exception(f"Unable to parse parameters for [{name}]:\n{e}")
             item["params"] = {}
 
         return {name[(len(menu) + 6):]: item}

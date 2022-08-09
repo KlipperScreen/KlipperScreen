@@ -112,8 +112,8 @@ class KlippyFiles:
     def add_file_callback(self, callback):
         try:
             self.callbacks.append(callback)
-        except Exception:
-            logging.debug(f"Callback not found: {callback}")
+        except Exception as e:
+            logging.debug(f"Callback not found: {callback}:\n{e}")
 
     def process_update(self, data):
         if 'item' in data and data['item']['root'] != 'gcodes':

@@ -293,8 +293,8 @@ class BasePanel(ScreenPanel):
             env.install_gettext_translations(self.lang)
             j2_temp = env.from_string(title)
             title = j2_temp.render()
-        except Exception:
-            logging.debug(f"Error parsing jinja for title: {title}")
+        except Exception as e:
+            logging.debug(f"Error parsing jinja for title: {title}\n{e}")
 
         self.titlelbl.set_label(f"{self._screen.connecting_to_printer} | {title}")
 
