@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-12 22:17-0300\n"
+"POT-Creation-Date: 2022-08-10 12:01-0300\n"
 "PO-Revision-Date: 2022-03-31 10:50-0300\n"
 "Last-Translator: O. Robardet\n"
 "Language-Team: \n"
@@ -49,8 +49,8 @@ msgstr "Actions"
 msgid "Add Printer"
 msgstr "Ajouter une imprimante"
 
-msgid "Add bed mesh profile"
-msgstr "Ajouter un profil de maillage"
+msgid "Add profile"
+msgstr ""
 
 msgid "Apply"
 msgstr ""
@@ -84,6 +84,9 @@ msgstr "Auto"
 msgid "Auto-calibrate"
 msgstr "Calibrage automatique"
 
+msgid "Auto-close notifications"
+msgstr ""
+
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
 
@@ -93,8 +96,8 @@ msgstr "Nivelage du plateau"
 msgid "Bed Mesh"
 msgstr "Maillage du plateau"
 
-msgid "Bltouch found applied offset"
-msgstr "Bltouch a trouvé le décalage appliqué"
+msgid "Bed screw configuration:"
+msgstr ""
 
 msgid "Calibrate"
 msgstr "Étalonner"
@@ -104,6 +107,9 @@ msgstr "Calibré"
 
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "Calibré, enregistrez la configuration pour la rendre permanente"
+
+msgid "Calibrating"
+msgstr ""
 
 msgid "Calibrating..."
 msgstr "Calibrage..."
@@ -129,14 +135,10 @@ msgstr "Impossible de se connecter à Moonraker"
 msgid "Channel"
 msgstr "Canal"
 
-msgid ""
-"Check /tmp/KlipperScreen.log for more information.\n"
-"Please submit an issue on GitHub for help."
-msgstr ""
-"Vérifiez /tmp/KlipperScreen.log pour plus d'informations.\n"
-"SVP envoyez une requête sur GitHub pour obtenir de l'aide."
-
 msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Checking for updates, please wait..."
 msgstr ""
 
 msgid "Clear"
@@ -178,6 +180,9 @@ msgstr "Diminuer"
 
 msgid "Delete"
 msgstr "Effacer"
+
+msgid "Delete File?"
+msgstr ""
 
 msgid "Deselect"
 msgstr "Désélectionner"
@@ -441,6 +446,11 @@ msgstr "Réseau"
 msgid "New"
 msgstr "Nouveau"
 
+msgid ""
+"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"conf"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "Rien de sélectionné"
 
@@ -507,9 +517,6 @@ msgstr "Impression"
 msgid "Probe Offset"
 msgstr ""
 
-msgid "Probe found applied offset"
-msgstr "Probe a trouvé le décalage appliqué"
-
 msgid "Profile Name:"
 msgstr "Nom de profil:"
 
@@ -527,6 +534,9 @@ msgstr "Récupérer \"--soft\""
 
 msgid "Reference"
 msgstr "Référence"
+
+msgid "Refresh"
+msgstr ""
 
 msgid "Restart"
 msgstr "Redémarrer"
@@ -679,6 +689,9 @@ msgstr "Total:"
 msgid "Unknown Heater"
 msgstr "Chauffage inconnu"
 
+msgid "Unknown screw position"
+msgstr ""
+
 msgid "Unload"
 msgstr "Décharger"
 
@@ -766,6 +779,19 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Bltouch found applied offset"
+#~ msgstr "Bltouch a trouvé le décalage appliqué"
+
+#~ msgid ""
+#~ "Check /tmp/KlipperScreen.log for more information.\n"
+#~ "Please submit an issue on GitHub for help."
+#~ msgstr ""
+#~ "Vérifiez /tmp/KlipperScreen.log pour plus d'informations.\n"
+#~ "SVP envoyez une requête sur GitHub pour obtenir de l'aide."
+
+#~ msgid "Probe found applied offset"
+#~ msgstr "Probe a trouvé le décalage appliqué"
 
 #~ msgid "Tool"
 #~ msgstr "Outil"

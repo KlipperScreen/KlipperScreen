@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-12 22:17-0300\n"
+"POT-Creation-Date: 2022-08-10 12:01-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -44,7 +44,7 @@ msgstr ""
 msgid "Add Printer"
 msgstr ""
 
-msgid "Add bed mesh profile"
+msgid "Add profile"
 msgstr ""
 
 msgid "Apply"
@@ -79,6 +79,9 @@ msgstr ""
 msgid "Auto-calibrate"
 msgstr ""
 
+msgid "Auto-close notifications"
+msgstr ""
+
 msgid "Auto-scroll"
 msgstr ""
 
@@ -88,7 +91,7 @@ msgstr ""
 msgid "Bed Mesh"
 msgstr ""
 
-msgid "Bltouch found applied offset"
+msgid "Bed screw configuration:"
 msgstr ""
 
 msgid "Calibrate"
@@ -98,6 +101,9 @@ msgid "Calibrated"
 msgstr ""
 
 msgid "Calibrated, save configuration to make it permanent"
+msgstr ""
+
+msgid "Calibrating"
 msgstr ""
 
 msgid "Calibrating..."
@@ -124,12 +130,10 @@ msgstr ""
 msgid "Channel"
 msgstr ""
 
-msgid ""
-"Check /tmp/KlipperScreen.log for more information.\n"
-"Please submit an issue on GitHub for help."
+msgid "Check ADXL Wiring"
 msgstr ""
 
-msgid "Check ADXL Wiring"
+msgid "Checking for updates, please wait..."
 msgstr ""
 
 msgid "Clear"
@@ -170,6 +174,9 @@ msgid "Decrease"
 msgstr ""
 
 msgid "Delete"
+msgstr ""
+
+msgid "Delete File?"
 msgstr ""
 
 msgid "Deselect"
@@ -428,6 +435,11 @@ msgstr ""
 msgid "New"
 msgstr ""
 
+msgid ""
+"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"conf"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr ""
 
@@ -494,9 +506,6 @@ msgstr ""
 msgid "Probe Offset"
 msgstr ""
 
-msgid "Probe found applied offset"
-msgstr ""
-
 msgid "Profile Name:"
 msgstr ""
 
@@ -513,6 +522,9 @@ msgid "Recover Soft"
 msgstr ""
 
 msgid "Reference"
+msgstr ""
+
+msgid "Refresh"
 msgstr ""
 
 msgid "Restart"
@@ -662,6 +674,9 @@ msgid "Total:"
 msgstr ""
 
 msgid "Unknown Heater"
+msgstr ""
+
+msgid "Unknown screw position"
 msgstr ""
 
 msgid "Unload"
