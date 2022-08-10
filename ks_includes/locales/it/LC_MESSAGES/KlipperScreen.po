@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-12 22:17-0300\n"
+"POT-Creation-Date: 2022-08-10 12:01-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pappicio\n"
 "Language-Team: \n"
@@ -44,8 +44,8 @@ msgstr "Azioni"
 msgid "Add Printer"
 msgstr "Aggiungi Stampante"
 
-msgid "Add bed mesh profile"
-msgstr "Aggiungi Profilo Mesh"
+msgid "Add profile"
+msgstr ""
 
 msgid "Apply"
 msgstr ""
@@ -79,6 +79,9 @@ msgstr "Auto"
 msgid "Auto-calibrate"
 msgstr ""
 
+msgid "Auto-close notifications"
+msgstr ""
+
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
 
@@ -88,8 +91,8 @@ msgstr "Livello del letto"
 msgid "Bed Mesh"
 msgstr "Rete letto"
 
-msgid "Bltouch found applied offset"
-msgstr "Bltouch ha trovato l'offset applicato"
+msgid "Bed screw configuration:"
+msgstr ""
 
 msgid "Calibrate"
 msgstr "Calibra"
@@ -99,6 +102,9 @@ msgstr ""
 
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "Calibrato, salva la configurazione per renderla permanente"
+
+msgid "Calibrating"
+msgstr ""
 
 msgid "Calibrating..."
 msgstr ""
@@ -124,14 +130,10 @@ msgstr "Impossibile connettersi a Moonraker"
 msgid "Channel"
 msgstr "Canale"
 
-msgid ""
-"Check /tmp/KlipperScreen.log for more information.\n"
-"Please submit an issue on GitHub for help."
-msgstr ""
-"Verifica /tmp/KlipperScreen.log per info.\n"
-"Aggiungi un problema sul GitHub."
-
 msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Checking for updates, please wait..."
 msgstr ""
 
 msgid "Clear"
@@ -173,6 +175,9 @@ msgstr "Diminuisci"
 
 msgid "Delete"
 msgstr "Elimina"
+
+msgid "Delete File?"
+msgstr ""
 
 msgid "Deselect"
 msgstr "Deseleziona"
@@ -436,6 +441,11 @@ msgstr "Rete"
 msgid "New"
 msgstr ""
 
+msgid ""
+"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"conf"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "Niente selezionato"
 
@@ -502,9 +512,6 @@ msgstr "In Stampa"
 msgid "Probe Offset"
 msgstr ""
 
-msgid "Probe found applied offset"
-msgstr "Probe ha trovato l'offset applicato"
-
 msgid "Profile Name:"
 msgstr "Nome Profilo:"
 
@@ -522,6 +529,9 @@ msgstr "Recuperare Soft"
 
 msgid "Reference"
 msgstr "Riferimento"
+
+msgid "Refresh"
+msgstr ""
 
 msgid "Restart"
 msgstr "Riavvia"
@@ -676,6 +686,9 @@ msgstr "Totale:"
 msgid "Unknown Heater"
 msgstr "Riscaldatore sconosciuto"
 
+msgid "Unknown screw position"
+msgstr ""
+
 msgid "Unload"
 msgstr "Scaricare"
 
@@ -763,6 +776,19 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Bltouch found applied offset"
+#~ msgstr "Bltouch ha trovato l'offset applicato"
+
+#~ msgid ""
+#~ "Check /tmp/KlipperScreen.log for more information.\n"
+#~ "Please submit an issue on GitHub for help."
+#~ msgstr ""
+#~ "Verifica /tmp/KlipperScreen.log per info.\n"
+#~ "Aggiungi un problema sul GitHub."
+
+#~ msgid "Probe found applied offset"
+#~ msgstr "Probe ha trovato l'offset applicato"
 
 #~ msgid "Tool"
 #~ msgstr "Strumenti"

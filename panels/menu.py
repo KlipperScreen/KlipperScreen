@@ -114,6 +114,6 @@ class MenuPanel(ScreenPanel):
             if result == 'True':
                 return True
             return False
-        except Exception:
-            logging.debug(f"Error evaluating enable statement: {enable}")
+        except Exception as e:
+            logging.debug(f"Error evaluating enable statement: {enable}\n{e}")
             return False

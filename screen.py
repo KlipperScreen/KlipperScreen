@@ -299,7 +299,7 @@ class KlipperScreen(Gtk.Window):
         try:
             return self.load_panel[panel](*args)
         except Exception as e:
-            msg = f"Unable to create panel {panel}"
+            msg = f"Unable to create panel {panel}\n{e}"
             logging.exception(msg)
             raise Exception(msg) from e
 
@@ -316,7 +316,7 @@ class KlipperScreen(Gtk.Window):
                 if panel_name in self.panels:
                     del self.panels[panel_name]
                 logging.exception(f"Unable to load panel {panel_type}")
-                self.show_error_modal(f"Unable to load panel {panel_type}", e)
+                self.show_error_modal(f"Unable to load panel {panel_type}", f"{e}")
                 return
 
             if hasattr(self.panels[panel_name], "process_update"):
@@ -344,8 +344,8 @@ class KlipperScreen(Gtk.Window):
             if hasattr(self.panels[panel_name], "activate"):
                 self.panels[panel_name].activate()
                 self.show_all()
-        except Exception:
-            logging.exception("Error attaching panel")
+        except Exception as e:
+            logging.exception(f"Error attaching panel:\n{e}")
 
         self._cur_panels.append(panel_name)
         logging.debug(f"Current panel hierarchy: {self._cur_panels}")
@@ -484,8 +484,8 @@ class KlipperScreen(Gtk.Window):
             try:
                 with open(theme_style_conf) as f:
                     style_options.update(json.load(f))
-            except Exception:
-                logging.error("Unable to parse custom template conf file.")
+            except Exception as e:
+                logging.error(f"Unable to parse custom template conf file:\n{e}")
 
         self.gtk.color_list = style_options['graph_colors']
 
@@ -769,7 +769,7 @@ class KlipperScreen(Gtk.Window):
         for panel in list(self.panels):
             if panel not in ["printer_select", "splash_screen"]:
                 del self.panels[panel]
-        if dialog in self.dialogs:
+        for dialog in self.dialogs:
             dialog.destroy()
 
     def state_paused(self, prev_state):
@@ -891,8 +891,8 @@ class KlipperScreen(Gtk.Window):
             env.install_gettext_translations(self.lang)
             j2_temp = env.from_string(text)
             text = j2_temp.render()
-        except Exception:
-            logging.debug("Error parsing jinja for confirm_send_action")
+        except Exception as e:
+            logging.debug(f"Error parsing jinja for confirm_send_action\n{e}")
 
         label = Gtk.Label()
         label.set_markup(text)
@@ -906,7 +906,6 @@ class KlipperScreen(Gtk.Window):
         if self.confirm is not None:
             self.confirm.destroy()
         self.confirm = self.gtk.Dialog(self, buttons, label, self._confirm_send_action_response, method, params)
-
 
     def _confirm_send_action_response(self, widget, response_id, method, params):
         if response_id == Gtk.ResponseType.OK:
@@ -1138,5 +1137,5 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-    except Exception:
-        logging.exception("Fatal error in main loop")
+    except Exception as ex:
+        logging.exception(f"Fatal error in main loop:\n{ex}")
