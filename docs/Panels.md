@@ -3,13 +3,13 @@
 ### Main Menu
 ![Main Menu](img/panels/main_panel.png)
 
-### Job Status
+### [Job Status](Job_status.md)
 ```py
 panel: job_status
 ```
 ![Job Status](img/panels/job_status.png)
 
-### Bed Level
+### [Bed Level](Screws.md)
 ```py
 panel: bed_level
 ```
@@ -84,13 +84,13 @@ panel: system
 ```
 ![System Panel](img/panels/system.png)
 
-### Temperature
+### [Temperature](Temperature.md)
 ```py
 panel: temperature
 ```
 ![Temperature](img/panels/temperature.png)
 
-### Z Calibrate
+### [Z Calibrate](Zcalibrate.md)
 ```py
 panel: zcalibrate
 ```

@@ -7,7 +7,6 @@ repo_name: jordanruthe/KlipperScreen/
 repo_url: https://github.com/jordanruthe/KlipperScreen/
 nav:
     - Home: index.md
-    - Bed Level/Screws: Screws.md
     - Setup:
       - Hardware.md
       - Installation.md
@@ -16,10 +15,16 @@ nav:
       - Macros: macros.md
       - Android.md
     - Troubleshooting.md
+    - Panels:
+      - Bed Level/Screws: Screws.md
+      - Job_status/Printing: Job_status.md
+      - Temperature: Temperature.md
+      - Z Calibrate: Zcalibrate.md
+    - Screenshots: Panels.md
     - Theming.md
     - Translations.md
     - Breaking Changes: Changelog.md
-    - Screenshots: Panels.md
+
     - Contact.md
 theme:
   name: material
@@ -27,8 +32,8 @@ theme:
   features:
     - content.code.annotate
     - content.tooltips
+    - navigation.expand
     - navigation.indexes
-    - navigation.sections
     - navigation.top
     - navigation.tracking
     - search.highlight
