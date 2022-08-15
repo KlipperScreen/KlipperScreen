@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-02 13:43-0300\n"
+"POT-Creation-Date: 2022-08-10 12:01-0300\n"
 "PO-Revision-Date: 2022-04-15 17:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -49,8 +49,8 @@ msgstr "Åtgärder"
 msgid "Add Printer"
 msgstr "Lägg till skrivare"
 
-msgid "Add bed mesh profile"
-msgstr "Lägg till mesh profil"
+msgid "Add profile"
+msgstr ""
 
 msgid "Apply"
 msgstr ""
@@ -84,6 +84,9 @@ msgstr "Automatisk"
 msgid "Auto-calibrate"
 msgstr ""
 
+msgid "Auto-close notifications"
+msgstr ""
+
 msgid "Auto-scroll"
 msgstr "Auto-scrolla"
 
@@ -93,8 +96,8 @@ msgstr ""
 msgid "Bed Mesh"
 msgstr ""
 
-msgid "Bltouch found applied offset"
-msgstr "Bltouch hittade tillämpad offset"
+msgid "Bed screw configuration:"
+msgstr ""
 
 msgid "Calibrate"
 msgstr "Kalibrera"
@@ -104,6 +107,9 @@ msgstr ""
 
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "Kalibrerad, spara konfiguration för att göra den permanent"
+
+msgid "Calibrating"
+msgstr ""
 
 msgid "Calibrating..."
 msgstr ""
@@ -129,14 +135,10 @@ msgstr "Kan inte ansluta till Moonraker"
 msgid "Channel"
 msgstr ""
 
-msgid ""
-"Check /tmp/KlipperScreen.log for more information.\n"
-"Please submit an issue on GitHub for help."
-msgstr ""
-"Kontrollera /tmp/KlipperScreen.log för mer information.\n"
-"Skicka in ett problem på GitHub för hjälp."
-
 msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Checking for updates, please wait..."
 msgstr ""
 
 msgid "Clear"
@@ -178,6 +180,9 @@ msgstr "Minska"
 
 msgid "Delete"
 msgstr "Radera"
+
+msgid "Delete File?"
+msgstr ""
 
 msgid "Deselect"
 msgstr "Avmarkera"
@@ -441,6 +446,11 @@ msgstr "Nätverk"
 msgid "New"
 msgstr ""
 
+msgid ""
+"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"conf"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "Inget valt"
 
@@ -459,6 +469,9 @@ msgid_plural "Packages will be updated"
 msgstr[0] "Paketet kommer att uppdateras"
 msgstr[1] "Paketen kommer att uppdateras"
 
+msgid "Part Fan"
+msgstr ""
+
 msgid "Password saved"
 msgstr "Lösenordet har sparats"
 
@@ -470,6 +483,9 @@ msgstr "Pausad"
 
 msgid "Perform a full upgrade?"
 msgstr "Utför en fullständig uppgradering?"
+
+msgid "Pins"
+msgstr ""
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Vänligen kompilera om och flasha mikrokontrollern."
@@ -501,9 +517,6 @@ msgstr "Skriver ut"
 msgid "Probe Offset"
 msgstr ""
 
-msgid "Probe found applied offset"
-msgstr ""
-
 msgid "Profile Name:"
 msgstr "Profilens namn:"
 
@@ -521,6 +534,9 @@ msgstr ""
 
 msgid "Reference"
 msgstr "Referens"
+
+msgid "Refresh"
+msgstr ""
 
 msgid "Restart"
 msgstr "Starta om"
@@ -542,6 +558,9 @@ msgstr ""
 
 #, python-format
 msgid "Retry #%s"
+msgstr ""
+
+msgid "Retrying"
 msgstr ""
 
 msgid "Save"
@@ -672,6 +691,9 @@ msgstr ""
 msgid "Unknown Heater"
 msgstr "Okänt värmeelement"
 
+msgid "Unknown screw position"
+msgstr ""
+
 msgid "Unload"
 msgstr ""
 
@@ -759,6 +781,16 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Bltouch found applied offset"
+#~ msgstr "Bltouch hittade tillämpad offset"
+
+#~ msgid ""
+#~ "Check /tmp/KlipperScreen.log for more information.\n"
+#~ "Please submit an issue on GitHub for help."
+#~ msgstr ""
+#~ "Kontrollera /tmp/KlipperScreen.log för mer information.\n"
+#~ "Skicka in ett problem på GitHub för hjälp."
 
 #~ msgid "Tool"
 #~ msgstr "Verktyg"

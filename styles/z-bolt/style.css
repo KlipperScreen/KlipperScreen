@@ -206,3 +206,7 @@ textview .time {
 .error {
     background-color: rgba(204, 30, 30, 0.7);
 }
+
+.keyboard_pad {
+    background-color: #13181C;
+}

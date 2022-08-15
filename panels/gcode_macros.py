@@ -12,19 +12,22 @@ def create_panel(*args):
 
 
 class MacroPanel(ScreenPanel):
-    def initialize(self, panel_name):
-
-        self.macros = {}
-        self.loaded_macros = []
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
         self.sort_reverse = False
-        self.menu = ['macros_menu']
-
-        sort = Gtk.Label(_("Sort:"))
-        sort.set_hexpand(False)
         self.sort_lbl = _("Name")
         self.sort_btn = self._gtk.ButtonImage("arrow-up", self.sort_lbl, "color1", .66, Gtk.PositionType.RIGHT, False)
         self.sort_btn.connect("clicked", self.change_sort)
         self.sort_btn.set_hexpand(True)
+        self.allmacros = {}
+        self.loaded_macros = []
+        self.macros = {}
+        self.menu = ['macros_menu']
+
+    def initialize(self, panel_name):
+        sort = Gtk.Label(_("Sort:"))
+        sort.set_hexpand(False)
+
         adjust = self._gtk.ButtonImage("settings", None, "color2", 1, Gtk.PositionType.LEFT, False)
         adjust.connect("clicked", self.load_menu, 'options')
         adjust.set_hexpand(False)
@@ -60,7 +63,7 @@ class MacroPanel(ScreenPanel):
             return
 
         name = Gtk.Label()
-        name.set_markup("<big><b>%s</b></big>" % macro)
+        name.set_markup(f"<big><b>{macro}</b></big>")
         name.set_hexpand(True)
         name.set_vexpand(True)
         name.set_halign(Gtk.Align.START)
@@ -118,8 +121,8 @@ class MacroPanel(ScreenPanel):
 
     def load_gcode_macros(self):
         macros = self._screen.printer.get_gcode_macros()
-        section_name = "displayed_macros %s" % self._screen.connected_printer
-        logging.info("Macro section name [%s]" % section_name)
+        section_name = f"displayed_macros {self._screen.connected_printer}"
+        logging.info(f"Macro section name [{section_name}]")
 
         for x in macros:
             macro = x[12:].strip()
@@ -139,7 +142,7 @@ class MacroPanel(ScreenPanel):
 
             self.allmacros[macro] = {
                 "name": macro,
-                "section": "displayed_macros %s" % self._screen.connected_printer,
+                "section": f"displayed_macros {self._screen.connected_printer}",
             }
         for macro in list(self.allmacros):
             self.add_option('options', self.allmacros, macro, self.allmacros[macro])
@@ -148,7 +151,7 @@ class MacroPanel(ScreenPanel):
 
     def add_option(self, boxname, opt_array, opt_name, option):
         name = Gtk.Label()
-        name.set_markup("<big><b>%s</b></big>" % (option['name']))
+        name.set_markup(f"<big><b>{option['name']}</b></big>")
         name.set_hexpand(True)
         name.set_vexpand(True)
         name.set_halign(Gtk.Align.START)

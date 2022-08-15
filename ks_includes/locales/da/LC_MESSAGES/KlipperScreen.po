@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-02 13:43-0300\n"
+"POT-Creation-Date: 2022-08-10 12:01-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
@@ -44,8 +44,8 @@ msgstr "Muligheder"
 msgid "Add Printer"
 msgstr "Tilføj printer"
 
-msgid "Add bed mesh profile"
-msgstr "Tilføj \"bed-mesh\" profil"
+msgid "Add profile"
+msgstr ""
 
 msgid "Apply"
 msgstr ""
@@ -79,6 +79,9 @@ msgstr "Auto"
 msgid "Auto-calibrate"
 msgstr "Automatisk kalibrering"
 
+msgid "Auto-close notifications"
+msgstr ""
+
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
 
@@ -88,8 +91,8 @@ msgstr "Bed-Level"
 msgid "Bed Mesh"
 msgstr "Bed-mesh"
 
-msgid "Bltouch found applied offset"
-msgstr "Bltouch fundet anvendt offset"
+msgid "Bed screw configuration:"
+msgstr ""
 
 msgid "Calibrate"
 msgstr "Kalibrér"
@@ -99,6 +102,9 @@ msgstr "Kalibreret"
 
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "Kalibreret, gem konfiguration for at gøre den permanent"
+
+msgid "Calibrating"
+msgstr ""
 
 msgid "Calibrating..."
 msgstr "Kalibrerer..."
@@ -124,14 +130,10 @@ msgstr "Kan ikke oprette forbindelse til Moonraker"
 msgid "Channel"
 msgstr "Kanal"
 
-msgid ""
-"Check /tmp/KlipperScreen.log for more information.\n"
-"Please submit an issue on GitHub for help."
-msgstr ""
-"Tjek /tmp/KlipperScreen.log for mere information.\n"
-"Indsend venligst et \"Issue\" på GitHub for hjælp."
-
 msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Checking for updates, please wait..."
 msgstr ""
 
 msgid "Clear"
@@ -173,6 +175,9 @@ msgstr "Formindsk"
 
 msgid "Delete"
 msgstr "Slet"
+
+msgid "Delete File?"
+msgstr ""
 
 msgid "Deselect"
 msgstr "Fravælg"
@@ -436,6 +441,11 @@ msgstr "Netværk"
 msgid "New"
 msgstr "Ny"
 
+msgid ""
+"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"conf"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "Intet valgt"
 
@@ -454,6 +464,9 @@ msgid_plural "Packages will be updated"
 msgstr[0] "Pakken vil blive opdateret"
 msgstr[1] "Pakker vil blive opdateret"
 
+msgid "Part Fan"
+msgstr ""
+
 msgid "Password saved"
 msgstr "Adgangskode gemt"
 
@@ -465,6 +478,9 @@ msgstr "På pause"
 
 msgid "Perform a full upgrade?"
 msgstr "Vil du udføre en fuld opgradering?"
+
+msgid "Pins"
+msgstr ""
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Genkompilér og flash mikrocontrolleren."
@@ -496,9 +512,6 @@ msgstr "Printer"
 msgid "Probe Offset"
 msgstr ""
 
-msgid "Probe found applied offset"
-msgstr "Probe fundet anvendt offset"
-
 msgid "Profile Name:"
 msgstr "Profilnavn:"
 
@@ -516,6 +529,9 @@ msgstr "Nulstil"
 
 msgid "Reference"
 msgstr "Reference"
+
+msgid "Refresh"
+msgstr ""
 
 msgid "Restart"
 msgstr "Genstart"
@@ -538,6 +554,9 @@ msgstr ""
 #, python-format
 msgid "Retry #%s"
 msgstr "Prøv igen #%s"
+
+msgid "Retrying"
+msgstr ""
 
 msgid "Save"
 msgstr "Gem"
@@ -667,6 +686,9 @@ msgstr "Total:"
 msgid "Unknown Heater"
 msgstr "Ukendt varmelegeme"
 
+msgid "Unknown screw position"
+msgstr ""
+
 msgid "Unload"
 msgstr "Tilbagetræk"
 
@@ -754,6 +776,19 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Bltouch found applied offset"
+#~ msgstr "Bltouch fundet anvendt offset"
+
+#~ msgid ""
+#~ "Check /tmp/KlipperScreen.log for more information.\n"
+#~ "Please submit an issue on GitHub for help."
+#~ msgstr ""
+#~ "Tjek /tmp/KlipperScreen.log for mere information.\n"
+#~ "Indsend venligst et \"Issue\" på GitHub for hjælp."
+
+#~ msgid "Probe found applied offset"
+#~ msgstr "Probe fundet anvendt offset"
 
 #~ msgid "Tool"
 #~ msgstr "Ekstruder"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-02 13:43-0300\n"
+"POT-Creation-Date: 2022-08-10 12:01-0300\n"
 "PO-Revision-Date: 2022-03-31 10:54-0300\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
@@ -51,8 +51,8 @@ msgstr "פעולות"
 msgid "Add Printer"
 msgstr "הוסף מדפסת"
 
-msgid "Add bed mesh profile"
-msgstr "הוסף פרופיל רשת למיטה"
+msgid "Add profile"
+msgstr ""
 
 msgid "Apply"
 msgstr ""
@@ -87,6 +87,9 @@ msgstr "אוטומטי"
 msgid "Auto-calibrate"
 msgstr ""
 
+msgid "Auto-close notifications"
+msgstr ""
+
 msgid "Auto-scroll"
 msgstr "גלילה אוטומטית"
 
@@ -96,8 +99,8 @@ msgstr "פילוס מיטה"
 msgid "Bed Mesh"
 msgstr "מיפוי מיטה"
 
-msgid "Bltouch found applied offset"
-msgstr "Bltouch נמצא היסט מוחל"
+msgid "Bed screw configuration:"
+msgstr ""
 
 msgid "Calibrate"
 msgstr "לְדַרֵג"
@@ -107,6 +110,9 @@ msgstr ""
 
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "מכויל, שמור את התצורה כדי שהיא תהיה קבועה"
+
+msgid "Calibrating"
+msgstr ""
 
 msgid "Calibrating..."
 msgstr ""
@@ -132,14 +138,10 @@ msgstr "לא ניתן להתחבר ל-Moonraker"
 msgid "Channel"
 msgstr "עָרוּץ"
 
-msgid ""
-"Check /tmp/KlipperScreen.log for more information.\n"
-"Please submit an issue on GitHub for help."
-msgstr ""
-"בדוק KlipperScreen.log, בתיקית tmp ליותר פרטים.\n"
-"אנא שלח דוח תקלה ב- GITHUB, לעזרה."
-
 msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Checking for updates, please wait..."
 msgstr ""
 
 msgid "Clear"
@@ -181,6 +183,9 @@ msgstr "לְהַקְטִין"
 
 msgid "Delete"
 msgstr "לִמְחוֹק"
+
+msgid "Delete File?"
+msgstr ""
 
 msgid "Deselect"
 msgstr "בטל את הבחירה"
@@ -444,6 +449,11 @@ msgstr "רשת"
 msgid "New"
 msgstr ""
 
+msgid ""
+"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"conf"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "שום דבר לא נבחר"
 
@@ -464,6 +474,9 @@ msgstr[1] "חבילות יעודכנו"
 msgstr[2] "חבילות יעודכנו"
 msgstr[3] "חבילות יעודכנו"
 
+msgid "Part Fan"
+msgstr ""
+
 msgid "Password saved"
 msgstr "הסיסמה נשמרה"
 
@@ -475,6 +488,9 @@ msgstr "מושהה"
 
 msgid "Perform a full upgrade?"
 msgstr "לבצע שדרוג מלא?"
+
+msgid "Pins"
+msgstr ""
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "אנא הידור מחדש והבזק את המיקרו-בקר."
@@ -506,9 +522,6 @@ msgstr "מדפיס"
 msgid "Probe Offset"
 msgstr ""
 
-msgid "Probe found applied offset"
-msgstr "Probe נמצא היסט מוחל"
-
 msgid "Profile Name:"
 msgstr "שם פרופיל:"
 
@@ -526,6 +539,9 @@ msgstr "לְהַחלִים Soft"
 
 msgid "Reference"
 msgstr "התייחסות"
+
+msgid "Refresh"
+msgstr ""
 
 msgid "Restart"
 msgstr "אתחל"
@@ -548,6 +564,9 @@ msgstr ""
 #, python-format
 msgid "Retry #%s"
 msgstr "נסה שוב #%s"
+
+msgid "Retrying"
+msgstr ""
 
 msgid "Save"
 msgstr "להציל"
@@ -677,6 +696,9 @@ msgstr "סך הכל:"
 msgid "Unknown Heater"
 msgstr "מחמם לא ידוע"
 
+msgid "Unknown screw position"
+msgstr ""
+
 msgid "Unload"
 msgstr "לִפְרוֹק"
 
@@ -768,6 +790,19 @@ msgstr "מ\"מ/ש"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Bltouch found applied offset"
+#~ msgstr "Bltouch נמצא היסט מוחל"
+
+#~ msgid ""
+#~ "Check /tmp/KlipperScreen.log for more information.\n"
+#~ "Please submit an issue on GitHub for help."
+#~ msgstr ""
+#~ "בדוק KlipperScreen.log, בתיקית tmp ליותר פרטים.\n"
+#~ "אנא שלח דוח תקלה ב- GITHUB, לעזרה."
+
+#~ msgid "Probe found applied offset"
+#~ msgstr "Probe נמצא היסט מוחל"
 
 #~ msgid "Tool"
 #~ msgstr "כלי"

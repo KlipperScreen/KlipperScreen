@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-02 13:43-0300\n"
+"POT-Creation-Date: 2022-08-10 12:01-0300\n"
 "PO-Revision-Date: 2022-03-31 11:25-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -49,8 +49,8 @@ msgstr "動作"
 msgid "Add Printer"
 msgstr "新增列印機"
 
-msgid "Add bed mesh profile"
-msgstr "新增網床輪廓"
+msgid "Add profile"
+msgstr ""
 
 msgid "Apply"
 msgstr ""
@@ -84,6 +84,9 @@ msgstr "汽車"
 msgid "Auto-calibrate"
 msgstr ""
 
+msgid "Auto-close notifications"
+msgstr ""
+
 msgid "Auto-scroll"
 msgstr "自動滾屏"
 
@@ -93,8 +96,8 @@ msgstr "熱床調平"
 msgid "Bed Mesh"
 msgstr "網格床"
 
-msgid "Bltouch found applied offset"
-msgstr "Bltouch 發現應用的偏移量"
+msgid "Bed screw configuration:"
+msgstr ""
 
 msgid "Calibrate"
 msgstr "校正"
@@ -104,6 +107,9 @@ msgstr ""
 
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "校準，保存配置以使其永久化"
+
+msgid "Calibrating"
+msgstr ""
 
 msgid "Calibrating..."
 msgstr ""
@@ -129,14 +135,10 @@ msgstr "無法連接到 Moonraker"
 msgid "Channel"
 msgstr "通道"
 
-msgid ""
-"Check /tmp/KlipperScreen.log for more information.\n"
-"Please submit an issue on GitHub for help."
-msgstr ""
-"檢查/tmp/KlipperScreen.log 日誌檔以了解更多訊息。\n"
-"請在GitHub上提交問題以尋求幫助。"
-
 msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Checking for updates, please wait..."
 msgstr ""
 
 msgid "Clear"
@@ -178,6 +180,9 @@ msgstr "減少"
 
 msgid "Delete"
 msgstr "刪除"
+
+msgid "Delete File?"
+msgstr ""
 
 msgid "Deselect"
 msgstr "取消選擇"
@@ -441,6 +446,11 @@ msgstr "網路"
 msgid "New"
 msgstr ""
 
+msgid ""
+"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"conf"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "未選擇任何內容"
 
@@ -458,6 +468,9 @@ msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "包將被更新"
 
+msgid "Part Fan"
+msgstr ""
+
 msgid "Password saved"
 msgstr "密碼已保存"
 
@@ -469,6 +482,9 @@ msgstr "已暫停"
 
 msgid "Perform a full upgrade?"
 msgstr "執行全面升級？"
+
+msgid "Pins"
+msgstr ""
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "請重新編譯並刷寫微控制器。"
@@ -500,9 +516,6 @@ msgstr "列印中"
 msgid "Probe Offset"
 msgstr ""
 
-msgid "Probe found applied offset"
-msgstr "Probe 發現應用的偏移量"
-
 msgid "Profile Name:"
 msgstr "配置檔案名稱:"
 
@@ -520,6 +533,9 @@ msgstr "恢復 Soft"
 
 msgid "Reference"
 msgstr "參考"
+
+msgid "Refresh"
+msgstr ""
 
 msgid "Restart"
 msgstr "重新啟動"
@@ -542,6 +558,9 @@ msgstr ""
 #, python-format
 msgid "Retry #%s"
 msgstr "重試 #%s"
+
+msgid "Retrying"
+msgstr ""
 
 msgid "Save"
 msgstr "儲存"
@@ -667,6 +686,9 @@ msgstr "全部的："
 msgid "Unknown Heater"
 msgstr "未知加熱器"
 
+msgid "Unknown screw position"
+msgstr ""
+
 msgid "Unload"
 msgstr "卸載"
 
@@ -752,6 +774,19 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Bltouch found applied offset"
+#~ msgstr "Bltouch 發現應用的偏移量"
+
+#~ msgid ""
+#~ "Check /tmp/KlipperScreen.log for more information.\n"
+#~ "Please submit an issue on GitHub for help."
+#~ msgstr ""
+#~ "檢查/tmp/KlipperScreen.log 日誌檔以了解更多訊息。\n"
+#~ "請在GitHub上提交問題以尋求幫助。"
+
+#~ msgid "Probe found applied offset"
+#~ msgstr "Probe 發現應用的偏移量"
 
 #~ msgid "Tool"
 #~ msgstr "工具"

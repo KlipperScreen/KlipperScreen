@@ -36,8 +36,8 @@ class PowerPanel(ScreenPanel):
         devices = self._screen.printer.get_power_devices()
         for x in devices:
             self.devices[x]['switch'].disconnect_by_func(self.on_switch)
-            self.devices[x]['switch'].set_active(True if self._screen.printer.get_power_device_status(x) == "on"
-                                                 else False)
+            self.devices[x]['switch'].set_active(self._screen.printer.get_power_device_status(x) == "on")
+
             self.devices[x]['switch'].connect("notify::active", self.on_switch, x)
 
     def add_device(self, device):
@@ -45,7 +45,7 @@ class PowerPanel(ScreenPanel):
         frame.get_style_context().add_class("frame-item")
 
         name = Gtk.Label()
-        name.set_markup("<big><b>%s</b></big>" % device)
+        name.set_markup(f"<big><b>{device}</b></big>")
         name.set_hexpand(True)
         name.set_vexpand(True)
         name.set_halign(Gtk.Align.START)
@@ -55,7 +55,7 @@ class PowerPanel(ScreenPanel):
 
         switch = Gtk.Switch()
         switch.set_hexpand(False)
-        switch.set_active(True if self._screen.printer.get_power_device_status(device) == "on" else False)
+        switch.set_active(self._screen.printer.get_power_device_status(device) == "on")
         switch.connect("notify::active", self.on_switch, device)
         switch.set_property("width-request", round(self._gtk.get_font_size() * 7))
         switch.set_property("height-request", round(self._gtk.get_font_size() * 3.5))
@@ -89,7 +89,7 @@ class PowerPanel(ScreenPanel):
             self.add_device(x)
 
     def on_switch(self, switch, gparam, device):
-        logging.debug("Power toggled %s" % device)
+        logging.debug(f"Power toggled {device}")
         if switch.get_active():
             self._screen._ws.klippy.power_device_on(device)
         else:
@@ -103,5 +103,5 @@ class PowerPanel(ScreenPanel):
             return
         device = data['device']
         self.devices[device]['switch'].disconnect_by_func(self.on_switch)
-        self.devices[device]['switch'].set_active(True if data['status'] == "on" else False)
+        self.devices[device]['switch'].set_active(data['status'] == "on")
         self.devices[device]['switch'].connect("notify::active", self.on_switch, device)

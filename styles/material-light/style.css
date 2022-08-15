@@ -258,3 +258,7 @@ textview .time {
 .error {
     background-color: #EF9A9A;
 }
+
+.keyboard_pad {
+    background-color: #BDBDBD;
+}

@@ -39,7 +39,7 @@ class MenuPanel(ScreenPanel):
         else:
             self.arrangeMenuItems(self.items, 4)
 
-    def arrangeMenuItems(self, items, columns, expandLast=False):
+    def arrangeMenuItems(self, items, columns, expand_last=False):
         for child in self.grid.get_children():
             self.grid.remove(child)
 
@@ -47,7 +47,7 @@ class MenuPanel(ScreenPanel):
         i = 0
         for item in items:
             key = list(item)[0]
-            logging.debug("Evaluating item: %s" % key)
+            logging.debug(f"Evaluating item: {key}")
             if not self.evaluate_enable(item[key]['enable']):
                 continue
 
@@ -63,7 +63,7 @@ class MenuPanel(ScreenPanel):
             row = int(i / columns)
 
             width = height = 1
-            if expandLast is True and i + 1 == length and length % 2 == 1:
+            if expand_last is True and i + 1 == length and length % 2 == 1:
                 width = 2
 
             self.grid.attach(self.labels[key], col, row, width, height)
@@ -76,13 +76,13 @@ class MenuPanel(ScreenPanel):
             key = list(self.items[i])[0]
             item = self.items[i][key]
 
-            env = Environment(extensions=["jinja2.ext.i18n"])
+            env = Environment(extensions=["jinja2.ext.i18n"], autoescape=True)
             env.install_gettext_translations(self.lang)
             j2_temp = env.from_string(item['name'])
             parsed_name = j2_temp.render()
 
             b = self._gtk.ButtonImage(
-                item['icon'], parsed_name, "color" + str((i % 4) + 1)
+                item['icon'], parsed_name, f"color{(i % 4) + 1}"
             )
             if item['panel'] is not False:
                 b.connect("clicked", self.menu_item_clicked, item['panel'], item)
@@ -108,13 +108,12 @@ class MenuPanel(ScreenPanel):
 
         self.j2_data = self._printer.get_printer_status_data()
         try:
-            logging.debug("Template: '%s'" % enable)
-            logging.debug("Data: %s" % self.j2_data)
-            j2_temp = Template(enable)
+            logging.debug(f"Template: '{enable}'")
+            j2_temp = Template(enable, autoescape=True)
             result = j2_temp.render(self.j2_data)
             if result == 'True':
                 return True
             return False
-        except Exception:
-            logging.debug("Error evaluating enable statement: %s", enable)
+        except Exception as e:
+            logging.debug(f"Error evaluating enable statement: {enable}\n{e}")
             return False

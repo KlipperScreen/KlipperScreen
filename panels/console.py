@@ -1,5 +1,4 @@
 import gi
-import logging
 import time
 import re
 
@@ -24,12 +23,13 @@ COLORS = {
 
 
 class ConsolePanel(ScreenPanel):
-    def initialize(self, panel_name):
-
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
         self.autoscroll = True
         self.hidetemps = True
 
-        gcodes = self._screen._ws.send_method("server.gcode_store", {"count": 100}, self.gcode_response)
+    def initialize(self, panel_name):
+        self._screen._ws.send_method("server.gcode_store", {"count": 100}, self.gcode_response)
 
         o1_lbl = Gtk.Label(_("Auto-scroll"))
         o1_lbl.set_halign(Gtk.Align.END)
@@ -80,7 +80,7 @@ class ConsolePanel(ScreenPanel):
         entry = Gtk.Entry()
         entry.set_hexpand(True)
         entry.set_vexpand(False)
-        entry.connect("button-press-event", self._screen.show_keyboard)
+        entry.connect("button-press-event", self._show_keyboard)
         entry.connect("focus-in-event", self._screen.show_keyboard)
         entry.connect("activate", self._send_command)
         entry.grab_focus_without_selecting()
@@ -105,11 +105,14 @@ class ConsolePanel(ScreenPanel):
         content_box.pack_end(ebox, False, False, 0)
         self.content.add(content_box)
 
+    def _show_keyboard(self, widget=None, event=None):
+        self._screen.show_keyboard(entry=self.labels['entry'])
+
     def clear(self, widget):
         self.labels['tb'].set_text("")
 
-    def add_gcode(self, type, time, message):
-        if type == "command":
+    def add_gcode(self, msgtype, msgtime, message):
+        if msgtype == "command":
             color = COLORS['command']
         elif message.startswith("!!"):
             color = COLORS['error']
@@ -122,14 +125,14 @@ class ConsolePanel(ScreenPanel):
         else:
             color = COLORS['response']
 
-        message = '<span color="%s"><b>%s</b></span>' % (color, message)
+        message = f'<span color="{color}"><b>{message}</b></span>'
 
         message = message.replace('\n', '\n         ')
 
         self.labels['tb'].insert_markup(
             self.labels['tb'].get_end_iter(),
-            '\n<span color="%s">%s</span> %s' % (COLORS['time'], datetime.fromtimestamp(time).strftime("%H:%M:%S"),
-                                                 message), -1
+            f'\n<span color="{COLORS["time"]}">{datetime.fromtimestamp(msgtime).strftime("%H:%M:%S")}</span> {message}',
+            -1
         )
         # Limit the length
         if self.labels['tb'].get_line_count() > 999:

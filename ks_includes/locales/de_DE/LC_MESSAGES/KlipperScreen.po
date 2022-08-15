@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-02 13:43-0300\n"
+"POT-Creation-Date: 2022-08-10 12:01-0300\n"
 "PO-Revision-Date: 2022-03-31 10:43-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -49,8 +49,8 @@ msgstr "Aktionen"
 msgid "Add Printer"
 msgstr "Drucker hinzufügen"
 
-msgid "Add bed mesh profile"
-msgstr "Mesh-Level Profil hinzufügen"
+msgid "Add profile"
+msgstr ""
 
 msgid "Apply"
 msgstr ""
@@ -84,6 +84,9 @@ msgstr "Auto"
 msgid "Auto-calibrate"
 msgstr "Automatisch kalibrieren"
 
+msgid "Auto-close notifications"
+msgstr ""
+
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
 
@@ -93,8 +96,8 @@ msgstr "Druckbett leveln"
 msgid "Bed Mesh"
 msgstr "Druckbett Mesh-Level"
 
-msgid "Bltouch found applied offset"
-msgstr "Bltouch hat angewendeten Offset gefunden"
+msgid "Bed screw configuration:"
+msgstr ""
 
 msgid "Calibrate"
 msgstr "Höheneinstellung"
@@ -104,6 +107,9 @@ msgstr "Kalibriert"
 
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "Kalibriert, Konfiguration speichern, um sie dauerhaft zu machen"
+
+msgid "Calibrating"
+msgstr ""
 
 msgid "Calibrating..."
 msgstr "Kalibrieren..."
@@ -129,14 +135,10 @@ msgstr "Es kann keine Verbindung zu Moonraker hergestellt werden"
 msgid "Channel"
 msgstr "Kanal"
 
-msgid ""
-"Check /tmp/KlipperScreen.log for more information.\n"
-"Please submit an issue on GitHub for help."
-msgstr ""
-"Prüfe /tmp/KlipperScreen.log für weitere Informationen.\n"
-"Bitte eröffne einen Fehlerbericht auf https://git.io/JLNn4 für Hilfe."
-
 msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "Checking for updates, please wait..."
 msgstr ""
 
 msgid "Clear"
@@ -178,6 +180,9 @@ msgstr "Verringern"
 
 msgid "Delete"
 msgstr "Löschen"
+
+msgid "Delete File?"
+msgstr ""
 
 msgid "Deselect"
 msgstr "Abwählen"
@@ -451,6 +456,11 @@ msgstr "Netzwerk"
 msgid "New"
 msgstr "Neu"
 
+msgid ""
+"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"conf"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "Nichts ausgewählt"
 
@@ -469,6 +479,9 @@ msgid_plural "Packages will be updated"
 msgstr[0] "Paket wird aktualisiert"
 msgstr[1] "Pakete werden aktualisiert"
 
+msgid "Part Fan"
+msgstr ""
+
 msgid "Password saved"
 msgstr "Passwort gespeichert"
 
@@ -480,6 +493,9 @@ msgstr "Pausiert"
 
 msgid "Perform a full upgrade?"
 msgstr "Vollständiges Upgrade durchführen?"
+
+msgid "Pins"
+msgstr ""
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Please recompile and flash the micro-controller."
@@ -511,9 +527,6 @@ msgstr "Drucken"
 msgid "Probe Offset"
 msgstr ""
 
-msgid "Probe found applied offset"
-msgstr "Probe hat angewendeten Offset gefunden"
-
 msgid "Profile Name:"
 msgstr "Profilname:"
 
@@ -531,6 +544,9 @@ msgstr "Rücksetzen Soft"
 
 msgid "Reference"
 msgstr "Referenz"
+
+msgid "Refresh"
+msgstr ""
 
 msgid "Restart"
 msgstr "Neustart"
@@ -553,6 +569,9 @@ msgstr "Rückzugsgeschwindigkeit"
 #, python-format
 msgid "Retry #%s"
 msgstr "Wiederholen #%s"
+
+msgid "Retrying"
+msgstr ""
 
 msgid "Save"
 msgstr "Speichern"
@@ -682,6 +701,9 @@ msgstr "Gesamt:"
 msgid "Unknown Heater"
 msgstr "Unbekannte Heizung"
 
+msgid "Unknown screw position"
+msgstr ""
+
 msgid "Unload"
 msgstr "Entladen"
 
@@ -771,6 +793,19 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Bltouch found applied offset"
+#~ msgstr "Bltouch hat angewendeten Offset gefunden"
+
+#~ msgid ""
+#~ "Check /tmp/KlipperScreen.log for more information.\n"
+#~ "Please submit an issue on GitHub for help."
+#~ msgstr ""
+#~ "Prüfe /tmp/KlipperScreen.log für weitere Informationen.\n"
+#~ "Bitte eröffne einen Fehlerbericht auf https://git.io/JLNn4 für Hilfe."
+
+#~ msgid "Probe found applied offset"
+#~ msgstr "Probe hat angewendeten Offset gefunden"
 
 #~ msgid "Tool"
 #~ msgstr "Druckkopf"

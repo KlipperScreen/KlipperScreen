@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-02 13:43-0300\n"
-"PO-Revision-Date: 2022-07-12 00:18+0300\n"
+"POT-Creation-Date: 2022-08-10 12:01-0300\n"
+"PO-Revision-Date: 2022-08-10 21:10+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: tr_TR\n"
@@ -49,8 +49,8 @@ msgstr "Eylemler"
 msgid "Add Printer"
 msgstr "Yazıcı Ekle"
 
-msgid "Add bed mesh profile"
-msgstr "Tabla Örgüsü profili ekle"
+msgid "Add profile"
+msgstr "Profil ekle"
 
 msgid "Apply"
 msgstr "Uygula"
@@ -84,6 +84,9 @@ msgstr "Otomatik"
 msgid "Auto-calibrate"
 msgstr "Otomatik-Kalibrasyon"
 
+msgid "Auto-close notifications"
+msgstr "Bildirimleri otomatik kapat"
+
 msgid "Auto-scroll"
 msgstr "Otomatik kaydırma"
 
@@ -93,8 +96,8 @@ msgstr "Tabla Ayarı"
 msgid "Bed Mesh"
 msgstr "Tabla Örgüsü"
 
-msgid "Bltouch found applied offset"
-msgstr "Bltouch uygulanmış ofseti buldu"
+msgid "Bed screw configuration:"
+msgstr "Tabla vida yapılandırması:"
 
 msgid "Calibrate"
 msgstr "Kalibre et"
@@ -104,6 +107,9 @@ msgstr "Kalibre Edildi"
 
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "Kalibre edildi, kalıcı hale getirmek için yapılandırmayı kaydedin"
+
+msgid "Calibrating"
+msgstr "Kalibre Ediliyor"
 
 msgid "Calibrating..."
 msgstr "Kalibre Ediliyor..."
@@ -129,15 +135,11 @@ msgstr "Moonraker'a bağlanılamıyor"
 msgid "Channel"
 msgstr "Kanal"
 
-msgid ""
-"Check /tmp/KlipperScreen.log for more information.\n"
-"Please submit an issue on GitHub for help."
-msgstr ""
-"Daha fazla bilgi için /tmp/KlipperScreen.log'a bakın.\n"
-"Lütfen yardım için GitHub'da bir sorun gönderin."
-
 msgid "Check ADXL Wiring"
 msgstr "ADXL Bağlantılarını Kontrol Et"
+
+msgid "Checking for updates, please wait..."
+msgstr "Güncellemeler kontrol ediliyor, lütfen bekleyin..."
 
 msgid "Clear"
 msgstr "Temizle"
@@ -178,6 +180,9 @@ msgstr "Azalt"
 
 msgid "Delete"
 msgstr "Sil"
+
+msgid "Delete File?"
+msgstr "Dosyayı Sil?"
 
 msgid "Deselect"
 msgstr "Seçimi kaldır"
@@ -441,6 +446,13 @@ msgstr "Ağ"
 msgid "New"
 msgstr "Yeni"
 
+msgid ""
+"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"conf"
+msgstr ""
+"Otomatik algılama desteklenmiyor, klipperscreen.conf dosyasından "
+"yapılandırmanız gerekli"
+
 msgid "Nothing selected"
 msgstr "Hiçbir şey seçilmedi"
 
@@ -459,6 +471,9 @@ msgid_plural "Packages will be updated"
 msgstr[0] "Paket yükseltilecek"
 msgstr[1] "Paketler yükseltilecek"
 
+msgid "Part Fan"
+msgstr "Parça Fan"
+
 msgid "Password saved"
 msgstr "Şifre kaydedildi"
 
@@ -470,6 +485,9 @@ msgstr "Duraklatıldı"
 
 msgid "Perform a full upgrade?"
 msgstr "Tam yükseltme yap?"
+
+msgid "Pins"
+msgstr "Pinler"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Lütfen mikro denetleyiciyi yeniden derleyin ve flaşlayın."
@@ -501,9 +519,6 @@ msgstr "Yazdırılıyor"
 msgid "Probe Offset"
 msgstr "Prob ofseti"
 
-msgid "Probe found applied offset"
-msgstr "Prob uygulanmış ofset bulundu"
-
 msgid "Profile Name:"
 msgstr "Profil ismi:"
 
@@ -521,6 +536,9 @@ msgstr "Yumuşak Kurtar"
 
 msgid "Reference"
 msgstr "Referans"
+
+msgid "Refresh"
+msgstr "Yenile"
 
 msgid "Restart"
 msgstr "Yeniden Başlat"
@@ -543,6 +561,9 @@ msgstr "Geri Çekme Hızı"
 #, python-format
 msgid "Retry #%s"
 msgstr "Yeniden Dene #%s"
+
+msgid "Retrying"
+msgstr "Yeniden Deneniyor"
 
 msgid "Save"
 msgstr "Kaydet"
@@ -672,6 +693,9 @@ msgstr "Toplam:"
 msgid "Unknown Heater"
 msgstr "Bilinmeyen Isıtıcı"
 
+msgid "Unknown screw position"
+msgstr "Bilinmeyen vida konumu"
+
 msgid "Unload"
 msgstr "Boşalt"
 
@@ -759,6 +783,19 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Bltouch found applied offset"
+#~ msgstr "Bltouch uygulanmış ofseti buldu"
+
+#~ msgid ""
+#~ "Check /tmp/KlipperScreen.log for more information.\n"
+#~ "Please submit an issue on GitHub for help."
+#~ msgstr ""
+#~ "Daha fazla bilgi için /tmp/KlipperScreen.log'a bakın.\n"
+#~ "Lütfen yardım için GitHub'da bir sorun gönderin."
+
+#~ msgid "Probe found applied offset"
+#~ msgstr "Prob uygulanmış ofset bulundu"
 
 #~ msgid "Tool"
 #~ msgstr "Araç"

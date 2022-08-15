@@ -14,6 +14,8 @@ have set your pi up for your preferred language.
 * Save the file as `ks_includes/locales/{LANGUAGE DESIGNATION}/KlipperScreen.po`.
 * Select `File -> Compile to MO`. Save this file as `ks_includes/locales/{LANGUAGE DESIGNATION}/KlipperScreen.mo`
 
-Once you have followed those steps, as long as your pi is set up for your preferred language, KlipperScreen will
-automatically use the translations provided in the file. KlipperScreen currently does not detect RTL languages, but
-support for RTL is planned in the near future. 
+Once you have followed those steps, restart KlipperScreen, and select it from the list in the settings.
+If you edited and recompiled, you need to restart KlipperScreen to reload the translation.
+
+Do not edit the POT file as is automatically generated and your changes will be lost.
+[Attach your translation on a GitHub issue or create a PR](Contact.md)
