@@ -165,6 +165,11 @@ scrollbar slider {
     background-color: #404E57;
 }
 
+separator {
+    margin: 1em 2em;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
 textview, textview text {
     background: transparent;
     font-family: Free Mono;

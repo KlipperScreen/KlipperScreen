@@ -34,6 +34,7 @@ class KlipperScreenConfig:
     do_not_edit_prefix = "#~#"
 
     def __init__(self, configfile, screen=None):
+        self.errors = []
         self.default_config_path = os.path.join(klipperscreendir, "ks_includes", "defaults.conf")
         self.config = configparser.ConfigParser()
         self.config_path = self.get_config_file_location(configfile)
@@ -58,29 +59,39 @@ class KlipperScreenConfig:
                 if saved_def is not None:
                     self.config.read_string(saved_def)
                     logging.info(f"====== Saved Def ======\n{saved_def}\n=======================")
-                # This is the final config
-                # self.log_config(self.config)
+            # This is the final config
+            # self.log_config(self.config)
+            if self.validate_config():
+                logging.info('Configuration validated succesfuly')
+            else:
+                logging.error('Invalid configuration detected !!!')
+                logging.info('Loading default config')
+                self.config = configparser.ConfigParser()
+                self.config.read(self.default_config_path)
         except KeyError as Kerror:
-            raise ConfigError(f"Error reading config: {self.config_path}\n{Kerror}") from Kerror
+            msg = f"Error reading config: {self.config_path}\n{Kerror}"
+            logging.exception(msg)
+            self.errors.append(msg)
+            raise ConfigError(msg) from Kerror
+        except ValueError as Verror:
+            msg = f"Invalid Value in the config:\n{Verror}"
+            logging.exception(msg)
+            self.errors.append(msg)
         except Exception as e:
-            logging.exception(f"Unknown error with config:\n{e}")
+            msg = f"Unknown error with the config:\n{e}"
+            logging.exception(msg)
+            self.errors.append(msg)
 
         printers = sorted([i for i in self.config.sections() if i.startswith("printer ")])
+        if len(printers) == 0:
+            printers.append("Printer Printer")
         self.printers = [
             {printer[8:]: {
                 "moonraker_host": self.config.get(printer, "moonraker_host", fallback="127.0.0.1"),
                 "moonraker_port": self.config.get(printer, "moonraker_port", fallback="7125"),
-                "moonraker_api_key": self.config.get(printer, "moonraker_api_key", fallback=False)
-            }} for printer in printers]
-
-        if len(printers) <= 0:
-            self.printers.append({
-                "Printer": {
-                    "moonraker_host": self.config.get("main", "moonraker_host", fallback="127.0.0.1"),
-                    "moonraker_port": self.config.get("main", "moonraker_port", fallback="7125"),
-                    "moonraker_api_key": self.config.get("main", "moonraker_api_key", fallback="")
-                }
-            })
+                "moonraker_api_key": self.config.get(printer, "moonraker_api_key", fallback="")
+            }} for printer in printers
+        ]
 
         conf_printers_debug = copy.deepcopy(self.printers)
         for printer in conf_printers_debug:
@@ -98,6 +109,72 @@ class KlipperScreenConfig:
         self.lang.install(names=['gettext', 'ngettext'])
 
         self._create_configurable_options(screen)
+
+    def validate_config(self):
+        valid = True
+        bools = strs = numbers = ()
+        for section in self.config:
+            if section == 'main':
+                bools = (
+                    'invert_x', 'invert_y', 'invert_z', '24htime', 'only_heaters', 'show_cursor', 'confirm_estop',
+                    'autoclose_popups', 'use_dpms', 'use_default_menu', 'side_macro_shortcut', 'use-matchbox-keyboard'
+                )
+                strs = (
+                    'default_printer', 'language', 'print_sort_dir', 'theme', 'screen_blanking', 'font_size',
+                    'print_estimate_method', 'screen_blanking'
+                )
+                numbers = (
+                    'job_complete_timeout', 'job_error_timeout', 'move_speed_xy', 'move_speed_z',
+                    'print_estimate_compensation'
+                )
+            elif section.startswith('printer '):
+                bools = (
+                    'invert_x', 'invert_y', 'invert_z',
+                )
+                strs = (
+                    'moonraker_api_key', 'moonraker_host', 'language', 'titlebar_name_type',
+                    'screw_positions', 'power_devices', 'titlebar_items'
+                )
+                numbers = (
+                    'moonraker_port', 'move_speed_xy', 'move_speed_z', 'z_babystep_values'
+                    'calibrate_x_position', 'calibrate_y_position',
+                )
+            elif section.startswith('preheat '):
+                strs = ('gcode', '')
+                numbers = [f'{option}' for option in self.config[section] if option != 'gcode']
+            elif section.startswith('menu '):
+                strs = ('name', 'icon', 'panel', 'method', 'params', 'enable', 'confirm')
+            elif section == 'bed_screws':
+                # This section may be deprecated in favor of moving this options under the printer section
+                numbers = ('rotation', '')
+                strs = ('screw_positions', '')
+            elif section.startswith('graph') or section.startswith('displayed_macros'):
+                bools = [f'{option}' for option in self.config[section]]
+            elif section.startswith('z_calibrate_position'):
+                # This section may be deprecated in favor of moving this options under the printer section
+                numbers = ('calibrate_x_position', 'calibrate_y_position')
+            elif section == 'DEFAULT':
+                continue
+            else:
+                self.errors.append(f'Section [{section}] not recognized')
+
+            for key in self.config[section]:
+                if key not in bools and key not in strs and key not in numbers:
+                    msg = f'Option "{key}" not recognized for section "[{section}]"'
+                    self.errors.append(msg)
+                    # This most probably is not a big issue, continue to load the config
+                elif key in numbers and not self.config[section][key].isnumeric() \
+                        or key in bools and self.config[section][key] not in ["False", "false", "True", "true"]:
+                    msg = (
+                        f'Unable to parse "{key}" from [{section}]\n'
+                        f'Expected a {"number" if key in numbers else "boolean"} but got: {self.config[section][key]}'
+                    )
+                    self.errors.append(msg)
+                    valid = False
+        return valid
+
+    def get_errors(self):
+        return "".join(f'{error}\n\n' for error in self.errors)
 
     def _create_configurable_options(self, screen):
 

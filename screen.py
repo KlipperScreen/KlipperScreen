@@ -126,7 +126,10 @@ class KlipperScreen(Gtk.Window):
         self.base_panel.activate()
 
         self.printer_initializing(_("Initializing"))
-
+        if self._config.errors:
+            self.show_error_modal("Invalid config file", self._config.get_errors())
+            # Prevent this dialog from being destroyed
+            self.dialogs = []
         self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
 
         # Move mouse to 0,0
@@ -406,31 +409,34 @@ class KlipperScreen(Gtk.Window):
         logging.exception(f"Showing error modal: {err}")
 
         title = Gtk.Label()
-        title.set_markup(f"<b>{err}</b>\n\n")
+        title.set_markup(f"<b>{err}</b>\n")
         title.set_line_wrap(True)
         title.set_halign(Gtk.Align.START)
-        message = Gtk.Label()
-        message.set_markup(
-            "Provide /tmp/KlipperScreen.log when asking for help.\n\n"
-            + f"KlipperScreen: {self.version}\n"
-            + f"<i>{e}</i>\n"
-        )
+        title.set_hexpand(True)
+        version = Gtk.Label(label=f"{self.version}")
+        version.set_halign(Gtk.Align.END)
+
+        message = Gtk.Label(label=f"{e}")
         message.set_line_wrap(True)
-
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        vbox.set_halign(Gtk.Align.CENTER)
-        vbox.set_valign(Gtk.Align.CENTER)
-        vbox.add(title)
-        vbox.add(message)
-
         scroll = self.gtk.ScrolledWindow()
+        scroll.set_vexpand(True)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        scroll.add(vbox)
+        scroll.add(message)
+
+        help_notice = Gtk.Label(label="Provide /tmp/KlipperScreen.log when asking for help.\n")
+        help_notice.set_line_wrap(True)
+
+        grid = Gtk.Grid()
+        grid.attach(title, 0, 0, 1, 1)
+        grid.attach(version, 1, 0, 1, 1)
+        grid.attach(Gtk.Separator(), 0, 1, 2, 1)
+        grid.attach(scroll, 0, 2, 2, 1)
+        grid.attach(help_notice, 0, 3, 2, 1)
 
         buttons = [
             {"name": _("Go Back"), "response": Gtk.ResponseType.CANCEL}
         ]
-        self.gtk.Dialog(self, buttons, scroll, self.error_modal_response)
+        self.gtk.Dialog(self, buttons, grid, self.error_modal_response)
 
     @staticmethod
     def error_modal_response(widget, response_id):
@@ -459,11 +465,6 @@ class KlipperScreen(Gtk.Window):
     def restart_ks(self, widget, response_id):
         if response_id == Gtk.ResponseType.OK:
             logging.debug("Restarting")
-            # This can be removed after a grace period
-            service = self._config.get_main_config().get('service')
-            if service is not None and service != "KlipperScreen":
-                self.show_popup_message("Error: option \"service\" is not supported anymore")
-            # ^^^
             self._ws.send_method("machine.services.restart", {"service": "KlipperScreen"})
         widget.destroy()
 
