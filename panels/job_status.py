@@ -459,7 +459,8 @@ class JobStatusPanel(ScreenPanel):
             {"name": _("Cancel Print"), "response": Gtk.ResponseType.OK},
             {"name": _("Go Back"), "response": Gtk.ResponseType.CANCEL}
         ]
-
+        if len(self._printer.get_stat("exclude_object", "objects")) > 1:
+            buttons.insert(0, {"name": _("Exclude Object"), "response": Gtk.ResponseType.APPLY})
         label = Gtk.Label()
         label.set_markup(_("Are you sure you wish to cancel this print?"))
         label.set_hexpand(True)
@@ -474,6 +475,10 @@ class JobStatusPanel(ScreenPanel):
 
     def cancel_confirm(self, widget, response_id):
         widget.destroy()
+
+        if response_id == Gtk.ResponseType.APPLY:
+            self.menu_item_clicked(None, "exclude", {"panel": "exclude", "name": _("Exclude Object")})
+            return
 
         if response_id == Gtk.ResponseType.CANCEL:
             self.enable_button("pause", "cancel")
