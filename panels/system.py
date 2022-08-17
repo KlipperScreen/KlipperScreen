@@ -68,7 +68,7 @@ class SystemPanel(ScreenPanel):
                 self.labels[f"{prog}_status"].connect("clicked", self.show_update_info, prog)
 
                 if prog in ALLOWED_SERVICES:
-                    self.labels[f"{prog}_restart"] = self._gtk.ButtonImage("refresh", None, None, .7, .7)
+                    self.labels[f"{prog}_restart"] = self._gtk.ButtonImage("refresh", scale=.7)
                     self.labels[f"{prog}_restart"].connect("clicked", self.restart, prog)
                     infogrid.attach(self.labels[f"{prog}_restart"], 0, i, 1, 1)
 

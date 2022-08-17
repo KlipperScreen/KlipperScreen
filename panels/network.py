@@ -160,12 +160,12 @@ class NetworkPanel(ScreenPanel):
         labels.set_valign(Gtk.Align.CENTER)
         labels.set_halign(Gtk.Align.START)
 
-        connect = self._gtk.ButtonImage("load", None, "color3")
+        connect = self._gtk.ButtonImage("load", style="color3")
         connect.connect("clicked", self.connect_network, ssid)
         connect.set_hexpand(False)
         connect.set_halign(Gtk.Align.END)
 
-        delete = self._gtk.ButtonImage("delete", None, "color3")
+        delete = self._gtk.ButtonImage("delete", style="color3")
         delete.connect("clicked", self.remove_wifi_network, ssid)
         delete.set_size_request(60, 0)
         delete.set_hexpand(False)

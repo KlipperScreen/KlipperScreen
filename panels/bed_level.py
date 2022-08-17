@@ -91,14 +91,14 @@ class BedLevelPanel(ScreenPanel):
 
         logging.debug(f"Using {len(self.screws)}-screw locations [x,y] [{self.x_cnt}x{self.y_cnt}]")
 
-        self.labels['bl'] = self._gtk.ButtonImage("bed-level-t-l", None, None, 2.5)
-        self.labels['br'] = self._gtk.ButtonImage("bed-level-t-r", None, None, 2.5)
-        self.labels['fl'] = self._gtk.ButtonImage("bed-level-b-l", None, None, 2.5)
-        self.labels['fr'] = self._gtk.ButtonImage("bed-level-b-r", None, None, 2.5)
-        self.labels['lm'] = self._gtk.ButtonImage("bed-level-l-m", None, None, 2.5)
-        self.labels['rm'] = self._gtk.ButtonImage("bed-level-r-m", None, None, 2.5)
-        self.labels['fm'] = self._gtk.ButtonImage("bed-level-b-m", None, None, 2.5)
-        self.labels['bm'] = self._gtk.ButtonImage("bed-level-t-m", None, None, 2.5)
+        self.labels['bl'] = self._gtk.ButtonImage("bed-level-t-l", scale=2.5)
+        self.labels['br'] = self._gtk.ButtonImage("bed-level-t-r", scale=2.5)
+        self.labels['fl'] = self._gtk.ButtonImage("bed-level-b-l", scale=2.5)
+        self.labels['fr'] = self._gtk.ButtonImage("bed-level-b-r", scale=2.5)
+        self.labels['lm'] = self._gtk.ButtonImage("bed-level-l-m", scale=2.5)
+        self.labels['rm'] = self._gtk.ButtonImage("bed-level-r-m", scale=2.5)
+        self.labels['fm'] = self._gtk.ButtonImage("bed-level-b-m", scale=2.5)
+        self.labels['bm'] = self._gtk.ButtonImage("bed-level-t-m", scale=2.5)
 
         valid_positions = True
         printer_cfg = self._config.get_printer_config(self._screen.connected_printer)

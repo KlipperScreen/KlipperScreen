@@ -47,7 +47,7 @@ class ConsolePanel(ScreenPanel):
         o2_switch.set_active(self.hidetemps)
         o2_switch.connect("notify::active", self.hide_temps)
 
-        o3_button = self._gtk.ButtonImage("refresh", _('Clear') + " ", None, .66, Gtk.PositionType.RIGHT, False)
+        o3_button = self._gtk.ButtonImage("refresh", _('Clear') + " ", None, .66, Gtk.PositionType.RIGHT, 1)
         o3_button.connect("clicked", self.clear)
 
         options = Gtk.Box()
@@ -85,7 +85,7 @@ class ConsolePanel(ScreenPanel):
         entry.connect("activate", self._send_command)
         entry.grab_focus_without_selecting()
 
-        enter = self._gtk.ButtonImage("resume", " " + _('Send') + " ", None, .66, Gtk.PositionType.RIGHT, False)
+        enter = self._gtk.ButtonImage("resume", " " + _('Send') + " ", None, .66, Gtk.PositionType.RIGHT, 1)
         enter.set_hexpand(False)
         enter.connect("clicked", self._send_command)
 
