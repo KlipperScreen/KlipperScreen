@@ -421,17 +421,18 @@ class KlipperScreenConfig:
                     save_config.add_section(opt['section'])
                 save_config.set(opt['section'], name, str(curval))
 
-        macro_sections = [i for i in self.config.sections() if i.startswith("displayed_macros")]
-        for macro_sec in macro_sections:
-            for item in self.config.options(macro_sec):
-                value = self.config[macro_sec].getboolean(item, fallback=True)
+        extra_sections = [i for i in self.config.sections() if i.startswith("displayed_macros")]
+        extra_sections.extend([i for i in self.config.sections() if i.startswith("graph")])
+        for section in extra_sections:
+            for item in self.config.options(section):
+                value = self.config[section].getboolean(item, fallback=True)
                 if value is False or (self.defined_config is not None and
-                                      macro_sec in self.defined_config.sections() and
-                                      self.defined_config[macro_sec].getboolean(item, fallback=True) is False and
-                                      self.defined_config[macro_sec].getboolean(item, fallback=True) != value):
-                    if macro_sec not in save_config.sections():
-                        save_config.add_section(macro_sec)
-                    save_config.set(macro_sec, item, str(value))
+                                      section in self.defined_config.sections() and
+                                      self.defined_config[section].getboolean(item, fallback=True) is False and
+                                      self.defined_config[section].getboolean(item, fallback=True) != value):
+                    if section not in save_config.sections():
+                        save_config.add_section(section)
+                    save_config.set(section, item, str(value))
 
         save_output = self._build_config_string(save_config).split("\n")
         for i in range(len(save_output)):

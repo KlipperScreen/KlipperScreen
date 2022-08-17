@@ -110,7 +110,12 @@ class MainPanel(MenuPanel):
         name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "), None, .5, Gtk.PositionType.LEFT, 1)
         name.connect("clicked", self.toggle_visibility, device)
         name.set_alignment(0, .5)
-        name.get_style_context().add_class(class_name)
+        visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}", device, fallback=True)
+        if visible:
+            name.get_style_context().add_class(class_name)
+        else:
+            name.get_style_context().add_class("graph_label_hidden")
+        self.labels['da'].set_showing(device, visible)
 
         temp = self._gtk.Button("")
         if can_target:
@@ -121,7 +126,7 @@ class MainPanel(MenuPanel):
             "name": name,
             "temp": temp,
             "can_target": can_target,
-            "visible_graph": True
+            "visible": visible
         }
 
         devices = sorted(self.devices)
@@ -134,17 +139,21 @@ class MainPanel(MenuPanel):
         return True
 
     def toggle_visibility(self, widget, device):
-        self.devices[device]['visible_graph'] ^= True
-        logging.info(f"Graph show {self.devices[device]['visible_graph']}: {device}")
+        self.devices[device]['visible'] ^= True
+        logging.info(f"Graph show {self.devices[device]['visible']}: {device}")
 
-        self.labels['da'].set_showing(device, self.devices[device]['visible_graph'])
-        if self.devices[device]['visible_graph']:
+        section = f"graph {self._screen.connected_printer}"
+        if section not in self._config.get_config().sections():
+            self._config.get_config().add_section(section)
+        self._config.set(section, f"{device}", f"{self.devices[device]['visible']}")
+        self._config.save_user_config_options()
+
+        self.labels['da'].set_showing(device, self.devices[device]['visible'])
+        if self.devices[device]['visible']:
             self.devices[device]['name'].get_style_context().remove_class("graph_label_hidden")
-            self.devices[device]['name'].get_style_context().add_class(
-                self.devices[device]['class'])
+            self.devices[device]['name'].get_style_context().add_class(self.devices[device]['class'])
         else:
-            self.devices[device]['name'].get_style_context().remove_class(
-                self.devices[device]['class'])
+            self.devices[device]['name'].get_style_context().remove_class(self.devices[device]['class'])
             self.devices[device]['name'].get_style_context().add_class("graph_label_hidden")
         self.labels['da'].queue_draw()
 
