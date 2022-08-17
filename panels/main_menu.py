@@ -107,13 +107,10 @@ class MainPanel(MenuPanel):
         if can_target:
             self.labels['da'].add_object(device, "targets", rgb, True, False)
 
-        name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "),
-                                     None, .5, Gtk.PositionType.LEFT, False)
+        name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "), None, .5, Gtk.PositionType.LEFT, 1)
         name.connect("clicked", self.toggle_visibility, device)
         name.set_alignment(0, .5)
         name.get_style_context().add_class(class_name)
-        child = name.get_children()[0].get_children()[0].get_children()[1]
-        child.set_ellipsize(Pango.EllipsizeMode.END)
 
         temp = self._gtk.Button("")
         if can_target:

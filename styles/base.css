@@ -22,12 +22,12 @@ button {
     -gtk-icon-shadow: none;
 }
 
-button:active {
+button:active, .button_active {
     background-color: #304C62;
 }
 
-.button_active {
-    background-color: #20303D;
+button label {
+    margin-top: .3em;
 }
 
 button.color1 {

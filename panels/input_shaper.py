@@ -25,7 +25,7 @@ class InputShaperPanel(ScreenPanel):
         super().__init__(screen, title, back)
         self.freq_xy_adj = {}
         self.freq_xy_combo = {}
-        self.calibrate_btn = self._gtk.ButtonImage("move", _('Finding ADXL'), "color1", word_wrap=False)
+        self.calibrate_btn = self._gtk.ButtonImage("move", _('Finding ADXL'), "color1", lines=1)
         self.calibrate_btn.connect("clicked", self.on_popover_clicked)
         self.calibrate_btn.set_sensitive(False)
         self.status = Gtk.Label("")

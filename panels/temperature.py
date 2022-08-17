@@ -64,8 +64,8 @@ class TemperaturePanel(ScreenPanel):
 
     def create_right_panel(self):
 
-        cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'), "color4", .66, Gtk.PositionType.LEFT, False)
-        adjust = self._gtk.ButtonImage('fine-tune', '', "color3", 1, Gtk.PositionType.LEFT, False)
+        cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'), "color4", .66, Gtk.PositionType.LEFT, 1)
+        adjust = self._gtk.ButtonImage('fine-tune', '', "color3", 1, Gtk.PositionType.LEFT, 1)
 
         right = self._gtk.HomogeneousGrid()
         right.attach(cooldown, 0, 0, 2, 1)
@@ -319,12 +319,10 @@ class TemperaturePanel(ScreenPanel):
             self.labels['da'].add_object(device, "targets", rgb, True, False)
 
         name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "),
-                                     None, .5, Gtk.PositionType.LEFT, False)
+                                     None, .5, Gtk.PositionType.LEFT, 1)
         name.connect('clicked', self.on_popover_clicked, device)
         name.set_alignment(0, .5)
         name.get_style_context().add_class(class_name)
-        child = name.get_children()[0].get_children()[0].get_children()[1]
-        child.set_ellipsize(Pango.EllipsizeMode.END)
 
         temp = self._gtk.Button("")
         temp.connect('clicked', self.select_heater, device)

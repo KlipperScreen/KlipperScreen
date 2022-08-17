@@ -43,13 +43,13 @@ class PrintPanel(ScreenPanel):
         sbox.set_vexpand(False)
         sbox.add(sort)
         for i, (name, val) in enumerate(self.sort_items.items(), start=1):
-            s = self._gtk.ButtonImage(None, val, f"color{i % 4}", .66, Gtk.PositionType.RIGHT, False)
+            s = self._gtk.ButtonImage(None, val, f"color{i % 4}", .66, Gtk.PositionType.RIGHT, 1)
             if name == self.sort_current[0]:
                 s.set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], .66))
             s.connect("clicked", self.change_sort, name)
             self.labels[f'sort_{name}'] = s
             sbox.add(s)
-        refresh = self._gtk.ButtonImage("refresh", None, None, .66)
+        refresh = self._gtk.ButtonImage("refresh", scale=.66)
         refresh.connect('clicked', self._refresh_files)
         sbox.add(refresh)
         sbox.set_hexpand(True)
@@ -166,7 +166,7 @@ class PrintPanel(ScreenPanel):
         labels.set_valign(Gtk.Align.CENTER)
         labels.set_halign(Gtk.Align.START)
 
-        actions = self._gtk.ButtonImage("load", None, "color3")
+        actions = self._gtk.ButtonImage("load", style="color3")
         actions.connect("clicked", self.change_dir, directory)
         actions.set_hexpand(False)
         actions.set_halign(Gtk.Align.END)
@@ -213,7 +213,7 @@ class PrintPanel(ScreenPanel):
         labels.set_valign(Gtk.Align.CENTER)
         labels.set_halign(Gtk.Align.START)
 
-        actions = self._gtk.ButtonImage("print", None, "color3")
+        actions = self._gtk.ButtonImage("print", style="color3")
         actions.connect("clicked", self.confirm_print, filepath)
         actions.set_hexpand(False)
         actions.set_halign(Gtk.Align.END)

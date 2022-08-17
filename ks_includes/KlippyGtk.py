@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import contextlib
 import gi
 import logging
 import os
@@ -164,9 +163,7 @@ class KlippyGtk:
         b.connect("clicked", self.screen.reset_screensaver_timeout)
         return b
 
-    def ButtonImage(self, image_name=None, label=None, style=None, scale=1.38,
-                    position=Gtk.PositionType.TOP, word_wrap=True):
-
+    def ButtonImage(self, image_name=None, label=None, style=None, scale=1.38, position=Gtk.PositionType.TOP, lines=2):
         b = Gtk.Button(label=label)
         b.set_hexpand(True)
         b.set_vexpand(True)
@@ -176,12 +173,17 @@ class KlippyGtk:
         b.set_image_position(position)
         b.set_always_show_image(True)
 
-        if word_wrap is True:
-            with contextlib.suppress(Exception):
-                # Get the label object
-                child = b.get_children()[0].get_children()[0].get_children()[1]
-                child.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-                child.set_line_wrap(True)
+        try:
+            # Get the label object
+            child = b.get_children()[0].get_children()[0].get_children()[1]
+            child.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+            child.set_line_wrap(True)
+            child.set_ellipsize(True)
+            child.set_ellipsize(Pango.EllipsizeMode.END)
+            child.set_lines(lines)
+        except Exception as e:
+            logging.debug(f"Unable to wrap and ellipsize label: {e}")
+
         if style is not None:
             b.get_style_context().add_class(style)
         b.connect("clicked", self.screen.reset_screensaver_timeout)
