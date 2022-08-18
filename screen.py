@@ -171,7 +171,7 @@ class KlipperScreen(Gtk.Window):
             if self.printer.get_state() not in ["disconnected", "error", "startup", "shutdown"]:
                 self.base_panel.show_heaters(True)
             self.base_panel.show_printer_select(True)
-            self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut'))
+            self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
             return
 
         # Cleanup
@@ -393,7 +393,7 @@ class KlipperScreen(Gtk.Window):
         self.show_all()
         self.popup_message = box
 
-        if self._config.get_main_config().getboolean('autoclose_popups'):
+        if self._config.get_main_config().getboolean('autoclose_popups', True):
             GLib.timeout_add_seconds(10, self.close_popup_message)
 
         return False
@@ -581,7 +581,7 @@ class KlipperScreen(Gtk.Window):
     def _menu_go_back(self, widget=None):
         logging.info("#### Menu go back")
         self.remove_keyboard()
-        if self._config.get_main_config().getboolean('autoclose_popups'):
+        if self._config.get_main_config().getboolean('autoclose_popups', True):
             self.close_popup_message()
         self._remove_current_panel()
 
@@ -793,7 +793,7 @@ class KlipperScreen(Gtk.Window):
             self.printer_select_callbacks = [self.state_ready]
             return
 
-        self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut'))
+        self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
         self.base_panel.show_heaters(True)
 
         # Do not return to main menu if completing a job, timeouts/user input will return
@@ -1039,7 +1039,7 @@ class KlipperScreen(Gtk.Window):
         self.close_popup_message()
         self.show_panel('job_status', "job_status", "Print Status", 2)
         self.base_panel.show_heaters(True)
-        self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut'))
+        self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
 
     def show_keyboard(self, widget=None, event=None, entry=None):
         if self.keyboard is not None:
