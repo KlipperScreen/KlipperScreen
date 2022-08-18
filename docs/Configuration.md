@@ -13,26 +13,15 @@ Write in the file only the options that need to be changed, and restart KlipperS
 
 
 ## Main Options
+The options listd here are not changeable from within the ui.
 ```py
 [main]
-# Invert axis in move panel. Default is False. Change to true to invert
-invert_x: False
-invert_y: False
-invert_z: False
-
 # Time in seconds before the Job Status page closes itself after a successful job/print
 # 0 means disabled
 job_complete_timeout: 0
 
 # Time in seconds before the Job Status closes itself if an error is encountered
 job_error_timeout: 0
-
-# Autoclose popups, this includes various notifications and M118
-autoclose_popups: True
-
-# Specify the language
-#   The language can be specified here instead of using the system default language.
-language: en
 
 # Allows the cursor to be displayed on the screen
 show_cursor: False
@@ -44,11 +33,7 @@ default_printer: Ender 3 Pro
 # set this to False. See Menu section below.
 use_default_menu: True
 
-# Screen DPMS
-# By default DPMS is used to turn off the screen, this should prevent burn-in and save power.
-# However if you find that your screen doesn't turn off because it doesn't support it
-# Setting this to false will just turn the screen black.
-use_dpms: True
+
 ```
 
 ## Printer Options
