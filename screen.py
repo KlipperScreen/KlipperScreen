@@ -1040,6 +1040,8 @@ class KlipperScreen(Gtk.Window):
         self.show_panel('job_status', "job_status", "Print Status", 2)
         self.base_panel.show_heaters(True)
         self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
+        for dialog in self.dialogs:
+            dialog.destroy()
 
     def show_keyboard(self, widget=None, event=None, entry=None):
         if self.keyboard is not None:
