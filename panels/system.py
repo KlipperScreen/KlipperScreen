@@ -28,17 +28,17 @@ class SystemPanel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
 
-        update_all = self._gtk.ButtonImage('arrow-up', _('Full\nUpdate'), 'color1')
+        update_all = self._gtk.ButtonImage('arrow-up', _('Full Update'), 'color1')
         update_all.connect("clicked", self.show_update_info, "full")
         update_all.set_vexpand(False)
         self.refresh = self._gtk.ButtonImage('refresh', _('Refresh'), 'color2')
         self.refresh.connect("clicked", self.refresh_updates)
         self.refresh.set_vexpand(False)
 
-        reboot = self._gtk.ButtonImage('refresh', _('System\nRestart'), 'color3')
+        reboot = self._gtk.ButtonImage('refresh', _('System Restart'), 'color3')
         reboot.connect("clicked", self.reboot_poweroff, "reboot")
         reboot.set_vexpand(False)
-        shutdown = self._gtk.ButtonImage('shutdown', _('System\nShutdown'), 'color4')
+        shutdown = self._gtk.ButtonImage('shutdown', _('System Shutdown'), 'color4')
         shutdown.connect("clicked", self.reboot_poweroff, "poweroff")
         shutdown.set_vexpand(False)
 
