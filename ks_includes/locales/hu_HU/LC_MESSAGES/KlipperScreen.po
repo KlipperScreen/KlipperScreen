@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 12:01-0300\n"
+"POT-Creation-Date: 2022-08-15 19:47-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -45,7 +45,7 @@ msgid "Add Printer"
 msgstr "Nyomtató hozzáadása"
 
 msgid "Add profile"
-msgstr ""
+msgstr "Profil hozzáadása"
 
 msgid "Apply"
 msgstr "Alkalmaz"
@@ -80,7 +80,7 @@ msgid "Auto-calibrate"
 msgstr "Automatikus kalibrálás"
 
 msgid "Auto-close notifications"
-msgstr ""
+msgstr "Értesítések automatikus bezárása"
 
 msgid "Auto-scroll"
 msgstr "Automatikus görgetés"
@@ -92,7 +92,7 @@ msgid "Bed Mesh"
 msgstr "Ágyháló"
 
 msgid "Bed screw configuration:"
-msgstr ""
+msgstr "Az ágycsavar konfigurációja:"
 
 msgid "Calibrate"
 msgstr "Kalibrálás"
@@ -104,7 +104,7 @@ msgid "Calibrated, save configuration to make it permanent"
 msgstr "Kalibrálva! Mentse el a konfigurációt, hogy az állandó legyen"
 
 msgid "Calibrating"
-msgstr ""
+msgstr "Kalibrálás"
 
 msgid "Calibrating..."
 msgstr "Kalibrálás..."
@@ -134,10 +134,10 @@ msgid "Check ADXL Wiring"
 msgstr "Ellenőrizze az ADXL kábelezést"
 
 msgid "Checking for updates, please wait..."
-msgstr ""
+msgstr "Frissítések keresése, kérjük, várjon..."
 
 msgid "Clear"
-msgstr "Egyértelmű"
+msgstr "Tiszta"
 
 msgid "Close"
 msgstr "Bezárás"
@@ -177,7 +177,7 @@ msgid "Delete"
 msgstr "Töröl"
 
 msgid "Delete File?"
-msgstr ""
+msgstr "Fájl törlése?"
 
 msgid "Deselect"
 msgstr "Kijelölés törlése"
@@ -445,6 +445,8 @@ msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr ""
+"Az automatikus felismerés nem támogatott, a klipperscreenben kell beállítani."
+"conf"
 
 msgid "Nothing selected"
 msgstr "Nincs kiválasztva"
@@ -465,7 +467,7 @@ msgstr[0] "A csomag frissítésre kerül"
 msgstr[1] "Csomag frissül"
 
 msgid "Part Fan"
-msgstr ""
+msgstr "Tárgyhűtő"
 
 msgid "Password saved"
 msgstr "Jelszó mentve"
@@ -480,7 +482,7 @@ msgid "Perform a full upgrade?"
 msgstr "Teljes frissítést hajt végre?"
 
 msgid "Pins"
-msgstr ""
+msgstr "Kimenetek"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Fordítsa újra és frissítse a mikrovezérlőt."
@@ -531,7 +533,7 @@ msgid "Reference"
 msgstr "Referencia"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Frissítés"
 
 msgid "Restart"
 msgstr "Újraindítás"
@@ -556,7 +558,7 @@ msgid "Retry #%s"
 msgstr "Újra #%s"
 
 msgid "Retrying"
-msgstr ""
+msgstr "Újrapróbálkozás"
 
 msgid "Save"
 msgstr "Mentés"
@@ -687,7 +689,7 @@ msgid "Unknown Heater"
 msgstr "Ismeretlen melegítő"
 
 msgid "Unknown screw position"
-msgstr ""
+msgstr "Ismeretlen csavarhelyzet"
 
 msgid "Unload"
 msgstr "Kiadás"
