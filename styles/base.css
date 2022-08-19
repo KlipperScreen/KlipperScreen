@@ -27,7 +27,8 @@ button:active, .button_active {
 }
 
 button label {
-    margin-top: .3em;
+    margin-top: .25em;
+    margin-bottom: .5em;
 }
 
 button.color1 {

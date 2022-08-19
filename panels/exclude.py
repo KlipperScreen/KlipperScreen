@@ -20,7 +20,7 @@ class ExcludeObjectPanel(ScreenPanel):
         self.object_list.set_halign(Gtk.Align.CENTER)
         self.buttons = {}
         self.current_object = self._gtk.ButtonImage("extrude", "", scale=.66,
-                                                    position=Gtk.PositionType.LEFT, word_wrap=False)
+                                                    position=Gtk.PositionType.LEFT, lines=1)
         self.current_object.connect("clicked", self.exclude_current)
         self.current_object.set_hexpand(True)
         self.current_object.set_vexpand(False)
@@ -48,7 +48,7 @@ class ExcludeObjectPanel(ScreenPanel):
     def add_object(self, name):
         if name not in self.buttons:
             self.buttons[name] = self._gtk.ButtonImage("cancel", name, scale=.66, position=Gtk.PositionType.LEFT,
-                                                       word_wrap=False)
+                                                       lines=1)
             self.buttons[name].connect("clicked", self.exclude_object, name)
             self.buttons[name].set_hexpand(True)
         if name in self.excluded_objects:

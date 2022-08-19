@@ -164,14 +164,16 @@ class KlippyGtk:
         return b
 
     def ButtonImage(self, image_name=None, label=None, style=None, scale=1.38, position=Gtk.PositionType.TOP, lines=2):
-        b = Gtk.Button(label=label)
+        b = Gtk.Button()
+        if label is not None:
+            b.set_label(label.replace("\n", " "))
         b.set_hexpand(True)
         b.set_vexpand(True)
         b.set_can_focus(False)
         if image_name is not None:
             b.set_image(self.Image(image_name, scale))
-        b.set_image_position(position)
-        b.set_always_show_image(True)
+            b.set_image_position(position)
+            b.set_always_show_image(True)
 
         if label is not None:
             try:
