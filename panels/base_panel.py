@@ -169,8 +169,9 @@ class BasePanel(ScreenPanel):
         n = 0
         if self._screen.printer.get_tools():
             self.current_extruder = self._screen.printer.get_stat("toolhead", "extruder")
-            self.control['temp_box'].add(self.labels[f"{self.current_extruder}_box"])
-            n += 1
+            if self.current_extruder:
+                self.control['temp_box'].add(self.labels[f"{self.current_extruder}_box"])
+                n += 1
 
         if self._screen.printer.has_heated_bed():
             self.control['temp_box'].add(self.labels['heater_bed_box'])
@@ -178,7 +179,7 @@ class BasePanel(ScreenPanel):
 
         # Options in the config have priority
         if printer_cfg is not None:
-            titlebar_items = printer_cfg.get("titlebar_items", "")
+            titlebar_items = printer_cfg.get("titlebar_items", None)
             if titlebar_items is not None:
                 titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
                 logging.info(f"Titlebar items: {titlebar_items}")
