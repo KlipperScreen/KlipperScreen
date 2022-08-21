@@ -519,13 +519,15 @@ class TemperaturePanel(ScreenPanel):
             self.update_temp(
                 x,
                 self._printer.get_dev_stat(x, "temperature"),
-                self._printer.get_dev_stat(x, "target")
+                self._printer.get_dev_stat(x, "target"),
+                self._printer.get_dev_stat(x, "power"),
             )
         for h in self._printer.get_heaters():
             self.update_temp(
                 h,
                 self._printer.get_dev_stat(h, "temperature"),
-                self._printer.get_dev_stat(h, "target")
+                self._printer.get_dev_stat(h, "target"),
+                self._printer.get_dev_stat(x, "power"),
             )
         return
 
@@ -553,7 +555,7 @@ class TemperaturePanel(ScreenPanel):
         self.labels['da'].queue_draw()
         return True
 
-    def update_temp(self, device, temp, target):
+    def update_temp(self, device, temp, target, power):
         if device not in self.devices:
             return
         if self.devices[device]["can_target"] and target > 0:

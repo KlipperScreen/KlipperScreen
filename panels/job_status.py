@@ -543,7 +543,8 @@ class JobStatusPanel(ScreenPanel):
                 self.update_temp(
                     x,
                     self._printer.get_dev_stat(x, "temperature"),
-                    self._printer.get_dev_stat(x, "target")
+                    self._printer.get_dev_stat(x, "target"),
+                    self._printer.get_dev_stat(x, "power"),
                 )
                 self.extruder_button[x].set_label(self.labels[x].get_text())
             for x in self._printer.get_heaters():
@@ -551,7 +552,8 @@ class JobStatusPanel(ScreenPanel):
                     self.update_temp(
                         x,
                         self._printer.get_dev_stat(x, "temperature"),
-                        self._printer.get_dev_stat(x, "target")
+                        self._printer.get_dev_stat(x, "target"),
+                        self._printer.get_dev_stat(x, "power"),
                     )
                     self.heater_button[x].set_label(self.labels[x].get_text())
 
@@ -916,9 +918,12 @@ class JobStatusPanel(ScreenPanel):
             msg = " "
         self.labels['lcdmessage'].set_text(f"{msg}")
 
-    def update_temp(self, x, temp, target):
-        if x in self.labels and temp is not None:
-            if target is not None and target > 0:
-                self.labels[x].set_label(f"{int(temp):3}/{int(target):3}°")
-            else:
-                self.labels[x].set_label(f"{int(temp):3}°")
+    def update_temp(self, x, temp, target, power):
+        if x not in self.labels or temp is None:
+            return
+        new_text = f"{int(temp):3}"
+        if target is not None:
+            new_text += f"/{int(target):3}°"
+        if power is not None:
+            new_text += f", {int(power*100):3}%"
+        self.labels[x].set_label(new_text)
