@@ -142,7 +142,6 @@ class BedMeshPanel(ScreenPanel):
             button_box.add(buttons["load"])
             button_box.add(buttons["view"])
 
-
         box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
         box.pack_start(name, True, True, 0)
         box.pack_start(button_box, False, False, 0)
@@ -176,7 +175,6 @@ class BedMeshPanel(ScreenPanel):
             self.remove_create()
             return True
         return False
-
 
     def load_meshes(self):
         bm_profiles = self._screen.printer.get_config_section_list("bed_mesh ")
