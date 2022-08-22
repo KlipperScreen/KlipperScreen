@@ -17,14 +17,12 @@ try:
     ctypes.cdll.LoadLibrary('libXext.so.6')
     libXext = ctypes.CDLL('libXext.so.6')
 
-
     class DPMS_State:
         Fail = -1
         On = 0
         Standby = 1
         Suspend = 2
         Off = 3
-
 
     def get_DPMS_state(display_name_in_byte_string=b':0'):
         state = DPMS_State.Fail
@@ -47,7 +45,6 @@ try:
                         state = struct.unpack('H', state_p.raw)[0]
             libXext.XCloseDisplay(display)
         return state
-
 
     dpms_loaded = True
 except Exception:
