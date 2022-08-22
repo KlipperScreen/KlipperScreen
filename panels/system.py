@@ -35,10 +35,10 @@ class SystemPanel(ScreenPanel):
         self.refresh.connect("clicked", self.refresh_updates)
         self.refresh.set_vexpand(False)
 
-        reboot = self._gtk.ButtonImage('refresh', _('System Restart'), 'color3')
+        reboot = self._gtk.ButtonImage('refresh', _('Restart'), 'color3')
         reboot.connect("clicked", self.reboot_poweroff, "reboot")
         reboot.set_vexpand(False)
-        shutdown = self._gtk.ButtonImage('shutdown', _('System Shutdown'), 'color4')
+        shutdown = self._gtk.ButtonImage('shutdown', _('Shutdown'), 'color4')
         shutdown.connect("clicked", self.reboot_poweroff, "poweroff")
         shutdown.set_vexpand(False)
 
@@ -391,7 +391,7 @@ class SystemPanel(ScreenPanel):
         scroll.add(vbox)
         buttons = [
             {"name": _("Host"), "response": Gtk.ResponseType.OK},
-            {"name": _("Machine"), "response": Gtk.ResponseType.APPLY},
+            {"name": _("Printer"), "response": Gtk.ResponseType.APPLY},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
         ]
         self._gtk.Dialog(self._screen, buttons, scroll, self.reboot_poweroff_confirm, method)
