@@ -185,11 +185,8 @@ class SystemPanel(ScreenPanel):
                     details.set_line_wrap(True)
                     details.set_halign(Gtk.Align.START)
                     commit_box.add(details)
-
-                    frame = Gtk.Frame()
-                    frame.get_style_context().add_class("frame-item")
-                    frame.add(commit_box)
-                    vbox.add(frame)
+                    commit_box.add(Gtk.Separator())
+                    vbox.add(commit_box)
 
         if "package_count" in info:
             label.set_markup((
