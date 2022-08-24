@@ -446,6 +446,9 @@ class TemperaturePanel(ScreenPanel):
         self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")
         self.active_heater = None
 
+        for d in self.active_heaters:
+            self.devices[d]['name'].get_style_context().add_class("button_active")
+
         if self._screen.vertical_mode:
             self.grid.remove_row(1)
             self.grid.attach(self.create_right_panel(), 0, 1, 1, 1)
@@ -493,9 +496,8 @@ class TemperaturePanel(ScreenPanel):
         return
 
     def show_numpad(self, widget, device=None):
-
-        if self.active_heater is not None:
-            self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")
+        for d in self.active_heaters:
+            self.devices[d]['name'].get_style_context().remove_class("button_active")
         self.active_heater = self.popover_device if device is None else device
         self.devices[self.active_heater]['name'].get_style_context().add_class("button_active")
 
