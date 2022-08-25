@@ -52,12 +52,23 @@ class MainPanel(MenuPanel):
         if self.graph_update is None:
             # This has a high impact on load
             self.graph_update = GLib.timeout_add_seconds(5, self.update_graph)
-        return
+        for device in self.devices:
+            visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}", device, fallback=True)
+            self.devices[device]['visible'] = visible
+            self.labels['da'].set_showing(device, visible)
+            if visible:
+                self.devices[device]['name'].get_style_context().add_class(self.devices[device]['class'])
+                self.devices[device]['name'].get_style_context().remove_class("graph_label_hidden")
+            else:
+                self.devices[device]['name'].get_style_context().add_class("graph_label_hidden")
+                self.devices[device]['name'].get_style_context().remove_class(self.devices[device]['class'])
 
     def deactivate(self):
         if self.graph_update:
             GLib.source_remove(self.graph_update)
             self.graph_update = None
+        if self.active_heater is not None:
+            self.hide_numpad()
 
     def add_device(self, device):
 
@@ -208,7 +219,7 @@ class MainPanel(MenuPanel):
 
         return box
 
-    def hide_numpad(self, widget):
+    def hide_numpad(self, widget=None):
         self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")
         self.active_heater = None
 

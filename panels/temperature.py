@@ -189,14 +189,25 @@ class TemperaturePanel(ScreenPanel):
         if self.graph_update is None:
             # This has a high impact on load
             self.graph_update = GLib.timeout_add_seconds(5, self.update_graph)
+        for device in self.devices:
+            visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}", device, fallback=True)
+            self.devices[device]['visible'] = visible
+            self.labels['da'].set_showing(device, visible)
+            if visible:
+                self.devices[device]['name'].get_style_context().add_class(self.devices[device]['class'])
+                self.devices[device]['name'].get_style_context().remove_class("graph_label_hidden")
+            else:
+                self.devices[device]['name'].get_style_context().add_class("graph_label_hidden")
+                self.devices[device]['name'].get_style_context().remove_class(self.devices[device]['class'])
 
     def deactivate(self):
         if self.graph_update is not None:
             GLib.source_remove(self.graph_update)
             self.graph_update = None
+        if self.active_heater is not None:
+            self.hide_numpad()
 
     def select_heater(self, widget, device):
-
         if self.devices[device]["can_target"]:
             if device in self.active_heaters:
                 self.active_heaters.pop(self.active_heaters.index(device))
@@ -442,7 +453,7 @@ class TemperaturePanel(ScreenPanel):
 
         return box
 
-    def hide_numpad(self, widget):
+    def hide_numpad(self, widget=None):
         self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")
         self.active_heater = None
 
