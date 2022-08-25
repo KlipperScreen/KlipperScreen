@@ -37,7 +37,7 @@ class HeaterGraph(Gtk.DrawingArea):
 
     @staticmethod
     def event_cb(da, ev):
-        if ev.ev_type == Gdk.EventType.BUTTON_PRESS:
+        if ev.type == Gdk.EventType.BUTTON_PRESS:
             x = ev.x
             y = ev.y
             logging.info(f"Graph area: {x} {y}")
