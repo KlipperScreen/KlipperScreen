@@ -185,20 +185,32 @@ class TemperaturePanel(ScreenPanel):
                 self._printer.set_dev_stat(heater, "target", int(target))
                 logging.info(f"Setting {heater} to {target}")
 
-    def activate(self):
-        if self.graph_update is None:
-            # This has a high impact on load
-            self.graph_update = GLib.timeout_add_seconds(5, self.update_graph)
+    def update_graph_visibility(self):
+        count = 0
         for device in self.devices:
-            visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}", device, fallback=True)
+            visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}",
+                                                           device, fallback=True)
             self.devices[device]['visible'] = visible
             self.labels['da'].set_showing(device, visible)
             if visible:
+                count += 1
                 self.devices[device]['name'].get_style_context().add_class(self.devices[device]['class'])
                 self.devices[device]['name'].get_style_context().remove_class("graph_label_hidden")
             else:
                 self.devices[device]['name'].get_style_context().add_class("graph_label_hidden")
                 self.devices[device]['name'].get_style_context().remove_class(self.devices[device]['class'])
+        if count > 0:
+            self.left_panel.add(self.labels['da'])
+            self.labels['da'].queue_draw()
+            self.labels['da'].show()
+        else:
+            self.left_panel.remove(self.labels['da'])
+
+    def activate(self):
+        if self.graph_update is None:
+            # This has a high impact on load
+            self.graph_update = GLib.timeout_add_seconds(5, self.update_graph)
+        self.update_graph_visibility()
 
     def deactivate(self):
         if self.graph_update is not None:
@@ -378,14 +390,7 @@ class TemperaturePanel(ScreenPanel):
         self._config.set(section, f"{device}", f"{self.devices[device]['visible']}")
         self._config.save_user_config_options()
 
-        self.labels['da'].set_showing(device, self.devices[device]['visible'])
-        if self.devices[device]['visible']:
-            self.devices[device]['name'].get_style_context().remove_class("graph_label_hidden")
-            self.devices[device]['name'].get_style_context().add_class(self.devices[device]['class'])
-        else:
-            self.devices[device]['name'].get_style_context().remove_class(self.devices[device]['class'])
-            self.devices[device]['name'].get_style_context().add_class("graph_label_hidden")
-        self.labels['da'].queue_draw()
+        self.update_graph_visibility()
         if self.devices[device]['can_target']:
             self.popover_populate_menu()
             self.labels['popover'].show_all()
@@ -431,9 +436,9 @@ class TemperaturePanel(ScreenPanel):
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(self.labels['devices'])
 
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        box.add(scroll)
-        box.add(self.labels['da'])
+        self.left_panel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        self.left_panel.add(scroll)
+        self.left_panel.add(self.labels['da'])
 
         self.labels['graph_settemp'] = self._gtk.Button(label=_("Set Temp"))
         self.labels['graph_settemp'].connect("clicked", self.show_numpad)
@@ -451,7 +456,7 @@ class TemperaturePanel(ScreenPanel):
         for d in self._printer.get_temp_store_devices():
             self.add_device(d)
 
-        return box
+        return self.left_panel
 
     def hide_numpad(self, widget=None):
         self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")
