@@ -3,7 +3,7 @@ import logging
 import contextlib
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GLib, Pango
+from gi.repository import Gtk, GLib
 
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.widgets.graph import HeaterGraph
@@ -20,6 +20,8 @@ class TemperaturePanel(ScreenPanel):
 
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, back)
+        self.popover_timeout = None
+        self.left_panel = None
         self.popover_device = None
         self.h = 1
         self.tempdeltas = ["1", "5", "10", "25"]
@@ -348,7 +350,8 @@ class TemperaturePanel(ScreenPanel):
         self.labels['da'].add_object(device, "temperatures", rgb, False, True)
         if can_target:
             self.labels['da'].add_object(device, "targets", rgb, True, False)
-            name.connect('clicked', self.select_heater, device)
+            name.connect('button-press-event', self.name_pressed, device)
+            name.connect('button-release-event', self.name_released, device)
         else:
             name.connect("clicked", self.toggle_visibility, device)
         self.labels['da'].set_showing(device, visible)
@@ -377,6 +380,16 @@ class TemperaturePanel(ScreenPanel):
         self.labels['devices'].attach(temp, 1, pos, 1, 1)
         self.labels['devices'].show_all()
         return True
+
+    def name_pressed(self, widget, event, device):
+        self.popover_timeout = GLib.timeout_add_seconds(1, self.popover_popup, widget, device)
+
+    def name_released(self, widget, event, device):
+        if self.popover_timeout is not None:
+            GLib.source_remove(self.popover_timeout)
+            self.popover_timeout = None
+        if not self.popover_device:
+            self.select_heater(None, device)
 
     def toggle_visibility(self, widget, device=None):
         if device is None:
@@ -451,6 +464,7 @@ class TemperaturePanel(ScreenPanel):
         self.labels['popover_vbox'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         popover.add(self.labels['popover_vbox'])
         popover.set_position(Gtk.PositionType.BOTTOM)
+        popover.connect('closed', self.popover_closed)
         self.labels['popover'] = popover
 
         for d in self._printer.get_temp_store_devices():
@@ -473,7 +487,10 @@ class TemperaturePanel(ScreenPanel):
             self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
         self.grid.show_all()
 
-    def on_popover_clicked(self, widget, device):
+    def popover_closed(self, widget):
+        self.popover_device = None
+
+    def popover_popup(self, widget, device):
         self.popover_device = device
         po = self.labels['popover']
         po.set_relative_to(widget)
