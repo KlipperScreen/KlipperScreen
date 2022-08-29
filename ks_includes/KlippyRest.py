@@ -9,6 +9,13 @@ class KlippyRest:
         self.port = port
         self.api_key = api_key
 
+    @property
+    def endpoint(self):
+        protocol = "http"
+        if int(self.port) == 443:
+            protocol = "https"
+        return f"{protocol}://{self.ip}:{self.port}"
+
     def get_server_info(self):
         return self.send_request("server/info")
 
@@ -22,7 +29,8 @@ class KlippyRest:
         return self.send_request("printer/info")
 
     def get_thumbnail_stream(self, thumbnail):
-        url = f"http://{self.ip}:{self.port}/server/files/gcodes/{thumbnail}"
+        url = f"{self.endpoint}/server/files/gcodes/{thumbnail}"
+
         response = requests.get(url, stream=True)
         if response.status_code == 200:
             response.raw.decode_content = True
@@ -30,7 +38,7 @@ class KlippyRest:
         return False
 
     def send_request(self, method):
-        url = f"http://{self.ip}:{self.port}/{method}"
+        url = f"{self.endpoint}/{method}"
         logging.debug(f"Sending request to {url}")
         headers = {} if self.api_key is False else {"x-api-key": self.api_key}
         try:
