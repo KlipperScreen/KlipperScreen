@@ -732,7 +732,7 @@ class JobStatusPanel(ScreenPanel):
     def state_check(self):
         ps = self._printer.get_stat("print_stats")
 
-        if ps['state'] == self.state:
+        if 'state' not in ps or ps['state'] == self.state:
             return True
 
         if ps['state'] == "printing":
