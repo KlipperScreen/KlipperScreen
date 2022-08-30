@@ -254,7 +254,7 @@ class TemperaturePanel(ScreenPanel):
                         elif i == heater:
                             target = self.preheat_options[setting][heater]
                             logging.info(f"heater match {heater}")
-                if target is None and setting == "cooldown":
+                if target is None and setting == "cooldown" and not heater.startswith('temperature_fan '):
                     target = 0
                 if heater.startswith('extruder'):
                     if self.validate(heater, target, max_temp):
