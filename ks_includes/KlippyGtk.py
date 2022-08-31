@@ -172,20 +172,26 @@ class KlippyGtk:
         b.set_can_focus(False)
         if image_name is not None:
             b.set_image(self.Image(image_name, scale))
-            b.set_image_position(position)
-            b.set_always_show_image(True)
+        b.set_image_position(position)
+        b.set_always_show_image(True)
 
         if label is not None:
             try:
                 # Get the label object
-                child = b.get_children()[0].get_children()[0].get_children()[1]
+                if image_name is not None:
+                    if position == Gtk.PositionType.RIGHT:
+                        child = b.get_children()[0].get_children()[0].get_children()[0]
+                    else:
+                        child = b.get_children()[0].get_children()[0].get_children()[1]
+                else:
+                    child = b.get_children()[0]
                 child.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
                 child.set_line_wrap(True)
                 child.set_ellipsize(True)
                 child.set_ellipsize(Pango.EllipsizeMode.END)
                 child.set_lines(lines)
             except Exception as e:
-                logging.debug(f"Unable to wrap and ellipsize label: {image_name} {label} {e}")
+                logging.debug(f"Unable to wrap and ellipsize label: {label} image: {image_name} exception:{e}")
 
         if style is not None:
             b.get_style_context().add_class(style)
