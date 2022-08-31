@@ -565,7 +565,7 @@ class JobStatusPanel(ScreenPanel):
                 self.labels['temp_grid'].attach(self.extruder_button[self.current_extruder], 0, 0, 1, 1)
                 self._screen.show_all()
         with contextlib.suppress(KeyError):
-            self.labels['max_accel'].set_text(f"{data['toolhead']['max_accel']} mm/s²")
+            self.labels['max_accel'].set_text(f"{data['toolhead']['max_accel']:.0f} mm/s²")
         with contextlib.suppress(KeyError):
             self.labels['advance'].set_text(f"{data['extruder']['pressure_advance']:.2f}")
 
