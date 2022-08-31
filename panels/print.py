@@ -38,10 +38,10 @@ class PrintPanel(ScreenPanel):
         self.labels['files'] = {}
 
     def initialize(self, panel_name):
-        sort = Gtk.Label(_("Sort by: "))
+        sort = Gtk.Label(_("Sort:"))
         sbox = Gtk.Box(spacing=0)
         sbox.set_vexpand(False)
-        sbox.add(sort)
+        sbox.pack_start(sort, False, False, 5)
         for i, (name, val) in enumerate(self.sort_items.items(), start=1):
             s = self._gtk.ButtonImage(None, val, f"color{i % 4}", .5, Gtk.PositionType.RIGHT, 1)
             if name == self.sort_current[0]:
