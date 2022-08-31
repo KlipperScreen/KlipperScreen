@@ -24,12 +24,7 @@ class KlippyFiles:
         logging.info(f"Gcodes path: {self.gcodes_path}")
 
     def reset(self):
-        self.run_callbacks()
-        self.callbacks = None
-        self.files = None
-        self.filelist = None
-        self.gcodes_path = None
-        self._screen = None
+        self.__init__(self._screen)
 
     def _callback(self, result, method, params):
         if method == "server.files.list":
