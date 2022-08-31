@@ -244,7 +244,7 @@ class ZCalibratePanel(ScreenPanel):
     def update_position(self, position):
         self.widgets['zposition'].set_text(f"Z: {position[2]:.2f}")
         if self.z_offset is not None:
-            self.widgets['zoffset'].set_text(f"{position[2] - self.z_offset:.2f}")
+            self.widgets['zoffset'].set_text(f"{-position[2] + self.z_offset:.2f}")
 
     def change_distance(self, widget, distance):
         if self.distance == distance:
