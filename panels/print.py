@@ -43,9 +43,9 @@ class PrintPanel(ScreenPanel):
         sbox.set_vexpand(False)
         sbox.add(sort)
         for i, (name, val) in enumerate(self.sort_items.items(), start=1):
-            s = self._gtk.ButtonImage(None, val, f"color{i % 4}", .66, Gtk.PositionType.RIGHT, 1)
+            s = self._gtk.ButtonImage(None, val, f"color{i % 4}", .5, Gtk.PositionType.RIGHT, 1)
             if name == self.sort_current[0]:
-                s.set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], .66))
+                s.set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], .5))
             s.connect("clicked", self.change_sort, name)
             self.labels[f'sort_{name}'] = s
             sbox.add(s)
@@ -284,7 +284,7 @@ class PrintPanel(ScreenPanel):
             self.labels[f'sort_{oldkey}'].set_image(None)
             self.labels[f'sort_{oldkey}'].show_all()
             self.sort_current = [key, 0]
-        self.labels[f'sort_{key}'].set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], .66))
+        self.labels[f'sort_{key}'].set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], .5))
         self.labels[f'sort_{key}'].show()
         GLib.idle_add(self.reload_files)
 
