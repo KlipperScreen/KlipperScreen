@@ -45,7 +45,7 @@ sudo service KlipperScreen restart
 
 If it's still failing as a last resort add `needs_root_rights=yes` to `/etc/X11/Xwrapper.config`:
 ```sh
-sudo echo needs_root_rights=yes>>/etc/X11/Xwrapper.config
+sudo bash -c "echo needs_root_rights=yes>>/etc/X11/Xwrapper.config"
 ```
 
 restart KS.
