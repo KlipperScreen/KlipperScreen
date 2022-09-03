@@ -32,9 +32,6 @@ default_printer: Ender 3 Pro
 # To define a full set of custom menues (instead of merging user entries with default entries)
 # set this to False. See Menu section below.
 use_default_menu: True
-
-# Show current % power of each heater next to its temperature
-show_heater_power: True
 ```
 
 ## Printer Options

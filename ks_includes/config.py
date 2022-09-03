@@ -229,7 +229,8 @@ class KlipperScreenConfig:
                 "range": [50, 150], "step": 1}},
             {"autoclose_popups": {"section": "main", "name": _("Auto-close notifications"), "type": "binary",
                                   "value": "True"}},
-
+            {"show_heater_power": {"section": "main", "name": _("Show Heater Power"), "type": "binary",
+                                   "value": "False"}},
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
 
