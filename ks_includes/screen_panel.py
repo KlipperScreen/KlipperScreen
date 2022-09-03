@@ -192,7 +192,7 @@ class ScreenPanel:
             new_label_text += f"/{int(target):3}"
         new_label_text += "°"
         if show_power:
-            new_label_text += f", {int(power*100):3}%"
+            new_label_text += f" {int(power*100):3}%"
 
         if dev in self.labels:
             self.labels[dev].set_label(new_label_text)
