@@ -163,7 +163,7 @@ class KlipperScreenConfig:
                     msg = f'Option "{key}" not recognized for section "[{section}]"'
                     self.errors.append(msg)
                     # This most probably is not a big issue, continue to load the config
-                elif key in numbers and not self.config[section][key].isnumeric() \
+                elif key in numbers and not self.is_float(self.config[section][key]) \
                         or key in bools and self.config[section][key] not in ["False", "false", "True", "true"]:
                     msg = (
                         f'Unable to parse "{key}" from [{section}]\n'
@@ -172,6 +172,14 @@ class KlipperScreenConfig:
                     self.errors.append(msg)
                     valid = False
         return valid
+
+    @staticmethod
+    def is_float(element):
+        try:
+            float(element)
+            return True
+        except ValueError:
+            return False
 
     def get_errors(self):
         return "".join(f'{error}\n\n' for error in self.errors)
@@ -392,7 +400,7 @@ class KlipperScreenConfig:
         if name not in self.config:
             return False
         cfg = self.config[name]
-        return {opt: cfg.get("gcode", None) if opt == "gcode" else cfg.getint(opt, None) for opt in cfg}
+        return {opt: cfg.get("gcode", None) if opt == "gcode" else cfg.getfloat(opt, None) for opt in cfg}
 
     def get_printer_config(self, name):
         if not name.startswith("printer "):
