@@ -210,7 +210,7 @@ msgid "Estimated Time Method"
 msgstr "Método para estimar tiempo"
 
 msgid "Exclude Object"
-msgstr ""
+msgstr "Excluir Objeto"
 
 msgid "Extrude"
 msgstr "Extruir"
@@ -309,7 +309,7 @@ msgid "Homing"
 msgstr "Origen"
 
 msgid "Host"
-msgstr ""
+msgstr "Anfitrión"
 
 msgid "Hostname"
 msgstr "Hostname"
@@ -384,7 +384,7 @@ msgid "Lower Nozzle"
 msgstr "Bajar Boquilla"
 
 msgid "Machine"
-msgstr ""
+msgstr "Máquina"
 
 msgid "Macro shortcut on sidebar"
 msgstr "Atajo a Macros en el lateral"
