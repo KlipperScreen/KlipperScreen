@@ -186,7 +186,7 @@ class JobStatusPanel(ScreenPanel):
                 self.heater_button[device].set_halign(Gtk.Align.START)
                 self.labels['temp_grid'].attach(self.heater_button[device], n, 0, 1, 1)
                 n += 1
-        extra_item = True
+        extra_item = not self._config.get_main_config().getboolean('show_heater_power', False)
         printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
         if printer_cfg is not None:
             titlebar_items = printer_cfg.get("titlebar_items", "")

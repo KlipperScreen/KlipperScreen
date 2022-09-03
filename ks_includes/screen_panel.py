@@ -31,7 +31,7 @@ class ScreenPanel:
         self.content.set_hexpand(True)
         self.content.set_vexpand(True)
 
-        self._show_heater_power = self._config.get_main_config().getboolean('show_heater_power', True)
+        self._show_heater_power = self._config.get_main_config().getboolean('show_heater_power', False)
 
     def initialize(self, panel_name):
         # Create gtk items here
