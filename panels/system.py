@@ -253,7 +253,7 @@ class SystemPanel(ScreenPanel):
         ]
 
         scroll = self._gtk.ScrolledWindow()
-        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.set_property("overlay-scrolling", True)
 
         self.labels['update_progress'] = Gtk.Label(_("Starting recovery for") + f' {program}...')
         self.labels['update_progress'].set_halign(Gtk.Align.START)
@@ -296,7 +296,7 @@ class SystemPanel(ScreenPanel):
         ]
 
         scroll = self._gtk.ScrolledWindow()
-        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.set_property("overlay-scrolling", True)
 
         if "full" in info:
             self.labels['update_progress'] = Gtk.Label(_("Updating") + '\n')
