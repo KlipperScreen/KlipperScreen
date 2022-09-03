@@ -258,10 +258,3 @@ class ExtrudePanel(ScreenPanel):
             self._screen._ws.klippy.gcode_script(f"SET_FILAMENT_SENSOR SENSOR={name} ENABLE=0")
             self.labels[x]['box'].get_style_context().remove_class("filament_sensor_empty")
             self.labels[x]['box'].get_style_context().remove_class("filament_sensor_detected")
-
-    def update_temp(self, dev, temp, target, power):
-        if dev in self.labels and temp is not None:
-            if target > 0:
-                self.labels[dev].set_label(f"{temp:.1f}°C\n({target:.0f})")
-            else:
-                self.labels[dev].set_label(f"{temp:.1f}°C")

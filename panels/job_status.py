@@ -917,13 +917,3 @@ class JobStatusPanel(ScreenPanel):
         if msg is None:
             msg = " "
         self.labels['lcdmessage'].set_text(f"{msg}")
-
-    def update_temp(self, x, temp, target, power):
-        if x not in self.labels or temp is None:
-            return
-        new_text = f"{int(temp):3}"
-        if target is not None:
-            new_text += f"/{int(target):3}°"
-        if power is not None:
-            new_text += f", {int(power*100):3}%"
-        self.labels[x].set_label(new_text)

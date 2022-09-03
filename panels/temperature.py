@@ -554,11 +554,3 @@ class TemperaturePanel(ScreenPanel):
     def update_graph(self):
         self.labels['da'].queue_draw()
         return True
-
-    def update_temp(self, device, temp, target, power):
-        if device not in self.devices:
-            return
-        if self.devices[device]["can_target"] and target > 0:
-            self.devices[device]["temp"].get_child().set_label(f"{temp:.1f} / {target:.0f}")
-        else:
-            self.devices[device]["temp"].get_child().set_label(f"{temp:.1f}")

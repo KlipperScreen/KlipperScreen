@@ -13,7 +13,7 @@ Write in the file only the options that need to be changed, and restart KlipperS
 
 
 ## Main Options
-The options listd here are not changeable from within the ui.
+The options listed here are not changeable from within the ui.
 ```py
 [main]
 # Time in seconds before the Job Status page closes itself after a successful job/print
@@ -33,7 +33,8 @@ default_printer: Ender 3 Pro
 # set this to False. See Menu section below.
 use_default_menu: True
 
-
+# Show current % power of each heater next to its temperature
+show_heater_power: True
 ```
 
 ## Printer Options
