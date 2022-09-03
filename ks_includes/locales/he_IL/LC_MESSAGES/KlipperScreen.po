@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 12:01-0300\n"
+"POT-Creation-Date: 2022-08-18 23:05-0300\n"
 "PO-Revision-Date: 2022-03-31 10:54-0300\n"
 "Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
 "Language-Team: \n"
@@ -212,6 +212,9 @@ msgstr "שְׁגִיאָה"
 msgid "Estimated Time Method"
 msgstr "שיטת זמן משוערת"
 
+msgid "Exclude Object"
+msgstr ""
+
 msgid "Extrude"
 msgstr "אקסטרוזיה"
 
@@ -312,6 +315,9 @@ msgstr "איפוס Z"
 msgid "Homing"
 msgstr "איפוס צירים"
 
+msgid "Host"
+msgstr ""
+
 msgid "Hostname"
 msgstr "Hostname"
 
@@ -385,6 +391,9 @@ msgstr "לִטעוֹן"
 
 msgid "Lower Nozzle"
 msgstr "הנמך דיזה"
+
+msgid "Machine"
+msgstr ""
 
 msgid "Macro shortcut on sidebar"
 msgstr "קיצור מקרו בסרגל הצד"

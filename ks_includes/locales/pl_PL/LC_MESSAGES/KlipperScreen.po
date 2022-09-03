@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 12:01-0300\n"
+"POT-Creation-Date: 2022-08-18 23:05-0300\n"
 "PO-Revision-Date: 2022-03-31 11:06-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -210,6 +210,9 @@ msgstr "Błąd"
 msgid "Estimated Time Method"
 msgstr "Sposób Oszacowania Czasu"
 
+msgid "Exclude Object"
+msgstr ""
+
 msgid "Extrude"
 msgstr "Extruduj"
 
@@ -306,6 +309,9 @@ msgstr "Baza Z"
 msgid "Homing"
 msgstr "Bazowanie"
 
+msgid "Host"
+msgstr ""
+
 msgid "Hostname"
 msgstr "Nazwa hosta"
 
@@ -377,6 +383,9 @@ msgstr "Ładuj"
 
 msgid "Lower Nozzle"
 msgstr "Obniż  dyszę"
+
+msgid "Machine"
+msgstr ""
 
 msgid "Macro shortcut on sidebar"
 msgstr "Skrót do makr na pasku bocznym"

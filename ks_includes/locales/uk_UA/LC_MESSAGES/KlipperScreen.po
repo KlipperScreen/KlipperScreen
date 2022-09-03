@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  2022-06-02 14:53-0300\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 12:01-0300\n"
+"POT-Creation-Date: 2022-08-18 23:05-0300\n"
 "PO-Revision-Date: 2022-06-03 10:02+0300\n"
 "Last-Translator: \n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.0.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -211,6 +211,9 @@ msgstr "Помилка"
 msgid "Estimated Time Method"
 msgstr "Метод розрахунку часу"
 
+msgid "Exclude Object"
+msgstr ""
+
 msgid "Extrude"
 msgstr "Видавити"
 
@@ -307,6 +310,9 @@ msgstr "Дім Z"
 msgid "Homing"
 msgstr "До дому"
 
+msgid "Host"
+msgstr ""
+
 msgid "Hostname"
 msgstr "Назва хоста"
 
@@ -378,6 +384,9 @@ msgstr "Завантажити"
 
 msgid "Lower Nozzle"
 msgstr "Низ сопла"
+
+msgid "Machine"
+msgstr ""
 
 msgid "Macro shortcut on sidebar"
 msgstr "Ярлик макросу на бічній панелі"

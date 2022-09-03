@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 12:01-0300\n"
+"POT-Creation-Date: 2022-08-18 23:05-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
@@ -204,6 +204,9 @@ msgstr "Fejl"
 msgid "Estimated Time Method"
 msgstr "Metode til beregning af tid"
 
+msgid "Exclude Object"
+msgstr ""
+
 msgid "Extrude"
 msgstr "Ekstrudér"
 
@@ -300,6 +303,9 @@ msgstr "Home Z"
 msgid "Homing"
 msgstr "Homing"
 
+msgid "Host"
+msgstr ""
+
 msgid "Hostname"
 msgstr "Værtsnavn"
 
@@ -371,6 +377,9 @@ msgstr "Indlæs"
 
 msgid "Lower Nozzle"
 msgstr "Sænk Nozzle"
+
+msgid "Machine"
+msgstr ""
 
 msgid "Macro shortcut on sidebar"
 msgstr "Makrogenvej på sidelinjen"

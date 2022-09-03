@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 12:01-0300\n"
+"POT-Creation-Date: 2022-08-18 23:05-0300\n"
 "PO-Revision-Date: 2022-03-31 11:25-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -209,6 +209,9 @@ msgstr "錯誤"
 msgid "Estimated Time Method"
 msgstr "預估時間方法"
 
+msgid "Exclude Object"
+msgstr ""
+
 msgid "Extrude"
 msgstr "擠出機"
 
@@ -305,6 +308,9 @@ msgstr "歸零 Z"
 msgid "Homing"
 msgstr "歸零"
 
+msgid "Host"
+msgstr ""
+
 msgid "Hostname"
 msgstr "主機名稱"
 
@@ -376,6 +382,9 @@ msgstr "載入"
 
 msgid "Lower Nozzle"
 msgstr "降低噴嘴"
+
+msgid "Machine"
+msgstr ""
 
 msgid "Macro shortcut on sidebar"
 msgstr "在側邊欄上顯示巨集快捷鍵"

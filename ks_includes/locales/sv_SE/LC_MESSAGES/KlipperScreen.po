@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 12:01-0300\n"
+"POT-Creation-Date: 2022-08-18 23:05-0300\n"
 "PO-Revision-Date: 2022-04-15 17:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -209,6 +209,9 @@ msgstr "Fel"
 msgid "Estimated Time Method"
 msgstr ""
 
+msgid "Exclude Object"
+msgstr ""
+
 msgid "Extrude"
 msgstr "Extrudera"
 
@@ -305,6 +308,9 @@ msgstr "Hem Z"
 msgid "Homing"
 msgstr ""
 
+msgid "Host"
+msgstr ""
+
 msgid "Hostname"
 msgstr "Värdnamn"
 
@@ -376,6 +382,9 @@ msgstr "Ladda"
 
 msgid "Lower Nozzle"
 msgstr "Sänk munstycket"
+
+msgid "Machine"
+msgstr ""
 
 msgid "Macro shortcut on sidebar"
 msgstr "Makro genväg på sidofältet"

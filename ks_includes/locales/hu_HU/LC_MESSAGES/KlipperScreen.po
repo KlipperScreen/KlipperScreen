@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-15 19:47-0300\n"
+"POT-Creation-Date: 2022-08-18 23:05-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -204,6 +204,9 @@ msgstr "Hiba"
 msgid "Estimated Time Method"
 msgstr "Becsült idő módszer"
 
+msgid "Exclude Object"
+msgstr ""
+
 msgid "Extrude"
 msgstr "Száladagolás"
 
@@ -300,6 +303,9 @@ msgstr "Z kezdőpont"
 msgid "Homing"
 msgstr "Kezdőpont"
 
+msgid "Host"
+msgstr ""
+
 msgid "Hostname"
 msgstr "Gazdanév"
 
@@ -371,6 +377,9 @@ msgstr "Betöltés"
 
 msgid "Lower Nozzle"
 msgstr "Fúvóka le"
+
+msgid "Machine"
+msgstr ""
 
 msgid "Macro shortcut on sidebar"
 msgstr "Makró parancsikon az oldalsávon"

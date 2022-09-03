@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 12:01-0300\n"
+"POT-Creation-Date: 2022-08-18 23:05-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: NSteven\n"
 "Language-Team: NSteven\n"
@@ -204,6 +204,9 @@ msgstr "오류"
 msgid "Estimated Time Method"
 msgstr "예상시간 옵션"
 
+msgid "Exclude Object"
+msgstr ""
+
 msgid "Extrude"
 msgstr "압출 "
 
@@ -300,6 +303,9 @@ msgstr "Z축 홈"
 msgid "Homing"
 msgstr "툴 헤드 위치 초기화"
 
+msgid "Host"
+msgstr ""
+
 msgid "Hostname"
 msgstr "호스트 이름"
 
@@ -371,6 +377,9 @@ msgstr "필라 넣기"
 
 msgid "Lower Nozzle"
 msgstr "노즐 낮춤"
+
+msgid "Machine"
+msgstr ""
 
 msgid "Macro shortcut on sidebar"
 msgstr "사이드바에 매크로 아이콘 표시"
