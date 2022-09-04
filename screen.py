@@ -830,6 +830,17 @@ class KlipperScreen(Gtk.Window):
     def toggle_macro_shortcut(self, value):
         self.base_panel.show_macro_shortcut(value)
 
+    def reload_panels(self, *args):
+        self._remove_all_panels()
+        for panel in list(self.panels):
+            if panel not in ["printer_select", "splash_screen"]:
+                del self.panels[panel]
+        for dialog in self.dialogs:
+            dialog.destroy()
+        state = self.printer.state
+        self.printer.state = None
+        self.printer.change_state(state)
+
     def _websocket_callback(self, action, data):
 
         if self.connecting is True:
