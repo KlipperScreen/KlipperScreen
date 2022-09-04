@@ -136,7 +136,7 @@ class KlipperScreenConfig:
                     'screw_positions', 'power_devices', 'titlebar_items'
                 )
                 numbers = (
-                    'moonraker_port', 'move_speed_xy', 'move_speed_z', 'z_babystep_values'
+                    'moonraker_port', 'move_speed_xy', 'move_speed_z', 'z_babystep_values',
                     'calibrate_x_position', 'calibrate_y_position',
                 )
             elif section.startswith('preheat '):
