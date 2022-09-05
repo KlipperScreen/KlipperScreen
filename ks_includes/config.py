@@ -153,6 +153,9 @@ class KlipperScreenConfig:
             elif section.startswith('z_calibrate_position'):
                 # This section may be deprecated in favor of moving this options under the printer section
                 numbers = ('calibrate_x_position', 'calibrate_y_position')
+            elif section.startswith('include'):
+                # We don't need to validate 'include' sections here.
+                continue
             elif section == 'DEFAULT':
                 continue
             else:
