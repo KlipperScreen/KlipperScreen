@@ -199,7 +199,9 @@ class Printer:
         logging.debug(f"Power devices: {self.power_devices}")
 
     def get_config_section_list(self, search=""):
-        return [i for i in list(self.config) if i.startswith(search)] if hasattr(self, "config") else []
+        if self.config is not None:
+            return [i for i in list(self.config) if i.startswith(search)] if hasattr(self, "config") else []
+        return []
 
     def get_config_section(self, section):
         return self.config[section] if section in self.config else False
