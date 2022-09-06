@@ -137,10 +137,10 @@ class KlipperScreenConfig:
                 )
                 strs = (
                     'moonraker_api_key', 'moonraker_host', 'language', 'titlebar_name_type',
-                    'screw_positions', 'power_devices', 'titlebar_items'
+                    'screw_positions', 'power_devices', 'titlebar_items', 'z_babystep_values',
                 )
                 numbers = (
-                    'moonraker_port', 'move_speed_xy', 'move_speed_z', 'z_babystep_values',
+                    'moonraker_port', 'move_speed_xy', 'move_speed_z',
                     'calibrate_x_position', 'calibrate_y_position',
                 )
             elif section.startswith('preheat '):
