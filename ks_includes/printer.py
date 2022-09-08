@@ -198,6 +198,16 @@ class Printer:
             }
         logging.debug(f"Power devices: {self.power_devices}")
 
+    def get_bed_max(self, axis):
+        # Delta
+        if 'delta_radius' in self.config["printer"]:
+            return float(self.config["printer"]['delta_radius'])
+        # Deltesian
+        if axis == 'x' and 'print_width' in self.config["printer"]:
+            return float(self.config["printer"]['print_width'])
+        # Other
+        return float(self.config[f"stepper_{axis}"]['position_max'])
+
     def get_config_section_list(self, search=""):
         if self.config is not None:
             return [i for i in list(self.config) if i.startswith(search)] if hasattr(self, "config") else []
