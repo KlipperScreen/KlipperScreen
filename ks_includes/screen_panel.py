@@ -177,7 +177,7 @@ class ScreenPanel:
             if size < unit:
                 return f"{(1024 * size / unit):.1f} {suffix}"
 
-    def update_temp(self, dev, temp, target, power):
+    def update_temp(self, dev, temp, target, power, lines=1):
         if temp is None:
             return
 
@@ -192,6 +192,10 @@ class ScreenPanel:
             new_label_text += f"/{int(target):3}"
         new_label_text += "°"
         if show_power:
+            if lines == 2:
+                # The label should wrap, but it doesn't work
+                # this is a workaround
+                new_label_text += "\n  "
             new_label_text += f" {int(power*100):3}%"
 
         if dev in self.labels:

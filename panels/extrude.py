@@ -170,6 +170,7 @@ class ExtrudePanel(ScreenPanel):
                 self._printer.get_dev_stat(x, "temperature"),
                 self._printer.get_dev_stat(x, "target"),
                 self._printer.get_dev_stat(x, "power"),
+                lines=2,
             )
 
         if ("toolhead" in data and "extruder" in data["toolhead"] and
