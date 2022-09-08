@@ -485,12 +485,10 @@ popover button {
     background-color: #222;
 }
 
-.screensaver button {
+.screensaver, .screensaver button, .screensaver button:hover, .screensaver button:focus, .screensaver button:active {
     background-color: black;
-}
-
-.screensaver button:active {
-    background-color: rgba(0, 0, 0, 0.5);
+    border: 0;
+    margin: 0;
 }
 
 .option_slider_max trough highlight, trough progress {
