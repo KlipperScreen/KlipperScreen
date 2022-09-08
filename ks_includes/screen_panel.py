@@ -189,8 +189,9 @@ class ScreenPanel:
 
         new_label_text = f"{int(temp):3}"
         if show_target:
-            new_label_text += f"/{int(target):3}"
-        new_label_text += "°"
+            new_label_text += f"/{int(target)}"
+        if dev not in self.devices:
+            new_label_text += "°"
         if show_power:
             if lines == 2:
                 # The label should wrap, but it doesn't work
