@@ -287,11 +287,13 @@ class Printer:
     def get_state(self):
         return self.state
 
-    def set_dev_temps(self, dev, temp, target=None):
+    def set_dev_temps(self, dev, temp, target=None, power=None):
         if dev in self.devices:
             self.devices[dev]['temperature'] = temp
             if target is not None:
                 self.devices[dev]['target'] = target
+            if power is not None:
+                self.devices[dev]['power'] = power
 
     def get_dev_stats(self, dev):
         return self.devices[dev] if dev in self.devices else None

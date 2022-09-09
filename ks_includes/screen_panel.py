@@ -31,6 +31,8 @@ class ScreenPanel:
         self.content.set_hexpand(True)
         self.content.set_vexpand(True)
 
+        self._show_heater_power = self._config.get_main_config().getboolean('show_heater_power', False)
+
     def initialize(self, panel_name):
         # Create gtk items here
         return
@@ -174,3 +176,30 @@ class ScreenPanel:
             unit = 1024 ** i
             if size < unit:
                 return f"{(1024 * size / unit):.1f} {suffix}"
+
+    def update_temp(self, dev, temp, target, power, lines=1):
+        if temp is None:
+            return
+
+        show_target = bool(target)
+        if dev in self.devices and not self.devices[dev]["can_target"]:
+            show_target = False
+
+        show_power = show_target and self._show_heater_power and power is not None
+
+        new_label_text = f"{int(temp):3}"
+        if show_target:
+            new_label_text += f"/{int(target)}"
+        if dev not in self.devices:
+            new_label_text += "°"
+        if show_power:
+            if lines == 2:
+                # The label should wrap, but it doesn't work
+                # this is a workaround
+                new_label_text += "\n  "
+            new_label_text += f" {int(power*100):3}%"
+
+        if dev in self.labels:
+            self.labels[dev].set_label(new_label_text)
+        elif dev in self.devices:
+            self.devices[dev]["temp"].get_child().set_label(new_label_text)
