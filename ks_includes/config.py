@@ -112,12 +112,11 @@ class KlipperScreenConfig:
 
     def validate_config(self):
         valid = True
-        bools = strs = numbers = ()
         for section in self.config:
             if section == 'DEFAULT' or section.startswith('include '):
                 # Do not validate 'DEFAULT' or 'include*' sections
                 continue
-
+            bools = strs = numbers = ()
             if section == 'main':
                 bools = (
                     'invert_x', 'invert_y', 'invert_z', '24htime', 'only_heaters', 'show_cursor', 'confirm_estop',
