@@ -157,6 +157,12 @@ update_x11()
     fi
 }
 
+add_desktop_file()
+{
+    DESKTOP=$(<$SCRIPTPATH/KlipperScreen.desktop)
+    echo "$DESKTOP" | tee $HOME/.local/share/applications/KlipperScreen.desktop > /dev/null
+}
+
 start_KlipperScreen()
 {
     echo_text "Starting service..."
@@ -173,4 +179,5 @@ modify_user
 install_systemd_service
 update_x11
 echo_ok "KlipperScreen was installed"
+add_desktop_file
 start_KlipperScreen
