@@ -112,7 +112,7 @@ class HeaterGraph(Gtk.DrawingArea):
         d_len = len(data) - 1
         for d in data:
             p_x = i * swidth + gsize[0][0] if i != d_len else gsize[1][0] - 1
-            p_y = gsize[1][1] - 1 - (d * hscale)
+            p_y = max(gsize[0][1], min(gsize[1][1], gsize[1][1] - 1 - (d * hscale)))
             if i == 0:
                 ctx.move_to(gsize[0][0] + 1, p_y)
                 i += 1
@@ -132,6 +132,7 @@ class HeaterGraph(Gtk.DrawingArea):
 
     def graph_lines(self, ctx, gsize, max_num):
         nscale = 10
+        max_num = min(max_num, 999)
         while (max_num / nscale) > 5:
             nscale += 10
         # nscale = math.floor((max_num / 10) / 4) * 10

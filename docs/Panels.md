@@ -21,6 +21,12 @@ panel: bed_mesh
 ```
 ![Bed Mesh](img/panels/bed_mesh.png)
 
+### Console
+```py
+panel: console
+```
+![Console](img/panels/console.png)
+
 ### Extrude
 ```py
 panel: extrude theme:material-dark
@@ -44,6 +50,18 @@ panel: fine_tune
 panel: gcode_macros
 ```
 ![Gcode Macros Panel](img/panels/gcode_macros.png)
+
+### Input Shapers
+```py
+panel: input_shaper
+```
+![Limits](img/panels/input_shaper.png)
+
+### Limits
+```py
+panel: limits
+```
+![Limits](img/panels/limits.png)
 
 ### Menu
 ![Menu Panel](img/panels/menu.png)
@@ -72,6 +90,12 @@ panel: print
 ```
 ![Print Panel](img/panels/print.png)
 
+### Retraction
+```py
+panel: retraction
+```
+![Limits](img/panels/retraction.png)
+
 ### Settings
 ```py
 panel: settings
@@ -95,21 +119,3 @@ panel: temperature
 panel: zcalibrate
 ```
 ![Z Calibrate](img/panels/zcalibrate.png)
-
-### Limits
-```py
-panel: limits
-```
-![Limits](img/panels/limits.png)
-
-### Retraction
-```py
-panel: retraction
-```
-![Limits](img/panels/retraction.png)
-
-### Input Shapers
-```py
-panel: input_shaper
-```
-![Limits](img/panels/input_shaper.png)
