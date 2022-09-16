@@ -12,7 +12,18 @@ def create_panel(*args):
     return SystemPanel(*args)
 
 
-ALLOWED_SERVICES = ["KlipperScreen", "MoonCord", "klipper", "moonraker", "webcamd"]
+# Same as ALLOWED_SERVICES in moonraker
+# https://github.com/Arksine/moonraker/blob/master/moonraker/components/machine.py
+ALLOWED_SERVICES = (
+    "crowsnest",
+    "MoonCord",
+    "moonraker",
+    "moonraker-telegram-bot",
+    "klipper",
+    "KlipperScreen",
+    "sonar",
+    "webcamd",
+)
 
 
 class SystemPanel(ScreenPanel):
@@ -190,9 +201,9 @@ class SystemPanel(ScreenPanel):
 
         if "package_count" in info:
             label.set_markup((
-                f'<b>{info["package_count"]} '
-                + ngettext("Package will be updated", "Packages will be updated", info["package_count"])
-                + f':</b>\n'
+                    f'<b>{info["package_count"]} '
+                    + ngettext("Package will be updated", "Packages will be updated", info["package_count"])
+                    + f':</b>\n'
             ))
             label.set_halign(Gtk.Align.CENTER)
             vbox.add(label)
