@@ -16,21 +16,17 @@ class PowerPanel(ScreenPanel):
 
         self.devices = {}
 
-        # Create a scroll window for the power devices
-        scroll = self._gtk.ScrolledWindow()
-
         # Create a grid for all devices
         self.labels['devices'] = Gtk.Grid()
-        scroll.add(self.labels['devices'])
-
-        # Create a box to contain all of the above
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        box.set_vexpand(True)
-        box.pack_start(scroll, True, True, 0)
+        self.labels['devices'].set_valign(Gtk.Align.CENTER)
 
         self.load_power_devices()
 
-        self.content.add(box)
+        # Create a scroll window for the power devices
+        scroll = self._gtk.ScrolledWindow()
+        scroll.add(self.labels['devices'])
+
+        self.content.add(scroll)
 
     def activate(self):
         devices = self._screen.printer.get_power_devices()
@@ -87,6 +83,10 @@ class PowerPanel(ScreenPanel):
         devices = self._screen.printer.get_power_devices()
         for x in devices:
             self.add_device(x)
+        # Add the line at the top
+        frame = Gtk.Frame()
+        frame.set_vexpand(False)
+        self.labels['devices'].attach(frame, 0, -1, 1, 1)
 
     def on_switch(self, switch, gparam, device):
         logging.debug(f"Power toggled {device}")

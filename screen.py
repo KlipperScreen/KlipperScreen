@@ -271,9 +271,10 @@ class KlipperScreen(Gtk.Window):
             }
         }
         for extruder in self.printer.get_tools():
-            requested_updates['objects'][extruder] = ["target", "temperature", "pressure_advance", "smooth_time"]
+            requested_updates['objects'][extruder] = [
+                "target", "temperature", "pressure_advance", "smooth_time", "power"]
         for h in self.printer.get_heaters():
-            requested_updates['objects'][h] = ["target", "temperature"]
+            requested_updates['objects'][h] = ["target", "temperature", "power"]
         for f in self.printer.get_fans():
             requested_updates['objects'][f] = ["speed"]
         for f in self.printer.get_filament_sensors():
@@ -828,6 +829,17 @@ class KlipperScreen(Gtk.Window):
 
     def toggle_macro_shortcut(self, value):
         self.base_panel.show_macro_shortcut(value)
+
+    def reload_panels(self, *args):
+        self._remove_all_panels()
+        for panel in list(self.panels):
+            if panel not in ["printer_select", "splash_screen"]:
+                del self.panels[panel]
+        for dialog in self.dialogs:
+            dialog.destroy()
+        state = self.printer.state
+        self.printer.state = None
+        self.printer.change_state(state)
 
     def _websocket_callback(self, action, data):
 

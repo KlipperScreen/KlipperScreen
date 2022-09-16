@@ -112,12 +112,16 @@ class KlipperScreenConfig:
 
     def validate_config(self):
         valid = True
-        bools = strs = numbers = ()
         for section in self.config:
+            if section == 'DEFAULT' or section.startswith('include '):
+                # Do not validate 'DEFAULT' or 'include*' sections
+                continue
+            bools = strs = numbers = ()
             if section == 'main':
                 bools = (
                     'invert_x', 'invert_y', 'invert_z', '24htime', 'only_heaters', 'show_cursor', 'confirm_estop',
-                    'autoclose_popups', 'use_dpms', 'use_default_menu', 'side_macro_shortcut', 'use-matchbox-keyboard'
+                    'autoclose_popups', 'use_dpms', 'use_default_menu', 'side_macro_shortcut', 'use-matchbox-keyboard',
+                    'show_heater_power'
                 )
                 strs = (
                     'default_printer', 'language', 'print_sort_dir', 'theme', 'screen_blanking', 'font_size',
@@ -133,10 +137,10 @@ class KlipperScreenConfig:
                 )
                 strs = (
                     'moonraker_api_key', 'moonraker_host', 'language', 'titlebar_name_type',
-                    'screw_positions', 'power_devices', 'titlebar_items'
+                    'screw_positions', 'power_devices', 'titlebar_items', 'z_babystep_values',
                 )
                 numbers = (
-                    'moonraker_port', 'move_speed_xy', 'move_speed_z', 'z_babystep_values',
+                    'moonraker_port', 'move_speed_xy', 'move_speed_z',
                     'calibrate_x_position', 'calibrate_y_position',
                 )
             elif section.startswith('preheat '):
@@ -153,8 +157,6 @@ class KlipperScreenConfig:
             elif section.startswith('z_calibrate_position'):
                 # This section may be deprecated in favor of moving this options under the printer section
                 numbers = ('calibrate_x_position', 'calibrate_y_position')
-            elif section == 'DEFAULT':
-                continue
             else:
                 self.errors.append(f'Section [{section}] not recognized')
 
@@ -220,7 +222,7 @@ class KlipperScreenConfig:
             {"confirm_estop": {"section": "main", "name": _("Confirm Emergency Stop"), "type": "binary",
                                "value": "False"}},
             {"only_heaters": {"section": "main", "name": _("Hide sensors in Temp."), "type": "binary",
-                              "value": "False", "callback": screen.restart_warning}},
+                              "value": "False", "callback": screen.reload_panels}},
             {"use_dpms": {"section": "main", "name": _("Screen DPMS"), "type": "binary",
                           "value": "True", "callback": screen.set_dpms}},
             {"print_estimate_compensation": {
@@ -228,7 +230,8 @@ class KlipperScreenConfig:
                 "range": [50, 150], "step": 1}},
             {"autoclose_popups": {"section": "main", "name": _("Auto-close notifications"), "type": "binary",
                                   "value": "True"}},
-
+            {"show_heater_power": {"section": "main", "name": _("Show Heater Power"), "type": "binary",
+                                   "value": "False", "callback": screen.reload_panels}},
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
 
