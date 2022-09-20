@@ -121,14 +121,23 @@ class KlippyGtk:
 
     def Image(self, image_name, scale=1.0):
         filename = os.path.join(self.themedir, f"{image_name}.svg")
+        filename2 = os.path.join(self.themedir, f"{image_name}.png")
+
         if os.path.exists(filename):
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename,
                                                              int(round(self.img_width * scale)),
                                                              int(round(self.img_height * scale)),
                                                              True)
             return Gtk.Image.new_from_pixbuf(pixbuf)
+        elif os.path.exists(filename2):
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename2,
+                                                             int(round(self.img_width * scale)),
+                                                             int(round(self.img_height * scale)),
+                                                             True)
+            return Gtk.Image.new_from_pixbuf(pixbuf)
         else:
             logging.error(f"Unable to find image {filename}")
+            logging.error(f"Unable to find image {filename2}")
             return Gtk.Image()
 
     def PixbufFromFile(self, filename, width_scale=1, height_scale=1):
