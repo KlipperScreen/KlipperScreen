@@ -92,7 +92,7 @@ class LimitsPanel(ScreenPanel):
         scale.connect("button-release-event", self.set_opt_value, option)
         self.values[option] = value
 
-        reset = self._gtk.ButtonImage("refresh", None, "color1")
+        reset = self._gtk.ButtonImage("refresh", style="color1")
         reset.connect("clicked", self.reset_value, option)
         reset.set_hexpand(False)
 

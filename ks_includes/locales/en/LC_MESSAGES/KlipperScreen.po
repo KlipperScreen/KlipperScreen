@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 12:01-0300\n"
+"POT-Creation-Date: 2022-08-18 23:05-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -204,6 +204,9 @@ msgstr ""
 msgid "Estimated Time Method"
 msgstr ""
 
+msgid "Exclude Object"
+msgstr ""
+
 msgid "Extrude"
 msgstr ""
 
@@ -246,9 +249,7 @@ msgstr ""
 msgid "Finish"
 msgstr ""
 
-msgid ""
-"Firmware\n"
-"Restart"
+msgid "Firmware Restart"
 msgstr ""
 
 msgid "Flow:"
@@ -260,9 +261,7 @@ msgstr ""
 msgid "Font Size"
 msgstr ""
 
-msgid ""
-"Full\n"
-"Update"
+msgid "Full Update"
 msgstr ""
 
 msgid "Go Back"
@@ -304,6 +303,9 @@ msgstr ""
 msgid "Homing"
 msgstr ""
 
+msgid "Host"
+msgstr ""
+
 msgid "Hostname"
 msgstr ""
 
@@ -337,9 +339,7 @@ msgstr ""
 msgid "Invert Z"
 msgstr ""
 
-msgid ""
-"Klipper\n"
-"Restart"
+msgid "Klipper Restart"
 msgstr ""
 
 msgid "Klipper has disconnected"
@@ -376,6 +376,9 @@ msgid "Load"
 msgstr ""
 
 msgid "Lower Nozzle"
+msgstr ""
+
+msgid "Machine"
 msgstr ""
 
 msgid "Macro shortcut on sidebar"
@@ -650,14 +653,10 @@ msgstr ""
 msgid "System"
 msgstr ""
 
-msgid ""
-"System\n"
-"Restart"
+msgid "System Restart"
 msgstr ""
 
-msgid ""
-"System\n"
-"Shutdown"
+msgid "System Shutdown"
 msgstr ""
 
 msgid "Temp (°C)"

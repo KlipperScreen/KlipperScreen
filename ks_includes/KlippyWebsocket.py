@@ -44,7 +44,18 @@ class KlippyWebsocket(threading.Thread):
         self.closing = False
         self.ws = None
 
-        self._url = f"{host}:{port}"
+        self.host = host
+        self.port = port
+
+    @property
+    def _url(self):
+        return f"{self.host}:{self.port}"
+
+    @property
+    def ws_proto(self):
+        if int(self.port) == 443:
+            return "wss"
+        return "ws"
 
     def initial_connect(self):
         # Enable a timeout so that way if moonraker is not running, it will attempt to reconnect
@@ -83,7 +94,7 @@ class KlippyWebsocket(threading.Thread):
             logging.debug("Unable to get oneshot token")
             return False
 
-        self.ws_url = f"ws://{self._url}/websocket?token={token}"
+        self.ws_url = f"{self.ws_proto}://{self._url}/websocket?token={token}"
         self.ws = websocket.WebSocketApp(
             self.ws_url, on_close=ws_on_close, on_error=ws_on_error, on_message=ws_on_message, on_open=ws_on_open)
 

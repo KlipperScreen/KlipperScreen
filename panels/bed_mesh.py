@@ -31,15 +31,13 @@ class BedMeshPanel(ScreenPanel):
 
     def initialize(self, panel_name):
 
-        addprofile = self._gtk.ButtonImage("increase", " " + _("Add profile"),
-                                           "color1", .66, Gtk.PositionType.LEFT, False)
+        addprofile = self._gtk.ButtonImage("increase", " " + _("Add profile"), "color1", .66, Gtk.PositionType.LEFT, 1)
         addprofile.connect("clicked", self.show_create_profile)
         addprofile.set_hexpand(True)
-        clear = self._gtk.ButtonImage("cancel", " " + _("Clear"), "color2", .66, Gtk.PositionType.LEFT, False)
+        clear = self._gtk.ButtonImage("cancel", " " + _("Clear"), "color2", .66, Gtk.PositionType.LEFT, 1)
         clear.connect("clicked", self._clear_mesh)
         clear.set_hexpand(True)
-        top_calibrate = self._gtk.ButtonImage("refresh", " " + _("Calibrate"),
-                                              "color3", .66, Gtk.PositionType.LEFT, False)
+        top_calibrate = self._gtk.ButtonImage("refresh", " " + _("Calibrate"), "color3", .66, Gtk.PositionType.LEFT, 1)
         top_calibrate.connect("clicked", self._send_calibrate)
         top_calibrate.set_hexpand(True)
 
@@ -144,7 +142,6 @@ class BedMeshPanel(ScreenPanel):
             button_box.add(buttons["load"])
             button_box.add(buttons["view"])
 
-
         box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
         box.pack_start(name, True, True, 0)
         box.pack_start(button_box, False, False, 0)
@@ -178,7 +175,6 @@ class BedMeshPanel(ScreenPanel):
             self.remove_create()
             return True
         return False
-
 
     def load_meshes(self):
         bm_profiles = self._screen.printer.get_config_section_list("bed_mesh ")

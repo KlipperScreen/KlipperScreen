@@ -30,13 +30,13 @@ class SplashScreenPanel(ScreenPanel):
 
         self.labels['menu'] = self._gtk.ButtonImage("settings", _("Menu"), "color4")
         self.labels['menu'].connect("clicked", self._screen._go_to_submenu, "")
-        self.labels['restart'] = self._gtk.ButtonImage("refresh", _("Klipper\nRestart"), "color1")
+        self.labels['restart'] = self._gtk.ButtonImage("refresh", _("Klipper Restart"), "color1")
         self.labels['restart'].connect("clicked", self.restart)
-        self.labels['firmware_restart'] = self._gtk.ButtonImage("refresh", _("Firmware\nRestart"), "color2")
+        self.labels['firmware_restart'] = self._gtk.ButtonImage("refresh", _("Firmware Restart"), "color2")
         self.labels['firmware_restart'].connect("clicked", self.firmware_restart)
-        self.labels['restart_system'] = self._gtk.ButtonImage("refresh", _("System\nRestart"), "color1")
+        self.labels['restart_system'] = self._gtk.ButtonImage("refresh", _("System Restart"), "color1")
         self.labels['restart_system'].connect("clicked", self.restart_system)
-        self.labels['shutdown'] = self._gtk.ButtonImage("shutdown", _('System\nShutdown'), "color2")
+        self.labels['shutdown'] = self._gtk.ButtonImage("shutdown", _('System Shutdown'), "color2")
         self.labels['shutdown'].connect("clicked", self.shutdown)
 
         self.labels['actions'] = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)

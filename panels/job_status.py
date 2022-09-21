@@ -186,7 +186,7 @@ class JobStatusPanel(ScreenPanel):
                 self.heater_button[device].set_halign(Gtk.Align.START)
                 self.labels['temp_grid'].attach(self.heater_button[device], n, 0, 1, 1)
                 n += 1
-        extra_item = True
+        extra_item = not self._show_heater_power
         printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
         if printer_cfg is not None:
             titlebar_items = printer_cfg.get("titlebar_items", "")
@@ -459,7 +459,8 @@ class JobStatusPanel(ScreenPanel):
             {"name": _("Cancel Print"), "response": Gtk.ResponseType.OK},
             {"name": _("Go Back"), "response": Gtk.ResponseType.CANCEL}
         ]
-
+        if len(self._printer.get_stat("exclude_object", "objects")) > 1:
+            buttons.insert(0, {"name": _("Exclude Object"), "response": Gtk.ResponseType.APPLY})
         label = Gtk.Label()
         label.set_markup(_("Are you sure you wish to cancel this print?"))
         label.set_hexpand(True)
@@ -474,6 +475,10 @@ class JobStatusPanel(ScreenPanel):
 
     def cancel_confirm(self, widget, response_id):
         widget.destroy()
+
+        if response_id == Gtk.ResponseType.APPLY:
+            self.menu_item_clicked(None, "exclude", {"panel": "exclude", "name": _("Exclude Object")})
+            return
 
         if response_id == Gtk.ResponseType.CANCEL:
             self.enable_button("pause", "cancel")
@@ -538,7 +543,8 @@ class JobStatusPanel(ScreenPanel):
                 self.update_temp(
                     x,
                     self._printer.get_dev_stat(x, "temperature"),
-                    self._printer.get_dev_stat(x, "target")
+                    self._printer.get_dev_stat(x, "target"),
+                    self._printer.get_dev_stat(x, "power"),
                 )
                 self.extruder_button[x].set_label(self.labels[x].get_text())
             for x in self._printer.get_heaters():
@@ -546,7 +552,8 @@ class JobStatusPanel(ScreenPanel):
                     self.update_temp(
                         x,
                         self._printer.get_dev_stat(x, "temperature"),
-                        self._printer.get_dev_stat(x, "target")
+                        self._printer.get_dev_stat(x, "target"),
+                        self._printer.get_dev_stat(x, "power"),
                     )
                     self.heater_button[x].set_label(self.labels[x].get_text())
 
@@ -560,7 +567,7 @@ class JobStatusPanel(ScreenPanel):
                 self.labels['temp_grid'].attach(self.extruder_button[self.current_extruder], 0, 0, 1, 1)
                 self._screen.show_all()
         with contextlib.suppress(KeyError):
-            self.labels['max_accel'].set_text(f"{data['toolhead']['max_accel']} mm/s²")
+            self.labels['max_accel'].set_text(f"{data['toolhead']['max_accel']:.0f} mm/s²")
         with contextlib.suppress(KeyError):
             self.labels['advance'].set_text(f"{data['extruder']['pressure_advance']:.2f}")
 
@@ -727,7 +734,7 @@ class JobStatusPanel(ScreenPanel):
     def state_check(self):
         ps = self._printer.get_stat("print_stats")
 
-        if ps['state'] == self.state:
+        if 'state' not in ps or ps['state'] == self.state:
             return True
 
         if ps['state'] == "printing":
@@ -910,10 +917,3 @@ class JobStatusPanel(ScreenPanel):
         if msg is None:
             msg = " "
         self.labels['lcdmessage'].set_text(f"{msg}")
-
-    def update_temp(self, x, temp, target):
-        if x in self.labels and temp is not None:
-            if target is not None and target > 0:
-                self.labels[x].set_label(f"{int(temp):3}/{int(target):3}°")
-            else:
-                self.labels[x].set_label(f"{int(temp):3}°")

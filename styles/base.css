@@ -22,12 +22,13 @@ button {
     -gtk-icon-shadow: none;
 }
 
-button:active {
+button:active, .button_active {
     background-color: #304C62;
 }
 
-.button_active {
-    background-color: #20303D;
+button label {
+    margin-top: .25em;
+    margin-bottom: .5em;
 }
 
 button.color1 {
@@ -163,6 +164,11 @@ scrollbar slider {
     min-width: 2em;
     border-radius: .7em;
     background-color: #404E57;
+}
+
+separator {
+    margin: 1em 2em;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 textview, textview text {
@@ -479,12 +485,10 @@ popover button {
     background-color: #222;
 }
 
-.screensaver {
+.screensaver, .screensaver button, .screensaver button:hover, .screensaver button:focus, .screensaver button:active {
     background-color: black;
-}
-
-.screensaver button:active {
-    background-color: rgba(0, 0, 0, 0.5);
+    border: 0;
+    margin: 0;
 }
 
 .option_slider_max trough highlight, trough progress {

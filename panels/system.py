@@ -1,9 +1,9 @@
 import gi
 import logging
+import os
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango, GLib
-from datetime import datetime
 
 from ks_includes.screen_panel import ScreenPanel
 
@@ -12,12 +12,24 @@ def create_panel(*args):
     return SystemPanel(*args)
 
 
-ALLOWED_SERVICES = ["KlipperScreen", "MoonCord", "klipper", "moonraker", "webcamd"]
+# Same as ALLOWED_SERVICES in moonraker
+# https://github.com/Arksine/moonraker/blob/master/moonraker/components/machine.py
+ALLOWED_SERVICES = (
+    "crowsnest",
+    "MoonCord",
+    "moonraker",
+    "moonraker-telegram-bot",
+    "klipper",
+    "KlipperScreen",
+    "sonar",
+    "webcamd",
+)
 
 
 class SystemPanel(ScreenPanel):
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, back)
+        self.refresh = None
         self.update_status = None
         self.update_dialog = None
         self.update_prog = None
@@ -27,20 +39,18 @@ class SystemPanel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
 
-        update_all = self._gtk.ButtonImage('arrow-up', _('Full\nUpdate'), 'color1')
+        update_all = self._gtk.ButtonImage('arrow-up', _('Full Update'), 'color1')
         update_all.connect("clicked", self.show_update_info, "full")
         update_all.set_vexpand(False)
         self.refresh = self._gtk.ButtonImage('refresh', _('Refresh'), 'color2')
         self.refresh.connect("clicked", self.refresh_updates)
         self.refresh.set_vexpand(False)
 
-        reboot = self._gtk.ButtonImage('refresh', _('System\nRestart'), 'color3')
-        reboot.connect("clicked", self._screen._confirm_send_action,
-                       _("Are you sure you wish to reboot the system?"), "machine.reboot")
+        reboot = self._gtk.ButtonImage('refresh', _('Restart'), 'color3')
+        reboot.connect("clicked", self.reboot_poweroff, "reboot")
         reboot.set_vexpand(False)
-        shutdown = self._gtk.ButtonImage('shutdown', _('System\nShutdown'), 'color4')
-        shutdown.connect("clicked", self._screen._confirm_send_action,
-                         _("Are you sure you wish to shutdown the system?"), "machine.shutdown")
+        shutdown = self._gtk.ButtonImage('shutdown', _('Shutdown'), 'color4')
+        shutdown.connect("clicked", self.reboot_poweroff, "poweroff")
         shutdown.set_vexpand(False)
 
         scroll = self._gtk.ScrolledWindow()
@@ -68,7 +78,7 @@ class SystemPanel(ScreenPanel):
                 self.labels[f"{prog}_status"].connect("clicked", self.show_update_info, prog)
 
                 if prog in ALLOWED_SERVICES:
-                    self.labels[f"{prog}_restart"] = self._gtk.ButtonImage("refresh", None, None, .7, .7)
+                    self.labels[f"{prog}_restart"] = self._gtk.ButtonImage("refresh", scale=.7)
                     self.labels[f"{prog}_restart"].connect("clicked", self.restart, prog)
                     infogrid.attach(self.labels[f"{prog}_restart"], 0, i, 1, 1)
 
@@ -186,11 +196,8 @@ class SystemPanel(ScreenPanel):
                     details.set_line_wrap(True)
                     details.set_halign(Gtk.Align.START)
                     commit_box.add(details)
-
-                    frame = Gtk.Frame()
-                    frame.get_style_context().add_class("frame-item")
-                    frame.add(commit_box)
-                    vbox.add(frame)
+                    commit_box.add(Gtk.Separator())
+                    vbox.add(commit_box)
 
         if "package_count" in info:
             label.set_markup((
@@ -257,7 +264,7 @@ class SystemPanel(ScreenPanel):
         ]
 
         scroll = self._gtk.ScrolledWindow()
-        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.set_property("overlay-scrolling", True)
 
         self.labels['update_progress'] = Gtk.Label(_("Starting recovery for") + f' {program}...')
         self.labels['update_progress'].set_halign(Gtk.Align.START)
@@ -300,7 +307,7 @@ class SystemPanel(ScreenPanel):
         ]
 
         scroll = self._gtk.ScrolledWindow()
-        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.set_property("overlay-scrolling", True)
 
         if "full" in info:
             self.labels['update_progress'] = Gtk.Label(_("Updating") + '\n')
@@ -377,3 +384,35 @@ class SystemPanel(ScreenPanel):
     def _autoscroll(self, *args):
         adj = self.labels['update_scroll'].get_vadjustment()
         adj.set_value(adj.get_upper() - adj.get_page_size())
+
+    def reboot_poweroff(self, widget, method):
+        scroll = self._gtk.ScrolledWindow()
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        vbox.set_halign(Gtk.Align.CENTER)
+        vbox.set_valign(Gtk.Align.CENTER)
+        if method == "reboot":
+            label = Gtk.Label(label=_("Are you sure you wish to reboot the system?"))
+        else:
+            label = Gtk.Label(label=_("Are you sure you wish to shutdown the system?"))
+        vbox.add(label)
+        scroll.add(vbox)
+        buttons = [
+            {"name": _("Host"), "response": Gtk.ResponseType.OK},
+            {"name": _("Printer"), "response": Gtk.ResponseType.APPLY},
+            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
+        ]
+        self._gtk.Dialog(self._screen, buttons, scroll, self.reboot_poweroff_confirm, method)
+
+    def reboot_poweroff_confirm(self, widget, response_id, method):
+        if response_id == Gtk.ResponseType.OK:
+            if method == "reboot":
+                os.system("systemctl reboot")
+            else:
+                os.system("systemctl poweroff")
+        elif response_id == Gtk.ResponseType.APPLY:
+            if method == "reboot":
+                self._screen._ws.send_method("machine.reboot")
+            else:
+                self._screen._ws.send_method("machine.shutdown")
+        widget.destroy()

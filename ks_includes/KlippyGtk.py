@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import contextlib
 import gi
 import logging
 import os
@@ -164,10 +163,10 @@ class KlippyGtk:
         b.connect("clicked", self.screen.reset_screensaver_timeout)
         return b
 
-    def ButtonImage(self, image_name=None, label=None, style=None, scale=1.38,
-                    position=Gtk.PositionType.TOP, word_wrap=True):
-
-        b = Gtk.Button(label=label)
+    def ButtonImage(self, image_name=None, label=None, style=None, scale=1.38, position=Gtk.PositionType.TOP, lines=2):
+        b = Gtk.Button()
+        if label is not None:
+            b.set_label(label.replace("\n", " "))
         b.set_hexpand(True)
         b.set_vexpand(True)
         b.set_can_focus(False)
@@ -176,12 +175,24 @@ class KlippyGtk:
         b.set_image_position(position)
         b.set_always_show_image(True)
 
-        if word_wrap is True:
-            with contextlib.suppress(Exception):
+        if label is not None:
+            try:
                 # Get the label object
-                child = b.get_children()[0].get_children()[0].get_children()[1]
+                if image_name is not None:
+                    if position == Gtk.PositionType.RIGHT:
+                        child = b.get_children()[0].get_children()[0].get_children()[0]
+                    else:
+                        child = b.get_children()[0].get_children()[0].get_children()[1]
+                else:
+                    child = b.get_children()[0]
                 child.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
                 child.set_line_wrap(True)
+                child.set_ellipsize(True)
+                child.set_ellipsize(Pango.EllipsizeMode.END)
+                child.set_lines(lines)
+            except Exception as e:
+                logging.debug(f"Unable to wrap and ellipsize label: {label} image: {image_name} exception:{e}")
+
         if style is not None:
             b.get_style_context().add_class(style)
         b.connect("clicked", self.screen.reset_screensaver_timeout)
@@ -260,6 +271,8 @@ class KlippyGtk:
         scroll = Gtk.ScrolledWindow()
         scroll.set_property("overlay-scrolling", False)
         scroll.set_vexpand(True)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK |
+                          Gdk.EventMask.TOUCH_MASK |
+                          Gdk.EventMask.BUTTON_RELEASE_MASK)
+        scroll.set_kinetic_scrolling(True)
         return scroll

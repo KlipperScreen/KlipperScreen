@@ -199,7 +199,9 @@ class Printer:
         logging.debug(f"Power devices: {self.power_devices}")
 
     def get_config_section_list(self, search=""):
-        return [i for i in list(self.config) if i.startswith(search)] if hasattr(self, "config") else []
+        if self.config is not None:
+            return [i for i in list(self.config) if i.startswith(search)] if hasattr(self, "config") else []
+        return []
 
     def get_config_section(self, section):
         return self.config[section] if section in self.config else False
@@ -285,11 +287,13 @@ class Printer:
     def get_state(self):
         return self.state
 
-    def set_dev_temps(self, dev, temp, target=None):
+    def set_dev_temps(self, dev, temp, target=None, power=None):
         if dev in self.devices:
             self.devices[dev]['temperature'] = temp
             if target is not None:
                 self.devices[dev]['target'] = target
+            if power is not None:
+                self.devices[dev]['power'] = power
 
     def get_dev_stats(self, dev):
         return self.devices[dev] if dev in self.devices else None

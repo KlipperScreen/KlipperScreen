@@ -45,7 +45,7 @@ sudo service KlipperScreen restart
 
 If it's still failing as a last resort add `needs_root_rights=yes` to `/etc/X11/Xwrapper.config`:
 ```sh
-sudo echo needs_root_rights=yes>>/etc/X11/Xwrapper.config
+sudo bash -c "echo needs_root_rights=yes>>/etc/X11/Xwrapper.config"
 ```
 
 restart KS.
@@ -110,6 +110,34 @@ and reboot, that should make the touch work, if your screen is rotated 180 degre
 ## OctoPrint
 
 KlipperScreen was never intended to be used with OctoPrint, and there is no support for it.
+
+## WiFi networks not listed
+
+This can be caused because of the user is not allowed to control the interface
+
+* Edit `/etc/wpa_supplicant/wpa_supplicant.conf` and add this line if it's not there:
+
+```
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+```
+
+* Run `cat /etc/group | grep netdev`
+
+If your username is not listed under that line, you need to add it with the following command:
+
+```sh
+usermod -a -G netdev pi
+```
+(if your username is not 'pi' change 'pi' to your username)
+
+Then reboot the machine:
+
+```
+systemctl reboot
+```
+
+!!! tip
+    It's possible to just restart KlipperScreen and networking
 
 ## Other issues
 

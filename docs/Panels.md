@@ -3,13 +3,13 @@
 ### Main Menu
 ![Main Menu](img/panels/main_panel.png)
 
-### Job Status
+### [Job Status](Job_status.md)
 ```py
 panel: job_status
 ```
 ![Job Status](img/panels/job_status.png)
 
-### Bed Level
+### [Bed Level](Screws.md)
 ```py
 panel: bed_level
 ```
@@ -20,6 +20,12 @@ panel: bed_level
 panel: bed_mesh
 ```
 ![Bed Mesh](img/panels/bed_mesh.png)
+
+### Console
+```py
+panel: console
+```
+![Console](img/panels/console.png)
 
 ### Extrude
 ```py
@@ -44,6 +50,18 @@ panel: fine_tune
 panel: gcode_macros
 ```
 ![Gcode Macros Panel](img/panels/gcode_macros.png)
+
+### Input Shapers
+```py
+panel: input_shaper
+```
+![Limits](img/panels/input_shaper.png)
+
+### Limits
+```py
+panel: limits
+```
+![Limits](img/panels/limits.png)
 
 ### Menu
 ![Menu Panel](img/panels/menu.png)
@@ -72,6 +90,12 @@ panel: print
 ```
 ![Print Panel](img/panels/print.png)
 
+### Retraction
+```py
+panel: retraction
+```
+![Limits](img/panels/retraction.png)
+
 ### Settings
 ```py
 panel: settings
@@ -84,32 +108,14 @@ panel: system
 ```
 ![System Panel](img/panels/system.png)
 
-### Temperature
+### [Temperature](Temperature.md)
 ```py
 panel: temperature
 ```
 ![Temperature](img/panels/temperature.png)
 
-### Z Calibrate
+### [Z Calibrate](Zcalibrate.md)
 ```py
 panel: zcalibrate
 ```
 ![Z Calibrate](img/panels/zcalibrate.png)
-
-### Limits
-```py
-panel: limits
-```
-![Limits](img/panels/limits.png)
-
-### Retraction
-```py
-panel: retraction
-```
-![Limits](img/panels/retraction.png)
-
-### Input Shapers
-```py
-panel: input_shaper
-```
-![Limits](img/panels/input_shaper.png)

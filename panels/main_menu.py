@@ -47,17 +47,40 @@ class MainPanel(MenuPanel):
         self.content.add(self.grid)
         self.layout.show_all()
 
+    def update_graph_visibility(self):
+        count = 0
+        for device in self.devices:
+            visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}",
+                                                           device, fallback=True)
+            self.devices[device]['visible'] = visible
+            self.labels['da'].set_showing(device, visible)
+            if visible:
+                count += 1
+                self.devices[device]['name'].get_style_context().add_class(self.devices[device]['class'])
+                self.devices[device]['name'].get_style_context().remove_class("graph_label_hidden")
+            else:
+                self.devices[device]['name'].get_style_context().add_class("graph_label_hidden")
+                self.devices[device]['name'].get_style_context().remove_class(self.devices[device]['class'])
+        if count > 0:
+            self.left_panel.add(self.labels['da'])
+            self.labels['da'].queue_draw()
+            self.labels['da'].show()
+        else:
+            self.left_panel.remove(self.labels['da'])
+
     def activate(self):
         # For this case False != None
         if self.graph_update is None:
             # This has a high impact on load
             self.graph_update = GLib.timeout_add_seconds(5, self.update_graph)
-        return
+        self.update_graph_visibility()
 
     def deactivate(self):
         if self.graph_update:
             GLib.source_remove(self.graph_update)
             self.graph_update = None
+        if self.active_heater is not None:
+            self.hide_numpad()
 
     def add_device(self, device):
 
@@ -107,13 +130,15 @@ class MainPanel(MenuPanel):
         if can_target:
             self.labels['da'].add_object(device, "targets", rgb, True, False)
 
-        name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "),
-                                     None, .5, Gtk.PositionType.LEFT, False)
+        name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "), None, .5, Gtk.PositionType.LEFT, 1)
         name.connect("clicked", self.toggle_visibility, device)
         name.set_alignment(0, .5)
-        name.get_style_context().add_class(class_name)
-        child = name.get_children()[0].get_children()[0].get_children()[1]
-        child.set_ellipsize(Pango.EllipsizeMode.END)
+        visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}", device, fallback=True)
+        if visible:
+            name.get_style_context().add_class(class_name)
+        else:
+            name.get_style_context().add_class("graph_label_hidden")
+        self.labels['da'].set_showing(device, visible)
 
         temp = self._gtk.Button("")
         if can_target:
@@ -124,7 +149,7 @@ class MainPanel(MenuPanel):
             "name": name,
             "temp": temp,
             "can_target": can_target,
-            "visible_graph": True
+            "visible": visible
         }
 
         devices = sorted(self.devices)
@@ -137,19 +162,16 @@ class MainPanel(MenuPanel):
         return True
 
     def toggle_visibility(self, widget, device):
-        self.devices[device]['visible_graph'] ^= True
-        logging.info(f"Graph show {self.devices[device]['visible_graph']}: {device}")
+        self.devices[device]['visible'] ^= True
+        logging.info(f"Graph show {self.devices[device]['visible']}: {device}")
 
-        self.labels['da'].set_showing(device, self.devices[device]['visible_graph'])
-        if self.devices[device]['visible_graph']:
-            self.devices[device]['name'].get_style_context().remove_class("graph_label_hidden")
-            self.devices[device]['name'].get_style_context().add_class(
-                self.devices[device]['class'])
-        else:
-            self.devices[device]['name'].get_style_context().remove_class(
-                self.devices[device]['class'])
-            self.devices[device]['name'].get_style_context().add_class("graph_label_hidden")
-        self.labels['da'].queue_draw()
+        section = f"graph {self._screen.connected_printer}"
+        if section not in self._config.get_config().sections():
+            self._config.get_config().add_section(section)
+        self._config.set(section, f"{device}", f"{self.devices[device]['visible']}")
+        self._config.save_user_config_options()
+
+        self.update_graph_visibility()
 
     def change_target_temp(self, temp):
 
@@ -193,16 +215,15 @@ class MainPanel(MenuPanel):
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(self.labels['devices'])
 
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        box.add(scroll)
-        box.add(self.labels['da'])
+        self.left_panel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        self.left_panel.add(scroll)
 
         for d in self._printer.get_temp_store_devices():
             self.add_device(d)
 
-        return box
+        return self.left_panel
 
-    def hide_numpad(self, widget):
+    def hide_numpad(self, widget=None):
         self.devices[self.active_heater]['name'].get_style_context().remove_class("button_active")
         self.active_heater = None
 
@@ -222,13 +243,15 @@ class MainPanel(MenuPanel):
             self.update_temp(
                 x,
                 self._printer.get_dev_stat(x, "temperature"),
-                self._printer.get_dev_stat(x, "target")
+                self._printer.get_dev_stat(x, "target"),
+                self._printer.get_dev_stat(x, "power"),
             )
         for h in self._printer.get_heaters():
             self.update_temp(
                 h,
                 self._printer.get_dev_stat(h, "temperature"),
                 self._printer.get_dev_stat(h, "target"),
+                self._printer.get_dev_stat(x, "power"),
             )
         return
 
@@ -254,11 +277,3 @@ class MainPanel(MenuPanel):
     def update_graph(self):
         self.labels['da'].queue_draw()
         return True
-
-    def update_temp(self, device, temp, target):
-        if device not in self.devices:
-            return
-        if self.devices[device]["can_target"] and target > 0:
-            self.devices[device]["temp"].get_child().set_label(f"{temp:.1f} / {target:.0f}")
-        else:
-            self.devices[device]["temp"].get_child().set_label(f"{temp:.1f}")
