@@ -160,6 +160,7 @@ update_x11()
 add_desktop_file()
 {
     DESKTOP=$(<$SCRIPTPATH/KlipperScreen.desktop)
+    mkdir -p $HOME/.local/share/applications/
     echo "$DESKTOP" | tee $HOME/.local/share/applications/KlipperScreen.desktop > /dev/null
 }
 
