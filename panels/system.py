@@ -201,9 +201,9 @@ class SystemPanel(ScreenPanel):
 
         if "package_count" in info:
             label.set_markup((
-                    f'<b>{info["package_count"]} '
-                    + ngettext("Package will be updated", "Packages will be updated", info["package_count"])
-                    + f':</b>\n'
+                f'<b>{info["package_count"]} '
+                + ngettext("Package will be updated", "Packages will be updated", info["package_count"])
+                + f':</b>\n'
             ))
             label.set_halign(Gtk.Align.CENTER)
             vbox.add(label)
