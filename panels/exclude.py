@@ -30,6 +30,7 @@ class ExcludeObjectPanel(ScreenPanel):
         self.excluded_objects = self._printer.get_stat("exclude_object", "excluded_objects")
         logging.info(f'Excluded: {self.excluded_objects}')
         self.objects = self._printer.get_stat("exclude_object", "objects")
+        self.labels['map'] = None
 
     def initialize(self, panel_name):
         for obj in self.objects:
@@ -100,4 +101,5 @@ class ExcludeObjectPanel(ScreenPanel):
         self.update_graph()
 
     def update_graph(self):
-        self.labels['map'].queue_draw()
+        if self.labels['map']:
+            self.labels['map'].queue_draw()
