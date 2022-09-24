@@ -12,7 +12,18 @@ def create_panel(*args):
     return SystemPanel(*args)
 
 
-ALLOWED_SERVICES = ["KlipperScreen", "MoonCord", "klipper", "moonraker", "webcamd"]
+# Same as ALLOWED_SERVICES in moonraker
+# https://github.com/Arksine/moonraker/blob/master/moonraker/components/machine.py
+ALLOWED_SERVICES = (
+    "crowsnest",
+    "MoonCord",
+    "moonraker",
+    "moonraker-telegram-bot",
+    "klipper",
+    "KlipperScreen",
+    "sonar",
+    "webcamd",
+)
 
 
 class SystemPanel(ScreenPanel):
