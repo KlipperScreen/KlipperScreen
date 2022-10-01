@@ -4,7 +4,7 @@ import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.widgets.objectmap import ObjectMap
@@ -20,12 +20,10 @@ class ExcludeObjectPanel(ScreenPanel):
         self._screen = screen
         self.object_list = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         self.object_list.set_valign(Gtk.Align.CENTER)
-        self.object_list.set_halign(Gtk.Align.CENTER)
+        self.object_list.set_halign(Gtk.Align.START)
         self.buttons = {}
-        self.current_object = self._gtk.ButtonImage("extrude", "", scale=.66,
-                                                    position=Gtk.PositionType.LEFT, lines=1)
+        self.current_object = self._gtk.ButtonImage("extrude", "", scale=.66, position=Gtk.PositionType.LEFT, lines=1)
         self.current_object.connect("clicked", self.exclude_current)
-        self.current_object.set_hexpand(True)
         self.current_object.set_vexpand(False)
         self.excluded_objects = self._printer.get_stat("exclude_object", "excluded_objects")
         logging.info(f'Excluded: {self.excluded_objects}')
@@ -59,12 +57,14 @@ class ExcludeObjectPanel(ScreenPanel):
 
     def add_object(self, name):
         if name not in self.buttons:
-            self.buttons[name] = self._gtk.ButtonImage("cancel", name, scale=.66, position=Gtk.PositionType.LEFT,
-                                                       lines=1)
+            self.buttons[name] = self._gtk.Button(name.replace("_", " "))
+            self.buttons[name].get_children()[0].set_line_wrap_mode(Pango.WrapMode.CHAR)
+            self.buttons[name].get_children()[0].set_line_wrap(True)
             self.buttons[name].connect("clicked", self.exclude_object, name)
             self.buttons[name].set_hexpand(True)
-        if name in self.excluded_objects:
-            self.buttons[name].set_sensitive(False)
+        for name in self.excluded_objects:
+            if name in self.buttons:
+                self.object_list.remove(self.buttons[name])
         self.buttons[name].get_style_context().add_class("frame-item")
         self.object_list.add(self.buttons[name])
 
@@ -83,16 +83,27 @@ class ExcludeObjectPanel(ScreenPanel):
     def process_update(self, action, data):
         if action == "notify_status_update":
             with contextlib.suppress(KeyError):
-                self.current_object.set_label(f'{data["exclude_object"]["current_object"]}')
+                # Update objects
+                self.objects = data["exclude_object"]["objects"]
+                logging.info(f'Objects: {data["exclude_object"]["objects"]}')
+                for obj in self.buttons:
+                    self.object_list.remove(self.buttons[obj])
+                self.buttons = {}
+                for obj in self.objects:
+                    logging.info(f"Adding {obj['name']}")
+                    self.add_object(obj["name"])
+            with contextlib.suppress(KeyError):
+                # Update current objects
+                self.current_object.set_label(f'{data["exclude_object"]["current_object"].replace("_", " ")}')
                 self.update_graph()
             with contextlib.suppress(KeyError):
+                # Update excluded objects
                 logging.info(f'Excluded objects: {data["exclude_object"]["excluded_objects"]}')
                 self.excluded_objects = data["exclude_object"]["excluded_objects"]
                 for name in self.excluded_objects:
-                    self.buttons[name].set_sensitive(False)
+                    if name in self.buttons:
+                        self.object_list.remove(self.buttons[name])
                 self.update_graph()
-            with contextlib.suppress(KeyError):
-                logging.info(f'Objects: {data["exclude_object"]["objects"]}')
         elif action == "notify_gcode_response" and "Excluding object" in data:
             self._screen.show_popup_message(data, level=1)
             self.update_graph()
