@@ -168,7 +168,6 @@ class FineTunePanel(ScreenPanel):
                 self.labels['zoffset'].set_label(f'  {round(z_offset, 2):.2f}mm')
             self._screen._ws.klippy.gcode_script(f"SET_GCODE_OFFSET Z_ADJUST={direction}{self.bs_delta} MOVE=1")
 
-
     def change_bs_delta(self, widget, bs):
         if self.bs_delta == bs:
             return
