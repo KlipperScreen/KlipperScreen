@@ -20,6 +20,7 @@ class ObjectMap(Gtk.DrawingArea):
         self.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
         self.connect('button_press_event', self.event_cb)
         self.font_size = round(font_size * 0.75)
+        self.font_spacing = round(self.font_size * 1.5)
         self.margin_left = round(self.font_size * 2.75)
         self.margin_right = 15
         self.margin_top = 10
@@ -27,11 +28,20 @@ class ObjectMap(Gtk.DrawingArea):
         self.objects = self.printer.get_stat("exclude_object", "objects")
         self.current_object = self.printer.get_stat("current_object", "current_object")
         self.excluded_objects = self.printer.get_stat("exclude_object", "excluded_objects")
+        self.min_x = self.min_y = 0
+        self.max_x = self.printer.get_bed_max('x')
+        self.max_y = self.printer.get_bed_max('y')
+
+    def x_graph_to_bed(self, width, gx):
+        return (gx - self.margin_left) * self.max_x / (width - self.margin_left - self.margin_right)
+
+    def y_graph_to_bed(self, height, gy):
+        return self.max_y * (1 - (gy - self.margin_top) / (height - self.margin_top))
 
     def event_cb(self, da, ev):
-        width = da.get_allocated_width()
-        x = (ev.x - self.margin_left) * self.printer.get_bed_max('x') / (width - self.margin_left - self.margin_right)
-        y = self.printer.get_bed_max('y') * (1 - (ev.y - self.margin_top) / (width - self.margin_top))
+        # Convert coordinates from screen-graph to bed
+        x = self.x_graph_to_bed(da.get_allocated_width(), ev.x)
+        y = self.y_graph_to_bed(da.get_allocated_height(), ev.y)
         logging.info(f"Touched GRAPH {ev.x:.0f},{ev.y:.0f} BED: {x:.0f},{y:.0f}")
 
         for obj in self.objects:
@@ -58,68 +68,59 @@ class ObjectMap(Gtk.DrawingArea):
         )
 
     def draw_graph(self, da, ctx):
-        self.objects = self.printer.get_stat("exclude_object", "objects")
-        self.current_object = self.printer.get_stat("exclude_object", "current_object")
-        self.excluded_objects = self.printer.get_stat("exclude_object", "excluded_objects")
-        width = da.get_allocated_width()
-        height = da.get_allocated_height()
-        left = self.margin_left
-        right = width - self.margin_right
-        top = self.margin_top
-        bottom = height - self.margin_bottom
-        font_spacing = round(self.font_size * 1.5)
+        right = da.get_allocated_width() - self.margin_right
+        bottom = da.get_allocated_height() - self.margin_bottom
 
         # Styling
-        ctx.set_source_rgb(.5, .5, .5)
+        ctx.set_source_rgb(.5, .5, .5)  # Grey
         ctx.set_line_width(1)
         ctx.set_font_size(self.font_size)
 
         # Borders
-        ctx.move_to(left, top)
-        logging.info(f"l:{left:.0f} t:{top:.0f} r:{right:.0f} b:{bottom:.0f}")
-        ctx.line_to(right, top)
+        ctx.move_to(self.margin_left, self.margin_top)
+        logging.info(f"l:{self.margin_left:.0f} t:{self.margin_top:.0f} r:{right:.0f} b:{bottom:.0f}")
+        ctx.line_to(right, self.margin_top)
         ctx.line_to(right, bottom)
-        ctx.line_to(left, bottom)
-        ctx.line_to(left, top)
+        ctx.line_to(self.margin_left, bottom)
+        ctx.line_to(self.margin_left, self.margin_top)
         ctx.stroke()
 
-        # Indicators
-        ctx.line_to(left - font_spacing, bottom + font_spacing)
-        ctx.show_text("0".rjust(3, " "))
+        # Axis labels
+        ctx.move_to(self.margin_left - self.font_spacing, bottom + self.font_spacing)
+        ctx.show_text(f"{self.min_y:.0f}".rjust(3, " "))
         ctx.stroke()
-
-        ctx.line_to(right - font_spacing, bottom + font_spacing)
-        ctx.show_text(f"{self.printer.get_bed_max('x'):.0f}")
+        ctx.move_to(right - self.font_spacing, bottom + self.font_spacing)
+        ctx.show_text(f"{self.max_x:.0f}")
         ctx.stroke()
-
-        ctx.line_to(left - 1.5 * font_spacing, top)
-        ctx.show_text(f"{self.printer.get_bed_max('y'):.0f}".rjust(3, " "))
+        ctx.move_to(self.margin_left - 1.5 * self.font_spacing, self.margin_top)
+        ctx.show_text(f"{self.max_y:.0f}".rjust(3, " "))
         ctx.stroke()
 
         # middle markers
-        midx = (right - left) / 2 + left
+        midx = (right - self.margin_left) / 2 + self.margin_left
         ctx.set_dash([1, 1])
-        ctx.move_to(midx, top)
+        ctx.move_to(midx, self.margin_top)
         ctx.line_to(midx, bottom)
         ctx.stroke()
-        midy = (top - bottom) / 2 + bottom
-        ctx.move_to(left, midy)
+        midy = (self.margin_top - bottom) / 2 + bottom
+        ctx.move_to(self.margin_left, midy)
         ctx.line_to(right, midy)
         ctx.stroke()
         ctx.set_dash([1, 0])
 
         # objects
-        for obj in self.objects:
+        for obj in self.printer.get_stat("exclude_object", "objects"):
             # change the color depending on the status
-            if obj['name'] == self.current_object:
-                ctx.set_source_rgb(1, 0, 0)
-            elif obj['name'] in self.excluded_objects:
-                ctx.set_source_rgb(0, 0, 0)
+            if obj['name'] == self.printer.get_stat("exclude_object", "current_object"):
+                ctx.set_source_rgb(1, 0, 0)  # Red
+            elif obj['name'] in self.printer.get_stat("exclude_object", "excluded_objects"):
+                ctx.set_source_rgb(0, 0, 0)  # Black
             else:
-                ctx.set_source_rgb(.5, .5, .5)
+                ctx.set_source_rgb(.5, .5, .5)  # Grey
             for i, point in enumerate(obj["polygon"]):
-                x = self.x_convert_bed_to_graph_coords(width, point[0])
-                y = self.y_convert_bed_to_graph_coords(width, point[1])
+                # Convert coordinates from bed to screen-graph
+                x = self.x_bed_to_graph(da.get_allocated_width(), point[0])
+                y = self.y_bed_to_graph(da.get_allocated_height(), point[1])
                 if i == 0:
                     ctx.move_to(x, y)
                     continue
@@ -129,8 +130,8 @@ class ObjectMap(Gtk.DrawingArea):
             ctx.fill()
             ctx.stroke()
 
-    def x_convert_bed_to_graph_coords(self, w, bx):
-        return ((bx * (w - self.margin_left - self.margin_right)) / self.printer.get_bed_max('x')) + self.margin_left
+    def x_bed_to_graph(self, width, bx):
+        return ((bx * (width - self.margin_left - self.margin_right)) / self.max_x) + self.margin_left
 
-    def y_convert_bed_to_graph_coords(self, w, by):
-        return ((1 - (by / self.printer.get_bed_max('y'))) * (w - self.margin_top)) + self.margin_top
+    def y_bed_to_graph(self, height, by):
+        return ((1 - (by / self.max_y)) * (height - self.margin_top)) + self.margin_top

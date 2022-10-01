@@ -7,7 +7,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 from ks_includes.screen_panel import ScreenPanel
-from ks_includes.widgets.map import ObjectMap
+from ks_includes.widgets.objectmap import ObjectMap
 
 
 def create_panel(*args):
