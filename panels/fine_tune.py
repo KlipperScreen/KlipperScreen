@@ -1,6 +1,7 @@
 import gi
 import logging
 import re
+import contextlib
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
@@ -155,8 +156,16 @@ class FineTunePanel(ScreenPanel):
 
     def change_babystepping(self, widget, direction):
         if direction == "reset":
+            self.labels['zoffset'].set_label('  0.00mm')
             self._screen._ws.klippy.gcode_script("SET_GCODE_OFFSET Z=0 MOVE=1")
         elif direction in ["+", "-"]:
+            with contextlib.suppress(KeyError):
+                z_offset = float(self._printer.data["gcode_move"]["homing_origin"][2])
+                if direction == "+":
+                    z_offset += float(self.bs_delta)
+                else:
+                    z_offset -= float(self.bs_delta)
+                self.labels['zoffset'].set_label(f'  {round(z_offset, 2):.2f}mm')
             self._screen._ws.klippy.gcode_script(f"SET_GCODE_OFFSET Z_ADJUST={direction}{self.bs_delta} MOVE=1")
 
     def change_bs_delta(self, widget, bs):
@@ -184,6 +193,7 @@ class FineTunePanel(ScreenPanel):
             self.extrusion = 100
 
         self.extrusion = max(self.extrusion, 1)
+        self.labels['extrudefactor'].set_label(f"  {self.extrusion:3}%")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.set_extrusion_rate(self.extrusion))
 
     def change_speed(self, widget, direction):
@@ -195,6 +205,7 @@ class FineTunePanel(ScreenPanel):
             self.speed = 100
 
         self.speed = max(self.speed, 1)
+        self.labels['speedfactor'].set_label(f"  {self.speed:3}%")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.set_speed_rate(self.speed))
 
     def change_percent_delta(self, widget, delta):

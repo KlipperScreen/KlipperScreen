@@ -7,6 +7,9 @@ It's strongly suggested to read Klipper documentation about [Bed level](https://
 
 ## Buttons
 * "Start" will initiate the only method available, or ask the user if multiple methods are available.
+!!! note
+    KlipperScreen will home if needed and move to the middle of the bed,
+    but the location can be configured in [KlipperScreen.conf](https://klipperscreen.readthedocs.io/en/latest/Configuration/#printer-options)
 * The raise(+) and lower(-) buttons send `TESTZ Z=distance` where distance is selected in the bottom row.
 * Accept will send `ACCEPT`
 * Abort will send `ABORT`
