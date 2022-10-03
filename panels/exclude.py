@@ -56,19 +56,26 @@ class ExcludeObjectPanel(ScreenPanel):
         self.content.show_all()
 
     def add_object(self, name):
-        if name not in self.buttons:
+        if name not in self.buttons and name not in self.excluded_objects:
             self.buttons[name] = self._gtk.Button(name.replace("_", " "))
             self.buttons[name].get_children()[0].set_line_wrap_mode(Pango.WrapMode.CHAR)
             self.buttons[name].get_children()[0].set_line_wrap(True)
             self.buttons[name].connect("clicked", self.exclude_object, name)
             self.buttons[name].set_hexpand(True)
-        for name in self.excluded_objects:
-            if name in self.buttons:
-                self.object_list.remove(self.buttons[name])
-        self.buttons[name].get_style_context().add_class("frame-item")
-        self.object_list.add(self.buttons[name])
+            self.buttons[name].get_style_context().add_class("frame-item")
+            self.object_list.add(self.buttons[name])
 
     def exclude_object(self, widget, name):
+        if len(self.buttons) == 1:
+            # Do not exclude the last object, this is a workaround for a bug of klipper that starts
+            # to move the toolhead really fast skipping gcode until the file ends
+            # Remove this if they fix it.
+            self._screen._confirm_send_action(
+                widget,
+               _("Are you sure you wish to cancel this print?"),
+                "printer.print.cancel",
+            )
+            return
         script = {"script": f"EXCLUDE_OBJECT NAME={name}"}
         self._screen._confirm_send_action(
             widget,
@@ -94,7 +101,8 @@ class ExcludeObjectPanel(ScreenPanel):
                     self.add_object(obj["name"])
             with contextlib.suppress(KeyError):
                 # Update current objects
-                self.current_object.set_label(f'{data["exclude_object"]["current_object"].replace("_", " ")}')
+                if data["exclude_object"]["current_object"]:
+                    self.current_object.set_label(f'{data["exclude_object"]["current_object"].replace("_", " ")}')
                 self.update_graph()
             with contextlib.suppress(KeyError):
                 # Update excluded objects

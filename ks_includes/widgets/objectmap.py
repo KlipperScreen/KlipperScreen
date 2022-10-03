@@ -28,15 +28,14 @@ class ObjectMap(Gtk.DrawingArea):
         self.objects = self.printer.get_stat("exclude_object", "objects")
         self.current_object = self.printer.get_stat("current_object", "current_object")
         self.excluded_objects = self.printer.get_stat("exclude_object", "excluded_objects")
-        self.min_x = self.min_y = 0
-        self.max_x = self.printer.get_bed_max('x')
-        self.max_y = self.printer.get_bed_max('y')
+        self.min_x = self.min_y = 99999999
+        self.max_x = self.max_y = 0
 
     def x_graph_to_bed(self, width, gx):
-        return (gx - self.margin_left) * self.max_x / (width - self.margin_left - self.margin_right)
+        return (((gx - self.margin_left) * (self.max_x - self.min_x)) / (width - self.margin_left - self.margin_right)) + self.min_x
 
     def y_graph_to_bed(self, height, gy):
-        return self.max_y * (1 - (gy - self.margin_top) / (height - self.margin_top))
+        return ((1 - ((gy - self.margin_top) / (height - self.margin_top - self.margin_bottom))) * (self.max_y - self.min_y)) + self.min_y
 
     def event_cb(self, da, ev):
         # Convert coordinates from screen-graph to bed
@@ -70,6 +69,16 @@ class ObjectMap(Gtk.DrawingArea):
     def draw_graph(self, da, ctx):
         right = da.get_allocated_width() - self.margin_right
         bottom = da.get_allocated_height() - self.margin_bottom
+        self.objects = self.printer.get_stat("exclude_object", "objects")
+
+        for obj in self.objects:
+            for point in obj["polygon"]:
+                # Find min coords
+                self.min_x = min(self.min_x, point[0])
+                self.min_y = min(self.min_y, point[1])
+                # Find max coords
+                self.max_x = max(self.max_x, point[0])
+                self.max_y = max(self.max_y, point[1])
 
         # Styling
         ctx.set_source_rgb(.5, .5, .5)  # Grey
@@ -78,7 +87,7 @@ class ObjectMap(Gtk.DrawingArea):
 
         # Borders
         ctx.move_to(self.margin_left, self.margin_top)
-        logging.info(f"l:{self.margin_left:.0f} t:{self.margin_top:.0f} r:{right:.0f} b:{bottom:.0f}")
+        # logging.info(f"l:{self.margin_left:.0f} t:{self.margin_top:.0f} r:{right:.0f} b:{bottom:.0f}")
         ctx.line_to(right, self.margin_top)
         ctx.line_to(right, bottom)
         ctx.line_to(self.margin_left, bottom)
@@ -86,14 +95,14 @@ class ObjectMap(Gtk.DrawingArea):
         ctx.stroke()
 
         # Axis labels
-        ctx.move_to(self.margin_left - self.font_spacing, bottom + self.font_spacing)
-        ctx.show_text(f"{self.min_y:.0f}".rjust(3, " "))
+        ctx.move_to(0, bottom + self.font_spacing)
+        ctx.show_text(f"{self.min_x:.0f},{self.min_y:.0f}")
         ctx.stroke()
-        ctx.move_to(right - self.font_spacing, bottom + self.font_spacing)
-        ctx.show_text(f"{self.max_x:.0f}")
+        ctx.move_to(right - self.font_spacing * 2, bottom + self.font_spacing)
+        ctx.show_text(f"{self.max_x:.0f},{self.min_y:.0f}")
         ctx.stroke()
-        ctx.move_to(self.margin_left - 1.5 * self.font_spacing, self.margin_top)
-        ctx.show_text(f"{self.max_y:.0f}".rjust(3, " "))
+        ctx.move_to(0, self.font_spacing / 2)
+        ctx.show_text(f"{self.min_x:.0f},{self.max_y:.0f}")
         ctx.stroke()
 
         # middle markers
@@ -108,8 +117,8 @@ class ObjectMap(Gtk.DrawingArea):
         ctx.stroke()
         ctx.set_dash([1, 0])
 
-        # objects
-        for obj in self.printer.get_stat("exclude_object", "objects"):
+        # Draw objects
+        for obj in self.objects:
             # change the color depending on the status
             if obj['name'] == self.printer.get_stat("exclude_object", "current_object"):
                 ctx.set_source_rgb(1, 0, 0)  # Red
@@ -131,7 +140,7 @@ class ObjectMap(Gtk.DrawingArea):
             ctx.stroke()
 
     def x_bed_to_graph(self, width, bx):
-        return ((bx * (width - self.margin_left - self.margin_right)) / self.max_x) + self.margin_left
+        return (((bx - self.min_x) * (width - self.margin_left - self.margin_right)) / (self.max_x - self.min_x)) + self.margin_left
 
     def y_bed_to_graph(self, height, by):
-        return ((1 - (by / self.max_y)) * (height - self.margin_top)) + self.margin_top
+        return ((1 - ((by - self.min_y) / (self.max_y - self.min_y))) * (height - self.margin_top - self.margin_bottom)) + self.margin_top
