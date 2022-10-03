@@ -32,10 +32,12 @@ class ObjectMap(Gtk.DrawingArea):
         self.max_x = self.max_y = 0
 
     def x_graph_to_bed(self, width, gx):
-        return (((gx - self.margin_left) * (self.max_x - self.min_x)) / (width - self.margin_left - self.margin_right)) + self.min_x
+        return (((gx - self.margin_left) * (self.max_x - self.min_x))
+                / (width - self.margin_left - self.margin_right)) + self.min_x
 
     def y_graph_to_bed(self, height, gy):
-        return ((1 - ((gy - self.margin_top) / (height - self.margin_top - self.margin_bottom))) * (self.max_y - self.min_y)) + self.min_y
+        return ((1 - ((gy - self.margin_top) / (height - self.margin_top - self.margin_bottom)))
+                * (self.max_y - self.min_y)) + self.min_y
 
     def event_cb(self, da, ev):
         # Convert coordinates from screen-graph to bed
@@ -140,7 +142,9 @@ class ObjectMap(Gtk.DrawingArea):
             ctx.stroke()
 
     def x_bed_to_graph(self, width, bx):
-        return (((bx - self.min_x) * (width - self.margin_left - self.margin_right)) / (self.max_x - self.min_x)) + self.margin_left
+        return (((bx - self.min_x) * (width - self.margin_left - self.margin_right))
+                / (self.max_x - self.min_x)) + self.margin_left
 
     def y_bed_to_graph(self, height, by):
-        return ((1 - ((by - self.min_y) / (self.max_y - self.min_y))) * (height - self.margin_top - self.margin_bottom)) + self.margin_top
+        return ((1 - ((by - self.min_y) / (self.max_y - self.min_y)))
+                * (height - self.margin_top - self.margin_bottom)) + self.margin_top

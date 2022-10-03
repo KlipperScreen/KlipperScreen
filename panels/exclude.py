@@ -72,7 +72,7 @@ class ExcludeObjectPanel(ScreenPanel):
             # Remove this if they fix it.
             self._screen._confirm_send_action(
                 widget,
-               _("Are you sure you wish to cancel this print?"),
+                _("Are you sure you wish to cancel this print?"),
                 "printer.print.cancel",
             )
             return
