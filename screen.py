@@ -46,7 +46,9 @@ PRINTER_BASE_STATUS_OBJECTS = [
     'toolhead',
     'virtual_sdcard',
     'webhooks',
-    'motion_report'
+    'motion_report',
+    'firmware_retraction',
+    'exclude_object',
 ]
 
 klipperscreendir = pathlib.Path(__file__).parent.resolve()
@@ -405,7 +407,6 @@ class KlipperScreen(Gtk.Window):
 
         self.base_panel.get().remove(self.popup_message)
         self.popup_message = None
-        self.show_all()
 
     def show_error_modal(self, err, e=""):
         logging.exception(f"Showing error modal: {err}")
