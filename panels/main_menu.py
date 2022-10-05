@@ -251,7 +251,7 @@ class MainPanel(MenuPanel):
                 h,
                 self._printer.get_dev_stat(h, "temperature"),
                 self._printer.get_dev_stat(h, "target"),
-                self._printer.get_dev_stat(x, "power"),
+                self._printer.get_dev_stat(h, "power"),
             )
         return
 
