@@ -1,5 +1,6 @@
 import gi
 import logging
+import re
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
@@ -17,13 +18,25 @@ class ExtrudePanel(ScreenPanel):
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, back)
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-        self.speeds = ['1', '2', '5', '25']
-        self.speed = 1
-        self.distances = ['5', '10', '15', '25']
-        self.distance = 5
+
         macros = self._screen.printer.get_gcode_macros()
         self.load_filament = any("LOAD_FILAMENT" in macro.upper() for macro in macros)
         self.unload_filament = any("UNLOAD_FILAMENT" in macro.upper() for macro in macros)
+
+        self.speeds = ['1', '2', '5', '25']
+        self.distances = ['5', '10', '15', '25']
+        print_cfg = self._config.get_printer_config(self._screen.connected_printer)
+        if print_cfg is not None:
+            dis = print_cfg.get("extrude_distances", '5, 10, 15, 25')
+            if re.match(r'^[0-9,\s]+$', dis):
+                dis = [str(i.strip()) for i in dis.split(',')]
+                if 1 < len(dis) < 5:
+                    self.distances = dis
+            vel = print_cfg.get("extrude_speeds", '1, 2, 5, 25')
+            if re.match(r'^[0-9,\s]+$', vel):
+                vel = [str(i.strip()) for i in vel.split(',')]
+                if 1 < len(vel) < 5:
+                    self.speeds = vel
 
     def initialize(self, panel_name):
         self.labels['extrude'] = self._gtk.ButtonImage("extrude", _("Extrude"), "color4")
@@ -73,14 +86,15 @@ class ExtrudePanel(ScreenPanel):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
-            if i == "5":
+            if j == 1:
                 ctx.add_class("distbutton_active")
+                self.labels[f"dist{i}"].set_active(True)
+                self.distance = int(i)
             distgrid.attach(self.labels[f"dist{i}"], j, 0, 1, 1)
-        self.labels["dist5"].set_active(True)
 
         speedgrid = Gtk.Grid()
         for j, i in enumerate(self.speeds):
-            self.labels[f"speed{i}"] = self._gtk.ToggleButton(_(i))
+            self.labels[f"speed{i}"] = self._gtk.ToggleButton(i)
             self.labels[f"speed{i}"].connect("clicked", self.change_speed, int(i))
             ctx = self.labels[f"speed{i}"].get_style_context()
             if ((self._screen.lang_ltr is True and j == 0) or
@@ -91,10 +105,11 @@ class ExtrudePanel(ScreenPanel):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
-            if i == "2":
+            if j == 1:
                 ctx.add_class("distbutton_active")
+                self.labels[f"speed{i}"].set_active(True)
+                self.speed = int(i)
             speedgrid.attach(self.labels[f"speed{i}"], j, 0, 1, 1)
-        self.labels["speed2"].set_active(True)
 
         distbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.labels['extrude_dist'] = Gtk.Label(_("Distance (mm)"))
@@ -197,20 +212,10 @@ class ExtrudePanel(ScreenPanel):
                     logging.info(f"{x}: Filament detected: {data[x]['filament_detected']}")
 
     def change_distance(self, widget, distance):
-        if self.distance == distance:
-            return
         logging.info(f"### Distance {distance}")
-
-        ctx = self.labels[f"dist{self.distance}"].get_style_context()
-        ctx.remove_class("distbutton_active")
-
+        self.labels[f"dist{self.distance}"].get_style_context().remove_class("distbutton_active")
+        self.labels[f"dist{distance}"].get_style_context().add_class("distbutton_active")
         self.distance = distance
-        ctx = self.labels[f"dist{self.distance}"].get_style_context()
-        ctx.add_class("distbutton_active")
-        for i in self.distances:
-            if i == self.distance:
-                continue
-            self.labels[f"dist{i}"].set_active(False)
 
     def change_extruder(self, widget, extruder):
         logging.info(f"Changing extruder to {extruder}")
@@ -221,18 +226,10 @@ class ExtrudePanel(ScreenPanel):
         self._screen._ws.klippy.gcode_script(f"T{self._printer.get_tool_number(extruder)}")
 
     def change_speed(self, widget, speed):
-        if self.speed == speed:
-            return
         logging.info(f"### Speed {speed}")
-
         self.labels[f"speed{self.speed}"].get_style_context().remove_class("distbutton_active")
-
+        self.labels[f"speed{speed}"].get_style_context().add_class("distbutton_active")
         self.speed = speed
-        self.labels[f"speed{self.speed}"].get_style_context().add_class("distbutton_active")
-        for i in self.speeds:
-            if i == self.speed:
-                continue
-            self.labels[f"speed{i}"].set_active(False)
 
     def extrude(self, widget, direction):
         self._screen._ws.klippy.gcode_script(KlippyGcodes.EXTRUDE_REL)
