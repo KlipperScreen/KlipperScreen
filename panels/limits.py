@@ -69,6 +69,8 @@ class LimitsPanel(ScreenPanel):
                     self.limits[option]['scale'].get_style_context().add_class("option_slider_max")
                 else:
                     self.limits[option]['scale'].get_style_context().remove_class("option_slider_max")
+                # Infinite scale
+                self.limits[option]['adjustment'].set_upper(self.values[option] * 1.5)
         self.limits[option]['scale'].connect("button-release-event", self.set_opt_value, option)
 
     def add_option(self, option, optname, units, value):
@@ -83,8 +85,9 @@ class LimitsPanel(ScreenPanel):
         name.set_line_wrap(True)
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        scale = Gtk.Scale.new_with_range(orientation=Gtk.Orientation.HORIZONTAL, min=0, max=value * 1.5, step=1)
-        scale.set_value(value)
+        # adj (value, lower, upper, step_increment, page_increment, page_size)
+        adj = Gtk.Adjustment(value, 1, (value * 1.5), 1, 5, 0)
+        scale = Gtk.Scale.new(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
         scale.set_digits(0)
         scale.set_hexpand(True)
         scale.set_has_origin(True)
@@ -108,6 +111,7 @@ class LimitsPanel(ScreenPanel):
         self.limits[option] = {
             "row": frame,
             "scale": scale,
+            "adjustment": adj,
         }
 
         limits = sorted(self.limits)
