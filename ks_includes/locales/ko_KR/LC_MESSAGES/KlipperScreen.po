@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-18 23:05-0300\n"
+"POT-Creation-Date: 2022-10-12 13:34-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: NSteven\n"
 "Language-Team: NSteven\n"
@@ -57,6 +57,9 @@ msgstr "엔드스탑 높이 기준을 %.2f 높이의 옵셋으로 설정 하시�
 #, python-format
 msgid "Apply %s%.2f offset to Probe?"
 msgstr "프로브 높이 기준을 %s%.2f 높이의 옵셋으로 설정 하시겠습니까?"
+
+msgid "Are you sure do you want to exclude the object?"
+msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "비상정지 시킬까요?"
@@ -378,9 +381,6 @@ msgstr "필라 넣기"
 msgid "Lower Nozzle"
 msgstr "노즐 낮춤"
 
-msgid "Machine"
-msgstr ""
-
 msgid "Macro shortcut on sidebar"
 msgstr "사이드바에 매크로 아이콘 표시"
 
@@ -499,6 +499,9 @@ msgstr "출력 제어"
 msgid "Print Time"
 msgstr "출력 시간"
 
+msgid "Printer"
+msgstr ""
+
 msgid "Printer Connections"
 msgstr "프린터 연결"
 
@@ -601,6 +604,12 @@ msgstr "설정"
 msgid "Show"
 msgstr "보기"
 
+msgid "Show Heater Power"
+msgstr ""
+
+msgid "Shutdown"
+msgstr ""
+
 msgid "Size"
 msgstr "크기"
 
@@ -615,9 +624,6 @@ msgstr "슬라이서:"
 
 msgid "Small"
 msgstr "작은"
-
-msgid "Sort by: "
-msgstr "분류 기준: "
 
 msgid "Sort:"
 msgstr "종류:"
@@ -762,6 +768,9 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Sort by: "
+#~ msgstr "분류 기준: "
 
 #~ msgid "Bltouch found applied offset"
 #~ msgstr "Bltouch가 적용된 오프셋"

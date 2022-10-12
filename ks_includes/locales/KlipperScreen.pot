@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-18 23:05-0300\n"
+"POT-Creation-Date: 2022-10-12 13:34-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,6 +61,9 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.2f offset to Probe?"
+msgstr ""
+
+msgid "Are you sure do you want to exclude the object?"
 msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
@@ -383,9 +386,6 @@ msgstr ""
 msgid "Lower Nozzle"
 msgstr ""
 
-msgid "Machine"
-msgstr ""
-
 msgid "Macro shortcut on sidebar"
 msgstr ""
 
@@ -505,6 +505,9 @@ msgstr ""
 msgid "Print Time"
 msgstr ""
 
+msgid "Printer"
+msgstr ""
+
 msgid "Printer Connections"
 msgstr ""
 
@@ -607,6 +610,12 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
+msgid "Show Heater Power"
+msgstr ""
+
+msgid "Shutdown"
+msgstr ""
+
 msgid "Size"
 msgstr ""
 
@@ -620,9 +629,6 @@ msgid "Slicer:"
 msgstr ""
 
 msgid "Small"
-msgstr ""
-
-msgid "Sort by: "
 msgstr ""
 
 msgid "Sort:"

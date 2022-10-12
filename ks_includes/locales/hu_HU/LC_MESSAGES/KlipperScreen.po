@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-11 11:38-0300\n"
+"POT-Creation-Date: 2022-10-12 13:34-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -57,6 +57,9 @@ msgstr "Alkalmaz %.2f eltolást az Endstopra?"
 #, python-format
 msgid "Apply %s%.2f offset to Probe?"
 msgstr "Alkalmaz %s%.2f eltolást a szondára?"
+
+msgid "Are you sure do you want to exclude the object?"
+msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Biztosan Vészleállítást végez?"
@@ -378,9 +381,6 @@ msgstr "Betöltés"
 msgid "Lower Nozzle"
 msgstr "Fúvóka le"
 
-msgid "Machine"
-msgstr "Gép"
-
 msgid "Macro shortcut on sidebar"
 msgstr "Makró parancsikon az oldalsávon"
 
@@ -502,6 +502,9 @@ msgstr "Nyomtatásvezérlés"
 msgid "Print Time"
 msgstr "Nyomtatási idő"
 
+msgid "Printer"
+msgstr ""
+
 msgid "Printer Connections"
 msgstr "Nyomtató csatlakozások"
 
@@ -604,6 +607,12 @@ msgstr "Beállítások"
 msgid "Show"
 msgstr "Mutat"
 
+msgid "Show Heater Power"
+msgstr ""
+
+msgid "Shutdown"
+msgstr ""
+
 msgid "Size"
 msgstr "Méret"
 
@@ -618,9 +627,6 @@ msgstr "Szeletelő:"
 
 msgid "Small"
 msgstr "Kicsi"
-
-msgid "Sort by: "
-msgstr "Sorrend: "
 
 msgid "Sort:"
 msgstr "Fajta:"
@@ -767,6 +773,12 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Machine"
+#~ msgstr "Gép"
+
+#~ msgid "Sort by: "
+#~ msgstr "Sorrend: "
 
 #~ msgid "Bltouch found applied offset"
 #~ msgstr "A Bltouch alkalmazott eltolást talált"
