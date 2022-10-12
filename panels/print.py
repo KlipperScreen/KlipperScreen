@@ -110,10 +110,14 @@ class PrintPanel(ScreenPanel):
         d = f"gcodes/{filepath}".split('/')[:-1]
         directory = '/'.join(d)
         filename = filepath.split('/')[-1]
+        if filename.startswith("."):
+            return
         for i in range(1, len(d)):
             curdir = "/".join(d[:i])
             newdir = "/".join(d[:i + 1])
             if newdir not in self.filelist[curdir]['directories']:
+                if d[i].startswith("."):
+                    return
                 self.add_directory(newdir)
 
         if filename not in self.filelist[directory]['files']:
@@ -333,6 +337,8 @@ class PrintPanel(ScreenPanel):
     def delete_file(self, filename):
         dir_parts = f"gcodes/{filename}".split('/')[:-1]
         directory = '/'.join(dir_parts)
+        if directory not in self.filelist or filename.split('/')[-1].startswith("."):
+            return
         self.filelist[directory]["files"].pop(self.filelist[directory]["files"].index(filename.split('/')[-1]))
         i = len(dir_parts)
         while i > 1:
