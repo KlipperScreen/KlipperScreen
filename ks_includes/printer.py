@@ -147,7 +147,7 @@ class Printer:
 
         if wh_state == "ready":
             new_state = "ready"
-            if self.data['pause_resume']['is_paused']:
+            if self.data.get('pause_resume').get('is_paused'):
                 new_state = "paused"
             elif self.data['print_stats']:
                 print_state = self.data['print_stats']['state'].lower()  # complete, error, paused, printing, standby
