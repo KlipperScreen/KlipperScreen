@@ -206,9 +206,10 @@ class ZCalibratePanel(ScreenPanel):
                 x_offset = float(probe['x_offset'])
             if "y_offset" in probe:
                 y_offset = float(probe['y_offset'])
-        if x_offset is not None and y_offset is not None:
-            logging.info(f"Probe offset X:{x_offset} Y:{y_offset}")
+        logging.info(f"Offset X:{x_offset} Y:{y_offset}")
+        if x_offset is not None:
             x_position = x_position - x_offset
+        if y_offset is not None:
             y_position = y_position - y_offset
 
         logging.info(f"Moving to X:{x_position} Y:{y_position}")
