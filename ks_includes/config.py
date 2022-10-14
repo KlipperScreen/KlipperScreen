@@ -391,9 +391,7 @@ class KlipperScreenConfig:
 
     def get_menu_name(self, menu="__main", subsection=""):
         name = f"menu {menu} {subsection}" if subsection != "" else f"menu {menu}"
-        if name not in self.config:
-            return False
-        return self.config[name].get('name')
+        return False if name not in self.config else self.config[name].get('name')
 
     def get_preheat_options(self):
         index = "preheat "
@@ -410,9 +408,7 @@ class KlipperScreenConfig:
         if not name.startswith("printer "):
             name = f"printer {name}"
 
-        if name not in self.config:
-            return None
-        return self.config[name]
+        return None if name not in self.config else self.config[name]
 
     def get_printer_power_name(self):
         return self.config['settings'].get("printer_power_name", "printer")

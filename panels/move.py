@@ -199,15 +199,13 @@ class MovePanel(ScreenPanel):
         self.distance = distance
 
     def move(self, widget, axis, direction):
-        speed = None
         if self._config.get_config()['main'].getboolean(f"invert_{axis.lower()}", False):
             direction = "-" if direction == "+" else "+"
 
         dist = f"{direction}{self.distance}"
         config_key = "move_speed_z" if axis == AXIS_Z else "move_speed_xy"
         printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
-        if printer_cfg is not None:
-            speed = printer_cfg.getint(config_key, None)
+        speed = None if printer_cfg is None else printer_cfg.getint(config_key, None)
         if speed is None:
             speed = self._config.get_config()['main'].getint(config_key, 20)
 

@@ -126,7 +126,7 @@ class PrintPanel(ScreenPanel):
                 if curdir != "gcodes" and fileinfo['modified'] > self.filelist[curdir]['modified']:
                     self.filelist[curdir]['modified'] = fileinfo['modified']
                     self.labels['directories'][curdir]['info'].set_markup(
-                        f'<small>' + _("Modified")
+                        '<small>' + _("Modified")
                         + f' <b>{datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %H:%M}</b></small>'
                     )
 

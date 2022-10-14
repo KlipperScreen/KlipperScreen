@@ -135,10 +135,8 @@ class KlippyFiles:
         return filename in self.filelist
 
     def file_metadata_exists(self, filename):
-        if not self.file_exists(filename):
-            return False
-        if "slicer" in self.files[filename]:
-            return True
+        if self.file_exists(filename):
+            return "slicer" in self.files[filename]
         return False
 
     def get_thumbnail_location(self, filename, small=False):

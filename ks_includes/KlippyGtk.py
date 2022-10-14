@@ -225,9 +225,9 @@ class KlippyGtk:
         dialog.show_all()
         # Change cursor to blank
         if self.cursor:
-            dialog.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.ARROW))
+            dialog.get_window().set_cursor(Gdk.Cursor.new(Gdk.CursorType.ARROW))
         else:
-            dialog.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.BLANK_CURSOR))
+            dialog.get_window().set_cursor(Gdk.Cursor.new(Gdk.CursorType.BLANK_CURSOR))
 
         self.screen.dialogs.append(dialog)
         return dialog
