@@ -24,7 +24,9 @@ class ExtrudePanel(ScreenPanel):
         self.unload_filament = any("UNLOAD_FILAMENT" in macro.upper() for macro in macros)
 
         self.speeds = ['1', '2', '5', '25']
+        self.speed = int(self.speeds[1])
         self.distances = ['5', '10', '15', '25']
+        self.distance = int(self.distances[1])
         print_cfg = self._config.get_printer_config(self._screen.connected_printer)
         if print_cfg is not None:
             dis = print_cfg.get("extrude_distances", '5, 10, 15, 25')
@@ -75,7 +77,7 @@ class ExtrudePanel(ScreenPanel):
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
-            self.labels[f"dist{i}"] = self._gtk.ToggleButton(i)
+            self.labels[f"dist{i}"] = self._gtk.Button(i)
             self.labels[f"dist{i}"].connect("clicked", self.change_distance, int(i))
             ctx = self.labels[f"dist{i}"].get_style_context()
             if ((self._screen.lang_ltr is True and j == 0) or
@@ -86,15 +88,13 @@ class ExtrudePanel(ScreenPanel):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
-            if j == 1:
+            if int(i) == self.distance:
                 ctx.add_class("distbutton_active")
-                self.labels[f"dist{i}"].set_active(True)
-                self.distance = int(i)
             distgrid.attach(self.labels[f"dist{i}"], j, 0, 1, 1)
 
         speedgrid = Gtk.Grid()
         for j, i in enumerate(self.speeds):
-            self.labels[f"speed{i}"] = self._gtk.ToggleButton(i)
+            self.labels[f"speed{i}"] = self._gtk.Button(i)
             self.labels[f"speed{i}"].connect("clicked", self.change_speed, int(i))
             ctx = self.labels[f"speed{i}"].get_style_context()
             if ((self._screen.lang_ltr is True and j == 0) or
@@ -105,10 +105,8 @@ class ExtrudePanel(ScreenPanel):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
-            if j == 1:
+            if int(i) == self.speed:
                 ctx.add_class("distbutton_active")
-                self.labels[f"speed{i}"].set_active(True)
-                self.speed = int(i)
             speedgrid.attach(self.labels[f"speed{i}"], j, 0, 1, 1)
 
         distbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
