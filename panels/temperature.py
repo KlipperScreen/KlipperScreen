@@ -211,18 +211,17 @@ class TemperaturePanel(ScreenPanel):
             self.hide_numpad()
 
     def select_heater(self, widget, device):
-        if self.active_heater is None:
-            if self.devices[device]["can_target"]:
-                if device in self.active_heaters:
-                    self.active_heaters.pop(self.active_heaters.index(device))
-                    self.devices[device]['name'].get_style_context().remove_class("button_active")
-                    self.devices[device]['select'].set_label(_("Select"))
-                    logging.info(f"Deselecting {device}")
-                    return
-                self.active_heaters.append(device)
-                self.devices[device]['name'].get_style_context().add_class("button_active")
-                self.devices[device]['select'].set_label(_("Deselect"))
-                logging.info(f"Seselecting {device}")
+        if self.active_heater is None and self.devices[device]["can_target"]:
+            if device in self.active_heaters:
+                self.active_heaters.pop(self.active_heaters.index(device))
+                self.devices[device]['name'].get_style_context().remove_class("button_active")
+                self.devices[device]['select'].set_label(_("Select"))
+                logging.info(f"Deselecting {device}")
+                return
+            self.active_heaters.append(device)
+            self.devices[device]['name'].get_style_context().add_class("button_active")
+            self.devices[device]['select'].set_label(_("Deselect"))
+            logging.info(f"Seselecting {device}")
         return
 
     def set_temperature(self, widget, setting):
