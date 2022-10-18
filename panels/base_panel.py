@@ -128,27 +128,28 @@ class BasePanel(ScreenPanel):
         if not show or self._screen.printer.get_temp_store_devices() is None:
             return
 
+        img_size = self._gtk.img_scale * .5
         for device in self._screen.printer.get_temp_store_devices():
             if device.startswith("extruder"):
                 if self._screen.printer.extrudercount > 1:
                     if device == "extruder":
-                        icon = self._gtk.Image("extruder-0", .5)
+                        icon = self._gtk.Image("extruder-0", img_size, img_size)
                     else:
-                        icon = self._gtk.Image(f"extruder-{device[8:]}", .5)
+                        icon = self._gtk.Image(f"extruder-{device[8:]}", img_size, img_size)
                 else:
-                    icon = self._gtk.Image("extruder", .5)
+                    icon = self._gtk.Image("extruder", img_size, img_size)
             elif device.startswith("heater_bed"):
-                icon = self._gtk.Image("bed", .5)
+                icon = self._gtk.Image("bed", img_size, img_size)
             # Extra items
             elif self.titlebar_name_type is not None:
                 # The item has a name, do not use an icon
                 icon = None
             elif device.startswith("temperature_fan"):
-                icon = self._gtk.Image("fan", .5)
+                icon = self._gtk.Image("fan", img_size, img_size)
             elif device.startswith("heater_generic"):
-                icon = self._gtk.Image("heater", .5)
+                icon = self._gtk.Image("heater", img_size, img_size)
             else:
-                icon = self._gtk.Image("heat-up", .5)
+                icon = self._gtk.Image("heat-up", img_size, img_size)
 
             self.labels[device] = Gtk.Label(label="100º")
             self.labels[device].set_ellipsize(Pango.EllipsizeMode.START)

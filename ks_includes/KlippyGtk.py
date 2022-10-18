@@ -10,8 +10,6 @@ from gi.repository import Gdk, GdkPixbuf, Gio, Gtk, Pango
 
 class KlippyGtk:
     labels = {}
-    width_ratio = 16
-    height_ratio = 9.375
 
     def __init__(self, screen, width, height, theme, cursor, fontsize_type):
         self.screen = screen
@@ -28,10 +26,10 @@ class KlippyGtk:
             self.font_size = round(self.font_size * 0.91)
         elif fontsize_type == "large":
             self.font_size = round(self.font_size * 1.09)
-        self.header_size = int(round((self.width / self.width_ratio) / 1.33))
         self.titlebar_height = self.font_size * 2
-        self.img_width = int(round(self.width / self.width_ratio))
-        self.img_height = int(round(self.height / self.height_ratio))
+        self.img_scale = self.font_size * 2.5
+        self.img_width = self.font_size * 3
+        self.img_height = self.font_size * 3
         if self.screen.vertical_mode:
             self.action_bar_width = int(self.width)
             self.action_bar_height = int(self.height * .1)
@@ -69,15 +67,6 @@ class KlippyGtk:
 
     def get_titlebar_height(self):
         return self.titlebar_height
-
-    def get_header_size(self):
-        return self.header_size
-
-    def get_image_width(self):
-        return self.img_width
-
-    def get_image_height(self):
-        return self.img_height
 
     def get_keyboard_height(self):
         if (self.height / self.width) >= 3:
@@ -119,37 +108,29 @@ class KlippyGtk:
             la.get_style_context().add_class(style)
         return la
 
-    def Image(self, image_name, scale=1.0):
+    def Image(self, image_name, width=None, height=None):
+        width = width if width is not None else self.img_width
+        height = height if height is not None else self.img_height
         filename = os.path.join(self.themedir, f"{image_name}.svg")
         if os.path.exists(filename):
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename,
-                                                             int(round(self.img_width * scale)),
-                                                             int(round(self.img_height * scale)),
-                                                             True)
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, int(width), int(height))
             return Gtk.Image.new_from_pixbuf(pixbuf)
         else:
             logging.error(f"Unable to find image {filename}")
             return Gtk.Image()
 
-    def PixbufFromFile(self, filename, width_scale=1, height_scale=1):
-        return GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            filename,
-            int(round(self.img_width * width_scale)),
-            int(round(self.img_height * height_scale)),
-            True
-        )
+    @staticmethod
+    def PixbufFromFile(filename, width=-1, height=-1):
+        return GdkPixbuf.Pixbuf.new_from_file_at_size(filename, int(width), int(height))
 
-    def PixbufFromHttp(self, resource, width_scale=1, height_scale=1):
+    def PixbufFromHttp(self, resource, width=-1, height=-1):
         response = self.screen.apiclient.get_thumbnail_stream(resource)
         if response is False:
             return None
         stream = Gio.MemoryInputStream.new_from_data(response, None)
-        return GdkPixbuf.Pixbuf.new_from_stream_at_scale(
-            stream,
-            int(round(self.img_width * width_scale)),
-            int(round(self.img_height * height_scale)),
-            True
-        )
+        pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(stream, int(width), int(height), True)
+        stream.close_async(2)
+        return pixbuf
 
     def Button(self, label=None, style=None):
         b = Gtk.Button(label=label)
@@ -171,7 +152,8 @@ class KlippyGtk:
         b.set_vexpand(True)
         b.set_can_focus(False)
         if image_name is not None:
-            b.set_image(self.Image(image_name, scale))
+            width = height = self.img_scale * scale
+            b.set_image(self.Image(image_name, width, height))
         b.set_image_position(position)
         b.set_always_show_image(True)
 
@@ -238,13 +220,13 @@ class KlippyGtk:
         logging.info("Removing Dialog")
         self.screen.dialogs.remove(dialog)
 
-    def ToggleButtonImage(self, image_name, label, style=None, scale=1.38):
+    def ToggleButtonImage(self, image_name, label, style=None, width=None, height=None):
 
         b = Gtk.ToggleButton(label=label)
         b.set_hexpand(True)
         b.set_vexpand(True)
         b.set_can_focus(False)
-        b.set_image(self.Image(image_name, scale))
+        b.set_image(self.Image(image_name, width, height))
         b.set_image_position(Gtk.PositionType.TOP)
         b.set_always_show_image(True)
 

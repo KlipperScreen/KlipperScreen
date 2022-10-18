@@ -45,7 +45,7 @@ class PrintPanel(ScreenPanel):
         for i, (name, val) in enumerate(self.sort_items.items(), start=1):
             s = self._gtk.ButtonImage(None, val, f"color{i % 4}", .5, Gtk.PositionType.RIGHT, 1)
             if name == self.sort_current[0]:
-                s.set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], .5))
+                s.set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], self._gtk.img_scale * .5))
             s.connect("clicked", self.change_sort, name)
             self.labels[f'sort_{name}'] = s
             sbox.add(s)
@@ -179,7 +179,7 @@ class PrintPanel(ScreenPanel):
         file.set_hexpand(True)
         file.set_vexpand(False)
 
-        icon = self._gtk.Image("folder", 1)
+        icon = self._gtk.Image("folder")
 
         file.add(icon)
         file.add(labels)
@@ -226,12 +226,11 @@ class PrintPanel(ScreenPanel):
         file.set_hexpand(True)
         file.set_vexpand(False)
 
-        icon = Gtk.Image()
         pixbuf = self.get_file_image(filepath, small=True)
         if pixbuf is not None:
-            icon.set_from_pixbuf(pixbuf)
+            icon = Gtk.Image.new_from_pixbuf(pixbuf)
         else:
-            icon = self._gtk.Image("file", 1.6)
+            icon = self._gtk.Image("file")
 
         img = Gtk.Button()
         img.set_image(icon)
@@ -288,7 +287,8 @@ class PrintPanel(ScreenPanel):
             self.labels[f'sort_{oldkey}'].set_image(None)
             self.labels[f'sort_{oldkey}'].show_all()
             self.sort_current = [key, 0]
-        self.labels[f'sort_{key}'].set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], .5))
+        self.labels[f'sort_{key}'].set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]],
+                                                             self._gtk.img_scale * .5))
         self.labels[f'sort_{key}'].show()
         GLib.idle_add(self.reload_files)
 
@@ -312,16 +312,16 @@ class PrintPanel(ScreenPanel):
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
         grid = Gtk.Grid()
-        grid.add(label)
-
-        pixbuf = self.get_file_image(filename, 8, 3.2)
-        if pixbuf is not None:
-            image = Gtk.Image.new_from_pixbuf(pixbuf)
-            grid.attach_next_to(image, label, Gtk.PositionType.BOTTOM, 1, 3)
-
         grid.set_vexpand(True)
         grid.set_halign(Gtk.Align.CENTER)
         grid.set_valign(Gtk.Align.CENTER)
+        grid.add(label)
+
+        pixbuf = self.get_file_image(filename, self._screen.width * .9, self._screen.height * .6)
+        if pixbuf is not None:
+            image = Gtk.Image.new_from_pixbuf(pixbuf)
+            image.set_vexpand(False)
+            grid.attach_next_to(image, label, Gtk.PositionType.BOTTOM, 1, 1)
 
         self._gtk.Dialog(self._screen, buttons, grid, self.confirm_print_response, filename)
 

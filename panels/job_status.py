@@ -119,12 +119,7 @@ class JobStatusPanel(ScreenPanel):
         overlay.add(self.labels['darea'])
         overlay.add_overlay(box)
 
-        self.labels['thumbnail'] = self._gtk.Image("file", 2)
-        if self._screen.vertical_mode:
-            self.labels['thumbnail'].set_size_request(0, self._screen.height / 4)
-        else:
-            self.labels['thumbnail'].set_size_request(self._screen.width / 3, 0)
-
+        self.labels['thumbnail'] = self._gtk.Image("file", self._screen.width / 4, self._screen.height / 4)
         self.labels['info_grid'] = Gtk.Grid()
         self.labels['info_grid'].attach(self.labels['thumbnail'], 0, 0, 1, 1)
         if self._screen.printer.get_tools():
@@ -826,7 +821,13 @@ class JobStatusPanel(ScreenPanel):
 
     def show_file_thumbnail(self):
         if self._files.has_thumbnail(self.filename):
-            pixbuf = self.get_file_image(self.filename, 5, 4)
+            if self._screen.vertical_mode:
+                width = -1
+                height = self._screen.height / 4
+            else:
+                width = self._screen.width / 3
+                height = -1
+            pixbuf = self.get_file_image(self.filename, width, height)
             if pixbuf is not None:
                 self.labels['thumbnail'].set_from_pixbuf(pixbuf)
 
@@ -840,7 +841,6 @@ class JobStatusPanel(ScreenPanel):
             "limit": (self._screen.width * 24 / 480) // (self._gtk.get_font_size() / 11),
             "length": len(self.labels['file'].get_label())
         }
-
         if self.animation_timeout is None and (self.filename_label['length'] - self.filename_label['limit']) > 0:
             self.animation_timeout = GLib.timeout_add_seconds(1, self.animate_label)
         self.update_percent_complete()
