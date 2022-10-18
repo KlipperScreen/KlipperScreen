@@ -212,6 +212,8 @@ class KlippyGtk:
             button.get_child().set_line_wrap(True)
             button.set_size_request((screen.width - 30) / 3, screen.height / 5)
 
+        dialog.connect("response", self.screen.reset_screensaver_timeout)
+        dialog.connect("response", self.remove_dialog, dialog)
         dialog.connect("response", callback, *args)
         dialog.get_style_context().add_class("dialog")
 
@@ -231,6 +233,10 @@ class KlippyGtk:
 
         self.screen.dialogs.append(dialog)
         return dialog
+
+    def remove_dialog(self, widget, response_id, dialog):
+        logging.info("Removing Dialog")
+        self.screen.dialogs.remove(dialog)
 
     def ToggleButtonImage(self, image_name, label, style=None, scale=1.38):
 

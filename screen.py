@@ -607,7 +607,7 @@ class KlipperScreen(Gtk.Window):
                 self.subscriptions.pop(i)
                 return
 
-    def reset_screensaver_timeout(self, widget=None):
+    def reset_screensaver_timeout(self, *args):
         if self.screensaver_timeout is not None:
             GLib.source_remove(self.screensaver_timeout)
             self.screensaver_timeout = GLib.timeout_add_seconds(self.blanking_time, self.show_screensaver)
@@ -617,6 +617,8 @@ class KlipperScreen(Gtk.Window):
         if self.screensaver is not None:
             self.close_screensaver()
         self.remove_keyboard()
+        for dialog in self.dialogs:
+            dialog.hide()
 
         close = Gtk.Button()
         close.connect("clicked", self.close_screensaver)
@@ -626,12 +628,12 @@ class KlipperScreen(Gtk.Window):
         box.pack_start(close, True, True, 0)
         box.set_halign(Gtk.Align.CENTER)
         box.get_style_context().add_class("screensaver")
-
         self.base_panel.get().put(box, 0, 0)
-        self.show_all()
+
         # Avoid leaving a cursor-handle
         close.grab_focus()
         self.screensaver = box
+        self.screensaver.show_all()
         return False
 
     def close_screensaver(self, widget=None):
@@ -644,6 +646,8 @@ class KlipperScreen(Gtk.Window):
             self.wake_screen()
         else:
             self.screensaver_timeout = GLib.timeout_add_seconds(self.blanking_time, self.show_screensaver)
+        for dialog in self.dialogs:
+            dialog.show()
         self.show_all()
         return False
 
