@@ -837,8 +837,7 @@ class JobStatusPanel(ScreenPanel):
             "complete": self.labels['file'].get_label(),
             "current": self.labels['file'].get_label(),
             "position": 0,
-            "limit": 0.8 * (self._gtk.get_content_width() - self.labels[
-                'darea'].get_allocated_width()) // self._gtk.get_font_size(),
+            "limit": (self._screen.width * 24 / 480) // (self._gtk.get_font_size() / 11),
             "length": len(self.labels['file'].get_label())
         }
 
