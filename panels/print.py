@@ -189,7 +189,6 @@ class PrintPanel(ScreenPanel):
         self.directories[directory] = frame
 
         self.labels['directories'][directory] = {
-            "icon": icon,
             "info": info,
             "name": name
         }
@@ -226,17 +225,12 @@ class PrintPanel(ScreenPanel):
         file.set_hexpand(True)
         file.set_vexpand(False)
 
-        pixbuf = self.get_file_image(filepath, small=True)
-        if pixbuf is not None:
-            icon = Gtk.Image.new_from_pixbuf(pixbuf)
-        else:
-            icon = self._gtk.Image("file")
 
-        img = Gtk.Button()
-        img.set_image(icon)
-        img.connect("clicked", self.confirm_delete_file, f"gcodes/{filepath}")
+        icon = Gtk.Button()
+        GLib.idle_add(self.image_load, filepath)
+        icon.connect("clicked", self.confirm_delete_file, f"gcodes/{filepath}")
 
-        file.add(img)
+        file.add(icon)
         file.add(labels)
         if os.path.splitext(filename)[1] in [".gcode", ".g", ".gco"]:
             file.add(actions)
@@ -248,6 +242,13 @@ class PrintPanel(ScreenPanel):
             "info": info,
             "name": name
         }
+
+    def image_load(self, filepath):
+        pixbuf = self.get_file_image(filepath, small=True)
+        if pixbuf is not None:
+            self.labels['files'][filepath]['icon'].set_image(Gtk.Image.new_from_pixbuf(pixbuf))
+        else:
+            self.labels['files'][filepath]['icon'].set_image(self._gtk.Image("file"))
 
     def confirm_delete_file(self, widget, filepath):
         logging.debug(f"Sending delete_file {filepath}")
@@ -396,9 +397,7 @@ class PrintPanel(ScreenPanel):
         self.labels['files'][filename]['info'].set_markup(self.get_file_info_str(filename))
 
         # Update icon
-        pixbuf = self.get_file_image(filename)
-        if pixbuf is not None:
-            self.labels['files'][filename]['icon'].set_from_pixbuf(pixbuf)
+        GLib.idle_add(self.image_load, filename)
 
     def _callback(self, newfiles, deletedfiles, updatedfiles=None):
         logging.debug(f"newfiles: {newfiles}")
