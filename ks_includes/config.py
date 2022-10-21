@@ -348,21 +348,36 @@ class KlipperScreenConfig:
         return ["\n".join(user_def), None if saved_def is None else "\n".join(saved_def)]
 
     def get_config_file_location(self, file):
-        logging.info(f"Passed config file: {file}")
-        if not path.exists(file):
-            file = os.path.join(klipperscreendir, self.configfile_name)
-            if not path.exists(file):
-                file = self.configfile_name.lower()
-                if not path.exists(file):
-                    klipper_config = os.path.join(os.path.expanduser("~/"), "klipper_config")
-                    file = os.path.join(klipper_config, self.configfile_name)
-                    if not path.exists(file):
-                        file = os.path.join(klipper_config, self.configfile_name.lower())
-                        if not path.exists(file):
-                            file = self.default_config_path
+        # Passed config (-c) by default is ~/KlipperScreen.conf
+        if path.exists(file):
+            return file
 
-        logging.info(f"Found configuration file at: {file}")
-        return file
+        file = os.path.join(klipperscreendir, self.configfile_name)
+        if path.exists(file):
+            return file
+        file = os.path.join(klipperscreendir, self.configfile_name.lower())
+        if path.exists(file):
+            return file
+
+        klipper_config = os.path.join(os.path.expanduser("~/"), "printer_data", "config")
+        file = os.path.join(klipper_config, self.configfile_name)
+        if path.exists(file):
+            return file
+        file = os.path.join(klipper_config, self.configfile_name.lower())
+        if path.exists(file):
+            return file
+
+        # OLD config folder
+        klipper_config = os.path.join(os.path.expanduser("~/"), "klipper_config")
+        file = os.path.join(klipper_config, self.configfile_name)
+        if path.exists(file):
+            return file
+        file = os.path.join(klipper_config, self.configfile_name.lower())
+        if path.exists(file):
+            return file
+
+        # fallback
+        return self.default_config_path
 
     def get_config(self):
         return self.config
