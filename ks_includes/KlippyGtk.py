@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import contextlib
 import gi
 import logging
 import os
@@ -108,16 +109,19 @@ class KlippyGtk:
             la.get_style_context().add_class(style)
         return la
 
-    def Image(self, image_name, width=None, height=None):
+    def Image(self, image_name=None, width=None, height=None):
+        if image_name is None:
+            return Gtk.Image()
         width = width if width is not None else self.img_width
         height = height if height is not None else self.img_height
-        filename = os.path.join(self.themedir, f"{image_name}.svg")
-        if os.path.exists(filename):
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, int(width), int(height))
-            return Gtk.Image.new_from_pixbuf(pixbuf)
-        else:
-            logging.error(f"Unable to find image {filename}")
-            return Gtk.Image()
+        filename = os.path.join(self.themedir, image_name)
+        for ext in ["svg", "png"]:
+            with contextlib.suppress(Exception):
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(f"{filename}.{ext}", int(width), int(height))
+                if pixbuf is not None:
+                    return Gtk.Image.new_from_pixbuf(pixbuf)
+        logging.error(f"Unable to find image {filename}.{ext}")
+        return Gtk.Image()
 
     @staticmethod
     def PixbufFromFile(filename, width=-1, height=-1):
