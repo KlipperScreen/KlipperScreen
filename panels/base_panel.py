@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import contextlib
-import datetime
 import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Pango
 from jinja2 import Environment
+from datetime import datetime
 
 from ks_includes.screen_panel import ScreenPanel
 
@@ -81,7 +81,7 @@ class BasePanel(ScreenPanel):
         self.control['time'] = Gtk.Label("00:00 AM")
         self.control['time_box'] = Gtk.Box()
         self.control['time_box'].set_halign(Gtk.Align.END)
-        self.control['time_box'].pack_end(self.control['time'], True, True, 5)
+        self.control['time_box'].pack_end(self.control['time'], True, True, 10)
 
         self.titlebar = Gtk.Box(spacing=5)
         self.titlebar.set_size_request(0, self._gtk.get_titlebar_height())
@@ -301,11 +301,13 @@ class BasePanel(ScreenPanel):
         self.titlelbl.set_label(f"{self._screen.connecting_to_printer} | {title}")
 
     def update_time(self):
-        now = datetime.datetime.now()
+        now = datetime.now()
         confopt = self._config.get_main_config().getboolean("24htime", True)
         if now.minute != self.time_min or self.time_format != confopt:
             if confopt:
-                self.control['time'].set_text(f'{now:%H:%M}')
+                self.control['time'].set_text(f'{now:%H:%M }')
             else:
                 self.control['time'].set_text(f'{now:%I:%M %p}')
+            self.time_min = now.minute
+            self.time_format = confopt
         return True
