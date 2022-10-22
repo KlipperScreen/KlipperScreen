@@ -7,6 +7,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Pango
 from jinja2 import Environment
 from datetime import datetime
+from math import log
 
 from ks_includes.screen_panel import ScreenPanel
 
@@ -140,12 +141,7 @@ class BasePanel(ScreenPanel):
             self.labels[f'{device}_box'].pack_start(self.labels[device], False, False, 0)
 
         # Limit the number of items according to resolution
-        if self._screen.width <= 480:
-            nlimit = 3
-        elif self._screen.width <= 800:
-            nlimit = 4
-        else:
-            nlimit = 5
+        nlimit = int(round(log(self._screen.width, 10) * 5 - 10.5))
 
         n = 0
         if self._screen.printer.get_tools():
