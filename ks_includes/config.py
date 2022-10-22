@@ -129,7 +129,7 @@ class KlipperScreenConfig:
                 )
                 numbers = (
                     'job_complete_timeout', 'job_error_timeout', 'move_speed_xy', 'move_speed_z',
-                    'print_estimate_compensation'
+                    'print_estimate_compensation', 'width', 'height',
                 )
             elif section.startswith('printer '):
                 bools = (
