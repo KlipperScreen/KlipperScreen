@@ -65,7 +65,7 @@ class BasePanel(ScreenPanel):
         self.action_bar.add(self.control['home'])
         if len(self._config.get_printers()) > 1:
             self.action_bar.add(self.control['printer_select'])
-        self.action_bar.add(self.control['macros_shortcut'])
+        self.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
         self.action_bar.add(self.control['estop'])
 
         # Titlebar
@@ -267,11 +267,11 @@ class BasePanel(ScreenPanel):
                 self.action_bar.reorder_child(self.control['macros_shortcut'], 2)
             else:
                 self.action_bar.reorder_child(self.control['macros_shortcut'], 3)
+            self.control['macros_shortcut'].show()
             self.buttons_showing['macros_shortcut'] = True
         elif show is False and self.buttons_showing['macros_shortcut'] is True:
             self.action_bar.remove(self.control['macros_shortcut'])
             self.buttons_showing['macros_shortcut'] = False
-        self._screen.show_all()
 
     def show_printer_select(self, show=True):
         if len(self._config.get_printers()) <= 1:
@@ -280,10 +280,10 @@ class BasePanel(ScreenPanel):
             self.action_bar.add(self.control['printer_select'])
             self.action_bar.reorder_child(self.control['printer_select'], 2)
             self.buttons_showing['printer_select'] = True
+            self.control['printer_select'].show()
         elif show is False and self.buttons_showing['printer_select']:
             self.action_bar.remove(self.control['printer_select'])
             self.buttons_showing['printer_select'] = False
-        self._screen.show_all()
 
     def set_title(self, title):
         try:
