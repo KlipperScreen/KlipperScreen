@@ -109,9 +109,7 @@ class MenuPanel(ScreenPanel):
             logging.debug(f"Template: '{enable}'")
             j2_temp = Template(enable, autoescape=True)
             result = j2_temp.render(self.j2_data)
-            if result == 'True':
-                return True
-            return False
+            return result == 'True'
         except Exception as e:
             logging.debug(f"Error evaluating enable statement: {enable}\n{e}")
             return False

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-18 23:05-0300\n"
+"POT-Creation-Date: 2022-10-12 13:34-0300\n"
 "PO-Revision-Date: 2022-07-16 23:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -62,6 +62,9 @@ msgstr "对Endstop应用%.2f的偏移量？"
 #, python-format
 msgid "Apply %s%.2f offset to Probe?"
 msgstr "将%s%.2f的偏移量应用于探针？"
+
+msgid "Are you sure do you want to exclude the object?"
+msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "您确定要紧急停止吗？"
@@ -383,9 +386,6 @@ msgstr "载入耗材"
 msgid "Lower Nozzle"
 msgstr "降低喷嘴"
 
-msgid "Machine"
-msgstr ""
-
 msgid "Macro shortcut on sidebar"
 msgstr "显示侧边栏宏快捷方式"
 
@@ -504,6 +504,9 @@ msgstr "打印控制"
 msgid "Print Time"
 msgstr "打印用时"
 
+msgid "Printer"
+msgstr ""
+
 msgid "Printer Connections"
 msgstr "龙门架调平"
 
@@ -606,6 +609,12 @@ msgstr "设置"
 msgid "Show"
 msgstr "显示"
 
+msgid "Show Heater Power"
+msgstr ""
+
+msgid "Shutdown"
+msgstr ""
+
 msgid "Size"
 msgstr "大小"
 
@@ -620,9 +629,6 @@ msgstr "切片:"
 
 msgid "Small"
 msgstr "小"
-
-msgid "Sort by: "
-msgstr "排序: "
 
 msgid "Sort:"
 msgstr "排序:"
@@ -768,6 +774,9 @@ msgstr ""
 msgid "mm/s²"
 msgstr ""
 
+#~ msgid "Sort by: "
+#~ msgstr "排序: "
+
 #~ msgid "Bltouch found applied offset"
 #~ msgstr "Bltouch 发现应用的偏移量"
 
@@ -795,9 +804,6 @@ msgstr ""
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6 地址"
-
-#~ msgid "Unknown Heater "
-#~ msgstr "未知加热器 "
 
 #~ msgid "Disconnect"
 #~ msgstr "断开"

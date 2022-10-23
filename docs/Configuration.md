@@ -81,6 +81,10 @@ screw_positions: ""
 # Rotation is useful if the screen is not directly in front of the machine.
 # Valid values are 0 90 180 270
 screw_rotation: 0
+
+# Define distances and speeds for the extrude panel. CSV list 2 to 4 integers
+extrude_distances: 5, 10, 15, 25
+extrude_speeds: 1, 2, 5, 25
 ```
 
 ## Preheat Options

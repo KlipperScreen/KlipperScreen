@@ -105,11 +105,12 @@ create_virtualenv()
 {
     echo_text "Creating virtual environment"
     if [ ! -d ${KSENV} ]; then
-        GET_PIP="${HOME}/get-pip.py"
-        virtualenv --no-pip -p /usr/bin/python3 ${KSENV}
-        curl https://bootstrap.pypa.io/pip/3.6/get-pip.py -o ${GET_PIP}
-        ${KSENV}/bin/python ${GET_PIP}
-        rm ${GET_PIP}
+        virtualenv -p /usr/bin/python3 ${KSENV}
+#         GET_PIP="${HOME}/get-pip.py"
+#         virtualenv --no-pip -p /usr/bin/python3 ${KSENV}
+#         curl https://bootstrap.pypa.io/pip/3.6/get-pip.py -o ${GET_PIP}
+#         ${KSENV}/bin/python ${GET_PIP}
+#         rm ${GET_PIP}
     fi
 
     source ${KSENV}/bin/activate

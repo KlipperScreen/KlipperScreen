@@ -25,7 +25,7 @@ class TemperaturePanel(ScreenPanel):
         self.popover_device = None
         self.h = 1
         self.tempdeltas = ["1", "5", "10", "25"]
-        self.tempdelta = "10"
+        self.tempdelta = self.tempdeltas[-2]
         self.show_preheat = False
         self.preheat_options = self._screen._config.get_preheat_options()
         logging.debug(f"Preheat options: {self.preheat_options}")
@@ -115,7 +115,7 @@ class TemperaturePanel(ScreenPanel):
 
         tempgrid = Gtk.Grid()
         for j, i in enumerate(self.tempdeltas):
-            self.labels[f'deg{i}'] = self._gtk.ToggleButton(i)
+            self.labels[f'deg{i}'] = self._gtk.Button(i)
             self.labels[f'deg{i}'].connect("clicked", self.change_temp_delta, i)
             ctx = self.labels[f'deg{i}'].get_style_context()
             if j == 0:
@@ -124,10 +124,9 @@ class TemperaturePanel(ScreenPanel):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
-            if i == "10":
+            if i == self.tempdelta:
                 ctx.add_class("distbutton_active")
             tempgrid.attach(self.labels[f'deg{i}'], j, 0, 1, 1)
-        self.labels[f"deg{self.tempdelta}"].set_active(True)
 
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         vbox.pack_start(Gtk.Label(_("Temperature") + " (°C)"), False, False, 8)
@@ -140,20 +139,10 @@ class TemperaturePanel(ScreenPanel):
         return deltagrid
 
     def change_temp_delta(self, widget, tempdelta):
-        if self.tempdelta == tempdelta:
-            return
         logging.info(f"### tempdelta {tempdelta}")
-
-        ctx = self.labels[f"deg{self.tempdelta}"].get_style_context()
-        ctx.remove_class("distbutton_active")
-
+        self.labels[f"deg{self.tempdelta}"].get_style_context().remove_class("distbutton_active")
+        self.labels[f"deg{tempdelta}"].get_style_context().add_class("distbutton_active")
         self.tempdelta = tempdelta
-        ctx = self.labels[f"deg{self.tempdelta}"].get_style_context()
-        ctx.add_class("distbutton_active")
-        for i in self.tempdeltas:
-            if i == self.tempdeltas:
-                continue
-            self.labels[f"deg{i}"].set_active(False)
 
     def change_target_temp_incremental(self, widget, direction):
 
@@ -222,18 +211,17 @@ class TemperaturePanel(ScreenPanel):
             self.hide_numpad()
 
     def select_heater(self, widget, device):
-        if self.active_heater is None:
-            if self.devices[device]["can_target"]:
-                if device in self.active_heaters:
-                    self.active_heaters.pop(self.active_heaters.index(device))
-                    self.devices[device]['name'].get_style_context().remove_class("button_active")
-                    self.devices[device]['select'].set_label(_("Select"))
-                    logging.info(f"Deselecting {device}")
-                    return
-                self.active_heaters.append(device)
-                self.devices[device]['name'].get_style_context().add_class("button_active")
-                self.devices[device]['select'].set_label(_("Deselect"))
-                logging.info(f"Seselecting {device}")
+        if self.active_heater is None and self.devices[device]["can_target"]:
+            if device in self.active_heaters:
+                self.active_heaters.pop(self.active_heaters.index(device))
+                self.devices[device]['name'].get_style_context().remove_class("button_active")
+                self.devices[device]['select'].set_label(_("Select"))
+                logging.info(f"Deselecting {device}")
+                return
+            self.active_heaters.append(device)
+            self.devices[device]['name'].get_style_context().add_class("button_active")
+            self.devices[device]['select'].set_label(_("Deselect"))
+            logging.info(f"Seselecting {device}")
         return
 
     def set_temperature(self, widget, setting):

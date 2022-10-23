@@ -17,8 +17,8 @@ def create_panel(*args):
 
 
 class MovePanel(ScreenPanel):
-    distance = 1
     distances = ['.1', '.5', '1', '5', '10', '25', '50']
+    distance = distances[-2]
 
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, back)
@@ -100,7 +100,7 @@ class MovePanel(ScreenPanel):
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
-            self.labels[i] = self._gtk.ToggleButton(i)
+            self.labels[i] = self._gtk.Button(i)
             self.labels[i].set_direction(Gtk.TextDirection.LTR)
             self.labels[i].connect("clicked", self.change_distance, i)
             ctx = self.labels[i].get_style_context()
@@ -110,10 +110,9 @@ class MovePanel(ScreenPanel):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
-            if i == "1":
+            if i == self.distance:
                 ctx.add_class("distbutton_active")
             distgrid.attach(self.labels[i], j, 0, 1, 1)
-        self.labels["1"].set_active(True)
 
         self.labels['pos_x'] = Gtk.Label("X: 0")
         self.labels['pos_y'] = Gtk.Label("Y: 0")
@@ -194,31 +193,19 @@ class MovePanel(ScreenPanel):
                 self.labels['pos_z'].set_text("Z: ?")
 
     def change_distance(self, widget, distance):
-        if self.distance == distance:
-            return
         logging.info(f"### Distance {distance}")
-
-        ctx = self.labels[f"{self.distance}"].get_style_context()
-        ctx.remove_class("distbutton_active")
-
+        self.labels[f"{self.distance}"].get_style_context().remove_class("distbutton_active")
+        self.labels[f"{distance}"].get_style_context().add_class("distbutton_active")
         self.distance = distance
-        ctx = self.labels[self.distance].get_style_context()
-        ctx.add_class("distbutton_active")
-        for i in self.distances:
-            if i == self.distance:
-                continue
-            self.labels[f"{i}"].set_active(False)
 
     def move(self, widget, axis, direction):
-        speed = None
         if self._config.get_config()['main'].getboolean(f"invert_{axis.lower()}", False):
             direction = "-" if direction == "+" else "+"
 
         dist = f"{direction}{self.distance}"
         config_key = "move_speed_z" if axis == AXIS_Z else "move_speed_xy"
         printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
-        if printer_cfg is not None:
-            speed = printer_cfg.getint(config_key, None)
+        speed = None if printer_cfg is None else printer_cfg.getint(config_key, None)
         if speed is None:
             speed = self._config.get_config()['main'].getint(config_key, 20)
 

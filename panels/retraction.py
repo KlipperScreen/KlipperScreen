@@ -102,6 +102,14 @@ class FWRetractionPanel(ScreenPanel):
         self.list[option]['scale'].disconnect_by_func(self.set_opt_value)
         self.list[option]['scale'].set_value(self.values[option])
         self.list[option]['scale'].connect("button-release-event", self.set_opt_value, option)
+        # Infinite scale
+        for opt in self.options:
+            if opt['option'] == option:
+                if self.values[option] > opt["maxval"] * .75:
+                    self.list[option]['adjustment'].set_upper(self.values[option] * 1.5)
+                else:
+                    self.list[option]['adjustment'].set_upper(opt["maxval"])
+                break
 
     def add_option(self, option, optname, units, value, digits, maxval):
         logging.info(f"Adding option: {option}")
@@ -116,8 +124,9 @@ class FWRetractionPanel(ScreenPanel):
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         minimum = 1 if option in ["retract_speed", "unretract_speed"] else 0
         self.values[option] = value
-        scale = Gtk.Scale.new_with_range(orientation=Gtk.Orientation.HORIZONTAL, min=minimum, max=maxval, step=1)
-        scale.set_value(self.values[option])
+        # adj (value, lower, upper, step_increment, page_increment, page_size)
+        adj = Gtk.Adjustment(value, minimum, maxval, 1, 5, 0)
+        scale = Gtk.Scale.new(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
         scale.set_digits(digits)
         scale.set_hexpand(True)
         scale.set_has_origin(True)
@@ -140,6 +149,7 @@ class FWRetractionPanel(ScreenPanel):
         self.list[option] = {
             "row": frame,
             "scale": scale,
+            "adjustment": adj,
         }
 
         pos = sorted(self.list).index(option)

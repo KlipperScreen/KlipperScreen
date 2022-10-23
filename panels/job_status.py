@@ -849,14 +849,11 @@ class JobStatusPanel(ScreenPanel):
 
     def animate_label(self):
         pos = self.filename_label['position']
-        current = self.filename_label['current']
-        complete = self.filename_label['complete']
-
         if pos > (self.filename_label['length'] - self.filename_label['limit']):
             self.filename_label['position'] = 0
-            self.labels['file'].set_label(complete)
+            self.labels['file'].set_label(self.filename_label['complete'])
         else:
-            self.labels['file'].set_label(current[pos:self.filename_label['length']])
+            self.labels['file'].set_label(self.filename_label['current'][pos:self.filename_label['length']])
             self.filename_label['position'] += 1
         return True
 
