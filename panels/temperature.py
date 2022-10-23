@@ -211,7 +211,7 @@ class TemperaturePanel(ScreenPanel):
             self.hide_numpad()
 
     def select_heater(self, widget, device):
-        if self.active_heater is None and self.devices[device]["can_target"]:
+        if self.active_heater is None and device in self.devices and self.devices[device]["can_target"]:
             if device in self.active_heaters:
                 self.active_heaters.pop(self.active_heaters.index(device))
                 self.devices[device]['name'].get_style_context().remove_class("button_active")

@@ -146,7 +146,7 @@ class BasePanel(ScreenPanel):
         n = 0
         if self._screen.printer.get_tools():
             self.current_extruder = self._screen.printer.get_stat("toolhead", "extruder")
-            if self.current_extruder:
+            if self.current_extruder and f"{self.current_extruder}_box" in self.labels:
                 self.control['temp_box'].add(self.labels[f"{self.current_extruder}_box"])
                 n += 1
 
