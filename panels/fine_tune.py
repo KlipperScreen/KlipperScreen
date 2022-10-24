@@ -32,6 +32,7 @@ class FineTunePanel(ScreenPanel):
                 bs = [str(i.strip()) for i in bs.split(',')]
                 if 1 < len(bs) < 3:
                     self.bs_deltas = bs
+                    self.bs_delta = self.bs_deltas[-1]
 
         # babystepping grid
         bsgrid = Gtk.Grid()
