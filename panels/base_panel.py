@@ -288,7 +288,7 @@ class BasePanel(ScreenPanel):
     def set_title(self, title):
         try:
             env = Environment(extensions=["jinja2.ext.i18n"], autoescape=True)
-            env.install_gettext_translations(self.lang)
+            env.install_gettext_translations(self._config.get_lang())
             j2_temp = env.from_string(title)
             title = j2_temp.render()
         except Exception as e:

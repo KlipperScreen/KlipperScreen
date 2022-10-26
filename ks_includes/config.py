@@ -40,6 +40,8 @@ class KlipperScreenConfig:
         self.config_path = self.get_config_file_location(configfile)
         logging.debug(f"Config path location: {self.config_path}")
         self.defined_config = None
+        self.lang = None
+        self.langs = {}
 
         try:
             self.config.read(self.default_config_path)
@@ -101,14 +103,34 @@ class KlipperScreenConfig:
                 item[name]['moonraker_api_key'] = "redacted"
         logging.debug(f"Configured printers: {json.dumps(conf_printers_debug, indent=2)}")
 
-        lang = self.get_main_config().get("language", None)
-        lang = [lang] if lang is not None and lang != "default" else None
-        logging.info(f"Detected language: {lang}")
-        self.lang = gettext.translation('KlipperScreen', localedir='ks_includes/locales', languages=lang,
-                                        fallback=True)
-        self.lang.install(names=['gettext', 'ngettext'])
-
+        self.create_translations()
         self._create_configurable_options(screen)
+
+    def create_translations(self):
+        lang_path = os.path.join(klipperscreendir, "ks_includes", "locales")
+        self.lang_list = [d for d in os.listdir(lang_path) if not os.path.isfile(os.path.join(lang_path, d))]
+        self.lang_list.sort()
+        logging.info(f"Available lang list {self.lang_list}")
+        for lng in self.lang_list:
+            self.langs[lng] = gettext.translation('KlipperScreen', localedir=lang_path, languages=[lng], fallback=True)
+
+        lang = self.get_main_config().get("language", None)
+        logging.debug(f"Selected lang: {lang} OS lang: {os.getenv('LANG')}")
+        self.install_language(lang)
+
+    def install_language(self, lang):
+        if lang is None or lang == "system_lang":
+            for language in self.lang_list:
+                if os.getenv('LANG').lower().startswith(language):
+                    logging.debug("Using system lang")
+                    lang = language
+        if lang not in self.lang_list:
+            logging.error(f"lang: {lang} not found")
+            lang = "en"
+            return
+        logging.info(f"Using lang {lang}")
+        self.lang = self.langs[lang]
+        self.lang.install(names=['gettext', 'ngettext'])
 
     def validate_config(self):
         valid = True
@@ -136,7 +158,7 @@ class KlipperScreenConfig:
                     'invert_x', 'invert_y', 'invert_z',
                 )
                 strs = (
-                    'moonraker_api_key', 'moonraker_host', 'language', 'titlebar_name_type',
+                    'moonraker_api_key', 'moonraker_host', 'titlebar_name_type',
                     'screw_positions', 'power_devices', 'titlebar_items', 'z_babystep_values',
                     'extrude_distances', "extrude_speeds",
                 )
@@ -192,7 +214,7 @@ class KlipperScreenConfig:
         self.configurable_options = [
             {"language": {
                 "section": "main", "name": _("Language"), "type": "dropdown", "value": "system_lang",
-                "callback": screen.restart_warning, "options": [
+                "callback": screen.change_language, "options": [
                     {"name": _("System") + " " + _("(default)"), "value": "system_lang"}]}},
             {"theme": {
                 "section": "main", "name": _("Icon Theme"), "type": "dropdown",
@@ -248,12 +270,8 @@ class KlipperScreenConfig:
 
         self.configurable_options.extend(panel_options)
 
-        lang_path = os.path.join(klipperscreendir, "ks_includes", "locales")
-        langs = [d for d in os.listdir(lang_path) if not os.path.isfile(os.path.join(lang_path, d))]
-        langs.sort()
         lang_opt = self.configurable_options[0]['language']['options']
-
-        for lang in langs:
+        for lang in self.lang_list:
             lang_opt.append({"name": lang, "value": lang})
 
         t_path = os.path.join(klipperscreendir, 'styles')

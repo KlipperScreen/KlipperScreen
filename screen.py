@@ -74,7 +74,6 @@ class KlipperScreen(Gtk.Window):
     printer = None
     printer_select_callbacks = []
     printer_select_prepanel = None
-    rtl_languages = ['he_il']
     subscriptions = []
     shutdown = True
     updating = False
@@ -96,17 +95,7 @@ class KlipperScreen(Gtk.Window):
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
         self._config = KlipperScreenConfig(configfile, self)
-        self.lang = self._config.get_lang()
-
-        logging.debug(f"OS Language: {os.getenv('LANG')}")
-
-        self.lang_ltr = True
-        for lang in self.rtl_languages:
-            if os.getenv('LANG').lower().startswith(lang):
-                self.lang_ltr = False
-                Gtk.Widget.set_default_direction(Gtk.TextDirection.RTL)
-                logging.debug("Enabling RTL mode")
-                break
+        self.lang_ltr = self.set_text_direction(self._config.get_main_config().get("language", None))
 
         Gtk.Window.__init__(self)
         monitor = Gdk.Display.get_default().get_primary_monitor()
@@ -835,11 +824,30 @@ class KlipperScreen(Gtk.Window):
     def toggle_macro_shortcut(self, value):
         self.base_panel.show_macro_shortcut(value)
 
+    def set_text_direction(self, lang=None):
+        rtl_languages = ['he_IL']
+        if lang is None:
+            for lng in rtl_languages:
+                if os.getenv('LANG').startswith(lng):
+                    lang = lng
+                    break
+        if lang in rtl_languages:
+            Gtk.Widget.set_default_direction(Gtk.TextDirection.RTL)
+            logging.debug("Enabling RTL mode")
+            return False
+        Gtk.Widget.set_default_direction(Gtk.TextDirection.LTR)
+        return True
+
+    def change_language(self, lang):
+        self._config.install_language(lang)
+        self.lang_ltr = self.set_text_direction(lang)
+        self._config._create_configurable_options(self)
+        self.reload_panels()
+
     def reload_panels(self, *args):
         self._remove_all_panels()
         for panel in list(self.panels):
-            if panel not in ["printer_select", "splash_screen"]:
-                del self.panels[panel]
+            del self.panels[panel]
         for dialog in self.dialogs:
             dialog.destroy()
         state = self.printer.state
@@ -907,7 +915,7 @@ class KlipperScreen(Gtk.Window):
 
         try:
             env = Environment(extensions=["jinja2.ext.i18n"], autoescape=True)
-            env.install_gettext_translations(self.lang)
+            env.install_gettext_translations(self._config.get_lang())
             j2_temp = env.from_string(text)
             text = j2_temp.render()
         except Exception as e:
