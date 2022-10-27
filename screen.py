@@ -7,7 +7,6 @@ import json
 import importlib
 import logging
 import os
-import re
 import signal
 import subprocess
 import pathlib
@@ -850,9 +849,7 @@ class KlipperScreen(Gtk.Window):
             del self.panels[panel]
         for dialog in self.dialogs:
             dialog.destroy()
-        state = self.printer.state
-        self.printer.state = None
-        self.printer.change_state(state)
+        self.printer.change_state(self.printer.state)
 
     def _websocket_callback(self, action, data):
 
@@ -860,9 +857,10 @@ class KlipperScreen(Gtk.Window):
             return
 
         if action == "notify_klippy_disconnected":
-            logging.debug("Received notify_klippy_disconnected")
             self.printer.change_state("disconnected")
             return
+        elif action == "notify_klippy_shutdown":
+            self.printer.change_state("shutdown")
         elif action == "notify_klippy_ready":
             self.printer.change_state("ready")
         elif action == "notify_status_update" and self.printer.get_state() != "shutdown":
@@ -880,17 +878,11 @@ class KlipperScreen(Gtk.Window):
             self.printer.process_power_update(data)
             self.panels['splash_screen'].check_power_status()
         elif self.printer.get_state() not in ["error", "shutdown"] and action == "notify_gcode_response":
-            if "Klipper state: Shutdown" in data:
-                logging.debug("Shutdown in gcode response, changing state to shutdown")
-                self.printer.change_state("shutdown")
-
-            if not (data.startswith("B:") and
-                    re.search(r'B:[0-9\.]+\s/[0-9\.]+\sT[0-9]+:[0-9\.]+', data)):
+            if not (data.startswith("B:") or data.startswith("T:")):
                 if data.startswith("echo: "):
                     self.show_popup_message(data[6:], 1)
                 elif data.startswith("!! "):
                     self.show_popup_message(data[3:], 3)
-                    logging.debug(json.dumps([action, data], indent=2))
                 if "SAVE_CONFIG" in data and self.printer.get_state() == "ready":
                     script = {"script": "SAVE_CONFIG"}
                     self._confirm_send_action(
@@ -1049,10 +1041,7 @@ class KlipperScreen(Gtk.Window):
         return False
 
     def printer_ready(self):
-
         self.close_popup_message()
-        # Force an update to printer webhooks state in case the update is missed due to websocket subscribe not yet sent
-        self.printer.process_update({"webhooks": {"state": "ready", "state_message": "Printer is ready"}})
         self.show_panel('main_panel', "main_menu", _("Home"), 2,
                         items=self._config.get_menu_items("__main"), extrudercount=self.printer.get_extruder_count())
         self.ws_subscribe()

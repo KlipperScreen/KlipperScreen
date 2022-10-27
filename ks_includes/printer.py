@@ -134,8 +134,8 @@ class Printer:
                 self.data[x] = {}
             self.data[x].update(data[x])
 
-        if "webhooks" in data or "idle_timeout" in data or "print_stats" in data or "pause_resume" in data:
-            self.evaluate_state()
+        if "webhooks" in data or "print_stats" in data:
+            self.process_status_update()
 
     def get_updates(self):
         updates = self.data.copy()
@@ -143,39 +143,27 @@ class Printer:
         return updates
 
     def evaluate_state(self):
-        wh_state = self.data['webhooks']['state'].lower()  # possible values: startup, ready, shutdown, error
+        # webhooks states: startup, ready, shutdown, error
+        if self.data['webhooks']['state'] == "ready":
+            if self.data['print_stats']:  # standby, printing, paused, error, complete
+                if self.data['print_stats']['state'] == 'paused' or self.data.get('pause_resume').get('is_paused'):
+                    return "paused"
+                if self.data['print_stats']['state'] == 'printing':
+                    return "printing"
+        return self.data['webhooks']['state']
 
-        if wh_state == "ready":
-            new_state = "ready"
-            if self.data.get('pause_resume').get('is_paused'):
-                new_state = "paused"
-            elif self.data['print_stats']:
-                print_state = self.data['print_stats']['state'].lower()  # complete, error, paused, printing, standby
-                if print_state == "paused":
-                    new_state = "paused"
-                if self.data['idle_timeout']:
-                    idle_state = self.data['idle_timeout']['state'].lower()  # idle, printing, ready
-                    if idle_state == "printing":
-                        if print_state == "complete":
-                            new_state = "ready"
-                        elif print_state != "printing":  # Not printing a file, toolhead moving
-                            new_state = "busy"
-                        else:
-                            new_state = "printing"
-
-            if new_state != "busy":
-                self.change_state(new_state)
-        else:
-            self.change_state(wh_state)
+    def process_status_update(self):
+        state = self.evaluate_state()
+        if state != self.state:
+            self.change_state(state)
 
     def process_power_update(self, data):
         if data['device'] in self.power_devices:
             self.power_devices[data['device']]['status'] = data['status']
 
     def change_state(self, state):
-        if state == self.state or state not in list(self.state_callbacks):
+        if state not in list(self.state_callbacks):  # disconnected, startup, ready, shutdown, error, paused, printing
             return
-
         logging.debug(f"Changing state from '{self.state}' to '{state}'")
         prev_state = self.state
         self.state = state
