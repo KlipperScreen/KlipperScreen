@@ -67,10 +67,11 @@ class LimitsPanel(ScreenPanel):
             if opt["option"] == option:
                 if self.values[option] > opt["max"]:
                     self.limits[option]['scale'].get_style_context().add_class("option_slider_max")
+                    # Infinite scale
+                    self.limits[option]['adjustment'].set_upper(self.values[option] * 1.5)
                 else:
                     self.limits[option]['scale'].get_style_context().remove_class("option_slider_max")
-                # Infinite scale
-                self.limits[option]['adjustment'].set_upper(self.values[option] * 1.5)
+                    self.limits[option]['adjustment'].set_upper(opt["max"] * 1.5)
         self.limits[option]['scale'].connect("button-release-event", self.set_opt_value, option)
 
     def add_option(self, option, optname, units, value):
