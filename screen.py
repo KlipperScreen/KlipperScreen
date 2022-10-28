@@ -933,7 +933,7 @@ class KlipperScreen(Gtk.Window):
 
     def printer_initializing(self, text=None, disconnect=False):
         self.close_popup_message()
-        self.show_panel('splash_screen', "splash_screen", _("Splash Screen"), 2)
+        self.show_panel('splash_screen', "splash_screen", _("Home"), 2)
         if disconnect is True and self.printer is not None:
             self.shutdown = True
             self.printer.state = "disconnected"
