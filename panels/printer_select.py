@@ -2,7 +2,7 @@ import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, GLib
 from ks_includes.screen_panel import ScreenPanel
 
 logger = logging.getLogger("KlipperScreen.PrinterSelect")
@@ -17,7 +17,6 @@ class PrinterSelect(ScreenPanel):
         super().__init__(screen, title, False)
 
     def initialize(self, panel_name):
-
         printers = self._config.get_printers()
 
         grid = self._gtk.HomogeneousGrid()
@@ -47,3 +46,7 @@ class PrinterSelect(ScreenPanel):
                 col = i % columns
                 row = int(i / columns)
             grid.attach(self.labels[name], col, row, 1, 1)
+
+    def activate(self):
+        self._screen.base_panel.action_bar.hide()
+        GLib.timeout_add(100, self._screen.base_panel.action_bar.hide)

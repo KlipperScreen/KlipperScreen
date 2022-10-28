@@ -137,7 +137,7 @@ class KlipperScreen(Gtk.Window):
             pname = list(printers[0])[0]
             self.connect_printer(pname)
         else:
-            self.show_panel("printer_select", "printer_select", "Printer Select", 2)
+            self.show_printer_select()
 
     def connect_printer_widget(self, widget, name):
         self.connect_printer(name)
@@ -714,11 +714,7 @@ class KlipperScreen(Gtk.Window):
         logging.debug(f"Saving panel: {self._cur_panels[0]}")
         self.printer_select_prepanel = self._cur_panels[0]
         self.base_panel.show_heaters(False)
-        self.base_panel.show_macro_shortcut(False)
-        self.base_panel.show_printer_select(False)
-        self.show_panel("printer_select", "printer_select", "Printer Select", 2)
-        self.show_all()
-        self.base_panel.action_bar.hide()
+        self.show_panel("printer_select", "printer_select", _("Printer Select"), 2)
 
     def state_execute(self, callback, prev_state):
         if self.is_updating():

@@ -116,18 +116,17 @@ class BasePanel(ScreenPanel):
         return
 
     def show_heaters(self, show=True):
+        for child in self.control['temp_box'].get_children():
+            self.control['temp_box'].remove(child)
+        if not show or self._screen.printer.get_temp_store_devices() is None:
+            return
+
         printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
         if printer_cfg is not None:
             self.titlebar_name_type = printer_cfg.get("titlebar_name_type", None)
         else:
             self.titlebar_name_type = None
         logging.info(f"Titlebar name type: {self.titlebar_name_type}")
-
-        for child in self.control['temp_box'].get_children():
-            self.control['temp_box'].remove(child)
-
-        if not show or self._screen.printer.get_temp_store_devices() is None:
-            return
 
         img_size = self._gtk.img_scale * .5
         for device in self._screen.printer.get_temp_store_devices():
