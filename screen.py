@@ -933,7 +933,7 @@ class KlipperScreen(Gtk.Window):
 
     def printer_initializing(self, text=None, disconnect=False):
         self.close_popup_message()
-        self.show_panel('splash_screen', "splash_screen", "Splash Screen", 2)
+        self.show_panel('splash_screen', "splash_screen", _("Splash Screen"), 2)
         if disconnect is True and self.printer is not None:
             self.shutdown = True
             self.printer.state = "disconnected"
@@ -1047,7 +1047,7 @@ class KlipperScreen(Gtk.Window):
 
     def printer_printing(self):
         self.close_popup_message()
-        self.show_panel('job_status', "job_status", "Print Status", 2)
+        self.show_panel('job_status', "job_status", _("Printing"), 2)
         self.base_panel.show_heaters(True)
         self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
         for dialog in self.dialogs:
