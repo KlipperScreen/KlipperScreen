@@ -225,7 +225,6 @@ class PrintPanel(ScreenPanel):
         file.set_hexpand(True)
         file.set_vexpand(False)
 
-
         icon = Gtk.Button()
         GLib.idle_add(self.image_load, filepath)
         icon.connect("clicked", self.confirm_delete_file, f"gcodes/{filepath}")

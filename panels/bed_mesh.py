@@ -271,7 +271,6 @@ class BedMeshPanel(ScreenPanel):
         ax.zaxis.set_major_formatter('{x:.02f}')
         fig.colorbar(surf, shrink=0.7, aspect=5, pad=0.25)
 
-
         title = Gtk.Label()
         title.set_markup(f"<b>{profile}</b>")
         title.set_hexpand(True)
