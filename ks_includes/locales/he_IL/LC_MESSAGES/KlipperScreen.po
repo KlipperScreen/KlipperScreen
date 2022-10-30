@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-18 23:05-0300\n"
+"POT-Creation-Date: 2022-10-27 23:42-0300\n"
 "PO-Revision-Date: 2022-03-31 10:54-0300\n"
-"Last-Translator: Emanuel Sharvit <manu7irl@gmail.com>\n"
+"Last-Translator: Tal Rahav <talrhv1@gmail.com>\n"
 "Language-Team: \n"
 "Language: he_IL\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgid "%s will be updated to version"
 msgstr "%s יעודכן לגרסה"
 
 msgid "(default)"
-msgstr "(בְּרִירַת מֶחדָל)"
+msgstr "(ברירת מחדל)"
 
 msgid "24 Hour Time"
 msgstr "זמן 24 שעות"
@@ -34,13 +34,13 @@ msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "FIRMWARE_RESTART עשוי לפתור את הבעיה."
 
 msgid "ADXL Not Configured"
-msgstr ""
+msgstr "ADXL אינו מוגדר"
 
 msgid "Abort"
 msgstr "בטל"
 
 msgid "Acceleration:"
-msgstr ""
+msgstr "האצה"
 
 msgid "Accept"
 msgstr "אשר"
@@ -52,22 +52,24 @@ msgid "Add Printer"
 msgstr "הוסף מדפסת"
 
 msgid "Add profile"
-msgstr ""
+msgstr "הוסף פרופיל"
 
 msgid "Apply"
-msgstr ""
+msgstr "החל"
 
 #, python-format
 msgid "Apply %.2f offset to Endstop?"
-msgstr ""
+msgstr "הוסף %.2f לתחנת קצה?"
 
 #, python-format
 msgid "Apply %s%.2f offset to Probe?"
+msgstr "הוסף %.2f לפרוב (בודק)?"
+
+msgid "Are you sure do you want to exclude the object?"
 msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr ""
-"האם אתה בטוח שברצונך להדפיסהאם אתה בטוח שברצונך להפעיל את עצירת החירום?"
+msgstr "האם אתה בטוח שאתה רוצה לבצע עצירת חירום?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "האם אתה בטוח שברצונך לבטל את ההדפסה?"
@@ -79,16 +81,16 @@ msgid "Are you sure you wish to reboot the system?"
 msgstr "האם אתה בטוח שברצונך לאתחל את המערכת?"
 
 msgid "Are you sure you wish to shutdown the system?"
-msgstr "האם אתה בטוח שברצונך לסגור את המערכת?"
+msgstr "האם אתה בטוח שברצונך לכבות את המערכת?"
 
 msgid "Auto"
 msgstr "אוטומטי"
 
 msgid "Auto-calibrate"
-msgstr ""
+msgstr "כיול אוטומטי"
 
 msgid "Auto-close notifications"
-msgstr ""
+msgstr "סגירת התראות אוטומטית"
 
 msgid "Auto-scroll"
 msgstr "גלילה אוטומטית"
@@ -100,22 +102,22 @@ msgid "Bed Mesh"
 msgstr "מיפוי מיטה"
 
 msgid "Bed screw configuration:"
-msgstr ""
+msgstr "הגדרת בורג מיטה"
 
 msgid "Calibrate"
-msgstr "לְדַרֵג"
+msgstr "לכייל"
 
 msgid "Calibrated"
-msgstr ""
+msgstr "מכויל"
 
 msgid "Calibrated, save configuration to make it permanent"
 msgstr "מכויל, שמור את התצורה כדי שהיא תהיה קבועה"
 
 msgid "Calibrating"
-msgstr ""
+msgstr "מכייל"
 
 msgid "Calibrating..."
-msgstr ""
+msgstr "מכייל..."
 
 msgid "Can't set above the maximum:"
 msgstr "לא ניתן להגדיר מעל המקסימום:"
@@ -136,22 +138,22 @@ msgid "Cannot connect to Moonraker"
 msgstr "לא ניתן להתחבר ל-Moonraker"
 
 msgid "Channel"
-msgstr "עָרוּץ"
+msgstr "ערוץ"
 
 msgid "Check ADXL Wiring"
-msgstr ""
+msgstr "בדוק את החיווט של ה ADXL"
 
 msgid "Checking for updates, please wait..."
-msgstr ""
+msgstr "בודק עדכונים, אנא המתן"
 
 msgid "Clear"
-msgstr ""
+msgstr "נקה"
 
 msgid "Close"
 msgstr "סגור"
 
 msgid "Complete"
-msgstr "לְהַשְׁלִים"
+msgstr "הסתיים"
 
 msgid "Configuration"
 msgstr "קונפיגורציה"
@@ -160,32 +162,32 @@ msgid "Confirm Emergency Stop"
 msgstr "אשר עצירת חירום"
 
 msgid "Connected"
-msgstr "מְחוּבָּר"
+msgstr "מחובר"
 
 #, python-format
 msgid "Connecting to %s"
 msgstr "מתחבר ל- %s"
 
 msgid "Console"
-msgstr "לְנַחֵם"
+msgstr "קונסול"
 
 msgid "Continue"
-msgstr "לְהַמשִׁיך"
+msgstr "המשך"
 
 msgid "Cooldown"
-msgstr "תירגע"
+msgstr "הפעל קירור"
 
 msgid "Date"
-msgstr "תַאֲרִיך"
+msgstr "תאריך"
 
 msgid "Decrease"
-msgstr "לְהַקְטִין"
+msgstr "הורד"
 
 msgid "Delete"
-msgstr "לִמְחוֹק"
+msgstr "מחק"
 
 msgid "Delete File?"
-msgstr ""
+msgstr "מחק קובץ"
 
 msgid "Deselect"
 msgstr "בטל את הבחירה"
@@ -207,16 +209,16 @@ msgid "Elapsed:"
 msgstr "זמן שעבר:"
 
 msgid "Error"
-msgstr "שְׁגִיאָה"
+msgstr "שגיאה"
 
 msgid "Estimated Time Method"
 msgstr "שיטת זמן משוערת"
 
 msgid "Exclude Object"
-msgstr ""
+msgstr "ביטול אובייקט"
 
 msgid "Extrude"
-msgstr "אקסטרוזיה"
+msgstr "הוצא חומר"
 
 msgid "Extrusion +"
 msgstr "שיחול +"
@@ -231,25 +233,25 @@ msgid "Fan"
 msgstr "מאוורר"
 
 msgid "Filament Used"
-msgstr "נימה בשימוש"
+msgstr "חומר ששומש"
 
 msgid "Filament total:"
-msgstr ""
+msgstr "חומר כולל"
 
 msgid "Filament used:"
-msgstr ""
+msgstr "חומר ששומש:"
 
 msgid "Filament:"
-msgstr ""
+msgstr "חומר גלם"
 
 msgid "File"
-msgstr "קוֹבֶץ"
+msgstr "קובץ"
 
 msgid "File:"
 msgstr ""
 
 msgid "Finding ADXL"
-msgstr ""
+msgstr "מחפש ADXL"
 
 msgid "Fine Tuning"
 msgstr "כוונון עדין"
@@ -258,41 +260,37 @@ msgid "Finish"
 msgstr "סיים"
 
 msgid "Firmware Restart"
-msgstr ""
-"קושחה\n"
-"איתחול"
+msgstr "אתחול קושחה"
 
 msgid "Flow:"
-msgstr ""
+msgstr "זרם"
 
 msgid "Flowrate:"
-msgstr ""
+msgstr "קצב זרימה"
 
 msgid "Font Size"
 msgstr "גודל טקסט"
 
 msgid "Full Update"
-msgstr ""
-"מלא\n"
-"עדכון"
+msgstr "עדכון מלא"
 
 msgid "Go Back"
 msgstr "חזרה"
 
 msgid "Height:"
-msgstr ""
+msgstr "גובה"
 
 msgid "Hidden"
-msgstr "מוּסתָר"
+msgstr "מוסתר"
 
 msgid "Hide"
-msgstr "להתחבא"
+msgstr "הסתר"
 
 msgid "Hide sensors in Temp."
 msgstr "הסתר חיישנים בטמפ'."
 
 msgid "Hide temp."
-msgstr ""
+msgstr "הסתר טמפרטורה"
 
 msgid "Home"
 msgstr "איפוס"
@@ -316,13 +314,13 @@ msgid "Homing"
 msgstr "איפוס צירים"
 
 msgid "Host"
-msgstr ""
+msgstr "שרת"
 
 msgid "Hostname"
-msgstr "Hostname"
+msgstr "שם שרת"
 
 msgid "Icon Theme"
-msgstr "נושא אייקון"
+msgstr "ערכת נושא"
 
 msgid "Increase"
 msgstr "הגדל"
@@ -334,10 +332,10 @@ msgid "Initializing printer..."
 msgstr "מאתחל מדפסת..."
 
 msgid "Input Shaper"
-msgstr ""
+msgstr "מעצב גימור"
 
 msgid "Interface"
-msgstr "מִמְשָׁק"
+msgstr "ממשק"
 
 msgid "Invalid"
 msgstr "לא חוקי"
@@ -352,9 +350,7 @@ msgid "Invert Z"
 msgstr "הפוך את Z"
 
 msgid "Klipper Restart"
-msgstr ""
-"קליפר\n"
-"איתחול"
+msgstr "אתחול קליפר"
 
 msgid "Klipper has disconnected"
 msgstr "קליפר התנתק"
@@ -363,10 +359,10 @@ msgid "Klipper has encountered an error."
 msgstr "קילפר נתקל בבעיה."
 
 msgid "Klipper has shutdown"
-msgstr "קליפר נכבה"
+msgstr "קליפר כבה"
 
 msgid "Klipper is attempting to start"
-msgstr "קליפר מנסה לרוץ"
+msgstr "קליפר מנסה לעלות"
 
 msgid "Klipper will reboot"
 msgstr "קליפר יבצע אתחול"
@@ -375,10 +371,10 @@ msgid "Language"
 msgstr "שפה"
 
 msgid "Large"
-msgstr "גָדוֹל"
+msgstr "גדול"
 
 msgid "Layer:"
-msgstr ""
+msgstr "שכבה"
 
 msgid "Left:"
 msgstr "זמן שנותר:"
@@ -387,13 +383,10 @@ msgid "Limits"
 msgstr "גבולות"
 
 msgid "Load"
-msgstr "לִטעוֹן"
+msgstr "טעינה"
 
 msgid "Lower Nozzle"
 msgstr "הנמך דיזה"
-
-msgid "Machine"
-msgstr ""
 
 msgid "Macro shortcut on sidebar"
 msgstr "קיצור מקרו בסרגל הצד"
@@ -405,10 +398,10 @@ msgid "Main Menu"
 msgstr "תפריט ראשי"
 
 msgid "Max"
-msgstr ""
+msgstr "מקסימום"
 
 msgid "Max Acceleration"
-msgstr ""
+msgstr "מקסימום תאוצה"
 
 msgid "Max Acceleration to Deceleration"
 msgstr "האצה מרבית להאטה"
@@ -417,19 +410,19 @@ msgid "Max Velocity"
 msgstr "מהירות מרבית"
 
 msgid "Measure Both"
-msgstr ""
+msgstr "מדוד את שניהם"
 
 msgid "Measure X"
-msgstr ""
+msgstr "מדוד X"
 
 msgid "Measure Y"
-msgstr ""
+msgstr "מדוד Y"
 
 msgid "Medium"
-msgstr "ממוצע"
+msgstr "בינוני"
 
 msgid "Menu"
-msgstr "תַפרִיט"
+msgstr "תפריט"
 
 msgid "Modified"
 msgstr "שונה"
@@ -444,18 +437,18 @@ msgid "Move Distance (mm)"
 msgstr "מרחק הזזה (מ''מ)"
 
 msgid "Name"
-msgstr "שֵׁם"
+msgstr "שם"
 
 msgid "Network"
 msgstr "רשת"
 
 msgid "New"
-msgstr ""
+msgstr "חדש"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
-msgstr ""
+msgstr "איתור אוטומטי אינו נתמך, זה צריך להיות מוגדר ב klipperscreen"
 
 msgid "Nothing selected"
 msgstr "שום דבר לא נבחר"
@@ -478,7 +471,7 @@ msgstr[2] "חבילות יעודכנו"
 msgstr[3] "חבילות יעודכנו"
 
 msgid "Part Fan"
-msgstr ""
+msgstr "מאוורר חומר"
 
 msgid "Password saved"
 msgstr "הסיסמה נשמרה"
@@ -493,10 +486,10 @@ msgid "Perform a full upgrade?"
 msgstr "לבצע שדרוג מלא?"
 
 msgid "Pins"
-msgstr ""
+msgstr "פינים"
 
 msgid "Please recompile and flash the micro-controller."
-msgstr "אנא הידור מחדש והבזק את המיקרו-בקר."
+msgstr "אנא הדר (קמפל) מחדש ובצע פלאש למיקרו-בקר."
 
 msgid "Power"
 msgstr "הפעלה"
@@ -505,10 +498,10 @@ msgid "Power On Printer"
 msgstr "הפעל מדפסת"
 
 msgid "Pressure Advance:"
-msgstr ""
+msgstr "פרשר אדוונס"
 
 msgid "Print"
-msgstr "הדפס"
+msgstr "הדפסה"
 
 msgid "Print Control"
 msgstr "שליטה בהדפסה"
@@ -516,35 +509,41 @@ msgstr "שליטה בהדפסה"
 msgid "Print Time"
 msgstr "זמן הדפסה"
 
+msgid "Printer"
+msgstr "מדפסת"
+
 msgid "Printer Connections"
 msgstr "חיבורי מדפסת"
+
+msgid "Printer Select"
+msgstr ""
 
 msgid "Printing"
 msgstr "מדפיס"
 
 msgid "Probe Offset"
-msgstr ""
+msgstr "פרוב אוף-סט"
 
 msgid "Profile Name:"
 msgstr "שם פרופיל:"
 
 msgid "Quad Gantry Level"
-msgstr "רמת מרפסת גנטרי"
+msgstr "יישור הגנטרי הריבועי"
 
 msgid "Raise Nozzle"
-msgstr "הגבה"
+msgstr "הגבה דיזה"
 
 msgid "Recover Hard"
-msgstr "לְהַחלִים Hard"
+msgstr "שחזור מלא"
 
 msgid "Recover Soft"
-msgstr "לְהַחלִים Soft"
+msgstr "שחזור עדין"
 
 msgid "Reference"
 msgstr "התייחסות"
 
 msgid "Refresh"
-msgstr ""
+msgstr "רענון"
 
 msgid "Restart"
 msgstr "אתחל"
@@ -556,39 +555,39 @@ msgid "Retract"
 msgstr "שיחול לאחור"
 
 msgid "Retraction"
-msgstr ""
+msgstr "משיכה"
 
 msgid "Retraction Length"
-msgstr ""
+msgstr "מרחק משיכה"
 
 msgid "Retraction Speed"
-msgstr ""
+msgstr "מהירות משיכה"
 
 #, python-format
 msgid "Retry #%s"
 msgstr "נסה שוב #%s"
 
 msgid "Retrying"
-msgstr ""
+msgstr "מנסה שוב"
 
 msgid "Save"
-msgstr "להציל"
+msgstr "לשמור"
 
 msgid "Save Config"
 msgstr "שמור קונפיג"
 
 msgid "Save Z"
-msgstr ""
+msgstr "שמור Z"
 
 msgid "Save configuration?"
-msgstr ""
+msgstr "שמור קונפיגרציה?"
 
 msgid "Saved"
-msgstr ""
+msgstr "נשמר"
 
 #, python-format
 msgid "Saved offset: %s"
-msgstr ""
+msgstr "שמור אופ-סט %s"
 
 msgid "Screen DPMS"
 msgstr "DPMS מסך"
@@ -603,7 +602,7 @@ msgid "Select"
 msgstr "בחר"
 
 msgid "Send"
-msgstr "לִשְׁלוֹחַ"
+msgstr "שליחה"
 
 #, python-format
 msgid "Sending Power ON signal to: %s"
@@ -616,13 +615,19 @@ msgid "Settings"
 msgstr "הגדרות"
 
 msgid "Show"
-msgstr "הופעה"
+msgstr "הצג"
+
+msgid "Show Heater Power"
+msgstr "הצג זרם מיטה"
+
+msgid "Shutdown"
+msgstr "כיבוי"
 
 msgid "Size"
 msgstr "גודל"
 
 msgid "Slicer"
-msgstr "Slicer"
+msgstr "סלייסר"
 
 msgid "Slicer Time correction (%)"
 msgstr "תיקון זמן פריסה (%)"
@@ -631,13 +636,10 @@ msgid "Slicer:"
 msgstr ""
 
 msgid "Small"
-msgstr "קָטָן"
-
-msgid "Sort by: "
-msgstr "מיין לפי: "
+msgstr "קטן"
 
 msgid "Sort:"
-msgstr ""
+msgstr "מיין"
 
 msgid "Speed (mm/s)"
 msgstr "מהירות (מ\"מ/שניות)"
@@ -649,13 +651,13 @@ msgid "Speed -"
 msgstr "מהירות -"
 
 msgid "Speed:"
-msgstr ""
+msgstr "מהירות"
 
 msgid "Square Corner Velocity"
 msgstr "מהירות פינה מרובעת"
 
 msgid "Start"
-msgstr "הַתחָלָה"
+msgstr "התחל"
 
 msgid "Starting WiFi Association"
 msgstr "מתחיל איגוד WiFi"
@@ -670,14 +672,10 @@ msgid "System"
 msgstr "מערכת"
 
 msgid "System Restart"
-msgstr ""
-"מערכת\n"
-"אתחול"
+msgstr "אתחול מערכת"
 
 msgid "System Shutdown"
-msgstr ""
-"מערכת\n"
-"לכבות"
+msgstr "כיבוי מערכת"
 
 msgid "Temp (°C)"
 msgstr "טמפ' (°C)"
@@ -696,10 +694,10 @@ msgid "Unknown Heater"
 msgstr "מחמם לא ידוע"
 
 msgid "Unknown screw position"
-msgstr ""
+msgstr "מיקום בורג לא ידוע"
 
 msgid "Unload"
-msgstr "לִפְרוֹק"
+msgstr "העלה"
 
 msgid "Unretract Extra Length"
 msgstr ""
@@ -714,7 +712,7 @@ msgid "Update"
 msgstr "עדכון"
 
 msgid "Updating"
-msgstr "עִדכּוּן"
+msgstr "מעדכן"
 
 msgid "Uploaded"
 msgstr "הועלה"
@@ -732,7 +730,7 @@ msgid "XY Move Speed (mm/s)"
 msgstr "מהירות תנועה XY (מ\"מ/שנייה)"
 
 msgid "XY Speed (mm/s)"
-msgstr ""
+msgstr "מהירות XY (mm/s)"
 
 msgid "Y+"
 msgstr "Y+"
@@ -747,13 +745,13 @@ msgid "Z Move Speed (mm/s)"
 msgstr "מהירות תנועה Z (מ\"מ/שניות)"
 
 msgid "Z Speed (mm/s)"
-msgstr ""
+msgstr "מהירות Z (mm/s)"
 
 msgid "Z Tilt"
 msgstr "הטיה Z"
 
 msgid "Z offset:"
-msgstr ""
+msgstr "Z אוף-סט"
 
 msgid "Z+"
 msgstr "Z+"
@@ -789,6 +787,18 @@ msgstr "מ\"מ/ש"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Machine"
+#~ msgstr "מכונה"
+
+#~ msgid "Manual Calibration"
+#~ msgstr "כיול ידני"
+
+#~ msgid "Auto Calibration"
+#~ msgstr "כיול אוטומטי"
+
+#~ msgid "Sort by: "
+#~ msgstr "מיין לפי: "
 
 #~ msgid "Bltouch found applied offset"
 #~ msgstr "Bltouch נמצא היסט מוחל"

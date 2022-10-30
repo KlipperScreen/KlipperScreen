@@ -127,7 +127,7 @@ class InputShaperPanel(ScreenPanel):
         if method == "both":
             self._screen._ws.klippy.gcode_script('SHAPER_CALIBRATE')
 
-        self.calibrate_btn.set_label(self.lang.gettext('Calibrating...'))
+        self.calibrate_btn.set_label(_('Calibrating...'))
         self.calibrate_btn.set_sensitive(False)
 
     def set_opt_value(self, widget, opt, *args):

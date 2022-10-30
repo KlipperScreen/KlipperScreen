@@ -446,8 +446,8 @@ class NetworkPanel(ScreenPanel):
     def reload_networks(self, widget=None):
         self.networks = {}
         self.labels['networklist'].remove_column(0)
-        self.wifi.rescan()
         if self.wifi is not None and self.wifi.is_initialized():
+            self.wifi.rescan()
             GLib.idle_add(self.load_networks)
 
     def activate(self):

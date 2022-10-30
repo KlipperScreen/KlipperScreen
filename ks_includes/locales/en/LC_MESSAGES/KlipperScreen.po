@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-18 23:05-0300\n"
+"POT-Creation-Date: 2022-10-27 23:42-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -56,6 +56,9 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.2f offset to Probe?"
+msgstr ""
+
+msgid "Are you sure do you want to exclude the object?"
 msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
@@ -378,9 +381,6 @@ msgstr ""
 msgid "Lower Nozzle"
 msgstr ""
 
-msgid "Machine"
-msgstr ""
-
 msgid "Macro shortcut on sidebar"
 msgstr ""
 
@@ -500,7 +500,13 @@ msgstr ""
 msgid "Print Time"
 msgstr ""
 
+msgid "Printer"
+msgstr ""
+
 msgid "Printer Connections"
+msgstr ""
+
+msgid "Printer Select"
 msgstr ""
 
 msgid "Printing"
@@ -602,6 +608,12 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
+msgid "Show Heater Power"
+msgstr ""
+
+msgid "Shutdown"
+msgstr ""
+
 msgid "Size"
 msgstr ""
 
@@ -615,9 +627,6 @@ msgid "Slicer:"
 msgstr ""
 
 msgid "Small"
-msgstr ""
-
-msgid "Sort by: "
 msgstr ""
 
 msgid "Sort:"

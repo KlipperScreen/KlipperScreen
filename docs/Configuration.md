@@ -81,6 +81,10 @@ screw_positions: ""
 # Rotation is useful if the screen is not directly in front of the machine.
 # Valid values are 0 90 180 270
 screw_rotation: 0
+
+# Define distances and speeds for the extrude panel. CSV list 2 to 4 integers
+extrude_distances: 5, 10, 15, 25
+extrude_speeds: 1, 2, 5, 25
 ```
 
 ## Preheat Options
@@ -188,7 +192,8 @@ KlipperScreen will search for a configuration file in the following order:
 
 1. _~/KlipperScreen.conf_
 2. _${KlipperScreen_Directory}/KlipperScreen.conf_
-3. _~/klipper_config/KlipperScreen.conf_
+3. _~/printer_data/config/KlipperScreen.conf_
+4. _~/klipper_config/KlipperScreen.conf_
 
 If you need a custom location for the configuration file, you can add -c or --configfile to the systemd file and specify
 the location of your configuration file.

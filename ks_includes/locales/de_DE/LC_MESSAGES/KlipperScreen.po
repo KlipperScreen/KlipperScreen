@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-18 23:05-0300\n"
+"POT-Creation-Date: 2022-10-27 23:42-0300\n"
 "PO-Revision-Date: 2022-03-31 10:43-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -61,6 +61,9 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.2f offset to Probe?"
+msgstr ""
+
+msgid "Are you sure do you want to exclude the object?"
 msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
@@ -383,9 +386,6 @@ msgstr "Laden"
 msgid "Lower Nozzle"
 msgstr "Düse absenken"
 
-msgid "Machine"
-msgstr ""
-
 msgid "Macro shortcut on sidebar"
 msgstr "Makro Verknüpfung in Sidebar"
 
@@ -505,8 +505,14 @@ msgstr "Druck Steuerung"
 msgid "Print Time"
 msgstr "Druckzeit"
 
+msgid "Printer"
+msgstr ""
+
 msgid "Printer Connections"
 msgstr "Drucker Verbindungen"
+
+msgid "Printer Select"
+msgstr ""
 
 msgid "Printing"
 msgstr "Drucken"
@@ -607,6 +613,12 @@ msgstr "Einstellungen"
 msgid "Show"
 msgstr "Zeigen"
 
+msgid "Show Heater Power"
+msgstr ""
+
+msgid "Shutdown"
+msgstr ""
+
 msgid "Size"
 msgstr "Größe"
 
@@ -621,9 +633,6 @@ msgstr ""
 
 msgid "Small"
 msgstr "Klein"
-
-msgid "Sort by: "
-msgstr "Sortierung: "
 
 msgid "Sort:"
 msgstr "Sortieren: "
@@ -773,6 +782,9 @@ msgstr "mm/s"
 msgid "mm/s²"
 msgstr "mm/s²"
 
+#~ msgid "Sort by: "
+#~ msgstr "Sortierung: "
+
 #~ msgid "Bltouch found applied offset"
 #~ msgstr "Bltouch hat angewendeten Offset gefunden"
 
@@ -800,9 +812,6 @@ msgstr "mm/s²"
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6"
-
-#~ msgid "Unknown Heater "
-#~ msgstr "Unbekannte Heizung "
 
 #~ msgid "Disconnect"
 #~ msgstr "Nicht verbunden"

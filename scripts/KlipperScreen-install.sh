@@ -105,11 +105,12 @@ create_virtualenv()
 {
     echo_text "Creating virtual environment"
     if [ ! -d ${KSENV} ]; then
-        GET_PIP="${HOME}/get-pip.py"
-        virtualenv --no-pip -p /usr/bin/python3 ${KSENV}
-        curl https://bootstrap.pypa.io/pip/3.6/get-pip.py -o ${GET_PIP}
-        ${KSENV}/bin/python ${GET_PIP}
-        rm ${GET_PIP}
+        virtualenv -p /usr/bin/python3 ${KSENV}
+#         GET_PIP="${HOME}/get-pip.py"
+#         virtualenv --no-pip -p /usr/bin/python3 ${KSENV}
+#         curl https://bootstrap.pypa.io/pip/3.6/get-pip.py -o ${GET_PIP}
+#         ${KSENV}/bin/python ${GET_PIP}
+#         rm ${GET_PIP}
     fi
 
     source ${KSENV}/bin/activate
@@ -161,6 +162,13 @@ update_x11()
     fi
 }
 
+add_desktop_file()
+{
+    DESKTOP=$(<$SCRIPTPATH/KlipperScreen.desktop)
+    mkdir -p $HOME/.local/share/applications/
+    echo "$DESKTOP" | tee $HOME/.local/share/applications/KlipperScreen.desktop > /dev/null
+}
+
 start_KlipperScreen()
 {
     echo_text "Starting service..."
@@ -177,4 +185,5 @@ modify_user
 install_systemd_service
 update_x11
 echo_ok "KlipperScreen was installed"
+add_desktop_file
 start_KlipperScreen

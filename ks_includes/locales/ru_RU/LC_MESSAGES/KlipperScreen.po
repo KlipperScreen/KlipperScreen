@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-18 23:05-0300\n"
+"POT-Creation-Date: 2022-10-27 23:42-0300\n"
 "PO-Revision-Date: 2022-06-03 20:25-0500\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: \n"
@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.0.1\n"
 "X-Poedit-Flags-xgettext: --add-comments\n"
 
@@ -63,6 +63,9 @@ msgstr "Применить смещение %.2f к Endstop?"
 #, python-format
 msgid "Apply %s%.2f offset to Probe?"
 msgstr "Применить смещение %s%.2f к зонду?"
+
+msgid "Are you sure do you want to exclude the object?"
+msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Вы уверены, что хотите запустить аварийную остановку?"
@@ -384,9 +387,6 @@ msgstr "Загрузить"
 msgid "Lower Nozzle"
 msgstr "Опустить сопло"
 
-msgid "Machine"
-msgstr ""
-
 msgid "Macro shortcut on sidebar"
 msgstr "Показать макросы в панели"
 
@@ -507,8 +507,14 @@ msgstr "Управление печатью"
 msgid "Print Time"
 msgstr "Время печати"
 
+msgid "Printer"
+msgstr ""
+
 msgid "Printer Connections"
 msgstr "Подключение принтера"
+
+msgid "Printer Select"
+msgstr ""
 
 msgid "Printing"
 msgstr "Печатается"
@@ -609,6 +615,12 @@ msgstr "Настройки"
 msgid "Show"
 msgstr "Показывать"
 
+msgid "Show Heater Power"
+msgstr ""
+
+msgid "Shutdown"
+msgstr ""
+
 msgid "Size"
 msgstr "Размер"
 
@@ -623,9 +635,6 @@ msgstr ""
 
 msgid "Small"
 msgstr "Маленький"
-
-msgid "Sort by: "
-msgstr "Орден: "
 
 msgid "Sort:"
 msgstr "Сортировать:"
@@ -775,6 +784,9 @@ msgstr "мм/с"
 msgid "mm/s²"
 msgstr "мм/с²"
 
+#~ msgid "Sort by: "
+#~ msgstr "Орден: "
+
 #~ msgid "Bltouch found applied offset"
 #~ msgstr "Bltouch обнаружил примененное смещение"
 
@@ -802,9 +814,6 @@ msgstr "мм/с²"
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6"
-
-#~ msgid "Unknown Heater "
-#~ msgstr "Неизвестный обогреватель "
 
 #~ msgid "Disconnect"
 #~ msgstr "Отключить"

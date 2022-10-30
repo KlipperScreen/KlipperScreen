@@ -16,8 +16,8 @@ def create_panel(*args):
 class ZCalibratePanel(ScreenPanel):
     _screen = None
     widgets = {}
-    distance = 1
     distances = ['.01', '.05', '.1', '.5', '1', '5']
+    distance = distances[-2]
 
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, False)
@@ -90,7 +90,7 @@ class ZCalibratePanel(ScreenPanel):
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
-            self.widgets[i] = self._gtk.ToggleButton(i)
+            self.widgets[i] = self._gtk.Button(i)
             self.widgets[i].set_direction(Gtk.TextDirection.LTR)
             self.widgets[i].connect("clicked", self.change_distance, i)
             ctx = self.widgets[i].get_style_context()
@@ -100,10 +100,9 @@ class ZCalibratePanel(ScreenPanel):
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
-            if i == "1":
+            if i == self.distance:
                 ctx.add_class("distbutton_active")
             distgrid.attach(self.widgets[i], j, 0, 1, 1)
-        self.widgets["1"].set_active(True)
 
         self.widgets['move_dist'] = Gtk.Label(_("Move Distance (mm)"))
         distances = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -206,9 +205,10 @@ class ZCalibratePanel(ScreenPanel):
                 x_offset = float(probe['x_offset'])
             if "y_offset" in probe:
                 y_offset = float(probe['y_offset'])
-        if x_offset is not None and y_offset is not None:
-            logging.info(f"Probe offset X:{x_offset} Y:{y_offset}")
+        logging.info(f"Offset X:{x_offset} Y:{y_offset}")
+        if x_offset is not None:
             x_position = x_position - x_offset
+        if y_offset is not None:
             y_position = y_position - y_offset
 
         logging.info(f"Moving to X:{x_position} Y:{y_position}")
@@ -247,19 +247,10 @@ class ZCalibratePanel(ScreenPanel):
             self.widgets['zoffset'].set_text(f"{-position[2] + self.z_offset:.2f}")
 
     def change_distance(self, widget, distance):
-        if self.distance == distance:
-            return
-
-        ctx = self.widgets[f'{self.distance}'].get_style_context()
-        ctx.remove_class("distbutton_active")
-
+        logging.info(f"### Distance {distance}")
+        self.widgets[f"{self.distance}"].get_style_context().remove_class("distbutton_active")
+        self.widgets[f"{distance}"].get_style_context().add_class("distbutton_active")
         self.distance = distance
-        ctx = self.widgets[self.distance].get_style_context()
-        ctx.add_class("distbutton_active")
-        for i in self.distances:
-            if i == self.distance:
-                continue
-            self.widgets[f"{i}"].set_active(False)
 
     def move(self, widget, direction):
         dist = f"{direction}{self.distance}"

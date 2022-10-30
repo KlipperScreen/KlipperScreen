@@ -104,9 +104,9 @@ class MacroPanel(ScreenPanel):
     def change_sort(self, widget):
         self.sort_reverse ^= True
         if self.sort_reverse:
-            self.sort_btn.set_image(self._gtk.Image("arrow-down", .5))
+            self.sort_btn.set_image(self._gtk.Image("arrow-down", self._gtk.img_scale * .5))
         else:
-            self.sort_btn.set_image(self._gtk.Image("arrow-up", .5))
+            self.sort_btn.set_image(self._gtk.Image("arrow-up", self._gtk.img_scale * .5))
         self.sort_btn.show()
 
         GLib.idle_add(self.reload_macros)

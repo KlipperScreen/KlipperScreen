@@ -1,6 +1,7 @@
 import gi
 import logging
 import re
+import contextlib
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
@@ -14,15 +15,11 @@ def create_panel(*args):
 
 
 class FineTunePanel(ScreenPanel):
-    user_selecting = False
-
-    bs = 0
-    bs_delta = "0.05"
     bs_deltas = ["0.01", "0.05"]
-    percent_delta = 1
+    bs_delta = bs_deltas[-1]
     percent_deltas = ['1', '5', '10', '25']
-    extrusion = 100
-    speed = 100
+    percent_delta = percent_deltas[-2]
+    speed = extrusion = 100
 
     def initialize(self, panel_name):
 
@@ -33,15 +30,16 @@ class FineTunePanel(ScreenPanel):
             bs = print_cfg.get("z_babystep_values", "0.01, 0.05")
             if re.match(r'^[0-9,\.\s]+$', bs):
                 bs = [str(i.strip()) for i in bs.split(',')]
-                self.bs_deltas = bs if len(bs) <= 2 else [bs[0], bs[-1]]
-                self.bs_delta = self.bs_deltas[0]
+                if 1 < len(bs) < 3:
+                    self.bs_deltas = bs
+                    self.bs_delta = self.bs_deltas[-1]
 
         # babystepping grid
         bsgrid = Gtk.Grid()
         for j, i in enumerate(self.bs_deltas):
-            self.labels[i] = self._gtk.ToggleButton(i)
-            self.labels[i].connect("clicked", self.change_bs_delta, i)
-            ctx = self.labels[i].get_style_context()
+            self.labels[f"bdelta{i}"] = self._gtk.Button(i)
+            self.labels[f"bdelta{i}"].connect("clicked", self.change_bs_delta, float(i))
+            ctx = self.labels[f"bdelta{i}"].get_style_context()
             if j == 0:
                 ctx.add_class("distbutton_top")
             elif j == len(self.bs_deltas) - 1:
@@ -50,23 +48,22 @@ class FineTunePanel(ScreenPanel):
                 ctx.add_class("distbutton")
             if i == self.bs_delta:
                 ctx.add_class("distbutton_active")
-            bsgrid.attach(self.labels[i], j, 0, 1, 1)
+            bsgrid.attach(self.labels[f"bdelta{i}"], j, 0, 1, 1)
         # Grid for percentage
         deltgrid = Gtk.Grid()
         for j, i in enumerate(self.percent_deltas):
-            self.labels[i] = self._gtk.ToggleButton(f"{i}%")
-            self.labels[i].connect("clicked", self.change_percent_delta, i)
-            ctx = self.labels[i].get_style_context()
+            self.labels[f"pdelta{i}"] = self._gtk.Button(f"{i}%")
+            self.labels[f"pdelta{i}"].connect("clicked", self.change_percent_delta, int(i))
+            ctx = self.labels[f"pdelta{i}"].get_style_context()
             if j == 0:
                 ctx.add_class("distbutton_top")
             elif j == len(self.percent_deltas) - 1:
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
-            if i == "1":
+            if i == self.percent_delta:
                 ctx.add_class("distbutton_active")
-            deltgrid.attach(self.labels[i], j, 0, 1, 1)
-        self.labels["1"].set_active(True)
+            deltgrid.attach(self.labels[f"pdelta{i}"], j, 0, 1, 1)
 
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
@@ -155,35 +152,34 @@ class FineTunePanel(ScreenPanel):
 
     def change_babystepping(self, widget, direction):
         if direction == "reset":
+            self.labels['zoffset'].set_label('  0.00mm')
             self._screen._ws.klippy.gcode_script("SET_GCODE_OFFSET Z=0 MOVE=1")
         elif direction in ["+", "-"]:
+            with contextlib.suppress(KeyError):
+                z_offset = float(self._printer.data["gcode_move"]["homing_origin"][2])
+                if direction == "+":
+                    z_offset += float(self.bs_delta)
+                else:
+                    z_offset -= float(self.bs_delta)
+                self.labels['zoffset'].set_label(f'  {round(z_offset, 2):.2f}mm')
             self._screen._ws.klippy.gcode_script(f"SET_GCODE_OFFSET Z_ADJUST={direction}{self.bs_delta} MOVE=1")
 
     def change_bs_delta(self, widget, bs):
-        if self.bs_delta == bs:
-            return
         logging.info(f"### BabyStepping {bs}")
-
-        ctx = self.labels[f"{self.bs_delta}"].get_style_context()
-        ctx.remove_class("distbutton_active")
-
+        self.labels[f"bdelta{self.bs_delta}"].get_style_context().remove_class("distbutton_active")
+        self.labels[f"bdelta{bs}"].get_style_context().add_class("distbutton_active")
         self.bs_delta = bs
-        ctx = self.labels[self.bs_delta].get_style_context()
-        ctx.add_class("distbutton_active")
-        for i in self.bs_deltas:
-            if i == self.bs_delta:
-                continue
-            self.labels[i].set_active(False)
 
     def change_extrusion(self, widget, direction):
         if direction == "+":
-            self.extrusion += int(self.percent_delta)
+            self.extrusion += self.percent_delta
         elif direction == "-":
-            self.extrusion -= int(self.percent_delta)
+            self.extrusion -= self.percent_delta
         elif direction == "reset":
             self.extrusion = 100
 
         self.extrusion = max(self.extrusion, 1)
+        self.labels['extrudefactor'].set_label(f"  {self.extrusion:3}%")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.set_extrusion_rate(self.extrusion))
 
     def change_speed(self, widget, direction):
@@ -195,20 +191,11 @@ class FineTunePanel(ScreenPanel):
             self.speed = 100
 
         self.speed = max(self.speed, 1)
+        self.labels['speedfactor'].set_label(f"  {self.speed:3}%")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.set_speed_rate(self.speed))
 
     def change_percent_delta(self, widget, delta):
-        if self.percent_delta == delta:
-            return
         logging.info(f"### Delta {delta}")
-
-        ctx = self.labels[f"{self.percent_delta}"].get_style_context()
-        ctx.remove_class("distbutton_active")
-
+        self.labels[f"pdelta{self.percent_delta}"].get_style_context().remove_class("distbutton_active")
+        self.labels[f"pdelta{delta}"].get_style_context().add_class("distbutton_active")
         self.percent_delta = delta
-        ctx = self.labels[self.percent_delta].get_style_context()
-        ctx.add_class("distbutton_active")
-        for i in self.percent_deltas:
-            if i == self.percent_delta:
-                continue
-            self.labels[f"{i}"].set_active(False)

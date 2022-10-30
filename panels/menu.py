@@ -77,7 +77,7 @@ class MenuPanel(ScreenPanel):
             item = self.items[i][key]
 
             env = Environment(extensions=["jinja2.ext.i18n"], autoescape=True)
-            env.install_gettext_translations(self.lang)
+            env.install_gettext_translations(self._config.get_lang())
             j2_temp = env.from_string(item['name'])
             parsed_name = j2_temp.render()
 
@@ -109,9 +109,7 @@ class MenuPanel(ScreenPanel):
             logging.debug(f"Template: '{enable}'")
             j2_temp = Template(enable, autoescape=True)
             result = j2_temp.render(self.j2_data)
-            if result == 'True':
-                return True
-            return False
+            return result == 'True'
         except Exception as e:
             logging.debug(f"Error evaluating enable statement: {enable}\n{e}")
             return False

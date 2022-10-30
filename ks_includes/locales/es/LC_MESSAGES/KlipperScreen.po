@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-18 23:05-0300\n"
-"PO-Revision-Date: 2022-08-10 12:01-0300\n"
+"POT-Creation-Date: 2022-10-27 23:42-0300\n"
+"PO-Revision-Date: 2022-10-27 23:24-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -62,6 +62,9 @@ msgstr "Aplicar %.2f desfase al final de carrera?"
 #, python-format
 msgid "Apply %s%.2f offset to Probe?"
 msgstr "Aplicar %s%.2f desfase al sensor?"
+
+msgid "Are you sure do you want to exclude the object?"
+msgstr "¿Está seguro de excluir este objeto?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "¿Parada de emergencia?"
@@ -383,9 +386,6 @@ msgstr "Cargar"
 msgid "Lower Nozzle"
 msgstr "Bajar Boquilla"
 
-msgid "Machine"
-msgstr "Máquina"
-
 msgid "Macro shortcut on sidebar"
 msgstr "Atajo a Macros en el lateral"
 
@@ -507,8 +507,14 @@ msgstr "Control de impresión"
 msgid "Print Time"
 msgstr "Tiempo de impresión"
 
+msgid "Printer"
+msgstr "Impresora"
+
 msgid "Printer Connections"
 msgstr "Conexiones a impresoras"
+
+msgid "Printer Select"
+msgstr "Seleccionar Impresora"
 
 msgid "Printing"
 msgstr "Imprimiendo"
@@ -609,6 +615,12 @@ msgstr "Opciones"
 msgid "Show"
 msgstr "Mostrar"
 
+msgid "Show Heater Power"
+msgstr "Mostrar potencia del calentador"
+
+msgid "Shutdown"
+msgstr "Apagar"
+
 msgid "Size"
 msgstr "Tamaño"
 
@@ -623,9 +635,6 @@ msgstr "Slicer:"
 
 msgid "Small"
 msgstr "Pequeño"
-
-msgid "Sort by: "
-msgstr "Ordenar por: "
 
 msgid "Sort:"
 msgstr "Ordenar:"
@@ -773,6 +782,12 @@ msgstr "mm/s"
 msgid "mm/s²"
 msgstr "mm/s²"
 
+#~ msgid "Machine"
+#~ msgstr "Máquina"
+
+#~ msgid "Sort by: "
+#~ msgstr "Ordenar por: "
+
 #~ msgid "Bltouch found applied offset"
 #~ msgstr "Encontrado Bltouch aplicado desfase"
 
@@ -800,9 +815,6 @@ msgstr "mm/s²"
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6"
-
-#~ msgid "Unknown Heater "
-#~ msgstr "Calentador Desconocido "
 
 #~ msgid "Disconnect"
 #~ msgstr "Desconectar"

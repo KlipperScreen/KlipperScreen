@@ -30,44 +30,8 @@ fan1 will show in the interface, but _fan2 will be hidden.
 
 
 ## Thumbnails
-KlipperScreen can display thumbnails in the file browser and as previews in the print status.
 
-
-![Job Status](img/panels/job_status.png)
-
-
-* [PrusaSlicer](#prusaslicer)
-* [SuperSlicer](#superslicer)
-* [Cura](#cura)
-* [ideaMaker](#ideamaker)
-
-### PrusaSlicer
-In “Expert” mode PrusaSlicer has an option in the “Printer Settings” tab to activate previews.
-Under General / Firmware.
-
-
-![PrusaSlicer](img/quicktips/PrusaSlicer-thumbnails.png)
-
-
-### SuperSlicer
-In “Expert” mode SuperSlicer has some very convenient options in the “Printer Settings” tab to activate and customize the previews.
-
-
-![SuperSlicer](img/quicktips/SuperSlicer-thumbnails.png)
-
-
-### Cura
-The Cura plugin [“Cura2Moonraker”](https://github.com/emtrax-ltd/Cura2MoonrakerPlugin) is required for this.
-
-
-![Cura](img/quicktips/Cura-thumbnails.png)
-
-
-### ideaMaker
-To enable thumbnails, open the Advanced tab in the printer settings, enable the GCode Thumbnails for Octoprint and Mainsail option and enter your prefered square format image size in the Resolution fields (e.g. 400 X 400). It’s necessary that the thumbnail width and height resolution is equal.
-
-
-![ideaMaker](img/quicktips/IdeaMaker-thumbnails.png)
+Moved to [Thumbnails](Thumbnails.md)
 
 
 ## Layer Progress

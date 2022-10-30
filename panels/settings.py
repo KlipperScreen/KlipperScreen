@@ -102,12 +102,10 @@ class SettingsPanel(ScreenPanel):
             dev.add(box)
         elif option['type'] == "dropdown":
             dropdown = Gtk.ComboBoxText()
-            i = 0
-            for opt in option['options']:
+            for i, opt in enumerate(option['options']):
                 dropdown.append(opt['value'], opt['name'])
                 if opt['value'] == self._config.get_config()[option['section']].get(opt_name, option['value']):
                     dropdown.set_active(i)
-                i += 1
             dropdown.connect("changed", self.on_dropdown_change, option['section'], opt_name,
                              option['callback'] if "callback" in option else None)
             dropdown.set_entry_text_column(0)

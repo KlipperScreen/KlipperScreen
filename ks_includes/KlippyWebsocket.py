@@ -64,8 +64,6 @@ class KlippyWebsocket(threading.Thread):
         self.connect()
 
     def connect(self):
-        _ = self._screen.lang.gettext
-
         def ws_on_close(ws, a=None, b=None):
             self.on_close(ws)
 
