@@ -161,7 +161,6 @@ class KlipperScreen(Gtk.Window):
             if self.printer.get_state() not in ["disconnected", "error", "startup", "shutdown"]:
                 self.base_panel.show_heaters(True)
             self.base_panel.show_printer_select(True)
-            self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
             return
 
         # Cleanup
@@ -728,7 +727,6 @@ class KlipperScreen(Gtk.Window):
             return
 
         logging.debug("### Going to disconnected")
-        self.base_panel.show_macro_shortcut(False)
         self.wake_screen()
         self.printer_initializing(_("Klipper has disconnected"))
         if self.connected_printer is not None:
@@ -743,7 +741,6 @@ class KlipperScreen(Gtk.Window):
             self.printer_select_callbacks = [self.state_error]
             return
 
-        self.base_panel.show_macro_shortcut(False)
         self.wake_screen()
         msg = self.printer.get_stat("webhooks", "state_message")
         if "FIRMWARE_RESTART" in msg:
@@ -808,7 +805,6 @@ class KlipperScreen(Gtk.Window):
             self.printer_select_callbacks = [self.state_shutdown]
             return
 
-        self.base_panel.show_macro_shortcut(False)
         self.wake_screen()
         msg = self.printer.get_stat("webhooks", "state_message")
         if "ready" in msg:
