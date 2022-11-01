@@ -826,11 +826,11 @@ class JobStatusPanel(ScreenPanel):
     def show_file_thumbnail(self):
         if self._files.has_thumbnail(self.filename):
             if self._screen.vertical_mode:
-                width = -1
+                width = self._screen.width * 0.9
                 height = self._screen.height / 4
             else:
                 width = self._screen.width / 3
-                height = -1
+                height = self._gtk.get_content_height() * 0.48
             pixbuf = self.get_file_image(self.filename, width, height)
             if pixbuf is not None:
                 self.labels['thumbnail'].set_from_pixbuf(pixbuf)
