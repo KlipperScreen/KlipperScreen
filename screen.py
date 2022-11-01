@@ -782,6 +782,7 @@ class KlipperScreen(Gtk.Window):
 
         self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
         self.base_panel.show_heaters(True)
+        self.base_panel.show_estop(True)
 
         # Do not return to main menu if completing a job, timeouts/user input will return
         if "job_status" in self._cur_panels or "main_menu" in self._cur_panels:
@@ -1046,6 +1047,7 @@ class KlipperScreen(Gtk.Window):
         self.show_panel('job_status', "job_status", _("Printing"), 2)
         self.base_panel.show_heaters(True)
         self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
+        self.base_panel.show_estop(True)
         for dialog in self.dialogs:
             dialog.destroy()
 

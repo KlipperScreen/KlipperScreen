@@ -23,7 +23,8 @@ class BasePanel(ScreenPanel):
         self.buttons_showing = {
             'back': not back,
             'macros_shortcut': False,
-            'printer_select': False
+            'printer_select': False,
+            'estop': True,
         }
         self.current_extruder = None
         # Action bar buttons
@@ -306,3 +307,12 @@ class BasePanel(ScreenPanel):
             self.time_min = now.minute
             self.time_format = confopt
         return True
+
+    def show_estop(self, show=True):
+        if show and self.buttons_showing['estop'] is False:
+            self.action_bar.add(self.control['estop'])
+            self.buttons_showing['estop'] = True
+            self.control['estop'].show()
+        elif show is False and self.buttons_showing['estop']:
+            self.action_bar.remove(self.control['estop'])
+            self.buttons_showing['estop'] = False
