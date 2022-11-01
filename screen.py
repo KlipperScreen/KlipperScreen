@@ -97,6 +97,7 @@ class KlipperScreen(Gtk.Window):
         self.lang_ltr = self.set_text_direction(self._config.get_main_config().get("language", None))
 
         Gtk.Window.__init__(self)
+        self.set_title("KlipperScreen")
         monitor = Gdk.Display.get_default().get_primary_monitor()
         self.width = self._config.get_main_config().getint("width", monitor.get_geometry().width)
         self.height = self._config.get_main_config().getint("height", monitor.get_geometry().height)
@@ -109,6 +110,7 @@ class KlipperScreen(Gtk.Window):
         self.gtk = KlippyGtk(self, self.width, self.height, self.theme, self.show_cursor,
                              self._config.get_main_config().get("font_size", "medium"))
         self.init_style()
+        self.set_icon_from_file(os.path.join(klipperscreendir, "styles", "icon.svg"))
 
         self.base_panel = BasePanel(self, title="Base Panel", back=False)
         self.add(self.base_panel.get())
