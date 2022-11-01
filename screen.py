@@ -1123,12 +1123,17 @@ class KlipperScreen(Gtk.Window):
 def main():
     version = functions.get_software_version()
     parser = argparse.ArgumentParser(description="KlipperScreen - A GUI for Klipper")
+    homedir = os.path.expanduser("~")
+
     parser.add_argument(
-        "-c", "--configfile", default="~/KlipperScreen.conf", metavar='<configfile>',
+        "-c", "--configfile", default=os.path.join(homedir, "KlipperScreen.conf"), metavar='<configfile>',
         help="Location of KlipperScreen configuration file"
     )
+    logdir = os.path.join(homedir, "printer_data", "logs")
+    if not os.path.exists(logdir):
+        logdir = "/tmp"
     parser.add_argument(
-        "-l", "--logfile", default="/tmp/KlipperScreen.log", metavar='<logfile>',
+        "-l", "--logfile", default=os.path.join(logdir, "KlipperScreen.log"), metavar='<logfile>',
         help="Location of KlipperScreen logfile output"
     )
     args = parser.parse_args()

@@ -5,12 +5,17 @@ This page will have common problems and common solutions to those problems.
 
 The first step to troubleshooting any problem is getting the cause of the error.
 
-* Check for the file `/tmp/KlipperScreen.log`
+* Find KlipperScreen.log:
 
-look at the contents by running `cat /tmp/KlipperScreen.log` or grab the file over WinSCP or another sftp program.
-This is the most important file, and should be provided if you ask for support.
+!!! important
+    This log file should be provided if you ask for support.
 
-If that file is non-existent, run `journalctl -xe -u KlipperScreen`
+Depending on your setup the file could be accesible from the web interface (Mainsail/Fluidd) alongside other logs
+
+Located at `~/printer_data/logs`or in `/tmp/` if the former doesn't exists.
+
+If KlipperScreen.log doesn't exist, run `systemctl status KlipperScreen`
+(or `journalctl -xe -u KlipperScreen`)
 
 Check the file `/var/log/Xorg.0.log` where you can find issues with the X server.
 

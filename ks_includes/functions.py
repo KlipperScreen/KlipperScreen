@@ -157,7 +157,6 @@ def setup_logging(log_file, software_version):
     stdout_fmt = logging.Formatter(
         '%(asctime)s [%(filename)s:%(funcName)s()] - %(message)s')
     stdout_hdlr.setFormatter(stdout_fmt)
-
     fh = listener = None
     try:
         if os.path.exists(log_file):
