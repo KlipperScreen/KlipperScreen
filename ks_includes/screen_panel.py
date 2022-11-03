@@ -14,7 +14,6 @@ class ScreenPanel:
         self._screen = screen
         self._config = screen._config
         self._files = screen.files
-        self.lang = self._screen.lang
         self._printer = screen.printer
         self.labels = {}
         self._gtk = screen.gtk
@@ -51,10 +50,11 @@ class ScreenPanel:
     def get_content(self):
         return self.content
 
-    def get_file_image(self, filename, width=1, height=1, small=False):
+    def get_file_image(self, filename, width=None, height=None, small=False):
         if not self._files.has_thumbnail(filename):
             return None
-
+        width = width if width is not None else self._gtk.img_width
+        height = height if height is not None else self._gtk.img_height
         loc = self._files.get_thumbnail_location(filename, small)
         if loc is None:
             return None

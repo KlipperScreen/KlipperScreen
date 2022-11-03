@@ -45,7 +45,7 @@ class PrintPanel(ScreenPanel):
         for i, (name, val) in enumerate(self.sort_items.items(), start=1):
             s = self._gtk.ButtonImage(None, val, f"color{i % 4}", .5, Gtk.PositionType.RIGHT, 1)
             if name == self.sort_current[0]:
-                s.set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], .5))
+                s.set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], self._gtk.img_scale * .5))
             s.connect("clicked", self.change_sort, name)
             self.labels[f'sort_{name}'] = s
             sbox.add(s)
@@ -179,7 +179,7 @@ class PrintPanel(ScreenPanel):
         file.set_hexpand(True)
         file.set_vexpand(False)
 
-        icon = self._gtk.Image("folder", 1)
+        icon = self._gtk.Image("folder")
 
         file.add(icon)
         file.add(labels)
@@ -189,7 +189,6 @@ class PrintPanel(ScreenPanel):
         self.directories[directory] = frame
 
         self.labels['directories'][directory] = {
-            "icon": icon,
             "info": info,
             "name": name
         }
@@ -226,18 +225,11 @@ class PrintPanel(ScreenPanel):
         file.set_hexpand(True)
         file.set_vexpand(False)
 
-        icon = Gtk.Image()
-        pixbuf = self.get_file_image(filepath, small=True)
-        if pixbuf is not None:
-            icon.set_from_pixbuf(pixbuf)
-        else:
-            icon = self._gtk.Image("file", 1.6)
+        icon = Gtk.Button()
+        GLib.idle_add(self.image_load, filepath)
+        icon.connect("clicked", self.confirm_delete_file, f"gcodes/{filepath}")
 
-        img = Gtk.Button()
-        img.set_image(icon)
-        img.connect("clicked", self.confirm_delete_file, f"gcodes/{filepath}")
-
-        file.add(img)
+        file.add(icon)
         file.add(labels)
         if os.path.splitext(filename)[1] in [".gcode", ".g", ".gco"]:
             file.add(actions)
@@ -249,6 +241,13 @@ class PrintPanel(ScreenPanel):
             "info": info,
             "name": name
         }
+
+    def image_load(self, filepath):
+        pixbuf = self.get_file_image(filepath, small=True)
+        if pixbuf is not None:
+            self.labels['files'][filepath]['icon'].set_image(Gtk.Image.new_from_pixbuf(pixbuf))
+        else:
+            self.labels['files'][filepath]['icon'].set_image(self._gtk.Image("file"))
 
     def confirm_delete_file(self, widget, filepath):
         logging.debug(f"Sending delete_file {filepath}")
@@ -288,7 +287,8 @@ class PrintPanel(ScreenPanel):
             self.labels[f'sort_{oldkey}'].set_image(None)
             self.labels[f'sort_{oldkey}'].show_all()
             self.sort_current = [key, 0]
-        self.labels[f'sort_{key}'].set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], .5))
+        self.labels[f'sort_{key}'].set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]],
+                                                             self._gtk.img_scale * .5))
         self.labels[f'sort_{key}'].show()
         GLib.idle_add(self.reload_files)
 
@@ -312,16 +312,16 @@ class PrintPanel(ScreenPanel):
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
         grid = Gtk.Grid()
-        grid.add(label)
-
-        pixbuf = self.get_file_image(filename, 8, 3.2)
-        if pixbuf is not None:
-            image = Gtk.Image.new_from_pixbuf(pixbuf)
-            grid.attach_next_to(image, label, Gtk.PositionType.BOTTOM, 1, 3)
-
         grid.set_vexpand(True)
         grid.set_halign(Gtk.Align.CENTER)
         grid.set_valign(Gtk.Align.CENTER)
+        grid.add(label)
+
+        pixbuf = self.get_file_image(filename, self._screen.width * .9, self._screen.height * .6)
+        if pixbuf is not None:
+            image = Gtk.Image.new_from_pixbuf(pixbuf)
+            image.set_vexpand(False)
+            grid.attach_next_to(image, label, Gtk.PositionType.BOTTOM, 1, 1)
 
         self._gtk.Dialog(self._screen, buttons, grid, self.confirm_print_response, filename)
 
@@ -396,9 +396,7 @@ class PrintPanel(ScreenPanel):
         self.labels['files'][filename]['info'].set_markup(self.get_file_info_str(filename))
 
         # Update icon
-        pixbuf = self.get_file_image(filename)
-        if pixbuf is not None:
-            self.labels['files'][filename]['icon'].set_from_pixbuf(pixbuf)
+        GLib.idle_add(self.image_load, filename)
 
     def _callback(self, newfiles, deletedfiles, updatedfiles=None):
         logging.debug(f"newfiles: {newfiles}")

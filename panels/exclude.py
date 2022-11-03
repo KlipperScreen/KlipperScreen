@@ -36,17 +36,17 @@ class ExcludeObjectPanel(ScreenPanel):
             self.add_object(obj["name"])
 
         scroll = self._gtk.ScrolledWindow()
+        scroll.set_size_request((self._screen.width * .9) // 2, -1)
         scroll.add(self.object_list)
         scroll.set_halign(Gtk.Align.CENTER)
-        scroll.set_size_request(self._gtk.get_content_width() // 2, 0)
 
-        grid = Gtk.Grid()
+        grid = self._gtk.HomogeneousGrid()
+        grid.set_row_homogeneous(False)
         grid.attach(self.current_object, 0, 0, 2, 1)
         grid.attach(Gtk.Separator(), 0, 1, 2, 1)
 
         if self.objects and "polygon" in self.objects[0]:
             self.labels['map'] = ObjectMap(self._screen, self._printer, self._gtk.get_font_size())
-            self.labels['map'].set_size_request(self._gtk.get_content_width() // 2, 0)
             grid.attach(self.labels['map'], 0, 2, 1, 1)
             grid.attach(scroll, 1, 2, 1, 1)
         else:
@@ -58,15 +58,14 @@ class ExcludeObjectPanel(ScreenPanel):
     def add_object(self, name):
         if name not in self.buttons and name not in self.excluded_objects:
             self.buttons[name] = self._gtk.Button(name.replace("_", " "))
-            self.buttons[name].get_children()[0].set_line_wrap_mode(Pango.WrapMode.CHAR)
+            self.buttons[name].get_children()[0].set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
             self.buttons[name].get_children()[0].set_line_wrap(True)
             self.buttons[name].connect("clicked", self.exclude_object, name)
-            self.buttons[name].set_hexpand(True)
             self.buttons[name].get_style_context().add_class("frame-item")
             self.object_list.add(self.buttons[name])
 
     def exclude_object(self, widget, name):
-        if len(self.buttons) == 1:
+        if len(self.excluded_objects) == len(self.objects) - 1:
             # Do not exclude the last object, this is a workaround for a bug of klipper that starts
             # to move the toolhead really fast skipping gcode until the file ends
             # Remove this if they fix it.
@@ -112,6 +111,8 @@ class ExcludeObjectPanel(ScreenPanel):
                     if name in self.buttons:
                         self.object_list.remove(self.buttons[name])
                 self.update_graph()
+                if len(self.excluded_objects) == len(self.objects):
+                    self.menu_return(False)
         elif action == "notify_gcode_response" and "Excluding object" in data:
             self._screen.show_popup_message(data, level=1)
             self.update_graph()

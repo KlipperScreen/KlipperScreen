@@ -192,7 +192,8 @@ KlipperScreen will search for a configuration file in the following order:
 
 1. _~/KlipperScreen.conf_
 2. _${KlipperScreen_Directory}/KlipperScreen.conf_
-3. _~/klipper_config/KlipperScreen.conf_
+3. _~/printer_data/config/KlipperScreen.conf_
+4. _~/klipper_config/KlipperScreen.conf_
 
 If you need a custom location for the configuration file, you can add -c or --configfile to the systemd file and specify
 the location of your configuration file.

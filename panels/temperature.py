@@ -39,11 +39,15 @@ class TemperaturePanel(ScreenPanel):
         state = self._printer.get_state()
         logging.info(state)
         selection = []
-        if "extruder" in self._printer.get_tools():
-            selection.append("extruder")
         if state not in ["printing", "paused"]:
+            for extruder in self._printer.get_tools():
+                selection.append(extruder)
             self.show_preheat = True
             selection.extend(self._printer.get_heaters())
+        else:
+            current_extruder = self._screen.printer.get_stat("toolhead", "extruder")
+            if current_extruder:
+                selection.append(current_extruder)
 
         # Select heaters
         for h in selection:
@@ -211,7 +215,7 @@ class TemperaturePanel(ScreenPanel):
             self.hide_numpad()
 
     def select_heater(self, widget, device):
-        if self.active_heater is None and self.devices[device]["can_target"]:
+        if self.active_heater is None and device in self.devices and self.devices[device]["can_target"]:
             if device in self.active_heaters:
                 self.active_heaters.pop(self.active_heaters.index(device))
                 self.devices[device]['name'].get_style_context().remove_class("button_active")
@@ -277,6 +281,7 @@ class TemperaturePanel(ScreenPanel):
             elif target > max_temp:
                 self._screen.show_popup_message(_("Can't set above the maximum:") + f' {max_temp}')
                 return False
+        logging.debug(f"Invalid {heater} Target:{target}/{max_temp}")
         return False
 
     def preheat_gcode(self, setting):

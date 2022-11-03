@@ -77,7 +77,7 @@ class MenuPanel(ScreenPanel):
             item = self.items[i][key]
 
             env = Environment(extensions=["jinja2.ext.i18n"], autoescape=True)
-            env.install_gettext_translations(self.lang)
+            env.install_gettext_translations(self._config.get_lang())
             j2_temp = env.from_string(item['name'])
             parsed_name = j2_temp.render()
 

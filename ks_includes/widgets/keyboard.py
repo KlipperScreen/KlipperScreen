@@ -7,7 +7,6 @@ from gi.repository import Gtk, GLib
 class Keyboard(Gtk.Box):
     def __init__(self, screen, close_cb, entry=None):
         super().__init__(orientation=Gtk.Orientation.VERTICAL)
-        _ = screen.lang.gettext
         self._gtk = screen.gtk
         self.close_cb = close_cb
         self.keyboard = Gtk.Grid()

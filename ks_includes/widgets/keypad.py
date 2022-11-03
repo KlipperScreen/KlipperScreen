@@ -8,7 +8,6 @@ class Keypad(Gtk.Box):
     def __init__(self, screen, change_temp, close_function):
         super().__init__(orientation=Gtk.Orientation.VERTICAL)
 
-        _ = screen.lang.gettext
         self.labels = {}
         self.change_temp = change_temp
         self.screen = screen
