@@ -93,6 +93,9 @@ class Keyboard(Gtk.Box):
             for language in self.langs:
                 if os.getenv('LANG').lower().startswith(language):
                     return language
+        for l in self.langs:
+            if language.startswith(l):
+                return l
         return "en"
 
     def set_pallet(self, p):
