@@ -496,6 +496,9 @@ class KlipperScreenConfig:
             klipper_config = os.path.join(filepath, "klipper_config")
             if os.path.exists(klipper_config):
                 filepath = os.path.join(klipper_config, "KlipperScreen.conf")
+            klipper_config = os.path.join(filepath, "printer_data", "config")
+            if os.path.exists(klipper_config):
+                filepath = os.path.join(klipper_config, "KlipperScreen.conf")
             else:
                 filepath = os.path.join(filepath, "KlipperScreen.conf")
 
