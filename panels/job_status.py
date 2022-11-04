@@ -440,7 +440,7 @@ class JobStatusPanel(ScreenPanel):
         if self.filename != "none":
             self._screen._ws.klippy.print_start(self.filename)
             self.new_print()
-        GLib.timeout_add_seconds(5, self.enable_button("restart"))
+        GLib.timeout_add_seconds(5, self.enable_button, "restart")
 
     def resume(self, widget):
         self._screen._ws.klippy.print_resume(self._response_callback, "enable_button", "pause", "cancel")
@@ -497,7 +497,7 @@ class JobStatusPanel(ScreenPanel):
         if self.state not in ["printing", "paused", "cancelling"]:
             self._screen.printer_ready()
             self._printer.change_state("ready")
-            GLib.timeout_add_seconds(5, self.enable_button("menu"))
+            GLib.timeout_add_seconds(5, self.enable_button, "menu")
 
         return False
 

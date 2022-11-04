@@ -117,68 +117,71 @@ class BasePanel(ScreenPanel):
         return
 
     def show_heaters(self, show=True):
-        for child in self.control['temp_box'].get_children():
-            self.control['temp_box'].remove(child)
-        if not show or self._screen.printer.get_temp_store_devices() is None:
-            return
+        try:
+            for child in self.control['temp_box'].get_children():
+                self.control['temp_box'].remove(child)
+            if not show or self._screen.printer.get_temp_store_devices() is None:
+                return
 
-        printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
-        if printer_cfg is not None:
-            self.titlebar_name_type = printer_cfg.get("titlebar_name_type", None)
-        else:
-            self.titlebar_name_type = None
-        logging.info(f"Titlebar name type: {self.titlebar_name_type}")
+            printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
+            if printer_cfg is not None:
+                self.titlebar_name_type = printer_cfg.get("titlebar_name_type", None)
+            else:
+                self.titlebar_name_type = None
+            logging.info(f"Titlebar name type: {self.titlebar_name_type}")
 
-        img_size = self._gtk.img_scale * .5
-        for device in self._screen.printer.get_temp_store_devices():
-            self.labels[device] = Gtk.Label(label="100º")
-            self.labels[device].set_ellipsize(Pango.EllipsizeMode.START)
+            img_size = self._gtk.img_scale * .5
+            for device in self._screen.printer.get_temp_store_devices():
+                self.labels[device] = Gtk.Label(label="100º")
+                self.labels[device].set_ellipsize(Pango.EllipsizeMode.START)
 
-            self.labels[f'{device}_box'] = Gtk.Box()
-            icon = self.get_icon(device, img_size)
-            if icon is not None:
-                self.labels[f'{device}_box'].pack_start(icon, False, False, 3)
-            self.labels[f'{device}_box'].pack_start(self.labels[device], False, False, 0)
+                self.labels[f'{device}_box'] = Gtk.Box()
+                icon = self.get_icon(device, img_size)
+                if icon is not None:
+                    self.labels[f'{device}_box'].pack_start(icon, False, False, 3)
+                self.labels[f'{device}_box'].pack_start(self.labels[device], False, False, 0)
 
-        # Limit the number of items according to resolution
-        nlimit = int(round(log(self._screen.width, 10) * 5 - 10.5))
+            # Limit the number of items according to resolution
+            nlimit = int(round(log(self._screen.width, 10) * 5 - 10.5))
 
-        n = 0
-        if self._screen.printer.get_tools():
-            self.current_extruder = self._screen.printer.get_stat("toolhead", "extruder")
-            if self.current_extruder and f"{self.current_extruder}_box" in self.labels:
-                self.control['temp_box'].add(self.labels[f"{self.current_extruder}_box"])
+            n = 0
+            if self._screen.printer.get_tools():
+                self.current_extruder = self._screen.printer.get_stat("toolhead", "extruder")
+                if self.current_extruder and f"{self.current_extruder}_box" in self.labels:
+                    self.control['temp_box'].add(self.labels[f"{self.current_extruder}_box"])
+                    n += 1
+
+            if self._screen.printer.has_heated_bed():
+                self.control['temp_box'].add(self.labels['heater_bed_box'])
                 n += 1
 
-        if self._screen.printer.has_heated_bed():
-            self.control['temp_box'].add(self.labels['heater_bed_box'])
-            n += 1
-
-        # Options in the config have priority
-        if printer_cfg is not None:
-            titlebar_items = printer_cfg.get("titlebar_items", None)
-            if titlebar_items is not None:
-                titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
-                logging.info(f"Titlebar items: {titlebar_items}")
-                for device in self._screen.printer.get_temp_store_devices():
-                    # Users can fill the bar if they want
-                    if n >= nlimit + 1:
-                        break
-                    name = device.split()[1] if len(device.split()) > 1 else device
-                    for item in titlebar_items:
-                        if name == item:
-                            self.control['temp_box'].add(self.labels[f"{device}_box"])
-                            n += 1
+            # Options in the config have priority
+            if printer_cfg is not None:
+                titlebar_items = printer_cfg.get("titlebar_items", None)
+                if titlebar_items is not None:
+                    titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
+                    logging.info(f"Titlebar items: {titlebar_items}")
+                    for device in self._screen.printer.get_temp_store_devices():
+                        # Users can fill the bar if they want
+                        if n >= nlimit + 1:
                             break
+                        name = device.split()[1] if len(device.split()) > 1 else device
+                        for item in titlebar_items:
+                            if name == item:
+                                self.control['temp_box'].add(self.labels[f"{device}_box"])
+                                n += 1
+                                break
 
-        # If there is enough space fill with heater_generic
-        for device in self._screen.printer.get_temp_store_devices():
-            if n >= nlimit:
-                break
-            if device.startswith("heater_generic"):
-                self.control['temp_box'].add(self.labels[f"{device}_box"])
-                n += 1
-        self.control['temp_box'].show_all()
+            # If there is enough space fill with heater_generic
+            for device in self._screen.printer.get_temp_store_devices():
+                if n >= nlimit:
+                    break
+                if device.startswith("heater_generic"):
+                    self.control['temp_box'].add(self.labels[f"{device}_box"])
+                    n += 1
+            self.control['temp_box'].show_all()
+        except Exception as e:
+            logging.debug(f"Couldn't create heaters box: {e}")
 
     def get_icon(self, device, img_size):
         if device.startswith("extruder"):
