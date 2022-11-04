@@ -18,6 +18,7 @@ class ZCalibratePanel(ScreenPanel):
     widgets = {}
     distances = ['.01', '.05', '.1', '.5', '1', '5']
     distance = distances[-2]
+    probe_types = ["probe", "bltouch", "smart_effector", "dockable_probe"]
 
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, False)
@@ -25,15 +26,11 @@ class ZCalibratePanel(ScreenPanel):
 
     def initialize(self, panel_name):
 
-        if self._printer.config_section_exists("probe"):
-            self.z_offset = float(self._screen.printer.get_config_section("probe")['z_offset'])
-        elif self._printer.config_section_exists("bltouch"):
-            self.z_offset = float(self._screen.printer.get_config_section("bltouch")['z_offset'])
-        elif self._printer.config_section_exists("smart_effector"):
-            self.z_offset = float(self._screen.printer.get_config_section("smart_effector")['z_offset'])
-        else:
-            self.z_offset = None
-
+        for probe_type in self.probe_types:
+            if self._printer.config_section_exists(probe_type):
+                self.z_offset = float(self._screen.printer.get_config_section(probe_type)['z_offset'])
+                logging.info(f"Using: {probe_type} Z offset: {self.z_offset}")
+                break
         self.widgets['zposition'] = Gtk.Label("Z: ?")
 
         pos = self._gtk.HomogeneousGrid()
@@ -62,9 +59,11 @@ class ZCalibratePanel(ScreenPanel):
                 and not self._screen.printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"):
             self._add_button("Endstop", "endstop", pobox)
             functions.append("endstop")
-        if self._printer.config_section_exists("probe") or self._printer.config_section_exists("bltouch"):
-            self._add_button("Probe", "probe", pobox)
-            functions.append("probe")
+        for probe_type in self.probe_types:
+            if self._printer.config_section_exists(probe_type):
+                self._add_button("Probe", "probe", pobox)
+                functions.append("probe")
+                break
         if self._printer.config_section_exists("bed_mesh") and "probe" not in functions:
             # This is used to do a manual bed mesh if there is no probe
             self._add_button("Bed mesh", "mesh", pobox)
@@ -208,18 +207,14 @@ class ZCalibratePanel(ScreenPanel):
         # Find probe offset
         klipper_cfg = self._screen.printer.get_config_section_list()
         x_offset = y_offset = None
-        if "bltouch" in klipper_cfg:
-            bltouch = self._screen.printer.get_config_section("bltouch")
-            if "x_offset" in bltouch:
-                x_offset = float(bltouch['x_offset'])
-            if "y_offset" in bltouch:
-                y_offset = float(bltouch['y_offset'])
-        elif "probe" in klipper_cfg:
-            probe = self._screen.printer.get_config_section("probe")
-            if "x_offset" in probe:
-                x_offset = float(probe['x_offset'])
-            if "y_offset" in probe:
-                y_offset = float(probe['y_offset'])
+        for probe_type in self.probe_types:
+            if probe_type in klipper_cfg:
+                probe = self._screen.printer.get_config_section(probe_type)
+                if "x_offset" in probe:
+                    x_offset = float(probe['x_offset'])
+                if "y_offset" in probe:
+                    y_offset = float(probe['y_offset'])
+                break
         logging.info(f"Offset X:{x_offset} Y:{y_offset}")
         if x_offset is not None:
             x_position = x_position - x_offset
