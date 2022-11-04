@@ -43,11 +43,6 @@ usermod -a -G tty pi
 ```
 (if your username is not 'pi' change 'pi' to your username)
 
-You may also need:
-```sh
-sudo apt install xserver-xorg-legacy
-```
-
 Restart KlipperScreen:
 ```sh
 sudo service KlipperScreen restart
