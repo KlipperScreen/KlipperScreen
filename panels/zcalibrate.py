@@ -174,7 +174,7 @@ class ZCalibratePanel(ScreenPanel):
             safe_z = self._screen.printer.get_config_section("safe_z_home")['home_xy_position']
             safe_z = [str(i.strip()) for i in safe_z.split(',')]
             if x_position is None:
-                x_position= float(safe_z[0])
+                x_position = float(safe_z[0])
                 logging.debug(f"Using safe_z x:{x_position}")
             if y_position is None:
                 y_position = float(safe_z[1])
