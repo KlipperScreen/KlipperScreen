@@ -268,9 +268,7 @@ class ZCalibratePanel(ScreenPanel):
         self.distance = distance
 
     def move(self, widget, direction):
-        dist = f"{direction}{self.distance}"
-        logging.info(f"# Moving {KlippyGcodes.testz_move(dist)}")
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.testz_move(dist))
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.testz_move(f"{direction}{self.distance}"))
 
     def abort(self, widget):
         logging.info("Aborting calibration")
@@ -307,3 +305,7 @@ class ZCalibratePanel(ScreenPanel):
         self.widgets['complete'].get_style_context().remove_class('color3')
         self.widgets['cancel'].set_sensitive(False)
         self.widgets['cancel'].get_style_context().remove_class('color2')
+
+    def activate(self):
+        # This is only here because klipper doesn't provide a method to detect if it's calibrating
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.testz_move("+0.001"))
