@@ -286,6 +286,9 @@ class BasePanel(ScreenPanel):
             self.buttons_showing['printer_select'] = False
 
     def set_title(self, title):
+        if not title:
+             self.titlelbl.set_label(f"{self._screen.connecting_to_printer}")
+             return
         try:
             env = Environment(extensions=["jinja2.ext.i18n"], autoescape=True)
             env.install_gettext_translations(self._config.get_lang())
