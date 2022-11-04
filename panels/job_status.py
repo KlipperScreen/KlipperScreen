@@ -490,14 +490,12 @@ class JobStatusPanel(ScreenPanel):
             self.enable_button(*args)
 
     def close_panel(self, widget=None):
-        self.disable_button("menu")
         logging.debug("Closing job_status panel")
         self.remove_close_timeout()
         self.state_check()
         if self.state not in ["printing", "paused", "cancelling"]:
             self._screen.printer_ready()
             self._printer.change_state("ready")
-            GLib.timeout_add_seconds(5, self.enable_button, "menu")
 
         return False
 
