@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-27 23:42-0300\n"
-"PO-Revision-Date: 2022-09-21 19:32+0300\n"
+"PO-Revision-Date: 2022-10-30 16:54+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: tr_TR\n"
@@ -64,7 +64,7 @@ msgid "Apply %s%.2f offset to Probe?"
 msgstr "Prob için %s%.2f ofset uygula?"
 
 msgid "Are you sure do you want to exclude the object?"
-msgstr ""
+msgstr "Nesneyi hariç tutmak istediğinizden emin misiniz?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Acil Durdurma'yı çalıştırmak istediğinizden emin misiniz?"
@@ -508,13 +508,13 @@ msgid "Print Time"
 msgstr "Yazdırma Süresi"
 
 msgid "Printer"
-msgstr ""
+msgstr "Yazıcı"
 
 msgid "Printer Connections"
 msgstr "Yazıcı Bağlantıları"
 
 msgid "Printer Select"
-msgstr ""
+msgstr "Yazıcı Seçimi"
 
 msgid "Printing"
 msgstr "Yazdırılıyor"
@@ -616,10 +616,10 @@ msgid "Show"
 msgstr "Göster"
 
 msgid "Show Heater Power"
-msgstr ""
+msgstr "Isıtıcı Gücünü Göster"
 
 msgid "Shutdown"
-msgstr ""
+msgstr "Kapat"
 
 msgid "Size"
 msgstr "Boyut"
