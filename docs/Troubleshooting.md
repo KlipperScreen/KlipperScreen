@@ -10,11 +10,16 @@ The first step to troubleshooting any problem is getting the cause of the error.
 !!! important
     This log file should be provided if you ask for support.
 
-Depending on your setup the file could be accesible from the web interface (Mainsail/Fluidd) alongside other logs
+Depending on your setup the file could be accesible from the web interface alongside other logs
 
+Mainsail | Fluidd
+:-:|:-:
+![m_logs](img/troubleshooting/logs_mainsail.png) | ![f_logs](img/troubleshooting/logs_fluidd.png)
+
+if you can't find it in the web interface, use sftp to grab the log (for example Filezilla, WinSCP)
 Located at `~/printer_data/logs`or in `/tmp/` if the former doesn't exists.
 
-If KlipperScreen.log doesn't exist, run `systemctl status KlipperScreen`
+If KlipperScreen.log doesn't exist, run `systemctl status KlipperScreen`<br>
 (or `journalctl -xe -u KlipperScreen`)
 
 Check the file `/var/log/Xorg.0.log` where you can find issues with the X server.
