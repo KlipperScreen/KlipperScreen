@@ -106,7 +106,6 @@ class MenuPanel(ScreenPanel):
 
         self.j2_data = self._printer.get_printer_status_data()
         try:
-            logging.debug(f"Template: '{enable}'")
             j2_temp = Template(enable, autoescape=True)
             result = j2_temp.render(self.j2_data)
             return result == 'True'
