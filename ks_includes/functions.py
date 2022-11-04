@@ -159,8 +159,6 @@ def setup_logging(log_file, software_version):
     stdout_hdlr.setFormatter(stdout_fmt)
     fh = listener = None
     try:
-        if os.path.exists(log_file):
-            os.replace(log_file, log_file + ".1")
         fh = KlipperScreenLoggingHandler(software_version, log_file, maxBytes=8000000, backupCount=1)
         formatter = logging.Formatter('%(asctime)s [%(filename)s:%(funcName)s()] - %(message)s')
         fh.setFormatter(formatter)
