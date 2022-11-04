@@ -171,14 +171,18 @@ class ZCalibratePanel(ScreenPanel):
 
         # Use safe_z_home position
         if "safe_z_home" in self._screen.printer.get_config_section_list():
-            safe_z = self._screen.printer.get_config_section("safe_z_home")['home_xy_position']
-            safe_z = [str(i.strip()) for i in safe_z.split(',')]
+            safe_z = self._screen.printer.get_config_section("safe_z_home")
+            safe_z_xy = safe_z['home_xy_position']
+            safe_z_xy = [str(i.strip()) for i in safe_z_xy.split(',')]
             if x_position is None:
-                x_position = float(safe_z[0])
+                x_position = float(safe_z_xy[0])
                 logging.debug(f"Using safe_z x:{x_position}")
             if y_position is None:
-                y_position = float(safe_z[1])
+                y_position = float(safe_z_xy[1])
                 logging.debug(f"Using safe_z y:{y_position}")
+            if 'z_hop' in safe_z:
+                speed = safe_z['z_hop_speed'] if 'z_hop_speed' in safe_z else 15
+                self._screen._ws.klippy.gcode_script(f"G0 Z{safe_z['z_hop']} F{speed * 60}")
 
         if x_position is not None and y_position is not None:
             logging.debug(f"Configured probing position X: {x_position} Y: {y_position}")
