@@ -24,7 +24,7 @@ class BasePanel(ScreenPanel):
             'back': not back,
             'macros_shortcut': False,
             'printer_select': False,
-            'estop': True,
+            'estop': False,
         }
         self.current_extruder = None
         # Action bar buttons

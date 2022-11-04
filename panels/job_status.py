@@ -365,6 +365,7 @@ class JobStatusPanel(ScreenPanel):
         self.create_status_grid()
         if self.vel_timeout is None:
             self.vel_timeout = GLib.timeout_add_seconds(1, self.update_velocity)
+        self._screen.base_panel_show_all()
 
     def deactivate(self):
         if self.vel_timeout is not None:

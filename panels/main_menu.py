@@ -74,6 +74,7 @@ class MainPanel(MenuPanel):
             # This has a high impact on load
             self.graph_update = GLib.timeout_add_seconds(5, self.update_graph)
         self.update_graph_visibility()
+        self._screen.base_panel_show_all()
 
     def deactivate(self):
         if self.graph_update:

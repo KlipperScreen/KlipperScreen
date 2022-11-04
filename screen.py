@@ -162,8 +162,6 @@ class KlipperScreen(Gtk.Window):
             while len(self.printer_select_callbacks) > 0:
                 i = self.printer_select_callbacks.pop(0)
                 i()
-            if self.printer.get_state() not in ["disconnected", "error", "startup", "shutdown"]:
-                self.base_panel.show_heaters(True)
             self.base_panel.show_printer_select(True)
             return
 
@@ -784,10 +782,6 @@ class KlipperScreen(Gtk.Window):
             self.printer_select_callbacks = [self.state_ready]
             return
 
-        self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
-        self.base_panel.show_heaters(True)
-        self.base_panel.show_estop(True)
-
         # Do not return to main menu if completing a job, timeouts/user input will return
         if "job_status" in self._cur_panels or "main_menu" in self._cur_panels:
             return
@@ -1037,10 +1031,16 @@ class KlipperScreen(Gtk.Window):
         self.panels['splash_screen'].update_text(msg)
         return False
 
+    def base_panel_show_all(self):
+        self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
+        self.base_panel.show_heaters(True)
+        self.base_panel.show_estop(True)
+
     def printer_ready(self):
         self.close_popup_message()
         self.show_panel('main_panel', "main_menu", None, 2,
                         items=self._config.get_menu_items("__main"), extrudercount=self.printer.get_extruder_count())
+        self.base_panel_show_all()
         self.ws_subscribe()
         if "job_status" in self.panels:
             self.remove_subscription("job_status")
@@ -1049,9 +1049,7 @@ class KlipperScreen(Gtk.Window):
     def printer_printing(self):
         self.close_popup_message()
         self.show_panel('job_status', "job_status", _("Printing"), 2)
-        self.base_panel.show_heaters(True)
-        self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
-        self.base_panel.show_estop(True)
+        self.base_panel_show_all()
         for dialog in self.dialogs:
             dialog.destroy()
 
