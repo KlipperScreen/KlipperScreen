@@ -157,8 +157,8 @@ class ZCalibratePanel(ScreenPanel):
             self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_ENDSTOP_CALIBRATE)
 
     def _move_to_position(self):
-        # Get position from config
         x_position = y_position = None
+        # Get position from config
         printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
         logging.info(printer_cfg)
         if printer_cfg is not None:
@@ -168,6 +168,17 @@ class ZCalibratePanel(ScreenPanel):
             # OLD global way, this should be deprecated
             x_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_x_position", None)
             y_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_y_position", None)
+
+        # Use safe_z_home position
+        if "safe_z_home" in self._screen.printer.get_config_section_list():
+            safe_z = self._screen.printer.get_config_section("safe_z_home")['home_xy_position']
+            safe_z = [str(i.strip()) for i in safe_z.split(',')]
+            if x_position is None:
+                x_position= float(safe_z[0])
+                logging.debug(f"Using safe_z x:{x_position}")
+            if y_position is None:
+                y_position = float(safe_z[1])
+                logging.debug(f"Using safe_z y:{y_position}")
 
         if x_position is not None and y_position is not None:
             logging.debug(f"Configured probing position X: {x_position} Y: {y_position}")
