@@ -134,7 +134,6 @@ class JobStatusPanel(ScreenPanel):
         self.grid.attach(self.buttons['button_grid'], 0, 3, 4, 1)
 
         self.content.add(self.grid)
-        self._screen.wake_screen()
 
     def create_status_grid(self, widget=None):
         self.main_status_displayed = True
@@ -522,7 +521,7 @@ class JobStatusPanel(ScreenPanel):
         self.remove_close_timeout()
         if self.state_timeout is None:
             self.state_timeout = GLib.timeout_add_seconds(1, self.state_check)
-        self._screen.wake_screen()
+        self._screen.close_screensaver()
         self.state_check()
 
     def process_update(self, action, data):
@@ -761,7 +760,7 @@ class JobStatusPanel(ScreenPanel):
         return True
 
     def _add_timeout(self, job_timeout):
-        self._screen.wake_screen()
+        self._screen.close_screensaver()
         self.remove_close_timeout()
         timeout = self._config.get_main_config().getint(job_timeout, 0)
         if timeout != 0:

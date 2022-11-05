@@ -347,8 +347,7 @@ class KlipperScreen(Gtk.Window):
         logging.debug(f"Current panel hierarchy: {self._cur_panels}")
 
     def show_popup_message(self, message, level=3):
-        if self.screensaver is not None:
-            self.wake_screen()
+        self.close_screensaver()
         if self.popup_message is not None:
             self.close_popup_message()
 
@@ -658,7 +657,6 @@ class KlipperScreen(Gtk.Window):
         if self._config.get_main_config().get('screen_blanking') != "off":
             logging.debug("Screen wake up")
             os.system("xset -display :0 dpms force on")
-            self.close_screensaver()
 
     def set_dpms(self, use_dpms):
         self.use_dpms = use_dpms
@@ -729,7 +727,7 @@ class KlipperScreen(Gtk.Window):
             return
 
         logging.debug("### Going to disconnected")
-        self.wake_screen()
+        self.close_screensaver()
         self.printer_initializing(_("Klipper has disconnected"))
         if self.connected_printer is not None:
             self.connected_printer = None
@@ -743,7 +741,7 @@ class KlipperScreen(Gtk.Window):
             self.printer_select_callbacks = [self.state_error]
             return
 
-        self.wake_screen()
+        self.close_screensaver()
         msg = self.printer.get_stat("webhooks", "state_message")
         if "FIRMWARE_RESTART" in msg:
             self.printer_initializing("<b>" + _("Klipper has encountered an error.") + "\n" +
@@ -804,7 +802,7 @@ class KlipperScreen(Gtk.Window):
             self.printer_select_callbacks = [self.state_shutdown]
             return
 
-        self.wake_screen()
+        self.close_screensaver()
         msg = self.printer.get_stat("webhooks", "state_message")
         if "ready" in msg:
             msg = ""
@@ -1047,6 +1045,7 @@ class KlipperScreen(Gtk.Window):
             del self.panels["job_status"]
 
     def printer_printing(self):
+        self.close_screensaver()
         self.close_popup_message()
         self.show_panel('job_status', "job_status", _("Printing"), 2)
         self.base_panel_show_all()
