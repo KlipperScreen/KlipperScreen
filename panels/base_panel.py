@@ -316,9 +316,8 @@ class BasePanel(ScreenPanel):
 
     def show_estop(self, show=True):
         if show and self.buttons_showing['estop'] is False:
-            self.action_bar.add(self.control['estop'])
+            self.control['estop'].set_sensitive(True)
             self.buttons_showing['estop'] = True
-            self.control['estop'].show()
         elif show is False and self.buttons_showing['estop']:
-            self.action_bar.remove(self.control['estop'])
+            self.control['estop'].set_sensitive(False)
             self.buttons_showing['estop'] = False
