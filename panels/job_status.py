@@ -632,12 +632,6 @@ class JobStatusPanel(ScreenPanel):
         if fan_label:
             self.labels['fan'].set_text(fan_label[:12])
 
-        if "layer_height" in self.file_metadata and "object_height" in self.file_metadata:
-            layer_label = (
-                f"{1 + round((self.pos_z - self.f_layer_h) / self.layer_h)} / {self.labels['total_layers'].get_text()}"
-            )
-            self.labels['layer'].set_label(layer_label)
-
         self.state_check()
         if self.state not in ["printing", "paused"]:
             return
@@ -648,6 +642,15 @@ class JobStatusPanel(ScreenPanel):
             self.update_filename()
         else:
             self.update_percent_complete()
+        if ps.get('info').get('total_layer'):
+            self.labels['total_layers'].set_label(f"{ps['info']['total_layer']}")
+        if ps.get('info').get('current_layer'):
+            self.labels['layer'].set_label(f"{ps['info']['current_layer']} / {self.labels['total_layers'].get_text()}")
+        elif "layer_height" in self.file_metadata and "object_height" in self.file_metadata:
+            layer_label = (
+                f"{1 + round((self.pos_z - self.f_layer_h) / self.layer_h)} / {self.labels['total_layers'].get_text()}")
+            self.labels['layer'].set_label(layer_label)
+
         if 'print_duration' in ps:
             if int(ps['print_duration']) == 0 and self.progress > 0.001:
                 # Print duration remains at 0 when using No-extusion tests
@@ -828,7 +831,7 @@ class JobStatusPanel(ScreenPanel):
                 height = self._screen.height / 4
             else:
                 width = self._screen.width / 3
-                height = self._gtk.get_content_height() * 0.48
+                height = self._gtk.get_content_height() * 0.47
             pixbuf = self.get_file_image(self.filename, width, height)
             if pixbuf is not None:
                 self.labels['thumbnail'].set_from_pixbuf(pixbuf)
