@@ -7,8 +7,9 @@ import contextlib
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Pango
-from numpy import sqrt, pi, dot, array, median
 from ks_includes.screen_panel import ScreenPanel
+from math import pi, sqrt
+from statistics import median
 
 
 def create_panel(*args):
@@ -582,11 +583,12 @@ class JobStatusPanel(ScreenPanel):
                 if self.prev_gpos is not None:
                     interval = now - self.prev_gpos[1]
                     # Calculate Velocity
-                    vel = [(pos[0] - self.prev_gpos[0][0]),
-                           (pos[1] - self.prev_gpos[0][1]),
-                           (pos[2] - self.prev_gpos[0][2])]
-                    vel = array(vel)
-                    self.velstore.append(sqrt(vel.dot(vel)) / interval)
+                    vel = sqrt(sum([
+                        (pos[0] - self.prev_gpos[0][0]) ** 2,
+                        (pos[1] - self.prev_gpos[0][1]) ** 2,
+                        (pos[2] - self.prev_gpos[0][2]) ** 2]
+                    )) / interval
+                    self.velstore.append(vel)
                 self.prev_gpos = [pos, now]
             with contextlib.suppress(KeyError):
                 self.extrusion = int(round(data["gcode_move"]["extrude_factor"] * 100))
@@ -612,11 +614,12 @@ class JobStatusPanel(ScreenPanel):
                     evelocity = (pos[3] - self.prev_pos[0][3]) / interval
                     self.flowstore.append(self.fila_section * evelocity)
                     # Calculate Velocity
-                    vel = [(pos[0] - self.prev_pos[0][0]),
-                           (pos[1] - self.prev_pos[0][1]),
-                           (pos[2] - self.prev_pos[0][2])]
-                    vel = array(vel)
-                    self.velstore.append(sqrt(vel.dot(vel)) / interval)
+                    vel = sqrt(sum([
+                        (pos[0] - self.prev_pos[0][0]) ** 2,
+                        (pos[1] - self.prev_pos[0][1]) ** 2,
+                        (pos[2] - self.prev_pos[0][2]) ** 2]
+                    )) / interval
+                    self.velstore.append(vel)
                 self.prev_pos = [pos, now]
             with contextlib.suppress(KeyError):
                 self.velstore.append(float(data["motion_report"]["live_velocity"]))
@@ -675,8 +678,8 @@ class JobStatusPanel(ScreenPanel):
             self.velstore.append(0)
         if not self.flowstore:
             self.flowstore.append(0)
-        self.flowrate = median(array(self.flowstore))
-        self.vel = median(array(self.velstore))
+        self.flowrate = median(self.flowstore)
+        self.vel = median(self.velstore)
         self.velstore = []
         self.flowstore = []
         self.labels['flowrate'].set_label(f"{self.flowrate:.1f} mm³/s")
