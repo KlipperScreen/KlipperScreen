@@ -157,9 +157,9 @@ class ZCalibratePanel(ScreenPanel):
 
     def _move_to_position(self):
         x_position = y_position = None
+        z_hop = speed = None
         # Get position from config
         printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
-        logging.info(printer_cfg)
         if printer_cfg is not None:
             x_position = printer_cfg.getfloat("calibrate_x_position", None)
             y_position = printer_cfg.getfloat("calibrate_y_position", None)
@@ -167,6 +167,15 @@ class ZCalibratePanel(ScreenPanel):
             # OLD global way, this should be deprecated
             x_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_x_position", None)
             y_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_y_position", None)
+
+        klipper_cfg = self._screen.printer.get_config_section_list()
+        for probe_type in self.probe_types:
+            if probe_type in klipper_cfg:
+                probe = self._screen.printer.get_config_section(probe_type)
+                if "sample_retract_dist" in probe:
+                    z_hop = probe['sample_retract_dist']
+                if "speed" in probe:
+                    speed = probe['speed']
 
         # Use safe_z_home position
         if "safe_z_home" in self._screen.printer.get_config_section_list():
@@ -180,8 +189,13 @@ class ZCalibratePanel(ScreenPanel):
                 y_position = float(safe_z_xy[1])
                 logging.debug(f"Using safe_z y:{y_position}")
             if 'z_hop' in safe_z:
-                speed = safe_z['z_hop_speed'] if 'z_hop_speed' in safe_z else 15
-                self._screen._ws.klippy.gcode_script(f"G0 Z{safe_z['z_hop']} F{speed * 60}")
+                z_hop = safe_z['z_hop']
+            if 'z_hop_speed' in safe_z:
+                speed = safe_z['z_hop_speed']
+
+        speed = 15 if speed is None else speed
+        z_hop = 5 if z_hop is None else z_hop
+        self._screen._ws.klippy.gcode_script(f"G0 Z{z_hop} F{float(speed) * 60}")
 
         if x_position is not None and y_position is not None:
             logging.debug(f"Configured probing position X: {x_position} Y: {y_position}")
@@ -190,9 +204,9 @@ class ZCalibratePanel(ScreenPanel):
             logging.info("Detected delta kinematics calibrating at 0,0")
             self._screen._ws.klippy.gcode_script('G0 X0 Y0 F3000')
         else:
-            self._calculate_position()
+            self._calculate_position(klipper_cfg)
 
-    def _calculate_position(self):
+    def _calculate_position(self, klipper_cfg):
         logging.debug("Position not configured, probing the middle of the bed")
         try:
             xmax = float(self._screen.printer.get_config_section("stepper_x")['position_max'])
@@ -205,7 +219,6 @@ class ZCalibratePanel(ScreenPanel):
         logging.info(f"Center position X:{x_position} Y:{y_position}")
 
         # Find probe offset
-        klipper_cfg = self._screen.printer.get_config_section_list()
         x_offset = y_offset = None
         for probe_type in self.probe_types:
             if probe_type in klipper_cfg:
