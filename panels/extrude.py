@@ -24,9 +24,7 @@ class ExtrudePanel(ScreenPanel):
         self.unload_filament = any("UNLOAD_FILAMENT" in macro.upper() for macro in macros)
 
         self.speeds = ['1', '2', '5', '25']
-        self.speed = int(self.speeds[1])
         self.distances = ['5', '10', '15', '25']
-        self.distance = int(self.distances[1])
         print_cfg = self._config.get_printer_config(self._screen.connected_printer)
         if print_cfg is not None:
             dis = print_cfg.get("extrude_distances", '5, 10, 15, 25')
@@ -39,6 +37,9 @@ class ExtrudePanel(ScreenPanel):
                 vel = [str(i.strip()) for i in vel.split(',')]
                 if 1 < len(vel) < 5:
                     self.speeds = vel
+
+        self.distance = int(self.distances[1])
+        self.speed = int(self.speeds[1])
 
     def initialize(self, panel_name):
         self.labels['extrude'] = self._gtk.ButtonImage("extrude", _("Extrude"), "color4")
