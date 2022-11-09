@@ -49,6 +49,21 @@ PRINTER_BASE_STATUS_OBJECTS = [
 klipperscreendir = pathlib.Path(__file__).parent.resolve()
 
 
+def set_text_direction(lang=None):
+    rtl_languages = ['he_IL']
+    if lang is None:
+        for lng in rtl_languages:
+            if os.getenv('LANG').startswith(lng):
+                lang = lng
+                break
+    if lang in rtl_languages:
+        Gtk.Widget.set_default_direction(Gtk.TextDirection.RTL)
+        logging.debug("Enabling RTL mode")
+        return False
+    Gtk.Widget.set_default_direction(Gtk.TextDirection.LTR)
+    return True
+
+
 class KlipperScreen(Gtk.Window):
     """ Class for creating a screen for Klipper via HDMI """
     _cur_panels = []
@@ -90,7 +105,7 @@ class KlipperScreen(Gtk.Window):
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
         self._config = KlipperScreenConfig(configfile, self)
-        self.lang_ltr = self.set_text_direction(self._config.get_main_config().get("language", None))
+        self.lang_ltr = set_text_direction(self._config.get_main_config().get("language", None))
 
         Gtk.Window.__init__(self)
         self.set_title("KlipperScreen")
@@ -809,23 +824,9 @@ class KlipperScreen(Gtk.Window):
     def toggle_macro_shortcut(self, value):
         self.base_panel.show_macro_shortcut(value)
 
-    def set_text_direction(self, lang=None):
-        rtl_languages = ['he_IL']
-        if lang is None:
-            for lng in rtl_languages:
-                if os.getenv('LANG').startswith(lng):
-                    lang = lng
-                    break
-        if lang in rtl_languages:
-            Gtk.Widget.set_default_direction(Gtk.TextDirection.RTL)
-            logging.debug("Enabling RTL mode")
-            return False
-        Gtk.Widget.set_default_direction(Gtk.TextDirection.LTR)
-        return True
-
     def change_language(self, lang):
         self._config.install_language(lang)
-        self.lang_ltr = self.set_text_direction(lang)
+        self.lang_ltr = set_text_direction(lang)
         self._config._create_configurable_options(self)
         self.reload_panels()
 
