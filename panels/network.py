@@ -118,7 +118,6 @@ class NetworkPanel(ScreenPanel):
     def add_network(self, ssid, show=True):
 
         if ssid is None:
-            logging.info("SSID is None")
             return
         ssid = ssid.strip()
         if ssid in list(self.networks):
@@ -314,7 +313,6 @@ class NetworkPanel(ScreenPanel):
     def remove_network(self, ssid, show=True):
         if ssid not in list(self.networks):
             return
-        logging.info(self.labels['networklist'])
         for i in range(len(self.labels['networklist'])):
             if self.networks[ssid] == self.labels['networklist'].get_child_at(0, i):
                 self.labels['networklist'].remove_row(i)

@@ -931,7 +931,7 @@ class KlipperScreen(Gtk.Window):
             self.panels['splash_screen'].update_text(text)
 
     def search_power_devices(self, power_devices):
-        if self.connected_printer is None:
+        if self.connected_printer is None or not power_devices:
             return
         found_devices = []
         devices = self.printer.get_power_devices()
@@ -945,7 +945,7 @@ class KlipperScreen(Gtk.Window):
             logging.info("Found %s", found_devices)
             return found_devices
         else:
-            logging.info("Power devices not found")
+            logging.info("Associated power devices not found")
             return None
 
     def power_on(self, widget, devices):
