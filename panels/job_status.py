@@ -31,9 +31,8 @@ class JobStatusPanel(ScreenPanel):
         self.current_extruder = None
         self.fila_section = 0
         self.buttons = None
-        self.is_paused = False
         self.filename_label = self.filename = self.prev_pos = self.prev_gpos = None
-        self.state_timeout = self.close_timeout = self.vel_timeout = self.animation_timeout = None
+        self.close_timeout = self.vel_timeout = self.animation_timeout = None
         self.file_metadata = self.fans = {}
         self.state = "standby"
         self.timeleft_type = "auto"
@@ -360,8 +359,6 @@ class JobStatusPanel(ScreenPanel):
     def activate(self):
         ps = self._printer.get_stat("print_stats")
         self.set_state(ps['state'])
-        if self.state_timeout is None:
-            self.state_timeout = GLib.timeout_add_seconds(1, self.state_check)
         self.create_status_grid()
         if self.vel_timeout is None:
             self.vel_timeout = GLib.timeout_add_seconds(1, self.update_velocity)
@@ -397,7 +394,6 @@ class JobStatusPanel(ScreenPanel):
         self.buttons['save_offset_endstop'].connect("clicked", self.save_offset, "endstop")
 
     def save_offset(self, widget, device):
-
         saved_z_offset = 0
         if self._printer.config_section_exists("probe"):
             saved_z_offset = float(self._screen.printer.get_config_section("probe")['z_offset'])
@@ -437,11 +433,9 @@ class JobStatusPanel(ScreenPanel):
         widget.destroy()
 
     def restart(self, widget):
-        self.disable_button("restart")
         if self.filename != "none":
             self._screen._ws.klippy.print_start(self.filename)
             self.new_print()
-        GLib.timeout_add_seconds(5, self.enable_button, "restart")
 
     def resume(self, widget):
         self._screen._ws.klippy.print_resume(self._response_callback, "enable_button", "pause", "cancel")
@@ -452,7 +446,6 @@ class JobStatusPanel(ScreenPanel):
         self._screen.show_all()
 
     def cancel(self, widget):
-
         buttons = [
             {"name": _("Cancel Print"), "response": Gtk.ResponseType.OK},
             {"name": _("Go Back"), "response": Gtk.ResponseType.CANCEL}
@@ -497,7 +490,6 @@ class JobStatusPanel(ScreenPanel):
         if self.state not in ["printing", "paused", "cancelling"]:
             self._screen.printer_ready()
             self._printer.change_state("ready")
-
         return False
 
     def remove_close_timeout(self):
@@ -520,8 +512,6 @@ class JobStatusPanel(ScreenPanel):
 
     def new_print(self):
         self.remove_close_timeout()
-        if self.state_timeout is None:
-            self.state_timeout = GLib.timeout_add_seconds(1, self.state_check)
         self._screen.close_screensaver()
         self.state_check()
 
@@ -773,7 +763,6 @@ class JobStatusPanel(ScreenPanel):
         return False
 
     def set_state(self, state):
-
         if self.state != state:
             logging.debug(f"Changing job_status state from '{self.state}' to '{state}'")
         if state == "paused":
