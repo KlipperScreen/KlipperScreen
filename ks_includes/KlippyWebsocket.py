@@ -33,6 +33,7 @@ class KlippyWebsocket(threading.Thread):
     callback_table = {}
     reconnect_timeout = None
     reconnect_count = 0
+    max_retries = 4
 
     def __init__(self, screen, callback, host, port):
         threading.Thread.__init__(self)
@@ -59,7 +60,8 @@ class KlippyWebsocket(threading.Thread):
 
     def initial_connect(self):
         # Enable a timeout so that way if moonraker is not running, it will attempt to reconnect
-        if self.reconnect_timeout is None:
+        self.reconnect_count = 0
+        if not self.reconnect_timeout:
             self.reconnect_timeout = GLib.timeout_add_seconds(6, self.reconnect)
         self.connect()
 
@@ -76,10 +78,16 @@ class KlippyWebsocket(threading.Thread):
         def ws_on_open(ws):
             self.on_open(ws)
 
+        self.reconnect_count += 1
         try:
             state = self._screen.apiclient.get_server_info()
             if state is False:
-                if self.reconnect_count > 3:
+                if self.reconnect_count > self.max_retries:
+                    self._screen.panels['splash_screen'].add_retry_button()
+                    self._screen.panels['splash_screen'].update_text(
+                        _("Cannot connect to Moonraker")
+                        + f'\n\n{self._url}')
+                elif self.reconnect_count > 2:
                     self._screen.panels['splash_screen'].update_text(
                         _("Cannot connect to Moonraker")
                         + f'\n\n{self._url}\n\n'
@@ -159,6 +167,7 @@ class KlippyWebsocket(threading.Thread):
         logging.info(f"Self.connected = {self.is_connected()}")
         self.connected = True
         self.reconnect_count = 0
+        self._screen.panels['splash_screen'].remove_retry_button()
         if self.reconnect_timeout is not None:
             GLib.source_remove(self.reconnect_timeout)
             self.reconnect_timeout = None
@@ -200,9 +209,10 @@ class KlippyWebsocket(threading.Thread):
         if self.is_connected():
             logging.debug("Reconnected")
             return False
-
+        if self.reconnect_count > self.max_retries:
+            logging.debug("Stopping reconnections")
+            return False
         logging.debug("Attempting to reconnect")
-        self.reconnect_count += 1
         self.connect()
         return True
 

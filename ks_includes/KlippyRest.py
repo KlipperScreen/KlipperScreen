@@ -44,17 +44,15 @@ class KlippyRest:
         try:
             r = requests.get(url, headers=headers)
         except Exception as e:
-            logging.critical(e, exc_info=True)
+            logging.error(e)
             return False
         if r.status_code != 200:
             return False
 
-        # TODO: Try/except
         try:
             data = json.loads(r.content)
         except Exception as e:
-            logging.critical(e, exc_info=True)
-            logging.exception(f"Unable to parse response from moonraker:\n {r.content}")
+            logging.error(f"Unable to parse response from moonraker:\n {r.content}")
             return False
 
         return data
