@@ -645,14 +645,13 @@ class JobStatusPanel(ScreenPanel):
             self.update_filename()
         else:
             self.update_percent_complete()
-        if ps.get('info').get('total_layer'):
+        if 'info' in ps and 'total_layer' in ps['info'] and ps['info']['total_layer'] is not None:
             self.labels['total_layers'].set_label(f"{ps['info']['total_layer']}")
-        if ps.get('info').get('current_layer'):
+        if 'info' in ps and 'current_layer' in ps['info'] and ps['info']['current_layer'] is not None:
             self.labels['layer'].set_label(f"{ps['info']['current_layer']} / {self.labels['total_layers'].get_text()}")
         elif "layer_height" in self.file_metadata and "object_height" in self.file_metadata:
-            layer_label = (
+            self.labels['layer'].set_label(
                 f"{1 + round((self.pos_z - self.f_layer_h) / self.layer_h)} / {self.labels['total_layers'].get_text()}")
-            self.labels['layer'].set_label(layer_label)
 
         if 'print_duration' in ps:
             if int(ps['print_duration']) == 0 and self.progress > 0.001:
