@@ -119,8 +119,8 @@ class KlipperScreen(Gtk.Window):
         self.vertical_mode = self.width < self.height
         logging.info(f"Screen resolution: {self.width}x{self.height}")
         self.theme = self._config.get_main_config().get('theme')
-        self.show_cursor = self._config.get_main_config().getboolean("show_cursor", fallback=False)
-        self.gtk = KlippyGtk(self, self.width, self.height, self.theme, self.show_cursor,
+        show_cursor = self._config.get_main_config().getboolean("show_cursor", fallback=False)
+        self.gtk = KlippyGtk(self, self.width, self.height, self.theme, show_cursor,
                              self._config.get_main_config().get("font_size", "medium"))
         self.init_style()
         self.set_icon_from_file(os.path.join(klipperscreendir, "styles", "icon.svg"))
@@ -128,6 +128,12 @@ class KlipperScreen(Gtk.Window):
         self.base_panel = BasePanel(self, title="Base Panel", back=False)
         self.add(self.base_panel.get())
         self.show_all()
+        if show_cursor:
+            self.get_window().set_cursor(Gdk.Cursor.new(Gdk.CursorType.ARROW))
+            os.system("xsetroot  -cursor_name  arrow")
+        else:
+            self.get_window().set_cursor(Gdk.Cursor.new(Gdk.CursorType.BLANK_CURSOR))
+            os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
         self.base_panel.activate()
 
         self.printer_initializing(_("Initializing"))
@@ -137,9 +143,6 @@ class KlipperScreen(Gtk.Window):
             self.dialogs = []
         self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
 
-        # Move mouse to 0,0
-        os.system("/usr/bin/xdotool mousemove 0 0")
-        self.change_cursor()
         self.initial_connection()
 
     def initial_connection(self):
@@ -1104,17 +1107,6 @@ class KlipperScreen(Gtk.Window):
             os.kill(self.keyboard['process'].pid, signal.SIGTERM)
         self.base_panel.get_content().remove(self.keyboard['box'])
         self.keyboard = None
-
-    def change_cursor(self, cursortype=None):
-        if cursortype == "watch":
-            os.system("xsetroot  -cursor_name  watch")
-        elif self.show_cursor:
-            self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.ARROW))
-            os.system("xsetroot  -cursor_name  arrow")
-        else:
-            self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.BLANK_CURSOR))
-            os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
-        return
 
 
 def main():

@@ -10,7 +10,7 @@ FBDEV="xserver-xorg-video-fbdev"
 PYTHON="python3-virtualenv virtualenv python3-distutils"
 PYGOBJECT="libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0"
 MISC="librsvg2-common libopenjp2-7 libatlas-base-dev wireless-tools"
-OPTIONAL="xserver-xorg-legacy fonts-nanum xdotool"
+OPTIONAL="xserver-xorg-legacy fonts-nanum"
 
 # moonraker will check this list when updating
 # if new packages are required for existing installs add them below too.
