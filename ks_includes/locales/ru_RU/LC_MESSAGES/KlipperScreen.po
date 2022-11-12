@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-27 23:42-0300\n"
+"POT-Creation-Date: 2022-11-12 11:20-0300\n"
 "PO-Revision-Date: 2022-06-03 20:25-0500\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: \n"
@@ -182,9 +182,6 @@ msgstr "Дата"
 msgid "Decrease"
 msgstr "Уменьшить"
 
-msgid "Delete"
-msgstr "Удалить"
-
 msgid "Delete File?"
 msgstr ""
 
@@ -290,9 +287,6 @@ msgstr "Скрыть датчики в Temp."
 
 msgid "Hide temp."
 msgstr "Скрыть температуру."
-
-msgid "Home"
-msgstr "Парковка"
 
 msgid "Home All"
 msgstr "Парковать все"
@@ -423,6 +417,9 @@ msgstr "Среднее"
 msgid "Menu"
 msgstr "Меню"
 
+msgid "Mesh calibrate"
+msgstr ""
+
 msgid "Modified"
 msgstr "Изменено"
 
@@ -441,6 +438,9 @@ msgstr "Имя"
 msgid "Network"
 msgstr "Сеть"
 
+msgid "Never"
+msgstr ""
+
 msgid "New"
 msgstr "Новый"
 
@@ -451,9 +451,6 @@ msgstr ""
 
 msgid "Nothing selected"
 msgstr "Ничего не выбрано"
-
-msgid "Off"
-msgstr "Выкл"
 
 #, python-format
 msgid "Outdated by %d"
@@ -560,6 +557,9 @@ msgstr "Длина ретракта"
 
 msgid "Retraction Speed"
 msgstr "Скорость ретракта"
+
+msgid "Retry"
+msgstr ""
 
 #, python-format
 msgid "Retry #%s"
@@ -715,9 +715,6 @@ msgstr "Обновление"
 msgid "Uploaded"
 msgstr "Дата"
 
-msgid "View Mesh"
-msgstr "Смотреть сетку"
-
 msgid "X+"
 msgstr "X+"
 
@@ -783,6 +780,18 @@ msgstr "мм/с"
 
 msgid "mm/s²"
 msgstr "мм/с²"
+
+#~ msgid "Delete"
+#~ msgstr "Удалить"
+
+#~ msgid "Home"
+#~ msgstr "Парковка"
+
+#~ msgid "Off"
+#~ msgstr "Выкл"
+
+#~ msgid "View Mesh"
+#~ msgstr "Смотреть сетку"
 
 #~ msgid "Sort by: "
 #~ msgstr "Орден: "

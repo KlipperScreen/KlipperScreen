@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-27 23:42-0300\n"
+"POT-Creation-Date: 2022-11-12 11:20-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
@@ -176,9 +176,6 @@ msgstr "Dato"
 msgid "Decrease"
 msgstr "Formindsk"
 
-msgid "Delete"
-msgstr "Slet"
-
 msgid "Delete File?"
 msgstr ""
 
@@ -284,9 +281,6 @@ msgstr "Skjul sensorer i Temp."
 
 msgid "Hide temp."
 msgstr ""
-
-msgid "Home"
-msgstr "Home"
 
 msgid "Home All"
 msgstr "Home alle"
@@ -417,6 +411,9 @@ msgstr "Mellem"
 msgid "Menu"
 msgstr "Menu"
 
+msgid "Mesh calibrate"
+msgstr ""
+
 msgid "Modified"
 msgstr "Ændret"
 
@@ -435,6 +432,9 @@ msgstr "Navn"
 msgid "Network"
 msgstr "Netværk"
 
+msgid "Never"
+msgstr ""
+
 msgid "New"
 msgstr "Ny"
 
@@ -445,9 +445,6 @@ msgstr ""
 
 msgid "Nothing selected"
 msgstr "Intet valgt"
-
-msgid "Off"
-msgstr "Sluk"
 
 #, python-format
 msgid "Outdated by %d"
@@ -552,6 +549,9 @@ msgid "Retraction Length"
 msgstr ""
 
 msgid "Retraction Speed"
+msgstr ""
+
+msgid "Retry"
 msgstr ""
 
 #, python-format
@@ -708,9 +708,6 @@ msgstr "Opdatering"
 msgid "Uploaded"
 msgstr "Uploadet"
 
-msgid "View Mesh"
-msgstr "Vis mesh"
-
 msgid "X+"
 msgstr "X+"
 
@@ -774,6 +771,18 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Delete"
+#~ msgstr "Slet"
+
+#~ msgid "Home"
+#~ msgstr "Home"
+
+#~ msgid "Off"
+#~ msgstr "Sluk"
+
+#~ msgid "View Mesh"
+#~ msgstr "Vis mesh"
 
 #~ msgid "Sort by: "
 #~ msgstr "Sortér efter: "

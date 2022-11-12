@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-27 23:42-0300\n"
+"POT-Creation-Date: 2022-11-12 11:20-0300\n"
 "PO-Revision-Date: 2022-04-15 17:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -181,9 +181,6 @@ msgstr "Datum"
 msgid "Decrease"
 msgstr "Minska"
 
-msgid "Delete"
-msgstr "Radera"
-
 msgid "Delete File?"
 msgstr ""
 
@@ -289,9 +286,6 @@ msgstr "Dölj sensorer i Temp."
 
 msgid "Hide temp."
 msgstr ""
-
-msgid "Home"
-msgstr "Hem"
 
 msgid "Home All"
 msgstr "Hem Alla"
@@ -422,6 +416,9 @@ msgstr "Medium"
 msgid "Menu"
 msgstr "Meny"
 
+msgid "Mesh calibrate"
+msgstr ""
+
 msgid "Modified"
 msgstr "Ändrad"
 
@@ -440,6 +437,9 @@ msgstr "Namn"
 msgid "Network"
 msgstr "Nätverk"
 
+msgid "Never"
+msgstr ""
+
 msgid "New"
 msgstr ""
 
@@ -450,9 +450,6 @@ msgstr ""
 
 msgid "Nothing selected"
 msgstr "Inget valt"
-
-msgid "Off"
-msgstr "Avstängd"
 
 #, python-format
 msgid "Outdated by %d"
@@ -557,6 +554,9 @@ msgid "Retraction Length"
 msgstr ""
 
 msgid "Retraction Speed"
+msgstr ""
+
+msgid "Retry"
 msgstr ""
 
 #, python-format
@@ -713,9 +713,6 @@ msgstr "Uppdaterar"
 msgid "Uploaded"
 msgstr "Uppladdad"
 
-msgid "View Mesh"
-msgstr ""
-
 msgid "X+"
 msgstr "X+"
 
@@ -779,6 +776,15 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Delete"
+#~ msgstr "Radera"
+
+#~ msgid "Home"
+#~ msgstr "Hem"
+
+#~ msgid "Off"
+#~ msgstr "Avstängd"
 
 #~ msgid "Sort by: "
 #~ msgstr "Sortera efter: "

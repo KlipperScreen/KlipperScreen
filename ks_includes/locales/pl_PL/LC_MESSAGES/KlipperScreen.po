@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-27 23:42-0300\n"
+"POT-Creation-Date: 2022-11-12 11:20-0300\n"
 "PO-Revision-Date: 2022-03-31 11:06-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -182,9 +182,6 @@ msgstr "Data"
 msgid "Decrease"
 msgstr "Obniż"
 
-msgid "Delete"
-msgstr "Skasuj"
-
 msgid "Delete File?"
 msgstr ""
 
@@ -290,9 +287,6 @@ msgstr "Ukryj czujniki w Temp."
 
 msgid "Hide temp."
 msgstr ""
-
-msgid "Home"
-msgstr "Baza"
 
 msgid "Home All"
 msgstr "Baza Wszystkich"
@@ -423,6 +417,9 @@ msgstr "Średni"
 msgid "Menu"
 msgstr "Menu"
 
+msgid "Mesh calibrate"
+msgstr ""
+
 msgid "Modified"
 msgstr "Zmodyfikowane"
 
@@ -441,6 +438,9 @@ msgstr "Nazwa"
 msgid "Network"
 msgstr "Sieć"
 
+msgid "Never"
+msgstr ""
+
 msgid "New"
 msgstr ""
 
@@ -451,9 +451,6 @@ msgstr ""
 
 msgid "Nothing selected"
 msgstr "Nic nie wybrano"
-
-msgid "Off"
-msgstr "Wyłącz"
 
 #, python-format
 msgid "Outdated by %d"
@@ -559,6 +556,9 @@ msgid "Retraction Length"
 msgstr ""
 
 msgid "Retraction Speed"
+msgstr ""
+
+msgid "Retry"
 msgstr ""
 
 #, python-format
@@ -715,9 +715,6 @@ msgstr "Aktualizacja"
 msgid "Uploaded"
 msgstr "Przesłane"
 
-msgid "View Mesh"
-msgstr "Wyświetl siatkę"
-
 msgid "X+"
 msgstr "X+"
 
@@ -783,6 +780,18 @@ msgstr "mm/s²"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Delete"
+#~ msgstr "Skasuj"
+
+#~ msgid "Home"
+#~ msgstr "Baza"
+
+#~ msgid "Off"
+#~ msgstr "Wyłącz"
+
+#~ msgid "View Mesh"
+#~ msgstr "Wyświetl siatkę"
 
 #~ msgid "Sort by: "
 #~ msgstr "Sortuj wg: "

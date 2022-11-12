@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-27 23:42-0300\n"
-"PO-Revision-Date: 2022-10-27 23:24-0300\n"
+"POT-Creation-Date: 2022-11-12 11:20-0300\n"
+"PO-Revision-Date: 2022-11-12 11:20-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -181,9 +181,6 @@ msgstr "Fecha"
 msgid "Decrease"
 msgstr "Disminuir"
 
-msgid "Delete"
-msgstr "Borrar"
-
 msgid "Delete File?"
 msgstr "¿Borrar archivo?"
 
@@ -289,9 +286,6 @@ msgstr "Ocultar sensores en Temp."
 
 msgid "Hide temp."
 msgstr "Ocultar temp."
-
-msgid "Home"
-msgstr "Inicio"
 
 msgid "Home All"
 msgstr "Origen XYZ"
@@ -422,6 +416,9 @@ msgstr "Medio"
 msgid "Menu"
 msgstr "Menú"
 
+msgid "Mesh calibrate"
+msgstr "Calibrar Malla"
+
 msgid "Modified"
 msgstr "Modificado"
 
@@ -440,6 +437,9 @@ msgstr "Nombre"
 msgid "Network"
 msgstr "Red"
 
+msgid "Never"
+msgstr "Nunca"
+
 msgid "New"
 msgstr "Nuevo"
 
@@ -452,9 +452,6 @@ msgstr ""
 
 msgid "Nothing selected"
 msgstr "Nada seleccionado"
-
-msgid "Off"
-msgstr "Apagar"
 
 #, python-format
 msgid "Outdated by %d"
@@ -560,6 +557,9 @@ msgstr "Largo de Retracción"
 
 msgid "Retraction Speed"
 msgstr "Velocidad de Retracción"
+
+msgid "Retry"
+msgstr "Reintentar"
 
 #, python-format
 msgid "Retry #%s"
@@ -715,9 +715,6 @@ msgstr "Actualizando"
 msgid "Uploaded"
 msgstr "Subido"
 
-msgid "View Mesh"
-msgstr "Ver Malla"
-
 msgid "X+"
 msgstr "X+"
 
@@ -781,6 +778,18 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Delete"
+#~ msgstr "Borrar"
+
+#~ msgid "Home"
+#~ msgstr "Inicio"
+
+#~ msgid "Off"
+#~ msgstr "Apagar"
+
+#~ msgid "View Mesh"
+#~ msgstr "Ver Malla"
 
 #~ msgid "Machine"
 #~ msgstr "Máquina"

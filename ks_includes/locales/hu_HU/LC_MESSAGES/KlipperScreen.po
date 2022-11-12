@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-03 07:34-0300\n"
+"POT-Creation-Date: 2022-11-12 11:20-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -176,9 +176,6 @@ msgstr "Dátum"
 msgid "Decrease"
 msgstr "Csökkent"
 
-msgid "Delete"
-msgstr "Töröl"
-
 msgid "Delete File?"
 msgstr "Fájl törlése?"
 
@@ -284,9 +281,6 @@ msgstr "Hőfok szenzorok elrejtése."
 
 msgid "Hide temp."
 msgstr "Hőfok elrejtése"
-
-msgid "Home"
-msgstr "Kezdőpontok"
 
 msgid "Home All"
 msgstr "X-Y-Z kezdőpont"
@@ -417,6 +411,9 @@ msgstr "Közepes"
 msgid "Menu"
 msgstr "Menü"
 
+msgid "Mesh calibrate"
+msgstr ""
+
 msgid "Modified"
 msgstr "Módosított"
 
@@ -435,6 +432,9 @@ msgstr "Név"
 msgid "Network"
 msgstr "Hálózat"
 
+msgid "Never"
+msgstr ""
+
 msgid "New"
 msgstr "Új"
 
@@ -447,9 +447,6 @@ msgstr ""
 
 msgid "Nothing selected"
 msgstr "Nincs kiválasztva"
-
-msgid "Off"
-msgstr "Ki"
 
 #, python-format
 msgid "Outdated by %d"
@@ -555,6 +552,9 @@ msgstr "Visszahúzási hossz"
 
 msgid "Retraction Speed"
 msgstr "Visszahúzási sebesség"
+
+msgid "Retry"
+msgstr ""
 
 #, python-format
 msgid "Retry #%s"
@@ -710,9 +710,6 @@ msgstr "Frissítés"
 msgid "Uploaded"
 msgstr "Feltöltve"
 
-msgid "View Mesh"
-msgstr "Háló nézet"
-
 msgid "X+"
 msgstr "X+"
 
@@ -776,6 +773,18 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Delete"
+#~ msgstr "Töröl"
+
+#~ msgid "Home"
+#~ msgstr "Kezdőpontok"
+
+#~ msgid "Off"
+#~ msgstr "Ki"
+
+#~ msgid "View Mesh"
+#~ msgstr "Háló nézet"
 
 #~ msgid "Machine"
 #~ msgstr "Gép"

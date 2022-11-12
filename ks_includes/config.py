@@ -230,7 +230,7 @@ class KlipperScreenConfig:
             {"screen_blanking": {
                 "section": "main", "name": _("Screen Power Off Time"), "type": "dropdown",
                 "value": "3600", "callback": screen.set_screenblanking_timeout, "options": [
-                    {"name": _("Off"), "value": "off"}]
+                    {"name": _("Never"), "value": "off"}]
             }},
             {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
             {"side_macro_shortcut": {

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-27 23:42-0300\n"
+"POT-Creation-Date: 2022-11-12 11:20-0300\n"
 "PO-Revision-Date: 2022-07-16 23:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -181,9 +181,6 @@ msgstr "日期"
 msgid "Decrease"
 msgstr "减少"
 
-msgid "Delete"
-msgstr "删除"
-
 msgid "Delete File?"
 msgstr ""
 
@@ -289,9 +286,6 @@ msgstr "隐藏温度传感器。"
 
 msgid "Hide temp."
 msgstr "隐藏温度。"
-
-msgid "Home"
-msgstr "首页"
 
 msgid "Home All"
 msgstr "全部归零"
@@ -422,6 +416,9 @@ msgstr "中"
 msgid "Menu"
 msgstr "菜单"
 
+msgid "Mesh calibrate"
+msgstr ""
+
 msgid "Modified"
 msgstr "修改时间"
 
@@ -440,6 +437,9 @@ msgstr "文件名称"
 msgid "Network"
 msgstr "网络"
 
+msgid "Never"
+msgstr ""
+
 msgid "New"
 msgstr ""
 
@@ -450,9 +450,6 @@ msgstr ""
 
 msgid "Nothing selected"
 msgstr "未选择任何内容"
-
-msgid "Off"
-msgstr "关闭"
 
 #, python-format
 msgid "Outdated by %d"
@@ -557,6 +554,9 @@ msgstr "回抽长度"
 
 msgid "Retraction Speed"
 msgstr "回抽速度"
+
+msgid "Retry"
+msgstr ""
 
 #, python-format
 msgid "Retry #%s"
@@ -712,9 +712,6 @@ msgstr "更新中"
 msgid "Uploaded"
 msgstr "上传时间"
 
-msgid "View Mesh"
-msgstr "查看热床网格"
-
 msgid "X+"
 msgstr ""
 
@@ -776,6 +773,18 @@ msgstr ""
 
 msgid "mm/s²"
 msgstr ""
+
+#~ msgid "Delete"
+#~ msgstr "删除"
+
+#~ msgid "Home"
+#~ msgstr "首页"
+
+#~ msgid "Off"
+#~ msgstr "关闭"
+
+#~ msgid "View Mesh"
+#~ msgstr "查看热床网格"
 
 #~ msgid "Sort by: "
 #~ msgstr "排序: "

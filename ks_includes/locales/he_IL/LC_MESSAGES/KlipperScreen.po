@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-27 23:42-0300\n"
+"POT-Creation-Date: 2022-11-12 11:20-0300\n"
 "PO-Revision-Date: 2022-03-31 10:54-0300\n"
 "Last-Translator: Tal Rahav <talrhv1@gmail.com>\n"
 "Language-Team: \n"
@@ -183,9 +183,6 @@ msgstr "תאריך"
 msgid "Decrease"
 msgstr "הורד"
 
-msgid "Delete"
-msgstr "מחק"
-
 msgid "Delete File?"
 msgstr "מחק קובץ"
 
@@ -291,9 +288,6 @@ msgstr "הסתר חיישנים בטמפ'."
 
 msgid "Hide temp."
 msgstr "הסתר טמפרטורה"
-
-msgid "Home"
-msgstr "איפוס"
 
 msgid "Home All"
 msgstr "איפוס XYZ"
@@ -424,6 +418,9 @@ msgstr "בינוני"
 msgid "Menu"
 msgstr "תפריט"
 
+msgid "Mesh calibrate"
+msgstr ""
+
 msgid "Modified"
 msgstr "שונה"
 
@@ -442,6 +439,9 @@ msgstr "שם"
 msgid "Network"
 msgstr "רשת"
 
+msgid "Never"
+msgstr ""
+
 msgid "New"
 msgstr "חדש"
 
@@ -452,9 +452,6 @@ msgstr "איתור אוטומטי אינו נתמך, זה צריך להיות מ
 
 msgid "Nothing selected"
 msgstr "שום דבר לא נבחר"
-
-msgid "Off"
-msgstr "כבוי"
 
 #, python-format
 msgid "Outdated by %d"
@@ -562,6 +559,9 @@ msgstr "מרחק משיכה"
 
 msgid "Retraction Speed"
 msgstr "מהירות משיכה"
+
+msgid "Retry"
+msgstr ""
 
 #, python-format
 msgid "Retry #%s"
@@ -717,9 +717,6 @@ msgstr "מעדכן"
 msgid "Uploaded"
 msgstr "הועלה"
 
-msgid "View Mesh"
-msgstr "צפה ברשת"
-
 msgid "X+"
 msgstr "X+"
 
@@ -787,6 +784,18 @@ msgstr "מ\"מ/ש"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Delete"
+#~ msgstr "מחק"
+
+#~ msgid "Home"
+#~ msgstr "איפוס"
+
+#~ msgid "Off"
+#~ msgstr "כבוי"
+
+#~ msgid "View Mesh"
+#~ msgstr "צפה ברשת"
 
 #~ msgid "Machine"
 #~ msgstr "מכונה"
