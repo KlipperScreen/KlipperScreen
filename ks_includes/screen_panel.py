@@ -4,8 +4,6 @@ import logging
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
-from ks_includes.KlippyGcodes import KlippyGcodes
-
 
 class ScreenPanel:
 
@@ -37,7 +35,6 @@ class ScreenPanel:
         return
 
     def emergency_stop(self, widget):
-
         if self._config.get_main_config().getboolean('confirm_estop', False):
             self._screen._confirm_send_action(widget, _("Are you sure you want to run Emergency Stop?"),
                                               "printer.emergency_stop")
@@ -66,18 +63,6 @@ class ScreenPanel:
 
     def get_title(self):
         return self.title
-
-    def home(self, widget):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
-
-    def homexy(self, widget):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME_XY)
-
-    def z_tilt(self, widget):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_TILT)
-
-    def quad_gantry_level(self, widget):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.QUAD_GANTRY_LEVEL)
 
     def menu_item_clicked(self, widget, panel, item):
         logging.info(f"### Creating panel {item['panel']} : {panel} {item}")
