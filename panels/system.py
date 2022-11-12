@@ -83,7 +83,6 @@ class SystemPanel(ScreenPanel):
                     infogrid.attach(self.labels[f"{prog}_restart"], 0, i, 1, 1)
 
                 infogrid.attach(self.labels[f"{prog}_status"], 2, i, 1, 1)
-                logging.info(f"Updating program: {prog} ")
                 self.update_program_info(prog)
 
                 infogrid.attach(self.labels[prog], 1, i, 1, 1)
@@ -338,12 +337,11 @@ class SystemPanel(ScreenPanel):
 
     def update_program_info(self, p):
 
-        logging.info(f"Updating program: {p} ")
         if 'version_info' not in self.update_status or p not in self.update_status['version_info']:
+            logging.info(f"Unknown version: {p}")
             return
 
         info = self.update_status['version_info'][p]
-        logging.info(f"{p}: {info}")
 
         if p == "system":
             self.labels[p].set_markup("<b>System</b>")
@@ -352,7 +350,7 @@ class SystemPanel(ScreenPanel):
                 self.labels[f"{p}_status"].get_style_context().remove_class('update')
                 self.labels[f"{p}_status"].set_sensitive(False)
             else:
-                self._needs_update(p)
+                self._needs_update(p, local="", remote=info['package_count'])
 
         elif 'configured_type' in info and info['configured_type'] == 'git_repo':
             if info['is_valid'] and not info['is_dirty']:
@@ -361,7 +359,7 @@ class SystemPanel(ScreenPanel):
                     self.labels[f"{p}_status"].get_style_context().remove_class('invalid')
                 else:
                     self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']} -> {info['remote_version']}")
-                    self._needs_update(p)
+                    self._needs_update(p, info['version'], info['remote_version'])
             else:
                 self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
                 self.labels[f"{p}_status"].set_label(_("Invalid"))
@@ -371,15 +369,17 @@ class SystemPanel(ScreenPanel):
             self._already_updated(p, info)
         else:
             self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']} -> {info['remote_version']}")
-            self._needs_update(p)
+            self._needs_update(p, info['version'], info['remote_version'])
 
     def _already_updated(self, p, info):
+        logging.info(f"{p} {info['version']}")
         self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
         self.labels[f"{p}_status"].set_label(_("Up To Date"))
         self.labels[f"{p}_status"].get_style_context().remove_class('update')
         self.labels[f"{p}_status"].set_sensitive(False)
 
-    def _needs_update(self, p):
+    def _needs_update(self, p, local="", remote=""):
+        logging.info(f"{p} {local} -> {remote}")
         self.labels[f"{p}_status"].set_label(_("Update"))
         self.labels[f"{p}_status"].get_style_context().add_class('update')
         self.labels[f"{p}_status"].set_sensitive(True)

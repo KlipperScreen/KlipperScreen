@@ -85,7 +85,8 @@ class BedMeshPanel(ScreenPanel):
         if profile not in self.profiles:
             self.add_profile(profile)
 
-        logging.info(f"Active {self.active_mesh} changing to {profile}")
+        if self.active_mesh != profile:
+            logging.info(f"Active {self.active_mesh} changing to {profile}")
         self.profiles[profile]['name'].set_sensitive(False)
         self.profiles[profile]['name'].get_style_context().add_class("button_active")
         self.active_mesh = profile
@@ -176,7 +177,6 @@ class BedMeshPanel(ScreenPanel):
 
     def load_meshes(self):
         bm_profiles = self._printer.get_stat("bed_mesh", "profiles")
-        logging.info(f"Bed profiles: {bm_profiles}")
         for prof in bm_profiles:
             if prof not in self.profiles:
                 self.add_profile(prof)
@@ -187,7 +187,6 @@ class BedMeshPanel(ScreenPanel):
     def process_update(self, action, data):
         if action == "notify_status_update":
             with contextlib.suppress(KeyError):
-                logging.info(data['bed_mesh'])
                 self.activate_mesh(data['bed_mesh']['profile_name'])
 
     def remove_create(self):

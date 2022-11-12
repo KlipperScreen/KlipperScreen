@@ -47,8 +47,8 @@ try:
         return state
 
     dpms_loaded = True
-except Exception:
-    pass
+except Exception as msg:
+    logging.error(f"Couldn't load DPMS: {msg}")
 
 
 def get_network_interfaces():

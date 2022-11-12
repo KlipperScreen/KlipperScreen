@@ -856,7 +856,6 @@ class KlipperScreen(Gtk.Window):
         elif action == "notify_status_update" and self.printer.get_state() != "shutdown":
             self.printer.process_update(data)
         elif action == "notify_filelist_changed":
-            logging.debug("Filelist changed: %s", json.dumps(data, indent=2))
             if self.files is not None:
                 self.files.process_update(data)
         elif action == "notify_metadata_update":
@@ -923,6 +922,7 @@ class KlipperScreen(Gtk.Window):
         widget.destroy()
 
     def _send_action(self, widget, method, params):
+        logging.info(f"{method}: {params}")
         self._ws.send_method(method, params)
 
     def printer_initializing(self, text=None, disconnect=False):
