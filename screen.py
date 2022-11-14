@@ -1037,8 +1037,7 @@ class KlipperScreen(Gtk.Window):
 
     def printer_ready(self):
         self.close_popup_message()
-        self.show_panel('main_panel', "main_menu", None, 2,
-                        items=self._config.get_menu_items("__main"), extrudercount=self.printer.get_extruder_count())
+        self.show_panel('main_panel', "main_menu", None, 2, items=self._config.get_menu_items("__main"))
         self.base_panel_show_all()
         self.ws_subscribe()
         if "job_status" in self.panels:

@@ -25,7 +25,7 @@ class MainPanel(MenuPanel):
         self.active_heater = None
         self.h = 1
 
-    def initialize(self, panel_name, items, extrudercount):
+    def initialize(self, panel_name, items):
         logging.info("### Making MainMenu")
 
         self.items = items
