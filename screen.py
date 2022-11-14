@@ -318,10 +318,7 @@ class KlipperScreen(Gtk.Window):
         if panel_name not in self.panels:
             try:
                 self.panels[panel_name] = self._load_panel(panel_type, self, title)
-                if kwargs != {}:
-                    self.panels[panel_name].initialize(panel_name, **kwargs)
-                else:
-                    self.panels[panel_name].initialize(panel_name)
+                self.panels[panel_name].initialize(panel_name, **kwargs)
             except Exception as e:
                 if panel_name in self.panels:
                     del self.panels[panel_name]
