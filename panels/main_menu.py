@@ -2,7 +2,7 @@ import gi
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GLib, Pango
+from gi.repository import Gtk, GLib
 from panels.menu import MenuPanel
 
 from ks_includes.widgets.graph import HeaterGraph
@@ -16,6 +16,7 @@ def create_panel(*args):
 class MainPanel(MenuPanel):
     def __init__(self, screen, title, back=False):
         super().__init__(screen, title, False)
+        self.left_panel = None
         self.items = None
         self.grid = self._gtk.HomogeneousGrid()
         self.grid.set_hexpand(True)
@@ -48,6 +49,8 @@ class MainPanel(MenuPanel):
         self.layout.show_all()
 
     def update_graph_visibility(self):
+        if self.left_panel is None:
+            return
         count = 0
         for device in self.devices:
             visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}",
