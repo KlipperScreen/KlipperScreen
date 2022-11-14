@@ -882,7 +882,7 @@ class KlipperScreen(Gtk.Window):
                     )
 
         self.base_panel.process_update(action, data)
-        if self._cur_panels[-1] in self.subscriptions:
+        if self._cur_panels and self._cur_panels[-1] in self.subscriptions:
             self.panels[self._cur_panels[-1]].process_update(action, data)
 
     def _confirm_send_action(self, widget, text, method, params=None):
