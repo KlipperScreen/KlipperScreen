@@ -318,7 +318,6 @@ class KlipperScreen(Gtk.Window):
         if panel_name not in self.panels:
             try:
                 self.panels[panel_name] = self._load_panel(panel_type, self, title)
-
                 if kwargs != {}:
                     self.panels[panel_name].initialize(panel_name, **kwargs)
                 else:
@@ -343,10 +342,7 @@ class KlipperScreen(Gtk.Window):
             self.base_panel.add_content(self.panels[panel_name])
 
             logging.debug(f"Showing back. count: {len(self._cur_panels)}")
-            if len(self._cur_panels) == 0:
-                self.base_panel.show_back(False)
-            else:
-                self.base_panel.show_back(True)
+            self.base_panel.show_back(len(self._cur_panels) > 0)
             self.show_all()
 
             if hasattr(self.panels[panel_name], "process_update"):
@@ -537,8 +533,6 @@ class KlipperScreen(Gtk.Window):
 
     def _go_to_submenu(self, widget, name):
         logging.info(f"#### Go to submenu {name}")
-        # self._remove_current_panel(False)
-
         # Find current menu item
         if "main_panel" in self._cur_panels:
             menu = "__main"
@@ -559,11 +553,12 @@ class KlipperScreen(Gtk.Window):
 
     def _remove_all_panels(self):
         while len(self._cur_panels) > 0:
-            self._remove_current_panel(True, False)
+            self._remove_current_panel()
         self.show_all()
 
-    def _remove_current_panel(self, pop=True, show=True):
+    def _remove_current_panel(self, pop=True):
         if len(self._cur_panels) <= 0:
+            self.reload_panels()
             return
         self.base_panel.remove(self.panels[self._cur_panels[-1]].get_content())
         if hasattr(self.panels[self._cur_panels[-1]], "deactivate"):
@@ -580,8 +575,7 @@ class KlipperScreen(Gtk.Window):
                     self.panels[self._cur_panels[-1]].process_update("notify_status_update",
                                                                      self.printer.get_updates())
                     self.add_subscription(self._cur_panels[-1])
-                if show is True:
-                    self.show_all()
+                self.show_all()
 
     def _menu_go_back(self, widget=None):
         logging.info("#### Menu go back")
