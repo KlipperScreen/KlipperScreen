@@ -129,10 +129,12 @@ class KlipperScreen(Gtk.Window):
         self.add(self.base_panel.get())
         self.show_all()
         if show_cursor:
-            self.get_window().set_cursor(Gdk.Cursor.new(Gdk.CursorType.ARROW))
+            self.get_window().set_cursor(
+                Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.ARROW))
             os.system("xsetroot  -cursor_name  arrow")
         else:
-            self.get_window().set_cursor(Gdk.Cursor.new(Gdk.CursorType.BLANK_CURSOR))
+            self.get_window().set_cursor(
+                Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.BLANK_CURSOR))
             os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
         self.base_panel.activate()
 
