@@ -165,15 +165,13 @@ class Printer:
         if state not in list(self.state_callbacks):  # disconnected, startup, ready, shutdown, error, paused, printing
             return
         logging.debug(f"Changing state from '{self.state}' to '{state}'")
-        prev_state = self.state
         self.state = state
         if self.state_callbacks[state] is not None:
             logging.debug(f"Adding callback for state: {state}")
             Gdk.threads_add_idle(
                 GLib.PRIORITY_HIGH_IDLE,
                 self.state_cb,
-                self.state_callbacks[state],
-                prev_state
+                self.state_callbacks[state]
             )
 
     def configure_power_devices(self, data):
