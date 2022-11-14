@@ -589,17 +589,12 @@ class KlipperScreen(Gtk.Window):
             self._remove_current_panel()
 
     def add_subscription(self, panel_name):
-        for sub in self.subscriptions:
-            if sub == panel_name:
-                return
-
-        self.subscriptions.append(panel_name)
+        if panel_name not in self.subscriptions:
+            self.subscriptions.append(panel_name)
 
     def remove_subscription(self, panel_name):
-        for i in range(len(self.subscriptions)):
-            if self.subscriptions[i] == panel_name:
-                self.subscriptions.pop(i)
-                return
+        if panel_name in self.subscriptions:
+            self.subscriptions.remove(panel_name)
 
     def reset_screensaver_timeout(self, *args):
         if self.screensaver_timeout is not None:
