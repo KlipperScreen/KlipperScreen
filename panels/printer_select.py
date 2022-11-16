@@ -38,7 +38,7 @@ class PrinterSelect(ScreenPanel):
         for i, printer in enumerate(printers):
             name = list(printer)[0]
             self.labels[name] = self._gtk.ButtonImage("extruder", name, f"color{1 + i % 4}")
-            self.labels[name].connect("clicked", self._screen.connect_printer_widget, name)
+            self.labels[name].connect("clicked", self.connect_printer, name)
             if self._screen.vertical_mode:
                 row = i % columns
                 col = int(i / columns)
@@ -46,6 +46,9 @@ class PrinterSelect(ScreenPanel):
                 col = i % columns
                 row = int(i / columns)
             grid.attach(self.labels[name], col, row, 1, 1)
+
+    def connect_printer(self, widget, name):
+        self._screen.connect_printer(name)
 
     def activate(self):
         self._screen.base_panel.action_bar.hide()

@@ -156,9 +156,6 @@ class KlipperScreen(Gtk.Window):
         else:
             self.show_printer_select()
 
-    def connect_printer_widget(self, widget, name):
-        self.connect_printer(name)
-
     def connect_printer(self, name):
         data = {
             "moonraker_host": "127.0.0.1",
