@@ -56,6 +56,7 @@ class ExcludeObjectPanel(ScreenPanel):
                 scroll.set_size_request((self._screen.width * .9) // 2, -1)
         else:
             grid.attach(scroll, 0, 2, 2, 1)
+            scroll.set_size_request(self._gtk.get_content_width(), -1)
 
         self.content.add(grid)
         self.content.show_all()
