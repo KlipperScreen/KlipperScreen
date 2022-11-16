@@ -53,7 +53,7 @@ class KlippyWebsocket(threading.Thread):
 
     @property
     def ws_proto(self):
-        if int(self.port) == 443:
+        if int(self.port) in {443, 7130}:
             return "wss"
         return "ws"
 
