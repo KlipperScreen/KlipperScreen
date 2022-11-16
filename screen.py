@@ -253,6 +253,7 @@ class KlipperScreen(Gtk.Window):
         self.connecting = False
 
         self.connected_printer = name
+        self.base_panel.set_ks_printer_cfg(name)
         logging.debug(f"Connected to printer: {name}")
 
     def ws_subscribe(self):

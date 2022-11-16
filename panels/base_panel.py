@@ -19,6 +19,7 @@ class BasePanel(ScreenPanel):
         self.time_min = -1
         self.time_format = self._config.get_main_config().getboolean("24htime", True)
         self.time_update = None
+        self.titlebar_items = []
         self.titlebar_name_type = None
         self.buttons_showing = {
             'back': not back,
@@ -123,13 +124,6 @@ class BasePanel(ScreenPanel):
             if not show or self._screen.printer.get_temp_store_devices() is None:
                 return
 
-            printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
-            if printer_cfg is not None:
-                self.titlebar_name_type = printer_cfg.get("titlebar_name_type", None)
-            else:
-                self.titlebar_name_type = None
-            logging.info(f"Titlebar name type: {self.titlebar_name_type}")
-
             img_size = self._gtk.img_scale * .5
             for device in self._screen.printer.get_temp_store_devices():
                 self.labels[device] = Gtk.Label(label="100º")
@@ -156,21 +150,16 @@ class BasePanel(ScreenPanel):
                 n += 1
 
             # Options in the config have priority
-            if printer_cfg is not None:
-                titlebar_items = printer_cfg.get("titlebar_items", None)
-                if titlebar_items is not None:
-                    titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
-                    logging.info(f"Titlebar items: {titlebar_items}")
-                    for device in self._screen.printer.get_temp_store_devices():
-                        # Users can fill the bar if they want
-                        if n >= nlimit + 1:
-                            break
-                        name = device.split()[1] if len(device.split()) > 1 else device
-                        for item in titlebar_items:
-                            if name == item:
-                                self.control['temp_box'].add(self.labels[f"{device}_box"])
-                                n += 1
-                                break
+            for device in self._screen.printer.get_temp_store_devices():
+                # Users can fill the bar if they want
+                if n >= nlimit + 1:
+                    break
+                name = device.split()[1] if len(device.split()) > 1 else device
+                for item in self.titlebar_items:
+                    if name == item:
+                        self.control['temp_box'].add(self.labels[f"{device}_box"])
+                        n += 1
+                        break
 
             # If there is enough space fill with heater_generic
             for device in self._screen.printer.get_temp_store_devices():
@@ -321,3 +310,14 @@ class BasePanel(ScreenPanel):
         elif show is False and self.buttons_showing['estop']:
             self.control['estop'].set_sensitive(False)
             self.buttons_showing['estop'] = False
+
+    def set_ks_printer_cfg(self, printer):
+        self.ks_printer_cfg = self._config.get_printer_config(printer)
+        if self.ks_printer_cfg is not None:
+            self.titlebar_name_type = self.ks_printer_cfg.get("titlebar_name_type", None)
+            titlebar_items = self.ks_printer_cfg.get("titlebar_items", None)
+            if titlebar_items is not None:
+                self.titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
+                logging.info(f"Titlebar name type: {self.titlebar_name_type} items: {self.titlebar_items}")
+            else:
+                self.titlebar_items = []

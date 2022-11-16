@@ -19,6 +19,7 @@ class ScreenPanel:
         self.title = title
         self.devices = {}
         self.active_heaters = []
+        self.ks_printer_cfg = None
 
         self.layout = Gtk.Layout()
         self.layout.set_size(self._screen.width, self._screen.height)
