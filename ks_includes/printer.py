@@ -51,7 +51,6 @@ class Printer:
         self.output_pin_count = None
 
     def reinit(self, printer_info, data):
-        logging.debug(f"Moonraker object status: {data}")
         self.config = data['configfile']['config']
         self.extrudercount = 0
         self.tempdevcount = 0
@@ -164,8 +163,9 @@ class Printer:
     def change_state(self, state):
         if state not in list(self.state_callbacks):  # disconnected, startup, ready, shutdown, error, paused, printing
             return
-        logging.debug(f"Changing state from '{self.state}' to '{state}'")
-        self.state = state
+        if state != self.state:
+            logging.debug(f"Changing state from '{self.state}' to '{state}'")
+            self.state = state
         if self.state_callbacks[state] is not None:
             logging.debug(f"Adding callback for state: {state}")
             Gdk.threads_add_idle(

@@ -704,14 +704,15 @@ class KlipperScreen(Gtk.Window):
         if self.is_updating():
             self.update_queue.append([callback])
         else:
+            self.init_printer()
             callback()
 
     def state_disconnected(self, msg=None):
         logging.debug("### Going to disconnected")
+        self.printer.state = "disconnected"
         self.close_screensaver()
         msg = _("Klipper has disconnected") if msg is None else msg
         self.printer_initializing(msg)
-        self.init_printer()
 
     def state_error(self):
         self.close_screensaver()
@@ -742,7 +743,6 @@ class KlipperScreen(Gtk.Window):
         # Do not return to main menu if completing a job, timeouts/user input will return
         if "job_status" in self._cur_panels:
             return
-        self.init_printer()
         self.printer_ready()
 
     def state_startup(self):
@@ -913,11 +913,6 @@ class KlipperScreen(Gtk.Window):
         printer_info = self.apiclient.get_printer_info()
         if printer_info is False:
             self.printer_initializing("Unable to get printer info from moonraker")
-            return False
-
-        data = self.apiclient.send_request("printer/objects/query?" + "&".join(PRINTER_BASE_STATUS_OBJECTS))
-        if data is False:
-            self.printer_initializing("Error getting printer object data")
             return False
 
         config = self.apiclient.send_request("printer/objects/query?configfile")
