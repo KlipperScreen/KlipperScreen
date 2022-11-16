@@ -304,30 +304,26 @@ class KlipperScreen(Gtk.Window):
             raise Exception(msg) from e
 
     def show_panel(self, panel_name, panel_type, title, remove=None, pop=True, **kwargs):
-        if panel_name not in self.panels:
-            try:
-                self.panels[panel_name] = self._load_panel(panel_type, self, title)
-                self.panels[panel_name].initialize(panel_name, **kwargs)
-            except Exception as e:
-                if panel_name in self.panels:
-                    del self.panels[panel_name]
-                logging.exception(f"Unable to load panel {panel_type}")
-                self.show_error_modal(f"Unable to load panel {panel_type}", f"{e}")
-                return
-
-            if hasattr(self.panels[panel_name], "process_update"):
-                self.panels[panel_name].process_update("notify_status_update", self.printer.get_data())
-
         try:
             if remove == 2:
                 self._remove_all_panels()
             elif remove == 1:
                 self._remove_current_panel(pop)
 
+            if panel_name not in self.panels:
+                try:
+                    self.panels[panel_name] = self._load_panel(panel_type, self, title)
+                    self.panels[panel_name].initialize(panel_name, **kwargs)
+                except Exception as e:
+                    if panel_name in self.panels:
+                        del self.panels[panel_name]
+                    logging.exception(f"Unable to load panel {panel_type}")
+                    self.show_error_modal(f"Unable to load panel {panel_type}", f"{e}")
+                    return
+
             logging.debug(f"Attaching panel {panel_name}")
             self.base_panel.add_content(self.panels[panel_name])
 
-            logging.debug(f"Showing back. count: {len(self._cur_panels)}")
             self.base_panel.show_back(len(self._cur_panels) > 0)
             self.show_all()
 
@@ -341,7 +337,7 @@ class KlipperScreen(Gtk.Window):
             logging.exception(f"Error attaching panel:\n{e}")
 
         self._cur_panels.append(panel_name)
-        logging.debug(f"Current panel hierarchy: {self._cur_panels}")
+        logging.debug(f"Current panel hierarchy: {' > '.join(self._cur_panels)}")
 
     def show_popup_message(self, message, level=3):
         self.close_screensaver()
@@ -538,9 +534,15 @@ class KlipperScreen(Gtk.Window):
                         "menu", disname, 1, False, display_name=disname, items=menuitems)
 
     def _remove_all_panels(self):
-        while len(self._cur_panels) > 0:
-            self._remove_current_panel()
-        self.show_all()
+        self.subscriptions = []
+        self._cur_panels = []
+        for _ in self.base_panel.content.get_children():
+            self.base_panel.content.remove(_)
+        for panel in list(self.panels):
+            if panel not in ["printer_select", "splash_screen"]:
+                del self.panels[panel]
+        for dialog in self.dialogs:
+            dialog.destroy()
 
     def _remove_current_panel(self, pop=True):
         if len(self._cur_panels) <= 0:
@@ -712,12 +714,6 @@ class KlipperScreen(Gtk.Window):
         logging.debug("### Going to disconnected")
         self.close_screensaver()
         self.printer_initializing(_("Klipper has disconnected"))
-        self.subscriptions = []
-        for panel in list(self.panels):
-            if panel not in ["printer_select", "splash_screen"]:
-                del self.panels[panel]
-        for dialog in self.dialogs:
-            dialog.destroy()
         self.init_printer()
 
     def state_error(self):
@@ -734,12 +730,6 @@ class KlipperScreen(Gtk.Window):
         else:
             self.printer_initializing("<b>" + _("Klipper has encountered an error.") +
                                       "</b>" + "\n\n" + msg)
-
-        for panel in list(self.panels):
-            if panel not in ["printer_select", "splash_screen"]:
-                del self.panels[panel]
-        for dialog in self.dialogs:
-            dialog.destroy()
 
     def state_paused(self):
         if "job_status" not in self._cur_panels:
@@ -780,10 +770,6 @@ class KlipperScreen(Gtk.Window):
 
     def reload_panels(self, *args):
         self._remove_all_panels()
-        for panel in list(self.panels):
-            del self.panels[panel]
-        for dialog in self.dialogs:
-            dialog.destroy()
         self.printer.change_state(self.printer.state)
 
     def _websocket_callback(self, action, data):
