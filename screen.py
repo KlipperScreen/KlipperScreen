@@ -83,7 +83,6 @@ class KlipperScreen(Gtk.Window):
     screensaver = None
     printer = None
     subscriptions = []
-    shutdown = True
     updating = False
     update_queue = []
     _ws = None
@@ -230,7 +229,7 @@ class KlipperScreen(Gtk.Window):
                                    {
                                        "on_connect": self.init_printer,
                                        "on_message": self._websocket_callback,
-                                       "on_close": self.printer_initializing
+                                       "on_close": self.state_disconnected
                                    },
                                    data["moonraker_host"],
                                    data["moonraker_port"]
@@ -710,10 +709,11 @@ class KlipperScreen(Gtk.Window):
         else:
             callback()
 
-    def state_disconnected(self):
+    def state_disconnected(self, msg=None):
         logging.debug("### Going to disconnected")
         self.close_screensaver()
-        self.printer_initializing(_("Klipper has disconnected"))
+        msg = _("Klipper has disconnected") if msg is None else msg
+        self.printer_initializing(msg)
         self.init_printer()
 
     def state_error(self):
@@ -856,14 +856,11 @@ class KlipperScreen(Gtk.Window):
         logging.info(f"{method}: {params}")
         self._ws.send_method(method, params)
 
-    def printer_initializing(self, text=None, disconnect=False):
+    def printer_initializing(self, msg):
         self.close_popup_message()
-        self.show_panel('splash_screen', "splash_screen", None, 2)
-        if disconnect is True and self.printer is not None:
-            self.shutdown = True
-            self.printer.state = "disconnected"
-        if text is not None:
-            self.panels['splash_screen'].update_text(text)
+        if 'splash_screen' not in self._cur_panels:
+            self.show_panel('splash_screen', "splash_screen", None, 2)
+        self.panels['splash_screen'].update_text(msg)
 
     def search_power_devices(self, power_devices):
         if self.connected_printer is None or not power_devices:
@@ -902,7 +899,6 @@ class KlipperScreen(Gtk.Window):
         self.reinit_count += 1
         self.init_printer_timeout = GLib.timeout_add_seconds(3, self.init_printer)
 
-        self.shutdown = False
         powerdevs = self.apiclient.send_request("machine/device_power/devices")
         if powerdevs is not False:
             self.printer.configure_power_devices(powerdevs['result'])
