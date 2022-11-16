@@ -894,6 +894,7 @@ class KlipperScreen(Gtk.Window):
 
         state = self.apiclient.get_server_info()
         if state is False:
+            logging.info("Moonraker not connected")
             return False
         # Moonraker is ready, set a loop to init the printer
         self.reinit_count += 1
@@ -904,7 +905,8 @@ class KlipperScreen(Gtk.Window):
             self.printer.configure_power_devices(powerdevs['result'])
 
         if state['result']['klippy_connected'] is False:
-            self.panels['splash_screen'].update_text(
+            logging.info("Klipper not connected")
+            self.printer_initializing(
                 _("Moonraker: connected")
                 + f"\n\nKlipper: {state['result']['klippy_state']}\n\n"
                 + _("Retry #%s") % self.reinit_count
@@ -913,15 +915,18 @@ class KlipperScreen(Gtk.Window):
 
         printer_info = self.apiclient.get_printer_info()
         if printer_info is False:
-            return self._update_splash_screen("Unable to get printer info from moonraker")
+            self.printer_initializing("Unable to get printer info from moonraker")
+            return False
 
         data = self.apiclient.send_request("printer/objects/query?" + "&".join(PRINTER_BASE_STATUS_OBJECTS))
         if data is False:
-            return self._update_splash_screen("Error getting printer object data")
+            self.printer_initializing("Error getting printer object data")
+            return False
 
         config = self.apiclient.send_request("printer/objects/query?configfile")
         if config is False:
-            return self._update_splash_screen("Error getting printer config data")
+            self.printer_initializing("Error getting printer configuration")
+            return False
 
         # Reinitialize printer, in case the printer was shut down and anything has changed.
         self.printer.reinit(printer_info['result'], config['result']['status'])
@@ -937,7 +942,8 @@ class KlipperScreen(Gtk.Window):
         data = self.apiclient.send_request("printer/objects/query?" + "&".join(PRINTER_BASE_STATUS_OBJECTS +
                                                                                extra_items))
         if data is False:
-            return self._update_splash_screen("Error getting printer object data with extra items")
+            self.printer_initializing("Error getting printer object data with extra items")
+            return False
 
         tempstore = self.apiclient.send_request("server/temperature_store")
         if tempstore is not False:
@@ -950,11 +956,6 @@ class KlipperScreen(Gtk.Window):
         logging.info("Printer initialized")
         GLib.source_remove(self.init_printer_timeout)
         self.reinit_count = 0
-        return False
-
-    def _update_splash_screen(self, msg):
-        logging.info(msg)
-        self.panels['splash_screen'].update_text(msg)
         return False
 
     def base_panel_show_all(self):

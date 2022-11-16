@@ -84,11 +84,11 @@ class KlippyWebsocket(threading.Thread):
             if state is False:
                 if self.reconnect_count > self.max_retries:
                     self._screen.panels['splash_screen'].add_retry_button()
-                    self._screen.panels['splash_screen'].update_text(
+                    self._screen.printer_initializing(
                         _("Cannot connect to Moonraker")
                         + f'\n\n{self._url}')
                 elif self.reconnect_count > 2:
-                    self._screen.panels['splash_screen'].update_text(
+                    self._screen.printer_initializing(
                         _("Cannot connect to Moonraker")
                         + f'\n\n{self._url}\n\n'
                         + _("Retrying") + f' #{self.reconnect_count}'
