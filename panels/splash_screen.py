@@ -3,7 +3,7 @@ import logging
 import os
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gdk, Gtk, Pango
+from gi.repository import Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
@@ -18,7 +18,6 @@ class SplashScreenPanel(ScreenPanel):
         super().__init__(screen, title, back)
 
     def initialize(self, panel_name):
-        self.retry_button = False
         image = self._gtk.Image("klipper", self._screen.width / 5, self._screen.height * .5)
         self.labels['text'] = Gtk.Label(_("Initializing printer..."))
         self.labels['text'].set_line_wrap(True)
@@ -38,7 +37,6 @@ class SplashScreenPanel(ScreenPanel):
         self.labels['shutdown'].connect("clicked", self.shutdown)
         self.labels['retry'] = self._gtk.ButtonImage("load", _('Retry'), "color3")
         self.labels['retry'].connect("clicked", self.retry)
-        self.labels['retry'].connect("clicked", self.remove_retry_button)
 
         self.labels['actions'] = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         self.labels['actions'].set_hexpand(True)
@@ -85,14 +83,14 @@ class SplashScreenPanel(ScreenPanel):
                     logging.info(f"Associated power devices: {power_devices}")
                     self.add_power_button(self._screen.search_power_devices(power_devices))
 
-        if self._screen.printer is not None and self._screen.printer.state != "disconnected":
+        if self._screen._ws and self._screen._ws.is_connected():
             self.labels['actions'].add(self.labels['restart'])
             self.labels['actions'].add(self.labels['firmware_restart'])
         else:
             self.labels['actions'].add(self.labels['restart_system'])
             self.labels['actions'].add(self.labels['shutdown'])
         self.labels['actions'].add(self.labels['menu'])
-        if self.retry_button:
+        if self._screen._ws and self._screen._ws.is_connecting():
             self.labels['actions'].add(self.labels['retry'])
         self.labels['actions'].show_all()
 
@@ -102,14 +100,6 @@ class SplashScreenPanel(ScreenPanel):
             self.labels['power'].connect("clicked", self._screen.power_on, powerdevs)
             self.check_power_status()
             self.labels['actions'].add(self.labels['power'])
-
-    def add_retry_button(self):
-        self.retry_button = True
-
-    def remove_retry_button(self, *args):
-        self.retry_button = False
-        self.update_text((_("Connecting to %s") % self._screen.connecting_to_printer))
-        self.show_restart_buttons()
 
     def activate(self):
         self.check_power_status()
@@ -155,4 +145,6 @@ class SplashScreenPanel(ScreenPanel):
             os.system("systemctl reboot")
 
     def retry(self, widget):
-        self._screen._ws.initial_connect()
+        self.update_text((_("Connecting to %s") % self._screen.connecting_to_printer))
+        self._screen._ws.retry()
+        self.show_restart_buttons()
