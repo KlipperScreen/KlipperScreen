@@ -45,9 +45,9 @@ chmod +x launch_KlipperScreen.sh
 nano launch_KlipperScreen.sh
 ```
 
-* Paste this into the script (edit the IP for example: 192.168.1.2:0)
+* Paste this into the script (replace the example IP)
 ```bash
-DISPLAY=(ip address from blue screen):0 $KS_XCLIENT
+DISPLAY=192.168.150.122:0 $KS_XCLIENT
 ```
 
 !!! important
