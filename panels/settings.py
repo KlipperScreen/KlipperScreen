@@ -18,9 +18,6 @@ class SettingsPanel(ScreenPanel):
         self.menu = ['settings_menu']
 
     def initialize(self, panel_name):
-
-        self.labels['add_printer_button'] = self._gtk.Button(_("Add Printer"), "color1")
-
         options = self._config.get_configurable_options().copy()
         options.append({"printers": {
             "name": _("Printer Connections"),
@@ -120,12 +117,9 @@ class SettingsPanel(ScreenPanel):
             scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
             dev.add(scale)
         elif option['type'] == "printer":
-            logging.debug(f"Option: {option}")
             box = Gtk.Box()
             box.set_vexpand(False)
-            label = Gtk.Label()
-            url = f"{option['moonraker_host']}:{option['moonraker_port']}"
-            label.set_markup(f"<big>{option['name']}</big>\n{url}")
+            label = Gtk.Label(f"{option['moonraker_host']}:{option['moonraker_port']}")
             box.add(label)
             dev.add(box)
         elif option['type'] == "menu":
