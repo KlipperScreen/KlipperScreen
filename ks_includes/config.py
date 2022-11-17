@@ -539,10 +539,10 @@ class KlipperScreenConfig:
         cfg = self.config[name]
         item = {
             "name": cfg.get("name"),
-            "icon": cfg.get("icon"),
-            "panel": cfg.get("panel", False),
-            "method": cfg.get("method", False),
-            "confirm": cfg.get("confirm", False),
+            "icon": cfg.get("icon", None),
+            "panel": cfg.get("panel", None),
+            "method": cfg.get("method", None),
+            "confirm": cfg.get("confirm", None),
             "enable": cfg.get("enable", "True")
         }
 

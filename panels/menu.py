@@ -83,11 +83,11 @@ class MenuPanel(ScreenPanel):
             parsed_name = j2_temp.render()
 
             b = self._gtk.ButtonImage(item['icon'], parsed_name, f"color{(i % 4) + 1}")
-            if item['panel'] is not False:
+            if item['panel'] is not None:
                 b.connect("clicked", self.menu_item_clicked, item['panel'], item)
-            elif item['method'] is not False:
+            elif item['method'] is not None:
                 params = item['params'] if item['params'] is not False else {}
-                if item['confirm'] is not False:
+                if item['confirm'] is not None:
                     b.connect("clicked", self._screen._confirm_send_action, item['confirm'], item['method'], params)
                 else:
                     b.connect("clicked", self._screen._send_action, item['method'], params)
