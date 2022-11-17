@@ -1,7 +1,7 @@
 # Configuration
 
 Usually you don't need to create a configuration file, but if you need to change something that is not changeable in the UI
-create a blank file in `~/klipper_config/KlipperScreen.conf`, if the file already exist then just edit it.
+create a blank file in `~/printer_data/config/KlipperScreen.conf`, if the file already exist then just edit it.
 
 Write in the file only the options that need to be changed, and restart KlipperScreen.
 
