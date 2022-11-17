@@ -29,8 +29,6 @@ class ExcludeObjectPanel(ScreenPanel):
         logging.info(f'Excluded: {self.excluded_objects}')
         self.objects = self._printer.get_stat("exclude_object", "objects")
         self.labels['map'] = None
-
-    def initialize(self, panel_name):
         for obj in self.objects:
             logging.info(f"Adding {obj['name']}")
             self.add_object(obj["name"])

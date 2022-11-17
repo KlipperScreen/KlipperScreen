@@ -21,10 +21,8 @@ class FineTunePanel(ScreenPanel):
     percent_delta = percent_deltas[-2]
     speed = extrusion = 100
 
-    def initialize(self, panel_name):
-
-        logging.debug("FineTunePanel")
-
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
         print_cfg = self._config.get_printer_config(self._screen.connected_printer)
         if print_cfg is not None:
             bs = print_cfg.get("z_babystep_values", "0.01, 0.05")

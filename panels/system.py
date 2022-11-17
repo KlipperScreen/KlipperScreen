@@ -33,9 +33,6 @@ class SystemPanel(ScreenPanel):
         self.update_status = None
         self.update_dialog = None
         self.update_prog = None
-
-    def initialize(self, panel_name):
-
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
 

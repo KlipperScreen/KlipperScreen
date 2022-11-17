@@ -112,10 +112,7 @@ class BasePanel(ScreenPanel):
 
         # Layout is and content are on screen_panel
         self.layout.add(self.main_grid)
-
-    def initialize(self, panel_name):
         self.update_time()
-        return
 
     def show_heaters(self, show=True):
         try:

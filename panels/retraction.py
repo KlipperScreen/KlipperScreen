@@ -20,9 +20,6 @@ class FWRetractionPanel(ScreenPanel):
         self.grid = Gtk.Grid()
         self.values = {}
         self.list = {}
-
-    def initialize(self, panel_name):
-
         conf = self._printer.get_config_section("firmware_retraction")
 
         retract_length = float(conf['retract_length']) if 'retract_length' in conf else 0

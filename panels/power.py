@@ -12,8 +12,8 @@ def create_panel(*args):
 
 
 class PowerPanel(ScreenPanel):
-    def initialize(self, panel_name):
-
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
         self.devices = {}
 
         # Create a grid for all devices

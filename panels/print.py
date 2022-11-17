@@ -36,8 +36,6 @@ class PrintPanel(ScreenPanel):
         self.directories = {}
         self.labels['directories'] = {}
         self.labels['files'] = {}
-
-    def initialize(self, panel_name):
         sort = Gtk.Label(_("Sort:"))
         sbox = Gtk.Box(spacing=0)
         sbox.set_vexpand(False)

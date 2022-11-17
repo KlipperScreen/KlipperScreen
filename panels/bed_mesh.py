@@ -22,9 +22,6 @@ class BedMeshPanel(ScreenPanel):
         self.profiles = {}
         self.show_create = False
         self.active_mesh = None
-
-    def initialize(self, panel_name):
-
         addprofile = self._gtk.ButtonImage("increase", " " + _("Add profile"), "color1", .66, Gtk.PositionType.LEFT, 1)
         addprofile.connect("clicked", self.show_create_profile)
         addprofile.set_hexpand(True)

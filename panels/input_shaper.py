@@ -35,10 +35,6 @@ class InputShaperPanel(ScreenPanel):
         self.status.set_ellipsize(Pango.EllipsizeMode.END)
         self.calibrating_axis = None
         self.has_sensor = False
-
-    def initialize(self, panel_name):
-
-        self.has_sensor = False
         self.calibrating_axis = None
 
         auto_calibration_label = Gtk.Label()

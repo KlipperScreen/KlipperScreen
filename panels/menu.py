@@ -16,17 +16,17 @@ class MenuPanel(ScreenPanel):
     i = 0
     j2_data = None
 
-    def initialize(self, panel_name, display_name, items):
-
-        self.items = items
-        self.create_menu_items()
-
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
+        self.items = None
         self.grid = self._gtk.HomogeneousGrid()
 
+    def initialize(self, items):
+        self.items = items
+        self.create_menu_items()
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(self.grid)
-
         self.content.add(scroll)
 
     def activate(self):

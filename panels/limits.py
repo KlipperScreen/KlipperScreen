@@ -16,14 +16,9 @@ class LimitsPanel(ScreenPanel):
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, back)
         self.limits = {}
-        self.grid = Gtk.Grid()
         self.options = None
         self.values = {}
-
-    def initialize(self, panel_name):
-
-        scroll = self._gtk.ScrolledWindow()
-        scroll.add(self.grid)
+        self.grid = Gtk.Grid()
 
         conf = self._printer.get_config_section("printer")
         self.options = [
@@ -42,6 +37,8 @@ class LimitsPanel(ScreenPanel):
         for opt in self.options:
             self.add_option(opt['option'], opt['name'], opt['units'], opt['max'])
 
+        scroll = self._gtk.ScrolledWindow()
+        scroll.add(self.grid)
         self.content.add(scroll)
         self.content.show_all()
 

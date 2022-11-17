@@ -31,10 +31,6 @@ class ScreenPanel:
 
         self._show_heater_power = self._config.get_main_config().getboolean('show_heater_power', False)
 
-    def initialize(self, panel_name):
-        # Create gtk items here
-        return
-
     def emergency_stop(self, widget):
         if self._config.get_main_config().getboolean('confirm_estop', False):
             self._screen._confirm_send_action(widget, _("Are you sure you want to run Emergency Stop?"),

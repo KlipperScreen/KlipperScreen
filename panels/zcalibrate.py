@@ -23,9 +23,6 @@ class ZCalibratePanel(ScreenPanel):
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, False)
         self.z_offset = None
-
-    def initialize(self, panel_name):
-
         for probe_type in self.probe_types:
             if self._printer.config_section_exists(probe_type):
                 self.z_offset = float(self._screen.printer.get_config_section(probe_type)['z_offset'])

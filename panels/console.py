@@ -27,8 +27,6 @@ class ConsolePanel(ScreenPanel):
         super().__init__(screen, title, back)
         self.autoscroll = True
         self.hidetemps = True
-
-    def initialize(self, panel_name):
         self._screen._ws.send_method("server.gcode_store", {"count": 100}, self.gcode_response)
 
         o1_lbl = Gtk.Label(_("Auto-scroll"))

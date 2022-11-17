@@ -18,15 +18,15 @@ class MainPanel(MenuPanel):
         super().__init__(screen, title, False)
         self.left_panel = None
         self.items = None
-        self.grid = self._gtk.HomogeneousGrid()
-        self.grid.set_hexpand(True)
-        self.grid.set_vexpand(True)
         self.devices = {}
         self.graph_update = None
         self.active_heater = None
         self.h = 1
+        self.grid = self._gtk.HomogeneousGrid()
+        self.grid.set_hexpand(True)
+        self.grid.set_vexpand(True)
 
-    def initialize(self, panel_name, items):
+    def initialize(self, items):
         logging.info("### Making MainMenu")
 
         self.items = items

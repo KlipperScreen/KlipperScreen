@@ -13,8 +13,8 @@ def create_panel(*args):
 
 class OutputPinPanel(ScreenPanel):
 
-    def initialize(self, panel_name):
-
+    def __init__(self, screen, title, back=True):
+        super().__init__(screen, title, back)
         self.devices = {}
         # Create a grid for all devices
         self.labels['devices'] = Gtk.Grid()

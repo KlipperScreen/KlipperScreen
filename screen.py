@@ -309,7 +309,8 @@ class KlipperScreen(Gtk.Window):
             if panel_name not in self.panels:
                 try:
                     self.panels[panel_name] = self._load_panel(panel_type, self, title)
-                    self.panels[panel_name].initialize(panel_name, **kwargs)
+                    if hasattr(self.panels[panel_name], "initialize"):
+                        self.panels[panel_name].initialize(**kwargs)
                 except Exception as e:
                     if panel_name in self.panels:
                         del self.panels[panel_name]
@@ -526,8 +527,7 @@ class KlipperScreen(Gtk.Window):
             logging.info("No items in menu, returning.")
             return
 
-        self.show_panel(f'{self._cur_panels[-1]}_{name}',
-                        "menu", disname, 1, False, display_name=disname, items=menuitems)
+        self.show_panel(f'{self._cur_panels[-1]}_{name}', "menu", disname, 1, False, items=menuitems)
 
     def _remove_all_panels(self):
         self.subscriptions = []

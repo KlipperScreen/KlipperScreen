@@ -16,8 +16,6 @@ class SettingsPanel(ScreenPanel):
         super().__init__(screen, title, back)
         self.printers = self.settings = {}
         self.menu = ['settings_menu']
-
-    def initialize(self, panel_name):
         options = self._config.get_configurable_options().copy()
         options.append({"printers": {
             "name": _("Printer Connections"),

@@ -19,6 +19,14 @@ def create_panel(*args):
 class JobStatusPanel(ScreenPanel):
     def __init__(self, screen, title, back=False):
         super().__init__(screen, title, False)
+        self.extrusion_button = None
+        self.elapsed_button = None
+        self.left_button = None
+        self.fan_button = None
+        self.speed_button = None
+        self.z_button = None
+        self.heater_button = None
+        self.extruder_button = None
         self.grid = self._gtk.HomogeneousGrid()
         self.grid.set_row_homogeneous(False)
         self.pos_z = 0
@@ -30,7 +38,7 @@ class JobStatusPanel(ScreenPanel):
         self.oheight = 0
         self.current_extruder = None
         self.fila_section = 0
-        self.buttons = None
+        self.buttons = {}
         self.filename_label = self.filename = self.prev_pos = self.prev_gpos = None
         self.close_timeout = self.vel_timeout = self.animation_timeout = None
         self.file_metadata = self.fans = {}
@@ -39,8 +47,6 @@ class JobStatusPanel(ScreenPanel):
         self.progress = self.zoffset = self.flowrate = self.vel = 0
         self.main_status_displayed = True
         self.velstore = self.flowstore = []
-
-    def initialize(self, panel_name):
 
         data = ['pos_x', 'pos_y', 'pos_z', 'time_left', 'duration', 'slicer_time', 'file_time',
                 'filament_time', 'est_time', 'speed_factor', 'req_speed', 'max_accel', 'extrude_factor', 'zoffset',

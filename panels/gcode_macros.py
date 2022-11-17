@@ -23,8 +23,6 @@ class MacroPanel(ScreenPanel):
         self.loaded_macros = []
         self.macros = {}
         self.menu = ['macros_menu']
-
-    def initialize(self, panel_name):
         sort = Gtk.Label(_("Sort:"))
         sort.set_hexpand(False)
 

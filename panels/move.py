@@ -21,21 +21,6 @@ class MovePanel(ScreenPanel):
         self.settings = {}
         self.menu = ['move_menu']
 
-    def home(self, widget):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
-
-    def homexy(self, widget):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME_XY)
-
-    def z_tilt(self, widget):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_TILT)
-
-    def quad_gantry_level(self, widget):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.QUAD_GANTRY_LEVEL)
-
-    def initialize(self, panel_name):
-        grid = self._gtk.HomogeneousGrid()
-
         self.labels['x+'] = self._gtk.ButtonImage("arrow-right", _("X+"), "color1")
         self.labels['x+'].connect("clicked", self.move, "X", "+")
         self.labels['x-'] = self._gtk.ButtonImage("arrow-left", _("X-"), "color1")
@@ -69,6 +54,7 @@ class MovePanel(ScreenPanel):
                                           _("Are you sure you wish to disable motors?"),
                                           "printer.gcode.script", script)
 
+        grid = self._gtk.HomogeneousGrid()
         if self._screen.vertical_mode:
             if self._screen.lang_ltr:
                 grid.attach(self.labels['x+'], 2, 1, 1, 1)
@@ -282,3 +268,15 @@ class MovePanel(ScreenPanel):
             self.unload_menu()
             return True
         return False
+
+    def home(self, widget):
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+
+    def homexy(self, widget):
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME_XY)
+
+    def z_tilt(self, widget):
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_TILT)
+
+    def quad_gantry_level(self, widget):
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.QUAD_GANTRY_LEVEL)

@@ -30,8 +30,6 @@ class TemperaturePanel(ScreenPanel):
         self.preheat_options = self._screen._config.get_preheat_options()
         logging.debug(f"Preheat options: {self.preheat_options}")
         self.grid = self._gtk.HomogeneousGrid()
-
-    def initialize(self, panel_name):
         self._gtk.reset_temp_color()
         self.grid.attach(self.create_left_panel(), 0, 0, 1, 1)
 

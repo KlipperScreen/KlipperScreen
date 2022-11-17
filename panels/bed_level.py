@@ -18,16 +18,12 @@ class BedLevelPanel(ScreenPanel):
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, back)
         self.response_count = 0
-        self.panel_name = ""
         self.screw_dict = {}
         self.screws = []
         self.y_cnt = 0
         self.x_cnt = 0
         self.x_offset = 0
         self.y_offset = 0
-
-    def initialize(self, panel_name):
-        self.panel_name = panel_name
         self.labels['dm'] = self._gtk.ButtonImage("motor-off", _("Disable XY"), "color3")
         self.labels['dm'].connect("clicked", self.disable_motors)
         screw_positions = []

@@ -18,7 +18,6 @@ class ExtrudePanel(ScreenPanel):
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, back)
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-
         macros = self._screen.printer.get_gcode_macros()
         self.load_filament = any("LOAD_FILAMENT" in macro.upper() for macro in macros)
         self.unload_filament = any("UNLOAD_FILAMENT" in macro.upper() for macro in macros)
@@ -40,8 +39,6 @@ class ExtrudePanel(ScreenPanel):
 
         self.distance = int(self.distances[1])
         self.speed = int(self.speeds[1])
-
-    def initialize(self, panel_name):
         self.labels['extrude'] = self._gtk.ButtonImage("extrude", _("Extrude"), "color4")
         self.labels['extrude'].connect("clicked", self.extrude, "+")
         self.labels['load'] = self._gtk.ButtonImage("arrow-down", _("Load"), "color3")

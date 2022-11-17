@@ -15,8 +15,6 @@ def create_panel(*args):
 class PrinterSelect(ScreenPanel):
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, False)
-
-    def initialize(self, panel_name):
         printers = self._config.get_printers()
 
         grid = self._gtk.HomogeneousGrid()
