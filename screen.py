@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import argparse
+
 import gi
 
 import json
@@ -281,23 +282,18 @@ class KlipperScreen(Gtk.Window):
             panel_path = os.path.join(os.path.dirname(__file__), 'panels', f"{panel}.py")
             logging.info(f"Panel path: {panel_path}")
             if not os.path.exists(panel_path):
-                msg = f"Panel {panel} does not exist"
-                logging.info(msg)
-                raise Exception(msg)
+                logging.error(f"Panel {panel} does not exist")
+                raise FileNotFoundError(os.strerror(2), "\n" + panel_path)
 
             module = importlib.import_module(f"panels.{panel}")
             if not hasattr(module, "create_panel"):
-                msg = f"Cannot locate create_panel function for {panel}"
-                logging.info(msg)
-                raise Exception(msg)
+                raise ImportError(f"Cannot locate create_panel function for {panel}")
             self.load_panel[panel] = getattr(module, "create_panel")
 
         try:
             return self.load_panel[panel](*args)
         except Exception as e:
-            msg = f"Unable to create panel {panel}\n{e}"
-            logging.exception(msg)
-            raise Exception(msg) from e
+            raise RuntimeError(f"Unable to create panel: {panel}\n{e}") from e
 
     def show_panel(self, panel_name, panel_type, title, remove=None, pop=True, **kwargs):
         try:
@@ -387,7 +383,7 @@ class KlipperScreen(Gtk.Window):
         self.popup_message = None
 
     def show_error_modal(self, err, e=""):
-        logging.exception(f"Showing error modal: {err}")
+        logging.error(f"Showing error modal: {err}")
 
         title = Gtk.Label()
         title.set_markup(f"<b>{err}</b>\n")
@@ -419,9 +415,9 @@ class KlipperScreen(Gtk.Window):
         ]
         self.gtk.Dialog(self, buttons, grid, self.error_modal_response)
 
-    @staticmethod
-    def error_modal_response(widget, response_id):
+    def error_modal_response(self, widget, response_id):
         widget.destroy()
+        self.reload_panels()
 
     def restart_warning(self, value):
 
