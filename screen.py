@@ -204,12 +204,6 @@ class KlipperScreen(Gtk.Window):
         }, self.state_execute)
 
         self._remove_all_panels()
-        self.subscriptions = []
-        for panel in list(self.panels):
-            if panel not in ["printer_select", "splash_screen"]:
-                del self.panels[panel]
-        for dialog in self.dialogs:
-            dialog.destroy()
         self.base_panel.show_printer_select(True)
         self.printer_initializing(_("Connecting to %s") % name)
 
@@ -321,7 +315,6 @@ class KlipperScreen(Gtk.Window):
             self.show_all()
 
             if hasattr(self.panels[panel_name], "process_update"):
-                self.panels[panel_name].process_update("notify_status_update", self.printer.get_updates())
                 self.add_subscription(panel_name)
             if hasattr(self.panels[panel_name], "activate"):
                 self.panels[panel_name].activate()
@@ -544,7 +537,8 @@ class KlipperScreen(Gtk.Window):
         self.base_panel.remove(self.panels[self._cur_panels[-1]].get_content())
         if hasattr(self.panels[self._cur_panels[-1]], "deactivate"):
             self.panels[self._cur_panels[-1]].deactivate()
-        self.remove_subscription(self._cur_panels[-1])
+        if self._cur_panels[-1] in self.subscriptions:
+            self.subscriptions.remove(self._cur_panels[-1])
         if pop is True:
             self._cur_panels.pop()
             if len(self._cur_panels) > 0:
@@ -553,8 +547,6 @@ class KlipperScreen(Gtk.Window):
                 if hasattr(self.panels[self._cur_panels[-1]], "activate"):
                     self.panels[self._cur_panels[-1]].activate()
                 if hasattr(self.panels[self._cur_panels[-1]], "process_update"):
-                    self.panels[self._cur_panels[-1]].process_update("notify_status_update",
-                                                                     self.printer.get_updates())
                     self.add_subscription(self._cur_panels[-1])
                 self.show_all()
 
@@ -575,10 +567,6 @@ class KlipperScreen(Gtk.Window):
     def add_subscription(self, panel_name):
         if panel_name not in self.subscriptions:
             self.subscriptions.append(panel_name)
-
-    def remove_subscription(self, panel_name):
-        if panel_name in self.subscriptions:
-            self.subscriptions.remove(panel_name)
 
     def reset_screensaver_timeout(self, *args):
         if self.screensaver_timeout is not None:
@@ -805,7 +793,6 @@ class KlipperScreen(Gtk.Window):
                         "printer.gcode.script",
                         script
                     )
-
         self.base_panel.process_update(action, data)
         if self._cur_panels and self._cur_panels[-1] in self.subscriptions:
             self.panels[self._cur_panels[-1]].process_update(action, data)
@@ -956,9 +943,6 @@ class KlipperScreen(Gtk.Window):
         self.close_popup_message()
         self.show_panel('main_panel', "main_menu", None, 2, items=self._config.get_menu_items("__main"))
         self.base_panel_show_all()
-        if "job_status" in self.panels:
-            self.remove_subscription("job_status")
-            del self.panels["job_status"]
 
     def printer_printing(self):
         self.close_screensaver()

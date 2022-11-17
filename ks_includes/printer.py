@@ -136,11 +136,6 @@ class Printer:
         if "webhooks" in data or "print_stats" in data:
             self.process_status_update()
 
-    def get_updates(self):
-        updates = self.data.copy()
-        updates.update(self.devices)
-        return updates
-
     def evaluate_state(self):
         # webhooks states: startup, ready, shutdown, error
         if self.data['webhooks']['state'] == "ready":
