@@ -543,7 +543,7 @@ class KlipperScreenConfig:
             "panel": cfg.get("panel", False),
             "method": cfg.get("method", False),
             "confirm": cfg.get("confirm", False),
-            "enable": cfg.get("enable", True)
+            "enable": cfg.get("enable", "True")
         }
 
         try:

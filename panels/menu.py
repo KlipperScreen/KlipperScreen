@@ -96,11 +96,6 @@ class MenuPanel(ScreenPanel):
             self.labels[key] = b
 
     def evaluate_enable(self, enable):
-        if enable is True:
-            return True
-        if enable is False:
-            return False
-
         if enable == "{{ moonraker_connected }}":
             logging.info("moonraker is_connected %s", self._screen._ws.is_connected())
             return self._screen._ws.is_connected()
