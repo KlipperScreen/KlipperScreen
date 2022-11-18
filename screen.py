@@ -83,7 +83,6 @@ class KlipperScreen(Gtk.Window):
     updating = False
     update_queue = []
     _ws = None
-    init_printer_timeout = None
     dpms_timeout = None
     screensaver_timeout = None
     reinit_count = 0
@@ -131,8 +130,6 @@ class KlipperScreen(Gtk.Window):
                 Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.BLANK_CURSOR))
             os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
         self.base_panel.activate()
-
-        self.printer_initializing(_("Initializing"))
         if self._config.errors:
             self.show_error_modal("Invalid config file", self._config.get_errors())
             # Prevent this dialog from being destroyed
@@ -841,10 +838,9 @@ class KlipperScreen(Gtk.Window):
         state = self.apiclient.get_server_info()
         if state is False:
             logging.info("Moonraker not connected")
-            return False
+            return
         # Moonraker is ready, set a loop to init the printer
         self.reinit_count += 1
-        self.init_printer_timeout = GLib.timeout_add_seconds(3, self.init_printer)
 
         powerdevs = self.apiclient.send_request("machine/device_power/devices")
         if powerdevs is not False:
@@ -857,17 +853,20 @@ class KlipperScreen(Gtk.Window):
                 + f"\n\nKlipper: {state['result']['klippy_state']}\n\n"
                 + _("Retry #%s") % self.reinit_count
             )
-            return False
+            GLib.timeout_add_seconds(3, self.init_printer)
+            return
 
         printer_info = self.apiclient.get_printer_info()
         if printer_info is False:
             self.printer_initializing("Unable to get printer info from moonraker")
-            return False
+            GLib.timeout_add_seconds(3, self.init_printer)
+            return
 
         config = self.apiclient.send_request("printer/objects/query?configfile")
         if config is False:
             self.printer_initializing("Error getting printer configuration")
-            return False
+            GLib.timeout_add_seconds(3, self.init_printer)
+            return
 
         # Reinitialize printer, in case the printer was shut down and anything has changed.
         self.printer.reinit(printer_info['result'], config['result']['status'])
@@ -884,7 +883,8 @@ class KlipperScreen(Gtk.Window):
                                                                                extra_items))
         if data is False:
             self.printer_initializing("Error getting printer object data with extra items")
-            return False
+            GLib.timeout_add_seconds(3, self.init_printer)
+            return
 
         tempstore = self.apiclient.send_request("server/temperature_store")
         if tempstore is not False:
@@ -895,9 +895,7 @@ class KlipperScreen(Gtk.Window):
         self.files.refresh_files()
 
         logging.info("Printer initialized")
-        GLib.source_remove(self.init_printer_timeout)
         self.reinit_count = 0
-        return False
 
     def base_panel_show_all(self):
         self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
