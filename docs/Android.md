@@ -73,6 +73,15 @@ sudo service KlipperScreen stop
 sudo service KlipperScreen start
 ```
 
+## Stop Screen Blanking in Xserver-XSDL
+
+Even after enabling the "Stay Awake" option in the Developer/USB Debugging options of your Android device, the Xserver-XSDL may still go to a black screen but keep the backlight of your device on.  To keep the screen always active, upon start up of Xserver-XSDL app, select the `Change Device Configuration` at the top of the splash screen and then select the `Command line parameters, one argument per line` option. Append the following argument (must be on seperate lines):
+```
+-s
+0
+```
+This will disable the screen-saver in Xserver and keep KlipperScreen always active.
+
 ## Migration from other tutorials
 
 KlipperScreen says error option "service" is not supported anymore.
