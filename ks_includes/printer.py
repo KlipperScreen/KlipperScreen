@@ -6,67 +6,53 @@ from gi.repository import Gdk, GLib
 
 
 class Printer:
-    def __init__(self, printer_info, data, state_execute_cb):
-        self.klipper = {"version": printer_info['software_version']}
-        self.tempstore = None
+    def __init__(self, state_cb):
         self.config = None
+        self.data = None
         self.state = "disconnected"
-        self.state_cb = state_execute_cb
-        self.power_devices = {}
-        self.store_timeout = False
-        self.data = data
+        self.state_cb = state_cb
+        self.state_callbacks = None
         self.devices = {}
         self.power_devices = {}
-        self.state_callbacks = {
-            "disconnected": None,
-            "error": None,
-            "paused": None,
-            "printing": None,
-            "ready": None,
-            "startup": None,
-            "shutdown": None
-        }
         self.tools = []
         self.extrudercount = 0
         self.tempdevcount = 0
         self.fancount = 0
         self.output_pin_count = 0
+        self.store_timeout = None
+        self.tempstore = {}
 
     def reset(self):
-        GLib.source_remove(self.store_timeout)
-        self.store_timeout = None
+        self.config = None
+        self.data = None
         self.state = None
         self.state_cb = None
-        self.data = None
+        self.state_callbacks = None
         self.devices = None
         self.power_devices = None
-        self.state_callbacks = None
         self.tools = None
         self.extrudercount = None
         self.tempdevcount = None
         self.fancount = None
-        self.config = None
-        self.klipper = None
-        self.tempstore = None
         self.output_pin_count = None
+        self.store_timeout = None
+        self.tempstore = None
+        if self.store_timeout is not None:
+            GLib.source_remove(self.store_timeout)
+            self.store_timeout = None
 
     def reinit(self, printer_info, data):
         self.config = data['configfile']['config']
+        self.data = data
+        self.devices = {}
+        self.tools = []
         self.extrudercount = 0
         self.tempdevcount = 0
         self.fancount = 0
         self.output_pin_count = 0
-        self.tools = []
-        self.devices = {}
-        self.data = data
-        self.klipper = {}
         self.tempstore = {}
         if not self.store_timeout:
             self.store_timeout = GLib.timeout_add_seconds(1, self._update_temp_store)
-
-        self.klipper = {
-            "version": printer_info['software_version']
-        }
 
         for x in self.config.keys():
             if x[:8] == "extruder":
@@ -99,10 +85,8 @@ class Printer:
                 name = x.split()[1] if len(x.split()) > 1 else x
                 if not name.startswith("_"):
                     self.fancount += 1
-            if x.startswith('output_pin '):
-                # Support for hiding devices by name
-                if not x.split()[1].startswith("_"):
-                    self.output_pin_count += 1
+            if x.startswith('output_pin ') and not x.split()[1].startswith("_"):
+                self.output_pin_count += 1
             if x.startswith('bed_mesh '):
                 r = self.config[x]
                 r['x_count'] = int(r['x_count'])
@@ -114,7 +98,7 @@ class Printer:
                 r['points'] = [[float(j.strip()) for j in i.split(",")] for i in r['points'].strip().split("\n")]
         self.process_update(data)
 
-        logging.info(f"Klipper version: {self.klipper['version']}")
+        logging.info(f"Klipper version: {printer_info['software_version']}")
         logging.info(f"# Extruders: {self.extrudercount}")
         logging.info(f"# Temperature devices: {self.tempdevcount}")
         logging.info(f"# Fans: {self.fancount}")
@@ -138,12 +122,12 @@ class Printer:
 
     def evaluate_state(self):
         # webhooks states: startup, ready, shutdown, error
-        if self.data['webhooks']['state'] == "ready":
-            if self.data['print_stats']:  # standby, printing, paused, error, complete
-                if self.data['print_stats']['state'] == 'paused' or self.data.get('pause_resume').get('is_paused'):
-                    return "paused"
-                if self.data['print_stats']['state'] == 'printing':
-                    return "printing"
+        # print_stats: standby, printing, paused, error, complete
+        if self.data['webhooks']['state'] == "ready" and self.data['print_stats']:
+            if self.data['print_stats']['state'] == 'paused' or self.data.get('pause_resume').get('is_paused'):
+                return "paused"
+            if self.data['print_stats']['state'] == 'printing':
+                return "printing"
         return self.data['webhooks']['state']
 
     def process_status_update(self):
@@ -246,9 +230,6 @@ class Printer:
 
         return data
 
-    def get_klipper_version(self):
-        return self.klipper['version']
-
     def get_power_devices(self):
         return list(self.power_devices)
 
@@ -263,9 +244,6 @@ class Printer:
         if substat is not None:
             return self.data[stat][substat] if substat in self.data[stat] else {}
         return self.data[stat]
-
-    def get_state(self):
-        return self.state
 
     def set_dev_temps(self, dev, temp, target=None, power=None):
         if dev in self.devices:
@@ -305,9 +283,6 @@ class Printer:
         elif pin in self.config and 'value' in self.config[pin]:
             return self.config[pin]["value"]
         return 0
-
-    def get_extruder_count(self):
-        return self.extrudercount
 
     def get_temp_store_devices(self):
         if self.tempstore is not None:
@@ -355,11 +330,6 @@ class Printer:
 
     def config_section_exists(self, section):
         return section in self.get_config_section_list()
-
-    def set_callbacks(self, callbacks):
-        for name, cb in callbacks.items():
-            if name in list(self.state_callbacks):
-                self.state_callbacks[name] = cb
 
     def set_dev_stat(self, dev, stat, value):
         if dev not in self.devices:

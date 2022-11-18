@@ -34,7 +34,7 @@ class TemperaturePanel(ScreenPanel):
         self.grid.attach(self.create_left_panel(), 0, 0, 1, 1)
 
         # When printing start in temp_delta mode and only select tools
-        state = self._printer.get_state()
+        state = self._printer.state
         logging.info(state)
         selection = []
         if state not in ["printing", "paused"]:

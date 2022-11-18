@@ -160,18 +160,8 @@ class KlipperScreen(Gtk.Window):
         }
 
         self.connecting_to_printer = name
-
-        # Cleanup
-        if self.files is not None:
-            self.files.reset()
-            self.files = None
-        if self.printer is not None:
-            self.printer.reset()
-            self.printer = None
-
         for printer in self._config.get_printers():
             pname = list(printer)[0]
-
             if pname != name:
                 continue
             data = printer[pname]
@@ -183,26 +173,15 @@ class KlipperScreen(Gtk.Window):
 
         logging.info(f"Connecting to printer: {name}")
         self.apiclient = KlippyRest(data["moonraker_host"], data["moonraker_port"], data["moonraker_api_key"])
-
-        self.printer = Printer({
-            "software_version": "Unknown"
-        }, {
-            'configfile': {
-                'config': {}
-            },
-            'print_stats': {
-                'state': 'disconnected'
-            },
-            'virtual_sdcard': {
-                'is_active': False
-            }
-        }, self.state_execute)
-
-        self._remove_all_panels()
-        self.base_panel.show_printer_select(True)
-        self.printer_initializing(_("Connecting to %s") % name)
-
-        self.printer.set_callbacks({
+        # Cleanup
+        if self.files is not None:
+            self.files.reset()
+            self.files = None
+        if self.printer is not None:
+            self.printer.reset()
+            self.printer = None
+        self.printer = Printer(self.state_execute)
+        self.printer.state_callbacks = {
             "disconnected": self.state_disconnected,
             "error": self.state_error,
             "paused": self.state_paused,
@@ -210,7 +189,10 @@ class KlipperScreen(Gtk.Window):
             "ready": self.state_ready,
             "startup": self.state_startup,
             "shutdown": self.state_shutdown
-        })
+        }
+        self._remove_all_panels()
+        self.base_panel.show_printer_select(True)
+        self.printer_initializing(_("Connecting to %s") % name)
 
         self._ws = KlippyWebsocket(self,
                                    {
@@ -225,7 +207,6 @@ class KlipperScreen(Gtk.Window):
         self.files = KlippyFiles(self)
         self._ws.initial_connect()
         self.connecting = False
-
         self.connected_printer = name
         self.base_panel.set_ks_printer_cfg(name)
         logging.debug(f"Connected to printer: {name}")
@@ -487,9 +468,6 @@ class KlipperScreen(Gtk.Window):
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
 
-    def is_printing(self):
-        return self.printer.get_state() == "printing"
-
     def is_updating(self):
         return self.updating
 
@@ -748,9 +726,8 @@ class KlipperScreen(Gtk.Window):
         self.printer.change_state(self.printer.state)
 
     def _websocket_callback(self, action, data):
-        if self.connecting is True:
+        if self.connecting:
             return
-
         if action == "notify_klippy_disconnected":
             self.printer.change_state("disconnected")
             return
@@ -758,7 +735,7 @@ class KlipperScreen(Gtk.Window):
             self.printer.change_state("shutdown")
         elif action == "notify_klippy_ready":
             self.printer.change_state("ready")
-        elif action == "notify_status_update" and self.printer.get_state() != "shutdown":
+        elif action == "notify_status_update" and self.printer.state != "shutdown":
             self.printer.process_update(data)
         elif action == "notify_filelist_changed":
             if self.files is not None:
@@ -771,13 +748,13 @@ class KlipperScreen(Gtk.Window):
             logging.debug("Power status changed: %s", data)
             self.printer.process_power_update(data)
             self.panels['splash_screen'].check_power_status()
-        elif self.printer.get_state() not in ["error", "shutdown"] and action == "notify_gcode_response":
+        elif action == "notify_gcode_response" and self.printer.state not in ["error", "shutdown"]:
             if not (data.startswith("B:") or data.startswith("T:")):
                 if data.startswith("echo: "):
                     self.show_popup_message(data[6:], 1)
                 elif data.startswith("!! "):
                     self.show_popup_message(data[3:], 3)
-                if "SAVE_CONFIG" in data and self.printer.get_state() == "ready":
+                if "SAVE_CONFIG" in data and self.printer.state == "ready":
                     script = {"script": "SAVE_CONFIG"}
                     self._confirm_send_action(
                         None,
