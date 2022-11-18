@@ -11,7 +11,7 @@ from queue import Queue
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import GLib, Gdk
+from gi.repository import GLib
 
 
 class WifiManager:
@@ -103,10 +103,7 @@ class WifiManager:
     def callback(self, cb_type, msg):
         if cb_type in self._callbacks:
             for cb in self._callbacks[cb_type]:
-                Gdk.threads_add_idle(
-                    GLib.PRIORITY_DEFAULT_IDLE,
-                    cb,
-                    msg)
+                GLib.idle_add(cb, msg)
 
     def connect(self, ssid):
         netid = None
@@ -164,9 +161,8 @@ class WifiManager:
                 self.networks[ssid]['connected'] = ssid == con_ssid
             if prev_ssid != self.connected_ssid:
                 for cb in self._callbacks['connected']:
-                    Gdk.threads_add_idle(
-                        GLib.PRIORITY_DEFAULT_IDLE,
-                        cb, self.connected_ssid, prev_ssid)
+                    args = self.connected_ssid, prev_ssid
+                    GLib.idle_add(cb, *args)
             return [con_ssid, con_bssid]
         elif "ssid" in variables and "bssid" in variables:
             self.connected = True
@@ -175,9 +171,8 @@ class WifiManager:
                 self.networks[ssid]['connected'] = ssid == variables['ssid']
             if prev_ssid != self.connected_ssid:
                 for cb in self._callbacks['connected']:
-                    Gdk.threads_add_idle(
-                        GLib.PRIORITY_DEFAULT_IDLE,
-                        cb, self.connected_ssid, prev_ssid)
+                    args = self.connected_ssid, prev_ssid
+                    GLib.idle_add(cb, *args)
             return [variables['ssid'], variables['bssid']]
         else:
             logging.info("Resetting connected_ssid")
@@ -187,9 +182,8 @@ class WifiManager:
                 self.networks[ssid]['connected'] = False
             if prev_ssid != self.connected_ssid:
                 for cb in self._callbacks['connected']:
-                    Gdk.threads_add_idle(
-                        GLib.PRIORITY_DEFAULT_IDLE,
-                        cb, self.connected_ssid, prev_ssid)
+                    args = self.connected_ssid, prev_ssid
+                    GLib.idle_add(cb, *args)
             return None
 
     def get_current_wifi_idle_add(self):
@@ -289,9 +283,8 @@ class WifiManager:
                 new_networks.append(net)
         if new_networks or deleted_networks:
             for cb in self._callbacks['scan_results']:
-                Gdk.threads_add_idle(
-                    GLib.PRIORITY_DEFAULT_IDLE,
-                    cb, new_networks, deleted_networks)
+                args = new_networks, deleted_networks
+                GLib.idle_add(cb, *args)
 
     def wpa_cli(self, command, wait=True):
         if wait is False:
@@ -326,7 +319,7 @@ class WpaSocket(Thread):
                 continue
             if msg.startswith("<"):
                 if "CTRL-EVENT-SCAN-RESULTS" in msg:
-                    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.wm.scan_results)
+                    GLib.idle_add(self.wm.scan_results)
                 elif "CTRL-EVENT-DISCONNECTED" in msg:
                     self.callback("connecting_status", msg)
                     match = re.match('<3>CTRL-EVENT-DISCONNECTED bssid=(\\S+) reason=3 locally_generated=1', msg)
@@ -338,7 +331,7 @@ class WpaSocket(Thread):
                 elif "Trying to associate" in msg or "CTRL-EVENT-REGDOM-CHANGE" in msg:
                     self.callback("connecting_status", msg)
                 elif "CTRL-EVENT-CONNECTED" in msg:
-                    Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, self.wm.get_current_wifi_idle_add)
+                    GLib.idle_add(self.wm.get_current_wifi_idle_add)
                     self.callback("connecting_status", msg)
             elif self.skip_commands > 0:
                 self.skip_commands = self.skip_commands - 1

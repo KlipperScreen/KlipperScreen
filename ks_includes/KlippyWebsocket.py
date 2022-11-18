@@ -8,7 +8,7 @@ import websocket
 import logging
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import GLib, Gdk
+from gi.repository import GLib
 from ks_includes.KlippyGcodes import KlippyGcodes
 
 api_key = ""
@@ -126,24 +126,17 @@ class KlippyWebsocket(threading.Thread):
     def on_message(self, ws, message):
         response = json.loads(message)
         if "id" in response and response['id'] in self.callback_table:
-            Gdk.threads_add_idle(
-                GLib.PRIORITY_HIGH_IDLE,
-                self.callback_table[response['id']][0],
-                response,
-                self.callback_table[response['id']][1],
-                self.callback_table[response['id']][2],
-                *self.callback_table[response['id']][3]
-            )
+            args = (response,
+                    self.callback_table[response['id']][1],
+                    self.callback_table[response['id']][2],
+                    *self.callback_table[response['id']][3])
+            GLib.idle_add(self.callback_table[response['id']][0], *args)
             self.callback_table.pop(response['id'])
             return
 
         if "method" in response and "on_message" in self._callback:
-            Gdk.threads_add_idle(
-                GLib.PRIORITY_HIGH_IDLE,
-                self._callback['on_message'],
-                response['method'],
-                response['params'][0] if "params" in response else {}
-            )
+            args = response['method'], response['params'][0] if "params" in response else {}
+            GLib.idle_add(self._callback['on_message'], *args)
         return
 
     def send_method(self, method, params=None, callback=None, *args):
@@ -171,10 +164,7 @@ class KlippyWebsocket(threading.Thread):
         self.connected = True
         self.reconnect_count = 0
         if "on_connect" in self._callback:
-            Gdk.threads_add_idle(
-                GLib.PRIORITY_HIGH_IDLE,
-                self._callback['on_connect']
-            )
+            GLib.idle_add(self._callback['on_connect'])
 
     def on_close(self, ws):
         if self.is_connected() is False:
@@ -192,11 +182,7 @@ class KlippyWebsocket(threading.Thread):
         self.connected = False
 
         if "on_close" in self._callback:
-            Gdk.threads_add_idle(
-                GLib.PRIORITY_HIGH_IDLE,
-                self._callback['on_close'],
-                "Lost Connection to Moonraker",
-            )
+            GLib.idle_add(self._callback['on_close'], "Lost Connection to Moonraker")
         self.retry()
 
     def reconnect(self):
