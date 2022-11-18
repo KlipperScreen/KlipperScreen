@@ -16,7 +16,6 @@ class KlippyFiles:
         self.gcodes_path = None
 
     def initialize(self):
-        self.gcodes_path = None
         if "virtual_sdcard" in self._screen.printer.get_config_section_list():
             vsd = self._screen.printer.get_config_section("virtual_sdcard")
             if "path" in vsd:
@@ -24,7 +23,11 @@ class KlippyFiles:
         logging.info(f"Gcodes path: {self.gcodes_path}")
 
     def reset(self):
-        self.__init__(self._screen)
+        self._screen = None
+        self.callbacks = None
+        self.files = None
+        self.filelist = None
+        self.gcodes_path = None
 
     def _callback(self, result, method, params):
         if method == "server.files.list":
