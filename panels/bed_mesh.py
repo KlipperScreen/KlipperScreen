@@ -251,10 +251,6 @@ class BedMeshPanel(ScreenPanel):
     def _show_keyboard(self, widget=None, event=None):
         self._screen.show_keyboard(entry=self.labels['profile_name'])
 
-    @staticmethod
-    def _close_dialog(widget, response):
-        widget.destroy()
-
     def create_profile(self, widget):
         name = self.labels['profile_name'].get_text()
         if self.active_mesh is None:

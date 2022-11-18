@@ -76,10 +76,6 @@ class ScreenPanel:
     def show_all(self):
         self._screen.show_all()
 
-    def update_image_text(self, label, text):
-        if label in self.labels and 'l' in self.labels[label]:
-            self.labels[label]['l'].set_text(text)
-
     def load_menu(self, widget, name):
         if f"{name}_menu" not in self.labels:
             return

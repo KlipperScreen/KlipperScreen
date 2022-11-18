@@ -226,23 +226,6 @@ class KlippyGtk:
         logging.info("Removing Dialog")
         self.screen.dialogs.remove(dialog)
 
-    def ToggleButtonImage(self, image_name, label, style=None, width=None, height=None):
-
-        b = Gtk.ToggleButton(label=label)
-        b.set_hexpand(True)
-        b.set_vexpand(True)
-        b.set_can_focus(False)
-        b.set_image(self.Image(image_name, width, height))
-        b.set_image_position(Gtk.PositionType.TOP)
-        b.set_always_show_image(True)
-
-        if style is not None:
-            ctx = b.get_style_context()
-            ctx.add_class(style)
-
-        b.connect("clicked", self.screen.reset_screensaver_timeout)
-        return b
-
     @staticmethod
     def HomogeneousGrid(width=None, height=None):
         g = Gtk.Grid()

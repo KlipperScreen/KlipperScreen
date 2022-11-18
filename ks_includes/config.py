@@ -443,9 +443,6 @@ class KlipperScreenConfig:
 
         return None if name not in self.config else self.config[name]
 
-    def get_printer_power_name(self):
-        return self.config['settings'].get("printer_power_name", "printer")
-
     def get_printers(self):
         return self.printers
 

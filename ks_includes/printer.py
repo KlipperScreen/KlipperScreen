@@ -171,9 +171,6 @@ class Printer:
     def get_config_section(self, section):
         return self.config[section] if section in self.config else False
 
-    def get_data(self):
-        return self.data
-
     def get_fans(self):
         fans = []
         if self.config_section_exists("fan"):
@@ -244,17 +241,6 @@ class Printer:
         if substat is not None:
             return self.data[stat][substat] if substat in self.data[stat] else {}
         return self.data[stat]
-
-    def set_dev_temps(self, dev, temp, target=None, power=None):
-        if dev in self.devices:
-            self.devices[dev]['temperature'] = temp
-            if target is not None:
-                self.devices[dev]['target'] = target
-            if power is not None:
-                self.devices[dev]['power'] = power
-
-    def get_dev_stats(self, dev):
-        return self.devices[dev] if dev in self.devices else None
 
     def get_dev_stat(self, dev, stat):
         if dev in self.devices and stat in self.devices[dev]:

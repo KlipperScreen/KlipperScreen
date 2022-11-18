@@ -882,10 +882,6 @@ class JobStatusPanel(ScreenPanel):
             logging.debug("Cannot find file metadata. Listening for updated metadata")
             self._screen.files.add_file_callback(self._callback_metadata)
 
-    def update_image_text(self, label, text):
-        if label in self.labels and 'l' in self.labels[label]:
-            self.labels[label]['l'].set_text(text)
-
     def update_percent_complete(self):
         if self.state not in ["printing", "paused"]:
             return

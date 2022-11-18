@@ -175,10 +175,6 @@ class KlippyFiles:
         if notify is True:
             self.run_callbacks(deletedfiles=[filename])
 
-    def ret_file_data(self, filename):
-        logging.info(f"Getting file info for {filename}")
-        self._screen._ws.klippy.get_file_metadata(filename, self._callback)
-
     def run_callbacks(self, newfiles=None, deletedfiles=None, mods=None):
         if mods is None:
             mods = []

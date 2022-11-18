@@ -32,7 +32,6 @@ class SystemPanel(ScreenPanel):
         self.refresh = None
         self.update_status = None
         self.update_dialog = None
-        self.update_prog = None
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
 
@@ -275,7 +274,6 @@ class SystemPanel(ScreenPanel):
         dialog.set_response_sensitive(Gtk.ResponseType.CANCEL, False)
         dialog.get_widget_for_response(Gtk.ResponseType.CANCEL).hide()
 
-        self.update_prog = program
         self.update_dialog = dialog
 
         logging.info(f"Sending machine.update.recover name: {program}")
@@ -321,7 +319,6 @@ class SystemPanel(ScreenPanel):
         dialog.set_response_sensitive(Gtk.ResponseType.CANCEL, False)
         dialog.get_widget_for_response(Gtk.ResponseType.CANCEL).hide()
 
-        self.update_prog = program
         self.update_dialog = dialog
 
         if program in ['klipper', 'moonraker', 'system', 'full']:

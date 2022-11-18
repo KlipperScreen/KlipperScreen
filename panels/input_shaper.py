@@ -34,7 +34,6 @@ class InputShaperPanel(ScreenPanel):
         self.status.set_halign(Gtk.Align.START)
         self.status.set_ellipsize(Pango.EllipsizeMode.END)
         self.calibrating_axis = None
-        self.has_sensor = False
         self.calibrating_axis = None
 
         auto_calibration_label = Gtk.Label()
@@ -176,7 +175,6 @@ class InputShaperPanel(ScreenPanel):
             self.calibrate_btn.set_label(_('ADXL Not Configured'))
             self.calibrate_btn.set_sensitive(False)
         if 'adxl345 values' in data or 'axes noise' in data:
-            self.has_sensor = True
             self.calibrate_btn.set_sensitive(True)
             self.calibrate_btn.set_label(_('Auto-calibrate'))
         # Recommended shaper_type_y = ei, shaper_freq_y = 48.4 Hz
