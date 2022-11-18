@@ -12,7 +12,7 @@ class KlippyRest:
     @property
     def endpoint(self):
         protocol = "http"
-        if int(self.port) == 443:
+        if int(self.port) in {443, 7130}:
             protocol = "https"
         return f"{protocol}://{self.ip}:{self.port}"
 
