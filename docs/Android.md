@@ -28,7 +28,7 @@ search "how to enable android debugging on device-model-and-brand"
 
 ```bash
 cd ~/KlipperScreen/scripts
-cp android-adb.sh launch_KlipperScreen.sh
+cp sample-android-adb.sh launch_KlipperScreen.sh
 chmod +x launch_KlipperScreen.sh
 ```
 
