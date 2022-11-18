@@ -68,17 +68,12 @@ def set_text_direction(lang=None):
 class KlipperScreen(Gtk.Window):
     """ Class for creating a screen for Klipper via HDMI """
     _cur_panels = []
-    bed_temp_label = None
     connecting = False
     connecting_to_printer = None
     connected_printer = None
-    currentPanel = None
     files = None
-    filename = ""
     keyboard = None
-    last_update = {}
     load_panel = {}
-    number_tools = 1
     panels = {}
     popup_message = None
     screensaver = None
@@ -413,7 +408,6 @@ class KlipperScreen(Gtk.Window):
         self.reload_panels()
 
     def restart_warning(self, value):
-
         logging.debug(f"Showing restart warning because: {value}")
 
         buttons = [
@@ -736,8 +730,7 @@ class KlipperScreen(Gtk.Window):
     def state_shutdown(self):
         self.close_screensaver()
         msg = self.printer.get_stat("webhooks", "state_message")
-        if "ready" in msg:
-            msg = ""
+        msg = msg if "ready" not in msg else ""
         self.printer_initializing("<b>" + _("Klipper has shutdown") +
                                   "</b>" + "\n\n" + msg)
 
@@ -755,7 +748,6 @@ class KlipperScreen(Gtk.Window):
         self.printer.change_state(self.printer.state)
 
     def _websocket_callback(self, action, data):
-
         if self.connecting is True:
             return
 
@@ -798,9 +790,6 @@ class KlipperScreen(Gtk.Window):
             self.panels[self._cur_panels[-1]].process_update(action, data)
 
     def _confirm_send_action(self, widget, text, method, params=None):
-
-        if params is None:
-            params = {}
         buttons = [
             {"name": _("Continue"), "response": Gtk.ResponseType.OK},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
@@ -862,7 +851,6 @@ class KlipperScreen(Gtk.Window):
             return None
 
     def power_on(self, widget, devices):
-
         for device in devices:
             if self.printer.get_power_device_status(device) == "off":
                 self.show_popup_message(_("Sending Power ON signal to: %s") % devices, level=1)
@@ -872,7 +860,6 @@ class KlipperScreen(Gtk.Window):
                 logging.info("%s is ON", device)
 
     def init_printer(self):
-
         state = self.apiclient.get_server_info()
         if state is False:
             logging.info("Moonraker not connected")
