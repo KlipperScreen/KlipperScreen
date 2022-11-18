@@ -72,7 +72,7 @@ class SplashScreenPanel(ScreenPanel):
 
         self.clear_action_bar()
         printer = self._screen.connected_printer
-        if printer is not None and self._screen._ws.is_connected():
+        if printer is not None and self._screen._ws.connected:
             printer_cfg = self._config.get_printer_config(printer)
             if printer_cfg is not None:
                 power_devices = printer_cfg.get("power_devices", "")
@@ -81,14 +81,14 @@ class SplashScreenPanel(ScreenPanel):
                     logging.info(f"Associated power devices: {power_devices}")
                     self.add_power_button(self._screen.search_power_devices(power_devices))
 
-        if self._screen._ws and self._screen._ws.is_connected():
+        if self._screen._ws and self._screen._ws.connected:
             self.labels['actions'].add(self.labels['restart'])
             self.labels['actions'].add(self.labels['firmware_restart'])
         else:
             self.labels['actions'].add(self.labels['restart_system'])
             self.labels['actions'].add(self.labels['shutdown'])
         self.labels['actions'].add(self.labels['menu'])
-        if self._screen._ws and self._screen._ws.is_connecting():
+        if self._screen._ws and not self._screen._ws.connecting:
             self.labels['actions'].add(self.labels['retry'])
         self.labels['actions'].show_all()
 
@@ -123,8 +123,7 @@ class SplashScreenPanel(ScreenPanel):
         self._screen._ws.klippy.restart()
 
     def shutdown(self, widget):
-
-        if self._screen._ws.is_connected():
+        if self._screen._ws.connected:
             self._screen._confirm_send_action(widget,
                                               _("Are you sure you wish to shutdown the system?"),
                                               "machine.shutdown")
@@ -134,7 +133,7 @@ class SplashScreenPanel(ScreenPanel):
 
     def restart_system(self, widget):
 
-        if self._screen._ws.is_connected():
+        if self._screen._ws.connected:
             self._screen._confirm_send_action(widget,
                                               _("Are you sure you wish to reboot the system?"),
                                               "machine.reboot")

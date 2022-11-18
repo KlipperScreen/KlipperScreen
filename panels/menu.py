@@ -32,7 +32,7 @@ class MenuPanel(ScreenPanel):
     def activate(self):
         self.j2_data = self._printer.get_printer_status_data()
         self.j2_data.update({
-            'moonraker_connected': self._screen._ws.is_connected()
+            'moonraker_connected': self._screen._ws.connected
         })
         if self._screen.vertical_mode:
             self.arrangeMenuItems(self.items, 3)
@@ -96,8 +96,8 @@ class MenuPanel(ScreenPanel):
 
     def evaluate_enable(self, enable):
         if enable == "{{ moonraker_connected }}":
-            logging.info("moonraker is_connected %s", self._screen._ws.is_connected())
-            return self._screen._ws.is_connected()
+            logging.info(f"moonraker connected {self._screen._ws.connected}")
+            return self._screen._ws.connected
 
         self.j2_data = self._printer.get_printer_status_data()
         try:

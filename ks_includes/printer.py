@@ -37,9 +37,6 @@ class Printer:
         self.output_pin_count = None
         self.store_timeout = None
         self.tempstore = None
-        if self.store_timeout is not None:
-            GLib.source_remove(self.store_timeout)
-            self.store_timeout = None
 
     def reinit(self, printer_info, data):
         self.config = data['configfile']['config']
@@ -87,15 +84,6 @@ class Printer:
                     self.fancount += 1
             if x.startswith('output_pin ') and not x.split()[1].startswith("_"):
                 self.output_pin_count += 1
-            if x.startswith('bed_mesh '):
-                r = self.config[x]
-                r['x_count'] = int(r['x_count'])
-                r['y_count'] = int(r['y_count'])
-                r['max_x'] = float(r['max_x'])
-                r['min_x'] = float(r['min_x'])
-                r['max_y'] = float(r['max_y'])
-                r['min_y'] = float(r['min_y'])
-                r['points'] = [[float(j.strip()) for j in i.split(",")] for i in r['points'].strip().split("\n")]
         self.process_update(data)
 
         logging.info(f"Klipper version: {printer_info['software_version']}")
@@ -320,6 +308,8 @@ class Printer:
         self.devices[dev][stat] = value
 
     def _update_temp_store(self):
+        if self.tempstore is None:
+            return False
         for device in self.tempstore:
             for x in self.tempstore[device]:
                 if len(self.tempstore[device][x]) >= 1200:

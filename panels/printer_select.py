@@ -47,4 +47,5 @@ class PrinterSelect(ScreenPanel):
 
     def activate(self):
         self._screen.base_panel.action_bar.hide()
+        self._screen._ws.connecting = False
         GLib.timeout_add(100, self._screen.base_panel.action_bar.hide)
