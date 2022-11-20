@@ -797,6 +797,8 @@ class JobStatusPanel(ScreenPanel):
             self.buttons['button_grid'].attach(self.buttons['control'], 3, 0, 1, 1)
             self.enable_button("resume", "cancel")
         else:
+            offset = self._screen.printer.get_stat("gcode_move", "homing_origin")
+            self.zoffset = float(offset[2]) if offset else 0
             if self.zoffset != 0:
                 endstop = (self._screen.printer.config_section_exists("stepper_z") and
                            not self._screen.printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"))
