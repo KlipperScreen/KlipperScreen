@@ -241,7 +241,9 @@ class KlipperScreenConfig:
                 "value": "medium", "callback": screen.restart_warning, "options": [
                     {"name": _("Small"), "value": "small"},
                     {"name": _("Medium") + " " + _("(default)"), "value": "medium"},
-                    {"name": _("Large"), "value": "large"}]}},
+                    {"name": _("Large"), "value": "large"},
+                    {"name": _("Extra Large"), "value": "extralarge"},
+                    {"name": _("Maximum"), "value": "max"}]}},
             {"confirm_estop": {"section": "main", "name": _("Confirm Emergency Stop"), "type": "binary",
                                "value": "False"}},
             {"only_heaters": {"section": "main", "name": _("Hide sensors in Temp."), "type": "binary",
@@ -486,7 +488,7 @@ class KlipperScreenConfig:
                     f"{self.do_not_edit_line}\n"
                     f"{self.do_not_edit_prefix}\n"
                     + '\n'.join(save_output) + f"\n"
-                    f"{self.do_not_edit_prefix}\n")
+                                               f"{self.do_not_edit_prefix}\n")
 
         if self.config_path != self.default_config_path:
             filepath = self.config_path

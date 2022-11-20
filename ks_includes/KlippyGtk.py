@@ -18,36 +18,39 @@ class KlippyGtk:
         self.width = width
         self.height = height
         self.themedir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles", theme, "images")
+        self.cursor = cursor
+        self.font_size_type = fontsize_type
 
         self.font_ratio = [33, 49] if self.screen.vertical_mode else [43, 29]
-        self.font_size = int(min(
-            self.width / self.font_ratio[0],
-            self.height / self.font_ratio[1]
-        ))
-        if fontsize_type == "small":
-            self.font_size = round(self.font_size * 0.91)
+        self.font_size = min(self.width / self.font_ratio[0], self.height / self.font_ratio[1])
+        self.img_scale = self.font_size * 2
+        if fontsize_type == "max":
+            self.font_size = self.font_size * 1.2
+        elif fontsize_type == "extralarge":
+            self.font_size = self.font_size * 1.14
+            self.img_scale = self.img_scale * 0.6
         elif fontsize_type == "large":
-            self.font_size = round(self.font_size * 1.09)
-        self.titlebar_height = self.font_size * 2
-        self.img_scale = self.font_size * 2.5
+            self.font_size = self.font_size * 1.09
+            self.img_scale = self.img_scale * 0.9
+        elif fontsize_type == "small":
+            self.font_size = self.font_size * 0.91
         self.img_width = self.font_size * 3
         self.img_height = self.font_size * 3
+        self.titlebar_height = self.font_size * 2
+        logging.info(f"Font size: {self.font_size} ({fontsize_type})")
+
         if self.screen.vertical_mode:
             self.action_bar_width = int(self.width)
             self.action_bar_height = int(self.height * .1)
         else:
             self.action_bar_width = int(self.width * .1)
             self.action_bar_height = int(self.height)
-        self.cursor = cursor
 
         self.color_list = {}  # This is set by screen.py init_style()
-
         for key in self.color_list:
             if "base" in self.color_list[key]:
                 rgb = [int(self.color_list[key]['base'][i:i + 2], 16) for i in range(0, 6, 2)]
                 self.color_list[key]['rgb'] = rgb
-
-        logging.debug(f"img width: {self.img_width} height: {self.img_height}")
 
     def get_action_bar_width(self):
         return self.action_bar_width
@@ -150,6 +153,8 @@ class KlippyGtk:
         return b
 
     def ButtonImage(self, image_name=None, label=None, style=None, scale=1.38, position=Gtk.PositionType.TOP, lines=2):
+        if self.font_size_type == "max" and label is not None and scale == 1.38:
+            image_name = None
         b = Gtk.Button()
         if label is not None:
             b.set_label(label.replace("\n", " "))

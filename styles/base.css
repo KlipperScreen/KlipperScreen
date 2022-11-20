@@ -372,7 +372,7 @@ trough {
 }
 
 .printing-filename {
-    font-size: 1.75em;
+    font-size: 1.4em;
     font-weight: bold;
     margin: .25em .25em 0 0;
 }
@@ -381,7 +381,7 @@ trough {
     margin-right: .25em;
 }
 .printing-info button {
-    margin: .15em;
+    margin: .1em;
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: .5em;
 }
