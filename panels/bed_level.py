@@ -41,10 +41,13 @@ class BedLevelPanel(ScreenPanel):
             self.screws = self._get_screws("screws_tilt_adjust")
             logging.info(f"screws_tilt_adjust: {self.screws}")
 
-            if "bltouch" in self._screen.printer.get_config_section_list():
-                self._get_offsets("bltouch")
-            elif "probe" in self._screen.printer.get_config_section_list():
-                self._get_offsets("probe")
+            probe = self._screen.printer.get_probe()
+            if probe:
+                if "x_offset" in probe:
+                    self.x_offset = round(float(probe['x_offset']), 1)
+                if "y_offset" in probe:
+                    self.y_offset = round(float(probe['y_offset']), 1)
+                logging.debug(f"offset X: {self.x_offset} Y: {self.y_offset}")
             # bed_screws uses NOZZLE positions
             # screws_tilt_adjust uses PROBE positions and to be offseted for the buttons to work equal to bed_screws
             new_screws = [
@@ -336,14 +339,6 @@ class BedLevelPanel(ScreenPanel):
                     round(float(result[2]), 1)
                 ])
         return sorted(screws, key=lambda s: (float(s[1]), float(s[0])))
-
-    def _get_offsets(self, section):
-        probe = self._screen.printer.get_config_section(section)
-        if "x_offset" in probe:
-            self.x_offset = round(float(probe['x_offset']), 1)
-        if "y_offset" in probe:
-            self.y_offset = round(float(probe['y_offset']), 1)
-        logging.debug(f"{section} offset X: {self.x_offset} Y: {self.y_offset}")
 
     def screws_tilt_calculate(self, widget):
         if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":

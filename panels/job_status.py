@@ -401,20 +401,16 @@ class JobStatusPanel(ScreenPanel):
         self.buttons['save_offset_endstop'].connect("clicked", self.save_offset, "endstop")
 
     def save_offset(self, widget, device):
-        saved_z_offset = 0
-        if self._printer.config_section_exists("probe"):
-            saved_z_offset = float(self._screen.printer.get_config_section("probe")['z_offset'])
-        elif self._printer.config_section_exists("bltouch"):
-            saved_z_offset = float(self._screen.printer.get_config_section("bltouch")['z_offset'])
-
         sign = "+" if self.zoffset > 0 else "-"
         label = Gtk.Label()
         if device == "probe":
+            probe = self._printer.get_probe()
+            saved_z_offset = probe['z_offset'] if probe else "?"
             label.set_text(_("Apply %s%.2f offset to Probe?") % (sign, abs(self.zoffset))
                            + "\n\n"
                            + _("Saved offset: %s") % saved_z_offset)
         elif device == "endstop":
-            label.set_text(_("Apply %.2f offset to Endstop?") % self.zoffset)
+            label.set_text(_("Apply %.2f offset to Endstop?") % (sign, abs(self.zoffset)))
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
         label.set_vexpand(True)
@@ -808,7 +804,7 @@ class JobStatusPanel(ScreenPanel):
                     self.buttons['button_grid'].attach(self.buttons["save_offset_endstop"], 0, 0, 1, 1)
                 else:
                     self.buttons['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
-                if self._printer.config_section_exists("probe") or self._printer.config_section_exists("bltouch"):
+                if self._screen.printer.get_probe():
                     self.buttons['button_grid'].attach(self.buttons["save_offset_probe"], 1, 0, 1, 1)
                 else:
                     self.buttons['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)

@@ -18,16 +18,14 @@ class ZCalibratePanel(ScreenPanel):
     widgets = {}
     distances = ['.01', '.05', '.1', '.5', '1', '5']
     distance = distances[-2]
-    probe_types = ["probe", "bltouch", "smart_effector", "dockable_probe"]
 
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, False)
         self.z_offset = None
-        for probe_type in self.probe_types:
-            if self._printer.config_section_exists(probe_type):
-                self.z_offset = float(self._screen.printer.get_config_section(probe_type)['z_offset'])
-                logging.info(f"Using: {probe_type} Z offset: {self.z_offset}")
-                break
+        self.probe = self._screen.printer.get_probe()
+        if self.probe:
+            self.z_offset = float(self.probe['z_offset'])
+        logging.info(f"Z offset: {self.z_offset}")
         self.widgets['zposition'] = Gtk.Label("Z: ?")
 
         pos = self._gtk.HomogeneousGrid()
@@ -56,11 +54,9 @@ class ZCalibratePanel(ScreenPanel):
                 and not self._screen.printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"):
             self._add_button("Endstop", "endstop", pobox)
             functions.append("endstop")
-        for probe_type in self.probe_types:
-            if self._printer.config_section_exists(probe_type):
-                self._add_button("Probe", "probe", pobox)
-                functions.append("probe")
-                break
+        if self.probe:
+            self._add_button("Probe", "probe", pobox)
+            functions.append("probe")
         if self._printer.config_section_exists("bed_mesh") and "probe" not in functions:
             # This is used to do a manual bed mesh if there is no probe
             self._add_button("Bed mesh", "mesh", pobox)
@@ -165,14 +161,11 @@ class ZCalibratePanel(ScreenPanel):
             x_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_x_position", None)
             y_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_y_position", None)
 
-        klipper_cfg = self._screen.printer.get_config_section_list()
-        for probe_type in self.probe_types:
-            if probe_type in klipper_cfg:
-                probe = self._screen.printer.get_config_section(probe_type)
-                if "sample_retract_dist" in probe:
-                    z_hop = probe['sample_retract_dist']
-                if "speed" in probe:
-                    speed = probe['speed']
+        if self.probe:
+            if "sample_retract_dist" in self.probe:
+                z_hop = self.probe['sample_retract_dist']
+            if "speed" in self.probe:
+                speed = self.probe['speed']
 
         # Use safe_z_home position
         if "safe_z_home" in self._screen.printer.get_config_section_list():
@@ -201,9 +194,9 @@ class ZCalibratePanel(ScreenPanel):
             logging.info("Detected delta kinematics calibrating at 0,0")
             self._screen._ws.klippy.gcode_script('G0 X0 Y0 F3000')
         else:
-            self._calculate_position(klipper_cfg)
+            self._calculate_position()
 
-    def _calculate_position(self, klipper_cfg):
+    def _calculate_position(self):
         logging.debug("Position not configured, probing the middle of the bed")
         try:
             xmax = float(self._screen.printer.get_config_section("stepper_x")['position_max'])
@@ -217,14 +210,11 @@ class ZCalibratePanel(ScreenPanel):
 
         # Find probe offset
         x_offset = y_offset = None
-        for probe_type in self.probe_types:
-            if probe_type in klipper_cfg:
-                probe = self._screen.printer.get_config_section(probe_type)
-                if "x_offset" in probe:
-                    x_offset = float(probe['x_offset'])
-                if "y_offset" in probe:
-                    y_offset = float(probe['y_offset'])
-                break
+        if self.probe:
+            if "x_offset" in self.probe:
+                x_offset = float(self.probe['x_offset'])
+            if "y_offset" in self.probe:
+                y_offset = float(self.probe['y_offset'])
         logging.info(f"Offset X:{x_offset} Y:{y_offset}")
         if x_offset is not None:
             x_position = x_position - x_offset
@@ -264,7 +254,7 @@ class ZCalibratePanel(ScreenPanel):
     def update_position(self, position):
         self.widgets['zposition'].set_text(f"Z: {position[2]:.2f}")
         if self.z_offset is not None:
-            self.widgets['zoffset'].set_text(f"{-position[2] + self.z_offset:.2f}")
+            self.widgets['zoffset'].set_text(f"{position[2] - self.z_offset:.2f}")
 
     def change_distance(self, widget, distance):
         logging.info(f"### Distance {distance}")

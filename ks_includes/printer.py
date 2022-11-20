@@ -187,6 +187,14 @@ class Printer:
         sensors.extend(iter(self.get_config_section_list("filament_motion_sensor ")))
         return sensors
 
+    def get_probe(self):
+        probe_types = ["probe", "bltouch", "smart_effector", "dockable_probe"]
+        for probe_type in probe_types:
+            if self.config_section_exists(probe_type):
+                logging.info(f"Probe type: {probe_type}")
+                return self.get_config_section(probe_type)
+        return None
+
     def get_printer_status_data(self):
         data = {
             "printer": {
