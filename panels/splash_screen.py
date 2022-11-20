@@ -72,15 +72,12 @@ class SplashScreenPanel(ScreenPanel):
     def show_restart_buttons(self):
 
         self.clear_action_bar()
-        printer = self._screen.connected_printer
-        if printer is not None and self._screen._ws.connected:
-            printer_cfg = self._config.get_printer_config(printer)
-            if printer_cfg is not None:
-                power_devices = printer_cfg.get("power_devices", "")
-                power_devices = [str(i.strip()) for i in power_devices.split(',')]
-                if power_devices[0]:
-                    logging.info(f"Associated power devices: {power_devices}")
-                    self.add_power_button(self._screen.search_power_devices(power_devices))
+        if self.ks_printer_cfg is not None and self._screen._ws.connected:
+            power_devices = self.ks_printer_cfg.get("power_devices", "")
+            power_devices = [str(i.strip()) for i in power_devices.split(',')]
+            if power_devices[0]:
+                logging.info(f"Associated power devices: {power_devices}")
+                self.add_power_button(self._screen.search_power_devices(power_devices))
 
         if self._screen._ws and self._screen._ws.connected:
             self.labels['actions'].add(self.labels['restart'])

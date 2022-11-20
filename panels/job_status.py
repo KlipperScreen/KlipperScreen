@@ -188,9 +188,8 @@ class JobStatusPanel(ScreenPanel):
                 self.labels['temp_grid'].attach(self.heater_button[device], n, 0, 1, 1)
                 n += 1
         extra_item = not self._show_heater_power
-        printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
-        if printer_cfg is not None:
-            titlebar_items = printer_cfg.get("titlebar_items", "")
+        if self.ks_printer_cfg is not None:
+            titlebar_items = self.ks_printer_cfg.get("titlebar_items", "")
             if titlebar_items is not None:
                 titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
                 logging.info(f"Titlebar items: {titlebar_items}")

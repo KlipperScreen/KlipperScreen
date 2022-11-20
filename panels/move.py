@@ -199,8 +199,7 @@ class MovePanel(ScreenPanel):
 
         dist = f"{direction}{self.distance}"
         config_key = "move_speed_z" if axis == "Z" else "move_speed_xy"
-        printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
-        speed = None if printer_cfg is None else printer_cfg.getint(config_key, None)
+        speed = None if self.ks_printer_cfg is None else self.ks_printer_cfg.getint(config_key, None)
         if speed is None:
             speed = self._config.get_config()['main'].getint(config_key, 20)
         speed = 60 * max(1, speed)

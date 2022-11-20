@@ -24,9 +24,8 @@ class FineTunePanel(ScreenPanel):
 
     def __init__(self, screen, title, back=True):
         super().__init__(screen, title, back)
-        print_cfg = self._config.get_printer_config(self._screen.connected_printer)
-        if print_cfg is not None:
-            bs = print_cfg.get("z_babystep_values", "0.01, 0.05")
+        if self.ks_printer_cfg is not None:
+            bs = self.ks_printer_cfg.get("z_babystep_values", "0.01, 0.05")
             if re.match(r'^[0-9,\.\s]+$', bs):
                 bs = [str(i.strip()) for i in bs.split(',')]
                 if 1 < len(bs) < 3:

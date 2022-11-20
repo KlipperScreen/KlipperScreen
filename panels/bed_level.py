@@ -103,10 +103,8 @@ class BedLevelPanel(ScreenPanel):
         self.labels['bm'] = self._gtk.ButtonImage("bed-level-t-m", scale=2.5)
 
         valid_positions = True
-        printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
-        if printer_cfg is not None:
-            logging.info(f"printer {printer_cfg}")
-            screw_positions = printer_cfg.get("screw_positions", "")
+        if self.ks_printer_cfg is not None:
+            screw_positions = self.ks_printer_cfg.get("screw_positions", "")
             screw_positions = [str(i.strip()) for i in screw_positions.split(',')]
             logging.info(f"Positions: {screw_positions}")
             for screw in screw_positions:
@@ -116,7 +114,7 @@ class BedLevelPanel(ScreenPanel):
                     valid_positions = False
             if not (3 <= len(screw_positions) <= 8):
                 valid_positions = False
-            rotation = printer_cfg.getint("screw_rotation", 0)
+            rotation = self.ks_printer_cfg.getint("screw_rotation", 0)
             logging.info(f"Rotation: {rotation}")
         else:
             valid_positions = False

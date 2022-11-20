@@ -310,7 +310,7 @@ class BasePanel(ScreenPanel):
             self.buttons_showing['estop'] = False
 
     def set_ks_printer_cfg(self, printer):
-        self.ks_printer_cfg = self._config.get_printer_config(printer)
+        ScreenPanel.ks_printer_cfg = self._config.get_printer_config(printer)
         if self.ks_printer_cfg is not None:
             self.titlebar_name_type = self.ks_printer_cfg.get("titlebar_name_type", None)
             titlebar_items = self.ks_printer_cfg.get("titlebar_items", None)

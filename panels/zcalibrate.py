@@ -14,7 +14,6 @@ def create_panel(*args):
 
 
 class ZCalibratePanel(ScreenPanel):
-    _screen = None
     widgets = {}
     distances = ['.01', '.05', '.1', '.5', '1', '5']
     distance = distances[-2]
@@ -152,10 +151,9 @@ class ZCalibratePanel(ScreenPanel):
         x_position = y_position = None
         z_hop = speed = None
         # Get position from config
-        printer_cfg = self._config.get_printer_config(self._screen.connected_printer)
-        if printer_cfg is not None:
-            x_position = printer_cfg.getfloat("calibrate_x_position", None)
-            y_position = printer_cfg.getfloat("calibrate_y_position", None)
+        if self.ks_printer_cfg is not None:
+            x_position = self.ks_printer_cfg.getfloat("calibrate_x_position", None)
+            y_position = self.ks_printer_cfg.getfloat("calibrate_y_position", None)
         elif 'z_calibrate_position' in self._config.get_config():
             # OLD global way, this should be deprecated
             x_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_x_position", None)

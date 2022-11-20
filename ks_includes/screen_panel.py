@@ -7,29 +7,31 @@ from gi.repository import Gtk
 
 
 class ScreenPanel:
+    _screen = None
+    _config = None
+    _files = None
+    _printer = None
+    _gtk = None
+    ks_printer_cfg = None
 
     def __init__(self, screen, title, back=True):
         self.menu = None
-        self._screen = screen
-        self._config = screen._config
-        self._files = screen.files
-        self._printer = screen.printer
+        ScreenPanel._screen = screen
+        ScreenPanel._config = screen._config
+        ScreenPanel._files = screen.files
+        ScreenPanel._printer = screen.printer
+        ScreenPanel._gtk = screen.gtk
         self.labels = {}
-        self._gtk = screen.gtk
         self.control = {}
         self.title = title
         self.devices = {}
         self.active_heaters = []
-        self.ks_printer_cfg = None
-
         self.layout = Gtk.Layout()
-        self.layout.set_size(self._screen.width, self._screen.height)
-
+        self.layout.set_size(screen.width, screen.height)
         self.content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.content.get_style_context().add_class("content")
         self.content.set_hexpand(True)
         self.content.set_vexpand(True)
-
         self._show_heater_power = self._config.get_main_config().getboolean('show_heater_power', False)
 
     def emergency_stop(self, widget):
