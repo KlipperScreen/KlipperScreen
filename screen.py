@@ -82,7 +82,6 @@ class KlipperScreen(Gtk.Window):
     updating = False
     update_queue = []
     _ws = None
-    dpms_timeout = None
     screensaver_timeout = None
     reinit_count = 0
 
@@ -571,12 +570,12 @@ class KlipperScreen(Gtk.Window):
         return False
 
     def check_dpms_state(self):
+        if not self.use_dpms:
+            return False
         state = functions.get_DPMS_state()
-
         if state == functions.DPMS_State.Fail:
             logging.info("DPMS State FAIL: Stopping DPMS Check")
-            if self.screensaver_timeout is None:
-                self.set_dpms(False)
+            self.set_dpms(False)
             return False
         elif state != functions.DPMS_State.On:
             if self.screensaver is None:
@@ -601,9 +600,6 @@ class KlipperScreen(Gtk.Window):
 
         if time == "off":
             logging.debug(f"Screen blanking: {time}")
-            if self.dpms_timeout is not None:
-                GLib.source_remove(self.dpms_timeout)
-                self.dpms_timeout = None
             if self.screensaver_timeout is not None:
                 GLib.source_remove(self.screensaver_timeout)
             os.system("xset -display :0 dpms 0 0 0")
@@ -619,14 +615,10 @@ class KlipperScreen(Gtk.Window):
                 logging.debug("Using DPMS")
                 os.system("xset -display :0 s off")
                 os.system(f"xset -display :0 dpms 0 {self.blanking_time} 0")
-                if self.dpms_timeout is None:
-                    self.dpms_timeout = GLib.timeout_add_seconds(1, self.check_dpms_state)
+                GLib.timeout_add_seconds(1, self.check_dpms_state)
                 return
         # Without dpms just blank the screen
         logging.debug("Not using DPMS")
-        if self.dpms_timeout is not None:
-            GLib.source_remove(self.dpms_timeout)
-            self.dpms_timeout = None
         os.system("xset -display :0 dpms 0 0 0")
         if self.screensaver_timeout is None:
             self.screensaver_timeout = GLib.timeout_add_seconds(self.blanking_time, self.show_screensaver)
