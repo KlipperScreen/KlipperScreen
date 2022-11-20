@@ -1,4 +1,3 @@
-import json
 import logging
 
 import requests
@@ -30,30 +29,30 @@ class KlippyRest:
         return self.send_request("printer/info")
 
     def get_thumbnail_stream(self, thumbnail):
-        url = f"{self.endpoint}/server/files/gcodes/{thumbnail}"
+        return self.send_request(f"server/files/gcodes/{thumbnail}", json=False)
 
-        response = requests.get(url, stream=True)
-        if response.status_code == 200:
-            response.raw.decode_content = True
-            return response.content
-        return False
-
-    def send_request(self, method):
+    def send_request(self, method, json=True):
         url = f"{self.endpoint}/{method}"
-        logging.debug(f"Sending request to {url}")
         headers = {} if self.api_key is False else {"x-api-key": self.api_key}
+        data = False
         try:
-            r = requests.get(url, headers=headers)
+            response = requests.get(url, headers=headers)
+            response.raise_for_status()
+            if json:
+                logging.debug(f"Sending request to {url}")
+                data = response.json()
+            else:
+                data = response.content
+        except requests.exceptions.HTTPError as h:
+            logging.error(h)
+        except requests.exceptions.ConnectionError as c:
+            logging.error(c)
+        except requests.exceptions.Timeout as t:
+            logging.error(t)
+        except requests.exceptions.JSONDecodeError as j:
+            logging.error(j)
+        except requests.exceptions.RequestException as r:
+            logging.error(r)
         except Exception as e:
             logging.error(e)
-            return False
-        if r.status_code != 200:
-            return False
-
-        try:
-            data = json.loads(r.content)
-        except Exception as e:
-            logging.error(f"Unable to parse response from moonraker:\n {r.content}")
-            return False
-
         return data
