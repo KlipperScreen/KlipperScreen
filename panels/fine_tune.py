@@ -1,7 +1,8 @@
-import gi
 import logging
 import re
 import contextlib
+
+import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk

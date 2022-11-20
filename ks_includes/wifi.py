@@ -3,9 +3,7 @@ import logging
 import re
 import socket
 import threading
-
 from threading import Thread
-
 from queue import Queue
 
 import gi

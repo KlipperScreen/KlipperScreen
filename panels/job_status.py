@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-import gi
 import logging
 import os
 import time
 import contextlib
+
+import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Pango

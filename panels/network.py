@@ -1,7 +1,9 @@
-import gi
 import logging
-import netifaces
 import os
+
+import gi
+import netifaces
+
 from ks_includes.wifi import WifiManager
 
 gi.require_version("Gtk", "3.0")
