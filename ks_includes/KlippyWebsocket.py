@@ -109,7 +109,8 @@ class KlippyWebsocket(threading.Thread):
             logging.debug("Closing websocket")
             self.ws.close()
 
-    def on_message(self, ws, message):
+    def on_message(self, *args):
+        message = args[1] if len(args) == 2 else args[0]
         response = json.loads(message)
         if "id" in response and response['id'] in self.callback_table:
             args = (response,
@@ -144,16 +145,19 @@ class KlippyWebsocket(threading.Thread):
         self.ws.send(json.dumps(data))
         return True
 
-    def on_open(self, ws):
+    def on_open(self, *args):
         logging.info("Moonraker Websocket Open")
         self.connected = True
         self.reconnect_count = 0
         if "on_connect" in self._callback:
             GLib.idle_add(self._callback['on_connect'])
 
-    def on_close(self, ws, status, message):
+    def on_close(self, *args):
+        # args: ws, status, message
+        # sometimes ws is not passed due to bugs
+        message = args[2] if len(args) == 3 else args[1]
         if message is not None:
-            logging.info(f"{status} {message}")
+            logging.info(f"{message}")
         if not self.connected:
             logging.debug("Connection already closed")
             return
@@ -179,7 +183,8 @@ class KlippyWebsocket(threading.Thread):
         return True
 
     @staticmethod
-    def on_error(ws, error):
+    def on_error(*args):
+        error = args[1] if len(args) == 2 else args[0]
         logging.debug(f"Websocket error: {error}")
 
 
