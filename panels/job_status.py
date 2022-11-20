@@ -621,8 +621,7 @@ class JobStatusPanel(ScreenPanel):
         fan_label = ""
         for fan in self.fans:
             with contextlib.suppress(KeyError):
-                fan_speed = int(round(self._printer.get_fan_speed(fan, data[fan]["speed"]), 2) * 100)
-                self.fans[fan]['speed'] = f"{fan_speed:3}%"
+                self.fans[fan]['speed'] = f"{self._screen.printer.get_fan_speed(fan) * 100:3.0f}%"
                 fan_label += f" {self.fans[fan]['name']}{self.fans[fan]['speed']}"
         if fan_label:
             self.labels['fan'].set_text(fan_label[:12])
