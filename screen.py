@@ -659,18 +659,13 @@ class KlipperScreen(Gtk.Window):
 
     def state_error(self):
         self.close_screensaver()
-        msg = self.printer.get_stat("webhooks", "state_message")
-        if "FIRMWARE_RESTART" in msg:
-            self.printer_initializing("<b>" + _("Klipper has encountered an error.") + "\n" +
-                                      _("A FIRMWARE_RESTART may fix the issue.") +
-                                      "</b>" + "\n\n" + msg)
-        elif "micro-controller" in msg:
-            self.printer_initializing("<b>" + _("Klipper has encountered an error.") +
-                                      _("Please recompile and flash the micro-controller.") +
-                                      "</b>" + "\n\n" + msg)
-        else:
-            self.printer_initializing("<b>" + _("Klipper has encountered an error.") +
-                                      "</b>" + "\n\n" + msg)
+        msg = _("Klipper has encountered an error.") + "\n"
+        state = self.printer.get_stat("webhooks", "state_message")
+        if "FIRMWARE_RESTART" in state:
+            msg += _("A FIRMWARE_RESTART may fix the issue.") + "\n"
+        elif "micro-controller" in state:
+            msg += _("Please recompile and flash the micro-controller.") + "\n"
+        self.printer_initializing(msg + "\n" + state)
 
     def state_paused(self):
         if "job_status" not in self._cur_panels:
@@ -695,8 +690,7 @@ class KlipperScreen(Gtk.Window):
         self.close_screensaver()
         msg = self.printer.get_stat("webhooks", "state_message")
         msg = msg if "ready" not in msg else ""
-        self.printer_initializing("<b>" + _("Klipper has shutdown") +
-                                  "</b>" + "\n\n" + msg)
+        self.printer_initializing(_("Klipper has shutdown") + "\n\n" + msg)
 
     def toggle_macro_shortcut(self, value):
         self.base_panel.show_macro_shortcut(value)
