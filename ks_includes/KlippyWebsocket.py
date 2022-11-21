@@ -130,6 +130,7 @@ class KlippyWebsocket(threading.Thread):
     def on_open(self, *args):
         logging.info("Moonraker Websocket Open")
         self.connected = True
+        self._screen.reinit_count = 0
         self.reconnect_count = 0
         if "on_connect" in self._callback:
             GLib.idle_add(self._callback['on_connect'])

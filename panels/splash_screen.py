@@ -86,7 +86,7 @@ class SplashScreenPanel(ScreenPanel):
             self.labels['actions'].add(self.labels['restart_system'])
             self.labels['actions'].add(self.labels['shutdown'])
         self.labels['actions'].add(self.labels['menu'])
-        if self._screen._ws and not self._screen._ws.connecting:
+        if self._screen._ws and not self._screen._ws.connecting or self._screen.reinit_count > self._screen.max_retries:
             self.labels['actions'].add(self.labels['retry'])
         self.labels['actions'].show_all()
 
@@ -141,5 +141,9 @@ class SplashScreenPanel(ScreenPanel):
 
     def retry(self, widget):
         self.update_text((_("Connecting to %s") % self._screen.connecting_to_printer))
-        self._screen._ws.retry()
+        if self._screen._ws and not self._screen._ws.connecting:
+            self._screen._ws.retry()
+        else:
+            self._screen.reinit_count = 0
+            self._screen.init_printer()
         self.show_restart_buttons()

@@ -84,6 +84,7 @@ class KlipperScreen(Gtk.Window):
     _ws = None
     screensaver_timeout = None
     reinit_count = 0
+    max_retries = 4
 
     def __init__(self, args, version):
         self.blanking_time = 600
@@ -639,7 +640,7 @@ class KlipperScreen(Gtk.Window):
             callback()
 
     def websocket_disconnected(self, msg):
-        self.printer_initializing(msg)
+        self.printer_initializing(msg, remove=True)
         self.connecting = True
         self.connected_printer = None
         self.files.reset()
@@ -651,7 +652,7 @@ class KlipperScreen(Gtk.Window):
     def state_disconnected(self):
         logging.debug("### Going to disconnected")
         self.close_screensaver()
-        self.printer_initializing(_("Klipper has disconnected"))
+        self.printer_initializing(_("Klipper has disconnected"), remove=True)
 
     def state_error(self):
         self.close_screensaver()
@@ -661,7 +662,7 @@ class KlipperScreen(Gtk.Window):
             msg += _("A FIRMWARE_RESTART may fix the issue.") + "\n"
         elif "micro-controller" in state:
             msg += _("Please recompile and flash the micro-controller.") + "\n"
-        self.printer_initializing(msg + "\n" + state)
+        self.printer_initializing(msg + "\n" + state, remove=True)
 
     def state_paused(self):
         if "job_status" not in self._cur_panels:
@@ -686,7 +687,7 @@ class KlipperScreen(Gtk.Window):
         self.close_screensaver()
         msg = self.printer.get_stat("webhooks", "state_message")
         msg = msg if "ready" not in msg else ""
-        self.printer_initializing(_("Klipper has shutdown") + "\n\n" + msg)
+        self.printer_initializing(_("Klipper has shutdown") + "\n\n" + msg, remove=True)
 
     def toggle_macro_shortcut(self, value):
         self.base_panel.show_macro_shortcut(value)
@@ -781,9 +782,9 @@ class KlipperScreen(Gtk.Window):
         logging.info(f"{method}: {params}")
         self._ws.send_method(method, params)
 
-    def printer_initializing(self, msg):
+    def printer_initializing(self, msg, remove=False):
         self.close_popup_message()
-        if 'splash_screen' not in self.panels or 'printer_select' not in self._cur_panels:
+        if 'splash_screen' not in self.panels or remove:
             self.show_panel('splash_screen', "splash_screen", None, 2)
         self.panels['splash_screen'].update_text(msg)
 
@@ -815,6 +816,8 @@ class KlipperScreen(Gtk.Window):
                 logging.info("%s is ON", device)
 
     def init_printer(self):
+        if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:
+            return
         state = self.apiclient.get_server_info()
         if state is False:
             logging.info("Moonraker not connected")
@@ -832,11 +835,11 @@ class KlipperScreen(Gtk.Window):
 
         if state['result']['klippy_connected'] is False:
             logging.info("Klipper not connected")
-            self.printer_initializing(
-                _("Moonraker: connected")
-                + f"\n\nKlipper: {state['result']['klippy_state']}\n\n"
-                + _("Retry #%s") % self.reinit_count
-            )
+            msg = _("Moonraker: connected") + "\n\n"
+            msg += f"Klipper: {state['result']['klippy_state']}" + "\n\n"
+            if self.reinit_count <= self.max_retries:
+                msg += _("Retrying") + f' #{self.reinit_count}'
+            self.printer_initializing(msg)
             GLib.timeout_add_seconds(3, self.init_printer)
             return
 
