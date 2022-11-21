@@ -719,7 +719,9 @@ class KlipperScreen(Gtk.Window):
         elif action == "notify_metadata_update":
             self.files.request_metadata(data['filename'])
         elif action == "notify_update_response":
-            logging.info(f"{action}: {data}")
+            if 'message' in data and 'Error' in data['message']:
+                logging.error(f"{action}:{data['message']}")
+                self.show_popup_message(data['message'], 3)
         elif action == "notify_power_changed":
             logging.debug("Power status changed: %s", data)
             self.printer.process_power_update(data)
