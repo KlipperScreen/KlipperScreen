@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-12 11:20-0300\n"
-"PO-Revision-Date: 2022-11-12 11:20-0300\n"
+"POT-Creation-Date: 2022-11-20 21:00-0300\n"
+"PO-Revision-Date: 2022-11-20 21:00-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -45,9 +45,6 @@ msgstr "Aceptar"
 
 msgid "Actions"
 msgstr "Acciones"
-
-msgid "Add Printer"
-msgstr "Agregar impresora"
 
 msgid "Add profile"
 msgstr "Agregar perfil"
@@ -212,6 +209,9 @@ msgstr "Método para estimar tiempo"
 msgid "Exclude Object"
 msgstr "Excluir Objeto"
 
+msgid "Extra Large"
+msgstr "Extra Grande"
+
 msgid "Extrude"
 msgstr "Extruir"
 
@@ -317,9 +317,6 @@ msgstr "Tema de Iconos"
 msgid "Increase"
 msgstr "Aumentar"
 
-msgid "Initializing"
-msgstr "Iniciando"
-
 msgid "Initializing printer..."
 msgstr "Iniciando Impresora..."
 
@@ -400,6 +397,9 @@ msgstr "Max. Aceleración a Desaceleración"
 
 msgid "Max Velocity"
 msgstr "Max. Velocidad"
+
+msgid "Maximum"
+msgstr "Maximo"
 
 msgid "Measure Both"
 msgstr "Medir Ambos"
@@ -778,6 +778,12 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Add Printer"
+#~ msgstr "Agregar impresora"
+
+#~ msgid "Initializing"
+#~ msgstr "Iniciando"
 
 #~ msgid "Delete"
 #~ msgstr "Borrar"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2022-09-04 14:53-0300\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-12 11:20-0300\n"
+"POT-Creation-Date: 2022-11-20 21:00-0300\n"
 "PO-Revision-Date: 2022-09-16 21:40+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -46,9 +46,6 @@ msgstr "Прийняти"
 
 msgid "Actions"
 msgstr "Дії"
-
-msgid "Add Printer"
-msgstr "Додати принтер"
 
 msgid "Add profile"
 msgstr "Додати профіль"
@@ -213,6 +210,9 @@ msgstr "Метод розрахунку часу"
 msgid "Exclude Object"
 msgstr "Виключити об’єкт"
 
+msgid "Extra Large"
+msgstr ""
+
 msgid "Extrude"
 msgstr ""
 "Заміна\n"
@@ -322,9 +322,6 @@ msgstr "Тема оформлення"
 msgid "Increase"
 msgstr "Збільшити"
 
-msgid "Initializing"
-msgstr "Ініціалізація"
-
 msgid "Initializing printer..."
 msgstr "Ініціалізація принтера..."
 
@@ -407,6 +404,9 @@ msgstr "Макс. прискорення до гальмування"
 
 msgid "Max Velocity"
 msgstr "Макс. швидкість"
+
+msgid "Maximum"
+msgstr ""
 
 msgid "Measure Both"
 msgstr "Виміряти все"
@@ -792,6 +792,12 @@ msgstr "мм/с"
 
 msgid "mm/s²"
 msgstr "мм/с²"
+
+#~ msgid "Add Printer"
+#~ msgstr "Додати принтер"
+
+#~ msgid "Initializing"
+#~ msgstr "Ініціалізація"
 
 #~ msgid "Delete"
 #~ msgstr "Видалити"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-12 11:20-0300\n"
+"POT-Creation-Date: 2022-11-20 21:00-0300\n"
 "PO-Revision-Date: 2022-10-30 16:54+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -45,9 +45,6 @@ msgstr "Kabul et"
 
 msgid "Actions"
 msgstr "Eylemler"
-
-msgid "Add Printer"
-msgstr "Yazıcı Ekle"
 
 msgid "Add profile"
 msgstr "Profil ekle"
@@ -212,6 +209,9 @@ msgstr "Tahmini Zaman Metodu"
 msgid "Exclude Object"
 msgstr "Nesneyi Hariç Tut"
 
+msgid "Extra Large"
+msgstr ""
+
 msgid "Extrude"
 msgstr "Ekstrüzyon"
 
@@ -317,9 +317,6 @@ msgstr "Simge Teması"
 msgid "Increase"
 msgstr "Artır"
 
-msgid "Initializing"
-msgstr "Başlatılıyor"
-
 msgid "Initializing printer..."
 msgstr "Yazıcı başlatılıyor..."
 
@@ -400,6 +397,9 @@ msgstr "Maksimum Hızlanma ve Yavaşlama"
 
 msgid "Max Velocity"
 msgstr "Maksimum Hız"
+
+msgid "Maximum"
+msgstr ""
 
 msgid "Measure Both"
 msgstr "İkisini de ölçüle"
@@ -778,6 +778,12 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Add Printer"
+#~ msgstr "Yazıcı Ekle"
+
+#~ msgid "Initializing"
+#~ msgstr "Başlatılıyor"
 
 #~ msgid "Delete"
 #~ msgstr "Sil"

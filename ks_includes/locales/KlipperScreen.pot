@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-12 11:20-0300\n"
+"POT-Creation-Date: 2022-11-20 21:00-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,9 +44,6 @@ msgid "Accept"
 msgstr ""
 
 msgid "Actions"
-msgstr ""
-
-msgid "Add Printer"
 msgstr ""
 
 msgid "Add profile"
@@ -212,6 +209,9 @@ msgstr ""
 msgid "Exclude Object"
 msgstr ""
 
+msgid "Extra Large"
+msgstr ""
+
 msgid "Extrude"
 msgstr ""
 
@@ -317,9 +317,6 @@ msgstr ""
 msgid "Increase"
 msgstr ""
 
-msgid "Initializing"
-msgstr ""
-
 msgid "Initializing printer..."
 msgstr ""
 
@@ -399,6 +396,9 @@ msgid "Max Acceleration to Deceleration"
 msgstr ""
 
 msgid "Max Velocity"
+msgstr ""
+
+msgid "Maximum"
 msgstr ""
 
 msgid "Measure Both"

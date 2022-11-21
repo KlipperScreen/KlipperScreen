@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-12 11:20-0300\n"
+"POT-Creation-Date: 2022-11-20 21:00-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -40,9 +40,6 @@ msgstr "Elfogad"
 
 msgid "Actions"
 msgstr "Műveletek"
-
-msgid "Add Printer"
-msgstr "Nyomtató hozzáadása"
 
 msgid "Add profile"
 msgstr "Profil hozzáadása"
@@ -207,6 +204,9 @@ msgstr "Becsült idő módszer"
 msgid "Exclude Object"
 msgstr "Objektum kizárása"
 
+msgid "Extra Large"
+msgstr ""
+
 msgid "Extrude"
 msgstr "Száladagolás"
 
@@ -312,9 +312,6 @@ msgstr "Ikon téma"
 msgid "Increase"
 msgstr "Növel"
 
-msgid "Initializing"
-msgstr "Inicializálás"
-
 msgid "Initializing printer..."
 msgstr "Nyomtató inicializálása..."
 
@@ -395,6 +392,9 @@ msgstr "Lassulás max gyorsulása"
 
 msgid "Max Velocity"
 msgstr "Max sebesség"
+
+msgid "Maximum"
+msgstr ""
 
 msgid "Measure Both"
 msgstr "Mindkettő mérése"
@@ -773,6 +773,12 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Add Printer"
+#~ msgstr "Nyomtató hozzáadása"
+
+#~ msgid "Initializing"
+#~ msgstr "Inicializálás"
 
 #~ msgid "Delete"
 #~ msgstr "Töröl"

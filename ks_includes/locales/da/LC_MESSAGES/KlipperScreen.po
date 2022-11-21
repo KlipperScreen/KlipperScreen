@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-12 11:20-0300\n"
+"POT-Creation-Date: 2022-11-20 21:00-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
@@ -40,9 +40,6 @@ msgstr "OK"
 
 msgid "Actions"
 msgstr "Muligheder"
-
-msgid "Add Printer"
-msgstr "Tilføj printer"
 
 msgid "Add profile"
 msgstr ""
@@ -207,6 +204,9 @@ msgstr "Metode til beregning af tid"
 msgid "Exclude Object"
 msgstr ""
 
+msgid "Extra Large"
+msgstr ""
+
 msgid "Extrude"
 msgstr "Ekstrudér"
 
@@ -312,9 +312,6 @@ msgstr "Ikon-tema"
 msgid "Increase"
 msgstr "Forøg"
 
-msgid "Initializing"
-msgstr "Initialiserer"
-
 msgid "Initializing printer..."
 msgstr "Initialiserer printer..."
 
@@ -395,6 +392,9 @@ msgstr "Maks. acceleration til decceleration"
 
 msgid "Max Velocity"
 msgstr "Maks. hastighed"
+
+msgid "Maximum"
+msgstr ""
 
 msgid "Measure Both"
 msgstr ""
@@ -771,6 +771,12 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Add Printer"
+#~ msgstr "Tilføj printer"
+
+#~ msgid "Initializing"
+#~ msgstr "Initialiserer"
 
 #~ msgid "Delete"
 #~ msgstr "Slet"
