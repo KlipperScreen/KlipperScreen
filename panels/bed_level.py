@@ -16,8 +16,8 @@ def create_panel(*args):
 
 class BedLevelPanel(ScreenPanel):
 
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.response_count = 0
         self.screw_dict = {}
         self.screws = []

@@ -20,8 +20,8 @@ class PrintPanel(ScreenPanel):
     dir_panels = {}
     filelist = {'gcodes': {'directories': [], 'files': []}}
 
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         sortdir = self._config.get_main_config().get("print_sort_dir", "name_asc")
         sortdir = sortdir.split('_')
         if sortdir[0] not in ["name", "date"] or sortdir[1] not in ["asc", "desc"]:

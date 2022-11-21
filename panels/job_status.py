@@ -18,8 +18,8 @@ def create_panel(*args):
 
 
 class JobStatusPanel(ScreenPanel):
-    def __init__(self, screen, title, back=False):
-        super().__init__(screen, title, False)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.extrusion_button = None
         self.elapsed_button = None
         self.left_button = None

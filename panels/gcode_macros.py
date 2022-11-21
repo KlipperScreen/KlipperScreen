@@ -13,8 +13,8 @@ def create_panel(*args):
 
 
 class MacroPanel(ScreenPanel):
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.sort_reverse = False
         self.sort_lbl = _("Name")
         self.sort_btn = self._gtk.ButtonImage("arrow-up", self.sort_lbl, "color1", .5, Gtk.PositionType.RIGHT, 1)

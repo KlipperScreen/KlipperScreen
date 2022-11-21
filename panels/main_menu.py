@@ -15,8 +15,8 @@ def create_panel(*args):
 
 
 class MainPanel(MenuPanel):
-    def __init__(self, screen, title, back=False):
-        super().__init__(screen, title, False)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.left_panel = None
         self.items = None
         self.devices = {}

@@ -28,8 +28,8 @@ ALLOWED_SERVICES = (
 
 
 class SystemPanel(ScreenPanel):
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.refresh = None
         self.update_status = None
         self.update_dialog = None

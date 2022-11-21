@@ -17,8 +17,8 @@ CHANGEABLE_FANS = ["fan", "fan_generic"]
 
 
 class FanPanel(ScreenPanel):
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.fan_speed = {}
         self.devices = {}
         # Create a grid for all devices

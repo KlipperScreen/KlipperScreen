@@ -18,8 +18,8 @@ class ZCalibratePanel(ScreenPanel):
     distances = ['.01', '.05', '.1', '.5', '1', '5']
     distance = distances[-2]
 
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, False)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.z_offset = None
         self.probe = self._screen.printer.get_probe()
         if self.probe:

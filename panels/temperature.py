@@ -19,8 +19,8 @@ class TemperaturePanel(ScreenPanel):
     graph_update = None
     active_heater = None
 
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.popover_timeout = None
         self.left_panel = None
         self.popover_device = None

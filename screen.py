@@ -116,7 +116,7 @@ class KlipperScreen(Gtk.Window):
         self.init_style()
         self.set_icon_from_file(os.path.join(klipperscreendir, "styles", "icon.svg"))
 
-        self.base_panel = BasePanel(self, title="Base Panel", back=False)
+        self.base_panel = BasePanel(self, title="Base Panel")
         self.add(self.base_panel.get())
         self.show_all()
         if show_cursor:

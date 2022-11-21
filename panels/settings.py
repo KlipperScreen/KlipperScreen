@@ -11,8 +11,8 @@ def create_panel(*args):
 
 
 class SettingsPanel(ScreenPanel):
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.printers = self.settings = {}
         self.menu = ['settings_menu']
         options = self._config.get_configurable_options().copy()

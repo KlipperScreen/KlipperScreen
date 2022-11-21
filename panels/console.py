@@ -24,8 +24,8 @@ COLORS = {
 
 
 class ConsolePanel(ScreenPanel):
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.autoscroll = True
         self.hidetemps = True
         self._screen._ws.send_method("server.gcode_store", {"count": 100}, self.gcode_response)

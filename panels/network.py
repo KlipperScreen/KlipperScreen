@@ -18,8 +18,8 @@ def create_panel(*args):
 class NetworkPanel(ScreenPanel):
     initialized = False
 
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.show_add = False
         self.networks = {}
         self.interface = None

@@ -15,8 +15,8 @@ def create_panel(*args):
 
 class FWRetractionPanel(ScreenPanel):
 
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.options = None
         self.grid = Gtk.Grid()
         self.values = {}

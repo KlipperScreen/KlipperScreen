@@ -17,8 +17,8 @@ class MenuPanel(ScreenPanel):
     i = 0
     j2_data = None
 
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.items = None
         self.grid = self._gtk.HomogeneousGrid()
 
