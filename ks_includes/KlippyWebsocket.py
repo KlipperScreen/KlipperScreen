@@ -11,21 +11,6 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import GLib
 from ks_includes.KlippyGcodes import KlippyGcodes
 
-api_key = ""
-
-api = {
-    "printer_info": {
-        "url": "/printer/info",
-        "method": "get_printer_info"
-    },
-    "apikey": {
-        "url": "/access/api_key"
-    },
-    "oneshot_token": {
-        "url": "/access/oneshot_token"
-    }
-}
-
 
 class KlippyWebsocket(threading.Thread):
     _req_id = 0
@@ -42,7 +27,6 @@ class KlippyWebsocket(threading.Thread):
         self._screen = screen
         self._callback = callback
         self.klippy = MoonrakerApi(self)
-        self.closing = False
         self.ws = None
 
         self.host = host
@@ -103,7 +87,6 @@ class KlippyWebsocket(threading.Thread):
             logging.debug("Error starting web socket")
 
     def close(self):
-        self.closing = True
         self.connecting = False
         if self.ws is not None:
             logging.debug("Closing websocket")

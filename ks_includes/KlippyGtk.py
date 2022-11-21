@@ -170,13 +170,12 @@ class KlippyGtk:
         if label is not None:
             try:
                 # Get the label object
-                if image_name is not None:
-                    if position == Gtk.PositionType.RIGHT:
-                        child = b.get_children()[0].get_children()[0].get_children()[0]
-                    else:
-                        child = b.get_children()[0].get_children()[0].get_children()[1]
-                else:
+                if image_name is None:
                     child = b.get_children()[0]
+                elif position == Gtk.PositionType.RIGHT:
+                    child = b.get_children()[0].get_children()[0].get_children()[0]
+                else:
+                    child = b.get_children()[0].get_children()[0].get_children()[1]
                 child.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
                 child.set_line_wrap(True)
                 child.set_ellipsize(True)

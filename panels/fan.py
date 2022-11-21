@@ -38,7 +38,7 @@ class FanPanel(ScreenPanel):
 
         for fan in self.devices:
             if fan in data and "speed" in data[fan]:
-                self.update_fan_speed(None, fan, self._printer.get_fan_speed(fan, data[fan]["speed"]))
+                self.update_fan_speed(None, fan, self._printer.get_fan_speed(fan))
 
     def update_fan_speed(self, widget, fan, speed):
         if fan not in self.devices:

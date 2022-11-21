@@ -1,5 +1,3 @@
-import logging
-
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -35,7 +33,6 @@ class SettingsPanel(ScreenPanel):
         self.labels['printers'] = Gtk.Grid()
         self.labels['printers_menu'].add(self.labels['printers'])
         for printer in self._config.get_printers():
-            logging.debug(f"Printer: {printer}")
             pname = list(printer)[0]
             self.printers[pname] = {
                 "name": pname,

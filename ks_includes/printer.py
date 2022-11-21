@@ -240,11 +240,12 @@ class Printer:
             return self.devices[dev][stat]
         return None
 
-    def get_fan_speed(self, fan="fan", speed=None):
+    def get_fan_speed(self, fan="fan"):
+        speed = 0
         if fan not in self.config or fan not in self.data:
             logging.debug(f"Error getting {fan} config")
-            return speed if speed is not None else 0
-        if speed is None and "speed" in self.data[fan]:
+            return speed
+        if "speed" in self.data[fan]:
             speed = self.data[fan]["speed"]
         if 'max_power' in self.config[fan]:
             max_power = float(self.config[fan]['max_power'])

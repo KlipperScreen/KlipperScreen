@@ -134,7 +134,6 @@ class JobStatusPanel(ScreenPanel):
             self.current_extruder = self._printer.get_stat("toolhead", "extruder")
             diameter = float(self._printer.get_config_section(self.current_extruder)['filament_diameter'])
             self.fila_section = pi * ((diameter / 2) ** 2)
-        self.create_status_grid()
 
         self.grid.attach(overlay, 0, 0, 1, 1)
         self.grid.attach(fi_box, 1, 0, 3, 1)

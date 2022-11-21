@@ -21,7 +21,7 @@ class KlippyRest:
 
     def get_oneshot_token(self):
         r = self.send_request("access/oneshot_token")
-        if r is False:
+        if r is False or 'result' not in r:
             return False
         return r['result']
 
