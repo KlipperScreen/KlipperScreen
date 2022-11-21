@@ -265,21 +265,18 @@ class KlipperScreen(Gtk.Window):
                 except Exception as e:
                     if panel_name in self.panels:
                         del self.panels[panel_name]
-                    logging.exception(f"Unable to load panel {panel_type}")
                     self.show_error_modal(f"Unable to load panel {panel_type}", f"{e}")
                     return
 
             logging.debug(f"Attaching panel {panel_name}")
             self.base_panel.add_content(self.panels[panel_name])
-
             self.base_panel.show_back(len(self._cur_panels) > 0)
-            self.show_all()
 
             if hasattr(self.panels[panel_name], "process_update"):
                 self.add_subscription(panel_name)
             if hasattr(self.panels[panel_name], "activate"):
                 self.panels[panel_name].activate()
-                self.show_all()
+            self.show_all()
         except Exception as e:
             logging.exception(f"Error attaching panel:\n{e}")
 
@@ -337,7 +334,7 @@ class KlipperScreen(Gtk.Window):
         self.popup_message = None
 
     def show_error_modal(self, err, e=""):
-        logging.error(f"Showing error modal: {err}")
+        logging.error(f"Showing error modal: {err} {e}")
 
         title = Gtk.Label()
         title.set_markup(f"<b>{err}</b>\n")
@@ -469,11 +466,10 @@ class KlipperScreen(Gtk.Window):
         logging.info(f"#### Menu {menu}")
         disname = self._config.get_menu_name(menu, name)
         menuitems = self._config.get_menu_items(menu, name)
-        if len(menuitems) == 0:
-            logging.info("No items in menu, returning.")
-            return
-
-        self.show_panel(f'{self._cur_panels[-1]}_{name}', "menu", disname, 1, False, items=menuitems)
+        if len(menuitems) != 0:
+            self.show_panel(name, "menu", disname, 1, False, items=menuitems)
+        else:
+            logging.info("No items in menu")
 
     def _remove_all_panels(self):
         self.subscriptions = []
