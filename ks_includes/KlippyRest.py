@@ -8,6 +8,7 @@ class KlippyRest:
         self.ip = ip
         self.port = port
         self.api_key = api_key
+        self.status = ''
 
     @property
     def endpoint(self):
@@ -44,15 +45,19 @@ class KlippyRest:
             else:
                 data = response.content
         except requests.exceptions.HTTPError as h:
-            logging.error(h)
+            self.status = h
         except requests.exceptions.ConnectionError as c:
-            logging.error(c)
+            self.status = c
         except requests.exceptions.Timeout as t:
-            logging.error(t)
+            self.status = t
         except requests.exceptions.JSONDecodeError as j:
-            logging.error(j)
+            self.status = j
         except requests.exceptions.RequestException as r:
-            logging.error(r)
+            self.status = r
         except Exception as e:
-            logging.error(e)
+            self.status = e
+        if data:
+            self.status = ''
+        else:
+            logging.error(self.status)
         return data

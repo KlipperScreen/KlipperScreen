@@ -159,7 +159,7 @@ class KlippyWebsocket(threading.Thread):
             self.connecting = False
             self._screen.printer_initializing(
                 _("Cannot connect to Moonraker")
-                + f'\n\n{self._url}')
+                + f'\n\n{self._url}\n\n{self._screen.apiclient.status}')
             return False
         logging.debug("Attempting to reconnect")
         self.connect()
