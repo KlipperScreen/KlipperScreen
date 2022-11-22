@@ -702,8 +702,12 @@ class KlipperScreen(Gtk.Window):
         self.reload_panels()
 
     def reload_panels(self, *args):
+        if "printer_select" in self._cur_panels:
+            self.show_printer_select()
+            return
         self._remove_all_panels()
-        self.printer.change_state(self.printer.state)
+        if self.printer is not None:
+            self.printer.change_state(self.printer.state)
 
     def _websocket_callback(self, action, data):
         if self.connecting:
