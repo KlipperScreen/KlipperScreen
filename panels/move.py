@@ -22,19 +22,19 @@ class MovePanel(ScreenPanel):
         self.settings = {}
         self.menu = ['move_menu']
 
-        self.labels['x+'] = self._gtk.ButtonImage("arrow-right", _("X+"), "color1")
+        self.labels['x+'] = self._gtk.ButtonImage("arrow-right", "X+", "color1")
         self.labels['x+'].connect("clicked", self.move, "X", "+")
-        self.labels['x-'] = self._gtk.ButtonImage("arrow-left", _("X-"), "color1")
+        self.labels['x-'] = self._gtk.ButtonImage("arrow-left", "X-", "color1")
         self.labels['x-'].connect("clicked", self.move, "X", "-")
 
-        self.labels['y+'] = self._gtk.ButtonImage("arrow-up", _("Y+"), "color2")
+        self.labels['y+'] = self._gtk.ButtonImage("arrow-up", "Y+", "color2")
         self.labels['y+'].connect("clicked", self.move, "Y", "+")
-        self.labels['y-'] = self._gtk.ButtonImage("arrow-down", _("Y-"), "color2")
+        self.labels['y-'] = self._gtk.ButtonImage("arrow-down", "Y-", "color2")
         self.labels['y-'].connect("clicked", self.move, "Y", "-")
 
-        self.labels['z+'] = self._gtk.ButtonImage("z-farther", _("Z+"), "color3")
+        self.labels['z+'] = self._gtk.ButtonImage("z-farther", "Z+", "color3")
         self.labels['z+'].connect("clicked", self.move, "Z", "+")
-        self.labels['z-'] = self._gtk.ButtonImage("z-closer", _("Z-"), "color3")
+        self.labels['z-'] = self._gtk.ButtonImage("z-closer", "Z-", "color3")
         self.labels['z-'].connect("clicked", self.move, "Z", "-")
 
         self.labels['home'] = self._gtk.ButtonImage("home", _("Home All"), "color4")

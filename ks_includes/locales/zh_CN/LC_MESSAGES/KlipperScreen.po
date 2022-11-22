@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-20 21:00-0300\n"
+"POT-Creation-Date: 2022-11-21 21:35-0300\n"
 "PO-Revision-Date: 2022-07-16 23:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -110,9 +110,6 @@ msgstr "已校准，保存配置后生效"
 
 msgid "Calibrating"
 msgstr ""
-
-msgid "Calibrating..."
-msgstr "校准中..."
 
 msgid "Can't set above the maximum:"
 msgstr "设置值超出最大值："
@@ -558,10 +555,6 @@ msgstr "回抽速度"
 msgid "Retry"
 msgstr ""
 
-#, python-format
-msgid "Retry #%s"
-msgstr "重试 #%s"
-
 msgid "Retrying"
 msgstr ""
 
@@ -712,23 +705,11 @@ msgstr "更新中"
 msgid "Uploaded"
 msgstr "上传时间"
 
-msgid "X+"
-msgstr ""
-
-msgid "X-"
-msgstr ""
-
 msgid "XY Move Speed (mm/s)"
 msgstr "XY轴移动速度(mm/s)"
 
 msgid "XY Speed (mm/s)"
 msgstr "XY轴速度(mm/s)"
-
-msgid "Y+"
-msgstr ""
-
-msgid "Y-"
-msgstr ""
 
 msgid "Z Calibrate"
 msgstr "Z轴校准"
@@ -744,12 +725,6 @@ msgstr "Z 倾斜校准"
 
 msgid "Z offset:"
 msgstr "Z轴偏移:"
-
-msgid "Z+"
-msgstr ""
-
-msgid "Z-"
-msgstr ""
 
 msgid "commit"
 msgid_plural "commits"
@@ -773,6 +748,13 @@ msgstr ""
 
 msgid "mm/s²"
 msgstr ""
+
+#~ msgid "Calibrating..."
+#~ msgstr "校准中..."
+
+#, python-format
+#~ msgid "Retry #%s"
+#~ msgstr "重试 #%s"
 
 #~ msgid "Add Printer"
 #~ msgstr "添加打印机"

@@ -123,6 +123,12 @@ class KlipperScreenConfig:
                     logging.debug("Using system lang")
                     lang = language
         if lang not in self.lang_list:
+            # try to match a parent
+            for language in self.lang_list:
+                if lang.startswith(language):
+                    lang = language
+                    self.set("main", "language", lang)
+        if lang not in self.lang_list:
             logging.error(f"lang: {lang} not found")
             logging.info(f"Available lang list {self.lang_list}")
             lang = "en"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-20 21:00-0300\n"
+"POT-Creation-Date: 2022-11-21 21:35-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,9 +109,6 @@ msgid "Calibrated, save configuration to make it permanent"
 msgstr ""
 
 msgid "Calibrating"
-msgstr ""
-
-msgid "Calibrating..."
 msgstr ""
 
 msgid "Can't set above the maximum:"
@@ -559,10 +556,6 @@ msgstr ""
 msgid "Retry"
 msgstr ""
 
-#, python-format
-msgid "Retry #%s"
-msgstr ""
-
 msgid "Retrying"
 msgstr ""
 
@@ -713,22 +706,10 @@ msgstr ""
 msgid "Uploaded"
 msgstr ""
 
-msgid "X+"
-msgstr ""
-
-msgid "X-"
-msgstr ""
-
 msgid "XY Move Speed (mm/s)"
 msgstr ""
 
 msgid "XY Speed (mm/s)"
-msgstr ""
-
-msgid "Y+"
-msgstr ""
-
-msgid "Y-"
 msgstr ""
 
 msgid "Z Calibrate"
@@ -744,12 +725,6 @@ msgid "Z Tilt"
 msgstr ""
 
 msgid "Z offset:"
-msgstr ""
-
-msgid "Z+"
-msgstr ""
-
-msgid "Z-"
 msgstr ""
 
 msgid "commit"
