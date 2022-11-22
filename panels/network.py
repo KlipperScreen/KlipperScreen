@@ -341,7 +341,7 @@ class NetworkPanel(ScreenPanel):
         if "add_network" in self.labels:
             del self.labels['add_network']
 
-        label = self._gtk.Label(_("PSK for") + f' ssid')
+        label = self._gtk.Label(_("PSK for") + ' ssid')
         label.set_hexpand(False)
         self.labels['network_psk'] = Gtk.Entry()
         self.labels['network_psk'].set_text('')
@@ -401,7 +401,7 @@ class NetworkPanel(ScreenPanel):
                 ipv4 = f"<b>IPv4:</b> {ifadd[netifaces.AF_INET][0]['addr']} "
             if netifaces.AF_INET6 in ifadd and len(ifadd[netifaces.AF_INET6]) > 0:
                 ipv6 = f"<b>IPv6:</b> {ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0]} "
-            info = f'<b>' + _("Hostname") + f':</b> {hostname}\n{ipv4}\n{ipv6}\n'
+            info = '<b>' + _("Hostname") + f':</b> {hostname}\n{ipv4}\n{ipv6}\n'
         elif "psk" in netinfo:
             info = _("Password saved")
         if "encryption" in netinfo:
@@ -431,7 +431,7 @@ class NetworkPanel(ScreenPanel):
         connected = (
             f'<b>{self.interface}</b>\n\n'
             f'<small><b>' + _("Connected") + f'</b></small>\n'
-            f'<b>' + _("Hostname") + f':</b> {hostname}\n'
+            + '<b>' + _("Hostname") + f':</b> {hostname}\n'
             f'{ipv4}\n'
             f'{ipv6}\n'
         )
