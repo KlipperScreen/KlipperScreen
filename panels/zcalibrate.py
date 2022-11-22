@@ -267,7 +267,7 @@ class ZCalibratePanel(ScreenPanel):
         logging.info("Aborting calibration")
         self._screen._ws.klippy.gcode_script(KlippyGcodes.ABORT)
         self.buttons_not_calibrating()
-        self.menu_return(widget)
+        self._screen._menu_go_back()
 
     def accept(self, widget):
         logging.info("Accepting Z position")

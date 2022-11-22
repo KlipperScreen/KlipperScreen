@@ -116,7 +116,7 @@ class ExcludeObjectPanel(ScreenPanel):
                         self.object_list.remove(self.buttons[name])
                 self.update_graph()
                 if len(self.excluded_objects) == len(self.objects):
-                    self.menu_return(False)
+                    self._screen._menu_go_back()
         elif action == "notify_gcode_response" and "Excluding object" in data:
             self._screen.show_popup_message(data, level=1)
             self.update_graph()

@@ -67,12 +67,6 @@ class ScreenPanel:
     def menu_item_clicked(self, widget, panel, item):
         self._screen.show_panel(panel, item['panel'], item['name'], 1, False)
 
-    def menu_return(self, widget, home=False):
-        if home is False:
-            self._screen._menu_go_back()
-            return
-        self._screen._menu_go_home()
-
     def set_title(self, title):
         self.title = title
 

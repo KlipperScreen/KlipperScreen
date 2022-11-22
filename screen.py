@@ -100,6 +100,7 @@ class KlipperScreen(Gtk.Window):
         self.lang_ltr = set_text_direction(self._config.get_main_config().get("language", None))
 
         Gtk.Window.__init__(self)
+        self.connect("key-press-event", self._key_press_event)
         self.set_title("KlipperScreen")
         monitor = Gdk.Display.get_default().get_primary_monitor()
         self.width = self._config.get_main_config().getint("width", monitor.get_geometry().width)
@@ -511,7 +512,7 @@ class KlipperScreen(Gtk.Window):
             self.close_popup_message()
         self._remove_current_panel()
 
-    def _menu_go_home(self):
+    def _menu_go_home(self, widget=None):
         logging.info("#### Menu go home")
         self.remove_keyboard()
         self.close_popup_message()
@@ -956,6 +957,13 @@ class KlipperScreen(Gtk.Window):
             os.kill(self.keyboard['process'].pid, SIGTERM)
         self.base_panel.get_content().remove(self.keyboard['box'])
         self.keyboard = None
+
+    def _key_press_event(self, widget, event):
+        keyval_name = Gdk.keyval_name(event.keyval)
+        if keyval_name == "Escape":
+            self._menu_go_home()
+        elif keyval_name == "BackSpace" and len(self._cur_panels) > 1:
+            self.base_panel.back()
 
 
 def main():
