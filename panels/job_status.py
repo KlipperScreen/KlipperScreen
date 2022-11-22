@@ -831,7 +831,7 @@ class JobStatusPanel(ScreenPanel):
             "complete": self.labels['file'].get_label(),
             "current": self.labels['file'].get_label(),
             "position": 0,
-            "limit": (self._screen.width * 24 / 480) // (self._gtk.get_font_size() / 11),
+            "limit": (self._screen.width * 37 / 480) // (self._gtk.get_font_size() / 11),
             "length": len(self.labels['file'].get_label())
         }
         if self.animation_timeout is None and (self.filename_label['length'] - self.filename_label['limit']) > 0:
