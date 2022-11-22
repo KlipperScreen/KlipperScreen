@@ -2,10 +2,8 @@
 
 import argparse
 import json
-import importlib
 import logging
 import os
-import signal
 import subprocess
 import pathlib
 import traceback  # noqa
@@ -14,7 +12,9 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
+from importlib import import_module
 from jinja2 import Environment
+from signal import SIGTERM
 
 from ks_includes import functions
 from ks_includes.KlippyWebsocket import KlippyWebsocket
@@ -241,7 +241,7 @@ class KlipperScreen(Gtk.Window):
                 logging.error(f"Panel {panel} does not exist")
                 raise FileNotFoundError(os.strerror(2), "\n" + panel_path)
 
-            module = importlib.import_module(f"panels.{panel}")
+            module = import_module(f"panels.{panel}")
             if not hasattr(module, "create_panel"):
                 raise ImportError(f"Cannot locate create_panel function for {panel}")
             self.load_panel[panel] = getattr(module, "create_panel")
@@ -953,7 +953,7 @@ class KlipperScreen(Gtk.Window):
             return
 
         if 'process' in self.keyboard:
-            os.kill(self.keyboard['process'].pid, signal.SIGTERM)
+            os.kill(self.keyboard['process'].pid, SIGTERM)
         self.base_panel.get_content().remove(self.keyboard['box'])
         self.keyboard = None
 
