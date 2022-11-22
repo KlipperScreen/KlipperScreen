@@ -204,7 +204,6 @@ class KlippyGtk:
             button.set_size_request((screen.width - 30) / 3, screen.height / 5)
 
         dialog.connect("response", self.screen.reset_screensaver_timeout)
-        dialog.connect("response", self.remove_dialog, dialog)
         dialog.connect("response", callback, *args)
         dialog.get_style_context().add_class("dialog")
 
@@ -225,11 +224,16 @@ class KlippyGtk:
                 Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.BLANK_CURSOR))
 
         self.screen.dialogs.append(dialog)
+        logging.info(f"Showing dialog {dialog}")
         return dialog
 
-    def remove_dialog(self, widget, response_id, dialog):
-        logging.info("Removing Dialog")
-        self.screen.dialogs.remove(dialog)
+    def remove_dialog(self, dialog, *args):
+        dialog.destroy()
+        if dialog in self.screen.dialogs:
+            logging.info("Removing Dialog")
+            self.screen.dialogs.remove(dialog)
+            return
+        logging.debug(f"Cannot remove dialog {dialog}")
 
     @staticmethod
     def HomogeneousGrid(width=None, height=None):

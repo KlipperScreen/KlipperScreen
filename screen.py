@@ -368,8 +368,8 @@ class KlipperScreen(Gtk.Window):
         ]
         self.gtk.Dialog(self, buttons, grid, self.error_modal_response)
 
-    def error_modal_response(self, widget, response_id):
-        widget.destroy()
+    def error_modal_response(self, dialog, response_id):
+        self.gtk.remove_dialog(dialog)
         self.reload_panels()
 
     def restart_warning(self, value):
@@ -391,11 +391,11 @@ class KlipperScreen(Gtk.Window):
 
         self.gtk.Dialog(self, buttons, label, self.restart_ks)
 
-    def restart_ks(self, widget, response_id):
+    def restart_ks(self, dialog, response_id):
+        self.gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.OK:
             logging.debug("Restarting")
             self._ws.send_method("machine.services.restart", {"service": "KlipperScreen"})
-        widget.destroy()
 
     def init_style(self):
         css_data = pathlib.Path(os.path.join(klipperscreendir, "styles", "base.css")).read_text()
@@ -482,7 +482,7 @@ class KlipperScreen(Gtk.Window):
             if panel not in ["printer_select", "splash_screen"]:
                 del self.panels[panel]
         for dialog in self.dialogs:
-            dialog.destroy()
+            self.gtk.remove_dialog(dialog)
         self.close_screensaver()
 
     def _remove_current_panel(self, pop=True):
@@ -534,6 +534,7 @@ class KlipperScreen(Gtk.Window):
             self.close_screensaver()
         self.remove_keyboard()
         for dialog in self.dialogs:
+            logging.debug("Hiding dialog")
             dialog.hide()
 
         close = Gtk.Button()
@@ -563,6 +564,7 @@ class KlipperScreen(Gtk.Window):
         else:
             self.screensaver_timeout = GLib.timeout_add_seconds(self.blanking_time, self.show_screensaver)
         for dialog in self.dialogs:
+            logging.info(f"Restoring Dialog {dialog}")
             dialog.show()
         self.show_all()
         return False
@@ -770,14 +772,13 @@ class KlipperScreen(Gtk.Window):
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
         if self.confirm is not None:
-            self.confirm.destroy()
+            self.gtk.remove_dialog(self.confirm)
         self.confirm = self.gtk.Dialog(self, buttons, label, self._confirm_send_action_response, method, params)
 
-    def _confirm_send_action_response(self, widget, response_id, method, params):
+    def _confirm_send_action_response(self, dialog, response_id, method, params):
+        self.gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.OK:
-            self._send_action(widget, method, params)
-
-        widget.destroy()
+            self._send_action(None, method, params)
 
     def _send_action(self, widget, method, params):
         logging.info(f"{method}: {params}")
@@ -901,7 +902,7 @@ class KlipperScreen(Gtk.Window):
         self.show_panel('job_status', "job_status", _("Printing"), 2)
         self.base_panel_show_all()
         for dialog in self.dialogs:
-            dialog.destroy()
+            self.gtk.remove_dialog(dialog)
 
     def show_keyboard(self, widget=None, event=None, entry=None):
         if self.keyboard is not None:

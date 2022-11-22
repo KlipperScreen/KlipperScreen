@@ -251,10 +251,6 @@ class NetworkPanel(ScreenPanel):
                 del self.labels[i]
         self.show_add = False
 
-    @staticmethod
-    def close_dialog(widget, response_id):
-        widget.destroy()
-
     def connected_callback(self, ssid, prev_ssid):
         logging.info("Now connected to a new network")
         if ssid is not None:
@@ -293,7 +289,7 @@ class NetworkPanel(ScreenPanel):
         self.labels['connecting_info'].set_halign(Gtk.Align.START)
         self.labels['connecting_info'].set_valign(Gtk.Align.START)
         scroll.add(self.labels['connecting_info'])
-        self._gtk.Dialog(self._screen, buttons, scroll, self.close_dialog)
+        self._gtk.Dialog(self._screen, buttons, scroll, self._gtk.remove_dialog)
         self._screen.show_all()
 
         if ssid in list(self.networks):

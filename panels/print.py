@@ -324,12 +324,10 @@ class PrintPanel(ScreenPanel):
 
         self._gtk.Dialog(self._screen, buttons, grid, self.confirm_print_response, filename)
 
-    def confirm_print_response(self, widget, response_id, filename):
-        widget.destroy()
-
+    def confirm_print_response(self, dialog, response_id, filename):
+        self._gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.CANCEL:
             return
-
         logging.info(f"Starting print: {filename}")
         self._screen._ws.klippy.print_start(filename)
 

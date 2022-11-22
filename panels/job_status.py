@@ -427,14 +427,14 @@ class JobStatusPanel(ScreenPanel):
         ]
         self._gtk.Dialog(self._screen, buttons, grid, self.save_confirm, device)
 
-    def save_confirm(self, widget, response_id, device):
+    def save_confirm(self, dialog, response_id, device):
+        self._gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.APPLY:
             if device == "probe":
                 self._screen._ws.klippy.gcode_script("Z_OFFSET_APPLY_PROBE")
             if device == "endstop":
                 self._screen._ws.klippy.gcode_script("Z_OFFSET_APPLY_ENDSTOP")
             self._screen._ws.klippy.gcode_script("SAVE_CONFIG")
-        widget.destroy()
 
     def restart(self, widget):
         if self.filename != "none":
@@ -467,17 +467,14 @@ class JobStatusPanel(ScreenPanel):
 
         self._gtk.Dialog(self._screen, buttons, label, self.cancel_confirm)
 
-    def cancel_confirm(self, widget, response_id):
-        widget.destroy()
-
+    def cancel_confirm(self, dialog, response_id):
+        self._gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.APPLY:
             self.menu_item_clicked(None, "exclude", {"panel": "exclude", "name": _("Exclude Object")})
             return
-
         if response_id == Gtk.ResponseType.CANCEL:
             self.enable_button("pause", "cancel")
             return
-
         logging.debug("Canceling print")
         self.set_state("cancelling")
         self.disable_button("pause", "resume", "cancel")

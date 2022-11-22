@@ -98,8 +98,8 @@ class SystemPanel(ScreenPanel):
     def activate(self):
         self.get_updates()
 
-    def finish_updating(self, widget, response_id):
-        widget.destroy()
+    def finish_updating(self, dialog, response_id):
+        self._gtk.remove_dialog(dialog)
         self._screen.set_updating(False)
         self.get_updates()
 
@@ -237,20 +237,20 @@ class SystemPanel(ScreenPanel):
         ]
         self._gtk.Dialog(self._screen, buttons, scroll, self.update_confirm, program)
 
-    def update_confirm(self, widget, response_id, program):
+    def update_confirm(self, dialog, response_id, program):
+        self._gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.OK:
             logging.debug(f"Updating {program}")
             self.update_program(self, program)
-        widget.destroy()
 
-    def reset_confirm(self, widget, response_id, program):
+    def reset_confirm(self, dialog, response_id, program):
+        self._gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.OK:
             logging.debug(f"Recovering hard {program}")
             self.reset_repo(self, program, True)
         if response_id == Gtk.ResponseType.APPLY:
             logging.debug(f"Recovering soft {program}")
             self.reset_repo(self, program, False)
-        widget.destroy()
 
     def reset_repo(self, widget, program, hard):
         if self._screen.is_updating():
@@ -402,7 +402,8 @@ class SystemPanel(ScreenPanel):
         ]
         self._gtk.Dialog(self._screen, buttons, scroll, self.reboot_poweroff_confirm, method)
 
-    def reboot_poweroff_confirm(self, widget, response_id, method):
+    def reboot_poweroff_confirm(self, dialog, response_id, method):
+        self._gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.OK:
             if method == "reboot":
                 os.system("systemctl reboot")
@@ -413,4 +414,3 @@ class SystemPanel(ScreenPanel):
                 self._screen._ws.send_method("machine.reboot")
             else:
                 self._screen._ws.send_method("machine.shutdown")
-        widget.destroy()
