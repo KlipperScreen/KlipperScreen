@@ -524,7 +524,7 @@ class KlipperScreen(Gtk.Window):
             self.subscriptions.append(panel_name)
 
     def reset_screensaver_timeout(self, *args):
-        if self.screensaver_timeout is not None:
+        if not self.use_dpms and self.screensaver_timeout is not None:
             GLib.source_remove(self.screensaver_timeout)
             self.screensaver_timeout = GLib.timeout_add_seconds(self.blanking_time, self.show_screensaver)
 
