@@ -135,7 +135,7 @@ class MainPanel(MenuPanel):
         if can_target:
             self.labels['da'].add_object(device, "targets", rgb, True, False)
 
-        name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "), None, .5, Gtk.PositionType.LEFT, 1)
+        name = self._gtk.Button(image, devname.capitalize().replace("_", " "), None, .5, Gtk.PositionType.LEFT, 1)
         name.connect("clicked", self.toggle_visibility, device)
         name.set_alignment(0, .5)
         visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}", device, fallback=True)
@@ -145,7 +145,7 @@ class MainPanel(MenuPanel):
             name.get_style_context().add_class("graph_label_hidden")
         self.labels['da'].set_showing(device, visible)
 
-        temp = self._gtk.Button("")
+        temp = self._gtk.Button(label="")
         if can_target:
             temp.connect("clicked", self.show_numpad, device)
 

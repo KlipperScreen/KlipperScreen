@@ -22,34 +22,34 @@ class MovePanel(ScreenPanel):
         self.settings = {}
         self.menu = ['move_menu']
 
-        self.labels['x+'] = self._gtk.ButtonImage("arrow-right", "X+", "color1")
+        self.labels['x+'] = self._gtk.Button("arrow-right", "X+", "color1")
         self.labels['x+'].connect("clicked", self.move, "X", "+")
-        self.labels['x-'] = self._gtk.ButtonImage("arrow-left", "X-", "color1")
+        self.labels['x-'] = self._gtk.Button("arrow-left", "X-", "color1")
         self.labels['x-'].connect("clicked", self.move, "X", "-")
 
-        self.labels['y+'] = self._gtk.ButtonImage("arrow-up", "Y+", "color2")
+        self.labels['y+'] = self._gtk.Button("arrow-up", "Y+", "color2")
         self.labels['y+'].connect("clicked", self.move, "Y", "+")
-        self.labels['y-'] = self._gtk.ButtonImage("arrow-down", "Y-", "color2")
+        self.labels['y-'] = self._gtk.Button("arrow-down", "Y-", "color2")
         self.labels['y-'].connect("clicked", self.move, "Y", "-")
 
-        self.labels['z+'] = self._gtk.ButtonImage("z-farther", "Z+", "color3")
+        self.labels['z+'] = self._gtk.Button("z-farther", "Z+", "color3")
         self.labels['z+'].connect("clicked", self.move, "Z", "+")
-        self.labels['z-'] = self._gtk.ButtonImage("z-closer", "Z-", "color3")
+        self.labels['z-'] = self._gtk.Button("z-closer", "Z-", "color3")
         self.labels['z-'].connect("clicked", self.move, "Z", "-")
 
-        self.labels['home'] = self._gtk.ButtonImage("home", _("Home All"), "color4")
+        self.labels['home'] = self._gtk.Button("home", _("Home All"), "color4")
         self.labels['home'].connect("clicked", self.home)
 
-        self.labels['home-xy'] = self._gtk.ButtonImage("home", _("Home XY"), "color4")
+        self.labels['home-xy'] = self._gtk.Button("home", _("Home XY"), "color4")
         self.labels['home-xy'].connect("clicked", self.homexy)
 
-        self.labels['z_tilt'] = self._gtk.ButtonImage("z-tilt", _("Z Tilt"), "color4")
+        self.labels['z_tilt'] = self._gtk.Button("z-tilt", _("Z Tilt"), "color4")
         self.labels['z_tilt'].connect("clicked", self.z_tilt)
 
-        self.labels['quad_gantry_level'] = self._gtk.ButtonImage("z-tilt", _("Quad Gantry Level"), "color4")
+        self.labels['quad_gantry_level'] = self._gtk.Button("z-tilt", _("Quad Gantry Level"), "color4")
         self.labels['quad_gantry_level'].connect("clicked", self.quad_gantry_level)
 
-        self.labels['motors-off'] = self._gtk.ButtonImage("motor-off", _("Disable Motors"), "color4")
+        self.labels['motors-off'] = self._gtk.Button("motor-off", _("Disable Motors"), "color4")
         script = {"script": "M18"}
         self.labels['motors-off'].connect("clicked", self._screen._confirm_send_action,
                                           _("Are you sure you wish to disable motors?"),
@@ -95,7 +95,7 @@ class MovePanel(ScreenPanel):
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
-            self.labels[i] = self._gtk.Button(i)
+            self.labels[i] = self._gtk.Button(label=i)
             self.labels[i].set_direction(Gtk.TextDirection.LTR)
             self.labels[i].connect("clicked", self.change_distance, i)
             ctx = self.labels[i].get_style_context()
@@ -112,7 +112,7 @@ class MovePanel(ScreenPanel):
         self.labels['pos_x'] = Gtk.Label("X: 0")
         self.labels['pos_y'] = Gtk.Label("Y: 0")
         self.labels['pos_z'] = Gtk.Label("Z: 0")
-        adjust = self._gtk.ButtonImage("settings", None, "color2", 1, Gtk.PositionType.LEFT, 1)
+        adjust = self._gtk.Button("settings", None, "color2", 1, Gtk.PositionType.LEFT, 1)
         adjust.connect("clicked", self.load_menu, 'options', _('Settings'))
         adjust.set_hexpand(False)
         self.labels['move_dist'] = Gtk.Label(_("Move Distance (mm)"))

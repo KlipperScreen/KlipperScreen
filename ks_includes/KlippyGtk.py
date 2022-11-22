@@ -140,19 +140,7 @@ class KlippyGtk:
         stream.close_async(2)
         return pixbuf
 
-    def Button(self, label=None, style=None):
-        b = Gtk.Button(label=label)
-        b.set_hexpand(True)
-        b.set_vexpand(True)
-        b.set_can_focus(False)
-        b.props.relief = Gtk.ReliefStyle.NONE
-
-        if style is not None:
-            b.get_style_context().add_class(style)
-        b.connect("clicked", self.screen.reset_screensaver_timeout)
-        return b
-
-    def ButtonImage(self, image_name=None, label=None, style=None, scale=1.38, position=Gtk.PositionType.TOP, lines=2):
+    def Button(self, image_name=None, label=None, style=None, scale=1.38, position=Gtk.PositionType.TOP, lines=2):
         if self.font_size_type == "max" and label is not None and scale == 1.38:
             image_name = None
         b = Gtk.Button()

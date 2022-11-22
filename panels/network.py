@@ -58,7 +58,7 @@ class NetworkPanel(ScreenPanel):
         self.labels['interface'].set_hexpand(True)
         self.labels['ip'] = Gtk.Label()
         self.labels['ip'].set_hexpand(True)
-        reload_networks = self._gtk.ButtonImage("refresh", None, "color1", .66)
+        reload_networks = self._gtk.Button("refresh", None, "color1", .66)
         reload_networks.connect("clicked", self.reload_networks)
         reload_networks.set_hexpand(False)
 
@@ -157,12 +157,12 @@ class NetworkPanel(ScreenPanel):
         labels.set_valign(Gtk.Align.CENTER)
         labels.set_halign(Gtk.Align.START)
 
-        connect = self._gtk.ButtonImage("load", style="color3")
+        connect = self._gtk.Button("load", style="color3")
         connect.connect("clicked", self.connect_network, ssid)
         connect.set_hexpand(False)
         connect.set_halign(Gtk.Align.END)
 
-        delete = self._gtk.ButtonImage("delete", style="color3")
+        delete = self._gtk.Button("delete", style="color3")
         delete.connect("clicked", self.remove_wifi_network, ssid)
         delete.set_size_request(60, 0)
         delete.set_hexpand(False)
@@ -346,7 +346,7 @@ class NetworkPanel(ScreenPanel):
         self.labels['network_psk'].connect("focus-in-event", self._show_keyboard)
         self.labels['network_psk'].grab_focus_without_selecting()
 
-        save = self._gtk.ButtonImage("sd", _("Save"), "color3")
+        save = self._gtk.Button("sd", _("Save"), "color3")
         save.set_hexpand(False)
         save.connect("clicked", self.add_new_network, ssid, True)
 

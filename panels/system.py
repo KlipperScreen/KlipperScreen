@@ -36,17 +36,17 @@ class SystemPanel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
 
-        update_all = self._gtk.ButtonImage('arrow-up', _('Full Update'), 'color1')
+        update_all = self._gtk.Button('arrow-up', _('Full Update'), 'color1')
         update_all.connect("clicked", self.show_update_info, "full")
         update_all.set_vexpand(False)
-        self.refresh = self._gtk.ButtonImage('refresh', _('Refresh'), 'color2')
+        self.refresh = self._gtk.Button('refresh', _('Refresh'), 'color2')
         self.refresh.connect("clicked", self.refresh_updates)
         self.refresh.set_vexpand(False)
 
-        reboot = self._gtk.ButtonImage('refresh', _('Restart'), 'color3')
+        reboot = self._gtk.Button('refresh', _('Restart'), 'color3')
         reboot.connect("clicked", self.reboot_poweroff, "reboot")
         reboot.set_vexpand(False)
-        shutdown = self._gtk.ButtonImage('shutdown', _('Shutdown'), 'color4')
+        shutdown = self._gtk.Button('shutdown', _('Shutdown'), 'color4')
         shutdown.connect("clicked", self.reboot_poweroff, "poweroff")
         shutdown.set_vexpand(False)
 
@@ -75,7 +75,7 @@ class SystemPanel(ScreenPanel):
                 self.labels[f"{prog}_status"].connect("clicked", self.show_update_info, prog)
 
                 if prog in ALLOWED_SERVICES:
-                    self.labels[f"{prog}_restart"] = self._gtk.ButtonImage("refresh", scale=.7)
+                    self.labels[f"{prog}_restart"] = self._gtk.Button("refresh", scale=.7)
                     self.labels[f"{prog}_restart"].connect("clicked", self.restart, prog)
                     infogrid.attach(self.labels[f"{prog}_restart"], 0, i, 1, 1)
 

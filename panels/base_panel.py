@@ -29,22 +29,22 @@ class BasePanel(ScreenPanel):
         self.current_extruder = None
         # Action bar buttons
         scale = 1.5 if self._gtk.font_size_type == "extralarge" else 1
-        self.control['back'] = self._gtk.ButtonImage('back', scale=scale)
+        self.control['back'] = self._gtk.Button('back', scale=scale)
         self.control['back'].connect("clicked", self.back)
-        self.control['home'] = self._gtk.ButtonImage('main', scale=scale)
+        self.control['home'] = self._gtk.Button('main', scale=scale)
         self.control['home'].connect("clicked", self._screen._menu_go_home)
 
         if len(self._config.get_printers()) > 1:
-            self.control['printer_select'] = self._gtk.ButtonImage('shuffle', scale=scale)
+            self.control['printer_select'] = self._gtk.Button('shuffle', scale=scale)
             self.control['printer_select'].connect("clicked", self._screen.show_printer_select)
 
-        self.control['macros_shortcut'] = self._gtk.ButtonImage('custom-script', scale=scale)
+        self.control['macros_shortcut'] = self._gtk.Button('custom-script', scale=scale)
         self.control['macros_shortcut'].connect("clicked", self.menu_item_clicked, "gcode_macros", {
             "name": "Macros",
             "panel": "gcode_macros"
         })
 
-        self.control['estop'] = self._gtk.ButtonImage('emergency', scale=scale)
+        self.control['estop'] = self._gtk.Button('emergency', scale=scale)
         self.control['estop'].connect("clicked", self.emergency_stop)
 
         # Any action bar button should close the keyboard

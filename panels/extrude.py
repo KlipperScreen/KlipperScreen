@@ -39,17 +39,17 @@ class ExtrudePanel(ScreenPanel):
 
         self.distance = int(self.distances[1])
         self.speed = int(self.speeds[1])
-        self.labels['extrude'] = self._gtk.ButtonImage("extrude", _("Extrude"), "color4")
+        self.labels['extrude'] = self._gtk.Button("extrude", _("Extrude"), "color4")
         self.labels['extrude'].connect("clicked", self.extrude, "+")
-        self.labels['load'] = self._gtk.ButtonImage("arrow-down", _("Load"), "color3")
+        self.labels['load'] = self._gtk.Button("arrow-down", _("Load"), "color3")
 
         self.labels['load'].connect("clicked", self.load_unload, "+")
-        self.labels['unload'] = self._gtk.ButtonImage("arrow-up", _("Unload"), "color2")
+        self.labels['unload'] = self._gtk.Button("arrow-up", _("Unload"), "color2")
 
         self.labels['unload'].connect("clicked", self.load_unload, "-")
-        self.labels['retract'] = self._gtk.ButtonImage("retract", _("Retract"), "color1")
+        self.labels['retract'] = self._gtk.Button("retract", _("Retract"), "color1")
         self.labels['retract'].connect("clicked", self.extrude, "-")
-        self.labels['temperature'] = self._gtk.ButtonImage("heat-up", _("Temperature"), "color4")
+        self.labels['temperature'] = self._gtk.Button("heat-up", _("Temperature"), "color4")
         self.labels['temperature'].connect("clicked", self.menu_item_clicked, "temperature", {
             "name": "Temperature",
             "panel": "temperature"
@@ -60,10 +60,9 @@ class ExtrudePanel(ScreenPanel):
         i = 0
         for extruder in self._printer.get_tools():
             if self._printer.extrudercount > 1:
-                self.labels[extruder] = self._gtk.ButtonImage(f"extruder-{i}",
-                                                              f"T{self._printer.get_tool_number(extruder)}")
+                self.labels[extruder] = self._gtk.Button(f"extruder-{i}", f"T{self._printer.get_tool_number(extruder)}")
             else:
-                self.labels[extruder] = self._gtk.ButtonImage("extruder", "")
+                self.labels[extruder] = self._gtk.Button("extruder", "")
             self.labels[extruder].connect("clicked", self.change_extruder, extruder)
             if extruder == self.current_extruder:
                 self.labels[extruder].get_style_context().add_class("button_active")
@@ -75,7 +74,7 @@ class ExtrudePanel(ScreenPanel):
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
-            self.labels[f"dist{i}"] = self._gtk.Button(i)
+            self.labels[f"dist{i}"] = self._gtk.Button(label=i)
             self.labels[f"dist{i}"].connect("clicked", self.change_distance, int(i))
             ctx = self.labels[f"dist{i}"].get_style_context()
             if ((self._screen.lang_ltr is True and j == 0) or

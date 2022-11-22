@@ -23,13 +23,13 @@ class BedMeshPanel(ScreenPanel):
         self.profiles = {}
         self.show_create = False
         self.active_mesh = None
-        addprofile = self._gtk.ButtonImage("increase", " " + _("Add profile"), "color1", .66, Gtk.PositionType.LEFT, 1)
+        addprofile = self._gtk.Button("increase", " " + _("Add profile"), "color1", .66, Gtk.PositionType.LEFT, 1)
         addprofile.connect("clicked", self.show_create_profile)
         addprofile.set_hexpand(True)
-        self.clear = self._gtk.ButtonImage("cancel", " " + _("Clear"), "color2", .66, Gtk.PositionType.LEFT, 1)
+        self.clear = self._gtk.Button("cancel", " " + _("Clear"), "color2", .66, Gtk.PositionType.LEFT, 1)
         self.clear.connect("clicked", self.send_clear_mesh)
         self.clear.set_hexpand(True)
-        calibrate = self._gtk.ButtonImage("refresh", " " + _("Calibrate"), "color3", .66, Gtk.PositionType.LEFT, 1)
+        calibrate = self._gtk.Button("refresh", " " + _("Calibrate"), "color3", .66, Gtk.PositionType.LEFT, 1)
         calibrate.connect("clicked", self.calibrate_mesh)
         calibrate.set_hexpand(True)
 
@@ -115,7 +115,7 @@ class BedMeshPanel(ScreenPanel):
 
     def add_profile(self, profile):
         logging.debug(f"Adding Profile: {profile}")
-        name = self._gtk.Button(f"<big><b>{profile}</b></big>")
+        name = self._gtk.Button(label=f"<big><b>{profile}</b></big>")
         name.get_children()[0].set_use_markup(True)
         name.get_children()[0].set_line_wrap(True)
         name.get_children()[0].set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
@@ -125,8 +125,8 @@ class BedMeshPanel(ScreenPanel):
         name.connect("clicked", self.update_graph, profile)
 
         buttons = {
-            "save": self._gtk.ButtonImage("complete", None, "color4", .75),
-            "delete": self._gtk.ButtonImage("cancel", None, "color2", .75),
+            "save": self._gtk.Button("complete", None, "color4", .75),
+            "delete": self._gtk.Button("cancel", None, "color2", .75),
         }
         buttons["save"].connect("clicked", self.send_save_mesh, profile)
         buttons["delete"].connect("clicked", self.send_remove_mesh, profile)
@@ -230,7 +230,7 @@ class BedMeshPanel(ScreenPanel):
             self.labels['profile_name'].connect("focus-in-event", self._show_keyboard)
             self.labels['profile_name'].grab_focus_without_selecting()
 
-            save = self._gtk.ButtonImage("complete", _("Save"), "color3")
+            save = self._gtk.Button("complete", _("Save"), "color3")
             save.set_hexpand(False)
             save.connect("clicked", self.create_profile)
 

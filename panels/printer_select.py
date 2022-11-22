@@ -32,7 +32,7 @@ class PrinterSelect(ScreenPanel):
 
         for i, printer in enumerate(printers):
             name = list(printer)[0]
-            self.labels[name] = self._gtk.ButtonImage("extruder", name, f"color{1 + i % 4}")
+            self.labels[name] = self._gtk.Button("extruder", name, f"color{1 + i % 4}")
             self.labels[name].connect("clicked", self.connect_printer, name)
             if self._screen.vertical_mode:
                 row = i % columns

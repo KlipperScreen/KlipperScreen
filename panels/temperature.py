@@ -69,8 +69,8 @@ class TemperaturePanel(ScreenPanel):
 
     def create_right_panel(self):
 
-        cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'), "color4", .5, Gtk.PositionType.LEFT, 1)
-        adjust = self._gtk.ButtonImage('fine-tune', None, "color3", 1, Gtk.PositionType.LEFT, 1)
+        cooldown = self._gtk.Button('cool-down', _('Cooldown'), "color4", .5, Gtk.PositionType.LEFT, 1)
+        adjust = self._gtk.Button('fine-tune', None, "color3", 1, Gtk.PositionType.LEFT, 1)
         cooldown.connect("clicked", self.set_temperature, "cooldown")
         adjust.connect("clicked", self.switch_preheat_adjust)
 
@@ -98,7 +98,7 @@ class TemperaturePanel(ScreenPanel):
         i = 0
         for option in self.preheat_options:
             if option != "cooldown":
-                self.labels[option] = self._gtk.Button(option, f"color{(i % 4) + 1}")
+                self.labels[option] = self._gtk.Button(label=option, style=f"color{(i % 4) + 1}")
                 self.labels[option].connect("clicked", self.set_temperature, option)
                 self.labels['preheat_grid'].attach(self.labels[option], (i % 2), int(i / 2), 1, 1)
                 i += 1
@@ -108,14 +108,14 @@ class TemperaturePanel(ScreenPanel):
 
     def delta_adjust(self):
         deltagrid = self._gtk.HomogeneousGrid()
-        self.labels["increase"] = self._gtk.ButtonImage("increase", _("Increase"), "color1")
+        self.labels["increase"] = self._gtk.Button("increase", _("Increase"), "color1")
         self.labels["increase"].connect("clicked", self.change_target_temp_incremental, "+")
-        self.labels["decrease"] = self._gtk.ButtonImage("decrease", _("Decrease"), "color3")
+        self.labels["decrease"] = self._gtk.Button("decrease", _("Decrease"), "color3")
         self.labels["decrease"].connect("clicked", self.change_target_temp_incremental, "-")
 
         tempgrid = Gtk.Grid()
         for j, i in enumerate(self.tempdeltas):
-            self.labels[f'deg{i}'] = self._gtk.Button(i)
+            self.labels[f'deg{i}'] = self._gtk.Button(label=i)
             self.labels[f'deg{i}'].connect("clicked", self.change_temp_delta, i)
             ctx = self.labels[f'deg{i}'].get_style_context()
             if j == 0:
@@ -328,7 +328,7 @@ class TemperaturePanel(ScreenPanel):
 
         rgb = self._gtk.get_temp_color(dev_type)
 
-        name = self._gtk.ButtonImage(image, devname.capitalize().replace("_", " "), None, .5, Gtk.PositionType.LEFT, 1)
+        name = self._gtk.Button(image, devname.capitalize().replace("_", " "), None, .5, Gtk.PositionType.LEFT, 1)
         name.set_alignment(0, .5)
         visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}", device, fallback=True)
         if visible:
@@ -346,7 +346,7 @@ class TemperaturePanel(ScreenPanel):
             name.connect("clicked", self.toggle_visibility, device)
         self.labels['da'].set_showing(device, visible)
 
-        temp = self._gtk.Button("")
+        temp = self._gtk.Button(label="")
         if can_target:
             temp.connect("clicked", self.show_numpad, device)
 

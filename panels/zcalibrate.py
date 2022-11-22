@@ -37,14 +37,14 @@ class ZCalibratePanel(ScreenPanel):
             pos.attach(Gtk.Label(f"{self.z_offset:.2f}"), 0, 4, 1, 1)
             pos.attach(self.widgets['zoffset'], 1, 4, 1, 1)
 
-        self.widgets['zpos'] = self._gtk.ButtonImage('z-farther', _("Raise Nozzle"), 'color4')
+        self.widgets['zpos'] = self._gtk.Button('z-farther', _("Raise Nozzle"), 'color4')
         self.widgets['zpos'].connect("clicked", self.move, "+")
-        self.widgets['zneg'] = self._gtk.ButtonImage('z-closer', _("Lower Nozzle"), 'color1')
+        self.widgets['zneg'] = self._gtk.Button('z-closer', _("Lower Nozzle"), 'color1')
         self.widgets['zneg'].connect("clicked", self.move, "-")
-        self.widgets['start'] = self._gtk.ButtonImage('resume', _("Start"), 'color3')
-        self.widgets['complete'] = self._gtk.ButtonImage('complete', _('Accept'), 'color3')
+        self.widgets['start'] = self._gtk.Button('resume', _("Start"), 'color3')
+        self.widgets['complete'] = self._gtk.Button('complete', _('Accept'), 'color3')
         self.widgets['complete'].connect("clicked", self.accept)
-        self.widgets['cancel'] = self._gtk.ButtonImage('cancel', _('Abort'), 'color2')
+        self.widgets['cancel'] = self._gtk.Button('cancel', _('Abort'), 'color2')
         self.widgets['cancel'].connect("clicked", self.abort)
 
         functions = []
@@ -81,7 +81,7 @@ class ZCalibratePanel(ScreenPanel):
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
-            self.widgets[i] = self._gtk.Button(i)
+            self.widgets[i] = self._gtk.Button(label=i)
             self.widgets[i].set_direction(Gtk.TextDirection.LTR)
             self.widgets[i].connect("clicked", self.change_distance, i)
             ctx = self.widgets[i].get_style_context()

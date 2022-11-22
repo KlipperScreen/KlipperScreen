@@ -72,13 +72,13 @@ class Keyboard(Gtk.Box):
             for r, row in enumerate(pallet):
                 for k, key in enumerate(row):
                     if key == "⌫":
-                        self.buttons[p][r][k] = screen.gtk.ButtonImage("backspace", scale=.6)
+                        self.buttons[p][r][k] = screen.gtk.Button("backspace", scale=.6)
                     elif key == "✕":
-                        self.buttons[p][r][k] = screen.gtk.ButtonImage("cancel", scale=.6)
+                        self.buttons[p][r][k] = screen.gtk.Button("cancel", scale=.6)
                     elif key == "✔":
-                        self.buttons[p][r][k] = screen.gtk.ButtonImage("complete", scale=.6)
+                        self.buttons[p][r][k] = screen.gtk.Button("complete", scale=.6)
                     else:
-                        self.buttons[p][r][k] = screen.gtk.Button(key)
+                        self.buttons[p][r][k] = screen.gtk.Button(label=key, lines=1)
                     self.buttons[p][r][k].set_hexpand(True)
                     self.buttons[p][r][k].set_vexpand(True)
                     self.buttons[p][r][k].connect('button-press-event', self.repeat, key)

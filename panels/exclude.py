@@ -22,7 +22,7 @@ class ExcludeObjectPanel(ScreenPanel):
         self.object_list.set_valign(Gtk.Align.CENTER)
         self.object_list.set_halign(Gtk.Align.START)
         self.buttons = {}
-        self.current_object = self._gtk.ButtonImage("extrude", "", scale=.66, position=Gtk.PositionType.LEFT, lines=1)
+        self.current_object = self._gtk.Button("extrude", "", scale=.66, position=Gtk.PositionType.LEFT, lines=1)
         self.current_object.connect("clicked", self.exclude_current)
         self.current_object.set_vexpand(False)
         self.excluded_objects = self._printer.get_stat("exclude_object", "excluded_objects")
@@ -61,7 +61,7 @@ class ExcludeObjectPanel(ScreenPanel):
 
     def add_object(self, name):
         if name not in self.buttons and name not in self.excluded_objects:
-            self.buttons[name] = self._gtk.Button(name.replace("_", " "))
+            self.buttons[name] = self._gtk.Button(label=name.replace("_", " "))
             self.buttons[name].get_children()[0].set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
             self.buttons[name].get_children()[0].set_line_wrap(True)
             self.buttons[name].connect("clicked", self.exclude_object, name)
