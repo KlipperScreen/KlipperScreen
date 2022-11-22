@@ -28,7 +28,7 @@ class MacroPanel(ScreenPanel):
         sort.set_hexpand(False)
 
         adjust = self._gtk.ButtonImage("settings", None, "color2", 1, Gtk.PositionType.LEFT, 1)
-        adjust.connect("clicked", self.load_menu, 'options')
+        adjust.connect("clicked", self.load_menu, 'options', _("Settings"))
         adjust.set_hexpand(False)
 
         sbox = Gtk.Box()

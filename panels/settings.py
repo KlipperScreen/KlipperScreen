@@ -120,7 +120,7 @@ class SettingsPanel(ScreenPanel):
             dev.add(box)
         elif option['type'] == "menu":
             open_menu = self._gtk.ButtonImage("settings", style="color3")
-            open_menu.connect("clicked", self.load_menu, option['menu'])
+            open_menu.connect("clicked", self.load_menu, option['menu'], option['name'])
             open_menu.set_hexpand(False)
             open_menu.set_halign(Gtk.Align.END)
             dev.add(open_menu)

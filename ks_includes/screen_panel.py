@@ -61,7 +61,7 @@ class ScreenPanel:
     def show_all(self):
         self._screen.show_all()
 
-    def load_menu(self, widget, name):
+    def load_menu(self, widget, name, title=None):
         if f"{name}_menu" not in self.labels:
             return
 
@@ -71,12 +71,14 @@ class ScreenPanel:
         self.menu.append(f'{name}_menu')
         self.content.add(self.labels[self.menu[-1]])
         self.content.show_all()
+        if title:
+            self._screen.base_panel.set_title(f"{self.title} | {title}")
 
     def unload_menu(self, widget=None):
         logging.debug(f"self.menu: {self.menu}")
         if len(self.menu) <= 1 or self.menu[-2] not in self.labels:
             return
-
+        self._screen.base_panel.set_title(self._screen.panels[self._screen._cur_panels[-1]].title)
         self.menu.pop()
         for child in self.content.get_children():
             self.content.remove(child)
