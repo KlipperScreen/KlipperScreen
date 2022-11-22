@@ -17,7 +17,7 @@ class MacroPanel(ScreenPanel):
         super().__init__(screen, title)
         self.sort_reverse = False
         self.sort_lbl = _("Name")
-        self.sort_btn = self._gtk.Button("arrow-up", self.sort_lbl, "color1", .5, Gtk.PositionType.RIGHT, 1)
+        self.sort_btn = self._gtk.Button("arrow-up", self.sort_lbl, "color1", self.bts, Gtk.PositionType.RIGHT, 1)
         self.sort_btn.connect("clicked", self.change_sort)
         self.sort_btn.set_hexpand(True)
         self.allmacros = {}
@@ -27,7 +27,7 @@ class MacroPanel(ScreenPanel):
         sort = Gtk.Label(_("Sort:"))
         sort.set_hexpand(False)
 
-        adjust = self._gtk.Button("settings", None, "color2", 1, Gtk.PositionType.LEFT, 1)
+        adjust = self._gtk.Button("settings", None, "color2", self.bts, Gtk.PositionType.LEFT, 1)
         adjust.connect("clicked", self.load_menu, 'options', _("Settings"))
         adjust.set_hexpand(False)
 
@@ -103,9 +103,9 @@ class MacroPanel(ScreenPanel):
     def change_sort(self, widget):
         self.sort_reverse ^= True
         if self.sort_reverse:
-            self.sort_btn.set_image(self._gtk.Image("arrow-down", self._gtk.img_scale * .5))
+            self.sort_btn.set_image(self._gtk.Image("arrow-down", self.bts))
         else:
-            self.sort_btn.set_image(self._gtk.Image("arrow-up", self._gtk.img_scale * .5))
+            self.sort_btn.set_image(self._gtk.Image("arrow-up", self.bts))
         self.sort_btn.show()
 
         GLib.idle_add(self.reload_macros)

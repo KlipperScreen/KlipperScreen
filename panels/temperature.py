@@ -29,7 +29,6 @@ class TemperaturePanel(ScreenPanel):
         self.tempdelta = self.tempdeltas[-2]
         self.show_preheat = False
         self.preheat_options = self._screen._config.get_preheat_options()
-        logging.debug(f"Preheat options: {self.preheat_options}")
         self.grid = self._gtk.HomogeneousGrid()
         self._gtk.reset_temp_color()
         self.grid.attach(self.create_left_panel(), 0, 0, 1, 1)
@@ -68,9 +67,8 @@ class TemperaturePanel(ScreenPanel):
         self.layout.show_all()
 
     def create_right_panel(self):
-
-        cooldown = self._gtk.Button('cool-down', _('Cooldown'), "color4", .5, Gtk.PositionType.LEFT, 1)
-        adjust = self._gtk.Button('fine-tune', None, "color3", 1, Gtk.PositionType.LEFT, 1)
+        cooldown = self._gtk.Button('cool-down', _('Cooldown'), "color4", self.bts, Gtk.PositionType.LEFT, 1)
+        adjust = self._gtk.Button('fine-tune', None, "color3", self.bts, Gtk.PositionType.LEFT, 1)
         cooldown.connect("clicked", self.set_temperature, "cooldown")
         adjust.connect("clicked", self.switch_preheat_adjust)
 
@@ -328,7 +326,7 @@ class TemperaturePanel(ScreenPanel):
 
         rgb = self._gtk.get_temp_color(dev_type)
 
-        name = self._gtk.Button(image, devname.capitalize().replace("_", " "), None, .5, Gtk.PositionType.LEFT, 1)
+        name = self._gtk.Button(image, devname.capitalize().replace("_", " "), None, self.bts, Gtk.PositionType.LEFT, 1)
         name.set_alignment(0, .5)
         visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}", device, fallback=True)
         if visible:

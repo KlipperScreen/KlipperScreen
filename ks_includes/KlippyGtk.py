@@ -150,6 +150,8 @@ class KlippyGtk:
         b.set_vexpand(True)
         b.set_can_focus(False)
         if image_name is not None:
+            if label is None:
+                scale = scale * 1.5
             width = height = self.img_scale * scale
             b.set_image(self.Image(image_name, width, height))
         b.set_image_position(position)
