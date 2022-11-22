@@ -41,12 +41,6 @@ class ScreenPanel:
         else:
             self._screen._ws.klippy.emergency_stop()
 
-    def get(self):
-        return self.layout
-
-    def get_content(self):
-        return self.content
-
     def get_file_image(self, filename, width=None, height=None, small=False):
         if not self._files.has_thumbnail(filename):
             return None
@@ -61,14 +55,8 @@ class ScreenPanel:
             return self._gtk.PixbufFromHttp(loc[1], width, height)
         return None
 
-    def get_title(self):
-        return self.title
-
     def menu_item_clicked(self, widget, panel, item):
         self._screen.show_panel(panel, item['panel'], item['name'], 1, False)
-
-    def set_title(self, title):
-        self.title = title
 
     def show_all(self):
         self._screen.show_all()

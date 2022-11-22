@@ -119,7 +119,7 @@ class KlipperScreen(Gtk.Window):
         self.set_icon_from_file(os.path.join(klipperscreendir, "styles", "icon.svg"))
 
         self.base_panel = BasePanel(self, title="Base Panel")
-        self.add(self.base_panel.get())
+        self.add(self.base_panel.layout)
         self.show_all()
         if show_cursor:
             self.get_window().set_cursor(
@@ -318,7 +318,7 @@ class KlipperScreen(Gtk.Window):
         box.add(msg)
         box.add(close)
 
-        self.base_panel.get().put(box, 0, 0)
+        self.base_panel.layout.put(box, 0, 0)
 
         self.show_all()
         self.popup_message = box
@@ -332,7 +332,7 @@ class KlipperScreen(Gtk.Window):
         if self.popup_message is None:
             return
 
-        self.base_panel.get().remove(self.popup_message)
+        self.base_panel.layout.remove(self.popup_message)
         self.popup_message = None
 
     def show_error_modal(self, err, e=""):
@@ -489,7 +489,7 @@ class KlipperScreen(Gtk.Window):
         if len(self._cur_panels) <= 0:
             self.reload_panels()
             return
-        self.base_panel.remove(self.panels[self._cur_panels[-1]].get_content())
+        self.base_panel.remove(self.panels[self._cur_panels[-1]].content)
         if hasattr(self.panels[self._cur_panels[-1]], "deactivate"):
             self.panels[self._cur_panels[-1]].deactivate()
         if self._cur_panels[-1] in self.subscriptions:
@@ -544,7 +544,7 @@ class KlipperScreen(Gtk.Window):
         box.pack_start(close, True, True, 0)
         box.set_halign(Gtk.Align.CENTER)
         box.get_style_context().add_class("screensaver")
-        self.base_panel.get().put(box, 0, 0)
+        self.base_panel.layout.put(box, 0, 0)
 
         # Avoid leaving a cursor-handle
         close.grab_focus()
@@ -556,7 +556,7 @@ class KlipperScreen(Gtk.Window):
         if self.screensaver is None:
             return False
         logging.debug("Closing Screensaver")
-        self.base_panel.get().remove(self.screensaver)
+        self.base_panel.layout.remove(self.screensaver)
         self.screensaver = None
         if self.use_dpms:
             self.wake_screen()
@@ -926,7 +926,7 @@ class KlipperScreen(Gtk.Window):
             keyboard = Gtk.Socket()
             box.get_style_context().add_class("keyboard_matchbox")
             box.pack_start(keyboard, True, True, 0)
-            self.base_panel.get_content().pack_end(box, False, False, 0)
+            self.base_panel.content.pack_end(box, False, False, 0)
 
             self.show_all()
             keyboard.add_id(xid)
@@ -946,8 +946,8 @@ class KlipperScreen(Gtk.Window):
             "entry": entry,
             "box": box
         }
-        self.base_panel.get_content().pack_end(box, False, False, 0)
-        self.base_panel.get_content().show_all()
+        self.base_panel.content.pack_end(box, False, False, 0)
+        self.base_panel.content.show_all()
 
     def remove_keyboard(self, widget=None, event=None):
         if self.keyboard is None:
@@ -955,7 +955,7 @@ class KlipperScreen(Gtk.Window):
 
         if 'process' in self.keyboard:
             os.kill(self.keyboard['process'].pid, SIGTERM)
-        self.base_panel.get_content().remove(self.keyboard['box'])
+        self.base_panel.content.remove(self.keyboard['box'])
         self.keyboard = None
 
     def _key_press_event(self, widget, event):

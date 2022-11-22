@@ -200,8 +200,8 @@ class BasePanel(ScreenPanel):
 
     def add_content(self, panel):
         self.current_panel = panel
-        self.set_title(panel.get_title())
-        self.content.add(panel.get_content())
+        self.set_title(panel.title)
+        self.content.add(panel.content)
 
     def back(self, widget=None):
         if self.current_panel is None:
