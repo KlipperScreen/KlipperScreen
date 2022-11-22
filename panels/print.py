@@ -37,18 +37,16 @@ class PrintPanel(ScreenPanel):
         self.directories = {}
         self.labels['directories'] = {}
         self.labels['files'] = {}
-        sort = Gtk.Label(_("Sort:"))
         sbox = Gtk.Box(spacing=0)
         sbox.set_vexpand(False)
-        sbox.pack_start(sort, False, False, 5)
         for i, (name, val) in enumerate(self.sort_items.items(), start=1):
             s = self._gtk.Button(None, val, f"color{i % 4}", .5, Gtk.PositionType.RIGHT, 1)
             if name == self.sort_current[0]:
-                s.set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], self._gtk.img_scale * .5))
+                s.set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], self._gtk.img_scale * self.bts))
             s.connect("clicked", self.change_sort, name)
             self.labels[f'sort_{name}'] = s
             sbox.add(s)
-        refresh = self._gtk.Button("refresh", scale=.66)
+        refresh = self._gtk.Button("refresh", style="color4", scale=self.bts)
         refresh.connect('clicked', self._refresh_files)
         sbox.add(refresh)
         sbox.set_hexpand(True)
@@ -287,7 +285,7 @@ class PrintPanel(ScreenPanel):
             self.labels[f'sort_{oldkey}'].show_all()
             self.sort_current = [key, 0]
         self.labels[f'sort_{key}'].set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]],
-                                                             self._gtk.img_scale * .5))
+                                                             self._gtk.img_scale * self.bts))
         self.labels[f'sort_{key}'].show()
         GLib.idle_add(self.reload_files)
 

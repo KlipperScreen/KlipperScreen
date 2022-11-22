@@ -24,8 +24,6 @@ class MacroPanel(ScreenPanel):
         self.loaded_macros = []
         self.macros = {}
         self.menu = ['macros_menu']
-        sort = Gtk.Label(_("Sort:"))
-        sort.set_hexpand(False)
 
         adjust = self._gtk.Button("settings", None, "color2", self.bts, Gtk.PositionType.LEFT, 1)
         adjust.connect("clicked", self.load_menu, 'options', _("Settings"))
@@ -33,7 +31,6 @@ class MacroPanel(ScreenPanel):
 
         sbox = Gtk.Box()
         sbox.set_vexpand(False)
-        sbox.pack_start(sort, False, False, 5)
         sbox.pack_start(self.sort_btn, True, True, 5)
         sbox.pack_start(adjust, True, True, 5)
 
