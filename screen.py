@@ -639,6 +639,7 @@ class KlipperScreen(Gtk.Window):
         if self.is_updating():
             self.update_queue.append([callback])
         else:
+            self.reinit_count = 0
             self.init_printer()
             callback()
 
