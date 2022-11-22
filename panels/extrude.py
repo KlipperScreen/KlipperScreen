@@ -91,7 +91,7 @@ class ExtrudePanel(ScreenPanel):
 
         speedgrid = Gtk.Grid()
         for j, i in enumerate(self.speeds):
-            self.labels[f"speed{i}"] = self._gtk.Button(i)
+            self.labels[f"speed{i}"] = self._gtk.Button(label=i)
             self.labels[f"speed{i}"].connect("clicked", self.change_speed, int(i))
             ctx = self.labels[f"speed{i}"].get_style_context()
             if ((self._screen.lang_ltr is True and j == 0) or
