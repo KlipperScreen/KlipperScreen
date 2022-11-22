@@ -71,18 +71,16 @@ class TemperaturePanel(ScreenPanel):
 
         cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'), "color4", .5, Gtk.PositionType.LEFT, 1)
         adjust = self._gtk.ButtonImage('fine-tune', None, "color3", 1, Gtk.PositionType.LEFT, 1)
+        cooldown.connect("clicked", self.set_temperature, "cooldown")
+        adjust.connect("clicked", self.switch_preheat_adjust)
 
         right = self._gtk.HomogeneousGrid()
         right.attach(cooldown, 0, 0, 2, 1)
         right.attach(adjust, 2, 0, 1, 1)
         if self.show_preheat:
-            right.attach(self.preheat(), 0, 1, 3, 4)
+            right.attach(self.preheat(), 0, 1, 3, 3)
         else:
-            right.attach(self.delta_adjust(), 0, 1, 3, 4)
-
-        cooldown.connect("clicked", self.set_temperature, "cooldown")
-        adjust.connect("clicked", self.switch_preheat_adjust)
-
+            right.attach(self.delta_adjust(), 0, 1, 3, 3)
         return right
 
     def switch_preheat_adjust(self, widget):
@@ -104,8 +102,7 @@ class TemperaturePanel(ScreenPanel):
                 self.labels[option].connect("clicked", self.set_temperature, option)
                 self.labels['preheat_grid'].attach(self.labels[option], (i % 2), int(i / 2), 1, 1)
                 i += 1
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll = self._gtk.ScrolledWindow()
         scroll.add(self.labels["preheat_grid"])
         return scroll
 
