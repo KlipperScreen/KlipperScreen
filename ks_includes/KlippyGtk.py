@@ -218,6 +218,8 @@ class KlippyGtk:
         return dialog
 
     def remove_dialog(self, dialog, *args):
+        if self.screen.updating:
+            return
         dialog.destroy()
         if dialog in self.screen.dialogs:
             logging.info("Removing Dialog")

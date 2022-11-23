@@ -99,8 +99,8 @@ class SystemPanel(ScreenPanel):
         self.get_updates()
 
     def finish_updating(self, dialog, response_id):
+        self._screen.updating = False
         self._gtk.remove_dialog(dialog)
-        self._screen.set_updating(False)
         self.get_updates()
 
     def refresh_updates(self, widget=None):
@@ -122,16 +122,14 @@ class SystemPanel(ScreenPanel):
         self._screen.close_popup_message()
 
     def process_update(self, action, data):
-        if action == "notify_update_response":
-            logging.info(f"Update: {data}")
-            if 'application' in data:
-                self.labels['update_progress'].set_text(
-                    f"{self.labels['update_progress'].get_text().strip()}\n"
-                    f"{data['message']}\n"
-                )
-                if data['complete']:
-                    self.update_dialog.set_response_sensitive(Gtk.ResponseType.CANCEL, True)
-                    self.update_dialog.get_widget_for_response(Gtk.ResponseType.CANCEL).show()
+        if action == "notify_update_response" and 'application' in data:
+            self.labels['update_progress'].set_text(
+                f"{self.labels['update_progress'].get_text().strip()}\n"
+                f"{data['message']}\n"
+            )
+            if data['complete']:
+                self.update_dialog.set_response_sensitive(Gtk.ResponseType.CANCEL, True)
+                self.update_dialog.get_widget_for_response(Gtk.ResponseType.CANCEL).show()
 
     def restart(self, widget, program):
         if program not in ALLOWED_SERVICES:
@@ -253,7 +251,7 @@ class SystemPanel(ScreenPanel):
             self.reset_repo(self, program, False)
 
     def reset_repo(self, widget, program, hard):
-        if self._screen.is_updating():
+        if self._screen.updating:
             return
 
         buttons = [
@@ -280,10 +278,10 @@ class SystemPanel(ScreenPanel):
         logging.info(f"Sending machine.update.recover name: {program}")
 
         self._screen._ws.send_method("machine.update.recover", {"name": program, "hard": hard})
-        self._screen.set_updating(True)
+        self._screen.updating = True
 
     def update_program(self, widget, program):
-        if self._screen.is_updating():
+        if self._screen.updating:
             return
 
         if not self.update_status:
@@ -328,7 +326,7 @@ class SystemPanel(ScreenPanel):
         else:
             logging.info(f"Sending machine.update.client name: {program}")
             self._screen._ws.send_method("machine.update.client", {"name": program})
-        self._screen.set_updating(True)
+        self._screen.updating = True
 
     def update_program_info(self, p):
 
