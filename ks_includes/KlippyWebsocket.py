@@ -28,7 +28,7 @@ class KlippyWebsocket(threading.Thread):
         self._callback = callback
         self.klippy = MoonrakerApi(self)
         self.ws = None
-
+        self.closing = False
         self.host = host
         self.port = port
 
@@ -86,9 +86,9 @@ class KlippyWebsocket(threading.Thread):
             logging.debug("Error starting web socket")
 
     def close(self):
+        self.closing = True
         self.connecting = False
         if self.ws is not None:
-            logging.debug("Closing websocket")
             self.ws.close()
 
     def on_message(self, *args):
@@ -144,10 +144,14 @@ class KlippyWebsocket(threading.Thread):
         if not self.connected:
             logging.debug("Connection already closed")
             return
-
+        if self.closing:
+            logging.debug("Closing websocket")
+            self.ws.keep_running = False
+            self.close()
+            self.closing = False
+            return
         if "on_close" in self._callback:
             GLib.idle_add(self._callback['on_close'], "Lost Connection to Moonraker")
-
         logging.info("Moonraker Websocket Closed")
         self.connected = False
 
