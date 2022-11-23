@@ -40,6 +40,12 @@ class ScreenPanel:
         else:
             self.bts = .5
 
+        self.update_dialog = None
+
+    def _autoscroll(self, scroll, *args):
+        adj = scroll.get_vadjustment()
+        adj.set_value(adj.get_upper() - adj.get_page_size())
+
     def emergency_stop(self, widget):
         if self._config.get_main_config().getboolean('confirm_estop', False):
             self._screen._confirm_send_action(widget, _("Are you sure you want to run Emergency Stop?"),

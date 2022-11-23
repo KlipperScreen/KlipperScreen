@@ -31,7 +31,6 @@ class SystemPanel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         self.refresh = None
-        self.update_status = None
         self.update_dialog = None
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
@@ -56,9 +55,9 @@ class SystemPanel(ScreenPanel):
         infogrid = Gtk.Grid()
         infogrid.get_style_context().add_class("system-program-grid")
         update_resp = self._screen.apiclient.send_request("machine/update/status")
-        self.update_status = None
 
         if not update_resp:
+            self.update_status = {}
             logging.info("No update manager configured")
         else:
             self.update_status = update_resp['result']
@@ -98,11 +97,6 @@ class SystemPanel(ScreenPanel):
     def activate(self):
         self.get_updates()
 
-    def finish_updating(self, dialog, response_id):
-        self._screen.updating = False
-        self._gtk.remove_dialog(dialog)
-        self.get_updates()
-
     def refresh_updates(self, widget=None):
         self.refresh.set_sensitive(False)
         self._screen.show_popup_message(_("Checking for updates, please wait..."), level=1)
@@ -111,6 +105,7 @@ class SystemPanel(ScreenPanel):
     def get_updates(self, refresh="false"):
         update_resp = self._screen.apiclient.send_request(f"machine/update/status?refresh={refresh}")
         if not update_resp:
+            self.update_status = {}
             logging.info("No update manager configured")
         else:
             self.update_status = update_resp['result']
@@ -121,16 +116,6 @@ class SystemPanel(ScreenPanel):
         self.refresh.set_sensitive(True)
         self._screen.close_popup_message()
 
-    def process_update(self, action, data):
-        if action == "notify_update_response" and 'application' in data:
-            self.labels['update_progress'].set_text(
-                f"{self.labels['update_progress'].get_text().strip()}\n"
-                f"{data['message']}\n"
-            )
-            if data['complete']:
-                self.update_dialog.set_response_sensitive(Gtk.ResponseType.CANCEL, True)
-                self.update_dialog.get_widget_for_response(Gtk.ResponseType.CANCEL).show()
-
     def restart(self, widget, program):
         if program not in ALLOWED_SERVICES:
             return
@@ -139,13 +124,7 @@ class SystemPanel(ScreenPanel):
         self._screen._ws.send_method("machine.services.restart", {"service": program})
 
     def show_update_info(self, widget, program):
-
-        if not self.update_status:
-            return
-        if program in self.update_status['version_info']:
-            info = self.update_status['version_info'][program]
-        else:
-            info = {"full": True}
+        info = self.update_status['version_info'][program] if program in self.update_status['version_info'] else {}
 
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
@@ -156,7 +135,10 @@ class SystemPanel(ScreenPanel):
 
         label = Gtk.Label()
         label.set_line_wrap(True)
-        if 'configured_type' in info and info['configured_type'] == 'git_repo':
+        if program == "full":
+            label.set_markup('<b>' + _("Perform a full upgrade?") + '</b>')
+            vbox.add(label)
+        elif 'configured_type' in info and info['configured_type'] == 'git_repo':
             if not info['is_valid'] or info['is_dirty']:
                 label.set_markup(_("Do you want to recover %s?") % program)
                 vbox.add(label)
@@ -217,9 +199,6 @@ class SystemPanel(ScreenPanel):
                 if pos == 2:
                     i += 1
             vbox.add(grid)
-        elif "full" in info:
-            label.set_markup('<b>' + _("Perform a full upgrade?") + '</b>')
-            vbox.add(label)
         else:
             label.set_markup(
                 "<b>" + _("%s will be updated to version") % program.capitalize()
@@ -253,72 +232,26 @@ class SystemPanel(ScreenPanel):
     def reset_repo(self, widget, program, hard):
         if self._screen.updating:
             return
-
-        buttons = [
-            {"name": _("Finish"), "response": Gtk.ResponseType.CANCEL}
-        ]
-
-        scroll = self._gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", True)
-
-        self.labels['update_progress'] = Gtk.Label(_("Starting recovery for") + f' {program}...')
-        self.labels['update_progress'].set_halign(Gtk.Align.START)
-        self.labels['update_progress'].set_valign(Gtk.Align.START)
-        self.labels['update_progress'].set_ellipsize(Pango.EllipsizeMode.END)
-        self.labels['update_progress'].connect("size-allocate", self._autoscroll)
-        scroll.add(self.labels['update_progress'])
-        self.labels['update_scroll'] = scroll
-
-        dialog = self._gtk.Dialog(self._screen, buttons, scroll, self.finish_updating)
-        dialog.set_response_sensitive(Gtk.ResponseType.CANCEL, False)
-        dialog.get_widget_for_response(Gtk.ResponseType.CANCEL).hide()
-
-        self.update_dialog = dialog
-
-        logging.info(f"Sending machine.update.recover name: {program}")
-
+        msg = _("Starting recovery for") + f' {program}...'
+        self._screen._websocket_callback("notify_update_response",
+                                         {'application': {program}, 'message': msg, 'complete': False})
+        logging.info(f"Sending machine.update.recover name: {program} hard: {hard}")
         self._screen._ws.send_method("machine.update.recover", {"name": program, "hard": hard})
-        self._screen.updating = True
 
     def update_program(self, widget, program):
-        if self._screen.updating:
-            return
-
-        if not self.update_status:
+        if self._screen.updating or not self.update_status:
             return
 
         if program in self.update_status['version_info']:
             info = self.update_status['version_info'][program]
             logging.info(f"program: {info}")
-        else:
-            info = {"full": True}
-            logging.info("full upgrade")
+            if "package_count" in info and info['package_count'] == 0 \
+                    or "version" in info and info['version'] == info['remote_version']:
+                return
 
-        if "package_count" in info and info['package_count'] == 0 \
-                or "version" in info and info['version'] == info['remote_version']:
-            return
-        buttons = [
-            {"name": _("Finish"), "response": Gtk.ResponseType.CANCEL}
-        ]
-
-        scroll = self._gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", True)
-
-        if "full" in info:
-            self.labels['update_progress'] = Gtk.Label(_("Updating") + '\n')
-        else:
-            self.labels['update_progress'] = Gtk.Label(_("Starting update for") + f' {program}...')
-        self.labels['update_progress'].set_halign(Gtk.Align.START)
-        self.labels['update_progress'].set_valign(Gtk.Align.START)
-        self.labels['update_progress'].connect("size-allocate", self._autoscroll)
-        scroll.add(self.labels['update_progress'])
-        self.labels['update_scroll'] = scroll
-
-        dialog = self._gtk.Dialog(self._screen, buttons, scroll, self.finish_updating)
-        dialog.set_response_sensitive(Gtk.ResponseType.CANCEL, False)
-        dialog.get_widget_for_response(Gtk.ResponseType.CANCEL).hide()
-
-        self.update_dialog = dialog
+        msg = _("Updating") if program == "full" else _("Starting update for") + f' {program}...'
+        self._screen._websocket_callback("notify_update_response",
+                                         {'application': {program}, 'message': msg, 'complete': False})
 
         if program in ['klipper', 'moonraker', 'system', 'full']:
             logging.info(f"Sending machine.update.{program}")
@@ -326,7 +259,6 @@ class SystemPanel(ScreenPanel):
         else:
             logging.info(f"Sending machine.update.client name: {program}")
             self._screen._ws.send_method("machine.update.client", {"name": program})
-        self._screen.updating = True
 
     def update_program_info(self, p):
 
@@ -376,10 +308,6 @@ class SystemPanel(ScreenPanel):
         self.labels[f"{p}_status"].set_label(_("Update"))
         self.labels[f"{p}_status"].get_style_context().add_class('update')
         self.labels[f"{p}_status"].set_sensitive(True)
-
-    def _autoscroll(self, *args):
-        adj = self.labels['update_scroll'].get_vadjustment()
-        adj.set_value(adj.get_upper() - adj.get_page_size())
 
     def reboot_poweroff(self, widget, method):
         scroll = self._gtk.ScrolledWindow()
