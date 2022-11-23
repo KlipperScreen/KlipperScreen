@@ -155,7 +155,6 @@ class KlipperScreen(Gtk.Window):
         self.connecting_to_printer = name
         if self._ws is not None and self._ws.connected:
             self._ws.close()
-            return
 
         data = {
             "moonraker_host": "127.0.0.1",
@@ -182,8 +181,7 @@ class KlipperScreen(Gtk.Window):
             "startup": self.state_startup,
             "shutdown": self.state_shutdown
         }
-        self._remove_all_panels()
-        self.printer_initializing(_("Connecting to %s") % name)
+        self.printer_initializing(_("Connecting to %s") % name, remove=True)
 
         self._ws = KlippyWebsocket(self,
                                    {
