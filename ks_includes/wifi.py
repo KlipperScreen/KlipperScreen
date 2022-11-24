@@ -16,31 +16,25 @@ class WifiManager:
     networks_in_supplicant = []
     connected = False
     _stop_loop = False
-    thread = None
 
     def __init__(self, interface, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.loop = None
-        self._poll_task = None
-        self._scanning = False
         self._callbacks = {
             "connected": [],
             "connecting_status": [],
-            "scan_results": []
+            "scan_results": [],
+            "popup": [],
         }
         self._stop_loop = False
         self.connected = False
         self.connected_ssid = None
-        self.connecting_info = []
         self.event = threading.Event()
         self.initialized = False
         self.interface = interface
         self.networks = {}
         self.supplicant_networks = {}
         self.queue = Queue()
-        self.tasks = []
         self.timeout = None
-        self.scan_time = 0
 
         ks_socket_file = "/tmp/.KS_wpa_supplicant"
         if os.path.exists(ks_socket_file):
@@ -115,7 +109,7 @@ class WifiManager:
             return False
 
         logging.info(f"Attempting to connect to wifi: {netid}")
-        self.connecting_info = [f"Attempting to connect to {ssid}"]
+        self.callback("connecting_status", f"Attempting to connect to {ssid}")
         self.wpa_cli(f"SELECT_NETWORK {id}")
         self.save_wpa_conf()
 
@@ -195,19 +189,13 @@ class WifiManager:
             for net in self.networks:
                 if mac == net['mac']:
                     return net
-        return None
+        return {}
 
     def get_networks(self):
         return list(self.networks)
 
     def get_supplicant_networks(self):
         return self.supplicant_networks
-
-    def is_connected(self):
-        return self.connected
-
-    def is_initialized(self):
-        return self.initialized
 
     def read_wpa_supplicant(self):
         results = self.wpa_cli("LIST_NETWORKS").split('\n')
@@ -222,13 +210,8 @@ class WifiManager:
             }
             self.networks_in_supplicant.append(self.supplicant_networks[net[0]])
 
-    def remove_callback(self, name, callback):
-        if name in self._callbacks and callback in self._callbacks[name]:
-            self._callbacks[name].remove(callback)
-
     def rescan(self):
         self.wpa_cli("SCAN", False)
-        return True
 
     def save_wpa_conf(self):
         logging.info("Saving WPA config")
@@ -339,9 +322,6 @@ class WpaSocket(Thread):
 
     def skip_command(self):
         self.skip_commands = self.skip_commands + 1
-
-    def stop(self):
-        self._stop_loop = True
 
 
 class WifiChannels:

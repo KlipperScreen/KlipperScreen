@@ -1,38 +1,22 @@
 # Network in KlipperScreen is a connection in NetworkManager
 # Interface in KlipperScreen is a device in NetworkManager
 
-# Todo:
-# + Disable hotspot autoconnect when page is showing.
-# - Use the security provided by the AP when adding a network
-# + Consider removing hotspot from list of APs
-# + Handle hidden networks or networks with no SSID better.
-# - Fix responsiveness issue. Might be realated to DBusGMainLoop
-# - The IP address for the ethernet is not right. It is from wifi.
-# - Avahi does not announce the ethernet IP.
-# - settings = con.GetSettings() sometimes fails
-# - When adding and removing connections, make sure known_connections is updated as well.
-
-import os
+import contextlib
 import logging
-import re
-import socket
-import threading
-
-from threading import Thread
-import NetworkManager
-from queue import Queue
 import uuid
 
-from dbus.mainloop.glib import DBusGMainLoop
+import NetworkManager
 import dbus
-
+from dbus.mainloop.glib import DBusGMainLoop
 import gi
+
 gi.require_version('Gdk', '3.0')
-from gi.repository import GLib, Gdk
+from gi.repository import GLib
 
 from ks_includes.wifi import WifiChannels
 
-class WifiManagerNM():
+
+class WifiManager:
     networks_in_supplicant = []
 
     def __init__(self, interface_name, *args, **kwargs):
@@ -41,14 +25,14 @@ class WifiManagerNM():
         self._callbacks = {
             "connected": [],
             "connecting_status": [],
-            "scan_results": []
+            "scan_results": [],
+            "popup": [],
         }
         self.connected = False
         self.connected_ssid = None
-        self.connecting_info = []
         self.interface_name = interface_name
-        self.known_networks = {} # List of known connections
-        self.visible_networks = {} # List of visible access points
+        self.known_networks = {}  # List of known connections
+        self.visible_networks = {}  # List of visible access points
         self.ssid_by_path = {}
         self.path_by_ssid = {}
         self.hidden_ssid_index = 0
@@ -58,31 +42,26 @@ class WifiManagerNM():
         self.wifi_dev.OnAccessPointRemoved(self._ap_removed)
         self.wifi_dev.OnStateChanged(self._ap_state_changed)
 
-
         for ap in self.wifi_dev.GetAccessPoints():
             self._add_ap(ap)
         self._update_known_connections()
-        self._set_autoconnect_on_hotspot(False)
         self.initialized = True
 
     def _update_known_connections(self):
         self.known_networks = {}
         for con in NetworkManager.Settings.ListConnections():
             settings = con.GetSettings()
-            if "802-11-wireless" in settings and settings["802-11-wireless"]['ssid'] != "Recore":
+            if "802-11-wireless" in settings:
                 ssid = settings["802-11-wireless"]['ssid']
                 self.known_networks[ssid] = con
 
     def _ap_added(self, nm, interface, signal, access_point):
-        try:
+        with contextlib.suppress(NetworkManager.ObjectVanished):
             access_point.OnPropertiesChanged(self._ap_prop_changed)
             ssid = self._add_ap(access_point)
             for cb in self._callbacks['scan_results']:
-                Gdk.threads_add_idle(
-                    GLib.PRIORITY_DEFAULT_IDLE,
-                    cb, [ssid], [])
-        except NetworkManager.ObjectVanished:
-            pass
+                args = (cb, [ssid], [])
+                GLib.idle_add(*args)
 
     def _ap_removed(self, dev, interface, signal, access_point):
         path = access_point.object_path
@@ -90,41 +69,52 @@ class WifiManagerNM():
             ssid = self.ssid_by_path[path]
             self._remove_ap(path)
             for cb in self._callbacks['scan_results']:
-                Gdk.threads_add_idle(
-                    GLib.PRIORITY_DEFAULT_IDLE,
-                    cb, [], [ssid])
+                args = (cb, [ssid], [])
+                GLib.idle_add(*args)
 
     def _ap_state_changed(self, nm, interface, signal, old_state, new_state, reason):
         msg = ""
-        if new_state == NetworkManager.NM_DEVICE_STATE_UNKNOWN:
-            msg = "the device's state is unknown"
+        if new_state in (NetworkManager.NM_DEVICE_STATE_UNKNOWN, NetworkManager.NM_DEVICE_STATE_REASON_UNKNOWN):
+            msg = "State is unknown"
         elif new_state == NetworkManager.NM_DEVICE_STATE_UNMANAGED:
-            msg = "the device is recognized, but not managed by NetworkManager"
+            msg = "Error: Not managed by NetworkManager"
         elif new_state == NetworkManager.NM_DEVICE_STATE_UNAVAILABLE:
-            msg = "the device is managed by NetworkManager, but is not available for use. Reasons may include the wireless switched off, missing firmware, no ethernet carrier, missing supplicant or modem manager, etc."
+            msg = "Error: Not available for use:\nReasons may include the wireless switched off, missing firmware, etc."
         elif new_state == NetworkManager.NM_DEVICE_STATE_DISCONNECTED:
-            msg = "the device can be activated, but is currently idle and not connected to a network."
+            msg = "Currently disconnected"
         elif new_state == NetworkManager.NM_DEVICE_STATE_PREPARE:
-            msg = "the device is preparing the connection to the network."
+            msg = "Preparing the connection to the network"
         elif new_state == NetworkManager.NM_DEVICE_STATE_CONFIG:
-            msg = "the device is connecting to the requested network."
+            msg = "Connecting to the requested network..."
         elif new_state == NetworkManager.NM_DEVICE_STATE_NEED_AUTH:
-            msg = "the device requires more information to continue connecting to the requested network."
+            msg = "Authorizing"
         elif new_state == NetworkManager.NM_DEVICE_STATE_IP_CONFIG:
-            msg = "the device is requesting IPv4 and/or IPv6 addresses and routing information from the network."
+            msg = "Requesting IP addresses and routing information"
         elif new_state == NetworkManager.NM_DEVICE_STATE_IP_CHECK:
-            msg = "the device is checking whether further action is required for the requested network connection."
+            msg = "Checking whether further action is required for the requested network connection"
+        elif new_state == NetworkManager.NM_DEVICE_STATE_SECONDARIES:
+            msg = "Waiting for a secondary connection (like a VPN)"
         elif new_state == NetworkManager.NM_DEVICE_STATE_ACTIVATED:
             msg = "Connected"
+        elif new_state == NetworkManager.NM_DEVICE_STATE_DEACTIVATING:
+            msg = "A disconnection from the current network connection was requested"
+        elif new_state == NetworkManager.NM_DEVICE_STATE_FAILED:
+            msg = "Failed to connect to the requested network"
+            self.callback("popup", msg)
+        elif new_state == NetworkManager.NM_DEVICE_STATE_REASON_DEPENDENCY_FAILED:
+            msg = "A dependency of the connection failed"
+        elif new_state == NetworkManager.NM_DEVICE_STATE_REASON_CARRIER:
+            msg = ""
+        else:
+            logging.info(f"State {new_state}")
         if msg != "":
             self.callback("connecting_status", msg)
 
         if new_state == NetworkManager.NM_DEVICE_STATE_ACTIVATED:
             self.connected = True
             for cb in self._callbacks['connected']:
-                Gdk.threads_add_idle(
-                    GLib.PRIORITY_DEFAULT_IDLE,
-                    cb, self.get_connected_ssid(), None)
+                args = (cb, self.get_connected_ssid(), None)
+                GLib.idle_add(*args)
         else:
             self.connected = False
 
@@ -134,7 +124,7 @@ class WifiManagerNM():
     def _add_ap(self, ap):
         ssid = ap.Ssid
         if ssid == "":
-            ssid = f"(hidden-{self.hidden_ssid_index})"
+            ssid = _("Hidden") + f" {self.hidden_ssid_index}"
             self.hidden_ssid_index += 1
         self.ssid_by_path[ap.object_path] = ssid
         self.path_by_ssid[ssid] = ap.object_path
@@ -142,21 +132,17 @@ class WifiManagerNM():
         return ssid
 
     def _remove_ap(self, path):
-        ssid = self.ssid_by_path.pop(path, None)
+        self.ssid_by_path.pop(path, None)
         self.visible_networks.pop(path, None)
 
     def add_callback(self, name, callback):
         if name in self._callbacks and callback not in self._callbacks[name]:
             self._callbacks[name].append(callback)
 
-    def remove_callback(self, name, callback):
-        if name in self._callbacks and callback in self._callbacks[name]:
-            self._callbacks[name].remove(callback)
-
-    def callback(self, type, msg):
-        if type in self._callbacks:
-            for cb in self._callbacks[type]:
-                Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, cb, msg)
+    def callback(self, cb_type, msg):
+        if cb_type in self._callbacks:
+            for cb in self._callbacks[cb_type]:
+                GLib.idle_add(cb, msg)
 
     def add_network(self, ssid, psk):
         aps = self._visible_networks_by_ssid()
@@ -185,22 +171,23 @@ class WifiManagerNM():
                 'method': 'auto'
             }
         }
-        NetworkManager.Settings.AddConnection(new_connection)
+        try:
+            NetworkManager.Settings.AddConnection(new_connection)
+        except dbus.exceptions.DBusException as e:
+            msg = _("Invalid password") if "802-11-wireless-security.psk" in e else f"{e}"
+            self.callback("popup", msg)
+            logging.info(f"Error adding network {e}")
         self._update_known_connections()
         return True
 
     def connect(self, ssid):
         if ssid in self.known_networks:
             conn = self.known_networks[ssid]
-            try:
-                logging.info("Attempting to connect to wifi: %s" % id)
+            with contextlib.suppress(NetworkManager.ObjectVanished):
+                msg = f"Connecting to: {ssid}"
+                logging.info(msg)
+                self.callback("connecting_status", msg)
                 NetworkManager.NetworkManager.ActivateConnection(conn, self.wifi_dev, "/")
-            except NetworkManager.ObjectVanished:
-              pass
-
-    def _get_known_connections_by_uuid(self):
-        connections = NetworkManager.Settings.ListConnections()
-        return dict([(x.GetSettings()['connection']['uuid'], x) for x in connections])
 
     def delete_network(self, ssid):
         for ssid in self.known_networks:
@@ -221,30 +208,27 @@ class WifiManagerNM():
         aps = self.wifi_dev.GetAccessPoints()
         ret = {}
         for ap in aps:
-            try:
+            with contextlib.suppress(NetworkManager.ObjectVanished):
                 ret[ap.Ssid] = ap
-            except NetworkManager.ObjectVanished:
-              pass
         return ret
 
     def get_network_info(self, ssid):
+        netinfo = {}
         if ssid in self.known_networks:
             con = self.known_networks[ssid]
-            try:
+            with contextlib.suppress(NetworkManager.ObjectVanished):
                 settings = con.GetSettings()
                 if settings and '802-11-wireless' in settings:
-                    return {
+                    netinfo.update({
                         "ssid": settings['802-11-wireless']['ssid'],
                         "connected": self.get_connected_ssid() == ssid
-                    }
-            except NetworkManager.ObjectVanished:
-                pass
+                    })
         path = self.path_by_ssid[ssid]
         aps = self.visible_networks
         if path in aps:
             ap = aps[path]
-            try:
-                return {
+            with contextlib.suppress(NetworkManager.ObjectVanished):
+                netinfo.update({
                     "mac": ap.HwAddress,
                     "channel": WifiChannels.lookup(str(ap.Frequency))[1],
                     "configured": ssid in self.known_networks,
@@ -254,22 +238,22 @@ class WifiManagerNM():
                     "connected": self._get_connected_ap() == ap,
                     "encryption": self._get_encryption(ap.RsnFlags),
                     "signal_level_dBm": str(ap.Strength)
-                }
-            except NetworkManager.ObjectVanished:
-                pass
+                })
+        return netinfo
 
-    def _get_encryption(self, flags):
+    @staticmethod
+    def _get_encryption(flags):
         encryption = ""
         if (flags & NetworkManager.NM_802_11_AP_SEC_PAIR_WEP40 or
-            flags & NetworkManager.NM_802_11_AP_SEC_PAIR_WEP104 or
-            flags & NetworkManager.NM_802_11_AP_SEC_GROUP_WEP40 or
-            flags & NetworkManager.NM_802_11_AP_SEC_GROUP_WEP104):
+                flags & NetworkManager.NM_802_11_AP_SEC_PAIR_WEP104 or
+                flags & NetworkManager.NM_802_11_AP_SEC_GROUP_WEP40 or
+                flags & NetworkManager.NM_802_11_AP_SEC_GROUP_WEP104):
             encryption += "WEP "
         if (flags & NetworkManager.NM_802_11_AP_SEC_PAIR_TKIP or
-            flags & NetworkManager.NM_802_11_AP_SEC_GROUP_TKIP):
+                flags & NetworkManager.NM_802_11_AP_SEC_GROUP_TKIP):
             encryption += "TKIP "
         if (flags & NetworkManager.NM_802_11_AP_SEC_PAIR_CCMP or
-            flags & NetworkManager.NM_802_11_AP_SEC_GROUP_CCMP):
+                flags & NetworkManager.NM_802_11_AP_SEC_GROUP_CCMP):
             encryption += "AES "
         if flags & NetworkManager.NM_802_11_AP_SEC_KEY_MGMT_PSK:
             encryption += "WPA-PSK "
@@ -281,26 +265,10 @@ class WifiManagerNM():
         return list(set(list(self.known_networks.keys()) + list(self.ssid_by_path.values())))
 
     def get_supplicant_networks(self):
-        return {ssid:{"ssid": ssid} for ssid in self.known_networks.keys()}
-
-    def is_connected(self):
-        return self.connected
-
-    def is_initialized(self):
-        return self.initialized
-
-    def _set_autoconnect_on_hotspot(self, value):
-        for con in NetworkManager.Settings.ListConnections():
-            settings = con.GetSettings()
-            if "802-11-wireless" in settings and settings["802-11-wireless"]['ssid'] == "Recore":
-                old_val = settings["connection"]["autoconnect"]
-                if old_val != value:
-                    settings["connection"]["autoconnect"] = value
-                    con.Update(settings)
+        return {ssid: {"ssid": ssid} for ssid in self.known_networks.keys()}
 
     def rescan(self):
         try:
             self.wifi_dev.RequestScan({})
-        except dbus.exceptions.DBusException:
-            return False
-        return True
+        except dbus.exceptions.DBusException as e:
+            logging.error(f"Error during rescan {e}")

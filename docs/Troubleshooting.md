@@ -116,7 +116,7 @@ and reboot, that should make the touch work, if your screen is rotated 180 degre
 
 KlipperScreen was never intended to be used with OctoPrint, and there is no support for it.
 
-## WiFi networks not listed
+## WiFi networks not listed (Using wpa_supplicant as backend)
 
 This can be caused because of the user is not allowed to control the interface
 
@@ -137,12 +137,41 @@ usermod -a -G netdev pi
 
 Then reboot the machine:
 
-```
+```sh
 systemctl reboot
 ```
 
 !!! tip
     It's possible to just restart KlipperScreen and networking
+
+## WiFi networks not listed (Using NetworkManager as backend)
+
+`[wifi_nm.py:rescan()] [...] NetworkManager.wifi.scan request failed: not authorized`
+
+
+If you see the above permission error in the log you may need to use polkit or disable it:
+
+```sh
+mkdir -p /etc/NetworkManager/conf.d
+sudo nano /etc/NetworkManager/conf.d/any-user.conf
+```
+
+in the editor paste this:
+
+```conf
+[main]
+auth-polkit=false
+```
+
+Then restart the service:
+
+```sh
+systemctl restart NetworkManager.service
+```
+
+!!! tip
+    It's possible to just restart KlipperScreen and NetworkManager
+
 
 ## Other issues
 

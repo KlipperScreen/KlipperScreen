@@ -26,16 +26,16 @@ class NetworkPanel(ScreenPanel):
         self.network_interfaces = netifaces.interfaces()
         self.wireless_interfaces = [iface for iface in self.network_interfaces if iface.startswith('w')]
         self.wifi = None
-
         self.use_network_manager = os.system('systemctl is-active --quiet NetworkManager.service') == 0
         if len(self.wireless_interfaces) > 0:
             logging.info(f"Found wireless interfaces: {self.wireless_interfaces}")
             if self.use_network_manager:
-                from ks_includes.wifi_nm import WifiManagerNM
-                self.wifi = WifiManagerNM(self.wireless_interfaces[0])
+                logging.info("Using NetworkManager")
+                from ks_includes.wifi_nm import WifiManager
             else:
+                logging.info("Using wpa_cli")
                 from ks_includes.wifi import WifiManager
-                self.wifi = WifiManager(self.wireless_interfaces[0])
+            self.wifi = WifiManager(self.wireless_interfaces[0])
 
         # Get IP Address
         gws = netifaces.gateways()
@@ -83,7 +83,7 @@ class NetworkPanel(ScreenPanel):
 
         self.labels['networklist'] = Gtk.Grid()
 
-        if self.wifi is not None and self.wifi.is_initialized():
+        if self.wifi is not None and self.wifi.initialized:
             box.pack_start(sbox, False, False, 5)
             box.pack_start(scroll, True, True, 0)
 
@@ -92,6 +92,7 @@ class NetworkPanel(ScreenPanel):
 
             self.wifi.add_callback("connected", self.connected_callback)
             self.wifi.add_callback("scan_results", self.scan_callback)
+            self.wifi.add_callback("popup", self.popup_callback)
             if self.update_timeout is None:
                 self.update_timeout = GLib.timeout_add_seconds(5, self.update_all_networks)
         else:
@@ -108,13 +109,10 @@ class NetworkPanel(ScreenPanel):
 
     def load_networks(self):
         networks = self.wifi.get_networks()
-
         if not networks:
             return
-
         for net in networks:
             self.add_network(net, False)
-
         self.update_all_networks()
         self.content.show_all()
 
@@ -124,7 +122,6 @@ class NetworkPanel(ScreenPanel):
             return
         ssid = ssid.strip()
         if ssid in list(self.networks):
-            logging.info("SSID already listed")
             return
 
         configured_networks = self.wifi.get_supplicant_networks()
@@ -256,6 +253,9 @@ class NetworkPanel(ScreenPanel):
                 del self.labels[i]
         self.show_add = False
 
+    def popup_callback(self, msg):
+        self._screen.show_popup_message(msg)
+
     def connected_callback(self, ssid, prev_ssid):
         logging.info("Now connected to a new network")
         if ssid is not None:
@@ -284,12 +284,7 @@ class NetworkPanel(ScreenPanel):
             {"name": _("Close"), "response": Gtk.ResponseType.CANCEL}
         ]
 
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_hexpand(True)
-        scroll.set_vexpand(True)
-        scroll.add_events(Gdk.EventMask.TOUCH_MASK)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        scroll = self._gtk.ScrolledWindow()
         self.labels['connecting_info'] = Gtk.Label(_("Starting WiFi Association"))
         self.labels['connecting_info'].set_halign(Gtk.Align.START)
         self.labels['connecting_info'].set_valign(Gtk.Align.START)
@@ -387,8 +382,6 @@ class NetworkPanel(ScreenPanel):
             logging.info(f"Unknown SSID {ssid}")
             return
         netinfo = self.wifi.get_network_info(ssid)
-        if netinfo is None:
-            netinfo = {}
         if "connected" in netinfo:
             connected = netinfo['connected']
         else:
@@ -443,7 +436,7 @@ class NetworkPanel(ScreenPanel):
     def reload_networks(self, widget=None):
         self.networks = {}
         self.labels['networklist'].remove_column(0)
-        if self.wifi is not None and self.wifi.is_initialized():
+        if self.wifi is not None and self.wifi.initialized:
             self.wifi.rescan()
             GLib.idle_add(self.load_networks)
 
@@ -451,7 +444,7 @@ class NetworkPanel(ScreenPanel):
         if self.initialized:
             self.reload_networks()
             if self.update_timeout is None:
-                if self.wifi is not None and self.wifi.is_initialized():
+                if self.wifi is not None and self.wifi.initialized:
                     self.update_timeout = GLib.timeout_add_seconds(5, self.update_all_networks)
                 else:
                     self.update_timeout = GLib.timeout_add_seconds(5, self.update_single_network_info)
