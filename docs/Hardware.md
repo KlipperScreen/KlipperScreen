@@ -1,6 +1,8 @@
 # Hardware
 
-There are no recommended screens, but the minimum supported resolution is 480x320
+There are no recommended screens, but the minimum supported resolution is 480x320.
+
+In general, if the device can show a GNU/Linux desktop, then KlipperScreen should work too.
 
 #### Hardware known to work
 
