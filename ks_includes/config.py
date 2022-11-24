@@ -6,6 +6,7 @@ import json
 import re
 import copy
 import pathlib
+import locale
 
 from io import StringIO
 
@@ -113,13 +114,13 @@ class KlipperScreenConfig:
             self.langs[lng] = gettext.translation('KlipperScreen', localedir=lang_path, languages=[lng], fallback=True)
 
         lang = self.get_main_config().get("language", None)
-        logging.debug(f"Selected lang: {lang} OS lang: {os.getenv('LANG')}")
+        logging.debug(f"Selected lang: {lang} OS lang: {locale.getdefaultlocale()[0]}")
         self.install_language(lang)
 
     def install_language(self, lang):
         if lang is None or lang == "system_lang":
             for language in self.lang_list:
-                if os.getenv('LANG').lower().startswith(language):
+                if locale.getdefaultlocale()[0].startswith(language):
                     logging.debug("Using system lang")
                     lang = language
         if lang not in self.lang_list:
