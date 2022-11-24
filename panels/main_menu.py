@@ -66,10 +66,11 @@ class MainPanel(MenuPanel):
                 self.devices[device]['name'].get_style_context().add_class("graph_label_hidden")
                 self.devices[device]['name'].get_style_context().remove_class(self.devices[device]['class'])
         if count > 0:
-            self.left_panel.add(self.labels['da'])
+            if self.labels['da'] not in self.left_panel:
+                self.left_panel.add(self.labels['da'])
             self.labels['da'].queue_draw()
             self.labels['da'].show()
-        else:
+        elif self.labels['da'] in self.left_panel:
             self.left_panel.remove(self.labels['da'])
 
     def activate(self):
