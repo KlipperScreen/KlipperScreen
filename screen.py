@@ -7,6 +7,7 @@ import os
 import subprocess
 import pathlib
 import traceback  # noqa
+import locale
 
 import gi
 
@@ -51,10 +52,10 @@ klipperscreendir = pathlib.Path(__file__).parent.resolve()
 
 
 def set_text_direction(lang=None):
-    rtl_languages = ['he_IL']
+    rtl_languages = ['he']
     if lang is None:
         for lng in rtl_languages:
-            if os.getenv('LANG').startswith(lng):
+            if locale.getdefaultlocale()[0].startswith(lng):
                 lang = lng
                 break
     if lang in rtl_languages:
