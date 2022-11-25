@@ -177,7 +177,7 @@ def setup_logging(log_file, software_version):
     def logging_exception_handler(ex_type, value, tb, thread_identifier=None):
         logging.exception(
             f'Uncaught exception {ex_type}: {value}\n'
-            f'Traceback: {traceback.format_tb(tb)}'
+            + '\n'.join([str(x) for x in [*traceback.format_tb(tb)]])
         )
 
     sys.excepthook = logging_exception_handler
