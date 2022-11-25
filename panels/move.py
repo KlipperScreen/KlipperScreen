@@ -21,77 +21,71 @@ class MovePanel(ScreenPanel):
         super().__init__(screen, title)
         self.settings = {}
         self.menu = ['move_menu']
-
-        self.labels['x+'] = self._gtk.Button("arrow-right", "X+", "color1")
-        self.labels['x+'].connect("clicked", self.move, "X", "+")
-        self.labels['x-'] = self._gtk.Button("arrow-left", "X-", "color1")
-        self.labels['x-'].connect("clicked", self.move, "X", "-")
-
-        self.labels['y+'] = self._gtk.Button("arrow-up", "Y+", "color2")
-        self.labels['y+'].connect("clicked", self.move, "Y", "+")
-        self.labels['y-'] = self._gtk.Button("arrow-down", "Y-", "color2")
-        self.labels['y-'].connect("clicked", self.move, "Y", "-")
-
-        self.labels['z+'] = self._gtk.Button("z-farther", "Z+", "color3")
-        self.labels['z+'].connect("clicked", self.move, "Z", "+")
-        self.labels['z-'] = self._gtk.Button("z-closer", "Z-", "color3")
-        self.labels['z-'].connect("clicked", self.move, "Z", "-")
-
-        self.labels['home'] = self._gtk.Button("home", _("Home All"), "color4")
-        self.labels['home'].connect("clicked", self.home)
-
-        self.labels['home-xy'] = self._gtk.Button("home", _("Home XY"), "color4")
-        self.labels['home-xy'].connect("clicked", self.homexy)
-
-        self.labels['z_tilt'] = self._gtk.Button("z-tilt", _("Z Tilt"), "color4")
-        self.labels['z_tilt'].connect("clicked", self.z_tilt)
-
-        self.labels['quad_gantry_level'] = self._gtk.Button("z-tilt", _("Quad Gantry Level"), "color4")
-        self.labels['quad_gantry_level'].connect("clicked", self.quad_gantry_level)
-
-        self.labels['motors-off'] = self._gtk.Button("motor-off", _("Disable Motors"), "color4")
+        self.buttons = {
+            'x+': self._gtk.Button("arrow-right", "X+", "color1"),
+            'x-': self._gtk.Button("arrow-left", "X-", "color1"),
+            'y+': self._gtk.Button("arrow-up", "Y+", "color2"),
+            'y-': self._gtk.Button("arrow-down", "Y-", "color2"),
+            'z+': self._gtk.Button("z-farther", "Z+", "color3"),
+            'z-': self._gtk.Button("z-closer", "Z-", "color3"),
+            'home': self._gtk.Button("home", _("Home All"), "color4"),
+            'home_xy': self._gtk.Button("home", _("Home XY"), "color4"),
+            'z_tilt': self._gtk.Button("z-tilt", _("Z Tilt"), "color4"),
+            'quad_gantry_level': self._gtk.Button("z-tilt", _("Quad Gantry Level"), "color4"),
+            'motors_off': self._gtk.Button("motor-off", _("Disable Motors"), "color4"),
+        }
+        self.buttons['x+'].connect("clicked", self.move, "X", "+")
+        self.buttons['x-'].connect("clicked", self.move, "X", "-")
+        self.buttons['y+'].connect("clicked", self.move, "Y", "+")
+        self.buttons['y-'].connect("clicked", self.move, "Y", "-")
+        self.buttons['z+'].connect("clicked", self.move, "Z", "+")
+        self.buttons['z-'].connect("clicked", self.move, "Z", "-")
+        self.buttons['home'].connect("clicked", self.home)
+        self.buttons['home_xy'].connect("clicked", self.homexy)
+        self.buttons['z_tilt'].connect("clicked", self.z_tilt)
+        self.buttons['quad_gantry_level'].connect("clicked", self.quad_gantry_level)
         script = {"script": "M18"}
-        self.labels['motors-off'].connect("clicked", self._screen._confirm_send_action,
-                                          _("Are you sure you wish to disable motors?"),
-                                          "printer.gcode.script", script)
+        self.buttons['motors_off'].connect("clicked", self._screen._confirm_send_action,
+                                           _("Are you sure you wish to disable motors?"),
+                                           "printer.gcode.script", script)
 
         grid = self._gtk.HomogeneousGrid()
         if self._screen.vertical_mode:
             if self._screen.lang_ltr:
-                grid.attach(self.labels['x+'], 2, 1, 1, 1)
-                grid.attach(self.labels['x-'], 0, 1, 1, 1)
-                grid.attach(self.labels['z+'], 2, 2, 1, 1)
-                grid.attach(self.labels['z-'], 0, 2, 1, 1)
+                grid.attach(self.buttons['x+'], 2, 1, 1, 1)
+                grid.attach(self.buttons['x-'], 0, 1, 1, 1)
+                grid.attach(self.buttons['z+'], 2, 2, 1, 1)
+                grid.attach(self.buttons['z-'], 0, 2, 1, 1)
             else:
-                grid.attach(self.labels['x+'], 0, 1, 1, 1)
-                grid.attach(self.labels['x-'], 2, 1, 1, 1)
-                grid.attach(self.labels['z+'], 0, 2, 1, 1)
-                grid.attach(self.labels['z-'], 2, 2, 1, 1)
-            grid.attach(self.labels['y+'], 1, 0, 1, 1)
-            grid.attach(self.labels['y-'], 1, 1, 1, 1)
+                grid.attach(self.buttons['x+'], 0, 1, 1, 1)
+                grid.attach(self.buttons['x-'], 2, 1, 1, 1)
+                grid.attach(self.buttons['z+'], 0, 2, 1, 1)
+                grid.attach(self.buttons['z-'], 2, 2, 1, 1)
+            grid.attach(self.buttons['y+'], 1, 0, 1, 1)
+            grid.attach(self.buttons['y-'], 1, 1, 1, 1)
 
         else:
             if self._screen.lang_ltr:
-                grid.attach(self.labels['x+'], 2, 1, 1, 1)
-                grid.attach(self.labels['x-'], 0, 1, 1, 1)
+                grid.attach(self.buttons['x+'], 2, 1, 1, 1)
+                grid.attach(self.buttons['x-'], 0, 1, 1, 1)
             else:
-                grid.attach(self.labels['x+'], 0, 1, 1, 1)
-                grid.attach(self.labels['x-'], 2, 1, 1, 1)
-            grid.attach(self.labels['y+'], 1, 0, 1, 1)
-            grid.attach(self.labels['y-'], 1, 1, 1, 1)
-            grid.attach(self.labels['z+'], 3, 0, 1, 1)
-            grid.attach(self.labels['z-'], 3, 1, 1, 1)
+                grid.attach(self.buttons['x+'], 0, 1, 1, 1)
+                grid.attach(self.buttons['x-'], 2, 1, 1, 1)
+            grid.attach(self.buttons['y+'], 1, 0, 1, 1)
+            grid.attach(self.buttons['y-'], 1, 1, 1, 1)
+            grid.attach(self.buttons['z+'], 3, 0, 1, 1)
+            grid.attach(self.buttons['z-'], 3, 1, 1, 1)
 
-        grid.attach(self.labels['home'], 0, 0, 1, 1)
+        grid.attach(self.buttons['home'], 0, 0, 1, 1)
 
         if self._printer.config_section_exists("z_tilt"):
-            grid.attach(self.labels['z_tilt'], 2, 0, 1, 1)
+            grid.attach(self.buttons['z_tilt'], 2, 0, 1, 1)
         elif self._printer.config_section_exists("quad_gantry_level"):
-            grid.attach(self.labels['quad_gantry_level'], 2, 0, 1, 1)
+            grid.attach(self.buttons['quad_gantry_level'], 2, 0, 1, 1)
         elif "delta" in self._screen.printer.get_config_section("printer")['kinematics']:
-            grid.attach(self.labels['motors-off'], 2, 0, 1, 1)
+            grid.attach(self.buttons['motors_off'], 2, 0, 1, 1)
         else:
-            grid.attach(self.labels['home-xy'], 2, 0, 1, 1)
+            grid.attach(self.buttons['home_xy'], 2, 0, 1, 1)
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
@@ -160,10 +154,21 @@ class MovePanel(ScreenPanel):
             name = list(option)[0]
             self.add_option('options', self.settings, name, option[name])
 
+    def activate(self):
+        self.process_busy(self._printer.busy)
+
+    def process_busy(self, busy):
+        buttons = ("home", "home_xy", "z_tilt", "quad_gantry_level")
+        for button in buttons:
+            if button in self.buttons:
+                self.buttons[button].set_sensitive(not busy)
+
     def process_update(self, action, data):
+        if action == "notify_busy":
+            self.process_busy(data)
+            return
         if action != "notify_status_update":
             return
-
         homed_axes = self._screen.printer.get_stat("toolhead", "homed_axes")
         if homed_axes == "xyz":
             if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
