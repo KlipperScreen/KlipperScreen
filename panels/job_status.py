@@ -630,6 +630,7 @@ class JobStatusPanel(ScreenPanel):
         return True
 
     def update_time_left(self, duration=0, fila_used=0):
+        self.labels["duration"].set_label(self.format_time(duration))
         total_duration = None
         if self.progress < 1:
             slicer_time = filament_time = file_time = None
@@ -641,16 +642,16 @@ class JobStatusPanel(ScreenPanel):
                     # speed_factor compensation based on empirical testing
                     spdcomp = sqrt(self.speed_factor)
                     slicer_time = (self.file_metadata['estimated_time'] * usrcomp) / spdcomp
-            self.labels["slicer_time"].set_label(self.format_time(slicer_time))
+            self.labels["slicer_time"].set_label(self.format_eta(slicer_time, duration))
 
             with contextlib.suppress(Exception):
                 if self.file_metadata['filament_total'] > fila_used:
                     filament_time = duration / (fila_used / self.file_metadata['filament_total'])
-            self.labels["filament_time"].set_label(self.format_time(filament_time))
+            self.labels["filament_time"].set_label(self.format_eta(filament_time, duration))
 
             with contextlib.suppress(ZeroDivisionError):
                 file_time = duration / self.progress
-            self.labels["file_time"].set_label(self.format_time(file_time))
+            self.labels["file_time"].set_label(self.format_eta(file_time, duration))
 
             if timeleft_type == "file":
                 total_duration = file_time
@@ -670,10 +671,11 @@ class JobStatusPanel(ScreenPanel):
                     total_duration = (filament_time + file_time) / 2
                 else:
                     total_duration = file_time
-        self.labels["duration"].set_label(self.format_time(duration))
-        self.labels["est_time"].set_label(self.format_time(total_duration))
-        if total_duration is not None:
-            self.labels["time_left"].set_label(self.format_time(total_duration - duration))
+            self.labels["est_time"].set_label(self.format_eta(total_duration, duration))
+            self.labels["time_left"].set_label(self.format_eta(total_duration, duration))
+        else:
+            self.labels["est_time"].set_label("-")
+            self.labels["time_left"].set_label("-")
 
     def state_check(self):
         ps = self._printer.get_stat("print_stats")
