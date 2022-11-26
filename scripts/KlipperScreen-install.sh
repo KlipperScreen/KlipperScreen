@@ -9,7 +9,7 @@ FBTURBO="xserver-xorg-video-fbturbo"
 FBDEV="xserver-xorg-video-fbdev"
 PYTHON="python3-virtualenv virtualenv python3-distutils"
 PYGOBJECT="libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0"
-MISC="librsvg2-common libopenjp2-7 libatlas-base-dev wireless-tools"
+MISC="librsvg2-common libopenjp2-7 libatlas-base-dev wireless-tools libdbus-glib-1-dev autoconf"
 OPTIONAL="xserver-xorg-legacy fonts-nanum"
 
 # moonraker will check this list when updating
@@ -114,15 +114,13 @@ create_virtualenv()
     fi
 
     source ${KSENV}/bin/activate
-    while read requirements; do
-        pip --disable-pip-version-check install $requirements
-        if [ $? -gt 0 ]; then
-            echo "Error: pip install exited with status code $?"
-            echo "Unable to install dependencies, aborting install."
-            deactivate
-            exit 1
-        fi
-    done < ${KSPATH}/scripts/KlipperScreen-requirements.txt
+    pip --disable-pip-version-check install -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
+    if [ $? -gt 0 ]; then
+        echo "Error: pip install exited with status code $?"
+        echo "Unable to install dependencies, aborting install."
+        deactivate
+        exit 1
+    fi
     deactivate
     echo_ok "Virtual enviroment created"
 }
