@@ -17,7 +17,7 @@ class SplashScreenPanel(ScreenPanel):
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
-        image = self._gtk.Image("klipper", self._screen.width / 5, self._screen.height * .5)
+        image = self._gtk.Image("klipper", self._gtk.get_content_width() * .2, self._gtk.get_content_height() * .5)
         self.labels['text'] = Gtk.Label(_("Initializing printer..."))
         self.labels['text'].set_line_wrap(True)
         self.labels['text'].set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
@@ -42,7 +42,7 @@ class SplashScreenPanel(ScreenPanel):
         self.labels['actions'].set_vexpand(False)
         self.labels['actions'].set_halign(Gtk.Align.CENTER)
         self.labels['actions'].set_homogeneous(True)
-        self.labels['actions'].set_size_request(self._screen.base_panel.content.get_allocation().width, 0)
+        self.labels['actions'].set_size_request(self._gtk.get_content_width(), -1)
 
         scroll = self._gtk.ScrolledWindow()
         scroll.set_hexpand(True)

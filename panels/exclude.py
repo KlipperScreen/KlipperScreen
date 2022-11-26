@@ -47,7 +47,7 @@ class ExcludeObjectPanel(ScreenPanel):
             if self._screen.vertical_mode:
                 grid.attach(self.labels['map'], 0, 2, 2, 1)
                 grid.attach(scroll, 0, 3, 2, 1)
-                scroll.set_size_request(self._screen.width, -1)
+                scroll.set_size_request(self._gtk.get_content_width(), -1)
             else:
                 grid.attach(self.labels['map'], 0, 2, 1, 1)
                 grid.attach(scroll, 1, 2, 1, 1)

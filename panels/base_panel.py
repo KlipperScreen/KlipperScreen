@@ -55,11 +55,10 @@ class BasePanel(ScreenPanel):
         if self._screen.vertical_mode:
             self.action_bar.set_hexpand(True)
             self.action_bar.set_vexpand(False)
-            self.action_bar.set_size_request(0, self._gtk.get_action_bar_height())
         else:
             self.action_bar.set_hexpand(False)
             self.action_bar.set_vexpand(True)
-            self.action_bar.set_size_request(self._gtk.get_action_bar_width(), 0)
+        self.action_bar.set_size_request(self._gtk.get_action_bar_width(), self._gtk.get_action_bar_height())
 
         self.action_bar.get_style_context().add_class('action_bar')
         self.action_bar.add(self.control['back'])
@@ -88,7 +87,7 @@ class BasePanel(ScreenPanel):
         self.control['time_box'].pack_end(self.control['time'], True, True, 10)
 
         self.titlebar = Gtk.Box(spacing=5)
-        self.titlebar.set_size_request(0, self._gtk.get_titlebar_height())
+        self.titlebar.set_size_request(self._gtk.get_content_width(), self._gtk.get_titlebar_height())
         self.titlebar.set_valign(Gtk.Align.CENTER)
         self.titlebar.add(self.control['temp_box'])
         self.titlebar.add(self.titlelbl)
