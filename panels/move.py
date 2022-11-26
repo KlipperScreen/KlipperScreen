@@ -103,9 +103,13 @@ class MovePanel(ScreenPanel):
                 ctx.add_class("distbutton_active")
             distgrid.attach(self.labels[i], j, 0, 1, 1)
 
-        self.labels['pos_x'] = Gtk.Label("X: 0")
-        self.labels['pos_y'] = Gtk.Label("Y: 0")
-        self.labels['pos_z'] = Gtk.Label("Z: 0")
+        homed_axes = self._screen.printer.get_stat("toolhead", "homed_axes")
+        x = self._screen.printer.get_stat("gcode_move", "gcode_position")[0] if "x" in homed_axes else "?"
+        y = self._screen.printer.get_stat("gcode_move", "gcode_position")[1] if "y" in homed_axes else "?"
+        z = self._screen.printer.get_stat("gcode_move", "gcode_position")[2] if "z" in homed_axes else "?"
+        self.labels['pos_x'] = Gtk.Label(f"X: {x:.2f}")
+        self.labels['pos_y'] = Gtk.Label(f"Y: {y:.2f}")
+        self.labels['pos_z'] = Gtk.Label(f"Z: {z:.2f}")
         adjust = self._gtk.Button("settings", None, "color2", 1, Gtk.PositionType.LEFT, 1)
         adjust.connect("clicked", self.load_menu, 'options', _('Settings'))
         adjust.set_hexpand(False)

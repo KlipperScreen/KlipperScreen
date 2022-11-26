@@ -65,16 +65,27 @@ class FineTunePanel(ScreenPanel):
 
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
+        factor = self._printer.get_stat("gcode_move", "extrude_factor")
+        self.extrusion = round(float(factor) * 100) if factor else 100
+        factor = self._printer.get_stat("gcode_move", "speed_factor")
+        self.speed_factor = float(factor) if factor else 1
+        self.speed = round(self.speed_factor * 100)
+        offset = self._screen.printer.get_stat("gcode_move", "homing_origin")
+        offset = float(offset[2]) if offset else 0
+
         self.labels['z+'] = self._gtk.Button("z-farther", "Z+", "color1")
         self.labels['z-'] = self._gtk.Button("z-closer", "Z-", "color1")
-        self.labels['zoffset'] = self._gtk.Button("refresh", "  0.00" + _("mm"), "color1", .6, Gtk.PositionType.LEFT, 1)
+        self.labels['zoffset'] = self._gtk.Button("refresh", f'  {offset:.2f}' + _("mm"),
+                                                  "color1", self.bts, Gtk.PositionType.LEFT, 1)
         self.labels['speed+'] = self._gtk.Button("speed+", _("Speed +"), "color3")
         self.labels['speed-'] = self._gtk.Button("speed-", _("Speed -"), "color3")
-        self.labels['speedfactor'] = self._gtk.Button("refresh", "  100%", "color3", .6, Gtk.PositionType.LEFT, 1)
+        self.labels['speedfactor'] = self._gtk.Button("refresh", f"  {self.speed:3}%",
+                                                      "color3", self.bts, Gtk.PositionType.LEFT, 1)
 
         self.labels['extrude+'] = self._gtk.Button("flow+", _("Extrusion +"), "color4")
         self.labels['extrude-'] = self._gtk.Button("flow-", _("Extrusion -"), "color4")
-        self.labels['extrudefactor'] = self._gtk.Button("refresh", "  100%", "color4", .6, Gtk.PositionType.LEFT, 1)
+        self.labels['extrudefactor'] = self._gtk.Button("refresh", f"  {self.extrusion:3}%",
+                                                        "color4", self.bts, Gtk.PositionType.LEFT, 1)
         if self._screen.vertical_mode:
             grid.attach(self.labels['z+'], 0, 0, 1, 1)
             grid.attach(self.labels['z-'], 1, 0, 1, 1)
@@ -121,10 +132,10 @@ class FineTunePanel(ScreenPanel):
             if "homing_origin" in data["gcode_move"]:
                 self.labels['zoffset'].set_label(f'  {data["gcode_move"]["homing_origin"][2]:.2f}mm')
             if "extrude_factor" in data["gcode_move"]:
-                self.extrusion = int(round(data["gcode_move"]["extrude_factor"] * 100))
+                self.extrusion = round(float(data["gcode_move"]["extrude_factor"]) * 100)
                 self.labels['extrudefactor'].set_label(f"  {self.extrusion:3}%")
             if "speed_factor" in data["gcode_move"]:
-                self.speed = int(round(data["gcode_move"]["speed_factor"] * 100))
+                self.speed = round(float(data["gcode_move"]["speed_factor"]) * 100)
                 self.labels['speedfactor'].set_label(f"  {self.speed:3}%")
 
     def change_babystepping(self, widget, direction):
@@ -149,9 +160,9 @@ class FineTunePanel(ScreenPanel):
 
     def change_extrusion(self, widget, direction):
         if direction == "+":
-            self.extrusion += self.percent_delta
+            self.extrusion += int(self.percent_delta)
         elif direction == "-":
-            self.extrusion -= self.percent_delta
+            self.extrusion -= int(self.percent_delta)
         elif direction == "reset":
             self.extrusion = 100
 

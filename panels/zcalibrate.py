@@ -36,6 +36,11 @@ class ZCalibratePanel(ScreenPanel):
             pos.attach(Gtk.Label(_("New")), 1, 3, 1, 1)
             pos.attach(Gtk.Label(f"{self.z_offset:.2f}"), 0, 4, 1, 1)
             pos.attach(self.widgets['zoffset'], 1, 4, 1, 1)
+        self._screen.printer.get_stat("gcode_move", "gcode_position")
+        if self._screen.printer.get_stat("toolhead", "homed_axes") == "xyz":
+            p = self._screen.printer.get_stat('gcode_move', 'gcode_position')
+            if p:
+                self.update_position(p)
         self.buttons = {
             'zpos': self._gtk.Button('z-farther', _("Raise Nozzle"), 'color4'),
             'zneg': self._gtk.Button('z-closer', _("Lower Nozzle"), 'color1'),
@@ -233,8 +238,8 @@ class ZCalibratePanel(ScreenPanel):
         if action == "notify_status_update":
             if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
                 self.widgets['zposition'].set_text("Z: ?")
-            elif "toolhead" in data and "position" in data['toolhead']:
-                self.update_position(data['toolhead']['position'])
+            elif "gcode_move" in data and "gcode_position" in data['gcode_move']:
+                self.update_position(data['gcode_move']['gcode_position'])
         elif action == "notify_gcode_response":
             data = data.lower()
             if "unknown" in data:
