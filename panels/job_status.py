@@ -55,6 +55,17 @@ class JobStatusPanel(ScreenPanel):
             self.labels[item].set_vexpand(True)
             self.labels[item].set_hexpand(True)
 
+        offset = self._screen.printer.get_stat("gcode_move", "homing_origin")
+        self.zoffset = float(offset[2]) if offset else 0
+        self.labels['zoffset'].set_label(f"{self.zoffset:.2f}")
+        accel = self._screen.printer.get_stat('toolhead', 'max_accel')
+        if accel:
+            self.labels['max_accel'].set_label(f"{accel:.0f} mm/s²")
+        self.labels['extrude_factor'].set_label(f"{self.extrusion:3}%")
+        adv = self._screen.printer.get_stat('extruder', 'pressure_advance')
+        if adv:
+            self.labels['advance'].set_label(f"{adv:.2f}")
+
         self.labels['left'] = Gtk.Label(_("Left:"))
         self.labels['elapsed'] = Gtk.Label(_("Elapsed:"))
         self.labels['total'] = Gtk.Label(_("Total:"))
@@ -546,12 +557,9 @@ class JobStatusPanel(ScreenPanel):
 
         if "gcode_move" in data:
             with contextlib.suppress(KeyError):
-                self.labels['pos_x'].set_label(f"X: {data['gcode_move']['gcode_position'][0]:6.2f}")
-                self.labels['pos_y'].set_label(f"Y: {data['gcode_move']['gcode_position'][1]:6.2f}")
-                self.labels['pos_z'].set_label(f"Z: {data['gcode_move']['gcode_position'][2]:6.2f}")
-                self.pos_z = data["gcode_move"]["gcode_position"][2]
                 if self.main_status_displayed:
-                    self.buttons['z'].set_label(self.labels['pos_z'].get_text())
+                    self.pos_z = float(data['gcode_move']['gcode_position'][2])
+                    self.buttons['z'].set_label(f"Z: {data['gcode_move']['gcode_position'][2]:6.2f}")
             with contextlib.suppress(KeyError):
                 self.extrusion = round(float(data["gcode_move"]["extrude_factor"]) * 100)
                 self.labels['extrude_factor'].set_label(f"{self.extrusion:3}%")
@@ -567,6 +575,10 @@ class JobStatusPanel(ScreenPanel):
                 self.zoffset = data["gcode_move"]["homing_origin"][2]
                 self.labels['zoffset'].set_label(f"{self.zoffset:.2f}")
         if "motion_report" in data:
+            with contextlib.suppress(KeyError):
+                self.labels['pos_x'].set_label(f"X: {data['motion_report']['live_position'][0]:6.2f}")
+                self.labels['pos_y'].set_label(f"Y: {data['motion_report']['live_position'][1]:6.2f}")
+                self.labels['pos_z'].set_label(f"Z: {data['motion_report']['live_position'][2]:6.2f}")
             with contextlib.suppress(KeyError):
                 self.vel = float(data["motion_report"]["live_velocity"])
                 self.labels['req_speed'].set_label(f"{self.speed}% {self.vel:.0f}/{self.req_speed:.0f} mm/s")
