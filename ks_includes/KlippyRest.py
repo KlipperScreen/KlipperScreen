@@ -1,5 +1,5 @@
 import logging
-
+import re
 import requests
 
 
@@ -45,19 +45,34 @@ class KlippyRest:
             else:
                 data = response.content
         except requests.exceptions.HTTPError as h:
-            self.status = h
+            self.status = self.format_status(h)
         except requests.exceptions.ConnectionError as c:
-            self.status = c
+            self.status = self.format_status(c)
         except requests.exceptions.Timeout as t:
-            self.status = t
+            self.status = self.format_status(t)
         except requests.exceptions.JSONDecodeError as j:
-            self.status = j
+            self.status = self.format_status(j)
         except requests.exceptions.RequestException as r:
-            self.status = r
+            self.status = self.format_status(r)
         except Exception as e:
-            self.status = e
+            self.status = self.format_status(e)
         if data:
             self.status = ''
         else:
             logging.error(self.status)
         return data
+
+    @staticmethod
+    def format_status(status):
+        try:
+            rep = {"HTTPConnectionPool": "", "/server/info ": "", "Caused by ": "", "(": "", ")": "", ": ": "\n"}
+            rep = {re.escape(k): v for k, v in rep.items()}
+            pattern = re.compile("|".join(rep.keys()))
+            err = ""
+            for _ in pattern.sub(lambda m: rep[re.escape(m.group(0))], f"{status}").split("\n"):
+                if not _ or "urllib3" in _ or _ == "":
+                    continue
+                err += _ + "\n"
+            return err
+        except TypeError or KeyError:
+            return status
