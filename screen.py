@@ -968,7 +968,7 @@ class KlipperScreen(Gtk.Window):
         keyval_name = Gdk.keyval_name(event.keyval)
         if keyval_name == "Escape":
             self._menu_go_home()
-        elif keyval_name == "BackSpace" and len(self._cur_panels) > 1:
+        elif keyval_name == "BackSpace" and len(self._cur_panels) > 1 and self.keyboard is None:
             self.base_panel.back()
 
 
