@@ -123,7 +123,7 @@ class KlipperScreenConfig:
                 if locale.getdefaultlocale()[0].startswith(language):
                     logging.debug("Using system lang")
                     lang = language
-        if lang not in self.lang_list:
+        if lang is not None and lang not in self.lang_list:
             # try to match a parent
             for language in self.lang_list:
                 if lang.startswith(language):
