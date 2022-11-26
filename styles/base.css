@@ -396,10 +396,6 @@ trough {
     margin: 0 0 0 0;
 }
 
-.printing-progress-bar {
-    color: #00C9B4;
-}
-
 .printing-progress-text {
     font-size: 1.25em;
     font-weight: bold;
@@ -454,13 +450,6 @@ trough {
     background-color: white;
     color: black;
     padding: 2em 2.5em 2em 2.5em;
-}
-
-.notification {
-    background-clip: padding-box;
-    padding: .25em;
-    border-radius: 0 0 .25em .25em;
-    opacity: 0.8;
 }
 
 .system-program-grid {
