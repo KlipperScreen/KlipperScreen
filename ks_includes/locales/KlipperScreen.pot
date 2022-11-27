@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-27 23:42-0300\n"
+"POT-Creation-Date: 2022-11-21 21:35-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,9 +44,6 @@ msgid "Accept"
 msgstr ""
 
 msgid "Actions"
-msgstr ""
-
-msgid "Add Printer"
 msgstr ""
 
 msgid "Add profile"
@@ -114,9 +111,6 @@ msgstr ""
 msgid "Calibrating"
 msgstr ""
 
-msgid "Calibrating..."
-msgstr ""
-
 msgid "Can't set above the maximum:"
 msgstr ""
 
@@ -181,9 +175,6 @@ msgstr ""
 msgid "Decrease"
 msgstr ""
 
-msgid "Delete"
-msgstr ""
-
 msgid "Delete File?"
 msgstr ""
 
@@ -213,6 +204,9 @@ msgid "Estimated Time Method"
 msgstr ""
 
 msgid "Exclude Object"
+msgstr ""
+
+msgid "Extra Large"
 msgstr ""
 
 msgid "Extrude"
@@ -290,9 +284,6 @@ msgstr ""
 msgid "Hide temp."
 msgstr ""
 
-msgid "Home"
-msgstr ""
-
 msgid "Home All"
 msgstr ""
 
@@ -321,9 +312,6 @@ msgid "Icon Theme"
 msgstr ""
 
 msgid "Increase"
-msgstr ""
-
-msgid "Initializing"
 msgstr ""
 
 msgid "Initializing printer..."
@@ -407,6 +395,9 @@ msgstr ""
 msgid "Max Velocity"
 msgstr ""
 
+msgid "Maximum"
+msgstr ""
+
 msgid "Measure Both"
 msgstr ""
 
@@ -420,6 +411,9 @@ msgid "Medium"
 msgstr ""
 
 msgid "Menu"
+msgstr ""
+
+msgid "Mesh calibrate"
 msgstr ""
 
 msgid "Modified"
@@ -440,6 +434,9 @@ msgstr ""
 msgid "Network"
 msgstr ""
 
+msgid "Never"
+msgstr ""
+
 msgid "New"
 msgstr ""
 
@@ -449,9 +446,6 @@ msgid ""
 msgstr ""
 
 msgid "Nothing selected"
-msgstr ""
-
-msgid "Off"
 msgstr ""
 
 #, python-format
@@ -559,8 +553,7 @@ msgstr ""
 msgid "Retraction Speed"
 msgstr ""
 
-#, python-format
-msgid "Retry #%s"
+msgid "Retry"
 msgstr ""
 
 msgid "Retrying"
@@ -713,25 +706,10 @@ msgstr ""
 msgid "Uploaded"
 msgstr ""
 
-msgid "View Mesh"
-msgstr ""
-
-msgid "X+"
-msgstr ""
-
-msgid "X-"
-msgstr ""
-
 msgid "XY Move Speed (mm/s)"
 msgstr ""
 
 msgid "XY Speed (mm/s)"
-msgstr ""
-
-msgid "Y+"
-msgstr ""
-
-msgid "Y-"
 msgstr ""
 
 msgid "Z Calibrate"
@@ -747,12 +725,6 @@ msgid "Z Tilt"
 msgstr ""
 
 msgid "Z offset:"
-msgstr ""
-
-msgid "Z+"
-msgstr ""
-
-msgid "Z-"
 msgstr ""
 
 msgid "commit"

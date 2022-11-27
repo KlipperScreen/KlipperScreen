@@ -1,6 +1,7 @@
-import gi
 import time
 import re
+
+import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
@@ -23,12 +24,10 @@ COLORS = {
 
 
 class ConsolePanel(ScreenPanel):
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.autoscroll = True
         self.hidetemps = True
-
-    def initialize(self, panel_name):
         self._screen._ws.send_method("server.gcode_store", {"count": 100}, self.gcode_response)
 
         o1_lbl = Gtk.Label(_("Auto-scroll"))
@@ -47,7 +46,7 @@ class ConsolePanel(ScreenPanel):
         o2_switch.set_active(self.hidetemps)
         o2_switch.connect("notify::active", self.hide_temps)
 
-        o3_button = self._gtk.ButtonImage("refresh", _('Clear') + " ", None, .66, Gtk.PositionType.RIGHT, 1)
+        o3_button = self._gtk.Button("refresh", _('Clear') + " ", None, .66, Gtk.PositionType.RIGHT, 1)
         o3_button.connect("clicked", self.clear)
 
         options = Gtk.Box()
@@ -85,7 +84,7 @@ class ConsolePanel(ScreenPanel):
         entry.connect("activate", self._send_command)
         entry.grab_focus_without_selecting()
 
-        enter = self._gtk.ButtonImage("resume", " " + _('Send') + " ", None, .66, Gtk.PositionType.RIGHT, 1)
+        enter = self._gtk.Button("resume", " " + _('Send') + " ", None, .66, Gtk.PositionType.RIGHT, 1)
         enter.set_hexpand(False)
         enter.connect("clicked", self._send_command)
 

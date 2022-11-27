@@ -34,11 +34,11 @@ class Keypad(Gtk.Box):
         for i in range(len(keys)):
             k_id = f'button_{str(keys[i][0])}'
             if keys[i][0] == "B":
-                self.labels[k_id] = self._gtk.ButtonImage("backspace", scale=1)
+                self.labels[k_id] = self._gtk.Button("backspace", scale=1)
             elif keys[i][0] == "E":
-                self.labels[k_id] = self._gtk.ButtonImage("complete", scale=1)
+                self.labels[k_id] = self._gtk.Button("complete", scale=1)
             else:
-                self.labels[k_id] = Gtk.Button(keys[i][0])
+                self.labels[k_id] = Gtk.Button(label=keys[i][0])
             self.labels[k_id].connect('clicked', self.update_entry, keys[i][0])
             self.labels[k_id].get_style_context().add_class(keys[i][1])
             numpad.attach(self.labels[k_id], i % 3, i / 3, 1, 1)
@@ -48,7 +48,7 @@ class Keypad(Gtk.Box):
         self.labels['entry'].props.xalign = 0.5
         self.labels['entry'].connect("activate", self.update_entry, "E")
 
-        b = self._gtk.ButtonImage('cancel', _('Close'), None, .66, Gtk.PositionType.LEFT, 1)
+        b = self._gtk.Button('cancel', _('Close'), None, .66, Gtk.PositionType.LEFT, 1)
         b.connect("clicked", close_function)
 
         self.add(self.labels['entry'])

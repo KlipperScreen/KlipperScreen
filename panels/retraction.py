@@ -1,6 +1,7 @@
-import gi
 import logging
 import re
+
+import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
@@ -14,15 +15,12 @@ def create_panel(*args):
 
 class FWRetractionPanel(ScreenPanel):
 
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.options = None
         self.grid = Gtk.Grid()
         self.values = {}
         self.list = {}
-
-    def initialize(self, panel_name):
-
         conf = self._printer.get_config_section("firmware_retraction")
 
         retract_length = float(conf['retract_length']) if 'retract_length' in conf else 0
@@ -133,7 +131,7 @@ class FWRetractionPanel(ScreenPanel):
         scale.get_style_context().add_class("option_slider")
         scale.connect("button-release-event", self.set_opt_value, option)
 
-        reset = self._gtk.ButtonImage("refresh", style="color1")
+        reset = self._gtk.Button("refresh", style="color1")
         reset.connect("clicked", self.reset_value, option)
         reset.set_hexpand(False)
 

@@ -16,7 +16,7 @@ button {
     background-image: none;
     background-color: #13181C;
     margin: .25em;
-    padding: 0 .5em;
+    padding: .2em .5em 0;
     border-radius: 0;
     border: 0;
     -gtk-icon-shadow: none;
@@ -372,7 +372,7 @@ trough {
 }
 
 .printing-filename {
-    font-size: 1.75em;
+    font-size: 1.4em;
     font-weight: bold;
     margin: .25em .25em 0 0;
 }
@@ -381,7 +381,7 @@ trough {
     margin-right: .25em;
 }
 .printing-info button {
-    margin: .15em;
+    margin: .1em;
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: .5em;
 }
@@ -394,10 +394,6 @@ trough {
     color: #f0f0f0;
     font-style: italic;
     margin: 0 0 0 0;
-}
-
-.printing-progress-bar {
-    color: #00C9B4;
 }
 
 .printing-progress-text {
@@ -454,13 +450,6 @@ trough {
     background-color: white;
     color: black;
     padding: 2em 2.5em 2em 2.5em;
-}
-
-.notification {
-    background-clip: padding-box;
-    padding: .25em;
-    border-radius: 0 0 .25em .25em;
-    opacity: 0.8;
 }
 
 .system-program-grid {

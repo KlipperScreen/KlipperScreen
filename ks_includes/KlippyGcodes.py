@@ -1,8 +1,5 @@
 class KlippyGcodes:
     HOME = "G28"
-    HOME_X = "G28 X"
-    HOME_Y = "G28 Y"
-    HOME_Z = "G28 Z"
     HOME_XY = "G28 X Y"
     Z_TILT = "Z_TILT_ADJUST"
     QUAD_GANTRY_LEVEL = "QUAD_GANTRY_LEVEL"
@@ -15,7 +12,6 @@ class KlippyGcodes:
     EXTRUDE_REL = "M83"
 
     SET_EXT_TEMP = "M104"
-
     SET_BED_TEMP = "M140"
 
     SET_EXT_FACTOR = "M221"
@@ -27,10 +23,6 @@ class KlippyGcodes:
     TESTZ = "TESTZ Z="
     ABORT = "ABORT"
     ACCEPT = "ACCEPT"
-
-    SAVE_CONFIG = "SAVE_CONFIG"
-    RESTART = "RESTART"
-    FIRMWARE_RESTART = "FIRMWARE_RESTART"
 
     @staticmethod
     def set_bed_temp(temp):

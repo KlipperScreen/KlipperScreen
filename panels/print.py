@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-import gi
 import logging
 import os
+
+import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib, Pango
@@ -19,8 +20,8 @@ class PrintPanel(ScreenPanel):
     dir_panels = {}
     filelist = {'gcodes': {'directories': [], 'files': []}}
 
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         sortdir = self._config.get_main_config().get("print_sort_dir", "name_asc")
         sortdir = sortdir.split('_')
         if sortdir[0] not in ["name", "date"] or sortdir[1] not in ["asc", "desc"]:
@@ -36,20 +37,16 @@ class PrintPanel(ScreenPanel):
         self.directories = {}
         self.labels['directories'] = {}
         self.labels['files'] = {}
-
-    def initialize(self, panel_name):
-        sort = Gtk.Label(_("Sort:"))
         sbox = Gtk.Box(spacing=0)
         sbox.set_vexpand(False)
-        sbox.pack_start(sort, False, False, 5)
         for i, (name, val) in enumerate(self.sort_items.items(), start=1):
-            s = self._gtk.ButtonImage(None, val, f"color{i % 4}", .5, Gtk.PositionType.RIGHT, 1)
+            s = self._gtk.Button(None, val, f"color{i % 4}", .5, Gtk.PositionType.RIGHT, 1)
             if name == self.sort_current[0]:
-                s.set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], self._gtk.img_scale * .5))
+                s.set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], self._gtk.img_scale * self.bts))
             s.connect("clicked", self.change_sort, name)
             self.labels[f'sort_{name}'] = s
             sbox.add(s)
-        refresh = self._gtk.ButtonImage("refresh", scale=.66)
+        refresh = self._gtk.Button("refresh", style="color4", scale=self.bts)
         refresh.connect('clicked', self._refresh_files)
         sbox.add(refresh)
         sbox.set_hexpand(True)
@@ -170,7 +167,7 @@ class PrintPanel(ScreenPanel):
         labels.set_valign(Gtk.Align.CENTER)
         labels.set_halign(Gtk.Align.START)
 
-        actions = self._gtk.ButtonImage("load", style="color3")
+        actions = self._gtk.Button("load", style="color3")
         actions.connect("clicked", self.change_dir, directory)
         actions.set_hexpand(False)
         actions.set_halign(Gtk.Align.END)
@@ -216,7 +213,7 @@ class PrintPanel(ScreenPanel):
         labels.set_valign(Gtk.Align.CENTER)
         labels.set_halign(Gtk.Align.START)
 
-        actions = self._gtk.ButtonImage("print", style="color3")
+        actions = self._gtk.Button("print", style="color3")
         actions.connect("clicked", self.confirm_print, filepath)
         actions.set_hexpand(False)
         actions.set_halign(Gtk.Align.END)
@@ -288,7 +285,7 @@ class PrintPanel(ScreenPanel):
             self.labels[f'sort_{oldkey}'].show_all()
             self.sort_current = [key, 0]
         self.labels[f'sort_{key}'].set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]],
-                                                             self._gtk.img_scale * .5))
+                                                             self._gtk.img_scale * self.bts))
         self.labels[f'sort_{key}'].show()
         GLib.idle_add(self.reload_files)
 
@@ -325,12 +322,10 @@ class PrintPanel(ScreenPanel):
 
         self._gtk.Dialog(self._screen, buttons, grid, self.confirm_print_response, filename)
 
-    def confirm_print_response(self, widget, response_id, filename):
-        widget.destroy()
-
+    def confirm_print_response(self, dialog, response_id, filename):
+        self._gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.CANCEL:
             return
-
         logging.info(f"Starting print: {filename}")
         self._screen._ws.klippy.print_start(filename)
 

@@ -1,7 +1,7 @@
 # Configuration
 
 Usually you don't need to create a configuration file, but if you need to change something that is not changeable in the UI
-create a blank file in `~/klipper_config/KlipperScreen.conf`, if the file already exist then just edit it.
+create a blank file in `~/printer_data/config/KlipperScreen.conf`, if the file already exist then just edit it.
 
 Write in the file only the options that need to be changed, and restart KlipperScreen.
 
@@ -41,6 +41,7 @@ Multiple printers can be defined
 [printer Ender 3 Pro]
 # Define the moonraker host/port if different from 127.0.0.1 and 7125
 moonraker_host: 127.0.0.1
+# ports 443 and 7130 will use https/wss
 moonraker_port: 7125
 # Moonraker API key if this is not connecting from a trusted client IP
 moonraker_api_key: False

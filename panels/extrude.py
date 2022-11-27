@@ -1,6 +1,7 @@
-import gi
 import logging
 import re
+
+import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
@@ -15,44 +16,41 @@ def create_panel(*args):
 
 class ExtrudePanel(ScreenPanel):
 
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-
         macros = self._screen.printer.get_gcode_macros()
         self.load_filament = any("LOAD_FILAMENT" in macro.upper() for macro in macros)
         self.unload_filament = any("UNLOAD_FILAMENT" in macro.upper() for macro in macros)
 
         self.speeds = ['1', '2', '5', '25']
-        self.speed = int(self.speeds[1])
         self.distances = ['5', '10', '15', '25']
-        self.distance = int(self.distances[1])
-        print_cfg = self._config.get_printer_config(self._screen.connected_printer)
-        if print_cfg is not None:
-            dis = print_cfg.get("extrude_distances", '5, 10, 15, 25')
+        if self.ks_printer_cfg is not None:
+            dis = self.ks_printer_cfg.get("extrude_distances", '5, 10, 15, 25')
             if re.match(r'^[0-9,\s]+$', dis):
                 dis = [str(i.strip()) for i in dis.split(',')]
                 if 1 < len(dis) < 5:
                     self.distances = dis
-            vel = print_cfg.get("extrude_speeds", '1, 2, 5, 25')
+            vel = self.ks_printer_cfg.get("extrude_speeds", '1, 2, 5, 25')
             if re.match(r'^[0-9,\s]+$', vel):
                 vel = [str(i.strip()) for i in vel.split(',')]
                 if 1 < len(vel) < 5:
                     self.speeds = vel
 
-    def initialize(self, panel_name):
-        self.labels['extrude'] = self._gtk.ButtonImage("extrude", _("Extrude"), "color4")
-        self.labels['extrude'].connect("clicked", self.extrude, "+")
-        self.labels['load'] = self._gtk.ButtonImage("arrow-down", _("Load"), "color3")
-
-        self.labels['load'].connect("clicked", self.load_unload, "+")
-        self.labels['unload'] = self._gtk.ButtonImage("arrow-up", _("Unload"), "color2")
-
-        self.labels['unload'].connect("clicked", self.load_unload, "-")
-        self.labels['retract'] = self._gtk.ButtonImage("retract", _("Retract"), "color1")
-        self.labels['retract'].connect("clicked", self.extrude, "-")
-        self.labels['temperature'] = self._gtk.ButtonImage("heat-up", _("Temperature"), "color4")
-        self.labels['temperature'].connect("clicked", self.menu_item_clicked, "temperature", {
+        self.distance = int(self.distances[1])
+        self.speed = int(self.speeds[1])
+        self.buttons = {
+            'extrude': self._gtk.Button("extrude", _("Extrude"), "color4"),
+            'load': self._gtk.Button("arrow-down", _("Load"), "color3"),
+            'unload': self._gtk.Button("arrow-up", _("Unload"), "color2"),
+            'retract': self._gtk.Button("retract", _("Retract"), "color1"),
+            'temperature': self._gtk.Button("heat-up", _("Temperature"), "color4"),
+        }
+        self.buttons['extrude'].connect("clicked", self.extrude, "+")
+        self.buttons['load'].connect("clicked", self.load_unload, "+")
+        self.buttons['unload'].connect("clicked", self.load_unload, "-")
+        self.buttons['retract'].connect("clicked", self.extrude, "-")
+        self.buttons['temperature'].connect("clicked", self.menu_item_clicked, "temperature", {
             "name": "Temperature",
             "panel": "temperature"
         })
@@ -62,10 +60,9 @@ class ExtrudePanel(ScreenPanel):
         i = 0
         for extruder in self._printer.get_tools():
             if self._printer.extrudercount > 1:
-                self.labels[extruder] = self._gtk.ButtonImage(f"extruder-{i}",
-                                                              f"T{self._printer.get_tool_number(extruder)}")
+                self.labels[extruder] = self._gtk.Button(f"extruder-{i}", f"T{self._printer.get_tool_number(extruder)}")
             else:
-                self.labels[extruder] = self._gtk.ButtonImage("extruder", "")
+                self.labels[extruder] = self._gtk.Button("extruder", "")
             self.labels[extruder].connect("clicked", self.change_extruder, extruder)
             if extruder == self.current_extruder:
                 self.labels[extruder].get_style_context().add_class("button_active")
@@ -73,11 +70,11 @@ class ExtrudePanel(ScreenPanel):
                 extgrid.attach(self.labels[extruder], i, 0, 1, 1)
                 i += 1
         if i < (limit - 1):
-            extgrid.attach(self.labels['temperature'], i + 1, 0, 1, 1)
+            extgrid.attach(self.buttons['temperature'], i + 1, 0, 1, 1)
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
-            self.labels[f"dist{i}"] = self._gtk.Button(i)
+            self.labels[f"dist{i}"] = self._gtk.Button(label=i)
             self.labels[f"dist{i}"].connect("clicked", self.change_distance, int(i))
             ctx = self.labels[f"dist{i}"].get_style_context()
             if ((self._screen.lang_ltr is True and j == 0) or
@@ -94,7 +91,7 @@ class ExtrudePanel(ScreenPanel):
 
         speedgrid = Gtk.Grid()
         for j, i in enumerate(self.speeds):
-            self.labels[f"speed{i}"] = self._gtk.Button(i)
+            self.labels[f"speed{i}"] = self._gtk.Button(label=i)
             self.labels[f"speed{i}"].connect("clicked", self.change_speed, int(i))
             ctx = self.labels[f"speed{i}"].get_style_context()
             if ((self._screen.lang_ltr is True and j == 0) or
@@ -155,28 +152,39 @@ class ExtrudePanel(ScreenPanel):
         grid.attach(extgrid, 0, 0, 4, 1)
 
         if self._screen.vertical_mode:
-            grid.attach(self.labels['extrude'], 0, 1, 2, 1)
-            grid.attach(self.labels['retract'], 2, 1, 2, 1)
-            grid.attach(self.labels['load'], 0, 2, 2, 1)
-            grid.attach(self.labels['unload'], 2, 2, 2, 1)
+            grid.attach(self.buttons['extrude'], 0, 1, 2, 1)
+            grid.attach(self.buttons['retract'], 2, 1, 2, 1)
+            grid.attach(self.buttons['load'], 0, 2, 2, 1)
+            grid.attach(self.buttons['unload'], 2, 2, 2, 1)
             grid.attach(distbox, 0, 3, 4, 1)
             grid.attach(speedbox, 0, 4, 4, 1)
             grid.attach(sensors, 0, 5, 4, 1)
         else:
-            grid.attach(self.labels['extrude'], 0, 2, 1, 1)
-            grid.attach(self.labels['load'], 1, 2, 1, 1)
-            grid.attach(self.labels['unload'], 2, 2, 1, 1)
-            grid.attach(self.labels['retract'], 3, 2, 1, 1)
+            grid.attach(self.buttons['extrude'], 0, 2, 1, 1)
+            grid.attach(self.buttons['load'], 1, 2, 1, 1)
+            grid.attach(self.buttons['unload'], 2, 2, 1, 1)
+            grid.attach(self.buttons['retract'], 3, 2, 1, 1)
             grid.attach(distbox, 0, 3, 2, 1)
             grid.attach(speedbox, 2, 3, 2, 1)
             grid.attach(sensors, 0, 4, 4, 1)
 
         self.content.add(grid)
 
+    def activate(self):
+        self.process_busy(self._printer.busy)
+
+    def process_busy(self, busy):
+        for button in self.buttons:
+            if button == "temperature":
+                continue
+            self.buttons[button].set_sensitive((not busy))
+
     def process_update(self, action, data):
+        if action == "notify_busy":
+            self.process_busy(data)
+            return
         if action != "notify_status_update":
             return
-
         for x in self._printer.get_tools():
             self.update_temp(
                 x,

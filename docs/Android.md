@@ -28,7 +28,7 @@ search "how to enable android debugging on device-model-and-brand"
 
 ```bash
 cd ~/KlipperScreen/scripts
-cp android-adb.sh launch_KlipperScreen.sh
+cp sample-android-adb.sh launch_KlipperScreen.sh
 chmod +x launch_KlipperScreen.sh
 ```
 
@@ -45,9 +45,9 @@ chmod +x launch_KlipperScreen.sh
 nano launch_KlipperScreen.sh
 ```
 
-* Paste this into the script (edit the IP for example: 192.168.1.2:0)
+* Paste this into the script (replace the example IP)
 ```bash
-DISPLAY=(ip address from blue screen):0 $KS_XCLIENT
+DISPLAY=192.168.150.122:0 $KS_XCLIENT
 ```
 
 !!! important
@@ -72,6 +72,15 @@ on the Pi
 sudo service KlipperScreen stop
 sudo service KlipperScreen start
 ```
+
+## Stop Screen Blanking in Xserver-XSDL
+
+Even after enabling the "Stay Awake" option in the Developer/USB Debugging options of your Android device, the Xserver-XSDL may still go to a black screen but keep the backlight of your device on.  To keep the screen always active, upon start up of Xserver-XSDL app, select the `Change Device Configuration` at the top of the splash screen and then select the `Command line parameters, one argument per line` option. Append the following argument (must be on seperate lines):
+```
+-s
+0
+```
+This will disable the screen-saver in Xserver and keep KlipperScreen always active.
 
 ## Migration from other tutorials
 

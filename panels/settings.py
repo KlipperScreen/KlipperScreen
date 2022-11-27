@@ -1,5 +1,4 @@
 import gi
-import logging
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
@@ -12,15 +11,10 @@ def create_panel(*args):
 
 
 class SettingsPanel(ScreenPanel):
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.printers = self.settings = {}
         self.menu = ['settings_menu']
-
-    def initialize(self, panel_name):
-
-        self.labels['add_printer_button'] = self._gtk.Button(_("Add Printer"), "color1")
-
         options = self._config.get_configurable_options().copy()
         options.append({"printers": {
             "name": _("Printer Connections"),
@@ -39,7 +33,6 @@ class SettingsPanel(ScreenPanel):
         self.labels['printers'] = Gtk.Grid()
         self.labels['printers_menu'].add(self.labels['printers'])
         for printer in self._config.get_printers():
-            logging.debug(f"Printer: {printer}")
             pname = list(printer)[0]
             self.printers[pname] = {
                 "name": pname,
@@ -120,17 +113,14 @@ class SettingsPanel(ScreenPanel):
             scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
             dev.add(scale)
         elif option['type'] == "printer":
-            logging.debug(f"Option: {option}")
             box = Gtk.Box()
             box.set_vexpand(False)
-            label = Gtk.Label()
-            url = f"{option['moonraker_host']}:{option['moonraker_port']}"
-            label.set_markup(f"<big>{option['name']}</big>\n{url}")
+            label = Gtk.Label(f"{option['moonraker_host']}:{option['moonraker_port']}")
             box.add(label)
             dev.add(box)
         elif option['type'] == "menu":
-            open_menu = self._gtk.ButtonImage("settings", style="color3")
-            open_menu.connect("clicked", self.load_menu, option['menu'])
+            open_menu = self._gtk.Button("settings", style="color3")
+            open_menu.connect("clicked", self.load_menu, option['menu'], option['name'])
             open_menu.set_hexpand(False)
             open_menu.set_halign(Gtk.Align.END)
             dev.add(open_menu)

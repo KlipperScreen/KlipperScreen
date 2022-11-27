@@ -1,5 +1,6 @@
-import gi
 import logging
+
+import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
@@ -13,17 +14,12 @@ def create_panel(*args):
 
 class LimitsPanel(ScreenPanel):
 
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.limits = {}
-        self.grid = Gtk.Grid()
         self.options = None
         self.values = {}
-
-    def initialize(self, panel_name):
-
-        scroll = self._gtk.ScrolledWindow()
-        scroll.add(self.grid)
+        self.grid = Gtk.Grid()
 
         conf = self._printer.get_config_section("printer")
         self.options = [
@@ -42,6 +38,8 @@ class LimitsPanel(ScreenPanel):
         for opt in self.options:
             self.add_option(opt['option'], opt['name'], opt['units'], opt['max'])
 
+        scroll = self._gtk.ScrolledWindow()
+        scroll.add(self.grid)
         self.content.add(scroll)
         self.content.show_all()
 
@@ -96,7 +94,7 @@ class LimitsPanel(ScreenPanel):
         scale.connect("button-release-event", self.set_opt_value, option)
         self.values[option] = value
 
-        reset = self._gtk.ButtonImage("refresh", style="color1")
+        reset = self._gtk.Button("refresh", style="color1")
         reset.connect("clicked", self.reset_value, option)
         reset.set_hexpand(False)
 

@@ -15,28 +15,25 @@ def create_panel(*args):
 
 
 class ExcludeObjectPanel(ScreenPanel):
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self._screen = screen
         self.object_list = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         self.object_list.set_valign(Gtk.Align.CENTER)
         self.object_list.set_halign(Gtk.Align.START)
         self.buttons = {}
-        self.current_object = self._gtk.ButtonImage("extrude", "", scale=.66, position=Gtk.PositionType.LEFT, lines=1)
+        self.current_object = self._gtk.Button("extrude", "", scale=self.bts, position=Gtk.PositionType.LEFT, lines=1)
         self.current_object.connect("clicked", self.exclude_current)
         self.current_object.set_vexpand(False)
         self.excluded_objects = self._printer.get_stat("exclude_object", "excluded_objects")
         logging.info(f'Excluded: {self.excluded_objects}')
         self.objects = self._printer.get_stat("exclude_object", "objects")
         self.labels['map'] = None
-
-    def initialize(self, panel_name):
         for obj in self.objects:
             logging.info(f"Adding {obj['name']}")
             self.add_object(obj["name"])
 
         scroll = self._gtk.ScrolledWindow()
-        scroll.set_size_request((self._screen.width * .9) // 2, -1)
         scroll.add(self.object_list)
         scroll.set_halign(Gtk.Align.CENTER)
 
@@ -47,17 +44,24 @@ class ExcludeObjectPanel(ScreenPanel):
 
         if self.objects and "polygon" in self.objects[0]:
             self.labels['map'] = ObjectMap(self._screen, self._printer, self._gtk.get_font_size())
-            grid.attach(self.labels['map'], 0, 2, 1, 1)
-            grid.attach(scroll, 1, 2, 1, 1)
+            if self._screen.vertical_mode:
+                grid.attach(self.labels['map'], 0, 2, 2, 1)
+                grid.attach(scroll, 0, 3, 2, 1)
+                scroll.set_size_request(self._gtk.get_content_width(), -1)
+            else:
+                grid.attach(self.labels['map'], 0, 2, 1, 1)
+                grid.attach(scroll, 1, 2, 1, 1)
+                scroll.set_size_request((self._screen.width * .9) // 2, -1)
         else:
             grid.attach(scroll, 0, 2, 2, 1)
+            scroll.set_size_request(self._gtk.get_content_width(), -1)
 
         self.content.add(grid)
         self.content.show_all()
 
     def add_object(self, name):
         if name not in self.buttons and name not in self.excluded_objects:
-            self.buttons[name] = self._gtk.Button(name.replace("_", " "))
+            self.buttons[name] = self._gtk.Button(label=name.replace("_", " "))
             self.buttons[name].get_children()[0].set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
             self.buttons[name].get_children()[0].set_line_wrap(True)
             self.buttons[name].connect("clicked", self.exclude_object, name)
@@ -112,7 +116,7 @@ class ExcludeObjectPanel(ScreenPanel):
                         self.object_list.remove(self.buttons[name])
                 self.update_graph()
                 if len(self.excluded_objects) == len(self.objects):
-                    self.menu_return(False)
+                    self._screen._menu_go_back()
         elif action == "notify_gcode_response" and "Excluding object" in data:
             self._screen.show_popup_message(data, level=1)
             self.update_graph()

@@ -1,5 +1,6 @@
-import gi
 import logging
+
+import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
@@ -12,8 +13,8 @@ def create_panel(*args):
 
 
 class PowerPanel(ScreenPanel):
-    def initialize(self, panel_name):
-
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.devices = {}
 
         # Create a grid for all devices

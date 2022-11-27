@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-27 23:42-0300\n"
-"PO-Revision-Date: 2022-10-27 23:24-0300\n"
+"POT-Creation-Date: 2022-11-21 21:35-0300\n"
+"PO-Revision-Date: 2022-11-20 21:00-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -45,9 +45,6 @@ msgstr "Aceptar"
 
 msgid "Actions"
 msgstr "Acciones"
-
-msgid "Add Printer"
-msgstr "Agregar impresora"
 
 msgid "Add profile"
 msgstr "Agregar perfil"
@@ -114,9 +111,6 @@ msgstr "Calibrado, guarde su configuración para hacerlo permanente"
 msgid "Calibrating"
 msgstr "Calibrando"
 
-msgid "Calibrating..."
-msgstr "Calibrando..."
-
 msgid "Can't set above the maximum:"
 msgstr "Error: Valor sobre el máximo:"
 
@@ -181,9 +175,6 @@ msgstr "Fecha"
 msgid "Decrease"
 msgstr "Disminuir"
 
-msgid "Delete"
-msgstr "Borrar"
-
 msgid "Delete File?"
 msgstr "¿Borrar archivo?"
 
@@ -214,6 +205,9 @@ msgstr "Método para estimar tiempo"
 
 msgid "Exclude Object"
 msgstr "Excluir Objeto"
+
+msgid "Extra Large"
+msgstr "Extra Grande"
 
 msgid "Extrude"
 msgstr "Extruir"
@@ -290,9 +284,6 @@ msgstr "Ocultar sensores en Temp."
 msgid "Hide temp."
 msgstr "Ocultar temp."
 
-msgid "Home"
-msgstr "Inicio"
-
 msgid "Home All"
 msgstr "Origen XYZ"
 
@@ -322,9 +313,6 @@ msgstr "Tema de Iconos"
 
 msgid "Increase"
 msgstr "Aumentar"
-
-msgid "Initializing"
-msgstr "Iniciando"
 
 msgid "Initializing printer..."
 msgstr "Iniciando Impresora..."
@@ -407,6 +395,9 @@ msgstr "Max. Aceleración a Desaceleración"
 msgid "Max Velocity"
 msgstr "Max. Velocidad"
 
+msgid "Maximum"
+msgstr "Maximo"
+
 msgid "Measure Both"
 msgstr "Medir Ambos"
 
@@ -421,6 +412,9 @@ msgstr "Medio"
 
 msgid "Menu"
 msgstr "Menú"
+
+msgid "Mesh calibrate"
+msgstr "Calibrar Malla"
 
 msgid "Modified"
 msgstr "Modificado"
@@ -440,6 +434,9 @@ msgstr "Nombre"
 msgid "Network"
 msgstr "Red"
 
+msgid "Never"
+msgstr "Nunca"
+
 msgid "New"
 msgstr "Nuevo"
 
@@ -452,9 +449,6 @@ msgstr ""
 
 msgid "Nothing selected"
 msgstr "Nada seleccionado"
-
-msgid "Off"
-msgstr "Apagar"
 
 #, python-format
 msgid "Outdated by %d"
@@ -561,9 +555,8 @@ msgstr "Largo de Retracción"
 msgid "Retraction Speed"
 msgstr "Velocidad de Retracción"
 
-#, python-format
-msgid "Retry #%s"
-msgstr "Intento #%s"
+msgid "Retry"
+msgstr "Reintentar"
 
 msgid "Retrying"
 msgstr "Reintentando"
@@ -715,26 +708,11 @@ msgstr "Actualizando"
 msgid "Uploaded"
 msgstr "Subido"
 
-msgid "View Mesh"
-msgstr "Ver Malla"
-
-msgid "X+"
-msgstr "X+"
-
-msgid "X-"
-msgstr "X-"
-
 msgid "XY Move Speed (mm/s)"
 msgstr "Velocidad XY (mm/s)"
 
 msgid "XY Speed (mm/s)"
 msgstr "XY Velocidad (mm/s)"
-
-msgid "Y+"
-msgstr "Y+"
-
-msgid "Y-"
-msgstr "Y-"
 
 msgid "Z Calibrate"
 msgstr "Calibrar Z"
@@ -750,12 +728,6 @@ msgstr "Inclinación Z"
 
 msgid "Z offset:"
 msgstr "Desfase Z:"
-
-msgid "Z+"
-msgstr "Z+"
-
-msgid "Z-"
-msgstr "Z-"
 
 msgid "commit"
 msgid_plural "commits"
@@ -781,6 +753,49 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Calibrating..."
+#~ msgstr "Calibrando..."
+
+#~ msgid "Z+"
+#~ msgstr "Z+"
+
+#~ msgid "Z-"
+#~ msgstr "Z-"
+
+#~ msgid "X+"
+#~ msgstr "X+"
+
+#~ msgid "X-"
+#~ msgstr "X-"
+
+#~ msgid "Y+"
+#~ msgstr "Y+"
+
+#~ msgid "Y-"
+#~ msgstr "Y-"
+
+#, python-format
+#~ msgid "Retry #%s"
+#~ msgstr "Intento #%s"
+
+#~ msgid "Add Printer"
+#~ msgstr "Agregar impresora"
+
+#~ msgid "Initializing"
+#~ msgstr "Iniciando"
+
+#~ msgid "Delete"
+#~ msgstr "Borrar"
+
+#~ msgid "Home"
+#~ msgstr "Inicio"
+
+#~ msgid "Off"
+#~ msgstr "Apagar"
+
+#~ msgid "View Mesh"
+#~ msgstr "Ver Malla"
 
 #~ msgid "Machine"
 #~ msgstr "Máquina"

@@ -16,7 +16,6 @@ class KlippyFiles:
         self.gcodes_path = None
 
     def initialize(self):
-        self.gcodes_path = None
         if "virtual_sdcard" in self._screen.printer.get_config_section_list():
             vsd = self._screen.printer.get_config_section("virtual_sdcard")
             if "path" in vsd:
@@ -24,7 +23,11 @@ class KlippyFiles:
         logging.info(f"Gcodes path: {self.gcodes_path}")
 
     def reset(self):
-        self.__init__(self._screen)
+        self._screen = None
+        self.callbacks = None
+        self.files = None
+        self.filelist = None
+        self.gcodes_path = None
 
     def _callback(self, result, method, params):
         if method == "server.files.list":
@@ -92,7 +95,8 @@ class KlippyFiles:
         if filename in self.filelist:
             logging.info(f"File already exists: {filename}")
             self.request_metadata(filename)
-            GLib.timeout_add_seconds(1, self.run_callbacks, mods=[filename])
+            args = None, None, [filename]
+            GLib.idle_add(self.run_callbacks, *args)
             return
 
         self.filelist.append(filename)
@@ -172,10 +176,6 @@ class KlippyFiles:
         if notify is True:
             self.run_callbacks(deletedfiles=[filename])
 
-    def ret_file_data(self, filename):
-        logging.info(f"Getting file info for {filename}")
-        self._screen._ws.klippy.get_file_metadata(filename, self._callback)
-
     def run_callbacks(self, newfiles=None, deletedfiles=None, mods=None):
         if mods is None:
             mods = []
@@ -186,7 +186,8 @@ class KlippyFiles:
         if len(self.callbacks) <= 0:
             return False
         for cb in self.callbacks:
-            GLib.idle_add(cb, newfiles, deletedfiles, mods)
+            args = newfiles, deletedfiles, mods
+            GLib.idle_add(cb, *args)
         return False
 
     def get_file_list(self):
