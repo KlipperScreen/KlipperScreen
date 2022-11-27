@@ -660,18 +660,15 @@ class JobStatusPanel(ScreenPanel):
                 # speed_factor compensation based on empirical testing
                 spdcomp = sqrt(self.speed_factor)
                 slicer_time = ((self.file_metadata['estimated_time'] * usrcomp) / spdcomp) + non_printing
-        self.labels["slicer_time"].set_label(f"{self.format_time(slicer_time)} | "
-                                             f"{self.format_eta(slicer_time, total_duration)}")
+        self.labels["slicer_time"].set_label(self.format_time(slicer_time))
 
         with contextlib.suppress(Exception):
             if self.file_metadata['filament_total'] > fila_used:
                 filament_time = (total_duration / (fila_used / self.file_metadata['filament_total'])) + non_printing
-        self.labels["filament_time"].set_label(f"{self.format_time(filament_time)} | "
-                                               f"{self.format_eta(filament_time, total_duration)}")
+        self.labels["filament_time"].set_label(self.format_time(filament_time))
         with contextlib.suppress(ZeroDivisionError):
             file_time = (total_duration / self.progress) + non_printing
-        self.labels["file_time"].set_label(f"{self.format_time(file_time)} | "
-                                           f"{self.format_eta(file_time, total_duration)}")
+        self.labels["file_time"].set_label(self.format_time(file_time))
 
         if timeleft_type == "file":
             estimated = file_time
