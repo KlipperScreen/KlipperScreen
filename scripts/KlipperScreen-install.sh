@@ -14,7 +14,7 @@ OPTIONAL="xserver-xorg-legacy fonts-nanum"
 
 # moonraker will check this list when updating
 # if new packages are required for existing installs add them below too.
-PKGLIST=""
+PKGLIST="libdbus-glib-1-dev autoconf"
 
 Red='\033[0;31m'
 Green='\033[0;32m'
