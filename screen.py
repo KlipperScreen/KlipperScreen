@@ -8,7 +8,7 @@ import subprocess
 import pathlib
 import traceback  # noqa
 import locale
-
+import sys
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -16,7 +16,6 @@ from gi.repository import Gtk, Gdk, GLib, Pango
 from importlib import import_module
 from jinja2 import Environment
 from signal import SIGTERM
-from sys import exit
 
 from ks_includes import functions
 from ks_includes.KlippyWebsocket import KlippyWebsocket
@@ -358,7 +357,9 @@ class KlipperScreen(Gtk.Window):
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(message)
 
-        help_notice = Gtk.Label(label="Provide /tmp/KlipperScreen.log when asking for help.\n")
+        help_msg = _("Provide /tmp/KlipperScreen.log when asking for help.\n")
+        help_msg += _("KlipperScreen will be restarted")
+        help_notice = Gtk.Label(label=help_msg)
         help_notice.set_line_wrap(True)
 
         grid = Gtk.Grid()
@@ -375,32 +376,12 @@ class KlipperScreen(Gtk.Window):
 
     def error_modal_response(self, dialog, response_id):
         self.gtk.remove_dialog(dialog)
-        self.reload_panels()
+        self.restart_ks()
 
-    def restart_warning(self, value):
-        logging.debug(f"Showing restart warning because: {value}")
-
-        buttons = [
-            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL},
-            {"name": _("Restart"), "response": Gtk.ResponseType.OK}
-        ]
-
-        label = Gtk.Label()
-        label.set_markup(_("To apply %s KlipperScreen needs to be restarted") % value)
-        label.set_hexpand(True)
-        label.set_halign(Gtk.Align.CENTER)
-        label.set_vexpand(True)
-        label.set_valign(Gtk.Align.CENTER)
-        label.set_line_wrap(True)
-        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-
-        self.gtk.Dialog(self, buttons, label, self.restart_ks)
-
-    def restart_ks(self, dialog, response_id):
-        self.gtk.remove_dialog(dialog)
-        if response_id == Gtk.ResponseType.OK:
-            logging.debug("Restarting")
-            self._ws.send_method("machine.services.restart", {"service": "KlipperScreen"})
+    def restart_ks(self, *args):
+        logging.debug(f"Restarting {sys.executable} {' '.join(sys.argv)}")
+        os.execv(sys.executable, ['python'] + sys.argv)
+        self._ws.send_method("machine.services.restart", {"service": "KlipperScreen"})  # Fallback
 
     def init_style(self):
         css_data = pathlib.Path(os.path.join(klipperscreendir, "styles", "base.css")).read_text()
@@ -1016,4 +997,4 @@ if __name__ == "__main__":
         main()
     except Exception as ex:
         logging.exception(f"Fatal error in main loop:\n{ex}")
-        exit(1)
+        sys.exit(1)
