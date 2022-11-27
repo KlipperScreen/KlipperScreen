@@ -176,7 +176,7 @@ class SystemPanel(ScreenPanel):
                     commit_box.add(Gtk.Separator())
                     vbox.add(commit_box)
 
-        if "package_count" in info:
+        elif "package_count" in info:
             label.set_markup((
                 f'<b>{info["package_count"]} '
                 + ngettext("Package will be updated", "Packages will be updated", info["package_count"])
