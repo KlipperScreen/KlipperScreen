@@ -707,6 +707,8 @@ class KlipperScreen(Gtk.Window):
             if 'message' in data and 'Error' in data['message']:
                 logging.error(f"{action}:{data['message']}")
                 self.show_popup_message(data['message'], 3)
+                if "KlipperScreen" in data['message']:
+                    self.restart_ks()
         elif action == "notify_power_changed":
             logging.debug("Power status changed: %s", data)
             self.printer.process_power_update(data)
