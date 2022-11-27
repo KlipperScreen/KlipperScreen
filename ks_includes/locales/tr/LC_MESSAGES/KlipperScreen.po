@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-21 21:35-0300\n"
-"PO-Revision-Date: 2022-11-21 21:31-0300\n"
+"PO-Revision-Date: 2022-11-27 13:59+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.1\n"
+"X-Generator: Poedit 3.2\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -207,7 +207,7 @@ msgid "Exclude Object"
 msgstr "Nesneyi Hariç Tut"
 
 msgid "Extra Large"
-msgstr ""
+msgstr "Çok Büyük"
 
 msgid "Extrude"
 msgstr "Ekstrüzyon"
@@ -396,7 +396,7 @@ msgid "Max Velocity"
 msgstr "Maksimum Hız"
 
 msgid "Maximum"
-msgstr ""
+msgstr "Maksimum"
 
 msgid "Measure Both"
 msgstr "İkisini de ölçüle"
@@ -414,7 +414,7 @@ msgid "Menu"
 msgstr "Menü"
 
 msgid "Mesh calibrate"
-msgstr ""
+msgstr "Mesh Kalibre et"
 
 msgid "Modified"
 msgstr "Değiştirilmiş"
@@ -435,7 +435,7 @@ msgid "Network"
 msgstr "Ağ"
 
 msgid "Never"
-msgstr ""
+msgstr "Asla"
 
 msgid "New"
 msgstr "Yeni"
@@ -556,7 +556,7 @@ msgid "Retraction Speed"
 msgstr "Geri Çekme Hızı"
 
 msgid "Retry"
-msgstr ""
+msgstr "Tekrar dene"
 
 msgid "Retrying"
 msgstr "Yeniden Deneniyor"
