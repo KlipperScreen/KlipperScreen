@@ -10,6 +10,7 @@ from gi.repository import GLib, Gtk, Pango
 from ks_includes.screen_panel import ScreenPanel
 from math import pi, sqrt
 from statistics import median
+from time import time
 
 
 def create_panel(*args):
@@ -371,7 +372,7 @@ class JobStatusPanel(ScreenPanel):
         ps = self._printer.get_stat("print_stats")
         self.set_state(ps['state'])
         if self.flow_timeout is None:
-            self.flow_timeout = GLib.timeout_add_seconds(1, self.update_flow)
+            self.flow_timeout = GLib.timeout_add_seconds(2, self.update_flow)
         self._screen.base_panel_show_all()
 
     def deactivate(self):
@@ -579,6 +580,14 @@ class JobStatusPanel(ScreenPanel):
                 self.labels['pos_x'].set_label(f"X: {data['motion_report']['live_position'][0]:6.2f}")
                 self.labels['pos_y'].set_label(f"Y: {data['motion_report']['live_position'][1]:6.2f}")
                 self.labels['pos_z'].set_label(f"Z: {data['motion_report']['live_position'][2]:6.2f}")
+                pos = data["motion_report"]["live_position"]
+                now = time()
+                if self.prev_pos is not None:
+                    interval = (now - self.prev_pos[1])
+                    # Calculate Flowrate
+                    evelocity = (pos[3] - self.prev_pos[0][3]) / interval
+                    self.flowstore.append(self.fila_section * evelocity)
+                self.prev_pos = [pos, now]
             with contextlib.suppress(KeyError):
                 self.vel = float(data["motion_report"]["live_velocity"])
                 self.labels['req_speed'].set_label(f"{self.speed}% {self.vel:.0f}/{self.req_speed:.0f} mm/s")
@@ -613,16 +622,13 @@ class JobStatusPanel(ScreenPanel):
                 f"{1 + round((self.pos_z - self.f_layer_h) / self.layer_h)} / {self.labels['total_layers'].get_text()}")
 
         if 'print_duration' in ps:
-            if int(ps['print_duration']) == 0 and self.progress > 0.001:
-                # Print duration remains at 0 when using No-extusion tests
-                duration = ps['total_duration']
-            else:
-                duration = ps['print_duration']
+            total_duration = ps['total_duration']
+            print_duration = ps['print_duration']
             if 'filament_used' in ps:
                 self.labels['filament_used'].set_label(f"{float(ps['filament_used']) / 1000:.1f} m")
-                self.update_time_left(duration, ps['filament_used'])
+                self.update_time_left(total_duration, print_duration, ps['filament_used'])
             else:
-                self.update_time_left(duration)
+                self.update_time_left(total_duration, print_duration)
 
         if self.main_status_displayed:
             self.buttons['fan'].set_label(self.labels['fan'].get_text())
@@ -641,53 +647,52 @@ class JobStatusPanel(ScreenPanel):
             self.buttons['extrusion'].set_label(f"{self.extrusion:3}% {self.flowrate:5.1f} mm³/s")
         return True
 
-    def update_time_left(self, duration=0, fila_used=0):
-        self.labels["duration"].set_label(self.format_time(duration))
-        total_duration = None
-        if self.progress < 1:
-            slicer_time = filament_time = file_time = None
-            timeleft_type = self._config.get_config()['main'].get('print_estimate_method', 'auto')
+    def update_time_left(self, total_duration, print_duration, fila_used=0):
+        self.labels["duration"].set_label(self.format_time(total_duration))
+        non_printing = total_duration - print_duration
+        estimated = None
+        slicer_time = filament_time = file_time = None
+        timeleft_type = self._config.get_config()['main'].get('print_estimate_method', 'auto')
 
-            with contextlib.suppress(KeyError):
-                if self.file_metadata['estimated_time'] > 0:
-                    usrcomp = (self._config.get_config()['main'].getint('print_estimate_compensation', 100) / 100)
-                    # speed_factor compensation based on empirical testing
-                    spdcomp = sqrt(self.speed_factor)
-                    slicer_time = (self.file_metadata['estimated_time'] * usrcomp) / spdcomp
-            self.labels["slicer_time"].set_label(self.format_eta(slicer_time, duration))
+        with contextlib.suppress(KeyError):
+            if self.file_metadata['estimated_time'] > 0:
+                usrcomp = (self._config.get_config()['main'].getint('print_estimate_compensation', 100) / 100)
+                # speed_factor compensation based on empirical testing
+                spdcomp = sqrt(self.speed_factor)
+                slicer_time = ((self.file_metadata['estimated_time'] * usrcomp) / spdcomp) + non_printing
+        self.labels["slicer_time"].set_label(f"{self.format_time(slicer_time)} | "
+                                             f"{self.format_eta(slicer_time, total_duration)}")
 
-            with contextlib.suppress(Exception):
-                if self.file_metadata['filament_total'] > fila_used:
-                    filament_time = duration / (fila_used / self.file_metadata['filament_total'])
-            self.labels["filament_time"].set_label(self.format_eta(filament_time, duration))
+        with contextlib.suppress(Exception):
+            if self.file_metadata['filament_total'] > fila_used:
+                filament_time = (total_duration / (fila_used / self.file_metadata['filament_total'])) + non_printing
+        self.labels["filament_time"].set_label(f"{self.format_time(filament_time)} | "
+                                               f"{self.format_eta(filament_time, total_duration)}")
+        with contextlib.suppress(ZeroDivisionError):
+            file_time = (total_duration / self.progress) + non_printing
+        self.labels["file_time"].set_label(f"{self.format_time(file_time)} | "
+                                           f"{self.format_eta(file_time, total_duration)}")
 
-            with contextlib.suppress(ZeroDivisionError):
-                file_time = duration / self.progress
-            self.labels["file_time"].set_label(self.format_eta(file_time, duration))
-
-            if timeleft_type == "file":
-                total_duration = file_time
-            elif timeleft_type == "filament":
-                total_duration = filament_time
-            elif slicer_time is not None:
-                if timeleft_type == "slicer":
-                    total_duration = slicer_time
-                elif filament_time is not None and self.progress > 0.14:
-                    # Weighted arithmetic mean (Slicer is the most accurate)
-                    total_duration = (slicer_time * 3 + filament_time + file_time) / 5
-                else:
-                    # At the begining file and filament are innacurate
-                    total_duration = slicer_time
-            elif file_time is not None:
-                if filament_time is not None:
-                    total_duration = (filament_time + file_time) / 2
-                else:
-                    total_duration = file_time
-            self.labels["est_time"].set_label(self.format_eta(total_duration, duration))
-            self.labels["time_left"].set_label(self.format_eta(total_duration, duration))
-        else:
-            self.labels["est_time"].set_label("-")
-            self.labels["time_left"].set_label("-")
+        if timeleft_type == "file":
+            estimated = file_time
+        elif timeleft_type == "filament":
+            estimated = filament_time
+        elif slicer_time is not None:
+            if timeleft_type == "slicer":
+                estimated = slicer_time
+            elif filament_time is not None and self.progress > 0.14:
+                # Weighted arithmetic mean (Slicer is the most accurate)
+                estimated = (slicer_time * 3 + filament_time + file_time) / 5
+            else:
+                # At the begining file and filament are innacurate
+                estimated = slicer_time
+        elif file_time is not None:
+            if filament_time is not None:
+                estimated = (filament_time + file_time) / 2
+            else:
+                estimated = file_time
+        self.labels["est_time"].set_label(self.format_time(estimated))
+        self.labels["time_left"].set_label(self.format_eta(estimated, total_duration))
 
     def state_check(self):
         ps = self._printer.get_stat("print_stats")

@@ -104,12 +104,12 @@ class MovePanel(ScreenPanel):
             distgrid.attach(self.labels[i], j, 0, 1, 1)
 
         homed_axes = self._screen.printer.get_stat("toolhead", "homed_axes")
-        x = self._screen.printer.get_stat("gcode_move", "gcode_position")[0] if "x" in homed_axes else "?"
-        y = self._screen.printer.get_stat("gcode_move", "gcode_position")[1] if "y" in homed_axes else "?"
-        z = self._screen.printer.get_stat("gcode_move", "gcode_position")[2] if "z" in homed_axes else "?"
-        self.labels['pos_x'] = Gtk.Label(f"X: {x:.2f}")
-        self.labels['pos_y'] = Gtk.Label(f"Y: {y:.2f}")
-        self.labels['pos_z'] = Gtk.Label(f"Z: {z:.2f}")
+        x = self._screen.printer.get_stat("gcode_move", "gcode_position")[0]
+        y = self._screen.printer.get_stat("gcode_move", "gcode_position")[1]
+        z = self._screen.printer.get_stat("gcode_move", "gcode_position")[2]
+        self.labels['pos_x'] = Gtk.Label(f"X: {f'{x:.2f}' if 'x' in homed_axes else '?'}")
+        self.labels['pos_y'] = Gtk.Label(f"Y: {f'{y:.2f}' if 'y' in homed_axes else '?'}")
+        self.labels['pos_z'] = Gtk.Label(f"Z: {f'{z:.2f}' if 'z' in homed_axes else '?'}")
         adjust = self._gtk.Button("settings", None, "color2", 1, Gtk.PositionType.LEFT, 1)
         adjust.connect("clicked", self.load_menu, 'options', _('Settings'))
         adjust.set_hexpand(False)
