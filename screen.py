@@ -357,8 +357,8 @@ class KlipperScreen(Gtk.Window):
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(message)
 
-        help_msg = _("Provide /tmp/KlipperScreen.log when asking for help.\n")
-        help_msg += _("KlipperScreen will be restarted")
+        help_msg = _("Provide KlipperScreen.log when asking for help.\n")
+        help_msg += _("KlipperScreen will reboot")
         help_notice = Gtk.Label(label=help_msg)
         help_notice.set_line_wrap(True)
 

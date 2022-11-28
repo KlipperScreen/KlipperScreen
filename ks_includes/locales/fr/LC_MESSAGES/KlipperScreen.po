@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-21 21:35-0300\n"
-"PO-Revision-Date: 2022-11-23 14:06-0300\n"
+"POT-Creation-Date: 2022-11-28 11:57-0300\n"
+"PO-Revision-Date: 2022-11-28 11:06-0300\n"
 "Last-Translator: O. Robardet\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -326,6 +326,9 @@ msgstr "Interface"
 msgid "Invalid"
 msgstr "Invalide"
 
+msgid "Invalid password"
+msgstr ""
+
 msgid "Invert X"
 msgstr "Inverser l'axe X"
 
@@ -352,6 +355,9 @@ msgstr "Klipper tente de démarrer"
 
 msgid "Klipper will reboot"
 msgstr "Klipper va redémarrer"
+
+msgid "KlipperScreen will reboot"
+msgstr "KlipperScreen va redémarrer"
 
 msgid "Language"
 msgstr "Langue"
@@ -519,6 +525,9 @@ msgstr "Décalage du palpeur"
 msgid "Profile Name:"
 msgstr "Nom du profil:"
 
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr ""
+
 msgid "Quad Gantry Level"
 msgstr "Portique à quatre niveaux"
 
@@ -629,9 +638,6 @@ msgstr "Slicer:"
 msgid "Small"
 msgstr "Petite"
 
-msgid "Sort:"
-msgstr "Trier:"
-
 msgid "Speed (mm/s)"
 msgstr "Vitesse (mm/s)"
 
@@ -673,10 +679,6 @@ msgstr "Temp (°C)"
 
 msgid "Temperature"
 msgstr "Température"
-
-#, python-format
-msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr "Pour appliquer %s, KlipperScreen doit être redémarré"
 
 msgid "Total:"
 msgstr "Total:"
@@ -753,6 +755,9 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Sort:"
+#~ msgstr "Trier:"
 
 #~ msgid "Calibrating..."
 #~ msgstr "Calibrage..."

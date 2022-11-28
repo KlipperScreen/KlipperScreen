@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2022-09-04 14:53-0300\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-21 21:35-0300\n"
-"PO-Revision-Date: 2022-09-16 21:40+0300\n"
+"POT-Creation-Date: 2022-11-28 11:57-0300\n"
+"PO-Revision-Date: 2022-11-28 11:36-0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
 "Language: uk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -331,6 +331,9 @@ msgstr "Інтерфейс"
 msgid "Invalid"
 msgstr "Недійсний"
 
+msgid "Invalid password"
+msgstr ""
+
 msgid "Invert X"
 msgstr "Інвертувати X"
 
@@ -359,6 +362,9 @@ msgstr "Кліппер намагається стартувати"
 
 msgid "Klipper will reboot"
 msgstr "Klipper перезавантажиться"
+
+msgid "KlipperScreen will reboot"
+msgstr "KlipperScreen перезавантажиться"
 
 msgid "Language"
 msgstr "Мова"
@@ -529,6 +535,9 @@ msgstr "Зміщення зонда"
 msgid "Profile Name:"
 msgstr "Ім'я профілю:"
 
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr ""
+
 msgid "Quad Gantry Level"
 msgstr "Портальне вирівнювання"
 
@@ -641,9 +650,6 @@ msgstr "Слайсер:"
 msgid "Small"
 msgstr "Малий"
 
-msgid "Sort:"
-msgstr "Сортувати:"
-
 msgid "Speed (mm/s)"
 msgstr "Швидкість (мм/с)"
 
@@ -685,10 +691,6 @@ msgstr "Teмп (°C)"
 
 msgid "Temperature"
 msgstr "Температура"
-
-#, python-format
-msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr "Щоб застосувати %s, потрібно перезапустити KlipperScreen"
 
 msgid "Total:"
 msgstr "Всього:"
@@ -767,6 +769,9 @@ msgstr "мм/с"
 
 msgid "mm/s²"
 msgstr "мм/с²"
+
+#~ msgid "Sort:"
+#~ msgstr "Сортувати:"
 
 #~ msgid "Calibrating..."
 #~ msgstr "Калібрування..."

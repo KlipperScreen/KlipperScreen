@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-21 21:35-0300\n"
-"PO-Revision-Date: 2022-11-21 21:27-0300\n"
+"POT-Creation-Date: 2022-11-28 11:57-0300\n"
+"PO-Revision-Date: 2022-11-28 11:08-0300\n"
 "Last-Translator: Tal Rahav <talrhv1@gmail.com>\n"
 "Language-Team: \n"
 "Language: he\n"
@@ -328,6 +328,9 @@ msgstr "ממשק"
 msgid "Invalid"
 msgstr "לא חוקי"
 
+msgid "Invalid password"
+msgstr ""
+
 msgid "Invert X"
 msgstr "הפוך את X"
 
@@ -338,7 +341,7 @@ msgid "Invert Z"
 msgstr "הפוך את Z"
 
 msgid "Klipper Restart"
-msgstr "אתחול קליפר"
+msgstr "Klipper יאתחל מחדש"
 
 msgid "Klipper has disconnected"
 msgstr "קליפר התנתק"
@@ -354,6 +357,9 @@ msgstr "קליפר מנסה לעלות"
 
 msgid "Klipper will reboot"
 msgstr "קליפר יבצע אתחול"
+
+msgid "KlipperScreen will reboot"
+msgstr "KlipperScreen יאתחל מחדש"
 
 msgid "Language"
 msgstr "שפה"
@@ -521,6 +527,9 @@ msgstr "פרוב אוף-סט"
 msgid "Profile Name:"
 msgstr "שם פרופיל:"
 
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr ""
+
 msgid "Quad Gantry Level"
 msgstr "יישור הגנטרי הריבועי"
 
@@ -631,9 +640,6 @@ msgstr ""
 msgid "Small"
 msgstr "קטן"
 
-msgid "Sort:"
-msgstr "מיין"
-
 msgid "Speed (mm/s)"
 msgstr "מהירות (מ\"מ/שניות)"
 
@@ -675,10 +681,6 @@ msgstr "טמפ' (°C)"
 
 msgid "Temperature"
 msgstr "טמפרטורה"
-
-#, python-format
-msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr "כדי ליישם %s צריך להפעיל מחדש את KlipperScreen"
 
 msgid "Total:"
 msgstr "סך הכל:"
@@ -759,6 +761,9 @@ msgstr "מ\"מ/ש"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+#~ msgid "Sort:"
+#~ msgstr "מיין"
 
 #~ msgid "Calibrating..."
 #~ msgstr "מכייל..."
