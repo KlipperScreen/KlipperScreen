@@ -84,7 +84,7 @@ class PrintPanel(ScreenPanel):
             self.filelist[parent_dir]['directories'].append(directory)
 
         if directory not in self.labels['directories']:
-            self._create_frame(directory)
+            self._create_row(directory)
         reverse = self.sort_current[1] != 0
         dirs = sorted(
             self.filelist[parent_dir]['directories'],
@@ -99,16 +99,14 @@ class PrintPanel(ScreenPanel):
             self.dir_panels[parent_dir].show_all()
 
     def add_file(self, filepath, show=True):
-
         fileinfo = self._screen.files.get_file_info(filepath)
         if fileinfo is None:
             return
-
-        d = f"gcodes/{filepath}".split('/')[:-1]
-        directory = '/'.join(d)
-        filename = filepath.split('/')[-1]
+        filename = os.path.split(filepath)[-1]
         if filename.startswith("."):
             return
+        directory = os.path.dirname(os.path.join("gcodes", filepath))
+        d = directory.split('/')
         for i in range(1, len(d)):
             curdir = "/".join(d[:i])
             newdir = "/".join(d[:i + 1])
@@ -130,7 +128,7 @@ class PrintPanel(ScreenPanel):
             self.filelist[directory]['files'].append(filename)
 
         if filepath not in self.files:
-            self._create_frame_file(filename, filepath)
+            self._create_row(filepath, filename)
         reverse = self.sort_current[1] != 0
         files = sorted(
             self.filelist[directory]['files'],
@@ -146,16 +144,16 @@ class PrintPanel(ScreenPanel):
         if show is True:
             self.dir_panels[directory].show_all()
 
-    def _create_frame(self, directory):
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-
+    def _create_row(self, fullpath, filename=None):
         name = Gtk.Label()
-        name.set_markup(f"<big><b>{directory.split('/')[-1]}</b></big>")
+        if filename:
+            name.set_markup(f'<big><b>{os.path.splitext(filename)[0].replace("_", " ")}</b></big>')
+        else:
+            name.set_markup(f"<big><b>{os.path.split(fullpath)[-1]}</b></big>")
         name.set_hexpand(True)
         name.set_halign(Gtk.Align.START)
         name.set_line_wrap(True)
-        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        name.set_line_wrap_mode(Pango.WrapMode.CHAR)
 
         info = Gtk.Label()
         info.set_halign(Gtk.Align.START)
@@ -168,76 +166,42 @@ class PrintPanel(ScreenPanel):
         labels.set_halign(Gtk.Align.START)
 
         actions = self._gtk.Button("load", style="color3")
-        actions.connect("clicked", self.change_dir, directory)
         actions.set_hexpand(False)
         actions.set_halign(Gtk.Align.END)
+        if filename:
+            info.set_markup(self.get_file_info_str(fullpath))
+            actions.connect("clicked", self.confirm_print, fullpath)
+            icon = Gtk.Button()
+            GLib.idle_add(self.image_load, fullpath)
+        else:
+            actions.connect("clicked", self.change_dir, fullpath)
+            icon = self._gtk.Button("folder")
+        icon.set_hexpand(False)
+        icon.connect("clicked", self.confirm_delete_file, f"gcodes/{fullpath}")
 
         file = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        file.get_style_context().add_class("frame-item")
         file.set_hexpand(True)
         file.set_vexpand(False)
-
-        icon = self._gtk.Image("folder")
-
         file.add(icon)
         file.add(labels)
-        file.add(actions)
-        frame.add(file)
-
-        self.directories[directory] = frame
-
-        self.labels['directories'][directory] = {
-            "info": info,
-            "name": name
-        }
-
-        self.dir_panels[directory] = Gtk.Grid()
-
-    def _create_frame_file(self, filename, filepath):
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-
-        name = Gtk.Label()
-        name.set_markup(f'<big><b>{os.path.splitext(filename)[0].replace("_", " ")}</b></big>')
-        name.set_hexpand(True)
-        name.set_halign(Gtk.Align.START)
-        name.set_line_wrap(True)
-        name.set_line_wrap_mode(Pango.WrapMode.CHAR)
-
-        info = Gtk.Label()
-        info.set_halign(Gtk.Align.START)
-        info.set_markup(self.get_file_info_str(filepath))
-        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        labels.add(name)
-        labels.add(info)
-        labels.set_vexpand(True)
-        labels.set_valign(Gtk.Align.CENTER)
-        labels.set_halign(Gtk.Align.START)
-
-        actions = self._gtk.Button("print", style="color3")
-        actions.connect("clicked", self.confirm_print, filepath)
-        actions.set_hexpand(False)
-        actions.set_halign(Gtk.Align.END)
-
-        file = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        file.set_hexpand(True)
-        file.set_vexpand(False)
-
-        icon = Gtk.Button()
-        GLib.idle_add(self.image_load, filepath)
-        icon.connect("clicked", self.confirm_delete_file, f"gcodes/{filepath}")
-
-        file.add(icon)
-        file.add(labels)
-        if os.path.splitext(filename)[1] in [".gcode", ".g", ".gco"]:
+        if not filename or (filename and os.path.splitext(filename)[1] in [".gcode", ".g", ".gco"]):
             file.add(actions)
-        frame.add(file)
 
-        self.files[filepath] = frame
-        self.labels['files'][filepath] = {
-            "icon": icon,
-            "info": info,
-            "name": name
-        }
+        if filename is not None:
+            self.files[fullpath] = file
+            self.labels['files'][fullpath] = {
+                "icon": icon,
+                "info": info,
+                "name": name
+            }
+        else:
+            self.directories[fullpath] = file
+            self.labels['directories'][fullpath] = {
+                "info": info,
+                "name": name
+            }
+            self.dir_panels[fullpath] = Gtk.Grid()
 
     def image_load(self, filepath):
         pixbuf = self.get_file_image(filepath, small=True)

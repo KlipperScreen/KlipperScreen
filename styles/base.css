@@ -106,11 +106,6 @@ entry {
     padding: .25em;
 }
 
-frame {
-    color: white;
-    border-bottom: 1px solid #444;
-}
-
 label {
     color: white;
 }
@@ -256,6 +251,7 @@ trough {
 .frame-item {
     min-height: 4.5em;
     padding: .2em .3em;
+    border-bottom: 1px solid #1c1c1c
 }
 
 .heatergraph {
