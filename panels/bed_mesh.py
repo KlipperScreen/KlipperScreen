@@ -43,7 +43,6 @@ class BedMeshPanel(ScreenPanel):
 
         # Create a grid for all profiles
         self.labels['profiles'] = Gtk.Grid()
-        self.labels['profiles'].get_style_context().add_class("frame-item")
         self.labels['profiles'].set_valign(Gtk.Align.CENTER)
 
         scroll = self._gtk.ScrolledWindow()
@@ -144,17 +143,14 @@ class BedMeshPanel(ScreenPanel):
         button_box.add(buttons["delete"])
 
         box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        box.get_style_context().add_class("frame-item")
         box.pack_start(name, True, True, 0)
         box.pack_start(button_box, False, False, 0)
-
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-        frame.add(box)
 
         self.profiles[profile] = {
             "name": name,
             "button_box": button_box,
-            "row": frame,
+            "row": box,
             "save": buttons["save"],
             "delete": buttons["delete"],
         }

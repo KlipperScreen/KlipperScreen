@@ -58,10 +58,6 @@ class SettingsPanel(ScreenPanel):
     def add_option(self, boxname, opt_array, opt_name, option):
         if option['type'] is None:
             return
-
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-
         name = Gtk.Label()
         name.set_markup(f"<big><b>{option['name']}</b></big>")
         name.set_hexpand(True)
@@ -75,6 +71,7 @@ class SettingsPanel(ScreenPanel):
         labels.add(name)
 
         dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        dev.get_style_context().add_class("frame-item")
         dev.set_hexpand(True)
         dev.set_vexpand(False)
         dev.set_valign(Gtk.Align.CENTER)
@@ -125,12 +122,9 @@ class SettingsPanel(ScreenPanel):
             open_menu.set_halign(Gtk.Align.END)
             dev.add(open_menu)
 
-        frame.add(dev)
-        frame.show_all()
-
         opt_array[opt_name] = {
             "name": option['name'],
-            "row": frame
+            "row": dev
         }
 
         opts = sorted(list(opt_array), key=lambda x: opt_array[x]['name'])

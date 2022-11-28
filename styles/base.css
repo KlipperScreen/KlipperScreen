@@ -251,7 +251,7 @@ trough {
 .frame-item {
     min-height: 4.5em;
     padding: .2em .3em;
-    border-bottom: 1px solid #1c1c1c
+    border-bottom: 1px solid rgba(255,255,255,0.05)
 }
 
 .heatergraph {

@@ -103,10 +103,6 @@ class FanPanel(ScreenPanel):
         fan_row.add(name)
         fan_row.add(fan_col)
 
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-        frame.add(fan_row)
-
         self.devices[fan] = {
             "changeable": changeable,
             "scale": scale,
@@ -123,7 +119,7 @@ class FanPanel(ScreenPanel):
             pos = devices.index(fan)
 
         self.labels['devices'].insert_row(pos)
-        self.labels['devices'].attach(frame, 0, pos, 1, 1)
+        self.labels['devices'].attach(fan_row, 0, pos, 1, 1)
         self.labels['devices'].show_all()
 
     def load_fans(self):
@@ -134,9 +130,6 @@ class FanPanel(ScreenPanel):
             if name.startswith("_"):
                 continue
             self.add_fan(fan)
-        frame = Gtk.Frame()
-        frame.set_vexpand(False)
-        self.labels['devices'].attach(frame, 0, -1, 1, 1)
 
     def set_fan_speed(self, widget, event, fan):
         value = self.devices[fan]['scale'].get_value()

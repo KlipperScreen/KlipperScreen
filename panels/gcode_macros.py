@@ -76,15 +76,12 @@ class MacroPanel(ScreenPanel):
         labels.add(name)
 
         dev = Gtk.Box(spacing=5)
+        dev.get_style_context().add_class("frame-item")
         dev.add(labels)
         dev.add(btn)
 
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-        frame.add(dev)
-
         self.macros[macro] = {
-            "row": frame
+            "row": dev
         }
 
         macros = sorted(self.macros, reverse=self.sort_reverse, key=str.casefold)
@@ -167,19 +164,16 @@ class MacroPanel(ScreenPanel):
         box.add(switch)
 
         dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        dev.get_style_context().add_class("frame-item")
         dev.set_hexpand(True)
         dev.set_vexpand(False)
         dev.set_valign(Gtk.Align.CENTER)
         dev.add(name)
         dev.add(box)
 
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-        frame.add(dev)
-        frame.show_all()
         opt_array[opt_name] = {
             "name": option['name'],
-            "row": frame
+            "row": dev
         }
 
         opts = sorted(self.allmacros, key=str.casefold)

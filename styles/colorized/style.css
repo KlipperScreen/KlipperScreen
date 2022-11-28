@@ -91,11 +91,6 @@ entry {
     border-color: #002b36; /*base03*/
 }
 
-frame {
-    color: #fdf6e3; /*base3*/
-    border-bottom-color: #073642; /*base02*/
-}
-
 label {
     color: #fdf6e3; /*base3*/
 }

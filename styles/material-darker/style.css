@@ -67,16 +67,6 @@ switch:checked {
     background-color: #2f5631;
 }
 
-entry {
-    background-color: #1c1c1c;
-    border-color: #1c1c1c;
-}
-
-frame {
-    color: #e2e2e2;
-    border-bottom-color: #121212;
-}
-
 label {
     color: #e2e2e2;
 }

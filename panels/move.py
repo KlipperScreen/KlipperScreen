@@ -228,6 +228,7 @@ class MovePanel(ScreenPanel):
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
         dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        dev.get_style_context().add_class("frame-item")
         dev.set_hexpand(True)
         dev.set_vexpand(False)
         dev.set_valign(Gtk.Align.CENTER)
@@ -255,14 +256,9 @@ class MovePanel(ScreenPanel):
             scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
             dev.add(scale)
 
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-        frame.add(dev)
-        frame.show_all()
-
         opt_array[opt_name] = {
             "name": option['name'],
-            "row": frame
+            "row": dev
         }
 
         opts = sorted(list(opt_array), key=lambda x: opt_array[x]['name'])

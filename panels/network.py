@@ -171,6 +171,7 @@ class NetworkPanel(ScreenPanel):
         delete.set_halign(Gtk.Align.END)
 
         network = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        network.get_style_context().add_class("frame-item")
         network.set_hexpand(True)
         network.set_vexpand(False)
 
@@ -182,11 +183,7 @@ class NetworkPanel(ScreenPanel):
         else:
             buttons.pack_end(connect, False, False, 0)
         network.add(buttons)
-
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-        self.networks[ssid] = frame
-        frame.add(network)
+        self.networks[ssid] = network
 
         nets = sorted(list(self.networks), reverse=False)
         if connected_ssid in nets:
