@@ -170,9 +170,6 @@ class ExtrudePanel(ScreenPanel):
 
         self.content.add(grid)
 
-    def activate(self):
-        self.process_busy(self._printer.busy)
-
     def process_busy(self, busy):
         for button in self.buttons:
             if button == "temperature":

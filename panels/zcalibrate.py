@@ -36,11 +36,6 @@ class ZCalibratePanel(ScreenPanel):
             pos.attach(Gtk.Label(_("New")), 1, 3, 1, 1)
             pos.attach(Gtk.Label(f"{self.z_offset:.2f}"), 0, 4, 1, 1)
             pos.attach(self.widgets['zoffset'], 1, 4, 1, 1)
-        self._screen.printer.get_stat("gcode_move", "gcode_position")
-        if self._screen.printer.get_stat("toolhead", "homed_axes") == "xyz":
-            p = self._screen.printer.get_stat('gcode_move', 'gcode_position')
-            if p:
-                self.update_position(p)
         self.buttons = {
             'zpos': self._gtk.Button('z-farther', _("Raise Nozzle"), 'color4'),
             'zneg': self._gtk.Button('z-closer', _("Lower Nozzle"), 'color1'),
@@ -312,5 +307,4 @@ class ZCalibratePanel(ScreenPanel):
 
     def activate(self):
         # This is only here because klipper doesn't provide a method to detect if it's calibrating
-        self.process_busy(self._printer.busy)
         self._screen._ws.klippy.gcode_script(KlippyGcodes.testz_move("+0.001"))

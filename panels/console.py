@@ -28,7 +28,6 @@ class ConsolePanel(ScreenPanel):
         super().__init__(screen, title)
         self.autoscroll = True
         self.hidetemps = True
-        self._screen._ws.send_method("server.gcode_store", {"count": 100}, self.gcode_response)
 
         o1_lbl = Gtk.Label(_("Auto-scroll"))
         o1_lbl.set_halign(Gtk.Align.END)
@@ -107,7 +106,7 @@ class ConsolePanel(ScreenPanel):
     def _show_keyboard(self, widget=None, event=None):
         self._screen.show_keyboard(entry=self.labels['entry'])
 
-    def clear(self, widget):
+    def clear(self, widget=None):
         self.labels['tb'].set_text("")
 
     def add_gcode(self, msgtype, msgtime, message):
@@ -166,3 +165,7 @@ class ConsolePanel(ScreenPanel):
 
         self.add_gcode("command", time.time(), cmd)
         self._screen._ws.klippy.gcode_script(cmd)
+
+    def activate(self):
+        self.clear()
+        self._screen._ws.send_method("server.gcode_store", {"count": 100}, self.gcode_response)

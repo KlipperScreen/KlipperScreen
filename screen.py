@@ -280,6 +280,8 @@ class KlipperScreen(Gtk.Window):
 
             if hasattr(self.panels[panel_name], "process_update"):
                 self.add_subscription(panel_name)
+                self.process_update("notify_status_update", self.printer.data)
+                self.process_update("notify_busy", self.printer.busy)
             if hasattr(self.panels[panel_name], "activate"):
                 self.panels[panel_name].activate()
             self.show_all()
@@ -477,7 +479,7 @@ class KlipperScreen(Gtk.Window):
             self.panels[self._cur_panels[-1]].deactivate()
         if self._cur_panels[-1] in self.subscriptions:
             self.subscriptions.remove(self._cur_panels[-1])
-        if pop is True:
+        if pop:
             self._cur_panels.pop()
             if len(self._cur_panels) > 0:
                 self.base_panel.add_content(self.panels[self._cur_panels[-1]])
@@ -486,6 +488,8 @@ class KlipperScreen(Gtk.Window):
                     self.panels[self._cur_panels[-1]].activate()
                 if hasattr(self.panels[self._cur_panels[-1]], "process_update"):
                     self.add_subscription(self._cur_panels[-1])
+                    self.process_update("notify_status_update", self.printer.data)
+                    self.process_update("notify_busy", self.printer.busy)
                 self.show_all()
 
     def _menu_go_back(self, widget=None):
@@ -493,14 +497,12 @@ class KlipperScreen(Gtk.Window):
         self.remove_keyboard()
         if self._config.get_main_config().getboolean('autoclose_popups', True):
             self.close_popup_message()
-        self._remove_current_panel(True)
+        self._remove_current_panel()
 
     def _menu_go_home(self, widget=None):
         logging.info("#### Menu go home")
-        self.remove_keyboard()
-        self.close_popup_message()
         while len(self._cur_panels) > 1:
-            self._remove_current_panel()
+            self._menu_go_back()
 
     def add_subscription(self, panel_name):
         if panel_name not in self.subscriptions:

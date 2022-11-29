@@ -69,7 +69,6 @@ class BedMeshPanel(ScreenPanel):
         self.load_meshes()
         with contextlib.suppress(KeyError):
             self.activate_mesh(self._screen.printer.get_stat("bed_mesh", "profile_name"))
-        self.process_busy(self._printer.busy)
 
     def activate_mesh(self, profile):
         if self.active_mesh is not None:

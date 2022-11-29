@@ -22,15 +22,11 @@ class JobStatusPanel(ScreenPanel):
         super().__init__(screen, title)
         self.grid = self._gtk.HomogeneousGrid()
         self.grid.set_row_homogeneous(False)
-        z = self._printer.get_stat("gcode_move", "gcode_position")
-        self.pos_z = float(z[2]) if z else 0
-        factor = self._printer.get_stat("gcode_move", "extrude_factor")
-        self.extrusion = round(float(factor) * 100) if factor else 100
-        factor = self._printer.get_stat("gcode_move", "speed_factor")
-        self.speed_factor = float(factor) if factor else 1
-        self.speed = round(self.speed_factor * 100)
-        req = self._printer.get_stat("gcode_move", "speed")
-        self.req_speed = round(float(req) / 60 * self.speed_factor) if req else 0
+        self.pos_z = 0
+        self.extrusion = 100
+        self.speed_factor = 1
+        self.speed = 100
+        self.req_speed = 0
         self.f_layer_h = self.layer_h = 1
         self.oheight = 0
         self.current_extruder = None
@@ -59,17 +55,6 @@ class JobStatusPanel(ScreenPanel):
             self.labels[item] = Gtk.Label("-")
             self.labels[item].set_vexpand(True)
             self.labels[item].set_hexpand(True)
-
-        offset = self._screen.printer.get_stat("gcode_move", "homing_origin")
-        self.zoffset = float(offset[2]) if offset else 0
-        self.labels['zoffset'].set_label(f"{self.zoffset:.2f} {self.mm}")
-        accel = self._screen.printer.get_stat('toolhead', 'max_accel')
-        if accel:
-            self.labels['max_accel'].set_label(f"{accel:.0f} {self.mms2}")
-        self.labels['extrude_factor'].set_label(f"{self.extrusion:3}%")
-        adv = self._screen.printer.get_stat('extruder', 'pressure_advance')
-        if adv:
-            self.labels['advance'].set_label(f"{adv:.2f}")
 
         self.labels['left'] = Gtk.Label(_("Left:"))
         self.labels['elapsed'] = Gtk.Label(_("Elapsed:"))

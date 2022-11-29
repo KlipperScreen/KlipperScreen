@@ -65,26 +65,19 @@ class FineTunePanel(ScreenPanel):
 
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
-        factor = self._printer.get_stat("gcode_move", "extrude_factor")
-        self.extrusion = round(float(factor) * 100) if factor else 100
-        factor = self._printer.get_stat("gcode_move", "speed_factor")
-        self.speed_factor = float(factor) if factor else 1
-        self.speed = round(self.speed_factor * 100)
-        offset = self._screen.printer.get_stat("gcode_move", "homing_origin")
-        offset = float(offset[2]) if offset else 0
 
         self.labels['z+'] = self._gtk.Button("z-farther", "Z+", "color1")
         self.labels['z-'] = self._gtk.Button("z-closer", "Z-", "color1")
-        self.labels['zoffset'] = self._gtk.Button("refresh", f'  {offset:.2f}' + _("mm"),
+        self.labels['zoffset'] = self._gtk.Button("refresh", '  0.00' + _("mm"),
                                                   "color1", self.bts, Gtk.PositionType.LEFT, 1)
         self.labels['speed+'] = self._gtk.Button("speed+", _("Speed +"), "color3")
         self.labels['speed-'] = self._gtk.Button("speed-", _("Speed -"), "color3")
-        self.labels['speedfactor'] = self._gtk.Button("refresh", f"  {self.speed:3}%",
+        self.labels['speedfactor'] = self._gtk.Button("refresh", "  100%",
                                                       "color3", self.bts, Gtk.PositionType.LEFT, 1)
 
         self.labels['extrude+'] = self._gtk.Button("flow+", _("Extrusion +"), "color4")
         self.labels['extrude-'] = self._gtk.Button("flow-", _("Extrusion -"), "color4")
-        self.labels['extrudefactor'] = self._gtk.Button("refresh", f"  {self.extrusion:3}%",
+        self.labels['extrudefactor'] = self._gtk.Button("refresh", "  100%",
                                                         "color4", self.bts, Gtk.PositionType.LEFT, 1)
         if self._screen.vertical_mode:
             grid.attach(self.labels['z+'], 0, 0, 1, 1)

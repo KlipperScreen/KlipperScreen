@@ -103,13 +103,8 @@ class MovePanel(ScreenPanel):
                 ctx.add_class("distbutton_active")
             distgrid.attach(self.labels[i], j, 0, 1, 1)
 
-        homed_axes = self._screen.printer.get_stat("toolhead", "homed_axes")
-        x = self._screen.printer.get_stat("gcode_move", "gcode_position")[0]
-        y = self._screen.printer.get_stat("gcode_move", "gcode_position")[1]
-        z = self._screen.printer.get_stat("gcode_move", "gcode_position")[2]
-        self.labels['pos_x'] = Gtk.Label(f"X: {f'{x:.2f}' if 'x' in homed_axes else '?'}")
-        self.labels['pos_y'] = Gtk.Label(f"Y: {f'{y:.2f}' if 'y' in homed_axes else '?'}")
-        self.labels['pos_z'] = Gtk.Label(f"Z: {f'{z:.2f}' if 'z' in homed_axes else '?'}")
+        for p in ('pos_x', 'pos_y', 'pos_z'):
+            self.labels[p] = Gtk.Label()
         adjust = self._gtk.Button("settings", None, "color2", 1, Gtk.PositionType.LEFT, 1)
         adjust.connect("clicked", self.load_menu, 'options', _('Settings'))
         adjust.set_hexpand(False)
@@ -157,9 +152,6 @@ class MovePanel(ScreenPanel):
         for option in configurable_options:
             name = list(option)[0]
             self.add_option('options', self.settings, name, option[name])
-
-    def activate(self):
-        self.process_busy(self._printer.busy)
 
     def process_busy(self, busy):
         buttons = ("home", "home_xy", "z_tilt", "quad_gantry_level")
