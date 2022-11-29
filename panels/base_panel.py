@@ -224,12 +224,11 @@ class BasePanel(ScreenPanel):
                         try:
                             self.update_dialog.set_response_sensitive(Gtk.ResponseType.OK, True)
                             self.update_dialog.get_widget_for_response(Gtk.ResponseType.OK).show()
-                            return
                         except AttributeError:
                             logging.error("error trying to show the updater button the dialog might be closed")
-                    self._screen.updating = False
-                    for dialog in self._screen.dialogs:
-                        self._gtk.remove_dialog(dialog)
+                            self._screen.updating = False
+                            for dialog in self._screen.dialogs:
+                                self._gtk.remove_dialog(dialog)
 
         if action != "notify_status_update" or self._screen.printer is None:
             return
