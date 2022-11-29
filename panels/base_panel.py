@@ -31,7 +31,7 @@ class BasePanel(ScreenPanel):
         self.control['back'] = self._gtk.Button('back', scale=self.bts)
         self.control['back'].connect("clicked", self.back)
         self.control['home'] = self._gtk.Button('main', scale=self.bts)
-        self.control['home'].connect("clicked", self._screen._menu_go_home)
+        self.control['home'].connect("clicked", self._screen._menu_go_back, True)
 
         if len(self._config.get_printers()) > 1:
             self.control['printer_select'] = self._gtk.Button('shuffle', scale=self.bts)
@@ -357,11 +357,11 @@ class BasePanel(ScreenPanel):
         logging.info("Finishing update")
         self._screen.updating = False
         self._gtk.remove_dialog(dialog)
-        self._screen._menu_go_home()
+        self._screen._menu_go_back(home=True)
 
     def close_update_dialog(self, *args):
         logging.info("Closing update dialog")
         if self.update_dialog in self._screen.dialogs:
             self._screen.dialogs.remove(self.update_dialog)
         self.update_dialog = None
-        self._screen._menu_go_home()
+        self._screen._menu_go_back(home=True)

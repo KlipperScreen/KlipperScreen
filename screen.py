@@ -273,23 +273,22 @@ class KlipperScreen(Gtk.Window):
                         del self.panels[panel_name]
                     self.show_error_modal(f"Unable to load panel {panel_type}", f"{e}")
                     return
-
-            logging.debug(f"Attaching panel {panel_name}")
-            self.base_panel.add_content(self.panels[panel_name])
-            self.base_panel.show_back(len(self._cur_panels) > 0)
-
-            if hasattr(self.panels[panel_name], "process_update"):
-                self.add_subscription(panel_name)
-                self.process_update("notify_status_update", self.printer.data)
-                self.process_update("notify_busy", self.printer.busy)
-            if hasattr(self.panels[panel_name], "activate"):
-                self.panels[panel_name].activate()
-            self.show_all()
+            self._cur_panels.append(panel_name)
+            self.attach_panel(panel_name)
         except Exception as e:
             logging.exception(f"Error attaching panel:\n{e}")
 
-        self._cur_panels.append(panel_name)
+    def attach_panel(self, panel_name):
+        self.base_panel.add_content(self.panels[panel_name])
         logging.debug(f"Current panel hierarchy: {' > '.join(self._cur_panels)}")
+        self.base_panel.show_back(len(self._cur_panels) > 1)
+        if hasattr(self.panels[panel_name], "process_update"):
+            self.add_subscription(panel_name)
+            self.process_update("notify_status_update", self.printer.data)
+            self.process_update("notify_busy", self.printer.busy)
+        if hasattr(self.panels[panel_name], "activate"):
+            self.panels[panel_name].activate()
+        self.show_all()
 
     def show_popup_message(self, message, level=3):
         self.close_screensaver()
@@ -471,7 +470,7 @@ class KlipperScreen(Gtk.Window):
         self.close_screensaver()
 
     def _remove_current_panel(self, pop=True):
-        if len(self._cur_panels) <= 0:
+        if len(self._cur_panels) < 1:
             self.reload_panels()
             return
         self.base_panel.remove(self.panels[self._cur_panels[-1]].content)
@@ -480,29 +479,18 @@ class KlipperScreen(Gtk.Window):
         if self._cur_panels[-1] in self.subscriptions:
             self.subscriptions.remove(self._cur_panels[-1])
         if pop:
-            self._cur_panels.pop()
-            if len(self._cur_panels) > 0:
-                self.base_panel.add_content(self.panels[self._cur_panels[-1]])
-                self.base_panel.show_back(len(self._cur_panels) != 1)
-                if hasattr(self.panels[self._cur_panels[-1]], "activate"):
-                    self.panels[self._cur_panels[-1]].activate()
-                if hasattr(self.panels[self._cur_panels[-1]], "process_update"):
-                    self.add_subscription(self._cur_panels[-1])
-                    self.process_update("notify_status_update", self.printer.data)
-                    self.process_update("notify_busy", self.printer.busy)
-                self.show_all()
+            del self._cur_panels[-1]
+            self.attach_panel(self._cur_panels[-1])
 
-    def _menu_go_back(self, widget=None):
-        logging.info("#### Menu go back")
+    def _menu_go_back(self, widget=None, home=False):
+        logging.info(f"#### Menu go {'home' if home else 'back'}")
         self.remove_keyboard()
         if self._config.get_main_config().getboolean('autoclose_popups', True):
             self.close_popup_message()
-        self._remove_current_panel()
-
-    def _menu_go_home(self, widget=None):
-        logging.info("#### Menu go home")
         while len(self._cur_panels) > 1:
-            self._menu_go_back()
+            self._remove_current_panel()
+            if not home:
+                break
 
     def add_subscription(self, panel_name):
         if panel_name not in self.subscriptions:
@@ -952,7 +940,7 @@ class KlipperScreen(Gtk.Window):
     def _key_press_event(self, widget, event):
         keyval_name = Gdk.keyval_name(event.keyval)
         if keyval_name == "Escape":
-            self._menu_go_home()
+            self._menu_go_back(home=True)
         elif keyval_name == "BackSpace" and len(self._cur_panels) > 1 and self.keyboard is None:
             self.base_panel.back()
 
