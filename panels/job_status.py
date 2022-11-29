@@ -577,7 +577,8 @@ class JobStatusPanel(ScreenPanel):
                 self.req_speed = round(float(data["gcode_move"]["speed"]) / 60 * self.speed_factor)
                 self.labels['req_speed'].set_label(
                     f"{self.speed}% {self.vel:3.0f}/{self.req_speed:3.0f} "
-                    f"{f'{self.mms}' if self.vel < 1000 and self.req_speed < 1000 else ''}")
+                    f"{f'{self.mms}' if self.vel < 1000 and self.req_speed < 1000 and self._screen.width > 480 else ''}"
+                )
                 if self.main_status_displayed:
                     self.buttons['speed'].set_label(self.labels['req_speed'].get_label())
             with contextlib.suppress(KeyError):
@@ -600,7 +601,8 @@ class JobStatusPanel(ScreenPanel):
                 self.vel = float(data["motion_report"]["live_velocity"])
                 self.labels['req_speed'].set_label(
                     f"{self.speed}% {self.vel:3.0f}/{self.req_speed:3.0f} "
-                    f"{f'{self.mms}' if self.vel < 1000 and self.req_speed < 1000 else ''}")
+                    f"{f'{self.mms}' if self.vel < 1000 and self.req_speed < 1000 and self._screen.width > 480 else ''}"
+                )
                 if self.main_status_displayed:
                     self.buttons['speed'].set_label(self.labels['req_speed'].get_label())
             with contextlib.suppress(KeyError):
