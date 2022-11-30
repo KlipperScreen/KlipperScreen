@@ -78,18 +78,11 @@ class SettingsPanel(ScreenPanel):
 
         dev.add(labels)
         if option['type'] == "binary":
-            box = Gtk.Box()
-            box.set_vexpand(False)
             switch = Gtk.Switch()
-            switch.set_hexpand(False)
-            switch.set_vexpand(False)
             switch.set_active(self._config.get_config().getboolean(option['section'], opt_name))
             switch.connect("notify::active", self.switch_config_option, option['section'], opt_name,
                            option['callback'] if "callback" in option else None)
-            switch.set_property("width-request", round(self._gtk.get_font_size() * 7))
-            switch.set_property("height-request", round(self._gtk.get_font_size() * 3.5))
-            box.add(switch)
-            dev.add(box)
+            dev.add(switch)
         elif option['type'] == "dropdown":
             dropdown = Gtk.ComboBoxText()
             for i, opt in enumerate(option['options']):

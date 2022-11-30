@@ -91,6 +91,9 @@ combobox arrow {
 }
 
 switch {
+    margin: 0.75em;
+    min-width: 6em;
+    min-height: 3em;
     border: 0;
     border-radius: 3em;
 }
@@ -483,6 +486,11 @@ popover button {
 .filament_sensor {
     border-radius: 3em;
 }
+
+.filament_sensor switch {
+    margin: 0;
+}
+
 .filament_sensor_detected {
     background-color: darkgreen;
 }

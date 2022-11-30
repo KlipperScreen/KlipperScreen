@@ -30,32 +30,38 @@ class ConsolePanel(ScreenPanel):
         self.hidetemps = True
 
         o1_lbl = Gtk.Label(_("Auto-scroll"))
-        o1_lbl.set_halign(Gtk.Align.END)
         o1_switch = Gtk.Switch()
-        o1_switch.set_property("width-request", round(self._gtk.get_font_size() * 5))
-        o1_switch.set_property("height-request", round(self._gtk.get_font_size() * 2.5))
         o1_switch.set_active(self.autoscroll)
         o1_switch.connect("notify::active", self.set_autoscroll)
 
         o2_lbl = Gtk.Label(_("Hide temp."))
-        o2_lbl.set_halign(Gtk.Align.END)
         o2_switch = Gtk.Switch()
-        o2_switch.set_property("width-request", round(self._gtk.get_font_size() * 5))
-        o2_switch.set_property("height-request", round(self._gtk.get_font_size() * 2.5))
         o2_switch.set_active(self.hidetemps)
         o2_switch.connect("notify::active", self.hide_temps)
 
+        if self._screen.vertical_mode:
+            o1_lbl.set_halign(Gtk.Align.CENTER)
+            o2_lbl.set_halign(Gtk.Align.CENTER)
+        else:
+            o1_lbl.set_halign(Gtk.Align.END)
+            o2_lbl.set_halign(Gtk.Align.END)
         o3_button = self._gtk.Button("refresh", _('Clear') + " ", None, self.bts, Gtk.PositionType.RIGHT, 1)
         o3_button.connect("clicked", self.clear)
 
-        options = Gtk.Box()
-        options.set_hexpand(True)
+        options = Gtk.Grid()
         options.set_vexpand(False)
-        options.add(o1_lbl)
-        options.pack_start(o1_switch, False, False, 5)
-        options.add(o2_lbl)
-        options.pack_start(o2_switch, False, False, 5)
-        options.add(o3_button)
+        if self._screen.vertical_mode:
+            options.attach(o1_lbl, 0, 0, 1, 1)
+            options.attach(o1_switch, 0, 1, 1, 1)
+            options.attach(o2_lbl, 1, 0, 1, 1)
+            options.attach(o2_switch, 1, 1, 1, 1)
+            options.attach(o3_button, 3, 0, 1, 2)
+        else:
+            options.attach(o1_lbl, 0, 0, 1, 1)
+            options.attach(o1_switch, 1, 0, 1, 1)
+            options.attach(o2_lbl, 2, 0, 1, 1)
+            options.attach(o2_switch, 3, 0, 1, 1)
+            options.attach(o3_button, 4, 0, 1, 1)
 
         sw = Gtk.ScrolledWindow()
         sw.set_hexpand(True)
