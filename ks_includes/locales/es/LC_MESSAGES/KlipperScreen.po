@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-28 11:57-0300\n"
-"PO-Revision-Date: 2022-11-28 11:06-0300\n"
+"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"PO-Revision-Date: 2022-11-30 18:10-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -534,6 +534,9 @@ msgstr "Nivelación cuádruple"
 msgid "Raise Nozzle"
 msgstr "Levantar Boquilla"
 
+msgid "Recover"
+msgstr "Recuperar"
+
 msgid "Recover Hard"
 msgstr "Recuperar Hard"
 
@@ -755,6 +758,9 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+msgid "mm³/s"
+msgstr "mm³/s"
 
 #~ msgid "KlipperScreen will be restarted"
 #~ msgstr "KlipperScreen se reiniciará"

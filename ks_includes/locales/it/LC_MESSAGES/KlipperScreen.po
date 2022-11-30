@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-28 11:57-0300\n"
+"POT-Creation-Date: 2022-11-30 18:17-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pappicio\n"
 "Language-Team: \n"
@@ -385,10 +385,10 @@ msgid "Main Menu"
 msgstr "Menu Principale"
 
 msgid "Max"
-msgstr ""
+msgstr "Max"
 
 msgid "Max Acceleration"
-msgstr ""
+msgstr "Accelerazione Massima"
 
 msgid "Max Acceleration to Deceleration"
 msgstr "Da acceleraz. Massima a Deceleraz. Massima"
@@ -529,6 +529,9 @@ msgstr "Quad Gantry Level"
 msgid "Raise Nozzle"
 msgstr "Alza Ugello"
 
+msgid "Recover"
+msgstr "Recuperare"
+
 msgid "Recover Hard"
 msgstr "Recuperare Hard"
 
@@ -628,7 +631,7 @@ msgid "Slicer Time correction (%)"
 msgstr "Affettatrice Correzione del tempo (%)"
 
 msgid "Slicer:"
-msgstr ""
+msgstr "Slicer:"
 
 msgid "Small"
 msgstr "Piccola"
@@ -750,6 +753,9 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+msgid "mm³/s"
+msgstr "mm³/s"
 
 #~ msgid "Sort:"
 #~ msgstr "Ordinare:"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-28 11:57-0300\n"
+"POT-Creation-Date: 2022-11-30 18:17-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: NSteven\n"
 "Language-Team: NSteven\n"
@@ -526,6 +526,9 @@ msgstr "쿼드 갠트리 레벨"
 msgid "Raise Nozzle"
 msgstr "노즐 높임"
 
+msgid "Recover"
+msgstr ""
+
 msgid "Recover Hard"
 msgstr "강화 복구 모드"
 
@@ -745,6 +748,9 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+msgid "mm³/s"
+msgstr ""
 
 #~ msgid "Sort:"
 #~ msgstr "종류:"

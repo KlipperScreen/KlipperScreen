@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-28 11:57-0300\n"
+"POT-Creation-Date: 2022-11-30 18:17-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
@@ -527,6 +527,9 @@ msgstr "Justering af 4-søjlers konstruktion"
 msgid "Raise Nozzle"
 msgstr "Hæv Nozzle"
 
+msgid "Recover"
+msgstr "Nulstil"
+
 msgid "Recover Hard"
 msgstr "Nulstil alt"
 
@@ -748,6 +751,9 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+msgid "mm³/s"
+msgstr ""
 
 #~ msgid "Sort:"
 #~ msgstr "Sortere: "

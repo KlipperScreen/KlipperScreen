@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-28 11:57-0300\n"
+"POT-Creation-Date: 2022-11-30 18:17-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: boyon\n"
 "Language-Team: \n"
@@ -526,6 +526,9 @@ msgstr "ガントリーレベル"
 msgid "Raise Nozzle"
 msgstr ""
 
+msgid "Recover"
+msgstr ""
+
 msgid "Recover Hard"
 msgstr ""
 
@@ -744,6 +747,9 @@ msgid "mm/s"
 msgstr ""
 
 msgid "mm/s²"
+msgstr ""
+
+msgid "mm³/s"
 msgstr ""
 
 #~ msgid "Sort:"
