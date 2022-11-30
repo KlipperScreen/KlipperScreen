@@ -283,30 +283,6 @@ class MoonrakerApi:
             *args
         )
 
-    def temperature_set(self, heater, target, callback=None, *args):
-        if heater == "heater_bed":
-            logging.debug(f"Sending printer.gcode.script: {KlippyGcodes.set_bed_temp(target)}")
-            return self._ws.send_method(
-                "printer.gcode.script",
-                {
-                    "script": KlippyGcodes.set_bed_temp(target)
-                },
-                callback,
-                *args
-            )
-        else:
-            logging.debug(
-                f'Sending printer.gcode.script: {KlippyGcodes.set_ext_temp(target, heater.replace("tool", ""))}')
-            # TODO: Add max/min limits
-            return self._ws.send_method(
-                "printer.gcode.script",
-                {
-                    "script": KlippyGcodes.set_ext_temp(target, heater.replace("tool", ""))
-                },
-                callback,
-                *args
-            )
-
     def set_bed_temp(self, target, callback=None, *args):
         logging.debug(f"Sending set_bed_temp: {KlippyGcodes.set_bed_temp(target)}")
         return self._ws.send_method(
