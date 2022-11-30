@@ -408,7 +408,8 @@ class JobStatusPanel(ScreenPanel):
             {"name": _("Apply"), "response": Gtk.ResponseType.APPLY},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
         ]
-        self._gtk.Dialog(self._screen, buttons, grid, self.save_confirm, device)
+        dialog = self._gtk.Dialog(self._screen, buttons, grid, self.save_confirm, device)
+        dialog.set_title(_("Save Z"))
 
     def save_confirm(self, dialog, response_id, device):
         self._gtk.remove_dialog(dialog)
@@ -448,7 +449,8 @@ class JobStatusPanel(ScreenPanel):
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        self._gtk.Dialog(self._screen, buttons, label, self.cancel_confirm)
+        dialog = self._gtk.Dialog(self._screen, buttons, label, self.cancel_confirm)
+        dialog.set_title(_("Cancel"))
 
     def cancel_confirm(self, dialog, response_id):
         self._gtk.remove_dialog(dialog)

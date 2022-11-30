@@ -284,7 +284,8 @@ class PrintPanel(ScreenPanel):
             image.set_vexpand(False)
             grid.attach_next_to(image, label, Gtk.PositionType.BOTTOM, 1, 1)
 
-        self._gtk.Dialog(self._screen, buttons, grid, self.confirm_print_response, filename)
+        dialog = self._gtk.Dialog(self._screen, buttons, grid, self.confirm_print_response, filename)
+        dialog.set_title(_("Print"))
 
     def confirm_print_response(self, dialog, response_id, filename):
         self._gtk.remove_dialog(dialog)

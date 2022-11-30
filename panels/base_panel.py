@@ -348,6 +348,7 @@ class BasePanel(ScreenPanel):
         dialog.connect("delete-event", self.close_update_dialog)
         dialog.set_response_sensitive(Gtk.ResponseType.OK, False)
         dialog.get_widget_for_response(Gtk.ResponseType.OK).hide()
+        dialog.set_title(_("Updating"))
         self.update_dialog = dialog
         self._screen.updating = True
 
