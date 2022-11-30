@@ -85,6 +85,7 @@ class KlipperScreen(Gtk.Window):
     screensaver_timeout = None
     reinit_count = 0
     max_retries = 4
+    initialized = False
 
     def __init__(self, args, version):
         try:
@@ -617,11 +618,13 @@ class KlipperScreen(Gtk.Window):
         self.files = None
         self.printer.reset()
         self.printer = None
+        self.initialized = False
         self.connect_printer(self.connecting_to_printer)
 
     def state_disconnected(self):
         logging.debug("### Going to disconnected")
         self.close_screensaver()
+        self.initialized = False
         self.printer_initializing(_("Klipper has disconnected"), remove=True)
 
     def state_error(self):
@@ -862,6 +865,7 @@ class KlipperScreen(Gtk.Window):
         self.files.refresh_files()
 
         logging.info("Printer initialized")
+        self.initialized = True
         self.reinit_count = 0
 
     def base_panel_show_all(self):

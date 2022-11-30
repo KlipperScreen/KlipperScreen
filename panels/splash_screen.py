@@ -79,7 +79,7 @@ class SplashScreenPanel(ScreenPanel):
                 logging.info(f"Associated power devices: {power_devices}")
                 self.add_power_button(self._screen.search_power_devices(power_devices))
 
-        if self._screen._ws and self._screen._ws.connected:
+        if self._screen.initialized:
             self.labels['actions'].add(self.labels['restart'])
             self.labels['actions'].add(self.labels['firmware_restart'])
         else:
