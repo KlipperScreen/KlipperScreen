@@ -255,6 +255,7 @@ class KlipperScreen(Gtk.Window):
         try:
             return self.load_panel[panel](*args)
         except Exception as e:
+            logging.exception(e)
             raise RuntimeError(f"Unable to create panel: {panel}\n{e}") from e
 
     def show_panel(self, panel_name, panel_type, title, remove=None, pop=True, **kwargs):
@@ -881,10 +882,10 @@ class KlipperScreen(Gtk.Window):
     def printer_printing(self):
         self.close_screensaver()
         self.close_popup_message()
-        self.show_panel('job_status', "job_status", _("Printing"), 2)
         self.base_panel_show_all()
         for dialog in self.dialogs:
             self.gtk.remove_dialog(dialog)
+        self.show_panel('job_status', "job_status", _("Printing"), 2)
 
     def show_keyboard(self, widget=None, event=None, entry=None):
         if self.keyboard is not None:
