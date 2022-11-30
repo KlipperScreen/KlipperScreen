@@ -724,12 +724,10 @@ class KlipperScreen(Gtk.Window):
                     )
         self.process_update(action, data)
 
-    def process_update(self, action, data):
-        self.base_panel.process_update(action, data)
+    def process_update(self, *args):
+        GLib.idle_add(self.base_panel.process_update, *args)
         for x in self.subscriptions:
-            self.panels[x].process_update(action, data)
-        if "job_status" in self._cur_panels:
-            self.panels["job_status"].process_update(action, data)
+            GLib.idle_add(self.panels[x].process_update, *args)
 
     def _confirm_send_action(self, widget, text, method, params=None):
         buttons = [
