@@ -72,10 +72,10 @@ class FanPanel(ScreenPanel):
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
         fan_col = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        stop_btn = self._gtk.Button("cancel", None, "color1", 1)
+        stop_btn = self._gtk.Button("cancel", None, "color1")
         stop_btn.set_hexpand(False)
         stop_btn.connect("clicked", self.update_fan_speed, fan, 0)
-        max_btn = self._gtk.Button("fan-on", _("Max"), "color2", 1)
+        max_btn = self._gtk.Button("fan-on", _("Max"), "color2")
         max_btn.set_hexpand(False)
         max_btn.connect("clicked", self.update_fan_speed, fan, 100)
 

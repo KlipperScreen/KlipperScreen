@@ -34,20 +34,26 @@ class KlippyGtk:
         self.themedir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles", theme, "images")
         self.cursor = cursor
         self.font_size_type = fontsize_type
-
         self.font_ratio = [33, 49] if self.screen.vertical_mode else [43, 29]
         self.font_size = min(self.width / self.font_ratio[0], self.height / self.font_ratio[1])
         self.img_scale = self.font_size * 2
+        self.button_image_scale = 1.38
+        self.bsidescale = .65  # Buttons with image at the side
+
         if fontsize_type == "max":
             self.font_size = self.font_size * 1.2
+            self.bsidescale = .7
         elif fontsize_type == "extralarge":
             self.font_size = self.font_size * 1.14
-            self.img_scale = self.img_scale * 0.6
+            self.img_scale = self.img_scale * 0.7
+            self.bsidescale = 1
         elif fontsize_type == "large":
             self.font_size = self.font_size * 1.09
             self.img_scale = self.img_scale * 0.9
+            self.bsidescale = .8
         elif fontsize_type == "small":
             self.font_size = self.font_size * 0.91
+            self.bsidescale = .55
         self.img_width = self.font_size * 3
         self.img_height = self.font_size * 3
         self.titlebar_height = self.font_size * 2
@@ -155,8 +161,8 @@ class KlippyGtk:
         stream.close_async(2)
         return pixbuf
 
-    def Button(self, image_name=None, label=None, style=None, scale=1.38, position=Gtk.PositionType.TOP, lines=2):
-        if self.font_size_type == "max" and label is not None and scale == 1.38:
+    def Button(self, image_name=None, label=None, style=None, scale=None, position=Gtk.PositionType.TOP, lines=2):
+        if self.font_size_type == "max" and label is not None and scale is None:
             image_name = None
         b = Gtk.Button()
         if label is not None:
@@ -165,6 +171,8 @@ class KlippyGtk:
         b.set_vexpand(True)
         b.set_can_focus(False)
         if image_name is not None:
+            if scale is None:
+                scale = self.button_image_scale
             if label is None:
                 scale = scale * 1.5
             width = height = self.img_scale * scale

@@ -33,12 +33,7 @@ class ScreenPanel:
         self.content.set_hexpand(True)
         self.content.set_vexpand(True)
         self._show_heater_power = self._config.get_main_config().getboolean('show_heater_power', False)
-        if self._gtk.font_size_type == "extralarge":
-            self.bts = 1
-        elif self._gtk.font_size_type == "large":
-            self.bts = .7
-        else:
-            self.bts = .5
+        self.bts = self._gtk.bsidescale
 
         self.update_dialog = None
 
