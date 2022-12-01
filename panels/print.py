@@ -172,12 +172,13 @@ class PrintPanel(ScreenPanel):
             info.set_markup(self.get_file_info_str(fullpath))
             actions.connect("clicked", self.confirm_print, fullpath)
             icon = Gtk.Button()
+            icon.connect("clicked", self.confirm_delete_file, f"gcodes/{fullpath}")
             GLib.idle_add(self.image_load, fullpath)
         else:
             actions.connect("clicked", self.change_dir, fullpath)
             icon = self._gtk.Button("folder")
+            icon.connect("clicked", self.confirm_delete_directory, fullpath)
         icon.set_hexpand(False)
-        icon.connect("clicked", self.confirm_delete_file, f"gcodes/{fullpath}")
 
         file = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
         file.get_style_context().add_class("frame-item")
@@ -217,6 +218,16 @@ class PrintPanel(ScreenPanel):
             None,
             _("Delete File?") + "\n\n" + filepath,
             "server.files.delete_file",
+            params
+        )
+
+    def confirm_delete_directory(self, widget, dirpath):
+        logging.debug(f"Sending delete_directory {dirpath}")
+        params = {"path": f"{dirpath}", "force": True}
+        self._screen._confirm_send_action(
+            None,
+            _("Delete Directory?") + "\n\n" + dirpath,
+            "server.files.delete_directory",
             params
         )
 
