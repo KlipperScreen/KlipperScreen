@@ -414,6 +414,16 @@ trough {
     font-size: 1.25em;
 }
 
+.print-filename {
+    font-size: 1.1em;
+    margin-bottom: 0.2em;
+
+}
+
+.print-info {
+    font-size: 0.95em;
+}
+
 .tempbutton_top {
     border: .15em solid white;
     border-bottom: 0;

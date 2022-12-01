@@ -37,6 +37,9 @@ class PrintPanel(ScreenPanel):
         self.directories = {}
         self.labels['directories'] = {}
         self.labels['files'] = {}
+        self.time_24 = self._config.get_main_config().getboolean("24htime", True)
+        logging.info(f"24h time is {self.time_24}")
+
         sbox = Gtk.Box(spacing=0)
         sbox.set_vexpand(False)
         for i, (name, val) in enumerate(self.sort_items.items(), start=1):
@@ -120,11 +123,11 @@ class PrintPanel(ScreenPanel):
                 curdir = os.path.join(*d[:i + 1])
                 if curdir != "gcodes" and fileinfo['modified'] > self.filelist[curdir]['modified']:
                     self.filelist[curdir]['modified'] = fileinfo['modified']
-                    self.labels['directories'][curdir]['info'].set_markup(
-                        '<small>' + _("Modified")
-                        + f' <b>{datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %H:%M}</b></small>'
-                    )
-
+                    if self.time_24:
+                        time = f':<b>  {datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %H:%M}</b>'
+                    else:
+                        time = f':<b>  {datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %I:%M %p}<b>'
+                    self.labels['directories'][curdir]['info'].set_markup(_("Modified") + time)
             self.filelist[directory]['files'].append(filename)
 
         if filepath not in self.files:
@@ -146,6 +149,7 @@ class PrintPanel(ScreenPanel):
 
     def _create_row(self, fullpath, filename=None):
         name = Gtk.Label()
+        name.get_style_context().add_class("print-filename")
         if filename:
             name.set_markup(f'<big><b>{os.path.splitext(filename)[0].replace("_", " ")}</b></big>')
         else:
@@ -157,6 +161,7 @@ class PrintPanel(ScreenPanel):
 
         info = Gtk.Label()
         info.set_halign(Gtk.Align.START)
+        info.get_style_context().add_class("print-info")
 
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)
@@ -338,14 +343,16 @@ class PrintPanel(ScreenPanel):
         fileinfo = self._screen.files.get_file_info(filename)
         if fileinfo is None:
             return
-        info = '<small>' + _("Uploaded") + f': <b>{datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %H:%M}</b>\n'
+        info = _("Uploaded")
+        if self.time_24:
+            info += f':<b>  {datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %H:%M}</b>\n'
+        else:
+            info += f':<b>  {datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %I:%M %p}</b>\n'
 
         if "size" in fileinfo:
-            info += _("Size") + f': <b>{self.format_size(fileinfo["size"])}</b>\n'
+            info += _("Size") + f':  <b>{self.format_size(fileinfo["size"])}</b>\n'
         if "estimated_time" in fileinfo:
-            info += _("Print Time") + f': <b>{self.format_time(fileinfo["estimated_time"])}</b>'
-        info += "</small>"
-
+            info += _("Print Time") + f':  <b>{self.format_time(fileinfo["estimated_time"])}</b>'
         return info
 
     def reload_files(self, widget=None):
