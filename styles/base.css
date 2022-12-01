@@ -266,9 +266,15 @@ trough {
 }
 
 .heater-grid label {
-    margin-top: .2em;
-    margin-bottom: .2em;
-    min-height: 2em;
+    min-height: 0em;
+    padding: 0;
+    margin: 0;
+}
+
+.heater-grid button{
+    margin: .2em;
+    min-height: 2.9em;
+    padding: 0 .5em;
 }
 
 .keyboard_box {

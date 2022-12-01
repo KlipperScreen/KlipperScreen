@@ -146,7 +146,7 @@ class MainPanel(MenuPanel):
             name.get_style_context().add_class("graph_label_hidden")
         self.labels['da'].set_showing(device, visible)
 
-        temp = self._gtk.Button(label="")
+        temp = self._gtk.Button(label="", lines=1)
         if can_target:
             temp.connect("clicked", self.show_numpad, device)
 
@@ -209,7 +209,7 @@ class MainPanel(MenuPanel):
 
         name = Gtk.Label("")
         temp = Gtk.Label(_("Temp (°C)"))
-        temp.set_size_request(round(self._gtk.get_font_size() * 7.7), -1)
+        temp.set_size_request(self._gtk.font_size * 6, -1)
 
         self.labels['devices'].attach(name, 0, 0, 1, 1)
         self.labels['devices'].attach(temp, 1, 0, 1, 1)
