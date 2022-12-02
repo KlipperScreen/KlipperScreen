@@ -1,7 +1,8 @@
 import datetime
-import gi
 import logging
 import math
+
+import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gdk, Gtk
@@ -47,9 +48,15 @@ class HeaterGraph(Gtk.DrawingArea):
                    for name in self.store if "temperatures" in self.store[name])
 
     def get_max_num(self, data_points=0):
-        mnum = []
-        for x in self.store:
-            mnum.extend(max(self.printer.get_temp_store(x, t, data_points)) for t in self.store[x] if t != "show")
+        mnum = [0]
+        for device in self.store:
+            if self.store[device]['show']:
+                temp = self.printer.get_temp_store(device, "temperatures", data_points)
+                if temp:
+                    mnum.append(max(temp))
+                target = self.printer.get_temp_store(device, "targets", data_points)
+                if target:
+                    mnum.append(max(target))
         return max(mnum)
 
     def draw_graph(self, da, ctx):

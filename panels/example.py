@@ -11,7 +11,8 @@ def create_panel(*args):
 
 
 class ExamplePanel(ScreenPanel):
-    def initialize(self, panel_name):
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
 
         # Create gtk items here
 

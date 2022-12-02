@@ -1,5 +1,6 @@
-import gi
 import logging
+
+import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib, Pango
@@ -12,11 +13,11 @@ def create_panel(*args):
 
 
 class MacroPanel(ScreenPanel):
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.sort_reverse = False
         self.sort_lbl = _("Name")
-        self.sort_btn = self._gtk.ButtonImage("arrow-up", self.sort_lbl, "color1", .5, Gtk.PositionType.RIGHT, 1)
+        self.sort_btn = self._gtk.Button("arrow-up", self.sort_lbl, "color1", self.bts, Gtk.PositionType.RIGHT, 1)
         self.sort_btn.connect("clicked", self.change_sort)
         self.sort_btn.set_hexpand(True)
         self.allmacros = {}
@@ -24,17 +25,12 @@ class MacroPanel(ScreenPanel):
         self.macros = {}
         self.menu = ['macros_menu']
 
-    def initialize(self, panel_name):
-        sort = Gtk.Label(_("Sort:"))
-        sort.set_hexpand(False)
-
-        adjust = self._gtk.ButtonImage("settings", None, "color2", 1, Gtk.PositionType.LEFT, 1)
-        adjust.connect("clicked", self.load_menu, 'options')
+        adjust = self._gtk.Button("settings", None, "color2", self.bts, Gtk.PositionType.LEFT, 1)
+        adjust.connect("clicked", self.load_menu, 'options', _("Settings"))
         adjust.set_hexpand(False)
 
         sbox = Gtk.Box()
         sbox.set_vexpand(False)
-        sbox.pack_start(sort, False, False, 5)
         sbox.pack_start(self.sort_btn, True, True, 5)
         sbox.pack_start(adjust, True, True, 5)
 
@@ -71,7 +67,7 @@ class MacroPanel(ScreenPanel):
         name.set_line_wrap(True)
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        btn = self._gtk.ButtonImage("resume", style="color3")
+        btn = self._gtk.Button("resume", style="color3")
         btn.connect("clicked", self.run_gcode_macro, macro)
         btn.set_hexpand(False)
         btn.set_halign(Gtk.Align.END)
@@ -80,15 +76,12 @@ class MacroPanel(ScreenPanel):
         labels.add(name)
 
         dev = Gtk.Box(spacing=5)
+        dev.get_style_context().add_class("frame-item")
         dev.add(labels)
         dev.add(btn)
 
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-        frame.add(dev)
-
         self.macros[macro] = {
-            "row": frame
+            "row": dev
         }
 
         macros = sorted(self.macros, reverse=self.sort_reverse, key=str.casefold)
@@ -104,9 +97,9 @@ class MacroPanel(ScreenPanel):
     def change_sort(self, widget):
         self.sort_reverse ^= True
         if self.sort_reverse:
-            self.sort_btn.set_image(self._gtk.Image("arrow-down", .5))
+            self.sort_btn.set_image(self._gtk.Image("arrow-down", self.bts))
         else:
-            self.sort_btn.set_image(self._gtk.Image("arrow-up", .5))
+            self.sort_btn.set_image(self._gtk.Image("arrow-up", self.bts))
         self.sort_btn.show()
 
         GLib.idle_add(self.reload_macros)
@@ -171,19 +164,16 @@ class MacroPanel(ScreenPanel):
         box.add(switch)
 
         dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        dev.get_style_context().add_class("frame-item")
         dev.set_hexpand(True)
         dev.set_vexpand(False)
         dev.set_valign(Gtk.Align.CENTER)
         dev.add(name)
         dev.add(box)
 
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-        frame.add(dev)
-        frame.show_all()
         opt_array[opt_name] = {
             "name": option['name'],
-            "row": frame
+            "row": dev
         }
 
         opts = sorted(self.allmacros, key=str.casefold)

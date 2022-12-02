@@ -1,21 +1,32 @@
-## Create Translations
+# Translations
 
-You can use an editor such as [poedit](https://poedit.net/) to assist in translations. This guide will assume that you
-will be using poedit.
+## Updating an existing translation:
 
-This guide will refer to `language designation`. This can be found from running `echo $LANG` on your pi, as long as you
-have set your pi up for your preferred language.
+You can use an editor such as [poedit](https://poedit.net/) to assist in translations.
 
-#### New Language
+* Edit `ks_includes/locals/{ISO 639 lang code}/LC_MESSAGES/KlipperScreen.po`
+
+To test your translation:
+
+In poedit go to `File -> Compile to MO`. Save it on the same folder, and restart KlipperScreen
+
+
+## Adding a new Language:
+
+Example using poedit
 
 * Select `Create a new translation` or `File -> New from POT/PO` and select `ks_includes/locals/KlipperScreen.pot`.
-* Enter your language designation.
-* Create the translations
-* Save the file as `ks_includes/locales/{LANGUAGE DESIGNATION}/KlipperScreen.po`.
-* Select `File -> Compile to MO`. Save this file as `ks_includes/locales/{LANGUAGE DESIGNATION}/KlipperScreen.mo`
+!!! important
+    Do not edit the POT file as is automatically generated and your changes will be lost.
+* Save the file as `ks_includes/locales/{ISO 639 lang code}/LC_MESSAGES/KlipperScreen.po`
+* Select `File -> Compile to MO`.  Save it on the same folder, and restart KlipperScreen
 
-Once you have followed those steps, restart KlipperScreen, and select it from the list in the settings.
+!!! note
+    [Wikipedia ISO 639 Language Codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+
+Once you have restarted KlipperScreen, select it from the list in the settings.
 If you edited and recompiled, you need to restart KlipperScreen to reload the translation.
 
-Do not edit the POT file as is automatically generated and your changes will be lost.
+
+## Contributing:
 [Attach your translation on a GitHub issue or create a PR](Contact.md)

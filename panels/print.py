@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-import gi
 import logging
 import os
+
+import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib, Pango
@@ -19,8 +20,8 @@ class PrintPanel(ScreenPanel):
     dir_panels = {}
     filelist = {'gcodes': {'directories': [], 'files': []}}
 
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         sortdir = self._config.get_main_config().get("print_sort_dir", "name_asc")
         sortdir = sortdir.split('_')
         if sortdir[0] not in ["name", "date"] or sortdir[1] not in ["asc", "desc"]:
@@ -36,20 +37,16 @@ class PrintPanel(ScreenPanel):
         self.directories = {}
         self.labels['directories'] = {}
         self.labels['files'] = {}
-
-    def initialize(self, panel_name):
-        sort = Gtk.Label(_("Sort:"))
         sbox = Gtk.Box(spacing=0)
         sbox.set_vexpand(False)
-        sbox.pack_start(sort, False, False, 5)
         for i, (name, val) in enumerate(self.sort_items.items(), start=1):
-            s = self._gtk.ButtonImage(None, val, f"color{i % 4}", .5, Gtk.PositionType.RIGHT, 1)
+            s = self._gtk.Button(None, val, f"color{i % 4}", .5, Gtk.PositionType.RIGHT, 1)
             if name == self.sort_current[0]:
-                s.set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], .5))
+                s.set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], self._gtk.img_scale * self.bts))
             s.connect("clicked", self.change_sort, name)
             self.labels[f'sort_{name}'] = s
             sbox.add(s)
-        refresh = self._gtk.ButtonImage("refresh", scale=.66)
+        refresh = self._gtk.Button("refresh", style="color4", scale=self.bts)
         refresh.connect('clicked', self._refresh_files)
         sbox.add(refresh)
         sbox.set_hexpand(True)
@@ -87,7 +84,7 @@ class PrintPanel(ScreenPanel):
             self.filelist[parent_dir]['directories'].append(directory)
 
         if directory not in self.labels['directories']:
-            self._create_frame(directory)
+            self._create_row(directory)
         reverse = self.sort_current[1] != 0
         dirs = sorted(
             self.filelist[parent_dir]['directories'],
@@ -102,16 +99,14 @@ class PrintPanel(ScreenPanel):
             self.dir_panels[parent_dir].show_all()
 
     def add_file(self, filepath, show=True):
-
         fileinfo = self._screen.files.get_file_info(filepath)
         if fileinfo is None:
             return
-
-        d = f"gcodes/{filepath}".split('/')[:-1]
-        directory = '/'.join(d)
-        filename = filepath.split('/')[-1]
+        filename = os.path.split(filepath)[-1]
         if filename.startswith("."):
             return
+        directory = os.path.dirname(os.path.join("gcodes", filepath))
+        d = directory.split('/')
         for i in range(1, len(d)):
             curdir = "/".join(d[:i])
             newdir = "/".join(d[:i + 1])
@@ -133,7 +128,7 @@ class PrintPanel(ScreenPanel):
             self.filelist[directory]['files'].append(filename)
 
         if filepath not in self.files:
-            self._create_frame_file(filename, filepath)
+            self._create_row(filepath, filename)
         reverse = self.sort_current[1] != 0
         files = sorted(
             self.filelist[directory]['files'],
@@ -149,59 +144,12 @@ class PrintPanel(ScreenPanel):
         if show is True:
             self.dir_panels[directory].show_all()
 
-    def _create_frame(self, directory):
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-
+    def _create_row(self, fullpath, filename=None):
         name = Gtk.Label()
-        name.set_markup(f"<big><b>{directory.split('/')[-1]}</b></big>")
-        name.set_hexpand(True)
-        name.set_halign(Gtk.Align.START)
-        name.set_line_wrap(True)
-        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-
-        info = Gtk.Label()
-        info.set_halign(Gtk.Align.START)
-
-        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        labels.add(name)
-        labels.add(info)
-        labels.set_vexpand(True)
-        labels.set_valign(Gtk.Align.CENTER)
-        labels.set_halign(Gtk.Align.START)
-
-        actions = self._gtk.ButtonImage("load", style="color3")
-        actions.connect("clicked", self.change_dir, directory)
-        actions.set_hexpand(False)
-        actions.set_halign(Gtk.Align.END)
-
-        file = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        file.set_hexpand(True)
-        file.set_vexpand(False)
-
-        icon = self._gtk.Image("folder", 1)
-
-        file.add(icon)
-        file.add(labels)
-        file.add(actions)
-        frame.add(file)
-
-        self.directories[directory] = frame
-
-        self.labels['directories'][directory] = {
-            "icon": icon,
-            "info": info,
-            "name": name
-        }
-
-        self.dir_panels[directory] = Gtk.Grid()
-
-    def _create_frame_file(self, filename, filepath):
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-
-        name = Gtk.Label()
-        name.set_markup(f'<big><b>{os.path.splitext(filename)[0].replace("_", " ")}</b></big>')
+        if filename:
+            name.set_markup(f'<big><b>{os.path.splitext(filename)[0].replace("_", " ")}</b></big>')
+        else:
+            name.set_markup(f"<big><b>{os.path.split(fullpath)[-1]}</b></big>")
         name.set_hexpand(True)
         name.set_halign(Gtk.Align.START)
         name.set_line_wrap(True)
@@ -209,7 +157,7 @@ class PrintPanel(ScreenPanel):
 
         info = Gtk.Label()
         info.set_halign(Gtk.Align.START)
-        info.set_markup(self.get_file_info_str(filepath))
+
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)
         labels.add(info)
@@ -217,38 +165,50 @@ class PrintPanel(ScreenPanel):
         labels.set_valign(Gtk.Align.CENTER)
         labels.set_halign(Gtk.Align.START)
 
-        actions = self._gtk.ButtonImage("print", style="color3")
-        actions.connect("clicked", self.confirm_print, filepath)
+        actions = self._gtk.Button("load", style="color3")
         actions.set_hexpand(False)
         actions.set_halign(Gtk.Align.END)
+        if filename:
+            info.set_markup(self.get_file_info_str(fullpath))
+            actions.connect("clicked", self.confirm_print, fullpath)
+            icon = Gtk.Button()
+            GLib.idle_add(self.image_load, fullpath)
+        else:
+            actions.connect("clicked", self.change_dir, fullpath)
+            icon = self._gtk.Button("folder")
+        icon.set_hexpand(False)
+        icon.connect("clicked", self.confirm_delete_file, f"gcodes/{fullpath}")
 
         file = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        file.get_style_context().add_class("frame-item")
         file.set_hexpand(True)
         file.set_vexpand(False)
+        file.add(icon)
+        file.add(labels)
+        if not filename or (filename and os.path.splitext(filename)[1] in [".gcode", ".g", ".gco"]):
+            file.add(actions)
 
-        icon = Gtk.Image()
+        if filename is not None:
+            self.files[fullpath] = file
+            self.labels['files'][fullpath] = {
+                "icon": icon,
+                "info": info,
+                "name": name
+            }
+        else:
+            self.directories[fullpath] = file
+            self.labels['directories'][fullpath] = {
+                "info": info,
+                "name": name
+            }
+            self.dir_panels[fullpath] = Gtk.Grid()
+
+    def image_load(self, filepath):
         pixbuf = self.get_file_image(filepath, small=True)
         if pixbuf is not None:
-            icon.set_from_pixbuf(pixbuf)
+            self.labels['files'][filepath]['icon'].set_image(Gtk.Image.new_from_pixbuf(pixbuf))
         else:
-            icon = self._gtk.Image("file", 1.6)
-
-        img = Gtk.Button()
-        img.set_image(icon)
-        img.connect("clicked", self.confirm_delete_file, f"gcodes/{filepath}")
-
-        file.add(img)
-        file.add(labels)
-        if os.path.splitext(filename)[1] in [".gcode", ".g", ".gco"]:
-            file.add(actions)
-        frame.add(file)
-
-        self.files[filepath] = frame
-        self.labels['files'][filepath] = {
-            "icon": icon,
-            "info": info,
-            "name": name
-        }
+            self.labels['files'][filepath]['icon'].set_image(self._gtk.Image("file"))
 
     def confirm_delete_file(self, widget, filepath):
         logging.debug(f"Sending delete_file {filepath}")
@@ -288,7 +248,8 @@ class PrintPanel(ScreenPanel):
             self.labels[f'sort_{oldkey}'].set_image(None)
             self.labels[f'sort_{oldkey}'].show_all()
             self.sort_current = [key, 0]
-        self.labels[f'sort_{key}'].set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], .5))
+        self.labels[f'sort_{key}'].set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]],
+                                                             self._gtk.img_scale * self.bts))
         self.labels[f'sort_{key}'].show()
         GLib.idle_add(self.reload_files)
 
@@ -312,25 +273,24 @@ class PrintPanel(ScreenPanel):
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
         grid = Gtk.Grid()
-        grid.add(label)
-
-        pixbuf = self.get_file_image(filename, 8, 3.2)
-        if pixbuf is not None:
-            image = Gtk.Image.new_from_pixbuf(pixbuf)
-            grid.attach_next_to(image, label, Gtk.PositionType.BOTTOM, 1, 3)
-
         grid.set_vexpand(True)
         grid.set_halign(Gtk.Align.CENTER)
         grid.set_valign(Gtk.Align.CENTER)
+        grid.add(label)
 
-        self._gtk.Dialog(self._screen, buttons, grid, self.confirm_print_response, filename)
+        pixbuf = self.get_file_image(filename, self._screen.width * .9, self._screen.height * .6)
+        if pixbuf is not None:
+            image = Gtk.Image.new_from_pixbuf(pixbuf)
+            image.set_vexpand(False)
+            grid.attach_next_to(image, label, Gtk.PositionType.BOTTOM, 1, 1)
 
-    def confirm_print_response(self, widget, response_id, filename):
-        widget.destroy()
+        dialog = self._gtk.Dialog(self._screen, buttons, grid, self.confirm_print_response, filename)
+        dialog.set_title(_("Print"))
 
+    def confirm_print_response(self, dialog, response_id, filename):
+        self._gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.CANCEL:
             return
-
         logging.info(f"Starting print: {filename}")
         self._screen._ws.klippy.print_start(filename)
 
@@ -396,9 +356,7 @@ class PrintPanel(ScreenPanel):
         self.labels['files'][filename]['info'].set_markup(self.get_file_info_str(filename))
 
         # Update icon
-        pixbuf = self.get_file_image(filename)
-        if pixbuf is not None:
-            self.labels['files'][filename]['icon'].set_from_pixbuf(pixbuf)
+        GLib.idle_add(self.image_load, filename)
 
     def _callback(self, newfiles, deletedfiles, updatedfiles=None):
         logging.debug(f"newfiles: {newfiles}")

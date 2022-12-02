@@ -1,10 +1,13 @@
 # Hardware
 
-There are no recommended screens, but the minimum supported resolution is 480x320
+There are no recommended screens, but the minimum supported resolution is 480x320.
+
+In general, if the device can show a GNU/Linux desktop, then KlipperScreen should work too.
 
 #### Hardware known to work
 
 * [BTT PI TFT50](https://www.biqu.equipment/collections/lcd/products/bigtreetech-pi-tft50-v1-0-tft-display-for-raspberry-pi-3d-printer-part)
+* [BTT HDMI5/7](https://biqu.equipment/products/bigtreetech-hdmi5-v1-0-hdmi7-v1-0)
 * [Raspberry PI 7" Touchscreen](https://www.raspberrypi.org/products/raspberry-pi-touch-display/)
 * [Hyperpixel 4](https://shop.pimoroni.com/products/hyperpixel-4)
 * [3.5" Elegoo](https://www.elegoo.com/de/products/elegoo-3-5-inch-tft-lcd-screen)

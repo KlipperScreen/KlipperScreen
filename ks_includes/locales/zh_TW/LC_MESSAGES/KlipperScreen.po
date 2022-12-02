@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-12 13:34-0300\n"
-"PO-Revision-Date: 2022-03-31 11:25-0300\n"
+"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"PO-Revision-Date: 2022-11-28 11:37-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -45,9 +45,6 @@ msgstr "接受"
 
 msgid "Actions"
 msgstr "動作"
-
-msgid "Add Printer"
-msgstr "新增列印機"
 
 msgid "Add profile"
 msgstr ""
@@ -114,9 +111,6 @@ msgstr "校準，保存配置以使其永久化"
 msgid "Calibrating"
 msgstr ""
 
-msgid "Calibrating..."
-msgstr ""
-
 msgid "Can't set above the maximum:"
 msgstr "不能設置超過最大值："
 
@@ -181,9 +175,6 @@ msgstr "日期"
 msgid "Decrease"
 msgstr "減少"
 
-msgid "Delete"
-msgstr "刪除"
-
 msgid "Delete File?"
 msgstr ""
 
@@ -213,6 +204,9 @@ msgid "Estimated Time Method"
 msgstr "預估時間方法"
 
 msgid "Exclude Object"
+msgstr ""
+
+msgid "Extra Large"
 msgstr ""
 
 msgid "Extrude"
@@ -290,9 +284,6 @@ msgstr "在溫度中隱藏傳感器。"
 msgid "Hide temp."
 msgstr ""
 
-msgid "Home"
-msgstr "首頁"
-
 msgid "Home All"
 msgstr "歸零全部"
 
@@ -323,9 +314,6 @@ msgstr "圖標主題"
 msgid "Increase"
 msgstr "增加"
 
-msgid "Initializing"
-msgstr "初始化中"
-
 msgid "Initializing printer..."
 msgstr "初始化列印機中.."
 
@@ -337,6 +325,9 @@ msgstr "介面"
 
 msgid "Invalid"
 msgstr "無效的"
+
+msgid "Invalid password"
+msgstr ""
 
 msgid "Invert X"
 msgstr "反轉 X"
@@ -364,6 +355,9 @@ msgstr "Klipper 正在嘗試重新啟動"
 
 msgid "Klipper will reboot"
 msgstr "Klipper 將重新啟動"
+
+msgid "KlipperScreen will reboot"
+msgstr "KlipperScreen 將重新啟動"
 
 msgid "Language"
 msgstr "語言"
@@ -407,6 +401,9 @@ msgstr "最大加速到減速"
 msgid "Max Velocity"
 msgstr "最大速度"
 
+msgid "Maximum"
+msgstr ""
+
 msgid "Measure Both"
 msgstr ""
 
@@ -421,6 +418,9 @@ msgstr "中"
 
 msgid "Menu"
 msgstr "選單"
+
+msgid "Mesh calibrate"
+msgstr ""
 
 msgid "Modified"
 msgstr "修改"
@@ -440,6 +440,9 @@ msgstr "名稱"
 msgid "Network"
 msgstr "網路"
 
+msgid "Never"
+msgstr ""
+
 msgid "New"
 msgstr ""
 
@@ -450,9 +453,6 @@ msgstr ""
 
 msgid "Nothing selected"
 msgstr "未選擇任何內容"
-
-msgid "Off"
-msgstr "關閉"
 
 #, python-format
 msgid "Outdated by %d"
@@ -510,6 +510,9 @@ msgstr ""
 msgid "Printer Connections"
 msgstr "連接列印機"
 
+msgid "Printer Select"
+msgstr ""
+
 msgid "Printing"
 msgstr "列印中"
 
@@ -519,11 +522,17 @@ msgstr ""
 msgid "Profile Name:"
 msgstr "配置檔案名稱:"
 
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr ""
+
 msgid "Quad Gantry Level"
 msgstr "龍門調平"
 
 msgid "Raise Nozzle"
 msgstr "上升噴嘴"
+
+msgid "Recover"
+msgstr ""
 
 msgid "Recover Hard"
 msgstr "恢復 Hard"
@@ -555,9 +564,8 @@ msgstr ""
 msgid "Retraction Speed"
 msgstr ""
 
-#, python-format
-msgid "Retry #%s"
-msgstr "重試 #%s"
+msgid "Retry"
+msgstr ""
 
 msgid "Retrying"
 msgstr ""
@@ -630,9 +638,6 @@ msgstr ""
 msgid "Small"
 msgstr "小的"
 
-msgid "Sort:"
-msgstr ""
-
 msgid "Speed (mm/s)"
 msgstr "速度（mm/s）"
 
@@ -675,10 +680,6 @@ msgstr "溫度（°C）"
 msgid "Temperature"
 msgstr "溫度"
 
-#, python-format
-msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr "要應用 %s，需要重新啟動 KlipperScreen"
-
 msgid "Total:"
 msgstr "全部的："
 
@@ -709,26 +710,11 @@ msgstr "更新"
 msgid "Uploaded"
 msgstr "上傳時間"
 
-msgid "View Mesh"
-msgstr "檢視網格"
-
-msgid "X+"
-msgstr "X+"
-
-msgid "X-"
-msgstr "X-"
-
 msgid "XY Move Speed (mm/s)"
 msgstr "XY 移動速度 (mm/s)"
 
 msgid "XY Speed (mm/s)"
 msgstr ""
-
-msgid "Y+"
-msgstr "Y+"
-
-msgid "Y-"
-msgstr "Y-"
 
 msgid "Z Calibrate"
 msgstr "Z 校準"
@@ -744,12 +730,6 @@ msgstr "Z 傾斜"
 
 msgid "Z offset:"
 msgstr ""
-
-msgid "Z+"
-msgstr "Z+"
-
-msgid "Z-"
-msgstr "Z-"
 
 msgid "commit"
 msgid_plural "commits"
@@ -773,6 +753,49 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+msgid "mm³/s"
+msgstr ""
+
+#~ msgid "Z+"
+#~ msgstr "Z+"
+
+#~ msgid "Z-"
+#~ msgstr "Z-"
+
+#~ msgid "X+"
+#~ msgstr "X+"
+
+#~ msgid "X-"
+#~ msgstr "X-"
+
+#~ msgid "Y+"
+#~ msgstr "Y+"
+
+#~ msgid "Y-"
+#~ msgstr "Y-"
+
+#, python-format
+#~ msgid "Retry #%s"
+#~ msgstr "重試 #%s"
+
+#~ msgid "Add Printer"
+#~ msgstr "新增列印機"
+
+#~ msgid "Initializing"
+#~ msgstr "初始化中"
+
+#~ msgid "Delete"
+#~ msgstr "刪除"
+
+#~ msgid "Home"
+#~ msgstr "首頁"
+
+#~ msgid "Off"
+#~ msgstr "關閉"
+
+#~ msgid "View Mesh"
+#~ msgstr "檢視網格"
 
 #~ msgid "Sort by: "
 #~ msgstr "排序: "

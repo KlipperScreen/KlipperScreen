@@ -35,11 +35,31 @@ Moved to [Thumbnails](Thumbnails.md)
 
 
 ## Layer Progress
+
+Accurate layer progress as a message below the status:
+
 PrusaSlicer/SuperSlicer > Printer Settings > Custom Gcode > After layer change Gcode
 
 `M117 Layer {layer_num+1}/[total_layer_count] : {filament_settings_id[0]}`
 
 ![Layer_progress](img/quicktips/PS_SS_Layer_progress.png)
+
+Accurate layer progress in the secondary screen of the printing panel:
+
+The layer number in the secondary screen of the printing panelis calculated according to object height and provided layer height.
+It will be innacurate when using variable layer height, but can be fixed by providing klipper with the correct data.
+
+![speed_screenshot](img/panels/job_status_speed.png)
+
+PrusaSlicer/SuperSlicer:
+
+Printer Settings > Custom Gcode > Start Gcode
+
+`SET_PRINT_STATS_INFO TOTAL_LAYER=[total_layer_count]`
+
+Printer Settings > Custom Gcode > After layer change Gcode
+
+`SET_PRINT_STATS_INFO CURRENT_LAYER={layer_num + 1}`
 
 ## Supported Macros
 [Macros](macros.md)
