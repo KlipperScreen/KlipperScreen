@@ -119,7 +119,7 @@ class Printer:
         # print_stats: standby, printing, paused, error, complete
         # idle_timeout: Idle, Printing, Ready
         if self.data['webhooks']['state'] == "ready" and self.data['print_stats']:
-            if self.data['print_stats']['state'] == 'paused' or self.data.get('pause_resume').get('is_paused'):
+            if self.data['print_stats']['state'] == 'paused':
                 return "paused"
             if self.data['print_stats']['state'] == 'printing':
                 return "printing"
