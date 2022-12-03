@@ -108,6 +108,8 @@ class KlipperScreen(Gtk.Window):
         self.connect("key-press-event", self._key_press_event)
         monitor = Gdk.Display.get_default().get_primary_monitor()
         if monitor is None:
+            monitor = Gdk.Display.get_default().get_monitor(0)
+        if monitor is None:
             raise RuntimeError("Couldn't get default monitor")
         self.width = self._config.get_main_config().getint("width", monitor.get_geometry().width)
         self.height = self._config.get_main_config().getint("height", monitor.get_geometry().height)
