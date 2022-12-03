@@ -341,8 +341,7 @@ class NetworkPanel(ScreenPanel):
         self.labels['network_psk'].set_text('')
         self.labels['network_psk'].set_hexpand(True)
         self.labels['network_psk'].connect("activate", self.add_new_network, ssid, True)
-        self.labels['network_psk'].connect("focus-in-event", self._show_keyboard)
-        self.labels['network_psk'].grab_focus_without_selecting()
+        self.labels['network_psk'].connect("focus-in-event", self._screen.show_keyboard)
 
         save = self._gtk.Button("sd", _("Save"), "color3")
         save.set_hexpand(False)
@@ -360,12 +359,9 @@ class NetworkPanel(ScreenPanel):
         self.labels['add_network'].pack_start(box, True, True, 5)
 
         self.content.add(self.labels['add_network'])
-        self._screen.show_keyboard()
+        self.labels['network_psk'].grab_focus_without_selecting()
         self.content.show_all()
         self.show_add = True
-
-    def _show_keyboard(self, widget=None, event=None):
-        self._screen.show_keyboard(entry=self.labels['network_psk'])
 
     def update_all_networks(self):
         for network in list(self.networks):

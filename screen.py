@@ -889,7 +889,7 @@ class KlipperScreen(Gtk.Window):
             self.gtk.remove_dialog(dialog)
         self.show_panel('job_status', "job_status", _("Printing"), 2)
 
-    def show_keyboard(self, widget=None, event=None, entry=None):
+    def show_keyboard(self, entry=None, event=None):
         if self.keyboard is not None:
             return
 
@@ -928,17 +928,13 @@ class KlipperScreen(Gtk.Window):
             return
         box.get_style_context().add_class("keyboard_box")
         box.add(Keyboard(self, self.remove_keyboard, entry=entry))
-        self.keyboard = {
-            "entry": entry,
-            "box": box
-        }
+        self.keyboard = {"box": box}
         self.base_panel.content.pack_end(box, False, False, 0)
         self.base_panel.content.show_all()
 
     def remove_keyboard(self, widget=None, event=None):
         if self.keyboard is None:
             return
-
         if 'process' in self.keyboard:
             os.kill(self.keyboard['process'].pid, SIGTERM)
         self.base_panel.content.remove(self.keyboard['box'])

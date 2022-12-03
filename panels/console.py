@@ -84,7 +84,7 @@ class ConsolePanel(ScreenPanel):
         entry = Gtk.Entry()
         entry.set_hexpand(True)
         entry.set_vexpand(False)
-        entry.connect("button-press-event", self._show_keyboard)
+        entry.connect("button-press-event", self._screen.show_keyboard)
         entry.connect("focus-in-event", self._screen.show_keyboard)
         entry.connect("activate", self._send_command)
         entry.grab_focus_without_selecting()
@@ -108,9 +108,6 @@ class ConsolePanel(ScreenPanel):
         content_box.add(sw)
         content_box.pack_end(ebox, False, False, 0)
         self.content.add(content_box)
-
-    def _show_keyboard(self, widget=None, event=None):
-        self._screen.show_keyboard(entry=self.labels['entry'])
 
     def clear(self, widget=None):
         self.labels['tb'].set_text("")

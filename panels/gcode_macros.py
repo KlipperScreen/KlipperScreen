@@ -97,12 +97,9 @@ class MacroPanel(ScreenPanel):
 
         for param in self.macros[macro]["params"]:
             labels.add(Gtk.Label(param))
-            self.macros[macro]["params"][param].connect("focus-in-event", self._show_keyboard)
+            self.macros[macro]["params"][param].connect("focus-in-event", self._screen.show_keyboard)
             self.macros[macro]["params"][param].connect("focus-out-event", self._screen.remove_keyboard)
             labels.add(self.macros[macro]["params"][param])
-
-    def _show_keyboard(self, widget=None, event=None):
-        self._screen.show_keyboard(entry=widget)
 
     def run_gcode_macro(self, widget, macro):
         params = ""

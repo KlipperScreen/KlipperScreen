@@ -237,8 +237,7 @@ class BedMeshPanel(ScreenPanel):
             self.labels['profile_name'].set_text('')
             self.labels['profile_name'].set_hexpand(True)
             self.labels['profile_name'].connect("activate", self.create_profile)
-            self.labels['profile_name'].connect("focus-in-event", self._show_keyboard)
-            self.labels['profile_name'].grab_focus_without_selecting()
+            self.labels['profile_name'].connect("focus-in-event", self._screen.show_keyboard)
 
             save = self._gtk.Button("complete", _("Save"), "color3")
             save.set_hexpand(False)
@@ -256,11 +255,8 @@ class BedMeshPanel(ScreenPanel):
             self.labels['create_profile'].pack_start(box, True, True, 5)
 
         self.content.add(self.labels['create_profile'])
-        self._show_keyboard()
+        self.labels['profile_name'].grab_focus_without_selecting()
         self.show_create = True
-
-    def _show_keyboard(self, widget=None, event=None):
-        self._screen.show_keyboard(entry=self.labels['profile_name'])
 
     def create_profile(self, widget):
         name = self.labels['profile_name'].get_text()
