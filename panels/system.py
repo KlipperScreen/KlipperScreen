@@ -234,6 +234,7 @@ class SystemPanel(ScreenPanel):
     def reset_repo(self, widget, program, hard):
         if self._screen.updating:
             return
+        self._screen.base_panel.show_update_dialog()
         msg = _("Starting recovery for") + f' {program}...'
         self._screen._websocket_callback("notify_update_response",
                                          {'application': {program}, 'message': msg, 'complete': False})
@@ -250,7 +251,7 @@ class SystemPanel(ScreenPanel):
             if "package_count" in info and info['package_count'] == 0 \
                     or "version" in info and info['version'] == info['remote_version']:
                 return
-
+        self._screen.base_panel.show_update_dialog()
         msg = _("Updating") if program == "full" else _("Starting update for") + f' {program}...'
         self._screen._websocket_callback("notify_update_response",
                                          {'application': {program}, 'message': msg, 'complete': False})
