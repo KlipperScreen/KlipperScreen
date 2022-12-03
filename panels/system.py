@@ -289,6 +289,7 @@ class SystemPanel(ScreenPanel):
                     self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']} -> {info['remote_version']}")
                     self._needs_update(p, info['version'], info['remote_version'])
             else:
+                logging.info(f"Invalid {p} {info['version']}")
                 self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
                 self.labels[f"{p}_status"].set_label(_("Invalid"))
                 self.labels[f"{p}_status"].get_style_context().add_class('invalid')
