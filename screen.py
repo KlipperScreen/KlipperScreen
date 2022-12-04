@@ -163,7 +163,15 @@ class KlipperScreen(Gtk.Window):
         self.connecting_to_printer = name
         if self._ws is not None and self._ws.connected:
             self._ws.close()
-
+            self.connected_printer = None
+            if self.files:
+                self.files.reset()
+                self.files = None
+            if self.printer:
+                self.printer.reset()
+                self.printer = None
+        self.connecting = True
+        self.initialized = False
         data = {
             "moonraker_host": "127.0.0.1",
             "moonraker_port": "7125",
