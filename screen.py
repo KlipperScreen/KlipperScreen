@@ -398,6 +398,9 @@ class KlipperScreen(Gtk.Window):
         self._ws.send_method("machine.services.restart", {"service": "KlipperScreen"})  # Fallback
 
     def init_style(self):
+        settings = Gtk.Settings.get_default()
+        settings.set_property("gtk-theme-name", "Adwaita")
+        settings.set_property("gtk-application-prefer-dark-theme", False)
         css_data = pathlib.Path(os.path.join(klipperscreendir, "styles", "base.css")).read_text()
 
         with open(os.path.join(klipperscreendir, "styles", "base.conf")) as f:
