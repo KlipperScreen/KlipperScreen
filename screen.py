@@ -612,8 +612,6 @@ class KlipperScreen(Gtk.Window):
         self.process_update("notify_busy", busy)
 
     def state_execute(self, callback):
-        self.reinit_count = 0
-        self.init_printer()
         callback()
 
     def websocket_disconnected(self, msg):
@@ -632,6 +630,8 @@ class KlipperScreen(Gtk.Window):
         self.close_screensaver()
         self.initialized = False
         self.printer_initializing(_("Klipper has disconnected"), remove=True)
+        self.reinit_count = 0
+        self.init_printer()
 
     def state_error(self):
         self.close_screensaver()
@@ -862,11 +862,9 @@ class KlipperScreen(Gtk.Window):
             self.printer_initializing("Error getting printer object data with extra items")
             GLib.timeout_add_seconds(3, self.init_printer)
             return
-
-        tempstore = self.apiclient.send_request("server/temperature_store")
-        if tempstore is not False:
-            self.printer.init_temp_store(tempstore['result'])
         self.printer.process_update(data['result']['status'])
+        self.init_tempstore()
+        GLib.timeout_add_seconds(2, self.init_tempstore)  # If devices changed it takes a while to register
 
         self.files.initialize()
         self.files.refresh_files()
@@ -874,6 +872,9 @@ class KlipperScreen(Gtk.Window):
         logging.info("Printer initialized")
         self.initialized = True
         self.reinit_count = 0
+
+    def init_tempstore(self):
+        self.printer.init_temp_store(self.apiclient.send_request("server/temperature_store"))
 
     def base_panel_show_all(self):
         self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))

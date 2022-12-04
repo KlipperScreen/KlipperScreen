@@ -313,14 +313,15 @@ class Printer:
         if "heater_bed" in self.devices:
             return True
 
-    def init_temp_store(self, result):
-        for dev in result:
-            self.tempstore[dev] = {}
-            if "targets" in result[dev]:
-                self.tempstore[dev]["targets"] = result[dev]["targets"]
-            if "temperatures" in result[dev]:
-                self.tempstore[dev]["temperatures"] = result[dev]["temperatures"]
-        logging.info(f"Temp store: {list(self.tempstore)}")
+    def init_temp_store(self, tempstore):
+        if 'result' in tempstore:
+            if self.tempstore and list(self.tempstore) != list(tempstore['result']):
+                logging.debug("Tempstore has changed")
+                self.tempstore = tempstore['result']
+                self.change_state(self.state)
+            else:
+                self.tempstore = tempstore['result']
+            logging.info(f"Temp store: {list(self.tempstore)}")
 
     def config_section_exists(self, section):
         return section in self.get_config_section_list()
