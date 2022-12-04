@@ -72,10 +72,9 @@ class Printer:
                     or x.startswith('heater_generic ') \
                     or x.startswith('temperature_sensor ') \
                     or x.startswith('temperature_fan '):
-                self.devices[x] = {
-                    "temperature": 0,
-                    "target": 0
-                }
+                self.devices[x] = {"temperature": 0}
+                if not x.startswith('temperature_sensor '):
+                    self.devices[x]["target"] = 0
                 # Support for hiding devices by name
                 name = x.split()[1] if len(x.split()) > 1 else x
                 if not name.startswith("_"):
@@ -282,8 +281,8 @@ class Printer:
         if self.tempstore is not None:
             return list(self.tempstore)
 
-    def get_temp_store_device_has_target(self, device):
-        return device in self.tempstore and "targets" in self.tempstore[device]
+    def device_has_target(self, device):
+        return "target" in self.devices[device] or (device in self.tempstore and "targets" in self.tempstore[device])
 
     def get_temp_store(self, device, section=False, results=0):
         if device not in self.tempstore:

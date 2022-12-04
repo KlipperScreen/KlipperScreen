@@ -34,7 +34,6 @@ class HeaterGraph(Gtk.DrawingArea):
             "fill": fill,
             "rgb": rgb
         }})
-        self.max_length = max(self.max_length, len(self.printer.get_temp_store(name, ev_type)))
 
     @staticmethod
     def event_cb(da, ev):

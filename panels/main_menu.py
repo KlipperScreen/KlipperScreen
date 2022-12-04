@@ -50,7 +50,7 @@ class MainPanel(MenuPanel):
         self.layout.show_all()
 
     def update_graph_visibility(self):
-        if self.left_panel is None:
+        if self.left_panel is None or not self._printer.get_temp_store_devices():
             return
         count = 0
         for device in self.devices:
@@ -131,7 +131,7 @@ class MainPanel(MenuPanel):
 
         rgb = self._gtk.get_temp_color(dev_type)
 
-        can_target = self._printer.get_temp_store_device_has_target(device)
+        can_target = self._printer.device_has_target(device)
         self.labels['da'].add_object(device, "temperatures", rgb, False, True)
         if can_target:
             self.labels['da'].add_object(device, "targets", rgb, True, False)
@@ -224,7 +224,7 @@ class MainPanel(MenuPanel):
         self.left_panel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         self.left_panel.add(scroll)
 
-        for d in self._printer.get_temp_store_devices():
+        for d in (self._printer.get_tools() + self._printer.get_heaters()):
             self.add_device(d)
 
         return self.left_panel
