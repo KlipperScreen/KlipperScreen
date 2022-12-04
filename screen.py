@@ -697,12 +697,12 @@ class KlipperScreen(Gtk.Window):
         if self.connecting:
             return
         if action == "notify_klippy_disconnected":
-            self.printer.change_state("disconnected")
+            self.printer.process_update({'webhooks': {'state': "disconnected"}})
             return
         elif action == "notify_klippy_shutdown":
-            self.printer.change_state("shutdown")
+            self.printer.process_update({'webhooks': {'state': "shutdown"}})
         elif action == "notify_klippy_ready":
-            self.printer.change_state("ready")
+            self.printer.process_update({'webhooks': {'state': "ready"}})
         elif action == "notify_status_update" and self.printer.state != "shutdown":
             self.printer.process_update(data)
         elif action == "notify_filelist_changed":
