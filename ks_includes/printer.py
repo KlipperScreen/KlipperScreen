@@ -24,6 +24,7 @@ class Printer:
         self.tempstore = {}
         self.busy_cb = None
         self.busy = None
+        self.temperature_store_size = None
 
     def reset(self):
         self.config = None
@@ -42,6 +43,7 @@ class Printer:
         self.tempstore = None
         self.busy_cb = None
         self.busy = None
+        self.temperature_store_size = None
 
     def reinit(self, printer_info, data):
         self.config = data['configfile']['config']
@@ -56,6 +58,7 @@ class Printer:
         self.busy = False
         if not self.store_timeout:
             self.store_timeout = GLib.timeout_add_seconds(1, self._update_temp_store)
+        self.tempstore_size = 1200
 
         for x in self.config.keys():
             if x[:8] == "extruder":
@@ -320,6 +323,12 @@ class Printer:
                 self.change_state(self.state)
             else:
                 self.tempstore = tempstore['result']
+            for device in self.tempstore:
+                for x in self.tempstore[device]:
+                    length = len(self.tempstore[device][x])
+                    if length < self.tempstore_size:
+                        for i in range(1, self.tempstore_size - length):
+                            self.tempstore[device][x].insert(0, 0)
             logging.info(f"Temp store: {list(self.tempstore)}")
 
     def config_section_exists(self, section):
@@ -336,10 +345,9 @@ class Printer:
             return False
         for device in self.tempstore:
             for x in self.tempstore[device]:
-                if len(self.tempstore[device][x]) >= 1200:
-                    self.tempstore[device][x].pop(0)
+                self.tempstore[device][x].pop(0)
                 temp = self.get_dev_stat(device, x[:-1])
                 if temp is None:
                     temp = 0
-                self.tempstore[device][x].append(round(temp, 2))
+                self.tempstore[device][x].append(temp)
         return True

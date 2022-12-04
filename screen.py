@@ -886,6 +886,13 @@ class KlipperScreen(Gtk.Window):
 
     def init_tempstore(self):
         self.printer.init_temp_store(self.apiclient.send_request("server/temperature_store"))
+        server_config = self.apiclient.send_request("server/config")
+        if server_config:
+            try:
+                self.printer.tempstore_size = server_config["result"]["config"]["data_store"]["temperature_store_size"]
+                logging.info(f"Temperature store size: {self.printer.tempstore_size}")
+            except KeyError:
+                logging.error("Couldn't get the temperature store size")
 
     def base_panel_show_all(self):
         self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
