@@ -26,6 +26,22 @@ button:active, .button_active {
     background-color: #304C62;
 }
 
+button:disabled,
+button.color1:disabled,
+button.color2:disabled,
+button.color3:disabled,
+button.color4:disabled {
+    border: 0;
+}
+
+button:disabled label,
+button.color1:disabled label,
+button.color2:disabled label,
+button.color3:disabled label,
+button.color4:disabled label {
+    color: grey;
+}
+
 button label {
     margin-top: .25em;
     margin-bottom: .5em;
