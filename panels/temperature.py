@@ -503,22 +503,13 @@ class TemperaturePanel(ScreenPanel):
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
-
-        for x in self._printer.get_tools():
+        for x in (self._printer.get_tools() + self._printer.get_heaters()):
             self.update_temp(
                 x,
                 self._printer.get_dev_stat(x, "temperature"),
                 self._printer.get_dev_stat(x, "target"),
                 self._printer.get_dev_stat(x, "power"),
             )
-        for h in self._printer.get_heaters():
-            self.update_temp(
-                h,
-                self._printer.get_dev_stat(h, "temperature"),
-                self._printer.get_dev_stat(h, "target"),
-                self._printer.get_dev_stat(h, "power"),
-            )
-        return
 
     def show_numpad(self, widget, device=None):
         for d in self.active_heaters:
