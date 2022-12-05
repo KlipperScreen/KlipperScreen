@@ -74,10 +74,9 @@ class SplashScreenPanel(ScreenPanel):
         self.clear_action_bar()
         if self.ks_printer_cfg is not None and self._screen._ws.connected:
             power_devices = self.ks_printer_cfg.get("power_devices", "")
-            power_devices = [str(i.strip()) for i in power_devices.split(',')]
-            if power_devices[0]:
+            if power_devices:
                 logging.info(f"Associated power devices: {power_devices}")
-                self.add_power_button(self._screen.search_power_devices(power_devices))
+                self.add_power_button(power_devices)
 
         if self._screen.initialized:
             self.labels['actions'].add(self.labels['restart'])
@@ -91,11 +90,10 @@ class SplashScreenPanel(ScreenPanel):
         self.labels['actions'].show_all()
 
     def add_power_button(self, powerdevs):
-        if powerdevs is not None:
-            self.labels['power'] = self._gtk.Button("shutdown", _("Power On Printer"), "color3")
-            self.labels['power'].connect("clicked", self._screen.power_on, powerdevs)
-            self.check_power_status()
-            self.labels['actions'].add(self.labels['power'])
+        self.labels['power'] = self._gtk.Button("shutdown", _("Power On Printer"), "color3")
+        self.labels['power'].connect("clicked", self._screen.power_devices, powerdevs, True)
+        self.check_power_status()
+        self.labels['actions'].add(self.labels['power'])
 
     def activate(self):
         self.check_power_status()

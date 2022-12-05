@@ -540,6 +540,7 @@ class KlipperScreen(Gtk.Window):
         close.grab_focus()
         self.screensaver = box
         self.screensaver.show_all()
+        self.power_devices(None, self._config.get_main_config().get("screen_off_devices", ""), on=False)
         return False
 
     def close_screensaver(self, widget=None):
@@ -556,6 +557,7 @@ class KlipperScreen(Gtk.Window):
             logging.info(f"Restoring Dialog {dialog}")
             dialog.show()
         self.show_all()
+        self.power_devices(None, self._config.get_main_config().get("screen_on_devices", ""), on=True)
         return False
 
     def check_dpms_state(self):
@@ -789,32 +791,24 @@ class KlipperScreen(Gtk.Window):
             self.show_panel('splash_screen', "splash_screen", None, 2)
         self.panels['splash_screen'].update_text(msg)
 
-    def search_power_devices(self, power_devices):
-        if self.connected_printer is None or not power_devices:
-            return
+    def search_power_devices(self, devices):
         found_devices = []
-        devices = self.printer.get_power_devices()
-        logging.debug("Power devices: %s", devices)
-        if devices is not None:
-            for device in devices:
-                for power_device in power_devices:
-                    if device == power_device and power_device not in found_devices:
-                        found_devices.append(power_device)
-        if found_devices:
-            logging.info("Found %s", found_devices)
+        if self.connected_printer is None or not devices:
             return found_devices
-        else:
-            logging.info("Associated power devices not found")
-            return None
+        devices = [str(i.strip()) for i in devices.split(',')]
+        power_devices = self.printer.get_power_devices()
+        if power_devices:
+            found_devices = [dev for dev in devices if dev in power_devices]
+            logging.info(f"Found {found_devices}", )
+        return found_devices
 
-    def power_on(self, widget, devices):
-        for device in devices:
-            if self.printer.get_power_device_status(device) == "off":
-                self.show_popup_message(_("Sending Power ON signal to: %s") % devices, level=1)
-                logging.info("%s is OFF, Sending Power ON signal", device)
-                self._ws.klippy.power_device_on(device)
-            elif self.printer.get_power_device_status(device) == "on":
-                logging.info("%s is ON", device)
+    def power_devices(self, widget=None, devices=None, on=False):
+        devs = self.search_power_devices(devices)
+        for dev in devs:
+            if on:
+                self._ws.klippy.power_device_on(dev)
+            else:
+                self._ws.klippy.power_device_off(dev)
 
     def init_printer(self):
         if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:
