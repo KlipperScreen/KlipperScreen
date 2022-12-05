@@ -102,6 +102,7 @@ class ExcludeObjectPanel(ScreenPanel):
                 for obj in self.objects:
                     logging.info(f"Adding {obj['name']}")
                     self.add_object(obj["name"])
+                self.content.show_all()
             with contextlib.suppress(KeyError):
                 # Update current objects
                 if data["exclude_object"]["current_object"]:
