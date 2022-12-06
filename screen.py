@@ -731,6 +731,8 @@ class KlipperScreen(Gtk.Window):
                     self.show_popup_message(data[6:], 1)
                 elif data.startswith("!! "):
                     self.show_popup_message(data[3:], 3)
+                elif "unknown" in data.lower():
+                    self.show_popup_message(data)
                 if "SAVE_CONFIG" in data and self.printer.state == "ready":
                     script = {"script": "SAVE_CONFIG"}
                     self._confirm_send_action(
