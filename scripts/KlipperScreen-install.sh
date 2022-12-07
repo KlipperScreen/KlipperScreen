@@ -109,10 +109,16 @@ create_virtualenv()
     source ${KSENV}/bin/activate
     pip --disable-pip-version-check install -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
     if [ $? -gt 0 ]; then
-        echo "Error: pip install exited with status code $?"
-        echo "Unable to install dependencies, aborting install."
-        deactivate
-        exit 1
+        echo_error "Error: pip install exited with status code $?"
+        echo_text "Trying again with new tools..."
+        sudo apt-get install -y build-essential cmake
+        pip install --upgrade pip setuptools
+        pip install -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
+        if [ $? -gt 0 ]; then
+            echo_error "Unable to install dependencies, aborting install."
+            deactivate
+            exit 1
+        fi
     fi
     deactivate
     echo_ok "Virtual enviroment created"
