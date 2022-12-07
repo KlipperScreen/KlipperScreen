@@ -27,79 +27,58 @@ def format_label(widget, lines=2):
 class KlippyGtk:
     labels = {}
 
-    def __init__(self, screen, width, height, theme, cursor, fontsize_type):
+    def __init__(self, screen):
         self.screen = screen
-        self.width = width
-        self.height = height
-        self.themedir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles", theme, "images")
-        self.cursor = cursor
-        self.font_size_type = fontsize_type
+        self.themedir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles", screen.theme, "images")
+        self.cursor = screen.show_cursor
+        self.font_size_type = screen._config.get_main_config().get("font_size", "medium")
+        self.width = screen.width
+        self.height = screen.height
         self.font_ratio = [33, 49] if self.screen.vertical_mode else [43, 29]
         self.font_size = min(self.width / self.font_ratio[0], self.height / self.font_ratio[1])
         self.img_scale = self.font_size * 2
         self.button_image_scale = 1.38
         self.bsidescale = .65  # Buttons with image at the side
 
-        if fontsize_type == "max":
+        if self.font_size_type == "max":
             self.font_size = self.font_size * 1.2
             self.bsidescale = .7
-        elif fontsize_type == "extralarge":
+        elif self.font_size_type == "extralarge":
             self.font_size = self.font_size * 1.14
             self.img_scale = self.img_scale * 0.7
             self.bsidescale = 1
-        elif fontsize_type == "large":
+        elif self.font_size_type == "large":
             self.font_size = self.font_size * 1.09
             self.img_scale = self.img_scale * 0.9
             self.bsidescale = .8
-        elif fontsize_type == "small":
+        elif self.font_size_type == "small":
             self.font_size = self.font_size * 0.91
             self.bsidescale = .55
         self.img_width = self.font_size * 3
         self.img_height = self.font_size * 3
         self.titlebar_height = self.font_size * 2
-        logging.info(f"Font size: {self.font_size} ({fontsize_type})")
+        logging.info(f"Font size: {self.font_size:.1f} ({self.font_size_type})")
 
         if self.screen.vertical_mode:
             self.action_bar_width = int(self.width)
             self.action_bar_height = int(self.height * .1)
+            self.content_width = self.width
+            self.content_height = self.height - self.titlebar_height - self.action_bar_height
         else:
             self.action_bar_width = int(self.width * .1)
             self.action_bar_height = int(self.height)
+            self.content_width = self.width - self.action_bar_width
+            self.content_height = self.height - self.titlebar_height
+
+        self.keyboard_height = self.content_height * 0.5
+        if (self.height / self.width) >= 3:  # Ultra-tall
+            self.keyboard_height = self.keyboard_height * 0.5
 
         self.color_list = {}  # This is set by screen.py init_style()
         for key in self.color_list:
             if "base" in self.color_list[key]:
                 rgb = [int(self.color_list[key]['base'][i:i + 2], 16) for i in range(0, 6, 2)]
                 self.color_list[key]['rgb'] = rgb
-
-    def get_action_bar_width(self):
-        return self.action_bar_width
-
-    def get_action_bar_height(self):
-        return self.action_bar_height
-
-    def get_content_width(self):
-        if self.screen.vertical_mode:
-            return self.width
-        return self.width - self.action_bar_width
-
-    def get_content_height(self):
-        if self.screen.vertical_mode:
-            return self.height - self.titlebar_height - self.action_bar_height
-        return self.height - self.titlebar_height
-
-    def get_font_size(self):
-        return self.font_size
-
-    def get_titlebar_height(self):
-        return self.titlebar_height
-
-    def get_keyboard_height(self):
-        if (self.height / self.width) >= 3:
-            # Ultra-tall
-            return self.get_content_height() * 0.25
-        else:
-            return self.get_content_height() * 0.5
 
     def get_temp_color(self, device):
         # logging.debug("Color list %s" % self.color_list)

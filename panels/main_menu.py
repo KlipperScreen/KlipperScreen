@@ -47,7 +47,7 @@ class MainPanel(MenuPanel):
             grid.attach(self.labels['menu'], 1, 0, 1, 1)
         self.grid = grid
         self.content.add(self.grid)
-        self.layout.show_all()
+        self.show_all()
 
     def update_graph_visibility(self):
         if self.left_panel is None or not self._printer.get_temp_store_devices():
@@ -209,12 +209,12 @@ class MainPanel(MenuPanel):
 
         name = Gtk.Label("")
         temp = Gtk.Label(_("Temp (°C)"))
-        temp.set_size_request(self._gtk.font_size * 6, -1)
+        temp.get_style_context().add_class("heater-grid-temp")
 
         self.labels['devices'].attach(name, 0, 0, 1, 1)
         self.labels['devices'].attach(temp, 1, 0, 1, 1)
 
-        self.labels['da'] = HeaterGraph(self._printer, self._gtk.get_font_size())
+        self.labels['da'] = HeaterGraph(self._printer, self._gtk.font_size)
         self.labels['da'].set_vexpand(True)
 
         scroll = self._gtk.ScrolledWindow()

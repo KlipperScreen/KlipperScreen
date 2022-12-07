@@ -110,6 +110,7 @@ class KlipperScreen(Gtk.Window):
         self.lang_ltr = set_text_direction(self._config.get_main_config().get("language", None))
 
         self.connect("key-press-event", self._key_press_event)
+        self.connect("configure_event", self.update_size)
         monitor = Gdk.Display.get_default().get_primary_monitor()
         if monitor is None:
             monitor = Gdk.Display.get_default().get_monitor(0)
@@ -118,22 +119,21 @@ class KlipperScreen(Gtk.Window):
         self.width = self._config.get_main_config().getint("width", monitor.get_geometry().width)
         self.height = self._config.get_main_config().getint("height", monitor.get_geometry().height)
         self.set_default_size(self.width, self.height)
-        self.set_resizable(False)
+        self.set_resizable(True)
         if not (self._config.get_main_config().get("width") or self._config.get_main_config().get("height")):
             self.fullscreen()
         self.vertical_mode = self.width < self.height
         logging.info(f"Screen resolution: {self.width}x{self.height}")
         self.theme = self._config.get_main_config().get('theme')
-        show_cursor = self._config.get_main_config().getboolean("show_cursor", fallback=False)
-        self.gtk = KlippyGtk(self, self.width, self.height, self.theme, show_cursor,
-                             self._config.get_main_config().get("font_size", "medium"))
+        self.show_cursor = self._config.get_main_config().getboolean("show_cursor", fallback=False)
+        self.gtk = KlippyGtk(self)
         self.init_style()
         self.set_icon_from_file(os.path.join(klipperscreendir, "styles", "icon.svg"))
 
         self.base_panel = BasePanel(self, title="Base Panel")
-        self.add(self.base_panel.layout)
+        self.add(self.base_panel.main_grid)
         self.show_all()
-        if show_cursor:
+        if self.show_cursor:
             self.get_window().set_cursor(
                 Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.ARROW))
             os.system("xsetroot  -cursor_name  arrow")
@@ -317,32 +317,23 @@ class KlipperScreen(Gtk.Window):
         msg.get_child().set_line_wrap(True)
         msg.get_child().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         msg.connect("clicked", self.close_popup_message)
-
-        close = Gtk.Button(label="<b><big>X</big></b>")
-        close.set_hexpand(False)
-        close.set_vexpand(True)
-        close.get_child().set_use_markup(True)
-        close.set_can_focus(False)
-        close.connect("clicked", self.close_popup_message)
-
-        box = Gtk.Box()
-        box.set_size_request(self.width, -1)
-        box.set_halign(Gtk.Align.CENTER)
-        box.get_style_context().add_class("message_popup")
+        msg.get_style_context().add_class("message_popup")
         if level == 1:
-            box.get_style_context().add_class("message_popup_echo")
+            msg.get_style_context().add_class("message_popup_echo")
         elif level == 2:
-            box.get_style_context().add_class("message_popup_warning")
+            msg.get_style_context().add_class("message_popup_warning")
         else:
-            box.get_style_context().add_class("message_popup_error")
+            msg.get_style_context().add_class("message_popup_error")
 
-        box.add(msg)
-        box.add(close)
+        popup = Gtk.Popover.new(self.base_panel.titlebar)
+        popup.get_style_context().add_class("message_popup_popover")
+        popup.set_size_request(self.width, -1)
+        popup.set_halign(Gtk.Align.CENTER)
+        popup.add(msg)
+        popup.popup()
 
-        self.base_panel.layout.put(box, 0, 0)
-
-        self.show_all()
-        self.popup_message = box
+        self.popup_message = popup
+        self.popup_message.show_all()
 
         if self._config.get_main_config().getboolean('autoclose_popups', True):
             GLib.timeout_add_seconds(10, self.close_popup_message)
@@ -352,8 +343,7 @@ class KlipperScreen(Gtk.Window):
     def close_popup_message(self, widget=None):
         if self.popup_message is None:
             return
-
-        self.base_panel.layout.remove(self.popup_message)
+        self.popup_message.popdown()
         self.popup_message = None
 
     def show_error_modal(self, err, e=""):
@@ -448,7 +438,7 @@ class KlipperScreen(Gtk.Window):
                 style_options['graph_colors']['sensor']['colors'][i]
             )
 
-        css_data = css_data.replace("KS_FONT_SIZE", f"{self.gtk.get_font_size()}")
+        css_data = css_data.replace("KS_FONT_SIZE", f"{self.gtk.font_size}")
 
         style_provider = Gtk.CssProvider()
         style_provider.load_from_data(css_data.encode())
@@ -538,7 +528,8 @@ class KlipperScreen(Gtk.Window):
         box.pack_start(close, True, True, 0)
         box.set_halign(Gtk.Align.CENTER)
         box.get_style_context().add_class("screensaver")
-        self.base_panel.layout.put(box, 0, 0)
+        self.remove(self.base_panel.main_grid)
+        self.add(box)
 
         # Avoid leaving a cursor-handle
         close.grab_focus()
@@ -551,8 +542,9 @@ class KlipperScreen(Gtk.Window):
         if self.screensaver is None:
             return False
         logging.debug("Closing Screensaver")
-        self.base_panel.layout.remove(self.screensaver)
+        self.remove(self.screensaver)
         self.screensaver = None
+        self.add(self.base_panel.main_grid)
         if self.use_dpms:
             self.wake_screen()
         else:
@@ -914,7 +906,7 @@ class KlipperScreen(Gtk.Window):
             return
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        box.set_size_request(self.gtk.get_content_width(), self.gtk.get_keyboard_height())
+        box.set_size_request(self.gtk.content_width, self.gtk.keyboard_height)
 
         if self._config.get_main_config().getboolean("use-matchbox-keyboard", False):
             return self._show_matchbox_keyboard(box)
@@ -969,6 +961,12 @@ class KlipperScreen(Gtk.Window):
             self._menu_go_back(home=True)
         elif keyval_name == "BackSpace" and len(self._cur_panels) > 1 and self.keyboard is None:
             self.base_panel.back()
+
+    def update_size(self, *args):
+        self.width, self.height = self.get_size()
+        if self.vertical_mode != (self.width < self.height):
+            self.reload_panels()
+            self.vertical_mode = self.width < self.height
 
 
 def main():

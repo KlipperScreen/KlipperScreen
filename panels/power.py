@@ -51,8 +51,8 @@ class PowerPanel(ScreenPanel):
         switch.set_hexpand(False)
         switch.set_active(self._screen.printer.get_power_device_status(device) == "on")
         switch.connect("notify::active", self.on_switch, device)
-        switch.set_property("width-request", round(self._gtk.get_font_size() * 7))
-        switch.set_property("height-request", round(self._gtk.get_font_size() * 3.5))
+        switch.set_property("width-request", round(self._gtk.font_size * 7))
+        switch.set_property("height-request", round(self._gtk.font_size * 3.5))
 
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)

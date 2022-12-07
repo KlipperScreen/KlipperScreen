@@ -54,11 +54,11 @@ class BedMeshPanel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
         grid.attach(topbar, 0, 0, 2, 1)
-        self.labels['map'] = BedMap(self._gtk.get_font_size(), self.active_mesh)
+        self.labels['map'] = BedMap(self._gtk.font_size, self.active_mesh)
         if self._screen.vertical_mode:
             grid.attach(self.labels['map'], 0, 2, 2, 1)
             grid.attach(scroll, 0, 3, 2, 1)
-            self.labels['map'].set_size_request(self._gtk.get_content_width(), self._gtk.get_content_height() * .4)
+            self.labels['map'].set_size_request(self._gtk.content_width, self._gtk.content_height * .4)
         else:
             grid.attach(self.labels['map'], 0, 2, 1, 1)
             grid.attach(scroll, 1, 2, 1, 1)

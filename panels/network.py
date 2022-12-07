@@ -166,7 +166,6 @@ class NetworkPanel(ScreenPanel):
 
         delete = self._gtk.Button("delete", style="color3")
         delete.connect("clicked", self.remove_wifi_network, ssid)
-        delete.set_size_request(60, 0)
         delete.set_hexpand(False)
         delete.set_halign(Gtk.Align.END)
 

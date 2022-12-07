@@ -26,8 +26,6 @@ class ScreenPanel:
         self.title = title
         self.devices = {}
         self.active_heaters = []
-        self.layout = Gtk.Layout()
-        self.layout.set_size(screen.width, screen.height)
         self.content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.content.get_style_context().add_class("content")
         self.content.set_hexpand(True)

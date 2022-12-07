@@ -43,18 +43,18 @@ class ExcludeObjectPanel(ScreenPanel):
         grid.attach(Gtk.Separator(), 0, 1, 2, 1)
 
         if self.objects and "polygon" in self.objects[0]:
-            self.labels['map'] = ObjectMap(self._screen, self._printer, self._gtk.get_font_size())
+            self.labels['map'] = ObjectMap(self._screen, self._printer, self._gtk.font_size)
             if self._screen.vertical_mode:
                 grid.attach(self.labels['map'], 0, 2, 2, 1)
                 grid.attach(scroll, 0, 3, 2, 1)
-                scroll.set_size_request(self._gtk.get_content_width(), -1)
+                scroll.set_size_request(self._gtk.content_width, -1)
             else:
                 grid.attach(self.labels['map'], 0, 2, 1, 1)
                 grid.attach(scroll, 1, 2, 1, 1)
                 scroll.set_size_request((self._screen.width * .9) // 2, -1)
         else:
             grid.attach(scroll, 0, 2, 2, 1)
-            scroll.set_size_request(self._gtk.get_content_width(), -1)
+            scroll.set_size_request(self._gtk.content_width, -1)
 
         self.content.add(grid)
         self.content.show_all()

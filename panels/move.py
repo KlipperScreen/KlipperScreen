@@ -233,8 +233,8 @@ class MovePanel(ScreenPanel):
             switch.set_vexpand(False)
             switch.set_active(self._config.get_config().getboolean(option['section'], opt_name))
             switch.connect("notify::active", self.switch_config_option, option['section'], opt_name)
-            switch.set_property("width-request", round(self._gtk.get_font_size() * 7))
-            switch.set_property("height-request", round(self._gtk.get_font_size() * 3.5))
+            switch.set_property("width-request", round(self._gtk.font_size * 7))
+            switch.set_property("height-request", round(self._gtk.font_size * 3.5))
             box.add(switch)
             dev.add(box)
         elif option['type'] == "scale":

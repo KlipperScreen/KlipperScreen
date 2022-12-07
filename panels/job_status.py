@@ -340,7 +340,7 @@ class JobStatusPanel(ScreenPanel):
         r = min(w, h) * .42
 
         ctx.set_source_rgb(0.13, 0.13, 0.13)
-        ctx.set_line_width(self._gtk.get_font_size() * .75)
+        ctx.set_line_width(self._gtk.font_size * .75)
         ctx.translate(w / 2, h / 2)
         ctx.arc(0, 0, r, 0, 2 * pi)
         ctx.stroke()
@@ -773,7 +773,7 @@ class JobStatusPanel(ScreenPanel):
                 height = self._screen.height / 4
             else:
                 width = self._screen.width / 3
-                height = self._gtk.get_content_height() * 0.47
+                height = self._gtk.content_height * 0.47
             pixbuf = self.get_file_image(self.filename, width, height)
             if pixbuf is not None:
                 self.labels['thumbnail'].set_from_pixbuf(pixbuf)
@@ -785,7 +785,7 @@ class JobStatusPanel(ScreenPanel):
             "complete": self.labels['file'].get_label(),
             "current": self.labels['file'].get_label(),
             "position": 0,
-            "limit": (self._screen.width * 37 / 480) // (self._gtk.get_font_size() / 11),
+            "limit": (self._screen.width * 37 / 480) // (self._gtk.font_size / 11),
             "length": len(self.labels['file'].get_label())
         }
         if self.animation_timeout is None and (self.filename_label['length'] - self.filename_label['limit']) > 0:
