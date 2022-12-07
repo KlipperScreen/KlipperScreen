@@ -66,6 +66,10 @@ def set_text_direction(lang=None):
     return True
 
 
+def state_execute(callback):
+    callback()
+
+
 class KlipperScreen(Gtk.Window):
     """ Class for creating a screen for Klipper via HDMI """
     _cur_panels = []
@@ -187,7 +191,7 @@ class KlipperScreen(Gtk.Window):
             break
 
         self.apiclient = KlippyRest(data["moonraker_host"], data["moonraker_port"], data["moonraker_api_key"])
-        self.printer = Printer(self.state_execute)
+        self.printer = Printer(state_execute)
         self.printer.state_callbacks = {
             "disconnected": self.state_disconnected,
             "error": self.state_error,
@@ -623,9 +627,6 @@ class KlipperScreen(Gtk.Window):
 
     def process_busy_state(self, busy):
         self.process_update("notify_busy", busy)
-
-    def state_execute(self, callback):
-        callback()
 
     def websocket_disconnected(self, msg):
         self.printer_initializing(msg, remove=True)
