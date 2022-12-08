@@ -47,7 +47,6 @@ class MainPanel(MenuPanel):
             grid.attach(self.labels['menu'], 1, 0, 1, 1)
         self.grid = grid
         self.content.add(self.grid)
-        self.show_all()
 
     def update_graph_visibility(self):
         if self.left_panel is None or not self._printer.get_temp_store_devices():

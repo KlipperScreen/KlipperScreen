@@ -63,9 +63,6 @@ class ScreenPanel:
     def menu_item_clicked(self, widget, panel, item):
         self._screen.show_panel(panel, item['panel'], item['name'], 1, False)
 
-    def show_all(self):
-        self._screen.show_all()
-
     def load_menu(self, widget, name, title=None):
         if f"{name}_menu" not in self.labels:
             return

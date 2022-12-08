@@ -764,7 +764,7 @@ class JobStatusPanel(ScreenPanel):
             if self.state != "cancelling":
                 self.buttons['button_grid'].attach(self.buttons['menu'], 3, 0, 1, 1)
                 self.can_close = True
-        self.show_all()
+        self.content.show_all()
 
     def show_file_thumbnail(self):
         if self._files.has_thumbnail(self.filename):

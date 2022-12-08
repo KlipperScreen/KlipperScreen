@@ -64,7 +64,6 @@ class TemperaturePanel(ScreenPanel):
             self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
 
         self.content.add(self.grid)
-        self.show_all()
 
     def create_right_panel(self):
         cooldown = self._gtk.Button('cool-down', _('Cooldown'), "color4", self.bts, Gtk.PositionType.LEFT, 1)
