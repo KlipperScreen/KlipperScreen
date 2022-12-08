@@ -165,7 +165,7 @@ class KlipperScreenConfig:
                 strs = (
                     'moonraker_api_key', 'moonraker_host', 'titlebar_name_type',
                     'screw_positions', 'power_devices', 'titlebar_items', 'z_babystep_values',
-                    'extrude_distances', "extrude_speeds",
+                    'extrude_distances', "extrude_speeds", "camera_url",
                 )
                 numbers = (
                     'moonraker_port', 'move_speed_xy', 'move_speed_z',

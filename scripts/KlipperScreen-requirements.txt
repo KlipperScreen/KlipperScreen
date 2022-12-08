@@ -5,3 +5,4 @@ websocket-client==1.4.2
 pycairo==1.22.0
 PyGObject==3.42.2
 python-networkmanager==2.2
+python-mpv==0.5.2

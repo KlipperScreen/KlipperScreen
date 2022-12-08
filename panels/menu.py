@@ -31,10 +31,6 @@ class MenuPanel(ScreenPanel):
         self.content.add(scroll)
 
     def activate(self):
-        self.j2_data = self._printer.get_printer_status_data()
-        self.j2_data.update({
-            'moonraker_connected': self._screen._ws.connected
-        })
         if self._screen.vertical_mode:
             self.arrangeMenuItems(self.items, 3)
         else:
@@ -99,7 +95,8 @@ class MenuPanel(ScreenPanel):
         if enable == "{{ moonraker_connected }}":
             logging.info(f"moonraker connected {self._screen._ws.connected}")
             return self._screen._ws.connected
-
+        elif enable == "{{ camera_configured }}":
+            return self.ks_printer_cfg.get("camera_url", None) is not None
         self.j2_data = self._printer.get_printer_status_data()
         try:
             j2_temp = Template(enable, autoescape=True)
