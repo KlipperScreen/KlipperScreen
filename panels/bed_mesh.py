@@ -68,7 +68,7 @@ class BedMeshPanel(ScreenPanel):
     def activate(self):
         self.load_meshes()
         with contextlib.suppress(KeyError):
-            self.activate_mesh(self._screen.printer.get_stat("bed_mesh", "profile_name"))
+            self.activate_mesh(self._printer.get_stat("bed_mesh", "profile_name"))
 
     def activate_mesh(self, profile):
         if self.active_mesh is not None:
@@ -268,13 +268,13 @@ class BedMeshPanel(ScreenPanel):
 
     def calibrate_mesh(self, widget):
         self._screen.show_popup_message(_("Calibrating"), level=1)
-        if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
+        if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
             self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
 
         self._screen._ws.klippy.gcode_script("BED_MESH_CALIBRATE")
 
         # Load zcalibrate to do a manual mesh
-        if not self._screen.printer.get_probe():
+        if not self._printer.get_probe():
             self.menu_item_clicked(widget, "refresh", {"name": _("Mesh calibrate"), "panel": "zcalibrate"})
 
     def send_clear_mesh(self, widget):

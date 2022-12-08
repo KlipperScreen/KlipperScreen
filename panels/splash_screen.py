@@ -103,13 +103,13 @@ class SplashScreenPanel(ScreenPanel):
 
     def check_power_status(self):
         if 'power' in self.labels:
-            devices = self._screen.printer.get_power_devices()
+            devices = self._printer.get_power_devices()
             if devices is not None:
                 for device in devices:
-                    if self._screen.printer.get_power_device_status(device) == "off":
+                    if self._printer.get_power_device_status(device) == "off":
                         self.labels['power'].set_sensitive(True)
                         break
-                    elif self._screen.printer.get_power_device_status(device) == "on":
+                    elif self._printer.get_power_device_status(device) == "on":
                         self.labels['power'].set_sensitive(False)
 
     def firmware_restart(self, widget):

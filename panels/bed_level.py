@@ -33,7 +33,7 @@ class BedLevelPanel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
         grid.attach(self.buttons['dm'], 0, 0, 1, 1)
 
-        if "screws_tilt_adjust" in self._screen.printer.get_config_section_list():
+        if "screws_tilt_adjust" in self._printer.get_config_section_list():
             self.buttons['screws'] = self._gtk.Button("refresh", _("Screws Adjust"), "color4")
             self.buttons['screws'].connect("clicked", self.screws_tilt_calculate)
             grid.attach(self.buttons['screws'], 0, 1, 1, 1)
@@ -41,7 +41,7 @@ class BedLevelPanel(ScreenPanel):
             self.screws = self._get_screws("screws_tilt_adjust")
             logging.info(f"screws_tilt_adjust: {self.screws}")
 
-            probe = self._screen.printer.get_probe()
+            probe = self._printer.get_probe()
             if probe:
                 if "x_offset" in probe:
                     self.x_offset = round(float(probe['x_offset']), 1)
@@ -57,7 +57,7 @@ class BedLevelPanel(ScreenPanel):
 
             self.screws = new_screws
             logging.info(f"screws with offset: {self.screws}")
-        elif "bed_screws" in self._screen.printer.get_config_section_list():
+        elif "bed_screws" in self._printer.get_config_section_list():
             self.screws = self._get_screws("bed_screws")
             logging.info(f"bed_screws: {self.screws}")
 
@@ -262,7 +262,7 @@ class BedLevelPanel(ScreenPanel):
             self.buttons[key].set_label(f"{value}")
 
     def go_to_position(self, widget, position):
-        if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
+        if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
             self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
         logging.debug(f"Going to position: {position}")
         script = [
@@ -335,7 +335,7 @@ class BedLevelPanel(ScreenPanel):
 
     def _get_screws(self, config_section_name):
         screws = []
-        config_section = self._screen.printer.get_config_section(config_section_name)
+        config_section = self._printer.get_config_section(config_section_name)
         for item in config_section:
             logging.debug(f"{config_section_name}: {config_section[item]}")
             result = re.match(r"([\-0-9\.]+)\s*,\s*([\-0-9\.]+)", config_section[item])
@@ -347,7 +347,7 @@ class BedLevelPanel(ScreenPanel):
         return sorted(screws, key=lambda s: (float(s[1]), float(s[0])))
 
     def screws_tilt_calculate(self, widget):
-        if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
+        if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
             self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
         self.response_count = 0
         self.buttons['screws'].set_sensitive(False)

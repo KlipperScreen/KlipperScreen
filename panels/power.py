@@ -30,10 +30,10 @@ class PowerPanel(ScreenPanel):
         self.content.add(scroll)
 
     def activate(self):
-        devices = self._screen.printer.get_power_devices()
+        devices = self._printer.get_power_devices()
         for x in devices:
             self.devices[x]['switch'].disconnect_by_func(self.on_switch)
-            self.devices[x]['switch'].set_active(self._screen.printer.get_power_device_status(x) == "on")
+            self.devices[x]['switch'].set_active(self._printer.get_power_device_status(x) == "on")
 
             self.devices[x]['switch'].connect("notify::active", self.on_switch, x)
 
@@ -49,7 +49,7 @@ class PowerPanel(ScreenPanel):
 
         switch = Gtk.Switch()
         switch.set_hexpand(False)
-        switch.set_active(self._screen.printer.get_power_device_status(device) == "on")
+        switch.set_active(self._printer.get_power_device_status(device) == "on")
         switch.connect("notify::active", self.on_switch, device)
         switch.set_property("width-request", round(self._gtk.font_size * 7))
         switch.set_property("height-request", round(self._gtk.font_size * 3.5))
@@ -77,7 +77,7 @@ class PowerPanel(ScreenPanel):
         self.labels['devices'].show_all()
 
     def load_power_devices(self):
-        devices = self._screen.printer.get_power_devices()
+        devices = self._printer.get_power_devices()
         for x in devices:
             self.add_device(x)
 

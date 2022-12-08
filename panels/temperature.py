@@ -43,7 +43,7 @@ class TemperaturePanel(ScreenPanel):
             self.show_preheat = True
             selection.extend(self._printer.get_heaters())
         else:
-            current_extruder = self._screen.printer.get_stat("toolhead", "extruder")
+            current_extruder = self._printer.get_stat("toolhead", "extruder")
             if current_extruder:
                 selection.append(current_extruder)
 

@@ -82,7 +82,7 @@ class MovePanel(ScreenPanel):
             grid.attach(self.buttons['z_tilt'], 2, 0, 1, 1)
         elif self._printer.config_section_exists("quad_gantry_level"):
             grid.attach(self.buttons['quad_gantry_level'], 2, 0, 1, 1)
-        elif "delta" in self._screen.printer.get_config_section("printer")['kinematics']:
+        elif "delta" in self._printer.get_config_section("printer")['kinematics']:
             grid.attach(self.buttons['motors_off'], 2, 0, 1, 1)
         else:
             grid.attach(self.buttons['home_xy'], 2, 0, 1, 1)
@@ -164,7 +164,7 @@ class MovePanel(ScreenPanel):
             return
         if action != "notify_status_update":
             return
-        homed_axes = self._screen.printer.get_stat("toolhead", "homed_axes")
+        homed_axes = self._printer.get_stat("toolhead", "homed_axes")
         if homed_axes == "xyz":
             if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
                 self.labels['pos_x'].set_text(f"X: {data['gcode_move']['gcode_position'][0]:.2f}")

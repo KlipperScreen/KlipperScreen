@@ -21,7 +21,7 @@ class ZCalibratePanel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         self.z_offset = None
-        self.probe = self._screen.printer.get_probe()
+        self.probe = self._printer.get_probe()
         if self.probe:
             self.z_offset = float(self.probe['z_offset'])
         logging.info(f"Z offset: {self.z_offset}")
@@ -51,7 +51,7 @@ class ZCalibratePanel(ScreenPanel):
         functions = []
         pobox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         if self._printer.config_section_exists("stepper_z") \
-                and not self._screen.printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"):
+                and not self._printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"):
             self._add_button("Endstop", "endstop", pobox)
             functions.append("endstop")
         if self.probe:
@@ -61,7 +61,7 @@ class ZCalibratePanel(ScreenPanel):
             # This is used to do a manual bed mesh if there is no probe
             self._add_button("Bed mesh", "mesh", pobox)
             functions.append("mesh")
-        if "delta" in self._screen.printer.get_config_section("printer")['kinematics']:
+        if "delta" in self._printer.get_config_section("printer")['kinematics']:
             if "probe" in functions:
                 self._add_button("Delta Automatic", "delta", pobox)
                 functions.append("delta")
@@ -132,7 +132,7 @@ class ZCalibratePanel(ScreenPanel):
 
     def start_calibration(self, widget, method):
         self.labels['popover'].popdown()
-        if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
+        if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
             self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
 
         if method == "probe":
@@ -166,8 +166,8 @@ class ZCalibratePanel(ScreenPanel):
                 speed = self.probe['speed']
 
         # Use safe_z_home position
-        if "safe_z_home" in self._screen.printer.get_config_section_list():
-            safe_z = self._screen.printer.get_config_section("safe_z_home")
+        if "safe_z_home" in self._printer.get_config_section_list():
+            safe_z = self._printer.get_config_section("safe_z_home")
             safe_z_xy = safe_z['home_xy_position']
             safe_z_xy = [str(i.strip()) for i in safe_z_xy.split(',')]
             if x_position is None:
@@ -188,7 +188,7 @@ class ZCalibratePanel(ScreenPanel):
         if x_position is not None and y_position is not None:
             logging.debug(f"Configured probing position X: {x_position} Y: {y_position}")
             self._screen._ws.klippy.gcode_script(f'G0 X{x_position} Y{y_position} F3000')
-        elif "delta" in self._screen.printer.get_config_section("printer")['kinematics']:
+        elif "delta" in self._printer.get_config_section("printer")['kinematics']:
             logging.info("Detected delta kinematics calibrating at 0,0")
             self._screen._ws.klippy.gcode_script('G0 X0 Y0 F3000')
         else:
@@ -197,8 +197,8 @@ class ZCalibratePanel(ScreenPanel):
     def _calculate_position(self):
         logging.debug("Position not configured, probing the middle of the bed")
         try:
-            xmax = float(self._screen.printer.get_config_section("stepper_x")['position_max'])
-            ymax = float(self._screen.printer.get_config_section("stepper_y")['position_max'])
+            xmax = float(self._printer.get_config_section("stepper_x")['position_max'])
+            ymax = float(self._printer.get_config_section("stepper_y")['position_max'])
         except KeyError:
             logging.error("Couldn't get max position from stepper_x and stepper_y")
             return
@@ -231,7 +231,7 @@ class ZCalibratePanel(ScreenPanel):
             self.process_busy(data)
             return
         if action == "notify_status_update":
-            if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":
+            if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
                 self.widgets['zposition'].set_text("Z: ?")
             elif "gcode_move" in data and "gcode_position" in data['gcode_move']:
                 self.update_position(data['gcode_move']['gcode_position'])
