@@ -74,7 +74,7 @@ class SplashScreenPanel(ScreenPanel):
         self.clear_action_bar()
         if self.ks_printer_cfg is not None and self._screen._ws.connected:
             power_devices = self.ks_printer_cfg.get("power_devices", "")
-            if power_devices:
+            if power_devices and self._printer.get_power_devices():
                 logging.info(f"Associated power devices: {power_devices}")
                 self.add_power_button(power_devices)
 
