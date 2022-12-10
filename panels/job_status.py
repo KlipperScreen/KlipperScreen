@@ -422,6 +422,9 @@ class JobStatusPanel(ScreenPanel):
 
     def restart(self, widget):
         if self.filename != "none":
+            if self.state == "error":
+                script = {"script": "SDCARD_RESET_FILE"}
+                self._screen._send_action(None, "printer.gcode.script", script)
             self._screen._ws.klippy.print_start(self.filename)
             self.new_print()
 
