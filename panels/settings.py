@@ -58,10 +58,6 @@ class SettingsPanel(ScreenPanel):
     def add_option(self, boxname, opt_array, opt_name, option):
         if option['type'] is None:
             return
-
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-
         name = Gtk.Label()
         name.set_markup(f"<big><b>{option['name']}</b></big>")
         name.set_hexpand(True)
@@ -75,24 +71,18 @@ class SettingsPanel(ScreenPanel):
         labels.add(name)
 
         dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        dev.get_style_context().add_class("frame-item")
         dev.set_hexpand(True)
         dev.set_vexpand(False)
         dev.set_valign(Gtk.Align.CENTER)
 
         dev.add(labels)
         if option['type'] == "binary":
-            box = Gtk.Box()
-            box.set_vexpand(False)
             switch = Gtk.Switch()
-            switch.set_hexpand(False)
-            switch.set_vexpand(False)
             switch.set_active(self._config.get_config().getboolean(option['section'], opt_name))
             switch.connect("notify::active", self.switch_config_option, option['section'], opt_name,
                            option['callback'] if "callback" in option else None)
-            switch.set_property("width-request", round(self._gtk.get_font_size() * 7))
-            switch.set_property("height-request", round(self._gtk.get_font_size() * 3.5))
-            box.add(switch)
-            dev.add(box)
+            dev.add(switch)
         elif option['type'] == "dropdown":
             dropdown = Gtk.ComboBoxText()
             for i, opt in enumerate(option['options']):
@@ -125,12 +115,9 @@ class SettingsPanel(ScreenPanel):
             open_menu.set_halign(Gtk.Align.END)
             dev.add(open_menu)
 
-        frame.add(dev)
-        frame.show_all()
-
         opt_array[opt_name] = {
             "name": option['name'],
-            "row": frame
+            "row": dev
         }
 
         opts = sorted(list(opt_array), key=lambda x: opt_array[x]['name'])

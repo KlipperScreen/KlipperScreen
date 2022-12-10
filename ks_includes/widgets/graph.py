@@ -34,7 +34,6 @@ class HeaterGraph(Gtk.DrawingArea):
             "fill": fill,
             "rgb": rgb
         }})
-        self.max_length = max(self.max_length, len(self.printer.get_temp_store(name, ev_type)))
 
     @staticmethod
     def event_cb(da, ev):
@@ -92,6 +91,8 @@ class HeaterGraph(Gtk.DrawingArea):
         points_per_pixel = self.max_length / graph_width
         data_points = int(round(graph_width * points_per_pixel, 0))
         max_num = math.ceil(self.get_max_num(data_points) * 1.1 / 10) * 10
+        if points_per_pixel == 0:
+            return
         d_width = 1 / points_per_pixel
 
         d_height_scale = self.graph_lines(ctx, gsize, max_num)
@@ -188,7 +189,7 @@ class HeaterGraph(Gtk.DrawingArea):
             ctx.set_font_size(self.font_size)
             ctx.show_text(f"{h:2}:{m:02}")
             ctx.stroke()
-            i += 1 if self.max_length < 600 else 2
+            i += 1 + self.max_length // 601
 
     def is_showing(self, device):
         return False if device not in self.store else self.store[device]['show']

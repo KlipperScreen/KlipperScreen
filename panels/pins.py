@@ -37,10 +37,6 @@ class OutputPinPanel(ScreenPanel):
                 continue
             self.add_pin(pin)
 
-        frame = Gtk.Frame()
-        frame.set_vexpand(False)
-        self.labels['devices'].attach(frame, 0, -1, 1, 1)
-
     def add_pin(self, pin):
 
         logging.info(f"Adding pin: {pin}")
@@ -73,12 +69,8 @@ class OutputPinPanel(ScreenPanel):
         pin_row.add(name)
         pin_row.add(pin_col)
 
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-        frame.add(pin_row)
-
         self.devices[pin] = {
-            "row": frame,
+            "row": pin_row,
             "scale": scale,
         }
 

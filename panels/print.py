@@ -37,6 +37,9 @@ class PrintPanel(ScreenPanel):
         self.directories = {}
         self.labels['directories'] = {}
         self.labels['files'] = {}
+        self.time_24 = self._config.get_main_config().getboolean("24htime", True)
+        logging.info(f"24h time is {self.time_24}")
+
         sbox = Gtk.Box(spacing=0)
         sbox.set_vexpand(False)
         for i, (name, val) in enumerate(self.sort_items.items(), start=1):
@@ -55,7 +58,7 @@ class PrintPanel(ScreenPanel):
         pbox = Gtk.Box(spacing=0)
         pbox.set_hexpand(True)
         pbox.set_vexpand(False)
-        self.labels['path'] = Gtk.Label("  /")
+        self.labels['path'] = Gtk.Label()
         pbox.add(self.labels['path'])
         self.labels['path_box'] = pbox
 
@@ -78,13 +81,13 @@ class PrintPanel(ScreenPanel):
             self.change_dir(None, "gcodes")
 
     def add_directory(self, directory, show=True):
-        parent_dir = '/'.join(directory.split('/')[:-1])
+        parent_dir = os.path.dirname(directory)
         if directory not in self.filelist:
             self.filelist[directory] = {'directories': [], 'files': [], 'modified': 0}
             self.filelist[parent_dir]['directories'].append(directory)
 
         if directory not in self.labels['directories']:
-            self._create_frame(directory)
+            self._create_row(directory)
         reverse = self.sort_current[1] != 0
         dirs = sorted(
             self.filelist[parent_dir]['directories'],
@@ -99,19 +102,17 @@ class PrintPanel(ScreenPanel):
             self.dir_panels[parent_dir].show_all()
 
     def add_file(self, filepath, show=True):
-
         fileinfo = self._screen.files.get_file_info(filepath)
         if fileinfo is None:
             return
-
-        d = f"gcodes/{filepath}".split('/')[:-1]
-        directory = '/'.join(d)
-        filename = filepath.split('/')[-1]
+        filename = os.path.basename(filepath)
         if filename.startswith("."):
             return
+        directory = os.path.dirname(os.path.join("gcodes", filepath))
+        d = directory.split(os.sep)
         for i in range(1, len(d)):
-            curdir = "/".join(d[:i])
-            newdir = "/".join(d[:i + 1])
+            curdir = os.path.join(*d[:i])
+            newdir = os.path.join(*d[:i + 1])
             if newdir not in self.filelist[curdir]['directories']:
                 if d[i].startswith("."):
                     return
@@ -119,18 +120,18 @@ class PrintPanel(ScreenPanel):
 
         if filename not in self.filelist[directory]['files']:
             for i in range(1, len(d)):
-                curdir = "/".join(d[:i + 1])
+                curdir = os.path.join(*d[:i + 1])
                 if curdir != "gcodes" and fileinfo['modified'] > self.filelist[curdir]['modified']:
                     self.filelist[curdir]['modified'] = fileinfo['modified']
-                    self.labels['directories'][curdir]['info'].set_markup(
-                        '<small>' + _("Modified")
-                        + f' <b>{datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %H:%M}</b></small>'
-                    )
-
+                    if self.time_24:
+                        time = f':<b>  {datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %H:%M}</b>'
+                    else:
+                        time = f':<b>  {datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %I:%M %p}<b>'
+                    self.labels['directories'][curdir]['info'].set_markup(_("Modified") + time)
             self.filelist[directory]['files'].append(filename)
 
         if filepath not in self.files:
-            self._create_frame_file(filename, filepath)
+            self._create_row(filepath, filename)
         reverse = self.sort_current[1] != 0
         files = sorted(
             self.filelist[directory]['files'],
@@ -146,19 +147,21 @@ class PrintPanel(ScreenPanel):
         if show is True:
             self.dir_panels[directory].show_all()
 
-    def _create_frame(self, directory):
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-
+    def _create_row(self, fullpath, filename=None):
         name = Gtk.Label()
-        name.set_markup(f"<big><b>{directory.split('/')[-1]}</b></big>")
+        name.get_style_context().add_class("print-filename")
+        if filename:
+            name.set_markup(f'<big><b>{os.path.splitext(filename)[0].replace("_", " ")}</b></big>')
+        else:
+            name.set_markup(f"<big><b>{os.path.split(fullpath)[-1]}</b></big>")
         name.set_hexpand(True)
         name.set_halign(Gtk.Align.START)
         name.set_line_wrap(True)
-        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        name.set_line_wrap_mode(Pango.WrapMode.CHAR)
 
         info = Gtk.Label()
         info.set_halign(Gtk.Align.START)
+        info.get_style_context().add_class("print-info")
 
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)
@@ -168,76 +171,43 @@ class PrintPanel(ScreenPanel):
         labels.set_halign(Gtk.Align.START)
 
         actions = self._gtk.Button("load", style="color3")
-        actions.connect("clicked", self.change_dir, directory)
         actions.set_hexpand(False)
         actions.set_halign(Gtk.Align.END)
+        if filename:
+            info.set_markup(self.get_file_info_str(fullpath))
+            actions.connect("clicked", self.confirm_print, fullpath)
+            icon = Gtk.Button()
+            icon.connect("clicked", self.confirm_delete_file, f"gcodes/{fullpath}")
+            GLib.idle_add(self.image_load, fullpath)
+        else:
+            actions.connect("clicked", self.change_dir, fullpath)
+            icon = self._gtk.Button("folder")
+            icon.connect("clicked", self.confirm_delete_directory, fullpath)
+        icon.set_hexpand(False)
 
         file = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        file.get_style_context().add_class("frame-item")
         file.set_hexpand(True)
         file.set_vexpand(False)
-
-        icon = self._gtk.Image("folder")
-
         file.add(icon)
         file.add(labels)
-        file.add(actions)
-        frame.add(file)
-
-        self.directories[directory] = frame
-
-        self.labels['directories'][directory] = {
-            "info": info,
-            "name": name
-        }
-
-        self.dir_panels[directory] = Gtk.Grid()
-
-    def _create_frame_file(self, filename, filepath):
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-
-        name = Gtk.Label()
-        name.set_markup(f'<big><b>{os.path.splitext(filename)[0].replace("_", " ")}</b></big>')
-        name.set_hexpand(True)
-        name.set_halign(Gtk.Align.START)
-        name.set_line_wrap(True)
-        name.set_line_wrap_mode(Pango.WrapMode.CHAR)
-
-        info = Gtk.Label()
-        info.set_halign(Gtk.Align.START)
-        info.set_markup(self.get_file_info_str(filepath))
-        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        labels.add(name)
-        labels.add(info)
-        labels.set_vexpand(True)
-        labels.set_valign(Gtk.Align.CENTER)
-        labels.set_halign(Gtk.Align.START)
-
-        actions = self._gtk.Button("print", style="color3")
-        actions.connect("clicked", self.confirm_print, filepath)
-        actions.set_hexpand(False)
-        actions.set_halign(Gtk.Align.END)
-
-        file = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        file.set_hexpand(True)
-        file.set_vexpand(False)
-
-        icon = Gtk.Button()
-        GLib.idle_add(self.image_load, filepath)
-        icon.connect("clicked", self.confirm_delete_file, f"gcodes/{filepath}")
-
-        file.add(icon)
-        file.add(labels)
-        if os.path.splitext(filename)[1] in [".gcode", ".g", ".gco"]:
+        if not filename or (filename and os.path.splitext(filename)[1] in [".gcode", ".g", ".gco"]):
             file.add(actions)
-        frame.add(file)
 
-        self.files[filepath] = frame
-        self.labels['files'][filepath] = {
-            "icon": icon,
-            "info": info,
-            "name": name
-        }
+        if filename is not None:
+            self.files[fullpath] = file
+            self.labels['files'][fullpath] = {
+                "icon": icon,
+                "info": info,
+                "name": name
+            }
+        else:
+            self.directories[fullpath] = file
+            self.labels['directories'][fullpath] = {
+                "info": info,
+                "name": name
+            }
+            self.dir_panels[fullpath] = Gtk.Grid()
 
     def image_load(self, filepath):
         pixbuf = self.get_file_image(filepath, small=True)
@@ -256,9 +226,19 @@ class PrintPanel(ScreenPanel):
             params
         )
 
+    def confirm_delete_directory(self, widget, dirpath):
+        logging.debug(f"Sending delete_directory {dirpath}")
+        params = {"path": f"{dirpath}", "force": True}
+        self._screen._confirm_send_action(
+            None,
+            _("Delete Directory?") + "\n\n" + dirpath,
+            "server.files.delete_directory",
+            params
+        )
+
     def back(self):
-        if len(self.cur_directory.split('/')) > 1:
-            self.change_dir(None, '/'.join(self.cur_directory.split('/')[:-1]))
+        if os.path.dirname(self.cur_directory):
+            self.change_dir(None, os.path.dirname(self.cur_directory))
             return True
         return False
 
@@ -270,7 +250,7 @@ class PrintPanel(ScreenPanel):
         for child in self.scroll.get_children():
             self.scroll.remove(child)
         self.cur_directory = directory
-        self.labels['path'].set_text(f"  /{self.cur_directory[7:]}")
+        self.labels['path'].set_text(f"  {self.cur_directory[7:]}")
 
         self.scroll.add(self.dir_panels[directory])
         self.content.show_all()
@@ -320,7 +300,8 @@ class PrintPanel(ScreenPanel):
             image.set_vexpand(False)
             grid.attach_next_to(image, label, Gtk.PositionType.BOTTOM, 1, 1)
 
-        self._gtk.Dialog(self._screen, buttons, grid, self.confirm_print_response, filename)
+        dialog = self._gtk.Dialog(self._screen, buttons, grid, self.confirm_print_response, filename)
+        dialog.set_title(_("Print"))
 
     def confirm_print_response(self, dialog, response_id, filename):
         self._gtk.remove_dialog(dialog)
@@ -330,27 +311,27 @@ class PrintPanel(ScreenPanel):
         self._screen._ws.klippy.print_start(filename)
 
     def delete_file(self, filename):
-        dir_parts = f"gcodes/{filename}".split('/')[:-1]
-        directory = '/'.join(dir_parts)
-        if directory not in self.filelist or filename.split('/')[-1].startswith("."):
+        directory = os.path.join("gcodes", os.path.dirname(filename)) if os.path.dirname(filename) else "gcodes"
+        if directory not in self.filelist or os.path.basename(filename).startswith("."):
             return
-        self.filelist[directory]["files"].pop(self.filelist[directory]["files"].index(filename.split('/')[-1]))
+        self.filelist[directory]["files"].pop(self.filelist[directory]["files"].index(os.path.basename(filename)))
+        dir_parts = directory.split(os.sep)
         i = len(dir_parts)
         while i > 1:
-            cur_dir = '/'.join(dir_parts[:i])
+            cur_dir = os.path.join(*dir_parts[:i])
             if len(self.filelist[cur_dir]['directories']) > 0 or len(self.filelist[cur_dir]['files']) > 0:
                 break
-            par_dir = '/'.join(cur_dir.split('/')[:-1])
+            parent_dir = os.path.dirname(cur_dir)
 
             if self.cur_directory == cur_dir:
-                self.change_dir(None, par_dir)
+                self.change_dir(None, parent_dir)
 
             del self.filelist[cur_dir]
-            self.filelist[par_dir]['directories'].pop(self.filelist[par_dir]['directories'].index(cur_dir))
-            self.dir_panels[par_dir].remove(self.directories[cur_dir])
+            self.filelist[parent_dir]['directories'].pop(self.filelist[parent_dir]['directories'].index(cur_dir))
+            self.dir_panels[parent_dir].remove(self.directories[cur_dir])
             del self.directories[cur_dir]
             del self.labels['directories'][cur_dir]
-            self.dir_panels[par_dir].show_all()
+            self.dir_panels[parent_dir].show_all()
             i -= 1
 
         self.dir_panels[directory].remove(self.files[filename])
@@ -362,14 +343,16 @@ class PrintPanel(ScreenPanel):
         fileinfo = self._screen.files.get_file_info(filename)
         if fileinfo is None:
             return
-        info = '<small>' + _("Uploaded") + f': <b>{datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %H:%M}</b>\n'
+        info = _("Uploaded")
+        if self.time_24:
+            info += f':<b>  {datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %H:%M}</b>\n'
+        else:
+            info += f':<b>  {datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %I:%M %p}</b>\n'
 
         if "size" in fileinfo:
-            info += _("Size") + f': <b>{self.format_size(fileinfo["size"])}</b>\n'
+            info += _("Size") + f':  <b>{self.format_size(fileinfo["size"])}</b>\n'
         if "estimated_time" in fileinfo:
-            info += _("Print Time") + f': <b>{self.format_time(fileinfo["estimated_time"])}</b>'
-        info += "</small>"
-
+            info += _("Print Time") + f':  <b>{self.format_time(fileinfo["estimated_time"])}</b>'
         return info
 
     def reload_files(self, widget=None):

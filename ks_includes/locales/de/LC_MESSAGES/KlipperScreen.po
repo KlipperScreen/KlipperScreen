@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-21 21:35-0300\n"
-"PO-Revision-Date: 2022-11-21 21:26-0300\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"PO-Revision-Date: 2022-11-30 18:10-0300\n"
+"Last-Translator: livinhack\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +50,7 @@ msgid "Add profile"
 msgstr "Profil hinzufügen"
 
 msgid "Apply"
-msgstr "Sich bewerben"
+msgstr "Anwenden"
 
 #, python-format
 msgid "Apply %.2f offset to Endstop?"
@@ -85,7 +85,7 @@ msgid "Auto-calibrate"
 msgstr "Automatisch kalibrieren"
 
 msgid "Auto-close notifications"
-msgstr "Benachrichtigungen zum automatischen Schließen"
+msgstr "Benachrichtigungen automatisch schließen"
 
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
@@ -106,7 +106,7 @@ msgid "Calibrated"
 msgstr "Kalibriert"
 
 msgid "Calibrated, save configuration to make it permanent"
-msgstr "Kalibriert, Konfiguration speichern, um sie dauerhaft zu machen"
+msgstr "Kalibriert, Konfiguration dauerhaft speichern"
 
 msgid "Calibrating"
 msgstr "Kalibrieren"
@@ -249,22 +249,22 @@ msgid "Fine Tuning"
 msgstr "Feintuning"
 
 msgid "Finish"
-msgstr "Ziel"
+msgstr "Fertig"
 
 msgid "Firmware Restart"
-msgstr "Firmware Neu starten"
+msgstr "Firmware Neustart"
 
 msgid "Flow:"
-msgstr "Fließen:"
+msgstr "Fluss:"
 
 msgid "Flowrate:"
-msgstr "Fließen:"
+msgstr "Fließrate:"
 
 msgid "Font Size"
 msgstr "Schriftgröße"
 
 msgid "Full Update"
-msgstr "Voll Aktualisieren"
+msgstr "Vollständige Aktualisierung"
 
 msgid "Go Back"
 msgstr "Zurück"
@@ -303,7 +303,7 @@ msgid "Homing"
 msgstr "Grundposition"
 
 msgid "Host"
-msgstr ""
+msgstr "Host"
 
 msgid "Hostname"
 msgstr "Hostname"
@@ -318,13 +318,16 @@ msgid "Initializing printer..."
 msgstr "Drucker wird initialisiert..."
 
 msgid "Input Shaper"
-msgstr ""
+msgstr "Input Shaper"
 
 msgid "Interface"
 msgstr "Interface"
 
 msgid "Invalid"
 msgstr "Ungültig"
+
+msgid "Invalid password"
+msgstr "Ungültiges Passwort"
 
 msgid "Invert X"
 msgstr "Achse X invertieren"
@@ -336,10 +339,10 @@ msgid "Invert Z"
 msgstr "Achse Z invertieren"
 
 msgid "Klipper Restart"
-msgstr "Klipper Neu starten"
+msgstr "Klipper Neustart"
 
 msgid "Klipper has disconnected"
-msgstr "Klipper nicht verbunden"
+msgstr "Verbindung zu Klipper getrennt"
 
 msgid "Klipper has encountered an error."
 msgstr "Klipper hat einen Fehler festgestellt."
@@ -352,6 +355,9 @@ msgstr "Klipper ist startbereit"
 
 msgid "Klipper will reboot"
 msgstr "Klipper startet neu"
+
+msgid "KlipperScreen will reboot"
+msgstr "KlipperScreen startet neu"
 
 msgid "Language"
 msgstr "Sprache"
@@ -399,7 +405,7 @@ msgid "Maximum"
 msgstr "Maximal"
 
 msgid "Measure Both"
-msgstr "Messen Sie beides"
+msgstr "Beides messen"
 
 msgid "Measure X"
 msgstr "Messen Sie X"
@@ -463,7 +469,7 @@ msgstr[0] "Paket wird aktualisiert"
 msgstr[1] "Pakete werden aktualisiert"
 
 msgid "Part Fan"
-msgstr ""
+msgstr "Bauteil Lüfter"
 
 msgid "Password saved"
 msgstr "Passwort gespeichert"
@@ -478,7 +484,7 @@ msgid "Perform a full upgrade?"
 msgstr "Vollständiges Upgrade durchführen?"
 
 msgid "Pins"
-msgstr ""
+msgstr "Pins"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Please recompile and flash the micro-controller."
@@ -508,7 +514,7 @@ msgid "Printer Connections"
 msgstr "Drucker Verbindungen"
 
 msgid "Printer Select"
-msgstr "Wählen Sie Drucker"
+msgstr "Wählen Sie einen Drucker"
 
 msgid "Printing"
 msgstr "Drucken"
@@ -519,23 +525,29 @@ msgstr "Sonden-Offset"
 msgid "Profile Name:"
 msgstr "Profilname:"
 
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr ""
+
 msgid "Quad Gantry Level"
 msgstr "Quad Gantry Level"
 
 msgid "Raise Nozzle"
 msgstr "Düse anheben"
 
+msgid "Recover"
+msgstr "Rücksetzen"
+
 msgid "Recover Hard"
-msgstr "Rücksetzen Hard"
+msgstr "Rücksetzen (Hard)"
 
 msgid "Recover Soft"
-msgstr "Rücksetzen Soft"
+msgstr "Rücksetzen (Soft)"
 
 msgid "Reference"
 msgstr "Referenz"
 
 msgid "Refresh"
-msgstr "Aktualisierung"
+msgstr "Aktualisieren"
 
 msgid "Restart"
 msgstr "Neustart"
@@ -559,7 +571,7 @@ msgid "Retry"
 msgstr "Wiederholen"
 
 msgid "Retrying"
-msgstr "Wiederholen"
+msgstr "Wiederhole"
 
 msgid "Save"
 msgstr "Speichern"
@@ -568,13 +580,13 @@ msgid "Save Config"
 msgstr "Einstellungen speichern"
 
 msgid "Save Z"
-msgstr "Speichern Sie Z"
+msgstr "Z speichern"
 
 msgid "Save configuration?"
 msgstr "Konfiguration speichern?"
 
 msgid "Saved"
-msgstr "Gerettet"
+msgstr "Gespeichert"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -612,7 +624,7 @@ msgid "Show Heater Power"
 msgstr "Heizleistung anzeigen"
 
 msgid "Shutdown"
-msgstr "Stilllegen"
+msgstr "Ausschalten"
 
 msgid "Size"
 msgstr "Größe"
@@ -624,13 +636,10 @@ msgid "Slicer Time correction (%)"
 msgstr "Slicer-Zeitkorrektur (%)"
 
 msgid "Slicer:"
-msgstr ""
+msgstr "Slicer:"
 
 msgid "Small"
 msgstr "Klein"
-
-msgid "Sort:"
-msgstr "Sortieren:"
 
 msgid "Speed (mm/s)"
 msgstr "Geschwindigkeit (mm/s)"
@@ -651,7 +660,7 @@ msgid "Start"
 msgstr "Starten"
 
 msgid "Starting WiFi Association"
-msgstr "Wi-Fi Association starten"
+msgstr "Wi-Fi Verbindung starten"
 
 msgid "Starting recovery for"
 msgstr "Starte Wiederherstellung für"
@@ -674,10 +683,6 @@ msgstr "Temp (°C)"
 msgid "Temperature"
 msgstr "Temperatur"
 
-#, python-format
-msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr "Zum Übernehmen von %s benötigt Klipperscreen einen Neustart"
-
 msgid "Total:"
 msgstr "Gesamt:"
 
@@ -694,7 +699,7 @@ msgid "Unretract Extra Length"
 msgstr "Überlänge ausfahren"
 
 msgid "Unretract Speed"
-msgstr "Geschwindigkeit ausfahren"
+msgstr "Ausfahrgeschwindigkeit"
 
 # Respect the number of characters
 # english text barely fits in small screens
@@ -705,7 +710,7 @@ msgid "Update"
 msgstr "Update"
 
 msgid "Updating"
-msgstr "Aktualisierung"
+msgstr "Aktualisiere"
 
 msgid "Uploaded"
 msgstr "Hochgeladen"
@@ -755,6 +760,12 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+msgid "mm³/s"
+msgstr ""
+
+#~ msgid "Sort:"
+#~ msgstr "Sortieren:"
 
 #~ msgid "Calibrating..."
 #~ msgstr "Kalibrieren..."

@@ -51,7 +51,7 @@ class KlippyWebsocket(threading.Thread):
         # Enable a timeout so that way if moonraker is not running, it will attempt to reconnect
         self.connect()
         if self.connecting:
-            GLib.timeout_add_seconds(6, self.reconnect)
+            GLib.timeout_add_seconds(10, self.reconnect)
 
     def connect(self):
         if self.connected:
@@ -282,30 +282,6 @@ class MoonrakerApi:
             callback,
             *args
         )
-
-    def temperature_set(self, heater, target, callback=None, *args):
-        if heater == "heater_bed":
-            logging.debug(f"Sending printer.gcode.script: {KlippyGcodes.set_bed_temp(target)}")
-            return self._ws.send_method(
-                "printer.gcode.script",
-                {
-                    "script": KlippyGcodes.set_bed_temp(target)
-                },
-                callback,
-                *args
-            )
-        else:
-            logging.debug(
-                f'Sending printer.gcode.script: {KlippyGcodes.set_ext_temp(target, heater.replace("tool", ""))}')
-            # TODO: Add max/min limits
-            return self._ws.send_method(
-                "printer.gcode.script",
-                {
-                    "script": KlippyGcodes.set_ext_temp(target, heater.replace("tool", ""))
-                },
-                callback,
-                *args
-            )
 
     def set_bed_temp(self, target, callback=None, *args):
         logging.debug(f"Sending set_bed_temp: {KlippyGcodes.set_bed_temp(target)}")

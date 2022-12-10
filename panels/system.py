@@ -148,7 +148,8 @@ class SystemPanel(ScreenPanel):
                     {"name": _("Recover Soft"), "response": Gtk.ResponseType.APPLY},
                     {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
                 ]
-                self._gtk.Dialog(self._screen, recoverybuttons, scroll, self.reset_confirm, program)
+                dialog = self._gtk.Dialog(self._screen, recoverybuttons, scroll, self.reset_confirm, program)
+                dialog.set_title(_("Recover"))
                 return
             else:
                 if info['version'] == info['remote_version']:
@@ -176,7 +177,7 @@ class SystemPanel(ScreenPanel):
                     commit_box.add(Gtk.Separator())
                     vbox.add(commit_box)
 
-        if "package_count" in info:
+        elif "package_count" in info:
             label.set_markup((
                 f'<b>{info["package_count"]} '
                 + ngettext("Package will be updated", "Packages will be updated", info["package_count"])
@@ -212,7 +213,8 @@ class SystemPanel(ScreenPanel):
             {"name": _("Update"), "response": Gtk.ResponseType.OK},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
         ]
-        self._gtk.Dialog(self._screen, buttons, scroll, self.update_confirm, program)
+        dialog = self._gtk.Dialog(self._screen, buttons, scroll, self.update_confirm, program)
+        dialog.set_title(_("Update"))
 
     def update_confirm(self, dialog, response_id, program):
         self._gtk.remove_dialog(dialog)
@@ -232,6 +234,7 @@ class SystemPanel(ScreenPanel):
     def reset_repo(self, widget, program, hard):
         if self._screen.updating:
             return
+        self._screen.base_panel.show_update_dialog()
         msg = _("Starting recovery for") + f' {program}...'
         self._screen._websocket_callback("notify_update_response",
                                          {'application': {program}, 'message': msg, 'complete': False})
@@ -248,7 +251,7 @@ class SystemPanel(ScreenPanel):
             if "package_count" in info and info['package_count'] == 0 \
                     or "version" in info and info['version'] == info['remote_version']:
                 return
-
+        self._screen.base_panel.show_update_dialog()
         msg = _("Updating") if program == "full" else _("Starting update for") + f' {program}...'
         self._screen._websocket_callback("notify_update_response",
                                          {'application': {program}, 'message': msg, 'complete': False})
@@ -286,6 +289,7 @@ class SystemPanel(ScreenPanel):
                     self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']} -> {info['remote_version']}")
                     self._needs_update(p, info['version'], info['remote_version'])
             else:
+                logging.info(f"Invalid {p} {info['version']}")
                 self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
                 self.labels[f"{p}_status"].set_label(_("Invalid"))
                 self.labels[f"{p}_status"].get_style_context().add_class('invalid')
@@ -326,7 +330,11 @@ class SystemPanel(ScreenPanel):
             {"name": _("Printer"), "response": Gtk.ResponseType.APPLY},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
         ]
-        self._gtk.Dialog(self._screen, buttons, scroll, self.reboot_poweroff_confirm, method)
+        dialog = self._gtk.Dialog(self._screen, buttons, scroll, self.reboot_poweroff_confirm, method)
+        if method == "reboot":
+            dialog.set_title(_("Restart"))
+        else:
+            dialog.set_title(_("Shutdown"))
 
     def reboot_poweroff_confirm(self, dialog, response_id, method):
         self._gtk.remove_dialog(dialog)

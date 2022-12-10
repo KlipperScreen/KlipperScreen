@@ -50,7 +50,7 @@ class MainPanel(MenuPanel):
         self.layout.show_all()
 
     def update_graph_visibility(self):
-        if self.left_panel is None:
+        if self.left_panel is None or not self._printer.get_temp_store_devices():
             return
         count = 0
         for device in self.devices:
@@ -131,7 +131,7 @@ class MainPanel(MenuPanel):
 
         rgb = self._gtk.get_temp_color(dev_type)
 
-        can_target = self._printer.get_temp_store_device_has_target(device)
+        can_target = self._printer.device_has_target(device)
         self.labels['da'].add_object(device, "temperatures", rgb, False, True)
         if can_target:
             self.labels['da'].add_object(device, "targets", rgb, True, False)
@@ -146,7 +146,7 @@ class MainPanel(MenuPanel):
             name.get_style_context().add_class("graph_label_hidden")
         self.labels['da'].set_showing(device, visible)
 
-        temp = self._gtk.Button(label="")
+        temp = self._gtk.Button(label="", lines=1)
         if can_target:
             temp.connect("clicked", self.show_numpad, device)
 
@@ -209,7 +209,7 @@ class MainPanel(MenuPanel):
 
         name = Gtk.Label("")
         temp = Gtk.Label(_("Temp (°C)"))
-        temp.set_size_request(round(self._gtk.get_font_size() * 7.7), -1)
+        temp.set_size_request(self._gtk.font_size * 6, -1)
 
         self.labels['devices'].attach(name, 0, 0, 1, 1)
         self.labels['devices'].attach(temp, 1, 0, 1, 1)
@@ -224,7 +224,7 @@ class MainPanel(MenuPanel):
         self.left_panel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         self.left_panel.add(scroll)
 
-        for d in self._printer.get_temp_store_devices():
+        for d in (self._printer.get_tools() + self._printer.get_heaters()):
             self.add_device(d)
 
         return self.left_panel
@@ -244,22 +244,13 @@ class MainPanel(MenuPanel):
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
-
-        for x in self._printer.get_tools():
+        for x in (self._printer.get_tools() + self._printer.get_heaters()):
             self.update_temp(
                 x,
                 self._printer.get_dev_stat(x, "temperature"),
                 self._printer.get_dev_stat(x, "target"),
                 self._printer.get_dev_stat(x, "power"),
             )
-        for h in self._printer.get_heaters():
-            self.update_temp(
-                h,
-                self._printer.get_dev_stat(h, "temperature"),
-                self._printer.get_dev_stat(h, "target"),
-                self._printer.get_dev_stat(h, "power"),
-            )
-        return
 
     def show_numpad(self, widget, device):
 

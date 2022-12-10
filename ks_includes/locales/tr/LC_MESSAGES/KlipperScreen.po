@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-21 21:35-0300\n"
-"PO-Revision-Date: 2022-11-27 13:59+0300\n"
+"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"PO-Revision-Date: 2022-11-30 18:15-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -326,6 +326,9 @@ msgstr "Arayüz"
 msgid "Invalid"
 msgstr "Geçersiz"
 
+msgid "Invalid password"
+msgstr ""
+
 msgid "Invert X"
 msgstr "X Ters çevir"
 
@@ -352,6 +355,9 @@ msgstr "Klipper başlatılmaya çalışılıyor"
 
 msgid "Klipper will reboot"
 msgstr "Klipper yeniden başlayacak"
+
+msgid "KlipperScreen will reboot"
+msgstr "KlipperScreen yeniden başlayacak"
 
 msgid "Language"
 msgstr "Dil"
@@ -519,11 +525,17 @@ msgstr "Prob ofseti"
 msgid "Profile Name:"
 msgstr "Profil ismi:"
 
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr ""
+
 msgid "Quad Gantry Level"
 msgstr "Dörtlü Köprü Seviyesi"
 
 msgid "Raise Nozzle"
 msgstr "Nozzle yükselt"
+
+msgid "Recover"
+msgstr "Kurtar"
 
 msgid "Recover Hard"
 msgstr "Zorla Kurtar"
@@ -629,9 +641,6 @@ msgstr "Dilimleyici:"
 msgid "Small"
 msgstr "Küçük"
 
-msgid "Sort:"
-msgstr "Sırala:"
-
 msgid "Speed (mm/s)"
 msgstr "Hız  (mm/s)"
 
@@ -673,10 +682,6 @@ msgstr "Sıcaklık (°C)"
 
 msgid "Temperature"
 msgstr "Sıcaklık"
-
-#, python-format
-msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr "Uygulamak için %s KlipperScreen yeniden başlatılmalı"
 
 msgid "Total:"
 msgstr "Toplam:"
@@ -753,6 +758,12 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+msgid "mm³/s"
+msgstr "mm³/s"
+
+#~ msgid "Sort:"
+#~ msgstr "Sırala:"
 
 #~ msgid "Calibrating..."
 #~ msgstr "Kalibre Ediliyor..."

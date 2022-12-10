@@ -68,7 +68,7 @@ class TemperaturePanel(ScreenPanel):
 
     def create_right_panel(self):
         cooldown = self._gtk.Button('cool-down', _('Cooldown'), "color4", self.bts, Gtk.PositionType.LEFT, 1)
-        adjust = self._gtk.Button('fine-tune', None, "color3", self.bts, Gtk.PositionType.LEFT, 1)
+        adjust = self._gtk.Button('fine-tune', None, "color3", self.bts * 1.4, Gtk.PositionType.LEFT, 1)
         cooldown.connect("clicked", self.set_temperature, "cooldown")
         adjust.connect("clicked", self.switch_preheat_adjust)
 
@@ -106,9 +106,9 @@ class TemperaturePanel(ScreenPanel):
 
     def delta_adjust(self):
         deltagrid = self._gtk.HomogeneousGrid()
-        self.labels["increase"] = self._gtk.Button("increase", _("Increase"), "color1")
+        self.labels["increase"] = self._gtk.Button("increase", None, "color1")
         self.labels["increase"].connect("clicked", self.change_target_temp_incremental, "+")
-        self.labels["decrease"] = self._gtk.Button("decrease", _("Decrease"), "color3")
+        self.labels["decrease"] = self._gtk.Button("decrease", None, "color3")
         self.labels["decrease"].connect("clicked", self.change_target_temp_incremental, "-")
 
         tempgrid = Gtk.Grid()
@@ -175,6 +175,8 @@ class TemperaturePanel(ScreenPanel):
                 logging.info(f"Setting {heater} to {target}")
 
     def update_graph_visibility(self):
+        if not self._printer.get_temp_store_devices():
+            return
         count = 0
         for device in self.devices:
             visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}",
@@ -335,7 +337,7 @@ class TemperaturePanel(ScreenPanel):
         else:
             name.get_style_context().add_class("graph_label_hidden")
 
-        can_target = self._printer.get_temp_store_device_has_target(device)
+        can_target = self._printer.device_has_target(device)
         self.labels['da'].add_object(device, "temperatures", rgb, False, True)
         if can_target:
             self.labels['da'].add_object(device, "targets", rgb, True, False)
@@ -345,7 +347,7 @@ class TemperaturePanel(ScreenPanel):
             name.connect("clicked", self.toggle_visibility, device)
         self.labels['da'].set_showing(device, visible)
 
-        temp = self._gtk.Button(label="")
+        temp = self._gtk.Button(label="", lines=1)
         if can_target:
             temp.connect("clicked", self.show_numpad, device)
 
@@ -426,7 +428,7 @@ class TemperaturePanel(ScreenPanel):
 
         name = Gtk.Label("")
         temp = Gtk.Label(_("Temp (°C)"))
-        temp.set_size_request(round(self._gtk.get_font_size() * 7.7), -1)
+        temp.set_size_request(self._gtk.font_size * 6, -1)
 
         self.labels['devices'].attach(name, 0, 0, 1, 1)
         self.labels['devices'].attach(temp, 1, 0, 1, 1)
@@ -455,7 +457,7 @@ class TemperaturePanel(ScreenPanel):
         popover.connect('closed', self.popover_closed)
         self.labels['popover'] = popover
 
-        for d in self._printer.get_temp_store_devices():
+        for d in (self._printer.get_tools() + self._printer.get_heaters()):
             self.add_device(d)
 
         return self.left_panel
@@ -501,22 +503,13 @@ class TemperaturePanel(ScreenPanel):
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
-
-        for x in self._printer.get_tools():
+        for x in (self._printer.get_tools() + self._printer.get_heaters()):
             self.update_temp(
                 x,
                 self._printer.get_dev_stat(x, "temperature"),
                 self._printer.get_dev_stat(x, "target"),
                 self._printer.get_dev_stat(x, "power"),
             )
-        for h in self._printer.get_heaters():
-            self.update_temp(
-                h,
-                self._printer.get_dev_stat(h, "temperature"),
-                self._printer.get_dev_stat(h, "target"),
-                self._printer.get_dev_stat(h, "power"),
-            )
-        return
 
     def show_numpad(self, widget, device=None):
         for d in self.active_heaters:

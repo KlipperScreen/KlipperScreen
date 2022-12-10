@@ -24,6 +24,7 @@ class Printer:
         self.tempstore = {}
         self.busy_cb = None
         self.busy = None
+        self.temperature_store_size = None
 
     def reset(self):
         self.config = None
@@ -42,6 +43,7 @@ class Printer:
         self.tempstore = None
         self.busy_cb = None
         self.busy = None
+        self.temperature_store_size = None
 
     def reinit(self, printer_info, data):
         self.config = data['configfile']['config']
@@ -56,6 +58,7 @@ class Printer:
         self.busy = False
         if not self.store_timeout:
             self.store_timeout = GLib.timeout_add_seconds(1, self._update_temp_store)
+        self.tempstore_size = 1200
 
         for x in self.config.keys():
             if x[:8] == "extruder":
@@ -72,10 +75,9 @@ class Printer:
                     or x.startswith('heater_generic ') \
                     or x.startswith('temperature_sensor ') \
                     or x.startswith('temperature_fan '):
-                self.devices[x] = {
-                    "temperature": 0,
-                    "target": 0
-                }
+                self.devices[x] = {"temperature": 0}
+                if not x.startswith('temperature_sensor '):
+                    self.devices[x]["target"] = 0
                 # Support for hiding devices by name
                 name = x.split()[1] if len(x.split()) > 1 else x
                 if not name.startswith("_"):
@@ -119,7 +121,7 @@ class Printer:
         # print_stats: standby, printing, paused, error, complete
         # idle_timeout: Idle, Printing, Ready
         if self.data['webhooks']['state'] == "ready" and self.data['print_stats']:
-            if self.data['print_stats']['state'] == 'paused' or self.data.get('pause_resume').get('is_paused'):
+            if self.data['print_stats']['state'] == 'paused':
                 return "paused"
             if self.data['print_stats']['state'] == 'printing':
                 return "printing"
@@ -282,8 +284,8 @@ class Printer:
         if self.tempstore is not None:
             return list(self.tempstore)
 
-    def get_temp_store_device_has_target(self, device):
-        return device in self.tempstore and "targets" in self.tempstore[device]
+    def device_has_target(self, device):
+        return "target" in self.devices[device] or (device in self.tempstore and "targets" in self.tempstore[device])
 
     def get_temp_store(self, device, section=False, results=0):
         if device not in self.tempstore:
@@ -313,14 +315,21 @@ class Printer:
         if "heater_bed" in self.devices:
             return True
 
-    def init_temp_store(self, result):
-        for dev in result:
-            self.tempstore[dev] = {}
-            if "targets" in result[dev]:
-                self.tempstore[dev]["targets"] = result[dev]["targets"]
-            if "temperatures" in result[dev]:
-                self.tempstore[dev]["temperatures"] = result[dev]["temperatures"]
-        logging.info(f"Temp store: {list(self.tempstore)}")
+    def init_temp_store(self, tempstore):
+        if 'result' in tempstore:
+            if self.tempstore and list(self.tempstore) != list(tempstore['result']):
+                logging.debug("Tempstore has changed")
+                self.tempstore = tempstore['result']
+                self.change_state(self.state)
+            else:
+                self.tempstore = tempstore['result']
+            for device in self.tempstore:
+                for x in self.tempstore[device]:
+                    length = len(self.tempstore[device][x])
+                    if length < self.tempstore_size:
+                        for i in range(1, self.tempstore_size - length):
+                            self.tempstore[device][x].insert(0, 0)
+            logging.info(f"Temp store: {list(self.tempstore)}")
 
     def config_section_exists(self, section):
         return section in self.get_config_section_list()
@@ -336,10 +345,9 @@ class Printer:
             return False
         for device in self.tempstore:
             for x in self.tempstore[device]:
-                if len(self.tempstore[device][x]) >= 1200:
-                    self.tempstore[device][x].pop(0)
+                self.tempstore[device][x].pop(0)
                 temp = self.get_dev_stat(device, x[:-1])
                 if temp is None:
                     temp = 0
-                self.tempstore[device][x].append(round(temp, 2))
+                self.tempstore[device][x].append(temp)
         return True

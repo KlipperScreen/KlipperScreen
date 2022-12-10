@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-21 21:35-0300\n"
+"POT-Creation-Date: 2022-11-30 18:17-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -321,6 +321,9 @@ msgstr "Felület"
 msgid "Invalid"
 msgstr "Érvénytelen"
 
+msgid "Invalid password"
+msgstr ""
+
 msgid "Invert X"
 msgstr "Fordított X"
 
@@ -347,6 +350,9 @@ msgstr "Klipper megpróbálja elindítani"
 
 msgid "Klipper will reboot"
 msgstr "A Klipper újraindul"
+
+msgid "KlipperScreen will reboot"
+msgstr "A KlipperScreen újraindul"
 
 msgid "Language"
 msgstr "Nyelv"
@@ -514,11 +520,17 @@ msgstr "Szonda eltolás"
 msgid "Profile Name:"
 msgstr "Profil név:"
 
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr ""
+
 msgid "Quad Gantry Level"
 msgstr "Négy állású szint"
 
 msgid "Raise Nozzle"
 msgstr "Fúvóka fel"
+
+msgid "Recover"
+msgstr "Visszaállítása"
 
 msgid "Recover Hard"
 msgstr "Hárdver visszaállítása"
@@ -624,9 +636,6 @@ msgstr "Szeletelő:"
 msgid "Small"
 msgstr "Kicsi"
 
-msgid "Sort:"
-msgstr "Fajta:"
-
 msgid "Speed (mm/s)"
 msgstr "Sebesség (mm/s)"
 
@@ -668,10 +677,6 @@ msgstr "Hőmérséklet (°C)"
 
 msgid "Temperature"
 msgstr "Hőfok"
-
-#, python-format
-msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr "A %s KlipperScreen alkalmazásához újra kell indítani"
 
 msgid "Total:"
 msgstr "Teljes:"
@@ -748,6 +753,12 @@ msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
+
+msgid "mm³/s"
+msgstr "mm³/s"
+
+#~ msgid "Sort:"
+#~ msgstr "Fajta:"
 
 #~ msgid "Calibrating..."
 #~ msgstr "Kalibrálás..."

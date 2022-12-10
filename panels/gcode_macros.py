@@ -1,5 +1,5 @@
 import logging
-
+import re
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -16,16 +16,14 @@ class MacroPanel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         self.sort_reverse = False
-        self.sort_lbl = _("Name")
-        self.sort_btn = self._gtk.Button("arrow-up", self.sort_lbl, "color1", self.bts, Gtk.PositionType.RIGHT, 1)
+        self.sort_btn = self._gtk.Button("arrow-up", _("Name"), "color1", self.bts, Gtk.PositionType.RIGHT, 1)
         self.sort_btn.connect("clicked", self.change_sort)
         self.sort_btn.set_hexpand(True)
-        self.allmacros = {}
-        self.loaded_macros = []
+        self.options = {}
         self.macros = {}
         self.menu = ['macros_menu']
 
-        adjust = self._gtk.Button("settings", None, "color2", self.bts, Gtk.PositionType.LEFT, 1)
+        adjust = self._gtk.Button("settings", " " + _("Settings"), "color2", self.bts, Gtk.PositionType.LEFT, 1)
         adjust.connect("clicked", self.load_menu, 'options', _("Settings"))
         adjust.set_hexpand(False)
 
@@ -65,7 +63,7 @@ class MacroPanel(ScreenPanel):
         name.set_halign(Gtk.Align.START)
         name.set_valign(Gtk.Align.CENTER)
         name.set_line_wrap(True)
-        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        name.set_line_wrap_mode(Pango.WrapMode.CHAR)
 
         btn = self._gtk.Button("resume", style="color3")
         btn.connect("clicked", self.run_gcode_macro, macro)
@@ -75,27 +73,41 @@ class MacroPanel(ScreenPanel):
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)
 
-        dev = Gtk.Box(spacing=5)
-        dev.add(labels)
-        dev.add(btn)
-
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-        frame.add(dev)
+        row = Gtk.Box(spacing=5)
+        row.get_style_context().add_class("frame-item")
+        row.add(labels)
+        row.add(btn)
 
         self.macros[macro] = {
-            "row": frame
+            "row": row,
+            "params": {},
         }
+        pattern = r'params\.(?P<param>..*)\|default\((?P<default>..*)\).*'
+        gcode = self._printer.get_config_section(f"gcode_macro {macro}")["gcode"].split("\n")
+        i = 0
+        for line in gcode:
+            if line.startswith("{") and "params." in line:
+                result = re.search(pattern, line)
+                if result:
+                    result = result.groupdict()
+                    default = result["default"] if "default" in result else ""
+                    entry = Gtk.Entry()
+                    entry.set_text(default)
+                    self.macros[macro]["params"].update({result["param"]: entry})
 
-        macros = sorted(self.macros, reverse=self.sort_reverse, key=str.casefold)
-        pos = macros.index(macro)
-
-        self.loaded_macros.append(macro)
-        self.labels['macros'].insert_row(pos)
-        self.labels['macros'].attach(self.macros[macro]['row'], 0, pos, 1, 1)
+        for param in self.macros[macro]["params"]:
+            labels.add(Gtk.Label(param))
+            self.macros[macro]["params"][param].connect("focus-in-event", self._screen.show_keyboard)
+            self.macros[macro]["params"][param].connect("focus-out-event", self._screen.remove_keyboard)
+            labels.add(self.macros[macro]["params"][param])
 
     def run_gcode_macro(self, widget, macro):
-        self._screen._ws.klippy.gcode_script(macro)
+        params = ""
+        for param in self.macros[macro]["params"]:
+            value = self.macros[macro]["params"][param].get_text()
+            if value:
+                params += f'{param}={value} '
+        self._screen._ws.klippy.gcode_script(f"{macro} {params}")
 
     def change_sort(self, widget):
         self.sort_reverse ^= True
@@ -110,40 +122,31 @@ class MacroPanel(ScreenPanel):
     def reload_macros(self):
         self.labels['macros'].remove_column(0)
         self.macros = {}
-        self.loaded_macros = []
-        self.allmacros = {}
+        self.options = {}
         self.labels['options'].remove_column(0)
         self.load_gcode_macros()
 
     def load_gcode_macros(self):
-        macros = self._screen.printer.get_gcode_macros()
-        section_name = f"displayed_macros {self._screen.connected_printer}"
-        logging.info(f"Macro section name [{section_name}]")
-
-        for x in macros:
-            macro = x[12:].strip()
-
-            if macro in self.loaded_macros:
+        for macro in self._printer.get_gcode_macros():
+            macro = macro[12:].strip()
+            if macro.startswith("_"):  # Support for hiding macros by name
                 continue
-
-            if (section_name not in self._config.get_config().sections() or
-                    self._config.get_config().getboolean(section_name, macro.lower(), fallback=True)):
-                self.add_gcode_macro(macro)
-
-        for macro in self._printer.get_config_section_list("gcode_macro "):
-            macro = macro[12:]
-            # Support for hiding macros by name
-            if macro.startswith("_"):
-                continue
-
-            self.allmacros[macro] = {
+            self.options[macro] = {
                 "name": macro,
                 "section": f"displayed_macros {self._screen.connected_printer}",
             }
-        for macro in list(self.allmacros):
-            self.add_option('options', self.allmacros, macro, self.allmacros[macro])
+            show = self._config.get_config().getboolean(self.options[macro]["section"], macro.lower(), fallback=True)
+            if macro not in self.macros and show:
+                self.add_gcode_macro(macro)
 
-        self.labels['macros'].show_all()
+        for macro in list(self.options):
+            self.add_option('options', self.options, macro, self.options[macro])
+        macros = sorted(self.macros, reverse=self.sort_reverse, key=str.casefold)
+        for macro in macros:
+            pos = macros.index(macro)
+            self.labels['macros'].insert_row(pos)
+            self.labels['macros'].attach(self.macros[macro]['row'], 0, pos, 1, 1)
+            self.labels['macros'].show_all()
 
     def add_option(self, boxname, opt_array, opt_name, option):
         name = Gtk.Label()
@@ -167,22 +170,19 @@ class MacroPanel(ScreenPanel):
         box.add(switch)
 
         dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        dev.get_style_context().add_class("frame-item")
         dev.set_hexpand(True)
         dev.set_vexpand(False)
         dev.set_valign(Gtk.Align.CENTER)
         dev.add(name)
         dev.add(box)
 
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-        frame.add(dev)
-        frame.show_all()
         opt_array[opt_name] = {
             "name": option['name'],
-            "row": frame
+            "row": dev
         }
 
-        opts = sorted(self.allmacros, key=str.casefold)
+        opts = sorted(self.options, key=str.casefold)
         pos = opts.index(opt_name)
 
         self.labels[boxname].insert_row(pos)

@@ -38,9 +38,6 @@ class PowerPanel(ScreenPanel):
             self.devices[x]['switch'].connect("notify::active", self.on_switch, x)
 
     def add_device(self, device):
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-
         name = Gtk.Label()
         name.set_markup(f"<big><b>{device}</b></big>")
         name.set_hexpand(True)
@@ -66,10 +63,9 @@ class PowerPanel(ScreenPanel):
         dev.set_valign(Gtk.Align.CENTER)
         dev.add(labels)
         dev.add(switch)
-        frame.add(dev)
 
         self.devices[device] = {
-            "row": frame,
+            "row": dev,
             "switch": switch
         }
 
@@ -84,10 +80,6 @@ class PowerPanel(ScreenPanel):
         devices = self._screen.printer.get_power_devices()
         for x in devices:
             self.add_device(x)
-        # Add the line at the top
-        frame = Gtk.Frame()
-        frame.set_vexpand(False)
-        self.labels['devices'].attach(frame, 0, -1, 1, 1)
 
     def on_switch(self, switch, gparam, device):
         logging.debug(f"Power toggled {device}")

@@ -5,16 +5,15 @@ KSPATH=$(sed 's/\/scripts//g' <<< $SCRIPTPATH)
 KSENV="${KLIPPERSCREEN_VENV:-${HOME}/.KlipperScreen-env}"
 
 XSERVER="xinit xinput x11-xserver-utils xserver-xorg-input-evdev xserver-xorg-input-libinput"
-FBTURBO="xserver-xorg-video-fbturbo"
 FBDEV="xserver-xorg-video-fbdev"
 PYTHON="python3-virtualenv virtualenv python3-distutils"
 PYGOBJECT="libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0"
 MISC="librsvg2-common libopenjp2-7 libatlas-base-dev wireless-tools libdbus-glib-1-dev autoconf"
-OPTIONAL="xserver-xorg-legacy fonts-nanum"
+OPTIONAL="xserver-xorg-legacy fonts-nanum fonts-ipafont"
 
 # moonraker will check this list when updating
 # if new packages are required for existing installs add them below too.
-PKGLIST=""
+PKGLIST="libdbus-glib-1-dev autoconf fonts-ipafont"
 
 Red='\033[0;31m'
 Green='\033[0;32m'
@@ -64,19 +63,13 @@ install_packages()
         exit 1
     fi
     sudo apt-get install -y $OPTIONAL
-    sudo apt-get install -y $FBTURBO
+    echo $_
+    sudo apt-get install -y $FBDEV
     if [ $? -eq 0 ]; then
-        echo_ok "Installed FBturbo driver"
+        echo_ok "Installed FBdev"
     else
-        echo $_
-        echo_error "Installation of $FBTURBO failed, trying $FBDEV"
-        sudo apt-get install -y $FBDEV
-        if [ $? -eq 0 ]; then
-            echo_ok "Installed FBdev"
-        else
-            echo_error "Installation of FBdev failed ($FBDEV)"
-            exit 1
-        fi
+        echo_error "Installation of FBdev failed ($FBDEV)"
+        exit 1
     fi
     sudo apt-get install -y $PYTHON
     if [ $? -eq 0 ]; then

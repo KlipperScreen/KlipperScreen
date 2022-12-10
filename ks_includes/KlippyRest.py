@@ -59,20 +59,17 @@ class KlippyRest:
         if data:
             self.status = ''
         else:
-            logging.error(self.status)
+            logging.error(self.status.replace('\n', '>>'))
         return data
 
     @staticmethod
     def format_status(status):
         try:
-            rep = {"HTTPConnectionPool": "", "/server/info ": "", "Caused by ": "", "(": "", ")": "", ": ": "\n"}
+            rep = {"HTTPConnectionPool": "", "/server/info ": "", "Caused by ": "", "(": "", ")": "",
+                   ": ": "\n", "'": "", "`": "", "\"": ""}
             rep = {re.escape(k): v for k, v in rep.items()}
             pattern = re.compile("|".join(rep.keys()))
-            err = ""
-            for _ in pattern.sub(lambda m: rep[re.escape(m.group(0))], f"{status}").split("\n"):
-                if not _ or "urllib3" in _ or _ == "":
-                    continue
-                err += _ + "\n"
-            return err
+            status = pattern.sub(lambda m: rep[re.escape(m.group(0))], f"{status}").split("\n")
+            return "\n".join(_ for _ in status if "urllib3" not in _ and _ != "")
         except TypeError or KeyError:
             return status

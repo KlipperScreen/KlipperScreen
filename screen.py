@@ -8,7 +8,7 @@ import subprocess
 import pathlib
 import traceback  # noqa
 import locale
-
+import sys
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -16,7 +16,6 @@ from gi.repository import Gtk, Gdk, GLib, Pango
 from importlib import import_module
 from jinja2 import Environment
 from signal import SIGTERM
-from sys import exit
 
 from ks_includes import functions
 from ks_includes.KlippyWebsocket import KlippyWebsocket
@@ -86,6 +85,7 @@ class KlipperScreen(Gtk.Window):
     screensaver_timeout = None
     reinit_count = 0
     max_retries = 4
+    initialized = False
 
     def __init__(self, args, version):
         try:
@@ -107,6 +107,8 @@ class KlipperScreen(Gtk.Window):
 
         self.connect("key-press-event", self._key_press_event)
         monitor = Gdk.Display.get_default().get_primary_monitor()
+        if monitor is None:
+            monitor = Gdk.Display.get_default().get_monitor(0)
         if monitor is None:
             raise RuntimeError("Couldn't get default monitor")
         self.width = self._config.get_main_config().getint("width", monitor.get_geometry().width)
@@ -161,7 +163,15 @@ class KlipperScreen(Gtk.Window):
         self.connecting_to_printer = name
         if self._ws is not None and self._ws.connected:
             self._ws.close()
-
+            self.connected_printer = None
+            if self.files:
+                self.files.reset()
+                self.files = None
+            if self.printer:
+                self.printer.reset()
+                self.printer = None
+        self.connecting = True
+        self.initialized = False
         data = {
             "moonraker_host": "127.0.0.1",
             "moonraker_port": "7125",
@@ -255,6 +265,7 @@ class KlipperScreen(Gtk.Window):
         try:
             return self.load_panel[panel](*args)
         except Exception as e:
+            logging.exception(e)
             raise RuntimeError(f"Unable to create panel: {panel}\n{e}") from e
 
     def show_panel(self, panel_name, panel_type, title, remove=None, pop=True, **kwargs):
@@ -274,21 +285,22 @@ class KlipperScreen(Gtk.Window):
                         del self.panels[panel_name]
                     self.show_error_modal(f"Unable to load panel {panel_type}", f"{e}")
                     return
-
-            logging.debug(f"Attaching panel {panel_name}")
-            self.base_panel.add_content(self.panels[panel_name])
-            self.base_panel.show_back(len(self._cur_panels) > 0)
-
-            if hasattr(self.panels[panel_name], "process_update"):
-                self.add_subscription(panel_name)
-            if hasattr(self.panels[panel_name], "activate"):
-                self.panels[panel_name].activate()
-            self.show_all()
+            self._cur_panels.append(panel_name)
+            self.attach_panel(panel_name)
         except Exception as e:
             logging.exception(f"Error attaching panel:\n{e}")
 
-        self._cur_panels.append(panel_name)
+    def attach_panel(self, panel_name):
+        self.base_panel.add_content(self.panels[panel_name])
         logging.debug(f"Current panel hierarchy: {' > '.join(self._cur_panels)}")
+        self.base_panel.show_back(len(self._cur_panels) > 1)
+        if hasattr(self.panels[panel_name], "process_update"):
+            self.add_subscription(panel_name)
+            self.process_update("notify_status_update", self.printer.data)
+            self.process_update("notify_busy", self.printer.busy)
+        if hasattr(self.panels[panel_name], "activate"):
+            self.panels[panel_name].activate()
+        self.show_all()
 
     def show_popup_message(self, message, level=3):
         self.close_screensaver()
@@ -358,7 +370,9 @@ class KlipperScreen(Gtk.Window):
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(message)
 
-        help_notice = Gtk.Label(label="Provide /tmp/KlipperScreen.log when asking for help.\n")
+        help_msg = _("Provide KlipperScreen.log when asking for help.\n")
+        help_msg += _("KlipperScreen will reboot")
+        help_notice = Gtk.Label(label=help_msg)
         help_notice.set_line_wrap(True)
 
         grid = Gtk.Grid()
@@ -371,38 +385,22 @@ class KlipperScreen(Gtk.Window):
         buttons = [
             {"name": _("Go Back"), "response": Gtk.ResponseType.CANCEL}
         ]
-        self.gtk.Dialog(self, buttons, grid, self.error_modal_response)
+        dialog = self.gtk.Dialog(self, buttons, grid, self.error_modal_response)
+        dialog.set_title(_("Error"))
 
     def error_modal_response(self, dialog, response_id):
         self.gtk.remove_dialog(dialog)
-        self.reload_panels()
+        self.restart_ks()
 
-    def restart_warning(self, value):
-        logging.debug(f"Showing restart warning because: {value}")
-
-        buttons = [
-            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL},
-            {"name": _("Restart"), "response": Gtk.ResponseType.OK}
-        ]
-
-        label = Gtk.Label()
-        label.set_markup(_("To apply %s KlipperScreen needs to be restarted") % value)
-        label.set_hexpand(True)
-        label.set_halign(Gtk.Align.CENTER)
-        label.set_vexpand(True)
-        label.set_valign(Gtk.Align.CENTER)
-        label.set_line_wrap(True)
-        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-
-        self.gtk.Dialog(self, buttons, label, self.restart_ks)
-
-    def restart_ks(self, dialog, response_id):
-        self.gtk.remove_dialog(dialog)
-        if response_id == Gtk.ResponseType.OK:
-            logging.debug("Restarting")
-            self._ws.send_method("machine.services.restart", {"service": "KlipperScreen"})
+    def restart_ks(self, *args):
+        logging.debug(f"Restarting {sys.executable} {' '.join(sys.argv)}")
+        os.execv(sys.executable, ['python'] + sys.argv)
+        self._ws.send_method("machine.services.restart", {"service": "KlipperScreen"})  # Fallback
 
     def init_style(self):
+        settings = Gtk.Settings.get_default()
+        settings.set_property("gtk-theme-name", "Adwaita")
+        settings.set_property("gtk-application-prefer-dark-theme", False)
         css_data = pathlib.Path(os.path.join(klipperscreendir, "styles", "base.css")).read_text()
 
         with open(os.path.join(klipperscreendir, "styles", "base.conf")) as f:
@@ -488,7 +486,7 @@ class KlipperScreen(Gtk.Window):
         self.close_screensaver()
 
     def _remove_current_panel(self, pop=True):
-        if len(self._cur_panels) <= 0:
+        if len(self._cur_panels) < 1:
             self.reload_panels()
             return
         self.base_panel.remove(self.panels[self._cur_panels[-1]].content)
@@ -496,30 +494,19 @@ class KlipperScreen(Gtk.Window):
             self.panels[self._cur_panels[-1]].deactivate()
         if self._cur_panels[-1] in self.subscriptions:
             self.subscriptions.remove(self._cur_panels[-1])
-        if pop is True:
-            self._cur_panels.pop()
-            if len(self._cur_panels) > 0:
-                self.base_panel.add_content(self.panels[self._cur_panels[-1]])
-                self.base_panel.show_back(len(self._cur_panels) != 1)
-                if hasattr(self.panels[self._cur_panels[-1]], "activate"):
-                    self.panels[self._cur_panels[-1]].activate()
-                if hasattr(self.panels[self._cur_panels[-1]], "process_update"):
-                    self.add_subscription(self._cur_panels[-1])
-                self.show_all()
+        if pop:
+            del self._cur_panels[-1]
+            self.attach_panel(self._cur_panels[-1])
 
-    def _menu_go_back(self, widget=None):
-        logging.info("#### Menu go back")
+    def _menu_go_back(self, widget=None, home=False):
+        logging.info(f"#### Menu go {'home' if home else 'back'}")
         self.remove_keyboard()
         if self._config.get_main_config().getboolean('autoclose_popups', True):
             self.close_popup_message()
-        self._remove_current_panel(True)
-
-    def _menu_go_home(self, widget=None):
-        logging.info("#### Menu go home")
-        self.remove_keyboard()
-        self.close_popup_message()
         while len(self._cur_panels) > 1:
             self._remove_current_panel()
+            if not home:
+                break
 
     def add_subscription(self, panel_name):
         if panel_name not in self.subscriptions:
@@ -553,6 +540,7 @@ class KlipperScreen(Gtk.Window):
         close.grab_focus()
         self.screensaver = box
         self.screensaver.show_all()
+        self.power_devices(None, self._config.get_main_config().get("screen_off_devices", ""), on=False)
         return False
 
     def close_screensaver(self, widget=None):
@@ -569,6 +557,7 @@ class KlipperScreen(Gtk.Window):
             logging.info(f"Restoring Dialog {dialog}")
             dialog.show()
         self.show_all()
+        self.power_devices(None, self._config.get_main_config().get("screen_on_devices", ""), on=True)
         return False
 
     def check_dpms_state(self):
@@ -613,6 +602,8 @@ class KlipperScreen(Gtk.Window):
             os.system("xset -display :0 +dpms")
             if functions.get_DPMS_state() == functions.DPMS_State.Fail:
                 logging.info("DPMS State FAIL")
+                self.show_popup_message("DPMS has failed to load")
+                self._config.set("main", "use_dpms", "False")
             else:
                 logging.debug("Using DPMS")
                 os.system("xset -display :0 s off")
@@ -634,8 +625,6 @@ class KlipperScreen(Gtk.Window):
         self.process_update("notify_busy", busy)
 
     def state_execute(self, callback):
-        self.reinit_count = 0
-        self.init_printer()
         callback()
 
     def websocket_disconnected(self, msg):
@@ -646,12 +635,16 @@ class KlipperScreen(Gtk.Window):
         self.files = None
         self.printer.reset()
         self.printer = None
+        self.initialized = False
         self.connect_printer(self.connecting_to_printer)
 
     def state_disconnected(self):
         logging.debug("### Going to disconnected")
         self.close_screensaver()
+        self.initialized = False
         self.printer_initializing(_("Klipper has disconnected"), remove=True)
+        self.reinit_count = 0
+        self.init_printer()
 
     def state_error(self):
         self.close_screensaver()
@@ -709,12 +702,12 @@ class KlipperScreen(Gtk.Window):
         if self.connecting:
             return
         if action == "notify_klippy_disconnected":
-            self.printer.change_state("disconnected")
+            self.printer.process_update({'webhooks': {'state': "disconnected"}})
             return
         elif action == "notify_klippy_shutdown":
-            self.printer.change_state("shutdown")
+            self.printer.process_update({'webhooks': {'state': "shutdown"}})
         elif action == "notify_klippy_ready":
-            self.printer.change_state("ready")
+            self.printer.process_update({'webhooks': {'state': "ready"}})
         elif action == "notify_status_update" and self.printer.state != "shutdown":
             self.printer.process_update(data)
         elif action == "notify_filelist_changed":
@@ -726,6 +719,8 @@ class KlipperScreen(Gtk.Window):
             if 'message' in data and 'Error' in data['message']:
                 logging.error(f"{action}:{data['message']}")
                 self.show_popup_message(data['message'], 3)
+                if "KlipperScreen" in data['message']:
+                    self.restart_ks()
         elif action == "notify_power_changed":
             logging.debug("Power status changed: %s", data)
             self.printer.process_power_update(data)
@@ -746,12 +741,10 @@ class KlipperScreen(Gtk.Window):
                     )
         self.process_update(action, data)
 
-    def process_update(self, action, data):
-        self.base_panel.process_update(action, data)
+    def process_update(self, *args):
+        GLib.idle_add(self.base_panel.process_update, *args)
         for x in self.subscriptions:
-            self.panels[x].process_update(action, data)
-        if "job_status" in self._cur_panels:
-            self.panels["job_status"].process_update(action, data)
+            GLib.idle_add(self.panels[x].process_update, *args)
 
     def _confirm_send_action(self, widget, text, method, params=None):
         buttons = [
@@ -779,11 +772,14 @@ class KlipperScreen(Gtk.Window):
         if self.confirm is not None:
             self.gtk.remove_dialog(self.confirm)
         self.confirm = self.gtk.Dialog(self, buttons, label, self._confirm_send_action_response, method, params)
+        self.confirm.set_title("KlipperScreen")
 
     def _confirm_send_action_response(self, dialog, response_id, method, params):
         self.gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.OK:
             self._send_action(None, method, params)
+        if method == "server.files.delete_directory":
+            GLib.timeout_add_seconds(2, self.files.refresh_files)
 
     def _send_action(self, widget, method, params):
         logging.info(f"{method}: {params}")
@@ -795,32 +791,24 @@ class KlipperScreen(Gtk.Window):
             self.show_panel('splash_screen', "splash_screen", None, 2)
         self.panels['splash_screen'].update_text(msg)
 
-    def search_power_devices(self, power_devices):
-        if self.connected_printer is None or not power_devices:
-            return
+    def search_power_devices(self, devices):
         found_devices = []
-        devices = self.printer.get_power_devices()
-        logging.debug("Power devices: %s", devices)
-        if devices is not None:
-            for device in devices:
-                for power_device in power_devices:
-                    if device == power_device and power_device not in found_devices:
-                        found_devices.append(power_device)
-        if found_devices:
-            logging.info("Found %s", found_devices)
+        if self.connected_printer is None or not devices:
             return found_devices
-        else:
-            logging.info("Associated power devices not found")
-            return None
+        devices = [str(i.strip()) for i in devices.split(',')]
+        power_devices = self.printer.get_power_devices()
+        if power_devices:
+            found_devices = [dev for dev in devices if dev in power_devices]
+            logging.info(f"Found {found_devices}", )
+        return found_devices
 
-    def power_on(self, widget, devices):
-        for device in devices:
-            if self.printer.get_power_device_status(device) == "off":
-                self.show_popup_message(_("Sending Power ON signal to: %s") % devices, level=1)
-                logging.info("%s is OFF, Sending Power ON signal", device)
-                self._ws.klippy.power_device_on(device)
-            elif self.printer.get_power_device_status(device) == "on":
-                logging.info("%s is ON", device)
+    def power_devices(self, widget=None, devices=None, on=False):
+        devs = self.search_power_devices(devices)
+        for dev in devs:
+            if on:
+                self._ws.klippy.power_device_on(dev)
+            else:
+                self._ws.klippy.power_device_off(dev)
 
     def init_printer(self):
         if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:
@@ -879,17 +867,26 @@ class KlipperScreen(Gtk.Window):
             self.printer_initializing("Error getting printer object data with extra items")
             GLib.timeout_add_seconds(3, self.init_printer)
             return
-
-        tempstore = self.apiclient.send_request("server/temperature_store")
-        if tempstore is not False:
-            self.printer.init_temp_store(tempstore['result'])
         self.printer.process_update(data['result']['status'])
+        self.init_tempstore()
+        GLib.timeout_add_seconds(2, self.init_tempstore)  # If devices changed it takes a while to register
 
         self.files.initialize()
         self.files.refresh_files()
 
         logging.info("Printer initialized")
+        self.initialized = True
         self.reinit_count = 0
+
+    def init_tempstore(self):
+        self.printer.init_temp_store(self.apiclient.send_request("server/temperature_store"))
+        server_config = self.apiclient.send_request("server/config")
+        if server_config:
+            try:
+                self.printer.tempstore_size = server_config["result"]["config"]["data_store"]["temperature_store_size"]
+                logging.info(f"Temperature store size: {self.printer.tempstore_size}")
+            except KeyError:
+                logging.error("Couldn't get the temperature store size")
 
     def base_panel_show_all(self):
         self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
@@ -904,12 +901,12 @@ class KlipperScreen(Gtk.Window):
     def printer_printing(self):
         self.close_screensaver()
         self.close_popup_message()
-        self.show_panel('job_status', "job_status", _("Printing"), 2)
         self.base_panel_show_all()
         for dialog in self.dialogs:
             self.gtk.remove_dialog(dialog)
+        self.show_panel('job_status', "job_status", _("Printing"), 2)
 
-    def show_keyboard(self, widget=None, event=None, entry=None):
+    def show_keyboard(self, entry=None, event=None):
         if self.keyboard is not None:
             return
 
@@ -948,17 +945,13 @@ class KlipperScreen(Gtk.Window):
             return
         box.get_style_context().add_class("keyboard_box")
         box.add(Keyboard(self, self.remove_keyboard, entry=entry))
-        self.keyboard = {
-            "entry": entry,
-            "box": box
-        }
+        self.keyboard = {"box": box}
         self.base_panel.content.pack_end(box, False, False, 0)
         self.base_panel.content.show_all()
 
     def remove_keyboard(self, widget=None, event=None):
         if self.keyboard is None:
             return
-
         if 'process' in self.keyboard:
             os.kill(self.keyboard['process'].pid, SIGTERM)
         self.base_panel.content.remove(self.keyboard['box'])
@@ -967,7 +960,7 @@ class KlipperScreen(Gtk.Window):
     def _key_press_event(self, widget, event):
         keyval_name = Gdk.keyval_name(event.keyval)
         if keyval_name == "Escape":
-            self._menu_go_home()
+            self._menu_go_back(home=True)
         elif keyval_name == "BackSpace" and len(self._cur_panels) > 1 and self.keyboard is None:
             self.base_panel.back()
 
@@ -1016,4 +1009,4 @@ if __name__ == "__main__":
         main()
     except Exception as ex:
         logging.exception(f"Fatal error in main loop:\n{ex}")
-        exit(1)
+        sys.exit(1)

@@ -66,10 +66,6 @@ entry {
     border-color: #13181C;
 }
 
-frame {
-    border-bottom-color: #444;
-}
-
 label {
     color: white;
 }

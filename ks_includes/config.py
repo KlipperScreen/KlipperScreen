@@ -152,7 +152,7 @@ class KlipperScreenConfig:
                 )
                 strs = (
                     'default_printer', 'language', 'print_sort_dir', 'theme', 'screen_blanking', 'font_size',
-                    'print_estimate_method', 'screen_blanking'
+                    'print_estimate_method', 'screen_blanking', "screen_on_devices", "screen_off_devices",
                 )
                 numbers = (
                     'job_complete_timeout', 'job_error_timeout', 'move_speed_xy', 'move_speed_z',
@@ -223,7 +223,7 @@ class KlipperScreenConfig:
                     {"name": _("System") + " " + _("(default)"), "value": "system_lang"}]}},
             {"theme": {
                 "section": "main", "name": _("Icon Theme"), "type": "dropdown",
-                "value": "z-bolt", "callback": screen.restart_warning, "options": [
+                "value": "z-bolt", "callback": screen.restart_ks, "options": [
                     {"name": "Z-bolt" + " " + _("(default)"), "value": "z-bolt"}]}},
             {"print_estimate_method": {
                 "section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
@@ -243,7 +243,7 @@ class KlipperScreenConfig:
                 "value": "True", "callback": screen.toggle_macro_shortcut}},
             {"font_size": {
                 "section": "main", "name": _("Font Size"), "type": "dropdown",
-                "value": "medium", "callback": screen.restart_warning, "options": [
+                "value": "medium", "callback": screen.restart_ks, "options": [
                     {"name": _("Small"), "value": "small"},
                     {"name": _("Medium") + " " + _("(default)"), "value": "medium"},
                     {"name": _("Large"), "value": "large"},

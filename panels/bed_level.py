@@ -260,7 +260,6 @@ class BedLevelPanel(ScreenPanel):
     def activate(self):
         for key, value in self.screw_dict.items():
             self.buttons[key].set_label(f"{value}")
-        self.process_busy(self._printer.busy)
 
     def go_to_position(self, widget, position):
         if self._screen.printer.get_stat("toolhead", "homed_axes") != "xyz":

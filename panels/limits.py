@@ -103,12 +103,8 @@ class LimitsPanel(ScreenPanel):
         item.attach(scale, 0, 1, 1, 1)
         item.attach(reset, 1, 1, 1, 1)
 
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-        frame.add(item)
-
         self.limits[option] = {
-            "row": frame,
+            "row": item,
             "scale": scale,
             "adjustment": adj,
         }

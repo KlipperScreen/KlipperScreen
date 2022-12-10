@@ -32,6 +32,10 @@ default_printer: Ender 3 Pro
 # To define a full set of custom menues (instead of merging user entries with default entries)
 # set this to False. See Menu section below.
 use_default_menu: True
+
+# Define one or more moonraker power devices that turn on/off with the screensaver (CSV list)
+screen_on_devices: example1, example2
+screen_off_devices:  example1, example2
 ```
 
 ## Printer Options
@@ -76,7 +80,7 @@ calibrate_y_position: 100
 # Bed Screws
 # define the screw positons required for odd number of screws in a comma separated list
 # possible values are: bl, br, bm, fl, fr, fm, lm, rm
-# they correspond to back-left, back-right, back-middle, front-left, front-right, front-middle, left-middle, left-right
+# they correspond to back-left, back-right, back-middle, front-left, front-right, front-middle, left-middle, right-middle
 screw_positions: ""
 
 # Rotation is useful if the screen is not directly in front of the machine.

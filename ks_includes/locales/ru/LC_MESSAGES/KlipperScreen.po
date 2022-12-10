@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-21 21:35-0300\n"
-"PO-Revision-Date: 2022-11-21 21:31-0300\n"
+"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"PO-Revision-Date: 2022-11-30 18:15-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -327,6 +327,9 @@ msgstr "Интерфейс"
 msgid "Invalid"
 msgstr "Неверный"
 
+msgid "Invalid password"
+msgstr ""
+
 msgid "Invert X"
 msgstr "Инверсия X"
 
@@ -353,6 +356,9 @@ msgstr "Klipper готов"
 
 msgid "Klipper will reboot"
 msgstr "Klipper перезагружается"
+
+msgid "KlipperScreen will reboot"
+msgstr "KlipperScreen перезагружается"
 
 msgid "Language"
 msgstr "Язык"
@@ -521,11 +527,17 @@ msgstr "Смещение зонда"
 msgid "Profile Name:"
 msgstr "Имя профиля:"
 
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr ""
+
 msgid "Quad Gantry Level"
 msgstr "Уровень Quad Gantry"
 
 msgid "Raise Nozzle"
 msgstr "Поднять сопло"
+
+msgid "Recover"
+msgstr "Восстановить"
 
 msgid "Recover Hard"
 msgstr "Восстановить Hard"
@@ -631,9 +643,6 @@ msgstr "Слайсер:"
 msgid "Small"
 msgstr "Маленький"
 
-msgid "Sort:"
-msgstr "Сортировать:"
-
 msgid "Speed (mm/s)"
 msgstr "Скорость (мм/с)"
 
@@ -675,10 +684,6 @@ msgstr "Темп  (°С)"
 
 msgid "Temperature"
 msgstr "Tемпература"
-
-#, python-format
-msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr "Чтобы применить %s необходимо перезапустить KlipperScreen"
 
 msgid "Total:"
 msgstr "Итого:"
@@ -757,6 +762,12 @@ msgstr "мм/с"
 
 msgid "mm/s²"
 msgstr "мм/с²"
+
+msgid "mm³/s"
+msgstr "мм/с³"
+
+#~ msgid "Sort:"
+#~ msgstr "Сортировать:"
 
 #~ msgid "Calibrating..."
 #~ msgstr "Калибровка..."
