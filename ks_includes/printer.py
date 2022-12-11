@@ -101,6 +101,8 @@ class Printer:
         logging.info(f"# Output pins: {self.output_pin_count}")
 
     def process_update(self, data):
+        if self.data is None:
+            return
         for x in (self.get_tools() + self.get_heaters() + self.get_filament_sensors()):
             if x in data:
                 for i in data[x]:
@@ -316,7 +318,7 @@ class Printer:
             return True
 
     def init_temp_store(self, tempstore):
-        if 'result' in tempstore:
+        if tempstore and 'result' in tempstore:
             if self.tempstore and list(self.tempstore) != list(tempstore['result']):
                 logging.debug("Tempstore has changed")
                 self.tempstore = tempstore['result']

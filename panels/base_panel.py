@@ -242,7 +242,7 @@ class BasePanel(ScreenPanel):
                             name = f"{name[:1].upper()}: "
                     self.labels[device].set_label(f"{name}{int(temp)}°")
 
-        with contextlib.suppress(KeyError):
+        with contextlib.suppress(Exception):
             if data["toolhead"]["extruder"] != self.current_extruder:
                 self.control['temp_box'].remove(self.labels[f"{self.current_extruder}_box"])
                 self.current_extruder = data["toolhead"]["extruder"]
