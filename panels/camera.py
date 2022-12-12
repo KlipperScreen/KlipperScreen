@@ -49,11 +49,17 @@ class CameraPanel(ScreenPanel):
             self.mpv.terminate()
             self.mpv = None
         # Create mpv after show or the 'window' property will be None
-        self.mpv = mpv.MPV(
-            log_handler=self.log,
-            vo=self.vo,
-            profile='sw-fast',
-        )
+        try:
+            self.mpv = mpv.MPV(
+                log_handler=self.log,
+                vo=self.vo,
+                profile='sw-fast',
+            )
+        except ValueError:
+            self.mpv = mpv.MPV(
+                log_handler=self.log,
+                vo=self.vo,
+            )
         # On wayland mpv cannot be embedded at least for now
         # https://github.com/mpv-player/mpv/issues/9654
         # if fs or self.wayland:
