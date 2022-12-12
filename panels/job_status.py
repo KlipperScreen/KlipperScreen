@@ -559,7 +559,7 @@ class JobStatusPanel(ScreenPanel):
                 )
                 self.buttons['speed'].set_label(self.labels['req_speed'].get_label())
             with contextlib.suppress(KeyError):
-                self.zoffset = data["gcode_move"]["homing_origin"][2]
+                self.zoffset = float(data["gcode_move"]["homing_origin"][2])
                 self.labels['zoffset'].set_label(f"{self.zoffset:.2f} {self.mm}")
         if "motion_report" in data:
             with contextlib.suppress(KeyError):
