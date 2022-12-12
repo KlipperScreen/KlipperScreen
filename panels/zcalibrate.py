@@ -183,7 +183,9 @@ class ZCalibratePanel(ScreenPanel):
 
         speed = 15 if speed is None else speed
         z_hop = 5 if z_hop is None else z_hop
-        self._screen._ws.klippy.gcode_script(f"G0 Z{z_hop} F{float(speed) * 60}")
+        self._screen._ws.klippy.gcode_script(f"G91\nG0 Z{z_hop} F{float(speed) * 60}")
+        if self._printer.get_stat("gcode_move", "absolute_coordinates"):
+            self._screen._ws.klippy.gcode_script("G90")
 
         if x_position is not None and y_position is not None:
             logging.debug(f"Configured probing position X: {x_position} Y: {y_position}")
