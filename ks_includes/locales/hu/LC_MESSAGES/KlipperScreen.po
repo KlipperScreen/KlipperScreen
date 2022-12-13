@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"POT-Creation-Date: 2022-12-13 20:39-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -202,7 +202,7 @@ msgid "Exclude Object"
 msgstr "Objektum kizárása"
 
 msgid "Extra Large"
-msgstr ""
+msgstr "Extra nagy"
 
 msgid "Extrude"
 msgstr "Száladagolás"
@@ -322,7 +322,7 @@ msgid "Invalid"
 msgstr "Érvénytelen"
 
 msgid "Invalid password"
-msgstr ""
+msgstr "Érvénytelen jelszó"
 
 msgid "Invert X"
 msgstr "Fordított X"
@@ -397,7 +397,7 @@ msgid "Max Velocity"
 msgstr "Max sebesség"
 
 msgid "Maximum"
-msgstr ""
+msgstr "Maximum"
 
 msgid "Measure Both"
 msgstr "Mindkettő mérése"
@@ -415,7 +415,7 @@ msgid "Menu"
 msgstr "Menü"
 
 msgid "Mesh calibrate"
-msgstr ""
+msgstr "Háló kalibrálása"
 
 msgid "Modified"
 msgstr "Módosított"
@@ -436,7 +436,7 @@ msgid "Network"
 msgstr "Hálózat"
 
 msgid "Never"
-msgstr ""
+msgstr "Soha"
 
 msgid "New"
 msgstr "Új"
@@ -521,7 +521,7 @@ msgid "Profile Name:"
 msgstr "Profil név:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "Add meg a KlipperScreen.log-ot, amikor segítséget kérsz.\n"
 
 msgid "Quad Gantry Level"
 msgstr "Négy állású szint"
@@ -563,7 +563,7 @@ msgid "Retraction Speed"
 msgstr "Visszahúzási sebesség"
 
 msgid "Retry"
-msgstr ""
+msgstr "Újra"
 
 msgid "Retrying"
 msgstr "Újrapróbálkozás"
