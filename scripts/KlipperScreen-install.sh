@@ -149,7 +149,7 @@ modify_user()
 
 update_x11()
 {
-    if [ -e /etc/X11/Xwrapper.conf ]
+    if [ -e /etc/X11/Xwrapper.config ]
     then
         echo_text "Updating X11 Xwrapper"
         sudo sed -i 's/allowed_users=console/allowed_users=anybody/g' /etc/X11/Xwrapper.config
