@@ -7,12 +7,12 @@ from gi.repository import GLib
 
 
 class Printer:
-    def __init__(self, state_cb):
-        self.config = None
-        self.data = None
+    def __init__(self, state_cb, state_callbacks, busy_cb):
+        self.config = {}
+        self.data = {}
         self.state = "disconnected"
         self.state_cb = state_cb
-        self.state_callbacks = None
+        self.state_callbacks = state_callbacks
         self.devices = {}
         self.power_devices = {}
         self.tools = []
@@ -22,28 +22,9 @@ class Printer:
         self.output_pin_count = 0
         self.store_timeout = None
         self.tempstore = {}
-        self.busy_cb = None
-        self.busy = None
-        self.temperature_store_size = None
-
-    def reset(self):
-        self.config = None
-        self.data = None
-        self.state = None
-        self.state_cb = None
-        self.state_callbacks = None
-        self.devices = None
-        self.power_devices = None
-        self.tools = None
-        self.extrudercount = None
-        self.tempdevcount = None
-        self.fancount = None
-        self.output_pin_count = None
-        self.store_timeout = None
-        self.tempstore = None
-        self.busy_cb = None
-        self.busy = None
-        self.temperature_store_size = None
+        self.busy_cb = busy_cb
+        self.busy = False
+        self.tempstore_size = 1200
 
     def reinit(self, printer_info, data):
         self.config = data['configfile']['config']
