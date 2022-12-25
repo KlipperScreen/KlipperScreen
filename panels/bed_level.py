@@ -15,7 +15,6 @@ def create_panel(*args):
 
 def find_closest(screws, point, remove = False):
     if len(screws) == 0: return None
-    if len(screws) == 1: return screws[0]
     closest = screws[0]
     min_distance = math.dist(closest, point)
     for screw in screws[1:]:
