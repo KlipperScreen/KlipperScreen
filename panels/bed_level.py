@@ -146,10 +146,11 @@ class BedLevelPanel(ScreenPanel):
             # All screws fitted.
             if self.x_cnt > 3: self.x_cnt = 3
             if self.y_cnt > 3: self.y_cnt = 3
+        else:
+            logging.debug(f"Screws not used: {remaining_screws}")
 
         used_screw_cnt = len(self.screws) - len(remaining_screws)
         logging.debug(f"Using {used_screw_cnt}-screw locations [x,y] [{self.x_cnt}x{self.y_cnt}]")
-        logging.debug(f"Screws not used: {remaining_screws}")
 
         button_scale = 2.5
         if self.ks_printer_cfg is not None:
