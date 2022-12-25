@@ -129,12 +129,12 @@ class BedLevelPanel(ScreenPanel):
                 pos = find_closest(remaining_positions, screw)
                 closest = find_closest(remaining_screws, pos)
                 if closest != screw: continue
-                logging.debug(f"Fitted screw {screw} close to {pos}")
                 elif pos == fmp: fm = screw
                 elif pos == bmp: bm = screw
                 elif pos == lmp: lm = screw
                 elif pos == rmp: rm = screw
                         
+                logging.debug(f"Fitted screw {screw} close to {pos}")
                 remaining_positions.remove(pos)
                 remaining_screws.remove(screw)
 
