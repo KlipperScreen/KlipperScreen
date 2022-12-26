@@ -324,9 +324,17 @@ class BedLevelPanel(ScreenPanel):
         for key, value in self.screw_dict.items():
             self.buttons[key].set_label(f"{value}")
 
-    def go_to_position(self, widget, position):
+    def maybe_home_first(self, z_tilt = False):
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
             self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+            z_tilt = True
+
+        if z_tilt and self._printer.config_section_exists("z_tilt"):
+                self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_TILT)
+
+    def go_to_position(self, widget, position):
+        self.maybe_home_first()
+
         logging.debug(f"Going to position: {position}")
         script = [
             f"{KlippyGcodes.MOVE_ABSOLUTE}",
@@ -410,8 +418,7 @@ class BedLevelPanel(ScreenPanel):
         return sorted(screws, key=lambda s: (float(s[1]), float(s[0])))
 
     def screws_tilt_calculate(self, widget):
-        if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+        self.maybe_home_first(z_tilt = True)
         self.response_count = 0
         self.buttons['screws'].set_sensitive(False)
         self._screen._ws.klippy.gcode_script("SCREWS_TILT_CALCULATE")
