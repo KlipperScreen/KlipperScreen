@@ -2,6 +2,8 @@ import logging
 
 import gi
 
+import json
+
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from jinja2 import Environment, Template
@@ -75,15 +77,29 @@ class MenuPanel(ScreenPanel):
 
             env = Environment(extensions=["jinja2.ext.i18n"], autoescape=True)
             env.install_gettext_translations(self._config.get_lang())
-            j2_temp = env.from_string(item['name'])
-            parsed_name = j2_temp.render()
-            style = item['style'] if item['style'] else f"color{(i % 4) + 1}"
 
-            b = self._gtk.Button(item['icon'], parsed_name, style)
+            printer = self._printer.get_printer_status_data()
+
+            name = env.from_string(item['name']).render(printer)
+            icon = env.from_string(item['icon']).render(printer)
+            style = env.from_string(item['style']).render(printer) if item['style'] else None
+
+            b = self._gtk.Button(icon, name, (style if style else f"color{(i % 4) + 1}"))
+
             if item['panel'] is not None:
-                b.connect("clicked", self.menu_item_clicked, item['panel'], item)
+                panel = env.from_string(item['panel']).render(printer)
+                b.connect("clicked", self.menu_item_clicked, panel, item)
             elif item['method'] is not None:
-                params = item['params'] if item['params'] is not False else {}
+                params = {}
+
+                if item['params'] is not False:
+                    try:
+                        p = env.from_string(item['params']).render(printer)
+                        params = json.loads(p)
+                    except Exception as e:
+                        logging.exception(f"Unable to parse parameters for [{name}]:\n{e}")
+                        params = {}
+
                 if item['confirm'] is not None:
                     b.connect("clicked", self._screen._confirm_send_action, item['confirm'], item['method'], params)
                 else:
