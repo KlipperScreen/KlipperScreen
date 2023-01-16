@@ -110,7 +110,7 @@ class WifiManager:
 
         logging.info(f"Attempting to connect to wifi: {netid}")
         self.callback("connecting_status", f"Attempting to connect to {ssid}")
-        self.wpa_cli(f"SELECT_NETWORK {id}")
+        self.wpa_cli(f"SELECT_NETWORK {netid}")
         self.save_wpa_conf()
 
     def delete_network(self, ssid):
