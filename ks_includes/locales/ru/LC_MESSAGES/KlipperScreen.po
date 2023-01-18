@@ -623,7 +623,7 @@ msgid "Show"
 msgstr "Показывать"
 
 msgid "Show Heater Power"
-msgstr "Показать мощьность нагрева"
+msgstr "Показать мощность нагрева"
 
 msgid "Shutdown"
 msgstr "Выключить"
