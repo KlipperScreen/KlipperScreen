@@ -159,12 +159,12 @@ class NetworkPanel(ScreenPanel):
         labels.set_valign(Gtk.Align.CENTER)
         labels.set_halign(Gtk.Align.START)
 
-        connect = self._gtk.Button("load", style="color3")
+        connect = self._gtk.Button("load", None, "color3", .66)
         connect.connect("clicked", self.connect_network, ssid)
         connect.set_hexpand(False)
         connect.set_halign(Gtk.Align.END)
 
-        delete = self._gtk.Button("delete", style="color3")
+        delete = self._gtk.Button("delete", None, "color3", .66)
         delete.connect("clicked", self.remove_wifi_network, ssid)
         delete.set_hexpand(False)
         delete.set_halign(Gtk.Align.END)
@@ -178,6 +178,7 @@ class NetworkPanel(ScreenPanel):
 
         buttons = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
         if network_id != -1 or netinfo['connected']:
+            buttons.pack_end(connect, False, False, 0)
             buttons.pack_end(delete, False, False, 0)
         else:
             buttons.pack_end(connect, False, False, 0)
@@ -386,6 +387,7 @@ class NetworkPanel(ScreenPanel):
             ifadd = netifaces.ifaddresses(self.interface)
             if netifaces.AF_INET in ifadd and len(ifadd[netifaces.AF_INET]) > 0:
                 ipv4 = f"<b>IPv4:</b> {ifadd[netifaces.AF_INET][0]['addr']} "
+                self.labels['ip'].set_text(f"IP: {ifadd[netifaces.AF_INET][0]['addr']}  ")
             if netifaces.AF_INET6 in ifadd and len(ifadd[netifaces.AF_INET6]) > 0:
                 ipv6 = f"<b>IPv6:</b> {ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0]} "
             info = '<b>' + _("Hostname") + f':</b> {hostname}\n{ipv4}\n{ipv6}\n'
@@ -413,6 +415,7 @@ class NetworkPanel(ScreenPanel):
         ipv6 = ""
         if netifaces.AF_INET in ifadd and len(ifadd[netifaces.AF_INET]) > 0:
             ipv4 = f"<b>IPv4:</b> {ifadd[netifaces.AF_INET][0]['addr']} "
+            self.labels['ip'].set_text(f"IP: {ifadd[netifaces.AF_INET][0]['addr']}  ")
         if netifaces.AF_INET6 in ifadd and len(ifadd[netifaces.AF_INET6]) > 0:
             ipv6 = f"<b>IPv6:</b> {ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0]} "
         connected = (
