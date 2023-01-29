@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"POT-Creation-Date: 2023-01-29 09:28-0600\n"
 "PO-Revision-Date: 2022-11-30 18:15-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: \n"
@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.2.1\n"
 "X-Poedit-Flags-xgettext: --add-comments\n"
 
@@ -112,6 +112,9 @@ msgstr "Откалибровано, сохраните конфигурацию,
 msgid "Calibrating"
 msgstr "Калибровка"
 
+msgid "Camera"
+msgstr ""
+
 msgid "Can't set above the maximum:"
 msgstr "Невозможно установить выше максимума:"
 
@@ -173,8 +176,8 @@ msgstr "Остудить"
 msgid "Date"
 msgstr "Дата"
 
-msgid "Decrease"
-msgstr "Уменьшить"
+msgid "Delete Directory?"
+msgstr ""
 
 msgid "Delete File?"
 msgstr "Удалить Файл?"
@@ -267,6 +270,9 @@ msgstr "Размер шрифта"
 msgid "Full Update"
 msgstr "Полный Обновлять"
 
+msgid "Fullscreen"
+msgstr ""
+
 msgid "Go Back"
 msgstr "Назад"
 
@@ -311,9 +317,6 @@ msgstr "Имя хоста"
 
 msgid "Icon Theme"
 msgstr "Темы"
-
-msgid "Increase"
-msgstr "Поднять"
 
 msgid "Initializing printer..."
 msgstr "Принтер стартует..."
@@ -551,6 +554,9 @@ msgstr "Ссылка"
 msgid "Refresh"
 msgstr "Обновить"
 
+msgid "Rename/Move:"
+msgstr ""
+
 msgid "Restart"
 msgstr "Перезагрузка"
 
@@ -608,10 +614,6 @@ msgstr "Выбирать"
 
 msgid "Send"
 msgstr "Отправить"
-
-#, python-format
-msgid "Sending Power ON signal to: %s"
-msgstr "Отправка сигнала включения питания на: %s"
 
 msgid "Set Temp"
 msgstr "Заданная температура"
@@ -765,6 +767,16 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм/с³"
+
+#~ msgid "Decrease"
+#~ msgstr "Уменьшить"
+
+#~ msgid "Increase"
+#~ msgstr "Поднять"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "Отправка сигнала включения питания на: %s"
 
 #~ msgid "Sort:"
 #~ msgstr "Сортировать:"
