@@ -92,6 +92,10 @@ install_packages()
         echo_error "Installation of Misc packages failed ($MISC)"
         exit 1
     fi
+#     ModemManager interferes with klipper comms
+#     on buster it's installed as a dependency of mpv
+#     it doesn't happen on bullseye
+    sudo systemctl mask ModemManager.service
 }
 
 create_virtualenv()
