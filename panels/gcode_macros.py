@@ -65,7 +65,7 @@ class MacroPanel(ScreenPanel):
         name.set_line_wrap(True)
         name.set_line_wrap_mode(Pango.WrapMode.CHAR)
 
-        btn = self._gtk.Button("resume", style="color3")
+        btn = self._gtk.Button("playmacro", style="macrocolor")
         btn.connect("clicked", self.run_gcode_macro, macro)
         btn.set_hexpand(False)
         btn.set_halign(Gtk.Align.END)

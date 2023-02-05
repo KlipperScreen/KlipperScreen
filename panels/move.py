@@ -22,12 +22,12 @@ class MovePanel(ScreenPanel):
         self.settings = {}
         self.menu = ['move_menu']
         self.buttons = {
-            'x+': self._gtk.Button("arrow-right", "X+", "color1"),
-            'x-': self._gtk.Button("arrow-left", "X-", "color1"),
-            'y+': self._gtk.Button("arrow-up", "Y+", "color2"),
-            'y-': self._gtk.Button("arrow-down", "Y-", "color2"),
-            'z+': self._gtk.Button("z-farther", "Z+", "color3"),
-            'z-': self._gtk.Button("z-closer", "Z-", "color3"),
+            'x+': self._gtk.Button("arrow-right", "X +", "color1"),
+            'x-': self._gtk.Button("arrow-left", "X -", "color1"),
+            'y+': self._gtk.Button("arrow-down", "Y +", "color2"),
+            'y-': self._gtk.Button("arrow-up", "Y -", "color2"),
+            'z+': self._gtk.Button("z-farther", "Z +", "color3"),
+            'z-': self._gtk.Button("z-closer", "Z -", "color3"),
             'home': self._gtk.Button("home", _("Home All"), "color4"),
             'home_xy': self._gtk.Button("home", _("Home XY"), "color4"),
             'z_tilt': self._gtk.Button("z-tilt", _("Z Tilt"), "color4"),
@@ -71,8 +71,8 @@ class MovePanel(ScreenPanel):
             else:
                 grid.attach(self.buttons['x+'], 0, 1, 1, 1)
                 grid.attach(self.buttons['x-'], 2, 1, 1, 1)
-            grid.attach(self.buttons['y+'], 1, 0, 1, 1)
-            grid.attach(self.buttons['y-'], 1, 1, 1, 1)
+            grid.attach(self.buttons['y+'], 1, 1, 1, 1)
+            grid.attach(self.buttons['y-'], 1, 0, 1, 1)
             grid.attach(self.buttons['z+'], 3, 0, 1, 1)
             grid.attach(self.buttons['z-'], 3, 1, 1, 1)
 

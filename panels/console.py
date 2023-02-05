@@ -15,11 +15,11 @@ def create_panel(*args):
 
 
 COLORS = {
-    "command": "#bad8ff",
+    "command": "#D8DEE9",
     "error": "#ff6975",
-    "response": "#b8b8b8",
-    "time": "grey",
-    "warning": "#c9c9c9"
+    "response": "#ECEFF4",
+    "time": "#88C0D0",
+    "warning": "#D08770"
 }
 
 
@@ -50,6 +50,7 @@ class ConsolePanel(ScreenPanel):
 
         options = Gtk.Grid()
         options.set_vexpand(False)
+        options.set_halign(Gtk.Align.CENTER)
         if self._screen.vertical_mode:
             options.attach(o1_lbl, 0, 0, 1, 1)
             options.attach(o1_switch, 0, 1, 1, 1)
@@ -84,12 +85,15 @@ class ConsolePanel(ScreenPanel):
         entry = Gtk.Entry()
         entry.set_hexpand(True)
         entry.set_vexpand(False)
+        entry.set_placeholder_text(_("Enter your command here..."))
+        entry.get_style_context().add_class("entrybox")
         entry.connect("button-press-event", self._screen.show_keyboard)
         entry.connect("focus-in-event", self._screen.show_keyboard)
         entry.connect("activate", self._send_command)
         entry.grab_focus_without_selecting()
 
         enter = self._gtk.Button("resume", " " + _('Send') + " ", None, .66, Gtk.PositionType.RIGHT, 1)
+        enter.get_style_context().add_class("send")
         enter.set_hexpand(False)
         enter.connect("clicked", self._send_command)
 

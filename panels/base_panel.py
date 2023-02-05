@@ -29,10 +29,13 @@ class BasePanel(ScreenPanel):
         self.current_extruder = None
         # Action bar buttons
         abscale = self.bts * 1.1
-        self.control['back'] = self._gtk.Button('back', scale=abscale)
-        self.control['back'].connect("clicked", self.back)
         self.control['home'] = self._gtk.Button('main', scale=abscale)
         self.control['home'].connect("clicked", self._screen._menu_go_back, True)
+        self.control['console_shortcut'] = self._gtk.Button('console', scale=abscale)
+        self.control['console_shortcut'].connect("clicked", self.menu_item_clicked, "console", {
+            "name": "Console",
+            "panel": "console"
+        })
 
         if len(self._config.get_printers()) > 1:
             self.control['printer_select'] = self._gtk.Button('shuffle', scale=abscale)
@@ -61,9 +64,9 @@ class BasePanel(ScreenPanel):
             self.action_bar.set_vexpand(True)
         self.action_bar.get_style_context().add_class('action_bar')
         self.action_bar.set_size_request(self._gtk.action_bar_width, self._gtk.action_bar_height)
-        self.action_bar.add(self.control['back'])
         self.action_bar.add(self.control['home'])
-        self.show_back(False)
+        self.action_bar.add(self.control['console_shortcut'])
+        # self.show_back(False)
         if self.buttons_showing['printer_select']:
             self.action_bar.add(self.control['printer_select'])
         self.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
@@ -253,13 +256,13 @@ class BasePanel(ScreenPanel):
     def remove(self, widget):
         self.content.remove(widget)
 
-    def show_back(self, show=True):
-        if show:
-            self.control['back'].set_sensitive(True)
-            self.control['home'].set_sensitive(True)
-            return
-        self.control['back'].set_sensitive(False)
-        self.control['home'].set_sensitive(False)
+    # def show_back(self, show=True):
+    #     if show:
+    #         self.control['back'].set_sensitive(True)
+    #         self.control['home'].set_sensitive(True)
+    #         return
+    #     self.control['back'].set_sensitive(False)
+    #     self.control['home'].set_sensitive(False)
 
     def show_macro_shortcut(self, show=True):
         if show is True and self.buttons_showing['macros_shortcut'] is False:
@@ -296,7 +299,7 @@ class BasePanel(ScreenPanel):
         except Exception as e:
             logging.debug(f"Error parsing jinja for title: {title}\n{e}")
 
-        self.titlelbl.set_label(f"{self._screen.connecting_to_printer} | {title}")
+        self.titlelbl.set_label(f"{self._screen.connecting_to_printer} → {title}")
 
     def update_time(self):
         now = datetime.now()
