@@ -168,7 +168,7 @@ trough {
   min-height: 2em;
   background-color: #404e57;
   color: #eceff4;
-  border: 1px solid black;
+  border: 1px solid #2e3440;
 }
 
 trough highlight,
@@ -176,7 +176,7 @@ trough progress {
   min-height: 2em;
   background-color: #3584e4;
   color: #eceff4;
-  border: 1px solid black;
+  border: 1px solid #2e3440;
 }
 
 trough progress.left {
@@ -226,7 +226,7 @@ trough {
 }
 
 .popup {
-  background-color: black;
+  background-color: #2e3440;
 }
 
 .action_bar {
@@ -243,24 +243,24 @@ trough {
 }
 
 .dialog {
-  border: 0.1em solid black;
+  border: 0.1em solid #2e3440;
   padding: 2.5em;
-  background-color: black;
+  background-color: #2e3440;
   margin: 1em;
 }
 
 .dialog button {
   padding: 1.5em;
-  border-bottom: 0.4em solid #009384;
+  border-bottom: 0.4em solid #88c0d0;
   margin-top: 1em;
 }
 
 .dialog button:nth-child(1) {
-  border-bottom-color: green;
+  border-bottom-color: #a3be8c;
 }
 
 .dialog button:nth-child(2) {
-  border-bottom-color: red;
+  border-bottom-color: #bf616a;
 }
 
 .distbutton_active {
@@ -527,7 +527,7 @@ trough {
 
 .message button {
   background-color: #eceff4;
-  color: black;
+  color: #2e3440;
   padding: 2em 2.5em 2em 2.5em;
 }
 
@@ -558,7 +558,7 @@ popover button {
 .screensaver button:hover,
 .screensaver button:focus,
 .screensaver button:active {
-  background-color: black;
+  background-color: #2e3440;
   border: 0;
   margin: 0;
 }
