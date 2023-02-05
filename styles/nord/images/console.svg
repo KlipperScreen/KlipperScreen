@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="console.svg"
+   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <metadata
+     id="metadata16">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>folder</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     pagecolor="#bfbfbf"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="826"
+     id="namedview12"
+     showgrid="false"
+     inkscape:pagecheckerboard="false"
+     inkscape:zoom="5.4137931"
+     inkscape:cx="10.713376"
+     inkscape:cy="32.047771"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg10"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:document-rotation="0"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:snap-midpoints="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:snap-center="true"
+     inkscape:bbox-nodes="true"
+     inkscape:bbox-paths="true" />
+  <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title2">folder</title>
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <g
+     id="g866"
+     transform="matrix(0.1125,0,0,0.11221614,23.459315,25.512191)"
+     style="stroke-width:8.90012">
+    <g
+       id="g6"
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:8.90012"
+       transform="translate(-164.0828,-182.18471)">
+      <g
+         id="g4"
+         style="stroke-width:8.90012">
+        <path
+           d="M 0,32 V 448 H 480 V 32 Z M 448,416 H 32 V 64 h 416 z"
+           id="path2"
+           style="stroke-width:8.90012" />
+      </g>
+    </g>
+    <g
+       id="g12"
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:8.90012"
+       transform="translate(-164.0828,-182.18471)">
+      <g
+         id="g10"
+         style="stroke-width:8.90012">
+        <rect
+           x="208"
+           y="288"
+           width="128"
+           height="32"
+           id="rect8"
+           style="stroke-width:8.90012" />
+      </g>
+    </g>
+    <g
+       id="g18"
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:8.90012"
+       transform="translate(-164.0828,-182.18471)">
+      <g
+         id="g16"
+         style="stroke-width:8.90012">
+        <polygon
+           points="172.64,224 102.24,294.24 123.36,315.36 214.56,224 123.36,132.64 102.24,153.76 "
+           id="polygon14"
+           style="stroke-width:8.90012" />
+      </g>
+    </g>
+  </g>
+</svg>
