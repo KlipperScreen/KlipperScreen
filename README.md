@@ -43,6 +43,9 @@ install_script: scripts/KlipperScreen-install.sh
 managed_services: Nord-KlipperScreen
 ```
 
+## Uninstalling
+I've found that the easiest way to uninstall Nord Klipperscreen is to just do a clean reinstall of KlipperScreen since this will clear any of the custom or modified files that this theme uses. My preferred method of uninstalling is to use [Kiauh](https://github.com/th33xitus/kiauh). The steps on how to use an run Kiauh can be found on the [Kiauh readme](https://github.com/th33xitus/kiauh#%EF%B8%8F-instructions)
+
 ## Screenshots
 ### Klipper Disconnected
 ![Klipper Disconnected](https://user-images.githubusercontent.com/70914399/216843314-250d316d-da2c-4cbf-a91b-76f639ac6457.jpg)
