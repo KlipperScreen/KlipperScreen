@@ -297,7 +297,7 @@ class KlipperScreen(Gtk.Window):
     def attach_panel(self, panel_name):
         self.base_panel.add_content(self.panels[panel_name])
         logging.debug(f"Current panel hierarchy: {' > '.join(self._cur_panels)}")
-        self.base_panel.show_back(len(self._cur_panels) > 1)
+        # self.base_panel.show_back(len(self._cur_panels) > 1)
         if hasattr(self.panels[panel_name], "process_update"):
             self.add_subscription(panel_name)
             self.process_update("notify_status_update", self.printer.data)
