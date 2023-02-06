@@ -44,7 +44,7 @@ class Keyboard(Gtk.Box):
                     ["ABC", "abc", "123", ".", ",", "?", "!", "'"],
                 ]
             ]
-        if language == "fr":
+        elif language == "fr":
             self.keys = [
                 [
                     ["a", "z", "e", "r", "t", "y", "u", "i", "o", "p", "⌫"],
