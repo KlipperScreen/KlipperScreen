@@ -92,6 +92,10 @@ install_packages()
         echo_error "Installation of Misc packages failed ($MISC)"
         exit 1
     fi
+#     ModemManager interferes with klipper comms
+#     on buster it's installed as a dependency of mpv
+#     it doesn't happen on bullseye
+    sudo systemctl mask ModemManager.service
 }
 
 create_virtualenv()
@@ -149,7 +153,7 @@ modify_user()
 
 update_x11()
 {
-    if [ -e /etc/X11/Xwrapper.conf ]
+    if [ -e /etc/X11/Xwrapper.config ]
     then
         echo_text "Updating X11 Xwrapper"
         sudo sed -i 's/allowed_users=console/allowed_users=anybody/g' /etc/X11/Xwrapper.config

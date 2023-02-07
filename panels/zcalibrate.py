@@ -244,7 +244,6 @@ class ZCalibratePanel(ScreenPanel):
                 logging.info(data)
             elif "save_config" in data:
                 self.buttons_not_calibrating()
-                self._screen.show_popup_message(_("Calibrated, save configuration to make it permanent"), level=1)
             elif "out of range" in data:
                 self._screen.show_popup_message(data)
                 self.buttons_not_calibrating()
