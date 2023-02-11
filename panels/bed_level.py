@@ -19,8 +19,8 @@ def create_panel(*args):
 # but return None if the distance is above max_distance.
 # If remove is set to true, the screw is also removed
 # from the list of passed in screws.
-def find_closest(screws, point, max_distance, remove = False):
-    if len(screws) == 0: 
+def find_closest(screws, point, max_distance, remove=False):
+    if len(screws) == 0:
         return None
     closest = screws[0]
     min_distance = math.dist(closest, point)
@@ -40,7 +40,7 @@ def find_closest(screws, point, max_distance, remove = False):
 
 # Similar to find_closest screw, but removes the screw by default.
 def remove_closest(screws, point, max_distance):
-    return find_closest(screws, point, max_distance, remove = True)
+    return find_closest(screws, point, max_distance, remove=True)
 
 
 class BedLevelPanel(ScreenPanel):
@@ -125,7 +125,7 @@ class BedLevelPanel(ScreenPanel):
             mid_x = round((min_x + max_x) / 2)
             fmp = (mid_x, min_y)
             bmp = (mid_x, max_y)
-            remaining_positions.extend([fmp,bmp])
+            remaining_positions.extend([fmp, bmp])
             fm = bm = None
 
         if self.y_cnt == 3:
@@ -137,7 +137,7 @@ class BedLevelPanel(ScreenPanel):
             mid_y = round((min_y + max_y) / 2)
             lmp = (min_x, mid_y)
             rmp = (max_x, mid_y)
-            remaining_positions.extend([lmp,rmp])
+            remaining_positions.extend([lmp, rmp])
             lm = rm = None
 
         remaining_count = len(remaining_screws)
@@ -147,15 +147,15 @@ class BedLevelPanel(ScreenPanel):
             for screw in remaining_screws:
                 pos = find_closest(remaining_positions, screw, max_distance)
                 closest = find_closest(remaining_screws, pos, max_distance)
-                if closest != screw: 
+                if closest != screw:
                     continue
-                elif pos == fmp: 
+                elif pos == fmp:
                     fm = screw
-                elif pos == bmp: 
+                elif pos == bmp:
                     bm = screw
-                elif pos == lmp: 
+                elif pos == lmp:
                     lm = screw
-                elif pos == rmp: 
+                elif pos == rmp:
                     rm = screw
 
                 logging.debug(f"Fitted screw {screw} close to {pos}")
@@ -164,15 +164,17 @@ class BedLevelPanel(ScreenPanel):
 
             if remaining_count == len(remaining_screws):
                 logging.warning(
-                    f"Remaining screws: {remaining_screws}" + 
+                    f"Remaining screws: {remaining_screws}" +
                     f" don't fit to positions: {remaining_positions}")
                 break
             remaining_count = len(remaining_screws)
 
         if remaining_count == 0:
             # All screws fitted.
-            if self.x_cnt > 3: self.x_cnt = 3
-            if self.y_cnt > 3: self.y_cnt = 3
+            if self.x_cnt > 3:
+                self.x_cnt = 3
+            if self.y_cnt > 3:
+                self.y_cnt = 3
         else:
             logging.debug(f"Screws not used: {remaining_screws}")
 
@@ -183,14 +185,14 @@ class BedLevelPanel(ScreenPanel):
         if self.x_cnt > 2 or self.y_cnt > 2:
             button_scale = 2
 
-        self.buttons['bl'] = self._gtk.Button("bed-level-t-l", scale = button_scale)
-        self.buttons['br'] = self._gtk.Button("bed-level-t-r", scale = button_scale)
-        self.buttons['fl'] = self._gtk.Button("bed-level-b-l", scale = button_scale)
-        self.buttons['fr'] = self._gtk.Button("bed-level-b-r", scale = button_scale)
-        self.buttons['lm'] = self._gtk.Button("bed-level-l-m", scale = button_scale)
-        self.buttons['rm'] = self._gtk.Button("bed-level-r-m", scale = button_scale)
-        self.buttons['fm'] = self._gtk.Button("bed-level-b-m", scale = button_scale)
-        self.buttons['bm'] = self._gtk.Button("bed-level-t-m", scale = button_scale)
+        self.buttons['bl'] = self._gtk.Button("bed-level-t-l", scale=button_scale)
+        self.buttons['br'] = self._gtk.Button("bed-level-t-r", scale=button_scale)
+        self.buttons['fl'] = self._gtk.Button("bed-level-b-l", scale=button_scale)
+        self.buttons['fr'] = self._gtk.Button("bed-level-b-r", scale=button_scale)
+        self.buttons['lm'] = self._gtk.Button("bed-level-l-m", scale=button_scale)
+        self.buttons['rm'] = self._gtk.Button("bed-level-r-m", scale=button_scale)
+        self.buttons['fm'] = self._gtk.Button("bed-level-b-m", scale=button_scale)
+        self.buttons['bm'] = self._gtk.Button("bed-level-t-m", scale=button_scale)
 
         valid_positions = True
         if self.ks_printer_cfg is not None:
@@ -353,7 +355,7 @@ class BedLevelPanel(ScreenPanel):
 
     # Test if all axes have been homed and home first if not.
     # It will perform Z_TILT operation if configured.
-    def maybe_home_first(self, z_tilt = False):
+    def maybe_home_first(self, z_tilt=False):
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
             self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
             z_tilt = True
@@ -448,7 +450,7 @@ class BedLevelPanel(ScreenPanel):
         return sorted(screws, key=lambda s: (float(s[1]), float(s[0])))
 
     def screws_tilt_calculate(self, widget):
-        self.maybe_home_first(z_tilt = True)
+        self.maybe_home_first(z_tilt=True)
         self.response_count = 0
         self.buttons['screws'].set_sensitive(False)
         self._screen._ws.klippy.gcode_script("SCREWS_TILT_CALCULATE")
