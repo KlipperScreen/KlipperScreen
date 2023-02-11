@@ -13,7 +13,7 @@ from ks_includes.screen_panel import ScreenPanel
 def create_panel(*args):
     return BedLevelPanel(*args)
 
-def find_closest(screws, point, remove = False):
+def find_closest(screws, point, max_distance, remove = False):
     if len(screws) == 0: return None
     closest = screws[0]
     min_distance = math.dist(closest, point)
@@ -23,12 +23,15 @@ def find_closest(screws, point, remove = False):
             closest = screw
             min_distance = distance
 
+    if min_distance > max_distance:
+        return None
+
     if remove:
         screws.remove(closest)
     return closest
 
-def remove_closest(screws, point):
-    return find_closest(screws, point, remove = True)
+def remove_closest(screws, point, max_distance):
+    return find_closest(screws, point, max_distance, remove = True)
 
 class BedLevelPanel(ScreenPanel):
 
@@ -88,19 +91,22 @@ class BedLevelPanel(ScreenPanel):
         max_x = max(x_positions)
         min_y = min(y_positions)
         max_y = max(y_positions)
+        max_distance = math.ceil(math.dist((min_x, min_y), (max_x, max_y)) / min(self.x_cnt, self.y_cnt, 3))
+        
+        logging.debug(f"Using max_distance: {max_distance} to fit: {len(self.screws)} screws.")
 
         remaining_screws = self.screws[:]
         remaining_positions = []
 
-        fl = remove_closest(remaining_screws, (min_x, min_y))
-        bl = remove_closest(remaining_screws, (min_x, max_y))
-        br = remove_closest(remaining_screws, (max_x, max_y))
-        fr = remove_closest(remaining_screws, (max_x, min_y))
+        fl = remove_closest(remaining_screws, (min_x, min_y), max_distance)
+        bl = remove_closest(remaining_screws, (min_x, max_y), max_distance)
+        br = remove_closest(remaining_screws, (max_x, max_y), max_distance)
+        fr = remove_closest(remaining_screws, (max_x, min_y), max_distance)
 
         if self.x_cnt == 3:
             mid_x = [x for x in list(zip(*self.screws))[0] if x not in (min_x, max_x)][0]
-            fm = remove_closest(remaining_screws, (mid_x, min_y))
-            bm = remove_closest(remaining_screws, (mid_x, max_y))
+            fm = remove_closest(remaining_screws, (mid_x, min_y), max_distance)
+            bm = remove_closest(remaining_screws, (mid_x, max_y), max_distance)
             fmp = bmp = None
         else:
             mid_x = round((min_x + max_x) / 2)
@@ -111,8 +117,8 @@ class BedLevelPanel(ScreenPanel):
 
         if self.y_cnt == 3:
             mid_y = [y for y in list(zip(*self.screws))[1] if y not in (min_y, max_y)][0]
-            lm = remove_closest(remaining_screws, (min_x, mid_y))
-            rm = remove_closest(remaining_screws, (max_x, mid_y))
+            lm = remove_closest(remaining_screws, (min_x, mid_y), max_distance)
+            rm = remove_closest(remaining_screws, (max_x, mid_y), max_distance)
             lmp = rmp = None
         else:
             mid_y = round((min_y + max_y) / 2)
@@ -125,8 +131,8 @@ class BedLevelPanel(ScreenPanel):
         while remaining_count > 0:
             logging.debug(f"Fitting remaining: {remaining_screws} to positions: {remaining_positions}")
             for screw in remaining_screws:
-                pos = find_closest(remaining_positions, screw)
-                closest = find_closest(remaining_screws, pos)
+                pos = find_closest(remaining_positions, screw, max_distance)
+                closest = find_closest(remaining_screws, pos, max_distance)
                 if closest != screw: continue
                 elif pos == fmp: fm = screw
                 elif pos == bmp: bm = screw
