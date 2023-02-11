@@ -1,0 +1,776 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Czech\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-29 09:28-0600\n"
+"PO-Revision-Date: 2023-01-29 09:27-0600\n"
+"Last-Translator: \n"
+"Language-Team: Jan Stanka (stanky@email.cz)\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 2.4.2\n"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s bude aktualizováno na verzi"
+
+msgid "(default)"
+msgstr ""
+
+msgid "24 Hour Time"
+msgstr "24 hod formát"
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr "FW restart může fixnout chyby."
+
+msgid "ADXL Not Configured"
+msgstr "ADXL není nastaven"
+
+msgid "Abort"
+msgstr "Zrušit"
+
+msgid "Acceleration:"
+msgstr "Zrychlení:"
+
+msgid "Accept"
+msgstr "Přijmout"
+
+msgid "Actions"
+msgstr "Akce"
+
+msgid "Add profile"
+msgstr "Přidat profil"
+
+msgid "Apply"
+msgstr "Použít"
+
+#, python-format
+msgid "Apply %.2f offset to Endstop?"
+msgstr "Použít %.2f přesah k Endstop?"
+
+#, python-format
+msgid "Apply %s%.2f offset to Probe?"
+msgstr "Použít %s%.2f přesah k Sondě?"
+
+msgid "Are you sure do you want to exclude the object?"
+msgstr "Opravdu chceš vyjmout objekt?"
+
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "Opravdu okamžitě zastavit?"
+
+msgid "Are you sure you wish to cancel this print?"
+msgstr "Opravdu chcete zrušit tisk?"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "Opravdu chcete uvolnit motory?"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "Opravdu chcete rebootovat systém?"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "Opravdu chcete vypnout systém?"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Auto-calibrate"
+msgstr "Auto-kalibrace"
+
+msgid "Auto-close notifications"
+msgstr "Automaticky zavřít upozornění"
+
+msgid "Auto-scroll"
+msgstr "Auto posun"
+
+msgid "Bed Level"
+msgstr "Vyrovnání podložky"
+
+msgid "Bed Mesh"
+msgstr "Mapa podložky"
+
+msgid "Bed screw configuration:"
+msgstr "Vyrovnání šroubů podložky:"
+
+msgid "Calibrate"
+msgstr "Kalibrace"
+
+msgid "Calibrated"
+msgstr "Zkalibrováno"
+
+msgid "Calibrated, save configuration to make it permanent"
+msgstr "Zkalibrováno, uložit změny jako trvalé"
+
+msgid "Calibrating"
+msgstr "Kalibruji"
+
+msgid "Camera"
+msgstr ""
+
+msgid "Can't set above the maximum:"
+msgstr "Nemohu nastavit víc než max:"
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "Cancel Print"
+msgstr "Zrušit tisk"
+
+msgid "Cancelled"
+msgstr "Zrušeno"
+
+msgid "Cancelling"
+msgstr "Ruším"
+
+msgid "Cannot connect to Moonraker"
+msgstr "Nelze se připojit k Moonraker"
+
+msgid "Channel"
+msgstr "Kanál"
+
+msgid "Check ADXL Wiring"
+msgstr "Zkontroluj zapojení ADXL"
+
+msgid "Checking for updates, please wait..."
+msgstr "Kontrola aktualizací, čekej ..."
+
+msgid "Clear"
+msgstr "Vymaž"
+
+msgid "Close"
+msgstr "Zavřít"
+
+msgid "Complete"
+msgstr "Hotovo"
+
+msgid "Configuration"
+msgstr "Konfigurace"
+
+msgid "Confirm Emergency Stop"
+msgstr "Potvrzovat Emergency Stop"
+
+msgid "Connected"
+msgstr "Připojeno"
+
+#, python-format
+msgid "Connecting to %s"
+msgstr "Připojování k %s"
+
+msgid "Console"
+msgstr "Konsole"
+
+msgid "Continue"
+msgstr "Pokračuj"
+
+msgid "Cooldown"
+msgstr "Zchladit"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Delete Directory?"
+msgstr ""
+
+msgid "Delete File?"
+msgstr "Smazat soubor?"
+
+msgid "Deselect"
+msgstr "Odznačit"
+
+msgid "Disable Motors"
+msgstr "Uvolnit motory"
+
+msgid "Disable XY"
+msgstr "Uvolnit XY"
+
+msgid "Distance (mm)"
+msgstr "Vzdálenost (mm)"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "Obnovit %s?"
+
+msgid "Elapsed:"
+msgstr "Uplynulo:"
+
+msgid "Error"
+msgstr "Chyba"
+
+msgid "Estimated Time Method"
+msgstr "Výpočet doby tisku"
+
+msgid "Exclude Object"
+msgstr "Vyloučit objekt"
+
+msgid "Extra Large"
+msgstr "Extra velký"
+
+msgid "Extrude"
+msgstr "Extruze"
+
+msgid "Extrusion +"
+msgstr "Extruze +"
+
+msgid "Extrusion -"
+msgstr "Extruze -"
+
+msgid "Failed, adjust position first"
+msgstr "Chyba, nastav nejprve pozici"
+
+msgid "Fan"
+msgstr "Větrák"
+
+msgid "Filament Used"
+msgstr "Typ filamentu"
+
+msgid "Filament total:"
+msgstr "Filament celkem:"
+
+msgid "Filament used:"
+msgstr "Použitý filament:"
+
+msgid "Filament:"
+msgstr "Filament:"
+
+msgid "File"
+msgstr "Soubor"
+
+msgid "File:"
+msgstr "Soubor:"
+
+msgid "Finding ADXL"
+msgstr "Hledání ADXL"
+
+msgid "Fine Tuning"
+msgstr "Ladění"
+
+msgid "Finish"
+msgstr "Konec"
+
+msgid "Firmware Restart"
+msgstr "Firmware Restart"
+
+msgid "Flow:"
+msgstr "Tok:"
+
+msgid "Flowrate:"
+msgstr "Rychlost toku:"
+
+msgid "Font Size"
+msgstr "Velikost fontu"
+
+msgid "Full Update"
+msgstr "Úplný update"
+
+msgid "Fullscreen"
+msgstr ""
+
+msgid "Go Back"
+msgstr "Zpět"
+
+msgid "Height:"
+msgstr "Výška:"
+
+msgid "Hidden"
+msgstr "Skrytý"
+
+msgid "Hide"
+msgstr "Skrýt"
+
+msgid "Hide sensors in Temp."
+msgstr "Skrýt senzory v Temp."
+
+msgid "Hide temp."
+msgstr "Skrýt teplotu"
+
+msgid "Home All"
+msgstr "Zaparkovat XYZ"
+
+msgid "Home X"
+msgstr "Zaparkovat X"
+
+msgid "Home XY"
+msgstr "Zaparkovat XY"
+
+msgid "Home Y"
+msgstr "Zaparkovat Y"
+
+msgid "Home Z"
+msgstr "Zaparkovat Z"
+
+msgid "Homing"
+msgstr "Domů"
+
+msgid "Host"
+msgstr "Host"
+
+msgid "Hostname"
+msgstr "Hostname"
+
+msgid "Icon Theme"
+msgstr "Sada ikon"
+
+msgid "Initializing printer..."
+msgstr "Startuji tiskárnu ..."
+
+msgid "Input Shaper"
+msgstr ""
+
+msgid "Interface"
+msgstr "Rozhraní"
+
+msgid "Invalid"
+msgstr "Špatně"
+
+msgid "Invalid password"
+msgstr "Špatné heslo"
+
+msgid "Invert X"
+msgstr "Otočit X"
+
+msgid "Invert Y"
+msgstr "Otočit Y"
+
+msgid "Invert Z"
+msgstr "Otočit Z"
+
+msgid "Klipper Restart"
+msgstr "Klipper Restart"
+
+msgid "Klipper has disconnected"
+msgstr "Klipper odpojen"
+
+msgid "Klipper has encountered an error."
+msgstr "Klipper zaznamenal chybu."
+
+msgid "Klipper has shutdown"
+msgstr "Klipper zastaven"
+
+msgid "Klipper is attempting to start"
+msgstr "Klipper startuje"
+
+msgid "Klipper will reboot"
+msgstr "Klipper se restartuje"
+
+msgid "KlipperScreen will reboot"
+msgstr "KlipperScreen se restartuje"
+
+msgid "Language"
+msgstr "Jazyk"
+
+msgid "Large"
+msgstr "Velký"
+
+msgid "Layer:"
+msgstr "Vrstva:"
+
+msgid "Left:"
+msgstr "Zbývá:"
+
+msgid "Limits"
+msgstr "Limity"
+
+msgid "Load"
+msgstr "Zasuň"
+
+msgid "Lower Nozzle"
+msgstr "Trysku níž"
+
+msgid "Macro shortcut on sidebar"
+msgstr "Macro shortcut on sidebar"
+
+msgid "Macros"
+msgstr "Makra"
+
+msgid "Main Menu"
+msgstr "Hlavní menu"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Max Acceleration"
+msgstr "Max. zrychlení"
+
+msgid "Max Acceleration to Deceleration"
+msgstr "Z max. zrychlení do zpomalení"
+
+msgid "Max Velocity"
+msgstr "Max. rychlost"
+
+msgid "Maximum"
+msgstr "Maximum"
+
+msgid "Measure Both"
+msgstr "Změřit oboje"
+
+msgid "Measure X"
+msgstr "Změřit X"
+
+msgid "Measure Y"
+msgstr "Změřit Y"
+
+msgid "Medium"
+msgstr "Střední"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Mesh calibrate"
+msgstr "Kalibrace sítě"
+
+msgid "Modified"
+msgstr "Změněno"
+
+msgid "Moonraker: connected"
+msgstr "Moonraker: připojen"
+
+msgid "Move"
+msgstr "Posun"
+
+msgid "Move Distance (mm)"
+msgstr "Vzdálenost posunu (mm)"
+
+msgid "Name"
+msgstr "Jméno"
+
+msgid "Network"
+msgstr "Síť"
+
+msgid "Never"
+msgstr "Nikdy"
+
+msgid "New"
+msgstr "Nový"
+
+msgid ""
+"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"conf"
+msgstr "Nepodporováno autodetekcí, nakonfiguruj v klipperscreen.conf"
+
+msgid "Nothing selected"
+msgstr "Nevybráno nic"
+
+#, python-format
+msgid "Outdated by %d"
+msgstr "Zastaralý %d"
+
+msgid "PSK for"
+msgstr "PSK pro"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "Balíček bude aktualizován"
+msgstr[1] "Balíčky budou aktualizovány"
+msgstr[2] ""
+
+msgid "Part Fan"
+msgstr "Částečný ofuk"
+
+msgid "Password saved"
+msgstr "Heslo uloženo"
+
+msgid "Pause"
+msgstr "Pauza"
+
+msgid "Paused"
+msgstr "Pozastaveno"
+
+msgid "Perform a full upgrade?"
+msgstr "Úplně aktualizovat?"
+
+msgid "Pins"
+msgstr "Piny"
+
+msgid "Please recompile and flash the micro-controller."
+msgstr "Znovu přelož a flashni micro-controller."
+
+msgid "Power"
+msgstr "Zdroj"
+
+msgid "Power On Printer"
+msgstr "Zapni tiskárnu"
+
+msgid "Pressure Advance:"
+msgstr "Pressure Advance:"
+
+msgid "Print"
+msgstr "Tisk"
+
+msgid "Print Control"
+msgstr "Nastavení tisku"
+
+msgid "Print Time"
+msgstr "Čas tisku"
+
+msgid "Printer"
+msgstr "Tiskárna"
+
+msgid "Printer Connections"
+msgstr "Připojení"
+
+msgid "Printer Select"
+msgstr "Výběr tiskárny"
+
+msgid "Printing"
+msgstr "Probíhá tisk"
+
+msgid "Probe Offset"
+msgstr "Offset sondy"
+
+msgid "Profile Name:"
+msgstr "Jméno profilu:"
+
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr "Provide KlipperScreen.log when asking for help.\n"
+
+msgid "Quad Gantry Level"
+msgstr "Quad Gantry Level"
+
+msgid "Raise Nozzle"
+msgstr "Zvedni trysku"
+
+msgid "Recover"
+msgstr "Recover"
+
+msgid "Recover Hard"
+msgstr "Recover Hard"
+
+msgid "Recover Soft"
+msgstr "Recover Soft"
+
+msgid "Reference"
+msgstr "Reference"
+
+msgid "Refresh"
+msgstr "Obnovit"
+
+msgid "Rename/Move:"
+msgstr ""
+
+msgid "Restart"
+msgstr "Restart"
+
+msgid "Resume"
+msgstr "Pokračuj"
+
+msgid "Retract"
+msgstr "Retrakce"
+
+msgid "Retraction"
+msgstr "Retrakce"
+
+msgid "Retraction Length"
+msgstr "Délka retrakce"
+
+msgid "Retraction Speed"
+msgstr "Rychlost retrakce"
+
+msgid "Retry"
+msgstr "Znovu"
+
+msgid "Retrying"
+msgstr "Zkouším znovu"
+
+msgid "Save"
+msgstr "Uložit"
+
+msgid "Save Config"
+msgstr "Ulož nastavení"
+
+msgid "Save Z"
+msgstr "Uložit Z"
+
+msgid "Save configuration?"
+msgstr "Uložit nastavení?"
+
+msgid "Saved"
+msgstr "Uloženo"
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr "Uložený offset: %s"
+
+msgid "Screen DPMS"
+msgstr "Screen DPMS"
+
+msgid "Screen Power Off Time"
+msgstr "Čas vypnutí displeje"
+
+msgid "Screws Adjust"
+msgstr "Nastavit šrouby"
+
+msgid "Select"
+msgstr "Vyber"
+
+msgid "Send"
+msgstr "Odeslat"
+
+msgid "Set Temp"
+msgstr "Nastav teplotu"
+
+msgid "Settings"
+msgstr "Nastavení"
+
+msgid "Show"
+msgstr "Ukaž"
+
+msgid "Show Heater Power"
+msgstr "Ukaž odběr topení"
+
+msgid "Shutdown"
+msgstr "Shutdown"
+
+msgid "Size"
+msgstr "Velikost"
+
+msgid "Slicer"
+msgstr "Slicer"
+
+msgid "Slicer Time correction (%)"
+msgstr "Časová korekce Sliceru  (%)"
+
+msgid "Slicer:"
+msgstr "Slicer:"
+
+msgid "Small"
+msgstr "Malý"
+
+msgid "Speed (mm/s)"
+msgstr "Rychlost (mm/s)"
+
+msgid "Speed +"
+msgstr "Rychlost ₊"
+
+msgid "Speed -"
+msgstr "Rychlost -"
+
+msgid "Speed:"
+msgstr "Rychlost:"
+
+msgid "Square Corner Velocity"
+msgstr ""
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Starting WiFi Association"
+msgstr "Připojování k WiFi"
+
+msgid "Starting recovery for"
+msgstr "Obnovuji"
+
+msgid "Starting update for"
+msgstr "Aktualizuji"
+
+msgid "System"
+msgstr "Systém"
+
+msgid "System Restart"
+msgstr "Restart systému"
+
+msgid "System Shutdown"
+msgstr "Vypnutí"
+
+msgid "Temp (°C)"
+msgstr "Teplota (°C)"
+
+msgid "Temperature"
+msgstr "Teplota"
+
+msgid "Total:"
+msgstr "Total:"
+
+msgid "Unknown Heater"
+msgstr "Neznámé topení"
+
+msgid "Unknown screw position"
+msgstr "Neznámé nastavení šroubů"
+
+msgid "Unload"
+msgstr "Vysuň"
+
+msgid "Unretract Extra Length"
+msgstr "Vysuň extra délku"
+
+msgid "Unretract Speed"
+msgstr "Vysunovací rychlost"
+
+msgid "Up To Date"
+msgstr "Aktuální"
+
+msgid "Update"
+msgstr "Aktualizuj"
+
+msgid "Updating"
+msgstr "Aktualizuji"
+
+msgid "Uploaded"
+msgstr "Nahrané"
+
+msgid "XY Move Speed (mm/s)"
+msgstr "Rychlost pohybu XY  (mm/s)"
+
+msgid "XY Speed (mm/s)"
+msgstr "Rychlost XY (mm/s)"
+
+msgid "Z Calibrate"
+msgstr "Kalibrace Z"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "Rychlost pohybu Z (mm/s)"
+
+msgid "Z Speed (mm/s)"
+msgstr "Rychlost pohybu Z  (mm/s)"
+
+msgid "Z Tilt"
+msgstr "Z Tilt"
+
+msgid "Z offset:"
+msgstr "Z offset:"
+
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "dBm"
+msgstr "dBm"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "hodina"
+msgstr[1] "hodiny"
+msgstr[2] "hodin"
+
+msgid "minutes"
+msgstr "min"
+
+msgid "mm"
+msgstr "mm"
+
+msgid "mm/s"
+msgstr "mm/s"
+
+msgid "mm/s²"
+msgstr "mm/s²"
+
+msgid "mm³/s"
+msgstr "mm³/s"
+
+#~ msgid "Decrease"
+#~ msgstr "Snížit"
+
+#~ msgid "Increase"
+#~ msgstr "Zvětšit"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "Odeslat ZAP do %s"
