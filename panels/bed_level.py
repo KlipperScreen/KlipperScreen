@@ -153,8 +153,8 @@ class BedLevelPanel(ScreenPanel):
         logging.debug(f"Using {used_screw_cnt}-screw locations [x,y] [{self.x_cnt}x{self.y_cnt}]")
 
         button_scale = 2.5
-        if self.ks_printer_cfg is not None:
-            button_scale = float(self.ks_printer_cfg.get("screw_button_scale", button_scale))
+        if self.x_cnt > 2 or self.y_cnt > 2:
+            button_scale = 2 
 
         self.buttons['bl'] = self._gtk.Button("bed-level-t-l", scale = button_scale)
         self.buttons['br'] = self._gtk.Button("bed-level-t-r", scale = button_scale)
