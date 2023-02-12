@@ -67,7 +67,7 @@ class MenuPanel(ScreenPanel):
 
             self.grid.attach(self.labels[key], col, row, width, height)
             i += 1
-
+        self.j2_data = None
         return self.grid
 
     def create_menu_items(self):
