@@ -82,6 +82,7 @@ class PrintPanel(ScreenPanel):
         if self.cur_directory != "gcodes":
             self.change_dir(None, "gcodes")
         self._refresh_files()
+        logging.debug("Print panel")
 
     def add_directory(self, directory, show=True):
         parent_dir = os.path.dirname(directory)
@@ -414,6 +415,7 @@ class PrintPanel(ScreenPanel):
 
     def _refresh_files(self, widget=None):
         self._files.refresh_files()
+        self._screen.memory_trace()
 
     def show_rename(self, widget, fullpath):
         self.source = fullpath
