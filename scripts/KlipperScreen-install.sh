@@ -75,14 +75,14 @@ install_packages()
     if [ $? -eq 0 ]; then
         echo_ok "Installed Python dependincies"
     else
-        echo_error "Installation of Python dependincies failed ($PYTHON)"
+        echo_error "Installation of Python dependencies failed ($PYTHON)"
         exit 1
     fi
     sudo apt-get install -y $PYGOBJECT
     if [ $? -eq 0 ]; then
         echo_ok "Installed PyGobject dependincies"
     else
-        echo_error "Installation of PyGobject dependincies failed ($PYGOBJECT)"
+        echo_error "Installation of PyGobject dependencies failed ($PYGOBJECT)"
         exit 1
     fi
     sudo apt-get install -y $MISC
@@ -177,7 +177,7 @@ start_KlipperScreen()
     sudo systemctl start KlipperScreen
 }
 if [ "$EUID" == 0 ]
-    then echo_error "Plaease do not run this script as root"
+    then echo_error "Please do not run this script as root"
     exit 1
 fi
 install_packages
