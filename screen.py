@@ -328,7 +328,7 @@ class KlipperScreen(Gtk.Window):
 
         popup = Gtk.Popover.new(self.base_panel.titlebar)
         popup.get_style_context().add_class("message_popup_popover")
-        popup.set_size_request(self.width *.9, -1)
+        popup.set_size_request(self.width * .9, -1)
         popup.set_halign(Gtk.Align.CENTER)
         popup.add(msg)
         popup.popup()
