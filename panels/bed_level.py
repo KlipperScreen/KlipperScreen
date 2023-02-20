@@ -351,9 +351,9 @@ class BedLevelPanel(ScreenPanel):
         # Test if all axes have been homed. Home if necessary.
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
             self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
-        # do Z_TILT_CALIBRATE if applicable.
-        if self._printer.config_section_exists("z_tilt"):
-            self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_TILT)
+            # do Z_TILT_CALIBRATE if applicable.
+            if self._printer.config_section_exists("z_tilt"):
+                self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_TILT)
 
     def go_to_position(self, widget, position):
         self.home()
