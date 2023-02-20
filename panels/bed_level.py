@@ -138,8 +138,8 @@ class BedLevelPanel(ScreenPanel):
 
         remaining_count = len(remaining_screws)
         while remaining_count > 0:
-            logging.debug(
-                f"Fitting remaining: {remaining_screws} to positions: {remaining_positions}")
+            logging.debug(f"Screws remaining: {remaining_screws}")
+            logging.debug(f"Positions remaining: {remaining_positions}")
             for screw in remaining_screws:
                 pos = find_closest(remaining_positions, screw, max_distance)
                 closest = find_closest(remaining_screws, pos, max_distance)
