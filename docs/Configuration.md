@@ -133,6 +133,8 @@ A menu item is configured as follows:
 name: Item Name
 icon: home
 # Optional Parameters
+# Icon style, defined as "button.mycolor4" (for example) in the theme css
+style: mycolor4
 # Panel from the panels listed below
 panel: preheat
 # Moonraker method to call when the item is selected

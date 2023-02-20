@@ -316,6 +316,7 @@ class KlipperScreen(Gtk.Window):
         msg.set_vexpand(True)
         msg.get_child().set_line_wrap(True)
         msg.get_child().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        msg.get_child().set_max_width_chars(40)
         msg.connect("clicked", self.close_popup_message)
         msg.get_style_context().add_class("message_popup")
         if level == 1:
@@ -327,7 +328,7 @@ class KlipperScreen(Gtk.Window):
 
         popup = Gtk.Popover.new(self.base_panel.titlebar)
         popup.get_style_context().add_class("message_popup_popover")
-        popup.set_size_request(self.width, -1)
+        popup.set_size_request(self.width * .9, -1)
         popup.set_halign(Gtk.Align.CENTER)
         popup.add(msg)
         popup.popup()

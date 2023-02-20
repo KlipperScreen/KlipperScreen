@@ -175,7 +175,7 @@ class KlipperScreenConfig:
                 strs = ('gcode', '')
                 numbers = [f'{option}' for option in self.config[section] if option != 'gcode']
             elif section.startswith('menu '):
-                strs = ('name', 'icon', 'panel', 'method', 'params', 'enable', 'confirm')
+                strs = ('name', 'icon', 'panel', 'method', 'params', 'enable', 'confirm', 'style')
             elif section == 'bed_screws':
                 # This section may be deprecated in favor of moving this options under the printer section
                 numbers = ('rotation', '')
@@ -549,13 +549,9 @@ class KlipperScreenConfig:
             "panel": cfg.get("panel", None),
             "method": cfg.get("method", None),
             "confirm": cfg.get("confirm", None),
-            "enable": cfg.get("enable", "True")
+            "enable": cfg.get("enable", "True"),
+            "params": cfg.get("params", "{}"),
+            "style": cfg.get("style", None)
         }
-
-        try:
-            item["params"] = json.loads(cfg.get("params", "{}"))
-        except Exception as e:
-            logging.exception(f"Unable to parse parameters for [{name}]:\n{e}")
-            item["params"] = {}
 
         return {name[(len(menu) + 6):]: item}
