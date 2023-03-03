@@ -23,9 +23,9 @@ def find_closest(screws, point, max_distance, remove=False):
     if len(screws) == 0:
         return None
     closest = screws[0]
-    min_distance = math.dist(closest, point)
+    min_distance = math.hypot(closest[0] - point[0], closest[1] - point[1])
     for screw in screws[1:]:
-        distance = math.dist(screw, point)
+        distance = math.hypot(screw[0] - point[0], screw[1] - point[1])
         if distance < min_distance:
             closest = screw
             min_distance = distance
@@ -98,7 +98,7 @@ class BedLevelPanel(ScreenPanel):
         min_y = min(y_positions)
         max_y = max(y_positions)
         max_distance = math.ceil(
-            math.dist((min_x, min_y), (max_x, max_y))
+            math.hypot(max_x - min_x, max_y - min_y)
             / min(self.x_cnt, self.y_cnt, 3)
         )
 
