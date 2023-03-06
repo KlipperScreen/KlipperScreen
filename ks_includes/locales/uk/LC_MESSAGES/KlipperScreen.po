@@ -5,19 +5,19 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2022-09-04 14:53-0300\n"
+"Project-Id-Version: 2023-03-06 14:53-0300\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-30 18:17-0300\n"
-"PO-Revision-Date: 2022-11-30 18:16-0300\n"
+"PO-Revision-Date: 2023-03-06 23:37+0200\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
-"Language: uk\n"
+"Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.2.1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -62,7 +62,7 @@ msgid "Apply %s%.2f offset to Probe?"
 msgstr "Застосувати зміщення %s%.2f до зонда?"
 
 msgid "Are you sure do you want to exclude the object?"
-msgstr ""
+msgstr "Ви впевнені, що бажаєте виключити об’єкт?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Ви впевнені, що хочете зробити аварійну зупинку?"
@@ -208,7 +208,7 @@ msgid "Exclude Object"
 msgstr "Виключити об’єкт"
 
 msgid "Extra Large"
-msgstr ""
+msgstr "Дуже Великий"
 
 msgid "Extrude"
 msgstr ""
@@ -332,7 +332,7 @@ msgid "Invalid"
 msgstr "Недійсний"
 
 msgid "Invalid password"
-msgstr ""
+msgstr "Недійсний пароль"
 
 msgid "Invert X"
 msgstr "Інвертувати X"
@@ -409,7 +409,7 @@ msgid "Max Velocity"
 msgstr "Макс. швидкість"
 
 msgid "Maximum"
-msgstr ""
+msgstr "Максимум"
 
 msgid "Measure Both"
 msgstr "Виміряти все"
@@ -427,7 +427,7 @@ msgid "Menu"
 msgstr "Меню"
 
 msgid "Mesh calibrate"
-msgstr ""
+msgstr "Калібрування сітки столу"
 
 msgid "Modified"
 msgstr "Змінено"
@@ -445,10 +445,10 @@ msgid "Name"
 msgstr "Ім'я"
 
 msgid "Network"
-msgstr "Сітка"
+msgstr "Мережа"
 
 msgid "Never"
-msgstr ""
+msgstr "Ніколи"
 
 msgid "New"
 msgstr "Новий"
@@ -518,13 +518,13 @@ msgid "Print Time"
 msgstr "Час друку"
 
 msgid "Printer"
-msgstr ""
+msgstr "Принтер"
 
 msgid "Printer Connections"
 msgstr "Підключення принтера"
 
 msgid "Printer Select"
-msgstr ""
+msgstr "Вибір Принтера"
 
 msgid "Printing"
 msgstr "Друк"
@@ -536,7 +536,7 @@ msgid "Profile Name:"
 msgstr "Ім'я профілю:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "Надайте KlipperScreen.log, коли звертаєтесь по допомогу.\n"
 
 msgid "Quad Gantry Level"
 msgstr "Портальне вирівнювання"
@@ -557,7 +557,9 @@ msgid "Reference"
 msgstr "Довідка"
 
 msgid "Refresh"
-msgstr "Оновити"
+msgstr ""
+"Перевірка\n"
+"Оновлень"
 
 msgid "Restart"
 msgstr "Перезапуск"
@@ -580,7 +582,7 @@ msgid "Retraction Speed"
 msgstr "Швидкість втягування"
 
 msgid "Retry"
-msgstr ""
+msgstr "Повторіть спробу"
 
 msgid "Retrying"
 msgstr "Повторна спроба"
@@ -633,10 +635,10 @@ msgid "Show"
 msgstr "Показати"
 
 msgid "Show Heater Power"
-msgstr ""
+msgstr "Показати Потужність Нагрівача"
 
 msgid "Shutdown"
-msgstr "вимкнувся"
+msgstr "Вимкнути"
 
 msgid "Size"
 msgstr "Розмір"
@@ -714,7 +716,7 @@ msgid "Unretract Speed"
 msgstr "Швидкість повернення"
 
 msgid "Up To Date"
-msgstr "Оновити"
+msgstr "Актуально"
 
 msgid "Update"
 msgstr "Оновлення"
