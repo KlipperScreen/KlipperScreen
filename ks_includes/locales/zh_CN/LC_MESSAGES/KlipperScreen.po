@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-18 23:05-0300\n"
-"PO-Revision-Date: 2022-07-16 23:03+0800\n"
+"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"PO-Revision-Date: 2022-11-28 11:36-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -46,9 +46,6 @@ msgstr "应用"
 msgid "Actions"
 msgstr "控制"
 
-msgid "Add Printer"
-msgstr "添加打印机"
-
 msgid "Add profile"
 msgstr ""
 
@@ -62,6 +59,9 @@ msgstr "对Endstop应用%.2f的偏移量？"
 #, python-format
 msgid "Apply %s%.2f offset to Probe?"
 msgstr "将%s%.2f的偏移量应用于探针？"
+
+msgid "Are you sure do you want to exclude the object?"
+msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "您确定要紧急停止吗？"
@@ -110,9 +110,6 @@ msgstr "已校准，保存配置后生效"
 
 msgid "Calibrating"
 msgstr ""
-
-msgid "Calibrating..."
-msgstr "校准中..."
 
 msgid "Can't set above the maximum:"
 msgstr "设置值超出最大值："
@@ -178,9 +175,6 @@ msgstr "日期"
 msgid "Decrease"
 msgstr "减少"
 
-msgid "Delete"
-msgstr "删除"
-
 msgid "Delete File?"
 msgstr ""
 
@@ -210,6 +204,9 @@ msgid "Estimated Time Method"
 msgstr "估算剩余时间方式"
 
 msgid "Exclude Object"
+msgstr ""
+
+msgid "Extra Large"
 msgstr ""
 
 msgid "Extrude"
@@ -287,9 +284,6 @@ msgstr "隐藏温度传感器。"
 msgid "Hide temp."
 msgstr "隐藏温度。"
 
-msgid "Home"
-msgstr "首页"
-
 msgid "Home All"
 msgstr "全部归零"
 
@@ -320,9 +314,6 @@ msgstr "主题风格"
 msgid "Increase"
 msgstr "增加"
 
-msgid "Initializing"
-msgstr "初始化"
-
 msgid "Initializing printer..."
 msgstr "初始化打印机中..."
 
@@ -334,6 +325,9 @@ msgstr "接口"
 
 msgid "Invalid"
 msgstr "无效"
+
+msgid "Invalid password"
+msgstr ""
 
 msgid "Invert X"
 msgstr "反转X轴"
@@ -362,6 +356,9 @@ msgstr "Klipper正在启动"
 msgid "Klipper will reboot"
 msgstr "Klipper将重新启动"
 
+msgid "KlipperScreen will reboot"
+msgstr "KlipperScreen 将重新启动"
+
 msgid "Language"
 msgstr "语言"
 
@@ -382,9 +379,6 @@ msgstr "载入耗材"
 
 msgid "Lower Nozzle"
 msgstr "降低喷嘴"
-
-msgid "Machine"
-msgstr ""
 
 msgid "Macro shortcut on sidebar"
 msgstr "显示侧边栏宏快捷方式"
@@ -407,6 +401,9 @@ msgstr "最大加速至减速"
 msgid "Max Velocity"
 msgstr "最大速度"
 
+msgid "Maximum"
+msgstr ""
+
 msgid "Measure Both"
 msgstr ""
 
@@ -421,6 +418,9 @@ msgstr "中"
 
 msgid "Menu"
 msgstr "菜单"
+
+msgid "Mesh calibrate"
+msgstr ""
 
 msgid "Modified"
 msgstr "修改时间"
@@ -440,6 +440,9 @@ msgstr "文件名称"
 msgid "Network"
 msgstr "网络"
 
+msgid "Never"
+msgstr ""
+
 msgid "New"
 msgstr ""
 
@@ -450,9 +453,6 @@ msgstr ""
 
 msgid "Nothing selected"
 msgstr "未选择任何内容"
-
-msgid "Off"
-msgstr "关闭"
 
 #, python-format
 msgid "Outdated by %d"
@@ -504,8 +504,14 @@ msgstr "打印控制"
 msgid "Print Time"
 msgstr "打印用时"
 
+msgid "Printer"
+msgstr ""
+
 msgid "Printer Connections"
 msgstr "龙门架调平"
+
+msgid "Printer Select"
+msgstr ""
 
 msgid "Printing"
 msgstr "打印中"
@@ -516,11 +522,17 @@ msgstr "探头偏移"
 msgid "Profile Name:"
 msgstr "配置文件名称:"
 
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr ""
+
 msgid "Quad Gantry Level"
 msgstr "龙门架调平"
 
 msgid "Raise Nozzle"
 msgstr "升高喷嘴"
+
+msgid "Recover"
+msgstr ""
 
 msgid "Recover Hard"
 msgstr "重置(Hard)"
@@ -552,9 +564,8 @@ msgstr "回抽长度"
 msgid "Retraction Speed"
 msgstr "回抽速度"
 
-#, python-format
-msgid "Retry #%s"
-msgstr "重试 #%s"
+msgid "Retry"
+msgstr ""
 
 msgid "Retrying"
 msgstr ""
@@ -606,6 +617,12 @@ msgstr "设置"
 msgid "Show"
 msgstr "显示"
 
+msgid "Show Heater Power"
+msgstr ""
+
+msgid "Shutdown"
+msgstr ""
+
 msgid "Size"
 msgstr "大小"
 
@@ -620,12 +637,6 @@ msgstr "切片:"
 
 msgid "Small"
 msgstr "小"
-
-msgid "Sort by: "
-msgstr "排序: "
-
-msgid "Sort:"
-msgstr "排序:"
 
 msgid "Speed (mm/s)"
 msgstr "速度(mm/s)"
@@ -669,10 +680,6 @@ msgstr "温度 (°C)"
 msgid "Temperature"
 msgstr "温度控制"
 
-#, python-format
-msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr "要应用%s请重新启动KlipperScreen"
-
 msgid "Total:"
 msgstr "总:"
 
@@ -703,26 +710,11 @@ msgstr "更新中"
 msgid "Uploaded"
 msgstr "上传时间"
 
-msgid "View Mesh"
-msgstr "查看热床网格"
-
-msgid "X+"
-msgstr ""
-
-msgid "X-"
-msgstr ""
-
 msgid "XY Move Speed (mm/s)"
 msgstr "XY轴移动速度(mm/s)"
 
 msgid "XY Speed (mm/s)"
 msgstr "XY轴速度(mm/s)"
-
-msgid "Y+"
-msgstr ""
-
-msgid "Y-"
-msgstr ""
 
 msgid "Z Calibrate"
 msgstr "Z轴校准"
@@ -738,12 +730,6 @@ msgstr "Z 倾斜校准"
 
 msgid "Z offset:"
 msgstr "Z轴偏移:"
-
-msgid "Z+"
-msgstr ""
-
-msgid "Z-"
-msgstr ""
 
 msgid "commit"
 msgid_plural "commits"
@@ -767,6 +753,40 @@ msgstr ""
 
 msgid "mm/s²"
 msgstr ""
+
+msgid "mm³/s"
+msgstr ""
+
+#~ msgid "Sort:"
+#~ msgstr "排序:"
+
+#~ msgid "Calibrating..."
+#~ msgstr "校准中..."
+
+#, python-format
+#~ msgid "Retry #%s"
+#~ msgstr "重试 #%s"
+
+#~ msgid "Add Printer"
+#~ msgstr "添加打印机"
+
+#~ msgid "Initializing"
+#~ msgstr "初始化"
+
+#~ msgid "Delete"
+#~ msgstr "删除"
+
+#~ msgid "Home"
+#~ msgstr "首页"
+
+#~ msgid "Off"
+#~ msgstr "关闭"
+
+#~ msgid "View Mesh"
+#~ msgstr "查看热床网格"
+
+#~ msgid "Sort by: "
+#~ msgstr "排序: "
 
 #~ msgid "Bltouch found applied offset"
 #~ msgstr "Bltouch 发现应用的偏移量"
@@ -795,9 +815,6 @@ msgstr ""
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6 地址"
-
-#~ msgid "Unknown Heater "
-#~ msgstr "未知加热器 "
 
 #~ msgid "Disconnect"
 #~ msgstr "断开"

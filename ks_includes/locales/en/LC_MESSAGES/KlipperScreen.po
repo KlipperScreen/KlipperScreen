@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-18 23:05-0300\n"
+"POT-Creation-Date: 2022-11-30 18:17-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -41,9 +41,6 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-msgid "Add Printer"
-msgstr ""
-
 msgid "Add profile"
 msgstr ""
 
@@ -56,6 +53,9 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.2f offset to Probe?"
+msgstr ""
+
+msgid "Are you sure do you want to exclude the object?"
 msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
@@ -104,9 +104,6 @@ msgid "Calibrated, save configuration to make it permanent"
 msgstr ""
 
 msgid "Calibrating"
-msgstr ""
-
-msgid "Calibrating..."
 msgstr ""
 
 msgid "Can't set above the maximum:"
@@ -173,9 +170,6 @@ msgstr ""
 msgid "Decrease"
 msgstr ""
 
-msgid "Delete"
-msgstr ""
-
 msgid "Delete File?"
 msgstr ""
 
@@ -205,6 +199,9 @@ msgid "Estimated Time Method"
 msgstr ""
 
 msgid "Exclude Object"
+msgstr ""
+
+msgid "Extra Large"
 msgstr ""
 
 msgid "Extrude"
@@ -282,9 +279,6 @@ msgstr ""
 msgid "Hide temp."
 msgstr ""
 
-msgid "Home"
-msgstr ""
-
 msgid "Home All"
 msgstr ""
 
@@ -315,9 +309,6 @@ msgstr ""
 msgid "Increase"
 msgstr ""
 
-msgid "Initializing"
-msgstr ""
-
 msgid "Initializing printer..."
 msgstr ""
 
@@ -328,6 +319,9 @@ msgid "Interface"
 msgstr ""
 
 msgid "Invalid"
+msgstr ""
+
+msgid "Invalid password"
 msgstr ""
 
 msgid "Invert X"
@@ -357,6 +351,9 @@ msgstr ""
 msgid "Klipper will reboot"
 msgstr ""
 
+msgid "KlipperScreen will reboot"
+msgstr ""
+
 msgid "Language"
 msgstr ""
 
@@ -376,9 +373,6 @@ msgid "Load"
 msgstr ""
 
 msgid "Lower Nozzle"
-msgstr ""
-
-msgid "Machine"
 msgstr ""
 
 msgid "Macro shortcut on sidebar"
@@ -402,6 +396,9 @@ msgstr ""
 msgid "Max Velocity"
 msgstr ""
 
+msgid "Maximum"
+msgstr ""
+
 msgid "Measure Both"
 msgstr ""
 
@@ -415,6 +412,9 @@ msgid "Medium"
 msgstr ""
 
 msgid "Menu"
+msgstr ""
+
+msgid "Mesh calibrate"
 msgstr ""
 
 msgid "Modified"
@@ -435,6 +435,9 @@ msgstr ""
 msgid "Network"
 msgstr ""
 
+msgid "Never"
+msgstr ""
+
 msgid "New"
 msgstr ""
 
@@ -444,9 +447,6 @@ msgid ""
 msgstr ""
 
 msgid "Nothing selected"
-msgstr ""
-
-msgid "Off"
 msgstr ""
 
 #, python-format
@@ -500,7 +500,13 @@ msgstr ""
 msgid "Print Time"
 msgstr ""
 
+msgid "Printer"
+msgstr ""
+
 msgid "Printer Connections"
+msgstr ""
+
+msgid "Printer Select"
 msgstr ""
 
 msgid "Printing"
@@ -512,10 +518,16 @@ msgstr ""
 msgid "Profile Name:"
 msgstr ""
 
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr ""
+
 msgid "Quad Gantry Level"
 msgstr ""
 
 msgid "Raise Nozzle"
+msgstr ""
+
+msgid "Recover"
 msgstr ""
 
 msgid "Recover Hard"
@@ -548,8 +560,7 @@ msgstr ""
 msgid "Retraction Speed"
 msgstr ""
 
-#, python-format
-msgid "Retry #%s"
+msgid "Retry"
 msgstr ""
 
 msgid "Retrying"
@@ -602,6 +613,12 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
+msgid "Show Heater Power"
+msgstr ""
+
+msgid "Shutdown"
+msgstr ""
+
 msgid "Size"
 msgstr ""
 
@@ -615,12 +632,6 @@ msgid "Slicer:"
 msgstr ""
 
 msgid "Small"
-msgstr ""
-
-msgid "Sort by: "
-msgstr ""
-
-msgid "Sort:"
 msgstr ""
 
 msgid "Speed (mm/s)"
@@ -665,10 +676,6 @@ msgstr ""
 msgid "Temperature"
 msgstr ""
 
-#, python-format
-msgid "To apply %s KlipperScreen needs to be restarted"
-msgstr ""
-
 msgid "Total:"
 msgstr ""
 
@@ -699,25 +706,10 @@ msgstr ""
 msgid "Uploaded"
 msgstr ""
 
-msgid "View Mesh"
-msgstr ""
-
-msgid "X+"
-msgstr ""
-
-msgid "X-"
-msgstr ""
-
 msgid "XY Move Speed (mm/s)"
 msgstr ""
 
 msgid "XY Speed (mm/s)"
-msgstr ""
-
-msgid "Y+"
-msgstr ""
-
-msgid "Y-"
 msgstr ""
 
 msgid "Z Calibrate"
@@ -733,12 +725,6 @@ msgid "Z Tilt"
 msgstr ""
 
 msgid "Z offset:"
-msgstr ""
-
-msgid "Z+"
-msgstr ""
-
-msgid "Z-"
 msgstr ""
 
 msgid "commit"
@@ -764,4 +750,7 @@ msgid "mm/s"
 msgstr ""
 
 msgid "mm/s²"
+msgstr ""
+
+msgid "mm³/s"
 msgstr ""

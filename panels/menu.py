@@ -1,5 +1,8 @@
-import gi
 import logging
+
+import gi
+
+import json
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
@@ -16,24 +19,20 @@ class MenuPanel(ScreenPanel):
     i = 0
     j2_data = None
 
-    def initialize(self, panel_name, display_name, items):
-
-        self.items = items
-        self.create_menu_items()
-
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
+        self.items = None
         self.grid = self._gtk.HomogeneousGrid()
 
+    def initialize(self, items):
+        self.items = items
+        self.create_menu_items()
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(self.grid)
-
         self.content.add(scroll)
 
     def activate(self):
-        self.j2_data = self._printer.get_printer_status_data()
-        self.j2_data.update({
-            'moonraker_connected': self._screen._ws.is_connected()
-        })
         if self._screen.vertical_mode:
             self.arrangeMenuItems(self.items, 3)
         else:
@@ -47,8 +46,8 @@ class MenuPanel(ScreenPanel):
         i = 0
         for item in items:
             key = list(item)[0]
-            logging.debug(f"Evaluating item: {key}")
             if not self.evaluate_enable(item[key]['enable']):
+                logging.debug(f"X > {key}")
                 continue
 
             if columns == 4:
@@ -77,16 +76,31 @@ class MenuPanel(ScreenPanel):
             item = self.items[i][key]
 
             env = Environment(extensions=["jinja2.ext.i18n"], autoescape=True)
-            env.install_gettext_translations(self.lang)
-            j2_temp = env.from_string(item['name'])
-            parsed_name = j2_temp.render()
+            env.install_gettext_translations(self._config.get_lang())
 
-            b = self._gtk.ButtonImage(item['icon'], parsed_name, f"color{(i % 4) + 1}")
-            if item['panel'] is not False:
-                b.connect("clicked", self.menu_item_clicked, item['panel'], item)
-            elif item['method'] is not False:
-                params = item['params'] if item['params'] is not False else {}
-                if item['confirm'] is not False:
+            printer = self._printer.get_printer_status_data()
+
+            name = env.from_string(item['name']).render(printer)
+            icon = env.from_string(item['icon']).render(printer) if item['icon'] else None
+            style = env.from_string(item['style']).render(printer) if item['style'] else None
+
+            b = self._gtk.Button(icon, name, (style if style else f"color{(i % 4) + 1}"))
+
+            if item['panel'] is not None:
+                panel = env.from_string(item['panel']).render(printer)
+                b.connect("clicked", self.menu_item_clicked, panel, item)
+            elif item['method'] is not None:
+                params = {}
+
+                if item['params'] is not False:
+                    try:
+                        p = env.from_string(item['params']).render(printer)
+                        params = json.loads(p)
+                    except Exception as e:
+                        logging.exception(f"Unable to parse parameters for [{name}]:\n{e}")
+                        params = {}
+
+                if item['confirm'] is not None:
                     b.connect("clicked", self._screen._confirm_send_action, item['confirm'], item['method'], params)
                 else:
                     b.connect("clicked", self._screen._send_action, item['method'], params)
@@ -95,23 +109,16 @@ class MenuPanel(ScreenPanel):
             self.labels[key] = b
 
     def evaluate_enable(self, enable):
-        if enable is True:
-            return True
-        if enable is False:
-            return False
-
         if enable == "{{ moonraker_connected }}":
-            logging.info("moonraker is_connected %s", self._screen._ws.is_connected())
-            return self._screen._ws.is_connected()
-
+            logging.info(f"moonraker connected {self._screen._ws.connected}")
+            return self._screen._ws.connected
+        elif enable == "{{ camera_configured }}":
+            return self.ks_printer_cfg and self.ks_printer_cfg.get("camera_url", None) is not None
         self.j2_data = self._printer.get_printer_status_data()
         try:
-            logging.debug(f"Template: '{enable}'")
             j2_temp = Template(enable, autoescape=True)
             result = j2_temp.render(self.j2_data)
-            if result == 'True':
-                return True
-            return False
+            return result == 'True'
         except Exception as e:
             logging.debug(f"Error evaluating enable statement: {enable}\n{e}")
             return False

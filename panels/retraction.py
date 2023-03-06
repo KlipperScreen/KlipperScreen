@@ -1,6 +1,7 @@
-import gi
 import logging
 import re
+
+import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
@@ -14,15 +15,12 @@ def create_panel(*args):
 
 class FWRetractionPanel(ScreenPanel):
 
-    def __init__(self, screen, title, back=True):
-        super().__init__(screen, title, back)
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.options = None
         self.grid = Gtk.Grid()
         self.values = {}
         self.list = {}
-
-    def initialize(self, panel_name):
-
         conf = self._printer.get_config_section("firmware_retraction")
 
         retract_length = float(conf['retract_length']) if 'retract_length' in conf else 0
@@ -102,6 +100,14 @@ class FWRetractionPanel(ScreenPanel):
         self.list[option]['scale'].disconnect_by_func(self.set_opt_value)
         self.list[option]['scale'].set_value(self.values[option])
         self.list[option]['scale'].connect("button-release-event", self.set_opt_value, option)
+        # Infinite scale
+        for opt in self.options:
+            if opt['option'] == option:
+                if self.values[option] > opt["maxval"] * .75:
+                    self.list[option]['adjustment'].set_upper(self.values[option] * 1.5)
+                else:
+                    self.list[option]['adjustment'].set_upper(opt["maxval"])
+                break
 
     def add_option(self, option, optname, units, value, digits, maxval):
         logging.info(f"Adding option: {option}")
@@ -116,15 +122,16 @@ class FWRetractionPanel(ScreenPanel):
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         minimum = 1 if option in ["retract_speed", "unretract_speed"] else 0
         self.values[option] = value
-        scale = Gtk.Scale.new_with_range(orientation=Gtk.Orientation.HORIZONTAL, min=minimum, max=maxval, step=1)
-        scale.set_value(self.values[option])
+        # adj (value, lower, upper, step_increment, page_increment, page_size)
+        adj = Gtk.Adjustment(value, minimum, maxval, 1, 5, 0)
+        scale = Gtk.Scale.new(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
         scale.set_digits(digits)
         scale.set_hexpand(True)
         scale.set_has_origin(True)
         scale.get_style_context().add_class("option_slider")
         scale.connect("button-release-event", self.set_opt_value, option)
 
-        reset = self._gtk.ButtonImage("refresh", style="color1")
+        reset = self._gtk.Button("refresh", style="color1")
         reset.connect("clicked", self.reset_value, option)
         reset.set_hexpand(False)
 
@@ -133,13 +140,10 @@ class FWRetractionPanel(ScreenPanel):
         item.attach(scale, 0, 1, 1, 1)
         item.attach(reset, 1, 1, 1, 1)
 
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-        frame.add(item)
-
         self.list[option] = {
-            "row": frame,
+            "row": item,
             "scale": scale,
+            "adjustment": adj,
         }
 
         pos = sorted(self.list).index(option)

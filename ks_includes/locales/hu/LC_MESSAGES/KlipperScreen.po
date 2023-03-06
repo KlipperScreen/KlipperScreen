@@ -1,0 +1,823 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: KlipperScreen\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-13 20:39-0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: AntoszHUN\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.1\n"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s verzió frissítése"
+
+msgid "(default)"
+msgstr "(alapértelmezett)"
+
+msgid "24 Hour Time"
+msgstr "24 Órás Idő"
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr "A FIRMWARE_RESTART javíthatja a problémát."
+
+msgid "ADXL Not Configured"
+msgstr "ADXL nincs konfigurálva"
+
+msgid "Abort"
+msgstr "Megszakít"
+
+msgid "Acceleration:"
+msgstr "Gyorsulás:"
+
+msgid "Accept"
+msgstr "Elfogad"
+
+msgid "Actions"
+msgstr "Műveletek"
+
+msgid "Add profile"
+msgstr "Profil hozzáadása"
+
+msgid "Apply"
+msgstr "Alkalmaz"
+
+#, python-format
+msgid "Apply %.2f offset to Endstop?"
+msgstr "Alkalmazod %.2f eltolást az Endstopra?"
+
+#, python-format
+msgid "Apply %s%.2f offset to Probe?"
+msgstr "Alkalmazod %s%.2f eltolást a szondára?"
+
+msgid "Are you sure do you want to exclude the object?"
+msgstr "Biztosan kizárod az objektumot?"
+
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "Biztosan Vészleállítást szeretnél?"
+
+msgid "Are you sure you wish to cancel this print?"
+msgstr "Biztosan megszakítod ezt a nyomtatást?"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "Biztosan le szeretnéd tiltani a motorokat?"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "Biztos, hogy újra akarod indítani a rendszert?"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "Biztos, hogy le szeretnéd állítani a rendszert?"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Auto-calibrate"
+msgstr "Automatikus kalibrálás"
+
+msgid "Auto-close notifications"
+msgstr "Értesítések automatikus bezárása"
+
+msgid "Auto-scroll"
+msgstr "Automatikus görgetés"
+
+msgid "Bed Level"
+msgstr "Ágyszint"
+
+msgid "Bed Mesh"
+msgstr "Ágyháló"
+
+msgid "Bed screw configuration:"
+msgstr "Az ágycsavar konfigurációja:"
+
+msgid "Calibrate"
+msgstr "Kalibrálás"
+
+msgid "Calibrated"
+msgstr "Kalibrálva"
+
+msgid "Calibrated, save configuration to make it permanent"
+msgstr "Kalibrálva! Mentsd el a konfigurációt, hogy az állandó legyen"
+
+msgid "Calibrating"
+msgstr "Kalibrálás"
+
+msgid "Can't set above the maximum:"
+msgstr "Nem állítható a maximum fölé:"
+
+msgid "Cancel"
+msgstr "Mégse"
+
+msgid "Cancel Print"
+msgstr "Nyomtatás megszakítása"
+
+msgid "Cancelled"
+msgstr "Törölve"
+
+msgid "Cancelling"
+msgstr "Törlés"
+
+msgid "Cannot connect to Moonraker"
+msgstr "Nem lehet csatlakozni a Moonrakerhez"
+
+msgid "Channel"
+msgstr "Csatorna"
+
+msgid "Check ADXL Wiring"
+msgstr "Ellenőrizd az ADXL kábelezést"
+
+msgid "Checking for updates, please wait..."
+msgstr "Frissítések keresése, kérjük, várj..."
+
+msgid "Clear"
+msgstr "Tiszta"
+
+msgid "Close"
+msgstr "Bezárás"
+
+msgid "Complete"
+msgstr "Befejezve"
+
+msgid "Configuration"
+msgstr "Konfiguráció"
+
+msgid "Confirm Emergency Stop"
+msgstr "Vészleállítás megerősítése"
+
+msgid "Connected"
+msgstr "Csatlakoztatva"
+
+#, python-format
+msgid "Connecting to %s"
+msgstr "Csatlakozás %s"
+
+msgid "Console"
+msgstr "Konzol"
+
+msgid "Continue"
+msgstr "Folytat"
+
+msgid "Cooldown"
+msgstr "Lehűtés"
+
+msgid "Date"
+msgstr "Dátum"
+
+msgid "Decrease"
+msgstr "Csökkent"
+
+msgid "Delete File?"
+msgstr "Fájl törlése?"
+
+msgid "Deselect"
+msgstr "Kijelölés törlése"
+
+msgid "Disable Motors"
+msgstr "Motorok letiltása"
+
+msgid "Disable XY"
+msgstr "XY Letiltása"
+
+msgid "Distance (mm)"
+msgstr "Távolság (mm)"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "Vissza akarod állítani %s-t?"
+
+msgid "Elapsed:"
+msgstr "Eltelt:"
+
+msgid "Error"
+msgstr "Hiba"
+
+msgid "Estimated Time Method"
+msgstr "Becsült idő módszer"
+
+msgid "Exclude Object"
+msgstr "Objektum kizárása"
+
+msgid "Extra Large"
+msgstr "Extra nagy"
+
+msgid "Extrude"
+msgstr "Száladagolás"
+
+msgid "Extrusion +"
+msgstr "Extrudálás +"
+
+msgid "Extrusion -"
+msgstr "Extrudálás -"
+
+msgid "Failed, adjust position first"
+msgstr "Sikertelen! Előbb állítsd be a pozíciót"
+
+msgid "Fan"
+msgstr "Hűtés"
+
+msgid "Filament Used"
+msgstr "Használt nyomtatószál"
+
+msgid "Filament total:"
+msgstr "Összes nyomtatószál:"
+
+msgid "Filament used:"
+msgstr "Használt nyomtatószál:"
+
+msgid "Filament:"
+msgstr "Nyomtatószál:"
+
+msgid "File"
+msgstr "Fájl"
+
+msgid "File:"
+msgstr "Fájl:"
+
+msgid "Finding ADXL"
+msgstr "ADXL keresése"
+
+msgid "Fine Tuning"
+msgstr "Finomhangolás"
+
+msgid "Finish"
+msgstr "Befejezve"
+
+msgid "Firmware Restart"
+msgstr "Firmware Újraindítása"
+
+msgid "Flow:"
+msgstr "Folyam:"
+
+msgid "Flowrate:"
+msgstr "Áramlás:"
+
+msgid "Font Size"
+msgstr "Betűméret"
+
+msgid "Full Update"
+msgstr "Teljes Frissítés"
+
+msgid "Go Back"
+msgstr "Visszalépés"
+
+msgid "Height:"
+msgstr "Magasság:"
+
+msgid "Hidden"
+msgstr "Rejtett"
+
+msgid "Hide"
+msgstr "Elrejt"
+
+msgid "Hide sensors in Temp."
+msgstr "Hőfok szenzorok elrejtése."
+
+msgid "Hide temp."
+msgstr "Hőfok elrejtése"
+
+msgid "Home All"
+msgstr "X-Y-Z kezdőpont"
+
+msgid "Home X"
+msgstr "X kezdőpont"
+
+msgid "Home XY"
+msgstr "XY kezdőpont"
+
+msgid "Home Y"
+msgstr "Y kezdőpont"
+
+msgid "Home Z"
+msgstr "Z kezdőpont"
+
+msgid "Homing"
+msgstr "Kezdőpont"
+
+msgid "Host"
+msgstr "Gazdagép"
+
+msgid "Hostname"
+msgstr "Gazdanév"
+
+msgid "Icon Theme"
+msgstr "Ikon téma"
+
+msgid "Increase"
+msgstr "Növel"
+
+msgid "Initializing printer..."
+msgstr "Nyomtató inicializálása..."
+
+msgid "Input Shaper"
+msgstr "Bemeneti alakító"
+
+msgid "Interface"
+msgstr "Felület"
+
+msgid "Invalid"
+msgstr "Érvénytelen"
+
+msgid "Invalid password"
+msgstr "Érvénytelen jelszó"
+
+msgid "Invert X"
+msgstr "Fordított X"
+
+msgid "Invert Y"
+msgstr "Fordított Y"
+
+msgid "Invert Z"
+msgstr "Fordított Z"
+
+msgid "Klipper Restart"
+msgstr "Klipper Újraindítása"
+
+msgid "Klipper has disconnected"
+msgstr "Klipper szétkapcsolt"
+
+msgid "Klipper has encountered an error."
+msgstr "A Klipper hibát észlelt."
+
+msgid "Klipper has shutdown"
+msgstr "A Klipper leállt"
+
+msgid "Klipper is attempting to start"
+msgstr "Klipper megpróbálja elindítani"
+
+msgid "Klipper will reboot"
+msgstr "A Klipper újraindul"
+
+msgid "KlipperScreen will reboot"
+msgstr "A KlipperScreen újraindul"
+
+msgid "Language"
+msgstr "Nyelv"
+
+msgid "Large"
+msgstr "Nagy"
+
+msgid "Layer:"
+msgstr "Réteg:"
+
+msgid "Left:"
+msgstr "Bal:"
+
+msgid "Limits"
+msgstr "Korlátok"
+
+msgid "Load"
+msgstr "Betöltés"
+
+msgid "Lower Nozzle"
+msgstr "Fúvóka le"
+
+msgid "Macro shortcut on sidebar"
+msgstr "Makró parancsikon az oldalsávon"
+
+msgid "Macros"
+msgstr "Makrók"
+
+msgid "Main Menu"
+msgstr "Főmenü"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Max Acceleration"
+msgstr "Max gyorsulás"
+
+msgid "Max Acceleration to Deceleration"
+msgstr "Lassulás max gyorsulása"
+
+msgid "Max Velocity"
+msgstr "Max sebesség"
+
+msgid "Maximum"
+msgstr "Maximum"
+
+msgid "Measure Both"
+msgstr "Mindkettő mérése"
+
+msgid "Measure X"
+msgstr "X mérése"
+
+msgid "Measure Y"
+msgstr "Y mérése"
+
+msgid "Medium"
+msgstr "Közepes"
+
+msgid "Menu"
+msgstr "Menü"
+
+msgid "Mesh calibrate"
+msgstr "Háló kalibrálása"
+
+msgid "Modified"
+msgstr "Módosított"
+
+msgid "Moonraker: connected"
+msgstr "Moonraker: csatlakoztatva"
+
+msgid "Move"
+msgstr "Mozgatás"
+
+msgid "Move Distance (mm)"
+msgstr "Mozgási távolság (mm)"
+
+msgid "Name"
+msgstr "Név"
+
+msgid "Network"
+msgstr "Hálózat"
+
+msgid "Never"
+msgstr "Soha"
+
+msgid "New"
+msgstr "Új"
+
+msgid ""
+"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"conf"
+msgstr ""
+"Az automatikus felismerés nem támogatott, a klipperscreenben kell beállítani."
+"conf"
+
+msgid "Nothing selected"
+msgstr "Nincs kiválasztva"
+
+#, python-format
+msgid "Outdated by %d"
+msgstr "%d által elavult"
+
+msgid "PSK for"
+msgstr "PSK-nak"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "A csomag frissítésre kerül"
+msgstr[1] "Csomag frissül"
+
+msgid "Part Fan"
+msgstr "Tárgyhűtő"
+
+msgid "Password saved"
+msgstr "Jelszó mentve"
+
+msgid "Pause"
+msgstr "Szünet"
+
+msgid "Paused"
+msgstr "Szüneteltetve"
+
+msgid "Perform a full upgrade?"
+msgstr "Teljes frissítést hajtasz végre?"
+
+msgid "Pins"
+msgstr "Kimenetek"
+
+msgid "Please recompile and flash the micro-controller."
+msgstr "Fordítsd újra és frissítsd a mikrovezérlőt."
+
+msgid "Power"
+msgstr "Bekapcsolás"
+
+msgid "Power On Printer"
+msgstr "Nyomtató bekapcsolása"
+
+msgid "Pressure Advance:"
+msgstr "Nyomás előtolás:"
+
+msgid "Print"
+msgstr "Nyomtatás"
+
+msgid "Print Control"
+msgstr "Nyomtatásvezérlés"
+
+msgid "Print Time"
+msgstr "Nyomtatási idő"
+
+msgid "Printer"
+msgstr "Nyomtató"
+
+msgid "Printer Connections"
+msgstr "Nyomtató csatlakozások"
+
+msgid "Printer Select"
+msgstr "Nyomtató kiválasztása"
+
+msgid "Printing"
+msgstr "Nyomtatás"
+
+msgid "Probe Offset"
+msgstr "Szonda eltolás"
+
+msgid "Profile Name:"
+msgstr "Profil név:"
+
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr "Add meg a KlipperScreen.log-ot, amikor segítséget kérsz.\n"
+
+msgid "Quad Gantry Level"
+msgstr "Négy állású szint"
+
+msgid "Raise Nozzle"
+msgstr "Fúvóka fel"
+
+msgid "Recover"
+msgstr "Visszaállítása"
+
+msgid "Recover Hard"
+msgstr "Hárdver visszaállítása"
+
+msgid "Recover Soft"
+msgstr "Program visszaállítása"
+
+msgid "Reference"
+msgstr "Referencia"
+
+msgid "Refresh"
+msgstr "Frissítés"
+
+msgid "Restart"
+msgstr "Újraindítás"
+
+msgid "Resume"
+msgstr "Folytat"
+
+msgid "Retract"
+msgstr "Visszahúz"
+
+msgid "Retraction"
+msgstr "Visszahúzás"
+
+msgid "Retraction Length"
+msgstr "Visszahúzási hossz"
+
+msgid "Retraction Speed"
+msgstr "Visszahúzási sebesség"
+
+msgid "Retry"
+msgstr "Újra"
+
+msgid "Retrying"
+msgstr "Újrapróbálkozás"
+
+msgid "Save"
+msgstr "Mentés"
+
+msgid "Save Config"
+msgstr "Konfiguráció mentése"
+
+msgid "Save Z"
+msgstr "Z mentése"
+
+msgid "Save configuration?"
+msgstr "Mented a konfigurációt?"
+
+msgid "Saved"
+msgstr "Mentve"
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr "Eltolás mentve: %s"
+
+msgid "Screen DPMS"
+msgstr "Képernyő DPMS"
+
+msgid "Screen Power Off Time"
+msgstr "Kijelző kikapcsolási ideje"
+
+msgid "Screws Adjust"
+msgstr "Csavarok beállítása"
+
+msgid "Select"
+msgstr "Kijelölés"
+
+msgid "Send"
+msgstr "Küldés"
+
+#, python-format
+msgid "Sending Power ON signal to: %s"
+msgstr "Bekapcsolási jel küldése ide: %s"
+
+msgid "Set Temp"
+msgstr "Hőfok megadás"
+
+msgid "Settings"
+msgstr "Beállítások"
+
+msgid "Show"
+msgstr "Mutat"
+
+msgid "Show Heater Power"
+msgstr "A fűtésteljesítmény megjelenítése"
+
+msgid "Shutdown"
+msgstr "Leállítás"
+
+msgid "Size"
+msgstr "Méret"
+
+msgid "Slicer"
+msgstr "Szeletelő"
+
+msgid "Slicer Time correction (%)"
+msgstr "Szeletelő idő javítása (%)"
+
+msgid "Slicer:"
+msgstr "Szeletelő:"
+
+msgid "Small"
+msgstr "Kicsi"
+
+msgid "Speed (mm/s)"
+msgstr "Sebesség (mm/s)"
+
+msgid "Speed +"
+msgstr "Sebesség +"
+
+msgid "Speed -"
+msgstr "Sebesség -"
+
+msgid "Speed:"
+msgstr "Sebesség:"
+
+msgid "Square Corner Velocity"
+msgstr "Sebesség a sarkokban"
+
+msgid "Start"
+msgstr "Indítás"
+
+msgid "Starting WiFi Association"
+msgstr "A WiFi Egyesület elindítása"
+
+msgid "Starting recovery for"
+msgstr "Helyreállítás megkezdése"
+
+msgid "Starting update for"
+msgstr "Frissítés indítása"
+
+msgid "System"
+msgstr "Rendszer"
+
+msgid "System Restart"
+msgstr "Rendszer Újraindítása"
+
+msgid "System Shutdown"
+msgstr "Rendszer Leállitás"
+
+msgid "Temp (°C)"
+msgstr "Hőmérséklet (°C)"
+
+msgid "Temperature"
+msgstr "Hőfok"
+
+msgid "Total:"
+msgstr "Teljes:"
+
+msgid "Unknown Heater"
+msgstr "Ismeretlen melegítő"
+
+msgid "Unknown screw position"
+msgstr "Ismeretlen csavarhelyzet"
+
+msgid "Unload"
+msgstr "Kiadás"
+
+msgid "Unretract Extra Length"
+msgstr "Extra hossz visszahúzása"
+
+msgid "Unretract Speed"
+msgstr "Visszahúzási sebesség"
+
+msgid "Up To Date"
+msgstr "Naprakész"
+
+msgid "Update"
+msgstr "Frissít"
+
+msgid "Updating"
+msgstr "Frissítés"
+
+msgid "Uploaded"
+msgstr "Feltöltve"
+
+msgid "XY Move Speed (mm/s)"
+msgstr "XY Mozgási seb. (mm/s)"
+
+msgid "XY Speed (mm/s)"
+msgstr "XY Sebesség (mm/s)"
+
+msgid "Z Calibrate"
+msgstr "Z Kalibrálás"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "Z Mozgási seb. (mm/s)"
+
+msgid "Z Speed (mm/s)"
+msgstr "Z Sebesség (mm/s)"
+
+msgid "Z Tilt"
+msgstr "Z Dőlés"
+
+msgid "Z offset:"
+msgstr "Z eltolás:"
+
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "ajánlás"
+msgstr[1] "ajánlások"
+
+msgid "dBm"
+msgstr "dBm"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "óra"
+msgstr[1] "órák"
+
+msgid "minutes"
+msgstr "perc"
+
+msgid "mm"
+msgstr "mm"
+
+msgid "mm/s"
+msgstr "mm/s"
+
+msgid "mm/s²"
+msgstr "mm/s²"
+
+msgid "mm³/s"
+msgstr "mm³/s"
+
+#~ msgid "Sort:"
+#~ msgstr "Fajta:"
+
+#~ msgid "Calibrating..."
+#~ msgstr "Kalibrálás..."
+
+#~ msgid "Z+"
+#~ msgstr "Z+"
+
+#~ msgid "Z-"
+#~ msgstr "Z-"
+
+#~ msgid "X+"
+#~ msgstr "X+"
+
+#~ msgid "X-"
+#~ msgstr "X-"
+
+#~ msgid "Y+"
+#~ msgstr "Y+"
+
+#~ msgid "Y-"
+#~ msgstr "Y-"
+
+#, python-format
+#~ msgid "Retry #%s"
+#~ msgstr "Újra #%s"
+
+#~ msgid "Add Printer"
+#~ msgstr "Nyomtató hozzáadása"
+
+#~ msgid "Initializing"
+#~ msgstr "Inicializálás"
+
+#~ msgid "Delete"
+#~ msgstr "Töröl"
+
+#~ msgid "Home"
+#~ msgstr "Kezdőpontok"
+
+#~ msgid "Off"
+#~ msgstr "Ki"
+
+#~ msgid "View Mesh"
+#~ msgstr "Háló nézet"
+
+#~ msgid "Machine"
+#~ msgstr "Gép"
+
+#~ msgid "Sort by: "
+#~ msgstr "Sorrend: "
+
+#~ msgid "Bltouch found applied offset"
+#~ msgstr "A Bltouch alkalmazott eltolást talált"
+
+#~ msgid ""
+#~ "Check /tmp/KlipperScreen.log for more information.\n"
+#~ "Please submit an issue on GitHub for help."
+#~ msgstr ""
+#~ "Nézd a /tmp/KlipperScreen.log további információért.\n"
+#~ "Segítségért küldj be egy hibajegyet a GitHubon."
+
+#~ msgid "Probe found applied offset"
+#~ msgstr "A szonda alkalmazott eltolást talált"

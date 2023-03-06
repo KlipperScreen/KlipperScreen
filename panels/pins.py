@@ -1,5 +1,6 @@
-import gi
 import logging
+
+import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib, Pango
@@ -13,8 +14,8 @@ def create_panel(*args):
 
 class OutputPinPanel(ScreenPanel):
 
-    def initialize(self, panel_name):
-
+    def __init__(self, screen, title):
+        super().__init__(screen, title)
         self.devices = {}
         # Create a grid for all devices
         self.labels['devices'] = Gtk.Grid()
@@ -36,10 +37,6 @@ class OutputPinPanel(ScreenPanel):
                 continue
             self.add_pin(pin)
 
-        frame = Gtk.Frame()
-        frame.set_vexpand(False)
-        self.labels['devices'].attach(frame, 0, -1, 1, 1)
-
     def add_pin(self, pin):
 
         logging.info(f"Adding pin: {pin}")
@@ -60,7 +57,7 @@ class OutputPinPanel(ScreenPanel):
         scale.get_style_context().add_class("fan_slider")
         scale.connect("button-release-event", self.set_output_pin, pin)
 
-        min_btn = self._gtk.ButtonImage("cancel", None, "color1", 1)
+        min_btn = self._gtk.Button("cancel", None, "color1", 1)
         min_btn.set_hexpand(False)
         min_btn.connect("clicked", self.update_pin_value, pin, 0)
 
@@ -72,12 +69,8 @@ class OutputPinPanel(ScreenPanel):
         pin_row.add(name)
         pin_row.add(pin_col)
 
-        frame = Gtk.Frame()
-        frame.get_style_context().add_class("frame-item")
-        frame.add(pin_row)
-
         self.devices[pin] = {
-            "row": frame,
+            "row": pin_row,
             "scale": scale,
         }
 

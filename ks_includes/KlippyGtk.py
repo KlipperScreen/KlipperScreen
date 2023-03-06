@@ -1,90 +1,84 @@
 # -*- coding: utf-8 -*-
-import gi
+import contextlib
 import logging
 import os
 import pathlib
+
+import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gdk, GdkPixbuf, Gio, Gtk, Pango
 
 
+def format_label(widget, lines=2):
+    if type(widget) == Gtk.Label:
+        return widget
+    if type(widget) in (Gtk.Container, Gtk.Bin, Gtk.Button, Gtk.Alignment, Gtk.Box):
+        for _ in widget.get_children():
+            lbl = format_label(_)
+            if lbl is not None:
+                lbl.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+                lbl.set_line_wrap(True)
+                lbl.set_ellipsize(True)
+                lbl.set_ellipsize(Pango.EllipsizeMode.END)
+                lbl.set_lines(lines)
+
+
 class KlippyGtk:
     labels = {}
-    width_ratio = 16
-    height_ratio = 9.375
 
-    def __init__(self, screen, width, height, theme, cursor, fontsize_type):
+    def __init__(self, screen):
         self.screen = screen
-        self.width = width
-        self.height = height
-        self.themedir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles", theme, "images")
-
+        self.themedir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles", screen.theme, "images")
+        self.cursor = screen.show_cursor
+        self.font_size_type = screen._config.get_main_config().get("font_size", "medium")
+        self.width = screen.width
+        self.height = screen.height
         self.font_ratio = [33, 49] if self.screen.vertical_mode else [43, 29]
-        self.font_size = int(min(
-            self.width / self.font_ratio[0],
-            self.height / self.font_ratio[1]
-        ))
-        if fontsize_type == "small":
-            self.font_size = round(self.font_size * 0.91)
-        elif fontsize_type == "large":
-            self.font_size = round(self.font_size * 1.09)
-        self.header_size = int(round((self.width / self.width_ratio) / 1.33))
+        self.font_size = min(self.width / self.font_ratio[0], self.height / self.font_ratio[1])
+        self.img_scale = self.font_size * 2
+        self.button_image_scale = 1.38
+        self.bsidescale = .65  # Buttons with image at the side
+
+        if self.font_size_type == "max":
+            self.font_size = self.font_size * 1.2
+            self.bsidescale = .7
+        elif self.font_size_type == "extralarge":
+            self.font_size = self.font_size * 1.14
+            self.img_scale = self.img_scale * 0.7
+            self.bsidescale = 1
+        elif self.font_size_type == "large":
+            self.font_size = self.font_size * 1.09
+            self.img_scale = self.img_scale * 0.9
+            self.bsidescale = .8
+        elif self.font_size_type == "small":
+            self.font_size = self.font_size * 0.91
+            self.bsidescale = .55
+        self.img_width = self.font_size * 3
+        self.img_height = self.font_size * 3
         self.titlebar_height = self.font_size * 2
-        self.img_width = int(round(self.width / self.width_ratio))
-        self.img_height = int(round(self.height / self.height_ratio))
+        logging.info(f"Font size: {self.font_size:.1f} ({self.font_size_type})")
+
         if self.screen.vertical_mode:
             self.action_bar_width = int(self.width)
             self.action_bar_height = int(self.height * .1)
+            self.content_width = self.width
+            self.content_height = self.height - self.titlebar_height - self.action_bar_height
         else:
             self.action_bar_width = int(self.width * .1)
             self.action_bar_height = int(self.height)
-        self.cursor = cursor
+            self.content_width = self.width - self.action_bar_width
+            self.content_height = self.height - self.titlebar_height
+
+        self.keyboard_height = self.content_height * 0.5
+        if (self.height / self.width) >= 3:  # Ultra-tall
+            self.keyboard_height = self.keyboard_height * 0.5
 
         self.color_list = {}  # This is set by screen.py init_style()
-
         for key in self.color_list:
             if "base" in self.color_list[key]:
                 rgb = [int(self.color_list[key]['base'][i:i + 2], 16) for i in range(0, 6, 2)]
                 self.color_list[key]['rgb'] = rgb
-
-        logging.debug(f"img width: {self.img_width} height: {self.img_height}")
-
-    def get_action_bar_width(self):
-        return self.action_bar_width
-
-    def get_action_bar_height(self):
-        return self.action_bar_height
-
-    def get_content_width(self):
-        return self.width - self.action_bar_width
-
-    def get_content_height(self):
-        if self.screen.vertical_mode:
-            return self.height - self.titlebar_height - self.action_bar_height
-        else:
-            return self.height - self.titlebar_height
-
-    def get_font_size(self):
-        return self.font_size
-
-    def get_titlebar_height(self):
-        return self.titlebar_height
-
-    def get_header_size(self):
-        return self.header_size
-
-    def get_image_width(self):
-        return self.img_width
-
-    def get_image_height(self):
-        return self.img_height
-
-    def get_keyboard_height(self):
-        if (self.height / self.width) >= 3:
-            # Ultra-tall
-            return self.get_content_height() * 0.25
-        else:
-            return self.get_content_height() * 0.5
 
     def get_temp_color(self, device):
         # logging.debug("Color list %s" % self.color_list)
@@ -119,51 +113,36 @@ class KlippyGtk:
             la.get_style_context().add_class(style)
         return la
 
-    def Image(self, image_name, scale=1.0):
-        filename = os.path.join(self.themedir, f"{image_name}.svg")
-        if os.path.exists(filename):
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename,
-                                                             int(round(self.img_width * scale)),
-                                                             int(round(self.img_height * scale)),
-                                                             True)
-            return Gtk.Image.new_from_pixbuf(pixbuf)
-        else:
-            logging.error(f"Unable to find image {filename}")
+    def Image(self, image_name=None, width=None, height=None):
+        if image_name is None:
             return Gtk.Image()
+        width = width if width is not None else self.img_width
+        height = height if height is not None else self.img_height
+        filename = os.path.join(self.themedir, image_name)
+        for ext in ["svg", "png"]:
+            with contextlib.suppress(Exception):
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(f"{filename}.{ext}", int(width), int(height))
+                if pixbuf is not None:
+                    return Gtk.Image.new_from_pixbuf(pixbuf)
+        logging.error(f"Unable to find image {filename}.{ext}")
+        return Gtk.Image()
 
-    def PixbufFromFile(self, filename, width_scale=1, height_scale=1):
-        return GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            filename,
-            int(round(self.img_width * width_scale)),
-            int(round(self.img_height * height_scale)),
-            True
-        )
+    @staticmethod
+    def PixbufFromFile(filename, width=-1, height=-1):
+        return GdkPixbuf.Pixbuf.new_from_file_at_size(filename, int(width), int(height))
 
-    def PixbufFromHttp(self, resource, width_scale=1, height_scale=1):
+    def PixbufFromHttp(self, resource, width=-1, height=-1):
         response = self.screen.apiclient.get_thumbnail_stream(resource)
         if response is False:
             return None
         stream = Gio.MemoryInputStream.new_from_data(response, None)
-        return GdkPixbuf.Pixbuf.new_from_stream_at_scale(
-            stream,
-            int(round(self.img_width * width_scale)),
-            int(round(self.img_height * height_scale)),
-            True
-        )
+        pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(stream, int(width), int(height), True)
+        stream.close_async(2)
+        return pixbuf
 
-    def Button(self, label=None, style=None):
-        b = Gtk.Button(label=label)
-        b.set_hexpand(True)
-        b.set_vexpand(True)
-        b.set_can_focus(False)
-        b.props.relief = Gtk.ReliefStyle.NONE
-
-        if style is not None:
-            b.get_style_context().add_class(style)
-        b.connect("clicked", self.screen.reset_screensaver_timeout)
-        return b
-
-    def ButtonImage(self, image_name=None, label=None, style=None, scale=1.38, position=Gtk.PositionType.TOP, lines=2):
+    def Button(self, image_name=None, label=None, style=None, scale=None, position=Gtk.PositionType.TOP, lines=2):
+        if self.font_size_type == "max" and label is not None and scale is None:
+            image_name = None
         b = Gtk.Button()
         if label is not None:
             b.set_label(label.replace("\n", " "))
@@ -171,28 +150,17 @@ class KlippyGtk:
         b.set_vexpand(True)
         b.set_can_focus(False)
         if image_name is not None:
-            b.set_image(self.Image(image_name, scale))
+            if scale is None:
+                scale = self.button_image_scale
+            if label is None:
+                scale = scale * 1.5
+            width = height = self.img_scale * scale
+            b.set_image(self.Image(image_name, width, height))
         b.set_image_position(position)
         b.set_always_show_image(True)
 
         if label is not None:
-            try:
-                # Get the label object
-                if image_name is not None:
-                    if position == Gtk.PositionType.RIGHT:
-                        child = b.get_children()[0].get_children()[0].get_children()[0]
-                    else:
-                        child = b.get_children()[0].get_children()[0].get_children()[1]
-                else:
-                    child = b.get_children()[0]
-                child.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-                child.set_line_wrap(True)
-                child.set_ellipsize(True)
-                child.set_ellipsize(Pango.EllipsizeMode.END)
-                child.set_lines(lines)
-            except Exception as e:
-                logging.debug(f"Unable to wrap and ellipsize label: {label} image: {image_name} exception:{e}")
-
+            format_label(b, lines)
         if style is not None:
             b.get_style_context().add_class(style)
         b.connect("clicked", self.screen.reset_screensaver_timeout)
@@ -205,13 +173,13 @@ class KlippyGtk:
         dialog.set_transient_for(screen)
         dialog.set_modal(True)
 
-        for i, button in enumerate(buttons):
-            dialog.add_button(button_text=button['name'], response_id=button['response'])
-            button = dialog.get_children()[0].get_children()[0].get_children()[0].get_children()[i]
-            button.get_child().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-            button.get_child().set_line_wrap(True)
+        for button in buttons:
+            dialog.add_button(button['name'], button['response'])
+            button = dialog.get_widget_for_response(button['response'])
             button.set_size_request((screen.width - 30) / 3, screen.height / 5)
+            format_label(button, 3)
 
+        dialog.connect("response", self.screen.reset_screensaver_timeout)
         dialog.connect("response", callback, *args)
         dialog.get_style_context().add_class("dialog")
 
@@ -225,29 +193,25 @@ class KlippyGtk:
         dialog.show_all()
         # Change cursor to blank
         if self.cursor:
-            dialog.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.ARROW))
+            dialog.get_window().set_cursor(
+                Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.ARROW))
         else:
-            dialog.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.BLANK_CURSOR))
+            dialog.get_window().set_cursor(
+                Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.BLANK_CURSOR))
 
         self.screen.dialogs.append(dialog)
+        logging.info(f"Showing dialog {dialog}")
         return dialog
 
-    def ToggleButtonImage(self, image_name, label, style=None, scale=1.38):
-
-        b = Gtk.ToggleButton(label=label)
-        b.set_hexpand(True)
-        b.set_vexpand(True)
-        b.set_can_focus(False)
-        b.set_image(self.Image(image_name, scale))
-        b.set_image_position(Gtk.PositionType.TOP)
-        b.set_always_show_image(True)
-
-        if style is not None:
-            ctx = b.get_style_context()
-            ctx.add_class(style)
-
-        b.connect("clicked", self.screen.reset_screensaver_timeout)
-        return b
+    def remove_dialog(self, dialog, *args):
+        if self.screen.updating:
+            return
+        dialog.destroy()
+        if dialog in self.screen.dialogs:
+            logging.info("Removing Dialog")
+            self.screen.dialogs.remove(dialog)
+            return
+        logging.debug(f"Cannot remove dialog {dialog}")
 
     @staticmethod
     def HomogeneousGrid(width=None, height=None):

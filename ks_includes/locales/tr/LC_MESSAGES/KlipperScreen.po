@@ -1,0 +1,837 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"PO-Revision-Date: 2022-12-10 14:52+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2\n"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s sürüme güncellenecektir"
+
+msgid "(default)"
+msgstr "(varsayılan)"
+
+msgid "24 Hour Time"
+msgstr "24 Saat Zaman"
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr "Bir FIRMWARE_RESTART sorunu çözebilir."
+
+msgid "ADXL Not Configured"
+msgstr "ADXL Yapılandırılmadı"
+
+msgid "Abort"
+msgstr "İptal et"
+
+msgid "Acceleration:"
+msgstr "Hızlanma:"
+
+msgid "Accept"
+msgstr "Kabul et"
+
+msgid "Actions"
+msgstr "Eylemler"
+
+msgid "Add profile"
+msgstr "Profil ekle"
+
+msgid "Apply"
+msgstr "Uygula"
+
+#, python-format
+msgid "Apply %.2f offset to Endstop?"
+msgstr "Sonlandırıcı için %.2f ofset uygula?"
+
+#, python-format
+msgid "Apply %s%.2f offset to Probe?"
+msgstr "Prob için %s%.2f ofset uygula?"
+
+msgid "Are you sure do you want to exclude the object?"
+msgstr "Nesneyi hariç tutmak istediğinizden emin misiniz?"
+
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "Acil Durdurma'yı çalıştırmak istediğinizden emin misiniz?"
+
+msgid "Are you sure you wish to cancel this print?"
+msgstr "Bu baskıyı iptal etmek istediğinizden emin misiniz?"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "Motorları devre dışı bırakmak istediğinizden emin misiniz?"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "Sistemi yeniden başlatmak istediğinizden emin misiniz?"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "Sistemi kapatmak istediğinizden emin misiniz?"
+
+msgid "Auto"
+msgstr "Otomatik"
+
+msgid "Auto-calibrate"
+msgstr "Otomatik-Kalibrasyon"
+
+msgid "Auto-close notifications"
+msgstr "Bildirimleri otomatik kapat"
+
+msgid "Auto-scroll"
+msgstr "Otomatik kaydırma"
+
+msgid "Bed Level"
+msgstr "Tabla Ayarı"
+
+msgid "Bed Mesh"
+msgstr "Tabla Örgüsü"
+
+msgid "Bed screw configuration:"
+msgstr "Tabla vida yapılandırması:"
+
+msgid "Calibrate"
+msgstr "Kalibre et"
+
+msgid "Calibrated"
+msgstr "Kalibre Edildi"
+
+msgid "Calibrated, save configuration to make it permanent"
+msgstr "Kalibre edildi, kalıcı hale getirmek için yapılandırmayı kaydedin"
+
+msgid "Calibrating"
+msgstr "Kalibre Ediliyor"
+
+msgid "Can't set above the maximum:"
+msgstr "Maksimumun üzerine ayarlanamaz:"
+
+msgid "Cancel"
+msgstr "İptal"
+
+msgid "Cancel Print"
+msgstr "Baskıyı iptal et"
+
+msgid "Cancelled"
+msgstr "İptal edildi"
+
+msgid "Cancelling"
+msgstr "İptal ediliyor"
+
+msgid "Cannot connect to Moonraker"
+msgstr "Moonraker'a bağlanılamıyor"
+
+msgid "Channel"
+msgstr "Kanal"
+
+msgid "Check ADXL Wiring"
+msgstr "ADXL Bağlantılarını Kontrol Et"
+
+msgid "Checking for updates, please wait..."
+msgstr "Güncellemeler kontrol ediliyor, lütfen bekleyin..."
+
+msgid "Clear"
+msgstr "Temizle"
+
+msgid "Close"
+msgstr "Kapat"
+
+msgid "Complete"
+msgstr "Tamamlandı"
+
+msgid "Configuration"
+msgstr "Yapılandırma"
+
+msgid "Confirm Emergency Stop"
+msgstr "Acil Durdurmayı Onaylayın"
+
+msgid "Connected"
+msgstr "Bağlandı"
+
+#, python-format
+msgid "Connecting to %s"
+msgstr "%s'e Bağlanılıyor"
+
+msgid "Console"
+msgstr "Konsol"
+
+msgid "Continue"
+msgstr "Devam et"
+
+msgid "Cooldown"
+msgstr "Soğutma"
+
+msgid "Date"
+msgstr "Tarih"
+
+msgid "Decrease"
+msgstr "Azalt"
+
+msgid "Delete File?"
+msgstr "Dosyayı Sil?"
+
+msgid "Deselect"
+msgstr "Seçimi kaldır"
+
+msgid "Disable Motors"
+msgstr "Motorları Devre Dışı Bırak"
+
+msgid "Disable XY"
+msgstr "XY Devre dışı bırak"
+
+msgid "Distance (mm)"
+msgstr "Uzaklık (mm)"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "%s Kurtarmak istiyor musunuz?"
+
+msgid "Elapsed:"
+msgstr "Geçen:"
+
+msgid "Error"
+msgstr "Hata"
+
+msgid "Estimated Time Method"
+msgstr "Tahmini Zaman Metodu"
+
+msgid "Exclude Object"
+msgstr "Nesneyi Hariç Tut"
+
+msgid "Extra Large"
+msgstr "Çok Büyük"
+
+msgid "Extrude"
+msgstr "Ekstrüzyon"
+
+msgid "Extrusion +"
+msgstr "Ekstrüzyon +"
+
+msgid "Extrusion -"
+msgstr "Ekstrüzyon -"
+
+msgid "Failed, adjust position first"
+msgstr "Başarısız, önce konumu ayarlayın"
+
+msgid "Fan"
+msgstr "Fan"
+
+msgid "Filament Used"
+msgstr "Kullanılan Filament"
+
+msgid "Filament total:"
+msgstr "Toplam Filament:"
+
+msgid "Filament used:"
+msgstr "Kullanılan Filament:"
+
+msgid "Filament:"
+msgstr "Filament:"
+
+msgid "File"
+msgstr "Dosya"
+
+msgid "File:"
+msgstr "Dosya:"
+
+msgid "Finding ADXL"
+msgstr "ADXL Bulunuyor"
+
+msgid "Fine Tuning"
+msgstr "İnce Ayar"
+
+msgid "Finish"
+msgstr "Bitir"
+
+msgid "Firmware Restart"
+msgstr "Firmware Yeniden Başlat"
+
+msgid "Flow:"
+msgstr "Akış:"
+
+msgid "Flowrate:"
+msgstr "Akış oranı:"
+
+msgid "Font Size"
+msgstr "Yazı boyutu"
+
+msgid "Full Update"
+msgstr "Tam Güncelleme"
+
+msgid "Go Back"
+msgstr "Geri git"
+
+msgid "Height:"
+msgstr "Yükseklik:"
+
+msgid "Hidden"
+msgstr "Gizli"
+
+msgid "Hide"
+msgstr "Gizle"
+
+msgid "Hide sensors in Temp."
+msgstr "Sıcaklıktaki sensörleri gizleyin."
+
+msgid "Hide temp."
+msgstr "Sıcaklığı gizle."
+
+msgid "Home All"
+msgstr "Eksenleri Sıfırla"
+
+msgid "Home X"
+msgstr "X Sıfırla"
+
+msgid "Home XY"
+msgstr "XY Sıfırla"
+
+msgid "Home Y"
+msgstr "Y Sıfırla"
+
+msgid "Home Z"
+msgstr "Z  Sıfırla"
+
+msgid "Homing"
+msgstr "Eksen Sıfırlama"
+
+msgid "Host"
+msgstr "Sunucu"
+
+msgid "Hostname"
+msgstr "Ana bilgisayar adı"
+
+msgid "Icon Theme"
+msgstr "Simge Teması"
+
+msgid "Increase"
+msgstr "Artır"
+
+msgid "Initializing printer..."
+msgstr "Yazıcı başlatılıyor..."
+
+msgid "Input Shaper"
+msgstr "İvme Düzenleyicisi"
+
+msgid "Interface"
+msgstr "Arayüz"
+
+msgid "Invalid"
+msgstr "Geçersiz"
+
+msgid "Invalid password"
+msgstr "Geçersiz şifre"
+
+msgid "Invert X"
+msgstr "X Ters çevir"
+
+msgid "Invert Y"
+msgstr "Y Ters çevir"
+
+msgid "Invert Z"
+msgstr "Z Ters çevir"
+
+msgid "Klipper Restart"
+msgstr "Klipper Yeniden başlat"
+
+msgid "Klipper has disconnected"
+msgstr "Klipper bağlantısı kesildi"
+
+msgid "Klipper has encountered an error."
+msgstr "Klipper bir hatayla karşılaştı."
+
+msgid "Klipper has shutdown"
+msgstr "Klipper Kapandı"
+
+msgid "Klipper is attempting to start"
+msgstr "Klipper başlatılmaya çalışılıyor"
+
+msgid "Klipper will reboot"
+msgstr "Klipper yeniden başlayacak"
+
+msgid "KlipperScreen will reboot"
+msgstr "KlipperScreen yeniden başlayacak"
+
+msgid "Language"
+msgstr "Dil"
+
+msgid "Large"
+msgstr "Büyük"
+
+msgid "Layer:"
+msgstr "Katman:"
+
+msgid "Left:"
+msgstr "Kalan:"
+
+msgid "Limits"
+msgstr "Limitler"
+
+msgid "Load"
+msgstr "Yükle"
+
+msgid "Lower Nozzle"
+msgstr "Nozzle düşür"
+
+msgid "Macro shortcut on sidebar"
+msgstr "Kenar çubuğunda makro kısayolu"
+
+msgid "Macros"
+msgstr "Makrolar"
+
+msgid "Main Menu"
+msgstr "Ana Menü"
+
+msgid "Max"
+msgstr "Maks"
+
+msgid "Max Acceleration"
+msgstr "Maksimum Hızlanma"
+
+msgid "Max Acceleration to Deceleration"
+msgstr "Maksimum Hızlanma ve Yavaşlama"
+
+msgid "Max Velocity"
+msgstr "Maksimum Hız"
+
+msgid "Maximum"
+msgstr "Maksimum"
+
+msgid "Measure Both"
+msgstr "İkisini de ölçüle"
+
+msgid "Measure X"
+msgstr "X Ölçüle"
+
+msgid "Measure Y"
+msgstr "Y Ölçüle"
+
+msgid "Medium"
+msgstr "Orta"
+
+msgid "Menu"
+msgstr "Menü"
+
+msgid "Mesh calibrate"
+msgstr "Mesh Kalibre et"
+
+msgid "Modified"
+msgstr "Değiştirilmiş"
+
+msgid "Moonraker: connected"
+msgstr "Moonraker: bağlandı"
+
+msgid "Move"
+msgstr "Hareket"
+
+msgid "Move Distance (mm)"
+msgstr "Hareket Mesafesi (mm)"
+
+msgid "Name"
+msgstr "İsim"
+
+msgid "Network"
+msgstr "Ağ"
+
+msgid "Never"
+msgstr "Asla"
+
+msgid "New"
+msgstr "Yeni"
+
+msgid ""
+"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"conf"
+msgstr ""
+"Otomatik algılama desteklenmiyor, klipperscreen.conf dosyasından "
+"yapılandırmanız gerekli"
+
+msgid "Nothing selected"
+msgstr "Hiçbir şey seçilmedi"
+
+#, python-format
+msgid "Outdated by %d"
+msgstr "Güncelliğini yitiren %d"
+
+msgid "PSK for"
+msgstr "PSK için"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "Paket yükseltilecek"
+msgstr[1] "Paketler yükseltilecek"
+
+msgid "Part Fan"
+msgstr "Parça Fan"
+
+msgid "Password saved"
+msgstr "Şifre kaydedildi"
+
+msgid "Pause"
+msgstr "Duraklat"
+
+msgid "Paused"
+msgstr "Duraklatıldı"
+
+msgid "Perform a full upgrade?"
+msgstr "Tam yükseltme yap?"
+
+msgid "Pins"
+msgstr "Pinler"
+
+msgid "Please recompile and flash the micro-controller."
+msgstr "Lütfen mikro denetleyiciyi yeniden derleyin ve flaşlayın."
+
+msgid "Power"
+msgstr "Güç"
+
+msgid "Power On Printer"
+msgstr "Yazıcıya Güç Ver (aç)"
+
+msgid "Pressure Advance:"
+msgstr "Akış Dengeleme:"
+
+msgid "Print"
+msgstr "Yazdır"
+
+msgid "Print Control"
+msgstr "Yazdırma Kontrolü"
+
+msgid "Print Time"
+msgstr "Yazdırma Süresi"
+
+msgid "Printer"
+msgstr "Yazıcı"
+
+msgid "Printer Connections"
+msgstr "Yazıcı Bağlantıları"
+
+msgid "Printer Select"
+msgstr "Yazıcı Seçimi"
+
+msgid "Printing"
+msgstr "Yazdırılıyor"
+
+msgid "Probe Offset"
+msgstr "Prob ofseti"
+
+msgid "Profile Name:"
+msgstr "Profil ismi:"
+
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr "Yardım isterken KlipperScreen.log dosyasını sağlayın.\n"
+
+msgid "Quad Gantry Level"
+msgstr "Dörtlü Köprü Seviyesi"
+
+msgid "Raise Nozzle"
+msgstr "Nozzle yükselt"
+
+msgid "Recover"
+msgstr "Kurtar"
+
+msgid "Recover Hard"
+msgstr "Zorla Kurtar"
+
+msgid "Recover Soft"
+msgstr "Yumuşak Kurtar"
+
+msgid "Reference"
+msgstr "Referans"
+
+msgid "Refresh"
+msgstr "Yenile"
+
+msgid "Restart"
+msgstr "Yeniden Başlat"
+
+msgid "Resume"
+msgstr "Devam Et"
+
+msgid "Retract"
+msgstr "Geri çek"
+
+msgid "Retraction"
+msgstr "Geri Çekme"
+
+msgid "Retraction Length"
+msgstr "Geri Çekme Uzunluğu"
+
+msgid "Retraction Speed"
+msgstr "Geri Çekme Hızı"
+
+msgid "Retry"
+msgstr "Tekrar dene"
+
+msgid "Retrying"
+msgstr "Yeniden Deneniyor"
+
+msgid "Save"
+msgstr "Kaydet"
+
+msgid "Save Config"
+msgstr "Yapılandırma Kayıt"
+
+msgid "Save Z"
+msgstr "Z Kaydet"
+
+msgid "Save configuration?"
+msgstr "Yapılandırmayı kaydet?"
+
+msgid "Saved"
+msgstr "Kaydedildi"
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr "Kaydedilen ofset: %s"
+
+msgid "Screen DPMS"
+msgstr "Ekran DPMS"
+
+msgid "Screen Power Off Time"
+msgstr "Ekran kapatma zamanı"
+
+msgid "Screws Adjust"
+msgstr "Vida Ayarı"
+
+msgid "Select"
+msgstr "Seç"
+
+msgid "Send"
+msgstr "Gönder"
+
+#, python-format
+msgid "Sending Power ON signal to: %s"
+msgstr "Güç AÇ sinyalı gönderilen: %s"
+
+msgid "Set Temp"
+msgstr "Sıcaklık Ayarla"
+
+msgid "Settings"
+msgstr "Ayarlar"
+
+msgid "Show"
+msgstr "Göster"
+
+msgid "Show Heater Power"
+msgstr "Isıtıcı Gücünü Göster"
+
+msgid "Shutdown"
+msgstr "Kapat"
+
+msgid "Size"
+msgstr "Boyut"
+
+msgid "Slicer"
+msgstr "Dilimleme"
+
+msgid "Slicer Time correction (%)"
+msgstr "Dilimleme Zamanı doğrulama (%)"
+
+msgid "Slicer:"
+msgstr "Dilimleyici:"
+
+msgid "Small"
+msgstr "Küçük"
+
+msgid "Speed (mm/s)"
+msgstr "Hız  (mm/s)"
+
+msgid "Speed +"
+msgstr "Hız +"
+
+msgid "Speed -"
+msgstr "Hız -"
+
+msgid "Speed:"
+msgstr "Hız:"
+
+msgid "Square Corner Velocity"
+msgstr "Kare Köşe Hızı"
+
+msgid "Start"
+msgstr "Başlat"
+
+msgid "Starting WiFi Association"
+msgstr "WiFi Bağlantısı başlatılıyor"
+
+msgid "Starting recovery for"
+msgstr "Kurtarma başlatılıyor"
+
+msgid "Starting update for"
+msgstr "Güncelleme başlatılıyor"
+
+msgid "System"
+msgstr "Sistem"
+
+msgid "System Restart"
+msgstr "Sistem Yeniden Başlat"
+
+msgid "System Shutdown"
+msgstr "Sistem Kapat"
+
+msgid "Temp (°C)"
+msgstr "Sıcaklık (°C)"
+
+msgid "Temperature"
+msgstr "Sıcaklık"
+
+msgid "Total:"
+msgstr "Toplam:"
+
+msgid "Unknown Heater"
+msgstr "Bilinmeyen Isıtıcı"
+
+msgid "Unknown screw position"
+msgstr "Bilinmeyen vida konumu"
+
+msgid "Unload"
+msgstr "Boşalt"
+
+msgid "Unretract Extra Length"
+msgstr "İleri İtme Ekstra Uzunluk"
+
+msgid "Unretract Speed"
+msgstr "İleri itme Hızı"
+
+msgid "Up To Date"
+msgstr "Güncel"
+
+msgid "Update"
+msgstr "Güncelle"
+
+msgid "Updating"
+msgstr "Yükleniyor"
+
+msgid "Uploaded"
+msgstr "Yüklendi"
+
+msgid "XY Move Speed (mm/s)"
+msgstr "XY Hareket hızı (mm/s)"
+
+msgid "XY Speed (mm/s)"
+msgstr "XY Hızı (mm/s)"
+
+msgid "Z Calibrate"
+msgstr "Z Kalibrasyonu"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "Z Hareket hızı (mm/s)"
+
+msgid "Z Speed (mm/s)"
+msgstr "Z Hızı (mm/s)"
+
+msgid "Z Tilt"
+msgstr "Z Eğim"
+
+msgid "Z offset:"
+msgstr "Z ofset:"
+
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "commit"
+msgstr[1] "commits"
+
+msgid "dBm"
+msgstr "dBm"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "saat"
+msgstr[1] "saatler"
+
+msgid "minutes"
+msgstr "dakika"
+
+msgid "mm"
+msgstr "mm"
+
+msgid "mm/s"
+msgstr "mm/s"
+
+msgid "mm/s²"
+msgstr "mm/s²"
+
+msgid "mm³/s"
+msgstr "mm³/s"
+
+#~ msgid "Sort:"
+#~ msgstr "Sırala:"
+
+#~ msgid "Calibrating..."
+#~ msgstr "Kalibre Ediliyor..."
+
+#~ msgid "Z+"
+#~ msgstr "Z+"
+
+#~ msgid "Z-"
+#~ msgstr "Z-"
+
+#~ msgid "X+"
+#~ msgstr "X+"
+
+#~ msgid "X-"
+#~ msgstr "X-"
+
+#~ msgid "Y+"
+#~ msgstr "Y+"
+
+#~ msgid "Y-"
+#~ msgstr "Y-"
+
+#, python-format
+#~ msgid "Retry #%s"
+#~ msgstr "Yeniden Dene #%s"
+
+#~ msgid "Add Printer"
+#~ msgstr "Yazıcı Ekle"
+
+#~ msgid "Initializing"
+#~ msgstr "Başlatılıyor"
+
+#~ msgid "Delete"
+#~ msgstr "Sil"
+
+#~ msgid "Home"
+#~ msgstr "Ana Ekran"
+
+#~ msgid "Off"
+#~ msgstr "Kapa"
+
+#~ msgid "View Mesh"
+#~ msgstr "Örgüyü Görüntüle"
+
+#~ msgid "Machine"
+#~ msgstr "Makine"
+
+#~ msgid "Sort by: "
+#~ msgstr "Sırala: "
+
+#~ msgid "Bltouch found applied offset"
+#~ msgstr "Bltouch uygulanmış ofseti buldu"
+
+#~ msgid ""
+#~ "Check /tmp/KlipperScreen.log for more information.\n"
+#~ "Please submit an issue on GitHub for help."
+#~ msgstr ""
+#~ "Daha fazla bilgi için /tmp/KlipperScreen.log'a bakın.\n"
+#~ "Lütfen yardım için GitHub'da bir sorun gönderin."
+
+#~ msgid "Probe found applied offset"
+#~ msgstr "Prob uygulanmış ofset bulundu"
+
+#~ msgid "Tool"
+#~ msgstr "Araç"
+
+#~ msgid "Displayed Macros"
+#~ msgstr "Görüntülenen Makrolar"
+
+#~ msgid "Z Position"
+#~ msgstr "Z Pozisyonu"
