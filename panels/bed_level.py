@@ -88,7 +88,7 @@ class BedLevelPanel(ScreenPanel):
         nscrews = len(self.screws)
         # KS config
         valid_positions = True
-        valid_screws = ["bl", "fl", "fr", "br", "bm", "fm", "lm", "rm"]
+        valid_screws = ["bl", "fl", "fr", "br", "bm", "fm", "lm", "rm", "center"]
         if self.ks_printer_cfg is not None:
             screw_positions = self.ks_printer_cfg.get("screw_positions", "")
             if screw_positions:
@@ -99,7 +99,7 @@ class BedLevelPanel(ScreenPanel):
                         logging.error(f"Unknown screw: {screw}")
                         self._screen.show_popup_message(_("Unknown screw position") + f": {screw}")
                         valid_positions = False
-                if not (3 <= len(screw_positions) <= 8):
+                if not (3 <= len(screw_positions) <= 9):
                     valid_positions = False
             else:
                 if nscrews in (3, 5, 7):
@@ -148,6 +148,8 @@ class BedLevelPanel(ScreenPanel):
         lm = find_closest(remaining_screws, (min_x, mid_y), max_distance, remove="lm" in screw_positions)
         rm = find_closest(remaining_screws, (max_x, mid_y), max_distance, remove="rm" in screw_positions)
 
+        center = find_closest(remaining_screws, (mid_x, mid_y), max_distance, remove="center" in screw_positions)
+
         if len(remaining_screws) != 0:
             logging.debug(f"Screws not used: {remaining_screws}")
 
@@ -163,6 +165,7 @@ class BedLevelPanel(ScreenPanel):
         self.buttons['rm'] = self._gtk.Button("bed-level-r-m", scale=button_scale)
         self.buttons['fm'] = self._gtk.Button("bed-level-b-m", scale=button_scale)
         self.buttons['bm'] = self._gtk.Button("bed-level-t-m", scale=button_scale)
+        self.buttons['center'] = self._gtk.Button("increase", scale=button_scale)
 
         bedgrid = Gtk.Grid()
 
@@ -183,6 +186,9 @@ class BedLevelPanel(ScreenPanel):
                 bedgrid.attach(self.buttons['lm'], 1, 1, 1, 1)
             if "rm" in screw_positions and rm:
                 bedgrid.attach(self.buttons['rm'], 3, 1, 1, 1)
+            if "center" in screw_positions and center:
+                bedgrid.attach(self.buttons['center'], 2, 1, 1, 1)
+                self.buttons['center'].connect("clicked", self.go_to_position, center)
         else:
             label = Gtk.Label(
                 _("Bed screw configuration:") + f" {nscrews}\n\n"
@@ -283,7 +289,7 @@ class BedLevelPanel(ScreenPanel):
                 'fl': fl,
                 'lm': lm
             }
-
+        self.screw_dict['center'] = center
         grid.attach(bedgrid, 1, 0, 3, 2)
         self.content.add(grid)
 
