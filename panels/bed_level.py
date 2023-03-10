@@ -108,7 +108,9 @@ class BedLevelPanel(ScreenPanel):
             rotation = self.ks_printer_cfg.getint("screw_rotation", 0)
             logging.info(f"Rotation: {rotation}")
         else:
-            valid_positions = False
+            if nscrews in (3, 5, 7):
+                valid_positions = False
+            screw_positions = valid_screws
         if 'bed_screws' in self._config.get_config():
             rotation = self._config.get_config()['bed_screws'].getint("rotation", 0)
             logging.debug(f"Rotation: {rotation}")
