@@ -153,7 +153,14 @@ class Printer:
         return []
 
     def get_config_section(self, section):
-        return self.config[section] if section in self.config else False
+        return next(
+            (
+                self.config[key]
+                for key in self.config.keys()
+                if key.find(section) > -1
+            ),
+            False,
+        )
 
     def get_fans(self):
         fans = []
