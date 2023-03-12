@@ -168,6 +168,7 @@ add_desktop_file()
     DESKTOP=$(<$SCRIPTPATH/KlipperScreen.desktop)
     mkdir -p $HOME/.local/share/applications/
     echo "$DESKTOP" | tee $HOME/.local/share/applications/KlipperScreen.desktop > /dev/null
+    sudo cp $SCRIPTPATH/../styles/icon.svg /usr/share/icons/hicolor/scalable/apps/KlipperScreen.svg
 }
 
 start_KlipperScreen()
