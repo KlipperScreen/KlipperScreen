@@ -394,7 +394,7 @@ class JobStatusPanel(ScreenPanel):
                             + "\n\n"
                             + _("Saved offset: %s") % saved_z_offset)
         elif device == "endstop":
-            label.set_label(_("Apply %.2f offset to Endstop?") % (sign, abs(self.zoffset)))
+            label.set_label(_("Apply %s%.2f offset to Endstop?") % (sign, abs(self.zoffset)))
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
         label.set_vexpand(True)
