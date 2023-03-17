@@ -122,8 +122,8 @@ class KlipperScreen(Gtk.Window):
         self.set_resizable(True)
         if not (self._config.get_main_config().get("width") or self._config.get_main_config().get("height")):
             self.fullscreen()
-        self.vertical_ratio = self.width / self.height
-        self.vertical_mode = self.vertical_ratio < 1.0
+        self.aspect_ratio = self.width / self.height
+        self.vertical_mode = self.aspect_ratio < 1.0
         logging.info(f"Screen resolution: {self.width}x{self.height}")
         self.theme = self._config.get_main_config().get('theme')
         self.show_cursor = self._config.get_main_config().getboolean("show_cursor", fallback=False)
@@ -968,12 +968,12 @@ class KlipperScreen(Gtk.Window):
     def update_size(self, *args):
         self.width, self.height = self.get_size()
         new_ratio = self.width / self.height
-        new_mode = self.vertical_ratio < 1.0
-        ratio_delta = abs(self.vertical_ratio - new_ratio)
+        new_mode = new_ratio < 1.0
+        ratio_delta = abs(self.aspect_ratio - new_ratio)
         if ratio_delta > 0.1 and self.vertical_mode != new_mode:
             self.reload_panels()
             self.vertical_mode = new_mode
-            self.vertical_ratio = new_ratio
+            self.aspect_ratio = new_ratio
 
 
 def main():
