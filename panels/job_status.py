@@ -119,7 +119,7 @@ class JobStatusPanel(ScreenPanel):
         overlay.add_overlay(box)
         self.grid.attach(overlay, 0, 0, 1, 1)
 
-        self.labels['thumbnail'] = self._gtk.Image("file", self._screen.width / 4, self._screen.height / 4)
+        self.labels['thumbnail'] = self._gtk.Image()
         self.labels['info_grid'] = Gtk.Grid()
         self.labels['info_grid'].attach(self.labels['thumbnail'], 0, 0, 1, 1)
         if self._printer.get_tools():
@@ -351,6 +351,9 @@ class JobStatusPanel(ScreenPanel):
     def activate(self):
         ps = self._printer.get_stat("print_stats")
         self.set_state(ps['state'])
+        if 'filename' in ps and (ps['filename'] != self.filename):
+            logging.debug(f"Changing filename: '{self.filename}' to '{ps['filename']}'")
+            self.update_filename()
         if self.flow_timeout is None:
             self.flow_timeout = GLib.timeout_add_seconds(2, self.update_flow)
         self._screen.base_panel_show_all()
@@ -610,13 +613,11 @@ class JobStatusPanel(ScreenPanel):
                 f"{1 + round((self.pos_z - self.f_layer_h) / self.layer_h)} / {self.labels['total_layers'].get_text()}")
 
         if 'print_duration' in ps:
-            total_duration = ps['total_duration']
-            print_duration = ps['print_duration']
             if 'filament_used' in ps:
                 self.labels['filament_used'].set_label(f"{float(ps['filament_used']) / 1000:.1f} m")
-                self.update_time_left(total_duration, print_duration, ps['filament_used'])
+                self.update_time_left(ps['total_duration'], ps['print_duration'], ps['filament_used'])
             else:
-                self.update_time_left(total_duration, print_duration)
+                self.update_time_left(ps['total_duration'], ps['print_duration'])
 
         elapsed_label = f"{self.labels['elapsed'].get_text()}  {self.labels['duration'].get_text()}"
         self.buttons['elapsed'].set_label(elapsed_label)
@@ -770,16 +771,18 @@ class JobStatusPanel(ScreenPanel):
         self.content.show_all()
 
     def show_file_thumbnail(self):
-        if self._files.has_thumbnail(self.filename):
-            if self._screen.vertical_mode:
-                width = self._screen.width * 0.9
-                height = self._screen.height / 4
-            else:
-                width = self._screen.width / 3
-                height = self._gtk.content_height * 0.47
-            pixbuf = self.get_file_image(self.filename, width, height)
-            if pixbuf is not None:
-                self.labels['thumbnail'].set_from_pixbuf(pixbuf)
+        if self._screen.vertical_mode:
+            width = self._screen.width * 0.9
+            height = self._screen.height / 4
+        else:
+            width = self._screen.width / 3
+            height = self._gtk.content_height * 0.47
+        pixbuf = self.get_file_image(self.filename, width, height)
+        logging.debug(self.filename)
+        if pixbuf is None:
+            logging.debug("no pixbuf")
+            pixbuf = self._gtk.PixbufFromIcon("file", width / 2, height / 2)
+        self.labels['thumbnail'].set_from_pixbuf(pixbuf)
 
     def update_filename(self):
         self.filename = self._printer.get_stat('print_stats', 'filename')
@@ -812,7 +815,6 @@ class JobStatusPanel(ScreenPanel):
             logging.info(f"Update Metadata. File: {self.filename} Size: {self.file_metadata['size']}")
             if "estimated_time" in self.file_metadata and self.timeleft_type == "slicer":
                 self.labels["est_time"].set_label(self.format_time(self.file_metadata['estimated_time']))
-            self.show_file_thumbnail()
             if "object_height" in self.file_metadata:
                 self.oheight = float(self.file_metadata['object_height'])
                 self.labels['height'].set_label(f"{self.oheight} {self.mm}")
@@ -829,6 +831,7 @@ class JobStatusPanel(ScreenPanel):
             self.file_metadata = {}
             logging.debug("Cannot find file metadata. Listening for updated metadata")
             self._screen.files.add_file_callback(self._callback_metadata)
+        self.show_file_thumbnail()
 
     def update_percent_complete(self):
         if self.state not in ["printing", "paused"]:

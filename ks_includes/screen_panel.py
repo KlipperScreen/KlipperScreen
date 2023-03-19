@@ -49,11 +49,11 @@ class ScreenPanel:
     def get_file_image(self, filename, width=None, height=None, small=False):
         if not self._files.has_thumbnail(filename):
             return None
-        width = width if width is not None else self._gtk.img_width
-        height = height if height is not None else self._gtk.img_height
         loc = self._files.get_thumbnail_location(filename, small)
         if loc is None:
             return None
+        width = width if width is not None else self._gtk.img_width
+        height = height if height is not None else self._gtk.img_height
         if loc[0] == "file":
             return self._gtk.PixbufFromFile(loc[1], width, height)
         if loc[0] == "http":
