@@ -332,7 +332,10 @@ class PrintPanel(ScreenPanel):
         directory = os.path.join("gcodes", os.path.dirname(filename)) if os.path.dirname(filename) else "gcodes"
         if directory not in self.filelist or os.path.basename(filename).startswith("."):
             return
-        self.filelist[directory]["files"].pop(self.filelist[directory]["files"].index(os.path.basename(filename)))
+        try:
+            self.filelist[directory]["files"].pop(self.filelist[directory]["files"].index(os.path.basename(filename)))
+        except Exception as e:
+            logging.exception(e)
         dir_parts = directory.split(os.sep)
         i = len(dir_parts)
         while i > 1:
@@ -352,7 +355,10 @@ class PrintPanel(ScreenPanel):
             self.dir_panels[parent_dir].show_all()
             i -= 1
 
-        self.dir_panels[directory].remove(self.files[filename])
+        try:
+            self.dir_panels[directory].remove(self.files[filename])
+        except Exception as e:
+            logging.exception(e)
         self.dir_panels[directory].show_all()
         self.files.pop(filename)
 
@@ -417,34 +423,36 @@ class PrintPanel(ScreenPanel):
             self.content.remove(child)
 
         if "rename_file" not in self.labels:
-            lbl = self._gtk.Label(_("Rename/Move:"))
-            lbl.set_halign(Gtk.Align.START)
-            lbl.set_hexpand(False)
-            self.labels['new_name'] = Gtk.Entry()
-            self.labels['new_name'].set_text(fullpath)
-            self.labels['new_name'].set_hexpand(True)
-            self.labels['new_name'].connect("activate", self.rename)
-            self.labels['new_name'].connect("focus-in-event", self._screen.show_keyboard)
-
-            save = self._gtk.Button("complete", _("Save"), "color3")
-            save.set_hexpand(False)
-            save.connect("clicked", self.rename)
-
-            box = Gtk.Box()
-            box.pack_start(self.labels['new_name'], True, True, 5)
-            box.pack_start(save, False, False, 5)
-
-            self.labels['rename_file'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-            self.labels['rename_file'].set_valign(Gtk.Align.CENTER)
-            self.labels['rename_file'].set_hexpand(True)
-            self.labels['rename_file'].set_vexpand(True)
-            self.labels['rename_file'].pack_start(lbl, True, True, 5)
-            self.labels['rename_file'].pack_start(box, True, True, 5)
-
+            self._create_rename_box(fullpath)
         self.content.add(self.labels['rename_file'])
         self.labels['new_name'].set_text(fullpath[7:])
         self.labels['new_name'].grab_focus_without_selecting()
         self.showing_rename = True
+
+    def _create_rename_box(self, fullpath):
+        lbl = self._gtk.Label(_("Rename/Move:"))
+        lbl.set_halign(Gtk.Align.START)
+        lbl.set_hexpand(False)
+        self.labels['new_name'] = Gtk.Entry()
+        self.labels['new_name'].set_text(fullpath)
+        self.labels['new_name'].set_hexpand(True)
+        self.labels['new_name'].connect("activate", self.rename)
+        self.labels['new_name'].connect("focus-in-event", self._screen.show_keyboard)
+
+        save = self._gtk.Button("complete", _("Save"), "color3")
+        save.set_hexpand(False)
+        save.connect("clicked", self.rename)
+
+        box = Gtk.Box()
+        box.pack_start(self.labels['new_name'], True, True, 5)
+        box.pack_start(save, False, False, 5)
+
+        self.labels['rename_file'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+        self.labels['rename_file'].set_valign(Gtk.Align.CENTER)
+        self.labels['rename_file'].set_hexpand(True)
+        self.labels['rename_file'].set_vexpand(True)
+        self.labels['rename_file'].pack_start(lbl, True, True, 5)
+        self.labels['rename_file'].pack_start(box, True, True, 5)
 
     def hide_rename(self):
         self._screen.remove_keyboard()
