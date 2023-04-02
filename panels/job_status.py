@@ -393,11 +393,11 @@ class JobStatusPanel(ScreenPanel):
         if device == "probe":
             probe = self._printer.get_probe()
             saved_z_offset = probe['z_offset'] if probe else "?"
-            label.set_label(_("Apply %s%.2f offset to Probe?") % (sign, abs(self.zoffset))
+            label.set_label(_("Apply %s%.3f offset to Probe?") % (sign, abs(self.zoffset))
                             + "\n\n"
                             + _("Saved offset: %s") % saved_z_offset)
         elif device == "endstop":
-            label.set_label(_("Apply %s%.2f offset to Endstop?") % (sign, abs(self.zoffset)))
+            label.set_label(_("Apply %s%.3f offset to Endstop?") % (sign, abs(self.zoffset)))
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
         label.set_vexpand(True)
@@ -563,7 +563,7 @@ class JobStatusPanel(ScreenPanel):
                 self.buttons['speed'].set_label(self.labels['req_speed'].get_label())
             with contextlib.suppress(KeyError):
                 self.zoffset = float(data["gcode_move"]["homing_origin"][2])
-                self.labels['zoffset'].set_label(f"{self.zoffset:.2f} {self.mm}")
+                self.labels['zoffset'].set_label(f"{self.zoffset:.3f} {self.mm}")
         if "motion_report" in data:
             with contextlib.suppress(KeyError):
                 self.labels['pos_x'].set_label(f"X: {data['motion_report']['live_position'][0]:6.2f}")
