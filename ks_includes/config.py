@@ -11,12 +11,14 @@ import locale
 from io import StringIO
 
 SCREEN_BLANKING_OPTIONS = [
-    300,  # 5 Minutes
-    900,  # 15 Minutes
+    60,    # 1 Minute
+    120,   # 2 Minutes
+    300,   # 5 Minutes
+    900,   # 15 Minutes
     1800,  # 30 Minutes
     3600,  # 1 Hour
     7200,  # 2 Hours
-    14400,  # 4 Hours
+    14400, # 4 Hours
 ]
 
 klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
