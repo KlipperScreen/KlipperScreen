@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"POT-Creation-Date: 2023-05-07 07:02-0600\n"
 "PO-Revision-Date: 2022-11-28 11:37-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -53,11 +53,11 @@ msgid "Apply"
 msgstr ""
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
+msgid "Apply %s%.3f offset to Endstop?"
 msgstr ""
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
+msgid "Apply %s%.3f offset to Probe?"
 msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
@@ -105,10 +105,10 @@ msgstr "校正"
 msgid "Calibrated"
 msgstr ""
 
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "校準，保存配置以使其永久化"
-
 msgid "Calibrating"
+msgstr ""
+
+msgid "Camera"
 msgstr ""
 
 msgid "Can't set above the maximum:"
@@ -172,8 +172,8 @@ msgstr "冷卻"
 msgid "Date"
 msgstr "日期"
 
-msgid "Decrease"
-msgstr "減少"
+msgid "Delete Directory?"
+msgstr ""
 
 msgid "Delete File?"
 msgstr ""
@@ -266,6 +266,9 @@ msgstr "字體大小"
 msgid "Full Update"
 msgstr "滿的 更新"
 
+msgid "Fullscreen"
+msgstr ""
+
 msgid "Go Back"
 msgstr "返回"
 
@@ -310,9 +313,6 @@ msgstr "主機名稱"
 
 msgid "Icon Theme"
 msgstr "圖標主題"
-
-msgid "Increase"
-msgstr "增加"
 
 msgid "Initializing printer..."
 msgstr "初始化列印機中.."
@@ -546,6 +546,9 @@ msgstr "參考"
 msgid "Refresh"
 msgstr ""
 
+msgid "Rename/Move:"
+msgstr ""
+
 msgid "Restart"
 msgstr "重新啟動"
 
@@ -603,10 +606,6 @@ msgstr "選擇"
 
 msgid "Send"
 msgstr "發送"
-
-#, python-format
-msgid "Sending Power ON signal to: %s"
-msgstr "正在發送通電信號到：%s"
 
 msgid "Set Temp"
 msgstr "設定溫度"
@@ -742,8 +741,9 @@ msgid "hour"
 msgid_plural "hours"
 msgstr[0] "小時"
 
-msgid "minutes"
-msgstr "分鐘"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
 
 msgid "mm"
 msgstr "mm"
@@ -756,6 +756,19 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "校準，保存配置以使其永久化"
+
+#~ msgid "Decrease"
+#~ msgstr "減少"
+
+#~ msgid "Increase"
+#~ msgstr "增加"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "正在發送通電信號到：%s"
 
 #~ msgid "Z+"
 #~ msgstr "Z+"

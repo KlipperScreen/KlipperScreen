@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"POT-Creation-Date: 2023-05-07 07:02-0600\n"
 "PO-Revision-Date: 2022-11-30 18:14-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -54,12 +54,12 @@ msgid "Apply"
 msgstr "Stosować"
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
-msgstr "Zastosować przesunięcie %.2f do Endstop?"
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr ""
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
-msgstr "Zastosować przesunięcie %s%.2f do sondy?"
+msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Czy na pewno chcesz wykluczyć obiekt?"
@@ -106,11 +106,11 @@ msgstr "Kalibracja"
 msgid "Calibrated"
 msgstr "Skalibrowany"
 
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "Skalibrowano, zapisz konfigurację aby została na stałe"
-
 msgid "Calibrating"
 msgstr "Kalibracja"
+
+msgid "Camera"
+msgstr ""
 
 msgid "Can't set above the maximum:"
 msgstr "Nie można ustawić powyżej maksymum:"
@@ -173,8 +173,8 @@ msgstr "Studzenie"
 msgid "Date"
 msgstr "Data"
 
-msgid "Decrease"
-msgstr "Obniż"
+msgid "Delete Directory?"
+msgstr ""
 
 msgid "Delete File?"
 msgstr "Usunąć plik?"
@@ -267,6 +267,9 @@ msgstr "Rozmiar trzcionki"
 msgid "Full Update"
 msgstr "Pełny Aktualizacja"
 
+msgid "Fullscreen"
+msgstr ""
+
 msgid "Go Back"
 msgstr "Powróć"
 
@@ -311,9 +314,6 @@ msgstr "Nazwa hosta"
 
 msgid "Icon Theme"
 msgstr "Motyw Ikon"
-
-msgid "Increase"
-msgstr "Zwiększ"
 
 msgid "Initializing printer..."
 msgstr "Drukarka Startuje..."
@@ -551,6 +551,9 @@ msgstr "Sprawdzenie"
 msgid "Refresh"
 msgstr "Odświeżać"
 
+msgid "Rename/Move:"
+msgstr ""
+
 msgid "Restart"
 msgstr "Restartuj"
 
@@ -608,10 +611,6 @@ msgstr "Zaznacz"
 
 msgid "Send"
 msgstr "Wysłać"
-
-#, python-format
-msgid "Sending Power ON signal to: %s"
-msgstr "Wysyłam sygnał włączenia do: %s"
 
 msgid "Set Temp"
 msgstr "Ustaw Temperaturę"
@@ -751,8 +750,11 @@ msgstr[0] "godzina"
 msgstr[1] "godziny"
 msgstr[2] "godzin"
 
-msgid "minutes"
-msgstr "minut"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "mm"
 msgstr "mm"
@@ -765,6 +767,19 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "Skalibrowano, zapisz konfigurację aby została na stałe"
+
+#~ msgid "Decrease"
+#~ msgstr "Obniż"
+
+#~ msgid "Increase"
+#~ msgstr "Zwiększ"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "Wysyłam sygnał włączenia do: %s"
 
 #~ msgid "Sort:"
 #~ msgstr "Sortować:"

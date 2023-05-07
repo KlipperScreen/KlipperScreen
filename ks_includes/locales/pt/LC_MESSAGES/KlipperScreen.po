@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"POT-Creation-Date: 2023-05-07 07:02-0600\n"
 "PO-Revision-Date: 2022-11-30 18:14-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -53,12 +53,12 @@ msgid "Apply"
 msgstr "Aplicar"
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
-msgstr "Aplicar deslocamento de %.2f para Endstop?"
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr ""
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
-msgstr "Aplicar deslocamento %s%.2f ao Sonda?"
+msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Tem certeza de que deseja excluir o objeto?"
@@ -105,11 +105,11 @@ msgstr "Calibrar"
 msgid "Calibrated"
 msgstr "Calibrado"
 
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "Calibrado, use o comando para salvar definitivamente"
-
 msgid "Calibrating"
 msgstr "Calibrando"
+
+msgid "Camera"
+msgstr ""
 
 msgid "Can't set above the maximum:"
 msgstr "Não é possível definir o máximo:"
@@ -172,8 +172,8 @@ msgstr "Resfriar"
 msgid "Date"
 msgstr "Data"
 
-msgid "Decrease"
-msgstr "Diminuir"
+msgid "Delete Directory?"
+msgstr ""
 
 msgid "Delete File?"
 msgstr "Excluir arquivo?"
@@ -266,6 +266,9 @@ msgstr "Tamanho da fonte"
 msgid "Full Update"
 msgstr "Atualização completa"
 
+msgid "Fullscreen"
+msgstr ""
+
 msgid "Go Back"
 msgstr "Voltar"
 
@@ -310,9 +313,6 @@ msgstr "Hostname"
 
 msgid "Icon Theme"
 msgstr "Tema dos icones"
-
-msgid "Increase"
-msgstr "Aumentar"
 
 msgid "Initializing printer..."
 msgstr "Inicializando impressora..."
@@ -549,6 +549,9 @@ msgstr "Referência"
 msgid "Refresh"
 msgstr "Atualizar"
 
+msgid "Rename/Move:"
+msgstr ""
+
 msgid "Restart"
 msgstr "Reiniciar"
 
@@ -606,10 +609,6 @@ msgstr "Selecionar"
 
 msgid "Send"
 msgstr "Enviar"
-
-#, python-format
-msgid "Sending Power ON signal to: %s"
-msgstr "Enviando sinal de energia para: %s"
 
 msgid "Set Temp"
 msgstr "Definir temperatura"
@@ -747,8 +746,10 @@ msgid_plural "hours"
 msgstr[0] "hora"
 msgstr[1] "horas"
 
-msgid "minutes"
-msgstr "minutos"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "mm"
 msgstr "mm"
@@ -761,6 +762,19 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "Calibrado, use o comando para salvar definitivamente"
+
+#~ msgid "Decrease"
+#~ msgstr "Diminuir"
+
+#~ msgid "Increase"
+#~ msgstr "Aumentar"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "Enviando sinal de energia para: %s"
 
 #~ msgid "Sort:"
 #~ msgstr "Ordenar:"
