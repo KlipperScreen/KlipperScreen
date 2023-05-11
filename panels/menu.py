@@ -21,16 +21,16 @@ class MenuPanel(ScreenPanel):
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
-        self.items = None
+        self.items = []
         self.grid = self._gtk.HomogeneousGrid()
 
     def initialize(self, items):
         for item in items:
             key = next(iter(item))
-            if not self.evaluate_enable(item[key]['enable']):
+            if self.evaluate_enable(item[key]['enable']):
+                self.items.append(item)
+            else:
                 logging.debug(f"X > {key}")
-                items.remove(item)
-        self.items = items
         self.create_menu_items()
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
