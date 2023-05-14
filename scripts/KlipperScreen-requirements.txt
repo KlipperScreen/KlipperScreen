@@ -2,7 +2,7 @@ jinja2==3.1.2
 netifaces==0.11.0
 requests==2.30.0
 websocket-client==1.5.1
-pycairo==1.22.0
+pycairo==1.23.0
 PyGObject==3.44.1
 python-mpv==0.5.2
 six==1.16.0
