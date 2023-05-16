@@ -64,7 +64,7 @@ msgid "Are you sure do you want to exclude the object?"
 msgstr "Möchtest du das Objekt wirklich ausschließen?"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr "Bist du sicher, dass Sie Not-Aus ausführen möchten?"
+msgstr "Bist du sicher, dass du den Not-Aus ausführen möchtest?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Möchtest du diesen Druck wirklich abbrechen?"
