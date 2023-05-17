@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2022-09-04 14:53-0300\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-07 07:02-0600\n"
-"PO-Revision-Date: 2023-03-10 20:26-0600\n"
-"Last-Translator: Andrii Komarovskyi\n"
+"POT-Creation-Date: 2023-05-17 07:58-0600\n"
+"PO-Revision-Date: 2023-05-14 21:16+0300\n"
+"Last-Translator: Oleksii Zelivianskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.3\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -59,7 +59,7 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr ""
+msgstr "Застосувати зміщення %s%.3f до зонда?"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Ви впевнені, що бажаєте виключити об’єкт?"
@@ -211,9 +211,7 @@ msgid "Extra Large"
 msgstr "Дуже Великий"
 
 msgid "Extrude"
-msgstr ""
-"Заміна\n"
-"пластику"
+msgstr "Подача пластика"
 
 msgid "Extrusion +"
 msgstr "Видавити +"
@@ -445,7 +443,7 @@ msgid "Name"
 msgstr "Ім'я"
 
 msgid "Network"
-msgstr "Мережа"
+msgstr "Сітка"
 
 msgid "Never"
 msgstr "Ніколи"
@@ -557,9 +555,7 @@ msgid "Reference"
 msgstr "Довідка"
 
 msgid "Refresh"
-msgstr ""
-"Перевірка\n"
-"Оновлень"
+msgstr "Оновити"
 
 msgid "Rename/Move:"
 msgstr ""
@@ -571,7 +567,7 @@ msgid "Resume"
 msgstr "ВІДНОВИТИ"
 
 msgid "Retract"
-msgstr "Ретракт"
+msgstr "Втягування пластика"
 
 msgid "Retraction"
 msgstr ""
@@ -637,7 +633,7 @@ msgid "Show Heater Power"
 msgstr "Показати Потужність Нагрівача"
 
 msgid "Shutdown"
-msgstr "Вимкнути"
+msgstr "вимкнувся"
 
 msgid "Size"
 msgstr "Розмір"
@@ -715,7 +711,7 @@ msgid "Unretract Speed"
 msgstr "Швидкість повернення"
 
 msgid "Up To Date"
-msgstr "Актуально"
+msgstr "Оновити"
 
 msgid "Update"
 msgstr "Оновлення"
