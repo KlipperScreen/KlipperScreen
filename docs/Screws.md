@@ -35,7 +35,9 @@ See "screw_positions" in the [printer options](https://klipperscreen.readthedocs
 
 ## Limitations
 
-The panel doesn't support more than 8 screws or screws that directly in the center of the bed.
+The panel doesn't support more than 9 screws. if there is a center screw define the positions to avoid issues.
+See "screw_positions" in the [printer options](https://klipperscreen.readthedocs.io/en/latest/Configuration/#printer-options)
+
 
 ## Is there an alternative?
 
