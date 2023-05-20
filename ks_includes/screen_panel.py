@@ -64,7 +64,9 @@ class ScreenPanel:
         self._screen.show_panel(panel, item['panel'], item['name'], 1, False)
 
     def load_menu(self, widget, name, title=None):
+        logging.info(f"loading menu {name}")
         if f"{name}_menu" not in self.labels:
+            logging.error(f"{name} not in labels")
             return
 
         for child in self.content.get_children():

@@ -220,7 +220,7 @@ class KlipperScreenConfig:
 
         self.configurable_options = [
             {"language": {
-                "section": "main", "name": _("Language"), "type": "dropdown", "value": "system_lang",
+                "section": "main", "name": _("Language"), "type": None, "value": "system_lang",
                 "callback": screen.change_language, "options": [
                     {"name": _("System") + " " + _("(default)"), "value": "system_lang"}]}},
             {"theme": {
@@ -278,10 +278,6 @@ class KlipperScreenConfig:
         ]
 
         self.configurable_options.extend(panel_options)
-
-        lang_opt = self.configurable_options[0]['language']['options']
-        for lang in self.lang_list:
-            lang_opt.append({"name": lang, "value": lang})
 
         t_path = os.path.join(klipperscreendir, 'styles')
         themes = [d for d in os.listdir(t_path) if (not os.path.isfile(os.path.join(t_path, d)) and d != "z-bolt")]

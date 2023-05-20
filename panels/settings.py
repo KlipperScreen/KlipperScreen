@@ -13,13 +13,18 @@ def create_panel(*args):
 class SettingsPanel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
-        self.printers = self.settings = {}
+        self.printers = self.settings = self.langs = {}
         self.menu = ['settings_menu']
         options = self._config.get_configurable_options().copy()
         options.append({"printers": {
             "name": _("Printer Connections"),
             "type": "menu",
             "menu": "printers"
+        }})
+        options.append({"lang": {
+            "name": _("Language"),
+            "type": "menu",
+            "menu": "lang"
         }})
 
         self.labels['settings_menu'] = self._gtk.ScrolledWindow()
@@ -28,6 +33,16 @@ class SettingsPanel(ScreenPanel):
         for option in options:
             name = list(option)[0]
             self.add_option('settings', self.settings, name, option[name])
+
+        self.labels['lang_menu'] = self._gtk.ScrolledWindow()
+        self.labels['lang'] = Gtk.Grid()
+        self.labels['lang_menu'].add(self.labels['lang'])
+        for lang in self._config.lang_list:
+            self.langs[lang] = {
+                "name": lang,
+                "type": "lang",
+            }
+            self.add_option("lang", self.langs, lang, self.langs[lang])
 
         self.labels['printers_menu'] = self._gtk.ScrolledWindow()
         self.labels['printers'] = Gtk.Grid()
@@ -114,6 +129,12 @@ class SettingsPanel(ScreenPanel):
             open_menu.set_hexpand(False)
             open_menu.set_halign(Gtk.Align.END)
             dev.add(open_menu)
+        elif option['type'] == "lang":
+            select = self._gtk.Button("load", style="color3")
+            select.connect("clicked", self._screen.change_language, option['name'])
+            select.set_hexpand(False)
+            select.set_halign(Gtk.Align.END)
+            dev.add(select)
 
         opt_array[opt_name] = {
             "name": option['name'],
