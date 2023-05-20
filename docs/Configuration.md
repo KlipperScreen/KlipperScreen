@@ -131,8 +131,12 @@ A menu item is configured as follows:
 [menu __main my_menu_item]
 # To build a sub-menu of this menu item, you would next use [menu __main my_menu_item sub_menu_item]
 name: Item Name
-icon: home
 # Optional Parameters
+#
+# Icon name to be used, it can be any image in the directory:
+# KlipperScreen/styles/{theme}/images/ where {theme} is your current theme
+# Supported formats svg or png
+icon: home
 # Icon style, defined as "button.mycolor4" (for example) in the theme css
 style: mycolor4
 # Panel from the panels listed below
