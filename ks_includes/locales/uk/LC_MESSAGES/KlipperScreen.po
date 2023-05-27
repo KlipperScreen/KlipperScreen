@@ -5,11 +5,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2022-09-04 14:53-0300\n"
+"Project-Id-Version: 2023-05-24 14:53-0300\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-17 07:58-0600\n"
-"PO-Revision-Date: 2023-05-14 21:16+0300\n"
-"Last-Translator: Oleksii Zelivianskyi\n"
+"PO-Revision-Date: 2023-05-24 22:02+0300\n"
+"Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.3\n"
+"X-Generator: Poedit 3.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -55,7 +55,7 @@ msgstr "Застосувати"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr ""
+msgstr "Застосувати зміщення %s%.3f до кінцевика?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
@@ -110,7 +110,7 @@ msgid "Calibrating"
 msgstr "Калібрування"
 
 msgid "Camera"
-msgstr ""
+msgstr "Камера"
 
 msgid "Can't set above the maximum:"
 msgstr "Не можна встановити вище максимум:"
@@ -174,7 +174,7 @@ msgid "Date"
 msgstr "Дата"
 
 msgid "Delete Directory?"
-msgstr ""
+msgstr "Видалити Теку?"
 
 msgid "Delete File?"
 msgstr "Видалити файл?"
@@ -211,7 +211,9 @@ msgid "Extra Large"
 msgstr "Дуже Великий"
 
 msgid "Extrude"
-msgstr "Подача пластика"
+msgstr ""
+"Заміна\n"
+"пластику"
 
 msgid "Extrusion +"
 msgstr "Видавити +"
@@ -270,7 +272,7 @@ msgstr ""
 "Оновлення"
 
 msgid "Fullscreen"
-msgstr ""
+msgstr "Повноекранний режим"
 
 msgid "Go Back"
 msgstr "Назад"
@@ -443,7 +445,7 @@ msgid "Name"
 msgstr "Ім'я"
 
 msgid "Network"
-msgstr "Сітка"
+msgstr "Мережа"
 
 msgid "Never"
 msgstr "Ніколи"
@@ -484,7 +486,7 @@ msgid "Pause"
 msgstr "Пауза"
 
 msgid "Paused"
-msgstr "ПАУЗА"
+msgstr "Зупинено"
 
 msgid "Perform a full upgrade?"
 msgstr "Виконати повне оновлення?"
@@ -555,10 +557,12 @@ msgid "Reference"
 msgstr "Довідка"
 
 msgid "Refresh"
-msgstr "Оновити"
+msgstr ""
+"Перевірка\n"
+"Оновлень"
 
 msgid "Rename/Move:"
-msgstr ""
+msgstr "Перейменувати/перемістити:"
 
 msgid "Restart"
 msgstr "Перезапуск"
@@ -567,7 +571,7 @@ msgid "Resume"
 msgstr "ВІДНОВИТИ"
 
 msgid "Retract"
-msgstr "Втягування пластика"
+msgstr "Ретракт"
 
 msgid "Retraction"
 msgstr ""
@@ -633,7 +637,7 @@ msgid "Show Heater Power"
 msgstr "Показати Потужність Нагрівача"
 
 msgid "Shutdown"
-msgstr "вимкнувся"
+msgstr "Вимкнути"
 
 msgid "Size"
 msgstr "Розмір"
@@ -684,7 +688,9 @@ msgid "System Restart"
 msgstr "Перезавантаження системи"
 
 msgid "System Shutdown"
-msgstr "Завершення роботи системи"
+msgstr ""
+"Завершення роботи\n"
+"системи"
 
 msgid "Temp (°C)"
 msgstr "Teмп (°C)"
@@ -711,7 +717,7 @@ msgid "Unretract Speed"
 msgstr "Швидкість повернення"
 
 msgid "Up To Date"
-msgstr "Оновити"
+msgstr "Актуально"
 
 msgid "Update"
 msgstr "Оновлення"
@@ -760,9 +766,9 @@ msgstr[2] "години"
 
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "хвилина"
+msgstr[1] "хвилин"
+msgstr[2] "хвилини"
 
 msgid "mm"
 msgstr "мм"
