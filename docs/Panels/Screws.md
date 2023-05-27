@@ -1,6 +1,6 @@
 # Bed level
 
-![Bed Level](img/panels/bed_level.png)
+![Bed Level](../img/panels/bed_level.png)
 
 For this panel to appear in the menu `[bed_screws]` or `[screws_tilt_adjust]` need to be defined in Klipper config (printer.cfg)
 

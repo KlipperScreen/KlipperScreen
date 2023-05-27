@@ -2,7 +2,7 @@
 This panel supports various modes of operation to assist in the calibration of the Z axis of the machine.
 It's strongly suggested to read Klipper documentation about [Bed level](https://www.klipper3d.org/Bed_Level.html)
 
-![Screenshot](img/panels/zcalibrate.png)
+![Screenshot](../img/panels/zcalibrate.png)
 
 
 ## Buttons

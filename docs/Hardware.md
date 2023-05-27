@@ -26,7 +26,6 @@ In general, if the device can show a GNU/Linux desktop, then KlipperScreen shoul
 Follow the manufacturer instructions on how to install your screen. In general if you see a white screen, then it's not properly installed, ensure that you at least see a console, Then [install](Installation.md) KlipperScreen, if you are having troubles refer to the [troubleshooting page](Troubleshooting.md) for further information.
 
 ## Screen rotation
-Currently there is no support for rotation at runtime, do not use xrandr to rotate the screen.
 Configure the server to start in the desired orientation, there are many ways to achieve this, here is one:
 
 
@@ -56,6 +55,7 @@ Save the file and restart KlipperScreen.
 sudo service KlipperScreen restart
 ```
 
+TODO: LCDSHOW way
 
 ## Touchscreen touch rotation
 If your touchscreen isn't registering touches properly after the screen has been rotated, you will need to apply a
