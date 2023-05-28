@@ -348,7 +348,8 @@ class KlipperScreen(Gtk.Window):
         if self.popup_message is None:
             return
         self.popup_message.popdown()
-        GLib.source_remove(self.popup_timeout)
+        if self.popup_timeout is not None:
+            GLib.source_remove(self.popup_timeout)
         self.popup_message = self.popup_timeout = None
 
     def show_error_modal(self, err, e=""):
