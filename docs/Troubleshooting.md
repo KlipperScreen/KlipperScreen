@@ -22,7 +22,7 @@ If KlipperScreen.log doesn't exist, run `systemctl status KlipperScreen`<br>
 
 Check the file `/var/log/Xorg.0.log` where you can find issues with the X server.
 
-## Cannot open virtual Console
+## Screen shows console instead of KlipperScreen
 
 If you see this line in the logs (`systemctl status KlipperScreen`):
 ```sh
@@ -30,14 +30,15 @@ xf86OpenConsole: Cannot open virtual console 2 (Permission denied)
 ```
 [Follow this steps](Troubleshooting/VC_ERROR.md)
 
-## Screen shows console instead of KlipperScreen
-
-You may see this line in the logs (`systemctl status KlipperScreen`):
+If you see this line in the logs (`systemctl status KlipperScreen`):
 
 ```sh
 KlipperScreen-start.sh: (EE) no screens found(EE)
 ```
-[Follow this steps](Troubleshooting/Showing_Console.md)
+
+[First check the screen](Troubleshooting/Physical_Install.md)
+
+[If it's not any of the above follow this steps](Troubleshooting/Showing_console.md)
 
 ## Screen is all white or blank or no signal
 

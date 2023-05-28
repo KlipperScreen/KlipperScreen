@@ -1,9 +1,5 @@
 # Screen shows console instead of KlipperScreen
 
-TODO: 
- - image of the console
- - update for non fbturbo
-
 If the screen is connected via HDMI and the board has more than one HDMI try the other port
 
 ## LCD-show
