@@ -257,9 +257,6 @@ class KlipperScreenConfig:
                               "value": "False", "callback": screen.reload_panels}},
             {"use_dpms": {"section": "main", "name": _("Screen DPMS"), "type": "binary",
                           "value": "True", "callback": screen.set_dpms}},
-            {"print_estimate_compensation": {
-                "section": "main", "name": _("Slicer Time correction (%)"), "type": "scale", "value": "100",
-                "range": [50, 150], "step": 1}},
             {"autoclose_popups": {"section": "main", "name": _("Auto-close notifications"), "type": "binary",
                                   "value": "True"}},
             {"show_heater_power": {"section": "main", "name": _("Show Heater Power"), "type": "binary",

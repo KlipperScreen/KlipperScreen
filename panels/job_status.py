@@ -642,10 +642,9 @@ class JobStatusPanel(ScreenPanel):
 
         with contextlib.suppress(KeyError):
             if self.file_metadata['estimated_time'] > 0:
-                usrcomp = (self._config.get_config()['main'].getint('print_estimate_compensation', 100) / 100)
                 # speed_factor compensation based on empirical testing
                 spdcomp = sqrt(self.speed_factor)
-                slicer_time = ((self.file_metadata['estimated_time'] * usrcomp) / spdcomp) + non_printing
+                slicer_time = ((self.file_metadata['estimated_time']) / spdcomp) + non_printing
         self.labels["slicer_time"].set_label(self.format_time(slicer_time))
 
         with contextlib.suppress(Exception):
