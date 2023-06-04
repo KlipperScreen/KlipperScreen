@@ -152,6 +152,7 @@ class Keyboard(Gtk.Box):
             # This can be used to repeat all the keys,
             # but I don't find it useful on the console
             self.timeout = GLib.timeout_add(400, self.repeat, widget, None, key)
+        widget.get_style_context().add_class("active")
         return True
 
     def release(self, widget, event):
@@ -162,6 +163,7 @@ class Keyboard(Gtk.Box):
         if self.clear_timeout is not None:
             GLib.source_remove(self.clear_timeout)
             self.clear_timeout = None
+        widget.get_style_context().remove_class("active")
 
     def clear(self, widget=None):
         self.entry.set_text("")
