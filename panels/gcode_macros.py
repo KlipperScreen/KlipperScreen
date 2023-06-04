@@ -50,6 +50,10 @@ class MacroPanel(ScreenPanel):
         while len(self.menu) > 1:
             self.unload_menu()
         self.reload_macros()
+        self._screen.base_panel.toggle_macro_shorcut_sensitive(False)
+
+    def deactivate(self):
+        self._screen.base_panel.toggle_macro_shorcut_sensitive(True)
 
     def add_gcode_macro(self, macro):
         # Support for hiding macros by name
