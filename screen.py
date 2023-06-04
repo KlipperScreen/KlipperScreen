@@ -514,8 +514,10 @@ class KlipperScreen(Gtk.Window):
             self.subscriptions.append(panel_name)
 
     def reset_screensaver_timeout(self, *args):
-        if not self.use_dpms and self.screensaver_timeout is not None:
+        if self.screensaver_timeout is not None:
             GLib.source_remove(self.screensaver_timeout)
+            self.screensaver_timeout = None
+        if not self.use_dpms:
             self.screensaver_timeout = GLib.timeout_add_seconds(self.blanking_time, self.show_screensaver)
 
     def show_screensaver(self):
@@ -543,7 +545,9 @@ class KlipperScreen(Gtk.Window):
         self.screensaver = box
         self.screensaver.show_all()
         self.power_devices(None, self._config.get_main_config().get("screen_off_devices", ""), on=False)
-        return False
+        if self.screensaver_timeout is not None:
+            GLib.source_remove(self.screensaver_timeout)
+            self.screensaver_timeout = None
 
     def close_screensaver(self, widget=None):
         if self.screensaver is None:
@@ -555,13 +559,12 @@ class KlipperScreen(Gtk.Window):
         if self.use_dpms:
             self.wake_screen()
         else:
-            self.screensaver_timeout = GLib.timeout_add_seconds(self.blanking_time, self.show_screensaver)
+            self.reset_screensaver_timeout()
         for dialog in self.dialogs:
             logging.info(f"Restoring Dialog {dialog}")
             dialog.show()
         self.show_all()
         self.power_devices(None, self._config.get_main_config().get("screen_on_devices", ""), on=True)
-        return False
 
     def check_dpms_state(self):
         if not self.use_dpms:
@@ -596,6 +599,7 @@ class KlipperScreen(Gtk.Window):
             logging.debug(f"Screen blanking: {time}")
             if self.screensaver_timeout is not None:
                 GLib.source_remove(self.screensaver_timeout)
+                self.screensaver_timeout = None
             os.system("xset -display :0 dpms 0 0 0")
             return
 
@@ -616,8 +620,7 @@ class KlipperScreen(Gtk.Window):
         # Without dpms just blank the screen
         logging.debug("Not using DPMS")
         os.system("xset -display :0 dpms 0 0 0")
-        if self.screensaver_timeout is None:
-            self.screensaver_timeout = GLib.timeout_add_seconds(self.blanking_time, self.show_screensaver)
+        self.reset_screensaver_timeout()
         return
 
     def show_printer_select(self, widget=None):
