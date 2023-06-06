@@ -189,6 +189,7 @@ class KlipperScreen(Gtk.Window):
         self.connecting = True
         self.initialized = False
 
+        ind = 0
         logging.info(f"Connecting to printer: {name}")
         for printer in self.printers:
             if name == list(printer)[0]:
@@ -1005,7 +1006,7 @@ def main():
     functions.patch_threading_excepthook()
 
     logging.info(f"KlipperScreen version: {version}")
-    if not Gtk.init_check(None)[0]:
+    if not Gtk.init_check():
         logging.critical("Failed to initialize Gtk")
         raise RuntimeError
     try:
