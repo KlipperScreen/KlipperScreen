@@ -116,13 +116,13 @@ class KlipperScreenConfig:
             self.langs[lng] = gettext.translation('KlipperScreen', localedir=lang_path, languages=[lng], fallback=True)
 
         lang = self.get_main_config().get("language", None)
-        logging.debug(f"Selected lang: {lang} OS lang: {locale.getdefaultlocale()[0]}")
+        logging.debug(f"Selected lang: {lang} OS lang: {locale.getlocale()[0]}")
         self.install_language(lang)
 
     def install_language(self, lang):
         if lang is None or lang == "system_lang":
             for language in self.lang_list:
-                if locale.getdefaultlocale()[0].startswith(language):
+                if locale.getlocale()[0].startswith(language):
                     logging.debug("Using system lang")
                     lang = language
         if lang is not None and lang not in self.lang_list:
