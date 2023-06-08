@@ -157,7 +157,7 @@ class KlipperScreen(Gtk.Window):
         state_callbacks = {
             "disconnected": self.state_disconnected,
             "error": self.state_error,
-            "paused": self.state_paused,
+            "paused": self.state_printing,
             "printing": self.state_printing,
             "ready": self.state_ready,
             "startup": self.state_startup,
@@ -654,21 +654,19 @@ class KlipperScreen(Gtk.Window):
             msg += _("Please recompile and flash the micro-controller.") + "\n"
         self.printer_initializing(msg + "\n" + state, remove=True)
 
-    def state_paused(self):
-        if "job_status" not in self._cur_panels:
-            self.printer_printing()
-
     def state_printing(self):
-        if "job_status" not in self._cur_panels:
-            self.printer_printing()
-        else:
-            self.panels["job_status"].new_print()
+        self.close_screensaver()
+        self.base_panel_show_all()
+        for dialog in self.dialogs:
+            self.gtk.remove_dialog(dialog)
+        self.show_panel('job_status', "job_status", _("Printing"), 2)
 
-    def state_ready(self):
+    def state_ready(self, wait=True):
         # Do not return to main menu if completing a job, timeouts/user input will return
-        if "job_status" in self._cur_panels:
+        if "job_status" in self._cur_panels and wait:
             return
-        self.printer_ready()
+        self.show_panel('main_panel', "main_menu", None, 2, items=self._config.get_menu_items("__main"))
+        self.base_panel_show_all()
 
     def state_startup(self):
         self.printer_initializing(_("Klipper is attempting to start"))
@@ -892,17 +890,6 @@ class KlipperScreen(Gtk.Window):
         self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
         self.base_panel.show_heaters(True)
         self.base_panel.show_estop(True)
-
-    def printer_ready(self):
-        self.show_panel('main_panel', "main_menu", None, 2, items=self._config.get_menu_items("__main"))
-        self.base_panel_show_all()
-
-    def printer_printing(self):
-        self.close_screensaver()
-        self.base_panel_show_all()
-        for dialog in self.dialogs:
-            self.gtk.remove_dialog(dialog)
-        self.show_panel('job_status', "job_status", _("Printing"), 2)
 
     def show_keyboard(self, entry=None, event=None):
         if self.keyboard is not None:
