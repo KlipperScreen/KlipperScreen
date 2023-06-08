@@ -89,7 +89,7 @@ class KlipperScreen(Gtk.Window):
     screensaver_timeout = None
     reinit_count = 0
     max_retries = 4
-    initialized = False
+    initialized = initializing = False
     popup_timeout = None
 
     def __init__(self, args, version):
@@ -627,6 +627,7 @@ class KlipperScreen(Gtk.Window):
 
     def websocket_disconnected(self, msg):
         self.printer_initializing(msg, remove=True)
+        self.printer.state = "disconnected"
         self.connecting = True
         self.connected_printer = None
         self.files.reset()
@@ -638,9 +639,8 @@ class KlipperScreen(Gtk.Window):
         logging.debug("### Going to disconnected")
         self.close_screensaver()
         self.initialized = False
-        self.printer_initializing(_("Klipper has disconnected"), remove=True)
         self.reinit_count = 0
-        self.init_printer()
+        self._init_printer(_("Klipper has disconnected"), remove=True)
 
     def state_error(self):
         self.close_screensaver()
@@ -806,13 +806,24 @@ class KlipperScreen(Gtk.Window):
             else:
                 self._ws.klippy.power_device_off(dev)
 
+    def _init_printer(self, msg, remove=False):
+        self.printer_initializing(msg, remove)
+        self.initializing = False
+        GLib.timeout_add_seconds(3, self.init_printer)
+        return False
+
     def init_printer(self):
+        if self.initializing:
+            return False
+        self.initializing = True
         if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:
-            return
+            self.initializing = False
+            return False
         state = self.apiclient.get_server_info()
         if state is False:
             logging.info("Moonraker not connected")
-            return
+            self.initializing = False
+            return False
         self.connecting = not self._ws.connected
         self.connected_printer = self.connecting_to_printer
         self.base_panel.set_ks_printer_cfg(self.connected_printer)
@@ -830,22 +841,13 @@ class KlipperScreen(Gtk.Window):
             msg += f"Klipper: {state['result']['klippy_state']}" + "\n\n"
             if self.reinit_count <= self.max_retries:
                 msg += _("Retrying") + f' #{self.reinit_count}'
-            self.printer_initializing(msg)
-            GLib.timeout_add_seconds(3, self.init_printer)
-            return
-
+            return self._init_printer(msg)
         printer_info = self.apiclient.get_printer_info()
         if printer_info is False:
-            self.printer_initializing("Unable to get printer info from moonraker")
-            GLib.timeout_add_seconds(3, self.init_printer)
-            return
-
+            return self._init_printer("Unable to get printer info from moonraker")
         config = self.apiclient.send_request("printer/objects/query?configfile")
         if config is False:
-            self.printer_initializing("Error getting printer configuration")
-            GLib.timeout_add_seconds(3, self.init_printer)
-            return
-
+            return self._init_printer("Error getting printer configuration")
         # Reinitialize printer, in case the printer was shut down and anything has changed.
         self.printer.reinit(printer_info['result'], config['result']['status'])
 
@@ -860,9 +862,7 @@ class KlipperScreen(Gtk.Window):
         data = self.apiclient.send_request("printer/objects/query?" + "&".join(PRINTER_BASE_STATUS_OBJECTS +
                                                                                extra_items))
         if data is False:
-            self.printer_initializing("Error getting printer object data with extra items")
-            GLib.timeout_add_seconds(3, self.init_printer)
-            return
+            return self._init_printer("Error getting printer object data with extra items")
         self.printer.process_update(data['result']['status'])
         self.init_tempstore()
         GLib.timeout_add_seconds(2, self.init_tempstore)  # If devices changed it takes a while to register
@@ -873,6 +873,8 @@ class KlipperScreen(Gtk.Window):
         logging.info("Printer initialized")
         self.initialized = True
         self.reinit_count = 0
+        self.initializing = False
+        return False
 
     def init_tempstore(self):
         self.printer.init_temp_store(self.apiclient.send_request("server/temperature_store"))
