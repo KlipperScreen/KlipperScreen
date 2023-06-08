@@ -26,6 +26,7 @@ class MainPanel(MenuPanel):
         self.grid = self._gtk.HomogeneousGrid()
         self.grid.set_hexpand(True)
         self.grid.set_vexpand(True)
+        self.graph_retry = 0
 
     def initialize(self, items):
         logging.info("### Making MainMenu")
@@ -50,7 +51,12 @@ class MainPanel(MenuPanel):
 
     def update_graph_visibility(self):
         if self.left_panel is None or not self._printer.get_temp_store_devices():
-            return
+            self.graph_retry += 1
+            if self.graph_retry < 5:
+                GLib.timeout_add_seconds(5, self.update_graph_visibility)
+            else:
+                logging.debug(f"Could not create graph {self.left_panel} {self._printer.get_temp_store_devices()}")
+            return False
         count = 0
         for device in self.devices:
             visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}",
@@ -71,6 +77,8 @@ class MainPanel(MenuPanel):
             self.labels['da'].show()
         elif self.labels['da'] in self.left_panel:
             self.left_panel.remove(self.labels['da'])
+        self.graph_retry = 0
+        return False
 
     def activate(self):
         # For this case False != None
@@ -206,7 +214,7 @@ class MainPanel(MenuPanel):
         self.labels['devices'].get_style_context().add_class('heater-grid')
         self.labels['devices'].set_vexpand(False)
 
-        name = Gtk.Label("")
+        name = Gtk.Label(label="")
         temp = Gtk.Label(_("Temp (°C)"))
         temp.get_style_context().add_class("heater-grid-temp")
 
