@@ -19,11 +19,13 @@ class MacroPanel(ScreenPanel):
         self.sort_btn = self._gtk.Button("arrow-up", _("Name"), "color1", self.bts, Gtk.PositionType.RIGHT, 1)
         self.sort_btn.connect("clicked", self.change_sort)
         self.sort_btn.set_hexpand(True)
+        self.sort_btn.get_style_context().add_class("buttons_slim")
         self.options = {}
         self.macros = {}
         self.menu = ['macros_menu']
 
         adjust = self._gtk.Button("settings", " " + _("Settings"), "color2", self.bts, Gtk.PositionType.LEFT, 1)
+        adjust.get_style_context().add_class("buttons_slim")
         adjust.connect("clicked", self.load_menu, 'options', _("Settings"))
         adjust.set_hexpand(False)
 
