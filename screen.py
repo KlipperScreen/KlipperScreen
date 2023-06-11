@@ -253,7 +253,7 @@ class KlipperScreen(Gtk.Window):
 
         self._ws.klippy.object_subscription(requested_updates)
 
-    def _load_panel(self, panel, *args):
+    def _load_panel(self, panel, *args, **kwargs):
         if panel not in self.load_panel:
             logging.debug(f"Loading panel: {panel}")
             panel_path = os.path.join(os.path.dirname(__file__), 'panels', f"{panel}.py")
@@ -268,7 +268,7 @@ class KlipperScreen(Gtk.Window):
             self.load_panel[panel] = getattr(module, "create_panel")
 
         try:
-            return self.load_panel[panel](*args)
+            return self.load_panel[panel](*args, **kwargs)
         except Exception as e:
             logging.exception(e)
             raise RuntimeError(f"Unable to create panel: {panel}\n{e}") from e
@@ -282,9 +282,7 @@ class KlipperScreen(Gtk.Window):
 
             if panel_name not in self.panels:
                 try:
-                    self.panels[panel_name] = self._load_panel(panel_type, self, title)
-                    if hasattr(self.panels[panel_name], "initialize"):
-                        self.panels[panel_name].initialize(**kwargs)
+                    self.panels[panel_name] = self._load_panel(panel_type, self, title, **kwargs)
                 except Exception as e:
                     if panel_name in self.panels:
                         del self.panels[panel_name]

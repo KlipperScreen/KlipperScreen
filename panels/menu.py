@@ -11,45 +11,44 @@ from jinja2 import Environment, Template
 from ks_includes.screen_panel import ScreenPanel
 
 
-def create_panel(*args):
-    return MenuPanel(*args)
+def create_panel(*args, **kwargs):
+    return MenuPanel(*args, **kwargs)
 
 
 class MenuPanel(ScreenPanel):
-    i = 0
     j2_data = None
 
-    def __init__(self, screen, title):
+    def __init__(self, screen, title, items=None):
         super().__init__(screen, title)
-        self.items = []
-        self.grid = self._gtk.HomogeneousGrid()
-
-    def initialize(self, items):
-        for item in items:
-            key = next(iter(item))
-            if self.evaluate_enable(item[key]['enable']):
-                self.items.append(item)
-            else:
-                logging.debug(f"X > {key}")
+        self.items = items
         self.create_menu_items()
-        scroll = self._gtk.ScrolledWindow()
-        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        scroll.add(self.grid)
-        self.content.add(scroll)
+        self.grid = self._gtk.HomogeneousGrid()
+        self.scroll = self._gtk.ScrolledWindow()
+        self.scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
     def activate(self):
+        self.add_content()
+
+    def add_content(self):
+        for child in self.scroll.get_children():
+            self.scroll.remove(child)
         if self._screen.vertical_mode:
-            self.arrangeMenuItems(self.items, 3)
+            self.scroll.add(self.arrangeMenuItems(self.items, 3))
         else:
-            self.arrangeMenuItems(self.items, 4)
+            self.scroll.add(self.arrangeMenuItems(self.items, 4))
+        if not self.content.get_children():
+            self.content.add(self.scroll)
 
     def arrangeMenuItems(self, items, columns, expand_last=False):
         for child in self.grid.get_children():
             self.grid.remove(child)
-
         length = len(items)
-        for i, item in enumerate(items):
+        i = 0
+        for item in items:
             key = list(item)[0]
+            if not self.evaluate_enable(item[key]['enable']):
+                logging.debug(f"X > {key}")
+                continue
 
             if columns == 4:
                 if length <= 4:
@@ -67,6 +66,7 @@ class MenuPanel(ScreenPanel):
                 width = 2
 
             self.grid.attach(self.labels[key], col, row, width, height)
+            i += 1
         self.j2_data = None
         return self.grid
 

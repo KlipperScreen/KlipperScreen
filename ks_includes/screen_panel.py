@@ -14,7 +14,7 @@ class ScreenPanel:
     _gtk = None
     ks_printer_cfg = None
 
-    def __init__(self, screen, title):
+    def __init__(self, screen, title, **kwargs):
         self.menu = None
         ScreenPanel._screen = screen
         ScreenPanel._config = screen._config

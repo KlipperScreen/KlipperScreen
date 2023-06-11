@@ -10,44 +10,38 @@ from ks_includes.widgets.heatergraph import HeaterGraph
 from ks_includes.widgets.keypad import Keypad
 
 
-def create_panel(*args):
-    return MainPanel(*args)
+def create_panel(*args, **kwargs):
+    return MainPanel(*args, **kwargs)
 
 
 class MainPanel(MenuPanel):
-    def __init__(self, screen, title):
-        super().__init__(screen, title)
+    def __init__(self, screen, title, items=None):
+        super().__init__(screen, title, items)
         self.left_panel = None
-        self.items = None
         self.devices = {}
         self.graph_update = None
         self.active_heater = None
         self.h = 1
-        self.grid = self._gtk.HomogeneousGrid()
-        self.grid.set_hexpand(True)
-        self.grid.set_vexpand(True)
+        self.main_menu = self._gtk.HomogeneousGrid()
+        self.main_menu.set_hexpand(True)
+        self.main_menu.set_vexpand(True)
         self.graph_retry = 0
 
-    def initialize(self, items):
         logging.info("### Making MainMenu")
 
-        self.items = items
-        self.create_menu_items()
         stats = self._printer.get_printer_status_data()["printer"]
-        grid = self._gtk.HomogeneousGrid()
         if stats["temperature_devices"]["count"] > 0 or stats["extruders"]["count"] > 0:
             self._gtk.reset_temp_color()
-            grid.attach(self.create_left_panel(), 0, 0, 1, 1)
+            self.main_menu.attach(self.create_left_panel(), 0, 0, 1, 1)
         else:
             self.graph_update = False
         if self._screen.vertical_mode:
             self.labels['menu'] = self.arrangeMenuItems(items, 3, True)
-            grid.attach(self.labels['menu'], 0, 1, 1, 1)
+            self.main_menu.attach(self.labels['menu'], 0, 1, 1, 1)
         else:
             self.labels['menu'] = self.arrangeMenuItems(items, 2, True)
-            grid.attach(self.labels['menu'], 1, 0, 1, 1)
-        self.grid = grid
-        self.content.add(self.grid)
+            self.main_menu.attach(self.labels['menu'], 1, 0, 1, 1)
+        self.content.add(self.main_menu)
 
     def update_graph_visibility(self):
         if self.left_panel is None or not self._printer.get_temp_store_devices():
@@ -241,12 +235,12 @@ class MainPanel(MenuPanel):
         self.active_heater = None
 
         if self._screen.vertical_mode:
-            self.grid.remove_row(1)
-            self.grid.attach(self.labels['menu'], 0, 1, 1, 1)
+            self.main_menu.remove_row(1)
+            self.main_menu.attach(self.labels['menu'], 0, 1, 1, 1)
         else:
-            self.grid.remove_column(1)
-            self.grid.attach(self.labels['menu'], 1, 0, 1, 1)
-        self.grid.show_all()
+            self.main_menu.remove_column(1)
+            self.main_menu.attach(self.labels['menu'], 1, 0, 1, 1)
+        self.main_menu.show_all()
 
     def process_update(self, action, data):
         if action != "notify_status_update":
@@ -271,12 +265,12 @@ class MainPanel(MenuPanel):
         self.labels["keypad"].clear()
 
         if self._screen.vertical_mode:
-            self.grid.remove_row(1)
-            self.grid.attach(self.labels["keypad"], 0, 1, 1, 1)
+            self.main_menu.remove_row(1)
+            self.main_menu.attach(self.labels["keypad"], 0, 1, 1, 1)
         else:
-            self.grid.remove_column(1)
-            self.grid.attach(self.labels["keypad"], 1, 0, 1, 1)
-        self.grid.show_all()
+            self.main_menu.remove_column(1)
+            self.main_menu.attach(self.labels["keypad"], 1, 0, 1, 1)
+        self.main_menu.show_all()
 
     def update_graph(self):
         self.labels['da'].queue_draw()
