@@ -951,7 +951,10 @@ class KlipperScreen(Gtk.Window):
             self.base_panel.back()
 
     def update_size(self, *args):
-        self.width, self.height = self.get_size()
+        width, height = self.get_size()
+        if width != self.width or height != self.height:
+            logging.info(f"Size changed: {self.width}x{self.height}")
+        self.width, self.height = width, height
         new_ratio = self.width / self.height
         new_mode = new_ratio < 1.0
         ratio_delta = abs(self.aspect_ratio - new_ratio)
@@ -959,6 +962,7 @@ class KlipperScreen(Gtk.Window):
             self.reload_panels()
             self.vertical_mode = new_mode
             self.aspect_ratio = new_ratio
+            logging.info(f"Vertical mode: {self.vertical_mode}")
 
 
 def main():
