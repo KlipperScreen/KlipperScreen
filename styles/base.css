@@ -178,12 +178,30 @@ scale trough slider {
 scrollbar, scrollbar button, scrollbar trough {
     border: none;
     background-color: #13181C;
+    min-height: 2.5em;
 }
 
 scrollbar slider {
-    min-width: 2em;
+    min-width: 2.5em;
     border-radius: .7em;
     background-color: #404E57;
+}
+
+scrollbar.vertical.with-steppers {
+    -GtkScrollbar-has-backward-stepper: true;
+    -GtkScrollbar-has-forward-stepper: true;
+}
+
+scrollbar.vertical.with-steppers button.down {
+    -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
+}
+
+scrollbar.vertical.with-steppers button.up {
+    -gtk-icon-source: -gtk-icontheme("pan-up-symbolic");
+}
+
+undershoot.top, undershoot.bottom {
+    background-image: none;
 }
 
 separator {
