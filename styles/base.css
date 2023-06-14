@@ -579,3 +579,30 @@ popover button {
 .graph_label_sensor_3 {border-left-width: .4em; border-left-style: solid;}
 .graph_label_sensor_4 {border-left-width: .4em; border-left-style: solid;}
 .graph_label_sensor_5 {border-left-width: .4em; border-left-style: solid;}
+
+scrollbar.vertical {
+    -GtkScrollbar-has-backward-stepper: true;
+    -GtkScrollbar-has-forward-stepper: true;
+}
+
+scrollbar.vertical slider {
+    min-width: 2em;
+}
+
+scrollbar button {
+    min-width: 2em;
+    min-height: 2em;
+}
+
+scrollbar.vertical button.down {
+    -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
+}
+
+scrollbar.vertical button.up {
+    -gtk-icon-source: -gtk-icontheme("pan-up-symbolic");
+}
+
+undershoot.top,
+undershoot.bottom {
+    background-image: none;
+}
