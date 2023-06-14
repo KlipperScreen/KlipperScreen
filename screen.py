@@ -68,6 +68,7 @@ def set_text_direction(lang=None):
 
 def state_execute(callback):
     callback()
+    return False
 
 
 class KlipperScreen(Gtk.Window):
@@ -352,6 +353,7 @@ class KlipperScreen(Gtk.Window):
         if self.popup_timeout is not None:
             GLib.source_remove(self.popup_timeout)
         self.popup_message = self.popup_timeout = None
+        return False
 
     def show_error_modal(self, err, e=""):
         logging.error(f"Showing error modal: {err} {e}")
@@ -483,6 +485,7 @@ class KlipperScreen(Gtk.Window):
             self.gtk.remove_dialog(dialog)
         self.close_screensaver()
 
+
     def _remove_current_panel(self, pop=True):
         if len(self._cur_panels) < 1:
             self.reload_panels()
@@ -545,6 +548,7 @@ class KlipperScreen(Gtk.Window):
         if self.screensaver_timeout is not None:
             GLib.source_remove(self.screensaver_timeout)
             self.screensaver_timeout = None
+        return False
 
     def close_screensaver(self, widget=None):
         if self.screensaver is None:
@@ -626,6 +630,7 @@ class KlipperScreen(Gtk.Window):
 
     def process_busy_state(self, busy):
         self.process_update("notify_busy", busy)
+        return False
 
     def websocket_disconnected(self, msg):
         self.printer_initializing(msg, remove=True)
@@ -886,6 +891,7 @@ class KlipperScreen(Gtk.Window):
                 logging.info(f"Temperature store size: {self.printer.tempstore_size}")
             except KeyError:
                 logging.error("Couldn't get the temperature store size")
+        return False
 
     def base_panel_show_all(self):
         self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))

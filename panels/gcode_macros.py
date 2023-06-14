@@ -136,6 +136,7 @@ class MacroPanel(ScreenPanel):
         self.options = {}
         self.labels['options'].remove_column(0)
         self.load_gcode_macros()
+        return False
 
     def load_gcode_macros(self):
         for macro in self._printer.get_gcode_macros():

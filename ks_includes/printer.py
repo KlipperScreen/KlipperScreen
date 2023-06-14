@@ -132,6 +132,7 @@ class Printer:
             GLib.idle_add(self.busy_cb, False)
         if state != self.state:
             self.change_state(state)
+        return False
 
     def process_power_update(self, data):
         if data['device'] in self.power_devices:

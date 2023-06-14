@@ -257,6 +257,7 @@ class MainPanel(MenuPanel):
                 self._printer.get_dev_stat(x, "target"),
                 self._printer.get_dev_stat(x, "power"),
             )
+        return False
 
     def show_numpad(self, widget, device):
 

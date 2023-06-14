@@ -250,6 +250,8 @@ class BasePanel(ScreenPanel):
                 self.control['temp_box'].reorder_child(self.labels[f"{self.current_extruder}_box"], 0)
                 self.control['temp_box'].show_all()
 
+        return False
+
     def remove(self, widget):
         self.content.remove(widget)
 
