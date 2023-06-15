@@ -255,5 +255,5 @@ class KlippyGtk:
     @staticmethod
     def ScrolledWindowWithSteppers():
         scroll = KlippyGtk.ScrolledWindow()
-        scroll.get_vscrollbar().get_style_context().add_class("arrowed")
+        scroll.get_vscrollbar().get_style_context().add_class("with-steppers")
         return scroll

@@ -580,25 +580,25 @@ popover button {
 .graph_label_sensor_4 {border-left-width: .4em; border-left-style: solid;}
 .graph_label_sensor_5 {border-left-width: .4em; border-left-style: solid;}
 
-scrollbar.vertical.arrowed {
+scrollbar.vertical.with-steppers {
     -GtkScrollbar-has-backward-stepper: true;
     -GtkScrollbar-has-forward-stepper: true;
 }
 
-scrollbar.vertical.arrowed slider {
-    min-width: 2em;
+scrollbar.vertical.with-steppers slider {
+    min-width: 3em;
 }
 
-scrollbar.arrowed button {
-    min-width: 2em;
-    min-height: 2em;
+scrollbar.with-steppers button {
+    min-width: 3em;
+    min-height: 3em;
 }
 
-scrollbar.vertical.arrowed button.down {
+scrollbar.vertical.with-steppers button.down {
     -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
 }
 
-scrollbar.vertical.arrowed button.up {
+scrollbar.vertical.with-steppers button.up {
     -gtk-icon-source: -gtk-icontheme("pan-up-symbolic");
 }
 
