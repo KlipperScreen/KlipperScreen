@@ -109,6 +109,8 @@ class KlipperScreen(Gtk.Window):
 
         self._config = KlipperScreenConfig(configfile, self)
         self.lang_ltr = set_text_direction(self._config.get_main_config().get("language", None))
+        self.env = Environment(extensions=["jinja2.ext.i18n"], autoescape=True)
+        self.env.install_gettext_translations(self._config.get_lang())
 
         self.connect("key-press-event", self._key_press_event)
         self.connect("configure_event", self.update_size)
@@ -681,6 +683,7 @@ class KlipperScreen(Gtk.Window):
     def change_language(self, widget, lang):
         self._config.install_language(lang)
         self.lang_ltr = set_text_direction(lang)
+        self.env.install_gettext_translations(self._config.get_lang())
         self._config._create_configurable_options(self)
         self.reload_panels()
 
@@ -750,9 +753,7 @@ class KlipperScreen(Gtk.Window):
         ]
 
         try:
-            env = Environment(extensions=["jinja2.ext.i18n"], autoescape=True)
-            env.install_gettext_translations(self._config.get_lang())
-            j2_temp = env.from_string(text)
+            j2_temp = self.env.from_string(text)
             text = j2_temp.render()
         except Exception as e:
             logging.debug(f"Error parsing jinja for confirm_send_action\n{e}")
