@@ -242,7 +242,7 @@ class KlippyGtk:
         return b
 
     @staticmethod
-    def ScrolledWindow():
+    def ScrolledWindow(set_arrows=False):
         scroll = Gtk.ScrolledWindow()
         scroll.set_property("overlay-scrolling", False)
         scroll.set_vexpand(True)
@@ -250,4 +250,7 @@ class KlippyGtk:
                           Gdk.EventMask.TOUCH_MASK |
                           Gdk.EventMask.BUTTON_RELEASE_MASK)
         scroll.set_kinetic_scrolling(True)
+        if set_arrows:
+            scroll.get_vscrollbar().get_style_context().add_class("arrowed")
+
         return scroll
