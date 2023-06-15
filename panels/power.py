@@ -24,7 +24,7 @@ class PowerPanel(ScreenPanel):
         self.load_power_devices()
 
         # Create a scroll window for the power devices
-        scroll = self._gtk.ScrolledWindow(True)
+        scroll = self._gtk.ScrolledWindowWithSteppers()
         scroll.add(self.labels['devices'])
 
         self.content.add(scroll)

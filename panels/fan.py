@@ -27,7 +27,7 @@ class FanPanel(ScreenPanel):
 
         self.load_fans()
 
-        scroll = self._gtk.ScrolledWindow(True)
+        scroll = self._gtk.ScrolledWindowWithSteppers()
         scroll.add(self.labels['devices'])
 
         self.content.add(scroll)
