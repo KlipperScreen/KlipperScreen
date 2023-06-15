@@ -34,7 +34,7 @@ class MacroPanel(ScreenPanel):
         sbox.pack_start(self.sort_btn, True, True, 5)
         sbox.pack_start(adjust, True, True, 5)
 
-        self.labels['macros_list'] = self._gtk.ScrolledWindow()
+        self.labels['macros_list'] = self._gtk.ScrolledWindow(True)
         self.labels['macros'] = Gtk.Grid()
         self.labels['macros_list'].add(self.labels['macros'])
 
@@ -44,7 +44,7 @@ class MacroPanel(ScreenPanel):
         self.labels['macros_menu'].pack_start(self.labels['macros_list'], True, True, 0)
 
         self.content.add(self.labels['macros_menu'])
-        self.labels['options_menu'] = self._gtk.ScrolledWindow()
+        self.labels['options_menu'] = self._gtk.ScrolledWindow(True)
         self.labels['options'] = Gtk.Grid()
         self.labels['options_menu'].add(self.labels['options'])
 

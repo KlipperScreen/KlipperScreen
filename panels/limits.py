@@ -38,7 +38,7 @@ class LimitsPanel(ScreenPanel):
         for opt in self.options:
             self.add_option(opt['option'], opt['name'], opt['units'], opt['max'])
 
-        scroll = self._gtk.ScrolledWindow()
+        scroll = self._gtk.ScrolledWindow(True)
         scroll.add(self.grid)
         self.content.add(scroll)
         self.content.show_all()

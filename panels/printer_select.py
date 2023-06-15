@@ -15,7 +15,7 @@ class PrinterSelect(ScreenPanel):
         printers = self._config.get_printers()
 
         grid = self._gtk.HomogeneousGrid()
-        scroll = self._gtk.ScrolledWindow()
+        scroll = self._gtk.ScrolledWindow(True)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(grid)
         self.content.add(scroll)
