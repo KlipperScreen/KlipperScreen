@@ -477,14 +477,17 @@ class KlipperScreen(Gtk.Window):
             logging.info("No items in menu")
 
     def _remove_all_panels(self):
-        self.subscriptions = []
-        self._cur_panels = []
         for _ in self.base_panel.content.get_children():
             self.base_panel.content.remove(_)
         for dialog in self.dialogs:
             self.gtk.remove_dialog(dialog)
+        for panel in list(self.panels):
+            if hasattr(self.panels[panel], "deactivate"):
+                self.panels[panel].deactivate()
+            del self.panels[panel]
+        self.subscriptions.clear()
+        self._cur_panels.clear()
         self.close_screensaver()
-
 
     def _remove_current_panel(self, pop=True):
         if len(self._cur_panels) < 1:
