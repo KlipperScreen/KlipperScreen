@@ -4,7 +4,7 @@
 
 Install the screen, following the instructions provided by the manufacturer, Some screens don't neeed extra software but some need to be installed with a script.
 It's strongly recommended to test it and ensure your hardware is working with Raspbian, Ubuntu or any distro you like.
-Once you stablished that the screen is working, then proceed installing KlipperScreen.
+Once you have established that the screen is working, then proceed installing KlipperScreen.
 
 ## Setup
 This install process is meant for a non-desktop version of the OS for example Raspbian Lite, but it should work on other versions.
