@@ -251,3 +251,9 @@ class KlippyGtk:
                           Gdk.EventMask.BUTTON_RELEASE_MASK)
         scroll.set_kinetic_scrolling(True)
         return scroll
+
+    @staticmethod
+    def ScrolledWindowWithSteppers():
+        scroll = KlippyGtk.ScrolledWindow()
+        scroll.get_vscrollbar().get_style_context().add_class("with-steppers")
+        return scroll

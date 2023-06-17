@@ -27,14 +27,14 @@ class SettingsPanel(ScreenPanel):
             "menu": "lang"
         }})
 
-        self.labels['settings_menu'] = self._gtk.ScrolledWindow()
+        self.labels['settings_menu'] = self._gtk.ScrolledWindowWithSteppers()
         self.labels['settings'] = Gtk.Grid()
         self.labels['settings_menu'].add(self.labels['settings'])
         for option in options:
             name = list(option)[0]
             self.add_option('settings', self.settings, name, option[name])
 
-        self.labels['lang_menu'] = self._gtk.ScrolledWindow()
+        self.labels['lang_menu'] = self._gtk.ScrolledWindowWithSteppers()
         self.labels['lang'] = Gtk.Grid()
         self.labels['lang_menu'].add(self.labels['lang'])
         for lang in self._config.lang_list:
@@ -44,7 +44,7 @@ class SettingsPanel(ScreenPanel):
             }
             self.add_option("lang", self.langs, lang, self.langs[lang])
 
-        self.labels['printers_menu'] = self._gtk.ScrolledWindow()
+        self.labels['printers_menu'] = self._gtk.ScrolledWindowWithSteppers()
         self.labels['printers'] = Gtk.Grid()
         self.labels['printers_menu'].add(self.labels['printers'])
         for printer in self._config.get_printers():

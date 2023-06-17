@@ -76,7 +76,7 @@ class NetworkPanel(ScreenPanel):
             sbox.add(self.labels['ip'])
         sbox.add(reload_networks)
 
-        scroll = self._gtk.ScrolledWindow()
+        scroll = self._gtk.ScrolledWindowWithSteppers()
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         box.set_vexpand(True)
@@ -282,7 +282,7 @@ class NetworkPanel(ScreenPanel):
             {"name": _("Close"), "response": Gtk.ResponseType.CANCEL}
         ]
 
-        scroll = self._gtk.ScrolledWindow()
+        scroll = self._gtk.ScrolledWindowWithSteppers()
         self.labels['connecting_info'] = Gtk.Label(_("Starting WiFi Association"))
         self.labels['connecting_info'].set_halign(Gtk.Align.START)
         self.labels['connecting_info'].set_valign(Gtk.Align.START)

@@ -23,7 +23,7 @@ class MenuPanel(ScreenPanel):
         self.items = items
         self.create_menu_items()
         self.grid = self._gtk.HomogeneousGrid()
-        self.scroll = self._gtk.ScrolledWindow()
+        self.scroll = self._gtk.ScrolledWindowWithSteppers()
         self.scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
     def activate(self):
