@@ -105,6 +105,7 @@ class KlipperScreen(Gtk.Window):
         self.version = version
         self.dialogs = []
         self.confirm = None
+        self.panels_reinit = []
 
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
@@ -280,18 +281,24 @@ class KlipperScreen(Gtk.Window):
         try:
             if remove == 2:
                 self._remove_all_panels()
+                self.panels_reinit = list(self.panels)
             elif remove == 1:
                 self._remove_current_panel(pop)
-
             if panel_name not in self.panels:
                 try:
                     self.panels[panel_name] = self._load_panel(panel_type, self, title, **kwargs)
                 except Exception as e:
+
                     if panel_name in self.panels:
                         del self.panels[panel_name]
                     self.show_error_modal(f"Unable to load panel {panel_type}", f"{e}")
                     return
+
             self._cur_panels.append(panel_name)
+            if panel_name in self.panels_reinit:
+                logging.info("Reinitializing panel")
+                self.panels[panel_name].__init__(self, title, **kwargs)
+                self.panels_reinit.remove(panel_name)
             self.attach_panel(panel_name)
         except Exception as e:
             logging.exception(f"Error attaching panel:\n{e}")
@@ -484,7 +491,6 @@ class KlipperScreen(Gtk.Window):
         for panel in list(self.panels):
             if hasattr(self.panels[panel], "deactivate"):
                 self.panels[panel].deactivate()
-            del self.panels[panel]
         self.subscriptions.clear()
         self._cur_panels.clear()
         self.close_screensaver()
