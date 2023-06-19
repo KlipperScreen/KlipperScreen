@@ -1,0 +1,50 @@
+# Wi-Fi networks not listed
+
+Check if network-manager is installed:
+
+```
+dpkg -s network-manager                                                                                                                                                                                      
+```
+
+if the response is the following:
+
+```
+dpkg-query: the package `network-manager' is not installed
+```
+
+go to [wpa_supplicant](wpa_supplicant.md)
+
+if the response is the following:
+
+```
+Package: network-manager
+Status: install ok installed
+```
+
+this line may appear in KlipperScreen.log:
+
+`[wifi_nm.py:rescan()] [...] NetworkManager.wifi.scan request failed: not authorized`
+
+
+in order to fix this polkit needs to be configured or disabled:
+
+here is how to disable polkit for network-manager:
+
+```sh
+mkdir -p /etc/NetworkManager/conf.d
+sudo nano /etc/NetworkManager/conf.d/any-user.conf
+```
+
+in the editor paste this:
+
+```conf
+[main]
+auth-polkit=false
+```
+
+Then restart the service (or reboot):
+
+```sh
+systemctl restart NetworkManager.service
+systemctl restart KlipperScreen.service
+```

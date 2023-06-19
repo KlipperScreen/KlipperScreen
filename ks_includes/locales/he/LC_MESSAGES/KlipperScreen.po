@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"POT-Creation-Date: 2023-05-07 07:02-0600\n"
 "PO-Revision-Date: 2022-11-30 18:11-0300\n"
 "Last-Translator: Tal Rahav <talrhv1@gmail.com>\n"
 "Language-Team: \n"
@@ -55,12 +55,12 @@ msgid "Apply"
 msgstr "החל"
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
-msgstr "הוסף %.2f לתחנת קצה?"
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr ""
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
-msgstr "החל היסט של %s%.2f על בדיקה"
+msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr ""
@@ -107,11 +107,11 @@ msgstr "לכייל"
 msgid "Calibrated"
 msgstr "מכויל"
 
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "מכויל, שמור את התצורה כדי שהיא תהיה קבועה"
-
 msgid "Calibrating"
 msgstr "מכייל"
+
+msgid "Camera"
+msgstr ""
 
 msgid "Can't set above the maximum:"
 msgstr "לא ניתן להגדיר מעל המקסימום:"
@@ -174,8 +174,8 @@ msgstr "הפעל קירור"
 msgid "Date"
 msgstr "תאריך"
 
-msgid "Decrease"
-msgstr "הורד"
+msgid "Delete Directory?"
+msgstr ""
 
 msgid "Delete File?"
 msgstr "מחק קובץ"
@@ -268,6 +268,9 @@ msgstr "גודל טקסט"
 msgid "Full Update"
 msgstr "עדכון מלא"
 
+msgid "Fullscreen"
+msgstr ""
+
 msgid "Go Back"
 msgstr "חזרה"
 
@@ -312,9 +315,6 @@ msgstr "שם שרת"
 
 msgid "Icon Theme"
 msgstr "ערכת נושא"
-
-msgid "Increase"
-msgstr "הגדל"
 
 msgid "Initializing printer..."
 msgstr "מאתחל מדפסת..."
@@ -551,6 +551,9 @@ msgstr "התייחסות"
 msgid "Refresh"
 msgstr "רענון"
 
+msgid "Rename/Move:"
+msgstr ""
+
 msgid "Restart"
 msgstr "אתחל"
 
@@ -608,10 +611,6 @@ msgstr "בחר"
 
 msgid "Send"
 msgstr "שליחה"
-
-#, python-format
-msgid "Sending Power ON signal to: %s"
-msgstr "שולח אות הפעלה אל: %s"
 
 msgid "Set Temp"
 msgstr "הגדר טמפ'"
@@ -753,8 +752,12 @@ msgstr[1] "שעות"
 msgstr[2] "שעות"
 msgstr[3] "שעות"
 
-msgid "minutes"
-msgstr "דקות"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 msgid "mm"
 msgstr "מ''מ"
@@ -767,6 +770,19 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "מכויל, שמור את התצורה כדי שהיא תהיה קבועה"
+
+#~ msgid "Decrease"
+#~ msgstr "הורד"
+
+#~ msgid "Increase"
+#~ msgstr "הגדל"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "שולח אות הפעלה אל: %s"
 
 #~ msgid "Sort:"
 #~ msgstr "מיין"

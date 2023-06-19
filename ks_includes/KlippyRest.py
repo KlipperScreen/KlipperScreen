@@ -37,7 +37,7 @@ class KlippyRest:
         headers = {} if self.api_key is False else {"x-api-key": self.api_key}
         data = False
         try:
-            response = requests.get(url, headers=headers)
+            response = requests.get(url, headers=headers, timeout=3)
             response.raise_for_status()
             if json:
                 logging.debug(f"Sending request to {url}")

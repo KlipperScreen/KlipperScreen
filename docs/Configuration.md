@@ -79,7 +79,7 @@ calibrate_y_position: 100
 
 # Bed Screws
 # define the screw positons required for odd number of screws in a comma separated list
-# possible values are: bl, br, bm, fl, fr, fm, lm, rm
+# possible values are: bl, br, bm, fl, fr, fm, lm, rm, center
 # they correspond to back-left, back-right, back-middle, front-left, front-right, front-middle, left-middle, right-middle
 screw_positions: ""
 
@@ -131,8 +131,14 @@ A menu item is configured as follows:
 [menu __main my_menu_item]
 # To build a sub-menu of this menu item, you would next use [menu __main my_menu_item sub_menu_item]
 name: Item Name
-icon: home
 # Optional Parameters
+#
+# Icon name to be used, it can be any image in the directory:
+# KlipperScreen/styles/{theme}/images/ where {theme} is your current theme
+# Supported formats svg or png
+icon: home
+# Icon style, defined as "button.mycolor4" (for example) in the theme css
+style: mycolor4
 # Panel from the panels listed below
 panel: preheat
 # Moonraker method to call when the item is selected

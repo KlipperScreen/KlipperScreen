@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-29 09:28-0600\n"
+"POT-Creation-Date: 2023-05-07 07:02-0600\n"
 "PO-Revision-Date: 2023-01-29 09:27-0600\n"
 "Last-Translator: \n"
 "Language-Team: Jan Stanka (stanky@email.cz)\n"
@@ -53,12 +53,12 @@ msgid "Apply"
 msgstr "Použít"
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
-msgstr "Použít %.2f přesah k Endstop?"
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr ""
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
-msgstr "Použít %s%.2f přesah k Sondě?"
+msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Opravdu chceš vyjmout objekt?"
@@ -104,9 +104,6 @@ msgstr "Kalibrace"
 
 msgid "Calibrated"
 msgstr "Zkalibrováno"
-
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "Zkalibrováno, uložit změny jako trvalé"
 
 msgid "Calibrating"
 msgstr "Kalibruji"
@@ -750,8 +747,11 @@ msgstr[0] "hodina"
 msgstr[1] "hodiny"
 msgstr[2] "hodin"
 
-msgid "minutes"
-msgstr "min"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "mm"
 msgstr "mm"
@@ -764,6 +764,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "Zkalibrováno, uložit změny jako trvalé"
 
 #~ msgid "Decrease"
 #~ msgstr "Snížit"

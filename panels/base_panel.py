@@ -253,6 +253,8 @@ class BasePanel(ScreenPanel):
                 self.control['temp_box'].reorder_child(self.labels[f"{self.current_extruder}_box"], 0)
                 self.control['temp_box'].show_all()
 
+        return False
+
     def remove(self, widget):
         self.content.remove(widget)
 
@@ -276,6 +278,9 @@ class BasePanel(ScreenPanel):
         elif show is False and self.buttons_showing['macros_shortcut'] is True:
             self.action_bar.remove(self.control['macros_shortcut'])
             self.buttons_showing['macros_shortcut'] = False
+
+    def toggle_macro_shorcut_sensitive(self, value=True):
+        self.control['macros_shortcut'].set_sensitive(value)
 
     def show_printer_select(self, show=True):
         if show and self.buttons_showing['printer_select'] is False:

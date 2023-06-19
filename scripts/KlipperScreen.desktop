@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=KlipperScreen
 GenericName=Touch screen GUI for Klipper via Moonraker
-Icon=$HOME/KlipperScreen/styles/icon.svg
+Icon=KlipperScreen
 Exec=sh -c "$HOME/.KlipperScreen-env/bin/python $HOME/KlipperScreen/screen.py"
 Terminal=false
 Type=Application

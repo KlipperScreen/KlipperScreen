@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-29 09:28-0600\n"
+"POT-Creation-Date: 2023-05-07 07:02-0600\n"
 "PO-Revision-Date: 2022-11-30 18:15-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: \n"
@@ -54,12 +54,12 @@ msgid "Apply"
 msgstr "Применить"
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
-msgstr "Применить смещение %.2f к Endstop?"
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr ""
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
-msgstr "Применить смещение %s%.2f к зонду?"
+msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Вы уверены, что хотите исключить объект?"
@@ -105,9 +105,6 @@ msgstr "Калибровка"
 
 msgid "Calibrated"
 msgstr "Откалиброванный"
-
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "Откалибровано, сохраните конфигурацию, чтобы сделать ее постоянной"
 
 msgid "Calibrating"
 msgstr "Калибровка"
@@ -753,8 +750,11 @@ msgstr[0] "час"
 msgstr[1] "часа"
 msgstr[2] "часа"
 
-msgid "minutes"
-msgstr "минут"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "mm"
 msgstr "мм"
@@ -767,6 +767,9 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм/с³"
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "Откалибровано, сохраните конфигурацию, чтобы сделать ее постоянной"
 
 #~ msgid "Decrease"
 #~ msgstr "Уменьшить"

@@ -3,17 +3,17 @@
 ### Main Menu
 ![Main Menu](img/panels/main_panel.png)
 
-### [Job Status](Job_status.md)
+### [Job Status](Panels/Job_status.md)
 ```py
 panel: job_status
 ```
-![Job Status](img/panels/job_status.png)
+[![Job Status](img/panels/job_status.png)](Panels/Job_status.md)
 
-### [Bed Level](Screws.md)
+### [Bed Level](Panels/Screws.md)
 ```py
 panel: bed_level
 ```
-![Bed Level](img/panels/bed_level.png)
+[![Bed Level](img/panels/bed_level.png)](Panels/Screws.md)
 
 ### Bed Mesh
 ```py
@@ -108,14 +108,14 @@ panel: system
 ```
 ![System Panel](img/panels/system.png)
 
-### [Temperature](Temperature.md)
+### [Temperature](Panels/Temperature.md)
 ```py
 panel: temperature
 ```
-![Temperature](img/panels/temperature.png)
+[![Temperature](img/panels/temperature.png)](Panels/Temperature.md)
 
-### [Z Calibrate](Zcalibrate.md)
+### [Z Calibrate](Panels/Zcalibrate.md)
 ```py
 panel: zcalibrate
 ```
-![Z Calibrate](img/panels/zcalibrate.png)
+[![Z Calibrate](img/panels/zcalibrate.png)](Panels/Zcalibrate.md)

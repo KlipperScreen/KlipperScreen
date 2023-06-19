@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"POT-Creation-Date: 2023-05-07 07:02-0600\n"
 "PO-Revision-Date: 2022-11-21 21:31-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -53,11 +53,11 @@ msgid "Apply"
 msgstr ""
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
+msgid "Apply %s%.3f offset to Endstop?"
 msgstr ""
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
+msgid "Apply %s%.3f offset to Probe?"
 msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
@@ -105,10 +105,10 @@ msgstr "Kalibrera"
 msgid "Calibrated"
 msgstr ""
 
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "Kalibrerad, spara konfiguration för att göra den permanent"
-
 msgid "Calibrating"
+msgstr ""
+
+msgid "Camera"
 msgstr ""
 
 msgid "Can't set above the maximum:"
@@ -172,8 +172,8 @@ msgstr "Nedkylning"
 msgid "Date"
 msgstr "Datum"
 
-msgid "Decrease"
-msgstr "Minska"
+msgid "Delete Directory?"
+msgstr ""
 
 msgid "Delete File?"
 msgstr ""
@@ -266,6 +266,9 @@ msgstr "Textstorlek"
 msgid "Full Update"
 msgstr "Fullständig Uppdatering"
 
+msgid "Fullscreen"
+msgstr ""
+
 msgid "Go Back"
 msgstr "Gå tillbaka"
 
@@ -310,9 +313,6 @@ msgstr "Värdnamn"
 
 msgid "Icon Theme"
 msgstr "Ikon tema"
-
-msgid "Increase"
-msgstr "Öka"
 
 msgid "Initializing printer..."
 msgstr "Initierar skrivaren..."
@@ -547,6 +547,9 @@ msgstr "Referens"
 msgid "Refresh"
 msgstr ""
 
+msgid "Rename/Move:"
+msgstr ""
+
 msgid "Restart"
 msgstr "Starta om"
 
@@ -604,10 +607,6 @@ msgstr "Välj"
 
 msgid "Send"
 msgstr "Skicka"
-
-#, python-format
-msgid "Sending Power ON signal to: %s"
-msgstr "Skickar ström PÅ-signal till: %s"
 
 msgid "Set Temp"
 msgstr ""
@@ -745,8 +744,10 @@ msgid_plural "hours"
 msgstr[0] "timme"
 msgstr[1] "timmar"
 
-msgid "minutes"
-msgstr "minuter"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "mm"
 msgstr "mm"
@@ -759,6 +760,19 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "Kalibrerad, spara konfiguration för att göra den permanent"
+
+#~ msgid "Decrease"
+#~ msgstr "Minska"
+
+#~ msgid "Increase"
+#~ msgstr "Öka"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "Skickar ström PÅ-signal till: %s"
 
 #~ msgid "Z+"
 #~ msgstr "Z+"

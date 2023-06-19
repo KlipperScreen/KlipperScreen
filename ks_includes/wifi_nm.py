@@ -5,7 +5,7 @@ import contextlib
 import logging
 import uuid
 
-import NetworkManager
+from ks_includes import NetworkManager
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
 import gi

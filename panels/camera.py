@@ -1,9 +1,10 @@
+import contextlib
 import mpv
 import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk
 
 from ks_includes.screen_panel import ScreenPanel
 
@@ -29,12 +30,7 @@ class CameraPanel(ScreenPanel):
         self.content.add(box)
         self.content.show_all()
         self.url = self.ks_printer_cfg.get("camera_url", "http://127.0.0.1/webcam/?action=stream").replace('"', '')
-        # wayland has no primary monitor with that we can detect it
-        self.wayland = Gdk.Display.get_default().get_primary_monitor() is None
-        # gpu output driver doesn't work on a pi3 and the autoselected sdl doesn't size correctly
-        # consider adding a software switch to enable the gpu backend if set by the user
-        self.vo = 'wlshm' if self.wayland else 'x11'
-        logging.debug(f"Camera URL: {self.url} vo: {self.vo} wayland: {self.wayland}")
+        logging.debug(f"Camera URL: {self.url}")
 
     def activate(self):
         self.play()
@@ -49,20 +45,20 @@ class CameraPanel(ScreenPanel):
             self.mpv.terminate()
             self.mpv = None
         # Create mpv after show or the 'window' property will be None
-        try:
-            self.mpv = mpv.MPV(
-                log_handler=self.log,
-                vo=self.vo,
-                profile='sw-fast',
-            )
-        except ValueError:
-            self.mpv = mpv.MPV(
-                log_handler=self.log,
-                vo=self.vo,
-            )
+        self.mpv = mpv.MPV(log_handler=self.log, vo='gpu,wlshm,xv,x11')
+
+        with contextlib.suppress(Exception):
+            self.mpv.profile = 'sw-fast'
+
+        # LOW LATENCY PLAYBACK
+        with contextlib.suppress(Exception):
+            self.mpv.profile = 'low-latency'
+        self.mpv.untimed = True
+        self.mpv.audio = 'no'
+
         # On wayland mpv cannot be embedded at least for now
         # https://github.com/mpv-player/mpv/issues/9654
-        # if fs or self.wayland:
+        # if fs:
         self.mpv.fullscreen = True
 
         @self.mpv.on_key_press('MBTN_LEFT' or 'MBTN_LEFT_DBL')
@@ -75,7 +71,7 @@ class CameraPanel(ScreenPanel):
         #     def clicked():
         #         self._screen.show_popup_message(self.url, level=1)
         self.mpv.play(self.url)
-        # if fs or self.wayland:
+        # if fs:
         try:
             self.mpv.wait_for_playback()
         except mpv.ShutdownError:

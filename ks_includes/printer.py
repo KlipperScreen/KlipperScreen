@@ -1,5 +1,5 @@
 import logging
-
+import contextlib
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -7,12 +7,12 @@ from gi.repository import GLib
 
 
 class Printer:
-    def __init__(self, state_cb):
-        self.config = None
-        self.data = None
+    def __init__(self, state_cb, state_callbacks, busy_cb):
+        self.config = {}
+        self.data = {}
         self.state = "disconnected"
         self.state_cb = state_cb
-        self.state_callbacks = None
+        self.state_callbacks = state_callbacks
         self.devices = {}
         self.power_devices = {}
         self.tools = []
@@ -22,28 +22,9 @@ class Printer:
         self.output_pin_count = 0
         self.store_timeout = None
         self.tempstore = {}
-        self.busy_cb = None
-        self.busy = None
-        self.temperature_store_size = None
-
-    def reset(self):
-        self.config = None
-        self.data = None
-        self.state = None
-        self.state_cb = None
-        self.state_callbacks = None
-        self.devices = None
-        self.power_devices = None
-        self.tools = None
-        self.extrudercount = None
-        self.tempdevcount = None
-        self.fancount = None
-        self.output_pin_count = None
-        self.store_timeout = None
-        self.tempstore = None
-        self.busy_cb = None
-        self.busy = None
-        self.temperature_store_size = None
+        self.busy_cb = busy_cb
+        self.busy = False
+        self.tempstore_size = 1200
 
     def reinit(self, printer_info, data):
         self.config = data['configfile']['config']
@@ -92,6 +73,15 @@ class Printer:
                     self.fancount += 1
             if x.startswith('output_pin ') and not x.split()[1].startswith("_"):
                 self.output_pin_count += 1
+            if x.startswith('bed_mesh '):
+                r = self.config[x]
+                r['x_count'] = int(r['x_count'])
+                r['y_count'] = int(r['y_count'])
+                r['max_x'] = float(r['max_x'])
+                r['min_x'] = float(r['min_x'])
+                r['max_y'] = float(r['max_y'])
+                r['min_y'] = float(r['min_y'])
+                r['points'] = [[float(j.strip()) for j in i.split(",")] for i in r['points'].strip().split("\n")]
         self.process_update(data)
 
         logging.info(f"Klipper version: {printer_info['software_version']}")
@@ -122,13 +112,14 @@ class Printer:
         # webhooks states: startup, ready, shutdown, error
         # print_stats: standby, printing, paused, error, complete
         # idle_timeout: Idle, Printing, Ready
-        if self.data['webhooks']['state'] == "ready" and self.data['print_stats']:
-            if self.data['print_stats']['state'] == 'paused':
-                return "paused"
-            if self.data['print_stats']['state'] == 'printing':
-                return "printing"
-            if self.data['idle_timeout'] and self.data['idle_timeout']['state'].lower() == "printing":
-                return "busy"
+        if self.data['webhooks']['state'] == "ready":
+            with contextlib.suppress(KeyError):
+                if self.data['print_stats']['state'] == 'paused':
+                    return "paused"
+                if self.data['print_stats']['state'] == 'printing':
+                    return "printing"
+                if self.data['idle_timeout']['state'].lower() == "printing":
+                    return "busy"
         return self.data['webhooks']['state']
 
     def process_status_update(self):
@@ -141,6 +132,7 @@ class Printer:
             GLib.idle_add(self.busy_cb, False)
         if state != self.state:
             self.change_state(state)
+        return False
 
     def process_power_update(self, data):
         if data['device'] in self.power_devices:
@@ -173,6 +165,16 @@ class Printer:
 
     def get_config_section(self, section):
         return self.config[section] if section in self.config else False
+
+    def get_macro(self, macro):
+        return next(
+            (
+                self.config[key]
+                for key in self.config.keys()
+                if key.find(macro) > -1
+            ),
+            False,
+        )
 
     def get_fans(self):
         fans = []
@@ -318,20 +320,21 @@ class Printer:
             return True
 
     def init_temp_store(self, tempstore):
-        if tempstore and 'result' in tempstore:
-            if self.tempstore and list(self.tempstore) != list(tempstore['result']):
-                logging.debug("Tempstore has changed")
-                self.tempstore = tempstore['result']
-                self.change_state(self.state)
-            else:
-                self.tempstore = tempstore['result']
-            for device in self.tempstore:
-                for x in self.tempstore[device]:
-                    length = len(self.tempstore[device][x])
-                    if length < self.tempstore_size:
-                        for i in range(1, self.tempstore_size - length):
-                            self.tempstore[device][x].insert(0, 0)
-            logging.info(f"Temp store: {list(self.tempstore)}")
+        if not tempstore or 'result' not in tempstore:
+            return
+        if self.tempstore and list(self.tempstore) != list(tempstore['result']):
+            logging.debug("Tempstore has changed")
+            self.tempstore = tempstore['result']
+            self.change_state(self.state)
+        else:
+            self.tempstore = tempstore['result']
+        for device in self.tempstore:
+            for x in self.tempstore[device]:
+                length = len(self.tempstore[device][x])
+                if length < self.tempstore_size:
+                    for _ in range(1, self.tempstore_size - length):
+                        self.tempstore[device][x].insert(0, 0)
+        logging.info(f"Temp store: {list(self.tempstore)}")
 
     def config_section_exists(self, section):
         return section in self.get_config_section_list()
