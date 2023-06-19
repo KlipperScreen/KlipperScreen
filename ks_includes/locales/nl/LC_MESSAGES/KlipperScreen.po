@@ -1,0 +1,764 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-07 07:02-0600\n"
+"PO-Revision-Date: 2023-05-07 18:50+0200\n"
+"Last-Translator: Thijs Triemstra <info@collab.nl>\n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s zal worden ge-update naar versie"
+
+msgid "(default)"
+msgstr "(standaard)"
+
+msgid "24 Hour Time"
+msgstr "24 Uurs Tijd"
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr "Een FIRMWARE_RESTART kan het probleem oplossen."
+
+msgid "ADXL Not Configured"
+msgstr "ADXL Niet Geconfigureerd"
+
+msgid "Abort"
+msgstr "Annuleer"
+
+msgid "Acceleration:"
+msgstr "Acceleratie:"
+
+msgid "Accept"
+msgstr "Accepteer"
+
+msgid "Actions"
+msgstr "Acties"
+
+msgid "Add profile"
+msgstr "Profiel toevoegen"
+
+msgid "Apply"
+msgstr "Toepassen"
+
+#, python-format
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr "Gebruik %s%.3f offset voor Eindstop?"
+
+#, python-format
+msgid "Apply %s%.3f offset to Probe?"
+msgstr "Gebruik %s%.3f offset voor Probe?"
+
+msgid "Are you sure do you want to exclude the object?"
+msgstr "Weet je zeker dat je het object wilt uitsluiten?"
+
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "Weet je zeker dat je de Nood Stop wilt inschakelen?"
+
+msgid "Are you sure you wish to cancel this print?"
+msgstr "Weet je zeker dat je deze print wilt annuleren?"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "Weet je zeker dat je de motors wilt uitschakelen?"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "Weet je zeker dat je het systeem wilt herstarten?"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "Weet je zeker dat je het systeem wilt afsluiten?"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Auto-calibrate"
+msgstr "Auto-kalibreren"
+
+msgid "Auto-close notifications"
+msgstr "Auto-sluit notificaties"
+
+msgid "Auto-scroll"
+msgstr "Auto-scroll"
+
+msgid "Bed Level"
+msgstr "Bed Level"
+
+msgid "Bed Mesh"
+msgstr "Bed Mesh"
+
+msgid "Bed screw configuration:"
+msgstr "Bed schroef configuratie:"
+
+msgid "Calibrate"
+msgstr "Kalibreer"
+
+msgid "Calibrated"
+msgstr "Gekalibreerd"
+
+msgid "Calibrating"
+msgstr "Kalibreren"
+
+msgid "Camera"
+msgstr "Camera"
+
+msgid "Can't set above the maximum:"
+msgstr "Kan niet boven maximum instellen:"
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "Cancel Print"
+msgstr "Annuleer Print"
+
+msgid "Cancelled"
+msgstr "Geannuleerd"
+
+msgid "Cancelling"
+msgstr "Annuleren"
+
+msgid "Cannot connect to Moonraker"
+msgstr "Kan geen verbinding met Moonraker maken"
+
+msgid "Channel"
+msgstr "Kanaal"
+
+msgid "Check ADXL Wiring"
+msgstr "Controleer AXDL Bedrading"
+
+msgid "Checking for updates, please wait..."
+msgstr "Bezig met controleren van updates, moment geduld.."
+
+msgid "Clear"
+msgstr "Leegmaken"
+
+msgid "Close"
+msgstr "Sluiten"
+
+msgid "Complete"
+msgstr "Voltooid"
+
+msgid "Configuration"
+msgstr "Configuratie"
+
+msgid "Confirm Emergency Stop"
+msgstr "Bevestig Nood Stop"
+
+msgid "Connected"
+msgstr "Verbonden"
+
+#, python-format
+msgid "Connecting to %s"
+msgstr "Verbinden met %s"
+
+msgid "Console"
+msgstr "Console"
+
+msgid "Continue"
+msgstr "Doorgaan"
+
+msgid "Cooldown"
+msgstr "Afkoelen"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Delete Directory?"
+msgstr "Verwijder directory?"
+
+msgid "Delete File?"
+msgstr "Verwijder bestand?"
+
+msgid "Deselect"
+msgstr "Deselecteer"
+
+msgid "Disable Motors"
+msgstr "Motors Uitschakelen"
+
+msgid "Disable XY"
+msgstr "XY Uitschakelen"
+
+msgid "Distance (mm)"
+msgstr "Afstand (mm)"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "Wil je %s herstellen?"
+
+msgid "Elapsed:"
+msgstr "Verstreken:"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Estimated Time Method"
+msgstr "Schatting Tijd Methode"
+
+msgid "Exclude Object"
+msgstr "Uitsluiten Object"
+
+msgid "Extra Large"
+msgstr "Extra Groot"
+
+msgid "Extrude"
+msgstr "Extrude"
+
+msgid "Extrusion +"
+msgstr "Extrusion +"
+
+msgid "Extrusion -"
+msgstr "Extrusion -"
+
+msgid "Failed, adjust position first"
+msgstr "Mislukt, wijzig positie eerst"
+
+msgid "Fan"
+msgstr "Ventilator"
+
+msgid "Filament Used"
+msgstr "Filament Gebruikt"
+
+msgid "Filament total:"
+msgstr "Filament totaal:"
+
+msgid "Filament used:"
+msgstr "Filament gebruikt:"
+
+msgid "Filament:"
+msgstr "Filament:"
+
+msgid "File"
+msgstr "Bestand"
+
+msgid "File:"
+msgstr "Bestand:"
+
+msgid "Finding ADXL"
+msgstr "Zoekt ADXL"
+
+msgid "Fine Tuning"
+msgstr "Fine Tuning"
+
+msgid "Finish"
+msgstr "Voltooi"
+
+msgid "Firmware Restart"
+msgstr "Firmware Herstarten"
+
+msgid "Flow:"
+msgstr "Flow:"
+
+msgid "Flowrate:"
+msgstr "Flowrate:"
+
+msgid "Font Size"
+msgstr "Lettertype Grootte"
+
+msgid "Full Update"
+msgstr "Volledige Update"
+
+msgid "Fullscreen"
+msgstr "Volledig Scherm"
+
+msgid "Go Back"
+msgstr "Ga Terug"
+
+msgid "Height:"
+msgstr "Hoogte:"
+
+msgid "Hidden"
+msgstr "Verborgen"
+
+msgid "Hide"
+msgstr "Verberg"
+
+msgid "Hide sensors in Temp."
+msgstr "Verberg sensoren in Temp."
+
+msgid "Hide temp."
+msgstr "Verberg temp."
+
+msgid "Home All"
+msgstr "Home alles"
+
+msgid "Home X"
+msgstr "Home X"
+
+msgid "Home XY"
+msgstr "Home XY"
+
+msgid "Home Y"
+msgstr "Home Y"
+
+msgid "Home Z"
+msgstr "Home Z"
+
+msgid "Homing"
+msgstr "Homing"
+
+msgid "Host"
+msgstr "Host"
+
+msgid "Hostname"
+msgstr "Hostnaam"
+
+msgid "Icon Theme"
+msgstr "Icoon Thema"
+
+msgid "Initializing printer..."
+msgstr "Initialiseren printer…"
+
+msgid "Input Shaper"
+msgstr "Input Shaper"
+
+msgid "Interface"
+msgstr "Interface"
+
+msgid "Invalid"
+msgstr "Ongeldig"
+
+msgid "Invalid password"
+msgstr "Ongeldig wachtwoord"
+
+msgid "Invert X"
+msgstr "Invert X"
+
+msgid "Invert Y"
+msgstr "Invert Y"
+
+msgid "Invert Z"
+msgstr "Invert Z"
+
+msgid "Klipper Restart"
+msgstr "Klipper Herstarten"
+
+msgid "Klipper has disconnected"
+msgstr "Klipper verbinding verbroken"
+
+msgid "Klipper has encountered an error."
+msgstr "Klipper heeft een fout ontdekt."
+
+msgid "Klipper has shutdown"
+msgstr "Klipper is afgesloten"
+
+msgid "Klipper is attempting to start"
+msgstr "Klipper probeert te starten"
+
+msgid "Klipper will reboot"
+msgstr "Klipper zal herstarten"
+
+msgid "KlipperScreen will reboot"
+msgstr "KlipperScreen zal herstarten"
+
+msgid "Language"
+msgstr "Taal"
+
+msgid "Large"
+msgstr "Groot"
+
+msgid "Layer:"
+msgstr "Laag:"
+
+msgid "Left:"
+msgstr "Links:"
+
+msgid "Limits"
+msgstr "Limieten"
+
+msgid "Load"
+msgstr "Laad"
+
+msgid "Lower Nozzle"
+msgstr "Onderste Nozzle"
+
+msgid "Macro shortcut on sidebar"
+msgstr "Macro snelkoppeling in sidebar"
+
+msgid "Macros"
+msgstr "Macros"
+
+msgid "Main Menu"
+msgstr "Hoofd Menu"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Max Acceleration"
+msgstr "Max Acceleratie"
+
+msgid "Max Acceleration to Deceleration"
+msgstr "Max Acceleratie naar De-acceleratie"
+
+msgid "Max Velocity"
+msgstr "Max Velocity"
+
+msgid "Maximum"
+msgstr "Maximum"
+
+msgid "Measure Both"
+msgstr "Meet Beide"
+
+msgid "Measure X"
+msgstr "Meet X"
+
+msgid "Measure Y"
+msgstr "Meet Y"
+
+msgid "Medium"
+msgstr "Medium"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Mesh calibrate"
+msgstr "Mesh kalibreren"
+
+msgid "Modified"
+msgstr "Aangepast"
+
+msgid "Moonraker: connected"
+msgstr "Moonraker: verbonden"
+
+msgid "Move"
+msgstr "Beweeg"
+
+msgid "Move Distance (mm)"
+msgstr "Beweeg Afstand (mm)"
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "Network"
+msgstr "Netwerk"
+
+msgid "Never"
+msgstr "Nooit"
+
+msgid "New"
+msgstr "Nieuw"
+
+msgid ""
+"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"conf"
+msgstr ""
+"Niet ondersteunt voor auto-detectie, dit moet worden geconfigureerd in "
+"klipperscreen.conf"
+
+msgid "Nothing selected"
+msgstr "Niets geselecteerd"
+
+#, python-format
+msgid "Outdated by %d"
+msgstr "Verouderd sinds %d"
+
+msgid "PSK for"
+msgstr "PSK voor"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "Pakket word ge-update"
+msgstr[1] "Pakketten worden ge-update"
+
+msgid "Part Fan"
+msgstr "Part Ventilator"
+
+msgid "Password saved"
+msgstr "Wachtwoord opgeslagen"
+
+msgid "Pause"
+msgstr "Pauzeer"
+
+msgid "Paused"
+msgstr "Gepauzeerd"
+
+msgid "Perform a full upgrade?"
+msgstr "Volledige upgrade uitvoeren?"
+
+msgid "Pins"
+msgstr "Pinnen"
+
+msgid "Please recompile and flash the micro-controller."
+msgstr "Hercompileer en flash de micro-controller aub."
+
+msgid "Power"
+msgstr "Stroom"
+
+msgid "Power On Printer"
+msgstr "Printer Aanzetten"
+
+msgid "Pressure Advance:"
+msgstr "Pressure Advance:"
+
+msgid "Print"
+msgstr "Print"
+
+msgid "Print Control"
+msgstr "Print Control"
+
+msgid "Print Time"
+msgstr "Print Tijd"
+
+msgid "Printer"
+msgstr "Printer"
+
+msgid "Printer Connections"
+msgstr "Printer Verbindingen"
+
+msgid "Printer Select"
+msgstr "Printer Selecteren"
+
+msgid "Printing"
+msgstr "Bezig met printen"
+
+msgid "Probe Offset"
+msgstr "Probe Offset"
+
+msgid "Profile Name:"
+msgstr "Profiel Naam:"
+
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr "Stuur ook KlipperScreen.log als je vraagt om hulp.\n"
+
+msgid "Quad Gantry Level"
+msgstr "Quad Gantry Level"
+
+msgid "Raise Nozzle"
+msgstr "Nozzle omhoog"
+
+msgid "Recover"
+msgstr "Herstellen"
+
+msgid "Recover Hard"
+msgstr "Hard Herstel"
+
+msgid "Recover Soft"
+msgstr "Soft Herstel"
+
+msgid "Reference"
+msgstr "Referentie"
+
+msgid "Refresh"
+msgstr "Refresh"
+
+msgid "Rename/Move:"
+msgstr "Hernoem/beweeg:"
+
+msgid "Restart"
+msgstr "Herstarten"
+
+msgid "Resume"
+msgstr "Hervatten"
+
+msgid "Retract"
+msgstr "Retract"
+
+msgid "Retraction"
+msgstr "Retraction"
+
+msgid "Retraction Length"
+msgstr "Retraction Lengte"
+
+msgid "Retraction Speed"
+msgstr "Retraction Snelheid"
+
+msgid "Retry"
+msgstr "Opnieuw"
+
+msgid "Retrying"
+msgstr "Probeert opnieuw"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Save Config"
+msgstr "Config Opslaan"
+
+msgid "Save Z"
+msgstr "Z Opslaan"
+
+msgid "Save configuration?"
+msgstr "Configuratie opslaan?"
+
+msgid "Saved"
+msgstr "Opgeslagen"
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr "Offset opgeslagen: %s"
+
+msgid "Screen DPMS"
+msgstr "Scherm DPMS"
+
+msgid "Screen Power Off Time"
+msgstr "Scherm Uitschakelen Tijd"
+
+msgid "Screws Adjust"
+msgstr "Schroeven Aanpassen"
+
+msgid "Select"
+msgstr "Selecteer"
+
+msgid "Send"
+msgstr "Verstuur"
+
+msgid "Set Temp"
+msgstr "Verander Temp"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Show"
+msgstr "Toon"
+
+msgid "Show Heater Power"
+msgstr "Toon Heater Stroom"
+
+msgid "Shutdown"
+msgstr "Afsluiten"
+
+msgid "Size"
+msgstr "Afmetingen"
+
+msgid "Slicer"
+msgstr "Slicer"
+
+msgid "Slicer Time correction (%)"
+msgstr "Slicer Tijd correctie (%)"
+
+msgid "Slicer:"
+msgstr "Slicer:"
+
+msgid "Small"
+msgstr "Klein"
+
+msgid "Speed (mm/s)"
+msgstr "Snelheid (mm/s)"
+
+msgid "Speed +"
+msgstr "Snelheid +"
+
+msgid "Speed -"
+msgstr "Snelheid -"
+
+msgid "Speed:"
+msgstr "Snelheid:"
+
+msgid "Square Corner Velocity"
+msgstr "Square Corner Velocity"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Starting WiFi Association"
+msgstr "WiFi Association starten"
+
+msgid "Starting recovery for"
+msgstr "Herstel starten voor"
+
+msgid "Starting update for"
+msgstr "Update starten voor"
+
+msgid "System"
+msgstr "Systeem"
+
+msgid "System Restart"
+msgstr "Systeem Herstarten"
+
+msgid "System Shutdown"
+msgstr "Systeem Afsluiten"
+
+msgid "Temp (°C)"
+msgstr "Temp (°C)"
+
+msgid "Temperature"
+msgstr "Temperatuur"
+
+msgid "Total:"
+msgstr "Totaal:"
+
+msgid "Unknown Heater"
+msgstr "Onbekende Heater"
+
+msgid "Unknown screw position"
+msgstr "Onbekende schroef positie"
+
+msgid "Unload"
+msgstr "Uitladen"
+
+msgid "Unretract Extra Length"
+msgstr "Unretract Extra Lengte"
+
+msgid "Unretract Speed"
+msgstr "Unretract Snelheid"
+
+msgid "Up To Date"
+msgstr "Up To Date"
+
+msgid "Update"
+msgstr "Update"
+
+msgid "Updating"
+msgstr "Bezig met updaten"
+
+msgid "Uploaded"
+msgstr "Geupload"
+
+msgid "XY Move Speed (mm/s)"
+msgstr "XY Move Snelheid (mm/s)"
+
+msgid "XY Speed (mm/s)"
+msgstr "XY Snelheid (mm/s)"
+
+msgid "Z Calibrate"
+msgstr "Z Kalibratie"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "Z Move Snelheid (mm/s)"
+
+msgid "Z Speed (mm/s)"
+msgstr "Z Snelheid (mm/s)"
+
+msgid "Z Tilt"
+msgstr "Z Tilt"
+
+msgid "Z offset:"
+msgstr "Z offset:"
+
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "commit"
+msgstr[1] "commits"
+
+msgid "dBm"
+msgstr "dBm"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "uur"
+msgstr[1] "uren"
+
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "minuut"
+msgstr[1] "minuten"
+
+msgid "mm"
+msgstr "mm"
+
+msgid "mm/s"
+msgstr "mm/s"
+
+msgid "mm/s²"
+msgstr "mm/s²"
+
+msgid "mm³/s"
+msgstr "mm³/s"

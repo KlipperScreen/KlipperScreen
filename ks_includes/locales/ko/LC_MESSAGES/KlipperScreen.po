@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"POT-Creation-Date: 2023-05-07 07:02-0600\n"
 "PO-Revision-Date: \n"
 "Last-Translator: NSteven\n"
 "Language-Team: NSteven\n"
@@ -48,12 +48,12 @@ msgid "Apply"
 msgstr "확인"
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
-msgstr "엔드스탑 높이 기준을 %.2f 높이의 옵셋으로 설정 하시겠습니까?"
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr ""
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
-msgstr "프로브 높이 기준을 %s%.2f 높이의 옵셋으로 설정 하시겠습니까?"
+msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr ""
@@ -100,10 +100,10 @@ msgstr "교정"
 msgid "Calibrated"
 msgstr "교정됨"
 
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "교정됨, 설정을 저장합니다"
-
 msgid "Calibrating"
+msgstr ""
+
+msgid "Camera"
 msgstr ""
 
 msgid "Can't set above the maximum:"
@@ -167,8 +167,8 @@ msgstr "가열 중단"
 msgid "Date"
 msgstr "날짜"
 
-msgid "Decrease"
-msgstr "낮추기"
+msgid "Delete Directory?"
+msgstr ""
 
 msgid "Delete File?"
 msgstr ""
@@ -261,6 +261,9 @@ msgstr "글꼴 크기"
 msgid "Full Update"
 msgstr "전체 업데이트"
 
+msgid "Fullscreen"
+msgstr ""
+
 msgid "Go Back"
 msgstr "뒤로"
 
@@ -305,9 +308,6 @@ msgstr "호스트 이름"
 
 msgid "Icon Theme"
 msgstr "아이콘 테마"
-
-msgid "Increase"
-msgstr "높이기"
 
 msgid "Initializing printer..."
 msgstr "프린터 초기화 중.."
@@ -541,6 +541,9 @@ msgstr "참조"
 msgid "Refresh"
 msgstr ""
 
+msgid "Rename/Move:"
+msgstr ""
+
 msgid "Restart"
 msgstr "재시작"
 
@@ -598,10 +601,6 @@ msgstr "선택"
 
 msgid "Send"
 msgstr "보내기"
-
-#, python-format
-msgid "Sending Power ON signal to: %s"
-msgstr "전원 켜기 신호 송신 ㅈ: %s"
 
 msgid "Set Temp"
 msgstr "온도 설정"
@@ -737,8 +736,9 @@ msgid "hour"
 msgid_plural "hours"
 msgstr[0] "시간"
 
-msgid "minutes"
-msgstr "분"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
 
 msgid "mm"
 msgstr "mm"
@@ -751,6 +751,19 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "교정됨, 설정을 저장합니다"
+
+#~ msgid "Decrease"
+#~ msgstr "낮추기"
+
+#~ msgid "Increase"
+#~ msgstr "높이기"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "전원 켜기 신호 송신 ㅈ: %s"
 
 #~ msgid "Sort:"
 #~ msgstr "종류:"

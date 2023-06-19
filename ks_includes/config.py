@@ -11,11 +11,13 @@ import locale
 from io import StringIO
 
 SCREEN_BLANKING_OPTIONS = [
-    300,  # 5 Minutes
-    900,  # 15 Minutes
-    1800,  # 30 Minutes
-    3600,  # 1 Hour
-    7200,  # 2 Hours
+    60,     # 1 Minute
+    120,    # 2 Minutes
+    300,    # 5 Minutes
+    900,    # 15 Minutes
+    1800,   # 30 Minutes
+    3600,   # 1 Hour
+    7200,   # 2 Hours
     14400,  # 4 Hours
 ]
 
@@ -114,13 +116,13 @@ class KlipperScreenConfig:
             self.langs[lng] = gettext.translation('KlipperScreen', localedir=lang_path, languages=[lng], fallback=True)
 
         lang = self.get_main_config().get("language", None)
-        logging.debug(f"Selected lang: {lang} OS lang: {locale.getdefaultlocale()[0]}")
+        logging.debug(f"Selected lang: {lang} OS lang: {locale.getlocale()[0]}")
         self.install_language(lang)
 
     def install_language(self, lang):
         if lang is None or lang == "system_lang":
             for language in self.lang_list:
-                if locale.getdefaultlocale()[0].startswith(language):
+                if locale.getlocale()[0].startswith(language):
                     logging.debug("Using system lang")
                     lang = language
         if lang is not None and lang not in self.lang_list:
@@ -175,7 +177,7 @@ class KlipperScreenConfig:
                 strs = ('gcode', '')
                 numbers = [f'{option}' for option in self.config[section] if option != 'gcode']
             elif section.startswith('menu '):
-                strs = ('name', 'icon', 'panel', 'method', 'params', 'enable', 'confirm')
+                strs = ('name', 'icon', 'panel', 'method', 'params', 'enable', 'confirm', 'style')
             elif section == 'bed_screws':
                 # This section may be deprecated in favor of moving this options under the printer section
                 numbers = ('rotation', '')
@@ -218,7 +220,7 @@ class KlipperScreenConfig:
 
         self.configurable_options = [
             {"language": {
-                "section": "main", "name": _("Language"), "type": "dropdown", "value": "system_lang",
+                "section": "main", "name": _("Language"), "type": None, "value": "system_lang",
                 "callback": screen.change_language, "options": [
                     {"name": _("System") + " " + _("(default)"), "value": "system_lang"}]}},
             {"theme": {
@@ -255,9 +257,6 @@ class KlipperScreenConfig:
                               "value": "False", "callback": screen.reload_panels}},
             {"use_dpms": {"section": "main", "name": _("Screen DPMS"), "type": "binary",
                           "value": "True", "callback": screen.set_dpms}},
-            {"print_estimate_compensation": {
-                "section": "main", "name": _("Slicer Time correction (%)"), "type": "scale", "value": "100",
-                "range": [50, 150], "step": 1}},
             {"autoclose_popups": {"section": "main", "name": _("Auto-close notifications"), "type": "binary",
                                   "value": "True"}},
             {"show_heater_power": {"section": "main", "name": _("Show Heater Power"), "type": "binary",
@@ -277,10 +276,6 @@ class KlipperScreenConfig:
 
         self.configurable_options.extend(panel_options)
 
-        lang_opt = self.configurable_options[0]['language']['options']
-        for lang in self.lang_list:
-            lang_opt.append({"name": lang, "value": lang})
-
         t_path = os.path.join(klipperscreendir, 'styles')
         themes = [d for d in os.listdir(t_path) if (not os.path.isfile(os.path.join(t_path, d)) and d != "z-bolt")]
         themes.sort()
@@ -293,10 +288,11 @@ class KlipperScreenConfig:
             [i for i in self.configurable_options if list(i)[0] == "screen_blanking"][0])
         for num in SCREEN_BLANKING_OPTIONS:
             hour = num // 3600
+            minute = num / 60
             if hour > 0:
                 name = f'{hour} ' + ngettext("hour", "hours", hour)
             else:
-                name = f'{num / 60:.0f} ' + _("minutes")
+                name = f'{minute:.0f} ' + ngettext("minute", "minutes", minute)
             self.configurable_options[index]['screen_blanking']['options'].append({
                 "name": name,
                 "value": f"{num}"
@@ -549,13 +545,9 @@ class KlipperScreenConfig:
             "panel": cfg.get("panel", None),
             "method": cfg.get("method", None),
             "confirm": cfg.get("confirm", None),
-            "enable": cfg.get("enable", "True")
+            "enable": cfg.get("enable", "True"),
+            "params": cfg.get("params", "{}"),
+            "style": cfg.get("style", None)
         }
-
-        try:
-            item["params"] = json.loads(cfg.get("params", "{}"))
-        except Exception as e:
-            logging.exception(f"Unable to parse parameters for [{name}]:\n{e}")
-            item["params"] = {}
 
         return {name[(len(menu) + 6):]: item}

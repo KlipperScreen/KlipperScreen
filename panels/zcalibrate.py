@@ -34,7 +34,7 @@ class ZCalibratePanel(ScreenPanel):
             pos.attach(Gtk.Label(_("Probe Offset") + ": "), 0, 2, 2, 1)
             pos.attach(Gtk.Label(_("Saved")), 0, 3, 1, 1)
             pos.attach(Gtk.Label(_("New")), 1, 3, 1, 1)
-            pos.attach(Gtk.Label(f"{self.z_offset:.2f}"), 0, 4, 1, 1)
+            pos.attach(Gtk.Label(f"{self.z_offset:.3f}"), 0, 4, 1, 1)
             pos.attach(self.widgets['zoffset'], 1, 4, 1, 1)
         self.buttons = {
             'zpos': self._gtk.Button('z-farther', _("Raise Nozzle"), 'color4'),
@@ -244,7 +244,6 @@ class ZCalibratePanel(ScreenPanel):
                 logging.info(data)
             elif "save_config" in data:
                 self.buttons_not_calibrating()
-                self._screen.show_popup_message(_("Calibrated, save configuration to make it permanent"), level=1)
             elif "out of range" in data:
                 self._screen.show_popup_message(data)
                 self.buttons_not_calibrating()
@@ -258,9 +257,9 @@ class ZCalibratePanel(ScreenPanel):
         return
 
     def update_position(self, position):
-        self.widgets['zposition'].set_text(f"Z: {position[2]:.2f}")
+        self.widgets['zposition'].set_text(f"Z: {position[2]:.3f}")
         if self.z_offset is not None:
-            self.widgets['zoffset'].set_text(f"{position[2] - self.z_offset:.2f}")
+            self.widgets['zoffset'].set_text(f"{position[2] - self.z_offset:.3f}")
 
     def change_distance(self, widget, distance):
         logging.info(f"### Distance {distance}")

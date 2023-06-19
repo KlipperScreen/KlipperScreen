@@ -194,13 +194,16 @@ class TemperaturePanel(ScreenPanel):
                 self.left_panel.add(self.labels['da'])
             self.labels['da'].queue_draw()
             self.labels['da'].show()
+            if self.graph_update is None:
+                # This has a high impact on load
+                self.graph_update = GLib.timeout_add_seconds(5, self.update_graph)
         elif self.labels['da'] in self.left_panel:
             self.left_panel.remove(self.labels['da'])
+            if self.graph_update is not None:
+                GLib.source_remove(self.graph_update)
+                self.graph_update = None
 
     def activate(self):
-        if self.graph_update is None:
-            # This has a high impact on load
-            self.graph_update = GLib.timeout_add_seconds(5, self.update_graph)
         self.update_graph_visibility()
 
     def deactivate(self):

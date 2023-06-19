@@ -122,7 +122,7 @@ entry {
     font-size: 1em;
     background-color: #20292F;
     border: .2em solid #13181C;
-    padding: .25em;
+    padding: .2em;
 }
 
 label {
@@ -159,8 +159,14 @@ trough progress.left {
     border: 0px;
 }
 
+scale {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
 scale mark {
-    margin-top: 1em;
     color: white;
 }
 
@@ -303,7 +309,7 @@ trough {
 }
 
 .keyboard_box {
-    margin-top: 35px;
+    margin-top: 38px;
 }
 
 .keyboard_matchbox {
@@ -547,6 +553,13 @@ popover button {
 
 .filament_sensor_empty {
     background-color: darkred;
+}
+
+.buttons_slim, .buttons_slim label {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 /* Hardcoded values until creation of dynamic CSS updates */

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"POT-Creation-Date: 2023-05-07 07:02-0600\n"
 "PO-Revision-Date: 2022-11-30 18:11-0300\n"
 "Last-Translator: O. Robardet\n"
 "Language-Team: \n"
@@ -53,12 +53,12 @@ msgid "Apply"
 msgstr "Appliquer"
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
-msgstr "Appliquer un décalage de %.2f au Endstop ?"
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr ""
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
-msgstr "Appliquer un décalage de %s%.2f au palpeur ?"
+msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Êtes-vous sûr de vouloir exclure l’objet ?"
@@ -105,11 +105,11 @@ msgstr "Calibrer"
 msgid "Calibrated"
 msgstr "Calibré"
 
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "Calibré, enregistrez la configuration pour la rendre permanente"
-
 msgid "Calibrating"
 msgstr "Calibrage"
+
+msgid "Camera"
+msgstr ""
 
 msgid "Can't set above the maximum:"
 msgstr "Impossible de définir au-dessus du maximum:"
@@ -172,8 +172,8 @@ msgstr "Refroidir"
 msgid "Date"
 msgstr "Date"
 
-msgid "Decrease"
-msgstr "Diminuer"
+msgid "Delete Directory?"
+msgstr ""
 
 msgid "Delete File?"
 msgstr "Supprimer le fichier ?"
@@ -266,6 +266,9 @@ msgstr "Taille de la police"
 msgid "Full Update"
 msgstr "Mettre à jour"
 
+msgid "Fullscreen"
+msgstr ""
+
 msgid "Go Back"
 msgstr "Retour"
 
@@ -310,9 +313,6 @@ msgstr "Nom d’hôte"
 
 msgid "Icon Theme"
 msgstr "Thème"
-
-msgid "Increase"
-msgstr "Augmenter"
 
 msgid "Initializing printer..."
 msgstr "Démarrage de l'imprimante..."
@@ -549,6 +549,9 @@ msgstr "Référence"
 msgid "Refresh"
 msgstr "Rafraîchir"
 
+msgid "Rename/Move:"
+msgstr ""
+
 msgid "Restart"
 msgstr "Redémarrer"
 
@@ -606,10 +609,6 @@ msgstr "Sélectionner"
 
 msgid "Send"
 msgstr "Envoyer"
-
-#, python-format
-msgid "Sending Power ON signal to: %s"
-msgstr "Envoi du signal de mise sous tension à: %s"
 
 msgid "Set Temp"
 msgstr "Régler la température"
@@ -747,8 +746,10 @@ msgid_plural "hours"
 msgstr[0] "heure"
 msgstr[1] "heures"
 
-msgid "minutes"
-msgstr "minutes"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "mm"
 msgstr "mm"
@@ -761,6 +762,19 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "Calibré, enregistrez la configuration pour la rendre permanente"
+
+#~ msgid "Decrease"
+#~ msgstr "Diminuer"
+
+#~ msgid "Increase"
+#~ msgstr "Augmenter"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "Envoi du signal de mise sous tension à: %s"
 
 #~ msgid "Sort:"
 #~ msgstr "Trier:"

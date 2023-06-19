@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"POT-Creation-Date: 2023-05-07 07:02-0600\n"
 "PO-Revision-Date: 2022-12-10 14:52+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -53,12 +53,12 @@ msgid "Apply"
 msgstr "Uygula"
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
-msgstr "Sonlandırıcı için %.2f ofset uygula?"
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr ""
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
-msgstr "Prob için %s%.2f ofset uygula?"
+msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Nesneyi hariç tutmak istediğinizden emin misiniz?"
@@ -105,11 +105,11 @@ msgstr "Kalibre et"
 msgid "Calibrated"
 msgstr "Kalibre Edildi"
 
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "Kalibre edildi, kalıcı hale getirmek için yapılandırmayı kaydedin"
-
 msgid "Calibrating"
 msgstr "Kalibre Ediliyor"
+
+msgid "Camera"
+msgstr ""
 
 msgid "Can't set above the maximum:"
 msgstr "Maksimumun üzerine ayarlanamaz:"
@@ -172,8 +172,8 @@ msgstr "Soğutma"
 msgid "Date"
 msgstr "Tarih"
 
-msgid "Decrease"
-msgstr "Azalt"
+msgid "Delete Directory?"
+msgstr ""
 
 msgid "Delete File?"
 msgstr "Dosyayı Sil?"
@@ -266,6 +266,9 @@ msgstr "Yazı boyutu"
 msgid "Full Update"
 msgstr "Tam Güncelleme"
 
+msgid "Fullscreen"
+msgstr ""
+
 msgid "Go Back"
 msgstr "Geri git"
 
@@ -310,9 +313,6 @@ msgstr "Ana bilgisayar adı"
 
 msgid "Icon Theme"
 msgstr "Simge Teması"
-
-msgid "Increase"
-msgstr "Artır"
 
 msgid "Initializing printer..."
 msgstr "Yazıcı başlatılıyor..."
@@ -549,6 +549,9 @@ msgstr "Referans"
 msgid "Refresh"
 msgstr "Yenile"
 
+msgid "Rename/Move:"
+msgstr ""
+
 msgid "Restart"
 msgstr "Yeniden Başlat"
 
@@ -606,10 +609,6 @@ msgstr "Seç"
 
 msgid "Send"
 msgstr "Gönder"
-
-#, python-format
-msgid "Sending Power ON signal to: %s"
-msgstr "Güç AÇ sinyalı gönderilen: %s"
 
 msgid "Set Temp"
 msgstr "Sıcaklık Ayarla"
@@ -747,8 +746,10 @@ msgid_plural "hours"
 msgstr[0] "saat"
 msgstr[1] "saatler"
 
-msgid "minutes"
-msgstr "dakika"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "mm"
 msgstr "mm"
@@ -761,6 +762,19 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "Kalibre edildi, kalıcı hale getirmek için yapılandırmayı kaydedin"
+
+#~ msgid "Decrease"
+#~ msgstr "Azalt"
+
+#~ msgid "Increase"
+#~ msgstr "Artır"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "Güç AÇ sinyalı gönderilen: %s"
 
 #~ msgid "Sort:"
 #~ msgstr "Sırala:"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"POT-Creation-Date: 2023-05-07 07:02-0600\n"
 "PO-Revision-Date: 2022-11-30 18:10-0300\n"
 "Last-Translator: livinhack\n"
 "Language-Team: \n"
@@ -53,30 +53,30 @@ msgid "Apply"
 msgstr "Anwenden"
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
-msgstr "%.2f Offset auf Endstop anwenden?"
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr "%s%.3f Offset auf Endstop anwenden"
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
-msgstr "%s%.2f Offset auf Sonde anwenden?"
+msgid "Apply %s%.3f offset to Probe?"
+msgstr "%s%.3f Offset auf Probe anwenden"
 
 msgid "Are you sure do you want to exclude the object?"
-msgstr "Möchten Sie das Objekt wirklich ausschließen?"
+msgstr "Möchtest du das Objekt wirklich ausschließen?"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr "Sind Sie sicher, dass Sie Not-Aus ausführen möchten?"
+msgstr "Bist du sicher, dass du den Not-Aus ausführen möchtest?"
 
 msgid "Are you sure you wish to cancel this print?"
-msgstr "Möchten Sie diesen Druck wirklich abbrechen?"
+msgstr "Möchtest du diesen Druck wirklich abbrechen?"
 
 msgid "Are you sure you wish to disable motors?"
-msgstr "Möchten Sie die Motoren wirklich deaktivieren?"
+msgstr "Möchtest du die Motoren wirklich deaktivieren?"
 
 msgid "Are you sure you wish to reboot the system?"
-msgstr "Möchten Sie das System wirklich neu starten?"
+msgstr "Möchtest du das System wirklich neu starten?"
 
 msgid "Are you sure you wish to shutdown the system?"
-msgstr "Möchten Sie das System wirklich herunterfahren?"
+msgstr "Möchtest du das System wirklich herunterfahren?"
 
 msgid "Auto"
 msgstr "Auto"
@@ -94,22 +94,22 @@ msgid "Bed Level"
 msgstr "Druckbett leveln"
 
 msgid "Bed Mesh"
-msgstr "Druckbett Mesh-Level"
+msgstr "Druckbett Mesh"
 
 msgid "Bed screw configuration:"
 msgstr "Bettschraubenkonfiguration:"
 
 msgid "Calibrate"
-msgstr "Höheneinstellung"
+msgstr "Kalibrieren"
 
 msgid "Calibrated"
 msgstr "Kalibriert"
 
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "Kalibriert, Konfiguration dauerhaft speichern"
-
 msgid "Calibrating"
-msgstr "Kalibrieren"
+msgstr "Kalibriere"
+
+msgid "Camera"
+msgstr "Kamera"
 
 msgid "Can't set above the maximum:"
 msgstr "Kann nicht über dem Maximum eingestellt werden:"
@@ -124,7 +124,7 @@ msgid "Cancelled"
 msgstr "Abgebrochen"
 
 msgid "Cancelling"
-msgstr "Wird unterbrochen"
+msgstr "Wird abgebrochen"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Es kann keine Verbindung zu Moonraker hergestellt werden"
@@ -133,13 +133,13 @@ msgid "Channel"
 msgstr "Kanal"
 
 msgid "Check ADXL Wiring"
-msgstr "Überprüfen Sie die ADXL-Verkabelung"
+msgstr "Überprüfe die ADXL-Verkabelung"
 
 msgid "Checking for updates, please wait..."
 msgstr "Suche nach Updates, bitte warten..."
 
 msgid "Clear"
-msgstr ""
+msgstr "Leeren"
 
 msgid "Close"
 msgstr "Schließen"
@@ -172,8 +172,8 @@ msgstr "Abkühlen"
 msgid "Date"
 msgstr "Datum"
 
-msgid "Decrease"
-msgstr "Verringern"
+msgid "Delete Directory?"
+msgstr "Ordner löschen?"
 
 msgid "Delete File?"
 msgstr "Datei löschen?"
@@ -185,7 +185,7 @@ msgid "Disable Motors"
 msgstr "Motoren deaktivieren"
 
 msgid "Disable XY"
-msgstr "Achse XY deaktivieren"
+msgstr "XY-Achse deaktivieren"
 
 msgid "Distance (mm)"
 msgstr "Entfernung (mm)"
@@ -195,13 +195,13 @@ msgid "Do you want to recover %s?"
 msgstr "Möchtest du zurück zu %s?"
 
 msgid "Elapsed:"
-msgstr "Druckzeit:"
+msgstr "Laufzeit:"
 
 msgid "Error"
 msgstr "Fehler"
 
 msgid "Estimated Time Method"
-msgstr "Druckzeit"
+msgstr "Verbleibende Zeit"
 
 msgid "Exclude Object"
 msgstr "Objekt ausschließen"
@@ -210,13 +210,13 @@ msgid "Extra Large"
 msgstr "Extra groß"
 
 msgid "Extrude"
-msgstr "Filament fördern"
+msgstr "Fördern"
 
 msgid "Extrusion +"
-msgstr "Extrusion +"
+msgstr "Fördern +"
 
 msgid "Extrusion -"
-msgstr "Extrusion -"
+msgstr "Fördern -"
 
 msgid "Failed, adjust position first"
 msgstr "Fehlgeschlagen, Position zuerst anpassen"
@@ -225,7 +225,7 @@ msgid "Fan"
 msgstr "Lüfter"
 
 msgid "Filament Used"
-msgstr "Filamentverbrauch"
+msgstr "Filament verbraucht"
 
 msgid "Filament total:"
 msgstr "Filament insgesamt:"
@@ -258,13 +258,16 @@ msgid "Flow:"
 msgstr "Fluss:"
 
 msgid "Flowrate:"
-msgstr "Fließrate:"
+msgstr "Flussrate:"
 
 msgid "Font Size"
 msgstr "Schriftgröße"
 
 msgid "Full Update"
 msgstr "Vollständige Aktualisierung"
+
+msgid "Fullscreen"
+msgstr "Vollbild"
 
 msgid "Go Back"
 msgstr "Zurück"
@@ -288,16 +291,16 @@ msgid "Home All"
 msgstr "Alle Achsen zurücksetzen"
 
 msgid "Home X"
-msgstr "Achse X zurücksetzen"
+msgstr "Achse X neupositionieren"
 
 msgid "Home XY"
-msgstr "Achse XY zurücksetzen"
+msgstr "Achse XY neupositionieren"
 
 msgid "Home Y"
-msgstr "Achse Y zurücksetzen"
+msgstr "Achse Y neupositionieren"
 
 msgid "Home Z"
-msgstr "Achse Z zurücksetzen"
+msgstr "Achse Z neupositionieren"
 
 msgid "Homing"
 msgstr "Grundposition"
@@ -311,9 +314,6 @@ msgstr "Hostname"
 msgid "Icon Theme"
 msgstr "Icon Theme"
 
-msgid "Increase"
-msgstr "Erhöhen"
-
 msgid "Initializing printer..."
 msgstr "Drucker wird initialisiert..."
 
@@ -321,7 +321,7 @@ msgid "Input Shaper"
 msgstr "Input Shaper"
 
 msgid "Interface"
-msgstr "Interface"
+msgstr "Oberfläche"
 
 msgid "Invalid"
 msgstr "Ungültig"
@@ -351,7 +351,7 @@ msgid "Klipper has shutdown"
 msgstr "Klipper abgeschaltet"
 
 msgid "Klipper is attempting to start"
-msgstr "Klipper ist startbereit"
+msgstr "Klipper veruscht zu starten"
 
 msgid "Klipper will reboot"
 msgstr "Klipper startet neu"
@@ -381,7 +381,7 @@ msgid "Lower Nozzle"
 msgstr "Düse absenken"
 
 msgid "Macro shortcut on sidebar"
-msgstr "Makro Verknüpfung in Sidebar"
+msgstr "Makro Verknüpfung in Seitenleiste"
 
 msgid "Macros"
 msgstr "Makros"
@@ -408,10 +408,10 @@ msgid "Measure Both"
 msgstr "Beides messen"
 
 msgid "Measure X"
-msgstr "Messen Sie X"
+msgstr "Messe X"
 
 msgid "Measure Y"
-msgstr "Messen Sie Y"
+msgstr "Messe Y"
 
 msgid "Medium"
 msgstr "Mittel"
@@ -450,7 +450,7 @@ msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr ""
-"Wird für die automatische Erkennung nicht unterstützt, muss in klipperscreen."
+"Wird für die automatische Erkennung nicht unterstützt, muss in Klipperscreen."
 "conf konfiguriert werden"
 
 msgid "Nothing selected"
@@ -487,7 +487,7 @@ msgid "Pins"
 msgstr "Pins"
 
 msgid "Please recompile and flash the micro-controller."
-msgstr "Please recompile and flash the micro-controller."
+msgstr "Bitte neukomplieren und Controller neubespielen."
 
 msgid "Power"
 msgstr "Ein"
@@ -514,7 +514,7 @@ msgid "Printer Connections"
 msgstr "Drucker Verbindungen"
 
 msgid "Printer Select"
-msgstr "Wählen Sie einen Drucker"
+msgstr "Wähle einen Drucker"
 
 msgid "Printing"
 msgstr "Drucken"
@@ -526,7 +526,7 @@ msgid "Profile Name:"
 msgstr "Profilname:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "Stelle die KlipperScreen.log zur Verfügung wenn du hilfe benötigst\n"
 
 msgid "Quad Gantry Level"
 msgstr "Quad Gantry Level"
@@ -548,6 +548,9 @@ msgstr "Referenz"
 
 msgid "Refresh"
 msgstr "Aktualisieren"
+
+msgid "Rename/Move:"
+msgstr "Umbenennen/Bewegen"
 
 msgid "Restart"
 msgstr "Neustart"
@@ -590,7 +593,7 @@ msgstr "Gespeichert"
 
 #, python-format
 msgid "Saved offset: %s"
-msgstr "Gespeicherter Versatz: %s"
+msgstr "Gespeicherter Offset: %s"
 
 msgid "Screen DPMS"
 msgstr "Bildschirm-DPMS"
@@ -605,11 +608,7 @@ msgid "Select"
 msgstr "Wählen"
 
 msgid "Send"
-msgstr "Schicken"
-
-#, python-format
-msgid "Sending Power ON signal to: %s"
-msgstr "Senden des Einschaltsignals an: %s"
+msgstr "Senden"
 
 msgid "Set Temp"
 msgstr "Temp. einstellen"
@@ -672,10 +671,10 @@ msgid "System"
 msgstr "System"
 
 msgid "System Restart"
-msgstr "Drucker Neustarten"
+msgstr "System neustarten"
 
 msgid "System Shutdown"
-msgstr "Drucker Ausschalten"
+msgstr "System herunterfahren"
 
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
@@ -707,7 +706,7 @@ msgid "Up To Date"
 msgstr "Aktuell"
 
 msgid "Update"
-msgstr "Update"
+msgstr "Aktualsieren"
 
 msgid "Updating"
 msgstr "Aktualisiere"
@@ -731,7 +730,7 @@ msgid "Z Speed (mm/s)"
 msgstr "Z Geschwindigkeit (mm/s)"
 
 msgid "Z Tilt"
-msgstr "Z-Achse ausrichten"
+msgstr "Z-Neigung"
 
 msgid "Z offset:"
 msgstr "Z Offset:"
@@ -749,8 +748,10 @@ msgid_plural "hours"
 msgstr[0] "Stunde"
 msgstr[1] "Stunden"
 
-msgid "minutes"
-msgstr "Minuten"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "Minute"
+msgstr[1] "Minuten"
 
 msgid "mm"
 msgstr "mm"
@@ -762,7 +763,20 @@ msgid "mm/s²"
 msgstr "mm/s²"
 
 msgid "mm³/s"
-msgstr ""
+msgstr "mm³/s"
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "Kalibriert, Konfiguration dauerhaft speichern"
+
+#~ msgid "Decrease"
+#~ msgstr "Verringern"
+
+#~ msgid "Increase"
+#~ msgstr "Erhöhen"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "Senden des Einschaltsignals an: %s"
 
 #~ msgid "Sort:"
 #~ msgstr "Sortieren:"
@@ -796,7 +810,7 @@ msgstr ""
 #~ msgstr "Drucker hinzufügen"
 
 #~ msgid "Initializing"
-#~ msgstr "Startvorgang"
+#~ msgstr "Initialisierung"
 
 #~ msgid "Delete"
 #~ msgstr "Löschen"
@@ -811,7 +825,7 @@ msgstr ""
 #~ msgstr "Mesh anzeigen"
 
 #~ msgid "Sort by: "
-#~ msgstr "Sortierung: "
+#~ msgstr "Sortierung nach: "
 
 #~ msgid "Bltouch found applied offset"
 #~ msgstr "Bltouch hat angewendeten Offset gefunden"
@@ -821,7 +835,7 @@ msgstr ""
 #~ "Please submit an issue on GitHub for help."
 #~ msgstr ""
 #~ "Prüfe /tmp/KlipperScreen.log für weitere Informationen.\n"
-#~ "Bitte eröffne einen Fehlerbericht auf https://git.io/JLNn4 für Hilfe."
+#~ "Bitte eröffne einen Fehlerbericht auf GitHub für Hilfe."
 
 #~ msgid "Probe found applied offset"
 #~ msgstr "Probe hat angewendeten Offset gefunden"
@@ -842,7 +856,7 @@ msgstr ""
 #~ msgstr "IPv6"
 
 #~ msgid "Disconnect"
-#~ msgstr "Nicht verbunden"
+#~ msgstr "Trennen"
 
 #~ msgid "Duration Only"
 #~ msgstr "Reine Druckzeit"
@@ -854,8 +868,8 @@ msgstr ""
 #~ "Klipper has encountered an error with the micro-controller.\n"
 #~ "Please recompile and flash."
 #~ msgstr ""
-#~ "Klipper hat einen Fehler mit dem Mainboard festgestellt.\n"
-#~ "Bitte Mainboard neu programmieren."
+#~ "Klipper hat einen Fehler mit dem Microcontroller festgestellt.\n"
+#~ "Bitte Microcontroller neu programmieren."
 
 #~ msgid ""
 #~ "Klipper has encountered an error.\n"
