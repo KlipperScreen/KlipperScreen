@@ -425,6 +425,7 @@ class JobStatusPanel(ScreenPanel):
 
     def restart(self, widget):
         if self.filename != "none":
+            self.disable_button("restart")
             if self.state == "error":
                 script = {"script": "SDCARD_RESET_FILE"}
                 self._screen._send_action(None, "printer.gcode.script", script)
@@ -432,11 +433,12 @@ class JobStatusPanel(ScreenPanel):
             self.new_print()
 
     def resume(self, widget):
-        self._screen._ws.klippy.print_resume(self._response_callback, "enable_button", "pause", "cancel")
+        self._screen._ws.klippy.print_resume()
         self._screen.show_all()
 
     def pause(self, widget):
-        self._screen._ws.klippy.print_pause(self._response_callback, "enable_button", "resume", "cancel")
+        self.disable_button("pause", "resume")
+        self._screen._ws.klippy.print_pause()
         self._screen.show_all()
 
     def cancel(self, widget):
@@ -469,11 +471,7 @@ class JobStatusPanel(ScreenPanel):
         logging.debug("Canceling print")
         self.set_state("cancelling")
         self.disable_button("pause", "resume", "cancel")
-        self._screen._ws.klippy.print_cancel(self._response_callback)
-
-    def _response_callback(self, response, method, params, func=None, *args):
-        if func == "enable_button":
-            self.enable_button(*args)
+        self._screen._ws.klippy.print_cancel()
 
     def close_panel(self, widget=None):
         if self.can_close:
@@ -763,6 +761,9 @@ class JobStatusPanel(ScreenPanel):
 
             if self.filename is not None:
                 self.buttons['button_grid'].attach(self.buttons['restart'], 2, 0, 1, 1)
+                self.enable_button("restart")
+            else:
+                self.disable_button("restart")
             if self.state != "cancelling":
                 self.buttons['button_grid'].attach(self.buttons['menu'], 3, 0, 1, 1)
                 self.can_close = True
