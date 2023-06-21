@@ -118,6 +118,7 @@ class MacroPanel(ScreenPanel):
             value = self.macros[macro]["params"][param].get_text()
             if value:
                 params += f'{param}={value} '
+        self._screen.show_popup_message(f"{macro} {params}", 1)
         self._screen._ws.klippy.gcode_script(f"{macro} {params}")
 
     def change_sort(self, widget):
