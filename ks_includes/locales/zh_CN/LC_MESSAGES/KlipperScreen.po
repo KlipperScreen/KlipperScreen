@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-07 07:02-0600\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: 2022-11-28 11:36-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -183,9 +183,6 @@ msgstr "取消选择"
 
 msgid "Disable Motors"
 msgstr "关闭电机"
-
-msgid "Disable XY"
-msgstr "关闭 XY 轴电机"
 
 msgid "Distance (mm)"
 msgstr "挤出长度（mm）"
@@ -628,9 +625,6 @@ msgstr "大小"
 msgid "Slicer"
 msgstr "切片"
 
-msgid "Slicer Time correction (%)"
-msgstr "切片软件时间校正(%)"
-
 msgid "Slicer:"
 msgstr "切片:"
 
@@ -756,6 +750,12 @@ msgstr ""
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Disable XY"
+#~ msgstr "关闭 XY 轴电机"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "切片软件时间校正(%)"
 
 #~ msgid "Calibrated, save configuration to make it permanent"
 #~ msgstr "已校准，保存配置后生效"

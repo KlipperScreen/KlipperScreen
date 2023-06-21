@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-07 07:02-0600\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,9 +182,6 @@ msgid "Deselect"
 msgstr ""
 
 msgid "Disable Motors"
-msgstr ""
-
-msgid "Disable XY"
 msgstr ""
 
 msgid "Distance (mm)"
@@ -627,9 +624,6 @@ msgid "Size"
 msgstr ""
 
 msgid "Slicer"
-msgstr ""
-
-msgid "Slicer Time correction (%)"
 msgstr ""
 
 msgid "Slicer:"

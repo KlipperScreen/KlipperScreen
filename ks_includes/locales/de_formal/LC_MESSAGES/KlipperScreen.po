@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-07 07:02-0600\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: 2022-11-30 18:10-0300\n"
 "Last-Translator: livinhack\n"
 "Language-Team: \n"
@@ -183,9 +183,6 @@ msgstr "Abwählen"
 
 msgid "Disable Motors"
 msgstr "Motoren deaktivieren"
-
-msgid "Disable XY"
-msgstr "XY-Achse deaktivieren"
 
 msgid "Distance (mm)"
 msgstr "Entfernung (mm)"
@@ -526,7 +523,8 @@ msgid "Profile Name:"
 msgstr "Profilname:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Stellen Sie die KlipperScreen.log zur Verfügung wenn Sie hilfe benötigen\n"
+msgstr ""
+"Stellen Sie die KlipperScreen.log zur Verfügung wenn Sie hilfe benötigen\n"
 
 msgid "Quad Gantry Level"
 msgstr "Quad Gantry Level"
@@ -630,9 +628,6 @@ msgstr "Größe"
 
 msgid "Slicer"
 msgstr "Slicer"
-
-msgid "Slicer Time correction (%)"
-msgstr "Slicer-Zeitkorrektur (%)"
 
 msgid "Slicer:"
 msgstr "Slicer:"
@@ -764,6 +759,12 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Disable XY"
+#~ msgstr "XY-Achse deaktivieren"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "Slicer-Zeitkorrektur (%)"
 
 #~ msgid "Calibrated, save configuration to make it permanent"
 #~ msgstr "Kalibriert, Konfiguration dauerhaft speichern"

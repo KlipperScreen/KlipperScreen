@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-07 07:02-0600\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: 2022-11-30 18:11-0300\n"
 "Last-Translator: Tal Rahav <talrhv1@gmail.com>\n"
 "Language-Team: \n"
@@ -185,9 +185,6 @@ msgstr "בטל את הבחירה"
 
 msgid "Disable Motors"
 msgstr "השבת מנועים"
-
-msgid "Disable XY"
-msgstr "השבת את XY"
 
 msgid "Distance (mm)"
 msgstr "מרחק (מ\"מ)"
@@ -633,9 +630,6 @@ msgstr "גודל"
 msgid "Slicer"
 msgstr "סלייסר"
 
-msgid "Slicer Time correction (%)"
-msgstr "תיקון זמן פריסה (%)"
-
 msgid "Slicer:"
 msgstr ""
 
@@ -770,6 +764,12 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Disable XY"
+#~ msgstr "השבת את XY"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "תיקון זמן פריסה (%)"
 
 #~ msgid "Calibrated, save configuration to make it permanent"
 #~ msgstr "מכויל, שמור את התצורה כדי שהיא תהיה קבועה"

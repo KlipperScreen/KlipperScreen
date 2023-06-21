@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-07 07:02-0600\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -178,9 +178,6 @@ msgstr "Kijelölés törlése"
 
 msgid "Disable Motors"
 msgstr "Motorok letiltása"
-
-msgid "Disable XY"
-msgstr "XY Letiltása"
 
 msgid "Distance (mm)"
 msgstr "Távolság (mm)"
@@ -626,9 +623,6 @@ msgstr "Méret"
 msgid "Slicer"
 msgstr "Szeletelő"
 
-msgid "Slicer Time correction (%)"
-msgstr "Szeletelő idő javítása (%)"
-
 msgid "Slicer:"
 msgstr "Szeletelő:"
 
@@ -757,6 +751,12 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Disable XY"
+#~ msgstr "XY Letiltása"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "Szeletelő idő javítása (%)"
 
 #~ msgid "Calibrated, save configuration to make it permanent"
 #~ msgstr "Kalibrálva! Mentsd el a konfigurációt, hogy az állandó legyen"

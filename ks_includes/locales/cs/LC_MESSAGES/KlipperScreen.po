@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-07 07:02-0600\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: 2023-01-29 09:27-0600\n"
 "Last-Translator: \n"
 "Language-Team: Jan Stanka (stanky@email.cz)\n"
@@ -183,9 +183,6 @@ msgstr "Odznačit"
 
 msgid "Disable Motors"
 msgstr "Uvolnit motory"
-
-msgid "Disable XY"
-msgstr "Uvolnit XY"
 
 msgid "Distance (mm)"
 msgstr "Vzdálenost (mm)"
@@ -630,9 +627,6 @@ msgstr "Velikost"
 msgid "Slicer"
 msgstr "Slicer"
 
-msgid "Slicer Time correction (%)"
-msgstr "Časová korekce Sliceru  (%)"
-
 msgid "Slicer:"
 msgstr "Slicer:"
 
@@ -764,6 +758,12 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Disable XY"
+#~ msgstr "Uvolnit XY"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "Časová korekce Sliceru  (%)"
 
 #~ msgid "Calibrated, save configuration to make it permanent"
 #~ msgstr "Zkalibrováno, uložit změny jako trvalé"

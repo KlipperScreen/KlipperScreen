@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-07 07:02-0600\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
@@ -178,9 +178,6 @@ msgstr "Fravælg"
 
 msgid "Disable Motors"
 msgstr "Deaktivér motorer"
-
-msgid "Disable XY"
-msgstr "Deaktivér XY"
 
 msgid "Distance (mm)"
 msgstr "Længde (mm)"
@@ -624,9 +621,6 @@ msgstr "Størrelse"
 msgid "Slicer"
 msgstr "Slicer"
 
-msgid "Slicer Time correction (%)"
-msgstr "Slicer Tidskorrektion (%)"
-
 msgid "Slicer:"
 msgstr ""
 
@@ -755,6 +749,12 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Disable XY"
+#~ msgstr "Deaktivér XY"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "Slicer Tidskorrektion (%)"
 
 #~ msgid "Calibrated, save configuration to make it permanent"
 #~ msgstr "Kalibreret, gem konfiguration for at gøre den permanent"

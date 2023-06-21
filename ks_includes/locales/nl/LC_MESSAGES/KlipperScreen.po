@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-07 07:02-0600\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: 2023-05-07 18:50+0200\n"
 "Last-Translator: Thijs Triemstra <info@collab.nl>\n"
 "Language-Team: \n"
@@ -183,9 +183,6 @@ msgstr "Deselecteer"
 
 msgid "Disable Motors"
 msgstr "Motors Uitschakelen"
-
-msgid "Disable XY"
-msgstr "XY Uitschakelen"
 
 msgid "Distance (mm)"
 msgstr "Afstand (mm)"
@@ -631,9 +628,6 @@ msgstr "Afmetingen"
 msgid "Slicer"
 msgstr "Slicer"
 
-msgid "Slicer Time correction (%)"
-msgstr "Slicer Tijd correctie (%)"
-
 msgid "Slicer:"
 msgstr "Slicer:"
 
@@ -762,3 +756,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Disable XY"
+#~ msgstr "XY Uitschakelen"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "Slicer Tijd correctie (%)"

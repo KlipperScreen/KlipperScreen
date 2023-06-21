@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-07 07:02-0600\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: 2022-11-21 21:31-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -183,9 +183,6 @@ msgstr "Avmarkera"
 
 msgid "Disable Motors"
 msgstr "Inaktivera motorer"
-
-msgid "Disable XY"
-msgstr "Inaktivera XY"
 
 msgid "Distance (mm)"
 msgstr "Avstånd (mm)"
@@ -629,9 +626,6 @@ msgstr "Storlek"
 msgid "Slicer"
 msgstr ""
 
-msgid "Slicer Time correction (%)"
-msgstr ""
-
 msgid "Slicer:"
 msgstr ""
 
@@ -760,6 +754,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Disable XY"
+#~ msgstr "Inaktivera XY"
 
 #~ msgid "Calibrated, save configuration to make it permanent"
 #~ msgstr "Kalibrerad, spara konfiguration för att göra den permanent"

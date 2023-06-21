@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-07 07:02-0600\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: boyon\n"
 "Language-Team: \n"
@@ -178,9 +178,6 @@ msgstr "選択解除"
 
 msgid "Disable Motors"
 msgstr "モーターの無効化"
-
-msgid "Disable XY"
-msgstr "XY軸制御の無効化"
 
 msgid "Distance (mm)"
 msgstr "距離(mm)"
@@ -623,9 +620,6 @@ msgstr "サイズ"
 msgid "Slicer"
 msgstr "スライサー"
 
-msgid "Slicer Time correction (%)"
-msgstr "スライサーの補正時間(%)"
-
 msgid "Slicer:"
 msgstr "スライサー:"
 
@@ -751,6 +745,12 @@ msgstr ""
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Disable XY"
+#~ msgstr "XY軸制御の無効化"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "スライサーの補正時間(%)"
 
 #~ msgid "Calibrated, save configuration to make it permanent"
 #~ msgstr ""

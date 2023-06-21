@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-07 07:02-0600\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: NSteven\n"
 "Language-Team: NSteven\n"
@@ -178,9 +178,6 @@ msgstr "선택 해제"
 
 msgid "Disable Motors"
 msgstr "모터 전원 끄기"
-
-msgid "Disable XY"
-msgstr "XY 비활성화"
 
 msgid "Distance (mm)"
 msgstr "거리 (mm)"
@@ -623,9 +620,6 @@ msgstr "크기"
 msgid "Slicer"
 msgstr "슬라이서"
 
-msgid "Slicer Time correction (%)"
-msgstr "슬라이서 시간 보정(%)"
-
 msgid "Slicer:"
 msgstr "슬라이서:"
 
@@ -751,6 +745,12 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Disable XY"
+#~ msgstr "XY 비활성화"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "슬라이서 시간 보정(%)"
 
 #~ msgid "Calibrated, save configuration to make it permanent"
 #~ msgstr "교정됨, 설정을 저장합니다"

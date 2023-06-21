@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-07 07:02-0600\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: 2022-11-30 18:15-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: \n"
@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.2.1\n"
 "X-Poedit-Flags-xgettext: --add-comments\n"
 
@@ -184,9 +184,6 @@ msgstr "Отменить выбор"
 
 msgid "Disable Motors"
 msgstr "Откл. моторы"
-
-msgid "Disable XY"
-msgstr "Отключить XY"
 
 msgid "Distance (mm)"
 msgstr "Расстояние (mm)"
@@ -633,9 +630,6 @@ msgstr "Размер"
 msgid "Slicer"
 msgstr "Слайсер"
 
-msgid "Slicer Time correction (%)"
-msgstr "Коррекция времени Слайсер (%)"
-
 msgid "Slicer:"
 msgstr "Слайсер:"
 
@@ -767,6 +761,12 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм/с³"
+
+#~ msgid "Disable XY"
+#~ msgstr "Отключить XY"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "Коррекция времени Слайсер (%)"
 
 #~ msgid "Calibrated, save configuration to make it permanent"
 #~ msgstr "Откалибровано, сохраните конфигурацию, чтобы сделать ее постоянной"

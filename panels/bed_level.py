@@ -49,7 +49,7 @@ class BedLevelPanel(ScreenPanel):
         self.x_cnt = 0
         self.x_offset = 0
         self.y_offset = 0
-        self.buttons = {'dm': self._gtk.Button("motor-off", _("Disable XY"), "color3")}
+        self.buttons = {'dm': self._gtk.Button("motor-off", _("Disable Motors"), "color3")}
         self.buttons['dm'].connect("clicked", self.disable_motors)
         screw_positions = []
         rotation = None

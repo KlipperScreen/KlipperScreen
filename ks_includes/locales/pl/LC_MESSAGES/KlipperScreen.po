@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-16 23:45+0200\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: 2023-06-19 16:20+0000\n"
 "Last-Translator: Daviteusz <imefiu3@gmail.com>\n"
 "Language-Team: Polish <https://translate.daviteusz.eu/projects/klipperscreen/"
@@ -180,9 +180,6 @@ msgstr "Odznacz"
 
 msgid "Disable Motors"
 msgstr "Wyłącz silniki"
-
-msgid "Disable XY"
-msgstr "Wyłącz XY"
 
 msgid "Distance (mm)"
 msgstr "Dystans (mm)"
@@ -629,9 +626,6 @@ msgstr "Rozmiar"
 msgid "Slicer"
 msgstr "Slicer"
 
-msgid "Slicer Time correction (%)"
-msgstr "Korekta czasu Slicera (%)"
-
 msgid "Slicer:"
 msgstr "Slicer:"
 
@@ -763,3 +757,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Disable XY"
+#~ msgstr "Wyłącz XY"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "Korekta czasu Slicera (%)"

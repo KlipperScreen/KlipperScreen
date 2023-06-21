@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2023-05-24 14:53-0300\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-17 07:58-0600\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: 2023-05-24 22:02+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.1\n"
 
 #, python-format
@@ -184,9 +184,6 @@ msgstr "Скасувати вибір"
 
 msgid "Disable Motors"
 msgstr "Вимкнути мотори"
-
-msgid "Disable XY"
-msgstr "Вимкнути XY"
 
 msgid "Distance (mm)"
 msgstr "Відстань (мм)"
@@ -645,9 +642,6 @@ msgstr "Розмір"
 msgid "Slicer"
 msgstr "Слайсер"
 
-msgid "Slicer Time correction (%)"
-msgstr "Виправлення часу слайсера (%)"
-
 msgid "Slicer:"
 msgstr "Слайсер:"
 
@@ -781,6 +775,12 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм/с³"
+
+#~ msgid "Disable XY"
+#~ msgstr "Вимкнути XY"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "Виправлення часу слайсера (%)"
 
 #~ msgid "Calibrated, save configuration to make it permanent"
 #~ msgstr "Відкалібровано, збережіть конфігурацію, щоб зробити її постійною"

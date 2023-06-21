@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-07 07:02-0600\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: 2022-12-10 14:52+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -183,9 +183,6 @@ msgstr "Seçimi kaldır"
 
 msgid "Disable Motors"
 msgstr "Motorları Devre Dışı Bırak"
-
-msgid "Disable XY"
-msgstr "XY Devre dışı bırak"
 
 msgid "Distance (mm)"
 msgstr "Uzaklık (mm)"
@@ -631,9 +628,6 @@ msgstr "Boyut"
 msgid "Slicer"
 msgstr "Dilimleme"
 
-msgid "Slicer Time correction (%)"
-msgstr "Dilimleme Zamanı doğrulama (%)"
-
 msgid "Slicer:"
 msgstr "Dilimleyici:"
 
@@ -762,6 +756,12 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Disable XY"
+#~ msgstr "XY Devre dışı bırak"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "Dilimleme Zamanı doğrulama (%)"
 
 #~ msgid "Calibrated, save configuration to make it permanent"
 #~ msgstr "Kalibre edildi, kalıcı hale getirmek için yapılandırmayı kaydedin"

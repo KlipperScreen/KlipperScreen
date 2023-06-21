@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-07 07:16-0600\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: 2022-11-30 18:10-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
@@ -183,9 +183,6 @@ msgstr "Deseleccionar"
 
 msgid "Disable Motors"
 msgstr "Desactivar Motores"
-
-msgid "Disable XY"
-msgstr "Desactivar XY"
 
 msgid "Distance (mm)"
 msgstr "Distancia (mm)"
@@ -631,9 +628,6 @@ msgstr "Tamaño"
 msgid "Slicer"
 msgstr "Slicer"
 
-msgid "Slicer Time correction (%)"
-msgstr "Corrección del tiempo del Slicer (%)"
-
 msgid "Slicer:"
 msgstr "Slicer:"
 
@@ -762,6 +756,12 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Disable XY"
+#~ msgstr "Desactivar XY"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "Corrección del tiempo del Slicer (%)"
 
 #~ msgid "Calibrated, save configuration to make it permanent"
 #~ msgstr "Calibrado, guarde su configuración para hacerlo permanente"
