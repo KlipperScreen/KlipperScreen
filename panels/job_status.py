@@ -160,15 +160,16 @@ class JobStatusPanel(ScreenPanel):
         n = 0
         self.buttons['extruder'] = {}
         if self._printer.get_tools():
+            self.current_extruder = self._printer.get_stat("toolhead", "extruder")
             for i, extruder in enumerate(self._printer.get_tools()):
                 self.labels[extruder] = Gtk.Label("-")
                 self.buttons['extruder'][extruder] = self._gtk.Button(f"extruder-{i}", "", None, self.bts,
                                                                       Gtk.PositionType.LEFT, 1)
                 self.buttons['extruder'][extruder].set_label(self.labels[extruder].get_text())
                 self.buttons['extruder'][extruder].connect("clicked", self.menu_item_clicked, "temperature",
-                                                           {"panel": "temperature", "name": _("Temperature")})
+                                                           {"panel": "temperature", "name": _("Temperature"),
+                                                          'extra': self.current_extruder})
                 self.buttons['extruder'][extruder].set_halign(Gtk.Align.START)
-            self.current_extruder = self._printer.get_stat("toolhead", "extruder")
             self.labels['temp_grid'].attach(self.buttons['extruder'][self.current_extruder], n, 0, 1, 1)
             n += 1
         else:
@@ -179,7 +180,8 @@ class JobStatusPanel(ScreenPanel):
             self.labels['heater_bed'] = Gtk.Label("-")
             self.buttons['heater']['heater_bed'].set_label(self.labels['heater_bed'].get_text())
             self.buttons['heater']['heater_bed'].connect("clicked", self.menu_item_clicked, "temperature",
-                                                         {"panel": "temperature", "name": _("Temperature")})
+                                                         {"panel": "temperature", "name": _("Temperature"),
+                                                          'extra': 'heater_bed'})
             self.buttons['heater']['heater_bed'].set_halign(Gtk.Align.START)
             self.labels['temp_grid'].attach(self.buttons['heater']['heater_bed'], n, 0, 1, 1)
             n += 1
@@ -191,7 +193,7 @@ class JobStatusPanel(ScreenPanel):
                 self.labels[dev] = Gtk.Label("-")
                 self.buttons['heater'][dev].set_label(self.labels[dev].get_text())
                 self.buttons['heater'][dev].connect("clicked", self.menu_item_clicked, "temperature",
-                                                    {"panel": "temperature", "name": _("Temperature")})
+                                                    {"panel": "temperature", "name": _("Temperature"), "extra": dev})
                 self.buttons['heater'][dev].set_halign(Gtk.Align.START)
                 self.labels['temp_grid'].attach(self.buttons['heater'][dev], n, 0, 1, 1)
                 n += 1

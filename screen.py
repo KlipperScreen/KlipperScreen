@@ -293,6 +293,9 @@ class KlipperScreen(Gtk.Window):
                         del self.panels[panel_name]
                     self.show_error_modal(f"Unable to load panel {panel_type}", f"{e}")
                     return
+            elif 'extra' in kwargs:
+                logging.info(f"extra: {kwargs['extra']}")
+                self.panels[panel_name].__init__(self, title, **kwargs)
 
             self._cur_panels.append(panel_name)
             if panel_name in self.panels_reinit:
