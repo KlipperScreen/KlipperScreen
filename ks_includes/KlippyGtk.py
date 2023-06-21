@@ -164,7 +164,7 @@ class KlippyGtk:
             if scale is None:
                 scale = self.button_image_scale
             if label is None:
-                scale = scale * 1.5
+                scale = scale * 1.4
             width = height = self.img_scale * scale
             b.set_image(self.Image(image_name, width, height))
         b.set_image_position(position)
