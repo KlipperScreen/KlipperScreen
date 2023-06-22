@@ -1,15 +1,16 @@
 import gi
-
+import logging
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 
 class Keypad(Gtk.Box):
-    def __init__(self, screen, change_temp, close_function):
+    def __init__(self, screen, change_temp, pid_calibrate, close_function):
         super().__init__(orientation=Gtk.Orientation.VERTICAL)
 
         self.labels = {}
         self.change_temp = change_temp
+        self.pid_calibrate = pid_calibrate
         self.screen = screen
         self._gtk = screen.gtk
 
@@ -48,12 +49,19 @@ class Keypad(Gtk.Box):
         self.labels['entry'].props.xalign = 0.5
         self.labels['entry'].connect("activate", self.update_entry, "E")
 
+        self.pid = self._gtk.Button('heat-up', _('Calibrate') + ' PID', None, .66, Gtk.PositionType.LEFT, 1)
+        self.pid.connect("clicked", self.update_entry, "PID")
+        self.pid.set_sensitive(False)
         b = self._gtk.Button('cancel', _('Close'), None, .66, Gtk.PositionType.LEFT, 1)
         b.connect("clicked", close_function)
 
         self.add(self.labels['entry'])
         self.add(numpad)
-        self.add(b)
+        bottom = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        if self.screen.printer.state not in ["printing", "paused"]:
+            bottom.add(self.pid)
+        bottom.add(b)
+        self.add(bottom)
 
         self.labels["keypad"] = numpad
 
@@ -62,18 +70,25 @@ class Keypad(Gtk.Box):
 
     def update_entry(self, widget, digit):
         text = self.labels['entry'].get_text()
+        temp = self.validate_temp(text)
+        self.pid.set_sensitive(temp > 9)
         if digit == 'B':
             if len(text) < 1:
                 return
             self.labels['entry'].set_text(text[:-1])
         elif digit == 'E':
-            try:
-                temp = int(text)
-            except ValueError:
-                temp = 0
             self.change_temp(temp)
             self.labels['entry'].set_text("")
-        elif len(text) >= 3:
-            return
+        elif digit == 'PID':
+            self.pid_calibrate(temp)
+            self.labels['entry'].set_text("")
         else:
             self.labels['entry'].set_text(text + digit)
+            self.pid.set_sensitive(self.validate_temp(text + digit) > 9)
+
+    @staticmethod
+    def validate_temp(temp):
+        try:
+            return int(temp)
+        except ValueError:
+            return 0

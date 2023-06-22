@@ -326,6 +326,17 @@ class MoonrakerApi:
             *args
         )
 
+    def pid_calibrate(self, device, temp, callback=None, *args):
+        logging.debug(f"Sending pid_calibrate {device}")
+        return self._ws.send_method(
+            "printer.gcode.script",
+            {
+                "script": f"PID_CALIBRATE HEATER={device} TARGET={temp}"
+            },
+            callback,
+            *args
+        )
+
     def restart(self):
         logging.debug("Sending printer.restart")
         return self._ws.send_method(
