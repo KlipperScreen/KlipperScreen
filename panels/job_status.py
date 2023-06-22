@@ -168,7 +168,7 @@ class JobStatusPanel(ScreenPanel):
                 self.buttons['extruder'][extruder].set_label(self.labels[extruder].get_text())
                 self.buttons['extruder'][extruder].connect("clicked", self.menu_item_clicked, "temperature",
                                                            {"panel": "temperature", "name": _("Temperature"),
-                                                          'extra': self.current_extruder})
+                                                            'extra': self.current_extruder})
                 self.buttons['extruder'][extruder].set_halign(Gtk.Align.START)
             self.labels['temp_grid'].attach(self.buttons['extruder'][self.current_extruder], n, 0, 1, 1)
             n += 1
