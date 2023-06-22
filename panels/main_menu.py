@@ -22,7 +22,7 @@ class MainPanel(MenuPanel):
         self.devices = {}
         self.graph_update = None
         self.active_heater = None
-        self.h = 1
+        self.h = self.f = 0
         self.main_menu = self._gtk.HomogeneousGrid()
         self.main_menu.set_hexpand(True)
         self.main_menu.set_vexpand(True)
@@ -108,8 +108,10 @@ class MainPanel(MenuPanel):
             return False
 
         if device.startswith("extruder"):
-            i = sum(d.startswith('extruder') for d in self.devices)
-            image = f"extruder-{i}" if self._printer.extrudercount > 1 else "extruder"
+            if self._printer.extrudercount > 1:
+                image = f"extruder-{device[8:]}" if device[8:] else "extruder-0"
+            else:
+                image = "extruder"
             class_name = f"graph_label_{device}"
             dev_type = "extruder"
         elif device == "heater_bed":
@@ -118,19 +120,19 @@ class MainPanel(MenuPanel):
             class_name = "graph_label_heater_bed"
             dev_type = "bed"
         elif device.startswith("heater_generic"):
-            self.h = sum("heater_generic" in d for d in self.devices)
+            self.h += 1
             image = "heater"
             class_name = f"graph_label_sensor_{self.h}"
             dev_type = "sensor"
         elif device.startswith("temperature_fan"):
-            f = 1 + sum("temperature_fan" in d for d in self.devices)
+            self.f += 1
             image = "fan"
-            class_name = f"graph_label_fan_{f}"
+            class_name = f"graph_label_fan_{self.f}"
             dev_type = "fan"
         elif self._config.get_main_config().getboolean("only_heaters", False):
             return False
         else:
-            self.h += sum("sensor" in d for d in self.devices)
+            self.h += 1
             image = "heat-up"
             class_name = f"graph_label_sensor_{self.h}"
             dev_type = "sensor"
