@@ -913,6 +913,7 @@ class KlipperScreen(Gtk.Window):
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.set_size_request(self.gtk.content_width, self.gtk.keyboard_height)
+        box.set_vexpand(False)
 
         if self._config.get_main_config().getboolean("use-matchbox-keyboard", False):
             return self._show_matchbox_keyboard(box)
