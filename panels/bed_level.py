@@ -53,6 +53,10 @@ class BedLevelPanel(ScreenPanel):
         self.buttons['dm'].connect("clicked", self.disable_motors)
         screw_positions = []
         rotation = None
+        self.probe_z_height = 0
+        self.lift_speed = 5
+        self.horizontal_move_z = 5
+        self.horizontal_speed = 50
 
         grid = self._gtk.HomogeneousGrid()
         grid.attach(self.buttons['dm'], 0, 0, 1, 1)
@@ -312,9 +316,9 @@ class BedLevelPanel(ScreenPanel):
         logging.debug(f"Going to position: {position}")
         script = [
             f"{KlippyGcodes.MOVE_ABSOLUTE}",
-            "G1 Z7 F800\n",
-            f"G1 X{position[0]} Y{position[1]} F3600\n",
-            "G1 Z.1 F300\n"
+            f"G1 Z{self.horizontal_move_z} F{self.lift_speed * 60}\n",
+            f"G1 X{position[0]} Y{position[1]} F{self.horizontal_speed * 60}\n",
+            f"G1 Z{self.probe_z_height} F{self.lift_speed * 60}\n"
         ]
 
         self._screen._ws.klippy.gcode_script(
@@ -382,14 +386,24 @@ class BedLevelPanel(ScreenPanel):
     def _get_screws(self, config_section_name):
         screws = []
         config_section = self._printer.get_config_section(config_section_name)
+        logging.debug(config_section_name)
         for item in config_section:
-            logging.debug(f"{config_section_name}: {config_section[item]}")
-            result = re.match(r"([\-0-9\.]+)\s*,\s*([\-0-9\.]+)", config_section[item])
-            if result:
-                screws.append([
-                    round(float(result[1]), 1),
-                    round(float(result[2]), 1)
-                ])
+            logging.debug(f"{item}: {config_section[item]}")
+            if item == 'probe_speed':
+                self.lift_speed = float(config_section[item])
+            elif item == 'speed':
+                self.horizontal_speed = float(config_section[item])
+            elif item == 'horizontal_move_z':
+                self.horizontal_move_z = float(config_section[item])
+            elif item == 'probe_height':
+                self.probe_z_height = float(config_section[item])
+            else:
+                result = re.match(r"([\-0-9\.]+)\s*,\s*([\-0-9\.]+)", config_section[item])
+                if result:
+                    screws.append([
+                        round(float(result[1]), 1),
+                        round(float(result[2]), 1)
+                    ])
         return sorted(screws, key=lambda s: (float(s[1]), float(s[0])))
 
     def screws_tilt_calculate(self, widget):
