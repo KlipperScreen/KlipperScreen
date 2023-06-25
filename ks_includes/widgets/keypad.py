@@ -1,5 +1,5 @@
 import gi
-import logging
+
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
@@ -57,13 +57,18 @@ class Keypad(Gtk.Box):
 
         self.add(self.labels['entry'])
         self.add(numpad)
-        bottom = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        if self.screen.printer.state not in ["printing", "paused"]:
-            bottom.add(self.pid)
-        bottom.add(b)
-        self.add(bottom)
+        self.bottom = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        self.bottom.add(b)
+        self.add(self.bottom)
 
         self.labels["keypad"] = numpad
+
+    def show_pid(self, can_pid):
+        if can_pid and self.pid not in self.bottom:
+            self.bottom.add(self.pid)
+            self.bottom.reorder_child(self.pid, 0)
+        elif self.pid in self.bottom:
+            self.bottom.remove(self.pid)
 
     def clear(self):
         self.labels['entry'].set_text("")
@@ -71,7 +76,6 @@ class Keypad(Gtk.Box):
     def update_entry(self, widget, digit):
         text = self.labels['entry'].get_text()
         temp = self.validate_temp(text)
-        self.pid.set_sensitive(temp > 9)
         if digit == 'B':
             if len(text) < 1:
                 return
@@ -82,9 +86,11 @@ class Keypad(Gtk.Box):
         elif digit == 'PID':
             self.pid_calibrate(temp)
             self.labels['entry'].set_text("")
+        elif len(text + digit) > 3:
+            return
         else:
             self.labels['entry'].set_text(text + digit)
-            self.pid.set_sensitive(self.validate_temp(text + digit) > 9)
+        self.pid.set_sensitive(self.validate_temp(self.labels['entry'].get_text()) > 9)
 
     @staticmethod
     def validate_temp(temp):

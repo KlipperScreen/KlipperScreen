@@ -38,8 +38,7 @@ class TemperaturePanel(ScreenPanel):
         logging.info(state)
         selection = []
         if state not in ["printing", "paused"]:
-            for extruder in self._printer.get_tools():
-                selection.append(extruder)
+            selection.extend(iter(self._printer.get_tools()))
             self.show_preheat = True
             selection.extend(self._printer.get_heaters())
         else:
@@ -534,6 +533,9 @@ class TemperaturePanel(ScreenPanel):
 
         if "keypad" not in self.labels:
             self.labels["keypad"] = Keypad(self._screen, self.change_target_temp, self.pid_calibrate, self.hide_numpad)
+        can_pid = self._printer.state not in ["printing", "paused"] \
+            and self._screen.printer.config[self.active_heater]['control'] == 'pid'
+        self.labels["keypad"].show_pid(can_pid)
         self.labels["keypad"].clear()
 
         if self._screen.vertical_mode:
