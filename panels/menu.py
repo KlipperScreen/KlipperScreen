@@ -74,7 +74,7 @@ class MenuPanel(ScreenPanel):
         for i in range(len(self.items)):
             key = list(self.items[i])[0]
             item = self.items[i][key]
-            scale = 1.1 if 12 < len(self.items) <= 16 else None # hack to fit a 4th row
+            scale = 1.1 if 12 < len(self.items) <= 16 else None  # hack to fit a 4th row
 
             printer = self._printer.get_printer_status_data()
 
