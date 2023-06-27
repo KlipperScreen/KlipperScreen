@@ -217,7 +217,14 @@ class MainPanel(MenuPanel):
 
     def pid_calibrate(self, temp):
         if self.verify_max_temp(temp):
-            self._screen._ws.klippy.pid_calibrate(self.active_heater, temp)
+            script = {"script": f"PID_CALIBRATE HEATER={self.active_heater} TARGET={temp}"}
+            self._screen._confirm_send_action(
+                None,
+                _("Initiate a PID calibration for:") + f" {self.active_heater} @ {temp} ºC"
+                + "\n\n" + _("It may take more than 5 minutes depending on the heater power."),
+                "printer.gcode.script",
+                script
+            )
 
     def create_left_panel(self):
 
