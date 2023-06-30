@@ -11,15 +11,15 @@ from ks_includes.widgets.heatergraph import HeaterGraph
 from ks_includes.widgets.keypad import Keypad
 
 
-def create_panel(*args):
-    return TemperaturePanel(*args)
+def create_panel(*args, **kwargs):
+    return TemperaturePanel(*args, **kwargs)
 
 
 class TemperaturePanel(ScreenPanel):
     graph_update = None
     active_heater = None
 
-    def __init__(self, screen, title):
+    def __init__(self, screen, title, extra=None):
         super().__init__(screen, title)
         self.popover_timeout = None
         self.left_panel = None
@@ -34,18 +34,13 @@ class TemperaturePanel(ScreenPanel):
         self.grid.attach(self.create_left_panel(), 0, 0, 1, 1)
 
         # When printing start in temp_delta mode and only select tools
-        state = self._printer.state
-        logging.info(state)
         selection = []
-        if state not in ["printing", "paused"]:
-            for extruder in self._printer.get_tools():
-                selection.append(extruder)
+        if self._printer.state not in ["printing", "paused"]:
+            selection.extend(iter(self._printer.get_tools()))
             self.show_preheat = True
             selection.extend(self._printer.get_heaters())
-        else:
-            current_extruder = self._printer.get_stat("toolhead", "extruder")
-            if current_extruder:
-                selection.append(current_extruder)
+        elif extra:
+            selection.append(extra)
 
         # Select heaters
         for h in selection:
@@ -224,7 +219,7 @@ class TemperaturePanel(ScreenPanel):
             self.active_heaters.append(device)
             self.devices[device]['name'].get_style_context().add_class("button_active")
             self.devices[device]['select'].set_label(_("Deselect"))
-            logging.info(f"Seselecting {device}")
+            logging.info(f"Selecting {device}")
         return
 
     def set_temperature(self, widget, setting):
