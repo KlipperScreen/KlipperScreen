@@ -400,11 +400,9 @@ class TemperaturePanel(ScreenPanel):
 
     def change_target_temp(self, temp):
         name = self.active_heater.split()[1] if len(self.active_heater.split()) > 1 else self.active_heater
-        max_temp = int(float(self._printer.get_config_section(self.active_heater)['max_temp']))
-        if temp > max_temp:
-            self._screen.show_popup_message(_("Can't set above the maximum:") + f' {max_temp}')
+        temp = self.verify_max_temp(temp)
+        if temp is False:
             return
-        temp = max(temp, 0)
 
         if self.active_heater.startswith('extruder'):
             self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(self.active_heater), temp)
@@ -418,6 +416,26 @@ class TemperaturePanel(ScreenPanel):
             logging.info(f"Unknown heater: {self.active_heater}")
             self._screen.show_popup_message(_("Unknown Heater") + " " + self.active_heater)
         self._printer.set_dev_stat(self.active_heater, "target", temp)
+
+    def verify_max_temp(self, temp):
+        temp = int(temp)
+        max_temp = int(float(self._printer.get_config_section(self.active_heater)['max_temp']))
+        logging.debug(f"{temp}/{max_temp}")
+        if temp > max_temp:
+            self._screen.show_popup_message(_("Can't set above the maximum:") + f' {max_temp}')
+            return False
+        return max(temp, 0)
+
+    def pid_calibrate(self, temp):
+        if self.verify_max_temp(temp):
+            script = {"script": f"PID_CALIBRATE HEATER={self.active_heater} TARGET={temp}"}
+            self._screen._confirm_send_action(
+                None,
+                _("Initiate a PID calibration for:") + f" {self.active_heater} @ {temp} ºC"
+                + "\n\n" + _("It may take more than 5 minutes depending on the heater power."),
+                "printer.gcode.script",
+                script
+            )
 
     def create_left_panel(self):
 
@@ -517,7 +535,10 @@ class TemperaturePanel(ScreenPanel):
         self.devices[self.active_heater]['name'].get_style_context().add_class("button_active")
 
         if "keypad" not in self.labels:
-            self.labels["keypad"] = Keypad(self._screen, self.change_target_temp, self.hide_numpad)
+            self.labels["keypad"] = Keypad(self._screen, self.change_target_temp, self.pid_calibrate, self.hide_numpad)
+        can_pid = self._printer.state not in ["printing", "paused"] \
+            and self._screen.printer.config[self.active_heater]['control'] == 'pid'
+        self.labels["keypad"].show_pid(can_pid)
         self.labels["keypad"].clear()
 
         if self._screen.vertical_mode:
