@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-21 16:13-0300\n"
-"PO-Revision-Date: 2023-06-19 16:20+0000\n"
+"PO-Revision-Date: 2023-06-29 22:18+0000\n"
 "Last-Translator: Daviteusz <imefiu3@gmail.com>\n"
 "Language-Team: Polish <https://translate.daviteusz.eu/projects/klipperscreen/"
 "translate/pl/>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.18\n"
+"X-Generator: Weblate 4.18.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -276,7 +276,7 @@ msgid "Hide"
 msgstr "Ukryj"
 
 msgid "Hide sensors in Temp."
-msgstr "Ukryj sensory w Temp."
+msgstr "Ukryj sensory w obszarze Temperatura"
 
 msgid "Hide temp."
 msgstr "Ukryj temp."
@@ -399,13 +399,13 @@ msgid "Maximum"
 msgstr "Maksymalna"
 
 msgid "Measure Both"
-msgstr "Zmierz oba"
+msgstr "Pomiar obu osi"
 
 msgid "Measure X"
-msgstr "Zmierz X"
+msgstr "Pomiar osi X"
 
 msgid "Measure Y"
-msgstr "Zmierz Y"
+msgstr "Pomiar osi Y"
 
 msgid "Medium"
 msgstr "Średni"
@@ -438,7 +438,7 @@ msgid "Never"
 msgstr "Nigdy"
 
 msgid "New"
-msgstr "Nowy"
+msgstr "Nowe"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -584,7 +584,7 @@ msgid "Save configuration?"
 msgstr "Zapisać konfigurację?"
 
 msgid "Saved"
-msgstr "Zapisano"
+msgstr "Zapisane"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -750,7 +750,7 @@ msgid "mm"
 msgstr "mm"
 
 msgid "mm/s"
-msgstr "mm/s²"
+msgstr "mm/s"
 
 msgid "mm/s²"
 msgstr "mm/s²"
