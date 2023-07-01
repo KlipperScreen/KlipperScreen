@@ -44,6 +44,10 @@ class MainPanel(MenuPanel):
 
     def update_graph_visibility(self):
         if self.left_panel is None or not self._printer.get_temp_store_devices():
+            if self._printer.get_temp_store_devices():
+                logging.info("Retrying to create left panel")
+                self._gtk.reset_temp_color()
+                self.main_menu.attach(self.create_left_panel(), 0, 0, 1, 1)
             self.graph_retry += 1
             if self.graph_retry < 5:
                 if self.graph_retry_timeout is None:
