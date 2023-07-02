@@ -704,6 +704,8 @@ class KlipperScreen(Gtk.Window):
         self.lang_ltr = set_text_direction(lang)
         self.env.install_gettext_translations(self._config.get_lang())
         self._config._create_configurable_options(self)
+        self._config.set('main', 'language', lang)
+        self._config.save_user_config_options()
         self.reload_panels()
 
     def reload_panels(self, *args):
