@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
@@ -37,9 +37,6 @@ msgstr "Acceleration:"
 
 msgid "Accept"
 msgstr "OK"
-
-msgid "Actions"
-msgstr "Muligheder"
 
 msgid "Add profile"
 msgstr ""
@@ -141,9 +138,6 @@ msgstr "Luk"
 
 msgid "Complete"
 msgstr "Færdig"
-
-msgid "Configuration"
-msgstr "Konfiguration"
 
 msgid "Confirm Emergency Stop"
 msgstr "Bekræft Nødstop"
@@ -279,6 +273,9 @@ msgstr "Skjul sensorer i Temp."
 msgid "Hide temp."
 msgstr ""
 
+msgid "Home"
+msgstr "Home"
+
 msgid "Home All"
 msgstr "Home alle"
 
@@ -294,9 +291,6 @@ msgstr "Home Y"
 msgid "Home Z"
 msgstr "Home Z"
 
-msgid "Homing"
-msgstr "Homing"
-
 msgid "Host"
 msgstr ""
 
@@ -308,6 +302,9 @@ msgstr "Ikon-tema"
 
 msgid "Initializing printer..."
 msgstr "Initialiserer printer..."
+
+msgid "Initiate a PID calibration for:"
+msgstr ""
 
 msgid "Input Shaper"
 msgstr ""
@@ -329,6 +326,9 @@ msgstr "Invertér Y"
 
 msgid "Invert Z"
 msgstr "Invertér Z"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipper Genstart"
@@ -419,6 +419,9 @@ msgstr "Ændret"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: tilsluttet"
+
+msgid "More"
+msgstr ""
 
 msgid "Move"
 msgstr "Flytning"
@@ -750,6 +753,15 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr ""
 
+#~ msgid "Actions"
+#~ msgstr "Muligheder"
+
+#~ msgid "Configuration"
+#~ msgstr "Konfiguration"
+
+#~ msgid "Homing"
+#~ msgstr "Homing"
+
 #~ msgid "Disable XY"
 #~ msgstr "Deaktivér XY"
 
@@ -805,9 +817,6 @@ msgstr ""
 
 #~ msgid "Delete"
 #~ msgstr "Slet"
-
-#~ msgid "Home"
-#~ msgstr "Home"
 
 #~ msgid "Off"
 #~ msgstr "Sluk"

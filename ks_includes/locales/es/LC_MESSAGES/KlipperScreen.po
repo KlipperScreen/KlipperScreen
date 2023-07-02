@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 16:13-0300\n"
-"PO-Revision-Date: 2022-11-30 18:10-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
+"PO-Revision-Date: 2023-07-02 16:31-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -42,9 +42,6 @@ msgstr "Aceleración:"
 
 msgid "Accept"
 msgstr "Aceptar"
-
-msgid "Actions"
-msgstr "Acciones"
 
 msgid "Add profile"
 msgstr "Agregar perfil"
@@ -146,9 +143,6 @@ msgstr "Cerrar"
 
 msgid "Complete"
 msgstr "Completado"
-
-msgid "Configuration"
-msgstr "Ajustes"
 
 msgid "Confirm Emergency Stop"
 msgstr "Confirmar Emergencia"
@@ -284,6 +278,9 @@ msgstr "Ocultar sensores en Temp."
 msgid "Hide temp."
 msgstr "Ocultar temp."
 
+msgid "Home"
+msgstr "Inicio"
+
 msgid "Home All"
 msgstr "Origen XYZ"
 
@@ -299,9 +296,6 @@ msgstr "Origen Y"
 msgid "Home Z"
 msgstr "Origen Z"
 
-msgid "Homing"
-msgstr "Origen"
-
 msgid "Host"
 msgstr "Anfitrión"
 
@@ -313,6 +307,9 @@ msgstr "Tema de Iconos"
 
 msgid "Initializing printer..."
 msgstr "Iniciando Impresora..."
+
+msgid "Initiate a PID calibration for:"
+msgstr "Iniciar calibración PID para:"
 
 msgid "Input Shaper"
 msgstr "Corrección de Resonancias"
@@ -334,6 +331,10 @@ msgstr "Invertir Y"
 
 msgid "Invert Z"
 msgstr "Invertir Z"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
+"Puede tardar más de 5 minutos dependiendo de la potencia del calentador."
 
 msgid "Klipper Restart"
 msgstr "Reiniciar Klipper"
@@ -424,6 +425,9 @@ msgstr "Modificado"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: conectado"
+
+msgid "More"
+msgstr "Más"
 
 msgid "Move"
 msgstr "Mover"
@@ -547,7 +551,7 @@ msgid "Refresh"
 msgstr "Actualizar"
 
 msgid "Rename/Move:"
-msgstr "Renombrar/Movar"
+msgstr "Renombrar/Mover:"
 
 msgid "Restart"
 msgstr "Reiniciar"
@@ -757,6 +761,15 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+#~ msgid "Actions"
+#~ msgstr "Acciones"
+
+#~ msgid "Configuration"
+#~ msgstr "Ajustes"
+
+#~ msgid "Homing"
+#~ msgstr "Origen"
+
 #~ msgid "Disable XY"
 #~ msgstr "Desactivar XY"
 
@@ -815,9 +828,6 @@ msgstr "mm³/s"
 
 #~ msgid "Delete"
 #~ msgstr "Borrar"
-
-#~ msgid "Home"
-#~ msgstr "Inicio"
 
 #~ msgid "Off"
 #~ msgstr "Apagar"

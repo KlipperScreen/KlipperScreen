@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -37,9 +37,6 @@ msgstr "Gyorsulás:"
 
 msgid "Accept"
 msgstr "Elfogad"
-
-msgid "Actions"
-msgstr "Műveletek"
 
 msgid "Add profile"
 msgstr "Profil hozzáadása"
@@ -141,9 +138,6 @@ msgstr "Bezárás"
 
 msgid "Complete"
 msgstr "Befejezve"
-
-msgid "Configuration"
-msgstr "Konfiguráció"
 
 msgid "Confirm Emergency Stop"
 msgstr "Vészleállítás megerősítése"
@@ -279,6 +273,9 @@ msgstr "Hőfok szenzorok elrejtése."
 msgid "Hide temp."
 msgstr "Hőfok elrejtése"
 
+msgid "Home"
+msgstr "Kezdőpontok"
+
 msgid "Home All"
 msgstr "X-Y-Z kezdőpont"
 
@@ -294,9 +291,6 @@ msgstr "Y kezdőpont"
 msgid "Home Z"
 msgstr "Z kezdőpont"
 
-msgid "Homing"
-msgstr "Kezdőpont"
-
 msgid "Host"
 msgstr "Gazdagép"
 
@@ -308,6 +302,9 @@ msgstr "Ikon téma"
 
 msgid "Initializing printer..."
 msgstr "Nyomtató inicializálása..."
+
+msgid "Initiate a PID calibration for:"
+msgstr ""
 
 msgid "Input Shaper"
 msgstr "Bemeneti alakító"
@@ -329,6 +326,9 @@ msgstr "Fordított Y"
 
 msgid "Invert Z"
 msgstr "Fordított Z"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipper Újraindítása"
@@ -419,6 +419,9 @@ msgstr "Módosított"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: csatlakoztatva"
+
+msgid "More"
+msgstr ""
 
 msgid "Move"
 msgstr "Mozgatás"
@@ -752,6 +755,15 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+#~ msgid "Actions"
+#~ msgstr "Műveletek"
+
+#~ msgid "Configuration"
+#~ msgstr "Konfiguráció"
+
+#~ msgid "Homing"
+#~ msgstr "Kezdőpont"
+
 #~ msgid "Disable XY"
 #~ msgstr "XY Letiltása"
 
@@ -807,9 +819,6 @@ msgstr "mm³/s"
 
 #~ msgid "Delete"
 #~ msgstr "Töröl"
-
-#~ msgid "Home"
-#~ msgstr "Kezdőpontok"
 
 #~ msgid "Off"
 #~ msgstr "Ki"

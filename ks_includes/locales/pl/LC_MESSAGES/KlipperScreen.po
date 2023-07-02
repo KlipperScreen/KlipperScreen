@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: 2023-06-29 22:18+0000\n"
 "Last-Translator: Daviteusz <imefiu3@gmail.com>\n"
 "Language-Team: Polish <https://translate.daviteusz.eu/projects/klipperscreen/"
@@ -39,9 +39,6 @@ msgstr "Przyśpieszenie:"
 
 msgid "Accept"
 msgstr "Akceptuj"
-
-msgid "Actions"
-msgstr "Akcje"
 
 msgid "Add profile"
 msgstr "Dodaj profil"
@@ -143,9 +140,6 @@ msgstr "Zamknij"
 
 msgid "Complete"
 msgstr "Zakończone"
-
-msgid "Configuration"
-msgstr "Konfiguracja"
 
 msgid "Confirm Emergency Stop"
 msgstr "Potwierdzaj awaryjny stop"
@@ -281,6 +275,9 @@ msgstr "Ukryj sensory w obszarze Temperatura"
 msgid "Hide temp."
 msgstr "Ukryj temp."
 
+msgid "Home"
+msgstr ""
+
 msgid "Home All"
 msgstr "Bazuj wszystkie"
 
@@ -296,9 +293,6 @@ msgstr "Bazuj Y"
 msgid "Home Z"
 msgstr "Bazuj Z"
 
-msgid "Homing"
-msgstr "Bazowanie"
-
 msgid "Host"
 msgstr "Gospodarz"
 
@@ -310,6 +304,9 @@ msgstr "Motyw ikon"
 
 msgid "Initializing printer..."
 msgstr "Inicjowanie drukarki..."
+
+msgid "Initiate a PID calibration for:"
+msgstr ""
 
 msgid "Input Shaper"
 msgstr "Input Shaper"
@@ -331,6 +328,9 @@ msgstr "Odwróć Y"
 
 msgid "Invert Z"
 msgstr "Odwróć Z"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Restartuj Klipper"
@@ -421,6 +421,9 @@ msgstr "Zmodyfikowane"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: połączony"
+
+msgid "More"
+msgstr ""
 
 msgid "Move"
 msgstr "Ruch"
@@ -757,6 +760,15 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Actions"
+#~ msgstr "Akcje"
+
+#~ msgid "Configuration"
+#~ msgstr "Konfiguracja"
+
+#~ msgid "Homing"
+#~ msgstr "Bazowanie"
 
 #~ msgid "Disable XY"
 #~ msgstr "Wyłącz XY"

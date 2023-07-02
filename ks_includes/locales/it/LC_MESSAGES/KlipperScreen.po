@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pappicio\n"
 "Language-Team: \n"
@@ -37,9 +37,6 @@ msgstr "Accelerazione:"
 
 msgid "Accept"
 msgstr "Accetta"
-
-msgid "Actions"
-msgstr "Azioni"
 
 msgid "Add profile"
 msgstr "Aggiungi profilo"
@@ -141,9 +138,6 @@ msgstr "Chiudi"
 
 msgid "Complete"
 msgstr "Completo"
-
-msgid "Configuration"
-msgstr "Impostazioni"
 
 msgid "Confirm Emergency Stop"
 msgstr "Conferma arresto di emergenza"
@@ -279,6 +273,9 @@ msgstr "Nascondi sensori in Temp."
 msgid "Hide temp."
 msgstr "Nascondi temp."
 
+msgid "Home"
+msgstr "Inizio"
+
 msgid "Home All"
 msgstr "Home XYZ"
 
@@ -294,9 +291,6 @@ msgstr "Home Y"
 msgid "Home Z"
 msgstr "Home Z"
 
-msgid "Homing"
-msgstr "Homing"
-
 msgid "Host"
 msgstr ""
 
@@ -308,6 +302,9 @@ msgstr "Tema Icone"
 
 msgid "Initializing printer..."
 msgstr "Inizializzo stampante..."
+
+msgid "Initiate a PID calibration for:"
+msgstr ""
 
 msgid "Input Shaper"
 msgstr ""
@@ -329,6 +326,9 @@ msgstr "Inverti Y"
 
 msgid "Invert Z"
 msgstr "Inverti Z"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipper Riavvio"
@@ -419,6 +419,9 @@ msgstr "Modificato"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: connesso"
+
+msgid "More"
+msgstr ""
 
 msgid "Move"
 msgstr "Muovi"
@@ -752,6 +755,15 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+#~ msgid "Actions"
+#~ msgstr "Azioni"
+
+#~ msgid "Configuration"
+#~ msgstr "Impostazioni"
+
+#~ msgid "Homing"
+#~ msgstr "Homing"
+
 #~ msgid "Disable XY"
 #~ msgstr "Disab. XY"
 
@@ -807,9 +819,6 @@ msgstr "mm³/s"
 
 #~ msgid "Delete"
 #~ msgstr "Elimina"
-
-#~ msgid "Home"
-#~ msgstr "Inizio"
 
 #~ msgid "Off"
 #~ msgstr "Off"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,9 +41,6 @@ msgid "Acceleration:"
 msgstr ""
 
 msgid "Accept"
-msgstr ""
-
-msgid "Actions"
 msgstr ""
 
 msgid "Add profile"
@@ -145,9 +142,6 @@ msgid "Close"
 msgstr ""
 
 msgid "Complete"
-msgstr ""
-
-msgid "Configuration"
 msgstr ""
 
 msgid "Confirm Emergency Stop"
@@ -284,6 +278,9 @@ msgstr ""
 msgid "Hide temp."
 msgstr ""
 
+msgid "Home"
+msgstr ""
+
 msgid "Home All"
 msgstr ""
 
@@ -299,9 +296,6 @@ msgstr ""
 msgid "Home Z"
 msgstr ""
 
-msgid "Homing"
-msgstr ""
-
 msgid "Host"
 msgstr ""
 
@@ -312,6 +306,9 @@ msgid "Icon Theme"
 msgstr ""
 
 msgid "Initializing printer..."
+msgstr ""
+
+msgid "Initiate a PID calibration for:"
 msgstr ""
 
 msgid "Input Shaper"
@@ -333,6 +330,9 @@ msgid "Invert Y"
 msgstr ""
 
 msgid "Invert Z"
+msgstr ""
+
+msgid "It may take more than 5 minutes depending on the heater power."
 msgstr ""
 
 msgid "Klipper Restart"
@@ -423,6 +423,9 @@ msgid "Modified"
 msgstr ""
 
 msgid "Moonraker: connected"
+msgstr ""
+
+msgid "More"
 msgstr ""
 
 msgid "Move"

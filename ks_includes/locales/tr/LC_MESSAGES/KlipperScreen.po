@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: 2022-12-10 14:52+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -42,9 +42,6 @@ msgstr "Hızlanma:"
 
 msgid "Accept"
 msgstr "Kabul et"
-
-msgid "Actions"
-msgstr "Eylemler"
 
 msgid "Add profile"
 msgstr "Profil ekle"
@@ -146,9 +143,6 @@ msgstr "Kapat"
 
 msgid "Complete"
 msgstr "Tamamlandı"
-
-msgid "Configuration"
-msgstr "Yapılandırma"
 
 msgid "Confirm Emergency Stop"
 msgstr "Acil Durdurmayı Onaylayın"
@@ -284,6 +278,9 @@ msgstr "Sıcaklıktaki sensörleri gizleyin."
 msgid "Hide temp."
 msgstr "Sıcaklığı gizle."
 
+msgid "Home"
+msgstr "Ana Ekran"
+
 msgid "Home All"
 msgstr "Eksenleri Sıfırla"
 
@@ -299,9 +296,6 @@ msgstr "Y Sıfırla"
 msgid "Home Z"
 msgstr "Z  Sıfırla"
 
-msgid "Homing"
-msgstr "Eksen Sıfırlama"
-
 msgid "Host"
 msgstr "Sunucu"
 
@@ -313,6 +307,9 @@ msgstr "Simge Teması"
 
 msgid "Initializing printer..."
 msgstr "Yazıcı başlatılıyor..."
+
+msgid "Initiate a PID calibration for:"
+msgstr ""
 
 msgid "Input Shaper"
 msgstr "İvme Düzenleyicisi"
@@ -334,6 +331,9 @@ msgstr "Y Ters çevir"
 
 msgid "Invert Z"
 msgstr "Z Ters çevir"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipper Yeniden başlat"
@@ -424,6 +424,9 @@ msgstr "Değiştirilmiş"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: bağlandı"
+
+msgid "More"
+msgstr ""
 
 msgid "Move"
 msgstr "Hareket"
@@ -757,6 +760,15 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+#~ msgid "Actions"
+#~ msgstr "Eylemler"
+
+#~ msgid "Configuration"
+#~ msgstr "Yapılandırma"
+
+#~ msgid "Homing"
+#~ msgstr "Eksen Sıfırlama"
+
 #~ msgid "Disable XY"
 #~ msgstr "XY Devre dışı bırak"
 
@@ -812,9 +824,6 @@ msgstr "mm³/s"
 
 #~ msgid "Delete"
 #~ msgstr "Sil"
-
-#~ msgid "Home"
-#~ msgstr "Ana Ekran"
 
 #~ msgid "Off"
 #~ msgstr "Kapa"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: 2022-11-30 18:15-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: \n"
@@ -43,9 +43,6 @@ msgstr "Ускорение:"
 
 msgid "Accept"
 msgstr "Применить"
-
-msgid "Actions"
-msgstr "Действия"
 
 msgid "Add profile"
 msgstr "Добавить профиль"
@@ -147,9 +144,6 @@ msgstr "Закрыть"
 
 msgid "Complete"
 msgstr "Готово"
-
-msgid "Configuration"
-msgstr "Параметр"
 
 msgid "Confirm Emergency Stop"
 msgstr "Подтвердить аварийную остановку"
@@ -285,6 +279,9 @@ msgstr "Скрыть датчики в Temp."
 msgid "Hide temp."
 msgstr "Скрыть температуру."
 
+msgid "Home"
+msgstr "Парковка"
+
 msgid "Home All"
 msgstr "Парковать все"
 
@@ -300,9 +297,6 @@ msgstr "Парковать Y"
 msgid "Home Z"
 msgstr "Парковать Z"
 
-msgid "Homing"
-msgstr "Парковка"
-
 msgid "Host"
 msgstr "Хост"
 
@@ -314,6 +308,9 @@ msgstr "Темы"
 
 msgid "Initializing printer..."
 msgstr "Принтер стартует..."
+
+msgid "Initiate a PID calibration for:"
+msgstr ""
 
 msgid "Input Shaper"
 msgstr "Входной шейпер"
@@ -335,6 +332,9 @@ msgstr "Инверсия Y"
 
 msgid "Invert Z"
 msgstr "Инверсия Z"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipper Рестарт"
@@ -425,6 +425,9 @@ msgstr "Изменено"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: подключен"
+
+msgid "More"
+msgstr ""
 
 msgid "Move"
 msgstr "Двигать"
@@ -762,6 +765,15 @@ msgstr "мм/с²"
 msgid "mm³/s"
 msgstr "мм/с³"
 
+#~ msgid "Actions"
+#~ msgstr "Действия"
+
+#~ msgid "Configuration"
+#~ msgstr "Параметр"
+
+#~ msgid "Homing"
+#~ msgstr "Парковка"
+
 #~ msgid "Disable XY"
 #~ msgstr "Отключить XY"
 
@@ -817,9 +829,6 @@ msgstr "мм/с³"
 
 #~ msgid "Delete"
 #~ msgstr "Удалить"
-
-#~ msgid "Home"
-#~ msgstr "Парковка"
 
 #~ msgid "Off"
 #~ msgstr "Выкл"

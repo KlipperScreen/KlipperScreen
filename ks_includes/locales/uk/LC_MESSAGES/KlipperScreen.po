@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2023-05-24 14:53-0300\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: 2023-05-24 22:02+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -43,9 +43,6 @@ msgstr "Прискорення:"
 
 msgid "Accept"
 msgstr "Прийняти"
-
-msgid "Actions"
-msgstr "Дії"
 
 msgid "Add profile"
 msgstr "Додати профіль"
@@ -147,9 +144,6 @@ msgstr "Закрити"
 
 msgid "Complete"
 msgstr "Завершено"
-
-msgid "Configuration"
-msgstr "Конфігурація"
 
 msgid "Confirm Emergency Stop"
 msgstr "Підтвердьте АВАРІЙНУ ЗУПИНКУ"
@@ -289,6 +283,9 @@ msgstr "Сховати датчик t°."
 msgid "Hide temp."
 msgstr "Приховати темп."
 
+msgid "Home"
+msgstr "Домашня сторінка"
+
 msgid "Home All"
 msgstr "Дім Всі"
 
@@ -304,9 +301,6 @@ msgstr "Дім Y"
 msgid "Home Z"
 msgstr "Дім Z"
 
-msgid "Homing"
-msgstr "До дому"
-
 msgid "Host"
 msgstr "Хост"
 
@@ -318,6 +312,9 @@ msgstr "Тема оформлення"
 
 msgid "Initializing printer..."
 msgstr "Ініціалізація принтера..."
+
+msgid "Initiate a PID calibration for:"
+msgstr ""
 
 msgid "Input Shaper"
 msgstr "Input Shaper"
@@ -339,6 +336,9 @@ msgstr "Інвертувати Y"
 
 msgid "Invert Z"
 msgstr "Інвертувати Z"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr ""
@@ -431,6 +431,9 @@ msgstr "Змінено"
 
 msgid "Moonraker: connected"
 msgstr "Підключено до Moonraker"
+
+msgid "More"
+msgstr ""
 
 msgid "Move"
 msgstr "Переміщення"
@@ -776,6 +779,15 @@ msgstr "мм/с²"
 msgid "mm³/s"
 msgstr "мм/с³"
 
+#~ msgid "Actions"
+#~ msgstr "Дії"
+
+#~ msgid "Configuration"
+#~ msgstr "Конфігурація"
+
+#~ msgid "Homing"
+#~ msgstr "До дому"
+
 #~ msgid "Disable XY"
 #~ msgstr "Вимкнути XY"
 
@@ -831,9 +843,6 @@ msgstr "мм/с³"
 
 #~ msgid "Delete"
 #~ msgstr "Видалити"
-
-#~ msgid "Home"
-#~ msgstr "Домашня сторінка"
 
 #~ msgid "Off"
 #~ msgstr "Вимк"

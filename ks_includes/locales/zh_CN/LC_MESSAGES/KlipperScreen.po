@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: 2022-11-28 11:36-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -42,9 +42,6 @@ msgstr "加速度:"
 
 msgid "Accept"
 msgstr "应用"
-
-msgid "Actions"
-msgstr "控制"
 
 msgid "Add profile"
 msgstr ""
@@ -146,9 +143,6 @@ msgstr "关闭"
 
 msgid "Complete"
 msgstr "完成"
-
-msgid "Configuration"
-msgstr "设置"
 
 msgid "Confirm Emergency Stop"
 msgstr "确认紧急停止"
@@ -284,6 +278,9 @@ msgstr "隐藏温度传感器。"
 msgid "Hide temp."
 msgstr "隐藏温度。"
 
+msgid "Home"
+msgstr "首页"
+
 msgid "Home All"
 msgstr "全部归零"
 
@@ -299,9 +296,6 @@ msgstr "Y轴归零"
 msgid "Home Z"
 msgstr "Z轴归零"
 
-msgid "Homing"
-msgstr "归零"
-
 msgid "Host"
 msgstr ""
 
@@ -313,6 +307,9 @@ msgstr "主题风格"
 
 msgid "Initializing printer..."
 msgstr "初始化打印机中..."
+
+msgid "Initiate a PID calibration for:"
+msgstr ""
 
 msgid "Input Shaper"
 msgstr "共振补偿"
@@ -334,6 +331,9 @@ msgstr "反转Y轴"
 
 msgid "Invert Z"
 msgstr "反转Z轴"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "重启 Klipper"
@@ -424,6 +424,9 @@ msgstr "修改时间"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker：已连接"
+
+msgid "More"
+msgstr ""
 
 msgid "Move"
 msgstr "移动"
@@ -751,6 +754,15 @@ msgstr ""
 msgid "mm³/s"
 msgstr ""
 
+#~ msgid "Actions"
+#~ msgstr "控制"
+
+#~ msgid "Configuration"
+#~ msgstr "设置"
+
+#~ msgid "Homing"
+#~ msgstr "归零"
+
 #~ msgid "Disable XY"
 #~ msgstr "关闭 XY 轴电机"
 
@@ -788,9 +800,6 @@ msgstr ""
 
 #~ msgid "Delete"
 #~ msgstr "删除"
-
-#~ msgid "Home"
-#~ msgstr "首页"
 
 #~ msgid "Off"
 #~ msgstr "关闭"

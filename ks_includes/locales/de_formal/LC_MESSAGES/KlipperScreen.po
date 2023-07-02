@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: 2022-11-30 18:10-0300\n"
 "Last-Translator: livinhack\n"
 "Language-Team: \n"
@@ -42,9 +42,6 @@ msgstr "Beschleunigung:"
 
 msgid "Accept"
 msgstr "OK"
-
-msgid "Actions"
-msgstr "Aktionen"
 
 msgid "Add profile"
 msgstr "Profil hinzufügen"
@@ -146,9 +143,6 @@ msgstr "Schließen"
 
 msgid "Complete"
 msgstr "Fertiggestellt"
-
-msgid "Configuration"
-msgstr "Einstellungen"
 
 msgid "Confirm Emergency Stop"
 msgstr "Not-Aus bestätigen"
@@ -284,6 +278,9 @@ msgstr "Sensoren in Temp ausblenden."
 msgid "Hide temp."
 msgstr "Temp. ausblenden"
 
+msgid "Home"
+msgstr "Grundposition"
+
 msgid "Home All"
 msgstr "Alle Achsen zurücksetzen"
 
@@ -299,9 +296,6 @@ msgstr "Achse Y neupositionieren"
 msgid "Home Z"
 msgstr "Achse Z neupositionieren"
 
-msgid "Homing"
-msgstr "Grundposition"
-
 msgid "Host"
 msgstr "Host"
 
@@ -313,6 +307,9 @@ msgstr "Icon Theme"
 
 msgid "Initializing printer..."
 msgstr "Drucker wird initialisiert..."
+
+msgid "Initiate a PID calibration for:"
+msgstr ""
 
 msgid "Input Shaper"
 msgstr "Input Shaper"
@@ -334,6 +331,9 @@ msgstr "Achse Y invertieren"
 
 msgid "Invert Z"
 msgstr "Achse Z invertieren"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipper Neustart"
@@ -424,6 +424,9 @@ msgstr "Modifiziert"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: Verbunden"
+
+msgid "More"
+msgstr ""
 
 msgid "Move"
 msgstr "Bewegen"
@@ -760,6 +763,15 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+#~ msgid "Actions"
+#~ msgstr "Aktionen"
+
+#~ msgid "Configuration"
+#~ msgstr "Einstellungen"
+
+#~ msgid "Homing"
+#~ msgstr "Grundposition"
+
 #~ msgid "Disable XY"
 #~ msgstr "XY-Achse deaktivieren"
 
@@ -815,9 +827,6 @@ msgstr "mm³/s"
 
 #~ msgid "Delete"
 #~ msgstr "Löschen"
-
-#~ msgid "Home"
-#~ msgstr "Grundposition"
 
 #~ msgid "Off"
 #~ msgstr "Aus"

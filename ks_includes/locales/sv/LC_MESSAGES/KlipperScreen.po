@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: 2022-11-21 21:31-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -42,9 +42,6 @@ msgstr ""
 
 msgid "Accept"
 msgstr "Godkänn"
-
-msgid "Actions"
-msgstr "Åtgärder"
 
 msgid "Add profile"
 msgstr ""
@@ -146,9 +143,6 @@ msgstr "Stäng"
 
 msgid "Complete"
 msgstr "Färdig"
-
-msgid "Configuration"
-msgstr "Konfiguration"
 
 msgid "Confirm Emergency Stop"
 msgstr "Bekräfta nödstopp"
@@ -284,6 +278,9 @@ msgstr "Dölj sensorer i Temp."
 msgid "Hide temp."
 msgstr ""
 
+msgid "Home"
+msgstr "Hem"
+
 msgid "Home All"
 msgstr "Hem Alla"
 
@@ -299,9 +296,6 @@ msgstr "Hem Y"
 msgid "Home Z"
 msgstr "Hem Z"
 
-msgid "Homing"
-msgstr ""
-
 msgid "Host"
 msgstr ""
 
@@ -313,6 +307,9 @@ msgstr "Ikon tema"
 
 msgid "Initializing printer..."
 msgstr "Initierar skrivaren..."
+
+msgid "Initiate a PID calibration for:"
+msgstr ""
 
 msgid "Input Shaper"
 msgstr ""
@@ -334,6 +331,9 @@ msgstr "Invertera Y"
 
 msgid "Invert Z"
 msgstr "Invertera Z"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipper Omstart"
@@ -424,6 +424,9 @@ msgstr "Ändrad"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: ansluten"
+
+msgid "More"
+msgstr ""
 
 msgid "Move"
 msgstr "Flytta"
@@ -755,6 +758,12 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr ""
 
+#~ msgid "Actions"
+#~ msgstr "Åtgärder"
+
+#~ msgid "Configuration"
+#~ msgstr "Konfiguration"
+
 #~ msgid "Disable XY"
 #~ msgstr "Inaktivera XY"
 
@@ -797,9 +806,6 @@ msgstr ""
 
 #~ msgid "Delete"
 #~ msgstr "Radera"
-
-#~ msgid "Home"
-#~ msgstr "Hem"
 
 #~ msgid "Off"
 #~ msgstr "Avstängd"

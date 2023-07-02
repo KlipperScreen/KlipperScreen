@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: 2023-05-07 18:50+0200\n"
 "Last-Translator: Thijs Triemstra <info@collab.nl>\n"
 "Language-Team: \n"
@@ -42,9 +42,6 @@ msgstr "Acceleratie:"
 
 msgid "Accept"
 msgstr "Accepteer"
-
-msgid "Actions"
-msgstr "Acties"
 
 msgid "Add profile"
 msgstr "Profiel toevoegen"
@@ -146,9 +143,6 @@ msgstr "Sluiten"
 
 msgid "Complete"
 msgstr "Voltooid"
-
-msgid "Configuration"
-msgstr "Configuratie"
 
 msgid "Confirm Emergency Stop"
 msgstr "Bevestig Nood Stop"
@@ -284,6 +278,9 @@ msgstr "Verberg sensoren in Temp."
 msgid "Hide temp."
 msgstr "Verberg temp."
 
+msgid "Home"
+msgstr ""
+
 msgid "Home All"
 msgstr "Home alles"
 
@@ -299,9 +296,6 @@ msgstr "Home Y"
 msgid "Home Z"
 msgstr "Home Z"
 
-msgid "Homing"
-msgstr "Homing"
-
 msgid "Host"
 msgstr "Host"
 
@@ -313,6 +307,9 @@ msgstr "Icoon Thema"
 
 msgid "Initializing printer..."
 msgstr "Initialiseren printer…"
+
+msgid "Initiate a PID calibration for:"
+msgstr ""
 
 msgid "Input Shaper"
 msgstr "Input Shaper"
@@ -334,6 +331,9 @@ msgstr "Invert Y"
 
 msgid "Invert Z"
 msgstr "Invert Z"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipper Herstarten"
@@ -424,6 +424,9 @@ msgstr "Aangepast"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: verbonden"
+
+msgid "More"
+msgstr ""
 
 msgid "Move"
 msgstr "Beweeg"
@@ -756,6 +759,15 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Actions"
+#~ msgstr "Acties"
+
+#~ msgid "Configuration"
+#~ msgstr "Configuratie"
+
+#~ msgid "Homing"
+#~ msgstr "Homing"
 
 #~ msgid "Disable XY"
 #~ msgstr "XY Uitschakelen"

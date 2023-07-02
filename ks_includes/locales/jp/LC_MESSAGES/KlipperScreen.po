@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: boyon\n"
 "Language-Team: \n"
@@ -37,9 +37,6 @@ msgstr "加速度:"
 
 msgid "Accept"
 msgstr "承諾する"
-
-msgid "Actions"
-msgstr "操作"
 
 msgid "Add profile"
 msgstr "プロファイルの追加"
@@ -141,9 +138,6 @@ msgstr "終了"
 
 msgid "Complete"
 msgstr "完了"
-
-msgid "Configuration"
-msgstr "設定"
 
 msgid "Confirm Emergency Stop"
 msgstr "緊急停止時に確認する"
@@ -279,6 +273,9 @@ msgstr "温度を非表示にする"
 msgid "Hide temp."
 msgstr "温度を非表示にする"
 
+msgid "Home"
+msgstr ""
+
 msgid "Home All"
 msgstr ""
 
@@ -294,9 +291,6 @@ msgstr "Home Y"
 msgid "Home Z"
 msgstr "Home Z"
 
-msgid "Homing"
-msgstr "Homing"
-
 msgid "Host"
 msgstr ""
 
@@ -307,6 +301,9 @@ msgid "Icon Theme"
 msgstr "アイコンテーマ"
 
 msgid "Initializing printer..."
+msgstr ""
+
+msgid "Initiate a PID calibration for:"
 msgstr ""
 
 msgid "Input Shaper"
@@ -329,6 +326,9 @@ msgstr "Y軸を反対にする"
 
 msgid "Invert Z"
 msgstr "X軸を反対にする"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipperを再起動する"
@@ -419,6 +419,9 @@ msgstr "変更"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: 接続済"
+
+msgid "More"
+msgstr ""
 
 msgid "Move"
 msgstr "移動"
@@ -745,6 +748,15 @@ msgstr ""
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Actions"
+#~ msgstr "操作"
+
+#~ msgid "Configuration"
+#~ msgstr "設定"
+
+#~ msgid "Homing"
+#~ msgstr "Homing"
 
 #~ msgid "Disable XY"
 #~ msgstr "XY軸制御の無効化"
