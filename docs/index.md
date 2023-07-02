@@ -24,4 +24,11 @@ Job Status
 KlipperScreen was inspired by [OctoScreen](https://github.com/Z-Bolt/OctoScreen/) and the need for a touchscreen GUI that
 will natively work with [Klipper](https://github.com/klipper3d/klipper) and [Moonraker](https://github.com/arksine/moonraker).
 
-[Changelog](Changelog.md)
+### About the project
+
+KlipperScreen has been created and maintained by Jordan Ruthe from 2020 to 2021
+the current maintainer is Alfredo Monclus (alfrix) from 2021 onwards
+
+thanks to all the people who helped along the way.
+
+[Contributors](https://github.com/jordanruthe/KlipperScreen/graphs/contributors)
