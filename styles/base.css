@@ -44,7 +44,7 @@ button.color4:disabled label {
 
 button label {
     margin-top: .25em;
-    margin-bottom: .5em;
+    margin-bottom: 0;
 }
 
 button.color1 {

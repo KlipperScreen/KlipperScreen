@@ -74,6 +74,7 @@ class MenuPanel(ScreenPanel):
         for i in range(len(self.items)):
             key = list(self.items[i])[0]
             item = self.items[i][key]
+            scale = 1.1 if 12 < len(self.items) <= 16 else None  # hack to fit a 4th row
 
             printer = self._printer.get_printer_status_data()
 
@@ -81,7 +82,7 @@ class MenuPanel(ScreenPanel):
             icon = self._screen.env.from_string(item['icon']).render(printer) if item['icon'] else None
             style = self._screen.env.from_string(item['style']).render(printer) if item['style'] else None
 
-            b = self._gtk.Button(icon, name, style or f"color{i % 4 + 1}")
+            b = self._gtk.Button(icon, name, style or f"color{i % 4 + 1}", scale=scale)
 
             if item['panel'] is not None:
                 panel = self._screen.env.from_string(item['panel']).render(printer)
