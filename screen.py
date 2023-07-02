@@ -726,7 +726,7 @@ class KlipperScreen(Gtk.Window):
             self.printer.process_update({'webhooks': {'state': "ready"}})
         elif action == "notify_status_update" and self.printer.state != "shutdown":
             self.printer.process_update(data)
-            if 'manual_probe' in data and data['manual_probe']['is_active'] and 'zcalibrate' not in self._cur_panels:
+            if 'manual_probe' in data and data['manual_probe']['is_active'] and 'zoffset' not in self._cur_panels:
                 self.show_panel('zoffset', "zcalibrate", None, 1, False)
         elif action == "notify_filelist_changed":
             if self.files is not None:
