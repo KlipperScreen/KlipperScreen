@@ -27,6 +27,7 @@ class MainPanel(MenuPanel):
         self.main_menu.set_hexpand(True)
         self.main_menu.set_vexpand(True)
         self.graph_retry = 0
+        scroll = self._gtk.ScrolledWindow()
 
         logging.info("### Making MainMenu")
 
@@ -36,10 +37,12 @@ class MainPanel(MenuPanel):
             self.main_menu.attach(self.create_left_panel(), 0, 0, 1, 1)
         if self._screen.vertical_mode:
             self.labels['menu'] = self.arrangeMenuItems(items, 3, True)
-            self.main_menu.attach(self.labels['menu'], 0, 1, 1, 1)
+            scroll.add(self.labels['menu'])
+            self.main_menu.attach(scroll, 0, 1, 1, 1)
         else:
             self.labels['menu'] = self.arrangeMenuItems(items, 2, True)
-            self.main_menu.attach(self.labels['menu'], 1, 0, 1, 1)
+            scroll.add(self.labels['menu'])
+            self.main_menu.attach(scroll, 1, 0, 1, 1)
         self.content.add(self.main_menu)
 
     def update_graph_visibility(self):
