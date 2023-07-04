@@ -1,9 +1,10 @@
+# Daviteusz <imefiu3@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-02 16:32-0300\n"
-"PO-Revision-Date: 2023-06-29 22:18+0000\n"
+"PO-Revision-Date: 2023-07-04 03:44+0000\n"
 "Last-Translator: Daviteusz <imefiu3@gmail.com>\n"
 "Language-Team: Polish <https://translate.daviteusz.eu/projects/klipperscreen/"
 "translate/pl/>\n"
@@ -258,7 +259,7 @@ msgid "Fullscreen"
 msgstr "Pełny ekran"
 
 msgid "Go Back"
-msgstr "Wróć"
+msgstr "Powróć"
 
 msgid "Height:"
 msgstr "Wysokość:"
@@ -276,7 +277,7 @@ msgid "Hide temp."
 msgstr "Ukryj temp."
 
 msgid "Home"
-msgstr ""
+msgstr "Bazuj"
 
 msgid "Home All"
 msgstr "Bazuj wszystkie"
@@ -306,7 +307,7 @@ msgid "Initializing printer..."
 msgstr "Inicjowanie drukarki..."
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "Rozpoczęcie kalibracji PID dla:"
 
 msgid "Input Shaper"
 msgstr "Input Shaper"
@@ -330,7 +331,7 @@ msgid "Invert Z"
 msgstr "Odwróć Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
+msgstr "Może to potrwać dłużej niż 5 minut w zależności od mocy grzałki."
 
 msgid "Klipper Restart"
 msgstr "Restartuj Klipper"
@@ -423,7 +424,7 @@ msgid "Moonraker: connected"
 msgstr "Moonraker: połączony"
 
 msgid "More"
-msgstr ""
+msgstr "Więcej"
 
 msgid "Move"
 msgstr "Ruch"
@@ -494,7 +495,7 @@ msgid "Power On Printer"
 msgstr "Zasilanie włączone"
 
 msgid "Pressure Advance:"
-msgstr "Natężenie docisku:"
+msgstr "Pressure Advance:"
 
 msgid "Print"
 msgstr "Drukuj"
@@ -648,7 +649,7 @@ msgid "Speed:"
 msgstr "Prędkość:"
 
 msgid "Square Corner Velocity"
-msgstr "Prędkość w narożniku prostokątnym"
+msgstr "Prędkość na rogu kwadratu"
 
 msgid "Start"
 msgstr "Start"
