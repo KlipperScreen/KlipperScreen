@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-02 16:32-0300\n"
-"PO-Revision-Date: 2023-07-06 22:23+0800\n"
+"PO-Revision-Date: 2023-07-06 22:33+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -255,7 +255,7 @@ msgid "Font Size"
 msgstr "字体大小"
 
 msgid "Full Update"
-msgstr "完整更新"
+msgstr "全部更新"
 
 msgid "Fullscreen"
 msgstr "全屏"
@@ -456,7 +456,7 @@ msgstr "未选择任何内容"
 
 #, python-format
 msgid "Outdated by %d"
-msgstr "已过时%d"
+msgstr "已落后 %d"
 
 msgid "PSK for"
 msgstr "PSK"
@@ -695,7 +695,7 @@ msgid "Unretract Speed"
 msgstr "回料速度"
 
 msgid "Up To Date"
-msgstr "最新的"
+msgstr "最新版本"
 
 msgid "Update"
 msgstr "更新"
