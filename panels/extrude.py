@@ -118,6 +118,7 @@ class ExtrudePanel(ScreenPanel):
 
         filament_sensors = self._printer.get_filament_sensors()
         sensors = Gtk.Grid()
+        sensors.set_size_request(self._gtk.content_width, -1)
         if len(filament_sensors) > 0:
             sensors.set_column_spacing(5)
             sensors.set_row_spacing(5)
@@ -138,10 +139,9 @@ class ExtrudePanel(ScreenPanel):
                 self.labels[x]['switch'].set_property("width-request", round(self._gtk.font_size * 2))
                 self.labels[x]['switch'].set_property("height-request", round(self._gtk.font_size))
                 self.labels[x]['switch'].connect("notify::active", self.enable_disable_fs, name, x)
-                self.labels[x]['box'].pack_start(self.labels[x]['label'], True, True, 5)
-                self.labels[x]['box'].pack_start(self.labels[x]['switch'], False, False, 5)
+                self.labels[x]['box'].pack_start(self.labels[x]['label'], True, True, 10)
+                self.labels[x]['box'].pack_start(self.labels[x]['switch'], False, False, 0)
                 self.labels[x]['box'].get_style_context().add_class("filament_sensor")
-                self.labels[x]['box'].set_hexpand(True)
                 sensors.attach(self.labels[x]['box'], s, 0, 1, 1)
 
         grid = Gtk.Grid()
