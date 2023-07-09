@@ -14,9 +14,21 @@ will natively work with [Klipper](https://github.com/kevinOConnor/klipper) and [
 
 [More Screenshots](https://klipperscreen.readthedocs.io/en/latest/Panels/)
 
-### About
+### About the project
 
 KlipperScreen has been created and maintained by Jordan Ruthe from 2020 to 2021
-the current maintainer is Alfredo Monclus (alfrix) from 2021 onwards
+
+|Donate to Jordan|
+|-|
+|[Patreon](https://www.patreon.com/klipperscreen)|
+|[Ko-fi](https://ko-fi.com/klipperscreen)|
+
+The current maintainer is Alfredo Monclus (alfrix) from 2021 onwards
+
+|Dontate to Alfrix|
+|-|
+|[Ko-fi](https://ko-fi.com/alfrix)|
 
 thanks to all the people who helped along the way.
+
+[Contributors](https://github.com/KlipperScreen/KlipperScreen/graphs/contributors)
