@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,9 +43,6 @@ msgstr ""
 msgid "Accept"
 msgstr ""
 
-msgid "Actions"
-msgstr ""
-
 msgid "Add profile"
 msgstr ""
 
@@ -53,11 +50,11 @@ msgid "Apply"
 msgstr ""
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
+msgid "Apply %s%.3f offset to Endstop?"
 msgstr ""
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
+msgid "Apply %s%.3f offset to Probe?"
 msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
@@ -105,10 +102,10 @@ msgstr ""
 msgid "Calibrated"
 msgstr ""
 
-msgid "Calibrated, save configuration to make it permanent"
+msgid "Calibrating"
 msgstr ""
 
-msgid "Calibrating"
+msgid "Camera"
 msgstr ""
 
 msgid "Can't set above the maximum:"
@@ -147,9 +144,6 @@ msgstr ""
 msgid "Complete"
 msgstr ""
 
-msgid "Configuration"
-msgstr ""
-
 msgid "Confirm Emergency Stop"
 msgstr ""
 
@@ -172,7 +166,7 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-msgid "Decrease"
+msgid "Delete Directory?"
 msgstr ""
 
 msgid "Delete File?"
@@ -182,9 +176,6 @@ msgid "Deselect"
 msgstr ""
 
 msgid "Disable Motors"
-msgstr ""
-
-msgid "Disable XY"
 msgstr ""
 
 msgid "Distance (mm)"
@@ -266,6 +257,9 @@ msgstr ""
 msgid "Full Update"
 msgstr ""
 
+msgid "Fullscreen"
+msgstr ""
+
 msgid "Go Back"
 msgstr ""
 
@@ -284,6 +278,9 @@ msgstr ""
 msgid "Hide temp."
 msgstr ""
 
+msgid "Home"
+msgstr ""
+
 msgid "Home All"
 msgstr ""
 
@@ -299,9 +296,6 @@ msgstr ""
 msgid "Home Z"
 msgstr ""
 
-msgid "Homing"
-msgstr ""
-
 msgid "Host"
 msgstr ""
 
@@ -311,10 +305,10 @@ msgstr ""
 msgid "Icon Theme"
 msgstr ""
 
-msgid "Increase"
+msgid "Initializing printer..."
 msgstr ""
 
-msgid "Initializing printer..."
+msgid "Initiate a PID calibration for:"
 msgstr ""
 
 msgid "Input Shaper"
@@ -336,6 +330,9 @@ msgid "Invert Y"
 msgstr ""
 
 msgid "Invert Z"
+msgstr ""
+
+msgid "It may take more than 5 minutes depending on the heater power."
 msgstr ""
 
 msgid "Klipper Restart"
@@ -426,6 +423,9 @@ msgid "Modified"
 msgstr ""
 
 msgid "Moonraker: connected"
+msgstr ""
+
+msgid "More"
 msgstr ""
 
 msgid "Move"
@@ -547,6 +547,9 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
+msgid "Rename/Move:"
+msgstr ""
+
 msgid "Restart"
 msgstr ""
 
@@ -605,10 +608,6 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#, python-format
-msgid "Sending Power ON signal to: %s"
-msgstr ""
-
 msgid "Set Temp"
 msgstr ""
 
@@ -628,9 +627,6 @@ msgid "Size"
 msgstr ""
 
 msgid "Slicer"
-msgstr ""
-
-msgid "Slicer Time correction (%)"
 msgstr ""
 
 msgid "Slicer:"
@@ -745,8 +741,10 @@ msgid_plural "hours"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "minutes"
-msgstr ""
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "mm"
 msgstr ""

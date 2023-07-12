@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: NSteven\n"
 "Language-Team: NSteven\n"
@@ -38,9 +38,6 @@ msgstr "가속도:"
 msgid "Accept"
 msgstr "확인"
 
-msgid "Actions"
-msgstr "툴 헤드 제어"
-
 msgid "Add profile"
 msgstr ""
 
@@ -48,12 +45,12 @@ msgid "Apply"
 msgstr "확인"
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
-msgstr "엔드스탑 높이 기준을 %.2f 높이의 옵셋으로 설정 하시겠습니까?"
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr ""
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
-msgstr "프로브 높이 기준을 %s%.2f 높이의 옵셋으로 설정 하시겠습니까?"
+msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr ""
@@ -100,10 +97,10 @@ msgstr "교정"
 msgid "Calibrated"
 msgstr "교정됨"
 
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "교정됨, 설정을 저장합니다"
-
 msgid "Calibrating"
+msgstr ""
+
+msgid "Camera"
 msgstr ""
 
 msgid "Can't set above the maximum:"
@@ -142,9 +139,6 @@ msgstr "닫기"
 msgid "Complete"
 msgstr "완료"
 
-msgid "Configuration"
-msgstr "환경 설정"
-
 msgid "Confirm Emergency Stop"
 msgstr "비상정지 확인창 표시"
 
@@ -167,8 +161,8 @@ msgstr "가열 중단"
 msgid "Date"
 msgstr "날짜"
 
-msgid "Decrease"
-msgstr "낮추기"
+msgid "Delete Directory?"
+msgstr ""
 
 msgid "Delete File?"
 msgstr ""
@@ -178,9 +172,6 @@ msgstr "선택 해제"
 
 msgid "Disable Motors"
 msgstr "모터 전원 끄기"
-
-msgid "Disable XY"
-msgstr "XY 비활성화"
 
 msgid "Distance (mm)"
 msgstr "거리 (mm)"
@@ -261,6 +252,9 @@ msgstr "글꼴 크기"
 msgid "Full Update"
 msgstr "전체 업데이트"
 
+msgid "Fullscreen"
+msgstr ""
+
 msgid "Go Back"
 msgstr "뒤로"
 
@@ -279,6 +273,9 @@ msgstr "온도 섹션에서 센서 항목 숨김."
 msgid "Hide temp."
 msgstr "온도 숨김"
 
+msgid "Home"
+msgstr "홈"
+
 msgid "Home All"
 msgstr "전체 홈"
 
@@ -294,9 +291,6 @@ msgstr "Y축 홈"
 msgid "Home Z"
 msgstr "Z축 홈"
 
-msgid "Homing"
-msgstr "툴 헤드 위치 초기화"
-
 msgid "Host"
 msgstr ""
 
@@ -306,11 +300,11 @@ msgstr "호스트 이름"
 msgid "Icon Theme"
 msgstr "아이콘 테마"
 
-msgid "Increase"
-msgstr "높이기"
-
 msgid "Initializing printer..."
 msgstr "프린터 초기화 중.."
+
+msgid "Initiate a PID calibration for:"
+msgstr ""
 
 msgid "Input Shaper"
 msgstr "인풋 셰이퍼"
@@ -332,6 +326,9 @@ msgstr "Y축 반전"
 
 msgid "Invert Z"
 msgstr "Z축 반전"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "클리퍼 재시작"
@@ -422,6 +419,9 @@ msgstr "수정됨"
 
 msgid "Moonraker: connected"
 msgstr "문래커: 연결됨"
+
+msgid "More"
+msgstr ""
 
 msgid "Move"
 msgstr "툴 헤드 이동"
@@ -541,6 +541,9 @@ msgstr "참조"
 msgid "Refresh"
 msgstr ""
 
+msgid "Rename/Move:"
+msgstr ""
+
 msgid "Restart"
 msgstr "재시작"
 
@@ -599,10 +602,6 @@ msgstr "선택"
 msgid "Send"
 msgstr "보내기"
 
-#, python-format
-msgid "Sending Power ON signal to: %s"
-msgstr "전원 켜기 신호 송신 ㅈ: %s"
-
 msgid "Set Temp"
 msgstr "온도 설정"
 
@@ -623,9 +622,6 @@ msgstr "크기"
 
 msgid "Slicer"
 msgstr "슬라이서"
-
-msgid "Slicer Time correction (%)"
-msgstr "슬라이서 시간 보정(%)"
 
 msgid "Slicer:"
 msgstr "슬라이서:"
@@ -737,8 +733,9 @@ msgid "hour"
 msgid_plural "hours"
 msgstr[0] "시간"
 
-msgid "minutes"
-msgstr "분"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
 
 msgid "mm"
 msgstr "mm"
@@ -751,6 +748,34 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Actions"
+#~ msgstr "툴 헤드 제어"
+
+#~ msgid "Configuration"
+#~ msgstr "환경 설정"
+
+#~ msgid "Homing"
+#~ msgstr "툴 헤드 위치 초기화"
+
+#~ msgid "Disable XY"
+#~ msgstr "XY 비활성화"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "슬라이서 시간 보정(%)"
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "교정됨, 설정을 저장합니다"
+
+#~ msgid "Decrease"
+#~ msgstr "낮추기"
+
+#~ msgid "Increase"
+#~ msgstr "높이기"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "전원 켜기 신호 송신 ㅈ: %s"
 
 #~ msgid "Sort:"
 #~ msgstr "종류:"
@@ -788,9 +813,6 @@ msgstr ""
 
 #~ msgid "Delete"
 #~ msgstr "삭제"
-
-#~ msgid "Home"
-#~ msgstr "홈"
 
 #~ msgid "Off"
 #~ msgstr "끄기"

@@ -123,7 +123,7 @@ class FineTunePanel(ScreenPanel):
 
         if "gcode_move" in data:
             if "homing_origin" in data["gcode_move"]:
-                self.labels['zoffset'].set_label(f'  {data["gcode_move"]["homing_origin"][2]:.2f}mm')
+                self.labels['zoffset'].set_label(f'  {data["gcode_move"]["homing_origin"][2]:.3f}mm')
             if "extrude_factor" in data["gcode_move"]:
                 self.extrusion = round(float(data["gcode_move"]["extrude_factor"]) * 100)
                 self.labels['extrudefactor'].set_label(f"  {self.extrusion:3}%")
@@ -142,7 +142,7 @@ class FineTunePanel(ScreenPanel):
                     z_offset += float(self.bs_delta)
                 else:
                     z_offset -= float(self.bs_delta)
-                self.labels['zoffset'].set_label(f'  {round(z_offset, 2):.2f}mm')
+                self.labels['zoffset'].set_label(f'  {z_offset:.3f}mm')
             self._screen._ws.klippy.gcode_script(f"SET_GCODE_OFFSET Z_ADJUST={direction}{self.bs_delta} MOVE=1")
 
     def change_bs_delta(self, widget, bs):

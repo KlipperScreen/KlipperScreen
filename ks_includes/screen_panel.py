@@ -14,7 +14,7 @@ class ScreenPanel:
     _gtk = None
     ks_printer_cfg = None
 
-    def __init__(self, screen, title):
+    def __init__(self, screen, title, **kwargs):
         self.menu = None
         ScreenPanel._screen = screen
         ScreenPanel._config = screen._config
@@ -49,22 +49,27 @@ class ScreenPanel:
     def get_file_image(self, filename, width=None, height=None, small=False):
         if not self._files.has_thumbnail(filename):
             return None
-        width = width if width is not None else self._gtk.img_width
-        height = height if height is not None else self._gtk.img_height
         loc = self._files.get_thumbnail_location(filename, small)
         if loc is None:
             return None
+        width = width if width is not None else self._gtk.img_width
+        height = height if height is not None else self._gtk.img_height
         if loc[0] == "file":
             return self._gtk.PixbufFromFile(loc[1], width, height)
         if loc[0] == "http":
             return self._gtk.PixbufFromHttp(loc[1], width, height)
         return None
 
-    def menu_item_clicked(self, widget, panel, item):
-        self._screen.show_panel(panel, item['panel'], item['name'], 1, False)
+    def menu_item_clicked(self, widget, panel_type, item):
+        if 'extra' in item:
+            self._screen.show_panel(panel_type, item['panel'], item['name'], 1, False, extra=item['extra'])
+            return
+        self._screen.show_panel(panel_type, item['panel'], item['name'], 1, False)
 
     def load_menu(self, widget, name, title=None):
+        logging.info(f"loading menu {name}")
         if f"{name}_menu" not in self.labels:
+            logging.error(f"{name} not in labels")
             return
 
         for child in self.content.get_children():

@@ -15,13 +15,19 @@ nav:
       - Macros: macros.md
       - Android.md
       - Thumbnails.md
-    - Troubleshooting.md
-    - Panels:
-      - Bed Level/Screws: Screws.md
-      - Job_status/Printing: Job_status.md
-      - Temperature: Temperature.md
-      - Z Calibrate: Zcalibrate.md
+    - Troubleshooting:
+      - First Steps/Log: Troubleshooting.md
+      - Network: Troubleshooting/Network.md
+      - Physical install: Troubleshooting/Physical_Install.md
+      - Showing Console: Troubleshooting/Showing_console.md
+      - Touch: Troubleshooting/Touch_issues.md
+      - Virtual Console Error: Troubleshooting/VC_ERROR.md
     - Screenshots: Panels.md
+    - Panels:
+      - Bed Level/Screws: Panels/Screws.md
+      - Job_status/Printing: Panels/Job_status.md
+      - Temperature: Panels/Temperature.md
+      - Z Calibrate: Panels/Zcalibrate.md
     - Theming.md
     - Translations.md
     - Breaking Changes: Changelog.md
@@ -55,6 +61,7 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.details
 
 extra:
     social:

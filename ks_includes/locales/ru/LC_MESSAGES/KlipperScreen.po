@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-29 09:28-0600\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: 2022-11-30 18:15-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: \n"
@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.2.1\n"
 "X-Poedit-Flags-xgettext: --add-comments\n"
 
@@ -44,9 +44,6 @@ msgstr "Ускорение:"
 msgid "Accept"
 msgstr "Применить"
 
-msgid "Actions"
-msgstr "Действия"
-
 msgid "Add profile"
 msgstr "Добавить профиль"
 
@@ -54,12 +51,12 @@ msgid "Apply"
 msgstr "Применить"
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
-msgstr "Применить смещение %.2f к Endstop?"
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr ""
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
-msgstr "Применить смещение %s%.2f к зонду?"
+msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Вы уверены, что хотите исключить объект?"
@@ -106,9 +103,6 @@ msgstr "Калибровка"
 msgid "Calibrated"
 msgstr "Откалиброванный"
 
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "Откалибровано, сохраните конфигурацию, чтобы сделать ее постоянной"
-
 msgid "Calibrating"
 msgstr "Калибровка"
 
@@ -151,9 +145,6 @@ msgstr "Закрыть"
 msgid "Complete"
 msgstr "Готово"
 
-msgid "Configuration"
-msgstr "Параметр"
-
 msgid "Confirm Emergency Stop"
 msgstr "Подтвердить аварийную остановку"
 
@@ -187,9 +178,6 @@ msgstr "Отменить выбор"
 
 msgid "Disable Motors"
 msgstr "Откл. моторы"
-
-msgid "Disable XY"
-msgstr "Отключить XY"
 
 msgid "Distance (mm)"
 msgstr "Расстояние (mm)"
@@ -291,6 +279,9 @@ msgstr "Скрыть датчики в Temp."
 msgid "Hide temp."
 msgstr "Скрыть температуру."
 
+msgid "Home"
+msgstr "Парковка"
+
 msgid "Home All"
 msgstr "Парковать все"
 
@@ -306,9 +297,6 @@ msgstr "Парковать Y"
 msgid "Home Z"
 msgstr "Парковать Z"
 
-msgid "Homing"
-msgstr "Парковка"
-
 msgid "Host"
 msgstr "Хост"
 
@@ -320,6 +308,9 @@ msgstr "Темы"
 
 msgid "Initializing printer..."
 msgstr "Принтер стартует..."
+
+msgid "Initiate a PID calibration for:"
+msgstr ""
 
 msgid "Input Shaper"
 msgstr "Входной шейпер"
@@ -341,6 +332,9 @@ msgstr "Инверсия Y"
 
 msgid "Invert Z"
 msgstr "Инверсия Z"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipper Рестарт"
@@ -431,6 +425,9 @@ msgstr "Изменено"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: подключен"
+
+msgid "More"
+msgstr ""
 
 msgid "Move"
 msgstr "Двигать"
@@ -636,9 +633,6 @@ msgstr "Размер"
 msgid "Slicer"
 msgstr "Слайсер"
 
-msgid "Slicer Time correction (%)"
-msgstr "Коррекция времени Слайсер (%)"
-
 msgid "Slicer:"
 msgstr "Слайсер:"
 
@@ -753,8 +747,11 @@ msgstr[0] "час"
 msgstr[1] "часа"
 msgstr[2] "часа"
 
-msgid "minutes"
-msgstr "минут"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "mm"
 msgstr "мм"
@@ -767,6 +764,24 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм/с³"
+
+#~ msgid "Actions"
+#~ msgstr "Действия"
+
+#~ msgid "Configuration"
+#~ msgstr "Параметр"
+
+#~ msgid "Homing"
+#~ msgstr "Парковка"
+
+#~ msgid "Disable XY"
+#~ msgstr "Отключить XY"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "Коррекция времени Слайсер (%)"
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "Откалибровано, сохраните конфигурацию, чтобы сделать ее постоянной"
 
 #~ msgid "Decrease"
 #~ msgstr "Уменьшить"
@@ -814,9 +829,6 @@ msgstr "мм/с³"
 
 #~ msgid "Delete"
 #~ msgstr "Удалить"
-
-#~ msgid "Home"
-#~ msgstr "Парковка"
 
 #~ msgid "Off"
 #~ msgstr "Выкл"

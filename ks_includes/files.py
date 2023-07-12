@@ -130,6 +130,7 @@ class KlippyFiles:
             self.add_file(data['item'], False)
             self.remove_file(data['source_item']['path'], False)
             self.run_callbacks(newfiles=[data['item']['path']], deletedfiles=[data['source_item']['path']])
+        return False
 
     def remove_file_callback(self, callback):
         if callback in self.callbacks:
@@ -165,6 +166,7 @@ class KlippyFiles:
 
     def refresh_files(self):
         self._screen._ws.klippy.get_file_list(self._callback)
+        return False
 
     def remove_file(self, filename, notify=True):
         if filename not in self.filelist:

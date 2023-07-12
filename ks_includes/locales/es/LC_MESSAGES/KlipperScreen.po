@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
-"PO-Revision-Date: 2022-11-30 18:10-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
+"PO-Revision-Date: 2023-07-02 16:31-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -43,9 +43,6 @@ msgstr "Aceleración:"
 msgid "Accept"
 msgstr "Aceptar"
 
-msgid "Actions"
-msgstr "Acciones"
-
 msgid "Add profile"
 msgstr "Agregar perfil"
 
@@ -53,12 +50,12 @@ msgid "Apply"
 msgstr "Aplicar"
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
-msgstr "Aplicar %.2f desfase al final de carrera?"
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr "Aplicar %s%.3f al fin de carrera?"
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
-msgstr "Aplicar %s%.2f desfase al sensor?"
+msgid "Apply %s%.3f offset to Probe?"
+msgstr "Aplicar %s%.3f al sensor?"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "¿Está seguro de excluir este objeto?"
@@ -105,11 +102,11 @@ msgstr "Calibrar"
 msgid "Calibrated"
 msgstr "Calibrado"
 
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "Calibrado, guarde su configuración para hacerlo permanente"
-
 msgid "Calibrating"
 msgstr "Calibrando"
+
+msgid "Camera"
+msgstr "Camara"
 
 msgid "Can't set above the maximum:"
 msgstr "Error: Valor sobre el máximo:"
@@ -147,9 +144,6 @@ msgstr "Cerrar"
 msgid "Complete"
 msgstr "Completado"
 
-msgid "Configuration"
-msgstr "Ajustes"
-
 msgid "Confirm Emergency Stop"
 msgstr "Confirmar Emergencia"
 
@@ -172,8 +166,8 @@ msgstr "Enfriar"
 msgid "Date"
 msgstr "Fecha"
 
-msgid "Decrease"
-msgstr "Disminuir"
+msgid "Delete Directory?"
+msgstr "Borrar Carpeta?"
 
 msgid "Delete File?"
 msgstr "¿Borrar archivo?"
@@ -183,9 +177,6 @@ msgstr "Deseleccionar"
 
 msgid "Disable Motors"
 msgstr "Desactivar Motores"
-
-msgid "Disable XY"
-msgstr "Desactivar XY"
 
 msgid "Distance (mm)"
 msgstr "Distancia (mm)"
@@ -266,6 +257,9 @@ msgstr "Tamaño del texto"
 msgid "Full Update"
 msgstr "Actualizar Todo"
 
+msgid "Fullscreen"
+msgstr "Pantalla Completa"
+
 msgid "Go Back"
 msgstr "Volver"
 
@@ -284,6 +278,9 @@ msgstr "Ocultar sensores en Temp."
 msgid "Hide temp."
 msgstr "Ocultar temp."
 
+msgid "Home"
+msgstr "Inicio"
+
 msgid "Home All"
 msgstr "Origen XYZ"
 
@@ -299,9 +296,6 @@ msgstr "Origen Y"
 msgid "Home Z"
 msgstr "Origen Z"
 
-msgid "Homing"
-msgstr "Origen"
-
 msgid "Host"
 msgstr "Anfitrión"
 
@@ -311,11 +305,11 @@ msgstr "Hostname"
 msgid "Icon Theme"
 msgstr "Tema de Iconos"
 
-msgid "Increase"
-msgstr "Aumentar"
-
 msgid "Initializing printer..."
 msgstr "Iniciando Impresora..."
+
+msgid "Initiate a PID calibration for:"
+msgstr "Iniciar calibración PID para:"
 
 msgid "Input Shaper"
 msgstr "Corrección de Resonancias"
@@ -337,6 +331,10 @@ msgstr "Invertir Y"
 
 msgid "Invert Z"
 msgstr "Invertir Z"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
+"Puede tardar más de 5 minutos dependiendo de la potencia del calentador."
 
 msgid "Klipper Restart"
 msgstr "Reiniciar Klipper"
@@ -427,6 +425,9 @@ msgstr "Modificado"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: conectado"
+
+msgid "More"
+msgstr "Más"
 
 msgid "Move"
 msgstr "Mover"
@@ -549,6 +550,9 @@ msgstr "Referencia"
 msgid "Refresh"
 msgstr "Actualizar"
 
+msgid "Rename/Move:"
+msgstr "Renombrar/Mover:"
+
 msgid "Restart"
 msgstr "Reiniciar"
 
@@ -607,10 +611,6 @@ msgstr "Seleccionar"
 msgid "Send"
 msgstr "Enviar"
 
-#, python-format
-msgid "Sending Power ON signal to: %s"
-msgstr "Enviando señal de encendido a: %s"
-
 msgid "Set Temp"
 msgstr "Establecer Temp"
 
@@ -631,9 +631,6 @@ msgstr "Tamaño"
 
 msgid "Slicer"
 msgstr "Slicer"
-
-msgid "Slicer Time correction (%)"
-msgstr "Corrección del tiempo del Slicer (%)"
 
 msgid "Slicer:"
 msgstr "Slicer:"
@@ -747,8 +744,10 @@ msgid_plural "hours"
 msgstr[0] "hora"
 msgstr[1] "horas"
 
-msgid "minutes"
-msgstr "minutos"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "minuto"
+msgstr[1] "minutos"
 
 msgid "mm"
 msgstr "mm"
@@ -761,6 +760,34 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Actions"
+#~ msgstr "Acciones"
+
+#~ msgid "Configuration"
+#~ msgstr "Ajustes"
+
+#~ msgid "Homing"
+#~ msgstr "Origen"
+
+#~ msgid "Disable XY"
+#~ msgstr "Desactivar XY"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "Corrección del tiempo del Slicer (%)"
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "Calibrado, guarde su configuración para hacerlo permanente"
+
+#~ msgid "Decrease"
+#~ msgstr "Disminuir"
+
+#~ msgid "Increase"
+#~ msgstr "Aumentar"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "Enviando señal de encendido a: %s"
 
 #~ msgid "KlipperScreen will be restarted"
 #~ msgstr "KlipperScreen se reiniciará"
@@ -801,9 +828,6 @@ msgstr "mm³/s"
 
 #~ msgid "Delete"
 #~ msgstr "Borrar"
-
-#~ msgid "Home"
-#~ msgstr "Inicio"
 
 #~ msgid "Off"
 #~ msgstr "Apagar"

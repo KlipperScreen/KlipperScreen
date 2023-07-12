@@ -67,8 +67,8 @@ class BedMeshPanel(ScreenPanel):
 
     def activate(self):
         self.load_meshes()
-        with contextlib.suppress(KeyError):
-            self.activate_mesh(self._printer.get_stat("bed_mesh", "profile_name"))
+        if not self._printer.get_stat('bed_mesh', 'profile_name') and 'default' in self.profiles:
+            self.send_load_mesh(None, 'default')  # this is not the default behaviour of klipper anymore
 
     def activate_mesh(self, profile):
         if self.active_mesh is not None:

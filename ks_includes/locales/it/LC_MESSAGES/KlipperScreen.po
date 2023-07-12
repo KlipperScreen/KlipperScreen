@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pappicio\n"
 "Language-Team: \n"
@@ -38,9 +38,6 @@ msgstr "Accelerazione:"
 msgid "Accept"
 msgstr "Accetta"
 
-msgid "Actions"
-msgstr "Azioni"
-
 msgid "Add profile"
 msgstr "Aggiungi profilo"
 
@@ -48,12 +45,12 @@ msgid "Apply"
 msgstr "Applicare"
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
-msgstr "Applicare l'offset %.2f a Endstop?"
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr ""
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
-msgstr "Applicare l'offset %s%.2f a Probe?"
+msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Sei sicuro di voler escludere l'oggetto?"
@@ -100,11 +97,11 @@ msgstr "Calibra"
 msgid "Calibrated"
 msgstr "Calibrato"
 
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "Calibrato, salva la configurazione per renderla permanente"
-
 msgid "Calibrating"
 msgstr "Calibratura"
+
+msgid "Camera"
+msgstr ""
 
 msgid "Can't set above the maximum:"
 msgstr "Impossibile impostare al di sopra del massimo:"
@@ -142,9 +139,6 @@ msgstr "Chiudi"
 msgid "Complete"
 msgstr "Completo"
 
-msgid "Configuration"
-msgstr "Impostazioni"
-
 msgid "Confirm Emergency Stop"
 msgstr "Conferma arresto di emergenza"
 
@@ -167,8 +161,8 @@ msgstr "Raffredda"
 msgid "Date"
 msgstr "Data"
 
-msgid "Decrease"
-msgstr "Diminuisci"
+msgid "Delete Directory?"
+msgstr ""
 
 msgid "Delete File?"
 msgstr "Cancella il file?"
@@ -178,9 +172,6 @@ msgstr "Deseleziona"
 
 msgid "Disable Motors"
 msgstr "Disab. Motori"
-
-msgid "Disable XY"
-msgstr "Disab. XY"
 
 msgid "Distance (mm)"
 msgstr "Distanza (mm)"
@@ -261,6 +252,9 @@ msgstr "Dimensione del testo"
 msgid "Full Update"
 msgstr "Completo Aggiornare"
 
+msgid "Fullscreen"
+msgstr ""
+
 msgid "Go Back"
 msgstr "Indietro"
 
@@ -279,6 +273,9 @@ msgstr "Nascondi sensori in Temp."
 msgid "Hide temp."
 msgstr "Nascondi temp."
 
+msgid "Home"
+msgstr "Inizio"
+
 msgid "Home All"
 msgstr "Home XYZ"
 
@@ -294,9 +291,6 @@ msgstr "Home Y"
 msgid "Home Z"
 msgstr "Home Z"
 
-msgid "Homing"
-msgstr "Homing"
-
 msgid "Host"
 msgstr ""
 
@@ -306,11 +300,11 @@ msgstr "Hostname"
 msgid "Icon Theme"
 msgstr "Tema Icone"
 
-msgid "Increase"
-msgstr "Incrementa"
-
 msgid "Initializing printer..."
 msgstr "Inizializzo stampante..."
+
+msgid "Initiate a PID calibration for:"
+msgstr ""
 
 msgid "Input Shaper"
 msgstr ""
@@ -332,6 +326,9 @@ msgstr "Inverti Y"
 
 msgid "Invert Z"
 msgstr "Inverti Z"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipper Riavvio"
@@ -422,6 +419,9 @@ msgstr "Modificato"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: connesso"
+
+msgid "More"
+msgstr ""
 
 msgid "Move"
 msgstr "Muovi"
@@ -544,6 +544,9 @@ msgstr "Riferimento"
 msgid "Refresh"
 msgstr "Ricaricare"
 
+msgid "Rename/Move:"
+msgstr ""
+
 msgid "Restart"
 msgstr "Riavvia"
 
@@ -602,10 +605,6 @@ msgstr "Selezionare"
 msgid "Send"
 msgstr "Spedire"
 
-#, python-format
-msgid "Sending Power ON signal to: %s"
-msgstr "Invio del segnale di accensione a: %s"
-
 msgid "Set Temp"
 msgstr "Imposta temp"
 
@@ -626,9 +625,6 @@ msgstr "Grandezza"
 
 msgid "Slicer"
 msgstr "Slicer"
-
-msgid "Slicer Time correction (%)"
-msgstr "Affettatrice Correzione del tempo (%)"
 
 msgid "Slicer:"
 msgstr "Slicer:"
@@ -742,8 +738,10 @@ msgid_plural "hours"
 msgstr[0] "ora"
 msgstr[1] "ore"
 
-msgid "minutes"
-msgstr "minuti"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "mm"
 msgstr "mm"
@@ -756,6 +754,34 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Actions"
+#~ msgstr "Azioni"
+
+#~ msgid "Configuration"
+#~ msgstr "Impostazioni"
+
+#~ msgid "Homing"
+#~ msgstr "Homing"
+
+#~ msgid "Disable XY"
+#~ msgstr "Disab. XY"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "Affettatrice Correzione del tempo (%)"
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "Calibrato, salva la configurazione per renderla permanente"
+
+#~ msgid "Decrease"
+#~ msgstr "Diminuisci"
+
+#~ msgid "Increase"
+#~ msgstr "Incrementa"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "Invio del segnale di accensione a: %s"
 
 #~ msgid "Sort:"
 #~ msgstr "Ordinare:"
@@ -793,9 +819,6 @@ msgstr "mm³/s"
 
 #~ msgid "Delete"
 #~ msgstr "Elimina"
-
-#~ msgid "Home"
-#~ msgstr "Inizio"
 
 #~ msgid "Off"
 #~ msgstr "Off"

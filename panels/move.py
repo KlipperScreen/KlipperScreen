@@ -28,10 +28,7 @@ class MovePanel(ScreenPanel):
             'y-': self._gtk.Button("arrow-down", "Y-", "color2"),
             'z+': self._gtk.Button("z-farther", "Z+", "color3"),
             'z-': self._gtk.Button("z-closer", "Z-", "color3"),
-            'home': self._gtk.Button("home", _("Home All"), "color4"),
-            'home_xy': self._gtk.Button("home", _("Home XY"), "color4"),
-            'z_tilt': self._gtk.Button("z-tilt", _("Z Tilt"), "color4"),
-            'quad_gantry_level': self._gtk.Button("z-tilt", _("Quad Gantry Level"), "color4"),
+            'home': self._gtk.Button("home", _("Home"), "color4"),
             'motors_off': self._gtk.Button("motor-off", _("Disable Motors"), "color4"),
         }
         self.buttons['x+'].connect("clicked", self.move, "X", "+")
@@ -41,9 +38,6 @@ class MovePanel(ScreenPanel):
         self.buttons['z+'].connect("clicked", self.move, "Z", "+")
         self.buttons['z-'].connect("clicked", self.move, "Z", "-")
         self.buttons['home'].connect("clicked", self.home)
-        self.buttons['home_xy'].connect("clicked", self.homexy)
-        self.buttons['z_tilt'].connect("clicked", self.z_tilt)
-        self.buttons['quad_gantry_level'].connect("clicked", self.quad_gantry_level)
         script = {"script": "M18"}
         self.buttons['motors_off'].connect("clicked", self._screen._confirm_send_action,
                                            _("Are you sure you wish to disable motors?"),
@@ -77,15 +71,7 @@ class MovePanel(ScreenPanel):
             grid.attach(self.buttons['z-'], 3, 1, 1, 1)
 
         grid.attach(self.buttons['home'], 0, 0, 1, 1)
-
-        if self._printer.config_section_exists("z_tilt"):
-            grid.attach(self.buttons['z_tilt'], 2, 0, 1, 1)
-        elif self._printer.config_section_exists("quad_gantry_level"):
-            grid.attach(self.buttons['quad_gantry_level'], 2, 0, 1, 1)
-        elif "delta" in self._printer.get_config_section("printer")['kinematics']:
-            grid.attach(self.buttons['motors_off'], 2, 0, 1, 1)
-        else:
-            grid.attach(self.buttons['home_xy'], 2, 0, 1, 1)
+        grid.attach(self.buttons['motors_off'], 2, 0, 1, 1)
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
@@ -153,7 +139,7 @@ class MovePanel(ScreenPanel):
             self.add_option('options', self.settings, name, option[name])
 
     def process_busy(self, busy):
-        buttons = ("home", "home_xy", "z_tilt", "quad_gantry_level")
+        buttons = ("home", "motors_off")
         for button in buttons:
             if button in self.buttons:
                 self.buttons[button].set_sensitive(not busy)
@@ -266,13 +252,10 @@ class MovePanel(ScreenPanel):
         return False
 
     def home(self, widget):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
-
-    def homexy(self, widget):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME_XY)
-
-    def z_tilt(self, widget):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_TILT)
-
-    def quad_gantry_level(self, widget):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.QUAD_GANTRY_LEVEL)
+        if "delta" in self._printer.get_config_section("printer")['kinematics']:
+            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+            return
+        name = "homing"
+        disname = self._screen._config.get_menu_name("move", name)
+        menuitems = self._screen._config.get_menu_items("move", name)
+        self._screen.show_panel(name, "menu", disname, 1, False, items=menuitems)

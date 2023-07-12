@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
-"PO-Revision-Date: 2022-11-28 11:37-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
+"PO-Revision-Date: 2023-07-07 16:44+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -16,76 +16,73 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.1\n"
+"X-Generator: Poedit 3.3\n"
 
 #, python-format
 msgid "%s will be updated to version"
-msgstr "%s 將更新到版本"
+msgstr "%s 將被更新為版本"
 
 msgid "(default)"
 msgstr "(預設)"
 
 msgid "24 Hour Time"
-msgstr "24 小時制"
+msgstr "使用24小時制"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr ""
+msgstr "重啟Klipper韌體可能會解決這個問題。"
 
 msgid "ADXL Not Configured"
-msgstr ""
+msgstr "未設定ADXL"
 
 msgid "Abort"
-msgstr "中止"
+msgstr "取消"
 
 msgid "Acceleration:"
-msgstr ""
+msgstr "加速度"
 
 msgid "Accept"
 msgstr "接受"
 
-msgid "Actions"
-msgstr "動作"
-
 msgid "Add profile"
-msgstr ""
+msgstr "新增設定檔案"
 
 msgid "Apply"
-msgstr ""
+msgstr "應用"
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
-msgstr ""
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr "將 %s%.3f 偏移量應用於限位？"
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
-msgstr ""
+msgid "Apply %s%.3f offset to Probe?"
+msgstr "將 %s%.3f 偏移量應用於探針？"
 
 msgid "Are you sure do you want to exclude the object?"
-msgstr ""
+msgstr "你確定要排除該目標嗎？"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr "您確定要運行緊急停止嗎？"
+msgstr "您確定要緊急停止嗎？"
 
 msgid "Are you sure you wish to cancel this print?"
-msgstr "您確定要取消列印嗎?"
+msgstr "您確定要取消列印嗎？"
 
 msgid "Are you sure you wish to disable motors?"
-msgstr "您確定要禁用電機嗎？"
+msgstr "您確定要關閉電機嗎？"
 
 msgid "Are you sure you wish to reboot the system?"
-msgstr "您確定要重新啟動系統嗎?"
+msgstr "您確定要重啟系統嗎？"
 
 msgid "Are you sure you wish to shutdown the system?"
-msgstr "您確定要關閉系統嗎?"
+msgstr "您確定要關閉系統嗎？"
 
 msgid "Auto"
-msgstr "汽車"
+msgstr "自動"
 
 msgid "Auto-calibrate"
-msgstr ""
+msgstr "自動校準"
 
 msgid "Auto-close notifications"
-msgstr ""
+msgstr "自動關閉通知"
 
 msgid "Auto-scroll"
 msgstr "自動滾屏"
@@ -94,25 +91,25 @@ msgid "Bed Level"
 msgstr "熱床調平"
 
 msgid "Bed Mesh"
-msgstr "網格床"
+msgstr "床網"
 
 msgid "Bed screw configuration:"
-msgstr ""
+msgstr "熱床螺絲設定："
 
 msgid "Calibrate"
-msgstr "校正"
+msgstr "校準"
 
 msgid "Calibrated"
-msgstr ""
-
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "校準，保存配置以使其永久化"
+msgstr "已校準"
 
 msgid "Calibrating"
-msgstr ""
+msgstr "正在校準"
+
+msgid "Camera"
+msgstr "相機"
 
 msgid "Can't set above the maximum:"
-msgstr "不能設置超過最大值："
+msgstr "設定值超出最大值："
 
 msgid "Cancel"
 msgstr "取消"
@@ -124,22 +121,22 @@ msgid "Cancelled"
 msgstr "已取消"
 
 msgid "Cancelling"
-msgstr "取消"
+msgstr "正在取消"
 
 msgid "Cannot connect to Moonraker"
-msgstr "無法連接到 Moonraker"
+msgstr "無法連線到Moonraker"
 
 msgid "Channel"
-msgstr "通道"
+msgstr "群組"
 
 msgid "Check ADXL Wiring"
-msgstr ""
+msgstr "檢查ADXL的接線"
 
 msgid "Checking for updates, please wait..."
-msgstr ""
+msgstr "正在檢查更新，請稍等..."
 
 msgid "Clear"
-msgstr ""
+msgstr "清除"
 
 msgid "Close"
 msgstr "關閉"
@@ -147,18 +144,15 @@ msgstr "關閉"
 msgid "Complete"
 msgstr "完成"
 
-msgid "Configuration"
-msgstr "配置"
-
 msgid "Confirm Emergency Stop"
-msgstr "確認緊急停止"
+msgstr "緊急停止需確認"
 
 msgid "Connected"
-msgstr "連接"
+msgstr "已連線"
 
 #, python-format
 msgid "Connecting to %s"
-msgstr "連接到 %s"
+msgstr "連線到 %s"
 
 msgid "Console"
 msgstr "控制台"
@@ -172,78 +166,75 @@ msgstr "冷卻"
 msgid "Date"
 msgstr "日期"
 
-msgid "Decrease"
-msgstr "減少"
+msgid "Delete Directory?"
+msgstr "刪除資料夾？"
 
 msgid "Delete File?"
-msgstr ""
+msgstr "刪除檔案？"
 
 msgid "Deselect"
 msgstr "取消選擇"
 
 msgid "Disable Motors"
-msgstr "禁用步進電機"
-
-msgid "Disable XY"
-msgstr "禁用 XY"
+msgstr "關閉電機"
 
 msgid "Distance (mm)"
-msgstr "距離(mm)"
+msgstr "擠出長度（mm）"
 
 #, python-format
 msgid "Do you want to recover %s?"
-msgstr "您想恢復 %s 嗎?"
+msgstr "你想恢復 %s 嗎？"
 
 msgid "Elapsed:"
-msgstr "已耗時間："
+msgstr "已用時間："
 
 msgid "Error"
 msgstr "錯誤"
 
 msgid "Estimated Time Method"
-msgstr "預估時間方法"
+msgstr "估算剩餘時間方式"
 
 msgid "Exclude Object"
-msgstr ""
+msgstr "排除目標"
 
 msgid "Extra Large"
-msgstr ""
+msgstr "特大"
 
 msgid "Extrude"
 msgstr "擠出機"
 
 msgid "Extrusion +"
-msgstr "擠出 +"
+msgstr "擠壓 +"
 
 msgid "Extrusion -"
-msgstr "擠出 -"
+msgstr "擠壓 -"
 
 msgid "Failed, adjust position first"
-msgstr "失敗，先調整位置"
+msgstr "失敗，請先調整位置"
 
 msgid "Fan"
 msgstr "風扇"
 
 msgid "Filament Used"
-msgstr "已消耗的耗材"
+msgstr "已消耗耗材"
 
 msgid "Filament total:"
-msgstr ""
+msgstr "使用耗材總數："
 
 msgid "Filament used:"
-msgstr ""
+msgstr "使用耗材："
 
 msgid "Filament:"
-msgstr ""
+msgstr "耗材："
 
 msgid "File"
 msgstr "檔案"
 
 msgid "File:"
-msgstr ""
+msgstr "檔案："
 
 msgid "Finding ADXL"
-msgstr ""
+msgstr "查詢ADXL"
 
 msgid "Fine Tuning"
 msgstr "微調"
@@ -252,136 +243,142 @@ msgid "Finish"
 msgstr "完成"
 
 msgid "Firmware Restart"
-msgstr "Firmware 重新啟動"
+msgstr "重啟Klipper韌體"
 
 msgid "Flow:"
-msgstr ""
+msgstr "流量："
 
 msgid "Flowrate:"
-msgstr ""
+msgstr "流速："
 
 msgid "Font Size"
-msgstr "字體大小"
+msgstr "字型大小"
 
 msgid "Full Update"
-msgstr "滿的 更新"
+msgstr "全部更新"
+
+msgid "Fullscreen"
+msgstr "全螢幕"
 
 msgid "Go Back"
 msgstr "返回"
 
 msgid "Height:"
-msgstr ""
+msgstr "高度："
 
 msgid "Hidden"
-msgstr "隱"
+msgstr "隱藏的"
 
 msgid "Hide"
 msgstr "隱藏"
 
 msgid "Hide sensors in Temp."
-msgstr "在溫度中隱藏傳感器。"
+msgstr "在溫度顯示中隱藏其他感測器"
 
 msgid "Hide temp."
-msgstr ""
+msgstr "隱藏溫度"
 
-msgid "Home All"
-msgstr "歸零全部"
-
-msgid "Home X"
-msgstr "歸零 X"
-
-msgid "Home XY"
-msgstr "歸零 XY"
-
-msgid "Home Y"
-msgstr "歸零 Y"
-
-msgid "Home Z"
-msgstr "歸零 Z"
-
-msgid "Homing"
+msgid "Home"
 msgstr "歸零"
 
+msgid "Home All"
+msgstr "全部歸零"
+
+msgid "Home X"
+msgstr "X軸歸零"
+
+msgid "Home XY"
+msgstr "XY軸歸零"
+
+msgid "Home Y"
+msgstr "Y軸歸零"
+
+msgid "Home Z"
+msgstr "Z軸歸零"
+
 msgid "Host"
-msgstr ""
+msgstr "主機"
 
 msgid "Hostname"
-msgstr "主機名稱"
+msgstr "主機名"
 
 msgid "Icon Theme"
-msgstr "圖標主題"
-
-msgid "Increase"
-msgstr "增加"
+msgstr "主題"
 
 msgid "Initializing printer..."
-msgstr "初始化列印機中.."
+msgstr "正在初始化列印機..."
+
+msgid "Initiate a PID calibration for:"
+msgstr "啟動PID校準："
 
 msgid "Input Shaper"
-msgstr ""
+msgstr "共振補償"
 
 msgid "Interface"
 msgstr "介面"
 
 msgid "Invalid"
-msgstr "無效的"
+msgstr "無效"
 
 msgid "Invalid password"
-msgstr ""
+msgstr "密碼無效"
 
 msgid "Invert X"
-msgstr "反轉 X"
+msgstr "反轉X軸"
 
 msgid "Invert Y"
-msgstr "反轉 Y"
+msgstr "反轉Y軸"
 
 msgid "Invert Z"
-msgstr "反轉 Z"
+msgstr "反轉Z軸"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr "這可能需要5分鐘以上的時間，這取決於加熱器的功率。"
 
 msgid "Klipper Restart"
-msgstr "Klipper 重新啟動"
+msgstr "重啟Klipper"
 
 msgid "Klipper has disconnected"
-msgstr "Klipper 已斷開連結"
+msgstr "Klipper已斷開連線"
 
 msgid "Klipper has encountered an error."
 msgstr "Klipper遇到一個錯誤。"
 
 msgid "Klipper has shutdown"
-msgstr "Klipper 已經關閉"
+msgstr "Klipper已關閉"
 
 msgid "Klipper is attempting to start"
-msgstr "Klipper 正在嘗試重新啟動"
+msgstr "Klipper正在啟動"
 
 msgid "Klipper will reboot"
-msgstr "Klipper 將重新啟動"
+msgstr "Klipper將重新啟動"
 
 msgid "KlipperScreen will reboot"
-msgstr "KlipperScreen 將重新啟動"
+msgstr "KlipperScreen將重新啟動"
 
 msgid "Language"
-msgstr "語言"
+msgstr "介面語言"
 
 msgid "Large"
-msgstr "大的"
+msgstr "大"
 
 msgid "Layer:"
-msgstr ""
+msgstr "層："
 
 msgid "Left:"
-msgstr "剩下時間："
+msgstr "剩餘時間："
 
 msgid "Limits"
-msgstr "限制"
+msgstr "列印機限制"
 
 msgid "Load"
-msgstr "載入"
+msgstr "載入耗材"
 
 msgid "Lower Nozzle"
 msgstr "降低噴嘴"
 
 msgid "Macro shortcut on sidebar"
-msgstr "在側邊欄上顯示巨集快捷鍵"
+msgstr "顯示側邊欄巨集按鈕"
 
 msgid "Macros"
 msgstr "巨集"
@@ -390,28 +387,28 @@ msgid "Main Menu"
 msgstr "主選單"
 
 msgid "Max"
-msgstr ""
+msgstr "最大"
 
 msgid "Max Acceleration"
-msgstr ""
+msgstr "最大加速度"
 
 msgid "Max Acceleration to Deceleration"
-msgstr "最大加速到減速"
+msgstr "最大加速至減速"
 
 msgid "Max Velocity"
 msgstr "最大速度"
 
 msgid "Maximum"
-msgstr ""
+msgstr "最大"
 
 msgid "Measure Both"
-msgstr ""
+msgstr "同時測量"
 
 msgid "Measure X"
-msgstr ""
+msgstr "測量X軸"
 
 msgid "Measure Y"
-msgstr ""
+msgstr "測量Y軸"
 
 msgid "Medium"
 msgstr "中"
@@ -420,13 +417,16 @@ msgid "Menu"
 msgstr "選單"
 
 msgid "Mesh calibrate"
-msgstr ""
+msgstr "床網校準"
 
 msgid "Modified"
-msgstr "修改"
+msgstr "已修改"
 
 msgid "Moonraker: connected"
-msgstr "Moonraker：已連接"
+msgstr "Moonraker：已連線"
+
+msgid "More"
+msgstr "更多設定"
 
 msgid "Move"
 msgstr "移動"
@@ -441,15 +441,15 @@ msgid "Network"
 msgstr "網路"
 
 msgid "Never"
-msgstr ""
+msgstr "從不"
 
 msgid "New"
-msgstr ""
+msgstr "新的值"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
-msgstr ""
+msgstr "不支援自動檢測，需要在klpperscreen.conf中進行設定"
 
 msgid "Nothing selected"
 msgstr "未選擇任何內容"
@@ -459,17 +459,17 @@ msgid "Outdated by %d"
 msgstr "已過時 %d"
 
 msgid "PSK for"
-msgstr "PSK 用於"
+msgstr "PSK"
 
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
-msgstr[0] "包將被更新"
+msgstr[0] "軟體包將被更新"
 
 msgid "Part Fan"
-msgstr ""
+msgstr "模型風扇"
 
 msgid "Password saved"
-msgstr "密碼已保存"
+msgstr "密碼已儲存"
 
 msgid "Pause"
 msgstr "暫停"
@@ -478,13 +478,13 @@ msgid "Paused"
 msgstr "已暫停"
 
 msgid "Perform a full upgrade?"
-msgstr "執行全面升級？"
+msgstr "是否全部升級？"
 
 msgid "Pins"
-msgstr ""
+msgstr "引腳"
 
 msgid "Please recompile and flash the micro-controller."
-msgstr "請重新編譯並刷寫微控制器。"
+msgstr "請重新編譯並燒錄微控制器。"
 
 msgid "Power"
 msgstr "電源"
@@ -493,7 +493,7 @@ msgid "Power On Printer"
 msgstr "啟動列印機"
 
 msgid "Pressure Advance:"
-msgstr ""
+msgstr "壓力推進："
 
 msgid "Print"
 msgstr "列印"
@@ -505,70 +505,73 @@ msgid "Print Time"
 msgstr "列印時間"
 
 msgid "Printer"
-msgstr ""
+msgstr "列印機"
 
 msgid "Printer Connections"
-msgstr "連接列印機"
+msgstr "列印機連線"
 
 msgid "Printer Select"
-msgstr ""
+msgstr "列印機選擇"
 
 msgid "Printing"
 msgstr "列印中"
 
 msgid "Probe Offset"
-msgstr ""
+msgstr "探針偏移"
 
 msgid "Profile Name:"
-msgstr "配置檔案名稱:"
+msgstr "設定檔名稱："
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "在尋求幫助時，請提供KlipperScreen.log檔案。\n"
 
 msgid "Quad Gantry Level"
-msgstr "龍門調平"
+msgstr "龍門架調平"
 
 msgid "Raise Nozzle"
-msgstr "上升噴嘴"
+msgstr "升高噴嘴"
 
 msgid "Recover"
-msgstr ""
+msgstr "恢復"
 
 msgid "Recover Hard"
-msgstr "恢復 Hard"
+msgstr "硬恢復(git recover hard)"
 
 msgid "Recover Soft"
-msgstr "恢復 Soft"
+msgstr "軟恢復(git reset)"
 
 msgid "Reference"
 msgstr "參考"
 
 msgid "Refresh"
-msgstr ""
+msgstr "重新整理"
+
+msgid "Rename/Move:"
+msgstr "重新命名/移動："
 
 msgid "Restart"
-msgstr "重新啟動"
+msgstr "重啟"
 
 msgid "Resume"
-msgstr "恢復"
+msgstr "繼續"
 
 msgid "Retract"
-msgstr "回抽"
+msgstr "抽回"
 
 msgid "Retraction"
-msgstr ""
+msgstr "回抽"
 
 msgid "Retraction Length"
-msgstr ""
+msgstr "回抽長度"
 
 msgid "Retraction Speed"
-msgstr ""
+msgstr "回抽速度"
 
 msgid "Retry"
-msgstr ""
+msgstr "重試"
 
 msgid "Retrying"
-msgstr ""
+msgstr "正在重試"
 
 msgid "Save"
 msgstr "儲存"
@@ -577,36 +580,32 @@ msgid "Save Config"
 msgstr "儲存設定"
 
 msgid "Save Z"
-msgstr ""
+msgstr "儲存Z軸"
 
 msgid "Save configuration?"
-msgstr ""
+msgstr "是否儲存設定？"
 
 msgid "Saved"
-msgstr ""
+msgstr "已儲存"
 
 #, python-format
 msgid "Saved offset: %s"
-msgstr ""
+msgstr "儲存偏移：%s"
 
 msgid "Screen DPMS"
-msgstr "屏幕DPMS"
+msgstr "螢幕省電管理系統"
 
 msgid "Screen Power Off Time"
-msgstr "螢幕關閉時間"
+msgstr "關閉螢幕時間"
 
 msgid "Screws Adjust"
-msgstr "Screws 調整"
+msgstr "螺絲調整"
 
 msgid "Select"
 msgstr "選擇"
 
 msgid "Send"
 msgstr "發送"
-
-#, python-format
-msgid "Sending Power ON signal to: %s"
-msgstr "正在發送通電信號到：%s"
 
 msgid "Set Temp"
 msgstr "設定溫度"
@@ -615,31 +614,28 @@ msgid "Settings"
 msgstr "設定"
 
 msgid "Show"
-msgstr "展示"
+msgstr "顯示"
 
 msgid "Show Heater Power"
-msgstr ""
+msgstr "顯示加熱器功率"
 
 msgid "Shutdown"
-msgstr ""
+msgstr "關閉"
 
 msgid "Size"
 msgstr "大小"
 
 msgid "Slicer"
-msgstr "切片"
-
-msgid "Slicer Time correction (%)"
-msgstr "切片器時間校正 (%)"
+msgstr "切片軟體"
 
 msgid "Slicer:"
-msgstr ""
+msgstr "切片軟體："
 
 msgid "Small"
-msgstr "小的"
+msgstr "小"
 
 msgid "Speed (mm/s)"
-msgstr "速度（mm/s）"
+msgstr "速度(mm/s)"
 
 msgid "Speed +"
 msgstr "速度 +"
@@ -648,16 +644,16 @@ msgid "Speed -"
 msgstr "速度 -"
 
 msgid "Speed:"
-msgstr ""
+msgstr "速度："
 
 msgid "Square Corner Velocity"
-msgstr "方角速度"
+msgstr "直角速度"
 
 msgid "Start"
 msgstr "開始"
 
 msgid "Starting WiFi Association"
-msgstr "啟動 WiFi 關聯"
+msgstr "開始WiFi連線"
 
 msgid "Starting recovery for"
 msgstr "開始恢復"
@@ -669,71 +665,71 @@ msgid "System"
 msgstr "系統"
 
 msgid "System Restart"
-msgstr "系統重新啟動"
+msgstr "重啟系統"
 
 msgid "System Shutdown"
 msgstr "關閉系統"
 
 msgid "Temp (°C)"
-msgstr "溫度（°C）"
+msgstr "溫度 (°C)"
 
 msgid "Temperature"
 msgstr "溫度"
 
 msgid "Total:"
-msgstr "全部的："
+msgstr "合計："
 
 msgid "Unknown Heater"
 msgstr "未知加熱器"
 
 msgid "Unknown screw position"
-msgstr ""
+msgstr "未知螺絲位置"
 
 msgid "Unload"
-msgstr "卸載"
+msgstr "解除安裝"
 
 msgid "Unretract Extra Length"
-msgstr ""
+msgstr "回料長度"
 
 msgid "Unretract Speed"
-msgstr ""
+msgstr "回料速度"
 
 msgid "Up To Date"
-msgstr "最新"
+msgstr "最新版本"
 
 msgid "Update"
 msgstr "更新"
 
 msgid "Updating"
-msgstr "更新"
+msgstr "正在更新"
 
 msgid "Uploaded"
-msgstr "上傳時間"
+msgstr "上傳於"
 
 msgid "XY Move Speed (mm/s)"
-msgstr "XY 移動速度 (mm/s)"
+msgstr "XY軸移動速度(mm/s)"
 
 msgid "XY Speed (mm/s)"
-msgstr ""
+msgstr "XY軸速度(mm/s)"
 
 msgid "Z Calibrate"
-msgstr "Z 校準"
+msgstr "Z軸校準"
 
 msgid "Z Move Speed (mm/s)"
-msgstr "Z 移動速度 (mm/s)"
+msgstr "Z軸移動速度(mm/s)"
 
 msgid "Z Speed (mm/s)"
-msgstr ""
+msgstr "Z軸速度(mm/s)"
 
 msgid "Z Tilt"
-msgstr "Z 傾斜"
+msgstr "Z軸傾斜校準"
 
 msgid "Z offset:"
-msgstr ""
+msgstr "Z軸偏移："
 
 msgid "commit"
 msgid_plural "commits"
-msgstr[0] "改變"
+msgstr[0] "更改"
 
 msgid "dBm"
 msgstr "dBm"
@@ -742,11 +738,12 @@ msgid "hour"
 msgid_plural "hours"
 msgstr[0] "小時"
 
-msgid "minutes"
-msgstr "分鐘"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "分"
 
 msgid "mm"
-msgstr "mm"
+msgstr "秒"
 
 msgid "mm/s"
 msgstr "mm/s"
@@ -755,84 +752,97 @@ msgid "mm/s²"
 msgstr "mm/s²"
 
 msgid "mm³/s"
-msgstr ""
+msgstr "mm³/s"
 
-#~ msgid "Z+"
-#~ msgstr "Z+"
+#~ msgid "Actions"
+#~ msgstr "控制"
 
-#~ msgid "Z-"
-#~ msgstr "Z-"
+#~ msgid "Configuration"
+#~ msgstr "设置"
 
-#~ msgid "X+"
-#~ msgstr "X+"
+#~ msgid "Homing"
+#~ msgstr "归零"
 
-#~ msgid "X-"
-#~ msgstr "X-"
+#~ msgid "Disable XY"
+#~ msgstr "关闭 XY 轴电机"
 
-#~ msgid "Y+"
-#~ msgstr "Y+"
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "切片软件时间校正(%)"
 
-#~ msgid "Y-"
-#~ msgstr "Y-"
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "已校准，保存配置后生效"
+
+#~ msgid "Decrease"
+#~ msgstr "减少"
+
+#~ msgid "Increase"
+#~ msgstr "增加"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "打开: %s"
+
+#~ msgid "Sort:"
+#~ msgstr "排序:"
+
+#~ msgid "Calibrating..."
+#~ msgstr "校准中..."
 
 #, python-format
 #~ msgid "Retry #%s"
-#~ msgstr "重試 #%s"
+#~ msgstr "重试 #%s"
 
 #~ msgid "Add Printer"
-#~ msgstr "新增列印機"
+#~ msgstr "添加打印机"
 
 #~ msgid "Initializing"
-#~ msgstr "初始化中"
+#~ msgstr "初始化"
 
 #~ msgid "Delete"
-#~ msgstr "刪除"
-
-#~ msgid "Home"
-#~ msgstr "首頁"
+#~ msgstr "删除"
 
 #~ msgid "Off"
-#~ msgstr "關閉"
+#~ msgstr "关闭"
 
 #~ msgid "View Mesh"
-#~ msgstr "檢視網格"
+#~ msgstr "查看热床网格"
 
 #~ msgid "Sort by: "
 #~ msgstr "排序: "
 
 #~ msgid "Bltouch found applied offset"
-#~ msgstr "Bltouch 發現應用的偏移量"
+#~ msgstr "Bltouch 发现应用的偏移量"
 
 #~ msgid ""
 #~ "Check /tmp/KlipperScreen.log for more information.\n"
 #~ "Please submit an issue on GitHub for help."
 #~ msgstr ""
-#~ "檢查/tmp/KlipperScreen.log 日誌檔以了解更多訊息。\n"
-#~ "請在GitHub上提交問題以尋求幫助。"
+#~ "检查/tmp/KlipperScreen.log以获取更多信息。\n"
+#~ "请在GitHub上提交问题以寻求帮助。"
 
 #~ msgid "Probe found applied offset"
-#~ msgstr "Probe 發現應用的偏移量"
+#~ msgstr "找到探头偏移"
 
 #~ msgid "Tool"
 #~ msgstr "工具"
 
 #~ msgid "Displayed Macros"
-#~ msgstr "顯示巨集"
+#~ msgstr "宏命令显示开关"
 
 #~ msgid "Z Position"
 #~ msgstr "Z 位置"
 
 #~ msgid "IPv4"
-#~ msgstr "IPv4"
+#~ msgstr "IPv4 地址"
 
 #~ msgid "IPv6"
-#~ msgstr "IPv6"
+#~ msgstr "IPv6 地址"
 
 #~ msgid "Disconnect"
-#~ msgstr "斷開"
+#~ msgstr "断开"
 
 #~ msgid "Duration Only"
-#~ msgstr "僅持續時間"
+#~ msgstr "持续时间"
 
 #~ msgid "Klipper Version"
 #~ msgstr "Klipper 版本"
@@ -841,33 +851,69 @@ msgstr ""
 #~ "Klipper has encountered an error with the micro-controller.\n"
 #~ "Please recompile and flash."
 #~ msgstr ""
-#~ "Klipper遇到微控制器錯誤。\n"
-#~ "請重新編譯並刷新。"
+#~ "Klipper与MCU通讯错误。\n"
+#~ "请为主板重新烧录固件。"
 
 #~ msgid ""
 #~ "Klipper has encountered an error.\n"
 #~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
 #~ msgstr ""
-#~ "Klipper遇到錯誤。\n"
-#~ "發出 FIRMWARE_RESTART 嘗試解決這個問題。"
+#~ "Klipper 遇到错误。\n"
+#~ "使用”FIRMWARE_RESTART“命令尝试解决此问题。"
 
 #~ msgid "KlipperScreen Version"
 #~ msgstr "KlipperScreen 版本"
 
 #~ msgid "Show Only Heaters in Temp."
-#~ msgstr "僅顯示溫度下的加熱器"
+#~ msgstr "仅显示使用中的加热器."
 
 #~ msgid "Target"
-#~ msgstr "目標溫度"
+#~ msgstr "目标"
 
 #~ msgid "Temp"
-#~ msgstr "目前溫度"
+#~ msgstr "温度"
 
 #~ msgid "Number Pad"
-#~ msgstr "數字鍵盤"
+#~ msgstr "数字键盘"
 
 #~ msgid "Preheat"
-#~ msgstr "預熱"
+#~ msgstr "预热"
 
 #~ msgid "Screen will show in less than one second"
-#~ msgstr "螢幕將在1秒內顯示"
+#~ msgstr "屏幕将在1秒内显示"
+
+#~ msgid "Medium (default)"
+#~ msgstr "中 (默认)"
+
+#~ msgid "File Estimation (default)"
+#~ msgstr "文件 (默认)"
+
+#~ msgid "Fan Off"
+#~ msgstr "关闭风扇"
+
+#~ msgid "Fan On"
+#~ msgstr "打开风扇"
+
+#~ msgid "Fast"
+#~ msgstr "加速"
+
+#~ msgid "Slow"
+#~ msgstr "减速"
+
+#~ msgid "?"
+#~ msgstr "?"
+
+#~ msgid "Cancel Change"
+#~ msgstr "取消更改"
+
+#~ msgid "Control"
+#~ msgstr "控制"
+
+#~ msgid "Load Average"
+#~ msgstr "平均负载"
+
+#~ msgid "Network Info"
+#~ msgstr "网络信息"
+
+#~ msgid "Screen Blanking Time"
+#~ msgstr "关闭屏幕时间"

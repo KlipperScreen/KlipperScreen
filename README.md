@@ -13,3 +13,10 @@ will natively work with [Klipper](https://github.com/kevinOConnor/klipper) and [
 [![Main Menu](docs/img/panels/main_panel.png)](https://klipperscreen.readthedocs.io/en/latest/Panels/)
 
 [More Screenshots](https://klipperscreen.readthedocs.io/en/latest/Panels/)
+
+### About
+
+KlipperScreen has been created and maintained by Jordan Ruthe from 2020 to 2021
+the current maintainer is Alfredo Monclus (alfrix) from 2021 onwards
+
+thanks to all the people who helped along the way.

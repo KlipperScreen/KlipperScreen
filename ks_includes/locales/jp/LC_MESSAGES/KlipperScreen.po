@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 18:17-0300\n"
+"POT-Creation-Date: 2023-07-02 16:32-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: boyon\n"
 "Language-Team: \n"
@@ -38,9 +38,6 @@ msgstr "加速度:"
 msgid "Accept"
 msgstr "承諾する"
 
-msgid "Actions"
-msgstr "操作"
-
 msgid "Add profile"
 msgstr "プロファイルの追加"
 
@@ -48,12 +45,12 @@ msgid "Apply"
 msgstr "適用する"
 
 #, python-format
-msgid "Apply %.2f offset to Endstop?"
-msgstr "エンドストップにオフセットに  %.2f を適用しますか？"
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr ""
 
 #, python-format
-msgid "Apply %s%.2f offset to Probe?"
-msgstr "プローブオフセットに  %s%.2f を適用しますか？"
+msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "対象を除外しますか？"
@@ -100,11 +97,11 @@ msgstr "校正"
 msgid "Calibrated"
 msgstr "構成済み"
 
-msgid "Calibrated, save configuration to make it permanent"
-msgstr "校正完了しました。次回起動時以降も適用するには設定を保存してください"
-
 msgid "Calibrating"
 msgstr "校正中"
+
+msgid "Camera"
+msgstr ""
 
 msgid "Can't set above the maximum:"
 msgstr "上限値を超えて設定できません:"
@@ -142,9 +139,6 @@ msgstr "終了"
 msgid "Complete"
 msgstr "完了"
 
-msgid "Configuration"
-msgstr "設定"
-
 msgid "Confirm Emergency Stop"
 msgstr "緊急停止時に確認する"
 
@@ -167,8 +161,8 @@ msgstr "クールダウン"
 msgid "Date"
 msgstr "日付"
 
-msgid "Decrease"
-msgstr "減少"
+msgid "Delete Directory?"
+msgstr ""
 
 msgid "Delete File?"
 msgstr "ファイルを削除しますか？"
@@ -178,9 +172,6 @@ msgstr "選択解除"
 
 msgid "Disable Motors"
 msgstr "モーターの無効化"
-
-msgid "Disable XY"
-msgstr "XY軸制御の無効化"
 
 msgid "Distance (mm)"
 msgstr "距離(mm)"
@@ -261,6 +252,9 @@ msgstr "フォントサイズ"
 msgid "Full Update"
 msgstr "フルアップデート"
 
+msgid "Fullscreen"
+msgstr ""
+
 msgid "Go Back"
 msgstr "戻る"
 
@@ -279,6 +273,9 @@ msgstr "温度を非表示にする"
 msgid "Hide temp."
 msgstr "温度を非表示にする"
 
+msgid "Home"
+msgstr ""
+
 msgid "Home All"
 msgstr ""
 
@@ -294,9 +291,6 @@ msgstr "Home Y"
 msgid "Home Z"
 msgstr "Home Z"
 
-msgid "Homing"
-msgstr "Homing"
-
 msgid "Host"
 msgstr ""
 
@@ -306,10 +300,10 @@ msgstr "Hostname"
 msgid "Icon Theme"
 msgstr "アイコンテーマ"
 
-msgid "Increase"
-msgstr "増加"
-
 msgid "Initializing printer..."
+msgstr ""
+
+msgid "Initiate a PID calibration for:"
 msgstr ""
 
 msgid "Input Shaper"
@@ -332,6 +326,9 @@ msgstr "Y軸を反対にする"
 
 msgid "Invert Z"
 msgstr "X軸を反対にする"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipperを再起動する"
@@ -422,6 +419,9 @@ msgstr "変更"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: 接続済"
+
+msgid "More"
+msgstr ""
 
 msgid "Move"
 msgstr "移動"
@@ -541,6 +541,9 @@ msgstr ""
 msgid "Refresh"
 msgstr "最新表示"
 
+msgid "Rename/Move:"
+msgstr ""
+
 msgid "Restart"
 msgstr "再起動"
 
@@ -599,10 +602,6 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#, python-format
-msgid "Sending Power ON signal to: %s"
-msgstr ""
-
 msgid "Set Temp"
 msgstr "温度設定"
 
@@ -623,9 +622,6 @@ msgstr "サイズ"
 
 msgid "Slicer"
 msgstr "スライサー"
-
-msgid "Slicer Time correction (%)"
-msgstr "スライサーの補正時間(%)"
 
 msgid "Slicer:"
 msgstr "スライサー:"
@@ -737,8 +733,9 @@ msgid "hour"
 msgid_plural "hours"
 msgstr[0] ""
 
-msgid "minutes"
-msgstr "分"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
 
 msgid "mm"
 msgstr ""
@@ -751,6 +748,31 @@ msgstr ""
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Actions"
+#~ msgstr "操作"
+
+#~ msgid "Configuration"
+#~ msgstr "設定"
+
+#~ msgid "Homing"
+#~ msgstr "Homing"
+
+#~ msgid "Disable XY"
+#~ msgstr "XY軸制御の無効化"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "スライサーの補正時間(%)"
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr ""
+#~ "校正完了しました。次回起動時以降も適用するには設定を保存してください"
+
+#~ msgid "Decrease"
+#~ msgstr "減少"
+
+#~ msgid "Increase"
+#~ msgstr "増加"
 
 #~ msgid "Sort:"
 #~ msgstr "ソート順:"

@@ -29,39 +29,25 @@ class ConsolePanel(ScreenPanel):
         self.autoscroll = True
         self.hidetemps = True
 
-        o1_lbl = Gtk.Label(_("Auto-scroll"))
-        o1_switch = Gtk.Switch()
-        o1_switch.set_active(self.autoscroll)
-        o1_switch.connect("notify::active", self.set_autoscroll)
+        o1_button = self._gtk.Button("arrow-down", _("Auto-scroll") + " ", None, self.bts, Gtk.PositionType.RIGHT, 1)
+        o1_button.get_style_context().add_class("button_active")
+        o1_button.get_style_context().add_class("buttons_slim")
+        o1_button.connect("clicked", self.set_autoscroll)
 
-        o2_lbl = Gtk.Label(_("Hide temp."))
-        o2_switch = Gtk.Switch()
-        o2_switch.set_active(self.hidetemps)
-        o2_switch.connect("notify::active", self.hide_temps)
+        o2_button = self._gtk.Button("heat-up", _("Hide temp.") + " ", None, self.bts, Gtk.PositionType.RIGHT, 1)
+        o2_button.get_style_context().add_class("button_active")
+        o2_button.get_style_context().add_class("buttons_slim")
+        o2_button.connect("clicked", self.hide_temps)
 
-        if self._screen.vertical_mode:
-            o1_lbl.set_halign(Gtk.Align.CENTER)
-            o2_lbl.set_halign(Gtk.Align.CENTER)
-        else:
-            o1_lbl.set_halign(Gtk.Align.END)
-            o2_lbl.set_halign(Gtk.Align.END)
         o3_button = self._gtk.Button("refresh", _('Clear') + " ", None, self.bts, Gtk.PositionType.RIGHT, 1)
+        o3_button.get_style_context().add_class("buttons_slim")
         o3_button.connect("clicked", self.clear)
 
         options = Gtk.Grid()
         options.set_vexpand(False)
-        if self._screen.vertical_mode:
-            options.attach(o1_lbl, 0, 0, 1, 1)
-            options.attach(o1_switch, 0, 1, 1, 1)
-            options.attach(o2_lbl, 1, 0, 1, 1)
-            options.attach(o2_switch, 1, 1, 1, 1)
-            options.attach(o3_button, 3, 0, 1, 2)
-        else:
-            options.attach(o1_lbl, 0, 0, 1, 1)
-            options.attach(o1_switch, 1, 0, 1, 1)
-            options.attach(o2_lbl, 2, 0, 1, 1)
-            options.attach(o2_switch, 3, 0, 1, 1)
-            options.attach(o3_button, 4, 0, 1, 1)
+        options.attach(o1_button, 0, 0, 1, 1)
+        options.attach(o2_button, 1, 0, 1, 1)
+        options.attach(o3_button, 2, 0, 1, 1)
 
         sw = Gtk.ScrolledWindow()
         sw.set_hexpand(True)
@@ -90,6 +76,8 @@ class ConsolePanel(ScreenPanel):
         entry.grab_focus_without_selecting()
 
         enter = self._gtk.Button("resume", " " + _('Send') + " ", None, .66, Gtk.PositionType.RIGHT, 1)
+        enter.get_style_context().add_class("buttons_slim")
+
         enter.set_hexpand(False)
         enter.connect("clicked", self._send_command)
 
@@ -150,11 +138,20 @@ class ConsolePanel(ScreenPanel):
         if action == "notify_gcode_response":
             self.add_gcode("response", time.time(), data)
 
-    def hide_temps(self, *args):
+    def hide_temps(self, widget):
         self.hidetemps ^= True
+        self.toggle_active_class(widget, self.hidetemps)
 
-    def set_autoscroll(self, *args):
+    def set_autoscroll(self, widget):
         self.autoscroll ^= True
+        self.toggle_active_class(widget, self.autoscroll)
+
+    @staticmethod
+    def toggle_active_class(widget, cond):
+        if cond:
+            widget.get_style_context().add_class("button_active")
+        else:
+            widget.get_style_context().remove_class("button_active")
 
     def _autoscroll(self, *args):
         if self.autoscroll:
