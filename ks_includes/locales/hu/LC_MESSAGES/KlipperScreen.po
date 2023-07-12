@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 16:32-0300\n"
+"POT-Creation-Date: 2023-07-12 16:32-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -46,11 +46,11 @@ msgstr "Alkalmaz"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr ""
+msgstr "Alkalmazod a %s%.3f végpont eltolást?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr ""
+msgstr "Alkalmazod a %s%.3f szonda eltolást?"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Biztosan kizárod az objektumot?"
@@ -101,7 +101,7 @@ msgid "Calibrating"
 msgstr "Kalibrálás"
 
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 msgid "Can't set above the maximum:"
 msgstr "Nem állítható a maximum fölé:"
@@ -162,7 +162,7 @@ msgid "Date"
 msgstr "Dátum"
 
 msgid "Delete Directory?"
-msgstr ""
+msgstr "Törlöd a könyvtárat?"
 
 msgid "Delete File?"
 msgstr "Fájl törlése?"
@@ -253,7 +253,7 @@ msgid "Full Update"
 msgstr "Teljes Frissítés"
 
 msgid "Fullscreen"
-msgstr ""
+msgstr "Teljes képernyő"
 
 msgid "Go Back"
 msgstr "Visszalépés"
@@ -304,7 +304,7 @@ msgid "Initializing printer..."
 msgstr "Nyomtató inicializálása..."
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "PID-kalibráció kezdeményezése:"
 
 msgid "Input Shaper"
 msgstr "Bemeneti alakító"
@@ -328,7 +328,7 @@ msgid "Invert Z"
 msgstr "Fordított Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
+msgstr "A fűtés teljesítményétől függően több mint 5 percig tarthat."
 
 msgid "Klipper Restart"
 msgstr "Klipper Újraindítása"
@@ -421,7 +421,7 @@ msgid "Moonraker: connected"
 msgstr "Moonraker: csatlakoztatva"
 
 msgid "More"
-msgstr ""
+msgstr "Több"
 
 msgid "Move"
 msgstr "Mozgatás"
@@ -445,7 +445,7 @@ msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr ""
-"Az automatikus felismerés nem támogatott, a klipperscreenben kell beállítani."
+"Az automatikus felismerés nem támogatott, a KlipperScreen-ben kell beállítani."
 "conf"
 
 msgid "Nothing selected"
@@ -545,7 +545,7 @@ msgid "Refresh"
 msgstr "Frissítés"
 
 msgid "Rename/Move:"
-msgstr ""
+msgstr "Átnevez/Áthelyez:"
 
 msgid "Restart"
 msgstr "Újraindítás"
@@ -740,8 +740,8 @@ msgstr[1] "órák"
 
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "perc"
+msgstr[1] "percek"
 
 msgid "mm"
 msgstr "mm"
