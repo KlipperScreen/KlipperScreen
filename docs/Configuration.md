@@ -5,6 +5,13 @@ create a blank file in `~/printer_data/config/KlipperScreen.conf`, if the file a
 
 Write in the file only the options that need to be changed, and restart KlipperScreen.
 
+
+!!! failure "Critical"
+    Each configuration option should be on a newline, as they are presented here.
+
+    The line endings should be of UNIX style (LF).
+
+
 ## Include files
 ```py
 [include conf.d/*.conf]
@@ -96,6 +103,11 @@ camera_url: http://127.0.0.1/webcam/?action=stream
 ```
 
 ## Preheat Options
+
+!!! question
+    Adding a custom preheat section will cause the defaults to not load, this is
+    the intended behaviour.
+
 ```py
 [preheat my_temp_setting]
 extruder: 195
@@ -125,6 +137,9 @@ This allows a custom configuration for the menu displayed while the printer is i
 different items and there are several panel options available. It is possible to have a gcode script run on a menu
 button press. There are two menus available in KlipperScreen, __main and __print. The __main menu is displayed while the
 printer is idle. The __print menu is accessible from the printing status page.
+
+!!! info
+    A predefined set of menus is already provided and it's recommended to be used
 
 A menu item is configured as follows:
 ```py
