@@ -102,8 +102,7 @@ class MacroPanel(ScreenPanel):
                 if result:
                     result = result.groupdict()
                     default = result["default"] if "default" in result else ""
-                    entry = Gtk.Entry()
-                    entry.set_text(default)
+                    entry = Gtk.Entry(placeholder_text=default)
                     self.macros[macro]["params"].update({result["param"]: entry})
 
         for param in self.macros[macro]["params"]:
