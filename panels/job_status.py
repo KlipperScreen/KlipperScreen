@@ -21,22 +21,22 @@ class JobStatusPanel(ScreenPanel):
         super().__init__(screen, title)
         self.grid = self._gtk.HomogeneousGrid()
         self.grid.set_row_homogeneous(False)
-        self.pos_z = 0
+        self.pos_z = 0.0
         self.extrusion = 100
-        self.speed_factor = 1
+        self.speed_factor = 1.0
         self.speed = 100
         self.req_speed = 0
         self.f_layer_h = self.layer_h = 1
-        self.oheight = 0
+        self.oheight = 0.0
         self.current_extruder = None
-        self.fila_section = 0
+        self.fila_section = 0.0
         self.filename_label = self.filename = self.prev_pos = self.prev_gpos = None
         self.can_close = False
         self.flow_timeout = self.animation_timeout = None
         self.file_metadata = self.fans = {}
         self.state = "standby"
         self.timeleft_type = "auto"
-        self.progress = self.zoffset = self.flowrate = self.vel = 0
+        self.progress = self.zoffset = self.flowrate = self.vel = 0.0
         self.flowstore = []
         self.mm = _("mm")
         self.mms = _("mm/s")
@@ -351,11 +351,6 @@ class JobStatusPanel(ScreenPanel):
         ctx.stroke()
 
     def activate(self):
-        ps = self._printer.get_stat("print_stats")
-        self.set_state(ps['state'])
-        if 'filename' in ps and (ps['filename'] != self.filename):
-            logging.debug(f"Changing filename: '{self.filename}' to '{ps['filename']}'")
-            self.update_filename()
         if self.flow_timeout is None:
             self.flow_timeout = GLib.timeout_add_seconds(2, self.update_flow)
         self._screen.base_panel_show_all()
@@ -426,13 +421,16 @@ class JobStatusPanel(ScreenPanel):
             self._screen._ws.klippy.gcode_script("SAVE_CONFIG")
 
     def restart(self, widget):
-        if self.filename != "none":
+        if self.filename:
             self.disable_button("restart")
             if self.state == "error":
                 script = {"script": "SDCARD_RESET_FILE"}
                 self._screen._send_action(None, "printer.gcode.script", script)
             self._screen._ws.klippy.print_start(self.filename)
+            logging.info(f"Starting print: {self.filename}")
             self.new_print()
+        else:
+            logging.info(f"Could not restart {self.filename}")
 
     def resume(self, widget):
         self._screen._ws.klippy.print_resume()
@@ -495,12 +493,12 @@ class JobStatusPanel(ScreenPanel):
 
     def new_print(self):
         self._screen.close_screensaver()
-        self.state_check()
+        self.update_progress(0.0)
 
     def process_update(self, action, data):
         if action == "notify_gcode_response":
             if "action:cancel" in data:
-                self.set_state("cancelling")
+                self.set_state("cancelled")
             elif "action:paused" in data:
                 self.set_state("paused")
             elif "action:resumed" in data:
@@ -528,7 +526,10 @@ class JobStatusPanel(ScreenPanel):
                 )
                 self.buttons['heater'][x].set_label(self.labels[x].get_text())
 
-        self.update_message()
+        if "display_status" in data and "message" in data["display_status"]:
+            self.labels['lcdmessage'].set_label(
+                f"{data['display_status']['message'] if data['display_status']['message'] is not None else ''}"
+            )
 
         with contextlib.suppress(KeyError):
             if data["toolhead"]["extruder"] != self.current_extruder:
@@ -587,41 +588,46 @@ class JobStatusPanel(ScreenPanel):
                 self.flowstore.append(self.fila_section * float(data["motion_report"]["live_extruder_velocity"]))
         fan_label = ""
         for fan in self.fans:
-            with contextlib.suppress(KeyError):
-                self.fans[fan]['speed'] = f"{self._printer.get_fan_speed(fan) * 100:3.0f}%"
-                fan_label += f" {self.fans[fan]['name']}{self.fans[fan]['speed']}"
+            self.fans[fan]['speed'] = f"{self._printer.get_fan_speed(fan) * 100:3.0f}%"
+            fan_label += f" {self.fans[fan]['name']}{self.fans[fan]['speed']}"
         if fan_label:
             self.buttons['fan'].set_label(fan_label[:12])
-
-        self.state_check()
-        if self.state not in ["printing", "paused"]:
-            return
-
-        ps = self._printer.get_stat("print_stats")
-        if 'filename' in ps and (ps['filename'] != self.filename):
-            logging.debug(f"Changing filename: '{self.filename}' to '{ps['filename']}'")
-            self.update_filename()
-        else:
-            self.update_percent_complete()
-        if 'info' in ps and 'total_layer' in ps['info'] and ps['info']['total_layer'] is not None:
-            self.labels['total_layers'].set_label(f"{ps['info']['total_layer']}")
-        if 'info' in ps and 'current_layer' in ps['info'] and ps['info']['current_layer'] is not None:
-            self.labels['layer'].set_label(f"{ps['info']['current_layer']} / {self.labels['total_layers'].get_text()}")
-        elif "layer_height" in self.file_metadata and "object_height" in self.file_metadata:
-            self.labels['layer'].set_label(
-                f"{1 + round((self.pos_z - self.f_layer_h) / self.layer_h)} / {self.labels['total_layers'].get_text()}")
-
-        if 'print_duration' in ps:
-            if 'filament_used' in ps:
-                self.labels['filament_used'].set_label(f"{float(ps['filament_used']) / 1000:.1f} m")
-                self.update_time_left(ps['total_duration'], ps['print_duration'], ps['filament_used'])
-            else:
-                self.update_time_left(ps['total_duration'], ps['print_duration'])
-
-        elapsed_label = f"{self.labels['elapsed'].get_text()}  {self.labels['duration'].get_text()}"
-        self.buttons['elapsed'].set_label(elapsed_label)
-        remaining_label = f"{self.labels['left'].get_text()}  {self.labels['time_left'].get_text()}"
-        self.buttons['left'].set_label(remaining_label)
+        if "virtual_sdcard" in data and "progress" in data["virtual_sdcard"]:
+            self.update_progress(data["virtual_sdcard"]["progress"])
+        if "print_stats" in data:
+            with contextlib.suppress(KeyError):
+                self.set_state(
+                    data["print_stats"]["state"],
+                    msg=f'{data["print_stats"]["message"] if "message" in data["print_stats"] else ""}'
+                )
+            with contextlib.suppress(KeyError):
+                self.update_filename(data['print_stats']["filename"])
+            with contextlib.suppress(KeyError):
+                if 'print_duration' in data["print_stats"]:
+                    if 'filament_used' in data["print_stats"]:
+                        self.labels['filament_used'].set_label(
+                            f"{float(data['print_stats']['filament_used']) / 1000:.1f} m"
+                        )
+                    self.update_time_left(
+                        data['print_stats']['total_duration'],
+                        data['print_stats']['print_duration'],
+                        f"{data['print_stats']['filament_used'] if 'filament_used' in 'print_stats' else 0}"
+                    )
+            if 'info' in data["print_stats"]:
+                with contextlib.suppress(KeyError):
+                    if data["print_stats"]['info']['total_layer'] is not None:
+                        self.labels['total_layers'].set_label(f"{data['print_stats']['info']['total_layer']}")
+                with contextlib.suppress(KeyError):
+                    if data["print_stats"]['info']['current_layer'] is not None:
+                        self.labels['layer'].set_label(
+                            f"{data['print_stats']['info']['current_layer']} / "
+                            f"{self.labels['total_layers'].get_text()}"
+                        )
+            elif "layer_height" in self.file_metadata and "object_height" in self.file_metadata:
+                self.labels['layer'].set_label(
+                    f"{1 + round((self.pos_z - self.f_layer_h) / self.layer_h)} / "
+                    f"{self.labels['total_layers'].get_text()}"
+                )
 
     def update_flow(self):
         if not self.flowstore:
@@ -632,8 +638,11 @@ class JobStatusPanel(ScreenPanel):
         self.buttons['extrusion'].set_label(f"{self.extrusion:3}% {self.flowrate:5.1f} {self.mms3}")
         return True
 
-    def update_time_left(self, total_duration, print_duration, fila_used=0):
+    def update_time_left(self, total_duration:int, print_duration:int, fila_used='0'):
+        fila_used = float(fila_used)
         self.labels["duration"].set_label(self.format_time(total_duration))
+        elapsed_label = f"{self.labels['elapsed'].get_text()}  {self.labels['duration'].get_text()}"
+        self.buttons['elapsed'].set_label(elapsed_label)
         non_printing = total_duration - print_duration
         estimated = None
         slicer_time = filament_time = file_time = None
@@ -670,61 +679,43 @@ class JobStatusPanel(ScreenPanel):
         elif file_time is not None:
             if filament_time is not None:
                 estimated = (filament_time + file_time) / 2
-            else:
-                estimated = file_time
+        if estimated is None or estimated < 1:
+            estimated = file_time
         self.labels["est_time"].set_label(self.format_time(estimated))
         self.labels["time_left"].set_label(self.format_eta(estimated, total_duration))
+        remaining_label = f"{self.labels['left'].get_text()}  {self.labels['time_left'].get_text()}"
+        self.buttons['left'].set_label(remaining_label)
 
-    def state_check(self):
-        ps = self._printer.get_stat("print_stats")
-
-        if 'state' not in ps or ps['state'] == self.state:
-            return True
-
-        if ps['state'] == "printing":
-            if self.state == "cancelling":
-                return True
-            self.set_state("printing")
-            self.update_filename()
-        elif ps['state'] == "complete":
-            self.progress = 1
-            self.update_progress()
-            self.set_state("complete")
-            return self._add_timeout(self._config.get_main_config().getint("job_complete_timeout", 0))
-        elif ps['state'] == "error":
-            self.set_state("error")
+    def set_state(self, state, msg=""):
+        if state == "printing":
+            self.labels["status"].set_label(_("Printing"))
+        elif state == "complete":
+            self.update_progress(1)
+            self.labels["status"].set_label(_("Complete"))
+            self.buttons['left'].set_label("-")
+            self._add_timeout(self._config.get_main_config().getint("job_complete_timeout", 0))
+        elif state == "error":
             self.labels['status'].set_label(_("Error"))
-            self._screen.show_popup_message(ps['message'])
-            return self._add_timeout(self._config.get_main_config().getint("job_error_timeout", 0))
-        elif ps['state'] == "cancelled":
-            self.set_state("cancelled")
-            return self._add_timeout(self._config.get_main_config().getint("job_cancelled_timeout", 0))
-        elif ps['state'] == "paused":
-            self.set_state("paused")
-        elif ps['state'] == "standby":
-            self.set_state("standby")
-        return True
+            self._screen.show_popup_message(msg)
+            self._add_timeout(self._config.get_main_config().getint("job_error_timeout", 0))
+        elif state == "cancelling":
+            self.labels["status"].set_label(_("Cancelling"))
+        elif state == "cancelled" or (state == "standby" and self.state == "cancelled"):
+            self.labels["status"].set_label(_("Cancelled"))
+            self._add_timeout(self._config.get_main_config().getint("job_cancelled_timeout", 0))
+        elif state == "paused":
+            self.labels["status"].set_label(_("Paused"))
+        elif state == "standby":
+            self.labels["status"].set_label(_("Standby"))
+        if self.state != state:
+            logging.debug(f"Changing job_status state from '{self.state}' to '{state}'")
+            self.state = state
+        self.show_buttons_for_state()
 
     def _add_timeout(self, timeout):
         self._screen.close_screensaver()
         if timeout != 0:
             GLib.timeout_add_seconds(timeout, self.close_panel)
-
-    def set_state(self, state):
-        if self.state != state:
-            logging.debug(f"Changing job_status state from '{self.state}' to '{state}'")
-        if state == "paused":
-            self.labels["status"].set_label(_("Paused"))
-        elif state == "printing":
-            self.labels["status"].set_label(_("Printing"))
-        elif state == "cancelling":
-            self.labels["status"].set_label(_("Cancelling"))
-        elif state == "cancelled" or (state == "standby" and self.state == "cancelling"):
-            self.labels["status"].set_label(_("Cancelled"))
-        elif state == "complete":
-            self.labels["status"].set_label(_("Complete"))
-        self.state = state
-        self.show_buttons_for_state()
 
     def show_buttons_for_state(self):
         self.buttons['button_grid'].remove_row(0)
@@ -761,7 +752,7 @@ class JobStatusPanel(ScreenPanel):
                 self.buttons['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
                 self.buttons['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
 
-            if self.filename is not None:
+            if self.filename:
                 self.buttons['button_grid'].attach(self.buttons['restart'], 2, 0, 1, 1)
                 self.enable_button("restart")
             else:
@@ -785,8 +776,10 @@ class JobStatusPanel(ScreenPanel):
             pixbuf = self._gtk.PixbufFromIcon("file", width / 2, height / 2)
         self.labels['thumbnail'].set_from_pixbuf(pixbuf)
 
-    def update_filename(self):
-        self.filename = self._printer.get_stat('print_stats', 'filename')
+    def update_filename(self, filename):
+        if not filename:
+            return
+        self.filename = filename
         self.labels["file"].set_label(os.path.splitext(self.filename)[0])
         self.filename_label = {
             "complete": self.labels['file'].get_label(),
@@ -797,7 +790,6 @@ class JobStatusPanel(ScreenPanel):
         }
         if self.animation_timeout is None and (self.filename_label['length'] - self.filename_label['limit']) > 0:
             self.animation_timeout = GLib.timeout_add_seconds(1, self.animate_label)
-        self.update_percent_complete()
         self.update_file_metadata()
 
     def animate_label(self):
@@ -834,27 +826,7 @@ class JobStatusPanel(ScreenPanel):
             self._screen.files.add_file_callback(self._callback_metadata)
         self.show_file_thumbnail()
 
-    def update_percent_complete(self):
-        if self.state not in ["printing", "paused"]:
-            return
-
-        if "gcode_start_byte" in self.file_metadata:
-            progress = (max(self._printer.get_stat('virtual_sdcard', 'file_position') -
-                            self.file_metadata['gcode_start_byte'], 0) / (self.file_metadata['gcode_end_byte'] -
-                                                                          self.file_metadata['gcode_start_byte']))
-        else:
-            progress = self._printer.get_stat('virtual_sdcard', 'progress')
-
-        if progress != self.progress:
-            self.progress = progress
-            self.labels['darea'].queue_draw()
-            self.update_progress()
-
-    def update_progress(self):
-        self.labels['progress_text'].set_label(f"{self.progress * 100:.0f}%")
-
-    def update_message(self):
-        msg = self._printer.get_stat("display_status", "message")
-        if msg is None:
-            msg = " "
-        self.labels['lcdmessage'].set_label(f"{msg}")
+    def update_progress(self, progress:float):
+        self.labels['progress_text'].set_label(f"{progress * 100:.0f}%")
+        self.progress = progress
+        self.labels['darea'].queue_draw()
