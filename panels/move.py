@@ -114,6 +114,9 @@ class MovePanel(ScreenPanel):
         printer_cfg = self._printer.get_config_section("printer")
         # The max_velocity parameter is not optional in klipper config.
         max_velocity = int(float(printer_cfg["max_velocity"]))
+        if max_velocity <= 1:
+            logging.error(f"Error getting max_velocity\n{printer_cfg}")
+            max_velocity = 50
         if "max_z_velocity" in printer_cfg:
             max_z_velocity = int(float(printer_cfg["max_z_velocity"]))
         else:
