@@ -121,13 +121,13 @@ class ScreenPanel:
 
     @staticmethod
     def format_time(seconds):
-        if seconds is None or seconds <= 0:
+        if seconds is None or seconds < 1:
             return "-"
         days = seconds // 86400
         seconds %= 86400
         hours = seconds // 3600
         seconds %= 3600
-        minutes = seconds // 60
+        minutes = round(seconds / 60)
         seconds %= 60
         return f"{f'{days:2.0f}d ' if days > 0 else ''}" \
                f"{f'{hours:2.0f}h ' if hours > 0 else ''}" \
