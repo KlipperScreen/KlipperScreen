@@ -65,7 +65,7 @@ class SystemPanel(ScreenPanel):
             items = sorted(list(vi))
             i = 0
             for prog in items:
-                self.labels[prog] = Gtk.Label("")
+                self.labels[prog] = Gtk.Label()
                 self.labels[prog].set_hexpand(True)
                 self.labels[prog].set_halign(Gtk.Align.START)
 

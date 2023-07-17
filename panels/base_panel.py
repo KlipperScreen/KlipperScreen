@@ -80,7 +80,7 @@ class BasePanel(ScreenPanel):
         self.titlelbl.set_ellipsize(Pango.EllipsizeMode.END)
         self.set_title(title)
 
-        self.control['time'] = Gtk.Label("00:00 AM")
+        self.control['time'] = Gtk.Label(label="00:00 AM")
         self.control['time_box'] = Gtk.Box()
         self.control['time_box'].set_halign(Gtk.Align.END)
         self.control['time_box'].pack_end(self.control['time'], True, True, 10)

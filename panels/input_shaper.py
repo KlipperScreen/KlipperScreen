@@ -29,7 +29,7 @@ class InputShaperPanel(ScreenPanel):
         self.calibrate_btn = self._gtk.Button("move", _('Finding ADXL'), "color1", lines=1)
         self.calibrate_btn.connect("clicked", self.on_popover_clicked)
         self.calibrate_btn.set_sensitive(False)
-        self.status = Gtk.Label("")
+        self.status = Gtk.Label()
         self.status.set_hexpand(True)
         self.status.set_vexpand(False)
         self.status.set_halign(Gtk.Align.START)

@@ -50,7 +50,7 @@ class JobStatusPanel(ScreenPanel):
                 'flowrate']
 
         for item in data:
-            self.labels[item] = Gtk.Label("-")
+            self.labels[item] = Gtk.Label(label="-")
             self.labels[item].set_vexpand(True)
             self.labels[item].set_hexpand(True)
 
@@ -86,12 +86,12 @@ class JobStatusPanel(ScreenPanel):
                 "speed": "-"
             }
 
-        self.labels['file'] = Gtk.Label("Filename")
+        self.labels['file'] = Gtk.Label(label="Filename")
         self.labels['file'].get_style_context().add_class("printing-filename")
         self.labels['file'].set_hexpand(True)
-        self.labels['status'] = Gtk.Label("Status")
+        self.labels['status'] = Gtk.Label(label="Status")
         self.labels['status'].get_style_context().add_class("printing-status")
-        self.labels['lcdmessage'] = Gtk.Label("")
+        self.labels['lcdmessage'] = Gtk.Label()
         self.labels['lcdmessage'].get_style_context().add_class("printing-status")
 
         for label in self.labels:
@@ -109,7 +109,7 @@ class JobStatusPanel(ScreenPanel):
 
         box = Gtk.Box()
         box.set_halign(Gtk.Align.CENTER)
-        self.labels['progress_text'] = Gtk.Label("0%")
+        self.labels['progress_text'] = Gtk.Label(label="0%")
         self.labels['progress_text'].get_style_context().add_class("printing-progress-text")
         box.add(self.labels['progress_text'])
 
@@ -162,7 +162,7 @@ class JobStatusPanel(ScreenPanel):
         if self._printer.get_tools():
             self.current_extruder = self._printer.get_stat("toolhead", "extruder")
             for i, extruder in enumerate(self._printer.get_tools()):
-                self.labels[extruder] = Gtk.Label("-")
+                self.labels[extruder] = Gtk.Label(label="-")
                 self.buttons['extruder'][extruder] = self._gtk.Button(f"extruder-{i}", "", None, self.bts,
                                                                       Gtk.PositionType.LEFT, 1)
                 self.buttons['extruder'][extruder].set_label(self.labels[extruder].get_text())
@@ -177,7 +177,7 @@ class JobStatusPanel(ScreenPanel):
         self.buttons['heater'] = {}
         if self._printer.has_heated_bed():
             self.buttons['heater']['heater_bed'] = self._gtk.Button("bed", "", None, self.bts, Gtk.PositionType.LEFT, 1)
-            self.labels['heater_bed'] = Gtk.Label("-")
+            self.labels['heater_bed'] = Gtk.Label(label="-")
             self.buttons['heater']['heater_bed'].set_label(self.labels['heater_bed'].get_text())
             self.buttons['heater']['heater_bed'].connect("clicked", self.menu_item_clicked, "temperature",
                                                          {"panel": "temperature", "name": _("Temperature"),
@@ -190,7 +190,7 @@ class JobStatusPanel(ScreenPanel):
                 break
             if dev.startswith("heater_generic"):
                 self.buttons['heater'][dev] = self._gtk.Button("heater", "", None, self.bts, Gtk.PositionType.LEFT, 1)
-                self.labels[dev] = Gtk.Label("-")
+                self.labels[dev] = Gtk.Label(label="-")
                 self.buttons['heater'][dev].set_label(self.labels[dev].get_text())
                 self.buttons['heater'][dev].connect("clicked", self.menu_item_clicked, "temperature",
                                                     {"panel": "temperature", "name": _("Temperature"), "extra": dev})
@@ -215,7 +215,7 @@ class JobStatusPanel(ScreenPanel):
                                     break
                                 self.buttons['heater'][device] = self._gtk.Button("heat-up", "", None, self.bts,
                                                                                   Gtk.PositionType.LEFT, 1)
-                                self.labels[device] = Gtk.Label("-")
+                                self.labels[device] = Gtk.Label(label="-")
                                 self.buttons['heater'][device].set_label(self.labels[device].get_text())
                                 self.buttons['heater'][device].connect("clicked", self.menu_item_clicked, "temperature",
                                                                        {"panel": "temperature",
@@ -743,14 +743,14 @@ class JobStatusPanel(ScreenPanel):
                 if endstop:
                     self.buttons['button_grid'].attach(self.buttons["save_offset_endstop"], 0, 0, 1, 1)
                 else:
-                    self.buttons['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
+                    self.buttons['button_grid'].attach(Gtk.Label(), 0, 0, 1, 1)
                 if self._printer.get_probe():
                     self.buttons['button_grid'].attach(self.buttons["save_offset_probe"], 1, 0, 1, 1)
                 else:
-                    self.buttons['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
+                    self.buttons['button_grid'].attach(Gtk.Label(), 1, 0, 1, 1)
             else:
-                self.buttons['button_grid'].attach(Gtk.Label(""), 0, 0, 1, 1)
-                self.buttons['button_grid'].attach(Gtk.Label(""), 1, 0, 1, 1)
+                self.buttons['button_grid'].attach(Gtk.Label(), 0, 0, 1, 1)
+                self.buttons['button_grid'].attach(Gtk.Label(), 1, 0, 1, 1)
 
             if self.filename:
                 self.buttons['button_grid'].attach(self.buttons['restart'], 2, 0, 1, 1)
