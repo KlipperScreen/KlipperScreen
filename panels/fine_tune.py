@@ -1,7 +1,5 @@
 import logging
 import re
-import contextlib
-
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -136,13 +134,12 @@ class FineTunePanel(ScreenPanel):
             self.labels['zoffset'].set_label('  0.00mm')
             self._screen._ws.klippy.gcode_script("SET_GCODE_OFFSET Z=0 MOVE=1")
         elif direction in ["+", "-"]:
-            with contextlib.suppress(KeyError):
-                z_offset = float(self._printer.data["gcode_move"]["homing_origin"][2])
-                if direction == "+":
-                    z_offset += float(self.bs_delta)
-                else:
-                    z_offset -= float(self.bs_delta)
-                self.labels['zoffset'].set_label(f'  {z_offset:.3f}mm')
+            z_offset = float(self._printer.data["gcode_move"]["homing_origin"][2])
+            if direction == "+":
+                z_offset += float(self.bs_delta)
+            else:
+                z_offset -= float(self.bs_delta)
+            self.labels['zoffset'].set_label(f'  {z_offset:.3f}mm')
             self._screen._ws.klippy.gcode_script(f"SET_GCODE_OFFSET Z_ADJUST={direction}{self.bs_delta} MOVE=1")
 
     def change_bs_delta(self, widget, bs):

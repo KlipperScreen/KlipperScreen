@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-import contextlib
 import logging
 import os
 import pathlib
-
 import gi
 
 gi.require_version("Gtk", "3.0")

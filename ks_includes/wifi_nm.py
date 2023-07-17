@@ -1,19 +1,16 @@
 # Network in KlipperScreen is a connection in NetworkManager
 # Interface in KlipperScreen is a device in NetworkManager
 
-import contextlib
 import logging
 import uuid
-
-from ks_includes import NetworkManager
 import dbus
-from dbus.mainloop.glib import DBusGMainLoop
 import gi
 
 gi.require_version('Gdk', '3.0')
 from gi.repository import GLib
-
+from contextlib import suppress
 from ks_includes.wifi import WifiChannels
+from ks_includes import NetworkManager
 
 
 class WifiManager:
@@ -21,7 +18,7 @@ class WifiManager:
 
     def __init__(self, interface_name, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        DBusGMainLoop(set_as_default=True)
+        dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
         self._callbacks = {
             "connected": [],
             "connecting_status": [],
@@ -56,7 +53,7 @@ class WifiManager:
                 self.known_networks[ssid] = con
 
     def _ap_added(self, nm, interface, signal, access_point):
-        with contextlib.suppress(NetworkManager.ObjectVanished):
+        with suppress(NetworkManager.ObjectVanished):
             access_point.OnPropertiesChanged(self._ap_prop_changed)
             ssid = self._add_ap(access_point)
             for cb in self._callbacks['scan_results']:
@@ -183,7 +180,7 @@ class WifiManager:
     def connect(self, ssid):
         if ssid in self.known_networks:
             conn = self.known_networks[ssid]
-            with contextlib.suppress(NetworkManager.ObjectVanished):
+            with suppress(NetworkManager.ObjectVanished):
                 msg = f"Connecting to: {ssid}"
                 logging.info(msg)
                 self.callback("connecting_status", msg)
@@ -208,7 +205,7 @@ class WifiManager:
         aps = self.wifi_dev.GetAccessPoints()
         ret = {}
         for ap in aps:
-            with contextlib.suppress(NetworkManager.ObjectVanished):
+            with suppress(NetworkManager.ObjectVanished):
                 ret[ap.Ssid] = ap
         return ret
 
@@ -216,7 +213,7 @@ class WifiManager:
         netinfo = {}
         if ssid in self.known_networks:
             con = self.known_networks[ssid]
-            with contextlib.suppress(NetworkManager.ObjectVanished):
+            with suppress(NetworkManager.ObjectVanished):
                 settings = con.GetSettings()
                 if settings and '802-11-wireless' in settings:
                     netinfo.update({
@@ -227,7 +224,7 @@ class WifiManager:
         aps = self.visible_networks
         if path in aps:
             ap = aps[path]
-            with contextlib.suppress(NetworkManager.ObjectVanished):
+            with suppress(NetworkManager.ObjectVanished):
                 netinfo.update({
                     "mac": ap.HwAddress,
                     "channel": WifiChannels.lookup(str(ap.Frequency))[1],

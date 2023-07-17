@@ -1,11 +1,8 @@
 import logging
-import contextlib
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
-
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.widgets.bedmap import BedMap
@@ -193,9 +190,10 @@ class BedMeshPanel(ScreenPanel):
         if action == "notify_busy":
             self.process_busy(data)
             return
-        if action == "notify_status_update":
-            with contextlib.suppress(KeyError):
-                self.activate_mesh(data['bed_mesh']['profile_name'])
+        if action != "notify_status_update":
+            return
+        if 'bed_mesh' in data and 'profile_name' in data['bed_mesh']:
+            self.activate_mesh(data['bed_mesh']['profile_name'])
 
     def remove_create(self):
         if self.show_create is False:

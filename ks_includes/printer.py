@@ -1,5 +1,4 @@
 import logging
-import contextlib
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -115,14 +114,14 @@ class Printer:
         # webhooks states: startup, ready, shutdown, error
         # print_stats: standby, printing, paused, error, complete
         # idle_timeout: Idle, Printing, Ready
-        if self.data['webhooks']['state'] == "ready":
-            with contextlib.suppress(KeyError):
-                if self.data['print_stats']['state'] == 'paused':
-                    return "paused"
-                if self.data['print_stats']['state'] == 'printing':
-                    return "printing"
-                if self.data['idle_timeout']['state'].lower() == "printing":
-                    return "busy"
+        if self.data['webhooks']['state'] == "ready" and (
+                'print_stats' in self.data and 'state' in self.data['print_stats']):
+            if self.data['print_stats']['state'] == 'paused':
+                return "paused"
+            if self.data['print_stats']['state'] == 'printing':
+                return "printing"
+            if self.data['idle_timeout']['state'].lower() == "printing":
+                return "busy"
         return self.data['webhooks']['state']
 
     def process_status_update(self):

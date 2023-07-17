@@ -1,11 +1,9 @@
 import logging
-import contextlib
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib
-
+from contextlib import suppress
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.widgets.heatergraph import HeaterGraph
 from ks_includes.widgets.keypad import Keypad
@@ -230,7 +228,7 @@ class TemperaturePanel(ScreenPanel):
                 target = None
                 max_temp = float(self._printer.get_config_section(heater)['max_temp'])
                 name = heater.split()[1] if len(heater.split()) > 1 else heater
-                with contextlib.suppress(KeyError):
+                with suppress(KeyError):
                     for i in self.preheat_options[setting]:
                         logging.info(f"{self.preheat_options[setting]}")
                         if i == name:
@@ -247,19 +245,19 @@ class TemperaturePanel(ScreenPanel):
                         self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), target)
                 elif heater.startswith('heater_bed'):
                     if target is None:
-                        with contextlib.suppress(KeyError):
+                        with suppress(KeyError):
                             target = self.preheat_options[setting]["bed"]
                     if self.validate(heater, target, max_temp):
                         self._screen._ws.klippy.set_bed_temp(target)
                 elif heater.startswith('heater_generic '):
                     if target is None:
-                        with contextlib.suppress(KeyError):
+                        with suppress(KeyError):
                             target = self.preheat_options[setting]["heater_generic"]
                     if self.validate(heater, target, max_temp):
                         self._screen._ws.klippy.set_heater_temp(name, target)
                 elif heater.startswith('temperature_fan '):
                     if target is None:
-                        with contextlib.suppress(KeyError):
+                        with suppress(KeyError):
                             target = self.preheat_options[setting]["temperature_fan"]
                     if self.validate(heater, target, max_temp):
                         self._screen._ws.klippy.set_temp_fan_temp(name, target)
@@ -279,7 +277,7 @@ class TemperaturePanel(ScreenPanel):
         return False
 
     def preheat_gcode(self, setting):
-        with contextlib.suppress(KeyError):
+        with suppress(KeyError):
             self._screen._ws.klippy.gcode_script(self.preheat_options[setting]['gcode'])
         return False
 
