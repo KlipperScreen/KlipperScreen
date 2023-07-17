@@ -96,7 +96,7 @@ class NetworkPanel(ScreenPanel):
             if self.update_timeout is None:
                 self.update_timeout = GLib.timeout_add_seconds(5, self.update_all_networks)
         else:
-            self.labels['networkinfo'] = Gtk.Label("")
+            self.labels['networkinfo'] = Gtk.Label()
             self.labels['networkinfo'].get_style_context().add_class('temperature_entry')
             box.pack_start(self.labels['networkinfo'], False, False, 0)
             self.update_single_network_info()
@@ -144,7 +144,7 @@ class NetworkPanel(ScreenPanel):
         if connected_ssid == ssid:
             display_name += " (" + _("Connected") + ")"
 
-        name = Gtk.Label("")
+        name = Gtk.Label()
         name.set_markup(f"<big><b>{display_name}</b></big>")
         name.set_hexpand(True)
         name.set_halign(Gtk.Align.START)
