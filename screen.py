@@ -85,7 +85,6 @@ class KlipperScreen(Gtk.Window):
     popup_message = None
     screensaver = None
     printers = printer = None
-    subscriptions = []
     updating = False
     _ws = None
     screensaver_timeout = None
@@ -313,7 +312,6 @@ class KlipperScreen(Gtk.Window):
         logging.debug(f"Current panel hierarchy: {' > '.join(self._cur_panels)}")
         self.base_panel.show_back(len(self._cur_panels) > 1)
         if hasattr(self.panels[panel_name], "process_update"):
-            self.add_subscription(panel_name)
             self.process_update("notify_status_update", self.printer.data)
             self.process_update("notify_busy", self.printer.busy)
         if hasattr(self.panels[panel_name], "activate"):
@@ -496,7 +494,6 @@ class KlipperScreen(Gtk.Window):
         for panel in list(self.panels):
             if hasattr(self.panels[panel], "deactivate"):
                 self.panels[panel].deactivate()
-        self.subscriptions.clear()
         self._cur_panels.clear()
         self.close_screensaver()
 
@@ -507,8 +504,6 @@ class KlipperScreen(Gtk.Window):
         self.base_panel.remove(self.panels[self._cur_panels[-1]].content)
         if hasattr(self.panels[self._cur_panels[-1]], "deactivate"):
             self.panels[self._cur_panels[-1]].deactivate()
-        if self._cur_panels[-1] in self.subscriptions:
-            self.subscriptions.remove(self._cur_panels[-1])
         if pop:
             del self._cur_panels[-1]
             self.attach_panel(self._cur_panels[-1])
@@ -522,10 +517,6 @@ class KlipperScreen(Gtk.Window):
             self._remove_current_panel()
             if not home:
                 break
-
-    def add_subscription(self, panel_name):
-        if panel_name not in self.subscriptions:
-            self.subscriptions.append(panel_name)
 
     def reset_screensaver_timeout(self, *args):
         if self.screensaver_timeout is not None:
@@ -765,9 +756,9 @@ class KlipperScreen(Gtk.Window):
         self.process_update(action, data)
 
     def process_update(self, *args):
-        GLib.idle_add(self.base_panel.process_update, *args)
-        for x in self.subscriptions:
-            GLib.idle_add(self.panels[x].process_update, *args)
+        self.base_panel.process_update(*args)
+        if self._cur_panels and hasattr(self.panels[self._cur_panels[-1]], "process_update"):
+            self.panels[self._cur_panels[-1]].process_update(*args)
 
     def _confirm_send_action(self, widget, text, method, params=None):
         buttons = [
