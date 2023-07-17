@@ -1,11 +1,10 @@
-import contextlib
 import mpv
 import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
-
+from contextlib import suppress
 from ks_includes.screen_panel import ScreenPanel
 
 
@@ -47,11 +46,11 @@ class CameraPanel(ScreenPanel):
         # Create mpv after show or the 'window' property will be None
         self.mpv = mpv.MPV(log_handler=self.log, vo='gpu,wlshm,xv,x11')
 
-        with contextlib.suppress(Exception):
+        with suppress(Exception):
             self.mpv.profile = 'sw-fast'
 
         # LOW LATENCY PLAYBACK
-        with contextlib.suppress(Exception):
+        with suppress(Exception):
             self.mpv.profile = 'low-latency'
         self.mpv.untimed = True
         self.mpv.audio = 'no'

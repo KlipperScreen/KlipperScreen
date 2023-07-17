@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 import logging
 import os
-import contextlib
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Pango
-from ks_includes.screen_panel import ScreenPanel
+from contextlib import suppress
 from math import pi, sqrt
 from statistics import median
 from time import time
+from ks_includes.screen_panel import ScreenPanel
 
 
 def create_panel(*args):
@@ -531,41 +531,41 @@ class JobStatusPanel(ScreenPanel):
                 f"{data['display_status']['message'] if data['display_status']['message'] is not None else ''}"
             )
 
-        with contextlib.suppress(KeyError):
+        with suppress(KeyError):
             if data["toolhead"]["extruder"] != self.current_extruder:
                 self.labels['temp_grid'].remove_column(0)
                 self.labels['temp_grid'].insert_column(0)
                 self.current_extruder = data["toolhead"]["extruder"]
                 self.labels['temp_grid'].attach(self.buttons['extruder'][self.current_extruder], 0, 0, 1, 1)
                 self._screen.show_all()
-        with contextlib.suppress(KeyError):
+        with suppress(KeyError):
             self.labels['max_accel'].set_label(f"{data['toolhead']['max_accel']:.0f} {self.mms2}")
-        with contextlib.suppress(KeyError):
+        with suppress(KeyError):
             self.labels['advance'].set_label(f"{data['extruder']['pressure_advance']:.2f}")
 
         if "gcode_move" in data:
-            with contextlib.suppress(KeyError):
+            with suppress(KeyError):
                 self.pos_z = round(float(data['gcode_move']['gcode_position'][2]), 2)
                 self.buttons['z'].set_label(f"Z: {self.pos_z:6.2f}{f'/{self.oheight}' if self.oheight > 0 else ''}")
-            with contextlib.suppress(KeyError):
+            with suppress(KeyError):
                 self.extrusion = round(float(data["gcode_move"]["extrude_factor"]) * 100)
                 self.labels['extrude_factor'].set_label(f"{self.extrusion:3}%")
-            with contextlib.suppress(KeyError):
+            with suppress(KeyError):
                 self.speed = round(float(data["gcode_move"]["speed_factor"]) * 100)
                 self.speed_factor = float(data["gcode_move"]["speed_factor"])
                 self.labels['speed_factor'].set_label(f"{self.speed:3}%")
-            with contextlib.suppress(KeyError):
+            with suppress(KeyError):
                 self.req_speed = round(float(data["gcode_move"]["speed"]) / 60 * self.speed_factor)
                 self.labels['req_speed'].set_label(
                     f"{self.speed}% {self.vel:3.0f}/{self.req_speed:3.0f} "
                     f"{f'{self.mms}' if self.vel < 1000 and self.req_speed < 1000 and self._screen.width > 500 else ''}"
                 )
                 self.buttons['speed'].set_label(self.labels['req_speed'].get_label())
-            with contextlib.suppress(KeyError):
+            with suppress(KeyError):
                 self.zoffset = float(data["gcode_move"]["homing_origin"][2])
                 self.labels['zoffset'].set_label(f"{self.zoffset:.3f} {self.mm}")
         if "motion_report" in data:
-            with contextlib.suppress(KeyError):
+            with suppress(KeyError):
                 self.labels['pos_x'].set_label(f"X: {data['motion_report']['live_position'][0]:6.2f}")
                 self.labels['pos_y'].set_label(f"Y: {data['motion_report']['live_position'][1]:6.2f}")
                 self.labels['pos_z'].set_label(f"Z: {data['motion_report']['live_position'][2]:6.2f}")
@@ -577,14 +577,14 @@ class JobStatusPanel(ScreenPanel):
                     evelocity = (pos[3] - self.prev_pos[0][3]) / interval
                     self.flowstore.append(self.fila_section * evelocity)
                 self.prev_pos = [pos, now]
-            with contextlib.suppress(KeyError):
+            with suppress(KeyError):
                 self.vel = float(data["motion_report"]["live_velocity"])
                 self.labels['req_speed'].set_label(
                     f"{self.speed}% {self.vel:3.0f}/{self.req_speed:3.0f} "
                     f"{f'{self.mms}' if self.vel < 1000 and self.req_speed < 1000 and self._screen.width > 500 else ''}"
                 )
                 self.buttons['speed'].set_label(self.labels['req_speed'].get_label())
-            with contextlib.suppress(KeyError):
+            with suppress(KeyError):
                 self.flowstore.append(self.fila_section * float(data["motion_report"]["live_extruder_velocity"]))
         fan_label = ""
         for fan in self.fans:
@@ -595,14 +595,14 @@ class JobStatusPanel(ScreenPanel):
         if "virtual_sdcard" in data and "progress" in data["virtual_sdcard"]:
             self.update_progress(data["virtual_sdcard"]["progress"])
         if "print_stats" in data:
-            with contextlib.suppress(KeyError):
+            with suppress(KeyError):
                 self.set_state(
                     data["print_stats"]["state"],
                     msg=f'{data["print_stats"]["message"] if "message" in data["print_stats"] else ""}'
                 )
-            with contextlib.suppress(KeyError):
+            with suppress(KeyError):
                 self.update_filename(data['print_stats']["filename"])
-            with contextlib.suppress(KeyError):
+            with suppress(KeyError):
                 if 'print_duration' in data["print_stats"]:
                     if 'filament_used' in data["print_stats"]:
                         self.labels['filament_used'].set_label(
@@ -614,10 +614,10 @@ class JobStatusPanel(ScreenPanel):
                         f"{data['print_stats']['filament_used'] if 'filament_used' in 'print_stats' else 0}"
                     )
             if 'info' in data["print_stats"]:
-                with contextlib.suppress(KeyError):
+                with suppress(KeyError):
                     if data["print_stats"]['info']['total_layer'] is not None:
                         self.labels['total_layers'].set_label(f"{data['print_stats']['info']['total_layer']}")
-                with contextlib.suppress(KeyError):
+                with suppress(KeyError):
                     if data["print_stats"]['info']['current_layer'] is not None:
                         self.labels['layer'].set_label(
                             f"{data['print_stats']['info']['current_layer']} / "
@@ -648,18 +648,18 @@ class JobStatusPanel(ScreenPanel):
         slicer_time = filament_time = file_time = None
         timeleft_type = self._config.get_config()['main'].get('print_estimate_method', 'auto')
 
-        with contextlib.suppress(KeyError):
+        with suppress(KeyError):
             if self.file_metadata['estimated_time'] > 0:
                 # speed_factor compensation based on empirical testing
                 spdcomp = sqrt(self.speed_factor)
                 slicer_time = ((self.file_metadata['estimated_time']) / spdcomp) + non_printing
         self.labels["slicer_time"].set_label(self.format_time(slicer_time))
 
-        with contextlib.suppress(Exception):
+        with suppress(Exception):
             if self.file_metadata['filament_total'] > fila_used:
                 filament_time = (total_duration / (fila_used / self.file_metadata['filament_total'])) + non_printing
         self.labels["filament_time"].set_label(self.format_time(filament_time))
-        with contextlib.suppress(ZeroDivisionError):
+        with suppress(ZeroDivisionError):
             file_time = (total_duration / self.progress) + non_printing
         self.labels["file_time"].set_label(self.format_time(file_time))
 

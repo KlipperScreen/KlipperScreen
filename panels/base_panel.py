@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import contextlib
 import logging
 
 import gi
@@ -9,7 +8,7 @@ from gi.repository import GLib, Gtk, Pango
 from jinja2 import Environment
 from datetime import datetime
 from math import log
-
+from contextlib import suppress
 from ks_includes.screen_panel import ScreenPanel
 
 
@@ -208,11 +207,11 @@ class BasePanel(ScreenPanel):
         if action == "notify_update_response":
             if self.update_dialog is None:
                 self.show_update_dialog()
-            with contextlib.suppress(KeyError):
+            with suppress(KeyError):
                 self.labels['update_progress'].set_text(
                     f"{self.labels['update_progress'].get_text().strip()}\n"
                     f"{data['message']}\n")
-            with contextlib.suppress(KeyError):
+            with suppress(KeyError):
                 if data['complete']:
                     logging.info("Update complete")
                     if self.update_dialog is not None:
@@ -242,7 +241,7 @@ class BasePanel(ScreenPanel):
                             name = f"{name[:1].upper()}: "
                     self.labels[device].set_label(f"{name}{int(temp)}°")
 
-        with contextlib.suppress(Exception):
+        with suppress(Exception):
             if data["toolhead"]["extruder"] != self.current_extruder:
                 self.control['temp_box'].remove(self.labels[f"{self.current_extruder}_box"])
                 self.current_extruder = data["toolhead"]["extruder"]
