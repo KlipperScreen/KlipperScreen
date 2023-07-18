@@ -592,8 +592,6 @@ class JobStatusPanel(ScreenPanel):
             fan_label += f" {self.fans[fan]['name']}{self.fans[fan]['speed']}"
         if fan_label:
             self.buttons['fan'].set_label(fan_label[:12])
-        if "virtual_sdcard" in data and "progress" in data["virtual_sdcard"]:
-            self.update_progress(data["virtual_sdcard"]["progress"])
         if "print_stats" in data:
             with suppress(KeyError):
                 self.set_state(
@@ -608,11 +606,6 @@ class JobStatusPanel(ScreenPanel):
                         self.labels['filament_used'].set_label(
                             f"{float(data['print_stats']['filament_used']) / 1000:.1f} m"
                         )
-                    self.update_time_left(
-                        data['print_stats']['total_duration'],
-                        data['print_stats']['print_duration'],
-                        f"{data['print_stats']['filament_used'] if 'filament_used' in 'print_stats' else 0}"
-                    )
             if 'info' in data["print_stats"]:
                 with suppress(KeyError):
                     if data["print_stats"]['info']['total_layer'] is not None:
@@ -628,6 +621,8 @@ class JobStatusPanel(ScreenPanel):
                     f"{1 + round((self.pos_z - self.f_layer_h) / self.layer_h)} / "
                     f"{self.labels['total_layers'].get_text()}"
                 )
+            if self.state in ["printing", "paused"]:
+                self.update_time_left()
 
     def update_flow(self):
         if not self.flowstore:
@@ -638,8 +633,10 @@ class JobStatusPanel(ScreenPanel):
         self.buttons['extrusion'].set_label(f"{self.extrusion:3}% {self.flowrate:5.1f} {self.mms3}")
         return True
 
-    def update_time_left(self, total_duration:int, print_duration:int, fila_used='0'):
-        fila_used = float(fila_used)
+    def update_time_left(self):
+        total_duration = float(self._printer.get_stat('print_stats', 'total_duration'))
+        print_duration = float(self._printer.get_stat('print_stats', 'print_duration'))
+        fila_used = float(self._printer.get_stat('print_stats', 'filament_used'))
         self.labels["duration"].set_label(self.format_time(total_duration))
         elapsed_label = f"{self.labels['elapsed'].get_text()}  {self.labels['duration'].get_text()}"
         self.buttons['elapsed'].set_label(elapsed_label)
@@ -657,10 +654,10 @@ class JobStatusPanel(ScreenPanel):
 
         with suppress(Exception):
             if self.file_metadata['filament_total'] > fila_used:
-                filament_time = (total_duration / (fila_used / self.file_metadata['filament_total'])) + non_printing
+                filament_time = (print_duration / (fila_used / self.file_metadata['filament_total'])) + non_printing
         self.labels["filament_time"].set_label(self.format_time(filament_time))
         with suppress(ZeroDivisionError):
-            file_time = (total_duration / self.progress) + non_printing
+            file_time = (print_duration / self._printer.get_stat("virtual_sdcard", "progress")) + non_printing
         self.labels["file_time"].set_label(self.format_time(file_time))
 
         if timeleft_type == "file":
@@ -685,6 +682,12 @@ class JobStatusPanel(ScreenPanel):
         self.labels["time_left"].set_label(self.format_eta(estimated, total_duration))
         remaining_label = f"{self.labels['left'].get_text()}  {self.labels['time_left'].get_text()}"
         self.buttons['left'].set_label(remaining_label)
+        self.update_progress(min(max(total_duration / estimated, 0), 1))
+
+    def update_progress(self, progress: float):
+        self.progress = progress
+        self.labels['progress_text'].set_label(f"{progress * 100:.0f}%")
+        self.labels['darea'].queue_draw()
 
     def set_state(self, state, msg=""):
         if state == "printing":
@@ -825,8 +828,3 @@ class JobStatusPanel(ScreenPanel):
             logging.debug("Cannot find file metadata. Listening for updated metadata")
             self._screen.files.add_file_callback(self._callback_metadata)
         self.show_file_thumbnail()
-
-    def update_progress(self, progress:float):
-        self.labels['progress_text'].set_label(f"{progress * 100:.0f}%")
-        self.progress = progress
-        self.labels['darea'].queue_draw()
