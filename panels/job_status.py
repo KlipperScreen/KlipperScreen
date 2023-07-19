@@ -156,7 +156,7 @@ class JobStatusPanel(ScreenPanel):
         self.buttons.update(buttons)
 
         self.labels['temp_grid'] = Gtk.Grid()
-        nlimit = 2 if self._screen.width <= 480 else 3
+        nlimit = 2 if self._screen.width <= 500 else 3
         n = 0
         self.buttons['extruder'] = {}
         if self._printer.get_tools():
