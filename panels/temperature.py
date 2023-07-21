@@ -9,11 +9,7 @@ from ks_includes.widgets.heatergraph import HeaterGraph
 from ks_includes.widgets.keypad import Keypad
 
 
-def create_panel(*args, **kwargs):
-    return TemperaturePanel(*args, **kwargs)
-
-
-class TemperaturePanel(ScreenPanel):
+class Panel(ScreenPanel):
     graph_update = None
     active_heater = None
 

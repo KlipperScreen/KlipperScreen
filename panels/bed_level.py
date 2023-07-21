@@ -1,18 +1,12 @@
 import logging
 import re
 import math
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
-
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
-
-
-def create_panel(*args):
-    return BedLevelPanel(*args)
 
 
 # Find the screw closest to the point,
@@ -38,7 +32,7 @@ def find_closest(screws, point, max_distance, remove=False):
     return closest
 
 
-class BedLevelPanel(ScreenPanel):
+class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
         super().__init__(screen, title)

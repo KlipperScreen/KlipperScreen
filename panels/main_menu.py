@@ -1,20 +1,14 @@
 import logging
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib
-from panels.menu import MenuPanel
-
+from panels.menu import Panel as MenuPanel
 from ks_includes.widgets.heatergraph import HeaterGraph
 from ks_includes.widgets.keypad import Keypad
 
 
-def create_panel(*args, **kwargs):
-    return MainPanel(*args, **kwargs)
-
-
-class MainPanel(MenuPanel):
+class Panel(MenuPanel):
     def __init__(self, screen, title, items=None):
         super().__init__(screen, title, items)
         self.graph_retry_timeout = None

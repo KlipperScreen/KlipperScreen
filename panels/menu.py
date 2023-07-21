@@ -1,21 +1,14 @@
 import logging
-
-import gi
-
 import json
+import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from jinja2 import Template
-
 from ks_includes.screen_panel import ScreenPanel
 
 
-def create_panel(*args, **kwargs):
-    return MenuPanel(*args, **kwargs)
-
-
-class MenuPanel(ScreenPanel):
+class Panel(ScreenPanel):
     j2_data = None
 
     def __init__(self, screen, title, items=None):
@@ -86,7 +79,7 @@ class MenuPanel(ScreenPanel):
 
             if item['panel'] is not None:
                 panel = self._screen.env.from_string(item['panel']).render(printer)
-                b.connect("clicked", self.menu_item_clicked, panel, item)
+                b.connect("clicked", self.menu_item_clicked, item)
             elif item['method'] is not None:
                 params = {}
 

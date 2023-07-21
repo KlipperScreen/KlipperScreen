@@ -1,16 +1,10 @@
 import re
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
-
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
-
-
-def create_panel(*args):
-    return InputShaperPanel(*args)
 
 
 # X and Y frequencies
@@ -21,7 +15,7 @@ XY_FREQ = [
 SHAPERS = ['zv', 'mzv', 'zvd', 'ei', '2hump_ei', '3hump_ei']
 
 
-class InputShaperPanel(ScreenPanel):
+class Panel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         self.freq_xy_adj = {}

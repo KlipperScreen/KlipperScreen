@@ -1,19 +1,13 @@
 import logging
 import re
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
-
 from ks_includes.screen_panel import ScreenPanel
 
 
-def create_panel(*args):
-    return FWRetractionPanel(*args)
-
-
-class FWRetractionPanel(ScreenPanel):
+class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
