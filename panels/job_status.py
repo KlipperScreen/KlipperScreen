@@ -741,8 +741,13 @@ class JobStatusPanel(ScreenPanel):
             offset = self._printer.get_stat("gcode_move", "homing_origin")
             self.zoffset = float(offset[2]) if offset else 0
             if self.zoffset != 0:
-                endstop = (self._printer.config_section_exists("stepper_z") and
-                           not self._printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"))
+                endstop = (
+                    (
+                        self._printer.config_section_exists("stepper_z")
+                        and not self._printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe")
+                    )
+                    or "delta" in self._printer.get_config_section("printer")['kinematics']
+                )
                 if endstop:
                     self.buttons['button_grid'].attach(self.buttons["save_offset_endstop"], 0, 0, 1, 1)
                 else:
