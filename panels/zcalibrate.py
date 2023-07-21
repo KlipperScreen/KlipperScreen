@@ -1,19 +1,13 @@
+import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
-
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
-import logging
 
-
-def create_panel(*args):
-    return ZCalibratePanel(*args)
-
-
-class ZCalibratePanel(ScreenPanel):
+class Panel(ScreenPanel):
     widgets = {}
     distances = ['.01', '.05', '.1', '.5', '1', '5']
     distance = distances[-2]

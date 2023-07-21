@@ -1,20 +1,14 @@
 import logging
 import re
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
-
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
 
-def create_panel(*args):
-    return ExtrudePanel(*args)
-
-
-class ExtrudePanel(ScreenPanel):
+class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
@@ -50,7 +44,7 @@ class ExtrudePanel(ScreenPanel):
         self.buttons['load'].connect("clicked", self.load_unload, "+")
         self.buttons['unload'].connect("clicked", self.load_unload, "-")
         self.buttons['retract'].connect("clicked", self.extrude, "-")
-        self.buttons['temperature'].connect("clicked", self.menu_item_clicked, "temperature", {
+        self.buttons['temperature'].connect("clicked", self.menu_item_clicked, {
             "name": "Temperature",
             "panel": "temperature"
         })

@@ -4,16 +4,11 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
-
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
 
-def create_panel(*args):
-    return FineTunePanel(*args)
-
-
-class FineTunePanel(ScreenPanel):
+class Panel(ScreenPanel):
     z_deltas = ["0.01", "0.05"]
     z_delta = z_deltas[-1]
     speed_deltas = ['5', '25']

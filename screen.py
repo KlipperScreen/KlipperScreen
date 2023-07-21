@@ -80,7 +80,6 @@ class KlipperScreen(Gtk.Window):
     connected_printer = None
     files = None
     keyboard = None
-    load_panel = {}
     panels = {}
     popup_message = None
     screensaver = None
@@ -105,7 +104,6 @@ class KlipperScreen(Gtk.Window):
         self.version = version
         self.dialogs = []
         self.confirm = None
-        self.panels_reinit = []
 
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
@@ -258,52 +256,31 @@ class KlipperScreen(Gtk.Window):
 
         self._ws.klippy.object_subscription(requested_updates)
 
-    def _load_panel(self, panel, *args, **kwargs):
-        if panel not in self.load_panel:
-            logging.debug(f"Loading panel: {panel}")
-            panel_path = os.path.join(os.path.dirname(__file__), 'panels', f"{panel}.py")
-            logging.info(f"Panel path: {panel_path}")
-            if not os.path.exists(panel_path):
-                logging.error(f"Panel {panel} does not exist")
-                raise FileNotFoundError(os.strerror(2), "\n" + panel_path)
+    @staticmethod
+    def _load_panel(panel):
+        logging.debug(f"Loading panel: {panel}")
+        panel_path = os.path.join(os.path.dirname(__file__), 'panels', f"{panel}.py")
+        if not os.path.exists(panel_path):
+            logging.error(f"Panel {panel} does not exist")
+            raise FileNotFoundError(os.strerror(2), "\n" + panel_path)
+        return import_module(f"panels.{panel}")
 
-            module = import_module(f"panels.{panel}")
-            if not hasattr(module, "create_panel"):
-                raise ImportError(f"Cannot locate create_panel function for {panel}")
-            self.load_panel[panel] = getattr(module, "create_panel")
-
-        try:
-            return self.load_panel[panel](*args, **kwargs)
-        except Exception as e:
-            logging.exception(e)
-            raise RuntimeError(f"Unable to create panel: {panel}\n{e}") from e
-
-    def show_panel(self, panel_name, panel_type, title, remove=None, pop=True, **kwargs):
+    def show_panel(self, panel, title, remove=None, pop=True, **kwargs):
         try:
             if remove == 2:
                 self._remove_all_panels()
-                self.panels_reinit = list(self.panels)
             elif remove == 1:
                 self._remove_current_panel(pop)
-            if panel_name not in self.panels:
+            if panel not in self.panels:
                 try:
-                    self.panels[panel_name] = self._load_panel(panel_type, self, title, **kwargs)
+                    self.panels[panel] = self._load_panel(panel).Panel(self, title, **kwargs)
                 except Exception as e:
-
-                    if panel_name in self.panels:
-                        del self.panels[panel_name]
-                    self.show_error_modal(f"Unable to load panel {panel_type}", f"{e}")
+                    self.show_error_modal(f"Unable to load panel {panel}", f"{e}")
                     return
-            elif 'extra' in kwargs:
-                logging.info(f"extra: {kwargs['extra']}")
-                self.panels[panel_name].__init__(self, title, **kwargs)
-
-            self._cur_panels.append(panel_name)
-            if panel_name in self.panels_reinit:
-                logging.info("Reinitializing panel")
-                self.panels[panel_name].__init__(self, title, **kwargs)
-                self.panels_reinit.remove(panel_name)
-            self.attach_panel(panel_name)
+            else:
+                self.panels[panel].__init__(self, title, **kwargs)
+            self._cur_panels.append(panel)
+            self.attach_panel(panel)
         except Exception as e:
             logging.exception(f"Error attaching panel:\n{e}")
 
@@ -471,7 +448,7 @@ class KlipperScreen(Gtk.Window):
     def _go_to_submenu(self, widget, name):
         logging.info(f"#### Go to submenu {name}")
         # Find current menu item
-        if "main_panel" in self._cur_panels:
+        if "main_menu" in self._cur_panels:
             menu = "__main"
         elif "splash_screen" in self._cur_panels:
             menu = "__splashscreen"
@@ -482,7 +459,7 @@ class KlipperScreen(Gtk.Window):
         disname = self._config.get_menu_name(menu, name)
         menuitems = self._config.get_menu_items(menu, name)
         if len(menuitems) != 0:
-            self.show_panel(name, "menu", disname, 1, False, items=menuitems)
+            self.show_panel("menu", disname, 1, False, items=menuitems)
         else:
             logging.info("No items in menu")
 
@@ -632,7 +609,7 @@ class KlipperScreen(Gtk.Window):
 
     def show_printer_select(self, widget=None):
         self.base_panel.show_heaters(False)
-        self.show_panel("printer_select", "printer_select", _("Printer Select"), 2)
+        self.show_panel("printer_select", _("Printer Select"), 2)
 
     def process_busy_state(self, busy):
         self.process_update("notify_busy", busy)
@@ -670,13 +647,13 @@ class KlipperScreen(Gtk.Window):
         self.base_panel_show_all()
         for dialog in self.dialogs:
             self.gtk.remove_dialog(dialog)
-        self.show_panel('job_status', "job_status", _("Printing"), 2)
+        self.show_panel("job_status", _("Printing"), 2)
 
     def state_ready(self, wait=True):
         # Do not return to main menu if completing a job, timeouts/user input will return
         if "job_status" in self._cur_panels and wait:
             return
-        self.show_panel('main_panel', "main_menu", None, 2, items=self._config.get_menu_items("__main"))
+        self.show_panel("main_menu", None, 2, items=self._config.get_menu_items("__main"))
         self.base_panel_show_all()
 
     def state_startup(self):
@@ -720,8 +697,8 @@ class KlipperScreen(Gtk.Window):
             self.printer.process_update({'webhooks': {'state': "ready"}})
         elif action == "notify_status_update" and self.printer.state != "shutdown":
             self.printer.process_update(data)
-            if 'manual_probe' in data and data['manual_probe']['is_active'] and 'zoffset' not in self._cur_panels:
-                self.show_panel('zoffset', "zcalibrate", None, 1, False)
+            if 'manual_probe' in data and data['manual_probe']['is_active'] and 'zcalibrate' not in self._cur_panels:
+                self.show_panel("zcalibrate", None, 1, False)
         elif action == "notify_filelist_changed":
             if self.files is not None:
                 self.files.process_update(data)
@@ -800,7 +777,7 @@ class KlipperScreen(Gtk.Window):
 
     def printer_initializing(self, msg, remove=False):
         if 'splash_screen' not in self.panels or remove:
-            self.show_panel('splash_screen', "splash_screen", None, 2)
+            self.show_panel("splash_screen", None, 2)
         self.panels['splash_screen'].update_text(msg)
 
     def search_power_devices(self, devices):

@@ -1,19 +1,13 @@
 import logging
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
-
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
 
-def create_panel(*args):
-    return MovePanel(*args)
-
-
-class MovePanel(ScreenPanel):
+class Panel(ScreenPanel):
     distances = ['.1', '.5', '1', '5', '10', '25', '50']
     distance = distances[-2]
 
@@ -261,4 +255,4 @@ class MovePanel(ScreenPanel):
         name = "homing"
         disname = self._screen._config.get_menu_name("move", name)
         menuitems = self._screen._config.get_menu_items("move", name)
-        self._screen.show_panel(name, "menu", disname, 1, False, items=menuitems)
+        self._screen.show_panel("menu", disname, 1, False, items=menuitems)

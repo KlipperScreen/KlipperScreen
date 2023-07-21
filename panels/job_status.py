@@ -12,11 +12,7 @@ from time import time
 from ks_includes.screen_panel import ScreenPanel
 
 
-def create_panel(*args):
-    return JobStatusPanel(*args)
-
-
-class JobStatusPanel(ScreenPanel):
+class Panel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         self.grid = self._gtk.HomogeneousGrid()
@@ -152,7 +148,7 @@ class JobStatusPanel(ScreenPanel):
         }
         for button in buttons:
             buttons[button].set_halign(Gtk.Align.START)
-        buttons['fan'].connect("clicked", self.menu_item_clicked, "fan", {"panel": "fan", "name": _("Fan")})
+        buttons['fan'].connect("clicked", self.menu_item_clicked, {"panel": "fan", "name": _("Fan")})
         self.buttons.update(buttons)
 
         self.labels['temp_grid'] = Gtk.Grid()
@@ -166,7 +162,7 @@ class JobStatusPanel(ScreenPanel):
                 self.buttons['extruder'][extruder] = self._gtk.Button(f"extruder-{i}", "", None, self.bts,
                                                                       Gtk.PositionType.LEFT, 1)
                 self.buttons['extruder'][extruder].set_label(self.labels[extruder].get_text())
-                self.buttons['extruder'][extruder].connect("clicked", self.menu_item_clicked, "temperature",
+                self.buttons['extruder'][extruder].connect("clicked", self.menu_item_clicked,
                                                            {"panel": "temperature", "name": _("Temperature"),
                                                             'extra': self.current_extruder})
                 self.buttons['extruder'][extruder].set_halign(Gtk.Align.START)
@@ -179,7 +175,7 @@ class JobStatusPanel(ScreenPanel):
             self.buttons['heater']['heater_bed'] = self._gtk.Button("bed", "", None, self.bts, Gtk.PositionType.LEFT, 1)
             self.labels['heater_bed'] = Gtk.Label(label="-")
             self.buttons['heater']['heater_bed'].set_label(self.labels['heater_bed'].get_text())
-            self.buttons['heater']['heater_bed'].connect("clicked", self.menu_item_clicked, "temperature",
+            self.buttons['heater']['heater_bed'].connect("clicked", self.menu_item_clicked,
                                                          {"panel": "temperature", "name": _("Temperature"),
                                                           'extra': 'heater_bed'})
             self.buttons['heater']['heater_bed'].set_halign(Gtk.Align.START)
@@ -192,7 +188,7 @@ class JobStatusPanel(ScreenPanel):
                 self.buttons['heater'][dev] = self._gtk.Button("heater", "", None, self.bts, Gtk.PositionType.LEFT, 1)
                 self.labels[dev] = Gtk.Label(label="-")
                 self.buttons['heater'][dev].set_label(self.labels[dev].get_text())
-                self.buttons['heater'][dev].connect("clicked", self.menu_item_clicked, "temperature",
+                self.buttons['heater'][dev].connect("clicked", self.menu_item_clicked,
                                                     {"panel": "temperature", "name": _("Temperature"), "extra": dev})
                 self.buttons['heater'][dev].set_halign(Gtk.Align.START)
                 self.labels['temp_grid'].attach(self.buttons['heater'][dev], n, 0, 1, 1)
@@ -217,7 +213,7 @@ class JobStatusPanel(ScreenPanel):
                                                                                   Gtk.PositionType.LEFT, 1)
                                 self.labels[device] = Gtk.Label(label="-")
                                 self.buttons['heater'][device].set_label(self.labels[device].get_text())
-                                self.buttons['heater'][device].connect("clicked", self.menu_item_clicked, "temperature",
+                                self.buttons['heater'][device].connect("clicked", self.menu_item_clicked,
                                                                        {"panel": "temperature",
                                                                         "name": _("Temperature")})
                                 self.buttons['heater'][device].set_halign(Gtk.Align.START)
@@ -375,7 +371,7 @@ class JobStatusPanel(ScreenPanel):
         }
         self.buttons['cancel'].connect("clicked", self.cancel)
         self.buttons['control'].connect("clicked", self._screen._go_to_submenu, "")
-        self.buttons['fine_tune'].connect("clicked", self.menu_item_clicked, "fine_tune", {
+        self.buttons['fine_tune'].connect("clicked", self.menu_item_clicked, {
             "panel": "fine_tune", "name": _("Fine Tuning")})
         self.buttons['menu'].connect("clicked", self.close_panel)
         self.buttons['pause'].connect("clicked", self.pause)
@@ -463,7 +459,7 @@ class JobStatusPanel(ScreenPanel):
     def cancel_confirm(self, dialog, response_id):
         self._gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.APPLY:
-            self.menu_item_clicked(None, "exclude", {"panel": "exclude", "name": _("Exclude Object")})
+            self.menu_item_clicked(None, {"panel": "exclude", "name": _("Exclude Object")})
             return
         if response_id == Gtk.ResponseType.CANCEL:
             self.enable_button("pause", "cancel")

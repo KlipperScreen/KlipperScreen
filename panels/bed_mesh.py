@@ -8,11 +8,7 @@ from ks_includes.screen_panel import ScreenPanel
 from ks_includes.widgets.bedmap import BedMap
 
 
-def create_panel(*args):
-    return BedMeshPanel(*args)
-
-
-class BedMeshPanel(ScreenPanel):
+class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
@@ -273,7 +269,7 @@ class BedMeshPanel(ScreenPanel):
 
         # Load zcalibrate to do a manual mesh
         if not self._printer.get_probe():
-            self.menu_item_clicked(widget, "refresh", {"name": _("Mesh calibrate"), "panel": "zcalibrate"})
+            self.menu_item_clicked(widget, {"name": _("Mesh calibrate"), "panel": "zcalibrate"})
 
     def send_clear_mesh(self, widget):
         self._screen._ws.klippy.gcode_script("BED_MESH_CLEAR")

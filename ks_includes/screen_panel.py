@@ -60,11 +60,11 @@ class ScreenPanel:
             return self._gtk.PixbufFromHttp(loc[1], width, height)
         return None
 
-    def menu_item_clicked(self, widget, panel_type, item):
+    def menu_item_clicked(self, widget, item):
         if 'extra' in item:
-            self._screen.show_panel(panel_type, item['panel'], item['name'], 1, False, extra=item['extra'])
+            self._screen.show_panel(item['panel'], item['name'], 1, False, extra=item['extra'])
             return
-        self._screen.show_panel(panel_type, item['panel'], item['name'], 1, False)
+        self._screen.show_panel(item['panel'], item['name'], 1, False)
 
     def load_menu(self, widget, name, title=None):
         logging.info(f"loading menu {name}")

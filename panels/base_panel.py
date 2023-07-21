@@ -38,7 +38,7 @@ class BasePanel(ScreenPanel):
             self.control['printer_select'].connect("clicked", self._screen.show_printer_select)
 
         self.control['macros_shortcut'] = self._gtk.Button('custom-script', scale=abscale)
-        self.control['macros_shortcut'].connect("clicked", self.menu_item_clicked, "gcode_macros", {
+        self.control['macros_shortcut'].connect("clicked", self.menu_item_clicked, {
             "name": "Macros",
             "panel": "gcode_macros"
         })

@@ -1,6 +1,5 @@
 import logging
 import os
-
 import gi
 import netifaces
 
@@ -9,11 +8,7 @@ from gi.repository import Gtk, Gdk, GLib, Pango
 from ks_includes.screen_panel import ScreenPanel
 
 
-def create_panel(*args):
-    return NetworkPanel(*args)
-
-
-class NetworkPanel(ScreenPanel):
+class Panel(ScreenPanel):
     initialized = False
 
     def __init__(self, screen, title):

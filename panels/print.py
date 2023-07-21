@@ -1,21 +1,15 @@
 # -*- coding: utf-8 -*-
 import logging
 import os
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib, Pango
 from datetime import datetime
-
 from ks_includes.screen_panel import ScreenPanel
 
 
-def create_panel(*args):
-    return PrintPanel(*args)
-
-
-class PrintPanel(ScreenPanel):
+class Panel(ScreenPanel):
     cur_directory = "gcodes"
     dir_panels = {}
     filelist = {'gcodes': {'directories': [], 'files': []}}

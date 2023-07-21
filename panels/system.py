@@ -1,16 +1,10 @@
 import logging
 import os
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango, GLib
-
 from ks_includes.screen_panel import ScreenPanel
-
-
-def create_panel(*args):
-    return SystemPanel(*args)
 
 
 # Same as ALLOWED_SERVICES in moonraker
@@ -27,7 +21,7 @@ ALLOWED_SERVICES = (
 )
 
 
-class SystemPanel(ScreenPanel):
+class Panel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         self.refresh = None
