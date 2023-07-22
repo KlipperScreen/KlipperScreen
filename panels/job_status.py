@@ -621,7 +621,7 @@ class JobStatusPanel(ScreenPanel):
                     f"{1 + round((self.pos_z - self.f_layer_h) / self.layer_h)} / "
                     f"{self.labels['total_layers'].get_text()}"
                 )
-            if self.state in ["printing", "paused"]:
+            if self.state in ["printing"]:
                 self.update_time_left()
 
     def update_flow(self):
@@ -636,7 +636,10 @@ class JobStatusPanel(ScreenPanel):
     def update_time_left(self):
         total_duration = float(self._printer.get_stat('print_stats', 'total_duration'))
         print_duration = float(self._printer.get_stat('print_stats', 'print_duration'))
+        if not print_duration:  # No-extrusion
+            print_duration = total_duration
         fila_used = float(self._printer.get_stat('print_stats', 'filament_used'))
+        progress = float(self._printer.get_stat("virtual_sdcard", "progress"))
         self.labels["duration"].set_label(self.format_time(total_duration))
         elapsed_label = f"{self.labels['elapsed'].get_text()}  {self.labels['duration'].get_text()}"
         self.buttons['elapsed'].set_label(elapsed_label)
@@ -657,7 +660,7 @@ class JobStatusPanel(ScreenPanel):
                 filament_time = (print_duration / (fila_used / self.file_metadata['filament_total'])) + non_printing
         self.labels["filament_time"].set_label(self.format_time(filament_time))
         with suppress(ZeroDivisionError):
-            file_time = (print_duration / self._printer.get_stat("virtual_sdcard", "progress")) + non_printing
+            file_time = (print_duration / progress) + non_printing
         self.labels["file_time"].set_label(self.format_time(file_time))
 
         if timeleft_type == "file":
@@ -667,16 +670,15 @@ class JobStatusPanel(ScreenPanel):
         elif slicer_time is not None:
             if timeleft_type == "slicer":
                 estimated = slicer_time
-            elif filament_time is not None and self.progress > 0.14:
+            elif filament_time is not None and progress > 0.14:
                 # Weighted arithmetic mean (Slicer is the most accurate)
                 estimated = (slicer_time * 3 + filament_time + file_time) / 5
             else:
                 # At the begining file and filament are innacurate
                 estimated = slicer_time
-        elif file_time is not None:
-            if filament_time is not None:
+        if (estimated is None or estimated < 1) and file_time is not None:
+            if filament_time is not None and filament_time > 1:
                 estimated = (filament_time + file_time) / 2
-        if estimated is None or estimated < 1:
             estimated = file_time
         self.labels["est_time"].set_label(self.format_time(estimated))
         self.labels["time_left"].set_label(self.format_eta(estimated, total_duration))
