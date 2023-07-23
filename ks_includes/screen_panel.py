@@ -161,9 +161,10 @@ class ScreenPanel:
 
     @staticmethod
     def prettify(name: str):
+        name = name.replace("_", " ")
         if name.islower():
-            name = name.capitalize()
-        return name.replace("_", " ")
+            name = name.title()
+        return name
 
     def update_temp(self, dev, temp, target, power, lines=1):
         if temp is None:
