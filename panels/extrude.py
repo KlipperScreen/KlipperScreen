@@ -129,7 +129,7 @@ class ExtrudePanel(ScreenPanel):
                     break
                 name = x[23:].strip()
                 self.labels[x] = {
-                    'label': Gtk.Label(name.capitalize().replace('_', ' ')),
+                    'label': Gtk.Label(self.prettify(name)),
                     'switch': Gtk.Switch(),
                     'box': Gtk.Box()
                 }

@@ -159,6 +159,12 @@ class ScreenPanel:
             if size < unit:
                 return f"{(1024 * size / unit):.1f} {suffix}"
 
+    @staticmethod
+    def prettify(name: str):
+        if name.islower():
+            name = name.capitalize()
+        return name.replace("_", " ")
+
     def update_temp(self, dev, temp, target, power, lines=1):
         if temp is None:
             return

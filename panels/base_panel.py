@@ -236,7 +236,7 @@ class BasePanel(ScreenPanel):
                     if not (device.startswith("extruder") or device.startswith("heater_bed")):
                         if self.titlebar_name_type == "full":
                             name = device.split()[1] if len(device.split()) > 1 else device
-                            name = f'{name.capitalize().replace("_", " ")}: '
+                            name = f'{self.prettify(name)}: '
                         elif self.titlebar_name_type == "short":
                             name = device.split()[1] if len(device.split()) > 1 else device
                             name = f"{name[:1].upper()}: "
