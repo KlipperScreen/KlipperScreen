@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-02 16:32-0300\n"
-"PO-Revision-Date: 2022-12-10 14:52+0300\n"
+"PO-Revision-Date: 2023-07-23 17:27+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -51,11 +51,11 @@ msgstr "Uygula"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr ""
+msgstr "Endstop'a %s%.3f ofset uygulansın mı?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr ""
+msgstr "Prob'a %s%.3f ofset uygulansın mı?"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Nesneyi hariç tutmak istediğinizden emin misiniz?"
@@ -106,7 +106,7 @@ msgid "Calibrating"
 msgstr "Kalibre Ediliyor"
 
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 msgid "Can't set above the maximum:"
 msgstr "Maksimumun üzerine ayarlanamaz:"
@@ -167,7 +167,7 @@ msgid "Date"
 msgstr "Tarih"
 
 msgid "Delete Directory?"
-msgstr ""
+msgstr "Dizini Sil?"
 
 msgid "Delete File?"
 msgstr "Dosyayı Sil?"
@@ -258,7 +258,7 @@ msgid "Full Update"
 msgstr "Tam Güncelleme"
 
 msgid "Fullscreen"
-msgstr ""
+msgstr "Tam Ekran"
 
 msgid "Go Back"
 msgstr "Geri git"
@@ -309,7 +309,7 @@ msgid "Initializing printer..."
 msgstr "Yazıcı başlatılıyor..."
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "PID kalibrasyonu başlatın:"
 
 msgid "Input Shaper"
 msgstr "İvme Düzenleyicisi"
@@ -333,7 +333,7 @@ msgid "Invert Z"
 msgstr "Z Ters çevir"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
+msgstr "Isıtıcı gücüne bağlı olarak 5 dakikadan fazla sürebilir."
 
 msgid "Klipper Restart"
 msgstr "Klipper Yeniden başlat"
@@ -426,7 +426,7 @@ msgid "Moonraker: connected"
 msgstr "Moonraker: bağlandı"
 
 msgid "More"
-msgstr ""
+msgstr "Daha"
 
 msgid "Move"
 msgstr "Hareket"
@@ -550,7 +550,7 @@ msgid "Refresh"
 msgstr "Yenile"
 
 msgid "Rename/Move:"
-msgstr ""
+msgstr "Yeniden Adlandır/Taşı:"
 
 msgid "Restart"
 msgstr "Yeniden Başlat"
@@ -745,8 +745,8 @@ msgstr[1] "saatler"
 
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "dakika"
+msgstr[1] "dakikalar"
 
 msgid "mm"
 msgstr "mm"
