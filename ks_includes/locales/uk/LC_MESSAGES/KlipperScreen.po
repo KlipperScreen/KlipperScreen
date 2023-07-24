@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2023-05-24 14:53-0300\n"
+"Project-Id-Version: 2023-07-22 14:53-0300\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-02 16:32-0300\n"
-"PO-Revision-Date: 2023-05-24 22:02+0300\n"
+"PO-Revision-Date: 2023-07-22 12:41+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
 "Language: uk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -314,7 +314,7 @@ msgid "Initializing printer..."
 msgstr "Ініціалізація принтера..."
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "Почати калібрування PID для:"
 
 msgid "Input Shaper"
 msgstr "Input Shaper"
@@ -338,7 +338,7 @@ msgid "Invert Z"
 msgstr "Інвертувати Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
+msgstr "Залежно від потужності обігрівача це може зайняти більше 5 хвилин."
 
 msgid "Klipper Restart"
 msgstr ""
@@ -433,7 +433,7 @@ msgid "Moonraker: connected"
 msgstr "Підключено до Moonraker"
 
 msgid "More"
-msgstr ""
+msgstr "Більше"
 
 msgid "Move"
 msgstr "Переміщення"
