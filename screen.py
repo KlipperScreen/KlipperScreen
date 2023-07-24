@@ -615,8 +615,9 @@ class KlipperScreen(Gtk.Window):
             os.system("xset -display :0 +dpms")
             if functions.get_DPMS_state() == functions.DPMS_State.Fail:
                 logging.info("DPMS State FAIL")
-                self.show_popup_message("DPMS has failed to load")
+                self.show_popup_message(_("DPMS has failed to load and has been disabled"))
                 self._config.set("main", "use_dpms", "False")
+                self._config.save_user_config_options()
             else:
                 logging.debug("Using DPMS")
                 os.system("xset -display :0 s off")
