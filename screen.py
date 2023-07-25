@@ -265,11 +265,11 @@ class KlipperScreen(Gtk.Window):
             raise FileNotFoundError(os.strerror(2), "\n" + panel_path)
         return import_module(f"panels.{panel}")
 
-    def show_panel(self, panel, title, remove=None, pop=True, **kwargs):
+    def show_panel(self, panel, title, remove_all=False, pop=True, **kwargs):
         try:
-            if remove == 2:
+            if remove_all:
                 self._remove_all_panels()
-            elif remove == 1:
+            else:
                 self._remove_current_panel(pop)
             if panel not in self.panels:
                 try:
@@ -284,15 +284,15 @@ class KlipperScreen(Gtk.Window):
         except Exception as e:
             logging.exception(f"Error attaching panel:\n{e}")
 
-    def attach_panel(self, panel_name):
-        self.base_panel.add_content(self.panels[panel_name])
+    def attach_panel(self, panel):
+        self.base_panel.add_content(self.panels[panel])
         logging.debug(f"Current panel hierarchy: {' > '.join(self._cur_panels)}")
         self.base_panel.show_back(len(self._cur_panels) > 1)
-        if hasattr(self.panels[panel_name], "process_update"):
+        if hasattr(self.panels[panel], "process_update"):
             self.process_update("notify_status_update", self.printer.data)
             self.process_update("notify_busy", self.printer.busy)
-        if hasattr(self.panels[panel_name], "activate"):
-            self.panels[panel_name].activate()
+        if hasattr(self.panels[panel], "activate"):
+            self.panels[panel].activate()
         self.show_all()
 
     def show_popup_message(self, message, level=3):
@@ -459,7 +459,7 @@ class KlipperScreen(Gtk.Window):
         disname = self._config.get_menu_name(menu, name)
         menuitems = self._config.get_menu_items(menu, name)
         if len(menuitems) != 0:
-            self.show_panel("menu", disname, 1, False, items=menuitems)
+            self.show_panel("menu", disname, pop=False, items=menuitems)
         else:
             logging.info("No items in menu")
 
@@ -609,7 +609,7 @@ class KlipperScreen(Gtk.Window):
 
     def show_printer_select(self, widget=None):
         self.base_panel.show_heaters(False)
-        self.show_panel("printer_select", _("Printer Select"), 2)
+        self.show_panel("printer_select", _("Printer Select"), remove_all=True)
 
     def process_busy_state(self, busy):
         self.process_update("notify_busy", busy)
@@ -647,13 +647,13 @@ class KlipperScreen(Gtk.Window):
         self.base_panel_show_all()
         for dialog in self.dialogs:
             self.gtk.remove_dialog(dialog)
-        self.show_panel("job_status", _("Printing"), 2)
+        self.show_panel("job_status", _("Printing"), remove_all=True)
 
     def state_ready(self, wait=True):
         # Do not return to main menu if completing a job, timeouts/user input will return
         if "job_status" in self._cur_panels and wait:
             return
-        self.show_panel("main_menu", None, 2, items=self._config.get_menu_items("__main"))
+        self.show_panel("main_menu", None, remove_all=True, items=self._config.get_menu_items("__main"))
         self.base_panel_show_all()
 
     def state_startup(self):
@@ -698,7 +698,7 @@ class KlipperScreen(Gtk.Window):
         elif action == "notify_status_update" and self.printer.state != "shutdown":
             self.printer.process_update(data)
             if 'manual_probe' in data and data['manual_probe']['is_active'] and 'zcalibrate' not in self._cur_panels:
-                self.show_panel("zcalibrate", None, 1, False)
+                self.show_panel("zcalibrate", _('Z Calibrate'), pop=False)
         elif action == "notify_filelist_changed":
             if self.files is not None:
                 self.files.process_update(data)
@@ -777,7 +777,7 @@ class KlipperScreen(Gtk.Window):
 
     def printer_initializing(self, msg, remove=False):
         if 'splash_screen' not in self.panels or remove:
-            self.show_panel("splash_screen", None, 2)
+            self.show_panel("splash_screen", None, remove_all=True)
         self.panels['splash_screen'].update_text(msg)
 
     def search_power_devices(self, devices):

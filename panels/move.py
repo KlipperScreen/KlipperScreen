@@ -255,4 +255,4 @@ class Panel(ScreenPanel):
         name = "homing"
         disname = self._screen._config.get_menu_name("move", name)
         menuitems = self._screen._config.get_menu_items("move", name)
-        self._screen.show_panel("menu", disname, 1, False, items=menuitems)
+        self._screen.show_panel("menu", disname, pop=False, items=menuitems)
