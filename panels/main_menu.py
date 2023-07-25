@@ -233,7 +233,7 @@ class Panel(MenuPanel):
         self.labels['devices'].get_style_context().add_class('heater-grid')
         self.labels['devices'].set_vexpand(False)
 
-        name = Gtk.Label(label="")
+        name = Gtk.Label()
         temp = Gtk.Label(_("Temp (°C)"))
         temp.get_style_context().add_class("heater-grid-temp")
 

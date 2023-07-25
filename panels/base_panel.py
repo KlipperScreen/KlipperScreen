@@ -117,7 +117,7 @@ class BasePanel(ScreenPanel):
 
             img_size = self._gtk.img_scale * self.bts
             for device in self._printer.get_temp_store_devices():
-                self.labels[device] = Gtk.Label(label="100º")
+                self.labels[device] = Gtk.Label()
                 self.labels[device].set_ellipsize(Pango.EllipsizeMode.START)
 
                 self.labels[f'{device}_box'] = Gtk.Box()
