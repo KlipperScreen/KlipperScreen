@@ -265,12 +265,12 @@ class KlipperScreen(Gtk.Window):
             raise FileNotFoundError(os.strerror(2), "\n" + panel_path)
         return import_module(f"panels.{panel}")
 
-    def show_panel(self, panel, title, remove_all=False, pop=True, **kwargs):
+    def show_panel(self, panel, title, remove_all=False, **kwargs):
         try:
             if remove_all:
                 self._remove_all_panels()
             else:
-                self._remove_current_panel(pop)
+                self._remove_current_panel()
             if panel not in self.panels:
                 try:
                     self.panels[panel] = self._load_panel(panel).Panel(self, title, **kwargs)
@@ -459,7 +459,7 @@ class KlipperScreen(Gtk.Window):
         disname = self._config.get_menu_name(menu, name)
         menuitems = self._config.get_menu_items(menu, name)
         if len(menuitems) != 0:
-            self.show_panel("menu", disname, pop=False, items=menuitems)
+            self.show_panel("menu", disname, items=menuitems)
         else:
             logging.info("No items in menu")
 
@@ -474,16 +474,10 @@ class KlipperScreen(Gtk.Window):
         self._cur_panels.clear()
         self.close_screensaver()
 
-    def _remove_current_panel(self, pop=True):
-        if len(self._cur_panels) < 1:
-            self.reload_panels()
-            return
+    def _remove_current_panel(self):
         self.base_panel.remove(self.panels[self._cur_panels[-1]].content)
         if hasattr(self.panels[self._cur_panels[-1]], "deactivate"):
             self.panels[self._cur_panels[-1]].deactivate()
-        if pop:
-            del self._cur_panels[-1]
-            self.attach_panel(self._cur_panels[-1])
 
     def _menu_go_back(self, widget=None, home=False):
         logging.info(f"#### Menu go {'home' if home else 'back'}")
@@ -492,8 +486,13 @@ class KlipperScreen(Gtk.Window):
             self.close_popup_message()
         while len(self._cur_panels) > 1:
             self._remove_current_panel()
+            del self._cur_panels[-1]
             if not home:
                 break
+        if len(self._cur_panels) < 1:
+            self.reload_panels()
+            return
+        self.attach_panel(self._cur_panels[-1])
 
     def reset_screensaver_timeout(self, *args):
         if self.screensaver_timeout is not None:
@@ -698,7 +697,7 @@ class KlipperScreen(Gtk.Window):
         elif action == "notify_status_update" and self.printer.state != "shutdown":
             self.printer.process_update(data)
             if 'manual_probe' in data and data['manual_probe']['is_active'] and 'zcalibrate' not in self._cur_panels:
-                self.show_panel("zcalibrate", _('Z Calibrate'), pop=False)
+                self.show_panel("zcalibrate", _('Z Calibrate'))
         elif action == "notify_filelist_changed":
             if self.files is not None:
                 self.files.process_update(data)
