@@ -652,6 +652,10 @@ class KlipperScreen(Gtk.Window):
         # Do not return to main menu if completing a job, timeouts/user input will return
         if "job_status" in self._cur_panels and wait:
             return
+        if not self.initialized:
+            logging.debug("Printer not initialized yet")
+            self.printer.state = "not ready"
+            return
         self.show_panel("main_menu", None, remove_all=True, items=self._config.get_menu_items("__main"))
         self.base_panel_show_all()
 
@@ -693,6 +697,9 @@ class KlipperScreen(Gtk.Window):
         elif action == "notify_klippy_shutdown":
             self.printer.process_update({'webhooks': {'state': "shutdown"}})
         elif action == "notify_klippy_ready":
+            if not self.initialized:
+                logging.debug("Still not initialized")
+                return
             self.printer.process_update({'webhooks': {'state': "ready"}})
         elif action == "notify_status_update" and self.printer.state != "shutdown":
             self.printer.process_update(data)
@@ -855,9 +862,7 @@ class KlipperScreen(Gtk.Window):
                                                                                extra_items))
         if data is False:
             return self._init_printer("Error getting printer object data with extra items")
-        self.printer.process_update(data['result']['status'])
         self.init_tempstore()
-        GLib.timeout_add_seconds(2, self.init_tempstore)  # If devices changed it takes a while to register
 
         self.files.initialize()
         self.files.refresh_files()
@@ -866,6 +871,7 @@ class KlipperScreen(Gtk.Window):
         self.initialized = True
         self.reinit_count = 0
         self.initializing = False
+        self.printer.process_update(data['result']['status'])
         return False
 
     def init_tempstore(self):
@@ -877,7 +883,6 @@ class KlipperScreen(Gtk.Window):
                 logging.info(f"Temperature store size: {self.printer.tempstore_size}")
             except KeyError:
                 logging.error("Couldn't get the temperature store size")
-        return False
 
     def base_panel_show_all(self):
         self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
