@@ -894,6 +894,8 @@ class KlipperScreen(Gtk.Window):
         self.files.initialize()
         self.files.refresh_files()
 
+        self.init_spoolman()
+
         logging.info("Printer initialized")
         self.initialized = True
         self.reinit_count = 0
@@ -919,6 +921,18 @@ class KlipperScreen(Gtk.Window):
                 logging.info(f"Temperature store size: {self.printer.tempstore_size}")
             except KeyError:
                 logging.error("Couldn't get the temperature store size")
+        return False
+
+    def init_spoolman(self):
+        server_config = self.apiclient.send_request("server/config")
+        if server_config:
+            try:
+                server_config["result"]["config"]["spoolman"]
+                self.printer.enable_spoolman()
+            except KeyError:
+                logging.warning("Not using Spoolman")
+
+        return False
 
     def show_keyboard(self, entry=None, event=None):
         if self.keyboard is not None:

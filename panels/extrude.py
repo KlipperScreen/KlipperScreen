@@ -39,6 +39,7 @@ class Panel(ScreenPanel):
             'unload': self._gtk.Button("arrow-up", _("Unload"), "color2"),
             'retract': self._gtk.Button("retract", _("Retract"), "color1"),
             'temperature': self._gtk.Button("heat-up", _("Temperature"), "color4"),
+            'spoolman': self._gtk.Button("spoolman", "Spoolman", "color3"),
         }
         self.buttons['extrude'].connect("clicked", self.extrude, "+")
         self.buttons['load'].connect("clicked", self.load_unload, "+")
@@ -48,7 +49,10 @@ class Panel(ScreenPanel):
             "name": "Temperature",
             "panel": "temperature"
         })
-
+        self.buttons['spoolman'].connect("clicked", self.menu_item_clicked, {
+            "name": "Spoolman",
+            "panel": "spoolman"
+        })
         extgrid = self._gtk.HomogeneousGrid()
         limit = 5
         i = 0
@@ -66,6 +70,8 @@ class Panel(ScreenPanel):
                 i += 1
         if i < (limit - 1):
             extgrid.attach(self.buttons['temperature'], i + 1, 0, 1, 1)
+        if i < (limit - 2) and self._printer.spoolman:
+            extgrid.attach(self.buttons['spoolman'], i + 2, 0, 1, 1)
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
@@ -163,7 +169,7 @@ class Panel(ScreenPanel):
 
     def enable_buttons(self, enable):
         for button in self.buttons:
-            if button == "temperature":
+            if button in ("temperature", "spoolman"):
                 continue
             self.buttons[button].set_sensitive(enable)
 
