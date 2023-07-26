@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 16:32-0300\n"
-"PO-Revision-Date: 2023-07-02 16:31-0300\n"
+"POT-Creation-Date: 2023-07-25 21:04-0300\n"
+"PO-Revision-Date: 2023-07-25 21:05-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -162,6 +162,9 @@ msgstr "Continuar"
 
 msgid "Cooldown"
 msgstr "Enfriar"
+
+msgid "DPMS has failed to load and has been disabled"
+msgstr "DPMS falló en cargar y ha sido deshabilitado"
 
 msgid "Date"
 msgstr "Fecha"
@@ -652,6 +655,9 @@ msgstr "Velocidad:"
 
 msgid "Square Corner Velocity"
 msgstr "Velocidad de esquina"
+
+msgid "Standby"
+msgstr "En espera"
 
 msgid "Start"
 msgstr "Iniciar"
