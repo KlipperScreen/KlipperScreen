@@ -13,8 +13,10 @@ nav:
       - Configuration.md
       - Quicktips.md
       - Macros: macros.md
-      - Android.md
       - Thumbnails.md
+      - Remote screens:
+        - VNC.md
+        - Xserver-XSDL (Android): Android.md
     - Troubleshooting:
       - First Steps/Log: Troubleshooting.md
       - Network: Troubleshooting/Network.md
