@@ -173,7 +173,7 @@ class KlipperScreenConfig:
                 strs = (
                     'moonraker_api_key', 'moonraker_host', 'titlebar_name_type',
                     'screw_positions', 'power_devices', 'titlebar_items', 'z_babystep_values',
-                    'extrude_distances', "extrude_speeds", "camera_url",
+                    'extrude_distances', "extrude_speeds",
                 )
                 numbers = (
                     'moonraker_port', 'move_speed_xy', 'move_speed_z',
@@ -199,6 +199,9 @@ class KlipperScreenConfig:
             for key in config[section]:
                 if key not in bools and key not in strs and key not in numbers:
                     msg = f'Option "{key}" not recognized for section "[{section}]"'
+                    if key == "camera_url":
+                        msg = "camera_url has been deprecated in favor of moonraker cameras"
+                        msg += "\n\n https://moonraker.readthedocs.io/en/latest/configuration/#webcam"
                     if remove:
                         # This should only be called for the auto-generated section
                         self.config.remove_option(section, key)
