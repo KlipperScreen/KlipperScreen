@@ -24,6 +24,7 @@ class Printer:
         self.busy_cb = busy_cb
         self.busy = False
         self.tempstore_size = 1200
+        self.cameras = []
 
     def reinit(self, printer_info, data):
         self.config = data['configfile']['config']
@@ -160,6 +161,10 @@ class Printer:
             }
         logging.debug(f"Power devices: {self.power_devices}")
 
+    def configure_cameras(self, data):
+        self.cameras = data
+        logging.debug(f"Cameras: {self.cameras}")
+
     def get_config_section_list(self, search=""):
         if self.config is not None:
             return [i for i in list(self.config) if i.startswith(search)] if hasattr(self, "config") else []
@@ -228,6 +233,7 @@ class Printer:
                 "idle_timeout": self.get_stat("idle_timeout").copy(),
                 "pause_resume": {"is_paused": self.state == "paused"},
                 "power_devices": {"count": len(self.get_power_devices())},
+                "cameras": {"count": len(self.cameras)},
             }
         }
 

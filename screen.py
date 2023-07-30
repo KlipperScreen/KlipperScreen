@@ -832,9 +832,16 @@ class KlipperScreen(Gtk.Window):
         # Moonraker is ready, set a loop to init the printer
         self.reinit_count += 1
 
-        powerdevs = self.apiclient.send_request("machine/device_power/devices")
-        if powerdevs is not False:
-            self.printer.configure_power_devices(powerdevs['result'])
+        server_info = self.apiclient.get_server_info()["result"]
+        logging.info(f"Moonraker info {server_info}")
+        if "power" in server_info["components"]:
+            powerdevs = self.apiclient.send_request("machine/device_power/devices")
+            if powerdevs is not False:
+                self.printer.configure_power_devices(powerdevs['result'])
+        if "webcam" in server_info["components"]:
+            cameras = self.apiclient.send_request("server/webcams/list")
+            if cameras is not False:
+                self.printer.configure_cameras(cameras['result']['webcams'])
 
         if state['result']['klippy_connected'] is False:
             logging.info("Klipper not connected")
