@@ -8,14 +8,15 @@ body:
       value: >-
         ## Thank you for choosing KlipperScreen
 
-        #### If you need general support, please visit us on [Discord](https://discord.gg/klipper)
+        This is a bug report, If you need general support, please visit us on [Discord](https://discord.gg/klipper)
 
-        #### The LOG file is REQUIRED, if you need help to find the log file:
+        #### The LOG file is REQUIRED
 
-        #### Read the [Documentation](https://klipperscreen.readthedocs.io/en/latest/Troubleshooting/)
+        if you need help to find the log file:
+        Read the [Documentation](https://klipperscreen.readthedocs.io/en/latest/Troubleshooting/)
 
         #### This is an Open Source project developed voluntarily, there are no Warranties, or ETA.
-        #### [License](https://github.com/KlipperScreen/KlipperScreen/blob/master/LICENSE)
+        [License](https://github.com/KlipperScreen/KlipperScreen/blob/master/LICENSE)
 
   - type: textarea
     id: what-happened

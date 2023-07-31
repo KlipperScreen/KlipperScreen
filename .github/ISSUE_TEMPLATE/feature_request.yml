@@ -7,10 +7,10 @@ body:
       value: >-
         ## Thank you for choosing KlipperScreen
 
-        #### This form is for feature request of KlipperScreen
+        This form is for feature requests of KlipperScreen
 
         #### This is an Open Source project developed voluntarily, there are no Warranties, or ETA.
-        #### [LICENSE](https://github.com/KlipperScreen/KlipperScreen/blob/master/LICENSE)
+        [License](https://github.com/KlipperScreen/KlipperScreen/blob/master/LICENSE)
 
   - type: textarea
     id: solution
