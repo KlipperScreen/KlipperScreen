@@ -1,8 +1,6 @@
 name: Feature request
-about: Suggest an idea for this project
+description: Suggest an idea for this project
 title: "[FR] <title>"
-labels: ''
-assignees: ''
 body:
   - type: markdown
     attributes:
@@ -31,7 +29,7 @@ body:
   - type: textarea
     id: alternative
     attributes:
-      label: 'Describe alternatives you've considered'
+      label: 'Describe alternatives you have considered'
       description: A clear and concise description of any alternative solutions or features you've considered.
     validations:
       required: false
