@@ -30,10 +30,11 @@ sudo systemctl service KlipperScreen restart
 ```
 5. On KlipperScreen set the following configuration:
 
+DPMS: off
+
 Display timeout: off
 
-
-DPMS: off
+![disable_dpms_poweroff](img/disable_dpms_poweroff.png)
 
 ## On the remote device:
 
