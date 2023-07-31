@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 16:32-0300\n"
+"POT-Creation-Date: 2023-07-31 02:01-0300\n"
 "PO-Revision-Date: 2022-11-30 18:14-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -166,6 +166,9 @@ msgstr "Continuar"
 
 msgid "Cooldown"
 msgstr "Resfriar"
+
+msgid "DPMS has failed to load and has been disabled"
+msgstr ""
 
 msgid "Date"
 msgstr "Data"
@@ -655,6 +658,9 @@ msgstr "Velocidade:"
 
 msgid "Square Corner Velocity"
 msgstr "Velocidade do Canto Reto"
+
+msgid "Standby"
+msgstr ""
 
 msgid "Start"
 msgstr "Iniciar"

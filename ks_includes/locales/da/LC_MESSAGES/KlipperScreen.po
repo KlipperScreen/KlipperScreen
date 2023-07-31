@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 16:32-0300\n"
+"POT-Creation-Date: 2023-07-31 02:01-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
@@ -157,6 +157,9 @@ msgstr "Fortsæt"
 
 msgid "Cooldown"
 msgstr "Afkøling"
+
+msgid "DPMS has failed to load and has been disabled"
+msgstr ""
 
 msgid "Date"
 msgstr "Dato"
@@ -644,6 +647,9 @@ msgstr "Hastighed:"
 
 msgid "Square Corner Velocity"
 msgstr "Hastighed for 90° hjørne"
+
+msgid "Standby"
+msgstr ""
 
 msgid "Start"
 msgstr "Start"

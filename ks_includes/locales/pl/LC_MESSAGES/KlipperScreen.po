@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 16:32-0300\n"
+"POT-Creation-Date: 2023-07-31 02:01-0300\n"
 "PO-Revision-Date: 2023-07-24 22:00+0000\n"
 "Last-Translator: Daviteusz <daviteusz0@gmail.com>\n"
 "Language-Team: Polish\n"
@@ -159,6 +159,9 @@ msgstr "Kontynuuj"
 
 msgid "Cooldown"
 msgstr "Studzenie"
+
+msgid "DPMS has failed to load and has been disabled"
+msgstr ""
 
 msgid "Date"
 msgstr "Data"
@@ -649,6 +652,9 @@ msgstr "Prędkość:"
 
 msgid "Square Corner Velocity"
 msgstr "Prędkość na rogu kwadratu"
+
+msgid "Standby"
+msgstr ""
 
 msgid "Start"
 msgstr "Start"
