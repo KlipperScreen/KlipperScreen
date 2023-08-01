@@ -256,6 +256,11 @@ class KlipperScreen(Gtk.Window):
 
         self._ws.klippy.object_subscription(requested_updates)
 
+    def preload(self):
+        logging.debug("Preloading panels")
+        for panel in ['move', 'temperature', 'extrude', 'job_status']:
+            self.panels[panel] = self._load_panel(panel).Panel(self, title='')
+
     @staticmethod
     def _load_panel(panel):
         logging.debug(f"Loading panel: {panel}")
@@ -881,6 +886,7 @@ class KlipperScreen(Gtk.Window):
         self.reinit_count = 0
         self.initializing = False
         self.printer.process_update(data['result']['status'])
+        self.preload()
         return False
 
     def init_tempstore(self):
