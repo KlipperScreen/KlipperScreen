@@ -265,22 +265,24 @@ class KlipperScreen(Gtk.Window):
             raise FileNotFoundError(os.strerror(2), "\n" + panel_path)
         return import_module(f"panels.{panel}")
 
-    def show_panel(self, panel, title, remove_all=False, **kwargs):
+    def show_panel(self, panel, title, remove_all=False, panel_name=None, **kwargs):
+        if panel_name is None:
+            panel_name = panel
         try:
             if remove_all:
                 self._remove_all_panels()
             else:
                 self._remove_current_panel()
-            if panel not in self.panels:
+            if panel_name not in self.panels:
                 try:
-                    self.panels[panel] = self._load_panel(panel).Panel(self, title, **kwargs)
+                    self.panels[panel_name] = self._load_panel(panel).Panel(self, title, **kwargs)
                 except Exception as e:
                     self.show_error_modal(f"Unable to load panel {panel}", f"{e}")
                     return
             else:
-                self.panels[panel].__init__(self, title, **kwargs)
-            self._cur_panels.append(panel)
-            self.attach_panel(panel)
+                self.panels[panel_name].__init__(self, title, **kwargs)
+            self._cur_panels.append(panel_name)
+            self.attach_panel(panel_name)
         except Exception as e:
             logging.exception(f"Error attaching panel:\n{e}")
 
@@ -459,7 +461,7 @@ class KlipperScreen(Gtk.Window):
         disname = self._config.get_menu_name(menu, name)
         menuitems = self._config.get_menu_items(menu, name)
         if len(menuitems) != 0:
-            self.show_panel("menu", disname, items=menuitems)
+            self.show_panel("menu", disname, panel_name=name, items=menuitems)
         else:
             logging.info("No items in menu")
 
