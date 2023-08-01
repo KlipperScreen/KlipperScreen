@@ -11,6 +11,7 @@ from gi.repository import GLib
 from contextlib import suppress
 from ks_includes.wifi import WifiChannels
 from ks_includes import NetworkManager
+from dbus.mainloop.glib import DBusGMainLoop
 
 
 class WifiManager:
@@ -18,7 +19,7 @@ class WifiManager:
 
     def __init__(self, interface_name, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+        DBusGMainLoop(set_as_default=True)
         self._callbacks = {
             "connected": [],
             "connecting_status": [],
