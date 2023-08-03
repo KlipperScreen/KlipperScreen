@@ -300,6 +300,7 @@ class KlipperScreen(Gtk.Window):
         self.base_panel.add_content(self.panels[panel])
         logging.debug(f"Current panel hierarchy: {' > '.join(self._cur_panels)}")
         self.base_panel.show_back(len(self._cur_panels) > 1)
+        self.base_panel.show_home(len(self._cur_panels) > 1)
         if hasattr(self.panels[panel], "process_update"):
             self.process_update("notify_status_update", self.printer.data)
             self.process_update("notify_busy", self.printer.busy)
