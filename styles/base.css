@@ -7,6 +7,10 @@
     border: 0;
 }
 
+button:disabled {
+    opacity: .2;
+}
+
 window {
     background-color: #13181C;
     -gtk-icon-shadow: none;
