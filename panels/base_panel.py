@@ -63,6 +63,7 @@ class BasePanel(ScreenPanel):
         self.action_bar.add(self.control['back'])
         self.action_bar.add(self.control['home'])
         self.show_back(False)
+        self.show_home(False)
         if self.buttons_showing['printer_select']:
             self.action_bar.add(self.control['printer_select'])
         self.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
@@ -255,12 +256,10 @@ class BasePanel(ScreenPanel):
         self.content.remove(widget)
 
     def show_back(self, show=True):
-        if show:
-            self.control['back'].set_sensitive(True)
-            self.control['home'].set_sensitive(True)
-            return
-        self.control['back'].set_sensitive(False)
-        self.control['home'].set_sensitive(False)
+        self.control['back'].set_sensitive(show)
+
+    def show_home(self, show=True):
+        self.control['home'].set_sensitive(show)
 
     def show_macro_shortcut(self, show=True):
         if show is True and self.buttons_showing['macros_shortcut'] is False:

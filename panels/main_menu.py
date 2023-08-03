@@ -22,6 +22,7 @@ class Panel(MenuPanel):
         self.main_menu.set_vexpand(True)
         self.graph_retry = 0
         scroll = self._gtk.ScrolledWindow()
+        self.numpad_visible = False
 
         logging.info("### Making MainMenu")
 
@@ -263,6 +264,8 @@ class Panel(MenuPanel):
             self.main_menu.remove_column(1)
             self.main_menu.attach(self.labels['menu'], 1, 0, 1, 1)
         self.main_menu.show_all()
+        self.numpad_visible = False
+        self._screen.base_panel.show_back(False)
 
     def process_update(self, action, data):
         if action != "notify_status_update":
@@ -297,7 +300,15 @@ class Panel(MenuPanel):
             self.main_menu.remove_column(1)
             self.main_menu.attach(self.labels["keypad"], 1, 0, 1, 1)
         self.main_menu.show_all()
+        self.numpad_visible = True
+        self._screen.base_panel.show_back(True)
 
     def update_graph(self):
         self.labels['da'].queue_draw()
         return True
+
+    def back(self):
+        if self.numpad_visible:
+            self.hide_numpad()
+            return True
+        return False
