@@ -104,6 +104,7 @@ class KlipperScreen(Gtk.Window):
         self.version = version
         self.dialogs = []
         self.confirm = None
+        self.panels_reinit = []
 
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
@@ -260,6 +261,7 @@ class KlipperScreen(Gtk.Window):
         logging.debug("Preloading panels")
         for panel in ['move', 'temperature', 'extrude', 'job_status']:
             self.panels[panel] = self._load_panel(panel).Panel(self, title='')
+            self.panels_reinit.append(panel)
 
     @staticmethod
     def _load_panel(panel):
@@ -276,6 +278,7 @@ class KlipperScreen(Gtk.Window):
         try:
             if remove_all:
                 self._remove_all_panels()
+                self.panels_reinit = list(self.panels)
             else:
                 self._remove_current_panel()
             if panel_name not in self.panels:
@@ -284,8 +287,10 @@ class KlipperScreen(Gtk.Window):
                 except Exception as e:
                     self.show_error_modal(f"Unable to load panel {panel}", f"{e}")
                     return
-            else:
+            elif panel_name in self.panels_reinit:
+                logging.info("Reinitializing panel")
                 self.panels[panel_name].__init__(self, title, **kwargs)
+                self.panels_reinit.remove(panel_name)
             self._cur_panels.append(panel_name)
             self.attach_panel(panel_name)
         except Exception as e:
