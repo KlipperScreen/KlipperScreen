@@ -4,7 +4,7 @@ site_description: >-
   KlipperScreen documentation.
 
 repo_name: jordanruthe/KlipperScreen/
-repo_url: https://github.com/jordanruthe/KlipperScreen/
+repo_url: https://github.com/KlipperScreen/KlipperScreen/
 nav:
     - Home: index.md
     - Setup:
@@ -68,7 +68,7 @@ markdown_extensions:
 extra:
     social:
       - icon: fontawesome/brands/github
-        link: https://github.com/jordanruthe/klipperScreen/
+        link: https://github.com/KlipperScreen/KlipperScreen/
       - icon: fontawesome/brands/discord
         link: https://discord.klipper3d.org/
       - icon: fontawesome/brands/python
