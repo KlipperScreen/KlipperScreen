@@ -33,6 +33,7 @@ nav:
     - Theming.md
     - Translations.md
     - Breaking Changes: Changelog.md
+    - Developers.md
 
     - Contact.md
 theme:
