@@ -29,6 +29,9 @@ class KlippyRest:
     def get_printer_info(self):
         return self.send_request("printer/info")
 
+    def get_gcode_help(self):
+        return self.send_request("printer/gcode/help")
+
     def get_thumbnail_stream(self, thumbnail):
         return self.send_request(f"server/files/gcodes/{thumbnail}", json=False)
 

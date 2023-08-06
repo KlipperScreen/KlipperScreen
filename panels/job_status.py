@@ -740,18 +740,11 @@ class Panel(ScreenPanel):
             offset = self._printer.get_stat("gcode_move", "homing_origin")
             self.zoffset = float(offset[2]) if offset else 0
             if self.zoffset != 0:
-                endstop = (
-                    (
-                        self._printer.config_section_exists("stepper_z")
-                        and not self._printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe")
-                    )
-                    or "delta" in self._printer.get_config_section("printer")['kinematics']
-                )
-                if endstop:
+                if "Z_OFFSET_APPLY_ENDSTOP" in self._printer.available_commands:
                     self.buttons['button_grid'].attach(self.buttons["save_offset_endstop"], 0, 0, 1, 1)
                 else:
                     self.buttons['button_grid'].attach(Gtk.Label(), 0, 0, 1, 1)
-                if self._printer.get_probe():
+                if "Z_OFFSET_APPLY_PROBE" in self._printer.available_commands:
                     self.buttons['button_grid'].attach(self.buttons["save_offset_probe"], 1, 0, 1, 1)
                 else:
                     self.buttons['button_grid'].attach(Gtk.Label(), 1, 0, 1, 1)

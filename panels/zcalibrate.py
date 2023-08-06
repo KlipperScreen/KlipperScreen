@@ -44,18 +44,18 @@ class Panel(ScreenPanel):
 
         functions = []
         pobox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        if self._printer.config_section_exists("stepper_z") \
-                and not self._printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"):
+
+        if "Z_ENDSTOP_CALIBRATE" in self._printer.available_commands:
             self._add_button("Endstop", "endstop", pobox)
             functions.append("endstop")
-        if self.probe:
+        if "PROBE_CALIBRATE" in self._printer.available_commands:
             self._add_button("Probe", "probe", pobox)
             functions.append("probe")
-        if self._printer.config_section_exists("bed_mesh") and "probe" not in functions:
+        if "BED_MESH_CALIBRATE" in self._printer.available_commands and "probe" not in functions:
             # This is used to do a manual bed mesh if there is no probe
             self._add_button("Bed mesh", "mesh", pobox)
             functions.append("mesh")
-        if "delta" in self._printer.get_config_section("printer")['kinematics']:
+        if "DELTA_CALIBRATE" in self._printer.available_commands:
             if "probe" in functions:
                 self._add_button("Delta Automatic", "delta", pobox)
                 functions.append("delta")
