@@ -3,7 +3,6 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
-from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
 
@@ -127,11 +126,11 @@ class Panel(ScreenPanel):
     def start_calibration(self, widget, method):
         self.labels['popover'].popdown()
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+            self._screen._ws.klippy.gcode_script("G28")
 
         if method == "probe":
             self._move_to_position()
-            self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_CALIBRATE)
+            self._screen._ws.klippy.gcode_script("PROBE_CALIBRATE")
         elif method == "mesh":
             self._screen._ws.klippy.gcode_script("BED_MESH_CALIBRATE")
         elif method == "delta":
@@ -139,7 +138,7 @@ class Panel(ScreenPanel):
         elif method == "delta_manual":
             self._screen._ws.klippy.gcode_script("DELTA_CALIBRATE METHOD=manual")
         elif method == "endstop":
-            self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_ENDSTOP_CALIBRATE)
+            self._screen._ws.klippy.gcode_script("Z_ENDSTOP_CALIBRATE")
 
     def _move_to_position(self):
         x_position = y_position = None
@@ -262,17 +261,17 @@ class Panel(ScreenPanel):
         self.distance = distance
 
     def move(self, widget, direction):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.testz_move(f"{direction}{self.distance}"))
+        self._screen._ws.klippy.gcode_script(f"TESTZ Z={direction}{self.distance}")
 
     def abort(self, widget):
         logging.info("Aborting calibration")
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.ABORT)
+        self._screen._ws.klippy.gcode_script("ABORT")
         self.buttons_not_calibrating()
         self._screen._menu_go_back()
 
     def accept(self, widget):
         logging.info("Accepting Z position")
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.ACCEPT)
+        self._screen._ws.klippy.gcode_script("ACCEPT")
 
     def buttons_calibrating(self):
         self.buttons['start'].get_style_context().remove_class('color3')

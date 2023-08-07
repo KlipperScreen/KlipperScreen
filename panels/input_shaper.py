@@ -3,7 +3,6 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
-from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
 
@@ -108,7 +107,7 @@ class Panel(ScreenPanel):
     def start_calibration(self, widget, method):
         self.labels['popover'].popdown()
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+            self._screen._ws.klippy.gcode_script("G28")
         self.calibrating_axis = method
         if method == "x":
             self._screen._ws.klippy.gcode_script('SHAPER_CALIBRATE AXIS=X')
