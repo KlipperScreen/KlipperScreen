@@ -187,7 +187,7 @@ class Panel(ScreenPanel):
             speed = self._config.get_config()['main'].getint(config_key, 20)
         speed = 60 * max(1, speed)
 
-        self._screen._ws.klippy.gcode_script(f"{KlippyGcodes.MOVE_RELATIVE}\n{KlippyGcodes.MOVE} {axis}{dist} F{speed}")
+        self._screen._ws.klippy.gcode_script(f"{KlippyGcodes.MOVE_RELATIVE}\nG0 {axis}{dist} F{speed}")
         if self._printer.get_stat("gcode_move", "absolute_coordinates"):
             self._screen._ws.klippy.gcode_script("G90")
 
@@ -250,7 +250,7 @@ class Panel(ScreenPanel):
 
     def home(self, widget):
         if "delta" in self._printer.get_config_section("printer")['kinematics']:
-            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+            self._screen._ws.klippy.gcode_script("G28")
             return
         name = "homing"
         disname = self._screen._config.get_menu_name("move", name)

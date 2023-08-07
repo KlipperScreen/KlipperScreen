@@ -300,10 +300,10 @@ class Panel(ScreenPanel):
     def home(self):
         # Test if all axes have been homed. Home if necessary.
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+            self._screen._ws.klippy.gcode_script("G28")
             # do Z_TILT_CALIBRATE if applicable.
             if self._printer.config_section_exists("z_tilt"):
-                self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_TILT)
+                self._screen._ws.klippy.gcode_script("Z_TILT_ADJUST")
 
     def go_to_position(self, widget, position):
         self.home()
