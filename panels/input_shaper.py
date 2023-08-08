@@ -110,14 +110,12 @@ class Panel(ScreenPanel):
             self._screen._ws.klippy.gcode_script("G28")
         self.calibrating_axis = method
         if method == "x":
-            self._screen._ws.klippy.gcode_script('SHAPER_CALIBRATE AXIS=X')
+            self._screen._send_action(self.calibrate_btn, "printer.gcode.script", {"script": 'SHAPER_CALIBRATE AXIS=X'})
         if method == "y":
-            self._screen._ws.klippy.gcode_script('SHAPER_CALIBRATE AXIS=Y')
+            self._screen._send_action(self.calibrate_btn, "printer.gcode.script", {"script": 'SHAPER_CALIBRATE AXIS=Y'})
         if method == "both":
-            self._screen._ws.klippy.gcode_script('SHAPER_CALIBRATE')
-
+            self._screen._send_action(self.calibrate_btn, "printer.gcode.script", {"script": 'SHAPER_CALIBRATE'})
         self.calibrate_btn.set_label(_('Calibrating') + '...')
-        self.calibrate_btn.set_sensitive(False)
 
     def set_opt_value(self, widget, opt, *args):
         shaper_freq_x = self.freq_xy_adj['shaper_freq_x'].get_value()

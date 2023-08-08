@@ -216,8 +216,8 @@ class Panel(ScreenPanel):
         for tool in self._printer.get_tools():
             self.labels[tool].get_style_context().remove_class("button_active")
         self.labels[extruder].get_style_context().add_class("button_active")
-
-        self._screen._ws.klippy.gcode_script(f"T{self._printer.get_tool_number(extruder)}")
+        self._screen._send_action(widget, "printer.gcode.script",
+                                  {"script": f"T{self._printer.get_tool_number(extruder)}"})
 
     def change_speed(self, widget, speed):
         logging.info(f"### Speed {speed}")
@@ -227,19 +227,22 @@ class Panel(ScreenPanel):
 
     def extrude(self, widget, direction):
         self._screen._ws.klippy.gcode_script(KlippyGcodes.EXTRUDE_REL)
-        self._screen._ws.klippy.gcode_script(f"G1 E{direction}{self.distance} F{self.speed * 60}")
+        self._screen._send_action(widget, "printer.gcode.script",
+                                  {"script": f"G1 E{direction}{self.distance} F{self.speed * 60}"})
 
     def load_unload(self, widget, direction):
         if direction == "-":
             if not self.unload_filament:
                 self._screen.show_popup_message("Macro UNLOAD_FILAMENT not found")
             else:
-                self._screen._ws.klippy.gcode_script(f"UNLOAD_FILAMENT SPEED={self.speed * 60}")
+                self._screen._send_action(widget, "printer.gcode.script",
+                                          {"script": f"UNLOAD_FILAMENT SPEED={self.speed * 60}"})
         if direction == "+":
             if not self.load_filament:
                 self._screen.show_popup_message("Macro LOAD_FILAMENT not found")
             else:
-                self._screen._ws.klippy.gcode_script(f"LOAD_FILAMENT SPEED={self.speed * 60}")
+                self._screen._send_action(widget, "printer.gcode.script",
+                                          {"script": f"LOAD_FILAMENT SPEED={self.speed * 60}"})
 
     def enable_disable_fs(self, switch, gparams, name, x):
         if switch.get_active():
