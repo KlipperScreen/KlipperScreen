@@ -349,7 +349,6 @@ class Panel(ScreenPanel):
     def activate(self):
         if self.flow_timeout is None:
             self.flow_timeout = GLib.timeout_add_seconds(2, self.update_flow)
-        self._screen.base_panel_show_all()
 
     def deactivate(self):
         if self.flow_timeout is not None:

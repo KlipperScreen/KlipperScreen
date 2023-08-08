@@ -91,9 +91,6 @@ class Panel(ScreenPanel):
 
     def activate(self):
         self.check_power_status()
-        self._screen.base_panel.show_macro_shortcut(False)
-        self._screen.base_panel.show_heaters(False)
-        self._screen.base_panel.show_estop(False)
 
     def check_power_status(self):
         if 'power' in self.labels:

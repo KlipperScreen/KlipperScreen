@@ -299,8 +299,6 @@ class KlipperScreen(Gtk.Window):
     def attach_panel(self, panel):
         self.base_panel.add_content(self.panels[panel])
         logging.debug(f"Current panel hierarchy: {' > '.join(self._cur_panels)}")
-        self.base_panel.show_back(len(self._cur_panels) > 1)
-        self.base_panel.show_home(len(self._cur_panels) > 1)
         if hasattr(self.panels[panel], "process_update"):
             self.process_update("notify_status_update", self.printer.data)
             self.process_update("notify_busy", self.printer.busy)
@@ -656,7 +654,6 @@ class KlipperScreen(Gtk.Window):
 
     def state_printing(self):
         self.close_screensaver()
-        self.base_panel_show_all()
         for dialog in self.dialogs:
             self.gtk.remove_dialog(dialog)
         self.show_panel("job_status", _("Printing"), remove_all=True)
@@ -670,7 +667,6 @@ class KlipperScreen(Gtk.Window):
             self.printer.state = "not ready"
             return
         self.show_panel("main_menu", None, remove_all=True, items=self._config.get_menu_items("__main"))
-        self.base_panel_show_all()
 
     def state_startup(self):
         self.printer_initializing(_("Klipper is attempting to start"))
@@ -681,8 +677,8 @@ class KlipperScreen(Gtk.Window):
         msg = msg if "ready" not in msg else ""
         self.printer_initializing(_("Klipper has shutdown") + "\n\n" + msg, remove=True)
 
-    def toggle_macro_shortcut(self, value):
-        self.base_panel.show_macro_shortcut(value)
+    def toggle_shortcut(self, value):
+        self.base_panel.show_shortcut(value)
 
     def change_language(self, widget, lang):
         self._config.install_language(lang)
@@ -914,11 +910,6 @@ class KlipperScreen(Gtk.Window):
                 logging.info(f"Temperature store size: {self.printer.tempstore_size}")
             except KeyError:
                 logging.error("Couldn't get the temperature store size")
-
-    def base_panel_show_all(self):
-        self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
-        self.base_panel.show_heaters(True)
-        self.base_panel.show_estop(True)
 
     def show_keyboard(self, entry=None, event=None):
         if self.keyboard is not None:
