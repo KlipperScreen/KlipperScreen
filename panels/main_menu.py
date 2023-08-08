@@ -82,7 +82,6 @@ class Panel(MenuPanel):
 
     def activate(self):
         self.update_graph_visibility()
-        self._screen.base_panel_show_all()
 
     def deactivate(self):
         if self.graph_update is not None:
@@ -265,7 +264,7 @@ class Panel(MenuPanel):
             self.main_menu.attach(self.labels['menu'], 1, 0, 1, 1)
         self.main_menu.show_all()
         self.numpad_visible = False
-        self._screen.base_panel.show_back(False)
+        self._screen.base_panel.set_control_sensitive(False, control='back')
 
     def process_update(self, action, data):
         if action != "notify_status_update":
@@ -301,7 +300,7 @@ class Panel(MenuPanel):
             self.main_menu.attach(self.labels["keypad"], 1, 0, 1, 1)
         self.main_menu.show_all()
         self.numpad_visible = True
-        self._screen.base_panel.show_back(True)
+        self._screen.base_panel.set_control_sensitive(True, control='back')
 
     def update_graph(self):
         self.labels['da'].queue_draw()
