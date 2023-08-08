@@ -257,7 +257,7 @@ class Panel(ScreenPanel):
                         self._screen._ws.klippy.set_temp_fan_temp(name, target)
             # This small delay is needed to properly update the target if the user configured something above
             # and then changed the target again using preheat gcode
-            GLib.timeout_add(250, self.preheat_gcode, setting)
+            GLib.timeout_add(250, self.preheat_gcode, widget, setting)
 
     def validate(self, heater, target=None, max_temp=None):
         if target is not None and max_temp is not None:
@@ -270,9 +270,10 @@ class Panel(ScreenPanel):
         logging.debug(f"Invalid {heater} Target:{target}/{max_temp}")
         return False
 
-    def preheat_gcode(self, setting):
+    def preheat_gcode(self, widget, setting):
         with suppress(KeyError):
-            self._screen._ws.klippy.gcode_script(self.preheat_options[setting]['gcode'])
+            script = {"script": self.preheat_options[setting]['gcode']}
+            self._screen._send_action(widget, "printer.gcode.script", script)
         return False
 
     def add_device(self, device):

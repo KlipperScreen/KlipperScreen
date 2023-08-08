@@ -420,8 +420,7 @@ class Panel(ScreenPanel):
         if self.filename:
             self.disable_button("restart")
             if self.state == "error":
-                script = {"script": "SDCARD_RESET_FILE"}
-                self._screen._send_action(None, "printer.gcode.script", script)
+                self._screen._ws.klippy.gcode_script("SDCARD_RESET_FILE")
             self._screen._ws.klippy.print_start(self.filename)
             logging.info(f"Starting print: {self.filename}")
             self.new_print()
