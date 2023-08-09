@@ -888,7 +888,8 @@ class KlipperScreen(Gtk.Window):
                                                                                extra_items))
         if data is False:
             return self._init_printer("Error getting printer object data with extra items")
-        self.init_tempstore()
+        if len(self.printer.get_tools() + self.printer.get_heaters()) > 0:
+            self.init_tempstore()
 
         self.files.initialize()
         self.files.refresh_files()
@@ -902,7 +903,15 @@ class KlipperScreen(Gtk.Window):
         return False
 
     def init_tempstore(self):
-        self.printer.init_temp_store(self.apiclient.send_request("server/temperature_store"))
+        tempstore = self.apiclient.send_request("server/temperature_store")
+        if tempstore and 'result' in tempstore:
+            self.printer.init_temp_store(tempstore['result'])
+            if hasattr(self.panels[self._cur_panels[-1]], "update_graph_visibility"):
+                self.panels[self._cur_panels[-1]].update_graph_visibility()
+        else:
+            logging.error(f'Tempstore not ready: {tempstore} Retrying in 5 seconds')
+            GLib.timeout_add_seconds(5, self.init_tempstore)
+            return
         server_config = self.apiclient.send_request("server/config")
         if server_config:
             try:

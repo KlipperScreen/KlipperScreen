@@ -330,14 +330,14 @@ class Printer:
             return True
 
     def init_temp_store(self, tempstore):
-        if not tempstore or 'result' not in tempstore:
-            return
-        if self.tempstore and list(self.tempstore) != list(tempstore['result']):
+        if not tempstore:
+            logging.debug("Tempstore not ready")
+        if self.tempstore and list(self.tempstore) != list(tempstore):
             logging.debug("Tempstore has changed")
-            self.tempstore = tempstore['result']
+            self.tempstore = tempstore
             self.change_state(self.state)
         else:
-            self.tempstore = tempstore['result']
+            self.tempstore = tempstore
         for device in self.tempstore:
             for x in self.tempstore[device]:
                 length = len(self.tempstore[device][x])

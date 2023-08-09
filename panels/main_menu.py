@@ -11,7 +11,6 @@ from ks_includes.widgets.keypad import Keypad
 class Panel(MenuPanel):
     def __init__(self, screen, title, items=None):
         super().__init__(screen, title, items)
-        self.graph_retry_timeout = None
         self.left_panel = None
         self.devices = {}
         self.graph_update = None
@@ -20,7 +19,6 @@ class Panel(MenuPanel):
         self.main_menu = self._gtk.HomogeneousGrid()
         self.main_menu.set_hexpand(True)
         self.main_menu.set_vexpand(True)
-        self.graph_retry = 0
         scroll = self._gtk.ScrolledWindow()
         self.numpad_visible = False
 
@@ -41,18 +39,12 @@ class Panel(MenuPanel):
         self.content.add(self.main_menu)
 
     def update_graph_visibility(self):
-        if self.left_panel is None or not self._printer.get_temp_store_devices():
-            if self._printer.get_temp_store_devices():
-                logging.info("Retrying to create left panel")
-                self._gtk.reset_temp_color()
-                self.main_menu.attach(self.create_left_panel(), 0, 0, 1, 1)
-            self.graph_retry += 1
-            if self.graph_retry < 5:
-                if self.graph_retry_timeout is None:
-                    self.graph_retry_timeout = GLib.timeout_add_seconds(5, self.update_graph_visibility)
-            else:
-                logging.debug(f"Could not create graph {self.left_panel} {self._printer.get_temp_store_devices()}")
-            return False
+        if self.left_panel is None:
+            logging.info("No left panel")
+            return
+        if not self._printer.get_temp_store_devices():
+            logging.debug(f"Could not create graph tempstore: {self._printer.get_temp_store_devices()}")
+            return
         count = 0
         for device in self.devices:
             visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}",
@@ -87,9 +79,6 @@ class Panel(MenuPanel):
         if self.graph_update is not None:
             GLib.source_remove(self.graph_update)
             self.graph_update = None
-        if self.graph_retry_timeout is not None:
-            GLib.source_remove(self.graph_retry_timeout)
-            self.graph_retry_timeout = None
         if self.active_heater is not None:
             self.hide_numpad()
 
