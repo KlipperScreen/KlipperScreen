@@ -164,6 +164,7 @@ class Panel(ScreenPanel):
 
     def update_graph_visibility(self):
         if not self._printer.get_temp_store_devices():
+            logging.debug(f"Could not create graph tempstore: {self._printer.get_temp_store_devices()}")
             return
         count = 0
         for device in self.devices:
