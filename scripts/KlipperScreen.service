@@ -8,6 +8,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=KS_USER
+SupplementaryGroups=klipperscreen
 WorkingDirectory=KS_DIR
 Environment="KS_XCLIENT=KS_ENV/bin/python KS_DIR/screen.py"
 ExecStart="KS_DIR/scripts/KlipperScreen-start.sh"
