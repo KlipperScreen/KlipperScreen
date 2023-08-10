@@ -116,7 +116,7 @@ class Panel(ScreenPanel):
                                               "machine.shutdown")
         else:
             logging.info("OS Shutdown")
-            os.system("systemctl poweroff")
+            os.system("systemctl poweroff -i")
 
     def restart_system(self, widget):
 
@@ -126,7 +126,7 @@ class Panel(ScreenPanel):
                                               "machine.reboot")
         else:
             logging.info("OS Reboot")
-            os.system("systemctl reboot")
+            os.system("systemctl reboot -i")
 
     def retry(self, widget):
         self.update_text((_("Connecting to %s") % self._screen.connecting_to_printer))
