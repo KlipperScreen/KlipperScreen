@@ -161,15 +161,22 @@ class Panel(ScreenPanel):
 
         self.content.add(grid)
 
-    def process_busy(self, busy):
+    def enable_buttons(self, enable):
         for button in self.buttons:
             if button == "temperature":
                 continue
-            self.buttons[button].set_sensitive((not busy))
+            self.buttons[button].set_sensitive(enable)
+
+    def activate(self):
+        if self._printer.state == "printing":
+            self.enable_buttons(False)
 
     def process_update(self, action, data):
-        if action == "notify_busy":
-            self.process_busy(data)
+        if action == "notify_gcode_response":
+            if "action:cancel" in data or "action:paused" in data:
+                self.enable_buttons(True)
+            elif "action:resumed" in data:
+                self.enable_buttons(False)
             return
         if action != "notify_status_update":
             return
