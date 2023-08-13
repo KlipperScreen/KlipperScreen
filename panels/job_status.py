@@ -674,6 +674,8 @@ class Panel(ScreenPanel):
             elif filament_time is not None and filament_time > 1:
                 estimated = (filament_time + file_time) / 2
             estimated = file_time
+        if estimated < 1:
+            return
 
         self.labels["est_time"].set_label(self.format_time(estimated))
         self.labels["time_left"].set_label(self.format_eta(estimated, print_duration))
