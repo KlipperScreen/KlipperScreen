@@ -998,6 +998,11 @@ class KlipperScreen(Gtk.Window):
 
 
 def main():
+    minimum = (3, 7)
+    if not sys.version_info >= minimum:
+        logging.error(f"python {sys.version_info.major}.{sys.version_info.minor} "
+                      f"does not meet the minimum requirement {minimum[0]}.{minimum[1]}")
+        sys.exit(1)
     version = functions.get_software_version()
     parser = argparse.ArgumentParser(description="KlipperScreen - A GUI for Klipper")
     homedir = os.path.expanduser("~")
@@ -1019,9 +1024,8 @@ def main():
         os.path.normpath(os.path.expanduser(args.logfile)),
         version
     )
-
     functions.patch_threading_excepthook()
-
+    logging.info(f"Python version: {sys.version_info.major}.{sys.version_info.minor}")
     logging.info(f"KlipperScreen version: {version}")
     if not Gtk.init_check():
         logging.critical("Failed to initialize Gtk")
