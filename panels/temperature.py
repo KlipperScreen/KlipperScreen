@@ -173,11 +173,9 @@ class Panel(ScreenPanel):
             self.labels['da'].set_showing(device, visible)
             if visible:
                 count += 1
-                self.devices[device]['name'].get_style_context().add_class(self.devices[device]['class'])
-                self.devices[device]['name'].get_style_context().remove_class("graph_label_hidden")
+                self.devices[device]['name'].get_style_context().add_class("graph_label")
             else:
-                self.devices[device]['name'].get_style_context().add_class("graph_label_hidden")
-                self.devices[device]['name'].get_style_context().remove_class(self.devices[device]['class'])
+                self.devices[device]['name'].get_style_context().remove_class("graph_label")
         if count > 0:
             if self.labels['da'] not in self.left_panel:
                 self.left_panel.add(self.labels['da'])
@@ -324,11 +322,10 @@ class Panel(ScreenPanel):
 
         name = self._gtk.Button(image, self.prettify(devname), None, self.bts, Gtk.PositionType.LEFT, 1)
         name.set_alignment(0, .5)
+        name.get_style_context().add_class(class_name)
         visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}", device, fallback=True)
         if visible:
-            name.get_style_context().add_class(class_name)
-        else:
-            name.get_style_context().add_class("graph_label_hidden")
+            name.get_style_context().add_class("graph_label")
 
         can_target = self._printer.device_has_target(device)
         self.labels['da'].add_object(device, "temperatures", rgb, False, True)

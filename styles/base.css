@@ -566,20 +566,4 @@ popover button {
     padding-bottom: 0;
 }
 
-/* Hardcoded values until creation of dynamic CSS updates */
-.graph_label_hidden {padding-left: .9em;} /* .4em on top of normal button padding */
-.graph_label_extruder {border-left-width: .4em; border-left-style: solid;}
-.graph_label_extruder1 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_extruder2 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_extruder3 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_extruder4 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_heater_bed {border-left-width: .4em; border-left-style: solid;}
-.graph_label_fan_1 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_fan_2 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_fan_3 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_fan_4 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_sensor_1 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_sensor_2 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_sensor_3 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_sensor_4 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_sensor_5 {border-left-width: .4em; border-left-style: solid;}
+.graph_label {border-left-width: .4em; border-left-style: solid;}
