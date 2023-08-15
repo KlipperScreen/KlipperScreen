@@ -330,8 +330,6 @@ class Printer:
             return True
 
     def init_temp_store(self, tempstore):
-        if not tempstore:
-            logging.debug("Tempstore not ready")
         if self.tempstore and list(self.tempstore) != list(tempstore):
             logging.debug("Tempstore has changed")
             self.tempstore = tempstore

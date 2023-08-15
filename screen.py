@@ -904,7 +904,7 @@ class KlipperScreen(Gtk.Window):
 
     def init_tempstore(self):
         tempstore = self.apiclient.send_request("server/temperature_store")
-        if tempstore and 'result' in tempstore:
+        if tempstore and 'result' in tempstore and tempstore['result']:
             self.printer.init_temp_store(tempstore['result'])
             if hasattr(self.panels[self._cur_panels[-1]], "update_graph_visibility"):
                 self.panels[self._cur_panels[-1]].update_graph_visibility()
