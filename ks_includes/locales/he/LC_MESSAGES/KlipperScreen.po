@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-31 02:01-0300\n"
+"POT-Creation-Date: 2023-08-16 10:20-0300\n"
 "PO-Revision-Date: 2022-11-30 18:11-0300\n"
 "Last-Translator: Tal Rahav <talrhv1@gmail.com>\n"
 "Language-Team: \n"
@@ -261,9 +261,6 @@ msgstr "גודל טקסט"
 
 msgid "Full Update"
 msgstr "עדכון מלא"
-
-msgid "Fullscreen"
-msgstr ""
 
 msgid "Go Back"
 msgstr "חזרה"
