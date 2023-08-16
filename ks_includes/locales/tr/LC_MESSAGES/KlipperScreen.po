@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-31 02:01-0300\n"
+"POT-Creation-Date: 2023-08-16 10:20-0300\n"
 "PO-Revision-Date: 2023-07-23 17:27+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -259,9 +259,6 @@ msgstr "Yazı boyutu"
 
 msgid "Full Update"
 msgstr "Tam Güncelleme"
-
-msgid "Fullscreen"
-msgstr "Tam Ekran"
 
 msgid "Go Back"
 msgstr "Geri git"
@@ -765,6 +762,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Tam Ekran"
 
 #~ msgid "Actions"
 #~ msgstr "Eylemler"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-31 02:01-0300\n"
+"POT-Creation-Date: 2023-08-16 10:20-0300\n"
 "PO-Revision-Date: 2022-11-21 21:31-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -259,9 +259,6 @@ msgstr "Textstorlek"
 
 msgid "Full Update"
 msgstr "Fullständig Uppdatering"
-
-msgid "Fullscreen"
-msgstr ""
 
 msgid "Go Back"
 msgstr "Gå tillbaka"

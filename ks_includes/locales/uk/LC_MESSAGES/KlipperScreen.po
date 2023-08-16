@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2023-07-31 15:31\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-31 02:01-0300\n"
+"POT-Creation-Date: 2023-08-16 10:20-0300\n"
 "PO-Revision-Date: 2023-07-31 15:32+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -264,9 +264,6 @@ msgid "Full Update"
 msgstr ""
 "Повне\n"
 "Оновлення"
-
-msgid "Fullscreen"
-msgstr "Повноекранний режим"
 
 msgid "Go Back"
 msgstr "Назад"
@@ -784,6 +781,9 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм/с³"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Повноекранний режим"
 
 #~ msgid "Actions"
 #~ msgstr "Дії"

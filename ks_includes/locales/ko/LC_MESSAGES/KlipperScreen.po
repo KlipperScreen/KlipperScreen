@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-31 02:01-0300\n"
+"POT-Creation-Date: 2023-08-16 10:20-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: NSteven\n"
 "Language-Team: NSteven\n"
@@ -254,9 +254,6 @@ msgstr "글꼴 크기"
 
 msgid "Full Update"
 msgstr "전체 업데이트"
-
-msgid "Fullscreen"
-msgstr ""
 
 msgid "Go Back"
 msgstr "뒤로"
