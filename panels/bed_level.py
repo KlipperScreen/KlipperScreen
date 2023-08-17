@@ -165,7 +165,7 @@ class Panel(ScreenPanel):
         self.buttons['rm'] = self._gtk.Button("bed-level-r-m", scale=button_scale)
         self.buttons['fm'] = self._gtk.Button("bed-level-b-m", scale=button_scale)
         self.buttons['bm'] = self._gtk.Button("bed-level-t-m", scale=button_scale)
-        self.buttons['center'] = self._gtk.Button("increase", scale=button_scale)
+        self.buttons['center'] = self._gtk.Button("increase", scale=button_scale/2)
 
         bedgrid = Gtk.Grid()
 
@@ -290,12 +290,15 @@ class Panel(ScreenPanel):
                 'lm': lm
             }
         self.screw_dict['center'] = center
+        remove_list = []
+        for screw in self.screw_dict:
+            if screw not in screw_positions:
+                remove_list.append(screw)
+        for screw in remove_list:
+            self.screw_dict.pop(screw)
+
         grid.attach(bedgrid, 1, 0, 3, 2)
         self.content.add(grid)
-
-    def activate(self):
-        for key, value in self.screw_dict.items():
-            self.buttons[key].set_label(f"{value}")
 
     def home(self):
         # Test if all axes have been homed. Home if necessary.
