@@ -130,7 +130,8 @@ class Panel(ScreenPanel):
     def spool_compare_date(model, row1, row2, user_data):
         spool1 = model.get_value(row1, 0)
         spool2 = model.get_value(row2, 0)
-        return 1 if spool1.last_used > spool2.last_used else -1
+        return 1 if (spool1.last_used or datetime.min).replace(tzinfo=None) > \
+                    (spool2.last_used or datetime.min).replace(tzinfo=None) else -1
 
     def _on_material_filter_changed(self, sender):
         treeiter = sender.get_active_iter()
@@ -274,12 +275,6 @@ class Panel(ScreenPanel):
         column_last_used = Gtk.TreeViewColumn(cell_renderer=text_renderer)
         column_last_used.set_visible(False)
         column_last_used.set_sort_column_id(1)
-        column_last_used.set_cell_data_func(
-            text_renderer,
-            lambda column, cell, model, it, data:
-            self._set_cell_background(cell, model.get_value(it, 0)) and
-            cell.set_property('text', f"{model.get_value(it, 0).last_used.astimezone():{self.timeFormat}}")
-        )
 
         column_material = Gtk.TreeViewColumn(cell_renderer=text_renderer)
         column_material.set_cell_data_func(
