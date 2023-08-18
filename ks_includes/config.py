@@ -188,7 +188,9 @@ class KlipperScreenConfig:
                 # This section may be deprecated in favor of moving this options under the printer section
                 numbers = ('rotation', '')
                 strs = ('screw_positions', '')
-            elif section.startswith('graph') or section.startswith('displayed_macros') or section.startswith('spoolman'):
+            elif section.startswith('graph')\
+                    or section.startswith('displayed_macros')\
+                    or section.startswith('spoolman'):
                 bools = [f'{option}' for option in config[section]]
             elif section.startswith('z_calibrate_position'):
                 # This section may be deprecated in favor of moving this options under the printer section

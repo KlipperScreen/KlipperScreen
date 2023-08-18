@@ -14,6 +14,7 @@ try:
 except ImportError:
     from backports.zoneinfo import ZoneInfo
 
+
 def format_date(date):
     try:
         return datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%f').replace(tzinfo=ZoneInfo('UTC'))
@@ -22,6 +23,7 @@ def format_date(date):
             return datetime.strptime(date, '%Y-%m-%dT%H:%M:%S').replace(tzinfo=ZoneInfo('UTC'))
         except ValueError:
             return None
+
 
 class SpoolmanVendor:
     id: int
