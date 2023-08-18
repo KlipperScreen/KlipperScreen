@@ -165,7 +165,7 @@ class Panel(ScreenPanel):
         self.buttons['rm'] = self._gtk.Button("bed-level-r-m", scale=button_scale)
         self.buttons['fm'] = self._gtk.Button("bed-level-b-m", scale=button_scale)
         self.buttons['bm'] = self._gtk.Button("bed-level-t-m", scale=button_scale)
-        self.buttons['center'] = self._gtk.Button("increase", scale=button_scale/2)
+        self.buttons['center'] = self._gtk.Button("increase", scale=button_scale / 2)
 
         bedgrid = Gtk.Grid()
 
