@@ -165,8 +165,13 @@ class KlippyGtk:
                 scale = scale * 1.4
             width = height = self.img_scale * scale
             b.set_image(self.Image(image_name, width, height))
-        b.set_image_position(position)
-        b.set_always_show_image(True)
+            b.set_image_position(position)
+            b.set_always_show_image(True)
+            spinner = Gtk.Spinner.new()
+            spinner.set_no_show_all(True)
+            spinner.set_size_request(width, height)
+            spinner.hide()
+            b.get_child().get_child().add(spinner)
 
         if label is not None:
             format_label(b, lines)
@@ -174,6 +179,24 @@ class KlippyGtk:
             b.get_style_context().add_class(style)
         b.connect("clicked", self.screen.reset_screensaver_timeout)
         return b
+
+    @staticmethod
+    def Button_busy(widget, busy):
+        box = widget.get_child().get_child()
+        if busy:
+            widget.set_sensitive(False)
+            widget.set_always_show_image(False)
+            box.get_children()[0].hide()
+            if type(box.get_children()[1]) == Gtk.Spinner:
+                box.get_children()[1].start()
+                box.get_children()[1].show()
+        else:
+            box.get_children()[0].show()
+            if type(box.get_children()[1]) == Gtk.Spinner:
+                box.get_children()[1].stop()
+                box.get_children()[1].hide()
+            widget.set_always_show_image(True)
+            widget.set_sensitive(True)
 
     def Dialog(self, screen, buttons, content, callback=None, *args):
         dialog = Gtk.Dialog()
@@ -239,8 +262,7 @@ class KlippyGtk:
         b.connect("clicked", self.screen.reset_screensaver_timeout)
         return b
 
-    @staticmethod
-    def ScrolledWindow():
+    def ScrolledWindow(self, steppers=True):
         scroll = Gtk.ScrolledWindow()
         scroll.set_property("overlay-scrolling", False)
         scroll.set_vexpand(True)
@@ -248,4 +270,6 @@ class KlippyGtk:
                           Gdk.EventMask.TOUCH_MASK |
                           Gdk.EventMask.BUTTON_RELEASE_MASK)
         scroll.set_kinetic_scrolling(True)
+        if self.screen._config.get_main_config().getboolean("show_scroll_steppers", fallback=False) and steppers:
+            scroll.get_vscrollbar().get_style_context().add_class("with-steppers")
         return scroll

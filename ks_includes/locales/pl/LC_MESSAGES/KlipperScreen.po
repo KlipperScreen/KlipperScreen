@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-31 02:01-0300\n"
+"POT-Creation-Date: 2023-08-16 10:20-0300\n"
 "PO-Revision-Date: 2023-07-31 22:13+0000\n"
 "Last-Translator: Daviteusz <daviteusz0@gmail.com>\n"
 "Language-Team: Polish\n"
@@ -256,9 +256,6 @@ msgstr "Rozmiar czcionki"
 
 msgid "Full Update"
 msgstr "Aktualizuj wszystko"
-
-msgid "Fullscreen"
-msgstr "Pełny ekran"
 
 msgid "Go Back"
 msgstr "Powróć"
@@ -766,6 +763,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Pełny ekran"
 
 #~ msgid "Actions"
 #~ msgstr "Akcje"

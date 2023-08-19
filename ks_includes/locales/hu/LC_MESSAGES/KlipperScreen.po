@@ -255,9 +255,6 @@ msgstr "Betűméret"
 msgid "Full Update"
 msgstr "Teljes Frissítés"
 
-msgid "Fullscreen"
-msgstr "Teljes képernyő"
-
 msgid "Go Back"
 msgstr "Visszalépés"
 
@@ -760,6 +757,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Teljes képernyő"
 
 #~ msgid "Actions"
 #~ msgstr "Műveletek"

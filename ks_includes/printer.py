@@ -24,6 +24,8 @@ class Printer:
         self.busy_cb = busy_cb
         self.busy = False
         self.tempstore_size = 1200
+        self.cameras = []
+        self.available_commands = {}
 
     def reinit(self, printer_info, data):
         self.config = data['configfile']['config']
@@ -39,6 +41,7 @@ class Printer:
         if not self.store_timeout:
             self.store_timeout = GLib.timeout_add_seconds(1, self._update_temp_store)
         self.tempstore_size = 1200
+        self.available_commands = {}
 
         for x in self.config.keys():
             if x[:8] == "extruder":
@@ -160,6 +163,10 @@ class Printer:
             }
         logging.debug(f"Power devices: {self.power_devices}")
 
+    def configure_cameras(self, data):
+        self.cameras = data
+        logging.debug(f"Cameras: {self.cameras}")
+
     def get_config_section_list(self, search=""):
         if self.config is not None:
             return [i for i in list(self.config) if i.startswith(search)] if hasattr(self, "config") else []
@@ -228,6 +235,7 @@ class Printer:
                 "idle_timeout": self.get_stat("idle_timeout").copy(),
                 "pause_resume": {"is_paused": self.state == "paused"},
                 "power_devices": {"count": len(self.get_power_devices())},
+                "cameras": {"count": len(self.cameras)},
             }
         }
 
@@ -322,14 +330,12 @@ class Printer:
             return True
 
     def init_temp_store(self, tempstore):
-        if not tempstore or 'result' not in tempstore:
-            return
-        if self.tempstore and list(self.tempstore) != list(tempstore['result']):
+        if self.tempstore and list(self.tempstore) != list(tempstore):
             logging.debug("Tempstore has changed")
-            self.tempstore = tempstore['result']
+            self.tempstore = tempstore
             self.change_state(self.state)
         else:
-            self.tempstore = tempstore['result']
+            self.tempstore = tempstore
         for device in self.tempstore:
             for x in self.tempstore[device]:
                 length = len(self.tempstore[device][x])

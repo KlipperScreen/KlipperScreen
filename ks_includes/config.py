@@ -156,7 +156,7 @@ class KlipperScreenConfig:
                 bools = (
                     'invert_x', 'invert_y', 'invert_z', '24htime', 'only_heaters', 'show_cursor', 'confirm_estop',
                     'autoclose_popups', 'use_dpms', 'use_default_menu', 'side_macro_shortcut', 'use-matchbox-keyboard',
-                    'show_heater_power'
+                    'show_heater_power', "show_scroll_steppers",
                 )
                 strs = (
                     'default_printer', 'language', 'print_sort_dir', 'theme', 'screen_blanking', 'font_size',
@@ -173,7 +173,7 @@ class KlipperScreenConfig:
                 strs = (
                     'moonraker_api_key', 'moonraker_host', 'titlebar_name_type',
                     'screw_positions', 'power_devices', 'titlebar_items', 'z_babystep_values',
-                    'extrude_distances', "extrude_speeds", "camera_url",
+                    'extrude_distances', "extrude_speeds",
                 )
                 numbers = (
                     'moonraker_port', 'move_speed_xy', 'move_speed_z',
@@ -199,6 +199,9 @@ class KlipperScreenConfig:
             for key in config[section]:
                 if key not in bools and key not in strs and key not in numbers:
                     msg = f'Option "{key}" not recognized for section "[{section}]"'
+                    if key == "camera_url":
+                        msg = "camera_url has been deprecated in favor of moonraker cameras"
+                        msg += "\n\n https://moonraker.readthedocs.io/en/latest/configuration/#webcam"
                     if remove:
                         # This should only be called for the auto-generated section
                         self.config.remove_option(section, key)
@@ -256,7 +259,7 @@ class KlipperScreenConfig:
             {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
             {"side_macro_shortcut": {
                 "section": "main", "name": _("Macro shortcut on sidebar"), "type": "binary",
-                "value": "True", "callback": screen.toggle_macro_shortcut}},
+                "value": "True", "callback": screen.toggle_shortcut}},
             {"font_size": {
                 "section": "main", "name": _("Font Size"), "type": "dropdown",
                 "value": "medium", "callback": screen.restart_ks, "options": [
@@ -275,6 +278,8 @@ class KlipperScreenConfig:
                                   "value": "True"}},
             {"show_heater_power": {"section": "main", "name": _("Show Heater Power"), "type": "binary",
                                    "value": "False", "callback": screen.reload_panels}},
+            {"show_scroll_steppers": {"section": "main", "name": _("Show Scrollbars Buttons"), "type": "binary",
+                                      "value": "False", "callback": screen.reload_panels}},
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
 

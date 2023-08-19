@@ -182,12 +182,30 @@ scale trough slider {
 scrollbar, scrollbar button, scrollbar trough {
     border: none;
     background-color: #13181C;
+    min-height: 2.5em;
 }
 
 scrollbar slider {
-    min-width: 2em;
+    min-width: 2.5em;
     border-radius: .7em;
     background-color: #404E57;
+}
+
+scrollbar.vertical.with-steppers {
+    -GtkScrollbar-has-backward-stepper: true;
+    -GtkScrollbar-has-forward-stepper: true;
+}
+
+scrollbar.vertical.with-steppers button.down {
+    -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
+}
+
+scrollbar.vertical.with-steppers button.up {
+    -gtk-icon-source: -gtk-icontheme("pan-up-symbolic");
+}
+
+undershoot.top, undershoot.bottom {
+    background-image: none;
 }
 
 separator {
@@ -566,20 +584,4 @@ popover button {
     padding-bottom: 0;
 }
 
-/* Hardcoded values until creation of dynamic CSS updates */
-.graph_label_hidden {padding-left: .9em;} /* .4em on top of normal button padding */
-.graph_label_extruder {border-left-width: .4em; border-left-style: solid;}
-.graph_label_extruder1 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_extruder2 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_extruder3 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_extruder4 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_heater_bed {border-left-width: .4em; border-left-style: solid;}
-.graph_label_fan_1 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_fan_2 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_fan_3 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_fan_4 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_sensor_1 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_sensor_2 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_sensor_3 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_sensor_4 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_sensor_5 {border-left-width: .4em; border-left-style: solid;}
+.graph_label {border-left-width: .4em; border-left-style: solid;}

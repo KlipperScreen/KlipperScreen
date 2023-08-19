@@ -68,9 +68,9 @@ If you wish to use the update manager feature of moonraker for KlipperScreen, ad
 type: git_repo
 path: ~/KlipperScreen
 origin: https://github.com/KlipperScreen/KlipperScreen.git
-env: ~/.KlipperScreen-env/bin/python
+virtualenv: ~/.KlipperScreen-env/bin/python
 requirements: scripts/KlipperScreen-requirements.txt
-install_script: scripts/KlipperScreen-install.sh
+system_dependencies: scripts/system-dependencies.json
 managed_services: KlipperScreen
 ```
 !!! note

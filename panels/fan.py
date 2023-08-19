@@ -3,7 +3,6 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib, Pango
-from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
 
@@ -129,7 +128,7 @@ class Panel(ScreenPanel):
         value = self.devices[fan]['scale'].get_value()
 
         if fan == "fan":
-            self._screen._ws.klippy.gcode_script(KlippyGcodes.set_fan_speed(value))
+            self._screen._ws.klippy.gcode_script(f"M106 S{value * 2.55:.0f}")
         else:
             self._screen._ws.klippy.gcode_script(f"SET_FAN_SPEED FAN={fan.split()[1]} SPEED={float(value) / 100}")
         # Check the speed in case it wasn't applied

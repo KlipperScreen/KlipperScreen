@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-31 02:01-0300\n"
+"POT-Creation-Date: 2023-08-16 10:20-0300\n"
 "PO-Revision-Date: 2023-01-29 09:27-0600\n"
 "Last-Translator: \n"
 "Language-Team: Jan Stanka (stanky@email.cz)\n"
@@ -259,9 +259,6 @@ msgstr "Velikost fontu"
 
 msgid "Full Update"
 msgstr "Úplný update"
-
-msgid "Fullscreen"
-msgstr ""
 
 msgid "Go Back"
 msgstr "Zpět"

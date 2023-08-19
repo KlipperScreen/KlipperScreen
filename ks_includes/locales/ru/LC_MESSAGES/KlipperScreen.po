@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-31 02:01-0300\n"
-"PO-Revision-Date: 2022-11-30 18:15-0300\n"
+"POT-Creation-Date: 2023-08-16 10:20-0300\n"
+"PO-Revision-Date: 2023-08-16 09:53-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.2.1\n"
+"X-Generator: Poedit 3.3.2\n"
 "X-Poedit-Flags-xgettext: --add-comments\n"
 
 #, python-format
@@ -52,11 +52,11 @@ msgstr "Применить"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr ""
+msgstr "Применить смещение %s%.3f к Endstop?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr ""
+msgstr "Применить смещение %s%.3f к зонду?"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Вы уверены, что хотите исключить объект?"
@@ -107,7 +107,7 @@ msgid "Calibrating"
 msgstr "Калибровка"
 
 msgid "Camera"
-msgstr ""
+msgstr "Камера"
 
 msgid "Can't set above the maximum:"
 msgstr "Невозможно установить выше максимума:"
@@ -165,13 +165,13 @@ msgid "Cooldown"
 msgstr "Остудить"
 
 msgid "DPMS has failed to load and has been disabled"
-msgstr ""
+msgstr "DPMS не загрузилась и была отключена"
 
 msgid "Date"
 msgstr "Дата"
 
 msgid "Delete Directory?"
-msgstr ""
+msgstr "Удалить каталог?"
 
 msgid "Delete File?"
 msgstr "Удалить Файл?"
@@ -261,9 +261,6 @@ msgstr "Размер шрифта"
 msgid "Full Update"
 msgstr "Полный Обновлять"
 
-msgid "Fullscreen"
-msgstr ""
-
 msgid "Go Back"
 msgstr "Назад"
 
@@ -313,7 +310,7 @@ msgid "Initializing printer..."
 msgstr "Принтер стартует..."
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "Запустите калибровку ПИД-регулятора для:"
 
 msgid "Input Shaper"
 msgstr "Входной шейпер"
@@ -325,7 +322,7 @@ msgid "Invalid"
 msgstr "Неверный"
 
 msgid "Invalid password"
-msgstr ""
+msgstr "Неверный пароль"
 
 msgid "Invert X"
 msgstr "Инверсия X"
@@ -337,7 +334,7 @@ msgid "Invert Z"
 msgstr "Инверсия Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
+msgstr "В зависимости от мощности нагревателя это может занять более 5 минут."
 
 msgid "Klipper Restart"
 msgstr "Klipper Рестарт"
@@ -430,7 +427,7 @@ msgid "Moonraker: connected"
 msgstr "Moonraker: подключен"
 
 msgid "More"
-msgstr ""
+msgstr "Больше"
 
 msgid "Move"
 msgstr "Двигать"
@@ -531,7 +528,7 @@ msgid "Profile Name:"
 msgstr "Имя профиля:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "Предоставьте KlipperScreen.log при обращении за помощью.\n"
 
 msgid "Quad Gantry Level"
 msgstr "Уровень Quad Gantry"
@@ -555,7 +552,7 @@ msgid "Refresh"
 msgstr "Обновить"
 
 msgid "Rename/Move:"
-msgstr ""
+msgstr "Переименовать/переместить:"
 
 msgid "Restart"
 msgstr "Перезагрузка"
@@ -658,7 +655,7 @@ msgid "Square Corner Velocity"
 msgstr "Квадратная угловая скорость"
 
 msgid "Standby"
-msgstr ""
+msgstr "Ожидание"
 
 msgid "Start"
 msgstr "Hачать"
@@ -755,9 +752,9 @@ msgstr[2] "часа"
 
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "минута"
+msgstr[1] "минуты"
+msgstr[2] "минут"
 
 msgid "mm"
 msgstr "мм"
@@ -770,6 +767,9 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм/с³"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Полный экран"
 
 #~ msgid "Actions"
 #~ msgstr "Действия"

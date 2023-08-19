@@ -349,7 +349,6 @@ class Panel(ScreenPanel):
     def activate(self):
         if self.flow_timeout is None:
             self.flow_timeout = GLib.timeout_add_seconds(2, self.update_flow)
-        self._screen.base_panel_show_all()
 
     def deactivate(self):
         if self.flow_timeout is not None:
@@ -420,8 +419,7 @@ class Panel(ScreenPanel):
         if self.filename:
             self.disable_button("restart")
             if self.state == "error":
-                script = {"script": "SDCARD_RESET_FILE"}
-                self._screen._send_action(None, "printer.gcode.script", script)
+                self._screen._ws.klippy.gcode_script("SDCARD_RESET_FILE")
             self._screen._ws.klippy.print_start(self.filename)
             logging.info(f"Starting print: {self.filename}")
             self.new_print()
@@ -676,6 +674,8 @@ class Panel(ScreenPanel):
             elif filament_time is not None and filament_time > 1:
                 estimated = (filament_time + file_time) / 2
             estimated = file_time
+        if estimated < 1:
+            return
 
         self.labels["est_time"].set_label(self.format_time(estimated))
         self.labels["time_left"].set_label(self.format_eta(estimated, print_duration))
@@ -740,18 +740,11 @@ class Panel(ScreenPanel):
             offset = self._printer.get_stat("gcode_move", "homing_origin")
             self.zoffset = float(offset[2]) if offset else 0
             if self.zoffset != 0:
-                endstop = (
-                    (
-                        self._printer.config_section_exists("stepper_z")
-                        and not self._printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe")
-                    )
-                    or "delta" in self._printer.get_config_section("printer")['kinematics']
-                )
-                if endstop:
+                if "Z_OFFSET_APPLY_ENDSTOP" in self._printer.available_commands:
                     self.buttons['button_grid'].attach(self.buttons["save_offset_endstop"], 0, 0, 1, 1)
                 else:
                     self.buttons['button_grid'].attach(Gtk.Label(), 0, 0, 1, 1)
-                if self._printer.get_probe():
+                if "Z_OFFSET_APPLY_PROBE" in self._printer.available_commands:
                     self.buttons['button_grid'].attach(self.buttons["save_offset_probe"], 1, 0, 1, 1)
                 else:
                     self.buttons['button_grid'].attach(Gtk.Label(), 1, 0, 1, 1)

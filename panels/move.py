@@ -36,7 +36,9 @@ class Panel(ScreenPanel):
         self.buttons['motors_off'].connect("clicked", self._screen._confirm_send_action,
                                            _("Are you sure you wish to disable motors?"),
                                            "printer.gcode.script", script)
-
+        adjust = self._gtk.Button("settings", None, "color2", 1, Gtk.PositionType.LEFT, 1)
+        adjust.connect("clicked", self.load_menu, 'options', _('Settings'))
+        adjust.set_hexpand(False)
         grid = self._gtk.HomogeneousGrid()
         if self._screen.vertical_mode:
             if self._screen.lang_ltr:
@@ -49,6 +51,7 @@ class Panel(ScreenPanel):
                 grid.attach(self.buttons['x-'], 2, 1, 1, 1)
                 grid.attach(self.buttons['z+'], 0, 2, 1, 1)
                 grid.attach(self.buttons['z-'], 2, 2, 1, 1)
+            grid.attach(adjust, 1, 2, 1, 1)
             grid.attach(self.buttons['y+'], 1, 0, 1, 1)
             grid.attach(self.buttons['y-'], 1, 1, 1, 1)
 
@@ -85,9 +88,6 @@ class Panel(ScreenPanel):
 
         for p in ('pos_x', 'pos_y', 'pos_z'):
             self.labels[p] = Gtk.Label()
-        adjust = self._gtk.Button("settings", None, "color2", 1, Gtk.PositionType.LEFT, 1)
-        adjust.connect("clicked", self.load_menu, 'options', _('Settings'))
-        adjust.set_hexpand(False)
         self.labels['move_dist'] = Gtk.Label(_("Move Distance (mm)"))
 
         bottomgrid = self._gtk.HomogeneousGrid()
@@ -96,7 +96,8 @@ class Panel(ScreenPanel):
         bottomgrid.attach(self.labels['pos_y'], 1, 0, 1, 1)
         bottomgrid.attach(self.labels['pos_z'], 2, 0, 1, 1)
         bottomgrid.attach(self.labels['move_dist'], 0, 1, 3, 1)
-        bottomgrid.attach(adjust, 3, 0, 1, 2)
+        if not self._screen.vertical_mode:
+            bottomgrid.attach(adjust, 3, 0, 1, 2)
 
         self.labels['move_menu'] = self._gtk.HomogeneousGrid()
         self.labels['move_menu'].attach(grid, 0, 0, 1, 3)
@@ -135,16 +136,7 @@ class Panel(ScreenPanel):
             name = list(option)[0]
             self.add_option('options', self.settings, name, option[name])
 
-    def process_busy(self, busy):
-        buttons = ("home", "motors_off")
-        for button in buttons:
-            if button in self.buttons:
-                self.buttons[button].set_sensitive(not busy)
-
     def process_update(self, action, data):
-        if action == "notify_busy":
-            self.process_busy(data)
-            return
         if action != "notify_status_update":
             return
         homed_axes = self._printer.get_stat("toolhead", "homed_axes")
@@ -186,8 +178,8 @@ class Panel(ScreenPanel):
         if speed is None:
             speed = self._config.get_config()['main'].getint(config_key, 20)
         speed = 60 * max(1, speed)
-
-        self._screen._ws.klippy.gcode_script(f"{KlippyGcodes.MOVE_RELATIVE}\n{KlippyGcodes.MOVE} {axis}{dist} F{speed}")
+        script = f"{KlippyGcodes.MOVE_RELATIVE}\nG0 {axis}{dist} F{speed}"
+        self._screen._send_action(widget, "printer.gcode.script", {"script": script})
         if self._printer.get_stat("gcode_move", "absolute_coordinates"):
             self._screen._ws.klippy.gcode_script("G90")
 
@@ -250,7 +242,7 @@ class Panel(ScreenPanel):
 
     def home(self, widget):
         if "delta" in self._printer.get_config_section("printer")['kinematics']:
-            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+            self._screen._send_action(widget, "printer.gcode.script", {"script": 'G28'})
             return
         name = "homing"
         disname = self._screen._config.get_menu_name("move", name)
