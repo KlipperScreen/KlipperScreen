@@ -1,0 +1,19 @@
+<svg viewBox="0 0 235 500" preserveAspectRatio="xMinYMin meet" width="23.5" height="50" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+    <path style="stroke:#6e0b30;stroke-width:0;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;fill:#343434;fill-rule:nonzero;opacity:1" vector-effect="non-scaling-stroke" transform="matrix(.58757 0 0 3.94769 197.135 250.047)" d="M0-63.27c34.925 0 63.27 28.345 63.27 63.27 0 34.925-28.345 63.27-63.27 63.27-34.925 0-63.27-28.345-63.27-63.27 0-34.925 28.345-63.27 63.27-63.27z"/>
+    <path style="stroke:#6e0b30;stroke-width:0;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;fill:var(--filament-color);fill-rule:nonzero;opacity:1" vector-effect="non-scaling-stroke" transform="matrix(.38158 0 0 3.46232 197.135 250.047)" d="M0-63.27c34.925 0 63.27 28.345 63.27 63.27 0 34.925-28.345 63.27-63.27 63.27-34.925 0-63.27-28.345-63.27-63.27 0-34.925 28.345-63.27 63.27-63.27z"/>
+    <path style="stroke:#000;stroke-width:0;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;fill:var(--filament-color);fill-rule:nonzero;opacity:1" vector-effect="non-scaling-stroke" transform="matrix(2.07364 0 0 3.3577 117.295 250.047)" d="M-38.503-65.24h77.006V65.24h-77.006z"/>
+    <g transform="matrix(.58757 0 0 3.94769 37.454 250.047)">
+        <filter id="a" y="-.057" height="1.114" x="-.057" width="1.272">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+            <feOffset dx="20" result="oBlur"/>
+            <feFlood flood-color="rgb(0,0,0)" flood-opacity=".67"/>
+            <feComposite in2="oBlur" operator="in"/>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        <path style="stroke:#6e0b30;stroke-width:0;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;fill:#343434;fill-rule:nonzero;opacity:1;filter:url(#a)" vector-effect="non-scaling-stroke" d="M0-63.27c34.925 0 63.27 28.345 63.27 63.27 0 34.925-28.345 63.27-63.27 63.27-34.925 0-63.27-28.345-63.27-63.27 0-34.925 28.345-63.27 63.27-63.27z"/>
+        <path style="stroke:#6e0b30;stroke-width:0;stroke-dasharray:none;stroke-linecap:butt;stroke-dashoffset:0;stroke-linejoin:miter;stroke-miterlimit:4;fill:#111;fill-rule:nonzero;opacity:1" vector-effect="non-scaling-stroke" transform="scale(.41452)" d="M0-63.27c34.925 0 63.27 28.345 63.27 63.27 0 34.925-28.345 63.27-63.27 63.27-34.925 0-63.27-28.345-63.27-63.27 0-34.925 28.345-63.27 63.27-63.27z"/>
+    </g>
+</svg>

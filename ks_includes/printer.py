@@ -26,6 +26,7 @@ class Printer:
         self.tempstore_size = 1200
         self.cameras = []
         self.available_commands = {}
+        self.spoolman = False
 
     def reinit(self, printer_info, data):
         self.config = data['configfile']['config']
@@ -37,6 +38,7 @@ class Printer:
         self.fancount = 0
         self.output_pin_count = 0
         self.tempstore = {}
+        self.spoolman = False
         self.busy = False
         if not self.store_timeout:
             self.store_timeout = GLib.timeout_add_seconds(1, self._update_temp_store)
@@ -236,6 +238,7 @@ class Printer:
                 "pause_resume": {"is_paused": self.state == "paused"},
                 "power_devices": {"count": len(self.get_power_devices())},
                 "cameras": {"count": len(self.cameras)},
+                "spoolman": self.spoolman
             }
         }
 
@@ -364,3 +367,7 @@ class Printer:
                     temp = 0
                 self.tempstore[device][x].append(temp)
         return True
+
+    def enable_spoolman(self):
+        logging.info("Enabling Spoolman")
+        self.spoolman = True

@@ -5,6 +5,8 @@
     font-family: RobotoMedium;
 }
 
+list row,
+treeview.view,
 window {
     background-color: #121212;
 }
@@ -59,10 +61,12 @@ combobox box button {
     border-color: #121212;
 }
 
+treeview.view check,
 switch {
     background-color: #1c1c1c;
 }
 
+treeview.view check:checked,
 switch:checked {
     background-color: #2f5631;
 }
