@@ -46,6 +46,10 @@ treeview.view check:checked {
     -gtk-icon-transform: translateX(-1.5em);
 }
 
+expander label {
+    padding : 1em;
+}
+
 button {
     background-image: none;
     background-color: #13181C;
