@@ -102,7 +102,7 @@ msgid "Calibrating"
 msgstr "Calibrazione"
 
 msgid "Camera"
-msgstr "Fotocamera"
+msgstr "Camera"
 
 msgid "Can't set above the maximum:"
 msgstr "Impossibile impostare oltre il massimo:"
@@ -329,7 +329,7 @@ msgid "Invert Z"
 msgstr "Inverti Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr "Potrebbero essere necessari più di 5 minuti a seconda della potenza del riscaldatore."
+msgstr "Potrebbero volerci più di 5 min., dipende della potenza del riscaldatore."
 
 msgid "Klipper Restart"
 msgstr "Riavvio Klipper"
@@ -371,10 +371,10 @@ msgid "Load"
 msgstr "Carica"
 
 msgid "Lower Nozzle"
-msgstr "Ugello inferiore"
+msgstr "Abbassa Ugello"
 
 msgid "Macro shortcut on sidebar"
-msgstr "Scorciatoia macro sulla barra laterale"
+msgstr "Macros sulla barra laterale"
 
 msgid "Macros"
 msgstr "Macros"
@@ -428,7 +428,7 @@ msgid "Move"
 msgstr "Spostamento"
 
 msgid "Move Distance (mm)"
-msgstr "Distanza di spostamento (mm)"
+msgstr "Distanza spostamento (mm)"
 
 msgid "Name"
 msgstr "Nome"
@@ -443,7 +443,7 @@ msgid "New"
 msgstr "Nuovo"
 
 msgid "Not supported for auto-detection, it needs to be configured in klipperscreen.conf"
-msgstr "Non supportato per il rilevamento automatico, deve essere configurato in klipperscreen.conf"
+msgstr "Non supportato per il rilevamento automatico, configurarlo in klipperscreen.conf"
 
 msgid "Nothing selected"
 msgstr "Nessuna selezione"
@@ -591,7 +591,7 @@ msgid "Screen DPMS"
 msgstr "Schermo DPMS"
 
 msgid "Screen Power Off Time"
-msgstr "Tempo di spegnimento dello schermo"
+msgstr "Tempo spegnimento schermo"
 
 msgid "Screws Adjust"
 msgstr "Screws Adjust"
@@ -717,7 +717,7 @@ msgid "Z Move Speed (mm/s)"
 msgstr "Velocità movimento Z (mm/s)"
 
 msgid "Z Speed (mm/s)"
-msgstr "Z Velocità (mm/s)"
+msgstr "Velocità Z(mm/s)"
 
 msgid "Z Tilt"
 msgstr "Z Tilt"
@@ -731,7 +731,7 @@ msgstr[0] "Applica"
 msgstr[1] "Applica"
 
 msgid "dBm"
-msgstr ""
+msgstr "dBm"
 
 msgid "hour"
 msgid_plural "hours"
@@ -744,13 +744,169 @@ msgstr[0] "minuto"
 msgstr[1] "minuti"
 
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 msgid "mm/s"
-msgstr ""
+msgstr "mm/s"
 
 msgid "mm/s²"
-msgstr ""
+msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Actions"
+#~ msgstr "Azioni"
+
+#~ msgid "Configuration"
+#~ msgstr "Impostazioni"
+
+#~ msgid "Homing"
+#~ msgstr "Homing"
+
+#~ msgid "Disable XY"
+#~ msgstr "Disab. XY"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "Correzione tempi Slicer (%)"
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "Calibrato, salva la configurazione per renderla permanente"
+
+#~ msgid "Decrease"
+#~ msgstr "Diminuisci"
+
+#~ msgid "Increase"
+#~ msgstr "Incrementa"
+
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "Invio del segnale di accensione a: %s"
+
+#~ msgid "Sort:"
+#~ msgstr "Ordinare:"
+
+#~ msgid "Calibrating..."
+#~ msgstr "Calibrazione..."
+
+#~ msgid "Z+"
+#~ msgstr "Z+"
+
+#~ msgid "Z-"
+#~ msgstr "Z-"
+
+#~ msgid "X+"
+#~ msgstr "X+"
+
+#~ msgid "X-"
+#~ msgstr "X-"
+
+#~ msgid "Y+"
+#~ msgstr "Y+"
+
+#~ msgid "Y-"
+#~ msgstr "Y-"
+
+#~ msgid "Retry #%s"
+#~ msgstr "Riprova #%s"
+
+#~ msgid "Add Printer"
+#~ msgstr "Aggiungi Stampante"
+
+#~ msgid "Initializing"
+#~ msgstr "Inizializzo"
+
+#~ msgid "Delete"
+#~ msgstr "Elimina"
+
+#~ msgid "Off"
+#~ msgstr "Off"
+
+#~ msgid "View Mesh"
+#~ msgstr "Visual. Mesh"
+
+#~ msgid "Sort by: "
+#~ msgstr "Ordina: "
+
+#~ msgid "Bltouch found applied offset"
+#~ msgstr "Bltouch ha trovato l'offset applicato"
+
+#~ msgid ""
+#~ "Check /tmp/KlipperScreen.log for more information.\n"
+#~ "Please submit an issue on GitHub for help."
+#~ msgstr ""
+#~ "Verifica /tmp/KlipperScreen.log per info.\n"
+#~ "Aggiungi un problema sul GitHub."
+
+#~ msgid "Probe found applied offset"
+#~ msgstr "Probe ha trovato l'offset applicato"
+
+#~ msgid "Tool"
+#~ msgstr "Strumenti"
+
+#~ msgid "Displayed Macros"
+#~ msgstr "Mostra/Nascondi Macros"
+
+#~ msgid "Z Position"
+#~ msgstr "Posizione Z"
+
+#~ msgid "IPv4"
+#~ msgstr "IPv4"
+
+#~ msgid "IPv6"
+#~ msgstr "IPv6"
+
+#~ msgid "Disconnect"
+#~ msgstr "Sconnetti"
+
+#~ msgid "Duration Only"
+#~ msgstr "Solo Durata"
+
+#~ msgid "Klipper Version"
+#~ msgstr "Versione Klipper"
+
+#~ msgid ""
+#~ "Klipper has encountered an error with the micro-controller.\n"
+#~ "Please recompile and flash."
+#~ msgstr ""
+#~ "Klipper ha riscontrato un errore con il microcontrollore.\n"
+#~ "Ricompila e flasha."
+
+#~ msgid ""
+#~ "Klipper has encountered an error.\n"
+#~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
+#~ msgstr ""
+#~ "Klipper ha riscontrato un errore.\n"
+#~ "esegui un FIRMWARE_RESTART per tentare di risolvere il problema."
+
+#~ msgid "KlipperScreen Version"
+#~ msgstr "Versione KlipperScreen"
+
+#~ msgid "Show Only Heaters in Temp."
+#~ msgstr "Mostra solo riscaldatori in temp."
+
+#~ msgid "Target"
+#~ msgstr "Obiettivo"
+
+#~ msgid "Temp"
+#~ msgstr "Temp"
+
+#~ msgid "Number Pad"
+#~ msgstr "Tastierino"
+
+#~ msgid "Preheat"
+#~ msgstr "Preriscalda"
+
+#~ msgid "Screen will show in less than one second"
+#~ msgstr "Lo schermo verrà visualizzato a breve"
+
+#~ msgid "Medium (default)"
+#~ msgstr "Media (predef.)"
+
+#~ msgid "File Estimation (default)"
+#~ msgstr "Stima file (predef.)"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "Change Printer"
+#~ msgstr "Cambia Stampante"
