@@ -98,8 +98,8 @@ screw_rotation: 0
 extrude_distances: 5, 10, 15, 25
 extrude_speeds: 1, 2, 5, 25
 
-# Camera configuration
-camera_url: http://127.0.0.1/webcam/?action=stream
+# Camera needs to be configured in moonraker:
+# https://moonraker.readthedocs.io/en/latest/configuration/#webcam
 ```
 
 ## Preheat Options

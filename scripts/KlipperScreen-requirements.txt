@@ -8,3 +8,4 @@ python-mpv==0.5.2;python_version<"3.10"
 python-mpv==1.0.4;python_version>="3.10"
 six==1.16.0
 dbus-python==1.3.2
+backports.zoneinfo;python_version<"3.9"
