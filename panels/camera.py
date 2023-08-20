@@ -48,10 +48,8 @@ class Panel(ScreenPanel):
         url = cam['stream_url']
         if url.startswith('/'):
             logging.info("camera URL is relative")
-            if self.ks_printer_cfg is not None:
-                url = self.ks_printer_cfg.get("moonraker_host", "127.0.0.1") + url
-            else:
-                url = f"127.0.0.1{url}"
+            endpoint = self._screen.apiclient.endpoint.split(':')
+            url = f"{endpoint[0]}{endpoint[1]}{url}"
         vf = ""
         if cam["flip_horizontal"]:
             vf += "hflip,"
