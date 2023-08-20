@@ -362,7 +362,7 @@ msgid "Layer:"
 msgstr "Layer:"
 
 msgid "Left:"
-msgstr "Sinistra:"
+msgstr "Restante:"
 
 msgid "Limits"
 msgstr "Limiti"
