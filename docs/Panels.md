@@ -108,6 +108,12 @@ panel: system
 ```
 ![System Panel](img/panels/system.png)
 
+### Spoolman
+```py
+panel: spoolman
+```
+![Spoolman](img/panels/spoolman.png)
+
 ### [Temperature](Panels/Temperature.md)
 ```py
 panel: temperature
