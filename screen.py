@@ -321,10 +321,13 @@ class KlipperScreen(Gtk.Window):
         msg.get_style_context().add_class("message_popup")
         if level == 1:
             msg.get_style_context().add_class("message_popup_echo")
+            logging.info(f'echo: {message}')
         elif level == 2:
             msg.get_style_context().add_class("message_popup_warning")
+            logging.info(f'warning: {message}')
         else:
             msg.get_style_context().add_class("message_popup_error")
+            logging.info(f'error: {message}')
 
         popup = Gtk.Popover.new(self.base_panel.titlebar)
         popup.get_style_context().add_class("message_popup_popover")
