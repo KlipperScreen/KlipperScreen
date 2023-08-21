@@ -49,7 +49,7 @@ class Panel(ScreenPanel):
         if url.startswith('/'):
             logging.info("camera URL is relative")
             endpoint = self._screen.apiclient.endpoint.split(':')
-            url = f"{endpoint[0]}{endpoint[1]}{url}"
+            url = f"{endpoint[0]}:{endpoint[1]}{url}"
         vf = ""
         if cam["flip_horizontal"]:
             vf += "hflip,"
