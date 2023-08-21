@@ -186,7 +186,7 @@ class BasePanel(ScreenPanel):
             self.time_update = GLib.timeout_add_seconds(1, self.update_time)
 
     def add_content(self, panel):
-        show = self._printer.state not in ('disconnected', 'startup', 'shutdown', 'error')
+        show = self._printer is not None and self._printer.state not in ('disconnected', 'startup', 'shutdown', 'error')
         self.show_shortcut(show and self._config.get_main_config().getboolean('side_macro_shortcut', True))
         self.show_heaters(show)
         self.set_control_sensitive(show, control='estop')
