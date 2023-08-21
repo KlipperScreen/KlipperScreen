@@ -93,5 +93,5 @@ class Panel(ScreenPanel):
 
     def log(self, loglevel, component, message):
         logging.debug(f'[{loglevel}] {component}: {message}')
-        if loglevel == 'error':
+        if loglevel == 'error' and 'No Xvideo support found' not in message:
             self._screen.show_popup_message(f'{message}')
