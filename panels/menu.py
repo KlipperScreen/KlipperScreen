@@ -64,10 +64,14 @@ class Panel(ScreenPanel):
         return self.grid
 
     def create_menu_items(self):
+        count = 0
+        for i in self.items:
+            if self.evaluate_enable(i[next(iter(i))]['enable']):
+                count += 1
+        scale = 1.1 if 12 < count <= 16 else None  # hack to fit a 4th row
         for i in range(len(self.items)):
             key = list(self.items[i])[0]
             item = self.items[i][key]
-            scale = 1.1 if 12 < len(self.items) <= 16 else None  # hack to fit a 4th row
 
             printer = self._printer.get_printer_status_data()
 
