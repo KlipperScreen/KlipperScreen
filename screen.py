@@ -321,10 +321,13 @@ class KlipperScreen(Gtk.Window):
         msg.get_style_context().add_class("message_popup")
         if level == 1:
             msg.get_style_context().add_class("message_popup_echo")
+            logging.info(f'echo: {message}')
         elif level == 2:
             msg.get_style_context().add_class("message_popup_warning")
+            logging.info(f'warning: {message}')
         else:
             msg.get_style_context().add_class("message_popup_error")
+            logging.info(f'error: {message}')
 
         popup = Gtk.Popover.new(self.base_panel.titlebar)
         popup.get_style_context().add_class("message_popup_popover")
@@ -788,7 +791,7 @@ class KlipperScreen(Gtk.Window):
 
     def _send_action(self, widget, method, params):
         logging.info(f"{method}: {params}")
-        if type(widget) == Gtk.Button:
+        if isinstance(widget, Gtk.Button):
             self.gtk.Button_busy(widget, True)
             self._ws.send_method(method, params, self.enable_widget, widget)
         else:
@@ -796,7 +799,7 @@ class KlipperScreen(Gtk.Window):
 
     def enable_widget(self, *args):
         for x in args:
-            if type(x) == Gtk.Button:
+            if isinstance(x, Gtk.Button):
                 GLib.timeout_add(150, self.gtk.Button_busy, x, False)
 
     def printer_initializing(self, msg, remove=False):
