@@ -341,7 +341,9 @@ class Panel(ScreenPanel):
             self.set_active_spool(spool)
 
     def change_sort(self, widget, sort_type):
-        self.current_sort_widget.set_image(None)
+        if self.current_sort_widget is not None:
+            self.current_sort_widget.set_always_show_image(True)
+            self.current_sort_widget.set_image(None)
         self.current_sort_widget = widget
         if sort_type == "id":
             logging.info("Sorting by ID")
@@ -359,7 +361,8 @@ class Panel(ScreenPanel):
         self._treeview.get_column(column).set_sort_order(new_sort_order)
         self._treeview.get_model().set_sort_column_id(column, new_sort_order)
         icon = "arrow-down" if new_sort_order == Gtk.SortType.DESCENDING else "arrow-up"
-        widget.set_image(self._gtk.Image(icon, self._gtk.img_scale * self.bts))
+        self.current_sort_widget.set_always_show_image(True)
+        self.current_sort_widget.set_image(self._gtk.Image(icon, self._gtk.img_scale * self.bts))
 
     def process_update(self, action, data):
         if action == "notify_active_spool_set":
