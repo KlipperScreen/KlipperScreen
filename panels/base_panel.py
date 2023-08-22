@@ -109,7 +109,7 @@ class BasePanel(ScreenPanel):
         try:
             for child in self.control['temp_box'].get_children():
                 self.control['temp_box'].remove(child)
-            devices = (self._printer.get_tools() + self._printer.get_heaters())
+            devices = self._printer.get_temp_devices()
             if not show or not devices:
                 return
 
@@ -128,18 +128,16 @@ class BasePanel(ScreenPanel):
             nlimit = int(round(log(self._screen.width, 10) * 5 - 10.5))
 
             n = 0
-            if self._printer.get_tools():
-                self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-                if self.current_extruder and f"{self.current_extruder}_box" in self.labels:
-                    self.control['temp_box'].add(self.labels[f"{self.current_extruder}_box"])
-                    n += 1
-
-            if self._printer.has_heated_bed():
-                self.control['temp_box'].add(self.labels['heater_bed_box'])
+            self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+            if self.current_extruder and f"{self.current_extruder}_box" in self.labels:
+                self.control['temp_box'].add(self.labels[f"{self.current_extruder}_box"])
                 n += 1
 
-            # Options in the config have priority
             for device in devices:
+                if device == 'heater_bed':
+                    self.control['temp_box'].add(self.labels['heater_bed_box'])
+                    n += 1
+                    continue
                 # Users can fill the bar if they want
                 if n >= nlimit + 1:
                     break
@@ -228,7 +226,7 @@ class BasePanel(ScreenPanel):
 
         if action != "notify_status_update" or self._screen.printer is None:
             return
-        devices = (self._printer.get_tools() + self._printer.get_heaters())
+        devices = (self._printer.get_temp_devices())
         if devices is not None:
             for device in devices:
                 temp = self._printer.get_dev_stat(device, "temperature")

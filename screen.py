@@ -891,7 +891,7 @@ class KlipperScreen(Gtk.Window):
                                                                                extra_items))
         if data is False:
             return self._init_printer("Error getting printer object data with extra items")
-        if len(self.printer.get_tools() + self.printer.get_heaters()) > 0:
+        if len(self.printer.get_temp_devices()) > 0:
             self.init_tempstore()
 
         self.files.initialize()

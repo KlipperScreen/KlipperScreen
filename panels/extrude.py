@@ -59,10 +59,9 @@ class Panel(ScreenPanel):
         for extruder in self._printer.get_tools():
             if self._printer.extrudercount > 1:
                 self.labels[extruder] = self._gtk.Button(f"extruder-{i}", f"T{self._printer.get_tool_number(extruder)}")
+                self.labels[extruder].connect("clicked", self.change_extruder, extruder)
             else:
                 self.labels[extruder] = self._gtk.Button("extruder", "")
-            if len(self._printer.get_tools()) > 1:
-                self.labels[extruder].connect("clicked", self.change_extruder, extruder)
             if extruder == self.current_extruder:
                 self.labels[extruder].get_style_context().add_class("button_active")
             if i < limit:
@@ -187,13 +186,14 @@ class Panel(ScreenPanel):
         if action != "notify_status_update":
             return
         for x in self._printer.get_tools():
-            self.update_temp(
-                x,
-                self._printer.get_dev_stat(x, "temperature"),
-                self._printer.get_dev_stat(x, "target"),
-                self._printer.get_dev_stat(x, "power"),
-                lines=2,
-            )
+            if x in data:
+                self.update_temp(
+                    x,
+                    self._printer.get_dev_stat(x, "temperature"),
+                    self._printer.get_dev_stat(x, "target"),
+                    self._printer.get_dev_stat(x, "power"),
+                    lines=2,
+                )
 
         if ("toolhead" in data and "extruder" in data["toolhead"] and
                 data["toolhead"]["extruder"] != self.current_extruder):

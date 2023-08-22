@@ -100,7 +100,7 @@ class Printer:
     def process_update(self, data):
         if self.data is None:
             return
-        for x in (self.get_tools() + self.get_heaters() + self.get_filament_sensors()):
+        for x in (self.get_temp_devices() + self.get_filament_sensors()):
             if x in data:
                 for i in data[x]:
                     self.set_dev_stat(x, i, data[x][i])
@@ -206,7 +206,7 @@ class Printer:
 
     def get_heaters(self):
         heaters = []
-        if self.has_heated_bed():
+        if "heater_bed" in self.devices:
             heaters.append("heater_bed")
         heaters.extend(iter(self.get_config_section_list("heater_generic ")))
         heaters.extend(iter(self.get_config_section_list("temperature_sensor ")))
@@ -322,15 +322,19 @@ class Printer:
             temp[section] = self.tempstore[device][section][-results:]
         return temp
 
+    def get_temp_devices(self):
+        devices = [
+            device
+            for device in self.tools
+            if not device.startswith('extruder_stepper')
+        ]
+        return devices + self.get_heaters()
+
     def get_tools(self):
         return self.tools
 
     def get_tool_number(self, tool):
         return self.tools.index(tool)
-
-    def has_heated_bed(self):
-        if "heater_bed" in self.devices:
-            return True
 
     def init_temp_store(self, tempstore):
         if self.tempstore and list(self.tempstore) != list(tempstore):
