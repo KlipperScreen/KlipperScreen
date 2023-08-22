@@ -179,11 +179,11 @@ class Panel(ScreenPanel):
         refresh.get_style_context().add_class("buttons_slim")
         refresh.connect('clicked', self.load_spools)
 
-        sort_btn_id = self._gtk.Button("sort_id", _("ID"), "color4", self.bts, Gtk.PositionType.RIGHT, 1)
+        sort_btn_id = self._gtk.Button(None, _("ID"), "color4", self.bts, Gtk.PositionType.RIGHT, 1)
         sort_btn_id.connect("clicked", self.change_sort, "id")
         sort_btn_id.get_style_context().add_class("buttons_slim")
 
-        sort_btn_used = self._gtk.Button("sort_last_used", _("Last Used"), "color3", self.bts, Gtk.PositionType.RIGHT, 1)
+        sort_btn_used = self._gtk.Button(None, _("Last Used"), "color3", self.bts, Gtk.PositionType.RIGHT, 1)
         sort_btn_used.connect("clicked", self.change_sort, "last_used")
         sort_btn_used.get_style_context().add_class("buttons_slim")
 
