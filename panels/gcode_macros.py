@@ -49,9 +49,6 @@ class Panel(ScreenPanel):
         self.reload_macros()
 
     def add_gcode_macro(self, macro):
-        # Support for hiding macros by name
-        if macro.startswith("_"):
-            return
         section = self._printer.get_macro(macro)
         if section:
             if "rename_existing" in section:
@@ -134,7 +131,9 @@ class Panel(ScreenPanel):
     def load_gcode_macros(self):
         for macro in self._printer.get_gcode_macros():
             macro = macro[12:].strip()
-            if macro.startswith("_"):  # Support for hiding macros by name
+            # Support for hiding macros by _
+            if macro.startswith("_") or macro.upper() in ('LOAD_FILAMENT', 'UNLOAD_FILAMENT'):
+                logging.info(f"Skipping macro {macro}")
                 continue
             self.options[macro] = {
                 "name": macro,
