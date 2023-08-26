@@ -52,7 +52,15 @@ class Panel(ScreenPanel):
         # Support for hiding macros by name
         if macro.startswith("_"):
             return
-
+        section = self._printer.get_macro(macro)
+        if section:
+            if "rename_existing" in section:
+                return
+            if "gcode" in section:
+                gcode = section["gcode"].split("\n")
+        else:
+            logging.debug(f"Couldn't load {macro}\n{section}")
+            return
         name = Gtk.Label()
         name.set_markup(f"<big><b>{macro}</b></big>")
         name.set_hexpand(True)
@@ -80,12 +88,6 @@ class Panel(ScreenPanel):
             "params": {},
         }
         pattern = r'params\.(?P<param>..*)\|default\((?P<default>..*)\).*'
-        gcode = self._printer.get_macro(macro)
-        if gcode and "gcode" in gcode:
-            gcode = gcode["gcode"].split("\n")
-        else:
-            logging.debug(f"Couldn't load {macro}\n{gcode}")
-            return
         i = 0
         for line in gcode:
             if line.startswith("{") and "params." in line:
