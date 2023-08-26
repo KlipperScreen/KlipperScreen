@@ -8,15 +8,24 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gdk, GdkPixbuf, Gio, Gtk, Pango
 
 
-def format_label(widget, lines=2):
-    if isinstance(widget, Gtk.Label):
-        widget.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-        widget.set_line_wrap(True)
-        widget.set_ellipsize(Pango.EllipsizeMode.END)
-        widget.set_lines(lines)
-    elif isinstance(widget, (Gtk.Container, Gtk.Bin, Gtk.Button, Gtk.Alignment, Gtk.Box)):
+def find_widget(widget, wanted_type):
+    # Returns a widget of wanted_type or None
+    if isinstance(widget, wanted_type):
+        return widget
+    if isinstance(widget, (Gtk.Container, Gtk.Bin, Gtk.Button, Gtk.Alignment, Gtk.Box)):
         for _ in widget.get_children():
-            format_label(_, lines)
+            result = find_widget(_, wanted_type)
+            if result is not None:
+                return result
+
+
+def format_label(widget, lines=2):
+    label = find_widget(widget, Gtk.Label)
+    if label is not None:
+        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        label.set_line_wrap(True)
+        label.set_ellipsize(Pango.EllipsizeMode.END)
+        label.set_lines(lines)
 
 
 class KlippyGtk:
@@ -179,20 +188,23 @@ class KlippyGtk:
 
     @staticmethod
     def Button_busy(widget, busy):
-        box = widget.get_child().get_child()
+        spinner = find_widget(widget, Gtk.Spinner)
+        image = find_widget(widget, Gtk.Image)
         if busy:
             widget.set_sensitive(False)
-            widget.set_always_show_image(False)
-            box.get_children()[0].hide()
-            if isinstance(box.get_children()[1], Gtk.Spinner):
-                box.get_children()[1].start()
-                box.get_children()[1].show()
+            if image:
+                widget.set_always_show_image(False)
+                image.hide()
+            if spinner:
+                spinner.start()
+                spinner.show()
         else:
-            box.get_children()[0].show()
-            if isinstance(box.get_children()[1], Gtk.Spinner):
-                box.get_children()[1].stop()
-                box.get_children()[1].hide()
-            widget.set_always_show_image(True)
+            if image:
+                widget.set_always_show_image(True)
+                image.show()
+            if spinner:
+                spinner.stop()
+                spinner.hide()
             widget.set_sensitive(True)
 
     def Dialog(self, screen, buttons, content, callback=None, *args):
