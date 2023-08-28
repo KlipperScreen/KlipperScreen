@@ -332,6 +332,10 @@ trough {
     min-height: 350px;
 }
 
+.heater-list scrollbar slider{
+    min-width: 1.5em;
+}
+
 .heater-grid {
     margin-right: .1em;
 }
