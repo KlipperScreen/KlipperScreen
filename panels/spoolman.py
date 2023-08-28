@@ -133,10 +133,11 @@ class Panel(ScreenPanel):
         return 1 if (spool1.last_used or datetime.min).replace(tzinfo=None) > \
                     (spool2.last_used or datetime.min).replace(tzinfo=None) else -1
 
-    def _on_material_filter_clear(self, sender):
+    def _on_material_filter_clear(self, sender, combobox):
         self._filters["material"] = None
         self._filterable.refilter()
         self._filter_expander.set_expanded(False)
+        combobox.set_active_iter(self._materials.get_iter_first())
 
     def _on_material_filter_changed(self, sender):
         treeiter = sender.get_active_iter()
@@ -223,8 +224,7 @@ class Panel(ScreenPanel):
         row.add(hbox)
 
         label = Gtk.Label(_("Material"))
-        _material_filter = Gtk.ComboBox()
-        _material_filter.set_model(self._materials)
+        _material_filter = Gtk.ComboBox.new_with_model(self._materials)
         _material_filter.connect("changed", self._on_material_filter_changed)
         cellrenderertext = Gtk.CellRendererText()
         _material_filter.pack_start(cellrenderertext, True)
@@ -233,7 +233,7 @@ class Panel(ScreenPanel):
 
         _material_reset_filter = self._gtk.Button("cancel", _("Clear"), "color2", self.bts, Gtk.PositionType.LEFT, 1)
         _material_reset_filter.get_style_context().add_class("buttons_slim")
-        _material_reset_filter.connect('clicked', self._on_material_filter_clear)
+        _material_reset_filter.connect('clicked', self._on_material_filter_clear, _material_filter)
 
         hbox.pack_start(label, False, True, 0)
         hbox.pack_start(_material_filter, True, True, 0)
