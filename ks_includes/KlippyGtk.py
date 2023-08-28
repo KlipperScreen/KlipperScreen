@@ -177,7 +177,9 @@ class KlippyGtk:
             spinner.set_no_show_all(True)
             spinner.set_size_request(width, height)
             spinner.hide()
-            b.get_child().get_child().add(spinner)
+            box = find_widget(b, Gtk.Box)
+            if box:
+                box.add(spinner)
 
         if label is not None:
             format_label(b, lines)
