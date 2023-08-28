@@ -10,6 +10,7 @@ from math import pi, sqrt
 from statistics import median
 from time import time
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.KlippyGtk import find_widget
 
 
 class Panel(ScreenPanel):
@@ -115,7 +116,9 @@ class Panel(ScreenPanel):
         overlay.add_overlay(box)
         self.grid.attach(overlay, 0, 0, 1, 1)
 
-        self.labels['thumbnail'] = self._gtk.Image()
+        self.labels['thumbnail'] = self._gtk.Button("file")
+        self.labels['thumbnail'].connect("clicked", self.show_fullscreen_thumbnail)
+        self.labels['thumbnail'].set_hexpand(False)
         self.labels['info_grid'] = Gtk.Grid()
         self.labels['info_grid'].attach(self.labels['thumbnail'], 0, 0, 1, 1)
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
@@ -766,8 +769,25 @@ class Panel(ScreenPanel):
         logging.debug(self.filename)
         if pixbuf is None:
             logging.debug("no pixbuf")
-            pixbuf = self._gtk.PixbufFromIcon("file", width / 2, height / 2)
-        self.labels['thumbnail'].set_from_pixbuf(pixbuf)
+            return
+        image = find_widget(self.labels['thumbnail'], Gtk.Image)
+        if image:
+            image.set_from_pixbuf(pixbuf)
+
+    def show_fullscreen_thumbnail(self, widget):
+        buttons = [
+            {"name": _("Close"), "response": Gtk.ResponseType.CANCEL}
+        ]
+        pixbuf = self.get_file_image(self.filename, self._screen.width * .9, self._screen.height * .6)
+        if pixbuf is None:
+            return
+        image = Gtk.Image.new_from_pixbuf(pixbuf)
+        dialog = self._gtk.Dialog(self._screen, buttons, image, self.close_fullscreen_thumbnail)
+        dialog.set_title(self.filename)
+        return
+
+    def close_fullscreen_thumbnail(self, dialog, response_id):
+        self._gtk.remove_dialog(dialog)
 
     def update_filename(self, filename):
         if not filename:
