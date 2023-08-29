@@ -133,6 +133,12 @@ class Panel(ScreenPanel):
         return 1 if (spool1.last_used or datetime.min).replace(tzinfo=None) > \
                     (spool2.last_used or datetime.min).replace(tzinfo=None) else -1
 
+    def _on_material_filter_clear(self, sender, combobox):
+        self._filters["material"] = None
+        self._filterable.refilter()
+        self._filter_expander.set_expanded(False)
+        combobox.set_active_iter(self._materials.get_iter_first())
+
     def _on_material_filter_changed(self, sender):
         treeiter = sender.get_active_iter()
         if treeiter is not None:
@@ -210,30 +216,35 @@ class Panel(ScreenPanel):
 
         filter_box = Gtk.ListBox()
         filter_box.set_selection_mode(Gtk.SelectionMode.NONE)
-        _filter = Gtk.Expander(label=_("Filter"))
-        _filter.add(filter_box)
+        self._filter_expander = Gtk.Expander(label=_("Filter"))
+        self._filter_expander.add(filter_box)
 
         row = Gtk.ListBoxRow()
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
         row.add(hbox)
 
         label = Gtk.Label(_("Material"))
-        _material_filter = Gtk.ComboBox()
-        _material_filter.set_model(self._materials)
+        _material_filter = Gtk.ComboBox.new_with_model(self._materials)
         _material_filter.connect("changed", self._on_material_filter_changed)
         cellrenderertext = Gtk.CellRendererText()
         _material_filter.pack_start(cellrenderertext, True)
         _material_filter.add_attribute(cellrenderertext, "text", 1)
+        _material_filter.set_hexpand(True)
+
+        _material_reset_filter = self._gtk.Button("cancel", _("Clear"), "color2", self.bts, Gtk.PositionType.LEFT, 1)
+        _material_reset_filter.get_style_context().add_class("buttons_slim")
+        _material_reset_filter.connect('clicked', self._on_material_filter_clear, _material_filter)
 
         hbox.pack_start(label, False, True, 0)
         hbox.pack_start(_material_filter, True, True, 0)
+        hbox.pack_end(_material_reset_filter, False, True, 0)
 
         filter_box.add(row)
 
         self.main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         self.main.set_vexpand(True)
         self.main.pack_start(sbox, False, False, 0)
-        self.main.pack_start(_filter, False, True, 0)
+        self.main.pack_start(self._filter_expander, False, True, 0)
         self.main.pack_start(self.scroll, True, True, 0)
 
         self.load_spools()
