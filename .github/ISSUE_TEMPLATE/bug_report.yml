@@ -8,9 +8,9 @@ body:
       value: >-
         ## Thank you for choosing KlipperScreen
 
-        This is a bug report, If you need general support, please visit us on [Discord](https://discord.gg/klipper)
+        This is a bug report, If you need general support, please visit us on [Discord](https://discord.klipper3d.org/)
 
-        #### The LOG file is REQUIRED
+        #### The LOG file is REQUIRED. Without the logfile your issue will be closed
 
         if you need help to find the log file:
         Read the [Documentation](https://klipperscreen.readthedocs.io/en/latest/Troubleshooting/)
@@ -48,7 +48,7 @@ body:
     id: logs
     attributes:
       label: Log output
-      description: Please copy and paste or attach the klipperscreen.log or xorg.log or the tail of journalctl.
+      description: Please attach the FULL klipperscreen.log and if needed xorg.log or the tail of journalctl.
       render: shell
     validations:
       required: true
