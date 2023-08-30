@@ -405,8 +405,7 @@ class Panel(ScreenPanel):
             {"name": _("Apply"), "response": Gtk.ResponseType.APPLY},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
         ]
-        dialog = self._gtk.Dialog(self._screen, buttons, grid, self.save_confirm, device)
-        dialog.set_title(_("Save Z"))
+        self._gtk.Dialog(_("Save Z"), buttons, grid, self.save_confirm, device)
 
     def save_confirm(self, dialog, response_id, device):
         self._gtk.remove_dialog(dialog)
@@ -452,9 +451,7 @@ class Panel(ScreenPanel):
         label.set_valign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-
-        dialog = self._gtk.Dialog(self._screen, buttons, label, self.cancel_confirm)
-        dialog.set_title(_("Cancel"))
+        self._gtk.Dialog(_("Cancel"), buttons, label, self.cancel_confirm)
 
     def cancel_confirm(self, dialog, response_id):
         self._gtk.remove_dialog(dialog)
@@ -778,13 +775,11 @@ class Panel(ScreenPanel):
         buttons = [
             {"name": _("Close"), "response": Gtk.ResponseType.CANCEL}
         ]
-        pixbuf = self.get_file_image(self.filename, self._screen.width * .9, self._screen.height * .6)
+        pixbuf = self.get_file_image(self.filename, self._screen.width * .9, self._screen.height * .5)
         if pixbuf is None:
             return
         image = Gtk.Image.new_from_pixbuf(pixbuf)
-        dialog = self._gtk.Dialog(self._screen, buttons, image, self.close_fullscreen_thumbnail)
-        dialog.set_title(self.filename)
-        return
+        self._gtk.Dialog(self.filename, buttons, image, self.close_fullscreen_thumbnail)
 
     def close_fullscreen_thumbnail(self, dialog, response_id):
         self._gtk.remove_dialog(dialog)

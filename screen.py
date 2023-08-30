@@ -391,8 +391,7 @@ class KlipperScreen(Gtk.Window):
         buttons = [
             {"name": _("Go Back"), "response": Gtk.ResponseType.CANCEL}
         ]
-        dialog = self.gtk.Dialog(self, buttons, grid, self.error_modal_response)
-        dialog.set_title(_("Error"))
+        self.gtk.Dialog(_("Error"), buttons, grid, self.error_modal_response)
 
     def error_modal_response(self, dialog, response_id):
         self.gtk.remove_dialog(dialog)
@@ -785,8 +784,9 @@ class KlipperScreen(Gtk.Window):
 
         if self.confirm is not None:
             self.gtk.remove_dialog(self.confirm)
-        self.confirm = self.gtk.Dialog(self, buttons, label, self._confirm_send_action_response, method, params)
-        self.confirm.set_title("KlipperScreen")
+        self.confirm = self.gtk.Dialog(
+            "KlipperScreen", buttons, label, self._confirm_send_action_response, method, params
+        )
 
     def _confirm_send_action_response(self, dialog, response_id, method, params):
         self.gtk.remove_dialog(dialog)

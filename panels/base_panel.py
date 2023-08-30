@@ -313,11 +313,10 @@ class BasePanel(ScreenPanel):
         self.labels['update_scroll'].set_property("overlay-scrolling", True)
         self.labels['update_scroll'].add(self.labels['update_progress'])
         self.labels['update_scroll'].connect("size-allocate", self._autoscroll)
-        dialog = self._gtk.Dialog(self._screen, button, self.labels['update_scroll'], self.finish_updating)
+        dialog = self._gtk.Dialog(_("Updating"), button, self.labels['update_scroll'], self.finish_updating)
         dialog.connect("delete-event", self.close_update_dialog)
         dialog.set_response_sensitive(Gtk.ResponseType.OK, False)
         dialog.get_widget_for_response(Gtk.ResponseType.OK).hide()
-        dialog.set_title(_("Updating"))
         self.update_dialog = dialog
         self._screen.updating = True
 
