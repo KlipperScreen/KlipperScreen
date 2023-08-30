@@ -38,7 +38,6 @@ class Printer:
         self.fancount = 0
         self.output_pin_count = 0
         self.tempstore = {}
-        self.spoolman = False
         self.busy = False
         if not self.store_timeout:
             self.store_timeout = GLib.timeout_add_seconds(1, self._update_temp_store)
