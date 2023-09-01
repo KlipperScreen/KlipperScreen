@@ -162,7 +162,7 @@ class KlipperScreen(Gtk.Window):
         state_callbacks = {
             "disconnected": self.state_disconnected,
             "error": self.state_error,
-            "paused": self.state_printing,
+            "paused": self.state_paused,
             "printing": self.state_printing,
             "ready": self.state_ready,
             "startup": self.state_startup,
@@ -659,6 +659,10 @@ class KlipperScreen(Gtk.Window):
         elif "micro-controller" in state:
             msg += _("Please recompile and flash the micro-controller.") + "\n"
         self.printer_initializing(msg + "\n" + state, remove=True)
+
+    def state_paused(self):
+        self.state_printing()
+        self.show_panel("extrude", _("Extrude"))
 
     def state_printing(self):
         self.close_screensaver()
