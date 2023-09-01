@@ -201,7 +201,15 @@ class Printer:
         return output_pins
 
     def get_gcode_macros(self):
-        return self.get_config_section_list("gcode_macro ")
+        macros = []
+        for macro in self.get_config_section_list("gcode_macro "):
+            macro = macro[12:].strip()
+            if macro.startswith("_") or macro.upper() in ('LOAD_FILAMENT', 'UNLOAD_FILAMENT'):
+                continue
+            if self.get_macro(macro) and "rename_existing" in self.get_macro(macro):
+                continue
+            macros.append(macro)
+        return macros
 
     def get_heaters(self):
         heaters = []

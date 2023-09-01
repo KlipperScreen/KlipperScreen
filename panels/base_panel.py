@@ -185,7 +185,7 @@ class BasePanel(ScreenPanel):
 
     def add_content(self, panel):
         show = self._printer is not None and self._printer.state not in ('disconnected', 'startup', 'shutdown', 'error')
-        self.show_shortcut(show and self._config.get_main_config().getboolean('side_macro_shortcut', True))
+        self.show_shortcut(show)
         self.show_heaters(show)
         self.set_control_sensitive(show, control='estop')
         for control in ('back', 'home'):
@@ -258,6 +258,11 @@ class BasePanel(ScreenPanel):
         self.control[control].set_sensitive(value)
 
     def show_shortcut(self, show=True):
+        show = (
+            show
+            and self._config.get_main_config().getboolean('side_macro_shortcut', True)
+            and self._printer.get_printer_status_data()["printer"]["gcode_macros"]["count"] > 0
+        )
         self.control['shortcut'].set_visible(show)
         self.set_control_sensitive(self._screen._cur_panels[-1] != self.shorcut['panel'])
 
