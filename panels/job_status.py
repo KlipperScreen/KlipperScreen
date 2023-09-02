@@ -661,6 +661,7 @@ class Panel(ScreenPanel):
             else:
                 # At the begining file and filament are innacurate
                 estimated = slicer_time
+
         if estimated < 1:
             if file_time is None:
                 return
@@ -669,12 +670,16 @@ class Panel(ScreenPanel):
             estimated = file_time
         if estimated < 1:
             return
+        progress = min(max(print_duration / estimated, 0), 1)
+        if progress >=1:
+            estimated = file_time
+            progress = min(max(print_duration / estimated, 0), 1)
 
         self.labels["est_time"].set_label(self.format_time(estimated))
         self.labels["time_left"].set_label(self.format_eta(estimated, print_duration))
         remaining_label = f"{self.labels['left'].get_text()}  {self.labels['time_left'].get_text()}"
         self.buttons['left'].set_label(remaining_label)
-        self.update_progress(min(max(print_duration / estimated, 0), 1))
+        self.update_progress(progress)
 
     def update_progress(self, progress: float):
         self.progress = progress
