@@ -671,7 +671,7 @@ class Panel(ScreenPanel):
         if estimated < 1:
             return
         progress = min(max(print_duration / estimated, 0), 1)
-        if progress >=1:
+        if progress >= 1:
             estimated = file_time
             progress = min(max(print_duration / estimated, 0), 1)
 
