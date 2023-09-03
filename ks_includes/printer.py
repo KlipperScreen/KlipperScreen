@@ -91,8 +91,8 @@ class Printer:
                 except KeyError:
                     logging.debug(f"Couldn't load mesh {x}: {self.config[x]}")
             if x.startswith('led') \
-                    or x.startswith('dotstar ') \
                     or x.startswith('neopixel ') \
+                    or x.startswith('dotstar ') \
                     or x.startswith('pca9533 ') \
                     or x.startswith('pca9632 '):
                 name = x.split()[1] if len(x.split()) > 1 else x
@@ -286,17 +286,16 @@ class Printer:
             self.config[config_item]['lightgroups'] = data['lightgroups']
 
     def get_led_color(self, led):
-        color = []
         if led not in self.config or led not in self.data:
             logging.debug(f"Error getting {led} config")
-            return color
+            return None
         else:
             color = self.data[led]["color_data"][0]
         return color
 
     def get_led_presets(self, led):
         presets = []
-        if led not in self.config or led not in  self.data:
+        if led not in self.config or led not in self.data:
             logging.debug(f"Error getting {led} config")
             return presets
         if "presets" in self.config[led]:
@@ -304,13 +303,23 @@ class Printer:
         return presets
 
     def get_led_color_mix(self, led):
-        if led not in self.config or led not in  self.data:
+        if led not in self.config or led not in self.data:
             logging.debug(f"Error getting {led} config")
-            return 0
-        else:
-            n = len(self.config[led]["color_order"])
-        logging.debug(f"Colors in led: {n}")
-        return n
+            return None
+        elif "color_order" in self.config[led]:
+            return self.config[led]["color_order"]
+        colors = ''
+        for option in self.config[led]:
+            if option in ("red_pin", 'initial_RED') and 'R' not in colors:
+                colors += 'R'
+            elif option in ("green_pin", 'initial_GREEN') and 'G' not in colors:
+                colors += 'G'
+            elif option in ("blue_pin", 'initial_BLUE') and 'B' not in colors:
+                colors += 'B'
+            elif option in ("white_pin", 'initial_WHITE') and 'W' not in colors:
+                colors += 'W'
+        logging.debug(f"Colors in led: {colors}")
+        return colors
 
     def get_power_devices(self):
         return list(self.power_devices)

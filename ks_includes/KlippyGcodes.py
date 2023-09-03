@@ -42,6 +42,9 @@ class KlippyGcodes:
 
     @staticmethod
     def set_led_color(led, color):
-        return f'SET_LED LED="{led}" ' \
-               f'RED={color["red"]} GREEN={color["green"]} BLUE={color["blue"]} WHITE={color["white"]} ' \
-               f'SYNC=0 TRANSMIT=1'
+        return (
+            f'SET_LED LED="{led}" '
+            f'RED={color[0]} GREEN={color[1]} BLUE={color[2]} '
+            f"{f'WHITE={color[3]} ' if len(color) == 4 else ''}"
+            f'SYNC=0 TRANSMIT=1'
+        )
