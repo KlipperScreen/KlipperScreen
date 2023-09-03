@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-03 11:48-0300\n"
-"PO-Revision-Date: 2023-07-25 21:05-0300\n"
+"PO-Revision-Date: 2023-09-03 11:53-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -47,7 +47,7 @@ msgid "Add profile"
 msgstr "Agregar perfil"
 
 msgid "All"
-msgstr ""
+msgstr "Todos"
 
 msgid "Apply"
 msgstr "Aplicar"
@@ -61,7 +61,7 @@ msgid "Apply %s%.3f offset to Probe?"
 msgstr "Aplicar %s%.3f al sensor?"
 
 msgid "Archived"
-msgstr ""
+msgstr "Archivados"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "¿Está seguro de excluir este objeto?"
@@ -243,7 +243,7 @@ msgid "File:"
 msgstr "Archivo:"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filtro"
 
 msgid "Finding ADXL"
 msgstr "Buscando ADXL"
@@ -312,7 +312,7 @@ msgid "Hostname"
 msgstr "Hostname"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "Tema de Iconos"
@@ -371,6 +371,8 @@ msgstr "KlipperScreen se reiniciará"
 
 msgid "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and shold be used from extrude"
 msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT están ocultos y deberían ser usados desde "
+"extruir"
 
 msgid "Language"
 msgstr "Idioma"
@@ -379,7 +381,7 @@ msgid "Large"
 msgstr "Grande"
 
 msgid "Last Used"
-msgstr ""
+msgstr "Ultimo usado"
 
 msgid "Layer:"
 msgstr "Capa:"
@@ -406,7 +408,7 @@ msgid "Main Menu"
 msgstr "Menú"
 
 msgid "Material"
-msgstr ""
+msgstr "Material"
 
 msgid "Max"
 msgstr "Max"
@@ -469,7 +471,7 @@ msgid "New"
 msgstr "Nuevo"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "No hay macros elegibles:"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -648,7 +650,7 @@ msgid "Show Heater Power"
 msgstr "Mostrar potencia del calentador"
 
 msgid "Show Scrollbars Buttons"
-msgstr ""
+msgstr "Mostrar botones de desplazamiento"
 
 msgid "Shutdown"
 msgstr "Apagar"
@@ -775,10 +777,10 @@ msgstr[0] "hora"
 msgstr[1] "horas"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "los macros que usan 'rename_existing' están ocultos"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "los macros con nombre comenzando en '_' están ocultos"
 
 msgid "minute"
 msgid_plural "minutes"
