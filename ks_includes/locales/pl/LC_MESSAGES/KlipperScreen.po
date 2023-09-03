@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-03 11:48-0300\n"
-"PO-Revision-Date: 2023-09-01 19:28+0000\n"
+"PO-Revision-Date: 2023-09-03 22:26+0000\n"
 "Last-Translator: Daviteusz <daviteusz0@gmail.com>\n"
 "Language-Team: Polish\n"
 "Language: pl\n"
@@ -44,7 +44,7 @@ msgid "Add profile"
 msgstr "Dodaj profil"
 
 msgid "All"
-msgstr ""
+msgstr "Wszystkie"
 
 msgid "Apply"
 msgstr "Zastosuj"
@@ -58,7 +58,7 @@ msgid "Apply %s%.3f offset to Probe?"
 msgstr "Zastosować przesunięcie %s%.3f do sondy?"
 
 msgid "Archived"
-msgstr ""
+msgstr "Zarchiwizowane"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Czy na pewno chcesz wykluczyć obiekt?"
@@ -240,7 +240,7 @@ msgid "File:"
 msgstr "Plik:"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filtruj"
 
 msgid "Finding ADXL"
 msgstr "Wyszukiwanie ADXL"
@@ -309,7 +309,7 @@ msgid "Hostname"
 msgstr "Nazwa hosta"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "Motyw ikon"
@@ -367,6 +367,8 @@ msgstr "KlipperScreen uruchomi się ponownie"
 
 msgid "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and shold be used from extrude"
 msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT są ukryte i powinny być używane z menu "
+"wytłaczania"
 
 msgid "Language"
 msgstr "Język"
@@ -375,7 +377,7 @@ msgid "Large"
 msgstr "Duży"
 
 msgid "Last Used"
-msgstr ""
+msgstr "Ostatnie użycie"
 
 msgid "Layer:"
 msgstr "Warstwa:"
@@ -402,7 +404,7 @@ msgid "Main Menu"
 msgstr "Menu główne"
 
 msgid "Material"
-msgstr ""
+msgstr "Materiał"
 
 msgid "Max"
 msgstr "Maks"
@@ -465,7 +467,7 @@ msgid "New"
 msgstr "Nowe"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "Brak odpowiednich makr:"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -645,7 +647,7 @@ msgid "Show Heater Power"
 msgstr "Pokaż moc grzałki"
 
 msgid "Show Scrollbars Buttons"
-msgstr ""
+msgstr "Pokaż przyciski pasków przewijania"
 
 msgid "Shutdown"
 msgstr "Wyłącz"
@@ -774,10 +776,10 @@ msgstr[1] "godziny"
 msgstr[2] "godzin"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "makra używające \"rename_existing\" są ukryte"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "makra z nazwą zaczynającą się od \"_\" są ukryte"
 
 msgid "minute"
 msgid_plural "minutes"
