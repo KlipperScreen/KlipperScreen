@@ -647,7 +647,7 @@ msgid "Show Heater Power"
 msgstr "Heizleistung anzeigen"
 
 msgid "Show Scrollbars Buttons"
-msgstr "Zeige Scrollbar Schaltfläche
+msgstr "Zeige Scrollbar Schaltfläche"
 
 msgid "Shutdown"
 msgstr "Ausschalten"
