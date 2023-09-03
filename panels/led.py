@@ -50,12 +50,13 @@ class Panel(ScreenPanel):
         self.content.show_all()
 
     def led_selector(self):
+        columns = 3 if self._screen.vertical_mode else 4
         grid = self._gtk.HomogeneousGrid()
         for i, led in enumerate(self.leds):
             name = led.split()[1] if len(led.split()) > 1 else led
             button = self._gtk.Button(None, name.upper(), style=f"color{(i % 4) + 1}")
             button.connect("clicked", self.open_selector, led)
-            grid.attach(button, (i % 2), int(i / 2), 1, 1)
+            grid.attach(button, (i % columns), int(i / columns), 1, 1)
         scroll = self._gtk.ScrolledWindow()
         scroll.add(grid)
         return scroll
@@ -117,7 +118,7 @@ class Panel(ScreenPanel):
                 self.update_scales(None, self._printer.get_led_color(led))
 
     def update_scales(self, event, color_data):
-        for idx, col_name in enumerate(self.col_mix):
+        for idx, col_name in enumerate(self.scales):
             scale = self.scales[col_name]
             scale.disconnect_by_func(self.apply_scales)
             scale.set_value(round(color_data[idx] * 255))
