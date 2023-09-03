@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2023-07-31 15:31\n"
+"Project-Id-Version: 2023-09-03 20:36\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-03 11:48-0300\n"
-"PO-Revision-Date: 2023-07-31 15:32+0300\n"
+"PO-Revision-Date: 2023-09-03 20:42+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
 "Language: uk\n"
@@ -48,7 +48,7 @@ msgid "Add profile"
 msgstr "Додати профіль"
 
 msgid "All"
-msgstr ""
+msgstr "Всі"
 
 msgid "Apply"
 msgstr "Застосувати"
@@ -62,7 +62,7 @@ msgid "Apply %s%.3f offset to Probe?"
 msgstr "Застосувати зміщення %s%.3f до зонда?"
 
 msgid "Archived"
-msgstr ""
+msgstr "Архівовано"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Ви впевнені, що бажаєте виключити об’єкт?"
@@ -246,7 +246,7 @@ msgid "File:"
 msgstr "Файл:"
 
 msgid "Filter"
-msgstr ""
+msgstr "Фільтр"
 
 msgid "Finding ADXL"
 msgstr "Знаходження ADXL"
@@ -317,7 +317,7 @@ msgid "Hostname"
 msgstr "Ім'я хоста"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "Тема оформлення"
@@ -377,6 +377,8 @@ msgstr "KlipperScreen перезавантажиться"
 
 msgid "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and shold be used from extrude"
 msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT приховані, і їх слід використовувати з меню "
+"екструзії"
 
 msgid "Language"
 msgstr "Мова"
@@ -385,7 +387,7 @@ msgid "Large"
 msgstr "Великий"
 
 msgid "Last Used"
-msgstr ""
+msgstr "Останнє Використання"
 
 msgid "Layer:"
 msgstr "Шар:"
@@ -412,7 +414,7 @@ msgid "Main Menu"
 msgstr "Головне Меню"
 
 msgid "Material"
-msgstr ""
+msgstr "Матеріал"
 
 msgid "Max"
 msgstr "Макс"
@@ -475,7 +477,7 @@ msgid "New"
 msgstr "Новий"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "Непридатний макрос:"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -661,7 +663,7 @@ msgid "Show Heater Power"
 msgstr "Показати Потужність Нагрівача"
 
 msgid "Show Scrollbars Buttons"
-msgstr ""
+msgstr "Показати кнопку смуги прокрутки"
 
 msgid "Shutdown"
 msgstr "Вимкнути"
@@ -792,10 +794,10 @@ msgstr[1] "годин"
 msgstr[2] "години"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "макроси, які використовують 'rename_existing', приховані"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "макроси з назвою, що починається на '_', приховані"
 
 msgid "minute"
 msgid_plural "minutes"
