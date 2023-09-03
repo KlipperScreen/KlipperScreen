@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 10:20-0300\n"
+"POT-Creation-Date: 2023-09-03 11:48-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -41,6 +41,9 @@ msgstr ""
 msgid "Add profile"
 msgstr ""
 
+msgid "All"
+msgstr ""
+
 msgid "Apply"
 msgstr ""
 
@@ -50,6 +53,9 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
+
+msgid "Archived"
 msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
@@ -231,6 +237,9 @@ msgstr ""
 msgid "File:"
 msgstr ""
 
+msgid "Filter"
+msgstr ""
+
 msgid "Finding ADXL"
 msgstr ""
 
@@ -297,6 +306,9 @@ msgstr ""
 msgid "Hostname"
 msgstr ""
 
+msgid "ID"
+msgstr ""
+
 msgid "Icon Theme"
 msgstr ""
 
@@ -351,10 +363,16 @@ msgstr ""
 msgid "KlipperScreen will reboot"
 msgstr ""
 
+msgid "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and shold be used from extrude"
+msgstr ""
+
 msgid "Language"
 msgstr ""
 
 msgid "Large"
+msgstr ""
+
+msgid "Last Used"
 msgstr ""
 
 msgid "Layer:"
@@ -379,6 +397,9 @@ msgid "Macros"
 msgstr ""
 
 msgid "Main Menu"
+msgstr ""
+
+msgid "Material"
 msgstr ""
 
 msgid "Max"
@@ -439,6 +460,9 @@ msgid "Never"
 msgstr ""
 
 msgid "New"
+msgstr ""
+
+msgid "No elegible macros:"
 msgstr ""
 
 msgid ""
@@ -615,6 +639,9 @@ msgstr ""
 msgid "Show Heater Power"
 msgstr ""
 
+msgid "Show Scrollbars Buttons"
+msgstr ""
+
 msgid "Shutdown"
 msgstr ""
 
@@ -738,6 +765,12 @@ msgid "hour"
 msgid_plural "hours"
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr ""
 
 msgid "minute"
 msgid_plural "minutes"

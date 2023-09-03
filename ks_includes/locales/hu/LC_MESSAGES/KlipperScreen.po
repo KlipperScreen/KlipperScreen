@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-05 16:43-0300\n"
+"POT-Creation-Date: 2023-09-03 11:48-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -41,6 +41,9 @@ msgstr "Elfogad"
 msgid "Add profile"
 msgstr "Profil hozzáadása"
 
+msgid "All"
+msgstr ""
+
 msgid "Apply"
 msgstr "Alkalmaz"
 
@@ -51,6 +54,9 @@ msgstr "Alkalmazod a %s%.3f végpont eltolást?"
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
 msgstr "Alkalmazod a %s%.3f szonda eltolást?"
+
+msgid "Archived"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Biztosan kizárod az objektumot?"
@@ -231,6 +237,9 @@ msgstr "Fájl"
 msgid "File:"
 msgstr "Fájl:"
 
+msgid "Filter"
+msgstr ""
+
 msgid "Finding ADXL"
 msgstr "ADXL keresése"
 
@@ -297,6 +306,9 @@ msgstr "Gazdagép"
 msgid "Hostname"
 msgstr "Gazdanév"
 
+msgid "ID"
+msgstr ""
+
 msgid "Icon Theme"
 msgstr "Ikon téma"
 
@@ -351,11 +363,17 @@ msgstr "A Klipper újraindul"
 msgid "KlipperScreen will reboot"
 msgstr "A KlipperScreen újraindul"
 
+msgid "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and shold be used from extrude"
+msgstr ""
+
 msgid "Language"
 msgstr "Nyelv"
 
 msgid "Large"
 msgstr "Nagy"
+
+msgid "Last Used"
+msgstr ""
 
 msgid "Layer:"
 msgstr "Réteg:"
@@ -380,6 +398,9 @@ msgstr "Makrók"
 
 msgid "Main Menu"
 msgstr "Főmenü"
+
+msgid "Material"
+msgstr ""
 
 msgid "Max"
 msgstr "Max"
@@ -440,6 +461,9 @@ msgstr "Soha"
 
 msgid "New"
 msgstr "Új"
+
+msgid "No elegible macros:"
+msgstr ""
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -617,6 +641,9 @@ msgstr "Mutat"
 msgid "Show Heater Power"
 msgstr "A fűtésteljesítmény megjelenítése"
 
+msgid "Show Scrollbars Buttons"
+msgstr ""
+
 msgid "Shutdown"
 msgstr "Leállítás"
 
@@ -740,6 +767,12 @@ msgid "hour"
 msgid_plural "hours"
 msgstr[0] "óra"
 msgstr[1] "órák"
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr ""
 
 msgid "minute"
 msgid_plural "minutes"

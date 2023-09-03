@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 10:20-0300\n"
+"POT-Creation-Date: 2023-09-03 11:48-0300\n"
 "PO-Revision-Date: 2023-08-16 09:53-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: \n"
@@ -47,6 +47,9 @@ msgstr "Применить"
 msgid "Add profile"
 msgstr "Добавить профиль"
 
+msgid "All"
+msgstr ""
+
 msgid "Apply"
 msgstr "Применить"
 
@@ -57,6 +60,9 @@ msgstr "Применить смещение %s%.3f к Endstop?"
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
 msgstr "Применить смещение %s%.3f к зонду?"
+
+msgid "Archived"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Вы уверены, что хотите исключить объект?"
@@ -237,6 +243,9 @@ msgstr "Файл"
 msgid "File:"
 msgstr "Файл:"
 
+msgid "Filter"
+msgstr ""
+
 msgid "Finding ADXL"
 msgstr "Поиск ADXL"
 
@@ -303,6 +312,9 @@ msgstr "Хост"
 msgid "Hostname"
 msgstr "Имя хоста"
 
+msgid "ID"
+msgstr ""
+
 msgid "Icon Theme"
 msgstr "Темы"
 
@@ -357,11 +369,17 @@ msgstr "Klipper перезагружается"
 msgid "KlipperScreen will reboot"
 msgstr "KlipperScreen перезагружается"
 
+msgid "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and shold be used from extrude"
+msgstr ""
+
 msgid "Language"
 msgstr "Язык"
 
 msgid "Large"
 msgstr "Большой"
+
+msgid "Last Used"
+msgstr ""
 
 msgid "Layer:"
 msgstr "Слой:"
@@ -386,6 +404,9 @@ msgstr "Макросы"
 
 msgid "Main Menu"
 msgstr "Главное меню"
+
+msgid "Material"
+msgstr ""
 
 msgid "Max"
 msgstr "Максимум"
@@ -446,6 +467,9 @@ msgstr "Никогда"
 
 msgid "New"
 msgstr "Новый"
+
+msgid "No elegible macros:"
+msgstr ""
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -624,6 +648,9 @@ msgstr "Показывать"
 msgid "Show Heater Power"
 msgstr "Показать мощность нагрева"
 
+msgid "Show Scrollbars Buttons"
+msgstr ""
+
 msgid "Shutdown"
 msgstr "Выключить"
 
@@ -749,6 +776,12 @@ msgid_plural "hours"
 msgstr[0] "час"
 msgstr[1] "часа"
 msgstr[2] "часа"
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr ""
 
 msgid "minute"
 msgid_plural "minutes"

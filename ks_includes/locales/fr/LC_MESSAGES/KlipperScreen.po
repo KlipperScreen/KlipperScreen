@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 10:20-0300\n"
+"POT-Creation-Date: 2023-09-03 11:48-0300\n"
 "PO-Revision-Date: 2022-11-30 18:11-0300\n"
 "Last-Translator: O. Robardet\n"
 "Language-Team: \n"
@@ -46,6 +46,9 @@ msgstr "Accepter"
 msgid "Add profile"
 msgstr "Ajouter un profil"
 
+msgid "All"
+msgstr ""
+
 msgid "Apply"
 msgstr "Appliquer"
 
@@ -55,6 +58,9 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
+
+msgid "Archived"
 msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
@@ -236,6 +242,9 @@ msgstr "Fichier"
 msgid "File:"
 msgstr "Fichier:"
 
+msgid "Filter"
+msgstr ""
+
 msgid "Finding ADXL"
 msgstr "Recherche de l’ADXL"
 
@@ -302,6 +311,9 @@ msgstr "Hôte"
 msgid "Hostname"
 msgstr "Nom d’hôte"
 
+msgid "ID"
+msgstr ""
+
 msgid "Icon Theme"
 msgstr "Thème"
 
@@ -356,11 +368,17 @@ msgstr "Klipper va redémarrer"
 msgid "KlipperScreen will reboot"
 msgstr "KlipperScreen va redémarrer"
 
+msgid "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and shold be used from extrude"
+msgstr ""
+
 msgid "Language"
 msgstr "Langue"
 
 msgid "Large"
 msgstr "Grande"
+
+msgid "Last Used"
+msgstr ""
 
 msgid "Layer:"
 msgstr "Couche:"
@@ -385,6 +403,9 @@ msgstr "Macros"
 
 msgid "Main Menu"
 msgstr "Menu principal"
+
+msgid "Material"
+msgstr ""
 
 msgid "Max"
 msgstr "Max"
@@ -445,6 +466,9 @@ msgstr "Jamais"
 
 msgid "New"
 msgstr "Nouveau"
+
+msgid "No elegible macros:"
+msgstr ""
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -622,6 +646,9 @@ msgstr "Afficher"
 msgid "Show Heater Power"
 msgstr "Afficher la puissance de chauffe"
 
+msgid "Show Scrollbars Buttons"
+msgstr ""
+
 msgid "Shutdown"
 msgstr "Arrêter"
 
@@ -745,6 +772,12 @@ msgid "hour"
 msgid_plural "hours"
 msgstr[0] "heure"
 msgstr[1] "heures"
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr ""
 
 msgid "minute"
 msgid_plural "minutes"

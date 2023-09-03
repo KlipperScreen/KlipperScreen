@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 10:20-0300\n"
+"POT-Creation-Date: 2023-09-03 11:48-0300\n"
 "PO-Revision-Date: 2023-01-29 09:27-0600\n"
 "Last-Translator: \n"
 "Language-Team: Jan Stanka (stanky@email.cz)\n"
@@ -46,6 +46,9 @@ msgstr "Přijmout"
 msgid "Add profile"
 msgstr "Přidat profil"
 
+msgid "All"
+msgstr ""
+
 msgid "Apply"
 msgstr "Použít"
 
@@ -55,6 +58,9 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
+
+msgid "Archived"
 msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
@@ -236,6 +242,9 @@ msgstr "Soubor"
 msgid "File:"
 msgstr "Soubor:"
 
+msgid "Filter"
+msgstr ""
+
 msgid "Finding ADXL"
 msgstr "Hledání ADXL"
 
@@ -302,6 +311,9 @@ msgstr "Host"
 msgid "Hostname"
 msgstr "Hostname"
 
+msgid "ID"
+msgstr ""
+
 msgid "Icon Theme"
 msgstr "Sada ikon"
 
@@ -356,11 +368,17 @@ msgstr "Klipper se restartuje"
 msgid "KlipperScreen will reboot"
 msgstr "KlipperScreen se restartuje"
 
+msgid "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and shold be used from extrude"
+msgstr ""
+
 msgid "Language"
 msgstr "Jazyk"
 
 msgid "Large"
 msgstr "Velký"
+
+msgid "Last Used"
+msgstr ""
 
 msgid "Layer:"
 msgstr "Vrstva:"
@@ -385,6 +403,9 @@ msgstr "Makra"
 
 msgid "Main Menu"
 msgstr "Hlavní menu"
+
+msgid "Material"
+msgstr ""
 
 msgid "Max"
 msgstr "Max"
@@ -445,6 +466,9 @@ msgstr "Nikdy"
 
 msgid "New"
 msgstr "Nový"
+
+msgid "No elegible macros:"
+msgstr ""
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -621,6 +645,9 @@ msgstr "Ukaž"
 msgid "Show Heater Power"
 msgstr "Ukaž odběr topení"
 
+msgid "Show Scrollbars Buttons"
+msgstr ""
+
 msgid "Shutdown"
 msgstr "Shutdown"
 
@@ -746,6 +773,12 @@ msgid_plural "hours"
 msgstr[0] "hodina"
 msgstr[1] "hodiny"
 msgstr[2] "hodin"
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr ""
 
 msgid "minute"
 msgid_plural "minutes"

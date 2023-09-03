@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 10:20-0300\n"
+"POT-Creation-Date: 2023-09-03 11:48-0300\n"
 "PO-Revision-Date: 2022-11-30 18:14-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -50,6 +50,9 @@ msgstr "Aceitar"
 msgid "Add profile"
 msgstr "Adicionar perfil"
 
+msgid "All"
+msgstr ""
+
 msgid "Apply"
 msgstr "Aplicar"
 
@@ -59,6 +62,9 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
+
+msgid "Archived"
 msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
@@ -240,6 +246,9 @@ msgstr "Arquivo"
 msgid "File:"
 msgstr "Arquivo:"
 
+msgid "Filter"
+msgstr ""
+
 msgid "Finding ADXL"
 msgstr "Encontrar ADXL"
 
@@ -306,6 +315,9 @@ msgstr "Host"
 msgid "Hostname"
 msgstr "Nome do Host"
 
+msgid "ID"
+msgstr ""
+
 msgid "Icon Theme"
 msgstr "Tema"
 
@@ -360,11 +372,17 @@ msgstr "Klipper será reiniciado"
 msgid "KlipperScreen will reboot"
 msgstr "KlipperScreen será reiniciado"
 
+msgid "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and shold be used from extrude"
+msgstr ""
+
 msgid "Language"
 msgstr "Idioma"
 
 msgid "Large"
 msgstr "Grande"
+
+msgid "Last Used"
+msgstr ""
 
 msgid "Layer:"
 msgstr "Camada:"
@@ -389,6 +407,9 @@ msgstr "Macros"
 
 msgid "Main Menu"
 msgstr "Menu principal"
+
+msgid "Material"
+msgstr ""
 
 msgid "Max"
 msgstr "Max"
@@ -449,6 +470,9 @@ msgstr "Nunca"
 
 msgid "New"
 msgstr "Novo"
+
+msgid "No elegible macros:"
+msgstr ""
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -626,6 +650,9 @@ msgstr "Mostrar"
 msgid "Show Heater Power"
 msgstr "Mostrar Potência do Aquecedor"
 
+msgid "Show Scrollbars Buttons"
+msgstr ""
+
 msgid "Shutdown"
 msgstr "Desligar"
 
@@ -749,6 +776,12 @@ msgid "hour"
 msgid_plural "hours"
 msgstr[0] "hora"
 msgstr[1] "horas"
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr ""
 
 msgid "minute"
 msgid_plural "minutes"
