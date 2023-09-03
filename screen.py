@@ -261,8 +261,8 @@ class KlipperScreen(Gtk.Window):
             requested_updates['objects'][f] = ["enabled", "filament_detected"]
         for p in self.printer.get_output_pins():
             requested_updates['objects'][p] = ["value"]
-        for l in self.printer.get_leds():
-            requested_updates['objects'][l] = ["color_data"]
+        for led in self.printer.get_leds():
+            requested_updates['objects'][led] = ["color_data"]
 
         self._ws.klippy.object_subscription(requested_updates)
 
