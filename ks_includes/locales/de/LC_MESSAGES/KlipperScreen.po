@@ -47,7 +47,7 @@ msgid "Add profile"
 msgstr "Profil hinzufügen"
 
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 msgid "Apply"
 msgstr "Anwenden"
@@ -61,7 +61,7 @@ msgid "Apply %s%.3f offset to Probe?"
 msgstr "%s%.3f Offset auf Probe anwenden"
 
 msgid "Archived"
-msgstr ""
+msgstr "Archiviert"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Möchtest du das Objekt wirklich ausschließen?"
@@ -210,13 +210,13 @@ msgid "Extra Large"
 msgstr "Extra groß"
 
 msgid "Extrude"
-msgstr "Fördern"
+msgstr "Extrudieren"
 
 msgid "Extrusion +"
-msgstr "Fördern +"
+msgstr "Extrudieren +"
 
 msgid "Extrusion -"
-msgstr "Fördern -"
+msgstr "Extrudieren -"
 
 msgid "Failed, adjust position first"
 msgstr "Fehlgeschlagen, Position zuerst anpassen"
@@ -243,7 +243,7 @@ msgid "File:"
 msgstr "Datei:"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 msgid "Finding ADXL"
 msgstr "ADXL finden"
@@ -312,7 +312,7 @@ msgid "Hostname"
 msgstr "Hostname"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "Icon Theme"
@@ -369,7 +369,7 @@ msgid "KlipperScreen will reboot"
 msgstr "KlipperScreen startet neu"
 
 msgid "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and shold be used from extrude"
-msgstr ""
+msgstr "Filament_Laden/Filament_Entladen sind versteckt und sollten von extrudieren aus verwendet werden"
 
 msgid "Language"
 msgstr "Sprache"
@@ -378,7 +378,7 @@ msgid "Large"
 msgstr "Groß"
 
 msgid "Last Used"
-msgstr ""
+msgstr "Zuletzt verwendet"
 
 msgid "Layer:"
 msgstr "Schicht:"
@@ -405,7 +405,7 @@ msgid "Main Menu"
 msgstr "Hauptmenü"
 
 msgid "Material"
-msgstr ""
+msgstr "Material"
 
 msgid "Max"
 msgstr "Max"
@@ -468,7 +468,7 @@ msgid "New"
 msgstr "Neu"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "Keine wählbaren Makros:"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -647,7 +647,7 @@ msgid "Show Heater Power"
 msgstr "Heizleistung anzeigen"
 
 msgid "Show Scrollbars Buttons"
-msgstr ""
+msgstr "Zeige Scrollbar Schaltfläche"
 
 msgid "Shutdown"
 msgstr "Ausschalten"
@@ -776,10 +776,10 @@ msgstr[0] "Stunde"
 msgstr[1] "Stunden"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "Makros, die 'rename_existing' verwenden, sind ausgeblendet"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "Makros mit einem Namen, der mit '_' beginnt, sind ausgeblendet"
 
 msgid "minute"
 msgid_plural "minutes"
