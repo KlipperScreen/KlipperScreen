@@ -104,7 +104,7 @@ extrude_speeds: 1, 2, 5, 25
 
 ## Preheat Options
 
-!!! question
+!!! question "Added one the others disappeared, Is this normal?"
     Adding a custom preheat section will cause the defaults to not load, this is
     the intended behaviour.
 
