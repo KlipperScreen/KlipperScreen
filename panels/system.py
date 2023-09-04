@@ -97,7 +97,7 @@ class Panel(ScreenPanel):
         GLib.timeout_add_seconds(1, self.get_updates, "true")
 
     def get_updates(self, refresh="false"):
-        update_resp = self._screen.apiclient.send_request(f"machine/update/status?refresh={refresh}")
+        update_resp = self._screen.apiclient.send_request(f"machine/update/status?refresh={refresh}", timeout=60)
         if not update_resp:
             self.update_status = {}
             logging.info("No update manager configured")
