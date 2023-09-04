@@ -695,7 +695,7 @@ class KlipperScreen(Gtk.Window):
                 _("No elegible macros:") + "\n"
                 + _("macros with a name starting with '_' are hidden") + "\n"
                 + _("macros that use 'rename_existing' are hidden") + "\n"
-                + _("LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and shold be used from extrude") + "\n"
+                + _("LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude") + "\n"
             )
         self.base_panel.show_shortcut(show)
 
