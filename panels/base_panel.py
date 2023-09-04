@@ -314,7 +314,7 @@ class BasePanel(ScreenPanel):
         self.labels['update_progress'].set_halign(Gtk.Align.START)
         self.labels['update_progress'].set_valign(Gtk.Align.START)
         self.labels['update_progress'].set_ellipsize(Pango.EllipsizeMode.END)
-        self.labels['update_scroll'] = self._gtk.ScrolledWindow()
+        self.labels['update_scroll'] = self._gtk.ScrolledWindow(steppers=False)
         self.labels['update_scroll'].set_property("overlay-scrolling", True)
         self.labels['update_scroll'].add(self.labels['update_progress'])
         self.labels['update_scroll'].connect("size-allocate", self._autoscroll)

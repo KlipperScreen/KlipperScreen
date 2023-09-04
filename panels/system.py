@@ -120,7 +120,7 @@ class Panel(ScreenPanel):
     def show_update_info(self, widget, program):
         info = self.update_status['version_info'][program] if program in self.update_status['version_info'] else {}
 
-        scroll = self._gtk.ScrolledWindow()
+        scroll = self._gtk.ScrolledWindow(steppers=False)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
