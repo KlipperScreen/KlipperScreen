@@ -34,8 +34,16 @@ class Panel(ScreenPanel):
         self.led = self.leds[0] if len(self.leds) == 1 else None
         self.open_selector(None, self.led)
 
+    def activate(self):
+        if self.led is not None:
+            self.set_title(f"{self.led}")
+
+    def set_title(self, title):
+        self._screen.base_panel.set_title(self.prettify(title))
+
     def back(self):
         if len(self.leds) > 1:
+            self.set_title(self._screen.panels[self._screen._cur_panels[-1]].title)
             self.open_selector(led=None)
             return True
         return False
@@ -50,6 +58,7 @@ class Panel(ScreenPanel):
         self.content.show_all()
 
     def led_selector(self):
+        self.led = None
         columns = 3 if self._screen.vertical_mode else 4
         grid = self._gtk.HomogeneousGrid()
         for i, led in enumerate(self.leds):
@@ -64,6 +73,7 @@ class Panel(ScreenPanel):
     def color_selector(self, led):
         logging.info(led)
         self.led = led
+        self.set_title(f"{self.led}")
         grid = self._gtk.HomogeneousGrid()
         color_data = self._printer.get_led_color(led)
         color_mix = self._printer.get_led_color_mix(led)
