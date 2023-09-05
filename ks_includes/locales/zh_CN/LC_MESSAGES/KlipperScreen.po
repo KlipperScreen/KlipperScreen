@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-04 22:18-0300\n"
-"PO-Revision-Date: 2023-08-03 17:57+0800\n"
+"PO-Revision-Date: 2023-09-05 23:45+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -47,7 +47,7 @@ msgid "Add profile"
 msgstr "添加配置文件"
 
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 msgid "Apply"
 msgstr "应用"
@@ -61,7 +61,7 @@ msgid "Apply %s%.3f offset to Probe?"
 msgstr "将 %s%.3f 偏移量应用于探针？"
 
 msgid "Archived"
-msgstr ""
+msgstr "已存档"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "你确定要排除该对象吗？"
@@ -91,7 +91,7 @@ msgid "Auto-close notifications"
 msgstr "自动关闭通知"
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "暂停打印时自动打开挤出控制界面"
 
 msgid "Auto-scroll"
 msgstr "自动滚屏"
@@ -246,7 +246,7 @@ msgid "File:"
 msgstr "文件："
 
 msgid "Filter"
-msgstr ""
+msgstr "筛选"
 
 msgid "Finding ADXL"
 msgstr "查找ADXL"
@@ -315,7 +315,7 @@ msgid "Hostname"
 msgstr "主机名"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "主题"
@@ -373,7 +373,7 @@ msgstr "KlipperScreen将重新启动"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
+msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT 被隐藏，应在挤出控制界面使用"
 
 msgid "Language"
 msgstr "界面语言"
@@ -382,7 +382,7 @@ msgid "Large"
 msgstr "大"
 
 msgid "Last Used"
-msgstr ""
+msgstr "上次使用"
 
 msgid "Layer:"
 msgstr "层："
@@ -409,7 +409,7 @@ msgid "Main Menu"
 msgstr "主菜单"
 
 msgid "Material"
-msgstr ""
+msgstr "材料"
 
 msgid "Max"
 msgstr "最大"
@@ -472,7 +472,7 @@ msgid "New"
 msgstr "新的值"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "无可用宏："
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -512,7 +512,7 @@ msgid "Pins"
 msgstr "引脚"
 
 msgid "Please recompile and flash the micro-controller."
-msgstr "请重新编译并烧录微控制器。"
+msgstr "请重新编译并更新微控制器固件。"
 
 msgid "Power"
 msgstr "电源"
@@ -536,7 +536,7 @@ msgid "Printer"
 msgstr "打印机"
 
 msgid "Printer Connections"
-msgstr "打印机连接"
+msgstr "已连接的打印机"
 
 msgid "Printer Select"
 msgstr "打印机选择"
@@ -648,7 +648,7 @@ msgid "Show Heater Power"
 msgstr "显示加热器功率"
 
 msgid "Show Scrollbars Buttons"
-msgstr ""
+msgstr "显示滚动条按钮"
 
 msgid "Shutdown"
 msgstr "关闭"
@@ -773,10 +773,10 @@ msgid_plural "hours"
 msgstr[0] "小时"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "使用 \"rename_existing \"的宏将被隐藏"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "名称以\"_\"开头的宏将被隐藏"
 
 msgid "minute"
 msgid_plural "minutes"
