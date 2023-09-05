@@ -662,7 +662,7 @@ class KlipperScreen(Gtk.Window):
 
     def state_paused(self):
         self.state_printing()
-        if self.screen._config.get_main_config().getboolean("auto_open_extrude", fallback=True):
+        if self._config.get_main_config().getboolean("auto_open_extrude", fallback=True):
             self.show_panel("extrude", _("Extrude"))
 
     def state_printing(self):
