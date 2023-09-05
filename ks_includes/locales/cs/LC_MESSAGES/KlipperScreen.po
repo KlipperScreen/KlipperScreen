@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-03 22:48-0300\n"
+"POT-Creation-Date: 2023-09-04 22:18-0300\n"
 "PO-Revision-Date: 2023-01-29 09:27-0600\n"
 "Last-Translator: \n"
 "Language-Team: Jan Stanka (stanky@email.cz)\n"
@@ -89,6 +89,9 @@ msgstr "Auto-kalibrace"
 
 msgid "Auto-close notifications"
 msgstr "Automaticky zavřít upozornění"
+
+msgid "Auto-open Extrude On Pause"
+msgstr ""
 
 msgid "Auto-scroll"
 msgstr "Auto posun"

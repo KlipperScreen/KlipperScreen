@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-03 22:48-0300\n"
+"POT-Creation-Date: 2023-09-04 22:18-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: boyon\n"
 "Language-Team: \n"
@@ -84,6 +84,9 @@ msgstr "自動校正"
 
 msgid "Auto-close notifications"
 msgstr "自動終了通知"
+
+msgid "Auto-open Extrude On Pause"
+msgstr ""
 
 msgid "Auto-scroll"
 msgstr "自動スクロール"

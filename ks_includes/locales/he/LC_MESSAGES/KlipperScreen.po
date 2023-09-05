@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-03 22:48-0300\n"
+"POT-Creation-Date: 2023-09-04 22:18-0300\n"
 "PO-Revision-Date: 2022-11-30 18:11-0300\n"
 "Last-Translator: Tal Rahav <talrhv1@gmail.com>\n"
 "Language-Team: \n"
@@ -91,6 +91,9 @@ msgstr "כיול אוטומטי"
 
 msgid "Auto-close notifications"
 msgstr "סגירת התראות אוטומטית"
+
+msgid "Auto-open Extrude On Pause"
+msgstr ""
 
 msgid "Auto-scroll"
 msgstr "גלילה אוטומטית"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2023-09-03 20:36\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-03 22:48-0300\n"
+"POT-Creation-Date: 2023-09-04 22:18-0300\n"
 "PO-Revision-Date: 2023-09-03 20:57+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -90,6 +90,9 @@ msgstr "Автоматичне калібрування"
 
 msgid "Auto-close notifications"
 msgstr "Автоматичне закриття сповіщень"
+
+msgid "Auto-open Extrude On Pause"
+msgstr ""
 
 msgid "Auto-scroll"
 msgstr "Автоматична прокрутка"

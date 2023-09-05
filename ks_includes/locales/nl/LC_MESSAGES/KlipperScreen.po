@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-03 22:48-0300\n"
+"POT-Creation-Date: 2023-09-04 22:18-0300\n"
 "PO-Revision-Date: 2023-05-07 18:50+0200\n"
 "Last-Translator: Thijs Triemstra <info@collab.nl>\n"
 "Language-Team: \n"
@@ -89,6 +89,9 @@ msgstr "Auto-kalibreren"
 
 msgid "Auto-close notifications"
 msgstr "Auto-sluit notificaties"
+
+msgid "Auto-open Extrude On Pause"
+msgstr ""
 
 msgid "Auto-scroll"
 msgstr "Auto-scroll"

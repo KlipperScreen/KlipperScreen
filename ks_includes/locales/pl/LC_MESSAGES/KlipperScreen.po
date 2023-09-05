@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-03 22:48-0300\n"
+"POT-Creation-Date: 2023-09-04 22:18-0300\n"
 "PO-Revision-Date: 2023-09-03 22:26+0000\n"
 "Last-Translator: Daviteusz <daviteusz0@gmail.com>\n"
 "Language-Team: Polish\n"
@@ -86,6 +86,9 @@ msgstr "Automatyczna kalibracja"
 
 msgid "Auto-close notifications"
 msgstr "Automatycznie zamykaj powiadomienia"
+
+msgid "Auto-open Extrude On Pause"
+msgstr ""
 
 msgid "Auto-scroll"
 msgstr "Automatyczne przewijanie"
