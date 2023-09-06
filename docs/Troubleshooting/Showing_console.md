@@ -4,7 +4,8 @@ If the screen is connected via HDMI and the board has more than one HDMI try the
 
 ## LCD-show
 
-when using LCD-show repos to install screens add `lite` at the end to properly install the screen on the lite version of the os.
+when using Waveshare-LCD-show repo to install screens add `lite` at the end to properly install the screen on the lite version of the os.
+This is also applicable to the old version of good-tft
 
 for example:
 ```
