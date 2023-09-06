@@ -24,6 +24,7 @@ nav:
       - Showing Console: Troubleshooting/Showing_console.md
       - Touch: Troubleshooting/Touch_issues.md
       - Virtual Console Error: Troubleshooting/VC_ERROR.md
+      - Last resort: Troubleshooting/Last_resort.md
     - Screenshots: Panels.md
     - Panels:
       - Bed Level/Screws: Panels/Screws.md
