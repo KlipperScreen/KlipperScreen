@@ -1,13 +1,32 @@
-# Supported Macros
+# Macros
+
+## Hide Macros
+
+Macros can be completely hidden in the interface by prefixing the name with an underscore.
+
+```ini
+[gcode_macro MY_AWESOME_GCODE]
+gcode:
+    _MY_HELPER_CODE
+
+[gcode_macro _MY_HELPER_CODE]
+gcode:
+    M300
+```
+
+`MY_AWESOME_GCODE` appears in your interface settings, but `_MY_HELPER_CODE` does not.
 
 ## Extrude Panel
 
 ### LOAD_FILAMENT / UNLOAD_FILAMENT
-Load and Unload Filament macros are used in the Extrude-Panel if it is available.
-The selected speed is transferred to this macro.
-The following example macros show how this can be used in the macro.
 
-```jinja
+This macros are used in the Extrude panel `Load` and `Unload` buttons.
+
+The selected speed in the panel is transferred as a parameter.
+
+The following examples show how this can be used:
+
+```ini
 [gcode_macro LOAD_FILAMENT]
 gcode:
     {% set speed = params.SPEED|default(300) %}
@@ -23,7 +42,7 @@ gcode:
     RESTORE_GCODE_STATE NAME=load_state
 ```
 
-```jinja
+```ini
 [gcode_macro UNLOAD_FILAMENT]
 gcode:
     {% set speed = params.SPEED|default(300) %}

@@ -13,7 +13,7 @@ Write in the file only the options that need to be changed, and restart KlipperS
 
 
 ## Include files
-```py
+```ini
 [include conf.d/*.conf]
 # Include another configuration file. Wildcards (*) will expand to match anything.
 ```
@@ -21,7 +21,7 @@ Write in the file only the options that need to be changed, and restart KlipperS
 
 ## Main Options
 The options listed here are not changeable from within the ui.
-```py
+```ini
 [main]
 # Time in seconds before the Job Status page closes itself after a successful job/print
 # 0 means disabled
@@ -47,7 +47,7 @@ screen_off_devices:  example1, example2
 
 ## Printer Options
 Multiple printers can be defined
-```py
+```ini
 # Define printer and name. Name is anything after the first printer word
 [printer Ender 3 Pro]
 # Define the moonraker host/port if different from 127.0.0.1 and 7125
@@ -108,7 +108,7 @@ extrude_speeds: 1, 2, 5, 25
     Adding a custom preheat section will cause the defaults to not load, this is
     the intended behaviour.
 
-```py
+```ini
 [preheat my_temp_setting]
 extruder: 195
 extruder1: 60
@@ -127,7 +127,7 @@ gcode: MY_HEATSOAK_MACRO
 There is a special preheat setting named cooldown to do additional things when the _cooldown_ button is pressed
 for example:
 
-```py
+```ini
 [preheat cooldown]
 gcode: M107
 ```
@@ -142,7 +142,7 @@ printer is idle. The __print menu is accessible from the printing status page.
     A predefined set of menus is already provided and it's recommended to be used
 
 A menu item is configured as follows:
-```py
+```ini
 [menu __main my_menu_item]
 # To build a sub-menu of this menu item, you would next use [menu __main my_menu_item sub_menu_item]
 name: Item Name
@@ -167,7 +167,7 @@ enable: {{ printer.power_devices.count > 0 }}
 Available panels are listed here: [docs/panels.md](Panels.md)
 
 Certain variables are available for conditional testing of the enable statement:
-```py
+```ini
 printer.extruders.count # Number of extruders
 printer.temperature_devices.count # Number of temperature related devices that are not extruders
 printer.fans.count # Number of fans
@@ -193,7 +193,7 @@ printer.pause_resume # Pause resume section of Klipper
 
 
 A sample configuration of a main menu would be as follows:
-```py
+```ini
 [menu __main homing]
 name: Homing
 icon: home

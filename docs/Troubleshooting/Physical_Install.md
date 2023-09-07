@@ -23,6 +23,3 @@ Some screens need drivers installed the most common cases are:
 ### Goodtft (generic/clones)
 * [Goodtft Wiki](http://www.lcdwiki.com)
 * [repo LCD-show](https://github.com/goodtft/LCD-show)
-
-!!! critical
-    remember to add `lite` when installing. See [LCD-SHOW](Showing_console.md#lcd-show)
