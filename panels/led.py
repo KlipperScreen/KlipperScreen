@@ -26,6 +26,9 @@ class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
+        data_misc = screen.apiclient.send_request("server/database/item?namespace=mainsail&key=miscellaneous.entries")
+        if data_misc:
+            self._printer.add_led_presets(data_misc['result']['value'][next(iter(data_misc["result"]["value"]))])
         self.col_mix = RGBW
         self.presets = {}
         self.scales = {}

@@ -280,7 +280,7 @@ class Printer:
         return leds
 
     def add_led_presets(self, data):
-        for _, value in data:
+        for _ in data:
             config_item = data['type'] + ' ' + data['name']
             self.config[config_item]['presets'] = data['presets']
             self.config[config_item]['lightgroups'] = data['lightgroups']
