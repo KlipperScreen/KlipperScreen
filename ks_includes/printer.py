@@ -302,7 +302,7 @@ class Printer:
             presets = self.config[led]["presets"]
         return presets
 
-    def get_led_color_mix(self, led):
+    def get_led_color_order(self, led):
         if led not in self.config or led not in self.data:
             logging.debug(f"Error getting {led} config")
             return None
