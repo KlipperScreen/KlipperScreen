@@ -55,6 +55,9 @@ class Panel(ScreenPanel):
                 return
             if "gcode" in section:
                 gcode = section["gcode"].split("\n")
+            else:
+                logging.error(f"gcode not found in {macro}\n{section}")
+                return
         else:
             logging.debug(f"Couldn't load {macro}\n{section}")
             return
