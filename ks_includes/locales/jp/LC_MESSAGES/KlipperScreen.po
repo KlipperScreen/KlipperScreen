@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-04 22:18-0300\n"
+"POT-Creation-Date: 2023-09-12 08:17-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: boyon\n"
 "Language-Team: \n"
@@ -160,9 +160,6 @@ msgstr "%s へ接続中・・・"
 
 msgid "Console"
 msgstr "コンソール"
-
-msgid "Continue"
-msgstr "継続"
 
 msgid "Cooldown"
 msgstr "クールダウン"
@@ -788,6 +785,9 @@ msgstr ""
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Continue"
+#~ msgstr "継続"
 
 #~ msgid "Actions"
 #~ msgstr "操作"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-04 22:18-0300\n"
+"POT-Creation-Date: 2023-09-12 08:17-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AntoszHUN\n"
 "Language-Team: \n"
@@ -160,9 +160,6 @@ msgstr "Csatlakozás %s"
 
 msgid "Console"
 msgstr "Konzol"
-
-msgid "Continue"
-msgstr "Folytat"
 
 msgid "Cooldown"
 msgstr "Lehűtés"
@@ -794,6 +791,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Continue"
+#~ msgstr "Folytat"
 
 #~ msgid "Fullscreen"
 #~ msgstr "Teljes képernyő"

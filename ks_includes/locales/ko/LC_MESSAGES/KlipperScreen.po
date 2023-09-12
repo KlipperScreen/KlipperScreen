@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-04 22:18-0300\n"
+"POT-Creation-Date: 2023-09-12 08:17-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: NSteven\n"
 "Language-Team: NSteven\n"
@@ -160,9 +160,6 @@ msgstr "%s에 연결 중.."
 
 msgid "Console"
 msgstr "콘솔 제어 명령"
-
-msgid "Continue"
-msgstr "계속"
 
 msgid "Cooldown"
 msgstr "가열 중단"
@@ -788,6 +785,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Continue"
+#~ msgstr "계속"
 
 #~ msgid "Actions"
 #~ msgstr "툴 헤드 제어"

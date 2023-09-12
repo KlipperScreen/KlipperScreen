@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-04 22:18-0300\n"
+"POT-Creation-Date: 2023-09-12 08:17-0300\n"
 "PO-Revision-Date: 2022-11-30 18:10-0300\n"
 "Last-Translator: livinhack\n"
 "Language-Team: \n"
@@ -165,9 +165,6 @@ msgstr "Verbinden zu %s"
 
 msgid "Console"
 msgstr "Konsole"
-
-msgid "Continue"
-msgstr "Fortsetzen"
 
 msgid "Cooldown"
 msgstr "Abkühlen"
@@ -804,6 +801,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Continue"
+#~ msgstr "Fortsetzen"
 
 #~ msgid "Fullscreen"
 #~ msgstr "Vollbild"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-04 22:18-0300\n"
+"POT-Creation-Date: 2023-09-12 08:17-0300\n"
 "PO-Revision-Date: 2023-05-07 18:50+0200\n"
 "Last-Translator: Thijs Triemstra <info@collab.nl>\n"
 "Language-Team: \n"
@@ -165,9 +165,6 @@ msgstr "Verbinden met %s"
 
 msgid "Console"
 msgstr "Console"
-
-msgid "Continue"
-msgstr "Doorgaan"
 
 msgid "Cooldown"
 msgstr "Afkoelen"
@@ -799,6 +796,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Continue"
+#~ msgstr "Doorgaan"
 
 #~ msgid "Fullscreen"
 #~ msgstr "Volledig Scherm"

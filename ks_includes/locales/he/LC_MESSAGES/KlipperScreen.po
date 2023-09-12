@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-04 22:18-0300\n"
+"POT-Creation-Date: 2023-09-12 08:17-0300\n"
 "PO-Revision-Date: 2022-11-30 18:11-0300\n"
 "Last-Translator: Tal Rahav <talrhv1@gmail.com>\n"
 "Language-Team: \n"
@@ -167,9 +167,6 @@ msgstr "מתחבר ל- %s"
 
 msgid "Console"
 msgstr "קונסול"
-
-msgid "Continue"
-msgstr "המשך"
 
 msgid "Cooldown"
 msgstr "הפעל קירור"
@@ -807,6 +804,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Continue"
+#~ msgstr "המשך"
 
 #~ msgid "Actions"
 #~ msgstr "פעולות"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-04 22:18-0300\n"
+"POT-Creation-Date: 2023-09-12 08:17-0300\n"
 "PO-Revision-Date: 2023-08-16 09:53-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: \n"
@@ -166,9 +166,6 @@ msgstr "Соединенный с  %s"
 
 msgid "Console"
 msgstr "Консоль"
-
-msgid "Continue"
-msgstr "Продолжить"
 
 msgid "Cooldown"
 msgstr "Остудить"
@@ -804,6 +801,9 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм/с³"
+
+#~ msgid "Continue"
+#~ msgstr "Продолжить"
 
 #~ msgid "Fullscreen"
 #~ msgstr "Полный экран"
