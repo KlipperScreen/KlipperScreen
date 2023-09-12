@@ -57,11 +57,16 @@ cat /var/log/Xorg.0.log
     ```sh
     KlipperScreen-start.sh: (EE) no screens found(EE)
     ```
-    [First check the screen](Troubleshooting/Physical_Install.md)
+    [Check the screen](Troubleshooting/Physical_Install.md)
 
-    [Maybe it's the wrong framebuffer](Troubleshooting/Framebuffer.md)
 
-## Screen is always white / black / blank or no 'No signal'
+[Maybe it's the wrong framebuffer](Troubleshooting/Framebuffer.md)
+
+If you can't fix it, [try using a desktop distro as described here.](Troubleshooting/Last_resort.md)
+
+If you want to contribute a solution: [Contact](Contact.md)
+
+## Screen is always ***white*** / ***black*** or ***`No signal`***
 
 If the screen never shows the console even during startup, Then it's typically an improperly installed screen.
 

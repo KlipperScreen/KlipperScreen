@@ -40,6 +40,9 @@ check if one of those or similar exist with:
 ls /usr/share/X11/xorg.conf.d/
 ```
 
+!!! failure "Critical"
+    ***DO NOT CREATE A FILE***, and only edit if there is more than 1 framebuffer
+
 !!! example
     you found 99-fbturbo.conf:
 
