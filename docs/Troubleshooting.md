@@ -57,8 +57,15 @@ cat /var/log/Xorg.0.log
     ```sh
     KlipperScreen-start.sh: (EE) no screens found(EE)
     ```
-    [Check the screen](Troubleshooting/Physical_Install.md)
+    This is usually not the main cause of the error. [Start by checking the screen](Troubleshooting/Physical_Install.md)
 
+    Drivers not installed or misconfigured can cause this too, continue looking the logs for more clues.
+
+!!! abstract "If you see this line in the [system logs](#system-logs):"
+    ```sh
+    modprobe: FATAL: Module g2d_23 not found in directory /lib/modules/6.1.21-v8+
+    ```
+    This error is common on RaspberryOS when using FBturbo and it's not a related issue.
 
 [Maybe it's the wrong framebuffer](Troubleshooting/Framebuffer.md)
 
