@@ -180,6 +180,6 @@ class Panel(ScreenPanel):
             results = re.search(r'shaper_type_(?P<axis>[xy]):(?P<shaper_type>.*?) shaper_freq_.:('
                                 r'?P<shaper_freq>[0-9.]+)', data)
             if results:
-                results.groupdict()
-            self.freq_xy_adj['shaper_freq_' + results['axis']].set_value(float(results['shaper_freq']))
-            self.freq_xy_combo['shaper_type_' + results['axis']].set_active(SHAPERS.index(results['shaper_type']))
+                results = results.groupdict()
+                self.freq_xy_adj['shaper_freq_' + results['axis']].set_value(float(results['shaper_freq']))
+                self.freq_xy_combo['shaper_type_' + results['axis']].set_active(SHAPERS.index(results['shaper_type']))
