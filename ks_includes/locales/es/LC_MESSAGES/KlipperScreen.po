@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -91,7 +91,7 @@ msgid "Auto-close notifications"
 msgstr "Auto-cerrar notificaciones"
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "Auto-abrir Extruir al pausar"
 
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
@@ -252,7 +252,7 @@ msgid "Fine Tuning"
 msgstr "Ajuste Fino"
 
 msgid "Finish"
-msgstr "Cerrar"
+msgstr "Finalizar"
 
 msgid "Firmware Restart"
 msgstr "Reiniciar Firmware"
@@ -261,7 +261,7 @@ msgid "Flow:"
 msgstr "Flujo:"
 
 msgid "Flowrate:"
-msgstr "Flujo:"
+msgstr "Tasa de Flujo:"
 
 msgid "Font Size"
 msgstr "Tamaño del texto"
@@ -406,7 +406,7 @@ msgid "Macros"
 msgstr "Macros"
 
 msgid "Main Menu"
-msgstr "Menú"
+msgstr "Menú Principal"
 
 msgid "Material"
 msgstr "Material"
@@ -575,7 +575,7 @@ msgid "Reference"
 msgstr "Referencia"
 
 msgid "Refresh"
-msgstr "Actualizar"
+msgstr "Recargar"
 
 msgid "Rename/Move:"
 msgstr "Renombrar/Mover:"
@@ -753,7 +753,7 @@ msgid "Z Calibrate"
 msgstr "Calibrar Z"
 
 msgid "Z Move Speed (mm/s)"
-msgstr "Velocidad Z  (mm/s)"
+msgstr "Velocidad Z (mm/s)"
 
 msgid "Z Speed (mm/s)"
 msgstr "Z Velocidad (mm/s)"
