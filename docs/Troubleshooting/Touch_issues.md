@@ -63,49 +63,50 @@ DISPLAY=:0 xinput set-prop "<device name>" 'Coordinate Transformation Matrix' <m
 
 Where the matrix can be one of the following options:
 
-* 0°: `1 0 0 0 1 0 0 0 1`
-* 90° Clockwise: `0 -1 1 1 0 0 0 0 1`
-* 90° Counter-Clockwise: `0 1 0 -1 0 1 0 0 1`
-* 180° (Inverts X and Y): `-1 0 1 0 -1 1 0 0 1`
-* invert Y: `-1 0 1 1 1 0 0 0 1`
-* invert X: `-1 0 1 0 1 0 0 0 1`
-* expand to twice the size horizontally: `0.5 0 0 0 1 0 0 0 1`
-<!-- * compress horizontally: --><!-- Commented out because of missing matrix info -->
+ | Rotation  | Matrix |
+ | - | - |
+ | 0° | `1 0 0 0 1 0 0 0 1` |
+ | 90° Clockwise | `0 -1 1 1 0 0 0 0 1` |
+ | 90° Counter-Clockwise | `0 1 0 -1 0 1 0 0 1` |
+ | 180° (Inverts X and Y) | `-1 0 1 0 -1 1 0 0 1` |
+ | invert Y | `-1 0 1 1 1 0 0 0 1` |
+ | invert X | `-1 0 1 0 1 0 0 0 1` |
+ | expand to twice the size horizontally | `0.5 0 0 0 1 0 0 0 1` |
 
-For more in-depth guidance on using Coordinate Transformation Matrices, see [InputCoordinateTransformation - Ubuntu Wiki](https://wiki.ubuntu.com/X/InputCoordinateTransformation).
-
-It has been reported that the touch expands with screens that don't use HDMI. This is due to the composite output, which enables automatically as a fallback when no HDMI device is plugged in.  
-If this is the case, adding `enable_tvout=0` to `/boot/config.txt` and reboot.
-
-For example:
-
-```sh
-DISPLAY=:0 xinput set-prop "ADS7846 Touchscreen" 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1
-```
-
-To make this permanent, modify the file `/etc/udev/rules.d/51-touchscreen.rules` and add following line:
-
-```sh
-ACTION=="add", ATTRS{name}=="<device name>", ENV{LIBINPUT_CALIBRATION_MATRIX}="<matrix>"
-```
-
-As an alternative if the above doesn't work:
-
-edit `/usr/share/X11/xorg.conf.d/40-libinput.conf`
-
-for example:
-
-```sh
-Section "InputClass"
-        Identifier "libinput touchscreen catchall"
-        MatchIsTouchscreen "on"
-        MatchDevicePath "/dev/input/event*"
-        Driver "libinput"
-        Option "TransformationMatrix" "0 -1 1 1 0 0 0 0 1"
-EndSection
-```
-
-More info about input transformation can be found in:
+For more in-depth guidance on using Coordinate Transformation Matrices:
 
 * [Ubuntu wiki InputCoordinateTransformation](https://wiki.ubuntu.com/X/InputCoordinateTransformation)
 * [Libinput docs](https://wayland.freedesktop.org/libinput/doc/1.9.0/absolute_axes.html)
+
+It has been reported that the touch expands with screens that don't use HDMI. This is due to the composite output,
+which enables automatically as a fallback when no HDMI device is plugged in.
+If this is the case, adding `enable_tvout=0` to `/boot/config.txt` and reboot.
+
+!!! example
+
+    ```sh
+    DISPLAY=:0 xinput set-prop "ADS7846 Touchscreen" 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1
+    ```
+
+    To make this permanent, modify the file `/etc/udev/rules.d/51-touchscreen.rules` and add following line:
+
+    ```sh
+    ACTION=="add", ATTRS{name}=="<device name>", ENV{LIBINPUT_CALIBRATION_MATRIX}="<matrix>"
+    ```
+
+    ---
+    As an alternative **if the above doesn't work**:
+
+    edit `/usr/share/X11/xorg.conf.d/40-libinput.conf`
+
+    for example:
+
+    ```sh
+    Section "InputClass"
+            Identifier "libinput touchscreen catchall"
+            MatchIsTouchscreen "on"
+            MatchDevicePath "/dev/input/event*"
+            Driver "libinput"
+            Option "TransformationMatrix" "0 -1 1 1 0 0 0 0 1"
+    EndSection
+    ```
