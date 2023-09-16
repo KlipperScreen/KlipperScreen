@@ -215,6 +215,8 @@ class KlippyGtk:
         dialog.set_resizable(False)
         dialog.set_transient_for(self.screen)
         dialog.set_modal(True)
+        if not self.screen.windowed:
+            dialog.fullscreen()
 
         for button in buttons:
             dialog.add_button(button['name'], button['response'])

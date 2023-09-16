@@ -92,6 +92,7 @@ class KlipperScreen(Gtk.Window):
     initialized = initializing = False
     popup_timeout = None
     wayland = False
+    windowed = False
 
     def __init__(self, args, version):
         try:
@@ -122,12 +123,16 @@ class KlipperScreen(Gtk.Window):
             monitor = Gdk.Display.get_default().get_monitor(0)
         if monitor is None:
             raise RuntimeError("Couldn't get default monitor")
-        self.width = self._config.get_main_config().getint("width", monitor.get_geometry().width)
-        self.height = self._config.get_main_config().getint("height", monitor.get_geometry().height)
-        self.set_default_size(self.width, self.height)
-        self.set_resizable(True)
-        if not (self._config.get_main_config().get("width") or self._config.get_main_config().get("height")):
+        self.width = self._config.get_main_config().getint("width", None)
+        self.height = self._config.get_main_config().getint("height", None)
+        if self.width or self.height:
+            self.set_resizable(True)
+            self.windowed = True
+        else:
+            self.width = monitor.get_geometry().width
+            self.height = monitor.get_geometry().height
             self.fullscreen()
+        self.set_default_size(self.width, self.height)
         self.aspect_ratio = self.width / self.height
         self.vertical_mode = self.aspect_ratio < 1.0
         logging.info(f"Screen resolution: {self.width}x{self.height}")
