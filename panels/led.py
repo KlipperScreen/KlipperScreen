@@ -14,7 +14,7 @@ class Panel(ScreenPanel):
         super().__init__(screen, title)
         self.preview = Gtk.DrawingArea(hexpand=True, vexpand=True)
         self.preview.connect("draw", self.on_draw)
-        self.preset_list = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=1)
+        self.preset_list = self._gtk.HomogeneousGrid()
         self.color_data = [0, 0, 0, 0]
         self.color_order = 'RGBW'
         self.presets = {
@@ -43,7 +43,7 @@ class Panel(ScreenPanel):
         self._screen.base_panel.set_title(self.prettify(title))
 
     def back(self):
-        if len(self.leds) > 1:
+        if len(self.leds) > 1 and self.current_led:
             self.set_title(self._screen.panels[self._screen._cur_panels[-1]].title)
             self.open_selector(led=None)
             return True
@@ -80,14 +80,17 @@ class Panel(ScreenPanel):
         if self.color_order is None:
             self.back()
             return
+        size = self._gtk.img_scale * 1.6
         scale_grid = self._gtk.HomogeneousGrid()
-        colors = "RGBW"
         for idx, col_value in enumerate(self.color_data):
             if not self.color_available(idx):
                 continue
-            button = self._gtk.Button(label=f'{colors[idx].upper()}', style=f"color{idx + 1}")
             color = [0, 0, 0, 0]
             color[idx] = 1
+            button = self._gtk.Button()
+            preview = Gtk.DrawingArea(width_request=size, height_request=size)
+            preview.connect("draw", self.on_draw, color)
+            button.set_image(preview)
             button.connect("clicked", self.apply_preset, color)
             button.set_hexpand(False)
             scale = Gtk.Scale.new_with_range(orientation=Gtk.Orientation.HORIZONTAL, min=0, max=255, step=1)
@@ -108,7 +111,7 @@ class Panel(ScreenPanel):
         preview_box.add(Gtk.Label(label=_("Color")))
         preview_box.add(self.preview)
 
-        self.preset_list.add(preview_box)
+        self.preset_list.attach(preview_box, 0, 0, 2, 1)
         data_misc = self._screen.apiclient.send_request(
             "server/database/item?namespace=mainsail&key=miscellaneous.entries")
         if data_misc:
@@ -117,17 +120,22 @@ class Panel(ScreenPanel):
                 self.presets.update(self.parse_presets(presets_data))
         for i, key in enumerate(self.presets):
             logging.info(f'Adding preset: {key}')
-            button = self._gtk.Button(None, key.upper(), style=f"color{(i % 4) + 1}")
+            preview = Gtk.DrawingArea(width_request=size, height_request=size)
+            preview.connect("draw", self.on_draw, self.presets[key])
+            button = self._gtk.Button()
+            button.set_image(preview)
             button.connect("clicked", self.apply_preset, self.presets[key])
-            self.preset_list.add(button)
+            self.preset_list.attach(button, i % 2, int(i / 2) + 1, 1, 1)
 
         scroll = self._gtk.ScrolledWindow()
         scroll.add(self.preset_list)
         grid.attach(scroll, 2, 0, 1, 1)
         return grid
 
-    def on_draw(self, da, ctx):
-        ctx.set_source_rgb(self.color_data[0], self.color_data[1], self.color_data[2])
+    def on_draw(self, da, ctx, color=None):
+        if color is None:
+            color = self.color_data
+        ctx.set_source_rgb(color[0], color[1], color[2])
         w = da.get_allocated_width()
         h = da.get_allocated_height()
         r = min(w, h) / 2
@@ -171,8 +179,8 @@ class Panel(ScreenPanel):
     @staticmethod
     def parse_presets(presets_data) -> {}:
         parsed = {}
-        for preset in presets_data.values():
-            name = preset["name"].lower()
+        for i, preset in enumerate(presets_data.values()):
+            name = i if preset["name"] == '' else preset["name"].lower()
             parsed[name] = []
             for color in ["red", "green", "blue", "white"]:
                 if color not in preset or preset[color] is None:
