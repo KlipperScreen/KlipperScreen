@@ -14,9 +14,7 @@ class Panel(ScreenPanel):
         super().__init__(screen, title)
         self.preview = Gtk.DrawingArea(hexpand=True, vexpand=True)
         self.preview.connect("draw", self.on_draw)
-        data_misc = screen.apiclient.send_request("server/database/item?namespace=mainsail&key=miscellaneous.entries")
-        if data_misc:
-            self._printer.add_led_presets(data_misc['result']['value'][next(iter(data_misc["result"]["value"]))])
+        self.preset_list = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=1)
         self.color_data = [0, 0, 0, 0]
         self.color_order = 'RGBW'
         self.presets = {
@@ -78,14 +76,10 @@ class Panel(ScreenPanel):
         self.current_led = led
         self.set_title(f"{self.current_led}")
         grid = self._gtk.HomogeneousGrid()
-        self.color_data = self._printer.get_led_color(led)
         self.color_order = self._printer.get_led_color_order(led)
-        if self.color_data is None or self.color_order is None:
+        if self.color_order is None:
             self.back()
             return
-        presets_data = self._printer.get_led_presets(led)
-        if presets_data:
-            self.presets.update(self.parse_presets(presets_data))
         scale_grid = self._gtk.HomogeneousGrid()
         colors = "RGBW"
         for idx, col_value in enumerate(self.color_data):
@@ -113,15 +107,22 @@ class Panel(ScreenPanel):
         preview_box.get_style_context().add_class("frame-item")
         preview_box.add(Gtk.Label(label=_("Color")))
         preview_box.add(self.preview)
-        preset_list = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=1)
-        preset_list.add(preview_box)
+
+        self.preset_list.add(preview_box)
+        data_misc = self._screen.apiclient.send_request(
+            "server/database/item?namespace=mainsail&key=miscellaneous.entries")
+        if data_misc:
+            presets_data = data_misc['result']['value'][next(iter(data_misc["result"]["value"]))]['presets']
+            if presets_data:
+                self.presets.update(self.parse_presets(presets_data))
         for i, key in enumerate(self.presets):
+            logging.info(f'Adding preset: {key}')
             button = self._gtk.Button(None, key.upper(), style=f"color{(i % 4) + 1}")
             button.connect("clicked", self.apply_preset, self.presets[key])
-            preset_list.add(button)
-        self.preview.queue_draw()
+            self.preset_list.add(button)
+
         scroll = self._gtk.ScrolledWindow()
-        scroll.add(preset_list)
+        scroll.add(self.preset_list)
         grid.attach(scroll, 2, 0, 1, 1)
         return grid
 
@@ -172,9 +173,10 @@ class Panel(ScreenPanel):
         parsed = {}
         for preset in presets_data.values():
             name = preset["name"].lower()
-            parsed[name] = [
-                round(preset[color] / 255, 4)
-                for color in ["red", "green", "blue", "white"]
-                if color in preset and preset[color] is not None
-            ]
+            parsed[name] = []
+            for color in ["red", "green", "blue", "white"]:
+                if color not in preset or preset[color] is None:
+                    parsed[name].append(0)
+                    continue
+                parsed[name].append(round(preset[color] / 255, 4))
         return parsed

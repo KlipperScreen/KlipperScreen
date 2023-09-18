@@ -279,29 +279,6 @@ class Printer:
             leds.extend(iter(self.get_config_section_list(f"{led_type} ")))
         return leds
 
-    def add_led_presets(self, data):
-        for _ in data:
-            config_item = data['type'] + ' ' + data['name']
-            self.config[config_item]['presets'] = data['presets']
-            self.config[config_item]['lightgroups'] = data['lightgroups']
-
-    def get_led_color(self, led):
-        if led not in self.config or led not in self.data:
-            logging.debug(f"Error getting {led} config")
-            return None
-        else:
-            color = self.data[led]["color_data"][0]
-        return color
-
-    def get_led_presets(self, led):
-        presets = []
-        if led not in self.config or led not in self.data:
-            logging.debug(f"Error getting {led} config")
-            return presets
-        if "presets" in self.config[led]:
-            presets = self.config[led]["presets"]
-        return presets
-
     def get_led_color_order(self, led):
         if led not in self.config or led not in self.data:
             logging.debug(f"Error getting {led} config")
