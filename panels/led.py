@@ -12,8 +12,9 @@ class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
-        self.preview = Gtk.DrawingArea(hexpand=True, vexpand=True)
+        self.preview = Gtk.DrawingArea()
         self.preview.connect("draw", self.on_draw)
+        self.preview_label = Gtk.Label(label='')
         self.preset_list = self._gtk.HomogeneousGrid()
         self.color_data = [0, 0, 0, 0]
         self.color_order = 'RGBW'
@@ -80,15 +81,15 @@ class Panel(ScreenPanel):
         if self.color_order is None:
             self.back()
             return
-        size = self._gtk.img_scale * 1.6
         scale_grid = self._gtk.HomogeneousGrid()
+        da_size = self._gtk.img_scale * 1.6
         for idx, col_value in enumerate(self.color_data):
             if not self.color_available(idx):
                 continue
             color = [0, 0, 0, 0]
             color[idx] = 1
             button = self._gtk.Button()
-            preview = Gtk.DrawingArea(width_request=size, height_request=size)
+            preview = Gtk.DrawingArea(width_request=da_size, height_request=da_size)
             preview.connect("draw", self.on_draw, color)
             button.set_image(preview)
             button.connect("clicked", self.apply_preset, color)
@@ -106,12 +107,9 @@ class Panel(ScreenPanel):
             scale_grid.attach(scale, 2, idx, 3, 1)
         grid.attach(scale_grid, 0, 0, 2, 1)
 
-        preview_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        preview_box.get_style_context().add_class("frame-item")
-        preview_box.add(Gtk.Label(label=_("Color")))
-        preview_box.add(self.preview)
-
-        self.preset_list.attach(preview_box, 0, 0, 2, 1)
+        columns = 3 if self._screen.vertical_mode else 2
+        self.preset_list.attach(self.preview_label, 0, 0, 1, 1)
+        self.preset_list.attach(self.preview, 1, 0, columns - 1, 1)
         data_misc = self._screen.apiclient.send_request(
             "server/database/item?namespace=mainsail&key=miscellaneous.entries")
         if data_misc:
@@ -120,16 +118,19 @@ class Panel(ScreenPanel):
                 self.presets.update(self.parse_presets(presets_data))
         for i, key in enumerate(self.presets):
             logging.info(f'Adding preset: {key}')
-            preview = Gtk.DrawingArea(width_request=size, height_request=size)
+            preview = Gtk.DrawingArea(width_request=da_size, height_request=da_size)
             preview.connect("draw", self.on_draw, self.presets[key])
             button = self._gtk.Button()
             button.set_image(preview)
             button.connect("clicked", self.apply_preset, self.presets[key])
-            self.preset_list.attach(button, i % 2, int(i / 2) + 1, 1, 1)
+            self.preset_list.attach(button, i % columns, int(i / columns) + 1, 1, 1)
 
         scroll = self._gtk.ScrolledWindow()
         scroll.add(self.preset_list)
-        grid.attach(scroll, 2, 0, 1, 1)
+        if self._screen.vertical_mode:
+            grid.attach(scroll, 0, 1, 2, 1)
+        else:
+            grid.attach(scroll, 2, 0, 1, 1)
         return grid
 
     def on_draw(self, da, ctx, color=None):
@@ -146,6 +147,7 @@ class Panel(ScreenPanel):
     def update_preview(self, args):
         self.update_color_data()
         self.preview.queue_draw()
+        self.preview_label.set_label(self.rgbw_to_hex(self.color_data))
 
     def process_update(self, action, data):
         if action != 'notify_status_update':
@@ -188,3 +190,14 @@ class Panel(ScreenPanel):
                     continue
                 parsed[name].append(round(preset[color] / 255, 4))
         return parsed
+
+    @staticmethod
+    def rgbw_to_hex(color):
+        hex_color = '#'
+        for value in color[:3]:
+            int_value = round(value * 255)
+            hex_color += hex(int_value)[2:].zfill(2)
+        alpha = round(color[3] * 255)
+        hex_color += hex(alpha)[2:].zfill(2)
+        return hex_color.upper()
+
