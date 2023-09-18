@@ -82,7 +82,7 @@ class Panel(ScreenPanel):
             self.back()
             return
         scale_grid = self._gtk.HomogeneousGrid()
-        da_size = self._gtk.img_scale * 1.6
+        da_size = self._gtk.img_scale * 2.75
         for idx, col_value in enumerate(self.color_data):
             if not self.color_available(idx):
                 continue
@@ -137,11 +137,16 @@ class Panel(ScreenPanel):
         if color is None:
             color = self.color_data
         ctx.set_source_rgb(color[0], color[1], color[2])
-        w = da.get_allocated_width()
-        h = da.get_allocated_height()
-        r = min(w, h) / 2
-        ctx.translate(w / 2, h / 2)
-        ctx.arc(0, 0, r, 0, 2 * pi)
+        # Set the size of the rectangle
+        width = height = da.get_allocated_width() * .9
+        x = da.get_allocated_width() * .05
+        # Set the radius of the corners
+        radius = width / 2 * 0.2
+        ctx.arc(x + radius, radius, radius, pi, 3 * pi / 2)
+        ctx.arc(x + width - radius, radius, radius, 3 * pi / 2, 0)
+        ctx.arc(x + width - radius, height - radius, radius, 0, pi / 2)
+        ctx.arc(x + radius, height - radius, radius, pi / 2, pi)
+        ctx.close_path()
         ctx.fill()
 
     def update_preview(self, args):
@@ -200,4 +205,3 @@ class Panel(ScreenPanel):
         alpha = round(color[3] * 255)
         hex_color += hex(alpha)[2:].zfill(2)
         return hex_color.upper()
-
