@@ -496,8 +496,6 @@ class KlipperScreen(Gtk.Window):
     def _menu_go_back(self, widget=None, home=False):
         logging.info(f"#### Menu go {'home' if home else 'back'}")
         self.remove_keyboard()
-        if self._config.get_main_config().getboolean('autoclose_popups', True):
-            self.close_popup_message()
         while len(self._cur_panels) > 1:
             self._remove_current_panel()
             del self._cur_panels[-1]
@@ -520,6 +518,7 @@ class KlipperScreen(Gtk.Window):
         if self.screensaver is not None:
             self.close_screensaver()
         self.remove_keyboard()
+        self.close_popup_message()
         for dialog in self.dialogs:
             logging.debug("Hiding dialog")
             dialog.hide()
