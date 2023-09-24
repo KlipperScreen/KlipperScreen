@@ -18,6 +18,7 @@ class Printer:
         self.extrudercount = 0
         self.tempdevcount = 0
         self.fancount = 0
+        self.ledcount = 0
         self.output_pin_count = 0
         self.store_timeout = None
         self.tempstore = {}
@@ -36,6 +37,7 @@ class Printer:
         self.extrudercount = 0
         self.tempdevcount = 0
         self.fancount = 0
+        self.ledcount = 0
         self.output_pin_count = 0
         self.tempstore = {}
         self.busy = False
@@ -88,6 +90,14 @@ class Printer:
                     r['points'] = [[float(j.strip()) for j in i.split(",")] for i in r['points'].strip().split("\n")]
                 except KeyError:
                     logging.debug(f"Couldn't load mesh {x}: {self.config[x]}")
+            if x.startswith('led') \
+                    or x.startswith('neopixel ') \
+                    or x.startswith('dotstar ') \
+                    or x.startswith('pca9533 ') \
+                    or x.startswith('pca9632 '):
+                name = x.split()[1] if len(x.split()) > 1 else x
+                if not name.startswith("_"):
+                    self.ledcount += 1
         self.process_update(data)
 
         logging.info(f"Klipper version: {printer_info['software_version']}")
@@ -95,6 +105,7 @@ class Printer:
         logging.info(f"# Temperature devices: {self.tempdevcount}")
         logging.info(f"# Fans: {self.fancount}")
         logging.info(f"# Output pins: {self.output_pin_count}")
+        logging.info(f"# Leds: {self.ledcount}")
 
     def process_update(self, data):
         if self.data is None:
@@ -245,7 +256,8 @@ class Printer:
                 "pause_resume": {"is_paused": self.state == "paused"},
                 "power_devices": {"count": len(self.get_power_devices())},
                 "cameras": {"count": len(self.cameras)},
-                "spoolman": self.spoolman
+                "spoolman": self.spoolman,
+                "leds": {"count": self.ledcount},
             }
         }
 
@@ -259,6 +271,32 @@ class Printer:
             data["printer"][section] = self.config_section_exists(section)
 
         return data
+
+    def get_leds(self):
+        leds = []
+        led_types = ["dotstar", "led", "neopixel", "pca9533", "pca9632"]
+        for led_type in led_types:
+            leds.extend(iter(self.get_config_section_list(f"{led_type} ")))
+        return leds
+
+    def get_led_color_order(self, led):
+        if led not in self.config or led not in self.data:
+            logging.debug(f"Error getting {led} config")
+            return None
+        elif "color_order" in self.config[led]:
+            return self.config[led]["color_order"]
+        colors = ''
+        for option in self.config[led]:
+            if option in ("red_pin", 'initial_RED') and 'R' not in colors:
+                colors += 'R'
+            elif option in ("green_pin", 'initial_GREEN') and 'G' not in colors:
+                colors += 'G'
+            elif option in ("blue_pin", 'initial_BLUE') and 'B' not in colors:
+                colors += 'B'
+            elif option in ("white_pin", 'initial_WHITE') and 'W' not in colors:
+                colors += 'W'
+        logging.debug(f"Colors in led: {colors}")
+        return colors
 
     def get_power_devices(self):
         return list(self.power_devices)

@@ -39,3 +39,11 @@ class KlippyGcodes:
     @staticmethod
     def bed_mesh_save(profile):
         return f"BED_MESH_PROFILE SAVE='{profile}'"
+
+    @staticmethod
+    def set_led_color(led, color):
+        return (
+            f'SET_LED LED="{led}" '
+            f'RED={color[0]} GREEN={color[1]} BLUE={color[2]} WHITE={color[3]} '
+            f'SYNC=0 TRANSMIT=1'
+        )
