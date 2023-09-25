@@ -887,7 +887,8 @@ class KlipperScreen(Gtk.Window):
             for missing in server_info["missing_klippy_requirements"]:
                 popup += f'[{missing}]\n'
                 level = 3
-        self.show_popup_message(popup, level)
+        if popup:
+            self.show_popup_message(popup, level)
         if "power" in server_info["components"]:
             powerdevs = self.apiclient.send_request("machine/device_power/devices")
             if powerdevs is not False:
