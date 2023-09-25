@@ -14,7 +14,7 @@ class Panel(ScreenPanel):
         super().__init__(screen, title)
         self.da_size = self._gtk.img_scale * 2
         self.preview = Gtk.DrawingArea(width_request=self.da_size, height_request=self.da_size)
-        self.preview.set_size_request(-1, self.da_size * 1.9)
+        self.preview.set_size_request(-1, self.da_size * 2)
         self.preview.connect("draw", self.on_draw)
         self.preview_label = Gtk.Label(label='')
         self.preset_list = self._gtk.HomogeneousGrid()
