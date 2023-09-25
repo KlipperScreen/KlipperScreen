@@ -62,7 +62,7 @@ msgid "Apply %s%.3f offset to Probe?"
 msgstr "Применить смещение %s%.3f к зонду?"
 
 msgid "Archived"
-msgstr ""
+msgstr "Архивные"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Вы уверены, что хотите исключить объект?"
@@ -86,16 +86,16 @@ msgid "Auto"
 msgstr "Авто"
 
 msgid "Auto-calibrate"
-msgstr "Автоматическая калибровка"
+msgstr "Автокалибровка"
 
 msgid "Auto-close notifications"
-msgstr "Автоматическое закрытие уведомлений"
+msgstr "Автозакрытие уведомлений"
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "Автооткрытие меню Extrude при паузе"
 
 msgid "Auto-scroll"
-msgstr "Автоматическая прокрутка"
+msgstr "Автопрокрутка"
 
 msgid "Bed Level"
 msgstr "Уровень стола"
@@ -158,11 +158,11 @@ msgid "Confirm Emergency Stop"
 msgstr "Подтвердить аварийную остановку"
 
 msgid "Connected"
-msgstr "Соединенный"
+msgstr "Подключено"
 
 #, python-format
 msgid "Connecting to %s"
-msgstr "Соединенный с  %s"
+msgstr "Подключён к %s"
 
 msgid "Console"
 msgstr "Консоль"
@@ -244,7 +244,7 @@ msgid "File:"
 msgstr "Файл:"
 
 msgid "Filter"
-msgstr ""
+msgstr "Фильтр"
 
 msgid "Finding ADXL"
 msgstr "Поиск ADXL"
@@ -268,7 +268,7 @@ msgid "Font Size"
 msgstr "Размер шрифта"
 
 msgid "Full Update"
-msgstr "Полный Обновлять"
+msgstr "Обновить всё"
 
 msgid "Go Back"
 msgstr "Назад"
@@ -322,7 +322,7 @@ msgid "Initializing printer..."
 msgstr "Принтер стартует..."
 
 msgid "Initiate a PID calibration for:"
-msgstr "Запустите калибровку ПИД-регулятора для:"
+msgstr "Запустить калибровку ПИД-регулятора для:"
 
 msgid "Input Shaper"
 msgstr "Входной шейпер"
@@ -364,10 +364,10 @@ msgid "Klipper is attempting to start"
 msgstr "Klipper готов"
 
 msgid "Klipper will reboot"
-msgstr "Klipper перезагружается"
+msgstr "Klipper перезагрузится"
 
 msgid "KlipperScreen will reboot"
-msgstr "KlipperScreen перезагружается"
+msgstr "KlipperScreen перезагрузится"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
@@ -380,7 +380,7 @@ msgid "Large"
 msgstr "Большой"
 
 msgid "Last Used"
-msgstr ""
+msgstr "Последнее использование"
 
 msgid "Layer:"
 msgstr "Слой:"
@@ -407,7 +407,7 @@ msgid "Main Menu"
 msgstr "Главное меню"
 
 msgid "Material"
-msgstr ""
+msgstr "Тип"
 
 msgid "Max"
 msgstr "Максимум"
@@ -470,7 +470,7 @@ msgid "New"
 msgstr "Новый"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "Нет понятных макросов:"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -496,7 +496,7 @@ msgstr[1] "Пакеты будут обновляться"
 msgstr[2] "Пакеты будут обновляться"
 
 msgid "Part Fan"
-msgstr "Частичный вентилятор"
+msgstr "Вентилятор обдува детали"
 
 msgid "Password saved"
 msgstr "Пароль сохранен"
@@ -517,7 +517,7 @@ msgid "Please recompile and flash the micro-controller."
 msgstr "Прошейте заново микроконтроллер."
 
 msgid "Power"
-msgstr "Включено"
+msgstr "Питание"
 
 msgid "Power On Printer"
 msgstr "Включить принтер"
@@ -538,7 +538,7 @@ msgid "Printer"
 msgstr "Принтер"
 
 msgid "Printer Connections"
-msgstr "Подключение принтера"
+msgstr "Подключённые принтеры"
 
 msgid "Printer Select"
 msgstr "Выбор принтера"
@@ -565,10 +565,10 @@ msgid "Recover"
 msgstr "Восстановить"
 
 msgid "Recover Hard"
-msgstr "Восстановить Hard"
+msgstr "Жесткое восстановление"
 
 msgid "Recover Soft"
-msgstr "Восстановить Soft"
+msgstr "Мягкое восстановление"
 
 msgid "Reference"
 msgstr "Ссылка"
@@ -650,7 +650,7 @@ msgid "Show Heater Power"
 msgstr "Показать мощность нагрева"
 
 msgid "Show Scrollbars Buttons"
-msgstr ""
+msgstr "Показать полосу прокрутки"
 
 msgid "Shutdown"
 msgstr "Выключить"
@@ -707,7 +707,7 @@ msgid "System Shutdown"
 msgstr "Выключить"
 
 msgid "Temp (°C)"
-msgstr "Темп  (°С)"
+msgstr "Температура (°С)"
 
 msgid "Temperature"
 msgstr "Tемпература"
@@ -716,19 +716,19 @@ msgid "Total:"
 msgstr "Итого:"
 
 msgid "Unknown Heater"
-msgstr "Неизвестный обогреватель"
+msgstr "Неизвестный нагреватель"
 
 msgid "Unknown screw position"
 msgstr "Неизвестное положение винта"
 
 msgid "Unload"
-msgstr "Загружено"
+msgstr "Выгрузить"
 
 msgid "Unretract Extra Length"
 msgstr "Дополнительная длина подачи перед возобновлением печати"
 
 msgid "Unretract Speed"
-msgstr "Скорость дополнительная подачи"
+msgstr "Скорость дополнительной подачи"
 
 msgid "Up To Date"
 msgstr "Обновлено"
@@ -766,8 +766,8 @@ msgstr "Смещение Z:"
 msgid "commit"
 msgid_plural "commits"
 msgstr[0] "изменение"
-msgstr[1] "изменение"
-msgstr[2] "изменение"
+msgstr[1] "изменения"
+msgstr[2] "изменения"
 
 msgid "dBm"
 msgstr "dBm"
@@ -779,10 +779,10 @@ msgstr[1] "часа"
 msgstr[2] "часа"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "макросы, использующие rename_existing, скрыты"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "макросы с именем, начинающиеся с '_', скрыты"
 
 msgid "minute"
 msgid_plural "minutes"
@@ -864,7 +864,7 @@ msgstr "мм/с³"
 #~ msgstr "Добавить принтер"
 
 #~ msgid "Initializing"
-#~ msgstr "Запуск"
+#~ msgstr "Инициализация"
 
 #, python-format
 #~ msgid "Retry #%s"
@@ -874,13 +874,13 @@ msgstr "мм/с³"
 #~ msgstr "Удалить"
 
 #~ msgid "Off"
-#~ msgstr "Выкл"
+#~ msgstr "Выкл."
 
 #~ msgid "View Mesh"
 #~ msgstr "Смотреть сетку"
 
 #~ msgid "Sort by: "
-#~ msgstr "Орден: "
+#~ msgstr "Сортировать по: "
 
 #~ msgid "Bltouch found applied offset"
 #~ msgstr "Bltouch обнаружил примененное смещение"
@@ -943,13 +943,13 @@ msgstr "мм/с³"
 #~ msgstr "Цель"
 
 #~ msgid "Temp"
-#~ msgstr "Темп"
+#~ msgstr "Температура"
 
 #~ msgid "Number Pad"
 #~ msgstr "Клавиатура"
 
 #~ msgid "Preheat"
-#~ msgstr "Разогрев"
+#~ msgstr "Преднагрев"
 
 #~ msgid "Screen will show in less than one second"
 #~ msgstr "Экран отобразится через одну секунду"
