@@ -98,7 +98,7 @@ check_requirements()
 {
     echo_text "Checking Python version"
     python3 --version
-    if ! python -c 'import sys; exit(1) if sys.version_info <= (3,7) else exit(0)'; then
+    if ! python3 -c 'import sys; exit(1) if sys.version_info <= (3,7) else exit(0)'; then
         echo_text 'Not supported'
         exit 1
     fi
