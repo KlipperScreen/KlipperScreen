@@ -81,10 +81,10 @@ class Panel(ScreenPanel):
 
             b = self._gtk.Button(icon, name, style or f"color{i % 4 + 1}", scale=scale)
 
-            if item['panel'] is not None:
+            if item['panel']:
                 panel = self._screen.env.from_string(item['panel']).render(printer)
                 b.connect("clicked", self.menu_item_clicked, item)
-            elif item['method'] is not None:
+            elif item['method']:
                 params = {}
 
                 if item['params'] is not False:
