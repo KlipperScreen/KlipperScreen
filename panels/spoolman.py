@@ -108,8 +108,9 @@ class SpoolmanSpool(GObject.GObject):
                 SpoolmanSpool._spool_icon = pathlib.Path(_spool_icon_path).read_text()
 
             loader = GdkPixbuf.PixbufLoader()
+            color = self.filament.color_hex if hasattr(self.filament, 'color_hex') else '000000'
             loader.write(
-                SpoolmanSpool._spool_icon.replace('var(--filament-color)', f'#{self.filament.color_hex}').encode()
+                SpoolmanSpool._spool_icon.replace('var(--filament-color)', f'#{color}').encode()
             )
             loader.close()
             self._icon = loader.get_pixbuf()
@@ -396,7 +397,9 @@ class Panel(ScreenPanel):
         for spool in spools["result"]:
             spoolObject = SpoolmanSpool(**spool)
             self._model.append(None, [spoolObject])
-            if spoolObject.filament.material not in materials:
+            if not hasattr(spoolObject.filament, 'material'):
+                spoolObject.filament.material = ''
+            elif spoolObject.filament.material not in materials:
                 materials.append(spoolObject.filament.material)
 
         materials.sort()
