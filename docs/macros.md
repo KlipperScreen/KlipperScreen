@@ -35,7 +35,7 @@ gcode:
     M300 # beep
     G91
     G92 E0
-    G1 E350 F{max_velocity} # fast-load
+    G1 E350 F{max_velocity * 60} # fast-load
     G1 E25 F{speed} # purge
     M300
     M300
@@ -52,7 +52,7 @@ gcode:
     M300 # beep
     G92 E0
     G1 E25 F{speed} # purge
-    G1 E-420 F{max_velocity} # fast-unload
+    G1 E-420 F{max_velocity * 60} # fast-unload
     M300
     M300
     RESTORE_GCODE_STATE NAME=unload_state
