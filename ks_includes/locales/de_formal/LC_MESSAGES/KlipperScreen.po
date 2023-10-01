@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-12 08:17-0300\n"
+"POT-Creation-Date: 2023-09-30 23:03-0300\n"
 "PO-Revision-Date: 2022-11-30 18:10-0300\n"
 "Last-Translator: livinhack\n"
 "Language-Team: \n"
@@ -385,6 +385,9 @@ msgstr "Zuletzt verwendet"
 
 msgid "Layer:"
 msgstr "Schicht:"
+
+msgid "Leds"
+msgstr ""
 
 msgid "Left:"
 msgstr "Restzeit:"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-12 08:17-0300\n"
+"POT-Creation-Date: 2023-09-30 23:03-0300\n"
 "PO-Revision-Date: 2023-08-16 09:53-0300\n"
 "Last-Translator: Jakob Kais <schpuntik@freenet.de>\n"
 "Language-Team: \n"
@@ -384,6 +384,9 @@ msgstr "Последнее использование"
 
 msgid "Layer:"
 msgstr "Слой:"
+
+msgid "Leds"
+msgstr ""
 
 msgid "Left:"
 msgstr "Осталось:"

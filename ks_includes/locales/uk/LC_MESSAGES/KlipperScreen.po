@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2023-09-03 20:36\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-12 08:17-0300\n"
+"POT-Creation-Date: 2023-09-30 23:03-0300\n"
 "PO-Revision-Date: 2023-09-03 20:57+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -392,6 +392,9 @@ msgstr "Останнє Використання"
 
 msgid "Layer:"
 msgstr "Шар:"
+
+msgid "Leds"
+msgstr ""
 
 msgid "Left:"
 msgstr "Залишилось:"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-12 08:17-0300\n"
+"POT-Creation-Date: 2023-09-30 23:03-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pappicio\n"
 "Language-Team: \n"
@@ -379,6 +379,9 @@ msgstr ""
 
 msgid "Layer:"
 msgstr "Layer:"
+
+msgid "Leds"
+msgstr ""
 
 msgid "Left:"
 msgstr "Restante:"
