@@ -2,9 +2,12 @@
 
 This article describes how to use KlipperScreen from an android device
 
-!!! important
-    The experience may not be equal to run KlipperScreen natively,
-    depending on the device there maybe performance degradation or other issues
+!!! warning
+    The experience may not be equal to run KlipperScreen natively.
+    Depending on the device or the network you may encounter performance degradation or other issues.
+
+!!! bug
+    Some [users have found](https://github.com/KlipperScreen/KlipperScreen/issues/862) that using this method causes memory-leaks
 
 1. [First installl KlipperScreen on the Pi](Installation.md)
 2. Install [XServer-XSDL](https://play.google.com/store/apps/details?id=x.org.server) on the android device

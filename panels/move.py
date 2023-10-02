@@ -113,7 +113,7 @@ class Panel(ScreenPanel):
             logging.error(f"Error getting max_velocity\n{printer_cfg}")
             max_velocity = 50
         if "max_z_velocity" in printer_cfg:
-            max_z_velocity = int(float(printer_cfg["max_z_velocity"]))
+            max_z_velocity = max(int(float(printer_cfg["max_z_velocity"])), 10)
         else:
             max_z_velocity = max_velocity
 

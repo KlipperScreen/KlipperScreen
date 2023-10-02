@@ -30,9 +30,8 @@ class Panel(ScreenPanel):
         # When printing start in temp_delta mode and only select tools
         selection = []
         if self._printer.state not in ["printing", "paused"]:
-            selection.extend(iter(self._printer.get_tools()))
             self.show_preheat = True
-            selection.extend(self._printer.get_heaters())
+            selection.extend(self._printer.get_temp_devices())
         elif extra:
             selection.append(extra)
 
@@ -448,6 +447,7 @@ class Panel(ScreenPanel):
 
         scroll = self._gtk.ScrolledWindow(steppers=False)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.get_style_context().add_class('heater-list')
         scroll.add(self.labels['devices'])
 
         self.left_panel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
@@ -467,7 +467,7 @@ class Panel(ScreenPanel):
         popover.connect('closed', self.popover_closed)
         self.labels['popover'] = popover
 
-        for d in (self._printer.get_tools() + self._printer.get_heaters()):
+        for d in self._printer.get_temp_devices():
             self.add_device(d)
 
         return self.left_panel
@@ -513,13 +513,14 @@ class Panel(ScreenPanel):
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
-        for x in (self._printer.get_tools() + self._printer.get_heaters()):
-            self.update_temp(
-                x,
-                self._printer.get_dev_stat(x, "temperature"),
-                self._printer.get_dev_stat(x, "target"),
-                self._printer.get_dev_stat(x, "power"),
-            )
+        for x in self._printer.get_temp_devices():
+            if x in data:
+                self.update_temp(
+                    x,
+                    self._printer.get_dev_stat(x, "temperature"),
+                    self._printer.get_dev_stat(x, "target"),
+                    self._printer.get_dev_stat(x, "power"),
+                )
 
     def show_numpad(self, widget, device=None):
         for d in self.active_heaters:

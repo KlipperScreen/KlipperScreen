@@ -8,18 +8,24 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gdk, GdkPixbuf, Gio, Gtk, Pango
 
 
-def format_label(widget, lines=2):
-    if type(widget) == Gtk.Label:
+def find_widget(widget, wanted_type):
+    # Returns a widget of wanted_type or None
+    if isinstance(widget, wanted_type):
         return widget
-    if type(widget) in (Gtk.Container, Gtk.Bin, Gtk.Button, Gtk.Alignment, Gtk.Box):
+    if isinstance(widget, (Gtk.Container, Gtk.Bin, Gtk.Button, Gtk.Alignment, Gtk.Box)):
         for _ in widget.get_children():
-            lbl = format_label(_)
-            if lbl is not None:
-                lbl.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-                lbl.set_line_wrap(True)
-                lbl.set_ellipsize(True)
-                lbl.set_ellipsize(Pango.EllipsizeMode.END)
-                lbl.set_lines(lines)
+            result = find_widget(_, wanted_type)
+            if result is not None:
+                return result
+
+
+def format_label(widget, lines=2):
+    label = find_widget(widget, Gtk.Label)
+    if label is not None:
+        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        label.set_line_wrap(True)
+        label.set_ellipsize(Pango.EllipsizeMode.END)
+        label.set_lines(lines)
 
 
 class KlippyGtk:
@@ -158,6 +164,8 @@ class KlippyGtk:
         b.set_hexpand(True)
         b.set_vexpand(True)
         b.set_can_focus(False)
+        b.set_image_position(position)
+        b.set_always_show_image(True)
         if image_name is not None:
             if scale is None:
                 scale = self.button_image_scale
@@ -165,13 +173,13 @@ class KlippyGtk:
                 scale = scale * 1.4
             width = height = self.img_scale * scale
             b.set_image(self.Image(image_name, width, height))
-            b.set_image_position(position)
-            b.set_always_show_image(True)
             spinner = Gtk.Spinner.new()
             spinner.set_no_show_all(True)
             spinner.set_size_request(width, height)
             spinner.hide()
-            b.get_child().get_child().add(spinner)
+            box = find_widget(b, Gtk.Box)
+            if box:
+                box.add(spinner)
 
         if label is not None:
             format_label(b, lines)
@@ -182,33 +190,38 @@ class KlippyGtk:
 
     @staticmethod
     def Button_busy(widget, busy):
-        box = widget.get_child().get_child()
+        spinner = find_widget(widget, Gtk.Spinner)
+        image = find_widget(widget, Gtk.Image)
         if busy:
             widget.set_sensitive(False)
-            widget.set_always_show_image(False)
-            box.get_children()[0].hide()
-            if type(box.get_children()[1]) == Gtk.Spinner:
-                box.get_children()[1].start()
-                box.get_children()[1].show()
+            if image:
+                widget.set_always_show_image(False)
+                image.hide()
+            if spinner:
+                spinner.start()
+                spinner.show()
         else:
-            box.get_children()[0].show()
-            if type(box.get_children()[1]) == Gtk.Spinner:
-                box.get_children()[1].stop()
-                box.get_children()[1].hide()
-            widget.set_always_show_image(True)
+            if image:
+                widget.set_always_show_image(True)
+                image.show()
+            if spinner:
+                spinner.stop()
+                spinner.hide()
             widget.set_sensitive(True)
 
-    def Dialog(self, screen, buttons, content, callback=None, *args):
-        dialog = Gtk.Dialog()
-        dialog.set_default_size(screen.width, screen.height)
+    def Dialog(self, title, buttons, content, callback=None, *args):
+        dialog = Gtk.Dialog(title=title)
+        dialog.set_default_size(self.width, self.height)
         dialog.set_resizable(False)
-        dialog.set_transient_for(screen)
+        dialog.set_transient_for(self.screen)
         dialog.set_modal(True)
+        if not self.screen.windowed:
+            dialog.fullscreen()
 
         for button in buttons:
             dialog.add_button(button['name'], button['response'])
             button = dialog.get_widget_for_response(button['response'])
-            button.set_size_request((screen.width - 30) / 3, screen.height / 5)
+            button.set_size_request((self.width - 30) / 3, self.height / 5)
             format_label(button, 3)
 
         dialog.connect("response", self.screen.reset_screensaver_timeout)
@@ -232,7 +245,7 @@ class KlippyGtk:
                 Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.BLANK_CURSOR))
 
         self.screen.dialogs.append(dialog)
-        logging.info(f"Showing dialog {dialog}")
+        logging.info(f"Showing dialog {dialog.get_title()} {dialog.get_size()}")
         return dialog
 
     def remove_dialog(self, dialog, *args):

@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 10:20-0300\n"
-"PO-Revision-Date: 2023-07-31 22:13+0000\n"
+"POT-Creation-Date: 2023-09-30 23:03-0300\n"
+"PO-Revision-Date: 2023-09-06 08:40+0000\n"
 "Last-Translator: Daviteusz <daviteusz0@gmail.com>\n"
 "Language-Team: Polish\n"
 "Language: pl\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.18.2\n"
+"X-Generator: Weblate 5.0\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -43,6 +43,9 @@ msgstr "Akceptuj"
 msgid "Add profile"
 msgstr "Dodaj profil"
 
+msgid "All"
+msgstr "Wszystkie"
+
 msgid "Apply"
 msgstr "Zastosuj"
 
@@ -53,6 +56,9 @@ msgstr "Zastosować przesunięcie %s%.3f do krańcówki?"
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
 msgstr "Zastosować przesunięcie %s%.3f do sondy?"
+
+msgid "Archived"
+msgstr "Zarchiwizowane"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Czy na pewno chcesz wykluczyć obiekt?"
@@ -80,6 +86,9 @@ msgstr "Automatyczna kalibracja"
 
 msgid "Auto-close notifications"
 msgstr "Automatycznie zamykaj powiadomienia"
+
+msgid "Auto-open Extrude On Pause"
+msgstr "Otwieraj menu wytłaczania podczas wstrzymania"
 
 msgid "Auto-scroll"
 msgstr "Automatyczne przewijanie"
@@ -153,9 +162,6 @@ msgstr "Łączenie z %s"
 
 msgid "Console"
 msgstr "Konsola"
-
-msgid "Continue"
-msgstr "Kontynuuj"
 
 msgid "Cooldown"
 msgstr "Studzenie"
@@ -233,6 +239,9 @@ msgstr "Plik"
 msgid "File:"
 msgstr "Plik:"
 
+msgid "Filter"
+msgstr "Filtruj"
+
 msgid "Finding ADXL"
 msgstr "Wyszukiwanie ADXL"
 
@@ -294,10 +303,13 @@ msgid "Home Z"
 msgstr "Bazuj Z"
 
 msgid "Host"
-msgstr "Gospodarz"
+msgstr "Host"
 
 msgid "Hostname"
 msgstr "Nazwa hosta"
+
+msgid "ID"
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "Motyw ikon"
@@ -353,14 +365,26 @@ msgstr "Klipper uruchomi się ponownie"
 msgid "KlipperScreen will reboot"
 msgstr "KlipperScreen uruchomi się ponownie"
 
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT są ukryte i powinny być używane z menu "
+"wytłaczania"
+
 msgid "Language"
 msgstr "Język"
 
 msgid "Large"
 msgstr "Duży"
 
+msgid "Last Used"
+msgstr "Ostatnie użycie"
+
 msgid "Layer:"
 msgstr "Warstwa:"
+
+msgid "Leds"
+msgstr ""
 
 msgid "Left:"
 msgstr "Pozostało:"
@@ -382,6 +406,9 @@ msgstr "Makra"
 
 msgid "Main Menu"
 msgstr "Menu główne"
+
+msgid "Material"
+msgstr "Materiał"
 
 msgid "Max"
 msgstr "Maks"
@@ -442,6 +469,9 @@ msgstr "Nigdy"
 
 msgid "New"
 msgstr "Nowe"
+
+msgid "No elegible macros:"
+msgstr "Brak odpowiednich makr:"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -620,6 +650,9 @@ msgstr "Pokaż"
 msgid "Show Heater Power"
 msgstr "Pokaż moc grzałki"
 
+msgid "Show Scrollbars Buttons"
+msgstr "Pokaż przyciski pasków przewijania"
+
 msgid "Shutdown"
 msgstr "Wyłącz"
 
@@ -733,9 +766,9 @@ msgstr "Przesunięcie Z:"
 
 msgid "commit"
 msgid_plural "commits"
-msgstr[0] "zmianę"
-msgstr[1] "zmiany"
-msgstr[2] "zmian"
+msgstr[0] "zatwierdzenie"
+msgstr[1] "zatwierdzenia"
+msgstr[2] "zatwierdzeń"
 
 msgid "dBm"
 msgstr "dBm"
@@ -745,6 +778,12 @@ msgid_plural "hours"
 msgstr[0] "godzina"
 msgstr[1] "godziny"
 msgstr[2] "godzin"
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "makra używające \"rename_existing\" są ukryte"
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "makra z nazwą zaczynającą się od \"_\" są ukryte"
 
 msgid "minute"
 msgid_plural "minutes"
@@ -763,6 +802,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Continue"
+#~ msgstr "Kontynuuj"
 
 #~ msgid "Fullscreen"
 #~ msgstr "Pełny ekran"

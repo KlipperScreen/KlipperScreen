@@ -46,6 +46,10 @@ class Panel(ScreenPanel):
 
     def play(self, widget, cam):
         url = cam['stream_url']
+        if url.startswith('/'):
+            logging.info("camera URL is relative")
+            endpoint = self._screen.apiclient.endpoint.split(':')
+            url = f"{endpoint[0]}:{endpoint[1]}{url}"
         vf = ""
         if cam["flip_horizontal"]:
             vf += "hflip,"
@@ -89,5 +93,5 @@ class Panel(ScreenPanel):
 
     def log(self, loglevel, component, message):
         logging.debug(f'[{loglevel}] {component}: {message}')
-        if loglevel == 'error':
+        if loglevel == 'error' and 'No Xvideo support found' not in message and 'youtube-dl' not in message:
             self._screen.show_popup_message(f'{message}')

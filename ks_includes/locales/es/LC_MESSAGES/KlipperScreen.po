@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 10:20-0300\n"
-"PO-Revision-Date: 2023-07-25 21:05-0300\n"
+"POT-Creation-Date: 2023-09-30 23:03-0300\n"
+"PO-Revision-Date: 2023-09-03 11:53-0300\n"
 "Last-Translator: alfrix\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -46,6 +46,9 @@ msgstr "Aceptar"
 msgid "Add profile"
 msgstr "Agregar perfil"
 
+msgid "All"
+msgstr "Todos"
+
 msgid "Apply"
 msgstr "Aplicar"
 
@@ -56,6 +59,9 @@ msgstr "Aplicar %s%.3f al fin de carrera?"
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
 msgstr "Aplicar %s%.3f al sensor?"
+
+msgid "Archived"
+msgstr "Archivados"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "¿Está seguro de excluir este objeto?"
@@ -83,6 +89,9 @@ msgstr "Auto-Calibrar"
 
 msgid "Auto-close notifications"
 msgstr "Auto-cerrar notificaciones"
+
+msgid "Auto-open Extrude On Pause"
+msgstr "Auto-abrir Extruir al pausar"
 
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
@@ -156,9 +165,6 @@ msgstr "Conectando a %s"
 
 msgid "Console"
 msgstr "Consola"
-
-msgid "Continue"
-msgstr "Continuar"
 
 msgid "Cooldown"
 msgstr "Enfriar"
@@ -236,6 +242,9 @@ msgstr "Archivo"
 msgid "File:"
 msgstr "Archivo:"
 
+msgid "Filter"
+msgstr "Filtro"
+
 msgid "Finding ADXL"
 msgstr "Buscando ADXL"
 
@@ -243,7 +252,7 @@ msgid "Fine Tuning"
 msgstr "Ajuste Fino"
 
 msgid "Finish"
-msgstr "Cerrar"
+msgstr "Finalizar"
 
 msgid "Firmware Restart"
 msgstr "Reiniciar Firmware"
@@ -252,7 +261,7 @@ msgid "Flow:"
 msgstr "Flujo:"
 
 msgid "Flowrate:"
-msgstr "Flujo:"
+msgstr "Tasa de Flujo:"
 
 msgid "Font Size"
 msgstr "Tamaño del texto"
@@ -301,6 +310,9 @@ msgstr "Anfitrión"
 
 msgid "Hostname"
 msgstr "Hostname"
+
+msgid "ID"
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "Tema de Iconos"
@@ -357,14 +369,26 @@ msgstr "Klipper se reiniciará"
 msgid "KlipperScreen will reboot"
 msgstr "KlipperScreen se reiniciará"
 
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT están ocultos y deberían ser usados desde "
+"extruir"
+
 msgid "Language"
 msgstr "Idioma"
 
 msgid "Large"
 msgstr "Grande"
 
+msgid "Last Used"
+msgstr "Ultimo usado"
+
 msgid "Layer:"
 msgstr "Capa:"
+
+msgid "Leds"
+msgstr ""
 
 msgid "Left:"
 msgstr "Restante:"
@@ -385,7 +409,10 @@ msgid "Macros"
 msgstr "Macros"
 
 msgid "Main Menu"
-msgstr "Menú"
+msgstr "Menú Principal"
+
+msgid "Material"
+msgstr "Material"
 
 msgid "Max"
 msgstr "Max"
@@ -446,6 +473,9 @@ msgstr "Nunca"
 
 msgid "New"
 msgstr "Nuevo"
+
+msgid "No elegible macros:"
+msgstr "No hay macros elegibles:"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -548,7 +578,7 @@ msgid "Reference"
 msgstr "Referencia"
 
 msgid "Refresh"
-msgstr "Actualizar"
+msgstr "Recargar"
 
 msgid "Rename/Move:"
 msgstr "Renombrar/Mover:"
@@ -622,6 +652,9 @@ msgstr "Mostrar"
 
 msgid "Show Heater Power"
 msgstr "Mostrar potencia del calentador"
+
+msgid "Show Scrollbars Buttons"
+msgstr "Mostrar botones de desplazamiento"
 
 msgid "Shutdown"
 msgstr "Apagar"
@@ -723,7 +756,7 @@ msgid "Z Calibrate"
 msgstr "Calibrar Z"
 
 msgid "Z Move Speed (mm/s)"
-msgstr "Velocidad Z  (mm/s)"
+msgstr "Velocidad Z (mm/s)"
 
 msgid "Z Speed (mm/s)"
 msgstr "Z Velocidad (mm/s)"
@@ -747,6 +780,12 @@ msgid_plural "hours"
 msgstr[0] "hora"
 msgstr[1] "horas"
 
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "los macros que usan 'rename_existing' están ocultos"
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "los macros con nombre comenzando en '_' están ocultos"
+
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuto"
@@ -763,6 +802,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Continue"
+#~ msgstr "Continuar"
 
 #~ msgid "Fullscreen"
 #~ msgstr "Pantalla Completa"

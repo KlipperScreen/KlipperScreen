@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 10:20-0300\n"
+"POT-Creation-Date: 2023-09-30 23:03-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
@@ -41,6 +41,9 @@ msgstr "OK"
 msgid "Add profile"
 msgstr ""
 
+msgid "All"
+msgstr ""
+
 msgid "Apply"
 msgstr ""
 
@@ -50,6 +53,9 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
+
+msgid "Archived"
 msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
@@ -77,6 +83,9 @@ msgid "Auto-calibrate"
 msgstr "Automatisk kalibrering"
 
 msgid "Auto-close notifications"
+msgstr ""
+
+msgid "Auto-open Extrude On Pause"
 msgstr ""
 
 msgid "Auto-scroll"
@@ -151,9 +160,6 @@ msgstr "Forbinder til %s"
 
 msgid "Console"
 msgstr "Terminal"
-
-msgid "Continue"
-msgstr "Fortsæt"
 
 msgid "Cooldown"
 msgstr "Afkøling"
@@ -231,6 +237,9 @@ msgstr "Fil"
 msgid "File:"
 msgstr "Fil:"
 
+msgid "Filter"
+msgstr ""
+
 msgid "Finding ADXL"
 msgstr "At finde ADXL"
 
@@ -297,6 +306,9 @@ msgstr ""
 msgid "Hostname"
 msgstr "Værtsnavn"
 
+msgid "ID"
+msgstr ""
+
 msgid "Icon Theme"
 msgstr "Ikon-tema"
 
@@ -351,13 +363,23 @@ msgstr "Klipper vil genstarte"
 msgid "KlipperScreen will reboot"
 msgstr "KlipperScreen vil genstarte"
 
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
+
 msgid "Language"
 msgstr "Sprog"
 
 msgid "Large"
 msgstr "Stor"
 
+msgid "Last Used"
+msgstr ""
+
 msgid "Layer:"
+msgstr ""
+
+msgid "Leds"
 msgstr ""
 
 msgid "Left:"
@@ -380,6 +402,9 @@ msgstr "Makroer"
 
 msgid "Main Menu"
 msgstr "Hovedmenu"
+
+msgid "Material"
+msgstr ""
 
 msgid "Max"
 msgstr ""
@@ -440,6 +465,9 @@ msgstr ""
 
 msgid "New"
 msgstr "Ny"
+
+msgid "No elegible macros:"
+msgstr ""
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -615,6 +643,9 @@ msgstr "At vise"
 msgid "Show Heater Power"
 msgstr ""
 
+msgid "Show Scrollbars Buttons"
+msgstr ""
+
 msgid "Shutdown"
 msgstr ""
 
@@ -739,6 +770,12 @@ msgid_plural "hours"
 msgstr[0] "time"
 msgstr[1] "timer"
 
+msgid "macros that use 'rename_existing' are hidden"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr ""
+
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] ""
@@ -755,6 +792,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Continue"
+#~ msgstr "Fortsæt"
 
 #~ msgid "Actions"
 #~ msgstr "Muligheder"

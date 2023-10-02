@@ -35,13 +35,13 @@ class KlippyRest:
     def get_thumbnail_stream(self, thumbnail):
         return self.send_request(f"server/files/gcodes/{thumbnail}", json=False)
 
-    def _do_request(self, method, request_method, data=None, json=None, json_response=True):
+    def _do_request(self, method, request_method, data=None, json=None, json_response=True, timeout=3):
         url = f"{self.endpoint}/{method}"
         headers = {} if self.api_key is False else {"x-api-key": self.api_key}
         response_data = False
         try:
             callee = getattr(requests, request_method)
-            response = callee(url, json=json, data=data, headers=headers, timeout=3)
+            response = callee(url, json=json, data=data, headers=headers, timeout=timeout)
             response.raise_for_status()
             if json_response:
                 logging.debug(f"Sending request to {url}")
@@ -69,8 +69,8 @@ class KlippyRest:
     def post_request(self, method, data=None, json=None, json_response=True):
         return self._do_request(method, "post", data, json, json_response)
 
-    def send_request(self, method, json=True):
-        return self._do_request(method, "get", json_response=json)
+    def send_request(self, method, json=True, timeout=3):
+        return self._do_request(method, "get", json_response=json, timeout=timeout)
 
     @staticmethod
     def format_status(status):

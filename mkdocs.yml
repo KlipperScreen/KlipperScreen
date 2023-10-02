@@ -3,7 +3,7 @@ site_url: https://klipperscreen.readthedocs.io
 site_description: >-
   KlipperScreen documentation.
 
-repo_name: jordanruthe/KlipperScreen/
+repo_name: KlipperScreen/KlipperScreen/
 repo_url: https://github.com/KlipperScreen/KlipperScreen/
 nav:
     - Home: index.md
@@ -21,9 +21,11 @@ nav:
       - First Steps/Log: Troubleshooting.md
       - Network: Troubleshooting/Network.md
       - Physical install: Troubleshooting/Physical_Install.md
-      - Showing Console: Troubleshooting/Showing_console.md
+      - Wrong Framebuffer: Troubleshooting/Framebuffer.md
       - Touch: Troubleshooting/Touch_issues.md
       - Virtual Console Error: Troubleshooting/VC_ERROR.md
+      - FBturbo: Troubleshooting/FBturbo.md
+      - Last resort: Troubleshooting/Last_resort.md
     - Screenshots: Panels.md
     - Panels:
       - Bed Level/Screws: Panels/Screws.md
@@ -34,7 +36,6 @@ nav:
     - Translations.md
     - Breaking Changes: Changelog.md
     - Developers.md
-
     - Contact.md
 theme:
   name: material

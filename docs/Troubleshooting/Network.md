@@ -1,29 +1,34 @@
 # Wi-Fi networks not listed
 
+!!! tip "First start"
+    The initial scan may take a couple of minutes, first be patient before assuming it's an issue
+
 Check if network-manager is installed:
 
-```
-dpkg -s network-manager                                                                                                                                                                                      
+```bash
+dpkg -s network-manager
 ```
 
 if the response is the following:
 
-```
-dpkg-query: the package `network-manager' is not installed
+```bash
+dpkg-query: the package 'network-manager' is not installed
 ```
 
 go to [wpa_supplicant](wpa_supplicant.md)
 
 if the response is the following:
 
-```
+```sh
 Package: network-manager
 Status: install ok installed
 ```
 
 this line may appear in KlipperScreen.log:
-
-`[wifi_nm.py:rescan()] [...] NetworkManager.wifi.scan request failed: not authorized`
+!!! abstract "Log"
+    ```sh
+    [wifi_nm.py:rescan()] [...] NetworkManager.wifi.scan request failed: not authorized
+    ```
 
 
 in order to fix this polkit needs to be configured or disabled:

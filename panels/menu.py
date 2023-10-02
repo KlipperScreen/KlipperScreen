@@ -64,10 +64,14 @@ class Panel(ScreenPanel):
         return self.grid
 
     def create_menu_items(self):
+        count = 0
+        for i in self.items:
+            if self.evaluate_enable(i[next(iter(i))]['enable']):
+                count += 1
+        scale = 1.1 if 12 < count <= 16 else None  # hack to fit a 4th row
         for i in range(len(self.items)):
             key = list(self.items[i])[0]
             item = self.items[i][key]
-            scale = 1.1 if 12 < len(self.items) <= 16 else None  # hack to fit a 4th row
 
             printer = self._printer.get_printer_status_data()
 
@@ -77,10 +81,10 @@ class Panel(ScreenPanel):
 
             b = self._gtk.Button(icon, name, style or f"color{i % 4 + 1}", scale=scale)
 
-            if item['panel'] is not None:
+            if item['panel']:
                 panel = self._screen.env.from_string(item['panel']).render(printer)
                 b.connect("clicked", self.menu_item_clicked, item)
-            elif item['method'] is not None:
+            elif item['method']:
                 params = {}
 
                 if item['params'] is not False:

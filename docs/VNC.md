@@ -3,8 +3,8 @@
 This article describes how to use KlipperScreen through a remote connection.
 
 !!! warning
-    The experience may not be equal to run KlipperScreen natively,
-    depending on the device and network there maybe performance degradation or other issues
+    The experience may not be equal to run KlipperScreen natively.
+    Depending on the device or the network you may encounter performance degradation or other issues.
 
 ##  On the Host device (for example a Raspberry Pi):
 

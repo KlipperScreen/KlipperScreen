@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 10:20-0300\n"
+"POT-Creation-Date: 2023-09-30 23:03-0300\n"
 "PO-Revision-Date: 2022-11-30 18:11-0300\n"
 "Last-Translator: Tal Rahav <talrhv1@gmail.com>\n"
 "Language-Team: \n"
@@ -48,6 +48,9 @@ msgstr "אשר"
 msgid "Add profile"
 msgstr "הוסף פרופיל"
 
+msgid "All"
+msgstr ""
+
 msgid "Apply"
 msgstr "החל"
 
@@ -57,6 +60,9 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
+
+msgid "Archived"
 msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
@@ -85,6 +91,9 @@ msgstr "כיול אוטומטי"
 
 msgid "Auto-close notifications"
 msgstr "סגירת התראות אוטומטית"
+
+msgid "Auto-open Extrude On Pause"
+msgstr ""
 
 msgid "Auto-scroll"
 msgstr "גלילה אוטומטית"
@@ -158,9 +167,6 @@ msgstr "מתחבר ל- %s"
 
 msgid "Console"
 msgstr "קונסול"
-
-msgid "Continue"
-msgstr "המשך"
 
 msgid "Cooldown"
 msgstr "הפעל קירור"
@@ -238,6 +244,9 @@ msgstr "קובץ"
 msgid "File:"
 msgstr ""
 
+msgid "Filter"
+msgstr ""
+
 msgid "Finding ADXL"
 msgstr "מחפש ADXL"
 
@@ -304,6 +313,9 @@ msgstr "שרת"
 msgid "Hostname"
 msgstr "שם שרת"
 
+msgid "ID"
+msgstr ""
+
 msgid "Icon Theme"
 msgstr "ערכת נושא"
 
@@ -358,14 +370,24 @@ msgstr "קליפר יבצע אתחול"
 msgid "KlipperScreen will reboot"
 msgstr "KlipperScreen יאתחל מחדש"
 
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
+
 msgid "Language"
 msgstr "שפה"
 
 msgid "Large"
 msgstr "גדול"
 
+msgid "Last Used"
+msgstr ""
+
 msgid "Layer:"
 msgstr "שכבה"
+
+msgid "Leds"
+msgstr ""
 
 msgid "Left:"
 msgstr "זמן שנותר:"
@@ -387,6 +409,9 @@ msgstr "מקרואים"
 
 msgid "Main Menu"
 msgstr "תפריט ראשי"
+
+msgid "Material"
+msgstr ""
 
 msgid "Max"
 msgstr "מקסימום"
@@ -447,6 +472,9 @@ msgstr ""
 
 msgid "New"
 msgstr "חדש"
+
+msgid "No elegible macros:"
+msgstr ""
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -624,6 +652,9 @@ msgstr "הצג"
 msgid "Show Heater Power"
 msgstr "הצג זרם מיטה"
 
+msgid "Show Scrollbars Buttons"
+msgstr ""
+
 msgid "Shutdown"
 msgstr "כיבוי"
 
@@ -752,6 +783,12 @@ msgstr[1] "שעות"
 msgstr[2] "שעות"
 msgstr[3] "שעות"
 
+msgid "macros that use 'rename_existing' are hidden"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr ""
+
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] ""
@@ -770,6 +807,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Continue"
+#~ msgstr "המשך"
 
 #~ msgid "Actions"
 #~ msgstr "פעולות"

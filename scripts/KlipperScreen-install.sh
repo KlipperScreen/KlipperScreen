@@ -94,6 +94,16 @@ install_packages()
     sudo systemctl mask ModemManager.service
 }
 
+check_requirements()
+{
+    echo_text "Checking Python version"
+    python3 --version
+    if ! python3 -c 'import sys; exit(1) if sys.version_info <= (3,7) else exit(0)'; then
+        echo_text 'Not supported'
+        exit 1
+    fi
+}
+
 create_virtualenv()
 {
     echo_text "Creating virtual environment"
@@ -178,6 +188,7 @@ if [ "$EUID" == 0 ]
     exit 1
 fi
 install_packages
+check_requirements
 create_virtualenv
 modify_user
 install_systemd_service

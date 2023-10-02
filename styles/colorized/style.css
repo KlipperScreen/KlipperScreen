@@ -188,7 +188,7 @@ textview .time {
 }
 
 .message_popup_warning, .message_popup_warning button {
-    background-color: #b58900; /*solarazed-yellow*/
+    background-color: #cb4b16; /*solarazed-orange*/
 }
 
 .message_popup_error, .message_popup_error button {

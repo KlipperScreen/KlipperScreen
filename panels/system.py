@@ -97,7 +97,7 @@ class Panel(ScreenPanel):
         GLib.timeout_add_seconds(1, self.get_updates, "true")
 
     def get_updates(self, refresh="false"):
-        update_resp = self._screen.apiclient.send_request(f"machine/update/status?refresh={refresh}")
+        update_resp = self._screen.apiclient.send_request(f"machine/update/status?refresh={refresh}", timeout=60)
         if not update_resp:
             self.update_status = {}
             logging.info("No update manager configured")
@@ -120,7 +120,7 @@ class Panel(ScreenPanel):
     def show_update_info(self, widget, program):
         info = self.update_status['version_info'][program] if program in self.update_status['version_info'] else {}
 
-        scroll = self._gtk.ScrolledWindow()
+        scroll = self._gtk.ScrolledWindow(steppers=False)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -142,8 +142,7 @@ class Panel(ScreenPanel):
                     {"name": _("Recover Soft"), "response": Gtk.ResponseType.APPLY},
                     {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
                 ]
-                dialog = self._gtk.Dialog(self._screen, recoverybuttons, scroll, self.reset_confirm, program)
-                dialog.set_title(_("Recover"))
+                self._gtk.Dialog(_("Recover"), recoverybuttons, scroll, self.reset_confirm, program)
                 return
             else:
                 if info['version'] == info['remote_version']:
@@ -207,8 +206,7 @@ class Panel(ScreenPanel):
             {"name": _("Update"), "response": Gtk.ResponseType.OK},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
         ]
-        dialog = self._gtk.Dialog(self._screen, buttons, scroll, self.update_confirm, program)
-        dialog.set_title(_("Update"))
+        self._gtk.Dialog(_("Update"), buttons, scroll, self.update_confirm, program)
 
     def update_confirm(self, dialog, response_id, program):
         self._gtk.remove_dialog(dialog)
@@ -324,11 +322,11 @@ class Panel(ScreenPanel):
             {"name": _("Printer"), "response": Gtk.ResponseType.APPLY},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
         ]
-        dialog = self._gtk.Dialog(self._screen, buttons, scroll, self.reboot_poweroff_confirm, method)
         if method == "reboot":
-            dialog.set_title(_("Restart"))
+            title = _("Restart")
         else:
-            dialog.set_title(_("Shutdown"))
+            title = _("Shutdown")
+        self._gtk.Dialog(title, buttons, scroll, self.reboot_poweroff_confirm, method)
 
     def reboot_poweroff_confirm(self, dialog, response_id, method):
         self._gtk.remove_dialog(dialog)

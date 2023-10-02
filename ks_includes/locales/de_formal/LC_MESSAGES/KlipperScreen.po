@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 10:20-0300\n"
+"POT-Creation-Date: 2023-09-30 23:03-0300\n"
 "PO-Revision-Date: 2022-11-30 18:10-0300\n"
 "Last-Translator: livinhack\n"
 "Language-Team: \n"
@@ -46,6 +46,9 @@ msgstr "OK"
 msgid "Add profile"
 msgstr "Profil hinzufügen"
 
+msgid "All"
+msgstr "Alle"
+
 msgid "Apply"
 msgstr "Anwenden"
 
@@ -56,6 +59,9 @@ msgstr "%s%.3f Offset auf Endstop anwenden"
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
 msgstr "%s%.3f Offset auf Probe anwenden"
+
+msgid "Archived"
+msgstr "Archiviert"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Möchten Sie das Objekt wirklich ausschließen?"
@@ -83,6 +89,9 @@ msgstr "Automatisch kalibrieren"
 
 msgid "Auto-close notifications"
 msgstr "Benachrichtigungen automatisch schließen"
+
+msgid "Auto-open Extrude On Pause"
+msgstr ""
 
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
@@ -157,9 +166,6 @@ msgstr "Verbinden zu %s"
 msgid "Console"
 msgstr "Konsole"
 
-msgid "Continue"
-msgstr "Fortsetzen"
-
 msgid "Cooldown"
 msgstr "Abkühlen"
 
@@ -204,13 +210,13 @@ msgid "Extra Large"
 msgstr "Extra groß"
 
 msgid "Extrude"
-msgstr "Fördern"
+msgstr "Extrudieren"
 
 msgid "Extrusion +"
-msgstr "Fördern +"
+msgstr "Extrudieren +"
 
 msgid "Extrusion -"
-msgstr "Fördern -"
+msgstr "Extrudieren -"
 
 msgid "Failed, adjust position first"
 msgstr "Fehlgeschlagen, Position zuerst anpassen"
@@ -235,6 +241,9 @@ msgstr "Datei"
 
 msgid "File:"
 msgstr "Datei:"
+
+msgid "Filter"
+msgstr "Filter"
 
 msgid "Finding ADXL"
 msgstr "ADXL finden"
@@ -302,6 +311,9 @@ msgstr "Host"
 msgid "Hostname"
 msgstr "Hostname"
 
+msgid "ID"
+msgstr "ID"
+
 msgid "Icon Theme"
 msgstr "Icon Theme"
 
@@ -356,14 +368,26 @@ msgstr "Klipper startet neu"
 msgid "KlipperScreen will reboot"
 msgstr "KlipperScreen startet neu"
 
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
+"Filament_Laden/Filament_Entladen sind versteckt und sollten von extrudieren "
+"aus verwendet werden"
+
 msgid "Language"
 msgstr "Sprache"
 
 msgid "Large"
 msgstr "Groß"
 
+msgid "Last Used"
+msgstr "Zuletzt verwendet"
+
 msgid "Layer:"
 msgstr "Schicht:"
+
+msgid "Leds"
+msgstr ""
 
 msgid "Left:"
 msgstr "Restzeit:"
@@ -385,6 +409,9 @@ msgstr "Makros"
 
 msgid "Main Menu"
 msgstr "Hauptmenü"
+
+msgid "Material"
+msgstr "Material"
 
 msgid "Max"
 msgstr "Max"
@@ -445,6 +472,9 @@ msgstr "Niemals"
 
 msgid "New"
 msgstr "Neu"
+
+msgid "No elegible macros:"
+msgstr "Keine wählbaren Makros:"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -623,6 +653,9 @@ msgstr "Zeigen"
 msgid "Show Heater Power"
 msgstr "Heizleistung anzeigen"
 
+msgid "Show Scrollbars Buttons"
+msgstr "Zeige Scrollbar Schaltfläche"
+
 msgid "Shutdown"
 msgstr "Ausschalten"
 
@@ -749,6 +782,12 @@ msgid_plural "hours"
 msgstr[0] "Stunde"
 msgstr[1] "Stunden"
 
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "Makros, die 'rename_existing' verwenden, sind ausgeblendet"
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "Makros mit einem Namen, der mit '_' beginnt, sind ausgeblendet"
+
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "Minute"
@@ -765,6 +804,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Continue"
+#~ msgstr "Fortsetzen"
 
 #~ msgid "Fullscreen"
 #~ msgstr "Vollbild"

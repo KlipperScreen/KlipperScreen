@@ -109,7 +109,7 @@ class BasePanel(ScreenPanel):
         try:
             for child in self.control['temp_box'].get_children():
                 self.control['temp_box'].remove(child)
-            devices = (self._printer.get_tools() + self._printer.get_heaters())
+            devices = self._printer.get_temp_devices()
             if not show or not devices:
                 return
 
@@ -128,18 +128,16 @@ class BasePanel(ScreenPanel):
             nlimit = int(round(log(self._screen.width, 10) * 5 - 10.5))
 
             n = 0
-            if self._printer.get_tools():
-                self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-                if self.current_extruder and f"{self.current_extruder}_box" in self.labels:
-                    self.control['temp_box'].add(self.labels[f"{self.current_extruder}_box"])
-                    n += 1
-
-            if self._printer.has_heated_bed():
-                self.control['temp_box'].add(self.labels['heater_bed_box'])
+            self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+            if self.current_extruder and f"{self.current_extruder}_box" in self.labels:
+                self.control['temp_box'].add(self.labels[f"{self.current_extruder}_box"])
                 n += 1
 
-            # Options in the config have priority
             for device in devices:
+                if device == 'heater_bed':
+                    self.control['temp_box'].add(self.labels['heater_bed_box'])
+                    n += 1
+                    continue
                 # Users can fill the bar if they want
                 if n >= nlimit + 1:
                     break
@@ -186,8 +184,8 @@ class BasePanel(ScreenPanel):
             self.time_update = GLib.timeout_add_seconds(1, self.update_time)
 
     def add_content(self, panel):
-        show = self._printer.state not in ('disconnected', 'startup', 'shutdown', 'error')
-        self.show_shortcut(show and self._config.get_main_config().getboolean('side_macro_shortcut', True))
+        show = self._printer is not None and self._printer.state not in ('disconnected', 'startup', 'shutdown', 'error')
+        self.show_shortcut(show)
         self.show_heaters(show)
         self.set_control_sensitive(show, control='estop')
         for control in ('back', 'home'):
@@ -228,7 +226,7 @@ class BasePanel(ScreenPanel):
 
         if action != "notify_status_update" or self._screen.printer is None:
             return
-        devices = (self._printer.get_tools() + self._printer.get_heaters())
+        devices = (self._printer.get_temp_devices())
         if devices is not None:
             for device in devices:
                 temp = self._printer.get_dev_stat(device, "temperature")
@@ -260,6 +258,11 @@ class BasePanel(ScreenPanel):
         self.control[control].set_sensitive(value)
 
     def show_shortcut(self, show=True):
+        show = (
+            show
+            and self._config.get_main_config().getboolean('side_macro_shortcut', True)
+            and self._printer.get_printer_status_data()["printer"]["gcode_macros"]["count"] > 0
+        )
         self.control['shortcut'].set_visible(show)
         self.set_control_sensitive(self._screen._cur_panels[-1] != self.shorcut['panel'])
 
@@ -311,15 +314,14 @@ class BasePanel(ScreenPanel):
         self.labels['update_progress'].set_halign(Gtk.Align.START)
         self.labels['update_progress'].set_valign(Gtk.Align.START)
         self.labels['update_progress'].set_ellipsize(Pango.EllipsizeMode.END)
-        self.labels['update_scroll'] = self._gtk.ScrolledWindow()
+        self.labels['update_scroll'] = self._gtk.ScrolledWindow(steppers=False)
         self.labels['update_scroll'].set_property("overlay-scrolling", True)
         self.labels['update_scroll'].add(self.labels['update_progress'])
         self.labels['update_scroll'].connect("size-allocate", self._autoscroll)
-        dialog = self._gtk.Dialog(self._screen, button, self.labels['update_scroll'], self.finish_updating)
+        dialog = self._gtk.Dialog(_("Updating"), button, self.labels['update_scroll'], self.finish_updating)
         dialog.connect("delete-event", self.close_update_dialog)
         dialog.set_response_sensitive(Gtk.ResponseType.OK, False)
         dialog.get_widget_for_response(Gtk.ResponseType.OK).hide()
-        dialog.set_title(_("Updating"))
         self.update_dialog = dialog
         self._screen.updating = True
 

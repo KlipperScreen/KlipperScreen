@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2023-07-31 15:31\n"
+"Project-Id-Version: 2023-09-03 20:36\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 10:20-0300\n"
-"PO-Revision-Date: 2023-07-31 15:32+0300\n"
+"POT-Creation-Date: 2023-09-30 23:03-0300\n"
+"PO-Revision-Date: 2023-09-03 20:57+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
 "Language: uk\n"
@@ -47,6 +47,9 @@ msgstr "Прийняти"
 msgid "Add profile"
 msgstr "Додати профіль"
 
+msgid "All"
+msgstr "Всі"
+
 msgid "Apply"
 msgstr "Застосувати"
 
@@ -57,6 +60,9 @@ msgstr "Застосувати зміщення %s%.3f до кінцевика?"
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
 msgstr "Застосувати зміщення %s%.3f до зонда?"
+
+msgid "Archived"
+msgstr "Архівовано"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Ви впевнені, що бажаєте виключити об’єкт?"
@@ -84,6 +90,9 @@ msgstr "Автоматичне калібрування"
 
 msgid "Auto-close notifications"
 msgstr "Автоматичне закриття сповіщень"
+
+msgid "Auto-open Extrude On Pause"
+msgstr ""
 
 msgid "Auto-scroll"
 msgstr "Автоматична прокрутка"
@@ -157,9 +166,6 @@ msgstr "Підключення до %s"
 
 msgid "Console"
 msgstr "Консоль"
-
-msgid "Continue"
-msgstr "Продовжити"
 
 msgid "Cooldown"
 msgstr "Охолодження"
@@ -239,6 +245,9 @@ msgstr "Файл"
 msgid "File:"
 msgstr "Файл:"
 
+msgid "Filter"
+msgstr "Фільтр"
+
 msgid "Finding ADXL"
 msgstr "Знаходження ADXL"
 
@@ -307,6 +316,9 @@ msgstr "Хост"
 msgid "Hostname"
 msgstr "Ім'я хоста"
 
+msgid "ID"
+msgstr "ID"
+
 msgid "Icon Theme"
 msgstr "Тема оформлення"
 
@@ -363,14 +375,26 @@ msgstr "Klipper перезавантажиться"
 msgid "KlipperScreen will reboot"
 msgstr "KlipperScreen перезавантажиться"
 
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT приховані, і їх слід використовувати з меню "
+"Заміна пластику"
+
 msgid "Language"
 msgstr "Мова"
 
 msgid "Large"
 msgstr "Великий"
 
+msgid "Last Used"
+msgstr "Останнє Використання"
+
 msgid "Layer:"
 msgstr "Шар:"
+
+msgid "Leds"
+msgstr ""
 
 msgid "Left:"
 msgstr "Залишилось:"
@@ -392,6 +416,9 @@ msgstr "Макрос"
 
 msgid "Main Menu"
 msgstr "Головне Меню"
+
+msgid "Material"
+msgstr "Матеріал"
 
 msgid "Max"
 msgstr "Макс"
@@ -452,6 +479,9 @@ msgstr "Ніколи"
 
 msgid "New"
 msgstr "Новий"
+
+msgid "No elegible macros:"
+msgstr "Непридатний макрос:"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -636,6 +666,9 @@ msgstr "Показати"
 msgid "Show Heater Power"
 msgstr "Показати Потужність Нагрівача"
 
+msgid "Show Scrollbars Buttons"
+msgstr "Показати кнопку смуги прокрутки"
+
 msgid "Shutdown"
 msgstr "Вимкнути"
 
@@ -764,6 +797,12 @@ msgstr[0] "година"
 msgstr[1] "годин"
 msgstr[2] "години"
 
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "макроси, які використовують 'rename_existing', приховані"
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "макроси з назвою, що починається на '_', приховані"
+
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "хвилина"
@@ -781,6 +820,9 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм/с³"
+
+#~ msgid "Continue"
+#~ msgstr "Продовжити"
 
 #~ msgid "Fullscreen"
 #~ msgstr "Повноекранний режим"

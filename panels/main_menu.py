@@ -231,12 +231,13 @@ class Panel(MenuPanel):
 
         scroll = self._gtk.ScrolledWindow(steppers=False)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.get_style_context().add_class('heater-list')
         scroll.add(self.labels['devices'])
 
         self.left_panel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         self.left_panel.add(scroll)
 
-        for d in (self._printer.get_tools() + self._printer.get_heaters()):
+        for d in self._printer.get_temp_devices():
             self.add_device(d)
 
         return self.left_panel
@@ -258,14 +259,14 @@ class Panel(MenuPanel):
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
-        for x in (self._printer.get_tools() + self._printer.get_heaters()):
-            self.update_temp(
-                x,
-                self._printer.get_dev_stat(x, "temperature"),
-                self._printer.get_dev_stat(x, "target"),
-                self._printer.get_dev_stat(x, "power"),
-            )
-        return False
+        for x in self._printer.get_temp_devices():
+            if x in data:
+                self.update_temp(
+                    x,
+                    self._printer.get_dev_stat(x, "temperature"),
+                    self._printer.get_dev_stat(x, "target"),
+                    self._printer.get_dev_stat(x, "power"),
+                )
 
     def show_numpad(self, widget, device):
 
