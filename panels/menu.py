@@ -9,17 +9,18 @@ from ks_includes.screen_panel import ScreenPanel
 
 
 class Panel(ScreenPanel):
-    j2_data = None
 
     def __init__(self, screen, title, items=None):
         super().__init__(screen, title)
         self.items = items
+        self.j2_data = self._printer.get_printer_status_data()
         self.create_menu_items()
         self.grid = self._gtk.HomogeneousGrid()
         self.scroll = self._gtk.ScrolledWindow()
         self.scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
     def activate(self):
+        self.j2_data = self._printer.get_printer_status_data()
         self.add_content()
 
     def add_content(self):
@@ -60,36 +61,29 @@ class Panel(ScreenPanel):
 
             self.grid.attach(self.labels[key], col, row, width, height)
             i += 1
-        self.j2_data = None
         return self.grid
 
     def create_menu_items(self):
-        count = 0
-        for i in self.items:
-            if self.evaluate_enable(i[next(iter(i))]['enable']):
-                count += 1
+        count = sum(bool(self.evaluate_enable(i[next(iter(i))]['enable'])) for i in self.items)
         scale = 1.1 if 12 < count <= 16 else None  # hack to fit a 4th row
         for i in range(len(self.items)):
             key = list(self.items[i])[0]
             item = self.items[i][key]
 
-            printer = self._printer.get_printer_status_data()
-
-            name = self._screen.env.from_string(item['name']).render(printer)
-            icon = self._screen.env.from_string(item['icon']).render(printer) if item['icon'] else None
-            style = self._screen.env.from_string(item['style']).render(printer) if item['style'] else None
+            name = self._screen.env.from_string(item['name']).render(self.j2_data)
+            icon = self._screen.env.from_string(item['icon']).render(self.j2_data) if item['icon'] else None
+            style = self._screen.env.from_string(item['style']).render(self.j2_data) if item['style'] else None
 
             b = self._gtk.Button(icon, name, style or f"color{i % 4 + 1}", scale=scale)
 
             if item['panel']:
-                panel = self._screen.env.from_string(item['panel']).render(printer)
                 b.connect("clicked", self.menu_item_clicked, item)
             elif item['method']:
                 params = {}
 
                 if item['params'] is not False:
                     try:
-                        p = self._screen.env.from_string(item['params']).render(printer)
+                        p = self._screen.env.from_string(item['params']).render(self.j2_data)
                         params = json.loads(p)
                     except Exception as e:
                         logging.exception(f"Unable to parse parameters for [{name}]:\n{e}")
@@ -107,7 +101,6 @@ class Panel(ScreenPanel):
         if enable == "{{ moonraker_connected }}":
             logging.info(f"moonraker connected {self._screen._ws.connected}")
             return self._screen._ws.connected
-        self.j2_data = self._printer.get_printer_status_data()
         try:
             j2_temp = Template(enable, autoescape=True)
             result = j2_temp.render(self.j2_data)
