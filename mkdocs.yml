@@ -22,6 +22,7 @@ nav:
       - Network: Troubleshooting/Network.md
       - Physical install: Troubleshooting/Physical_Install.md
       - Wrong Framebuffer: Troubleshooting/Framebuffer.md
+      - Screen Rotation: Troubleshooting/Rotation.md
       - Touch: Troubleshooting/Touch_issues.md
       - Virtual Console Error: Troubleshooting/VC_ERROR.md
       - FBturbo: Troubleshooting/FBturbo.md
