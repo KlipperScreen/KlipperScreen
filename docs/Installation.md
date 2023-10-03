@@ -88,7 +88,7 @@ Some basic configuration needs to be applied for correct functionality.
 
 ```ini title="printer.cfg"
 [virtual_sdcard]
-path: ~/gcode_files
+path: ~/printer_data/gcodes
 [display_status]
 [pause_resume]
 ```
