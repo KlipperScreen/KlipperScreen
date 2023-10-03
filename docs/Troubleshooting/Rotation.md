@@ -16,7 +16,7 @@ here are some examples:
     ```
 
     Paste this section modifying the options to suit your needs:
-    ```
+    ```kconfig
     Section "Monitor"
         Identifier "DPI-1"
         # This identifier would be the same as the name of the connector printed by xrandr.
