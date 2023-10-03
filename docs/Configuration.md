@@ -168,7 +168,7 @@ enable: {{ printer.power_devices.count > 0 }}
 Available panels are listed here: [docs/panels.md](Panels.md)
 
 Certain variables are available for conditional testing of the enable statement:
-```ini
+```yaml
 printer.extruders.count # Number of extruders
 printer.temperature_devices.count # Number of temperature related devices that are not extruders
 printer.fans.count # Number of fans
@@ -195,7 +195,7 @@ printer.pause_resume # Pause resume section of Klipper
 
 
 A sample configuration of a main menu would be as follows:
-```ini
+```yaml+jinja
 [menu __main homing]
 name: Homing
 icon: home
