@@ -11,7 +11,7 @@ dpkg -s network-manager
 
 if the response is the following:
 
-```bash
+```sh
 dpkg-query: the package 'network-manager' is not installed
 ```
 
@@ -42,7 +42,7 @@ sudo nano /etc/NetworkManager/conf.d/any-user.conf
 
 in the editor paste this:
 
-```conf
+```ini
 [main]
 auth-polkit=false
 ```

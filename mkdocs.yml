@@ -41,6 +41,7 @@ theme:
   name: material
   language: en
   features:
+    - content.code.copy
     - content.code.annotate
     - content.tooltips
     - navigation.expand
