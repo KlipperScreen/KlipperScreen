@@ -1,5 +1,13 @@
 # Macros
 
+## Hidden by the interface
+
+All gcode_macros with the attribute `rename_existing` are hidden , because these are default Klipper Gcodes
+and these should be implemented in KlipperScreen itself with buttons already.
+[This is the same behaiviour of other UIs](https://docs.mainsail.xyz/overview/features/hide-macros-outputs-or-fans#macros-with-rename_existing)
+
+[LOAD_FILAMENT and UNLOAD_FILAMENT are also hidden](#load_filament-unload_filament)
+
 ## Hide Macros
 
 Macros can be completely hidden in the interface by prefixing the name with an underscore.
@@ -20,7 +28,7 @@ gcode:
 
 ### LOAD_FILAMENT / UNLOAD_FILAMENT
 
-This macros are used in the Extrude panel `Load` and `Unload` buttons.
+This macros are used in the Extrude panel `Load` and `Unload` buttons. and they will be hidden from the macros panel.
 
 The selected speed in the panel is transferred as a parameter.
 
