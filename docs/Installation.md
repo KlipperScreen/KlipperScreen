@@ -80,3 +80,19 @@ managed_services: KlipperScreen
 ```
 !!! tip
     If you see warnings in other UIs ignore them until KlipperScreen finishes installing, and Moonraker is restarted.
+
+
+## Printer Configuration
+
+Some basic configuration needs to be applied for correct functionality.
+
+```ini title="printer.cfg"
+[virtual_sdcard]
+path: ~/gcode_files
+[display_status]
+[pause_resume]
+```
+
+## Macros
+
+You may need some macros for the printer to function as you expected, [read more in the macros page](macros.md)
