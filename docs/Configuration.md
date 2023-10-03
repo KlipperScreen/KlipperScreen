@@ -174,6 +174,7 @@ printer.temperature_devices.count # Number of temperature related devices that a
 printer.fans.count # Number of fans
 printer.power_devices.count # Number of power devices configured in Moonraker
 printer.gcode_macros.count # Number of gcode macros
+printer.gcode_macros.list # List of names of the gcode macros
 printer.output_pins.count # Number of fans
 
 printer.bltouch # Available if bltouch section defined in config
@@ -204,16 +205,19 @@ name: Preheat
 icon: heat-up
 panel: preheat
 
-[menu __main print]
-name: Print
-icon: print
-panel: print
-
 [menu __main homing homeall]
 name: Home All
 icon: home
 method: printer.gcode.script
 params: {"script":"G28"}
+
+[menu __main homing mymacro]
+name: My Macro
+icon: home
+method: printer.gcode.script
+params: {"script":"MY_MACRO"}
+enable: {{ 'MY_MACRO' in printer.gcode_macros.list }}
+
 ```
 
 ## KlipperScreen behaviour towards configuration
