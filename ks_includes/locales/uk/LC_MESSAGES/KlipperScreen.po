@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2023-09-03 20:36\n"
+"Project-Id-Version: 2023-10-03 19:36\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-30 23:03-0300\n"
-"PO-Revision-Date: 2023-09-03 20:57+0300\n"
+"PO-Revision-Date: 2023-10-03 19:52+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
 "Language: uk\n"
@@ -92,7 +92,7 @@ msgid "Auto-close notifications"
 msgstr "Автоматичне закриття сповіщень"
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "Автоматично відкриває меню Екструзії під час Паузи"
 
 msgid "Auto-scroll"
 msgstr "Автоматична прокрутка"
@@ -394,7 +394,7 @@ msgid "Layer:"
 msgstr "Шар:"
 
 msgid "Leds"
-msgstr ""
+msgstr "Освітлення"
 
 msgid "Left:"
 msgstr "Залишилось:"
