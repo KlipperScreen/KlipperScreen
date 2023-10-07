@@ -233,6 +233,7 @@ class KlippyGtk:
         content_area.set_margin_end(15)
         content_area.set_margin_top(15)
         content_area.set_margin_bottom(15)
+        content.set_valign(Gtk.Align.CENTER)
         content_area.add(content)
 
         dialog.show_all()

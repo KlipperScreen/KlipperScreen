@@ -310,7 +310,8 @@ class Panel(ScreenPanel):
         grid.set_valign(Gtk.Align.CENTER)
         grid.add(label)
 
-        pixbuf = self.get_file_image(filename, self._screen.width * .9, self._screen.height * .5)
+        height = self._screen.height * .9 - self._gtk.font_size * 10
+        pixbuf = self.get_file_image(filename, self._screen.width * .9, height)
         if pixbuf is not None:
             image = Gtk.Image.new_from_pixbuf(pixbuf)
             grid.attach_next_to(image, label, Gtk.PositionType.BOTTOM, 1, 1)
