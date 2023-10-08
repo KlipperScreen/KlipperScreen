@@ -147,10 +147,6 @@ class Panel(ScreenPanel):
         if self.ks_printer_cfg is not None:
             x_position = self.ks_printer_cfg.getfloat("calibrate_x_position", None)
             y_position = self.ks_printer_cfg.getfloat("calibrate_y_position", None)
-        elif 'z_calibrate_position' in self._config.get_config():
-            # OLD global way, this should be deprecated
-            x_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_x_position", None)
-            y_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_y_position", None)
 
         if self.probe:
             if "sample_retract_dist" in self.probe:

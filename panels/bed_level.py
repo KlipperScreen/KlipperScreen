@@ -80,9 +80,7 @@ class Panel(ScreenPanel):
 
             self.screws = new_screws
             logging.info(f"screws with offset: {self.screws}")
-        elif "bed_screws" in self._printer.get_config_section_list():
-            self.screws = self._get_screws("bed_screws")
-            logging.info(f"bed_screws: {self.screws}")
+
         nscrews = len(self.screws)
         # KS config
         valid_positions = True

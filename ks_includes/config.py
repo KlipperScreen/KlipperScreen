@@ -173,7 +173,7 @@ class KlipperScreenConfig:
                 strs = (
                     'moonraker_api_key', 'moonraker_host', 'titlebar_name_type',
                     'screw_positions', 'power_devices', 'titlebar_items', 'z_babystep_values',
-                    'extrude_distances', "extrude_speeds", "camera_url", "spoolman",
+                    'extrude_distances', "extrude_speeds",
                 )
                 numbers = (
                     'moonraker_port', 'move_speed_xy', 'move_speed_z',
@@ -184,17 +184,10 @@ class KlipperScreenConfig:
                 numbers = [f'{option}' for option in config[section] if option != 'gcode']
             elif section.startswith('menu '):
                 strs = ('name', 'icon', 'panel', 'method', 'params', 'enable', 'confirm', 'style')
-            elif section == 'bed_screws':
-                # This section may be deprecated in favor of moving this options under the printer section
-                numbers = ('rotation', '')
-                strs = ('screw_positions', '')
             elif section.startswith('graph')\
                     or section.startswith('displayed_macros')\
                     or section.startswith('spoolman'):
                 bools = [f'{option}' for option in config[section]]
-            elif section.startswith('z_calibrate_position'):
-                # This section may be deprecated in favor of moving this options under the printer section
-                numbers = ('calibrate_x_position', 'calibrate_y_position')
             else:
                 self.errors.append(f'Section [{section}] not recognized')
 
@@ -202,8 +195,11 @@ class KlipperScreenConfig:
                 if key not in bools and key not in strs and key not in numbers:
                     msg = f'Option "{key}" not recognized for section "[{section}]"'
                     if key == "camera_url":
-                        msg = "camera_url has been deprecated in favor of moonraker cameras"
-                        msg += "\n\n https://moonraker.readthedocs.io/en/latest/configuration/#webcam"
+                        msg = (
+                            "camera_url has been deprecated in favor of moonraker cameras\n\n"
+                            + "https://moonraker.readthedocs.io/en/latest/configuration/#webcam\n\n"
+                            + "remove camera_url from KlipperScreen config file"
+                        )
                     if remove:
                         # This should only be called for the auto-generated section
                         self.config.remove_option(section, key)
