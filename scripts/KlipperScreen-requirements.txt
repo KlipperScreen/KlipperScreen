@@ -10,11 +10,11 @@ python-mpv==1.0.4;python_version>="3.10"
 
 backports.zoneinfo;python_version<"3.9"
 
-PyGObject==3.46.0;python_version>="3.8"
-pycairo==1.25.0;python_version>="3.8"
-websocket-client==1.6.3;python_version>="3.8"
-
 # Python 3.7 (For Buster until June 2024)
 PyGObject==3.44.1; python_version == '3.7'
 pycairo==1.23.0; python_version == '3.7'
 websocket-client==1.6.1; python_version == '3.7'
+
+PyGObject==3.46.0;python_version>="3.8"
+pycairo==1.25.0;python_version>="3.8"
+websocket-client==1.6.4;python_version>="3.8"
