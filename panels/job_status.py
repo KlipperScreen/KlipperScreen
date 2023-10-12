@@ -765,7 +765,7 @@ class Panel(ScreenPanel):
             width = self._screen.width * 0.9
             height = self._screen.height / 4
         else:
-            width = self._screen.width / 3
+            width = self._screen.width * .25
             height = self._gtk.content_height * 0.47
         pixbuf = self.get_file_image(self.filename, width, height)
         logging.debug(self.filename)
