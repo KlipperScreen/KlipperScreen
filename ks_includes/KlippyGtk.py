@@ -211,11 +211,13 @@ class KlippyGtk:
 
     def Dialog(self, title, buttons, content, callback=None, *args):
         dialog = Gtk.Dialog(title=title)
-        dialog.set_default_size(self.width, self.height)
         dialog.set_resizable(False)
         dialog.set_transient_for(self.screen)
         dialog.set_modal(True)
-        if not self.screen.windowed:
+        if self.screen.windowed:
+            dialog.set_default_size(self.width, self.height)
+        else:
+            logging.info("Dialog fullscreen")
             dialog.fullscreen()
 
         for button in buttons:
@@ -277,9 +279,8 @@ class KlippyGtk:
         return b
 
     def ScrolledWindow(self, steppers=True):
-        scroll = Gtk.ScrolledWindow()
+        scroll = Gtk.ScrolledWindow(vexpand=True)
         scroll.set_property("overlay-scrolling", False)
-        scroll.set_vexpand(True)
         scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK |
                           Gdk.EventMask.TOUCH_MASK |
                           Gdk.EventMask.BUTTON_RELEASE_MASK)

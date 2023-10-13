@@ -40,14 +40,14 @@ class Panel(ScreenPanel):
             if self._screen.vertical_mode:
                 grid.attach(self.labels['map'], 0, 2, 2, 1)
                 grid.attach(scroll, 0, 3, 2, 1)
-                scroll.set_size_request(self._gtk.content_width, -1)
+                scroll.set_size_request(self._gtk.content_width - 30, -1)
             else:
                 grid.attach(self.labels['map'], 0, 2, 1, 1)
                 grid.attach(scroll, 1, 2, 1, 1)
-                scroll.set_size_request((self._screen.width * .9) // 2, -1)
+                scroll.set_size_request((self._screen.width - 30) // 2, -1)
         else:
             grid.attach(scroll, 0, 2, 2, 1)
-            scroll.set_size_request(self._gtk.content_width, -1)
+            scroll.set_size_request(self._gtk.content_width - 30, -1)
 
         self.content.add(grid)
         self.content.show_all()

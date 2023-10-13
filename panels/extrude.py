@@ -117,7 +117,7 @@ class Panel(ScreenPanel):
 
         filament_sensors = self._printer.get_filament_sensors()
         sensors = Gtk.Grid()
-        sensors.set_size_request(self._gtk.content_width, -1)
+        sensors.set_size_request(self._gtk.content_width - 30, -1)
         if len(filament_sensors) > 0:
             sensors.set_column_spacing(5)
             sensors.set_row_spacing(5)

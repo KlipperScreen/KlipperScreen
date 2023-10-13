@@ -36,7 +36,7 @@ class Panel(ScreenPanel):
         self.labels['actions'].set_vexpand(False)
         self.labels['actions'].set_halign(Gtk.Align.CENTER)
         self.labels['actions'].set_homogeneous(True)
-        self.labels['actions'].set_size_request(self._gtk.content_width, -1)
+        self.labels['actions'].set_size_request(self._gtk.content_width - 30, -1)
 
         scroll = self._gtk.ScrolledWindow()
         scroll.set_hexpand(True)

@@ -59,9 +59,7 @@ class Panel(ScreenPanel):
             items = sorted(list(vi))
             i = 0
             for prog in items:
-                self.labels[prog] = Gtk.Label()
-                self.labels[prog].set_hexpand(True)
-                self.labels[prog].set_halign(Gtk.Align.START)
+                self.labels[prog] = Gtk.Label(hexpand=True, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END)
 
                 self.labels[f"{prog}_status"] = self._gtk.Button()
                 self.labels[f"{prog}_status"].set_hexpand(False)
@@ -121,6 +119,7 @@ class Panel(ScreenPanel):
         info = self.update_status['version_info'][program] if program in self.update_status['version_info'] else {}
 
         scroll = self._gtk.ScrolledWindow(steppers=False)
+        scroll.set_size_request(self._gtk.width - 30, self._gtk.height * .6)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)

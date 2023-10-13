@@ -365,29 +365,29 @@ class KlipperScreen(Gtk.Window):
         title = Gtk.Label()
         title.set_markup(f"<b>{err}</b>\n")
         title.set_line_wrap(True)
+        title.set_line_wrap_mode(Pango.WrapMode.CHAR)
         title.set_halign(Gtk.Align.START)
         title.set_hexpand(True)
         version = Gtk.Label(label=f"{self.version}")
         version.set_halign(Gtk.Align.END)
 
-        message = Gtk.Label(label=f"{e}")
+        help_msg = _("Provide KlipperScreen.log when asking for help")
+        message = Gtk.Label(label=f"{help_msg}\n\n{e}")
         message.set_line_wrap(True)
         scroll = self.gtk.ScrolledWindow(steppers=False)
         scroll.set_vexpand(True)
+        if self.vertical_mode:
+            scroll.set_size_request(self.gtk.width - 30, self.gtk.height * .6)
+        else:
+            scroll.set_size_request(self.gtk.width - 30, self.gtk.height * .45)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(message)
-
-        help_msg = _("Provide KlipperScreen.log when asking for help.\n")
-        help_msg += _("KlipperScreen will reboot")
-        help_notice = Gtk.Label(label=help_msg)
-        help_notice.set_line_wrap(True)
 
         grid = Gtk.Grid()
         grid.attach(title, 0, 0, 1, 1)
         grid.attach(version, 1, 0, 1, 1)
         grid.attach(Gtk.Separator(), 0, 1, 2, 1)
         grid.attach(scroll, 0, 2, 2, 1)
-        grid.attach(help_notice, 0, 3, 2, 1)
 
         buttons = [
             {"name": _("Go Back"), "response": Gtk.ResponseType.CANCEL}
