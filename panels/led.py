@@ -3,7 +3,7 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib
-from math import pi
+from math import pi, floor
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
@@ -144,7 +144,7 @@ class Panel(ScreenPanel):
     def on_draw(self, da, ctx, color=None):
         if color is None:
             color = self.color_data
-        ctx.set_source_rgb(color[0], color[1], color[2])
+        ctx.set_source_rgb(*self.rgbw_to_rgb(color))
         # Set the size of the rectangle
         width = height = da.get_allocated_width() * .9
         x = da.get_allocated_width() * .05
@@ -160,7 +160,7 @@ class Panel(ScreenPanel):
     def update_preview(self, args):
         self.update_color_data()
         self.preview.queue_draw()
-        self.preview_label.set_label(self.rgbw_to_hex(self.color_data))
+        self.preview_label.set_label(self.rgb_to_hex(self.rgbw_to_rgb(self.color_data)))
 
     def process_update(self, action, data):
         if action != 'notify_status_update':
@@ -205,11 +205,19 @@ class Panel(ScreenPanel):
         return parsed
 
     @staticmethod
-    def rgbw_to_hex(color):
+    def rgb_to_hex(color):
         hex_color = '#'
-        for value in color[:3]:
+        for value in color:
             int_value = round(value * 255)
             hex_color += hex(int_value)[2:].zfill(2)
-        alpha = round(color[3] * 255)
-        hex_color += hex(alpha)[2:].zfill(2)
         return hex_color.upper()
+
+    @staticmethod
+    def rgbw_to_rgb(color):
+        # The idea here is to use the white channel as a saturation control
+        # The white channel 'washes' the color
+        return (
+            [color[i] + color[3] for i in range(3)]  # Special case of only white channel
+            if color[0] == 0 and color[1] == 0 and color[2] == 0
+            else [color[i] + (1 - color[i]) * color[3] / 3 for i in range(3)]
+        )
