@@ -174,7 +174,7 @@ class Panel(ScreenPanel):
 
     def update_color_data(self):
         for idx in self.scales:
-            self.color_data[idx] = round(self.scales[idx].get_value() / 255, 4)
+            self.color_data[idx] = self.scales[idx].get_value() / 255
 
     def apply_preset(self, widget, color_data):
         self.update_scales(color_data)
@@ -199,7 +199,7 @@ class Panel(ScreenPanel):
                 if color not in preset or preset[color] is None:
                     parsed[name].append(0)
                     continue
-                parsed[name].append(round(preset[color] / 255, 4))
+                parsed[name].append(preset[color] / 255)
         return parsed
 
     @staticmethod
