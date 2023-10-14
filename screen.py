@@ -1029,7 +1029,6 @@ class KlipperScreen(Gtk.Window):
         width, height = self.get_size()
         if width != self.width or height != self.height:
             logging.info(f"Size changed: {self.width}x{self.height}")
-            self.show_error_modal(f"SIZE ISSUE {self.width}x{self.height}")
         self.width, self.height = width, height
         new_ratio = self.width / self.height
         new_mode = new_ratio < 1.0
