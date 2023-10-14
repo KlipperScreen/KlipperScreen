@@ -169,6 +169,10 @@ class Panel(ScreenPanel):
         sortable.set_sort_func(1, self.spool_compare_date)
 
         self.scroll = self._gtk.ScrolledWindow()
+        if self._screen.vertical_mode:
+            self.scroll.set_property("overlay-scrolling", True)
+        else:
+            self.scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
         sbox = Gtk.Box(spacing=0)
         sbox.set_vexpand(False)
