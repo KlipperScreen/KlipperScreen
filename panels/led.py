@@ -20,10 +20,7 @@ class Panel(ScreenPanel):
         self.preset_list = self._gtk.HomogeneousGrid()
         self.color_data = [0, 0, 0, 0]
         self.color_order = 'RGBW'
-        self.presets = {
-            "on": [1.0, 1.0, 1.0, 1.0],
-            "off": [0.0, 0.0, 0.0, 0.0]
-        }
+        self.presets = {"off": [0.0, 0.0, 0.0, 0.0]}
         self.scales = {}
         self.buttons = []
         self.leds = self._printer.get_leds()
@@ -81,8 +78,13 @@ class Panel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
         self.color_order = self._printer.get_led_color_order(led)
         if self.color_order is None:
+            logging.error("Error: Color order is None")
             self.back()
             return
+        on = []
+        for i in range(4):
+            on.append(1 if self.color_available(i) else 0)
+        self.presets["on"] = on
         scale_grid = self._gtk.HomogeneousGrid()
         for idx, col_value in enumerate(self.color_data):
             if not self.color_available(idx):
@@ -170,7 +172,7 @@ class Panel(ScreenPanel):
     def update_scales(self, color_data):
         for idx in self.scales:
             self.scales[idx].set_value(int(color_data[idx] * 255))
-            self.color_data[idx] = color_data[idx]
+        self.color_data = color_data
 
     def update_color_data(self):
         for idx in self.scales:
