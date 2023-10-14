@@ -2,13 +2,10 @@
 
 If the screen is connected over USB, issues with the cable may cause similar symptoms. For that, please see [this guide](Physical_Install.md#cable-issues).
 
-## Touch not working
+## Touch not working on RaspberryOS and derivatives
 
-Some DSI screens have issues where touch doesn't work with Debian Bullseye, or even in Debian Buster after an update. There is currently (September 2023) still no fix in upstream Debian.
-
-The current workaround/temporary fix involves changing the kernel driver module used for these displays. 
-
-### Fix
+Some DSI screens have issues where touch doesn't work with the default configuration.
+The current workaround/temporary fix involves changing the kernel driver module used for these displays.
 
 Open `/boot/config.txt` for editing using `sudo nano /boot/config.txt` and change
 
