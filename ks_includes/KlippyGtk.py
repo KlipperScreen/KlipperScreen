@@ -214,10 +214,8 @@ class KlippyGtk:
         dialog.set_resizable(False)
         dialog.set_transient_for(self.screen)
         dialog.set_modal(True)
-        if self.screen.windowed:
-            dialog.set_default_size(self.width, self.height)
-        else:
-            logging.info("Dialog fullscreen")
+        dialog.set_default_size(self.width, self.height)
+        if not self.screen.windowed:
             dialog.fullscreen()
 
         for button in buttons:
