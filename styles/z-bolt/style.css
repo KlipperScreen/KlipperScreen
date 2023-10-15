@@ -1,197 +1,195 @@
+@define-color color1 #ED6500;
+@define-color color2 #B10080;
+@define-color color3 #009384;
+@define-color color4 #A7E100;
+@define-color bg #13181C;
+@define-color active #324A5E;
+@define-color error #981E1F;
+@define-color text white;
+@define-color text-inv black;
+@define-color lines #cccccc;
+@define-color switch-scale-bg #3584e4;
+
 * {
-    color: white;
+    color: @text;
 }
 
 list row,
 treeview.view,
 window {
-    background-color: #13181C;
+    background-color: @bg;
 }
 
 button {
-    background-color: #13181C;
+    background-color: @bg;
 }
 
 button:active {
-    background-color: #304C62;
+    background-color: @active;
 }
 
 .button_active {
-    background-color: #20303D;
+    background-color: @active;
     border-radius: 1em;
 }
 
 button.color1 {
-    border-bottom-color: #ED6500;
+    border-bottom-color: @color1;
 }
 
 button.color2 {
-    border-bottom-color: #B10080;
+    border-bottom-color: @color2;
 }
 
 button.color3 {
-    border-bottom-color: #009384;
+    border-bottom-color: @color3;
 }
 
 button.color4 {
-    border-bottom-color: #A7E100;
+    border-bottom-color: @color4;
 }
 
 button.active {
-    background-color: #20303D;
+    background-color: @active;
 }
 
 button.update {
-    background: #009384;
-    border-color: #009384;
+    background: @color3;
+    border-color: @color3;
 }
 
 button.invalid {
-    background: #e61e1e;
-    border-color: #e61e1e;
+    background: @error;
+    border-color: @error;
 }
 
 combobox box button {
-    border-color: #cccccc;
+    border-color: @lines;
 }
 
 treeview.view check,
 switch {
-    background-color: #20292F;
+    background-color: @active;
 }
 treeview.view check:checked,
 switch:checked {
-    background-color: #3584e4;
+    background-color: @switch-scale-bg;
 }
 
 entry {
-    background-color: #20292F;
-    border-color: #13181C;
+    background-color: @active;
+    border-color: @bg;
 }
 
 label {
-    color: white;
+    color: @text;
 }
 
 menu {
-    background-color: #13181C;
-    border-color: #cccccc;
+    background-color: @bg;
+    border-color: @lines;
 }
 
 menuitem {
-    background-color: #13181C;
-    border-color: #cccccc;
+    background-color: @bg;
+    border-color: @lines;
 }
 
 trough {
-    background-color: #404E57;
-    color: white;
-    border-color: black;
+    background-color: @active;
+    color: @text;
+    border-color: @text-inv;
 }
 
-trough highlight, trough progress {
-    background-color: #3584e4;
-    color: white;
-    border-color: black;
+trough highlight,
+trough progress {
+    background-color: @switch-scale-bg;
+    color: @text;
+    border-color: @text-inv;
 }
 
 scale-mark {
-    color: white;
+    color: @text;
 }
 
-scrollbar, scrollbar button, scrollbar trough {
-    background-color: #13181C;
+scrollbar,
+scrollbar button,
+scrollbar trough {
+    background-color: @bg;
 }
 
 scrollbar slider {
-    background-color: #404E57;
+    background-color: @active;
 }
 
 textview .time {
-    color: grey;
+    color: @lines;
 }
 
 .popup {
-    background-color: black;
+    background-color: @text-inv;
 }
 
 .dialog {
-    border: #13181C;
-    background-color: #13181C;
+    border: @bg;
+    background-color: @bg;
 }
 
 .dialog button {
-    border-bottom-color: #009384;
+    border-bottom-color: @color3;
 }
 
 .dialog button:nth-child(1) {
-    border-bottom-color: #A7E100;
+    border-bottom-color: @color4;
 }
 
 .dialog button:nth-child(2) {
-    border-bottom-color: #cc1e1e;
+    border-bottom-color: @error;
 }
 
 .distbutton_active {
-    background-color: #20303D;
+    background-color: @active;
+    border-color: @color1;
+    box-shadow: 0 0 0 .2em @text inset;
 }
 
-.distbutton_top {
-    border-color: white;
-}
-
-.distbutton {
-    border-color: white;
-    border-left-color: #ccc;
-}
-
+.distbutton_top,
+.distbutton,
 .distbutton_bottom {
-    border-color: white;
-    border-left-color: #ccc;
+    border-color: @lines;
 }
 
 .fan_slider {
-    color: white;
+    color: @text;
 }
 
 .message_popup {
-    border-bottom-color: white;
+    border-bottom-color: @lines;
 }
 
-.numpad_tleft, .numpad_top, .numpad_tright, .numpad_left, .numpad_button, .numpad_right, .numpad_bleft, .numpad_bottom, .numpad_bright {
-    border-color: white;
-}
-
-.printing-status {
-    color: #f0f0f0;
-}
-
-.printing-progress-text {
-    color: white;
-}
-
-.printing-status-label {
-    color: #ccc;
+.numpad_key {
+    border-color: @lines;
 }
 
 .tempbutton_top {
-    border-color: white;
+    border-color: @lines;
 }
 
-.tempbutton, .tempbutton_bottom {
-    border-color: white;
-    border-top-color: #ccc;
+.tempbutton,
+.tempbutton_bottom {
+    border-color: @lines;
+    border-top-color: @lines;
 }
 
 .message {
-    border-color: #981E1F;
-    color: white;
-    background-color: #981E1F;
+    border-color: @error;
+    color: @text;
+    background-color: @error;
 }
 
 .message button {
-    background-color: white;
-    color: black;
+    background-color: @text;
+    color: @text-inv;
 }
 
 .warning {
@@ -203,5 +201,5 @@ textview .time {
 }
 
 .keyboard_pad {
-    background-color: #13181C;
+    background-color: @bg;
 }

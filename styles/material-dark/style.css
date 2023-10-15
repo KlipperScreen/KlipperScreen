@@ -1,226 +1,245 @@
 /* Material-dark theme created by Alfredo Monclus 2021 */
+@define-color text #e2e2e2;
+@define-color bg #121212;
+@define-color buttons-bg #090909;
+@define-color color1 #d46900;
+@define-color color2 #ed3c63;
+@define-color color3 #849900;
+@define-color color4 #007db4;
+
+@define-color echo #006412;
+@define-color warning #EF6C00;
+@define-color error #B71C1C;
+
+@define-color active #d46900;
+@define-color active-dark #282828;
+@define-color lines #a2a2a2;
+@define-color slider #d81549;
+@define-color popup #006064;
 
 * {
-    color: #e2e2e2;
+    color: @text;
 }
 
 list row,
 treeview.view,
+button,
 window {
-    background-color: #121212;
-}
-
-button {
-    background-color: #121212;
-}
-
-button:active {
-    background-color: #d8a415;
-}
-
-.button_active {
-    background-color: #282828;
-    border-width: .25em;
-    border-radius: 1em;
+    background-color: @bg;
 }
 
 button.color1 {
-    background-color: #090909;
-    border-color: #d46900;
+    background-color: @buttons-bg;
+    border-color: @color1;
     border-radius: 1em;
 }
 
 button.color2 {
-    background-color: #090909;
-    border-color: #ed3c63;
+    background-color: @buttons-bg;
+    border-color: @color2;
     border-radius: 1em;
 }
 
 button.color3 {
-    background-color: #090909;
-    border-color: #849900;
+    background-color: @buttons-bg;
+    border-color: @color3;
     border-radius: 1em;
 }
 
 button.color4 {
-    background-color: #090909;
-    border-color: #007db4;
+    background-color: @buttons-bg;
+    border-color: @color4;
     border-radius: 1em;
 }
 
-button.color1:active, button.color2:active, button.color3:active, button.color4:active, button.update:active, button.invalid:active, .dialog button:active {
+.button_active {
+    background-color: @active-dark;
+    border-width: .25em;
+    border-radius: 1em;
+}
+
+button.color1:active,
+button.color2:active,
+button.color3:active,
+button.color4:active,
+button.update:active,
+button.invalid:active,
+.dialog button:active {
     border-style: none;
 }
 
-button.active {
-    background-color: #ee6002;
+button.update,
+button.invalid {
+    background-color: @buttons-bg;
+    border: 0;
+    border-bottom: .3em solid;
+    border-radius: .75em;
 }
 
 button.update {
-    background-color: #090909;
-    border: 0;
-    border-bottom: .3em solid;
-    border-bottom-color: #849900;
-    border-radius: .75em;
+    border-bottom-color: @echo;
 }
 
 button.invalid {
-    background-color: #090909;
-    border: 0;
-    border-bottom: .3em solid;
-    border-bottom-color: #B71C1C;
-    border-radius: .75em;
+    border-bottom-color: @error;
 }
 
 combobox box button {
-    background-color: #1f1f1f;
-    border-color: #121212;
+    background-color: @active-dark;
+    border-color: @bg;
 }
 
 treeview.view check,
 switch {
-    background-color: #1f1f1f;
+    background-color: @active-dark;
 }
 
 treeview.view check:checked,
 switch:checked {
-    background-color: #849900;
+    background-color: @echo;
 }
 
 entry {
-    background-color: #1f1f1f;
-    border-color: #1f1f1f;
+    background-color: @active-dark;
+    border-color: @active-dark;
 }
 
 label {
-    color: #e2e2e2;
+    color: @text;
 }
 
 menu {
-    background-color: #121212;
-    border-color: #a2a2a2;
+    background-color: @bg;
+    border-color: @lines;
 }
 
 menuitem {
-    background-color: #121212;
-    border-color: #a2a2a2;
+    background-color: @bg;
+    border-color: @lines;
 }
 
 trough {
-    background-color: #1f1f1f;
-    color: #e2e2e2;
+    background-color: @active-dark;
+    color: @text;
 }
 
-trough highlight, trough progress {
-    background-color: #d81549;
-    color: #e2e2e2;
-    border-color: #121212;
+trough highlight,
+trough progress {
+    background-color: @slider;
+    color: @text;
+    border-color: @bg;
 }
 
 scale-mark {
-    color: #e2e2e2;
+    color: @text;
 }
 
-scrollbar, scrollbar button, scrollbar trough {
-    background-color: #121212;
+scrollbar,
+scrollbar button,
+scrollbar trough {
+    background-color: @bg;
 }
 
 scrollbar slider {
-    background-color: #2f2f2f;
+    background-color: @active-dark;
 }
 
 textview .time {
-    color: #9E9E9E;
+    color: @lines;
 }
 
 .popup {
-    background-color: #006064;
+    background-color: @popup;
 }
 
 .dialog {
-    border: #121212;
-    background-color: #121212;
+    border: @bg;
+    background-color: @bg;
 }
 
 .dialog button {
-    background-color: #090909;
-    border-bottom-color: #1f1f1f;
+    background-color: @buttons-bg;
+    border-bottom-color: @active-dark;
     border-radius: .75em;
 }
 
 .dialog button:nth-child(1) {
-    border-bottom-color: #849900;
+    border-bottom-color: @color3;
 }
 
 .dialog button:nth-child(2) {
-    border-bottom-color: #B71C1C;
+    border-bottom-color: @error;
 }
 
-.tempbutton_top, .tempbutton, .tempbutton_bottom, .distbutton_top, .distbutton, .distbutton_bottom  {
-    border-color: #121212;
-    background-color: #090909;
+.tempbutton_top,
+.tempbutton,
+.tempbutton_bottom,
+.distbutton_top,
+.distbutton,
+.distbutton_bottom  {
+    border-color: @bg;
+    background-color: @buttons-bg;
 }
 
-.distbutton_active {
-    background-color: #d46900;
+button:active,
+.distbutton_active,
+button.active {
+    background-color: @active;
 }
 
 .fan_slider {
-    color: #e2e2e2;
+    color: @text;
 }
 
 .message_popup {
-    border-bottom-color: #e2e2e2;
+    border-bottom-color: @text;
 }
 
-.message_popup_echo, .message_popup_echo button {
-    background-color: #006412;
+.message_popup_echo,
+.message_popup_echo button {
+    background-color: @echo;
 }
 
-.message_popup_warning, .message_popup_warning button {
-    background-color: #EF6C00;
+.message_popup_warning,
+.message_popup_warning button {
+    background-color: @warning;
 }
 
-.message_popup_error, .message_popup_error button {
-    background-color: #B71C1C;
+.message_popup_error,
+.message_popup_error button {
+    background-color: @error;
 }
 
-.numpad_tleft, .numpad_top, .numpad_tright, .numpad_left, .numpad_button, .numpad_right, .numpad_bleft, .numpad_bottom, .numpad_bright {
-    border-color: #121212;
-    background-color: #090909;
+.numpad_key {
+    border-color: @bg;
+    background-color: @buttons-bg;
 }
 
-.printing-status {
-    color: #e2e2e2;
-}
-
-.printing-progress-text {
-    color: #e2e2e2;
-}
-
+.printing-status,
+.printing-progress-text,
 .printing-status-label {
-    color: #9E9E9E;
+    color: @text;
 }
 
 .message {
-    border-color: #B71C1C;
-    color: #e2e2e2;
-    background-color: #B71C1C;
+    border-color: @error;
+    color: @text;
+    background-color: @error;
 }
 
 .message button {
-    background-color: #e2e2e2;
-    color: #121212;
+    background-color: @text;
+    color: @bg;
 }
 
 .warning {
-    background-color: #EF6C00;
+    background-color: @warning;
 }
 
 .error {
-    background-color: #B71C1C;
+    background-color: @error;
 }
 
 .keyboard_pad {
-    background-color: #090909; /*base02*/
+    background-color: @buttons-bg;
 }

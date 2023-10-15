@@ -1,264 +1,309 @@
 /* Material-light theme created by Alfredo Monclus 2021 */
+@define-color bg #FAFAFA;
+@define-color text black;
+@define-color color1 #FFF59D;
+@define-color color2 #F48FB1;
+@define-color color3 #C5E1A5;
+@define-color color4 #80DEEA;
+@define-color border #BDBDBD;
+@define-color active #FFAB91;
+@define-color warning #FFE082;
+@define-color error #EF9A9A;
+@define-color echo #a1ef9a;
+@define-color popup #006064;
+@define-color dialog #80CBC4;
+@define-color textview #212121;
 
 * {
-    color: black;
+    color: @text ;
 }
 
 list row,
 treeview.view,
 window {
-    background-color: #FAFAFA;
+    background-color: @bg;
 }
 
 button {
-    background-color: #FAFAFA;
+    background-color: @bg;
 }
 
 button label{
-    color: black;
+    color: @text;
 }
 
 button:active {
-    background-color: #FFA726;
+    background-color: @active;
 }
 
 .button_active {
-    border-color: #BDBDBD;
+    border-color: @border;
     border-style: solid;
     border-width: .25em;
-    background-color: white;
-    box-shadow: .1em .1em #BDBDBD;
+    background-color: @bg;
+    box-shadow: .1em .1em @border;
     border-radius: 1em;
 }
 
-button.color1 label, button.color2 label, button.color3 label, button.color4 label {
-    color: black;
+button.color1 label,
+button.color2 label,
+button.color3 label,
+button.color4 label {
+    color: @text;
 }
 
 button.color1 {
-    background-color: #FFF59D;
-    border-color: #FFF59D;
-    box-shadow: .1em .1em #BDBDBD;
+    background-color: @color1;
+    border-color: @color1;
+    box-shadow: .1em .1em @border;
     border-radius: 1em;
 }
 
 button.color2 {
-    background-color: #F48FB1;
-    border-color: #F48FB1;
-    box-shadow: .1em .1em #BDBDBD;
+    background-color: @color2;
+    border-color: @color2;
+    box-shadow: .1em .1em @border;
     border-radius: 1em;
 }
 
 button.color3 {
-    background-color: #C5E1A5;
-    border-color: #C5E1A5;
-    box-shadow: .1em .1em #BDBDBD;
+    background-color: @color3;
+    border-color: @color3;
+    box-shadow: .1em .1em @border;
     border-radius: 1em;
 }
 
 button.color4 {
-    background-color: #80DEEA;
-    border-color: #80DEEA;
-    box-shadow: .1em .1em #BDBDBD;
+    background-color: @color4;
+    border-color: @color4;
+    box-shadow: .1em .1em @border;
     border-radius: 1em;
 }
 
-button.color1:active, button.color2:active, button.color3:active, button.color4:active, button.update:active, button.invalid:active, .dialog button:active {
+button.color1:active,
+button.color2:active,
+button.color3:active,
+button.color4:active,
+button.update:active,
+button.invalid:active,
+.dialog button:active {
     border-style: none;
 }
 
 button.active {
-    background-color: #FFA726;
+    background-color: @active;
 }
 
 button.update {
-    background-color: #C5E1A5;
-    border-color: #C5E1A5;
+    background-color: @color3;
+    border-color: @color3;
 }
 
 button.invalid {
-    background-color: #EF9A9A;
-    border-color: #EF9A9A;
+    background-color: @error;
+    border-color: @error;
 }
 
 combobox window.popup {
-    background-color: white;
+    background-color: @bg;
 }
 
 combobox box button {
-    background-color: white;
-    border-color: #BDBDBD;
+    background-color: @bg;
+    border-color: @border;
 }
 
 treeview.view check,
 switch {
-    background-color: #BDBDBD;
+    background-color: @border;
 }
 
 treeview.view check:checked,
 switch:checked {
-    background-color: #C5E1A5;
+    background-color: @color3;
 }
 
-switch slider {
-    border: .1em solid #BDBDBD;
+treeview.view check,
+switch slider,
+scale trough,
+progressbar trough,
+scale trough slider {
+    border: .1em solid @border;
 }
 
 entry {
-    border-color: #F5F5F5;
-    background-color: #F5F5F5;
+    border-color: @border;
+    background-color: @bg;
 }
 
 .frame-item {
-    border-bottom-color: #BDBDBD;
+    border-bottom-color: @border;
 }
 
 label {
-    color: black;
+    color: @text;
 }
 
 menu {
-    background-color: #FAFAFA;
-    border-color: #BDBDBD;
+    background-color: @bg;
+    border-color: @border;
 }
 
 menuitem {
-    background-color: #FAFAFA;
-    border-color: #BDBDBD;
+    background-color: @bg;
+    border-color: @border;
 }
 
 trough {
     background-color: transparent;
-    color: #BDBDBD;
+    color: @border;
     border-radius: 1em;
 }
 
-trough highlight, trough progress {
-    background-color: #F48FB1;
-    color: #e2e2e2;
-    border-color: #121212;
+trough highlight,
+trough progress {
+    background-color: @color2;
+    color: @bg;
+    border-color: @border;
     border-top-left-radius: 1em;
     border-bottom-left-radius: 1em;
 }
 
-scale-mark {
-    color: #e2e2e2;
+
+progressbar trough progress {
+    border-top-right-radius: 1em;
+    border-bottom-right-radius: 1em;
 }
 
-scrollbar, scrollbar button, scrollbar trough {
+scale-mark {
+    color: @bg;
+}
+
+scrollbar,
+scrollbar button,
+scrollbar trough {
     background-color: transparent;
 }
 
 scrollbar slider {
-    background-color: #BDBDBD;
+    background-color: @border;
 }
 
 textview {
-    background-color: #212121;
+    background-color: @textview;
 }
 
 textview .time {
-    color: #9E9E9E;
+    color: @border;
 }
 
 .popup {
-    background-color: #006064;
+    background-color: @popup;
 }
 
 .dialog {
-    border: #121212;
-    background-color: #FAFAFA;
+    border: @border;
+    background-color: @bg;
 }
 
 .dialog button {
-    background-color: #80CBC4;
-    border-bottom-color: #80CBC4;
+    background-color: @dialog;
+    border-bottom-color: @dialog;
     border-radius: .75em;
 }
 
 .dialog button:nth-child(1) {
-    background-color: #C5E1A5;
-    border-bottom-color: #C5E1A5;
+    background-color: @color3;
+    border-bottom-color: @color3;
 }
 
 .dialog button:nth-child(2) {
-    background-color: #EF9A9A;
-    border-bottom-color: #EF9A9A;
+    background-color: @error;
+    border-bottom-color: @error;
 }
 
-.dialog button:nth-child(1) label , .dialog button:nth-child(2) label {
-    color: black;
+.dialog button:nth-child(1) label ,
+.dialog button:nth-child(2) label {
+    color: @text;
 }
 
-.tempbutton_top, .tempbutton, .tempbutton_bottom, .distbutton_top, .distbutton, .distbutton_bottom  {
-    border-color: #BDBDBD;
-    background-color: #F5F5F5;
+.tempbutton_top,
+.tempbutton,
+.tempbutton_bottom,
+.distbutton_top,
+.distbutton,
+.distbutton_bottom  {
+    border-color: @border;
+    background-color: @bg;
 }
 
 .distbutton_active {
-    background-color: #FFAB91;
+    background-color: @active;
 }
 
 .distbutton_active label {
-    color: black;
+    color: @text;
 }
 
 .fan_slider {
-    color: #e2e2e2;
+    color: @bg;
 }
 
 .message_popup {
-    border-bottom-color: #e2e2e2;
+    border-bottom-color: @border;
 }
 
-.message_popup_echo, .message_popup_echo button {
-    background-color: #a1ef9a;
+.message_popup_echo,
+.message_popup_echo button {
+    background-color: @echo;
 }
 
-.message_popup_warning, .message_popup_warning button {
-    background-color: #FFE082;
+.message_popup_warning,
+.message_popup_warning button {
+    background-color: @warning;
 }
 
-.message_popup_error, .message_popup_error button {
-    background-color: #EF9A9A;
+.message_popup_error,
+.message_popup_error button {
+    background-color: @error;
 }
 
-.numpad_tleft, .numpad_top, .numpad_tright, .numpad_left, .numpad_button, .numpad_right, .numpad_bleft, .numpad_bottom, .numpad_bright {
-    border-color: #BDBDBD;
-    background-color: #F5F5F5;
+.numpad_key {
+    border-color: @border;
+    background-color: @bg;
 }
 
 .printing-status {
-    color: black;
+    color: @text;
 }
 
 .printing-progress-text {
-    color: black;
+    color: @text;
 }
 
 .printing-status-label {
-    color: black;
+    color: @text;
 }
 
 .message {
-    border-color: #EF9A9A;
-    color: #e2e2e2;
-    background-color: #EF9A9A;
+    border-color: @error;
+    color: @bg;
+    background-color: @error;
 }
 
 .message button {
-    background-color: #e2e2e2;
-    color: #121212;
+    background-color: @bg;
+    color: @text;
 }
 
 .warning {
-    background-color: #FFE082;
+    background-color: @warning;
 }
 
 .error {
-    background-color: #EF9A9A;
+    background-color: @error;
 }
 
 .keyboard_pad {
-    background-color: #BDBDBD;
+    background-color: @border;
 }
