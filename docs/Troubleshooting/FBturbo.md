@@ -14,3 +14,9 @@ Remove the fbturbo driver
 ```sh
 sudo apt purge xserver-xorg-video-fbturbo
 ```
+
+make sure the config is removed:
+
+```sh
+sudo rm /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+```
