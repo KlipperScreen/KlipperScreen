@@ -273,11 +273,12 @@ class Printer:
         return data
 
     def get_leds(self):
-        leds = []
-        led_types = ["dotstar", "led", "neopixel", "pca9533", "pca9632"]
-        for led_type in led_types:
-            leds.extend(iter(self.get_config_section_list(f"{led_type} ")))
-        return leds
+        return [
+            led
+            for led_type in ["dotstar", "led", "neopixel", "pca9533", "pca9632"]
+            for led in self.get_config_section_list(f"{led_type} ")
+            if not led.split()[1].startswith("_")
+        ]
 
     def get_led_color_order(self, led):
         if led not in self.config or led not in self.data:
