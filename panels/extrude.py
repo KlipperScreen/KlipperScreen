@@ -58,7 +58,7 @@ class Panel(ScreenPanel):
         i = 0
         for extruder in self._printer.get_tools():
             if self._printer.extrudercount > 1:
-                self.labels[extruder] = self._gtk.Button(f"extruder-{i}", f"T{self._printer.get_tool_number(extruder)}")                
+                self.labels[extruder] = self._gtk.Button(f"extruder-{i}", f"T{self._printer.get_tool_number(extruder)}")
             else:
                 self.labels[extruder] = self._gtk.Button("extruder", "")
             self.labels[extruder].connect("clicked", self.change_extruder, extruder)
