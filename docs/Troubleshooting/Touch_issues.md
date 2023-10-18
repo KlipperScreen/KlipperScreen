@@ -62,58 +62,63 @@ DISPLAY=:0 xinput set-prop "<device name>" 'Coordinate Transformation Matrix' <m
 
 Where the matrix can be one of the following options:
 
-| Rotation                              | Matrix                |
-| ------------------------------------- | --------------------- |
-| 0°                                    | `1 0 0 0 1 0 0 0 1`   |
-| 90° Clockwise                         | `0 -1 1 1 0 0 0 0 1`  |
-| 90° Counter-Clockwise                 | `0 1 0 -1 0 1 0 0 1`  |
-| 180° (Inverts X and Y)                | `-1 0 1 0 -1 1 0 0 1` |
-| invert Y                              | `-1 0 1 1 1 0 0 0 1`  |
-| invert X                              | `-1 0 1 0 1 0 0 0 1`  |
-| expand to twice the size horizontally | `0.5 0 0 0 1 0 0 0 1` |
+| Rotation                                | Matrix                |
+|-----------------------------------------|-----------------------|
+| 0°                                      | `1 0 0 0 1 0 0 0 1`   |
+| 90° Clockwise                           | `0 -1 1 1 0 0 0 0 1`  |
+| 90° Counter-Clockwise                   | `0 1 0 -1 0 1 0 0 1`  |
+| 180° (Inverts X and Y)                  | `-1 0 1 0 -1 1 0 0 1` |
+| invert Y                                | `-1 0 1 1 1 0 0 0 1`  |
+| invert X                                | `-1 0 1 0 1 0 0 0 1`  |
+| expand to twice the size horizontally   | `0.5 0 0 0 1 0 0 0 1` |
 
 For more in-depth guidance on using Coordinate Transformation Matrices:
 
 * [Ubuntu wiki InputCoordinateTransformation](https://wiki.ubuntu.com/X/InputCoordinateTransformation)
 * [Libinput docs](https://wayland.freedesktop.org/libinput/doc/1.9.0/absolute_axes.html)
 
-It has been reported that the touch expands with screens that don't use HDMI. This is due to the composite output,
-which enables automatically as a fallback when no HDMI device is plugged in.
-If this is the case, adding `enable_tvout=0` to `/boot/config.txt` and reboot.
+To make this **permanent**, modify `/etc/udev/rules.d/51-touchscreen.rules`:
+
+```bash
+sudo nano /etc/udev/rules.d/51-touchscreen.rules
+```
+
+```sh title="51-touchscreen.rules"
+ACTION=="add", ATTRS{name}=="<device name>", ENV{LIBINPUT_CALIBRATION_MATRIX}="<matrix>"
+```
+
+Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
 
 !!! example
+
+    Test:
 
     ```sh
     DISPLAY=:0 xinput set-prop "ADS7846 Touchscreen" 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1
     ```
 
-    To make this permanent, modify the file `/etc/udev/rules.d/51-touchscreen.rules`:
-    
+    Permanent modification:
+
     ```bash
     sudo nano /etc/udev/rules.d/51-touchscreen.rules
     ```
 
-    and add following line
-
-    ```sh
-    ACTION=="add", ATTRS{name}=="<device name>", ENV{LIBINPUT_CALIBRATION_MATRIX}="<matrix>"
+    ```sh title="51-touchscreen.rules"
+    ACTION=="add", ATTRS{name}=="ADS7846 Touchscreen", ENV{LIBINPUT_CALIBRATION_MATRIX}="-1 0 1 0 -1 1 0 0 1"
     ```
     
     Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
 
-    ---
+
+!!! example "Alternative"
 
     As an alternative **if the above doesn't work**:
-
-    edit `/usr/share/X11/xorg.conf.d/40-libinput.conf`
 
     ```bash
     sudo nano /usr/share/X11/xorg.conf.d/40-libinput.conf
     ```
 
-    With the following contents:
-
-    ```sh
+    ```sh title="40-libinput.conf"
     Section "InputClass"
             Identifier "libinput touchscreen catchall"
             MatchIsTouchscreen "on"
@@ -123,3 +128,26 @@ If this is the case, adding `enable_tvout=0` to `/boot/config.txt` and reboot.
     EndSection
     ```
     Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
+
+## Touch is expanded:
+
+This can be due to other framebuffers being active, for example the composite output of Raspberries
+may be enabled automatically as a fallback when no HDMI device is plugged in.
+If this is the case:
+
+Open `/boot/config.txt` for editing:
+
+```sh
+sudo nano /boot/config.txt
+```
+
+add at the bottom (in the `[all]` section)
+
+```sh title="config.txt"
+enable_tvout=0
+max_frambefubbers=1
+```
+
+Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
+
+**Reboot** to apply changes.
