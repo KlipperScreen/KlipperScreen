@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-30 23:03-0300\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pappicio\n"
 "Language-Team: \n"
@@ -361,9 +361,6 @@ msgstr "Klipper sta tentando di avviarsi"
 msgid "Klipper will reboot"
 msgstr "Klipper si riavvierà"
 
-msgid "KlipperScreen will reboot"
-msgstr "KlipperScreen si riavvierà"
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -550,7 +547,7 @@ msgid "Profile Name:"
 msgstr "Nome profilo:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Fornisci KlipperScreen.log quando chiedi aiuto.\n"
+msgstr ""
 
 msgid "Quad Gantry Level"
 msgstr "Quad Gantry Level"
@@ -795,6 +792,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "KlipperScreen will reboot"
+#~ msgstr "KlipperScreen si riavvierà"
 
 #~ msgid "Continue"
 #~ msgstr "Continua"

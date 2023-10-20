@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-30 23:03-0300\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -363,9 +363,6 @@ msgid "Klipper is attempting to start"
 msgstr ""
 
 msgid "Klipper will reboot"
-msgstr ""
-
-msgid "KlipperScreen will reboot"
 msgstr ""
 
 msgid ""

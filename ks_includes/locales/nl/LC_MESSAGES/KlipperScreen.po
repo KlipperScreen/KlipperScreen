@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-30 23:03-0300\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
 "PO-Revision-Date: 2023-05-07 18:50+0200\n"
 "Last-Translator: Thijs Triemstra <info@collab.nl>\n"
 "Language-Team: \n"
@@ -365,9 +365,6 @@ msgstr "Klipper probeert te starten"
 msgid "Klipper will reboot"
 msgstr "Klipper zal herstarten"
 
-msgid "KlipperScreen will reboot"
-msgstr "KlipperScreen zal herstarten"
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -554,7 +551,7 @@ msgid "Profile Name:"
 msgstr "Profiel Naam:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Stuur ook KlipperScreen.log als je vraagt om hulp.\n"
+msgstr ""
 
 msgid "Quad Gantry Level"
 msgstr "Quad Gantry Level"
@@ -799,6 +796,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "KlipperScreen will reboot"
+#~ msgstr "KlipperScreen zal herstarten"
 
 #~ msgid "Continue"
 #~ msgstr "Doorgaan"

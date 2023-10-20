@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-30 23:03-0300\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
 "PO-Revision-Date: 2023-10-02 09:57+0000\n"
 "Last-Translator: Daviteusz <daviteusz0@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -363,9 +363,6 @@ msgstr "Klipper próbuje się uruchomić"
 msgid "Klipper will reboot"
 msgstr "Klipper uruchomi się ponownie"
 
-msgid "KlipperScreen will reboot"
-msgstr "KlipperScreen uruchomi się ponownie"
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -555,7 +552,7 @@ msgid "Profile Name:"
 msgstr "Nazwa profilu:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Przekaż KlipperScreen.log, prosząc o pomoc.\n"
+msgstr ""
 
 msgid "Quad Gantry Level"
 msgstr "Poziom bramy"
@@ -803,6 +800,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "KlipperScreen will reboot"
+#~ msgstr "KlipperScreen uruchomi się ponownie"
 
 #~ msgid "Continue"
 #~ msgstr "Kontynuuj"

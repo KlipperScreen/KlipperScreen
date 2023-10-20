@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-30 23:03-0300\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
 "PO-Revision-Date: 2022-11-21 21:31-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -364,9 +364,6 @@ msgstr "Klipper försöker starta"
 
 msgid "Klipper will reboot"
 msgstr "Klipper kommer att starta om"
-
-msgid "KlipperScreen will reboot"
-msgstr ""
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-30 23:03-0300\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
 "PO-Revision-Date: 2022-11-30 18:14-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -369,9 +369,6 @@ msgstr "Klipper está iniciando"
 msgid "Klipper will reboot"
 msgstr "Klipper será reiniciado"
 
-msgid "KlipperScreen will reboot"
-msgstr "KlipperScreen será reiniciado"
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -558,7 +555,7 @@ msgid "Profile Name:"
 msgstr "Nome do Perfil:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Forneça um Log do KlipperScreen ao pedir ajuda.\n"
+msgstr ""
 
 msgid "Quad Gantry Level"
 msgstr "Nível do pórtico quádruplo"
@@ -803,6 +800,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "KlipperScreen will reboot"
+#~ msgstr "KlipperScreen será reiniciado"
 
 #~ msgid "Continue"
 #~ msgstr "Continuar"

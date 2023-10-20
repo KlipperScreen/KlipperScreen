@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2023-10-03 19:36\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-30 23:03-0300\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
 "PO-Revision-Date: 2023-10-03 19:52+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -372,9 +372,6 @@ msgstr "Кліппер намагається стартувати"
 msgid "Klipper will reboot"
 msgstr "Klipper перезавантажиться"
 
-msgid "KlipperScreen will reboot"
-msgstr "KlipperScreen перезавантажиться"
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -566,7 +563,7 @@ msgid "Profile Name:"
 msgstr "Ім'я профілю:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Надайте KlipperScreen.log, коли звертаєтесь по допомогу.\n"
+msgstr ""
 
 msgid "Quad Gantry Level"
 msgstr "Портальне вирівнювання"
@@ -820,6 +817,9 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм/с³"
+
+#~ msgid "KlipperScreen will reboot"
+#~ msgstr "KlipperScreen перезавантажиться"
 
 #~ msgid "Continue"
 #~ msgstr "Продовжити"
