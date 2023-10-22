@@ -1,23 +1,23 @@
 /* Material-darker theme created by Alfredo Monclus 2021 */
-@define-color color_1 #e2e2e2
-@define-color color_2 #2196f3
-@define-color color_3 #fb8c00
-@define-color color_4 #9E9E9E
-@define-color color_5 #121212
-@define-color background-color_2 #1c1c1c
-@define-color background-color_3 #424242
-@define-color background-color_4 #252525
-@define-color background-color_5 #2f5631
-@define-color background-color_6 #006064
-@define-color background-color_7 #545454
-@define-color background-color_8 #006412
-@define-color background-color_9 #EF6C00
-@define-color background-color_10 #B71C1C
-@define-color background-color_12 #f9b274
-@define-color background-color_13 #CF6679
-@define-color background-color_14 #090909
-@define-color border-color_6 #a2a2a2
-@define-color border-color_7 #282828
+@define-color color_1 #e2e2e2;
+@define-color color_2 #2196f3;
+@define-color color_3 #fb8c00;
+@define-color color_4 #9E9E9E;
+@define-color color_5 #121212;
+@define-color background-color_2 #1c1c1c;
+@define-color background-color_3 #424242;
+@define-color background-color_4 #252525;
+@define-color background-color_5 #2f5631;
+@define-color background-color_6 #006064;
+@define-color background-color_7 #545454;
+@define-color background-color_8 #006412;
+@define-color background-color_9 #EF6C00;
+@define-color background-color_10 #B71C1C;
+@define-color background-color_12 #f9b274;
+@define-color background-color_13 #CF6679;
+@define-color background-color_14 #090909;
+@define-color border-color_6 #a2a2a2;
+@define-color border-color_7 #282828;
 
 * {
     color: #e2e2e2;
