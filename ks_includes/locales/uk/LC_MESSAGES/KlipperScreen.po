@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2023-10-03 19:36\n"
+"Project-Id-Version: 2023-10-24 19:36\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-10-03 19:52+0300\n"
+"PO-Revision-Date: 2023-10-24 00:27+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
 "Language: uk\n"
@@ -563,7 +563,7 @@ msgid "Profile Name:"
 msgstr "Ім'я профілю:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "Надайте KlipperScreen.log, коли звертаєтесь по допомогу.\n"
 
 msgid "Quad Gantry Level"
 msgstr "Портальне вирівнювання"
