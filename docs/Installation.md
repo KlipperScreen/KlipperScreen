@@ -39,7 +39,7 @@ Execute the following commands:
 
 ```sh
 cd ~/
-git clone https://github.com/jordanruthe/KlipperScreen.git
+git clone https://github.com/KlipperScreen/KlipperScreen.git
 cd ~/KlipperScreen
 ./scripts/KlipperScreen-install.sh
 ```
@@ -66,7 +66,7 @@ trusted_clients:
 
     Will require the [moonraker api key](https://moonraker.readthedocs.io/en/latest/installation/#retrieving-the-api-key) in [KlipperScreen.conf](Configuration.md)
 
-If you wish to use the update manager feature of moonraker for KlipperScreen, add the following block to the moonraker.conf:
+If you wish to use the update manager feature of moonraker for KlipperScreen, add the following block to `moonraker.conf`:
 
 ```ini title="moonraker.conf"
 [update_manager KlipperScreen]
