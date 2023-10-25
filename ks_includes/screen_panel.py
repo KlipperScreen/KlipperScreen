@@ -94,12 +94,14 @@ class ScreenPanel:
 
     def on_dropdown_change(self, combo, section, option, callback=None):
         tree_iter = combo.get_active_iter()
+        self._screen._button_pressed_feedback()
         if tree_iter is not None:
             model = combo.get_model()
             value = model[tree_iter][1]
             logging.debug(f"[{section}] {option} changed to {value}")
             self._config.set(section, option, value)
             self._config.save_user_config_options()
+            self._screen._button_pressed_feedback()
             if callback is not None:
                 callback(value)
 

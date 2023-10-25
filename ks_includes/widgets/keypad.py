@@ -41,6 +41,7 @@ class Keypad(Gtk.Box):
             else:
                 self.labels[k_id] = Gtk.Button(label=keys[i][0])
             self.labels[k_id].connect('clicked', self.update_entry, keys[i][0])
+            self.labels[k_id].connect("pressed", self.screen._button_pressed_feedback)
             self.labels[k_id].get_style_context().add_class(keys[i][1])
             self.labels[k_id].get_style_context().add_class("numpad_key")
             numpad.attach(self.labels[k_id], i % 3, i / 3, 1, 1)
