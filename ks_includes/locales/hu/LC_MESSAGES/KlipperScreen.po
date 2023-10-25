@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 16:32-0300\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: AntoszHUN\n"
+"Last-Translator: Peter Nemeth\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.1\n"
+"X-Generator: Poedit 3.4\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -21,7 +21,7 @@ msgid "(default)"
 msgstr "(alapértelmezett)"
 
 msgid "24 Hour Time"
-msgstr "24 Órás Idő"
+msgstr "24 órás idő"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "A FIRMWARE_RESTART javíthatja a problémát."
@@ -41,22 +41,28 @@ msgstr "Elfogad"
 msgid "Add profile"
 msgstr "Profil hozzáadása"
 
+msgid "All"
+msgstr "Mind"
+
 msgid "Apply"
 msgstr "Alkalmaz"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr ""
+msgstr "Alkalmazod a(z) %s%.3f végállás eltolást?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr ""
+msgstr "Alkalmazod a(z) %s%.3f szonda eltolást?"
+
+msgid "Archived"
+msgstr "Archivált"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Biztosan kizárod az objektumot?"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr "Biztosan Vészleállítást szeretnél?"
+msgstr "Biztosan vészleállítást szeretnél?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Biztosan megszakítod ezt a nyomtatást?"
@@ -78,6 +84,9 @@ msgstr "Automatikus kalibrálás"
 
 msgid "Auto-close notifications"
 msgstr "Értesítések automatikus bezárása"
+
+msgid "Auto-open Extrude On Pause"
+msgstr "Automatikus megnyitás adagolás szünetelése után"
 
 msgid "Auto-scroll"
 msgstr "Automatikus görgetés"
@@ -101,13 +110,13 @@ msgid "Calibrating"
 msgstr "Kalibrálás"
 
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 msgid "Can't set above the maximum:"
 msgstr "Nem állítható a maximum fölé:"
 
 msgid "Cancel"
-msgstr "Mégse"
+msgstr "Mégsem"
 
 msgid "Cancel Print"
 msgstr "Nyomtatás megszakítása"
@@ -152,17 +161,17 @@ msgstr "Csatlakozás %s"
 msgid "Console"
 msgstr "Konzol"
 
-msgid "Continue"
-msgstr "Folytat"
-
 msgid "Cooldown"
 msgstr "Lehűtés"
+
+msgid "DPMS has failed to load and has been disabled"
+msgstr "A DPMS betöltése nem sikerült, ezért le van tiltva"
 
 msgid "Date"
 msgstr "Dátum"
 
 msgid "Delete Directory?"
-msgstr ""
+msgstr "Törlöd a könyvtárat?"
 
 msgid "Delete File?"
 msgstr "Fájl törlése?"
@@ -199,10 +208,10 @@ msgid "Extrude"
 msgstr "Száladagolás"
 
 msgid "Extrusion +"
-msgstr "Extrudálás +"
+msgstr "Adagolás +"
 
 msgid "Extrusion -"
-msgstr "Extrudálás -"
+msgstr "Adagolás -"
 
 msgid "Failed, adjust position first"
 msgstr "Sikertelen! Előbb állítsd be a pozíciót"
@@ -228,6 +237,9 @@ msgstr "Fájl"
 msgid "File:"
 msgstr "Fájl:"
 
+msgid "Filter"
+msgstr "Szűrő"
+
 msgid "Finding ADXL"
 msgstr "ADXL keresése"
 
@@ -238,7 +250,7 @@ msgid "Finish"
 msgstr "Befejezve"
 
 msgid "Firmware Restart"
-msgstr "Firmware Újraindítása"
+msgstr "Firmware újraindítása"
 
 msgid "Flow:"
 msgstr "Folyam:"
@@ -250,10 +262,7 @@ msgid "Font Size"
 msgstr "Betűméret"
 
 msgid "Full Update"
-msgstr "Teljes Frissítés"
-
-msgid "Fullscreen"
-msgstr ""
+msgstr "Teljes frissítés"
 
 msgid "Go Back"
 msgstr "Visszalépés"
@@ -297,6 +306,9 @@ msgstr "Gazdagép"
 msgid "Hostname"
 msgstr "Gazdanév"
 
+msgid "ID"
+msgstr "ID"
+
 msgid "Icon Theme"
 msgstr "Ikon téma"
 
@@ -304,7 +316,7 @@ msgid "Initializing printer..."
 msgstr "Nyomtató inicializálása..."
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "PID-kalibráció kezdeményezése:"
 
 msgid "Input Shaper"
 msgstr "Bemeneti alakító"
@@ -328,13 +340,13 @@ msgid "Invert Z"
 msgstr "Fordított Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
+msgstr "A fűtés teljesítményétől függően több mint 5 percig tarthat."
 
 msgid "Klipper Restart"
-msgstr "Klipper Újraindítása"
+msgstr "A Klipper újraindítása"
 
 msgid "Klipper has disconnected"
-msgstr "Klipper szétkapcsolt"
+msgstr "A Klipper szétkapcsolt"
 
 msgid "Klipper has encountered an error."
 msgstr "A Klipper hibát észlelt."
@@ -343,13 +355,15 @@ msgid "Klipper has shutdown"
 msgstr "A Klipper leállt"
 
 msgid "Klipper is attempting to start"
-msgstr "Klipper megpróbálja elindítani"
+msgstr "A Klipper megpróbál elindulni"
 
 msgid "Klipper will reboot"
 msgstr "A Klipper újraindul"
 
-msgid "KlipperScreen will reboot"
-msgstr "A KlipperScreen újraindul"
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT rejtett és a száladagolásból kell használni"
 
 msgid "Language"
 msgstr "Nyelv"
@@ -357,11 +371,17 @@ msgstr "Nyelv"
 msgid "Large"
 msgstr "Nagy"
 
+msgid "Last Used"
+msgstr "Utoljára használt"
+
 msgid "Layer:"
 msgstr "Réteg:"
 
+msgid "Leds"
+msgstr "LED-ek"
+
 msgid "Left:"
-msgstr "Bal:"
+msgstr "Marad:"
 
 msgid "Limits"
 msgstr "Korlátok"
@@ -380,6 +400,9 @@ msgstr "Makrók"
 
 msgid "Main Menu"
 msgstr "Főmenü"
+
+msgid "Material"
+msgstr "Anyag"
 
 msgid "Max"
 msgstr "Max"
@@ -421,13 +444,13 @@ msgid "Moonraker: connected"
 msgstr "Moonraker: csatlakoztatva"
 
 msgid "More"
-msgstr ""
+msgstr "Több"
 
 msgid "Move"
 msgstr "Mozgatás"
 
 msgid "Move Distance (mm)"
-msgstr "Mozgási távolság (mm)"
+msgstr "Mozgás távolsága (mm)"
 
 msgid "Name"
 msgstr "Név"
@@ -441,12 +464,15 @@ msgstr "Soha"
 msgid "New"
 msgstr "Új"
 
+msgid "No elegible macros:"
+msgstr "Nincs választható makró:"
+
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr ""
-"Az automatikus felismerés nem támogatott, a klipperscreenben kell beállítani."
-"conf"
+"Az automatikus felismerés nem támogatott, a klipperscreen.conf-ban kell "
+"beállítani"
 
 msgid "Nothing selected"
 msgstr "Nincs kiválasztva"
@@ -521,7 +547,7 @@ msgid "Profile Name:"
 msgstr "Profil név:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Add meg a KlipperScreen.log-ot, amikor segítséget kérsz.\n"
+msgstr ""
 
 msgid "Quad Gantry Level"
 msgstr "Négy állású szint"
@@ -545,7 +571,7 @@ msgid "Refresh"
 msgstr "Frissítés"
 
 msgid "Rename/Move:"
-msgstr ""
+msgstr "Átnevez/Áthelyez:"
 
 msgid "Restart"
 msgstr "Újraindítás"
@@ -617,6 +643,9 @@ msgstr "Mutat"
 msgid "Show Heater Power"
 msgstr "A fűtésteljesítmény megjelenítése"
 
+msgid "Show Scrollbars Buttons"
+msgstr "Görgetősáv gombok megjelenítése"
+
 msgid "Shutdown"
 msgstr "Leállítás"
 
@@ -647,11 +676,14 @@ msgstr "Sebesség:"
 msgid "Square Corner Velocity"
 msgstr "Sebesség a sarkokban"
 
+msgid "Standby"
+msgstr "Készenlét"
+
 msgid "Start"
 msgstr "Indítás"
 
 msgid "Starting WiFi Association"
-msgstr "A WiFi Egyesület elindítása"
+msgstr "A WiFi társítás elindítása"
 
 msgid "Starting recovery for"
 msgstr "Helyreállítás megkezdése"
@@ -663,10 +695,10 @@ msgid "System"
 msgstr "Rendszer"
 
 msgid "System Restart"
-msgstr "Rendszer Újraindítása"
+msgstr "Rendszer újraindítása"
 
 msgid "System Shutdown"
-msgstr "Rendszer Leállitás"
+msgstr "Rendszer leállitás"
 
 msgid "Temp (°C)"
 msgstr "Hőmérséklet (°C)"
@@ -687,7 +719,7 @@ msgid "Unload"
 msgstr "Kiadás"
 
 msgid "Unretract Extra Length"
-msgstr "Extra hossz visszahúzása"
+msgstr "Extra visszahúzás hossza"
 
 msgid "Unretract Speed"
 msgstr "Visszahúzási sebesség"
@@ -738,10 +770,16 @@ msgid_plural "hours"
 msgstr[0] "óra"
 msgstr[1] "órák"
 
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "a 'rename_existing' használó makrók el vannak rejtve"
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "a '_' jellel kezdődő nevű makrók el vannak rejtve"
+
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "perc"
+msgstr[1] "percek"
 
 msgid "mm"
 msgstr "mm"
@@ -754,6 +792,15 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "KlipperScreen will reboot"
+#~ msgstr "A KlipperScreen újraindul"
+
+#~ msgid "Continue"
+#~ msgstr "Folytat"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Teljes képernyő"
 
 #~ msgid "Actions"
 #~ msgstr "Műveletek"

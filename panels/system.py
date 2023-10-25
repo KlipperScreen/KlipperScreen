@@ -1,16 +1,10 @@
 import logging
 import os
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango, GLib
-
 from ks_includes.screen_panel import ScreenPanel
-
-
-def create_panel(*args):
-    return SystemPanel(*args)
 
 
 # Same as ALLOWED_SERVICES in moonraker
@@ -27,7 +21,7 @@ ALLOWED_SERVICES = (
 )
 
 
-class SystemPanel(ScreenPanel):
+class Panel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         self.refresh = None
@@ -65,9 +59,7 @@ class SystemPanel(ScreenPanel):
             items = sorted(list(vi))
             i = 0
             for prog in items:
-                self.labels[prog] = Gtk.Label("")
-                self.labels[prog].set_hexpand(True)
-                self.labels[prog].set_halign(Gtk.Align.START)
+                self.labels[prog] = Gtk.Label(hexpand=True, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END)
 
                 self.labels[f"{prog}_status"] = self._gtk.Button()
                 self.labels[f"{prog}_status"].set_hexpand(False)
@@ -103,7 +95,7 @@ class SystemPanel(ScreenPanel):
         GLib.timeout_add_seconds(1, self.get_updates, "true")
 
     def get_updates(self, refresh="false"):
-        update_resp = self._screen.apiclient.send_request(f"machine/update/status?refresh={refresh}")
+        update_resp = self._screen.apiclient.send_request(f"machine/update/status?refresh={refresh}", timeout=60)
         if not update_resp:
             self.update_status = {}
             logging.info("No update manager configured")
@@ -126,7 +118,8 @@ class SystemPanel(ScreenPanel):
     def show_update_info(self, widget, program):
         info = self.update_status['version_info'][program] if program in self.update_status['version_info'] else {}
 
-        scroll = self._gtk.ScrolledWindow()
+        scroll = self._gtk.ScrolledWindow(steppers=False)
+        scroll.set_size_request(self._gtk.width - 30, self._gtk.height * .6)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -148,8 +141,7 @@ class SystemPanel(ScreenPanel):
                     {"name": _("Recover Soft"), "response": Gtk.ResponseType.APPLY},
                     {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
                 ]
-                dialog = self._gtk.Dialog(self._screen, recoverybuttons, scroll, self.reset_confirm, program)
-                dialog.set_title(_("Recover"))
+                self._gtk.Dialog(_("Recover"), recoverybuttons, scroll, self.reset_confirm, program)
                 return
             else:
                 if info['version'] == info['remote_version']:
@@ -213,8 +205,7 @@ class SystemPanel(ScreenPanel):
             {"name": _("Update"), "response": Gtk.ResponseType.OK},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
         ]
-        dialog = self._gtk.Dialog(self._screen, buttons, scroll, self.update_confirm, program)
-        dialog.set_title(_("Update"))
+        self._gtk.Dialog(_("Update"), buttons, scroll, self.update_confirm, program)
 
     def update_confirm(self, dialog, response_id, program):
         self._gtk.remove_dialog(dialog)
@@ -330,19 +321,19 @@ class SystemPanel(ScreenPanel):
             {"name": _("Printer"), "response": Gtk.ResponseType.APPLY},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
         ]
-        dialog = self._gtk.Dialog(self._screen, buttons, scroll, self.reboot_poweroff_confirm, method)
         if method == "reboot":
-            dialog.set_title(_("Restart"))
+            title = _("Restart")
         else:
-            dialog.set_title(_("Shutdown"))
+            title = _("Shutdown")
+        self._gtk.Dialog(title, buttons, scroll, self.reboot_poweroff_confirm, method)
 
     def reboot_poweroff_confirm(self, dialog, response_id, method):
         self._gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.OK:
             if method == "reboot":
-                os.system("systemctl reboot")
+                os.system("systemctl reboot -i")
             else:
-                os.system("systemctl poweroff")
+                os.system("systemctl poweroff -i")
         elif response_id == Gtk.ResponseType.APPLY:
             if method == "reboot":
                 self._screen._ws.send_method("machine.reboot")

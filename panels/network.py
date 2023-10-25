@@ -1,6 +1,5 @@
 import logging
 import os
-
 import gi
 import netifaces
 
@@ -9,11 +8,7 @@ from gi.repository import Gtk, Gdk, GLib, Pango
 from ks_includes.screen_panel import ScreenPanel
 
 
-def create_panel(*args):
-    return NetworkPanel(*args)
-
-
-class NetworkPanel(ScreenPanel):
+class Panel(ScreenPanel):
     initialized = False
 
     def __init__(self, screen, title):
@@ -96,7 +91,7 @@ class NetworkPanel(ScreenPanel):
             if self.update_timeout is None:
                 self.update_timeout = GLib.timeout_add_seconds(5, self.update_all_networks)
         else:
-            self.labels['networkinfo'] = Gtk.Label("")
+            self.labels['networkinfo'] = Gtk.Label()
             self.labels['networkinfo'].get_style_context().add_class('temperature_entry')
             box.pack_start(self.labels['networkinfo'], False, False, 0)
             self.update_single_network_info()
@@ -144,7 +139,7 @@ class NetworkPanel(ScreenPanel):
         if connected_ssid == ssid:
             display_name += " (" + _("Connected") + ")"
 
-        name = Gtk.Label("")
+        name = Gtk.Label()
         name.set_markup(f"<big><b>{display_name}</b></big>")
         name.set_hexpand(True)
         name.set_halign(Gtk.Align.START)
@@ -287,8 +282,7 @@ class NetworkPanel(ScreenPanel):
         self.labels['connecting_info'].set_halign(Gtk.Align.START)
         self.labels['connecting_info'].set_valign(Gtk.Align.START)
         scroll.add(self.labels['connecting_info'])
-        dialog = self._gtk.Dialog(self._screen, buttons, scroll, self._gtk.remove_dialog)
-        dialog.set_title(_("Starting WiFi Association"))
+        self._gtk.Dialog(_("Starting WiFi Association"), buttons, scroll, self._gtk.remove_dialog)
         self._screen.show_all()
 
         if ssid in list(self.networks):

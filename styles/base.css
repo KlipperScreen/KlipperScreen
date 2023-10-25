@@ -1,5 +1,19 @@
+@define-color color1 #ED6500;
+@define-color color2 #B10080;
+@define-color color3 #009384;
+@define-color color4 #A7E100;
+@define-color bg #13181C;
+@define-color active #404E57;
+@define-color echo #367554;
+@define-color warning #f9a825;
+@define-color error #981E1F;
+@define-color text white;
+@define-color text-inv black;
+@define-color lines #cccccc;
+@define-color switch-scale-bg #3584e4;
+
 * {
-    color: white;
+    color: @text;
     font-size: KS_FONT_SIZEpx;
     -GtkComboBox-appears-as-list: 0;
     text-shadow: none;
@@ -7,14 +21,53 @@
     border: 0;
 }
 
+button:disabled {
+    opacity: .2;
+}
+
+list row,
+treeview.view,
 window {
-    background-color: #13181C;
+    background-color: @bg;
     -gtk-icon-shadow: none;
+}
+
+switch slider {
+    border: 0;
+}
+
+switch,
+treeview.view check {
+    margin: 0.75em;
+    min-width: 6em;
+    min-height: 3em;
+    border: 0;
+    border-radius: 3em;
+}
+
+treeview.view check {
+    background-color: rgb(32,41,47);
+    -gtk-icon-source: -gtk-icontheme("switch-off-symbolic");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size : 3em 3em;
+    background-image: image(url("./styles/circle.svg"));
+    -gtk-icon-transform: translateX(1.5em);
+}
+treeview.view check:checked {
+    background-color : rgb(53,132,228);
+    background-position: right center;
+    -gtk-icon-source: -gtk-icontheme("switch-on-symbolic");
+    -gtk-icon-transform: translateX(-1.5em);
+}
+
+expander label {
+    padding : 1em;
 }
 
 button {
     background-image: none;
-    background-color: #13181C;
+    background-color: @bg;
     margin: .25em;
     padding: .2em .5em 0;
     border-radius: 0;
@@ -22,8 +75,10 @@ button {
     -gtk-icon-shadow: none;
 }
 
-button:active, .button_active {
-    background-color: #304C62;
+button:active,
+.button_active,
+button.active {
+    background-color: @active;
 }
 
 button:disabled,
@@ -48,35 +103,31 @@ button label {
 }
 
 button.color1 {
-    border-bottom: .4em solid #ED6500;
+    border-bottom: .4em solid @color1;
     margin: .3em;
     min-height: 3em;
 }
 
 button.color2 {
-    border-bottom: .4em solid #B10080;
+    border-bottom: .4em solid @color2;
     margin: .3em;
     min-height: 3em;
 }
 
 button.color3 {
-    border-bottom: .4em solid #009384;
+    border-bottom: .4em solid @color3;
     margin: .3em;
     min-height: 3em;
 }
 
 button.color4 {
-    border-bottom: .4em solid #A7E100;
+    border-bottom: .4em solid @color4;
     margin: .3em;
     min-height: 3em;
 }
 
 button.status {
-    background-color: #13181C;
-}
-
-button.active {
-    background-color: #20303D;
+    background-color: @bg;
 }
 
 button.file-list {
@@ -84,21 +135,21 @@ button.file-list {
 }
 
 button.update {
-    background: #009384;
-    border: .4em solid #009384;
+    background: @color3;
+    border: .4em solid @color3;
     border-radius: 0.4em;
     font-weight: bold;
 }
 
 button.invalid {
-    background: #e61e1e;
-    border: .4em solid #e61e1e;
+    background: @error;
+    border: .4em solid @error;
     border-radius: 0.4em;
     font-weight: bold;
 }
 
 combobox box button {
-    border: .05em solid #cccccc;
+    border: .05em solid @lines;
     padding: .5em 1em;
 }
 
@@ -106,53 +157,42 @@ combobox arrow {
     min-width: 1em;
 }
 
-switch {
-    margin: 0.75em;
-    min-width: 6em;
-    min-height: 3em;
-    border: 0;
-    border-radius: 3em;
-}
-
-switch slider {
-    border: 0;
-}
-
 entry {
     font-size: 1em;
-    background-color: #20292F;
-    border: .2em solid #13181C;
+    background-color: @active;
+    border: .2em solid @bg;
     padding: .2em;
 }
 
 label {
-    color: white;
+    color: @text;
 }
 
 menu {
-    background-color: #13181C;
-    border: .1em solid #cccccc;
+    background-color: @bg;
+    border: .1em solid @lines;
 }
 
 menuitem {
-    background-color: #13181C;
-    border: .1em solid #cccccc;
+    background-color: @bg;
+    border: .1em solid @lines;
     border-bottom: 0;
     border-top: 0;
 }
 
 trough {
     min-height: 2em;
-    background-color: #404E57;
-    color: white;
-    border: 1px solid black;
+    background-color: @active;
+    color: @text;
+    border: 1px solid @text-inv;
 }
 
-trough highlight, trough progress {
+trough highlight,
+trough progress {
     min-height: 2em;
-    background-color: #3584e4;
-    color: white;
-    border: 1px solid black;
+    background-color: @switch-scale-bg;
+    color: @text;
+    border: 1px solid @text-inv;
 }
 
 trough progress.left {
@@ -167,7 +207,7 @@ scale {
 }
 
 scale mark {
-    color: white;
+    color: @text;
 }
 
 scale trough slider {
@@ -175,15 +215,36 @@ scale trough slider {
     min-width: 2em;
 }
 
-scrollbar, scrollbar button, scrollbar trough {
+scrollbar,
+scrollbar button,
+scrollbar trough {
     border: none;
-    background-color: #13181C;
+    background-color: @bg;
+    min-height: 2.5em;
 }
 
 scrollbar slider {
-    min-width: 2em;
+    min-width: 2.5em;
     border-radius: .7em;
-    background-color: #404E57;
+    background-color: @active;
+}
+
+scrollbar.vertical.with-steppers {
+    -GtkScrollbar-has-backward-stepper: true;
+    -GtkScrollbar-has-forward-stepper: true;
+}
+
+scrollbar.vertical.with-steppers button.down {
+    -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
+}
+
+scrollbar.vertical.with-steppers button.up {
+    -gtk-icon-source: -gtk-icontheme("pan-up-symbolic");
+}
+
+undershoot.top,
+undershoot.bottom {
+    background-image: none;
 }
 
 separator {
@@ -191,13 +252,14 @@ separator {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-textview, textview text {
+textview,
+textview text {
     background: transparent;
     font-family: Free Mono;
 }
 
 textview .time {
-    color: grey;
+    color: @lines;
 }
 
 trough {
@@ -205,7 +267,7 @@ trough {
 }
 
 .popup {
-    background-color: black;
+    background-color: @text-inv;
 }
 
 .action_bar {
@@ -222,32 +284,33 @@ trough {
 }
 
 .dialog {
-    border: .1em solid black;
+    border: .1em solid @text-inv;
     padding: 2.5em;
-    background-color: black;
+    background-color: @text-inv;
     margin: 1em;
 }
 
 .dialog button {
     padding: 1.5em;
-    border-bottom: .4em solid #009384;
+    border-bottom: .4em solid @color3;
     margin-top: 1em;
 }
 
 .dialog button:nth-child(1) {
-    border-bottom-color: green;
+    border-bottom-color: @echo;
 }
 
 .dialog button:nth-child(2) {
-    border-bottom-color: red;
+    border-bottom-color: @error;
 }
 
 .distbutton_active {
-    background-color: #20303D;
+    background-color: @active;
+    font-weight: 600;
 }
 
 .distbutton_top {
-    border: .15em solid white;
+    border: .15em solid @lines;
     border-right: 0;
     border-top-left-radius: .75em;
     border-bottom-left-radius: .75em;
@@ -256,8 +319,8 @@ trough {
 }
 
 .distbutton {
-    border: .15em solid white;
-    border-left: .15em solid #ccc;
+    border: .15em solid @lines;
+    border-left: .15em solid @lines;
     border-right: 0;
     margin-left: 0;
     margin-right: 0;
@@ -265,8 +328,8 @@ trough {
 }
 
 .distbutton_bottom {
-    border: .15em solid white;
-    border-left: .15em solid #ccc;
+    border: .15em solid @lines;
+    border-left: .15em solid @lines;
     border-top-right-radius: .7em;
     border-bottom-right-radius: .7em;
     margin-left: 0;
@@ -275,7 +338,7 @@ trough {
 
 .fan_slider {
     margin: 0 1em 0 1em;
-    color: white;
+    color: @text;
 }
 
 .frame-item {
@@ -286,6 +349,10 @@ trough {
 
 .heatergraph {
     min-height: 350px;
+}
+
+.heater-list scrollbar slider{
+    min-width: 1.5em;
 }
 
 .heater-grid {
@@ -329,7 +396,7 @@ trough {
 }
 
 .message_popup {
-    border: .1em solid white;
+    border: .1em solid @lines;
     border-radius: 1em;
     padding: 1em;
     margin: 0;
@@ -339,24 +406,32 @@ trough {
     padding: 1em;
 }
 
-.message_popup_echo, .message_popup_echo button {
-    background-color: #367554;
+.message_popup_echo,
+.message_popup_echo button {
+    background-color: @echo;
 }
 
-.message_popup_warning, .message_popup_warning button {
-    background-color: #f9a825;
+.message_popup_warning,
+.message_popup_warning button {
+    background-color: @warning;
 }
 
-.message_popup_error, .message_popup_error button {
-    background-color: #9e2f3a;
+.message_popup_error,
+.message_popup_error button {
+    background-color: @error;
 }
 
 .numpad{
     margin-top: 30px;
 }
 
+.numpad_key {
+    border: .15em;
+    border-style: solid;
+    border-color: @lines;
+}
+
 .numpad_tleft {
-    border: .15em solid white;
     border-bottom: 0;
     border-right: 0;
     border-top-left-radius: .7em;
@@ -364,54 +439,46 @@ trough {
 }
 
 .numpad_top {
-    border: .15em solid white;
     border-bottom: 0;
     border-right: 0;
     margin: .15em 0 0 0;
 }
 
 .numpad_tright {
-    border: .15em solid white;
     border-bottom: 0;
     border-top-right-radius: .7em;
     margin: .15em .15em 0 0;
 }
 
 .numpad_left {
-    border: .15em solid white;
     border-right: 0;
     border-bottom: 0;
     margin: 0 0 0 .15em;
 }
 
 .numpad_button {
-    border: .15em solid white;
     border-right: 0;
     border-bottom: 0;
     margin: 0;
 }
 
 .numpad_right {
-    border: .15em solid white;
     border-bottom: 0;
     margin: 0 .15em 0 0;
 }
 
 .numpad_bleft {
-    border: .15em solid white;
     border-right: 0;
     border-bottom-left-radius: .7em;
     margin: 0 0 .15em .15em;
 }
 
 .numpad_bottom {
-    border: .15em solid white;
     border-right: 0;
     margin: 0 0 .15em 0;
 }
 
 .numpad_bright {
-    border: .15em solid white;
     border-bottom-right-radius: .7em;
     margin: 0 .15em .15em 0;
 }
@@ -436,21 +503,19 @@ trough {
 }
 
 .printing-status {
-    color: #f0f0f0;
     font-style: italic;
-    margin: 0 0 0 0;
+    margin: 0;
+    font-weight: bold;
 }
 
 .printing-progress-text {
     font-size: 1.25em;
     font-weight: bold;
-    color: white;
 }
 
 .printing-status-label {
     padding-top: .25em;
     padding-bottom: .15em;
-    color: #ccc;
     font-size: 1.25em;
 }
 
@@ -465,7 +530,7 @@ trough {
 }
 
 .tempbutton_top {
-    border: .15em solid white;
+    border: .15em solid @lines;
     border-bottom: 0;
     border-top-left-radius: .75em;
     border-top-right-radius: .75em;
@@ -473,16 +538,16 @@ trough {
 }
 
 .tempbutton {
-    border: .15em solid white;
-    border-top: .15em solid #ccc;
+    border: .15em solid @lines;
+    border-top: .15em solid @lines;
     border-bottom: 0;
     margin-top: 0;
     margin-bottom: 0;
 }
 
 .tempbutton_bottom {
-    border: .15em solid white;
-    border-top: .15em solid #ccc;
+    border: .15em solid @lines;
+    border-top: .15em solid @lines;
     border-bottom-left-radius: .7em;
     border-bottom-right-radius: .7em;
     margin-top: 0;
@@ -494,16 +559,16 @@ trough {
 }
 
 .message {
-    border: .1em solid #981E1F;
+    border: .1em solid @error;
     font-size: 1em;
     padding: 2.5em;
-    color: white;
-    background-color: #981E1F;
+    color: @text;
+    background-color: @error;
 }
 
 .message button {
-    background-color: white;
-    color: black;
+    background-color: @text;
+    color: @text-inv;
     padding: 2em 2.5em 2em 2.5em;
 }
 
@@ -522,21 +587,26 @@ trough {
 }
 
 popover {
-    background-color: #222;
+    background-color: @bg;
 }
 
 popover button {
-    background-color: #222;
+    background-color: @bg;
 }
 
-.screensaver, .screensaver button, .screensaver button:hover, .screensaver button:focus, .screensaver button:active {
+.screensaver,
+.screensaver button,
+.screensaver button:hover,
+.screensaver button:focus,
+.screensaver button:active {
     background-color: black;
     border: 0;
     margin: 0;
 }
 
-.option_slider_max trough highlight, trough progress {
-    background-color: darkred;
+.option_slider_max trough highlight,
+trough progress {
+    background-color: @error;
 }
 
 .filament_sensor {
@@ -548,34 +618,19 @@ popover button {
 }
 
 .filament_sensor_detected {
-    background-color: darkgreen;
+    background-color: @echo;
 }
 
 .filament_sensor_empty {
-    background-color: darkred;
+    background-color: @error;
 }
 
-.buttons_slim, .buttons_slim label {
+.buttons_slim,
+.buttons_slim label {
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 0;
     padding-bottom: 0;
 }
 
-/* Hardcoded values until creation of dynamic CSS updates */
-.graph_label_hidden {padding-left: .9em;} /* .4em on top of normal button padding */
-.graph_label_extruder {border-left-width: .4em; border-left-style: solid;}
-.graph_label_extruder1 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_extruder2 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_extruder3 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_extruder4 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_heater_bed {border-left-width: .4em; border-left-style: solid;}
-.graph_label_fan_1 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_fan_2 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_fan_3 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_fan_4 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_sensor_1 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_sensor_2 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_sensor_3 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_sensor_4 {border-left-width: .4em; border-left-style: solid;}
-.graph_label_sensor_5 {border-left-width: .4em; border-left-style: solid;}
+.graph_label {border-left-width: .4em; border-left-style: solid;}

@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2023-05-24 14:53-0300\n"
+"Project-Id-Version: 2023-10-24 19:36\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 16:32-0300\n"
-"PO-Revision-Date: 2023-05-24 22:02+0300\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"PO-Revision-Date: 2023-10-24 00:27+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
 "Language: uk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -47,6 +47,9 @@ msgstr "Прийняти"
 msgid "Add profile"
 msgstr "Додати профіль"
 
+msgid "All"
+msgstr "Всі"
+
 msgid "Apply"
 msgstr "Застосувати"
 
@@ -57,6 +60,9 @@ msgstr "Застосувати зміщення %s%.3f до кінцевика?"
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
 msgstr "Застосувати зміщення %s%.3f до зонда?"
+
+msgid "Archived"
+msgstr "Архівовано"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Ви впевнені, що бажаєте виключити об’єкт?"
@@ -84,6 +90,9 @@ msgstr "Автоматичне калібрування"
 
 msgid "Auto-close notifications"
 msgstr "Автоматичне закриття сповіщень"
+
+msgid "Auto-open Extrude On Pause"
+msgstr "Автоматично відкриває меню Екструзії під час Паузи"
 
 msgid "Auto-scroll"
 msgstr "Автоматична прокрутка"
@@ -158,11 +167,11 @@ msgstr "Підключення до %s"
 msgid "Console"
 msgstr "Консоль"
 
-msgid "Continue"
-msgstr "Продовжити"
-
 msgid "Cooldown"
 msgstr "Охолодження"
+
+msgid "DPMS has failed to load and has been disabled"
+msgstr "DPMS не вдалося завантажити, і його було вимкнено"
 
 msgid "Date"
 msgstr "Дата"
@@ -236,6 +245,9 @@ msgstr "Файл"
 msgid "File:"
 msgstr "Файл:"
 
+msgid "Filter"
+msgstr "Фільтр"
+
 msgid "Finding ADXL"
 msgstr "Знаходження ADXL"
 
@@ -261,9 +273,6 @@ msgid "Full Update"
 msgstr ""
 "Повне\n"
 "Оновлення"
-
-msgid "Fullscreen"
-msgstr "Повноекранний режим"
 
 msgid "Go Back"
 msgstr "Назад"
@@ -307,6 +316,9 @@ msgstr "Хост"
 msgid "Hostname"
 msgstr "Ім'я хоста"
 
+msgid "ID"
+msgstr "ID"
+
 msgid "Icon Theme"
 msgstr "Тема оформлення"
 
@@ -314,7 +326,7 @@ msgid "Initializing printer..."
 msgstr "Ініціалізація принтера..."
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "Почати калібрування PID для:"
 
 msgid "Input Shaper"
 msgstr "Input Shaper"
@@ -338,7 +350,7 @@ msgid "Invert Z"
 msgstr "Інвертувати Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
+msgstr "Залежно від потужності обігрівача це може зайняти більше 5 хвилин."
 
 msgid "Klipper Restart"
 msgstr ""
@@ -360,8 +372,11 @@ msgstr "Кліппер намагається стартувати"
 msgid "Klipper will reboot"
 msgstr "Klipper перезавантажиться"
 
-msgid "KlipperScreen will reboot"
-msgstr "KlipperScreen перезавантажиться"
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT приховані, і їх слід використовувати з меню "
+"Заміна пластику"
 
 msgid "Language"
 msgstr "Мова"
@@ -369,8 +384,14 @@ msgstr "Мова"
 msgid "Large"
 msgstr "Великий"
 
+msgid "Last Used"
+msgstr "Останнє Використання"
+
 msgid "Layer:"
 msgstr "Шар:"
+
+msgid "Leds"
+msgstr "Освітлення"
 
 msgid "Left:"
 msgstr "Залишилось:"
@@ -392,6 +413,9 @@ msgstr "Макрос"
 
 msgid "Main Menu"
 msgstr "Головне Меню"
+
+msgid "Material"
+msgstr "Матеріал"
 
 msgid "Max"
 msgstr "Макс"
@@ -433,7 +457,7 @@ msgid "Moonraker: connected"
 msgstr "Підключено до Moonraker"
 
 msgid "More"
-msgstr ""
+msgstr "Більше"
 
 msgid "Move"
 msgstr "Переміщення"
@@ -452,6 +476,9 @@ msgstr "Ніколи"
 
 msgid "New"
 msgstr "Новий"
+
+msgid "No elegible macros:"
+msgstr "Непридатний макрос:"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -636,6 +663,9 @@ msgstr "Показати"
 msgid "Show Heater Power"
 msgstr "Показати Потужність Нагрівача"
 
+msgid "Show Scrollbars Buttons"
+msgstr "Показати кнопку смуги прокрутки"
+
 msgid "Shutdown"
 msgstr "Вимкнути"
 
@@ -665,6 +695,9 @@ msgstr "Швидкість:"
 
 msgid "Square Corner Velocity"
 msgstr "Квадратно кутова швидкість"
+
+msgid "Standby"
+msgstr "Очікування"
 
 msgid "Start"
 msgstr "СТАРТ"
@@ -761,6 +794,12 @@ msgstr[0] "година"
 msgstr[1] "годин"
 msgstr[2] "години"
 
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "макроси, які використовують 'rename_existing', приховані"
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "макроси з назвою, що починається на '_', приховані"
+
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "хвилина"
@@ -778,6 +817,15 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм/с³"
+
+#~ msgid "KlipperScreen will reboot"
+#~ msgstr "KlipperScreen перезавантажиться"
+
+#~ msgid "Continue"
+#~ msgstr "Продовжити"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Повноекранний режим"
 
 #~ msgid "Actions"
 #~ msgstr "Дії"

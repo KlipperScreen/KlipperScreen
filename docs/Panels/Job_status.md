@@ -14,7 +14,7 @@ This panel has more information than it shows by default, just click/tap the cor
 !!! note
     Layer is calculated from object height, it may not be accurate if variable layer is used
 
-    If that is the case use the Layer Progress method described in the [Quicktips](Quicktips.md#layer-progress)
+    If that is the case use the Layer Progress method described in the [Quicktips](../Quicktips.md#layer-progress)
 
 ## Extrusion info
 ![extrusion_screenshot](../img/panels/job_status_extrusion.png)

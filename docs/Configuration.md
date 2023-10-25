@@ -5,8 +5,15 @@ create a blank file in `~/printer_data/config/KlipperScreen.conf`, if the file a
 
 Write in the file only the options that need to be changed, and restart KlipperScreen.
 
+
+!!! failure "Critical"
+    Each configuration option should be on a newline, as they are presented here.
+
+    The line endings should be of UNIX style (LF).
+
+
 ## Include files
-```py
+```{ .ini .no-copy }
 [include conf.d/*.conf]
 # Include another configuration file. Wildcards (*) will expand to match anything.
 ```
@@ -14,7 +21,7 @@ Write in the file only the options that need to be changed, and restart KlipperS
 
 ## Main Options
 The options listed here are not changeable from within the ui.
-```py
+```{ .ini .no-copy }
 [main]
 # Time in seconds before the Job Status page closes itself after a successful job/print
 # 0 means disabled
@@ -40,7 +47,7 @@ screen_off_devices:  example1, example2
 
 ## Printer Options
 Multiple printers can be defined
-```py
+```{ .ini .no-copy }
 # Define printer and name. Name is anything after the first printer word
 [printer Ender 3 Pro]
 # Define the moonraker host/port if different from 127.0.0.1 and 7125
@@ -81,7 +88,8 @@ calibrate_y_position: 100
 # define the screw positons required for odd number of screws in a comma separated list
 # possible values are: bl, br, bm, fl, fr, fm, lm, rm, center
 # they correspond to back-left, back-right, back-middle, front-left, front-right, front-middle, left-middle, right-middle
-screw_positions: ""
+# example:
+screw_positions: bl, br, fm
 
 # Rotation is useful if the screen is not directly in front of the machine.
 # Valid values are 0 90 180 270
@@ -91,12 +99,17 @@ screw_rotation: 0
 extrude_distances: 5, 10, 15, 25
 extrude_speeds: 1, 2, 5, 25
 
-# Camera configuration
-camera_url: http://127.0.0.1/webcam/?action=stream
+# Camera needs to be configured in moonraker:
+# https://moonraker.readthedocs.io/en/latest/configuration/#webcam
 ```
 
 ## Preheat Options
-```py
+
+!!! question "Added one the others disappeared, Is this normal?"
+    Adding a custom preheat section will cause the defaults to not load, this is
+    the intended behaviour.
+
+```ini
 [preheat my_temp_setting]
 extruder: 195
 extruder1: 60
@@ -115,7 +128,7 @@ gcode: MY_HEATSOAK_MACRO
 There is a special preheat setting named cooldown to do additional things when the _cooldown_ button is pressed
 for example:
 
-```py
+```ini
 [preheat cooldown]
 gcode: M107
 ```
@@ -126,8 +139,11 @@ different items and there are several panel options available. It is possible to
 button press. There are two menus available in KlipperScreen, __main and __print. The __main menu is displayed while the
 printer is idle. The __print menu is accessible from the printing status page.
 
+!!! info
+    A predefined set of menus is already provided and it's recommended to be used
+
 A menu item is configured as follows:
-```py
+```{ .ini .no-copy }
 [menu __main my_menu_item]
 # To build a sub-menu of this menu item, you would next use [menu __main my_menu_item sub_menu_item]
 name: Item Name
@@ -152,12 +168,13 @@ enable: {{ printer.power_devices.count > 0 }}
 Available panels are listed here: [docs/panels.md](Panels.md)
 
 Certain variables are available for conditional testing of the enable statement:
-```py
+```{ .yaml .no-copy }
 printer.extruders.count # Number of extruders
 printer.temperature_devices.count # Number of temperature related devices that are not extruders
 printer.fans.count # Number of fans
 printer.power_devices.count # Number of power devices configured in Moonraker
 printer.gcode_macros.count # Number of gcode macros
+printer.gcode_macros.list # List of names of the gcode macros
 printer.output_pins.count # Number of fans
 
 printer.bltouch # Available if bltouch section defined in config
@@ -178,7 +195,7 @@ printer.pause_resume # Pause resume section of Klipper
 
 
 A sample configuration of a main menu would be as follows:
-```py
+```{ .yaml+jinja .no-copy }
 [menu __main homing]
 name: Homing
 icon: home
@@ -188,16 +205,19 @@ name: Preheat
 icon: heat-up
 panel: preheat
 
-[menu __main print]
-name: Print
-icon: print
-panel: print
-
 [menu __main homing homeall]
 name: Home All
 icon: home
 method: printer.gcode.script
 params: {"script":"G28"}
+
+[menu __main homing mymacro]
+name: My Macro
+icon: home
+method: printer.gcode.script
+params: {"script":"MY_MACRO"}
+enable: {{ 'MY_MACRO' in printer.gcode_macros.list }}
+
 ```
 
 ## KlipperScreen behaviour towards configuration

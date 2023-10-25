@@ -47,6 +47,8 @@ class KlipperScreenConfig:
 
         try:
             self.config.read(self.default_config_path)
+            # In case a user altered defaults.conf
+            self.validate_config(self.config)
             if self.config_path != self.default_config_path:
                 user_def, saved_def = self.separate_saved_config(self.config_path)
                 self.defined_config = configparser.ConfigParser()
@@ -59,19 +61,16 @@ class KlipperScreenConfig:
                 self.exclude_from_config(self.defined_config)
 
                 self.log_config(self.defined_config)
-                self.config.read_string(user_def)
+                if self.validate_config(self.defined_config, string=user_def):
+                    self.config.read_string(user_def)
                 if saved_def is not None:
-                    self.config.read_string(saved_def)
-                    logging.info(f"====== Saved Def ======\n{saved_def}\n=======================")
+                    auto_gen = configparser.ConfigParser()
+                    auto_gen.read_string(saved_def)
+                    if self.validate_config(auto_gen, string=saved_def, remove=True):
+                        self.config.read_string(saved_def)
+                        logging.info(f"====== Saved Def ======\n{saved_def}\n=======================")
             # This is the final config
             # self.log_config(self.config)
-            if self.validate_config():
-                logging.info('Configuration validated succesfuly')
-            else:
-                logging.error('Invalid configuration detected !!!')
-                logging.info('Loading default config')
-                self.config = configparser.ConfigParser()
-                self.config.read(self.default_config_path)
         except KeyError as Kerror:
             msg = f"Error reading config: {self.config_path}\n{Kerror}"
             logging.exception(msg)
@@ -139,9 +138,16 @@ class KlipperScreenConfig:
         self.lang = self.langs[lang]
         self.lang.install(names=['gettext', 'ngettext'])
 
-    def validate_config(self):
+    def validate_config(self, config, string="", remove=False):
         valid = True
-        for section in self.config:
+        if string:
+            msg = "Section headers have extra information after brackets possible newline issue:"
+            for line in string.split('\n'):
+                if re.match(r".+\].", line):
+                    logging.error(line)
+                    self.errors.append(f'{msg}\n\n{line}')
+                    return False
+        for section in config:
             if section == 'DEFAULT' or section.startswith('include '):
                 # Do not validate 'DEFAULT' or 'include*' sections
                 continue
@@ -150,7 +156,7 @@ class KlipperScreenConfig:
                 bools = (
                     'invert_x', 'invert_y', 'invert_z', '24htime', 'only_heaters', 'show_cursor', 'confirm_estop',
                     'autoclose_popups', 'use_dpms', 'use_default_menu', 'side_macro_shortcut', 'use-matchbox-keyboard',
-                    'show_heater_power'
+                    'show_heater_power', "show_scroll_steppers", "auto_open_extrude"
                 )
                 strs = (
                     'default_printer', 'language', 'print_sort_dir', 'theme', 'screen_blanking', 'font_size',
@@ -167,41 +173,46 @@ class KlipperScreenConfig:
                 strs = (
                     'moonraker_api_key', 'moonraker_host', 'titlebar_name_type',
                     'screw_positions', 'power_devices', 'titlebar_items', 'z_babystep_values',
-                    'extrude_distances', "extrude_speeds", "camera_url",
+                    'extrude_distances', "extrude_speeds",
                 )
                 numbers = (
-                    'moonraker_port', 'move_speed_xy', 'move_speed_z',
+                    'moonraker_port', 'move_speed_xy', 'move_speed_z', 'screw_rotation',
                     'calibrate_x_position', 'calibrate_y_position',
                 )
             elif section.startswith('preheat '):
                 strs = ('gcode', '')
-                numbers = [f'{option}' for option in self.config[section] if option != 'gcode']
+                numbers = [f'{option}' for option in config[section] if option != 'gcode']
             elif section.startswith('menu '):
                 strs = ('name', 'icon', 'panel', 'method', 'params', 'enable', 'confirm', 'style')
-            elif section == 'bed_screws':
-                # This section may be deprecated in favor of moving this options under the printer section
-                numbers = ('rotation', '')
-                strs = ('screw_positions', '')
-            elif section.startswith('graph') or section.startswith('displayed_macros'):
-                bools = [f'{option}' for option in self.config[section]]
-            elif section.startswith('z_calibrate_position'):
-                # This section may be deprecated in favor of moving this options under the printer section
-                numbers = ('calibrate_x_position', 'calibrate_y_position')
+            elif section.startswith('graph')\
+                    or section.startswith('displayed_macros')\
+                    or section.startswith('spoolman'):
+                bools = [f'{option}' for option in config[section]]
             else:
                 self.errors.append(f'Section [{section}] not recognized')
 
-            for key in self.config[section]:
+            for key in config[section]:
                 if key not in bools and key not in strs and key not in numbers:
                     msg = f'Option "{key}" not recognized for section "[{section}]"'
-                    self.errors.append(msg)
-                    # This most probably is not a big issue, continue to load the config
-                elif key in numbers and not self.is_float(self.config[section][key]) \
-                        or key in bools and self.config[section][key] not in ["False", "false", "True", "true"]:
+                    if key == "camera_url":
+                        msg = (
+                            "camera_url has been deprecated in favor of moonraker cameras\n\n"
+                            + "https://moonraker.readthedocs.io/en/latest/configuration/#webcam\n\n"
+                            + "remove camera_url from KlipperScreen config file"
+                        )
+                    if remove:
+                        # This should only be called for the auto-generated section
+                        self.config.remove_option(section, key)
+                    else:
+                        self.errors.append(msg)
+                elif key in numbers and not self.is_float(config[section][key]) \
+                        or key in bools and not self.is_bool(config[section][key]):
                     msg = (
                         f'Unable to parse "{key}" from [{section}]\n'
-                        f'Expected a {"number" if key in numbers else "boolean"} but got: {self.config[section][key]}'
+                        f'Expected a {"number" if key in numbers else "boolean"} but got: {config[section][key]}'
                     )
                     self.errors.append(msg)
+                    logging.error('Invalid configuration detected !!!')
                     valid = False
         return valid
 
@@ -212,6 +223,10 @@ class KlipperScreenConfig:
             return True
         except ValueError:
             return False
+
+    @staticmethod
+    def is_bool(element):
+        return element in ["False", "false", "True", "true"]
 
     def get_errors(self):
         return "".join(f'{error}\n\n' for error in self.errors)
@@ -242,7 +257,7 @@ class KlipperScreenConfig:
             {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
             {"side_macro_shortcut": {
                 "section": "main", "name": _("Macro shortcut on sidebar"), "type": "binary",
-                "value": "True", "callback": screen.toggle_macro_shortcut}},
+                "value": "True", "callback": screen.toggle_shortcut}},
             {"font_size": {
                 "section": "main", "name": _("Font Size"), "type": "dropdown",
                 "value": "medium", "callback": screen.restart_ks, "options": [
@@ -261,6 +276,10 @@ class KlipperScreenConfig:
                                   "value": "True"}},
             {"show_heater_power": {"section": "main", "name": _("Show Heater Power"), "type": "binary",
                                    "value": "False", "callback": screen.reload_panels}},
+            {"show_scroll_steppers": {"section": "main", "name": _("Show Scrollbars Buttons"), "type": "binary",
+                                      "value": "False", "callback": screen.reload_panels}},
+            {"auto_open_extrude": {"section": "main", "name": _("Auto-open Extrude On Pause"), "type": "binary",
+                                   "value": "True", "callback": screen.reload_panels}},
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
 
@@ -347,7 +366,10 @@ class KlipperScreenConfig:
                 self._include_config("/".join(full_path.split("/")[:-1]), include)
             self.exclude_from_config(config)
             self.log_config(config)
-            self.config.read(file)
+            with open(file, 'r') as f:
+                string = f.read()
+                if self.validate_config(config, string=string):
+                    self.config.read(file)
 
     def separate_saved_config(self, config_path):
         user_def = []
@@ -465,6 +487,7 @@ class KlipperScreenConfig:
 
         extra_sections = [i for i in self.config.sections() if i.startswith("displayed_macros")]
         extra_sections.extend([i for i in self.config.sections() if i.startswith("graph")])
+        extra_sections.extend([i for i in self.config.sections() if i.startswith("spoolman")])
         for section in extra_sections:
             for item in self.config.options(section):
                 value = self.config[section].getboolean(item, fallback=True)

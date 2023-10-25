@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 16:32-0300\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: NSteven\n"
 "Language-Team: NSteven\n"
@@ -41,6 +41,9 @@ msgstr "확인"
 msgid "Add profile"
 msgstr ""
 
+msgid "All"
+msgstr ""
+
 msgid "Apply"
 msgstr "확인"
 
@@ -50,6 +53,9 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
+
+msgid "Archived"
 msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
@@ -77,6 +83,9 @@ msgid "Auto-calibrate"
 msgstr "자동 교정"
 
 msgid "Auto-close notifications"
+msgstr ""
+
+msgid "Auto-open Extrude On Pause"
 msgstr ""
 
 msgid "Auto-scroll"
@@ -152,11 +161,11 @@ msgstr "%s에 연결 중.."
 msgid "Console"
 msgstr "콘솔 제어 명령"
 
-msgid "Continue"
-msgstr "계속"
-
 msgid "Cooldown"
 msgstr "가열 중단"
+
+msgid "DPMS has failed to load and has been disabled"
+msgstr ""
 
 msgid "Date"
 msgstr "날짜"
@@ -228,6 +237,9 @@ msgstr "파일"
 msgid "File:"
 msgstr "파일:"
 
+msgid "Filter"
+msgstr ""
+
 msgid "Finding ADXL"
 msgstr "가속도계 찾는 중.."
 
@@ -251,9 +263,6 @@ msgstr "글꼴 크기"
 
 msgid "Full Update"
 msgstr "전체 업데이트"
-
-msgid "Fullscreen"
-msgstr ""
 
 msgid "Go Back"
 msgstr "뒤로"
@@ -296,6 +305,9 @@ msgstr ""
 
 msgid "Hostname"
 msgstr "호스트 이름"
+
+msgid "ID"
+msgstr ""
 
 msgid "Icon Theme"
 msgstr "아이콘 테마"
@@ -348,8 +360,9 @@ msgstr "클리퍼 시작하는 중"
 msgid "Klipper will reboot"
 msgstr "Klipper가 재부팅됩니다"
 
-msgid "KlipperScreen will reboot"
-msgstr "KlipperScreen가 재부팅됩니다"
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
 
 msgid "Language"
 msgstr "언어"
@@ -357,8 +370,14 @@ msgstr "언어"
 msgid "Large"
 msgstr "크게"
 
+msgid "Last Used"
+msgstr ""
+
 msgid "Layer:"
 msgstr "레이어:"
+
+msgid "Leds"
+msgstr ""
 
 msgid "Left:"
 msgstr "남음:"
@@ -380,6 +399,9 @@ msgstr "매크로"
 
 msgid "Main Menu"
 msgstr "메인 메뉴"
+
+msgid "Material"
+msgstr ""
 
 msgid "Max"
 msgstr ""
@@ -440,6 +462,9 @@ msgstr ""
 
 msgid "New"
 msgstr "신규"
+
+msgid "No elegible macros:"
+msgstr ""
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -614,6 +639,9 @@ msgstr "보기"
 msgid "Show Heater Power"
 msgstr ""
 
+msgid "Show Scrollbars Buttons"
+msgstr ""
+
 msgid "Shutdown"
 msgstr ""
 
@@ -643,6 +671,9 @@ msgstr "속도:"
 
 msgid "Square Corner Velocity"
 msgstr "모서리 통과 속도"
+
+msgid "Standby"
+msgstr ""
 
 msgid "Start"
 msgstr "시작"
@@ -733,6 +764,12 @@ msgid "hour"
 msgid_plural "hours"
 msgstr[0] "시간"
 
+msgid "macros that use 'rename_existing' are hidden"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr ""
+
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] ""
@@ -748,6 +785,12 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "KlipperScreen will reboot"
+#~ msgstr "KlipperScreen가 재부팅됩니다"
+
+#~ msgid "Continue"
+#~ msgstr "계속"
 
 #~ msgid "Actions"
 #~ msgstr "툴 헤드 제어"

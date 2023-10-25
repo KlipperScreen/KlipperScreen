@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 16:32-0300\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
 "PO-Revision-Date: 2022-11-21 21:31-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -46,6 +46,9 @@ msgstr "Godkänn"
 msgid "Add profile"
 msgstr ""
 
+msgid "All"
+msgstr ""
+
 msgid "Apply"
 msgstr ""
 
@@ -55,6 +58,9 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
+
+msgid "Archived"
 msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
@@ -82,6 +88,9 @@ msgid "Auto-calibrate"
 msgstr ""
 
 msgid "Auto-close notifications"
+msgstr ""
+
+msgid "Auto-open Extrude On Pause"
 msgstr ""
 
 msgid "Auto-scroll"
@@ -157,11 +166,11 @@ msgstr "Ansluter till %s"
 msgid "Console"
 msgstr "Konsol"
 
-msgid "Continue"
-msgstr "Fortsätt"
-
 msgid "Cooldown"
 msgstr "Nedkylning"
+
+msgid "DPMS has failed to load and has been disabled"
+msgstr ""
 
 msgid "Date"
 msgstr "Datum"
@@ -233,6 +242,9 @@ msgstr "Fil"
 msgid "File:"
 msgstr ""
 
+msgid "Filter"
+msgstr ""
+
 msgid "Finding ADXL"
 msgstr ""
 
@@ -256,9 +268,6 @@ msgstr "Textstorlek"
 
 msgid "Full Update"
 msgstr "Fullständig Uppdatering"
-
-msgid "Fullscreen"
-msgstr ""
 
 msgid "Go Back"
 msgstr "Gå tillbaka"
@@ -301,6 +310,9 @@ msgstr ""
 
 msgid "Hostname"
 msgstr "Värdnamn"
+
+msgid "ID"
+msgstr ""
 
 msgid "Icon Theme"
 msgstr "Ikon tema"
@@ -353,7 +365,8 @@ msgstr "Klipper försöker starta"
 msgid "Klipper will reboot"
 msgstr "Klipper kommer att starta om"
 
-msgid "KlipperScreen will reboot"
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
 
 msgid "Language"
@@ -362,7 +375,13 @@ msgstr "Språk"
 msgid "Large"
 msgstr "Stor"
 
+msgid "Last Used"
+msgstr ""
+
 msgid "Layer:"
+msgstr ""
+
+msgid "Leds"
 msgstr ""
 
 msgid "Left:"
@@ -385,6 +404,9 @@ msgstr "Makron"
 
 msgid "Main Menu"
 msgstr "Huvudmeny"
+
+msgid "Material"
+msgstr ""
 
 msgid "Max"
 msgstr ""
@@ -444,6 +466,9 @@ msgid "Never"
 msgstr ""
 
 msgid "New"
+msgstr ""
+
+msgid "No elegible macros:"
 msgstr ""
 
 msgid ""
@@ -620,6 +645,9 @@ msgstr "Visa"
 msgid "Show Heater Power"
 msgstr ""
 
+msgid "Show Scrollbars Buttons"
+msgstr ""
+
 msgid "Shutdown"
 msgstr ""
 
@@ -648,6 +676,9 @@ msgid "Speed:"
 msgstr ""
 
 msgid "Square Corner Velocity"
+msgstr ""
+
+msgid "Standby"
 msgstr ""
 
 msgid "Start"
@@ -741,6 +772,12 @@ msgid_plural "hours"
 msgstr[0] "timme"
 msgstr[1] "timmar"
 
+msgid "macros that use 'rename_existing' are hidden"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr ""
+
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] ""
@@ -757,6 +794,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Continue"
+#~ msgstr "Fortsätt"
 
 #~ msgid "Actions"
 #~ msgstr "Åtgärder"

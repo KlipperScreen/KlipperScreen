@@ -3,20 +3,23 @@
 ## First steps
 
 Install the screen, following the instructions provided by the manufacturer, Some screens don't neeed extra software but some need to be installed with a script.
-It's strongly recommended to test it and ensure your hardware is working with Raspbian, Ubuntu or any distro you like.
+It's strongly recommended to test it and ensure your hardware is working with RaspberryOS, Ubuntu or any distro you like.
 Once you have established that the screen is working, then proceed installing KlipperScreen.
 
 ## Setup
-This install process is meant for a non-desktop version of the OS for example Raspbian Lite, but it should work on other versions.
+This install process is meant for a non-desktop version of the OS for example RaspberryOS Lite, but it should work on other debian derivatives.
 
-If you want to use it on a desktop (GUI version), then do `sudo systemctl set-default multi-user.target`
-if it's a Raspberry Pi, you can use `sudo raspi-config` to set boot to console by choosing the following options in order:
-
-```sh
-1System Options
-└──S5 Boot / Auto Login
-   └──B1 Console
+If you installed a desktop (GUI version) of the OS and want to run KlipperScreen exclusively then do:
+```sh title="Boot to console / KlipperScreen"
+sudo systemctl set-default multi-user.target
+sudo reboot
 ```
+to undo and go back to the desktop environment:
+```sh title="Boot to the desktop"
+sudo systemctl set-default graphical.target
+sudo reboot
+```
+
 
 ## Auto install
 
@@ -36,7 +39,7 @@ Execute the following commands:
 
 ```sh
 cd ~/
-git clone https://github.com/jordanruthe/KlipperScreen.git
+git clone https://github.com/KlipperScreen/KlipperScreen.git
 cd ~/KlipperScreen
 ./scripts/KlipperScreen-install.sh
 ```
@@ -51,27 +54,45 @@ At this point KlipperScreen should be working, if it doesn't start then go to th
 
 ## Moonraker configuration
 
-In moonraker.conf ensure that 127.0.0.1 is a trusted client:
+In moonraker.conf ensure that the IP of the device is a trusted client:
 
-```py
+```ini title="moonraker.conf"
 [authorization]
 trusted_clients:
   127.0.0.1
 ```
 !!! warning
-    `force_logins: true` requires the moonraker api key in [KlipperScreen.conf](Configuration.md)
+    having `force_logins: true` in this section or if you don't want to use `trusted_clients`
 
-If you wish to use the update manager feature of moonraker for KlipperScreen, add the following block to the moonraker.conf:
+    Will require the [moonraker api key](https://moonraker.readthedocs.io/en/latest/installation/#retrieving-the-api-key) in [KlipperScreen.conf](Configuration.md)
 
-```py
+If you wish to use the update manager feature of moonraker for KlipperScreen, add the following block to `moonraker.conf`:
+
+```ini title="moonraker.conf"
 [update_manager KlipperScreen]
 type: git_repo
 path: ~/KlipperScreen
-origin: https://github.com/jordanruthe/KlipperScreen.git
-env: ~/.KlipperScreen-env/bin/python
+origin: https://github.com/KlipperScreen/KlipperScreen.git
+virtualenv: ~/.KlipperScreen-env
 requirements: scripts/KlipperScreen-requirements.txt
-install_script: scripts/KlipperScreen-install.sh
+system_dependencies: scripts/system-dependencies.json
 managed_services: KlipperScreen
 ```
-!!! note
-    If you see warnings in other UIs ignore them until KlipperScreen finishes installing.
+!!! tip
+    If you see warnings in other UIs ignore them until KlipperScreen finishes installing, and Moonraker is restarted.
+
+
+## Printer Configuration
+
+Some basic configuration needs to be applied for correct functionality.
+
+```ini title="printer.cfg"
+[virtual_sdcard]
+path: ~/printer_data/gcodes
+[display_status]
+[pause_resume]
+```
+
+## Macros
+
+You may need some macros for the printer to function as you expected, [read more in the macros page](macros.md)

@@ -1,16 +1,9 @@
 import re
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
-
-from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
-
-
-def create_panel(*args):
-    return InputShaperPanel(*args)
 
 
 # X and Y frequencies
@@ -21,7 +14,7 @@ XY_FREQ = [
 SHAPERS = ['zv', 'mzv', 'zvd', 'ei', '2hump_ei', '3hump_ei']
 
 
-class InputShaperPanel(ScreenPanel):
+class Panel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         self.freq_xy_adj = {}
@@ -29,7 +22,7 @@ class InputShaperPanel(ScreenPanel):
         self.calibrate_btn = self._gtk.Button("move", _('Finding ADXL'), "color1", lines=1)
         self.calibrate_btn.connect("clicked", self.on_popover_clicked)
         self.calibrate_btn.set_sensitive(False)
-        self.status = Gtk.Label("")
+        self.status = Gtk.Label()
         self.status.set_hexpand(True)
         self.status.set_vexpand(False)
         self.status.set_halign(Gtk.Align.START)
@@ -114,17 +107,15 @@ class InputShaperPanel(ScreenPanel):
     def start_calibration(self, widget, method):
         self.labels['popover'].popdown()
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+            self._screen._ws.klippy.gcode_script("G28")
         self.calibrating_axis = method
         if method == "x":
-            self._screen._ws.klippy.gcode_script('SHAPER_CALIBRATE AXIS=X')
+            self._screen._send_action(self.calibrate_btn, "printer.gcode.script", {"script": 'SHAPER_CALIBRATE AXIS=X'})
         if method == "y":
-            self._screen._ws.klippy.gcode_script('SHAPER_CALIBRATE AXIS=Y')
+            self._screen._send_action(self.calibrate_btn, "printer.gcode.script", {"script": 'SHAPER_CALIBRATE AXIS=Y'})
         if method == "both":
-            self._screen._ws.klippy.gcode_script('SHAPER_CALIBRATE')
-
+            self._screen._send_action(self.calibrate_btn, "printer.gcode.script", {"script": 'SHAPER_CALIBRATE'})
         self.calibrate_btn.set_label(_('Calibrating') + '...')
-        self.calibrate_btn.set_sensitive(False)
 
     def set_opt_value(self, widget, opt, *args):
         shaper_freq_x = self.freq_xy_adj['shaper_freq_x'].get_value()
@@ -175,7 +166,9 @@ class InputShaperPanel(ScreenPanel):
         # Recommended shaper_type_y = ei, shaper_freq_y = 48.4 Hz
         if 'recommended shaper_type_' in data:
             results = re.search(r'shaper_type_(?P<axis>[xy])\s*=\s*(?P<shaper_type>.*?), shaper_freq_.\s*=\s*('
-                                r'?P<shaper_freq>[0-9.]+)', data).groupdict()
+                                r'?P<shaper_freq>[0-9.]+)', data)
+            if results:
+                results.groupdict()
             self.freq_xy_adj['shaper_freq_' + results['axis']].set_value(float(results['shaper_freq']))
             self.freq_xy_combo['shaper_type_' + results['axis']].set_active(SHAPERS.index(results['shaper_type']))
             if self.calibrating_axis == results['axis'] or (self.calibrating_axis == "both" and results['axis'] == 'y'):
@@ -185,6 +178,8 @@ class InputShaperPanel(ScreenPanel):
         # shaper_type_y:ei shaper_freq_y:48.400 damping_ratio_y:0.100000
         if 'shaper_type_' in data:
             results = re.search(r'shaper_type_(?P<axis>[xy]):(?P<shaper_type>.*?) shaper_freq_.:('
-                                r'?P<shaper_freq>[0-9.]+)', data).groupdict()
-            self.freq_xy_adj['shaper_freq_' + results['axis']].set_value(float(results['shaper_freq']))
-            self.freq_xy_combo['shaper_type_' + results['axis']].set_active(SHAPERS.index(results['shaper_type']))
+                                r'?P<shaper_freq>[0-9.]+)', data)
+            if results:
+                results = results.groupdict()
+                self.freq_xy_adj['shaper_freq_' + results['axis']].set_value(float(results['shaper_freq']))
+                self.freq_xy_combo['shaper_type_' + results['axis']].set_active(SHAPERS.index(results['shaper_type']))

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 16:32-0300\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
 "PO-Revision-Date: 2022-11-30 18:14-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -50,6 +50,9 @@ msgstr "Aceitar"
 msgid "Add profile"
 msgstr "Adicionar perfil"
 
+msgid "All"
+msgstr ""
+
 msgid "Apply"
 msgstr "Aplicar"
 
@@ -59,6 +62,9 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
+
+msgid "Archived"
 msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
@@ -87,6 +93,9 @@ msgstr "Calibrar automaticamente"
 
 msgid "Auto-close notifications"
 msgstr "Notificações de fechamento automático"
+
+msgid "Auto-open Extrude On Pause"
+msgstr ""
 
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
@@ -161,11 +170,11 @@ msgstr "Conectando %s"
 msgid "Console"
 msgstr "Terminal"
 
-msgid "Continue"
-msgstr "Continuar"
-
 msgid "Cooldown"
 msgstr "Resfriar"
+
+msgid "DPMS has failed to load and has been disabled"
+msgstr ""
 
 msgid "Date"
 msgstr "Data"
@@ -237,6 +246,9 @@ msgstr "Arquivo"
 msgid "File:"
 msgstr "Arquivo:"
 
+msgid "Filter"
+msgstr ""
+
 msgid "Finding ADXL"
 msgstr "Encontrar ADXL"
 
@@ -260,9 +272,6 @@ msgstr "Tamanho da fonte"
 
 msgid "Full Update"
 msgstr "Atualizar Tudo"
-
-msgid "Fullscreen"
-msgstr ""
 
 msgid "Go Back"
 msgstr "Voltar"
@@ -305,6 +314,9 @@ msgstr "Host"
 
 msgid "Hostname"
 msgstr "Nome do Host"
+
+msgid "ID"
+msgstr ""
 
 msgid "Icon Theme"
 msgstr "Tema"
@@ -357,8 +369,9 @@ msgstr "Klipper está iniciando"
 msgid "Klipper will reboot"
 msgstr "Klipper será reiniciado"
 
-msgid "KlipperScreen will reboot"
-msgstr "KlipperScreen será reiniciado"
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
 
 msgid "Language"
 msgstr "Idioma"
@@ -366,8 +379,14 @@ msgstr "Idioma"
 msgid "Large"
 msgstr "Grande"
 
+msgid "Last Used"
+msgstr ""
+
 msgid "Layer:"
 msgstr "Camada:"
+
+msgid "Leds"
+msgstr ""
 
 msgid "Left:"
 msgstr "Restante:"
@@ -389,6 +408,9 @@ msgstr "Macros"
 
 msgid "Main Menu"
 msgstr "Menu principal"
+
+msgid "Material"
+msgstr ""
 
 msgid "Max"
 msgstr "Max"
@@ -449,6 +471,9 @@ msgstr "Nunca"
 
 msgid "New"
 msgstr "Novo"
+
+msgid "No elegible macros:"
+msgstr ""
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -530,7 +555,7 @@ msgid "Profile Name:"
 msgstr "Nome do Perfil:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Forneça um Log do KlipperScreen ao pedir ajuda.\n"
+msgstr ""
 
 msgid "Quad Gantry Level"
 msgstr "Nível do pórtico quádruplo"
@@ -626,6 +651,9 @@ msgstr "Mostrar"
 msgid "Show Heater Power"
 msgstr "Mostrar Potência do Aquecedor"
 
+msgid "Show Scrollbars Buttons"
+msgstr ""
+
 msgid "Shutdown"
 msgstr "Desligar"
 
@@ -655,6 +683,9 @@ msgstr "Velocidade:"
 
 msgid "Square Corner Velocity"
 msgstr "Velocidade do Canto Reto"
+
+msgid "Standby"
+msgstr ""
 
 msgid "Start"
 msgstr "Iniciar"
@@ -747,6 +778,12 @@ msgid_plural "hours"
 msgstr[0] "hora"
 msgstr[1] "horas"
 
+msgid "macros that use 'rename_existing' are hidden"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr ""
+
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] ""
@@ -763,6 +800,12 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "KlipperScreen will reboot"
+#~ msgstr "KlipperScreen será reiniciado"
+
+#~ msgid "Continue"
+#~ msgstr "Continuar"
 
 #~ msgid "Actions"
 #~ msgstr "Ações"

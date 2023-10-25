@@ -3,8 +3,8 @@ site_url: https://klipperscreen.readthedocs.io
 site_description: >-
   KlipperScreen documentation.
 
-repo_name: jordanruthe/KlipperScreen/
-repo_url: https://github.com/jordanruthe/KlipperScreen/
+repo_name: KlipperScreen/KlipperScreen/
+repo_url: https://github.com/KlipperScreen/KlipperScreen/
 nav:
     - Home: index.md
     - Setup:
@@ -13,15 +13,20 @@ nav:
       - Configuration.md
       - Quicktips.md
       - Macros: macros.md
-      - Android.md
       - Thumbnails.md
+      - Remote screens:
+        - VNC.md
+        - Xserver-XSDL (Android): Android.md
     - Troubleshooting:
       - First Steps/Log: Troubleshooting.md
       - Network: Troubleshooting/Network.md
       - Physical install: Troubleshooting/Physical_Install.md
-      - Showing Console: Troubleshooting/Showing_console.md
+      - Wrong Framebuffer: Troubleshooting/Framebuffer.md
+      - Screen Rotation: Troubleshooting/Rotation.md
       - Touch: Troubleshooting/Touch_issues.md
       - Virtual Console Error: Troubleshooting/VC_ERROR.md
+      - FBturbo: Troubleshooting/FBturbo.md
+      - Last resort: Troubleshooting/Last_resort.md
     - Screenshots: Panels.md
     - Panels:
       - Bed Level/Screws: Panels/Screws.md
@@ -31,12 +36,13 @@ nav:
     - Theming.md
     - Translations.md
     - Breaking Changes: Changelog.md
-
+    - Developers.md
     - Contact.md
 theme:
   name: material
   language: en
   features:
+    - content.code.copy
     - content.code.annotate
     - content.tooltips
     - navigation.expand
@@ -66,7 +72,7 @@ markdown_extensions:
 extra:
     social:
       - icon: fontawesome/brands/github
-        link: https://github.com/jordanruthe/klipperScreen/
+        link: https://github.com/KlipperScreen/KlipperScreen/
       - icon: fontawesome/brands/discord
         link: https://discord.klipper3d.org/
       - icon: fontawesome/brands/python

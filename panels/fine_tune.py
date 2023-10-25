@@ -1,26 +1,22 @@
 import logging
 import re
-import contextlib
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
-
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
 
-def create_panel(*args):
-    return FineTunePanel(*args)
-
-
-class FineTunePanel(ScreenPanel):
-    bs_deltas = ["0.01", "0.05"]
-    bs_delta = bs_deltas[-1]
-    percent_deltas = ['1', '5', '10', '25']
-    percent_delta = percent_deltas[-2]
+class Panel(ScreenPanel):
+    z_deltas = ["0.01", "0.05"]
+    z_delta = z_deltas[-1]
+    speed_deltas = ['5', '25']
+    s_delta = speed_deltas[-1]
+    extrude_deltas = ['1', '2']
+    e_delta = extrude_deltas[-1]
     speed = extrusion = 100
+    z_offset = 0.0
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
@@ -29,40 +25,53 @@ class FineTunePanel(ScreenPanel):
             if re.match(r'^[0-9,\.\s]+$', bs):
                 bs = [str(i.strip()) for i in bs.split(',')]
                 if 1 < len(bs) < 3:
-                    self.bs_deltas = bs
-                    self.bs_delta = self.bs_deltas[-1]
+                    self.z_deltas = bs
+                    self.z_delta = self.z_deltas[-1]
 
-        # babystepping grid
-        bsgrid = Gtk.Grid()
-        for j, i in enumerate(self.bs_deltas):
-            self.labels[f"bdelta{i}"] = self._gtk.Button(label=i)
-            self.labels[f"bdelta{i}"].connect("clicked", self.change_bs_delta, float(i))
-            ctx = self.labels[f"bdelta{i}"].get_style_context()
+        zgrid = Gtk.Grid()
+        for j, i in enumerate(self.z_deltas):
+            self.labels[f"zdelta{i}"] = self._gtk.Button(label=i)
+            self.labels[f"zdelta{i}"].connect("clicked", self.change_percent_delta, "z_offset", float(i))
+            ctx = self.labels[f"zdelta{i}"].get_style_context()
             if j == 0:
                 ctx.add_class("distbutton_top")
-            elif j == len(self.bs_deltas) - 1:
+            elif j == len(self.z_deltas) - 1:
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
-            if i == self.bs_delta:
+            if i == self.z_delta:
                 ctx.add_class("distbutton_active")
-            bsgrid.attach(self.labels[f"bdelta{i}"], j, 0, 1, 1)
-        # Grid for percentage
-        deltgrid = Gtk.Grid()
-        for j, i in enumerate(self.percent_deltas):
-            self.labels[f"pdelta{i}"] = self._gtk.Button(label=f"{i}%")
-            self.labels[f"pdelta{i}"].connect("clicked", self.change_percent_delta, int(i))
-            ctx = self.labels[f"pdelta{i}"].get_style_context()
+            zgrid.attach(self.labels[f"zdelta{i}"], j, 0, 1, 1)
+
+        spdgrid = Gtk.Grid()
+        for j, i in enumerate(self.speed_deltas):
+            self.labels[f"sdelta{i}"] = self._gtk.Button(label=f"{i}%")
+            self.labels[f"sdelta{i}"].connect("clicked", self.change_percent_delta, "speed", int(i))
+            ctx = self.labels[f"sdelta{i}"].get_style_context()
             if j == 0:
                 ctx.add_class("distbutton_top")
-            elif j == len(self.percent_deltas) - 1:
+            elif j == len(self.speed_deltas) - 1:
                 ctx.add_class("distbutton_bottom")
             else:
                 ctx.add_class("distbutton")
-            if i == self.percent_delta:
+            if i == self.s_delta:
                 ctx.add_class("distbutton_active")
-            deltgrid.attach(self.labels[f"pdelta{i}"], j, 0, 1, 1)
+            spdgrid.attach(self.labels[f"sdelta{i}"], j, 0, 1, 1)
 
+        extgrid = Gtk.Grid()
+        for j, i in enumerate(self.extrude_deltas):
+            self.labels[f"edelta{i}"] = self._gtk.Button(label=f"{i}%")
+            self.labels[f"edelta{i}"].connect("clicked", self.change_percent_delta, "extrude", int(i))
+            ctx = self.labels[f"edelta{i}"].get_style_context()
+            if j == 0:
+                ctx.add_class("distbutton_top")
+            elif j == len(self.extrude_deltas) - 1:
+                ctx.add_class("distbutton_bottom")
+            else:
+                ctx.add_class("distbutton")
+            if i == self.e_delta:
+                ctx.add_class("distbutton_active")
+            extgrid.attach(self.labels[f"edelta{i}"], j, 0, 1, 1)
         grid = self._gtk.HomogeneousGrid()
         grid.set_row_homogeneous(False)
 
@@ -83,26 +92,28 @@ class FineTunePanel(ScreenPanel):
             grid.attach(self.labels['z+'], 0, 0, 1, 1)
             grid.attach(self.labels['z-'], 1, 0, 1, 1)
             grid.attach(self.labels['zoffset'], 2, 0, 1, 1)
-            grid.attach(bsgrid, 0, 1, 3, 1)
+            grid.attach(zgrid, 0, 1, 3, 1)
             grid.attach(self.labels['speed-'], 0, 2, 1, 1)
             grid.attach(self.labels['speed+'], 1, 2, 1, 1)
             grid.attach(self.labels['speedfactor'], 2, 2, 1, 1)
-            grid.attach(self.labels['extrude-'], 0, 3, 1, 1)
-            grid.attach(self.labels['extrude+'], 1, 3, 1, 1)
-            grid.attach(self.labels['extrudefactor'], 2, 3, 1, 1)
-            grid.attach(deltgrid, 0, 4, 3, 1)
+            grid.attach(spdgrid, 0, 3, 3, 1)
+            grid.attach(self.labels['extrude-'], 0, 4, 1, 1)
+            grid.attach(self.labels['extrude+'], 1, 4, 1, 1)
+            grid.attach(self.labels['extrudefactor'], 2, 4, 1, 1)
+            grid.attach(extgrid, 0, 5, 3, 1)
         else:
             grid.attach(self.labels['zoffset'], 0, 0, 1, 1)
             grid.attach(self.labels['z+'], 0, 1, 1, 1)
             grid.attach(self.labels['z-'], 0, 2, 1, 1)
-            grid.attach(bsgrid, 0, 3, 1, 1)
+            grid.attach(zgrid, 0, 3, 1, 1)
             grid.attach(self.labels['speedfactor'], 1, 0, 1, 1)
             grid.attach(self.labels['speed+'], 1, 1, 1, 1)
             grid.attach(self.labels['speed-'], 1, 2, 1, 1)
+            grid.attach(spdgrid, 1, 3, 1, 1)
             grid.attach(self.labels['extrudefactor'], 2, 0, 1, 1)
             grid.attach(self.labels['extrude+'], 2, 1, 1, 1)
             grid.attach(self.labels['extrude-'], 2, 2, 1, 1)
-            grid.attach(deltgrid, 1, 3, 2, 1)
+            grid.attach(extgrid, 2, 3, 1, 1)
 
         self.labels['z+'].connect("clicked", self.change_babystepping, "+")
         self.labels['zoffset'].connect("clicked", self.change_babystepping, "reset")
@@ -117,13 +128,12 @@ class FineTunePanel(ScreenPanel):
         self.content.add(grid)
 
     def process_update(self, action, data):
-
         if action != "notify_status_update":
             return
-
         if "gcode_move" in data:
             if "homing_origin" in data["gcode_move"]:
                 self.labels['zoffset'].set_label(f'  {data["gcode_move"]["homing_origin"][2]:.3f}mm')
+                self.z_offset = float(data["gcode_move"]["homing_origin"][2])
             if "extrude_factor" in data["gcode_move"]:
                 self.extrusion = round(float(data["gcode_move"]["extrude_factor"]) * 100)
                 self.labels['extrudefactor'].set_label(f"  {self.extrusion:3}%")
@@ -134,49 +144,49 @@ class FineTunePanel(ScreenPanel):
     def change_babystepping(self, widget, direction):
         if direction == "reset":
             self.labels['zoffset'].set_label('  0.00mm')
-            self._screen._ws.klippy.gcode_script("SET_GCODE_OFFSET Z=0 MOVE=1")
-        elif direction in ["+", "-"]:
-            with contextlib.suppress(KeyError):
-                z_offset = float(self._printer.data["gcode_move"]["homing_origin"][2])
-                if direction == "+":
-                    z_offset += float(self.bs_delta)
-                else:
-                    z_offset -= float(self.bs_delta)
-                self.labels['zoffset'].set_label(f'  {z_offset:.3f}mm')
-            self._screen._ws.klippy.gcode_script(f"SET_GCODE_OFFSET Z_ADJUST={direction}{self.bs_delta} MOVE=1")
-
-    def change_bs_delta(self, widget, bs):
-        logging.info(f"### BabyStepping {bs}")
-        self.labels[f"bdelta{self.bs_delta}"].get_style_context().remove_class("distbutton_active")
-        self.labels[f"bdelta{bs}"].get_style_context().add_class("distbutton_active")
-        self.bs_delta = bs
+            self._screen._send_action(widget, "printer.gcode.script", {"script": "SET_GCODE_OFFSET Z=0 MOVE=1"})
+            return
+        elif direction == "+":
+            self.z_offset += float(self.z_delta)
+        elif direction == "-":
+            self.z_offset -= float(self.z_delta)
+        self.labels['zoffset'].set_label(f'  {self.z_offset:.3f}mm')
+        self._screen._send_action(widget, "printer.gcode.script",
+                                  {"script": f"SET_GCODE_OFFSET Z_ADJUST={direction}{self.z_delta} MOVE=1"})
 
     def change_extrusion(self, widget, direction):
         if direction == "+":
-            self.extrusion += int(self.percent_delta)
+            self.extrusion += int(self.e_delta)
         elif direction == "-":
-            self.extrusion -= int(self.percent_delta)
+            self.extrusion -= int(self.e_delta)
         elif direction == "reset":
             self.extrusion = 100
-
         self.extrusion = max(self.extrusion, 1)
         self.labels['extrudefactor'].set_label(f"  {self.extrusion:3}%")
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.set_extrusion_rate(self.extrusion))
+        self._screen._send_action(widget, "printer.gcode.script",
+                                  {"script": KlippyGcodes.set_extrusion_rate(self.extrusion)})
 
     def change_speed(self, widget, direction):
         if direction == "+":
-            self.speed += int(self.percent_delta)
+            self.speed += int(self.s_delta)
         elif direction == "-":
-            self.speed -= int(self.percent_delta)
+            self.speed -= int(self.s_delta)
         elif direction == "reset":
             self.speed = 100
 
         self.speed = max(self.speed, 1)
         self.labels['speedfactor'].set_label(f"  {self.speed:3}%")
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.set_speed_rate(self.speed))
+        self._screen._send_action(widget, "printer.gcode.script", {"script": KlippyGcodes.set_speed_rate(self.speed)})
 
-    def change_percent_delta(self, widget, delta):
+    def change_percent_delta(self, widget, array, delta):
         logging.info(f"### Delta {delta}")
-        self.labels[f"pdelta{self.percent_delta}"].get_style_context().remove_class("distbutton_active")
-        self.labels[f"pdelta{delta}"].get_style_context().add_class("distbutton_active")
-        self.percent_delta = delta
+        widget.get_style_context().add_class("distbutton_active")
+        if array == "z_offset":
+            self.labels[f"zdelta{self.z_delta}"].get_style_context().remove_class("distbutton_active")
+            self.z_delta = delta
+        elif array == "speed":
+            self.labels[f"sdelta{self.s_delta}"].get_style_context().remove_class("distbutton_active")
+            self.s_delta = delta
+        elif array == "extrude":
+            self.labels[f"edelta{self.e_delta}"].get_style_context().remove_class("distbutton_active")
+            self.e_delta = delta

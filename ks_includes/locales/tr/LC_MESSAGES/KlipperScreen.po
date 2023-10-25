@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 16:32-0300\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
 "PO-Revision-Date: 2023-07-23 17:27+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -46,6 +46,9 @@ msgstr "Kabul et"
 msgid "Add profile"
 msgstr "Profil ekle"
 
+msgid "All"
+msgstr ""
+
 msgid "Apply"
 msgstr "Uygula"
 
@@ -56,6 +59,9 @@ msgstr "Endstop'a %s%.3f ofset uygulansın mı?"
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
 msgstr "Prob'a %s%.3f ofset uygulansın mı?"
+
+msgid "Archived"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Nesneyi hariç tutmak istediğinizden emin misiniz?"
@@ -83,6 +89,9 @@ msgstr "Otomatik-Kalibrasyon"
 
 msgid "Auto-close notifications"
 msgstr "Bildirimleri otomatik kapat"
+
+msgid "Auto-open Extrude On Pause"
+msgstr ""
 
 msgid "Auto-scroll"
 msgstr "Otomatik kaydırma"
@@ -157,11 +166,11 @@ msgstr "%s'e Bağlanılıyor"
 msgid "Console"
 msgstr "Konsol"
 
-msgid "Continue"
-msgstr "Devam et"
-
 msgid "Cooldown"
 msgstr "Soğutma"
+
+msgid "DPMS has failed to load and has been disabled"
+msgstr ""
 
 msgid "Date"
 msgstr "Tarih"
@@ -233,6 +242,9 @@ msgstr "Dosya"
 msgid "File:"
 msgstr "Dosya:"
 
+msgid "Filter"
+msgstr ""
+
 msgid "Finding ADXL"
 msgstr "ADXL Bulunuyor"
 
@@ -256,9 +268,6 @@ msgstr "Yazı boyutu"
 
 msgid "Full Update"
 msgstr "Tam Güncelleme"
-
-msgid "Fullscreen"
-msgstr "Tam Ekran"
 
 msgid "Go Back"
 msgstr "Geri git"
@@ -301,6 +310,9 @@ msgstr "Sunucu"
 
 msgid "Hostname"
 msgstr "Ana bilgisayar adı"
+
+msgid "ID"
+msgstr ""
 
 msgid "Icon Theme"
 msgstr "Simge Teması"
@@ -353,8 +365,9 @@ msgstr "Klipper başlatılmaya çalışılıyor"
 msgid "Klipper will reboot"
 msgstr "Klipper yeniden başlayacak"
 
-msgid "KlipperScreen will reboot"
-msgstr "KlipperScreen yeniden başlayacak"
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
 
 msgid "Language"
 msgstr "Dil"
@@ -362,8 +375,14 @@ msgstr "Dil"
 msgid "Large"
 msgstr "Büyük"
 
+msgid "Last Used"
+msgstr ""
+
 msgid "Layer:"
 msgstr "Katman:"
+
+msgid "Leds"
+msgstr ""
 
 msgid "Left:"
 msgstr "Kalan:"
@@ -385,6 +404,9 @@ msgstr "Makrolar"
 
 msgid "Main Menu"
 msgstr "Ana Menü"
+
+msgid "Material"
+msgstr ""
 
 msgid "Max"
 msgstr "Maks"
@@ -445,6 +467,9 @@ msgstr "Asla"
 
 msgid "New"
 msgstr "Yeni"
+
+msgid "No elegible macros:"
+msgstr ""
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -526,7 +551,7 @@ msgid "Profile Name:"
 msgstr "Profil ismi:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Yardım isterken KlipperScreen.log dosyasını sağlayın.\n"
+msgstr ""
 
 msgid "Quad Gantry Level"
 msgstr "Dörtlü Köprü Seviyesi"
@@ -622,6 +647,9 @@ msgstr "Göster"
 msgid "Show Heater Power"
 msgstr "Isıtıcı Gücünü Göster"
 
+msgid "Show Scrollbars Buttons"
+msgstr ""
+
 msgid "Shutdown"
 msgstr "Kapat"
 
@@ -651,6 +679,9 @@ msgstr "Hız:"
 
 msgid "Square Corner Velocity"
 msgstr "Kare Köşe Hızı"
+
+msgid "Standby"
+msgstr ""
 
 msgid "Start"
 msgstr "Başlat"
@@ -743,6 +774,12 @@ msgid_plural "hours"
 msgstr[0] "saat"
 msgstr[1] "saatler"
 
+msgid "macros that use 'rename_existing' are hidden"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr ""
+
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "dakika"
@@ -759,6 +796,15 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "KlipperScreen will reboot"
+#~ msgstr "KlipperScreen yeniden başlayacak"
+
+#~ msgid "Continue"
+#~ msgstr "Devam et"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Tam Ekran"
 
 #~ msgid "Actions"
 #~ msgstr "Eylemler"

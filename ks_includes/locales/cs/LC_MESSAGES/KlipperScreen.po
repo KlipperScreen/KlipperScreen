@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 16:32-0300\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
 "PO-Revision-Date: 2023-01-29 09:27-0600\n"
 "Last-Translator: \n"
 "Language-Team: Jan Stanka (stanky@email.cz)\n"
@@ -46,6 +46,9 @@ msgstr "Přijmout"
 msgid "Add profile"
 msgstr "Přidat profil"
 
+msgid "All"
+msgstr ""
+
 msgid "Apply"
 msgstr "Použít"
 
@@ -55,6 +58,9 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
+
+msgid "Archived"
 msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
@@ -83,6 +89,9 @@ msgstr "Auto-kalibrace"
 
 msgid "Auto-close notifications"
 msgstr "Automaticky zavřít upozornění"
+
+msgid "Auto-open Extrude On Pause"
+msgstr ""
 
 msgid "Auto-scroll"
 msgstr "Auto posun"
@@ -157,11 +166,11 @@ msgstr "Připojování k %s"
 msgid "Console"
 msgstr "Konsole"
 
-msgid "Continue"
-msgstr "Pokračuj"
-
 msgid "Cooldown"
 msgstr "Zchladit"
+
+msgid "DPMS has failed to load and has been disabled"
+msgstr ""
 
 msgid "Date"
 msgstr "Datum"
@@ -233,6 +242,9 @@ msgstr "Soubor"
 msgid "File:"
 msgstr "Soubor:"
 
+msgid "Filter"
+msgstr ""
+
 msgid "Finding ADXL"
 msgstr "Hledání ADXL"
 
@@ -256,9 +268,6 @@ msgstr "Velikost fontu"
 
 msgid "Full Update"
 msgstr "Úplný update"
-
-msgid "Fullscreen"
-msgstr ""
 
 msgid "Go Back"
 msgstr "Zpět"
@@ -301,6 +310,9 @@ msgstr "Host"
 
 msgid "Hostname"
 msgstr "Hostname"
+
+msgid "ID"
+msgstr ""
 
 msgid "Icon Theme"
 msgstr "Sada ikon"
@@ -353,8 +365,9 @@ msgstr "Klipper startuje"
 msgid "Klipper will reboot"
 msgstr "Klipper se restartuje"
 
-msgid "KlipperScreen will reboot"
-msgstr "KlipperScreen se restartuje"
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
 
 msgid "Language"
 msgstr "Jazyk"
@@ -362,8 +375,14 @@ msgstr "Jazyk"
 msgid "Large"
 msgstr "Velký"
 
+msgid "Last Used"
+msgstr ""
+
 msgid "Layer:"
 msgstr "Vrstva:"
+
+msgid "Leds"
+msgstr ""
 
 msgid "Left:"
 msgstr "Zbývá:"
@@ -385,6 +404,9 @@ msgstr "Makra"
 
 msgid "Main Menu"
 msgstr "Hlavní menu"
+
+msgid "Material"
+msgstr ""
 
 msgid "Max"
 msgstr "Max"
@@ -445,6 +467,9 @@ msgstr "Nikdy"
 
 msgid "New"
 msgstr "Nový"
+
+msgid "No elegible macros:"
+msgstr ""
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -525,7 +550,7 @@ msgid "Profile Name:"
 msgstr "Jméno profilu:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Provide KlipperScreen.log when asking for help.\n"
+msgstr ""
 
 msgid "Quad Gantry Level"
 msgstr "Quad Gantry Level"
@@ -621,6 +646,9 @@ msgstr "Ukaž"
 msgid "Show Heater Power"
 msgstr "Ukaž odběr topení"
 
+msgid "Show Scrollbars Buttons"
+msgstr ""
+
 msgid "Shutdown"
 msgstr "Shutdown"
 
@@ -649,6 +677,9 @@ msgid "Speed:"
 msgstr "Rychlost:"
 
 msgid "Square Corner Velocity"
+msgstr ""
+
+msgid "Standby"
 msgstr ""
 
 msgid "Start"
@@ -744,6 +775,12 @@ msgstr[0] "hodina"
 msgstr[1] "hodiny"
 msgstr[2] "hodin"
 
+msgid "macros that use 'rename_existing' are hidden"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr ""
+
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] ""
@@ -761,6 +798,12 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "KlipperScreen will reboot"
+#~ msgstr "KlipperScreen se restartuje"
+
+#~ msgid "Continue"
+#~ msgstr "Pokračuj"
 
 #~ msgid "Actions"
 #~ msgstr "Akce"

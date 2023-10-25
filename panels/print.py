@@ -1,21 +1,15 @@
 # -*- coding: utf-8 -*-
 import logging
 import os
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib, Pango
 from datetime import datetime
-
 from ks_includes.screen_panel import ScreenPanel
 
 
-def create_panel(*args):
-    return PrintPanel(*args)
-
-
-class PrintPanel(ScreenPanel):
+class Panel(ScreenPanel):
     cur_directory = "gcodes"
     dir_panels = {}
     filelist = {'gcodes': {'directories': [], 'files': []}}
@@ -316,21 +310,19 @@ class PrintPanel(ScreenPanel):
         grid.set_valign(Gtk.Align.CENTER)
         grid.add(label)
 
-        pixbuf = self.get_file_image(filename, self._screen.width * .9, self._screen.height * .6)
+        height = self._screen.height * .9 - self._gtk.font_size * 10
+        pixbuf = self.get_file_image(filename, self._screen.width * .9, height)
         if pixbuf is not None:
             image = Gtk.Image.new_from_pixbuf(pixbuf)
-            image.set_vexpand(False)
             grid.attach_next_to(image, label, Gtk.PositionType.BOTTOM, 1, 1)
 
-        dialog = self._gtk.Dialog(self._screen, buttons, grid, self.confirm_print_response, filename)
-        dialog.set_title(_("Print"))
+        self._gtk.Dialog(_("Print") + f' {filename}', buttons, grid, self.confirm_print_response, filename)
 
     def confirm_print_response(self, dialog, response_id, filename):
         self._gtk.remove_dialog(dialog)
-        if response_id == Gtk.ResponseType.CANCEL:
-            return
-        logging.info(f"Starting print: {filename}")
-        self._screen._ws.klippy.print_start(filename)
+        if response_id == Gtk.ResponseType.OK:
+            logging.info(f"Starting print: {filename}")
+            self._screen._ws.klippy.print_start(filename)
 
     def delete_file(self, filename):
         directory = os.path.join("gcodes", os.path.dirname(filename)) if os.path.dirname(filename) else "gcodes"

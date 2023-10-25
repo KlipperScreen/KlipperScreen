@@ -1,20 +1,13 @@
-import contextlib
 import logging
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
-
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.widgets.objectmap import ObjectMap
 
 
-def create_panel(*args):
-    return ExcludeObjectPanel(*args)
-
-
-class ExcludeObjectPanel(ScreenPanel):
+class Panel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         self._screen = screen
@@ -47,14 +40,14 @@ class ExcludeObjectPanel(ScreenPanel):
             if self._screen.vertical_mode:
                 grid.attach(self.labels['map'], 0, 2, 2, 1)
                 grid.attach(scroll, 0, 3, 2, 1)
-                scroll.set_size_request(self._gtk.content_width, -1)
+                scroll.set_size_request(self._gtk.content_width - 30, -1)
             else:
                 grid.attach(self.labels['map'], 0, 2, 1, 1)
                 grid.attach(scroll, 1, 2, 1, 1)
-                scroll.set_size_request((self._screen.width * .9) // 2, -1)
+                scroll.set_size_request(self._gtk.content_width / 2 - 30, -1)
         else:
             grid.attach(scroll, 0, 2, 2, 1)
-            scroll.set_size_request(self._gtk.content_width, -1)
+            scroll.set_size_request(self._gtk.content_width - 30, -1)
 
         self.content.add(grid)
         self.content.show_all()
@@ -92,32 +85,32 @@ class ExcludeObjectPanel(ScreenPanel):
 
     def process_update(self, action, data):
         if action == "notify_status_update":
-            with contextlib.suppress(KeyError):
-                # Update objects
-                self.objects = data["exclude_object"]["objects"]
-                logging.info(f'Objects: {data["exclude_object"]["objects"]}')
-                for obj in self.buttons:
-                    self.object_list.remove(self.buttons[obj])
-                self.buttons = {}
-                for obj in self.objects:
-                    logging.info(f"Adding {obj['name']}")
-                    self.add_object(obj["name"])
-                self.content.show_all()
-            with contextlib.suppress(KeyError):
-                # Update current objects
-                if data["exclude_object"]["current_object"]:
-                    self.current_object.set_label(f'{data["exclude_object"]["current_object"].replace("_", " ")}')
-                self.update_graph()
-            with contextlib.suppress(KeyError):
-                # Update excluded objects
-                logging.info(f'Excluded objects: {data["exclude_object"]["excluded_objects"]}')
-                self.excluded_objects = data["exclude_object"]["excluded_objects"]
-                for name in self.excluded_objects:
-                    if name in self.buttons:
-                        self.object_list.remove(self.buttons[name])
-                self.update_graph()
-                if len(self.excluded_objects) == len(self.objects):
-                    self._screen._menu_go_back()
+            if "exclude_object" in data:
+                if "object" in data["exclude_object"]:                    # Update objects
+                    self.objects = data["exclude_object"]["objects"]
+                    logging.info(f'Objects: {data["exclude_object"]["objects"]}')
+                    for obj in self.buttons:
+                        self.object_list.remove(self.buttons[obj])
+                    self.buttons = {}
+                    for obj in self.objects:
+                        logging.info(f"Adding {obj['name']}")
+                        self.add_object(obj["name"])
+                    self.content.show_all()
+                if "current_object" in data["exclude_object"]:                    # Update objects
+                    # Update current objects
+                    if data["exclude_object"]["current_object"]:
+                        self.current_object.set_label(f'{data["exclude_object"]["current_object"].replace("_", " ")}')
+                    self.update_graph()
+                if "excluded_objects" in data["exclude_object"]:                    # Update objects
+                    # Update excluded objects
+                    logging.info(f'Excluded objects: {data["exclude_object"]["excluded_objects"]}')
+                    self.excluded_objects = data["exclude_object"]["excluded_objects"]
+                    for name in self.excluded_objects:
+                        if name in self.buttons:
+                            self.object_list.remove(self.buttons[name])
+                    self.update_graph()
+                    if len(self.excluded_objects) == len(self.objects):
+                        self._screen._menu_go_back()
         elif action == "notify_gcode_response" and "Excluding object" in data:
             self._screen.show_popup_message(data, level=1)
             self.update_graph()

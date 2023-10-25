@@ -1,21 +1,15 @@
-import logging
 import contextlib
-
+import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
-
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.widgets.bedmap import BedMap
 
 
-def create_panel(*args):
-    return BedMeshPanel(*args)
-
-
-class BedMeshPanel(ScreenPanel):
+class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
@@ -58,7 +52,7 @@ class BedMeshPanel(ScreenPanel):
         if self._screen.vertical_mode:
             grid.attach(self.labels['map'], 0, 2, 2, 1)
             grid.attach(scroll, 0, 3, 2, 1)
-            self.labels['map'].set_size_request(self._gtk.content_width, self._gtk.content_height * .4)
+            self.labels['map'].set_size_request(self._gtk.content_width - 30, self._gtk.content_height * .4)
         else:
             grid.attach(self.labels['map'], 0, 2, 1, 1)
             grid.attach(scroll, 1, 2, 1, 1)
@@ -67,8 +61,8 @@ class BedMeshPanel(ScreenPanel):
 
     def activate(self):
         self.load_meshes()
-        if not self._printer.get_stat('bed_mesh', 'profile_name') and 'default' in self.profiles:
-            self.send_load_mesh(None, 'default')  # this is not the default behaviour of klipper anymore
+        with contextlib.suppress(KeyError):
+            self.activate_mesh(self._printer.get_stat("bed_mesh", "profile_name"))
 
     def activate_mesh(self, profile):
         if self.active_mesh is not None:
@@ -179,23 +173,11 @@ class BedMeshPanel(ScreenPanel):
             if prof not in bm_profiles:
                 self.remove_profile(prof)
 
-    def process_busy(self, busy):
-        for button in self.buttons:
-            if button == 'clear':
-                self.buttons[button].set_sensitive(self.active_mesh is not None)
-                continue
-            self.buttons[button].set_sensitive((not busy))
-        for profile in self.profiles:
-            self.profiles[profile]["save"].set_sensitive((not busy))
-            self.profiles[profile]["delete"].set_sensitive((not busy))
-
     def process_update(self, action, data):
-        if action == "notify_busy":
-            self.process_busy(data)
+        if action != "notify_status_update":
             return
-        if action == "notify_status_update":
-            with contextlib.suppress(KeyError):
-                self.activate_mesh(data['bed_mesh']['profile_name'])
+        if 'bed_mesh' in data and 'profile_name' in data['bed_mesh']:
+            self.activate_mesh(data['bed_mesh']['profile_name'])
 
     def remove_create(self):
         if self.show_create is False:
@@ -263,29 +245,30 @@ class BedMeshPanel(ScreenPanel):
         if self.active_mesh is None:
             self.calibrate_mesh(None)
 
-        self._screen._ws.klippy.gcode_script(f"BED_MESH_PROFILE SAVE={name}")
+        self._screen._send_action(widget, "printer.gcode.script", {"script": f"BED_MESH_PROFILE SAVE={name}"})
         self.remove_create()
 
     def calibrate_mesh(self, widget):
+        widget.set_sensitive(False)
         self._screen.show_popup_message(_("Calibrating"), level=1)
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+            self._screen._ws.klippy.gcode_script("G28")
 
-        self._screen._ws.klippy.gcode_script("BED_MESH_CALIBRATE")
+        self._screen._send_action(widget, "printer.gcode.script", {"script": "BED_MESH_CALIBRATE"})
 
         # Load zcalibrate to do a manual mesh
         if not self._printer.get_probe():
-            self.menu_item_clicked(widget, "refresh", {"name": _("Mesh calibrate"), "panel": "zcalibrate"})
+            self.menu_item_clicked(widget, {"name": _("Mesh calibrate"), "panel": "zcalibrate"})
 
     def send_clear_mesh(self, widget):
-        self._screen._ws.klippy.gcode_script("BED_MESH_CLEAR")
+        self._screen._send_action(widget, "printer.gcode.script", {"script": "BED_MESH_CLEAR"})
 
     def send_load_mesh(self, widget, profile):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.bed_mesh_load(profile))
+        self._screen._send_action(widget, "printer.gcode.script", {"script": KlippyGcodes.bed_mesh_load(profile)})
 
     def send_save_mesh(self, widget, profile):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.bed_mesh_save(profile))
+        self._screen._send_action(widget, "printer.gcode.script", {"script": KlippyGcodes.bed_mesh_save(profile)})
 
     def send_remove_mesh(self, widget, profile):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.bed_mesh_remove(profile))
+        self._screen._send_action(widget, "printer.gcode.script", {"script": KlippyGcodes.bed_mesh_remove(profile)})
         self.remove_profile(profile)

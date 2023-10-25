@@ -1,32 +1,26 @@
 import logging
-
-import gi
-
 import json
+import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from jinja2 import Template
-
 from ks_includes.screen_panel import ScreenPanel
 
 
-def create_panel(*args, **kwargs):
-    return MenuPanel(*args, **kwargs)
-
-
-class MenuPanel(ScreenPanel):
-    j2_data = None
+class Panel(ScreenPanel):
 
     def __init__(self, screen, title, items=None):
         super().__init__(screen, title)
         self.items = items
+        self.j2_data = self._printer.get_printer_status_data()
         self.create_menu_items()
         self.grid = self._gtk.HomogeneousGrid()
         self.scroll = self._gtk.ScrolledWindow()
         self.scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
     def activate(self):
+        self.j2_data = self._printer.get_printer_status_data()
         self.add_content()
 
     def add_content(self):
@@ -67,32 +61,29 @@ class MenuPanel(ScreenPanel):
 
             self.grid.attach(self.labels[key], col, row, width, height)
             i += 1
-        self.j2_data = None
         return self.grid
 
     def create_menu_items(self):
+        count = sum(bool(self.evaluate_enable(i[next(iter(i))]['enable'])) for i in self.items)
+        scale = 1.1 if 12 < count <= 16 else None  # hack to fit a 4th row
         for i in range(len(self.items)):
             key = list(self.items[i])[0]
             item = self.items[i][key]
-            scale = 1.1 if 12 < len(self.items) <= 16 else None  # hack to fit a 4th row
 
-            printer = self._printer.get_printer_status_data()
-
-            name = self._screen.env.from_string(item['name']).render(printer)
-            icon = self._screen.env.from_string(item['icon']).render(printer) if item['icon'] else None
-            style = self._screen.env.from_string(item['style']).render(printer) if item['style'] else None
+            name = self._screen.env.from_string(item['name']).render(self.j2_data)
+            icon = self._screen.env.from_string(item['icon']).render(self.j2_data) if item['icon'] else None
+            style = self._screen.env.from_string(item['style']).render(self.j2_data) if item['style'] else None
 
             b = self._gtk.Button(icon, name, style or f"color{i % 4 + 1}", scale=scale)
 
-            if item['panel'] is not None:
-                panel = self._screen.env.from_string(item['panel']).render(printer)
-                b.connect("clicked", self.menu_item_clicked, panel, item)
-            elif item['method'] is not None:
+            if item['panel']:
+                b.connect("clicked", self.menu_item_clicked, item)
+            elif item['method']:
                 params = {}
 
                 if item['params'] is not False:
                     try:
-                        p = self._screen.env.from_string(item['params']).render(printer)
+                        p = self._screen.env.from_string(item['params']).render(self.j2_data)
                         params = json.loads(p)
                     except Exception as e:
                         logging.exception(f"Unable to parse parameters for [{name}]:\n{e}")
@@ -110,9 +101,6 @@ class MenuPanel(ScreenPanel):
         if enable == "{{ moonraker_connected }}":
             logging.info(f"moonraker connected {self._screen._ws.connected}")
             return self._screen._ws.connected
-        elif enable == "{{ camera_configured }}":
-            return self.ks_printer_cfg and self.ks_printer_cfg.get("camera_url", None) is not None
-        self.j2_data = self._printer.get_printer_status_data()
         try:
             j2_temp = Template(enable, autoescape=True)
             result = j2_temp.render(self.j2_data)

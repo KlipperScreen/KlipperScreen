@@ -17,7 +17,7 @@ Recommended sizes for thumbnails:
 * [Cura](#cura)
 * [ideaMaker](#ideamaker)
 
-### PrusaSlicer (2.3.0+)
+### PrusaSlicer
 In “Expert” mode PrusaSlicer has an option in the “Printer Settings” tab to activate previews.
 Under General / Firmware.
 
@@ -25,7 +25,7 @@ Under General / Firmware.
 ![PrusaSlicer](img/quicktips/PrusaSlicer-thumbnails.png)
 
 
-### SuperSlicer (2.2.54+)
+### SuperSlicer
 In “Expert” mode SuperSlicer has some very convenient options in the “Printer Settings” tab to activate and customize the previews.
 
 
@@ -51,7 +51,7 @@ In “Expert” mode SuperSlicer has some very convenient options in the “Prin
 ![Cura](img/quicktips/Cura-thumbnails.png)
 
 
-### ideaMaker (4.2.1+)
+### ideaMaker
 1. Open the Advanced tab in the printer settings
 2. Enable "GCode Thumbnails for Octoprint and Mainsail"
 3. Set both Width and Height to 300

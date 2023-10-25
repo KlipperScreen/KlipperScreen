@@ -1,0 +1,54 @@
+name: Bug report
+description: Create a report to help us improve
+title: "[BUG] <title>"
+labels: 'bug'
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        ## Thank you for choosing KlipperScreen
+
+        This is a bug report, If you need general support, please visit us on [Discord](https://discord.klipper3d.org/)
+
+        #### The LOG file is REQUIRED. Without the logfile your issue will be closed
+
+        if you need help to find the log file:
+        Read the [Documentation](https://klipperscreen.readthedocs.io/en/latest/Troubleshooting/)
+
+        #### This is an Open Source project developed voluntarily, there are no Warranties, or ETA.
+        [License](https://github.com/KlipperScreen/KlipperScreen/blob/master/LICENSE)
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 'What happened?'
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: 'What did you expect to happen instead?'
+      description: A clear and concise description of what you expected to happen instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro-steps
+    attributes:
+      label: 'How to reproduce this bug?'
+      description: A clear and concise description with precise steps to reproduce this bug.
+    validations:
+      required: true
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: 'Additional information:'
+      description: Any additional info, screenshots or recordings which help to describe the issue.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Log output
+      description: Please attach the FULL klipperscreen.log and if needed xorg.log or the tail of journalctl.
+      render: shell
+    validations:
+      required: true

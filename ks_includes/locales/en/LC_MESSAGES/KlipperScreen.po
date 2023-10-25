@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 16:32-0300\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -41,6 +41,9 @@ msgstr ""
 msgid "Add profile"
 msgstr ""
 
+msgid "All"
+msgstr ""
+
 msgid "Apply"
 msgstr ""
 
@@ -50,6 +53,9 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
+msgstr ""
+
+msgid "Archived"
 msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
@@ -77,6 +83,9 @@ msgid "Auto-calibrate"
 msgstr ""
 
 msgid "Auto-close notifications"
+msgstr ""
+
+msgid "Auto-open Extrude On Pause"
 msgstr ""
 
 msgid "Auto-scroll"
@@ -152,10 +161,10 @@ msgstr ""
 msgid "Console"
 msgstr ""
 
-msgid "Continue"
+msgid "Cooldown"
 msgstr ""
 
-msgid "Cooldown"
+msgid "DPMS has failed to load and has been disabled"
 msgstr ""
 
 msgid "Date"
@@ -228,6 +237,9 @@ msgstr ""
 msgid "File:"
 msgstr ""
 
+msgid "Filter"
+msgstr ""
+
 msgid "Finding ADXL"
 msgstr ""
 
@@ -250,9 +262,6 @@ msgid "Font Size"
 msgstr ""
 
 msgid "Full Update"
-msgstr ""
-
-msgid "Fullscreen"
 msgstr ""
 
 msgid "Go Back"
@@ -295,6 +304,9 @@ msgid "Host"
 msgstr ""
 
 msgid "Hostname"
+msgstr ""
+
+msgid "ID"
 msgstr ""
 
 msgid "Icon Theme"
@@ -348,7 +360,8 @@ msgstr ""
 msgid "Klipper will reboot"
 msgstr ""
 
-msgid "KlipperScreen will reboot"
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
 
 msgid "Language"
@@ -357,7 +370,13 @@ msgstr ""
 msgid "Large"
 msgstr ""
 
+msgid "Last Used"
+msgstr ""
+
 msgid "Layer:"
+msgstr ""
+
+msgid "Leds"
 msgstr ""
 
 msgid "Left:"
@@ -379,6 +398,9 @@ msgid "Macros"
 msgstr ""
 
 msgid "Main Menu"
+msgstr ""
+
+msgid "Material"
 msgstr ""
 
 msgid "Max"
@@ -439,6 +461,9 @@ msgid "Never"
 msgstr ""
 
 msgid "New"
+msgstr ""
+
+msgid "No elegible macros:"
 msgstr ""
 
 msgid ""
@@ -615,6 +640,9 @@ msgstr ""
 msgid "Show Heater Power"
 msgstr ""
 
+msgid "Show Scrollbars Buttons"
+msgstr ""
+
 msgid "Shutdown"
 msgstr ""
 
@@ -643,6 +671,9 @@ msgid "Speed:"
 msgstr ""
 
 msgid "Square Corner Velocity"
+msgstr ""
+
+msgid "Standby"
 msgstr ""
 
 msgid "Start"
@@ -735,6 +766,12 @@ msgid "hour"
 msgid_plural "hours"
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr ""
 
 msgid "minute"
 msgid_plural "minutes"

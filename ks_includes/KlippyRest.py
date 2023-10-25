@@ -29,21 +29,25 @@ class KlippyRest:
     def get_printer_info(self):
         return self.send_request("printer/info")
 
+    def get_gcode_help(self):
+        return self.send_request("printer/gcode/help")
+
     def get_thumbnail_stream(self, thumbnail):
         return self.send_request(f"server/files/gcodes/{thumbnail}", json=False)
 
-    def send_request(self, method, json=True):
+    def _do_request(self, method, request_method, data=None, json=None, json_response=True, timeout=3):
         url = f"{self.endpoint}/{method}"
         headers = {} if self.api_key is False else {"x-api-key": self.api_key}
-        data = False
+        response_data = False
         try:
-            response = requests.get(url, headers=headers, timeout=3)
+            callee = getattr(requests, request_method)
+            response = callee(url, json=json, data=data, headers=headers, timeout=timeout)
             response.raise_for_status()
-            if json:
+            if json_response:
                 logging.debug(f"Sending request to {url}")
-                data = response.json()
+                response_data = response.json()
             else:
-                data = response.content
+                response_data = response.content
         except requests.exceptions.HTTPError as h:
             self.status = self.format_status(h)
         except requests.exceptions.ConnectionError as c:
@@ -56,11 +60,17 @@ class KlippyRest:
             self.status = self.format_status(r)
         except Exception as e:
             self.status = self.format_status(e)
-        if data:
+        if response_data:
             self.status = ''
         else:
             logging.error(self.status.replace('\n', '>>'))
-        return data
+        return response_data
+
+    def post_request(self, method, data=None, json=None, json_response=True):
+        return self._do_request(method, "post", data, json, json_response)
+
+    def send_request(self, method, json=True, timeout=3):
+        return self._do_request(method, "get", json_response=json, timeout=timeout)
 
     @staticmethod
     def format_status(status):

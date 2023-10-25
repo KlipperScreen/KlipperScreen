@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 16:32-0300\n"
-"PO-Revision-Date: 2023-07-06 22:33+0800\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"PO-Revision-Date: 2023-09-05 23:45+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -35,16 +35,19 @@ msgid "ADXL Not Configured"
 msgstr "未配置ADXL"
 
 msgid "Abort"
-msgstr "取消"
+msgstr "放弃"
 
 msgid "Acceleration:"
 msgstr "加速度："
 
 msgid "Accept"
-msgstr "应用"
+msgstr "接受"
 
 msgid "Add profile"
 msgstr "添加配置文件"
+
+msgid "All"
+msgstr "全部"
 
 msgid "Apply"
 msgstr "应用"
@@ -56,6 +59,9 @@ msgstr "将 %s%.3f 偏移量应用于限位？"
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
 msgstr "将 %s%.3f 偏移量应用于探针？"
+
+msgid "Archived"
+msgstr "已存档"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "你确定要排除该对象吗？"
@@ -83,6 +89,9 @@ msgstr "自动校准"
 
 msgid "Auto-close notifications"
 msgstr "自动关闭通知"
+
+msgid "Auto-open Extrude On Pause"
+msgstr "暂停打印时自动打开挤出控制界面"
 
 msgid "Auto-scroll"
 msgstr "自动滚屏"
@@ -157,11 +166,11 @@ msgstr "连接到 %s"
 msgid "Console"
 msgstr "控制台"
 
-msgid "Continue"
-msgstr "继续"
-
 msgid "Cooldown"
 msgstr "冷却"
+
+msgid "DPMS has failed to load and has been disabled"
+msgstr "屏幕省电管理系统无法加载已禁用"
 
 msgid "Date"
 msgstr "日期"
@@ -233,6 +242,9 @@ msgstr "文件"
 msgid "File:"
 msgstr "文件："
 
+msgid "Filter"
+msgstr "筛选"
+
 msgid "Finding ADXL"
 msgstr "查找ADXL"
 
@@ -255,10 +267,7 @@ msgid "Font Size"
 msgstr "字体大小"
 
 msgid "Full Update"
-msgstr "全部更新"
-
-msgid "Fullscreen"
-msgstr "全屏"
+msgstr "更新全部"
 
 msgid "Go Back"
 msgstr "返回"
@@ -273,7 +282,7 @@ msgid "Hide"
 msgstr "隐藏"
 
 msgid "Hide sensors in Temp."
-msgstr "在温度显示中隐藏其他传感器"
+msgstr "在温度显示中隐藏传感器"
 
 msgid "Hide temp."
 msgstr "隐藏温度"
@@ -301,6 +310,9 @@ msgstr "主机"
 
 msgid "Hostname"
 msgstr "主机名"
+
+msgid "ID"
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "主题"
@@ -353,8 +365,9 @@ msgstr "Klipper正在启动"
 msgid "Klipper will reboot"
 msgstr "Klipper将重新启动"
 
-msgid "KlipperScreen will reboot"
-msgstr "KlipperScreen将重新启动"
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT 被隐藏，应在挤出控制界面使用"
 
 msgid "Language"
 msgstr "界面语言"
@@ -362,8 +375,14 @@ msgstr "界面语言"
 msgid "Large"
 msgstr "大"
 
+msgid "Last Used"
+msgstr "上次使用"
+
 msgid "Layer:"
 msgstr "层："
+
+msgid "Leds"
+msgstr ""
 
 msgid "Left:"
 msgstr "剩余时间："
@@ -385,6 +404,9 @@ msgstr "宏"
 
 msgid "Main Menu"
 msgstr "主菜单"
+
+msgid "Material"
+msgstr "材料"
 
 msgid "Max"
 msgstr "最大"
@@ -446,6 +468,9 @@ msgstr "从不"
 msgid "New"
 msgstr "新的值"
 
+msgid "No elegible macros:"
+msgstr "无可用宏："
+
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
@@ -478,13 +503,13 @@ msgid "Paused"
 msgstr "已暂停"
 
 msgid "Perform a full upgrade?"
-msgstr "是否全部升级？"
+msgstr "是否更新全部？"
 
 msgid "Pins"
 msgstr "引脚"
 
 msgid "Please recompile and flash the micro-controller."
-msgstr "请重新编译并烧录微控制器。"
+msgstr "请重新编译并更新微控制器固件。"
 
 msgid "Power"
 msgstr "电源"
@@ -508,7 +533,7 @@ msgid "Printer"
 msgstr "打印机"
 
 msgid "Printer Connections"
-msgstr "打印机连接"
+msgstr "已连接的打印机"
 
 msgid "Printer Select"
 msgstr "打印机选择"
@@ -523,7 +548,7 @@ msgid "Profile Name:"
 msgstr "配置文件名称："
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "在寻求帮助时，请提供KlipperScreen.log文件。\n"
+msgstr ""
 
 msgid "Quad Gantry Level"
 msgstr "龙门架调平"
@@ -535,16 +560,16 @@ msgid "Recover"
 msgstr "恢复"
 
 msgid "Recover Hard"
-msgstr "硬恢复(git recover hard)"
+msgstr "版本回退(清空修改内容)"
 
 msgid "Recover Soft"
-msgstr "软恢复(git reset)"
+msgstr "版本回退(保留修改内容)"
 
 msgid "Reference"
 msgstr "参考"
 
 msgid "Refresh"
-msgstr "刷新"
+msgstr "检查更新"
 
 msgid "Rename/Move:"
 msgstr "重命名/移动："
@@ -619,6 +644,9 @@ msgstr "显示"
 msgid "Show Heater Power"
 msgstr "显示加热器功率"
 
+msgid "Show Scrollbars Buttons"
+msgstr "显示滚动条按钮"
+
 msgid "Shutdown"
 msgstr "关闭"
 
@@ -648,6 +676,9 @@ msgstr "速度："
 
 msgid "Square Corner Velocity"
 msgstr "直角速度"
+
+msgid "Standby"
+msgstr "待机"
 
 msgid "Start"
 msgstr "开始"
@@ -713,7 +744,7 @@ msgid "XY Speed (mm/s)"
 msgstr "XY轴速度(mm/s)"
 
 msgid "Z Calibrate"
-msgstr "Z轴校准"
+msgstr "Z偏移校准"
 
 msgid "Z Move Speed (mm/s)"
 msgstr "Z轴移动速度(mm/s)"
@@ -738,12 +769,18 @@ msgid "hour"
 msgid_plural "hours"
 msgstr[0] "小时"
 
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "使用 \"rename_existing \"的宏将被隐藏"
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "名称以\"_\"开头的宏将被隐藏"
+
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "分"
 
 msgid "mm"
-msgstr "秒"
+msgstr "mm"
 
 msgid "mm/s"
 msgstr "mm/s"
@@ -753,6 +790,15 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "KlipperScreen will reboot"
+#~ msgstr "KlipperScreen将重新启动"
+
+#~ msgid "Continue"
+#~ msgstr "继续"
+
+#~ msgid "Fullscreen"
+#~ msgstr "全屏"
 
 #~ msgid "Actions"
 #~ msgstr "控制"
