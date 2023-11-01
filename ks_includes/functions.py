@@ -184,13 +184,3 @@ def setup_logging(log_file, software_version):
     logging.captureWarnings(True)
 
     return listener, fh
-
-
-def detect_desktop_environment():
-    try:
-        env = os.environ['XDG_CURRENT_DESKTOP']
-        logging.info(f"Session type: {os.environ['XDG_SESSION_TYPE']} DE: {env}")
-        if os.environ['XDG_CURRENT_DESKTOP']:
-            logging.warning("WARNING: Running inside a DE is not supported, and may lead to into problems")
-    except Exception as e:
-        logging.exception(f"Error:\n{e}\n\n{traceback.format_exc()}")
