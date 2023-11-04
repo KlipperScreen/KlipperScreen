@@ -186,7 +186,7 @@ class ScreenPanel:
                 # The label should wrap, but it doesn't work
                 # this is a workaround
                 new_label_text += "\n  "
-            new_label_text += f" {int(power*100):3}%"
+            new_label_text += f" {int(power * 100):3}%"
 
         if dev in self.labels:
             self.labels[dev].set_label(new_label_text)
