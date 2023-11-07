@@ -375,10 +375,6 @@ trough {
     min-width: 8em;
 }
 
-.keyboard_box {
-    margin-top: 38px;
-}
-
 .keyboard_matchbox {
     margin-top: 42px;
 }
@@ -419,10 +415,6 @@ trough {
 .message_popup_error,
 .message_popup_error button {
     background-color: @error;
-}
-
-.numpad{
-    margin-top: 30px;
 }
 
 .numpad_key {

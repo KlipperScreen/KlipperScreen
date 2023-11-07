@@ -1075,7 +1075,6 @@ def main():
     functions.patch_threading_excepthook()
     logging.info(f"Python version: {sys.version_info.major}.{sys.version_info.minor}")
     logging.info(f"KlipperScreen version: {version}")
-    functions.detect_desktop_environment()
     if not Gtk.init_check():
         logging.critical("Failed to initialize Gtk")
         raise RuntimeError
