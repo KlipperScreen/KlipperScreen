@@ -125,7 +125,11 @@ class KlipperScreen(Gtk.Window):
             raise RuntimeError("Couldn't get default monitor")
         self.width = self._config.get_main_config().getint("width", None)
         self.height = self._config.get_main_config().getint("height", None)
-        if self.width or self.height:
+        if 'XDG_CURRENT_DESKTOP' in os.environ:
+            if not self.width:
+                self.width = max(int(monitor.get_geometry().width * .5), 480)
+            if not self.height:
+                self.height = max(int(monitor.get_geometry().height * .5), 320)
             self.set_resizable(True)
             self.windowed = True
         else:
