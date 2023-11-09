@@ -94,7 +94,7 @@ class KlipperScreen(Gtk.Window):
     wayland = False
     windowed = False
 
-    def __init__(self, args, version):
+    def __init__(self, args):
         try:
             super().__init__(title="KlipperScreen")
         except Exception as e:
@@ -103,7 +103,6 @@ class KlipperScreen(Gtk.Window):
         self.blanking_time = 600
         self.use_dpms = True
         self.apiclient = None
-        self.version = version
         self.dialogs = []
         self.confirm = None
         self.panels_reinit = []
@@ -372,7 +371,7 @@ class KlipperScreen(Gtk.Window):
         title.set_line_wrap_mode(Pango.WrapMode.CHAR)
         title.set_halign(Gtk.Align.START)
         title.set_hexpand(True)
-        version = Gtk.Label(label=f"{self.version}")
+        version = Gtk.Label(label=f"{functions.get_software_version()}")
         version.set_halign(Gtk.Align.END)
 
         help_msg = _("Provide KlipperScreen.log when asking for help.\n")
@@ -1050,7 +1049,6 @@ def main():
         logging.error(f"python {sys.version_info.major}.{sys.version_info.minor} "
                       f"does not meet the minimum requirement {minimum[0]}.{minimum[1]}")
         sys.exit(1)
-    version = functions.get_software_version()
     parser = argparse.ArgumentParser(description="KlipperScreen - A GUI for Klipper")
     homedir = os.path.expanduser("~")
 
@@ -1067,18 +1065,13 @@ def main():
     )
     args = parser.parse_args()
 
-    functions.setup_logging(
-        os.path.normpath(os.path.expanduser(args.logfile)),
-        version
-    )
+    functions.setup_logging(os.path.normpath(os.path.expanduser(args.logfile)))
     functions.patch_threading_excepthook()
-    logging.info(f"Python version: {sys.version_info.major}.{sys.version_info.minor}")
-    logging.info(f"KlipperScreen version: {version}")
     if not Gtk.init_check():
         logging.critical("Failed to initialize Gtk")
         raise RuntimeError
     try:
-        win = KlipperScreen(args, version)
+        win = KlipperScreen(args)
     except Exception as e:
         logging.exception(f"Failed to initialize window\n{e}\n\n{traceback.format_exc()}")
         raise RuntimeError from e
