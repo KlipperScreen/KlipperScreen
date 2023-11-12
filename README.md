@@ -38,3 +38,9 @@ The current maintainer is Alfredo Monclus (alfrix) from 2021 onwards
 thanks to all the people who helped along the way.
 
 [Contributors](https://github.com/KlipperScreen/KlipperScreen/graphs/contributors)
+
+### Sponsors
+
+![LDO](docs/img/LDO-LOGO_SQ.png)
+
+Thank you [LDO](https://ldomotors.com/) for sponsoring KlipperScreen and the open source community.
