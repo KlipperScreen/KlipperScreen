@@ -326,22 +326,23 @@ class WpaSocket(Thread):
 
 class WifiChannels:
     @staticmethod
-    def lookup(freq):
+    def lookup(freq: str):
+        freq = int(freq)
         if freq > 2411 and freq < 2485:
             # 2484 allowed only in Japan
-            if freq == "2484":
+            if freq == 2484:
                 return "2.4", "14"
             ch_freq = freq - 2407
             ch = ch_freq / 5
             if int(ch) == ch:
-                return "2.4", ch
+                return "2.4", str(ch)
         elif freq > 4914 and freq < 4981:
             ch_freq = freq - 4000
             ch = ch_freq / 5
             if int(ch) == ch:
-                return "5", ch
+                return "5", str(ch)
         elif freq > 5034 and freq < 5826:
             ch_freq = freq - 5000
             ch = ch_freq / 5
             if int(ch) == ch:
-                return "5", ch
+                return "5", str(ch)
