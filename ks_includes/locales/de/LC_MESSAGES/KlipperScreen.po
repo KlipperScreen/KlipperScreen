@@ -360,7 +360,7 @@ msgid "Klipper has shutdown"
 msgstr "Klipper abgeschaltet"
 
 msgid "Klipper is attempting to start"
-msgstr "Klipper veruscht zu starten"
+msgstr "Klipper versucht zu starten"
 
 msgid "Klipper will reboot"
 msgstr "Klipper startet neu"
