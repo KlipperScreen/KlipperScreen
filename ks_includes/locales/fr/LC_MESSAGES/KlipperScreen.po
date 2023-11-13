@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-11-13 04:39+0000\n"
+"PO-Revision-Date: 2023-11-14 17:04+0000\n"
 "Last-Translator: Bahoué <stef.griv@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/fr/>\n"
@@ -55,11 +55,11 @@ msgstr "Appliquer"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr "Appliquer%s%.3f décalage vers Endstop ?"
+msgstr "Appliquer %s%.3f décalage vers Endstop ?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr "Appliquer%s%.3f décalage pour sonder ?"
+msgstr "Appliquer %s%.3f décalage pour sonder ?"
 
 msgid "Archived"
 msgstr "Archivé"
@@ -74,13 +74,13 @@ msgid "Are you sure you wish to cancel this print?"
 msgstr "Êtes-vous sûr de vouloir annuler cette impression ?"
 
 msgid "Are you sure you wish to disable motors?"
-msgstr "Voulez-vous vraiment désactiver les moteurs ?"
+msgstr "Voulez-vous vraiment désactiver les moteurs?"
 
 msgid "Are you sure you wish to reboot the system?"
-msgstr "Êtes-vous sûr de vouloir redémarrer le système ?"
+msgstr "Êtes-vous sûr de vouloir redémarrer le système?"
 
 msgid "Are you sure you wish to shutdown the system?"
-msgstr "Êtes-vous sûr de vouloir arrêter le système ?"
+msgstr "Êtes-vous sûr de vouloir arrêter le système?"
 
 msgid "Auto"
 msgstr "Auto"
@@ -104,7 +104,7 @@ msgid "Bed Mesh"
 msgstr "Maillage du plateau"
 
 msgid "Bed screw configuration:"
-msgstr "Configuration des vis du lit:"
+msgstr "Configuration des vis du plateau:"
 
 msgid "Calibrate"
 msgstr "Calibrer"
@@ -128,7 +128,7 @@ msgid "Cancel Print"
 msgstr "Annuler l'impression"
 
 msgid "Cancelled"
-msgstr "Annulée"
+msgstr "Annulé"
 
 msgid "Cancelling"
 msgstr "Annulation"
@@ -168,7 +168,7 @@ msgid "Console"
 msgstr "Console"
 
 msgid "Cooldown"
-msgstr "Refroidir"
+msgstr "Refroidissement"
 
 msgid "DPMS has failed to load and has been disabled"
 msgstr "Le DPMS n'a pas réussi à se charger et a été désactivé"
@@ -177,10 +177,10 @@ msgid "Date"
 msgstr "Date"
 
 msgid "Delete Directory?"
-msgstr "Supprimer le répertoire ?"
+msgstr "Supprimer le répertoire?"
 
 msgid "Delete File?"
-msgstr "Supprimer le fichier ?"
+msgstr "Supprimer le fichier?"
 
 msgid "Deselect"
 msgstr "Désélectionner"
@@ -193,7 +193,7 @@ msgstr "Distance (mm)"
 
 #, python-format
 msgid "Do you want to recover %s?"
-msgstr "Voulez-vous récupérer %s ?"
+msgstr "Voulez-vous récupérer %s?"
 
 msgid "Elapsed:"
 msgstr "Écoulé:"
@@ -253,10 +253,10 @@ msgid "Fine Tuning"
 msgstr "Réglages précis"
 
 msgid "Finish"
-msgstr "Terminée"
+msgstr "Terminé"
 
 msgid "Firmware Restart"
-msgstr "Redémarrer Firmware"
+msgstr "Redémarrage du firmware"
 
 msgid "Flow:"
 msgstr "Flux:"
@@ -510,7 +510,7 @@ msgid "Paused"
 msgstr "En pause"
 
 msgid "Perform a full upgrade?"
-msgstr "Effectuer une mise à jour complète ?"
+msgstr "Effectuer une mise à jour complète?"
 
 msgid "Pins"
 msgstr "Pins"
