@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-11-14 18:06+0000\n"
+"PO-Revision-Date: 2023-11-16 02:51+0000\n"
 "Last-Translator: Sascha <saschbuerger@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/de/>\n"
@@ -55,11 +55,11 @@ msgstr "Anwenden"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr "%s%.3f Offset auf Endstop anwenden"
+msgstr "%s%.3f Offset auf Endschalter anwenden?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr "%s%.3f Offset auf Probe anwenden"
+msgstr "%s%.3f Offset auf Sonde anwenden?"
 
 msgid "Archived"
 msgstr "Archiviert"
@@ -92,7 +92,7 @@ msgid "Auto-close notifications"
 msgstr "Benachrichtigungen automatisch schließen"
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "Extrudieren bei Pause automatisch öffnen"
 
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
@@ -292,19 +292,19 @@ msgid "Home"
 msgstr "Grundposition"
 
 msgid "Home All"
-msgstr "Alle Achsen zurücksetzen"
+msgstr "Alle Achsen referenzieren"
 
 msgid "Home X"
-msgstr "Achse X neupositionieren"
+msgstr "X referenzieren"
 
 msgid "Home XY"
-msgstr "Achse XY neupositionieren"
+msgstr "XY referenzieren"
 
 msgid "Home Y"
-msgstr "Achse Y neupositionieren"
+msgstr "Y referenzieren"
 
 msgid "Home Z"
-msgstr "Achse Z neupositionieren"
+msgstr "Z referenzieren"
 
 msgid "Host"
 msgstr "Host"
@@ -554,7 +554,7 @@ msgid "Profile Name:"
 msgstr "Profilname:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "Wenn Hilfe benötigt wird KlipperScreen.log angeben.\n"
 
 msgid "Quad Gantry Level"
 msgstr "Quad Gantry Level"
@@ -578,7 +578,7 @@ msgid "Refresh"
 msgstr "Aktualisieren"
 
 msgid "Rename/Move:"
-msgstr "Umbenennen/Bewegen"
+msgstr "Umbenennen/Bewegen:"
 
 msgid "Restart"
 msgstr "Neustart"
