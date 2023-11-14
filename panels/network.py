@@ -4,7 +4,7 @@ import gi
 import netifaces
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib, Pango
+from gi.repository import Gtk, GLib, Pango
 from ks_includes.screen_panel import ScreenPanel
 
 
@@ -21,6 +21,15 @@ class Panel(ScreenPanel):
         self.network_interfaces = netifaces.interfaces()
         self.wireless_interfaces = [iface for iface in self.network_interfaces if iface.startswith('w')]
         self.wifi = None
+
+        self.menu = ['wifi_menu']
+        self.labels['options_menu'] = self._gtk.ScrolledWindow()
+        self.labels['options'] = Gtk.Grid()
+        self.labels['options_menu'].add(self.labels['options'])
+        self.countries = {}
+        for country in self._config.country_list:
+            self.add_option('options', self.countries, country['name'], country)
+
         self.use_network_manager = os.system('systemctl is-active --quiet NetworkManager.service') == 0
         if len(self.wireless_interfaces) > 0:
             logging.info(f"Found wireless interfaces: {self.wireless_interfaces}")
@@ -58,9 +67,15 @@ class Panel(ScreenPanel):
         self.labels['interface'].set_hexpand(True)
         self.labels['ip'] = Gtk.Label()
         self.labels['ip'].set_hexpand(True)
-        reload_networks = self._gtk.Button("refresh", None, "color1", .66)
+        reload_networks = self._gtk.Button("refresh", None, "color1", self.bts, Gtk.PositionType.LEFT, 1)
+        reload_networks.get_style_context().add_class("buttons_slim")
         reload_networks.connect("clicked", self.reload_networks)
         reload_networks.set_hexpand(False)
+
+        adjust = self._gtk.Button("settings", None, "color2", self.bts, Gtk.PositionType.LEFT, 1)
+        adjust.get_style_context().add_class("buttons_slim")
+        adjust.connect("clicked", self.load_menu, 'options', _("Settings"))
+        adjust.set_hexpand(False)
 
         sbox = Gtk.Box()
         sbox.set_hexpand(True)
@@ -69,7 +84,8 @@ class Panel(ScreenPanel):
         if ip is not None:
             self.labels['ip'].set_text(f"IP: {ip}  ")
             sbox.add(self.labels['ip'])
-        sbox.add(reload_networks)
+        sbox.pack_start(reload_networks, True, True, 5)
+        sbox.pack_start(adjust, True, True, 5)
 
         scroll = self._gtk.ScrolledWindow()
 
@@ -99,8 +115,56 @@ class Panel(ScreenPanel):
                 self.update_timeout = GLib.timeout_add_seconds(5, self.update_single_network_info)
 
         self.content.add(box)
-        self.labels['main_box'] = box
+        self.labels['wifi_menu'] = box
         self.initialized = True
+
+    def add_option(self, boxname, opt_array, opt_name, option):
+        name = Gtk.Label()
+        name.set_markup(f"<big><b>{option['name']}</b></big>")
+        name.set_hexpand(True)
+        name.set_vexpand(True)
+        name.set_halign(Gtk.Align.START)
+        name.set_valign(Gtk.Align.CENTER)
+        name.set_line_wrap(True)
+        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+
+        dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        dev.get_style_context().add_class("frame-item")
+        dev.set_hexpand(True)
+        dev.set_vexpand(False)
+        dev.set_valign(Gtk.Align.CENTER)
+        dev.add(name)
+
+        select = self._gtk.Button("load", style="color3")
+        select.connect("clicked", self.change_country, option)
+        select.set_hexpand(False)
+        select.set_halign(Gtk.Align.END)
+        dev.add(select)
+
+        opt_array[opt_name] = {
+            "name": option['name'],
+            "row": dev
+        }
+
+        opts = sorted(list(opt_array), key=lambda x: opt_array[x]['name'])
+        pos = opts.index(opt_name)
+
+        self.labels[boxname].insert_row(pos)
+        self.labels[boxname].attach(opt_array[opt_name]['row'], 0, pos, 1, 1)
+        self.labels[boxname].show_all()
+
+    def change_country(self, widget, option):
+        commands = [
+            f"sudo iw reg set {option['code']}",
+            f"sudo sed -i 's/country=.*/country={option['code']}/' /etc/wpa_supplicant/wpa_supplicant.conf",
+            f"sudo sed -i 's/REGDOMAIN=.*/REGDOMAIN={option['code']}/' /etc/default/crda"
+        ]
+        for command in commands:
+            logging.info(command)
+            os.system(command)
+        os.system("sudo systemctl restart NetworkManager")
+        os.system("sudo systemctl restart networking")
+        self.back()
 
     def load_networks(self):
         networks = self.wifi.get_networks()
@@ -221,6 +285,9 @@ class Panel(ScreenPanel):
         if self.show_add:
             self.close_add_network()
             return True
+        if len(self.menu) > 1:
+            self.unload_menu()
+            return True
         return False
 
     def check_missing_networks(self):
@@ -239,7 +306,7 @@ class Panel(ScreenPanel):
 
         for child in self.content.get_children():
             self.content.remove(child)
-        self.content.add(self.labels['main_box'])
+        self.content.add(self.labels['wifi_menu'])
         self.content.show()
         for i in ['add_network', 'network_psk']:
             if i in self.labels:

@@ -45,6 +45,9 @@ class KlipperScreenConfig:
         self.lang = None
         self.langs = {}
 
+        with open(os.path.join(klipperscreendir, "ks_includes", "countries.json")) as f:
+            self.country_list = json.load(f)
+
         try:
             self.config.read(self.default_config_path)
             # In case a user altered defaults.conf
