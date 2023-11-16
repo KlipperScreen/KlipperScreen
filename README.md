@@ -16,9 +16,13 @@ will natively work with [Klipper](https://github.com/kevinOConnor/klipper) and [
 
 ### Translations <a href="https://hosted.weblate.org/engage/klipperscreen/"><img src="https://hosted.weblate.org/widget/klipperscreen/svg-badge.svg" alt="Translation status" /></a>
 
+Translations are hosted on Weblate, Thanks to the Weblate team for supporting the Open-Source community.
+
 Click the widget below to access the translation platform:
 
-<a href="https://hosted.weblate.org/engage/klipperscreen/"><img src="https://hosted.weblate.org/widget/klipperscreen/horizontal-auto.svg" alt="Stan tłumaczenia" width=30% /></a>
+<a href="https://hosted.weblate.org/engage/klipperscreen/">
+    <img src="https://hosted.weblate.org/widget/klipperscreen/horizontal-auto.svg" alt="Weblate widget" width=50% />
+</a>
 
 ### About the project
 
