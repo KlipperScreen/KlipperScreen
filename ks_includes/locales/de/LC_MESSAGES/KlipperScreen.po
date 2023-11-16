@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2022-11-30 18:10-0300\n"
-"Last-Translator: livinhack\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2023-11-16 02:51+0000\n"
+"Last-Translator: bbraeu <braeu.bernhard@gmail.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -54,11 +55,11 @@ msgstr "Anwenden"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr "%s%.3f Offset auf Endstop anwenden"
+msgstr "%s%.3f Offset auf Endschalter anwenden?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr "%s%.3f Offset auf Probe anwenden"
+msgstr "%s%.3f Offset auf Sonde anwenden?"
 
 msgid "Archived"
 msgstr "Archiviert"
@@ -91,7 +92,7 @@ msgid "Auto-close notifications"
 msgstr "Benachrichtigungen automatisch schließen"
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "Extrudieren bei Pause automatisch öffnen"
 
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
@@ -291,19 +292,19 @@ msgid "Home"
 msgstr "Grundposition"
 
 msgid "Home All"
-msgstr "Alle Achsen zurücksetzen"
+msgstr "Alle Achsen referenzieren"
 
 msgid "Home X"
-msgstr "Achse X neupositionieren"
+msgstr "X referenzieren"
 
 msgid "Home XY"
-msgstr "Achse XY neupositionieren"
+msgstr "XY referenzieren"
 
 msgid "Home Y"
-msgstr "Achse Y neupositionieren"
+msgstr "Y referenzieren"
 
 msgid "Home Z"
-msgstr "Achse Z neupositionieren"
+msgstr "Z referenzieren"
 
 msgid "Host"
 msgstr "Host"
@@ -360,7 +361,7 @@ msgid "Klipper has shutdown"
 msgstr "Klipper abgeschaltet"
 
 msgid "Klipper is attempting to start"
-msgstr "Klipper veruscht zu starten"
+msgstr "Klipper versucht zu starten"
 
 msgid "Klipper will reboot"
 msgstr "Klipper startet neu"
@@ -384,7 +385,7 @@ msgid "Layer:"
 msgstr "Schicht:"
 
 msgid "Leds"
-msgstr ""
+msgstr "Leds"
 
 msgid "Left:"
 msgstr "Restzeit:"
@@ -553,7 +554,7 @@ msgid "Profile Name:"
 msgstr "Profilname:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "Wenn Hilfe benötigt wird KlipperScreen.log angeben.\n"
 
 msgid "Quad Gantry Level"
 msgstr "Quad Gantry Level"
@@ -577,7 +578,7 @@ msgid "Refresh"
 msgstr "Aktualisieren"
 
 msgid "Rename/Move:"
-msgstr "Umbenennen/Bewegen"
+msgstr "Umbenennen/Bewegen:"
 
 msgid "Restart"
 msgstr "Neustart"
