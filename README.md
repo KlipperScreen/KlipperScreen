@@ -14,6 +14,12 @@ will natively work with [Klipper](https://github.com/kevinOConnor/klipper) and [
 
 [More Screenshots](https://klipperscreen.readthedocs.io/en/latest/Panels/)
 
+### Translations <a href="https://hosted.weblate.org/engage/klipperscreen/"><img src="https://hosted.weblate.org/widget/klipperscreen/svg-badge.svg" alt="Translation status" /></a>
+
+Click the widget below to access the translation platform:
+
+<a href="https://hosted.weblate.org/engage/klipperscreen/"><img src="https://hosted.weblate.org/widget/klipperscreen/horizontal-auto.svg" alt="Stan tłumaczenia" width=30% /></a>
+
 ### About the project
 
 KlipperScreen has been created and maintained by Jordan Ruthe from 2020 to 2021
