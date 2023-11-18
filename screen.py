@@ -131,6 +131,7 @@ class KlipperScreen(Gtk.Window):
                 self.width = max(int(monitor.get_geometry().width * .5), 480)
             if not self.height:
                 self.height = max(int(monitor.get_geometry().height * .5), 320)
+        if self.width or self.height:
             self.set_resizable(True)
             self.windowed = True
         else:
