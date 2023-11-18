@@ -136,7 +136,7 @@ class Panel(ScreenPanel):
         dev.add(name)
 
         select = self._gtk.Button("load", style="color3")
-        select.connect("clicked", self.change_country, option)
+        select.connect("clicked", self.change_wifi_country, option)
         select.set_hexpand(False)
         select.set_halign(Gtk.Align.END)
         dev.add(select)
@@ -153,17 +153,39 @@ class Panel(ScreenPanel):
         self.labels[boxname].attach(opt_array[opt_name]['row'], 0, pos, 1, 1)
         self.labels[boxname].show_all()
 
-    def change_country(self, widget, option):
+    def change_wifi_country(self, widget, option):
         commands = [
             f"sudo iw reg set {option['code']}",
-            f"sudo sed -i 's/country=.*/country={option['code']}/' /etc/wpa_supplicant/wpa_supplicant.conf",
-            f"sudo sed -i 's/REGDOMAIN=.*/REGDOMAIN={option['code']}/' /etc/default/crda"
         ]
+        wpa_supplicant = "/etc/wpa_supplicant/wpa_supplicant.conf"
+        if os.path.exists(wpa_supplicant):
+            commands.append(
+                f"sudo sed -i 's/country=.*/country={option['code']}/' {wpa_supplicant}"
+            )
+        cmdline = "/boot/cmdline.txt"
+        if os.path.exists(cmdline):
+            commands.append(
+                'sudo sed -i -e "s/\\s*cfg80211.ieee80211_regdom=\\S*//" -e "s/\\(.*\\)/\\1 '
+                + f'''cfg80211.ieee80211_regdom={option['code']}/" {cmdline}'''
+            )
+        crda = "/etc/default/crda"
+        if os.path.exists(crda):
+            commands.append(
+                f"sudo sed -i 's/REGDOMAIN=.*/REGDOMAIN={option['code']}/' {crda}"
+            )
+        if self.use_network_manager:
+            commands.append("nmcli radio wifi off && nmcli radio wifi on")
+        else:
+            commands.append(f"sudo wpa_cli -i {self.interface} set country {option['code']}")
+            commands.append(f"sudo wpa_cli -i {self.interface} save_config")
+            commands.append(f"sudo ifconfig {self.interface} down && sudo ifconfig {self.interface} up")
         for command in commands:
             logging.info(command)
             os.system(command)
-        os.system("sudo systemctl restart NetworkManager")
-        os.system("sudo systemctl restart networking")
+        self._screen.show_popup_message(
+            _("WiFi Region set to %s") % option['code'] + "\n" + _("A reboot might be needed"),
+            level=2
+        )
         self.back()
 
     def load_networks(self):
