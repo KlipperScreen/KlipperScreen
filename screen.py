@@ -127,10 +127,13 @@ class KlipperScreen(Gtk.Window):
         self.width = self._config.get_main_config().getint("width", None)
         self.height = self._config.get_main_config().getint("height", None)
         if 'XDG_CURRENT_DESKTOP' in os.environ:
+            logging.warning("Running inside a desktop environment is not recommended")
             if not self.width:
                 self.width = max(int(monitor.get_geometry().width * .5), 480)
             if not self.height:
                 self.height = max(int(monitor.get_geometry().height * .5), 320)
+        if self.width or self.height:
+            logging.info("Setting windowed mode")
             self.set_resizable(True)
             self.windowed = True
         else:
