@@ -135,10 +135,10 @@ msgid "Channel"
 msgstr "Csatorna"
 
 msgid "Check ADXL Wiring"
-msgstr "Ellenőrizd az ADXL kábelezést"
+msgstr "Ellenőrizd az ADXL kábelezését"
 
 msgid "Checking for updates, please wait..."
-msgstr "Frissítések keresése, kérjük, várj..."
+msgstr "Frissítések keresése, kérlek, várj..."
 
 msgid "Clear"
 msgstr "Tiszta"
@@ -175,7 +175,7 @@ msgid "Delete Directory?"
 msgstr "Törlöd a könyvtárat?"
 
 msgid "Delete File?"
-msgstr "Fájl törlése?"
+msgstr "Törlöd a fájlt?"
 
 msgid "Deselect"
 msgstr "Kijelölés törlése"
@@ -472,8 +472,8 @@ msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr ""
-"Az automatikus felismerés nem támogatott, a klipperscreen.conf-ban kell "
-"beállítani"
+"Az automatikus felismerés nem támogatott, a klipperscreen-ben kell konfigurálni."
+"konfig"
 
 msgid "Nothing selected"
 msgstr "Nincs kiválasztva"
@@ -503,10 +503,10 @@ msgid "Paused"
 msgstr "Szüneteltetve"
 
 msgid "Perform a full upgrade?"
-msgstr "Teljes frissítést hajtasz végre?"
+msgstr "Teljes frissítést szeretnél?"
 
 msgid "Pins"
-msgstr "Kimenetek"
+msgstr "Tűk"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Fordítsd újra és frissítsd a mikrovezérlőt."
@@ -793,102 +793,3 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "A KlipperScreen újraindul"
-
-#~ msgid "Continue"
-#~ msgstr "Folytat"
-
-#~ msgid "Fullscreen"
-#~ msgstr "Teljes képernyő"
-
-#~ msgid "Actions"
-#~ msgstr "Műveletek"
-
-#~ msgid "Configuration"
-#~ msgstr "Konfiguráció"
-
-#~ msgid "Homing"
-#~ msgstr "Kezdőpont"
-
-#~ msgid "Disable XY"
-#~ msgstr "XY Letiltása"
-
-#~ msgid "Slicer Time correction (%)"
-#~ msgstr "Szeletelő idő javítása (%)"
-
-#~ msgid "Calibrated, save configuration to make it permanent"
-#~ msgstr "Kalibrálva! Mentsd el a konfigurációt, hogy az állandó legyen"
-
-#~ msgid "Decrease"
-#~ msgstr "Csökkent"
-
-#~ msgid "Increase"
-#~ msgstr "Növel"
-
-#, python-format
-#~ msgid "Sending Power ON signal to: %s"
-#~ msgstr "Bekapcsolási jel küldése ide: %s"
-
-#~ msgid "Sort:"
-#~ msgstr "Fajta:"
-
-#~ msgid "Calibrating..."
-#~ msgstr "Kalibrálás..."
-
-#~ msgid "Z+"
-#~ msgstr "Z+"
-
-#~ msgid "Z-"
-#~ msgstr "Z-"
-
-#~ msgid "X+"
-#~ msgstr "X+"
-
-#~ msgid "X-"
-#~ msgstr "X-"
-
-#~ msgid "Y+"
-#~ msgstr "Y+"
-
-#~ msgid "Y-"
-#~ msgstr "Y-"
-
-#, python-format
-#~ msgid "Retry #%s"
-#~ msgstr "Újra #%s"
-
-#~ msgid "Add Printer"
-#~ msgstr "Nyomtató hozzáadása"
-
-#~ msgid "Initializing"
-#~ msgstr "Inicializálás"
-
-#~ msgid "Delete"
-#~ msgstr "Töröl"
-
-#~ msgid "Off"
-#~ msgstr "Ki"
-
-#~ msgid "View Mesh"
-#~ msgstr "Háló nézet"
-
-#~ msgid "Machine"
-#~ msgstr "Gép"
-
-#~ msgid "Sort by: "
-#~ msgstr "Sorrend: "
-
-#~ msgid "Bltouch found applied offset"
-#~ msgstr "A Bltouch alkalmazott eltolást talált"
-
-#~ msgid ""
-#~ "Check /tmp/KlipperScreen.log for more information.\n"
-#~ "Please submit an issue on GitHub for help."
-#~ msgstr ""
-#~ "Nézd a /tmp/KlipperScreen.log további információért.\n"
-#~ "Segítségért küldj be egy hibajegyet a GitHubon."
-
-#~ msgid "Probe found applied offset"
-#~ msgstr "A szonda alkalmazott eltolást talált"
