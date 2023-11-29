@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-11-16 08:20+0000\n"
+"PO-Revision-Date: 2023-11-28 09:22+0000\n"
 "Last-Translator: vjurka <v@jurka.lt>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/lt/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > "
 "19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? "
 "1 : 2);\n"
-"X-Generator: Weblate 5.2\n"
+"X-Generator: Weblate 5.3-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -94,13 +94,13 @@ msgid "Auto-close notifications"
 msgstr "Automatinis pranešimų slėpimas"
 
 msgid "Auto-open Extrude On Pause"
-msgstr "Automatiškai atidaryti Extrude menių kaip Pauzė"
+msgstr "Automatiškai atidaryti Extruderio menių kai suveikia Pauzė"
 
 msgid "Auto-scroll"
 msgstr "Automatinis slinkimas"
 
 msgid "Bed Level"
-msgstr "PLatformos lygis"
+msgstr "Platformos lygis"
 
 msgid "Bed Mesh"
 msgstr "Platformos tinkliukas"
@@ -351,22 +351,22 @@ msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "Priklausomai nuo šildytuvo galios gali užtrukti daugiau kaip 5 minutes."
 
 msgid "Klipper Restart"
-msgstr "Perkrauti Klipper`į"
+msgstr "Perkrauti Klipper'į"
 
 msgid "Klipper has disconnected"
-msgstr "Nėra ryšio su Klipper`iu"
+msgstr "Nėra ryšio su Klipper'iu"
 
 msgid "Klipper has encountered an error."
-msgstr "Klipper`is rado klaidą."
+msgstr "Klipper'is rado klaidą."
 
 msgid "Klipper has shutdown"
 msgstr "Klipper'is išjungtas"
 
 msgid "Klipper is attempting to start"
-msgstr "Klipper`is pasiruošęs"
+msgstr "Klipper'is pasiruošęs"
 
 msgid "Klipper will reboot"
-msgstr "Klipper`is persikraus"
+msgstr "Klipper'is persikraus"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
