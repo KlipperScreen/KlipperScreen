@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-05-07 18:50+0200\n"
+"PO-Revision-Date: 2023-12-02 13:25+0000\n"
 "Last-Translator: Thijs Triemstra <info@collab.nl>\n"
-"Language-Team: \n"
-"Language: nl_NL\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/nl/>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.3-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -47,7 +48,7 @@ msgid "Add profile"
 msgstr "Profiel toevoegen"
 
 msgid "All"
-msgstr ""
+msgstr "Alles"
 
 msgid "Apply"
 msgstr "Toepassen"
@@ -61,7 +62,7 @@ msgid "Apply %s%.3f offset to Probe?"
 msgstr "Gebruik %s%.3f offset voor Probe?"
 
 msgid "Archived"
-msgstr ""
+msgstr "Gearchiveerd"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Weet je zeker dat je het object wilt uitsluiten?"
@@ -91,7 +92,7 @@ msgid "Auto-close notifications"
 msgstr "Auto-sluit notificaties"
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "Auto-open Extrude na Pauze"
 
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
@@ -170,7 +171,7 @@ msgid "Cooldown"
 msgstr "Afkoelen"
 
 msgid "DPMS has failed to load and has been disabled"
-msgstr ""
+msgstr "DPMS kon niet worden geladen en is uitgeschakeld"
 
 msgid "Date"
 msgstr "Datum"
@@ -243,7 +244,7 @@ msgid "File:"
 msgstr "Bestand:"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 msgid "Finding ADXL"
 msgstr "Zoekt ADXL"
@@ -288,7 +289,7 @@ msgid "Hide temp."
 msgstr "Verberg temp."
 
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 msgid "Home All"
 msgstr "Home alles"
@@ -312,7 +313,7 @@ msgid "Hostname"
 msgstr "Hostnaam"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "Icoon Thema"
@@ -321,7 +322,7 @@ msgid "Initializing printer..."
 msgstr "Initialiseren printer…"
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "Initieer een PID-kalibratie voor:"
 
 msgid "Input Shaper"
 msgstr "Input Shaper"
@@ -345,7 +346,7 @@ msgid "Invert Z"
 msgstr "Invert Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
+msgstr "Het kan meer dan 5 minuten duren op basis van de heater power."
 
 msgid "Klipper Restart"
 msgstr "Klipper Herstarten"
@@ -368,6 +369,8 @@ msgstr "Klipper zal herstarten"
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT zijn verborgen en kunnen worden gebruikt in "
+"extrude"
 
 msgid "Language"
 msgstr "Taal"
@@ -376,13 +379,13 @@ msgid "Large"
 msgstr "Groot"
 
 msgid "Last Used"
-msgstr ""
+msgstr "Laatst Gebruikt"
 
 msgid "Layer:"
 msgstr "Laag:"
 
 msgid "Leds"
-msgstr ""
+msgstr "Leds"
 
 msgid "Left:"
 msgstr "Links:"
@@ -406,7 +409,7 @@ msgid "Main Menu"
 msgstr "Hoofd Menu"
 
 msgid "Material"
-msgstr ""
+msgstr "Materiaal"
 
 msgid "Max"
 msgstr "Max"
@@ -448,7 +451,7 @@ msgid "Moonraker: connected"
 msgstr "Moonraker: verbonden"
 
 msgid "More"
-msgstr ""
+msgstr "Meer"
 
 msgid "Move"
 msgstr "Beweeg"
@@ -469,7 +472,7 @@ msgid "New"
 msgstr "Nieuw"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "Macros komen niet in aanmerking:"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -551,7 +554,7 @@ msgid "Profile Name:"
 msgstr "Profiel Naam:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "Voeg KlipperScreen.log toe als je om hulp vraagt.\n"
 
 msgid "Quad Gantry Level"
 msgstr "Quad Gantry Level"
@@ -648,7 +651,7 @@ msgid "Show Heater Power"
 msgstr "Toon Heater Stroom"
 
 msgid "Show Scrollbars Buttons"
-msgstr ""
+msgstr "Toon Scrollbars Knoppen"
 
 msgid "Shutdown"
 msgstr "Afsluiten"
@@ -681,7 +684,7 @@ msgid "Square Corner Velocity"
 msgstr "Square Corner Velocity"
 
 msgid "Standby"
-msgstr ""
+msgstr "Standby"
 
 msgid "Start"
 msgstr "Start"
@@ -775,10 +778,10 @@ msgstr[0] "uur"
 msgstr[1] "uren"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "Macro's die 'rename_existing' gebruiken zijn verborgen"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "macro's die beginnen met '_' zijn verborgen"
 
 msgid "minute"
 msgid_plural "minutes"
