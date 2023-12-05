@@ -8,22 +8,23 @@ msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-10-27 21:25+0200\n"
-"Last-Translator: \n"
-"Language-Team: Jan Stanka (stanky@email.cz)\n"
+"PO-Revision-Date: 2023-12-05 11:06+0000\n"
+"Last-Translator: Mick#6366 <kos.m@post.cz>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
-"X-Generator: Poedit 3.4\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 5.3-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
 msgstr "%s bude aktualizováno na verzi"
 
 msgid "(default)"
-msgstr ""
+msgstr "(výchozí)"
 
 msgid "24 Hour Time"
 msgstr "24 hod formát"
@@ -288,7 +289,7 @@ msgid "Hide temp."
 msgstr "Skrýt teplotu"
 
 msgid "Home"
-msgstr ""
+msgstr "Domů"
 
 msgid "Home All"
 msgstr "Zaparkovat XYZ"
@@ -312,7 +313,7 @@ msgid "Hostname"
 msgstr "Hostname"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "Sada ikon"
@@ -321,7 +322,7 @@ msgid "Initializing printer..."
 msgstr "Startuji tiskárnu ..."
 
 msgid "Initiate a PID calibration for:"
-msgstr "Spustit PID kalibraci"
+msgstr "Spustit PID kalibraci:"
 
 msgid "Input Shaper"
 msgstr "Kompenzace rezonancí"
@@ -368,6 +369,7 @@ msgstr "Klipper se restartuje"
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT jsou skryté a měly by se používat s extrude"
 
 msgid "Language"
 msgstr "Jazyk"
@@ -397,7 +399,7 @@ msgid "Lower Nozzle"
 msgstr "Trysku níž"
 
 msgid "Macro shortcut on sidebar"
-msgstr "Macro shortcut on sidebar"
+msgstr "Makro zkratka na postranním panelu"
 
 msgid "Macros"
 msgstr "Makra"
@@ -490,7 +492,7 @@ msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "Balíček bude aktualizován"
 msgstr[1] "Balíčky budou aktualizovány"
-msgstr[2] ""
+msgstr[2] "Balíčky budou aktualizovány"
 
 msgid "Part Fan"
 msgstr "Částečný ofuk"
@@ -550,31 +552,31 @@ msgid "Profile Name:"
 msgstr "Jméno profilu:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "Při žádosti o pomoc uveďte soubor KlipperScreen.log.\n"
 
 msgid "Quad Gantry Level"
-msgstr "Quad Gantry Level"
+msgstr "QGL"
 
 msgid "Raise Nozzle"
 msgstr "Zvedni trysku"
 
 msgid "Recover"
-msgstr "Recover"
+msgstr "Obnovit"
 
 msgid "Recover Hard"
-msgstr "Recover Hard"
+msgstr "Tvrdé obnovení"
 
 msgid "Recover Soft"
-msgstr "Recover Soft"
+msgstr "Měkké obnovení"
 
 msgid "Reference"
-msgstr "Reference"
+msgstr "Odkaz"
 
 msgid "Refresh"
 msgstr "Obnovit"
 
 msgid "Rename/Move:"
-msgstr "Přejmenovat/Přesunout"
+msgstr "Přejmenovat/Přesunout:"
 
 msgid "Restart"
 msgstr "Restart"
@@ -620,7 +622,7 @@ msgid "Saved offset: %s"
 msgstr "Uložený offset: %s"
 
 msgid "Screen DPMS"
-msgstr "Screen DPMS"
+msgstr "Obrazovka DPMS"
 
 msgid "Screen Power Off Time"
 msgstr "Čas vypnutí displeje"
@@ -647,10 +649,10 @@ msgid "Show Heater Power"
 msgstr "Ukaž odběr topení"
 
 msgid "Show Scrollbars Buttons"
-msgstr "Ukaž rolovací tl."
+msgstr "Ukaž rolovací tlačítka"
 
 msgid "Shutdown"
-msgstr "Shutdown"
+msgstr "Vypnout"
 
 msgid "Size"
 msgstr "Velikost"
@@ -677,10 +679,10 @@ msgid "Speed:"
 msgstr "Rychlost:"
 
 msgid "Square Corner Velocity"
-msgstr ""
+msgstr "Čtvercová rychlost v rozích"
 
 msgid "Standby"
-msgstr ""
+msgstr "Pohotovostní režim"
 
 msgid "Start"
 msgstr "Start"
@@ -692,7 +694,7 @@ msgid "Starting recovery for"
 msgstr "Obnovuji"
 
 msgid "Starting update for"
-msgstr "Aktualizuji"
+msgstr "Spuštění aktualizace pro"
 
 msgid "System"
 msgstr "Systém"
@@ -740,7 +742,7 @@ msgid "Uploaded"
 msgstr "Nahrané"
 
 msgid "XY Move Speed (mm/s)"
-msgstr "Rychlost pohybu XY  (mm/s)"
+msgstr "Rychlost pohybu XY (mm/s)"
 
 msgid "XY Speed (mm/s)"
 msgstr "Rychlost XY (mm/s)"
@@ -752,7 +754,7 @@ msgid "Z Move Speed (mm/s)"
 msgstr "Rychlost pohybu Z (mm/s)"
 
 msgid "Z Speed (mm/s)"
-msgstr "Rychlost pohybu Z  (mm/s)"
+msgstr "Rychlost pohybu Z (mm/s)"
 
 msgid "Z Tilt"
 msgstr "Z Tilt"
@@ -776,10 +778,10 @@ msgstr[1] "hodiny"
 msgstr[2] "hodin"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "makra, která používají 'rename_existing', jsou skryta"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "makra s názvem začínajícím na '_' jsou skrytá"
 
 msgid "minute"
 msgid_plural "minutes"
