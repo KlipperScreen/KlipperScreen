@@ -1,7 +1,3 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Brazilian Portuguese translation improved by
 # Rafael Neuwirth Swierczynski (born and raised in Brazil),
@@ -51,21 +47,21 @@ msgid "Add profile"
 msgstr "Adicionar perfil"
 
 msgid "All"
-msgstr ""
+msgstr "Todos"
 
 msgid "Apply"
 msgstr "Aplicar"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr ""
+msgstr "Aplicar %s%.3f offset no Endstop?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr ""
+msgstr "Aplicar %s%.3f offset no Probe?"
 
 msgid "Archived"
-msgstr ""
+msgstr "Arquivado"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Tem certeza de que deseja excluir o objeto?"
@@ -92,19 +88,19 @@ msgid "Auto-calibrate"
 msgstr "Calibrar automaticamente"
 
 msgid "Auto-close notifications"
-msgstr "Notificações de fechamento automático"
+msgstr "Fechar notificações autom."
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "Abrir Ext. automaticamente em Pausa"
 
 msgid "Auto-scroll"
-msgstr "Auto-scroll"
+msgstr "Acompanhar Conteúdo"
 
 msgid "Bed Level"
 msgstr "Nível da Mesa"
 
 msgid "Bed Mesh"
-msgstr "Nivelamento da Mesa"
+msgstr "Nivelamento"
 
 msgid "Bed screw configuration:"
 msgstr "Configuração da Porca de Mesa:"
@@ -119,7 +115,7 @@ msgid "Calibrating"
 msgstr "Calibrando"
 
 msgid "Camera"
-msgstr ""
+msgstr "Câmera"
 
 msgid "Can't set above the maximum:"
 msgstr "Não é possível definir o Máximo:"
@@ -158,7 +154,7 @@ msgid "Complete"
 msgstr "Completado"
 
 msgid "Confirm Emergency Stop"
-msgstr "Etapa extra ao Parar com Emergência"
+msgstr "Confirmação ao Parar com Emergência"
 
 msgid "Connected"
 msgstr "Conectado"
@@ -247,7 +243,7 @@ msgid "File:"
 msgstr "Arquivo:"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filtro"
 
 msgid "Finding ADXL"
 msgstr "Encontrar ADXL"
@@ -289,10 +285,10 @@ msgid "Hide sensors in Temp."
 msgstr "Ocultar sensores na Temperatura."
 
 msgid "Hide temp."
-msgstr "Ocultar temperatura"
+msgstr "Ocultar Temp."
 
 msgid "Home"
-msgstr ""
+msgstr "Zerar"
 
 msgid "Home All"
 msgstr "Zerar XYZ"
@@ -316,10 +312,13 @@ msgid "Hostname"
 msgstr "Nome do Host"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "Tema"
+
+msgid "Notifications"
+msgstr "Notificações"
 
 msgid "Initializing printer..."
 msgstr "Inicializando Impressora..."
@@ -328,7 +327,7 @@ msgid "Initiate a PID calibration for:"
 msgstr ""
 
 msgid "Input Shaper"
-msgstr ""
+msgstr "Moldagem Assistiva"
 
 msgid "Interface"
 msgstr "Interface"
@@ -380,13 +379,13 @@ msgid "Large"
 msgstr "Grande"
 
 msgid "Last Used"
-msgstr ""
+msgstr "Último Usado"
 
 msgid "Layer:"
 msgstr "Camada:"
 
 msgid "Leds"
-msgstr ""
+msgstr "Luzes"
 
 msgid "Left:"
 msgstr "Restante:"
@@ -398,19 +397,19 @@ msgid "Load"
 msgstr "Carregar"
 
 msgid "Lower Nozzle"
-msgstr "Descer o Bico"
+msgstr "Descer Extrusor"
 
 msgid "Macro shortcut on sidebar"
-msgstr "Macro na barra lateral"
+msgstr "Atalho dedicado para Macros"
 
 msgid "Macros"
 msgstr "Macros"
 
 msgid "Main Menu"
-msgstr "Menu principal"
+msgstr "Menu Principal"
 
 msgid "Material"
-msgstr ""
+msgstr "Material"
 
 msgid "Max"
 msgstr "Max"
@@ -452,13 +451,13 @@ msgid "Moonraker: connected"
 msgstr "Moonraker: Conectado"
 
 msgid "More"
-msgstr ""
+msgstr "Extras"
 
 msgid "Move"
 msgstr "Mover"
 
 msgid "Move Distance (mm)"
-msgstr "Distancia do movimento (mm)"
+msgstr "Distancia de movimento (mm)"
 
 msgid "Name"
 msgstr "Nome"
@@ -513,7 +512,7 @@ msgid "Perform a full upgrade?"
 msgstr "Realizar uma Atualização Completa?"
 
 msgid "Pins"
-msgstr "Pinos"
+msgstr "Conectores"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Por favor, recompile e atualize o microcontrolador."
@@ -561,7 +560,7 @@ msgid "Quad Gantry Level"
 msgstr "Nível do pórtico quádruplo"
 
 msgid "Raise Nozzle"
-msgstr "Elevar o Bico"
+msgstr "Elevar Extrusor"
 
 msgid "Recover"
 msgstr "Recuperar"
@@ -579,7 +578,7 @@ msgid "Refresh"
 msgstr "Recarregar"
 
 msgid "Rename/Move:"
-msgstr ""
+msgstr "Renomear/Mover:"
 
 msgid "Restart"
 msgstr "Reiniciar"
@@ -609,7 +608,7 @@ msgid "Save"
 msgstr "Salvar"
 
 msgid "Save Config"
-msgstr "Salvar Configuração"
+msgstr "Salvar Config."
 
 msgid "Save Z"
 msgstr "Salvar Eixo Z"
@@ -618,17 +617,17 @@ msgid "Save configuration?"
 msgstr "Salvar configuração?"
 
 msgid "Saved"
-msgstr "Salvou"
+msgstr "Salvo"
 
 #, python-format
 msgid "Saved offset: %s"
 msgstr "Deslocamento salvo: %s"
 
 msgid "Screen DPMS"
-msgstr "Tela DPMS"
+msgstr "DPMS na Tela"
 
 msgid "Screen Power Off Time"
-msgstr "Tempo de desligamento da tela"
+msgstr "Descanso de Tela"
 
 msgid "Screws Adjust"
 msgstr "Nivelamento Manual"
@@ -649,10 +648,10 @@ msgid "Show"
 msgstr "Mostrar"
 
 msgid "Show Heater Power"
-msgstr "Mostrar Potência do Aquecedor"
+msgstr "Exibir Potência do Aquecedor"
 
 msgid "Show Scrollbars Buttons"
-msgstr ""
+msgstr "Botões auxiliares de Rolagem"
 
 msgid "Shutdown"
 msgstr "Desligar"
@@ -685,7 +684,7 @@ msgid "Square Corner Velocity"
 msgstr "Velocidade do Canto Reto"
 
 msgid "Standby"
-msgstr ""
+msgstr "Repouso"
 
 msgid "Start"
 msgstr "Iniciar"
@@ -703,10 +702,10 @@ msgid "System"
 msgstr "Sistema"
 
 msgid "System Restart"
-msgstr "Reinicialização do sistema"
+msgstr "Reiniciar Sistema"
 
 msgid "System Shutdown"
-msgstr "Desligamento do sistema"
+msgstr "Desligar Sistema"
 
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
@@ -779,10 +778,10 @@ msgstr[0] "hora"
 msgstr[1] "horas"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "macros que usam 'rename_existing' são ocultos"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "macros que iniciam com '_' são ocultos"
 
 msgid "minute"
 msgid_plural "minutes"
