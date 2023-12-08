@@ -22,10 +22,8 @@ class Panel(ScreenPanel):
         super().__init__(screen, title)
         self.empty = _("Notification log empty")
         self.tb = Gtk.TextBuffer(text=self.empty)
-        tv = Gtk.TextView()
+        tv = Gtk.TextView(editable=False, cursor_visible=False, wrap_mode=Gtk.WrapMode.WORD_CHAR)
         tv.set_buffer(self.tb)
-        tv.set_editable(False)
-        tv.set_cursor_visible(False)
         tv.connect("size-allocate", self._autoscroll)
 
         scroll = Gtk.ScrolledWindow()
