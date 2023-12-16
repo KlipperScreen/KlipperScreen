@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2023-10-24 19:36\n"
+"Project-Id-Version: 2023-12-17 01:36\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-10-24 00:27+0300\n"
+"PO-Revision-Date: 2023-12-17 00:58+0200\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
 "Language: uk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -212,8 +212,8 @@ msgstr "Дуже Великий"
 
 msgid "Extrude"
 msgstr ""
-"Заміна\n"
-"пластику"
+"Заміна пластику\n"
+"Продавити"
 
 msgid "Extrusion +"
 msgstr "Видавити +"
@@ -598,7 +598,9 @@ msgid "Resume"
 msgstr "ВІДНОВИТИ"
 
 msgid "Retract"
-msgstr "Ретракт"
+msgstr ""
+"Доатково\n"
+"вийняти"
 
 msgid "Retraction"
 msgstr ""
