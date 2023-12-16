@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2022-11-30 18:11-0300\n"
-"Last-Translator: O. Robardet\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2023-11-14 17:04+0000\n"
+"Last-Translator: Bahoué <stef.griv@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.1\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -47,21 +48,21 @@ msgid "Add profile"
 msgstr "Ajouter un profil"
 
 msgid "All"
-msgstr ""
+msgstr "Tous"
 
 msgid "Apply"
 msgstr "Appliquer"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr ""
+msgstr "Appliquer %s%.3f décalage vers Endstop ?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr ""
+msgstr "Appliquer %s%.3f décalage pour sonder ?"
 
 msgid "Archived"
-msgstr ""
+msgstr "Archivé"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Êtes-vous sûr de vouloir exclure l’objet ?"
@@ -73,13 +74,13 @@ msgid "Are you sure you wish to cancel this print?"
 msgstr "Êtes-vous sûr de vouloir annuler cette impression ?"
 
 msgid "Are you sure you wish to disable motors?"
-msgstr "Voulez-vous vraiment désactiver les moteurs ?"
+msgstr "Voulez-vous vraiment désactiver les moteurs?"
 
 msgid "Are you sure you wish to reboot the system?"
-msgstr "Êtes-vous sûr de vouloir redémarrer le système ?"
+msgstr "Êtes-vous sûr de vouloir redémarrer le système?"
 
 msgid "Are you sure you wish to shutdown the system?"
-msgstr "Êtes-vous sûr de vouloir arrêter le système ?"
+msgstr "Êtes-vous sûr de vouloir arrêter le système?"
 
 msgid "Auto"
 msgstr "Auto"
@@ -91,7 +92,7 @@ msgid "Auto-close notifications"
 msgstr "Fermeture automatique des notifications"
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "Ouverture automatique de l'extrusion en cas de pause"
 
 msgid "Auto-scroll"
 msgstr "Défilement automatique"
@@ -103,7 +104,7 @@ msgid "Bed Mesh"
 msgstr "Maillage du plateau"
 
 msgid "Bed screw configuration:"
-msgstr "Configuration des vis:"
+msgstr "Configuration des vis du plateau:"
 
 msgid "Calibrate"
 msgstr "Calibrer"
@@ -115,7 +116,7 @@ msgid "Calibrating"
 msgstr "Calibrage"
 
 msgid "Camera"
-msgstr ""
+msgstr "Caméra"
 
 msgid "Can't set above the maximum:"
 msgstr "Impossible de définir au-dessus du maximum:"
@@ -127,7 +128,7 @@ msgid "Cancel Print"
 msgstr "Annuler l'impression"
 
 msgid "Cancelled"
-msgstr "Annulée"
+msgstr "Annulé"
 
 msgid "Cancelling"
 msgstr "Annulation"
@@ -167,19 +168,19 @@ msgid "Console"
 msgstr "Console"
 
 msgid "Cooldown"
-msgstr "Refroidir"
+msgstr "Refroidissement"
 
 msgid "DPMS has failed to load and has been disabled"
-msgstr ""
+msgstr "Le DPMS n'a pas réussi à se charger et a été désactivé"
 
 msgid "Date"
 msgstr "Date"
 
 msgid "Delete Directory?"
-msgstr ""
+msgstr "Supprimer le répertoire?"
 
 msgid "Delete File?"
-msgstr "Supprimer le fichier ?"
+msgstr "Supprimer le fichier?"
 
 msgid "Deselect"
 msgstr "Désélectionner"
@@ -192,7 +193,7 @@ msgstr "Distance (mm)"
 
 #, python-format
 msgid "Do you want to recover %s?"
-msgstr "Voulez-vous récupérer %s ?"
+msgstr "Voulez-vous récupérer %s?"
 
 msgid "Elapsed:"
 msgstr "Écoulé:"
@@ -243,7 +244,7 @@ msgid "File:"
 msgstr "Fichier:"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filtre"
 
 msgid "Finding ADXL"
 msgstr "Recherche de l’ADXL"
@@ -252,10 +253,10 @@ msgid "Fine Tuning"
 msgstr "Réglages précis"
 
 msgid "Finish"
-msgstr "Terminée"
+msgstr "Terminé"
 
 msgid "Firmware Restart"
-msgstr "Redémarrer Firmware"
+msgstr "Redémarrage du firmware"
 
 msgid "Flow:"
 msgstr "Flux:"
@@ -267,7 +268,7 @@ msgid "Font Size"
 msgstr "Taille de la police"
 
 msgid "Full Update"
-msgstr "Mettre à jour"
+msgstr "Mise à jour complète"
 
 msgid "Go Back"
 msgstr "Retour"
@@ -312,7 +313,7 @@ msgid "Hostname"
 msgstr "Nom d’hôte"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "Thème"
@@ -321,7 +322,7 @@ msgid "Initializing printer..."
 msgstr "Démarrage de l'imprimante..."
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "Lancer un étalonnage PID pour :"
 
 msgid "Input Shaper"
 msgstr "Input Shaper"
@@ -333,7 +334,7 @@ msgid "Invalid"
 msgstr "Invalide"
 
 msgid "Invalid password"
-msgstr ""
+msgstr "Mot de passe invalide"
 
 msgid "Invert X"
 msgstr "Inverser l'axe X"
@@ -346,6 +347,7 @@ msgstr "Inverser l'axe Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr ""
+"Cela peut prendre plus de 5 minutes en fonction de la puissance du chauffage."
 
 msgid "Klipper Restart"
 msgstr "Redémarrer Klipper"
@@ -368,6 +370,8 @@ msgstr "Klipper va redémarrer"
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT sont cachés et doivent être utilisés à partir "
+"de l'extrusion"
 
 msgid "Language"
 msgstr "Langue"
@@ -376,13 +380,13 @@ msgid "Large"
 msgstr "Grande"
 
 msgid "Last Used"
-msgstr ""
+msgstr "Dernière utilisation"
 
 msgid "Layer:"
 msgstr "Couche:"
 
 msgid "Leds"
-msgstr ""
+msgstr "Leds"
 
 msgid "Left:"
 msgstr "Restant:"
@@ -406,7 +410,7 @@ msgid "Main Menu"
 msgstr "Menu principal"
 
 msgid "Material"
-msgstr ""
+msgstr "Matériau"
 
 msgid "Max"
 msgstr "Max"
@@ -448,7 +452,7 @@ msgid "Moonraker: connected"
 msgstr "Moonraker: connecté"
 
 msgid "More"
-msgstr ""
+msgstr "Plus"
 
 msgid "Move"
 msgstr "Mouvement"
@@ -469,7 +473,7 @@ msgid "New"
 msgstr "Nouveau"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "Macros non éligibles :"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -506,7 +510,7 @@ msgid "Paused"
 msgstr "En pause"
 
 msgid "Perform a full upgrade?"
-msgstr "Effectuer une mise à jour complète ?"
+msgstr "Effectuer une mise à jour complète?"
 
 msgid "Pins"
 msgstr "Pins"
@@ -521,7 +525,7 @@ msgid "Power On Printer"
 msgstr "Allumer l'imprimante"
 
 msgid "Pressure Advance:"
-msgstr "Pressure Advance:"
+msgstr "Avance de pression:"
 
 msgid "Print"
 msgstr "Imprimer"
@@ -552,6 +556,7 @@ msgstr "Nom du profil:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr ""
+"Fournissez le fichier KlipperScreen.log lorsque vous demandez de l'aide.\n"
 
 msgid "Quad Gantry Level"
 msgstr "Portique à quatre niveaux"
@@ -575,7 +580,7 @@ msgid "Refresh"
 msgstr "Rafraîchir"
 
 msgid "Rename/Move:"
-msgstr ""
+msgstr "Renommer/déplacer :"
 
 msgid "Restart"
 msgstr "Redémarrer"
@@ -648,7 +653,7 @@ msgid "Show Heater Power"
 msgstr "Afficher la puissance de chauffe"
 
 msgid "Show Scrollbars Buttons"
-msgstr ""
+msgstr "Boutons d'affichage des barres de défilement"
 
 msgid "Shutdown"
 msgstr "Arrêter"
@@ -660,7 +665,7 @@ msgid "Slicer"
 msgstr "Slicer"
 
 msgid "Slicer:"
-msgstr "Slicer:"
+msgstr "Trancheur:"
 
 msgid "Small"
 msgstr "Petite"
@@ -681,7 +686,7 @@ msgid "Square Corner Velocity"
 msgstr "Vélocité des angles droits"
 
 msgid "Standby"
-msgstr ""
+msgstr "En attente"
 
 msgid "Start"
 msgstr "Démarrer"
@@ -732,7 +737,7 @@ msgid "Up To Date"
 msgstr "À jour"
 
 msgid "Update"
-msgstr "Mettre à jour"
+msgstr "Mise à jour"
 
 msgid "Updating"
 msgstr "Mise à jour"
@@ -775,15 +780,15 @@ msgstr[0] "heure"
 msgstr[1] "heures"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "les macros qui utilisent 'rename_existing' sont cachées"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "les macros dont le nom commence par '_' sont cachées"
 
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minute"
+msgstr[1] "minutes"
 
 msgid "mm"
 msgstr "mm"

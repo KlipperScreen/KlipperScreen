@@ -5,15 +5,13 @@ labels: 'bug'
 body:
   - type: markdown
     attributes:
-      value: >-
+      value: |
+        <!--
+        Note: Please search to see if an issue already exists for the bug you encountered.
+        -->
         ## Thank you for choosing KlipperScreen
 
         This is a bug report, If you need general support, please visit us on [Discord](https://discord.klipper3d.org/)
-
-        #### The LOG file is REQUIRED. Without the logfile your issue will be closed
-
-        if you need help to find the log file:
-        Read the [Documentation](https://klipperscreen.readthedocs.io/en/latest/Troubleshooting/)
 
         #### This is an Open Source project developed voluntarily, there are no Warranties, or ETA.
         [License](https://github.com/KlipperScreen/KlipperScreen/blob/master/LICENSE)
@@ -23,6 +21,7 @@ body:
     attributes:
       label: 'What happened?'
       description: A clear and concise description of what the bug is.
+      placeholder: During a print i pressed pause and nothing happend
     validations:
       required: true
   - type: textarea
@@ -30,6 +29,7 @@ body:
     attributes:
       label: 'What did you expect to happen instead?'
       description: A clear and concise description of what you expected to happen instead.
+      placeholder: The printer to pause.
     validations:
       required: true
   - type: textarea
@@ -37,6 +37,7 @@ body:
     attributes:
       label: 'How to reproduce this bug?'
       description: A clear and concise description with precise steps to reproduce this bug.
+      placeholder: Press pause button and during printing.
     validations:
       required: true
   - type: textarea
@@ -44,11 +45,20 @@ body:
     attributes:
       label: 'Additional information:'
       description: Any additional info, screenshots or recordings which help to describe the issue.
+      placeholder: hardware info or related printer config.
   - type: textarea
     id: logs
     attributes:
       label: Log output
-      description: Please attach the FULL klipperscreen.log and if needed xorg.log or the tail of journalctl.
+      description: |
+        Please attach the FULL klipperscreen.log and if needed xorg.log or the tail of journalctl.
+        if you need help to find the log file:
+        Read the [Documentation](https://klipperscreen.readthedocs.io/en/latest/Troubleshooting/)
+      placeholder: |
+        #### The LOG file is REQUIRED. Without the logfile your issue will be closed
+
+        Use a Zip archive if needed
+
       render: shell
     validations:
       required: true

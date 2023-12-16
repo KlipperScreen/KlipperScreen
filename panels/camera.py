@@ -55,7 +55,7 @@ class Panel(ScreenPanel):
             vf += "hflip,"
         if cam["flip_vertical"]:
             vf += "vflip,"
-        vf += f"rotate:{cam['rotation']*3.14159/180}"
+        vf += f"rotate:{cam['rotation'] * 3.14159 / 180}"
         logging.info(f"video filters: {vf}")
 
         if self.mpv:

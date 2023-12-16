@@ -10,6 +10,7 @@ nav:
     - Setup:
       - Hardware.md
       - Installation.md
+      - Updating.md
       - Configuration.md
       - Quicktips.md
       - Macros: macros.md

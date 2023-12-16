@@ -1,6 +1,6 @@
 # KlipperScreen
 
-KlipperScreen is a touchscreen GUI that interfaces with [Klipper](https://github.com/kevinOConnor/klipper) via [Moonraker](https://github.com/arksine/moonraker). It can switch between multiple printers to access them from a single location, and it doesn't even need to run on the same host, you can install it on another device and configure the IP address to access the printer.
+KlipperScreen is a touchscreen GUI that interfaces with [Klipper](https://github.com/Klipper3d/klipper) via [Moonraker](https://github.com/arksine/moonraker). It can switch between multiple printers to access them from a single location, and it doesn't even need to run on the same host, you can install it on another device and configure the IP address to access the printer.
 
 ### Documentation [![Documentation Status](https://readthedocs.org/projects/klipperscreen/badge/?version=latest)](https://klipperscreen.readthedocs.io/en/latest/?badge=latest)
 
@@ -13,6 +13,16 @@ will natively work with [Klipper](https://github.com/kevinOConnor/klipper) and [
 [![Main Menu](docs/img/panels/main_panel.png)](https://klipperscreen.readthedocs.io/en/latest/Panels/)
 
 [More Screenshots](https://klipperscreen.readthedocs.io/en/latest/Panels/)
+
+### Translations <a href="https://hosted.weblate.org/engage/klipperscreen/"><img src="https://hosted.weblate.org/widget/klipperscreen/svg-badge.svg" alt="Translation status" /></a>
+
+Translations are hosted on Weblate, Thanks to the Weblate team for supporting the Open-Source community.
+
+Click the widget below to access the translation platform:
+
+<a href="https://hosted.weblate.org/engage/klipperscreen/">
+    <img src="https://hosted.weblate.org/widget/klipperscreen/horizontal-auto.svg" alt="Weblate widget" width=50% />
+</a>
 
 ### About the project
 
@@ -32,3 +42,9 @@ The current maintainer is Alfredo Monclus (alfrix) from 2021 onwards
 thanks to all the people who helped along the way.
 
 [Contributors](https://github.com/KlipperScreen/KlipperScreen/graphs/contributors)
+
+### Sponsors
+
+![LDO](docs/img/LDO-LOGO_SQ.png)
+
+Thank you [LDO](https://ldomotors.com/) for sponsoring KlipperScreen and the open source community.

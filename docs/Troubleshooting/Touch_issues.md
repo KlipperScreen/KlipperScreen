@@ -145,7 +145,7 @@ add at the bottom (in the `[all]` section)
 
 ```sh title="config.txt"
 enable_tvout=0
-max_frambefubbers=1
+max_framebuffers=1
 ```
 
 Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).

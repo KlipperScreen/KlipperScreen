@@ -21,19 +21,28 @@ Located at `~/printer_data/logs`or in `/tmp/` if the former doesn't exist.
 
 ## System logs
 
-If [KlipperScreen.log](#first-steps) doesn't exist:
+If [KlipperScreen.log](#first-steps) doesn't exist open a terminal in the host (typically from SSH) and
+copy all the relevant logs to the folder described above that can be seen and copied from the webui:
+
+```sh
+systemctl status KlipperScreen > ~/printer_data/logs/KliperScreen_systemctl.log
+journalctl -xe -u KlipperScreen > ~/printer_data/logs/KliperScreen_journalctl.log
+cp /var/log/Xorg.0.log ~/printer_data/logs/KliperScreen_Xorg.log
+```
+
+
+Alternatively you can inspect them directly on the terminal:
+
 ```sh
 systemctl status KlipperScreen
 ```
-or
 ```sh
 journalctl -xe -u KlipperScreen
 ```
-
-Also the Xorg log where you can find issues with the X server:
 ```sh
 cat /var/log/Xorg.0.log
 ```
+
 
 ## Screen shows console instead of KlipperScreen
 

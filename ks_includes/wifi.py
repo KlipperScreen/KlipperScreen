@@ -326,119 +326,22 @@ class WpaSocket(Thread):
 
 class WifiChannels:
     @staticmethod
-    def lookup(freq):
-        if freq == "2412":
-            return "2.4", "1"
-        if freq == "2417":
-            return "2.4", "2"
-        if freq == "2422":
-            return "2.4", "3"
-        if freq == "2427":
-            return "2.4", "4"
-        if freq == "2432":
-            return "2.4", "5"
-        if freq == "2437":
-            return "2.4", "6"
-        if freq == "2442":
-            return "2.4", "7"
-        if freq == "2447":
-            return "2.4", "8"
-        if freq == "2452":
-            return "2.4", "9"
-        if freq == "2457":
-            return "2.4", "10"
-        if freq == "2462":
-            return "2.4", "11"
-        if freq == "2467":
-            return "2.4", "12"
-        if freq == "2472":
-            return "2.4", "13"
-        if freq == "2484":
+    def lookup(freq: str):
+        if freq == '2484':
             return "2.4", "14"
-        if freq == "5035":
-            return "5", "7"
-        if freq == "5040":
-            return "5", "8"
-        if freq == "5045":
-            return "5", "9"
-        if freq == "5055":
-            return "5", "11"
-        if freq == "5060":
-            return "5", "12"
-        if freq == "5080":
-            return "5", "16"
-        if freq == "5170":
-            return "5", "34"
-        if freq == "5180":
-            return "5", "36"
-        if freq == "5190":
-            return "5", "38"
-        if freq == "5200":
-            return "5", "40"
-        if freq == "5210":
-            return "5", "42"
-        if freq == "5220":
-            return "5", "44"
-        if freq == "5230":
-            return "5", "46"
-        if freq == "5240":
-            return "5", "48"
-        if freq == "5260":
-            return "5", "52"
-        if freq == "5280":
-            return "5", "56"
-        if freq == "5300":
-            return "5", "60"
-        if freq == "5320":
-            return "5", "64"
-        if freq == "5500":
-            return "5", "100"
-        if freq == "5520":
-            return "5", "104"
-        if freq == "5540":
-            return "5", "108"
-        if freq == "5560":
-            return "5", "112"
-        if freq == "5580":
-            return "5", "116"
-        if freq == "5600":
-            return "5", "120"
-        if freq == "5620":
-            return "5", "124"
-        if freq == "5640":
-            return "5", "128"
-        if freq == "5660":
-            return "5", "132"
-        if freq == "5680":
-            return "5", "136"
-        if freq == "5700":
-            return "5", "140"
-        if freq == "5720":
-            return "5", "144"
-        if freq == "5745":
-            return "5", "149"
-        if freq == "5765":
-            return "5", "153"
-        if freq == "5785":
-            return "5", "157"
-        if freq == "5805":
-            return "5", "161"
-        if freq == "5825":
-            return "5", "165"
-        if freq == "4915":
-            return "5", "183"
-        if freq == "4920":
-            return "5", "184"
-        if freq == "4925":
-            return "5", "185"
-        if freq == "4935":
-            return "5", "187"
-        if freq == "4940":
-            return "5", "188"
-        if freq == "4945":
-            return "5", "189"
-        if freq == "4960":
-            return "5", "192"
-        if freq == "4980":
-            return "5", "196"
-        return None
+        try:
+            freq = float(freq)
+        except ValueError:
+            return None
+        if 2412 <= freq <= 2472:
+            return "2.4", str(int((freq - 2407) / 5))
+        elif 3657.5 <= freq <= 3692.5:
+            return "3", str(int((freq - 3000) / 5))
+        elif 4915 <= freq <= 4980:
+            return "5", str(int((freq - 4000) / 5))
+        elif 5035 <= freq <= 5885:
+            return "5", str(int((freq - 5000) / 5))
+        elif 6455 <= freq <= 7115:
+            return "6", str(int((freq - 5950) / 5))
+        else:
+            return None

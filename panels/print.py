@@ -33,6 +33,7 @@ class Panel(ScreenPanel):
         self.labels['files'] = {}
         self.source = ""
         self.time_24 = self._config.get_main_config().getboolean("24htime", True)
+        self.space = '  ' if self._screen.width > 480 else '\n'
         logging.info(f"24h time is {self.time_24}")
 
         sbox = Gtk.Box(spacing=0)
@@ -123,11 +124,11 @@ class Panel(ScreenPanel):
                 if curdir != "gcodes" and fileinfo['modified'] > self.filelist[curdir]['modified']:
                     self.filelist[curdir]['modified'] = fileinfo['modified']
                     if self.time_24:
-                        time = f':<b>  {datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %H:%M}</b>'
+                        time = f':<b>{self.space}{datetime.fromtimestamp(fileinfo["modified"]):%Y/%m/%d %H:%M}</b>'
                     else:
-                        time = f':<b>  {datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %I:%M %p}</b>'
+                        time = f':<b>{self.space}{datetime.fromtimestamp(fileinfo["modified"]):%Y/%m/%d %I:%M %p}</b>'
                     info = _("Modified") + time
-                    info += "\n" + _("Size") + f':<b>  {self.format_size(fileinfo["size"])}</b>'
+                    info += "\n" + _("Size") + f':<b>{self.space}{self.format_size(fileinfo["size"])}</b>'
                     self.labels['directories'][curdir]['info'].set_markup(info)
             self.filelist[directory]['files'].append(filename)
 
@@ -162,6 +163,8 @@ class Panel(ScreenPanel):
         name.set_line_wrap_mode(Pango.WrapMode.CHAR)
 
         info = Gtk.Label()
+        name.set_line_wrap(True)
+        info.set_line_wrap_mode(Pango.WrapMode.CHAR)
         info.set_hexpand(True)
         info.set_halign(Gtk.Align.START)
         info.get_style_context().add_class("print-info")
@@ -365,14 +368,14 @@ class Panel(ScreenPanel):
             return
         info = _("Uploaded")
         if self.time_24:
-            info += f':<b>  {datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %H:%M}</b>\n'
+            info += f':<b>{self.space}{datetime.fromtimestamp(fileinfo["modified"]):%Y/%m/%d %H:%M}</b>\n'
         else:
-            info += f':<b>  {datetime.fromtimestamp(fileinfo["modified"]):%Y-%m-%d %I:%M %p}</b>\n'
+            info += f':<b>{self.space}{datetime.fromtimestamp(fileinfo["modified"]):%Y/%m/%d %I:%M %p}</b>\n'
 
         if "size" in fileinfo:
-            info += _("Size") + f':  <b>{self.format_size(fileinfo["size"])}</b>\n'
+            info += _("Size") + f':{self.space}<b>{self.format_size(fileinfo["size"])}</b>\n'
         if "estimated_time" in fileinfo:
-            info += _("Print Time") + f':  <b>{self.format_time(fileinfo["estimated_time"])}</b>'
+            info += _("Print Time") + f':{self.space}<b>{self.format_time(fileinfo["estimated_time"])}</b>'
         return info
 
     def reload_files(self, widget=None):
