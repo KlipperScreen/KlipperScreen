@@ -99,6 +99,9 @@ screw_rotation: 0
 extrude_distances: 5, 10, 15, 25
 extrude_speeds: 1, 2, 5, 25
 
+# Define distances for the move panel
+move_distances: 0.1, 0.5, 1, 5, 10, 25, 50
+
 # Camera needs to be configured in moonraker:
 # https://moonraker.readthedocs.io/en/latest/configuration/#webcam
 ```
