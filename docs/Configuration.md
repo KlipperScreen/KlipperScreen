@@ -107,7 +107,7 @@ moonraker_port: 7125
 # extrude_speeds: 1, 2, 5, 25
 
 # Define distances for the move panel
-move_distances: 0.1, 0.5, 1, 5, 10, 25, 50
+# move_distances: 0.1, 0.5, 1, 5, 10, 25, 50
 
 # Camera needs to be configured in moonraker:
 # https://moonraker.readthedocs.io/en/latest/configuration/#webcam
