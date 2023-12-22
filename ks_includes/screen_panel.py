@@ -190,5 +190,9 @@ class ScreenPanel:
 
         if dev in self.labels:
             self.labels[dev].set_label(new_label_text)
+            if show_power:
+                self.labels[dev].get_style_context().add_class("heater-grid-temp-power")
+            else:
+                self.labels[dev].get_style_context().remove_class("heater-grid-temp-power")
         elif dev in self.devices:
             self.devices[dev]["temp"].get_child().set_label(new_label_text)
