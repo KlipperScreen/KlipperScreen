@@ -14,7 +14,7 @@ Write in the file only the options that need to be changed, and restart KlipperS
 
 ## Include files
 ```{ .ini .no-copy }
-[include conf.d/*.conf]
+# [include conf.d/*.conf]
 # Include another configuration file. Wildcards (*) will expand to match anything.
 ```
 
@@ -23,81 +23,88 @@ Write in the file only the options that need to be changed, and restart KlipperS
 The options listed here are not changeable from within the ui.
 ```{ .ini .no-copy }
 [main]
+
 # Time in seconds before the Job Status page closes itself after a successful job/print
 # 0 means disabled
-job_complete_timeout: 0
+# job_complete_timeout: 0
 
 # Time in seconds before the Job Status closes itself if an error is encountered
-job_error_timeout: 0
+# job_error_timeout: 0
 
 # Allows the cursor to be displayed on the screen
-show_cursor: False
+# show_cursor: False
 
 # If multiple printers are defined, this can be set the name of the one to show at startup.
-default_printer: Ender 3 Pro
+# default_printer: MyPrinter
 
 # To define a full set of custom menues (instead of merging user entries with default entries)
 # set this to False. See Menu section below.
-use_default_menu: True
+# use_default_menu: True
 
 # Define one or more moonraker power devices that turn on/off with the screensaver (CSV list)
-screen_on_devices: example1, example2
-screen_off_devices:  example1, example2
+# screen_on_devices: example1, example2
+# screen_off_devices:  example1, example2
 ```
+
+!!! tip
+    It is strongly recommended that you do not add settings to the config file if you don't need them
 
 ## Printer Options
 Multiple printers can be defined
 ```{ .ini .no-copy }
 # Define printer and name. Name is anything after the first printer word
-[printer Ender 3 Pro]
+[printer MyPrinter]
 # Define the moonraker host/port if different from 127.0.0.1 and 7125
 moonraker_host: 127.0.0.1
 # ports 443 and 7130 will use https/wss
 moonraker_port: 7125
-# Moonraker API key if this is not connecting from a trusted client IP
-moonraker_api_key: False
+# Moonraker API key if this host is not connecting from a trusted client IP
+# moonraker_api_key: False
 
-# Define the z_babystep intervals in a CSV list. Currently only 2 are supported
-z_babystep_values: 0.01, 0.05
+# Define the z_babystep intervals in a CSV list. Currently only 2 are supported, the last value is default
+# z_babystep_values: 0.01, 0.05
 
 # Override the movement speed and set a specific for this printer.
 # These setting overrides the settings configured in the UI. If specified,
 # the values configured in the UI will not be used.
-move_speed_xy: 500
-move_speed_z: 300
+# this is not recommended and may be removed in the future, use the ui settings
+# move_speed_xy: 500
+# move_speed_z: 300
 
 # Define one or more moonraker power devices that turn on this printer (CSV list)
 # Default is the printer name
-power_devices: example1, example2
+# power_devices: example1, example2
 
 # Define what items should be shown in titlebar besides the extruder and bed
 # the name must be the same as defined in the klipper config
 # valid options are temperature_sensors or temperature_fans, or heater_generic
-titlebar_items: chamber, MCU, Pi
+# titlebar_items: chamber, MCU, Pi
 
 # The style of the user defined items in the titlebar
 # Can be 'full' indicating that the full name is shown, 'short' for the first letter, or None (default) for no name
-titlebar_name_type: None
+# titlebar_name_type: None
 
 # Z probe calibrate position
 # By default is the middle of the bed
-calibrate_x_position: 100
-calibrate_y_position: 100
+# example:
+# calibrate_x_position: 100
+# calibrate_y_position: 100
+
 
 # Bed Screws
-# define the screw positons required for odd number of screws in a comma separated list
+# define the screw positons required for odd number of screws in a comma separated list (CSV)
 # possible values are: bl, br, bm, fl, fr, fm, lm, rm, center
 # they correspond to back-left, back-right, back-middle, front-left, front-right, front-middle, left-middle, right-middle
 # example:
-screw_positions: bl, br, fm
+# screw_positions: bl, br, fm
 
 # Rotation is useful if the screen is not directly in front of the machine.
 # Valid values are 0 90 180 270
-screw_rotation: 0
+# screw_rotation: 0
 
-# Define distances and speeds for the extrude panel. CSV list 2 to 4 integers
-extrude_distances: 5, 10, 15, 25
-extrude_speeds: 1, 2, 5, 25
+# Define distances and speeds for the extrude panel. CSV list 2 to 4 integers the second value is default
+# extrude_distances: 5, 10, 15, 25
+# extrude_speeds: 1, 2, 5, 25
 
 # Define distances for the move panel
 move_distances: 0.1, 0.5, 1, 5, 10, 25, 50
@@ -128,7 +135,8 @@ heater_generic: 60
 gcode: MY_HEATSOAK_MACRO
 ```
 
-There is a special preheat setting named cooldown to do additional things when the _cooldown_ button is pressed
+There is a special preheat setting named cooldown to *do additional things* when the _cooldown_ button is pressed
+*do not* add `TURN_OFF_ALL_HEATERS` or you will remove the ability to turn off individual heaters with this button.
 for example:
 
 ```ini
@@ -242,6 +250,6 @@ If include files are defined then, they will be merged first.
 The default config is included here: (do not edit use as reference)
 _${KlipperScreen_Directory}/ks_includes/default.conf_
 
-Preferably *do not* copy the entire default.conf file, just configure the settings needed.
+*Do not* copy the entire default.conf file, just configure the settings needed.
 
-If no config file is found, then when a setting is changed in the settings panel, a new configuration file will be created automatically.
+If no config file is found, then when a setting is changed in the settings panel, a new configuration file should be created automatically.
