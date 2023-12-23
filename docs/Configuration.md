@@ -20,7 +20,7 @@ Write in the file only the options that need to be changed, and restart KlipperS
 
 
 ## Main Options
-The options listed here are not changeable from within the ui.
+The options listed here are not editable from within the user interface.
 ```{ .ini .no-copy }
 [main]
 
@@ -37,7 +37,7 @@ The options listed here are not changeable from within the ui.
 # If multiple printers are defined, this can be set the name of the one to show at startup.
 # default_printer: MyPrinter
 
-# To define a full set of custom menues (instead of merging user entries with default entries)
+# To define a full set of custom menus (instead of merging user entries with default entries)
 # set this to False. See Menu section below.
 # use_default_menu: True
 
@@ -106,7 +106,7 @@ moonraker_port: 7125
 # extrude_distances: 5, 10, 15, 25
 # extrude_speeds: 1, 2, 5, 25
 
-# Define distances for the move panel
+# Define distances for the move panel. comma-separated list with 2 to 7 floats and/or integers
 # move_distances: 0.1, 0.5, 1, 5, 10, 25, 50
 
 # Camera needs to be configured in moonraker:
