@@ -13,6 +13,7 @@ class KlippyFiles:
         self.callbacks = []
         self.files = {}
         self.filelist = []
+        self.directories = []
         self.gcodes_path = None
 
     def initialize(self):
@@ -27,6 +28,7 @@ class KlippyFiles:
         self.callbacks = None
         self.files = None
         self.filelist = None
+        self.directories = None
         self.gcodes_path = None
 
     def _callback(self, result, method, params):
@@ -85,6 +87,13 @@ class KlippyFiles:
                         fdir = os.path.dirname(params['filename'])
                         thumbnail['path'] = os.path.join(fdir, thumbnail['relative_path'])
             self.run_callbacks(mods=[params['filename']])
+        elif method == "server.files.get_directory":
+            if 'result' not in result or 'dirs' not in result['result']:
+                return
+            for x in result['result']['dirs']:
+                if x not in self.directories:
+                    self.directories.append(x)
+                    self.get_dir_info(x['dirname'])
 
     def add_file(self, item, notify=True):
         if 'filename' not in item and 'path' not in item:
@@ -166,6 +175,7 @@ class KlippyFiles:
 
     def refresh_files(self):
         self._screen._ws.klippy.get_file_list(self._callback)
+        self._screen._ws.klippy.get_dir_info(self._callback)
         return False
 
     def remove_file(self, filename, notify=True):
@@ -199,3 +209,6 @@ class KlippyFiles:
         if filename not in self.files:
             return {"path": None, "modified": 0, "size": 0}
         return self.files[filename]
+
+    def get_dir_info(self, directory):
+        self._screen._ws.klippy.get_dir_info(self._callback, directory=directory)

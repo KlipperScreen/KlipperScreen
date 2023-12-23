@@ -82,8 +82,13 @@ class Panel(ScreenPanel):
 
     def add_directory(self, directory, show=True):
         parent_dir = os.path.dirname(directory)
+        modified = 0
+        for x in self._files.directories:
+            if x['dirname'] == os.path.split(directory)[-1]:
+                modified = x['modified']
+                break
         if directory not in self.filelist:
-            self.filelist[directory] = {'directories': [], 'files': [], 'modified': 0}
+            self.filelist[directory] = {'directories': [], 'files': [], 'modified': modified}
             self.filelist[parent_dir]['directories'].append(directory)
 
         if directory not in self.labels['directories']:
@@ -114,22 +119,22 @@ class Panel(ScreenPanel):
             curdir = os.path.join(*d[:i])
             newdir = os.path.join(*d[:i + 1])
             if newdir not in self.filelist[curdir]['directories']:
-                if d[i].startswith("."):
+                if newdir.startswith("."):
                     return
                 self.add_directory(newdir)
 
         if filename not in self.filelist[directory]['files']:
             for i in range(1, len(d)):
                 curdir = os.path.join(*d[:i + 1])
-                if curdir != "gcodes" and fileinfo['modified'] > self.filelist[curdir]['modified']:
-                    self.filelist[curdir]['modified'] = fileinfo['modified']
-                    if self.time_24:
-                        time = f':<b>{self.space}{datetime.fromtimestamp(fileinfo["modified"]):%Y/%m/%d %H:%M}</b>'
-                    else:
-                        time = f':<b>{self.space}{datetime.fromtimestamp(fileinfo["modified"]):%Y/%m/%d %I:%M %p}</b>'
-                    info = _("Modified") + time
-                    info += "\n" + _("Size") + f':<b>{self.space}{self.format_size(fileinfo["size"])}</b>'
-                    self.labels['directories'][curdir]['info'].set_markup(info)
+                if self.time_24:
+                    time = f":<b>{self.space}" \
+                           f"{datetime.fromtimestamp(self.filelist[curdir]['modified']):%Y/%m/%d %H:%M}</b>"
+                else:
+                    time = f":<b>{self.space}" \
+                           f"{datetime.fromtimestamp(self.filelist[curdir]['modified']):%Y/%m/%d %I:%M %p}</b>"
+                info = _("Modified") + time
+                info += "\n" + _("Size") + f':<b>{self.space}{self.format_size(fileinfo["size"])}</b>'
+                self.labels['directories'][curdir]['info'].set_markup(info)
             self.filelist[directory]['files'].append(filename)
 
         if filepath not in self.files:
@@ -394,21 +399,17 @@ class Panel(ScreenPanel):
             logging.debug(f"Cannot update file, file not in labels: {filename}")
             return
 
-        logging.info(f"Updating file {filename}")
         self.labels['files'][filename]['info'].set_markup(self.get_file_info_str(filename))
 
         # Update icon
         GLib.idle_add(self.image_load, filename)
 
     def _callback(self, newfiles, deletedfiles, updatedfiles=None):
-        logging.debug(f"newfiles: {newfiles}")
         for file in newfiles:
             self.add_file(file)
-        logging.debug(f"deletedfiles: {deletedfiles}")
         for file in deletedfiles:
             self.delete_file(file)
         if updatedfiles is not None:
-            logging.debug(f"updatefiles: {updatedfiles}")
             for file in updatedfiles:
                 self.update_file(file)
         return False
