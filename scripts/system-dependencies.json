@@ -23,6 +23,8 @@
         "libopenjp2-7",
         "wireless-tools",
         "libdbus-glib-1-dev",
+        "policykit-1",
+        "network-manager",
         "autoconf"
     ],
     "arch": [
@@ -42,6 +44,8 @@
         "librsvg",
         "openjpeg2",
         "dbus-glib",
+         "polkit",
+         "networkmanager",
         "autoconf"
     ]
 }
