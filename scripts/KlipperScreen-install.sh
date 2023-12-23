@@ -186,7 +186,7 @@ create_policy()
 
     KS_GID=$( getent group klipperscreen | awk -F: '{printf "%d", $3}' )
     sudo /bin/sh -c "cat > ${RULE_FILE}" << EOF
-// Allow KlipperScreen User to reboot and shutdown the system
+// Allow KlipperScreen to reboot, shutdown, etc
 polkit.addRule(function(action, subject) {
     if ((action.id == "org.freedesktop.login1.power-off" ||
          action.id == "org.freedesktop.login1.power-off-multiple-sessions" ||
