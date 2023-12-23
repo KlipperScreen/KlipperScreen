@@ -1,3 +1,4 @@
+import re
 import logging
 import gi
 
@@ -13,6 +14,15 @@ class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
+
+        if self.ks_printer_cfg is not None:
+            dis = self.ks_printer_cfg.get("move_distances", '0.1, 0.5, 1, 50, 10, 25, 50')
+            if re.match(r'^[0-9,\.\s]+$', dis):
+                dis = [str(i.strip()) for i in dis.split(',')]
+                if 1 < len(dis) <= 7 and len(dis) >= 2:
+                    self.distances = dis
+                    self.distance = self.distances[-2]
+
         self.settings = {}
         self.menu = ['move_menu']
         self.buttons = {
