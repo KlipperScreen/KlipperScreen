@@ -50,6 +50,9 @@ class Panel(ScreenPanel):
             logging.info("camera URL is relative")
             endpoint = self._screen.apiclient.endpoint.split(':')
             url = f"{endpoint[0]}:{endpoint[1]}{url}"
+        if '/webrtc' in url:
+            self._screen.show_popup_message(_('WebRTC is not supported by the backend trying Stream'))
+            url = url.replace('/webrtc', '/stream')
         vf = ""
         if cam["flip_horizontal"]:
             vf += "hflip,"
