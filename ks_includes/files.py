@@ -91,9 +91,9 @@ class KlippyFiles:
             if 'result' not in result or 'dirs' not in result['result']:
                 return
             for x in result['result']['dirs']:
-                if x not in self.directories:
+                if x not in self.directories and not x['dirname'].startswith('.'):
                     self.directories.append(x)
-                    self.get_dir_info(x['dirname'])
+                    self.get_dir_info(f"{params['path']}/{x['dirname']}")
 
     def add_file(self, item, notify=True):
         if 'filename' not in item and 'path' not in item:
