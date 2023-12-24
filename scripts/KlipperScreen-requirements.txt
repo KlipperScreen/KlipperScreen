@@ -17,4 +17,4 @@ websocket-client==1.6.1; python_version == '3.7'
 
 PyGObject==3.46.0;python_version>="3.8"
 pycairo==1.25.1;python_version>="3.8"
-websocket-client==1.6.4;python_version>="3.8"
+websocket-client==1.7.0;python_version>="3.8"
