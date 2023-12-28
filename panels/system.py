@@ -137,9 +137,9 @@ class Panel(ScreenPanel):
                 vbox.add(label)
                 scroll.add(vbox)
                 recoverybuttons = [
-                    {"name": _("Recover Hard"), "response": Gtk.ResponseType.OK},
-                    {"name": _("Recover Soft"), "response": Gtk.ResponseType.APPLY},
-                    {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
+                    {"name": _("Recover Hard"), "response": Gtk.ResponseType.OK, "style": 'dialog-warning'},
+                    {"name": _("Recover Soft"), "response": Gtk.ResponseType.APPLY, "style": 'dialog-info'},
+                    {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
                 ]
                 self._gtk.Dialog(_("Recover"), recoverybuttons, scroll, self.reset_confirm, program)
                 return
@@ -202,8 +202,8 @@ class Panel(ScreenPanel):
         scroll.add(vbox)
 
         buttons = [
-            {"name": _("Update"), "response": Gtk.ResponseType.OK},
-            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
+            {"name": _("Update"), "response": Gtk.ResponseType.OK, "style": 'dialog-info'},
+            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
         ]
         self._gtk.Dialog(_("Update"), buttons, scroll, self.update_confirm, program)
 
@@ -317,9 +317,9 @@ class Panel(ScreenPanel):
         vbox.add(label)
         scroll.add(vbox)
         buttons = [
-            {"name": _("Host"), "response": Gtk.ResponseType.OK},
-            {"name": _("Printer"), "response": Gtk.ResponseType.APPLY},
-            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
+            {"name": _("Host"), "response": Gtk.ResponseType.OK, "style": 'dialog-info'},
+            {"name": _("Printer"), "response": Gtk.ResponseType.APPLY, "style": 'dialog-warning'},
+            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
         ]
         if method == "reboot":
             title = _("Restart")

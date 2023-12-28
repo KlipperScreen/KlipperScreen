@@ -11,7 +11,6 @@
 @define-color error #EF9A9A;
 @define-color echo #a1ef9a;
 @define-color popup #006064;
-@define-color dialog #80CBC4;
 @define-color textview #212121;
 
 * {
@@ -206,27 +205,6 @@ textview .time {
     background-color: @bg;
 }
 
-.dialog button {
-    background-color: @dialog;
-    border-bottom-color: @dialog;
-    border-radius: .75em;
-}
-
-.dialog button:nth-child(1) {
-    background-color: @color3;
-    border-bottom-color: @color3;
-}
-
-.dialog button:nth-child(2) {
-    background-color: @error;
-    border-bottom-color: @error;
-}
-
-.dialog button:nth-child(1) label ,
-.dialog button:nth-child(2) label {
-    color: @text;
-}
-
 .tempbutton_top,
 .tempbutton,
 .tempbutton_bottom,
@@ -306,4 +284,38 @@ textview .time {
 
 .keyboard_pad {
     background-color: @border;
+}
+
+.dialog button {
+    border-radius: .75em;
+}
+
+.dialog-error {
+    background-color: @error;
+    border-bottom-color: @error;
+}
+
+.dialog-warning {
+    background-color: @warning;
+    border-bottom-color: @warning;
+}
+
+.dialog-info {
+    background-color: @color4;
+    border-bottom-color: @color4;
+}
+
+.dialog-default {
+    background-color: @color3;
+    border-bottom-color: @color3;
+}
+
+.dialog-secondary {
+    background-color: @color2;
+    border-bottom-color: @color2;
+}
+
+.dialog-primary {
+    background-color: @color1;
+    border-bottom-color: @color1;
 }

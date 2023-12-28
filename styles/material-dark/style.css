@@ -159,16 +159,7 @@ textview .time {
 
 .dialog button {
     background-color: @buttons-bg;
-    border-bottom-color: @active-dark;
     border-radius: .75em;
-}
-
-.dialog button:nth-child(1) {
-    border-bottom-color: @color3;
-}
-
-.dialog button:nth-child(2) {
-    border-bottom-color: @error;
 }
 
 .tempbutton_top,
@@ -242,4 +233,28 @@ button.active {
 
 .keyboard_pad {
     background-color: @buttons-bg;
+}
+
+.dialog-error {
+    border-bottom-color: @error;
+}
+
+.dialog-warning {
+    border-bottom-color: @warning;
+}
+
+.dialog-info {
+    border-bottom-color: @color4;
+}
+
+.dialog-default {
+    border-bottom-color: @color3;
+}
+
+.dialog-secondary {
+     border-bottom-color: @color2;
+}
+
+.dialog-primary {
+     border-bottom-color: @color1;
 }

@@ -292,16 +292,7 @@ trough {
 
 .dialog button {
     padding: 1.5em;
-    border-bottom: .4em solid @color3;
     margin-top: 1em;
-}
-
-.dialog button:nth-child(1) {
-    border-bottom-color: @echo;
-}
-
-.dialog button:nth-child(2) {
-    border-bottom-color: @error;
 }
 
 .distbutton_active {
@@ -630,3 +621,28 @@ trough progress {
 }
 
 .graph_label {border-left-width: .4em; border-left-style: solid;}
+
+.dialog-error {
+    border-bottom: .4em solid @error;
+}
+
+.dialog-warning {
+    border-bottom: .4em solid @warning;
+}
+
+.dialog-info {
+    border-bottom: .4em solid @color4;
+}
+
+.dialog-default {
+    border-bottom: .4em solid @color3;
+}
+
+.dialog-secondary {
+    border-bottom: .4em solid @color2;
+}
+
+.dialog-primary {
+    border-bottom: .4em solid @color1;
+}
+

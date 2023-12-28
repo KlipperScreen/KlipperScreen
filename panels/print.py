@@ -300,7 +300,7 @@ class Panel(ScreenPanel):
 
         buttons = [
             {"name": _("Print"), "response": Gtk.ResponseType.OK},
-            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
+            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
         ]
 
         label = Gtk.Label()
