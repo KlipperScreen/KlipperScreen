@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2022-11-21 21:31-0300\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2023-12-27 23:25+0000\n"
+"Last-Translator: eltacoloco <hampus.lind@webbpost.nu>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -32,39 +33,39 @@ msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "En FIRMWARE_RESTART kan lösa problemet."
 
 msgid "ADXL Not Configured"
-msgstr ""
+msgstr "ADXL inte konfigurerad"
 
 msgid "Abort"
 msgstr "Avbryt"
 
 msgid "Acceleration:"
-msgstr ""
+msgstr "Acceleration:"
 
 msgid "Accept"
 msgstr "Godkänn"
 
 msgid "Add profile"
-msgstr ""
+msgstr "Lägg till profil"
 
 msgid "All"
-msgstr ""
+msgstr "Alla"
 
 msgid "Apply"
-msgstr ""
+msgstr "Tillämpa"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr ""
+msgstr "Tillämpa %s%.3f offset på Ändstopp?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr ""
+msgstr "Tillämpa %s%.3f offset på sonden?"
 
 msgid "Archived"
-msgstr ""
+msgstr "Arkiverad"
 
 msgid "Are you sure do you want to exclude the object?"
-msgstr ""
+msgstr "Är du säker på att du vill utesluta objektet?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Är du säker på att du vill köra Nödstopp?"
@@ -85,37 +86,37 @@ msgid "Auto"
 msgstr "Automatisk"
 
 msgid "Auto-calibrate"
-msgstr ""
+msgstr "Auto-kalibrera"
 
 msgid "Auto-close notifications"
-msgstr ""
+msgstr "Automatisk stängning av aviseringar"
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "Autoöppna Extrude vid paus"
 
 msgid "Auto-scroll"
 msgstr "Auto-scrolla"
 
 msgid "Bed Level"
-msgstr ""
+msgstr "Bädd Level"
 
 msgid "Bed Mesh"
-msgstr ""
+msgstr "Bädd Mesh"
 
 msgid "Bed screw configuration:"
-msgstr ""
+msgstr "Konfiguration bädd skruvar:"
 
 msgid "Calibrate"
 msgstr "Kalibrera"
 
 msgid "Calibrated"
-msgstr ""
+msgstr "Kalibrerad"
 
 msgid "Calibrating"
-msgstr ""
+msgstr "Kalibrerar"
 
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 msgid "Can't set above the maximum:"
 msgstr "Kan inte ställa in över maxgränsen:"
@@ -136,16 +137,16 @@ msgid "Cannot connect to Moonraker"
 msgstr "Kan inte ansluta till Moonraker"
 
 msgid "Channel"
-msgstr ""
+msgstr "Kanal"
 
 msgid "Check ADXL Wiring"
-msgstr ""
+msgstr "Kontrollera ADXL-ledningar"
 
 msgid "Checking for updates, please wait..."
-msgstr ""
+msgstr "Söker efter uppdateringar, vänta..."
 
 msgid "Clear"
-msgstr ""
+msgstr "Rensa"
 
 msgid "Close"
 msgstr "Stäng"
@@ -170,16 +171,16 @@ msgid "Cooldown"
 msgstr "Nedkylning"
 
 msgid "DPMS has failed to load and has been disabled"
-msgstr ""
+msgstr "DPMS kunde inte laddas och har inaktiverats"
 
 msgid "Date"
 msgstr "Datum"
 
 msgid "Delete Directory?"
-msgstr ""
+msgstr "Ta bort katalogen?"
 
 msgid "Delete File?"
-msgstr ""
+msgstr "Radera fil?"
 
 msgid "Deselect"
 msgstr "Avmarkera"
@@ -201,13 +202,13 @@ msgid "Error"
 msgstr "Fel"
 
 msgid "Estimated Time Method"
-msgstr ""
+msgstr "Beräknad tidsmetod"
 
 msgid "Exclude Object"
-msgstr ""
+msgstr "Exkludera objekt"
 
 msgid "Extra Large"
-msgstr ""
+msgstr "Extra stor"
 
 msgid "Extrude"
 msgstr "Extrudera"
@@ -225,28 +226,28 @@ msgid "Fan"
 msgstr "Fläkt"
 
 msgid "Filament Used"
-msgstr ""
+msgstr "Filament används"
 
 msgid "Filament total:"
-msgstr ""
+msgstr "Totalt filament:"
 
 msgid "Filament used:"
-msgstr ""
+msgstr "Filament som används:"
 
 msgid "Filament:"
-msgstr ""
+msgstr "Filament:"
 
 msgid "File"
 msgstr "Fil"
 
 msgid "File:"
-msgstr ""
+msgstr "Fil:"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 msgid "Finding ADXL"
-msgstr ""
+msgstr "Hitta ADXL"
 
 msgid "Fine Tuning"
 msgstr "Finjustering"
@@ -258,10 +259,10 @@ msgid "Firmware Restart"
 msgstr "Firmware Omstart"
 
 msgid "Flow:"
-msgstr ""
+msgstr "Flöde:"
 
 msgid "Flowrate:"
-msgstr ""
+msgstr "Flödeshastighet:"
 
 msgid "Font Size"
 msgstr "Textstorlek"
@@ -273,7 +274,7 @@ msgid "Go Back"
 msgstr "Gå tillbaka"
 
 msgid "Height:"
-msgstr ""
+msgstr "Höjd:"
 
 msgid "Hidden"
 msgstr "Dold"
@@ -285,7 +286,7 @@ msgid "Hide sensors in Temp."
 msgstr "Dölj sensorer i Temp."
 
 msgid "Hide temp."
-msgstr ""
+msgstr "Dölj temp."
 
 msgid "Home"
 msgstr "Hem"
@@ -306,13 +307,13 @@ msgid "Home Z"
 msgstr "Hem Z"
 
 msgid "Host"
-msgstr ""
+msgstr "Värd"
 
 msgid "Hostname"
 msgstr "Värdnamn"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "Ikon tema"
@@ -321,10 +322,10 @@ msgid "Initializing printer..."
 msgstr "Initierar skrivaren..."
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "Initiera en PID-kalibrering för:"
 
 msgid "Input Shaper"
-msgstr ""
+msgstr "Input Shaper"
 
 msgid "Interface"
 msgstr "Gränssnitt"
@@ -333,7 +334,7 @@ msgid "Invalid"
 msgstr "Ogiltig"
 
 msgid "Invalid password"
-msgstr ""
+msgstr "Felaktigt lösenord"
 
 msgid "Invert X"
 msgstr "Invertera X"
@@ -345,13 +346,13 @@ msgid "Invert Z"
 msgstr "Invertera Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
+msgstr "Det kan ta mer än 5 minuter beroende på värmarens effekt."
 
 msgid "Klipper Restart"
 msgstr "Klipper Omstart"
 
 msgid "Klipper has disconnected"
-msgstr ""
+msgstr "Klipper har kopplat bort"
 
 msgid "Klipper has encountered an error."
 msgstr "Klipper har stött på ett fel."
@@ -368,6 +369,7 @@ msgstr "Klipper kommer att starta om"
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT är dolda och bör användas från extrudering"
 
 msgid "Language"
 msgstr "Språk"
@@ -376,13 +378,13 @@ msgid "Large"
 msgstr "Stor"
 
 msgid "Last Used"
-msgstr ""
+msgstr "Senast använd"
 
 msgid "Layer:"
-msgstr ""
+msgstr "Lager:"
 
 msgid "Leds"
-msgstr ""
+msgstr "Lysdioder"
 
 msgid "Left:"
 msgstr "Återstående:"
@@ -406,31 +408,31 @@ msgid "Main Menu"
 msgstr "Huvudmeny"
 
 msgid "Material"
-msgstr ""
+msgstr "Material"
 
 msgid "Max"
-msgstr ""
+msgstr "Max"
 
 msgid "Max Acceleration"
-msgstr ""
+msgstr "Max acceleration"
 
 msgid "Max Acceleration to Deceleration"
-msgstr ""
+msgstr "Max acceleration till inbromsning"
 
 msgid "Max Velocity"
-msgstr ""
+msgstr "Max Hastighet"
 
 msgid "Maximum"
-msgstr ""
+msgstr "Maximal"
 
 msgid "Measure Both"
-msgstr ""
+msgstr "Mät båda"
 
 msgid "Measure X"
-msgstr ""
+msgstr "Mått X"
 
 msgid "Measure Y"
-msgstr ""
+msgstr "Mått Y"
 
 msgid "Medium"
 msgstr "Medium"
@@ -439,7 +441,7 @@ msgid "Menu"
 msgstr "Meny"
 
 msgid "Mesh calibrate"
-msgstr ""
+msgstr "Mesh kalibrera"
 
 msgid "Modified"
 msgstr "Ändrad"
@@ -448,7 +450,7 @@ msgid "Moonraker: connected"
 msgstr "Moonraker: ansluten"
 
 msgid "More"
-msgstr ""
+msgstr "Mer"
 
 msgid "Move"
 msgstr "Flytta"
@@ -463,25 +465,27 @@ msgid "Network"
 msgstr "Nätverk"
 
 msgid "Never"
-msgstr ""
+msgstr "Aldrig"
 
 msgid "New"
-msgstr ""
+msgstr "Ny"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "Inga kvalificerade makron:"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr ""
+"Stöds inte för automatisk upptäckt, den måste konfigureras i klipperscreen."
+"conf"
 
 msgid "Nothing selected"
 msgstr "Inget valt"
 
 #, python-format
 msgid "Outdated by %d"
-msgstr ""
+msgstr "Föråldrad av %d"
 
 msgid "PSK for"
 msgstr "PSK för"
@@ -492,7 +496,7 @@ msgstr[0] "Paketet kommer att uppdateras"
 msgstr[1] "Paketen kommer att uppdateras"
 
 msgid "Part Fan"
-msgstr ""
+msgstr "Del Fläkt"
 
 msgid "Password saved"
 msgstr "Lösenordet har sparats"
@@ -507,7 +511,7 @@ msgid "Perform a full upgrade?"
 msgstr "Utför en fullständig uppgradering?"
 
 msgid "Pins"
-msgstr ""
+msgstr "Pins"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Vänligen kompilera om och flasha mikrokontrollern."
@@ -519,7 +523,7 @@ msgid "Power On Printer"
 msgstr "Slå på skrivaren"
 
 msgid "Pressure Advance:"
-msgstr ""
+msgstr "Tryckförflyttning:"
 
 msgid "Print"
 msgstr "Skriv ut"
@@ -528,52 +532,52 @@ msgid "Print Control"
 msgstr "Utskriftskontroll"
 
 msgid "Print Time"
-msgstr ""
+msgstr "Utskriftstid"
 
 msgid "Printer"
-msgstr ""
+msgstr "Skrivare"
 
 msgid "Printer Connections"
-msgstr ""
+msgstr "Skrivaranslutningar"
 
 msgid "Printer Select"
-msgstr ""
+msgstr "Välj skrivare"
 
 msgid "Printing"
 msgstr "Skriver ut"
 
 msgid "Probe Offset"
-msgstr ""
+msgstr "Sond-offset"
 
 msgid "Profile Name:"
 msgstr "Profilens namn:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "Ange KlipperScreen.log när du ber om hjälp.\n"
 
 msgid "Quad Gantry Level"
-msgstr ""
+msgstr "Quad Gantry nivå"
 
 msgid "Raise Nozzle"
-msgstr ""
+msgstr "Höj munstycket"
 
 msgid "Recover"
-msgstr ""
+msgstr "Återställ"
 
 msgid "Recover Hard"
-msgstr ""
+msgstr "Hård återställning"
 
 msgid "Recover Soft"
-msgstr ""
+msgstr "Mjuk återställning"
 
 msgid "Reference"
 msgstr "Referens"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Ladda om"
 
 msgid "Rename/Move:"
-msgstr ""
+msgstr "Byt namn/flytta:"
 
 msgid "Restart"
 msgstr "Starta om"
@@ -582,22 +586,22 @@ msgid "Resume"
 msgstr "Återuppta"
 
 msgid "Retract"
-msgstr ""
+msgstr "Dra tillbaka"
 
 msgid "Retraction"
-msgstr ""
+msgstr "Indragning"
 
 msgid "Retraction Length"
-msgstr ""
+msgstr "Indragningslängd"
 
 msgid "Retraction Speed"
-msgstr ""
+msgstr "Indragningshastighet"
 
 msgid "Retry"
-msgstr ""
+msgstr "Försök igen"
 
 msgid "Retrying"
-msgstr ""
+msgstr "Försöker igen"
 
 msgid "Save"
 msgstr "Spara"
@@ -606,26 +610,26 @@ msgid "Save Config"
 msgstr "Spara konfiguration"
 
 msgid "Save Z"
-msgstr ""
+msgstr "Spara Z"
 
 msgid "Save configuration?"
-msgstr ""
+msgstr "Spara konfigurationen?"
 
 msgid "Saved"
-msgstr ""
+msgstr "Sparad"
 
 #, python-format
 msgid "Saved offset: %s"
-msgstr ""
+msgstr "Sparad offset: %s"
 
 msgid "Screen DPMS"
-msgstr ""
+msgstr "Skärm DPMS"
 
 msgid "Screen Power Off Time"
 msgstr "Avstängningstid för skärmen"
 
 msgid "Screws Adjust"
-msgstr ""
+msgstr "Skruvar Justera"
 
 msgid "Select"
 msgstr "Välj"
@@ -634,7 +638,7 @@ msgid "Send"
 msgstr "Skicka"
 
 msgid "Set Temp"
-msgstr ""
+msgstr "Sätt temperatur"
 
 msgid "Settings"
 msgstr "Inställningar"
@@ -643,22 +647,22 @@ msgid "Show"
 msgstr "Visa"
 
 msgid "Show Heater Power"
-msgstr ""
+msgstr "Visa kraft värmare"
 
 msgid "Show Scrollbars Buttons"
-msgstr ""
+msgstr "Visa rullningslistknappar"
 
 msgid "Shutdown"
-msgstr ""
+msgstr "Stänga av"
 
 msgid "Size"
 msgstr "Storlek"
 
 msgid "Slicer"
-msgstr ""
+msgstr "Slicer"
 
 msgid "Slicer:"
-msgstr ""
+msgstr "Slicer:"
 
 msgid "Small"
 msgstr "Liten"
@@ -673,25 +677,25 @@ msgid "Speed -"
 msgstr "Hastighet -"
 
 msgid "Speed:"
-msgstr ""
+msgstr "Hastighet:"
 
 msgid "Square Corner Velocity"
-msgstr ""
+msgstr "Fyrkantigt hörn hastighet"
 
 msgid "Standby"
-msgstr ""
+msgstr "Vilar"
 
 msgid "Start"
 msgstr "Starta"
 
 msgid "Starting WiFi Association"
-msgstr ""
+msgstr "Startar WiFi Association"
 
 msgid "Starting recovery for"
-msgstr ""
+msgstr "Börjar återhämtning för"
 
 msgid "Starting update for"
-msgstr ""
+msgstr "Startar uppdatering för"
 
 msgid "System"
 msgstr "System"
@@ -709,22 +713,22 @@ msgid "Temperature"
 msgstr "Temperatur"
 
 msgid "Total:"
-msgstr ""
+msgstr "Total:"
 
 msgid "Unknown Heater"
 msgstr "Okänt värmeelement"
 
 msgid "Unknown screw position"
-msgstr ""
+msgstr "Okänd skruvposition"
 
 msgid "Unload"
-msgstr ""
+msgstr "Lasta av"
 
 msgid "Unretract Extra Length"
-msgstr ""
+msgstr "Dra tillbaka, extra längd"
 
 msgid "Unretract Speed"
-msgstr ""
+msgstr "Dra tillbaka Hastighet"
 
 msgid "Up To Date"
 msgstr "Aktuellt"
@@ -742,7 +746,7 @@ msgid "XY Move Speed (mm/s)"
 msgstr "XY rörelsehastighet (mm/s)"
 
 msgid "XY Speed (mm/s)"
-msgstr ""
+msgstr "XY-hastighet (mm/s)"
 
 msgid "Z Calibrate"
 msgstr "Z Kalibrering"
@@ -751,18 +755,18 @@ msgid "Z Move Speed (mm/s)"
 msgstr "Z rörelsehastighet (mm/s)"
 
 msgid "Z Speed (mm/s)"
-msgstr ""
+msgstr "Z hastighet (mm/s)"
 
 msgid "Z Tilt"
-msgstr ""
+msgstr "Z Lutning"
 
 msgid "Z offset:"
-msgstr ""
+msgstr "Z-offset:"
 
 msgid "commit"
 msgid_plural "commits"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "commit"
+msgstr[1] "commits"
 
 msgid "dBm"
 msgstr "dBm"
@@ -773,15 +777,15 @@ msgstr[0] "timme"
 msgstr[1] "timmar"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "makron som använder 'rename_existing' är dolda"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "makron med ett namn som börjar med '_' är dolda"
 
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minut"
+msgstr[1] "minuter"
 
 msgid "mm"
 msgstr "mm"
@@ -793,7 +797,7 @@ msgid "mm/s²"
 msgstr "mm/s²"
 
 msgid "mm³/s"
-msgstr ""
+msgstr "mm³/s"
 
 #~ msgid "Continue"
 #~ msgstr "Fortsätt"
