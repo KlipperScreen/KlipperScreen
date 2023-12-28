@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="heater.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <metadata
+     id="metadata16">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>folder</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs14">
+    <linearGradient
+       id="linearGradient11869">
+      <stop
+         style="stop-color:#dc322f;stop-opacity:1"
+         offset="0"
+         id="stop11861" />
+      <stop
+         style="stop-color:#cc4a17;stop-opacity:1"
+         offset="0.5"
+         id="stop11863" />
+      <stop
+         style="stop-color:#c65a11;stop-opacity:1"
+         offset="0.75"
+         id="stop11865" />
+      <stop
+         style="stop-color:#cc4f1a;stop-opacity:1"
+         offset="1"
+         id="stop11867" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#bfbfbf"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="826"
+     id="namedview12"
+     showgrid="false"
+     inkscape:pagecheckerboard="false"
+     inkscape:zoom="5.413793"
+     inkscape:cx="36.296179"
+     inkscape:cy="43.777071"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg10"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:document-rotation="0" />
+  <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title2">folder</title>
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <path
+     id="path52470"
+     style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
+     d="M 32.951247,2.9998603 C 25.51376,10.143927 18.926825,19.525488 23.063308,37.743476 18.153162,33.08117 16.587148,29.597804 15.538431,21.448114 6.0285967,46.805535 11.645718,57.067011 24.775373,60.164331 22.533402,57.496671 18.423709,51.239164 23.34011,44.525092 c 0.410143,2.816398 -1.241928,6.735772 4.485198,7.294211 3.200536,-0.592689 0.03165,-6.928398 5.515509,-17.458948 -2.626399,7.970356 1.908769,9.273605 2.363059,19.268404 2.749629,0.24329 5.888639,-5.891767 5.330976,-10.605566 4.907091,7.749787 0.632723,12.908488 -2.260539,17.976668 15.172074,-2.15354 16.066874,-16.48527 12.963494,-21.12912 -3.322894,-4.972342 -11.665129,-14.750679 -9.457353,-27.936369 -0.02926,-0.219407 -4.30408,4.36075 -6.084488,13.881044 C 31.261462,22.573964 30.07897,14.397145 32.951247,2.9998603 Z" />
+</svg>
