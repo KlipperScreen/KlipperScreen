@@ -1,0 +1,269 @@
+/* Colorized theme created by Alfredo Monclus 2021 */
+/* Using solarized colors */
+@define-color solarized-base0 #839496;
+@define-color solarized-base1 #93a1a1;
+@define-color solarized-base2 #eee8d5;
+@define-color solarized-base3 #fdf6e3;
+@define-color solarized-base00 #657b83;
+@define-color solarized-base01  #586e75;
+@define-color solarized-base02 #073642;
+@define-color solarized-base03 #002b36;
+@define-color solarized-yellow #b58900;
+@define-color solarized-orange #cb4b16;
+@define-color solarized-red #dc322f;
+@define-color solarized-magenta #d33682;
+@define-color solarized-violet #6c71c4;
+@define-color solarized-blue #268bd2;
+@define-color solarized-cyan #2aa198;
+@define-color solarized-green #859900;
+
+* {
+    color: @solarized-base3;
+}
+
+list row,
+treeview.view,
+window {
+    background-color: @solarized-base03;
+}
+
+button {
+    background-color: @solarized-base03;
+}
+
+button:active {
+    background-color: @solarized-orange;
+}
+
+.button_active {
+    border-color: @solarized-base02;
+    border-style: solid;
+    border-radius: 1em;
+    background-color: @solarized-base02;
+}
+
+button.color1 {
+    background-color: @solarized-base02;
+    border-bottom-color: @solarized-orange;
+    border-radius: 1em;
+}
+
+button.color2 {
+    background-color: @solarized-base02;
+    border-bottom-color: @solarized-magenta;
+    border-radius: 1em;
+}
+
+button.color3 {
+    background-color: @solarized-base02;
+    border-bottom-color: @solarized-cyan;
+    border-radius: 1em;
+}
+
+button.color4 {
+    background-color: @solarized-base02;
+    border-bottom-color: @solarized-green;
+    border-radius: 1em;
+}
+
+button.color1:active,
+button.color2:active,
+button.color3:active,
+button.color4:active,
+button.update:active,
+button.invalid:active,
+.dialog button:active {
+    border-style: none;
+    margin-top: .5em;
+}
+
+button.active {
+    background-color: @solarized-orange;
+}
+
+button.update {
+    background-color: @solarized-base02;
+    border: 0;
+    border-bottom: .3em solid;
+    border-bottom-color: @solarized-green;
+    border-radius: .75em;
+}
+
+button.invalid {
+    background-color: @solarized-base02;
+    border: 0;
+    border-bottom: .3em solid;
+    border-bottom-color: @solarized-red;
+    border-radius: .75em;
+}
+
+combobox box button {
+    background-color: @solarized-base02;
+    border-color: @solarized-base03;
+}
+
+treeview.view check,
+switch {
+    background-color: @solarized-base02;
+}
+
+treeview.view check:checked,
+switch:checked {
+    background-color: @solarized-green;
+}
+
+entry {
+    background-color: @solarized-base02;
+    border-color: @solarized-base03;
+}
+
+label {
+    color: @solarized-base3;
+}
+
+menu {
+    background-color: @solarized-base03;
+    border-color:  @solarized-base1;
+}
+
+menuitem {
+    background-color: @solarized-base03;
+    border-color: @solarized-base1
+}
+
+trough {
+    background-color: @solarized-base02;
+    color: @solarized-base3;
+    border-color: @solarized-base03;
+    border-radius: 1em;
+}
+
+trough highlight,
+trough progress {
+    background-color:  @solarized-violet;
+    color: @solarized-base3;
+    border-color: @solarized-base03;
+    border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
+}
+
+scale-mark {
+    color: @solarized-base3;
+}
+
+scrollbar,
+scrollbar button,
+scrollbar trough {
+    background-color: @solarized-base03;
+}
+
+scrollbar slider {
+    background-color: @solarized-base02;
+}
+
+textview .time {
+    color:  @solarized-base1;
+}
+
+.popup {
+    background-color: @solarized-cyan;
+}
+
+.dialog {
+    border: @solarized-base03;
+    background-color: @solarized-base03;
+}
+
+.dialog button {
+    background-color: @solarized-base02;
+    border-bottom-color: @solarized-cyan;
+    border-radius: .75em;
+}
+
+.dialog button:nth-child(1) {
+    border-bottom-color: @solarized-green;
+}
+
+.dialog button:nth-child(2) {
+    border-bottom-color:  @solarized-red;
+}
+.tempbutton_top,
+.tempbutton,
+.tempbutton_bottom,
+.distbutton_top,
+.distbutton,
+.distbutton_bottom  {
+    border-color: @solarized-base03;
+    background-color: @solarized-base02;
+}
+
+.distbutton_active {
+    background-color: @solarized-orange;
+}
+
+.fan_slider {
+    color: @solarized-base3;
+}
+
+.message_popup {
+    border-bottom-color: @solarized-base3;
+}
+
+.message_popup button {
+    background-color:  @solarized-red;
+}
+
+.message_popup_echo,
+.message_popup_echo button {
+    background-color: @solarized-green;
+}
+
+.message_popup_warning,
+.message_popup_warning button {
+    background-color:  @solarized-orange;
+}
+
+.message_popup_error,
+.message_popup_error button {
+    background-color:  @solarized-red;
+}
+
+.numpad_key {
+    border-color: @solarized-base03;
+    background-color: @solarized-base02;
+}
+
+.printing-status {
+    color: @solarized-base3;
+}
+
+.printing-progress-text {
+    color: @solarized-base3;
+}
+
+.printing-status-label {
+    color:  @solarized-base1;
+}
+
+.message {
+    border-color: @solarized-red;
+    color: @solarized-base3;
+    background-color: @solarized-red;
+}
+
+.message button {
+    background-color: @solarized-base3;
+    color: @solarized-base03;
+}
+
+.warning {
+    background-color:  @solarized-yellow;
+}
+
+.error {
+    background-color: @solarized-red;
+}
+
+.keyboard_pad {
+    background-color: @solarized-base02;
+}

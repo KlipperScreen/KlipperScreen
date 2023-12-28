@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="60.13768"
+   height="60.776516"
+   viewBox="0 0 60.137677 60.776516"
+   id="svg4160"
+   version="1.1"
+   sodipodi:docname="speed+.svg"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     id="namedview17"
+     showgrid="false"
+     inkscape:zoom="10.332938"
+     inkscape:cx="35.725287"
+     inkscape:cy="31.010978"
+     inkscape:window-x="-6"
+     inkscape:window-y="-6"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4160"
+     inkscape:document-rotation="0"
+     inkscape:snap-bbox="true"
+     inkscape:object-paths="true"
+     inkscape:snap-smooth-nodes="false"
+     inkscape:snap-intersection-paths="true"
+     inkscape:snap-midpoints="false"
+     inkscape:snap-object-midpoints="true"
+     inkscape:snap-center="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-bbox-edge-midpoints="false"
+     inkscape:bbox-nodes="false"
+     inkscape:bbox-paths="false" />
+  <defs
+     id="defs4162" />
+  <metadata
+     id="metadata4165">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     style="fill:#b58900;stroke:#073642;stroke-width:4;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1;stroke-linejoin:round"
+     id="path858"
+     sodipodi:type="arc"
+     sodipodi:cx="30.06884"
+     sodipodi:cy="30.388258"
+     sodipodi:rx="26"
+     sodipodi:ry="26"
+     sodipodi:start="2.3561945"
+     sodipodi:end="0.78539816"
+     sodipodi:arc-type="slice"
+     d="m 11.684064,48.773034 a 26,26 0 0 1 0,-36.769552 26,26 0 0 1 36.769552,0 26,26 0 0 1 0,36.769552 L 30.06884,30.388258 Z" />
+  <path
+     id="path860"
+     style="fill:#dc322f;fill-opacity:1;stroke:#073642;stroke-width:4;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stroke-linejoin:round"
+     d="M 49.564205,13.185621 A 26,26 0 0 1 48.453616,48.773034 L 30.06884,30.388258 Z" />
+  <path
+     id="path867"
+     style="fill:#859900;fill-opacity:1;stroke:#073642;stroke-width:4;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stroke-linejoin:round"
+     d="m 10.573475,13.185621 a 26,26 0 0 0 1.110589,35.587413 L 30.06884,30.388258 Z" />
+  <g
+     id="layer1" />
+  <circle
+     style="fill:#073642;fill-opacity:1;stroke:#073642;stroke-width:4.00001;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none"
+     id="path852"
+     cx="30.06884"
+     cy="30.388258"
+     r="10" />
+  <g
+     id="g838"
+     inkscape:transform-center-x="-7.4302575"
+     transform="rotate(-15,30.06884,30.388258)"
+     inkscape:transform-center-y="-0.52682988">
+    <path
+       style="fill:#fdf6e3;stroke:#fdf6e3;stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="m 30.077772,27.388258 v 6 l 19.51691,-3 z"
+       id="path844"
+       sodipodi:nodetypes="cccc" />
+    <circle
+       style="fill:#fdf6e3;stroke:none;stroke-width:4;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path842"
+       cx="-30.388258"
+       cy="-30.06884"
+       r="4"
+       transform="matrix(0,-1,-1,0,0,0)" />
+  </g>
+</svg>

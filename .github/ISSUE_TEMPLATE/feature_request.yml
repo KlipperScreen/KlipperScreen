@@ -1,0 +1,45 @@
+name: Feature request
+description: Suggest an idea for this project
+title: "[FR] <title>"
+labels: 'enhancement'
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        ## Thank you for choosing KlipperScreen
+
+        This form is for feature requests of KlipperScreen
+
+        Requesting a feature does not mean it will be worked on, it's taken as a suggestion.
+
+        #### This is an Open Source project developed voluntarily, there are no Warranties, or ETA.
+        [License](https://github.com/KlipperScreen/KlipperScreen/blob/master/LICENSE)
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 'Requested feature'
+      description: A clear and concise description of what you want.
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 'Is your feature request related to a problem?'
+      description: A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+    validations:
+      required: false
+  - type: textarea
+    id: alternative
+    attributes:
+      label: 'Describe alternatives you have considered'
+      description: A clear and concise description of any alternative solutions or features you've considered.
+    validations:
+      required: false
+  - type: textarea
+    id: info
+    attributes:
+      label: 'Additional information'
+      description: Add any other context drawings or screenshots about the feature.
+    validations:
+      required: false

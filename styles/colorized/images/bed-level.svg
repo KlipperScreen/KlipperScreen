@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="svg38"
+   sodipodi:docname="bed-level.svg"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     id="namedview18"
+     showgrid="false"
+     inkscape:zoom="9.8125"
+     inkscape:cx="32"
+     inkscape:cy="23.847134"
+     inkscape:window-x="-6"
+     inkscape:window-y="-6"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg38"
+     inkscape:document-rotation="0" />
+  <metadata
+     id="metadata44">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>bed</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs42">
+    <linearGradient
+       id="linearGradient955">
+      <stop
+         style="stop-color:#dc322f;stop-opacity:1"
+         offset="0"
+         id="stop959" />
+      <stop
+         style="stop-color:#cb4b16;stop-opacity:0.49803922"
+         offset="0.5"
+         id="stop964" />
+      <stop
+         style="stop-color:#b58900;stop-opacity:0.24705882"
+         offset="0.75"
+         id="stop966" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop961" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient955"
+       id="linearGradient945"
+       x1="51"
+       y1="40"
+       x2="50.862003"
+       y2="5.8426123"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(2.0000002,2.0003658)" />
+  </defs>
+  <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title2">bed</title>
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <g
+     id="g859"
+     transform="rotate(5,223.37587,38.189112)">
+    <rect
+       style="opacity:0.995;fill:#93a1a1;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers;stop-color:#000000"
+       id="rect863"
+       width="6"
+       height="4"
+       x="9"
+       y="50"
+       rx="1.9999998"
+       ry="2" />
+    <rect
+       style="opacity:0.995;fill:#93a1a1;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers;stop-color:#000000"
+       id="rect912-6"
+       width="6"
+       height="4"
+       x="49"
+       y="50"
+       rx="1.9999998"
+       ry="2" />
+    <rect
+       style="opacity:0.995;fill:#839496;stroke:none;stroke-width:2.00001;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers;stop-color:#000000"
+       id="rect857"
+       width="55"
+       height="7"
+       x="4.5"
+       y="44"
+       ry="2"
+       rx="2" />
+    <rect
+       style="opacity:0.995;fill:#586e75;stroke:none;stroke-width:2.00001;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers;stop-color:#000000"
+       id="rect854-5"
+       width="55"
+       x="4.5"
+       y="44"
+       height="2" />
+  </g>
+</svg>

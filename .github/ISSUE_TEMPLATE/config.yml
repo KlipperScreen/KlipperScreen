@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Klipper Discord Server
+    url: https://discord.klipper3d.org/
+    about: If you have questions or need general support.
+  - name: KlipperScreen Discussions
+    url: https://github.com/KlipperScreen/KlipperScreen/discussions
+    about: If you have questions or need general support.

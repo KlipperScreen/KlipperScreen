@@ -1,0 +1,205 @@
+@define-color color1 #ED6500;
+@define-color color2 #B10080;
+@define-color color3 #009384;
+@define-color color4 #A7E100;
+@define-color bg #13181C;
+@define-color active #324A5E;
+@define-color error #981E1F;
+@define-color text white;
+@define-color text-inv black;
+@define-color lines #cccccc;
+@define-color switch-scale-bg #3584e4;
+
+* {
+    color: @text;
+}
+
+list row,
+treeview.view,
+window {
+    background-color: @bg;
+}
+
+button {
+    background-color: @bg;
+}
+
+button:active {
+    background-color: @active;
+}
+
+.button_active {
+    background-color: @active;
+    border-radius: 1em;
+}
+
+button.color1 {
+    border-bottom-color: @color1;
+}
+
+button.color2 {
+    border-bottom-color: @color2;
+}
+
+button.color3 {
+    border-bottom-color: @color3;
+}
+
+button.color4 {
+    border-bottom-color: @color4;
+}
+
+button.active {
+    background-color: @active;
+}
+
+button.update {
+    background: @color3;
+    border-color: @color3;
+}
+
+button.invalid {
+    background: @error;
+    border-color: @error;
+}
+
+combobox box button {
+    border-color: @lines;
+}
+
+treeview.view check,
+switch {
+    background-color: @active;
+}
+treeview.view check:checked,
+switch:checked {
+    background-color: @switch-scale-bg;
+}
+
+entry {
+    background-color: @active;
+    border-color: @bg;
+}
+
+label {
+    color: @text;
+}
+
+menu {
+    background-color: @bg;
+    border-color: @lines;
+}
+
+menuitem {
+    background-color: @bg;
+    border-color: @lines;
+}
+
+trough {
+    background-color: @active;
+    color: @text;
+    border-color: @text-inv;
+}
+
+trough highlight,
+trough progress {
+    background-color: @switch-scale-bg;
+    color: @text;
+    border-color: @text-inv;
+}
+
+scale-mark {
+    color: @text;
+}
+
+scrollbar,
+scrollbar button,
+scrollbar trough {
+    background-color: @bg;
+}
+
+scrollbar slider {
+    background-color: @active;
+}
+
+textview .time {
+    color: @lines;
+}
+
+.popup {
+    background-color: @text-inv;
+}
+
+.dialog {
+    border: @bg;
+    background-color: @bg;
+}
+
+.dialog button {
+    border-bottom-color: @color3;
+}
+
+.dialog button:nth-child(1) {
+    border-bottom-color: @color4;
+}
+
+.dialog button:nth-child(2) {
+    border-bottom-color: @error;
+}
+
+.distbutton_active {
+    background-color: @active;
+    border-color: @color1;
+    box-shadow: 0 0 0 .2em @text inset;
+}
+
+.distbutton_top,
+.distbutton,
+.distbutton_bottom {
+    border-color: @lines;
+}
+
+.fan_slider {
+    color: @text;
+}
+
+.message_popup {
+    border-bottom-color: @lines;
+}
+
+.numpad_key {
+    border-color: @lines;
+}
+
+.tempbutton_top {
+    border-color: @lines;
+}
+
+.tempbutton,
+.tempbutton_bottom {
+    border-color: @lines;
+    border-top-color: @lines;
+}
+
+.message {
+    border-color: @error;
+    color: @text;
+    background-color: @error;
+}
+
+.message button {
+    background-color: @text;
+    color: @text-inv;
+}
+
+.warning {
+    background-color: rgba(30, 204, 39, 0.7);
+}
+
+.error {
+    background-color: rgba(204, 30, 30, 0.7);
+}
+
+.keyboard_pad {
+    background-color: @bg;
+}

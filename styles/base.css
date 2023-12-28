@@ -1,0 +1,632 @@
+@define-color color1 #ED6500;
+@define-color color2 #B10080;
+@define-color color3 #009384;
+@define-color color4 #A7E100;
+@define-color bg #13181C;
+@define-color active #404E57;
+@define-color echo #367554;
+@define-color warning #f9a825;
+@define-color error #981E1F;
+@define-color text white;
+@define-color text-inv black;
+@define-color lines #cccccc;
+@define-color switch-scale-bg #3584e4;
+
+* {
+    color: @text;
+    font-size: KS_FONT_SIZEpx;
+    -GtkComboBox-appears-as-list: 0;
+    text-shadow: none;
+    box-shadow: none;
+    border: 0;
+}
+
+button:disabled {
+    opacity: .2;
+}
+
+list row,
+treeview.view,
+window {
+    background-color: @bg;
+    -gtk-icon-shadow: none;
+}
+
+switch slider {
+    border: 0;
+}
+
+switch,
+treeview.view check {
+    margin: 0.75em;
+    min-width: 6em;
+    min-height: 3em;
+    border: 0;
+    border-radius: 3em;
+}
+
+treeview.view check {
+    background-color: rgb(32,41,47);
+    -gtk-icon-source: -gtk-icontheme("switch-off-symbolic");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size : 3em 3em;
+    background-image: image(url("./styles/circle.svg"));
+    -gtk-icon-transform: translateX(1.5em);
+}
+treeview.view check:checked {
+    background-color : rgb(53,132,228);
+    background-position: right center;
+    -gtk-icon-source: -gtk-icontheme("switch-on-symbolic");
+    -gtk-icon-transform: translateX(-1.5em);
+}
+
+expander label {
+    padding : 1em;
+}
+
+button {
+    background-image: none;
+    background-color: @bg;
+    margin: .25em;
+    padding: .2em .5em 0;
+    border-radius: 0;
+    border: 0;
+    -gtk-icon-shadow: none;
+}
+
+button:active,
+.button_active,
+button.active {
+    background-color: @active;
+}
+
+button:disabled,
+button.color1:disabled,
+button.color2:disabled,
+button.color3:disabled,
+button.color4:disabled {
+    border: 0;
+}
+
+button:disabled label,
+button.color1:disabled label,
+button.color2:disabled label,
+button.color3:disabled label,
+button.color4:disabled label {
+    color: grey;
+}
+
+button label {
+    margin-top: .25em;
+    margin-bottom: 0;
+}
+
+button.color1 {
+    border-bottom: .4em solid @color1;
+    margin: .3em;
+    min-height: 3em;
+}
+
+button.color2 {
+    border-bottom: .4em solid @color2;
+    margin: .3em;
+    min-height: 3em;
+}
+
+button.color3 {
+    border-bottom: .4em solid @color3;
+    margin: .3em;
+    min-height: 3em;
+}
+
+button.color4 {
+    border-bottom: .4em solid @color4;
+    margin: .3em;
+    min-height: 3em;
+}
+
+button.status {
+    background-color: @bg;
+}
+
+button.file-list {
+    margin: 0;
+}
+
+button.update {
+    background: @color3;
+    border: .4em solid @color3;
+    border-radius: 0.4em;
+    font-weight: bold;
+}
+
+button.invalid {
+    background: @error;
+    border: .4em solid @error;
+    border-radius: 0.4em;
+    font-weight: bold;
+}
+
+combobox box button {
+    border: .05em solid @lines;
+    padding: .5em 1em;
+}
+
+combobox arrow {
+    min-width: 1em;
+}
+
+entry {
+    font-size: 1em;
+    background-color: @active;
+    border: .2em solid @bg;
+    padding: .2em;
+}
+
+label {
+    color: @text;
+}
+
+menu {
+    background-color: @bg;
+    border: .1em solid @lines;
+}
+
+menuitem {
+    background-color: @bg;
+    border: .1em solid @lines;
+    border-bottom: 0;
+    border-top: 0;
+}
+
+trough {
+    min-height: 2em;
+    background-color: @active;
+    color: @text;
+    border: 1px solid @text-inv;
+}
+
+trough highlight,
+trough progress {
+    min-height: 2em;
+    background-color: @switch-scale-bg;
+    color: @text;
+    border: 1px solid @text-inv;
+}
+
+trough progress.left {
+    border: 0px;
+}
+
+scale {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+scale mark {
+    color: @text;
+}
+
+scale trough slider {
+    min-height: 2em;
+    min-width: 2em;
+}
+
+scrollbar,
+scrollbar button,
+scrollbar trough {
+    border: none;
+    background-color: @bg;
+    min-height: 2.5em;
+}
+
+scrollbar slider {
+    min-width: 2.5em;
+    border-radius: .7em;
+    background-color: @active;
+}
+
+scrollbar.vertical.with-steppers {
+    -GtkScrollbar-has-backward-stepper: true;
+    -GtkScrollbar-has-forward-stepper: true;
+}
+
+scrollbar.vertical.with-steppers button.down {
+    -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
+}
+
+scrollbar.vertical.with-steppers button.up {
+    -gtk-icon-source: -gtk-icontheme("pan-up-symbolic");
+}
+
+undershoot.top,
+undershoot.bottom {
+    background-image: none;
+}
+
+separator {
+    margin: 1em 2em;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+textview,
+textview text {
+    background: transparent;
+    font-family: Free Mono;
+}
+
+textview .time {
+    color: @lines;
+}
+
+trough {
+    margin: .5em .5em;
+}
+
+.popup {
+    background-color: @text-inv;
+}
+
+.action_bar {
+    /* min-width: 4.5em; */
+    /* min-height: 4.5em; */
+}
+
+.title_bar {
+    min-height: 2em;
+}
+
+.content {
+    margin: 0 .1em;
+}
+
+.dialog {
+    border: .1em solid @text-inv;
+    padding: 2.5em;
+    background-color: @text-inv;
+    margin: 1em;
+}
+
+.dialog button {
+    padding: 1.5em;
+    border-bottom: .4em solid @color3;
+    margin-top: 1em;
+}
+
+.dialog button:nth-child(1) {
+    border-bottom-color: @echo;
+}
+
+.dialog button:nth-child(2) {
+    border-bottom-color: @error;
+}
+
+.distbutton_active {
+    background-color: @active;
+    font-weight: 600;
+}
+
+.distbutton_top {
+    border: .15em solid @lines;
+    border-right: 0;
+    border-top-left-radius: .75em;
+    border-bottom-left-radius: .75em;
+    margin-right: 0;
+    min-height: 3em;
+}
+
+.distbutton {
+    border: .15em solid @lines;
+    border-left: .15em solid @lines;
+    border-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+    min-height: 3em;
+}
+
+.distbutton_bottom {
+    border: .15em solid @lines;
+    border-left: .15em solid @lines;
+    border-top-right-radius: .7em;
+    border-bottom-right-radius: .7em;
+    margin-left: 0;
+    min-height: 3em;
+}
+
+.fan_slider {
+    margin: 0 1em 0 1em;
+    color: @text;
+}
+
+.frame-item {
+    min-height: 4.5em;
+    padding: .2em .3em;
+    border-bottom: 1px solid rgba(255,255,255,0.05)
+}
+
+.heatergraph {
+    min-height: 350px;
+}
+
+.heater-list scrollbar slider{
+    min-width: 1.5em;
+}
+
+.heater-grid {
+    margin-right: .1em;
+}
+
+.heater-grid label {
+    min-height: 0em;
+    padding: 0;
+    margin: 0;
+}
+
+.heater-grid button{
+    margin: .2em;
+    min-height: 2.9em;
+    padding: 0 .5em;
+}
+
+.heater-grid-temp {
+    min-width: 5.5em;
+}
+
+.heater-grid-temp-power {
+    min-width: 8em;
+}
+
+.keyboard_matchbox {
+    margin-top: 42px;
+}
+
+.keyboard_pad {
+    margin: 0.05em;
+    padding: 0.0em;
+    border-radius: 0.7em;
+}
+
+.message_popup_popover {
+    border: 0;
+    background-color: Transparent;
+    padding: 0;
+}
+
+.message_popup {
+    border: .1em solid @lines;
+    border-radius: 1em;
+    padding: 1em;
+    margin: 0;
+}
+
+.message_popup button{
+    padding: 1em;
+}
+
+.message_popup_echo,
+.message_popup_echo button {
+    background-color: @echo;
+}
+
+.message_popup_warning,
+.message_popup_warning button {
+    background-color: @warning;
+}
+
+.message_popup_error,
+.message_popup_error button {
+    background-color: @error;
+}
+
+.numpad_key {
+    border: .15em;
+    border-style: solid;
+    border-color: @lines;
+}
+
+.numpad_tleft {
+    border-bottom: 0;
+    border-right: 0;
+    border-top-left-radius: .7em;
+    margin: .15em 0 0 .15em;
+}
+
+.numpad_top {
+    border-bottom: 0;
+    border-right: 0;
+    margin: .15em 0 0 0;
+}
+
+.numpad_tright {
+    border-bottom: 0;
+    border-top-right-radius: .7em;
+    margin: .15em .15em 0 0;
+}
+
+.numpad_left {
+    border-right: 0;
+    border-bottom: 0;
+    margin: 0 0 0 .15em;
+}
+
+.numpad_button {
+    border-right: 0;
+    border-bottom: 0;
+    margin: 0;
+}
+
+.numpad_right {
+    border-bottom: 0;
+    margin: 0 .15em 0 0;
+}
+
+.numpad_bleft {
+    border-right: 0;
+    border-bottom-left-radius: .7em;
+    margin: 0 0 .15em .15em;
+}
+
+.numpad_bottom {
+    border-right: 0;
+    margin: 0 0 .15em 0;
+}
+
+.numpad_bright {
+    border-bottom-right-radius: .7em;
+    margin: 0 .15em .15em 0;
+}
+
+.printing-filename {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: .25em .25em 0 0;
+}
+
+.printing-info {
+    margin-right: .25em;
+}
+.printing-info button {
+    margin: 0 .1em;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: .5em;
+}
+
+.printing-info-secondary label {
+    margin-left: .75em;
+}
+
+.printing-status {
+    font-style: italic;
+    margin: 0;
+    font-weight: bold;
+}
+
+.printing-progress-text {
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.printing-status-label {
+    padding-top: .25em;
+    padding-bottom: .15em;
+    font-size: 1.25em;
+}
+
+.print-filename {
+    font-size: 1.1em;
+    margin-bottom: 0.2em;
+
+}
+
+.print-info {
+    font-size: 0.95em;
+}
+
+.tempbutton_top {
+    border: .15em solid @lines;
+    border-bottom: 0;
+    border-top-left-radius: .75em;
+    border-top-right-radius: .75em;
+    margin-bottom: 0;
+}
+
+.tempbutton {
+    border: .15em solid @lines;
+    border-top: .15em solid @lines;
+    border-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.tempbutton_bottom {
+    border: .15em solid @lines;
+    border-top: .15em solid @lines;
+    border-bottom-left-radius: .7em;
+    border-bottom-right-radius: .7em;
+    margin-top: 0;
+}
+
+.updater-item {
+    min-height: 3em;
+    padding: .2em;
+}
+
+.message {
+    border: .1em solid @error;
+    font-size: 1em;
+    padding: 2.5em;
+    color: @text;
+    background-color: @error;
+}
+
+.message button {
+    background-color: @text;
+    color: @text-inv;
+    padding: 2em 2.5em 2em 2.5em;
+}
+
+.system-program-grid {
+    padding: 0.25em;
+    padding-right: .5em;
+    padding-bottom: 0;
+}
+
+.warning {
+    background-color: rgba(30, 204, 39, 0.7);
+}
+
+.error {
+    background-color: rgba(204, 30, 30, 0.7);
+}
+
+popover {
+    background-color: @bg;
+}
+
+popover button {
+    background-color: @bg;
+}
+
+.screensaver,
+.screensaver button,
+.screensaver button:hover,
+.screensaver button:focus,
+.screensaver button:active {
+    background-color: black;
+    border: 0;
+    margin: 0;
+}
+
+.option_slider_max trough highlight,
+trough progress {
+    background-color: @error;
+}
+
+.filament_sensor {
+    border-radius: 3em;
+}
+
+.filament_sensor switch {
+    margin: 0;
+}
+
+.filament_sensor_detected {
+    background-color: @echo;
+}
+
+.filament_sensor_empty {
+    background-color: @error;
+}
+
+.buttons_slim,
+.buttons_slim label {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.graph_label {border-left-width: .4em; border-left-style: solid;}

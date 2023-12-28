@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="svg38"
+   sodipodi:docname="bed.svg"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     id="namedview26"
+     showgrid="false"
+     inkscape:zoom="11.484375"
+     inkscape:cx="25.201387"
+     inkscape:cy="33.115348"
+     inkscape:window-x="-6"
+     inkscape:window-y="-6"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg38"
+     inkscape:document-rotation="0" />
+  <metadata
+     id="metadata44">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>bed</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs42">
+    <linearGradient
+       id="linearGradient955">
+      <stop
+         style="stop-color:#dc322f;stop-opacity:1"
+         offset="0"
+         id="stop959" />
+      <stop
+         style="stop-color:#cb4b16;stop-opacity:0.49803922"
+         offset="0.5"
+         id="stop964" />
+      <stop
+         style="stop-color:#b58900;stop-opacity:0.24705882"
+         offset="0.75"
+         id="stop966" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop961" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient955"
+       id="linearGradient945"
+       x1="51"
+       y1="40"
+       x2="50.862003"
+       y2="5.8426123"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(2.0000002,1.6573927)" />
+    <linearGradient
+       xlink:href="#linearGradient955"
+       id="linearGradient856"
+       gradientUnits="userSpaceOnUse"
+       x1="51"
+       y1="40"
+       x2="50.862003"
+       y2="5.8426123"
+       gradientTransform="translate(2.0000007,1.6573927)" />
+    <linearGradient
+       xlink:href="#linearGradient955"
+       id="linearGradient858"
+       gradientUnits="userSpaceOnUse"
+       x1="51"
+       y1="40"
+       x2="50.862003"
+       y2="5.8426123"
+       gradientTransform="translate(2.0000002,1.6573927)" />
+    <linearGradient
+       xlink:href="#linearGradient955"
+       id="linearGradient860"
+       gradientUnits="userSpaceOnUse"
+       x1="51"
+       y1="40"
+       x2="50.862003"
+       y2="5.8426123"
+       gradientTransform="translate(2.0000002,1.6573927)" />
+    <linearGradient
+       xlink:href="#linearGradient955"
+       id="linearGradient862"
+       gradientUnits="userSpaceOnUse"
+       x1="51"
+       y1="40"
+       x2="50.862003"
+       y2="5.8426123"
+       gradientTransform="translate(2.0000002,1.6573927)" />
+  </defs>
+  <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title2">bed</title>
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <path
+     d="m 32,39.709856 c 0,0 2.844819,-7.843516 2.844819,-10.736617 0,-3.085973 -5.689638,-7.522061 -5.689638,-10.736617 C 29.155181,15.343522 32,7.500005 32,7.500005"
+     id="path25"
+     stroke-width="3.00001"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="font-variation-settings:normal;vector-effect:none;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient856);stroke-width:3.00001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000" />
+  <path
+     d="m 42.431002,39.709856 c 0,0 2.844818,-7.843516 2.844818,-10.736617 0,-3.085973 -5.689637,-7.522061 -5.689637,-10.736617 0,-2.8931 2.844819,-10.736617 2.844819,-10.736617"
+     id="path27"
+     stroke-width="3.00001"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="font-variation-settings:normal;vector-effect:none;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient858);stroke-width:3.00001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000" />
+  <path
+     d="m 21.568998,39.709856 c 0,0 2.844818,-7.843516 2.844818,-10.736617 0,-3.085973 -5.689637,-7.522061 -5.689637,-10.736617 0,-2.8931 2.844819,-10.736617 2.844819,-10.736617"
+     id="path29"
+     stroke-width="3.00001"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="font-variation-settings:normal;vector-effect:none;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient860);stroke-width:3.00001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000" />
+  <path
+     d="m 52.862003,39.709856 c 0,0 2.844819,-7.843516 2.844819,-10.736617 0,-3.085973 -5.689638,-7.522061 -5.689638,-10.736617 0,-2.8931 2.844819,-10.736617 2.844819,-10.736617"
+     id="path31"
+     stroke-width="3.00001"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="fill:none;fill-rule:evenodd;stroke:url(#linearGradient862)" />
+  <path
+     d="m 11.137997,39.709856 c 0,0 2.844818,-7.843516 2.844818,-10.736617 0,-3.085973 -5.6896368,-7.522061 -5.6896368,-10.736617 0,-2.8931 2.8448188,-10.736617 2.8448188,-10.736617"
+     id="path33"
+     stroke-width="3.00001"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="font-variation-settings:normal;vector-effect:none;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient945);stroke-width:3.00001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000" />
+  <g
+     id="g859">
+    <rect
+       style="opacity:0.995;fill:#93a1a1;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers;stop-color:#000000"
+       id="rect863"
+       width="6"
+       height="4"
+       x="9"
+       y="50"
+       rx="1.9999998"
+       ry="2" />
+    <rect
+       style="opacity:0.995;fill:#93a1a1;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers;stop-color:#000000"
+       id="rect912"
+       width="6"
+       height="4"
+       x="49"
+       y="50"
+       rx="1.9999998"
+       ry="2" />
+    <rect
+       style="opacity:0.995;fill:#839496;stroke:none;stroke-width:2.00001;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers;stop-color:#000000"
+       id="rect857"
+       width="55"
+       height="7"
+       x="4.5"
+       y="44"
+       ry="2"
+       rx="2" />
+    <rect
+       style="opacity:0.995;fill:#586e75;stroke:none;stroke-width:2.00001;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers;stop-color:#000000"
+       id="rect854"
+       width="55"
+       x="4.5"
+       y="44"
+       height="2" />
+  </g>
+</svg>

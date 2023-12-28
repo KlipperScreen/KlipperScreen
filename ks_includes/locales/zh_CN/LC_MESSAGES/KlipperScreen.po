@@ -1,0 +1,966 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: KlipperScreen\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"PO-Revision-Date: 2023-11-16 02:51+0000\n"
+"Last-Translator: Samuel Wang <imhsaw@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"klipperscreen/klipperscreen/zh_Hans/>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.2-dev\n"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s 将被更新为版本"
+
+msgid "(default)"
+msgstr "(默认)"
+
+msgid "24 Hour Time"
+msgstr "使用24小时制"
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr "重启Klipper固件可能会解决这个问题。"
+
+msgid "ADXL Not Configured"
+msgstr "未配置ADXL"
+
+msgid "Abort"
+msgstr "放弃"
+
+msgid "Acceleration:"
+msgstr "加速度："
+
+msgid "Accept"
+msgstr "接受"
+
+msgid "Add profile"
+msgstr "添加配置文件"
+
+msgid "All"
+msgstr "全部"
+
+msgid "Apply"
+msgstr "应用"
+
+#, python-format
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr "将 %s%.3f 偏移量应用于限位？"
+
+#, python-format
+msgid "Apply %s%.3f offset to Probe?"
+msgstr "将 %s%.3f 偏移量应用于探针？"
+
+msgid "Archived"
+msgstr "已存档"
+
+msgid "Are you sure do you want to exclude the object?"
+msgstr "你确定要排除该对象吗？"
+
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "您确定要紧急停止吗？"
+
+msgid "Are you sure you wish to cancel this print?"
+msgstr "您确定要取消打印吗？"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "您确定要关闭电机吗？"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "您确定要重启系统吗？"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "您确定要关闭系统吗？"
+
+msgid "Auto"
+msgstr "自动"
+
+msgid "Auto-calibrate"
+msgstr "自动校准"
+
+msgid "Auto-close notifications"
+msgstr "自动关闭通知"
+
+msgid "Auto-open Extrude On Pause"
+msgstr "暂停打印时自动打开挤出控制界面"
+
+msgid "Auto-scroll"
+msgstr "自动滚屏"
+
+msgid "Bed Level"
+msgstr "热床调平"
+
+msgid "Bed Mesh"
+msgstr "床网"
+
+msgid "Bed screw configuration:"
+msgstr "热床螺丝配置："
+
+msgid "Calibrate"
+msgstr "校准"
+
+msgid "Calibrated"
+msgstr "已校准"
+
+msgid "Calibrating"
+msgstr "正在校准"
+
+msgid "Camera"
+msgstr "摄像头"
+
+msgid "Can't set above the maximum:"
+msgstr "设置值超出最大值："
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Cancel Print"
+msgstr "取消打印"
+
+msgid "Cancelled"
+msgstr "已取消"
+
+msgid "Cancelling"
+msgstr "正在取消"
+
+msgid "Cannot connect to Moonraker"
+msgstr "无法连接到Moonraker"
+
+msgid "Channel"
+msgstr "群组"
+
+msgid "Check ADXL Wiring"
+msgstr "检查ADXL的接线"
+
+msgid "Checking for updates, please wait..."
+msgstr "正在检查更新，请稍等..."
+
+msgid "Clear"
+msgstr "清除"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Complete"
+msgstr "完成"
+
+msgid "Confirm Emergency Stop"
+msgstr "紧急停止需确认"
+
+msgid "Connected"
+msgstr "已连接"
+
+#, python-format
+msgid "Connecting to %s"
+msgstr "连接到 %s"
+
+msgid "Console"
+msgstr "控制台"
+
+msgid "Cooldown"
+msgstr "冷却"
+
+msgid "DPMS has failed to load and has been disabled"
+msgstr "屏幕省电管理系统无法加载已禁用"
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Delete Directory?"
+msgstr "删除文件夹？"
+
+msgid "Delete File?"
+msgstr "删除文件？"
+
+msgid "Deselect"
+msgstr "取消选择"
+
+msgid "Disable Motors"
+msgstr "关闭电机"
+
+msgid "Distance (mm)"
+msgstr "挤出长度（mm）"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "你想恢复 %s 吗？"
+
+msgid "Elapsed:"
+msgstr "已用时间："
+
+msgid "Error"
+msgstr "错误"
+
+msgid "Estimated Time Method"
+msgstr "估算剩余时间方式"
+
+msgid "Exclude Object"
+msgstr "排除对象"
+
+msgid "Extra Large"
+msgstr "特大"
+
+msgid "Extrude"
+msgstr "挤出"
+
+msgid "Extrusion +"
+msgstr "挤压+"
+
+msgid "Extrusion -"
+msgstr "挤压 -"
+
+msgid "Failed, adjust position first"
+msgstr "失败，请先调整位置"
+
+msgid "Fan"
+msgstr "风扇"
+
+msgid "Filament Used"
+msgstr "已用耗材"
+
+msgid "Filament total:"
+msgstr "使用耗材总数："
+
+msgid "Filament used:"
+msgstr "使用耗材："
+
+msgid "Filament:"
+msgstr "耗材："
+
+msgid "File"
+msgstr "文件"
+
+msgid "File:"
+msgstr "文件："
+
+msgid "Filter"
+msgstr "筛选"
+
+msgid "Finding ADXL"
+msgstr "查找ADXL"
+
+msgid "Fine Tuning"
+msgstr "微调"
+
+msgid "Finish"
+msgstr "结束"
+
+msgid "Firmware Restart"
+msgstr "重启Klipper固件"
+
+msgid "Flow:"
+msgstr "流量："
+
+msgid "Flowrate:"
+msgstr "流速："
+
+msgid "Font Size"
+msgstr "字体大小"
+
+msgid "Full Update"
+msgstr "更新全部"
+
+msgid "Go Back"
+msgstr "返回"
+
+msgid "Height:"
+msgstr "高度："
+
+msgid "Hidden"
+msgstr "隐藏的"
+
+msgid "Hide"
+msgstr "隐藏"
+
+msgid "Hide sensors in Temp."
+msgstr "在温度显示中隐藏传感器"
+
+msgid "Hide temp."
+msgstr "隐藏温度"
+
+msgid "Home"
+msgstr "归零"
+
+msgid "Home All"
+msgstr "全部归零"
+
+msgid "Home X"
+msgstr "X轴归零"
+
+msgid "Home XY"
+msgstr "XY轴归零"
+
+msgid "Home Y"
+msgstr "Y轴归零"
+
+msgid "Home Z"
+msgstr "Z轴归零"
+
+msgid "Host"
+msgstr "主机"
+
+msgid "Hostname"
+msgstr "主机名"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Icon Theme"
+msgstr "主题"
+
+msgid "Initializing printer..."
+msgstr "正在初始化打印机..."
+
+msgid "Initiate a PID calibration for:"
+msgstr "启动PID校准："
+
+msgid "Input Shaper"
+msgstr "共振补偿"
+
+msgid "Interface"
+msgstr "接口"
+
+msgid "Invalid"
+msgstr "无效"
+
+msgid "Invalid password"
+msgstr "密码无效"
+
+msgid "Invert X"
+msgstr "反转X轴"
+
+msgid "Invert Y"
+msgstr "反转Y轴"
+
+msgid "Invert Z"
+msgstr "反转Z轴"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr "这可能需要5分钟以上的时间，这取决于加热器的功率。"
+
+msgid "Klipper Restart"
+msgstr "重启Klipper"
+
+msgid "Klipper has disconnected"
+msgstr "Klipper已断开连接"
+
+msgid "Klipper has encountered an error."
+msgstr "Klipper遇到一个错误。"
+
+msgid "Klipper has shutdown"
+msgstr "Klipper已关闭"
+
+msgid "Klipper is attempting to start"
+msgstr "Klipper正在启动"
+
+msgid "Klipper will reboot"
+msgstr "Klipper将重新启动"
+
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT 被隐藏，应在挤出控制界面使用"
+
+msgid "Language"
+msgstr "界面语言"
+
+msgid "Large"
+msgstr "大"
+
+msgid "Last Used"
+msgstr "上次使用"
+
+msgid "Layer:"
+msgstr "层："
+
+msgid "Leds"
+msgstr "灯珠"
+
+msgid "Left:"
+msgstr "剩余时间："
+
+msgid "Limits"
+msgstr "打印机限制"
+
+msgid "Load"
+msgstr "载入耗材"
+
+msgid "Lower Nozzle"
+msgstr "降低喷嘴"
+
+msgid "Macro shortcut on sidebar"
+msgstr "显示侧边栏宏按钮"
+
+msgid "Macros"
+msgstr "宏"
+
+msgid "Main Menu"
+msgstr "主菜单"
+
+msgid "Material"
+msgstr "材料"
+
+msgid "Max"
+msgstr "最大"
+
+msgid "Max Acceleration"
+msgstr "最大加速度"
+
+msgid "Max Acceleration to Deceleration"
+msgstr "最大加速至减速"
+
+msgid "Max Velocity"
+msgstr "最大速度"
+
+msgid "Maximum"
+msgstr "最大"
+
+msgid "Measure Both"
+msgstr "同时测量"
+
+msgid "Measure X"
+msgstr "测量X轴"
+
+msgid "Measure Y"
+msgstr "测量Y轴"
+
+msgid "Medium"
+msgstr "中"
+
+msgid "Menu"
+msgstr "菜单"
+
+msgid "Mesh calibrate"
+msgstr "床网校准"
+
+msgid "Modified"
+msgstr "已修改"
+
+msgid "Moonraker: connected"
+msgstr "Moonraker：已连接"
+
+msgid "More"
+msgstr "更多设置"
+
+msgid "Move"
+msgstr "移动"
+
+msgid "Move Distance (mm)"
+msgstr "移动距离（mm）"
+
+msgid "Name"
+msgstr "名称"
+
+msgid "Network"
+msgstr "网络"
+
+msgid "Never"
+msgstr "从不"
+
+msgid "New"
+msgstr "新的值"
+
+msgid "No elegible macros:"
+msgstr "无可用宏："
+
+msgid ""
+"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"conf"
+msgstr "不支持自动检测，需要在klpperscreen.conf中进行配置"
+
+msgid "Nothing selected"
+msgstr "未选择任何内容"
+
+#, python-format
+msgid "Outdated by %d"
+msgstr "已落后 %d"
+
+msgid "PSK for"
+msgstr "PSK"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "软件包将被更新"
+
+msgid "Part Fan"
+msgstr "模型风扇"
+
+msgid "Password saved"
+msgstr "密码已保存"
+
+msgid "Pause"
+msgstr "暂停"
+
+msgid "Paused"
+msgstr "已暂停"
+
+msgid "Perform a full upgrade?"
+msgstr "是否更新全部？"
+
+msgid "Pins"
+msgstr "引脚"
+
+msgid "Please recompile and flash the micro-controller."
+msgstr "请重新编译并更新微控制器固件。"
+
+msgid "Power"
+msgstr "电源"
+
+msgid "Power On Printer"
+msgstr "打印机通电"
+
+msgid "Pressure Advance:"
+msgstr "压力推进："
+
+msgid "Print"
+msgstr "打印"
+
+msgid "Print Control"
+msgstr "打印控制"
+
+msgid "Print Time"
+msgstr "打印用时"
+
+msgid "Printer"
+msgstr "打印机"
+
+msgid "Printer Connections"
+msgstr "已连接的打印机"
+
+msgid "Printer Select"
+msgstr "打印机选择"
+
+msgid "Printing"
+msgstr "打印中"
+
+msgid "Probe Offset"
+msgstr "探针偏移"
+
+msgid "Profile Name:"
+msgstr "配置文件名称："
+
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr "寻求帮助的时候请提供KlipperScreen.log。\n"
+
+msgid "Quad Gantry Level"
+msgstr "龙门架调平"
+
+msgid "Raise Nozzle"
+msgstr "升高喷嘴"
+
+msgid "Recover"
+msgstr "恢复"
+
+msgid "Recover Hard"
+msgstr "版本回退(清空修改内容)"
+
+msgid "Recover Soft"
+msgstr "版本回退(保留修改内容)"
+
+msgid "Reference"
+msgstr "参考"
+
+msgid "Refresh"
+msgstr "检查更新"
+
+msgid "Rename/Move:"
+msgstr "重命名/移动："
+
+msgid "Restart"
+msgstr "重启"
+
+msgid "Resume"
+msgstr "继续"
+
+msgid "Retract"
+msgstr "抽回"
+
+msgid "Retraction"
+msgstr "回抽"
+
+msgid "Retraction Length"
+msgstr "回抽长度"
+
+msgid "Retraction Speed"
+msgstr "回抽速度"
+
+msgid "Retry"
+msgstr "重试"
+
+msgid "Retrying"
+msgstr "正在重试"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Save Config"
+msgstr "保存配置"
+
+msgid "Save Z"
+msgstr "保存Z轴"
+
+msgid "Save configuration?"
+msgstr "是否保存设置？"
+
+msgid "Saved"
+msgstr "已保存"
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr "保存偏移：%s"
+
+msgid "Screen DPMS"
+msgstr "屏幕省电管理系统"
+
+msgid "Screen Power Off Time"
+msgstr "关闭屏幕时间"
+
+msgid "Screws Adjust"
+msgstr "螺丝调整"
+
+msgid "Select"
+msgstr "选择"
+
+msgid "Send"
+msgstr "发送"
+
+msgid "Set Temp"
+msgstr "设定温度"
+
+msgid "Settings"
+msgstr "设置"
+
+msgid "Show"
+msgstr "显示"
+
+msgid "Show Heater Power"
+msgstr "显示加热器功率"
+
+msgid "Show Scrollbars Buttons"
+msgstr "显示滚动条按钮"
+
+msgid "Shutdown"
+msgstr "关闭"
+
+msgid "Size"
+msgstr "大小"
+
+msgid "Slicer"
+msgstr "切片软件"
+
+msgid "Slicer:"
+msgstr "切片软件："
+
+msgid "Small"
+msgstr "小"
+
+msgid "Speed (mm/s)"
+msgstr "速度(mm/s)"
+
+msgid "Speed +"
+msgstr "速度 +"
+
+msgid "Speed -"
+msgstr "速度 -"
+
+msgid "Speed:"
+msgstr "速度："
+
+msgid "Square Corner Velocity"
+msgstr "直角速度"
+
+msgid "Standby"
+msgstr "待机"
+
+msgid "Start"
+msgstr "开始"
+
+msgid "Starting WiFi Association"
+msgstr "开始WiFi连接"
+
+msgid "Starting recovery for"
+msgstr "开始恢复"
+
+msgid "Starting update for"
+msgstr "开始更新"
+
+msgid "System"
+msgstr "系统"
+
+msgid "System Restart"
+msgstr "重启系统"
+
+msgid "System Shutdown"
+msgstr "关闭系统"
+
+msgid "Temp (°C)"
+msgstr "温度 (°C)"
+
+msgid "Temperature"
+msgstr "温度"
+
+msgid "Total:"
+msgstr "合计："
+
+msgid "Unknown Heater"
+msgstr "未知加热器"
+
+msgid "Unknown screw position"
+msgstr "未知螺丝位置"
+
+msgid "Unload"
+msgstr "卸载耗材"
+
+msgid "Unretract Extra Length"
+msgstr "回料长度"
+
+msgid "Unretract Speed"
+msgstr "回料速度"
+
+msgid "Up To Date"
+msgstr "最新版本"
+
+msgid "Update"
+msgstr "更新"
+
+msgid "Updating"
+msgstr "正在更新"
+
+msgid "Uploaded"
+msgstr "上传于"
+
+msgid "XY Move Speed (mm/s)"
+msgstr "XY轴移动速度(mm/s)"
+
+msgid "XY Speed (mm/s)"
+msgstr "XY轴速度(mm/s)"
+
+msgid "Z Calibrate"
+msgstr "Z偏移校准"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "Z轴移动速度(mm/s)"
+
+msgid "Z Speed (mm/s)"
+msgstr "Z轴速度(mm/s)"
+
+msgid "Z Tilt"
+msgstr "Z轴倾斜校准"
+
+msgid "Z offset:"
+msgstr "Z轴偏移："
+
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "更改"
+
+msgid "dBm"
+msgstr "dBm"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "小时"
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "使用 \"rename_existing \"的宏将被隐藏"
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "名称以\"_\"开头的宏将被隐藏"
+
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "分"
+
+msgid "mm"
+msgstr "mm"
+
+msgid "mm/s"
+msgstr "mm/s"
+
+msgid "mm/s²"
+msgstr "mm/s²"
+
+msgid "mm³/s"
+msgstr "mm³/s"
+
+#~ msgid "KlipperScreen will reboot"
+#~ msgstr "KlipperScreen将重新启动"
+
+#~ msgid "Continue"
+#~ msgstr "继续"
+
+#~ msgid "Fullscreen"
+#~ msgstr "全屏"
+
+#~ msgid "Actions"
+#~ msgstr "控制"
+
+#~ msgid "Configuration"
+#~ msgstr "设置"
+
+#~ msgid "Homing"
+#~ msgstr "归零"
+
+#~ msgid "Disable XY"
+#~ msgstr "关闭 XY 轴电机"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "切片软件时间校正(%)"
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "已校准，保存配置后生效"
+
+#~ msgid "Decrease"
+#~ msgstr "减少"
+
+#~ msgid "Increase"
+#~ msgstr "增加"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "打开: %s"
+
+#~ msgid "Sort:"
+#~ msgstr "排序:"
+
+#~ msgid "Calibrating..."
+#~ msgstr "校准中..."
+
+#, python-format
+#~ msgid "Retry #%s"
+#~ msgstr "重试 #%s"
+
+#~ msgid "Add Printer"
+#~ msgstr "添加打印机"
+
+#~ msgid "Initializing"
+#~ msgstr "初始化"
+
+#~ msgid "Delete"
+#~ msgstr "删除"
+
+#~ msgid "Off"
+#~ msgstr "关闭"
+
+#~ msgid "View Mesh"
+#~ msgstr "查看热床网格"
+
+#~ msgid "Sort by: "
+#~ msgstr "排序: "
+
+#~ msgid "Bltouch found applied offset"
+#~ msgstr "Bltouch 发现应用的偏移量"
+
+#~ msgid ""
+#~ "Check /tmp/KlipperScreen.log for more information.\n"
+#~ "Please submit an issue on GitHub for help."
+#~ msgstr ""
+#~ "检查/tmp/KlipperScreen.log以获取更多信息。\n"
+#~ "请在GitHub上提交问题以寻求帮助。"
+
+#~ msgid "Probe found applied offset"
+#~ msgstr "找到探头偏移"
+
+#~ msgid "Tool"
+#~ msgstr "工具"
+
+#~ msgid "Displayed Macros"
+#~ msgstr "宏命令显示开关"
+
+#~ msgid "Z Position"
+#~ msgstr "Z 位置"
+
+#~ msgid "IPv4"
+#~ msgstr "IPv4 地址"
+
+#~ msgid "IPv6"
+#~ msgstr "IPv6 地址"
+
+#~ msgid "Disconnect"
+#~ msgstr "断开"
+
+#~ msgid "Duration Only"
+#~ msgstr "持续时间"
+
+#~ msgid "Klipper Version"
+#~ msgstr "Klipper 版本"
+
+#~ msgid ""
+#~ "Klipper has encountered an error with the micro-controller.\n"
+#~ "Please recompile and flash."
+#~ msgstr ""
+#~ "Klipper与MCU通讯错误。\n"
+#~ "请为主板重新烧录固件。"
+
+#~ msgid ""
+#~ "Klipper has encountered an error.\n"
+#~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
+#~ msgstr ""
+#~ "Klipper 遇到错误。\n"
+#~ "使用”FIRMWARE_RESTART“命令尝试解决此问题。"
+
+#~ msgid "KlipperScreen Version"
+#~ msgstr "KlipperScreen 版本"
+
+#~ msgid "Show Only Heaters in Temp."
+#~ msgstr "仅显示使用中的加热器."
+
+#~ msgid "Target"
+#~ msgstr "目标"
+
+#~ msgid "Temp"
+#~ msgstr "温度"
+
+#~ msgid "Number Pad"
+#~ msgstr "数字键盘"
+
+#~ msgid "Preheat"
+#~ msgstr "预热"
+
+#~ msgid "Screen will show in less than one second"
+#~ msgstr "屏幕将在1秒内显示"
+
+#~ msgid "Medium (default)"
+#~ msgstr "中 (默认)"
+
+#~ msgid "File Estimation (default)"
+#~ msgstr "文件 (默认)"
+
+#~ msgid "Fan Off"
+#~ msgstr "关闭风扇"
+
+#~ msgid "Fan On"
+#~ msgstr "打开风扇"
+
+#~ msgid "Fast"
+#~ msgstr "加速"
+
+#~ msgid "Slow"
+#~ msgstr "减速"
+
+#~ msgid "?"
+#~ msgstr "?"
+
+#~ msgid "Cancel Change"
+#~ msgstr "取消更改"
+
+#~ msgid "Control"
+#~ msgstr "控制"
+
+#~ msgid "Load Average"
+#~ msgstr "平均负载"
+
+#~ msgid "Network Info"
+#~ msgstr "网络信息"
+
+#~ msgid "Screen Blanking Time"
+#~ msgstr "关闭屏幕时间"
