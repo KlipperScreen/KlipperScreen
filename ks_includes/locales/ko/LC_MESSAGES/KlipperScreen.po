@@ -3,15 +3,16 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: \n"
-"Last-Translator: NSteven\n"
-"Language-Team: NSteven\n"
+"PO-Revision-Date: 2023-12-28 12:05+0000\n"
+"Last-Translator: 방영웅 <bangyeongung20@gmail.com>\n"
+"Language-Team: Korean <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.1\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -21,10 +22,10 @@ msgid "(default)"
 msgstr "(기본)"
 
 msgid "24 Hour Time"
-msgstr "24시간"
+msgstr "24시간제 사용"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr "펌웨어를 재시작해 문제를 해결할 수 있습니다"
+msgstr "펌웨어를 재시작해 문제를 해결할 수 있습니다."
 
 msgid "ADXL Not Configured"
 msgstr "가속도계 설정이 없습니다"
@@ -39,33 +40,33 @@ msgid "Accept"
 msgstr "확인"
 
 msgid "Add profile"
-msgstr ""
+msgstr "프로파일 추가"
 
 msgid "All"
-msgstr ""
+msgstr "전체"
 
 msgid "Apply"
 msgstr "확인"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr ""
+msgstr "%s%.3f 오프셋을 Endstop에 적용하시겠습니까?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr ""
+msgstr "%s%.3f오프셋을 프로브에 적용하시겠습니까?"
 
 msgid "Archived"
-msgstr ""
+msgstr "저장됨"
 
 msgid "Are you sure do you want to exclude the object?"
-msgstr ""
+msgstr "개체를 제외하시겠습니까?"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr "비상정지 시킬까요?"
+msgstr "비상정지 시키겠습니까?"
 
 msgid "Are you sure you wish to cancel this print?"
-msgstr "지금 출력을 취소 하시겠습니까?"
+msgstr "출력을 취소하시겠습니까?"
 
 msgid "Are you sure you wish to disable motors?"
 msgstr "모터 전원을 끄시겠습니까?"
@@ -77,28 +78,28 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "시스템을 종료 하시겠습니까?"
 
 msgid "Auto"
-msgstr "오토"
+msgstr "자동"
 
 msgid "Auto-calibrate"
 msgstr "자동 교정"
 
 msgid "Auto-close notifications"
-msgstr ""
+msgstr "자동 알림 닫기"
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "일시정지 시 압출 가능"
 
 msgid "Auto-scroll"
-msgstr "오토 스크롤"
+msgstr "자동 스크롤"
 
 msgid "Bed Level"
-msgstr "베드 레베"
+msgstr "베드 레벨링"
 
 msgid "Bed Mesh"
 msgstr "배드 메시"
 
 msgid "Bed screw configuration:"
-msgstr ""
+msgstr "베드 스크류 설정:"
 
 msgid "Calibrate"
 msgstr "교정"
@@ -107,10 +108,10 @@ msgid "Calibrated"
 msgstr "교정됨"
 
 msgid "Calibrating"
-msgstr ""
+msgstr "교정 중"
 
 msgid "Camera"
-msgstr ""
+msgstr "카메라"
 
 msgid "Can't set above the maximum:"
 msgstr "최대 값을 초과하는 설정은 할 수 없습니다:"
@@ -125,19 +126,19 @@ msgid "Cancelled"
 msgstr "취소됨"
 
 msgid "Cancelling"
-msgstr "취소중"
+msgstr "취소 중"
 
 msgid "Cannot connect to Moonraker"
-msgstr "문래커에 연결할 수 없음"
+msgstr "문래이커에 연결할 수 없음"
 
 msgid "Channel"
 msgstr "채널"
 
 msgid "Check ADXL Wiring"
-msgstr "가속도계 배선을 확인해 주세요"
+msgstr "가속도 센서 배선을 확인해 주세요"
 
 msgid "Checking for updates, please wait..."
-msgstr ""
+msgstr "업데이트 확인 중입니다. 잠시 기다려 주세요..."
 
 msgid "Clear"
 msgstr "초기화"
@@ -156,25 +157,25 @@ msgstr "연결됨"
 
 #, python-format
 msgid "Connecting to %s"
-msgstr "%s에 연결 중.."
+msgstr "%s에 연결 중"
 
 msgid "Console"
-msgstr "콘솔 제어 명령"
+msgstr "콘솔 제어"
 
 msgid "Cooldown"
-msgstr "가열 중단"
+msgstr "가열 중지"
 
 msgid "DPMS has failed to load and has been disabled"
-msgstr ""
+msgstr "DPMS가 비활성화 되었습니다"
 
 msgid "Date"
 msgstr "날짜"
 
 msgid "Delete Directory?"
-msgstr ""
+msgstr "저장소를 삭제하시겠습니까?"
 
 msgid "Delete File?"
-msgstr ""
+msgstr "파일을 삭제하시겠습니까?"
 
 msgid "Deselect"
 msgstr "선택 해제"
@@ -196,16 +197,16 @@ msgid "Error"
 msgstr "오류"
 
 msgid "Estimated Time Method"
-msgstr "예상시간 옵션"
+msgstr "예상 시간 옵션"
 
 msgid "Exclude Object"
-msgstr ""
+msgstr "개체 제외"
 
 msgid "Extra Large"
-msgstr ""
+msgstr "매우 크게"
 
 msgid "Extrude"
-msgstr "압출 "
+msgstr "압출"
 
 msgid "Extrusion +"
 msgstr "압출 +"
@@ -217,7 +218,7 @@ msgid "Failed, adjust position first"
 msgstr "실패, 먼저 위치를 조정해 주세요"
 
 msgid "Fan"
-msgstr "쿨링 팬 제어"
+msgstr "쿨링 팬"
 
 msgid "Filament Used"
 msgstr "사용된 필라멘트"
@@ -238,10 +239,10 @@ msgid "File:"
 msgstr "파일:"
 
 msgid "Filter"
-msgstr ""
+msgstr "필터"
 
 msgid "Finding ADXL"
-msgstr "가속도계 찾는 중.."
+msgstr "가속도 센서 찾는 중"
 
 msgid "Fine Tuning"
 msgstr "미세 조정"
@@ -256,7 +257,7 @@ msgid "Flow:"
 msgstr "유량:"
 
 msgid "Flowrate:"
-msgstr "유량:"
+msgstr "유량 비율:"
 
 msgid "Font Size"
 msgstr "글꼴 크기"
@@ -283,31 +284,31 @@ msgid "Hide temp."
 msgstr "온도 숨김"
 
 msgid "Home"
-msgstr "홈"
+msgstr "원점 이동"
 
 msgid "Home All"
-msgstr "전체 홈"
+msgstr "전체 원점 이동"
 
 msgid "Home X"
-msgstr "X축 홈"
+msgstr "X축 원점 이동"
 
 msgid "Home XY"
-msgstr "XY축 홈"
+msgstr "X, Y축 원점 이동"
 
 msgid "Home Y"
-msgstr "Y축 홈"
+msgstr "Y축 원점 이동"
 
 msgid "Home Z"
-msgstr "Z축 홈"
+msgstr "Z축 원점 이동"
 
 msgid "Host"
-msgstr ""
+msgstr "호스트"
 
 msgid "Hostname"
 msgstr "호스트 이름"
 
 msgid "ID"
-msgstr ""
+msgstr "아이디"
 
 msgid "Icon Theme"
 msgstr "아이콘 테마"
@@ -316,10 +317,10 @@ msgid "Initializing printer..."
 msgstr "프린터 초기화 중.."
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "PID 보정 대상:"
 
 msgid "Input Shaper"
-msgstr "인풋 셰이퍼"
+msgstr "인풋 쉐이퍼"
 
 msgid "Interface"
 msgstr "인터페이스"
@@ -328,7 +329,7 @@ msgid "Invalid"
 msgstr "존재하지 않음"
 
 msgid "Invalid password"
-msgstr ""
+msgstr "잘못된 패스워드"
 
 msgid "Invert X"
 msgstr "X축 반전"
@@ -340,7 +341,7 @@ msgid "Invert Z"
 msgstr "Z축 반전"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
+msgstr "히터에 따라 5분 이상 걸릴 수 있습니다."
 
 msgid "Klipper Restart"
 msgstr "클리퍼 재시작"
@@ -349,7 +350,7 @@ msgid "Klipper has disconnected"
 msgstr "클리퍼와 연결이 끊어졌습니다"
 
 msgid "Klipper has encountered an error."
-msgstr "클리퍼에 오류가 발생했습니다"
+msgstr "클리퍼에 오류가 발생했습니다."
 
 msgid "Klipper has shutdown"
 msgstr "클리퍼가 종료되었습니다"
@@ -358,11 +359,11 @@ msgid "Klipper is attempting to start"
 msgstr "클리퍼 시작하는 중"
 
 msgid "Klipper will reboot"
-msgstr "Klipper가 재부팅됩니다"
+msgstr "클리퍼가 재부팅됩니다"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
+msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT는 숨겨져 있으므로 압출에서 사용해야 합니다"
 
 msgid "Language"
 msgstr "언어"
@@ -371,22 +372,22 @@ msgid "Large"
 msgstr "크게"
 
 msgid "Last Used"
-msgstr ""
+msgstr "마지막으로 사용"
 
 msgid "Layer:"
 msgstr "레이어:"
 
 msgid "Leds"
-msgstr ""
+msgstr "LED들"
 
 msgid "Left:"
 msgstr "남음:"
 
 msgid "Limits"
-msgstr "가속도 설정"
+msgstr "제한"
 
 msgid "Load"
-msgstr "필라 넣기"
+msgstr "필라멘트 로드"
 
 msgid "Lower Nozzle"
 msgstr "노즐 낮춤"
@@ -401,10 +402,10 @@ msgid "Main Menu"
 msgstr "메인 메뉴"
 
 msgid "Material"
-msgstr ""
+msgstr "재료"
 
 msgid "Max"
-msgstr ""
+msgstr "최대"
 
 msgid "Max Acceleration"
 msgstr "최대 가속"
@@ -413,13 +414,13 @@ msgid "Max Acceleration to Deceleration"
 msgstr "감속을 위한 최대 가속"
 
 msgid "Max Velocity"
-msgstr "출력 속도"
+msgstr "최대 출력 속도"
 
 msgid "Maximum"
-msgstr ""
+msgstr "최대"
 
 msgid "Measure Both"
-msgstr "XY축 모두 측정"
+msgstr "X, Y축 모두 측정"
 
 msgid "Measure X"
 msgstr "X축 측정"
@@ -434,19 +435,19 @@ msgid "Menu"
 msgstr "메뉴"
 
 msgid "Mesh calibrate"
-msgstr ""
+msgstr "메쉬 보정"
 
 msgid "Modified"
 msgstr "수정됨"
 
 msgid "Moonraker: connected"
-msgstr "문래커: 연결됨"
+msgstr "문래이커: 연결됨"
 
 msgid "More"
-msgstr ""
+msgstr "더"
 
 msgid "Move"
-msgstr "툴 헤드 이동"
+msgstr "이동"
 
 msgid "Move Distance (mm)"
 msgstr "이동 거리 (mm)"
@@ -458,21 +459,21 @@ msgid "Network"
 msgstr "네트워크"
 
 msgid "Never"
-msgstr ""
+msgstr "결코"
 
 msgid "New"
 msgstr "신규"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "적절한 매크로 없음:"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
-msgstr ""
+msgstr "자동 감지는 지원되지 않으므로 klipperscreen.conf로 구성해야 합니다"
 
 msgid "Nothing selected"
-msgstr "아무것도 선택하지 않ㅇ"
+msgstr "아무것도 선택하지 않음"
 
 #, python-format
 msgid "Outdated by %d"
@@ -486,7 +487,7 @@ msgid_plural "Packages will be updated"
 msgstr[0] "패키지가 업데이트 됩니다"
 
 msgid "Part Fan"
-msgstr ""
+msgstr "파트 쿨링 팬"
 
 msgid "Password saved"
 msgstr "비밀번호 저장됨"
@@ -498,13 +499,13 @@ msgid "Paused"
 msgstr "일시정지됨"
 
 msgid "Perform a full upgrade?"
-msgstr "전체 업그레이드를 실행합니까?"
+msgstr "전체 업그레이드를 실행하시겠습니까?"
 
 msgid "Pins"
-msgstr ""
+msgstr "핀"
 
 msgid "Please recompile and flash the micro-controller."
-msgstr "MCU 펌웨어를 다시 컴파일 한 다음 플래싱 해주세요"
+msgstr "MCU 펌웨어를 다시 컴파일 한 다음 플래싱 해주세요."
 
 msgid "Power"
 msgstr "전원"
@@ -513,7 +514,7 @@ msgid "Power On Printer"
 msgstr "프린터 전원 켜기"
 
 msgid "Pressure Advance:"
-msgstr "모서리 압출 제어"
+msgstr "모서리 압출 제어 수치:"
 
 msgid "Print"
 msgstr "출력"
@@ -525,49 +526,49 @@ msgid "Print Time"
 msgstr "출력 시간"
 
 msgid "Printer"
-msgstr ""
+msgstr "프린터"
 
 msgid "Printer Connections"
 msgstr "프린터 연결"
 
 msgid "Printer Select"
-msgstr ""
+msgstr "프린터 선택"
 
 msgid "Printing"
-msgstr "출력중"
+msgstr "출력 중"
 
 msgid "Probe Offset"
 msgstr "프로브 오프셋"
 
 msgid "Profile Name:"
-msgstr "프로파일 이름:"
+msgstr "프로필 이름:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "도움을 요청하면 KlipperScreen.log를 제공합니다.\n"
 
 msgid "Quad Gantry Level"
-msgstr "쿼드 갠트리 레벨"
+msgstr "쿼드 갠트리 레벨링"
 
 msgid "Raise Nozzle"
 msgstr "노즐 높임"
 
 msgid "Recover"
-msgstr ""
+msgstr "복구"
 
 msgid "Recover Hard"
-msgstr "강화 복구 모드"
+msgstr "강화 복구"
 
 msgid "Recover Soft"
-msgstr "일반 복구 모드"
+msgstr "일반 복구"
 
 msgid "Reference"
 msgstr "참조"
 
 msgid "Refresh"
-msgstr ""
+msgstr "새로고침"
 
 msgid "Rename/Move:"
-msgstr ""
+msgstr "이름 변경/이동:"
 
 msgid "Restart"
 msgstr "재시작"
@@ -579,19 +580,19 @@ msgid "Retract"
 msgstr "퇴출"
 
 msgid "Retraction"
-msgstr "필라 퇴출"
+msgstr "필라멘트 퇴출"
 
 msgid "Retraction Length"
-msgstr "퇴추 길이"
+msgstr "퇴출 길이"
 
 msgid "Retraction Speed"
 msgstr "퇴출 속도"
 
 msgid "Retry"
-msgstr ""
+msgstr "재시도"
 
 msgid "Retrying"
-msgstr ""
+msgstr "재시도 중"
 
 msgid "Save"
 msgstr "저장"
@@ -600,7 +601,7 @@ msgid "Save Config"
 msgstr "설정 저장"
 
 msgid "Save Z"
-msgstr "Z 옵셋 저장"
+msgstr "Z 오프셋 저장"
 
 msgid "Save configuration?"
 msgstr "구성을 저장하시겠습니까?"
@@ -610,7 +611,7 @@ msgstr "저장됨"
 
 #, python-format
 msgid "Saved offset: %s"
-msgstr "저장된 옵세: %s"
+msgstr "저장된 오프셋: %s"
 
 msgid "Screen DPMS"
 msgstr "화면 DPMS"
@@ -637,13 +638,13 @@ msgid "Show"
 msgstr "보기"
 
 msgid "Show Heater Power"
-msgstr ""
+msgstr "히터 전원 보기"
 
 msgid "Show Scrollbars Buttons"
-msgstr ""
+msgstr "스크롤바 버튼 보기"
 
 msgid "Shutdown"
-msgstr ""
+msgstr "셧다운"
 
 msgid "Size"
 msgstr "크기"
@@ -655,7 +656,7 @@ msgid "Slicer:"
 msgstr "슬라이서:"
 
 msgid "Small"
-msgstr "작은"
+msgstr "작게"
 
 msgid "Speed (mm/s)"
 msgstr "속도 (mm/s)"
@@ -673,7 +674,7 @@ msgid "Square Corner Velocity"
 msgstr "모서리 통과 속도"
 
 msgid "Standby"
-msgstr ""
+msgstr "준비됨"
 
 msgid "Start"
 msgstr "시작"
@@ -682,7 +683,7 @@ msgid "Starting WiFi Association"
 msgstr "WiFi 연결을 시작하는 중"
 
 msgid "Starting recovery for"
-msgstr "에 대한 복구 시작"
+msgstr "복구 시작"
 
 msgid "Starting update for"
 msgstr "업데이트 시작 중"
@@ -700,7 +701,7 @@ msgid "Temp (°C)"
 msgstr "온도 (°C)"
 
 msgid "Temperature"
-msgstr "온도 제어"
+msgstr "온도"
 
 msgid "Total:"
 msgstr "총:"
@@ -709,16 +710,16 @@ msgid "Unknown Heater"
 msgstr "알 수 없는 히터"
 
 msgid "Unknown screw position"
-msgstr ""
+msgstr "알 수 없는 스크류 위치"
 
 msgid "Unload"
-msgstr "필라 꺼내기"
+msgstr "필라멘트 꺼내기"
 
 msgid "Unretract Extra Length"
-msgstr "필라멘트 퇴출 길이"
+msgstr "필라멘트 언리트렉션 길이"
 
 msgid "Unretract Speed"
-msgstr "필라멘트 퇴출 속도"
+msgstr "필라멘트 언리트렉션 속도"
 
 msgid "Up To Date"
 msgstr "최신 버전 유지 중"
@@ -727,7 +728,7 @@ msgid "Update"
 msgstr "업데이트"
 
 msgid "Updating"
-msgstr "업데이트 중.."
+msgstr "업데이트 중"
 
 msgid "Uploaded"
 msgstr "업로드됨"
@@ -739,7 +740,7 @@ msgid "XY Speed (mm/s)"
 msgstr "XY 속도 (mm/s)"
 
 msgid "Z Calibrate"
-msgstr "Z 옵셋 교정"
+msgstr "Z 오프셋 교정"
 
 msgid "Z Move Speed (mm/s)"
 msgstr "Z 이동 속도 (mm/s)"
@@ -751,7 +752,7 @@ msgid "Z Tilt"
 msgstr "Z 기울기"
 
 msgid "Z offset:"
-msgstr "Z 옵셋:"
+msgstr "Z 오프셋:"
 
 msgid "commit"
 msgid_plural "commits"
@@ -765,14 +766,14 @@ msgid_plural "hours"
 msgstr[0] "시간"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "'rename_existing'을(를) 사용하는 매크로가 숨겨집니다"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "이름이 '_'로 시작하는 매크로는 숨겨집니다"
 
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
+msgstr[0] "분"
 
 msgid "mm"
 msgstr "mm"
@@ -784,7 +785,7 @@ msgid "mm/s²"
 msgstr "mm/s²"
 
 msgid "mm³/s"
-msgstr ""
+msgstr "mm³/s"
 
 #~ msgid "KlipperScreen will reboot"
 #~ msgstr "KlipperScreen가 재부팅됩니다"
