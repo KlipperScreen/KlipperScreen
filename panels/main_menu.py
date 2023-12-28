@@ -132,7 +132,7 @@ class Panel(MenuPanel):
         if can_target:
             self.labels['da'].add_object(device, "targets", rgb, True, False)
 
-        name = self._gtk.Button(image, self.prettify(devname), None, self.bts, Gtk.PositionType.LEFT, 1)
+        name = self._gtk.Label(self.prettify(devname))
         #name.connect("clicked", self.toggle_visibility, device)
         name.set_alignment(0, .5)
         name.get_style_context().add_class(class_name)
