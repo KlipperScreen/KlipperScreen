@@ -163,7 +163,7 @@ class Panel(MenuPanel):
         return True
 
     def toggle_visibility(self, widget, device):
-        self.devices[device]['visible'] ^= True
+        self.devices[device]['visible'] = False # swapping "^= True" to "= Flase" so the temp graph does not show up
         logging.info(f"Graph show {self.devices[device]['visible']}: {device}")
 
         section = f"graph {self._screen.connected_printer}"
@@ -255,6 +255,7 @@ class Panel(MenuPanel):
         self.main_menu.show_all()
         self.numpad_visible = False
         self._screen.base_panel.set_control_sensitive(False, control='back')
+        self.update_graph_visibility()
 
     def process_update(self, action, data):
         if action != "notify_status_update":
