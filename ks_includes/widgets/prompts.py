@@ -67,7 +67,7 @@ class Prompt:
 
         title = Gtk.Label(wrap=True, hexpand=True, vexpand=False, halign=Gtk.Align.CENTER, label=self.header)
 
-        close = self.gtk.Button("cancel", scale=self.gtk.bsidescale * .6)
+        close = self.gtk.Button("cancel", scale=self.gtk.bsidescale)
         close.set_hexpand(False)
         close.connect("clicked", self.end)
 
