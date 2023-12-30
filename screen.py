@@ -772,6 +772,7 @@ class KlipperScreen(Gtk.Window):
         elif action == "notify_gcode_response" and self.printer.state not in ["error", "shutdown"]:
             if not (data.startswith("B:") or data.startswith("T:")):
                 if data.startswith("// action:"):
+                    self.wake_screen()
                     if self.prompt is None:
                         self.prompt = Prompt(self)
                     self.prompt.decode(data[10:])
