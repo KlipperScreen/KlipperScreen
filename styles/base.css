@@ -220,7 +220,7 @@ scrollbar button,
 scrollbar trough {
     border: none;
     background-color: @bg;
-    min-height: 2.5em;
+    min-height: 1em;
 }
 
 scrollbar slider {
