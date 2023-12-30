@@ -81,12 +81,11 @@ class Prompt:
         scroll.add(Gtk.Label(label=self.text, wrap=True, vexpand=True))
 
         content = Gtk.Grid()
-        content.attach(title, 0, 0, 1, 1)
-        content.attach(close, 1, 0, 1, 1)
-        content.attach(Gtk.Separator(), 0, 1, 2, 1)
-        content.attach(scroll, 0, 2, 2, 1)
+        if not self.screen.windowed:
+            content.attach(title, 0, 0, 1, 1)
+            content.attach(close, 1, 0, 1, 1)
+        content.attach(scroll, 0, 1, 2, 1)
 
-        # title, buttons, content, callback = None, *args
         self.prompt = self.gtk.Dialog(
             self.window_title,
             self.buttons,
