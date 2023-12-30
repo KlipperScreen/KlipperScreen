@@ -68,28 +68,21 @@ class Panel(ScreenPanel):
     def add_option(self, boxname, opt_array, opt_name, option):
         if option['type'] is None:
             return
-        name = Gtk.Label()
+        name = Gtk.Label(
+            hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER,
+            wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
         name.set_markup(f"<big><b>{option['name']}</b></big>")
-        name.set_hexpand(True)
-        name.set_vexpand(True)
-        name.set_halign(Gtk.Align.START)
-        name.set_valign(Gtk.Align.CENTER)
-        name.set_line_wrap(True)
-        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
         labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)
 
-        dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        dev = Gtk.Box(spacing=5,
+                      valign=Gtk.Align.CENTER, hexpand=True, vexpand=False)
         dev.get_style_context().add_class("frame-item")
-        dev.set_hexpand(True)
-        dev.set_vexpand(False)
-        dev.set_valign(Gtk.Align.CENTER)
 
         dev.add(labels)
         if option['type'] == "binary":
-            switch = Gtk.Switch()
-            switch.set_active(self._config.get_config().getboolean(option['section'], opt_name))
+            switch = Gtk.Switch(active=self._config.get_config().getboolean(option['section'], opt_name))
             switch.connect("notify::active", self.switch_config_option, option['section'], opt_name,
                            option['callback'] if "callback" in option else None)
             dev.add(switch)
@@ -105,7 +98,7 @@ class Panel(ScreenPanel):
             dev.add(dropdown)
         elif option['type'] == "scale":
             dev.set_orientation(Gtk.Orientation.VERTICAL)
-            scale = Gtk.Scale.new_with_range(orientation=Gtk.Orientation.HORIZONTAL,
+            scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL,
                                              min=option['range'][0], max=option['range'][1], step=option['step'])
             scale.set_hexpand(True)
             scale.set_value(int(self._config.get_config().get(option['section'], opt_name, fallback=option['value'])))
@@ -113,8 +106,7 @@ class Panel(ScreenPanel):
             scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
             dev.add(scale)
         elif option['type'] == "printer":
-            box = Gtk.Box()
-            box.set_vexpand(False)
+            box = Gtk.Box(vexpand=False)
             label = Gtk.Label(f"{option['moonraker_host']}:{option['moonraker_port']}")
             box.add(label)
             dev.add(box)

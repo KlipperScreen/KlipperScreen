@@ -53,7 +53,7 @@ class Panel(ScreenPanel):
             "name": "Spoolman",
             "panel": "spoolman"
         })
-        extgrid = self._gtk.HomogeneousGrid()
+        extgrid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         limit = 5
         i = 0
         for extruder in self._printer.get_tools():
@@ -116,35 +116,26 @@ class Panel(ScreenPanel):
         speedbox.add(speedgrid)
 
         filament_sensors = self._printer.get_filament_sensors()
-        sensors = Gtk.Grid()
-        sensors.set_size_request(self._gtk.content_width - 30, -1)
+        sensors = Gtk.Grid(valign=Gtk.Align.CENTER, row_spacing=5, column_spacing=5)
         if len(filament_sensors) > 0:
-            sensors.set_column_spacing(5)
-            sensors.set_row_spacing(5)
-            sensors.set_halign(Gtk.Align.CENTER)
-            sensors.set_valign(Gtk.Align.CENTER)
             for s, x in enumerate(filament_sensors):
                 if s > limit:
                     break
                 name = x[23:].strip()
                 self.labels[x] = {
-                    'label': Gtk.Label(self.prettify(name)),
-                    'switch': Gtk.Switch(),
+                    'label': Gtk.Label(label=self.prettify(name), hexpand=True, halign=Gtk.Align.CENTER,
+                                       ellipsize=Pango.EllipsizeMode.END),
+                    'switch': Gtk.Switch(width_request=round(self._gtk.font_size * 2),
+                                         height_request=round(self._gtk.font_size)),
                     'box': Gtk.Box()
                 }
-                self.labels[x]['label'].set_halign(Gtk.Align.CENTER)
-                self.labels[x]['label'].set_hexpand(True)
-                self.labels[x]['label'].set_ellipsize(Pango.EllipsizeMode.END)
-                self.labels[x]['switch'].set_property("width-request", round(self._gtk.font_size * 2))
-                self.labels[x]['switch'].set_property("height-request", round(self._gtk.font_size))
                 self.labels[x]['switch'].connect("notify::active", self.enable_disable_fs, name, x)
                 self.labels[x]['box'].pack_start(self.labels[x]['label'], True, True, 10)
                 self.labels[x]['box'].pack_start(self.labels[x]['switch'], False, False, 0)
                 self.labels[x]['box'].get_style_context().add_class("filament_sensor")
                 sensors.attach(self.labels[x]['box'], s, 0, 1, 1)
 
-        grid = Gtk.Grid()
-        grid.set_column_homogeneous(True)
+        grid = Gtk.Grid(column_homogeneous=True)
         grid.attach(extgrid, 0, 0, 4, 1)
 
         if self._screen.vertical_mode:

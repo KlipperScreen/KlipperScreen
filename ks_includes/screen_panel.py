@@ -26,10 +26,8 @@ class ScreenPanel:
         self.title = title
         self.devices = {}
         self.active_heaters = []
-        self.content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, hexpand=True, vexpand=True)
         self.content.get_style_context().add_class("content")
-        self.content.set_hexpand(True)
-        self.content.set_vexpand(True)
         self._show_heater_power = self._config.get_main_config().getboolean('show_heater_power', False)
         self.bts = self._gtk.bsidescale
 

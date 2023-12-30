@@ -30,8 +30,7 @@ class Panel(ScreenPanel):
         super().__init__(screen, title)
         self.refresh = None
         self.update_dialog = None
-        grid = self._gtk.HomogeneousGrid()
-        grid.set_row_homogeneous(False)
+        grid = Gtk.Grid(column_homogeneous=True)
 
         update_all = self._gtk.Button('arrow-up', _('Full Update'), 'color1')
         update_all.connect("clicked", self.show_update_info, "full")
@@ -123,29 +122,23 @@ class Panel(ScreenPanel):
         info = self.update_status['version_info'][program] if program in self.update_status['version_info'] else {}
 
         scroll = self._gtk.ScrolledWindow(steppers=False)
-        scroll.set_size_request(self._gtk.width - 30, self._gtk.height * .6)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        vbox.set_halign(Gtk.Align.CENTER)
-        vbox.set_valign(Gtk.Align.CENTER)
 
-        label = Gtk.Label()
-        label.set_line_wrap(True)
+        label = Gtk.Label(wrap=True, vexpand=True)
         if program == "full":
             label.set_markup('<b>' + _("Perform a full upgrade?") + '</b>')
             vbox.add(label)
         elif 'configured_type' in info and info['configured_type'] == 'git_repo':
             if not info['is_valid'] or info['is_dirty']:
                 label.set_markup(_("Do you want to recover %s?") % program)
-                vbox.add(label)
-                scroll.add(vbox)
                 recoverybuttons = [
                     {"name": _("Recover Hard"), "response": Gtk.ResponseType.OK, "style": 'dialog-warning'},
                     {"name": _("Recover Soft"), "response": Gtk.ResponseType.APPLY, "style": 'dialog-info'},
                     {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
                 ]
-                self._gtk.Dialog(_("Recover"), recoverybuttons, scroll, self.reset_confirm, program)
+                self._gtk.Dialog(_("Recover"), recoverybuttons, label, self.reset_confirm, program)
                 return
             else:
                 if info['version'] == info['remote_version']:
@@ -156,19 +149,14 @@ class Panel(ScreenPanel):
                                  " " + ngettext("commit", "commits", ncommits) +
                                  ":</b>\n")
                 vbox.add(label)
-
+                label.set_vexpand(False)
                 for c in info['commits_behind']:
                     commit_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-                    title = Gtk.Label()
-                    title.set_line_wrap(True)
-                    title.set_line_wrap_mode(Pango.WrapMode.CHAR)
+                    title = Gtk.Label(wrap=True, hexpand=True)
                     title.set_markup(f"\n<b>{c['subject']}</b>\n<i>{c['author']}</i>\n")
-                    title.set_halign(Gtk.Align.START)
                     commit_box.add(title)
 
-                    details = Gtk.Label(label=f"{c['message']}")
-                    details.set_line_wrap(True)
-                    details.set_halign(Gtk.Align.START)
+                    details = Gtk.Label(label=f"{c['message']}", wrap=True, hexpand=True)
                     commit_box.add(details)
                     commit_box.add(Gtk.Separator())
                     vbox.add(commit_box)
@@ -179,18 +167,13 @@ class Panel(ScreenPanel):
                 + ngettext("Package will be updated", "Packages will be updated", info["package_count"])
                 + ':</b>\n'
             ))
-            label.set_halign(Gtk.Align.CENTER)
+            label.set_vexpand(False)
             vbox.add(label)
-            grid = Gtk.Grid()
-            grid.set_column_homogeneous(True)
-            grid.set_halign(Gtk.Align.CENTER)
-            grid.set_valign(Gtk.Align.CENTER)
+            grid = Gtk.Grid(column_homogeneous=True, halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER)
             i = 0
             for j, c in enumerate(info["package_list"]):
-                label = Gtk.Label()
+                label = Gtk.Label(halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END)
                 label.set_markup(f"  {c}  ")
-                label.set_halign(Gtk.Align.START)
-                label.set_ellipsize(Pango.EllipsizeMode.END)
                 pos = (j % 3)
                 grid.attach(label, pos, i, 1, 1)
                 if pos == 2:
@@ -309,17 +292,11 @@ class Panel(ScreenPanel):
         self.labels[f"{p}_status"].set_sensitive(True)
 
     def reboot_poweroff(self, widget, method):
-        scroll = self._gtk.ScrolledWindow()
-        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        vbox.set_halign(Gtk.Align.CENTER)
-        vbox.set_valign(Gtk.Align.CENTER)
+        label = Gtk.Label(wrap=True, hexpand=True, vexpand=True)
         if method == "reboot":
-            label = Gtk.Label(label=_("Are you sure you wish to reboot the system?"))
+            label.set_label(_("Are you sure you wish to reboot the system?"))
         else:
-            label = Gtk.Label(label=_("Are you sure you wish to shutdown the system?"))
-        vbox.add(label)
-        scroll.add(vbox)
+            label.set_label(_("Are you sure you wish to shutdown the system?"))
         buttons = [
             {"name": _("Host"), "response": Gtk.ResponseType.OK, "style": 'dialog-info'},
             {"name": _("Printer"), "response": Gtk.ResponseType.APPLY, "style": 'dialog-warning'},
@@ -329,7 +306,7 @@ class Panel(ScreenPanel):
             title = _("Restart")
         else:
             title = _("Shutdown")
-        self._gtk.Dialog(title, buttons, scroll, self.reboot_poweroff_confirm, method)
+        self._gtk.Dialog(title, buttons, label, self.reboot_poweroff_confirm, method)
 
     def reboot_poweroff_confirm(self, dialog, response_id, method):
         self._gtk.remove_dialog(dialog)

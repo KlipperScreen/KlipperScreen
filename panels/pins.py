@@ -12,8 +12,7 @@ class Panel(ScreenPanel):
         super().__init__(screen, title)
         self.devices = {}
         # Create a grid for all devices
-        self.labels['devices'] = Gtk.Grid()
-        self.labels['devices'].set_valign(Gtk.Align.CENTER)
+        self.labels['devices'] = Gtk.Grid(valign=Gtk.Align.CENTER)
 
         self.load_pins()
 
@@ -34,16 +33,11 @@ class Panel(ScreenPanel):
     def add_pin(self, pin):
 
         logging.info(f"Adding pin: {pin}")
-        name = Gtk.Label()
+        name = Gtk.Label(
+            hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER,
+            wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
         name.set_markup(f'\n<big><b>{" ".join(pin.split(" ")[1:])}</b></big>\n')
-        name.set_hexpand(True)
-        name.set_vexpand(True)
-        name.set_halign(Gtk.Align.START)
-        name.set_valign(Gtk.Align.CENTER)
-        name.set_line_wrap(True)
-        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-
-        scale = Gtk.Scale.new_with_range(orientation=Gtk.Orientation.HORIZONTAL, min=0, max=100, step=1)
+        scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, min=0, max=100, step=1)
         scale.set_value(self.check_pin_value(pin))
         scale.set_digits(0)
         scale.set_hexpand(True)
@@ -55,7 +49,7 @@ class Panel(ScreenPanel):
         min_btn.set_hexpand(False)
         min_btn.connect("clicked", self.update_pin_value, pin, 0)
 
-        pin_col = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        pin_col = Gtk.Box(spacing=5)
         pin_col.add(min_btn)
         pin_col.add(scale)
 

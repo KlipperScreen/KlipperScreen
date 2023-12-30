@@ -334,12 +334,12 @@ class KlipperScreen(Gtk.Window):
 
         self.log_notification(message, level)
 
-        msg = Gtk.Button(label=f"{message}")
-        msg.set_hexpand(True)
-        msg.set_vexpand(True)
-        msg.get_child().set_line_wrap(True)
-        msg.get_child().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-        msg.get_child().set_max_width_chars(40)
+        msg = Gtk.Button(label=f"{message}", hexpand=True, vexpand=True)
+        for widget in msg.get_children():
+            if isinstance(widget, Gtk.Label):
+                widget.set_line_wrap(True)
+                widget.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+                widget.set_max_width_chars(40)
         msg.connect("clicked", self.close_popup_message)
         msg.get_style_context().add_class("message_popup")
         if level == 1:
@@ -352,10 +352,9 @@ class KlipperScreen(Gtk.Window):
             msg.get_style_context().add_class("message_popup_error")
             logging.info(f'error: {message}')
 
-        popup = Gtk.Popover.new(self.base_panel.titlebar)
+        popup = Gtk.Popover(relative_to=self.base_panel.titlebar,
+                            halign=Gtk.Align.CENTER, width_request=int(self.width * .9))
         popup.get_style_context().add_class("message_popup_popover")
-        popup.set_size_request(self.width * .9, -1)
-        popup.set_halign(Gtk.Align.CENTER)
         popup.add(msg)
         popup.popup()
 
@@ -382,24 +381,13 @@ class KlipperScreen(Gtk.Window):
     def show_error_modal(self, err, e=""):
         logging.error(f"Showing error modal: {err} {e}")
 
-        title = Gtk.Label()
+        title = Gtk.Label(wrap=True, wrap_mode=Pango.WrapMode.CHAR, hexpand=True, halign=Gtk.Align.START)
         title.set_markup(f"<b>{err}</b>\n")
-        title.set_line_wrap(True)
-        title.set_line_wrap_mode(Pango.WrapMode.CHAR)
-        title.set_halign(Gtk.Align.START)
-        title.set_hexpand(True)
-        version = Gtk.Label(label=f"{functions.get_software_version()}")
-        version.set_halign(Gtk.Align.END)
+        version = Gtk.Label(label=f"{functions.get_software_version()}", halign=Gtk.Align.END)
 
         help_msg = _("Provide KlipperScreen.log when asking for help.\n")
-        message = Gtk.Label(label=f"{help_msg}\n\n{e}")
-        message.set_line_wrap(True)
+        message = Gtk.Label(label=f"{help_msg}\n\n{e}", wrap=True)
         scroll = self.gtk.ScrolledWindow(steppers=False)
-        scroll.set_vexpand(True)
-        if self.vertical_mode:
-            scroll.set_size_request(self.gtk.width - 30, self.gtk.height * .6)
-        else:
-            scroll.set_size_request(self.gtk.width - 30, self.gtk.height * .45)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(message)
 
@@ -548,10 +536,8 @@ class KlipperScreen(Gtk.Window):
         close = Gtk.Button()
         close.connect("clicked", self.close_screensaver)
 
-        box = Gtk.Box()
-        box.set_size_request(self.width, self.height)
+        box = Gtk.Box(halign=Gtk.Align.CENTER, width_request=self.width, height_request=self.height)
         box.pack_start(close, True, True, 0)
-        box.set_halign(Gtk.Align.CENTER)
         box.get_style_context().add_class("screensaver")
         self.remove(self.base_panel.main_grid)
         self.add(box)
@@ -810,14 +796,9 @@ class KlipperScreen(Gtk.Window):
         except Exception as e:
             logging.debug(f"Error parsing jinja for confirm_send_action\n{e}\n\n{traceback.format_exc()}")
 
-        label = Gtk.Label()
+        label = Gtk.Label(hexpand=True, vexpand=True, halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER,
+                          wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
         label.set_markup(text)
-        label.set_hexpand(True)
-        label.set_halign(Gtk.Align.CENTER)
-        label.set_vexpand(True)
-        label.set_valign(Gtk.Align.CENTER)
-        label.set_line_wrap(True)
-        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
         if self.confirm is not None:
             self.gtk.remove_dialog(self.confirm)

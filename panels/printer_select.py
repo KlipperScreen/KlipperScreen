@@ -10,7 +10,7 @@ class Panel(ScreenPanel):
         super().__init__(screen, title)
         printers = self._config.get_printers()
 
-        grid = self._gtk.HomogeneousGrid()
+        grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(grid)

@@ -22,31 +22,23 @@ class Panel(ScreenPanel):
             'clear': self._gtk.Button("cancel", " " + _("Clear"), "color2", self.bts, Gtk.PositionType.LEFT, 1),
         }
         self.buttons['add'].connect("clicked", self.show_create_profile)
-        self.buttons['add'].set_hexpand(True)
         self.buttons['clear'].connect("clicked", self.send_clear_mesh)
-        self.buttons['clear'].set_hexpand(True)
         self.buttons['calib'].connect("clicked", self.calibrate_mesh)
-        self.buttons['calib'].set_hexpand(True)
 
-        topbar = Gtk.Box(spacing=5)
-        topbar.set_hexpand(True)
-        topbar.set_vexpand(False)
+        topbar = Gtk.Box(spacing=5, hexpand=True, vexpand=False)
         topbar.add(self.buttons['add'])
         topbar.add(self.buttons['clear'])
         topbar.add(self.buttons['calib'])
 
         # Create a grid for all profiles
-        self.labels['profiles'] = Gtk.Grid()
-        self.labels['profiles'].set_valign(Gtk.Align.CENTER)
+        self.labels['profiles'] = Gtk.Grid(valign=Gtk.Align.CENTER)
 
         scroll = self._gtk.ScrolledWindow()
         scroll.add(self.labels['profiles'])
-        scroll.set_vexpand(True)
 
         self.load_meshes()
 
-        grid = self._gtk.HomogeneousGrid()
-        grid.set_row_homogeneous(False)
+        grid = Gtk.Grid(column_homogeneous=True)
         grid.attach(topbar, 0, 0, 2, 1)
         self.labels['map'] = BedMap(self._gtk.font_size, self.active_mesh)
         if self._screen.vertical_mode:
@@ -130,12 +122,12 @@ class Panel(ScreenPanel):
             b.set_vexpand(False)
             b.set_halign(Gtk.Align.END)
 
-        button_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        button_box = Gtk.Box(spacing=5)
         if profile != "default":
             button_box.add(buttons["save"])
         button_box.add(buttons["delete"])
 
-        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        box = Gtk.Box(spacing=5)
         box.get_style_context().add_class("frame-item")
         box.pack_start(name, True, True, 0)
         box.pack_start(button_box, False, False, 0)
@@ -213,11 +205,8 @@ class Panel(ScreenPanel):
             self.content.remove(child)
 
         if "create_profile" not in self.labels:
-            pl = self._gtk.Label(_("Profile Name:"))
-            pl.set_hexpand(False)
-            self.labels['profile_name'] = Gtk.Entry()
-            self.labels['profile_name'].set_text('')
-            self.labels['profile_name'].set_hexpand(True)
+            pl = Gtk.Label(label=_("Profile Name:"), hexpand=False)
+            self.labels['profile_name'] = Gtk.Entry(hexpand=True, text='')
             self.labels['profile_name'].connect("activate", self.create_profile)
             self.labels['profile_name'].connect("focus-in-event", self._screen.show_keyboard)
 
@@ -229,10 +218,8 @@ class Panel(ScreenPanel):
             box.pack_start(self.labels['profile_name'], True, True, 5)
             box.pack_start(save, False, False, 5)
 
-            self.labels['create_profile'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-            self.labels['create_profile'].set_valign(Gtk.Align.CENTER)
-            self.labels['create_profile'].set_hexpand(True)
-            self.labels['create_profile'].set_vexpand(True)
+            self.labels['create_profile'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5,
+                                                    valign=Gtk.Align.CENTER, hexpand=True, vexpand=True)
             self.labels['create_profile'].pack_start(pl, True, True, 5)
             self.labels['create_profile'].pack_start(box, True, True, 5)
 
@@ -243,7 +230,7 @@ class Panel(ScreenPanel):
     def create_profile(self, widget):
         name = self.labels['profile_name'].get_text()
         if self.active_mesh is None:
-            self.calibrate_mesh(None)
+            self.calibrate_mesh(widget)
 
         self._screen._send_action(widget, "printer.gcode.script", {"script": f"BED_MESH_PROFILE SAVE={name}"})
         self.remove_create()

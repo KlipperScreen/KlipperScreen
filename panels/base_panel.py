@@ -71,20 +71,15 @@ class BasePanel(ScreenPanel):
         # This box will be populated by show_heaters
         self.control['temp_box'] = Gtk.Box(spacing=10)
 
-        self.titlelbl = Gtk.Label()
-        self.titlelbl.set_hexpand(True)
-        self.titlelbl.set_halign(Gtk.Align.CENTER)
-        self.titlelbl.set_ellipsize(Pango.EllipsizeMode.END)
+        self.titlelbl = Gtk.Label(hexpand=True, halign=Gtk.Align.CENTER, ellipsize=Pango.EllipsizeMode.END)
         self.set_title(title)
 
         self.control['time'] = Gtk.Label(label="00:00 AM")
-        self.control['time_box'] = Gtk.Box()
-        self.control['time_box'].set_halign(Gtk.Align.END)
+        self.control['time_box'] = Gtk.Box(halign=Gtk.Align.END)
         self.control['time_box'].pack_end(self.control['time'], True, True, 10)
 
-        self.titlebar = Gtk.Box(spacing=5)
+        self.titlebar = Gtk.Box(spacing=5, valign=Gtk.Align.CENTER)
         self.titlebar.get_style_context().add_class("title_bar")
-        self.titlebar.set_valign(Gtk.Align.CENTER)
         self.titlebar.add(self.control['temp_box'])
         self.titlebar.add(self.titlelbl)
         self.titlebar.add(self.control['time_box'])
@@ -115,8 +110,7 @@ class BasePanel(ScreenPanel):
 
             img_size = self._gtk.img_scale * self.bts
             for device in devices:
-                self.labels[device] = Gtk.Label()
-                self.labels[device].set_ellipsize(Pango.EllipsizeMode.START)
+                self.labels[device] = Gtk.Label(ellipsize=Pango.EllipsizeMode.START)
 
                 self.labels[f'{device}_box'] = Gtk.Box()
                 icon = self.get_icon(device, img_size)
@@ -309,13 +303,9 @@ class BasePanel(ScreenPanel):
     def show_update_dialog(self):
         if self.update_dialog is not None:
             return
-        button = [{"name": _("Finish"), "response": Gtk.ResponseType.OK, "style": 'dialog-default'}]
-        self.labels['update_progress'] = Gtk.Label()
-        self.labels['update_progress'].set_halign(Gtk.Align.START)
-        self.labels['update_progress'].set_valign(Gtk.Align.START)
-        self.labels['update_progress'].set_ellipsize(Pango.EllipsizeMode.END)
+        button = [{"name": _("Finish"), "response": Gtk.ResponseType.OK}]
+        self.labels['update_progress'] = Gtk.Label(hexpand=True, vexpand=True, ellipsize=Pango.EllipsizeMode.END)
         self.labels['update_scroll'] = self._gtk.ScrolledWindow(steppers=False)
-        self.labels['update_scroll'].set_size_request(self._gtk.width - 30, self._gtk.height * .6)
         self.labels['update_scroll'].set_property("overlay-scrolling", True)
         self.labels['update_scroll'].add(self.labels['update_progress'])
         self.labels['update_scroll'].connect("size-allocate", self._autoscroll)

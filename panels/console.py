@@ -37,33 +37,23 @@ class Panel(ScreenPanel):
         o3_button.get_style_context().add_class("buttons_slim")
         o3_button.connect("clicked", self.clear)
 
-        options = Gtk.Grid()
-        options.set_vexpand(False)
+        options = Gtk.Grid(vexpand=False)
         options.attach(o1_button, 0, 0, 1, 1)
         options.attach(o2_button, 1, 0, 1, 1)
         options.attach(o3_button, 2, 0, 1, 1)
 
-        sw = Gtk.ScrolledWindow()
-        sw.set_hexpand(True)
-        sw.set_vexpand(True)
+        sw = Gtk.ScrolledWindow(hexpand=True, vexpand=True)
 
         tb = Gtk.TextBuffer()
-        tv = Gtk.TextView()
-        tv.set_buffer(tb)
-        tv.set_editable(False)
-        tv.set_cursor_visible(False)
+        tv = Gtk.TextView(buffer=tb, editable=False, cursor_visible=False)
         tv.connect("size-allocate", self._autoscroll)
         tv.connect("focus-in-event", self._screen.remove_keyboard)
 
         sw.add(tv)
 
-        ebox = Gtk.Box()
-        ebox.set_hexpand(True)
-        ebox.set_vexpand(False)
+        ebox = Gtk.Box(hexpand=True, vexpand=False)
 
-        entry = Gtk.Entry()
-        entry.set_hexpand(True)
-        entry.set_vexpand(False)
+        entry = Gtk.Entry(hexpand=True, vexpand=False)
         entry.connect("button-press-event", self._screen.show_keyboard)
         entry.connect("focus-in-event", self._screen.show_keyboard)
         entry.connect("activate", self._send_command)

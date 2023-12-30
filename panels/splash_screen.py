@@ -12,11 +12,9 @@ class Panel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         image = self._gtk.Image("klipper", self._gtk.content_width * .2, self._gtk.content_height * .5)
-        self.labels['text'] = Gtk.Label(_("Initializing printer..."))
-        self.labels['text'].set_line_wrap(True)
-        self.labels['text'].set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-        self.labels['text'].set_halign(Gtk.Align.CENTER)
-        self.labels['text'].set_valign(Gtk.Align.CENTER)
+        self.labels['text'] = Gtk.Label(
+            label=_("Initializing printer..."), wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR,
+            halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER)
 
         self.labels['menu'] = self._gtk.Button("settings", _("Menu"), "color4")
         self.labels['menu'].connect("clicked", self._screen._go_to_submenu, "")
@@ -31,23 +29,17 @@ class Panel(ScreenPanel):
         self.labels['retry'] = self._gtk.Button("load", _('Retry'), "color3")
         self.labels['retry'].connect("clicked", self.retry)
 
-        self.labels['actions'] = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        self.labels['actions'].set_hexpand(True)
-        self.labels['actions'].set_vexpand(False)
-        self.labels['actions'].set_halign(Gtk.Align.CENTER)
-        self.labels['actions'].set_homogeneous(True)
-        self.labels['actions'].set_size_request(self._gtk.content_width - 30, -1)
+        self.labels['actions'] = Gtk.Box(hexpand=True, vexpand=False, homogeneous=True)
 
         scroll = self._gtk.ScrolledWindow()
-        scroll.set_hexpand(True)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(self.labels['text'])
 
-        info = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
+        info = Gtk.Box()
         info.pack_start(image, False, True, 8)
         info.pack_end(scroll, True, True, 8)
 
-        main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         main.pack_start(info, True, True, 8)
         main.pack_end(self.labels['actions'], False, False, 0)
 

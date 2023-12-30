@@ -15,7 +15,7 @@ class Panel(ScreenPanel):
         self.items = items
         self.j2_data = self._printer.get_printer_status_data()
         self.create_menu_items()
-        self.grid = self._gtk.HomogeneousGrid()
+        self.grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         self.scroll = self._gtk.ScrolledWindow()
         self.scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 

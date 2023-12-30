@@ -26,9 +26,7 @@ class Panel(ScreenPanel):
         tv.set_buffer(self.tb)
         tv.connect("size-allocate", self._autoscroll)
 
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_hexpand(True)
-        scroll.set_vexpand(True)
+        scroll = Gtk.ScrolledWindow(hexpand=True, vexpand=True)
         scroll.add(tv)
         self.content.add(scroll)
 

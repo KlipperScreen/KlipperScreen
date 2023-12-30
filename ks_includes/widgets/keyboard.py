@@ -122,8 +122,6 @@ class Keyboard(Gtk.Box):
                         self.buttons[p][r][k] = screen.gtk.Button("arrow-down", scale=.6)
                     else:
                         self.buttons[p][r][k] = screen.gtk.Button(label=key, lines=1)
-                    self.buttons[p][r][k].set_hexpand(True)
-                    self.buttons[p][r][k].set_vexpand(True)
                     self.buttons[p][r][k].connect('button-press-event', self.repeat, key)
                     self.buttons[p][r][k].connect('button-release-event', self.release)
                     self.buttons[p][r][k].get_style_context().add_class("keyboard_pad")

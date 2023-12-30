@@ -49,7 +49,7 @@ class Panel(ScreenPanel):
         adjust = self._gtk.Button("settings", None, "color2", 1, Gtk.PositionType.LEFT, 1)
         adjust.connect("clicked", self.load_menu, 'options', _('Settings'))
         adjust.set_hexpand(False)
-        grid = self._gtk.HomogeneousGrid()
+        grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         if self._screen.vertical_mode:
             if self._screen.lang_ltr:
                 grid.attach(self.buttons['x+'], 2, 1, 1, 1)
@@ -98,9 +98,9 @@ class Panel(ScreenPanel):
 
         for p in ('pos_x', 'pos_y', 'pos_z'):
             self.labels[p] = Gtk.Label()
-        self.labels['move_dist'] = Gtk.Label(_("Move Distance (mm)"))
+        self.labels['move_dist'] = Gtk.Label(label=_("Move Distance (mm)"))
 
-        bottomgrid = self._gtk.HomogeneousGrid()
+        bottomgrid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         bottomgrid.set_direction(Gtk.TextDirection.LTR)
         bottomgrid.attach(self.labels['pos_x'], 0, 0, 1, 1)
         bottomgrid.attach(self.labels['pos_y'], 1, 0, 1, 1)
@@ -109,7 +109,7 @@ class Panel(ScreenPanel):
         if not self._screen.vertical_mode:
             bottomgrid.attach(adjust, 3, 0, 1, 2)
 
-        self.labels['move_menu'] = self._gtk.HomogeneousGrid()
+        self.labels['move_menu'] = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         self.labels['move_menu'].attach(grid, 0, 0, 1, 3)
         self.labels['move_menu'].attach(bottomgrid, 0, 3, 1, 1)
         self.labels['move_menu'].attach(distgrid, 0, 4, 1, 1)
@@ -194,37 +194,27 @@ class Panel(ScreenPanel):
             self._screen._ws.klippy.gcode_script("G90")
 
     def add_option(self, boxname, opt_array, opt_name, option):
-        name = Gtk.Label()
+        name = Gtk.Label(hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER, wrap=True)
         name.set_markup(f"<big><b>{option['name']}</b></big>")
-        name.set_hexpand(True)
-        name.set_vexpand(True)
-        name.set_halign(Gtk.Align.START)
-        name.set_valign(Gtk.Align.CENTER)
-        name.set_line_wrap(True)
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        dev = Gtk.Box(spacing=5,
+                      hexpand=True, vexpand=False, valign=Gtk.Align.CENTER)
         dev.get_style_context().add_class("frame-item")
-        dev.set_hexpand(True)
-        dev.set_vexpand(False)
-        dev.set_valign(Gtk.Align.CENTER)
         dev.add(name)
 
         if option['type'] == "binary":
-            box = Gtk.Box()
-            box.set_vexpand(False)
-            switch = Gtk.Switch()
-            switch.set_hexpand(False)
-            switch.set_vexpand(False)
-            switch.set_active(self._config.get_config().getboolean(option['section'], opt_name))
+            box = Gtk.Box(hexpand=False)
+            switch = Gtk.Switch(hexpand=False, vexpand=False,
+                                width_request=round(self._gtk.font_size * 7),
+                                height_request=round(self._gtk.font_size * 3.5),
+                                active=self._config.get_config().getboolean(option['section'], opt_name))
             switch.connect("notify::active", self.switch_config_option, option['section'], opt_name)
-            switch.set_property("width-request", round(self._gtk.font_size * 7))
-            switch.set_property("height-request", round(self._gtk.font_size * 3.5))
             box.add(switch)
             dev.add(box)
         elif option['type'] == "scale":
             dev.set_orientation(Gtk.Orientation.VERTICAL)
-            scale = Gtk.Scale.new_with_range(orientation=Gtk.Orientation.HORIZONTAL,
+            scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL,
                                              min=option['range'][0], max=option['range'][1], step=option['step'])
             scale.set_hexpand(True)
             scale.set_value(int(self._config.get_config().get(option['section'], opt_name, fallback=option['value'])))

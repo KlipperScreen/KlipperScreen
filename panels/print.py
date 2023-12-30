@@ -36,8 +36,7 @@ class Panel(ScreenPanel):
         self.space = '  ' if self._screen.width > 480 else '\n'
         logging.info(f"24h time is {self.time_24}")
 
-        sbox = Gtk.Box(spacing=0)
-        sbox.set_vexpand(False)
+        sbox = Gtk.Box(hexpand=True, vexpand=False)
         for i, (name, val) in enumerate(self.sort_items.items(), start=1):
             s = self._gtk.Button(None, val, f"color{i % 4}", .5, Gtk.PositionType.RIGHT, 1)
             s.get_style_context().add_class("buttons_slim")
@@ -50,18 +49,13 @@ class Panel(ScreenPanel):
         refresh.get_style_context().add_class("buttons_slim")
         refresh.connect('clicked', self._refresh_files)
         sbox.add(refresh)
-        sbox.set_hexpand(True)
-        sbox.set_vexpand(False)
 
-        pbox = Gtk.Box(spacing=0)
-        pbox.set_hexpand(True)
-        pbox.set_vexpand(False)
+        pbox = Gtk.Box(hexpand=True, vexpand=False)
         self.labels['path'] = Gtk.Label()
         pbox.add(self.labels['path'])
         self.labels['path_box'] = pbox
 
-        self.main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        self.main.set_vexpand(True)
+        self.main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
         self.main.pack_start(sbox, False, False, 0)
         self.main.pack_start(pbox, False, False, 0)
         self.main.pack_start(self.scroll, True, True, 0)
@@ -156,22 +150,14 @@ class Panel(ScreenPanel):
         return False
 
     def _create_row(self, fullpath, filename=None):
-        name = Gtk.Label()
+        name = Gtk.Label(hexpand=True, halign=Gtk.Align.START, wrap=True, wrap_mode=Pango.WrapMode.CHAR)
         name.get_style_context().add_class("print-filename")
         if filename:
             name.set_markup(f'<big><b>{os.path.splitext(filename)[0].replace("_", " ")}</b></big>')
         else:
             name.set_markup(f"<big><b>{os.path.split(fullpath)[-1]}</b></big>")
-        name.set_hexpand(True)
-        name.set_halign(Gtk.Align.START)
-        name.set_line_wrap(True)
-        name.set_line_wrap_mode(Pango.WrapMode.CHAR)
 
-        info = Gtk.Label()
-        name.set_line_wrap(True)
-        info.set_line_wrap_mode(Pango.WrapMode.CHAR)
-        info.set_hexpand(True)
-        info.set_halign(Gtk.Align.START)
+        info = Gtk.Label(hexpand=True, halign=Gtk.Align.START, wrap=True, wrap_mode=Pango.WrapMode.CHAR)
         info.get_style_context().add_class("print-info")
 
         delete = self._gtk.Button("delete", style="color1", scale=self.bts)
@@ -201,10 +187,8 @@ class Panel(ScreenPanel):
 
         delete.connect("clicked", self.confirm_delete_file, f"gcodes/{fullpath}")
 
-        row = Gtk.Grid()
+        row = Gtk.Grid(hexpand=True, vexpand=False)
         row.get_style_context().add_class("frame-item")
-        row.set_hexpand(True)
-        row.set_vexpand(False)
         row.attach(icon, 0, 0, 1, 2)
         row.attach(name, 1, 0, 3, 1)
         row.attach(info, 1, 1, 1, 1)
@@ -303,28 +287,19 @@ class Panel(ScreenPanel):
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
         ]
 
-        label = Gtk.Label()
+        label = Gtk.Label(hexpand=True, vexpand=True, wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
         label.set_markup(f"<b>{filename}</b>\n")
-        label.set_hexpand(True)
-        label.set_halign(Gtk.Align.CENTER)
-        label.set_vexpand(True)
-        label.set_valign(Gtk.Align.CENTER)
-        label.set_line_wrap(True)
-        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        grid = Gtk.Grid()
-        grid.set_vexpand(True)
-        grid.set_halign(Gtk.Align.CENTER)
-        grid.set_valign(Gtk.Align.CENTER)
-        grid.add(label)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        box.add(label)
 
         height = self._screen.height * .9 - self._gtk.font_size * 10
         pixbuf = self.get_file_image(filename, self._screen.width * .9, height)
         if pixbuf is not None:
             image = Gtk.Image.new_from_pixbuf(pixbuf)
-            grid.attach_next_to(image, label, Gtk.PositionType.BOTTOM, 1, 1)
+            box.add(image)
 
-        self._gtk.Dialog(_("Print") + f' {filename}', buttons, grid, self.confirm_print_response, filename)
+        self._gtk.Dialog(_("Print") + f' {filename}', buttons, box, self.confirm_print_response, filename)
 
     def confirm_print_response(self, dialog, response_id, filename):
         self._gtk.remove_dialog(dialog)
@@ -433,12 +408,8 @@ class Panel(ScreenPanel):
         self.showing_rename = True
 
     def _create_rename_box(self, fullpath):
-        lbl = self._gtk.Label(_("Rename/Move:"))
-        lbl.set_halign(Gtk.Align.START)
-        lbl.set_hexpand(False)
-        self.labels['new_name'] = Gtk.Entry()
-        self.labels['new_name'].set_text(fullpath)
-        self.labels['new_name'].set_hexpand(True)
+        lbl = Gtk.Label(label=_("Rename/Move:"), halign=Gtk.Align.START, hexpand=False)
+        self.labels['new_name'] = Gtk.Entry(text=fullpath, hexpand=True)
         self.labels['new_name'].connect("activate", self.rename)
         self.labels['new_name'].connect("focus-in-event", self._screen.show_keyboard)
 
@@ -450,10 +421,8 @@ class Panel(ScreenPanel):
         box.pack_start(self.labels['new_name'], True, True, 5)
         box.pack_start(save, False, False, 5)
 
-        self.labels['rename_file'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-        self.labels['rename_file'].set_valign(Gtk.Align.CENTER)
-        self.labels['rename_file'].set_hexpand(True)
-        self.labels['rename_file'].set_vexpand(True)
+        self.labels['rename_file'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5,
+                                             hexpand=True, vexpand=True, valign=Gtk.Align.CENTER)
         self.labels['rename_file'].pack_start(lbl, True, True, 5)
         self.labels['rename_file'].pack_start(box, True, True, 5)
 

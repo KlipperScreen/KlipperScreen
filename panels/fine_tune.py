@@ -72,8 +72,7 @@ class Panel(ScreenPanel):
             if i == self.e_delta:
                 ctx.add_class("distbutton_active")
             extgrid.attach(self.labels[f"edelta{i}"], j, 0, 1, 1)
-        grid = self._gtk.HomogeneousGrid()
-        grid.set_row_homogeneous(False)
+        grid = Gtk.Grid(column_homogeneous=True)
 
         self.labels['z+'] = self._gtk.Button("z-farther", "Z+", "color1")
         self.labels['z-'] = self._gtk.Button("z-closer", "Z-", "color1")

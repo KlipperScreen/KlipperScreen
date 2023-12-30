@@ -56,18 +56,14 @@ class Panel(ScreenPanel):
 
         self.labels['networks'] = {}
 
-        self.labels['interface'] = Gtk.Label()
+        self.labels['interface'] = Gtk.Label(hexpand=True)
         self.labels['interface'].set_text(" %s: %s  " % (_("Interface"), self.interface))
-        self.labels['interface'].set_hexpand(True)
-        self.labels['ip'] = Gtk.Label()
-        self.labels['ip'].set_hexpand(True)
+        self.labels['ip'] = Gtk.Label(hexpand=True)
         reload_networks = self._gtk.Button("refresh", None, "color1", .66)
         reload_networks.connect("clicked", self.reload_networks)
         reload_networks.set_hexpand(False)
 
-        sbox = Gtk.Box()
-        sbox.set_hexpand(True)
-        sbox.set_vexpand(False)
+        sbox = Gtk.Box(hexpand=True, vexpand=False)
         sbox.add(self.labels['interface'])
         if ip is not None:
             self.labels['ip'].set_text(f"IP: {ip}  ")
@@ -76,8 +72,7 @@ class Panel(ScreenPanel):
 
         scroll = self._gtk.ScrolledWindow()
 
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        box.set_vexpand(True)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
 
         self.labels['networklist'] = Gtk.Grid()
 
@@ -142,21 +137,14 @@ class Panel(ScreenPanel):
         if connected_ssid == ssid:
             display_name += " (" + _("Connected") + ")"
 
-        name = Gtk.Label()
+        name = Gtk.Label(hexpand=True, halign=Gtk.Align.START, wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
         name.set_markup(f"<big><b>{display_name}</b></big>")
-        name.set_hexpand(True)
-        name.set_halign(Gtk.Align.START)
-        name.set_line_wrap(True)
-        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        info = Gtk.Label()
-        info.set_halign(Gtk.Align.START)
-        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        info = Gtk.Label(halign=Gtk.Align.START)
+        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True,
+                         halign=Gtk.Align.START, valign=Gtk.Align.CENTER)
         labels.add(name)
         labels.add(info)
-        labels.set_vexpand(True)
-        labels.set_valign(Gtk.Align.CENTER)
-        labels.set_halign(Gtk.Align.START)
 
         connect = self._gtk.Button("load", None, "color3", .66)
         connect.connect("clicked", self.connect_network, ssid)
@@ -168,14 +156,12 @@ class Panel(ScreenPanel):
         delete.set_hexpand(False)
         delete.set_halign(Gtk.Align.END)
 
-        network = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        network = Gtk.Box(spacing=5, hexpand=True, vexpand=False)
         network.get_style_context().add_class("frame-item")
-        network.set_hexpand(True)
-        network.set_vexpand(False)
 
         network.add(labels)
 
-        buttons = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        buttons = Gtk.Box(spacing=5)
         if network_id != -1 or netinfo['connected']:
             buttons.pack_end(connect, False, False, 0)
             buttons.pack_end(delete, False, False, 0)
@@ -281,9 +267,8 @@ class Panel(ScreenPanel):
         ]
 
         scroll = self._gtk.ScrolledWindow()
-        self.labels['connecting_info'] = Gtk.Label(_("Starting WiFi Association"))
-        self.labels['connecting_info'].set_halign(Gtk.Align.START)
-        self.labels['connecting_info'].set_valign(Gtk.Align.START)
+        self.labels['connecting_info'] = Gtk.Label(
+            label=_("Starting WiFi Association"), halign=Gtk.Align.START, valign=Gtk.Align.START)
         scroll.add(self.labels['connecting_info'])
         self._gtk.Dialog(_("Starting WiFi Association"), buttons, scroll, self._gtk.remove_dialog)
         self._screen.show_all()
@@ -333,11 +318,8 @@ class Panel(ScreenPanel):
         if "add_network" in self.labels:
             del self.labels['add_network']
 
-        label = self._gtk.Label(_("PSK for") + ' ssid')
-        label.set_hexpand(False)
-        self.labels['network_psk'] = Gtk.Entry()
-        self.labels['network_psk'].set_text('')
-        self.labels['network_psk'].set_hexpand(True)
+        label = Gtk.Label(label=_("PSK for") + ' ssid', hexpand=False)
+        self.labels['network_psk'] = Gtk.Entry(hexpand=True)
         self.labels['network_psk'].connect("activate", self.add_new_network, ssid, True)
         self.labels['network_psk'].connect("focus-in-event", self._screen.show_keyboard)
 
@@ -349,10 +331,8 @@ class Panel(ScreenPanel):
         box.pack_start(self.labels['network_psk'], True, True, 5)
         box.pack_start(save, False, False, 5)
 
-        self.labels['add_network'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-        self.labels['add_network'].set_valign(Gtk.Align.CENTER)
-        self.labels['add_network'].set_hexpand(True)
-        self.labels['add_network'].set_vexpand(True)
+        self.labels['add_network'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5, valign=Gtk.Align.CENTER,
+                                             hexpand=True, vexpand=True)
         self.labels['add_network'].pack_start(label, True, True, 5)
         self.labels['add_network'].pack_start(box, True, True, 5)
 

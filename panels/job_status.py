@@ -16,8 +16,7 @@ from ks_includes.KlippyGtk import find_widget
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
-        self.grid = self._gtk.HomogeneousGrid()
-        self.grid.set_row_homogeneous(False)
+        self.grid = Gtk.Grid(column_homogeneous=True)
         self.pos_z = 0.0
         self.extrusion = 100
         self.speed_factor = 1.0
@@ -47,9 +46,7 @@ class Panel(ScreenPanel):
                 'flowrate']
 
         for item in data:
-            self.labels[item] = Gtk.Label(label="-")
-            self.labels[item].set_vexpand(True)
-            self.labels[item].set_hexpand(True)
+            self.labels[item] = Gtk.Label(label="-", hexpand=True, vexpand=True)
 
         self.labels['left'] = Gtk.Label(_("Left:"))
         self.labels['elapsed'] = Gtk.Label(_("Elapsed:"))
@@ -83,9 +80,8 @@ class Panel(ScreenPanel):
                 "speed": "-"
             }
 
-        self.labels['file'] = Gtk.Label(label="Filename")
+        self.labels['file'] = Gtk.Label(label="Filename", hexpand=True)
         self.labels['file'].get_style_context().add_class("printing-filename")
-        self.labels['file'].set_hexpand(True)
         self.labels['status'] = Gtk.Label(label="Status")
         self.labels['status'].get_style_context().add_class("printing-status")
         self.labels['lcdmessage'] = Gtk.Label()
@@ -104,14 +100,12 @@ class Panel(ScreenPanel):
         self.labels['darea'] = Gtk.DrawingArea()
         self.labels['darea'].connect("draw", self.on_draw)
 
-        box = Gtk.Box()
-        box.set_halign(Gtk.Align.CENTER)
+        box = Gtk.Box(halign=Gtk.Align.CENTER)
         self.labels['progress_text'] = Gtk.Label(label="0%")
         self.labels['progress_text'].get_style_context().add_class("printing-progress-text")
         box.add(self.labels['progress_text'])
 
-        overlay = Gtk.Overlay()
-        overlay.set_hexpand(True)
+        overlay = Gtk.Overlay(hexpand=True)
         overlay.add(self.labels['darea'])
         overlay.add_overlay(box)
         self.grid.attach(overlay, 0, 0, 1, 1)
@@ -128,8 +122,7 @@ class Panel(ScreenPanel):
 
         self.buttons = {}
         self.create_buttons()
-        self.buttons['button_grid'] = self._gtk.HomogeneousGrid()
-        self.buttons['button_grid'].set_vexpand(False)
+        self.buttons['button_grid'] = Gtk.Grid(row_homogeneous=True, column_homogeneous=True, vexpand=False)
         self.grid.attach(self.buttons['button_grid'], 0, 3, 4, 1)
 
         self.create_status_grid()
@@ -223,8 +216,7 @@ class Panel(ScreenPanel):
                                 n += 1
                                 break
 
-        szfe = Gtk.Grid()
-        szfe.set_column_homogeneous(True)
+        szfe = Gtk.Grid(column_homogeneous=True)
         szfe.attach(self.buttons['speed'], 0, 0, 3, 1)
         szfe.attach(self.buttons['z'], 2, 0, 2, 1)
         if self._printer.get_tools():
@@ -232,8 +224,7 @@ class Panel(ScreenPanel):
         if self._printer.get_fans():
             szfe.attach(self.buttons['fan'], 2, 1, 2, 1)
 
-        info = Gtk.Grid()
-        info.set_row_homogeneous(True)
+        info = Gtk.Grid(row_homogeneous=True)
         info.get_style_context().add_class("printing-info")
         info.attach(self.labels['temp_grid'], 0, 0, 1, 1)
         info.attach(szfe, 0, 1, 1, 2)
@@ -247,10 +238,7 @@ class Panel(ScreenPanel):
         goback.set_hexpand(False)
         goback.get_style_context().add_class("printing-info")
 
-        info = Gtk.Grid()
-        info.set_hexpand(True)
-        info.set_vexpand(True)
-        info.set_halign(Gtk.Align.START)
+        info = Gtk.Grid(hexpand=True, vexpand=True, halign=Gtk.Align.START)
         info.get_style_context().add_class("printing-info-secondary")
         info.attach(goback, 0, 0, 1, 6)
         info.attach(self.labels['flow'], 1, 0, 1, 1)
@@ -277,10 +265,7 @@ class Panel(ScreenPanel):
         pos_box.add(self.labels['pos_y'])
         pos_box.add(self.labels['pos_z'])
 
-        info = Gtk.Grid()
-        info.set_hexpand(True)
-        info.set_vexpand(True)
-        info.set_halign(Gtk.Align.START)
+        info = Gtk.Grid(hexpand=True, vexpand=True, halign=Gtk.Align.START)
         info.get_style_context().add_class("printing-info-secondary")
         info.attach(goback, 0, 0, 1, 6)
         info.attach(self.labels['speed_lbl'], 1, 0, 1, 1)
@@ -383,7 +368,7 @@ class Panel(ScreenPanel):
 
     def save_offset(self, widget, device):
         sign = "+" if self.zoffset > 0 else "-"
-        label = Gtk.Label()
+        label = Gtk.Label(hexpand=True, vexpand=True, wrap=True)
         if device == "probe":
             probe = self._printer.get_probe()
             saved_z_offset = probe['z_offset'] if probe else "?"
@@ -392,20 +377,12 @@ class Panel(ScreenPanel):
                             + _("Saved offset: %s") % saved_z_offset)
         elif device == "endstop":
             label.set_label(_("Apply %s%.3f offset to Endstop?") % (sign, abs(self.zoffset)))
-        label.set_hexpand(True)
-        label.set_halign(Gtk.Align.CENTER)
-        label.set_vexpand(True)
-        label.set_valign(Gtk.Align.CENTER)
-        label.set_line_wrap(True)
-        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        grid = self._gtk.HomogeneousGrid()
-        grid.attach(label, 0, 0, 1, 1)
         buttons = [
             {"name": _("Apply"), "response": Gtk.ResponseType.APPLY, "style": 'dialog-default'},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
         ]
-        self._gtk.Dialog(_("Save Z"), buttons, grid, self.save_confirm, device)
+        self._gtk.Dialog(_("Save Z"), buttons, label, self.save_confirm, device)
 
     def save_confirm(self, dialog, response_id, device):
         self._gtk.remove_dialog(dialog)
@@ -443,14 +420,8 @@ class Panel(ScreenPanel):
         ]
         if len(self._printer.get_stat("exclude_object", "objects")) > 1:
             buttons.insert(0, {"name": _("Exclude Object"), "response": Gtk.ResponseType.APPLY})
-        label = Gtk.Label()
+        label = Gtk.Label(hexpand=True, vexpand=True, wrap=True)
         label.set_markup(_("Are you sure you wish to cancel this print?"))
-        label.set_hexpand(True)
-        label.set_halign(Gtk.Align.CENTER)
-        label.set_vexpand(True)
-        label.set_valign(Gtk.Align.CENTER)
-        label.set_line_wrap(True)
-        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         self._gtk.Dialog(_("Cancel"), buttons, label, self.cancel_confirm)
 
     def cancel_confirm(self, dialog, response_id):
@@ -780,15 +751,12 @@ class Panel(ScreenPanel):
         buttons = [
             {"name": _("Close"), "response": Gtk.ResponseType.CANCEL}
         ]
-        height = self._screen.height * .9 - self._gtk.font_size * 7.5
-        pixbuf = self.get_file_image(self.filename, self._screen.width * .9, height)
+        pixbuf = self.get_file_image(self.filename, self._screen.width * .9, self._screen.height * .75)
         if pixbuf is None:
             return
         image = Gtk.Image.new_from_pixbuf(pixbuf)
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        box.add(image)
-        box.set_vexpand(True)
-        self._gtk.Dialog(self.filename, buttons, box, self.close_fullscreen_thumbnail)
+        image.set_vexpand(True)
+        self._gtk.Dialog(self.filename, buttons, image, self.close_fullscreen_thumbnail)
 
     def close_fullscreen_thumbnail(self, dialog, response_id):
         self._gtk.remove_dialog(dialog)
