@@ -339,6 +339,7 @@ class KlipperScreen(Gtk.Window):
         msg.get_child().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         msg.get_child().set_max_width_chars(40)
         msg.connect("clicked", self.close_popup_message)
+        msg.connect("pressed", self._button_pressed_feedback)
         msg.get_style_context().add_class("message_popup")
         if level == 1:
             msg.get_style_context().add_class("message_popup_echo")
@@ -479,6 +480,9 @@ class KlipperScreen(Gtk.Window):
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
 
+    def _button_pressed_feedback(self, widget=None):
+        os.system('/etc/scripts/ks_click.sh')
+
     def _go_to_submenu(self, widget, name):
         logging.info(f"#### Go to submenu {name}")
         # Find current menu item
@@ -545,6 +549,7 @@ class KlipperScreen(Gtk.Window):
 
         close = Gtk.Button()
         close.connect("clicked", self.close_screensaver)
+        close.connect("pressed", self._button_pressed_feedback)
 
         box = Gtk.Box()
         box.set_size_request(self.width, self.height)
