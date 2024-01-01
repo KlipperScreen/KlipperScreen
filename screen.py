@@ -871,9 +871,11 @@ class KlipperScreen(Gtk.Window):
 
     def init_printer(self):
         if self.initializing:
+            logging.info("Already Initializing")
             return False
         self.initializing = True
         if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:
+            logging.info("Stopping Retries")
             self.initializing = False
             return False
         state = self.apiclient.get_server_info()
