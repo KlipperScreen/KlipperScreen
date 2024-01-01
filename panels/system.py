@@ -10,14 +10,18 @@ from ks_includes.screen_panel import ScreenPanel
 # Same as ALLOWED_SERVICES in moonraker
 # https://github.com/Arksine/moonraker/blob/master/moonraker/components/machine.py
 ALLOWED_SERVICES = (
-    "crowsnest",
+    "klipper_mcu",
+    "webcamd",
     "MoonCord",
-    "moonraker",
-    "moonraker-telegram-bot",
     "klipper",
     "KlipperScreen",
+    "moonraker",
+    "moonraker-telegram-bot",
+    "moonraker-obico",
     "sonar",
-    "webcamd",
+    "crowsnest",
+    "octoeverywhere",
+    "ratos-configurator",
 )
 
 
