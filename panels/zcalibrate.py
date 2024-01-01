@@ -128,17 +128,20 @@ class Panel(ScreenPanel):
         self.buttons['start'].set_sensitive(False)
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
             self._screen._ws.klippy.gcode_script("G28")
-        if method == "probe":
-            self._move_to_position()
-            self._screen._ws.klippy.gcode_script("PROBE_CALIBRATE")
-        elif method == "mesh":
+        self._screen._ws.klippy.gcode_script("SET_GCODE_OFFSET Z=0")
+        if method == "mesh":
             self._screen._ws.klippy.gcode_script("BED_MESH_CALIBRATE")
-        elif method == "delta":
-            self._screen._ws.klippy.gcode_script("DELTA_CALIBRATE")
-        elif method == "delta_manual":
-            self._screen._ws.klippy.gcode_script("DELTA_CALIBRATE METHOD=manual")
-        elif method == "endstop":
-            self._screen._ws.klippy.gcode_script("Z_ENDSTOP_CALIBRATE")
+        else:
+            self._screen._ws.klippy.gcode_script("BED_MESH_CLEAR")
+            if method == "probe":
+                self._move_to_position()
+                self._screen._ws.klippy.gcode_script("PROBE_CALIBRATE")
+            elif method == "delta":
+                self._screen._ws.klippy.gcode_script("DELTA_CALIBRATE")
+            elif method == "delta_manual":
+                self._screen._ws.klippy.gcode_script("DELTA_CALIBRATE METHOD=manual")
+            elif method == "endstop":
+                self._screen._ws.klippy.gcode_script("Z_ENDSTOP_CALIBRATE")
 
     def _move_to_position(self):
         x_position = y_position = None
