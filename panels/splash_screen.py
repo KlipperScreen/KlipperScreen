@@ -19,13 +19,13 @@ class Panel(ScreenPanel):
         self.labels['menu'] = self._gtk.Button("settings", _("Menu"), "color4")
         self.labels['menu'].connect("clicked", self._screen._go_to_submenu, "")
         self.labels['restart'] = self._gtk.Button("refresh", _("Klipper Restart"), "color1")
-        self.labels['restart'].connect("clicked", self.restart)
+        self.labels['restart'].connect("clicked", self.restart_klipper)
         self.labels['firmware_restart'] = self._gtk.Button("refresh", _("Firmware Restart"), "color2")
         self.labels['firmware_restart'].connect("clicked", self.firmware_restart)
         self.labels['restart_system'] = self._gtk.Button("refresh", _("System Restart"), "color1")
-        self.labels['restart_system'].connect("clicked", self.restart_system)
+        self.labels['restart_system'].connect("clicked", self.reboot_poweroff, 'reboot')
         self.labels['shutdown'] = self._gtk.Button("shutdown", _('System Shutdown'), "color2")
-        self.labels['shutdown'].connect("clicked", self.shutdown)
+        self.labels['shutdown'].connect("clicked", self.reboot_poweroff, 'shutdown')
         self.labels['retry'] = self._gtk.Button("load", _('Retry'), "color3")
         self.labels['retry'].connect("clicked", self.retry)
 
@@ -98,27 +98,8 @@ class Panel(ScreenPanel):
     def firmware_restart(self, widget):
         self._screen._ws.klippy.restart_firmware()
 
-    def restart(self, widget):
+    def restart_klipper(self, widget):
         self._screen._ws.klippy.restart()
-
-    def shutdown(self, widget):
-        if self._screen._ws.connected:
-            self._screen._confirm_send_action(widget,
-                                              _("Are you sure you wish to shutdown the system?"),
-                                              "machine.shutdown")
-        else:
-            logging.info("OS Shutdown")
-            os.system("systemctl poweroff -i")
-
-    def restart_system(self, widget):
-
-        if self._screen._ws.connected:
-            self._screen._confirm_send_action(widget,
-                                              _("Are you sure you wish to reboot the system?"),
-                                              "machine.reboot")
-        else:
-            logging.info("OS Reboot")
-            os.system("systemctl reboot -i")
 
     def retry(self, widget):
         self.update_text((_("Connecting to %s") % self._screen.connecting_to_printer))
@@ -128,3 +109,32 @@ class Panel(ScreenPanel):
             self._screen.reinit_count = 0
             self._screen.init_printer()
         self.show_restart_buttons()
+
+    def reboot_poweroff(self, widget, method):
+        label = Gtk.Label(wrap=True, hexpand=True, vexpand=True)
+        if method == "reboot":
+            label.set_label(_("Are you sure you wish to reboot the system?"))
+            title = _("Restart")
+        else:
+            label.set_label(_("Are you sure you wish to shutdown the system?"))
+            title = _("Shutdown")
+        buttons = [
+            {"name": _("Host"), "response": Gtk.ResponseType.OK, "style": 'dialog-info'},
+            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
+        ]
+        if self._screen._ws.connected:
+            buttons.insert(1, {"name": _("Printer"), "response": Gtk.ResponseType.APPLY, "style": 'dialog-warning'})
+        self._gtk.Dialog(title, buttons, label, self.reboot_poweroff_confirm, method)
+
+    def reboot_poweroff_confirm(self, dialog, response_id, method):
+        self._gtk.remove_dialog(dialog)
+        if response_id == Gtk.ResponseType.OK:
+            if method == "reboot":
+                os.system("systemctl reboot -i")
+            else:
+                os.system("systemctl poweroff -i")
+        elif response_id == Gtk.ResponseType.APPLY:
+            if method == "reboot":
+                self._screen._ws.send_method("machine.reboot")
+            else:
+                self._screen._ws.send_method("machine.shutdown")
