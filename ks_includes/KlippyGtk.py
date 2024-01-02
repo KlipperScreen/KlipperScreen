@@ -204,7 +204,11 @@ class KlippyGtk:
         max_buttons = 3 if self.screen.vertical_mode else 4
         if len(buttons) > max_buttons:
             buttons = buttons[:max_buttons]
-        button_hsize = max(len(buttons), 3)
+        if len(buttons) > 2:
+            dialog.get_action_area().set_layout(Gtk.ButtonBoxStyle.EXPAND)
+            button_hsize = -1
+        else:
+            button_hsize = int((self.width / 3))
         for button in buttons:
             if 'style' in button:
                 style = button['style']
@@ -212,7 +216,7 @@ class KlippyGtk:
                 style = 'dialog-default'
             dialog.add_button(button['name'], button['response'])
             button = dialog.get_widget_for_response(button['response'])
-            button.set_size_request((self.width - 58) / button_hsize, self.height / 5)
+            button.set_size_request(button_hsize, round(self.height / 5))
             button.get_style_context().add_class(style)
             format_label(button, 2)
 
