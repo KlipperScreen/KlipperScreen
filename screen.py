@@ -878,7 +878,7 @@ class KlipperScreen(Gtk.Window):
         # Moonraker is ready, set a loop to init the printer
         self.reinit_count += 1
 
-        server_info = self.apiclient.get_server_info()["result"]
+        server_info = state["result"]
         logging.info(f"Moonraker info {server_info}")
         popup = ''
         level = 2
@@ -909,10 +909,10 @@ class KlipperScreen(Gtk.Window):
         if "spoolman" in server_info["components"]:
             self.printer.enable_spoolman()
 
-        if state['result']['klippy_connected'] is False:
+        if server_info['klippy_connected'] is False:
             logging.info("Klipper not connected")
             msg = _("Moonraker: connected") + "\n\n"
-            msg += f"Klipper: {state['result']['klippy_state']}" + "\n\n"
+            msg += f"Klipper: {server_info['klippy_state']}" + "\n\n"
             if self.reinit_count <= self.max_retries:
                 msg += _("Retrying") + f' #{self.reinit_count}'
             return self._init_printer(msg)
