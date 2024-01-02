@@ -402,8 +402,8 @@ class Panel(ScreenPanel):
         grid = self._gtk.HomogeneousGrid()
         grid.attach(label, 0, 0, 1, 1)
         buttons = [
-            {"name": _("Apply"), "response": Gtk.ResponseType.APPLY},
-            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
+            {"name": _("Apply"), "response": Gtk.ResponseType.APPLY, "style": 'dialog-default'},
+            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
         ]
         self._gtk.Dialog(_("Save Z"), buttons, grid, self.save_confirm, device)
 
@@ -438,8 +438,8 @@ class Panel(ScreenPanel):
 
     def cancel(self, widget):
         buttons = [
-            {"name": _("Cancel Print"), "response": Gtk.ResponseType.OK},
-            {"name": _("Go Back"), "response": Gtk.ResponseType.CANCEL}
+            {"name": _("Cancel Print"), "response": Gtk.ResponseType.OK, "style": 'dialog-error'},
+            {"name": _("Go Back"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-info'}
         ]
         if len(self._printer.get_stat("exclude_object", "objects")) > 1:
             buttons.insert(0, {"name": _("Exclude Object"), "response": Gtk.ResponseType.APPLY})

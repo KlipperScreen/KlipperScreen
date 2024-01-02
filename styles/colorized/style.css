@@ -176,17 +176,9 @@ textview .time {
 
 .dialog button {
     background-color: @solarized-base02;
-    border-bottom-color: @solarized-cyan;
     border-radius: .75em;
 }
 
-.dialog button:nth-child(1) {
-    border-bottom-color: @solarized-green;
-}
-
-.dialog button:nth-child(2) {
-    border-bottom-color:  @solarized-red;
-}
 .tempbutton_top,
 .tempbutton,
 .tempbutton_bottom,
@@ -266,4 +258,28 @@ textview .time {
 
 .keyboard_pad {
     background-color: @solarized-base02;
+}
+
+.dialog-error {
+    border-bottom-color: @solarized-red;
+}
+
+.dialog-warning {
+    border-bottom-color: @olarized-yellow;
+}
+
+.dialog-info {
+    border-bottom-color: @solarized-cyan;
+}
+
+.dialog-default {
+    border-bottom-color: @solarized-green;
+}
+
+.dialog-secondary {
+     border-bottom-color: @solarized-magenta;
+}
+
+.dialog-primary {
+     border-bottom-color: @solarized-orange;
 }

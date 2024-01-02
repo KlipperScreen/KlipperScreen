@@ -25,6 +25,7 @@ from ks_includes.files import KlippyFiles
 from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.printer import Printer
 from ks_includes.widgets.keyboard import Keyboard
+from ks_includes.widgets.prompts import Prompt
 from ks_includes.config import KlipperScreenConfig
 from panels.base_panel import BasePanel
 
@@ -95,6 +96,7 @@ class KlipperScreen(Gtk.Window):
     wayland = False
     windowed = False
     notification_log = []
+    prompt = None
 
     def __init__(self, args):
         try:
@@ -769,7 +771,12 @@ class KlipperScreen(Gtk.Window):
             self.panels['splash_screen'].check_power_status()
         elif action == "notify_gcode_response" and self.printer.state not in ["error", "shutdown"]:
             if not (data.startswith("B:") or data.startswith("T:")):
-                if data.startswith("echo: "):
+                if data.startswith("// action:"):
+                    self.wake_screen()
+                    if self.prompt is None:
+                        self.prompt = Prompt(self)
+                    self.prompt.decode(data[10:])
+                elif data.startswith("echo: "):
                     self.show_popup_message(data[6:], 1)
                 elif data.startswith("!! "):
                     self.show_popup_message(data[3:], 3)
@@ -793,8 +800,8 @@ class KlipperScreen(Gtk.Window):
 
     def _confirm_send_action(self, widget, text, method, params=None):
         buttons = [
-            {"name": _("Accept"), "response": Gtk.ResponseType.OK},
-            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
+            {"name": _("Accept"), "response": Gtk.ResponseType.OK, "style": 'dialog-info'},
+            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
         ]
 
         try:

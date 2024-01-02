@@ -218,21 +218,30 @@ class KlippyGtk:
         if not self.screen.windowed:
             dialog.fullscreen()
 
+        max_buttons = 3 if self.screen.vertical_mode else 4
+        if len(buttons) > max_buttons:
+            buttons = buttons[:max_buttons]
+        button_hsize = max(len(buttons), 3)
         for button in buttons:
+            if 'style' in button:
+                style = button['style']
+            else:
+                style = 'dialog-default'
             dialog.add_button(button['name'], button['response'])
             button = dialog.get_widget_for_response(button['response'])
-            button.set_size_request((self.width - 30) / 3, self.height / 5)
-            format_label(button, 3)
+            button.set_size_request((self.width - 58) / button_hsize, self.height / 5)
+            button.get_style_context().add_class(style)
+            format_label(button, 2)
 
         dialog.connect("response", self.screen.reset_screensaver_timeout)
         dialog.connect("response", callback, *args)
         dialog.get_style_context().add_class("dialog")
 
         content_area = dialog.get_content_area()
-        content_area.set_margin_start(15)
-        content_area.set_margin_end(15)
-        content_area.set_margin_top(15)
-        content_area.set_margin_bottom(15)
+        content_area.set_margin_start(5)
+        content_area.set_margin_end(5)
+        content_area.set_margin_top(5)
+        content_area.set_margin_bottom(0)
         content.set_valign(Gtk.Align.CENTER)
         content_area.add(content)
 

@@ -5,6 +5,7 @@
 @define-color bg #13181C;
 @define-color active #324A5E;
 @define-color error #981E1F;
+@define-color warning #f9a825;
 @define-color text white;
 @define-color text-inv black;
 @define-color lines #cccccc;
@@ -135,18 +136,6 @@ textview .time {
     background-color: @bg;
 }
 
-.dialog button {
-    border-bottom-color: @color3;
-}
-
-.dialog button:nth-child(1) {
-    border-bottom-color: @color4;
-}
-
-.dialog button:nth-child(2) {
-    border-bottom-color: @error;
-}
-
 .distbutton_active {
     background-color: @active;
     border-color: @color1;
@@ -202,4 +191,28 @@ textview .time {
 
 .keyboard_pad {
     background-color: @bg;
+}
+
+.dialog-error {
+    border-bottom-color: @error;
+}
+
+.dialog-warning {
+    border-bottom-color: @warning;
+}
+
+.dialog-info {
+    border-bottom-color: @color4;
+}
+
+.dialog-default {
+    border-bottom-color: @color3;
+}
+
+.dialog-secondary {
+    border-bottom-color: @color2;
+}
+
+.dialog-primary {
+    border-bottom-color: @color1;
 }
