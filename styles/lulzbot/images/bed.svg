@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="bed.svg"
+   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <metadata
+     id="metadata16">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>folder</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     pagecolor="#bfbfbf"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="826"
+     id="namedview12"
+     showgrid="false"
+     inkscape:pagecheckerboard="false"
+     inkscape:zoom="7.6562596"
+     inkscape:cx="33.175469"
+     inkscape:cy="32.065266"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg10"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:document-rotation="0" />
+  <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title2">folder</title>
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <path
+     d="m 60.5,47.162805 c 0,-1.581095 -1.289285,-2.887217 -2.849999,-2.887217 H 6.3500004 c -1.5607143,0 -2.85,1.306122 -2.85,2.887217 v 1.099893 c 0,1.581095 1.2892857,2.887218 2.85,2.887218 H 57.650001 c 1.560714,0 2.849999,-1.306123 2.849999,-2.887218 z"
+     id="path19"
+     stroke-width="3"
+     fill="#ffffff"
+     stroke-linecap="round"
+     style="fill-rule:evenodd;stroke:#ffffff;fill:none" />
+  <polyline
+     id="polyline21"
+     stroke-width="3.35312"
+     stroke-linejoin="round"
+     points="8.49019608 55.6078431 8.49019608 60 15.0784314 60 15.0784314 55.6078431"
+     style="fill:none;fill-rule:evenodd;stroke:#ffffff"
+     transform="matrix(0.89501232,0,0,0.89436406,0.81496344,3.3803529)" />
+  <polyline
+     id="polyline23"
+     stroke-width="3.35312"
+     stroke-linejoin="round"
+     points="54.6078431 55.6078431 54.6078431 60 61.1960784 60 61.1960784 55.6078431"
+     style="fill:none;fill-rule:evenodd;stroke:#ffffff"
+     transform="matrix(0.89501232,0,0,0.89436406,0.81496344,3.3803529)" />
+  <path
+     d="m 32,38.889591 c 0,0 2.948277,-8.130798 2.948277,-11.129863 0,-3.199003 -5.896552,-7.797569 -5.896552,-11.129864 C 29.051725,13.630799 32,5.5 32,5.5"
+     id="path25"
+     stroke-width="3"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="fill:none;fill-rule:evenodd;stroke:#ffffff" />
+  <path
+     d="m 42.810346,38.889591 c 0,0 2.948275,-8.130798 2.948275,-11.129863 0,-3.199003 -5.896551,-7.797569 -5.896551,-11.129864 C 39.86207,13.630799 42.810346,5.5 42.810346,5.5"
+     id="path27"
+     stroke-width="3"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="fill:none;fill-rule:evenodd;stroke:#ffffff" />
+  <path
+     d="m 21.189656,38.889591 c 0,0 2.948275,-8.130798 2.948275,-11.129863 0,-3.199003 -5.896551,-7.797569 -5.896551,-11.129864 C 18.24138,13.630799 21.189656,5.5 21.189656,5.5"
+     id="path29"
+     stroke-width="3"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="fill:none;fill-rule:evenodd;stroke:#ffffff" />
+  <path
+     d="m 53.62069,38.889591 c 0,0 2.948277,-8.130798 2.948277,-11.129863 0,-3.199003 -5.896553,-7.797569 -5.896553,-11.129864 C 50.672414,13.630799 53.62069,5.5 53.62069,5.5"
+     id="path31"
+     stroke-width="3"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="fill:none;fill-rule:evenodd;stroke:#ffffff" />
+  <path
+     d="m 10.379311,38.889591 c 0,0 2.948276,-8.130798 2.948276,-11.129863 0,-3.199003 -5.8965521,-7.797569 -5.8965521,-11.129864 C 7.4310349,13.630799 10.379311,5.5 10.379311,5.5"
+     id="path33"
+     stroke-width="3"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     style="fill:none;fill-rule:evenodd;stroke:#ffffff" />
+</svg>

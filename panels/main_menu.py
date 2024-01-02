@@ -132,8 +132,8 @@ class Panel(MenuPanel):
         if can_target:
             self.labels['da'].add_object(device, "targets", rgb, True, False)
 
-        name = self._gtk.Button(image, self.prettify(devname), None, self.bts, Gtk.PositionType.LEFT, 1)
-        name.connect("clicked", self.toggle_visibility, device)
+        name = self._gtk.Label(self.prettify(devname))
+        #name.connect("clicked", self.toggle_visibility, device)
         name.set_alignment(0, .5)
         name.get_style_context().add_class(class_name)
         visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}", device, fallback=True)
@@ -163,7 +163,7 @@ class Panel(MenuPanel):
         return True
 
     def toggle_visibility(self, widget, device):
-        self.devices[device]['visible'] ^= True
+        self.devices[device]['visible'] = False # swapping "^= True" to "= Flase" so the temp graph does not show up
         logging.info(f"Graph show {self.devices[device]['visible']}: {device}")
 
         section = f"graph {self._screen.connected_printer}"
@@ -255,6 +255,7 @@ class Panel(MenuPanel):
         self.main_menu.show_all()
         self.numpad_visible = False
         self._screen.base_panel.set_control_sensitive(False, control='back')
+        self.update_graph_visibility()
 
     def process_update(self, action, data):
         if action != "notify_status_update":

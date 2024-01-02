@@ -1,0 +1,43 @@
+/* Lulzbot KlipperScreen Theme 4/19/2023 CDS */
+/* Added disabled button opacity 11/9/2023 CDS */
+/* Adding comments, adjusting colors, made switches change color 11/20/2023 CDS */
+
+
+/* This sets the Lulzbot background Logo */
+window {background-image: url("/home/biqu/KlipperScreen/styles/lulzbot/Lulzbot_Logo_Very_Dark.jpg");}
+
+/* This sets the buttons to be transparent so you can see the background image, and rounds the ends of the lines below the icons. */
+button {background-color: rgba(0,0,0,0);border-radius:1em;}
+
+/* This sets the background color of the button to LulzBot green while you are pressing it */
+button:active {background-color: #c1d82f;}
+
+/* This sets the off and on colors for switches.  #4b5412 #383f0e */
+switch {background-color: #383f0e;}
+treeview.view check:checked,
+switch:checked {
+    background-color: #9db026;
+}
+
+/* This changes the lines below the main screen right side icons to LulzBot green. */
+button.color1 {border-bottom-color: #c1d82f;}
+button.color2 {border-bottom-color: #c1d82f;}
+button.color3 {border-bottom-color: #c1d82f;}
+button.color4 {border-bottom-color: #c1d82f;}
+
+/* This sets the color of the scroll bar slider button. */
+scrollbar slider {background-color: #383f0e;}
+
+/* This changes the color in the sliders for things like fan speed. */
+trough highlight, trough progress {
+    background-color: #9db026;
+    color: white;
+    border-color: black;
+}
+
+/* This changes the visiblity of the busy spinner for operations that take time.
+   The default is too dim and is almost invisible. */
+button:disabled {
+    opacity: 1;
+}
+

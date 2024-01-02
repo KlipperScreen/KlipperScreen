@@ -376,7 +376,7 @@ class Panel(ScreenPanel):
     def toggle_visibility(self, widget, device=None):
         if device is None:
             device = self.popover_device
-        self.devices[device]['visible'] ^= True
+        self.devices[device]['visible'] = False # swapping "^= True" to "= Flase" so the temp graph does not show up
         logging.info(f"Graph show {self.devices[device]['visible']}: {device}")
 
         section = f"graph {self._screen.connected_printer}"
