@@ -97,7 +97,6 @@ class Prompt:
         for button in self.buttons:
             if button['response'] == response_id:
                 self.screen._send_action(None, "printer.gcode.script", {'script': button['gcode']})
-        self.end()
 
     def end(self, *args):
         if self.prompt is not None:
