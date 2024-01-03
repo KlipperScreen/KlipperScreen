@@ -69,16 +69,12 @@ class Prompt:
 
         close = self.gtk.Button("cancel", scale=self.gtk.bsidescale)
         close.set_hexpand(False)
+        close.set_vexpand(False)
         close.connect("clicked", self.end)
 
         scroll = self.gtk.ScrolledWindow(steppers=False)
-        scroll.set_vexpand(True)
-        if self.screen.vertical_mode:
-            scroll.set_size_request(self.gtk.width - 30, self.gtk.height * .6)
-        else:
-            scroll.set_size_request(self.gtk.width - 30, self.gtk.height * .4)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        scroll.add(Gtk.Label(label=self.text, wrap=True, vexpand=True))
+        scroll.add(Gtk.Label(label=self.text, wrap=True, hexpand=True, vexpand=True))
 
         content = Gtk.Grid()
         if not self.screen.windowed:
