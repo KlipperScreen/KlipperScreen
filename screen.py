@@ -172,6 +172,11 @@ class KlipperScreen(Gtk.Window):
         self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
         self.log_notification("KlipperScreen Started", 1)
         self.initial_connection()
+        if sys.version_info == (3, 7):
+            GLib.timeout_add_seconds(2, self.show_popup_message,
+                                     _("Warning") + f" Python 3.7\n"
+                                     + _("Ended official support in June 2023") + "\n"
+                                     + _("KlipperScreen will drop support in June 2024"), 2)
 
     def initial_connection(self):
         self.printers = self._config.get_printers()
