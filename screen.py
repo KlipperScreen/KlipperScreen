@@ -851,11 +851,13 @@ class KlipperScreen(Gtk.Window):
             else:
                 self._ws.klippy.power_device_off(dev)
 
-    def _init_printer(self, msg, remove=False):
+    def _init_printer(self, msg, remove=False, klipper=False):
         self.printer_initializing(msg, remove)
         self.initializing = False
-        GLib.timeout_add_seconds(3, self.init_printer)
-        return False
+        if klipper:
+            GLib.timeout_add_seconds(3, self.init_klipper)
+        else:
+            GLib.timeout_add_seconds(3, self.init_printer)
 
     def init_printer(self):
         if self.initializing:
@@ -875,11 +877,11 @@ class KlipperScreen(Gtk.Window):
         self.connected_printer = self.connecting_to_printer
         self.base_panel.set_ks_printer_cfg(self.connected_printer)
 
+        self.init_server(state["result"])
         # Moonraker is ready, set a loop to init the printer
-        self.reinit_count += 1
+        return self.init_klipper(state["result"])
 
-        server_info = state["result"]
-        logging.info(f"Moonraker info {server_info}")
+    def init_server(self, server_info):
         popup = ''
         level = 2
         if server_info["warnings"]:
@@ -909,13 +911,23 @@ class KlipperScreen(Gtk.Window):
         if "spoolman" in server_info["components"]:
             self.printer.enable_spoolman()
 
+    def init_klipper(self, server_info=None):
+        if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:
+            logging.info("Stopping Retries")
+            return False
+        if not server_info:
+            server_info = self.apiclient.get_server_info()["result"]
+        logging.info(f"Moonraker info {server_info}")
+
+        self.reinit_count += 1
+
         if server_info['klippy_connected'] is False:
             logging.info("Klipper not connected")
             msg = _("Moonraker: connected") + "\n\n"
             msg += f"Klipper: {server_info['klippy_state']}" + "\n\n"
             if self.reinit_count <= self.max_retries:
                 msg += _("Retrying") + f' #{self.reinit_count}'
-            return self._init_printer(msg)
+            return self._init_printer(msg, klipper=True)
         printer_info = self.apiclient.get_printer_info()
         if printer_info is False:
             return self._init_printer("Unable to get printer info from moonraker")
