@@ -28,7 +28,6 @@ class Panel(ScreenPanel):
         shutdown.set_vexpand(False)
 
         self.update_msg = Gtk.Label(label=_("Checking for updates, please wait..."), vexpand=True)
-        self.moonraker_error_msg = Gtk.Label(label=_("Moonraker update manager is not responding"), vexpand=True)
 
         self.scroll = self._gtk.ScrolledWindow()
         self.scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
@@ -87,7 +86,7 @@ class Panel(ScreenPanel):
             if 'error' in response:
                 self.scroll.add(Gtk.Label(label=f"Moonraker: {response['error']['message']}", vexpand=True))
             else:
-                self.scroll.add(self.moonraker_error_msg)
+                self.scroll.add(Gtk.Label(label=_("Not working or not configured"), vexpand=True))
         else:
             self.update_status = response['result']
             self.update_all.set_sensitive(True)
