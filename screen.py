@@ -110,6 +110,7 @@ class KlipperScreen(Gtk.Window):
         self.dialogs = []
         self.confirm = None
         self.panels_reinit = []
+        self.last_popup_time = datetime.now()
 
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
@@ -328,6 +329,9 @@ class KlipperScreen(Gtk.Window):
         self.process_update("notify_log", log_entry)
 
     def show_popup_message(self, message, level=3):
+        if (datetime.now() - self.last_popup_time).seconds < 1:
+            return
+        self.last_popup_time = datetime.now()
         self.close_screensaver()
         if self.popup_message is not None:
             self.close_popup_message()
