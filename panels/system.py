@@ -140,7 +140,7 @@ class Panel(ScreenPanel):
                     title.set_markup(f"\n<b>{c['subject']}</b>\n<i>{c['author']}</i>\n")
                     commit_box.add(title)
 
-                    details = Gtk.Label(label=f"{c['message']}", wrap=True, hexpand=True)
+                    details = Gtk.Label(label=c['message'], wrap=True, hexpand=True)
                     commit_box.add(details)
                     commit_box.add(Gtk.Separator())
                     vbox.add(commit_box)
