@@ -2,7 +2,7 @@ import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk
 
 
 class Prompt:
@@ -15,10 +15,14 @@ class Prompt:
         self.id = 1
         self.prompt = None
 
+    def _key_press_event(self, widget, event):
+        keyval_name = Gdk.keyval_name(event.keyval)
+        if keyval_name == "Escape" or keyval_name == "BackSpace":
+            self.close()
+
     def decode(self, data):
         logging.info(f'{data}')
         if data.startswith('prompt_begin'):
-            # action:prompt_begin <headline>
             self.header = data.replace('prompt_begin', '')
             if self.header:
                 self.window_title = self.header
@@ -26,14 +30,9 @@ class Prompt:
             self.buttons = []
             return
         elif data.startswith('prompt_text'):
-            # action:prompt_text <text>
             self.text = data.replace('prompt_text ', '')
             return
         elif data.startswith('prompt_button ') or data.startswith('prompt_footer_button'):
-            # action:prompt_button <label>|<gcode?>|<color?>
-            #     <label>: text of the button
-            #     <gcode?>: optional G-Code (Default is the label text)
-            #     <color?>: optional secondary, info, warning, error
             data = data.replace('prompt_button ', '')
             data = data.replace('prompt_footer_button ', '')
             params = data.split('|')
@@ -70,7 +69,7 @@ class Prompt:
         close = self.gtk.Button("cancel", scale=self.gtk.bsidescale)
         close.set_hexpand(False)
         close.set_vexpand(False)
-        close.connect("clicked", self.end)
+        close.connect("clicked", self.close)
 
         scroll = self.gtk.ScrolledWindow(steppers=False)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
@@ -88,13 +87,20 @@ class Prompt:
             content,
             self.response,
         )
+        self.prompt.connect("key-press-event", self._key_press_event)
+        self.prompt.connect("delete-event", self.close)
+        self.screen.wake_screen()
 
     def response(self, dialog, response_id):
         for button in self.buttons:
             if button['response'] == response_id:
                 self.screen._send_action(None, "printer.gcode.script", {'script': button['gcode']})
 
-    def end(self, *args):
+    def close(self, *args):
+        script = {'script': 'RESPOND type="command" msg="action:prompt_end"'}
+        self.screen._send_action(None, "printer.gcode.script", script)
+
+    def end(self):
         if self.prompt is not None:
             self.gtk.remove_dialog(self.prompt)
         self.prompt = None
