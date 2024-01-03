@@ -41,6 +41,7 @@ class Panel(ScreenPanel):
         self.main_grid.attach(shutdown, 3, 2, 1, 1)
         self.content.add(self.main_grid)
 
+    def activate(self):
         self._screen._ws.send_method('machine.update.status', callback=self.get_updates)
 
     def create_info_grid(self):
@@ -151,6 +152,7 @@ class Panel(ScreenPanel):
                 + ':</b>\n'
             ))
             label.set_vexpand(False)
+            vbox.set_valign(Gtk.Align.CENTER)
             vbox.add(label)
             grid = Gtk.Grid(column_homogeneous=True, halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER)
             i = 0
