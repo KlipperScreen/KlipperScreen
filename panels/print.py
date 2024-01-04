@@ -26,7 +26,6 @@ class Panel(ScreenPanel):
             "date": _("Date")
         }
         self.sort_icon = ["arrow-up", "arrow-down"]
-        self.scroll = self._gtk.ScrolledWindow()
         self.files = {}
         self.directories = {}
         self.labels['directories'] = {}
@@ -35,6 +34,7 @@ class Panel(ScreenPanel):
         self.time_24 = self._config.get_main_config().getboolean("24htime", True)
         self.space = '  ' if self._screen.width > 480 else '\n'
         logging.info(f"24h time is {self.time_24}")
+        self.showing_rename = False
 
         sbox = Gtk.Box(hexpand=True, vexpand=False)
         for i, (name, val) in enumerate(self.sort_items.items(), start=1):
@@ -50,31 +50,26 @@ class Panel(ScreenPanel):
         refresh.connect('clicked', self._refresh_files)
         sbox.add(refresh)
 
-        pbox = Gtk.Box(hexpand=True, vexpand=False)
         self.labels['path'] = Gtk.Label()
-        pbox.add(self.labels['path'])
-        self.labels['path_box'] = pbox
+        self.scroll = self._gtk.ScrolledWindow()
 
         self.main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
         self.main.pack_start(sbox, False, False, 0)
-        self.main.pack_start(pbox, False, False, 0)
+        self.main.pack_start(self.labels['path'], False, False, 0)
         self.main.pack_start(self.scroll, True, True, 0)
+        self.content.add(self.main)
 
         self.dir_panels['gcodes'] = Gtk.Grid()
-
         GLib.idle_add(self.reload_files)
-
         self.scroll.add(self.dir_panels['gcodes'])
-        self.content.add(self.main)
         self._screen.files.add_file_callback(self._callback)
-        self.showing_rename = False
 
     def activate(self):
         if self.cur_directory != "gcodes":
             self.change_dir(None, "gcodes")
         self._refresh_files()
 
-    def add_directory(self, directory, show=True):
+    def add_directory(self, directory):
         parent_dir = os.path.dirname(directory)
         modified = 0
         for x in self._files.directories:
@@ -97,10 +92,9 @@ class Panel(ScreenPanel):
 
         self.dir_panels[parent_dir].insert_row(pos)
         self.dir_panels[parent_dir].attach(self.directories[directory], 0, pos, 1, 1)
-        if show is True:
-            self.dir_panels[parent_dir].show_all()
+        self.dir_panels[parent_dir].show_all()
 
-    def add_file(self, filepath, show=True):
+    def add_file(self, filepath):
         fileinfo = self._screen.files.get_file_info(filepath)
         if fileinfo is None:
             return
@@ -145,9 +139,7 @@ class Panel(ScreenPanel):
 
         self.dir_panels[directory].insert_row(pos)
         self.dir_panels[directory].attach(self.files[filepath], 0, pos, 1, 1)
-        if show is True:
-            self.dir_panels[directory].show_all()
-        return False
+        self.dir_panels[directory].show_all()
 
     def _create_row(self, fullpath, filename=None):
         name = Gtk.Label(hexpand=True, halign=Gtk.Align.START, wrap=True, wrap_mode=Pango.WrapMode.CHAR)
@@ -165,40 +157,22 @@ class Panel(ScreenPanel):
         rename = self._gtk.Button("files", style="color2", scale=self.bts)
         rename.set_hexpand(False)
 
+        row = Gtk.Grid(hexpand=True, vexpand=False)
+        row.get_style_context().add_class("frame-item")
+
         if filename:
-            action = self._gtk.Button("print", style="color3")
-            action.connect("clicked", self.confirm_print, fullpath)
+            if os.path.splitext(filename)[1] in [".gcode", ".g", ".gco"]:
+                action = self._gtk.Button("print", style="color3")
+                action.connect("clicked", self.confirm_print, fullpath)
+                action.set_hexpand(False)
+                action.set_halign(Gtk.Align.END)
+                row.attach(action, 4, 0, 1, 2)
             info.set_markup(self.get_file_info_str(fullpath))
             icon = Gtk.Button()
             icon.connect("clicked", self.confirm_print, fullpath)
             delete.connect("clicked", self.confirm_delete_file, f"gcodes/{fullpath}")
             rename.connect("clicked", self.show_rename, f"gcodes/{fullpath}")
             GLib.idle_add(self.image_load, fullpath)
-        else:
-            action = self._gtk.Button("load", style="color3")
-            action.connect("clicked", self.change_dir, fullpath)
-            icon = self._gtk.Button("folder")
-            icon.connect("clicked", self.change_dir, fullpath)
-            delete.connect("clicked", self.confirm_delete_directory, fullpath)
-            rename.connect("clicked", self.show_rename, fullpath)
-        icon.set_hexpand(False)
-        action.set_hexpand(False)
-        action.set_halign(Gtk.Align.END)
-
-        delete.connect("clicked", self.confirm_delete_file, f"gcodes/{fullpath}")
-
-        row = Gtk.Grid(hexpand=True, vexpand=False)
-        row.get_style_context().add_class("frame-item")
-        row.attach(icon, 0, 0, 1, 2)
-        row.attach(name, 1, 0, 3, 1)
-        row.attach(info, 1, 1, 1, 1)
-        row.attach(rename, 2, 1, 1, 1)
-        row.attach(delete, 3, 1, 1, 1)
-
-        if not filename or (filename and os.path.splitext(filename)[1] in [".gcode", ".g", ".gco"]):
-            row.attach(action, 4, 0, 1, 2)
-
-        if filename is not None:
             self.files[fullpath] = row
             self.labels['files'][fullpath] = {
                 "icon": icon,
@@ -206,12 +180,28 @@ class Panel(ScreenPanel):
                 "name": name
             }
         else:
+            action = self._gtk.Button("load", style="color3")
+            action.connect("clicked", self.change_dir, fullpath)
+            action.set_hexpand(False)
+            action.set_halign(Gtk.Align.END)
+            row.attach(action, 4, 0, 1, 2)
+            icon = self._gtk.Button("folder")
+            icon.connect("clicked", self.change_dir, fullpath)
+            delete.connect("clicked", self.confirm_delete_directory, fullpath)
+            rename.connect("clicked", self.show_rename, fullpath)
             self.directories[fullpath] = row
             self.labels['directories'][fullpath] = {
                 "info": info,
                 "name": name
             }
             self.dir_panels[fullpath] = Gtk.Grid()
+        icon.set_hexpand(False)
+
+        row.attach(icon, 0, 0, 1, 2)
+        row.attach(name, 1, 0, 3, 1)
+        row.attach(info, 1, 1, 1, 1)
+        row.attach(rename, 2, 1, 1, 1)
+        row.attach(delete, 3, 1, 1, 1)
 
     def image_load(self, filepath):
         pixbuf = self.get_file_image(filepath, small=True)
