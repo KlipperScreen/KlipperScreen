@@ -50,19 +50,21 @@ class Panel(ScreenPanel):
         refresh.connect('clicked', self._refresh_files)
         sbox.add(refresh)
 
-        self.labels['path'] = Gtk.Label()
-        self.scroll = self._gtk.ScrolledWindow()
+        self.labels['path'] = Gtk.Label(label=_('Loading...'), vexpand=True, no_show_all=True)
+        self.labels['path'].show()
 
         self.main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
         self.main.pack_start(sbox, False, False, 0)
         self.main.pack_start(self.labels['path'], False, False, 0)
-        self.main.pack_start(self.scroll, True, True, 0)
-        self.content.add(self.main)
 
         self.dir_panels['gcodes'] = Gtk.Grid()
         GLib.idle_add(self.reload_files)
+        self.scroll = self._gtk.ScrolledWindow()
+        self.scroll.hide()
+        self.main.pack_start(self.scroll, True, True, 0)
         self.scroll.add(self.dir_panels['gcodes'])
         self._screen.files.add_file_callback(self._callback)
+        self.content.add(self.main)
 
     def activate(self):
         if self.cur_directory != "gcodes":
@@ -248,10 +250,14 @@ class Panel(ScreenPanel):
         for child in self.scroll.get_children():
             self.scroll.remove(child)
         self.cur_directory = directory
-        self.labels['path'].set_text(f"  {self.cur_directory[7:]}")
+        self.labels['path'].set_text(self.cur_directory)
 
         self.scroll.add(self.dir_panels[directory])
         self.content.show_all()
+        if self.cur_directory == 'gcodes':
+            self.labels['path'].hide()
+        else:
+            self.labels['path'].show()
 
     def change_sort(self, widget, key):
         if self.sort_current[0] == key:
@@ -357,7 +363,10 @@ class Panel(ScreenPanel):
         flist = sorted(self._screen.files.get_file_list(), key=lambda item: '/' in item)
         for file in flist:
             GLib.idle_add(self.add_file, file)
-        return False
+        self.labels['path'].set_vexpand(False)
+        self.labels['path'].set_text(self.cur_directory)
+        if self.cur_directory == 'gcodes':
+            self.labels['path'].hide()
 
     def update_file(self, filename):
         if filename not in self.labels['files']:
