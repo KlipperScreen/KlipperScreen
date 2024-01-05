@@ -28,8 +28,8 @@ class BasePanel(ScreenPanel):
         self.control['back'].connect("clicked", self.back)
         self.control['home'] = self._gtk.Button('main', scale=abscale)
         self.control['home'].connect("clicked", self._screen._menu_go_back, True)
-        self.control['estop'] = self._gtk.Button('emergency', scale=abscale)
-        self.control['estop'].connect("clicked", self.emergency_stop)
+        #self.control['estop'] = self._gtk.Button('emergency', scale=abscale)
+        #self.control['estop'].connect("clicked", self.emergency_stop)
         for control in self.control:
             self.set_control_sensitive(False, control)
         self.control['printer_select'] = self._gtk.Button('shuffle', scale=abscale)
@@ -63,7 +63,7 @@ class BasePanel(ScreenPanel):
         self.action_bar.add(self.control['home'])
         self.action_bar.add(self.control['printer_select'])
         self.action_bar.add(self.control['shortcut'])
-        self.action_bar.add(self.control['estop'])
+        #self.action_bar.add(self.control['estop'])
         self.show_printer_select(len(self._config.get_printers()) > 1)
 
         # Titlebar
@@ -187,7 +187,7 @@ class BasePanel(ScreenPanel):
         show = self._printer is not None and self._printer.state not in ('disconnected', 'startup', 'shutdown', 'error')
         self.show_shortcut(show)
         self.show_heaters(show)
-        self.set_control_sensitive(show, control='estop')
+        #self.set_control_sensitive(show, control='estop')
         for control in ('back', 'home'):
             self.set_control_sensitive(len(self._screen._cur_panels) > 1, control=control)
         self.current_panel = panel
