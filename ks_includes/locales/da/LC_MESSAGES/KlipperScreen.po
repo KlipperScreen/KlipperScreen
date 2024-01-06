@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"POT-Creation-Date: 2024-01-06 08:35-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
@@ -192,6 +192,9 @@ msgstr "Vil du gendanne %s?"
 msgid "Elapsed:"
 msgstr "Tid:"
 
+msgid "Ended official support in June 2023"
+msgstr ""
+
 msgid "Error"
 msgstr "Fejl"
 
@@ -360,6 +363,9 @@ msgstr "Klipper forsøger at starte"
 msgid "Klipper will reboot"
 msgstr "Klipper vil genstarte"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr ""
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -387,6 +393,9 @@ msgstr "Grænser"
 
 msgid "Load"
 msgstr "Indlæs"
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Sænk Nozzle"
@@ -471,8 +480,17 @@ msgid ""
 "conf"
 msgstr ""
 
+msgid "Not working or not configured"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "Intet valgt"
+
+msgid "Notification log empty"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -733,6 +751,12 @@ msgstr "Opdatering"
 msgid "Uploaded"
 msgstr "Uploadet"
 
+msgid "Warning"
+msgstr ""
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
+
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Flyt hastighed (mm/s)"
 
@@ -790,17 +814,11 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr ""
 
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen vil genstarte"
-
 #~ msgid "Continue"
 #~ msgstr "Fortsæt"
 
 #~ msgid "Actions"
 #~ msgstr "Muligheder"
-
-#~ msgid "Configuration"
-#~ msgstr "Konfiguration"
 
 #~ msgid "Homing"
 #~ msgstr "Homing"

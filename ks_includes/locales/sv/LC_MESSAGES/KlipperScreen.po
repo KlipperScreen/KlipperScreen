@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"POT-Creation-Date: 2024-01-06 08:35-0300\n"
 "PO-Revision-Date: 2023-12-27 23:25+0000\n"
 "Last-Translator: eltacoloco <hampus.lind@webbpost.nu>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -198,6 +198,9 @@ msgstr "Vill du återställa %s?"
 msgid "Elapsed:"
 msgstr "Förfluten:"
 
+msgid "Ended official support in June 2023"
+msgstr ""
+
 msgid "Error"
 msgstr "Fel"
 
@@ -366,6 +369,9 @@ msgstr "Klipper försöker starta"
 msgid "Klipper will reboot"
 msgstr "Klipper kommer att starta om"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr ""
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -394,6 +400,9 @@ msgstr "Begränsningar"
 
 msgid "Load"
 msgstr "Ladda"
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Sänk munstycket"
@@ -480,8 +489,17 @@ msgstr ""
 "Stöds inte för automatisk upptäckt, den måste konfigureras i klipperscreen."
 "conf"
 
+msgid "Not working or not configured"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "Inget valt"
+
+msgid "Notification log empty"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -741,6 +759,12 @@ msgstr "Uppdaterar"
 
 msgid "Uploaded"
 msgstr "Uppladdad"
+
+msgid "Warning"
+msgstr ""
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY rörelsehastighet (mm/s)"

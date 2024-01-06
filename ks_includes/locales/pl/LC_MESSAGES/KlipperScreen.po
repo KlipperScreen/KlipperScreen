@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"POT-Creation-Date: 2024-01-06 08:35-0300\n"
 "PO-Revision-Date: 2023-10-23 14:32+0000\n"
 "Last-Translator: Daviteusz <daviteusz0@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -195,6 +195,9 @@ msgstr "Czy chcesz przywrócić sprawność %s?"
 msgid "Elapsed:"
 msgstr "Upłynęło:"
 
+msgid "Ended official support in June 2023"
+msgstr ""
+
 msgid "Error"
 msgstr "Błąd"
 
@@ -363,6 +366,9 @@ msgstr "Klipper próbuje się uruchomić"
 msgid "Klipper will reboot"
 msgstr "Klipper uruchomi się ponownie"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr ""
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -392,6 +398,9 @@ msgstr "Limity"
 
 msgid "Load"
 msgstr "Ładuj"
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Obniż dyszę"
@@ -478,8 +487,17 @@ msgstr ""
 "Nieobsługiwany do automatycznego wykrywania, musi być skonfigurowany w pliku "
 "klipperscreen.conf"
 
+msgid "Not working or not configured"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "Nic nie wybrano"
+
+msgid "Notification log empty"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -741,6 +759,12 @@ msgstr "Aktualizowanie"
 msgid "Uploaded"
 msgstr "Przesłane"
 
+msgid "Warning"
+msgstr ""
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
+
 msgid "XY Move Speed (mm/s)"
 msgstr "Prędkość ruchu XY (mm/s)"
 
@@ -800,9 +824,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen uruchomi się ponownie"
 
 #~ msgid "Continue"
 #~ msgstr "Kontynuuj"

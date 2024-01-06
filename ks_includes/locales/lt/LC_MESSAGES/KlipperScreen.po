@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"POT-Creation-Date: 2024-01-06 08:35-0300\n"
 "PO-Revision-Date: 2023-11-28 09:22+0000\n"
 "Last-Translator: vjurka <v@jurka.lt>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -200,6 +200,9 @@ msgstr "Ar norite atstatyti %s?"
 msgid "Elapsed:"
 msgstr "Praėjo:"
 
+msgid "Ended official support in June 2023"
+msgstr ""
+
 msgid "Error"
 msgstr "Klaida"
 
@@ -348,7 +351,8 @@ msgid "Invert Z"
 msgstr "Z inversija"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr "Priklausomai nuo šildytuvo galios gali užtrukti daugiau kaip 5 minutes."
+msgstr ""
+"Priklausomai nuo šildytuvo galios gali užtrukti daugiau kaip 5 minutes."
 
 msgid "Klipper Restart"
 msgstr "Perkrauti Klipper'į"
@@ -367,6 +371,9 @@ msgstr "Klipper'is pasiruošęs"
 
 msgid "Klipper will reboot"
 msgstr "Klipper'is persikraus"
+
+msgid "KlipperScreen will drop support in June 2024"
+msgstr ""
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
@@ -397,6 +404,9 @@ msgstr "Ribos"
 
 msgid "Load"
 msgstr "Užkrauti"
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Nuleisti purkštuką"
@@ -481,8 +491,17 @@ msgid ""
 "conf"
 msgstr "Neaptinkamas automatiškai, reikia konfigūruoti klipperscreen.conf"
 
+msgid "Not working or not configured"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "Niekas nepasirinkta"
+
+msgid "Notification log empty"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -743,6 +762,12 @@ msgstr "Atnaujinama"
 
 msgid "Uploaded"
 msgstr "Nusiųsta"
+
+msgid "Warning"
+msgstr ""
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY judėjimo greitis (mm/s)"

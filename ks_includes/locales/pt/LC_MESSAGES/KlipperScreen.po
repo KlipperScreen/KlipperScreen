@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"POT-Creation-Date: 2024-01-06 08:35-0300\n"
 "PO-Revision-Date: 2024-01-06 09:08+0000\n"
 "Last-Translator: Henrique Magarotto <magarotto@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -198,6 +198,9 @@ msgstr "Deseja recuperar %s?"
 msgid "Elapsed:"
 msgstr "Tempo Corrido:"
 
+msgid "Ended official support in June 2023"
+msgstr ""
+
 msgid "Error"
 msgstr "Erro"
 
@@ -318,9 +321,6 @@ msgstr "ID"
 msgid "Icon Theme"
 msgstr "Tema"
 
-msgid "Notifications"
-msgstr "Notificações"
-
 msgid "Initializing printer..."
 msgstr "Inicializando Impressora..."
 
@@ -349,7 +349,8 @@ msgid "Invert Z"
 msgstr "Inverter Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr "Isso pode levar mais que 5 minutos dependendo da potencia do aquecedor."
+msgstr ""
+"Isso pode levar mais que 5 minutos dependendo da potencia do aquecedor."
 
 msgid "Klipper Restart"
 msgstr "Reiniciar Klipper"
@@ -368,6 +369,9 @@ msgstr "Klipper está iniciando"
 
 msgid "Klipper will reboot"
 msgstr "Klipper será reiniciado"
+
+msgid "KlipperScreen will drop support in June 2024"
+msgstr ""
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
@@ -396,6 +400,9 @@ msgstr "Limites"
 
 msgid "Load"
 msgstr "Carregar"
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Descer Extrusor"
@@ -482,8 +489,17 @@ msgstr ""
 "Não é compatível com detecção automática, precisa ser configurado no "
 "klipperscreen.conf"
 
+msgid "Not working or not configured"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "Nada selecionado"
+
+msgid "Notification log empty"
+msgstr ""
+
+msgid "Notifications"
+msgstr "Notificações"
 
 #, python-format
 msgid "Outdated by %d"
@@ -744,6 +760,12 @@ msgstr "Atualizando"
 msgid "Uploaded"
 msgstr "Carregado"
 
+msgid "Warning"
+msgstr ""
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
+
 msgid "XY Move Speed (mm/s)"
 msgstr "Velocidade de Movimento XY (mm/s)"
 
@@ -798,12 +820,8 @@ msgstr "mm/s"
 msgid "mm/s²"
 msgstr "mm/s²"
 
-#, fuzzy
 msgid "mm³/s"
-msgstr "mm³/s"
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen será reiniciado"
+msgstr ""
 
 #~ msgid "Continue"
 #~ msgstr "Continuar"

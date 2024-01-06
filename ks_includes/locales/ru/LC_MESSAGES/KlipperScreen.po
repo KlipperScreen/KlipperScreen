@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"POT-Creation-Date: 2024-01-06 08:35-0300\n"
 "PO-Revision-Date: 2023-12-28 12:05+0000\n"
 "Last-Translator: Dr_Perry_Coke <dr.perrycoke@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -199,6 +199,9 @@ msgstr "Вы хотите восстановить%s?"
 msgid "Elapsed:"
 msgstr "Прошло:"
 
+msgid "Ended official support in June 2023"
+msgstr ""
+
 msgid "Error"
 msgstr "Ошибка"
 
@@ -367,9 +370,13 @@ msgstr "Klipper готов"
 msgid "Klipper will reboot"
 msgstr "Klipper перезагрузится"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr ""
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT скрыты и должны использоваться из extrude"
+msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT скрыты и должны использоваться из extrude"
 
 msgid "Language"
 msgstr "Язык"
@@ -394,6 +401,9 @@ msgstr "Лимиты"
 
 msgid "Load"
 msgstr "Загрузить"
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Опустить сопло"
@@ -480,8 +490,17 @@ msgstr ""
 "Не поддерживается для автоматического обнаружения, его необходимо настроить "
 "в klipperscreen.conf"
 
+msgid "Not working or not configured"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "Ничего не выбрано"
+
+msgid "Notification log empty"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -743,6 +762,12 @@ msgstr "Обновление"
 msgid "Uploaded"
 msgstr "Загружено"
 
+msgid "Warning"
+msgstr ""
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
+
 msgid "XY Move Speed (mm/s)"
 msgstr "Скорость перемещения по осям XY (мм/с)"
 
@@ -802,9 +827,6 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм³/с"
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen перезагрузится"
 
 #~ msgid "Continue"
 #~ msgstr "Продолжить"

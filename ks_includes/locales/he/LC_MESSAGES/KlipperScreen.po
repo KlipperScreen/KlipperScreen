@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"POT-Creation-Date: 2024-01-06 08:35-0300\n"
 "PO-Revision-Date: 2022-11-30 18:11-0300\n"
 "Last-Translator: Tal Rahav <talrhv1@gmail.com>\n"
 "Language-Team: \n"
@@ -199,6 +199,9 @@ msgstr "האם ברצונך לשחזר %s?"
 msgid "Elapsed:"
 msgstr "זמן שעבר:"
 
+msgid "Ended official support in June 2023"
+msgstr ""
+
 msgid "Error"
 msgstr "שגיאה"
 
@@ -367,6 +370,9 @@ msgstr "קליפר מנסה לעלות"
 msgid "Klipper will reboot"
 msgstr "קליפר יבצע אתחול"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr ""
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -394,6 +400,9 @@ msgstr "גבולות"
 
 msgid "Load"
 msgstr "טעינה"
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "הנמך דיזה"
@@ -478,8 +487,17 @@ msgid ""
 "conf"
 msgstr "איתור אוטומטי אינו נתמך, זה צריך להיות מוגדר ב klipperscreen"
 
+msgid "Not working or not configured"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "שום דבר לא נבחר"
+
+msgid "Notification log empty"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -742,6 +760,12 @@ msgstr "מעדכן"
 msgid "Uploaded"
 msgstr "הועלה"
 
+msgid "Warning"
+msgstr ""
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
+
 msgid "XY Move Speed (mm/s)"
 msgstr "מהירות תנועה XY (מ\"מ/שנייה)"
 
@@ -804,9 +828,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen יאתחל מחדש"
 
 #~ msgid "Continue"
 #~ msgstr "המשך"

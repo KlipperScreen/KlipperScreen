@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"POT-Creation-Date: 2024-01-06 08:35-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -192,6 +192,9 @@ msgstr ""
 msgid "Elapsed:"
 msgstr ""
 
+msgid "Ended official support in June 2023"
+msgstr ""
+
 msgid "Error"
 msgstr ""
 
@@ -360,6 +363,9 @@ msgstr ""
 msgid "Klipper will reboot"
 msgstr ""
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr ""
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -386,6 +392,9 @@ msgid "Limits"
 msgstr ""
 
 msgid "Load"
+msgstr ""
+
+msgid "Loading..."
 msgstr ""
 
 msgid "Lower Nozzle"
@@ -471,7 +480,16 @@ msgid ""
 "conf"
 msgstr ""
 
+msgid "Not working or not configured"
+msgstr ""
+
 msgid "Nothing selected"
+msgstr ""
+
+msgid "Notification log empty"
+msgstr ""
+
+msgid "Notifications"
 msgstr ""
 
 #, python-format
@@ -731,6 +749,12 @@ msgid "Updating"
 msgstr ""
 
 msgid "Uploaded"
+msgstr ""
+
+msgid "Warning"
+msgstr ""
+
+msgid "WebRTC is not supported by the backend trying Stream"
 msgstr ""
 
 msgid "XY Move Speed (mm/s)"

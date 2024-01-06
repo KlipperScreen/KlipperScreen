@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"POT-Creation-Date: 2024-01-06 08:35-0300\n"
 "PO-Revision-Date: 2023-11-16 02:51+0000\n"
 "Last-Translator: Samuel Wang <imhsaw@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -198,6 +198,9 @@ msgstr "你想恢复 %s 吗？"
 msgid "Elapsed:"
 msgstr "已用时间："
 
+msgid "Ended official support in June 2023"
+msgstr ""
+
 msgid "Error"
 msgstr "错误"
 
@@ -366,6 +369,9 @@ msgstr "Klipper正在启动"
 msgid "Klipper will reboot"
 msgstr "Klipper将重新启动"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr ""
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT 被隐藏，应在挤出控制界面使用"
@@ -393,6 +399,9 @@ msgstr "打印机限制"
 
 msgid "Load"
 msgstr "载入耗材"
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "降低喷嘴"
@@ -477,8 +486,17 @@ msgid ""
 "conf"
 msgstr "不支持自动检测，需要在klpperscreen.conf中进行配置"
 
+msgid "Not working or not configured"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "未选择任何内容"
+
+msgid "Notification log empty"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -738,6 +756,12 @@ msgstr "正在更新"
 msgid "Uploaded"
 msgstr "上传于"
 
+msgid "Warning"
+msgstr ""
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
+
 msgid "XY Move Speed (mm/s)"
 msgstr "XY轴移动速度(mm/s)"
 
@@ -791,9 +815,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen将重新启动"
 
 #~ msgid "Continue"
 #~ msgstr "继续"
