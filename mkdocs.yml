@@ -7,6 +7,7 @@ repo_name: KlipperScreen/KlipperScreen/
 repo_url: https://github.com/KlipperScreen/KlipperScreen/
 nav:
     - Home: index.md
+    - FAQ: FAQ.md
     - Setup:
       - Hardware.md
       - Installation.md

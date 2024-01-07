@@ -123,16 +123,11 @@ If you find a way of turning it off and you want to share it: [Contact](Contact.
 
 ## Touch issues
 
-
 [Follow this steps](Troubleshooting/Touch_issues.md)
 
 ## Network panel doesn't list WI-FI networks
 
 [Follow this steps](Troubleshooting/Network.md)
-
-## OctoPrint
-
-KlipperScreen was never intended to be used with OctoPrint, and there is no support for it.
 
 ## Other issues
 
