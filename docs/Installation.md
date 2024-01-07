@@ -51,6 +51,7 @@ If you need a custom location for the configuration file, you can add -c or --co
 the location of your configuration file.
 
 At this point KlipperScreen should be working, if it doesn't start then go to the [troubleshooting page](Troubleshooting.md)
+!!! warning
 
 ## Moonraker configuration
 
