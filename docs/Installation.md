@@ -7,19 +7,18 @@ It's strongly recommended to test it and ensure your hardware is working with Ra
 Once you have established that the screen is working, then proceed installing KlipperScreen.
 
 ## Setup
-This install process is meant for a non-desktop version of the OS for example RaspberryOS Lite, but it should work on other debian derivatives.
+The installation process is meant for a non-desktop version of the OS for example RaspberryOS Lite, but it should work on other debian derivatives.
+
+[Click to learn how to check if you installed a desktop version](../../FAQ/#how-to-check-if-you-have-a-desktop-environment)
 
 If you installed a desktop (GUI version) of the OS and want to run KlipperScreen exclusively then do:
 ```sh title="Boot to console / KlipperScreen"
-sudo systemctl set-default multi-user.target
-sudo reboot
+sudo systemctl set-default multi-user.target && sudo reboot
 ```
 to undo and go back to the desktop environment:
 ```sh title="Boot to the desktop"
-sudo systemctl set-default graphical.target
-sudo reboot
+sudo systemctl set-default graphical.target && sudo reboot
 ```
-
 
 ## Auto install
 

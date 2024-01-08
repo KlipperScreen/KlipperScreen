@@ -11,7 +11,7 @@ This article describes how to use KlipperScreen from an android device
 
 1. [First installl KlipperScreen on the Pi](Installation.md)
 2. Install [XServer-XSDL](https://play.google.com/store/apps/details?id=x.org.server) on the android device
-3. Choose [USB(ADB)](#adb) or [WIFI](#wifi)
+3. Choose [USB(ADB)](#adb) or [WI-FI](#wifi)
 
 ### ADB
 
@@ -104,11 +104,11 @@ sudo service KlippyScreenAndroid stop
 sudo rm /etc/systemd/system/KlippyScreenAndroid.service
 ```
 
-Follow this guide on how to setup the new launcher script with [USB(ADB)](#adb) or [WIFI](#wifi) and restart KS.
+Follow this guide on how to set up the new launcher script with [USB(ADB)](#adb) or [WI-FI](#wifi) and restart KS.
 
 ## Help
 
-[The Discourse thread has old instructions but you may get some help if needed](https://klipper.discourse.group/t/how-to-klipperscreen-on-android-smart-phones/1196)
+[The Discourse thread has old instructions, but you may get some help if needed](https://klipper.discourse.group/t/how-to-klipperscreen-on-android-smart-phones/1196)
 
 [#klipper-screen channel on Discord](https://discord.klipper3d.org/)
 

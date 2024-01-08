@@ -16,7 +16,7 @@ It's strongly suggested to read Klipper documentation about [Bed level](https://
 
 ## Calibration methods
 ### Endstop (`Z_ENDSTOP_CALIBRATE`)
-Available when an physical endstop is defined for `[stepper_z]`
+Available when a physical endstop is defined for `[stepper_z]`
 
 See Klipper documentation: [Calibrating a Z endstop](https://www.klipper3d.org/Manual_Level.html#calibrating-a-z-endstop)
 

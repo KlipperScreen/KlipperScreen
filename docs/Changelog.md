@@ -23,7 +23,7 @@ and the power device in moonraker.conf to have the same name.
 The "Power" panel will be in the Menu if there are power devices found
 
 #### [2022 01 11](https://github.com/KlipperScreen/KlipperScreen/commit/8a8c6c064cc6d097b1b34a5c42b4001367e545a6)
-* The Preheat panel has been deprecated in favor of an all in one Temperature panel
+* The Preheat panel has been deprecated in favor of an all-in-one Temperature panel
 
 Remove preheat panel from your Klipperscreen.conf or replace the occurrences of preheat with temperature
 

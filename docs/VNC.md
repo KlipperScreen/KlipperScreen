@@ -11,23 +11,22 @@ This article describes how to use KlipperScreen through a remote connection.
 
 1. [First installl KlipperScreen](Installation.md)
 2. Install a vnc server package, for example:
-```bash
-sudo apt install tigervnc-standalone-server
-```
+    ```bash
+    sudo apt install tigervnc-standalone-server
+    ```
 3. Create `launch_KlipperScreen.sh`:
 
-```bash
-#!/usr/bin/env bash
-
-# Use display 10 to avoid clashing with local X server, if anyy
-Xtigervnc -rfbport 5900 -noreset -AlwaysShared -SecurityTypes none :10&
-DISPLAY=:10 $KS_XCLIENT&
-wait
-```
+    ```bash
+    #!/usr/bin/env bash
+    # Use display 10 to avoid clashing with local X server, if anyy
+    Xtigervnc -rfbport 5900 -noreset -AlwaysShared -SecurityTypes none :10&
+    DISPLAY=:10 $KS_XCLIENT&
+    wait
+    ```
 4. Restart KlipperScreen or reboot the system:
-```bash
-sudo systemctl service KlipperScreen restart
-```
+    ```bash
+    sudo systemctl service KlipperScreen restart
+    ```
 5. On KlipperScreen set the following configuration:
 
 DPMS: off

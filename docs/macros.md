@@ -3,7 +3,7 @@
 ## Recommended
 
 !!! note
-     If you have already installed other UIs then you may have this macros already, and it's usually asked by KIAUH
+     If you have already installed other UIs then you may have these macros already, and it's usually asked by KIAUH
 
 None of the following macros are strictly required for KlipperScreen, but they provide the toolhead parking at pause and cancel.
 
@@ -109,7 +109,7 @@ gcode:
 
 ### LOAD_FILAMENT / UNLOAD_FILAMENT
 
-This macros are used in the Extrude panel `Load` and `Unload` buttons. and they will be hidden from the macros panel.
+These macros are used in the Extrude panel `Load` and `Unload` buttons. and they will be hidden from the macros panel.
 
 The selected speed in the panel is transferred as a parameter.
 

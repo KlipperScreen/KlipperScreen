@@ -151,7 +151,7 @@ button press. There are two menus available in KlipperScreen, __main and __print
 printer is idle. The __print menu is accessible from the printing status page.
 
 !!! info
-    A predefined set of menus is already provided and it's recommended to be used
+    A predefined set of menus is already provided
 
 A menu item is configured as follows:
 ```{ .ini .no-copy }

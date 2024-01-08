@@ -20,4 +20,4 @@ or open an issue describing the changes.
 
 or even provide ideas for a feature.
 
-[Github repository](https://github.com/KlipperScreen/KlipperScreen/)
+[GitHub repository](https://github.com/KlipperScreen/KlipperScreen/)
