@@ -45,23 +45,23 @@ class Panel(ScreenPanel):
             s.connect("clicked", self.change_sort, name)
             self.labels[f'sort_{name}'] = s
             sbox.add(s)
-        refresh = self._gtk.Button("refresh", style="color4", scale=self.bts)
-        refresh.get_style_context().add_class("buttons_slim")
-        refresh.connect('clicked', self._refresh_files)
-        sbox.add(refresh)
+        self.refresh = self._gtk.Button("refresh", style="color4", scale=self.bts)
+        self.refresh.get_style_context().add_class("buttons_slim")
+        self.refresh.connect('clicked', self._refresh_files)
+        sbox.add(self.refresh)
 
         self.labels['path'] = Gtk.Label(label=_('Loading...'), vexpand=True, no_show_all=True)
         self.labels['path'].show()
 
         self.main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
-        self.main.pack_start(sbox, False, False, 0)
-        self.main.pack_start(self.labels['path'], False, False, 0)
+        self.main.add(sbox)
+        self.main.add(self.labels['path'])
 
         self.dir_panels['gcodes'] = Gtk.Grid()
-        GLib.idle_add(self.reload_files)
+        self.show_loading()
+        GLib.idle_add(self.load_files)
         self.scroll = self._gtk.ScrolledWindow()
-        self.scroll.hide()
-        self.main.pack_start(self.scroll, True, True, 0)
+        self.main.add(self.scroll)
         self.scroll.add(self.dir_panels['gcodes'])
         self._screen.files.add_file_callback(self._callback)
         self.content.add(self.main)
@@ -250,16 +250,13 @@ class Panel(ScreenPanel):
         for child in self.scroll.get_children():
             self.scroll.remove(child)
         self.cur_directory = directory
-        self.labels['path'].set_text(self.cur_directory)
 
         self.scroll.add(self.dir_panels[directory])
+        self.show_directory()
         self.content.show_all()
-        if self.cur_directory == 'gcodes':
-            self.labels['path'].hide()
-        else:
-            self.labels['path'].show()
 
     def change_sort(self, widget, key):
+        self.show_loading()
         if self.sort_current[0] == key:
             self.sort_current[1] = (self.sort_current[1] + 1) % 2
         else:
@@ -357,16 +354,15 @@ class Panel(ScreenPanel):
     def reload_files(self, widget=None):
         self.filelist = {'gcodes': {'directories': [], 'files': []}}
         for dirpan in self.dir_panels:
-            for child in self.dir_panels[dirpan].get_children():
-                self.dir_panels[dirpan].remove(child)
+            for column in range(3):
+                self.dir_panels[dirpan].remove_column(column)
+        self.load_files()
 
+    def load_files(self):
         flist = sorted(self._screen.files.get_file_list(), key=lambda item: '/' in item)
         for file in flist:
-            GLib.idle_add(self.add_file, file)
-        self.labels['path'].set_vexpand(False)
-        self.labels['path'].set_text(self.cur_directory)
-        if self.cur_directory == 'gcodes':
-            self.labels['path'].hide()
+            self.add_file(file)
+        self.show_directory()
 
     def update_file(self, filename):
         if filename not in self.labels['files']:
@@ -386,11 +382,25 @@ class Panel(ScreenPanel):
         if updatedfiles is not None:
             for file in updatedfiles:
                 self.update_file(file)
-        return False
+        self._gtk.Button_busy(self.refresh, False)
 
     def _refresh_files(self, widget=None):
+        self._gtk.Button_busy(self.refresh, True)
         self._files.refresh_files()
-        return False
+
+    def show_directory(self):
+        self._gtk.Button_busy(self.refresh, False)
+        self.labels['path'].set_vexpand(False)
+        if self.cur_directory == 'gcodes':
+            self.labels['path'].hide()
+        else:
+            self.labels['path'].set_text(self.cur_directory)
+            self.labels['path'].show()
+
+    def show_loading(self):
+        self.labels['path'].set_text(_('Loading...'))
+        self.labels['path'].show()
+        self._gtk.Button_busy(self.refresh, True)
 
     def show_rename(self, widget, fullpath):
         self.source = fullpath

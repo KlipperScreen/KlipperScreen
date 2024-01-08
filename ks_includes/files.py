@@ -44,8 +44,7 @@ class KlippyFiles:
                         newfiles.append(file)
                         self.add_file(item, False)
 
-                if newfiles or len(deletedfiles) > 0:
-                    self.run_callbacks(newfiles, deletedfiles)
+                self.run_callbacks(newfiles, deletedfiles)
 
                 if len(deletedfiles) > 0:
                     for file in deletedfiles:
@@ -62,8 +61,7 @@ class KlippyFiles:
                     if fullpath not in self.filelist:
                         newfiles.append(fullpath)
 
-                if newfiles:
-                    self.run_callbacks(newfiles)
+                self.run_callbacks(newfiles)
         elif method == "server.files.metadata":
             if "error" in result.keys():
                 logging.debug(f"Error in getting metadata for {params['filename']}. Retrying in 6 seconds")
