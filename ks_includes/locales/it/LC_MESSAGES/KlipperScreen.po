@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-06 08:35-0300\n"
-"PO-Revision-Date: 2023-11-16 02:51+0000\n"
-"Last-Translator: Giadej <Giadej@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2024-01-08 12:06+0000\n"
+"Last-Translator: Riccardo Babetto <riccardobabetto@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/it/>\n"
 "Language: it\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.2-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -194,7 +194,7 @@ msgid "Elapsed:"
 msgstr "Trascorso:"
 
 msgid "Ended official support in June 2023"
-msgstr ""
+msgstr "Supporto ufficiale terminato in giugno 2023"
 
 msgid "Error"
 msgstr "Errore"
@@ -366,7 +366,7 @@ msgid "Klipper will reboot"
 msgstr "Klipper si riavvierà"
 
 msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
+msgstr "KlipperScreen rilascerà il supporto in giugno 2024"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
@@ -399,7 +399,7 @@ msgid "Load"
 msgstr "Carica"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Caricamento..."
 
 msgid "Lower Nozzle"
 msgstr "Abbassa Ugello"
@@ -487,16 +487,16 @@ msgstr ""
 "conf"
 
 msgid "Not working or not configured"
-msgstr ""
+msgstr "Non funzionante o non configurato"
 
 msgid "Nothing selected"
 msgstr "Nessuna selezione"
 
 msgid "Notification log empty"
-msgstr ""
+msgstr "Log notifiche vuoto"
 
 msgid "Notifications"
-msgstr ""
+msgstr "Notifiche"
 
 #, python-format
 msgid "Outdated by %d"
@@ -722,7 +722,7 @@ msgid "System Shutdown"
 msgstr "Spegnimento Sistema"
 
 msgid "Temp (°C)"
-msgstr "Temp (°C)"
+msgstr "Temperatura (°C)"
 
 msgid "Temperature"
 msgstr "Temperatura"
@@ -734,7 +734,7 @@ msgid "Unknown Heater"
 msgstr "Riscaldatore sconosciuto"
 
 msgid "Unknown screw position"
-msgstr "Posizione Screw sconosciuta"
+msgstr "Posizione vite sconosciuta"
 
 msgid "Unload"
 msgstr "Scarica"
@@ -758,10 +758,11 @@ msgid "Uploaded"
 msgstr "Caricato"
 
 msgid "Warning"
-msgstr ""
+msgstr "Attenzione"
 
+#, fuzzy
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
+msgstr "WebRTC non è supportato dal backend che prova a fare stream"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Velocità movimento XY (mm/s)"
@@ -801,7 +802,7 @@ msgid "macros that use 'rename_existing' are hidden"
 msgstr "macro che usano 'rename_existing' sono nascoste"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr "macros con nome che inzia con '_' sono nascoste"
+msgstr "macro con nome che inzia con '_' sono nascoste"
 
 msgid "minute"
 msgid_plural "minutes"

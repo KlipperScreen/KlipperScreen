@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-06 08:35-0300\n"
-"PO-Revision-Date: 2023-10-24 05:59+0000\n"
-"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"PO-Revision-Date: 2024-01-08 12:06+0000\n"
+"Last-Translator: Alfredo Monclus <alfredomonclus@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/es/>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1.1-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -199,7 +199,7 @@ msgid "Elapsed:"
 msgstr "Transcurrido:"
 
 msgid "Ended official support in June 2023"
-msgstr ""
+msgstr "Finalizó el soporte oficial en Junio 2023"
 
 msgid "Error"
 msgstr "Error"
@@ -371,7 +371,7 @@ msgid "Klipper will reboot"
 msgstr "Klipper se reiniciará"
 
 msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
+msgstr "KlipperScreen dejará de soportarlo en Junio 2024"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
@@ -404,7 +404,7 @@ msgid "Load"
 msgstr "Cargar"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Cargando..."
 
 msgid "Lower Nozzle"
 msgstr "Bajar Boquilla"
@@ -492,16 +492,16 @@ msgstr ""
 "klipperscreen.conf"
 
 msgid "Not working or not configured"
-msgstr ""
+msgstr "No funciona o no está configurado"
 
 msgid "Nothing selected"
 msgstr "Nada seleccionado"
 
 msgid "Notification log empty"
-msgstr ""
+msgstr "Registro de notificaciones vacío"
 
 msgid "Notifications"
-msgstr ""
+msgstr "Notificaciones"
 
 #, python-format
 msgid "Outdated by %d"
@@ -763,10 +763,10 @@ msgid "Uploaded"
 msgstr "Subido"
 
 msgid "Warning"
-msgstr ""
+msgstr "Advertencia"
 
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
+msgstr "WebRTC no es soportado por el backend intentando con Stream"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Velocidad XY (mm/s)"
