@@ -17,7 +17,7 @@ class Prompt:
 
     def _key_press_event(self, widget, event):
         keyval_name = Gdk.keyval_name(event.keyval)
-        if keyval_name == "Escape" or keyval_name == "BackSpace":
+        if keyval_name in ["Escape", "BackSpace"]:
             self.close()
 
     def decode(self, data):

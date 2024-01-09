@@ -215,13 +215,15 @@ class KlipperScreen(Gtk.Window):
         self.connecting = True
         self.initialized = False
 
-        ind = 0
         logging.info(f"Connecting to printer: {name}")
-        for printer in self.printers:
-            if name == list(printer)[0]:
-                ind = self.printers.index(printer)
-                break
-
+        ind = next(
+            (
+                self.printers.index(printer)
+                for printer in self.printers
+                if name == list(printer)[0]
+            ),
+            0,
+        )
         self.printer = self.printers[ind]["data"]
         self.apiclient = KlippyRest(
             self.printers[ind][name]["moonraker_host"],

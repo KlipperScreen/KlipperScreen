@@ -73,11 +73,14 @@ class Panel(ScreenPanel):
 
     def add_directory(self, directory):
         parent_dir = os.path.dirname(directory)
-        modified = 0
-        for x in self._files.directories:
-            if x['dirname'] == os.path.split(directory)[-1]:
-                modified = x['modified']
-                break
+        modified = next(
+            (
+                x['modified']
+                for x in self._files.directories
+                if x['dirname'] == os.path.split(directory)[-1]
+            ),
+            0,
+        )
         if directory not in self.filelist:
             self.filelist[directory] = {'directories': [], 'files': [], 'modified': modified}
             self.filelist[parent_dir]['directories'].append(directory)
