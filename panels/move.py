@@ -86,14 +86,9 @@ class Panel(ScreenPanel):
             self.labels[i].set_direction(Gtk.TextDirection.LTR)
             self.labels[i].connect("clicked", self.change_distance, i)
             ctx = self.labels[i].get_style_context()
-            if (self._screen.lang_ltr and j == 0) or (not self._screen.lang_ltr and j == len(self.distances) - 1):
-                ctx.add_class("distbutton_top")
-            elif (not self._screen.lang_ltr and j == 0) or (self._screen.lang_ltr and j == len(self.distances) - 1):
-                ctx.add_class("distbutton_bottom")
-            else:
-                ctx.add_class("distbutton")
+            ctx.add_class("horizontal_togglebuttons")
             if i == self.distance:
-                ctx.add_class("distbutton_active")
+                ctx.add_class("horizontal_togglebuttons_active")
             distgrid.attach(self.labels[i], j, 0, 1, 1)
 
         for p in ('pos_x', 'pos_y', 'pos_z'):
@@ -174,8 +169,8 @@ class Panel(ScreenPanel):
 
     def change_distance(self, widget, distance):
         logging.info(f"### Distance {distance}")
-        self.labels[f"{self.distance}"].get_style_context().remove_class("distbutton_active")
-        self.labels[f"{distance}"].get_style_context().add_class("distbutton_active")
+        self.labels[f"{self.distance}"].get_style_context().remove_class("horizontal_togglebuttons_active")
+        self.labels[f"{distance}"].get_style_context().add_class("horizontal_togglebuttons_active")
         self.distance = distance
 
     def move(self, widget, axis, direction):

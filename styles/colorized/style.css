@@ -175,17 +175,12 @@ textview .time {
     border-radius: .75em;
 }
 
-.tempbutton_top,
-.tempbutton,
-.tempbutton_bottom,
-.distbutton_top,
-.distbutton,
-.distbutton_bottom  {
+.horizontal_togglebuttons  {
     border-color: @solarized-base03;
     background-color: @solarized-base02;
 }
 
-.distbutton_active {
+.horizontal_togglebuttons_active {
     background-color: @solarized-orange;
 }
 

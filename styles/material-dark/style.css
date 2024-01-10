@@ -157,18 +157,13 @@ textview .time {
     border-radius: .75em;
 }
 
-.tempbutton_top,
-.tempbutton,
-.tempbutton_bottom,
-.distbutton_top,
-.distbutton,
-.distbutton_bottom  {
+.horizontal_togglebuttons {
     border-color: @bg;
     background-color: @buttons-bg;
 }
 
 button:active,
-.distbutton_active,
+.horizontal_togglebuttons_active,
 button.active {
     background-color: @active;
 }

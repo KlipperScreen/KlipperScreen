@@ -33,14 +33,9 @@ class Panel(ScreenPanel):
             self.labels[f"zdelta{i}"] = self._gtk.Button(label=i)
             self.labels[f"zdelta{i}"].connect("clicked", self.change_percent_delta, "z_offset", float(i))
             ctx = self.labels[f"zdelta{i}"].get_style_context()
-            if j == 0:
-                ctx.add_class("distbutton_top")
-            elif j == len(self.z_deltas) - 1:
-                ctx.add_class("distbutton_bottom")
-            else:
-                ctx.add_class("distbutton")
+            ctx.add_class("horizontal_togglebuttons")
             if i == self.z_delta:
-                ctx.add_class("distbutton_active")
+                ctx.add_class("horizontal_togglebuttons_active")
             zgrid.attach(self.labels[f"zdelta{i}"], j, 0, 1, 1)
 
         spdgrid = Gtk.Grid()
@@ -48,14 +43,9 @@ class Panel(ScreenPanel):
             self.labels[f"sdelta{i}"] = self._gtk.Button(label=f"{i}%")
             self.labels[f"sdelta{i}"].connect("clicked", self.change_percent_delta, "speed", int(i))
             ctx = self.labels[f"sdelta{i}"].get_style_context()
-            if j == 0:
-                ctx.add_class("distbutton_top")
-            elif j == len(self.speed_deltas) - 1:
-                ctx.add_class("distbutton_bottom")
-            else:
-                ctx.add_class("distbutton")
+            ctx.add_class("horizontal_togglebuttons")
             if i == self.s_delta:
-                ctx.add_class("distbutton_active")
+                ctx.add_class("horizontal_togglebuttons_active")
             spdgrid.attach(self.labels[f"sdelta{i}"], j, 0, 1, 1)
 
         extgrid = Gtk.Grid()
@@ -63,14 +53,9 @@ class Panel(ScreenPanel):
             self.labels[f"edelta{i}"] = self._gtk.Button(label=f"{i}%")
             self.labels[f"edelta{i}"].connect("clicked", self.change_percent_delta, "extrude", int(i))
             ctx = self.labels[f"edelta{i}"].get_style_context()
-            if j == 0:
-                ctx.add_class("distbutton_top")
-            elif j == len(self.extrude_deltas) - 1:
-                ctx.add_class("distbutton_bottom")
-            else:
-                ctx.add_class("distbutton")
+            ctx.add_class("horizontal_togglebuttons")
             if i == self.e_delta:
-                ctx.add_class("distbutton_active")
+                ctx.add_class("horizontal_togglebuttons_active")
             extgrid.attach(self.labels[f"edelta{i}"], j, 0, 1, 1)
         grid = Gtk.Grid(column_homogeneous=True)
 
@@ -179,13 +164,13 @@ class Panel(ScreenPanel):
 
     def change_percent_delta(self, widget, array, delta):
         logging.info(f"### Delta {delta}")
-        widget.get_style_context().add_class("distbutton_active")
+        widget.get_style_context().add_class("horizontal_togglebuttons_active")
         if array == "z_offset":
-            self.labels[f"zdelta{self.z_delta}"].get_style_context().remove_class("distbutton_active")
+            self.labels[f"zdelta{self.z_delta}"].get_style_context().remove_class("horizontal_togglebuttons_active")
             self.z_delta = delta
         elif array == "speed":
-            self.labels[f"sdelta{self.s_delta}"].get_style_context().remove_class("distbutton_active")
+            self.labels[f"sdelta{self.s_delta}"].get_style_context().remove_class("horizontal_togglebuttons_active")
             self.s_delta = delta
         elif array == "extrude":
-            self.labels[f"edelta{self.e_delta}"].get_style_context().remove_class("distbutton_active")
+            self.labels[f"edelta{self.e_delta}"].get_style_context().remove_class("horizontal_togglebuttons_active")
             self.e_delta = delta

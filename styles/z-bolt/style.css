@@ -134,15 +134,13 @@ textview .time {
     background-color: @bg;
 }
 
-.distbutton_active {
+.horizontal_togglebuttons_active {
     background-color: @active;
     border-color: @color1;
-    box-shadow: 0 0 0 .2em @text inset;
+    box-shadow: 0 0 0 .2em @lines inset;
 }
 
-.distbutton_top,
-.distbutton,
-.distbutton_bottom {
+.horizontal_togglebuttons {
     border-color: @lines;
 }
 
@@ -156,16 +154,6 @@ textview .time {
 
 .numpad_key {
     border-color: @lines;
-}
-
-.tempbutton_top {
-    border-color: @lines;
-}
-
-.tempbutton,
-.tempbutton_bottom {
-    border-color: @lines;
-    border-top-color: @lines;
 }
 
 .message {

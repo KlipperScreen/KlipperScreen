@@ -77,16 +77,9 @@ class Panel(ScreenPanel):
             self.labels[f"dist{i}"] = self._gtk.Button(label=i)
             self.labels[f"dist{i}"].connect("clicked", self.change_distance, int(i))
             ctx = self.labels[f"dist{i}"].get_style_context()
-            if ((self._screen.lang_ltr is True and j == 0) or
-                    (self._screen.lang_ltr is False and j == len(self.distances) - 1)):
-                ctx.add_class("distbutton_top")
-            elif ((self._screen.lang_ltr is False and j == 0) or
-                  (self._screen.lang_ltr is True and j == len(self.distances) - 1)):
-                ctx.add_class("distbutton_bottom")
-            else:
-                ctx.add_class("distbutton")
+            ctx.add_class("horizontal_togglebuttons")
             if int(i) == self.distance:
-                ctx.add_class("distbutton_active")
+                ctx.add_class("horizontal_togglebuttons_active")
             distgrid.attach(self.labels[f"dist{i}"], j, 0, 1, 1)
 
         speedgrid = Gtk.Grid()
@@ -94,16 +87,9 @@ class Panel(ScreenPanel):
             self.labels[f"speed{i}"] = self._gtk.Button(label=i)
             self.labels[f"speed{i}"].connect("clicked", self.change_speed, int(i))
             ctx = self.labels[f"speed{i}"].get_style_context()
-            if ((self._screen.lang_ltr is True and j == 0) or
-                    (self._screen.lang_ltr is False and j == len(self.speeds) - 1)):
-                ctx.add_class("distbutton_top")
-            elif ((self._screen.lang_ltr is False and j == 0) or
-                  (self._screen.lang_ltr is True and j == len(self.speeds) - 1)):
-                ctx.add_class("distbutton_bottom")
-            else:
-                ctx.add_class("distbutton")
+            ctx.add_class("horizontal_togglebuttons")
             if int(i) == self.speed:
-                ctx.add_class("distbutton_active")
+                ctx.add_class("horizontal_togglebuttons_active")
             speedgrid.attach(self.labels[f"speed{i}"], j, 0, 1, 1)
 
         distbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -211,8 +197,8 @@ class Panel(ScreenPanel):
 
     def change_distance(self, widget, distance):
         logging.info(f"### Distance {distance}")
-        self.labels[f"dist{self.distance}"].get_style_context().remove_class("distbutton_active")
-        self.labels[f"dist{distance}"].get_style_context().add_class("distbutton_active")
+        self.labels[f"dist{self.distance}"].get_style_context().remove_class("horizontal_togglebuttons_active")
+        self.labels[f"dist{distance}"].get_style_context().add_class("horizontal_togglebuttons_active")
         self.distance = distance
 
     def change_extruder(self, widget, extruder):
@@ -225,8 +211,8 @@ class Panel(ScreenPanel):
 
     def change_speed(self, widget, speed):
         logging.info(f"### Speed {speed}")
-        self.labels[f"speed{self.speed}"].get_style_context().remove_class("distbutton_active")
-        self.labels[f"speed{speed}"].get_style_context().add_class("distbutton_active")
+        self.labels[f"speed{self.speed}"].get_style_context().remove_class("horizontal_togglebuttons_active")
+        self.labels[f"speed{speed}"].get_style_context().add_class("horizontal_togglebuttons_active")
         self.speed = speed
 
     def extrude(self, widget, direction):
