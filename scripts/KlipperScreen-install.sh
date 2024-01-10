@@ -150,6 +150,7 @@ install_systemd_service()
     sudo systemctl unmask KlipperScreen.service
     sudo systemctl daemon-reload
     sudo systemctl enable KlipperScreen
+    sudo systemctl set-default multi-user.target
 }
 
 create_policy()
@@ -264,8 +265,13 @@ install_packages
 check_requirements
 create_virtualenv
 create_policy
-install_systemd_service
 update_x11
-echo_ok "KlipperScreen was installed"
 add_desktop_file
-start_KlipperScreen
+read -r -e -p "Install as a service? (This will enable boot to console) [Y/n]" choice
+if [[ $choice =~ ^[nN]$ ]]; then
+    echo_text "Not installing the service, KlipperScreen will need to be manually started"
+    echo_ok "KlipperScreen was installed"
+else
+    install_systemd_service
+    start_KlipperScreen
+fi
