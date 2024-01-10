@@ -10,7 +10,6 @@
 @define-color warning #FFE082;
 @define-color error #EF9A9A;
 @define-color echo #a1ef9a;
-@define-color popup #006064;
 @define-color textview #212121;
 
 * {
@@ -194,10 +193,6 @@ textview {
 
 textview .time {
     color: @border;
-}
-
-.popup {
-    background-color: @popup;
 }
 
 .dialog {

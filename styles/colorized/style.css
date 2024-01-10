@@ -165,10 +165,6 @@ textview .time {
     color:  @solarized-base1;
 }
 
-.popup {
-    background-color: @solarized-cyan;
-}
-
 .dialog {
     border: @solarized-base03;
     background-color: @solarized-base03;

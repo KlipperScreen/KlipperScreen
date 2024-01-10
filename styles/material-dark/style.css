@@ -15,7 +15,6 @@
 @define-color active-dark #282828;
 @define-color lines #a2a2a2;
 @define-color slider #d81549;
-@define-color popup #006064;
 
 * {
     color: @text;
@@ -146,10 +145,6 @@ scrollbar slider {
 
 textview .time {
     color: @lines;
-}
-
-.popup {
-    background-color: @popup;
 }
 
 .dialog {
