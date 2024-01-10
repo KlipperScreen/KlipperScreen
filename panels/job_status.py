@@ -147,74 +147,71 @@ class Panel(ScreenPanel):
         buttons['fan'].connect("clicked", self.menu_item_clicked, {"panel": "fan", "name": _("Fan")})
         self.buttons.update(buttons)
 
+        self.buttons['extruder'] = {}
+        for i, extruder in enumerate(self._printer.get_tools()):
+            self.labels[extruder] = Gtk.Label(label="-")
+            self.buttons['extruder'][extruder] = self._gtk.Button(f"extruder-{i}", "", None, self.bts,
+                                                                  Gtk.PositionType.LEFT, 1)
+            self.buttons['extruder'][extruder].set_label(self.labels[extruder].get_text())
+            self.buttons['extruder'][extruder].connect("clicked", self.menu_item_clicked,
+                                                       {"panel": "temperature", "name": _("Temperature"),
+                                                        'extra': extruder})
+            self.buttons['extruder'][extruder].set_halign(Gtk.Align.START)
+
         self.labels['temp_grid'] = Gtk.Grid()
         nlimit = 2 if self._screen.width <= 500 else 3
         n = 0
-        self.buttons['extruder'] = {}
-        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-        if self.current_extruder:
-            for i, extruder in enumerate(self._printer.get_tools()):
-                self.labels[extruder] = Gtk.Label(label="-")
-                self.buttons['extruder'][extruder] = self._gtk.Button(f"extruder-{i}", "", None, self.bts,
-                                                                      Gtk.PositionType.LEFT, 1)
-                self.buttons['extruder'][extruder].set_label(self.labels[extruder].get_text())
-                self.buttons['extruder'][extruder].connect("clicked", self.menu_item_clicked,
-                                                           {"panel": "temperature", "name": _("Temperature"),
-                                                            'extra': self.current_extruder})
-                self.buttons['extruder'][extruder].set_halign(Gtk.Align.START)
-            self.labels['temp_grid'].attach(self.buttons['extruder'][self.current_extruder], n, 0, 1, 1)
-            n += 1
+        if nlimit > 2 and len(self._printer.get_tools()) == 2:
+            for extruder in self.buttons['extruder']:
+                self.labels['temp_grid'].attach(self.buttons['extruder'][extruder], n, 0, 1, 1)
+                n += 1
+        else:
+            self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+            if self.current_extruder:
+                self.labels['temp_grid'].attach(self.buttons['extruder'][self.current_extruder], n, 0, 1, 1)
+                n += 1
         self.buttons['heater'] = {}
         for dev in self._printer.get_heaters():
             if n >= nlimit:
                 break
             if dev == "heater_bed":
-                self.buttons['heater']['heater_bed'] = self._gtk.Button("bed", "", None, self.bts,
-                                                                        Gtk.PositionType.LEFT, 1)
-                self.labels['heater_bed'] = Gtk.Label(label="-")
-                self.buttons['heater']['heater_bed'].set_label(self.labels['heater_bed'].get_text())
-                self.buttons['heater']['heater_bed'].connect("clicked", self.menu_item_clicked,
-                                                             {"panel": "temperature", "name": _("Temperature"),
-                                                              'extra': 'heater_bed'})
-                self.buttons['heater']['heater_bed'].set_halign(Gtk.Align.START)
-                self.labels['temp_grid'].attach(self.buttons['heater']['heater_bed'], n, 0, 1, 1)
-                n += 1
-            elif dev.startswith("heater_generic"):
+                self.buttons['heater'][dev] = self._gtk.Button("bed", "", None, self.bts, Gtk.PositionType.LEFT, 1)
+            else:
                 self.buttons['heater'][dev] = self._gtk.Button("heater", "", None, self.bts, Gtk.PositionType.LEFT, 1)
-                self.labels[dev] = Gtk.Label(label="-")
-                self.buttons['heater'][dev].set_label(self.labels[dev].get_text())
-                self.buttons['heater'][dev].connect("clicked", self.menu_item_clicked,
-                                                    {"panel": "temperature", "name": _("Temperature"), "extra": dev})
-                self.buttons['heater'][dev].set_halign(Gtk.Align.START)
-                self.labels['temp_grid'].attach(self.buttons['heater'][dev], n, 0, 1, 1)
-                n += 1
+            self.labels[dev] = Gtk.Label(label="-")
+
+            self.buttons['heater'][dev].set_label(self.labels[dev].get_text())
+            self.buttons['heater'][dev].connect("clicked", self.menu_item_clicked,
+                                                {"panel": "temperature", "name": _("Temperature"), "extra": dev})
+            self.buttons['heater'][dev].set_halign(Gtk.Align.START)
+            self.labels['temp_grid'].attach(self.buttons['heater'][dev], n, 0, 1, 1)
+            n += 1
         extra_item = not self._show_heater_power
         if self.ks_printer_cfg is not None:
             titlebar_items = self.ks_printer_cfg.get("titlebar_items", "")
             if titlebar_items is not None:
                 titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
                 logging.info(f"Titlebar items: {titlebar_items}")
-                for device in self._printer.get_heaters():
-                    if device.startswith("temperature_sensor"):
-                        name = " ".join(device.split(" ")[1:])
-                        for item in titlebar_items:
-                            if name == item:
-                                if extra_item:
-                                    extra_item = False
-                                    nlimit += 1
-                                if n >= nlimit:
-                                    break
-                                self.buttons['heater'][device] = self._gtk.Button("heat-up", "", None, self.bts,
-                                                                                  Gtk.PositionType.LEFT, 1)
-                                self.labels[device] = Gtk.Label(label="-")
-                                self.buttons['heater'][device].set_label(self.labels[device].get_text())
-                                self.buttons['heater'][device].connect("clicked", self.menu_item_clicked,
-                                                                       {"panel": "temperature",
-                                                                        "name": _("Temperature")})
-                                self.buttons['heater'][device].set_halign(Gtk.Align.START)
-                                self.labels['temp_grid'].attach(self.buttons['heater'][device], n, 0, 1, 1)
-                                n += 1
+                for device in self._printer.get_temp_sensors():
+                    name = " ".join(device.split(" ")[1:])
+                    for item in titlebar_items:
+                        if name == item:
+                            if extra_item:
+                                extra_item = False
+                                nlimit += 1
+                            if n >= nlimit:
                                 break
+                            self.buttons['heater'][device] = self._gtk.Button("heat-up", "", None, self.bts,
+                                                                              Gtk.PositionType.LEFT, 1)
+                            self.labels[device] = Gtk.Label(label="-")
+                            self.buttons['heater'][device].set_label(self.labels[device].get_text())
+                            self.buttons['heater'][device].connect("clicked", self.menu_item_clicked,
+                                                                   {"panel": "temperature",
+                                                                    "name": _("Temperature")})
+                            self.buttons['heater'][device].set_halign(Gtk.Align.START)
+                            self.labels['temp_grid'].attach(self.buttons['heater'][device], n, 0, 1, 1)
+                            n += 1
+                            break
 
         szfe = Gtk.Grid(column_homogeneous=True)
         szfe.attach(self.buttons['speed'], 0, 0, 3, 1)

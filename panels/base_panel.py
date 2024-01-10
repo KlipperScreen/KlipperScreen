@@ -111,7 +111,6 @@ class BasePanel(ScreenPanel):
             img_size = self._gtk.img_scale * self.bts
             for device in devices:
                 self.labels[device] = Gtk.Label(ellipsize=Pango.EllipsizeMode.START)
-
                 self.labels[f'{device}_box'] = Gtk.Box()
                 icon = self.get_icon(device, img_size)
                 if icon is not None:
@@ -120,18 +119,22 @@ class BasePanel(ScreenPanel):
 
             # Limit the number of items according to resolution
             nlimit = int(round(log(self._screen.width, 10) * 5 - 10.5))
-
             n = 0
-            self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-            if self.current_extruder and f"{self.current_extruder}_box" in self.labels:
-                self.control['temp_box'].add(self.labels[f"{self.current_extruder}_box"])
-                n += 1
-
+            if len(self._printer.get_tools()) > (nlimit - 1):
+                self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+                if self.current_extruder and f"{self.current_extruder}_box" in self.labels:
+                    self.control['temp_box'].add(self.labels[f"{self.current_extruder}_box"])
+            else:
+                self.current_extruder = False
             for device in devices:
-                if device == 'heater_bed':
-                    self.control['temp_box'].add(self.labels['heater_bed_box'])
-                    n += 1
-                    continue
+                if n >= nlimit:
+                    break
+                if device.startswith("extruder") and self.current_extruder is False:
+                    self.control['temp_box'].add(self.labels[f"{device}_box"])
+                elif device.startswith("heater"):
+                    self.control['temp_box'].add(self.labels[f"{device}_box"])
+                n += 1
+            for device in devices:
                 # Users can fill the bar if they want
                 if n >= nlimit + 1:
                     break
@@ -142,13 +145,6 @@ class BasePanel(ScreenPanel):
                         n += 1
                         break
 
-            # If there is enough space fill with heater_generic
-            for device in self._printer.get_heaters():
-                if n >= nlimit:
-                    break
-                if device.startswith("heater_generic"):
-                    self.control['temp_box'].add(self.labels[f"{device}_box"])
-                    n += 1
             self.control['temp_box'].show_all()
         except Exception as e:
             logging.debug(f"Couldn't create heaters box: {e}")
@@ -236,7 +232,7 @@ class BasePanel(ScreenPanel):
                     self.labels[device].set_label(f"{name}{int(temp)}°")
 
         with suppress(Exception):
-            if data["toolhead"]["extruder"] != self.current_extruder:
+            if self.current_extruder is not False and data["toolhead"]["extruder"] != self.current_extruder:
                 self.control['temp_box'].remove(self.labels[f"{self.current_extruder}_box"])
                 self.current_extruder = data["toolhead"]["extruder"]
                 self.control['temp_box'].pack_start(self.labels[f"{self.current_extruder}_box"], True, True, 3)
