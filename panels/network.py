@@ -21,7 +21,7 @@ class Panel(ScreenPanel):
         self.network_interfaces = netifaces.interfaces()
         self.wireless_interfaces = [
             iface for iface in self.network_interfaces
-            if iface.startswith('wlan') or iface.startswith('wlp')
+            if iface.startswith('wlan') or iface.startswith('wlp') or iface.startswith('wlx')
         ]
         self.wifi = None
         self.use_network_manager = os.system('systemctl is-active --quiet NetworkManager.service') == 0
