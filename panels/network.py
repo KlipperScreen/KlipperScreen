@@ -19,13 +19,10 @@ class Panel(ScreenPanel):
         self.prev_network = None
         self.update_timeout = None
         self.network_interfaces = netifaces.interfaces()
-        self.wireless_interfaces = [
-            iface for iface in self.network_interfaces
-            if iface.startswith('wlan') or iface.startswith('wlp') or iface.startswith('wlx')
-        ]
+        self.wireless_interfaces = [iface for iface in self.network_interfaces if iface.startswith('wl')]
         self.wifi = None
         self.use_network_manager = os.system('systemctl is-active --quiet NetworkManager.service') == 0
-        if len(self.wireless_interfaces) > 0:
+        if self.wireless_interfaces:
             logging.info(f"Found wireless interfaces: {self.wireless_interfaces}")
             if self.use_network_manager:
                 logging.info("Using NetworkManager")
@@ -34,6 +31,8 @@ class Panel(ScreenPanel):
                 logging.info("Using wpa_cli")
                 from ks_includes.wifi import WifiManager
             self.wifi = WifiManager(self.wireless_interfaces[0])
+        else:
+            logging.info(_("No wireless interface has been found"))
 
         # Get IP Address
         gws = netifaces.gateways()
@@ -43,11 +42,7 @@ class Panel(ScreenPanel):
             ints = netifaces.interfaces()
             if 'lo' in ints:
                 ints.pop(ints.index('lo'))
-            if len(ints) > 0:
-                self.interface = ints[0]
-            else:
-                self.interface = 'lo'
-
+            self.interface = ints[0] if len(ints) > 0 else 'lo'
         res = netifaces.ifaddresses(self.interface)
         if netifaces.AF_INET in res and len(res[netifaces.AF_INET]) > 0:
             ip = res[netifaces.AF_INET][0]['addr']
@@ -57,7 +52,7 @@ class Panel(ScreenPanel):
         self.labels['networks'] = {}
 
         self.labels['interface'] = Gtk.Label(hexpand=True)
-        self.labels['interface'].set_text(" %s: %s  " % (_("Interface"), self.interface))
+        self.labels['interface'].set_text(f' {_("Interface")}: {self.interface}  ')
         self.labels['ip'] = Gtk.Label(hexpand=True)
         reload_networks = self._gtk.Button("refresh", None, "color1", .66)
         reload_networks.connect("clicked", self.reload_networks)
