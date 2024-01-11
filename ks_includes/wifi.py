@@ -344,4 +344,4 @@ class WifiChannels:
         elif 6455 <= freq <= 7115:
             return "6", str(int((freq - 5950) / 5))
         else:
-            return None
+            return "?", "?"

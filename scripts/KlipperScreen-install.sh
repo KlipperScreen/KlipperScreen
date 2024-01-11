@@ -160,6 +160,7 @@ create_policy()
 
     echo_text "Installing KlipperScreen PolicyKit Rules"
     sudo groupadd -f klipperscreen
+    sudo groupadd -f netdev
     sudo groupadd -f tty
     if [ ! -x "$(command -v pkaction)" ]; then
         echo "PolicyKit not installed"
@@ -195,7 +196,7 @@ polkit.addRule(function(action, subject) {
          action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
          action.id == "org.freedesktop.login1.halt" ||
          action.id == "org.freedesktop.login1.halt-multiple-sessions" ||
-         action.id == "org.freedesktop.NetworkManager.wifi.scan" ||
+         action.id == "org.freedesktop.NetworkManager.*" ||
          action.id.startsWith("org.freedesktop.packagekit.")) &&
         subject.user == "$USER") {
         // Only allow processes with the "klipperscreen" supplementary group
@@ -222,7 +223,7 @@ create_policy_legacy()
     ACTIONS="${ACTIONS};org.freedesktop.login1.reboot-multiple-sessions"
     ACTIONS="${ACTIONS};org.freedesktop.login1.halt"
     ACTIONS="${ACTIONS};org.freedesktop.login1.halt-multiple-sessions"
-    ACTIONS="${ACTIONS};org.freedesktop.NetworkManager.wifi.scan"
+    ACTIONS="${ACTIONS};org.freedesktop.NetworkManager.*"
     sudo /bin/sh -c "cat > ${RULE_FILE}" << EOF
 [KlipperScreen]
 Identity=unix-user:$USER
