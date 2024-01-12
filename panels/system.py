@@ -67,12 +67,15 @@ class Panel(ScreenPanel):
 
             infogrid.attach(self.labels[f"{prog}_status"], 2, i, 1, 1)
             self.update_program_info(prog)
-        self.scroll.remove(self.update_msg)
+        self.clear_scroll()
         self.scroll.add(infogrid)
 
-    def refresh_updates(self, widget=None):
+    def clear_scroll(self):
         for child in self.scroll.get_children():
             self.scroll.remove(child)
+
+    def refresh_updates(self, widget=None):
+        self.clear_scroll()
         self.scroll.add(self.update_msg)
         self._gtk.Button_busy(widget, True)
         logging.info('Sending machine.update.refresh')
@@ -83,7 +86,7 @@ class Panel(ScreenPanel):
         logging.info(response)
         if not response or 'result' not in response:
             self.update_all.set_sensitive(False)
-            self.scroll.remove(self.update_msg)
+            self.clear_scroll()
             if 'error' in response:
                 self.scroll.add(Gtk.Label(label=f"Moonraker: {response['error']['message']}", vexpand=True))
             else:
