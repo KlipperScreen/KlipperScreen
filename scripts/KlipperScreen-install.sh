@@ -244,6 +244,21 @@ update_x11()
     fi
 }
 
+fix_fbturbo()
+{
+    if [ $(dpkg-query -W -f='${Status}' xserver-xorg-video-fbturbo 2>/dev/null | grep -c "ok installed") -eq 0 ];
+    then
+        FBCONFIG="/usr/share/X11/xorg.conf.d/99-fbturbo.conf"
+        if [ -e $FBCONFIG ]
+        then
+            echo_text "FBturbo not installed, but the configuration file exists"
+            echo_text "This will fail if the config is not removed or the package installed"
+            echo_text "moving the config to the home folder"
+            sudo mv $FBCONFIG ~/99-fbturbo-backup.conf
+        fi
+    fi
+}
+
 add_desktop_file()
 {
     DESKTOP=$(<$SCRIPTPATH/KlipperScreen.desktop)
@@ -267,6 +282,7 @@ check_requirements
 create_virtualenv
 create_policy
 update_x11
+fix_fbturbo
 add_desktop_file
 read -r -e -p "Install as a service? (This will enable boot to console) [Y/n]" choice
 if [[ $choice =~ ^[nN]$ ]]; then
