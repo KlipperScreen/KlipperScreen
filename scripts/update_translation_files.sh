@@ -5,6 +5,7 @@ xgettext --keyword=_ --keyword=ngettext:1,2 --language=Python --no-location --so
     -o ks_includes/locales/KlipperScreen.pot \
     *.py \
     ks_includes/*.py \
+    ks_includes/widgets/*.py \
     panels/*.py \
     ks_includes/defaults.conf
 # Update po

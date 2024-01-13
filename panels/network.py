@@ -47,7 +47,7 @@ class Panel(ScreenPanel):
         self.labels['networks'] = {}
 
         self.labels['interface'] = Gtk.Label(hexpand=True)
-        self.labels['interface'].set_text(f' {_("Interface")}: {self.interface}  ')
+        self.labels['interface'].set_text(_("Interface") + f': {self.interface}  ')
 
         self.labels['ip'] = Gtk.Label(hexpand=True)
         ifadd = netifaces.ifaddresses(self.interface)
@@ -341,7 +341,8 @@ class Panel(ScreenPanel):
                 self.labels['ip'].set_text(f"IP: {ifadd[netifaces.AF_INET][0]['addr']}  ")
             if ifadd.get(netifaces.AF_INET6):
                 ipv6 = f"<b>IPv6:</b> {ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0]}"
-            info = f'<b>{_("Hostname")}:</b> {os.uname().nodename}\n{ipv4}\n{ipv6}'
+
+            info = '<b>' + _("Hostname") + f':</b> {os.uname().nodename}\n{ipv4}\n{ipv6}'
         else:
             self.labels['networks'][ssid]['name'].set_label(_("Hidden") if ssid.startswith("\x00") else f"{ssid}")
             if "psk" in netinfo:
@@ -351,9 +352,9 @@ class Panel(ScreenPanel):
         if "frequency" in netinfo:
             freq = "2.4 GHz" if netinfo['frequency'][:1] == "2" else "5 Ghz"
         if "channel" in netinfo:
-            chan = f'{_("Channel")} {netinfo["channel"]}'
+            chan = _("Channel") + f' {netinfo["channel"]}'
         if "signal_level_dBm" in netinfo:
-            lvl = f'{netinfo["signal_level_dBm"]} {"%" if self.use_network_manager else _("dBm")}'
+            lvl = "% %".format(netinfo["signal_level_dBm"], "%" if self.use_network_manager else _("dBm"))
             icon = self.signal_strength(int(netinfo["signal_level_dBm"]))
             if 'icon' not in self.labels['networks'][ssid]:
                 self.labels['networks'][ssid]['row'].add(icon)
@@ -389,7 +390,7 @@ class Panel(ScreenPanel):
             ipv4 = ""
         self.labels['networkinfo'].set_markup(
             f'<b>{self.interface}</b>\n\n'
-            f'<b>{_("Hostname")}:</b> {os.uname().nodename}\n'
+            + '<b>' + _("Hostname") + f':</b> {os.uname().nodename}\n'
             f'<b>IPv4:</b> {ipv4}\n'
             f'<b>IPv6:</b> {ipv6}'
         )
