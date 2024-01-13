@@ -482,6 +482,12 @@ msgstr "Ny"
 msgid "No elegible macros:"
 msgstr "Inga kvalificerade makron:"
 
+msgid "No mesh has been loaded"
+msgstr ""
+
+msgid "No wireless interface has been found"
+msgstr ""
+
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"

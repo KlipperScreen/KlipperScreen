@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-06 08:35-0300\n"
+"POT-Creation-Date: 2024-01-12 21:42-0300\n"
 "PO-Revision-Date: 2024-01-08 12:06+0000\n"
 "Last-Translator: Riccardo Babetto <riccardobabetto@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -479,6 +479,12 @@ msgstr "Nuovo"
 msgid "No elegible macros:"
 msgstr "Nessuna macro elegibile:"
 
+msgid "No mesh has been loaded"
+msgstr ""
+
+msgid "No wireless interface has been found"
+msgstr ""
+
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
@@ -760,9 +766,8 @@ msgstr "Caricato"
 msgid "Warning"
 msgstr "Attenzione"
 
-#, fuzzy
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr "WebRTC non è supportato dal backend che prova a fare stream"
+msgstr ""
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Velocità movimento XY (mm/s)"
