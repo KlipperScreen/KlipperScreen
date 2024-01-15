@@ -289,7 +289,7 @@ class Panel(ScreenPanel):
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.add(label)
 
-        height = self._screen.height * .9 - self._gtk.font_size * 10
+        height = (self._screen.height - self._gtk.dialog_buttons_height - self._gtk.font_size) * .75
         pixbuf = self.get_file_image(filename, self._screen.width * .9, height)
         if pixbuf is not None:
             image = Gtk.Image.new_from_pixbuf(pixbuf)

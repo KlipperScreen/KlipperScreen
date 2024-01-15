@@ -43,6 +43,7 @@ class KlippyGtk:
         self.img_scale = self.font_size * 2
         self.button_image_scale = 1.38
         self.bsidescale = .65  # Buttons with image at the side
+        self.dialog_buttons_height = round(self.height / 5)
 
         if self.font_size_type == "max":
             self.font_size = self.font_size * 1.2
@@ -216,7 +217,7 @@ class KlippyGtk:
                 style = 'dialog-default'
             dialog.add_button(button['name'], button['response'])
             button = dialog.get_widget_for_response(button['response'])
-            button.set_size_request(button_hsize, round(self.height / 5))
+            button.set_size_request(button_hsize, self.dialog_buttons_height)
             button.get_style_context().add_class(style)
             format_label(button, 2)
 
