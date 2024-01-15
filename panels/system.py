@@ -98,7 +98,7 @@ class Panel(ScreenPanel):
         self.scroll.show_all()
 
     def restart(self, widget, program):
-        if self._printer.state in ["printing", "paused"]:
+        if self._printer.state in ("printing", "paused"):
             self._screen._confirm_send_action(widget, f'{_("Are you sure?")}\n\n'
                                                       f'{_("Restart")}: {program}',
                                               "machine.services.restart", {"service": program})
