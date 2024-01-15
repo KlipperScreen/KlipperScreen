@@ -338,6 +338,7 @@ class Panel(ScreenPanel):
         if self.flow_timeout is not None:
             GLib.source_remove(self.flow_timeout)
             self.flow_timeout = None
+        self._files.remove_file_callback(self._callback_metadata)
 
     def create_buttons(self):
 
@@ -448,7 +449,7 @@ class Panel(ScreenPanel):
             self.buttons[arg].set_sensitive(False)
 
     def _callback_metadata(self, newfiles, deletedfiles, modifiedfiles):
-        if not bool(self.file_metadata) and self.filename in modifiedfiles:
+        if self.filename in modifiedfiles:
             self.update_file_metadata()
             self._files.remove_file_callback(self._callback_metadata)
 
@@ -798,7 +799,7 @@ class Panel(ScreenPanel):
             if "filament_total" in self.file_metadata:
                 self.labels['filament_total'].set_label(f"{float(self.file_metadata['filament_total']) / 1000:.1f} m")
         else:
-            self.file_metadata = {}
             logging.debug("Cannot find file metadata. Listening for updated metadata")
             self._screen.files.add_file_callback(self._callback_metadata)
+            self._files.request_metadata(self.filename)
         self.show_file_thumbnail()

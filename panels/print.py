@@ -377,14 +377,16 @@ class Panel(ScreenPanel):
         # Update icon
         GLib.idle_add(self.image_load, filename)
 
-    def _callback(self, newfiles, deletedfiles, updatedfiles=None):
+    def _callback(self, newfiles, deletedfiles, modifiedfiles):
         for file in newfiles:
+            logging.info(f"adding {file}")
             self.add_file(file)
         for file in deletedfiles:
+            logging.info(f"deleting {file}")
             self.delete_file(file)
-        if updatedfiles is not None:
-            for file in updatedfiles:
-                self.update_file(file)
+        for file in modifiedfiles:
+            logging.info(f"updating {file}")
+            self.update_file(file)
         self._gtk.Button_busy(self.refresh, False)
 
     def _refresh_files(self, widget=None):

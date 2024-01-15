@@ -16,20 +16,11 @@ class KlippyFiles:
         self.directories = []
         self.gcodes_path = None
 
-    def initialize(self):
-        if "virtual_sdcard" in self._screen.printer.get_config_section_list():
-            vsd = self._screen.printer.get_config_section("virtual_sdcard")
-            if "path" in vsd:
-                self.gcodes_path = os.path.expanduser(vsd['path'])
+    def set_gcodes_path(self):
+        virtual_sdcard = self._screen.printer.get_config_section("virtual_sdcard")
+        if virtual_sdcard and "path" in virtual_sdcard:
+            self.gcodes_path = os.path.expanduser(virtual_sdcard['path'])
         logging.info(f"Gcodes path: {self.gcodes_path}")
-
-    def reset(self):
-        self._screen = None
-        self.callbacks = None
-        self.files = None
-        self.filelist = None
-        self.directories = None
-        self.gcodes_path = None
 
     def _callback(self, result, method, params):
         if method == "server.files.list":
@@ -44,7 +35,7 @@ class KlippyFiles:
                         newfiles.append(file)
                         self.add_file(item, False)
 
-                self.run_callbacks(newfiles, deletedfiles)
+                self.run_callbacks(newfiles=newfiles, deletedfiles=deletedfiles)
 
                 if len(deletedfiles) > 0:
                     for file in deletedfiles:
@@ -61,7 +52,7 @@ class KlippyFiles:
                     if fullpath not in self.filelist:
                         newfiles.append(fullpath)
 
-                self.run_callbacks(newfiles)
+                self.run_callbacks(newfiles=newfiles)
         elif method == "server.files.metadata":
             if "error" in result.keys():
                 logging.debug(f"Error in getting metadata for {params['filename']}. Retrying in 6 seconds")
@@ -102,8 +93,6 @@ class KlippyFiles:
         if filename in self.filelist:
             logging.info(f"File already exists: {filename}")
             self.request_metadata(filename)
-            args = None, None, [filename]
-            GLib.idle_add(self.run_callbacks, *args)
             return
 
         self.filelist.append(filename)
@@ -116,10 +105,7 @@ class KlippyFiles:
             self.run_callbacks(newfiles=[filename])
 
     def add_file_callback(self, callback):
-        try:
-            self.callbacks.append(callback)
-        except Exception as e:
-            logging.debug(f"Callback not found: {callback}:\n{e}")
+        self.callbacks.append(callback)
 
     def process_update(self, data):
         if 'item' in data and data['item']['root'] != 'gcodes':
@@ -140,35 +126,30 @@ class KlippyFiles:
         return False
 
     def remove_file_callback(self, callback):
-        if callback in self.callbacks:
-            self.callbacks.pop(self.callbacks.index(callback))
-
-    def file_exists(self, filename):
-        return filename in self.filelist
+        if callback not in self.callbacks:
+            logging.info(f"callback not found {callback}")
+            return
+        logging.info(f"removing callback {callback}")
+        self.callbacks.remove(callback)
 
     def file_metadata_exists(self, filename):
-        if self.file_exists(filename):
-            return "slicer" in self.files[filename]
-        return False
+        return filename in self.filelist and "slicer" in self.files[filename]
 
     def get_thumbnail_location(self, filename, small=False):
-        if small and len(self.files[filename]['thumbnails']) > 1 \
-                and self.files[filename]['thumbnails'][0]['width'] > self.files[filename]['thumbnails'][1]['width']:
+        if all((
+            small,
+            len(self.files[filename]['thumbnails']) > 1,
+            self.files[filename]['thumbnails'][0]['width'] > self.files[filename]['thumbnails'][1]['width']
+        )):
             thumb = self.files[filename]['thumbnails'][1]
         else:
             thumb = self.files[filename]['thumbnails'][0]
-        if thumb['local'] is False:
-            return ['http', thumb['path']]
-        return ['file', thumb['path']]
+        return ['file', thumb['path']] if thumb['local'] else ['http', thumb['path']]
 
     def has_thumbnail(self, filename):
-        if filename not in self.files:
-            return False
-        return "thumbnails" in self.files[filename] and len(self.files[filename]) > 0
+        return filename in self.files and "thumbnails" in self.files[filename]
 
     def request_metadata(self, filename):
-        if filename not in self.filelist:
-            return False
         self._screen._ws.klippy.get_file_metadata(filename, self._callback)
 
     def refresh_files(self):
@@ -177,28 +158,17 @@ class KlippyFiles:
         return False
 
     def remove_file(self, filename, notify=True):
-        if filename not in self.filelist:
-            return
-
-        self.filelist.remove(filename)
-        self.files.pop(filename, None)
-
-        if notify is True:
+        if filename in self.filelist:
+            self.filelist.remove(filename)
+        if filename in self.files:
+            self.files.pop(filename, None)
+        if notify:
             self.run_callbacks(deletedfiles=[filename])
 
-    def run_callbacks(self, newfiles=None, deletedfiles=None, mods=None):
-        if mods is None:
-            mods = []
-        if deletedfiles is None:
-            deletedfiles = []
-        if newfiles is None:
-            newfiles = []
-        if len(self.callbacks) <= 0:
-            return False
+    def run_callbacks(self, newfiles=(), deletedfiles=(), mods=()):
+        args = (newfiles, deletedfiles, mods)
         for cb in self.callbacks:
-            args = newfiles, deletedfiles, mods
             GLib.idle_add(cb, *args)
-        return False
 
     def get_file_list(self):
         return self.filelist
