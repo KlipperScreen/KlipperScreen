@@ -264,7 +264,7 @@ class Panel(ScreenPanel):
             self.sort_current[1] = (self.sort_current[1] + 1) % 2
         else:
             oldkey = self.sort_current[0]
-            logging.info(f"Changing sort_{oldkey} to {self.sort_items[self.sort_current[0]]}")
+            logging.info(f"Changing from {oldkey} to {key}")
             self.labels[f'sort_{oldkey}'].set_image(None)
             self.labels[f'sort_{oldkey}'].show_all()
             self.sort_current = [key, 0]
