@@ -150,8 +150,7 @@ class Panel(ScreenPanel):
             self.buttons[button].set_sensitive(enable)
 
     def activate(self):
-        if self._printer.state == "printing":
-            self.enable_buttons(False)
+        self.enable_buttons(self._printer.state in ("ready", "paused"))
 
     def process_update(self, action, data):
         if action == "notify_gcode_response":
