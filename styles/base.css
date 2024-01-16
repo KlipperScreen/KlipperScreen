@@ -22,7 +22,7 @@
 }
 
 button:disabled {
-    opacity: .2;
+    opacity: .5;
 }
 
 list row,
