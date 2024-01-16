@@ -84,9 +84,9 @@ class Panel(ScreenPanel):
         self._screen._ws.klippy.gcode_script(f'SET_PIN PIN={" ".join(pin.split(" ")[1:])} VALUE={value}')
         GLib.timeout_add_seconds(1, self.check_pin_value, pin, widget)
 
-    def check_pin_value(self, pin, widget):
+    def check_pin_value(self, pin, widget=None):
         self.update_pin_value(None, pin, self._printer.get_pin_value(pin))
-        if isinstance(widget, Gtk.Switch):
+        if widget and isinstance(widget, Gtk.Switch):
             widget.set_sensitive(True)
         return False
 
