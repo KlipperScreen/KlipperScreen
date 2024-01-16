@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-12 21:42-0300\n"
-"PO-Revision-Date: 2023-12-11 19:05+0000\n"
+"PO-Revision-Date: 2024-01-16 10:02+0000\n"
 "Last-Translator: \"Zs.Antal\" <zsikaiantal@icloud.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/hu/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -194,7 +194,7 @@ msgid "Elapsed:"
 msgstr "Eltelt:"
 
 msgid "Ended official support in June 2023"
-msgstr ""
+msgstr "A hivatalos támogatás 2023 júniusában véget ért"
 
 msgid "Error"
 msgstr "Hiba"
@@ -365,7 +365,7 @@ msgid "Klipper will reboot"
 msgstr "A Klipper újraindul"
 
 msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
+msgstr "A KlipperScreen 2024 júniusában megszünteti a támogatást"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
@@ -397,7 +397,7 @@ msgid "Load"
 msgstr "Betöltés"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Betöltés..."
 
 msgid "Lower Nozzle"
 msgstr "Fúvóka le"
@@ -478,10 +478,10 @@ msgid "No elegible macros:"
 msgstr "Nincs választható makró:"
 
 msgid "No mesh has been loaded"
-msgstr ""
+msgstr "Nincs háló betöltve"
 
 msgid "No wireless interface has been found"
-msgstr ""
+msgstr "Nem található vezeték nélküli interfész"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -491,16 +491,16 @@ msgstr ""
 "kell beállítani."
 
 msgid "Not working or not configured"
-msgstr ""
+msgstr "Nem működik vagy nincs beállítva"
 
 msgid "Nothing selected"
 msgstr "Nincs kiválasztva"
 
 msgid "Notification log empty"
-msgstr ""
+msgstr "Értesítési napló üres"
 
 msgid "Notifications"
-msgstr ""
+msgstr "Értesítések"
 
 #, python-format
 msgid "Outdated by %d"
@@ -762,10 +762,10 @@ msgid "Uploaded"
 msgstr "Feltöltve"
 
 msgid "Warning"
-msgstr ""
+msgstr "Figyelem"
 
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
+msgstr "A WebRTC-t a Streamet próbáló háttérrendszer nem támogatja"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Mozgási seb. (mm/s)"
