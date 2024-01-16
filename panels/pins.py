@@ -4,6 +4,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib, Pango
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.functions import parse_bool
 
 
 class Panel(ScreenPanel):
@@ -40,7 +41,7 @@ class Panel(ScreenPanel):
 
         self.devices[pin] = {}
         section = self._printer.get_config_section(pin)
-        if section.get('pwm') or section.get('hardware_pwm'):
+        if parse_bool(section.get('pwm', 'false')) or parse_bool(section.get('hardware_pwm', 'false')):
             scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, min=0, max=100, step=1)
             scale.set_value(self.check_pin_value(pin))
             scale.set_digits(0)
