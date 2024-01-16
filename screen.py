@@ -425,6 +425,7 @@ class KlipperScreen(Gtk.Window):
     def restart_ks(self, *args):
         logging.debug(f"Restarting {sys.executable} {' '.join(sys.argv)}")
         os.execv(sys.executable, ['python'] + sys.argv)
+        # noinspection PyUnreachableCode
         self._ws.send_method("machine.services.restart", {"service": "KlipperScreen"})  # Fallback
 
     def init_style(self):
