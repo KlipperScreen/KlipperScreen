@@ -720,6 +720,27 @@ msgstr ""
 msgid "System"
 msgstr ""
 
+msgid "System Info"
+msgstr ""
+
+msgid "Platform"
+msgstr ""
+
+msgid "Version"
+msgstr ""
+
+msgid "Mac"
+msgstr ""
+
+msgid "Screen Brightness"
+msgstr ""
+
+msgid "High"
+msgstr ""
+
+msgid "Low"
+msgstr ""
+
 msgid "System Restart"
 msgstr ""
 
