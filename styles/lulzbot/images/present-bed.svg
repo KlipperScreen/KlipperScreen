@@ -12,7 +12,7 @@
    viewBox="0 0 64 64"
    version="1.1"
    id="svg10"
-   sodipodi:docname="home-z.svg"
+   sodipodi:docname="present-bed.svg"
    inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)">
   <metadata
      id="metadata16">
@@ -57,16 +57,13 @@
      id="title2">folder</title>
   <desc
      id="desc4">Created with Sketch.</desc>
-  <rect
-     y="53.642284"
-     x="6.0500031"
-     height="5.8285666"
-     width="51.899994"
+  <path
      id="rect7837"
-     style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+     style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="m 56.916016,15.21324 -19.490235,0.07227 0.207031,13.642578 5.5,-5.599609 7.132813,7.007812 -17.517578,17.835938 -17.835938,-17.519531 7.007813,-7.134766 5.714844,5.613281 -0.208985,-13.80664 -20.5097654,0.07617 0.1679688,44.999999 49.9999996,-0.1875 z" />
   <path
      inkscape:connector-curvature="0"
      id="path7561-4"
-     d="M 48.941332,21.369023 31.355753,3.5989379 13.585668,21.184519 l 7.034623,7.108037 5.693541,-5.634648 -0.236549,20.738885 9.99935,0.114053 0.235947,-20.686154 5.520713,5.578953 z"
+     d="M 50.267256,30.336315 32.748631,48.17241 14.912536,30.653782 l 7.007842,-7.134442 5.714691,5.613196 -0.314541,-20.7378495 9.99885,-0.151657 0.313741,20.6851205 5.499693,-5.599675 z"
      style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
 </svg>
