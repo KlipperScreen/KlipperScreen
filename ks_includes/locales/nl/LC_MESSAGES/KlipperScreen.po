@@ -725,6 +725,27 @@ msgstr "Update starten voor"
 msgid "System"
 msgstr "Systeem"
 
+msgid "System Info"
+msgstr "Systeeminformatie"
+
+msgid "Platform"
+msgstr "Platform"
+
+msgid "Version"
+msgstr "Versie"
+
+msgid "Mac"
+msgstr "Mac-adres"
+
+msgid "Screen Brightness"
+msgstr "Schermhelderheid"
+
+msgid "High"
+msgstr "Hoog"
+
+msgid "Low"
+msgstr "Laag"
+
 msgid "System Restart"
 msgstr "Systeem Herstarten"
 

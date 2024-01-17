@@ -719,6 +719,27 @@ msgstr "Frissítés indítása"
 msgid "System"
 msgstr "Rendszer"
 
+msgid "System Info"
+msgstr "Rendszerinformáció"
+
+msgid "Platform"
+msgstr "Platform"
+
+msgid "Version"
+msgstr "Verzió"
+
+msgid "Mac"
+msgstr "Mac-cím"
+
+msgid "Screen Brightness"
+msgstr "Képernyő Fényerő"
+
+msgid "High"
+msgstr "Magas"
+
+msgid "Low"
+msgstr "Alacsony"
+
 msgid "System Restart"
 msgstr "Rendszer újraindítása"
 

@@ -726,6 +726,27 @@ msgstr "Запуск обновления для"
 msgid "System"
 msgstr "Система"
 
+msgid "System Info"
+msgstr "Информация о системе"
+
+msgid "Platform"
+msgstr "Платформа"
+
+msgid "Version"
+msgstr "Версия"
+
+msgid "Mac"
+msgstr "Mac-адрес"
+
+msgid "Screen Brightness"
+msgstr "Яркость экрана"
+
+msgid "High"
+msgstr "Высокая"
+
+msgid "Low"
+msgstr "Низкая"
+
 msgid "System Restart"
 msgstr "Рестарт Системы"
 

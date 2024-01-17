@@ -727,6 +727,27 @@ msgstr "Початок оновлення для"
 msgid "System"
 msgstr "Системна"
 
+msgid "System Info"
+msgstr "Інформація про систему"
+
+msgid "Platform"
+msgstr "Платформа"
+
+msgid "Version"
+msgstr "Версія"
+
+msgid "Mac"
+msgstr "MAC-адреса"
+
+msgid "Screen Brightness"
+msgstr "Яскравість екрану"
+
+msgid "High"
+msgstr "Висока"
+
+msgid "Low"
+msgstr "Низька"
+
 msgid "System Restart"
 msgstr "Перезавантаження системи"
 

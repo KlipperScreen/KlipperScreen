@@ -724,6 +724,27 @@ msgstr "Iniciando atualização para"
 msgid "System"
 msgstr "Sistema"
 
+msgid "System Info"
+msgstr "Info do Sistema"
+
+msgid "Platform"
+msgstr "Plataforma"
+
+msgid "Version"
+msgstr "Versão"
+
+msgid "Mac"
+msgstr "Mac"
+
+msgid "Screen Brightness"
+msgstr "Brilho da Tela"
+
+msgid "High"
+msgstr "Alto"
+
+msgid "Low"
+msgstr "Baixo"
+
 msgid "System Restart"
 msgstr "Reiniciar Sistema"
 

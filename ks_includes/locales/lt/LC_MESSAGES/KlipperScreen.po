@@ -727,6 +727,27 @@ msgstr "Paleidžiami atnaujinimai"
 msgid "System"
 msgstr "Sistema"
 
+msgid "System Info"
+msgstr "Sistemos Informacija"
+
+msgid "Platform"
+msgstr "Platforma"
+
+msgid "Version"
+msgstr "Versija"
+
+msgid "Mac"
+msgstr "Mac"
+
+msgid "Screen Brightness"
+msgstr "Ekrano šviesumas"
+
+msgid "High"
+msgstr "Aukštas"
+
+msgid "Low"
+msgstr "Žemas"
+
 msgid "System Restart"
 msgstr "Sistemos perkrovimas"
 

@@ -716,6 +716,27 @@ msgstr "업데이트 시작 중"
 msgid "System"
 msgstr "시스템"
 
+msgid "System Info"
+msgstr "시스템 정보"
+
+msgid "Platform"
+msgstr "플랫폼"
+
+msgid "Version"
+msgstr "버전"
+
+msgid "Mac"
+msgstr "Mac 주소"
+
+msgid "Screen Brightness"
+msgstr "화면 밝기"
+
+msgid "High"
+msgstr "높음"
+
+msgid "Low"
+msgstr "낮음"
+
 msgid "System Restart"
 msgstr "시스템 재시작"
 

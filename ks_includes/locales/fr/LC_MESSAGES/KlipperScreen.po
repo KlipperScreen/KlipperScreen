@@ -727,6 +727,24 @@ msgstr "Démarrage de la mise à jour pour"
 msgid "System"
 msgstr "Système"
 
+msgid "Platform"
+msgstr "Plateforme"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Mac"
+msgstr "Adresse Mac"
+
+msgid "Screen Brightness"
+msgstr "Luminosité de l'écran"
+
+msgid "High"
+msgstr "Élevé"
+
+msgid "Low"
+msgstr "Faible"
+
 msgid "System Restart"
 msgstr "Redémarrez le système"
 
@@ -1032,7 +1050,7 @@ msgstr "mm³/s"
 #~ msgid "Fan -"
 #~ msgstr "Ventilateur-"
 
-#~ msgid "System Information"
+#~ msgid "System Info"
 #~ msgstr "Info systeme"
 
 #~ msgid "Time Elapsed"

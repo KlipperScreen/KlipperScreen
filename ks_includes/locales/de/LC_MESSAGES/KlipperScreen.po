@@ -319,7 +319,7 @@ msgid "ID"
 msgstr "ID"
 
 msgid "Icon Theme"
-msgstr "Icon Theme"
+msgstr "Design"
 
 msgid "Initializing printer..."
 msgstr "Drucker wird initialisiert..."
@@ -724,6 +724,27 @@ msgstr "Starte Update für"
 
 msgid "System"
 msgstr "System"
+
+msgid "System Info"
+msgstr "Systeminformationen"
+
+msgid "Platform"
+msgstr "Plattform"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Mac"
+msgstr "Mac-Adresse"
+
+msgid "Screen Brightness"
+msgstr "Helligkeit"
+
+msgid "High"
+msgstr "Hoch"
+
+msgid "Low"
+msgstr "Niedrig"
 
 msgid "System Restart"
 msgstr "System neustarten"

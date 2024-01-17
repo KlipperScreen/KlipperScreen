@@ -724,6 +724,27 @@ msgstr "Startar uppdatering för"
 msgid "System"
 msgstr "System"
 
+msgid "System Info"
+msgstr "Systeminformation"
+
+msgid "Platform"
+msgstr "Plattform"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Mac"
+msgstr "Mac-adress"
+
+msgid "Screen Brightness"
+msgstr "Skärmens ljusstyrka"
+
+msgid "High"
+msgstr "Hög"
+
+msgid "Low"
+msgstr "Låg"
+
 msgid "System Restart"
 msgstr "System Omstart"
 

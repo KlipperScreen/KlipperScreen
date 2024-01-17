@@ -722,6 +722,27 @@ msgstr "Güncelleme başlatılıyor"
 msgid "System"
 msgstr "Sistem"
 
+msgid "System Info"
+msgstr "Sistem Bilgisi"
+
+msgid "Platform"
+msgstr "Platform"
+
+msgid "Version"
+msgstr "Sürüm"
+
+msgid "Mac"
+msgstr "Mac Adresi"
+
+msgid "Screen Brightness"
+msgstr "Ekran Parlaklığı"
+
+msgid "High"
+msgstr "Yüksek"
+
+msgid "Low"
+msgstr "Düşük"
+
 msgid "System Restart"
 msgstr "Sistem Yeniden Başlat"
 
