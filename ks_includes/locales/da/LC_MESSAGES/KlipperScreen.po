@@ -715,6 +715,27 @@ msgstr "Opdaterer"
 msgid "System"
 msgstr "System"
 
+msgid "System Info"
+msgstr "Systeminformation"
+
+msgid "Platform"
+msgstr "Platform"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Mac"
+msgstr "Mac-adresse"
+
+msgid "Screen Brightness"
+msgstr "Skærmens lysstyrke"
+
+msgid "High"
+msgstr "Høj"
+
+msgid "Low"
+msgstr "Lav"
+
 msgid "System Restart"
 msgstr "Genstart system"
 

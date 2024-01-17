@@ -720,6 +720,27 @@ msgstr "开始更新"
 msgid "System"
 msgstr "系统"
 
+msgid "System Info"
+msgstr "系统信息"
+
+msgid "Platform"
+msgstr "平台"
+
+msgid "Version"
+msgstr "版本"
+
+msgid "Mac"
+msgstr "Mac地址"
+
+msgid "Screen Brightness"
+msgstr "屏幕亮度"
+
+msgid "High"
+msgstr "高"
+
+msgid "Low"
+msgstr "低"
+
 msgid "System Restart"
 msgstr "重启系统"
 

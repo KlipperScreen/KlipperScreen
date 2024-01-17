@@ -714,6 +714,27 @@ msgstr "更新中"
 msgid "System"
 msgstr "システム"
 
+msgid "System Info"
+msgstr "システム情報"
+
+msgid "Platform"
+msgstr "プラットフォーム"
+
+msgid "Version"
+msgstr "バージョン"
+
+msgid "Mac"
+msgstr "Macアドレス"
+
+msgid "Screen Brightness"
+msgstr "画面の明るさ"
+
+msgid "High"
+msgstr "高い"
+
+msgid "Low"
+msgstr "低い"
+
 msgid "System Restart"
 msgstr "システムの再起動"
 

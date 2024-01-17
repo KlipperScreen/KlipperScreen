@@ -723,6 +723,27 @@ msgstr "Spuštění aktualizace pro"
 msgid "System"
 msgstr "Systém"
 
+msgid "System Info"
+msgstr "Systémové informace"
+
+msgid "Platform"
+msgstr "Platforma"
+
+msgid "Version"
+msgstr "Verze"
+
+msgid "Mac"
+msgstr "MAC adresa"
+
+msgid "Screen Brightness"
+msgstr "Jas obrazovky"
+
+msgid "High"
+msgstr "Vysoký"
+
+msgid "Low"
+msgstr "Nízký"
+
 msgid "System Restart"
 msgstr "Restart systému"
 

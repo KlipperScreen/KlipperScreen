@@ -724,6 +724,24 @@ msgstr "מתחיל עדכון עבור"
 msgid "System"
 msgstr "מערכת"
 
+msgid "Platform"
+msgstr "פלטפורמה"
+
+msgid "Version"
+msgstr "גרסה"
+
+msgid "Mac"
+msgstr "כתובת Mac"
+
+msgid "Screen Brightness"
+msgstr "בהירות המסך"
+
+msgid "High"
+msgstr "גבוהה"
+
+msgid "Low"
+msgstr "נמוכה"
+
 msgid "System Restart"
 msgstr "אתחול מערכת"
 
@@ -1041,7 +1059,7 @@ msgstr ""
 #~ msgid "Fan -"
 #~ msgstr "מאוורר -"
 
-#~ msgid "System Information"
+#~ msgid "System Info"
 #~ msgstr "מידע אודות המערכת"
 
 #~ msgid "Time Elapsed"
