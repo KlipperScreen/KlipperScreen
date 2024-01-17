@@ -87,7 +87,7 @@ class BasePanel(ScreenPanel):
         self.titlebar.set_valign(Gtk.Align.CENTER)
         self.titlebar.add(self.control['temp_box'])
         self.titlebar.add(self.titlelbl)
-        self.titlebar.add(self.control['time_box'])
+        #self.titlebar.add(self.control['time_box'])
 
         # Main layout
         self.main_grid = Gtk.Grid()
