@@ -3,6 +3,8 @@ import logging
 
 import gi
 
+import netifaces
+
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Pango
 from jinja2 import Environment
@@ -15,6 +17,7 @@ from ks_includes.screen_panel import ScreenPanel
 class BasePanel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
+        self.ip = None
         self.current_panel = None
         self.time_min = -1
         self.time_format = self._config.get_main_config().getboolean("24htime", True)
@@ -82,12 +85,19 @@ class BasePanel(ScreenPanel):
         self.control['time_box'].set_halign(Gtk.Align.END)
         self.control['time_box'].pack_end(self.control['time'], True, True, 10)
 
+        self.ip = self.get_ip()
+        self.control['ip_box'] = Gtk.Box()
+        self.control['ip'] = Gtk.Label(label=self.ip)
+        self.control['ip_box'].set_halign(Gtk.Align.END)
+        self.control['ip_box'].pack_end(self.control['ip'], True, True, 10)
+
         self.titlebar = Gtk.Box(spacing=5)
         self.titlebar.get_style_context().add_class("title_bar")
         self.titlebar.set_valign(Gtk.Align.CENTER)
         self.titlebar.add(self.control['temp_box'])
         self.titlebar.add(self.titlelbl)
         #self.titlebar.add(self.control['time_box'])
+        self.titlebar.add(self.control['ip_box'])
 
         # Main layout
         self.main_grid = Gtk.Grid()
@@ -104,6 +114,7 @@ class BasePanel(ScreenPanel):
             self.main_grid.attach(self.content, 1, 1, 1, 1)
 
         self.update_time()
+        self.update_ip()
 
     def show_heaters(self, show=True):
         try:
@@ -182,6 +193,7 @@ class BasePanel(ScreenPanel):
     def activate(self):
         if self.time_update is None:
             self.time_update = GLib.timeout_add_seconds(1, self.update_time)
+            self.time_update = GLib.timeout_add_seconds(15, self.update_ip)
 
     def add_content(self, panel):
         show = self._printer is not None and self._printer.state not in ('disconnected', 'startup', 'shutdown', 'error')
@@ -340,3 +352,28 @@ class BasePanel(ScreenPanel):
             self._screen.dialogs.remove(self.update_dialog)
         self.update_dialog = None
         self._screen._menu_go_back(home=True)
+
+    def get_ip(self):
+        #borrowed from network.py
+        gws = netifaces.gateways()
+        if "default" in gws and netifaces.AF_INET in gws["default"]:
+            self.interface = gws["default"][netifaces.AF_INET][1]
+        else:
+            ints = netifaces.interfaces()
+            if 'lo' in ints:
+                ints.pop(ints.index('lo'))
+            if len(ints) > 0:
+                self.interface = ints[0]
+            else:
+                self.interface = 'lo'
+        res = netifaces.ifaddresses(self.interface)
+        if netifaces.AF_INET in res and len(res[netifaces.AF_INET]) > 0:
+            ip = res[netifaces.AF_INET][0]['addr']
+        else:
+            ip = None
+        return ip
+
+    def update_ip(self):
+        self.ip = self.get_ip()
+        self.control['ip'].set_text(self.ip)
+        return True
