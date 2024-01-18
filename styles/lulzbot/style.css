@@ -4,7 +4,7 @@
 
 
 /* This sets the Lulzbot background Logo */
-window {background-image: url("/home/biqu/KlipperScreen/styles/lulzbot/Lulzbot_Logo_Very_Dark.jpg");}
+window {background-image: url("/home/biqu/KlipperScreen/styles/lulzbot/Darker_Rocto_800_480.png");}
 
 /* This sets the buttons to be transparent so you can see the background image, and rounds the ends of the lines below the icons. */
 button {background-color: rgba(0,0,0,0);border-radius:1em;}
