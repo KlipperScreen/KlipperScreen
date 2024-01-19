@@ -4,17 +4,17 @@ msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-12 21:42-0300\n"
-"PO-Revision-Date: 2023-10-23 14:32+0000\n"
-"Last-Translator: Daviteusz <daviteusz0@gmail.com>\n"
+"PO-Revision-Date: 2024-01-18 13:00+0000\n"
+"Last-Translator: Eryk Michalak <gnu.ewm@protonmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.1.1-dev\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -196,7 +196,7 @@ msgid "Elapsed:"
 msgstr "Upłynęło:"
 
 msgid "Ended official support in June 2023"
-msgstr ""
+msgstr "Oficjalne wsparcie zakończyło się w czerwcu 2023"
 
 msgid "Error"
 msgstr "Błąd"
@@ -367,7 +367,7 @@ msgid "Klipper will reboot"
 msgstr "Klipper uruchomi się ponownie"
 
 msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
+msgstr "KlipperScreen zakończy wsparcie w czerwcu 2024"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
@@ -400,7 +400,7 @@ msgid "Load"
 msgstr "Ładuj"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Ładowanie..."
 
 msgid "Lower Nozzle"
 msgstr "Obniż dyszę"
@@ -481,10 +481,10 @@ msgid "No elegible macros:"
 msgstr "Brak odpowiednich makr:"
 
 msgid "No mesh has been loaded"
-msgstr ""
+msgstr "Nie załadowano żadnej siatki"
 
 msgid "No wireless interface has been found"
-msgstr ""
+msgstr "Nie znaleziono żadnego bezprzewodowego interfejsu"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -494,16 +494,16 @@ msgstr ""
 "klipperscreen.conf"
 
 msgid "Not working or not configured"
-msgstr ""
+msgstr "Nie działa lub nie jest skonfigurowane"
 
 msgid "Nothing selected"
 msgstr "Nic nie wybrano"
 
 msgid "Notification log empty"
-msgstr ""
+msgstr "Dziennik powiadomień jest pusty"
 
 msgid "Notifications"
-msgstr ""
+msgstr "Powiadomienia"
 
 #, python-format
 msgid "Outdated by %d"
@@ -766,10 +766,10 @@ msgid "Uploaded"
 msgstr "Przesłane"
 
 msgid "Warning"
-msgstr ""
+msgstr "Ostrzeżenie"
 
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
+msgstr "WebRTC nie jest wspierane przez backend próbujący streamować"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Prędkość ruchu XY (mm/s)"
