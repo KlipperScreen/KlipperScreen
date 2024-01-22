@@ -1,32 +1,49 @@
-/* Lulzbot KlipperScreen Theme 4/19/2023 CDS */
-/* Added disabled button opacity 11/9/2023 CDS */
-/* Adding comments, adjusting colors, made switches change color 11/20/2023 CDS */
+/**********************************
+ *  Lulzbot KlipperScreen Theme   *
+ *  By Carl Smith  2024 - FAME3D  *
+ *********************************/
 
 
 /* This sets the Lulzbot background Logo */
 window {background-image: url("/home/biqu/KlipperScreen/styles/lulzbot/Darker_Rocto_800_480.png");}
 
-/* This sets the buttons to be transparent so you can see the background image, and rounds the ends of the lines below the icons. */
-button {background-color: rgba(0,0,0,0);border-radius:1em;}
+
+/* This sets the buttons to be partly transparent so you can see the background image, 
+   and rounds the border corners for buttons that have borders. */
+button {background-color: rgba(0,0,0,.45); border-radius:1em; border-style:none;} 
+
 
 /* This sets the background color of the button to LulzBot green while you are pressing it */
-button:active {background-color: #c1d82f;}
+button:active,
+.button_active,
+button.active {
+    background-color: #c1d82f;
+}
 
-/* This sets the off and on colors for switches.  #4b5412 #383f0e */
+
+/* This sets the off and on colors for switches. */
 switch {background-color: #383f0e;}
 treeview.view check:checked,
 switch:checked {
     background-color: #9db026;
 }
 
-/* This changes the lines below the main screen right side icons to LulzBot green. */
-button.color1 {border-bottom-color: #c1d82f;}
-button.color2 {border-bottom-color: #c1d82f;}
-button.color3 {border-bottom-color: #c1d82f;}
-button.color4 {border-bottom-color: #c1d82f;}
+
+/* This sets the main icons all to green border, sets margins around the borders so they don't touch */
+button.color1,
+button.color2,
+button.color3,
+button.color4 {
+    border-bottom: none;
+    margin: .2em;
+    min-height: 0em;
+    border: .1em solid #c1d82f; 
+}
+
 
 /* This sets the color of the scroll bar slider button. */
 scrollbar slider {background-color: #383f0e;}
+
 
 /* This changes the color in the sliders for things like fan speed. */
 trough highlight, trough progress {
@@ -41,3 +58,21 @@ button:disabled {
     opacity: 1;
 }
 
+
+.distbutton_active {
+    background-color: @active;
+    font-weight: 600;
+}
+
+.distbutton_top,
+.distbutton,
+.distbutton_bottom {
+    border: .1em solid #c1d82f;
+    margin-left: .2em;
+    margin-right: .2em;
+    min-height: 1em;
+    border-top-right-radius: .7em;
+    border-bottom-right-radius: .7em;
+    border-top-left-radius: .7em;
+    border-bottom-left-radius: .7em;
+}
