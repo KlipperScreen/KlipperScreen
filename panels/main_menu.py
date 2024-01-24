@@ -16,26 +16,26 @@ class Panel(MenuPanel):
         self.graph_update = None
         self.active_heater = None
         self.h = self.f = 0
-        self.main_menu = self._gtk.HomogeneousGrid()
-        self.main_menu.set_hexpand(True)
+        self.main_menu = Gtk.Grid()
+        self.main_menu.set_hexpand(False)
         self.main_menu.set_vexpand(True)
         scroll = self._gtk.ScrolledWindow()
         self.numpad_visible = False
 
         logging.info("### Making MainMenu")
 
-        stats = self._printer.get_printer_status_data()["printer"]
-        if stats["temperature_devices"]["count"] > 0 or stats["extruders"]["count"] > 0:
-            self._gtk.reset_temp_color()
-            self.main_menu.attach(self.create_left_panel(), 0, 0, 1, 1)
-        if self._screen.vertical_mode:
-            self.labels['menu'] = self.arrangeMenuItems(items, 3, True)
-            scroll.add(self.labels['menu'])
-            self.main_menu.attach(scroll, 0, 1, 1, 1)
-        else:
-            self.labels['menu'] = self.arrangeMenuItems(items, 2, True)
-            scroll.add(self.labels['menu'])
-            self.main_menu.attach(scroll, 1, 0, 1, 1)
+        #stats = self._printer.get_printer_status_data()["printer"]
+        #if stats["temperature_devices"]["count"] > 0 or stats["extruders"]["count"] > 0:
+        #    self._gtk.reset_temp_color()
+        #self.main_menu.attach(self.create_left_panel(), 0, 0, 2, 1)
+        #if self._screen.vertical_mode:
+        #    self.labels['menu'] = self.arrangeMenuItems(items, 3, True)
+        #    scroll.add(self.labels['menu'])
+        #    self.main_menu.attach(scroll, 0, 1, 1, 1)
+        #else:
+        self.labels['menu'] = self.arrangeMenuItems(items, 4, True)
+        scroll.add(self.labels['menu'])
+        self.main_menu.attach(scroll, 0, 1, 2, 2)
         self.content.add(self.main_menu)
 
     def update_graph_visibility(self):
@@ -132,8 +132,8 @@ class Panel(MenuPanel):
         if can_target:
             self.labels['da'].add_object(device, "targets", rgb, True, False)
 
-        name = self._gtk.Label(self.prettify(devname))
-        #name.connect("clicked", self.toggle_visibility, device)
+        name = self._gtk.Button(image, self.prettify(devname), None, self.bts, Gtk.PositionType.LEFT, 1)
+        name.connect("clicked", self.toggle_visibility, device)
         name.set_alignment(0, .5)
         name.get_style_context().add_class(class_name)
         visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}", device, fallback=True)
@@ -163,7 +163,7 @@ class Panel(MenuPanel):
         return True
 
     def toggle_visibility(self, widget, device):
-        self.devices[device]['visible'] = False # swapping "^= True" to "= Flase" so the temp graph does not show up
+        self.devices[device]['visible'] ^= True
         logging.info(f"Graph show {self.devices[device]['visible']}: {device}")
 
         section = f"graph {self._screen.connected_printer}"
@@ -219,12 +219,12 @@ class Panel(MenuPanel):
         self.labels['devices'].get_style_context().add_class('heater-grid')
         self.labels['devices'].set_vexpand(False)
 
-        name = Gtk.Label()
-        temp = Gtk.Label(_("Temp (°C)"))
-        temp.get_style_context().add_class("heater-grid-temp")
+        #name = Gtk.Label()
+        #temp = Gtk.Label(_("Temp (°C)"))
+        #temp.get_style_context().add_class("heater-grid-temp")
 
-        self.labels['devices'].attach(name, 0, 0, 1, 1)
-        self.labels['devices'].attach(temp, 1, 0, 1, 1)
+        #self.labels['devices'].attach(name, 0, 0, 1, 1)
+        #self.labels['devices'].attach(temp, 1, 0, 1, 1)
 
         self.labels['da'] = HeaterGraph(self._printer, self._gtk.font_size)
         self.labels['da'].set_vexpand(True)
@@ -234,7 +234,7 @@ class Panel(MenuPanel):
         scroll.get_style_context().add_class('heater-list')
         scroll.add(self.labels['devices'])
 
-        self.left_panel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        self.left_panel = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         self.left_panel.add(scroll)
 
         for d in self._printer.get_temp_devices():
@@ -255,7 +255,6 @@ class Panel(MenuPanel):
         self.main_menu.show_all()
         self.numpad_visible = False
         self._screen.base_panel.set_control_sensitive(False, control='back')
-        self.update_graph_visibility()
 
     def process_update(self, action, data):
         if action != "notify_status_update":
