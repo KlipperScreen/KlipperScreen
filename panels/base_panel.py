@@ -8,7 +8,6 @@ from gi.repository import GLib, Gtk, Pango
 from jinja2 import Environment
 from datetime import datetime
 from math import log
-from contextlib import suppress
 from ks_includes.screen_panel import ScreenPanel
 
 
@@ -198,22 +197,21 @@ class BasePanel(ScreenPanel):
         if action == "notify_update_response":
             if self.update_dialog is None:
                 self.show_update_dialog()
-            with suppress(KeyError):
+            if 'message' in data:
                 self.labels['update_progress'].set_text(
                     f"{self.labels['update_progress'].get_text().strip()}\n"
                     f"{data['message']}\n")
-            with suppress(KeyError):
-                if data['complete']:
-                    logging.info("Update complete")
-                    if self.update_dialog is not None:
-                        try:
-                            self.update_dialog.set_response_sensitive(Gtk.ResponseType.OK, True)
-                            self.update_dialog.get_widget_for_response(Gtk.ResponseType.OK).show()
-                        except AttributeError:
-                            logging.error("error trying to show the updater button the dialog might be closed")
-                            self._screen.updating = False
-                            for dialog in self._screen.dialogs:
-                                self._gtk.remove_dialog(dialog)
+            if 'complete' in data and data['complete']:
+                logging.info("Update complete")
+                if self.update_dialog is not None:
+                    try:
+                        self.update_dialog.set_response_sensitive(Gtk.ResponseType.OK, True)
+                        self.update_dialog.get_widget_for_response(Gtk.ResponseType.OK).show()
+                    except AttributeError:
+                        logging.error("error trying to show the updater button the dialog might be closed")
+                        self._screen.updating = False
+                        for dialog in self._screen.dialogs:
+                            self._gtk.remove_dialog(dialog)
 
         if action != "notify_status_update" or self._screen.printer is None:
             return
@@ -230,13 +228,13 @@ class BasePanel(ScreenPanel):
                         name = f"{name[:1].upper()}: "
                 self.labels[device].set_label(f"{name}{int(temp)}°")
 
-        with suppress(Exception):
-            if self.current_extruder is not False and data["toolhead"]["extruder"] != self.current_extruder:
-                self.control['temp_box'].remove(self.labels[f"{self.current_extruder}_box"])
-                self.current_extruder = data["toolhead"]["extruder"]
-                self.control['temp_box'].pack_start(self.labels[f"{self.current_extruder}_box"], True, True, 3)
-                self.control['temp_box'].reorder_child(self.labels[f"{self.current_extruder}_box"], 0)
-                self.control['temp_box'].show_all()
+        if (self.current_extruder is not False and 'toolhead' in data and 'extruder' in data['toolhead']
+                and data["toolhead"]["extruder"] != self.current_extruder):
+            self.control['temp_box'].remove(self.labels[f"{self.current_extruder}_box"])
+            self.current_extruder = data["toolhead"]["extruder"]
+            self.control['temp_box'].pack_start(self.labels[f"{self.current_extruder}_box"], True, True, 3)
+            self.control['temp_box'].reorder_child(self.labels[f"{self.current_extruder}_box"], 0)
+            self.control['temp_box'].show_all()
 
         return False
 
