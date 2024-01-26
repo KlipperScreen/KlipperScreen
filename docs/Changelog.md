@@ -2,7 +2,7 @@
 
 Breaking changes will be listed here.
 
-#### [2024_01_26]()
+#### [2024_01_26](https://github.com/KlipperScreen/KlipperScreen/commit/9d0e4b841f905f0034a7c6fefefcf041e38b90a3)
 * Deprecated old ~/klipper_config folder  users need to place the configfile
 in ~/printer_data/config, ~/.config/KlipperScreen, or directly in the repo
 
