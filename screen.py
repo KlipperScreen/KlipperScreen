@@ -191,7 +191,7 @@ class KlipperScreen(Gtk.Window):
             "shutdown": self.state_shutdown
         }
         for printer in self.printers:
-            printer["data"] = Printer(state_execute, state_callbacks, self.process_busy_state)
+            printer["data"] = Printer(state_execute, state_callbacks)
         default_printer = self._config.get_main_config().get('default_printer')
         logging.debug(f"Default printer: {default_printer}")
         if [True for p in self.printers if default_printer in p]:
@@ -266,6 +266,7 @@ class KlipperScreen(Gtk.Window):
                 "motion_report": ["live_position", "live_velocity", "live_extruder_velocity"],
                 "exclude_object": ["current_object", "objects", "excluded_objects"],
                 "manual_probe": ['is_active'],
+                "screws_tilt_adjust": ['results', 'error'],
             }
         }
         for extruder in self.printer.get_tools():
@@ -326,7 +327,6 @@ class KlipperScreen(Gtk.Window):
         logging.debug(f"Current panel hierarchy: {' > '.join(self._cur_panels)}")
         if hasattr(self.panels[panel], "process_update"):
             self.process_update("notify_status_update", self.printer.data)
-            self.process_update("notify_busy", self.printer.busy)
         if hasattr(self.panels[panel], "activate"):
             self.panels[panel].activate()
         self.show_all()
@@ -652,10 +652,6 @@ class KlipperScreen(Gtk.Window):
         self.base_panel.show_heaters(False)
         self.show_panel("printer_select", _("Printer Select"), remove_all=True)
 
-    def process_busy_state(self, busy):
-        self.process_update("notify_busy", busy)
-        return False
-
     def websocket_disconnected(self, msg):
         self.printer_initializing(msg, remove=True)
         self.printer.state = "disconnected"
@@ -758,6 +754,8 @@ class KlipperScreen(Gtk.Window):
             self.printer.process_update(data)
             if 'manual_probe' in data and data['manual_probe']['is_active'] and 'zcalibrate' not in self._cur_panels:
                 self.show_panel("zcalibrate", _('Z Calibrate'))
+            if "screws_tilt_adjust" in data and 'bed_level' not in self._cur_panels:
+                self.show_panel("bed_level", _('Bed Level'))
         elif action == "notify_filelist_changed":
             if self.files is not None:
                 self.files.process_update(data)

@@ -6,7 +6,7 @@ from gi.repository import GLib
 
 
 class Printer:
-    def __init__(self, state_cb, state_callbacks, busy_cb):
+    def __init__(self, state_cb, state_callbacks):
         self.config = {}
         self.data = {}
         self.state = "disconnected"
@@ -22,8 +22,6 @@ class Printer:
         self.output_pin_count = 0
         self.store_timeout = None
         self.tempstore = {}
-        self.busy_cb = busy_cb
-        self.busy = False
         self.tempstore_size = 1200
         self.cameras = []
         self.available_commands = {}
@@ -41,7 +39,6 @@ class Printer:
         self.ledcount = 0
         self.output_pin_count = 0
         self.tempstore = {}
-        self.busy = False
         if not self.store_timeout:
             self.store_timeout = GLib.timeout_add_seconds(1, self._update_temp_store)
         self.tempstore_size = 1200
@@ -137,18 +134,10 @@ class Printer:
                 return "paused"
             if self.data['print_stats']['state'] == 'printing':
                 return "printing"
-            if self.data['idle_timeout']['state'].lower() == "printing":
-                return "busy"
         return self.data['webhooks']['state']
 
     def process_status_update(self):
         state = self.evaluate_state()
-        if state == "busy":
-            self.busy = True
-            return GLib.idle_add(self.busy_cb, True)
-        if self.busy:
-            self.busy = False
-            GLib.idle_add(self.busy_cb, False)
         if state != self.state:
             self.change_state(state)
         return False
