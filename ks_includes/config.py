@@ -22,6 +22,9 @@ SCREEN_BLANKING_OPTIONS = [
 ]
 
 klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
+home = os.path.expanduser("~/")
+klipper_config = os.path.join(home, "printer_data", "config")
+xdg_config = os.path.join(home, ".config", "KlipperScreen")
 
 
 class ConfigError(Exception):
@@ -389,35 +392,27 @@ class KlipperScreenConfig:
                     saved_def.append(line[(len(self.do_not_edit_prefix) + 1):])
         return ["\n".join(user_def), None if saved_def is None else "\n".join(saved_def)]
 
+    @staticmethod
+    def check_path_exists(base_dir, filename):
+        for name in (filename, filename.lower()):
+            full_path = os.path.join(base_dir, name)
+            if os.path.exists(full_path):
+                return full_path
+        return None
+
     def get_config_file_location(self, file):
-        # Passed config (-c) by default is ~/KlipperScreen.conf
+        # Passed config (-c) by default is blank
         logging.info(f"Passed config (-c): {file}")
-        if os.path.exists(file):
+        if file not in (".", "..") and os.path.exists(file):
             return file
 
-        file = os.path.join(klipperscreendir, self.configfile_name)
-        if os.path.exists(file):
-            return file
-        file = os.path.join(klipperscreendir, self.configfile_name.lower())
-        if os.path.exists(file):
-            return file
+        # List of directories to search for the config file
+        directories = [klipper_config, xdg_config, klipperscreendir]
 
-        klipper_config = os.path.join(os.path.expanduser("~/"), "printer_data", "config")
-        file = os.path.join(klipper_config, self.configfile_name)
-        if os.path.exists(file):
-            return file
-        file = os.path.join(klipper_config, self.configfile_name.lower())
-        if os.path.exists(file):
-            return file
-
-        # OLD config folder
-        klipper_config = os.path.join(os.path.expanduser("~/"), "klipper_config")
-        file = os.path.join(klipper_config, self.configfile_name)
-        if os.path.exists(file):
-            return file
-        file = os.path.join(klipper_config, self.configfile_name.lower())
-        if os.path.exists(file):
-            return file
+        for directory in directories:
+            path = self.check_path_exists(directory, self.configfile_name)
+            if path:
+                return path
 
         # fallback
         return self.default_config_path
@@ -517,17 +512,17 @@ class KlipperScreenConfig:
         if self.config_path != self.default_config_path:
             filepath = self.config_path
         else:
-            filepath = os.path.expanduser("~/")
-            klipper_config = os.path.join(filepath, "printer_data", "config")
-            old_klipper_config = os.path.join(filepath, "klipper_config")
             if os.path.exists(klipper_config):
                 filepath = os.path.join(klipper_config, self.configfile_name)
-            elif os.path.exists(old_klipper_config):
-                filepath = os.path.join(old_klipper_config, self.configfile_name)
             else:
-                filepath = os.path.join(filepath, self.configfile_name)
+                try:
+                    if not os.path.exists(xdg_config):
+                        pathlib.Path(xdg_config).mkdir(parents=True, exist_ok=True)
+                    filepath = os.path.join(xdg_config, self.configfile_name)
+                except Exception as e:
+                    logging.error(e)
+                    filepath = klipperscreendir
             logging.info(f'Creating a new config file in {filepath}')
-
         try:
             with open(filepath, 'w') as file:
                 file.write(contents)

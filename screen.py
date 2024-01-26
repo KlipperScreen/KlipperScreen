@@ -1097,7 +1097,8 @@ def main():
     homedir = os.path.expanduser("~")
 
     parser.add_argument(
-        "-c", "--configfile", default=os.path.join(homedir, "KlipperScreen.conf"), metavar='<configfile>',
+        "-c", "--configfile",
+        default="", metavar='<configfile>',
         help="Location of KlipperScreen configuration file"
     )
     logdir = os.path.join(homedir, "printer_data", "logs")

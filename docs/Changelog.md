@@ -2,6 +2,10 @@
 
 Breaking changes will be listed here.
 
+#### [2024_01_26]()
+* Deprecated old ~/klipper_config folder  users need to place the configfile
+in ~/printer_data/config, ~/.config/KlipperScreen, or directly in the repo
+
 #### [2023 10 08](https://github.com/KlipperScreen/KlipperScreen/commit/b6199a4f24beb02dc0f8956f60c88e3ba3468927)
 * Deprecated [bed_screws] and [z_calibrate_position] sections those configs should go in [printer name]
 
