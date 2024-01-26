@@ -105,6 +105,7 @@ class KlipperScreen(Gtk.Window):
         except Exception as e:
             logging.exception(f"{e}\n\n{traceback.format_exc()}")
             raise RuntimeError from e
+        GLib.set_prgname('KlipperScreen')
         self.blanking_time = 600
         self.use_dpms = True
         self.apiclient = None
