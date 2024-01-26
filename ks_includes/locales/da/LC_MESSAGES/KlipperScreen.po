@@ -3,15 +3,16 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-12 21:42-0300\n"
-"PO-Revision-Date: \n"
-"Last-Translator: SRBJ\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2024-01-23 12:01+0000\n"
+"Last-Translator: srbjessen <srbjessen@gmail.com>\n"
+"Language-Team: Danish <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/da/>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -27,7 +28,7 @@ msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "En FIRMWARE_RESTART kan løse problemet."
 
 msgid "ADXL Not Configured"
-msgstr ""
+msgstr "ADXL ikke konfigureret"
 
 msgid "Abort"
 msgstr "Annuller"
@@ -39,57 +40,57 @@ msgid "Accept"
 msgstr "OK"
 
 msgid "Add profile"
-msgstr ""
+msgstr "Tilføj profil"
 
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 msgid "Apply"
-msgstr ""
+msgstr "Anvend"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr ""
+msgstr "Tilføj %s%.3f offset til endestoppet?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr ""
+msgstr "Tilføj %s%.3f offset til proben?"
 
 msgid "Archived"
-msgstr ""
+msgstr "Arkiveret"
 
 msgid "Are you sure do you want to exclude the object?"
-msgstr ""
+msgstr "Er du sikker på, at du ønsker at ekskludere dette objekt?"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr "Er du sikker på, at du vil køre nødstop?"
+msgstr "Er du sikker på, at du vil aktivere nødstop?"
 
 msgid "Are you sure you wish to cancel this print?"
-msgstr "Er du sikker på du vil annullere det igangværende print?"
+msgstr "Er du sikker på, at du vil annullere det igangværende print?"
 
 msgid "Are you sure you wish to disable motors?"
 msgstr "Er du sikker på, at du vil deaktivere motorer?"
 
 msgid "Are you sure you wish to reboot the system?"
-msgstr "Er du sikker på du vil genstarte systemet?"
+msgstr "Er du sikker på, at du vil genstarte systemet?"
 
 msgid "Are you sure you wish to shutdown the system?"
-msgstr "Er du sikker på du vil lukke systemet?"
+msgstr "Er du sikker på, at du vil lukke systemet?"
 
 msgid "Auto"
-msgstr "Auto"
+msgstr "Automatisk"
 
 msgid "Auto-calibrate"
 msgstr "Automatisk kalibrering"
 
 msgid "Auto-close notifications"
-msgstr ""
+msgstr "Luk automatisk notifikationer"
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "Åben automatisk ekstrudering ved Pause"
 
 msgid "Auto-scroll"
-msgstr "Auto-scroll"
+msgstr "Auto-rulning"
 
 msgid "Bed Level"
 msgstr "Bed-Level"
@@ -98,7 +99,7 @@ msgid "Bed Mesh"
 msgstr "Bed-mesh"
 
 msgid "Bed screw configuration:"
-msgstr ""
+msgstr "Bed-skrue konfiguration:"
 
 msgid "Calibrate"
 msgstr "Kalibrér"
@@ -110,16 +111,16 @@ msgid "Calibrating"
 msgstr "Kalibrerer"
 
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 msgid "Can't set above the maximum:"
 msgstr "Kan ikke indstilles over maksimum:"
 
 msgid "Cancel"
-msgstr "Annuller"
+msgstr "Annullér"
 
 msgid "Cancel Print"
-msgstr "Annuller print"
+msgstr "Annullér print"
 
 msgid "Cancelled"
 msgstr "Annulleret"
@@ -134,13 +135,13 @@ msgid "Channel"
 msgstr "Kanal"
 
 msgid "Check ADXL Wiring"
-msgstr ""
+msgstr "Check ledninger til ADXL"
 
 msgid "Checking for updates, please wait..."
-msgstr ""
+msgstr "Tjekker for opdateringer, vent venligst..."
 
 msgid "Clear"
-msgstr ""
+msgstr "Ryd"
 
 msgid "Close"
 msgstr "Luk"
@@ -165,16 +166,16 @@ msgid "Cooldown"
 msgstr "Afkøling"
 
 msgid "DPMS has failed to load and has been disabled"
-msgstr ""
+msgstr "DPMS kunne ikke indlæses og er blevet deaktiveret"
 
 msgid "Date"
 msgstr "Dato"
 
 msgid "Delete Directory?"
-msgstr ""
+msgstr "Slet mappe?"
 
 msgid "Delete File?"
-msgstr ""
+msgstr "Slet fil?"
 
 msgid "Deselect"
 msgstr "Fravælg"
@@ -193,7 +194,7 @@ msgid "Elapsed:"
 msgstr "Tid:"
 
 msgid "Ended official support in June 2023"
-msgstr ""
+msgstr "Officiel support udløb i Juni 2023"
 
 msgid "Error"
 msgstr "Fejl"
@@ -202,10 +203,10 @@ msgid "Estimated Time Method"
 msgstr "Metode til beregning af tid"
 
 msgid "Exclude Object"
-msgstr ""
+msgstr "Ekskludér objekt"
 
 msgid "Extra Large"
-msgstr ""
+msgstr "Ekstra stor"
 
 msgid "Extrude"
 msgstr "Ekstrudér"
@@ -241,7 +242,7 @@ msgid "File:"
 msgstr "Fil:"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 msgid "Finding ADXL"
 msgstr "At finde ADXL"
@@ -256,10 +257,10 @@ msgid "Firmware Restart"
 msgstr "Firmware Genstart"
 
 msgid "Flow:"
-msgstr ""
+msgstr "Flow:"
 
 msgid "Flowrate:"
-msgstr ""
+msgstr "Flowrate:"
 
 msgid "Font Size"
 msgstr "Skriftstørrelse"
@@ -271,7 +272,7 @@ msgid "Go Back"
 msgstr "Gå tilbage"
 
 msgid "Height:"
-msgstr ""
+msgstr "Højde:"
 
 msgid "Hidden"
 msgstr "Skjult"
@@ -283,7 +284,7 @@ msgid "Hide sensors in Temp."
 msgstr "Skjul sensorer i Temp."
 
 msgid "Hide temp."
-msgstr ""
+msgstr "Skjul temperaturer"
 
 msgid "Home"
 msgstr "Home"
@@ -304,13 +305,13 @@ msgid "Home Z"
 msgstr "Home Z"
 
 msgid "Host"
-msgstr ""
+msgstr "Vært"
 
 msgid "Hostname"
 msgstr "Værtsnavn"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "Ikon-tema"
@@ -319,10 +320,10 @@ msgid "Initializing printer..."
 msgstr "Initialiserer printer..."
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "Start PID kalibrering for:"
 
 msgid "Input Shaper"
-msgstr ""
+msgstr "Input Shaper"
 
 msgid "Interface"
 msgstr "Interface"
@@ -331,7 +332,7 @@ msgid "Invalid"
 msgstr "Ugyldig"
 
 msgid "Invalid password"
-msgstr ""
+msgstr "Ugyldigt kodeord"
 
 msgid "Invert X"
 msgstr "Invertér X"
@@ -343,7 +344,7 @@ msgid "Invert Z"
 msgstr "Invertér Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
+msgstr "Det kan tage mere end 5 minutter, afhængigt af opvarmerens styrke."
 
 msgid "Klipper Restart"
 msgstr "Klipper Genstart"
@@ -364,11 +365,13 @@ msgid "Klipper will reboot"
 msgstr "Klipper vil genstarte"
 
 msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
+msgstr "Klipperscreen stopper understøttelsen i Juni 2024"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT-makroerne er skjulte, og bør tilgås fra "
+"\"Ekstrudering\""
 
 msgid "Language"
 msgstr "Sprog"
@@ -377,13 +380,13 @@ msgid "Large"
 msgstr "Stor"
 
 msgid "Last Used"
-msgstr ""
+msgstr "Sidst brugt"
 
 msgid "Layer:"
-msgstr ""
+msgstr "Lag:"
 
 msgid "Leds"
-msgstr ""
+msgstr "LED'er"
 
 msgid "Left:"
 msgstr "Resterende:"
@@ -395,7 +398,7 @@ msgid "Load"
 msgstr "Indlæs"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Indlæser..."
 
 msgid "Lower Nozzle"
 msgstr "Sænk Nozzle"
@@ -410,10 +413,10 @@ msgid "Main Menu"
 msgstr "Hovedmenu"
 
 msgid "Material"
-msgstr ""
+msgstr "Materiale"
 
 msgid "Max"
-msgstr ""
+msgstr "Maks"
 
 msgid "Max Acceleration"
 msgstr "Maks. Acceleration"
@@ -425,16 +428,16 @@ msgid "Max Velocity"
 msgstr "Maks. hastighed"
 
 msgid "Maximum"
-msgstr ""
+msgstr "Maksimum"
 
 msgid "Measure Both"
-msgstr ""
+msgstr "Mål begge"
 
 msgid "Measure X"
-msgstr ""
+msgstr "Mål X"
 
 msgid "Measure Y"
-msgstr ""
+msgstr "Mål Y"
 
 msgid "Medium"
 msgstr "Mellem"
@@ -443,7 +446,7 @@ msgid "Menu"
 msgstr "Menu"
 
 msgid "Mesh calibrate"
-msgstr ""
+msgstr "Mesh-kalibrering"
 
 msgid "Modified"
 msgstr "Ændret"
@@ -452,7 +455,7 @@ msgid "Moonraker: connected"
 msgstr "Moonraker: tilsluttet"
 
 msgid "More"
-msgstr ""
+msgstr "Mere"
 
 msgid "Move"
 msgstr "Flytning"
@@ -467,36 +470,37 @@ msgid "Network"
 msgstr "Netværk"
 
 msgid "Never"
-msgstr ""
+msgstr "Aldrig"
 
 msgid "New"
 msgstr "Ny"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "Ingen mulige makroer:"
 
 msgid "No mesh has been loaded"
-msgstr ""
+msgstr "Intet mesh er indlæst"
 
 msgid "No wireless interface has been found"
-msgstr ""
+msgstr "Intet trådløst interface blev fundet"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr ""
+"Understøttes ikke til auto-find, dette skal konfigureres i klipperscreen.conf"
 
 msgid "Not working or not configured"
-msgstr ""
+msgstr "Fungerer ikke, eller ikke konfigureret"
 
 msgid "Nothing selected"
 msgstr "Intet valgt"
 
 msgid "Notification log empty"
-msgstr ""
+msgstr "Notifikationsloggen er tom"
 
 msgid "Notifications"
-msgstr ""
+msgstr "Notifikationer"
 
 #, python-format
 msgid "Outdated by %d"
@@ -511,7 +515,7 @@ msgstr[0] "Pakken vil blive opdateret"
 msgstr[1] "Pakker vil blive opdateret"
 
 msgid "Part Fan"
-msgstr ""
+msgstr "Print blæser"
 
 msgid "Password saved"
 msgstr "Adgangskode gemt"
@@ -526,7 +530,7 @@ msgid "Perform a full upgrade?"
 msgstr "Vil du udføre en fuld opgradering?"
 
 msgid "Pins"
-msgstr ""
+msgstr "Pins"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Genkompilér og flash mikrocontrolleren."
@@ -538,7 +542,7 @@ msgid "Power On Printer"
 msgstr "Tænd printer"
 
 msgid "Pressure Advance:"
-msgstr ""
+msgstr "Pressure Advance:"
 
 msgid "Print"
 msgstr "Print"
@@ -550,25 +554,25 @@ msgid "Print Time"
 msgstr "Printtid"
 
 msgid "Printer"
-msgstr ""
+msgstr "Printer"
 
 msgid "Printer Connections"
 msgstr "Printer forbindelser"
 
 msgid "Printer Select"
-msgstr ""
+msgstr "Vælg printer"
 
 msgid "Printing"
 msgstr "Printer"
 
 msgid "Probe Offset"
-msgstr ""
+msgstr "Probens offset"
 
 msgid "Profile Name:"
 msgstr "Profilnavn:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "Inkludér Klipperscreen.log når du beder om hjælp\n"
 
 msgid "Quad Gantry Level"
 msgstr "Justering af 4-søjlers konstruktion"
@@ -589,10 +593,10 @@ msgid "Reference"
 msgstr "Reference"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Opdatér"
 
 msgid "Rename/Move:"
-msgstr ""
+msgstr "Omdøb/Flyt:"
 
 msgid "Restart"
 msgstr "Genstart"
@@ -604,19 +608,19 @@ msgid "Retract"
 msgstr "Retract"
 
 msgid "Retraction"
-msgstr ""
+msgstr "Retraction"
 
 msgid "Retraction Length"
-msgstr ""
+msgstr "Retraction længde"
 
 msgid "Retraction Speed"
-msgstr ""
+msgstr "Retraction hastighed"
 
 msgid "Retry"
-msgstr ""
+msgstr "Forsøg igen"
 
 msgid "Retrying"
-msgstr ""
+msgstr "Forsøger igen..."
 
 msgid "Save"
 msgstr "Gem"
@@ -635,7 +639,7 @@ msgstr "Gemt"
 
 #, python-format
 msgid "Saved offset: %s"
-msgstr ""
+msgstr "Gemt offset: %s"
 
 msgid "Screen DPMS"
 msgstr "Skærm DPMS"
@@ -662,13 +666,13 @@ msgid "Show"
 msgstr "At vise"
 
 msgid "Show Heater Power"
-msgstr ""
+msgstr "Vis opvarmerens styrke"
 
 msgid "Show Scrollbars Buttons"
-msgstr ""
+msgstr "Vis knapper på rullelinjen"
 
 msgid "Shutdown"
-msgstr ""
+msgstr "Luk ned"
 
 msgid "Size"
 msgstr "Størrelse"
@@ -677,7 +681,7 @@ msgid "Slicer"
 msgstr "Slicer"
 
 msgid "Slicer:"
-msgstr ""
+msgstr "Slicer:"
 
 msgid "Small"
 msgstr "Lille"
@@ -698,7 +702,7 @@ msgid "Square Corner Velocity"
 msgstr "Hastighed for 90° hjørne"
 
 msgid "Standby"
-msgstr ""
+msgstr "Standby"
 
 msgid "Start"
 msgstr "Start"
@@ -734,16 +738,16 @@ msgid "Unknown Heater"
 msgstr "Ukendt varmelegeme"
 
 msgid "Unknown screw position"
-msgstr ""
+msgstr "Ukendt skrue-position"
 
 msgid "Unload"
 msgstr "Tilbagetræk"
 
 msgid "Unretract Extra Length"
-msgstr ""
+msgstr "Un-retract ekstra længde"
 
 msgid "Unretract Speed"
-msgstr ""
+msgstr "Un-retract hastighed"
 
 msgid "Up To Date"
 msgstr "Up-to-Date"
@@ -758,10 +762,10 @@ msgid "Uploaded"
 msgstr "Uploadet"
 
 msgid "Warning"
-msgstr ""
+msgstr "Advarsel"
 
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
+msgstr "WebRTC er ikke understøttet i back-end, forsøger at streame istedet"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Flyt hastighed (mm/s)"
@@ -782,7 +786,7 @@ msgid "Z Tilt"
 msgstr "Z-tilt"
 
 msgid "Z offset:"
-msgstr ""
+msgstr "Z offset:"
 
 msgid "commit"
 msgid_plural "commits"
@@ -798,15 +802,15 @@ msgstr[0] "time"
 msgstr[1] "timer"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "makroer der bruger 'rename_existing' er skjulte"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "makroer hvis navne begynder med '_' er skjulte"
 
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minut"
+msgstr[1] "minutter"
 
 msgid "mm"
 msgstr "mm"
@@ -818,7 +822,7 @@ msgid "mm/s²"
 msgstr "mm/s²"
 
 msgid "mm³/s"
-msgstr ""
+msgstr "mm³/s"
 
 #~ msgid "Continue"
 #~ msgstr "Fortsæt"
