@@ -53,24 +53,40 @@ class Panel(ScreenPanel):
             "name": "Spoolman",
             "panel": "spoolman"
         })
-        extgrid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
-        limit = 5
+
+        self.labels['extruders_menu'] = self._gtk.ScrolledWindow()
+        self.labels['extruders'] = Gtk.FlowBox(hexpand=True, vexpand=True, homogeneous=True,
+                                               selection_mode=Gtk.SelectionMode.NONE, max_children_per_line=4)
+        self.labels['extruders_menu'].add(self.labels['extruders'])
+
+        xbox = Gtk.Box(homogeneous=True)
+        limit = 4
         i = 0
         for extruder in self._printer.get_tools():
-            if self._printer.extrudercount > 1:
-                self.labels[extruder] = self._gtk.Button(f"extruder-{i}", f"T{self._printer.get_tool_number(extruder)}")
-                self.labels[extruder].connect("clicked", self.change_extruder, extruder)
-            else:
+            if self._printer.extrudercount == 1:
                 self.labels[extruder] = self._gtk.Button("extruder", "")
+            else:
+                n = self._printer.get_tool_number(extruder)
+                self.labels[extruder] = self._gtk.Button(f"extruder-{n}", f"T{n}")
+                self.labels[extruder].connect("clicked", self.change_extruder, extruder)
             if extruder == self.current_extruder:
                 self.labels[extruder].get_style_context().add_class("button_active")
-            if i < limit:
-                extgrid.attach(self.labels[extruder], i, 0, 1, 1)
+            if self._printer.extrudercount <= limit:
+                xbox.add(self.labels[extruder])
                 i += 1
-        if i < (limit - 1):
-            extgrid.attach(self.buttons['temperature'], i + 1, 0, 1, 1)
-        if i < (limit - 2) and self._printer.spoolman:
-            extgrid.attach(self.buttons['spoolman'], i + 2, 0, 1, 1)
+            else:
+                self.labels['extruders'].add(self.labels[extruder])
+        if self._printer.extrudercount > limit:
+            changer = self._gtk.Button("toolchanger")
+            changer.connect("clicked", self.load_menu, 'extruders', _('Extruders'))
+            xbox.add(changer)
+            self.labels["current_extruder"] = self._gtk.Button("extruder", "")
+            xbox.add(self.labels["current_extruder"])
+            self.labels["current_extruder"].connect("clicked", self.load_menu, 'extruders', _('Extruders'))
+        if i < limit:
+            xbox.add(self.buttons['temperature'])
+        if i < (limit - 1) and self._printer.spoolman:
+            xbox.add(self.buttons['spoolman'])
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
@@ -122,7 +138,7 @@ class Panel(ScreenPanel):
                 sensors.attach(self.labels[x]['box'], s, 0, 1, 1)
 
         grid = Gtk.Grid(column_homogeneous=True)
-        grid.attach(extgrid, 0, 0, 4, 1)
+        grid.attach(xbox, 0, 0, 4, 1)
 
         if self._screen.vertical_mode:
             grid.attach(self.buttons['extrude'], 0, 1, 2, 1)
@@ -141,7 +157,15 @@ class Panel(ScreenPanel):
             grid.attach(speedbox, 2, 3, 2, 1)
             grid.attach(sensors, 0, 4, 4, 1)
 
-        self.content.add(grid)
+        self.menu = ['extrude_menu']
+        self.labels['extrude_menu'] = grid
+        self.content.add(self.labels['extrude_menu'])
+
+    def back(self):
+        if len(self.menu) > 1:
+            self.unload_menu()
+            return True
+        return False
 
     def enable_buttons(self, enable):
         for button in self.buttons:
@@ -170,6 +194,8 @@ class Panel(ScreenPanel):
                     self._printer.get_dev_stat(x, "power"),
                     lines=2,
                 )
+        if "current_extruder" in self.labels:
+            self.labels["current_extruder"].set_label(self.labels[self.current_extruder].get_label())
 
         if ("toolhead" in data and "extruder" in data["toolhead"] and
                 data["toolhead"]["extruder"] != self.current_extruder):
@@ -177,6 +203,9 @@ class Panel(ScreenPanel):
                 self.labels[extruder].get_style_context().remove_class("button_active")
             self.current_extruder = data["toolhead"]["extruder"]
             self.labels[self.current_extruder].get_style_context().add_class("button_active")
+            if "current_extruder" in self.labels:
+                n = self._printer.get_tool_number(self.current_extruder)
+                self.labels["current_extruder"].set_image(self._gtk.Image(f"extruder-{n}"))
 
         for x in self._printer.get_filament_sensors():
             if x in data:
