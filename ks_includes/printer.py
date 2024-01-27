@@ -38,12 +38,11 @@ class Printer:
         self.fancount = 0
         self.ledcount = 0
         self.output_pin_count = 0
-        self.tempstore = {}
-        if not self.store_timeout:
-            self.store_timeout = GLib.timeout_add_seconds(1, self._update_temp_store)
+        self.tempstore = None
         self.tempstore_size = 1200
         self.available_commands = {}
         self.temp_devices = self.sensors = None
+        self.stop_tempstore_updates()
 
         for x in self.config.keys():
             if x[:8] == "extruder":
@@ -105,6 +104,12 @@ class Printer:
         logging.info(f"# Fans: {self.fancount}")
         logging.info(f"# Output pins: {self.output_pin_count}")
         logging.info(f"# Leds: {self.ledcount}")
+
+    def stop_tempstore_updates(self):
+        logging.info("Stopping tempstore")
+        if self.store_timeout is not None:
+            GLib.source_remove(self.store_timeout)
+            self.store_timeout = None
 
     def process_update(self, data):
         if self.data is None:
@@ -336,11 +341,10 @@ class Printer:
         return 0
 
     def get_temp_store_devices(self):
-        if self.tempstore is not None:
-            return list(self.tempstore)
+        return list(self.tempstore) if self.tempstore is not None else self.tempstore
 
     def device_has_target(self, device):
-        return "target" in self.devices[device] or (device in self.tempstore and "targets" in self.tempstore[device])
+        return "target" in self.devices[device]
 
     def get_temp_store(self, device, section=False, results=0):
         if device not in self.tempstore:
@@ -390,6 +394,8 @@ class Printer:
                     for _ in range(1, self.tempstore_size - length):
                         self.tempstore[device][x].insert(0, 0)
         logging.info(f"Temp store: {list(self.tempstore)}")
+        if not self.store_timeout:
+            self.store_timeout = GLib.timeout_add_seconds(1, self._update_temp_store)
 
     def config_section_exists(self, section):
         return section in self.get_config_section_list()

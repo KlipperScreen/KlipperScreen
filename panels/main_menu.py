@@ -67,10 +67,11 @@ class Panel(MenuPanel):
             if self.graph_update is not None:
                 GLib.source_remove(self.graph_update)
                 self.graph_update = None
-        self.graph_retry = 0
         return False
 
     def activate(self):
+        if self._printer.tempstore is None:
+            self._screen.init_tempstore()
         self.update_graph_visibility()
 
     def deactivate(self):
