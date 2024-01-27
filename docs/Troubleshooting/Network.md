@@ -5,35 +5,10 @@
 
 The network panel requires network-manager to function, (if you are using a fork this may not be the case)
 
-Check if network-manager is installed:
-
-```bash
-dpkg -s network-manager
-```
-
-if the response is the following:
-
-```sh
-dpkg-query: the package 'network-manager' is not installed
-```
-
-if the response is the following:
-
-```sh
-Package: network-manager
-Status: install ok installed
-```
-
-this line may appear in KlipperScreen.log:
-!!! abstract "Log"
-    ```sh
-    [wifi_nm.py:rescan()] [...] NetworkManager.wifi.scan request failed: not authorized
-    ```
-
 if version of KlipperScreen installed was previous than v0.3.9, then re-run the installer and reboot
 
 
-??? Alternative workaround for network-manager
+??? "Alternative workaround for network-manager not having permissions"
 
     in order to fix this polkit needs to be configured or disabled:
 
