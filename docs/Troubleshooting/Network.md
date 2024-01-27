@@ -15,7 +15,10 @@ if the response is the following:
 dpkg-query: the package 'network-manager' is not installed
 ```
 
-go to [wpa_supplicant](wpa_supplicant.md)
+Then install it:
+```bash
+sudo apt install network-manager
+```
 
 if the response is the following:
 
@@ -33,7 +36,7 @@ this line may appear in KlipperScreen.log:
 if version of KlipperScreen installed was previous than v0.3.8, then re-run the installer and reboot
 
 
-??? Alternative workaround for network-manager
+??? "Alternative workaround for network-manager not having permissions"
 
     in order to fix this polkit needs to be configured or disabled:
 
