@@ -14,6 +14,7 @@ This article describes how to use KlipperScreen through a remote connection.
     ```bash
     sudo apt install tigervnc-standalone-server
     ```
+
 3. Create `launch_KlipperScreen.sh`:
 
     ```bash
@@ -23,15 +24,17 @@ This article describes how to use KlipperScreen through a remote connection.
     DISPLAY=:10 $KS_XCLIENT&
     wait
     ```
+    !!! tip
+        To change resolution add: `-geometry 1280x720` to the arguments of Xtigervnc
+
 4. Restart KlipperScreen or reboot the system:
     ```bash
     sudo systemctl service KlipperScreen restart
     ```
+
 5. On KlipperScreen set the following configuration:
 
-DPMS: off
-
-Display timeout: off
+Turn off DPMS and Display timeout:
 
 ![disable_dpms_poweroff](img/disable_dpms_poweroff.png)
 
