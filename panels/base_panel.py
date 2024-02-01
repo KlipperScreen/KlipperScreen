@@ -17,7 +17,7 @@ from ks_includes.screen_panel import ScreenPanel
 class BasePanel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
-        self.ip = None
+        self.ip = " "
         self.current_panel = None
         self.time_min = -1
         self.time_format = self._config.get_main_config().getboolean("24htime", True)
@@ -85,7 +85,6 @@ class BasePanel(ScreenPanel):
         self.control['time_box'].set_halign(Gtk.Align.END)
         self.control['time_box'].pack_end(self.control['time'], True, True, 10)
 
-        self.ip = self.get_ip()
         self.control['ip_box'] = Gtk.Box()
         self.control['ip'] = Gtk.Label(label=self.ip)
         self.control['ip_box'].set_halign(Gtk.Align.END)
@@ -114,7 +113,6 @@ class BasePanel(ScreenPanel):
             self.main_grid.attach(self.content, 1, 1, 1, 1)
 
         self.update_time()
-        self.update_ip()
 
     def show_heaters(self, show=True):
         try:
@@ -370,7 +368,7 @@ class BasePanel(ScreenPanel):
         if netifaces.AF_INET in res and len(res[netifaces.AF_INET]) > 0:
             ip = res[netifaces.AF_INET][0]['addr']
         else:
-            ip = None
+            ip = "Offline"
         return ip
 
     def update_ip(self):
