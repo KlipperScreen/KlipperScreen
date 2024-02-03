@@ -239,8 +239,7 @@ KlipperScreen will search for a configuration file in the following order:
 2. _~/.config/KlipperScreen/KlipperScreen.conf_
 3. _${KlipperScreen_Directory}/KlipperScreen.conf_
 
-If you need a custom location for the configuration file, you can add -c or --configfile to the systemd file and specify
-the location of your configuration file.
+If you need a custom location for the configuration file, you can add [launch argument](#adding-launch-arguments)
 
 If one of those files are found, it will be merged with the default configuration.
 Default Preheat options will be discarded if a custom preheat is found.
@@ -252,3 +251,32 @@ _${KlipperScreen_Directory}/ks_includes/default.conf_
 *Do not* copy the entire default.conf file, just configure the settings needed.
 
 If no config file is found, then when a setting is changed in the settings panel, a new configuration file should be created automatically.
+
+## Starting on a different monitor/display/screen
+
+Add -m or --monitor as a launch argument, to specify the number of the monitor, that will show Klipperscreen (default: 0).
+
+!!! warning
+    Selecting the monitor is only allowed when KlipperScreen is set to launch fullscreen in standalone mode (no DE)
+
+
+## Adding launch arguments
+
+The recommended way to add launch arguments is:
+
+1. Create a launch script:
+    ```bash
+    touch ~/KlipperScreen/scripts/launch_KlipperScreen.sh
+    chmod +x launch_KlipperScreen.sh
+    ```
+2. Edit the script:
+    ```bash
+    nano ~/KlipperScreen/scripts/launch_KlipperScreen.sh
+    ```
+    Add the init and the launch argument, this example will launch KlipperScreen on the second monitor if exists:
+    ```
+    /usr/bin/xinit $KS_XCLIENT --monitor 1
+    ```
+
+    !!! tip
+        you can use --configfile and --logfile to specify custom locations for those files

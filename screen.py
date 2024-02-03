@@ -123,12 +123,16 @@ class KlipperScreen(Gtk.Window):
 
         self.connect("key-press-event", self._key_press_event)
         self.connect("configure_event", self.update_size)
-        monitor = Gdk.Display.get_default().get_primary_monitor()
-        if monitor is None:
-            self.wayland = True
-            monitor = Gdk.Display.get_default().get_monitor(0)
-        if monitor is None:
-            raise RuntimeError("Couldn't get default monitor")
+        monitor_amount = Gdk.Display.get_n_monitors(Gdk.Display.get_default())
+        try:
+            mon_n = int(args.monitor)
+            if not (-1 < mon_n < monitor_amount):
+                raise ValueError
+        except ValueError:
+            mon_n = 0
+        logging.info(f"Monitors: {monitor_amount} using number: {mon_n}")
+        monitor = Gdk.Display.get_default().get_monitor(mon_n)
+        self.wayland = Gdk.Display.get_default().get_primary_monitor() is None
         self.width = self._config.get_main_config().getint("width", None)
         self.height = self._config.get_main_config().getint("height", None)
         if 'XDG_CURRENT_DESKTOP' in os.environ:
@@ -139,12 +143,14 @@ class KlipperScreen(Gtk.Window):
                 self.height = max(int(monitor.get_geometry().height * .5), 320)
         if self.width or self.height:
             logging.info("Setting windowed mode")
+            if mon_n > 0:
+                logging.error("Monitor selection is only supported for fullscreen")
             self.set_resizable(True)
             self.windowed = True
         else:
             self.width = monitor.get_geometry().width
             self.height = monitor.get_geometry().height
-            self.fullscreen()
+            self.fullscreen_on_monitor(self.get_screen(), mon_n)
         self.set_default_size(self.width, self.height)
         self.aspect_ratio = self.width / self.height
         self.vertical_mode = self.aspect_ratio < 1.0
@@ -1110,6 +1116,10 @@ def main():
     parser.add_argument(
         "-l", "--logfile", default=os.path.join(logdir, "KlipperScreen.log"), metavar='<logfile>',
         help="Location of KlipperScreen logfile output"
+    )
+    parser.add_argument(
+        "-m", "--monitor", default="0", metavar='<monitor>',
+        help="Number of the monitor, that will show Klipperscreen (default: 0)"
     )
     args = parser.parse_args()
 
