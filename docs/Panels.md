@@ -1,5 +1,11 @@
 # Panels
 
+### Splash Screen
+![Splash_screen](img/panels/splash_screen.png)
+!!! tip
+    The *'power on'* button will only appear if a power device exists in moonraker and that power device name
+    should be added to `power_devices`  in the printer section of the klipperscreen configuration file
+
 ### Main Menu
 ![Main Menu](img/panels/main_panel.png)
 
