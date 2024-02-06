@@ -15,7 +15,7 @@ def format_label(widget):
         label.set_line_wrap_mode(Pango.WrapMode.CHAR)
         label.set_line_wrap(True)
         label.set_ellipsize(Pango.EllipsizeMode.END)
-        label.set_lines(4)
+        label.set_lines(2)
 
 
 class Panel(ScreenPanel):
@@ -68,7 +68,7 @@ class Panel(ScreenPanel):
         self.labels['path'].show()
 
         self.list_mode = True
-        self.thumbsize = self._gtk.img_scale * self._gtk.button_image_scale * 2
+        self.thumbsize = self._gtk.img_scale * self._gtk.button_image_scale * 2.5
         logging.info(f"Thumbsize: {self.thumbsize}")
         self.flowbox = Gtk.FlowBox(selection_mode=Gtk.SelectionMode.NONE,
                                    min_children_per_line=1,
@@ -91,9 +91,11 @@ class Panel(ScreenPanel):
         logging.info(f"lista {self.list_mode}")
         if self.list_mode:
             self.flowbox.set_min_children_per_line(1)
+            self.flowbox.set_max_children_per_line(1)
         else:
             columns = 3 if self._screen.vertical_mode else 4
             self.flowbox.set_min_children_per_line(columns)
+            self.flowbox.set_max_children_per_line(columns)
         self._refresh_files()
 
     def activate(self):
@@ -101,7 +103,6 @@ class Panel(ScreenPanel):
             self.change_dir()
 
     def add_item(self, item):
-        icon = Gtk.Button()
         if 'dirname' in item and item['dirname'].startswith("."):
             return
         elif 'filename' in item and item['filename'].startswith("."):
@@ -109,12 +110,10 @@ class Panel(ScreenPanel):
         elif 'dirname' in item:
             name = item['dirname']
             path = f"{self.cur_directory}/{name}"
-            icon.connect("clicked", self.change_dir, path)
         elif 'filename' in item:
             name = item['filename']
             path = f"{self.cur_directory}/{name}"
             path = path.replace('gcodes/', '')
-            icon.connect("clicked", self.confirm_print, path)
         else:
             logging.error(f"Unknown item {item}")
             return
@@ -134,8 +133,9 @@ class Panel(ScreenPanel):
             itemname = Gtk.Label(hexpand=True, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END)
             itemname.get_style_context().add_class("print-filename")
             itemname.set_markup(f"<big><b>{basename}</b></big>")
+            icon = Gtk.Button()
             if 'filename' in item:
-                icon.set_image(self._gtk.Image("file"))
+                icon.connect("clicked", self.confirm_print, path)
                 self.image_load(path, icon, self.thumbsize / 2, True, "file")
                 delete.connect("clicked", self.confirm_delete_file, f"gcodes/{path}")
                 rename.connect("clicked", self.show_rename, f"gcodes/{path}")
@@ -144,6 +144,7 @@ class Panel(ScreenPanel):
                 action.set_vexpand(False)
                 action.set_halign(Gtk.Align.END)
             elif 'dirname' in item:
+                icon.connect("clicked", self.change_dir, path)
                 icon.set_image(self._gtk.Image("folder"))
                 delete.connect("clicked", self.confirm_delete_directory, path)
                 rename.connect("clicked", self.show_rename, path)
@@ -158,17 +159,20 @@ class Panel(ScreenPanel):
             row.attach(info, 1, 1, 1, 1)
             row.attach(rename, 2, 1, 1, 1)
             row.attach(delete, 3, 1, 1, 1)
-            row.attach(action, 4, 0, 1, 2)
+            if 'filename' in item or 'dirname' in item:
+                row.attach(action, 4, 0, 1, 2)
             self.flowbox.add(row)
-        else:
-            icon.set_image_position(Gtk.PositionType.TOP)
-            icon.set_label(basename)
-            format_label(icon)
+        else:  # Thumbnail view
             if 'filename' in item:
+                icon = self._gtk.Button("file")
+                icon.connect("clicked", self.confirm_print, path)
                 self.image_load(path, icon, self.thumbsize, False, "file")
             elif 'dirname' in item:
-                icon.set_image(self._gtk.Image("folder", self.thumbsize, self.thumbsize))
-            self.flowbox.add(icon)
+                icon = self._gtk.Button("folder", label=basename)
+                icon.connect("clicked", self.change_dir, path)
+                format_label(icon)
+            if 'filename' in item or 'dirname' in item:
+                self.flowbox.add(icon)
 
     def show_path(self):
         self.labels['path'].set_vexpand(False)
