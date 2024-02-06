@@ -3,7 +3,7 @@ import os
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Pango
+from gi.repository import Gtk, GLib, Pango
 from datetime import datetime
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.KlippyGtk import find_widget
@@ -118,6 +118,7 @@ class Panel(ScreenPanel):
             logging.error(f"Unknown item {item}")
             return
         basename = os.path.splitext(name)[0]
+        args = None
         if self.list_mode:
             label = Gtk.Label(label=basename, hexpand=True, vexpand=False)
             format_label(label)
@@ -136,7 +137,7 @@ class Panel(ScreenPanel):
             icon = Gtk.Button()
             if 'filename' in item:
                 icon.connect("clicked", self.confirm_print, path)
-                self.image_load(path, icon, self.thumbsize / 2, True, "file")
+                args = (path, icon, self.thumbsize / 2, True, "file")
                 delete.connect("clicked", self.confirm_delete_file, f"gcodes/{path}")
                 rename.connect("clicked", self.show_rename, f"gcodes/{path}")
                 action = self._gtk.Button("print", style="color3")
@@ -145,7 +146,7 @@ class Panel(ScreenPanel):
                 action.set_halign(Gtk.Align.END)
             elif 'dirname' in item:
                 icon.connect("clicked", self.change_dir, path)
-                icon.set_image(self._gtk.Image("folder"))
+                args = (None, icon, self.thumbsize / 2, True, "folder")
                 delete.connect("clicked", self.confirm_delete_directory, path)
                 rename.connect("clicked", self.show_rename, path)
                 action = self._gtk.Button("load", style="color3")
@@ -166,13 +167,16 @@ class Panel(ScreenPanel):
             if 'filename' in item:
                 icon = self._gtk.Button("file")
                 icon.connect("clicked", self.confirm_print, path)
-                self.image_load(path, icon, self.thumbsize, False, "file")
+                args = (path, icon, self.thumbsize, False, "file")
             elif 'dirname' in item:
                 icon = self._gtk.Button("folder", label=basename)
                 icon.connect("clicked", self.change_dir, path)
+                args = (None, icon, self.thumbsize, False, "folder")
                 format_label(icon)
             if 'filename' in item or 'dirname' in item:
                 self.flowbox.add(icon)
+        if args:
+            GLib.idle_add(self.image_load, *args)
 
     def show_path(self):
         self.labels['path'].set_vexpand(False)
@@ -203,7 +207,7 @@ class Panel(ScreenPanel):
         if pixbuf is not None:
             widget.set_image(Gtk.Image.new_from_pixbuf(pixbuf))
         elif iconname is not None:
-            widget.set_image(self._gtk.Image(iconname))
+            widget.set_image(self._gtk.Image(iconname, size, size))
         format_label(widget)
 
     def confirm_delete_file(self, widget, filepath):
