@@ -354,7 +354,8 @@ class Panel(ScreenPanel):
         if "channel" in netinfo:
             chan = _("Channel") + f' {netinfo["channel"]}'
         if "signal_level_dBm" in netinfo:
-            lvl = "% %".format(netinfo["signal_level_dBm"], "%" if self.use_network_manager else _("dBm"))
+            unit = "%" if self.use_network_manager else _("dBm")
+            lvl = f"{netinfo['signal_level_dBm']} {unit}"
             icon = self.signal_strength(int(netinfo["signal_level_dBm"]))
             if 'icon' not in self.labels['networks'][ssid]:
                 self.labels['networks'][ssid]['row'].add(icon)
