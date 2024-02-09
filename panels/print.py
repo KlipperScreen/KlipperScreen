@@ -83,7 +83,6 @@ class Panel(ScreenPanel):
         self.main.add(self.scroll)
         self.content.add(self.main)
         self.set_loading(True)
-        self._screen.files.add_file_callback(self._refresh_files)
         self._screen._ws.klippy.get_dir_info(self.load_files, self.cur_directory)
 
     def switch_view_mode(self, widget):
@@ -101,6 +100,10 @@ class Panel(ScreenPanel):
     def activate(self):
         if self.cur_directory != 'gcodes':
             self.change_dir()
+        self._screen.files.add_file_callback(self._refresh_files)
+
+    def deactivate(self):
+        self._screen.files.remove_file_callback(self._refresh_files)
 
     def add_item(self, item):
         if 'dirname' in item and item['dirname'].startswith("."):
