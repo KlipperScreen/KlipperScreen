@@ -454,6 +454,9 @@ class Panel(ScreenPanel):
 
     def new_print(self):
         self._screen.close_screensaver()
+        if "virtual_sdcard" in self._printer.data:
+            logging.info("reseting progress")
+            self._printer.data["virtual_sdcard"]["progress"] = 0
         self.update_progress(0.0)
 
     def process_update(self, action, data):
@@ -592,7 +595,12 @@ class Panel(ScreenPanel):
         if not self.file_metadata.get('filament_total'):  # No-extrusion
             print_duration = total_duration
         fila_used = float(self._printer.get_stat('print_stats', 'filament_used'))
-        progress = float(self._printer.get_stat("virtual_sdcard", "progress"))
+        if "gcode_start_byte" in self.file_metadata:
+            progress = (max(self._printer.get_stat('virtual_sdcard', 'file_position') -
+                        self.file_metadata['gcode_start_byte'], 0) / (self.file_metadata['gcode_end_byte'] -
+                        self.file_metadata['gcode_start_byte']))
+        else:
+            progress = self._printer.get_stat('virtual_sdcard', 'progress')
         self.labels["duration"].set_label(self.format_time(total_duration))
         elapsed_label = f"{self.labels['elapsed'].get_text()}  {self.labels['duration'].get_text()}"
         self.buttons['elapsed'].set_label(elapsed_label)
