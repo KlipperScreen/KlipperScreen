@@ -135,6 +135,13 @@ class Panel(ScreenPanel):
             itemname.get_style_context().add_class("print-filename")
             itemname.set_markup(f"<big><b>{basename}</b></big>")
             icon = Gtk.Button()
+            row = Gtk.Grid(hexpand=True, vexpand=False, valign=Gtk.Align.CENTER)
+            row.get_style_context().add_class("frame-item")
+            row.attach(icon, 0, 0, 1, 2)
+            row.attach(itemname, 1, 0, 3, 1)
+            row.attach(info, 1, 1, 1, 1)
+            row.attach(rename, 2, 1, 1, 1)
+            row.attach(delete, 3, 1, 1, 1)
             if 'filename' in item:
                 icon.connect("clicked", self.confirm_print, path)
                 args = (path, icon, self.thumbsize / 2, True, "file")
@@ -142,8 +149,10 @@ class Panel(ScreenPanel):
                 rename.connect("clicked", self.show_rename, f"gcodes/{path}")
                 action = self._gtk.Button("print", style="color3")
                 action.connect("clicked", self.confirm_print, path)
+                action.set_hexpand(False)
                 action.set_vexpand(False)
                 action.set_halign(Gtk.Align.END)
+                row.attach(action, 4, 0, 1, 2)
             elif 'dirname' in item:
                 icon.connect("clicked", self.change_dir, path)
                 args = (None, icon, self.thumbsize / 2, True, "folder")
@@ -152,15 +161,8 @@ class Panel(ScreenPanel):
                 action = self._gtk.Button("load", style="color3")
                 action.connect("clicked", self.change_dir, path)
                 action.set_hexpand(False)
+                action.set_vexpand(False)
                 action.set_halign(Gtk.Align.END)
-            row = Gtk.Grid(hexpand=True, vexpand=False, valign=Gtk.Align.CENTER)
-            row.get_style_context().add_class("frame-item")
-            row.attach(icon, 0, 0, 1, 2)
-            row.attach(itemname, 1, 0, 3, 1)
-            row.attach(info, 1, 1, 1, 1)
-            row.attach(rename, 2, 1, 1, 1)
-            row.attach(delete, 3, 1, 1, 1)
-            if 'filename' in item or 'dirname' in item:
                 row.attach(action, 4, 0, 1, 2)
             self.flowbox.add(row)
         else:  # Thumbnail view
@@ -168,12 +170,11 @@ class Panel(ScreenPanel):
                 icon = self._gtk.Button("file", label=basename)
                 icon.connect("clicked", self.confirm_print, path)
                 args = (path, icon, self.thumbsize, False, "file")
+                self.flowbox.add(icon)
             elif 'dirname' in item:
                 icon = self._gtk.Button("folder", label=basename)
                 icon.connect("clicked", self.change_dir, path)
                 args = (None, icon, self.thumbsize, False, "folder")
-                format_label(icon)
-            if 'filename' in item or 'dirname' in item:
                 self.flowbox.add(icon)
         if args:
             GLib.idle_add(self.image_load, *args)
