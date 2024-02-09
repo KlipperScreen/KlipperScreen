@@ -196,7 +196,7 @@ class Panel(ScreenPanel):
             if 'dirname' in array[0]:
                 return sorted(array, reverse=reverse, key=lambda item: item['dirname'])
             elif 'filename' in array[0]:
-                return sorted(array, reverse=reverse, key=lambda item: item['filename'])
+                return sorted(array, reverse=reverse, key=lambda item: (item['filename'].casefold(), item['filename']))
         elif self.sort_current[0] == "size":
             return sorted(array, reverse=reverse, key=lambda item: item['size'])
         logging.error("Unknown Error sorting")
