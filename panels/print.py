@@ -165,7 +165,7 @@ class Panel(ScreenPanel):
             self.flowbox.add(row)
         else:  # Thumbnail view
             if 'filename' in item:
-                icon = self._gtk.Button("file")
+                icon = self._gtk.Button("file", label=basename)
                 icon.connect("clicked", self.confirm_print, path)
                 args = (path, icon, self.thumbsize, False, "file")
             elif 'dirname' in item:
