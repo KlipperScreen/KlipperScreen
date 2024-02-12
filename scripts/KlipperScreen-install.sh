@@ -103,10 +103,11 @@ install_packages()
 
 check_requirements()
 {
-    echo_text "Checking Python version"
+    VERSION="3,8"
+    echo_text "Checking Python version > "$VERSION
     python3 --version
-    if ! python3 -c 'import sys; exit(1) if sys.version_info <= (3,7) else exit(0)'; then
-        echo_text 'Not supported'
+    if ! python3 -c 'import sys; exit(1) if sys.version_info <= ('$VERSION') else exit(0)'; then
+        echo_error 'Not supported'
         exit 1
     fi
 }

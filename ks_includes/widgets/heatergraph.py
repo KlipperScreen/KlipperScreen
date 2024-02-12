@@ -64,11 +64,9 @@ class HeaterGraph(Gtk.DrawingArea):
         mnum = [0]
         for device in self.store:
             if self.store[device]['show']:
-                temp = self.printer.get_temp_store(device, "temperatures", data_points)
-                if temp:
+                if temp := self.printer.get_temp_store(device, "temperatures", data_points):
                     mnum.append(max(temp))
-                target = self.printer.get_temp_store(device, "targets", data_points)
-                if target:
+                if target := self.printer.get_temp_store(device, "targets", data_points):
                     mnum.append(max(target))
         return max(mnum)
 
