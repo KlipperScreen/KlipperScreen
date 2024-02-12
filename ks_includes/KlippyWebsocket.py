@@ -165,7 +165,7 @@ class KlippyWebsocket(threading.Thread):
             return
         if "on_close" in self._callback:
             GLib.idle_add(self._callback['on_close'],
-                          "Lost Connection to Moonraker",
+                          _("Lost Connection to Moonraker"),
                           priority=GLib.PRIORITY_HIGH_IDLE)
         logging.info("Moonraker Websocket Closed")
         self.connected = False
