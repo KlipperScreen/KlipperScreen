@@ -351,7 +351,7 @@ class Panel(ScreenPanel):
                                 self.buttons[key].set_label(_("Reference"))
                             else:
                                 self.buttons[key].set_label(f"{result['sign']} {result['adjust']}")
-                            if int(result['adjust'].split(':')[1]) < 6:
+                            if int(result['adjust'].split(':')[0]) == 0 and int(result['adjust'].split(':')[1]) < 6:
                                 self.buttons[key].set_image(self._gtk.Image('complete'))
                             else:
                                 self.buttons[key].set_image(self._gtk.Image(result['sign'].lower()))
