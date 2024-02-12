@@ -1,5 +1,4 @@
 import logging
-import re
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -68,20 +67,6 @@ class Panel(ScreenPanel):
             for opt in self.list:
                 if opt in data["firmware_retraction"]:
                     self.update_option(opt, data["firmware_retraction"][opt])
-        elif action == "notify_gcode_response":
-            # // RETRACT_LENGTH=0.00000 RETRACT_SPEED=20.00000 UNRETRACT_EXTRA_LENGTH=0.00000 UNRETRACT_SPEED=10.00000
-            result = re.match(
-                "^// [RETRACT_LENGTH= ]+([\\-0-9\\.]+)" +
-                "[RETRACT_SPEED= ]+([\\-0-9\\.]+)" +
-                "[UNRETRACT_EXTRA_LENGTH= ]+([\\-0-9\\.]+)" +
-                "[UNRETRACT_SPEED= ]+([\\-0-9\\.]+)",
-                data
-            )
-            if result:
-                self.update_option('retract_length', result[1])
-                self.update_option('retract_speed', result[2])
-                self.update_option('unretract_extra_length', result[3])
-                self.update_option('unretract_speed', result[4])
 
     def update_option(self, option, value):
         if option not in self.list:
