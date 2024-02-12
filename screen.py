@@ -1091,7 +1091,7 @@ class KlipperScreen(Gtk.Window):
 
 
 def main():
-    minimum = (3, 7)
+    minimum = (3, 8)
     if not sys.version_info >= minimum:
         logging.error(f"python {sys.version_info.major}.{sys.version_info.minor} "
                       f"does not meet the minimum requirement {minimum[0]}.{minimum[1]}")
