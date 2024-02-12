@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-12 21:42-0300\n"
-"PO-Revision-Date: 2023-12-17 01:27+0000\n"
-"Last-Translator: Maxime Carrein <maxime.c.work@gmail.com>\n"
+"PO-Revision-Date: 2024-02-10 14:01+0000\n"
+"Last-Translator: Thijs Triemstra <info@collab.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/nl/>\n"
 "Language: nl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -199,7 +199,7 @@ msgid "Elapsed:"
 msgstr "Verstreken:"
 
 msgid "Ended official support in June 2023"
-msgstr ""
+msgstr "Ondersteuning officieel beëindigt in juni 2023"
 
 msgid "Error"
 msgstr "Error"
@@ -370,7 +370,7 @@ msgid "Klipper will reboot"
 msgstr "Klipper zal herstarten"
 
 msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
+msgstr "KlipperScreen ondersteuning wordt in juni 2024 beëindigt"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
@@ -403,7 +403,7 @@ msgid "Load"
 msgstr "Laad"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Laden..."
 
 msgid "Lower Nozzle"
 msgstr "Onderste Nozzle"
@@ -484,10 +484,10 @@ msgid "No elegible macros:"
 msgstr "Macros komen niet in aanmerking:"
 
 msgid "No mesh has been loaded"
-msgstr ""
+msgstr "Geen mesh geladen"
 
 msgid "No wireless interface has been found"
-msgstr ""
+msgstr "Geen draadloze netwerk interface gevonden"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -497,16 +497,16 @@ msgstr ""
 "klipperscreen.conf"
 
 msgid "Not working or not configured"
-msgstr ""
+msgstr "Niet werkend of niet geconfigureerd"
 
 msgid "Nothing selected"
 msgstr "Niets geselecteerd"
 
 msgid "Notification log empty"
-msgstr ""
+msgstr "Notificatie log is leeg"
 
 msgid "Notifications"
-msgstr ""
+msgstr "Notificaties"
 
 #, python-format
 msgid "Outdated by %d"
@@ -768,10 +768,10 @@ msgid "Uploaded"
 msgstr "Geupload"
 
 msgid "Warning"
-msgstr ""
+msgstr "Waarschuwing"
 
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
+msgstr "WebRTC is niet ondersteund door de backend"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Move Snelheid (mm/s)"
