@@ -123,6 +123,7 @@ create_virtualenv()
         echo_text "Trying again with new tools..."
         sudo apt-get install -y build-essential cmake
         pip install --upgrade pip setuptools
+        pip install ninja==1.10.0
         pip install -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
         if [ $? -gt 0 ]; then
             echo_error "Unable to install dependencies, aborting install."
