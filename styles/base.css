@@ -247,6 +247,10 @@ undershoot.bottom {
     background-image: none;
 }
 
+spinner {
+    animation-timing-function: steps(10);
+}
+
 separator {
     margin: 1em 2em;
     background-color: rgba(255, 255, 255, 0.5);
