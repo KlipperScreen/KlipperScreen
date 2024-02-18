@@ -164,7 +164,6 @@ class Panel(ScreenPanel):
 
     def change_percent_delta(self, widget, array, delta):
         logging.info(f"### Delta {delta}")
-        widget.get_style_context().add_class("horizontal_togglebuttons_active")
         if array == "z_offset":
             self.labels[f"zdelta{self.z_delta}"].get_style_context().remove_class("horizontal_togglebuttons_active")
             self.z_delta = delta
@@ -174,3 +173,4 @@ class Panel(ScreenPanel):
         elif array == "extrude":
             self.labels[f"edelta{self.e_delta}"].get_style_context().remove_class("horizontal_togglebuttons_active")
             self.e_delta = delta
+        widget.get_style_context().add_class("horizontal_togglebuttons_active")
