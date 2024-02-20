@@ -1,12 +1,14 @@
 import logging
 import os
+import time
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GLib, Pango
+from gi.repository import Gtk, GLib, Pango, Gio
 from datetime import datetime
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.KlippyGtk import find_widget
+from ks_includes.widgets.flowboxchild_extended import PrintListItem
 
 
 def format_label(widget):
@@ -105,15 +107,19 @@ class Panel(ScreenPanel):
     def deactivate(self):
         self._screen.files.remove_file_callback(self._refresh_files)
 
-    def add_item(self, item):
-        if 'dirname' in item and item['dirname'].startswith("."):
-            return
-        elif 'filename' in item and item['filename'].startswith("."):
-            return
-        elif 'dirname' in item:
+    def create_item(self, item):
+        fbchild = PrintListItem()
+        fbchild.set_date(item['modified'])
+        fbchild.set_size(item['size'])
+        if 'dirname' in item:
+            if item['dirname'].startswith("."):
+                return
             name = item['dirname']
             path = f"{self.cur_directory}/{name}"
+            fbchild.set_as_dir(True)
         elif 'filename' in item:
+            if item['filename'].startswith("."):
+                return
             name = item['filename']
             path = f"{self.cur_directory}/{name}"
             path = path.replace('gcodes/', '')
@@ -121,6 +127,7 @@ class Panel(ScreenPanel):
             logging.error(f"Unknown item {item}")
             return
         basename = os.path.splitext(name)[0]
+        fbchild.set_name(basename.casefold())
         args = None
         if self.list_mode:
             label = Gtk.Label(label=basename, hexpand=True, vexpand=False)
@@ -167,20 +174,23 @@ class Panel(ScreenPanel):
                 action.set_vexpand(False)
                 action.set_halign(Gtk.Align.END)
                 row.attach(action, 4, 0, 1, 2)
-            self.flowbox.add(row)
+            if args:
+                GLib.idle_add(self.image_load, *args)
+            fbchild.add(row)
+            return fbchild
         else:  # Thumbnail view
             if 'filename' in item:
                 icon = self._gtk.Button("file", label=basename)
                 icon.connect("clicked", self.confirm_print, path)
                 args = (path, icon, self.thumbsize, False, "file")
-                self.flowbox.add(icon)
             elif 'dirname' in item:
                 icon = self._gtk.Button("folder", label=basename)
                 icon.connect("clicked", self.change_dir, path)
                 args = (None, icon, self.thumbsize, False, "folder")
-                self.flowbox.add(icon)
-        if args:
-            GLib.idle_add(self.image_load, *args)
+            if args:
+                GLib.idle_add(self.image_load, *args)
+                fbchild.add(icon)
+                return fbchild
 
     def show_path(self):
         self.labels['path'].set_vexpand(False)
@@ -265,10 +275,52 @@ class Panel(ScreenPanel):
                                                              self._gtk.img_scale * self.bts))
         self.labels[f'sort_{key}'].show()
 
-        self._refresh_files()
+        reverse = self.sort_current[1] != 0
+        if key == "name":
+            self.flowbox.set_sort_func(self.sort_names, reverse)
+        elif key == "date":
+            self.flowbox.set_sort_func(self.sort_dates, reverse)
+        elif key == "size":
+            self.flowbox.set_sort_func(self.sort_sizes, reverse)
 
         self._config.set("main", "print_sort_dir", f'{key}_{"asc" if self.sort_current[1] == 0 else "desc"}')
         self._config.save_user_config_options()
+
+    @staticmethod
+    def sort_names(a: PrintListItem, b: PrintListItem, reverse):
+        if a.is_dir() and not b.is_dir():
+            return -1
+        if b.is_dir() and not a.is_dir():
+            return 1
+        if a.get_name() < b.get_name():
+            return 1 if reverse else -1
+        elif a.get_name() > b.get_name():
+            return -1 if reverse else 1
+        return 0
+
+    @staticmethod
+    def sort_sizes(a: PrintListItem, b: PrintListItem, reverse):
+        if a.is_dir() and not b.is_dir():
+            return -1
+        if b.is_dir() and not a.is_dir():
+            return 1
+        if a.get_size() < b.get_size():
+            return 1 if reverse else -1
+        elif a.get_size() > b.get_size():
+            return -1 if reverse else 1
+        return 0
+
+    @staticmethod
+    def sort_dates(a: PrintListItem, b: PrintListItem, reverse):
+        if a.is_dir() and not b.is_dir():
+            return -1
+        if b.is_dir() and not a.is_dir():
+            return 1
+        if a.get_date() < b.get_date():
+            return 1 if reverse else -1
+        elif a.get_date() > b.get_date():
+            return -1 if reverse else 1
+        return 0
 
     def confirm_print(self, widget, filename):
 
@@ -318,13 +370,12 @@ class Panel(ScreenPanel):
         if not result.get("result") or not isinstance(result["result"], dict):
             logging.info(result)
             return
-        items = []
-        if 'dirs' in result["result"]:
-            items.extend(self.sorter(result["result"]['dirs']))
-        if 'files' in result["result"]:
-            items.extend(self.sorter(result["result"]["files"]))
+        items = list(filter(
+            None, map(
+                self.create_item, [*self.sorter(result["result"]["dirs"]), *self.sorter(result["result"]["files"])]
+            )))
         for item in items:
-            self.add_item(item)
+            self.flowbox.add(item)
         self.set_loading(False)
 
     def _refresh_files(self, *args):
@@ -345,8 +396,8 @@ class Panel(ScreenPanel):
         if loading:
             self.labels['path'].set_text(self.loading_msg)
             self.labels['path'].show()
-        else:
-            self.show_path()
+            return
+        self.show_path()
         self.content.show_all()
 
     def show_rename(self, widget, fullpath):
