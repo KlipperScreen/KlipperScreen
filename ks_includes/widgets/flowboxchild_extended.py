@@ -9,7 +9,7 @@ class PrintListItem(Gtk.FlowBoxChild):
         super().__init__()
         self.date = None
         self.size = None
-        self.dir = False
+        self.dir = 0
 
     def set_date(self, date):
         self.date = date
@@ -17,8 +17,11 @@ class PrintListItem(Gtk.FlowBoxChild):
     def set_size(self, size):
         self.size = size
 
-    def set_as_dir(self, is_dir):
-        self.dir = is_dir
+    def set_as_dir(self, is_dir: bool):
+        if is_dir:
+            self.dir = -1
+        else:
+            self.dir = 0
 
     def get_date(self):
         return self.date
@@ -26,5 +29,5 @@ class PrintListItem(Gtk.FlowBoxChild):
     def get_size(self):
         return self.size
 
-    def is_dir(self):
+    def get_is_dir(self):
         return self.dir

@@ -288,39 +288,29 @@ class Panel(ScreenPanel):
 
     @staticmethod
     def sort_names(a: PrintListItem, b: PrintListItem, reverse):
-        if a.is_dir() and not b.is_dir():
-            return -1
-        if b.is_dir() and not a.is_dir():
-            return 1
+        if a.get_is_dir() - b.get_is_dir() != 0:
+            return a.get_is_dir() - b.get_is_dir()
         if a.get_name() < b.get_name():
             return 1 if reverse else -1
-        elif a.get_name() > b.get_name():
+        if a.get_name() > b.get_name():
             return -1 if reverse else 1
         return 0
 
     @staticmethod
     def sort_sizes(a: PrintListItem, b: PrintListItem, reverse):
-        if a.is_dir() and not b.is_dir():
-            return -1
-        if b.is_dir() and not a.is_dir():
-            return 1
-        if a.get_size() < b.get_size():
-            return 1 if reverse else -1
-        elif a.get_size() > b.get_size():
-            return -1 if reverse else 1
-        return 0
+        if a.get_is_dir() - b.get_is_dir() != 0:
+            return a.get_is_dir() - b.get_is_dir()
+        if reverse:
+            return b.get_size() - a.get_size()
+        return a.get_size() - b.get_size()
 
     @staticmethod
     def sort_dates(a: PrintListItem, b: PrintListItem, reverse):
-        if a.is_dir() and not b.is_dir():
-            return -1
-        if b.is_dir() and not a.is_dir():
-            return 1
-        if a.get_date() < b.get_date():
-            return 1 if reverse else -1
-        elif a.get_date() > b.get_date():
-            return -1 if reverse else 1
-        return 0
+        if a.get_is_dir() - b.get_is_dir() != 0:
+            return a.get_is_dir() - b.get_is_dir()
+        if reverse:
+            return b.get_date() - a.get_date()
+        return a.get_date() - b.get_date()
 
     def confirm_print(self, widget, filename):
 
