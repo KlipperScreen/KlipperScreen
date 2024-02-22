@@ -1,10 +1,9 @@
 import logging
 import os
-import time
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GLib, Pango, Gio
+from gi.repository import Gtk, GLib, Pango
 from datetime import datetime
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.KlippyGtk import find_widget
@@ -100,12 +99,11 @@ class Panel(ScreenPanel):
         self._refresh_files()
 
     def activate(self):
-        if self.cur_directory != 'gcodes':
-            self.change_dir()
-        self._screen.files.add_file_callback(self._refresh_files)
+        self.change_dir()
+        self._screen.files.add_callback(self._callback)
 
     def deactivate(self):
-        self._screen.files.remove_file_callback(self._refresh_files)
+        self._screen.files.remove_callback(self._callback)
 
     def create_item(self, item):
         fbchild = PrintListItem()
@@ -118,7 +116,8 @@ class Panel(ScreenPanel):
             path = f"{self.cur_directory}/{name}"
             fbchild.set_as_dir(True)
         elif 'filename' in item:
-            if item['filename'].startswith("."):
+            if (item['filename'].startswith(".") or
+                    os.path.splitext(item['filename'])[1] not in {'.gcode', '.gco', '.g'}):
                 return
             name = item['filename']
             path = f"{self.cur_directory}/{name}"
@@ -127,6 +126,7 @@ class Panel(ScreenPanel):
             logging.error(f"Unknown item {item}")
             return
         basename = os.path.splitext(name)[0]
+        fbchild.set_path(path)
         fbchild.set_name(basename.casefold())
         args = None
         if self.list_mode:
@@ -368,10 +368,43 @@ class Panel(ScreenPanel):
             self.flowbox.add(item)
         self.set_loading(False)
 
-    def _refresh_files(self, *args):
-        if self.loading:
-            logging.info("Busy loading")
+    def delete_from_list(self, path):
+        for item in self.flowbox.get_children():
+            if item.get_path() == path:
+                logging.info("found removing")
+                self.flowbox.remove(item)
+                return True
+
+    def add_item_from_callback(self, action, item):
+        self.delete_from_list(item["path"])
+        path = os.path.join("gcodes", item["path"])
+        if self.cur_directory != os.path.dirname(path):
             return
+        if action == "create_dir":
+            item.update({"path": path, "dirname": os.path.split(item["path"])[1]})
+        else:
+            item.update({"path": path, "filename": os.path.split(item["path"])[1]})
+        fbchild = self.create_item(item)
+        logging.info(item)
+        if fbchild:
+            self.flowbox.add(fbchild)
+            self.flowbox.invalidate_sort()
+            self.flowbox.show_all()
+
+    def _callback(self, action, item):
+        logging.info(f"{action}: {item}")
+        if action in {"create_dir", "create_file"}:
+            self.add_item_from_callback(action, item)
+        if action == "delete_file":
+            self.delete_from_list(item["path"])
+        if action == "delete_dir":
+            self.delete_from_list(os.path.join("gcodes", item["path"]))
+        if action in {"modify_file", "move_file"}:
+            if "path" in item and item["path"].startswith("gcodes/"):
+                item["path"] = item["path"][7:]
+            self.add_item_from_callback(action, item)
+
+    def _refresh_files(self, *args):
         logging.info("Refreshing")
         self.set_loading(True)
         for child in self.flowbox.get_children():
