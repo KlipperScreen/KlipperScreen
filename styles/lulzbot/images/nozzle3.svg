@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="mdi-printer-3d-nozzle-outline"
+   viewBox="0 0 64 64"
+   version="1.1"
+   sodipodi:docname="nozzle.svg"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
+   width="64"
+   height="64">
+  <metadata
+     id="metadata9">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs7" />
+  <sodipodi:namedview
+     pagecolor="#c0c0c0"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview5"
+     showgrid="false"
+     inkscape:pagecheckerboard="false"
+     inkscape:zoom="10.4375"
+     inkscape:cx="34.107009"
+     inkscape:cy="33.720396"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="mdi-printer-3d-nozzle-outline"
+     inkscape:document-rotation="0" />
+  <path
+     d="m 22.655,5.3 h 26.7 v 13.35 h 5.34 V 34.67 H 48.02 l -9.345,10.68 h -5.34 L 23.99,34.67 H 17.315 V 18.65 h 5.34 V 5.3 m 8.01,53.4 H 9.305 v -5.34 h 21.36 a 2.67,2.67 0 0 0 2.67,-2.67 v -2.67 h 5.34 v 2.67 a 8.01,8.01 0 0 1 -8.01,8.01 m -8.01,-34.71 v 5.34 h 4.005 l 9.345,10.68 9.345,-10.68 h 4.005 v -5.34 h -5.34 V 10.64 h -16.02 v 13.35 z"
+     id="path2"
+     style="fill:#ffffff;fill-opacity:1;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke fill markers;stroke:none;stroke-opacity:1" />
+</svg>
