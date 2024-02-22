@@ -67,13 +67,21 @@ class Panel(ScreenPanel):
         self.loading_msg = _('Loading...')
         self.labels['path'] = Gtk.Label(label=self.loading_msg, vexpand=True, no_show_all=True)
         self.labels['path'].show()
-
-        self.list_mode = True
         self.thumbsize = self._gtk.img_scale * self._gtk.button_image_scale * 2.5
         logging.info(f"Thumbsize: {self.thumbsize}")
+
         self.flowbox = Gtk.FlowBox(selection_mode=Gtk.SelectionMode.NONE,
-                                   min_children_per_line=1,
                                    column_spacing=0, row_spacing=0, homogeneous=True)
+        list_mode = self._config.get_main_config().get("print_view", 'thumbs')
+        logging.info(list_mode)
+        self.list_mode = True if list_mode == 'list' else False
+        if self.list_mode:
+            self.flowbox.set_min_children_per_line(1)
+            self.flowbox.set_max_children_per_line(1)
+        else:
+            columns = 3 if self._screen.vertical_mode else 4
+            self.flowbox.set_min_children_per_line(columns)
+            self.flowbox.set_max_children_per_line(columns)
 
         self.scroll = self._gtk.ScrolledWindow()
         self.scroll.add(self.flowbox)
@@ -96,6 +104,8 @@ class Panel(ScreenPanel):
             columns = 3 if self._screen.vertical_mode else 4
             self.flowbox.set_min_children_per_line(columns)
             self.flowbox.set_max_children_per_line(columns)
+        self._config.set("main", "print_view", 'list' if self.list_mode else 'thumbs')
+        self._config.save_user_config_options()
         self._refresh_files()
 
     def activate(self):
