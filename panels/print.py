@@ -359,11 +359,8 @@ class Panel(ScreenPanel):
         if not result.get("result") or not isinstance(result["result"], dict):
             logging.info(result)
             return
-        items = list(filter(
-            None, map(
-                self.create_item, [*result["result"]["dirs"], *result["result"]["files"]]
-            )))
-        for item in items:
+        items = [self.create_item(item) for item in [*result["result"]["dirs"], *result["result"]["files"]]]
+        for item in filter(None, items):
             self.flowbox.add(item)
         self.set_sort()
         self.set_loading(False)
