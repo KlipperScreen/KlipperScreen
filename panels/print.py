@@ -109,7 +109,8 @@ class Panel(ScreenPanel):
         self._refresh_files()
 
     def activate(self):
-        self.change_dir()
+        if self.cur_directory != "gcodes":
+            self.change_dir()
         self._screen.files.add_callback(self._callback)
 
     def deactivate(self):
