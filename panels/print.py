@@ -211,22 +211,6 @@ class Panel(ScreenPanel):
             self.labels['path'].set_text(self.cur_directory)
             self.labels['path'].show()
 
-    def sorter(self, array):
-        if len(array) < 2:
-            return array
-        reverse = self.sort_current[1] != 0
-        if self.sort_current[0] == "date":
-            return sorted(array, reverse=reverse, key=lambda item: item['modified'])
-        elif self.sort_current[0] == "name":
-            if 'dirname' in array[0]:
-                return sorted(array, reverse=reverse, key=lambda item: item['dirname'])
-            elif 'filename' in array[0]:
-                return sorted(array, reverse=reverse, key=lambda item: (item['filename'].casefold(), item['filename']))
-        elif self.sort_current[0] == "size":
-            return sorted(array, reverse=reverse, key=lambda item: item['size'])
-        logging.error("Unknown Error sorting")
-        return array
-
     def image_load(self, filepath, widget, size=-1, small=True, iconname=None):
         pixbuf = self.get_file_image(filepath, size, size, small)
         if pixbuf is not None:
@@ -286,16 +270,19 @@ class Panel(ScreenPanel):
                                                              self._gtk.img_scale * self.bts))
         self.labels[f'sort_{key}'].show()
 
-        reverse = self.sort_current[1] != 0
-        if key == "name":
-            self.flowbox.set_sort_func(self.sort_names, reverse)
-        elif key == "date":
-            self.flowbox.set_sort_func(self.sort_dates, reverse)
-        elif key == "size":
-            self.flowbox.set_sort_func(self.sort_sizes, reverse)
+        self.set_sort()
 
         self._config.set("main", "print_sort_dir", f'{key}_{"asc" if self.sort_current[1] == 0 else "desc"}')
         self._config.save_user_config_options()
+
+    def set_sort(self):
+        reverse = self.sort_current[1] != 0
+        if self.sort_current[0] == "name":
+            self.flowbox.set_sort_func(self.sort_names, reverse)
+        elif self.sort_current[0] == "date":
+            self.flowbox.set_sort_func(self.sort_dates, reverse)
+        elif self.sort_current[0] == "size":
+            self.flowbox.set_sort_func(self.sort_sizes, reverse)
 
     @staticmethod
     def sort_names(a: PrintListItem, b: PrintListItem, reverse):
@@ -374,10 +361,11 @@ class Panel(ScreenPanel):
             return
         items = list(filter(
             None, map(
-                self.create_item, [*self.sorter(result["result"]["dirs"]), *self.sorter(result["result"]["files"])]
+                self.create_item, [*result["result"]["dirs"], *result["result"]["files"]]
             )))
         for item in items:
             self.flowbox.add(item)
+        self.set_sort()
         self.set_loading(False)
         logging.info(f"Loaded in {(datetime.now() - start).total_seconds():.3f} seconds")
 
