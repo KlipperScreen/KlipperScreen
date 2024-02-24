@@ -366,6 +366,7 @@ class Panel(ScreenPanel):
         return info
 
     def load_files(self, result, method, params):
+        start = datetime.now()
         self.set_loading(True)
         if not result.get("result") or not isinstance(result["result"], dict):
             logging.info(result)
@@ -377,6 +378,7 @@ class Panel(ScreenPanel):
         for item in items:
             self.flowbox.add(item)
         self.set_loading(False)
+        logging.info(f"Loaded in {(datetime.now() - start).total_seconds():.3f} seconds")
 
     def delete_from_list(self, path):
         for item in self.flowbox.get_children():
