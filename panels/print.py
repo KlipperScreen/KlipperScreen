@@ -139,7 +139,6 @@ class Panel(ScreenPanel):
         basename = os.path.splitext(name)[0]
         fbchild.set_path(path)
         fbchild.set_name(basename.casefold())
-        args = None
         if self.list_mode:
             label = Gtk.Label(label=basename, hexpand=True, vexpand=False)
             format_label(label)
@@ -165,7 +164,7 @@ class Panel(ScreenPanel):
             row.attach(delete, 3, 1, 1, 1)
             if 'filename' in item:
                 icon.connect("clicked", self.confirm_print, path)
-                args = (path, icon, self.thumbsize / 2, True, "file")
+                image_args = (path, icon, self.thumbsize / 2, True, "file")
                 delete.connect("clicked", self.confirm_delete_file, f"gcodes/{path}")
                 rename.connect("clicked", self.show_rename, f"gcodes/{path}")
                 action = self._gtk.Button("print", style="color3")
@@ -176,7 +175,7 @@ class Panel(ScreenPanel):
                 row.attach(action, 4, 0, 1, 2)
             elif 'dirname' in item:
                 icon.connect("clicked", self.change_dir, path)
-                args = (None, icon, self.thumbsize / 2, True, "folder")
+                image_args = (None, icon, self.thumbsize / 2, True, "folder")
                 delete.connect("clicked", self.confirm_delete_directory, path)
                 rename.connect("clicked", self.show_rename, path)
                 action = self._gtk.Button("load", style="color3")
@@ -185,23 +184,22 @@ class Panel(ScreenPanel):
                 action.set_vexpand(False)
                 action.set_halign(Gtk.Align.END)
                 row.attach(action, 4, 0, 1, 2)
-            if args:
-                GLib.idle_add(self.image_load, *args)
+            else:
+                return
             fbchild.add(row)
-            return fbchild
         else:  # Thumbnail view
+            icon = self._gtk.Button(label=basename)
             if 'filename' in item:
-                icon = self._gtk.Button("file", label=basename)
                 icon.connect("clicked", self.confirm_print, path)
-                args = (path, icon, self.thumbsize, False, "file")
+                image_args = (path, icon, self.thumbsize, False, "file")
             elif 'dirname' in item:
-                icon = self._gtk.Button("folder", label=basename)
                 icon.connect("clicked", self.change_dir, path)
-                args = (None, icon, self.thumbsize, False, "folder")
-            if args:
-                GLib.idle_add(self.image_load, *args)
-                fbchild.add(icon)
-                return fbchild
+                image_args = (None, icon, self.thumbsize, False, "folder")
+            else:
+                return
+            fbchild.add(icon)
+        self.image_load(*image_args)
+        return fbchild
 
     def show_path(self):
         self.labels['path'].set_vexpand(False)
