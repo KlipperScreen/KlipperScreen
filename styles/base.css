@@ -155,6 +155,15 @@ combobox box button {
 
 combobox arrow {
     min-width: 1em;
+    background-color: @bg;
+}
+
+combobox arrow:disabled {
+-gtk-icon-source: None;
+}
+
+combobox cellview {
+    padding: 0.5em;
 }
 
 entry {

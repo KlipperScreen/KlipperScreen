@@ -80,8 +80,12 @@ button.invalid {
     border-width: .1em;
 }
 
-combobox box button {
-    background-color: #121212;
+menu,
+menuitem,
+combobox button,
+combobox arrow,
+combobox menuitem {
+    background-color: #252525;
     border-color: #121212;
 }
 
@@ -97,16 +101,6 @@ switch:checked {
 
 label {
     color: #e2e2e2;
-}
-
-menu {
-    background-color: #121212;
-    border-color: #a2a2a2;
-}
-
-menuitem {
-    background-color: #121212;
-    border-color: #282828;
 }
 
 trough {

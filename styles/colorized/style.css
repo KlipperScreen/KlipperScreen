@@ -97,7 +97,13 @@ button.invalid {
     border-radius: .75em;
 }
 
-combobox box button {
+menu,
+menuitem,
+combobox button,
+combobox arrow,
+combobox menuitem,
+popover,
+popover button {
     background-color: @solarized-base02;
     border-color: @solarized-base03;
 }
@@ -119,16 +125,6 @@ entry {
 
 label {
     color: @solarized-base3;
-}
-
-menu {
-    background-color: @solarized-base03;
-    border-color:  @solarized-base1;
-}
-
-menuitem {
-    background-color: @solarized-base03;
-    border-color: @solarized-base1
 }
 
 trough {

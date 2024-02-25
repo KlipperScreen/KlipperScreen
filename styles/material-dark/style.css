@@ -83,7 +83,11 @@ button.invalid {
     border-bottom-color: @error;
 }
 
-combobox box button {
+menu,
+menuitem,
+combobox button,
+combobox arrow,
+combobox menuitem {
     background-color: @active-dark;
     border-color: @bg;
 }
@@ -105,16 +109,6 @@ entry {
 
 label {
     color: @text;
-}
-
-menu {
-    background-color: @bg;
-    border-color: @lines;
-}
-
-menuitem {
-    background-color: @bg;
-    border-color: @lines;
 }
 
 trough {
