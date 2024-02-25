@@ -547,10 +547,14 @@ trough {
 
 popover {
     background-color: @bg;
+    border: 0.1em solid white;
+    padding: 0em;
 }
 
 popover button {
     background-color: @bg;
+    padding: 1em 3.1em;
+    margin: 0;
 }
 
 .screensaver,
