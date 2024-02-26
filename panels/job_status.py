@@ -448,7 +448,7 @@ class Panel(ScreenPanel):
             self.buttons[arg].set_sensitive(False)
 
     def _callback_metadata(self, action, item):
-        if action == "update" and self.filename in item:
+        if action == "update_metadata" and self.filename in item:
             logging.info("Callback complete")
             self.update_file_metadata()
             self._files.remove_callback(self._callback_metadata)

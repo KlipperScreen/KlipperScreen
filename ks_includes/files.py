@@ -1,10 +1,8 @@
 import logging
 import os
-
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import GLib
 
 
 class KlippyFiles:
@@ -22,32 +20,34 @@ class KlippyFiles:
         logging.info(f"Gcodes path: {self.gcodes_path}")
 
     def _callback(self, result, method, params):
-        if method == "server.files.list" and "result" in result:
+        if "error" in result:
+            logging.debug(result["error"])
+            return
+        if method == "server.files.list":
             for item in result["result"]:
                 self.files[item["path"]] = item
                 self.request_metadata(item["path"])
         elif method == "server.files.metadata":
-            if "error" in result.keys():
-                logging.debug(f"{result['error']}")
-                return
             for x in result['result']:
                 self.files[params['filename']][x] = result['result'][x]
             if "thumbnails" in self.files[params['filename']]:
                 self.files[params['filename']]['thumbnails'].sort(key=lambda y: y['size'], reverse=True)
-
                 for thumbnail in self.files[params['filename']]['thumbnails']:
                     thumbnail['local'] = False
                     if self.gcodes_path is not None:
-                        fpath = os.path.join(self.gcodes_path, params['filename'])
-                        fdir = os.path.dirname(fpath)
-                        path = os.path.join(fdir, thumbnail['relative_path'])
+                        path = os.path.join(
+                            os.path.dirname(os.path.join(self.gcodes_path, params['filename'])),
+                            thumbnail['relative_path']
+                        )
                         if os.access(path, os.R_OK):
                             thumbnail['local'] = True
                             thumbnail['path'] = path
                     if thumbnail['local'] is False:
-                        fdir = os.path.dirname(params['filename'])
-                        thumbnail['path'] = os.path.join(fdir, thumbnail['relative_path'])
-            self.run_callbacks("update", result["result"])
+                        thumbnail['path'] = os.path.join(
+                            os.path.dirname(params['filename']),
+                            thumbnail['relative_path']
+                        )
+            self.run_callbacks("update_metadata", result["result"])
 
     def add_file(self, item):
         if 'path' not in item:
@@ -92,8 +92,7 @@ class KlippyFiles:
     def get_thumbnail_location(self, filename, small=False):
         if all((
             small,
-            len(self.files[filename]['thumbnails']) > 1,
-            self.files[filename]['thumbnails'][0]['width'] > self.files[filename]['thumbnails'][1]['width']
+            len(self.files[filename]['thumbnails']) > 1
         )):
             thumb = self.files[filename]['thumbnails'][1]
         else:

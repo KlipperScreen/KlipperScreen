@@ -3,7 +3,7 @@ import os
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GLib, Pango
+from gi.repository import Gtk, Pango
 from datetime import datetime
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.KlippyGtk import find_widget
@@ -74,7 +74,7 @@ class Panel(ScreenPanel):
                                    column_spacing=0, row_spacing=0, homogeneous=True)
         list_mode = self._config.get_main_config().get("print_view", 'thumbs')
         logging.info(list_mode)
-        self.list_mode = True if list_mode == 'list' else False
+        self.list_mode = list_mode == 'list'
         if self.list_mode:
             self.flowbox.set_min_children_per_line(1)
             self.flowbox.set_max_children_per_line(1)
@@ -296,17 +296,13 @@ class Panel(ScreenPanel):
     def sort_sizes(a: PrintListItem, b: PrintListItem, reverse):
         if a.get_is_dir() - b.get_is_dir() != 0:
             return a.get_is_dir() - b.get_is_dir()
-        if reverse:
-            return b.get_size() - a.get_size()
-        return a.get_size() - b.get_size()
+        return b.get_size() - a.get_size() if reverse else a.get_size() - b.get_size()
 
     @staticmethod
     def sort_dates(a: PrintListItem, b: PrintListItem, reverse):
         if a.get_is_dir() - b.get_is_dir() != 0:
             return a.get_is_dir() - b.get_is_dir()
-        if reverse:
-            return b.get_date() - a.get_date()
-        return a.get_date() - b.get_date()
+        return b.get_date() - a.get_date() if reverse else a.get_date() - b.get_date()
 
     def confirm_print(self, widget, filename):
 
@@ -389,13 +385,15 @@ class Panel(ScreenPanel):
 
     def _callback(self, action, item):
         logging.info(f"{action}: {item}")
-        if action in {"create_dir", "create_file"}:
+        if action == "update_metadata":
+            return
+        elif action in {"create_dir", "create_file"}:
             self.add_item_from_callback(action, item)
-        if action == "delete_file":
+        elif action == "delete_file":
             self.delete_from_list(item["path"])
-        if action == "delete_dir":
+        elif action == "delete_dir":
             self.delete_from_list(os.path.join("gcodes", item["path"]))
-        if action in {"modify_file", "move_file"}:
+        elif action in {"modify_file", "move_file"}:
             if "path" in item and item["path"].startswith("gcodes/"):
                 item["path"] = item["path"][7:]
             self.add_item_from_callback(action, item)
