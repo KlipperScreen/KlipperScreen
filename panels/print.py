@@ -35,7 +35,6 @@ class Panel(ScreenPanel):
         self.sort_icon = ["arrow-up", "arrow-down"]
         self.source = ""
         self.time_24 = self._config.get_main_config().getboolean("24htime", True)
-        self.space = '  ' if self._screen.width > 480 else '\n'
         self.showing_rename = False
         self.loading = False
         self.cur_directory = 'gcodes'
@@ -143,7 +142,7 @@ class Panel(ScreenPanel):
         if self.list_mode:
             label = Gtk.Label(label=basename, hexpand=True, vexpand=False)
             format_label(label)
-            info = Gtk.Label(hexpand=True, halign=Gtk.Align.START, wrap=True, wrap_mode=Pango.WrapMode.CHAR)
+            info = Gtk.Label(hexpand=True, halign=Gtk.Align.START, wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
             info.get_style_context().add_class("print-info")
             info.set_markup(self.get_info_str(item))
             delete = Gtk.Button(hexpand=False, vexpand=False, can_focus=False, always_show_image=True)
@@ -337,15 +336,15 @@ class Panel(ScreenPanel):
         if "modified" in item:
             info += _("Modified") if 'dirname' in item else _("Uploaded")
             if self.time_24:
-                info += f':<b>{self.space}{datetime.fromtimestamp(item["modified"]):%Y/%m/%d %H:%M}</b>\n'
+                info += f':<b> {datetime.fromtimestamp(item["modified"]):%Y/%m/%d %H:%M}</b>\n'
             else:
-                info += f':<b>{self.space}{datetime.fromtimestamp(item["modified"]):%Y/%m/%d %I:%M %p}</b>\n'
+                info += f':<b> {datetime.fromtimestamp(item["modified"]):%Y/%m/%d %I:%M %p}</b>\n'
         if "size" in item:
-            info += _("Size") + f':{self.space}<b>{self.format_size(item["size"])}</b>\n'
+            info += _("Size") + f': <b>{self.format_size(item["size"])}</b>\n'
         if 'filename' in item:
             fileinfo = self._screen.files.get_file_info(item['filename'])
             if "estimated_time" in fileinfo:
-                info += _("Print Time") + f':{self.space}<b>{self.format_time(fileinfo["estimated_time"])}</b>'
+                info += _("Print Time") + f': <b>{self.format_time(fileinfo["estimated_time"])}</b>'
         return info
 
     def load_files(self, result, method, params):
