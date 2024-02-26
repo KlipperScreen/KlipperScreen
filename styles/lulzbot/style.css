@@ -77,17 +77,22 @@ button:disabled {
     border-bottom-left-radius: .7em;
 }
 
+
 .buttons_main_top {
     margin: .2em;
     min-height: 0em;
     border: .1em solid #c1d82f; 
 }
 .buttons_main_top label {
-    /* No idea why, but the font-size sometimes won't work unless I add the background color */
-    background-color: rgba(0,0,0,0);
     font-size: 26;
     margin-bottom: .1em;
     margin-top: .1em;
     margin-left: .1em;
     margin-right: .1em;
 }
+
+.main_temp_on {background-color: rgba(193, 216, 47, .5);}
+.main_temp_on label {color: white;}
+
+.main_temp_off {background-color: rgba(0,0,0,0);}
+.main_temp_off label {color: white;}

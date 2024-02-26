@@ -27,7 +27,7 @@ class Panel(MenuPanel):
         self.fan_spd  = self._gtk.Button('fan', "%", "color3", self.bts * 1.5, Gtk.PositionType.LEFT, 1)
         self.top_panel = self.create_top_panel()
         self.main_menu.attach(self.top_panel, 0, 0, 2, 1)
-        
+
         self.labels['menu'] = self.arrangeMenuItems(items, 4, True)
         scroll.add(self.labels['menu'])
         self.main_menu.attach(scroll, 0, 1, 2, 2)
@@ -40,14 +40,19 @@ class Panel(MenuPanel):
 
     def create_top_panel(self):
         #Buttons are defined in the init so they can be seen by the update routine
-        
+
         self.ext_temp.connect("clicked", self.menu_item_clicked, {"name": "Temperature", "panel": "temperature"})
         self.bed_temp.connect("clicked", self.menu_item_clicked, {"name": "Temperature", "panel": "temperature"})
         self.fan_spd.connect("clicked", self.menu_item_clicked, {"name": "Fan", "panel": "fan"})
 
         self.ext_temp.get_style_context().add_class("buttons_main_top")
+        self.ext_temp.get_style_context().add_class("main_temp_off")
+
         self.bed_temp.get_style_context().add_class("buttons_main_top")
+        self.bed_temp.get_style_context().add_class("main_temp_off")
+
         self.fan_spd.get_style_context().add_class("buttons_main_top")
+        self.fan_spd.get_style_context().add_class("main_temp_off")
 
         top = self._gtk.HomogeneousGrid()
         top.set_property("height-request", 80)
@@ -56,7 +61,7 @@ class Panel(MenuPanel):
         top.attach(self.ext_temp, 0, 0, 1, 1)
         top.attach(self.bed_temp, 1, 0, 1, 1)
         top.attach(self.fan_spd,  2, 0, 1, 1)
-        
+
         return top
 
     def update_top_panel(self):
@@ -70,7 +75,28 @@ class Panel(MenuPanel):
 
         fs = self._printer.get_fan_speed("fan")
         fan_label = f" {float(fs) * 100:.0f}%"
-        
+
+        if ext_target > 0:
+            self.ext_temp.get_style_context().remove_class("main_temp_off")
+            self.ext_temp.get_style_context().add_class("main_temp_on")
+        else:
+            self.ext_temp.get_style_context().remove_class("main_temp_on")
+            self.ext_temp.get_style_context().add_class("main_temp_off")
+
+        if bed_target > 0:
+            self.bed_temp.get_style_context().remove_class("main_temp_off")
+            self.bed_temp.get_style_context().add_class("main_temp_on")
+        else:
+            self.bed_temp.get_style_context().remove_class("main_temp_on")
+            self.bed_temp.get_style_context().add_class("main_temp_off")
+
+        if fs > 0:
+            self.fan_spd.get_style_context().remove_class("main_temp_off")
+            self.fan_spd.get_style_context().add_class("main_temp_on")
+        else:
+            self.fan_spd.get_style_context().remove_class("main_temp_on")
+            self.fan_spd.get_style_context().add_class("main_temp_off")
+
         self.ext_temp.set_label(ext_label)
         self.bed_temp.set_label(bed_label)
         self.fan_spd.set_label(fan_label)
