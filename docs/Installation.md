@@ -9,7 +9,7 @@ Once you have established that the screen is working, then proceed installing Kl
 ## Setup
 The installation process is meant for a non-desktop version of the OS for example RaspberryOS Lite, but it should work on other debian derivatives.
 
-[Click to learn how to check if you installed a desktop version](../../FAQ/#how-to-check-if-you-have-a-desktop-environment)
+[Click to learn how to check if you installed a desktop version](FAQ.md#how-to-check-if-you-have-a-desktop-environment)
 
 If you installed a desktop (GUI version) of the OS and want to run KlipperScreen exclusively then do:
 ```sh title="Boot to console / KlipperScreen"

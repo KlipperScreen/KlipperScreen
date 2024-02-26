@@ -31,4 +31,4 @@ Follow the manufacturer instructions on how to install your screen. In general i
 
 ## Touchscreen touch rotation
 
-[Moved to Touch issues](../Troubleshooting/Touch_issues/#touch-rotation-and-matrix)
+[Moved to Touch issues](Troubleshooting/Touch_issues.md#touch-rotation-and-matrix)
