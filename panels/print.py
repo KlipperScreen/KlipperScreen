@@ -39,6 +39,7 @@ class Panel(ScreenPanel):
         self.showing_rename = False
         self.loading = False
         self.cur_directory = 'gcodes'
+        self.list_button_size = self._gtk.img_scale * self.bts
 
         self.headerbox = Gtk.Box(hexpand=True, vexpand=False)
         n = 0
@@ -145,12 +146,12 @@ class Panel(ScreenPanel):
             info = Gtk.Label(hexpand=True, halign=Gtk.Align.START, wrap=True, wrap_mode=Pango.WrapMode.CHAR)
             info.get_style_context().add_class("print-info")
             info.set_markup(self.get_info_str(item))
-            delete = self._gtk.Button("delete", style="color1", scale=self.bts)
-            delete.set_hexpand(False)
-            delete.set_vexpand(False)
-            rename = self._gtk.Button("files", style="color2", scale=self.bts)
-            rename.set_hexpand(False)
-            rename.set_vexpand(False)
+            delete = Gtk.Button(hexpand=False, vexpand=False, can_focus=False, always_show_image=True)
+            delete.get_style_context().add_class("color1")
+            delete.set_image(self._gtk.Image("delete", self.list_button_size, self.list_button_size))
+            rename = Gtk.Button(hexpand=False, vexpand=False, can_focus=False, always_show_image=True)
+            rename.get_style_context().add_class("color2")
+            rename.set_image(self._gtk.Image("files", self.list_button_size, self.list_button_size))
             itemname = Gtk.Label(hexpand=True, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END)
             itemname.get_style_context().add_class("print-filename")
             itemname.set_markup(f"<big><b>{basename}</b></big>")
