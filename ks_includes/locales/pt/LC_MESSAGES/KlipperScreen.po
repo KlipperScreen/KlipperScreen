@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-12 21:42-0300\n"
-"PO-Revision-Date: 2024-01-06 09:08+0000\n"
-"Last-Translator: Henrique Magarotto <magarotto@gmail.com>\n"
+"PO-Revision-Date: 2024-02-22 00:02+0000\n"
+"Last-Translator: Matheus Mösken Diegues <dmosken2015@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/pt/>\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -199,7 +199,7 @@ msgid "Elapsed:"
 msgstr "Tempo Corrido:"
 
 msgid "Ended official support in June 2023"
-msgstr ""
+msgstr "Suporte oficial encerrado em Junho de 2023"
 
 msgid "Error"
 msgstr "Erro"
@@ -371,7 +371,7 @@ msgid "Klipper will reboot"
 msgstr "Klipper será reiniciado"
 
 msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
+msgstr "KlipperScreen perderá o suporte em Junho de 2024"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
@@ -483,10 +483,10 @@ msgid "No elegible macros:"
 msgstr "Sem macros elegíveis:"
 
 msgid "No mesh has been loaded"
-msgstr ""
+msgstr "Nenhuma malha foi carregada"
 
 msgid "No wireless interface has been found"
-msgstr ""
+msgstr "Nenhuma interface sem fio foi encontrada"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -496,13 +496,13 @@ msgstr ""
 "klipperscreen.conf"
 
 msgid "Not working or not configured"
-msgstr ""
+msgstr "Não funciona ou não está configurado"
 
 msgid "Nothing selected"
 msgstr "Nada selecionado"
 
 msgid "Notification log empty"
-msgstr ""
+msgstr "Log de notificação vazio"
 
 msgid "Notifications"
 msgstr "Notificações"
