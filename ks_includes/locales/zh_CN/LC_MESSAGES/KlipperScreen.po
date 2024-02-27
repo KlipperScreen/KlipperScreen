@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-12 21:42-0300\n"
-"PO-Revision-Date: 2024-02-16 21:02+0000\n"
+"PO-Revision-Date: 2024-02-27 18:50+0000\n"
 "Last-Translator: Will Zhai <willzhai55@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "klipperscreen/klipperscreen/zh_Hans/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.4\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -42,7 +42,7 @@ msgid "Acceleration:"
 msgstr "加速度："
 
 msgid "Accept"
-msgstr "接受"
+msgstr "确定"
 
 msgid "Add profile"
 msgstr "添加配置文件"
@@ -155,7 +155,7 @@ msgid "Complete"
 msgstr "完成"
 
 msgid "Confirm Emergency Stop"
-msgstr "紧急停止需确认"
+msgstr "紧急停止需要二次确认"
 
 msgid "Connected"
 msgstr "已连接"
@@ -217,10 +217,10 @@ msgid "Extrude"
 msgstr "挤出"
 
 msgid "Extrusion +"
-msgstr "增加挤出量"
+msgstr "挤出量 +"
 
 msgid "Extrusion -"
-msgstr "减少挤出量"
+msgstr "挤出量 -"
 
 msgid "Failed, adjust position first"
 msgstr "失败，请先调整位置"
@@ -250,7 +250,7 @@ msgid "Filter"
 msgstr "筛选"
 
 msgid "Finding ADXL"
-msgstr "查找加速度计"
+msgstr "查找加速度计中"
 
 msgid "Fine Tuning"
 msgstr "微调"
