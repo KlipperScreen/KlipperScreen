@@ -129,25 +129,87 @@ Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
     ```
     Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
 
-## Touch is expanded:
 
-This can be due to other framebuffers being active, for example the composite output of Raspberries
-may be enabled automatically as a fallback when no HDMI device is plugged in.
-If this is the case:
+## Touch calibration
 
-Open `/boot/config.txt` for editing:
+This is optional, and you should only do it if you are having problems.
+
+Download and build xtcal:
 
 ```sh
-sudo nano /boot/config.txt
+sudo apt-get install libxaw7-dev
+cd
+git clone https://github.com/KurtJacobson/xtcal
+cd xtcal
+make
+cd ..
 ```
 
-add at the bottom (in the `[all]` section)
+First you will need your touchscreen device name. On a terminal, run:
 
-```sh title="config.txt"
-enable_tvout=0
-max_framebuffers=1
+```sh
+DISPLAY=:0 xinput
 ```
 
+Output:
+
+```text
+⎡ Virtual core pointer                          id=2    [master pointer  (3)]
+⎜   ↳ Virtual core XTEST pointer                id=4    [slave  pointer  (2)]
+⎜   ↳ ADS7846 Touchscreen                       id=6    [slave  pointer  (2)]
+⎣ Virtual core keyboard                         id=3    [master keyboard (2)]
+    ↳ Virtual core XTEST keyboard               id=5    [slave  keyboard (3)]
+```
+
+In this case the device is the ADS7846 Touchscreen, yours may be different
+
+Reset the old calibration: (set the 0° roation matrix: 1 0 0 0 1 0 0 0 1)
+```sh
+DISPLAY=:0 xinput set-prop "ADS7846 Touchscreen" 'Coordinate Transformation Matrix' 1 0 0 0 1 0 0 0 1
+```
+Run the calibrator - if it's not fullscreen cancel with `ctrl`+`c`
+```sh
+DISPLAY=:0 xtcal/xtcal
+```
+if the previous command was not fullscreen, adjust the geometry to cover the screen, for example:
+```sh
+DISPLAY=:0 xtcal/xtcal -geometry 480x320
+```
+
+!!! important
+    KlipperScreen or a desktop environment should be on the screen to launch the calibrator
+
+Touch the center of the crosses in order, they should turn white.
+
+![xtcal_preview](../img/troubleshooting/xtcal.png)
+
+### Test the calibration
+
+Copy the output of the calibration and test it, For example:
+```sh
+DISPLAY=:0 xinput set-prop "ADS7846 Touchscreen" 'Coordinate Transformation Matrix' -0.016267 -0.952804 0.978336 -1.010164 0.065333 0.998316 0 0 1
+```
+if it's not correct reset the matrix and run xtcal again.
+
+### Make it permanent
+Open calibration file:
+```sh
+sudo nano /usr/share/X11/xorg.conf.d/40-libinput.conf
+```
+Paste a section like this at the bottom,
+replacing the transformation matrix numbers with the numbers of the calibrator output:
+```sh title="40-libinput.conf"
+    Section "InputClass"
+        Identifier "libinput touchscreen catchall"
+        MatchIsTouchscreen "on"
+        MatchDevicePath "/dev/input/event*"
+        Driver "libinput"
+        Option "TransformationMatrix" "-0.016267 -0.952804 0.978336 -1.010164 0.065333 0.998316 0 0 1"
+    EndSection
+```
 Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
 
-**Reboot** to apply changes.
+test the persistency of the settings by rebooting
+```sh
+sudo reboot
+```
