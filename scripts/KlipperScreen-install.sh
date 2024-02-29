@@ -196,8 +196,7 @@ polkit.addRule(function(action, subject) {
          action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
          action.id == "org.freedesktop.login1.halt" ||
          action.id == "org.freedesktop.login1.halt-multiple-sessions" ||
-         action.id == "org.freedesktop.NetworkManager.*" ||
-         action.id.startsWith("org.freedesktop.packagekit.")) &&
+         action.id.startsWith("org.freedesktop.NetworkManager.")) &&
         subject.user == "$USER") {
         // Only allow processes with the "klipperscreen" supplementary group
         // access
