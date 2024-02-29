@@ -1,36 +1,48 @@
 # Touchscreen issues
 
-If the screen is connected over USB, issues with the cable may cause similar symptoms. For that, please see [this guide](Physical_Install.md#cable-issues).
+Contents:
 
-## Touch not working on RaspberryOS and derivatives
+* [Touch not working](#touch-not-working)
+* [Touch rotation and matrix](#touch-rotation-and-matrix)
+* [Touch calibration](#touch-calibration)
 
-Some DSI screens have issues where touch doesn't work with the default configuration.
-The current workaround/temporary fix involves changing the kernel driver module used for these displays.
+Beware that this document focuses on RaspberryOS but most of it should apply to any other Debian based distros
 
-Open `/boot/config.txt` for editing using `sudo nano /boot/config.txt` and change
+## Touch not working
 
-```sh
-dtoverlay=vc4-kms-v3d
-```
+If the screen is connected over USB, the cable may cause issues.
+For that, please see [this guide](Physical_Install.md#cable-issues).
 
-to
 
-```sh
-dtoverlay=vc4-fkms-v3d
-```
+??? abstract "DSI screens touch not working on RaspberryOS / MainsailOS version Debian 11 Bullseye"
 
-Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
+    Some DSI screens have issues where touch doesn't work with the default configuration.
+    The current workaround/temporary fix involves changing the kernel driver module used for these displays.
+    
+    `sudo nano /boot/config.txt` and change
+    
+    ```sh
+    dtoverlay=vc4-kms-v3d
+    ```
+    
+    to
+    
+    ```sh
+    dtoverlay=vc4-fkms-v3d
+    ```
 
-**Reboot** to apply changes.
-
-If that doesn't fix it, you can try commenting these lines out, resulting in:
-
-```sh
-# dtoverlay=vc4-kms-v3d
-# max_framebuffers=2
-```
-
-**Reboot** to apply changes.
+    Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
+    
+    **Reboot** to apply changes. `sudo reboot`
+    
+    If that doesn't fix it, you can try commenting these lines out, resulting in:
+    
+    ```sh
+    # dtoverlay=vc4-kms-v3d
+    # max_framebuffers=2
+    ```
+    
+    **Reboot** to apply changes. `sudo reboot`
 
 ## Touch rotation and matrix
 
