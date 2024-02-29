@@ -9,7 +9,10 @@ nav:
     - Home: index.md
     - FAQ: FAQ.md
     - Setup:
-      - Hardware.md
+      - Hardware: Hardware.md
+      - Hardware specific:
+        - GPIO 3.5": Hardware/GPIO_35.md
+        - HDMI: Hardware/HDMI.md
       - Installation.md
       - Updating.md
       - Configuration.md
