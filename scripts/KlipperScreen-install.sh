@@ -88,10 +88,6 @@ install_packages()
         echo_error "Installation of Misc packages failed ($MISC)"
         exit 1
     fi
-#     ModemManager interferes with klipper comms
-#     on buster it's installed as a dependency of mpv
-#     it doesn't happen on bullseye
-    sudo systemctl mask ModemManager.service
 }
 
 check_requirements()
@@ -109,11 +105,6 @@ create_virtualenv()
     echo_text "Creating virtual environment"
     if [ ! -d ${KSENV} ]; then
         virtualenv -p /usr/bin/python3 ${KSENV}
-#         GET_PIP="${HOME}/get-pip.py"
-#         virtualenv --no-pip -p /usr/bin/python3 ${KSENV}
-#         curl https://bootstrap.pypa.io/pip/3.6/get-pip.py -o ${GET_PIP}
-#         ${KSENV}/bin/python ${GET_PIP}
-#         rm ${GET_PIP}
     fi
 
     source ${KSENV}/bin/activate
