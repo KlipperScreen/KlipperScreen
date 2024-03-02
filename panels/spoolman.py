@@ -377,7 +377,7 @@ class Panel(ScreenPanel):
             "path": f"/v1/spool?allow_archived={not hide_archived}",
         })
         if not spools or "result" not in spools:
-            self._screen.show_error_modal("Exception when trying to fetch spools")
+            self._screen.show_popup_message(_("Error trying to fetch spools"))
             return
 
         materials = []
@@ -397,7 +397,7 @@ class Panel(ScreenPanel):
     def clear_active_spool(self, sender: Gtk.Button = None):
         result = self.apiClient.post_request("server/spoolman/spool_id", json={})
         if not result:
-            self._screen.show_error_modal("Exception when setting active spool")
+            self._screen.show_popup_message(_("Error clearing active spool"))
             return
 
     def set_active_spool(self, spool: SpoolmanSpool):
@@ -405,13 +405,13 @@ class Panel(ScreenPanel):
             "spool_id": spool.id
         })
         if not result:
-            self._screen.show_error_modal("Exception when setting active spool")
+            self._screen.show_popup_message(_("Error setting active spool"))
             return
 
     def get_active_spool(self) -> SpoolmanSpool:
         result = self.apiClient.send_request("server/spoolman/spool_id")
         if not result:
-            self._screen.show_error_modal("Exception when getting active spool")
+            self._screen.show_popup_message(_("Error getting active spool"))
             return
         self._active_spool_id = result["result"]["spool_id"]
         return self._active_spool_id
