@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 21:42-0300\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
 "PO-Revision-Date: 2024-02-22 00:02+0000\n"
 "Last-Translator: Matheus Mösken Diegues <dmosken2015@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -204,6 +204,18 @@ msgstr "Suporte oficial encerrado em Junho de 2023"
 msgid "Error"
 msgstr "Erro"
 
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
+
 msgid "Estimated Time Method"
 msgstr "Método de Tempo Estimado"
 
@@ -215,6 +227,9 @@ msgstr "Extra Grande"
 
 msgid "Extrude"
 msgstr "Extrusão"
+
+msgid "Extruders"
+msgstr ""
 
 msgid "Extrusion +"
 msgstr "+ Extrusão"
@@ -402,6 +417,9 @@ msgid "Load"
 msgstr "Carregar"
 
 msgid "Loading..."
+msgstr ""
+
+msgid "Lost Connection to Moonraker"
 msgstr ""
 
 msgid "Lower Nozzle"

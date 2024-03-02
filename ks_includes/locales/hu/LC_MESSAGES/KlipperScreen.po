@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 21:42-0300\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
 "PO-Revision-Date: 2024-01-16 10:02+0000\n"
 "Last-Translator: \"Zs.Antal\" <zsikaiantal@icloud.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -199,6 +199,18 @@ msgstr "A hivatalos támogatás 2023 júniusában véget ért"
 msgid "Error"
 msgstr "Hiba"
 
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
+
 msgid "Estimated Time Method"
 msgstr "Becsült idő módszer"
 
@@ -210,6 +222,9 @@ msgstr "Extra nagy"
 
 msgid "Extrude"
 msgstr "Száladagolás"
+
+msgid "Extruders"
+msgstr ""
 
 msgid "Extrusion +"
 msgstr "Adagolás +"
@@ -398,6 +413,9 @@ msgstr "Betöltés"
 
 msgid "Loading..."
 msgstr "Betöltés..."
+
+msgid "Lost Connection to Moonraker"
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Fúvóka le"

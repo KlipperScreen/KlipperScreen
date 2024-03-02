@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 21:42-0300\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
 "PO-Revision-Date: 2022-11-30 18:11-0300\n"
 "Last-Translator: Tal Rahav <talrhv1@gmail.com>\n"
 "Language-Team: \n"
@@ -205,6 +205,18 @@ msgstr ""
 msgid "Error"
 msgstr "שגיאה"
 
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
+
 msgid "Estimated Time Method"
 msgstr "שיטת זמן משוערת"
 
@@ -216,6 +228,9 @@ msgstr ""
 
 msgid "Extrude"
 msgstr "הוצא חומר"
+
+msgid "Extruders"
+msgstr ""
 
 msgid "Extrusion +"
 msgstr "שיחול +"
@@ -402,6 +417,9 @@ msgid "Load"
 msgstr "טעינה"
 
 msgid "Loading..."
+msgstr ""
+
+msgid "Lost Connection to Moonraker"
 msgstr ""
 
 msgid "Lower Nozzle"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 21:42-0300\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
 "PO-Revision-Date: 2024-01-23 12:01+0000\n"
 "Last-Translator: srbjessen <srbjessen@gmail.com>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -199,6 +199,18 @@ msgstr "Officiel support udløb i Juni 2023"
 msgid "Error"
 msgstr "Fejl"
 
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
+
 msgid "Estimated Time Method"
 msgstr "Metode til beregning af tid"
 
@@ -210,6 +222,9 @@ msgstr "Ekstra stor"
 
 msgid "Extrude"
 msgstr "Ekstrudér"
+
+msgid "Extruders"
+msgstr ""
 
 msgid "Extrusion +"
 msgstr "Ekstrudering +"
@@ -399,6 +414,9 @@ msgstr "Indlæs"
 
 msgid "Loading..."
 msgstr "Indlæser..."
+
+msgid "Lost Connection to Moonraker"
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Sænk Nozzle"

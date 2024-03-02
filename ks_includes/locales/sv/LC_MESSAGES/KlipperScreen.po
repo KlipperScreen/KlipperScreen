@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-06 08:35-0300\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
 "PO-Revision-Date: 2024-01-23 12:01+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -204,6 +204,18 @@ msgstr "Avslutade officiellt stöd i juni 2023"
 msgid "Error"
 msgstr "Fel"
 
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
+
 msgid "Estimated Time Method"
 msgstr "Beräknad tidsmetod"
 
@@ -215,6 +227,9 @@ msgstr "Extra stor"
 
 msgid "Extrude"
 msgstr "Extrudera"
+
+msgid "Extruders"
+msgstr ""
 
 msgid "Extrusion +"
 msgstr "Extrudering +"
@@ -403,6 +418,9 @@ msgstr "Ladda"
 
 msgid "Loading..."
 msgstr "Läser in..."
+
+msgid "Lost Connection to Moonraker"
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Sänk munstycket"

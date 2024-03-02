@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 21:42-0300\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
 "PO-Revision-Date: 2024-01-18 13:00+0000\n"
 "Last-Translator: Eryk Michalak <gnu.ewm@protonmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -201,6 +201,18 @@ msgstr "Oficjalne wsparcie zakończyło się w czerwcu 2023"
 msgid "Error"
 msgstr "Błąd"
 
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
+
 msgid "Estimated Time Method"
 msgstr "Metoda szacowanego czasu"
 
@@ -212,6 +224,9 @@ msgstr "Bardzo duży"
 
 msgid "Extrude"
 msgstr "Wytłaczaj"
+
+msgid "Extruders"
+msgstr ""
 
 msgid "Extrusion +"
 msgstr "Ekstruzja +"
@@ -401,6 +416,9 @@ msgstr "Ładuj"
 
 msgid "Loading..."
 msgstr "Ładowanie..."
+
+msgid "Lost Connection to Moonraker"
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Obniż dyszę"

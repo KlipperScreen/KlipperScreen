@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 21:42-0300\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
 "PO-Revision-Date: 2023-12-28 12:05+0000\n"
 "Last-Translator: 방영웅 <bangyeongung20@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/klipperscreen/"
@@ -199,6 +199,18 @@ msgstr ""
 msgid "Error"
 msgstr "오류"
 
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
+
 msgid "Estimated Time Method"
 msgstr "예상 시간 옵션"
 
@@ -210,6 +222,9 @@ msgstr "매우 크게"
 
 msgid "Extrude"
 msgstr "압출"
+
+msgid "Extruders"
+msgstr ""
 
 msgid "Extrusion +"
 msgstr "압출 +"
@@ -397,6 +412,9 @@ msgid "Load"
 msgstr "필라멘트 로드"
 
 msgid "Loading..."
+msgstr ""
+
+msgid "Lost Connection to Moonraker"
 msgstr ""
 
 msgid "Lower Nozzle"

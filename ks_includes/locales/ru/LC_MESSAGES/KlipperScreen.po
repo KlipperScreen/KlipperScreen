@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 21:42-0300\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
 "PO-Revision-Date: 2023-12-28 12:05+0000\n"
 "Last-Translator: Dr_Perry_Coke <dr.perrycoke@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -205,6 +205,18 @@ msgstr "Официальная поддержка прекращена в июн
 msgid "Error"
 msgstr "Ошибка"
 
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
+
 msgid "Estimated Time Method"
 msgstr "Расчётное время"
 
@@ -216,6 +228,9 @@ msgstr "Очень большой"
 
 msgid "Extrude"
 msgstr "Заправить"
+
+msgid "Extruders"
+msgstr ""
 
 msgid "Extrusion +"
 msgstr "Экструзия +"
@@ -404,6 +419,9 @@ msgstr "Загрузить"
 
 msgid "Loading..."
 msgstr "Загрузка..."
+
+msgid "Lost Connection to Moonraker"
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Опустить сопло"
@@ -772,7 +790,8 @@ msgid "Warning"
 msgstr "Предупреждение"
 
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr "Отсутствует поддержка WebRTC у бэкенда, который пытается передать поток"
+msgstr ""
+"Отсутствует поддержка WebRTC у бэкенда, который пытается передать поток"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Скорость перемещения по осям XY (мм/с)"
