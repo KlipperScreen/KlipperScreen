@@ -151,6 +151,7 @@ install_systemd_service()
     sudo systemctl daemon-reload
     sudo systemctl enable KlipperScreen
     sudo systemctl set-default multi-user.target
+    sudo adduser $USER tty
 }
 
 create_policy()
@@ -160,8 +161,7 @@ create_policy()
 
     echo_text "Installing KlipperScreen PolicyKit Rules"
     sudo groupadd -f klipperscreen
-    sudo groupadd -f netdev
-    sudo groupadd -f tty
+    sudo adduser $USER netdev
     if [ ! -x "$(command -v pkaction)" ]; then
         echo "PolicyKit not installed"
         return
@@ -233,14 +233,11 @@ EOF
 
 update_x11()
 {
-    if [ -e /etc/X11/Xwrapper.config ]
-    then
-        echo_text "Updating X11 Xwrapper"
-        sudo sed -i 's/allowed_users=console/allowed_users=anybody/g' /etc/X11/Xwrapper.config
-    else
-        echo_text "Adding X11 Xwrapper"
-        echo 'allowed_users=anybody' | sudo tee /etc/X11/Xwrapper.config
-    fi
+    echo_text "Adding X11 Xwrapper"
+    sudo /bin/sh -c "cat >  /etc/X11/Xwrapper.config" << EOF
+allowed_users=anybody
+needs_root_rights=yes
+EOF
 }
 
 fix_fbturbo()
