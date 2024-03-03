@@ -53,7 +53,15 @@ First you will need your device name. On a terminal, run:
 ```sh
 DISPLAY=:0 xinput
 ```
-
+??? tip "Alternative"
+    ```
+    libinput list-devices
+    ```
+    !!! note
+        requires libinput-tools
+        ```
+        sudo apt install libinput-tools
+        ```
 Output:
 
 ```text
@@ -101,6 +109,10 @@ ACTION=="add", ATTRS{name}=="<device name>", ENV{LIBINPUT_CALIBRATION_MATRIX}="<
 
 Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
 
+```sh
+sudo reboot
+```
+
 !!! example
 
     Test:
@@ -120,9 +132,12 @@ Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
     ```
 
     Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
+    ```sh
+    sudo reboot
+    ```
 
 
-!!! example "Alternative"
+!!! example "Alternative Example"
 
     As an alternative **if the above doesn't work**:
 
@@ -140,7 +155,9 @@ Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
     EndSection
     ```
     Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
-
+    ```sh
+    sudo reboot
+    ```
 
 ## Touch calibration
 
@@ -162,7 +179,15 @@ First you will need your touchscreen device name. On a terminal, run:
 ```sh
 DISPLAY=:0 xinput
 ```
-
+??? tip "Alternative"
+    ```
+    libinput list-devices
+    ```
+    !!! note
+        requires libinput-tools
+        ```
+        sudo apt install libinput-tools
+        ```
 Output:
 
 ```text
@@ -225,15 +250,3 @@ test the persistency of the settings by rebooting
 ```sh
 sudo reboot
 ```
-
-### Wayland
-
-an alternative to xinput list is:
-```
-libinput list-devices
-```
-!!! note
-    requires libinput-tools
-    ```
-    sudo apt install libinput-tools
-    ```
