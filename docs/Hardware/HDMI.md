@@ -8,8 +8,8 @@ you can do this by editing the kernel commandline
 sudo nano /boot/firmware/cmdline.txt
 ```
 
-!!! tip "Important"
-    Put all parameters in cmdline.txt on the same line, do not use carriage returns.
+!!! warning "Important"
+    Do not add newlines to the file, it must be 1 line with the options separated by spaces
 
 for example:
 ```

@@ -3,8 +3,8 @@ How i installed the 3.5" (A) type of screen on RaspberryOS Bookworm (Debian 12)
 
 ![preview](../img/hardware/rpi35a.jpg)
 
-!!! abstract
-    this is based on my own experience and it's provided for general information
+!!! abstract "Disclaimer"
+    This is based on my own experience, and it's provided for general information
     and does not constitute as advice of any kind.
 
 
@@ -70,5 +70,5 @@ add at the start or end:
 fbcon=map:11
 ```
 
-!!! warning Important
-    do not add newlines to the file,  it must be 1 line with the options separated by spaces
+!!! warning "Important"
+    Do not add newlines to the file,  it must be 1 line with the options separated by spaces
