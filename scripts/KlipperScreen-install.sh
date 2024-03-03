@@ -4,12 +4,11 @@ SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 KSPATH=$(sed 's/\/scripts//g' <<< $SCRIPTPATH)
 KSENV="${KLIPPERSCREEN_VENV:-${HOME}/.KlipperScreen-env}"
 
-XSERVER="xinit xinput x11-xserver-utils xserver-xorg-input-evdev xserver-xorg-input-libinput"
-FBDEV="xserver-xorg-video-fbdev"
+XSERVER="xinit xinput x11-xserver-utils xserver-xorg-input-evdev xserver-xorg-input-libinput xserver-xorg-legacy xserver-xorg-video-fbdev"
 PYTHON="python3-virtualenv virtualenv python3-distutils"
 PYGOBJECT="libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0"
 MISC="librsvg2-common libopenjp2-7 wireless-tools libdbus-glib-1-dev autoconf"
-OPTIONAL="xserver-xorg-legacy fonts-nanum fonts-ipafont libmpv-dev policykit-1 network-manager"
+OPTIONAL="fonts-nanum fonts-ipafont libmpv-dev policykit-1 network-manager"
 
 Red='\033[0;31m'
 Green='\033[0;32m'
@@ -60,13 +59,6 @@ install_packages()
     fi
     sudo apt-get install -y $OPTIONAL
     echo $_
-    sudo apt-get install -y $FBDEV
-    if [ $? -eq 0 ]; then
-        echo_ok "Installed FBdev"
-    else
-        echo_error "Installation of FBdev failed ($FBDEV)"
-        exit 1
-    fi
     sudo apt-get install -y $PYTHON
     if [ $? -eq 0 ]; then
         echo_ok "Installed Python dependencies"
