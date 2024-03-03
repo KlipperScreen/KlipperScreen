@@ -80,6 +80,11 @@ You can test a change by running:
 DISPLAY=:0 xinput set-prop "<device name>" 'Coordinate Transformation Matrix' <matrix>
 ```
 
+!!! example
+    ```sh
+    DISPLAY=:0 xinput set-prop "ADS7846 Touchscreen" 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1
+    ```
+
 Where the matrix can be one of the following options:
 
 | Rotation                                | Matrix                |
@@ -92,72 +97,7 @@ Where the matrix can be one of the following options:
 | invert X                                | `-1 0 1 0 1 0 0 0 1`  |
 | expand to twice the size horizontally   | `0.5 0 0 0 1 0 0 0 1` |
 
-For more in-depth guidance on using Coordinate Transformation Matrices:
-
-* [Ubuntu wiki InputCoordinateTransformation](https://wiki.ubuntu.com/X/InputCoordinateTransformation)
-* [Libinput docs](https://wayland.freedesktop.org/libinput/doc/1.9.0/absolute_axes.html)
-
-To make this **permanent**, modify `/etc/udev/rules.d/51-touchscreen.rules`:
-
-```bash
-sudo nano /etc/udev/rules.d/51-touchscreen.rules
-```
-
-```sh title="51-touchscreen.rules"
-ACTION=="add", ATTRS{name}=="<device name>", ENV{LIBINPUT_CALIBRATION_MATRIX}="<matrix>"
-```
-
-Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
-
-```sh
-sudo reboot
-```
-
-!!! example
-
-    Test:
-
-    ```sh
-    DISPLAY=:0 xinput set-prop "ADS7846 Touchscreen" 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1
-    ```
-
-    Permanent modification:
-
-    ```bash
-    sudo nano /etc/udev/rules.d/51-touchscreen.rules
-    ```
-
-    ```sh title="51-touchscreen.rules"
-    ACTION=="add", ATTRS{name}=="ADS7846 Touchscreen", ENV{LIBINPUT_CALIBRATION_MATRIX}="-1 0 1 0 -1 1 0 0 1"
-    ```
-
-    Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
-    ```sh
-    sudo reboot
-    ```
-
-
-!!! example "Alternative Example"
-
-    As an alternative **if the above doesn't work**:
-
-    ```bash
-    sudo nano /usr/share/X11/xorg.conf.d/40-libinput.conf
-    ```
-
-    ```sh title="40-libinput.conf"
-    Section "InputClass"
-            Identifier "libinput touchscreen catchall"
-            MatchIsTouchscreen "on"
-            MatchDevicePath "/dev/input/event*"
-            Driver "libinput"
-            Option "TransformationMatrix" "0 -1 1 1 0 0 0 0 1"
-    EndSection
-    ```
-    Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
-    ```sh
-    sudo reboot
-    ```
+To make the calibration permanent read [Save touch calibration](#save-touch-calibration)
 
 ## Touch calibration
 
@@ -204,11 +144,7 @@ Reset the old calibration: (set the 0° roation matrix: 1 0 0 0 1 0 0 0 1)
 ```sh
 DISPLAY=:0 xinput set-prop "ADS7846 Touchscreen" 'Coordinate Transformation Matrix' 1 0 0 0 1 0 0 0 1
 ```
-Run the calibrator - if it's not fullscreen cancel with `ctrl`+`c`
-```sh
-DISPLAY=:0 xtcal/xtcal
-```
-if the previous command was not fullscreen, adjust the geometry to cover the screen, for example:
+Run the calibrator - if it's not fullscreen cancel with `ctrl`+`c` and adjust geometry
 ```sh
 DISPLAY=:0 xtcal/xtcal -geometry 480x320
 ```
@@ -228,25 +164,64 @@ DISPLAY=:0 xinput set-prop "ADS7846 Touchscreen" 'Coordinate Transformation Matr
 ```
 if it's not correct reset the matrix and run xtcal again.
 
-### Make it permanent
-Open calibration file:
+
+## Save touch calibration
+
+modify `/etc/udev/rules.d/51-touchscreen.rules`:
+
 ```sh
-sudo nano /usr/share/X11/xorg.conf.d/40-libinput.conf
+sudo nano /etc/udev/rules.d/51-touchscreen.rules
 ```
-Paste a section like this at the bottom,
-replacing the transformation matrix numbers with the numbers of the calibrator output:
-```sh title="40-libinput.conf"
-    Section "InputClass"
-        Identifier "libinput touchscreen catchall"
-        MatchIsTouchscreen "on"
-        MatchDevicePath "/dev/input/event*"
-        Driver "libinput"
-        Option "TransformationMatrix" "-0.016267 -0.952804 0.978336 -1.010164 0.065333 0.998316 0 0 1"
-    EndSection
+
+```sh title="51-touchscreen.rules"
+ACTION=="add", ATTRS{name}=="<device name>", ENV{LIBINPUT_CALIBRATION_MATRIX}="<matrix>"
 ```
+
 Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
 
-test the persistency of the settings by rebooting
 ```sh
 sudo reboot
 ```
+
+!!! example
+
+    ```sh
+    sudo nano /etc/udev/rules.d/51-touchscreen.rules
+    ```
+
+    ```sh title="51-touchscreen.rules"
+    ACTION=="add", ATTRS{name}=="ADS7846 Touchscreen", ENV{LIBINPUT_CALIBRATION_MATRIX}="-1 0 1 0 -1 1 0 0 1"
+    ```
+
+    Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
+    ```sh
+    sudo reboot
+    ```
+
+
+!!! example "Alternative Example"
+
+    As an alternative **if the above doesn't work**:
+
+    ```bash
+    sudo nano /usr/share/X11/xorg.conf.d/40-libinput.conf
+    ```
+
+    ```sh title="40-libinput.conf"
+    Section "InputClass"
+            Identifier "libinput touchscreen catchall"
+            MatchIsTouchscreen "on"
+            MatchDevicePath "/dev/input/event*"
+            Driver "libinput"
+            Option "TransformationMatrix" "0 -1 1 1 0 0 0 0 1"
+    EndSection
+    ```
+    Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
+    ```sh
+    sudo reboot
+    ```
+
+For more in-depth guidance on using Coordinate Transformation Matrices:
+
+* [Ubuntu wiki InputCoordinateTransformation](https://wiki.ubuntu.com/X/InputCoordinateTransformation)
+* [Libinput docs](https://wayland.freedesktop.org/libinput/doc/1.9.0/absolute_axes.html)
