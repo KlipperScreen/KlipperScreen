@@ -15,9 +15,9 @@ KlipperScreen was not designed to work with OctoPrint and there are no plans to 
 
 |            Desktop environment             |                   Console                    |
 |:------------------------------------------:|:--------------------------------------------:|
-|   ![de](img/troubleshooting/desktop.png)   |     ![boot](img/troubleshooting/boot.png)    |
+|   ![de](img/troubleshooting/desktop.png)   |    ![boot](img/troubleshooting/boot.png)     |
 |            Desktop environment             |                   Console                    |
-|   ![delog](img/troubleshooting/delog.png)  |   ![clilog](img/troubleshooting/clilog.png)  |
+|  ![delog](img/troubleshooting/delog.png)   |  ![clilog](img/troubleshooting/clilog.png)   |
 
 ## Can i use KlipperScreen as a desktop application?
 
