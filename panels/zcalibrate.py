@@ -151,7 +151,8 @@ class Panel(ScreenPanel):
                 speed = self.probe['speed']
 
         # Use safe_z_home position
-        if "safe_z_home" in self._printer.get_config_section_list():
+        if ("safe_z_home" in self._printer.get_config_section_list() and
+                "Z_ENDSTOP_CALIBRATE" not in self._printer.available_commands):
             safe_z = self._printer.get_config_section("safe_z_home")
             safe_z_xy = safe_z['home_xy_position']
             safe_z_xy = [str(i.strip()) for i in safe_z_xy.split(',')]
