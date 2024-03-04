@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-02 17:39-0300\n"
-"PO-Revision-Date: 2024-02-18 16:02+0000\n"
+"PO-Revision-Date: 2024-03-03 22:39+0300\n"
 "Last-Translator: Nurettin Sevdik <nurettinsevdik10@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/tr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4\n"
+"X-Generator: Poedit 3.2\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -205,16 +205,16 @@ msgid "Error"
 msgstr "Hata"
 
 msgid "Error clearing active spool"
-msgstr ""
+msgstr "Aktif makara temizleme hatası"
 
 msgid "Error getting active spool"
-msgstr ""
+msgstr "Erkin makara hatalı"
 
 msgid "Error setting active spool"
-msgstr ""
+msgstr "Etkin makara ayar hatası"
 
 msgid "Error trying to fetch spools"
-msgstr ""
+msgstr "Makaraları getirmeye çalışırken hata oluştu"
 
 msgid "Estimated Time Method"
 msgstr "Tahmini Zaman Metodu"
@@ -229,7 +229,7 @@ msgid "Extrude"
 msgstr "Ekstrüzyon"
 
 msgid "Extruders"
-msgstr ""
+msgstr "Ekstrüzyonlar"
 
 msgid "Extrusion +"
 msgstr "Ekstrüzyon +"
@@ -419,7 +419,7 @@ msgid "Loading..."
 msgstr "Yükleniyor..."
 
 msgid "Lost Connection to Moonraker"
-msgstr ""
+msgstr "Moonraker ile Kayıp Bağlantı"
 
 msgid "Lower Nozzle"
 msgstr "Nozzle düşür"
