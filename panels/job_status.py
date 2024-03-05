@@ -373,8 +373,15 @@ class Panel(ScreenPanel):
                             + "\n\n"
                             + _("Saved offset: %s") % saved_z_offset)
         elif device == "endstop":
-            label.set_label(_("Apply %s%.3f offset to Endstop?") % (sign, abs(self.zoffset)))
-
+            saved_z_offset = None
+            msg = _("Apply %s%.3f offset to Endstop?") % (sign, abs(self.zoffset))
+            if 'stepper_z' in self._printer.get_config_section_list():
+                saved_z_offset = self._printer.get_config_section('stepper_z')['position_endstop']
+            elif 'stepper_a' in self._printer.get_config_section_list():
+                saved_z_offset = self._printer.get_config_section('stepper_a')['position_endstop']
+            if saved_z_offset:
+                msg += "\n\n" + _("Saved offset: %s") % saved_z_offset
+            label.set_label(msg)
         buttons = [
             {"name": _("Apply"), "response": Gtk.ResponseType.APPLY, "style": 'dialog-default'},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
