@@ -154,10 +154,21 @@ class KlipperScreen(Gtk.Window):
         self.gtk = KlippyGtk(self)
         self.init_style()
         self.set_icon_from_file(os.path.join(klipperscreendir, "styles", "icon.svg"))
-
         self.base_panel = BasePanel(self, title="Base Panel")
         self.add(self.base_panel.main_grid)
         self.show_all()
+        min_ver = (3, 8)
+        if sys.version_info < min_ver:
+            self.show_error_modal(
+                "Error",
+                _("The system doesn't meet the minimum requirement") + "\n"
+                + _("Expected:") + f" Python {min_ver[0]}.{min_ver[1]}" + "\n"
+                + _("Current:") + f" Python {sys.version_info.major}.{sys.version_info.minor}"
+            )
+            return
+        if self._config.errors:
+            self.show_error_modal("Invalid config file", self._config.get_errors())
+            return
         if self.show_cursor:
             self.get_window().set_cursor(
                 Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.ARROW))
@@ -167,10 +178,6 @@ class KlipperScreen(Gtk.Window):
                 Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.BLANK_CURSOR))
             os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
         self.base_panel.activate()
-        if self._config.errors:
-            self.show_error_modal("Invalid config file", self._config.get_errors())
-            # Prevent this dialog from being destroyed
-            self.dialogs = []
         self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
         self.log_notification("KlipperScreen Started", 1)
         self.initial_connection()
@@ -390,15 +397,16 @@ class KlipperScreen(Gtk.Window):
         self.popup_message = self.popup_timeout = None
         return False
 
-    def show_error_modal(self, err, e=""):
-        logging.error(f"Showing error modal: {err} {e}")
+    def show_error_modal(self, title_msg, description="", help_msg=None):
+        logging.error(f"Showing error modal: {title_msg} {description}")
 
         title = Gtk.Label(wrap=True, wrap_mode=Pango.WrapMode.CHAR, hexpand=True, halign=Gtk.Align.START)
-        title.set_markup(f"<b>{err}</b>\n")
+        title.set_markup(f"<b>{title_msg}</b>\n")
         version = Gtk.Label(label=f"{functions.get_software_version()}", halign=Gtk.Align.END)
 
-        help_msg = _("Provide KlipperScreen.log when asking for help.\n")
-        message = Gtk.Label(label=f"{help_msg}\n\n{e}", wrap=True)
+        if not help_msg:
+            help_msg = _("Provide KlipperScreen.log when asking for help.\n")
+        message = Gtk.Label(label=f"{description}\n\n{help_msg}", wrap=True)
         scroll = self.gtk.ScrolledWindow(steppers=False)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(message)
@@ -410,13 +418,13 @@ class KlipperScreen(Gtk.Window):
         grid.attach(scroll, 0, 2, 2, 1)
 
         buttons = [
-            {"name": _("Go Back"), "response": Gtk.ResponseType.CANCEL}
+            {"name": _("Close"), "response": Gtk.ResponseType.CLOSE}
         ]
         self.gtk.Dialog(_("Error"), buttons, grid, self.error_modal_response)
 
-    def error_modal_response(self, dialog, response_id):
-        self.gtk.remove_dialog(dialog)
-        self.restart_ks()
+    @staticmethod
+    def error_modal_response(dialog, response_id):
+        sys.exit(1)
 
     def restart_ks(self, *args):
         logging.debug(f"Restarting {sys.executable} {' '.join(sys.argv)}")
@@ -1086,11 +1094,6 @@ class KlipperScreen(Gtk.Window):
 
 
 def main():
-    minimum = (3, 8)
-    if not sys.version_info >= minimum:
-        logging.error(f"python {sys.version_info.major}.{sys.version_info.minor} "
-                      f"does not meet the minimum requirement {minimum[0]}.{minimum[1]}")
-        sys.exit(1)
     parser = argparse.ArgumentParser(description="KlipperScreen - A GUI for Klipper")
     homedir = os.path.expanduser("~")
 
