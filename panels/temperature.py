@@ -186,7 +186,7 @@ class Panel(ScreenPanel):
                 self.graph_update = None
 
     def activate(self):
-        if self._printer.tempstore is None:
+        if not self._printer.tempstore:
             self._screen.init_tempstore()
         self.update_graph_visibility()
 

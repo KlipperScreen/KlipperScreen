@@ -31,16 +31,16 @@ class Printer:
     def reinit(self, printer_info, data):
         self.config = data['configfile']['config']
         self.data = data
-        self.devices = {}
-        self.tools = []
+        self.devices.clear()
+        self.tools.clear()
         self.extrudercount = 0
         self.tempdevcount = 0
         self.fancount = 0
         self.ledcount = 0
         self.output_pin_count = 0
-        self.tempstore = None
+        self.tempstore.clear()
         self.tempstore_size = 1200
-        self.available_commands = {}
+        self.available_commands.clear()
         self.temp_devices = self.sensors = None
         self.stop_tempstore_updates()
 
@@ -341,7 +341,7 @@ class Printer:
         return 0
 
     def get_temp_store_devices(self):
-        return list(self.tempstore) if self.tempstore is not None else self.tempstore
+        return list(self.tempstore)
 
     def device_has_target(self, device):
         return "target" in self.devices[device]
