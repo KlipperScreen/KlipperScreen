@@ -279,9 +279,8 @@ trough {
     margin: .5em .5em;
 }
 
-.action_bar {
-    /* min-width: 4.5em; */
-    /* min-height: 4.5em; */
+.action_bar :disabled{
+    opacity: .6;
 }
 
 .title_bar {
