@@ -26,10 +26,10 @@ ExecStart="KS_DIR/scripts/KlipperScreen-start.sh"
 
 # Log this user with utmp, letting it show up with commands 'w' and
 # 'who'. This is needed since we replace (a)getty.
-UtmpIdentifier=%I
+UtmpIdentifier=tty7
 UtmpMode=user
 # A virtual terminal is needed.
-TTYPath=/dev/%I
+TTYPath=/dev/tty7
 TTYReset=yes
 TTYVHangup=yes
 TTYVTDisallocate=yes
