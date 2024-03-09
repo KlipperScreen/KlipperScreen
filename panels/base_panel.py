@@ -264,6 +264,7 @@ class BasePanel(ScreenPanel):
         )
         self.control['shortcut'].set_visible(show)
         self.set_control_sensitive(self._screen._cur_panels[-1] != self.shorcut['panel'])
+        self.set_control_sensitive(self._screen._cur_panels[-1] != self.shutdown['panel'], control='shutdown')
 
     def show_printer_select(self, show=True):
         self.control['printer_select'].set_visible(show)
