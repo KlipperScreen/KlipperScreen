@@ -80,7 +80,7 @@ class Panel(ScreenPanel):
             "row": row,
             "params": {},
         }
-        pattern = r'params\.(?P<param>..*)\|default\((?P<default>..*)\).*'
+        pattern = r'params\.(?P<param>[A-Z_0-9]+)(?:\s*\|.*\s*default\(\s*(?P<default>[^\)]+)\))?'
         i = 0
         for line in gcode:
             if line.startswith("{") and "params." in line:
