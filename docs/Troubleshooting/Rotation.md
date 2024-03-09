@@ -18,13 +18,14 @@ here are some examples:
     Paste this section modifying the options to suit your needs:
     ```kconfig
     Section "Monitor"
-        Identifier "DPI-1"
-        # This identifier would be the same as the name of the connector printed by xrandr.
-        # it can be "HDMI-0" "DisplayPort-0", "DSI-0", "DVI-0", "DPI-0" etc
+        Identifier "HDMI-A-1"
+        # This identifier would be the same as the name of the connector printed by xrandr
+        # DISPLAY=:0 xrandr
+        # for example  "DVI-I-1 connected primary" means that the identifier is "DVI-I-1"
+        # another example "Unknown19-1 connected primary" some GPIO screens identify as Unknown19
 
         Option "Rotate" "left"
         # Valid rotation options are normal,inverted,left,right
-
 
         Option "PreferredMode" "1920x1080"
         # May be necesary if you are not getting your prefered resolution.
