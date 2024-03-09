@@ -12,19 +12,14 @@ class KlippyRest:
 
     @property
     def endpoint(self):
-        protocol = "http"
-        if int(self.port) in {443, 7130}:
-            protocol = "https"
-        return f"{protocol}://{self.ip}:{self.port}"
+        return f"{'https' if int(self.port) in {443, 7130} else 'http'}://{self.ip}:{self.port}"
 
     def get_server_info(self):
         return self.send_request("server/info")
 
     def get_oneshot_token(self):
-        r = self.send_request("access/oneshot_token")
-        if r is False or 'result' not in r:
-            return False
-        return r['result']
+        res = self.send_request("access/oneshot_token")
+        return res['result'] if 'result' in res else False
 
     def get_printer_info(self):
         return self.send_request("printer/info")

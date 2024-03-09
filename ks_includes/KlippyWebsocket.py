@@ -38,9 +38,7 @@ class KlippyWebsocket(threading.Thread):
 
     @property
     def ws_proto(self):
-        if int(self.port) in {443, 7130}:
-            return "wss"
-        return "ws"
+        return "wss" if int(self.port) in {443, 7130} else "ws"
 
     def retry(self):
         self.reconnect_count = 0
@@ -78,8 +76,7 @@ class KlippyWebsocket(threading.Thread):
                 return True
             token = self._screen.apiclient.get_oneshot_token()
         except Exception as e:
-            logging.critical(e, exc_info=True)
-            logging.debug("Unable to get oneshot token")
+            logging.debug(f"Unable to get oneshot token {e}")
             return True
 
         self.ws_url = f"{self.ws_proto}://{self._url}/websocket?token={token}"
@@ -92,8 +89,7 @@ class KlippyWebsocket(threading.Thread):
             logging.debug("Starting websocket thread")
             self._wst.start()
         except Exception as e:
-            logging.critical(e, exc_info=True)
-            logging.debug("Error starting web socket")
+            logging.debug(f"Error starting web socket {e}")
             return True
         return False
 
