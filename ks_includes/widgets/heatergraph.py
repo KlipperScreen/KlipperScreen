@@ -44,9 +44,13 @@ class HeaterGraph(Gtk.DrawingArea):
             logging.info(f"Graph area: {x} {y}")
 
     def get_max_length(self):
-        return min(len(self.printer.get_temp_store(name, "temperatures"))
-                   for name in self.store if "temperatures" in self.store[name]
-                   and self.printer.get_temp_store(name, "temperatures"))
+        try:
+            return min(len(self.printer.get_temp_store(name, "temperatures"))
+                       for name in self.store if "temperatures" in self.store[name]
+                       and self.printer.get_temp_store(name, "temperatures"))
+        except ValueError:
+            logging.debug(self.printer.get_temp_devices())
+            return 0
 
     def get_max_num(self, data_points=0):
         mnum = [0]
