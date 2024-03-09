@@ -27,10 +27,19 @@ class BasePanel(ScreenPanel):
         self.control['back'].connect("clicked", self.back)
         self.control['home'] = self._gtk.Button('main', scale=abscale)
         self.control['home'].connect("clicked", self._screen._menu_go_back, True)
-        self.control['estop'] = self._gtk.Button('emergency', scale=abscale)
-        self.control['estop'].connect("clicked", self.emergency_stop)
         for control in self.control:
             self.set_control_sensitive(False, control)
+        self.control['estop'] = self._gtk.Button('emergency', scale=abscale)
+        self.control['estop'].connect("clicked", self.emergency_stop)
+        self.control['estop'].set_no_show_all(True)
+        self.shutdown = {
+            "name": None,
+            "panel": "shutdown",
+            "icon": "shutdown",
+        }
+        self.control['shutdown'] = self._gtk.Button('shutdown', scale=abscale)
+        self.control['shutdown'].connect("clicked", self.menu_item_clicked, self.shutdown)
+        self.control['shutdown'].set_no_show_all(True)
         self.control['printer_select'] = self._gtk.Button('shuffle', scale=abscale)
         self.control['printer_select'].connect("clicked", self._screen.show_printer_select)
         self.control['printer_select'].set_no_show_all(True)
@@ -63,6 +72,7 @@ class BasePanel(ScreenPanel):
         self.action_bar.add(self.control['printer_select'])
         self.action_bar.add(self.control['shortcut'])
         self.action_bar.add(self.control['estop'])
+        self.action_bar.add(self.control['shutdown'])
         self.show_printer_select(len(self._config.get_printers()) > 1)
 
         # Titlebar
@@ -174,10 +184,12 @@ class BasePanel(ScreenPanel):
             self.time_update = GLib.timeout_add_seconds(1, self.update_time)
 
     def add_content(self, panel):
-        show = self._printer is not None and self._printer.state not in ('disconnected', 'startup', 'shutdown', 'error')
-        self.show_shortcut(show)
-        self.show_heaters(show)
-        self.set_control_sensitive(show, control='estop')
+        printing = self._printer and self._printer.state in {"printing", "paused"}
+        connected = self._printer and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'}
+        self.control['estop'].set_visible(printing)
+        self.control['shutdown'].set_visible(not printing)
+        self.show_shortcut(connected)
+        self.show_heaters(connected)
         for control in ('back', 'home'):
             self.set_control_sensitive(len(self._screen._cur_panels) > 1, control=control)
         self.current_panel = panel
