@@ -25,6 +25,12 @@ dtoverlay=piscreen,drm
 ???+ info
     in this context drm stands for [Direct Rendering Manager](https://en.wikipedia.org/wiki/Direct_Rendering_Manager)
 
+I had to comment out (add # at the start) vc4 or it would boot into a blackscreen
+
+```
+#dtoverlay=vc4-kms-v3d
+```
+
 Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
 
 ```sh
