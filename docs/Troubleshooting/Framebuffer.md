@@ -53,7 +53,7 @@ ls /usr/share/X11/xorg.conf.d/
     ```sh
     sudo nano /usr/share/X11/xorg.conf.d/99-fbdev.conf
     ```
-    ``` title="99-fbturbo.conf"
+    ``` title="99-fbdev.conf"
     Section "Device"
             Identifier      "Allwinner A10/A13/A20 FBDEV"
             Driver          "fbdev"
