@@ -2,7 +2,7 @@
 
 ## What is the minimum Python version required?
 
-The minimum version is Python 3.7, this is checked during install.
+The minimum version is Python 3.8, this is checked during install.
 
 ##  OctoPrint?
 
