@@ -162,8 +162,8 @@ class KlipperScreen(Gtk.Window):
             self.show_error_modal(
                 "Error",
                 _("The system doesn't meet the minimum requirement") + "\n"
-                + _("Expected:") + f" Python {min_ver[0]}.{min_ver[1]}" + "\n"
-                + _("Current:") + f" Python {sys.version_info.major}.{sys.version_info.minor}"
+                + _("Minimum:") + f" Python {min_ver[0]}.{min_ver[1]}" + "\n"
+                + _("System:") + f" Python {sys.version_info.major}.{sys.version_info.minor}"
             )
             return
         if self._config.errors:
