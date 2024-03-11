@@ -123,7 +123,8 @@ class KlipperScreen(Gtk.Window):
 
         self.connect("key-press-event", self._key_press_event)
         self.connect("configure_event", self.update_size)
-        monitor_amount = Gdk.Display.get_n_monitors(Gdk.Display.get_default())
+        display = Gdk.Display.get_default()
+        monitor_amount = Gdk.Display.get_n_monitors(display)
         try:
             mon_n = int(args.monitor)
             if not (-1 < mon_n < monitor_amount):
@@ -131,8 +132,9 @@ class KlipperScreen(Gtk.Window):
         except ValueError:
             mon_n = 0
         logging.info(f"Monitors: {monitor_amount} using number: {mon_n}")
-        monitor = Gdk.Display.get_default().get_monitor(mon_n)
-        self.wayland = Gdk.Display.get_default().get_primary_monitor() is None
+        monitor = display.get_monitor(mon_n)
+        self.wayland = display.get_name().startswith('wayland') or display.get_primary_monitor() is None
+        logging.info(f"Wayland: {self.wayland} Display name: {display.get_name()}")
         self.width = self._config.get_main_config().getint("width", None)
         self.height = self._config.get_main_config().getint("height", None)
         if 'XDG_CURRENT_DESKTOP' in os.environ:
