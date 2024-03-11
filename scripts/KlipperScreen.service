@@ -9,10 +9,6 @@ ConditionPathExists=/dev/tty0
 # D-Bus is necessary for contacting logind, which is required.
 Wants=dbus.socket systemd-logind.service
 After=dbus.socket systemd-logind.service
-# Replace any (a)getty that may have spawned, since we log in
-# automatically.
-Conflicts=getty@%i.service
-After=getty@%i.service
 
 [Service]
 Type=simple
@@ -21,7 +17,7 @@ RestartSec=2
 User=KS_USER
 SupplementaryGroups=klipperscreen
 WorkingDirectory=KS_DIR
-Environment="KS_XCLIENT=KS_ENV/bin/python KS_DIR/screen.py"
+Environment="KS_XCLIENT=KS_ENV/bin/python KS_DIR/screen.py" BACKEND=KS_BACKEND
 ExecStart="KS_DIR/scripts/KlipperScreen-start.sh"
 
 # Log this user with utmp, letting it show up with commands 'w' and

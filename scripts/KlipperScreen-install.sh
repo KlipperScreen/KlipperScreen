@@ -5,6 +5,7 @@ KSPATH=$(sed 's/\/scripts//g' <<< $SCRIPTPATH)
 KSENV="${KLIPPERSCREEN_VENV:-${HOME}/.KlipperScreen-env}"
 
 XSERVER="xinit xinput x11-xserver-utils xserver-xorg-input-evdev xserver-xorg-input-libinput xserver-xorg-legacy xserver-xorg-video-fbdev"
+CAGE="cage seatd xwayland"
 PYTHON="python3-virtualenv virtualenv python3-distutils"
 PYGOBJECT="libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0"
 MISC="librsvg2-common libopenjp2-7 wireless-tools libdbus-glib-1-dev autoconf"
@@ -30,18 +31,47 @@ echo_ok ()
     printf "${Green}$1${Normal}\n"
 }
 
+install_graphical_backend()
+{
+  while true; do
+    if [ -z "$BACKEND" ]; then
+      echo_ok "Default is Xserver"
+      echo_text "Wayland needs kms/drm drivers"
+      read -r -e -p "Backend Xserver or Wayland (cage)? [X/w]" BACKEND
+      if [[ "$BACKEND" =~ ^[wW]$ ]]; then
+        echo_text "Installing Wayland Cage Kiosk"
+        if sudo apt-get install -y $CAGE; then
+            echo_ok "Installed Cage"
+            break
+        else
+            echo_error "Installation of Cage dependencies failed ($CAGE)"
+            exit 1
+        fi
+      else
+        echo_text "Installing Xserver"
+        if sudo apt-get install -y $XSERVER; then
+            echo_ok "Installed X"
+            update_x11
+            break
+        else
+            echo_error "Installation of X-server dependencies failed ($XSERVER)"
+            exit 1
+        fi
+      fi
+    fi
+  done
+}
+
 install_packages()
 {
     echo_text "Update package data"
     sudo apt-get update
 
     echo_text "Checking for broken packages..."
-    output=$(dpkg-query -W -f='${db:Status-Abbrev} ${binary:Package}\n' | grep -E ^.[^nci])
-    if [ $? -eq 0 ]; then
+    if dpkg-query -W -f='${db:Status-Abbrev} ${binary:Package}\n' | grep -E "^.[^nci]"; then
         echo_text "Detected broken packages. Attempting to fix"
         sudo apt-get -f install
-        output=$(dpkg-query -W -f='${db:Status-Abbrev} ${binary:Package}\n' | grep -E ^.[^nci])
-        if [ $? -eq 0 ]; then
+        if dpkg-query -W -f='${db:Status-Abbrev} ${binary:Package}\n' | grep -E "^.[^nci]"; then
             echo_error "Unable to fix broken packages. These must be fixed before KlipperScreen can be installed"
             exit 1
         fi
@@ -50,31 +80,22 @@ install_packages()
     fi
 
     echo_text "Installing KlipperScreen dependencies"
-    sudo apt-get install -y $XSERVER
-    if [ $? -eq 0 ]; then
-        echo_ok "Installed X"
-    else
-        echo_error "Installation of X-server dependencies failed ($XSERVER)"
-        exit 1
-    fi
     sudo apt-get install -y $OPTIONAL
     echo $_
-    sudo apt-get install -y $PYTHON
-    if [ $? -eq 0 ]; then
+    if sudo apt-get install -y $PYTHON; then
         echo_ok "Installed Python dependencies"
     else
         echo_error "Installation of Python dependencies failed ($PYTHON)"
         exit 1
     fi
-    sudo apt-get install -y $PYGOBJECT
-    if [ $? -eq 0 ]; then
+
+    if sudo apt-get install -y $PYGOBJECT; then
         echo_ok "Installed PyGobject dependencies"
     else
         echo_error "Installation of PyGobject dependencies failed ($PYGOBJECT)"
         exit 1
     fi
-    sudo apt-get install -y $MISC
-    if [ $? -eq 0 ]; then
+    if sudo apt-get install -y $MISC; then
         echo_ok "Installed Misc packages"
     else
         echo_error "Installation of Misc packages failed ($MISC)"
@@ -135,10 +156,12 @@ install_systemd_service()
     SERVICE=$(<$SCRIPTPATH/KlipperScreen.service)
     KSPATH_ESC=$(sed "s/\//\\\\\//g" <<< $KSPATH)
     KSENV_ESC=$(sed "s/\//\\\\\//g" <<< $KSENV)
+    KS_BACKEND_ESC=$(sed "s/\//\\\\\//g" <<< $BACKEND)
 
     SERVICE=$(sed "s/KS_USER/$USER/g" <<< $SERVICE)
     SERVICE=$(sed "s/KS_ENV/$KSENV_ESC/g" <<< $SERVICE)
     SERVICE=$(sed "s/KS_DIR/$KSPATH_ESC/g" <<< $SERVICE)
+    SERVICE=$(sed "s/KS_BACKEND/$KS_BACKEND_ESC/g" <<< $SERVICE)
 
     echo "$SERVICE" | sudo tee /etc/systemd/system/KlipperScreen.service > /dev/null
     sudo systemctl unmask KlipperScreen.service
@@ -236,11 +259,9 @@ EOF
 
 fix_fbturbo()
 {
-    if [ $(dpkg-query -W -f='${Status}' xserver-xorg-video-fbturbo 2>/dev/null | grep -c "ok installed") -eq 0 ];
-    then
+    if [ $(dpkg-query -W -f='${Status}' xserver-xorg-video-fbturbo 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
         FBCONFIG="/usr/share/X11/xorg.conf.d/99-fbturbo.conf"
-        if [ -e $FBCONFIG ]
-        then
+        if [ -e $FBCONFIG ]; then
             echo_text "FBturbo not installed, but the configuration file exists"
             echo_text "This will fail if the config is not removed or the package installed"
             echo_text "moving the config to the home folder"
@@ -260,25 +281,38 @@ add_desktop_file()
 start_KlipperScreen()
 {
     echo_text "Starting service..."
-    sudo systemctl stop KlipperScreen
-    sudo systemctl start KlipperScreen
+    sudo systemctl restart KlipperScreen
 }
+
+
+# Script start
 if [ "$EUID" == 0 ]
     then echo_error "Please do not run this script as root"
     exit 1
 fi
-install_packages
 check_requirements
+
+if [ -z "$SERVICE" ]; then
+    read -r -e -p "Install as a service? (This will enable boot to console) [Y/n]" SERVICE
+    if [[ $SERVICE =~ ^[nN]$ ]]; then
+        echo_text "Not installing the service"
+        echo_text "X or Wayland will NOT be installed"
+    else
+        install_graphical_backend
+        install_systemd_service
+        if [ -z "$START" ]; then
+            START=1
+        fi
+    fi
+fi
+
+install_packages
 create_virtualenv
 create_policy
-update_x11
 fix_fbturbo
 add_desktop_file
-read -r -e -p "Install as a service? (This will enable boot to console) [Y/n]" choice
-if [[ $choice =~ ^[nN]$ ]]; then
-    echo_text "Not installing the service, KlipperScreen will need to be manually started"
+if [ -z "$START" ]; then
     echo_ok "KlipperScreen was installed"
 else
-    install_systemd_service
     start_KlipperScreen
 fi
