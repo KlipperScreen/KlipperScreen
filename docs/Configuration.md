@@ -92,6 +92,7 @@ moonraker_port: 7125
 # screw_positions: bl, br, fm
 
 # Rotation is useful if the screen is not directly in front of the machine.
+# It will affect the bed mesh visualization.
 # Valid values are 0 90 180 270
 # screw_rotation: 0
 

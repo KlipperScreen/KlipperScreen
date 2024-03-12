@@ -96,6 +96,15 @@ class Panel(ScreenPanel):
         return bm[matrix]
 
     def update_graph(self, widget=None, profile=None):
+        if self.ks_printer_cfg is not None:
+            invert_x = self._config.get_config()['main'].getboolean("invert_x", False)
+            invert_y = self._config.get_config()['main'].getboolean("invert_y", False)
+            self.labels['map'].set_inversion(x=invert_x, y=invert_y)
+            rotation = self.ks_printer_cfg.getint("screw_rotation", 0)
+            if rotation not in (0, 90, 180, 270):
+                rotation = 0
+            self.labels['map'].set_rotation(rotation)
+            logging.info(f"Inversion X: {invert_x} Y: {invert_y} Rotation: {rotation}")
         self.labels['map'].update_bm(self.retrieve_bm(profile))
         self.labels['map'].queue_draw()
 

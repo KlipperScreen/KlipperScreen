@@ -13,9 +13,33 @@ class BedMap(Gtk.DrawingArea):
         self.font_size = font_size
         self.font_spacing = round(self.font_size * 1.5)
         self.bm = list(reversed(bm)) if bm is not None else None
+        self.invert_x = False
+        self.invert_y = False
+        self.rotation = 0
 
     def update_bm(self, bm):
-        self.bm = list(reversed(bm)) if bm is not None else None
+        if bm is None:
+            self.bm = None
+            return
+        print(bm)
+        if self.invert_x and self.invert_y:
+            self.bm = [list(reversed(b)) for b in bm]
+        elif self.invert_x:
+            self.bm = [list(reversed(b)) for b in list(reversed(bm))]
+        elif self.invert_y:
+            self.bm = list(bm)
+        else:
+            self.bm = list(reversed(bm))
+        if self.rotation in (90, 180, 270):
+            self.bm = self.rotate_matrix(self.bm)
+
+    def rotate_matrix(self, matrix):
+        if self.rotation == 90:
+            return [list(row) for row in zip(*matrix[::-1])]
+        elif self.rotation == 180:
+            return [list(row)[::-1] for row in matrix[::-1]]
+        elif self.rotation == 270:
+            return [list(row) for row in zip(*matrix)][::-1]
 
     def draw_graph(self, da, ctx):
         width = da.get_allocated_width()
@@ -68,3 +92,10 @@ class BedMap(Gtk.DrawingArea):
         if value < 0:
             return [color, color, 1]
         return [1, 1, 1]
+
+    def set_inversion(self, x=False, y=False):
+        self.invert_x = x
+        self.invert_y = y
+
+    def set_rotation(self, rotation=0):
+        self.rotation = rotation
