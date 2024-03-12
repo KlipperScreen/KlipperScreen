@@ -385,9 +385,7 @@ class Panel(ScreenPanel):
 
     def _callback(self, action, item):
         logging.info(f"{action}: {item}")
-        if action == "update_metadata":
-            return
-        elif action in {"create_dir", "create_file"}:
+        if action in {"create_dir", "create_file"}:
             self.add_item_from_callback(action, item)
         elif action == "delete_file":
             self.delete_from_list(item["path"])

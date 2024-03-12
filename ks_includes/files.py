@@ -47,7 +47,7 @@ class KlippyFiles:
                             os.path.dirname(params['filename']),
                             thumbnail['relative_path']
                         )
-            self.run_callbacks("update_metadata", result["result"])
+            self._screen.process_update("notify_metadata_update", params)
 
     def add_file(self, item):
         if 'path' not in item:
