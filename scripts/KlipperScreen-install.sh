@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-KSPATH=$(sed 's/\/scripts//g' <<< $SCRIPTPATH)
+SCRIPTPATH=$(dirname -- "$(readlink -f -- "$0")")
+KSPATH=$(dirname "$SCRIPTPATH")
 KSENV="${KLIPPERSCREEN_VENV:-${HOME}/.KlipperScreen-env}"
 
 XSERVER="xinit xinput x11-xserver-utils xserver-xorg-input-evdev xserver-xorg-input-libinput xserver-xorg-legacy xserver-xorg-video-fbdev"
@@ -40,8 +40,9 @@ install_graphical_backend()
       read -r -e -p "Backend Xserver or Wayland (cage)? [X/w]" BACKEND
       if [[ "$BACKEND" =~ ^[wW]$ ]]; then
         echo_text "Installing Wayland Cage Kiosk"
-        if sudo apt-get install -y $CAGE; then
+        if sudo apt install -y $CAGE; then
             echo_ok "Installed Cage"
+            BACKEND="W"
             break
         else
             echo_error "Installation of Cage dependencies failed ($CAGE)"
@@ -49,9 +50,10 @@ install_graphical_backend()
         fi
       else
         echo_text "Installing Xserver"
-        if sudo apt-get install -y $XSERVER; then
+        if sudo apt install -y $XSERVER; then
             echo_ok "Installed X"
             update_x11
+            BACKEND="X"
             break
         else
             echo_error "Installation of X-server dependencies failed ($XSERVER)"
@@ -65,12 +67,12 @@ install_graphical_backend()
 install_packages()
 {
     echo_text "Update package data"
-    sudo apt-get update
+    sudo apt update
 
     echo_text "Checking for broken packages..."
     if dpkg-query -W -f='${db:Status-Abbrev} ${binary:Package}\n' | grep -E "^.[^nci]"; then
         echo_text "Detected broken packages. Attempting to fix"
-        sudo apt-get -f install
+        sudo apt -f install
         if dpkg-query -W -f='${db:Status-Abbrev} ${binary:Package}\n' | grep -E "^.[^nci]"; then
             echo_error "Unable to fix broken packages. These must be fixed before KlipperScreen can be installed"
             exit 1
@@ -80,22 +82,22 @@ install_packages()
     fi
 
     echo_text "Installing KlipperScreen dependencies"
-    sudo apt-get install -y $OPTIONAL
-    echo $_
-    if sudo apt-get install -y $PYTHON; then
+    sudo apt install -y $OPTIONAL
+    echo "$_"
+    if sudo apt install -y $PYTHON; then
         echo_ok "Installed Python dependencies"
     else
         echo_error "Installation of Python dependencies failed ($PYTHON)"
         exit 1
     fi
 
-    if sudo apt-get install -y $PYGOBJECT; then
+    if sudo apt install -y $PYGOBJECT; then
         echo_ok "Installed PyGobject dependencies"
     else
         echo_error "Installation of PyGobject dependencies failed ($PYGOBJECT)"
         exit 1
     fi
-    if sudo apt-get install -y $MISC; then
+    if sudo apt install -y $MISC; then
         echo_ok "Installed Misc packages"
     else
         echo_error "Installation of Misc packages failed ($MISC)"
@@ -130,7 +132,7 @@ create_virtualenv()
     if [ $? -gt 0 ]; then
         echo_error "Error: pip install exited with status code $?"
         echo_text "Trying again with new tools..."
-        sudo apt-get install -y build-essential cmake
+        sudo apt install -y build-essential cmake
         if [[ "$(uname -m)" =~ armv[67]l ]]; then
             echo_text "Adding piwheels.org as extra index..."
             pip install --extra-index-url https://www.piwheels.org/simple --upgrade pip setuptools
@@ -153,22 +155,18 @@ install_systemd_service()
 {
     echo_text "Installing KlipperScreen unit file"
 
-    SERVICE=$(<$SCRIPTPATH/KlipperScreen.service)
-    KSPATH_ESC=$(sed "s/\//\\\\\//g" <<< $KSPATH)
-    KSENV_ESC=$(sed "s/\//\\\\\//g" <<< $KSENV)
-    KS_BACKEND_ESC=$(sed "s/\//\\\\\//g" <<< $BACKEND)
-
-    SERVICE=$(sed "s/KS_USER/$USER/g" <<< $SERVICE)
-    SERVICE=$(sed "s/KS_ENV/$KSENV_ESC/g" <<< $SERVICE)
-    SERVICE=$(sed "s/KS_DIR/$KSPATH_ESC/g" <<< $SERVICE)
-    SERVICE=$(sed "s/KS_BACKEND/$KS_BACKEND_ESC/g" <<< $SERVICE)
+    SERVICE=$(cat "$SCRIPTPATH"/KlipperScreen.service)
+    SERVICE=${SERVICE//KS_USER/$USER}
+    SERVICE=${SERVICE//KS_ENV/$KSENV}
+    SERVICE=${SERVICE//KS_DIR/$KSPATH}
+    SERVICE=${SERVICE//KS_BACKEND/$BACKEND}
 
     echo "$SERVICE" | sudo tee /etc/systemd/system/KlipperScreen.service > /dev/null
     sudo systemctl unmask KlipperScreen.service
     sudo systemctl daemon-reload
     sudo systemctl enable KlipperScreen
     sudo systemctl set-default multi-user.target
-    sudo adduser $USER tty
+    sudo adduser "$USER" tty
 }
 
 create_policy()
@@ -178,7 +176,7 @@ create_policy()
 
     echo_text "Installing KlipperScreen PolicyKit Rules"
     sudo groupadd -f klipperscreen
-    sudo adduser $USER netdev
+    sudo adduser "$USER" netdev
     if [ ! -x "$(command -v pkaction)" ]; then
         echo "PolicyKit not installed"
         return
@@ -204,7 +202,7 @@ create_policy()
     echo_text "Installing PolicyKit Rules to ${RULE_FILE}..."
 
     KS_GID=$( getent group klipperscreen | awk -F: '{printf "%d", $3}' )
-    sudo /bin/sh -c "cat > ${RULE_FILE}" << EOF
+    sudo tee ${RULE_FILE} > /dev/null << EOF
 // Allow KlipperScreen to reboot, shutdown, etc
 polkit.addRule(function(action, subject) {
     if ((action.id == "org.freedesktop.login1.power-off" ||
@@ -233,25 +231,23 @@ EOF
 create_policy_legacy()
 {
     RULE_FILE="/etc/polkit-1/localauthority/50-local.d/20-klipperscreen.pkla"
-    ACTIONS="org.freedesktop.login1.power-off"
-    ACTIONS="${ACTIONS};org.freedesktop.login1.power-off-multiple-sessions"
-    ACTIONS="${ACTIONS};org.freedesktop.login1.reboot"
-    ACTIONS="${ACTIONS};org.freedesktop.login1.reboot-multiple-sessions"
-    ACTIONS="${ACTIONS};org.freedesktop.login1.halt"
-    ACTIONS="${ACTIONS};org.freedesktop.login1.halt-multiple-sessions"
-    ACTIONS="${ACTIONS};org.freedesktop.NetworkManager.*"
-    sudo /bin/sh -c "cat > ${RULE_FILE}" << EOF
+    sudo tee ${RULE_FILE} > /dev/null << EOF
 [KlipperScreen]
 Identity=unix-user:$USER
-Action=$ACTIONS
+Action=org.freedesktop.login1.power-off;
+       org.freedesktop.login1.power-off-multiple-sessions;
+       org.freedesktop.login1.reboot;
+       org.freedesktop.login1.reboot-multiple-sessions;
+       org.freedesktop.login1.halt;
+       org.freedesktop.login1.halt-multiple-sessions;
+       org.freedesktop.NetworkManager.*
 ResultAny=yes
 EOF
 }
 
 update_x11()
 {
-    echo_text "Adding X11 Xwrapper"
-    sudo /bin/sh -c "cat >  /etc/X11/Xwrapper.config" << EOF
+    sudo tee /etc/X11/Xwrapper.config > /dev/null << EOF
 allowed_users=anybody
 needs_root_rights=yes
 EOF
@@ -259,7 +255,7 @@ EOF
 
 fix_fbturbo()
 {
-    if [ $(dpkg-query -W -f='${Status}' xserver-xorg-video-fbturbo 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+    if [ "$(dpkg-query -W -f='${Status}' xserver-xorg-video-fbturbo 2>/dev/null | grep -c "ok installed")" -eq 0 ]; then
         FBCONFIG="/usr/share/X11/xorg.conf.d/99-fbturbo.conf"
         if [ -e $FBCONFIG ]; then
             echo_text "FBturbo not installed, but the configuration file exists"
@@ -272,10 +268,9 @@ fix_fbturbo()
 
 add_desktop_file()
 {
-    DESKTOP=$(<$SCRIPTPATH/KlipperScreen.desktop)
-    mkdir -p $HOME/.local/share/applications/
-    echo "$DESKTOP" | tee $HOME/.local/share/applications/KlipperScreen.desktop > /dev/null
-    sudo cp $SCRIPTPATH/../styles/icon.svg /usr/share/icons/hicolor/scalable/apps/KlipperScreen.svg
+    mkdir -p "$HOME"/.local/share/applications/
+    cp "$SCRIPTPATH"/KlipperScreen.desktop "$HOME"/.local/share/applications/KlipperScreen.desktop
+    sudo cp "$SCRIPTPATH"/../styles/icon.svg /usr/share/icons/hicolor/scalable/apps/KlipperScreen.svg
 }
 
 start_KlipperScreen()
@@ -296,7 +291,7 @@ if [ -z "$SERVICE" ]; then
     read -r -e -p "Install as a service? (This will enable boot to console) [Y/n]" SERVICE
     if [[ $SERVICE =~ ^[nN]$ ]]; then
         echo_text "Not installing the service"
-        echo_text "X or Wayland will NOT be installed"
+        echo_text "The graphical backend will NOT be installed"
     else
         install_graphical_backend
         install_systemd_service
@@ -311,7 +306,7 @@ create_virtualenv
 create_policy
 fix_fbturbo
 add_desktop_file
-if [ -z "$START" ]; then
+if [ -z "$START" ] || [ "$START" -eq 0 ]; then
     echo_ok "KlipperScreen was installed"
 else
     start_KlipperScreen
