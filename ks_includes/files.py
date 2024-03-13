@@ -113,10 +113,11 @@ class KlippyFiles:
         for cb in self.callbacks:
             cb(action, item)
 
-    def get_file_info(self, filename):
-        if filename not in self.files:
-            return {"path": None, "modified": 0, "size": 0}
-        return self.files[filename]
+    def get_file_info(self, path):
+        if path not in self.files:
+            logging.info(f"Metadata not found {path}")
+            return {}
+        return self.files[path]
 
     def get_dir_info(self, directory):
         self._screen._ws.klippy.get_dir_info(self._callback, directory=directory)

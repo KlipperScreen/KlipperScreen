@@ -144,7 +144,7 @@ class Panel(ScreenPanel):
             format_label(label)
             info = Gtk.Label(hexpand=True, halign=Gtk.Align.START, wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
             info.get_style_context().add_class("print-info")
-            info.set_markup(self.get_info_str(item))
+            info.set_markup(self.get_info_str(item, path))
             delete = Gtk.Button(hexpand=False, vexpand=False, can_focus=False, always_show_image=True)
             delete.get_style_context().add_class("color1")
             delete.set_image(self._gtk.Image("delete", self.list_button_size, self.list_button_size))
@@ -331,7 +331,7 @@ class Panel(ScreenPanel):
             logging.info(f"Starting print: {filename}")
             self._screen._ws.klippy.print_start(filename)
 
-    def get_info_str(self, item):
+    def get_info_str(self, item, path):
         info = ""
         if "modified" in item:
             info += _("Modified") if 'dirname' in item else _("Uploaded")
@@ -342,7 +342,7 @@ class Panel(ScreenPanel):
         if "size" in item:
             info += _("Size") + f': <b>{self.format_size(item["size"])}</b>\n'
         if 'filename' in item:
-            fileinfo = self._screen.files.get_file_info(item['filename'])
+            fileinfo = self._screen.files.get_file_info(path)
             if "estimated_time" in fileinfo:
                 info += _("Print Time") + f': <b>{self.format_time(fileinfo["estimated_time"])}</b>'
         return info
