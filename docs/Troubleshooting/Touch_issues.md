@@ -106,7 +106,7 @@ This is optional, and you should only do it if you are having problems.
 Download and build xtcal:
 
 ```sh
-sudo apt-get install libxaw7-dev
+sudo apt-get install libxaw7-dev libxxf86vm-dev libxft-dev
 cd
 git clone https://github.com/KurtJacobson/xtcal
 cd xtcal
