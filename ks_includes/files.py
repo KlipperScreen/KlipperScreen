@@ -29,6 +29,8 @@ class KlippyFiles:
                 self.request_metadata(item["path"])
         elif method == "server.files.metadata":
             for x in result['result']:
+                if params['filename'] not in self.files:
+                    self.files[params['filename']] = {}
                 self.files[params['filename']][x] = result['result'][x]
             if "thumbnails" in self.files[params['filename']]:
                 self.files[params['filename']]['thumbnails'].sort(key=lambda y: y['size'], reverse=True)
