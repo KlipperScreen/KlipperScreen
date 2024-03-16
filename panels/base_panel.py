@@ -244,6 +244,7 @@ class BasePanel(ScreenPanel):
                         self._screen.updating = False
                         for dialog in self._screen.dialogs:
                             self._gtk.remove_dialog(dialog)
+            return
 
         if action != "notify_status_update" or self._screen.printer is None:
             return
