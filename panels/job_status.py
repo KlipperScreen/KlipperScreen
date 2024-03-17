@@ -631,7 +631,7 @@ class Panel(ScreenPanel):
         elif timeleft_type == "slicer":
             estimated = slicer_time
         elif estimated < 1:  # Auto
-            if slicer_time > 1:
+            if print_duration < slicer_time > 1:
                 if progress < 0.15:
                     # At the begining file and filament are innacurate
                     estimated = slicer_time
@@ -641,7 +641,7 @@ class Panel(ScreenPanel):
                 elif file_time > 1:
                     # Weighted arithmetic mean (Slicer is the most accurate)
                     estimated = (slicer_time * 2 + file_time) / 3
-            elif filament_time > 1 and file_time > 1:
+            elif print_duration < filament_time > 1 and file_time > 1:
                 estimated = (filament_time + file_time) / 2
             elif file_time > 1:
                 estimated = file_time
