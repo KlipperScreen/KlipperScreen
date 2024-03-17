@@ -361,40 +361,44 @@ class Panel(ScreenPanel):
         logging.info(f"Loaded in {(datetime.now() - start).total_seconds():.3f} seconds")
 
     def delete_from_list(self, path):
+        logging.info(f"deleting {path}")
         for item in self.flowbox.get_children():
-            if item.get_path() == path:
+            if item.get_path() in {path, f"gcodes/{path}"}:
                 logging.info("found removing")
                 self.flowbox.remove(item)
                 return True
 
-    def add_item_from_callback(self, action, item):
-        self.delete_from_list(item["path"])
+    def add_item_from_callback(self, action, data):
+        item = data['item']
+        if 'source_item' in data:
+            self.delete_from_list(data['source_item']['path'])
+        else:
+            self.delete_from_list(item['path'])
         path = os.path.join("gcodes", item["path"])
         if self.cur_directory != os.path.dirname(path):
             return
-        if action == "create_dir":
+        if action in {"create_dir", "move_dir"}:
             item.update({"path": path, "dirname": os.path.split(item["path"])[1]})
         else:
             item.update({"path": path, "filename": os.path.split(item["path"])[1]})
         fbchild = self.create_item(item)
-        logging.info(item)
         if fbchild:
             self.flowbox.add(fbchild)
             self.flowbox.invalidate_sort()
             self.flowbox.show_all()
 
-    def _callback(self, action, item):
-        logging.info(f"{action}: {item}")
+    def _callback(self, action, data):
+        logging.info(f"{action}: {data}")
         if action in {"create_dir", "create_file"}:
-            self.add_item_from_callback(action, item)
+            self.add_item_from_callback(action, data)
         elif action == "delete_file":
-            self.delete_from_list(item["path"])
+            self.delete_from_list(data['item']["path"])
         elif action == "delete_dir":
-            self.delete_from_list(os.path.join("gcodes", item["path"]))
-        elif action in {"modify_file", "move_file"}:
-            if "path" in item and item["path"].startswith("gcodes/"):
-                item["path"] = item["path"][7:]
-            self.add_item_from_callback(action, item)
+            self.delete_from_list(os.path.join("gcodes", data['item']["path"]))
+        elif action in {"modify_file", "move_file", "move_dir"}:
+            if "path" in data['item'] and data['item']["path"].startswith("gcodes/"):
+                data['item']["path"] = data['item']["path"][7:]
+            self.add_item_from_callback(action, data)
 
     def _refresh_files(self, *args):
         logging.info("Refreshing")
@@ -464,4 +468,3 @@ class Panel(ScreenPanel):
             params
         )
         self.back()
-        self._refresh_files()

@@ -32,6 +32,8 @@ class KlippyFiles:
                 if params['filename'] not in self.files:
                     self.files[params['filename']] = {}
                 self.files[params['filename']][x] = result['result'][x]
+            if 'path' not in self.files[params['filename']]:
+                self.files[params['filename']]['path'] = params['filename']
             if "thumbnails" in self.files[params['filename']]:
                 self.files[params['filename']]['thumbnails'].sort(key=lambda y: y['size'], reverse=True)
                 for thumbnail in self.files[params['filename']]['thumbnails']:
@@ -50,6 +52,9 @@ class KlippyFiles:
                             thumbnail['relative_path']
                         )
             self._screen.process_update("notify_metadata_update", params)
+            self.run_callbacks(
+                "modify_file", {'action': "modify_file", 'item': self.files[params['filename']]}
+            )
 
     def add_file(self, item):
         if 'path' not in item:
@@ -72,9 +77,11 @@ class KlippyFiles:
         logging.info(f"callback not found {callback}")
 
     def process_update(self, data):
-        if 'item' in data and data['item']['root'] != 'gcodes':
+        if (
+            'item' in data and data['item']['root'] != 'gcodes'
+            or data['action'].endswith("file") and not self.is_gcode(data['item']['path'])
+        ):
             return
-
         if data['action'] == "create_file":
             self.add_file(data['item'])
         elif data['action'] == "delete_file":
@@ -82,11 +89,13 @@ class KlippyFiles:
         elif data['action'] == "modify_file":
             self.request_metadata(data['item']['path'])
         elif data['action'] == "move_file":
-            self.remove_file(data['source_item']['path'])
-            self.add_file(data['item'])
-        self.run_callbacks(data['action'], data['item'])
+            self.files[data['item']['path']] = self.files.pop(data['source_item']['path'])
+            self.files[data['item']['path']].update(data['item'])
+        self.run_callbacks(data['action'], data)
 
-        return False
+    @staticmethod
+    def is_gcode(path):
+        return os.path.splitext(path)[1] in {'.gcode', '.gco', '.g'}
 
     def file_metadata_exists(self, filename):
         return filename in self.files and "slicer" in self.files[filename]
@@ -105,8 +114,10 @@ class KlippyFiles:
         return filename in self.files and "thumbnails" in self.files[filename]
 
     def request_metadata(self, filename):
-        if os.path.splitext(filename)[1] in {'.gcode', '.gco', '.g'}:
+        if self.is_gcode(filename):
             self._screen._ws.klippy.get_file_metadata(filename, self._callback)
+        else:
+            logging.info("Not a gcode")
 
     def refresh_files(self):
         self._screen._ws.klippy.get_file_list(self._callback)
@@ -118,6 +129,7 @@ class KlippyFiles:
     def get_file_info(self, path):
         if path not in self.files:
             logging.info(f"Metadata not found {path}")
+            self.request_metadata(path)
             return {}
         return self.files[path]
 
