@@ -55,8 +55,6 @@ class Panel(ScreenPanel):
             "panel": "spoolman"
         })
 
-        columns = 3 if self._screen.vertical_mode else 4
-
         xbox = Gtk.Box(homogeneous=True)
         limit = 4
         i = 0
@@ -76,7 +74,7 @@ class Panel(ScreenPanel):
             else:
                 extruder_buttons.append(self.labels[extruder])
         if extruder_buttons:
-            self.labels['extruders'] = AutoGrid(extruder_buttons, columns, vertical=self._screen.vertical_mode)
+            self.labels['extruders'] = AutoGrid(extruder_buttons, vertical=self._screen.vertical_mode)
             self.labels['extruders_menu'] = self._gtk.ScrolledWindow()
             self.labels['extruders_menu'].add(self.labels['extruders'])
         if self._printer.extrudercount > limit:

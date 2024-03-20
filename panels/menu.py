@@ -27,14 +27,11 @@ class Panel(ScreenPanel):
     def add_content(self):
         for child in self.scroll.get_children():
             self.scroll.remove(child)
-        if self._screen.vertical_mode:
-            self.scroll.add(self.arrangeMenuItems(self.items, 3))
-        else:
-            self.scroll.add(self.arrangeMenuItems(self.items, 4))
+        self.scroll.add(self.arrangeMenuItems(self.items))
         if not self.content.get_children():
             self.content.add(self.scroll)
 
-    def arrangeMenuItems(self, items, columns, expand_last=False):
+    def arrangeMenuItems(self, items, columns=None, expand_last=False):
         self.autogrid.clear()
         enabled = []
         for item in items:

@@ -10,7 +10,6 @@ class Panel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         printers = self._config.get_printers()
-        columns = 3 if self._screen.vertical_mode else 4
 
         printer_buttons = []
         for i, printer in enumerate(printers):
@@ -18,7 +17,7 @@ class Panel(ScreenPanel):
             self.labels[name] = self._gtk.Button("extruder", name, f"color{1 + i % 4}")
             self.labels[name].connect("clicked", self.connect_printer, name)
             printer_buttons.append(self.labels[name])
-        grid = AutoGrid(printer_buttons, columns, vertical=self._screen.vertical_mode)
+        grid = AutoGrid(printer_buttons, vertical=self._screen.vertical_mode)
 
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)

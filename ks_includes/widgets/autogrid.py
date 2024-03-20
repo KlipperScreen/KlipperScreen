@@ -18,8 +18,10 @@ class AutoGrid(Gtk.Grid):
         grid = Autogrid([Gtk.Button(), Gtk.Button()])
     """
 
-    def __init__(self, items=None, max_columns=4, expand_last=False, vertical=False):
+    def __init__(self, items=None, max_columns=None, expand_last=False, vertical=False):
         super().__init__(row_homogeneous=True, column_homogeneous=True)
+        if not max_columns:
+            max_columns = 3 if vertical else 4
         self.expand_last = expand_last
         if not items:
             return
@@ -40,7 +42,7 @@ class AutoGrid(Gtk.Grid):
         for i, widget in enumerate(items):
             col = i % columns
             row = int(i / columns)
-            if self.expand_last and (i + 1) == length:
+            if self.expand_last and (i + 1) == length and length % 2 == 1:
                 self.attach(widget, col, row, 2, 1)
             else:
                 self.attach(widget, col, row, 1, 1)
