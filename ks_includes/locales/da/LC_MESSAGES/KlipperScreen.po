@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-02 17:39-0300\n"
-"PO-Revision-Date: 2024-01-23 12:01+0000\n"
+"PO-Revision-Date: 2024-03-20 11:25+0000\n"
 "Last-Translator: srbjessen <srbjessen@gmail.com>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/da/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -200,16 +200,16 @@ msgid "Error"
 msgstr "Fejl"
 
 msgid "Error clearing active spool"
-msgstr ""
+msgstr "Fejl ved fjernelse af aktiv spole"
 
 msgid "Error getting active spool"
-msgstr ""
+msgstr "Fejl ved hentning af aktiv spole"
 
 msgid "Error setting active spool"
-msgstr ""
+msgstr "Fejl ved indstilling af aktiv spole"
 
 msgid "Error trying to fetch spools"
-msgstr ""
+msgstr "Fejl ved hentning af spoler"
 
 msgid "Estimated Time Method"
 msgstr "Metode til beregning af tid"
@@ -224,7 +224,7 @@ msgid "Extrude"
 msgstr "Ekstrudér"
 
 msgid "Extruders"
-msgstr ""
+msgstr "Ekstruderer"
 
 msgid "Extrusion +"
 msgstr "Ekstrudering +"
@@ -416,7 +416,7 @@ msgid "Loading..."
 msgstr "Indlæser..."
 
 msgid "Lost Connection to Moonraker"
-msgstr ""
+msgstr "Tabte forbindelse til Moonraker"
 
 msgid "Lower Nozzle"
 msgstr "Sænk Nozzle"

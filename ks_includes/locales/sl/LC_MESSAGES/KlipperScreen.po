@@ -8,49 +8,51 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-02 17:39-0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-03-18 16:11+0000\n"
+"Last-Translator: Dominik <dominik.sostar@gmail.com>\n"
+"Language-Team: Slovenian <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
-msgstr ""
+msgstr "%s bo posodobljen na različico"
 
 msgid "(default)"
-msgstr ""
+msgstr "(privzeto)"
 
 msgid "24 Hour Time"
-msgstr ""
+msgstr "24 urni čas"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr ""
+msgstr "Ponovni zagon MKE bi mogoče rešilo težavo."
 
 msgid "ADXL Not Configured"
-msgstr ""
+msgstr "ADXL ni konfiguriran"
 
 msgid "Abort"
-msgstr ""
+msgstr "Prekini"
 
 msgid "Acceleration:"
-msgstr ""
+msgstr "Pospešek:"
 
 msgid "Accept"
-msgstr ""
+msgstr "Sprejmi"
 
 msgid "Add profile"
-msgstr ""
+msgstr "Dodaj profil"
 
 msgid "All"
-msgstr ""
+msgstr "Vse"
 
 msgid "Apply"
-msgstr ""
+msgstr "Uporabi"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
@@ -61,147 +63,147 @@ msgid "Apply %s%.3f offset to Probe?"
 msgstr ""
 
 msgid "Archived"
-msgstr ""
+msgstr "Arhivirano"
 
 msgid "Are you sure do you want to exclude the object?"
-msgstr ""
+msgstr "Ali ste prepričani da želite izključiti predmet?"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr ""
+msgstr "Ali ste prepričani, da želite zagnati zaustavitev v sili?"
 
 msgid "Are you sure you wish to cancel this print?"
-msgstr ""
+msgstr "Ali ste prepričani da želite preklicati to tiskanje?"
 
 msgid "Are you sure you wish to disable motors?"
-msgstr ""
+msgstr "Ali ste prepričani, da želite onemogočiti motorje?"
 
 msgid "Are you sure you wish to reboot the system?"
-msgstr ""
+msgstr "Ali ste prepričani da želite znova zagnati sistem?"
 
 msgid "Are you sure you wish to shutdown the system?"
-msgstr ""
+msgstr "Ali ste prepričani da želite zaustaviti sistem?"
 
 msgid "Auto"
-msgstr ""
+msgstr "Samodejno"
 
 msgid "Auto-calibrate"
-msgstr ""
+msgstr "Samodejna umeritev"
 
 msgid "Auto-close notifications"
-msgstr ""
+msgstr "Samodejno zapri obvestila"
 
 msgid "Auto-open Extrude On Pause"
 msgstr ""
 
 msgid "Auto-scroll"
-msgstr ""
+msgstr "Samodejno pomikanje"
 
 msgid "Bed Level"
-msgstr ""
+msgstr "Umerjanje plošče"
 
 msgid "Bed Mesh"
-msgstr ""
+msgstr "Umerjanje mreže"
 
 msgid "Bed screw configuration:"
-msgstr ""
+msgstr "Umerjanje vijakov plošče:"
 
 msgid "Calibrate"
-msgstr ""
+msgstr "Umerite"
 
 msgid "Calibrated"
-msgstr ""
+msgstr "Umerjeno"
 
 msgid "Calibrating"
-msgstr ""
+msgstr "Umerjam"
 
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 msgid "Can't set above the maximum:"
-msgstr ""
+msgstr "Ni mogoče nastaviti nad največjo vrednostjo:"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Prekliči"
 
 msgid "Cancel Print"
-msgstr ""
+msgstr "Prekliči tisk"
 
 msgid "Cancelled"
-msgstr ""
+msgstr "Preklicano"
 
 msgid "Cancelling"
-msgstr ""
+msgstr "Preklicujem"
 
 msgid "Cannot connect to Moonraker"
-msgstr ""
+msgstr "Ne morem se povezati z Moonrakerjem"
 
 msgid "Channel"
-msgstr ""
+msgstr "Kanal"
 
 msgid "Check ADXL Wiring"
-msgstr ""
+msgstr "Preverite ožičenje ADXL"
 
 msgid "Checking for updates, please wait..."
-msgstr ""
+msgstr "Preverjanje posodobitev, počakajte ..."
 
 msgid "Clear"
-msgstr ""
+msgstr "Počisti"
 
 msgid "Close"
-msgstr ""
+msgstr "Zapri"
 
 msgid "Complete"
-msgstr ""
+msgstr "Končano"
 
 msgid "Confirm Emergency Stop"
-msgstr ""
+msgstr "Potrdite zaustavitev v sili"
 
 msgid "Connected"
-msgstr ""
+msgstr "Povezano"
 
 #, python-format
 msgid "Connecting to %s"
-msgstr ""
+msgstr "Povezujem s/z %s"
 
 msgid "Console"
-msgstr ""
+msgstr "Konzola"
 
 msgid "Cooldown"
-msgstr ""
+msgstr "Ohlajanje"
 
 msgid "DPMS has failed to load and has been disabled"
-msgstr ""
+msgstr "DPMS se ni uspel naložiti in je onemogočen"
 
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 msgid "Delete Directory?"
-msgstr ""
+msgstr "Izbrišem imenik?"
 
 msgid "Delete File?"
-msgstr ""
+msgstr "Izbrišem datoteko?"
 
 msgid "Deselect"
-msgstr ""
+msgstr "Prekliči izbiro"
 
 msgid "Disable Motors"
-msgstr ""
+msgstr "Onemogoči motorje"
 
 msgid "Distance (mm)"
-msgstr ""
+msgstr "Razdalja (mm)"
 
 #, python-format
 msgid "Do you want to recover %s?"
-msgstr ""
+msgstr "Ali želite obnoviti %s?"
 
 msgid "Elapsed:"
-msgstr ""
+msgstr "Preteklo:"
 
 msgid "Ended official support in June 2023"
-msgstr ""
+msgstr "Konec uradne podpore junija 2023"
 
 msgid "Error"
-msgstr ""
+msgstr "Napaka"
 
 msgid "Error clearing active spool"
 msgstr ""
@@ -216,391 +218,398 @@ msgid "Error trying to fetch spools"
 msgstr ""
 
 msgid "Estimated Time Method"
-msgstr ""
+msgstr "Način predvidenega časa"
 
 msgid "Exclude Object"
-msgstr ""
+msgstr "Izključi predmet"
 
 msgid "Extra Large"
-msgstr ""
+msgstr "Zelo veliko"
 
 msgid "Extrude"
-msgstr ""
+msgstr "Ekstrudirajte"
 
 msgid "Extruders"
-msgstr ""
+msgstr "Ekstruderji"
 
 msgid "Extrusion +"
-msgstr ""
+msgstr "Ekstruzija +"
 
 msgid "Extrusion -"
-msgstr ""
+msgstr "Ekstruzija -"
 
 msgid "Failed, adjust position first"
-msgstr ""
+msgstr "Ni uspelo, najprej prilagodite položaj"
 
 msgid "Fan"
-msgstr ""
+msgstr "Ventilator"
 
 msgid "Filament Used"
-msgstr ""
+msgstr "Poraba filamenta"
 
 msgid "Filament total:"
 msgstr ""
 
 msgid "Filament used:"
-msgstr ""
+msgstr "Porabljen filament:"
 
 msgid "Filament:"
-msgstr ""
+msgstr "Filament:"
 
 msgid "File"
-msgstr ""
+msgstr "Datoteka"
 
 msgid "File:"
-msgstr ""
+msgstr "Datoteka:"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 msgid "Finding ADXL"
-msgstr ""
+msgstr "Iščem ADXL"
 
 msgid "Fine Tuning"
-msgstr ""
+msgstr "Fino umerjanje"
 
 msgid "Finish"
-msgstr ""
+msgstr "Končaj"
 
 msgid "Firmware Restart"
-msgstr ""
+msgstr "Ponovi zagon MKE"
 
 msgid "Flow:"
-msgstr ""
+msgstr "Pretok:"
 
 msgid "Flowrate:"
 msgstr ""
 
 msgid "Font Size"
-msgstr ""
+msgstr "Velikost pisave"
 
 msgid "Full Update"
-msgstr ""
+msgstr "Polna posodobitev"
 
 msgid "Go Back"
-msgstr ""
+msgstr "Nazaj"
 
 msgid "Height:"
-msgstr ""
+msgstr "Višina:"
 
 msgid "Hidden"
-msgstr ""
+msgstr "Skrito"
 
 msgid "Hide"
-msgstr ""
+msgstr "Skrij"
 
 msgid "Hide sensors in Temp."
-msgstr ""
+msgstr "Skrij senzorje v temp."
 
 msgid "Hide temp."
-msgstr ""
+msgstr "Skrij temp."
 
 msgid "Home"
-msgstr ""
+msgstr "Nuliraj"
 
 msgid "Home All"
-msgstr ""
+msgstr "Nuliraj vse"
 
 msgid "Home X"
-msgstr ""
+msgstr "Nuliraj X"
 
 msgid "Home XY"
-msgstr ""
+msgstr "Nuliraj XY"
 
 msgid "Home Y"
-msgstr ""
+msgstr "Nuliraj Y"
 
 msgid "Home Z"
-msgstr ""
+msgstr "Nuliraj Z"
 
 msgid "Host"
-msgstr ""
+msgstr "Gostitelj"
 
 msgid "Hostname"
-msgstr ""
+msgstr "Ime gostitelja"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Icon Theme"
-msgstr ""
+msgstr "Tema ikon"
 
 msgid "Initializing printer..."
-msgstr ""
+msgstr "Inicializacija tiskalnika ..."
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "Zaženite kalibracijo PID za:"
 
 msgid "Input Shaper"
-msgstr ""
+msgstr "Input Shaper"
 
 msgid "Interface"
-msgstr ""
+msgstr "Vmesnik"
 
 msgid "Invalid"
-msgstr ""
+msgstr "Napačno"
 
 msgid "Invalid password"
-msgstr ""
+msgstr "Napačno geslo"
 
 msgid "Invert X"
-msgstr ""
+msgstr "Zrcali X"
 
 msgid "Invert Y"
-msgstr ""
+msgstr "Zrcali Y"
 
 msgid "Invert Z"
-msgstr ""
+msgstr "Zrcali Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
+msgstr "Lahko traja več kot 5 minut, odvisno od moči grelnika."
 
 msgid "Klipper Restart"
-msgstr ""
+msgstr "Ponovni zagon Klipperja"
 
 msgid "Klipper has disconnected"
-msgstr ""
+msgstr "Poveza s Klipperjem je prekinjena"
 
 msgid "Klipper has encountered an error."
-msgstr ""
+msgstr "Klipper je javil napako."
 
 msgid "Klipper has shutdown"
-msgstr ""
+msgstr "Klipper se je ugasnil"
 
 msgid "Klipper is attempting to start"
-msgstr ""
+msgstr "Klipper se skuša zagnati"
 
 msgid "Klipper will reboot"
-msgstr ""
+msgstr "Klipper se bo ponovno zagnal"
 
 msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
+msgstr "KlipperScreen bo do junija 2024 opustil podporo"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT sta skrita in ju je treba uporabiti pri "
+"ekstrudiranju"
 
 msgid "Language"
-msgstr ""
+msgstr "Jezik"
 
 msgid "Large"
-msgstr ""
+msgstr "Veliko"
 
 msgid "Last Used"
-msgstr ""
+msgstr "Nazadnje uporabljeno"
 
 msgid "Layer:"
-msgstr ""
+msgstr "Plast:"
 
 msgid "Leds"
-msgstr ""
+msgstr "Led luči"
 
 msgid "Left:"
-msgstr ""
+msgstr "Levo:"
 
 msgid "Limits"
-msgstr ""
+msgstr "Omejitve"
 
 msgid "Load"
-msgstr ""
+msgstr "Naloži"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Nalagam..."
 
 msgid "Lost Connection to Moonraker"
-msgstr ""
+msgstr "Izgubljena poveza z Moonrakerjem"
 
 msgid "Lower Nozzle"
-msgstr ""
+msgstr "Znižaj šobo"
 
 msgid "Macro shortcut on sidebar"
-msgstr ""
+msgstr "Makro bližnjica na stranski vrstici"
 
 msgid "Macros"
-msgstr ""
+msgstr "Makri"
 
 msgid "Main Menu"
-msgstr ""
+msgstr "Glavni meni"
 
 msgid "Material"
-msgstr ""
+msgstr "Materijal"
 
 msgid "Max"
-msgstr ""
+msgstr "Maks"
 
 msgid "Max Acceleration"
-msgstr ""
+msgstr "Največji pospešek"
 
 msgid "Max Acceleration to Deceleration"
-msgstr ""
+msgstr "Največji pospešek do pojemka"
 
 msgid "Max Velocity"
-msgstr ""
+msgstr "Največja hitrost"
 
 msgid "Maximum"
-msgstr ""
+msgstr "Največ"
 
 msgid "Measure Both"
-msgstr ""
+msgstr "Izmeri oboje"
 
 msgid "Measure X"
-msgstr ""
+msgstr "Izmeri X"
 
 msgid "Measure Y"
-msgstr ""
+msgstr "Izmeri Y"
 
 msgid "Medium"
-msgstr ""
+msgstr "Srednje"
 
 msgid "Menu"
-msgstr ""
+msgstr "Meni"
 
 msgid "Mesh calibrate"
-msgstr ""
+msgstr "Umeritev mreže"
 
 msgid "Modified"
-msgstr ""
+msgstr "Spremenjeno"
 
 msgid "Moonraker: connected"
-msgstr ""
+msgstr "Moonraker: povezan"
 
 msgid "More"
-msgstr ""
+msgstr "Več"
 
 msgid "Move"
-msgstr ""
+msgstr "Premakni"
 
 msgid "Move Distance (mm)"
-msgstr ""
+msgstr "Razdalja premika (mm)"
 
 msgid "Name"
-msgstr ""
+msgstr "Ime"
 
 msgid "Network"
-msgstr ""
+msgstr "Omrežje"
 
 msgid "Never"
-msgstr ""
+msgstr "Nikoli"
 
 msgid "New"
-msgstr ""
+msgstr "Novo"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "Neprimerni makri:"
 
 msgid "No mesh has been loaded"
-msgstr ""
+msgstr "Mreža ni naložena"
 
 msgid "No wireless interface has been found"
-msgstr ""
+msgstr "Brezžičnega vmesnika ni bilo mogoče najti"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr ""
+"Ni podprto za samodejno zaznavanje, treba ga je konfigurirati v klipperscreen"
+".conf"
 
 msgid "Not working or not configured"
-msgstr ""
+msgstr "Ne deluje ali ni konfigurirano"
 
 msgid "Nothing selected"
-msgstr ""
+msgstr "Nič ni izbrano"
 
 msgid "Notification log empty"
-msgstr ""
+msgstr "Dnevnik obvestil je prazen"
 
 msgid "Notifications"
-msgstr ""
+msgstr "Obvestila"
 
 #, python-format
 msgid "Outdated by %d"
-msgstr ""
+msgstr "Zastarelo za %d"
 
 msgid "PSK for"
-msgstr ""
+msgstr "PSK za"
 
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Paket bo posodobljen"
+msgstr[1] "Paketa bosta posodobljena"
+msgstr[2] "Paketi bodo posodobljeni"
+msgstr[3] "Paketov bo posodobljenih"
 
 msgid "Part Fan"
-msgstr ""
+msgstr "Ventilator za dele"
 
 msgid "Password saved"
-msgstr ""
+msgstr "Geslo shranjeno"
 
 msgid "Pause"
-msgstr ""
+msgstr "Pavza"
 
 msgid "Paused"
-msgstr ""
+msgstr "Zaustavljeno"
 
 msgid "Perform a full upgrade?"
-msgstr ""
+msgstr "Izvedem polno posodobitev?"
 
 msgid "Pins"
-msgstr ""
+msgstr "Pini"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr ""
 
 msgid "Power"
-msgstr ""
+msgstr "Vklop"
 
 msgid "Power On Printer"
-msgstr ""
+msgstr "Vklopite tiskalnik"
 
 msgid "Pressure Advance:"
-msgstr ""
+msgstr "Pressure Advance:"
 
 msgid "Print"
-msgstr ""
+msgstr "Natisni"
 
 msgid "Print Control"
-msgstr ""
+msgstr "Nadzor tiskanja"
 
 msgid "Print Time"
-msgstr ""
+msgstr "Čas tiskanja"
 
 msgid "Printer"
-msgstr ""
+msgstr "Tiskalnik"
 
 msgid "Printer Connections"
-msgstr ""
+msgstr "Povezave tiskalnika"
 
 msgid "Printer Select"
-msgstr ""
+msgstr "Izberi tiskalnik"
 
 msgid "Printing"
-msgstr ""
+msgstr "Tiskam"
 
 msgid "Probe Offset"
-msgstr ""
+msgstr "Odmik sonde"
 
 msgid "Profile Name:"
-msgstr ""
+msgstr "Ime profila:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "Ko prosite za pomoč, navedite KlipperScreen.log.\n"
 
+#, fuzzy
 msgid "Quad Gantry Level"
-msgstr ""
+msgstr "Quad Gantry Level"
 
 msgid "Raise Nozzle"
-msgstr ""
+msgstr "Dvigni šobo"
 
 msgid "Recover"
-msgstr ""
+msgstr "Obnovi"
 
 msgid "Recover Hard"
 msgstr ""
@@ -609,203 +618,203 @@ msgid "Recover Soft"
 msgstr ""
 
 msgid "Reference"
-msgstr ""
+msgstr "Referenca"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Osveži"
 
 msgid "Rename/Move:"
-msgstr ""
+msgstr "Preimenuj/Premakni:"
 
 msgid "Restart"
-msgstr ""
+msgstr "Ponovni zagon"
 
 msgid "Resume"
-msgstr ""
+msgstr "Nadaljuj"
 
 msgid "Retract"
-msgstr ""
+msgstr "Umakni"
 
 msgid "Retraction"
-msgstr ""
+msgstr "Umik"
 
 msgid "Retraction Length"
-msgstr ""
+msgstr "Dolžina umika"
 
 msgid "Retraction Speed"
-msgstr ""
+msgstr "Hitrost umika"
 
 msgid "Retry"
-msgstr ""
+msgstr "Poskusi znova"
 
 msgid "Retrying"
-msgstr ""
+msgstr "Poskušam znova"
 
 msgid "Save"
-msgstr ""
+msgstr "Shrani"
 
 msgid "Save Config"
-msgstr ""
+msgstr "Shrani konfiguracijo"
 
 msgid "Save Z"
-msgstr ""
+msgstr "Shrani Z"
 
 msgid "Save configuration?"
-msgstr ""
+msgstr "Shrani konfiguracijo?"
 
 msgid "Saved"
-msgstr ""
+msgstr "Shranjeno"
 
 #, python-format
 msgid "Saved offset: %s"
-msgstr ""
+msgstr "Shranjen odmik: %s"
 
 msgid "Screen DPMS"
-msgstr ""
+msgstr "DPMS zaslona"
 
 msgid "Screen Power Off Time"
-msgstr ""
+msgstr "Čas izklopa zaslona"
 
 msgid "Screws Adjust"
-msgstr ""
+msgstr "Nastavitev vijakov"
 
 msgid "Select"
-msgstr ""
+msgstr "Izberi"
 
 msgid "Send"
-msgstr ""
+msgstr "Pošlji"
 
 msgid "Set Temp"
-msgstr ""
+msgstr "Nastavi temperaturo"
 
 msgid "Settings"
-msgstr ""
+msgstr "Nastavitve"
 
 msgid "Show"
-msgstr ""
+msgstr "Pokaži"
 
 msgid "Show Heater Power"
-msgstr ""
+msgstr "Pokaži moč grelnika"
 
 msgid "Show Scrollbars Buttons"
-msgstr ""
+msgstr "Pokaži gumbe drsnih trakov"
 
 msgid "Shutdown"
-msgstr ""
+msgstr "Zaustavitev"
 
 msgid "Size"
-msgstr ""
+msgstr "Velikost"
 
 msgid "Slicer"
-msgstr ""
+msgstr "Slicer"
 
 msgid "Slicer:"
-msgstr ""
+msgstr "Slicer:"
 
 msgid "Small"
-msgstr ""
+msgstr "Majhno"
 
 msgid "Speed (mm/s)"
-msgstr ""
+msgstr "Hitrost (mm/s)"
 
 msgid "Speed +"
-msgstr ""
+msgstr "Hitrost +"
 
 msgid "Speed -"
-msgstr ""
+msgstr "Hitrost -"
 
 msgid "Speed:"
-msgstr ""
+msgstr "Hitrost:"
 
 msgid "Square Corner Velocity"
 msgstr ""
 
 msgid "Standby"
-msgstr ""
+msgstr "Ostani v pripravljenosti"
 
 msgid "Start"
-msgstr ""
+msgstr "Začni"
 
 msgid "Starting WiFi Association"
-msgstr ""
+msgstr "Zagon povezave WiFi"
 
 msgid "Starting recovery for"
-msgstr ""
+msgstr "Začetek obnovitve čez"
 
 msgid "Starting update for"
-msgstr ""
+msgstr "Začetek posodobitve čez"
 
 msgid "System"
-msgstr ""
+msgstr "Sistem"
 
 msgid "System Restart"
-msgstr ""
+msgstr "Ponovni zagon sistema"
 
 msgid "System Shutdown"
-msgstr ""
+msgstr "Zaustavitev sistema"
 
 msgid "Temp (°C)"
-msgstr ""
+msgstr "Temperatura (°C)"
 
 msgid "Temperature"
-msgstr ""
+msgstr "Temperatura"
 
 msgid "Total:"
-msgstr ""
+msgstr "Skupno:"
 
 msgid "Unknown Heater"
-msgstr ""
+msgstr "Neznan grelec"
 
 msgid "Unknown screw position"
-msgstr ""
+msgstr "Neznan položaj vijaka"
 
 msgid "Unload"
 msgstr ""
 
 msgid "Unretract Extra Length"
-msgstr ""
+msgstr "Odstrani dodatno dolžino"
 
 msgid "Unretract Speed"
 msgstr ""
 
 msgid "Up To Date"
-msgstr ""
+msgstr "Posodobljeno"
 
 msgid "Update"
-msgstr ""
+msgstr "Posodobi"
 
 msgid "Updating"
-msgstr ""
+msgstr "Posodabljam"
 
 msgid "Uploaded"
-msgstr ""
+msgstr "Naloženo"
 
 msgid "Warning"
-msgstr ""
+msgstr "Opozorilo"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr ""
 
 msgid "XY Move Speed (mm/s)"
-msgstr ""
+msgstr "Hitrost premikanja XY (mm/s)"
 
 msgid "XY Speed (mm/s)"
-msgstr ""
+msgstr "XY hitrost (mm/s)"
 
 msgid "Z Calibrate"
-msgstr ""
+msgstr "Umeri Z"
 
 msgid "Z Move Speed (mm/s)"
-msgstr ""
+msgstr "Hitrost premikanja Z (mm/s)"
 
 msgid "Z Speed (mm/s)"
-msgstr ""
+msgstr "Z hitrost (mm/s)"
 
 msgid "Z Tilt"
-msgstr ""
+msgstr "Z nagib"
 
 msgid "Z offset:"
-msgstr ""
+msgstr "Z odmik:"
 
 msgid "commit"
 msgid_plural "commits"
@@ -813,32 +822,36 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "dBm"
-msgstr ""
+msgstr "dBm"
 
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ura"
+msgstr[1] "Uri"
+msgstr[2] "Ure"
+msgstr[3] "Ur"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "makri, ki uporabljajo 'rename_existing' so skriti"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "makri z imenom, ki se začne z '_', so skriti"
 
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minuta"
+msgstr[1] "minuti"
+msgstr[2] "minute"
+msgstr[3] "minut"
 
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 msgid "mm/s"
-msgstr ""
+msgstr "mm/s"
 
 msgid "mm/s²"
-msgstr ""
+msgstr "mm/s²"
 
 msgid "mm³/s"
-msgstr ""
+msgstr "mm³/s"
