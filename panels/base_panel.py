@@ -83,7 +83,6 @@ class BasePanel(ScreenPanel):
         self.control['temp_box'] = Gtk.Box(spacing=10)
 
         self.titlelbl = Gtk.Label(hexpand=True, halign=Gtk.Align.CENTER, ellipsize=Pango.EllipsizeMode.END)
-        self.set_title(title)
 
         self.control['time'] = Gtk.Label(label="00:00 AM")
         self.control['time_box'] = Gtk.Box(halign=Gtk.Align.END)
@@ -94,6 +93,7 @@ class BasePanel(ScreenPanel):
         self.titlebar.add(self.control['temp_box'])
         self.titlebar.add(self.titlelbl)
         self.titlebar.add(self.control['time_box'])
+        self.set_title(title)
 
         # Main layout
         self.main_grid = Gtk.Grid()
@@ -297,6 +297,7 @@ class BasePanel(ScreenPanel):
         self.control['printer_select'].set_visible(show)
 
     def set_title(self, title):
+        self.titlebar.get_style_context().remove_class("message_popup_error")
         if not title:
             self.titlelbl.set_label(f"{self._screen.connecting_to_printer}")
             return
