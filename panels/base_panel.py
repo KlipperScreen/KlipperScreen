@@ -21,16 +21,27 @@ class BasePanel(ScreenPanel):
         self.titlebar_items = []
         self.titlebar_name_type = None
         self.current_extruder = None
+        self.last_usage_report = datetime.now()
+        self.usage_report = 0
         # Action bar buttons
         abscale = self.bts * 1.1
         self.control['back'] = self._gtk.Button('back', scale=abscale)
         self.control['back'].connect("clicked", self.back)
         self.control['home'] = self._gtk.Button('main', scale=abscale)
         self.control['home'].connect("clicked", self._screen._menu_go_back, True)
-        self.control['estop'] = self._gtk.Button('emergency', scale=abscale)
-        self.control['estop'].connect("clicked", self.emergency_stop)
         for control in self.control:
             self.set_control_sensitive(False, control)
+        self.control['estop'] = self._gtk.Button('emergency', scale=abscale)
+        self.control['estop'].connect("clicked", self.emergency_stop)
+        self.control['estop'].set_no_show_all(True)
+        self.shutdown = {
+            "name": None,
+            "panel": "shutdown",
+            "icon": "shutdown",
+        }
+        self.control['shutdown'] = self._gtk.Button('shutdown', scale=abscale)
+        self.control['shutdown'].connect("clicked", self.menu_item_clicked, self.shutdown)
+        self.control['shutdown'].set_no_show_all(True)
         self.control['printer_select'] = self._gtk.Button('shuffle', scale=abscale)
         self.control['printer_select'].connect("clicked", self._screen.show_printer_select)
         self.control['printer_select'].set_no_show_all(True)
@@ -63,6 +74,7 @@ class BasePanel(ScreenPanel):
         self.action_bar.add(self.control['printer_select'])
         self.action_bar.add(self.control['shortcut'])
         self.action_bar.add(self.control['estop'])
+        self.action_bar.add(self.control['shutdown'])
         self.show_printer_select(len(self._config.get_printers()) > 1)
 
         # Titlebar
@@ -174,10 +186,12 @@ class BasePanel(ScreenPanel):
             self.time_update = GLib.timeout_add_seconds(1, self.update_time)
 
     def add_content(self, panel):
-        show = self._printer is not None and self._printer.state not in ('disconnected', 'startup', 'shutdown', 'error')
-        self.show_shortcut(show)
-        self.show_heaters(show)
-        self.set_control_sensitive(show, control='estop')
+        printing = self._printer and self._printer.state in {"printing", "paused"}
+        connected = self._printer and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'}
+        self.control['estop'].set_visible(printing)
+        self.control['shutdown'].set_visible(not printing)
+        self.show_shortcut(connected)
+        self.show_heaters(connected)
         for control in ('back', 'home'):
             self.set_control_sensitive(len(self._screen._cur_panels) > 1, control=control)
         self.current_panel = panel
@@ -194,6 +208,30 @@ class BasePanel(ScreenPanel):
             self._screen._menu_go_back()
 
     def process_update(self, action, data):
+        if action == "notify_proc_stat_update":
+            cpu = (max(data["system_cpu_usage"][core] for core in data["system_cpu_usage"] if core.startswith("cpu")))
+            memory = (data["system_memory"]["used"] / data["system_memory"]["total"]) * 100
+            error = "message_popup_error"
+            ctx = self.titlebar.get_style_context()
+            msg = f"CPU: {cpu:2.0f}%    RAM: {memory:2.0f}%"
+            if cpu > 80 or memory > 85:
+                if self.usage_report < 3:
+                    self.usage_report += 1
+                    return
+                self.last_usage_report = datetime.now()
+                if not ctx.has_class(error):
+                    ctx.add_class(error)
+                self._screen.log_notification(msg, 3)
+                self.titlelbl.set_label(msg)
+            elif ctx.has_class(error):
+                self.titlelbl.set_label(msg)
+                if (datetime.now() - self.last_usage_report).seconds < 5:
+                    return
+                self.usage_report = 0
+                ctx.remove_class(error)
+                self.titlelbl.set_label(f"{self._screen.connecting_to_printer}")
+            return
+
         if action == "notify_update_response":
             if self.update_dialog is None:
                 self.show_update_dialog()
@@ -212,6 +250,7 @@ class BasePanel(ScreenPanel):
                         self._screen.updating = False
                         for dialog in self._screen.dialogs:
                             self._gtk.remove_dialog(dialog)
+            return
 
         if action != "notify_status_update" or self._screen.printer is None:
             return
@@ -252,6 +291,7 @@ class BasePanel(ScreenPanel):
         )
         self.control['shortcut'].set_visible(show)
         self.set_control_sensitive(self._screen._cur_panels[-1] != self.shorcut['panel'])
+        self.set_control_sensitive(self._screen._cur_panels[-1] != self.shutdown['panel'], control='shutdown')
 
     def show_printer_select(self, show=True):
         self.control['printer_select'].set_visible(show)

@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-02 17:39-0300\n"
-"PO-Revision-Date: 2024-02-10 14:01+0000\n"
-"Last-Translator: Thijs Triemstra <info@collab.nl>\n"
+"PO-Revision-Date: 2024-03-16 18:48+0000\n"
+"Last-Translator: Mikachu <micah.sh@proton.me>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/nl/>\n"
 "Language: nl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -205,16 +205,16 @@ msgid "Error"
 msgstr "Error"
 
 msgid "Error clearing active spool"
-msgstr ""
+msgstr "Error opruimen actieve spoel"
 
 msgid "Error getting active spool"
-msgstr ""
+msgstr "Error krijgen actieve spoel"
 
 msgid "Error setting active spool"
-msgstr ""
+msgstr "Error instellen actieve spoel"
 
 msgid "Error trying to fetch spools"
-msgstr ""
+msgstr "Error tijdens laden spoelen"
 
 msgid "Estimated Time Method"
 msgstr "Schatting Tijd Methode"
@@ -229,7 +229,7 @@ msgid "Extrude"
 msgstr "Extrude"
 
 msgid "Extruders"
-msgstr ""
+msgstr "Extruders"
 
 msgid "Extrusion +"
 msgstr "Extrusion +"
@@ -421,7 +421,7 @@ msgid "Loading..."
 msgstr "Laden..."
 
 msgid "Lost Connection to Moonraker"
-msgstr ""
+msgstr "Verbinding met Moonraker verbroken"
 
 msgid "Lower Nozzle"
 msgstr "Onderste Nozzle"

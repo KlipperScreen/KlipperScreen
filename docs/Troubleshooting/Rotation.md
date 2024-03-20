@@ -10,21 +10,34 @@ here are some examples:
 
 ???+ example "Universal xorg configuration"
 
+    Find the identifier use xrandr
+
+    ```sh
+    DISPLAY=:0 xrandr
+    ```
+
+    it will output something like:
+    ```
+    Screen 0: minimum 320 x 200, current 1024 x 600, maximum 8192 x 8192
+    HDMI-1 connected primary 1024x600+0+0 (normal left inverted right x axis y axis) 800mm x 450mm
+    ```
+
+    Take not that the screen is `HDMI-1` (it could be `HDMI-A-1` or many other names)
+
     Create /usr/share/X11/xorg.conf.d/90-monitor.conf
     ```bash
     sudo nano /usr/share/X11/xorg.conf.d/90-monitor.conf
     ```
-
     Paste this section modifying the options to suit your needs:
     ```kconfig
     Section "Monitor"
-        Identifier "DPI-1"
-        # This identifier would be the same as the name of the connector printed by xrandr.
-        # it can be "HDMI-0" "DisplayPort-0", "DSI-0", "DVI-0", "DPI-0" etc
+        Identifier "HDMI-1"
+        # This identifier would be the same as the name of the connector printed by xrandr
+        # for example  "DVI-I-1 connected primary" means that the identifier is "DVI-I-1"
+        # another example "Unknown19-1 connected primary" some GPIO screens identify as Unknown19
 
         Option "Rotate" "left"
         # Valid rotation options are normal,inverted,left,right
-
 
         Option "PreferredMode" "1920x1080"
         # May be necesary if you are not getting your prefered resolution.
@@ -35,6 +48,8 @@ here are some examples:
     ```bash
     sudo service KlipperScreen restart
     ```
+
+    you may have to adjust the [touch rotation](../Touch_issues/#touch-rotation-and-matrix)
 
 ??? example "Using Waveshare screen that is installed with LCD-show"
 

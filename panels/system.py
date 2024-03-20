@@ -13,19 +13,16 @@ class Panel(ScreenPanel):
         self.update_status = None
         self.system_info = self._screen.apiclient.send_request("machine/system_info")
 
-        self.update_all = self._gtk.Button('arrow-up', _('Full Update'), 'color1')
+        self.update_all = self._gtk.Button('arrow-up', _('Full Update'), 'color1', self.bts, Gtk.PositionType.LEFT, 1)
         self.update_all.connect("clicked", self.show_update_info, "full")
         self.update_all.set_vexpand(False)
-        self.refresh = self._gtk.Button('arrow-down', _('Refresh'), 'color2')
+        self.refresh = self._gtk.Button('arrow-down', _('Refresh'), 'color3', self.bts, Gtk.PositionType.LEFT, 1)
         self.refresh.connect("clicked", self.refresh_updates)
         self.refresh.set_vexpand(False)
 
-        reboot = self._gtk.Button('refresh', _('Restart'), 'color3')
-        reboot.connect("clicked", self.reboot_poweroff, "reboot")
-        reboot.set_vexpand(False)
-        shutdown = self._gtk.Button('shutdown', _('Shutdown'), 'color4')
-        shutdown.connect("clicked", self.reboot_poweroff, "poweroff")
-        shutdown.set_vexpand(False)
+        sbox = Gtk.Box(vexpand=False)
+        sbox.pack_start(self.update_all, True, True, 0)
+        sbox.pack_start(self.refresh, True, True, 0)
 
         self.update_msg = Gtk.Label(label=_("Checking for updates, please wait..."), vexpand=True)
 
@@ -33,13 +30,11 @@ class Panel(ScreenPanel):
         self.scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         self.scroll.add(self.update_msg)
 
-        self.main_grid = Gtk.Grid(column_homogeneous=True)
-        self.main_grid.attach(self.scroll, 0, 0, 4, 2)
-        self.main_grid.attach(self.update_all, 0, 2, 1, 1)
-        self.main_grid.attach(self.refresh, 1, 2, 1, 1)
-        self.main_grid.attach(reboot, 2, 2, 1, 1)
-        self.main_grid.attach(shutdown, 3, 2, 1, 1)
-        self.content.add(self.main_grid)
+        self.main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
+        self.main_box.pack_start(sbox, False, False, 0)
+        self.main_box.pack_start(self.scroll, True, True, 0)
+
+        self.content.add(self.main_box)
 
     def activate(self):
         self._screen._ws.send_method('machine.update.status', callback=self.get_updates)
@@ -56,7 +51,10 @@ class Panel(ScreenPanel):
 
             try:
                 if prog in self.system_info['result']['system_info']['available_services']:
-                    self.labels[f"{prog}_restart"] = self._gtk.Button("refresh", scale=.7)
+                    self.labels[f"{prog}_restart"] = self._gtk.Button("refresh", _("Restart"),
+                                                                      "color2",
+                                                                      position=Gtk.PositionType.LEFT,
+                                                                      scale=self.bts)
                     self.labels[f"{prog}_restart"].connect("clicked", self.restart, prog)
                     infogrid.attach(self.labels[f"{prog}_restart"], 0, i, 1, 1)
             except Exception as e:
@@ -277,31 +275,3 @@ class Panel(ScreenPanel):
         self.labels[f"{p}_status"].set_label(_("Update"))
         self.labels[f"{p}_status"].get_style_context().add_class('update')
         self.labels[f"{p}_status"].set_sensitive(True)
-
-    def reboot_poweroff(self, widget, method):
-        label = Gtk.Label(wrap=True, hexpand=True, vexpand=True)
-        if method == "reboot":
-            label.set_label(_("Are you sure you wish to reboot the system?"))
-            title = _("Restart")
-        else:
-            label.set_label(_("Are you sure you wish to shutdown the system?"))
-            title = _("Shutdown")
-        buttons = [
-            {"name": _("Host"), "response": Gtk.ResponseType.OK, "style": 'dialog-info'},
-            {"name": _("Printer"), "response": Gtk.ResponseType.APPLY, "style": 'dialog-warning'},
-            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
-        ]
-        self._gtk.Dialog(title, buttons, label, self.reboot_poweroff_confirm, method)
-
-    def reboot_poweroff_confirm(self, dialog, response_id, method):
-        self._gtk.remove_dialog(dialog)
-        if response_id == Gtk.ResponseType.OK:
-            if method == "reboot":
-                os.system("systemctl reboot -i")
-            else:
-                os.system("systemctl poweroff -i")
-        elif response_id == Gtk.ResponseType.APPLY:
-            if method == "reboot":
-                self._screen._ws.send_method("machine.reboot")
-            else:
-                self._screen._ws.send_method("machine.shutdown")

@@ -21,12 +21,20 @@ more complex example:
 video=HDMI-A-1:1920x1080M@60,rotate=90,reflect_x
 ```
 
-| Device      | 	Display                                        |
-|-------------|-------------------------------------------------|
-| HDMI-A-1    | HDMI 1 (sometimes HDMI 0 on PCB)                |
-| HDMI-A-2    | HDMI 2 (sometimes HDMI 1 on PCB if starts at 0) |
-| DSI-1       | DSI or DPI                                      |
-| Composite-1 | Composite                                       |
+???+ "Find the identifier use xrandr"
+    on a terminal run:
+    ```sh
+    DISPLAY=:0 xrandr
+    ```
+
+    it will output something like:
+    ```
+    Screen 0: minimum 320 x 200, current 1024 x 600, maximum 8192 x 8192
+    HDMI-1 connected primary 1024x600+0+0 (normal left inverted right x axis y axis) 800mm x 450mm
+    ```
+    in this case the identifier is HDMI-1 and a simple cmdline arg would be something like:
+
+    `video=HDMI-1:1024x600@60`
 
 
 Valid mode specifiers:

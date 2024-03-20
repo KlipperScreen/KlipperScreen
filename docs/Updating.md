@@ -30,6 +30,7 @@ git pull
 source ~/.KlipperScreen-env/bin/activate
 pip --disable-pip-version-check install -r ~/KlipperScreen/scripts/KlipperScreen-requirements.txt
 sudo service KlipperScreen restart
+deactivate
 ```
 
 

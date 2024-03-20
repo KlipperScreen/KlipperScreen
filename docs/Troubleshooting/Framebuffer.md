@@ -47,16 +47,13 @@ check if one of those or similar exist with:
 ls /usr/share/X11/xorg.conf.d/
 ```
 
-!!! failure "Critical"
-    ***DO NOT CREATE A FILE***, and only edit if there is more than 1 framebuffer
-
 !!! example
     you found 99-fbdev.conf:
 
     ```sh
     sudo nano /usr/share/X11/xorg.conf.d/99-fbdev.conf
     ```
-    ``` title="99-fbturbo.conf"
+    ``` title="99-fbdev.conf"
     Section "Device"
             Identifier      "Allwinner A10/A13/A20 FBDEV"
             Driver          "fbdev"

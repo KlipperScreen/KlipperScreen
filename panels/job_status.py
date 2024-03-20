@@ -337,7 +337,6 @@ class Panel(ScreenPanel):
         if self.flow_timeout is not None:
             GLib.source_remove(self.flow_timeout)
             self.flow_timeout = None
-        self._files.remove_callback(self._callback_metadata)
 
     def create_buttons(self):
 
@@ -373,8 +372,15 @@ class Panel(ScreenPanel):
                             + "\n\n"
                             + _("Saved offset: %s") % saved_z_offset)
         elif device == "endstop":
-            label.set_label(_("Apply %s%.3f offset to Endstop?") % (sign, abs(self.zoffset)))
-
+            saved_z_offset = None
+            msg = _("Apply %s%.3f offset to Endstop?") % (sign, abs(self.zoffset))
+            if 'stepper_z' in self._printer.get_config_section_list():
+                saved_z_offset = self._printer.get_config_section('stepper_z')['position_endstop']
+            elif 'stepper_a' in self._printer.get_config_section_list():
+                saved_z_offset = self._printer.get_config_section('stepper_a')['position_endstop']
+            if saved_z_offset:
+                msg += "\n\n" + _("Saved offset: %s") % saved_z_offset
+            label.set_label(msg)
         buttons = [
             {"name": _("Apply"), "response": Gtk.ResponseType.APPLY, "style": 'dialog-default'},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
@@ -447,12 +453,6 @@ class Panel(ScreenPanel):
         for arg in args:
             self.buttons[arg].set_sensitive(False)
 
-    def _callback_metadata(self, action, item):
-        if action == "update_metadata" and self.filename in item:
-            logging.info("Callback complete")
-            self.update_file_metadata()
-            self._files.remove_callback(self._callback_metadata)
-
     def new_print(self):
         self._screen.close_screensaver()
         if "virtual_sdcard" in self._printer.data:
@@ -469,6 +469,8 @@ class Panel(ScreenPanel):
             elif "action:resumed" in data:
                 self.set_state("printing")
             return
+        elif action == "notify_metadata_update" and data['filename'] == self.filename:
+            self.update_file_metadata()
         elif action != "notify_status_update":
             return
 
@@ -593,8 +595,6 @@ class Panel(ScreenPanel):
     def update_time_left(self):
         total_duration = float(self._printer.get_stat('print_stats', 'total_duration'))
         print_duration = float(self._printer.get_stat('print_stats', 'print_duration'))
-        if not self.file_metadata.get('filament_total'):  # No-extrusion
-            print_duration = total_duration
         fila_used = float(self._printer.get_stat('print_stats', 'filament_used'))
         if "gcode_start_byte" in self.file_metadata:
             progress = (max(self._printer.get_stat('virtual_sdcard', 'file_position') -
@@ -612,6 +612,10 @@ class Panel(ScreenPanel):
             spdcomp = sqrt(self.speed_factor)
             slicer_time = ((self.file_metadata['estimated_time']) / spdcomp)
             self.labels["slicer_time"].set_label(self.format_time(slicer_time))
+            if print_duration < 1:
+                print_duration = slicer_time * progress
+        elif print_duration < 1:  # No-extrusion
+            print_duration = total_duration
 
         if 'filament_total' in self.file_metadata and self.file_metadata['filament_total'] >= fila_used > 0:
             filament_time = (print_duration / (fila_used / self.file_metadata['filament_total']))
@@ -627,7 +631,7 @@ class Panel(ScreenPanel):
         elif timeleft_type == "slicer":
             estimated = slicer_time
         elif estimated < 1:  # Auto
-            if slicer_time > 1:
+            if print_duration < slicer_time > 1:
                 if progress < 0.15:
                     # At the begining file and filament are innacurate
                     estimated = slicer_time
@@ -637,7 +641,7 @@ class Panel(ScreenPanel):
                 elif file_time > 1:
                     # Weighted arithmetic mean (Slicer is the most accurate)
                     estimated = (slicer_time * 2 + file_time) / 3
-            elif filament_time > 1 and file_time > 1:
+            elif print_duration < filament_time > 1 and file_time > 1:
                 estimated = (filament_time + file_time) / 2
             elif file_time > 1:
                 estimated = file_time
@@ -804,6 +808,5 @@ class Panel(ScreenPanel):
                 self.labels['filament_total'].set_label(f"{float(self.file_metadata['filament_total']) / 1000:.1f} m")
         else:
             logging.debug("Cannot find file metadata. Listening for updated metadata")
-            self._screen.files.add_callback(self._callback_metadata)
             self._files.request_metadata(self.filename)
         self.show_file_thumbnail()

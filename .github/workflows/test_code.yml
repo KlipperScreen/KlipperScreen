@@ -1,5 +1,13 @@
 name: test-code
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - 'ks_includes/locales/**'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'ks_includes/locales/**'
 jobs:
   lint-python-code:
     runs-on: ubuntu-latest
