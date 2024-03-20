@@ -26,11 +26,18 @@ class Panel(MenuPanel):
         self.bed_temp = self._gtk.Button('bed', "°C", "color2", self.bts * 1.3, Gtk.PositionType.LEFT, 1)
         self.fan_spd  = self._gtk.Button('fan', "%", "color3", self.bts * 1.5, Gtk.PositionType.LEFT, 1)
         self.top_panel = self.create_top_panel()
-        self.main_menu.attach(self.top_panel, 0, 0, 2, 1)
+        self.main_menu.attach(self.top_panel, 0, 0, 3, 1)
 
-        self.labels['menu'] = self.arrangeMenuItems(items, 4, True)
+        self.labels['menu'] = self.arrangeMenuItems(items, 2, True)
         scroll.add(self.labels['menu'])
-        self.main_menu.attach(scroll, 0, 1, 2, 2)
+        self.main_menu.attach(scroll, 1, 1, 1, 1)
+
+        for child in self.labels['menu'].get_children():
+            child.get_style_context().add_class("buttons_main_left")
+            
+        self.right_panel = self.create_right_panel()
+        self.main_menu.attach(self.right_panel, 2, 1, 1, 1)
+
         self.content.add(self.main_menu)
 
     def process_update(self, action, data):
@@ -101,3 +108,18 @@ class Panel(MenuPanel):
         self.bed_temp.set_label(bed_label)
         self.fan_spd.set_label(fan_label)
         return
+
+
+    def create_right_panel(self):
+        self.change = self._gtk.Button('Filament3', " Filament", "button_change", self.bts * 3, Gtk.PositionType.LEFT, 2)
+        self.change.connect("clicked", self.menu_item_clicked, {"name": "Filament", "panel": "extrude"})
+        
+        self.print = self._gtk.Button('print', " Print", "button_print", self.bts * 3, Gtk.PositionType.LEFT, 1)
+        self.print.connect("clicked", self.menu_item_clicked, {"name": "Print", "panel": "print"})
+
+        right = self._gtk.HomogeneousGrid(width=300, height=0)
+        right.set_vexpand(True)
+        right.set_hexpand(False)
+        right.attach(self.change,  0, 0, 1, 1)
+        right.attach(self.print, 0, 1, 1, 1)
+        return right

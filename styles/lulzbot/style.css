@@ -34,7 +34,6 @@ button.color1,
 button.color2,
 button.color3,
 button.color4 {
-    border-bottom: none;
     margin: .2em;
     min-height: 0em;
     border: .1em solid #c1d82f; 
@@ -94,5 +93,28 @@ button:disabled {
 .main_temp_on {background-color: rgba(193, 216, 47, .5);}
 .main_temp_on label {color: white;}
 
-.main_temp_off {background-color: rgba(0,0,0,0);}
+.main_temp_off {background-color: rgba(0,0,0,.45);}
 .main_temp_off label {color: white;}
+
+.button_print {
+    border: .1em solid #c1d82f; 
+    background-color: rgba(54, 60, 13, .9);
+}
+.button_print label {
+    font-size: 26;
+}
+
+.button_change {
+    border: .1em solid #c1d82f; 
+}
+.button_change label {
+    font-size: 26;
+}
+
+.buttons_main_left {
+    min-height: 0em;
+    border: .1em solid #c1d82f; 
+}
+.buttons_main_left label {
+    font-size: 26;
+}
