@@ -36,7 +36,6 @@ class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
-        self.response_count = 0
         self.screw_dict = {}
         self.screws = []
         self.y_cnt = 0
@@ -52,7 +51,7 @@ class Panel(ScreenPanel):
         self.horizontal_move_z = 5
         self.horizontal_speed = 50
 
-        grid = self._gtk.HomogeneousGrid()
+        grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         grid.attach(self.buttons['dm'], 0, 0, 1, 1)
 
         if "screws_tilt_adjust" in self._printer.get_config_section_list():
@@ -188,12 +187,11 @@ class Panel(ScreenPanel):
                 bedgrid.attach(self.buttons['center'], 2, 1, 1, 1)
                 self.buttons['center'].connect("clicked", self.go_to_position, center)
         else:
-            label = Gtk.Label(
+            label = Gtk.Label(wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
+            label.set_text(
                 _("Bed screw configuration:") + f" {nscrews}\n\n"
                 + _("Not supported for auto-detection, it needs to be configured in klipperscreen.conf")
             )
-            label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-            label.set_line_wrap(True)
             grid.attach(label, 1, 0, 3, 2)
             self.content.add(grid)
             return
@@ -307,7 +305,6 @@ class Panel(ScreenPanel):
                 self._screen._ws.klippy.gcode_script("Z_TILT_ADJUST")
 
     def go_to_position(self, widget, position):
-        widget.set_sensitive(False)
         self.home()
         logging.debug(f"Going to position: {position}")
         script = [
@@ -324,55 +321,40 @@ class Panel(ScreenPanel):
     def process_busy(self, busy):
         for button in self.buttons:
             if button == "screws":
-                self.buttons[button].set_sensitive(
-                    self._printer.config_section_exists("screws_tilt_adjust")
-                    and (not busy))
                 continue
             self.buttons[button].set_sensitive((not busy))
 
     def process_update(self, action, data):
-        if action == "notify_busy":
-            self.process_busy(data)
+        if 'idle_timeout' in data:
+            self.process_busy(data['idle_timeout']['state'].lower() == "printing")
+        if action != "notify_status_update":
             return
-        if action != "notify_gcode_response":
-            return
-        if data.startswith('!!'):
-            self.response_count = 0
-            self.buttons['screws'].set_sensitive(True)
-            return
-        result = re.match(
-            "^// (.*) : [xX= ]+([\\-0-9\\.]+), [yY= ]+([\\-0-9\\.]+), [zZ= ]+[\\-0-9\\.]+ :" +
-            " (Adjust ->|adjust) ([CW]+ [0-9:]+)",
-            data
-        )
-        # screws_tilt_adjust uses PROBE positions and was offseted for the buttons to work equal to bed_screws
-        # for the result we need to undo the offset
-        if result:
-            x = round(float(result[2]) + self.x_offset, 1)
-            y = round(float(result[3]) + self.y_offset, 1)
-            for key, value in self.screw_dict.items():
-                if value and x == value[0] and y == value[1]:
-                    logging.debug(f"X: {x} Y: {y} Adjust: {result[5]} Pos: {key}")
-                    self.buttons[key].set_label(result[5])
-                    break
-            self.response_count += 1
-            if self.response_count >= len(self.screws) - 1:
+        if "screws_tilt_adjust" in data:
+            if "error" in data["screws_tilt_adjust"]:
                 self.buttons['screws'].set_sensitive(True)
-        else:
-            result = re.match(
-                "^// (.*) : [xX= ]+([\\-0-9\\.]+), [yY= ]+([\\-0-9\\.]+), [zZ= ]+[\\-0-9\\.]",
-                data
-            )
-            # screws_tilt_adjust uses PROBE positions and was offseted for the buttons to work equal to bed_screws
-            # for the result we need to undo the offset
-            if result and re.search('base', result[1]):
-                x = round(float(result[2]) + self.x_offset, 1)
-                y = round(float(result[3]) + self.y_offset, 1)
-                logging.debug(f"X: {x} Y: {y} is the reference")
-                for key, value in self.screw_dict.items():
-                    if value and x == value[0] and y == value[1]:
-                        logging.debug(f"X: {x} Y: {y} Pos: {key}")
-                        self.buttons[key].set_label(_("Reference"))
+                logging.info("Error reported by screws_tilt_adjust")
+            if "results" in data["screws_tilt_adjust"]:
+                section = self._printer.get_config_section('screws_tilt_adjust')
+                for screw, result in data["screws_tilt_adjust"]["results"].items():
+                    logging.info(f"{screw} {result['sign']} {result['adjust']}")
+                    if screw not in section:
+                        logging.error(f"{screw} not found in {section}")
+                        continue
+                    x, y = section[screw].split(',')
+                    x = round(float(x) + self.x_offset, 1)
+                    y = round(float(y) + self.y_offset, 1)
+                    for key, value in self.screw_dict.items():
+                        if value and x == value[0] and y == value[1]:
+                            logging.debug(f"X: {x} Y: {y} Adjust: {result['adjust']} Pos: {key}")
+                            if result['is_base']:
+                                logging.info(f"{screw} is the Reference")
+                                self.buttons[key].set_label(_("Reference"))
+                            else:
+                                self.buttons[key].set_label(f"{result['sign']} {result['adjust']}")
+                            if int(result['adjust'].split(':')[0]) == 0 and int(result['adjust'].split(':')[1]) < 6:
+                                self.buttons[key].set_image(self._gtk.Image('complete'))
+                            else:
+                                self.buttons[key].set_image(self._gtk.Image(result['sign'].lower()))
 
     def _get_screws(self, config_section_name):
         screws = []
@@ -398,8 +380,5 @@ class Panel(ScreenPanel):
         return sorted(screws, key=lambda s: (float(s[1]), float(s[0])))
 
     def screws_tilt_calculate(self, widget):
-        widget.set_sensitive(False)
         self.home()
-        self.response_count = 0
-        self.buttons['screws'].set_sensitive(False)
         self._screen._send_action(widget, "printer.gcode.script", {"script": "SCREWS_TILT_CALCULATE"})

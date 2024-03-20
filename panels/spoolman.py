@@ -174,9 +174,6 @@ class Panel(ScreenPanel):
         else:
             self.scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
-        sbox = Gtk.Box(spacing=0)
-        sbox.set_vexpand(False)
-
         clear_active_spool = self._gtk.Button("cancel", _("Clear"), "color2", self.bts, Gtk.PositionType.LEFT, 1)
         clear_active_spool.get_style_context().add_class("buttons_slim")
         clear_active_spool.connect('clicked', self.clear_active_spool)
@@ -193,48 +190,38 @@ class Panel(ScreenPanel):
         sort_btn_used.connect("clicked", self.change_sort, "last_used")
         sort_btn_used.get_style_context().add_class("buttons_slim")
 
-        switch = Gtk.Switch()
-        switch.set_hexpand(False)
-        switch.set_vexpand(False)
+        switch = Gtk.Switch(hexpand=False, vexpand=False)
         switch.set_active(self._config.get_config().getboolean("spoolman", "hide_archived", fallback=True))
         switch.connect("notify::active", self.switch_config_option, "spoolman", "hide_archived", self.load_spools)
 
-        name = Gtk.Label()
+        name = Gtk.Label(halign=Gtk.Align.START, valign=Gtk.Align.CENTER, wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
         name.set_markup(_("Archived"))
-        name.set_halign(Gtk.Align.START)
-        name.set_valign(Gtk.Align.CENTER)
-        name.set_line_wrap(True)
-        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        archived = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        archived.set_valign(Gtk.Align.CENTER)
+        archived = Gtk.Box(valign=Gtk.Align.CENTER)
         archived.add(name)
         archived.add(switch)
 
+        sbox = Gtk.Box(hexpand=True, vexpand=False)
         sbox.pack_start(sort_btn_id, True, True, 0)
         sbox.pack_start(sort_btn_used, True, True, 0)
         sbox.pack_start(clear_active_spool, True, True, 0)
         sbox.pack_start(refresh, True, True, 0)
         sbox.pack_start(archived, False, False, 5)
-        sbox.set_hexpand(True)
-        sbox.set_vexpand(False)
 
-        filter_box = Gtk.ListBox()
-        filter_box.set_selection_mode(Gtk.SelectionMode.NONE)
+        filter_box = Gtk.ListBox(selection_mode=Gtk.SelectionMode.NONE)
         self._filter_expander = Gtk.Expander(label=_("Filter"))
         self._filter_expander.add(filter_box)
 
         row = Gtk.ListBoxRow()
-        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        hbox = Gtk.Box(spacing=5)
         row.add(hbox)
 
         label = Gtk.Label(_("Material"))
-        _material_filter = Gtk.ComboBox.new_with_model(self._materials)
+        _material_filter = Gtk.ComboBox(model=self._materials, hexpand=True)
         _material_filter.connect("changed", self._on_material_filter_changed)
         cellrenderertext = Gtk.CellRendererText()
         _material_filter.pack_start(cellrenderertext, True)
         _material_filter.add_attribute(cellrenderertext, "text", 1)
-        _material_filter.set_hexpand(True)
 
         _material_reset_filter = self._gtk.Button("cancel", _("Clear"), "color2", self.bts, Gtk.PositionType.LEFT, 1)
         _material_reset_filter.get_style_context().add_class("buttons_slim")
@@ -246,21 +233,17 @@ class Panel(ScreenPanel):
 
         filter_box.add(row)
 
-        self.main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        self.main.set_vexpand(True)
+        self.main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
         self.main.pack_start(sbox, False, False, 0)
         self.main.pack_start(self._filter_expander, False, True, 0)
         self.main.pack_start(self.scroll, True, True, 0)
 
         self.load_spools()
         self.get_active_spool()
-        self._treeview = Gtk.TreeView(model=sortable)
-        self._treeview.set_headers_visible(False)
-        self._treeview.set_show_expanders(False)
+        self._treeview = Gtk.TreeView(model=sortable, headers_visible=False, show_expanders=False)
 
         text_renderer = Gtk.CellRendererText()
-        pixbuf_renderer = Gtk.CellRendererPixbuf()
-        pixbuf_renderer.set_padding(5, 5)
+        pixbuf_renderer = Gtk.CellRendererPixbuf(xpad=5, ypad=5)
         checkbox_renderer = Gtk.CellRendererToggle()
         column_id = Gtk.TreeViewColumn(cell_renderer=text_renderer)
         column_id.set_cell_data_func(
@@ -394,7 +377,7 @@ class Panel(ScreenPanel):
             "path": f"/v1/spool?allow_archived={not hide_archived}",
         })
         if not spools or "result" not in spools:
-            self._screen.show_error_modal("Exception when trying to fetch spools")
+            self._screen.show_popup_message(_("Error trying to fetch spools"))
             return
 
         materials = []
@@ -414,7 +397,7 @@ class Panel(ScreenPanel):
     def clear_active_spool(self, sender: Gtk.Button = None):
         result = self.apiClient.post_request("server/spoolman/spool_id", json={})
         if not result:
-            self._screen.show_error_modal("Exception when setting active spool")
+            self._screen.show_popup_message(_("Error clearing active spool"))
             return
 
     def set_active_spool(self, spool: SpoolmanSpool):
@@ -422,13 +405,13 @@ class Panel(ScreenPanel):
             "spool_id": spool.id
         })
         if not result:
-            self._screen.show_error_modal("Exception when setting active spool")
+            self._screen.show_popup_message(_("Error setting active spool"))
             return
 
     def get_active_spool(self) -> SpoolmanSpool:
         result = self.apiClient.send_request("server/spoolman/spool_id")
         if not result:
-            self._screen.show_error_modal("Exception when getting active spool")
+            self._screen.show_popup_message(_("Error getting active spool"))
             return
         self._active_spool_id = result["result"]["spool_id"]
         return self._active_spool_id

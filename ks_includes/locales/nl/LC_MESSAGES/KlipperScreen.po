@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-12-17 01:27+0000\n"
-"Last-Translator: Maxime Carrein <maxime.c.work@gmail.com>\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"PO-Revision-Date: 2024-03-16 18:48+0000\n"
+"Last-Translator: Mikachu <micah.sh@proton.me>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/nl/>\n"
 "Language: nl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -198,8 +198,23 @@ msgstr "Wil je %s herstellen?"
 msgid "Elapsed:"
 msgstr "Verstreken:"
 
+msgid "Ended official support in June 2023"
+msgstr "Ondersteuning officieel beëindigt in juni 2023"
+
 msgid "Error"
 msgstr "Error"
+
+msgid "Error clearing active spool"
+msgstr "Error opruimen actieve spoel"
+
+msgid "Error getting active spool"
+msgstr "Error krijgen actieve spoel"
+
+msgid "Error setting active spool"
+msgstr "Error instellen actieve spoel"
+
+msgid "Error trying to fetch spools"
+msgstr "Error tijdens laden spoelen"
 
 msgid "Estimated Time Method"
 msgstr "Schatting Tijd Methode"
@@ -212,6 +227,9 @@ msgstr "Extra Groot"
 
 msgid "Extrude"
 msgstr "Extrude"
+
+msgid "Extruders"
+msgstr "Extruders"
 
 msgid "Extrusion +"
 msgstr "Extrusion +"
@@ -366,6 +384,9 @@ msgstr "Klipper probeert te starten"
 msgid "Klipper will reboot"
 msgstr "Klipper zal herstarten"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr "KlipperScreen ondersteuning wordt in juni 2024 beëindigt"
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -395,6 +416,12 @@ msgstr "Limieten"
 
 msgid "Load"
 msgstr "Laad"
+
+msgid "Loading..."
+msgstr "Laden..."
+
+msgid "Lost Connection to Moonraker"
+msgstr "Verbinding met Moonraker verbroken"
 
 msgid "Lower Nozzle"
 msgstr "Onderste Nozzle"
@@ -474,6 +501,12 @@ msgstr "Nieuw"
 msgid "No elegible macros:"
 msgstr "Macros komen niet in aanmerking:"
 
+msgid "No mesh has been loaded"
+msgstr "Geen mesh geladen"
+
+msgid "No wireless interface has been found"
+msgstr "Geen draadloze netwerk interface gevonden"
+
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
@@ -481,8 +514,17 @@ msgstr ""
 "Niet ondersteunt voor auto-detectie, dit moet worden geconfigureerd in "
 "klipperscreen.conf"
 
+msgid "Not working or not configured"
+msgstr "Niet werkend of niet geconfigureerd"
+
 msgid "Nothing selected"
 msgstr "Niets geselecteerd"
+
+msgid "Notification log empty"
+msgstr "Notificatie log is leeg"
+
+msgid "Notifications"
+msgstr "Notificaties"
 
 #, python-format
 msgid "Outdated by %d"
@@ -743,6 +785,12 @@ msgstr "Bezig met updaten"
 msgid "Uploaded"
 msgstr "Geupload"
 
+msgid "Warning"
+msgstr "Waarschuwing"
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr "WebRTC is niet ondersteund door de backend"
+
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Move Snelheid (mm/s)"
 
@@ -799,9 +847,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen zal herstarten"
 
 #~ msgid "Continue"
 #~ msgstr "Doorgaan"

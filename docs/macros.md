@@ -3,7 +3,7 @@
 ## Recommended
 
 !!! note
-     If you have already installed other UIs then you may have this macros already, and it's usually asked by KIAUH
+     If you have already installed other UIs then you may have these macros already, and it's usually asked by KIAUH
 
 None of the following macros are strictly required for KlipperScreen, but they provide the toolhead parking at pause and cancel.
 
@@ -109,7 +109,7 @@ gcode:
 
 ### LOAD_FILAMENT / UNLOAD_FILAMENT
 
-This macros are used in the Extrude panel `Load` and `Unload` buttons. and they will be hidden from the macros panel.
+These macros are used in the Extrude panel `Load` and `Unload` buttons. and they will be hidden from the macros panel.
 
 The selected speed in the panel is transferred as a parameter.
 
@@ -183,3 +183,73 @@ gcode:
 
 `MY_AWESOME_GCODE` appears in your interface settings, but `_MY_HELPER_CODE` does not.
 
+
+## Prompts
+
+It allows macros in Klipper to trigger dialog prompts to interact with the Firmware and will enable
+the user to choose between options or to close the dialog again in case it's no longer needed.
+
+!!! warning
+    This feature needs the `[respond]` module of Klipper.
+
+    So please check if this is enabled in your Klipper config.
+
+### Supported Macro prompt commands
+
+Begin the prompt and set a title:
+
+```yaml+jinja title="Start"
+RESPOND TYPE=command MSG="action:prompt_begin My Prompt"
+```
+
+Add a button:
+
+Both `prompt_button` and `prompt_footer_button` work but at the moment of writing this they are equal
+
+The options are label | gcode | style
+
+Supported styles: primary, secondary, info, warning, error
+
+```yaml+jinja title="Add a button"
+RESPOND TYPE=command MSG="action:prompt_button button_text|RESPOND MSG=test|info"
+```
+
+!!! info
+    Only 4 buttons are allowed, the rest will not show due to screen space concerns
+
+Show the prompt on the screen:
+```yaml+jinja title="Show"
+RESPOND TYPE=command MSG="action:prompt_show"
+```
+
+Optional: Close the Prompt:
+```yaml+jinja title="Close"
+RESPOND TYPE=command MSG="action:prompt_end"
+```
+
+### Examples
+
+```yaml+jinja
+[gcode_macro SHOW_PROMPT]
+gcode:
+    RESPOND TYPE=command MSG="action:prompt_begin My Prompt"
+    RESPOND TYPE=command MSG="action:prompt_text This is an example of a prompt"
+    RESPOND TYPE=command MSG="action:prompt_button primary|G28|primary"
+    RESPOND TYPE=command MSG="action:prompt_button secondary|RESPOND MSG=test|secondary"
+    RESPOND TYPE=command MSG="action:prompt_button info|RESPOND MSG=test #2|info"
+    RESPOND TYPE=command MSG="action:prompt_button warning|RESPOND MSG=test #3|warning"
+    RESPOND TYPE=command MSG="action:prompt_show"
+```
+
+![Prompt_1](img/macros/Prompt_1.png)
+
+```yaml+jinja
+[gcode_macro SHOW_PROMPT_2]
+gcode:
+    RESPOND TYPE=command MSG="action:prompt_begin Nevermind just close this >>>"
+    RESPOND TYPE=command MSG="action:prompt_text Do you want to load a new filament?"
+    RESPOND TYPE=command MSG="action:prompt_footer_button Load|LOAD_FILAMENT"
+    RESPOND TYPE=command MSG="action:prompt_footer_button Unload|UNLOAD_FILAMENT|error"
+    RESPOND TYPE=command MSG="action:prompt_show"
+```
+![Prompt_2](img/macros/Prompt_2.png)

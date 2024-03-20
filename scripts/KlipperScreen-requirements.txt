@@ -1,6 +1,6 @@
-jinja2==3.1.2
+jinja2==3.1.3;python_version>="3.6"
+requests==2.31.0;python_version>="3.7"
 netifaces==0.11.0
-requests==2.31.0
 six==1.16.0
 dbus-python==1.3.2
 
@@ -15,6 +15,6 @@ PyGObject==3.44.1; python_version == '3.7'
 pycairo==1.23.0; python_version == '3.7'
 websocket-client==1.6.1; python_version == '3.7'
 
-PyGObject==3.46.0;python_version>="3.8"
-pycairo==1.25.1;python_version>="3.8"
+PyGObject==3.48.1;python_version>="3.8"
+pycairo==1.26.0;python_version>="3.8"
 websocket-client==1.7.0;python_version>="3.8"

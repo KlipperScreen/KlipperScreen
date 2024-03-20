@@ -15,7 +15,6 @@
 @define-color active-dark #282828;
 @define-color lines #a2a2a2;
 @define-color slider #d81549;
-@define-color popup #006064;
 
 * {
     color: @text;
@@ -84,7 +83,11 @@ button.invalid {
     border-bottom-color: @error;
 }
 
-combobox box button {
+menu,
+menuitem,
+combobox button,
+combobox arrow,
+combobox menuitem {
     background-color: @active-dark;
     border-color: @bg;
 }
@@ -106,16 +109,6 @@ entry {
 
 label {
     color: @text;
-}
-
-menu {
-    background-color: @bg;
-    border-color: @lines;
-}
-
-menuitem {
-    background-color: @bg;
-    border-color: @lines;
 }
 
 trough {
@@ -148,10 +141,6 @@ textview .time {
     color: @lines;
 }
 
-.popup {
-    background-color: @popup;
-}
-
 .dialog {
     border: @bg;
     background-color: @bg;
@@ -162,18 +151,13 @@ textview .time {
     border-radius: .75em;
 }
 
-.tempbutton_top,
-.tempbutton,
-.tempbutton_bottom,
-.distbutton_top,
-.distbutton,
-.distbutton_bottom  {
+.horizontal_togglebuttons {
     border-color: @bg;
     background-color: @buttons-bg;
 }
 
 button:active,
-.distbutton_active,
+.horizontal_togglebuttons_active,
 button.active {
     background-color: @active;
 }

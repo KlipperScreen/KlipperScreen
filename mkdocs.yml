@@ -7,8 +7,12 @@ repo_name: KlipperScreen/KlipperScreen/
 repo_url: https://github.com/KlipperScreen/KlipperScreen/
 nav:
     - Home: index.md
+    - FAQ: FAQ.md
     - Setup:
-      - Hardware.md
+      - Hardware: Hardware.md
+      - Hardware specific:
+        - GPIO 3.5": Hardware/GPIO_35.md
+        - HDMI: Hardware/HDMI.md
       - Installation.md
       - Updating.md
       - Configuration.md
@@ -77,3 +81,6 @@ extra:
       - icon: fontawesome/brands/discord
         link: https://discord.klipper3d.org/
       - icon: fontawesome/brands/python
+
+extra_css:
+      - stylesheets/extra.css

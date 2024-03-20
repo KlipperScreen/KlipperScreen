@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -192,7 +192,22 @@ msgstr ""
 msgid "Elapsed:"
 msgstr ""
 
+msgid "Ended official support in June 2023"
+msgstr ""
+
 msgid "Error"
+msgstr ""
+
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -205,6 +220,9 @@ msgid "Extra Large"
 msgstr ""
 
 msgid "Extrude"
+msgstr ""
+
+msgid "Extruders"
 msgstr ""
 
 msgid "Extrusion +"
@@ -360,6 +378,9 @@ msgstr ""
 msgid "Klipper will reboot"
 msgstr ""
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr ""
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -386,6 +407,12 @@ msgid "Limits"
 msgstr ""
 
 msgid "Load"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "Lost Connection to Moonraker"
 msgstr ""
 
 msgid "Lower Nozzle"
@@ -466,12 +493,27 @@ msgstr ""
 msgid "No elegible macros:"
 msgstr ""
 
+msgid "No mesh has been loaded"
+msgstr ""
+
+msgid "No wireless interface has been found"
+msgstr ""
+
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr ""
 
+msgid "Not working or not configured"
+msgstr ""
+
 msgid "Nothing selected"
+msgstr ""
+
+msgid "Notification log empty"
+msgstr ""
+
+msgid "Notifications"
 msgstr ""
 
 #, python-format
@@ -731,6 +773,12 @@ msgid "Updating"
 msgstr ""
 
 msgid "Uploaded"
+msgstr ""
+
+msgid "Warning"
+msgstr ""
+
+msgid "WebRTC is not supported by the backend trying Stream"
 msgstr ""
 
 msgid "XY Move Speed (mm/s)"

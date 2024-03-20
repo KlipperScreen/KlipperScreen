@@ -4,12 +4,11 @@ SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 KSPATH=$(sed 's/\/scripts//g' <<< $SCRIPTPATH)
 KSENV="${KLIPPERSCREEN_VENV:-${HOME}/.KlipperScreen-env}"
 
-XSERVER="xinit xinput x11-xserver-utils xserver-xorg-input-evdev xserver-xorg-input-libinput"
-FBDEV="xserver-xorg-video-fbdev"
+XSERVER="xinit xinput x11-xserver-utils xserver-xorg-input-evdev xserver-xorg-input-libinput xserver-xorg-legacy xserver-xorg-video-fbdev"
 PYTHON="python3-virtualenv virtualenv python3-distutils"
 PYGOBJECT="libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0"
 MISC="librsvg2-common libopenjp2-7 wireless-tools libdbus-glib-1-dev autoconf"
-OPTIONAL="xserver-xorg-legacy fonts-nanum fonts-ipafont libmpv-dev policykit-1 network-manager"
+OPTIONAL="fonts-nanum fonts-ipafont libmpv-dev policykit-1 network-manager"
 
 Red='\033[0;31m'
 Green='\033[0;32m'
@@ -60,13 +59,6 @@ install_packages()
     fi
     sudo apt-get install -y $OPTIONAL
     echo $_
-    sudo apt-get install -y $FBDEV
-    if [ $? -eq 0 ]; then
-        echo_ok "Installed FBdev"
-    else
-        echo_error "Installation of FBdev failed ($FBDEV)"
-        exit 1
-    fi
     sudo apt-get install -y $PYTHON
     if [ $? -eq 0 ]; then
         echo_ok "Installed Python dependencies"
@@ -88,10 +80,6 @@ install_packages()
         echo_error "Installation of Misc packages failed ($MISC)"
         exit 1
     fi
-#     ModemManager interferes with klipper comms
-#     on buster it's installed as a dependency of mpv
-#     it doesn't happen on bullseye
-    sudo systemctl mask ModemManager.service
 }
 
 check_requirements()
@@ -109,21 +97,27 @@ create_virtualenv()
     echo_text "Creating virtual environment"
     if [ ! -d ${KSENV} ]; then
         virtualenv -p /usr/bin/python3 ${KSENV}
-#         GET_PIP="${HOME}/get-pip.py"
-#         virtualenv --no-pip -p /usr/bin/python3 ${KSENV}
-#         curl https://bootstrap.pypa.io/pip/3.6/get-pip.py -o ${GET_PIP}
-#         ${KSENV}/bin/python ${GET_PIP}
-#         rm ${GET_PIP}
     fi
 
     source ${KSENV}/bin/activate
-    pip --disable-pip-version-check install -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
+    if [[ "$(uname -m)" =~ armv[67]l ]]; then
+        echo_text "Using armv[67]l! Adding piwheels.org as extra index..."
+        pip --disable-pip-version-check install --extra-index-url https://www.piwheels.org/simple -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
+    else
+        pip --disable-pip-version-check install -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
+    fi
     if [ $? -gt 0 ]; then
         echo_error "Error: pip install exited with status code $?"
         echo_text "Trying again with new tools..."
         sudo apt-get install -y build-essential cmake
-        pip install --upgrade pip setuptools
-        pip install -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
+        if [[ "$(uname -m)" =~ armv[67]l ]]; then
+            echo_text "Adding piwheels.org as extra index..."
+            pip install --extra-index-url https://www.piwheels.org/simple --upgrade pip setuptools
+            pip install --extra-index-url https://www.piwheels.org/simple -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
+        else
+            pip install --upgrade pip setuptools
+            pip install -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
+        fi
         if [ $? -gt 0 ]; then
             echo_error "Unable to install dependencies, aborting install."
             deactivate
@@ -150,6 +144,8 @@ install_systemd_service()
     sudo systemctl unmask KlipperScreen.service
     sudo systemctl daemon-reload
     sudo systemctl enable KlipperScreen
+    sudo systemctl set-default multi-user.target
+    sudo adduser $USER tty
 }
 
 create_policy()
@@ -159,7 +155,7 @@ create_policy()
 
     echo_text "Installing KlipperScreen PolicyKit Rules"
     sudo groupadd -f klipperscreen
-    sudo groupadd -f tty
+    sudo adduser $USER netdev
     if [ ! -x "$(command -v pkaction)" ]; then
         echo "PolicyKit not installed"
         return
@@ -194,8 +190,7 @@ polkit.addRule(function(action, subject) {
          action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
          action.id == "org.freedesktop.login1.halt" ||
          action.id == "org.freedesktop.login1.halt-multiple-sessions" ||
-         action.id == "org.freedesktop.NetworkManager.wifi.scan" ||
-         action.id.startsWith("org.freedesktop.packagekit.")) &&
+         action.id.startsWith("org.freedesktop.NetworkManager.")) &&
         subject.user == "$USER") {
         // Only allow processes with the "klipperscreen" supplementary group
         // access
@@ -221,7 +216,7 @@ create_policy_legacy()
     ACTIONS="${ACTIONS};org.freedesktop.login1.reboot-multiple-sessions"
     ACTIONS="${ACTIONS};org.freedesktop.login1.halt"
     ACTIONS="${ACTIONS};org.freedesktop.login1.halt-multiple-sessions"
-    ACTIONS="${ACTIONS};org.freedesktop.NetworkManager.wifi.scan"
+    ACTIONS="${ACTIONS};org.freedesktop.NetworkManager.*"
     sudo /bin/sh -c "cat > ${RULE_FILE}" << EOF
 [KlipperScreen]
 Identity=unix-user:$USER
@@ -232,13 +227,25 @@ EOF
 
 update_x11()
 {
-    if [ -e /etc/X11/Xwrapper.config ]
+    echo_text "Adding X11 Xwrapper"
+    sudo /bin/sh -c "cat >  /etc/X11/Xwrapper.config" << EOF
+allowed_users=anybody
+needs_root_rights=yes
+EOF
+}
+
+fix_fbturbo()
+{
+    if [ $(dpkg-query -W -f='${Status}' xserver-xorg-video-fbturbo 2>/dev/null | grep -c "ok installed") -eq 0 ];
     then
-        echo_text "Updating X11 Xwrapper"
-        sudo sed -i 's/allowed_users=console/allowed_users=anybody/g' /etc/X11/Xwrapper.config
-    else
-        echo_text "Adding X11 Xwrapper"
-        echo 'allowed_users=anybody' | sudo tee /etc/X11/Xwrapper.config
+        FBCONFIG="/usr/share/X11/xorg.conf.d/99-fbturbo.conf"
+        if [ -e $FBCONFIG ]
+        then
+            echo_text "FBturbo not installed, but the configuration file exists"
+            echo_text "This will fail if the config is not removed or the package installed"
+            echo_text "moving the config to the home folder"
+            sudo mv $FBCONFIG ~/99-fbturbo-backup.conf
+        fi
     fi
 }
 
@@ -264,8 +271,14 @@ install_packages
 check_requirements
 create_virtualenv
 create_policy
-install_systemd_service
 update_x11
-echo_ok "KlipperScreen was installed"
+fix_fbturbo
 add_desktop_file
-start_KlipperScreen
+read -r -e -p "Install as a service? (This will enable boot to console) [Y/n]" choice
+if [[ $choice =~ ^[nN]$ ]]; then
+    echo_text "Not installing the service, KlipperScreen will need to be manually started"
+    echo_ok "KlipperScreen was installed"
+else
+    install_systemd_service
+    start_KlipperScreen
+fi

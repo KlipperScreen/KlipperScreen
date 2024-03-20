@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-12-05 11:06+0000\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"PO-Revision-Date: 2024-02-12 00:05+0000\n"
 "Last-Translator: Mick#6366 <kos.m@post.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/cs/>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.3-dev\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -198,8 +198,23 @@ msgstr "Obnovit %s?"
 msgid "Elapsed:"
 msgstr "Uplynulo:"
 
+msgid "Ended official support in June 2023"
+msgstr "Oficiální podpora ukončena v červnu 2023"
+
 msgid "Error"
 msgstr "Chyba"
+
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Výpočet doby tisku"
@@ -212,6 +227,9 @@ msgstr "Extra velký"
 
 msgid "Extrude"
 msgstr "Extruze"
+
+msgid "Extruders"
+msgstr ""
 
 msgid "Extrusion +"
 msgstr "Extruze +"
@@ -366,6 +384,9 @@ msgstr "Klipper startuje"
 msgid "Klipper will reboot"
 msgstr "Klipper se restartuje"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr "KlipperScreen ztratí podporu v červnu 2024"
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -394,6 +415,12 @@ msgstr "Limity"
 
 msgid "Load"
 msgstr "Zasuň"
+
+msgid "Loading..."
+msgstr "Načítání...."
+
+msgid "Lost Connection to Moonraker"
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Trysku níž"
@@ -473,13 +500,28 @@ msgstr "Nový"
 msgid "No elegible macros:"
 msgstr "Žádná použitelná makra:"
 
+msgid "No mesh has been loaded"
+msgstr "Nebyla načtena žádná síť"
+
+msgid "No wireless interface has been found"
+msgstr "Nebylo nalezeno žádné bezdrátové rozhraní"
+
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr "Nepodporováno autodetekcí, nakonfiguruj v klipperscreen.conf"
 
+msgid "Not working or not configured"
+msgstr "Nefunguje nebo není nakonfigurováno"
+
 msgid "Nothing selected"
 msgstr "Nevybráno nic"
+
+msgid "Notification log empty"
+msgstr "Protokol oznámení je prázdný"
+
+msgid "Notifications"
+msgstr "Oznámení"
 
 #, python-format
 msgid "Outdated by %d"
@@ -741,6 +783,12 @@ msgstr "Aktualizuji"
 msgid "Uploaded"
 msgstr "Nahrané"
 
+msgid "Warning"
+msgstr "Varování"
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr "WebRTC není podporováno backendem, který se pokouší spustit Stream"
+
 msgid "XY Move Speed (mm/s)"
 msgstr "Rychlost pohybu XY (mm/s)"
 
@@ -800,9 +848,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen se restartuje"
 
 #~ msgid "Continue"
 #~ msgstr "Pokračuj"

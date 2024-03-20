@@ -6,6 +6,7 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gdk, Gtk
+from cairo import Context as cairoContext
 
 
 class HeaterGraph(Gtk.DrawingArea):
@@ -43,9 +44,13 @@ class HeaterGraph(Gtk.DrawingArea):
             logging.info(f"Graph area: {x} {y}")
 
     def get_max_length(self):
-        return min(len(self.printer.get_temp_store(name, "temperatures"))
-                   for name in self.store if "temperatures" in self.store[name]
-                   and self.printer.get_temp_store(name, "temperatures"))
+        try:
+            return min(len(self.printer.get_temp_store(name, "temperatures"))
+                       for name in self.store if "temperatures" in self.store[name]
+                       and self.printer.get_temp_store(name, "temperatures"))
+        except ValueError:
+            logging.debug(self.printer.get_temp_devices())
+            return 0
 
     def get_max_num(self, data_points=0):
         mnum = [0]
@@ -59,33 +64,19 @@ class HeaterGraph(Gtk.DrawingArea):
                     mnum.append(max(target))
         return max(mnum)
 
-    def draw_graph(self, da, ctx):
-        width = da.get_allocated_width()
-        height = da.get_allocated_height()
+    def draw_graph(self, da: Gtk.DrawingArea, ctx: cairoContext):
 
-        g_width_start = round(self.font_size * 2.75)
-        g_width = width - 15
-        g_height_start = 10
-        g_height = height - self.font_size * 2
+        x = round(self.font_size * 2.75)
+        y = 10
+        width = da.get_allocated_width() - 15
+        height = da.get_allocated_height() - self.font_size * 2
+        gsize = [[x, y], [width, height]]
 
         ctx.set_source_rgb(.5, .5, .5)
         ctx.set_line_width(1)
-        ctx.set_tolerance(0.1)
+        ctx.set_tolerance(1)
 
-        ctx.move_to(g_width_start, g_height_start)
-        ctx.line_to(g_width, g_height_start)
-        ctx.line_to(g_width, g_height)
-        ctx.line_to(g_width_start, g_height)
-        ctx.line_to(g_width_start, g_height_start)
-        ctx.stroke()
-
-        ctx.set_source_rgb(1, 0, 0)
-        ctx.move_to(g_width_start, height)
-
-        gsize = [
-            [g_width_start, g_height_start],
-            [g_width, g_height]
-        ]
+        ctx.rectangle(x, y, width - x, height - y)
 
         self.max_length = self.get_max_length()
         graph_width = gsize[1][0] - gsize[0][0]
@@ -104,55 +95,49 @@ class HeaterGraph(Gtk.DrawingArea):
                 continue
             for dev_type in self.store[name]:
                 d = self.printer.get_temp_store(name, dev_type, data_points)
-                if d is False:
-                    continue
-                self.graph_data(ctx, d, gsize, d_height_scale, d_width, self.store[name][dev_type]["rgb"],
-                                self.store[name][dev_type]["dashed"], self.store[name][dev_type]["fill"])
+                if d:
+                    self.graph_data(
+                        ctx, d, gsize, d_height_scale, d_width, self.store[name][dev_type]["rgb"],
+                        self.store[name][dev_type]["dashed"], self.store[name][dev_type]["fill"]
+                    )
 
     @staticmethod
-    def graph_data(ctx, data, gsize, hscale, swidth, rgb, dashed=False, fill=False):
-        i = 0
+    def graph_data(ctx: cairoContext, data, gsize, hscale, swidth, rgb, dashed=False, fill=False):
         ctx.set_source_rgba(rgb[0], rgb[1], rgb[2], 1)
-        ctx.move_to(gsize[0][0] + 1, gsize[0][1] - 1)
         if dashed:
             ctx.set_dash([10, 5])
         else:
             ctx.set_dash([1, 0])
         d_len = len(data) - 1
-        for d in data:
+
+        for i, d in enumerate(data):
             p_x = i * swidth + gsize[0][0] if i != d_len else gsize[1][0] - 1
             p_y = max(gsize[0][1], min(gsize[1][1], gsize[1][1] - 1 - (d * hscale)))
             if i == 0:
-                ctx.move_to(gsize[0][0] + 1, p_y)
-                i += 1
-                continue
+                ctx.move_to(gsize[0][0], p_y)
             ctx.line_to(p_x, p_y)
-            i += 1
-        if fill is False:
-            ctx.stroke()
-            return
-
-        ctx.stroke_preserve()
-        ctx.line_to(gsize[1][0] - 1, gsize[1][1] - 1)
-        ctx.line_to(gsize[0][0] + 1, gsize[1][1] - 1)
         if fill:
+            ctx.stroke_preserve()
+            ctx.line_to(gsize[1][0] - 1, gsize[1][1] - 1)
+            ctx.line_to(gsize[0][0] + 1, gsize[1][1] - 1)
             ctx.set_source_rgba(rgb[0], rgb[1], rgb[2], .1)
             ctx.fill()
+        else:
+            ctx.stroke()
 
-    def graph_lines(self, ctx, gsize, max_num):
+    def graph_lines(self, ctx: cairoContext, gsize, max_num):
         nscale = 10
         max_num = min(max_num, 999)
         while (max_num / nscale) > 5:
             nscale += 10
-        # nscale = math.floor((max_num / 10) / 4) * 10
         r = int(max_num / nscale) + 1
         hscale = (gsize[1][1] - gsize[0][1]) / (r * nscale)
+        ctx.set_font_size(self.font_size)
 
         for i in range(r):
             ctx.set_source_rgb(.5, .5, .5)
             lheight = gsize[1][1] - nscale * i * hscale
             ctx.move_to(6, lheight + 3)
-            ctx.set_font_size(self.font_size)
             ctx.show_text(str(nscale * i).rjust(3, " "))
             ctx.stroke()
             ctx.set_source_rgba(.5, .5, .5, .2)
@@ -161,11 +146,14 @@ class HeaterGraph(Gtk.DrawingArea):
             ctx.stroke()
         return hscale
 
-    def graph_time(self, ctx, gsize, points_per_pixel):
+    def graph_time(self, ctx: cairoContext, gsize, points_per_pixel):
 
         now = datetime.datetime.now()
         first = gsize[1][0] - (now.second + ((now.minute % 2) * 60)) / points_per_pixel
         steplen = 120 / points_per_pixel  # For 120s
+
+        font_size_multiplier = round(self.font_size * 1.5)
+        ctx.set_font_size(self.font_size)
 
         i = 0
         while True:
@@ -178,17 +166,9 @@ class HeaterGraph(Gtk.DrawingArea):
             ctx.stroke()
 
             ctx.set_source_rgb(.5, .5, .5)
-            ctx.move_to(x - round(self.font_size * 1.5), gsize[1][1] + round(self.font_size * 1.5))
+            ctx.move_to(x - font_size_multiplier, gsize[1][1] + font_size_multiplier)
 
-            h = now.hour
-            m = now.minute - (now.minute % 2) - i * 2
-            if m < 0:
-                h -= 1
-                m += 60
-                if h < 0:
-                    h += 24
-            ctx.set_font_size(self.font_size)
-            ctx.show_text(f"{h:2}:{m:02}")
+            ctx.show_text(f"{now - datetime.timedelta(minutes=2) * i:%H:%M}")
             ctx.stroke()
             i += 1 + self.max_length // 601
 

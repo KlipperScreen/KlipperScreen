@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-11-16 02:51+0000\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"PO-Revision-Date: 2024-03-16 18:48+0000\n"
 "Last-Translator: Giadej <Giadej@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/it/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.2-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -193,8 +193,23 @@ msgstr "Vuoi ripristinare %s?"
 msgid "Elapsed:"
 msgstr "Trascorso:"
 
+msgid "Ended official support in June 2023"
+msgstr "Supporto ufficiale terminato in giugno 2023"
+
 msgid "Error"
 msgstr "Errore"
+
+msgid "Error clearing active spool"
+msgstr "Errore nella cancellazione della bobina attiva"
+
+msgid "Error getting active spool"
+msgstr "Errore nel caricamento della bobina attiva"
+
+msgid "Error setting active spool"
+msgstr "Errore nel settaggio della bobina attiva"
+
+msgid "Error trying to fetch spools"
+msgstr "Errore nel tentativo di recuperare le bobine"
 
 msgid "Estimated Time Method"
 msgstr "Metodo Tempo Stimato"
@@ -207,6 +222,9 @@ msgstr "Extra Large"
 
 msgid "Extrude"
 msgstr "Estrudi"
+
+msgid "Extruders"
+msgstr "Estrusori"
 
 msgid "Extrusion +"
 msgstr "Estrusione +"
@@ -345,7 +363,7 @@ msgstr ""
 "Potrebbero volerci più di 5 min. a seconda della potenza del riscaldatore."
 
 msgid "Klipper Restart"
-msgstr "Riavvio Klipper"
+msgstr "Riavvia Klipper"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper si è disconnesso"
@@ -361,6 +379,9 @@ msgstr "Klipper sta tentando di avviarsi"
 
 msgid "Klipper will reboot"
 msgstr "Klipper si riavvierà"
+
+msgid "KlipperScreen will drop support in June 2024"
+msgstr "KlipperScreen rilascerà il supporto in giugno 2024"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
@@ -391,6 +412,12 @@ msgstr "Limiti"
 
 msgid "Load"
 msgstr "Carica"
+
+msgid "Loading..."
+msgstr "Caricamento..."
+
+msgid "Lost Connection to Moonraker"
+msgstr "Connessione persa con Moonraker"
 
 msgid "Lower Nozzle"
 msgstr "Abbassa Ugello"
@@ -470,6 +497,12 @@ msgstr "Nuovo"
 msgid "No elegible macros:"
 msgstr "Nessuna macro elegibile:"
 
+msgid "No mesh has been loaded"
+msgstr "Nessuna besh_mesh caricata"
+
+msgid "No wireless interface has been found"
+msgstr "Nessura interfaccia wireless trovata"
+
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
@@ -477,8 +510,17 @@ msgstr ""
 "Non supportato per il rilevamento automatico, configurarlo in klipperscreen."
 "conf"
 
+msgid "Not working or not configured"
+msgstr "Non funzionante o non configurato"
+
 msgid "Nothing selected"
 msgstr "Nessuna selezione"
+
+msgid "Notification log empty"
+msgstr "Log notifiche vuoto"
+
+msgid "Notifications"
+msgstr "Notifiche"
 
 #, python-format
 msgid "Outdated by %d"
@@ -698,13 +740,13 @@ msgid "System"
 msgstr "Sistema"
 
 msgid "System Restart"
-msgstr "Riavvio Sistema"
+msgstr "Riavvia Sistema"
 
 msgid "System Shutdown"
-msgstr "Spegnimento Sistema"
+msgstr "Spegni Sistema"
 
 msgid "Temp (°C)"
-msgstr "Temp (°C)"
+msgstr "Temperatura (°C)"
 
 msgid "Temperature"
 msgstr "Temperatura"
@@ -716,7 +758,7 @@ msgid "Unknown Heater"
 msgstr "Riscaldatore sconosciuto"
 
 msgid "Unknown screw position"
-msgstr "Posizione Screw sconosciuta"
+msgstr "Posizione vite sconosciuta"
 
 msgid "Unload"
 msgstr "Scarica"
@@ -738,6 +780,12 @@ msgstr "Aggiornamento"
 
 msgid "Uploaded"
 msgstr "Caricato"
+
+msgid "Warning"
+msgstr "Attenzione"
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr "WebRTC non è supportato dal backend che sta tentando lo stream"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Velocità movimento XY (mm/s)"
@@ -777,7 +825,7 @@ msgid "macros that use 'rename_existing' are hidden"
 msgstr "macro che usano 'rename_existing' sono nascoste"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr "macros con nome che inzia con '_' sono nascoste"
+msgstr "macro con nome che inzia con '_' sono nascoste"
 
 msgid "minute"
 msgid_plural "minutes"
@@ -795,9 +843,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen si riavvierà"
 
 #~ msgid "Continue"
 #~ msgstr "Continua"

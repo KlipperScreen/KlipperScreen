@@ -24,8 +24,7 @@ class Panel(ScreenPanel):
         adjust.connect("clicked", self.load_menu, 'options', _("Settings"))
         adjust.set_hexpand(False)
 
-        sbox = Gtk.Box()
-        sbox.set_vexpand(False)
+        sbox = Gtk.Box(vexpand=False)
         sbox.pack_start(self.sort_btn, True, True, 5)
         sbox.pack_start(adjust, True, True, 5)
 
@@ -33,8 +32,7 @@ class Panel(ScreenPanel):
         self.labels['macros'] = Gtk.Grid()
         self.labels['macros_list'].add(self.labels['macros'])
 
-        self.labels['macros_menu'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        self.labels['macros_menu'].set_vexpand(True)
+        self.labels['macros_menu'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
         self.labels['macros_menu'].pack_start(sbox, False, False, 0)
         self.labels['macros_menu'].pack_start(self.labels['macros_list'], True, True, 0)
 
@@ -61,14 +59,9 @@ class Panel(ScreenPanel):
         else:
             logging.debug(f"Couldn't load {macro}\n{section}")
             return
-        name = Gtk.Label()
+        name = Gtk.Label(hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER,
+                         wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
         name.set_markup(f"<big><b>{macro}</b></big>")
-        name.set_hexpand(True)
-        name.set_vexpand(True)
-        name.set_halign(Gtk.Align.START)
-        name.set_valign(Gtk.Align.CENTER)
-        name.set_line_wrap(True)
-        name.set_line_wrap_mode(Pango.WrapMode.CHAR)
 
         btn = self._gtk.Button("resume", style="color3")
         btn.connect("clicked", self.run_gcode_macro, macro)
@@ -87,8 +80,7 @@ class Panel(ScreenPanel):
             "row": row,
             "params": {},
         }
-        pattern = r'params\.(?P<param>..*)\|default\((?P<default>..*)\).*'
-        i = 0
+        pattern = r'params\.(?P<param>[a-zA-Z0-9_]+)(?:\s*\|.*\s*default\(\s*(?P<default>[^\)]+)\))?'
         for line in gcode:
             if line.startswith("{") and "params." in line:
                 result = re.search(pattern, line)
@@ -151,31 +143,20 @@ class Panel(ScreenPanel):
             self.labels['macros'].show_all()
 
     def add_option(self, boxname, opt_array, opt_name, option):
-        name = Gtk.Label()
+        name = Gtk.Label(hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER,
+                         wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
         name.set_markup(f"<big><b>{option['name']}</b></big>")
-        name.set_hexpand(True)
-        name.set_vexpand(True)
-        name.set_halign(Gtk.Align.START)
-        name.set_valign(Gtk.Align.CENTER)
-        name.set_line_wrap(True)
-        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        box = Gtk.Box()
-        box.set_vexpand(False)
-        switch = Gtk.Switch()
-        switch.set_hexpand(False)
-        switch.set_vexpand(False)
-        switch.set_active(self._config.get_config().getboolean(option['section'], opt_name, fallback=True))
+        box = Gtk.Box(vexpand=False)
+        switch = Gtk.Switch(hexpand=False, vexpand=False,
+                            width_request=round(self._gtk.font_size * 7),
+                            height_request=round(self._gtk.font_size * 3.5),
+                            active=self._config.get_config().getboolean(option['section'], opt_name, fallback=True))
         switch.connect("notify::active", self.switch_config_option, option['section'], opt_name)
-        switch.set_property("width-request", round(self._gtk.font_size * 7))
-        switch.set_property("height-request", round(self._gtk.font_size * 3.5))
         box.add(switch)
 
-        dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        dev = Gtk.Box(hexpand=True, vexpand=False, valign=Gtk.Align.CENTER)
         dev.get_style_context().add_class("frame-item")
-        dev.set_hexpand(True)
-        dev.set_vexpand(False)
-        dev.set_valign(Gtk.Align.CENTER)
         dev.add(name)
         dev.add(box)
 

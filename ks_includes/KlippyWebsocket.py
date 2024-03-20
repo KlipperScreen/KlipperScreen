@@ -38,9 +38,7 @@ class KlippyWebsocket(threading.Thread):
 
     @property
     def ws_proto(self):
-        if int(self.port) in {443, 7130}:
-            return "wss"
-        return "ws"
+        return "wss" if int(self.port) in {443, 7130} else "ws"
 
     def retry(self):
         self.reconnect_count = 0
@@ -78,8 +76,7 @@ class KlippyWebsocket(threading.Thread):
                 return True
             token = self._screen.apiclient.get_oneshot_token()
         except Exception as e:
-            logging.critical(e, exc_info=True)
-            logging.debug("Unable to get oneshot token")
+            logging.debug(f"Unable to get oneshot token {e}")
             return True
 
         self.ws_url = f"{self.ws_proto}://{self._url}/websocket?token={token}"
@@ -92,8 +89,7 @@ class KlippyWebsocket(threading.Thread):
             logging.debug("Starting websocket thread")
             self._wst.start()
         except Exception as e:
-            logging.critical(e, exc_info=True)
-            logging.debug("Error starting web socket")
+            logging.debug(f"Error starting web socket {e}")
             return True
         return False
 
@@ -111,13 +107,13 @@ class KlippyWebsocket(threading.Thread):
                     self.callback_table[response['id']][1],
                     self.callback_table[response['id']][2],
                     *self.callback_table[response['id']][3])
-            GLib.idle_add(self.callback_table[response['id']][0], *args)
+            GLib.idle_add(self.callback_table[response['id']][0], *args, priority=GLib.PRIORITY_HIGH_IDLE)
             self.callback_table.pop(response['id'])
             return
 
         if "method" in response and "on_message" in self._callback:
-            args = response['method'], response['params'][0] if "params" in response else {}
-            GLib.idle_add(self._callback['on_message'], *args)
+            args = (response['method'], response['params'][0] if "params" in response else {})
+            GLib.idle_add(self._callback['on_message'], *args, priority=GLib.PRIORITY_HIGH_IDLE)
         return
 
     def send_method(self, method, params=None, callback=None, *args):
@@ -146,7 +142,7 @@ class KlippyWebsocket(threading.Thread):
         self._screen.reinit_count = 0
         self.reconnect_count = 0
         if "on_connect" in self._callback:
-            GLib.idle_add(self._callback['on_connect'])
+            GLib.idle_add(self._callback['on_connect'], priority=GLib.PRIORITY_HIGH_IDLE)
 
     def on_close(self, *args):
         # args: ws, status, message
@@ -164,7 +160,9 @@ class KlippyWebsocket(threading.Thread):
             self.closing = False
             return
         if "on_close" in self._callback:
-            GLib.idle_add(self._callback['on_close'], "Lost Connection to Moonraker")
+            GLib.idle_add(self._callback['on_close'],
+                          _("Lost Connection to Moonraker"),
+                          priority=GLib.PRIORITY_HIGH_IDLE)
         logging.info("Moonraker Websocket Closed")
         self.connected = False
 

@@ -6,15 +6,23 @@ body:
   - type: markdown
     attributes:
       value: |
-        <!--
-        Note: Please search to see if an issue already exists for the bug you encountered.
-        -->
-        ## Thank you for choosing KlipperScreen
+
+        Please search to see if an issue already exists for the bug you encountered.
 
         This is a bug report, If you need general support, please visit us on [Discord](https://discord.klipper3d.org/)
 
+        # Guidelines:
+        1. Logfile must be provided and not just a little snip, from ks startup up to the bug
+        2. The version used must be from this repo (not a fork)
+        3. The version used shouldn't be too old (older than the last tagged version)
+
+        This bug report will be closed if the guidelines are not respected.
+
+
         #### This is an Open Source project developed voluntarily, there are no Warranties, or ETA.
         [License](https://github.com/KlipperScreen/KlipperScreen/blob/master/LICENSE)
+
+        ### Thank you for choosing KlipperScreen
 
   - type: textarea
     id: what-happened

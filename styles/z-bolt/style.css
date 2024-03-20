@@ -4,12 +4,14 @@
 @define-color color4 #A7E100;
 @define-color bg #13181C;
 @define-color active #324A5E;
+@define-color echo #007D70;
 @define-color error #981E1F;
-@define-color warning #f9a825;
+@define-color warning #F9A825;
+@define-color warning-text #434343;
 @define-color text white;
 @define-color text-inv black;
 @define-color lines #cccccc;
-@define-color switch-scale-bg #3584e4;
+@define-color switch-scale-bg #3584E4;
 
 * {
     color: @text;
@@ -17,6 +19,7 @@
 
 list row,
 treeview.view,
+combobox arrow,
 window {
     background-color: @bg;
 }
@@ -127,24 +130,18 @@ textview .time {
     color: @lines;
 }
 
-.popup {
-    background-color: @text-inv;
-}
-
 .dialog {
     border: @bg;
     background-color: @bg;
 }
 
-.distbutton_active {
+.horizontal_togglebuttons_active {
     background-color: @active;
     border-color: @color1;
-    box-shadow: 0 0 0 .2em @text inset;
+    box-shadow: 0 0 0 .2em @lines inset;
 }
 
-.distbutton_top,
-.distbutton,
-.distbutton_bottom {
+.horizontal_togglebuttons {
     border-color: @lines;
 }
 
@@ -160,16 +157,6 @@ textview .time {
     border-color: @lines;
 }
 
-.tempbutton_top {
-    border-color: @lines;
-}
-
-.tempbutton,
-.tempbutton_bottom {
-    border-color: @lines;
-    border-top-color: @lines;
-}
-
 .message {
     border-color: @error;
     color: @text;
@@ -181,12 +168,19 @@ textview .time {
     color: @text-inv;
 }
 
-.warning {
-    background-color: rgba(30, 204, 39, 0.7);
+.message_popup_echo {
+    background-color: @echo;
 }
 
-.error {
-    background-color: rgba(204, 30, 30, 0.7);
+.message_popup_warning {
+    background-color: @warning;
+}
+
+.message_popup_warning label {
+    color: @warning-text;
+}
+.message_popup_error {
+    background-color: @error;
 }
 
 .keyboard_pad {

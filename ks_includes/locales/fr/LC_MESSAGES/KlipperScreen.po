@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-11-14 17:04+0000\n"
-"Last-Translator: Bahoué <stef.griv@gmail.com>\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"PO-Revision-Date: 2024-03-07 19:01+0000\n"
+"Last-Translator: samuel fradette <fradette20@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/fr/>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.2-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -30,7 +30,7 @@ msgid "24 Hour Time"
 msgstr "Format 24 heures"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr "Un FIRMWARE_RESTART peut résoudre le problème."
+msgstr "La commande FIRMWARE_RESTART peut résoudre le problème."
 
 msgid "ADXL Not Configured"
 msgstr "ADXL non configuré"
@@ -48,18 +48,18 @@ msgid "Add profile"
 msgstr "Ajouter un profil"
 
 msgid "All"
-msgstr "Tous"
+msgstr "Tout"
 
 msgid "Apply"
 msgstr "Appliquer"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr "Appliquer %s%.3f décalage vers Endstop ?"
+msgstr "Appliquer une compensation de %s%.3f au Endstop ?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr "Appliquer %s%.3f décalage pour sonder ?"
+msgstr "Appliquer une compensation de %s%.3f au Z-Offset du palpeur ?"
 
 msgid "Archived"
 msgstr "Archivé"
@@ -74,13 +74,13 @@ msgid "Are you sure you wish to cancel this print?"
 msgstr "Êtes-vous sûr de vouloir annuler cette impression ?"
 
 msgid "Are you sure you wish to disable motors?"
-msgstr "Voulez-vous vraiment désactiver les moteurs?"
+msgstr "Voulez-vous vraiment désactiver les moteurs ?"
 
 msgid "Are you sure you wish to reboot the system?"
-msgstr "Êtes-vous sûr de vouloir redémarrer le système?"
+msgstr "Êtes-vous sûr de vouloir redémarrer le système ?"
 
 msgid "Are you sure you wish to shutdown the system?"
-msgstr "Êtes-vous sûr de vouloir arrêter le système?"
+msgstr "Êtes-vous sûr de vouloir arrêter le système ?"
 
 msgid "Auto"
 msgstr "Auto"
@@ -92,7 +92,7 @@ msgid "Auto-close notifications"
 msgstr "Fermeture automatique des notifications"
 
 msgid "Auto-open Extrude On Pause"
-msgstr "Ouverture automatique de l'extrusion en cas de pause"
+msgstr "Ouvrir le menu Extrusion lors d’une pause"
 
 msgid "Auto-scroll"
 msgstr "Défilement automatique"
@@ -119,7 +119,7 @@ msgid "Camera"
 msgstr "Caméra"
 
 msgid "Can't set above the maximum:"
-msgstr "Impossible de définir au-dessus du maximum:"
+msgstr "Impossible de définir au-dessus du maximum :"
 
 msgid "Cancel"
 msgstr "Annuler"
@@ -128,7 +128,7 @@ msgid "Cancel Print"
 msgstr "Annuler l'impression"
 
 msgid "Cancelled"
-msgstr "Annulé"
+msgstr "Annulée"
 
 msgid "Cancelling"
 msgstr "Annulation"
@@ -168,19 +168,19 @@ msgid "Console"
 msgstr "Console"
 
 msgid "Cooldown"
-msgstr "Refroidissement"
+msgstr "Refroidir"
 
 msgid "DPMS has failed to load and has been disabled"
-msgstr "Le DPMS n'a pas réussi à se charger et a été désactivé"
+msgstr "DPMS n’a pas pu charger et a été désactivé"
 
 msgid "Date"
 msgstr "Date"
 
 msgid "Delete Directory?"
-msgstr "Supprimer le répertoire?"
+msgstr "Supprimer le dossier ?"
 
 msgid "Delete File?"
-msgstr "Supprimer le fichier?"
+msgstr "Supprimer le fichier ?"
 
 msgid "Deselect"
 msgstr "Désélectionner"
@@ -193,13 +193,28 @@ msgstr "Distance (mm)"
 
 #, python-format
 msgid "Do you want to recover %s?"
-msgstr "Voulez-vous récupérer %s?"
+msgstr "Voulez-vous récupérer %s ?"
 
 msgid "Elapsed:"
 msgstr "Écoulé:"
 
+msgid "Ended official support in June 2023"
+msgstr "Fin du support officiel en juin 2023"
+
 msgid "Error"
 msgstr "Erreur"
+
+msgid "Error clearing active spool"
+msgstr "Erreur lors de l'effacement de la bobine active"
+
+msgid "Error getting active spool"
+msgstr "Erreur dans l'obtention de la bobine active"
+
+msgid "Error setting active spool"
+msgstr "Erreur dans le réglage de la bobine active"
+
+msgid "Error trying to fetch spools"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Méthode d'estimation de la durée"
@@ -212,6 +227,9 @@ msgstr "Extra Grande"
 
 msgid "Extrude"
 msgstr "Extrusion"
+
+msgid "Extruders"
+msgstr "Extrudeuse"
 
 msgid "Extrusion +"
 msgstr "Extrusion +"
@@ -250,16 +268,16 @@ msgid "Finding ADXL"
 msgstr "Recherche de l’ADXL"
 
 msgid "Fine Tuning"
-msgstr "Réglages précis"
+msgstr "Ajustements"
 
 msgid "Finish"
-msgstr "Terminé"
+msgstr "Terminer"
 
 msgid "Firmware Restart"
-msgstr "Redémarrage du firmware"
+msgstr "Redémarrer Firmware"
 
 msgid "Flow:"
-msgstr "Flux:"
+msgstr "Débit :"
 
 msgid "Flowrate:"
 msgstr "Débit:"
@@ -268,7 +286,7 @@ msgid "Font Size"
 msgstr "Taille de la police"
 
 msgid "Full Update"
-msgstr "Mise à jour complète"
+msgstr "Mettre à jour"
 
 msgid "Go Back"
 msgstr "Retour"
@@ -286,7 +304,9 @@ msgid "Hide sensors in Temp."
 msgstr "Masquer les capteurs dans Températures"
 
 msgid "Hide temp."
-msgstr "Masquer temp."
+msgstr ""
+"Masquer les\n"
+"températures"
 
 msgid "Home"
 msgstr "Accueil"
@@ -367,6 +387,9 @@ msgstr "Klipper tente de démarrer"
 msgid "Klipper will reboot"
 msgstr "Klipper va redémarrer"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr "KlipperScreen ne sera plus pris en charge en juin 2024"
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -396,6 +419,12 @@ msgstr "Limites"
 
 msgid "Load"
 msgstr "Charger"
+
+msgid "Loading..."
+msgstr "Chargement..."
+
+msgid "Lost Connection to Moonraker"
+msgstr "Perte de connexion avec Moonraker"
 
 msgid "Lower Nozzle"
 msgstr "Rapprocher la buse"
@@ -475,6 +504,12 @@ msgstr "Nouveau"
 msgid "No elegible macros:"
 msgstr "Macros non éligibles :"
 
+msgid "No mesh has been loaded"
+msgstr "Aucun maillage chargé"
+
+msgid "No wireless interface has been found"
+msgstr "Pas de périphérique sans-fil trouvé"
+
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
@@ -482,8 +517,17 @@ msgstr ""
 "Non pris en charge pour la détection automatique, il doit être configuré "
 "dans klipperscreen.conf"
 
+msgid "Not working or not configured"
+msgstr "Ne fonctionne pas ou n'est pas configuré"
+
 msgid "Nothing selected"
 msgstr "Rien de sélectionné"
+
+msgid "Notification log empty"
+msgstr "Journal de notification vide"
+
+msgid "Notifications"
+msgstr "Notifications"
 
 #, python-format
 msgid "Outdated by %d"
@@ -737,13 +781,19 @@ msgid "Up To Date"
 msgstr "À jour"
 
 msgid "Update"
-msgstr "Mise à jour"
+msgstr "Mis à jour"
 
 msgid "Updating"
 msgstr "Mise à jour"
 
 msgid "Uploaded"
 msgstr "Envoyé"
+
+msgid "Warning"
+msgstr "Danger"
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr "WebRTC n'est pas pris en charge par le backend essai du Stream"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Vitesse de déplacement XY (mm/s)"
@@ -801,9 +851,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen va redémarrer"
 
 #~ msgid "Continue"
 #~ msgstr "Continuer"

@@ -22,7 +22,7 @@
 }
 
 button:disabled {
-    opacity: .2;
+    opacity: .5;
 }
 
 list row,
@@ -155,6 +155,15 @@ combobox box button {
 
 combobox arrow {
     min-width: 1em;
+    background-color: @bg;
+}
+
+combobox arrow:disabled {
+-gtk-icon-source: None;
+}
+
+combobox cellview {
+    padding: 0.5em;
 }
 
 entry {
@@ -247,6 +256,10 @@ undershoot.bottom {
     background-image: none;
 }
 
+spinner {
+    animation-timing-function: steps(10);
+}
+
 separator {
     margin: 1em 2em;
     background-color: rgba(255, 255, 255, 0.5);
@@ -266,13 +279,8 @@ trough {
     margin: .5em .5em;
 }
 
-.popup {
-    background-color: @text-inv;
-}
-
-.action_bar {
-    /* min-width: 4.5em; */
-    /* min-height: 4.5em; */
+.action_bar :disabled{
+    opacity: .6;
 }
 
 .title_bar {
@@ -295,36 +303,32 @@ trough {
     margin-top: 1em;
 }
 
-.distbutton_active {
+.horizontal_togglebuttons_active {
     background-color: @active;
     font-weight: 600;
 }
 
-.distbutton_top {
-    border: .15em solid @lines;
-    border-right: 0;
+.horizontal_togglebuttons {
+    border-style: solid;
+    border-color: @lines;
+    border-width: .15em;
+    border-right-width: 0;
+    margin-left: 0;
+    margin-right: 0;
+    min-height: 3em;
+}
+
+.horizontal_togglebuttons:first-child {
     border-top-left-radius: .75em;
     border-bottom-left-radius: .75em;
-    margin-right: 0;
-    min-height: 3em;
+    margin-left: .25em;
 }
 
-.distbutton {
-    border: .15em solid @lines;
-    border-left: .15em solid @lines;
-    border-right: 0;
-    margin-left: 0;
-    margin-right: 0;
-    min-height: 3em;
-}
-
-.distbutton_bottom {
-    border: .15em solid @lines;
-    border-left: .15em solid @lines;
-    border-top-right-radius: .7em;
-    border-bottom-right-radius: .7em;
-    margin-left: 0;
-    min-height: 3em;
+.horizontal_togglebuttons:last-child {
+    border-top-right-radius: .75em;
+    border-bottom-right-radius: .75em;
+    border-right-width: .15em;
+    margin-right: .25em;
 }
 
 .fan_slider {
@@ -516,30 +520,6 @@ trough {
     font-size: 0.95em;
 }
 
-.tempbutton_top {
-    border: .15em solid @lines;
-    border-bottom: 0;
-    border-top-left-radius: .75em;
-    border-top-right-radius: .75em;
-    margin-bottom: 0;
-}
-
-.tempbutton {
-    border: .15em solid @lines;
-    border-top: .15em solid @lines;
-    border-bottom: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.tempbutton_bottom {
-    border: .15em solid @lines;
-    border-top: .15em solid @lines;
-    border-bottom-left-radius: .7em;
-    border-bottom-right-radius: .7em;
-    margin-top: 0;
-}
-
 .updater-item {
     min-height: 3em;
     padding: .2em;
@@ -575,10 +555,14 @@ trough {
 
 popover {
     background-color: @bg;
+    border: 0.1em solid white;
+    padding: 0em;
 }
 
 popover button {
     background-color: @bg;
+    padding: 1em 3.1em;
+    margin: 0;
 }
 
 .screensaver,

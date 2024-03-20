@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
 "PO-Revision-Date: 2023-07-07 16:44+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -197,8 +197,23 @@ msgstr "你想恢復 %s 嗎？"
 msgid "Elapsed:"
 msgstr "已用時間："
 
+msgid "Ended official support in June 2023"
+msgstr ""
+
 msgid "Error"
 msgstr "錯誤"
+
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "估算剩餘時間方式"
@@ -211,6 +226,9 @@ msgstr "特大"
 
 msgid "Extrude"
 msgstr "擠出機"
+
+msgid "Extruders"
+msgstr ""
 
 msgid "Extrusion +"
 msgstr "擠壓 +"
@@ -365,6 +383,9 @@ msgstr "Klipper正在啟動"
 msgid "Klipper will reboot"
 msgstr "Klipper將重新啟動"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr ""
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -392,6 +413,12 @@ msgstr "列印機限制"
 
 msgid "Load"
 msgstr "載入耗材"
+
+msgid "Loading..."
+msgstr ""
+
+msgid "Lost Connection to Moonraker"
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "降低噴嘴"
@@ -471,13 +498,28 @@ msgstr "新的值"
 msgid "No elegible macros:"
 msgstr ""
 
+msgid "No mesh has been loaded"
+msgstr ""
+
+msgid "No wireless interface has been found"
+msgstr ""
+
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr "不支援自動檢測，需要在klpperscreen.conf中進行設定"
 
+msgid "Not working or not configured"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "未選擇任何內容"
+
+msgid "Notification log empty"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -737,6 +779,12 @@ msgstr "正在更新"
 msgid "Uploaded"
 msgstr "上傳於"
 
+msgid "Warning"
+msgstr ""
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
+
 msgid "XY Move Speed (mm/s)"
 msgstr "XY軸移動速度(mm/s)"
 
@@ -790,9 +838,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen將重新啟動"
 
 #~ msgid "Continue"
 #~ msgstr "繼續"

@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-12-27 23:25+0000\n"
-"Last-Translator: eltacoloco <hampus.lind@webbpost.nu>\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"PO-Revision-Date: 2024-01-23 12:01+0000\n"
+"Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/sv/>\n"
 "Language: sv\n"
@@ -198,8 +198,23 @@ msgstr "Vill du återställa %s?"
 msgid "Elapsed:"
 msgstr "Förfluten:"
 
+msgid "Ended official support in June 2023"
+msgstr "Avslutade officiellt stöd i juni 2023"
+
 msgid "Error"
 msgstr "Fel"
+
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Beräknad tidsmetod"
@@ -212,6 +227,9 @@ msgstr "Extra stor"
 
 msgid "Extrude"
 msgstr "Extrudera"
+
+msgid "Extruders"
+msgstr ""
 
 msgid "Extrusion +"
 msgstr "Extrudering +"
@@ -366,6 +384,9 @@ msgstr "Klipper försöker starta"
 msgid "Klipper will reboot"
 msgstr "Klipper kommer att starta om"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr "KlipperScreen kommer att ta bort stödet i juni 2024"
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -394,6 +415,12 @@ msgstr "Begränsningar"
 
 msgid "Load"
 msgstr "Ladda"
+
+msgid "Loading..."
+msgstr "Läser in..."
+
+msgid "Lost Connection to Moonraker"
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Sänk munstycket"
@@ -473,6 +500,12 @@ msgstr "Ny"
 msgid "No elegible macros:"
 msgstr "Inga kvalificerade makron:"
 
+msgid "No mesh has been loaded"
+msgstr "Ingen mesh har laddats"
+
+msgid "No wireless interface has been found"
+msgstr "Inget trådlöst gränssnitt har hittats"
+
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
@@ -480,8 +513,17 @@ msgstr ""
 "Stöds inte för automatisk upptäckt, den måste konfigureras i klipperscreen."
 "conf"
 
+msgid "Not working or not configured"
+msgstr "Fungerar inte eller inte konfigurerad"
+
 msgid "Nothing selected"
 msgstr "Inget valt"
+
+msgid "Notification log empty"
+msgstr "Aviseringsloggen tom"
+
+msgid "Notifications"
+msgstr "Aviseringar"
 
 #, python-format
 msgid "Outdated by %d"
@@ -741,6 +783,12 @@ msgstr "Uppdaterar"
 
 msgid "Uploaded"
 msgstr "Uppladdad"
+
+msgid "Warning"
+msgstr "Varning"
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr "WebRTC stöds inte av backend provar Stream"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY rörelsehastighet (mm/s)"

@@ -12,9 +12,9 @@ The first step to troubleshooting any problem is getting the cause of the error.
 
 Depending on your setup the file could be accessible from the web interface alongside other logs
 
-Mainsail | Fluidd
-:-:|:-:
-![mainsail_logs](img/troubleshooting/logs_mainsail.png) | ![fluidd_logs](img/troubleshooting/logs_fluidd.png)
+|                        Mainsail                         |                       Fluidd                        |
+|:-------------------------------------------------------:|:---------------------------------------------------:|
+| ![mainsail_logs](img/troubleshooting/logs_mainsail.png) | ![fluidd_logs](img/troubleshooting/logs_fluidd.png) |
 
 if you can't find it in the web interface, use sftp to grab the log (for example Filezilla, WinSCP)
 Located at `~/printer_data/logs`or in `/tmp/` if the former doesn't exist.
@@ -74,7 +74,7 @@ cat /var/log/Xorg.0.log
     ```sh
     modprobe: FATAL: Module g2d_23 not found in directory /lib/modules/6.1.21-v8+
     ```
-    This error is common on RaspberryOS when using FBturbo and it's not a related issue.
+    This error is common on RaspberryOS when using FBturbo, it's not a related issue.
 
 !!! abstract "If you see this line in the [system logs](#system-logs):"
     ```sh
@@ -119,20 +119,15 @@ In KliperScreen settings find 'Screen DPMS' and turn it off.
 Your screen doesn't seem to support turning off via software.
 
 KlipperScreen will enable an internal screensaver to make it all black, and hopefully avoid burn-in.
-If you find a way of turning it off and you want to share it: [Contact](Contact.md)
+If you find a way of turning it off, please share it: [Contact](Contact.md)
 
 ## Touch issues
-
 
 [Follow this steps](Troubleshooting/Touch_issues.md)
 
 ## Network panel doesn't list WI-FI networks
 
 [Follow this steps](Troubleshooting/Network.md)
-
-## OctoPrint
-
-KlipperScreen was never intended to be used with OctoPrint, and there is no support for it.
 
 ## Other issues
 

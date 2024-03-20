@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
 "PO-Revision-Date: 2023-12-28 12:05+0000\n"
 "Last-Translator: Dr_Perry_Coke <dr.perrycoke@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.4-dev\n"
 "X-Poedit-Flags-xgettext: --add-comments\n"
 
@@ -199,8 +199,23 @@ msgstr "Вы хотите восстановить%s?"
 msgid "Elapsed:"
 msgstr "Прошло:"
 
+msgid "Ended official support in June 2023"
+msgstr "Официальная поддержка прекращена в июне 2023 г"
+
 msgid "Error"
 msgstr "Ошибка"
+
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Расчётное время"
@@ -213,6 +228,9 @@ msgstr "Очень большой"
 
 msgid "Extrude"
 msgstr "Заправить"
+
+msgid "Extruders"
+msgstr ""
 
 msgid "Extrusion +"
 msgstr "Экструзия +"
@@ -367,9 +385,13 @@ msgstr "Klipper готов"
 msgid "Klipper will reboot"
 msgstr "Klipper перезагрузится"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr "KlipperScreen прекратит поддержку в июне 2024 г"
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT скрыты и должны использоваться из extrude"
+msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT скрыты и должны использоваться из extrude"
 
 msgid "Language"
 msgstr "Язык"
@@ -394,6 +416,12 @@ msgstr "Лимиты"
 
 msgid "Load"
 msgstr "Загрузить"
+
+msgid "Loading..."
+msgstr "Загрузка..."
+
+msgid "Lost Connection to Moonraker"
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Опустить сопло"
@@ -473,6 +501,12 @@ msgstr "Новый"
 msgid "No elegible macros:"
 msgstr "Нет понятных макросов:"
 
+msgid "No mesh has been loaded"
+msgstr ""
+
+msgid "No wireless interface has been found"
+msgstr ""
+
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
@@ -480,8 +514,17 @@ msgstr ""
 "Не поддерживается для автоматического обнаружения, его необходимо настроить "
 "в klipperscreen.conf"
 
+msgid "Not working or not configured"
+msgstr "Не работает или не настроено"
+
 msgid "Nothing selected"
 msgstr "Ничего не выбрано"
+
+msgid "Notification log empty"
+msgstr "Журнал уведомлений пуст"
+
+msgid "Notifications"
+msgstr "Уведомления"
 
 #, python-format
 msgid "Outdated by %d"
@@ -743,6 +786,13 @@ msgstr "Обновление"
 msgid "Uploaded"
 msgstr "Загружено"
 
+msgid "Warning"
+msgstr "Предупреждение"
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
+"Отсутствует поддержка WebRTC у бэкенда, который пытается передать поток"
+
 msgid "XY Move Speed (mm/s)"
 msgstr "Скорость перемещения по осям XY (мм/с)"
 
@@ -802,9 +852,6 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм³/с"
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen перезагрузится"
 
 #~ msgid "Continue"
 #~ msgstr "Продолжить"

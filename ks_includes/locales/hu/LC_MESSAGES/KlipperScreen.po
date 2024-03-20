@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-12-11 19:05+0000\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"PO-Revision-Date: 2024-03-11 11:01+0000\n"
 "Last-Translator: \"Zs.Antal\" <zsikaiantal@icloud.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/hu/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -193,8 +193,23 @@ msgstr "Vissza akarod állítani %s-t?"
 msgid "Elapsed:"
 msgstr "Eltelt:"
 
+msgid "Ended official support in June 2023"
+msgstr "A hivatalos támogatás 2023 júniusában véget ért"
+
 msgid "Error"
 msgstr "Hiba"
+
+msgid "Error clearing active spool"
+msgstr "Hiba az aktív tekercs törlésekor"
+
+msgid "Error getting active spool"
+msgstr "Hiba az aktív tekercs lekérésekor"
+
+msgid "Error setting active spool"
+msgstr "Hiba az aktív tekercs beállításakor"
+
+msgid "Error trying to fetch spools"
+msgstr "Hiba a tekercsek lekérésekor"
 
 msgid "Estimated Time Method"
 msgstr "Becsült idő módszer"
@@ -207,6 +222,9 @@ msgstr "Extra nagy"
 
 msgid "Extrude"
 msgstr "Száladagolás"
+
+msgid "Extruders"
+msgstr "Adagolók"
 
 msgid "Extrusion +"
 msgstr "Adagolás +"
@@ -361,6 +379,9 @@ msgstr "A Klipper megpróbál elindulni"
 msgid "Klipper will reboot"
 msgstr "A Klipper újraindul"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr "A KlipperScreen 2024 júniusában megszünteti a támogatást"
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -389,6 +410,12 @@ msgstr "Korlátok"
 
 msgid "Load"
 msgstr "Betöltés"
+
+msgid "Loading..."
+msgstr "Betöltés..."
+
+msgid "Lost Connection to Moonraker"
+msgstr "Megszakadt a kapcsolat a Moonraker-el"
 
 msgid "Lower Nozzle"
 msgstr "Fúvóka le"
@@ -468,14 +495,30 @@ msgstr "Új"
 msgid "No elegible macros:"
 msgstr "Nincs választható makró:"
 
+msgid "No mesh has been loaded"
+msgstr "Nincs háló betöltve"
+
+msgid "No wireless interface has been found"
+msgstr "Nem található vezeték nélküli interfész"
+
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr ""
-"Az automatikus felismerés nem támogatott, ezt a klipperscreen.conf fájlban kell beállítani."
+"Az automatikus felismerés nem támogatott, ezt a klipperscreen.conf fájlban "
+"kell beállítani."
+
+msgid "Not working or not configured"
+msgstr "Nem működik vagy nincs beállítva"
 
 msgid "Nothing selected"
 msgstr "Nincs kiválasztva"
+
+msgid "Notification log empty"
+msgstr "Értesítési napló üres"
+
+msgid "Notifications"
+msgstr "Értesítések"
 
 #, python-format
 msgid "Outdated by %d"
@@ -735,6 +778,12 @@ msgstr "Frissítés"
 
 msgid "Uploaded"
 msgstr "Feltöltve"
+
+msgid "Warning"
+msgstr "Figyelem"
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr "A WebRTC-t a Streamet próbáló háttérrendszer nem támogatja"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Mozgási seb. (mm/s)"

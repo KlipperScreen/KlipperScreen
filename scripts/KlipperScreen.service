@@ -1,17 +1,39 @@
 [Unit]
 Description=KlipperScreen
-After=moonraker.service
 StartLimitIntervalSec=0
+# Make sure we are started after logins are permitted. If Plymouth is
+# used, we want to start when it is on its way out.
+After=systemd-user-sessions.service plymouth-quit-wait.service
+# On systems without virtual consoles, do not start.
+ConditionPathExists=/dev/tty0
+# D-Bus is necessary for contacting logind, which is required.
+Wants=dbus.socket systemd-logind.service
+After=dbus.socket systemd-logind.service
+# Replace any (a)getty that may have spawned, since we log in
+# automatically.
+Conflicts=getty@%i.service
+After=getty@%i.service
 
 [Service]
 Type=simple
 Restart=always
-RestartSec=1
+RestartSec=2
 User=KS_USER
 SupplementaryGroups=klipperscreen
 WorkingDirectory=KS_DIR
 Environment="KS_XCLIENT=KS_ENV/bin/python KS_DIR/screen.py"
 ExecStart="KS_DIR/scripts/KlipperScreen-start.sh"
 
+# Log this user with utmp, letting it show up with commands 'w' and
+# 'who'. This is needed since we replace (a)getty.
+UtmpIdentifier=tty7
+UtmpMode=user
+# A virtual terminal is needed.
+TTYPath=/dev/tty7
+TTYReset=yes
+TTYVHangup=yes
+TTYVTDisallocate=yes
+
 [Install]
 WantedBy=multi-user.target
+DefaultInstance=tty7

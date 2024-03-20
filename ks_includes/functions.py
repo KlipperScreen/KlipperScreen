@@ -100,6 +100,10 @@ def get_software_version():
     return "?"
 
 
+def parse_bool(value):
+    return value.lower() == "true"
+
+
 def patch_threading_excepthook():
     """Installs our exception handler into the threading modules Thread object
     Inspired by https://bugs.python.org/issue1230540

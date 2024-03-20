@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
 "PO-Revision-Date: 2023-11-16 02:51+0000\n"
 "Last-Translator: bbraeu <braeu.bernhard@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
@@ -198,8 +198,23 @@ msgstr "Möchten Sie zurück zu %s?"
 msgid "Elapsed:"
 msgstr "Laufzeit:"
 
+msgid "Ended official support in June 2023"
+msgstr ""
+
 msgid "Error"
 msgstr "Fehler"
+
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Verbleibende Zeit"
@@ -212,6 +227,9 @@ msgstr "Extra groß"
 
 msgid "Extrude"
 msgstr "Extrudieren"
+
+msgid "Extruders"
+msgstr ""
 
 msgid "Extrusion +"
 msgstr "Extrudieren +"
@@ -366,6 +384,9 @@ msgstr "Klipper versucht zu starten"
 msgid "Klipper will reboot"
 msgstr "Klipper startet neu"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr ""
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -395,6 +416,12 @@ msgstr "Grenzwerte"
 
 msgid "Load"
 msgstr "Laden"
+
+msgid "Loading..."
+msgstr ""
+
+msgid "Lost Connection to Moonraker"
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Düse absenken"
@@ -474,6 +501,12 @@ msgstr "Neu"
 msgid "No elegible macros:"
 msgstr "Keine wählbaren Makros:"
 
+msgid "No mesh has been loaded"
+msgstr ""
+
+msgid "No wireless interface has been found"
+msgstr ""
+
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
@@ -481,8 +514,17 @@ msgstr ""
 "Wird für die automatische Erkennung nicht unterstützt, muss in Klipperscreen."
 "conf konfiguriert werden"
 
+msgid "Not working or not configured"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "Nichts ausgewählt"
+
+msgid "Notification log empty"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -745,6 +787,12 @@ msgstr "Aktualisiere"
 msgid "Uploaded"
 msgstr "Hochgeladen"
 
+msgid "Warning"
+msgstr ""
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
+
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Bewegungsgeschwindigkeit (mm/s)"
 
@@ -801,9 +849,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen startet neu"
 
 #~ msgid "Continue"
 #~ msgstr "Fortsetzen"

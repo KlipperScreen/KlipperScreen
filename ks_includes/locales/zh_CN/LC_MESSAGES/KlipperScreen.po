@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-11-16 02:51+0000\n"
-"Last-Translator: Samuel Wang <imhsaw@gmail.com>\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"PO-Revision-Date: 2024-02-27 18:50+0000\n"
+"Last-Translator: Will Zhai <willzhai55@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "klipperscreen/klipperscreen/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -17,32 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.2-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
 msgstr "%s 将被更新为版本"
 
 msgid "(default)"
-msgstr "(默认)"
+msgstr "（默认）"
 
 msgid "24 Hour Time"
-msgstr "使用24小时制"
+msgstr "24小时制"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "重启Klipper固件可能会解决这个问题。"
 
 msgid "ADXL Not Configured"
-msgstr "未配置ADXL"
+msgstr "未配置加速度计"
 
 msgid "Abort"
-msgstr "放弃"
+msgstr "中止打印"
 
 msgid "Acceleration:"
 msgstr "加速度："
 
 msgid "Accept"
-msgstr "接受"
+msgstr "确定"
 
 msgid "Add profile"
 msgstr "添加配置文件"
@@ -140,7 +140,7 @@ msgid "Channel"
 msgstr "群组"
 
 msgid "Check ADXL Wiring"
-msgstr "检查ADXL的接线"
+msgstr "请检查加速度计的连线"
 
 msgid "Checking for updates, please wait..."
 msgstr "正在检查更新，请稍等..."
@@ -155,7 +155,7 @@ msgid "Complete"
 msgstr "完成"
 
 msgid "Confirm Emergency Stop"
-msgstr "紧急停止需确认"
+msgstr "紧急停止需要二次确认"
 
 msgid "Connected"
 msgstr "已连接"
@@ -171,7 +171,7 @@ msgid "Cooldown"
 msgstr "冷却"
 
 msgid "DPMS has failed to load and has been disabled"
-msgstr "屏幕省电管理系统无法加载已禁用"
+msgstr "屏幕省电管理系统无法加载并已禁用"
 
 msgid "Date"
 msgstr "日期"
@@ -198,8 +198,23 @@ msgstr "你想恢复 %s 吗？"
 msgid "Elapsed:"
 msgstr "已用时间："
 
+msgid "Ended official support in June 2023"
+msgstr "2023年6月结束官方支持"
+
 msgid "Error"
 msgstr "错误"
+
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "估算剩余时间方式"
@@ -213,11 +228,14 @@ msgstr "特大"
 msgid "Extrude"
 msgstr "挤出"
 
+msgid "Extruders"
+msgstr ""
+
 msgid "Extrusion +"
-msgstr "挤压+"
+msgstr "挤出量 +"
 
 msgid "Extrusion -"
-msgstr "挤压 -"
+msgstr "挤出量 -"
 
 msgid "Failed, adjust position first"
 msgstr "失败，请先调整位置"
@@ -247,7 +265,7 @@ msgid "Filter"
 msgstr "筛选"
 
 msgid "Finding ADXL"
-msgstr "查找ADXL"
+msgstr "查找加速度计中"
 
 msgid "Fine Tuning"
 msgstr "微调"
@@ -366,9 +384,12 @@ msgstr "Klipper正在启动"
 msgid "Klipper will reboot"
 msgstr "Klipper将重新启动"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr "KlipperScreen将于2024 年6月停止适配"
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT 被隐藏，应在挤出控制界面使用"
+msgstr "加载耗材/卸载耗材 已被隐藏，请前往在挤出控制界面"
 
 msgid "Language"
 msgstr "界面语言"
@@ -394,11 +415,17 @@ msgstr "打印机限制"
 msgid "Load"
 msgstr "载入耗材"
 
+msgid "Loading..."
+msgstr "加载中..."
+
+msgid "Lost Connection to Moonraker"
+msgstr ""
+
 msgid "Lower Nozzle"
 msgstr "降低喷嘴"
 
 msgid "Macro shortcut on sidebar"
-msgstr "显示侧边栏宏按钮"
+msgstr "在侧边栏显示宏按钮"
 
 msgid "Macros"
 msgstr "宏"
@@ -446,7 +473,7 @@ msgid "Modified"
 msgstr "已修改"
 
 msgid "Moonraker: connected"
-msgstr "Moonraker：已连接"
+msgstr "Moonraker: 已连接"
 
 msgid "More"
 msgstr "更多设置"
@@ -472,13 +499,28 @@ msgstr "新的值"
 msgid "No elegible macros:"
 msgstr "无可用宏："
 
+msgid "No mesh has been loaded"
+msgstr "未加载网床"
+
+msgid "No wireless interface has been found"
+msgstr "未找到无线接口"
+
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr "不支持自动检测，需要在klpperscreen.conf中进行配置"
 
+msgid "Not working or not configured"
+msgstr "不工作或未配置"
+
 msgid "Nothing selected"
 msgstr "未选择任何内容"
+
+msgid "Notification log empty"
+msgstr "通知日志为空"
+
+msgid "Notifications"
+msgstr "通知"
 
 #, python-format
 msgid "Outdated by %d"
@@ -519,7 +561,7 @@ msgid "Power On Printer"
 msgstr "打印机通电"
 
 msgid "Pressure Advance:"
-msgstr "压力推进："
+msgstr "压力提前："
 
 msgid "Print"
 msgstr "打印"
@@ -561,10 +603,10 @@ msgid "Recover"
 msgstr "恢复"
 
 msgid "Recover Hard"
-msgstr "版本回退(清空修改内容)"
+msgstr "版本回退（清空修改内容）"
 
 msgid "Recover Soft"
-msgstr "版本回退(保留修改内容)"
+msgstr "版本回退（保留修改内容）"
 
 msgid "Reference"
 msgstr "参考"
@@ -622,7 +664,7 @@ msgid "Screen DPMS"
 msgstr "屏幕省电管理系统"
 
 msgid "Screen Power Off Time"
-msgstr "关闭屏幕时间"
+msgstr "自动息屏"
 
 msgid "Screws Adjust"
 msgstr "螺丝调整"
@@ -643,7 +685,7 @@ msgid "Show"
 msgstr "显示"
 
 msgid "Show Heater Power"
-msgstr "显示加热器功率"
+msgstr "显示加热器功率（%）"
 
 msgid "Show Scrollbars Buttons"
 msgstr "显示滚动条按钮"
@@ -664,7 +706,7 @@ msgid "Small"
 msgstr "小"
 
 msgid "Speed (mm/s)"
-msgstr "速度(mm/s)"
+msgstr "速度（mm/s）"
 
 msgid "Speed +"
 msgstr "速度 +"
@@ -703,7 +745,7 @@ msgid "System Shutdown"
 msgstr "关闭系统"
 
 msgid "Temp (°C)"
-msgstr "温度 (°C)"
+msgstr "温度 （°C）"
 
 msgid "Temperature"
 msgstr "温度"
@@ -738,20 +780,26 @@ msgstr "正在更新"
 msgid "Uploaded"
 msgstr "上传于"
 
+msgid "Warning"
+msgstr "警告"
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr "不支持传送WebRTC至后台"
+
 msgid "XY Move Speed (mm/s)"
-msgstr "XY轴移动速度(mm/s)"
+msgstr "XY轴移动速度（mm/s）"
 
 msgid "XY Speed (mm/s)"
-msgstr "XY轴速度(mm/s)"
+msgstr "XY轴速度（mm/s）"
 
 msgid "Z Calibrate"
 msgstr "Z偏移校准"
 
 msgid "Z Move Speed (mm/s)"
-msgstr "Z轴移动速度(mm/s)"
+msgstr "Z轴移动速度（mm/s）"
 
 msgid "Z Speed (mm/s)"
-msgstr "Z轴速度(mm/s)"
+msgstr "Z轴速度（mm/s）"
 
 msgid "Z Tilt"
 msgstr "Z轴倾斜校准"
@@ -771,14 +819,14 @@ msgid_plural "hours"
 msgstr[0] "小时"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr "使用 \"rename_existing \"的宏将被隐藏"
+msgstr "使用\"rename_existing\"的宏将被隐藏"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "名称以\"_\"开头的宏将被隐藏"
 
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "分"
+msgstr[0] "分钟"
 
 msgid "mm"
 msgstr "mm"
@@ -791,9 +839,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen将重新启动"
 
 #~ msgid "Continue"
 #~ msgstr "继续"

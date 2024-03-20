@@ -24,5 +24,5 @@ This panel has more information than it shows by default, just click/tap the cor
 
 ## Extra temperature items
 
-By default only extruder and bed temperatures will be available but additional items can be defined
+By default, only extruder and bed temperatures will be available but additional items can be defined
 using ["titlebar_items" in the config](../Configuration.md#printer-options)

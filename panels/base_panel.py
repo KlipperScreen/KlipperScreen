@@ -10,7 +10,6 @@ from gi.repository import GLib, Gtk, Pango
 from jinja2 import Environment
 from datetime import datetime
 from math import log
-from contextlib import suppress
 from ks_includes.screen_panel import ScreenPanel
 
 
@@ -25,16 +24,28 @@ class BasePanel(ScreenPanel):
         self.titlebar_items = []
         self.titlebar_name_type = None
         self.current_extruder = None
+        self.last_usage_report = datetime.now()
+        self.usage_report = 0
         # Action bar buttons
         abscale = self.bts * 1.1
         self.control['back'] = self._gtk.Button('back', scale=abscale)
         self.control['back'].connect("clicked", self.back)
         self.control['home'] = self._gtk.Button('main', scale=abscale)
         self.control['home'].connect("clicked", self._screen._menu_go_back, True)
-        #self.control['estop'] = self._gtk.Button('emergency', scale=abscale)
-        #self.control['estop'].connect("clicked", self.emergency_stop)
+        
         for control in self.control:
             self.set_control_sensitive(False, control)
+        self.control['estop'] = self._gtk.Button('emergency', scale=abscale)
+        self.control['estop'].connect("clicked", self.emergency_stop)
+        self.control['estop'].set_no_show_all(True)
+        self.shutdown = {
+            "name": None,
+            "panel": "shutdown",
+            "icon": "shutdown",
+        }
+        self.control['shutdown'] = self._gtk.Button('shutdown', scale=abscale)
+        self.control['shutdown'].connect("clicked", self.menu_item_clicked, self.shutdown)
+        self.control['shutdown'].set_no_show_all(True)
         self.control['printer_select'] = self._gtk.Button('shuffle', scale=abscale)
         self.control['printer_select'].connect("clicked", self._screen.show_printer_select)
         self.control['printer_select'].set_no_show_all(True)
@@ -66,7 +77,10 @@ class BasePanel(ScreenPanel):
         self.action_bar.add(self.control['home'])
         self.action_bar.add(self.control['printer_select'])
         self.action_bar.add(self.control['shortcut'])
-        #self.action_bar.add(self.control['estop'])
+
+        self.action_bar.add(self.control['estop'])
+        self.action_bar.add(self.control['shutdown'])
+
         self.show_printer_select(len(self._config.get_printers()) > 1)
 
         # Titlebar
@@ -74,25 +88,16 @@ class BasePanel(ScreenPanel):
         # This box will be populated by show_heaters
         self.control['temp_box'] = Gtk.Box(spacing=10)
 
-        self.titlelbl = Gtk.Label()
-        self.titlelbl.set_hexpand(True)
-        self.titlelbl.set_halign(Gtk.Align.CENTER)
-        self.titlelbl.set_ellipsize(Pango.EllipsizeMode.END)
+        self.titlelbl = Gtk.Label(hexpand=True, halign=Gtk.Align.CENTER, ellipsize=Pango.EllipsizeMode.END)
         self.set_title(title)
 
         self.control['time'] = Gtk.Label(label="00:00 AM")
-        self.control['time_box'] = Gtk.Box()
-        self.control['time_box'].set_halign(Gtk.Align.END)
+        self.control['time_box'] = Gtk.Box(halign=Gtk.Align.END)
         self.control['time_box'].pack_end(self.control['time'], True, True, 10)
 
-        self.control['ip_box'] = Gtk.Box()
-        self.control['ip'] = Gtk.Label(label=self.ip)
-        self.control['ip_box'].set_halign(Gtk.Align.END)
-        self.control['ip_box'].pack_end(self.control['ip'], True, True, 10)
 
-        self.titlebar = Gtk.Box(spacing=5)
+        #self.titlebar = Gtk.Box(spacing=5, valign=Gtk.Align.CENTER)
         self.titlebar.get_style_context().add_class("title_bar")
-        self.titlebar.set_valign(Gtk.Align.CENTER)
         self.titlebar.add(self.control['temp_box'])
         self.titlebar.add(self.titlelbl)
         #self.titlebar.add(self.control['time_box'])
@@ -124,9 +129,7 @@ class BasePanel(ScreenPanel):
 
             img_size = self._gtk.img_scale * self.bts
             for device in devices:
-                self.labels[device] = Gtk.Label()
-                self.labels[device].set_ellipsize(Pango.EllipsizeMode.START)
-
+                self.labels[device] = Gtk.Label(ellipsize=Pango.EllipsizeMode.START)
                 self.labels[f'{device}_box'] = Gtk.Box()
                 icon = self.get_icon(device, img_size)
                 if icon is not None:
@@ -135,18 +138,23 @@ class BasePanel(ScreenPanel):
 
             # Limit the number of items according to resolution
             nlimit = int(round(log(self._screen.width, 10) * 5 - 10.5))
-
             n = 0
-            self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-            if self.current_extruder and f"{self.current_extruder}_box" in self.labels:
-                self.control['temp_box'].add(self.labels[f"{self.current_extruder}_box"])
-                n += 1
-
+            if len(self._printer.get_tools()) > (nlimit - 1):
+                self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+                if self.current_extruder and f"{self.current_extruder}_box" in self.labels:
+                    self.control['temp_box'].add(self.labels[f"{self.current_extruder}_box"])
+            else:
+                self.current_extruder = False
             for device in devices:
-                if device == 'heater_bed':
-                    self.control['temp_box'].add(self.labels['heater_bed_box'])
+                if n >= nlimit:
+                    break
+                if device.startswith("extruder") and self.current_extruder is False:
+                    self.control['temp_box'].add(self.labels[f"{device}_box"])
                     n += 1
-                    continue
+                elif device.startswith("heater"):
+                    self.control['temp_box'].add(self.labels[f"{device}_box"])
+                    n += 1
+            for device in devices:
                 # Users can fill the bar if they want
                 if n >= nlimit + 1:
                     break
@@ -157,13 +165,6 @@ class BasePanel(ScreenPanel):
                         n += 1
                         break
 
-            # If there is enough space fill with heater_generic
-            for device in self._printer.get_heaters():
-                if n >= nlimit:
-                    break
-                if device.startswith("heater_generic"):
-                    self.control['temp_box'].add(self.labels[f"{device}_box"])
-                    n += 1
             self.control['temp_box'].show_all()
         except Exception as e:
             logging.debug(f"Couldn't create heaters box: {e}")
@@ -194,10 +195,13 @@ class BasePanel(ScreenPanel):
             self.time_update = GLib.timeout_add_seconds(15, self.update_ip)
 
     def add_content(self, panel):
-        show = self._printer is not None and self._printer.state not in ('disconnected', 'startup', 'shutdown', 'error')
-        self.show_shortcut(show)
-        self.show_heaters(show)
-        #self.set_control_sensitive(show, control='estop')
+
+        printing = self._printer and self._printer.state in {"printing", "paused"}
+        connected = self._printer and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'}
+        self.control['estop'].set_visible(printing)
+        self.control['shutdown'].set_visible(not printing)
+        self.show_shortcut(connected)
+        self.show_heaters(connected)
         for control in ('back', 'home'):
             self.set_control_sensitive(len(self._screen._cur_panels) > 1, control=control)
         self.current_panel = panel
@@ -214,50 +218,72 @@ class BasePanel(ScreenPanel):
             self._screen._menu_go_back()
 
     def process_update(self, action, data):
+        if action == "notify_proc_stat_update":
+            cpu = (max(data["system_cpu_usage"][core] for core in data["system_cpu_usage"] if core.startswith("cpu")))
+            memory = (data["system_memory"]["used"] / data["system_memory"]["total"]) * 100
+            error = "message_popup_error"
+            ctx = self.titlebar.get_style_context()
+            msg = f"CPU: {cpu:2.0f}%    RAM: {memory:2.0f}%"
+            if cpu > 80 or memory > 85:
+                if self.usage_report < 3:
+                    self.usage_report += 1
+                    return
+                self.last_usage_report = datetime.now()
+                if not ctx.has_class(error):
+                    ctx.add_class(error)
+                self._screen.log_notification(msg, 3)
+                self.titlelbl.set_label(msg)
+            elif ctx.has_class(error):
+                self.titlelbl.set_label(msg)
+                if (datetime.now() - self.last_usage_report).seconds < 5:
+                    return
+                self.usage_report = 0
+                ctx.remove_class(error)
+                self.titlelbl.set_label(f"{self._screen.connecting_to_printer}")
+            return
+
         if action == "notify_update_response":
             if self.update_dialog is None:
                 self.show_update_dialog()
-            with suppress(KeyError):
+            if 'message' in data:
                 self.labels['update_progress'].set_text(
                     f"{self.labels['update_progress'].get_text().strip()}\n"
                     f"{data['message']}\n")
-            with suppress(KeyError):
-                if data['complete']:
-                    logging.info("Update complete")
-                    if self.update_dialog is not None:
-                        try:
-                            self.update_dialog.set_response_sensitive(Gtk.ResponseType.OK, True)
-                            self.update_dialog.get_widget_for_response(Gtk.ResponseType.OK).show()
-                        except AttributeError:
-                            logging.error("error trying to show the updater button the dialog might be closed")
-                            self._screen.updating = False
-                            for dialog in self._screen.dialogs:
-                                self._gtk.remove_dialog(dialog)
+            if 'complete' in data and data['complete']:
+                logging.info("Update complete")
+                if self.update_dialog is not None:
+                    try:
+                        self.update_dialog.set_response_sensitive(Gtk.ResponseType.OK, True)
+                        self.update_dialog.get_widget_for_response(Gtk.ResponseType.OK).show()
+                    except AttributeError:
+                        logging.error("error trying to show the updater button the dialog might be closed")
+                        self._screen.updating = False
+                        for dialog in self._screen.dialogs:
+                            self._gtk.remove_dialog(dialog)
+            return
 
         if action != "notify_status_update" or self._screen.printer is None:
             return
-        devices = (self._printer.get_temp_devices())
-        if devices is not None:
-            for device in devices:
-                temp = self._printer.get_dev_stat(device, "temperature")
-                if temp is not None and device in self.labels:
-                    name = ""
-                    if not (device.startswith("extruder") or device.startswith("heater_bed")):
-                        if self.titlebar_name_type == "full":
-                            name = device.split()[1] if len(device.split()) > 1 else device
-                            name = f'{self.prettify(name)}: '
-                        elif self.titlebar_name_type == "short":
-                            name = device.split()[1] if len(device.split()) > 1 else device
-                            name = f"{name[:1].upper()}: "
-                    self.labels[device].set_label(f"{name}{int(temp)}°")
+        for device in self._printer.get_temp_devices():
+            temp = self._printer.get_dev_stat(device, "temperature")
+            if temp is not None and device in self.labels:
+                name = ""
+                if not (device.startswith("extruder") or device.startswith("heater_bed")):
+                    if self.titlebar_name_type == "full":
+                        name = device.split()[1] if len(device.split()) > 1 else device
+                        name = f'{self.prettify(name)}: '
+                    elif self.titlebar_name_type == "short":
+                        name = device.split()[1] if len(device.split()) > 1 else device
+                        name = f"{name[:1].upper()}: "
+                self.labels[device].set_label(f"{name}{int(temp)}°")
 
-        with suppress(Exception):
-            if data["toolhead"]["extruder"] != self.current_extruder:
-                self.control['temp_box'].remove(self.labels[f"{self.current_extruder}_box"])
-                self.current_extruder = data["toolhead"]["extruder"]
-                self.control['temp_box'].pack_start(self.labels[f"{self.current_extruder}_box"], True, True, 3)
-                self.control['temp_box'].reorder_child(self.labels[f"{self.current_extruder}_box"], 0)
-                self.control['temp_box'].show_all()
+        if (self.current_extruder and 'toolhead' in data and 'extruder' in data['toolhead']
+                and data["toolhead"]["extruder"] != self.current_extruder):
+            self.control['temp_box'].remove(self.labels[f"{self.current_extruder}_box"])
+            self.current_extruder = data["toolhead"]["extruder"]
+            self.control['temp_box'].pack_start(self.labels[f"{self.current_extruder}_box"], True, True, 3)
+            self.control['temp_box'].reorder_child(self.labels[f"{self.current_extruder}_box"], 0)
+            self.control['temp_box'].show_all()
 
         return False
 
@@ -275,6 +301,7 @@ class BasePanel(ScreenPanel):
         )
         self.control['shortcut'].set_visible(show)
         self.set_control_sensitive(self._screen._cur_panels[-1] != self.shorcut['panel'])
+        self.set_control_sensitive(self._screen._cur_panels[-1] != self.shutdown['panel'], control='shutdown')
 
     def show_printer_select(self, show=True):
         self.control['printer_select'].set_visible(show)
@@ -319,13 +346,9 @@ class BasePanel(ScreenPanel):
     def show_update_dialog(self):
         if self.update_dialog is not None:
             return
-        button = [{"name": _("Finish"), "response": Gtk.ResponseType.OK, "style": 'dialog-default'}]
-        self.labels['update_progress'] = Gtk.Label()
-        self.labels['update_progress'].set_halign(Gtk.Align.START)
-        self.labels['update_progress'].set_valign(Gtk.Align.START)
-        self.labels['update_progress'].set_ellipsize(Pango.EllipsizeMode.END)
+        button = [{"name": _("Finish"), "response": Gtk.ResponseType.OK}]
+        self.labels['update_progress'] = Gtk.Label(hexpand=True, vexpand=True, ellipsize=Pango.EllipsizeMode.END)
         self.labels['update_scroll'] = self._gtk.ScrolledWindow(steppers=False)
-        self.labels['update_scroll'].set_size_request(self._gtk.width - 30, self._gtk.height * .6)
         self.labels['update_scroll'].set_property("overlay-scrolling", True)
         self.labels['update_scroll'].add(self.labels['update_progress'])
         self.labels['update_scroll'].connect("size-allocate", self._autoscroll)

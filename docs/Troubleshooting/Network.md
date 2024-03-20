@@ -30,7 +30,7 @@ this line may appear in KlipperScreen.log:
     [wifi_nm.py:rescan()] [...] NetworkManager.wifi.scan request failed: not authorized
     ```
 
-if version of KlipperScreen installed was previous than v0.3.8, then re-run the installer and reboot
+if version of KlipperScreen installed was previous than v0.3.9, then re-run the installer and reboot
 
 
 ??? Alternative workaround for network-manager

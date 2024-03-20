@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: boyon\n"
 "Language-Team: \n"
@@ -192,8 +192,23 @@ msgstr "元に戻しますか %s ？"
 msgid "Elapsed:"
 msgstr "経過時間:"
 
+msgid "Ended official support in June 2023"
+msgstr ""
+
 msgid "Error"
 msgstr "エラー"
+
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "予定時刻"
@@ -206,6 +221,9 @@ msgstr "特大"
 
 msgid "Extrude"
 msgstr "吐出"
+
+msgid "Extruders"
+msgstr ""
 
 msgid "Extrusion +"
 msgstr "吐出＋"
@@ -360,6 +378,9 @@ msgstr "Klipperは起動中です"
 msgid "Klipper will reboot"
 msgstr "Klipperは再起動します"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr ""
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -386,6 +407,12 @@ msgid "Limits"
 msgstr "制限"
 
 msgid "Load"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "Lost Connection to Moonraker"
 msgstr ""
 
 msgid "Lower Nozzle"
@@ -466,13 +493,28 @@ msgstr "新"
 msgid "No elegible macros:"
 msgstr ""
 
+msgid "No mesh has been loaded"
+msgstr ""
+
+msgid "No wireless interface has been found"
+msgstr ""
+
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr ""
 
+msgid "Not working or not configured"
+msgstr ""
+
 msgid "Nothing selected"
 msgstr "未選択"
+
+msgid "Notification log empty"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -732,6 +774,12 @@ msgstr "更新中"
 msgid "Uploaded"
 msgstr "アップロード済"
 
+msgid "Warning"
+msgstr ""
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
+
 msgid "XY Move Speed (mm/s)"
 msgstr "XY移動速度 (mm/s)"
 
@@ -785,9 +833,6 @@ msgstr ""
 
 msgid "mm³/s"
 msgstr ""
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreenは再起動します"
 
 #~ msgid "Continue"
 #~ msgstr "継続"

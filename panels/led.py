@@ -16,8 +16,8 @@ class Panel(ScreenPanel):
         self.preview = Gtk.DrawingArea(width_request=self.da_size, height_request=self.da_size)
         self.preview.set_size_request(-1, self.da_size * 2)
         self.preview.connect("draw", self.on_draw)
-        self.preview_label = Gtk.Label(label='')
-        self.preset_list = self._gtk.HomogeneousGrid()
+        self.preview_label = Gtk.Label()
+        self.preset_list = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         self.color_data = [0, 0, 0, 0]
         self.color_order = 'RGBW'
         self.presets = {"off": [0.0, 0.0, 0.0, 0.0]}
@@ -61,7 +61,7 @@ class Panel(ScreenPanel):
     def led_selector(self):
         self.current_led = None
         columns = 3 if self._screen.vertical_mode else 4
-        grid = self._gtk.HomogeneousGrid()
+        grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         for i, led in enumerate(self.leds):
             name = led.split()[1] if len(led.split()) > 1 else led
             button = self._gtk.Button(None, name.upper(), style=f"color{(i % 4) + 1}")
@@ -75,7 +75,7 @@ class Panel(ScreenPanel):
         logging.info(led)
         self.current_led = led
         self.set_title(f"{self.current_led}")
-        grid = self._gtk.HomogeneousGrid()
+        grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         self.color_order = self._printer.get_led_color_order(led)
         if self.color_order is None:
             logging.error("Error: Color order is None")
@@ -83,7 +83,7 @@ class Panel(ScreenPanel):
             return
         on = [1 if self.color_available(i) else 0 for i in range(4)]
         self.presets["on"] = on
-        scale_grid = self._gtk.HomogeneousGrid()
+        scale_grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         for idx, col_value in enumerate(self.color_data):
             if not self.color_available(idx):
                 continue
@@ -95,7 +95,7 @@ class Panel(ScreenPanel):
             button.set_image(preview)
             button.connect("clicked", self.apply_preset, color)
             button.set_hexpand(False)
-            scale = Gtk.Scale.new_with_range(orientation=Gtk.Orientation.HORIZONTAL, min=0, max=255, step=1)
+            scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, min=0, max=255, step=1)
             scale.set_value(round(col_value * 255))
             scale.set_digits(0)
             scale.set_hexpand(True)
@@ -126,10 +126,9 @@ class Panel(ScreenPanel):
 
         scroll = self._gtk.ScrolledWindow()
         scroll.add(self.preset_list)
-        preview_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        preview_box = Gtk.Box(homogeneous=True)
         preview_box.add(self.preview_label)
         preview_box.add(self.preview)
-        preview_box.set_homogeneous(True)
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.add(preview_box)
         box.add(scroll)

@@ -7,16 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2022-11-30 18:14-0300\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"PO-Revision-Date: 2024-02-22 00:02+0000\n"
+"Last-Translator: Matheus Mösken Diegues <dmosken2015@gmail.com>\n"
+"Language-Team: Portuguese <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.2.1\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -170,13 +171,13 @@ msgid "Cooldown"
 msgstr "Resfriar"
 
 msgid "DPMS has failed to load and has been disabled"
-msgstr ""
+msgstr "Gerenciador de economia de energia não disponível"
 
 msgid "Date"
 msgstr "Data"
 
 msgid "Delete Directory?"
-msgstr ""
+msgstr "Deletar diretório?"
 
 msgid "Delete File?"
 msgstr "Excluir Arquivo?"
@@ -197,8 +198,23 @@ msgstr "Deseja recuperar %s?"
 msgid "Elapsed:"
 msgstr "Tempo Corrido:"
 
+msgid "Ended official support in June 2023"
+msgstr "Suporte oficial encerrado em Junho de 2023"
+
 msgid "Error"
 msgstr "Erro"
+
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Método de Tempo Estimado"
@@ -211,6 +227,9 @@ msgstr "Extra Grande"
 
 msgid "Extrude"
 msgstr "Extrusão"
+
+msgid "Extruders"
+msgstr ""
 
 msgid "Extrusion +"
 msgstr "+ Extrusão"
@@ -317,14 +336,11 @@ msgstr "ID"
 msgid "Icon Theme"
 msgstr "Tema"
 
-msgid "Notifications"
-msgstr "Notificações"
-
 msgid "Initializing printer..."
 msgstr "Inicializando Impressora..."
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "Iniciar calibração do PID para:"
 
 msgid "Input Shaper"
 msgstr "Moldagem Assistiva"
@@ -349,6 +365,7 @@ msgstr "Inverter Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr ""
+"Isso pode levar mais que 5 minutos dependendo da potencia do aquecedor."
 
 msgid "Klipper Restart"
 msgstr "Reiniciar Klipper"
@@ -367,6 +384,9 @@ msgstr "Klipper está iniciando"
 
 msgid "Klipper will reboot"
 msgstr "Klipper será reiniciado"
+
+msgid "KlipperScreen will drop support in June 2024"
+msgstr "KlipperScreen perderá o suporte em Junho de 2024"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
@@ -395,6 +415,12 @@ msgstr "Limites"
 
 msgid "Load"
 msgstr "Carregar"
+
+msgid "Loading..."
+msgstr ""
+
+msgid "Lost Connection to Moonraker"
+msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Descer Extrusor"
@@ -472,7 +498,13 @@ msgid "New"
 msgstr "Novo"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "Sem macros elegíveis:"
+
+msgid "No mesh has been loaded"
+msgstr "Nenhuma malha foi carregada"
+
+msgid "No wireless interface has been found"
+msgstr "Nenhuma interface sem fio foi encontrada"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -481,8 +513,17 @@ msgstr ""
 "Não é compatível com detecção automática, precisa ser configurado no "
 "klipperscreen.conf"
 
+msgid "Not working or not configured"
+msgstr "Não funciona ou não está configurado"
+
 msgid "Nothing selected"
 msgstr "Nada selecionado"
+
+msgid "Notification log empty"
+msgstr "Log de notificação vazio"
+
+msgid "Notifications"
+msgstr "Notificações"
 
 #, python-format
 msgid "Outdated by %d"
@@ -554,7 +595,7 @@ msgid "Profile Name:"
 msgstr "Nome do Perfil:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "Forneça o KlipperScreen.log quando pedir ajuda.\n"
 
 msgid "Quad Gantry Level"
 msgstr "Nível do pórtico quádruplo"
@@ -743,6 +784,12 @@ msgstr "Atualizando"
 msgid "Uploaded"
 msgstr "Carregado"
 
+msgid "Warning"
+msgstr ""
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
+
 msgid "XY Move Speed (mm/s)"
 msgstr "Velocidade de Movimento XY (mm/s)"
 
@@ -785,8 +832,8 @@ msgstr "macros que iniciam com '_' são ocultos"
 
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minuto"
+msgstr[1] "minutos"
 
 msgid "mm"
 msgstr "mm"
@@ -799,9 +846,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen será reiniciado"
 
 #~ msgid "Continue"
 #~ msgstr "Continuar"

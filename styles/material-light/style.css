@@ -10,7 +10,6 @@
 @define-color warning #FFE082;
 @define-color error #EF9A9A;
 @define-color echo #a1ef9a;
-@define-color popup #006064;
 @define-color textview #212121;
 
 * {
@@ -135,10 +134,6 @@ entry {
     background-color: @bg;
 }
 
-.frame-item {
-    border-bottom-color: @border;
-}
-
 label {
     color: @text;
 }
@@ -196,35 +191,25 @@ textview .time {
     color: @border;
 }
 
-.popup {
-    background-color: @popup;
-}
-
-.dialog {
-    border: @border;
-    background-color: @bg;
-}
-
-.tempbutton_top,
-.tempbutton,
-.tempbutton_bottom,
-.distbutton_top,
-.distbutton,
-.distbutton_bottom  {
+.horizontal_togglebuttons  {
     border-color: @border;
     background-color: @bg;
 }
 
-.distbutton_active {
+.horizontal_togglebuttons_active {
     background-color: @active;
 }
 
-.distbutton_active label {
+.horizontal_togglebuttons_active label {
     color: @text;
 }
 
 .fan_slider {
     color: @bg;
+}
+
+.frame-item {
+    border-bottom-color: @border;
 }
 
 .message_popup {
@@ -284,6 +269,11 @@ textview .time {
 
 .keyboard_pad {
     background-color: @border;
+}
+
+.dialog {
+    border: @border;
+    background-color: @bg;
 }
 
 .dialog button {

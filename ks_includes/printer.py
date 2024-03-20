@@ -6,7 +6,7 @@ from gi.repository import GLib
 
 
 class Printer:
-    def __init__(self, state_cb, state_callbacks, busy_cb):
+    def __init__(self, state_cb, state_callbacks):
         self.config = {}
         self.data = {}
         self.state = "disconnected"
@@ -22,29 +22,27 @@ class Printer:
         self.output_pin_count = 0
         self.store_timeout = None
         self.tempstore = {}
-        self.busy_cb = busy_cb
-        self.busy = False
         self.tempstore_size = 1200
         self.cameras = []
         self.available_commands = {}
         self.spoolman = False
+        self.temp_devices = self.sensors = None
 
     def reinit(self, printer_info, data):
         self.config = data['configfile']['config']
         self.data = data
-        self.devices = {}
-        self.tools = []
+        self.devices.clear()
+        self.tools.clear()
         self.extrudercount = 0
         self.tempdevcount = 0
         self.fancount = 0
         self.ledcount = 0
         self.output_pin_count = 0
-        self.tempstore = {}
-        self.busy = False
-        if not self.store_timeout:
-            self.store_timeout = GLib.timeout_add_seconds(1, self._update_temp_store)
+        self.tempstore.clear()
         self.tempstore_size = 1200
-        self.available_commands = {}
+        self.available_commands.clear()
+        self.temp_devices = self.sensors = None
+        self.stop_tempstore_updates()
 
         for x in self.config.keys():
             if x[:8] == "extruder":
@@ -107,6 +105,12 @@ class Printer:
         logging.info(f"# Output pins: {self.output_pin_count}")
         logging.info(f"# Leds: {self.ledcount}")
 
+    def stop_tempstore_updates(self):
+        logging.info("Stopping tempstore")
+        if self.store_timeout is not None:
+            GLib.source_remove(self.store_timeout)
+            self.store_timeout = None
+
     def process_update(self, data):
         if self.data is None:
             return
@@ -135,18 +139,10 @@ class Printer:
                 return "paused"
             if self.data['print_stats']['state'] == 'printing':
                 return "printing"
-            if self.data['idle_timeout']['state'].lower() == "printing":
-                return "busy"
         return self.data['webhooks']['state']
 
     def process_status_update(self):
         state = self.evaluate_state()
-        if state == "busy":
-            self.busy = True
-            return GLib.idle_add(self.busy_cb, True)
-        if self.busy:
-            self.busy = False
-            GLib.idle_add(self.busy_cb, False)
         if state != self.state:
             self.change_state(state)
         return False
@@ -201,15 +197,12 @@ class Printer:
         fans = []
         if self.config_section_exists("fan"):
             fans.append("fan")
-        fan_types = ["controller_fan", "fan_generic", "heater_fan"]
-        for fan_type in fan_types:
+        for fan_type in ["controller_fan", "fan_generic", "heater_fan"]:
             fans.extend(iter(self.get_config_section_list(f"{fan_type} ")))
         return fans
 
     def get_output_pins(self):
-        output_pins = []
-        output_pins.extend(iter(self.get_config_section_list("output_pin ")))
-        return output_pins
+        return self.get_config_section_list("output_pin ")
 
     def get_gcode_macros(self):
         macros = []
@@ -223,18 +216,22 @@ class Printer:
         return macros
 
     def get_heaters(self):
-        heaters = []
+        heaters = self.get_config_section_list("heater_generic ")
         if "heater_bed" in self.devices:
-            heaters.append("heater_bed")
-        heaters.extend(iter(self.get_config_section_list("heater_generic ")))
-        heaters.extend(iter(self.get_config_section_list("temperature_sensor ")))
-        heaters.extend(iter(self.get_config_section_list("temperature_fan ")))
+            heaters.insert(0, "heater_bed")
         return heaters
 
+    def get_temp_fans(self):
+        return self.get_config_section_list("temperature_fan")
+
+    def get_temp_sensors(self):
+        return self.get_config_section_list("temperature_sensor")
+
     def get_filament_sensors(self):
-        sensors = list(self.get_config_section_list("filament_switch_sensor "))
-        sensors.extend(iter(self.get_config_section_list("filament_motion_sensor ")))
-        return sensors
+        if self.sensors is None:
+            self.sensors = list(self.get_config_section_list("filament_switch_sensor "))
+            self.sensors.extend(iter(self.get_config_section_list("filament_motion_sensor ")))
+        return self.sensors
 
     def get_probe(self):
         probe_types = ["probe", "bltouch", "smart_effector", "dockable_probe"]
@@ -344,11 +341,10 @@ class Printer:
         return 0
 
     def get_temp_store_devices(self):
-        if self.tempstore is not None:
-            return list(self.tempstore)
+        return list(self.tempstore)
 
     def device_has_target(self, device):
-        return "target" in self.devices[device] or (device in self.tempstore and "targets" in self.tempstore[device])
+        return "target" in self.devices[device]
 
     def get_temp_store(self, device, section=False, results=0):
         if device not in self.tempstore:
@@ -369,12 +365,14 @@ class Printer:
         return temp
 
     def get_temp_devices(self):
-        devices = [
-            device
-            for device in self.tools
-            if not device.startswith('extruder_stepper')
-        ]
-        return devices + self.get_heaters()
+        if self.temp_devices is None:
+            devices = [
+                device
+                for device in self.tools
+                if not device.startswith('extruder_stepper')
+            ]
+            self.temp_devices = devices + self.get_heaters() + self.get_temp_sensors() + self.get_temp_fans()
+        return self.temp_devices
 
     def get_tools(self):
         return self.tools
@@ -396,6 +394,8 @@ class Printer:
                     for _ in range(1, self.tempstore_size - length):
                         self.tempstore[device][x].insert(0, 0)
         logging.info(f"Temp store: {list(self.tempstore)}")
+        if not self.store_timeout:
+            self.store_timeout = GLib.timeout_add_seconds(1, self._update_temp_store)
 
     def config_section_exists(self, section):
         return section in self.get_config_section_list()
