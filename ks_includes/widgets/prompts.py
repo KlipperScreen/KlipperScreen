@@ -44,7 +44,8 @@ class Prompt:
             self.set_button(*params)
             return
         elif data == 'prompt_show':
-            self.show()
+            if not self.prompt:
+                self.show()
             return
         elif data == 'prompt_end':
             self.end()
