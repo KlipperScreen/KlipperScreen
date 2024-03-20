@@ -10,14 +10,14 @@ from cairo import Context as cairoContext
 
 
 class HeaterGraph(Gtk.DrawingArea):
-    def __init__(self, printer, font_size):
+    def __init__(self, screen, printer, font_size):
         super().__init__()
         self.set_hexpand(True)
         self.set_vexpand(True)
         self.get_style_context().add_class('heatergraph')
+        self._screen = screen
         self.printer = printer
         self.store = {}
-        self.max_length = 0
         self.connect('draw', self.draw_graph)
         self.add_events(Gdk.EventMask.TOUCH_MASK)
         self.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
@@ -26,15 +26,10 @@ class HeaterGraph(Gtk.DrawingArea):
         self.font_size = round(font_size * 0.75)
 
     def add_object(self, name, ev_type, rgb=None, dashed=False, fill=False):
-        if rgb is None:
-            rgb = [0, 0, 0]
-        if name not in self.store:
-            self.store.update({name: {"show": True}})
-        self.store[name].update({ev_type: {
-            "dashed": dashed,
-            "fill": fill,
-            "rgb": rgb
-        }})
+        rgb = [0, 0, 0] if rgb is None else rgb
+        self.store.update(
+            {name: {"show": True, ev_type: {"dashed": dashed, "fill": fill, "rgb": rgb}}}
+        )
 
     @staticmethod
     def event_cb(da, ev):
@@ -42,15 +37,6 @@ class HeaterGraph(Gtk.DrawingArea):
             x = ev.x
             y = ev.y
             logging.info(f"Graph area: {x} {y}")
-
-    def get_max_length(self):
-        try:
-            return min(len(self.printer.get_temp_store(name, "temperatures"))
-                       for name in self.store if "temperatures" in self.store[name]
-                       and self.printer.get_temp_store(name, "temperatures"))
-        except ValueError:
-            logging.debug(self.printer.get_temp_devices())
-            return 0
 
     def get_max_num(self, data_points=0):
         mnum = [0]
@@ -65,7 +51,10 @@ class HeaterGraph(Gtk.DrawingArea):
         return max(mnum)
 
     def draw_graph(self, da: Gtk.DrawingArea, ctx: cairoContext):
-
+        if not self.printer.tempstore:
+            logging.info("Tempstore not initialized!")
+            self._screen.init_tempstore()
+            return
         x = round(self.font_size * 2.75)
         y = 10
         width = da.get_allocated_width() - 15
@@ -78,9 +67,8 @@ class HeaterGraph(Gtk.DrawingArea):
 
         ctx.rectangle(x, y, width - x, height - y)
 
-        self.max_length = self.get_max_length()
         graph_width = gsize[1][0] - gsize[0][0]
-        points_per_pixel = self.max_length / graph_width
+        points_per_pixel = self.printer.get_tempstore_size() / graph_width
         data_points = int(round(graph_width * points_per_pixel, 0))
         max_num = math.ceil(self.get_max_num(data_points) * 1.1 / 10) * 10
         if points_per_pixel == 0:
@@ -170,7 +158,7 @@ class HeaterGraph(Gtk.DrawingArea):
 
             ctx.show_text(f"{now - datetime.timedelta(minutes=2) * i:%H:%M}")
             ctx.stroke()
-            i += 1 + self.max_length // 601
+            i += 1 + self.printer.get_tempstore_size() // 601
 
     def is_showing(self, device):
         return False if device not in self.store else self.store[device]['show']

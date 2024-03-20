@@ -1010,6 +1010,9 @@ class KlipperScreen(Gtk.Window):
             logging.error(f'Tempstore not ready: {tempstore} Retrying in 5 seconds')
             GLib.timeout_add_seconds(5, self.init_tempstore)
             return
+        if set(self.printer.tempstore) != set(self.printer.get_temp_devices()):
+            GLib.timeout_add_seconds(5, self.init_tempstore)
+            return
         server_config = self.apiclient.send_request("server/config")
         if server_config:
             try:

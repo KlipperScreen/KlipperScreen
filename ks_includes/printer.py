@@ -364,6 +364,9 @@ class Printer:
             temp[section] = self.tempstore[device][section][-results:]
         return temp
 
+    def get_tempstore_size(self):
+        return self.tempstore_size
+
     def get_temp_devices(self):
         if self.temp_devices is None:
             devices = [
@@ -381,7 +384,7 @@ class Printer:
         return self.tools.index(tool)
 
     def init_temp_store(self, tempstore):
-        if self.tempstore and list(self.tempstore) != list(tempstore):
+        if self.tempstore and set(self.tempstore) != set(tempstore):
             logging.debug("Tempstore has changed")
             self.tempstore = tempstore
             self.change_state(self.state)

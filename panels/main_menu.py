@@ -40,9 +40,6 @@ class Panel(MenuPanel):
         if self.left_panel is None:
             logging.info("No left panel")
             return
-        if not self._printer.get_temp_store_devices():
-            logging.debug(f"Could not create graph tempstore: {self._printer.get_temp_store_devices()}")
-            return
         count = 0
         for device in self.devices:
             visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}",
@@ -224,7 +221,7 @@ class Panel(MenuPanel):
         self.labels['devices'].attach(name, 0, 0, 1, 1)
         self.labels['devices'].attach(temp, 1, 0, 1, 1)
 
-        self.labels['da'] = HeaterGraph(self._printer, self._gtk.font_size)
+        self.labels['da'] = HeaterGraph(self._screen, self._printer, self._gtk.font_size)
 
         scroll = self._gtk.ScrolledWindow(steppers=False)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
