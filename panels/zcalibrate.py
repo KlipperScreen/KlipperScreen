@@ -15,6 +15,8 @@ class Panel(ScreenPanel):
         super().__init__(screen, title)
         self.mesh_min = []
         self.mesh_max = []
+        self.mesh_radius = None
+        self.mesh_origin = [0, 0]
         self.zero_ref = []
         self.z_hop_speed = 15.0
         self.z_hop = 5.0
@@ -105,11 +107,18 @@ class Panel(ScreenPanel):
             self._add_button("Probe", "probe", pobox)
             functions.append("probe")
         if "BED_MESH_CALIBRATE" in self._printer.available_commands:
-            self.mesh_min = self._csv_to_array(self._printer.get_config_section("bed_mesh")['mesh_min'])
-            self.mesh_max = self._csv_to_array(self._printer.get_config_section("bed_mesh")['mesh_max'])
+            mesh = self._printer.get_config_section("bed_mesh")
+            logging.info(f"Mesh: {mesh}")
+            if 'mesh_radius' in mesh:
+                self.mesh_radius = float(mesh['mesh_radius'])
+                if 'mesh_origin' in mesh:
+                    self.mesh_origin = self._csv_to_array(mesh['mesh_origin'])
+                logging.info(f"Mesh Radius: {self.mesh_radius} Origin: {self.mesh_origin}")
+            else:
+                self.mesh_min = self._csv_to_array(mesh['mesh_min'])
+                self.mesh_max = self._csv_to_array(mesh['mesh_max'])
             if 'zero_reference_position' in self._printer.get_config_section("bed_mesh"):
-                self.zero_ref = self._csv_to_array(
-                    self._printer.get_config_section("bed_mesh")['zero_reference_position'])
+                self.zero_ref = self._csv_to_array(mesh['zero_reference_position'])
             if "probe" not in functions:
                 # This is used to do a manual bed mesh if there is no probe
                 self._add_button("Bed mesh", "mesh", pobox)
@@ -186,9 +195,9 @@ class Panel(ScreenPanel):
         if ("safe_z_home" in self._printer.get_config_section_list() and
                 "Z_ENDSTOP_CALIBRATE" not in self._printer.available_commands):
             return self._get_safe_z()
-        if "delta" in self._printer.get_config_section("printer")['kinematics']:
-            logging.info("Detected delta kinematics calibrating at 0,0")
-            return 0 - self.x_offset, 0 - self.y_offset
+        if self.mesh_radius or "delta" in self._printer.get_config_section("printer")['kinematics']:
+            logging.info(f"Round bed calibrating at {self.mesh_origin}")
+            return self.mesh_origin[0] - self.x_offset, self.mesh_origin[1] - self.y_offset
 
         x, y = self._calculate_position()
         return x, y
