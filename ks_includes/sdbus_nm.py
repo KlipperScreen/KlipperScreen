@@ -1,5 +1,4 @@
 # This is the backend of the UI panel that communicates to sdbus-networkmanager
-# TODO Wifi on-off toggle
 # TODO device selection/swtichability
 # Alfredo Monclus (alfrix) 2024
 
@@ -91,6 +90,9 @@ class SdbusNm:
         else:
             self.wlan_device = None
             self.wifi = False
+
+    def is_wifi_enabled(self):
+        return self.nm.wireless_enabled
 
     def get_interfaces(self):
         return [NetworkDeviceGeneric(device).interface for device in self.nm.get_devices()]
@@ -243,3 +245,6 @@ class SdbusNm:
         if cb_type in self._callbacks:
             for cb in self._callbacks[cb_type]:
                 GLib.idle_add(cb, *args)
+
+    def toggle_wifi(self, enable):
+        self.nm.wireless_enabled = enable
