@@ -27,9 +27,13 @@ class HeaterGraph(Gtk.DrawingArea):
 
     def add_object(self, name, ev_type, rgb=None, dashed=False, fill=False):
         rgb = [0, 0, 0] if rgb is None else rgb
-        self.store.update(
-            {name: {"show": True, ev_type: {"dashed": dashed, "fill": fill, "rgb": rgb}}}
-        )
+        if name not in self.store:
+            self.store.update({name: {"show": True}})
+        self.store[name].update({ev_type: {
+            "dashed": dashed,
+            "fill": fill,
+            "rgb": rgb
+        }})
 
     @staticmethod
     def event_cb(da, ev):
