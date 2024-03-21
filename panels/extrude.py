@@ -6,6 +6,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.widgets.autogrid import AutoGrid
 
 
 class Panel(ScreenPanel):
@@ -54,14 +55,10 @@ class Panel(ScreenPanel):
             "panel": "spoolman"
         })
 
-        self.labels['extruders_menu'] = self._gtk.ScrolledWindow()
-        self.labels['extruders'] = Gtk.FlowBox(hexpand=True, vexpand=True, homogeneous=True,
-                                               selection_mode=Gtk.SelectionMode.NONE, max_children_per_line=4)
-        self.labels['extruders_menu'].add(self.labels['extruders'])
-
         xbox = Gtk.Box(homogeneous=True)
         limit = 4
         i = 0
+        extruder_buttons = []
         for extruder in self._printer.get_tools():
             if self._printer.extrudercount == 1:
                 self.labels[extruder] = self._gtk.Button("extruder", "")
@@ -75,7 +72,11 @@ class Panel(ScreenPanel):
                 xbox.add(self.labels[extruder])
                 i += 1
             else:
-                self.labels['extruders'].add(self.labels[extruder])
+                extruder_buttons.append(self.labels[extruder])
+        if extruder_buttons:
+            self.labels['extruders'] = AutoGrid(extruder_buttons, vertical=self._screen.vertical_mode)
+            self.labels['extruders_menu'] = self._gtk.ScrolledWindow()
+            self.labels['extruders_menu'].add(self.labels['extruders'])
         if self._printer.extrudercount > limit:
             changer = self._gtk.Button("toolchanger")
             changer.connect("clicked", self.load_menu, 'extruders', _('Extruders'))
