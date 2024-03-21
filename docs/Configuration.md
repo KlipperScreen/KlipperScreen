@@ -12,13 +12,6 @@ Write in the file only the options that need to be changed, and restart KlipperS
     The line endings should be of UNIX style (LF).
 
 
-## Include files
-```{ .ini .no-copy }
-# [include conf.d/*.conf]
-# Include another configuration file. Wildcards (*) will expand to match anything.
-```
-
-
 ## Main Options
 The options listed here are not editable from within the user interface.
 ```{ .ini .no-copy }
@@ -142,6 +135,12 @@ for example:
 ```ini
 [preheat cooldown]
 gcode: M107
+```
+
+## Include files
+```{ .ini .no-copy }
+# [include conf.d/*.conf]
+# Include another configuration file. Wildcards (*) will expand to match anything.
 ```
 
 ## Menu
