@@ -41,13 +41,23 @@ class Panel(ScreenPanel):
             self.labels['ip'].set_text(f"IP: {self.sdbus_nm.get_ip_address()}")
 
         self.reload_button = self._gtk.Button("refresh", None, "color1", self.bts)
+        self.reload_button.set_no_show_all(True)
+        self.reload_button.show()
         self.reload_button.connect("clicked", self.reload_networks)
         self.reload_button.set_hexpand(False)
+
+        self.wifi_toggle = Gtk.Switch(
+            width_request=round(self._gtk.font_size * 2),
+            height_request=round(self._gtk.font_size),
+            active=self.sdbus_nm.is_wifi_enabled()
+        )
+        self.wifi_toggle.connect("notify::active", self.toggle_wifi)
 
         sbox = Gtk.Box(hexpand=True, vexpand=False)
         sbox.add(self.labels['interface'])
         sbox.add(self.labels['ip'])
         sbox.add(self.reload_button)
+        sbox.add(self.wifi_toggle)
 
         scroll = self._gtk.ScrolledWindow()
         self.labels['main_box'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
@@ -324,3 +334,12 @@ class Panel(ScreenPanel):
         if self.update_timeout is not None:
             GLib.source_remove(self.update_timeout)
             self.update_timeout = None
+
+    def toggle_wifi(self, switch, gparams):
+        enable = switch.get_active()
+        if enable:
+            self.reload_button.show()
+        else:
+            self.reload_button.hide()
+        logging.info(f"WiFi {enable}")
+        self.sdbus_nm.toggle_wifi(enable)
