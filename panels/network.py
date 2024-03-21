@@ -40,14 +40,14 @@ class Panel(ScreenPanel):
             self.labels['interface'].set_text(_("Interface") + f': {self.interface}')
             self.labels['ip'].set_text(f"IP: {self.sdbus_nm.get_ip_address()}")
 
-        reload_networks = self._gtk.Button("refresh", None, "color1", self.bts)
-        reload_networks.connect("clicked", self.reload_networks)
-        reload_networks.set_hexpand(False)
+        self.reload_button = self._gtk.Button("refresh", None, "color1", self.bts)
+        self.reload_button.connect("clicked", self.reload_networks)
+        self.reload_button.set_hexpand(False)
 
         sbox = Gtk.Box(hexpand=True, vexpand=False)
         sbox.add(self.labels['interface'])
         sbox.add(self.labels['ip'])
-        sbox.add(reload_networks)
+        sbox.add(self.reload_button)
 
         scroll = self._gtk.ScrolledWindow()
         self.labels['main_box'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
@@ -70,11 +70,10 @@ class Panel(ScreenPanel):
     def popup_callback(self, msg, level=3):
         self._screen.show_popup_message(msg, level)
 
-    def load_networks(self, widget=None):
+    def load_networks(self):
         for net in self.sdbus_nm.get_networks():
             self.add_network(net['BSSID'])
-        if widget:
-            GLib.timeout_add_seconds(10, self._gtk.Button_busy, widget, False)
+        GLib.timeout_add_seconds(10, self._gtk.Button_busy, self.reload_button, False)
         self.content.show_all()
         return False
 
@@ -307,13 +306,16 @@ class Panel(ScreenPanel):
             if widget:
                 self._gtk.Button_busy(widget, True)
             self.sdbus_nm.rescan()
-            self.load_networks(widget)
+            self.load_networks()
         self.activate()
 
     def activate(self):
         if self.update_timeout is None:
-            if self.sdbus_nm.wifi:
-                self.sdbus_nm.rescan()
+            if self.sdbus_nm is not None and self.sdbus_nm.wifi:
+                if self.reload_button.get_sensitive():
+                    self._gtk.Button_busy(self.reload_button, True)
+                    self.sdbus_nm.rescan()
+                    self.load_networks()
                 self.update_timeout = GLib.timeout_add_seconds(5, self.update_all_networks)
             else:
                 self.update_timeout = GLib.timeout_add_seconds(5, self.update_single_network_info)
