@@ -411,8 +411,8 @@ class KlipperScreen(Gtk.Window):
         version = Gtk.Label(label=f"{functions.get_software_version()}", halign=Gtk.Align.END)
 
         help_msg = _("Provide KlipperScreen.log when asking for help.\n")
-        message = Gtk.Label(label=f"{help_msg}\n\n{e}", wrap=True)
-        scroll = self.gtk.ScrolledWindow(steppers=False)
+        message = Gtk.Label(label=f"{help_msg}\n\n{e}", wrap=True, wrap_mode=Pango.WrapMode.CHAR)
+        scroll = self.gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(message)
 
