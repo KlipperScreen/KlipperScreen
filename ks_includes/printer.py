@@ -346,6 +346,9 @@ class Printer:
     def device_has_target(self, device):
         return "target" in self.devices[device]
 
+    def device_has_power(self, device):
+        return "power" in self.devices[device]
+
     def get_temp_store(self, device, section=False, results=0):
         if device not in self.tempstore:
             return False

@@ -323,13 +323,15 @@ class Panel(ScreenPanel):
             name.get_style_context().add_class("graph_label")
 
         can_target = self._printer.device_has_target(device)
-        self.labels['da'].add_object(device, "temperatures", rgb, False, True)
+        self.labels['da'].add_object(device, "temperatures", rgb, False, False)
         if can_target:
-            self.labels['da'].add_object(device, "targets", rgb, True, False)
+            self.labels['da'].add_object(device, "targets", rgb, False, True)
             name.connect('button-press-event', self.name_pressed, device)
             name.connect('button-release-event', self.name_released, device)
         else:
             name.connect("clicked", self.toggle_visibility, device)
+        if self._show_heater_power and self._printer.device_has_power(device):
+            self.labels['da'].add_object(device, "powers", rgb, True, False)
         self.labels['da'].set_showing(device, visible)
 
         temp = self._gtk.Button(label="", lines=1)

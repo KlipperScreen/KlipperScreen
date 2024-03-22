@@ -95,16 +95,23 @@ class HeaterGraph(Gtk.DrawingArea):
 
     @staticmethod
     def graph_data(ctx: cairoContext, data, gsize, hscale, swidth, rgb, dashed=False, fill=False):
-        ctx.set_source_rgba(rgb[0], rgb[1], rgb[2], 1)
-        if dashed:
+        if fill:
+            ctx.set_source_rgba(rgb[0], rgb[1], rgb[2], .25)
+            ctx.set_dash([1, 0])
+        elif dashed:
+            ctx.set_source_rgba(rgb[0], rgb[1], rgb[2], .5)
             ctx.set_dash([10, 5])
         else:
+            ctx.set_source_rgba(rgb[0], rgb[1], rgb[2], 1)
             ctx.set_dash([1, 0])
         d_len = len(data) - 1
 
         for i, d in enumerate(data):
             p_x = i * swidth + gsize[0][0] if i != d_len else gsize[1][0] - 1
-            p_y = max(gsize[0][1], min(gsize[1][1], gsize[1][1] - 1 - (d * hscale)))
+            if dashed:  # d between 0 and 1
+                p_y = gsize[1][1] - (d * (gsize[1][1] - gsize[0][1]))
+            else:
+                p_y = max(gsize[0][1], min(gsize[1][1], gsize[1][1] - 1 - (d * hscale)))
             if i == 0:
                 ctx.move_to(gsize[0][0], p_y)
             ctx.line_to(p_x, p_y)
@@ -112,7 +119,6 @@ class HeaterGraph(Gtk.DrawingArea):
             ctx.stroke_preserve()
             ctx.line_to(gsize[1][0] - 1, gsize[1][1] - 1)
             ctx.line_to(gsize[0][0] + 1, gsize[1][1] - 1)
-            ctx.set_source_rgba(rgb[0], rgb[1], rgb[2], .1)
             ctx.fill()
         else:
             ctx.stroke()
