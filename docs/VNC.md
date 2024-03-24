@@ -27,17 +27,17 @@ This article describes how to use KlipperScreen through a remote connection.
     !!! tip
         To change resolution add: `-geometry 1280x720` to the arguments of Xtigervnc
 
-5. Make the script executable
+4. Make the script executable
     ```bash
     chmod +x ~/KlipperScreen/scripts/launch_KlipperScreen.sh
     ```
     
-7. Restart KlipperScreen or reboot the system:
+5. Restart KlipperScreen or reboot the system:
     ```bash
     sudo systemctl restart KlipperScreen.service
     ```
 
-8. On KlipperScreen set the following configuration:
+6. On KlipperScreen set the following configuration:
 
 Turn off DPMS and Display timeout:
 
