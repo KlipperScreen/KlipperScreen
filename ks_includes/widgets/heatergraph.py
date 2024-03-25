@@ -10,14 +10,14 @@ from cairo import Context as cairoContext
 
 
 class HeaterGraph(Gtk.DrawingArea):
-    def __init__(self, printer, font_size):
+    def __init__(self, screen, printer, font_size):
         super().__init__()
         self.set_hexpand(True)
         self.set_vexpand(True)
         self.get_style_context().add_class('heatergraph')
+        self._screen = screen
         self.printer = printer
         self.store = {}
-        self.max_length = 0
         self.connect('draw', self.draw_graph)
         self.add_events(Gdk.EventMask.TOUCH_MASK)
         self.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
@@ -26,8 +26,7 @@ class HeaterGraph(Gtk.DrawingArea):
         self.font_size = round(font_size * 0.75)
 
     def add_object(self, name, ev_type, rgb=None, dashed=False, fill=False):
-        if rgb is None:
-            rgb = [0, 0, 0]
+        rgb = [0, 0, 0] if rgb is None else rgb
         if name not in self.store:
             self.store.update({name: {"show": True}})
         self.store[name].update({ev_type: {
@@ -43,15 +42,6 @@ class HeaterGraph(Gtk.DrawingArea):
             y = ev.y
             logging.info(f"Graph area: {x} {y}")
 
-    def get_max_length(self):
-        try:
-            return min(len(self.printer.get_temp_store(name, "temperatures"))
-                       for name in self.store if "temperatures" in self.store[name]
-                       and self.printer.get_temp_store(name, "temperatures"))
-        except ValueError:
-            logging.debug(self.printer.get_temp_devices())
-            return 0
-
     def get_max_num(self, data_points=0):
         mnum = [0]
         for device in self.store:
@@ -65,7 +55,10 @@ class HeaterGraph(Gtk.DrawingArea):
         return max(mnum)
 
     def draw_graph(self, da: Gtk.DrawingArea, ctx: cairoContext):
-
+        if not self.printer.tempstore:
+            logging.info("Tempstore not initialized!")
+            self._screen.init_tempstore()
+            return
         x = round(self.font_size * 2.75)
         y = 10
         width = da.get_allocated_width() - 15
@@ -78,9 +71,8 @@ class HeaterGraph(Gtk.DrawingArea):
 
         ctx.rectangle(x, y, width - x, height - y)
 
-        self.max_length = self.get_max_length()
         graph_width = gsize[1][0] - gsize[0][0]
-        points_per_pixel = self.max_length / graph_width
+        points_per_pixel = self.printer.get_tempstore_size() / graph_width
         data_points = int(round(graph_width * points_per_pixel, 0))
         max_num = math.ceil(self.get_max_num(data_points) * 1.1 / 10) * 10
         if points_per_pixel == 0:
@@ -103,16 +95,23 @@ class HeaterGraph(Gtk.DrawingArea):
 
     @staticmethod
     def graph_data(ctx: cairoContext, data, gsize, hscale, swidth, rgb, dashed=False, fill=False):
-        ctx.set_source_rgba(rgb[0], rgb[1], rgb[2], 1)
-        if dashed:
+        if fill:
+            ctx.set_source_rgba(rgb[0], rgb[1], rgb[2], .25)
+            ctx.set_dash([1, 0])
+        elif dashed:
+            ctx.set_source_rgba(rgb[0], rgb[1], rgb[2], .5)
             ctx.set_dash([10, 5])
         else:
+            ctx.set_source_rgba(rgb[0], rgb[1], rgb[2], 1)
             ctx.set_dash([1, 0])
         d_len = len(data) - 1
 
         for i, d in enumerate(data):
             p_x = i * swidth + gsize[0][0] if i != d_len else gsize[1][0] - 1
-            p_y = max(gsize[0][1], min(gsize[1][1], gsize[1][1] - 1 - (d * hscale)))
+            if dashed:  # d between 0 and 1
+                p_y = gsize[1][1] - (d * (gsize[1][1] - gsize[0][1]))
+            else:
+                p_y = max(gsize[0][1], min(gsize[1][1], gsize[1][1] - 1 - (d * hscale)))
             if i == 0:
                 ctx.move_to(gsize[0][0], p_y)
             ctx.line_to(p_x, p_y)
@@ -120,7 +119,6 @@ class HeaterGraph(Gtk.DrawingArea):
             ctx.stroke_preserve()
             ctx.line_to(gsize[1][0] - 1, gsize[1][1] - 1)
             ctx.line_to(gsize[0][0] + 1, gsize[1][1] - 1)
-            ctx.set_source_rgba(rgb[0], rgb[1], rgb[2], .1)
             ctx.fill()
         else:
             ctx.stroke()
@@ -170,7 +168,7 @@ class HeaterGraph(Gtk.DrawingArea):
 
             ctx.show_text(f"{now - datetime.timedelta(minutes=2) * i:%H:%M}")
             ctx.stroke()
-            i += 1 + self.max_length // 601
+            i += 1 + self.printer.get_tempstore_size() // 601
 
     def is_showing(self, device):
         return False if device not in self.store else self.store[device]['show']

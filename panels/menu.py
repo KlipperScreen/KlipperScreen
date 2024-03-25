@@ -6,6 +6,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from jinja2 import Template
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.widgets.autogrid import AutoGrid
 
 
 class Panel(ScreenPanel):
@@ -15,9 +16,9 @@ class Panel(ScreenPanel):
         self.items = items
         self.j2_data = self._printer.get_printer_status_data()
         self.create_menu_items()
-        self.grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         self.scroll = self._gtk.ScrolledWindow()
         self.scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        self.autogrid = AutoGrid()
 
     def activate(self):
         self.j2_data = self._printer.get_printer_status_data()
@@ -26,42 +27,21 @@ class Panel(ScreenPanel):
     def add_content(self):
         for child in self.scroll.get_children():
             self.scroll.remove(child)
-        if self._screen.vertical_mode:
-            self.scroll.add(self.arrangeMenuItems(self.items, 3))
-        else:
-            self.scroll.add(self.arrangeMenuItems(self.items, 4))
+        self.scroll.add(self.arrangeMenuItems(self.items))
         if not self.content.get_children():
             self.content.add(self.scroll)
 
-    def arrangeMenuItems(self, items, columns, expand_last=False):
-        for child in self.grid.get_children():
-            self.grid.remove(child)
-        length = len(items)
-        i = 0
+    def arrangeMenuItems(self, items, columns=None, expand_last=False):
+        self.autogrid.clear()
+        enabled = []
         for item in items:
             key = list(item)[0]
             if not self.evaluate_enable(item[key]['enable']):
                 logging.debug(f"X > {key}")
                 continue
-
-            if columns == 4:
-                if length <= 4:
-                    # Arrange 2 x 2
-                    columns = 2
-                elif 4 < length <= 6:
-                    # Arrange 3 x 2
-                    columns = 3
-
-            col = i % columns
-            row = int(i / columns)
-
-            width = height = 1
-            if expand_last is True and i + 1 == length and length % 2 == 1:
-                width = 2
-
-            self.grid.attach(self.labels[key], col, row, width, height)
-            i += 1
-        return self.grid
+            enabled.append(self.labels[key])
+        self.autogrid.__init__(enabled, columns, expand_last, self._screen.vertical_mode)
+        return self.autogrid
 
     def create_menu_items(self):
         count = sum(bool(self.evaluate_enable(i[next(iter(i))]['enable'])) for i in self.items)

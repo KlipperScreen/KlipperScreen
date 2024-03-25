@@ -411,8 +411,8 @@ class KlipperScreen(Gtk.Window):
         version = Gtk.Label(label=f"{functions.get_software_version()}", halign=Gtk.Align.END)
 
         help_msg = _("Provide KlipperScreen.log when asking for help.\n")
-        message = Gtk.Label(label=f"{help_msg}\n\n{e}", wrap=True)
-        scroll = self.gtk.ScrolledWindow(steppers=False)
+        message = Gtk.Label(label=f"{help_msg}\n\n{e}", wrap=True, wrap_mode=Pango.WrapMode.CHAR)
+        scroll = self.gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(message)
 
@@ -1008,6 +1008,9 @@ class KlipperScreen(Gtk.Window):
                 self.panels[self._cur_panels[-1]].update_graph_visibility()
         else:
             logging.error(f'Tempstore not ready: {tempstore} Retrying in 5 seconds')
+            GLib.timeout_add_seconds(5, self.init_tempstore)
+            return
+        if set(self.printer.tempstore) != set(self.printer.get_temp_devices()):
             GLib.timeout_add_seconds(5, self.init_tempstore)
             return
         server_config = self.apiclient.send_request("server/config")
