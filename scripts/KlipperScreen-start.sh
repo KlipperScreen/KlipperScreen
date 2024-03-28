@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 SCRIPTPATH=$(dirname $(realpath $0))
 if [ -f $SCRIPTPATH/launch_KlipperScreen.sh ]
