@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-02 17:39-0300\n"
-"PO-Revision-Date: 2024-03-14 11:01+0000\n"
+"PO-Revision-Date: 2024-03-22 15:01+0000\n"
 "Last-Translator: Lâm Trần <trandanhlam99@gmail.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/vi/>\n"
@@ -21,13 +21,13 @@ msgstr ""
 
 #, python-format
 msgid "%s will be updated to version"
-msgstr ""
+msgstr "%s sẽ được nâng cấp lên phiên bản"
 
 msgid "(default)"
 msgstr "(mặc định)"
 
 msgid "24 Hour Time"
-msgstr ""
+msgstr "Thời gian định dạng 24h"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "Vấn đề có thể giải quyết bằng cách khởi động lại thiết bị."
@@ -62,7 +62,7 @@ msgid "Apply %s%.3f offset to Probe?"
 msgstr "Áp dụng %s%.3f sai trục cho Probe?"
 
 msgid "Archived"
-msgstr ""
+msgstr "Lưu trữ"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Bạn có chắc chắn muốn loại bỏ vật in này?"
@@ -92,7 +92,7 @@ msgid "Auto-close notifications"
 msgstr "Tự động đóng các thông báo"
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "Tự động mở bảng điều khiển bộ đùn khi tạm dừng"
 
 msgid "Auto-scroll"
 msgstr "Tự động cuộn"
@@ -101,108 +101,108 @@ msgid "Bed Level"
 msgstr "Cân bàn in"
 
 msgid "Bed Mesh"
-msgstr ""
+msgstr "Mặt phẳng bàn in"
 
 msgid "Bed screw configuration:"
-msgstr ""
+msgstr "Cấu hình ốc bàn in:"
 
 msgid "Calibrate"
-msgstr ""
+msgstr "Cân chỉnh"
 
 msgid "Calibrated"
-msgstr ""
+msgstr "Đã cân chỉnh"
 
 msgid "Calibrating"
-msgstr ""
+msgstr "Cân chỉnh"
 
 msgid "Camera"
-msgstr ""
+msgstr "Máy quay"
 
 msgid "Can't set above the maximum:"
-msgstr ""
+msgstr "Không thể cài đặt vượt quá giới hạn:"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Hủy bỏ"
 
 msgid "Cancel Print"
-msgstr ""
+msgstr "Hủy bỏ quá trình in"
 
 msgid "Cancelled"
-msgstr ""
+msgstr "Đã hủy"
 
 msgid "Cancelling"
-msgstr ""
+msgstr "Đang hủy"
 
 msgid "Cannot connect to Moonraker"
-msgstr ""
+msgstr "Không kết nối được tới Moonraker"
 
 msgid "Channel"
-msgstr ""
+msgstr "Kênh"
 
 msgid "Check ADXL Wiring"
-msgstr ""
+msgstr "Kiểm tra dây kết nối đến gia tốc kế"
 
 msgid "Checking for updates, please wait..."
-msgstr ""
+msgstr "Đang kiểm tra cập nhật, vui lòng chờ..."
 
 msgid "Clear"
-msgstr ""
+msgstr "Xóa bỏ"
 
 msgid "Close"
-msgstr ""
+msgstr "Đóng"
 
 msgid "Complete"
-msgstr ""
+msgstr "Hoàn thành"
 
 msgid "Confirm Emergency Stop"
-msgstr ""
+msgstr "Xác nhận dừng khẩn cấp"
 
 msgid "Connected"
-msgstr ""
+msgstr "Đã kết nối"
 
 #, python-format
 msgid "Connecting to %s"
-msgstr ""
+msgstr "Kết nối đến %s"
 
 msgid "Console"
-msgstr ""
+msgstr "Bảng điều khiển"
 
 msgid "Cooldown"
-msgstr ""
+msgstr "Làm nguội"
 
 msgid "DPMS has failed to load and has been disabled"
-msgstr ""
+msgstr "DPMS không tải được và đã bị vô hiệu hóa"
 
 msgid "Date"
-msgstr ""
+msgstr "Ngày"
 
 msgid "Delete Directory?"
-msgstr ""
+msgstr "Xóa thư mục?"
 
 msgid "Delete File?"
-msgstr ""
+msgstr "Xóa file?"
 
 msgid "Deselect"
-msgstr ""
+msgstr "Hủy chọn"
 
 msgid "Disable Motors"
-msgstr ""
+msgstr "Tắt tất cả các động cơ"
 
 msgid "Distance (mm)"
-msgstr ""
+msgstr "Khoảng cách (mm)"
 
 #, python-format
 msgid "Do you want to recover %s?"
-msgstr ""
+msgstr "Bạn có muốn khôi phục %s?"
 
 msgid "Elapsed:"
-msgstr ""
+msgstr "Đã qua:"
 
 msgid "Ended official support in June 2023"
-msgstr ""
+msgstr "Không còn hỗ trợ chính thức từ tháng 6 năm 2023"
 
 msgid "Error"
-msgstr ""
+msgstr "Lỗi"
 
 msgid "Error clearing active spool"
 msgstr ""
@@ -217,124 +217,124 @@ msgid "Error trying to fetch spools"
 msgstr ""
 
 msgid "Estimated Time Method"
-msgstr ""
+msgstr "Phương thức tính thời gian dự kiến"
 
 msgid "Exclude Object"
-msgstr ""
+msgstr "Loại trừ vật in"
 
 msgid "Extra Large"
-msgstr ""
+msgstr "Lớn hơn"
 
 msgid "Extrude"
-msgstr ""
+msgstr "Đùn"
 
 msgid "Extruders"
-msgstr ""
+msgstr "Các bộ đùn"
 
 msgid "Extrusion +"
-msgstr ""
+msgstr "Nhựa đùn ra +"
 
 msgid "Extrusion -"
-msgstr ""
+msgstr "Nhựa đùng ra -"
 
 msgid "Failed, adjust position first"
-msgstr ""
+msgstr "Không thành công, trước tiên hãy điều chỉnh vị trí"
 
 msgid "Fan"
-msgstr ""
+msgstr "Quạt"
 
 msgid "Filament Used"
-msgstr ""
+msgstr "Nhựa in đã dùng"
 
 msgid "Filament total:"
-msgstr ""
+msgstr "Tổng nhựa in:"
 
 msgid "Filament used:"
-msgstr ""
+msgstr "Nhựa đã dùng:"
 
 msgid "Filament:"
-msgstr ""
+msgstr "Nhựa:"
 
 msgid "File"
-msgstr ""
+msgstr "File"
 
 msgid "File:"
-msgstr ""
+msgstr "File:"
 
 msgid "Filter"
-msgstr ""
+msgstr "Bộ lọc"
 
 msgid "Finding ADXL"
-msgstr ""
+msgstr "Tìm kiếm gia tốc kế"
 
 msgid "Fine Tuning"
-msgstr ""
+msgstr "Tinh chỉnh"
 
 msgid "Finish"
-msgstr ""
+msgstr "Hoàn thành"
 
 msgid "Firmware Restart"
-msgstr ""
+msgstr "Khởi động lại bộ điều khiển"
 
 msgid "Flow:"
-msgstr ""
+msgstr "Lưu lượng nhựa đùn ra:"
 
 msgid "Flowrate:"
-msgstr ""
+msgstr "Lưu lượng nhựa đùn ra:"
 
 msgid "Font Size"
-msgstr ""
+msgstr "Kích thước hiển thị chữ"
 
 msgid "Full Update"
-msgstr ""
+msgstr "Cập nhật toàn bộ"
 
 msgid "Go Back"
-msgstr ""
+msgstr "Về trước"
 
 msgid "Height:"
-msgstr ""
+msgstr "Chiều cao:"
 
 msgid "Hidden"
-msgstr ""
+msgstr "Ẩn"
 
 msgid "Hide"
-msgstr ""
+msgstr "Ẩn"
 
 msgid "Hide sensors in Temp."
-msgstr ""
+msgstr "Ẩn các cảm biến trong nhệt."
 
 msgid "Hide temp."
-msgstr ""
+msgstr "Ẩn nhiệt độ."
 
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 msgid "Home All"
-msgstr ""
+msgstr "Home tất cả"
 
 msgid "Home X"
-msgstr ""
+msgstr "Home trục X"
 
 msgid "Home XY"
-msgstr ""
+msgstr "Home trục X và Y"
 
 msgid "Home Y"
-msgstr ""
+msgstr "Home trục Y"
 
 msgid "Home Z"
-msgstr ""
+msgstr "Home trục Z"
 
 msgid "Host"
-msgstr ""
+msgstr "Máy chủ chạy Klipper"
 
 msgid "Hostname"
-msgstr ""
+msgstr "Tên miền máy chủ"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Icon Theme"
-msgstr ""
+msgstr "Chủ đề biểu tượng"
 
 msgid "Initializing printer..."
 msgstr ""
