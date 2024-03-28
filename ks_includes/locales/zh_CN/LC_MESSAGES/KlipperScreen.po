@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-02 17:39-0300\n"
-"PO-Revision-Date: 2024-02-27 18:50+0000\n"
+"PO-Revision-Date: 2024-03-28 21:01+0000\n"
 "Last-Translator: Will Zhai <willzhai55@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "klipperscreen/klipperscreen/zh_Hans/>\n"
@@ -205,16 +205,16 @@ msgid "Error"
 msgstr "错误"
 
 msgid "Error clearing active spool"
-msgstr ""
+msgstr "退出当前耗材时出错"
 
 msgid "Error getting active spool"
-msgstr ""
+msgstr "获取当前耗材时出错"
 
 msgid "Error setting active spool"
-msgstr ""
+msgstr "设置当前耗材时出错"
 
 msgid "Error trying to fetch spools"
-msgstr ""
+msgstr "尝试获取耗材时出错"
 
 msgid "Estimated Time Method"
 msgstr "估算剩余时间方式"
@@ -229,7 +229,7 @@ msgid "Extrude"
 msgstr "挤出"
 
 msgid "Extruders"
-msgstr ""
+msgstr "挤出机"
 
 msgid "Extrusion +"
 msgstr "挤出量 +"
@@ -419,7 +419,7 @@ msgid "Loading..."
 msgstr "加载中..."
 
 msgid "Lost Connection to Moonraker"
-msgstr ""
+msgstr "与 Moonraker 失去连接"
 
 msgid "Lower Nozzle"
 msgstr "降低喷嘴"
