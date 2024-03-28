@@ -209,7 +209,7 @@ class BasePanel(ScreenPanel):
 
     def process_update(self, action, data):
         if action == "notify_proc_stat_update":
-            cpu = (max(data["system_cpu_usage"][core] for core in data["system_cpu_usage"] if core.startswith("cpu")))
+            cpu = data["system_cpu_usage"]["cpu"]
             memory = (data["system_memory"]["used"] / data["system_memory"]["total"]) * 100
             error = "message_popup_error"
             ctx = self.titlebar.get_style_context()
@@ -221,11 +221,11 @@ class BasePanel(ScreenPanel):
                 self.last_usage_report = datetime.now()
                 if not ctx.has_class(error):
                     ctx.add_class(error)
-                self._screen.log_notification(msg, 3)
+                self._screen.log_notification(f"{self._screen.connecting_to_printer}: {msg}", 2)
                 self.titlelbl.set_label(msg)
             elif ctx.has_class(error):
-                self.titlelbl.set_label(msg)
                 if (datetime.now() - self.last_usage_report).seconds < 5:
+                    self.titlelbl.set_label(msg)
                     return
                 self.usage_report = 0
                 ctx.remove_class(error)
