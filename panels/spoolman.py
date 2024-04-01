@@ -242,7 +242,7 @@ class Panel(ScreenPanel):
         self.get_active_spool()
         self._treeview = Gtk.TreeView(model=sortable, headers_visible=False, show_expanders=False)
 
-        text_renderer = Gtk.CellRendererText()
+        text_renderer = Gtk.CellRendererText(wrap_width=self._gtk.content_width/4)
         pixbuf_renderer = Gtk.CellRendererPixbuf(xpad=5, ypad=5)
         checkbox_renderer = Gtk.CellRendererToggle()
         column_id = Gtk.TreeViewColumn(cell_renderer=text_renderer)
