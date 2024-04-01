@@ -9,13 +9,13 @@ This article describes how to use KlipperScreen through a remote connection.
 ##  On the Host device (for example a Raspberry Pi):
 
 
-1. [First installl KlipperScreen](Installation.md)
+1. [First install KlipperScreen](Installation.md)
 2. Install a vnc server package, for example:
     ```bash
     sudo apt install tigervnc-standalone-server
     ```
 
-3. Create `launch_KlipperScreen.sh`:
+3. Create `~/KlipperScreen/scripts/launch_KlipperScreen.sh`:
 
     ```bash
     #!/usr/bin/env bash
@@ -27,12 +27,17 @@ This article describes how to use KlipperScreen through a remote connection.
     !!! tip
         To change resolution add: `-geometry 1280x720` to the arguments of Xtigervnc
 
-4. Restart KlipperScreen or reboot the system:
+4. Make the script executable
     ```bash
-    sudo systemctl service KlipperScreen restart
+    chmod +x ~/KlipperScreen/scripts/launch_KlipperScreen.sh
+    ```
+    
+5. Restart KlipperScreen or reboot the system:
+    ```bash
+    sudo systemctl restart KlipperScreen.service
     ```
 
-5. On KlipperScreen set the following configuration:
+6. On KlipperScreen set the following configuration:
 
 Turn off DPMS and Display timeout:
 
