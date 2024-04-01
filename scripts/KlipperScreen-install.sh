@@ -36,7 +36,7 @@ install_graphical_backend()
   while true; do
     if [ -z "$BACKEND" ]; then
       echo_ok "Default is Xserver"
-      echo_text "Wayland needs kms/drm drivers"
+      echo_text "Wayland is EXPERIMENTAL needs kms/drm drivers doesn't support DPMS and may need autologin"
       read -r -e -p "Backend Xserver or Wayland (cage)? [X/w]" BACKEND
       if [[ "$BACKEND" =~ ^[wW]$ ]]; then
         echo_text "Installing Wayland Cage Kiosk"
