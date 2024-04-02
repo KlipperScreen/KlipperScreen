@@ -72,8 +72,6 @@ class Panel(ScreenPanel):
             self.values[option] = int(value * 100)
         else:
             self.values[option] = int(value)
-        self.limits[option]['scale'].disconnect_by_func(self.set_opt_value)
-        self.limits[option]['scale'].set_value(self.values[option])
         for opt in self.options:
             if opt["option"] == option and 'max' not in opt:
                 if self.values[option] > opt["value"]:
@@ -83,6 +81,8 @@ class Panel(ScreenPanel):
                 else:
                     self.limits[option]['scale'].get_style_context().remove_class("option_slider_max")
                     self.limits[option]['adjustment'].set_upper(opt["value"] * 1.5)
+        self.limits[option]['scale'].disconnect_by_func(self.set_opt_value)
+        self.limits[option]['scale'].set_value(self.values[option])
         self.limits[option]['scale'].connect("button-release-event", self.set_opt_value, option)
 
     def add_option(self, option):
