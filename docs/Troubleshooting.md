@@ -37,7 +37,7 @@ You may need to press refresh or reload the page
 
 Alternatively you can inspect them directly on the terminal:
 
-!!! warning 
+!!! warning
     Please do not copy-paste the output of the terminal when providing info for an issue,
     most of the time this output will be incomplete, use the method described above
 
