@@ -27,7 +27,7 @@ class Panel(ScreenPanel):
                 "name": _("Minimum Cruise Ratio"),
                 "option": "minimum_cruise_ratio",
                 "units": "%",
-                "value": int(float(conf['minimum_cruise_ratio']) * 100),
+                "value": int(float(conf['minimum_cruise_ratio']) * 100) if "minimum_cruise_ratio" in conf else 50,
                 "max": 99
             },
             {
