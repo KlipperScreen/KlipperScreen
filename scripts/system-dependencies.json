@@ -24,7 +24,6 @@
         "wireless-tools",
         "libdbus-glib-1-dev",
         "policykit-1",
-        "network-manager",
         "autoconf"
     ],
     "arch": [
@@ -45,7 +44,6 @@
         "openjpeg2",
         "dbus-glib",
          "polkit",
-         "networkmanager",
         "autoconf"
     ]
 }
