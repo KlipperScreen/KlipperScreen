@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2024-03-28 21:01+0000\n"
 "Last-Translator: Will Zhai <willzhai55@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -106,6 +106,9 @@ msgstr "床网"
 msgid "Bed screw configuration:"
 msgstr "热床螺丝配置："
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "校准"
 
@@ -198,6 +201,9 @@ msgstr "你想恢复 %s 吗？"
 msgid "Elapsed:"
 msgstr "已用时间："
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr "2023年6月结束官方支持"
 
@@ -215,6 +221,9 @@ msgstr "设置当前耗材时出错"
 
 msgid "Error trying to fetch spools"
 msgstr "尝试获取耗材时出错"
+
+msgid "Error: Couldn't get a position to probe"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "估算剩余时间方式"
@@ -442,9 +451,6 @@ msgstr "最大"
 msgid "Max Acceleration"
 msgstr "最大加速度"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "最大加速至减速"
-
 msgid "Max Velocity"
 msgstr "最大速度"
 
@@ -468,6 +474,9 @@ msgstr "菜单"
 
 msgid "Mesh calibrate"
 msgstr "床网校准"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "已修改"
@@ -839,6 +848,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "最大加速至减速"
 
 #~ msgid "Continue"
 #~ msgstr "继续"

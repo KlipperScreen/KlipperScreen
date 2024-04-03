@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2024-01-23 12:01+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -106,6 +106,9 @@ msgstr "Bädd Mesh"
 msgid "Bed screw configuration:"
 msgstr "Konfiguration bädd skruvar:"
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "Kalibrera"
 
@@ -198,6 +201,9 @@ msgstr "Vill du återställa %s?"
 msgid "Elapsed:"
 msgstr "Förfluten:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr "Avslutade officiellt stöd i juni 2023"
 
@@ -214,6 +220,9 @@ msgid "Error setting active spool"
 msgstr ""
 
 msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -443,9 +452,6 @@ msgstr "Max"
 msgid "Max Acceleration"
 msgstr "Max acceleration"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "Max acceleration till inbromsning"
-
 msgid "Max Velocity"
 msgstr "Max Hastighet"
 
@@ -469,6 +475,9 @@ msgstr "Meny"
 
 msgid "Mesh calibrate"
 msgstr "Mesh kalibrera"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "Ändrad"
@@ -846,6 +855,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Max acceleration till inbromsning"
 
 #~ msgid "Continue"
 #~ msgstr "Fortsätt"

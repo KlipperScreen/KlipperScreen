@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2024-03-20 11:25+0000\n"
 "Last-Translator: vjurka <v@jurka.lt>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && ("
-"n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"(n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
@@ -106,6 +106,9 @@ msgstr "Platformos tinkliukas"
 
 msgid "Bed screw configuration:"
 msgstr "Platformos varžtų konfigūracija:"
+
+msgid "Both"
+msgstr ""
 
 msgid "Calibrate"
 msgstr "Kalibravimas"
@@ -199,6 +202,9 @@ msgstr "Ar norite atstatyti %s?"
 msgid "Elapsed:"
 msgstr "Praėjo:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr "Oficialus palaikymas baigtas 2023 m. birželio mėn"
 
@@ -216,6 +222,9 @@ msgstr "Klaida nustatant aktyvią ritę"
 
 msgid "Error trying to fetch spools"
 msgstr "Klaida bandant gauti rites"
+
+msgid "Error: Couldn't get a position to probe"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Numatomas laikas"
@@ -446,9 +455,6 @@ msgstr "Max"
 msgid "Max Acceleration"
 msgstr "Maksimalus pagreitis"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "Pagreitintas stabdymas"
-
 msgid "Max Velocity"
 msgstr "Maksimalus greitis"
 
@@ -472,6 +478,9 @@ msgstr "Meniu"
 
 msgid "Mesh calibrate"
 msgstr "Tinklelio kalibravimas"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "Pakeista"
@@ -851,3 +860,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Pagreitintas stabdymas"

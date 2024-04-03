@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2024-03-22 15:01+0000\n"
 "Last-Translator: Lâm Trần <trandanhlam99@gmail.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -106,6 +106,9 @@ msgstr "Mặt phẳng bàn in"
 msgid "Bed screw configuration:"
 msgstr "Cấu hình ốc bàn in:"
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "Cân chỉnh"
 
@@ -198,6 +201,9 @@ msgstr "Bạn có muốn khôi phục %s?"
 msgid "Elapsed:"
 msgstr "Đã qua:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr "Không còn hỗ trợ chính thức từ tháng 6 năm 2023"
 
@@ -214,6 +220,9 @@ msgid "Error setting active spool"
 msgstr ""
 
 msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -442,9 +451,6 @@ msgstr ""
 msgid "Max Acceleration"
 msgstr ""
 
-msgid "Max Acceleration to Deceleration"
-msgstr ""
-
 msgid "Max Velocity"
 msgstr ""
 
@@ -467,6 +473,9 @@ msgid "Menu"
 msgstr ""
 
 msgid "Mesh calibrate"
+msgstr ""
+
+msgid "Minimum Cruise Ratio"
 msgstr ""
 
 msgid "Modified"

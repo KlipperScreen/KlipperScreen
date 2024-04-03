@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2024-01-27 13:01+0000\n"
 "Last-Translator: Bernardo Scolnik <bscolnik@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -106,6 +106,9 @@ msgstr "Malha de Nivelamento da Base"
 msgid "Bed screw configuration:"
 msgstr "Configuração de atarraxamento da Base:"
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "Calibrar"
 
@@ -198,6 +201,9 @@ msgstr "Quer recuperar %s?"
 msgid "Elapsed:"
 msgstr "Decorrido:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr "Suporte oficial finalizado em Junho de 2023"
 
@@ -214,6 +220,9 @@ msgid "Error setting active spool"
 msgstr ""
 
 msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -444,9 +453,6 @@ msgstr "Max."
 msgid "Max Acceleration"
 msgstr "Aceleração Max."
 
-msgid "Max Acceleration to Deceleration"
-msgstr "Aceleração Max. para Desaceleração"
-
 msgid "Max Velocity"
 msgstr "Velocidade Max."
 
@@ -470,6 +476,9 @@ msgstr "Menu"
 
 msgid "Mesh calibrate"
 msgstr "Calibração de Malha"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "Modificado"
@@ -847,3 +856,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Aceleração Max. para Desaceleração"

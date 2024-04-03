@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2023-12-28 12:05+0000\n"
 "Last-Translator: Dr_Perry_Coke <dr.perrycoke@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -107,6 +107,9 @@ msgstr "Сетка стола"
 msgid "Bed screw configuration:"
 msgstr "Конфигурация винтов кровати:"
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "Калибровка"
 
@@ -199,6 +202,9 @@ msgstr "Вы хотите восстановить%s?"
 msgid "Elapsed:"
 msgstr "Прошло:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr "Официальная поддержка прекращена в июне 2023 г"
 
@@ -215,6 +221,9 @@ msgid "Error setting active spool"
 msgstr ""
 
 msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -444,9 +453,6 @@ msgstr "Максимум"
 msgid "Max Acceleration"
 msgstr "Максимальное ускорение"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "Ускорения торможения"
-
 msgid "Max Velocity"
 msgstr "Скорость"
 
@@ -470,6 +476,9 @@ msgstr "Меню"
 
 msgid "Mesh calibrate"
 msgstr "Калибровка сетки"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "Изменено"
@@ -852,6 +861,9 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм³/с"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Ускорения торможения"
 
 #~ msgid "Continue"
 #~ msgstr "Продолжить"

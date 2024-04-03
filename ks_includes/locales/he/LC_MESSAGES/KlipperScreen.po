@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2022-11-30 18:11-0300\n"
 "Last-Translator: Tal Rahav <talrhv1@gmail.com>\n"
 "Language-Team: \n"
@@ -107,6 +107,9 @@ msgstr "מיפוי מיטה"
 msgid "Bed screw configuration:"
 msgstr "הגדרת בורג מיטה"
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "לכייל"
 
@@ -199,6 +202,9 @@ msgstr "האם ברצונך לשחזר %s?"
 msgid "Elapsed:"
 msgstr "זמן שעבר:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr ""
 
@@ -215,6 +221,9 @@ msgid "Error setting active spool"
 msgstr ""
 
 msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -443,9 +452,6 @@ msgstr "מקסימום"
 msgid "Max Acceleration"
 msgstr "מקסימום תאוצה"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "האצה מרבית להאטה"
-
 msgid "Max Velocity"
 msgstr "מהירות מרבית"
 
@@ -468,6 +474,9 @@ msgid "Menu"
 msgstr "תפריט"
 
 msgid "Mesh calibrate"
+msgstr ""
+
+msgid "Minimum Cruise Ratio"
 msgstr ""
 
 msgid "Modified"
@@ -852,6 +861,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "האצה מרבית להאטה"
 
 #~ msgid "Continue"
 #~ msgstr "המשך"

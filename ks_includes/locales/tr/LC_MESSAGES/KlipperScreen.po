@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2024-03-03 22:39+0300\n"
 "Last-Translator: Nurettin Sevdik <nurettinsevdik10@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -106,6 +106,9 @@ msgstr "Tabla Örgüsü"
 msgid "Bed screw configuration:"
 msgstr "Tabla vida yapılandırması:"
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "Kalibre et"
 
@@ -198,6 +201,9 @@ msgstr "%s Kurtarmak istiyor musunuz?"
 msgid "Elapsed:"
 msgstr "Geçen:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr "Resmi destek Haziran 2023 tarihinde sona ermiştir"
 
@@ -215,6 +221,9 @@ msgstr "Etkin makara ayar hatası"
 
 msgid "Error trying to fetch spools"
 msgstr "Makaraları getirmeye çalışırken hata oluştu"
+
+msgid "Error: Couldn't get a position to probe"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Tahmini Zaman Metodu"
@@ -442,9 +451,6 @@ msgstr "Maks"
 msgid "Max Acceleration"
 msgstr "Maksimum Hızlanma"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "Maksimum Hızlanma ve Yavaşlama"
-
 msgid "Max Velocity"
 msgstr "Maksimum Hız"
 
@@ -468,6 +474,9 @@ msgstr "Menü"
 
 msgid "Mesh calibrate"
 msgstr "Mesh Kalibre et"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "Değiştirilmiş"
@@ -845,6 +854,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Maksimum Hızlanma ve Yavaşlama"
 
 #~ msgid "Continue"
 #~ msgstr "Devam et"

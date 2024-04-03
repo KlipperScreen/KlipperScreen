@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2023-12-17 01:36\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2024-01-21 12:01+0000\n"
 "Last-Translator: Сергій <sergiy.goncharuk.1@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -107,6 +107,9 @@ msgstr "Сітка столу"
 msgid "Bed screw configuration:"
 msgstr "Конфігурація гвинтів ліжка:"
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "Калібрування"
 
@@ -199,6 +202,9 @@ msgstr "Ви хочете відновити %s?"
 msgid "Elapsed:"
 msgstr "Минуло:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr "Офіційна підтримка припинена в червні 2023 року"
 
@@ -215,6 +221,9 @@ msgid "Error setting active spool"
 msgstr ""
 
 msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -445,9 +454,6 @@ msgstr "Макс"
 msgid "Max Acceleration"
 msgstr "Макс. прискорення"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "Макс. прискорення до гальмування"
-
 msgid "Max Velocity"
 msgstr "Макс. швидкість"
 
@@ -471,6 +477,9 @@ msgstr "Меню"
 
 msgid "Mesh calibrate"
 msgstr "Калібрування сітки столу"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "Змінено"
@@ -852,6 +861,9 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм/с³"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Макс. прискорення до гальмування"
 
 #~ msgid "Continue"
 #~ msgstr "Продовжити"

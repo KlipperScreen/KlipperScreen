@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2024-03-20 11:25+0000\n"
 "Last-Translator: srbjessen <srbjessen@gmail.com>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -101,6 +101,9 @@ msgstr "Bed-mesh"
 msgid "Bed screw configuration:"
 msgstr "Bed-skrue konfiguration:"
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "Kalibrér"
 
@@ -193,6 +196,9 @@ msgstr "Vil du gendanne %s?"
 msgid "Elapsed:"
 msgstr "Tid:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr "Officiel support udløb i Juni 2023"
 
@@ -210,6 +216,9 @@ msgstr "Fejl ved indstilling af aktiv spole"
 
 msgid "Error trying to fetch spools"
 msgstr "Fejl ved hentning af spoler"
+
+msgid "Error: Couldn't get a position to probe"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Metode til beregning af tid"
@@ -439,9 +448,6 @@ msgstr "Maks"
 msgid "Max Acceleration"
 msgstr "Maks. Acceleration"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "Maks. acceleration til decceleration"
-
 msgid "Max Velocity"
 msgstr "Maks. hastighed"
 
@@ -465,6 +471,9 @@ msgstr "Menu"
 
 msgid "Mesh calibrate"
 msgstr "Mesh-kalibrering"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "Ændret"
@@ -841,6 +850,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Maks. acceleration til decceleration"
 
 #~ msgid "Continue"
 #~ msgstr "Fortsæt"
