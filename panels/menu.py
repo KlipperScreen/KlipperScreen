@@ -83,8 +83,7 @@ class Panel(ScreenPanel):
             return self._screen._ws.connected
         try:
             j2_temp = Template(enable, autoescape=True)
-            result = j2_temp.render(self.j2_data)
-            return result == 'True'
+            return j2_temp.render(self.j2_data) == 'True'
         except Exception as e:
             logging.debug(f"Error evaluating enable statement: {enable}\n{e}")
             return False
