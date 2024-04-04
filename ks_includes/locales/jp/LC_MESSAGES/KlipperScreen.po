@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: boyon\n"
 "Language-Team: \n"
@@ -100,6 +100,9 @@ msgstr "ベッドメッシュ"
 msgid "Bed screw configuration:"
 msgstr "ベッドスクリュー設定:"
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "校正"
 
@@ -192,6 +195,9 @@ msgstr "元に戻しますか %s ？"
 msgid "Elapsed:"
 msgstr "経過時間:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr ""
 
@@ -208,6 +214,9 @@ msgid "Error setting active spool"
 msgstr ""
 
 msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -436,9 +445,6 @@ msgstr "最大"
 msgid "Max Acceleration"
 msgstr "最大加速度"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "減速時の最大加速度"
-
 msgid "Max Velocity"
 msgstr "最大速度"
 
@@ -462,6 +468,9 @@ msgstr "メニュー"
 
 msgid "Mesh calibrate"
 msgstr "メッシュ較正"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "変更"
@@ -833,6 +842,9 @@ msgstr ""
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "減速時の最大加速度"
 
 #~ msgid "Continue"
 #~ msgstr "継続"

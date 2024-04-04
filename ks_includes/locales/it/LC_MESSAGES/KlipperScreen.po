@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2024-03-16 18:48+0000\n"
 "Last-Translator: Giadej <Giadej@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -101,6 +101,9 @@ msgstr "Bed-Mesh"
 msgid "Bed screw configuration:"
 msgstr "Configurazione Bed Screw:"
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "Calibra"
 
@@ -193,6 +196,9 @@ msgstr "Vuoi ripristinare %s?"
 msgid "Elapsed:"
 msgstr "Trascorso:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr "Supporto ufficiale terminato in giugno 2023"
 
@@ -210,6 +216,9 @@ msgstr "Errore nel settaggio della bobina attiva"
 
 msgid "Error trying to fetch spools"
 msgstr "Errore nel tentativo di recuperare le bobine"
+
+msgid "Error: Couldn't get a position to probe"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Metodo Tempo Stimato"
@@ -440,9 +449,6 @@ msgstr "Max"
 msgid "Max Acceleration"
 msgstr "Max. Accelerazione"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "Max. Accelerazione a Decelerazione"
-
 msgid "Max Velocity"
 msgstr "Velocità massima"
 
@@ -466,6 +472,9 @@ msgstr "Menù"
 
 msgid "Mesh calibrate"
 msgstr "Calibrazione mesh"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "Modificato"
@@ -843,6 +852,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Max. Accelerazione a Decelerazione"
 
 #~ msgid "Continue"
 #~ msgstr "Continua"

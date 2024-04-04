@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2024-03-07 19:01+0000\n"
 "Last-Translator: samuel fradette <fradette20@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/klipperscreen/"
@@ -106,6 +106,9 @@ msgstr "Maillage du plateau"
 msgid "Bed screw configuration:"
 msgstr "Configuration des vis du plateau:"
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "Calibrer"
 
@@ -198,6 +201,9 @@ msgstr "Voulez-vous récupérer %s ?"
 msgid "Elapsed:"
 msgstr "Écoulé:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr "Fin du support officiel en juin 2023"
 
@@ -214,6 +220,9 @@ msgid "Error setting active spool"
 msgstr "Erreur dans le réglage de la bobine active"
 
 msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -447,9 +456,6 @@ msgstr "Max"
 msgid "Max Acceleration"
 msgstr "Accélération maximale"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "Accélération à décélération maximale"
-
 msgid "Max Velocity"
 msgstr "Vélocité maximale"
 
@@ -473,6 +479,9 @@ msgstr "Menu"
 
 msgid "Mesh calibrate"
 msgstr "Calibration du maillage"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "Modifié"
@@ -851,6 +860,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Accélération à décélération maximale"
 
 #~ msgid "Continue"
 #~ msgstr "Continuer"

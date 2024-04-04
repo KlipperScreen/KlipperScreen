@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2024-02-22 00:02+0000\n"
 "Last-Translator: Matheus Mösken Diegues <dmosken2015@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -106,6 +106,9 @@ msgstr "Nivelamento"
 msgid "Bed screw configuration:"
 msgstr "Configuração da Porca de Mesa:"
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "Calibrar"
 
@@ -198,6 +201,9 @@ msgstr "Deseja recuperar %s?"
 msgid "Elapsed:"
 msgstr "Tempo Corrido:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr "Suporte oficial encerrado em Junho de 2023"
 
@@ -214,6 +220,9 @@ msgid "Error setting active spool"
 msgstr ""
 
 msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -443,9 +452,6 @@ msgstr "Max"
 msgid "Max Acceleration"
 msgstr "Aceleração Máxima"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "Max. aceleração de desaceleração"
-
 msgid "Max Velocity"
 msgstr "Velocidade máxima"
 
@@ -469,6 +475,9 @@ msgstr "Menu"
 
 msgid "Mesh calibrate"
 msgstr "Calibrar Malha"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "Modificado"
@@ -846,6 +855,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Max. aceleração de desaceleração"
 
 #~ msgid "Continue"
 #~ msgstr "Continuar"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2024-03-16 18:48+0000\n"
 "Last-Translator: Mikachu <micah.sh@proton.me>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/klipperscreen/"
@@ -106,6 +106,9 @@ msgstr "Bed Mesh"
 msgid "Bed screw configuration:"
 msgstr "Bed schroef configuratie:"
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "Kalibreer"
 
@@ -198,6 +201,9 @@ msgstr "Wil je %s herstellen?"
 msgid "Elapsed:"
 msgstr "Verstreken:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr "Ondersteuning officieel beëindigt in juni 2023"
 
@@ -215,6 +221,9 @@ msgstr "Error instellen actieve spoel"
 
 msgid "Error trying to fetch spools"
 msgstr "Error tijdens laden spoelen"
+
+msgid "Error: Couldn't get a position to probe"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Schatting Tijd Methode"
@@ -444,9 +453,6 @@ msgstr "Max"
 msgid "Max Acceleration"
 msgstr "Max Acceleratie"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "Max Acceleratie naar De-acceleratie"
-
 msgid "Max Velocity"
 msgstr "Max Velocity"
 
@@ -470,6 +476,9 @@ msgstr "Menu"
 
 msgid "Mesh calibrate"
 msgstr "Mesh kalibreren"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "Aangepast"
@@ -847,6 +856,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Max Acceleratie naar De-acceleratie"
 
 #~ msgid "Continue"
 #~ msgstr "Doorgaan"

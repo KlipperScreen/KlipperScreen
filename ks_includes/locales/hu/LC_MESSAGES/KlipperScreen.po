@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2024-03-11 11:01+0000\n"
 "Last-Translator: \"Zs.Antal\" <zsikaiantal@icloud.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -101,6 +101,9 @@ msgstr "Ágyháló"
 msgid "Bed screw configuration:"
 msgstr "Az ágycsavar konfigurációja:"
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "Kalibrálás"
 
@@ -193,6 +196,9 @@ msgstr "Vissza akarod állítani %s-t?"
 msgid "Elapsed:"
 msgstr "Eltelt:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr "A hivatalos támogatás 2023 júniusában véget ért"
 
@@ -210,6 +216,9 @@ msgstr "Hiba az aktív tekercs beállításakor"
 
 msgid "Error trying to fetch spools"
 msgstr "Hiba a tekercsek lekérésekor"
+
+msgid "Error: Couldn't get a position to probe"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Becsült idő módszer"
@@ -438,9 +447,6 @@ msgstr "Max"
 msgid "Max Acceleration"
 msgstr "Max gyorsulás"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "Lassulás max gyorsulása"
-
 msgid "Max Velocity"
 msgstr "Max sebesség"
 
@@ -464,6 +470,9 @@ msgstr "Menü"
 
 msgid "Mesh calibrate"
 msgstr "Háló kalibrálása"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "Módosított"
@@ -841,3 +850,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Lassulás max gyorsulása"

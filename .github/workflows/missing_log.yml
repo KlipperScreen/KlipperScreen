@@ -18,5 +18,7 @@ jobs:
               body: `Hello, I'm an automated bot. \n\n
                 Please attach a log file to this issue as it is required to properly diagnose the problem. \n\n
                 Logs help verify versions, inspect for errors, prevent duplicate reports, etc. \n\n
+                If you don't know how to grab the log file please refer to the documentation: \n\n
+                https://klipperscreen.readthedocs.io/en/latest/Troubleshooting/ \n\n
                 Thank you!`
             })

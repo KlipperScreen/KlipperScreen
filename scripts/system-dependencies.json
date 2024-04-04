@@ -9,13 +9,6 @@
         "pkg-config",
         "python3-dev",
         "gir1.2-gtk-3.0",
-        "xinit",
-        "xinput",
-        "x11-xserver-utils",
-        "xserver-xorg-input-evdev",
-        "xserver-xorg-input-libinput",
-        "xserver-xorg-video-fbdev",
-        "xserver-xorg-legacy",
         "fonts-nanum",
         "fonts-ipafont",
         "libmpv-dev",
@@ -24,7 +17,6 @@
         "wireless-tools",
         "libdbus-glib-1-dev",
         "policykit-1",
-        "network-manager",
         "autoconf"
     ],
     "arch": [
@@ -33,11 +25,6 @@
         "pkgconf",
         "gobject-introspection",
         "gtk3",
-        "xorg-xinit",
-        "xorg-server",
-        "xf86-input-evdev",
-        "xf86-input-libinput",
-        "xf86-video-fbdev",
         "ttf-nanum",
         "otf-ipafont",
         "mpv",
@@ -45,7 +32,6 @@
         "openjpeg2",
         "dbus-glib",
          "polkit",
-         "networkmanager",
         "autoconf"
     ]
 }

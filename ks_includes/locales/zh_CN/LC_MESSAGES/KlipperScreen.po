@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
-"PO-Revision-Date: 2024-02-27 18:50+0000\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
+"PO-Revision-Date: 2024-03-28 21:01+0000\n"
 "Last-Translator: Will Zhai <willzhai55@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "klipperscreen/klipperscreen/zh_Hans/>\n"
@@ -106,6 +106,9 @@ msgstr "床网"
 msgid "Bed screw configuration:"
 msgstr "热床螺丝配置："
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "校准"
 
@@ -198,6 +201,9 @@ msgstr "你想恢复 %s 吗？"
 msgid "Elapsed:"
 msgstr "已用时间："
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr "2023年6月结束官方支持"
 
@@ -205,15 +211,18 @@ msgid "Error"
 msgstr "错误"
 
 msgid "Error clearing active spool"
-msgstr ""
+msgstr "退出当前耗材时出错"
 
 msgid "Error getting active spool"
-msgstr ""
+msgstr "获取当前耗材时出错"
 
 msgid "Error setting active spool"
-msgstr ""
+msgstr "设置当前耗材时出错"
 
 msgid "Error trying to fetch spools"
+msgstr "尝试获取耗材时出错"
+
+msgid "Error: Couldn't get a position to probe"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -229,7 +238,7 @@ msgid "Extrude"
 msgstr "挤出"
 
 msgid "Extruders"
-msgstr ""
+msgstr "挤出机"
 
 msgid "Extrusion +"
 msgstr "挤出量 +"
@@ -419,7 +428,7 @@ msgid "Loading..."
 msgstr "加载中..."
 
 msgid "Lost Connection to Moonraker"
-msgstr ""
+msgstr "与 Moonraker 失去连接"
 
 msgid "Lower Nozzle"
 msgstr "降低喷嘴"
@@ -441,9 +450,6 @@ msgstr "最大"
 
 msgid "Max Acceleration"
 msgstr "最大加速度"
-
-msgid "Max Acceleration to Deceleration"
-msgstr "最大加速至减速"
 
 msgid "Max Velocity"
 msgstr "最大速度"
@@ -468,6 +474,9 @@ msgstr "菜单"
 
 msgid "Mesh calibrate"
 msgstr "床网校准"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "已修改"
@@ -839,6 +848,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "最大加速至减速"
 
 #~ msgid "Continue"
 #~ msgstr "继续"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2024-03-15 05:29+0000\n"
 "Last-Translator: 이정희 <daemul72@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/klipperscreen/"
@@ -101,6 +101,9 @@ msgstr "배드 메시"
 msgid "Bed screw configuration:"
 msgstr "베드 스크류 설정:"
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "교정"
 
@@ -193,6 +196,9 @@ msgstr "%s을(를) 복구하시겠습니까?"
 msgid "Elapsed:"
 msgstr "경과:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr ""
 
@@ -209,6 +215,9 @@ msgid "Error setting active spool"
 msgstr ""
 
 msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -438,9 +447,6 @@ msgstr "최대"
 msgid "Max Acceleration"
 msgstr "최대 가속"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "감속을 위한 최대 가속"
-
 msgid "Max Velocity"
 msgstr "최대 출력 속도"
 
@@ -464,6 +470,9 @@ msgstr "메뉴"
 
 msgid "Mesh calibrate"
 msgstr "메쉬 보정"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "수정됨"
@@ -835,6 +844,9 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "감속을 위한 최대 가속"
 
 #~ msgid "Continue"
 #~ msgstr "계속"

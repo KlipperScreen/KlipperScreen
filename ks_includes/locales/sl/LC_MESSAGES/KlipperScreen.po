@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
+"POT-Creation-Date: 2024-04-03 14:35-0300\n"
 "PO-Revision-Date: 2024-03-18 16:11+0000\n"
 "Last-Translator: Dominik <dominik.sostar@gmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -107,6 +107,9 @@ msgstr "Umerjanje mreže"
 msgid "Bed screw configuration:"
 msgstr "Umerjanje vijakov plošče:"
 
+msgid "Both"
+msgstr ""
+
 msgid "Calibrate"
 msgstr "Umerite"
 
@@ -199,6 +202,9 @@ msgstr "Ali želite obnoviti %s?"
 msgid "Elapsed:"
 msgstr "Preteklo:"
 
+msgid "Emergency Stop"
+msgstr ""
+
 msgid "Ended official support in June 2023"
 msgstr "Konec uradne podpore junija 2023"
 
@@ -215,6 +221,9 @@ msgid "Error setting active spool"
 msgstr ""
 
 msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -445,9 +454,6 @@ msgstr "Maks"
 msgid "Max Acceleration"
 msgstr "Največji pospešek"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "Največji pospešek do pojemka"
-
 msgid "Max Velocity"
 msgstr "Največja hitrost"
 
@@ -471,6 +477,9 @@ msgstr "Meni"
 
 msgid "Mesh calibrate"
 msgstr "Umeritev mreže"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "Spremenjeno"
@@ -512,8 +521,8 @@ msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr ""
-"Ni podprto za samodejno zaznavanje, treba ga je konfigurirati v klipperscreen"
-".conf"
+"Ni podprto za samodejno zaznavanje, treba ga je konfigurirati v "
+"klipperscreen.conf"
 
 msgid "Not working or not configured"
 msgstr "Ne deluje ali ni konfigurirano"
@@ -601,9 +610,8 @@ msgstr "Ime profila:"
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "Ko prosite za pomoč, navedite KlipperScreen.log.\n"
 
-#, fuzzy
 msgid "Quad Gantry Level"
-msgstr "Quad Gantry Level"
+msgstr ""
 
 msgid "Raise Nozzle"
 msgstr "Dvigni šobo"
@@ -855,3 +863,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Največji pospešek do pojemka"
