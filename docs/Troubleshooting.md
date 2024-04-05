@@ -30,6 +30,9 @@ if you can't find it in the web interface, you will need to grab the system logs
 If [KlipperScreen.log](#first-steps) doesn't exist open a terminal in the host (typically from SSH) and
 run this commands:
 
+??? info "Multiple printers on the same host"
+    If the host is running multiple printers you may need to change `printer_data` to `printer_1_data`
+
 ```sh
 systemctl status KlipperScreen > ~/printer_data/logs/KlipperScreen_systemctl.log
 journalctl -xe -u KlipperScreen > ~/printer_data/logs/KlipperScreen_journalctl.log
