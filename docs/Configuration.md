@@ -155,52 +155,46 @@ printer is idle. The __print menu is accessible from the printing status page.
 A menu item is configured as follows:
 ```{ .ini .no-copy }
 [menu __main my_menu_item]
-# To build a sub-menu of this menu item, you would next use [menu __main my_menu_item sub_menu_item]
 name: Item Name
-# Optional Parameters
+#   To build a sub-menu of this menu item, you would next use [menu __main my_menu_item sub_menu_item]
 #
-# Icon name to be used, it can be any image in the directory:
-# KlipperScreen/styles/{theme}/images/ where {theme} is your current theme
-# Supported formats svg or png
-icon: home
-# Icon style, defined as "button.mycolor4" (for example) in the theme css
-style: mycolor4
-# Panel from the panels listed below
-panel: preheat
-# Moonraker method to call when the item is selected
-method: printer.gcode.script
-# Parameters that would be passed with the method above
-params: {"script":"G28 X"}
-# Enable allows hiding of a menu if the condition is false. This statement is evaluated in Jinja2
+#   The following items are optional:
+# icon: home
+#   Icon name to be used, it can be any image in the directory:
+#   KlipperScreen/styles/{theme}/images/ where {theme} is your current theme
+#   Supported formats svg or png
+#
+# style: mycolor4
+#   Icon style, defined as "button.mycolor4" (for example) in the theme css
+# panel: preheat
+#   Panel from the panels folder in the KlipperScreen folder
+# method: printer.gcode.script
+#   Moonraker method to call when the item is selected
+# params: {"script":"G28 X"}
+#   Parameters that would be passed with the method above
+# enable: {{ 'screws_tilt_adjust' in printer.config_sections and printer.power_devices.count > 0 }}
+#   Enable allows hiding of a menu if the condition is false. (evaluated with Jinja2)
 #   Available variables are listed below.
-enable: {{ printer.power_devices.count > 0 }}
 ```
 Available panels are listed here: [docs/panels.md](Panels.md)
 
 Certain variables are available for conditional testing of the enable statement:
 ```{ .yaml .no-copy }
+# Configured in Moonraker
+moonraker.power_devices.count # Number of power devices
+moonraker.cameras.count # Number of cameras
+moonraker.spoolman # Has spoolman
+
+# Printer specific
+printer.pause_resume.is_paused # Printing job is paused
 printer.extruders.count # Number of extruders
-printer.temperature_devices.count # Number of temperature related devices that are not extruders
+printer.temperature_devices.count # Number of temperature related devices (not extruders)
 printer.fans.count # Number of fans
-printer.power_devices.count # Number of power devices configured in Moonraker
+printer.output_pins.count # Number of pins configured
 printer.gcode_macros.count # Number of gcode macros
 printer.gcode_macros.list # List of names of the gcode macros
-printer.output_pins.count # Number of fans
-
-printer.bltouch # Available if bltouch section defined in config
-printer.probe # Available if probe section defined in config
-printer.bed_mesh # Available if bed_mesh section defined in config
-printer.quad_gantry_level # Available if quad_gantry_level section defined in config
-printer.z_tilt # Available if z_tilt section defined in config
-
-printer.firmware_retraction # True if defined in config
-printer.input_shaper # True if defined in config
-printer.bed_screws # True if defined in config
-printer.screws_tilt_adjust # True if defined in config
-
-printer.idle_timeout # Idle timeout section
-printer.pause_resume # Pause resume section of Klipper
-
+printer.leds.count # Number of leds
+printer.config_sections # Array of section headers of Klipper config (printer.cfg)
 ```
 
 
@@ -209,11 +203,6 @@ A sample configuration of a main menu would be as follows:
 [menu __main homing]
 name: Homing
 icon: home
-
-[menu __main preheat]
-name: Preheat
-icon: heat-up
-panel: preheat
 
 [menu __main homing homeall]
 name: Home All
@@ -228,6 +217,10 @@ method: printer.gcode.script
 params: {"script":"MY_MACRO"}
 enable: {{ 'MY_MACRO' in printer.gcode_macros.list }}
 
+[menu __main preheat]
+name: Preheat
+icon: heat-up
+panel: preheat
 ```
 
 ## KlipperScreen behaviour towards configuration
