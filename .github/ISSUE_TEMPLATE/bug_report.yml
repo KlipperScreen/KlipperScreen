@@ -12,7 +12,7 @@ body:
         This is a bug report, If you need general support, please visit us on [Discord](https://discord.klipper3d.org/)
 
         # Guidelines:
-        1. Logfile must be provided and not just a little snip, from ks startup up to the bug
+        1. Logfile must be provided from ks startup up to the bug
         2. The version used must be from this repo (not a fork)
         3. The version used shouldn't be too old (older than the last tagged version)
 
@@ -66,7 +66,5 @@ body:
         #### The LOG file is REQUIRED. Without the logfile your issue will be closed
 
         Use a Zip archive if needed
-
-      render: shell
     validations:
       required: true
