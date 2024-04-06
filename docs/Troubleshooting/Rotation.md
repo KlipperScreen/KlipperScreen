@@ -10,6 +10,7 @@ here are some examples:
 
 ???+ example "Universal xorg configuration"
 
+    #### Universal xorg configuration
     Find the identifier use xrandr
 
     ```sh
@@ -58,6 +59,7 @@ here are some examples:
 
 ??? example "Raspberry Pi using kernel cmdline"
 
+    #### Raspberry Pi using kernel cmdline
     To set screen orientation when in console mode, you will need to edit the kernel command-line
     to pass the required orientation to the system.
 
@@ -99,6 +101,7 @@ here are some examples:
 
 ??? example "Raspberry Pi legacy mode (works with vc4-fkms-v3d)"
 
+    #### Raspberry Pi legacy mode (works with vc4-fkms-v3d)
     add to config.txt
     ```bash
     display_lcd_rotate=2
@@ -125,6 +128,7 @@ here are some examples:
 
 ??? example "Using a screen installed with goodtft-LCD-show"
 
+    ####  Using a screen installed with goodtft-LCD-show
     ```bash
     cd LCD-show/
     sudo ./rotate.sh 90
@@ -132,6 +136,7 @@ here are some examples:
 
 ??? example "Using Waveshare screen that is installed with LCD-show"
 
+    ####  Using Waveshare screen that is installed with LCD-show
     ```bash
     cd LCD-show/
     sudo ./LCD43-show 270 lite
