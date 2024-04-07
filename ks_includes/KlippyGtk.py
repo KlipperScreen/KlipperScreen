@@ -196,30 +196,37 @@ class KlippyGtk:
                 spinner.hide()
             widget.set_sensitive(True)
 
+    def dialog_content_decouple(self, widget, event, dialog):
+        self.remove_dialog(dialog)
+
     def Dialog(self, title, buttons, content, callback=None, *args):
         dialog = Gtk.Dialog(title=title, modal=True, transient_for=self.screen,
                             default_width=self.width, default_height=self.height)
         if not self.screen.windowed:
             dialog.fullscreen()
 
-        max_buttons = 3 if self.screen.vertical_mode else 4
-        if len(buttons) > max_buttons:
-            buttons = buttons[:max_buttons]
-        if len(buttons) > 2:
-            dialog.get_action_area().set_layout(Gtk.ButtonBoxStyle.EXPAND)
-            button_hsize = -1
-        else:
-            button_hsize = int((self.width / 3))
-        for button in buttons:
-            if 'style' in button:
-                style = button['style']
+        if buttons:
+            max_buttons = 3 if self.screen.vertical_mode else 4
+            if len(buttons) > max_buttons:
+                buttons = buttons[:max_buttons]
+            if len(buttons) > 2:
+                dialog.get_action_area().set_layout(Gtk.ButtonBoxStyle.EXPAND)
+                button_hsize = -1
             else:
-                style = 'dialog-default'
-            dialog.add_button(button['name'], button['response'])
-            button = dialog.get_widget_for_response(button['response'])
-            button.set_size_request(button_hsize, self.dialog_buttons_height)
-            button.get_style_context().add_class(style)
-            format_label(button, 2)
+                button_hsize = int((self.width / 3))
+            for button in buttons:
+                style = button['style'] if 'style' in button else 'dialog-default'
+                dialog.add_button(button['name'], button['response'])
+                button = dialog.get_widget_for_response(button['response'])
+                button.set_size_request(button_hsize, self.dialog_buttons_height)
+                button.get_style_context().add_class(style)
+                format_label(button, 2)
+        else:
+            # No buttons means clicking anywhere closes the dialog
+            content.add_events(Gdk.EventMask.BUTTON_RELEASE_MASK)
+            content.connect("button-release-event", self.dialog_content_decouple, dialog)
+            dialog.add_events(Gdk.EventMask.BUTTON_RELEASE_MASK)
+            dialog.connect("button-release-event", self.remove_dialog)
 
         dialog.connect("response", self.screen.reset_screensaver_timeout)
         dialog.connect("response", callback, *args)

@@ -35,11 +35,8 @@ class HeaterGraph(Gtk.DrawingArea):
         return self.fullscreen
 
     def show_fullscreen_graph(self):
-        buttons = [
-            {"name": _("Close"), "response": Gtk.ResponseType.CANCEL}
-        ]
         self.fs_graph = HeaterGraph(self._screen, self.printer, self.font_size * 2, fullscreen=True, store=self.store)
-        self._gtk.Dialog(_("Temperature"), buttons, self.fs_graph, self.close_fullscreen_graph)
+        self._gtk.Dialog(_("Temperature"), None, self.fs_graph, self.close_fullscreen_graph)
 
     def close_fullscreen_graph(self, dialog, response_id):
         logging.info("Closing graph")
