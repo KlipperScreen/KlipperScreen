@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-03 14:35-0300\n"
-"PO-Revision-Date: 2024-03-03 22:39+0300\n"
+"PO-Revision-Date: 2024-04-10 20:17+0300\n"
 "Last-Translator: Nurettin Sevdik <nurettinsevdik10@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/tr/>\n"
@@ -107,7 +107,7 @@ msgid "Bed screw configuration:"
 msgstr "Tabla vida yapılandırması:"
 
 msgid "Both"
-msgstr ""
+msgstr "İkisi de"
 
 msgid "Calibrate"
 msgstr "Kalibre et"
@@ -202,7 +202,7 @@ msgid "Elapsed:"
 msgstr "Geçen:"
 
 msgid "Emergency Stop"
-msgstr ""
+msgstr "Acil Durdurma"
 
 msgid "Ended official support in June 2023"
 msgstr "Resmi destek Haziran 2023 tarihinde sona ermiştir"
@@ -223,7 +223,7 @@ msgid "Error trying to fetch spools"
 msgstr "Makaraları getirmeye çalışırken hata oluştu"
 
 msgid "Error: Couldn't get a position to probe"
-msgstr ""
+msgstr "Hata: İnceleyicinin pozisyonu alınamadı"
 
 msgid "Estimated Time Method"
 msgstr "Tahmini Zaman Metodu"
@@ -428,7 +428,7 @@ msgid "Loading..."
 msgstr "Yükleniyor..."
 
 msgid "Lost Connection to Moonraker"
-msgstr "Moonraker ile Kayıp Bağlantı"
+msgstr "Moonraker ile Bağlantı Koptu"
 
 msgid "Lower Nozzle"
 msgstr "Nozzle düşür"
@@ -476,7 +476,7 @@ msgid "Mesh calibrate"
 msgstr "Mesh Kalibre et"
 
 msgid "Minimum Cruise Ratio"
-msgstr ""
+msgstr "Minimum Seyir Oranı"
 
 msgid "Modified"
 msgstr "Değiştirilmiş"
