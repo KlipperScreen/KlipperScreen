@@ -749,15 +749,12 @@ class Panel(ScreenPanel):
             image.set_from_pixbuf(pixbuf)
 
     def show_fullscreen_thumbnail(self, widget):
-        buttons = [
-            {"name": _("Close"), "response": Gtk.ResponseType.CANCEL}
-        ]
         pixbuf = self.get_file_image(self.filename, self._screen.width * .9, self._screen.height * .75)
         if pixbuf is None:
             return
         image = Gtk.Image.new_from_pixbuf(pixbuf)
         image.set_vexpand(True)
-        self._gtk.Dialog(self.filename, buttons, image, self.close_fullscreen_thumbnail)
+        self._gtk.Dialog(self.filename, None, image, self.close_fullscreen_thumbnail)
 
     def close_fullscreen_thumbnail(self, dialog, response_id):
         self._gtk.remove_dialog(dialog)

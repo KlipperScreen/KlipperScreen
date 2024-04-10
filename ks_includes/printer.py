@@ -242,32 +242,23 @@ class Printer:
         return None
 
     def get_printer_status_data(self):
-        data = {
+        return {
+            "moonraker": {
+                "power_devices": {"count": len(self.get_power_devices())},
+                "cameras": {"count": len(self.cameras)},
+                "spoolman": self.spoolman,
+            },
             "printer": {
+                "pause_resume": {"is_paused": self.state == "paused"},
                 "extruders": {"count": self.extrudercount},
                 "temperature_devices": {"count": self.tempdevcount},
                 "fans": {"count": self.fancount},
                 "output_pins": {"count": self.output_pin_count},
                 "gcode_macros": {"count": len(self.get_gcode_macros()), "list": self.get_gcode_macros()},
-                "idle_timeout": self.get_stat("idle_timeout").copy(),
-                "pause_resume": {"is_paused": self.state == "paused"},
-                "power_devices": {"count": len(self.get_power_devices())},
-                "cameras": {"count": len(self.cameras)},
-                "spoolman": self.spoolman,
                 "leds": {"count": self.ledcount},
+                "config_sections": [section for section in self.config.keys()],
             }
         }
-
-        sections = ["bed_mesh", "bltouch", "probe", "quad_gantry_level", "z_tilt"]
-        for section in sections:
-            if self.config_section_exists(section):
-                data["printer"][section] = self.get_config_section(section).copy()
-
-        sections = ["firmware_retraction", "input_shaper", "bed_screws", "screws_tilt_adjust"]
-        for section in sections:
-            data["printer"][section] = self.config_section_exists(section)
-
-        return data
 
     def get_leds(self):
         return [

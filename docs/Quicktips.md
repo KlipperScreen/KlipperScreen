@@ -4,7 +4,9 @@ quick tips, without much explanation
 
 ## Hide macros, outputs or fans
 
-You can also hide devices by prefixing the name with an underscore.
+Macros can be hidden directly from the interface in the macro settings.
+
+You can also hide them and other devices by prefixing the name with an underscore.
 
 Lets hide a temperature_fan:
 
@@ -19,6 +21,10 @@ fan1 will show in the interface, but _fan2 will be hidden.
 ## Layer Progress
 
 ### Accurate layer progress as a message below the status:
+
+* [PrusaSlicer](#prusaslicer)
+* [Cura](#cura)
+* [ideaMaker](#ideamaker)
 
 #### PrusaSlicer
 
@@ -49,6 +55,10 @@ M117 Layer {layer_index} / {total_layers}
 ```
 
 ### Accurate layer progress in the secondary screen of the printing panel:
+
+* [PrusaSlicer](#prusaslicer_1)
+* [Cura](#cura_1)
+* [ideaMaker](#ideamaker_1)
 
 The layer number in the secondary screen of the printing panelis calculated according to object height and provided layer height.
 It will be innacurate when using variable layer height, but can be fixed by providing klipper with the correct data.

@@ -16,13 +16,22 @@ Depending on your setup the file could be accessible from the web interface alon
 |:-------------------------------------------------------:|:---------------------------------------------------:|
 | ![mainsail_logs](img/troubleshooting/logs_mainsail.png) | ![fluidd_logs](img/troubleshooting/logs_fluidd.png) |
 
-if you can't find it in the web interface, use sftp to grab the log (for example Filezilla, WinSCP)
-Located at `~/printer_data/logs`or in `/tmp/` if the former doesn't exist.
+if you can't find it in the web interface, you will need to grab the system logs as explained below
+
+??? tip "Alternative: Using sftp to grab the logs"
+    It is possible to use sftp to grab the log, with an application like Filezilla or WinSCP
+
+    With some file-browsers like Dolphin, just type the address for example: `sftp://pi@192.168.1.105/home/`
+
+    Locate the logs at `~/printer_data/logs`or in `/tmp/` if the former doesn't exist.
 
 ## System logs
 
 If [KlipperScreen.log](#first-steps) doesn't exist open a terminal in the host (typically from SSH) and
 run this commands:
+
+??? info "Multiple printers on the same host"
+    If the host is running multiple printers you may need to change `printer_data` to `printer_1_data`
 
 ```sh
 systemctl status KlipperScreen > ~/printer_data/logs/KlipperScreen_systemctl.log
@@ -32,20 +41,18 @@ cp -n /tmp/KlipperScreen.log ~/printer_data/logs/KlipperScreen.log
 ```
 
 This will copy all the relevant logs to the folder described above, so they can be downloaded from the browser.
-You may need to press refresh or reload the page
+With the method described in the first section. You may need to press refresh or reload the page
 
 
-Alternatively you can inspect them directly on the terminal:
-
-!!! warning
-    Please do not copy-paste the output of the terminal when providing info for an issue,
-    most of the time this output will be incomplete, use the method described above
-
-```sh
-systemctl status KlipperScreen
-journalctl -xe -u KlipperScreen
-cat /var/log/Xorg.0.log
-```
+??? tip "Alternative: inspect them directly on the terminal:"
+    !!! warning
+        Please do not copy-paste the output of the terminal when providing info for an issue,
+        most of the time this output will be incomplete, use the method described above
+    ```sh
+    systemctl status KlipperScreen
+    journalctl -xe -u KlipperScreen
+    cat /var/log/Xorg.0.log
+    ```
 
 
 ## Screen shows console instead of KlipperScreen

@@ -6,8 +6,9 @@ This article describes how to use KlipperScreen through a remote connection.
     The experience may not be equal to run KlipperScreen natively.
     Depending on the device or the network you may encounter performance degradation or other issues.
 
-##  On the Host device (for example a Raspberry Pi):
+##  On the Host device:
 
+The host device could be for example a Raspberry Pi
 
 1. [First install KlipperScreen](Installation.md)
 2. Install a vnc server package, for example:
@@ -31,7 +32,7 @@ This article describes how to use KlipperScreen through a remote connection.
     ```bash
     chmod +x ~/KlipperScreen/scripts/launch_KlipperScreen.sh
     ```
-    
+
 5. Restart KlipperScreen or reboot the system:
     ```bash
     sudo systemctl restart KlipperScreen.service
@@ -45,21 +46,22 @@ Turn off DPMS and Display timeout:
 
 ## On the remote device:
 
-1. Installa a VNC viewer and  configure it to the ip of the host.
+1. Install a VNC viewer and  configure it to the ip of the host.
 
 
 ???+ example "Example using an iPad"
+    #### Example using an iPad
     * Install a VNC viewer for example: `RealVNC Viewer: Remote Desktop`
-    #### Prevent unwanted rotation of UI:
+    ##### Prevent unwanted rotation of UI:
     * Go to `Settings` > `General` >  Set `Use side switch to` to `Lock Rotation`
-    #### Avoid accidentally switching between apps:
+    ##### Avoid accidentally switching between apps:
     * Go to `Restrictions` > Set passcode > Enable restrictions.
     * Open
     * Triple-click "Home" button
     * Guided access pops up
     * Press "Start"
     * Now iPad is locked to VNC viewer until "Guided access" mode is disabled by triple-clicking "Home" button and entering the restrictions password.
-    #### On the VNC viewer:
+    ##### On the VNC viewer:
     * Press "+" button at the top right
     * Enter IP address of your print host.
     * Press "Save"
