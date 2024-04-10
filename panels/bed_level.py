@@ -44,7 +44,6 @@ class Panel(ScreenPanel):
         self.y_offset = 0
         self.buttons = {'dm': self._gtk.Button("motor-off", _("Disable Motors"), "color3")}
         self.buttons['dm'].connect("clicked", self.disable_motors)
-        screw_positions = []
         rotation = None
         self.probe_z_height = 0
         self.lift_speed = 5
@@ -65,15 +64,15 @@ class Panel(ScreenPanel):
             probe = self._printer.get_probe()
             if probe:
                 if "x_offset" in probe:
-                    self.x_offset = round(float(probe['x_offset']), 1)
+                    self.x_offset = float(probe['x_offset'])
                 if "y_offset" in probe:
-                    self.y_offset = round(float(probe['y_offset']), 1)
+                    self.y_offset = float(probe['y_offset'])
                 logging.debug(f"offset X: {self.x_offset} Y: {self.y_offset}")
             # bed_screws uses NOZZLE positions
             # screws_tilt_adjust uses PROBE positions and
             # to be offseted for the buttons to work equal to bed_screws
             new_screws = [
-                [round(screw[0] + self.x_offset, 1), round(screw[1] + self.y_offset, 1)]
+                [screw[0] + self.x_offset, screw[1] + self.y_offset]
                 for screw in self.screws
             ]
 
@@ -341,8 +340,8 @@ class Panel(ScreenPanel):
                         logging.error(f"{screw} not found in {section}")
                         continue
                     x, y = section[screw].split(',')
-                    x = round(float(x) + self.x_offset, 1)
-                    y = round(float(y) + self.y_offset, 1)
+                    x = float(x) + self.x_offset
+                    y = float(y) + self.y_offset
                     for key, value in self.screw_dict.items():
                         if value and x == value[0] and y == value[1]:
                             logging.debug(f"X: {x} Y: {y} Adjust: {result['adjust']} Pos: {key}")
@@ -374,8 +373,8 @@ class Panel(ScreenPanel):
                 result = re.match(r"([\-0-9\.]+)\s*,\s*([\-0-9\.]+)", config_section[item])
                 if result:
                     screws.append([
-                        round(float(result[1]), 1),
-                        round(float(result[2]), 1)
+                        float(result[1]),
+                        float(result[2])
                     ])
         return sorted(screws, key=lambda s: (float(s[1]), float(s[0])))
 
