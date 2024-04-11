@@ -148,6 +148,8 @@ class Panel(ScreenPanel):
 
         if len(remaining_screws) != 0:
             logging.debug(f"Screws not used: {remaining_screws}")
+            self._screen.show_popup_message(f"Screws not used: {remaining_screws} \n"
+                                            f"It's possible that the configuration is not correct", 2)
 
         logging.debug(f"Using {len(self.screws) - len(remaining_screws)}/{len(self.screws)}-screw locations")
 
