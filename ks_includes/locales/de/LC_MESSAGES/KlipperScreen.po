@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-03 14:35-0300\n"
-"PO-Revision-Date: 2024-02-03 23:01+0000\n"
-"Last-Translator: criscrafter <criscrafter80@gmail.com>\n"
+"PO-Revision-Date: 2024-04-09 12:01+0000\n"
+"Last-Translator: Niklas Tecklenborg <niklas.tecklenborg@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/de/>\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -107,7 +107,7 @@ msgid "Bed screw configuration:"
 msgstr "Bettschraubenkonfiguration:"
 
 msgid "Both"
-msgstr ""
+msgstr "Beide"
 
 msgid "Calibrate"
 msgstr "Kalibrieren"
@@ -202,7 +202,7 @@ msgid "Elapsed:"
 msgstr "Laufzeit:"
 
 msgid "Emergency Stop"
-msgstr ""
+msgstr "Notausschalter"
 
 msgid "Ended official support in June 2023"
 msgstr "Offizieller Support endete im Juni 2023"
@@ -211,16 +211,16 @@ msgid "Error"
 msgstr "Fehler"
 
 msgid "Error clearing active spool"
-msgstr ""
+msgstr "Fehler beim Leeren der aktiven Spule"
 
 msgid "Error getting active spool"
-msgstr ""
+msgstr "Fehler beim Abrufen der aktiven Spule"
 
 msgid "Error setting active spool"
-msgstr ""
+msgstr "Fehler beim Einstellen der aktiven Spule"
 
 msgid "Error trying to fetch spools"
-msgstr ""
+msgstr "Fehler beim Abrufen der Spulen"
 
 msgid "Error: Couldn't get a position to probe"
 msgstr ""
@@ -430,7 +430,7 @@ msgid "Loading..."
 msgstr "Lädt..."
 
 msgid "Lost Connection to Moonraker"
-msgstr ""
+msgstr "Verbindung zu Moonraker verloren"
 
 msgid "Lower Nozzle"
 msgstr "Düse absenken"
