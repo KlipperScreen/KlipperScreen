@@ -767,22 +767,27 @@ class Panel(ScreenPanel):
         self.filename_label = {
             "complete": self.labels['file'].get_label(),
             "current": self.labels['file'].get_label(),
-            "position": 0,
-            "limit": (self._screen.width * 37 / 480) // (self._gtk.font_size / 11),
-            "length": len(self.labels['file'].get_label())
+            "end": 0,
         }
-        if self.animation_timeout is None and (self.filename_label['length'] - self.filename_label['limit']) > 0:
+        ellipsized = self.labels['file'].get_layout().is_ellipsized()
+        if not self.animation_timeout and ellipsized:
             self.animation_timeout = GLib.timeout_add_seconds(1, self.animate_label)
+        elif self.animation_timeout:
+            GLib.source_remove(self.animation_timeout)
+            self.animation_timeout = None
         self.update_file_metadata()
 
     def animate_label(self):
-        pos = self.filename_label['position']
-        if pos > (self.filename_label['length'] - self.filename_label['limit']):
-            self.filename_label['position'] = 0
-            self.labels['file'].set_label(self.filename_label['complete'])
+        ellipsized = self.labels['file'].get_layout().is_ellipsized()
+        if ellipsized or self.filename_label['end'] < 3:
+            self.filename_label['current'] = self.filename_label['current'][2:]
+            self.labels['file'].set_label(self.filename_label['current'])
+            if not ellipsized:
+                self.filename_label['end'] += 1
         else:
-            self.labels['file'].set_label(self.filename_label['current'][pos:self.filename_label['length']])
-            self.filename_label['position'] += 1
+            self.filename_label['end'] = 0
+            self.filename_label['current'] = self.filename_label['complete']
+            self.labels['file'].set_label(self.filename_label['complete'])
         return True
 
     def update_file_metadata(self):
