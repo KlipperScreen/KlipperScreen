@@ -393,7 +393,8 @@ msgstr "클리퍼스크린 2024년 6월 지원 중단"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT는 숨겨져 있으므로 압출에서 사용해야 합니다"
+msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT는 숨겨져 있으므로 압출에서 사용해야 합니다"
 
 msgid "Language"
 msgstr "언어"
