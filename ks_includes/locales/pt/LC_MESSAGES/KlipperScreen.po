@@ -373,7 +373,8 @@ msgid "Invert Z"
 msgstr "Inverter Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr "Isso pode levar mais que 5 minutos dependendo da potencia do aquecedor."
+msgstr ""
+"Isso pode levar mais que 5 minutos dependendo da potencia do aquecedor."
 
 msgid "Klipper Restart"
 msgstr "Reiniciar Klipper"
