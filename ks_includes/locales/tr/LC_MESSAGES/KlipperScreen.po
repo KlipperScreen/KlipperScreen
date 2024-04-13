@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-03 14:35-0300\n"
-"PO-Revision-Date: 2024-03-03 22:39+0300\n"
-"Last-Translator: Nurettin Sevdik <nurettinsevdik10@gmail.com>\n"
+"PO-Revision-Date: 2024-04-09 12:02+0000\n"
+"Last-Translator: Faruk 3d <ozcanfaruk.3d@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/tr/>\n"
 "Language: tr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -107,7 +107,7 @@ msgid "Bed screw configuration:"
 msgstr "Tabla vida yapılandırması:"
 
 msgid "Both"
-msgstr ""
+msgstr "ikisi de"
 
 msgid "Calibrate"
 msgstr "Kalibre et"
@@ -122,7 +122,7 @@ msgid "Camera"
 msgstr "Kamera"
 
 msgid "Can't set above the maximum:"
-msgstr "Maksimumun üzerine ayarlanamaz:"
+msgstr "Maksimumun üzerine ayarlanamıyor:"
 
 msgid "Cancel"
 msgstr "İptal"
@@ -202,7 +202,7 @@ msgid "Elapsed:"
 msgstr "Geçen:"
 
 msgid "Emergency Stop"
-msgstr ""
+msgstr "Acil durdurma"
 
 msgid "Ended official support in June 2023"
 msgstr "Resmi destek Haziran 2023 tarihinde sona ermiştir"
@@ -223,7 +223,7 @@ msgid "Error trying to fetch spools"
 msgstr "Makaraları getirmeye çalışırken hata oluştu"
 
 msgid "Error: Couldn't get a position to probe"
-msgstr ""
+msgstr "Hata: İnceleme için bir konum alınamadı"
 
 msgid "Estimated Time Method"
 msgstr "Tahmini Zaman Metodu"
@@ -331,7 +331,7 @@ msgid "Home Y"
 msgstr "Y Sıfırla"
 
 msgid "Home Z"
-msgstr "Z  Sıfırla"
+msgstr "Z Sıfırla"
 
 msgid "Host"
 msgstr "Sunucu"
@@ -476,7 +476,7 @@ msgid "Mesh calibrate"
 msgstr "Mesh Kalibre et"
 
 msgid "Minimum Cruise Ratio"
-msgstr ""
+msgstr "Minimum Gezinme Oranı"
 
 msgid "Modified"
 msgstr "Değiştirilmiş"
@@ -718,7 +718,7 @@ msgid "Small"
 msgstr "Küçük"
 
 msgid "Speed (mm/s)"
-msgstr "Hız  (mm/s)"
+msgstr "Hız (mm/s)"
 
 msgid "Speed +"
 msgstr "Hız +"
