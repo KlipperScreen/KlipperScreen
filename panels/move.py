@@ -113,12 +113,10 @@ class Panel(ScreenPanel):
 
         printer_cfg = self._printer.get_config_section("printer")
         # The max_velocity parameter is not optional in klipper config.
-        max_velocity = int(float(printer_cfg["max_velocity"]))
-        if max_velocity <= 1:
-            logging.error(f"Error getting max_velocity\n{printer_cfg}")
-            max_velocity = 50
+        # The minimum is 1, but least 2 values are needed to create a scale
+        max_velocity = max(int(float(printer_cfg["max_velocity"])), 2)
         if "max_z_velocity" in printer_cfg:
-            max_z_velocity = max(int(float(printer_cfg["max_z_velocity"])), 10)
+            max_z_velocity = max(int(float(printer_cfg["max_z_velocity"])), 2)
         else:
             max_z_velocity = max_velocity
 
@@ -137,35 +135,26 @@ class Panel(ScreenPanel):
         self.labels['options_menu'] = self._gtk.ScrolledWindow()
         self.labels['options'] = Gtk.Grid()
         self.labels['options_menu'].add(self.labels['options'])
+        self.options = {}
         for option in configurable_options:
             name = list(option)[0]
-            self.add_option('options', self.settings, name, option[name])
+            self.options.update(self.add_option('options', self.settings, name, option[name]))
 
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
-        homed_axes = self._printer.get_stat("toolhead", "homed_axes")
-        if homed_axes == "xyz":
-            if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
-                self.labels['pos_x'].set_text(f"X: {data['gcode_move']['gcode_position'][0]:.2f}")
-                self.labels['pos_y'].set_text(f"Y: {data['gcode_move']['gcode_position'][1]:.2f}")
-                self.labels['pos_z'].set_text(f"Z: {data['gcode_move']['gcode_position'][2]:.2f}")
-        else:
-            if "x" in homed_axes:
-                if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
-                    self.labels['pos_x'].set_text(f"X: {data['gcode_move']['gcode_position'][0]:.2f}")
-            else:
-                self.labels['pos_x'].set_text("X: ?")
-            if "y" in homed_axes:
-                if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
-                    self.labels['pos_y'].set_text(f"Y: {data['gcode_move']['gcode_position'][1]:.2f}")
-            else:
-                self.labels['pos_y'].set_text("Y: ?")
-            if "z" in homed_axes:
-                if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
-                    self.labels['pos_z'].set_text(f"Z: {data['gcode_move']['gcode_position'][2]:.2f}")
-            else:
-                self.labels['pos_z'].set_text("Z: ?")
+        if "toolhead" in data and "max_velocity" in data["toolhead"]:
+            max_vel = max(int(float(data["toolhead"]["max_velocity"])), 2)
+            adj = self.options['move_speed_xy'].get_adjustment()
+            adj.set_upper(max_vel)
+        if "gcode_move" in data or "toolhead" in data and "homed_axes" in data["toolhead"]:
+            homed_axes = self._printer.get_stat("toolhead", "homed_axes")
+            for i, axis in enumerate(('x', 'y', 'z')):
+                if axis not in homed_axes:
+                    self.labels[f"pos_{axis}"].set_text(f"{axis.upper()}: ?")
+                elif "gcode_move" in data and "gcode_position" in data["gcode_move"]:
+                    self.labels[f"pos_{axis}"].set_text(
+                        f"{axis.upper()}: {data['gcode_move']['gcode_position'][i]:.2f}")
 
     def change_distance(self, widget, distance):
         logging.info(f"### Distance {distance}")
@@ -197,7 +186,7 @@ class Panel(ScreenPanel):
                       hexpand=True, vexpand=False, valign=Gtk.Align.CENTER)
         dev.get_style_context().add_class("frame-item")
         dev.add(name)
-
+        setting = {}
         if option['type'] == "binary":
             box = Gtk.Box(hexpand=False)
             switch = Gtk.Switch(hexpand=False, vexpand=False,
@@ -205,6 +194,7 @@ class Panel(ScreenPanel):
                                 height_request=round(self._gtk.font_size * 3.5),
                                 active=self._config.get_config().getboolean(option['section'], opt_name))
             switch.connect("notify::active", self.switch_config_option, option['section'], opt_name)
+            setting = {opt_name: switch}
             box.add(switch)
             dev.add(box)
         elif option['type'] == "scale":
@@ -215,6 +205,7 @@ class Panel(ScreenPanel):
             scale.set_value(int(self._config.get_config().get(option['section'], opt_name, fallback=option['value'])))
             scale.set_digits(0)
             scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
+            setting = {opt_name: scale}
             dev.add(scale)
 
         opt_array[opt_name] = {
@@ -228,6 +219,7 @@ class Panel(ScreenPanel):
         self.labels[boxname].insert_row(pos)
         self.labels[boxname].attach(opt_array[opt_name]['row'], 0, pos, 1, 1)
         self.labels[boxname].show_all()
+        return setting
 
     def back(self):
         if len(self.menu) > 1:

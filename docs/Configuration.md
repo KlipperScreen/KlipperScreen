@@ -57,13 +57,6 @@ moonraker_port: 7125
 # Define the z_babystep intervals in a CSV list. Currently only 2 are supported, the last value is default
 # z_babystep_values: 0.01, 0.05
 
-# Override the movement speed and set a specific for this printer.
-# These setting overrides the settings configured in the UI. If specified,
-# the values configured in the UI will not be used.
-# this is not recommended and may be removed in the future, use the ui settings
-# move_speed_xy: 500
-# move_speed_z: 300
-
 # Define one or more moonraker power devices that turn on this printer (CSV list)
 # Default is the printer name
 # power_devices: example1, example2
