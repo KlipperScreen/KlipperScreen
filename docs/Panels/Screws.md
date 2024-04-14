@@ -38,6 +38,15 @@ See "screw_positions" in the [printer options](https://klipperscreen.readthedocs
 The panel doesn't support more than 9 screws. if there is a center screw define the positions to avoid issues.
 See "screw_positions" in the [printer options](https://klipperscreen.readthedocs.io/en/latest/Configuration/#printer-options)
 
+## Rotation
+
+The layout can be rotated if the screen is not directly in front of the machine.
+in the printer configuration you would add screw_rotation: 90
+Valid values are 0 90 180 270
+
+## Inversion
+
+The layout will be inverted if an axis is inverted in the move panel
 
 ## Is there an alternative?
 
