@@ -428,7 +428,7 @@ msgid "Loading..."
 msgstr "Yükleniyor..."
 
 msgid "Lost Connection to Moonraker"
-msgstr "Moonraker ile Kayıp Bağlantı"
+msgstr "Moonraker ile Bağlantı Koptu"
 
 msgid "Lower Nozzle"
 msgstr "Nozzle düşür"
