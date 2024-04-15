@@ -128,6 +128,7 @@ class Panel(ScreenPanel):
             self.options[macro] = {
                 "name": macro,
                 "section": f"displayed_macros {self._screen.connected_printer}",
+                "type": "binary"
             }
             show = self._config.get_config().getboolean(self.options[macro]["section"], macro.lower(), fallback=True)
             if macro not in self.macros and show:
@@ -141,36 +142,6 @@ class Panel(ScreenPanel):
             self.labels['macros'].insert_row(pos)
             self.labels['macros'].attach(self.macros[macro]['row'], 0, pos, 1, 1)
             self.labels['macros'].show_all()
-
-    def add_option(self, boxname, opt_array, opt_name, option):
-        name = Gtk.Label(hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER,
-                         wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
-        name.set_markup(f"<big><b>{option['name']}</b></big>")
-
-        box = Gtk.Box(vexpand=False)
-        switch = Gtk.Switch(hexpand=False, vexpand=False,
-                            width_request=round(self._gtk.font_size * 7),
-                            height_request=round(self._gtk.font_size * 3.5),
-                            active=self._config.get_config().getboolean(option['section'], opt_name, fallback=True))
-        switch.connect("notify::active", self.switch_config_option, option['section'], opt_name)
-        box.add(switch)
-
-        dev = Gtk.Box(hexpand=True, vexpand=False, valign=Gtk.Align.CENTER)
-        dev.get_style_context().add_class("frame-item")
-        dev.add(name)
-        dev.add(box)
-
-        opt_array[opt_name] = {
-            "name": option['name'],
-            "row": dev
-        }
-
-        opts = sorted(self.options, key=str.casefold)
-        pos = opts.index(opt_name)
-
-        self.labels[boxname].insert_row(pos)
-        self.labels[boxname].attach(opt_array[opt_name]['row'], 0, pos, 1, 1)
-        self.labels[boxname].show_all()
 
     def back(self):
         if len(self.menu) > 1:

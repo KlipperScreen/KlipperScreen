@@ -177,50 +177,6 @@ class Panel(ScreenPanel):
         if self._printer.get_stat("gcode_move", "absolute_coordinates"):
             self._screen._ws.klippy.gcode_script("G90")
 
-    def add_option(self, boxname, opt_array, opt_name, option):
-        name = Gtk.Label(hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER, wrap=True)
-        name.set_markup(f"<big><b>{option['name']}</b></big>")
-        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-
-        dev = Gtk.Box(spacing=5,
-                      hexpand=True, vexpand=False, valign=Gtk.Align.CENTER)
-        dev.get_style_context().add_class("frame-item")
-        dev.add(name)
-        setting = {}
-        if option['type'] == "binary":
-            box = Gtk.Box(hexpand=False)
-            switch = Gtk.Switch(hexpand=False, vexpand=False,
-                                width_request=round(self._gtk.font_size * 7),
-                                height_request=round(self._gtk.font_size * 3.5),
-                                active=self._config.get_config().getboolean(option['section'], opt_name))
-            switch.connect("notify::active", self.switch_config_option, option['section'], opt_name)
-            setting = {opt_name: switch}
-            box.add(switch)
-            dev.add(box)
-        elif option['type'] == "scale":
-            dev.set_orientation(Gtk.Orientation.VERTICAL)
-            scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL,
-                                             min=option['range'][0], max=option['range'][1], step=option['step'])
-            scale.set_hexpand(True)
-            scale.set_value(int(self._config.get_config().get(option['section'], opt_name, fallback=option['value'])))
-            scale.set_digits(0)
-            scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
-            setting = {opt_name: scale}
-            dev.add(scale)
-
-        opt_array[opt_name] = {
-            "name": option['name'],
-            "row": dev
-        }
-
-        opts = sorted(list(opt_array), key=lambda x: opt_array[x]['name'])
-        pos = opts.index(opt_name)
-
-        self.labels[boxname].insert_row(pos)
-        self.labels[boxname].attach(opt_array[opt_name]['row'], 0, pos, 1, 1)
-        self.labels[boxname].show_all()
-        return setting
-
     def back(self):
         if len(self.menu) > 1:
             self.unload_menu()
