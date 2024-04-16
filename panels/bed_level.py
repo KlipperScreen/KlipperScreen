@@ -95,18 +95,6 @@ class Panel(ScreenPanel):
         x_positions = {x[0] for x in self.screws}
         y_positions = {y[1] for y in self.screws}
         logging.info(f"X: {x_positions}\nY: {y_positions}")
-        x_cnt = len(x_positions)
-        y_cnt = len(y_positions)
-
-        if x_cnt > 3 or y_cnt > 3:
-            label = Gtk.Label(wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
-            label.set_text(
-                _("Bed screw configuration:") + f" {x_cnt}x{y_cnt}\n\n"
-                + _("Not supported")
-            )
-            grid.attach(label, 1, 0, 3, 2)
-            self.content.add(grid)
-            return
 
         min_x = min(x_positions)
         max_x = max(x_positions)
@@ -153,8 +141,12 @@ class Panel(ScreenPanel):
                     found.append(pos)
             logging.debug(f"Found: {found}")
             logging.debug(f"Screws not used: {remaining_screws}")
+            if len(self.screws) > 9:
+                error_msg = _("This panel supports up-to 9 screws in a 3x3 Grid")
+            else:
+                error_msg = _("It's possible that the configuration is not correct")
             self._screen.show_popup_message(_("Screws not used:") + f" {remaining_screws} \n" +
-                                            _("It's possible that the configuration is not correct"), 2)
+                                            error_msg, 2)
 
         logging.debug(f"Using {len(self.screws) - len(remaining_screws)}/{len(self.screws)}-screw locations")
 
