@@ -83,9 +83,10 @@ class Panel(ScreenPanel):
         if self.ks_printer_cfg is not None:
             rotation = self.ks_printer_cfg.getint("screw_rotation", 0)
             if rotation not in (0, 90, 180, 270):
+                self._screen.show_popup_message(_("Rotation invalid") + f" {rotation} \n")
                 logging.info(f"Rotation invalid: {rotation}")
                 rotation = 0
-            logging.info(f"Configured Rotation: {rotation}")
+            logging.info(f"Rotation: {rotation}")
             invert_x = self._config.get_config()['main'].getboolean("invert_x", False)
             invert_y = self._config.get_config()['main'].getboolean("invert_y", False)
             logging.info(f"Inversion X: {invert_x} Y: {invert_y}")
