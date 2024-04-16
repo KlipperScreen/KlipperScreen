@@ -121,15 +121,17 @@ class Panel(ScreenPanel):
 
         remaining_screws = self.screws[:]
 
+        # The order here it's important because the rotation function will
+        # shift the values according to the angle of rotation
         self.screw_positions = {
             'bl': find_closest(remaining_screws, (min_x, max_y), max_distance),
             'fm': find_closest(remaining_screws, (mid_x, min_y), max_distance),
             'br': find_closest(remaining_screws, (max_x, max_y), max_distance),
-            'rm': find_closest(remaining_screws, (max_x, mid_y), max_distance),
+            'lm': find_closest(remaining_screws, (min_x, mid_y), max_distance),
             'fr': find_closest(remaining_screws, (max_x, min_y), max_distance),
             'bm': find_closest(remaining_screws, (mid_x, max_y), max_distance),
             'fl': find_closest(remaining_screws, (min_x, min_y), max_distance),
-            'lm': find_closest(remaining_screws, (min_x, mid_y), max_distance),
+            'rm': find_closest(remaining_screws, (max_x, mid_y), max_distance),
         }
 
         if invert_x and invert_y:
@@ -229,40 +231,14 @@ class Panel(ScreenPanel):
 
     @staticmethod
     def map_rotation(positions, angle):
-        if angle == 90:
-            return {
-                'fr': positions['br'],
-                'fm': positions['rm'],
-                'fl': positions['fr'],
-                'rm': positions['bm'],
-                'bl': positions['fl'],
-                'bm': positions['lm'],
-                'br': positions['bl'],
-                'lm': positions['fm']
-            }
-        if angle == 180:
-            return {
-                'fr': positions['bl'],
-                'fm': positions['bm'],
-                'fl': positions['br'],
-                'rm': positions['lm'],
-                'bl': positions['fr'],
-                'bm': positions['fm'],
-                'br': positions['fl'],
-                'lm': positions['rm']
-            }
-        if angle == 270:
-            return {
-                'fr': positions['fl'],
-                'fm': positions['lm'],
-                'fl': positions['bl'],
-                'rm': positions['fm'],
-                'bl': positions['br'],
-                'bm': positions['rm'],
-                'br': positions['fr'],
-                'lm': positions['bm']
-            }
-        return positions
+        angle %= 360
+        shift = (angle // 90) * 2
+        rotated_positions = {}
+        keys = list(positions.keys())
+        for i, key in enumerate(keys):
+            new_key = keys[(i + shift) % len(keys)]
+            rotated_positions[new_key] = positions[key]
+        return rotated_positions
 
     def home(self):
         # Test if all axes have been homed. Home if necessary.
