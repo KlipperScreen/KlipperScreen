@@ -57,8 +57,9 @@ moonraker_port: 7125
 # Define the z_babystep intervals in a CSV list. Currently only 2 are supported, the last value is default
 # z_babystep_values: 0.01, 0.05
 
+# For the 'Power on' button on the splash screen:
 # Define one or more moonraker power devices that turn on this printer (CSV list)
-# Default is the printer name
+# By Default it tries to match the printer name defined in this section header to the moonraker power device name.
 # power_devices: example1, example2
 
 # Define what items should be shown in titlebar besides the extruder and bed
