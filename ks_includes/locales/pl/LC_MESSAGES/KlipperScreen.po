@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-03 14:35-0300\n"
-"PO-Revision-Date: 2024-04-13 16:48+0000\n"
-"Last-Translator: Daviteusz <daviteusz0@gmail.com>\n"
+"PO-Revision-Date: 2024-04-16 18:02+0000\n"
+"Last-Translator: F1CU <ficu1234@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/pl/>\n"
 "Language: pl\n"
@@ -199,7 +199,7 @@ msgid "Elapsed:"
 msgstr "Upłynęło:"
 
 msgid "Emergency Stop"
-msgstr ""
+msgstr "Wyłącznik awaryjny"
 
 msgid "Ended official support in June 2023"
 msgstr "Oficjalne wsparcie zakończyło się w czerwcu 2023"
@@ -208,19 +208,19 @@ msgid "Error"
 msgstr "Błąd"
 
 msgid "Error clearing active spool"
-msgstr ""
+msgstr "Błąd czyszczenia aktywnej szpuli"
 
 msgid "Error getting active spool"
-msgstr ""
+msgstr "Błąd pobierania aktywnej szpuli"
 
 msgid "Error setting active spool"
-msgstr ""
+msgstr "Błąd ustawiania aktywnej szpuli"
 
 msgid "Error trying to fetch spools"
-msgstr ""
+msgstr "Błąd podczas pobierania szpuli"
 
 msgid "Error: Couldn't get a position to probe"
-msgstr ""
+msgstr "Błąd: Nie mogę odczytać pozycji sondy"
 
 msgid "Estimated Time Method"
 msgstr "Metoda szacowanego czasu"
@@ -235,7 +235,7 @@ msgid "Extrude"
 msgstr "Wytłaczaj"
 
 msgid "Extruders"
-msgstr ""
+msgstr "Wytłaczarki"
 
 msgid "Extrusion +"
 msgstr "Ekstruzja +"
@@ -427,7 +427,7 @@ msgid "Loading..."
 msgstr "Ładowanie..."
 
 msgid "Lost Connection to Moonraker"
-msgstr ""
+msgstr "Utracono połączenie z Moonraker"
 
 msgid "Lower Nozzle"
 msgstr "Obniż dyszę"
