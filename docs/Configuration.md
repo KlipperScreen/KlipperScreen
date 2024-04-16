@@ -72,7 +72,8 @@ moonraker_port: 7125
 # titlebar_name_type: None
 
 # Z probe calibrate position
-# By default is the middle of the bed
+# By default it tries to guess the correct location
+# it will try using zero reference position, safe_z, mesh midddle, middle of axis length, etc
 # example:
 # calibrate_x_position: 100
 # calibrate_y_position: 100
