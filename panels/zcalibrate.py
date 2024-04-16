@@ -55,7 +55,10 @@ class Panel(ScreenPanel):
         self.buttons['zpos'].connect("clicked", self.move, "+")
         self.buttons['zneg'].connect("clicked", self.move, "-")
         self.buttons['complete'].connect("clicked", self.accept)
-        self.buttons['cancel'].connect("clicked", self.abort)
+        script = {"script": "ABORT"}
+        self.buttons['cancel'].connect("clicked", self._screen._confirm_send_action,
+                                       _("Are you sure you want to stop the calibration?"),
+                                       "printer.gcode.script", script)
 
         self.labels['popover'] = Gtk.Popover(position=Gtk.PositionType.BOTTOM)
 
@@ -265,12 +268,6 @@ class Panel(ScreenPanel):
 
     def move(self, widget, direction):
         self._screen._ws.klippy.gcode_script(f"TESTZ Z={direction}{self.distance}")
-
-    def abort(self, widget):
-        logging.info("Aborting calibration")
-        self._screen._ws.klippy.gcode_script("ABORT")
-        self.buttons_not_calibrating()
-        self._screen._menu_go_back()
 
     def accept(self, widget):
         logging.info("Accepting Z position")
