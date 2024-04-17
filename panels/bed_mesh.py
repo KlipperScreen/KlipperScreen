@@ -81,19 +81,9 @@ class Panel(ScreenPanel):
         if profile is None:
             return None
         if profile == self.active_mesh:
-            bm = self._printer.get_stat("bed_mesh")
-            if bm is None:
-                logging.info(f"Unable to load active mesh: {profile}")
-                return None
-            matrix = 'probed_matrix'
+            return self._printer.get_stat("bed_mesh")
         else:
-            bm = self._printer.get_config_section(f"bed_mesh {profile}")
-            if bm is False:
-                logging.info(f"Unable to load profile: {profile}")
-                self.remove_profile(profile)
-                return None
-            matrix = 'points'
-        return bm[matrix]
+            return self._printer.get_config_section(f"bed_mesh {profile}")
 
     def update_graph(self, widget=None, profile=None):
         if self.ks_printer_cfg is not None:

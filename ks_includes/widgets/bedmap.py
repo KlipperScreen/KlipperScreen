@@ -1,3 +1,4 @@
+import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -16,34 +17,78 @@ class BedMap(Gtk.DrawingArea):
         self.invert_x = False
         self.invert_y = False
         self.rotation = 0
+        self.mesh_min = [0, 0]
+        self.mesh_max = [0, 0]
+        self.mesh_radius = 0
 
     def update_bm(self, bm):
-        if bm is None:
+        if not bm:
             self.bm = None
             return
-        print(bm)
+
+        for key, value in bm.items():
+            if key == 'profiles':
+                continue
+            logging.info(f"{key}: {value}")
+        if 'mesh_min' in bm:
+            self.mesh_min = bm['mesh_min']
+            self.mesh_max = bm['mesh_max']
+        if 'mesh_radius' in bm:
+            self.mesh_radius = bm['mesh_radius']
+        if 'probed_matrix' in bm:
+            bm = bm['probed_matrix']
+        elif 'points' in bm:
+            bm = bm['points']
+        else:
+            self.bm = None
+            return
+
         if self.invert_x and self.invert_y:
-            self.bm = [list(reversed(b)) for b in bm]
-        elif self.invert_x:
+            self.rotation = (self.rotation + 180) % 360
+            self.invert_x = self.invert_y = False
+        if self.invert_x:
+            new_max = [self.mesh_min[0], self.mesh_max[1]]
+            new_min = [self.mesh_max[0], self.mesh_min[1]]
+            self.mesh_max = new_max
+            self.mesh_min = new_min
             self.bm = [list(reversed(b)) for b in list(reversed(bm))]
-        elif self.invert_y:
+        if self.invert_y:
+            new_max = [self.mesh_max[0], self.mesh_min[1]]
+            new_min = [self.mesh_min[0], self.mesh_max[1]]
+            self.mesh_max = new_max
+            self.mesh_min = new_min
             self.bm = list(bm)
         else:
             self.bm = list(reversed(bm))
+
         if self.rotation in (90, 180, 270):
             self.bm = self.rotate_matrix(self.bm)
 
     def rotate_matrix(self, matrix):
         if self.rotation == 90:
+            new_max = [self.mesh_max[1], self.mesh_min[0]]
+            new_min = [self.mesh_min[1], self.mesh_max[0]]
+            self.mesh_max = new_max
+            self.mesh_min = new_min
             return [list(row) for row in zip(*matrix[::-1])]
         elif self.rotation == 180:
+            new_max = [self.mesh_min[0], self.mesh_min[1]]
+            new_min = [self.mesh_max[0], self.mesh_max[1]]
+            self.mesh_max = new_max
+            self.mesh_min = new_min
             return [list(row)[::-1] for row in matrix[::-1]]
         elif self.rotation == 270:
+            new_max = [self.mesh_min[1], self.mesh_max[0]]
+            new_min = [self.mesh_max[1], self.mesh_min[0]]
+            self.mesh_max = new_max
+            self.mesh_min = new_min
             return [list(row) for row in zip(*matrix)][::-1]
 
     def draw_graph(self, da, ctx):
         width = da.get_allocated_width()
         height = da.get_allocated_height()
+        gwidth = int(width - self.font_size * 2.2)
+        gheight = int(height - self.font_size * 1.8)
         # Styling
         ctx.set_line_width(1)
         ctx.set_font_size(self.font_size)
@@ -55,14 +100,37 @@ class BedMap(Gtk.DrawingArea):
             ctx.stroke()
             return
 
+        if not self.mesh_radius:
+            text_side_top = [0, self.font_size]
+            text_side_bottom = [0, height - int(self.font_size * 2)]
+            text_side_middle = [self.font_size, (text_side_top[1] + text_side_bottom[1]) / 2]
+            text_bottom_left = [self.font_size * 1.8, height - int(self.font_size / 2)]
+            text_bottom_right = [width - int(self.font_size * 2.2), height - int(self.font_size / 2)]
+            text_bottom_middle = [int(self.font_size * 2 + gwidth / 2), height - int(self.font_size / 2)]
+            # dibujar ejes
+            ctx.set_source_rgb(0.5, 0.5, 0.5)
+            ctx.move_to(*text_side_top)
+            ctx.show_text(f"{self.mesh_max[1]:.0f}".rjust(4, " "))
+            ctx.move_to(*text_side_bottom)
+            ctx.show_text(f"{self.mesh_min[1]:.0f}".rjust(4, " "))
+            ctx.move_to(*text_bottom_left)
+            ctx.show_text(f"{self.mesh_min[0]:.0f}".rjust(4, " "))
+            ctx.move_to(*text_bottom_right)
+            ctx.show_text(f"{self.mesh_max[0]:.0f}".rjust(4, " "))
+            ctx.move_to(*text_side_middle)
+            ctx.show_text(f"{'Y' if self.rotation == 0 or self.rotation == 180 else 'X'}")
+            ctx.move_to(*text_bottom_middle)
+            ctx.show_text(f"{'X' if self.rotation == 0 or self.rotation == 180 else 'Y'}")
+            ctx.stroke()
+
         rows = len(self.bm)
         columns = len(self.bm[0])
         for i, row in enumerate(self.bm):
-            ty = height / rows * i
-            by = ty + height / rows
+            ty = (gheight / rows * i)
+            by = ty + gheight / rows
             for j, column in enumerate(row):
-                lx = width / columns * j
-                rx = lx + width / columns
+                lx = (gwidth / columns * j) + self.font_size * 2.2
+                rx = lx + gwidth / columns
                 # Colors
                 ctx.set_source_rgb(*self.colorbar(column))
                 ctx.move_to(lx, ty)
