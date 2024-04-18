@@ -62,9 +62,7 @@ class Panel(ScreenPanel):
             self.profiles[self.active_mesh]['name'].get_style_context().remove_class("button_active")
         if profile == "":
             logging.info("Clearing active profile")
-            self.active_mesh = None
-            self.update_graph()
-            self.buttons['clear'].set_sensitive(False)
+            self._clear_profile()
             return
         if profile not in self.profiles:
             self.add_profile(profile)
@@ -139,12 +137,7 @@ class Panel(ScreenPanel):
             "delete": buttons["delete"],
         }
 
-        pl = list(self.profiles)
-        if "default" in pl:
-            pl.remove('default')
-        profiles = sorted(pl)
-        pos = profiles.index(profile) + 1 if profile != "default" else 0
-
+        pos = self._get_position(profile)
         self.labels['profiles'].insert_row(pos)
         self.labels['profiles'].attach(self.profiles[profile]['row'], 0, pos, 1, 1)
         self.labels['profiles'].show_all()
@@ -186,17 +179,23 @@ class Panel(ScreenPanel):
         if profile not in self.profiles:
             return
 
+        pos = self._get_position(profile)
+        self.labels['profiles'].remove_row(pos)
+        del self.profiles[profile]
+        if not self.profiles:
+            self._clear_profile()
+
+    def _clear_profile(self):
+        self.active_mesh = None
+        self.update_graph()
+        self.buttons['clear'].set_sensitive(False)
+
+    def _get_position(self, profile):
         pl = list(self.profiles)
         if "default" in pl:
             pl.remove('default')
         profiles = sorted(pl)
-        pos = profiles.index(profile) + 1 if profile != "default" else 0
-        self.labels['profiles'].remove_row(pos)
-        del self.profiles[profile]
-        if not self.profiles:
-            self.active_mesh = None
-            self.update_graph()
-            self.buttons['clear'].set_sensitive(False)
+        return profiles.index(profile) + 1 if profile != "default" else 0
 
     def show_create_profile(self, widget):
 
