@@ -19,7 +19,6 @@ class BedMap(Gtk.DrawingArea):
         self.rotation = 0
         self.mesh_min = [0, 0]
         self.mesh_max = [0, 0]
-        self.mesh_radius = 0
 
     def update_bm(self, bm):
         if not bm:
@@ -32,9 +31,8 @@ class BedMap(Gtk.DrawingArea):
             logging.info(f"{key}: {value}")
         if 'mesh_min' in bm:
             self.mesh_min = bm['mesh_min']
+        if 'mesh_max' in bm:
             self.mesh_max = bm['mesh_max']
-        if 'mesh_radius' in bm:
-            self.mesh_radius = bm['mesh_radius']
         if 'probed_matrix' in bm:
             bm = bm['probed_matrix']
         elif 'points' in bm:
@@ -100,28 +98,30 @@ class BedMap(Gtk.DrawingArea):
             ctx.stroke()
             return
 
-        if not self.mesh_radius:
-            text_side_top = [0, self.font_size]
-            text_side_bottom = [0, height - int(self.font_size * 2)]
-            text_side_middle = [self.font_size, (text_side_top[1] + text_side_bottom[1]) / 2]
-            text_bottom_left = [self.font_size * 1.8, height - int(self.font_size / 2)]
-            text_bottom_right = [width - int(self.font_size * 2.2), height - int(self.font_size / 2)]
-            text_bottom_middle = [int(self.font_size * 2 + gwidth / 2), height - int(self.font_size / 2)]
-            # dibujar ejes
-            ctx.set_source_rgb(0.5, 0.5, 0.5)
-            ctx.move_to(*text_side_top)
-            ctx.show_text(f"{self.mesh_max[1]:.0f}".rjust(4, " "))
-            ctx.move_to(*text_side_bottom)
-            ctx.show_text(f"{self.mesh_min[1]:.0f}".rjust(4, " "))
-            ctx.move_to(*text_bottom_left)
-            ctx.show_text(f"{self.mesh_min[0]:.0f}".rjust(4, " "))
-            ctx.move_to(*text_bottom_right)
-            ctx.show_text(f"{self.mesh_max[0]:.0f}".rjust(4, " "))
-            ctx.move_to(*text_side_middle)
-            ctx.show_text(f"{'Y' if self.rotation == 0 or self.rotation == 180 else 'X'}")
-            ctx.move_to(*text_bottom_middle)
-            ctx.show_text(f"{'X' if self.rotation == 0 or self.rotation == 180 else 'Y'}")
-            ctx.stroke()
+        text_side_top = [0, self.font_size]
+        text_side_bottom = [0, height - int(self.font_size * 2)]
+        text_side_middle = [self.font_size, (text_side_top[1] + text_side_bottom[1]) / 2]
+        text_bottom_left = [self.font_size * 1.8, height - int(self.font_size / 2)]
+        text_bottom_right = [width - int(self.font_size * 2.2), height - int(self.font_size / 2)]
+        text_bottom_middle = [int(self.font_size * 2 + gwidth / 2), height - int(self.font_size / 2)]
+
+        ctx.set_source_rgb(0.5, 0.5, 0.5)
+        ctx.move_to(*text_side_middle)
+        ctx.show_text(f"{'Y' if self.rotation in (0, 180) else 'X'}")
+        ctx.move_to(*text_bottom_middle)
+        ctx.show_text(f"{'X' if self.rotation in (0, 180) else 'Y'}")
+        ctx.stroke()
+
+        # min and max axis labels
+        ctx.move_to(*text_side_top)
+        ctx.show_text(f"{self.mesh_max[1]:.0f}".rjust(4, " "))
+        ctx.move_to(*text_side_bottom)
+        ctx.show_text(f"{self.mesh_min[1]:.0f}".rjust(4, " "))
+        ctx.move_to(*text_bottom_left)
+        ctx.show_text(f"{self.mesh_min[0]:.0f}".rjust(4, " "))
+        ctx.move_to(*text_bottom_right)
+        ctx.show_text(f"{self.mesh_max[0]:.0f}".rjust(4, " "))
+        ctx.stroke()
 
         rows = len(self.bm)
         columns = len(self.bm[0])
