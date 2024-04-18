@@ -78,14 +78,6 @@ moonraker_port: 7125
 # calibrate_x_position: 100
 # calibrate_y_position: 100
 
-
-# Bed Screws
-# define the screw positons required for odd number of screws in a comma separated list (CSV)
-# possible values are: bl, br, bm, fl, fr, fm, lm, rm, center
-# they correspond to back-left, back-right, back-middle, front-left, front-right, front-middle, left-middle, right-middle
-# example:
-# screw_positions: bl, br, fm
-
 # Rotation is useful if the screen is not directly in front of the machine.
 # It will affect the bed mesh visualization.
 # Valid values are 0 90 180 270

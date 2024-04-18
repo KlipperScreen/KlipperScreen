@@ -13,7 +13,7 @@ from ks_includes.screen_panel import ScreenPanel
 # but return None if the distance is above max_distance.
 # If remove is set to true, the screw is also removed
 # from the list of passed in screws.
-def find_closest(screws, point, max_distance, remove=False):
+def find_closest(screws, point, max_distance):
     if len(screws) == 0:
         return None
     closest = screws[0]
@@ -26,9 +26,7 @@ def find_closest(screws, point, max_distance, remove=False):
 
     if min_distance > max_distance:
         return None
-
-    if remove:
-        screws.remove(closest)
+    screws.remove(closest)
     return closest
 
 
@@ -36,19 +34,18 @@ class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
-        self.screw_dict = {}
+        self.screw_positions = {}
         self.screws = []
-        self.y_cnt = 0
-        self.x_cnt = 0
         self.x_offset = 0
         self.y_offset = 0
         self.buttons = {'dm': self._gtk.Button("motor-off", _("Disable Motors"), "color3")}
         self.buttons['dm'].connect("clicked", self.disable_motors)
-        rotation = None
+        rotation = 0
         self.probe_z_height = 0
         self.lift_speed = 5
         self.horizontal_move_z = 5
         self.horizontal_speed = 50
+        invert_x = invert_y = False
 
         grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         grid.attach(self.buttons['dm'], 0, 0, 1, 1)
@@ -82,39 +79,22 @@ class Panel(ScreenPanel):
             self.screws = self._get_screws("bed_screws")
             logging.info(f"bed_screws: {self.screws}")
 
-        nscrews = len(self.screws)
         # KS config
-        valid_positions = True
-        valid_screws = ["bl", "fl", "fr", "br", "bm", "fm", "lm", "rm", "center"]
         if self.ks_printer_cfg is not None:
-            screw_positions = self.ks_printer_cfg.get("screw_positions", "")
-            if screw_positions:
-                screw_positions = [str(i.strip()) for i in screw_positions.split(',')]
-                logging.info(f"Positions: {screw_positions}")
-                for screw in screw_positions:
-                    if screw not in valid_screws:
-                        logging.error(f"Unknown screw: {screw}")
-                        self._screen.show_popup_message(_("Unknown screw position") + f": {screw}")
-                        valid_positions = False
-                if not (3 <= len(screw_positions) <= 9):
-                    valid_positions = False
-            else:
-                if nscrews in (3, 5, 7):
-                    valid_positions = False
-                screw_positions = valid_screws
             rotation = self.ks_printer_cfg.getint("screw_rotation", 0)
+            if rotation not in (0, 90, 180, 270):
+                self._screen.show_popup_message(_("Rotation invalid") + f" {rotation} \n")
+                logging.info(f"Rotation invalid: {rotation}")
+                rotation = 0
             logging.info(f"Rotation: {rotation}")
-        else:
-            if nscrews in (3, 5, 7):
-                valid_positions = False
-            screw_positions = valid_screws
+            invert_x = self._config.get_config()['main'].getboolean("invert_x", False)
+            invert_y = self._config.get_config()['main'].getboolean("invert_y", False)
+            logging.info(f"Inversion X: {invert_x} Y: {invert_y}")
 
         # get dimensions
         x_positions = {x[0] for x in self.screws}
         y_positions = {y[1] for y in self.screws}
         logging.info(f"X: {x_positions}\nY: {y_positions}")
-        self.x_cnt = len(x_positions)
-        self.y_cnt = len(y_positions)
 
         min_x = min(x_positions)
         max_x = max(x_positions)
@@ -124,32 +104,49 @@ class Panel(ScreenPanel):
         max_y = max(y_positions)
         mid_y = round((min_y + max_y) / 2)
 
-        max_distance = math.ceil(
-            math.hypot(max_x - min_x, max_y - min_y)
-            / min(self.x_cnt, self.y_cnt, 3)
-        )
+        max_distance = math.floor(min(max_x - min_x, max_y - min_y) / 3)
 
         logging.debug(f"Using max_distance: {max_distance} to fit: {len(self.screws)} screws.")
 
         remaining_screws = self.screws[:]
 
-        fl = find_closest(remaining_screws, (min_x, min_y), max_distance, remove="fl" in screw_positions)
-        bl = find_closest(remaining_screws, (min_x, max_y), max_distance, remove="bl" in screw_positions)
-        br = find_closest(remaining_screws, (max_x, max_y), max_distance, remove="br" in screw_positions)
-        fr = find_closest(remaining_screws, (max_x, min_y), max_distance, remove="fr" in screw_positions)
+        # The order here it's important because the rotation function will
+        # shift the values according to the angle of rotation
+        self.screw_positions = {
+            'bl': find_closest(remaining_screws, (min_x, max_y), max_distance),
+            'fm': find_closest(remaining_screws, (mid_x, min_y), max_distance),
+            'br': find_closest(remaining_screws, (max_x, max_y), max_distance),
+            'lm': find_closest(remaining_screws, (min_x, mid_y), max_distance),
+            'fr': find_closest(remaining_screws, (max_x, min_y), max_distance),
+            'bm': find_closest(remaining_screws, (mid_x, max_y), max_distance),
+            'fl': find_closest(remaining_screws, (min_x, min_y), max_distance),
+            'rm': find_closest(remaining_screws, (max_x, mid_y), max_distance),
+        }
 
-        fm = find_closest(remaining_screws, (mid_x, min_y), max_distance, remove="fm" in screw_positions)
-        bm = find_closest(remaining_screws, (mid_x, max_y), max_distance, remove="bm" in screw_positions)
+        if invert_x and invert_y:
+            rotation = (rotation + 180) % 360
+            invert_x = invert_y = False
+        if rotation != 0:
+            self.screw_positions = self.map_rotation(self.screw_positions, rotation)
+            logging.info(f"Rotated: {rotation}")
+        if invert_x or invert_y:
+            self.screw_positions = self.map_invert(self.screw_positions, invert_x, invert_y)
 
-        lm = find_closest(remaining_screws, (min_x, mid_y), max_distance, remove="lm" in screw_positions)
-        rm = find_closest(remaining_screws, (max_x, mid_y), max_distance, remove="rm" in screw_positions)
-
-        center = find_closest(remaining_screws, (mid_x, mid_y), max_distance, remove="center" in screw_positions)
+        self.screw_positions['center'] = find_closest(remaining_screws, (mid_x, mid_y), max_distance)
 
         if len(remaining_screws) != 0:
+            found = []
+            for pos in self.screw_positions:
+                if self.screw_positions[pos]:
+                    found.append(pos)
+            logging.debug(f"Found: {found}")
             logging.debug(f"Screws not used: {remaining_screws}")
-            self._screen.show_popup_message(f"Screws not used: {remaining_screws} \n"
-                                            f"It's possible that the configuration is not correct", 2)
+            if len(self.screws) > 9:
+                error_msg = _("This panel supports up-to 9 screws in a 3x3 Grid")
+            else:
+                error_msg = _("It's possible that the configuration is not correct")
+            self._screen.show_popup_message(_("Screws not used:") + f" {remaining_screws} \n" +
+                                            error_msg, 2)
 
         logging.debug(f"Using {len(self.screws) - len(remaining_screws)}/{len(self.screws)}-screw locations")
 
@@ -165,137 +162,76 @@ class Panel(ScreenPanel):
         self.buttons['bm'] = self._gtk.Button("bed-level-t-m", scale=button_scale)
         self.buttons['center'] = self._gtk.Button("bed-level-center", scale=button_scale)
 
+        screw_layout_map = {
+            'fr': [3, 2, 1, 1],
+            'fm': [2, 2, 1, 1],
+            'fl': [1, 2, 1, 1],
+            'rm': [3, 1, 1, 1],
+            'br': [3, 0, 1, 1],
+            'bm': [2, 0, 1, 1],
+            'bl': [1, 0, 1, 1],
+            'lm': [1, 1, 1, 1],
+            'center': [2, 1, 1, 1],
+        }
+
         bedgrid = Gtk.Grid()
+        for pos in screw_layout_map:
+            bedgrid.attach(self.buttons[pos], *screw_layout_map[pos])
+            self.buttons[pos].set_no_show_all(True)
+            if pos in self.screw_positions and self.screw_positions[pos]:
+                self.buttons[pos].show()
 
-        if valid_positions:
-            if "bl" in screw_positions and bl:
-                bedgrid.attach(self.buttons['bl'], 1, 0, 1, 1)
-            if "fl" in screw_positions and fl:
-                bedgrid.attach(self.buttons['fl'], 1, 2, 1, 1)
-            if "fr" in screw_positions and fr:
-                bedgrid.attach(self.buttons['fr'], 3, 2, 1, 1)
-            if "br" in screw_positions and br:
-                bedgrid.attach(self.buttons['br'], 3, 0, 1, 1)
-            if "bm" in screw_positions and bm:
-                bedgrid.attach(self.buttons['bm'], 2, 0, 1, 1)
-            if "fm" in screw_positions and fm:
-                bedgrid.attach(self.buttons['fm'], 2, 2, 1, 1)
-            if "lm" in screw_positions and lm:
-                bedgrid.attach(self.buttons['lm'], 1, 1, 1, 1)
-            if "rm" in screw_positions and rm:
-                bedgrid.attach(self.buttons['rm'], 3, 1, 1, 1)
-            if "center" in screw_positions and center:
-                bedgrid.attach(self.buttons['center'], 2, 1, 1, 1)
-                self.buttons['center'].connect("clicked", self.go_to_position, center)
-        else:
-            label = Gtk.Label(wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
-            label.set_text(
-                _("Bed screw configuration:") + f" {nscrews}\n\n"
-                + _("Not supported for auto-detection, it needs to be configured in klipperscreen.conf")
-            )
-            grid.attach(label, 1, 0, 3, 2)
-            self.content.add(grid)
-            return
+        for layout_pos in self.screw_positions:
+            self.buttons[layout_pos].connect("clicked", self.go_to_position, self.screw_positions[layout_pos])
 
-        if rotation == 90:
-            # fl lm bl
-            # fm    bm
-            # fr rm br
-
-            self.buttons['bl'].connect("clicked", self.go_to_position, fl)
-            self.buttons['bm'].connect("clicked", self.go_to_position, lm)
-            self.buttons['br'].connect("clicked", self.go_to_position, bl)
-            self.buttons['rm'].connect("clicked", self.go_to_position, bm)
-            self.buttons['fr'].connect("clicked", self.go_to_position, br)
-            self.buttons['fm'].connect("clicked", self.go_to_position, rm)
-            self.buttons['fl'].connect("clicked", self.go_to_position, fr)
-            self.buttons['lm'].connect("clicked", self.go_to_position, fm)
-            self.screw_dict = {
-                'bl': fl,
-                'bm': lm,
-                'br': bl,
-                'rm': bm,
-                'fr': br,
-                'fm': rm,
-                'fl': fr,
-                'lm': fm
-            }
-        elif rotation == 180:
-            # fr fm fl
-            # rm    lm
-            # br bm bl
-            self.buttons['bl'].connect("clicked", self.go_to_position, fr)
-            self.buttons['bm'].connect("clicked", self.go_to_position, fm)
-            self.buttons['br'].connect("clicked", self.go_to_position, fl)
-            self.buttons['rm'].connect("clicked", self.go_to_position, lm)
-            self.buttons['fr'].connect("clicked", self.go_to_position, bl)
-            self.buttons['fm'].connect("clicked", self.go_to_position, bm)
-            self.buttons['fl'].connect("clicked", self.go_to_position, br)
-            self.buttons['lm'].connect("clicked", self.go_to_position, rm)
-            self.screw_dict = {
-                'bl': fr,
-                'bm': fm,
-                'br': fl,
-                'rm': lm,
-                'fr': bl,
-                'fm': bm,
-                'fl': br,
-                'lm': rm
-            }
-        elif rotation == 270:
-            # br rm fr
-            # bm    fm
-            # bl lm fl
-            self.buttons['bl'].connect("clicked", self.go_to_position, br)
-            self.buttons['bm'].connect("clicked", self.go_to_position, rm)
-            self.buttons['br'].connect("clicked", self.go_to_position, fr)
-            self.buttons['rm'].connect("clicked", self.go_to_position, fm)
-            self.buttons['fr'].connect("clicked", self.go_to_position, fl)
-            self.buttons['fm'].connect("clicked", self.go_to_position, lm)
-            self.buttons['fl'].connect("clicked", self.go_to_position, bl)
-            self.buttons['lm'].connect("clicked", self.go_to_position, bm)
-            self.screw_dict = {
-                'bl': br,
-                'bm': rm,
-                'br': fr,
-                'rm': fm,
-                'fr': fl,
-                'fm': lm,
-                'fl': bl,
-                'lm': bm
-            }
-        else:
-            # bl bm br
-            # lm    rm
-            # fl fm fr
-            self.buttons['bl'].connect("clicked", self.go_to_position, bl)
-            self.buttons['bm'].connect("clicked", self.go_to_position, bm)
-            self.buttons['br'].connect("clicked", self.go_to_position, br)
-            self.buttons['rm'].connect("clicked", self.go_to_position, rm)
-            self.buttons['fr'].connect("clicked", self.go_to_position, fr)
-            self.buttons['fm'].connect("clicked", self.go_to_position, fm)
-            self.buttons['fl'].connect("clicked", self.go_to_position, fl)
-            self.buttons['lm'].connect("clicked", self.go_to_position, lm)
-            self.screw_dict = {
-                'bl': bl,
-                'bm': bm,
-                'br': br,
-                'rm': rm,
-                'fr': fr,
-                'fm': fm,
-                'fl': fl,
-                'lm': lm
-            }
-        self.screw_dict['center'] = center
         remove_list = []
-        for screw in self.screw_dict:
-            if screw not in screw_positions:
+        for screw in self.screw_positions:
+            if self.screw_positions[screw] is None:
                 remove_list.append(screw)
         for screw in remove_list:
-            self.screw_dict.pop(screw)
+            self.screw_positions.pop(screw)
+
+        logging.info(f"screw_positions: {self.screw_positions}")
 
         grid.attach(bedgrid, 1, 0, 3, 2)
         self.content.add(grid)
+
+    @staticmethod
+    def map_invert(positions, invert_x, invert_y):
+        if invert_x:
+            return {
+                'fr': positions['fl'],
+                'fm': positions['fm'],
+                'fl': positions['fr'],
+                'rm': positions['lm'],
+                'bl': positions['br'],
+                'bm': positions['bm'],
+                'br': positions['bl'],
+                'lm': positions['rm']
+            }
+        if invert_y:
+            return {
+                'fr': positions['br'],
+                'fm': positions['bm'],
+                'fl': positions['bl'],
+                'rm': positions['rm'],
+                'bl': positions['fl'],
+                'bm': positions['fm'],
+                'br': positions['fr'],
+                'lm': positions['lm']
+            }
+        return positions
+
+    @staticmethod
+    def map_rotation(positions, angle):
+        angle %= 360
+        shift = (angle // 90) * 2
+        rotated_positions = {}
+        keys = list(positions.keys())
+        for i, key in enumerate(keys):
+            new_key = keys[(i + shift) % len(keys)]
+            rotated_positions[new_key] = positions[key]
+        return rotated_positions
 
     def home(self):
         # Test if all axes have been homed. Home if necessary.
@@ -344,7 +280,7 @@ class Panel(ScreenPanel):
                     x, y = section[screw].split(',')
                     x = float(x) + self.x_offset
                     y = float(y) + self.y_offset
-                    for key, value in self.screw_dict.items():
+                    for key, value in self.screw_positions.items():
                         if value and x == value[0] and y == value[1]:
                             logging.debug(f"X: {x} Y: {y} Adjust: {result['adjust']} Pos: {key}")
                             if result['is_base']:
