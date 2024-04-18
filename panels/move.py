@@ -122,9 +122,9 @@ class Panel(ScreenPanel):
 
         configurable_options = [
             {"invert_x": {"section": "main", "name": _("Invert X"), "type": "binary", "value": "False",
-                          "callback": self.reinit_screw_panel}},
+                          "callback": self.reinit_panels}},
             {"invert_y": {"section": "main", "name": _("Invert Y"), "type": "binary", "value": "False",
-                          "callback": self.reinit_screw_panel}},
+                          "callback": self.reinit_panels}},
             {"invert_z": {"section": "main", "name": _("Invert Z"), "type": "binary", "value": "False"}},
             {"move_speed_xy": {
                 "section": "main", "name": _("XY Speed (mm/s)"), "type": "scale", "value": "50",
@@ -142,9 +142,10 @@ class Panel(ScreenPanel):
             name = list(option)[0]
             self.options.update(self.add_option('options', self.settings, name, option[name]))
 
-    def reinit_screw_panel(self, value):
+    def reinit_panels(self, value):
         logging.info(self._screen.panels)
         self._screen.panels_reinit.append("bed_level")
+        self._screen.panels_reinit.append("bed_mesh")
 
     def process_update(self, action, data):
         if action != "notify_status_update":
