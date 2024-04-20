@@ -101,7 +101,10 @@ class Panel(ScreenPanel):
         for param in self.macros[macro]["params"]:
             value = self.macros[macro]["params"][param].get_text()
             if value:
-                params += f' {param}={value}'
+                if re.findall(r'[G|M]\d{1,3}', macro):
+                    params += f' {param}{value}'
+                else:
+                    params += f' {param}={value}'
         self._screen.show_popup_message(f"{macro} {params}", 1)
         self._screen._send_action(widget, "printer.gcode.script", {"script": f"{macro}{params}"})
 
