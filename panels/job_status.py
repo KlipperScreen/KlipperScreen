@@ -762,30 +762,26 @@ class Panel(ScreenPanel):
     def update_filename(self, filename):
         if not filename:
             return
+        if self.animation_timeout is not None:
+            GLib.source_remove(self.animation_timeout)
+            self.animation_timeout = None
         self.filename = filename
         self.labels["file"].set_label(os.path.splitext(self.filename)[0])
         self.filename_label = {
             "complete": self.labels['file'].get_label(),
             "current": self.labels['file'].get_label(),
-            "end": 0,
         }
         ellipsized = self.labels['file'].get_layout().is_ellipsized()
-        if not self.animation_timeout and ellipsized:
+        if ellipsized:
             self.animation_timeout = GLib.timeout_add_seconds(1, self.animate_label)
-        elif self.animation_timeout:
-            GLib.source_remove(self.animation_timeout)
-            self.animation_timeout = None
         self.update_file_metadata()
 
     def animate_label(self):
         ellipsized = self.labels['file'].get_layout().is_ellipsized()
-        if ellipsized or self.filename_label['end'] < 3:
+        if ellipsized:
             self.filename_label['current'] = self.filename_label['current'][2:]
             self.labels['file'].set_label(self.filename_label['current'])
-            if not ellipsized:
-                self.filename_label['end'] += 1
         else:
-            self.filename_label['end'] = 0
             self.filename_label['current'] = self.filename_label['complete']
             self.labels['file'].set_label(self.filename_label['complete'])
         return True
