@@ -31,7 +31,7 @@ class BedMap(Gtk.DrawingArea):
                 continue
             logging.info(f"{key}: {value}")
         if radius:
-            self.mesh_radius = radius
+            self.mesh_radius = float(radius)
         if 'mesh_min' in bm:
             self.mesh_min = bm['mesh_min']
         if 'mesh_max' in bm:
