@@ -15,6 +15,8 @@ class Panel(ScreenPanel):
         super().__init__(screen, title)
         self.show_create = False
         self.active_mesh = None
+        section = self._printer.get_config_section("bed_mesh")
+        self.mesh_radius = section['mesh_radius'] if 'mesh_radius' in section else None
         self.profiles = {}
         self.buttons = {
             'add': self._gtk.Button("increase", " " + _("Add profile"), "color1", self.bts, Gtk.PositionType.LEFT, 1),
@@ -93,7 +95,7 @@ class Panel(ScreenPanel):
                 rotation = 0
             self.labels['map'].set_rotation(rotation)
             logging.info(f"Inversion X: {invert_x} Y: {invert_y} Rotation: {rotation}")
-        self.labels['map'].update_bm(self.retrieve_bm(profile))
+        self.labels['map'].update_bm(self.retrieve_bm(profile), self.mesh_radius)
         self.labels['map'].queue_draw()
 
     def add_profile(self, profile):

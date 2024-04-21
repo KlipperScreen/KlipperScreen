@@ -19,8 +19,9 @@ class BedMap(Gtk.DrawingArea):
         self.rotation = 0
         self.mesh_min = [0, 0]
         self.mesh_max = [0, 0]
+        self.mesh_radius = 0
 
-    def update_bm(self, bm):
+    def update_bm(self, bm, radius=None):
         if not bm:
             self.bm = None
             return
@@ -29,6 +30,8 @@ class BedMap(Gtk.DrawingArea):
             if key == 'profiles':
                 continue
             logging.info(f"{key}: {value}")
+        if radius:
+            self.mesh_radius = radius
         if 'mesh_min' in bm:
             self.mesh_min = bm['mesh_min']
         if 'mesh_max' in bm:
@@ -78,6 +81,7 @@ class BedMap(Gtk.DrawingArea):
         elif self.rotation == 270:
             new_max = [self.mesh_min[1], self.mesh_max[0]]
             new_min = [self.mesh_max[1], self.mesh_min[0]]
+
             self.mesh_max = new_max
             self.mesh_min = new_min
             return [list(row) for row in zip(*matrix)][::-1]
@@ -129,6 +133,8 @@ class BedMap(Gtk.DrawingArea):
             ty = (gheight / rows * i)
             by = ty + gheight / rows
             for j, column in enumerate(row):
+                if self.mesh_radius > 0 and self.round_bed_skip(i, j, row, rows, columns):
+                    continue
                 lx = (gwidth / columns * j) + self.font_size * 2.2
                 rx = lx + gwidth / columns
                 # Colors
@@ -150,6 +156,18 @@ class BedMap(Gtk.DrawingArea):
                     ctx.move_to((lx + rx) / 2 - self.font_size * 1.2, (ty + by + self.font_size) / 2)
                 ctx.show_text(f"{column:.2f}")
                 ctx.stroke()
+
+    @staticmethod
+    def round_bed_skip(i, j, row, rows, columns):
+        if columns <= 3:
+            return False
+        if i != rows // 2 and j != columns // 2:
+            # Skip if the value is equal to the next but verify that this also happens on the other side
+            if j < columns // 2 and row[j] == row[j + 1] and row[columns - 1] == row[columns - 1 - j]:
+                return True
+            if j > columns // 2 and row[j] == row[j - 1] and row[0] == row[columns - j]:
+                return True
+        return False
 
     @staticmethod
     def colorbar(value):
