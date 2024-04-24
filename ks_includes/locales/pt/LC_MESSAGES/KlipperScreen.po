@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-03 14:35-0300\n"
-"PO-Revision-Date: 2024-04-13 16:48+0000\n"
+"PO-Revision-Date: 2024-04-19 23:07+0000\n"
 "Last-Translator: Matheus Mösken Diegues <dmosken2015@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/pt/>\n"
@@ -107,7 +107,7 @@ msgid "Bed screw configuration:"
 msgstr "Configuração da Porca de Mesa:"
 
 msgid "Both"
-msgstr ""
+msgstr "Ambos"
 
 msgid "Calibrate"
 msgstr "Calibrar"
@@ -202,7 +202,7 @@ msgid "Elapsed:"
 msgstr "Tempo Corrido:"
 
 msgid "Emergency Stop"
-msgstr ""
+msgstr "Parada de Emergência"
 
 msgid "Ended official support in June 2023"
 msgstr "Suporte oficial encerrado em Junho de 2023"
@@ -211,19 +211,19 @@ msgid "Error"
 msgstr "Erro"
 
 msgid "Error clearing active spool"
-msgstr ""
+msgstr "Erro ao limpar a fila ativa"
 
 msgid "Error getting active spool"
-msgstr ""
+msgstr "Erro ao obter a fila ativa"
 
 msgid "Error setting active spool"
-msgstr ""
+msgstr "Erro ao definir a fila ativa"
 
 msgid "Error trying to fetch spools"
-msgstr ""
+msgstr "Erro ao tentar buscar filas"
 
 msgid "Error: Couldn't get a position to probe"
-msgstr ""
+msgstr "Erro: Não foi possível obter uma posição para a sonda"
 
 msgid "Estimated Time Method"
 msgstr "Método de Tempo Estimado"
@@ -238,7 +238,7 @@ msgid "Extrude"
 msgstr "Extrusão"
 
 msgid "Extruders"
-msgstr ""
+msgstr "Extrusores"
 
 msgid "Extrusion +"
 msgstr "+ Extrusão"
@@ -400,6 +400,8 @@ msgstr "KlipperScreen perderá o suporte em Junho de 2024"
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT estão ocultos e devem ser usados a partir do "
+"extrusor"
 
 msgid "Language"
 msgstr "Idioma"
@@ -426,10 +428,10 @@ msgid "Load"
 msgstr "Carregar"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Carregando..."
 
 msgid "Lost Connection to Moonraker"
-msgstr ""
+msgstr "Conexão Perdida com Moonraker"
 
 msgid "Lower Nozzle"
 msgstr "Descer Extrusor"
@@ -776,7 +778,7 @@ msgid "Unload"
 msgstr "Descarregar"
 
 msgid "Unretract Extra Length"
-msgstr ""
+msgstr "Comprimento Extra sem Recuar"
 
 msgid "Unretract Speed"
 msgstr "Velocidade Inversa de Retração"
@@ -794,10 +796,10 @@ msgid "Uploaded"
 msgstr "Carregado"
 
 msgid "Warning"
-msgstr ""
+msgstr "Aviso"
 
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
+msgstr "WebRTC não é suportado pela tentativa de Stream do backend"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Velocidade de Movimento XY (mm/s)"
@@ -854,7 +856,7 @@ msgid "mm/s²"
 msgstr "mm/s²"
 
 msgid "mm³/s"
-msgstr ""
+msgstr "mm³/s"
 
 #~ msgid "Max Acceleration to Deceleration"
 #~ msgstr "Max. aceleração de desaceleração"
