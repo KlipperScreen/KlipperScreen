@@ -13,6 +13,7 @@ Recommended sizes for thumbnails:
 
 ## Select your slicer:
 * [PrusaSlicer](#prusaslicer)
+* [OrcaSlicer](#orcaslicer)
 * [SuperSlicer](#superslicer)
 * [Cura](#cura)
 * [ideaMaker](#ideamaker)
@@ -23,6 +24,12 @@ Under General / Firmware.
 
 
 ![PrusaSlicer](img/quicktips/PrusaSlicer-thumbnails.png)
+
+
+### OrcaSlicer
+Usually works out of the box, the setting is in the printer settings under advanced:
+
+![OrcaSlicer](img/quicktips/OrcaSlicer-thumbnails.png)
 
 
 ### SuperSlicer

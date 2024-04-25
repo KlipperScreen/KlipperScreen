@@ -7,7 +7,7 @@ It's strongly recommended to test it and ensure your hardware is working with Ra
 Once you have established that the screen is working, then proceed installing KlipperScreen.
 
 ## Setup
-The installation process is meant for a non-desktop version of the OS for example RaspberryOS Lite, but it should work on other debian derivatives.
+The installation script is meant for RaspberryOS Lite, but it should work on other debian derivatives.
 
 [Click to learn how to check if you installed a desktop version](FAQ.md#how-to-check-if-you-have-a-desktop-environment)
 
@@ -46,11 +46,11 @@ cd ~/KlipperScreen
 This script will install packages that are listed under manual install, create a python virtual environment at
 `~/.KlipperScreen-env` and install a systemd service file.
 
+
 If you need a custom location for the configuration file, you can add -c or --configfile to the systemd file and specify
 the location of your configuration file.
 
 At this point KlipperScreen should be working, if it doesn't start then go to the [troubleshooting page](Troubleshooting.md)
-!!! warning
 
 ## Moonraker configuration
 
