@@ -201,22 +201,30 @@ class ScreenPanel:
             return
         name = Gtk.Label(
             hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER,
-            wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
+            wrap=True, wrap_mode=Pango.WrapMode.CHAR)
         name.set_markup(f"<big><b>{option['name']}</b></big>")
 
-        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        labels = Gtk.Box(spacing=0, orientation=Gtk.Orientation.VERTICAL, valign=Gtk.Align.CENTER)
         labels.add(name)
+        if 'tooltip' in option:
+            tooltip = Gtk.Label(
+                label=option['tooltip'],
+                hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER,
+                wrap=True, wrap_mode=Pango.WrapMode.CHAR)
+            labels.add(tooltip)
 
-        dev = Gtk.Box(spacing=5,
-                      valign=Gtk.Align.CENTER, hexpand=True, vexpand=False)
-        dev.get_style_context().add_class("frame-item")
-        dev.add(labels)
+        row_box = Gtk.Box(spacing=5, valign=Gtk.Align.CENTER, hexpand=True, vexpand=False)
+        row_box.get_style_context().add_class("frame-item")
+        row_box.add(labels)
+
         setting = {}
         if option['type'] == "binary":
             switch = Gtk.Switch(active=self._config.get_config().getboolean(option['section'], opt_name, fallback=True))
+            switch.set_vexpand(False)
+            switch.set_valign(Gtk.Align.CENTER)
             switch.connect("notify::active", self.switch_config_option, option['section'], opt_name,
                            option['callback'] if "callback" in option else None)
-            dev.add(switch)
+            row_box.add(switch)
             setting = {opt_name: switch}
         elif option['type'] == "dropdown":
             dropdown = Gtk.ComboBoxText()
@@ -227,39 +235,39 @@ class ScreenPanel:
             dropdown.connect("changed", self.on_dropdown_change, option['section'], opt_name,
                              option['callback'] if "callback" in option else None)
             dropdown.set_entry_text_column(0)
-            dev.add(dropdown)
+            row_box.add(dropdown)
             setting = {opt_name: dropdown}
         elif option['type'] == "scale":
-            dev.set_orientation(Gtk.Orientation.VERTICAL)
+            row_box.set_orientation(Gtk.Orientation.VERTICAL)
             scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL,
                                              min=option['range'][0], max=option['range'][1], step=option['step'])
             scale.set_hexpand(True)
             scale.set_value(int(self._config.get_config().get(option['section'], opt_name, fallback=option['value'])))
             scale.set_digits(0)
             scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
-            dev.add(scale)
+            row_box.add(scale)
             setting = {opt_name: scale}
         elif option['type'] == "printer":
             box = Gtk.Box(vexpand=False)
             label = Gtk.Label(f"{option['moonraker_host']}:{option['moonraker_port']}")
             box.add(label)
-            dev.add(box)
+            row_box.add(box)
         elif option['type'] == "menu":
             open_menu = self._gtk.Button("settings", style="color3")
             open_menu.connect("clicked", self.load_menu, option['menu'], option['name'])
             open_menu.set_hexpand(False)
             open_menu.set_halign(Gtk.Align.END)
-            dev.add(open_menu)
+            row_box.add(open_menu)
         elif option['type'] == "lang":
             select = self._gtk.Button("load", style="color3")
             select.connect("clicked", self._screen.change_language, option['name'])
             select.set_hexpand(False)
             select.set_halign(Gtk.Align.END)
-            dev.add(select)
+            row_box.add(select)
 
         opt_array[opt_name] = {
             "name": option['name'],
-            "row": dev
+            "row": row_box
         }
 
         opts = sorted(list(opt_array), key=lambda x: opt_array[x]['name'].casefold())

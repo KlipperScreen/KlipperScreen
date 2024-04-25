@@ -249,10 +249,12 @@ class KlipperScreenConfig:
                     {"name": _("System") + " " + _("(default)"), "value": "system_lang"}]}},
             {"theme": {
                 "section": "main", "name": _("Icon Theme"), "type": "dropdown",
+                "tooltip": _("Changes how the interface looks"),
                 "value": "z-bolt", "callback": screen.restart_ks, "options": [
                     {"name": "Z-bolt" + " " + _("(default)"), "value": "z-bolt"}]}},
             {"print_estimate_method": {
                 "section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
+                "tooltip": _("Changes how the time remaining is calculated"),
                 "value": "auto", "options": [
                     {"name": _("Auto") + " " + _("(default)"), "value": "auto"},
                     {"name": _("File"), "value": "file"},
@@ -260,15 +262,19 @@ class KlipperScreenConfig:
                     {"name": _("Slicer"), "value": "slicer"}]}},
             {"screen_blanking": {
                 "section": "main", "name": _("Screen Power Off Time"), "type": "dropdown",
+                "tooltip": _("Timeout for screen black-out or power-off"),
                 "value": "3600", "callback": screen.set_screenblanking_timeout, "options": [
                     {"name": _("Never"), "value": "off"}]
             }},
-            {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
+            {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary",
+                         "tooltip": _("Disable for 12hs with am / pm"),
+                         "value": "True"}},
             {"side_macro_shortcut": {
                 "section": "main", "name": _("Macro shortcut on sidebar"), "type": "binary",
                 "value": "True", "callback": screen.toggle_shortcut}},
             {"font_size": {
                 "section": "main", "name": _("Font Size"), "type": "dropdown",
+                "tooltip": _("Inversely affects the icon size"),
                 "value": "medium", "callback": screen.restart_ks, "options": [
                     {"name": _("Small"), "value": "small"},
                     {"name": _("Medium") + " " + _("(default)"), "value": "medium"},
@@ -276,16 +282,23 @@ class KlipperScreenConfig:
                     {"name": _("Extra Large"), "value": "extralarge"},
                     {"name": _("Maximum"), "value": "max"}]}},
             {"confirm_estop": {"section": "main", "name": _("Confirm Emergency Stop"), "type": "binary",
+                               "tooltip": _("Asks for confirmation before stopping"),
                                "value": "False"}},
             {"only_heaters": {"section": "main", "name": _("Hide sensors in Temp."), "type": "binary",
+                              "tooltip": _("Show only devices that are able to be set"),
                               "value": "False", "callback": screen.reload_panels}},
             {"use_dpms": {"section": "main", "name": _("Screen DPMS"), "type": "binary",
+                          "tooltip": _("Enable screen power management") + "\n"
+                                     + _("Not all screens support this"),
                           "value": "True", "callback": screen.set_dpms}},
             {"autoclose_popups": {"section": "main", "name": _("Auto-close notifications"), "type": "binary",
+                                  "tooltip": _("Close messages after a timeout"),
                                   "value": "True"}},
             {"show_heater_power": {"section": "main", "name": _("Show Heater Power"), "type": "binary",
+                                   "tooltip": _("Current percentage and graph line"),
                                    "value": "False", "callback": screen.reload_panels}},
             {"show_scroll_steppers": {"section": "main", "name": _("Show Scrollbars Buttons"), "type": "binary",
+                                      "tooltip": _("Useful for un-responsive touchscreens"),
                                       "value": "False", "callback": screen.reload_panels}},
             {"auto_open_extrude": {"section": "main", "name": _("Auto-open Extrude On Pause"), "type": "binary",
                                    "value": "True", "callback": screen.reload_panels}},
