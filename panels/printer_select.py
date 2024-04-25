@@ -4,6 +4,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.widgets.autogrid import AutoGrid
+from ks_includes.KlippyGtk import find_widget
 
 
 class Panel(ScreenPanel):
@@ -14,7 +15,13 @@ class Panel(ScreenPanel):
         printer_buttons = []
         for i, printer in enumerate(printers):
             name = list(printer)[0]
-            self.labels[name] = self._gtk.Button("printer", name, f"color{1 + i % 4}", scale=2)
+            scale = 3
+            self.labels[name] = self._gtk.Button("printer", name, f"color{1 + i % 4}", scale=scale)
+            scale *= self._gtk.img_scale
+            pixbuf = self._gtk.PixbufFromIcon(f"../../printers/{name}", scale, scale)
+            if pixbuf is not None:
+                image = find_widget(self.labels[name], Gtk.Image)
+                image.set_from_pixbuf(pixbuf)
             self.labels[name].connect("clicked", self.connect_printer, name)
             printer_buttons.append(self.labels[name])
         grid = AutoGrid(printer_buttons, vertical=self._screen.vertical_mode)
