@@ -227,9 +227,9 @@ class Keyboard(Gtk.Box):
 
     def toggle_shift(self):
         self.shift_active = not self.shift_active
-        if self.shift_active:
-            for widget in self.shift:
+        widget: Gtk.Widget
+        for widget in self.shift:
+            if self.shift_active:
                 widget.get_style_context().add_class("active")
-        else:
-            for widget in self.shift:
+            else:
                 widget.get_style_context().remove_class("active")
