@@ -1,7 +1,7 @@
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Pango
+from gi.repository import Gtk
 from ks_includes.screen_panel import ScreenPanel
 
 
