@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-03 14:35-0300\n"
+"POT-Creation-Date: 2024-04-26 23:35-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Mikachu <micah.sh@proton.me>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/klipperscreen/"
@@ -70,6 +70,9 @@ msgstr "Weet je zeker dat je het object wilt uitsluiten?"
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Weet je zeker dat je de Noodstop wilt inschakelen?"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Weet je zeker dat je deze print wilt annuleren?"
 
@@ -81,6 +84,9 @@ msgstr "Weet je zeker dat je het systeem wilt herstarten?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Weet je zeker dat je het systeem wilt afsluiten?"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "Auto"
@@ -102,9 +108,6 @@ msgstr "Bed Level"
 
 msgid "Bed Mesh"
 msgstr "Bed Mesh"
-
-msgid "Bed screw configuration:"
-msgstr "Bed schroef configuratie:"
 
 msgid "Both"
 msgstr ""
@@ -139,6 +142,12 @@ msgstr "Annuleren"
 msgid "Cannot connect to Moonraker"
 msgstr "Kan geen verbinding met Moonraker maken"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "Kanaal"
 
@@ -153,6 +162,9 @@ msgstr "Leegmaken"
 
 msgid "Close"
 msgstr "Sluiten"
+
+msgid "Close messages after a timeout"
+msgstr ""
 
 msgid "Complete"
 msgstr "Voltooid"
@@ -173,6 +185,9 @@ msgstr "Console"
 msgid "Cooldown"
 msgstr "Afkoelen"
 
+msgid "Current percentage and graph line"
+msgstr ""
+
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS kon niet worden geladen en is uitgeschakeld"
 
@@ -191,6 +206,9 @@ msgstr "Deselecteer"
 msgid "Disable Motors"
 msgstr "Motors Uitschakelen"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "Afstand (mm)"
 
@@ -202,6 +220,9 @@ msgid "Elapsed:"
 msgstr "Verstreken:"
 
 msgid "Emergency Stop"
+msgstr ""
+
+msgid "Enable screen power management"
 msgstr ""
 
 msgid "Ended official support in June 2023"
@@ -363,6 +384,9 @@ msgstr "Ongeldig"
 msgid "Invalid password"
 msgstr "Ongeldig wachtwoord"
 
+msgid "Inversely affects the icon size"
+msgstr ""
+
 msgid "Invert X"
 msgstr "Invert X"
 
@@ -374,6 +398,9 @@ msgstr "Invert Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "Het kan meer dan 5 minuten duren op basis van de heater power."
+
+msgid "It's possible that the configuration is not correct"
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipper Herstarten"
@@ -516,12 +543,8 @@ msgstr "Geen mesh geladen"
 msgid "No wireless interface has been found"
 msgstr "Geen draadloze netwerk interface gevonden"
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
+msgid "Not all screens support this"
 msgstr ""
-"Niet ondersteunt voor auto-detectie, dit moet worden geconfigureerd in "
-"klipperscreen.conf"
 
 msgid "Not working or not configured"
 msgstr "Niet werkend of niet geconfigureerd"
@@ -655,6 +678,9 @@ msgstr "Opnieuw"
 msgid "Retrying"
 msgstr "Probeert opnieuw"
 
+msgid "Rotation invalid"
+msgstr ""
+
 msgid "Save"
 msgstr "Opslaan"
 
@@ -683,6 +709,9 @@ msgstr "Scherm Uitschakelen Tijd"
 msgid "Screws Adjust"
 msgstr "Schroeven Aanpassen"
 
+msgid "Screws not used:"
+msgstr ""
+
 msgid "Select"
 msgstr "Selecteer"
 
@@ -703,6 +732,9 @@ msgstr "Toon Heater Stroom"
 
 msgid "Show Scrollbars Buttons"
 msgstr "Toon Scrollbars Knoppen"
+
+msgid "Show only devices that are able to be set"
+msgstr ""
 
 msgid "Shutdown"
 msgstr "Afsluiten"
@@ -764,14 +796,17 @@ msgstr "Temp (°C)"
 msgid "Temperature"
 msgstr "Temperatuur"
 
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
 msgid "Total:"
 msgstr "Totaal:"
 
 msgid "Unknown Heater"
 msgstr "Onbekende Heater"
-
-msgid "Unknown screw position"
-msgstr "Onbekende schroef positie"
 
 msgid "Unload"
 msgstr "Uitladen"
@@ -793,6 +828,9 @@ msgstr "Bezig met updaten"
 
 msgid "Uploaded"
 msgstr "Geupload"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr ""
 
 msgid "Warning"
 msgstr "Waarschuwing"
@@ -856,6 +894,19 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "Bed schroef configuratie:"
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr ""
+#~ "Niet ondersteunt voor auto-detectie, dit moet worden geconfigureerd in "
+#~ "klipperscreen.conf"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "Onbekende schroef positie"
 
 #~ msgid "Max Acceleration to Deceleration"
 #~ msgstr "Max Acceleratie naar De-acceleratie"

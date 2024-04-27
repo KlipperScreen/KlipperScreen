@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2023-12-17 01:36\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-03 14:35-0300\n"
+"POT-Creation-Date: 2024-04-26 23:35-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Сергій <sergiy.goncharuk.1@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -71,6 +71,9 @@ msgstr "Ви впевнені, що бажаєте виключити об’є�
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Ви впевнені, що хочете зробити аварійну зупинку?"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Ви впевнені, що хочете скасувати друк?"
 
@@ -82,6 +85,9 @@ msgstr "Ви впевнені, що хочете перезавантажити 
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Ви впевнені, що хочете вимкнути систему?"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "Автоматично"
@@ -103,9 +109,6 @@ msgstr "Вирівнювання столу"
 
 msgid "Bed Mesh"
 msgstr "Сітка столу"
-
-msgid "Bed screw configuration:"
-msgstr "Конфігурація гвинтів ліжка:"
 
 msgid "Both"
 msgstr ""
@@ -140,6 +143,12 @@ msgstr "Скасування"
 msgid "Cannot connect to Moonraker"
 msgstr "Не можливо підключитися до Moonraker"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "Канал"
 
@@ -154,6 +163,9 @@ msgstr "Очистити"
 
 msgid "Close"
 msgstr "Закрити"
+
+msgid "Close messages after a timeout"
+msgstr ""
 
 msgid "Complete"
 msgstr "Завершено"
@@ -174,6 +186,9 @@ msgstr "Консоль"
 msgid "Cooldown"
 msgstr "Охолодження"
 
+msgid "Current percentage and graph line"
+msgstr ""
+
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS не вдалося завантажити, і його було вимкнено"
 
@@ -192,6 +207,9 @@ msgstr "Скасувати вибір"
 msgid "Disable Motors"
 msgstr "Вимкнути мотори"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "Відстань (мм)"
 
@@ -203,6 +221,9 @@ msgid "Elapsed:"
 msgstr "Минуло:"
 
 msgid "Emergency Stop"
+msgstr ""
+
+msgid "Enable screen power management"
 msgstr ""
 
 msgid "Ended official support in June 2023"
@@ -364,6 +385,9 @@ msgstr "Недійсний"
 msgid "Invalid password"
 msgstr "Недійсний пароль"
 
+msgid "Inversely affects the icon size"
+msgstr ""
+
 msgid "Invert X"
 msgstr "Інвертувати X"
 
@@ -375,6 +399,9 @@ msgstr "Інвертувати Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "Залежно від потужності обігрівача це може зайняти більше 5 хвилин."
+
+msgid "It's possible that the configuration is not correct"
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Перезапуск Klipper"
@@ -517,12 +544,8 @@ msgstr "Не завантажено жодної сітки"
 msgid "No wireless interface has been found"
 msgstr "Бездротовий інтерфейс не знайдено"
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
+msgid "Not all screens support this"
 msgstr ""
-"Автоматичне визначення не підтримується, його потрібно налаштувати у "
-"klipperscreen.conf"
 
 msgid "Not working or not configured"
 msgstr "Не працює або не налаштовано"
@@ -657,6 +680,9 @@ msgstr "Повторіть спробу"
 msgid "Retrying"
 msgstr "Повторна спроба"
 
+msgid "Rotation invalid"
+msgstr ""
+
 msgid "Save"
 msgstr "Зберегти"
 
@@ -685,6 +711,9 @@ msgstr "Вимкнути екран через"
 msgid "Screws Adjust"
 msgstr "Регулювання гвинтів"
 
+msgid "Screws not used:"
+msgstr ""
+
 msgid "Select"
 msgstr "Вибрати"
 
@@ -705,6 +734,9 @@ msgstr "Показати Потужність Нагрівача"
 
 msgid "Show Scrollbars Buttons"
 msgstr "Показати кнопку смуги прокрутки"
+
+msgid "Show only devices that are able to be set"
+msgstr ""
 
 msgid "Shutdown"
 msgstr "Вимкнути"
@@ -766,14 +798,17 @@ msgstr "Teмп (°C)"
 msgid "Temperature"
 msgstr "Температура"
 
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
 msgid "Total:"
 msgstr "Всього:"
 
 msgid "Unknown Heater"
 msgstr "Невідомий нагрівач"
-
-msgid "Unknown screw position"
-msgstr "Невідоме положення гвинта"
 
 msgid "Unload"
 msgstr "Вийняти"
@@ -795,6 +830,9 @@ msgstr "Оновлення"
 
 msgid "Uploaded"
 msgstr "Завантажено"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr ""
 
 msgid "Warning"
 msgstr "Попередження"
@@ -861,6 +899,19 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм/с³"
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "Конфігурація гвинтів ліжка:"
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr ""
+#~ "Автоматичне визначення не підтримується, його потрібно налаштувати у "
+#~ "klipperscreen.conf"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "Невідоме положення гвинта"
 
 #~ msgid "Max Acceleration to Deceleration"
 #~ msgstr "Макс. прискорення до гальмування"

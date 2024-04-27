@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-03 14:35-0300\n"
+"POT-Creation-Date: 2024-04-26 23:35-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Alfredo Monclus <alfredomonclus@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -70,6 +70,9 @@ msgstr "¿Está seguro de excluir este objeto?"
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "¿Parada de emergencia?"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "¿Está seguro que desea cancelar esta impresión?"
 
@@ -81,6 +84,9 @@ msgstr "¿Está seguro que desea reiniciar el sistema?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "¿Está seguro que desea apagar el sistema?"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "Auto"
@@ -102,9 +108,6 @@ msgstr "Nivelar cama"
 
 msgid "Bed Mesh"
 msgstr "Malla de cama"
-
-msgid "Bed screw configuration:"
-msgstr "Configuración de tornillos:"
 
 msgid "Both"
 msgstr "Ambos"
@@ -139,6 +142,12 @@ msgstr "Cancelando"
 msgid "Cannot connect to Moonraker"
 msgstr "No se puede conectar a Moonraker"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "Canal"
 
@@ -153,6 +162,9 @@ msgstr "Limpiar"
 
 msgid "Close"
 msgstr "Cerrar"
+
+msgid "Close messages after a timeout"
+msgstr ""
 
 msgid "Complete"
 msgstr "Completado"
@@ -173,6 +185,9 @@ msgstr "Consola"
 msgid "Cooldown"
 msgstr "Enfriar"
 
+msgid "Current percentage and graph line"
+msgstr ""
+
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS falló en cargar y ha sido deshabilitado"
 
@@ -191,6 +206,9 @@ msgstr "Deseleccionar"
 msgid "Disable Motors"
 msgstr "Desactivar Motores"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "Distancia (mm)"
 
@@ -203,6 +221,9 @@ msgstr "Transcurrido:"
 
 msgid "Emergency Stop"
 msgstr "Parada de emergencia"
+
+msgid "Enable screen power management"
+msgstr ""
 
 msgid "Ended official support in June 2023"
 msgstr "Finalizó el soporte oficial en Junio 2023"
@@ -363,6 +384,9 @@ msgstr "Invalido"
 msgid "Invalid password"
 msgstr "Contraseña invalida"
 
+msgid "Inversely affects the icon size"
+msgstr ""
+
 msgid "Invert X"
 msgstr "Invertir X"
 
@@ -375,6 +399,9 @@ msgstr "Invertir Z"
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr ""
 "Puede tardar más de 5 minutos dependiendo de la potencia del calentador."
+
+msgid "It's possible that the configuration is not correct"
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Reiniciar Klipper"
@@ -517,12 +544,8 @@ msgstr "Ninguna malla cargada"
 msgid "No wireless interface has been found"
 msgstr "Ninguna interfaz inalámbrica encontrada"
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
+msgid "Not all screens support this"
 msgstr ""
-"No soportado para la detección automatica, necesita configurarlo en "
-"klipperscreen.conf"
 
 msgid "Not working or not configured"
 msgstr "No funciona o no está configurado"
@@ -656,6 +679,9 @@ msgstr "Reintentar"
 msgid "Retrying"
 msgstr "Reintentando"
 
+msgid "Rotation invalid"
+msgstr ""
+
 msgid "Save"
 msgstr "Guardar"
 
@@ -684,6 +710,9 @@ msgstr "Apagar pantalla tras"
 msgid "Screws Adjust"
 msgstr "Ajustar Tornillos"
 
+msgid "Screws not used:"
+msgstr ""
+
 msgid "Select"
 msgstr "Seleccionar"
 
@@ -704,6 +733,9 @@ msgstr "Mostrar potencia del calentador"
 
 msgid "Show Scrollbars Buttons"
 msgstr "Mostrar botones de desplazamiento"
+
+msgid "Show only devices that are able to be set"
+msgstr ""
 
 msgid "Shutdown"
 msgstr "Apagar"
@@ -765,14 +797,17 @@ msgstr "Temp (°C)"
 msgid "Temperature"
 msgstr "Temperatura"
 
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
 msgid "Total:"
 msgstr "Total:"
 
 msgid "Unknown Heater"
 msgstr "Calentador Desconocido"
-
-msgid "Unknown screw position"
-msgstr "Posición de tornillo desconocida"
 
 msgid "Unload"
 msgstr "Descargar"
@@ -794,6 +829,9 @@ msgstr "Actualizando"
 
 msgid "Uploaded"
 msgstr "Subido"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr ""
 
 msgid "Warning"
 msgstr "Advertencia"
@@ -857,6 +895,19 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "Configuración de tornillos:"
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr ""
+#~ "No soportado para la detección automatica, necesita configurarlo en "
+#~ "klipperscreen.conf"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "Posición de tornillo desconocida"
 
 #~ msgid "Max Acceleration to Deceleration"
 #~ msgstr "Max. Aceleración a Desaceleración"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-03 14:35-0300\n"
+"POT-Creation-Date: 2024-04-26 23:35-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: vjurka <v@jurka.lt>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && ("
-"n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"(n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
@@ -71,6 +71,9 @@ msgstr "Ar tikrai norite išmesti objektą?"
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Ar tikrai paleisti avarinį stabdymą?"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Ar tikrai norite nutraukti spausdinimą?"
 
@@ -82,6 +85,9 @@ msgstr "Ar tikrai norite perkrauti sistemą?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Ar tikrai norite išjungti spausdintuvą?"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "Auto"
@@ -103,9 +109,6 @@ msgstr "Platformos lygis"
 
 msgid "Bed Mesh"
 msgstr "Platformos tinkliukas"
-
-msgid "Bed screw configuration:"
-msgstr "Platformos varžtų konfigūracija:"
 
 msgid "Both"
 msgstr "Abu"
@@ -140,6 +143,12 @@ msgstr "Atšaukiama"
 msgid "Cannot connect to Moonraker"
 msgstr "Nepavyksta prisijungti prie Moonraker"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "Kanalas"
 
@@ -154,6 +163,9 @@ msgstr "Išvalyti"
 
 msgid "Close"
 msgstr "Uždaryti"
+
+msgid "Close messages after a timeout"
+msgstr ""
 
 msgid "Complete"
 msgstr "Baigta"
@@ -174,6 +186,9 @@ msgstr "Terminalas"
 msgid "Cooldown"
 msgstr "Atvėsinti"
 
+msgid "Current percentage and graph line"
+msgstr ""
+
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS nepakrauta ir išjungta"
 
@@ -192,6 +207,9 @@ msgstr "Atžymėti"
 msgid "Disable Motors"
 msgstr "Išjungti variklius"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "Atstumas (mm)"
 
@@ -204,6 +222,9 @@ msgstr "Praėjo:"
 
 msgid "Emergency Stop"
 msgstr "Avarinis stabdymas"
+
+msgid "Enable screen power management"
+msgstr ""
 
 msgid "Ended official support in June 2023"
 msgstr "Oficialus palaikymas baigtas 2023 m. birželio mėn"
@@ -364,6 +385,9 @@ msgstr "Neteisinga"
 msgid "Invalid password"
 msgstr "Blogas slaptažodis"
 
+msgid "Inversely affects the icon size"
+msgstr ""
+
 msgid "Invert X"
 msgstr "X inversija"
 
@@ -374,7 +398,11 @@ msgid "Invert Z"
 msgstr "Z inversija"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr "Priklausomai nuo šildytuvo galios gali užtrukti daugiau kaip 5 minutes."
+msgstr ""
+"Priklausomai nuo šildytuvo galios gali užtrukti daugiau kaip 5 minutes."
+
+msgid "It's possible that the configuration is not correct"
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Perkrauti Klipper'į"
@@ -517,10 +545,8 @@ msgstr "Tinklelis nebuvo įkeltas"
 msgid "No wireless interface has been found"
 msgstr "Belaidė sąsaja nerasta"
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
-msgstr "Neaptinkamas automatiškai, reikia konfigūruoti klipperscreen.conf"
+msgid "Not all screens support this"
+msgstr ""
 
 msgid "Not working or not configured"
 msgstr "Neveikia arba nesukonfigūruota"
@@ -655,6 +681,9 @@ msgstr "Pakartoti"
 msgid "Retrying"
 msgstr "Antras bandymas"
 
+msgid "Rotation invalid"
+msgstr ""
+
 msgid "Save"
 msgstr "Išsaugoti"
 
@@ -683,6 +712,9 @@ msgstr "Ekrano išjungimo laikas"
 msgid "Screws Adjust"
 msgstr "Reguliuoti varžtus"
 
+msgid "Screws not used:"
+msgstr ""
+
 msgid "Select"
 msgstr "Išsirinkti"
 
@@ -703,6 +735,9 @@ msgstr "Rodyti šildytuvo galią"
 
 msgid "Show Scrollbars Buttons"
 msgstr "Rodyti stumdymo juostą"
+
+msgid "Show only devices that are able to be set"
+msgstr ""
 
 msgid "Shutdown"
 msgstr "Išjungti"
@@ -764,14 +799,17 @@ msgstr "Temperatūra (°С)"
 msgid "Temperature"
 msgstr "Temperatūra"
 
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
 msgid "Total:"
 msgstr "Viso:"
 
 msgid "Unknown Heater"
 msgstr "Nežinomas šildytuvas"
-
-msgid "Unknown screw position"
-msgstr "Nežinoma varžto padėtis"
 
 msgid "Unload"
 msgstr "Iškrauti"
@@ -793,6 +831,9 @@ msgstr "Atnaujinama"
 
 msgid "Uploaded"
 msgstr "Nusiųsta"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr ""
 
 msgid "Warning"
 msgstr "Įspėjimas"
@@ -859,6 +900,17 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "Platformos varžtų konfigūracija:"
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr "Neaptinkamas automatiškai, reikia konfigūruoti klipperscreen.conf"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "Nežinoma varžto padėtis"
 
 #~ msgid "Max Acceleration to Deceleration"
 #~ msgstr "Pagreitintas stabdymas"

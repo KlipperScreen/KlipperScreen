@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-03 14:35-0300\n"
+"POT-Creation-Date: 2024-04-26 23:35-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: 이정희 <daemul72@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/klipperscreen/"
@@ -65,6 +65,9 @@ msgstr "개체를 제외하시겠습니까?"
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "비상정지 시키겠습니까?"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "출력을 취소하시겠습니까?"
 
@@ -76,6 +79,9 @@ msgstr "시스템을 재시작 하시겠습니까?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "시스템을 종료하시겠습니까?"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "자동"
@@ -97,9 +103,6 @@ msgstr "베드 레벨링"
 
 msgid "Bed Mesh"
 msgstr "배드 메시"
-
-msgid "Bed screw configuration:"
-msgstr "베드 스크류 설정:"
 
 msgid "Both"
 msgstr "둘 다"
@@ -134,6 +137,12 @@ msgstr "취소 중"
 msgid "Cannot connect to Moonraker"
 msgstr "문래이커에 연결할 수 없음"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "채널"
 
@@ -148,6 +157,9 @@ msgstr "초기화"
 
 msgid "Close"
 msgstr "닫기"
+
+msgid "Close messages after a timeout"
+msgstr ""
 
 msgid "Complete"
 msgstr "완료"
@@ -168,6 +180,9 @@ msgstr "콘솔 제어"
 msgid "Cooldown"
 msgstr "가열 중지"
 
+msgid "Current percentage and graph line"
+msgstr ""
+
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS가 비활성화 되었습니다"
 
@@ -186,6 +201,9 @@ msgstr "선택 해제"
 msgid "Disable Motors"
 msgstr "모터 전원 끄기"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "거리 (mm)"
 
@@ -198,6 +216,9 @@ msgstr "경과:"
 
 msgid "Emergency Stop"
 msgstr "긴급 정지"
+
+msgid "Enable screen power management"
+msgstr ""
 
 msgid "Ended official support in June 2023"
 msgstr "2023년 6월 이후 정식 지원이 중단됨"
@@ -358,6 +379,9 @@ msgstr "존재하지 않음"
 msgid "Invalid password"
 msgstr "잘못된 패스워드"
 
+msgid "Inversely affects the icon size"
+msgstr ""
+
 msgid "Invert X"
 msgstr "X축 반전"
 
@@ -369,6 +393,9 @@ msgstr "Z축 반전"
 
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "히터에 따라 5분 이상 걸릴 수 있습니다."
+
+msgid "It's possible that the configuration is not correct"
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "클리퍼 재시작"
@@ -510,10 +537,8 @@ msgstr "메쉬가 로드되지 않았습니다"
 msgid "No wireless interface has been found"
 msgstr "무선 인터페이스를 찾을 수 없습니다"
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
-msgstr "자동 감지는 지원되지 않으므로 klipperscreen.conf로 구성해야 합니다"
+msgid "Not all screens support this"
+msgstr ""
 
 msgid "Not working or not configured"
 msgstr "작동하지 않거나 구성되지 않음"
@@ -646,6 +671,9 @@ msgstr "재시도"
 msgid "Retrying"
 msgstr "재시도 중"
 
+msgid "Rotation invalid"
+msgstr ""
+
 msgid "Save"
 msgstr "저장"
 
@@ -674,6 +702,9 @@ msgstr "화면 절전 시간"
 msgid "Screws Adjust"
 msgstr "베드 스크류 조정"
 
+msgid "Screws not used:"
+msgstr ""
+
 msgid "Select"
 msgstr "선택"
 
@@ -694,6 +725,9 @@ msgstr "히터 전원 보기"
 
 msgid "Show Scrollbars Buttons"
 msgstr "스크롤바 버튼 보기"
+
+msgid "Show only devices that are able to be set"
+msgstr ""
 
 msgid "Shutdown"
 msgstr "시스템 종료"
@@ -755,14 +789,17 @@ msgstr "온도 (°C)"
 msgid "Temperature"
 msgstr "온도"
 
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
 msgid "Total:"
 msgstr "총:"
 
 msgid "Unknown Heater"
 msgstr "알 수 없는 히터"
-
-msgid "Unknown screw position"
-msgstr "알 수 없는 스크류 위치"
 
 msgid "Unload"
 msgstr "필라멘트 꺼내기"
@@ -784,6 +821,9 @@ msgstr "업데이트 중"
 
 msgid "Uploaded"
 msgstr "업로드됨"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr ""
 
 msgid "Warning"
 msgstr "경고"
@@ -844,6 +884,17 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "베드 스크류 설정:"
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr "자동 감지는 지원되지 않으므로 klipperscreen.conf로 구성해야 합니다"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "알 수 없는 스크류 위치"
 
 #~ msgid "Max Acceleration to Deceleration"
 #~ msgstr "감속을 위한 최대 가속"

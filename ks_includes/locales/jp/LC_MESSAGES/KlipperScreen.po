@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-03 14:35-0300\n"
+"POT-Creation-Date: 2024-04-26 23:35-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -65,6 +65,9 @@ msgstr "対象を除外しますか？"
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "緊急停止しますか？"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "印刷を中断しますか？"
 
@@ -76,6 +79,9 @@ msgstr "システムを再起動しますか？"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "システムをシャットダウンしますか？"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "自動"
@@ -97,9 +103,6 @@ msgstr "ベッドレベル"
 
 msgid "Bed Mesh"
 msgstr "ベッドメッシュ"
-
-msgid "Bed screw configuration:"
-msgstr "ベッドスクリュー設定:"
 
 msgid "Both"
 msgstr ""
@@ -134,6 +137,12 @@ msgstr "キャンセル中"
 msgid "Cannot connect to Moonraker"
 msgstr "Moonrakerに接続できません"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "チャンネル"
 
@@ -148,6 +157,9 @@ msgstr "クリア"
 
 msgid "Close"
 msgstr "終了"
+
+msgid "Close messages after a timeout"
+msgstr ""
 
 msgid "Complete"
 msgstr "完了"
@@ -168,6 +180,9 @@ msgstr "コンソール"
 msgid "Cooldown"
 msgstr "クールダウン"
 
+msgid "Current percentage and graph line"
+msgstr ""
+
 msgid "DPMS has failed to load and has been disabled"
 msgstr ""
 
@@ -186,6 +201,9 @@ msgstr "選択解除"
 msgid "Disable Motors"
 msgstr "モーターの無効化"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "距離(mm)"
 
@@ -197,6 +215,9 @@ msgid "Elapsed:"
 msgstr "経過時間:"
 
 msgid "Emergency Stop"
+msgstr ""
+
+msgid "Enable screen power management"
 msgstr ""
 
 msgid "Ended official support in June 2023"
@@ -358,6 +379,9 @@ msgstr "不正"
 msgid "Invalid password"
 msgstr ""
 
+msgid "Inversely affects the icon size"
+msgstr ""
+
 msgid "Invert X"
 msgstr "X軸を反対にする"
 
@@ -368,6 +392,9 @@ msgid "Invert Z"
 msgstr "X軸を反対にする"
 
 msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
+
+msgid "It's possible that the configuration is not correct"
 msgstr ""
 
 msgid "Klipper Restart"
@@ -509,9 +536,7 @@ msgstr ""
 msgid "No wireless interface has been found"
 msgstr ""
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
+msgid "Not all screens support this"
 msgstr ""
 
 msgid "Not working or not configured"
@@ -645,6 +670,9 @@ msgstr "再試行"
 msgid "Retrying"
 msgstr "再試行中"
 
+msgid "Rotation invalid"
+msgstr ""
+
 msgid "Save"
 msgstr "保存"
 
@@ -673,6 +701,9 @@ msgstr ""
 msgid "Screws Adjust"
 msgstr ""
 
+msgid "Screws not used:"
+msgstr ""
+
 msgid "Select"
 msgstr ""
 
@@ -692,6 +723,9 @@ msgid "Show Heater Power"
 msgstr ""
 
 msgid "Show Scrollbars Buttons"
+msgstr ""
+
+msgid "Show only devices that are able to be set"
 msgstr ""
 
 msgid "Shutdown"
@@ -754,14 +788,17 @@ msgstr "温度 (°C)"
 msgid "Temperature"
 msgstr "温度"
 
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
 msgid "Total:"
 msgstr "全体:"
 
 msgid "Unknown Heater"
 msgstr "無効なヒーター"
-
-msgid "Unknown screw position"
-msgstr "無効なのスクリュー位置"
 
 msgid "Unload"
 msgstr "アンロード"
@@ -783,6 +820,9 @@ msgstr "更新中"
 
 msgid "Uploaded"
 msgstr "アップロード済"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr ""
 
 msgid "Warning"
 msgstr ""
@@ -843,6 +883,12 @@ msgstr ""
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "ベッドスクリュー設定:"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "無効なのスクリュー位置"
 
 #~ msgid "Max Acceleration to Deceleration"
 #~ msgstr "減速時の最大加速度"

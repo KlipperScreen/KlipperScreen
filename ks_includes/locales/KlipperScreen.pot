@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-03 14:35-0300\n"
+"POT-Creation-Date: 2024-04-26 23:35-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,6 +69,9 @@ msgstr ""
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr ""
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr ""
 
@@ -79,6 +82,9 @@ msgid "Are you sure you wish to reboot the system?"
 msgstr ""
 
 msgid "Are you sure you wish to shutdown the system?"
+msgstr ""
+
+msgid "Asks for confirmation before stopping"
 msgstr ""
 
 msgid "Auto"
@@ -100,9 +106,6 @@ msgid "Bed Level"
 msgstr ""
 
 msgid "Bed Mesh"
-msgstr ""
-
-msgid "Bed screw configuration:"
 msgstr ""
 
 msgid "Both"
@@ -138,6 +141,12 @@ msgstr ""
 msgid "Cannot connect to Moonraker"
 msgstr ""
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr ""
 
@@ -151,6 +160,9 @@ msgid "Clear"
 msgstr ""
 
 msgid "Close"
+msgstr ""
+
+msgid "Close messages after a timeout"
 msgstr ""
 
 msgid "Complete"
@@ -172,6 +184,9 @@ msgstr ""
 msgid "Cooldown"
 msgstr ""
 
+msgid "Current percentage and graph line"
+msgstr ""
+
 msgid "DPMS has failed to load and has been disabled"
 msgstr ""
 
@@ -190,6 +205,9 @@ msgstr ""
 msgid "Disable Motors"
 msgstr ""
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr ""
 
@@ -201,6 +219,9 @@ msgid "Elapsed:"
 msgstr ""
 
 msgid "Emergency Stop"
+msgstr ""
+
+msgid "Enable screen power management"
 msgstr ""
 
 msgid "Ended official support in June 2023"
@@ -362,6 +383,9 @@ msgstr ""
 msgid "Invalid password"
 msgstr ""
 
+msgid "Inversely affects the icon size"
+msgstr ""
+
 msgid "Invert X"
 msgstr ""
 
@@ -372,6 +396,9 @@ msgid "Invert Z"
 msgstr ""
 
 msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
+
+msgid "It's possible that the configuration is not correct"
 msgstr ""
 
 msgid "Klipper Restart"
@@ -513,9 +540,7 @@ msgstr ""
 msgid "No wireless interface has been found"
 msgstr ""
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
+msgid "Not all screens support this"
 msgstr ""
 
 msgid "Not working or not configured"
@@ -650,6 +675,9 @@ msgstr ""
 msgid "Retrying"
 msgstr ""
 
+msgid "Rotation invalid"
+msgstr ""
+
 msgid "Save"
 msgstr ""
 
@@ -678,6 +706,9 @@ msgstr ""
 msgid "Screws Adjust"
 msgstr ""
 
+msgid "Screws not used:"
+msgstr ""
+
 msgid "Select"
 msgstr ""
 
@@ -697,6 +728,9 @@ msgid "Show Heater Power"
 msgstr ""
 
 msgid "Show Scrollbars Buttons"
+msgstr ""
+
+msgid "Show only devices that are able to be set"
 msgstr ""
 
 msgid "Shutdown"
@@ -759,13 +793,16 @@ msgstr ""
 msgid "Temperature"
 msgstr ""
 
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
 msgid "Total:"
 msgstr ""
 
 msgid "Unknown Heater"
-msgstr ""
-
-msgid "Unknown screw position"
 msgstr ""
 
 msgid "Unload"
@@ -787,6 +824,9 @@ msgid "Updating"
 msgstr ""
 
 msgid "Uploaded"
+msgstr ""
+
+msgid "Useful for un-responsive touchscreens"
 msgstr ""
 
 msgid "Warning"

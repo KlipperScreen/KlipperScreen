@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-03 14:35-0300\n"
+"POT-Creation-Date: 2024-04-26 23:35-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -70,6 +70,9 @@ msgstr "Är du säker på att du vill utesluta objektet?"
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Är du säker på att du vill köra Nödstopp?"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Är du säker på att du vill avbryta denna utskrift?"
 
@@ -81,6 +84,9 @@ msgstr "Är du säker på att du vill starta om systemet?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Är du säker på att du vill stänga av systemet?"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "Automatisk"
@@ -102,9 +108,6 @@ msgstr "Bädd Level"
 
 msgid "Bed Mesh"
 msgstr "Bädd Mesh"
-
-msgid "Bed screw configuration:"
-msgstr "Konfiguration bädd skruvar:"
 
 msgid "Both"
 msgstr ""
@@ -139,6 +142,12 @@ msgstr "Avbryter"
 msgid "Cannot connect to Moonraker"
 msgstr "Kan inte ansluta till Moonraker"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "Kanal"
 
@@ -153,6 +162,9 @@ msgstr "Rensa"
 
 msgid "Close"
 msgstr "Stäng"
+
+msgid "Close messages after a timeout"
+msgstr ""
 
 msgid "Complete"
 msgstr "Färdig"
@@ -173,6 +185,9 @@ msgstr "Konsol"
 msgid "Cooldown"
 msgstr "Nedkylning"
 
+msgid "Current percentage and graph line"
+msgstr ""
+
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS kunde inte laddas och har inaktiverats"
 
@@ -191,6 +206,9 @@ msgstr "Avmarkera"
 msgid "Disable Motors"
 msgstr "Inaktivera motorer"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "Avstånd (mm)"
 
@@ -202,6 +220,9 @@ msgid "Elapsed:"
 msgstr "Förfluten:"
 
 msgid "Emergency Stop"
+msgstr ""
+
+msgid "Enable screen power management"
 msgstr ""
 
 msgid "Ended official support in June 2023"
@@ -363,6 +384,9 @@ msgstr "Ogiltig"
 msgid "Invalid password"
 msgstr "Felaktigt lösenord"
 
+msgid "Inversely affects the icon size"
+msgstr ""
+
 msgid "Invert X"
 msgstr "Invertera X"
 
@@ -374,6 +398,9 @@ msgstr "Invertera Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "Det kan ta mer än 5 minuter beroende på värmarens effekt."
+
+msgid "It's possible that the configuration is not correct"
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipper Omstart"
@@ -515,12 +542,8 @@ msgstr "Ingen mesh har laddats"
 msgid "No wireless interface has been found"
 msgstr "Inget trådlöst gränssnitt har hittats"
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
+msgid "Not all screens support this"
 msgstr ""
-"Stöds inte för automatisk upptäckt, den måste konfigureras i klipperscreen."
-"conf"
 
 msgid "Not working or not configured"
 msgstr "Fungerar inte eller inte konfigurerad"
@@ -654,6 +677,9 @@ msgstr "Försök igen"
 msgid "Retrying"
 msgstr "Försöker igen"
 
+msgid "Rotation invalid"
+msgstr ""
+
 msgid "Save"
 msgstr "Spara"
 
@@ -682,6 +708,9 @@ msgstr "Avstängningstid för skärmen"
 msgid "Screws Adjust"
 msgstr "Skruvar Justera"
 
+msgid "Screws not used:"
+msgstr ""
+
 msgid "Select"
 msgstr "Välj"
 
@@ -702,6 +731,9 @@ msgstr "Visa kraft värmare"
 
 msgid "Show Scrollbars Buttons"
 msgstr "Visa rullningslistknappar"
+
+msgid "Show only devices that are able to be set"
+msgstr ""
 
 msgid "Shutdown"
 msgstr "Stänga av"
@@ -763,14 +795,17 @@ msgstr "Temperatur (°C)"
 msgid "Temperature"
 msgstr "Temperatur"
 
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
 msgid "Total:"
 msgstr "Total:"
 
 msgid "Unknown Heater"
 msgstr "Okänt värmeelement"
-
-msgid "Unknown screw position"
-msgstr "Okänd skruvposition"
 
 msgid "Unload"
 msgstr "Lasta av"
@@ -792,6 +827,9 @@ msgstr "Uppdaterar"
 
 msgid "Uploaded"
 msgstr "Uppladdad"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr ""
 
 msgid "Warning"
 msgstr "Varning"
@@ -855,6 +893,19 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "Konfiguration bädd skruvar:"
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr ""
+#~ "Stöds inte för automatisk upptäckt, den måste konfigureras i "
+#~ "klipperscreen.conf"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "Okänd skruvposition"
 
 #~ msgid "Max Acceleration to Deceleration"
 #~ msgstr "Max acceleration till inbromsning"

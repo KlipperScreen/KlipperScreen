@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-03 14:35-0300\n"
+"POT-Creation-Date: 2024-04-26 23:35-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Michal Bitala <bitala.michal@seznam.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/"
@@ -70,6 +70,9 @@ msgstr "Opravdu chceš vyjmout objekt?"
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Opravdu okamžitě zastavit?"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Opravdu chcete zrušit tisk?"
 
@@ -81,6 +84,9 @@ msgstr "Opravdu chcete rebootovat systém?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Opravdu chcete vypnout systém?"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "Auto"
@@ -102,9 +108,6 @@ msgstr "Vyrovnání podložky"
 
 msgid "Bed Mesh"
 msgstr "Mapa podložky"
-
-msgid "Bed screw configuration:"
-msgstr "Vyrovnání šroubů podložky:"
 
 msgid "Both"
 msgstr ""
@@ -139,6 +142,12 @@ msgstr "Ruším"
 msgid "Cannot connect to Moonraker"
 msgstr "Nelze se připojit k Moonraker"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "Kanál"
 
@@ -153,6 +162,9 @@ msgstr "Vymaž"
 
 msgid "Close"
 msgstr "Zavřít"
+
+msgid "Close messages after a timeout"
+msgstr ""
 
 msgid "Complete"
 msgstr "Hotovo"
@@ -173,6 +185,9 @@ msgstr "Konsole"
 msgid "Cooldown"
 msgstr "Zchladit"
 
+msgid "Current percentage and graph line"
+msgstr ""
+
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS se nepodařilo načíst a byl deaktivován"
 
@@ -191,6 +206,9 @@ msgstr "Odznačit"
 msgid "Disable Motors"
 msgstr "Uvolnit motory"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "Vzdálenost (mm)"
 
@@ -202,6 +220,9 @@ msgid "Elapsed:"
 msgstr "Uplynulo:"
 
 msgid "Emergency Stop"
+msgstr ""
+
+msgid "Enable screen power management"
 msgstr ""
 
 msgid "Ended official support in June 2023"
@@ -363,6 +384,9 @@ msgstr "Špatně"
 msgid "Invalid password"
 msgstr "Špatné heslo"
 
+msgid "Inversely affects the icon size"
+msgstr ""
+
 msgid "Invert X"
 msgstr "Otočit X"
 
@@ -374,6 +398,9 @@ msgstr "Otočit Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "V závislosti na výkonu ohřívače to může trvat déle než 5 minut."
+
+msgid "It's possible that the configuration is not correct"
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipper Restart"
@@ -515,10 +542,8 @@ msgstr "Nebyla načtena žádná síť"
 msgid "No wireless interface has been found"
 msgstr "Nebylo nalezeno žádné bezdrátové rozhraní"
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
-msgstr "Nepodporováno autodetekcí, nakonfiguruj v klipperscreen.conf"
+msgid "Not all screens support this"
+msgstr ""
 
 msgid "Not working or not configured"
 msgstr "Nefunguje nebo není nakonfigurováno"
@@ -653,6 +678,9 @@ msgstr "Znovu"
 msgid "Retrying"
 msgstr "Zkouším znovu"
 
+msgid "Rotation invalid"
+msgstr ""
+
 msgid "Save"
 msgstr "Uložit"
 
@@ -681,6 +709,9 @@ msgstr "Čas vypnutí displeje"
 msgid "Screws Adjust"
 msgstr "Nastavit šrouby"
 
+msgid "Screws not used:"
+msgstr ""
+
 msgid "Select"
 msgstr "Vyber"
 
@@ -701,6 +732,9 @@ msgstr "Ukaž odběr topení"
 
 msgid "Show Scrollbars Buttons"
 msgstr "Ukaž rolovací tlačítka"
+
+msgid "Show only devices that are able to be set"
+msgstr ""
 
 msgid "Shutdown"
 msgstr "Vypnout"
@@ -762,14 +796,17 @@ msgstr "Teplota (°C)"
 msgid "Temperature"
 msgstr "Teplota"
 
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
 msgid "Total:"
 msgstr "Total:"
 
 msgid "Unknown Heater"
 msgstr "Neznámé topení"
-
-msgid "Unknown screw position"
-msgstr "Neznámé nastavení šroubů"
 
 msgid "Unload"
 msgstr "Vysuň"
@@ -791,6 +828,9 @@ msgstr "Aktualizuji"
 
 msgid "Uploaded"
 msgstr "Nahrané"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr ""
 
 msgid "Warning"
 msgstr "Varování"
@@ -857,6 +897,17 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "Vyrovnání šroubů podložky:"
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr "Nepodporováno autodetekcí, nakonfiguruj v klipperscreen.conf"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "Neznámé nastavení šroubů"
 
 #~ msgid "Max Acceleration to Deceleration"
 #~ msgstr "Z max. zrychlení do zpomalení"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-03 14:35-0300\n"
+"POT-Creation-Date: 2024-04-26 23:35-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Dr_Perry_Coke <dr.perrycoke@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -71,6 +71,9 @@ msgstr "Вы уверены, что хотите исключить объект
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Вы уверены, что хотите запустить аварийную остановку?"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Вы хотите отменить эту печать?"
 
@@ -82,6 +85,9 @@ msgstr "Вы уверены что хотите перезагрузить си�
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Вы хотите выключить принтер?"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "Авто"
@@ -103,9 +109,6 @@ msgstr "Уровень стола"
 
 msgid "Bed Mesh"
 msgstr "Сетка стола"
-
-msgid "Bed screw configuration:"
-msgstr "Конфигурация винтов кровати:"
 
 msgid "Both"
 msgstr ""
@@ -140,6 +143,12 @@ msgstr "Отменить"
 msgid "Cannot connect to Moonraker"
 msgstr "Не удается подключиться к Moonraker"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "Канал"
 
@@ -154,6 +163,9 @@ msgstr "Очистить"
 
 msgid "Close"
 msgstr "Закрыть"
+
+msgid "Close messages after a timeout"
+msgstr ""
 
 msgid "Complete"
 msgstr "Готово"
@@ -174,6 +186,9 @@ msgstr "Консоль"
 msgid "Cooldown"
 msgstr "Остудить"
 
+msgid "Current percentage and graph line"
+msgstr ""
+
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS не загрузилась и была отключена"
 
@@ -192,6 +207,9 @@ msgstr "Отменить выбор"
 msgid "Disable Motors"
 msgstr "Откл. моторы"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "Расстояние (mm)"
 
@@ -203,6 +221,9 @@ msgid "Elapsed:"
 msgstr "Прошло:"
 
 msgid "Emergency Stop"
+msgstr ""
+
+msgid "Enable screen power management"
 msgstr ""
 
 msgid "Ended official support in June 2023"
@@ -364,6 +385,9 @@ msgstr "Неверный"
 msgid "Invalid password"
 msgstr "Неверный пароль"
 
+msgid "Inversely affects the icon size"
+msgstr ""
+
 msgid "Invert X"
 msgstr "Инверсия X"
 
@@ -375,6 +399,9 @@ msgstr "Инверсия Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "В зависимости от мощности нагревателя это может занять более 5 минут."
+
+msgid "It's possible that the configuration is not correct"
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipper Рестарт"
@@ -399,7 +426,8 @@ msgstr "KlipperScreen прекратит поддержку в июне 2024 г"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT скрыты и должны использоваться из extrude"
+msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT скрыты и должны использоваться из extrude"
 
 msgid "Language"
 msgstr "Язык"
@@ -515,12 +543,8 @@ msgstr ""
 msgid "No wireless interface has been found"
 msgstr ""
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
+msgid "Not all screens support this"
 msgstr ""
-"Не поддерживается для автоматического обнаружения, его необходимо настроить "
-"в klipperscreen.conf"
 
 msgid "Not working or not configured"
 msgstr "Не работает или не настроено"
@@ -655,6 +679,9 @@ msgstr "Повторить попытку"
 msgid "Retrying"
 msgstr "Повторная попытка"
 
+msgid "Rotation invalid"
+msgstr ""
+
 msgid "Save"
 msgstr "Сохранить"
 
@@ -683,6 +710,9 @@ msgstr "Время выключения экрана"
 msgid "Screws Adjust"
 msgstr "Настроить винты"
 
+msgid "Screws not used:"
+msgstr ""
+
 msgid "Select"
 msgstr "Выбирать"
 
@@ -703,6 +733,9 @@ msgstr "Показать мощность нагрева"
 
 msgid "Show Scrollbars Buttons"
 msgstr "Показать полосу прокрутки"
+
+msgid "Show only devices that are able to be set"
+msgstr ""
 
 msgid "Shutdown"
 msgstr "Выключить"
@@ -764,14 +797,17 @@ msgstr "Температура (°С)"
 msgid "Temperature"
 msgstr "Tемпература"
 
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
 msgid "Total:"
 msgstr "Итого:"
 
 msgid "Unknown Heater"
 msgstr "Неизвестный нагреватель"
-
-msgid "Unknown screw position"
-msgstr "Неизвестное положение винта"
 
 msgid "Unload"
 msgstr "Выгрузить"
@@ -794,11 +830,15 @@ msgstr "Обновление"
 msgid "Uploaded"
 msgstr "Загружено"
 
+msgid "Useful for un-responsive touchscreens"
+msgstr ""
+
 msgid "Warning"
 msgstr "Предупреждение"
 
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr "Отсутствует поддержка WebRTC у бэкенда, который пытается передать поток"
+msgstr ""
+"Отсутствует поддержка WebRTC у бэкенда, который пытается передать поток"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Скорость перемещения по осям XY (мм/с)"
@@ -859,6 +899,19 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм³/с"
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "Конфигурация винтов кровати:"
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr ""
+#~ "Не поддерживается для автоматического обнаружения, его необходимо "
+#~ "настроить в klipperscreen.conf"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "Неизвестное положение винта"
 
 #~ msgid "Max Acceleration to Deceleration"
 #~ msgstr "Ускорения торможения"

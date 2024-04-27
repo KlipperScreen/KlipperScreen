@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-03 14:35-0300\n"
+"POT-Creation-Date: 2024-04-26 23:35-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Nurettin Sevdik <nurettinsevdik10@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -70,6 +70,9 @@ msgstr "Nesneyi hariç tutmak istediğinizden emin misiniz?"
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Acil Durdurma'yı çalıştırmak istediğinizden emin misiniz?"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Bu baskıyı iptal etmek istediğinizden emin misiniz?"
 
@@ -81,6 +84,9 @@ msgstr "Sistemi yeniden başlatmak istediğinizden emin misiniz?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Sistemi kapatmak istediğinizden emin misiniz?"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "Otomatik"
@@ -102,9 +108,6 @@ msgstr "Tabla Ayarı"
 
 msgid "Bed Mesh"
 msgstr "Tabla Örgüsü"
-
-msgid "Bed screw configuration:"
-msgstr "Tabla vida yapılandırması:"
 
 msgid "Both"
 msgstr "ikisi de"
@@ -139,6 +142,12 @@ msgstr "İptal ediliyor"
 msgid "Cannot connect to Moonraker"
 msgstr "Moonraker'a bağlanılamıyor"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "Kanal"
 
@@ -153,6 +162,9 @@ msgstr "Temizle"
 
 msgid "Close"
 msgstr "Kapat"
+
+msgid "Close messages after a timeout"
+msgstr ""
 
 msgid "Complete"
 msgstr "Tamamlandı"
@@ -173,6 +185,9 @@ msgstr "Konsol"
 msgid "Cooldown"
 msgstr "Soğutma"
 
+msgid "Current percentage and graph line"
+msgstr ""
+
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS yüklenemedi ve devre dışı bırakıldı"
 
@@ -191,6 +206,9 @@ msgstr "Seçimi kaldır"
 msgid "Disable Motors"
 msgstr "Motorları Devre Dışı Bırak"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "Uzaklık (mm)"
 
@@ -203,6 +221,9 @@ msgstr "Geçen:"
 
 msgid "Emergency Stop"
 msgstr "Acil durdurma"
+
+msgid "Enable screen power management"
+msgstr ""
 
 msgid "Ended official support in June 2023"
 msgstr "Resmi destek Haziran 2023 tarihinde sona ermiştir"
@@ -363,6 +384,9 @@ msgstr "Geçersiz"
 msgid "Invalid password"
 msgstr "Geçersiz şifre"
 
+msgid "Inversely affects the icon size"
+msgstr ""
+
 msgid "Invert X"
 msgstr "X Ters çevir"
 
@@ -374,6 +398,9 @@ msgstr "Z Ters çevir"
 
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "Isıtıcı gücüne bağlı olarak 5 dakikadan fazla sürebilir."
+
+msgid "It's possible that the configuration is not correct"
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipper Yeniden başlat"
@@ -514,12 +541,8 @@ msgstr "Herhangi bir mesh yüklenmedi"
 msgid "No wireless interface has been found"
 msgstr "Herhangi bir kablosuz cihazı bulunamadı"
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
+msgid "Not all screens support this"
 msgstr ""
-"Otomatik algılama desteklenmiyor, klipperscreen.conf dosyasından "
-"yapılandırmanız gerekli"
 
 msgid "Not working or not configured"
 msgstr "Çalışmamakta veya konfigre edilmemiş"
@@ -653,6 +676,9 @@ msgstr "Tekrar dene"
 msgid "Retrying"
 msgstr "Yeniden Deneniyor"
 
+msgid "Rotation invalid"
+msgstr ""
+
 msgid "Save"
 msgstr "Kaydet"
 
@@ -681,6 +707,9 @@ msgstr "Ekran kapatma zamanı"
 msgid "Screws Adjust"
 msgstr "Vida Ayarı"
 
+msgid "Screws not used:"
+msgstr ""
+
 msgid "Select"
 msgstr "Seç"
 
@@ -701,6 +730,9 @@ msgstr "Isıtıcı Gücünü Göster"
 
 msgid "Show Scrollbars Buttons"
 msgstr "Kaydırma çubuklarında düğmeleri göster"
+
+msgid "Show only devices that are able to be set"
+msgstr ""
 
 msgid "Shutdown"
 msgstr "Kapat"
@@ -762,14 +794,17 @@ msgstr "Sıcaklık (°C)"
 msgid "Temperature"
 msgstr "Sıcaklık"
 
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
 msgid "Total:"
 msgstr "Toplam:"
 
 msgid "Unknown Heater"
 msgstr "Bilinmeyen Isıtıcı"
-
-msgid "Unknown screw position"
-msgstr "Bilinmeyen vida konumu"
 
 msgid "Unload"
 msgstr "Boşalt"
@@ -791,6 +826,9 @@ msgstr "Yükleniyor"
 
 msgid "Uploaded"
 msgstr "Yüklendi"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr ""
 
 msgid "Warning"
 msgstr "Uyarı"
@@ -854,6 +892,19 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "Tabla vida yapılandırması:"
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr ""
+#~ "Otomatik algılama desteklenmiyor, klipperscreen.conf dosyasından "
+#~ "yapılandırmanız gerekli"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "Bilinmeyen vida konumu"
 
 #~ msgid "Max Acceleration to Deceleration"
 #~ msgstr "Maksimum Hızlanma ve Yavaşlama"

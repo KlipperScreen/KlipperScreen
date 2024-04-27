@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-03 14:35-0300\n"
+"POT-Creation-Date: 2024-04-26 23:35-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/klipperscreen/"
@@ -72,6 +72,9 @@ msgstr ""
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "האם אתה בטוח שאתה רוצה לבצע עצירת חירום?"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "האם אתה בטוח שברצונך לבטל את ההדפסה?"
 
@@ -83,6 +86,9 @@ msgstr "האם אתה בטוח שברצונך לאתחל את המערכת?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "האם אתה בטוח שברצונך לכבות את המערכת?"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "אוטומטי"
@@ -104,9 +110,6 @@ msgstr "פילוס מיטה"
 
 msgid "Bed Mesh"
 msgstr "מיפוי מיטה"
-
-msgid "Bed screw configuration:"
-msgstr "הגדרת בורג מיטה"
 
 msgid "Both"
 msgstr ""
@@ -141,6 +144,12 @@ msgstr "מבטל"
 msgid "Cannot connect to Moonraker"
 msgstr "לא ניתן להתחבר ל-Moonraker"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "ערוץ"
 
@@ -155,6 +164,9 @@ msgstr "נקה"
 
 msgid "Close"
 msgstr "סגור"
+
+msgid "Close messages after a timeout"
+msgstr ""
 
 msgid "Complete"
 msgstr "הסתיים"
@@ -175,6 +187,9 @@ msgstr "קונסול"
 msgid "Cooldown"
 msgstr "הפעל קירור"
 
+msgid "Current percentage and graph line"
+msgstr ""
+
 msgid "DPMS has failed to load and has been disabled"
 msgstr ""
 
@@ -193,6 +208,9 @@ msgstr "בטל את הבחירה"
 msgid "Disable Motors"
 msgstr "השבת מנועים"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "מרחק (מ\"מ)"
 
@@ -204,6 +222,9 @@ msgid "Elapsed:"
 msgstr "זמן שעבר:"
 
 msgid "Emergency Stop"
+msgstr ""
+
+msgid "Enable screen power management"
 msgstr ""
 
 msgid "Ended official support in June 2023"
@@ -365,6 +386,9 @@ msgstr "לא חוקי"
 msgid "Invalid password"
 msgstr ""
 
+msgid "Inversely affects the icon size"
+msgstr ""
+
 msgid "Invert X"
 msgstr "הפוך את X"
 
@@ -375,6 +399,9 @@ msgid "Invert Z"
 msgstr "הפוך את Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
+
+msgid "It's possible that the configuration is not correct"
 msgstr ""
 
 msgid "Klipper Restart"
@@ -516,10 +543,8 @@ msgstr ""
 msgid "No wireless interface has been found"
 msgstr ""
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
-msgstr "איתור אוטומטי אינו נתמך, זה צריך להיות מוגדר ב klipperscreen"
+msgid "Not all screens support this"
+msgstr ""
 
 msgid "Not working or not configured"
 msgstr ""
@@ -655,6 +680,9 @@ msgstr ""
 msgid "Retrying"
 msgstr "מנסה שוב"
 
+msgid "Rotation invalid"
+msgstr ""
+
 msgid "Save"
 msgstr "לשמור"
 
@@ -683,6 +711,9 @@ msgstr "זמן כיבוי מסך"
 msgid "Screws Adjust"
 msgstr "סידור ברגים"
 
+msgid "Screws not used:"
+msgstr ""
+
 msgid "Select"
 msgstr "בחר"
 
@@ -702,6 +733,9 @@ msgid "Show Heater Power"
 msgstr "הצג זרם מיטה"
 
 msgid "Show Scrollbars Buttons"
+msgstr ""
+
+msgid "Show only devices that are able to be set"
 msgstr ""
 
 msgid "Shutdown"
@@ -764,14 +798,17 @@ msgstr "טמפ' (°C)"
 msgid "Temperature"
 msgstr "טמפרטורה"
 
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
 msgid "Total:"
 msgstr "סך הכל:"
 
 msgid "Unknown Heater"
 msgstr "מחמם לא ידוע"
-
-msgid "Unknown screw position"
-msgstr "מיקום בורג לא ידוע"
 
 msgid "Unload"
 msgstr "העלה"
@@ -793,6 +830,9 @@ msgstr "מעדכן"
 
 msgid "Uploaded"
 msgstr "הועלה"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr ""
 
 msgid "Warning"
 msgstr ""
@@ -862,6 +902,17 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "הגדרת בורג מיטה"
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr "איתור אוטומטי אינו נתמך, זה צריך להיות מוגדר ב klipperscreen"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "מיקום בורג לא ידוע"
 
 #~ msgid "Max Acceleration to Deceleration"
 #~ msgstr "האצה מרבית להאטה"
