@@ -1,8 +1,5 @@
 {
     "debian": [
-        "python3-virtualenv",
-        "virtualenv",
-        "python3-distutils",
         "libgirepository1.0-dev",
         "gcc",
         "libcairo2-dev",
@@ -20,7 +17,6 @@
         "autoconf"
     ],
     "arch": [
-        "python-virtualenv",
         "cairo",
         "pkgconf",
         "gobject-introspection",

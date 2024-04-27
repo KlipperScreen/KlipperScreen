@@ -6,7 +6,6 @@ KSENV="${KLIPPERSCREEN_VENV:-${HOME}/.KlipperScreen-env}"
 
 XSERVER="xinit xinput x11-xserver-utils xserver-xorg-input-evdev xserver-xorg-input-libinput xserver-xorg-legacy xserver-xorg-video-fbdev"
 CAGE="cage seatd xwayland"
-PYTHON="python3-virtualenv virtualenv python3-distutils"
 PYGOBJECT="libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0"
 MISC="librsvg2-common libopenjp2-7 wireless-tools libdbus-glib-1-dev autoconf"
 OPTIONAL="fonts-nanum fonts-ipafont libmpv-dev policykit-1 network-manager"
@@ -84,12 +83,6 @@ install_packages()
     echo_text "Installing KlipperScreen dependencies"
     sudo apt install -y $OPTIONAL
     echo "$_"
-    if sudo apt install -y $PYTHON; then
-        echo_ok "Installed Python dependencies"
-    else
-        echo_error "Installation of Python dependencies failed ($PYTHON)"
-        exit 1
-    fi
 
     if sudo apt install -y $PYGOBJECT; then
         echo_ok "Installed PyGobject dependencies"
@@ -119,7 +112,7 @@ create_virtualenv()
 {
     echo_text "Creating virtual environment"
     if [ ! -d ${KSENV} ]; then
-        virtualenv -p /usr/bin/python3 ${KSENV}
+        python3 -m venv  ${KSENV}
     fi
 
     source ${KSENV}/bin/activate
