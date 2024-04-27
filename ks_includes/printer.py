@@ -159,7 +159,7 @@ class Printer:
             self.state = state
         if self.state_callbacks[state] is not None:
             logging.debug(f"Adding callback for state: {state}")
-            GLib.idle_add(self.state_cb, self.state_callbacks[state])
+            GLib.idle_add(self.state_cb, state, self.state_callbacks[state])
 
     def configure_power_devices(self, data):
         self.power_devices = {}

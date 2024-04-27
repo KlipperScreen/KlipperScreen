@@ -161,7 +161,7 @@ class KlipperScreenConfig:
                     'show_heater_power', "show_scroll_steppers", "auto_open_extrude"
                 )
                 strs = (
-                    'default_printer', 'language', 'print_sort_dir', 'theme', 'screen_blanking', 'font_size',
+                    'default_printer', 'language', 'print_sort_dir', 'theme', 'screen_blanking_printing', 'font_size',
                     'print_estimate_method', 'screen_blanking', "screen_on_devices", "screen_off_devices", 'print_view',
                 )
                 numbers = (
@@ -266,6 +266,13 @@ class KlipperScreenConfig:
                 "value": "3600", "callback": screen.set_screenblanking_timeout, "options": [
                     {"name": _("Never"), "value": "off"}]
             }},
+            {"screen_blanking_printing": {
+                "section": "main", "name": _("Screen Power Off Time") + " (" + _("Printing") + ")",
+                "type": "dropdown",
+                "tooltip": _("Timeout for screen black-out or power-off during printing"),
+                "value": "3600", "callback": screen.set_screenblanking_printing_timeout, "options": [
+                    {"name": _("Never"), "value": "off"}]
+            }},
             {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary",
                          "tooltip": _("Disable for 12hs with am / pm"),
                          "value": "True"}},
@@ -326,16 +333,26 @@ class KlipperScreenConfig:
         for theme in themes:
             theme_opt.append({"name": theme, "value": theme})
 
-        index = self.configurable_options.index(
-            [i for i in self.configurable_options if list(i)[0] == "screen_blanking"][0])
+        i1 = i2 = None
+        for i, option in enumerate(self.configurable_options):
+            if list(option)[0] == "screen_blanking":
+                i1 = i
+            elif list(option)[0] == "screen_blanking_printing":
+                i2 = i
+            if i1 and i2:
+                break
         for num in SCREEN_BLANKING_OPTIONS:
             hour = num // 3600
-            minute = num / 60
+            minute = num // 60
             if hour > 0:
-                name = f'{hour} ' + ngettext("hour", "hours", hour)
+                name = f'{hour} ' + gettext.ngettext("hour", "hours", hour)
             else:
-                name = f'{minute:.0f} ' + ngettext("minute", "minutes", minute)
-            self.configurable_options[index]['screen_blanking']['options'].append({
+                name = f'{minute} ' + gettext.ngettext("minute", "minutes", minute)
+            self.configurable_options[i1]['screen_blanking']['options'].append({
+                "name": name,
+                "value": f"{num}"
+            })
+            self.configurable_options[i2]['screen_blanking_printing']['options'].append({
                 "name": name,
                 "value": f"{num}"
             })

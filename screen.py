@@ -70,11 +70,6 @@ def set_text_direction(lang=None):
     return True
 
 
-def state_execute(callback):
-    callback()
-    return False
-
-
 class KlipperScreen(Gtk.Window):
     """ Class for creating a screen for Klipper via HDMI """
     _cur_panels = []
@@ -188,6 +183,15 @@ class KlipperScreen(Gtk.Window):
                                      + _("Ended official support in June 2023") + "\n"
                                      + _("KlipperScreen will drop support in June 2024"), 2)
 
+    def state_execute(self, state, callback):
+        self.close_screensaver()
+        if state in ("printing", "paused"):
+            self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking_printing'))
+        else:
+            self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
+        callback()
+        return False
+
     def initial_connection(self):
         self.printers = self._config.get_printers()
         state_callbacks = {
@@ -200,7 +204,7 @@ class KlipperScreen(Gtk.Window):
             "shutdown": self.state_shutdown
         }
         for printer in self.printers:
-            printer["data"] = Printer(state_execute, state_callbacks)
+            printer["data"] = Printer(self.state_execute, state_callbacks)
         default_printer = self._config.get_main_config().get('default_printer')
         logging.debug(f"Default printer: {default_printer}")
         if [True for p in self.printers if default_printer in p]:
@@ -618,7 +622,14 @@ class KlipperScreen(Gtk.Window):
     def set_dpms(self, use_dpms):
         self.use_dpms = use_dpms
         logging.info(f"DPMS set to: {self.use_dpms}")
-        self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
+        if self.printer.state in ("printing", "paused"):
+            self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking_printing'))
+        else:
+            self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
+
+    def set_screenblanking_printing_timeout(self, time):
+        if self.printer.state in ("printing", "paused"):
+            self.set_screenblanking_timeout(time)
 
     def set_screenblanking_timeout(self, time):
         if not self.wayland:
@@ -673,13 +684,11 @@ class KlipperScreen(Gtk.Window):
     def state_disconnected(self):
         logging.debug("### Going to disconnected")
         self.printer.stop_tempstore_updates()
-        self.close_screensaver()
         self.initialized = False
         self.reinit_count = 0
         self._init_printer(_("Klipper has disconnected"), remove=True)
 
     def state_error(self):
-        self.close_screensaver()
         msg = _("Klipper has encountered an error.") + "\n"
         state = self.printer.get_stat("webhooks", "state_message")
         if "FIRMWARE_RESTART" in state:
@@ -694,7 +703,6 @@ class KlipperScreen(Gtk.Window):
             self.show_panel("extrude", _("Extrude"))
 
     def state_printing(self):
-        self.close_screensaver()
         for dialog in self.dialogs:
             self.gtk.remove_dialog(dialog)
         self.show_panel("job_status", _("Printing"), remove_all=True)
@@ -714,7 +722,6 @@ class KlipperScreen(Gtk.Window):
         self.printer_initializing(_("Klipper is attempting to start"))
 
     def state_shutdown(self):
-        self.close_screensaver()
         self.printer.stop_tempstore_updates()
         msg = self.printer.get_stat("webhooks", "state_message")
         msg = msg if "ready" not in msg else ""
