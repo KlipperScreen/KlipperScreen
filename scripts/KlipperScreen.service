@@ -32,4 +32,3 @@ TTYVTDisallocate=yes
 
 [Install]
 WantedBy=multi-user.target
-DefaultInstance=tty7

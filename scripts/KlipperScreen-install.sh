@@ -34,9 +34,12 @@ install_graphical_backend()
 {
   while true; do
     if [ -z "$BACKEND" ]; then
+      echo_text ""
+      echo_text "Choose graphical backend"
       echo_ok "Default is Xserver"
       echo_text "Wayland is EXPERIMENTAL needs kms/drm drivers doesn't support DPMS and may need autologin"
-      read -r -e -p "Backend Xserver or Wayland (cage)? [X/w]" BACKEND
+      echo_text ""
+      read -r -e -p "Backend Xserver or Wayland (cage), Press enter for default (Xserver)? [X/w]" BACKEND
       if [[ "$BACKEND" =~ ^[wW]$ ]]; then
         echo_text "Installing Wayland Cage Kiosk"
         if sudo apt install -y $CAGE; then
@@ -111,11 +114,12 @@ check_requirements()
 create_virtualenv()
 {
     echo_text "Creating virtual environment"
-    if [ ! -d ${KSENV} ]; then
-        python3 -m venv  ${KSENV}
-    fi
+    python3 -m venv ${KSENV}
 
-    source ${KSENV}/bin/activate
+    if ! source ${KSENV}/bin/activate; then
+        echo_error "Could not activate the enviroment, try deleting ${KSENV} and retry"
+        exit 1
+    fi
     if [[ "$(uname -m)" =~ armv[67]l ]]; then
         echo_text "Using armv[67]l! Adding piwheels.org as extra index..."
         pip --disable-pip-version-check install --extra-index-url https://www.piwheels.org/simple -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
@@ -281,7 +285,11 @@ fi
 check_requirements
 
 if [ -z "$SERVICE" ]; then
-    read -r -e -p "Install as a service? (This will enable boot to console) [Y/n]" SERVICE
+    echo_text "Install standalone?"
+    echo_text "it will create a service, enable boot to console and install the graphical dependencies."
+    echo_text "Say no to install as a regular desktop app that will not start automatically"
+    echo_text ""
+    read -r -e -p "Install standalone? Press enter for default (standalone) [Y/n]" SERVICE
     if [[ $SERVICE =~ ^[nN]$ ]]; then
         echo_text "Not installing the service"
         echo_text "The graphical backend will NOT be installed"
