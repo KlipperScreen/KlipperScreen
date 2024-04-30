@@ -665,6 +665,7 @@ class KlipperScreen(Gtk.Window):
 
     def websocket_connected(self):
         logging.debug("### websocket_connected")
+        self._ws.klippy.identify_client(functions.get_software_version(), self._ws.api_key)
         self.reinit_count = 0
         self.connecting = False
         self.connected_printer = self.connecting_to_printer

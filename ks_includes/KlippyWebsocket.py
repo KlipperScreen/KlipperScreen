@@ -328,3 +328,16 @@ class MoonrakerApi:
         return self._ws.send_method(
             "printer.firmware_restart"
         )
+
+    def identify_client(self, version, api_key):
+        logging.debug("Sending printer.firmware_restart")
+        return self._ws.send_method(
+            "server.connection.identify",
+            {
+                "client_name": "KlipperScreen",
+                "version": f"{version}",
+                "type": "display",
+                "url": "https://github.com/KlipperScreen/KlipperScreen",
+                "api_key": f"{api_key}"
+            },
+        )
