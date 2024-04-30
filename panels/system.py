@@ -49,7 +49,7 @@ class Panel(ScreenPanel):
             self.labels[f"{prog}_status"].connect("clicked", self.show_update_info, prog)
 
             try:
-                if prog in self.system_info['result']['system_info']['available_services']:
+                if prog in self.system_info['system_info']['available_services']:
                     self.labels[f"{prog}_restart"] = self._gtk.Button("refresh", _("Restart"),
                                                                       "color2",
                                                                       position=Gtk.PositionType.LEFT,

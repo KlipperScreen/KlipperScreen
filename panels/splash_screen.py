@@ -102,10 +102,7 @@ class Panel(ScreenPanel):
         self._screen._ws.klippy.restart()
 
     def retry(self, widget):
-        if self._screen._ws and not self._screen._ws.connecting:
-            self._screen._ws.retry()
-        self._screen.reinit_count = 0
-        self._screen._init_printer(_("Connecting to %s") % self._screen.connecting_to_printer)
+        self._screen.connect_printer(self._screen.connecting_to_printer)
         self.show_restart_buttons()
 
     def reboot_poweroff(self, widget, method):

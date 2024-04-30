@@ -112,7 +112,7 @@ class Panel(ScreenPanel):
         data_misc = self._screen.apiclient.send_request(
             "server/database/item?namespace=mainsail&key=miscellaneous.entries")
         if data_misc:
-            presets_data = data_misc['result']['value'][next(iter(data_misc["result"]["value"]))]['presets']
+            presets_data = data_misc['value'][next(iter(data_misc["value"]))]['presets']
             if presets_data:
                 self.presets.update(self.parse_presets(presets_data))
         for i, key in enumerate(self.presets):
