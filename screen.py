@@ -32,26 +32,6 @@ from panels.base_panel import BasePanel
 
 logging.getLogger("urllib3").setLevel(logging.WARNING)
 
-PRINTER_BASE_STATUS_OBJECTS = [
-    'bed_mesh',
-    'configfile',
-    'display_status',
-    'extruder',
-    'fan',
-    'gcode_move',
-    'heater_bed',
-    'idle_timeout',
-    'pause_resume',
-    'print_stats',
-    'toolhead',
-    'virtual_sdcard',
-    'webhooks',
-    'motion_report',
-    'firmware_retraction',
-    'exclude_object',
-    'manual_probe',
-]
-
 klipperscreendir = pathlib.Path(__file__).parent.resolve()
 
 
@@ -980,20 +960,37 @@ class KlipperScreen(Gtk.Window):
         self.printer.available_commands = self.apiclient.get_gcode_help()['result']
 
         self.ws_subscribe()
-        extra_items = (self.printer.get_tools()
-                       + self.printer.get_heaters()
-                       + self.printer.get_temp_sensors()
-                       + self.printer.get_fans()
-                       + self.printer.get_temp_fans()
-                       + self.printer.get_filament_sensors()
-                       + self.printer.get_output_pins()
-                       + self.printer.get_leds()
-                       )
+        items = (
+            'bed_mesh',
+            'configfile',
+            'display_status',
+            'extruder',
+            'fan',
+            'gcode_move',
+            'heater_bed',
+            'idle_timeout',
+            'pause_resume',
+            'print_stats',
+            'toolhead',
+            'virtual_sdcard',
+            'webhooks',
+            'motion_report',
+            'firmware_retraction',
+            'exclude_object',
+            'manual_probe',
+            *self.printer.get_tools(),
+            *self.printer.get_heaters(),
+            *self.printer.get_temp_sensors(),
+            *self.printer.get_fans(),
+            *self.printer.get_temp_fans(),
+            *self.printer.get_filament_sensors(),
+            *self.printer.get_output_pins(),
+            *self.printer.get_leds(),
+        )
 
-        data = self.apiclient.send_request("printer/objects/query?" + "&".join(PRINTER_BASE_STATUS_OBJECTS +
-                                                                               extra_items))
+        data = self.apiclient.send_request("printer/objects/query?" + "&".join(items))
         if data is False:
-            return self._init_printer("Error getting printer object data with extra items")
+            return self._init_printer("Error getting printer object data")
 
         self.files.set_gcodes_path()
 
