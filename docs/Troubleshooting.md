@@ -140,6 +140,10 @@ If you find a way of turning it off, please share it: [Contact](Contact.md)
 
 [Follow this steps](Troubleshooting/Network.md)
 
+## I see the Desktop environment instead of KlipperScreen
+
+[Follow this steps](Troubleshooting/Desktop.md)
+
 ## Other issues
 
 If you found an issue not listed here, or can't make it work, please provide all the log files

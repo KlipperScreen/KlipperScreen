@@ -54,3 +54,8 @@ this mode lets you create a mesh leveling bed using the paper test in various po
 Available when the kinematics are defined as delta.
 
 Klipper documentation: [Delta calibration](https://www.klipper3d.org/Delta_Calibrate.html)
+
+### Axis Twist Compensation (`AXIS_TWIST_COMPENSATION_CALIBRATE`)
+Available when `[axis_twist_compensation]` is defined in the Klipper configuration.
+
+Klipper documentation: [Axis Twist Compensation](https://www.klipper3d.org/Axis_Twist_Compensation.html)

@@ -19,8 +19,8 @@ The host device could be for example a Raspberry Pi
 3. Create `~/KlipperScreen/scripts/launch_KlipperScreen.sh`:
 
     ```bash
-    #!/usr/bin/env bash
-    # Use display 10 to avoid clashing with local X server, if anyy
+    #!/bin/bash
+    # Use display 10 to avoid clashing with local X server, if any
     Xtigervnc -rfbport 5900 -noreset -AlwaysShared -SecurityTypes none :10&
     DISPLAY=:10 $KS_XCLIENT&
     wait
@@ -60,7 +60,7 @@ Turn off DPMS and Display timeout:
     * Triple-click "Home" button
     * Guided access pops up
     * Press "Start"
-    * Now iPad is locked to VNC viewer until "Guided access" mode is disabled by triple-clicking "Home" button and entering the restrictions password.
+    * Now iPad is locked to VNC viewer until "Guided access" mode is disabled by triple-clicking "Home" button and entering the password.
     ##### On the VNC viewer:
     * Press "+" button at the top right
     * Enter IP address of your print host.

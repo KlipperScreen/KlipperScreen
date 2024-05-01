@@ -8,7 +8,7 @@ See [Physical install issues](Physical_Install.md)
 If the screen shows the bootup text, but ends in a blinking cursor or login prompt,
 and no matter what you tried in [Troubleshooting](../Troubleshooting.md) you can't make it work, then do this:
 
-1. Install a distro with a desktop enviromenment [Click to learn how to check](../../FAQ/#how-to-check-if-you-have-a-desktop-environment)
+1. Install a distro with a desktop enviromenment [Click to learn how to check](./Desktop.md)
 
 2. Ensure that the screen is working properly (display and touch)
 

@@ -1,7 +1,9 @@
 # Wi-Fi networks not listed
 
 !!! tip "First start"
-    The initial scan may take a couple of minutes, first be patient before assuming it's an issue
+    The initial scan may take a while, first be patient before assuming it's an issue
+
+The network panel requires network-manager to function, (if you are using a fork this may not be the case)
 
 Check if network-manager is installed:
 
@@ -14,8 +16,6 @@ if the response is the following:
 ```sh
 dpkg-query: the package 'network-manager' is not installed
 ```
-
-go to [wpa_supplicant](wpa_supplicant.md)
 
 if the response is the following:
 

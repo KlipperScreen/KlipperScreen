@@ -145,4 +145,4 @@ here are some examples:
 
 ## Touchscreen touch rotation
 
-[See touch rotation](../Touch_issues/#touch-rotation-and-matrix)
+[See touch rotation](./Touch_issues.md#touch-rotation-and-matrix)
