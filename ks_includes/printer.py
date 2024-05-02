@@ -114,14 +114,13 @@ class Printer:
     def process_update(self, data):
         if self.data is None:
             return
-        for x in (self.get_temp_devices() + self.get_filament_sensors()):
-            if x in data:
-                for i in data[x]:
-                    self.set_dev_stat(x, i, data[x][i])
 
         for x in data:
-            if x == "configfile":
-                continue
+            if x in self.get_temp_devices() or x in self.get_filament_sensors():
+                for i in data[x]:
+                    self.set_dev_stat(x, i, data[x][i])
+            if x == "configfile" and 'config' in data[x]:
+                self.config.update(data[x]['config'])
             if x not in self.data:
                 self.data[x] = {}
             self.data[x].update(data[x])
