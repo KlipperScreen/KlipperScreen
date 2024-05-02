@@ -174,9 +174,9 @@ class ScreenPanel:
 
         show_power = show_target and self._show_heater_power and power is not None
 
-        new_label_text = f"{int(temp):3}"
+        new_label_text = f"{temp:.0f}"
         if show_target:
-            new_label_text += f"/{int(target)}"
+            new_label_text += f"/{target:.0f}"
         if dev not in self.devices:
             new_label_text += "°"
         if show_power:
@@ -184,7 +184,7 @@ class ScreenPanel:
                 # The label should wrap, but it doesn't work
                 # this is a workaround
                 new_label_text += "\n  "
-            new_label_text += f" {int(power * 100):3}%"
+            new_label_text += f" {power * 100:3.0f}%"
 
         if dev in self.labels:
             self.labels[dev].set_label(new_label_text)
