@@ -130,7 +130,7 @@ class Panel(ScreenPanel):
             self._screen.show_popup_message(_("Nothing selected"))
         else:
             for heater in self.active_heaters:
-                target = self._printer.get_dev_stat(heater, "target")
+                target = self._printer.get_stat(heater, "target")
                 name = heater.split()[1] if len(heater.split()) > 1 else heater
                 if direction == "+":
                     target += int(self.tempdelta)
@@ -153,7 +153,6 @@ class Panel(ScreenPanel):
                 else:
                     logging.info(f"Unknown heater: {heater}")
                     self._screen.show_popup_message(_("Unknown Heater") + " " + heater)
-                self._printer.set_dev_stat(heater, "target", int(target))
                 logging.info(f"Setting {heater} to {target}")
 
     def update_graph_visibility(self):
@@ -256,7 +255,6 @@ class Panel(ScreenPanel):
     def validate(self, heater, target=None, max_temp=None):
         if target is not None and max_temp is not None:
             if 0 <= target <= max_temp:
-                self._printer.set_dev_stat(heater, "target", target)
                 return True
             elif target > max_temp:
                 self._screen.show_popup_message(_("Can't set above the maximum:") + f' {max_temp}')
@@ -274,7 +272,7 @@ class Panel(ScreenPanel):
 
         logging.info(f"Adding device: {device}")
 
-        temperature = self._printer.get_dev_stat(device, "temperature")
+        temperature = self._printer.get_stat(device, "temperature")
         if temperature is None:
             return False
 
@@ -403,7 +401,6 @@ class Panel(ScreenPanel):
         else:
             logging.info(f"Unknown heater: {self.active_heater}")
             self._screen.show_popup_message(_("Unknown Heater") + " " + self.active_heater)
-        self._printer.set_dev_stat(self.active_heater, "target", temp)
 
     def verify_max_temp(self, temp):
         temp = int(temp)
@@ -511,9 +508,9 @@ class Panel(ScreenPanel):
             if x in data:
                 self.update_temp(
                     x,
-                    self._printer.get_dev_stat(x, "temperature"),
-                    self._printer.get_dev_stat(x, "target"),
-                    self._printer.get_dev_stat(x, "power"),
+                    self._printer.get_stat(x, "temperature"),
+                    self._printer.get_stat(x, "target"),
+                    self._printer.get_stat(x, "power"),
                 )
 
     def show_numpad(self, widget, device=None):

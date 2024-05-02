@@ -116,9 +116,6 @@ class Printer:
             return
 
         for x in data:
-            if x in self.get_temp_devices() or x in self.get_filament_sensors():
-                for i in data[x]:
-                    self.set_dev_stat(x, i, data[x][i])
             if x == "configfile" and 'config' in data[x]:
                 self.config.update(data[x]['config'])
             if x not in self.data:
@@ -298,13 +295,9 @@ class Printer:
         if self.data is None or stat not in self.data:
             return {}
         if substat is not None:
-            return self.data[stat][substat] if substat in self.data[stat] else {}
-        return self.data[stat]
-
-    def get_dev_stat(self, dev, stat):
-        if dev in self.devices and stat in self.devices[dev]:
-            return self.devices[dev][stat]
-        return None
+            return self.data.get(stat, {}).get(substat, {})
+        else:
+            return self.data.get(stat, {})
 
     def get_fan_speed(self, fan="fan"):
         speed = 0
@@ -396,19 +389,13 @@ class Printer:
     def config_section_exists(self, section):
         return section in self.get_config_section_list()
 
-    def set_dev_stat(self, dev, stat, value):
-        if dev not in self.devices:
-            return
-
-        self.devices[dev][stat] = value
-
     def _update_temp_store(self):
         if self.tempstore is None:
             return False
         for device in self.tempstore:
             for x in self.tempstore[device]:
                 self.tempstore[device][x].pop(0)
-                temp = self.get_dev_stat(device, x[:-1])
+                temp = self.get_stat(device, x[:-1])
                 if temp is None:
                     temp = 0
                 self.tempstore[device][x].append(temp)

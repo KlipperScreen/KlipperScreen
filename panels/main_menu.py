@@ -82,7 +82,7 @@ class Panel(MenuPanel):
 
         logging.info(f"Adding device: {device}")
 
-        temperature = self._printer.get_dev_stat(device, "temperature")
+        temperature = self._printer.get_stat(device, "temperature")
         if temperature is None:
             return False
 
@@ -189,7 +189,6 @@ class Panel(MenuPanel):
         else:
             logging.info(f"Unknown heater: {self.active_heater}")
             self._screen.show_popup_message(_("Unknown Heater") + " " + self.active_heater)
-        self._printer.set_dev_stat(self.active_heater, "target", temp)
 
     def verify_max_temp(self, temp):
         temp = int(temp)
@@ -259,9 +258,9 @@ class Panel(MenuPanel):
             if x in data:
                 self.update_temp(
                     x,
-                    self._printer.get_dev_stat(x, "temperature"),
-                    self._printer.get_dev_stat(x, "target"),
-                    self._printer.get_dev_stat(x, "power"),
+                    self._printer.get_stat(x, "temperature"),
+                    self._printer.get_stat(x, "target"),
+                    self._printer.get_stat(x, "power"),
                 )
 
     def show_numpad(self, widget, device):
