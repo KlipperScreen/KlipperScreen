@@ -542,6 +542,8 @@ class KlipperScreen(Gtk.Window):
         logging.debug("Showing Screensaver")
         if self.screensaver is not None:
             self.close_screensaver()
+        if self.blanking_time == 0:
+            return False
         self.remove_keyboard()
         self.close_popup_message()
         for dialog in self.dialogs:
@@ -562,9 +564,6 @@ class KlipperScreen(Gtk.Window):
         self.screensaver = box
         self.screensaver.show_all()
         self.power_devices(None, self._config.get_main_config().get("screen_off_devices", ""), on=False)
-        if self.screensaver_timeout is not None:
-            GLib.source_remove(self.screensaver_timeout)
-            self.screensaver_timeout = None
         return False
 
     def close_screensaver(self, widget=None):
@@ -623,9 +622,7 @@ class KlipperScreen(Gtk.Window):
 
         if time == "off":
             logging.debug(f"Screen blanking: {time}")
-            if self.screensaver_timeout is not None:
-                GLib.source_remove(self.screensaver_timeout)
-                self.screensaver_timeout = None
+            self.blanking_time = 0
             if not self.wayland:
                 os.system("xset -display :0 dpms 0 0 0")
             return
