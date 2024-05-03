@@ -330,7 +330,7 @@ class MoonrakerApi:
         )
 
     def identify_client(self, version, api_key):
-        logging.debug("Sending printer.firmware_restart")
+        logging.debug("Sending server.connection.identify")
         return self._ws.send_method(
             "server.connection.identify",
             {
