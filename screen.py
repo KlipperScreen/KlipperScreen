@@ -677,7 +677,8 @@ class KlipperScreen(Gtk.Window):
         self.connecting = True
         self.connected_printer = None
         self.initialized = False
-        self.connect_printer(self.connecting_to_printer)
+        if 'printer_select' not in self._cur_panels:
+            self.connect_printer(self.connecting_to_printer)
 
     def state_disconnected(self):
         logging.debug("### Going to disconnected")
