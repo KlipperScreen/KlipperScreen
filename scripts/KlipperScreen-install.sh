@@ -7,7 +7,7 @@ KSENV="${KLIPPERSCREEN_VENV:-${HOME}/.KlipperScreen-env}"
 XSERVER="xinit xinput x11-xserver-utils xserver-xorg-input-evdev xserver-xorg-input-libinput xserver-xorg-legacy xserver-xorg-video-fbdev"
 CAGE="cage seatd xwayland"
 PYGOBJECT="libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0"
-MISC="librsvg2-common libopenjp2-7 wireless-tools libdbus-glib-1-dev autoconf"
+MISC="librsvg2-common libopenjp2-7 wireless-tools libdbus-glib-1-dev autoconf python3-venv"
 OPTIONAL="fonts-nanum fonts-ipafont libmpv-dev policykit-1 network-manager"
 
 Red='\033[0;31m'
