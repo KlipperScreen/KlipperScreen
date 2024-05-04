@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-26 23:35-0300\n"
-"PO-Revision-Date: 2024-04-13 16:48+0000\n"
-"Last-Translator: bbraeu <braeu.bernhard@gmail.com>\n"
+"PO-Revision-Date: 2024-05-02 19:07+0000\n"
+"Last-Translator: Sascha <saschbuerger@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/de/>\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.3-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -71,7 +71,7 @@ msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Bist du sicher, dass du den Not-Aus ausführen möchtest?"
 
 msgid "Are you sure you want to stop the calibration?"
-msgstr ""
+msgstr "Kalibrierung wirklich abbrechen?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Möchtest du diesen Druck wirklich abbrechen?"
@@ -143,10 +143,10 @@ msgid "Cannot connect to Moonraker"
 msgstr "Es kann keine Verbindung zu Moonraker hergestellt werden"
 
 msgid "Changes how the interface looks"
-msgstr ""
+msgstr "Ändert das Aussehen der Benutzeroberfläche"
 
 msgid "Changes how the time remaining is calculated"
-msgstr ""
+msgstr "Ändert die Berechnungsweiße der Restzeit"
 
 msgid "Channel"
 msgstr "Kanal"
@@ -164,7 +164,7 @@ msgid "Close"
 msgstr "Schließen"
 
 msgid "Close messages after a timeout"
-msgstr ""
+msgstr "Schließe die Nachrichten nach dem Ablauf der Zeit"
 
 msgid "Complete"
 msgstr "Fertiggestellt"
@@ -186,7 +186,7 @@ msgid "Cooldown"
 msgstr "Abkühlen"
 
 msgid "Current percentage and graph line"
-msgstr ""
+msgstr "Momentane Prozent und Diagramm Linie"
 
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS konnte nicht geladen werden und wurde deaktiviert"
@@ -207,7 +207,7 @@ msgid "Disable Motors"
 msgstr "Motoren deaktivieren"
 
 msgid "Disable for 12hs with am / pm"
-msgstr ""
+msgstr "Deaktivieren für 12h Anzeige mit AM/PM"
 
 msgid "Distance (mm)"
 msgstr "Entfernung (mm)"
@@ -223,10 +223,10 @@ msgid "Emergency Stop"
 msgstr "Notausschalter"
 
 msgid "Enable screen power management"
-msgstr ""
+msgstr "Bildschirm Energieverwaltung aktivieren"
 
 msgid "Ended official support in June 2023"
-msgstr "Offizieller Support endete im Juni 2023"
+msgstr "Offizieller Support im Juni 2023 eingestellt"
 
 msgid "Error"
 msgstr "Fehler"
@@ -244,7 +244,7 @@ msgid "Error trying to fetch spools"
 msgstr "Fehler beim Abrufen der Spulen"
 
 msgid "Error: Couldn't get a position to probe"
-msgstr "Fehler: Keine Position zum Abtasten gefunden"
+msgstr "Fehler: Es konnte keine Position zum Abtasten ermittelt werden"
 
 msgid "Estimated Time Method"
 msgstr "Verbleibende Zeit"
@@ -400,7 +400,7 @@ msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "Je nach Leistung der Heizung kann dies mehr als 5 Minuten dauern."
 
 msgid "It's possible that the configuration is not correct"
-msgstr ""
+msgstr "Es ist möglich das die Konfiguration nicht korrekt ist"
 
 msgid "Klipper Restart"
 msgstr "Klipper Neustart"
@@ -421,7 +421,7 @@ msgid "Klipper will reboot"
 msgstr "Klipper startet neu"
 
 msgid "KlipperScreen will drop support in June 2024"
-msgstr "KlipperScreen wird den Support im Juni 2024 einstellen"
+msgstr "KlipperScreen wird die Unterstützung im Juni 2024 beenden"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
@@ -544,7 +544,7 @@ msgid "No wireless interface has been found"
 msgstr "Es wurde keine drahtlose Schnittstelle gefunden"
 
 msgid "Not all screens support this"
-msgstr ""
+msgstr "Nicht alle Bildschirme unterstützen das"
 
 msgid "Not working or not configured"
 msgstr "Nicht funktionsfähig oder nicht konfiguriert"
@@ -631,7 +631,7 @@ msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "Wenn Hilfe benötigt wird KlipperScreen.log angeben.\n"
 
 msgid "Quad Gantry Level"
-msgstr "Quad Gantry Level"
+msgstr "Vierfache Nivellierung"
 
 msgid "Raise Nozzle"
 msgstr "Düse anheben"
@@ -679,7 +679,7 @@ msgid "Retrying"
 msgstr "Wiederhole"
 
 msgid "Rotation invalid"
-msgstr ""
+msgstr "Drehung ungültig"
 
 msgid "Save"
 msgstr "Speichern"
@@ -710,7 +710,7 @@ msgid "Screws Adjust"
 msgstr "Schrauben Einstellen"
 
 msgid "Screws not used:"
-msgstr ""
+msgstr "nicht genutzte Schrauben:"
 
 msgid "Select"
 msgstr "Wählen"
@@ -734,7 +734,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "Zeige Scrollbar Schaltfläche"
 
 msgid "Show only devices that are able to be set"
-msgstr ""
+msgstr "Zeige nur Geräte die eingestellt werden können"
 
 msgid "Shutdown"
 msgstr "Ausschalten"
@@ -838,7 +838,7 @@ msgid "Warning"
 msgstr "Warnung"
 
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr "WebRTC wird vom Backend nicht unterstützt."
+msgstr "WebRTC wird vom Backend nicht unterstützt"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Bewegungsgeschwindigkeit (mm/s)"
