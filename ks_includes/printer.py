@@ -396,7 +396,8 @@ class Printer:
             for x in self.tempstore[device]:
                 self.tempstore[device][x].pop(0)
                 temp = self.get_stat(device, x[:-1])
-                if temp is None:
+                if not temp:
+                    # If the temperature is not available, set it to 0.
                     temp = 0
                 self.tempstore[device][x].append(temp)
         return True
