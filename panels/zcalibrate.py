@@ -2,7 +2,7 @@ import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, Pango
 from ks_includes.screen_panel import ScreenPanel
 
 
@@ -45,6 +45,9 @@ class Panel(ScreenPanel):
             pos.attach(Gtk.Label(label=_("New")), 1, 3, 1, 1)
             pos.attach(Gtk.Label(label=f"{self.z_offset:.3f}"), 0, 4, 1, 1)
             pos.attach(self.widgets['zoffset'], 1, 4, 1, 1)
+        for label in pos.get_children():
+            if isinstance(label, Gtk.Label):
+                label.set_ellipsize(Pango.EllipsizeMode.END)
         self.buttons = {
             'zpos': self._gtk.Button('z-farther', _("Raise Nozzle"), 'color4'),
             'zneg': self._gtk.Button('z-closer', _("Lower Nozzle"), 'color1'),
