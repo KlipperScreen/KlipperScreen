@@ -210,7 +210,7 @@ class KlipperScreen(Gtk.Window):
         gc.collect()
         self.connecting = True
         self.initialized = False
-
+        self.initializing = False
         logging.info(f"Connecting to printer: {name}")
         ind = next(
             (
@@ -672,13 +672,15 @@ class KlipperScreen(Gtk.Window):
 
     def websocket_disconnected(self):
         logging.debug("### websocket_disconnected")
-        self.printer_initializing(_("Lost Connection to Moonraker"), go_to_splash=True)
         self.printer.state = "disconnected"
         self.connecting = True
         self.connected_printer = None
         self.initialized = False
         if 'printer_select' not in self._cur_panels:
+            self.printer_initializing(_("Lost Connection to Moonraker"), go_to_splash=True)
             self.connect_printer(self.connecting_to_printer)
+        else:
+            self.panels['printer_select'].disconnected_callback()
 
     def state_disconnected(self):
         logging.debug("### Going to disconnected")
@@ -894,7 +896,7 @@ class KlipperScreen(Gtk.Window):
     def _init_printer(self, msg, go_to_splash=False):
         self.printer_initializing(msg, go_to_splash)
         self.initializing = False
-        if self._ws.connected:
+        if self._ws.connected and not self._ws.closing:
             GLib.timeout_add_seconds(4, self.init_klipper)
         else:
             GLib.timeout_add_seconds(4, self.connect_to_moonraker)
@@ -902,6 +904,9 @@ class KlipperScreen(Gtk.Window):
     def connect_to_moonraker(self):
         if self.initializing:
             logging.info("Already Initializing")
+            return False
+        if self._ws.closing:
+            logging.info("Cancelling attempt")
             return False
         self.initializing = True
         if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:

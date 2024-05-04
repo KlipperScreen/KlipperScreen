@@ -80,9 +80,11 @@ class KlippyWebsocket(threading.Thread):
         return False
 
     def close(self):
+        logging.debug("Closing websocket")
         self.closing = True
         self.connecting = False
         if self.ws is not None:
+            self.ws.keep_running = False
             self.ws.close()
 
     def on_message(self, *args):
@@ -100,10 +102,13 @@ class KlippyWebsocket(threading.Thread):
         if "method" in response and "on_message" in self._callback:
             args = (response['method'], response['params'][0] if "params" in response else {})
             GLib.idle_add(self._callback['on_message'], *args, priority=GLib.PRIORITY_HIGH_IDLE)
+        if self.closing:
+            timer = threading.Timer(2, self.ws.close)
+            timer.start()
         return
 
     def send_method(self, method, params=None, callback=None, *args):
-        if not self.connected:
+        if not self.connected or self.closing:
             return False
         if params is None:
             params = {}
@@ -132,17 +137,16 @@ class KlippyWebsocket(threading.Thread):
     def on_close(self, *args):
         # args: ws, status, message
         # sometimes ws is not passed due to bugs
-        message = args[2] if len(args) == 3 else args[1]
+        if len(args) == 3:
+            status = args[1]
+            message = args[2]
+        else:
+            status = args[0]
+            message = args[1]
         if message is not None:
-            logging.info(f"{message}")
+            logging.info(f"{status} {message}")
         if not self.connected:
             logging.debug("Connection already closed")
-            return
-        if self.closing:
-            logging.debug("Closing websocket")
-            self.ws.keep_running = False
-            self.close()
-            self.closing = False
             return
         if "on_close" in self._callback:
             GLib.idle_add(self._callback['on_close'], priority=GLib.PRIORITY_HIGH_IDLE)

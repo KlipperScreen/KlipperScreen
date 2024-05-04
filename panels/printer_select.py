@@ -1,3 +1,4 @@
+import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -12,7 +13,7 @@ class Panel(ScreenPanel):
         super().__init__(screen, title)
         printers = self._config.get_printers()
 
-        printer_buttons = []
+        self.printer_buttons = []
         for i, printer in enumerate(printers):
             name = list(printer)[0]
             scale = 3
@@ -23,8 +24,8 @@ class Panel(ScreenPanel):
                 image = find_widget(self.labels[name], Gtk.Image)
                 image.set_from_pixbuf(pixbuf)
             self.labels[name].connect("clicked", self.connect_printer, name)
-            printer_buttons.append(self.labels[name])
-        grid = AutoGrid(printer_buttons, vertical=self._screen.vertical_mode)
+            self.printer_buttons.append(self.labels[name])
+        grid = AutoGrid(self.printer_buttons, vertical=self._screen.vertical_mode)
 
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
@@ -35,7 +36,16 @@ class Panel(ScreenPanel):
         self._screen.connect_printer(name)
 
     def activate(self):
-        self._screen.base_panel.action_bar.hide()
-        GLib.timeout_add(100, self._screen.base_panel.action_bar.hide)
-        if self._screen._ws:
+        if self._screen._ws and self._screen._ws.connected:
             self._screen.close_websocket()
+            logging.debug("Waiting for disconnect")
+            self._screen.base_panel.set_title(_("Please wait"))
+            b: Gtk.Button
+            for b in self.printer_buttons:
+                b.set_sensitive(False)
+
+    def disconnected_callback(self):
+        logging.debug("Disconnected. Enabling buttons")
+        self._screen.base_panel.set_title(_("Printer Select"))
+        for b in self.printer_buttons:
+            b.set_sensitive(True)

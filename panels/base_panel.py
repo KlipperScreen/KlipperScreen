@@ -288,13 +288,16 @@ class BasePanel(ScreenPanel):
             show
             and self._config.get_main_config().getboolean('side_macro_shortcut', True)
             and self._printer.get_printer_status_data()["printer"]["gcode_macros"]["count"] > 0
+            and self._screen._cur_panels[-1] != 'printer_select'
         )
         self.control['shortcut'].set_visible(show)
         self.set_control_sensitive(self._screen._cur_panels[-1] != self.shorcut['panel'])
         self.set_control_sensitive(self._screen._cur_panels[-1] != self.shutdown['panel'], control='shutdown')
 
     def show_printer_select(self, show=True):
-        self.control['printer_select'].set_visible(show)
+        self.control['printer_select'].set_visible(
+            show and 'printer_select' not in self._screen._cur_panels
+        )
 
     def set_title(self, title):
         self.titlebar.get_style_context().remove_class("message_popup_error")
