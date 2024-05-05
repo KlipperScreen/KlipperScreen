@@ -257,9 +257,10 @@ class ScreenPanel:
             open_menu.set_hexpand(False)
             open_menu.set_halign(Gtk.Align.END)
             row_box.add(open_menu)
-        elif option['type'] == "lang":
+        elif option['type'] == "button":
             select = self._gtk.Button("load", style="color3")
-            select.connect("clicked", self._screen.change_language, option['name'])
+            if "callback" in option:
+                select.connect("clicked", option['callback'], option['name'])
             select.set_hexpand(False)
             select.set_halign(Gtk.Align.END)
             row_box.add(select)

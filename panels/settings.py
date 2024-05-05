@@ -35,7 +35,8 @@ class Panel(ScreenPanel):
         for lang in self._config.lang_list:
             self.langs[lang] = {
                 "name": lang,
-                "type": "lang",
+                "type": "button",
+                "callback": self._screen.change_language,
             }
             self.add_option("lang", self.langs, lang, self.langs[lang])
 
