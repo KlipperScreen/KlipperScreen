@@ -40,7 +40,7 @@ class KlipperScreenConfig:
     def __init__(self, configfile, screen=None):
         self.lang_list = None
         self.errors = []
-        self.default_config_path = os.path.join(klipperscreendir, "ks_includes", "defaults.conf")
+        self.default_config_path = os.path.join(klipperscreendir, "config", "defaults.conf")
         self.config = configparser.ConfigParser()
         self.config_path = self.get_config_file_location(configfile)
         logging.debug(f"Config path location: {self.config_path}")
@@ -50,6 +50,9 @@ class KlipperScreenConfig:
 
         try:
             self.config.read(self.default_config_path)
+            includes = [i[8:] for i in self.config.sections() if i.startswith("include ")]
+            for include in includes:
+                self._include_config("/".join(self.config_path.split("/")[:-1]), include)
             # In case a user altered defaults.conf
             self.validate_config(self.config)
             if self.config_path != self.default_config_path:
@@ -367,7 +370,7 @@ class KlipperScreenConfig:
 
     def exclude_from_config(self, config):
         exclude_list = ['preheat']
-        if not self.defined_config.getboolean('main', "use_default_menu", fallback=True):
+        if self.defined_config and not self.defined_config.getboolean('main', "use_default_menu", fallback=True):
             logging.info("Using custom menu, removing default menu entries.")
             exclude_list.extend(('menu __main', 'menu __print', 'menu __splashscreen'))
         for i in exclude_list:

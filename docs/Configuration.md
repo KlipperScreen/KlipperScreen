@@ -241,7 +241,7 @@ Default Preheat options will be discarded if a custom preheat is found.
 If include files are defined then, they will be merged first.
 
 The default config is included here: (do not edit use as reference)
-_${KlipperScreen_Directory}/ks_includes/default.conf_
+_${KlipperScreen_Directory}/config/defaults.conf_
 
 *Do not* copy the entire default.conf file, just configure the settings needed.
 
