@@ -103,8 +103,7 @@ class HeaterGraph(Gtk.DrawingArea):
             if not self.store[name]['show']:
                 continue
             for dev_type in self.store[name]:
-                d = self.printer.get_temp_store(name, dev_type, data_points)
-                if d:
+                if d := self.printer.get_temp_store(name, dev_type, data_points):
                     self.graph_data(
                         ctx, d, gsize, d_height_scale, d_width, self.store[name][dev_type]["rgb"],
                         self.store[name][dev_type]["dashed"], self.store[name][dev_type]["fill"]
