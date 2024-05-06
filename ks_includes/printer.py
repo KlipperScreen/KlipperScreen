@@ -12,7 +12,6 @@ class Printer:
         self.state = "disconnected"
         self.state_cb = state_cb
         self.state_callbacks = state_callbacks
-        self.devices = {}
         self.power_devices = {}
         self.tools = []
         self.extrudercount = 0
@@ -31,7 +30,6 @@ class Printer:
     def reinit(self, printer_info, data):
         self.config = data['configfile']['config']
         self.data = data
-        self.devices.clear()
         self.tools.clear()
         self.extrudercount = 0
         self.tempdevcount = 0
@@ -49,19 +47,10 @@ class Printer:
                 self.tools.append(x)
                 self.tools = sorted(self.tools)
                 self.extrudercount += 1
-                if x.startswith('extruder_stepper'):
-                    continue
-                self.devices[x] = {
-                    "temperature": 0,
-                    "target": 0
-                }
             if x == 'heater_bed' \
                     or x.startswith('heater_generic ') \
                     or x.startswith('temperature_sensor ') \
                     or x.startswith('temperature_fan '):
-                self.devices[x] = {"temperature": 0}
-                if not x.startswith('temperature_sensor '):
-                    self.devices[x]["target"] = 0
                 # Support for hiding devices by name
                 name = x.split()[1] if len(x.split()) > 1 else x
                 if not name.startswith("_"):
@@ -213,7 +202,7 @@ class Printer:
 
     def get_heaters(self):
         heaters = self.get_config_section_list("heater_generic ")
-        if "heater_bed" in self.devices:
+        if "heater_bed" in self.config:
             heaters.insert(0, "heater_bed")
         return heaters
 
@@ -327,10 +316,10 @@ class Printer:
         return list(self.tempstore)
 
     def device_has_target(self, device):
-        return "target" in self.devices[device]
+        return "target" in self.data[device]
 
     def device_has_power(self, device):
-        return "power" in self.devices[device]
+        return "power" in self.data[device]
 
     def get_temp_store(self, device, section=False, results=0):
         if device not in self.tempstore:
