@@ -26,6 +26,7 @@ class Printer:
         self.available_commands = {}
         self.spoolman = False
         self.temp_devices = self.sensors = None
+        self.system_info = {}
 
     def reinit(self, printer_info, data):
         self.config = data['configfile']['config']
@@ -41,6 +42,7 @@ class Printer:
         self.available_commands.clear()
         self.temp_devices = self.sensors = None
         self.stop_tempstore_updates()
+        self.system_info.clear()
 
         for x in self.config.keys():
             if x[:8] == "extruder":

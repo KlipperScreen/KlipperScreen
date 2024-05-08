@@ -10,7 +10,6 @@ class Panel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         self.update_status = None
-        self.system_info = self._screen.apiclient.send_request("machine/system_info")
 
         self.update_all = self._gtk.Button('arrow-up', _('Full Update'), 'color1', self.bts, Gtk.PositionType.LEFT, 1)
         self.update_all.connect("clicked", self.show_update_info, "full")
@@ -49,7 +48,7 @@ class Panel(ScreenPanel):
             self.labels[f"{prog}_status"].connect("clicked", self.show_update_info, prog)
 
             try:
-                if prog in self.system_info['system_info']['available_services']:
+                if prog in self._printer.system_info['available_services']:
                     self.labels[f"{prog}_restart"] = self._gtk.Button("refresh", _("Restart"),
                                                                       "color2",
                                                                       position=Gtk.PositionType.LEFT,
@@ -236,9 +235,9 @@ class Panel(ScreenPanel):
 
         if p == "system":
             distro = (
-                self.system_info['system_info']['distribution']['name']
-                if 'system_info' in self.system_info
-                   and 'distribution' in self.system_info['system_info']
+                self._printer.system_info['distribution']['name']
+                if 'distribution' in self._printer.system_info
+                   and 'name' in self._printer.system_info['distribution']
                 else _('System'))
             self.labels[p].set_markup(f"<b>{distro}</b>")
             if info['package_count'] == 0:

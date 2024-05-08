@@ -981,6 +981,9 @@ class KlipperScreen(Gtk.Window):
             return False
         self.printer.reinit(printer_info, config['status'])
         self.printer.available_commands = self.apiclient.get_gcode_help()
+        info = self.apiclient.send_request("machine/system_info")
+        if info and 'system_info' in info:
+            self.printer.system_info = info['system_info']
 
         items = (
             'bed_mesh',
