@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-26 23:35-0300\n"
-"PO-Revision-Date: 2024-04-13 16:48+0000\n"
-"Last-Translator: Michal Bitala <bitala.michal@seznam.cz>\n"
+"PO-Revision-Date: 2024-05-06 09:07+0000\n"
+"Last-Translator: Miloslav Kos <kos.m@post.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/cs/>\n"
 "Language: cs\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.3\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -71,7 +71,7 @@ msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Opravdu okamžitě zastavit?"
 
 msgid "Are you sure you want to stop the calibration?"
-msgstr ""
+msgstr "Opravdu chcete kalibraci zastavit?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Opravdu chcete zrušit tisk?"
@@ -86,7 +86,7 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "Opravdu chcete vypnout systém?"
 
 msgid "Asks for confirmation before stopping"
-msgstr ""
+msgstr "Před zastavením si vyžádá potvrzení"
 
 msgid "Auto"
 msgstr "Auto"
@@ -110,7 +110,7 @@ msgid "Bed Mesh"
 msgstr "Mapa podložky"
 
 msgid "Both"
-msgstr ""
+msgstr "Obě"
 
 msgid "Calibrate"
 msgstr "Kalibrace"
@@ -143,10 +143,10 @@ msgid "Cannot connect to Moonraker"
 msgstr "Nelze se připojit k Moonraker"
 
 msgid "Changes how the interface looks"
-msgstr ""
+msgstr "Změna vzhledu rozhraní"
 
 msgid "Changes how the time remaining is calculated"
-msgstr ""
+msgstr "Změna způsobu výpočtu zbývajícího času"
 
 msgid "Channel"
 msgstr "Kanál"
@@ -164,7 +164,7 @@ msgid "Close"
 msgstr "Zavřít"
 
 msgid "Close messages after a timeout"
-msgstr ""
+msgstr "Zavírání zpráv po uplynutí časového limitu"
 
 msgid "Complete"
 msgstr "Hotovo"
@@ -186,7 +186,7 @@ msgid "Cooldown"
 msgstr "Zchladit"
 
 msgid "Current percentage and graph line"
-msgstr ""
+msgstr "Aktuální procento a linie grafu"
 
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS se nepodařilo načíst a byl deaktivován"
@@ -207,7 +207,7 @@ msgid "Disable Motors"
 msgstr "Uvolnit motory"
 
 msgid "Disable for 12hs with am / pm"
-msgstr ""
+msgstr "Vypnout na 12 hodin am / pm"
 
 msgid "Distance (mm)"
 msgstr "Vzdálenost (mm)"
@@ -220,10 +220,10 @@ msgid "Elapsed:"
 msgstr "Uplynulo:"
 
 msgid "Emergency Stop"
-msgstr ""
+msgstr "Nouzové zastavení"
 
 msgid "Enable screen power management"
-msgstr ""
+msgstr "Povolit správu napájení obrazovky"
 
 msgid "Ended official support in June 2023"
 msgstr "Oficiální podpora ukončena v červnu 2023"
@@ -232,19 +232,19 @@ msgid "Error"
 msgstr "Chyba"
 
 msgid "Error clearing active spool"
-msgstr ""
+msgstr "Chyba při vymazání aktivní cívky"
 
 msgid "Error getting active spool"
-msgstr ""
+msgstr "Chyba při získávání aktivní cívky"
 
 msgid "Error setting active spool"
-msgstr ""
+msgstr "Chyba nastavení aktivní cívky"
 
 msgid "Error trying to fetch spools"
-msgstr ""
+msgstr "Chyba při pokusu o načtení cívek"
 
 msgid "Error: Couldn't get a position to probe"
-msgstr ""
+msgstr "Chyba: Nepodařilo se získat pozici pro sondování"
 
 msgid "Estimated Time Method"
 msgstr "Výpočet doby tisku"
@@ -259,7 +259,7 @@ msgid "Extrude"
 msgstr "Extruze"
 
 msgid "Extruders"
-msgstr ""
+msgstr "Extrudéry"
 
 msgid "Extrusion +"
 msgstr "Extruze +"
@@ -385,7 +385,7 @@ msgid "Invalid password"
 msgstr "Špatné heslo"
 
 msgid "Inversely affects the icon size"
-msgstr ""
+msgstr "Inverzně ovlivňuje velikost ikony"
 
 msgid "Invert X"
 msgstr "Otočit X"
@@ -400,7 +400,7 @@ msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "V závislosti na výkonu ohřívače to může trvat déle než 5 minut."
 
 msgid "It's possible that the configuration is not correct"
-msgstr ""
+msgstr "Je možné, že konfigurace není správná"
 
 msgid "Klipper Restart"
 msgstr "Klipper Restart"
@@ -456,7 +456,7 @@ msgid "Loading..."
 msgstr "Načítání...."
 
 msgid "Lost Connection to Moonraker"
-msgstr ""
+msgstr "Ztracené spojení s Moonrakerem"
 
 msgid "Lower Nozzle"
 msgstr "Trysku níž"
@@ -504,7 +504,7 @@ msgid "Mesh calibrate"
 msgstr "Kalibrace sítě"
 
 msgid "Minimum Cruise Ratio"
-msgstr ""
+msgstr "Minimální cestovní poměr"
 
 msgid "Modified"
 msgstr "Změněno"
@@ -543,7 +543,7 @@ msgid "No wireless interface has been found"
 msgstr "Nebylo nalezeno žádné bezdrátové rozhraní"
 
 msgid "Not all screens support this"
-msgstr ""
+msgstr "Ne všechny obrazovky podporují tuto funkci"
 
 msgid "Not working or not configured"
 msgstr "Nefunguje nebo není nakonfigurováno"
@@ -679,7 +679,7 @@ msgid "Retrying"
 msgstr "Zkouším znovu"
 
 msgid "Rotation invalid"
-msgstr ""
+msgstr "Neplatné otáčení"
 
 msgid "Save"
 msgstr "Uložit"
@@ -710,7 +710,7 @@ msgid "Screws Adjust"
 msgstr "Nastavit šrouby"
 
 msgid "Screws not used:"
-msgstr ""
+msgstr "Nepoužívané šrouby:"
 
 msgid "Select"
 msgstr "Vyber"
@@ -734,7 +734,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "Ukaž rolovací tlačítka"
 
 msgid "Show only devices that are able to be set"
-msgstr ""
+msgstr "Zobrazit pouze zařízení, která lze nastavit"
 
 msgid "Shutdown"
 msgstr "Vypnout"
@@ -797,10 +797,10 @@ msgid "Temperature"
 msgstr "Teplota"
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr ""
+msgstr "Tento panel podporuje až 9 šroubů v mřížce 3x3"
 
 msgid "Timeout for screen black-out or power-off"
-msgstr ""
+msgstr "Časový limit pro zhasnutí obrazovky nebo vypnutí napájení"
 
 msgid "Total:"
 msgstr "Total:"
@@ -830,7 +830,7 @@ msgid "Uploaded"
 msgstr "Nahrané"
 
 msgid "Useful for un-responsive touchscreens"
-msgstr ""
+msgstr "Užitečné pro nereagující dotykové obrazovky"
 
 msgid "Warning"
 msgstr "Varování"
