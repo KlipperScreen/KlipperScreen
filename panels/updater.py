@@ -235,18 +235,22 @@ class Panel(ScreenPanel):
         info = self.update_status['version_info'][p]
 
         if p == "system":
-            self.labels[p].set_markup("<b>System</b>")
+            distro = (
+                self.system_info['system_info']['distribution']['name']
+                if 'system_info' in self.system_info
+                   and 'distribution' in self.system_info['system_info']
+                else _('System'))
+            self.labels[p].set_markup(f"<b>{distro}</b>")
             if info['package_count'] == 0:
-                self.labels[f"{p}_status"].set_label(_("Up To Date"))
-                self.labels[f"{p}_status"].get_style_context().remove_class('update')
-                self.labels[f"{p}_status"].set_sensitive(False)
+                self._already_updated(p)
             else:
                 self._needs_update(p, local="", remote=info['package_count'])
 
         elif 'configured_type' in info and info['configured_type'] == 'git_repo':
             if info['is_valid'] and not info['is_dirty']:
                 if info['version'] == info['remote_version']:
-                    self._already_updated(p, info)
+                    self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
+                    self._already_updated(p)
                     self.labels[f"{p}_status"].get_style_context().remove_class('invalid')
                 else:
                     self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']} -> {info['remote_version']}")
@@ -258,13 +262,13 @@ class Panel(ScreenPanel):
                 self.labels[f"{p}_status"].get_style_context().add_class('invalid')
                 self.labels[f"{p}_status"].set_sensitive(True)
         elif 'version' in info and info['version'] == info['remote_version']:
-            self._already_updated(p, info)
+            self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
+            self._already_updated(p)
         else:
             self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']} -> {info['remote_version']}")
             self._needs_update(p, info['version'], info['remote_version'])
 
-    def _already_updated(self, p, info):
-        self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
+    def _already_updated(self, p):
         self.labels[f"{p}_status"].set_label(_("Up To Date"))
         self.labels[f"{p}_status"].get_style_context().remove_class('update')
         self.labels[f"{p}_status"].set_sensitive(False)
