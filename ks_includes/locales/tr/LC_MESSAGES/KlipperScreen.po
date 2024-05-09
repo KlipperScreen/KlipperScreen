@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-26 23:35-0300\n"
-"PO-Revision-Date: 2024-05-07 02:10+0000\n"
+"PO-Revision-Date: 2024-05-09 23:16+0300\n"
 "Last-Translator: Makers Lab <makerslab.tr@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/tr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5.4-dev\n"
+"X-Generator: Poedit 3.2\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -59,7 +59,7 @@ msgstr "Endstop'a %s%.3f ofset uygulansın mı?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr "Prob'a %s%.3f ofset uygulansın mı?"
+msgstr "İnceleyici'ye %s%.3f telafi uygulansın mı?"
 
 msgid "Archived"
 msgstr "Arşivlenen"
@@ -143,10 +143,10 @@ msgid "Cannot connect to Moonraker"
 msgstr "Moonraker'a bağlanılamıyor"
 
 msgid "Changes how the interface looks"
-msgstr ""
+msgstr "Arayüzün nasıl göründüğünü değiştirir"
 
 msgid "Changes how the time remaining is calculated"
-msgstr ""
+msgstr "Kalan sürenin hesaplanma şeklini değiştirir"
 
 msgid "Channel"
 msgstr "Kanal"
@@ -164,7 +164,7 @@ msgid "Close"
 msgstr "Kapat"
 
 msgid "Close messages after a timeout"
-msgstr ""
+msgstr "Zaman aşımından sonra mesajları kapat"
 
 msgid "Complete"
 msgstr "Tamamlandı"
@@ -186,7 +186,7 @@ msgid "Cooldown"
 msgstr "Soğutma"
 
 msgid "Current percentage and graph line"
-msgstr ""
+msgstr "Mevcut yüzde ve grafik çizgisi"
 
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS yüklenemedi ve devre dışı bırakıldı"
@@ -207,7 +207,7 @@ msgid "Disable Motors"
 msgstr "Motorları Devre Dışı Bırak"
 
 msgid "Disable for 12hs with am / pm"
-msgstr ""
+msgstr "12 saat boyunca am / pm ile devre dışı bırakın"
 
 msgid "Distance (mm)"
 msgstr "Uzaklık (mm)"
@@ -223,7 +223,7 @@ msgid "Emergency Stop"
 msgstr "Acil durdurma"
 
 msgid "Enable screen power management"
-msgstr ""
+msgstr "Ekran güç yönetimini etkinleştirin"
 
 msgid "Ended official support in June 2023"
 msgstr "Resmi destek Haziran 2023 tarihinde sona ermiştir"
@@ -244,7 +244,7 @@ msgid "Error trying to fetch spools"
 msgstr "Makaraları getirmeye çalışırken hata oluştu"
 
 msgid "Error: Couldn't get a position to probe"
-msgstr "Hata: İnceleme için bir konum alınamadı"
+msgstr "Hata: İnceleyici için bir konum alınamadı"
 
 msgid "Estimated Time Method"
 msgstr "Tahmini Zaman Metodu"
@@ -385,7 +385,7 @@ msgid "Invalid password"
 msgstr "Geçersiz şifre"
 
 msgid "Inversely affects the icon size"
-msgstr ""
+msgstr "Simge boyutunu ters yönde etkiler"
 
 msgid "Invert X"
 msgstr "X Ters çevir"
@@ -400,7 +400,7 @@ msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "Isıtıcı gücüne bağlı olarak 5 dakikadan fazla sürebilir."
 
 msgid "It's possible that the configuration is not correct"
-msgstr ""
+msgstr "Bu yapılandırmanın doğru olmama olasılığı var"
 
 msgid "Klipper Restart"
 msgstr "Klipper Yeniden başlat"
@@ -473,7 +473,7 @@ msgid "Material"
 msgstr "Malzeme"
 
 msgid "Max"
-msgstr "Maks"
+msgstr "Maksimum"
 
 msgid "Max Acceleration"
 msgstr "Maksimum Hızlanma"
@@ -542,7 +542,7 @@ msgid "No wireless interface has been found"
 msgstr "Herhangi bir kablosuz cihazı bulunamadı"
 
 msgid "Not all screens support this"
-msgstr ""
+msgstr "Tüm ekranlar bunu desteklemez"
 
 msgid "Not working or not configured"
 msgstr "Çalışmamakta veya konfigre edilmemiş"
@@ -620,7 +620,7 @@ msgid "Printing"
 msgstr "Yazdırılıyor"
 
 msgid "Probe Offset"
-msgstr "İnceleyici ofseti"
+msgstr "İnceleyici telafisi"
 
 msgid "Profile Name:"
 msgstr "Profil ismi:"
@@ -677,7 +677,7 @@ msgid "Retrying"
 msgstr "Yeniden Deneniyor"
 
 msgid "Rotation invalid"
-msgstr ""
+msgstr "Döndürme geçersiz"
 
 msgid "Save"
 msgstr "Kaydet"
@@ -708,7 +708,7 @@ msgid "Screws Adjust"
 msgstr "Vida Ayarı"
 
 msgid "Screws not used:"
-msgstr ""
+msgstr "Kullanılmayan vidalar:"
 
 msgid "Select"
 msgstr "Seç"
@@ -732,7 +732,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "Kaydırma çubuklarında düğmeleri göster"
 
 msgid "Show only devices that are able to be set"
-msgstr ""
+msgstr "Yalnızca ayarlanabilecek cihazları göster"
 
 msgid "Shutdown"
 msgstr "Kapat"
@@ -795,10 +795,10 @@ msgid "Temperature"
 msgstr "Sıcaklık"
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr ""
+msgstr "Bu panel 3x3 Izgarada en fazla 9 vidayı destekler"
 
 msgid "Timeout for screen black-out or power-off"
-msgstr ""
+msgstr "Ekranın kararması veya kapanması için zaman aşımı"
 
 msgid "Total:"
 msgstr "Toplam:"
@@ -822,13 +822,13 @@ msgid "Update"
 msgstr "Güncelle"
 
 msgid "Updating"
-msgstr "Yükleniyor"
+msgstr "Güncelleniyor"
 
 msgid "Uploaded"
 msgstr "Yüklendi"
 
 msgid "Useful for un-responsive touchscreens"
-msgstr ""
+msgstr "Yanıt vermeyen dokunmatik ekranlar için kullanışlıdır"
 
 msgid "Warning"
 msgstr "Uyarı"
