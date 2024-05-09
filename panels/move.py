@@ -80,8 +80,12 @@ class Panel(ScreenPanel):
                 grid.attach(self.buttons["x-"], 2, 1, 1, 1)
             grid.attach(self.buttons["y+"], 1, 0, 1, 1)
             grid.attach(self.buttons["y-"], 1, 1, 1, 1)
-            grid.attach(self.buttons["z+"], 3, 0, 1, 1)
-            grid.attach(self.buttons["z-"], 3, 1, 1, 1)
+            if self._config.get_config()["main"].getboolean("invert_z", False):
+                grid.attach(self.buttons["z+"], 3, 1, 1, 1)
+                grid.attach(self.buttons["z-"], 3, 0, 1, 1)
+            else:
+                grid.attach(self.buttons["z+"], 3, 0, 1, 1)
+                grid.attach(self.buttons["z-"], 3, 1, 1, 1)
 
         grid.attach(self.buttons["home"], 0, 0, 1, 1)
         grid.attach(self.buttons["motors_off"], 2, 0, 1, 1)
@@ -155,6 +159,7 @@ class Panel(ScreenPanel):
                     "name": _("Invert Z"),
                     "type": "binary",
                     "value": "False",
+                    "callback": self.reinit_move,
                 }
             },
             {
@@ -196,6 +201,11 @@ class Panel(ScreenPanel):
         self._screen.panels_reinit.append("bed_level")
         self._screen.panels_reinit.append("bed_mesh")
 
+    def reinit_move(self, widget):
+        self._screen.panels_reinit.append("move")
+        self._screen.panels_reinit.append("zcalibrate")
+        self._screen._menu_go_back(home=True)
+
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
@@ -228,8 +238,10 @@ class Panel(ScreenPanel):
         self.distance = distance
 
     def move(self, widget, axis, direction):
-        if self._config.get_config()["main"].getboolean(
-            f"invert_{axis.lower()}", False
+        axis = axis.lower()
+        if (
+            self._config.get_config()["main"].getboolean(f"invert_{axis}", False)
+            and axis != "z"
         ):
             direction = "-" if direction == "+" else "+"
 

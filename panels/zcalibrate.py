@@ -85,16 +85,24 @@ class Panel(ScreenPanel):
 
         grid = Gtk.Grid(column_homogeneous=True)
         if self._screen.vertical_mode:
-            grid.attach(self.buttons['zpos'], 0, 1, 1, 1)
-            grid.attach(self.buttons['zneg'], 0, 2, 1, 1)
+            if self._config.get_config()["main"].getboolean("invert_z", False):
+                grid.attach(self.buttons['zpos'], 0, 2, 1, 1)
+                grid.attach(self.buttons['zneg'], 0, 1, 1, 1)
+            else:
+                grid.attach(self.buttons['zpos'], 0, 1, 1, 1)
+                grid.attach(self.buttons['zneg'], 0, 2, 1, 1)
             grid.attach(self.buttons['start'], 0, 0, 1, 1)
             grid.attach(pos, 1, 0, 1, 1)
             grid.attach(self.buttons['complete'], 1, 1, 1, 1)
             grid.attach(self.buttons['cancel'], 1, 2, 1, 1)
             grid.attach(distances, 0, 3, 2, 1)
         else:
-            grid.attach(self.buttons['zpos'], 0, 0, 1, 1)
-            grid.attach(self.buttons['zneg'], 0, 1, 1, 1)
+            if self._config.get_config()["main"].getboolean("invert_z", False):
+                grid.attach(self.buttons['zpos'], 0, 1, 1, 1)
+                grid.attach(self.buttons['zneg'], 0, 0, 1, 1)
+            else:
+                grid.attach(self.buttons['zpos'], 0, 0, 1, 1)
+                grid.attach(self.buttons['zneg'], 0, 1, 1, 1)
             grid.attach(self.buttons['start'], 1, 0, 1, 1)
             grid.attach(pos, 1, 1, 1, 1)
             grid.attach(self.buttons['complete'], 2, 0, 1, 1)
