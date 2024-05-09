@@ -134,6 +134,7 @@ class Panel(ScreenPanel):
                     "section": "main",
                     "name": _("Invert X"),
                     "type": "binary",
+                    "tooltip": _("This will affect screw positions and mesh graph"),
                     "value": "False",
                     "callback": self.reinit_panels,
                 }
@@ -143,6 +144,7 @@ class Panel(ScreenPanel):
                     "section": "main",
                     "name": _("Invert Y"),
                     "type": "binary",
+                    "tooltip": _("This will affect screw positions and mesh graph"),
                     "value": "False",
                     "callback": self.reinit_panels,
                 }
@@ -160,6 +162,7 @@ class Panel(ScreenPanel):
                     "section": "main",
                     "name": _("XY Speed (mm/s)"),
                     "type": "scale",
+                    "tooltip": _("Only for the move panel"),
                     "value": "50",
                     "range": [1, max_velocity],
                     "step": 1,
@@ -170,6 +173,7 @@ class Panel(ScreenPanel):
                     "section": "main",
                     "name": _("Z Speed (mm/s)"),
                     "type": "scale",
+                    "tooltip": _("Only for the move panel"),
                     "value": "10",
                     "range": [1, max_z_velocity],
                     "step": 1,
