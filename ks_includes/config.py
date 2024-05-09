@@ -120,10 +120,8 @@ class KlipperScreenConfig:
         for lng in self.lang_list:
             self.langs[lng] = gettext.translation('KlipperScreen', localedir=lang_path, languages=[lng], fallback=True)
 
-        lang = self.get_main_config().get("language", None)
+        lang = self.get_main_config().get("language", "system_lang")
         logging.debug(f"Selected lang: {lang} OS lang: {locale.getlocale()[0]}")
-        if lang not in self.lang_list:
-            lang = self.find_language(lang)
         self.install_language(lang)
 
     def find_language(self, lang):
@@ -139,6 +137,8 @@ class KlipperScreenConfig:
         return next((language for language in self.lang_list if lang.startswith(language)), "en")
 
     def install_language(self, lang):
+        if lang not in self.lang_list:
+            lang = self.find_language(lang)
         logging.info(f"Using lang {lang}")
         self.lang = self.langs[lang]
         self.lang.install(names=['gettext', 'ngettext'])
@@ -320,6 +320,7 @@ class KlipperScreenConfig:
             {"move_speed_z": {"section": "main", "name": _("Z Move Speed (mm/s)"), "type": None, "value": "10"}},
             {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
             {"print_view": {"section": "main", "type": None, "value": "thumbs"}},
+            {"language": {"section": "main", "name": _("Language"), "type": None, "value": "system_lang"}},
         ]
 
         self.configurable_options.extend(panel_options)
