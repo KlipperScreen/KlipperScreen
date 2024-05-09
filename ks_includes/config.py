@@ -337,7 +337,11 @@ class KlipperScreenConfig:
                 break
 
         t_path = os.path.join(klipperscreendir, 'styles')
-        themes = [d for d in os.listdir(t_path) if (not os.path.isfile(os.path.join(t_path, d)) and d != "z-bolt")]
+        themes = [
+            d for d in os.listdir(t_path)
+            if (not os.path.isfile(os.path.join(t_path, d))
+                and d not in ("z-bolt", "printers"))
+        ]
         themes.sort()
 
         for theme in themes:
