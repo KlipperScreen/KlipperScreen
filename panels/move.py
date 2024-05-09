@@ -157,6 +157,9 @@ class Panel(ScreenPanel):
                 "invert_z": {
                     "section": "main",
                     "name": _("Invert Z"),
+                    "tooltip": _(
+                        "Swaps buttons if they are on top of each other, affects other panels"
+                    ),
                     "type": "binary",
                     "value": "False",
                     "callback": self.reinit_move,
