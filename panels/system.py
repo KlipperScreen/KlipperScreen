@@ -12,7 +12,7 @@ class Panel(ScreenPanel):
         self.current_row = 0
         self.mem_multiplier = None
         self.scales = {}
-
+        self.labels = {}
         self.grid = Gtk.Grid(column_spacing=10, row_spacing=5)
 
         sysinfo = screen.printer.system_info
