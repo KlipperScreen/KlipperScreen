@@ -162,12 +162,6 @@ class Panel(ScreenPanel):
         self.labels['extrude_menu'] = grid
         self.content.add(self.labels['extrude_menu'])
 
-    def back(self):
-        if len(self.menu) > 1:
-            self.unload_menu()
-            return True
-        return False
-
     def enable_buttons(self, enable):
         for button in self.buttons:
             if button in ("temperature", "spoolman"):

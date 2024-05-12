@@ -15,7 +15,7 @@ class ScreenPanel:
     ks_printer_cfg = None
 
     def __init__(self, screen, title, **kwargs):
-        self.menu = None
+        self.menu = []
         ScreenPanel._screen = screen
         ScreenPanel._config = screen._config
         ScreenPanel._files = screen.files
@@ -74,21 +74,28 @@ class ScreenPanel:
             self.content.remove(child)
 
         self.menu.append(f'{name}_menu')
+        logging.debug(f"self.menu: {self.menu}")
         self.content.add(self.labels[self.menu[-1]])
         self.content.show_all()
         if title:
             self._screen.base_panel.set_title(f"{self.title} | {title}")
 
     def unload_menu(self, widget=None):
-        logging.debug(f"self.menu: {self.menu}")
         if len(self.menu) <= 1 or self.menu[-2] not in self.labels:
             return
         self._screen.base_panel.set_title(self._screen.panels[self._screen._cur_panels[-1]].title)
         self.menu.pop()
+        logging.debug(f"self.menu: {self.menu}")
         for child in self.content.get_children():
             self.content.remove(child)
         self.content.add(self.labels[self.menu[-1]])
         self.content.show_all()
+
+    def back(self):
+        if len(self.menu) > 1:
+            self.unload_menu()
+            return True
+        return False
 
     def on_dropdown_change(self, combo, section, option, callback=None):
         tree_iter = combo.get_active_iter()

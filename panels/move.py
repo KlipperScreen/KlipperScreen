@@ -24,7 +24,7 @@ class Panel(ScreenPanel):
                     self.distance = self.distances[-2]
 
         self.settings = {}
-        self.menu = ["move_menu"]
+        self.menu.append("move_menu")
         self.buttons = {
             "x+": self._gtk.Button("arrow-right", "X+", "color1"),
             "x-": self._gtk.Button("arrow-left", "X-", "color1"),
@@ -200,14 +200,13 @@ class Panel(ScreenPanel):
             )
 
     def reinit_panels(self, value):
-        logging.info(self._screen.panels)
         self._screen.panels_reinit.append("bed_level")
         self._screen.panels_reinit.append("bed_mesh")
 
     def reinit_move(self, widget):
         self._screen.panels_reinit.append("move")
         self._screen.panels_reinit.append("zcalibrate")
-        self._screen._menu_go_back(home=True)
+        self.menu.clear()
 
     def process_update(self, action, data):
         if action != "notify_status_update":
@@ -262,12 +261,6 @@ class Panel(ScreenPanel):
         self._screen._send_action(widget, "printer.gcode.script", {"script": script})
         if self._printer.get_stat("gcode_move", "absolute_coordinates"):
             self._screen._ws.klippy.gcode_script("G90")
-
-    def back(self):
-        if len(self.menu) > 1:
-            self.unload_menu()
-            return True
-        return False
 
     def home(self, widget):
         if "delta" in self._printer.get_config_section("printer")["kinematics"]:

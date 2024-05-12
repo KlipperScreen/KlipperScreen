@@ -54,13 +54,3 @@ class Panel(ScreenPanel):
             self.add_option("printers", self.printers, pname, self.printers[pname])
 
         self.content.add(self.labels['settings_menu'])
-
-    def activate(self):
-        while len(self.menu) > 1:
-            self.unload_menu()
-
-    def back(self):
-        if len(self.menu) > 1:
-            self.unload_menu()
-            return True
-        return False

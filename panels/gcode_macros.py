@@ -42,8 +42,6 @@ class Panel(ScreenPanel):
         self.labels['options_menu'].add(self.labels['options'])
 
     def activate(self):
-        while len(self.menu) > 1:
-            self.unload_menu()
         self.reload_macros()
 
     def add_gcode_macro(self, macro):
