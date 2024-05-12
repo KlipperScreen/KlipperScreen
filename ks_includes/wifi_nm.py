@@ -228,7 +228,7 @@ class WifiManager:
             with suppress(NetworkManager.ObjectVanished):
                 netinfo.update({
                     "mac": ap.HwAddress,
-                    "channel": WifiChannels.lookup(str(ap.Frequency))[1],
+                    "channel": WifiChannels.lookup(ap.Frequency)[1],
                     "configured": ssid in self.known_networks,
                     "frequency": str(ap.Frequency),
                     "flags": ap.Flags,

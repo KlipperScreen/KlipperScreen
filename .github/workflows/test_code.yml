@@ -1,10 +1,18 @@
 name: test-code
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - 'ks_includes/locales/**'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'ks_includes/locales/**'
 jobs:
   lint-python-code:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
       - uses: ricardochaves/python-lint@v1.4.0
         with:
           python-root-list: "screen.py ks_includes panels"

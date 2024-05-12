@@ -14,7 +14,7 @@ class Keypad(Gtk.Box):
         self.screen = screen
         self._gtk = screen.gtk
 
-        numpad = self._gtk.HomogeneousGrid()
+        numpad = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         numpad.set_direction(Gtk.TextDirection.LTR)
         numpad.get_style_context().add_class('numpad')
 
@@ -59,7 +59,7 @@ class Keypad(Gtk.Box):
 
         self.add(self.labels['entry'])
         self.add(numpad)
-        self.bottom = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        self.bottom = Gtk.Box()
         self.bottom.add(self.pid)
         self.bottom.add(b)
         self.add(self.bottom)

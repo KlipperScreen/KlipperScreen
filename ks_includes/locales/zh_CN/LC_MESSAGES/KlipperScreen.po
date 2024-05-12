@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-11-16 02:51+0000\n"
+"POT-Creation-Date: 2024-04-26 23:35-0300\n"
+"PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Samuel Wang <imhsaw@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "klipperscreen/klipperscreen/zh_Hans/>\n"
@@ -17,32 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.2-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
 msgstr "%s 将被更新为版本"
 
 msgid "(default)"
-msgstr "(默认)"
+msgstr "（默认）"
 
 msgid "24 Hour Time"
-msgstr "使用24小时制"
+msgstr "24小时制"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "重启Klipper固件可能会解决这个问题。"
 
 msgid "ADXL Not Configured"
-msgstr "未配置ADXL"
+msgstr "未配置加速度计"
 
 msgid "Abort"
-msgstr "放弃"
+msgstr "中止打印"
 
 msgid "Acceleration:"
 msgstr "加速度："
 
 msgid "Accept"
-msgstr "接受"
+msgstr "确定"
 
 msgid "Add profile"
 msgstr "添加配置文件"
@@ -70,6 +70,9 @@ msgstr "你确定要排除该对象吗？"
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "您确定要紧急停止吗？"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "您确定要取消打印吗？"
 
@@ -81,6 +84,9 @@ msgstr "您确定要重启系统吗？"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "您确定要关闭系统吗？"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "自动"
@@ -103,8 +109,8 @@ msgstr "热床调平"
 msgid "Bed Mesh"
 msgstr "床网"
 
-msgid "Bed screw configuration:"
-msgstr "热床螺丝配置："
+msgid "Both"
+msgstr ""
 
 msgid "Calibrate"
 msgstr "校准"
@@ -136,11 +142,17 @@ msgstr "正在取消"
 msgid "Cannot connect to Moonraker"
 msgstr "无法连接到Moonraker"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "群组"
 
 msgid "Check ADXL Wiring"
-msgstr "检查ADXL的接线"
+msgstr "请检查加速度计的连线"
 
 msgid "Checking for updates, please wait..."
 msgstr "正在检查更新，请稍等..."
@@ -151,11 +163,14 @@ msgstr "清除"
 msgid "Close"
 msgstr "关闭"
 
+msgid "Close messages after a timeout"
+msgstr ""
+
 msgid "Complete"
 msgstr "完成"
 
 msgid "Confirm Emergency Stop"
-msgstr "紧急停止需确认"
+msgstr "紧急停止需要二次确认"
 
 msgid "Connected"
 msgstr "已连接"
@@ -170,8 +185,11 @@ msgstr "控制台"
 msgid "Cooldown"
 msgstr "冷却"
 
+msgid "Current percentage and graph line"
+msgstr ""
+
 msgid "DPMS has failed to load and has been disabled"
-msgstr "屏幕省电管理系统无法加载已禁用"
+msgstr "屏幕省电管理系统无法加载并已禁用"
 
 msgid "Date"
 msgstr "日期"
@@ -188,6 +206,9 @@ msgstr "取消选择"
 msgid "Disable Motors"
 msgstr "关闭电机"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "挤出长度（mm）"
 
@@ -198,8 +219,32 @@ msgstr "你想恢复 %s 吗？"
 msgid "Elapsed:"
 msgstr "已用时间："
 
+msgid "Emergency Stop"
+msgstr ""
+
+msgid "Enable screen power management"
+msgstr ""
+
+msgid "Ended official support in June 2023"
+msgstr "2023年6月结束官方支持"
+
 msgid "Error"
 msgstr "错误"
+
+msgid "Error clearing active spool"
+msgstr "退出当前耗材时出错"
+
+msgid "Error getting active spool"
+msgstr "获取当前耗材时出错"
+
+msgid "Error setting active spool"
+msgstr "设置当前耗材时出错"
+
+msgid "Error trying to fetch spools"
+msgstr "尝试获取耗材时出错"
+
+msgid "Error: Couldn't get a position to probe"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "估算剩余时间方式"
@@ -213,11 +258,14 @@ msgstr "特大"
 msgid "Extrude"
 msgstr "挤出"
 
+msgid "Extruders"
+msgstr "挤出机"
+
 msgid "Extrusion +"
-msgstr "挤压+"
+msgstr "挤出量 +"
 
 msgid "Extrusion -"
-msgstr "挤压 -"
+msgstr "挤出量 -"
 
 msgid "Failed, adjust position first"
 msgstr "失败，请先调整位置"
@@ -247,7 +295,7 @@ msgid "Filter"
 msgstr "筛选"
 
 msgid "Finding ADXL"
-msgstr "查找ADXL"
+msgstr "查找加速度计中"
 
 msgid "Fine Tuning"
 msgstr "微调"
@@ -336,6 +384,9 @@ msgstr "无效"
 msgid "Invalid password"
 msgstr "密码无效"
 
+msgid "Inversely affects the icon size"
+msgstr ""
+
 msgid "Invert X"
 msgstr "反转X轴"
 
@@ -347,6 +398,9 @@ msgstr "反转Z轴"
 
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "这可能需要5分钟以上的时间，这取决于加热器的功率。"
+
+msgid "It's possible that the configuration is not correct"
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "重启Klipper"
@@ -366,9 +420,12 @@ msgstr "Klipper正在启动"
 msgid "Klipper will reboot"
 msgstr "Klipper将重新启动"
 
+msgid "KlipperScreen will drop support in June 2024"
+msgstr "KlipperScreen将于2024 年6月停止适配"
+
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT 被隐藏，应在挤出控制界面使用"
+msgstr "加载耗材/卸载耗材 已被隐藏，请前往在挤出控制界面"
 
 msgid "Language"
 msgstr "界面语言"
@@ -394,11 +451,17 @@ msgstr "打印机限制"
 msgid "Load"
 msgstr "载入耗材"
 
+msgid "Loading..."
+msgstr "加载中..."
+
+msgid "Lost Connection to Moonraker"
+msgstr "与 Moonraker 失去连接"
+
 msgid "Lower Nozzle"
 msgstr "降低喷嘴"
 
 msgid "Macro shortcut on sidebar"
-msgstr "显示侧边栏宏按钮"
+msgstr "在侧边栏显示宏按钮"
 
 msgid "Macros"
 msgstr "宏"
@@ -414,9 +477,6 @@ msgstr "最大"
 
 msgid "Max Acceleration"
 msgstr "最大加速度"
-
-msgid "Max Acceleration to Deceleration"
-msgstr "最大加速至减速"
 
 msgid "Max Velocity"
 msgstr "最大速度"
@@ -442,11 +502,14 @@ msgstr "菜单"
 msgid "Mesh calibrate"
 msgstr "床网校准"
 
+msgid "Minimum Cruise Ratio"
+msgstr ""
+
 msgid "Modified"
 msgstr "已修改"
 
 msgid "Moonraker: connected"
-msgstr "Moonraker：已连接"
+msgstr "Moonraker: 已连接"
 
 msgid "More"
 msgstr "更多设置"
@@ -472,13 +535,26 @@ msgstr "新的值"
 msgid "No elegible macros:"
 msgstr "无可用宏："
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
-msgstr "不支持自动检测，需要在klpperscreen.conf中进行配置"
+msgid "No mesh has been loaded"
+msgstr "未加载网床"
+
+msgid "No wireless interface has been found"
+msgstr "未找到无线接口"
+
+msgid "Not all screens support this"
+msgstr ""
+
+msgid "Not working or not configured"
+msgstr "不工作或未配置"
 
 msgid "Nothing selected"
 msgstr "未选择任何内容"
+
+msgid "Notification log empty"
+msgstr "通知日志为空"
+
+msgid "Notifications"
+msgstr "通知"
 
 #, python-format
 msgid "Outdated by %d"
@@ -519,7 +595,7 @@ msgid "Power On Printer"
 msgstr "打印机通电"
 
 msgid "Pressure Advance:"
-msgstr "压力推进："
+msgstr "压力提前："
 
 msgid "Print"
 msgstr "打印"
@@ -561,10 +637,10 @@ msgid "Recover"
 msgstr "恢复"
 
 msgid "Recover Hard"
-msgstr "版本回退(清空修改内容)"
+msgstr "版本回退（清空修改内容）"
 
 msgid "Recover Soft"
-msgstr "版本回退(保留修改内容)"
+msgstr "版本回退（保留修改内容）"
 
 msgid "Reference"
 msgstr "参考"
@@ -599,6 +675,9 @@ msgstr "重试"
 msgid "Retrying"
 msgstr "正在重试"
 
+msgid "Rotation invalid"
+msgstr ""
+
 msgid "Save"
 msgstr "保存"
 
@@ -622,10 +701,13 @@ msgid "Screen DPMS"
 msgstr "屏幕省电管理系统"
 
 msgid "Screen Power Off Time"
-msgstr "关闭屏幕时间"
+msgstr "自动息屏"
 
 msgid "Screws Adjust"
 msgstr "螺丝调整"
+
+msgid "Screws not used:"
+msgstr ""
 
 msgid "Select"
 msgstr "选择"
@@ -643,10 +725,13 @@ msgid "Show"
 msgstr "显示"
 
 msgid "Show Heater Power"
-msgstr "显示加热器功率"
+msgstr "显示加热器功率（%）"
 
 msgid "Show Scrollbars Buttons"
 msgstr "显示滚动条按钮"
+
+msgid "Show only devices that are able to be set"
+msgstr ""
 
 msgid "Shutdown"
 msgstr "关闭"
@@ -664,7 +749,7 @@ msgid "Small"
 msgstr "小"
 
 msgid "Speed (mm/s)"
-msgstr "速度(mm/s)"
+msgstr "速度（mm/s）"
 
 msgid "Speed +"
 msgstr "速度 +"
@@ -703,19 +788,22 @@ msgid "System Shutdown"
 msgstr "关闭系统"
 
 msgid "Temp (°C)"
-msgstr "温度 (°C)"
+msgstr "温度 （°C）"
 
 msgid "Temperature"
 msgstr "温度"
+
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
 
 msgid "Total:"
 msgstr "合计："
 
 msgid "Unknown Heater"
 msgstr "未知加热器"
-
-msgid "Unknown screw position"
-msgstr "未知螺丝位置"
 
 msgid "Unload"
 msgstr "卸载耗材"
@@ -738,20 +826,29 @@ msgstr "正在更新"
 msgid "Uploaded"
 msgstr "上传于"
 
+msgid "Useful for un-responsive touchscreens"
+msgstr ""
+
+msgid "Warning"
+msgstr "警告"
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr "不支持传送WebRTC至后台"
+
 msgid "XY Move Speed (mm/s)"
-msgstr "XY轴移动速度(mm/s)"
+msgstr "XY轴移动速度（mm/s）"
 
 msgid "XY Speed (mm/s)"
-msgstr "XY轴速度(mm/s)"
+msgstr "XY轴速度（mm/s）"
 
 msgid "Z Calibrate"
 msgstr "Z偏移校准"
 
 msgid "Z Move Speed (mm/s)"
-msgstr "Z轴移动速度(mm/s)"
+msgstr "Z轴移动速度（mm/s）"
 
 msgid "Z Speed (mm/s)"
-msgstr "Z轴速度(mm/s)"
+msgstr "Z轴速度（mm/s）"
 
 msgid "Z Tilt"
 msgstr "Z轴倾斜校准"
@@ -771,14 +868,14 @@ msgid_plural "hours"
 msgstr[0] "小时"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr "使用 \"rename_existing \"的宏将被隐藏"
+msgstr "使用\"rename_existing\"的宏将被隐藏"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "名称以\"_\"开头的宏将被隐藏"
 
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "分"
+msgstr[0] "分钟"
 
 msgid "mm"
 msgstr "mm"
@@ -792,8 +889,19 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen将重新启动"
+#~ msgid "Bed screw configuration:"
+#~ msgstr "热床螺丝配置："
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr "不支持自动检测，需要在klpperscreen.conf中进行配置"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "未知螺丝位置"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "最大加速至减速"
 
 #~ msgid "Continue"
 #~ msgstr "继续"

@@ -28,23 +28,20 @@ will natively work with [Klipper](https://github.com/klipper3d/klipper) and [Moo
 
 KlipperScreen has been created and maintained by Jordan Ruthe from 2020 to 2021
 
-|Donate to Jordan|
-|-|
-|[Patreon](https://www.patreon.com/klipperscreen)|
-|[Ko-fi](https://ko-fi.com/klipperscreen)|
+Donate to Jordan: [Patreon](https://www.patreon.com/klipperscreen) [Ko-fi](https://ko-fi.com/klipperscreen)
+
 
 The current maintainer is Alfredo Monclus (alfrix) from 2021 onwards
 
-|Dontate to Alfrix|
-|-|
-|[Ko-fi](https://ko-fi.com/alfrix)|
+Donate to Alfredo: [Ko-fi](https://ko-fi.com/alfrix)
 
-thanks to all the people who helped along the way.
+thanks to all the [contributors](https://github.com/KlipperScreen/KlipperScreen/graphs/contributors) who helped along the way.
 
-[Contributors](https://github.com/KlipperScreen/KlipperScreen/graphs/contributors)
 
 ### Sponsors
 
 ![LDO](img/LDO-LOGO_SQ.png)
 
 Thank you [LDO](https://ldomotors.com/) for sponsoring KlipperScreen and the open source community.
+
+Thanks  YUMI 3D-EXPERT.FR for sponsoring KlipperScreen and the open source community.

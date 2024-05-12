@@ -1,4 +1,4 @@
-# Physical install issues
+# Physical installation issues
 
 If the screen never shows the console even during startup, Then it's typically an improperly installed screen,
 

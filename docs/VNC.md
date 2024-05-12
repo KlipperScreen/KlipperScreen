@@ -6,53 +6,62 @@ This article describes how to use KlipperScreen through a remote connection.
     The experience may not be equal to run KlipperScreen natively.
     Depending on the device or the network you may encounter performance degradation or other issues.
 
-##  On the Host device (for example a Raspberry Pi):
+##  On the Host device:
 
+The host device could be for example a Raspberry Pi
 
-1. [First installl KlipperScreen](Installation.md)
+1. [First install KlipperScreen](Installation.md)
 2. Install a vnc server package, for example:
-```bash
-sudo apt install tigervnc-standalone-server
-```
-3. Create `launch_KlipperScreen.sh`:
+    ```bash
+    sudo apt install tigervnc-standalone-server
+    ```
 
-```bash
-#!/usr/bin/env bash
+3. Create `~/KlipperScreen/scripts/launch_KlipperScreen.sh`:
 
-# Use display 10 to avoid clashing with local X server, if anyy
-Xtigervnc -rfbport 5900 -noreset -AlwaysShared -SecurityTypes none :10&
-DISPLAY=:10 $KS_XCLIENT&
-wait
-```
-4. Restart KlipperScreen or reboot the system:
-```bash
-sudo systemctl service KlipperScreen restart
-```
-5. On KlipperScreen set the following configuration:
+    ```bash
+    #!/bin/bash
+    # Use display 10 to avoid clashing with local X server, if any
+    Xtigervnc -rfbport 5900 -noreset -AlwaysShared -SecurityTypes none :10&
+    DISPLAY=:10 $KS_XCLIENT&
+    wait
+    ```
+    !!! tip
+        To change resolution add: `-geometry 1280x720` to the arguments of Xtigervnc
 
-DPMS: off
+4. Make the script executable
+    ```bash
+    chmod +x ~/KlipperScreen/scripts/launch_KlipperScreen.sh
+    ```
 
-Display timeout: off
+5. Restart KlipperScreen or reboot the system:
+    ```bash
+    sudo systemctl restart KlipperScreen.service
+    ```
+
+6. On KlipperScreen set the following configuration:
+
+Turn off DPMS and Display timeout:
 
 ![disable_dpms_poweroff](img/disable_dpms_poweroff.png)
 
 ## On the remote device:
 
-1. Installa a VNC viewer and  configure it to the ip of the host.
+1. Install a VNC viewer and  configure it to the ip of the host.
 
 
 ???+ example "Example using an iPad"
+    #### Example using an iPad
     * Install a VNC viewer for example: `RealVNC Viewer: Remote Desktop`
-    #### Prevent unwanted rotation of UI:
+    ##### Prevent unwanted rotation of UI:
     * Go to `Settings` > `General` >  Set `Use side switch to` to `Lock Rotation`
-    #### Avoid accidentally switching between apps:
+    ##### Avoid accidentally switching between apps:
     * Go to `Restrictions` > Set passcode > Enable restrictions.
     * Open
     * Triple-click "Home" button
     * Guided access pops up
     * Press "Start"
-    * Now iPad is locked to VNC viewer until "Guided access" mode is disabled by triple-clicking "Home" button and entering the restrictions password.
-    #### On the VNC viewer:
+    * Now iPad is locked to VNC viewer until "Guided access" mode is disabled by triple-clicking "Home" button and entering the password.
+    ##### On the VNC viewer:
     * Press "+" button at the top right
     * Enter IP address of your print host.
     * Press "Save"

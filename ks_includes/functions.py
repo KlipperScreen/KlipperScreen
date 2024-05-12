@@ -100,6 +100,10 @@ def get_software_version():
     return "?"
 
 
+def parse_bool(value):
+    return value.lower() == "true"
+
+
 def patch_threading_excepthook():
     """Installs our exception handler into the threading modules Thread object
     Inspired by https://bugs.python.org/issue1230540
@@ -156,7 +160,8 @@ def setup_logging(log_file):
 
     stdout_hdlr = logging.StreamHandler(sys.stdout)
     stdout_fmt = logging.Formatter(
-        '%(asctime)s [%(filename)s:%(funcName)s()] - %(message)s')
+        '%(asctime)s,%(msecs)03d [%(filename)s:%(funcName)s] - %(message)s',
+        '%Y%m%d %H:%M:%S')
     stdout_hdlr.setFormatter(stdout_fmt)
     fh = listener = None
     try:

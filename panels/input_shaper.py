@@ -22,50 +22,35 @@ class Panel(ScreenPanel):
         self.calibrate_btn = self._gtk.Button("move", _('Finding ADXL'), "color1", lines=1)
         self.calibrate_btn.connect("clicked", self.on_popover_clicked)
         self.calibrate_btn.set_sensitive(False)
-        self.status = Gtk.Label()
-        self.status.set_hexpand(True)
-        self.status.set_vexpand(False)
-        self.status.set_halign(Gtk.Align.START)
-        self.status.set_ellipsize(Pango.EllipsizeMode.END)
+        self.status = Gtk.Label(hexpand=True, vexpand=False, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END)
         self.calibrating_axis = None
         self.calibrating_axis = None
 
-        auto_calibration_label = Gtk.Label()
+        auto_calibration_label = Gtk.Label(hexpand=True)
         auto_calibration_label.set_markup('<big><b>Auto Calibration</b></big>')
-        auto_calibration_label.set_hexpand(True)
 
         auto_grid = Gtk.Grid()
         auto_grid.attach(auto_calibration_label, 0, 0, 1, 1)
         auto_grid.attach(self.calibrate_btn, 1, 0, 1, 1)
 
-        manual_calibration_label = Gtk.Label()
+        manual_calibration_label = Gtk.Label(vexpand=True)
         manual_calibration_label.set_markup('<big><b>Manual Calibration</b></big>')
-        manual_calibration_label.set_vexpand(True)
 
-        disclaimer = Gtk.Label()
+        disclaimer = Gtk.Label(wrap=True, halign=Gtk.Align.CENTER)
         disclaimer.set_markup('<small>NOTE: Edit your printer.cfg to save manual calibration changes.</small>')
-        disclaimer.set_line_wrap(True)
-        disclaimer.set_halign(Gtk.Align.CENTER)
 
         input_grid = Gtk.Grid()
         input_grid.attach(manual_calibration_label, 0, 0, 3, 1)
         input_grid.attach(disclaimer, 0, 1, 3, 1)
 
         for i, dim_freq in enumerate(XY_FREQ):
-            axis_lbl = Gtk.Label()
+            axis_lbl = Gtk.Label(hexpand=False, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER,
+                                 wrap=True)
             axis_lbl.set_markup(f"<b>{dim_freq['name']}</b>")
-            axis_lbl.set_hexpand(False)
-            axis_lbl.set_vexpand(True)
-            axis_lbl.set_halign(Gtk.Align.START)
-            axis_lbl.set_valign(Gtk.Align.CENTER)
-            axis_lbl.set_line_wrap(True)
 
             self.freq_xy_adj[dim_freq['config']] = Gtk.Adjustment(0, dim_freq['min'], dim_freq['max'], 0.1)
-            scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=self.freq_xy_adj[dim_freq['config']])
-            scale.set_digits(1)
-            scale.set_hexpand(True)
-            scale.set_valign(Gtk.Align.END)
-            scale.set_has_origin(True)
+            scale = Gtk.Scale(adjustment=self.freq_xy_adj[dim_freq['config']],
+                              digits=1, hexpand=True, valign=Gtk.Align.END, has_origin=True)
             scale.get_style_context().add_class("option_slider")
             scale.connect("button-release-event", self.set_opt_value, dim_freq['config'])
 

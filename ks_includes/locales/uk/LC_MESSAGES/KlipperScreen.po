@@ -7,17 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2023-12-17 01:36\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-12-17 00:58+0200\n"
-"Last-Translator: Andrii Komarovskyi\n"
-"Language-Team: Andrii Komarovskyi\n"
+"POT-Creation-Date: 2024-04-26 23:35-0300\n"
+"PO-Revision-Date: 2024-04-13 16:48+0000\n"
+"Last-Translator: Сергій <sergiy.goncharuk.1@gmail.com>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.4.1\n"
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -70,6 +71,9 @@ msgstr "Ви впевнені, що бажаєте виключити об’є�
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Ви впевнені, що хочете зробити аварійну зупинку?"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Ви впевнені, що хочете скасувати друк?"
 
@@ -81,6 +85,9 @@ msgstr "Ви впевнені, що хочете перезавантажити 
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Ви впевнені, що хочете вимкнути систему?"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "Автоматично"
@@ -103,8 +110,8 @@ msgstr "Вирівнювання столу"
 msgid "Bed Mesh"
 msgstr "Сітка столу"
 
-msgid "Bed screw configuration:"
-msgstr "Конфігурація гвинтів ліжка:"
+msgid "Both"
+msgstr ""
 
 msgid "Calibrate"
 msgstr "Калібрування"
@@ -136,6 +143,12 @@ msgstr "Скасування"
 msgid "Cannot connect to Moonraker"
 msgstr "Не можливо підключитися до Moonraker"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "Канал"
 
@@ -150,6 +163,9 @@ msgstr "Очистити"
 
 msgid "Close"
 msgstr "Закрити"
+
+msgid "Close messages after a timeout"
+msgstr ""
 
 msgid "Complete"
 msgstr "Завершено"
@@ -170,6 +186,9 @@ msgstr "Консоль"
 msgid "Cooldown"
 msgstr "Охолодження"
 
+msgid "Current percentage and graph line"
+msgstr ""
+
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS не вдалося завантажити, і його було вимкнено"
 
@@ -188,6 +207,9 @@ msgstr "Скасувати вибір"
 msgid "Disable Motors"
 msgstr "Вимкнути мотори"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "Відстань (мм)"
 
@@ -198,8 +220,32 @@ msgstr "Ви хочете відновити %s?"
 msgid "Elapsed:"
 msgstr "Минуло:"
 
+msgid "Emergency Stop"
+msgstr ""
+
+msgid "Enable screen power management"
+msgstr ""
+
+msgid "Ended official support in June 2023"
+msgstr "Офіційна підтримка припинена в червні 2023 року"
+
 msgid "Error"
 msgstr "Помилка"
+
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error getting active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Метод розрахунку часу"
@@ -211,9 +257,10 @@ msgid "Extra Large"
 msgstr "Дуже Великий"
 
 msgid "Extrude"
+msgstr "Видавити"
+
+msgid "Extruders"
 msgstr ""
-"Заміна пластику\n"
-"Продавити"
 
 msgid "Extrusion +"
 msgstr "Видавити +"
@@ -270,9 +317,7 @@ msgid "Font Size"
 msgstr "Розмір шрифту"
 
 msgid "Full Update"
-msgstr ""
-"Повне\n"
-"Оновлення"
+msgstr "Повне оновлення"
 
 msgid "Go Back"
 msgstr "Назад"
@@ -340,6 +385,9 @@ msgstr "Недійсний"
 msgid "Invalid password"
 msgstr "Недійсний пароль"
 
+msgid "Inversely affects the icon size"
+msgstr ""
+
 msgid "Invert X"
 msgstr "Інвертувати X"
 
@@ -352,10 +400,11 @@ msgstr "Інвертувати Z"
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "Залежно від потужності обігрівача це може зайняти більше 5 хвилин."
 
-msgid "Klipper Restart"
+msgid "It's possible that the configuration is not correct"
 msgstr ""
-"Перезапуск\n"
-"Klipper"
+
+msgid "Klipper Restart"
+msgstr "Перезапуск Klipper"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper загубив зв'язок"
@@ -371,6 +420,9 @@ msgstr "Кліппер намагається стартувати"
 
 msgid "Klipper will reboot"
 msgstr "Klipper перезавантажиться"
+
+msgid "KlipperScreen will drop support in June 2024"
+msgstr "KlipperScreen припинить підтримку в червні 2024 року"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
@@ -402,6 +454,12 @@ msgstr "Ліміти"
 msgid "Load"
 msgstr "Завантажити"
 
+msgid "Loading..."
+msgstr "Завантаження..."
+
+msgid "Lost Connection to Moonraker"
+msgstr ""
+
 msgid "Lower Nozzle"
 msgstr "Опустити сопло"
 
@@ -422,9 +480,6 @@ msgstr "Макс"
 
 msgid "Max Acceleration"
 msgstr "Макс. прискорення"
-
-msgid "Max Acceleration to Deceleration"
-msgstr "Макс. прискорення до гальмування"
 
 msgid "Max Velocity"
 msgstr "Макс. швидкість"
@@ -449,6 +504,9 @@ msgstr "Меню"
 
 msgid "Mesh calibrate"
 msgstr "Калібрування сітки столу"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
 
 msgid "Modified"
 msgstr "Змінено"
@@ -480,15 +538,26 @@ msgstr "Новий"
 msgid "No elegible macros:"
 msgstr "Непридатний макрос:"
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
+msgid "No mesh has been loaded"
+msgstr "Не завантажено жодної сітки"
+
+msgid "No wireless interface has been found"
+msgstr "Бездротовий інтерфейс не знайдено"
+
+msgid "Not all screens support this"
 msgstr ""
-"Автоматичне визначення не підтримується, його потрібно налаштувати у "
-"klipperscreen.conf"
+
+msgid "Not working or not configured"
+msgstr "Не працює або не налаштовано"
 
 msgid "Nothing selected"
 msgstr "Не обрано"
+
+msgid "Notification log empty"
+msgstr "Журнал сповіщень порожній"
+
+msgid "Notifications"
+msgstr "Сповіщення"
 
 #, python-format
 msgid "Outdated by %d"
@@ -519,9 +588,7 @@ msgid "Perform a full upgrade?"
 msgstr "Виконати повне оновлення?"
 
 msgid "Pins"
-msgstr ""
-"Керування\n"
-"контактами"
+msgstr "Піни"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Будь ласка, перекомпілюйте та перепрошійте мікроконтролер."
@@ -584,9 +651,7 @@ msgid "Reference"
 msgstr "Довідка"
 
 msgid "Refresh"
-msgstr ""
-"Перевірка\n"
-"Оновлень"
+msgstr "Оновити"
 
 msgid "Rename/Move:"
 msgstr "Перейменувати/перемістити:"
@@ -598,14 +663,10 @@ msgid "Resume"
 msgstr "ВІДНОВИТИ"
 
 msgid "Retract"
-msgstr ""
-"Доатково\n"
-"вийняти"
+msgstr "Втягнути"
 
 msgid "Retraction"
-msgstr ""
-"Параметри\n"
-"ретракту"
+msgstr "Втягування"
 
 msgid "Retraction Length"
 msgstr "Довжина втягування"
@@ -618,6 +679,9 @@ msgstr "Повторіть спробу"
 
 msgid "Retrying"
 msgstr "Повторна спроба"
+
+msgid "Rotation invalid"
+msgstr ""
 
 msgid "Save"
 msgstr "Зберегти"
@@ -647,6 +711,9 @@ msgstr "Вимкнути екран через"
 msgid "Screws Adjust"
 msgstr "Регулювання гвинтів"
 
+msgid "Screws not used:"
+msgstr ""
+
 msgid "Select"
 msgstr "Вибрати"
 
@@ -667,6 +734,9 @@ msgstr "Показати Потужність Нагрівача"
 
 msgid "Show Scrollbars Buttons"
 msgstr "Показати кнопку смуги прокрутки"
+
+msgid "Show only devices that are able to be set"
+msgstr ""
 
 msgid "Shutdown"
 msgstr "Вимкнути"
@@ -720,9 +790,7 @@ msgid "System Restart"
 msgstr "Перезавантаження системи"
 
 msgid "System Shutdown"
-msgstr ""
-"Завершення роботи\n"
-"системи"
+msgstr "Вимкнення системи"
 
 msgid "Temp (°C)"
 msgstr "Teмп (°C)"
@@ -730,14 +798,17 @@ msgstr "Teмп (°C)"
 msgid "Temperature"
 msgstr "Температура"
 
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
 msgid "Total:"
 msgstr "Всього:"
 
 msgid "Unknown Heater"
 msgstr "Невідомий нагрівач"
-
-msgid "Unknown screw position"
-msgstr "Невідоме положення гвинта"
 
 msgid "Unload"
 msgstr "Вийняти"
@@ -752,13 +823,22 @@ msgid "Up To Date"
 msgstr "Актуально"
 
 msgid "Update"
-msgstr "Оновлення"
+msgstr "Оновити"
 
 msgid "Updating"
 msgstr "Оновлення"
 
 msgid "Uploaded"
 msgstr "Завантажено"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr ""
+
+msgid "Warning"
+msgstr "Попередження"
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr "WebRTC не підтримується бекендом, який намагається використати Stream"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Швидкість переміщення XY (мм/с)"
@@ -820,8 +900,21 @@ msgstr "мм/с²"
 msgid "mm³/s"
 msgstr "мм/с³"
 
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen перезавантажиться"
+#~ msgid "Bed screw configuration:"
+#~ msgstr "Конфігурація гвинтів ліжка:"
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr ""
+#~ "Автоматичне визначення не підтримується, його потрібно налаштувати у "
+#~ "klipperscreen.conf"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "Невідоме положення гвинта"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Макс. прискорення до гальмування"
 
 #~ msgid "Continue"
 #~ msgstr "Продовжити"

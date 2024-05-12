@@ -3,7 +3,7 @@ import datetime
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, Pango
 
 
 class ScreenPanel:
@@ -26,10 +26,8 @@ class ScreenPanel:
         self.title = title
         self.devices = {}
         self.active_heaters = []
-        self.content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, hexpand=True, vexpand=True)
         self.content.get_style_context().add_class("content")
-        self.content.set_hexpand(True)
-        self.content.set_vexpand(True)
         self._show_heater_power = self._config.get_main_config().getboolean('show_heater_power', False)
         self.bts = self._gtk.bsidescale
 
@@ -167,28 +165,108 @@ class ScreenPanel:
         return name
 
     def update_temp(self, dev, temp, target, power, lines=1):
-        if temp is None:
-            return
-
-        show_target = bool(target)
-        if dev in self.devices and not self.devices[dev]["can_target"]:
-            show_target = False
-
-        show_power = show_target and self._show_heater_power and power is not None
-
-        new_label_text = f"{int(temp):3}"
-        if show_target:
-            new_label_text += f"/{int(target)}"
+        new_label_text = f"{temp or 0:.1f}"
+        if self._printer.device_has_target(dev) and target:
+            new_label_text += f"/{target:.0f}"
         if dev not in self.devices:
             new_label_text += "°"
+
+        show_power = self._show_heater_power and power
         if show_power:
             if lines == 2:
                 # The label should wrap, but it doesn't work
                 # this is a workaround
                 new_label_text += "\n  "
-            new_label_text += f" {int(power * 100):3}%"
+            new_label_text += f" {power * 100:3.0f}%"
 
         if dev in self.labels:
             self.labels[dev].set_label(new_label_text)
+            if show_power:
+                self.labels[dev].get_style_context().add_class("heater-grid-temp-power")
+            else:
+                self.labels[dev].get_style_context().remove_class("heater-grid-temp-power")
         elif dev in self.devices:
             self.devices[dev]["temp"].get_child().set_label(new_label_text)
+
+    def add_option(self, boxname, opt_array, opt_name, option):
+        if option['type'] is None:
+            return
+        name = Gtk.Label(
+            hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER,
+            wrap=True, wrap_mode=Pango.WrapMode.CHAR)
+        name.set_markup(f"<big><b>{option['name']}</b></big>")
+
+        labels = Gtk.Box(spacing=0, orientation=Gtk.Orientation.VERTICAL, valign=Gtk.Align.CENTER)
+        labels.add(name)
+        if 'tooltip' in option:
+            tooltip = Gtk.Label(
+                label=option['tooltip'],
+                hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER,
+                wrap=True, wrap_mode=Pango.WrapMode.CHAR)
+            labels.add(tooltip)
+
+        row_box = Gtk.Box(spacing=5, valign=Gtk.Align.CENTER, hexpand=True, vexpand=False)
+        row_box.get_style_context().add_class("frame-item")
+        row_box.add(labels)
+
+        setting = {}
+        if option['type'] == "binary":
+            switch = Gtk.Switch(active=self._config.get_config().getboolean(option['section'], opt_name, fallback=True))
+            switch.set_vexpand(False)
+            switch.set_valign(Gtk.Align.CENTER)
+            switch.connect("notify::active", self.switch_config_option, option['section'], opt_name,
+                           option['callback'] if "callback" in option else None)
+            row_box.add(switch)
+            setting = {opt_name: switch}
+        elif option['type'] == "dropdown":
+            dropdown = Gtk.ComboBoxText()
+            for i, opt in enumerate(option['options']):
+                dropdown.append(opt['value'], opt['name'])
+                if opt['value'] == self._config.get_config()[option['section']].get(opt_name, option['value']):
+                    dropdown.set_active(i)
+            dropdown.connect("changed", self.on_dropdown_change, option['section'], opt_name,
+                             option['callback'] if "callback" in option else None)
+            dropdown.set_entry_text_column(0)
+            row_box.add(dropdown)
+            setting = {opt_name: dropdown}
+        elif option['type'] == "scale":
+            row_box.set_orientation(Gtk.Orientation.VERTICAL)
+            scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL,
+                                             min=option['range'][0], max=option['range'][1], step=option['step'])
+            scale.set_hexpand(True)
+            scale.set_value(int(self._config.get_config().get(option['section'], opt_name, fallback=option['value'])))
+            scale.set_digits(0)
+            scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
+            row_box.add(scale)
+            setting = {opt_name: scale}
+        elif option['type'] == "printer":
+            box = Gtk.Box(vexpand=False)
+            label = Gtk.Label(f"{option['moonraker_host']}:{option['moonraker_port']}")
+            box.add(label)
+            row_box.add(box)
+        elif option['type'] == "menu":
+            open_menu = self._gtk.Button("settings", style="color3")
+            open_menu.connect("clicked", self.load_menu, option['menu'], option['name'])
+            open_menu.set_hexpand(False)
+            open_menu.set_halign(Gtk.Align.END)
+            row_box.add(open_menu)
+        elif option['type'] == "button":
+            select = self._gtk.Button("load", style="color3")
+            if "callback" in option:
+                select.connect("clicked", option['callback'], option['name'])
+            select.set_hexpand(False)
+            select.set_halign(Gtk.Align.END)
+            row_box.add(select)
+
+        opt_array[opt_name] = {
+            "name": option['name'],
+            "row": row_box
+        }
+
+        opts = sorted(list(opt_array), key=lambda x: opt_array[x]['name'].casefold())
+        pos = opts.index(opt_name)
+
+        self.labels[boxname].insert_row(pos)
+        self.labels[boxname].attach(opt_array[opt_name]['row'], 0, pos, 1, 1)
+        self.labels[boxname].show_all()
+        return setting

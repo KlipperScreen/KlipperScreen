@@ -1,5 +1,11 @@
 # Panels
 
+### Splash Screen
+![Splash_screen](img/panels/splash_screen.png)
+!!! tip
+    The *'power on'* button will only appear if a power device exists in moonraker and that power device name
+    should be added to `power_devices`  in the printer section of the klipperscreen configuration file
+
 ### Main Menu
 ![Main Menu](img/panels/main_panel.png)
 
@@ -102,12 +108,6 @@ panel: settings
 ```
 ![Settings](img/panels/settings.png)
 
-### System
-```py
-panel: system
-```
-![System Panel](img/panels/system.png)
-
 ### Spoolman
 ```py
 panel: spoolman
@@ -119,6 +119,12 @@ panel: spoolman
 panel: temperature
 ```
 [![Temperature](img/panels/temperature.png)](Panels/Temperature.md)
+
+### Updater
+```py
+panel: updater
+```
+![Updater Panel](img/panels/updater.png)
 
 ### [Z Calibrate](Panels/Zcalibrate.md)
 ```py

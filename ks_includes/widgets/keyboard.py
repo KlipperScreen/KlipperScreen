@@ -122,8 +122,6 @@ class Keyboard(Gtk.Box):
                         self.buttons[p][r][k] = screen.gtk.Button("arrow-down", scale=.6)
                     else:
                         self.buttons[p][r][k] = screen.gtk.Button(label=key, lines=1)
-                    self.buttons[p][r][k].set_hexpand(True)
-                    self.buttons[p][r][k].set_vexpand(True)
                     self.buttons[p][r][k].connect('button-press-event', self.repeat, key)
                     self.buttons[p][r][k].connect('button-release-event', self.release)
                     self.buttons[p][r][k].get_style_context().add_class("keyboard_pad")
@@ -229,9 +227,9 @@ class Keyboard(Gtk.Box):
 
     def toggle_shift(self):
         self.shift_active = not self.shift_active
-        if self.shift_active:
-            for widget in self.shift:
+        widget: Gtk.Widget
+        for widget in self.shift:
+            if self.shift_active:
                 widget.get_style_context().add_class("active")
-        else:
-            for widget in self.shift:
+            else:
                 widget.get_style_context().remove_class("active")

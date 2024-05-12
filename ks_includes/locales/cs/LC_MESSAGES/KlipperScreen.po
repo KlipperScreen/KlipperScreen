@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-20 00:09-0300\n"
-"PO-Revision-Date: 2023-12-05 11:06+0000\n"
-"Last-Translator: Mick#6366 <kos.m@post.cz>\n"
+"POT-Creation-Date: 2024-04-26 23:35-0300\n"
+"PO-Revision-Date: 2024-05-06 09:07+0000\n"
+"Last-Translator: Miloslav Kos <kos.m@post.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.3-dev\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"X-Generator: Weblate 5.5.3\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -70,6 +70,9 @@ msgstr "Opravdu chceš vyjmout objekt?"
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Opravdu okamžitě zastavit?"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr "Opravdu chcete kalibraci zastavit?"
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Opravdu chcete zrušit tisk?"
 
@@ -81,6 +84,9 @@ msgstr "Opravdu chcete rebootovat systém?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Opravdu chcete vypnout systém?"
+
+msgid "Asks for confirmation before stopping"
+msgstr "Před zastavením si vyžádá potvrzení"
 
 msgid "Auto"
 msgstr "Auto"
@@ -103,8 +109,8 @@ msgstr "Vyrovnání podložky"
 msgid "Bed Mesh"
 msgstr "Mapa podložky"
 
-msgid "Bed screw configuration:"
-msgstr "Vyrovnání šroubů podložky:"
+msgid "Both"
+msgstr "Obě"
 
 msgid "Calibrate"
 msgstr "Kalibrace"
@@ -136,6 +142,12 @@ msgstr "Ruším"
 msgid "Cannot connect to Moonraker"
 msgstr "Nelze se připojit k Moonraker"
 
+msgid "Changes how the interface looks"
+msgstr "Změna vzhledu rozhraní"
+
+msgid "Changes how the time remaining is calculated"
+msgstr "Změna způsobu výpočtu zbývajícího času"
+
 msgid "Channel"
 msgstr "Kanál"
 
@@ -150,6 +162,9 @@ msgstr "Vymaž"
 
 msgid "Close"
 msgstr "Zavřít"
+
+msgid "Close messages after a timeout"
+msgstr "Zavírání zpráv po uplynutí časového limitu"
 
 msgid "Complete"
 msgstr "Hotovo"
@@ -170,6 +185,9 @@ msgstr "Konsole"
 msgid "Cooldown"
 msgstr "Zchladit"
 
+msgid "Current percentage and graph line"
+msgstr "Aktuální procento a linie grafu"
+
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS se nepodařilo načíst a byl deaktivován"
 
@@ -188,6 +206,9 @@ msgstr "Odznačit"
 msgid "Disable Motors"
 msgstr "Uvolnit motory"
 
+msgid "Disable for 12hs with am / pm"
+msgstr "Vypnout na 12 hodin am / pm"
+
 msgid "Distance (mm)"
 msgstr "Vzdálenost (mm)"
 
@@ -198,8 +219,32 @@ msgstr "Obnovit %s?"
 msgid "Elapsed:"
 msgstr "Uplynulo:"
 
+msgid "Emergency Stop"
+msgstr "Nouzové zastavení"
+
+msgid "Enable screen power management"
+msgstr "Povolit správu napájení obrazovky"
+
+msgid "Ended official support in June 2023"
+msgstr "Oficiální podpora ukončena v červnu 2023"
+
 msgid "Error"
 msgstr "Chyba"
+
+msgid "Error clearing active spool"
+msgstr "Chyba při vymazání aktivní cívky"
+
+msgid "Error getting active spool"
+msgstr "Chyba při získávání aktivní cívky"
+
+msgid "Error setting active spool"
+msgstr "Chyba nastavení aktivní cívky"
+
+msgid "Error trying to fetch spools"
+msgstr "Chyba při pokusu o načtení cívek"
+
+msgid "Error: Couldn't get a position to probe"
+msgstr "Chyba: Nepodařilo se získat pozici pro sondování"
 
 msgid "Estimated Time Method"
 msgstr "Výpočet doby tisku"
@@ -212,6 +257,9 @@ msgstr "Extra velký"
 
 msgid "Extrude"
 msgstr "Extruze"
+
+msgid "Extruders"
+msgstr "Extrudéry"
 
 msgid "Extrusion +"
 msgstr "Extruze +"
@@ -336,6 +384,9 @@ msgstr "Špatně"
 msgid "Invalid password"
 msgstr "Špatné heslo"
 
+msgid "Inversely affects the icon size"
+msgstr "Inverzně ovlivňuje velikost ikony"
+
 msgid "Invert X"
 msgstr "Otočit X"
 
@@ -347,6 +398,9 @@ msgstr "Otočit Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "V závislosti na výkonu ohřívače to může trvat déle než 5 minut."
+
+msgid "It's possible that the configuration is not correct"
+msgstr "Je možné, že konfigurace není správná"
 
 msgid "Klipper Restart"
 msgstr "Klipper Restart"
@@ -365,6 +419,9 @@ msgstr "Klipper startuje"
 
 msgid "Klipper will reboot"
 msgstr "Klipper se restartuje"
+
+msgid "KlipperScreen will drop support in June 2024"
+msgstr "KlipperScreen ztratí podporu v červnu 2024"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
@@ -395,6 +452,12 @@ msgstr "Limity"
 msgid "Load"
 msgstr "Zasuň"
 
+msgid "Loading..."
+msgstr "Načítání...."
+
+msgid "Lost Connection to Moonraker"
+msgstr "Ztracené spojení s Moonrakerem"
+
 msgid "Lower Nozzle"
 msgstr "Trysku níž"
 
@@ -415,9 +478,6 @@ msgstr "Max"
 
 msgid "Max Acceleration"
 msgstr "Max. zrychlení"
-
-msgid "Max Acceleration to Deceleration"
-msgstr "Z max. zrychlení do zpomalení"
 
 msgid "Max Velocity"
 msgstr "Max. rychlost"
@@ -442,6 +502,9 @@ msgstr "Menu"
 
 msgid "Mesh calibrate"
 msgstr "Kalibrace sítě"
+
+msgid "Minimum Cruise Ratio"
+msgstr "Minimální cestovní poměr"
 
 msgid "Modified"
 msgstr "Změněno"
@@ -473,13 +536,26 @@ msgstr "Nový"
 msgid "No elegible macros:"
 msgstr "Žádná použitelná makra:"
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
-msgstr "Nepodporováno autodetekcí, nakonfiguruj v klipperscreen.conf"
+msgid "No mesh has been loaded"
+msgstr "Nebyla načtena žádná síť"
+
+msgid "No wireless interface has been found"
+msgstr "Nebylo nalezeno žádné bezdrátové rozhraní"
+
+msgid "Not all screens support this"
+msgstr "Ne všechny obrazovky podporují tuto funkci"
+
+msgid "Not working or not configured"
+msgstr "Nefunguje nebo není nakonfigurováno"
 
 msgid "Nothing selected"
 msgstr "Nevybráno nic"
+
+msgid "Notification log empty"
+msgstr "Protokol oznámení je prázdný"
+
+msgid "Notifications"
+msgstr "Oznámení"
 
 #, python-format
 msgid "Outdated by %d"
@@ -602,6 +678,9 @@ msgstr "Znovu"
 msgid "Retrying"
 msgstr "Zkouším znovu"
 
+msgid "Rotation invalid"
+msgstr "Neplatné otáčení"
+
 msgid "Save"
 msgstr "Uložit"
 
@@ -630,6 +709,9 @@ msgstr "Čas vypnutí displeje"
 msgid "Screws Adjust"
 msgstr "Nastavit šrouby"
 
+msgid "Screws not used:"
+msgstr "Nepoužívané šrouby:"
+
 msgid "Select"
 msgstr "Vyber"
 
@@ -650,6 +732,9 @@ msgstr "Ukaž odběr topení"
 
 msgid "Show Scrollbars Buttons"
 msgstr "Ukaž rolovací tlačítka"
+
+msgid "Show only devices that are able to be set"
+msgstr "Zobrazit pouze zařízení, která lze nastavit"
 
 msgid "Shutdown"
 msgstr "Vypnout"
@@ -711,14 +796,17 @@ msgstr "Teplota (°C)"
 msgid "Temperature"
 msgstr "Teplota"
 
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr "Tento panel podporuje až 9 šroubů v mřížce 3x3"
+
+msgid "Timeout for screen black-out or power-off"
+msgstr "Časový limit pro zhasnutí obrazovky nebo vypnutí napájení"
+
 msgid "Total:"
 msgstr "Total:"
 
 msgid "Unknown Heater"
 msgstr "Neznámé topení"
-
-msgid "Unknown screw position"
-msgstr "Neznámé nastavení šroubů"
 
 msgid "Unload"
 msgstr "Vysuň"
@@ -740,6 +828,15 @@ msgstr "Aktualizuji"
 
 msgid "Uploaded"
 msgstr "Nahrané"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr "Užitečné pro nereagující dotykové obrazovky"
+
+msgid "Warning"
+msgstr "Varování"
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr "WebRTC není podporováno backendem, který se pokouší spustit Stream"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Rychlost pohybu XY (mm/s)"
@@ -801,8 +898,19 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen se restartuje"
+#~ msgid "Bed screw configuration:"
+#~ msgstr "Vyrovnání šroubů podložky:"
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr "Nepodporováno autodetekcí, nakonfiguruj v klipperscreen.conf"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "Neznámé nastavení šroubů"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Z max. zrychlení do zpomalení"
 
 #~ msgid "Continue"
 #~ msgstr "Pokračuj"

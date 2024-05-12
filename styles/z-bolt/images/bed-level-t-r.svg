@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="64"
    height="64"
    viewBox="0 0 64 64"
    version="1.1"
    id="svg10"
    sodipodi:docname="bed-level-t-r.svg"
-   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)">
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <metadata
      id="metadata16">
     <rdf:RDF>
@@ -38,43 +38,43 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1600"
-     inkscape:window-height="837"
+     inkscape:window-height="855"
      id="namedview12"
      showgrid="false"
      inkscape:pagecheckerboard="false"
-     inkscape:zoom="4.7265625"
-     inkscape:cx="35.548945"
-     inkscape:cy="38.743817"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:zoom="6.6843688"
+     inkscape:cx="21.6924"
+     inkscape:cy="31.940189"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg10"
      inkscape:snap-bbox="true"
      inkscape:snap-bbox-edge-midpoints="false"
      inkscape:document-rotation="0"
-     inkscape:snap-bbox-midpoints="true" />
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:showpageshadow="0"
+     inkscape:deskcolor="#d1d1d1" />
   <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
   <title
      id="title2">folder</title>
   <desc
      id="desc4">Created with Sketch.</desc>
-  <g
-     id="g1628"
-     transform="matrix(-0.33899393,0,0,-0.34194017,74.84367,19.316237)"
-     style="stroke-width:2.93717">
-    <path
-       style="fill:none;stroke:#ffffff;stroke-width:8.81151;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 152.02033,-121.74843 40,40.5"
-       id="path1610" />
-    <path
-       style="fill:none;stroke:#ffffff;stroke-width:8.81151;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 192.02033,28.25157 -45,0.5 -19.5,17.5 H 62.020333 v -98.5 l 28,-31 0.5,-38"
-       id="path1608" />
-    <circle
-       style="opacity:0.995;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:8.81151;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers;stop-color:#000000"
-       id="path1623"
-       cx="107.52033"
-       cy="-11.74843"
-       r="16" />
-  </g>
+  <path
+     style="fill:none;stroke:#ffffff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 23.3097,60.946916 9.7499427,47.098339"
+     id="path1610" />
+  <path
+     style="fill:none;stroke:#ffffff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 9.7499427,9.6558904 25.00467,9.4849203 31.615051,3.5009673 H 59.819153 V 37.182074 l -7.49183,10.600145 -0.169497,12.993727"
+     id="path1608"
+     sodipodi:nodetypes="ccccccc" />
+  <ellipse
+     style="opacity:0.995;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers;stop-color:#000000"
+     id="path1623"
+     cx="-34.394928"
+     cy="-29.333498"
+     transform="scale(-1)"
+     rx="5.423903"
+     ry="5.4710426" />
 </svg>

@@ -20,17 +20,19 @@ class KlippyWebsocket(threading.Thread):
     reconnect_count = 0
     max_retries = 4
 
-    def __init__(self, screen, callback, host, port):
+    def __init__(self, callback, host, port, api_key):
         threading.Thread.__init__(self)
         self._wst = None
         self.ws_url = None
-        self._screen = screen
         self._callback = callback
         self.klippy = MoonrakerApi(self)
         self.ws = None
         self.closing = False
         self.host = host
         self.port = port
+        self.header = {"x-api-key": api_key} if api_key else {}
+        self.api_key = api_key
+        self.reconnect_count = 0
 
     @property
     def _url(self):
@@ -38,14 +40,7 @@ class KlippyWebsocket(threading.Thread):
 
     @property
     def ws_proto(self):
-        if int(self.port) in {443, 7130}:
-            return "wss"
-        return "ws"
-
-    def retry(self):
-        self.reconnect_count = 0
-        self.connecting = True
-        self.initial_connect()
+        return "wss" if int(self.port) in {443, 7130} else "ws"
 
     def initial_connect(self):
         if self.connect() is not False:
@@ -55,9 +50,7 @@ class KlippyWebsocket(threading.Thread):
         if self.reconnect_count > self.max_retries:
             logging.debug("Stopping reconnections")
             self.connecting = False
-            self._screen.printer_initializing(
-                _("Cannot connect to Moonraker")
-                + f'\n\n{self._screen.apiclient.status}')
+            GLib.idle_add(self._callback['on_cancel'])
             return False
         return self.connect()
 
@@ -67,40 +60,31 @@ class KlippyWebsocket(threading.Thread):
             return False
         logging.debug("Attempting to connect")
         self.reconnect_count += 1
-        try:
-            state = self._screen.apiclient.get_server_info()
-            if state is False:
-                if self.reconnect_count > 2:
-                    self._screen.printer_initializing(
-                        _("Cannot connect to Moonraker") + '\n\n'
-                        + _("Retrying") + f' #{self.reconnect_count}'
-                    )
-                return True
-            token = self._screen.apiclient.get_oneshot_token()
-        except Exception as e:
-            logging.critical(e, exc_info=True)
-            logging.debug("Unable to get oneshot token")
-            return True
 
-        self.ws_url = f"{self.ws_proto}://{self._url}/websocket?token={token}"
+        self.ws_url = f"{self.ws_proto}://{self._url}/websocket?token={self.api_key}"
         self.ws = websocket.WebSocketApp(
             self.ws_url,
-            on_close=self.on_close, on_error=self.on_error, on_message=self.on_message, on_open=self.on_open
+            on_close=self.on_close,
+            on_error=self.on_error,
+            on_message=self.on_message,
+            on_open=self.on_open,
+            header=self.header
         )
         self._wst = threading.Thread(target=self.ws.run_forever, daemon=True)
         try:
             logging.debug("Starting websocket thread")
             self._wst.start()
         except Exception as e:
-            logging.critical(e, exc_info=True)
-            logging.debug("Error starting web socket")
+            logging.debug(f"Error starting web socket {e}")
             return True
         return False
 
     def close(self):
+        logging.debug("Closing websocket")
         self.closing = True
         self.connecting = False
         if self.ws is not None:
+            self.ws.keep_running = False
             self.ws.close()
 
     def on_message(self, *args):
@@ -111,17 +95,20 @@ class KlippyWebsocket(threading.Thread):
                     self.callback_table[response['id']][1],
                     self.callback_table[response['id']][2],
                     *self.callback_table[response['id']][3])
-            GLib.idle_add(self.callback_table[response['id']][0], *args)
+            GLib.idle_add(self.callback_table[response['id']][0], *args, priority=GLib.PRIORITY_HIGH_IDLE)
             self.callback_table.pop(response['id'])
             return
 
         if "method" in response and "on_message" in self._callback:
-            args = response['method'], response['params'][0] if "params" in response else {}
-            GLib.idle_add(self._callback['on_message'], *args)
+            args = (response['method'], response['params'][0] if "params" in response else {})
+            GLib.idle_add(self._callback['on_message'], *args, priority=GLib.PRIORITY_HIGH_IDLE)
+        if self.closing:
+            timer = threading.Timer(2, self.ws.close)
+            timer.start()
         return
 
     def send_method(self, method, params=None, callback=None, *args):
-        if not self.connected:
+        if not self.connected or self.closing:
             return False
         if params is None:
             params = {}
@@ -143,28 +130,26 @@ class KlippyWebsocket(threading.Thread):
         logging.info("Moonraker Websocket Open")
         self.connected = True
         self.connecting = False
-        self._screen.reinit_count = 0
         self.reconnect_count = 0
         if "on_connect" in self._callback:
-            GLib.idle_add(self._callback['on_connect'])
+            GLib.idle_add(self._callback['on_connect'], priority=GLib.PRIORITY_HIGH_IDLE)
 
     def on_close(self, *args):
         # args: ws, status, message
         # sometimes ws is not passed due to bugs
-        message = args[2] if len(args) == 3 else args[1]
+        if len(args) == 3:
+            status = args[1]
+            message = args[2]
+        else:
+            status = args[0]
+            message = args[1]
         if message is not None:
-            logging.info(f"{message}")
+            logging.info(f"{status} {message}")
         if not self.connected:
             logging.debug("Connection already closed")
             return
-        if self.closing:
-            logging.debug("Closing websocket")
-            self.ws.keep_running = False
-            self.close()
-            self.closing = False
-            return
         if "on_close" in self._callback:
-            GLib.idle_add(self._callback['on_close'], "Lost Connection to Moonraker")
+            GLib.idle_add(self._callback['on_close'], priority=GLib.PRIORITY_HIGH_IDLE)
         logging.info("Moonraker Websocket Closed")
         self.connected = False
 
@@ -194,7 +179,7 @@ class MoonrakerApi:
         )
 
     def get_file_dir(self, path='gcodes', callback=None, *args):
-        logging.debug("Sending server.files.directory")
+        logging.debug(f"Sending server.files.directory {path}")
         return self._ws.send_method(
             "server.files.list",
             {"path": path},
@@ -211,6 +196,15 @@ class MoonrakerApi:
             *args
         )
 
+    def get_dir_info(self, callback=None, directory='gcodes', *args):
+        logging.debug(f"Sending server.files.get_directory  {directory}")
+        return self._ws.send_method(
+            "server.files.get_directory",
+            {"path": directory},
+            callback,
+            *args
+        )
+
     def get_file_metadata(self, filename, callback=None, *args):
         return self._ws.send_method(
             "server.files.metadata",
@@ -221,6 +215,7 @@ class MoonrakerApi:
 
     def object_subscription(self, updates):
         logging.debug("Sending printer.objects.subscribe")
+        logging.debug(updates)
         return self._ws.send_method(
             "printer.objects.subscribe",
             updates
@@ -336,4 +331,17 @@ class MoonrakerApi:
         logging.debug("Sending printer.firmware_restart")
         return self._ws.send_method(
             "printer.firmware_restart"
+        )
+
+    def identify_client(self, version, api_key):
+        logging.debug("Sending server.connection.identify")
+        return self._ws.send_method(
+            "server.connection.identify",
+            {
+                "client_name": "KlipperScreen",
+                "version": f"{version}",
+                "type": "display",
+                "url": "https://github.com/KlipperScreen/KlipperScreen",
+                "api_key": f"{api_key}"
+            },
         )

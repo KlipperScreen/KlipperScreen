@@ -20,24 +20,33 @@ and reports the amount to be adjusted into the labels of the corner buttons.
 
 ### Why `[bed_screws]` are ignored/not used?
 
-Because if the probe offset is changed or the difference between `[bed_screws]` and `[screws_tilt_adjust]` wasn't calculated correctly,
-the "Screws adjust" button stops working.
-
+`[screws_tilt_adjust]` positions with offset will be used over `[bed_screws]`, because if the probe offset is changed or
+the difference between `[bed_screws]` and `[screws_tilt_adjust]` wasn't calculated correctly,
+the "Screws adjust" button stops working correctly.
 
 ### Why the probe offset is applied to `[screws_tilt_adjust]`?
 
-Because the corner buttons in KlipperScreen should place the nozzle above the screw to do the ["paper test"](https://www.klipper3d.org/Bed_Level.html?h=paper#the-paper-test). It doesn't affect the function of `SCREWS_TILT_CALCULATE`, which will go to the defined positions.
+Because the corner buttons in KlipperScreen should place the nozzle above the screw to do the ["paper test"](https://www.klipper3d.org/Bed_Level.html?h=paper#the-paper-test).
+It doesn't affect the function of `SCREWS_TILT_CALCULATE`, which will go to the defined positions.
 
-## Not supported for auto-detection
+## Is `BED_SCREWS_ADJUST` supported?
 
-This message will appear if you are using 3 or 5 screws and didn't define them in KlipperScreen.conf.
-See "screw_positions" in the [printer options](https://klipperscreen.readthedocs.io/en/latest/Configuration/#printer-options)
+No, but you can achieve the same thing by using the corner buttons and going in a circle pattern adjusting until desired.
+`BED_SCREWS_ADJUST` is just a helper that moves to the screws in sequence
 
 ## Limitations
 
-The panel doesn't support more than 9 screws. if there is a center screw define the positions to avoid issues.
-See "screw_positions" in the [printer options](https://klipperscreen.readthedocs.io/en/latest/Configuration/#printer-options)
+The panel doesn't support more than 9 screws or grids bigger than 3x3.
 
+## Rotation
+
+The layout can be rotated if the screen is not directly in front of the machine.
+in the printer configuration you would add screw_rotation: 90
+Valid values are 0 90 180 270
+
+## Inversion
+
+The layout will be inverted if an axis is inverted in the move panel
 
 ## Is there an alternative?
 

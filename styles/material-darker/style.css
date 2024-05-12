@@ -30,10 +30,6 @@ window {
     background-color: #121212;
 }
 
-.active_device {
-    background-color: #1c1c1c;
-}
-
 button {
     background-color: #121212;
 }
@@ -84,8 +80,12 @@ button.invalid {
     border-width: .1em;
 }
 
-combobox box button {
-    background-color: #121212;
+menu,
+menuitem,
+combobox button,
+combobox arrow,
+combobox menuitem {
+    background-color: #252525;
     border-color: #121212;
 }
 
@@ -101,16 +101,6 @@ switch:checked {
 
 label {
     color: #e2e2e2;
-}
-
-menu {
-    background-color: #121212;
-    border-color: #a2a2a2;
-}
-
-menuitem {
-    background-color: #121212;
-    border-color: #282828;
 }
 
 trough {
@@ -142,8 +132,8 @@ textview .time {
     color: #9E9E9E;
 }
 
-.popup {
-    background-color: #006064;
+.active_device {
+    background-color: #1c1c1c;
 }
 
 .dialog {
@@ -153,30 +143,41 @@ textview .time {
 
 .dialog button {
     background-color: #252525;
-    border-bottom-color: #252525;
     border-radius: .25em;
 }
 
-.dialog button:nth-child(1) {
-    border-bottom-color: #2f5631;
+
+.dialog-error {
+    border-bottom-color: #CF6679;
 }
 
-.dialog button:nth-child(2) {
-    border-bottom-color: #B71C1C;
+.dialog-warning {
+    border-bottom-color: #f9b274;
 }
 
-.tempbutton_top,
-.tempbutton,
-.tempbutton_bottom,
-.distbutton_top,
-.distbutton,
-.distbutton_bottom  {
+.dialog-info {
+    border-bottom-color: @color4;
+}
+
+.dialog-default {
+    border-bottom-color: @color3;
+}
+
+.dialog-secondary {
+     border-bottom-color: @color2;
+}
+
+.dialog-primary {
+     border-bottom-color: @color1;
+}
+
+.horizontal_togglebuttons  {
     border-color: #545454;
     border-width: .1em;
     background-color: #252525;
 }
 
-.distbutton_active {
+.horizontal_togglebuttons_active {
     background-color: #545454;
 }
 
@@ -229,14 +230,6 @@ textview .time {
 .message button {
     background-color: #e2e2e2;
     color: #121212;
-}
-
-.warning {
-    background-color: #f9b274;
-}
-
-.error {
-    background-color: #CF6679;
 }
 
 .keyboard_pad {

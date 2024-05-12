@@ -1,8 +1,22 @@
 # Theming
 
-To create a custom theme, create a folder in: _${KlipperScreen_Directory}/styles/_
+## Custom printer select icons
 
-The folder name will be the theme name, in that folder create another folder named `images` this is where the icons should be placed. The icons must be SVG files and they need to have specific names that are defined in the code, use the default theme as a reference for the names or check the code.
+When multiple printers are configured, their icons can be customized by placing an icon in:
+
+_${KlipperScreen_Directory}/styles/printers/_
+
+* The name of the icon must be the exact printer name configured in KlipperScreen.conf
+* The format should be svg or png.
+
+## Custom themes
+
+To create a custom theme, create a folder in:
+
+_${KlipperScreen_Directory}/styles/_
+
+The folder name will be the theme name, in that folder create another folder named `images` this is where the icons should be placed.
+The icons must be SVG files with specific names that are defined in the code, use the default theme as a reference for the names or check the code.
 
 To edit colors and styles, create a css file named `style.css` you can use the contents of another theme as a reference.
 

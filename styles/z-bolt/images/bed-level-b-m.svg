@@ -6,7 +6,7 @@
    version="1.1"
    id="svg10"
    sodipodi:docname="bed-level-b-m.svg"
-   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -38,13 +38,13 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1600"
-     inkscape:window-height="826"
+     inkscape:window-height="855"
      id="namedview12"
      showgrid="false"
      inkscape:pagecheckerboard="false"
-     inkscape:zoom="4.7265625"
-     inkscape:cx="26.234711"
-     inkscape:cy="38.82314"
+     inkscape:zoom="6.5738834"
+     inkscape:cx="21.904861"
+     inkscape:cy="25.175378"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -54,9 +54,11 @@
      inkscape:document-rotation="0"
      inkscape:snap-bbox-midpoints="true"
      showguides="true"
-     inkscape:guide-bbox="true">
+     inkscape:guide-bbox="true"
+     inkscape:showpageshadow="0"
+     inkscape:deskcolor="#d1d1d1">
     <sodipodi:guide
-       position="531.3124,10"
+       position="4.194958,54"
        orientation="0,1"
        id="guide825"
        inkscape:label=""
@@ -70,12 +72,23 @@
      id="desc4">Created with Sketch.</desc>
   <g
      id="g1628"
-     transform="matrix(0.33899393,0,0,0.34194017,5.1563314,50.254168)"
+     transform="matrix(-0.33899393,0,0,-0.34194017,74.84367,19.316237)"
      style="stroke-width:2.93717">
     <path
        style="fill:none;stroke:#ffffff;stroke-width:8.81151;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 101.68628,10.954642 H 56.686281"
+       d="M 86.185318,-101.43226 H 166.58418"
        id="path1608"
        sodipodi:nodetypes="cc" />
+    <g
+       id="g1628-3"
+       transform="rotate(-180,136.72936,-28.109415)"
+       style="stroke-width:2.93717">
+      <circle
+         style="opacity:0.995;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:8.81151;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers;stop-color:#000000"
+         id="path1623"
+         cx="147.07397"
+         cy="-11.74843"
+         r="16" />
+    </g>
   </g>
 </svg>
