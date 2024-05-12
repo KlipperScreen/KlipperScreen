@@ -5,20 +5,19 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2023-12-17 01:36\n"
+"Project-Id-Version: 24-05-17 16.20\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-26 23:35-0300\n"
-"PO-Revision-Date: 2024-04-13 16:48+0000\n"
-"Last-Translator: Сергій <sergiy.goncharuk.1@gmail.com>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/uk/>\n"
+"PO-Revision-Date: 2024-05-12 16:39+0300\n"
+"Last-Translator: Andrii Komarovskyi\n"
+"Language-Team: Andrii Komarovskyi\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -72,7 +71,7 @@ msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Ви впевнені, що хочете зробити аварійну зупинку?"
 
 msgid "Are you sure you want to stop the calibration?"
-msgstr ""
+msgstr "Ви впевнені, що хочете припинити калібрування?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Ви впевнені, що хочете скасувати друк?"
@@ -87,7 +86,7 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "Ви впевнені, що хочете вимкнути систему?"
 
 msgid "Asks for confirmation before stopping"
-msgstr ""
+msgstr "Запитує підтвердження перед зупинкою"
 
 msgid "Auto"
 msgstr "Автоматично"
@@ -111,7 +110,7 @@ msgid "Bed Mesh"
 msgstr "Сітка столу"
 
 msgid "Both"
-msgstr ""
+msgstr "Обидва"
 
 msgid "Calibrate"
 msgstr "Калібрування"
@@ -144,10 +143,10 @@ msgid "Cannot connect to Moonraker"
 msgstr "Не можливо підключитися до Moonraker"
 
 msgid "Changes how the interface looks"
-msgstr ""
+msgstr "Змінює вигляд інтерфейсу"
 
 msgid "Changes how the time remaining is calculated"
-msgstr ""
+msgstr "Змінює спосіб розрахунку часу, що залишився"
 
 msgid "Channel"
 msgstr "Канал"
@@ -165,7 +164,7 @@ msgid "Close"
 msgstr "Закрити"
 
 msgid "Close messages after a timeout"
-msgstr ""
+msgstr "Закрити повідомлення після тайм-ауту"
 
 msgid "Complete"
 msgstr "Завершено"
@@ -187,7 +186,7 @@ msgid "Cooldown"
 msgstr "Охолодження"
 
 msgid "Current percentage and graph line"
-msgstr ""
+msgstr "Поточний відсоток і лінія графіка"
 
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS не вдалося завантажити, і його було вимкнено"
@@ -208,7 +207,7 @@ msgid "Disable Motors"
 msgstr "Вимкнути мотори"
 
 msgid "Disable for 12hs with am / pm"
-msgstr ""
+msgstr "Вимкнути на 12 годин за допомогою am / pm"
 
 msgid "Distance (mm)"
 msgstr "Відстань (мм)"
@@ -221,10 +220,10 @@ msgid "Elapsed:"
 msgstr "Минуло:"
 
 msgid "Emergency Stop"
-msgstr ""
+msgstr "Аварійна зупинка"
 
 msgid "Enable screen power management"
-msgstr ""
+msgstr "Увімкнути керування живленням екрана"
 
 msgid "Ended official support in June 2023"
 msgstr "Офіційна підтримка припинена в червні 2023 року"
@@ -233,19 +232,19 @@ msgid "Error"
 msgstr "Помилка"
 
 msgid "Error clearing active spool"
-msgstr ""
+msgstr "Помилка очищення активної котушки"
 
 msgid "Error getting active spool"
-msgstr ""
+msgstr "Помилка отримання активної котушки"
 
 msgid "Error setting active spool"
-msgstr ""
+msgstr "Помилка налаштування активної катушки"
 
 msgid "Error trying to fetch spools"
-msgstr ""
+msgstr "Помилка спроби вибору котушки"
 
 msgid "Error: Couldn't get a position to probe"
-msgstr ""
+msgstr "Помилка: не вдалося отримати позицію для проби"
 
 msgid "Estimated Time Method"
 msgstr "Метод розрахунку часу"
@@ -260,7 +259,7 @@ msgid "Extrude"
 msgstr "Видавити"
 
 msgid "Extruders"
-msgstr ""
+msgstr "Екструдери"
 
 msgid "Extrusion +"
 msgstr "Видавити +"
@@ -386,7 +385,7 @@ msgid "Invalid password"
 msgstr "Недійсний пароль"
 
 msgid "Inversely affects the icon size"
-msgstr ""
+msgstr "Зворотно впливає на розмір іконки"
 
 msgid "Invert X"
 msgstr "Інвертувати X"
@@ -401,7 +400,7 @@ msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "Залежно від потужності обігрівача це може зайняти більше 5 хвилин."
 
 msgid "It's possible that the configuration is not correct"
-msgstr ""
+msgstr "Можливо, конфігурація неправильна"
 
 msgid "Klipper Restart"
 msgstr "Перезапуск Klipper"
@@ -458,7 +457,7 @@ msgid "Loading..."
 msgstr "Завантаження..."
 
 msgid "Lost Connection to Moonraker"
-msgstr ""
+msgstr "Втрачено з’єднання з Moonraker"
 
 msgid "Lower Nozzle"
 msgstr "Опустити сопло"
@@ -506,7 +505,7 @@ msgid "Mesh calibrate"
 msgstr "Калібрування сітки столу"
 
 msgid "Minimum Cruise Ratio"
-msgstr ""
+msgstr "Мінімальний крейсерський коефіцієнт"
 
 msgid "Modified"
 msgstr "Змінено"
@@ -545,7 +544,7 @@ msgid "No wireless interface has been found"
 msgstr "Бездротовий інтерфейс не знайдено"
 
 msgid "Not all screens support this"
-msgstr ""
+msgstr "Не всі екрани підтримують це"
 
 msgid "Not working or not configured"
 msgstr "Не працює або не налаштовано"
@@ -681,7 +680,7 @@ msgid "Retrying"
 msgstr "Повторна спроба"
 
 msgid "Rotation invalid"
-msgstr ""
+msgstr "Обертання недійсне"
 
 msgid "Save"
 msgstr "Зберегти"
@@ -712,7 +711,7 @@ msgid "Screws Adjust"
 msgstr "Регулювання гвинтів"
 
 msgid "Screws not used:"
-msgstr ""
+msgstr "Гвинти не використовувалися:"
 
 msgid "Select"
 msgstr "Вибрати"
@@ -736,7 +735,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "Показати кнопку смуги прокрутки"
 
 msgid "Show only devices that are able to be set"
-msgstr ""
+msgstr "Показувати лише пристрої, які можна налаштувати"
 
 msgid "Shutdown"
 msgstr "Вимкнути"
@@ -799,10 +798,10 @@ msgid "Temperature"
 msgstr "Температура"
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr ""
+msgstr "Ця панель підтримує до 9 гвинтів у сітці 3x3"
 
 msgid "Timeout for screen black-out or power-off"
-msgstr ""
+msgstr "Тайм-аут для затемнення екрана або вимкнення живлення"
 
 msgid "Total:"
 msgstr "Всього:"
@@ -832,7 +831,7 @@ msgid "Uploaded"
 msgstr "Завантажено"
 
 msgid "Useful for un-responsive touchscreens"
-msgstr ""
+msgstr "Корисно для сенсорних екранів, які не реагують"
 
 msgid "Warning"
 msgstr "Попередження"
