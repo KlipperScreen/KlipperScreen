@@ -32,7 +32,6 @@ class KlippyWebsocket(threading.Thread):
         self.port = port
         self.header = {"x-api-key": api_key} if api_key else {}
         self.api_key = api_key
-        self.reconnect_count = 0
 
     @property
     def _url(self):

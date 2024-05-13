@@ -124,6 +124,7 @@ class Panel(ScreenPanel):
         self._screen._ws.klippy.restart()
 
     def retry(self, widget):
+        logging.debug("User retrying connection")
         self._screen.connect_printer(self._screen.connecting_to_printer)
         self.show_restart_buttons()
 

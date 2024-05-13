@@ -203,10 +203,10 @@ class KlipperScreen(Gtk.Window):
 
     def connect_printer(self, name):
         self.connecting_to_printer = name
-        if self.files:
-            self.files.__init__(self)
         if self._ws is not None and self._ws.connected:
+            self.printer_initializing("Waiting Websocket closure")
             self.close_websocket()
+            return
         gc.collect()
         self.connecting = True
         self.initialized = False
@@ -239,6 +239,8 @@ class KlipperScreen(Gtk.Window):
         )
         if self.files is None:
             self.files = KlippyFiles(self)
+        else:
+            self.files.reinit()
 
         self.reinit_count = 0
         self.printer_initializing(_("Connecting to %s") % name, True)
@@ -919,9 +921,12 @@ class KlipperScreen(Gtk.Window):
             return False
         self.server_info = self.apiclient.get_server_info()
         if not self.server_info:
-            logging.info("Moonraker not connected")
-            self._init_printer(_("Cannot connect to Moonraker") + "\n\n"
-                               + _("Retrying") + f" #{self.reinit_count}")
+            logging.info("Cannot get server info")
+            if self.reinit_count > 0:
+                self._init_printer(_("Cannot connect to Moonraker") + "\n\n"
+                                   + _("Retrying") + f" #{self.reinit_count}")
+            else:
+                self._init_printer(_("Connecting to %s") % self.connecting_to_printer)
             self.initializing = False
             self.reinit_count += 1
             return False
