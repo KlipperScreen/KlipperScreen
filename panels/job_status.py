@@ -470,7 +470,7 @@ class Panel(ScreenPanel):
                 self.set_state("printing")
             return
         elif action == "notify_metadata_update" and data['filename'] == self.filename:
-            self.update_file_metadata()
+            self.update_file_metadata(response=True)
         elif action != "notify_status_update":
             return
 
@@ -766,6 +766,7 @@ class Panel(ScreenPanel):
             GLib.source_remove(self.animation_timeout)
             self.animation_timeout = None
         self.filename = filename
+        logging.debug(f"Updating filename to {filename}")
         self.labels["file"].set_label(os.path.splitext(self.filename)[0])
         self.filename_label = {
             "complete": self.labels['file'].get_label(),
@@ -786,7 +787,7 @@ class Panel(ScreenPanel):
             self.labels['file'].set_label(self.filename_label['complete'])
         return True
 
-    def update_file_metadata(self):
+    def update_file_metadata(self, response=False):
         if self._files.file_metadata_exists(self.filename):
             self.file_metadata = self._files.get_file_info(self.filename)
             logging.info(f"Update Metadata. File: {self.filename} Size: {self.file_metadata['size']}")
@@ -804,7 +805,9 @@ class Panel(ScreenPanel):
                     self.labels['total_layers'].set_label(f"{((self.oheight - self.f_layer_h) / self.layer_h) + 1:.0f}")
             if "filament_total" in self.file_metadata:
                 self.labels['filament_total'].set_label(f"{float(self.file_metadata['filament_total']) / 1000:.1f} m")
-        else:
+        elif not response:
             logging.debug("Cannot find file metadata. Listening for updated metadata")
             self._files.request_metadata(self.filename)
+        else:
+            logging.debug("Cannot load file metadata")
         self.show_file_thumbnail()
