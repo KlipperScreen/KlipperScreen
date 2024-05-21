@@ -352,9 +352,9 @@ class KlipperScreenConfig:
             hour = num // 3600
             minute = num // 60
             if hour > 0:
-                name = f'{hour} ' + gettext.ngettext("hour", "hours", hour)
+                name = f'{hour} ' + ngettext("hour", "hours", hour)
             else:
-                name = f'{minute} ' + gettext.ngettext("minute", "minutes", minute)
+                name = f'{minute} ' + ngettext("minute", "minutes", minute)
             self.configurable_options[i1]['screen_blanking']['options'].append({
                 "name": name,
                 "value": f"{num}"

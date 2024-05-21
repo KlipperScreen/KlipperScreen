@@ -129,15 +129,19 @@ class ScreenPanel:
         if seconds is None or seconds < 1:
             return "-"
         days = seconds // 86400
+        day_units = ngettext("day", "days", days)
         seconds %= 86400
         hours = seconds // 3600
+        hour_units = ngettext("hour", "hours", hours)
         seconds %= 3600
         minutes = round(seconds / 60)
+        min_units = ngettext("minute", "minutes", minutes)
         seconds %= 60
-        return f"{f'{days:2.0f}d ' if days > 0 else ''}" \
-               f"{f'{hours:2.0f}h ' if hours > 0 else ''}" \
-               f"{f'{minutes:2.0f}m ' if minutes > 0 else ''}" \
-               f"{f'{seconds:2.0f}s' if days == 0 and hours == 0 and minutes == 0 else ''}"
+        sec_units = ngettext("second", "seconds", seconds)
+        return f"{f'{days:2.0f} {day_units} ' if days > 0 else ''}" \
+               f"{f'{hours:2.0f} {hour_units} ' if hours > 0 else ''}" \
+               f"{f'{minutes:2.0f} {min_units} ' if minutes > 0 and days == 0 else ''}" \
+               f"{f'{seconds:2.0f} {sec_units}' if days == 0 and hours == 0 and minutes == 0 else ''}"
 
     def format_eta(self, total, elapsed):
         if total is None:
