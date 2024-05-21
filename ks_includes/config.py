@@ -199,11 +199,12 @@ class KlipperScreenConfig:
             for key in config[section]:
                 if key not in bools and key not in strs and key not in numbers:
                     msg = f'Option "{key}" not recognized for section "[{section}]"'
-                    if key == "gcode" and section.startswith("menu"):
+                    if section.startswith("menu"):
                         msg = (
                             msg + "\n\n"
-                            + "The 'gcode' option is not part of KlipperScreen syntax\n"
-                            + "it's meant for text/graphical LCDs (usually blue) controlled by Klipper itself\n"
+                            + "KlipperScreen menu uses different options than Klipper\n"
+                            + "Syntax meant for text/graphical LCDs (usually blue)\n"
+                            + "will not work with KlipperScreen\n"
                             + "please consult KlipperScreen documentation."
                         )
                     if key == "camera_url":
