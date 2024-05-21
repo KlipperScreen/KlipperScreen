@@ -197,6 +197,9 @@ class Printer:
             fans.extend(iter(self.get_config_section_list(f"{fan_type} ")))
         return fans
 
+    def get_pwm_tools(self):
+        return self.get_config_section_list("pwm_tool ")
+
     def get_output_pins(self):
         return self.get_config_section_list("output_pin ")
 
