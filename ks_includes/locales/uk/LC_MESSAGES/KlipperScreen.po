@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 24-05-17 16.20\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-26 23:35-0300\n"
+"POT-Creation-Date: 2024-05-23 23:37-0300\n"
 "PO-Revision-Date: 2024-05-12 16:39+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -199,9 +199,6 @@ msgstr "Видалити Теку?"
 
 msgid "Delete File?"
 msgstr "Видалити файл?"
-
-msgid "Deselect"
-msgstr "Скасувати вибір"
 
 msgid "Disable Motors"
 msgstr "Вимкнути мотори"
@@ -498,6 +495,9 @@ msgstr "Виміряти Y"
 msgid "Medium"
 msgstr "Середній"
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr "Меню"
 
@@ -558,6 +558,9 @@ msgstr "Журнал сповіщень порожній"
 msgid "Notifications"
 msgstr "Сповіщення"
 
+msgid "Only for the move panel"
+msgstr ""
+
 #, python-format
 msgid "Outdated by %d"
 msgstr "Застаріло на %d"
@@ -591,6 +594,9 @@ msgstr "Піни"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Будь ласка, перекомпілюйте та перепрошійте мікроконтролер."
+
+msgid "Please wait"
+msgstr ""
 
 msgid "Power"
 msgstr "Живлення"
@@ -713,9 +719,6 @@ msgstr "Регулювання гвинтів"
 msgid "Screws not used:"
 msgstr "Гвинти не використовувалися:"
 
-msgid "Select"
-msgstr "Вибрати"
-
 msgid "Send"
 msgstr "Надіслати"
 
@@ -782,6 +785,9 @@ msgstr "Початок відновлення для"
 msgid "Starting update for"
 msgstr "Початок оновлення для"
 
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
+
 msgid "System"
 msgstr "Системна"
 
@@ -800,8 +806,14 @@ msgstr "Температура"
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr "Ця панель підтримує до 9 гвинтів у сітці 3x3"
 
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
 msgid "Timeout for screen black-out or power-off"
 msgstr "Тайм-аут для затемнення екрана або вимкнення живлення"
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr ""
 
 msgid "Total:"
 msgstr "Всього:"
@@ -869,6 +881,12 @@ msgstr[2] "коментарі"
 msgid "dBm"
 msgstr "dBm"
 
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "година"
@@ -898,6 +916,18 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм/с³"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#~ msgid "Deselect"
+#~ msgstr "Скасувати вибір"
+
+#~ msgid "Select"
+#~ msgstr "Вибрати"
 
 #~ msgid "Bed screw configuration:"
 #~ msgstr "Конфігурація гвинтів ліжка:"

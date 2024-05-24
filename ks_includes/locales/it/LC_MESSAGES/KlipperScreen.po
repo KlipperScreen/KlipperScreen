@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-26 23:35-0300\n"
+"POT-Creation-Date: 2024-05-23 23:37-0300\n"
 "PO-Revision-Date: 2024-04-24 20:07+0000\n"
 "Last-Translator: Giadej <Giadej@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -194,9 +194,6 @@ msgstr "Eliminare Directory?"
 
 msgid "Delete File?"
 msgstr "Eliminare file?"
-
-msgid "Deselect"
-msgstr "Deseleziona"
 
 msgid "Disable Motors"
 msgstr "Disabilita Motori"
@@ -494,6 +491,9 @@ msgstr "Misura Y"
 msgid "Medium"
 msgstr "Medio"
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr "Menù"
 
@@ -554,6 +554,9 @@ msgstr "Log notifiche vuoto"
 msgid "Notifications"
 msgstr "Notifiche"
 
+msgid "Only for the move panel"
+msgstr ""
+
 #, python-format
 msgid "Outdated by %d"
 msgstr "Obsoleto da %d"
@@ -586,6 +589,9 @@ msgstr "Pins"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Ricompila e flasha il micro-controller."
+
+msgid "Please wait"
+msgstr ""
 
 msgid "Power"
 msgstr "Power"
@@ -708,9 +714,6 @@ msgstr "Screws Adjust"
 msgid "Screws not used:"
 msgstr ""
 
-msgid "Select"
-msgstr "Seleziona"
-
 msgid "Send"
 msgstr "Invia"
 
@@ -777,6 +780,9 @@ msgstr "Avvio ripristino per"
 msgid "Starting update for"
 msgstr "Avvio aggiornamento per"
 
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
+
 msgid "System"
 msgstr "Sistema"
 
@@ -795,7 +801,13 @@ msgstr "Temperatura"
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr ""
 
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
 msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off during printing"
 msgstr ""
 
 msgid "Total:"
@@ -863,6 +875,11 @@ msgstr[1] "Applica"
 msgid "dBm"
 msgstr "dBm"
 
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "ora"
@@ -890,6 +907,17 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#~ msgid "Deselect"
+#~ msgstr "Deseleziona"
+
+#~ msgid "Select"
+#~ msgstr "Seleziona"
 
 #~ msgid "Bed screw configuration:"
 #~ msgstr "Configurazione Bed Screw:"

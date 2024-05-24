@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-26 23:35-0300\n"
+"POT-Creation-Date: 2024-05-23 23:37-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: 이정희 <daemul72@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/klipperscreen/"
@@ -194,9 +194,6 @@ msgstr "저장소를 삭제하시겠습니까?"
 
 msgid "Delete File?"
 msgstr "파일을 삭제하시겠습니까?"
-
-msgid "Deselect"
-msgstr "선택 해제"
 
 msgid "Disable Motors"
 msgstr "모터 전원 끄기"
@@ -492,6 +489,9 @@ msgstr "Y축 측정"
 msgid "Medium"
 msgstr "중간"
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr "메뉴"
 
@@ -552,6 +552,9 @@ msgstr "알림 로그가 비어 있음"
 msgid "Notifications"
 msgstr "공지"
 
+msgid "Only for the move panel"
+msgstr ""
+
 #, python-format
 msgid "Outdated by %d"
 msgstr "%d 보다 오래됨"
@@ -583,6 +586,9 @@ msgstr "핀"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "MCU 펌웨어를 다시 컴파일 한 다음 플래싱 해주세요."
+
+msgid "Please wait"
+msgstr ""
 
 msgid "Power"
 msgstr "전원"
@@ -705,9 +711,6 @@ msgstr "베드 스크류 조정"
 msgid "Screws not used:"
 msgstr ""
 
-msgid "Select"
-msgstr "선택"
-
 msgid "Send"
 msgstr "보내기"
 
@@ -774,6 +777,9 @@ msgstr "복구 시작"
 msgid "Starting update for"
 msgstr "업데이트 시작 중"
 
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
+
 msgid "System"
 msgstr "시스템"
 
@@ -792,7 +798,13 @@ msgstr "온도"
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr ""
 
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
 msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off during printing"
 msgstr ""
 
 msgid "Total:"
@@ -859,6 +871,10 @@ msgstr[0] "커밋"
 msgid "dBm"
 msgstr "dBm"
 
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "시간"
@@ -884,6 +900,16 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+
+#~ msgid "Deselect"
+#~ msgstr "선택 해제"
+
+#~ msgid "Select"
+#~ msgstr "선택"
 
 #~ msgid "Bed screw configuration:"
 #~ msgstr "베드 스크류 설정:"

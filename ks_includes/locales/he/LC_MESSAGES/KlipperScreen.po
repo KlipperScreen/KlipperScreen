@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-26 23:35-0300\n"
+"POT-Creation-Date: 2024-05-23 23:37-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/klipperscreen/"
@@ -201,9 +201,6 @@ msgstr ""
 
 msgid "Delete File?"
 msgstr "מחק קובץ"
-
-msgid "Deselect"
-msgstr "בטל את הבחירה"
 
 msgid "Disable Motors"
 msgstr "השבת מנועים"
@@ -498,6 +495,9 @@ msgstr "מדוד Y"
 msgid "Medium"
 msgstr "בינוני"
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr "תפריט"
 
@@ -558,6 +558,9 @@ msgstr ""
 msgid "Notifications"
 msgstr ""
 
+msgid "Only for the move panel"
+msgstr ""
+
 #, python-format
 msgid "Outdated by %d"
 msgstr "מיושן על ידי %d"
@@ -592,6 +595,9 @@ msgstr "פינים"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "אנא הדר (קמפל) מחדש ובצע פלאש למיקרו-בקר."
+
+msgid "Please wait"
+msgstr ""
 
 msgid "Power"
 msgstr "הפעלה"
@@ -714,9 +720,6 @@ msgstr "סידור ברגים"
 msgid "Screws not used:"
 msgstr ""
 
-msgid "Select"
-msgstr "בחר"
-
 msgid "Send"
 msgstr "שליחה"
 
@@ -783,6 +786,9 @@ msgstr "החל התאוששות עבור"
 msgid "Starting update for"
 msgstr "מתחיל עדכון עבור"
 
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
+
 msgid "System"
 msgstr "מערכת"
 
@@ -801,7 +807,13 @@ msgstr "טמפרטורה"
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr ""
 
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
 msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off during printing"
 msgstr ""
 
 msgid "Total:"
@@ -871,6 +883,13 @@ msgstr[3] "שינויים"
 msgid "dBm"
 msgstr "dBm"
 
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "שעה"
@@ -902,6 +921,19 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#~ msgid "Deselect"
+#~ msgstr "בטל את הבחירה"
+
+#~ msgid "Select"
+#~ msgstr "בחר"
 
 #~ msgid "Bed screw configuration:"
 #~ msgstr "הגדרת בורג מיטה"

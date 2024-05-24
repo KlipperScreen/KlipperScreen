@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-26 23:35-0300\n"
+"POT-Creation-Date: 2024-05-23 23:37-0300\n"
 "PO-Revision-Date: 2024-05-07 02:10+0000\n"
 "Last-Translator: Rui Menezes <ruizivo.menezes@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -199,9 +199,6 @@ msgstr "Deletar Diretório?"
 
 msgid "Delete File?"
 msgstr "Deletar Arquivo?"
-
-msgid "Deselect"
-msgstr "Desselecionar"
 
 msgid "Disable Motors"
 msgstr "Desabilitar Motores"
@@ -498,6 +495,9 @@ msgstr "Medir Y"
 msgid "Medium"
 msgstr "Médio"
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr "Menu"
 
@@ -558,6 +558,9 @@ msgstr "Registro de notificação vazio"
 msgid "Notifications"
 msgstr "Notificações"
 
+msgid "Only for the move panel"
+msgstr ""
+
 #, python-format
 msgid "Outdated by %d"
 msgstr "Desatualizado por %d"
@@ -590,6 +593,9 @@ msgstr "Pinos"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Por favor recompile e grave o microcontrolador."
+
+msgid "Please wait"
+msgstr ""
 
 msgid "Power"
 msgstr "Ligar"
@@ -712,9 +718,6 @@ msgstr "Ajuste de atarraxamento"
 msgid "Screws not used:"
 msgstr "Parafusos não utilizados:"
 
-msgid "Select"
-msgstr "Selecionar"
-
 msgid "Send"
 msgstr "Enviar"
 
@@ -781,6 +784,9 @@ msgstr "Iniciando recuperação para"
 msgid "Starting update for"
 msgstr "Iniciando atualização para"
 
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
+
 msgid "System"
 msgstr "Sistema"
 
@@ -799,8 +805,14 @@ msgstr "Temperatura"
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr "Este painel suporta até 9 parafusos em uma grade 3x3"
 
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
 msgid "Timeout for screen black-out or power-off"
 msgstr "Tempo limite para tela apagar ou desligar"
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr ""
 
 msgid "Total:"
 msgstr "Total:"
@@ -867,6 +879,11 @@ msgstr[1] "comprometimentos"
 msgid "dBm"
 msgstr "dBm"
 
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "hora"
@@ -894,6 +911,17 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#~ msgid "Deselect"
+#~ msgstr "Desselecionar"
+
+#~ msgid "Select"
+#~ msgstr "Selecionar"
 
 #~ msgid "Bed screw configuration:"
 #~ msgstr "Configuração de atarraxamento da Base:"

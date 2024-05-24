@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-26 23:35-0300\n"
+"POT-Creation-Date: 2024-05-23 23:37-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -197,9 +197,6 @@ msgid "Delete Directory?"
 msgstr ""
 
 msgid "Delete File?"
-msgstr ""
-
-msgid "Deselect"
 msgstr ""
 
 msgid "Disable Motors"
@@ -495,6 +492,9 @@ msgstr ""
 msgid "Medium"
 msgstr ""
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr ""
 
@@ -555,6 +555,9 @@ msgstr ""
 msgid "Notifications"
 msgstr ""
 
+msgid "Only for the move panel"
+msgstr ""
+
 #, python-format
 msgid "Outdated by %d"
 msgstr ""
@@ -586,6 +589,9 @@ msgid "Pins"
 msgstr ""
 
 msgid "Please recompile and flash the micro-controller."
+msgstr ""
+
+msgid "Please wait"
 msgstr ""
 
 msgid "Power"
@@ -709,9 +715,6 @@ msgstr ""
 msgid "Screws not used:"
 msgstr ""
 
-msgid "Select"
-msgstr ""
-
 msgid "Send"
 msgstr ""
 
@@ -778,6 +781,9 @@ msgstr ""
 msgid "Starting update for"
 msgstr ""
 
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
+
 msgid "System"
 msgstr ""
 
@@ -796,7 +802,13 @@ msgstr ""
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr ""
 
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
 msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off during printing"
 msgstr ""
 
 msgid "Total:"
@@ -864,6 +876,11 @@ msgstr[1] ""
 msgid "dBm"
 msgstr ""
 
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] ""
@@ -891,3 +908,8 @@ msgstr ""
 
 msgid "mm³/s"
 msgstr ""
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""

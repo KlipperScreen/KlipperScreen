@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-26 23:35-0300\n"
+"POT-Creation-Date: 2024-05-23 23:37-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
@@ -199,9 +199,6 @@ msgstr "刪除資料夾？"
 
 msgid "Delete File?"
 msgstr "刪除檔案？"
-
-msgid "Deselect"
-msgstr "取消選擇"
 
 msgid "Disable Motors"
 msgstr "關閉電機"
@@ -496,6 +493,9 @@ msgstr "測量Y軸"
 msgid "Medium"
 msgstr "中"
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr "選單"
 
@@ -556,6 +556,9 @@ msgstr ""
 msgid "Notifications"
 msgstr ""
 
+msgid "Only for the move panel"
+msgstr ""
+
 #, python-format
 msgid "Outdated by %d"
 msgstr "已過時 %d"
@@ -587,6 +590,9 @@ msgstr "引腳"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "請重新編譯並燒錄微控制器。"
+
+msgid "Please wait"
+msgstr ""
 
 msgid "Power"
 msgstr "電源"
@@ -709,9 +715,6 @@ msgstr "螺絲調整"
 msgid "Screws not used:"
 msgstr ""
 
-msgid "Select"
-msgstr "選擇"
-
 msgid "Send"
 msgstr "發送"
 
@@ -778,6 +781,9 @@ msgstr "開始恢復"
 msgid "Starting update for"
 msgstr "開始更新"
 
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
+
 msgid "System"
 msgstr "系統"
 
@@ -796,7 +802,13 @@ msgstr "溫度"
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr ""
 
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
 msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off during printing"
 msgstr ""
 
 msgid "Total:"
@@ -863,6 +875,10 @@ msgstr[0] "更改"
 msgid "dBm"
 msgstr "dBm"
 
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "小時"
@@ -888,6 +904,16 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+
+#~ msgid "Deselect"
+#~ msgstr "取消選擇"
+
+#~ msgid "Select"
+#~ msgstr "選擇"
 
 #~ msgid "Bed screw configuration:"
 #~ msgstr "熱床螺絲設定："

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-26 23:35-0300\n"
+"POT-Creation-Date: 2024-05-23 23:37-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Mikachu <micah.sh@proton.me>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/klipperscreen/"
@@ -199,9 +199,6 @@ msgstr "Verwijder directory?"
 
 msgid "Delete File?"
 msgstr "Verwijder bestand?"
-
-msgid "Deselect"
-msgstr "Deselecteer"
 
 msgid "Disable Motors"
 msgstr "Motors Uitschakelen"
@@ -498,6 +495,9 @@ msgstr "Meet Y"
 msgid "Medium"
 msgstr "Medium"
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr "Menu"
 
@@ -558,6 +558,9 @@ msgstr "Notificatie log is leeg"
 msgid "Notifications"
 msgstr "Notificaties"
 
+msgid "Only for the move panel"
+msgstr ""
+
 #, python-format
 msgid "Outdated by %d"
 msgstr "Verouderd sinds %d"
@@ -590,6 +593,9 @@ msgstr "Pinnen"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Hercompileer en flash de micro-controller aub."
+
+msgid "Please wait"
+msgstr ""
 
 msgid "Power"
 msgstr "Stroom"
@@ -712,9 +718,6 @@ msgstr "Schroeven Aanpassen"
 msgid "Screws not used:"
 msgstr ""
 
-msgid "Select"
-msgstr "Selecteer"
-
 msgid "Send"
 msgstr "Verstuur"
 
@@ -781,6 +784,9 @@ msgstr "Herstel starten voor"
 msgid "Starting update for"
 msgstr "Update starten voor"
 
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
+
 msgid "System"
 msgstr "Systeem"
 
@@ -799,7 +805,13 @@ msgstr "Temperatuur"
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr ""
 
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
 msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off during printing"
 msgstr ""
 
 msgid "Total:"
@@ -867,6 +879,11 @@ msgstr[1] "commits"
 msgid "dBm"
 msgstr "dBm"
 
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "uur"
@@ -894,6 +911,17 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#~ msgid "Deselect"
+#~ msgstr "Deselecteer"
+
+#~ msgid "Select"
+#~ msgstr "Selecteer"
 
 #~ msgid "Bed screw configuration:"
 #~ msgstr "Bed schroef configuratie:"

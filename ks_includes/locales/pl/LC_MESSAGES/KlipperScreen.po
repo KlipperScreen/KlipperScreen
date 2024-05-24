@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-26 23:35-0300\n"
+"POT-Creation-Date: 2024-05-23 23:37-0300\n"
 "PO-Revision-Date: 2024-04-16 18:02+0000\n"
 "Last-Translator: F1CU <ficu1234@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -196,9 +196,6 @@ msgstr "Usunąć katalog?"
 
 msgid "Delete File?"
 msgstr "Usunąć plik?"
-
-msgid "Deselect"
-msgstr "Odznacz"
 
 msgid "Disable Motors"
 msgstr "Wyłącz silniki"
@@ -495,6 +492,9 @@ msgstr "Pomiar osi Y"
 msgid "Medium"
 msgstr "Średni"
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr "Menu"
 
@@ -555,6 +555,9 @@ msgstr "Dziennik powiadomień jest pusty"
 msgid "Notifications"
 msgstr "Powiadomienia"
 
+msgid "Only for the move panel"
+msgstr ""
+
 #, python-format
 msgid "Outdated by %d"
 msgstr "Nieaktualny o %d"
@@ -588,6 +591,9 @@ msgstr "Piny"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Proszę przekompilować i sflashować mikrokontroler."
+
+msgid "Please wait"
+msgstr ""
 
 msgid "Power"
 msgstr "Zasilanie"
@@ -710,9 +716,6 @@ msgstr "Popraw śruby"
 msgid "Screws not used:"
 msgstr ""
 
-msgid "Select"
-msgstr "Zaznacz"
-
 msgid "Send"
 msgstr "Wyślij"
 
@@ -779,6 +782,9 @@ msgstr "Rozpoczęto przywracanie dla"
 msgid "Starting update for"
 msgstr "Rozpoczęcie aktualizacji dla"
 
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
+
 msgid "System"
 msgstr "System"
 
@@ -797,7 +803,13 @@ msgstr "Temperatura"
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr ""
 
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
 msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off during printing"
 msgstr ""
 
 msgid "Total:"
@@ -866,6 +878,12 @@ msgstr[2] "zatwierdzeń"
 msgid "dBm"
 msgstr "dBm"
 
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "godzina"
@@ -895,6 +913,18 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#~ msgid "Deselect"
+#~ msgstr "Odznacz"
+
+#~ msgid "Select"
+#~ msgstr "Zaznacz"
 
 #~ msgid "Bed screw configuration:"
 #~ msgstr "Konfiguracja śrub stołu:"

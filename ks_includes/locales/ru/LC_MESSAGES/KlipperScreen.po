@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-26 23:35-0300\n"
+"POT-Creation-Date: 2024-05-23 23:37-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Dr_Perry_Coke <dr.perrycoke@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -200,9 +200,6 @@ msgstr "Удалить каталог?"
 
 msgid "Delete File?"
 msgstr "Удалить Файл?"
-
-msgid "Deselect"
-msgstr "Отменить выбор"
 
 msgid "Disable Motors"
 msgstr "Откл. моторы"
@@ -498,6 +495,9 @@ msgstr "Измерьте Y"
 msgid "Medium"
 msgstr "Средний"
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr "Меню"
 
@@ -558,6 +558,9 @@ msgstr "Журнал уведомлений пуст"
 msgid "Notifications"
 msgstr "Уведомления"
 
+msgid "Only for the move panel"
+msgstr ""
+
 #, python-format
 msgid "Outdated by %d"
 msgstr "Устарело на %d"
@@ -591,6 +594,9 @@ msgstr "Пины"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Прошейте заново микроконтроллер."
+
+msgid "Please wait"
+msgstr ""
 
 msgid "Power"
 msgstr "Питание"
@@ -713,9 +719,6 @@ msgstr "Настроить винты"
 msgid "Screws not used:"
 msgstr ""
 
-msgid "Select"
-msgstr "Выбирать"
-
 msgid "Send"
 msgstr "Отправить"
 
@@ -782,6 +785,9 @@ msgstr "Запуск восстановления для"
 msgid "Starting update for"
 msgstr "Запуск обновления для"
 
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
+
 msgid "System"
 msgstr "Система"
 
@@ -800,7 +806,13 @@ msgstr "Tемпература"
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr ""
 
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
 msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off during printing"
 msgstr ""
 
 msgid "Total:"
@@ -870,6 +882,12 @@ msgstr[2] "изменений"
 msgid "dBm"
 msgstr "дБм"
 
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "час"
@@ -899,6 +917,18 @@ msgstr "мм/с²"
 
 msgid "mm³/s"
 msgstr "мм³/с"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#~ msgid "Deselect"
+#~ msgstr "Отменить выбор"
+
+#~ msgid "Select"
+#~ msgstr "Выбирать"
 
 #~ msgid "Bed screw configuration:"
 #~ msgstr "Конфигурация винтов кровати:"

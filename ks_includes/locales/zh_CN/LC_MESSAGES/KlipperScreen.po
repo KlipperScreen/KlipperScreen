@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-26 23:35-0300\n"
+"POT-Creation-Date: 2024-05-23 23:37-0300\n"
 "PO-Revision-Date: 2024-05-14 04:01+0000\n"
 "Last-Translator: Sida Liu <liul8258@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -199,9 +199,6 @@ msgstr "删除文件夹？"
 
 msgid "Delete File?"
 msgstr "删除文件？"
-
-msgid "Deselect"
-msgstr "取消选择"
 
 msgid "Disable Motors"
 msgstr "关闭电机"
@@ -496,6 +493,9 @@ msgstr "测量Y轴"
 msgid "Medium"
 msgstr "中"
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr "菜单"
 
@@ -556,6 +556,9 @@ msgstr "通知日志为空"
 msgid "Notifications"
 msgstr "通知"
 
+msgid "Only for the move panel"
+msgstr ""
+
 #, python-format
 msgid "Outdated by %d"
 msgstr "已落后 %d"
@@ -587,6 +590,9 @@ msgstr "引脚"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "请重新编译并更新微控制器固件。"
+
+msgid "Please wait"
+msgstr ""
 
 msgid "Power"
 msgstr "电源"
@@ -709,9 +715,6 @@ msgstr "螺丝调整"
 msgid "Screws not used:"
 msgstr "没有使用螺丝:"
 
-msgid "Select"
-msgstr "选择"
-
 msgid "Send"
 msgstr "发送"
 
@@ -778,6 +781,9 @@ msgstr "开始恢复"
 msgid "Starting update for"
 msgstr "开始更新"
 
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
+
 msgid "System"
 msgstr "系统"
 
@@ -796,8 +802,14 @@ msgstr "温度"
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr "这个界面支持9个调平螺丝以3x3阵列显示"
 
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
 msgid "Timeout for screen black-out or power-off"
 msgstr "超过倒计时后关闭屏幕"
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr ""
 
 msgid "Total:"
 msgstr "合计："
@@ -863,6 +875,10 @@ msgstr[0] "更改"
 msgid "dBm"
 msgstr "dBm"
 
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "小时"
@@ -888,6 +904,16 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+
+#~ msgid "Deselect"
+#~ msgstr "取消选择"
+
+#~ msgid "Select"
+#~ msgstr "选择"
 
 #~ msgid "Bed screw configuration:"
 #~ msgstr "热床螺丝配置："

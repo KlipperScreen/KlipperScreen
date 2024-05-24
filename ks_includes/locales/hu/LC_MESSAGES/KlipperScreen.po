@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-26 23:35-0300\n"
+"POT-Creation-Date: 2024-05-23 23:37-0300\n"
 "PO-Revision-Date: 2024-04-28 23:23+0000\n"
 "Last-Translator: \"Zs.Antal\" <zsikaiantal@icloud.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -194,9 +194,6 @@ msgstr "Törlöd a könyvtárat?"
 
 msgid "Delete File?"
 msgstr "Törlöd a fájlt?"
-
-msgid "Deselect"
-msgstr "Kijelölés törlése"
 
 msgid "Disable Motors"
 msgstr "Motorok letiltása"
@@ -492,6 +489,9 @@ msgstr "Y mérése"
 msgid "Medium"
 msgstr "Közepes"
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr "Menü"
 
@@ -552,6 +552,9 @@ msgstr "Értesítési napló üres"
 msgid "Notifications"
 msgstr "Értesítések"
 
+msgid "Only for the move panel"
+msgstr ""
+
 #, python-format
 msgid "Outdated by %d"
 msgstr "%d által elavult"
@@ -584,6 +587,9 @@ msgstr "Tűk"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Fordítsd újra és frissítsd a mikrovezérlőt."
+
+msgid "Please wait"
+msgstr ""
 
 msgid "Power"
 msgstr "Bekapcsolás"
@@ -706,9 +712,6 @@ msgstr "Csavarok beállítása"
 msgid "Screws not used:"
 msgstr "Nem használt csavarok:"
 
-msgid "Select"
-msgstr "Kijelölés"
-
 msgid "Send"
 msgstr "Küldés"
 
@@ -775,6 +778,9 @@ msgstr "Helyreállítás megkezdése"
 msgid "Starting update for"
 msgstr "Frissítés indítása"
 
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
+
 msgid "System"
 msgstr "Rendszer"
 
@@ -793,8 +799,14 @@ msgstr "Hőfok"
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr "Ez a panel akár 9 csavart is elbír egy 3x3-as rácsban"
 
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
 msgid "Timeout for screen black-out or power-off"
 msgstr "A képernyő elsötétítés / kikapcsolás időkorlátja"
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr ""
 
 msgid "Total:"
 msgstr "Teljes:"
@@ -861,6 +873,11 @@ msgstr[1] "ajánlások"
 msgid "dBm"
 msgstr "dBm"
 
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "óra"
@@ -888,6 +905,17 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#~ msgid "Deselect"
+#~ msgstr "Kijelölés törlése"
+
+#~ msgid "Select"
+#~ msgstr "Kijelölés"
 
 #~ msgid "Bed screw configuration:"
 #~ msgstr "Az ágycsavar konfigurációja:"

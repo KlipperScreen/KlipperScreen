@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-26 23:35-0300\n"
+"POT-Creation-Date: 2024-05-23 23:37-0300\n"
 "PO-Revision-Date: 2024-05-09 23:16+0300\n"
 "Last-Translator: Makers Lab <makerslab.tr@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -199,9 +199,6 @@ msgstr "Dizini Sil?"
 
 msgid "Delete File?"
 msgstr "Dosyayı Sil?"
-
-msgid "Deselect"
-msgstr "Seçimi kaldır"
 
 msgid "Disable Motors"
 msgstr "Motorları Devre Dışı Bırak"
@@ -496,6 +493,9 @@ msgstr "Y Ölçüle"
 msgid "Medium"
 msgstr "Orta"
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr "Menü"
 
@@ -556,6 +556,9 @@ msgstr "Bildirim geçmişi boş"
 msgid "Notifications"
 msgstr "Bildirimler"
 
+msgid "Only for the move panel"
+msgstr ""
+
 #, python-format
 msgid "Outdated by %d"
 msgstr "Güncelliğini yitiren %d"
@@ -588,6 +591,9 @@ msgstr "Pinler"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Lütfen mikro denetleyiciyi yeniden derleyin ve flaşlayın."
+
+msgid "Please wait"
+msgstr ""
 
 msgid "Power"
 msgstr "Güç"
@@ -710,9 +716,6 @@ msgstr "Vida Ayarı"
 msgid "Screws not used:"
 msgstr "Kullanılmayan vidalar:"
 
-msgid "Select"
-msgstr "Seç"
-
 msgid "Send"
 msgstr "Gönder"
 
@@ -779,6 +782,9 @@ msgstr "Kurtarma başlatılıyor"
 msgid "Starting update for"
 msgstr "Güncelleme başlatılıyor"
 
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
+
 msgid "System"
 msgstr "Sistem"
 
@@ -797,8 +803,14 @@ msgstr "Sıcaklık"
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr "Bu panel 3x3 Izgarada en fazla 9 vidayı destekler"
 
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
 msgid "Timeout for screen black-out or power-off"
 msgstr "Ekranın kararması veya kapanması için zaman aşımı"
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr ""
 
 msgid "Total:"
 msgstr "Toplam:"
@@ -865,6 +877,11 @@ msgstr[1] "değişiklikler"
 msgid "dBm"
 msgstr "dBm"
 
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "saat"
@@ -892,6 +909,17 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#~ msgid "Deselect"
+#~ msgstr "Seçimi kaldır"
+
+#~ msgid "Select"
+#~ msgstr "Seç"
 
 #~ msgid "Bed screw configuration:"
 #~ msgstr "Tabla vida yapılandırması:"
