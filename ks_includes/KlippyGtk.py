@@ -38,6 +38,7 @@ class KlippyGtk:
         self.font_size_type = screen._config.get_main_config().get("font_size", "medium")
         self.width = screen.width
         self.height = screen.height
+        self.ultra_tall = (self.height / self.width) >= 3
         self.font_ratio = [33, 49] if self.screen.vertical_mode else [43, 29]
         self.font_size = min(self.width / self.font_ratio[0], self.height / self.font_ratio[1])
         self.img_scale = self.font_size * 2
@@ -76,7 +77,7 @@ class KlippyGtk:
             self.content_height = self.height - self.titlebar_height
 
         self.keyboard_height = self.content_height * 0.5
-        if (self.height / self.width) >= 3:  # Ultra-tall
+        if self.ultra_tall:
             self.keyboard_height = self.keyboard_height * 0.5
 
         self.color_list = {}  # This is set by screen.py init_style()
