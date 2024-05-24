@@ -169,6 +169,15 @@ class ScreenPanel:
                 return f"{(1024 * size / unit):.1f} {suffix}"
 
     @staticmethod
+    def format_speed(bitrate):
+        bitrate = float(bitrate)
+        suffixes = ["Kbits/s", "Mbits/s", "Gbits/s", "Tbits/s", "Pbits/s", "Ebits/s", "Zbits/s", "Ybits/s"]
+        for i, suffix in enumerate(suffixes, start=1):
+            unit = 1000 ** i
+            if bitrate < unit:
+                return f"{(1000 * bitrate / unit):.0f} {suffix}"
+
+    @staticmethod
     def prettify(name: str):
         name = name.replace("_", " ")
         if name.islower():
