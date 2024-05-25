@@ -66,8 +66,6 @@ class Panel(ScreenPanel):
             self.labels['main_box'].pack_start(sbox, False, False, 5)
             GLib.idle_add(self.load_networks)
             scroll.add(self.network_list)
-
-            self.sdbus_nm.add_callback("popup", self.popup_callback)
         else:
             self._screen.show_popup_message(_("No wireless interface has been found"), level=2)
             self.labels['networkinfo'] = Gtk.Label()
@@ -89,7 +87,6 @@ class Panel(ScreenPanel):
 
     def add_network(self, bssid):
         if bssid in self.network_rows:
-            logging.info(f"{bssid} already in list")
             return
 
         net = next(net for net in self.sdbus_nm.get_networks() if bssid == net['BSSID'])
@@ -169,11 +166,13 @@ class Panel(ScreenPanel):
     def add_new_network(self, widget, ssid):
         self._screen.remove_keyboard()
         result = self.sdbus_nm.add_network(ssid, self.labels['network_psk'].get_text())
-        self.close_add_network()
-        if result:
-            self.connect_network(widget, ssid, showadd=False)
+        if "error" in result:
+            self._screen.show_popup_message(result["message"])
+            if result["error"] == "psk_invalid":
+                return
         else:
-            self._screen.show_popup_message(_("Invalid password"))
+            self.connect_network(widget, ssid, showadd=False)
+        self.close_add_network()
 
     def back(self):
         if self.show_add:
@@ -203,7 +202,10 @@ class Panel(ScreenPanel):
         bssid = self.sdbus_nm.get_bssid_from_ssid(ssid)
         if bssid and bssid in self.network_rows:
             self.remove_network_from_list(bssid)
-        self.sdbus_nm.connect(ssid)
+        msg = f"{ssid}\n" + _("Starting WiFi Association")
+        self._screen.show_popup_message(msg, 1)
+        result = self.sdbus_nm.connect(ssid)
+        logging.debug(result)
         self.update_all_networks()
         self.activate()
 

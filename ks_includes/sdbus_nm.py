@@ -15,6 +15,7 @@ from sdbus_block.networkmanager import (
     IPv4Config,
     ActiveConnection,
     enums,
+    exceptions,
 )
 from sdbus import sd_bus_open_system, set_default_bus
 from gi.repository import GLib
@@ -81,9 +82,6 @@ class SdbusNm:
         self.system_bus = sd_bus_open_system()  # We need system bus
         set_default_bus(self.system_bus)
         self.nm = NetworkManager()
-        self._callbacks = {
-            "popup": [],
-        }
         if self.get_wireless_interfaces():
             self.wlan_device = self.get_wireless_interfaces()[0]
             self.wifi = True
@@ -177,8 +175,7 @@ class SdbusNm:
         return self.get_connected_ap().hw_address if self.get_connected_ap() is not None else None
 
     def add_network(self, ssid, psk):
-        existing_network = NetworkManagerSettings().get_connections_by_id(ssid)
-        if existing_network:
+        if existing_network := NetworkManagerSettings().get_connections_by_id(ssid):
             for network in existing_network:
                 self.delete_connection_path(network)
 
@@ -204,14 +201,14 @@ class SdbusNm:
         }
 
         try:
-            msg = f"{ssid}\n" + _("Starting WiFi Association")
-            self.callback("popup", msg, 1)
             NetworkManagerSettings().add_connection(properties)
-            return True
+            return {"status": "success"}
+        except exceptions.NmConnectionInvalidPropertyError:
+            logging.exception("Invalid property")
+            return {"error": "psk_invalid", "message": _("Invalid password")}
         except Exception as e:
-            logging.error(f"{e}")
-            self.callback("popup", f"Error: {e}")
-        return False
+            logging.exception("Couldn't add network")
+            return {"error": "unknown", "message": _("Couldn't add network") + f"\n{e}"}
 
     def disconnect_network(self):
         self.wlan_device.disconnect()
@@ -230,21 +227,9 @@ class SdbusNm:
 
     def connect(self, ssid):
         connection = NetworkManagerSettings().get_connections_by_id(ssid)
-        if not connection:
-            self.callback("popup", f"{ssid} {connection}")
-            return
-        msg = f"{ssid}:\n" + _("Starting WiFi Association")
-        self.callback("popup", msg, 1)
-        self.nm.activate_connection(connection[0])
-
-    def add_callback(self, name, callback):
-        if name in self._callbacks and callback not in self._callbacks[name]:
-            self._callbacks[name].append(callback)
-
-    def callback(self, cb_type, *args):
-        if cb_type in self._callbacks:
-            for cb in self._callbacks[cb_type]:
-                GLib.idle_add(cb, *args)
+        if connection:
+            self.nm.activate_connection(connection[0])
+        return connection
 
     def toggle_wifi(self, enable):
         self.nm.wireless_enabled = enable
