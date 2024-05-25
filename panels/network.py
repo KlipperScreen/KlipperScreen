@@ -17,7 +17,20 @@ class Panel(ScreenPanel):
         self.network_list = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, hexpand=True, vexpand=True)
         self.network_rows = {}
         self.networks = {}
-        self.sdbus_nm = SdbusNm()
+        try:
+            self.sdbus_nm = SdbusNm()
+        except Exception as e:
+            logging.exception("Failed to initialize")
+            self.sdbus_nm = None
+            self.content.add(
+                Gtk.Label(
+                    label=_("Failed to initialize sdbus") + f"\n{e}",
+                    wrap=True,
+                    wrap_mode=Pango.WrapMode.WORD_CHAR,
+                )
+            )
+            self._screen.panels_reinit.append(self._screen._cur_panels[-1])
+            return
         self.wifi_signal_icons = {
             'excellent': self._gtk.PixbufFromIcon('wifi_excellent'),
             'good': self._gtk.PixbufFromIcon('wifi_good'),
@@ -322,8 +335,10 @@ class Panel(ScreenPanel):
         self.activate()
 
     def activate(self):
+        if self.sdbus_nm is None:
+            return
         if self.update_timeout is None:
-            if self.sdbus_nm is not None and self.sdbus_nm.wifi:
+            if self.sdbus_nm.wifi:
                 if self.reload_button.get_sensitive():
                     self._gtk.Button_busy(self.reload_button, True)
                     self.sdbus_nm.rescan()

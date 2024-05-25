@@ -82,6 +82,8 @@ class SdbusNm:
 
     def __init__(self):
         self.system_bus = sd_bus_open_system()  # We need system bus
+        if self.system_bus is None:
+            return None
         set_default_bus(self.system_bus)
         self.nm = NetworkManager()
         if self.get_wireless_interfaces():
