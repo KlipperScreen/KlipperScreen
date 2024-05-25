@@ -52,6 +52,8 @@ def get_encryption(flags):
         encryption += "WPA-PSK "
     if flags & NM_802_11_AP_SEC_KEY_MGMT_802_1X:
         encryption += "802.1x "
+    if not encryption:
+        encryption += "Open"
     return encryption
 
 
@@ -132,6 +134,11 @@ class SdbusNm:
 
     def is_known(self, ssid):
         return any(net['SSID'] == ssid for net in self.get_known_networks())
+
+    def is_open(self, ssid):
+        for network in self.get_networks():
+            if network["SSID"] == ssid:
+                return network["security"] == "Open"
 
     def get_ip_address(self):
         active_connection_path = self.nm.primary_connection

@@ -195,7 +195,7 @@ class Panel(ScreenPanel):
 
     def connect_network(self, widget, ssid, showadd=True):
         self.deactivate()
-        if showadd and not self.sdbus_nm.is_known(ssid):
+        if showadd and not self.sdbus_nm.is_known(ssid) and not self.sdbus_nm.is_open(ssid):
             self.show_add_network(widget, ssid)
             self.activate()
             return
