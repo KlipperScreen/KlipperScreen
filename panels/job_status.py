@@ -780,6 +780,8 @@ class Panel(ScreenPanel):
         self.update_file_metadata()
 
     def animate_label(self):
+        if not self.filename_label:
+            return False
         ellipsized = self.labels['file'].get_layout().is_ellipsized()
         if ellipsized:
             self.filename_label['current'] = self.filename_label['current'][2:]
