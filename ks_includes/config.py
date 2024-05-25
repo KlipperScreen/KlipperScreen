@@ -52,7 +52,7 @@ class KlipperScreenConfig:
             self.config.read(self.default_config_path)
             includes = [i[8:] for i in self.config.sections() if i.startswith("include ")]
             for include in includes:
-                self._include_config("/".join(self.default_config_path.split("/")[:-1]), include)
+                self._include_config("/".join(self.default_config_path.split("/")[:-1]), include, log=False)
             # In case a user altered defaults.conf
             self.validate_config(self.config)
             if self.config_path != self.default_config_path:
@@ -384,7 +384,7 @@ class KlipperScreenConfig:
                         if k.startswith(i):
                             del self.config[k]
 
-    def _include_config(self, directory, filepath):
+    def _include_config(self, directory, filepath, log=True):
         full_path = filepath if filepath[0] == "/" else f"{directory}/{filepath}"
         parse_files = []
 
@@ -392,7 +392,7 @@ class KlipperScreenConfig:
             parent_dir = "/".join(full_path.split("/")[:-1])
             file = full_path.split("/")[-1]
             if not os.path.exists(parent_dir):
-                logging.info(f"Config Error: Directory {parent_dir} does not exist")
+                logging.error(f"Config Error: Directory {parent_dir} does not exist")
                 return
             files = os.listdir(parent_dir)
             regex = f"^{file.replace('*', '.*')}$"
@@ -400,7 +400,7 @@ class KlipperScreenConfig:
 
         else:
             if not os.path.exists(os.path.join(full_path)):
-                logging.info(f"Config Error: {full_path} does not exist")
+                logging.error(f"Config Error: {full_path} does not exist")
                 return
             parse_files.append(full_path)
 
@@ -412,7 +412,8 @@ class KlipperScreenConfig:
             for include in includes:
                 self._include_config("/".join(full_path.split("/")[:-1]), include)
             self.exclude_from_config(config)
-            self.log_config(config)
+            if log:
+                self.log_config(config)
             with open(file, 'r') as f:
                 string = f.read()
                 if self.validate_config(config, string=string):

@@ -36,7 +36,6 @@ class KlippyRest:
     def _do_request(self, method, request_method, data=None, json=None, json_response=True, timeout=3):
         url = f"{self.endpoint}/{method}"
         headers = {"x-api-key": self.api_key} if self.api_key else {}
-        logging.debug(f"Sending {request_method} to {url}")
         try:
             callee = getattr(requests, request_method)
             response = callee(url, json=json, data=data, headers=headers, timeout=timeout)

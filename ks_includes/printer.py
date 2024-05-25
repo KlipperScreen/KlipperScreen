@@ -106,7 +106,6 @@ class Printer:
         logging.info(f"# Leds: {self.ledcount}")
 
     def stop_tempstore_updates(self):
-        logging.info("Stopping tempstore")
         if self.store_timeout is not None:
             GLib.source_remove(self.store_timeout)
             self.store_timeout = None

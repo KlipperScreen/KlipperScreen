@@ -214,7 +214,6 @@ class MoonrakerApi:
 
     def object_subscription(self, updates):
         logging.debug("Sending printer.objects.subscribe")
-        logging.debug(updates)
         return self._ws.send_method(
             "printer.objects.subscribe",
             updates
