@@ -92,7 +92,7 @@ class KlipperScreenConfig:
             self.errors.append(msg)
 
         printers = [i for i in self.config.sections() if i.startswith("printer ")]
-        if len(printers) == 0:
+        if not printers:
             printers.append("Printer Printer")
         self.printers = [
             {printer[8:]: {

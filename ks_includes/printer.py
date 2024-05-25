@@ -46,61 +46,56 @@ class Printer:
         self.system_info.clear()
 
         for x in self.config.keys():
-            if x[:8] == "extruder":
+            # Support for hiding devices by name
+            section, _, name = x.partition(" ")
+            if name.startswith("_"):
+                continue
+
+            if section.startswith("extruder"):
                 self.tools.append(x)
-                self.tools = sorted(self.tools)
                 self.extrudercount += 1
-                if x.startswith('extruder_stepper'):
+                if name.startswith("extruder_stepper"):
                     continue
-                self.data[x] = {
-                    "temperature": 0,
-                    "target": 0
-                }
-            if x == 'heater_bed' \
-                    or x.startswith('heater_generic ') \
-                    or x.startswith('temperature_sensor ') \
-                    or x.startswith('temperature_fan '):
+                self.data[x] = {"temperature": 0, "target": 0}
+            elif section in (
+                "heater_bed",
+                "heater_generic",
+                "temperature_sensor",
+                "temperature_fan"
+            ):
                 self.data[x] = {"temperature": 0}
-                if not x.startswith('temperature_sensor '):
+                if section != "temperature_sensor":
                     self.data[x]["target"] = 0
-                # Support for hiding devices by name
-                name = x.split()[1] if len(x.split()) > 1 else x
-                if not name.startswith("_"):
-                    self.tempdevcount += 1
-            if x == 'fan' \
-                    or x.startswith('controller_fan ') \
-                    or x.startswith('heater_fan ') \
-                    or x.startswith('fan_generic '):
-                # Support for hiding devices by name
-                name = x.split()[1] if len(x.split()) > 1 else x
-                if not name.startswith("_"):
-                    self.fancount += 1
-            if x.startswith('output_pin ') and not x.split()[1].startswith("_"):
+                self.tempdevcount += 1
+            elif section in (
+                "fan",
+                "controller_fan",
+                "heater_fan",
+                "fan_generic"
+            ):
+                self.fancount += 1
+            elif section == "output_pin":
                 self.output_pin_count += 1
-            if x.startswith('pwm_tool ') and not x.split()[1].startswith("_"):
+            elif section == "pwm_tool":
                 self.pwm_tools_count += 1
-            if x.startswith('bed_mesh '):
-                try:
-                    r = self.config[x]
-                    r['x_count'] = int(r['x_count'])
-                    r['y_count'] = int(r['y_count'])
-                    r['max_x'] = float(r['max_x'])
-                    r['min_x'] = float(r['min_x'])
-                    r['max_y'] = float(r['max_y'])
-                    r['min_y'] = float(r['min_y'])
-                    r['points'] = [[float(j.strip()) for j in i.split(",")] for i in r['points'].strip().split("\n")]
-                except KeyError:
-                    logging.debug(f"Couldn't load mesh {x}: {self.config[x]}")
-            if x.startswith('led') \
-                    or x.startswith('neopixel ') \
-                    or x.startswith('dotstar ') \
-                    or x.startswith('pca9533 ') \
-                    or x.startswith('pca9632 '):
-                name = x.split()[1] if len(x.split()) > 1 else x
-                if not name.startswith("_"):
-                    self.ledcount += 1
+            elif section == "bed_mesh":
+                self.process_bed_mesh(x)
+            elif section in (
+                "led",
+                "neopixel",
+                "dotstar",
+                "pca9533",
+                "pca9632"
+            ):
+                self.ledcount += 1
+
+        self.tools = sorted(self.tools)
+
+        self.log_counts(printer_info)
+
         self.process_update(data)
 
+    def log_counts(self, printer_info):
         logging.info(f"Klipper version: {printer_info['software_version']}")
         logging.info(f"# Extruders: {self.extrudercount}")
         logging.info(f"# Temperature devices: {self.tempdevcount}")
@@ -108,6 +103,19 @@ class Printer:
         logging.info(f"# Output pins: {self.output_pin_count}")
         logging.info(f"# PWM tools: {self.pwm_tools_count}")
         logging.info(f"# Leds: {self.ledcount}")
+
+    def process_bed_mesh(self, x):
+        try:
+            r = self.config[x]
+            r['x_count'] = int(r['x_count'])
+            r['y_count'] = int(r['y_count'])
+            r['max_x'] = float(r['max_x'])
+            r['min_x'] = float(r['min_x'])
+            r['max_y'] = float(r['max_y'])
+            r['min_y'] = float(r['min_y'])
+            r['points'] = [[float(j.strip()) for j in i.split(",")] for i in r['points'].strip().split("\n")]
+        except KeyError:
+            logging.debug(f"Couldn't load mesh {x}: {self.config[x]}")
 
     def stop_tempstore_updates(self):
         if self.store_timeout is not None:
@@ -259,7 +267,7 @@ class Printer:
                 "pwm_tools": {"count": self.pwm_tools_count},
                 "gcode_macros": {"count": len(self.get_gcode_macros()), "list": self.get_gcode_macros()},
                 "leds": {"count": self.ledcount},
-                "config_sections": [section for section in self.config.keys()],
+                "config_sections": list(self.config.keys()),
             }
         }
 
