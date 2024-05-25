@@ -162,8 +162,8 @@ combobox arrow:disabled {
 -gtk-icon-source: None;
 }
 
-combobox cellview {
-    padding: 0.5em;
+cellview {
+    padding: 0.5em 0.25em 0.5em 0;
 }
 
 entry {
@@ -630,3 +630,6 @@ trough progress {
     border-bottom: .4em solid @color1;
 }
 
+flowboxchild {
+    padding: 0;
+}
