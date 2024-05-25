@@ -37,6 +37,7 @@ class Printer:
         self.fancount = 0
         self.ledcount = 0
         self.output_pin_count = 0
+        self.pwm_tools_count = 0
         self.tempstore.clear()
         self.tempstore_size = 1200
         self.available_commands.clear()
@@ -76,6 +77,8 @@ class Printer:
                     self.fancount += 1
             if x.startswith('output_pin ') and not x.split()[1].startswith("_"):
                 self.output_pin_count += 1
+            if x.startswith('pwm_tool ') and not x.split()[1].startswith("_"):
+                self.pwm_tools_count += 1
             if x.startswith('bed_mesh '):
                 try:
                     r = self.config[x]
@@ -103,6 +106,7 @@ class Printer:
         logging.info(f"# Temperature devices: {self.tempdevcount}")
         logging.info(f"# Fans: {self.fancount}")
         logging.info(f"# Output pins: {self.output_pin_count}")
+        logging.info(f"# PWM tools: {self.pwm_tools_count}")
         logging.info(f"# Leds: {self.ledcount}")
 
     def stop_tempstore_updates(self):
@@ -252,6 +256,7 @@ class Printer:
                 "temperature_devices": {"count": self.tempdevcount},
                 "fans": {"count": self.fancount},
                 "output_pins": {"count": self.output_pin_count},
+                "pwm_tools": {"count": self.pwm_tools_count},
                 "gcode_macros": {"count": len(self.get_gcode_macros()), "list": self.get_gcode_macros()},
                 "leds": {"count": self.ledcount},
                 "config_sections": [section for section in self.config.keys()],
