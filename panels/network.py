@@ -222,8 +222,6 @@ class Panel(ScreenPanel):
         bssid = self.sdbus_nm.get_bssid_from_ssid(ssid)
         if bssid and bssid in self.network_rows:
             self.remove_network_from_list(bssid)
-        msg = f"{ssid}\n" + _("Starting WiFi Association")
-        self._screen.show_popup_message(msg, 1)
         result = self.sdbus_nm.connect(ssid)
         logging.debug(result)
         self.update_all_networks()
