@@ -222,8 +222,7 @@ class Panel(ScreenPanel):
         if bssid and bssid in self.network_rows:
             self.remove_network_from_list(bssid)
         self.sdbus_nm.connect(ssid)
-        self.update_all_networks()
-        self.activate()
+        self.reload_networks()
 
     def remove_network_from_list(self, bssid):
         if bssid not in self.network_rows:
