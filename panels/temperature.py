@@ -25,7 +25,7 @@ class Panel(ScreenPanel):
         self.h = self.f = 0
         self.tempdeltas = ["1", "5", "10", "25"]
         self.tempdelta = self.tempdeltas[-2]
-        self.show_preheat = self._printer.state in ("printing", "paused")
+        self.show_preheat = self._printer.state not in ("printing", "paused")
         self.preheat_options = self._screen._config.get_preheat_options()
         self.grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         self._gtk.reset_temp_color()
