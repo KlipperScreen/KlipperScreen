@@ -81,7 +81,6 @@ def WifiChannels(freq: str):
 class SdbusNm:
 
     def __init__(self, popup_callback):
-        self.insufficient_privileges = False
         self.ensure_nm_running()
         self.system_bus = sd_bus_open_system()  # We need system bus
         if self.system_bus is None:
@@ -214,22 +213,11 @@ class SdbusNm:
         )
 
     def add_network(self, ssid, psk):
-        if self.insufficient_privileges:
-            return {"error": "insufficient_privileges", "message": _("Insufficient privileges")}
-
         security_type = self.get_security_type(ssid)
         if security_type is None:
             return {"error": "network_not_found", "message": _("Network not found")}
 
-        existing_networks = NetworkManagerSettings().list_connections()
-        for connection_path in existing_networks:
-            connection_settings = NetworkConnectionSettings(connection_path).get_settings()
-            if (
-                connection_settings.get('802-11-wireless') and
-                connection_settings['802-11-wireless'].get('ssid') and
-                connection_settings['802-11-wireless']['ssid'][1].decode() == ssid
-            ):
-                self.delete_connection_path(connection_path)
+        self.delete_network(ssid)
 
         properties: NetworkManagerConnectionProperties = {
             "connection": {
@@ -268,7 +256,6 @@ class SdbusNm:
             NetworkManagerSettings().add_connection(properties)
             return {"status": "success"}
         except exceptions.NmSettingsPermissionDeniedError:
-            self.insufficient_privileges = True
             logging.exception("Insufficient privileges")
             return {"error": "insufficient_privileges", "message": _("Insufficient privileges")}
         except exceptions.NmConnectionInvalidPropertyError:
@@ -282,13 +269,15 @@ class SdbusNm:
         self.wlan_device.disconnect()
 
     def delete_network(self, ssid):
-        connection = self.get_connection_by_ssid(ssid)
-        for path in connection:
-            self.delete_connection_path(path)
+        self.delete_connection_path(self.get_connection_by_ssid(ssid))
 
-    @staticmethod
-    def delete_connection_path(path):
-        NetworkConnectionSettings(path).delete()
+    def delete_connection_path(self, path):
+        try:
+            NetworkConnectionSettings(path).delete()
+            logging.info(f"Deleted connection path: {path}")
+        except Exception as e:
+            logging.exception(f"Failed to delete connection path: {path} - {e}")
+            return {"error": "deletion_failed", "message": _("Failed to delete connection") + f"\n{e}"}
 
     def rescan(self):
         return self.wlan_device.request_scan({})
@@ -306,11 +295,10 @@ class SdbusNm:
         return None
 
     def connect(self, ssid):
-        connections = NetworkManagerSettings().list_connections()
-
         if target_connection := self.get_connection_by_ssid(ssid):
             self.popup(f"{ssid}\n{_('Starting WiFi Association')}", 1)
             try:
+                self.wlan_device.disconnect()
                 active_connection = self.nm.activate_connection(target_connection)
                 self.monitor_connection_status(active_connection)
                 return target_connection

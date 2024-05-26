@@ -208,22 +208,20 @@ class Panel(ScreenPanel):
 
     def connect_network(self, widget, ssid, showadd=True):
         self.deactivate()
-        if self.sdbus_nm.is_open(ssid):
-            result = self.sdbus_nm.add_network(ssid, '')
-            if "error" in result:
-                self._screen.show_popup_message(result["message"])
-            else:
-                self.connect_network(widget, ssid, showadd=False)
-            return
         if showadd and not self.sdbus_nm.is_known(ssid):
-            self.show_add_network(widget, ssid)
+            if self.sdbus_nm.is_open(ssid):
+                logging.debug("Network is Open do not show psk")
+                result = self.sdbus_nm.add_network(ssid, '')
+                if "error" in result:
+                    self._screen.show_popup_message(result["message"])
+            else:
+                self.show_add_network(widget, ssid)
             self.activate()
             return
         bssid = self.sdbus_nm.get_bssid_from_ssid(ssid)
         if bssid and bssid in self.network_rows:
             self.remove_network_from_list(bssid)
-        result = self.sdbus_nm.connect(ssid)
-        logging.debug(result)
+        self.sdbus_nm.connect(ssid)
         self.update_all_networks()
         self.activate()
 
@@ -246,7 +244,7 @@ class Panel(ScreenPanel):
         if "add_network" in self.labels:
             del self.labels['add_network']
 
-        label = Gtk.Label(label=_("PSK for") + ' ssid', hexpand=False)
+        label = Gtk.Label(label=_("PSK for") + f' {ssid}', hexpand=False)
         self.labels['network_psk'] = Gtk.Entry(hexpand=True)
         self.labels['network_psk'].connect("activate", self.add_new_network, ssid)
         self.labels['network_psk'].connect("focus-in-event", self._screen.show_keyboard)
