@@ -343,8 +343,8 @@ class KlipperScreen(Gtk.Window):
         self.notification_log.append(log_entry)
         self.process_update("notify_log", log_entry)
 
-    def show_popup_message(self, message, level=3):
-        if (datetime.now() - self.last_popup_time).seconds < 1:
+    def show_popup_message(self, message, level=3, from_ws=False):
+        if (datetime.now() - self.last_popup_time).seconds < 1 and from_ws:
             return
         self.last_popup_time = datetime.now()
         self.close_screensaver()
@@ -794,7 +794,7 @@ class KlipperScreen(Gtk.Window):
         elif action == "notify_update_response":
             if 'message' in data and 'Error' in data['message']:
                 logging.error(f"{action}:{data['message']}")
-                self.show_popup_message(data['message'], 3)
+                self.show_popup_message(data['message'], 3, from_ws=True)
                 if "KlipperScreen" in data['message']:
                     self.restart_ks()
         elif action == "notify_power_changed":
@@ -813,12 +813,12 @@ class KlipperScreen(Gtk.Window):
                         return
                     self.prompt.decode(action)
                 elif data.startswith("echo: "):
-                    self.show_popup_message(data[6:], 1)
+                    self.show_popup_message(data[6:], 1, from_ws=True)
                 elif data.startswith("!! "):
-                    self.show_popup_message(data[3:], 3)
+                    self.show_popup_message(data[3:], 3, from_ws=True)
                 elif "unknown" in data.lower() and \
                         not ("TESTZ" in data or "MEASURE_AXES_NOISE" in data or "ACCELEROMETER_QUERY" in data):
-                    self.show_popup_message(data)
+                    self.show_popup_message(data, from_ws=True)
                 elif "SAVE_CONFIG" in data and self.printer.state == "ready":
                     script = {"script": "SAVE_CONFIG"}
                     self._confirm_send_action(

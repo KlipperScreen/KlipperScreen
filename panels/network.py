@@ -18,7 +18,7 @@ class Panel(ScreenPanel):
         self.network_rows = {}
         self.networks = {}
         try:
-            self.sdbus_nm = SdbusNm()
+            self.sdbus_nm = SdbusNm(self.popup_callback)
         except Exception as e:
             logging.exception("Failed to initialize")
             self.sdbus_nm = None
@@ -208,7 +208,14 @@ class Panel(ScreenPanel):
 
     def connect_network(self, widget, ssid, showadd=True):
         self.deactivate()
-        if showadd and not self.sdbus_nm.is_known(ssid) and not self.sdbus_nm.is_open(ssid):
+        if self.sdbus_nm.is_open(ssid):
+            result = self.sdbus_nm.add_network(ssid, '')
+            if "error" in result:
+                self._screen.show_popup_message(result["message"])
+            else:
+                self.connect_network(widget, ssid, showadd=False)
+            return
+        if showadd and not self.sdbus_nm.is_known(ssid):
             self.show_add_network(widget, ssid)
             self.activate()
             return

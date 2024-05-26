@@ -203,6 +203,12 @@ create_policy()
     sudo tee ${RULE_FILE} > /dev/null << EOF
 // Allow KlipperScreen to reboot, shutdown, etc
 polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.NetworkManager.settings.modify.system" &&
+        subject.isInGroup("network")) {
+        return polkit.Result.YES;
+    }
+});
+polkit.addRule(function(action, subject) {
     if ((action.id == "org.freedesktop.login1.power-off" ||
          action.id == "org.freedesktop.login1.power-off-multiple-sessions" ||
          action.id == "org.freedesktop.login1.reboot" ||
