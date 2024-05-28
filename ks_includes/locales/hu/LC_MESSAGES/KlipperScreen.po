@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-23 23:37-0300\n"
-"PO-Revision-Date: 2024-04-28 23:23+0000\n"
+"PO-Revision-Date: 2024-05-27 14:12+0000\n"
 "Last-Translator: \"Zs.Antal\" <zsikaiantal@icloud.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/hu/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5.1\n"
+"X-Generator: Weblate 5.6-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -490,7 +490,7 @@ msgid "Medium"
 msgstr "Közepes"
 
 msgid "Memory"
-msgstr ""
+msgstr "Memória"
 
 msgid "Menu"
 msgstr "Menü"
@@ -553,7 +553,7 @@ msgid "Notifications"
 msgstr "Értesítések"
 
 msgid "Only for the move panel"
-msgstr ""
+msgstr "Csak a mozgatópanelhez"
 
 #, python-format
 msgid "Outdated by %d"
@@ -589,7 +589,7 @@ msgid "Please recompile and flash the micro-controller."
 msgstr "Fordítsd újra és frissítsd a mikrovezérlőt."
 
 msgid "Please wait"
-msgstr ""
+msgstr "Kérlek várj"
 
 msgid "Power"
 msgstr "Bekapcsolás"
@@ -780,6 +780,7 @@ msgstr "Frissítés indítása"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
 msgstr ""
+"Felcseréli a gombokat, ha egymáson vannak, más panelekre is hatással van"
 
 msgid "System"
 msgstr "Rendszer"
@@ -800,13 +801,14 @@ msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr "Ez a panel akár 9 csavart is elbír egy 3x3-as rácsban"
 
 msgid "This will affect screw positions and mesh graph"
-msgstr ""
+msgstr "Ez befolyásolja a csavarok helyzetét és a háló grafikonját"
 
 msgid "Timeout for screen black-out or power-off"
 msgstr "A képernyő elsötétítés / kikapcsolás időkorlátja"
 
 msgid "Timeout for screen black-out or power-off during printing"
 msgstr ""
+"Időkorlát a képernyő elsötétítéséhez vagy a nyomtatás közbeni kikapcsoláshoz"
 
 msgid "Total:"
 msgstr "Teljes:"
@@ -875,8 +877,8 @@ msgstr "dBm"
 
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "nap"
+msgstr[1] "napok"
 
 msgid "hour"
 msgid_plural "hours"
@@ -908,8 +910,8 @@ msgstr "mm³/s"
 
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "másodperc"
+msgstr[1] "másodpercek"
 
 #~ msgid "Deselect"
 #~ msgstr "Kijelölés törlése"

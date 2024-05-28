@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-23 23:37-0300\n"
-"PO-Revision-Date: 2024-05-06 09:07+0000\n"
+"PO-Revision-Date: 2024-05-27 14:12+0000\n"
 "Last-Translator: Miloslav Kos <kos.m@post.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/cs/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.5.3\n"
+"X-Generator: Weblate 5.6-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -495,7 +495,7 @@ msgid "Medium"
 msgstr "Střední"
 
 msgid "Memory"
-msgstr ""
+msgstr "Paměť"
 
 msgid "Menu"
 msgstr "Menu"
@@ -558,7 +558,7 @@ msgid "Notifications"
 msgstr "Oznámení"
 
 msgid "Only for the move panel"
-msgstr ""
+msgstr "Pouze pro panel pohybů"
 
 #, python-format
 msgid "Outdated by %d"
@@ -595,7 +595,7 @@ msgid "Please recompile and flash the micro-controller."
 msgstr "Znovu přelož a flashni micro-controller."
 
 msgid "Please wait"
-msgstr ""
+msgstr "Čekejte prosím"
 
 msgid "Power"
 msgstr "Zdroj"
@@ -785,7 +785,7 @@ msgid "Starting update for"
 msgstr "Spuštění aktualizace pro"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr ""
+msgstr "Vymění tlačítka, pokud jsou nad sebou, ovlivní ostatní panely"
 
 msgid "System"
 msgstr "Systém"
@@ -806,13 +806,13 @@ msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr "Tento panel podporuje až 9 šroubů v mřížce 3x3"
 
 msgid "This will affect screw positions and mesh graph"
-msgstr ""
+msgstr "To ovlivní polohu šroubů a graf sítě"
 
 msgid "Timeout for screen black-out or power-off"
 msgstr "Časový limit pro zhasnutí obrazovky nebo vypnutí napájení"
 
 msgid "Timeout for screen black-out or power-off during printing"
-msgstr ""
+msgstr "Časový limit pro výpadek obrazovky nebo vypnutí napájení během tisku"
 
 msgid "Total:"
 msgstr "Total:"
@@ -882,9 +882,9 @@ msgstr "dBm"
 
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "den"
+msgstr[1] "dny"
+msgstr[2] "dny"
 
 msgid "hour"
 msgid_plural "hours"
@@ -918,9 +918,9 @@ msgstr "mm³/s"
 
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "sekunda"
+msgstr[1] "sekundy"
+msgstr[2] "sekundy"
 
 #~ msgid "Deselect"
 #~ msgstr "Odznačit"
