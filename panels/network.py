@@ -132,7 +132,7 @@ class Panel(ScreenPanel):
                          halign=Gtk.Align.START, valign=Gtk.Align.CENTER)
         labels.add(name)
         labels.add(info)
-        icon = self._gtk.Image('wifi_weak')
+        icon = self._gtk.Image()
 
         self.network_rows[bssid] = Gtk.Box(spacing=5, hexpand=True, vexpand=False)
         self.network_rows[bssid].get_style_context().add_class("frame-item")
