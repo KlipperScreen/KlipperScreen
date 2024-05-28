@@ -345,8 +345,10 @@ class Panel(ScreenPanel):
                     self._gtk.Button_busy(self.reload_button, True)
                     self.sdbus_nm.rescan()
                     self.load_networks()
+                self.update_all_networks()
                 self.update_timeout = GLib.timeout_add_seconds(5, self.update_all_networks)
             else:
+                self.update_single_network_info()
                 self.update_timeout = GLib.timeout_add_seconds(5, self.update_single_network_info)
 
     def deactivate(self):
