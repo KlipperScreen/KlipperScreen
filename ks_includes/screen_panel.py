@@ -184,8 +184,8 @@ class ScreenPanel:
             name = name.title()
         return name
 
-    def update_temp(self, dev, temp, target, power, lines=1):
-        new_label_text = f"{temp or 0:.1f}"
+    def update_temp(self, dev, temp, target, power, lines=1, digits=1):
+        new_label_text = f"{temp or 0:.{digits}f}"
         if self._printer.device_has_target(dev) and target:
             new_label_text += f"/{target:.0f}"
         if dev not in self.devices:
