@@ -217,7 +217,8 @@ class SdbusNm:
         if security_type is None:
             return {"error": "network_not_found", "message": _("Network not found")}
 
-        self.delete_network(ssid)
+        if self.is_known(ssid):
+            self.delete_network(ssid)
 
         properties: NetworkManagerConnectionProperties = {
             "connection": {
@@ -269,7 +270,10 @@ class SdbusNm:
         self.wlan_device.disconnect()
 
     def delete_network(self, ssid):
-        self.delete_connection_path(self.get_connection_by_ssid(ssid))
+        if path := self.get_connection_path_by_ssid(ssid):
+            self.delete_connection_path(path)
+        else:
+            logging.debug(f"SSID '{ssid}' not found among saved connections")
 
     def delete_connection_path(self, path):
         try:
@@ -282,7 +286,7 @@ class SdbusNm:
     def rescan(self):
         return self.wlan_device.request_scan({})
 
-    def get_connection_by_ssid(self, ssid):
+    def get_connection_path_by_ssid(self, ssid):
         existing_networks = NetworkManagerSettings().list_connections()
         for connection_path in existing_networks:
             connection_settings = NetworkConnectionSettings(connection_path).get_settings()
@@ -295,7 +299,7 @@ class SdbusNm:
         return None
 
     def connect(self, ssid):
-        if target_connection := self.get_connection_by_ssid(ssid):
+        if target_connection := self.get_connection_path_by_ssid(ssid):
             self.popup(f"{ssid}\n{_('Starting WiFi Association')}", 1)
             try:
                 self.wlan_device.disconnect()
