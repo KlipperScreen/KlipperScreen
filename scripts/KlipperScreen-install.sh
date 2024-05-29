@@ -174,9 +174,9 @@ create_policy()
 
     echo_text "Installing KlipperScreen PolicyKit Rules"
     sudo groupadd -f klipperscreen
-    sudo adduser "$USER" netdev
+    sudo adduser "$USER" klipperscreen
     if [ ! -x "$(command -v pkaction)" ]; then
-        echo "PolicyKit not installed"
+        echo_error "PolicyKit not installed"
         return
     fi
 
@@ -194,20 +194,14 @@ create_policy()
     elif [ -d $POLKIT_DIR ]; then
         RULE_FILE="${POLKIT_DIR}/KlipperScreen.rules"
     else
-        echo "PolicyKit rules folder not detected"
+        echo_error "PolicyKit rules folder not detected"
         exit 1
     fi
     echo_text "Installing PolicyKit Rules to ${RULE_FILE}..."
-
-    KS_GID=$( getent group klipperscreen | awk -F: '{printf "%d", $3}' )
+    sudo rm ${RULE_FILE}
     sudo tee ${RULE_FILE} > /dev/null << EOF
-// Allow KlipperScreen to reboot, shutdown, etc
-polkit.addRule(function(action, subject) {
-    if (action.id == "org.freedesktop.NetworkManager.settings.modify.system" &&
-        subject.isInGroup("network")) {
-        return polkit.Result.YES;
-    }
-});
+// subject.isInGroup("klipperscreen")
+// subject.user == "$USER")
 polkit.addRule(function(action, subject) {
     if ((action.id == "org.freedesktop.login1.power-off" ||
          action.id == "org.freedesktop.login1.power-off-multiple-sessions" ||
@@ -217,10 +211,6 @@ polkit.addRule(function(action, subject) {
          action.id == "org.freedesktop.login1.halt-multiple-sessions" ||
          action.id.startsWith("org.freedesktop.NetworkManager.")) &&
         subject.user == "$USER") {
-        // Only allow processes with the "klipperscreen" supplementary group
-        // access
-        var regex = "^Groups:.+?\\\s$KS_GID[\\\s\\\0]";
-        var cmdpath = "/proc/" + subject.pid.toString() + "/status";
         try {
             polkit.spawn(["grep", "-Po", regex, cmdpath]);
             return polkit.Result.YES;

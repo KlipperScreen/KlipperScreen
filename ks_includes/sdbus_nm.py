@@ -17,7 +17,10 @@ from sdbus_block.networkmanager import (
     enums,
     exceptions,
 )
-from sdbus import sd_bus_open_system, set_default_bus
+from sdbus import (
+    sd_bus_open_system,
+    set_default_bus,
+)
 from gi.repository import GLib
 from uuid import uuid4
 
@@ -191,7 +194,7 @@ class SdbusNm:
             return sorted(networks, key=lambda i: i['signal_level'], reverse=True)
         return networks
 
-    def get_bssid_from_ssid(self, ssid):
+    def get_bssid_from_ssid(selsd_busf, ssid):
         return next(net['BSSID'] for net in self.get_networks() if ssid == net['SSID'])
 
     def get_connected_ap(self):
@@ -213,6 +216,7 @@ class SdbusNm:
         )
 
     def add_network(self, ssid, psk):
+
         security_type = self.get_security_type(ssid)
         if security_type is None:
             return {"error": "network_not_found", "message": _("Network not found")}
@@ -254,6 +258,11 @@ class SdbusNm:
             return {"error": "unknown_security_type", "message": _("Unknown security type")}
 
         try:
+            if not self.request_polkit_auth(
+                'org.example.NetworkManager.AddNetwork'
+            ):
+                return {"error": "insufficient_privileges", "message": _("Authorization failed")}
+
             NetworkManagerSettings().add_connection(properties)
             return {"status": "success"}
         except exceptions.NmSettingsPermissionDeniedError:
@@ -265,6 +274,9 @@ class SdbusNm:
         except Exception as e:
             logging.exception("Couldn't add network")
             return {"error": "unknown", "message": _("Couldn't add network") + f"\n{e}"}
+
+    def request_polkit_auth(self, action_id):
+        return True
 
     def disconnect_network(self):
         self.wlan_device.disconnect()
