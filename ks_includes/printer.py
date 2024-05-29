@@ -18,7 +18,6 @@ class Printer:
         self.tempdevcount = 0
         self.fancount = 0
         self.ledcount = 0
-        self.pwm_tools_count = 0
         self.output_pin_count = 0
         self.store_timeout = None
         self.tempstore = {}
