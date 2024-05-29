@@ -78,8 +78,6 @@ class Printer:
                 self.output_pin_count += 1
             elif section == "pwm_tool":
                 self.pwm_tools_count += 1
-            elif section == "bed_mesh":
-                self.process_bed_mesh(x)
             elif section in (
                 "led",
                 "neopixel",
@@ -90,9 +88,7 @@ class Printer:
                 self.ledcount += 1
 
         self.tools = sorted(self.tools)
-
         self.log_counts(printer_info)
-
         self.process_update(data)
 
     def log_counts(self, printer_info):
@@ -103,19 +99,6 @@ class Printer:
         logging.info(f"# Output pins: {self.output_pin_count}")
         logging.info(f"# PWM tools: {self.pwm_tools_count}")
         logging.info(f"# Leds: {self.ledcount}")
-
-    def process_bed_mesh(self, x):
-        try:
-            r = self.config[x]
-            r['x_count'] = int(r['x_count'])
-            r['y_count'] = int(r['y_count'])
-            r['max_x'] = float(r['max_x'])
-            r['min_x'] = float(r['min_x'])
-            r['max_y'] = float(r['max_y'])
-            r['min_y'] = float(r['min_y'])
-            r['points'] = [[float(j.strip()) for j in i.split(",")] for i in r['points'].strip().split("\n")]
-        except KeyError:
-            logging.debug(f"Couldn't load mesh {x}: {self.config[x]}")
 
     def stop_tempstore_updates(self):
         if self.store_timeout is not None:

@@ -29,17 +29,20 @@ class BedMap(Gtk.DrawingArea):
         for key, value in bm.items():
             if key == 'profiles':
                 continue
-            logging.info(f"{key}: {value}")
         if radius:
             self.mesh_radius = float(radius)
         if 'mesh_min' in bm:
             self.mesh_min = bm['mesh_min']
+        elif 'min_x' in bm and 'min_y' in bm:
+            self.mesh_min = (float(bm['min_x']), float(bm['min_y']))
         if 'mesh_max' in bm:
             self.mesh_max = bm['mesh_max']
+        elif 'max_x' in bm and 'max_y' in bm:
+            self.mesh_max = (float(bm['max_x']), float(bm['max_y']))
         if 'probed_matrix' in bm:
             bm = bm['probed_matrix']
         elif 'points' in bm:
-            bm = bm['points']
+            bm = self.transform_points_to_matrix(bm['points'])
         else:
             self.bm = None
             return
@@ -64,6 +67,11 @@ class BedMap(Gtk.DrawingArea):
 
         if self.rotation in (90, 180, 270):
             self.bm = self.rotate_matrix(self.bm)
+
+    @staticmethod
+    def transform_points_to_matrix(points):
+        rows = points.strip().split('\n')
+        return [list(map(float, row.split(','))) for row in rows]
 
     def rotate_matrix(self, matrix):
         if self.rotation == 90:
@@ -132,6 +140,7 @@ class BedMap(Gtk.DrawingArea):
         for i, row in enumerate(self.bm):
             ty = (gheight / rows * i)
             by = ty + gheight / rows
+            column: float
             for j, column in enumerate(row):
                 if self.mesh_radius > 0 and self.round_bed_skip(i, j, row, rows, columns):
                     continue
@@ -170,7 +179,7 @@ class BedMap(Gtk.DrawingArea):
         return False
 
     @staticmethod
-    def colorbar(value):
+    def colorbar(value: float):
         rmax = 0.25
         color = min(1, max(0, 1 - 1 / rmax * abs(value)))
         if value > 0:
