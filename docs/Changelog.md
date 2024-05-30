@@ -2,6 +2,9 @@
 
 Breaking changes will be listed here.
 
+#### [2024_05_24](https://github.com/KlipperScreen/KlipperScreen/commit/524aa0e7dc2b27c93534d356ba19963b793f38d8)
+* Drop python 3.7 support, last version for it is v0.4.1: `git reset --hard v0.4.1`
+
 #### [2024_01_26](https://github.com/KlipperScreen/KlipperScreen/commit/9d0e4b841f905f0034a7c6fefefcf041e38b90a3)
 * Deprecated old ~/klipper_config folder  users need to place the configfile
 in ~/printer_data/config, ~/.config/KlipperScreen, or directly in the repo
