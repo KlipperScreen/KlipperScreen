@@ -280,14 +280,14 @@ class SdbusNm:
         elif "802.1x" in security_type:
             properties["802-11-wireless-security"] = {
                 "key-mgmt": ("s", "ieee8021x"),
-                "wep-key-type": ("s", 2),
+                "wep-key-type": ("u", 2),
                 "wep-key0": ("s", psk),
                 "auth-alg": ("s", "shared"),
             }
         elif "WEP" in security_type:
             properties["802-11-wireless-security"] = {
                 "key-mgmt": ("s", "none"),
-                "wep-key-type": ("s", 2),
+                "wep-key-type": ("u", 2),
                 "wep-key0": ("s", psk),
                 "auth-alg": ("s", "shared"),
             }
