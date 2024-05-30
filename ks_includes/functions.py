@@ -40,7 +40,8 @@ try:
                 onoff_p = ctypes.create_string_buffer(1)
                 state_p = ctypes.create_string_buffer(2)
                 if libXext.DPMSInfo(display, state_p, onoff_p):
-                    if onoff := struct.unpack('B', onoff_p.raw)[0]:
+                    onoff = struct.unpack('B', onoff_p.raw)[0]
+                    if onoff:
                         state = struct.unpack('H', state_p.raw)[0]
             libXext.XCloseDisplay(display)
         return state
@@ -72,7 +73,8 @@ def get_wireless_interfaces():
         return None
     interfaces = []
     for line in result:
-        if match := re.search('^(\\S+)\\s+.*$', line):
+        match = re.search('^(\\S+)\\s+.*$', line)
+        if match:
             interfaces.append(match[1])
 
     return interfaces

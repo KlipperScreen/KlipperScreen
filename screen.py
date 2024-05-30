@@ -885,7 +885,8 @@ class KlipperScreen(Gtk.Window):
         if self.connected_printer is None or not devices:
             return found_devices
         devices = [str(i.strip()) for i in devices.split(',')]
-        if power_devices := self.printer.get_power_devices():
+        power_devices = self.printer.get_power_devices()
+        if power_devices:
             found_devices = [dev for dev in devices if dev in power_devices]
             logging.info(f"Found {found_devices}", )
         return found_devices
@@ -1040,7 +1041,8 @@ class KlipperScreen(Gtk.Window):
     def init_tempstore(self):
         if len(self.printer.get_temp_devices()) == 0:
             return
-        if tempstore := self.apiclient.send_request("server/temperature_store"):
+        tempstore = self.apiclient.send_request("server/temperature_store")
+        if tempstore:
             self.printer.init_temp_store(tempstore)
             if hasattr(self.panels[self._cur_panels[-1]], "update_graph_visibility"):
                 self.panels[self._cur_panels[-1]].update_graph_visibility()
@@ -1051,7 +1053,8 @@ class KlipperScreen(Gtk.Window):
         if set(self.printer.tempstore) != set(self.printer.get_temp_devices()):
             GLib.timeout_add_seconds(5, self.init_tempstore)
             return
-        if server_config := self.apiclient.send_request("server/config"):
+        server_config = self.apiclient.send_request("server/config")
+        if server_config:
             try:
                 self.printer.tempstore_size = server_config["config"]["data_store"]["temperature_store_size"]
                 logging.info(f"Temperature store size: {self.printer.tempstore_size}")
