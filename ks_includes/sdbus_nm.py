@@ -21,39 +21,49 @@ from sdbus import sd_bus_open_system, set_default_bus
 from gi.repository import GLib
 from uuid import uuid4
 
-NM_802_11_AP_SEC_NONE = 0
-NM_802_11_AP_SEC_PAIR_WEP40 = 1
-NM_802_11_AP_SEC_PAIR_WEP104 = 2
-NM_802_11_AP_SEC_PAIR_TKIP = 4
-NM_802_11_AP_SEC_PAIR_CCMP = 8
-NM_802_11_AP_SEC_GROUP_WEP40 = 16
-NM_802_11_AP_SEC_GROUP_WEP104 = 32
-NM_802_11_AP_SEC_GROUP_TKIP = 64
-NM_802_11_AP_SEC_GROUP_CCMP = 128
-NM_802_11_AP_SEC_KEY_MGMT_PSK = 256
-NM_802_11_AP_SEC_KEY_MGMT_802_1X = 512
+NONE = 0  # The access point has no special security requirements.
+PAIR_WEP40 = 1  # 40/64-bit WEP is supported for pairwise/unicast encryption.
+PAIR_WEP104 = 2  # 104/128-bit WEP is supported for pairwise/unicast encryption.
+PAIR_TKIP = 4  # TKIP is supported for pairwise/unicast encryption.
+PAIR_CCMP = 8  # AES/CCMP is supported for pairwise/unicast encryption.
+GROUP_WEP40 = 16  # 40/64-bit WEP is supported for group/broadcast encryption.
+GROUP_WEP104 = 32  # 104/128-bit WEP is supported for group/broadcast encryption.
+GROUP_TKIP = 64  # TKIP is supported for group/broadcast encryption.
+GROUP_CCMP = 128  # AES/CCMP is supported for group/broadcast encryption.
+KEY_MGMT_PSK = 256  # WPA/RSN Pre-Shared Key encryption
+KEY_MGMT_802_1X = 512  # 802.1x authentication and key management
+KEY_MGMT_SAE = 1024  # WPA/RSN Simultaneous Authentication of Equals
+KEY_MGMT_OWE = 2048  # WPA/RSN Opportunistic Wireless Encryption
+KEY_MGMT_OWE_TM = 4096  # WPA/RSN Opportunistic Wireless Encryption transition mode
+KEY_MGMT_EAP_SUITE_B_192 = 8192  # WPA3 Enterprise Suite-B 192
 
 
 def get_encryption(flags):
-    encryption = ""
-    if (
-        flags & NM_802_11_AP_SEC_PAIR_WEP40
-        or flags & NM_802_11_AP_SEC_PAIR_WEP104
-        or flags & NM_802_11_AP_SEC_GROUP_WEP40
-        or flags & NM_802_11_AP_SEC_GROUP_WEP104
-    ):
-        encryption += "WEP "
-    if flags & NM_802_11_AP_SEC_PAIR_TKIP or flags & NM_802_11_AP_SEC_GROUP_TKIP:
-        encryption += "TKIP "
-    if flags & NM_802_11_AP_SEC_PAIR_CCMP or flags & NM_802_11_AP_SEC_GROUP_CCMP:
-        encryption += "AES "
-    if flags & NM_802_11_AP_SEC_KEY_MGMT_PSK:
-        encryption += "WPA-PSK "
-    if flags & NM_802_11_AP_SEC_KEY_MGMT_802_1X:
-        encryption += "802.1x "
-    if not encryption:
-        encryption += "Open"
-    return encryption
+    if flags == 0:
+        return "Open"
+
+    encryption_mapping = {
+        PAIR_WEP40: "WEP",
+        PAIR_WEP104: "WEP",
+        PAIR_TKIP: "TKIP",
+        PAIR_CCMP: "AES",
+        GROUP_WEP40: "WEP",
+        GROUP_WEP104: "WEP",
+        GROUP_TKIP: "TKIP",
+        GROUP_CCMP: "AES",
+        KEY_MGMT_PSK: "WPA-PSK",
+        KEY_MGMT_802_1X: "802.1x",
+        KEY_MGMT_SAE: "WPA-SAE",
+        KEY_MGMT_OWE: "OWE",
+        KEY_MGMT_OWE_TM: "OWE-TM",
+        KEY_MGMT_EAP_SUITE_B_192: "WPA3-B192",
+    }
+
+    encryption_methods = []
+    for flag, method_name in encryption_mapping.items():
+        if flags & flag and method_name not in encryption_methods:
+            encryption_methods.append(method_name)
+    return " ".join(encryption_methods)
 
 
 def WifiChannels(freq: str):
@@ -242,28 +252,46 @@ class SdbusNm:
             "ipv6": {"method": ("s", "auto")},
         }
 
-        if "WPA-PSK" in security_type:
+        if security_type != "Open":
             properties["802-11-wireless"]["security"] = (
                 "s",
                 "802-11-wireless-security",
             )
+        if "WPA-PSK" in security_type:
             properties["802-11-wireless-security"] = {
                 "key-mgmt": ("s", "wpa-psk"),
-                "auth-alg": ("s", "open"),
                 "psk": ("s", psk),
             }
+        elif "SAE" in security_type:
+            properties["802-11-wireless-security"] = {
+                "key-mgmt": ("s", "sae"),
+                "psk": ("s", psk),
+            }
+        elif "WPA3-B192" in security_type:
+            properties["802-11-wireless-security"] = {
+                "key-mgmt": ("s", "wpa-eap-suite-b-192"),
+                "psk": ("s", psk),
+            }
+        elif "OWE" in security_type:
+            properties["802-11-wireless-security"] = {
+                "key-mgmt": ("s", "owe"),
+                "psk": ("s", psk),
+            }
+        elif "802.1x" in security_type:
+            properties["802-11-wireless-security"] = {
+                "key-mgmt": ("s", "ieee8021x"),
+                "wep-key-type": ("s", 2),
+                "wep-key0": ("s", psk),
+                "auth-alg": ("s", "shared"),
+            }
         elif "WEP" in security_type:
-            properties["802-11-wireless"]["security"] = (
-                "s",
-                "802-11-wireless-security",
-            )
             properties["802-11-wireless-security"] = {
                 "key-mgmt": ("s", "none"),
-                "wep-key-type": ("s", "key"),
+                "wep-key-type": ("s", 2),
                 "wep-key0": ("s", psk),
-                "auth-alg": ("s", "open"),
+                "auth-alg": ("s", "shared"),
             }
-        elif security_type != "Open":
+        else:
             return {
                 "error": "unknown_security_type",
                 "message": _("Unknown security type"),
