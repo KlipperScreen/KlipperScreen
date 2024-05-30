@@ -114,6 +114,10 @@ check_requirements()
 
 create_virtualenv()
 {
+    if [ -d $KSENV ]; then
+        echo_text "Removing old virtual environment"
+        rm -rf ${KSENV}
+
     echo_text "Creating virtual environment"
     python3 -m venv ${KSENV}
 
@@ -198,6 +202,7 @@ create_policy()
         exit 1
     fi
     echo_text "Installing PolicyKit Rules to ${RULE_FILE}..."
+    sudo rm ${RULE_FILE}
 
     KS_GID=$( getent group klipperscreen | awk -F: '{printf "%d", $3}' )
     sudo tee ${RULE_FILE} > /dev/null << EOF
