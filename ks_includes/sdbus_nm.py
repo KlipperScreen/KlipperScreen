@@ -37,16 +37,16 @@ NM_802_11_AP_SEC_KEY_MGMT_802_1X = 512
 
 def get_encryption(flags):
     encryption = ""
-    if (flags & NM_802_11_AP_SEC_PAIR_WEP40 or
-            flags & NM_802_11_AP_SEC_PAIR_WEP104 or
-            flags & NM_802_11_AP_SEC_GROUP_WEP40 or
-            flags & NM_802_11_AP_SEC_GROUP_WEP104):
+    if (
+        flags & NM_802_11_AP_SEC_PAIR_WEP40
+        or flags & NM_802_11_AP_SEC_PAIR_WEP104
+        or flags & NM_802_11_AP_SEC_GROUP_WEP40
+        or flags & NM_802_11_AP_SEC_GROUP_WEP104
+    ):
         encryption += "WEP "
-    if (flags & NM_802_11_AP_SEC_PAIR_TKIP or
-            flags & NM_802_11_AP_SEC_GROUP_TKIP):
+    if flags & NM_802_11_AP_SEC_PAIR_TKIP or flags & NM_802_11_AP_SEC_GROUP_TKIP:
         encryption += "TKIP "
-    if (flags & NM_802_11_AP_SEC_PAIR_CCMP or
-            flags & NM_802_11_AP_SEC_GROUP_CCMP):
+    if flags & NM_802_11_AP_SEC_PAIR_CCMP or flags & NM_802_11_AP_SEC_GROUP_CCMP:
         encryption += "AES "
     if flags & NM_802_11_AP_SEC_KEY_MGMT_PSK:
         encryption += "WPA-PSK "
@@ -58,7 +58,7 @@ def get_encryption(flags):
 
 
 def WifiChannels(freq: str):
-    if freq == '2484':
+    if freq == "2484":
         return "2.4", "14"
     try:
         freq = float(freq)
@@ -87,23 +87,26 @@ class SdbusNm:
             return None
         set_default_bus(self.system_bus)
         self.nm = NetworkManager()
-        if self.get_wireless_interfaces():
-            self.wlan_device = self.get_wireless_interfaces()[0]
-            self.wifi = True
-        else:
-            self.wlan_device = None
-            self.wifi = False
+        self.wlan_device = (
+            self.get_wireless_interfaces()[0]
+            if self.get_wireless_interfaces()
+            else None
+        )
+        self.wifi = self.wlan_device is not None
         self.popup = popup_callback
 
     def ensure_nm_running(self):
-        # Check if NetworkManager is running
         try:
-            status = subprocess.run(['systemctl', 'is-active', '--quiet', 'NetworkManager'])
+            status = subprocess.run(
+                ["systemctl", "is-active", "--quiet", "NetworkManager"]
+            )
             if status.returncode != 0:
                 logging.info("Starting NetworkManager service...")
-                subprocess.run(['sudo', 'systemctl', 'start', 'NetworkManager'])
-                subprocess.run(['sudo', 'systemctl', 'enable', 'NetworkManager'])
-                status = subprocess.run(['systemctl', 'is-active', '--quiet', 'NetworkManager'])
+                subprocess.run(["sudo", "systemctl", "start", "NetworkManager"])
+                subprocess.run(["sudo", "systemctl", "enable", "NetworkManager"])
+                status = subprocess.run(
+                    ["systemctl", "is-active", "--quiet", "NetworkManager"]
+                )
             if status.returncode != 0:
                 raise RuntimeError("Failed to start NetworkManager service")
         except FileNotFoundError as e:
@@ -114,7 +117,9 @@ class SdbusNm:
         return self.nm.wireless_enabled
 
     def get_interfaces(self):
-        return [NetworkDeviceGeneric(device).interface for device in self.nm.get_devices()]
+        return [
+            NetworkDeviceGeneric(device).interface for device in self.nm.get_devices()
+        ]
 
     def get_wireless_interfaces(self):
         devices = {path: NetworkDeviceGeneric(path) for path in self.nm.get_devices()}
@@ -125,18 +130,13 @@ class SdbusNm:
         ]
 
     def get_primary_interface(self):
-        if self.nm.primary_connection == '/':
-            # Nothing connected
+        if self.nm.primary_connection == "/":
             if self.wlan_device:
                 return self.wlan_device.interface
             return next(
-                (
-                    interface for interface in self.get_interfaces()
-                    if interface != 'lo'
-                ),
-                None
+                (interface for interface in self.get_interfaces() if interface != "lo"),
+                None,
             )
-
         gateway = ActiveConnection(self.nm.primary_connection).devices[0]
         return NetworkDeviceGeneric(gateway).interface
 
@@ -147,28 +147,28 @@ class SdbusNm:
         for netpath in saved_network_paths:
             saved_con = NetworkConnectionSettings(netpath)
             con_settings = saved_con.get_settings()
-            # 'type': ('s', '802-11-wireless')
-            if con_settings['connection']['type'][1] == "802-11-wireless":
-                known_networks.append({
-                    'SSID': con_settings['802-11-wireless']['ssid'][1].decode(),
-                    'UUID': con_settings['connection']['uuid'][1]
-                })
+            if con_settings["connection"]["type"][1] == "802-11-wireless":
+                known_networks.append(
+                    {
+                        "SSID": con_settings["802-11-wireless"]["ssid"][1].decode(),
+                        "UUID": con_settings["connection"]["uuid"][1],
+                    }
+                )
         return known_networks
 
     def is_known(self, ssid):
-        return any(net['SSID'] == ssid for net in self.get_known_networks())
+        return any(net["SSID"] == ssid for net in self.get_known_networks())
 
     def is_open(self, ssid):
         return self.get_security_type(ssid) == "Open"
 
     def get_ip_address(self):
         active_connection_path = self.nm.primary_connection
-        if not active_connection_path or active_connection_path == '/':
+        if not active_connection_path or active_connection_path == "/":
             return "?"
         active_connection = ActiveConnection(active_connection_path)
         ip_info = IPv4Config(active_connection.ip4_config)
-
-        return ip_info.address_data[0]['address'][1]
+        return ip_info.address_data[0]["address"][1]
 
     def get_networks(self):
         networks = []
@@ -178,7 +178,9 @@ class SdbusNm:
                 {
                     "SSID": ap.ssid.decode("utf-8"),
                     "known": self.is_known(ap.ssid.decode("utf-8")),
-                    "security": get_encryption(ap.rsn_flags or ap.wpa_flags or ap.flags),
+                    "security": get_encryption(
+                        ap.rsn_flags or ap.wpa_flags or ap.flags
+                    ),
                     "frequency": WifiChannels(ap.frequency)[0],
                     "channel": WifiChannels(ap.frequency)[1],
                     "signal_level": ap.strength,
@@ -188,11 +190,11 @@ class SdbusNm:
                 for ap in all_aps
                 if ap.ssid
             )
-            return sorted(networks, key=lambda i: i['signal_level'], reverse=True)
+            return sorted(networks, key=lambda i: i["signal_level"], reverse=True)
         return networks
 
     def get_bssid_from_ssid(self, ssid):
-        return next(net['BSSID'] for net in self.get_networks() if ssid == net['SSID'])
+        return next(net["BSSID"] for net in self.get_networks() if ssid == net["SSID"])
 
     def get_connected_ap(self):
         if self.wlan_device.active_access_point == "/":
@@ -200,7 +202,11 @@ class SdbusNm:
         return AccessPoint(self.wlan_device.active_access_point)
 
     def get_connected_bssid(self):
-        return self.get_connected_ap().hw_address if self.get_connected_ap() is not None else None
+        return (
+            self.get_connected_ap().hw_address
+            if self.get_connected_ap() is not None
+            else None
+        )
 
     def get_security_type(self, ssid):
         return next(
@@ -209,7 +215,7 @@ class SdbusNm:
                 for network in self.get_networks()
                 if network["SSID"] == ssid
             ),
-            None
+            None,
         )
 
     def add_network(self, ssid, psk):
@@ -225,7 +231,7 @@ class SdbusNm:
                 "id": ("s", ssid),
                 "uuid": ("s", str(uuid4())),
                 "type": ("s", "802-11-wireless"),
-                "interface-name": ("s", self.wlan_device.interface)
+                "interface-name": ("s", self.wlan_device.interface),
             },
             "802-11-wireless": {
                 "mode": ("s", "infrastructure"),
@@ -236,14 +242,20 @@ class SdbusNm:
         }
 
         if "WPA-PSK" in security_type:
-            properties["802-11-wireless"]["security"] = ("s", "802-11-wireless-security")
+            properties["802-11-wireless"]["security"] = (
+                "s",
+                "802-11-wireless-security",
+            )
             properties["802-11-wireless-security"] = {
                 "key-mgmt": ("s", "wpa-psk"),
                 "auth-alg": ("s", "open"),
                 "psk": ("s", psk),
             }
         elif "WEP" in security_type:
-            properties["802-11-wireless"]["security"] = ("s", "802-11-wireless-security")
+            properties["802-11-wireless"]["security"] = (
+                "s",
+                "802-11-wireless-security",
+            )
             properties["802-11-wireless-security"] = {
                 "key-mgmt": ("s", "none"),
                 "wep-key-type": ("s", "key"),
@@ -251,14 +263,20 @@ class SdbusNm:
                 "auth-alg": ("s", "open"),
             }
         elif security_type != "Open":
-            return {"error": "unknown_security_type", "message": _("Unknown security type")}
+            return {
+                "error": "unknown_security_type",
+                "message": _("Unknown security type"),
+            }
 
         try:
             NetworkManagerSettings().add_connection(properties)
             return {"status": "success"}
         except exceptions.NmSettingsPermissionDeniedError:
             logging.exception("Insufficient privileges")
-            return {"error": "insufficient_privileges", "message": _("Insufficient privileges")}
+            return {
+                "error": "insufficient_privileges",
+                "message": _("Insufficient privileges"),
+            }
         except exceptions.NmConnectionInvalidPropertyError:
             logging.exception("Invalid property")
             return {"error": "psk_invalid", "message": _("Invalid password")}
@@ -281,7 +299,10 @@ class SdbusNm:
             logging.info(f"Deleted connection path: {path}")
         except Exception as e:
             logging.exception(f"Failed to delete connection path: {path} - {e}")
-            return {"error": "deletion_failed", "message": _("Failed to delete connection") + f"\n{e}"}
+            return {
+                "error": "deletion_failed",
+                "message": _("Failed to delete connection") + f"\n{e}",
+            }
 
     def rescan(self):
         return self.wlan_device.request_scan({})
@@ -289,11 +310,13 @@ class SdbusNm:
     def get_connection_path_by_ssid(self, ssid):
         existing_networks = NetworkManagerSettings().list_connections()
         for connection_path in existing_networks:
-            connection_settings = NetworkConnectionSettings(connection_path).get_settings()
+            connection_settings = NetworkConnectionSettings(
+                connection_path
+            ).get_settings()
             if (
-                connection_settings.get('802-11-wireless') and
-                connection_settings['802-11-wireless'].get('ssid') and
-                connection_settings['802-11-wireless']['ssid'][1].decode() == ssid
+                connection_settings.get("802-11-wireless")
+                and connection_settings["802-11-wireless"].get("ssid")
+                and connection_settings["802-11-wireless"]["ssid"][1].decode() == ssid
             ):
                 return connection_path
         return None
@@ -327,3 +350,4 @@ class SdbusNm:
                     self.popup(_("Connection disconnected"))
                 elif state == enums.NM_ACTIVE_CONNECTION_STATE_FAILED:
                     self.popup(_("Connection failed"))
+
