@@ -21,7 +21,6 @@ from sdbus import sd_bus_open_system, set_default_bus
 from gi.repository import GLib
 from uuid import uuid4
 
-
 NM_802_11_AP_SEC_NONE = 0
 NM_802_11_AP_SEC_PAIR_WEP40 = 1
 NM_802_11_AP_SEC_PAIR_WEP104 = 2
@@ -93,6 +92,8 @@ class SdbusNm:
             else None
         )
         self.wifi = self.wlan_device is not None
+        self.monitor_connection = False
+        self.wifi_state = -1
         self.popup = popup_callback
 
     def ensure_nm_running(self):
@@ -325,9 +326,7 @@ class SdbusNm:
         if target_connection := self.get_connection_path_by_ssid(ssid):
             self.popup(f"{ssid}\n{_('Starting WiFi Association')}", 1)
             try:
-                self.wlan_device.disconnect()
                 active_connection = self.nm.activate_connection(target_connection)
-                self.monitor_connection_status(active_connection)
                 return target_connection
             except Exception as e:
                 logging.exception("Unexpected error")
@@ -338,16 +337,36 @@ class SdbusNm:
     def toggle_wifi(self, enable):
         self.nm.wireless_enabled = enable
 
-    def monitor_connection_status(self, active_connection):
-        def on_state_changed(active_conn_path, state, reason):
-            if active_conn_path == active_connection:
-                if state == enums.NM_ACTIVE_CONNECTION_STATE_ACTIVATED:
-                    self.popup(_("Connection established successfully"))
-                elif state in [
-                    enums.NM_ACTIVE_CONNECTION_STATE_DEACTIVATING,
-                    enums.NM_ACTIVE_CONNECTION_STATE_DEACTIVATED
-                ]:
-                    self.popup(_("Connection disconnected"))
-                elif state == enums.NM_ACTIVE_CONNECTION_STATE_FAILED:
-                    self.popup(_("Connection failed"))
+    def monitor_connection_status(self):
+        state = self.wlan_device.state
+        if self.wifi_state != state:
+            logging.debug(f"State changed: {state} {self.wlan_device.state_reason}")
+            if self.wifi_state == -1:
+                logging.debug("Starting to monitor state")
+            elif state in [
+                enums.DeviceState.PREPARE,
+                enums.DeviceState.CONFIG,
+            ]:
+                self.popup(_("Connecting"), 1)
+            elif state in [
+                enums.DeviceState.IP_CONFIG,
+                enums.DeviceState.IP_CHECK,
+                enums.DeviceState.SECONDARIES,
+            ]:
+                self.popup(_("Getting IP address"), 1)
+            elif state in [
+                enums.DeviceState.ACTIVATED,
+            ]:
+                self.popup(_("Connection established successfully"), 1)
+            elif state in [
+                enums.DeviceState.DISCONNECTED,
+                enums.DeviceState.DEACTIVATING,
+            ]:
+                self.popup(_("Connection disconnected"))
+            elif state == enums.DeviceState.FAILED:
+                self.popup(_("Connection failed"))
+            self.wifi_state = state
+        return self.monitor_connection
 
+    def enable_monitoring(self, enable):
+        self.monitor_connection = enable
