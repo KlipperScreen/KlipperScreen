@@ -117,7 +117,8 @@ create_virtualenv()
     if [ -d $KSENV ]; then
         echo_text "Removing old virtual environment"
         rm -rf ${KSENV}
-
+    fi
+    
     echo_text "Creating virtual environment"
     python3 -m venv ${KSENV}
 
