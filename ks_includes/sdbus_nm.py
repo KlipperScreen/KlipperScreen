@@ -121,8 +121,8 @@ class SdbusNm:
             if status.returncode != 0:
                 raise RuntimeError("Failed to start NetworkManager service")
         except FileNotFoundError as e:
-            logging.error("NetworkManager might not be installed")
-            raise RuntimeError(f"{e}\n" "it might not be installed?\n") from e
+            logging.exception(f"{e}")
+            raise RuntimeError(f"{e}") from e
 
     def is_wifi_enabled(self):
         return self.nm.wireless_enabled

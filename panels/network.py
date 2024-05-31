@@ -12,25 +12,32 @@ class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
-        self.show_add = False
-        self.update_timeout = None
-        self.network_list = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, hexpand=True, vexpand=True)
-        self.network_rows = {}
-        self.networks = {}
         try:
             self.sdbus_nm = SdbusNm(self.popup_callback)
         except Exception as e:
             logging.exception("Failed to initialize")
             self.sdbus_nm = None
-            self.content.add(
+            self.error_box = Gtk.Box(
+                orientation=Gtk.Orientation.VERTICAL,
+                hexpand=True,
+                vexpand=True
+            )
+            self.error_box.add(
                 Gtk.Label(
-                    label=_("Failed to initialize sdbus") + f"\n{e}",
+                    label=_("Failed to initialize") + f"\n{e}",
                     wrap=True,
                     wrap_mode=Pango.WrapMode.WORD_CHAR,
                 )
             )
+            self.error_box.set_valign(Gtk.Align.CENTER)
+            self.content.add(self.error_box)
             self._screen.panels_reinit.append(self._screen._cur_panels[-1])
             return
+        self.show_add = False
+        self.update_timeout = None
+        self.network_list = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, hexpand=True, vexpand=True)
+        self.network_rows = {}
+        self.networks = {}
         self.wifi_signal_icons = {
             'excellent': self._gtk.PixbufFromIcon('wifi_excellent'),
             'good': self._gtk.PixbufFromIcon('wifi_good'),
@@ -354,6 +361,8 @@ class Panel(ScreenPanel):
                 self.update_timeout = GLib.timeout_add_seconds(5, self.update_single_network_info)
 
     def deactivate(self):
+        if self.sdbus_nm is None:
+            return
         if self.update_timeout is not None:
             GLib.source_remove(self.update_timeout)
             self.update_timeout = None
