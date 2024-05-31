@@ -19,9 +19,9 @@ See [scripts/system-dependencies.json](https://github.com/KlipperScreen/KlipperS
 ## Create a virtual environment
 For example:
 ```bash
-virtualenv -p /usr/bin/python3   ~/.KlipperScreen-env
-source ~/.KlipperScreen-env/bin/activate
 cd ~/KlipperScreen
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r scripts/klipperscreen-requirements.txt
 ```
 # Set configurations

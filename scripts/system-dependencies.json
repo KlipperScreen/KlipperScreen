@@ -13,7 +13,6 @@
         "libopenjp2-7",
         "wireless-tools",
         "libdbus-glib-1-dev",
-        "policykit-1",
         "autoconf"
     ],
     "arch": [
@@ -27,7 +26,6 @@
         "librsvg",
         "openjpeg2",
         "dbus-glib",
-         "polkit",
         "autoconf"
     ]
 }
