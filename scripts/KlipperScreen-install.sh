@@ -39,7 +39,8 @@ install_graphical_backend()
       echo_ok "Default is Xserver"
       echo_text "Wayland is EXPERIMENTAL needs kms/drm drivers doesn't support DPMS and may need autologin"
       echo_text ""
-      read -r -e -p "Backend Xserver or Wayland (cage), Press enter for default (Xserver)? [X/w]" BACKEND
+      echo "Press enter for default (Xserver)"
+      read -r -e -p "Backend Xserver or Wayland (cage)? [X/w]" BACKEND
       if [[ "$BACKEND" =~ ^[wW]$ ]]; then
         echo_text "Installing Wayland Cage Kiosk"
         if sudo apt install -y $CAGE; then
@@ -292,6 +293,7 @@ start_KlipperScreen()
 install_network_manager()
 {
     if [ -z "$NETOWRK" ]; then
+        echo "Press enter for default (Yes)"
         read -r -e -p "Insall NetworkManager for the network panel [Y/n]" NETOWRK
         if [[ $NETOWRK =~ ^[nN]$ ]]; then
             echo_error "Not insalling NetworkManager for the network panel"
@@ -311,10 +313,12 @@ check_requirements
 
 if [ -z "$SERVICE" ]; then
     echo_text "Install standalone?"
-    echo_text "it will create a service, enable boot to console and install the graphical dependencies."
+    echo_text "It will create a service, enable boot to console and install the graphical dependencies."
+    echo_text ""
     echo_text "Say no to install as a regular desktop app that will not start automatically"
     echo_text ""
-    read -r -e -p "Install standalone? Press enter for default (standalone) [Y/n]" SERVICE
+    echo "Press enter for default (Yes)"
+    read -r -e -p "[Y/n]" SERVICE
     if [[ $SERVICE =~ ^[nN]$ ]]; then
         echo_text "Not installing the service"
         echo_text "The graphical backend will NOT be installed"
