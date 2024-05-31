@@ -7,8 +7,8 @@ KSENV="${KLIPPERSCREEN_VENV:-${HOME}/.KlipperScreen-env}"
 XSERVER="xinit xinput x11-xserver-utils xserver-xorg-input-evdev xserver-xorg-input-libinput xserver-xorg-legacy xserver-xorg-video-fbdev"
 CAGE="cage seatd xwayland"
 PYGOBJECT="libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0"
-MISC="librsvg2-common libopenjp2-7 wireless-tools libdbus-glib-1-dev autoconf python3-venv"
-OPTIONAL="fonts-nanum fonts-ipafont libmpv-dev policykit-1 network-manager"
+MISC="librsvg2-common libopenjp2-7 libdbus-glib-1-dev autoconf python3-venv"
+OPTIONAL="fonts-nanum fonts-ipafont libmpv-dev"
 
 Red='\033[0;31m'
 Green='\033[0;32m'
@@ -289,6 +289,18 @@ start_KlipperScreen()
     sudo systemctl restart KlipperScreen
 }
 
+install_network_manager()
+{
+    if [ -z "$NETOWRK" ]; then
+        read -r -e -p "Insall NetworkManager for the network panel [Y/n]" NETOWRK
+        if [[ $NETOWRK =~ ^[nN]$ ]]; then
+            echo_error "Not insalling NetworkManager for the network panel"
+        else
+            echo_ok "Insalling NetworkManager for the network panel"
+            sudo apt install network-manager
+        fi
+    fi
+}
 
 # Script start
 if [ "$EUID" == 0 ]
@@ -320,6 +332,7 @@ create_virtualenv
 create_policy
 fix_fbturbo
 add_desktop_file
+install_network_manager
 if [ -z "$START" ] || [ "$START" -eq 0 ]; then
     echo_ok "KlipperScreen was installed"
 else
