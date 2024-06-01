@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-23 23:37-0300\n"
-"PO-Revision-Date: 2024-05-31 10:46+0000\n"
-"Last-Translator: Techsider <yannikschirm@gmail.com>\n"
+"PO-Revision-Date: 2024-06-01 12:09+0000\n"
+"Last-Translator: Niklas Tecklenborg <niklas.tecklenborg@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/de/>\n"
 "Language: de\n"
@@ -382,7 +382,7 @@ msgid "Invalid password"
 msgstr "Ungültiges Passwort"
 
 msgid "Inversely affects the icon size"
-msgstr ""
+msgstr "Beeinflusst die Symbolgröße umgekehrt"
 
 msgid "Invert X"
 msgstr "Achse X invertieren"
@@ -496,7 +496,7 @@ msgid "Medium"
 msgstr "Mittel"
 
 msgid "Memory"
-msgstr ""
+msgstr "Speicher"
 
 msgid "Menu"
 msgstr "Menü"
@@ -559,7 +559,7 @@ msgid "Notifications"
 msgstr "Benachrichtigungen"
 
 msgid "Only for the move panel"
-msgstr ""
+msgstr "Nur für das Bewegungspanel"
 
 #, python-format
 msgid "Outdated by %d"
@@ -786,6 +786,8 @@ msgstr "Starte Update für"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
 msgstr ""
+"Vertauscht Tasten, wenn sie übereinander liegen, wirkt sich auf andere "
+"Bedienfelder aus"
 
 msgid "System"
 msgstr "System"
@@ -803,10 +805,10 @@ msgid "Temperature"
 msgstr "Temperatur"
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr ""
+msgstr "Dieses Panel unterstützt bis zu 9 Schrauben in einem 3x3 Raster"
 
 msgid "This will affect screw positions and mesh graph"
-msgstr ""
+msgstr "Dies wirkt sich auf die Schraubenpositionen und das Netzdiagramm aus"
 
 msgid "Timeout for screen black-out or power-off"
 msgstr "Timeout für dunklen oder ausgeschalteten Bildschirm"
@@ -844,7 +846,7 @@ msgid "Uploaded"
 msgstr "Hochgeladen"
 
 msgid "Useful for un-responsive touchscreens"
-msgstr ""
+msgstr "Nützlich für nicht reagierende Touchscreens"
 
 msgid "Warning"
 msgstr "Warnung"
