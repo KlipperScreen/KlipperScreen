@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-23 23:37-0300\n"
-"PO-Revision-Date: 2024-04-13 16:48+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2024-06-01 12:09+0000\n"
+"Last-Translator: 峻瑜哥 <a728728728@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
 "klipperscreen/klipperscreen/zh_Hant/>\n"
 "Language: zh_TW\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.6-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -48,7 +48,7 @@ msgid "Add profile"
 msgstr "新增設定檔案"
 
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 msgid "Apply"
 msgstr "應用"
@@ -62,7 +62,7 @@ msgid "Apply %s%.3f offset to Probe?"
 msgstr "將 %s%.3f 偏移量應用於探針？"
 
 msgid "Archived"
-msgstr ""
+msgstr "歸檔"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "你確定要排除該目標嗎？"
@@ -71,7 +71,7 @@ msgid "Are you sure you want to run Emergency Stop?"
 msgstr "您確定要緊急停止嗎？"
 
 msgid "Are you sure you want to stop the calibration?"
-msgstr ""
+msgstr "您確定要停止校準嗎？"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "您確定要取消列印嗎？"
@@ -86,7 +86,7 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "您確定要關閉系統嗎？"
 
 msgid "Asks for confirmation before stopping"
-msgstr ""
+msgstr "停止前要求確認"
 
 msgid "Auto"
 msgstr "自動"
@@ -98,7 +98,7 @@ msgid "Auto-close notifications"
 msgstr "自動關閉通知"
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "暫停時自動打開擠出"
 
 msgid "Auto-scroll"
 msgstr "自動滾屏"
@@ -110,7 +110,7 @@ msgid "Bed Mesh"
 msgstr "床網"
 
 msgid "Both"
-msgstr ""
+msgstr "雙向"
 
 msgid "Calibrate"
 msgstr "校準"
@@ -143,10 +143,10 @@ msgid "Cannot connect to Moonraker"
 msgstr "無法連線到Moonraker"
 
 msgid "Changes how the interface looks"
-msgstr ""
+msgstr "改變介面的外觀"
 
 msgid "Changes how the time remaining is calculated"
-msgstr ""
+msgstr "更改剩餘時間的計算方式"
 
 msgid "Channel"
 msgstr "群組"
@@ -164,7 +164,7 @@ msgid "Close"
 msgstr "關閉"
 
 msgid "Close messages after a timeout"
-msgstr ""
+msgstr "逾時後關閉訊息"
 
 msgid "Complete"
 msgstr "完成"
@@ -186,10 +186,10 @@ msgid "Cooldown"
 msgstr "冷卻"
 
 msgid "Current percentage and graph line"
-msgstr ""
+msgstr "當前百分比和折線圖"
 
 msgid "DPMS has failed to load and has been disabled"
-msgstr ""
+msgstr "DPMS 載入失敗並已停用"
 
 msgid "Date"
 msgstr "日期"
@@ -204,7 +204,7 @@ msgid "Disable Motors"
 msgstr "關閉電機"
 
 msgid "Disable for 12hs with am / pm"
-msgstr ""
+msgstr "在十二小時顯示模式中不顯示AM/PM"
 
 msgid "Distance (mm)"
 msgstr "擠出長度（mm）"
@@ -217,13 +217,13 @@ msgid "Elapsed:"
 msgstr "已用時間："
 
 msgid "Emergency Stop"
-msgstr ""
+msgstr "緊急停止"
 
 msgid "Enable screen power management"
-msgstr ""
+msgstr "開啟螢幕功率管理功能"
 
 msgid "Ended official support in June 2023"
-msgstr ""
+msgstr "2023年6月結束官方支持"
 
 msgid "Error"
 msgstr "錯誤"
@@ -241,7 +241,7 @@ msgid "Error trying to fetch spools"
 msgstr ""
 
 msgid "Error: Couldn't get a position to probe"
-msgstr ""
+msgstr "錯誤：無法取得要探測的位置"
 
 msgid "Estimated Time Method"
 msgstr "估算剩餘時間方式"
@@ -256,7 +256,7 @@ msgid "Extrude"
 msgstr "擠出機"
 
 msgid "Extruders"
-msgstr ""
+msgstr "擠出機"
 
 msgid "Extrusion +"
 msgstr "擠壓 +"
@@ -289,7 +289,7 @@ msgid "File:"
 msgstr "檔案："
 
 msgid "Filter"
-msgstr ""
+msgstr "過濾器"
 
 msgid "Finding ADXL"
 msgstr "查詢ADXL"
@@ -358,7 +358,7 @@ msgid "Hostname"
 msgstr "主機名"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "主題"
@@ -431,7 +431,7 @@ msgid "Large"
 msgstr "大"
 
 msgid "Last Used"
-msgstr ""
+msgstr "最後使用"
 
 msgid "Layer:"
 msgstr "層："
@@ -449,10 +449,10 @@ msgid "Load"
 msgstr "載入耗材"
 
 msgid "Loading..."
-msgstr ""
+msgstr "載入中..."
 
 msgid "Lost Connection to Moonraker"
-msgstr ""
+msgstr "與Moonraker失去連接"
 
 msgid "Lower Nozzle"
 msgstr "降低噴嘴"
@@ -467,7 +467,7 @@ msgid "Main Menu"
 msgstr "主選單"
 
 msgid "Material"
-msgstr ""
+msgstr "材料"
 
 msgid "Max"
 msgstr "最大"
@@ -494,7 +494,7 @@ msgid "Medium"
 msgstr "中"
 
 msgid "Memory"
-msgstr ""
+msgstr "記憶體"
 
 msgid "Menu"
 msgstr "選單"
@@ -533,13 +533,13 @@ msgid "New"
 msgstr "新的值"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "無可用巨集:"
 
 msgid "No mesh has been loaded"
-msgstr ""
+msgstr "未載入網床"
 
 msgid "No wireless interface has been found"
-msgstr ""
+msgstr "未找到wifi介面"
 
 msgid "Not all screens support this"
 msgstr ""
