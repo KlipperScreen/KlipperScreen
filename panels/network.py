@@ -22,9 +22,15 @@ class Panel(ScreenPanel):
                 hexpand=True,
                 vexpand=True
             )
+            message = (
+                _("Failed to initialize") + "\n"
+                + "This panel needs NetworkManager installed into the system\n"
+                + "And the apropriate permissions, without them it will not function.\n"
+                + f"\n{e}\n"
+            )
             self.error_box.add(
                 Gtk.Label(
-                    label=_("Failed to initialize") + f"\n{e}",
+                    label=message,
                     wrap=True,
                     wrap_mode=Pango.WrapMode.WORD_CHAR,
                 )
