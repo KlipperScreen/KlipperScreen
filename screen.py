@@ -731,7 +731,6 @@ class KlipperScreen(Gtk.Window):
     def state_shutdown(self):
         self.printer.stop_tempstore_updates()
         msg = self.printer.get_stat("webhooks", "state_message")
-        msg = msg if "ready" not in msg else ""
         self.printer_initializing(_("Klipper has shutdown") + "\n\n" + msg, go_to_splash=True)
 
     def toggle_shortcut(self, show):
