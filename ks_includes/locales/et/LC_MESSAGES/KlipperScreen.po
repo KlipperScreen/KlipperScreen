@@ -1,15 +1,10 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 23:37-0300\n"
-"PO-Revision-Date: 2024-04-13 16:48+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"POT-Creation-Date: 2024-06-02 08:31-0300\n"
+"PO-Revision-Date: 2024-06-02 12:00+0000\n"
+"Last-Translator: ChatGPT <noreply@openai.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/et/>\n"
 "Language: et\n"
@@ -21,896 +16,974 @@ msgstr ""
 
 #, python-format
 msgid "%s will be updated to version"
-msgstr ""
+msgstr "%s uuendatakse versioonile"
 
 msgid "(default)"
-msgstr ""
+msgstr "(vaikimisi)"
 
 msgid "24 Hour Time"
-msgstr ""
+msgstr "24-tunnine aeg"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr ""
+msgstr "Probleemi võib lahendada FIRMWARE_RESTART."
 
 msgid "ADXL Not Configured"
-msgstr ""
+msgstr "ADXL ei ole seadistatud"
 
 msgid "Abort"
-msgstr ""
+msgstr "Katkesta"
 
 msgid "Acceleration:"
-msgstr ""
+msgstr "Kiirendus:"
 
 msgid "Accept"
-msgstr ""
+msgstr "Nõustu"
 
 msgid "Add profile"
-msgstr ""
+msgstr "Lisa profiil"
 
 msgid "All"
-msgstr ""
+msgstr "Kõik"
 
 msgid "Apply"
-msgstr ""
+msgstr "Rakenda"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr ""
+msgstr "Rakenda %s%.3f nihe lõpp-punktile?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr ""
+msgstr "Rakenda %s%.3f nihe andurile?"
 
 msgid "Archived"
-msgstr ""
+msgstr "Arhiveeritud"
 
 msgid "Are you sure do you want to exclude the object?"
-msgstr ""
+msgstr "Kas olete kindel, et soovite objekti välistada?"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr ""
+msgstr "Kas olete kindel, et soovite käivitada hädapidurduse?"
 
 msgid "Are you sure you want to stop the calibration?"
-msgstr ""
+msgstr "Kas olete kindel, et soovite kalibreerimise peatada?"
 
 msgid "Are you sure you wish to cancel this print?"
-msgstr ""
+msgstr "Kas olete kindel, et soovite selle printimise tühistada?"
 
 msgid "Are you sure you wish to disable motors?"
-msgstr ""
+msgstr "Kas olete kindel, et soovite mootorid välja lülitada?"
 
 msgid "Are you sure you wish to reboot the system?"
-msgstr ""
+msgstr "Kas olete kindel, et soovite süsteemi taaskäivitada?"
 
 msgid "Are you sure you wish to shutdown the system?"
-msgstr ""
+msgstr "Kas olete kindel, et soovite süsteemi sulgeda?"
 
 msgid "Asks for confirmation before stopping"
-msgstr ""
+msgstr "Küsib kinnitust enne peatamist"
 
 msgid "Auto"
-msgstr ""
+msgstr "Automaatne"
 
 msgid "Auto-calibrate"
-msgstr ""
+msgstr "Automaatne kalibreerimine"
 
 msgid "Auto-close notifications"
-msgstr ""
+msgstr "Teatiste automaatne sulgemine"
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "Pausi ajal ekstrusiooni automaatne avamine"
 
 msgid "Auto-scroll"
-msgstr ""
+msgstr "Automaatne kerimine"
 
 msgid "Bed Level"
-msgstr ""
+msgstr "Voodi tase"
 
 msgid "Bed Mesh"
-msgstr ""
+msgstr "Voodi võrk"
 
 msgid "Both"
-msgstr ""
+msgstr "Mõlemad"
 
 msgid "Calibrate"
-msgstr ""
+msgstr "Kalibreeri"
 
 msgid "Calibrated"
-msgstr ""
+msgstr "Kalibreeritud"
 
 msgid "Calibrating"
-msgstr ""
+msgstr "Kalibreerimine"
 
 msgid "Camera"
-msgstr ""
+msgstr "Kaamera"
 
 msgid "Can't set above the maximum:"
-msgstr ""
+msgstr "Ei saa seada üle maksimaalse:"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Tühista"
 
 msgid "Cancel Print"
-msgstr ""
+msgstr "Tühista printimine"
 
 msgid "Cancelled"
-msgstr ""
+msgstr "Tühistatud"
 
 msgid "Cancelling"
-msgstr ""
+msgstr "Tühistamine"
 
 msgid "Cannot connect to Moonraker"
-msgstr ""
+msgstr "Ei saa ühendust Moonrakeriga"
 
 msgid "Changes how the interface looks"
-msgstr ""
+msgstr "Muutused liidese välimuses"
 
 msgid "Changes how the time remaining is calculated"
-msgstr ""
+msgstr "Muutused järelejäänud aja arvutamises"
 
 msgid "Channel"
-msgstr ""
+msgstr "Kanal"
 
 msgid "Check ADXL Wiring"
-msgstr ""
+msgstr "Kontrollige ADXL juhtmeid"
 
 msgid "Checking for updates, please wait..."
-msgstr ""
+msgstr "Uuenduste kontrollimine, palun oodake..."
 
 msgid "Clear"
-msgstr ""
+msgstr "Kustuta"
 
 msgid "Close"
-msgstr ""
+msgstr "Sulge"
 
 msgid "Close messages after a timeout"
-msgstr ""
+msgstr "Sõnumite sulgemine pärast ajalõppu"
 
 msgid "Complete"
-msgstr ""
+msgstr "Lõpetatud"
 
 msgid "Confirm Emergency Stop"
-msgstr ""
+msgstr "Kinnitage hädapidur"
 
 msgid "Connected"
+msgstr "Ühendatud"
+
+msgid "Connecting"
 msgstr ""
 
 #, python-format
 msgid "Connecting to %s"
+msgstr "Ühendamine %s-ga"
+
+msgid "Connection disconnected"
+msgstr ""
+
+msgid "Connection established successfully"
+msgstr ""
+
+msgid "Connection failed"
 msgstr ""
 
 msgid "Console"
-msgstr ""
+msgstr "Konsool"
 
 msgid "Cooldown"
+msgstr "Jahutus"
+
+msgid "Couldn't add network"
 msgstr ""
 
 msgid "Current percentage and graph line"
-msgstr ""
+msgstr "Praegune protsent ja graafiku joon"
 
 msgid "DPMS has failed to load and has been disabled"
-msgstr ""
+msgstr "DPMS-i laadimine ebaõnnestus ja see on keelatud"
 
 msgid "Date"
-msgstr ""
+msgstr "Kuupäev"
 
 msgid "Delete Directory?"
-msgstr ""
+msgstr "Kustuta kataloog?"
 
 msgid "Delete File?"
-msgstr ""
+msgstr "Kustuta fail?"
 
 msgid "Disable Motors"
-msgstr ""
+msgstr "Keela mootorid"
 
 msgid "Disable for 12hs with am / pm"
+msgstr "Keela 12 tunniks koos am/pm-ga"
+
+msgid "Disconnect"
 msgstr ""
 
 msgid "Distance (mm)"
+msgstr "Kaugus (mm)"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Do you want to let KlipperScreen try to solve the issue?"
 msgstr ""
 
 #, python-format
 msgid "Do you want to recover %s?"
-msgstr ""
+msgstr "Kas soovite taastada %s?"
 
 msgid "Elapsed:"
-msgstr ""
+msgstr "Möödunud:"
 
 msgid "Emergency Stop"
-msgstr ""
+msgstr "Hädapidur"
 
 msgid "Enable screen power management"
-msgstr ""
-
-msgid "Ended official support in June 2023"
-msgstr ""
+msgstr "Luba ekraani energiakontroll"
 
 msgid "Error"
-msgstr ""
+msgstr "Viga"
 
 msgid "Error clearing active spool"
-msgstr ""
+msgstr "Viga aktiivse pooli tühjendamisel"
 
 msgid "Error getting active spool"
-msgstr ""
+msgstr "Viga aktiivse pooli hankimisel"
 
 msgid "Error setting active spool"
-msgstr ""
+msgstr "Viga aktiivse pooli seadistamisel"
 
 msgid "Error trying to fetch spools"
-msgstr ""
+msgstr "Viga poolide toomise katsel"
 
 msgid "Error: Couldn't get a position to probe"
+msgstr "Viga: ei saanud sondi positsiooni"
+
+msgid "Estimated Time"
 msgstr ""
 
 msgid "Estimated Time Method"
-msgstr ""
+msgstr "Eeldatav aja meetod"
 
 msgid "Exclude Object"
-msgstr ""
+msgstr "Välista objekt"
 
 msgid "Extra Large"
-msgstr ""
+msgstr "Eriti suur"
 
 msgid "Extrude"
-msgstr ""
+msgstr "Ekstrudeeri"
 
 msgid "Extruders"
-msgstr ""
+msgstr "Ekstruderid"
 
 msgid "Extrusion +"
-msgstr ""
+msgstr "Ekstrusioon +"
 
 msgid "Extrusion -"
+msgstr "Ekstrusioon -"
+
+msgid "Failed to delete connection"
+msgstr ""
+
+msgid "Failed to initialize"
 msgstr ""
 
 msgid "Failed, adjust position first"
-msgstr ""
+msgstr "Ebaõnnestus, kohandage kõigepealt positsiooni"
 
 msgid "Fan"
+msgstr "Ventilaator"
+
+msgid "Filament"
 msgstr ""
 
 msgid "Filament Used"
-msgstr ""
+msgstr "Kasutatud filament"
 
 msgid "Filament total:"
-msgstr ""
+msgstr "Filamendi kogus:"
 
 msgid "Filament used:"
-msgstr ""
+msgstr "Kasutatud filament:"
 
 msgid "Filament:"
-msgstr ""
+msgstr "Filament:"
 
 msgid "File"
-msgstr ""
+msgstr "Fail"
 
 msgid "File:"
-msgstr ""
+msgstr "Fail:"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 msgid "Finding ADXL"
-msgstr ""
+msgstr "ADXL otsimine"
 
 msgid "Fine Tuning"
-msgstr ""
+msgstr "Peenhäälestus"
 
 msgid "Finish"
-msgstr ""
+msgstr "Lõpeta"
 
 msgid "Firmware Restart"
-msgstr ""
+msgstr "Püsivara taaskäivitamine"
 
 msgid "Flow:"
-msgstr ""
+msgstr "Vool:"
 
 msgid "Flowrate:"
-msgstr ""
+msgstr "Voolukiirus:"
 
 msgid "Font Size"
+msgstr "Fondi suurus"
+
+msgid "Forget"
 msgstr ""
 
 msgid "Full Update"
+msgstr "Täisuuendus"
+
+msgid "Gcodes"
+msgstr ""
+
+msgid "Getting IP address"
 msgstr ""
 
 msgid "Go Back"
-msgstr ""
+msgstr "Mine tagasi"
 
 msgid "Height:"
-msgstr ""
-
-msgid "Hidden"
-msgstr ""
+msgstr "Kõrgus:"
 
 msgid "Hide"
-msgstr ""
+msgstr "Peida"
 
 msgid "Hide sensors in Temp."
-msgstr ""
+msgstr "Peida andurid temperatuuri all"
 
 msgid "Hide temp."
-msgstr ""
+msgstr "Peida temp."
 
 msgid "Home"
-msgstr ""
+msgstr "Kodu"
 
 msgid "Home All"
-msgstr ""
+msgstr "Kõik koju"
 
 msgid "Home X"
-msgstr ""
+msgstr "Kodu X"
 
 msgid "Home XY"
-msgstr ""
+msgstr "Kodu XY"
 
 msgid "Home Y"
-msgstr ""
+msgstr "Kodu Y"
 
 msgid "Home Z"
-msgstr ""
+msgstr "Kodu Z"
 
 msgid "Host"
-msgstr ""
+msgstr "Host"
 
 msgid "Hostname"
-msgstr ""
+msgstr "Hosti nimi"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Icon Theme"
-msgstr ""
+msgstr "Ikoonide teema"
 
 msgid "Initializing printer..."
-msgstr ""
+msgstr "Printeri initsialiseerimine..."
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "Algata PID kalibreerimine jaoks:"
 
 msgid "Input Shaper"
+msgstr "Sisendvormija"
+
+msgid "Insufficient priviledges detected"
+msgstr ""
+
+msgid "Insufficient privileges"
 msgstr ""
 
 msgid "Interface"
-msgstr ""
+msgstr "Liides"
 
 msgid "Invalid"
-msgstr ""
+msgstr "Kehtetu"
 
 msgid "Invalid password"
-msgstr ""
+msgstr "Kehtetu parool"
 
 msgid "Inversely affects the icon size"
-msgstr ""
+msgstr "Mõjutab pöördeliselt ikooni suurust"
 
 msgid "Invert X"
-msgstr ""
+msgstr "Pööra X"
 
 msgid "Invert Y"
-msgstr ""
+msgstr "Pööra Y"
 
 msgid "Invert Z"
-msgstr ""
+msgstr "Pööra Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
+msgstr "See võib võtta rohkem kui 5 minutit, sõltuvalt kütteseadme võimsusest."
 
 msgid "It's possible that the configuration is not correct"
-msgstr ""
+msgstr "On võimalik, et konfiguratsioon ei ole õige"
 
 msgid "Klipper Restart"
-msgstr ""
+msgstr "Klipperi taaskäivitamine"
 
 msgid "Klipper has disconnected"
-msgstr ""
+msgstr "Klipper on lahti ühendatud"
 
 msgid "Klipper has encountered an error."
-msgstr ""
+msgstr "Klipperil tekkis viga."
 
 msgid "Klipper has shutdown"
-msgstr ""
+msgstr "Klipper on välja lülitatud"
 
 msgid "Klipper is attempting to start"
-msgstr ""
+msgstr "Klipper püüab käivituda"
 
 msgid "Klipper will reboot"
-msgstr ""
-
-msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
+msgstr "Klipper taaskäivitub"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT on peidetud ja neid tuleks kasutada "
+"ekstrudeerimisel"
 
 msgid "Language"
-msgstr ""
+msgstr "Keel"
 
 msgid "Large"
-msgstr ""
+msgstr "Suur"
 
 msgid "Last Used"
+msgstr "Viimati kasutatud"
+
+msgid "Layer Height"
 msgstr ""
 
 msgid "Layer:"
-msgstr ""
+msgstr "Kiht:"
 
 msgid "Leds"
-msgstr ""
+msgstr "LEDid"
 
 msgid "Left:"
-msgstr ""
+msgstr "Vasakul:"
 
 msgid "Limits"
-msgstr ""
+msgstr "Piirangud"
 
 msgid "Load"
-msgstr ""
+msgstr "Laadimine"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Laadimine..."
 
 msgid "Lost Connection to Moonraker"
-msgstr ""
+msgstr "Ühendus Moonrakeriga katkes"
 
 msgid "Lower Nozzle"
-msgstr ""
+msgstr "Alumine otsik"
 
 msgid "Macro shortcut on sidebar"
-msgstr ""
+msgstr "Makro otsetee külgribal"
 
 msgid "Macros"
-msgstr ""
+msgstr "Makrod"
 
 msgid "Main Menu"
-msgstr ""
+msgstr "Peamenüü"
 
 msgid "Material"
-msgstr ""
+msgstr "Materjal"
 
 msgid "Max"
-msgstr ""
+msgstr "Maks"
 
 msgid "Max Acceleration"
-msgstr ""
+msgstr "Maksimaalne kiirendus"
 
 msgid "Max Velocity"
+msgstr "Maksimaalne kiirus"
+
+msgid "Max:"
 msgstr ""
 
 msgid "Maximum"
-msgstr ""
+msgstr "Maksimaalne"
 
 msgid "Measure Both"
-msgstr ""
+msgstr "Mõõda mõlemad"
 
 msgid "Measure X"
-msgstr ""
+msgstr "Mõõda X"
 
 msgid "Measure Y"
-msgstr ""
+msgstr "Mõõda Y"
 
 msgid "Medium"
-msgstr ""
+msgstr "Keskmine"
 
 msgid "Memory"
-msgstr ""
+msgstr "Mälu"
 
 msgid "Menu"
-msgstr ""
+msgstr "Menüü"
 
 msgid "Mesh calibrate"
-msgstr ""
+msgstr "Võrgu kalibreerimine"
 
 msgid "Minimum Cruise Ratio"
+msgstr "Minimaalne kruiisisuhe"
+
+msgid "Minimum:"
 msgstr ""
 
 msgid "Modified"
-msgstr ""
+msgstr "Muudetud"
 
 msgid "Moonraker: connected"
-msgstr ""
+msgstr "Moonraker: ühendatud"
 
 msgid "More"
-msgstr ""
+msgstr "Veel"
 
 msgid "Move"
-msgstr ""
+msgstr "Liiguta"
 
 msgid "Move Distance (mm)"
-msgstr ""
+msgstr "Liigutuskaugus (mm)"
 
 msgid "Name"
-msgstr ""
+msgstr "Nimi"
 
 msgid "Network"
+msgstr "Võrk"
+
+msgid "Network not found"
 msgstr ""
 
 msgid "Never"
-msgstr ""
+msgstr "Mitte kunagi"
 
 msgid "New"
-msgstr ""
+msgstr "Uus"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "Sobivaid makrosid pole:"
 
 msgid "No mesh has been loaded"
-msgstr ""
+msgstr "Võrku ei ole laaditud"
 
 msgid "No wireless interface has been found"
-msgstr ""
+msgstr "Juhtmeta liidest ei leitud"
 
 msgid "Not all screens support this"
-msgstr ""
+msgstr "Mitte kõik ekraanid ei toeta seda"
 
 msgid "Not working or not configured"
-msgstr ""
+msgstr "Ei tööta või ei ole seadistatud"
 
 msgid "Nothing selected"
-msgstr ""
+msgstr "Midagi pole valitud"
 
 msgid "Notification log empty"
-msgstr ""
+msgstr "Teavituste logi tühi"
 
 msgid "Notifications"
-msgstr ""
+msgstr "Teavitused"
 
 msgid "Only for the move panel"
-msgstr ""
+msgstr "Ainult liigutuspaneelile"
 
 #, python-format
 msgid "Outdated by %d"
-msgstr ""
+msgstr "Aegunud %d võrra"
 
 msgid "PSK for"
-msgstr ""
+msgstr "PSK jaoks"
 
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Pakett uuendatakse"
+msgstr[1] "Paketid uuendatakse"
 
 msgid "Part Fan"
-msgstr ""
+msgstr "Osaventilaator"
 
 msgid "Password saved"
-msgstr ""
+msgstr "Parool salvestatud"
 
 msgid "Pause"
-msgstr ""
+msgstr "Paus"
 
 msgid "Paused"
-msgstr ""
+msgstr "Pausil"
 
 msgid "Perform a full upgrade?"
-msgstr ""
+msgstr "Kas sooritada täisuuendus?"
 
 msgid "Pins"
-msgstr ""
+msgstr "Nõelad"
 
 msgid "Please recompile and flash the micro-controller."
-msgstr ""
+msgstr "Palun kompileerige ja välgake mikro-kontroller."
 
 msgid "Please wait"
-msgstr ""
+msgstr "Palun oodake"
 
 msgid "Power"
-msgstr ""
+msgstr "Võimsus"
 
 msgid "Power On Printer"
-msgstr ""
+msgstr "Printeri sisselülitamine"
 
 msgid "Pressure Advance:"
-msgstr ""
+msgstr "Surveelisus:"
 
 msgid "Print"
-msgstr ""
+msgstr "Prindi"
 
 msgid "Print Control"
-msgstr ""
-
-msgid "Print Time"
-msgstr ""
+msgstr "Prindi juhtimine"
 
 msgid "Printer"
-msgstr ""
+msgstr "Printer"
 
 msgid "Printer Connections"
-msgstr ""
+msgstr "Printeri ühendused"
 
 msgid "Printer Select"
-msgstr ""
+msgstr "Vali printer"
 
 msgid "Printing"
-msgstr ""
+msgstr "Printimine"
 
 msgid "Probe Offset"
-msgstr ""
+msgstr "Sondi nihe"
 
 msgid "Profile Name:"
-msgstr ""
+msgstr "Profiili nimi:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "Abi küsimisel andke KlipperScreen.log.\n"
 
 msgid "Quad Gantry Level"
-msgstr ""
+msgstr "Neljandikurea tase"
 
 msgid "Raise Nozzle"
-msgstr ""
+msgstr "Tõsta otsik"
 
 msgid "Recover"
-msgstr ""
+msgstr "Taasta"
 
 msgid "Recover Hard"
-msgstr ""
+msgstr "Taasta raskelt"
 
 msgid "Recover Soft"
-msgstr ""
+msgstr "Taasta pehmelt"
 
 msgid "Reference"
-msgstr ""
+msgstr "Viide"
 
 msgid "Refresh"
+msgstr "Värskenda"
+
+msgid "Remove network"
 msgstr ""
 
 msgid "Rename/Move:"
-msgstr ""
+msgstr "Nimeta ümber/Liiguta:"
 
 msgid "Restart"
-msgstr ""
+msgstr "Taaskäivita"
 
 msgid "Resume"
-msgstr ""
+msgstr "Jätka"
 
 msgid "Retract"
-msgstr ""
+msgstr "Tagasi tõmbama"
 
 msgid "Retraction"
-msgstr ""
+msgstr "Tagasitõmbumine"
 
 msgid "Retraction Length"
-msgstr ""
+msgstr "Tagasitõmbumise pikkus"
 
 msgid "Retraction Speed"
-msgstr ""
+msgstr "Tagasitõmbumise kiirus"
 
 msgid "Retry"
-msgstr ""
+msgstr "Proovi uuesti"
 
 msgid "Retrying"
-msgstr ""
+msgstr "Uuesti proovimine"
 
 msgid "Rotation invalid"
-msgstr ""
+msgstr "Pööramine kehtetu"
 
 msgid "Save"
-msgstr ""
+msgstr "Salvesta"
 
 msgid "Save Config"
-msgstr ""
+msgstr "Salvesta konfiguratsioon"
 
 msgid "Save Z"
-msgstr ""
+msgstr "Salvesta Z"
 
 msgid "Save configuration?"
-msgstr ""
+msgstr "Salvesta konfiguratsioon?"
 
 msgid "Saved"
-msgstr ""
+msgstr "Salvestatud"
 
 #, python-format
 msgid "Saved offset: %s"
-msgstr ""
+msgstr "Salvestatud nihe: %s"
 
 msgid "Screen DPMS"
-msgstr ""
+msgstr "Ekraani DPMS"
 
 msgid "Screen Power Off Time"
-msgstr ""
+msgstr "Ekraani väljalülitamise aeg"
 
 msgid "Screws Adjust"
-msgstr ""
+msgstr "Kruvide reguleerimine"
 
 msgid "Screws not used:"
-msgstr ""
+msgstr "Kruvid ei ole kasutatud:"
 
 msgid "Send"
-msgstr ""
+msgstr "Saada"
 
 msgid "Set Temp"
-msgstr ""
+msgstr "Määra temperatuur"
 
 msgid "Settings"
-msgstr ""
+msgstr "Seaded"
 
 msgid "Show"
-msgstr ""
+msgstr "Näita"
 
 msgid "Show Heater Power"
-msgstr ""
+msgstr "Näita küttekeha võimsust"
 
 msgid "Show Scrollbars Buttons"
-msgstr ""
+msgstr "Näita kerimisriba nuppe"
 
 msgid "Show only devices that are able to be set"
-msgstr ""
+msgstr "Näita ainult seadmeid, mida saab seadistada"
 
 msgid "Shutdown"
-msgstr ""
+msgstr "Seiskamine"
 
 msgid "Size"
-msgstr ""
+msgstr "Suurus"
 
 msgid "Slicer"
-msgstr ""
+msgstr "Lõikur"
 
 msgid "Slicer:"
-msgstr ""
+msgstr "Lõikur:"
 
 msgid "Small"
-msgstr ""
+msgstr "Väike"
 
 msgid "Speed (mm/s)"
-msgstr ""
+msgstr "Kiirus (mm/s)"
 
 msgid "Speed +"
-msgstr ""
+msgstr "Kiirus +"
 
 msgid "Speed -"
-msgstr ""
+msgstr "Kiirus -"
 
 msgid "Speed:"
-msgstr ""
+msgstr "Kiirus:"
 
 msgid "Square Corner Velocity"
-msgstr ""
+msgstr "Ruudukujuline nurga kiirus"
 
 msgid "Standby"
-msgstr ""
+msgstr "Valmisolek"
 
 msgid "Start"
-msgstr ""
-
-msgid "Starting WiFi Association"
-msgstr ""
+msgstr "Alusta"
 
 msgid "Starting recovery for"
-msgstr ""
+msgstr "Taastamise alustamine"
 
 msgid "Starting update for"
-msgstr ""
+msgstr "Uuenduse alustamine"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr ""
+msgstr "Vahetab nuppe, kui need on üksteise peal, mõjutab teisi paneele"
 
 msgid "System"
-msgstr ""
+msgstr "Süsteem"
 
 msgid "System Restart"
-msgstr ""
+msgstr "Süsteemi taaskäivitamine"
 
 msgid "System Shutdown"
+msgstr "Süsteemi seiskamine"
+
+msgid "System:"
 msgstr ""
 
 msgid "Temp (°C)"
-msgstr ""
+msgstr "Temperatuur (°C)"
 
 msgid "Temperature"
+msgstr "Temperatuur"
+
+msgid "The system doesn't meet the minimum requirement"
 msgstr ""
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr ""
+msgstr "See paneel toetab kuni 9 kruvi 3x3 võrgus"
 
 msgid "This will affect screw positions and mesh graph"
-msgstr ""
+msgstr "See mõjutab kruvide asukohti ja võrgugraafikut"
 
 msgid "Timeout for screen black-out or power-off"
-msgstr ""
+msgstr "Ekraani pimenemise või väljalülitamise ajapiirang"
 
 msgid "Timeout for screen black-out or power-off during printing"
-msgstr ""
+msgstr "Ekraani pimenemise või väljalülitamise ajapiirang printimise ajal"
 
 msgid "Total:"
-msgstr ""
+msgstr "Kokku:"
 
 msgid "Unknown Heater"
+msgstr "Tundmatu küttekeha"
+
+msgid "Unknown security type"
 msgstr ""
 
 msgid "Unload"
-msgstr ""
+msgstr "Laadi maha"
 
 msgid "Unretract Extra Length"
-msgstr ""
+msgstr "Tagasitõmbamise lisapikkus"
 
 msgid "Unretract Speed"
-msgstr ""
+msgstr "Tagasitõmbamise kiirus"
 
 msgid "Up To Date"
-msgstr ""
+msgstr "Kuni kuupäevani"
 
 msgid "Update"
-msgstr ""
+msgstr "Uuenda"
 
 msgid "Updating"
-msgstr ""
+msgstr "Uuendamine"
 
 msgid "Uploaded"
-msgstr ""
+msgstr "Üles laaditud"
 
 msgid "Useful for un-responsive touchscreens"
-msgstr ""
-
-msgid "Warning"
-msgstr ""
+msgstr "Kasulik mitte reageerivate puuteekraanide jaoks"
 
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
+msgstr "WebRTC-d ei toeta taustsüsteem, mis proovib voogu"
 
 msgid "XY Move Speed (mm/s)"
-msgstr ""
+msgstr "XY liikumise kiirus (mm/s)"
 
 msgid "XY Speed (mm/s)"
-msgstr ""
+msgstr "XY kiirus (mm/s)"
 
 msgid "Z Calibrate"
-msgstr ""
+msgstr "Z kalibreerimine"
 
 msgid "Z Move Speed (mm/s)"
-msgstr ""
+msgstr "Z liikumise kiirus (mm/s)"
 
 msgid "Z Speed (mm/s)"
-msgstr ""
+msgstr "Z kiirus (mm/s)"
 
 msgid "Z Tilt"
-msgstr ""
+msgstr "Z kalle"
 
 msgid "Z offset:"
-msgstr ""
+msgstr "Z nihe:"
 
 msgid "commit"
 msgid_plural "commits"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "dBm"
-msgstr ""
+msgstr[0] "toiming"
+msgstr[1] "toimingud"
 
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "päev"
+msgstr[1] "päeva"
 
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "tund"
+msgstr[1] "tundi"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "Makrod, mis kasutavad 'rename_existing' on peidetud"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "Makrod, mille nimi algab '_' on peidetud"
 
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minut"
+msgstr[1] "minutit"
 
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 msgid "mm/s"
-msgstr ""
+msgstr "mm/s"
 
 msgid "mm/s²"
-msgstr ""
+msgstr "mm/s²"
 
 msgid "mm³/s"
-msgstr ""
+msgstr "mm³/s"
 
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "sekund"
+msgstr[1] "sekundit"
+
+#~ msgid "Ended official support in June 2023"
+#~ msgstr "Ametlik tugi lõppes juunis 2023"
+
+#~ msgid "Hidden"
+#~ msgstr "Peidetud"
+
+#~ msgid "KlipperScreen will drop support in June 2024"
+#~ msgstr "KlipperScreen lõpetab toe juunis 2024"
+
+#~ msgid "Print Time"
+#~ msgstr "Printimise aeg"
+
+#~ msgid "Starting WiFi Association"
+#~ msgstr "WiFi ühenduse loomine"
+
+#~ msgid "Warning"
+#~ msgstr "Hoiatus"
+
+#~ msgid "dBm"
+#~ msgstr "dBm"

@@ -1,15 +1,10 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 23:37-0300\n"
-"PO-Revision-Date: 2024-04-13 16:48+0000\n"
-"Last-Translator: Lâm Trần <trandanhlam99@gmail.com>\n"
+"POT-Creation-Date: 2024-06-02 08:31-0300\n"
+"PO-Revision-Date: 2024-06-02 12:00+0000\n"
+"Last-Translator: ChatGPT <noreply@openai.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/vi/>\n"
 "Language: vi\n"
@@ -21,31 +16,31 @@ msgstr ""
 
 #, python-format
 msgid "%s will be updated to version"
-msgstr "%s sẽ được nâng cấp lên phiên bản"
+msgstr "%s sẽ được cập nhật lên phiên bản"
 
 msgid "(default)"
 msgstr "(mặc định)"
 
 msgid "24 Hour Time"
-msgstr "Thời gian định dạng 24h"
+msgstr "Thời gian định dạng 24 giờ"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr "Vấn đề có thể giải quyết bằng cách khởi động lại thiết bị."
+msgstr "Một FIRMWARE_RESTART có thể sửa được vấn đề."
 
 msgid "ADXL Not Configured"
-msgstr "Gia tốc kế chưa được thiết lập"
+msgstr "Gia tốc kế chưa được cấu hình"
 
 msgid "Abort"
-msgstr "Hủy bỏ"
+msgstr "Hủy"
 
 msgid "Acceleration:"
 msgstr "Gia tốc:"
 
 msgid "Accept"
-msgstr "Đồng ý"
+msgstr "Chấp nhận"
 
 msgid "Add profile"
-msgstr "Thêm mô tả"
+msgstr "Thêm hồ sơ"
 
 msgid "All"
 msgstr "Tất cả"
@@ -55,83 +50,83 @@ msgstr "Áp dụng"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr "Áp dụng %s%.3f sai trục cho endstop?"
+msgstr "Áp dụng %s%.3f offset cho Endstop?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr "Áp dụng %s%.3f sai trục cho Probe?"
+msgstr "Áp dụng %s%.3f offset cho Probe?"
 
 msgid "Archived"
-msgstr "Lưu trữ"
+msgstr "Đã lưu trữ"
 
 msgid "Are you sure do you want to exclude the object?"
-msgstr "Bạn có chắc chắn muốn loại bỏ vật in này?"
+msgstr "Bạn có chắc chắn muốn loại bỏ vật này không?"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr "Bạn có muốn dừng khẩn cấp ngay lập tức?"
+msgstr "Bạn có chắc chắn muốn chạy Dừng Khẩn cấp không?"
 
 msgid "Are you sure you want to stop the calibration?"
-msgstr ""
+msgstr "Bạn có chắc chắn muốn dừng việc hiệu chuẩn không?"
 
 msgid "Are you sure you wish to cancel this print?"
-msgstr "Bạn có muốn dừng quá trình in?"
+msgstr "Bạn có chắc chắn muốn hủy in này không?"
 
 msgid "Are you sure you wish to disable motors?"
-msgstr "Bạn có muốn tắt động cơ?"
+msgstr "Bạn có chắc chắn muốn tắt các động cơ không?"
 
 msgid "Are you sure you wish to reboot the system?"
-msgstr "Bạn có chắc chắn muốn khởi động lại máy?"
+msgstr "Bạn có chắc chắn muốn khởi động lại hệ thống không?"
 
 msgid "Are you sure you wish to shutdown the system?"
-msgstr "Bạn có chắc chắn muốn tắt máy?"
+msgstr "Bạn có chắc chắn muốn tắt hệ thống không?"
 
 msgid "Asks for confirmation before stopping"
-msgstr ""
+msgstr "Yêu cầu xác nhận trước khi dừng lại"
 
 msgid "Auto"
 msgstr "Tự động"
 
 msgid "Auto-calibrate"
-msgstr "Tự động căn chỉnh"
+msgstr "Tự động hiệu chuẩn"
 
 msgid "Auto-close notifications"
-msgstr "Tự động đóng các thông báo"
+msgstr "Tự động đóng thông báo"
 
 msgid "Auto-open Extrude On Pause"
-msgstr "Tự động mở bảng điều khiển bộ đùn khi tạm dừng"
+msgstr "Tự động mở Extrude Khi Tạm Dừng"
 
 msgid "Auto-scroll"
 msgstr "Tự động cuộn"
 
 msgid "Bed Level"
-msgstr "Cân bàn in"
+msgstr "Cân bằng bàn"
 
 msgid "Bed Mesh"
-msgstr "Mặt phẳng bàn in"
+msgstr "Lưới bàn"
 
 msgid "Both"
-msgstr ""
+msgstr "Cả hai"
 
 msgid "Calibrate"
-msgstr "Cân chỉnh"
+msgstr "Hiệu chuẩn"
 
 msgid "Calibrated"
-msgstr "Đã cân chỉnh"
+msgstr "Đã hiệu chuẩn"
 
 msgid "Calibrating"
-msgstr "Cân chỉnh"
+msgstr "Đang hiệu chuẩn"
 
 msgid "Camera"
-msgstr "Máy quay"
+msgstr "Máy ảnh"
 
 msgid "Can't set above the maximum:"
-msgstr "Không thể cài đặt vượt quá giới hạn:"
+msgstr "Không thể đặt cao hơn tối đa:"
 
 msgid "Cancel"
 msgstr "Hủy bỏ"
 
 msgid "Cancel Print"
-msgstr "Hủy bỏ quá trình in"
+msgstr "Hủy in"
 
 msgid "Cancelled"
 msgstr "Đã hủy"
@@ -140,44 +135,56 @@ msgid "Cancelling"
 msgstr "Đang hủy"
 
 msgid "Cannot connect to Moonraker"
-msgstr "Không kết nối được tới Moonraker"
+msgstr "Không thể kết nối với Moonraker"
 
 msgid "Changes how the interface looks"
-msgstr ""
+msgstr "Thay đổi cách giao diện hiển thị"
 
 msgid "Changes how the time remaining is calculated"
-msgstr ""
+msgstr "Thay đổi cách tính thời gian còn lại"
 
 msgid "Channel"
 msgstr "Kênh"
 
 msgid "Check ADXL Wiring"
-msgstr "Kiểm tra dây kết nối đến gia tốc kế"
+msgstr "Kiểm tra dây kết nối ADXL"
 
 msgid "Checking for updates, please wait..."
-msgstr "Đang kiểm tra cập nhật, vui lòng chờ..."
+msgstr "Đang kiểm tra cập nhật, vui lòng đợi..."
 
 msgid "Clear"
-msgstr "Xóa bỏ"
+msgstr "Xóa"
 
 msgid "Close"
 msgstr "Đóng"
 
 msgid "Close messages after a timeout"
-msgstr ""
+msgstr "Đóng tin nhắn sau một khoảng thời gian chờ"
 
 msgid "Complete"
 msgstr "Hoàn thành"
 
 msgid "Confirm Emergency Stop"
-msgstr "Xác nhận dừng khẩn cấp"
+msgstr "Xác nhận Dừng Khẩn cấp"
 
 msgid "Connected"
 msgstr "Đã kết nối"
 
+msgid "Connecting"
+msgstr ""
+
 #, python-format
 msgid "Connecting to %s"
-msgstr "Kết nối đến %s"
+msgstr "Đang kết nối đến %s"
+
+msgid "Connection disconnected"
+msgstr ""
+
+msgid "Connection established successfully"
+msgstr ""
+
+msgid "Connection failed"
+msgstr ""
 
 msgid "Console"
 msgstr "Bảng điều khiển"
@@ -185,62 +192,75 @@ msgstr "Bảng điều khiển"
 msgid "Cooldown"
 msgstr "Làm nguội"
 
-msgid "Current percentage and graph line"
+msgid "Couldn't add network"
 msgstr ""
 
+msgid "Current percentage and graph line"
+msgstr "Phần trăm hiện tại và đường đồ thị"
+
 msgid "DPMS has failed to load and has been disabled"
-msgstr "DPMS không tải được và đã bị vô hiệu hóa"
+msgstr "DPMS không thể tải và đã bị vô hiệu hóa"
 
 msgid "Date"
 msgstr "Ngày"
 
 msgid "Delete Directory?"
-msgstr "Xóa thư mục?"
+msgstr "Xóa Thư mục?"
 
 msgid "Delete File?"
-msgstr "Xóa file?"
+msgstr "Xóa File?"
 
 msgid "Disable Motors"
-msgstr "Tắt tất cả các động cơ"
+msgstr "Tắt Động cơ"
 
 msgid "Disable for 12hs with am / pm"
+msgstr ""
+
+msgid "Disconnect"
 msgstr ""
 
 msgid "Distance (mm)"
 msgstr "Khoảng cách (mm)"
 
 #, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Do you want to let KlipperScreen try to solve the issue?"
+msgstr ""
+
+#, python-format
 msgid "Do you want to recover %s?"
-msgstr "Bạn có muốn khôi phục %s?"
+msgstr "Bạn có muốn khôi phục %s không?"
 
 msgid "Elapsed:"
 msgstr "Đã qua:"
 
 msgid "Emergency Stop"
-msgstr ""
+msgstr "Dừng Khẩn cấp"
 
 msgid "Enable screen power management"
-msgstr ""
-
-msgid "Ended official support in June 2023"
-msgstr "Không còn hỗ trợ chính thức từ tháng 6 năm 2023"
+msgstr "Bật quản lý nguồn màn hình"
 
 msgid "Error"
 msgstr "Lỗi"
 
 msgid "Error clearing active spool"
-msgstr ""
+msgstr "Lỗi khi xóa spool đang hoạt động"
 
 msgid "Error getting active spool"
-msgstr ""
+msgstr "Lỗi khi lấy spool đang hoạt động"
 
 msgid "Error setting active spool"
-msgstr ""
+msgstr "Lỗi khi đặt spool đang hoạt động"
 
 msgid "Error trying to fetch spools"
-msgstr ""
+msgstr "Lỗi khi tìm kiếm các spool"
 
 msgid "Error: Couldn't get a position to probe"
+msgstr "Lỗi: Không thể lấy vị trí để thăm dò"
+
+msgid "Estimated Time"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -264,11 +284,20 @@ msgstr "Nhựa đùn ra +"
 msgid "Extrusion -"
 msgstr "Nhựa đùng ra -"
 
+msgid "Failed to delete connection"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
 msgid "Failed, adjust position first"
 msgstr "Không thành công, trước tiên hãy điều chỉnh vị trí"
 
 msgid "Fan"
 msgstr "Quạt"
+
+msgid "Filament"
+msgstr ""
 
 msgid "Filament Used"
 msgstr "Nhựa in đã dùng"
@@ -312,17 +341,23 @@ msgstr "Lưu lượng nhựa đùn ra:"
 msgid "Font Size"
 msgstr "Kích thước hiển thị chữ"
 
+msgid "Forget"
+msgstr ""
+
 msgid "Full Update"
 msgstr "Cập nhật toàn bộ"
+
+msgid "Gcodes"
+msgstr ""
+
+msgid "Getting IP address"
+msgstr ""
 
 msgid "Go Back"
 msgstr "Về trước"
 
 msgid "Height:"
 msgstr "Chiều cao:"
-
-msgid "Hidden"
-msgstr "Ẩn"
 
 msgid "Hide"
 msgstr "Ẩn"
@@ -364,550 +399,588 @@ msgid "Icon Theme"
 msgstr "Chủ đề biểu tượng"
 
 msgid "Initializing printer..."
-msgstr ""
+msgstr "Đang khởi tạo máy in..."
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "Bắt đầu hiệu chỉnh PID cho:"
 
 msgid "Input Shaper"
+msgstr "Bộ định hình đầu vào"
+
+msgid "Insufficient priviledges detected"
+msgstr ""
+
+msgid "Insufficient privileges"
 msgstr ""
 
 msgid "Interface"
-msgstr ""
+msgstr "Giao diện"
 
 msgid "Invalid"
-msgstr ""
+msgstr "Không hợp lệ"
 
 msgid "Invalid password"
-msgstr ""
+msgstr "Mật khẩu không hợp lệ"
 
 msgid "Inversely affects the icon size"
-msgstr ""
+msgstr "Mật khẩu không hợp lệ"
 
 msgid "Invert X"
-msgstr ""
+msgstr "Đảo ngược trục X"
 
 msgid "Invert Y"
-msgstr ""
+msgstr "Đảo ngược trục Y"
 
 msgid "Invert Z"
-msgstr ""
+msgstr "Đảo ngược trục Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
+msgstr "Có thể mất hơn 5 phút tùy thuộc vào công suất máy sưởi."
 
 msgid "It's possible that the configuration is not correct"
-msgstr ""
+msgstr "Cấu hình có thể không chính xác"
 
 msgid "Klipper Restart"
-msgstr ""
+msgstr "Khởi động lại Klipper"
 
 msgid "Klipper has disconnected"
-msgstr ""
+msgstr "Klipper đã bị ngắt kết nối"
 
 msgid "Klipper has encountered an error."
-msgstr ""
+msgstr "Klipper đã gặp lỗi."
 
 msgid "Klipper has shutdown"
-msgstr ""
+msgstr "Klipper đã tắt"
 
 msgid "Klipper is attempting to start"
-msgstr ""
+msgstr "Klipper đang cố gắng khởi động"
 
 msgid "Klipper will reboot"
-msgstr ""
-
-msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
+msgstr "Klipper sẽ khởi động lại"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
+msgstr "Tải/Lấy nhựa ra được ẩn và nên sử dụng từ bảng điều khiển đùn"
 
 msgid "Language"
-msgstr ""
+msgstr "Ngôn ngữ"
 
 msgid "Large"
-msgstr ""
+msgstr "Lớn"
 
 msgid "Last Used"
+msgstr "Đã sử dụng lần cuối"
+
+msgid "Layer Height"
 msgstr ""
 
 msgid "Layer:"
-msgstr ""
+msgstr "Lớp:"
 
 msgid "Leds"
-msgstr ""
+msgstr "Đèn LED"
 
 msgid "Left:"
-msgstr ""
+msgstr "Còn lại:"
 
 msgid "Limits"
-msgstr ""
+msgstr "Giới hạn"
 
 msgid "Load"
-msgstr ""
+msgstr "Tải"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Đang tải..."
 
 msgid "Lost Connection to Moonraker"
-msgstr ""
+msgstr "Mất kết nối tới Moonraker"
 
 msgid "Lower Nozzle"
-msgstr ""
+msgstr "Hạ đầu phun"
 
 msgid "Macro shortcut on sidebar"
-msgstr ""
+msgstr "Lối tắt macro trên thanh bên"
 
 msgid "Macros"
-msgstr ""
+msgstr "Các macro"
 
 msgid "Main Menu"
-msgstr ""
+msgstr "Menu chính"
 
 msgid "Material"
-msgstr ""
+msgstr "Vật liệu"
 
 msgid "Max"
-msgstr ""
+msgstr "Tối đa"
 
 msgid "Max Acceleration"
-msgstr ""
+msgstr "Gia tốc tối đa"
 
 msgid "Max Velocity"
+msgstr "Vận tốc tối đa"
+
+msgid "Max:"
 msgstr ""
 
 msgid "Maximum"
-msgstr ""
+msgstr "Cực đại"
 
 msgid "Measure Both"
-msgstr ""
+msgstr "Đo cả hai"
 
 msgid "Measure X"
-msgstr ""
+msgstr "Đo trục X"
 
 msgid "Measure Y"
-msgstr ""
+msgstr "Đo trục Y"
 
 msgid "Medium"
-msgstr ""
+msgstr "Vừa"
 
 msgid "Memory"
-msgstr ""
+msgstr "Bộ nhớ"
 
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 msgid "Mesh calibrate"
-msgstr ""
+msgstr "Cân chỉnh lưới"
 
 msgid "Minimum Cruise Ratio"
+msgstr "Tỉ lệ tối thiểu"
+
+msgid "Minimum:"
 msgstr ""
 
 msgid "Modified"
-msgstr ""
+msgstr "Đã chỉnh sửa"
 
 msgid "Moonraker: connected"
-msgstr ""
+msgstr "Moonraker: đã kết nối"
 
 msgid "More"
-msgstr ""
+msgstr "Thêm"
 
 msgid "Move"
-msgstr ""
+msgstr "Di chuyển"
 
 msgid "Move Distance (mm)"
-msgstr ""
+msgstr "Khoảng cách di chuyển (mm)"
 
 msgid "Name"
-msgstr ""
+msgstr "Tên"
 
 msgid "Network"
+msgstr "Mạng"
+
+msgid "Network not found"
 msgstr ""
 
 msgid "Never"
-msgstr ""
+msgstr "Không bao giờ"
 
 msgid "New"
-msgstr ""
+msgstr "Mới"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "Không có macro hợp lệ:"
 
 msgid "No mesh has been loaded"
-msgstr ""
+msgstr "Không có lưới nào được tải"
 
 msgid "No wireless interface has been found"
-msgstr ""
+msgstr "Không tìm thấy giao diện không dây"
 
 msgid "Not all screens support this"
-msgstr ""
+msgstr "Không phải tất cả các màn hình đều hỗ trợ điều này"
 
 msgid "Not working or not configured"
-msgstr ""
+msgstr "Không hoạt động hoặc chưa được cấu hình"
 
 msgid "Nothing selected"
-msgstr ""
+msgstr "Không có gì được chọn"
 
 msgid "Notification log empty"
-msgstr ""
+msgstr "Nhật ký thông báo trống"
 
 msgid "Notifications"
-msgstr ""
+msgstr "Thông báo"
 
 msgid "Only for the move panel"
-msgstr ""
+msgstr "Chỉ dành cho bảng điều khiển di chuyển"
 
 #, python-format
 msgid "Outdated by %d"
-msgstr ""
+msgstr "Lỗi thời bởi %d"
 
 msgid "PSK for"
-msgstr ""
+msgstr "PSK cho"
 
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
-msgstr[0] ""
+msgstr[0] "Gói sẽ được cập nhật"
 
 msgid "Part Fan"
-msgstr ""
+msgstr "Quạt phần"
 
 msgid "Password saved"
-msgstr ""
+msgstr "Mật khẩu đã lưu"
 
 msgid "Pause"
-msgstr ""
+msgstr "Tạm dừng"
 
 msgid "Paused"
-msgstr ""
+msgstr "Đã tạm dừng"
 
 msgid "Perform a full upgrade?"
-msgstr ""
+msgstr "Thực hiện nâng cấp toàn bộ?"
 
 msgid "Pins"
-msgstr ""
+msgstr "Chân cắm"
 
 msgid "Please recompile and flash the micro-controller."
-msgstr ""
+msgstr "Vui lòng biên dịch lại và nạp lại bộ điều khiển."
 
 msgid "Please wait"
-msgstr ""
+msgstr "Vui lòng đợi"
 
 msgid "Power"
-msgstr ""
+msgstr "Nguồn điện"
 
 msgid "Power On Printer"
-msgstr ""
+msgstr "Bật nguồn máy in"
 
 msgid "Pressure Advance:"
-msgstr ""
+msgstr "Nâng áp suất:"
 
 msgid "Print"
-msgstr ""
+msgstr "In"
 
 msgid "Print Control"
-msgstr ""
-
-msgid "Print Time"
-msgstr ""
+msgstr "Điều khiển in"
 
 msgid "Printer"
-msgstr ""
+msgstr "Máy in"
 
 msgid "Printer Connections"
-msgstr ""
+msgstr "Kết nối máy in"
 
 msgid "Printer Select"
-msgstr ""
+msgstr "Chọn máy in"
 
 msgid "Printing"
-msgstr ""
+msgstr "Đang in"
 
 msgid "Probe Offset"
-msgstr ""
+msgstr "Sai lệch đầu dò"
 
 msgid "Profile Name:"
-msgstr ""
+msgstr "Tên mô tả:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "Cung cấp KlipperScreen.log khi cần trợ giúp.\n"
 
 msgid "Quad Gantry Level"
-msgstr ""
+msgstr "Cân chỉnh bốn trục"
 
 msgid "Raise Nozzle"
-msgstr ""
+msgstr "Nâng đầu phun"
 
 msgid "Recover"
-msgstr ""
+msgstr "Khôi phục"
 
 msgid "Recover Hard"
-msgstr ""
+msgstr "Khôi phục cứng"
 
 msgid "Recover Soft"
-msgstr ""
+msgstr "Khôi phục mềm"
 
 msgid "Reference"
-msgstr ""
+msgstr "Tham chiếu"
 
 msgid "Refresh"
+msgstr "Làm mới"
+
+msgid "Remove network"
 msgstr ""
 
 msgid "Rename/Move:"
-msgstr ""
+msgstr "Đổi tên/Di chuyển:"
 
 msgid "Restart"
-msgstr ""
+msgstr "Khởi động lại"
 
 msgid "Resume"
-msgstr ""
+msgstr "Tiếp tục"
 
 msgid "Retract"
-msgstr ""
+msgstr "Rút lại"
 
 msgid "Retraction"
-msgstr ""
+msgstr "Rút lại"
 
 msgid "Retraction Length"
-msgstr ""
+msgstr "Chiều dài rút lại"
 
 msgid "Retraction Speed"
-msgstr ""
+msgstr "Tốc độ rút lại"
 
 msgid "Retry"
-msgstr ""
+msgstr "Thử lại"
 
 msgid "Retrying"
-msgstr ""
+msgstr "Đang thử lại"
 
 msgid "Rotation invalid"
-msgstr ""
+msgstr "Vị trí không hợp lệ"
 
 msgid "Save"
-msgstr ""
+msgstr "Lưu"
 
 msgid "Save Config"
-msgstr ""
+msgstr "Lưu Cấu hình"
 
 msgid "Save Z"
-msgstr ""
+msgstr "Lưu Z"
 
 msgid "Save configuration?"
-msgstr ""
+msgstr "Lưu cấu hình?"
 
 msgid "Saved"
-msgstr ""
+msgstr "Đã lưu"
 
 #, python-format
 msgid "Saved offset: %s"
-msgstr ""
+msgstr "Đã lưu sai lệch: %s"
 
 msgid "Screen DPMS"
-msgstr ""
+msgstr "DPMS Màn hình"
 
 msgid "Screen Power Off Time"
-msgstr ""
+msgstr "Thời Gian Tắt Màn Hình"
 
 msgid "Screws Adjust"
-msgstr ""
+msgstr "Điều chỉnh Ốc vít"
 
 msgid "Screws not used:"
-msgstr ""
+msgstr "Ốc vít không được sử dụng:"
 
 msgid "Send"
-msgstr ""
+msgstr "Gửi"
 
 msgid "Set Temp"
-msgstr ""
+msgstr "Đặt Nhiệt độ"
 
 msgid "Settings"
-msgstr ""
+msgstr "Cài đặt"
 
 msgid "Show"
-msgstr ""
+msgstr "Hiển thị"
 
 msgid "Show Heater Power"
-msgstr ""
+msgstr "Hiển thị Công suất Bộ sưởi"
 
 msgid "Show Scrollbars Buttons"
-msgstr ""
+msgstr "Hiển thị Nút Thanh cuộn"
 
 msgid "Show only devices that are able to be set"
-msgstr ""
+msgstr "Chỉ hiển thị các thiết bị có thể được đặt"
 
 msgid "Shutdown"
-msgstr ""
+msgstr "Tắt nguồn"
 
 msgid "Size"
-msgstr ""
+msgstr "Kích thước"
 
 msgid "Slicer"
-msgstr ""
+msgstr "Phần mềm chia lớp"
 
 msgid "Slicer:"
-msgstr ""
+msgstr "Phần mềm chia lớp:"
 
 msgid "Small"
-msgstr ""
+msgstr "Nhỏ"
 
 msgid "Speed (mm/s)"
-msgstr ""
+msgstr "Tốc độ (mm/s)"
 
 msgid "Speed +"
-msgstr ""
+msgstr "Tốc độ +"
 
 msgid "Speed -"
-msgstr ""
+msgstr "Tốc độ -"
 
 msgid "Speed:"
-msgstr ""
+msgstr "Tốc độ:"
 
 msgid "Square Corner Velocity"
-msgstr ""
+msgstr "Tốc độ Góc Vuông"
 
 msgid "Standby"
-msgstr ""
+msgstr "Chế độ Chờ"
 
 msgid "Start"
-msgstr ""
-
-msgid "Starting WiFi Association"
-msgstr ""
+msgstr "Bắt đầu"
 
 msgid "Starting recovery for"
-msgstr ""
+msgstr "Bắt đầu phục hồi cho"
 
 msgid "Starting update for"
-msgstr ""
+msgstr "Bắt đầu cập nhật cho"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
 msgstr ""
+"Đổi chỗ các nút nếu chúng nằm trên đỉnh nhau, ảnh hưởng đến các bảng điều "
+"khác"
 
 msgid "System"
-msgstr ""
+msgstr "Hệ thống"
 
 msgid "System Restart"
-msgstr ""
+msgstr "Khởi động lại Hệ thống"
 
 msgid "System Shutdown"
+msgstr "Tắt Hệ thống"
+
+msgid "System:"
 msgstr ""
 
 msgid "Temp (°C)"
-msgstr ""
+msgstr "Nhiệt độ (°C)"
 
 msgid "Temperature"
+msgstr "Nhiệt độ"
+
+msgid "The system doesn't meet the minimum requirement"
 msgstr ""
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr ""
+msgstr "Bảng điều này hỗ trợ tối đa 9 ốc vít trong lưới 3x3"
 
 msgid "This will affect screw positions and mesh graph"
-msgstr ""
+msgstr "Điều này sẽ ảnh hưởng đến vị trí ốc vít và biểu đồ lưới"
 
 msgid "Timeout for screen black-out or power-off"
-msgstr ""
+msgstr "Thời gian chờ để màn hình tắt hoặc nguồn tắt"
 
 msgid "Timeout for screen black-out or power-off during printing"
-msgstr ""
+msgstr "Thời gian chờ để màn hình tắt hoặc nguồn tắt trong quá trình in"
 
 msgid "Total:"
-msgstr ""
+msgstr "Tổng cộng:"
 
 msgid "Unknown Heater"
+msgstr "Bộ sưởi không xác định"
+
+msgid "Unknown security type"
 msgstr ""
 
 msgid "Unload"
-msgstr ""
+msgstr "Đã tải"
 
 msgid "Unretract Extra Length"
-msgstr ""
+msgstr "Độ dài rút thêm"
 
 msgid "Unretract Speed"
-msgstr ""
+msgstr "Tốc độ rút"
 
 msgid "Up To Date"
-msgstr ""
+msgstr "Cập Nhật"
 
 msgid "Update"
-msgstr ""
+msgstr "Cập nhật"
 
 msgid "Updating"
-msgstr ""
+msgstr "Đang cập nhật"
 
 msgid "Uploaded"
-msgstr ""
+msgstr "Đã tải lên"
 
 msgid "Useful for un-responsive touchscreens"
-msgstr ""
-
-msgid "Warning"
-msgstr ""
+msgstr "Hữu ích cho màn hình cảm ứng không phản hồi"
 
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
+msgstr "WebRTC không được hỗ trợ bởi backend đang thử Stream"
 
 msgid "XY Move Speed (mm/s)"
-msgstr ""
+msgstr "Tốc độ Di chuyển XY (mm/s)"
 
 msgid "XY Speed (mm/s)"
-msgstr ""
+msgstr "Tốc độ XY (mm/s)"
 
 msgid "Z Calibrate"
-msgstr ""
+msgstr "Hiệu chuẩn Z"
 
 msgid "Z Move Speed (mm/s)"
-msgstr ""
+msgstr "Tốc độ Di chuyển Z (mm/s)"
 
 msgid "Z Speed (mm/s)"
-msgstr ""
+msgstr "Tốc độ Z (mm/s)"
 
 msgid "Z Tilt"
-msgstr ""
+msgstr "Nghiêng Z"
 
 msgid "Z offset:"
-msgstr ""
+msgstr "Độ lệch Z:"
 
 msgid "commit"
 msgid_plural "commits"
-msgstr[0] ""
-
-msgid "dBm"
-msgstr ""
+msgstr[0] "commit"
 
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
+msgstr[0] "ngày"
 
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
+msgstr[0] "giờ"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "các macro sử dụng 'rename_existing' đã bị ẩn"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "các macro có tên bắt đầu bằng '_' đã bị ẩn"
 
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
+msgstr[0] "phút"
 
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 msgid "mm/s"
-msgstr ""
+msgstr "mm/s"
 
 msgid "mm/s²"
-msgstr ""
+msgstr "mm/s²"
 
 msgid "mm³/s"
-msgstr ""
+msgstr "mm³/s"
 
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
+msgstr[0] "giây"
+
+#~ msgid "Ended official support in June 2023"
+#~ msgstr "Hỗ trợ chính thức kết thúc vào tháng 6 năm 2023"
+
+#~ msgid "Hidden"
+#~ msgstr "Ẩn"
+
+#~ msgid "KlipperScreen will drop support in June 2024"
+#~ msgstr "KlipperScreen sẽ ngừng hỗ trợ vào tháng 6 năm 2024"
+
+#~ msgid "Print Time"
+#~ msgstr "Thời gian in"
+
+#~ msgid "Starting WiFi Association"
+#~ msgstr "Bắt đầu Liên kết WiFi"
+
+#~ msgid "Warning"
+#~ msgstr "Cảnh báo"
+
+#~ msgid "dBm"
+#~ msgstr "dBm"
 
 #~ msgid "Deselect"
 #~ msgstr "Hủy chọn"
