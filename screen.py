@@ -134,8 +134,12 @@ class KlipperScreen(Gtk.Window):
         logging.info(f"Screen resolution: {self.width}x{self.height}")
         self.theme = self._config.get_main_config().get('theme')
         self.show_cursor = self._config.get_main_config().getboolean("show_cursor", fallback=False)
+        self.setup_gtk_settings()
+        self.style_provider = Gtk.CssProvider()
         self.gtk = KlippyGtk(self)
-        self.init_style()
+        self.base_css = ""
+        self.load_base_styles()
+        self.change_theme(self.theme)
         self.set_icon_from_file(os.path.join(klipperscreendir, "styles", "icon.svg"))
         self.base_panel = BasePanel(self, title="Base Panel")
         self.add(self.base_panel.main_grid)
@@ -433,34 +437,30 @@ class KlipperScreen(Gtk.Window):
         # noinspection PyUnreachableCode
         self._ws.send_method("machine.services.restart", {"service": "KlipperScreen"})  # Fallback
 
-    def init_style(self):
-        self.setup_gtk_settings()
-        css_data = self.load_base_css()
-        style_options = self.load_base_style_configuration()
-        theme_css, theme_options = self.load_custom_theme()
-        style_options.update(theme_options)
-        self.gtk.color_list = style_options['graph_colors']
-        css_data += theme_css
-        css_data = self.customize_graph_colors(css_data, style_options)
-        css_data = css_data.replace("KS_FONT_SIZE", f"{self.gtk.font_size}")
-        self.apply_styles(css_data)
-
     def setup_gtk_settings(self):
         settings = Gtk.Settings.get_default()
         settings.set_property("gtk-theme-name", "Adwaita")
         settings.set_property("gtk-application-prefer-dark-theme", False)
 
-    def load_base_css(self):
-        base_css_path = os.path.join(klipperscreendir, "styles", "base.css")
-        return pathlib.Path(base_css_path).read_text()
-
-    def load_base_style_configuration(self):
+    def load_base_styles(self):
         base_conf_path = os.path.join(klipperscreendir, "styles", "base.conf")
         with open(base_conf_path) as f:
-            return json.load(f)
+            self.style_options = json.load(f)
+        self.gtk.color_list = self.style_options['graph_colors']
+        base_css_path = os.path.join(klipperscreendir, "styles", "base.css")
+        self.base_css = pathlib.Path(base_css_path).read_text()
+        self.base_css = self.base_css.replace("KS_FONT_SIZE", f"{self.gtk.font_size}")
+        self.base_css = self.customize_graph_colors(self.base_css)
 
-    def load_custom_theme(self):
-        theme_dir = os.path.join(klipperscreendir, "styles", self.theme)
+        self.style_provider.load_from_data(self.base_css.encode())
+        Gtk.StyleContext.add_provider_for_screen(
+            Gdk.Screen.get_default(),
+            Gtk.CssProvider(),
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
+
+    def load_custom_theme(self, theme_name):
+        theme_dir = os.path.join(klipperscreendir, "styles", theme_name)
         theme_css_path = os.path.join(theme_dir, "style.css")
         theme_conf_path = os.path.join(theme_dir, "style.conf")
 
@@ -480,10 +480,11 @@ class KlipperScreen(Gtk.Window):
                     f"{e}\n\n"
                     f"{traceback.format_exc()}"
                 )
+
         return theme_css, theme_options
 
-    def customize_graph_colors(self, css_data, style_options):
-        for category, category_data in style_options['graph_colors'].items():
+    def customize_graph_colors(self, css_data):
+        for category, category_data in self.style_options['graph_colors'].items():
             for i, color in enumerate(category_data['colors'], start=1):
                 if category == "extruder":
                     class_name = f".graph_label_{category}{i}" if i > 1 else f".graph_label_{category}"
@@ -494,15 +495,27 @@ class KlipperScreen(Gtk.Window):
                 css_data += f"\n{class_name} {{ border-left-color: #{color} }}"
         return css_data
 
-    def apply_styles(self, css_data):
-        style_provider = Gtk.CssProvider()
-        style_provider.load_from_data(css_data.encode())
-
+    def update_style_provider(self, theme_css):
+        css_data = self.customize_graph_colors(theme_css)
+        css_data = self.base_css + css_data
+        screen = Gdk.Screen.get_default()
+        if self.style_provider:
+            Gtk.StyleContext.remove_provider_for_screen(screen, self.style_provider)
+        self.style_provider.load_from_data(css_data.encode())
         Gtk.StyleContext.add_provider_for_screen(
-            Gdk.Screen.get_default(),
-            style_provider,
+            screen,
+            self.style_provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
+
+    def change_theme(self, theme_name=None):
+        if not theme_name:
+            theme_name = self._config.get_main_config().get('theme')
+        self.gtk.update_themedir(theme_name)
+        theme_css, theme_options = self.load_custom_theme(theme_name)
+        self.style_options.update(theme_options)
+        self.gtk.color_list = self.style_options['graph_colors']
+        self.update_style_provider(theme_css)
 
     def _go_to_submenu(self, widget, name):
         logging.info(f"#### Go to submenu {name}")
