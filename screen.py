@@ -434,54 +434,67 @@ class KlipperScreen(Gtk.Window):
         self._ws.send_method("machine.services.restart", {"service": "KlipperScreen"})  # Fallback
 
     def init_style(self):
+        self.setup_gtk_settings()
+        css_data = self.load_base_css()
+        style_options = self.load_base_style_configuration()
+        theme_css, theme_options = self.load_custom_theme()
+        style_options.update(theme_options)
+        self.gtk.color_list = style_options['graph_colors']
+        css_data += theme_css
+        css_data = self.customize_graph_colors(css_data, style_options)
+        css_data = css_data.replace("KS_FONT_SIZE", f"{self.gtk.font_size}")
+        self.apply_styles(css_data)
+
+    def setup_gtk_settings(self):
         settings = Gtk.Settings.get_default()
         settings.set_property("gtk-theme-name", "Adwaita")
         settings.set_property("gtk-application-prefer-dark-theme", False)
-        css_data = pathlib.Path(os.path.join(klipperscreendir, "styles", "base.css")).read_text()
 
-        with open(os.path.join(klipperscreendir, "styles", "base.conf")) as f:
-            style_options = json.load(f)
-        # Load custom theme
-        theme = os.path.join(klipperscreendir, "styles", self.theme)
-        theme_style = os.path.join(theme, "style.css")
-        theme_style_conf = os.path.join(theme, "style.conf")
+    def load_base_css(self):
+        base_css_path = os.path.join(klipperscreendir, "styles", "base.css")
+        return pathlib.Path(base_css_path).read_text()
 
-        if os.path.exists(theme_style):
-            with open(theme_style) as css:
-                css_data += css.read()
-        if os.path.exists(theme_style_conf):
+    def load_base_style_configuration(self):
+        base_conf_path = os.path.join(klipperscreendir, "styles", "base.conf")
+        with open(base_conf_path) as f:
+            return json.load(f)
+
+    def load_custom_theme(self):
+        theme_dir = os.path.join(klipperscreendir, "styles", self.theme)
+        theme_css_path = os.path.join(theme_dir, "style.css")
+        theme_conf_path = os.path.join(theme_dir, "style.conf")
+
+        theme_css = ""
+        theme_options = {}
+
+        if os.path.exists(theme_css_path):
+            theme_css = pathlib.Path(theme_css_path).read_text()
+
+        if os.path.exists(theme_conf_path):
             try:
-                with open(theme_style_conf) as f:
-                    style_options.update(json.load(f))
+                with open(theme_conf_path) as f:
+                    theme_options = json.load(f)
             except Exception as e:
-                logging.error(f"Unable to parse custom template conf file:\n{e}\n\n{traceback.format_exc()}")
+                logging.error(
+                    f"Unable to parse custom template conf file:\n"
+                    f"{e}\n\n"
+                    f"{traceback.format_exc()}"
+                )
+        return theme_css, theme_options
 
-        self.gtk.color_list = style_options['graph_colors']
+    def customize_graph_colors(self, css_data, style_options):
+        for category, category_data in style_options['graph_colors'].items():
+            for i, color in enumerate(category_data['colors'], start=1):
+                if category == "extruder":
+                    class_name = f".graph_label_{category}{i}" if i > 1 else f".graph_label_{category}"
+                elif category == "bed":
+                    class_name = f".graph_label_{category}"
+                else:
+                    class_name = f".graph_label_{category}_{i}"
+                css_data += f"\n{class_name} {{ border-left-color: #{color} }}"
+        return css_data
 
-        for i in range(len(style_options['graph_colors']['extruder']['colors'])):
-            num = "" if i == 0 else i
-            css_data += "\n.graph_label_extruder%s {border-left-color: #%s}" % (
-                num,
-                style_options['graph_colors']['extruder']['colors'][i]
-            )
-        for i in range(len(style_options['graph_colors']['bed']['colors'])):
-            css_data += "\n.graph_label_heater_bed%s {border-left-color: #%s}" % (
-                "" if i == 0 else i + 1,
-                style_options['graph_colors']['bed']['colors'][i]
-            )
-        for i in range(len(style_options['graph_colors']['fan']['colors'])):
-            css_data += "\n.graph_label_fan_%s {border-left-color: #%s}" % (
-                i + 1,
-                style_options['graph_colors']['fan']['colors'][i]
-            )
-        for i in range(len(style_options['graph_colors']['sensor']['colors'])):
-            css_data += "\n.graph_label_sensor_%s {border-left-color: #%s}" % (
-                i + 1,
-                style_options['graph_colors']['sensor']['colors'][i]
-            )
-
-        css_data = css_data.replace("KS_FONT_SIZE", f"{self.gtk.font_size}")
-
+    def apply_styles(self, css_data):
         style_provider = Gtk.CssProvider()
         style_provider.load_from_data(css_data.encode())
 
