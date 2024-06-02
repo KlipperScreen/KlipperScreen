@@ -161,6 +161,7 @@ class KlippyGtk:
         if label is not None:
             b.set_label(label.replace("\n", " "))
         if image_name is not None:
+            b.set_name(image_name)
             if scale is None:
                 scale = self.button_image_scale
             if label is None:

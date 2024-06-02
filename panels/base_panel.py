@@ -12,7 +12,7 @@ from ks_includes.screen_panel import ScreenPanel
 
 
 class BasePanel(ScreenPanel):
-    def __init__(self, screen, title):
+    def __init__(self, screen, title=None):
         super().__init__(screen, title)
         self.current_panel = None
         self.time_min = -1
@@ -110,6 +110,16 @@ class BasePanel(ScreenPanel):
             self.main_grid.attach(self.content, 1, 1, 1, 1)
 
         self.update_time()
+
+    def reload_icons(self):
+        button: Gtk.Button
+        for button in self.action_bar.get_children():
+            img = button.get_image()
+            name = button.get_name()
+            pixbuf = img.get_pixbuf()
+            width = pixbuf.get_width()
+            height = pixbuf.get_height()
+            button.set_image(self._gtk.Image(name, width, height))
 
     def show_heaters(self, show=True):
         try:

@@ -139,9 +139,9 @@ class KlipperScreen(Gtk.Window):
         self.gtk = KlippyGtk(self)
         self.base_css = ""
         self.load_base_styles()
-        self.change_theme(self.theme)
         self.set_icon_from_file(os.path.join(klipperscreendir, "styles", "icon.svg"))
-        self.base_panel = BasePanel(self, title="Base Panel")
+        self.base_panel = BasePanel(self)
+        self.change_theme(self.theme)
         self.add(self.base_panel.main_grid)
         self.show_all()
         min_ver = (3, 8)
@@ -329,6 +329,10 @@ class KlipperScreen(Gtk.Window):
             logging.exception(f"Error attaching panel:\n{e}\n\n{traceback.format_exc()}")
 
     def attach_panel(self, panel):
+        if panel in self.panels_reinit:
+            # this happens when the first panel needs a reinit
+            self.reload_panels()
+            return
         self.base_panel.add_content(self.panels[panel])
         logging.debug(f"Current panel hierarchy: {' > '.join(self._cur_panels)}")
         while len(self.panels[panel].menu) > 1:
@@ -501,6 +505,7 @@ class KlipperScreen(Gtk.Window):
         screen = Gdk.Screen.get_default()
         if self.style_provider:
             Gtk.StyleContext.remove_provider_for_screen(screen, self.style_provider)
+        self.style_provider = Gtk.CssProvider()
         self.style_provider.load_from_data(css_data.encode())
         Gtk.StyleContext.add_provider_for_screen(
             screen,
@@ -516,6 +521,11 @@ class KlipperScreen(Gtk.Window):
         self.style_options.update(theme_options)
         self.gtk.color_list = self.style_options['graph_colors']
         self.update_style_provider(theme_css)
+        self.reload_icon_theme()
+
+    def reload_icon_theme(self):
+        self.panels_reinit = list(self.panels)
+        self.base_panel.reload_icons()
 
     def _go_to_submenu(self, widget, name):
         logging.info(f"#### Go to submenu {name}")
