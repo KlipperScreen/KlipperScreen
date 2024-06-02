@@ -300,6 +300,8 @@ install_network_manager()
         else
             echo_ok "Insalling NetworkManager for the network panel"
             sudo apt install network-manager
+            sudo systemctl start NetworkManager
+            sudo systemctl enable NetworkManager
         fi
     fi
 }
