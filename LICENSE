@@ -629,8 +629,9 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-OctoScreen: A OctoPrint touch interface for TFT touch modules
-Copyright (C) 2018 Máximo Cuadros Ortiz
+KlipperScreen: A Klipper touch interface for touchscreens
+Copyright (C) 2020-2021 Jordan Ruthe
+Copyright (C) 2021-2024 Alfredo Monclus
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
