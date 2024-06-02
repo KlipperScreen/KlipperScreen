@@ -385,12 +385,12 @@ class SdbusNm:
             elif state in [
                 enums.DeviceState.ACTIVATED,
             ]:
-                self.popup(_("Connection established successfully"), 1)
+                self.popup(_("Network connected"), 1)
             elif state in [
                 enums.DeviceState.DISCONNECTED,
                 enums.DeviceState.DEACTIVATING,
             ]:
-                self.popup(_("Connection disconnected"))
+                self.popup(_("Network disconnected"))
             elif state == enums.DeviceState.FAILED:
                 self.popup(_("Connection failed"))
             self.wifi_state = state

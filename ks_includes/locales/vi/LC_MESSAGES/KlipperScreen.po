@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 08:31-0300\n"
+"POT-Creation-Date: 2024-06-02 08:38-0300\n"
 "PO-Revision-Date: 2024-06-02 12:00+0000\n"
 "Last-Translator: ChatGPT <noreply@openai.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -176,12 +176,6 @@ msgstr ""
 #, python-format
 msgid "Connecting to %s"
 msgstr "Đang kết nối đến %s"
-
-msgid "Connection disconnected"
-msgstr ""
-
-msgid "Connection established successfully"
-msgstr ""
 
 msgid "Connection failed"
 msgstr ""
@@ -572,6 +566,12 @@ msgstr "Tên"
 
 msgid "Network"
 msgstr "Mạng"
+
+msgid "Network connected"
+msgstr ""
+
+msgid "Network disconnected"
+msgstr ""
 
 msgid "Network not found"
 msgstr ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 23:37-0300\n"
+"POT-Creation-Date: 2024-06-02 08:38-0300\n"
 "PO-Revision-Date: 2024-06-01 12:09+0000\n"
 "Last-Translator: \"Zs.Antal\" <zsikaiantal@icloud.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -170,15 +170,24 @@ msgstr "Vészleállítás megerősítése"
 msgid "Connected"
 msgstr "Csatlakoztatva"
 
+msgid "Connecting"
+msgstr ""
+
 #, python-format
 msgid "Connecting to %s"
 msgstr "Csatlakozás %s"
+
+msgid "Connection failed"
+msgstr ""
 
 msgid "Console"
 msgstr "Konzol"
 
 msgid "Cooldown"
 msgstr "Lehűtés"
+
+msgid "Couldn't add network"
+msgstr ""
 
 msgid "Current percentage and graph line"
 msgstr "Aktuális százalék és grafikonvonal"
@@ -201,8 +210,18 @@ msgstr "Motorok letiltása"
 msgid "Disable for 12hs with am / pm"
 msgstr "Letiltás 12 órára am / pm"
 
+msgid "Disconnect"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "Távolság (mm)"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Do you want to let KlipperScreen try to solve the issue?"
+msgstr ""
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -216,9 +235,6 @@ msgstr "Vész STOP"
 
 msgid "Enable screen power management"
 msgstr "Képernyő energiagazdálkodás engedélyezése"
-
-msgid "Ended official support in June 2023"
-msgstr "A hivatalos támogatás 2023 júniusában véget ért"
 
 msgid "Error"
 msgstr "Hiba"
@@ -237,6 +253,9 @@ msgstr "Hiba a tekercsek lekérésekor"
 
 msgid "Error: Couldn't get a position to probe"
 msgstr "Hiba: Nem sikerült beállítani a mérni kívánt pozíciót"
+
+msgid "Estimated Time"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Becsült idő módszer"
@@ -259,11 +278,20 @@ msgstr "Adagolás +"
 msgid "Extrusion -"
 msgstr "Adagolás -"
 
+msgid "Failed to delete connection"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
 msgid "Failed, adjust position first"
 msgstr "Sikertelen! Előbb állítsd be a pozíciót"
 
 msgid "Fan"
 msgstr "Hűtés"
+
+msgid "Filament"
+msgstr ""
 
 msgid "Filament Used"
 msgstr "Használt nyomtatószál"
@@ -307,17 +335,23 @@ msgstr "Áramlás:"
 msgid "Font Size"
 msgstr "Betűméret"
 
+msgid "Forget"
+msgstr ""
+
 msgid "Full Update"
 msgstr "Teljes frissítés"
+
+msgid "Gcodes"
+msgstr ""
+
+msgid "Getting IP address"
+msgstr ""
 
 msgid "Go Back"
 msgstr "Visszalépés"
 
 msgid "Height:"
 msgstr "Magasság:"
-
-msgid "Hidden"
-msgstr "Rejtett"
 
 msgid "Hide"
 msgstr "Elrejt"
@@ -367,6 +401,12 @@ msgstr "PID-kalibráció kezdeményezése:"
 msgid "Input Shaper"
 msgstr "Bemeneti alakító"
 
+msgid "Insufficient priviledges detected"
+msgstr ""
+
+msgid "Insufficient privileges"
+msgstr ""
+
 msgid "Interface"
 msgstr "Felület"
 
@@ -412,9 +452,6 @@ msgstr "A Klipper megpróbál elindulni"
 msgid "Klipper will reboot"
 msgstr "A Klipper újraindul"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr "A KlipperScreen 2024 júniusában megszünteti a támogatást"
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -428,6 +465,9 @@ msgstr "Nagy"
 
 msgid "Last Used"
 msgstr "Utoljára használt"
+
+msgid "Layer Height"
+msgstr ""
 
 msgid "Layer:"
 msgstr "Réteg:"
@@ -474,6 +514,9 @@ msgstr "Max gyorsulás"
 msgid "Max Velocity"
 msgstr "Max sebesség"
 
+msgid "Max:"
+msgstr ""
+
 msgid "Maximum"
 msgstr "Maximum"
 
@@ -501,6 +544,9 @@ msgstr "Háló kalibrálása"
 msgid "Minimum Cruise Ratio"
 msgstr "Minimális utazási arány"
 
+msgid "Minimum:"
+msgstr ""
+
 msgid "Modified"
 msgstr "Módosított"
 
@@ -521,6 +567,15 @@ msgstr "Név"
 
 msgid "Network"
 msgstr "Hálózat"
+
+msgid "Network connected"
+msgstr ""
+
+msgid "Network disconnected"
+msgstr ""
+
+msgid "Network not found"
+msgstr ""
 
 msgid "Never"
 msgstr "Soha"
@@ -606,9 +661,6 @@ msgstr "Nyomtatás"
 msgid "Print Control"
 msgstr "Nyomtatásvezérlés"
 
-msgid "Print Time"
-msgstr "Nyomtatási idő"
-
 msgid "Printer"
 msgstr "Nyomtató"
 
@@ -650,6 +702,9 @@ msgstr "Referencia"
 
 msgid "Refresh"
 msgstr "Frissítés"
+
+msgid "Remove network"
+msgstr ""
 
 msgid "Rename/Move:"
 msgstr "Átnevez/Áthelyez:"
@@ -769,9 +824,6 @@ msgstr "Készenlét"
 msgid "Start"
 msgstr "Indítás"
 
-msgid "Starting WiFi Association"
-msgstr "A WiFi társítás elindítása"
-
 msgid "Starting recovery for"
 msgstr "Helyreállítás megkezdése"
 
@@ -791,11 +843,17 @@ msgstr "Rendszer újraindítása"
 msgid "System Shutdown"
 msgstr "Rendszer leállitás"
 
+msgid "System:"
+msgstr ""
+
 msgid "Temp (°C)"
 msgstr "Hőfok (°C)"
 
 msgid "Temperature"
 msgstr "Hőfok"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr ""
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr "Ez a panel akár 9 csavart is elbír egy 3x3-as rácsban"
@@ -815,6 +873,9 @@ msgstr "Teljes:"
 
 msgid "Unknown Heater"
 msgstr "Ismeretlen melegítő"
+
+msgid "Unknown security type"
+msgstr ""
 
 msgid "Unload"
 msgstr "Kiadás"
@@ -839,9 +900,6 @@ msgstr "Feltöltve"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Hasznos a nem reagáló érintőképernyőknél"
-
-msgid "Warning"
-msgstr "Figyelem"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "A WebRTC-t a Streamet próbáló háttérrendszer nem támogatja"
@@ -871,9 +929,6 @@ msgid "commit"
 msgid_plural "commits"
 msgstr[0] "ajánlás"
 msgstr[1] "ajánlások"
-
-msgid "dBm"
-msgstr "dBm"
 
 msgid "day"
 msgid_plural "days"
@@ -912,6 +967,27 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] "másodperc"
 msgstr[1] "másodperc"
+
+#~ msgid "Ended official support in June 2023"
+#~ msgstr "A hivatalos támogatás 2023 júniusában véget ért"
+
+#~ msgid "Hidden"
+#~ msgstr "Rejtett"
+
+#~ msgid "KlipperScreen will drop support in June 2024"
+#~ msgstr "A KlipperScreen 2024 júniusában megszünteti a támogatást"
+
+#~ msgid "Print Time"
+#~ msgstr "Nyomtatási idő"
+
+#~ msgid "Starting WiFi Association"
+#~ msgstr "A WiFi társítás elindítása"
+
+#~ msgid "Warning"
+#~ msgstr "Figyelem"
+
+#~ msgid "dBm"
+#~ msgstr "dBm"
 
 #~ msgid "Deselect"
 #~ msgstr "Kijelölés törlése"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 23:37-0300\n"
+"POT-Creation-Date: 2024-06-02 08:38-0300\n"
 "PO-Revision-Date: 2024-04-16 18:02+0000\n"
 "Last-Translator: F1CU <ficu1234@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -172,15 +172,24 @@ msgstr "Potwierdzaj awaryjny stop"
 msgid "Connected"
 msgstr "Połączono"
 
+msgid "Connecting"
+msgstr ""
+
 #, python-format
 msgid "Connecting to %s"
 msgstr "Łączenie z %s"
+
+msgid "Connection failed"
+msgstr ""
 
 msgid "Console"
 msgstr "Konsola"
 
 msgid "Cooldown"
 msgstr "Studzenie"
+
+msgid "Couldn't add network"
+msgstr ""
 
 msgid "Current percentage and graph line"
 msgstr ""
@@ -203,8 +212,18 @@ msgstr "Wyłącz silniki"
 msgid "Disable for 12hs with am / pm"
 msgstr ""
 
+msgid "Disconnect"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "Dystans (mm)"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Do you want to let KlipperScreen try to solve the issue?"
+msgstr ""
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -218,9 +237,6 @@ msgstr "Wyłącznik awaryjny"
 
 msgid "Enable screen power management"
 msgstr ""
-
-msgid "Ended official support in June 2023"
-msgstr "Oficjalne wsparcie zakończyło się w czerwcu 2023"
 
 msgid "Error"
 msgstr "Błąd"
@@ -239,6 +255,9 @@ msgstr "Błąd podczas pobierania szpuli"
 
 msgid "Error: Couldn't get a position to probe"
 msgstr "Błąd: Nie mogę odczytać pozycji sondy"
+
+msgid "Estimated Time"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Metoda szacowanego czasu"
@@ -261,11 +280,20 @@ msgstr "Ekstruzja +"
 msgid "Extrusion -"
 msgstr "Ekstruzja -"
 
+msgid "Failed to delete connection"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
 msgid "Failed, adjust position first"
 msgstr "Niepowodzenie, najpierw dostosuj pozycję"
 
 msgid "Fan"
 msgstr "Wentylator"
+
+msgid "Filament"
+msgstr ""
 
 msgid "Filament Used"
 msgstr "Użyty filament"
@@ -309,17 +337,23 @@ msgstr "Przepływ:"
 msgid "Font Size"
 msgstr "Rozmiar czcionki"
 
+msgid "Forget"
+msgstr ""
+
 msgid "Full Update"
 msgstr "Aktualizuj wszystko"
+
+msgid "Gcodes"
+msgstr ""
+
+msgid "Getting IP address"
+msgstr ""
 
 msgid "Go Back"
 msgstr "Powróć"
 
 msgid "Height:"
 msgstr "Wysokość:"
-
-msgid "Hidden"
-msgstr "Ukryte"
 
 msgid "Hide"
 msgstr "Ukryj"
@@ -369,6 +403,12 @@ msgstr "Rozpoczęcie kalibracji PID dla:"
 msgid "Input Shaper"
 msgstr "Input Shaper"
 
+msgid "Insufficient priviledges detected"
+msgstr ""
+
+msgid "Insufficient privileges"
+msgstr ""
+
 msgid "Interface"
 msgstr "Interfejs"
 
@@ -414,9 +454,6 @@ msgstr "Klipper próbuje się uruchomić"
 msgid "Klipper will reboot"
 msgstr "Klipper uruchomi się ponownie"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr "KlipperScreen zakończy wsparcie w czerwcu 2024"
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -431,6 +468,9 @@ msgstr "Duży"
 
 msgid "Last Used"
 msgstr "Ostatnie użycie"
+
+msgid "Layer Height"
+msgstr ""
 
 msgid "Layer:"
 msgstr "Warstwa:"
@@ -477,6 +517,9 @@ msgstr "Maksymalne przyspieszenie"
 msgid "Max Velocity"
 msgstr "Maksymalna prędkość"
 
+msgid "Max:"
+msgstr ""
+
 msgid "Maximum"
 msgstr "Maksymalna"
 
@@ -504,6 +547,9 @@ msgstr "Kalibracja siatki"
 msgid "Minimum Cruise Ratio"
 msgstr ""
 
+msgid "Minimum:"
+msgstr ""
+
 msgid "Modified"
 msgstr "Zmodyfikowane"
 
@@ -524,6 +570,15 @@ msgstr "Nazwa"
 
 msgid "Network"
 msgstr "Sieć"
+
+msgid "Network connected"
+msgstr ""
+
+msgid "Network disconnected"
+msgstr ""
+
+msgid "Network not found"
+msgstr ""
 
 msgid "Never"
 msgstr "Nigdy"
@@ -610,9 +665,6 @@ msgstr "Drukuj"
 msgid "Print Control"
 msgstr "Kontrola druku"
 
-msgid "Print Time"
-msgstr "Czas druku"
-
 msgid "Printer"
 msgstr "Drukarka"
 
@@ -654,6 +706,9 @@ msgstr "Odniesienie"
 
 msgid "Refresh"
 msgstr "Odśwież"
+
+msgid "Remove network"
+msgstr ""
 
 msgid "Rename/Move:"
 msgstr "Zmień nazwę/Przenieś:"
@@ -773,9 +828,6 @@ msgstr "Tryb gotowości"
 msgid "Start"
 msgstr "Start"
 
-msgid "Starting WiFi Association"
-msgstr "Rozpoczęcie stowarzyszenia WiFi"
-
 msgid "Starting recovery for"
 msgstr "Rozpoczęto przywracanie dla"
 
@@ -794,11 +846,17 @@ msgstr "Restart systemu"
 msgid "System Shutdown"
 msgstr "Wyłącz system"
 
+msgid "System:"
+msgstr ""
+
 msgid "Temp (°C)"
 msgstr "Temperatura (°C)"
 
 msgid "Temperature"
 msgstr "Temperatura"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr ""
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr ""
@@ -817,6 +875,9 @@ msgstr "Całkowicie:"
 
 msgid "Unknown Heater"
 msgstr "Nieznany podgrzewacz"
+
+msgid "Unknown security type"
+msgstr ""
 
 msgid "Unload"
 msgstr "Wyładuj"
@@ -841,9 +902,6 @@ msgstr "Przesłane"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr ""
-
-msgid "Warning"
-msgstr "Ostrzeżenie"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC nie jest wspierane przez backend próbujący streamować"
@@ -874,9 +932,6 @@ msgid_plural "commits"
 msgstr[0] "zatwierdzenie"
 msgstr[1] "zatwierdzenia"
 msgstr[2] "zatwierdzeń"
-
-msgid "dBm"
-msgstr "dBm"
 
 msgid "day"
 msgid_plural "days"
@@ -919,6 +974,27 @@ msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+
+#~ msgid "Ended official support in June 2023"
+#~ msgstr "Oficjalne wsparcie zakończyło się w czerwcu 2023"
+
+#~ msgid "Hidden"
+#~ msgstr "Ukryte"
+
+#~ msgid "KlipperScreen will drop support in June 2024"
+#~ msgstr "KlipperScreen zakończy wsparcie w czerwcu 2024"
+
+#~ msgid "Print Time"
+#~ msgstr "Czas druku"
+
+#~ msgid "Starting WiFi Association"
+#~ msgstr "Rozpoczęcie stowarzyszenia WiFi"
+
+#~ msgid "Warning"
+#~ msgstr "Ostrzeżenie"
+
+#~ msgid "dBm"
+#~ msgstr "dBm"
 
 #~ msgid "Deselect"
 #~ msgstr "Odznacz"

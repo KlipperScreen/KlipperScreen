@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 23:37-0300\n"
+"POT-Creation-Date: 2024-06-02 08:38-0300\n"
 "PO-Revision-Date: 2024-05-07 02:10+0000\n"
 "Last-Translator: Rui Menezes <ruizivo.menezes@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -175,15 +175,24 @@ msgstr "Confirmar Parada de Emergência"
 msgid "Connected"
 msgstr "Conectado"
 
+msgid "Connecting"
+msgstr ""
+
 #, python-format
 msgid "Connecting to %s"
 msgstr "Conectando a %s"
+
+msgid "Connection failed"
+msgstr ""
 
 msgid "Console"
 msgstr "Console"
 
 msgid "Cooldown"
 msgstr "Resfriando"
+
+msgid "Couldn't add network"
+msgstr ""
 
 msgid "Current percentage and graph line"
 msgstr "Porcentagem atual e linha do gráfico"
@@ -206,8 +215,18 @@ msgstr "Desabilitar Motores"
 msgid "Disable for 12hs with am / pm"
 msgstr "Desativar por 12 horas com AM/PM"
 
+msgid "Disconnect"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "Distância (mm)"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Do you want to let KlipperScreen try to solve the issue?"
+msgstr ""
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -221,9 +240,6 @@ msgstr "Parada de Emergência"
 
 msgid "Enable screen power management"
 msgstr "Ativar gerenciamento de energia da tela"
-
-msgid "Ended official support in June 2023"
-msgstr "Suporte oficial finalizado em Junho de 2023"
 
 msgid "Error"
 msgstr "Erro"
@@ -242,6 +258,9 @@ msgstr "Erro ao tentar buscar spools"
 
 msgid "Error: Couldn't get a position to probe"
 msgstr "Erro: Não foi possível obter uma posição para sondar"
+
+msgid "Estimated Time"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Método de Tempo Estimado"
@@ -264,11 +283,20 @@ msgstr "Extrusão +"
 msgid "Extrusion -"
 msgstr "Extrusão -"
 
+msgid "Failed to delete connection"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
 msgid "Failed, adjust position first"
 msgstr "Falha, primeiro ajuste a posição"
 
 msgid "Fan"
 msgstr "Ventilador"
+
+msgid "Filament"
+msgstr ""
 
 msgid "Filament Used"
 msgstr "Filamento Utilizado"
@@ -312,17 +340,23 @@ msgstr "Taxa de fluxo:"
 msgid "Font Size"
 msgstr "Tamanho da Fonte"
 
+msgid "Forget"
+msgstr ""
+
 msgid "Full Update"
 msgstr "Atualização Completa"
+
+msgid "Gcodes"
+msgstr ""
+
+msgid "Getting IP address"
+msgstr ""
 
 msgid "Go Back"
 msgstr "Retornar"
 
 msgid "Height:"
 msgstr "Altura:"
-
-msgid "Hidden"
-msgstr "Escondido"
 
 msgid "Hide"
 msgstr "Esconder"
@@ -372,6 +406,12 @@ msgstr "Iniciar calibração PID para:"
 msgid "Input Shaper"
 msgstr "Modelagem de Entrada (Input Shaper)"
 
+msgid "Insufficient priviledges detected"
+msgstr ""
+
+msgid "Insufficient privileges"
+msgstr ""
+
 msgid "Interface"
 msgstr "Interface"
 
@@ -417,9 +457,6 @@ msgstr "Klipper está tentando iniciar"
 msgid "Klipper will reboot"
 msgstr "Klipper irá reiniciar"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr "KlipperScreen abandonará o suporte em Junho de 2024"
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -434,6 +471,9 @@ msgstr "Grande"
 
 msgid "Last Used"
 msgstr "Usado pela Última Vez"
+
+msgid "Layer Height"
+msgstr ""
 
 msgid "Layer:"
 msgstr "Camada:"
@@ -480,6 +520,9 @@ msgstr "Aceleração Max."
 msgid "Max Velocity"
 msgstr "Velocidade Max."
 
+msgid "Max:"
+msgstr ""
+
 msgid "Maximum"
 msgstr "Máximo"
 
@@ -507,6 +550,9 @@ msgstr "Calibração de Malha"
 msgid "Minimum Cruise Ratio"
 msgstr "Taxa Mínima de Deslocamento"
 
+msgid "Minimum:"
+msgstr ""
+
 msgid "Modified"
 msgstr "Modificado"
 
@@ -527,6 +573,15 @@ msgstr "Nome"
 
 msgid "Network"
 msgstr "Rede"
+
+msgid "Network connected"
+msgstr ""
+
+msgid "Network disconnected"
+msgstr ""
+
+msgid "Network not found"
+msgstr ""
 
 msgid "Never"
 msgstr "Nunca"
@@ -612,9 +667,6 @@ msgstr "Imprimir"
 msgid "Print Control"
 msgstr "Controle de Impressão"
 
-msgid "Print Time"
-msgstr "Tempo de Impressão"
-
 msgid "Printer"
 msgstr "Impressora"
 
@@ -656,6 +708,9 @@ msgstr "Referência"
 
 msgid "Refresh"
 msgstr "Atualizar"
+
+msgid "Remove network"
+msgstr ""
 
 msgid "Rename/Move:"
 msgstr "Renomear/Mover:"
@@ -775,9 +830,6 @@ msgstr "Em Espera"
 msgid "Start"
 msgstr "Iniciar"
 
-msgid "Starting WiFi Association"
-msgstr "Iniciando Associação com WiFi"
-
 msgid "Starting recovery for"
 msgstr "Iniciando recuperação para"
 
@@ -796,11 +848,17 @@ msgstr "Reiniciar Sistema"
 msgid "System Shutdown"
 msgstr "Desligar Sistema"
 
+msgid "System:"
+msgstr ""
+
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
 
 msgid "Temperature"
 msgstr "Temperatura"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr ""
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr "Este painel suporta até 9 parafusos em uma grade 3x3"
@@ -819,6 +877,9 @@ msgstr "Total:"
 
 msgid "Unknown Heater"
 msgstr "Aquecedor Desconhecido"
+
+msgid "Unknown security type"
+msgstr ""
 
 msgid "Unload"
 msgstr "Descarregar"
@@ -843,9 +904,6 @@ msgstr "Carregado"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Útil para telas sensíveis ao toque não responsivas"
-
-msgid "Warning"
-msgstr "Aviso"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC não é suportado pelo backend de transmissão"
@@ -875,9 +933,6 @@ msgid "commit"
 msgid_plural "commits"
 msgstr[0] "comprometimento"
 msgstr[1] "comprometimentos"
-
-msgid "dBm"
-msgstr "dBm"
 
 msgid "day"
 msgid_plural "days"
@@ -916,6 +971,27 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "Ended official support in June 2023"
+#~ msgstr "Suporte oficial finalizado em Junho de 2023"
+
+#~ msgid "Hidden"
+#~ msgstr "Escondido"
+
+#~ msgid "KlipperScreen will drop support in June 2024"
+#~ msgstr "KlipperScreen abandonará o suporte em Junho de 2024"
+
+#~ msgid "Print Time"
+#~ msgstr "Tempo de Impressão"
+
+#~ msgid "Starting WiFi Association"
+#~ msgstr "Iniciando Associação com WiFi"
+
+#~ msgid "Warning"
+#~ msgstr "Aviso"
+
+#~ msgid "dBm"
+#~ msgstr "dBm"
 
 #~ msgid "Deselect"
 #~ msgstr "Desselecionar"

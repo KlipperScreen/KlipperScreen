@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 23:37-0300\n"
+"POT-Creation-Date: 2024-06-02 08:38-0300\n"
 "PO-Revision-Date: 2024-05-15 07:01+0000\n"
 "Last-Translator: Miloslav Kos <kos.m@post.cz>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -170,15 +170,24 @@ msgstr "Bekræft Nødstop"
 msgid "Connected"
 msgstr "Forbundet"
 
+msgid "Connecting"
+msgstr ""
+
 #, python-format
 msgid "Connecting to %s"
 msgstr "Forbinder til %s"
+
+msgid "Connection failed"
+msgstr ""
 
 msgid "Console"
 msgstr "Terminal"
 
 msgid "Cooldown"
 msgstr "Afkøling"
+
+msgid "Couldn't add network"
+msgstr ""
 
 msgid "Current percentage and graph line"
 msgstr ""
@@ -201,8 +210,18 @@ msgstr "Deaktivér motorer"
 msgid "Disable for 12hs with am / pm"
 msgstr ""
 
+msgid "Disconnect"
+msgstr "Afbryd forbindelse"
+
 msgid "Distance (mm)"
 msgstr "Længde (mm)"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Do you want to let KlipperScreen try to solve the issue?"
+msgstr ""
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -216,9 +235,6 @@ msgstr ""
 
 msgid "Enable screen power management"
 msgstr ""
-
-msgid "Ended official support in June 2023"
-msgstr "Officiel support udløb i Juni 2023"
 
 msgid "Error"
 msgstr "Fejl"
@@ -236,6 +252,9 @@ msgid "Error trying to fetch spools"
 msgstr "Fejl ved hentning af spoler"
 
 msgid "Error: Couldn't get a position to probe"
+msgstr ""
+
+msgid "Estimated Time"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -259,11 +278,20 @@ msgstr "Ekstrudering +"
 msgid "Extrusion -"
 msgstr "Ekstrudering -"
 
+msgid "Failed to delete connection"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
 msgid "Failed, adjust position first"
 msgstr "Mislykkedes, juster først positionen"
 
 msgid "Fan"
 msgstr "Blæser"
+
+msgid "Filament"
+msgstr ""
 
 msgid "Filament Used"
 msgstr "Filament forbrug"
@@ -307,17 +335,23 @@ msgstr "Flowrate:"
 msgid "Font Size"
 msgstr "Skriftstørrelse"
 
+msgid "Forget"
+msgstr ""
+
 msgid "Full Update"
 msgstr "Fuld Opdatering"
+
+msgid "Gcodes"
+msgstr ""
+
+msgid "Getting IP address"
+msgstr ""
 
 msgid "Go Back"
 msgstr "Gå tilbage"
 
 msgid "Height:"
 msgstr "Højde:"
-
-msgid "Hidden"
-msgstr "Skjult"
 
 msgid "Hide"
 msgstr "Skjule"
@@ -367,6 +401,12 @@ msgstr "Start PID kalibrering for:"
 msgid "Input Shaper"
 msgstr "Input Shaper"
 
+msgid "Insufficient priviledges detected"
+msgstr ""
+
+msgid "Insufficient privileges"
+msgstr ""
+
 msgid "Interface"
 msgstr "Interface"
 
@@ -412,9 +452,6 @@ msgstr "Klipper forsøger at starte"
 msgid "Klipper will reboot"
 msgstr "Klipper vil genstarte"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr "Klipperscreen stopper understøttelsen i Juni 2024"
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -429,6 +466,9 @@ msgstr "Stor"
 
 msgid "Last Used"
 msgstr "Sidst brugt"
+
+msgid "Layer Height"
+msgstr ""
 
 msgid "Layer:"
 msgstr "Lag:"
@@ -475,6 +515,9 @@ msgstr "Maks. Acceleration"
 msgid "Max Velocity"
 msgstr "Maks. hastighed"
 
+msgid "Max:"
+msgstr ""
+
 msgid "Maximum"
 msgstr "Maksimum"
 
@@ -502,6 +545,9 @@ msgstr "Mesh-kalibrering"
 msgid "Minimum Cruise Ratio"
 msgstr ""
 
+msgid "Minimum:"
+msgstr ""
+
 msgid "Modified"
 msgstr "Ændret"
 
@@ -522,6 +568,15 @@ msgstr "Navn"
 
 msgid "Network"
 msgstr "Netværk"
+
+msgid "Network connected"
+msgstr ""
+
+msgid "Network disconnected"
+msgstr ""
+
+msgid "Network not found"
+msgstr ""
 
 msgid "Never"
 msgstr "Aldrig"
@@ -607,9 +662,6 @@ msgstr "Print"
 msgid "Print Control"
 msgstr "Print styring"
 
-msgid "Print Time"
-msgstr "Printtid"
-
 msgid "Printer"
 msgstr "Printer"
 
@@ -651,6 +703,9 @@ msgstr "Reference"
 
 msgid "Refresh"
 msgstr "Opdatér"
+
+msgid "Remove network"
+msgstr ""
 
 msgid "Rename/Move:"
 msgstr "Omdøb/Flyt:"
@@ -770,9 +825,6 @@ msgstr "Standby"
 msgid "Start"
 msgstr "Start"
 
-msgid "Starting WiFi Association"
-msgstr "Starter WiFi Association"
-
 msgid "Starting recovery for"
 msgstr "Gendanner"
 
@@ -791,11 +843,17 @@ msgstr "Genstart system"
 msgid "System Shutdown"
 msgstr "Luk system ned"
 
+msgid "System:"
+msgstr ""
+
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
 
 msgid "Temperature"
 msgstr "Temperatur"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr ""
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr ""
@@ -814,6 +872,9 @@ msgstr "Total:"
 
 msgid "Unknown Heater"
 msgstr "Ukendt varmelegeme"
+
+msgid "Unknown security type"
+msgstr ""
 
 msgid "Unload"
 msgstr "Tilbagetræk"
@@ -838,9 +899,6 @@ msgstr "Uploadet"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr ""
-
-msgid "Warning"
-msgstr "Advarsel"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC er ikke understøttet i back-end, forsøger at streame istedet"
@@ -870,9 +928,6 @@ msgid "commit"
 msgid_plural "commits"
 msgstr[0] "ændring"
 msgstr[1] "ændringer"
-
-msgid "dBm"
-msgstr "dBm"
 
 msgid "day"
 msgid_plural "days"
@@ -911,6 +966,27 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "Ended official support in June 2023"
+#~ msgstr "Officiel support udløb i Juni 2023"
+
+#~ msgid "Hidden"
+#~ msgstr "Skjult"
+
+#~ msgid "KlipperScreen will drop support in June 2024"
+#~ msgstr "Klipperscreen stopper understøttelsen i Juni 2024"
+
+#~ msgid "Print Time"
+#~ msgstr "Printtid"
+
+#~ msgid "Starting WiFi Association"
+#~ msgstr "Starter WiFi Association"
+
+#~ msgid "Warning"
+#~ msgstr "Advarsel"
+
+#~ msgid "dBm"
+#~ msgstr "dBm"
 
 #~ msgid "Deselect"
 #~ msgstr "Fravælg"
@@ -1036,9 +1112,6 @@ msgstr[1] ""
 #~ msgid "IPv6"
 #~ msgstr "IPv6"
 
-#~ msgid "Disconnect"
-#~ msgstr "Afbryd forbindelse"
-
 #~ msgid "Duration Only"
 #~ msgstr "Kun varighed"
 
@@ -1064,9 +1137,6 @@ msgstr[1] ""
 
 #~ msgid "Show Only Heaters in Temp."
 #~ msgstr "Vis kun varmelegemer i Temp."
-
-#~ msgid "Target"
-#~ msgstr "Mål"
 
 #~ msgid "Temp"
 #~ msgstr "Temp"

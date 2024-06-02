@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 23:37-0300\n"
+"POT-Creation-Date: 2024-06-02 08:38-0300\n"
 "PO-Revision-Date: 2024-05-30 06:09+0000\n"
 "Last-Translator: Selim <selim_guner2000@hotmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -175,15 +175,24 @@ msgstr "Acil Durdurmayı Onaylayın"
 msgid "Connected"
 msgstr "Bağlandı"
 
+msgid "Connecting"
+msgstr ""
+
 #, python-format
 msgid "Connecting to %s"
 msgstr "%s'e Bağlanılıyor"
+
+msgid "Connection failed"
+msgstr ""
 
 msgid "Console"
 msgstr "Konsol"
 
 msgid "Cooldown"
 msgstr "Soğutma"
+
+msgid "Couldn't add network"
+msgstr ""
 
 msgid "Current percentage and graph line"
 msgstr "Mevcut yüzde ve grafik çizgisi"
@@ -206,8 +215,18 @@ msgstr "Motorları Devre Dışı Bırak"
 msgid "Disable for 12hs with am / pm"
 msgstr "12 saat boyunca am / pm ile devre dışı bırakın"
 
+msgid "Disconnect"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "Uzaklık (mm)"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Do you want to let KlipperScreen try to solve the issue?"
+msgstr ""
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -221,9 +240,6 @@ msgstr "Acil durdurma"
 
 msgid "Enable screen power management"
 msgstr "Ekran güç yönetimini etkinleştirin"
-
-msgid "Ended official support in June 2023"
-msgstr "Resmi destek Haziran 2023 tarihinde sona ermiştir"
 
 msgid "Error"
 msgstr "Hata"
@@ -242,6 +258,9 @@ msgstr "Makaraları getirmeye çalışırken hata oluştu"
 
 msgid "Error: Couldn't get a position to probe"
 msgstr "Hata: İnceleyici için bir konum alınamadı"
+
+msgid "Estimated Time"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Tahmini Zaman Metodu"
@@ -264,11 +283,20 @@ msgstr "Ekstrüzyon +"
 msgid "Extrusion -"
 msgstr "Ekstrüzyon -"
 
+msgid "Failed to delete connection"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
 msgid "Failed, adjust position first"
 msgstr "Başarısız, önce konumu ayarlayın"
 
 msgid "Fan"
 msgstr "Fan"
+
+msgid "Filament"
+msgstr ""
 
 msgid "Filament Used"
 msgstr "Kullanılan Filament"
@@ -312,17 +340,23 @@ msgstr "Akış oranı:"
 msgid "Font Size"
 msgstr "Yazı boyutu"
 
+msgid "Forget"
+msgstr ""
+
 msgid "Full Update"
 msgstr "Tam Güncelleme"
+
+msgid "Gcodes"
+msgstr ""
+
+msgid "Getting IP address"
+msgstr ""
 
 msgid "Go Back"
 msgstr "Geri git"
 
 msgid "Height:"
 msgstr "Yükseklik:"
-
-msgid "Hidden"
-msgstr "Gizli"
 
 msgid "Hide"
 msgstr "Gizle"
@@ -372,6 +406,12 @@ msgstr "PID kalibrasyonu başlatın:"
 msgid "Input Shaper"
 msgstr "İvme Düzenleyicisi"
 
+msgid "Insufficient priviledges detected"
+msgstr ""
+
+msgid "Insufficient privileges"
+msgstr ""
+
 msgid "Interface"
 msgstr "Arayüz"
 
@@ -417,9 +457,6 @@ msgstr "Klipper başlatılmaya çalışılıyor"
 msgid "Klipper will reboot"
 msgstr "Klipper yeniden başlayacak"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr "KlipperScreen Haziran 2024 tarihinde desteği bırakacaktır"
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr "FILEMENT_YUKLE/FILEMENT_KALDIR gizlidir ve extrude'dan kullanılmalıdır"
@@ -432,6 +469,9 @@ msgstr "Büyük"
 
 msgid "Last Used"
 msgstr "Son kullanılan"
+
+msgid "Layer Height"
+msgstr ""
 
 msgid "Layer:"
 msgstr "Katman:"
@@ -478,6 +518,9 @@ msgstr "Maksimum Hızlanma"
 msgid "Max Velocity"
 msgstr "Maksimum Hız"
 
+msgid "Max:"
+msgstr ""
+
 msgid "Maximum"
 msgstr "Maksimum"
 
@@ -505,6 +548,9 @@ msgstr "Mesh Kalibre et"
 msgid "Minimum Cruise Ratio"
 msgstr "Minimum Gezinme Oranı"
 
+msgid "Minimum:"
+msgstr ""
+
 msgid "Modified"
 msgstr "Değiştirilmiş"
 
@@ -525,6 +571,15 @@ msgstr "İsim"
 
 msgid "Network"
 msgstr "Ağ"
+
+msgid "Network connected"
+msgstr ""
+
+msgid "Network disconnected"
+msgstr ""
+
+msgid "Network not found"
+msgstr ""
 
 msgid "Never"
 msgstr "Asla"
@@ -610,9 +665,6 @@ msgstr "Yazdır"
 msgid "Print Control"
 msgstr "Yazdırma Kontrolü"
 
-msgid "Print Time"
-msgstr "Yazdırma Süresi"
-
 msgid "Printer"
 msgstr "Yazıcı"
 
@@ -654,6 +706,9 @@ msgstr "Referans"
 
 msgid "Refresh"
 msgstr "Yenile"
+
+msgid "Remove network"
+msgstr ""
 
 msgid "Rename/Move:"
 msgstr "Yeniden Adlandır/Taşı:"
@@ -773,9 +828,6 @@ msgstr "Hazırda Bekle"
 msgid "Start"
 msgstr "Başlat"
 
-msgid "Starting WiFi Association"
-msgstr "WiFi Bağlantısı başlatılıyor"
-
 msgid "Starting recovery for"
 msgstr "Kurtarma başlatılıyor"
 
@@ -794,11 +846,17 @@ msgstr "Sistem Yeniden Başlat"
 msgid "System Shutdown"
 msgstr "Sistem Kapat"
 
+msgid "System:"
+msgstr ""
+
 msgid "Temp (°C)"
 msgstr "Sıcaklık (°C)"
 
 msgid "Temperature"
 msgstr "Sıcaklık"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr ""
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr "Bu panel 3x3 Izgarada en fazla 9 vidayı destekler"
@@ -817,6 +875,9 @@ msgstr "Toplam:"
 
 msgid "Unknown Heater"
 msgstr "Bilinmeyen Isıtıcı"
+
+msgid "Unknown security type"
+msgstr ""
 
 msgid "Unload"
 msgstr "Boşalt"
@@ -841,9 +902,6 @@ msgstr "Yüklendi"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Yanıt vermeyen dokunmatik ekranlar için kullanışlıdır"
-
-msgid "Warning"
-msgstr "Uyarı"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC, Stream deneyin tarafından desteklenmez"
@@ -873,9 +931,6 @@ msgid "commit"
 msgid_plural "commits"
 msgstr[0] "değişiklik"
 msgstr[1] "değişiklikler"
-
-msgid "dBm"
-msgstr "dBm"
 
 msgid "day"
 msgid_plural "days"
@@ -914,6 +969,27 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] "saniye"
 msgstr[1] "saniyeler"
+
+#~ msgid "Ended official support in June 2023"
+#~ msgstr "Resmi destek Haziran 2023 tarihinde sona ermiştir"
+
+#~ msgid "Hidden"
+#~ msgstr "Gizli"
+
+#~ msgid "KlipperScreen will drop support in June 2024"
+#~ msgstr "KlipperScreen Haziran 2024 tarihinde desteği bırakacaktır"
+
+#~ msgid "Print Time"
+#~ msgstr "Yazdırma Süresi"
+
+#~ msgid "Starting WiFi Association"
+#~ msgstr "WiFi Bağlantısı başlatılıyor"
+
+#~ msgid "Warning"
+#~ msgstr "Uyarı"
+
+#~ msgid "dBm"
+#~ msgstr "dBm"
 
 #~ msgid "Deselect"
 #~ msgstr "Seçimi kaldır"

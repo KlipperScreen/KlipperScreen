@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 23:37-0300\n"
+"POT-Creation-Date: 2024-06-02 08:38-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Sucuk4mylife <civandenizsevin@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
@@ -175,15 +175,24 @@ msgstr "Not-Aus bestätigen"
 msgid "Connected"
 msgstr "Verbunden"
 
+msgid "Connecting"
+msgstr ""
+
 #, python-format
 msgid "Connecting to %s"
 msgstr "Verbinden zu %s"
+
+msgid "Connection failed"
+msgstr ""
 
 msgid "Console"
 msgstr "Konsole"
 
 msgid "Cooldown"
 msgstr "Abkühlen"
+
+msgid "Couldn't add network"
+msgstr ""
 
 msgid "Current percentage and graph line"
 msgstr ""
@@ -206,8 +215,18 @@ msgstr "Motoren deaktivieren"
 msgid "Disable for 12hs with am / pm"
 msgstr ""
 
+msgid "Disconnect"
+msgstr "Trennen"
+
 msgid "Distance (mm)"
 msgstr "Entfernung (mm)"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Do you want to let KlipperScreen try to solve the issue?"
+msgstr ""
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -220,9 +239,6 @@ msgid "Emergency Stop"
 msgstr ""
 
 msgid "Enable screen power management"
-msgstr ""
-
-msgid "Ended official support in June 2023"
 msgstr ""
 
 msgid "Error"
@@ -241,6 +257,9 @@ msgid "Error trying to fetch spools"
 msgstr ""
 
 msgid "Error: Couldn't get a position to probe"
+msgstr ""
+
+msgid "Estimated Time"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -264,11 +283,20 @@ msgstr "Extrudieren +"
 msgid "Extrusion -"
 msgstr "Extrudieren -"
 
+msgid "Failed to delete connection"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
 msgid "Failed, adjust position first"
 msgstr "Fehlgeschlagen, Position zuerst anpassen"
 
 msgid "Fan"
 msgstr "Lüfter"
+
+msgid "Filament"
+msgstr ""
 
 msgid "Filament Used"
 msgstr "Filament verbraucht"
@@ -312,17 +340,23 @@ msgstr "Flussrate:"
 msgid "Font Size"
 msgstr "Schriftgröße"
 
+msgid "Forget"
+msgstr ""
+
 msgid "Full Update"
 msgstr "Vollständige Update"
+
+msgid "Gcodes"
+msgstr ""
+
+msgid "Getting IP address"
+msgstr ""
 
 msgid "Go Back"
 msgstr "Zurück"
 
 msgid "Height:"
 msgstr "Höhe:"
-
-msgid "Hidden"
-msgstr "Versteckt"
 
 msgid "Hide"
 msgstr "Verstecken"
@@ -372,6 +406,12 @@ msgstr "Initiieren einer PID-Kalibrierung für:"
 msgid "Input Shaper"
 msgstr "Input Shaper"
 
+msgid "Insufficient priviledges detected"
+msgstr ""
+
+msgid "Insufficient privileges"
+msgstr ""
+
 msgid "Interface"
 msgstr "Oberfläche"
 
@@ -417,9 +457,6 @@ msgstr "Klipper versucht zu starten"
 msgid "Klipper will reboot"
 msgstr "Klipper startet neu"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -434,6 +471,9 @@ msgstr "Groß"
 
 msgid "Last Used"
 msgstr "Zuletzt verwendet"
+
+msgid "Layer Height"
+msgstr ""
 
 msgid "Layer:"
 msgstr "Schicht:"
@@ -480,6 +520,9 @@ msgstr "Max Beschleunigung"
 msgid "Max Velocity"
 msgstr "Max Geschwindigkeit"
 
+msgid "Max:"
+msgstr ""
+
 msgid "Maximum"
 msgstr "Maximal"
 
@@ -507,6 +550,9 @@ msgstr "Mesh kalibrieren"
 msgid "Minimum Cruise Ratio"
 msgstr ""
 
+msgid "Minimum:"
+msgstr ""
+
 msgid "Modified"
 msgstr "Modifiziert"
 
@@ -527,6 +573,15 @@ msgstr "Name"
 
 msgid "Network"
 msgstr "Netzwerk"
+
+msgid "Network connected"
+msgstr ""
+
+msgid "Network disconnected"
+msgstr ""
+
+msgid "Network not found"
+msgstr ""
 
 msgid "Never"
 msgstr "Niemals"
@@ -612,9 +667,6 @@ msgstr "Druck"
 msgid "Print Control"
 msgstr "Druck Steuerung"
 
-msgid "Print Time"
-msgstr "Druckzeit"
-
 msgid "Printer"
 msgstr "Drucker"
 
@@ -656,6 +708,9 @@ msgstr "Referenz"
 
 msgid "Refresh"
 msgstr "Aktualisieren"
+
+msgid "Remove network"
+msgstr ""
 
 msgid "Rename/Move:"
 msgstr "Umbenennen/Bewegen"
@@ -775,9 +830,6 @@ msgstr "Standby"
 msgid "Start"
 msgstr "Starten"
 
-msgid "Starting WiFi Association"
-msgstr "Wi-Fi Verbindung starten"
-
 msgid "Starting recovery for"
 msgstr "Starte Wiederherstellung für"
 
@@ -796,11 +848,17 @@ msgstr "System neustarten"
 msgid "System Shutdown"
 msgstr "System herunterfahren"
 
+msgid "System:"
+msgstr ""
+
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
 
 msgid "Temperature"
 msgstr "Temperatur"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr ""
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr ""
@@ -819,6 +877,9 @@ msgstr "Gesamt:"
 
 msgid "Unknown Heater"
 msgstr "Unbekannte Heizung"
+
+msgid "Unknown security type"
+msgstr ""
 
 msgid "Unload"
 msgstr "Entladen"
@@ -844,9 +905,6 @@ msgid "Uploaded"
 msgstr "Hochgeladen"
 
 msgid "Useful for un-responsive touchscreens"
-msgstr ""
-
-msgid "Warning"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
@@ -877,9 +935,6 @@ msgid "commit"
 msgid_plural "commits"
 msgstr[0] "Änderung"
 msgstr[1] "Änderungen"
-
-msgid "dBm"
-msgstr "dBm"
 
 msgid "day"
 msgid_plural "days"
@@ -918,6 +973,18 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "Hidden"
+#~ msgstr "Versteckt"
+
+#~ msgid "Print Time"
+#~ msgstr "Druckzeit"
+
+#~ msgid "Starting WiFi Association"
+#~ msgstr "Wi-Fi Verbindung starten"
+
+#~ msgid "dBm"
+#~ msgstr "dBm"
 
 #~ msgid "Deselect"
 #~ msgstr "Abwählen"
@@ -1049,9 +1116,6 @@ msgstr[1] ""
 #~ msgid "IPv6"
 #~ msgstr "IPv6"
 
-#~ msgid "Disconnect"
-#~ msgstr "Trennen"
-
 #~ msgid "Duration Only"
 #~ msgstr "Reine Druckzeit"
 
@@ -1077,9 +1141,6 @@ msgstr[1] ""
 
 #~ msgid "Show Only Heaters in Temp."
 #~ msgstr "Nur Heizungen in Temp anzeigen."
-
-#~ msgid "Target"
-#~ msgstr "Ziel"
 
 #~ msgid "Temp"
 #~ msgstr "Temp"

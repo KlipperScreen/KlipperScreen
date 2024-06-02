@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 23:37-0300\n"
+"POT-Creation-Date: 2024-06-02 08:38-0300\n"
 "PO-Revision-Date: 2024-06-01 12:09+0000\n"
 "Last-Translator: 峻瑜哥 <a728728728@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
@@ -175,15 +175,24 @@ msgstr "緊急停止需確認"
 msgid "Connected"
 msgstr "已連線"
 
+msgid "Connecting"
+msgstr ""
+
 #, python-format
 msgid "Connecting to %s"
 msgstr "連線到 %s"
+
+msgid "Connection failed"
+msgstr ""
 
 msgid "Console"
 msgstr "控制台"
 
 msgid "Cooldown"
 msgstr "冷卻"
+
+msgid "Couldn't add network"
+msgstr ""
 
 msgid "Current percentage and graph line"
 msgstr "當前百分比和折線圖"
@@ -206,8 +215,18 @@ msgstr "關閉電機"
 msgid "Disable for 12hs with am / pm"
 msgstr "在十二小時顯示模式中不顯示AM/PM"
 
+msgid "Disconnect"
+msgstr "断开"
+
 msgid "Distance (mm)"
 msgstr "擠出長度（mm）"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Do you want to let KlipperScreen try to solve the issue?"
+msgstr ""
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -221,9 +240,6 @@ msgstr "緊急停止"
 
 msgid "Enable screen power management"
 msgstr "開啟螢幕功率管理功能"
-
-msgid "Ended official support in June 2023"
-msgstr "2023年6月結束官方支持"
 
 msgid "Error"
 msgstr "錯誤"
@@ -242,6 +258,9 @@ msgstr ""
 
 msgid "Error: Couldn't get a position to probe"
 msgstr "錯誤：無法取得要探測的位置"
+
+msgid "Estimated Time"
+msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "估算剩餘時間方式"
@@ -264,11 +283,20 @@ msgstr "擠壓 +"
 msgid "Extrusion -"
 msgstr "擠壓 -"
 
+msgid "Failed to delete connection"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
 msgid "Failed, adjust position first"
 msgstr "失敗，請先調整位置"
 
 msgid "Fan"
 msgstr "風扇"
+
+msgid "Filament"
+msgstr ""
 
 msgid "Filament Used"
 msgstr "已消耗耗材"
@@ -312,17 +340,23 @@ msgstr "流速："
 msgid "Font Size"
 msgstr "字型大小"
 
+msgid "Forget"
+msgstr ""
+
 msgid "Full Update"
 msgstr "全部更新"
+
+msgid "Gcodes"
+msgstr ""
+
+msgid "Getting IP address"
+msgstr ""
 
 msgid "Go Back"
 msgstr "返回"
 
 msgid "Height:"
 msgstr "高度："
-
-msgid "Hidden"
-msgstr "隱藏的"
 
 msgid "Hide"
 msgstr "隱藏"
@@ -372,6 +406,12 @@ msgstr "啟動PID校準："
 msgid "Input Shaper"
 msgstr "共振補償"
 
+msgid "Insufficient priviledges detected"
+msgstr ""
+
+msgid "Insufficient privileges"
+msgstr ""
+
 msgid "Interface"
 msgstr "介面"
 
@@ -417,9 +457,6 @@ msgstr "Klipper正在啟動"
 msgid "Klipper will reboot"
 msgstr "Klipper將重新啟動"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -432,6 +469,9 @@ msgstr "大"
 
 msgid "Last Used"
 msgstr "最後使用"
+
+msgid "Layer Height"
+msgstr ""
 
 msgid "Layer:"
 msgstr "層："
@@ -478,6 +518,9 @@ msgstr "最大加速度"
 msgid "Max Velocity"
 msgstr "最大速度"
 
+msgid "Max:"
+msgstr ""
+
 msgid "Maximum"
 msgstr "最大"
 
@@ -505,6 +548,9 @@ msgstr "床網校準"
 msgid "Minimum Cruise Ratio"
 msgstr ""
 
+msgid "Minimum:"
+msgstr ""
+
 msgid "Modified"
 msgstr "已修改"
 
@@ -525,6 +571,15 @@ msgstr "名稱"
 
 msgid "Network"
 msgstr "網路"
+
+msgid "Network connected"
+msgstr ""
+
+msgid "Network disconnected"
+msgstr ""
+
+msgid "Network not found"
+msgstr ""
 
 msgid "Never"
 msgstr "從不"
@@ -609,9 +664,6 @@ msgstr "列印"
 msgid "Print Control"
 msgstr "列印控制"
 
-msgid "Print Time"
-msgstr "列印時間"
-
 msgid "Printer"
 msgstr "列印機"
 
@@ -653,6 +705,9 @@ msgstr "參考"
 
 msgid "Refresh"
 msgstr "重新整理"
+
+msgid "Remove network"
+msgstr ""
 
 msgid "Rename/Move:"
 msgstr "重新命名/移動："
@@ -772,9 +827,6 @@ msgstr ""
 msgid "Start"
 msgstr "開始"
 
-msgid "Starting WiFi Association"
-msgstr "開始WiFi連線"
-
 msgid "Starting recovery for"
 msgstr "開始恢復"
 
@@ -793,11 +845,17 @@ msgstr "重啟系統"
 msgid "System Shutdown"
 msgstr "關閉系統"
 
+msgid "System:"
+msgstr ""
+
 msgid "Temp (°C)"
 msgstr "溫度 (°C)"
 
 msgid "Temperature"
 msgstr "溫度"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr ""
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr ""
@@ -816,6 +874,9 @@ msgstr "合計："
 
 msgid "Unknown Heater"
 msgstr "未知加熱器"
+
+msgid "Unknown security type"
+msgstr ""
 
 msgid "Unload"
 msgstr "解除安裝"
@@ -839,9 +900,6 @@ msgid "Uploaded"
 msgstr "上傳於"
 
 msgid "Useful for un-responsive touchscreens"
-msgstr ""
-
-msgid "Warning"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
@@ -871,9 +929,6 @@ msgstr "Z軸偏移："
 msgid "commit"
 msgid_plural "commits"
 msgstr[0] "更改"
-
-msgid "dBm"
-msgstr "dBm"
 
 msgid "day"
 msgid_plural "days"
@@ -908,6 +963,21 @@ msgstr "mm³/s"
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
+
+#~ msgid "Ended official support in June 2023"
+#~ msgstr "2023年6月結束官方支持"
+
+#~ msgid "Hidden"
+#~ msgstr "隱藏的"
+
+#~ msgid "Print Time"
+#~ msgstr "列印時間"
+
+#~ msgid "Starting WiFi Association"
+#~ msgstr "開始WiFi連線"
+
+#~ msgid "dBm"
+#~ msgstr "dBm"
 
 #~ msgid "Deselect"
 #~ msgstr "取消選擇"
@@ -1019,9 +1089,6 @@ msgstr[0] ""
 #~ msgid "IPv6"
 #~ msgstr "IPv6 地址"
 
-#~ msgid "Disconnect"
-#~ msgstr "断开"
-
 #~ msgid "Duration Only"
 #~ msgstr "持续时间"
 
@@ -1047,9 +1114,6 @@ msgstr[0] ""
 
 #~ msgid "Show Only Heaters in Temp."
 #~ msgstr "仅显示使用中的加热器."
-
-#~ msgid "Target"
-#~ msgstr "目标"
 
 #~ msgid "Temp"
 #~ msgstr "温度"
@@ -1092,9 +1156,6 @@ msgstr[0] ""
 
 #~ msgid "Load Average"
 #~ msgstr "平均负载"
-
-#~ msgid "Network Info"
-#~ msgstr "网络信息"
 
 #~ msgid "Screen Blanking Time"
 #~ msgstr "关闭屏幕时间"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 23:37-0300\n"
+"POT-Creation-Date: 2024-06-02 08:38-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Dominik <dominik.sostar@gmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -176,15 +176,24 @@ msgstr "Potrdite zaustavitev v sili"
 msgid "Connected"
 msgstr "Povezano"
 
+msgid "Connecting"
+msgstr ""
+
 #, python-format
 msgid "Connecting to %s"
 msgstr "Povezujem s/z %s"
+
+msgid "Connection failed"
+msgstr ""
 
 msgid "Console"
 msgstr "Konzola"
 
 msgid "Cooldown"
 msgstr "Ohlajanje"
+
+msgid "Couldn't add network"
+msgstr ""
 
 msgid "Current percentage and graph line"
 msgstr ""
@@ -207,8 +216,18 @@ msgstr "Onemogoči motorje"
 msgid "Disable for 12hs with am / pm"
 msgstr ""
 
+msgid "Disconnect"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "Razdalja (mm)"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Do you want to let KlipperScreen try to solve the issue?"
+msgstr ""
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -222,9 +241,6 @@ msgstr ""
 
 msgid "Enable screen power management"
 msgstr ""
-
-msgid "Ended official support in June 2023"
-msgstr "Konec uradne podpore junija 2023"
 
 msgid "Error"
 msgstr "Napaka"
@@ -242,6 +258,9 @@ msgid "Error trying to fetch spools"
 msgstr ""
 
 msgid "Error: Couldn't get a position to probe"
+msgstr ""
+
+msgid "Estimated Time"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -265,11 +284,20 @@ msgstr "Ekstruzija +"
 msgid "Extrusion -"
 msgstr "Ekstruzija -"
 
+msgid "Failed to delete connection"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
 msgid "Failed, adjust position first"
 msgstr "Ni uspelo, najprej prilagodite položaj"
 
 msgid "Fan"
 msgstr "Ventilator"
+
+msgid "Filament"
+msgstr ""
 
 msgid "Filament Used"
 msgstr "Poraba filamenta"
@@ -313,17 +341,23 @@ msgstr ""
 msgid "Font Size"
 msgstr "Velikost pisave"
 
+msgid "Forget"
+msgstr ""
+
 msgid "Full Update"
 msgstr "Polna posodobitev"
+
+msgid "Gcodes"
+msgstr ""
+
+msgid "Getting IP address"
+msgstr ""
 
 msgid "Go Back"
 msgstr "Nazaj"
 
 msgid "Height:"
 msgstr "Višina:"
-
-msgid "Hidden"
-msgstr "Skrito"
 
 msgid "Hide"
 msgstr "Skrij"
@@ -373,6 +407,12 @@ msgstr "Zaženite kalibracijo PID za:"
 msgid "Input Shaper"
 msgstr "Input Shaper"
 
+msgid "Insufficient priviledges detected"
+msgstr ""
+
+msgid "Insufficient privileges"
+msgstr ""
+
 msgid "Interface"
 msgstr "Vmesnik"
 
@@ -418,9 +458,6 @@ msgstr "Klipper se skuša zagnati"
 msgid "Klipper will reboot"
 msgstr "Klipper se bo ponovno zagnal"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr "KlipperScreen bo do junija 2024 opustil podporo"
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -435,6 +472,9 @@ msgstr "Veliko"
 
 msgid "Last Used"
 msgstr "Nazadnje uporabljeno"
+
+msgid "Layer Height"
+msgstr ""
 
 msgid "Layer:"
 msgstr "Plast:"
@@ -481,6 +521,9 @@ msgstr "Največji pospešek"
 msgid "Max Velocity"
 msgstr "Največja hitrost"
 
+msgid "Max:"
+msgstr ""
+
 msgid "Maximum"
 msgstr "Največ"
 
@@ -508,6 +551,9 @@ msgstr "Umeritev mreže"
 msgid "Minimum Cruise Ratio"
 msgstr ""
 
+msgid "Minimum:"
+msgstr ""
+
 msgid "Modified"
 msgstr "Spremenjeno"
 
@@ -528,6 +574,15 @@ msgstr "Ime"
 
 msgid "Network"
 msgstr "Omrežje"
+
+msgid "Network connected"
+msgstr ""
+
+msgid "Network disconnected"
+msgstr ""
+
+msgid "Network not found"
+msgstr ""
 
 msgid "Never"
 msgstr "Nikoli"
@@ -615,9 +670,6 @@ msgstr "Natisni"
 msgid "Print Control"
 msgstr "Nadzor tiskanja"
 
-msgid "Print Time"
-msgstr "Čas tiskanja"
-
 msgid "Printer"
 msgstr "Tiskalnik"
 
@@ -659,6 +711,9 @@ msgstr "Referenca"
 
 msgid "Refresh"
 msgstr "Osveži"
+
+msgid "Remove network"
+msgstr ""
 
 msgid "Rename/Move:"
 msgstr "Preimenuj/Premakni:"
@@ -778,9 +833,6 @@ msgstr "Ostani v pripravljenosti"
 msgid "Start"
 msgstr "Začni"
 
-msgid "Starting WiFi Association"
-msgstr "Zagon povezave WiFi"
-
 msgid "Starting recovery for"
 msgstr "Začetek obnovitve čez"
 
@@ -799,11 +851,17 @@ msgstr "Ponovni zagon sistema"
 msgid "System Shutdown"
 msgstr "Zaustavitev sistema"
 
+msgid "System:"
+msgstr ""
+
 msgid "Temp (°C)"
 msgstr "Temperatura (°C)"
 
 msgid "Temperature"
 msgstr "Temperatura"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr ""
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr ""
@@ -822,6 +880,9 @@ msgstr "Skupno:"
 
 msgid "Unknown Heater"
 msgstr "Neznan grelec"
+
+msgid "Unknown security type"
+msgstr ""
 
 msgid "Unload"
 msgstr ""
@@ -846,9 +907,6 @@ msgstr "Naloženo"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr ""
-
-msgid "Warning"
-msgstr "Opozorilo"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr ""
@@ -880,9 +938,6 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
-
-msgid "dBm"
-msgstr "dBm"
 
 msgid "day"
 msgid_plural "days"
@@ -929,6 +984,27 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
+
+#~ msgid "Ended official support in June 2023"
+#~ msgstr "Konec uradne podpore junija 2023"
+
+#~ msgid "Hidden"
+#~ msgstr "Skrito"
+
+#~ msgid "KlipperScreen will drop support in June 2024"
+#~ msgstr "KlipperScreen bo do junija 2024 opustil podporo"
+
+#~ msgid "Print Time"
+#~ msgstr "Čas tiskanja"
+
+#~ msgid "Starting WiFi Association"
+#~ msgstr "Zagon povezave WiFi"
+
+#~ msgid "Warning"
+#~ msgstr "Opozorilo"
+
+#~ msgid "dBm"
+#~ msgstr "dBm"
 
 #~ msgid "Deselect"
 #~ msgstr "Prekliči izbiro"

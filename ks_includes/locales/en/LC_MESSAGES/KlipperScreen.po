@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 23:37-0300\n"
+"POT-Creation-Date: 2024-06-02 08:38-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -169,14 +169,23 @@ msgstr ""
 msgid "Connected"
 msgstr ""
 
+msgid "Connecting"
+msgstr ""
+
 #, python-format
 msgid "Connecting to %s"
+msgstr ""
+
+msgid "Connection failed"
 msgstr ""
 
 msgid "Console"
 msgstr ""
 
 msgid "Cooldown"
+msgstr ""
+
+msgid "Couldn't add network"
 msgstr ""
 
 msgid "Current percentage and graph line"
@@ -200,7 +209,17 @@ msgstr ""
 msgid "Disable for 12hs with am / pm"
 msgstr ""
 
+msgid "Disconnect"
+msgstr ""
+
 msgid "Distance (mm)"
+msgstr ""
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Do you want to let KlipperScreen try to solve the issue?"
 msgstr ""
 
 #, python-format
@@ -214,9 +233,6 @@ msgid "Emergency Stop"
 msgstr ""
 
 msgid "Enable screen power management"
-msgstr ""
-
-msgid "Ended official support in June 2023"
 msgstr ""
 
 msgid "Error"
@@ -235,6 +251,9 @@ msgid "Error trying to fetch spools"
 msgstr ""
 
 msgid "Error: Couldn't get a position to probe"
+msgstr ""
+
+msgid "Estimated Time"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -258,10 +277,19 @@ msgstr ""
 msgid "Extrusion -"
 msgstr ""
 
+msgid "Failed to delete connection"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
 msgid "Failed, adjust position first"
 msgstr ""
 
 msgid "Fan"
+msgstr ""
+
+msgid "Filament"
 msgstr ""
 
 msgid "Filament Used"
@@ -306,16 +334,22 @@ msgstr ""
 msgid "Font Size"
 msgstr ""
 
+msgid "Forget"
+msgstr ""
+
 msgid "Full Update"
+msgstr ""
+
+msgid "Gcodes"
+msgstr ""
+
+msgid "Getting IP address"
 msgstr ""
 
 msgid "Go Back"
 msgstr ""
 
 msgid "Height:"
-msgstr ""
-
-msgid "Hidden"
 msgstr ""
 
 msgid "Hide"
@@ -366,6 +400,12 @@ msgstr ""
 msgid "Input Shaper"
 msgstr ""
 
+msgid "Insufficient priviledges detected"
+msgstr ""
+
+msgid "Insufficient privileges"
+msgstr ""
+
 msgid "Interface"
 msgstr ""
 
@@ -411,9 +451,6 @@ msgstr ""
 msgid "Klipper will reboot"
 msgstr ""
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -425,6 +462,9 @@ msgid "Large"
 msgstr ""
 
 msgid "Last Used"
+msgstr ""
+
+msgid "Layer Height"
 msgstr ""
 
 msgid "Layer:"
@@ -472,6 +512,9 @@ msgstr ""
 msgid "Max Velocity"
 msgstr ""
 
+msgid "Max:"
+msgstr ""
+
 msgid "Maximum"
 msgstr ""
 
@@ -499,6 +542,9 @@ msgstr ""
 msgid "Minimum Cruise Ratio"
 msgstr ""
 
+msgid "Minimum:"
+msgstr ""
+
 msgid "Modified"
 msgstr ""
 
@@ -518,6 +564,15 @@ msgid "Name"
 msgstr ""
 
 msgid "Network"
+msgstr ""
+
+msgid "Network connected"
+msgstr ""
+
+msgid "Network disconnected"
+msgstr ""
+
+msgid "Network not found"
 msgstr ""
 
 msgid "Never"
@@ -604,9 +659,6 @@ msgstr ""
 msgid "Print Control"
 msgstr ""
 
-msgid "Print Time"
-msgstr ""
-
 msgid "Printer"
 msgstr ""
 
@@ -647,6 +699,9 @@ msgid "Reference"
 msgstr ""
 
 msgid "Refresh"
+msgstr ""
+
+msgid "Remove network"
 msgstr ""
 
 msgid "Rename/Move:"
@@ -767,9 +822,6 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-msgid "Starting WiFi Association"
-msgstr ""
-
 msgid "Starting recovery for"
 msgstr ""
 
@@ -788,10 +840,16 @@ msgstr ""
 msgid "System Shutdown"
 msgstr ""
 
+msgid "System:"
+msgstr ""
+
 msgid "Temp (°C)"
 msgstr ""
 
 msgid "Temperature"
+msgstr ""
+
+msgid "The system doesn't meet the minimum requirement"
 msgstr ""
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
@@ -810,6 +868,9 @@ msgid "Total:"
 msgstr ""
 
 msgid "Unknown Heater"
+msgstr ""
+
+msgid "Unknown security type"
 msgstr ""
 
 msgid "Unload"
@@ -834,9 +895,6 @@ msgid "Uploaded"
 msgstr ""
 
 msgid "Useful for un-responsive touchscreens"
-msgstr ""
-
-msgid "Warning"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
@@ -867,9 +925,6 @@ msgid "commit"
 msgid_plural "commits"
 msgstr[0] ""
 msgstr[1] ""
-
-msgid "dBm"
-msgstr ""
 
 msgid "day"
 msgid_plural "days"
