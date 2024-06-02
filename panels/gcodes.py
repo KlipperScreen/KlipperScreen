@@ -167,7 +167,8 @@ class Panel(ScreenPanel):
                 image_args = (path, icon, self.thumbsize / 2, True, "file")
                 delete.connect("clicked", self.confirm_delete_file, f"gcodes/{path}")
                 rename.connect("clicked", self.show_rename, f"gcodes/{path}")
-                action = self._gtk.Button("printer", style="color3")
+                action_icon = "printer" if self._printer.extrudercount > 0 else "load"
+                action = self._gtk.Button(action_icon, style="color3")
                 action.connect("clicked", self.confirm_print, path)
                 action.set_hexpand(False)
                 action.set_vexpand(False)
@@ -305,9 +306,10 @@ class Panel(ScreenPanel):
         return b.get_date() - a.get_date() if reverse else a.get_date() - b.get_date()
 
     def confirm_print(self, widget, filename):
+        action = _("Print") if self._printer.extrudercount > 0 else _("Start")
 
         buttons = [
-            {"name": _("Print"), "response": Gtk.ResponseType.OK},
+            {"name": action, "response": Gtk.ResponseType.OK},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
         ]
 
@@ -326,11 +328,11 @@ class Panel(ScreenPanel):
         fileinfo = self._screen.files.get_file_info(filename)
         if "estimated_time" in fileinfo:
             box.pack_start(
-                Gtk.Label(label=_("Print Time") + f': {self.format_time(fileinfo["estimated_time"])}'),
+                Gtk.Label(label=_("Estimated Time") + f': {self.format_time(fileinfo["estimated_time"])}'),
                 False, False, 2
             )
 
-        self._gtk.Dialog(_("Print") + f' {filename}', buttons, box, self.confirm_print_response, filename)
+        self._gtk.Dialog(f'{action} {filename}', buttons, box, self.confirm_print_response, filename)
 
     def confirm_print_response(self, dialog, response_id, filename):
         self._gtk.remove_dialog(dialog)
@@ -357,7 +359,7 @@ class Panel(ScreenPanel):
             if "filament_name" in fileinfo:
                 info += f'<b>{fileinfo["filament_name"]}</b>\n'
             if "estimated_time" in fileinfo:
-                info += _("Print Time") + f': <b>{self.format_time(fileinfo["estimated_time"])}</b>'
+                info += _("Estimated Time") + f': <b>{self.format_time(fileinfo["estimated_time"])}</b>'
         return info
 
     def load_files(self, result, method, params):

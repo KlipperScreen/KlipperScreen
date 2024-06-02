@@ -90,11 +90,11 @@ panel: power
 ```
 ![Power](img/panels/power.png)
 
-### Print
+### Gcodes / Print
 ```py
-panel: print
+panel: gcodes
 ```
-![Print Panel](img/panels/print.png)
+![Gcodes Panel](img/panels/gcodes.png)
 
 ### Retraction
 ```py
