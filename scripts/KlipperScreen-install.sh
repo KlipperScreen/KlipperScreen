@@ -300,8 +300,12 @@ install_network_manager()
         else
             echo_ok "Insalling NetworkManager for the network panel"
             sudo apt install network-manager
-            sudo systemctl start NetworkManager
+            sudo systemctl -q disable dhcpcd 2> /dev/null
+            sudo systemctl -q stop dhcpcd 2> /dev/null
             sudo systemctl enable NetworkManager
+            sudo systemctl -q --no-block start NetworkManager
+            sync
+            systemctl reboot
         fi
     fi
 }
