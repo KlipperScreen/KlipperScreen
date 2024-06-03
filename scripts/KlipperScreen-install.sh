@@ -292,13 +292,13 @@ start_KlipperScreen()
 
 install_network_manager()
 {
-    if [ -z "$NETOWRK" ]; then
+    if [ -z "$NETWORK" ]; then
         echo "Press enter for default (Yes)"
-        read -r -e -p "Insall NetworkManager for the network panel [Y/n]" NETOWRK
-        if [[ $NETOWRK =~ ^[nN]$ ]]; then
-            echo_error "Not insalling NetworkManager for the network panel"
+        read -r -e -p "Install NetworkManager for the network panel [Y/n]" NETWORK
+        if [[ $NETWORK =~ ^[nN]$ ]]; then
+            echo_error "Not installing NetworkManager for the network panel"
         else
-            echo_ok "Insalling NetworkManager for the network panel"
+            echo_ok "Installing NetworkManager for the network panel"
             sudo apt install network-manager
             sudo systemctl -q disable dhcpcd 2> /dev/null
             sudo systemctl -q stop dhcpcd 2> /dev/null
