@@ -76,9 +76,6 @@ class Panel(ScreenPanel):
             return
 
         self.values[option] = float(value)
-        self.list[option]['scale'].disconnect_by_func(self.set_opt_value)
-        self.list[option]['scale'].set_value(self.values[option])
-        self.list[option]['scale'].connect("button-release-event", self.set_opt_value, option)
         # Infinite scale
         for opt in self.options:
             if opt['option'] == option:
@@ -87,6 +84,9 @@ class Panel(ScreenPanel):
                 else:
                     self.list[option]['adjustment'].set_upper(opt["maxval"])
                 break
+        self.list[option]['scale'].set_value(self.values[option])
+        self.list[option]['scale'].disconnect_by_func(self.set_opt_value)
+        self.list[option]['scale'].connect("button-release-event", self.set_opt_value, option)
 
     def add_option(self, option, optname, units, value, digits, maxval):
         logging.info(f"Adding option: {option}")
