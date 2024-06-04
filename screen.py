@@ -554,6 +554,7 @@ class KlipperScreen(Gtk.Window):
         for dialog in self.dialogs:
             self.gtk.remove_dialog(dialog)
         self.close_screensaver()
+        gc.collect()
 
     def _remove_current_panel(self):
         if hasattr(self.panels[self._cur_panels[-1]], "deactivate"):
