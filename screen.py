@@ -433,7 +433,7 @@ class KlipperScreen(Gtk.Window):
 
     @staticmethod
     def error_modal_response(dialog, response_id):
-        sys.exit(1)
+        os._exit(1)
 
     def restart_ks(self, *args):
         logging.debug(f"Restarting {sys.executable} {' '.join(sys.argv)}")
@@ -1222,4 +1222,4 @@ if __name__ == "__main__":
         main()
     except Exception as ex:
         logging.exception(f"Fatal error in main loop:\n{ex}\n\n{traceback.format_exc()}")
-        sys.exit(1)
+        os._exit(1)
