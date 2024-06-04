@@ -489,13 +489,13 @@ class KlipperScreen(Gtk.Window):
 
     def customize_graph_colors(self, css_data):
         for category, category_data in self.style_options['graph_colors'].items():
-            for i, color in enumerate(category_data['colors'], start=1):
+            for i, color in enumerate(category_data['colors'], start=0):
                 if category == "extruder":
-                    class_name = f".graph_label_{category}{i}" if i > 1 else f".graph_label_{category}"
+                    class_name = f".graph_label_{category}{i}" if i > 0 else f".graph_label_{category}"
                 elif category == "bed":
-                    class_name = f".graph_label_{category}"
+                    class_name = f".graph_label_heater_{category}"
                 else:
-                    class_name = f".graph_label_{category}_{i}"
+                    class_name = f".graph_label_{category}_{i + 1}"
                 css_data += f"\n{class_name} {{ border-left-color: #{color} }}"
         return css_data
 
