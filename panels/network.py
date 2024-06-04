@@ -197,42 +197,12 @@ class Panel(ScreenPanel):
         self._screen.remove_keyboard()
         result = self.sdbus_nm.add_network(ssid, self.labels['network_psk'].get_text())
         if "error" in result:
-            if result["error"] == "insufficient_privileges":
-                self.permissions_fix_dialog()
-                return
             self._screen.show_popup_message(result["message"])
             if result["error"] == "psk_invalid":
                 return
         else:
             self.connect_network(widget, ssid, showadd=False)
         self.close_add_network()
-
-    def permissions_fix_dialog(self):
-
-        label = Gtk.Label(wrap=True, vexpand=True)
-        label.set_markup(
-            _("Insufficient priviledges detected") + "\n"
-            + _("Do you want to let KlipperScreen try to solve the issue?")
-        )
-        buttons = [
-            {"name": _("Accept"), "response": Gtk.ResponseType.OK, "style": 'dialog-warning'},
-            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'},
-        ]
-        self._gtk.Dialog(_("Insufficient privileges"), buttons, label, self.confirm_permission_fix)
-
-    def confirm_permission_fix(self, dialog, response_id):
-        self._gtk.remove_dialog(dialog)
-        if response_id == Gtk.ResponseType.CANCEL:
-            return
-        if response_id == Gtk.ResponseType.OK:
-            conf_d_path = "/etc/NetworkManager/conf.d"
-            if not os.path.exists(conf_d_path):
-                subprocess.run(["sudo", "mkdir", "-p", conf_d_path])
-            with open("/tmp/any-user.conf", "w") as f:
-                f.write("[main]\nauth-polkit=false\n")
-            subprocess.run(["sudo", "mv", "/tmp/any-user.conf", "/etc/NetworkManager/conf.d/any-user.conf"])
-            subprocess.run(["sudo", "systemctl", "restart", "NetworkManager.service"])
-            subprocess.run(["sudo", "systemctl", "restart", "KlipperScreen.service"])
 
     def back(self):
         if self.show_add:
