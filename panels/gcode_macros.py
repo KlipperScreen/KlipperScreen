@@ -9,6 +9,7 @@ from ks_includes.screen_panel import ScreenPanel
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        title = title or _("Macros")
         super().__init__(screen, title)
         self.sort_reverse = False
         self.sort_btn = self._gtk.Button("arrow-up", _("Name"), "color1", self.bts, Gtk.PositionType.RIGHT, 1)

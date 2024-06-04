@@ -33,6 +33,7 @@ def find_closest(screws, point, max_distance):
 class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
+        title = title or _("Bed Level")
         super().__init__(screen, title)
         self.screw_positions = {}
         self.screws = []

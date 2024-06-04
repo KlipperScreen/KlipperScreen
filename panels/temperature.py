@@ -15,6 +15,7 @@ class Panel(ScreenPanel):
     active_heater = None
 
     def __init__(self, screen, title, extra=None):
+        title = title or _("Temperature")
         super().__init__(screen, title)
         self.left_panel = None
         self.devices = {}

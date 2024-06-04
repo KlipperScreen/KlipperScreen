@@ -148,6 +148,7 @@ class Panel(ScreenPanel):
             self._filterable.refilter()
 
     def __init__(self, screen, title):
+        title = title or "Spoolman"
         super().__init__(screen, title)
         self.apiClient = screen.apiclient
         if self._config.get_main_config().getboolean("24htime", True):

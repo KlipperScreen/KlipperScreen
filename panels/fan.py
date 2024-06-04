@@ -11,6 +11,7 @@ CHANGEABLE_FANS = ["fan", "fan_generic"]
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        title = title or _("Fan")
         super().__init__(screen, title)
         self.fan_speed = {}
         self.devices = {}

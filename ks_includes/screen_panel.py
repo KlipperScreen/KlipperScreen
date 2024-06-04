@@ -59,10 +59,12 @@ class ScreenPanel:
         return None
 
     def menu_item_clicked(self, widget, item):
+        panel_args = {}
+        if 'name' in item:
+            panel_args['title'] = item['name']
         if 'extra' in item:
-            self._screen.show_panel(item['panel'], item['name'], extra=item['extra'])
-            return
-        self._screen.show_panel(item['panel'], item['name'])
+            panel_args['extra'] = item['extra']
+        self._screen.show_panel(item['panel'], **panel_args)
 
     def load_menu(self, widget, name, title=None):
         logging.info(f"loading menu {name}")

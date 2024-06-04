@@ -9,6 +9,7 @@ from ks_includes.widgets.objectmap import ObjectMap
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        title = title or _("Exclude Object")
         super().__init__(screen, title)
         self._screen = screen
         self.object_list = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, hexpand=True, vexpand=True)

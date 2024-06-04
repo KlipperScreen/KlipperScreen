@@ -10,6 +10,7 @@ from ks_includes.functions import parse_bool
 class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
+        title = title or _("Pins")
         super().__init__(screen, title)
         self.devices = {}
         # Create a grid for all devices

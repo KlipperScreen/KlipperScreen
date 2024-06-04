@@ -11,6 +11,7 @@ from ks_includes.screen_panel import ScreenPanel
 class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
+        title = title or _("Leds")
         super().__init__(screen, title)
         self.da_size = self._gtk.img_scale * 2
         self.preview = Gtk.DrawingArea(width_request=self.da_size, height_request=self.da_size)

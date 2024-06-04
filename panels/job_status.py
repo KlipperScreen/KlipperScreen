@@ -14,6 +14,7 @@ from ks_includes.KlippyGtk import find_widget
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        title = title or (_("Printing") if self._printer.extrudercount > 0 else _("Job Status"))
         super().__init__(screen, title)
         self.grid = Gtk.Grid(column_homogeneous=True)
         self.pos_z = 0.0
@@ -143,7 +144,7 @@ class Panel(ScreenPanel):
         }
         for button in buttons:
             buttons[button].set_halign(Gtk.Align.START)
-        buttons['fan'].connect("clicked", self.menu_item_clicked, {"panel": "fan", "name": _("Fan")})
+        buttons['fan'].connect("clicked", self.menu_item_clicked, {"panel": "fan"})
         self.buttons.update(buttons)
 
         self.buttons['extruder'] = {}
@@ -153,7 +154,7 @@ class Panel(ScreenPanel):
                                                                   Gtk.PositionType.LEFT, 1)
             self.buttons['extruder'][extruder].set_label(self.labels[extruder].get_text())
             self.buttons['extruder'][extruder].connect("clicked", self.menu_item_clicked,
-                                                       {"panel": "temperature", "name": _("Temperature"),
+                                                       {"panel": "temperature",
                                                         'extra': extruder})
             self.buttons['extruder'][extruder].set_halign(Gtk.Align.START)
 
@@ -181,7 +182,7 @@ class Panel(ScreenPanel):
 
             self.buttons['heater'][dev].set_label(self.labels[dev].get_text())
             self.buttons['heater'][dev].connect("clicked", self.menu_item_clicked,
-                                                {"panel": "temperature", "name": _("Temperature"), "extra": dev})
+                                                {"panel": "temperature", "extra": dev})
             self.buttons['heater'][dev].set_halign(Gtk.Align.START)
             self.labels['temp_grid'].attach(self.buttons['heater'][dev], n, 0, 1, 1)
             n += 1
@@ -205,8 +206,7 @@ class Panel(ScreenPanel):
                             self.labels[device] = Gtk.Label(label="-")
                             self.buttons['heater'][device].set_label(self.labels[device].get_text())
                             self.buttons['heater'][device].connect("clicked", self.menu_item_clicked,
-                                                                   {"panel": "temperature",
-                                                                    "name": _("Temperature")})
+                                                                   {"panel": "temperature"})
                             self.buttons['heater'][device].set_halign(Gtk.Align.START)
                             self.labels['temp_grid'].attach(self.buttons['heater'][device], n, 0, 1, 1)
                             n += 1
@@ -354,7 +354,7 @@ class Panel(ScreenPanel):
         self.buttons['cancel'].connect("clicked", self.cancel)
         self.buttons['control'].connect("clicked", self._screen._go_to_submenu, "")
         self.buttons['fine_tune'].connect("clicked", self.menu_item_clicked, {
-            "panel": "fine_tune", "name": _("Fine Tuning")})
+            "panel": "fine_tune"})
         self.buttons['menu'].connect("clicked", self.close_panel)
         self.buttons['pause'].connect("clicked", self.pause)
         self.buttons['restart'].connect("clicked", self.restart)
@@ -430,7 +430,7 @@ class Panel(ScreenPanel):
     def cancel_confirm(self, dialog, response_id):
         self._gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.APPLY:
-            self.menu_item_clicked(None, {"panel": "exclude", "name": _("Exclude Object")})
+            self.menu_item_clicked(None, {"panel": "exclude"})
             return
         if response_id == Gtk.ResponseType.CANCEL:
             self.enable_button("pause", "cancel")

@@ -9,6 +9,7 @@ from ks_includes.screen_panel import ScreenPanel
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        title = title or _("Shutdown")
         super().__init__(screen, title)
 
         estop = self._gtk.Button("emergency", _("Emergency Stop"), "color2")

@@ -12,6 +12,7 @@ from ks_includes.sdbus_nm import SdbusNm
 class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
+        title = title or _("Network")
         super().__init__(screen, title)
         try:
             self.sdbus_nm = SdbusNm(self.popup_callback)

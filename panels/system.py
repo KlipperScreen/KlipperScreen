@@ -8,6 +8,7 @@ from ks_includes.screen_panel import ScreenPanel
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        title = title or _("System")
         super().__init__(screen, title)
         self.current_row = 0
         self.mem_multiplier = None

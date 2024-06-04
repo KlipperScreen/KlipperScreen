@@ -10,6 +10,7 @@ from ks_includes.KlippyGtk import find_widget
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        title = title or _("Printer Select")
         super().__init__(screen, title)
         printers = self._config.get_printers()
 

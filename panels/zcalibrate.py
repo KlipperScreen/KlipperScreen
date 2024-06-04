@@ -12,6 +12,7 @@ class Panel(ScreenPanel):
     distance = distances[-2]
 
     def __init__(self, screen, title):
+        title = title or _("Z Calibrate")
         super().__init__(screen, title)
         self.mesh_min = []
         self.mesh_max = []

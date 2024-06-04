@@ -19,6 +19,7 @@ COLORS = {
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        title = title or _("Console")
         super().__init__(screen, title)
         self.autoscroll = True
         self.hidetemps = True

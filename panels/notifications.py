@@ -19,6 +19,7 @@ def remove_newlines(msg: str) -> str:
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        title = title or _("Notifications")
         super().__init__(screen, title)
         self.empty = _("Notification log empty")
         self.tb = Gtk.TextBuffer(text=self.empty)

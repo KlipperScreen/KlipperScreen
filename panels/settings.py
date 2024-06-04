@@ -7,6 +7,7 @@ from ks_includes.screen_panel import ScreenPanel
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        title = title or _("Settings")
         super().__init__(screen, title)
         self.printers = self.settings = self.langs = {}
         self.menu = ['settings_menu']

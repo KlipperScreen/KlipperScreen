@@ -12,6 +12,7 @@ from ks_includes.widgets.autogrid import AutoGrid
 class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
+        title = title or _("Extrude")
         super().__init__(screen, title)
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
         macros = self._printer.get_config_section_list("gcode_macro ")
@@ -47,11 +48,9 @@ class Panel(ScreenPanel):
         self.buttons['unload'].connect("clicked", self.load_unload, "-")
         self.buttons['retract'].connect("clicked", self.extrude, "-")
         self.buttons['temperature'].connect("clicked", self.menu_item_clicked, {
-            "name": "Temperature",
             "panel": "temperature"
         })
         self.buttons['spoolman'].connect("clicked", self.menu_item_clicked, {
-            "name": "Spoolman",
             "panel": "spoolman"
         })
 

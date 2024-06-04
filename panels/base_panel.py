@@ -35,9 +35,7 @@ class BasePanel(ScreenPanel):
         self.control['estop'].connect("clicked", self.emergency_stop)
         self.control['estop'].set_no_show_all(True)
         self.shutdown = {
-            "name": None,
             "panel": "shutdown",
-            "icon": "shutdown",
         }
         self.control['shutdown'] = self._gtk.Button('shutdown', scale=abscale)
         self.control['shutdown'].connect("clicked", self.menu_item_clicked, self.shutdown)
@@ -47,7 +45,6 @@ class BasePanel(ScreenPanel):
         self.control['printer_select'].set_no_show_all(True)
 
         self.shorcut = {
-            "name": "Macros",
             "panel": "gcode_macros",
             "icon": "custom-script",
         }

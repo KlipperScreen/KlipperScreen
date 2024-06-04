@@ -304,7 +304,7 @@ class KlipperScreen(Gtk.Window):
             raise FileNotFoundError(os.strerror(2), "\n" + panel_path)
         return import_module(f"panels.{panel}")
 
-    def show_panel(self, panel, title, remove_all=False, panel_name=None, **kwargs):
+    def show_panel(self, panel, title=None, remove_all=False, panel_name=None, **kwargs):
         if panel_name is None:
             panel_name = panel
         try:
@@ -700,7 +700,7 @@ class KlipperScreen(Gtk.Window):
 
     def show_printer_select(self, widget=None):
         self.base_panel.show_heaters(False)
-        self.show_panel("printer_select", _("Printer Select"), remove_all=True)
+        self.show_panel("printer_select", remove_all=True)
 
     def websocket_connection_cancel(self):
         self.printer_initializing(
@@ -749,12 +749,12 @@ class KlipperScreen(Gtk.Window):
     def state_paused(self):
         self.state_printing()
         if self._config.get_main_config().getboolean("auto_open_extrude", fallback=True):
-            self.show_panel("extrude", _("Extrude"))
+            self.show_panel("extrude")
 
     def state_printing(self):
         for dialog in self.dialogs:
             self.gtk.remove_dialog(dialog)
-        self.show_panel("job_status", _("Printing"), remove_all=True)
+        self.show_panel("job_status", remove_all=True)
 
     def state_ready(self, wait=True):
         # Do not return to main menu if completing a job, timeouts/user input will return
@@ -765,7 +765,7 @@ class KlipperScreen(Gtk.Window):
             self.printer.state = "not ready"
             return
         self.files.refresh_files()
-        self.show_panel("main_menu", None, remove_all=True, items=self._config.get_menu_items("__main"))
+        self.show_panel("main_menu", remove_all=True, items=self._config.get_menu_items("__main"))
 
     def state_startup(self):
         self.printer_initializing(_("Klipper is attempting to start"))
@@ -822,9 +822,9 @@ class KlipperScreen(Gtk.Window):
         elif action == "notify_status_update" and self.printer.state != "shutdown":
             self.printer.process_update(data)
             if 'manual_probe' in data and data['manual_probe']['is_active'] and 'zcalibrate' not in self._cur_panels:
-                self.show_panel("zcalibrate", _('Z Calibrate'))
+                self.show_panel("zcalibrate")
             if "screws_tilt_adjust" in data and 'bed_level' not in self._cur_panels:
-                self.show_panel("bed_level", _('Bed Level'))
+                self.show_panel("bed_level")
         elif action == "notify_filelist_changed":
             if self.files is not None:
                 self.files.process_update(data)
@@ -917,7 +917,7 @@ class KlipperScreen(Gtk.Window):
 
     def printer_initializing(self, msg, go_to_splash=False):
         if 'splash_screen' not in self.panels or go_to_splash:
-            self.show_panel("splash_screen", None, remove_all=True)
+            self.show_panel("splash_screen", remove_all=True)
         self.panels['splash_screen'].update_text(msg)
         self.log_notification(msg, 0)
 

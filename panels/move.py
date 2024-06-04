@@ -13,6 +13,7 @@ class Panel(ScreenPanel):
     distance = distances[-2]
 
     def __init__(self, screen, title):
+        title = title or _("Move")
         super().__init__(screen, title)
 
         if self.ks_printer_cfg is not None:

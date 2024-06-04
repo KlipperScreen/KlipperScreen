@@ -12,6 +12,7 @@ from ks_includes.widgets.bedmap import BedMap
 class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
+        title = title or _("Bed Mesh")
         super().__init__(screen, title)
         self.show_create = False
         self.active_mesh = None

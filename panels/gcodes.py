@@ -21,6 +21,7 @@ def format_label(widget):
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        title = title or (_("Print") if self._printer.extrudercount > 0 else _("Gcodes"))
         super().__init__(screen, title)
         sortdir = self._config.get_main_config().get("print_sort_dir", "name_asc")
         sortdir = sortdir.split('_')

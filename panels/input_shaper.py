@@ -16,6 +16,7 @@ SHAPERS = ['zv', 'mzv', 'zvd', 'ei', '2hump_ei', '3hump_ei']
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        title = title or _("Input Shaper")
         super().__init__(screen, title)
         self.freq_xy_adj = {}
         self.freq_xy_combo = {}
