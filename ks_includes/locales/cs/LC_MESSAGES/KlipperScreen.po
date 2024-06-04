@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-02 08:38-0300\n"
-"PO-Revision-Date: 2024-05-27 14:12+0000\n"
+"PO-Revision-Date: 2024-06-03 19:09+0000\n"
 "Last-Translator: Miloslav Kos <kos.m@post.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/cs/>\n"
@@ -176,14 +176,14 @@ msgid "Connected"
 msgstr "Připojeno"
 
 msgid "Connecting"
-msgstr ""
+msgstr "Připojení"
 
 #, python-format
 msgid "Connecting to %s"
 msgstr "Připojování k %s"
 
 msgid "Connection failed"
-msgstr ""
+msgstr "Připojení se nezdařilo"
 
 msgid "Console"
 msgstr "Konsole"
@@ -192,7 +192,7 @@ msgid "Cooldown"
 msgstr "Zchladit"
 
 msgid "Couldn't add network"
-msgstr ""
+msgstr "Nepodařilo se přidat síť"
 
 msgid "Current percentage and graph line"
 msgstr "Aktuální procento a linie grafu"
@@ -216,17 +216,17 @@ msgid "Disable for 12hs with am / pm"
 msgstr "Vypnout na 12 hodin am / pm"
 
 msgid "Disconnect"
-msgstr ""
+msgstr "Odpojení"
 
 msgid "Distance (mm)"
 msgstr "Vzdálenost (mm)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
+msgstr "Chcete zapomenout nebo se odpojit %s?"
 
 msgid "Do you want to let KlipperScreen try to solve the issue?"
-msgstr ""
+msgstr "Chcete nechat KlipperScreen, aby se pokusil problém vyřešit?"
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -260,7 +260,7 @@ msgid "Error: Couldn't get a position to probe"
 msgstr "Chyba: Nepodařilo se získat pozici pro sondování"
 
 msgid "Estimated Time"
-msgstr ""
+msgstr "Odhadovaný čas"
 
 msgid "Estimated Time Method"
 msgstr "Výpočet doby tisku"
@@ -284,10 +284,10 @@ msgid "Extrusion -"
 msgstr "Extruze -"
 
 msgid "Failed to delete connection"
-msgstr ""
+msgstr "Nepodařilo se odstranit připojení"
 
 msgid "Failed to initialize"
-msgstr ""
+msgstr "Inicializace se nezdařila"
 
 msgid "Failed, adjust position first"
 msgstr "Chyba, nastav nejprve pozici"
@@ -296,7 +296,7 @@ msgid "Fan"
 msgstr "Větrák"
 
 msgid "Filament"
-msgstr ""
+msgstr "Filament"
 
 msgid "Filament Used"
 msgstr "Typ filamentu"
@@ -341,16 +341,16 @@ msgid "Font Size"
 msgstr "Velikost fontu"
 
 msgid "Forget"
-msgstr ""
+msgstr "Zapomenout"
 
 msgid "Full Update"
 msgstr "Úplný update"
 
 msgid "Gcodes"
-msgstr ""
+msgstr "Gkódy"
 
 msgid "Getting IP address"
-msgstr ""
+msgstr "Získání IP adresy"
 
 msgid "Go Back"
 msgstr "Zpět"
@@ -407,10 +407,10 @@ msgid "Input Shaper"
 msgstr "Kompenzace rezonancí"
 
 msgid "Insufficient priviledges detected"
-msgstr ""
+msgstr "Zjištěna nedostatečná oprávnění"
 
 msgid "Insufficient privileges"
-msgstr ""
+msgstr "Nedostatečná oprávnění"
 
 msgid "Interface"
 msgstr "Rozhraní"
@@ -472,7 +472,7 @@ msgid "Last Used"
 msgstr "Munulý"
 
 msgid "Layer Height"
-msgstr ""
+msgstr "Výška vrstvy"
 
 msgid "Layer:"
 msgstr "Vrstva:"
@@ -520,7 +520,7 @@ msgid "Max Velocity"
 msgstr "Max. rychlost"
 
 msgid "Max:"
-msgstr ""
+msgstr "Max:"
 
 msgid "Maximum"
 msgstr "Maximum"
@@ -550,7 +550,7 @@ msgid "Minimum Cruise Ratio"
 msgstr "Minimální cestovní poměr"
 
 msgid "Minimum:"
-msgstr ""
+msgstr "Min:"
 
 msgid "Modified"
 msgstr "Změněno"
@@ -574,13 +574,13 @@ msgid "Network"
 msgstr "Síť"
 
 msgid "Network connected"
-msgstr ""
+msgstr "Připojeno k síti"
 
 msgid "Network disconnected"
-msgstr ""
+msgstr "Síť odpojena"
 
 msgid "Network not found"
-msgstr ""
+msgstr "Síť nebyla nalezena"
 
 msgid "Never"
 msgstr "Nikdy"
@@ -713,7 +713,7 @@ msgid "Refresh"
 msgstr "Obnovit"
 
 msgid "Remove network"
-msgstr ""
+msgstr "Odebrat síť"
 
 msgid "Rename/Move:"
 msgstr "Přejmenovat/Přesunout:"
@@ -852,7 +852,7 @@ msgid "System Shutdown"
 msgstr "Vypnutí"
 
 msgid "System:"
-msgstr ""
+msgstr "Systém:"
 
 msgid "Temp (°C)"
 msgstr "Teplota (°C)"
@@ -861,7 +861,7 @@ msgid "Temperature"
 msgstr "Teplota"
 
 msgid "The system doesn't meet the minimum requirement"
-msgstr ""
+msgstr "Systém nesplňuje minimální požadavky"
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr "Tento panel podporuje až 9 šroubů v mřížce 3x3"
@@ -882,7 +882,7 @@ msgid "Unknown Heater"
 msgstr "Neznámé topení"
 
 msgid "Unknown security type"
-msgstr ""
+msgstr "Neznámý typ zabezpečení"
 
 msgid "Unload"
 msgstr "Vysuň"

@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-02 08:38-0300\n"
-"PO-Revision-Date: 2024-04-13 16:48+0000\n"
-"Last-Translator: vjurka <v@jurka.lt>\n"
+"PO-Revision-Date: 2024-06-04 17:51+0000\n"
+"Last-Translator: Vidmantas Jurka <vjurka@gmail.com>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/lt/>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"(n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.5-dev\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && ("
+"n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.6-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -72,7 +72,7 @@ msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Ar tikrai paleisti avarinį stabdymą?"
 
 msgid "Are you sure you want to stop the calibration?"
-msgstr ""
+msgstr "Ar tikrai norite sustabdyti kalibraciją?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Ar tikrai norite nutraukti spausdinimą?"
@@ -87,7 +87,7 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "Ar tikrai norite išjungti spausdintuvą?"
 
 msgid "Asks for confirmation before stopping"
-msgstr ""
+msgstr "Klausti patvirtinimo prieš sustabdant"
 
 msgid "Auto"
 msgstr "Auto"
@@ -144,10 +144,10 @@ msgid "Cannot connect to Moonraker"
 msgstr "Nepavyksta prisijungti prie Moonraker"
 
 msgid "Changes how the interface looks"
-msgstr ""
+msgstr "Pakeičia sąsajos išvaizdą"
 
 msgid "Changes how the time remaining is calculated"
-msgstr ""
+msgstr "Keičia likusio laiko skaičiavimo būdą"
 
 msgid "Channel"
 msgstr "Kanalas"
@@ -165,7 +165,7 @@ msgid "Close"
 msgstr "Uždaryti"
 
 msgid "Close messages after a timeout"
-msgstr ""
+msgstr "Pasibaigus skirtajam laikui uždaryti pranešimus"
 
 msgid "Complete"
 msgstr "Baigta"
@@ -177,14 +177,14 @@ msgid "Connected"
 msgstr "Prijungta"
 
 msgid "Connecting"
-msgstr ""
+msgstr "Prisijungiama"
 
 #, python-format
 msgid "Connecting to %s"
 msgstr "Prisijungiama prie %s"
 
 msgid "Connection failed"
-msgstr ""
+msgstr "Prisijungti nepavyko"
 
 msgid "Console"
 msgstr "Terminalas"
@@ -193,10 +193,10 @@ msgid "Cooldown"
 msgstr "Atvėsinti"
 
 msgid "Couldn't add network"
-msgstr ""
+msgstr "Nepavyko pridėti tinklo"
 
 msgid "Current percentage and graph line"
-msgstr ""
+msgstr "Galios procentai ir grafiko linija"
 
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS nepakrauta ir išjungta"
@@ -214,20 +214,20 @@ msgid "Disable Motors"
 msgstr "Išjungti variklius"
 
 msgid "Disable for 12hs with am / pm"
-msgstr ""
+msgstr "Išjungti 12hs su am / pm"
 
 msgid "Disconnect"
-msgstr ""
+msgstr "Atsijungti"
 
 msgid "Distance (mm)"
 msgstr "Atstumas (mm)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
+msgstr "Ar tikrai noriti atsijungti ir užmiršti %s?"
 
 msgid "Do you want to let KlipperScreen try to solve the issue?"
-msgstr ""
+msgstr "Ar norite leisti KlipperScreen pabandyti išspręsti problemą?"
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -240,7 +240,7 @@ msgid "Emergency Stop"
 msgstr "Avarinis stabdymas"
 
 msgid "Enable screen power management"
-msgstr ""
+msgstr "Įgalinti ekrano energijos valdymą"
 
 msgid "Error"
 msgstr "Klaida"
@@ -261,7 +261,7 @@ msgid "Error: Couldn't get a position to probe"
 msgstr "Klaida: neįmanoma pozicija aukščio sensoriui"
 
 msgid "Estimated Time"
-msgstr ""
+msgstr "Apskaičiuotas laikas"
 
 msgid "Estimated Time Method"
 msgstr "Numatomas laikas"
@@ -285,10 +285,10 @@ msgid "Extrusion -"
 msgstr "Ekstruzija -"
 
 msgid "Failed to delete connection"
-msgstr ""
+msgstr "Nepavyko ištrinti ryšio"
 
 msgid "Failed to initialize"
-msgstr ""
+msgstr "Nepavyko inicijuoti"
 
 msgid "Failed, adjust position first"
 msgstr "Klaida. Pakeiskite padėtį"
@@ -297,7 +297,7 @@ msgid "Fan"
 msgstr "Ventiliatorius"
 
 msgid "Filament"
-msgstr ""
+msgstr "Gijų siūlas"
 
 msgid "Filament Used"
 msgstr "Panaudota plastiko"
@@ -342,16 +342,16 @@ msgid "Font Size"
 msgstr "Šrifto dydis"
 
 msgid "Forget"
-msgstr ""
+msgstr "Užmiršti"
 
 msgid "Full Update"
 msgstr "Atnaujinti viską"
 
 msgid "Gcodes"
-msgstr ""
+msgstr "G-kodas"
 
 msgid "Getting IP address"
-msgstr ""
+msgstr "IP adreso gavimas"
 
 msgid "Go Back"
 msgstr "Atgal"
@@ -408,10 +408,10 @@ msgid "Input Shaper"
 msgstr "Input Shaper"
 
 msgid "Insufficient priviledges detected"
-msgstr ""
+msgstr "Aptikta, kad privilegijų nepakanka"
 
 msgid "Insufficient privileges"
-msgstr ""
+msgstr "Privilegijų nepakanka"
 
 msgid "Interface"
 msgstr "Interfeisas"
@@ -423,7 +423,7 @@ msgid "Invalid password"
 msgstr "Blogas slaptažodis"
 
 msgid "Inversely affects the icon size"
-msgstr ""
+msgstr "Atvirkščiai veikia piktogramos dydį"
 
 msgid "Invert X"
 msgstr "X inversija"
@@ -439,7 +439,7 @@ msgstr ""
 "Priklausomai nuo šildytuvo galios gali užtrukti daugiau kaip 5 minutes."
 
 msgid "It's possible that the configuration is not correct"
-msgstr ""
+msgstr "Gali būti, kad konfigūracija neteisinga"
 
 msgid "Klipper Restart"
 msgstr "Perkrauti Klipper'į"
@@ -475,7 +475,7 @@ msgid "Last Used"
 msgstr "Paskutinis naudotas"
 
 msgid "Layer Height"
-msgstr ""
+msgstr "Sluoksnio aukštis"
 
 msgid "Layer:"
 msgstr "Sluoksnis:"
@@ -523,7 +523,7 @@ msgid "Max Velocity"
 msgstr "Maksimalus greitis"
 
 msgid "Max:"
-msgstr ""
+msgstr "Max:"
 
 msgid "Maximum"
 msgstr "Maksimum"
@@ -541,7 +541,7 @@ msgid "Medium"
 msgstr "Vidutinis"
 
 msgid "Memory"
-msgstr ""
+msgstr "Atmintis"
 
 msgid "Menu"
 msgstr "Meniu"
@@ -553,7 +553,7 @@ msgid "Minimum Cruise Ratio"
 msgstr "Minimalus kruizo koeficientas"
 
 msgid "Minimum:"
-msgstr ""
+msgstr "Minimum:"
 
 msgid "Modified"
 msgstr "Pakeista"
@@ -577,13 +577,13 @@ msgid "Network"
 msgstr "Tinklas"
 
 msgid "Network connected"
-msgstr ""
+msgstr "Tinklas prijungtas"
 
 msgid "Network disconnected"
-msgstr ""
+msgstr "Tinklas atjungtas"
 
 msgid "Network not found"
-msgstr ""
+msgstr "Tinklas nerastas"
 
 msgid "Never"
 msgstr "Niekada"
@@ -601,7 +601,7 @@ msgid "No wireless interface has been found"
 msgstr "Belaidė sąsaja nerasta"
 
 msgid "Not all screens support this"
-msgstr ""
+msgstr "Ne visi ekranai tai palaiko"
 
 msgid "Not working or not configured"
 msgstr "Neveikia arba nesukonfigūruota"
@@ -616,7 +616,7 @@ msgid "Notifications"
 msgstr "Pranešimai"
 
 msgid "Only for the move panel"
-msgstr ""
+msgstr "Tik perkėlimo skydeliui"
 
 #, python-format
 msgid "Outdated by %d"
@@ -653,7 +653,7 @@ msgid "Please recompile and flash the micro-controller."
 msgstr "Perprogramuokite mikrovaldiklį."
 
 msgid "Please wait"
-msgstr ""
+msgstr "Prašome laukti"
 
 msgid "Power"
 msgstr "Maitinimas"
@@ -717,7 +717,7 @@ msgid "Refresh"
 msgstr "Atnaujinti"
 
 msgid "Remove network"
-msgstr ""
+msgstr "Pašalinti tinklą"
 
 msgid "Rename/Move:"
 msgstr "Pervadinti/Perkelti:"
@@ -747,7 +747,7 @@ msgid "Retrying"
 msgstr "Antras bandymas"
 
 msgid "Rotation invalid"
-msgstr ""
+msgstr "Neteisingas sukimas"
 
 msgid "Save"
 msgstr "Išsaugoti"
@@ -778,7 +778,7 @@ msgid "Screws Adjust"
 msgstr "Reguliuoti varžtus"
 
 msgid "Screws not used:"
-msgstr ""
+msgstr "Varžtai nenaudoti:"
 
 msgid "Send"
 msgstr "Siūsti"
@@ -799,7 +799,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "Rodyti stumdymo juostą"
 
 msgid "Show only devices that are able to be set"
-msgstr ""
+msgstr "Rodyti tik tuos įrenginius, kuriuos galima nustatyti"
 
 msgid "Shutdown"
 msgstr "Išjungti"
@@ -845,6 +845,7 @@ msgstr "Paleidžiami atnaujinimai"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
 msgstr ""
+"Sukeičia mygtukus, jei jie yra vienas ant kito, paveikia kitus skydelius"
 
 msgid "System"
 msgstr "Sistema"
@@ -856,7 +857,7 @@ msgid "System Shutdown"
 msgstr "Išjungti sistemą"
 
 msgid "System:"
-msgstr ""
+msgstr "SIstema:"
 
 msgid "Temp (°C)"
 msgstr "Temperatūra (°С)"
@@ -865,19 +866,19 @@ msgid "Temperature"
 msgstr "Temperatūra"
 
 msgid "The system doesn't meet the minimum requirement"
-msgstr ""
+msgstr "Sistema neatitinka minimalių reikalavimų"
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr ""
+msgstr "Ši plokštė palaiko iki 9 varžtų 3x3 tinklelyje"
 
 msgid "This will affect screw positions and mesh graph"
-msgstr ""
+msgstr "Tai turės įtakos varžtų padėčiai ir tinklelio grafikams"
 
 msgid "Timeout for screen black-out or power-off"
-msgstr ""
+msgstr "Ekrano užtemimo arba maitinimo išjungimo laikas"
 
 msgid "Timeout for screen black-out or power-off during printing"
-msgstr ""
+msgstr "Ekrano užtemimo arba maitinimo išjungimo laikas spausdinimo metu"
 
 msgid "Total:"
 msgstr "Viso:"
@@ -886,7 +887,7 @@ msgid "Unknown Heater"
 msgstr "Nežinomas šildytuvas"
 
 msgid "Unknown security type"
-msgstr ""
+msgstr "Nežinomas saugos tipas"
 
 msgid "Unload"
 msgstr "Iškrauti"
@@ -910,7 +911,7 @@ msgid "Uploaded"
 msgstr "Nusiųsta"
 
 msgid "Useful for un-responsive touchscreens"
-msgstr ""
+msgstr "Naudinga nereaguojantiems jutikliniams ekranams"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC nepalaikoma, bandoma Stream"
@@ -944,9 +945,9 @@ msgstr[2] "pakeitimai"
 
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "diena"
+msgstr[1] "dienos"
+msgstr[2] "dienų"
 
 msgid "hour"
 msgid_plural "hours"
@@ -980,9 +981,9 @@ msgstr "mm³/s"
 
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "sekundė"
+msgstr[1] "sekundės"
+msgstr[2] "sekundžių"
 
 #~ msgid "Ended official support in June 2023"
 #~ msgstr "Oficialus palaikymas baigtas 2023 m. birželio mėn"
