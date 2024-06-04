@@ -658,6 +658,9 @@ msgstr "啟動列印機"
 msgid "Pressure Advance:"
 msgstr "壓力推進："
 
+msgid "Pressure Advance"
+msgstr "壓力推進"
+
 msgid "Print"
 msgstr "列印"
 

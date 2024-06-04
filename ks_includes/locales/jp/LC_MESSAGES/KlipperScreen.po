@@ -653,6 +653,9 @@ msgstr "プリンター電源"
 msgid "Pressure Advance:"
 msgstr ""
 
+msgid "Pressure Advance"
+msgstr ""
+
 msgid "Print"
 msgstr "印刷"
 

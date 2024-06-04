@@ -42,6 +42,8 @@ class Panel(ScreenPanel):
             'retract': self._gtk.Button("retract", _("Retract"), "color1"),
             'temperature': self._gtk.Button("heat-up", _("Temperature"), "color4"),
             'spoolman': self._gtk.Button("spoolman", "Spoolman", "color3"),
+            'pressure': self._gtk.Button("settings", _("Pressure Advance"), "color2"),
+            'retraction': self._gtk.Button("settings", _("Retraction"), "color1")
         }
         self.buttons['extrude'].connect("clicked", self.extrude, "+")
         self.buttons['load'].connect("clicked", self.load_unload, "+")
@@ -52,6 +54,12 @@ class Panel(ScreenPanel):
         })
         self.buttons['spoolman'].connect("clicked", self.menu_item_clicked, {
             "panel": "spoolman"
+        })
+        self.buttons['pressure'].connect("clicked", self.menu_item_clicked, {
+            "panel": "pressure_advance"
+        })
+        self.buttons['retraction'].connect("clicked", self.menu_item_clicked, {
+            "panel": "retraction"
         })
 
         xbox = Gtk.Box(homogeneous=True)
@@ -67,7 +75,7 @@ class Panel(ScreenPanel):
                 self.labels[extruder].connect("clicked", self.change_extruder, extruder)
             if extruder == self.current_extruder:
                 self.labels[extruder].get_style_context().add_class("button_active")
-            if self._printer.extrudercount <= limit:
+            if self._printer.extrudercount < limit:
                 xbox.add(self.labels[extruder])
                 i += 1
             else:
@@ -76,13 +84,19 @@ class Panel(ScreenPanel):
             self.labels['extruders'] = AutoGrid(extruder_buttons, vertical=self._screen.vertical_mode)
             self.labels['extruders_menu'] = self._gtk.ScrolledWindow()
             self.labels['extruders_menu'].add(self.labels['extruders'])
-        if self._printer.extrudercount > limit:
+        if self._printer.extrudercount >= limit:
             changer = self._gtk.Button("toolchanger")
             changer.connect("clicked", self.load_menu, 'extruders', _('Extruders'))
             xbox.add(changer)
             self.labels["current_extruder"] = self._gtk.Button("extruder", "")
             xbox.add(self.labels["current_extruder"])
             self.labels["current_extruder"].connect("clicked", self.load_menu, 'extruders', _('Extruders'))
+        if not self._screen.vertical_mode:
+            xbox.add(self.buttons['pressure'])
+            i += 1
+        if self._printer.get_config_section("firmware_retraction") and not self._screen.vertical_mode:
+            xbox.add(self.buttons['retraction'])
+            i += 1
         if i < limit:
             xbox.add(self.buttons['temperature'])
         if i < (limit - 1) and self._printer.spoolman:
@@ -145,9 +159,14 @@ class Panel(ScreenPanel):
             grid.attach(self.buttons['retract'], 2, 1, 2, 1)
             grid.attach(self.buttons['load'], 0, 2, 2, 1)
             grid.attach(self.buttons['unload'], 2, 2, 2, 1)
-            grid.attach(distbox, 0, 3, 4, 1)
-            grid.attach(speedbox, 0, 4, 4, 1)
-            grid.attach(sensors, 0, 5, 4, 1)
+            settings_box = Gtk.Box(homogeneous=True)
+            settings_box.add(self.buttons['pressure'])
+            if self._printer.get_config_section("firmware_retraction"):
+                settings_box.add(self.buttons['retraction'])
+            grid.attach(settings_box, 0, 3, 4, 1)
+            grid.attach(distbox, 0, 4, 4, 1)
+            grid.attach(speedbox, 0, 5, 4, 1)
+            grid.attach(sensors, 0, 6, 4, 1)
         else:
             grid.attach(self.buttons['extrude'], 0, 2, 1, 1)
             grid.attach(self.buttons['load'], 1, 2, 1, 1)
@@ -163,7 +182,7 @@ class Panel(ScreenPanel):
 
     def enable_buttons(self, enable):
         for button in self.buttons:
-            if button in ("temperature", "spoolman"):
+            if button in ("pressure", "retraction", "spoolman", "temperature"):
                 continue
             self.buttons[button].set_sensitive(enable)
 

@@ -662,6 +662,9 @@ msgstr "Увімкнути принтер"
 msgid "Pressure Advance:"
 msgstr "Випередження тиску:"
 
+msgid "Pressure Advance"
+msgstr "Випередження тиску"
+
 msgid "Print"
 msgstr "Друк"
 

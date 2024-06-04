@@ -656,6 +656,9 @@ msgstr "Printeri sisselülitamine"
 msgid "Pressure Advance:"
 msgstr "Surveelisus:"
 
+msgid "Pressure Advance"
+msgstr "Surveelisus"
+
 msgid "Print"
 msgstr "Prindi"
 

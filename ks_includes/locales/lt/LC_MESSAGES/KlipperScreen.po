@@ -664,6 +664,10 @@ msgstr "Išjungti spausdintuvą"
 msgid "Pressure Advance:"
 msgstr "Slėgio kontrolė:"
 
+
+msgid "Pressure Advance"
+msgstr "Slėgio kontrolė"
+
 msgid "Print"
 msgstr "Spausdinti"
 

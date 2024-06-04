@@ -663,6 +663,9 @@ msgstr "הפעל מדפסת"
 msgid "Pressure Advance:"
 msgstr "פרשר אדוונס"
 
+msgid "Pressure Advance"
+msgstr "פרשר אדוונס"
+
 msgid "Print"
 msgstr "הדפסה"
 

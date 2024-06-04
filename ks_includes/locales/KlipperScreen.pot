@@ -658,6 +658,9 @@ msgstr ""
 msgid "Pressure Advance:"
 msgstr ""
 
+msgid "Pressure Advance"
+msgstr ""
+
 msgid "Print"
 msgstr ""
 

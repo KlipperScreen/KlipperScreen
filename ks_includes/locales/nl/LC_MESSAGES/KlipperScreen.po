@@ -661,6 +661,9 @@ msgstr "Printer Aanzetten"
 msgid "Pressure Advance:"
 msgstr "Pressure Advance:"
 
+msgid "Pressure Advance"
+msgstr "Pressure Advance"
+
 msgid "Print"
 msgstr "Print"
 

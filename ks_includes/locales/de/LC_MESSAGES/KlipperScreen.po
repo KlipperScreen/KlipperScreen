@@ -661,6 +661,9 @@ msgstr "Drucker einschalten"
 msgid "Pressure Advance:"
 msgstr "Druckvorlauf:"
 
+msgid "Pressure Advance"
+msgstr "Druckvorlauf"
+
 msgid "Print"
 msgstr "Druck"
 

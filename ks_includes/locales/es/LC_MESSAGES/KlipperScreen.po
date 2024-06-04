@@ -662,6 +662,9 @@ msgstr "Encender Impresora"
 msgid "Pressure Advance:"
 msgstr "Avance de presión:"
 
+msgid "Pressure Advance"
+msgstr "Avance de presión"
+
 msgid "Print"
 msgstr "Imprimir"
 

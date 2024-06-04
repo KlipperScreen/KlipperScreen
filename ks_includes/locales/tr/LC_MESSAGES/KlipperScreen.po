@@ -659,6 +659,9 @@ msgstr "Yazıcıya Güç Ver (aç)"
 msgid "Pressure Advance:"
 msgstr "Akış Dengeleme:"
 
+msgid "Pressure Advance"
+msgstr "Akış Dengeleme"
+
 msgid "Print"
 msgstr "Yazdır"
 

@@ -662,6 +662,9 @@ msgstr "Включить принтер"
 msgid "Pressure Advance:"
 msgstr "Повышение давления:"
 
+msgid "Pressure Advance"
+msgstr "Повышение давления"
+
 msgid "Print"
 msgstr "Печать"
 

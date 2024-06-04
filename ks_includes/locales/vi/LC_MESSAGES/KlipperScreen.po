@@ -653,6 +653,9 @@ msgstr "Bật nguồn máy in"
 msgid "Pressure Advance:"
 msgstr "Nâng áp suất:"
 
+msgid "Pressure Advance"
+msgstr "Nâng áp suất"
+
 msgid "Print"
 msgstr "In"
 

@@ -658,6 +658,9 @@ msgstr "打印机通电"
 msgid "Pressure Advance:"
 msgstr "压力提前："
 
+msgid "Pressure Advance"
+msgstr "压力提前"
+
 msgid "Print"
 msgstr "打印"
 

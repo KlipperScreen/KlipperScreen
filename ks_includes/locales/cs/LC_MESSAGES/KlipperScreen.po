@@ -661,6 +661,9 @@ msgstr "Zapni tiskárnu"
 msgid "Pressure Advance:"
 msgstr "Pressure Advance:"
 
+msgid "Pressure Advance"
+msgstr "Pressure Advance"
+
 msgid "Print"
 msgstr "Tisk"
 

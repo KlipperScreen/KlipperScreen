@@ -660,6 +660,9 @@ msgstr "Slå på skrivaren"
 msgid "Pressure Advance:"
 msgstr "Tryckförflyttning:"
 
+msgid "Pressure Advance"
+msgstr "Tryckförflyttning"
+
 msgid "Print"
 msgstr "Skriv ut"
 

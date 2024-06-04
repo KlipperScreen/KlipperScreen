@@ -654,6 +654,9 @@ msgstr "프린터 전원 켜기"
 msgid "Pressure Advance:"
 msgstr "모서리 압출 제어 수치:"
 
+msgid "Pressure Advance"
+msgstr "모서리 압출 제어 수치"
+
 msgid "Print"
 msgstr "출력"
 

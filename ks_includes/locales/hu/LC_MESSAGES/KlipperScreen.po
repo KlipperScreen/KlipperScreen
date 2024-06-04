@@ -655,6 +655,9 @@ msgstr "Nyomtató bekapcsolása"
 msgid "Pressure Advance:"
 msgstr "Nyomás előtolás:"
 
+msgid "Pressure Advance"
+msgstr "Nyomás előtolás"
+
 msgid "Print"
 msgstr "Nyomtatás"
 
