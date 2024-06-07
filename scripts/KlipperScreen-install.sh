@@ -291,6 +291,9 @@ install_network_manager()
             echo_error "Not installing NetworkManager for the network panel"
         else
             echo_ok "Installing NetworkManager for the network panel"
+            echo_text ""
+            echo_text "If you were not using NetworkManager"
+            echo_text "You will need to reconnect to the network using KlipperScreen or nmtui or nmcli"
             sudo apt install network-manager
             sudo mkdir -p /etc/NetworkManager/conf.d
             sudo tee /etc/NetworkManager/conf.d/any-user.conf > /dev/null << EOF

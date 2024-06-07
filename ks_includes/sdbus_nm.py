@@ -112,14 +112,7 @@ class SdbusNm:
                 ["systemctl", "is-active", "--quiet", "NetworkManager"]
             )
             if status.returncode != 0:
-                logging.info("Starting NetworkManager service...")
-                subprocess.run(["sudo", "systemctl", "start", "NetworkManager"])
-                subprocess.run(["sudo", "systemctl", "enable", "NetworkManager"])
-                status = subprocess.run(
-                    ["systemctl", "is-active", "--quiet", "NetworkManager"]
-                )
-            if status.returncode != 0:
-                raise RuntimeError("Failed to start NetworkManager service")
+                raise RuntimeError("Failed to detect NetworkManager service")
         except FileNotFoundError as e:
             logging.exception(f"{e}")
             raise RuntimeError(f"{e}") from e
