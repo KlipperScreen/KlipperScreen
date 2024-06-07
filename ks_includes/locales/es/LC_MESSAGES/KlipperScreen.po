@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-02 08:38-0300\n"
-"PO-Revision-Date: 2024-06-01 12:09+0000\n"
+"PO-Revision-Date: 2024-06-07 08:09+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/es/>\n"
@@ -176,14 +176,14 @@ msgid "Connected"
 msgstr "Conectado"
 
 msgid "Connecting"
-msgstr ""
+msgstr "Conentando"
 
 #, python-format
 msgid "Connecting to %s"
 msgstr "Conectando a %s"
 
 msgid "Connection failed"
-msgstr ""
+msgstr "La conexión falló"
 
 msgid "Console"
 msgstr "Consola"
@@ -192,7 +192,7 @@ msgid "Cooldown"
 msgstr "Enfriar"
 
 msgid "Couldn't add network"
-msgstr ""
+msgstr "No se pudo agregar la red"
 
 msgid "Current percentage and graph line"
 msgstr "Porcentaje actual y línea del gráfico"
@@ -223,10 +223,10 @@ msgstr "Distancia (mm)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
+msgstr "¿Quieres olvidar o desconectar %s?"
 
 msgid "Do you want to let KlipperScreen try to solve the issue?"
-msgstr ""
+msgstr "¿Quieres dejar que KlipperScreen intente resolver el problema?"
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -260,7 +260,7 @@ msgid "Error: Couldn't get a position to probe"
 msgstr "Error: No se pudo obtener una posición para sondear"
 
 msgid "Estimated Time"
-msgstr ""
+msgstr "Tiempo estimado"
 
 msgid "Estimated Time Method"
 msgstr "Método para estimar tiempo"
@@ -284,10 +284,10 @@ msgid "Extrusion -"
 msgstr "Extrusor -"
 
 msgid "Failed to delete connection"
-msgstr ""
+msgstr "No se pudo eliminar la conexión"
 
 msgid "Failed to initialize"
-msgstr ""
+msgstr "No se pudo inicializar"
 
 msgid "Failed, adjust position first"
 msgstr "Falló, ajuste la posición primero"
@@ -296,7 +296,7 @@ msgid "Fan"
 msgstr "Ventilador"
 
 msgid "Filament"
-msgstr ""
+msgstr "Filamento"
 
 msgid "Filament Used"
 msgstr "Filamento Usado"
@@ -341,16 +341,16 @@ msgid "Font Size"
 msgstr "Tamaño del texto"
 
 msgid "Forget"
-msgstr ""
+msgstr "Olvidar"
 
 msgid "Full Update"
 msgstr "Actualizar Todo"
 
 msgid "Gcodes"
-msgstr ""
+msgstr "Gcodes"
 
 msgid "Getting IP address"
-msgstr ""
+msgstr "Obteniendo la dirección IP"
 
 msgid "Go Back"
 msgstr "Volver"
@@ -407,10 +407,10 @@ msgid "Input Shaper"
 msgstr "Corrección de Resonancias"
 
 msgid "Insufficient priviledges detected"
-msgstr ""
+msgstr "Detectados privilegios insuficientes"
 
 msgid "Insufficient privileges"
-msgstr ""
+msgstr "Privilegios insuficientes"
 
 msgid "Interface"
 msgstr "Interfaz"
@@ -474,7 +474,7 @@ msgid "Last Used"
 msgstr "Ultimo usado"
 
 msgid "Layer Height"
-msgstr ""
+msgstr "Altura de capa"
 
 msgid "Layer:"
 msgstr "Capa:"
@@ -522,7 +522,7 @@ msgid "Max Velocity"
 msgstr "Max. Velocidad"
 
 msgid "Max:"
-msgstr ""
+msgstr "Máx:"
 
 msgid "Maximum"
 msgstr "Maximo"
@@ -552,7 +552,7 @@ msgid "Minimum Cruise Ratio"
 msgstr "Mínimo tiempo en Vel. Crucero"
 
 msgid "Minimum:"
-msgstr ""
+msgstr "Mínimo:"
 
 msgid "Modified"
 msgstr "Modificado"
@@ -576,13 +576,13 @@ msgid "Network"
 msgstr "Red"
 
 msgid "Network connected"
-msgstr ""
+msgstr "Conectado a la red"
 
 msgid "Network disconnected"
-msgstr ""
+msgstr "Desconectado de la red"
 
 msgid "Network not found"
-msgstr ""
+msgstr "Red no encontrada"
 
 msgid "Never"
 msgstr "Nunca"
@@ -714,7 +714,7 @@ msgid "Refresh"
 msgstr "Recargar"
 
 msgid "Remove network"
-msgstr ""
+msgstr "Red eliminada"
 
 msgid "Rename/Move:"
 msgstr "Renombrar/Mover:"
@@ -854,7 +854,7 @@ msgid "System Shutdown"
 msgstr "Apagar Sistema"
 
 msgid "System:"
-msgstr ""
+msgstr "Sistema:"
 
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
@@ -863,7 +863,7 @@ msgid "Temperature"
 msgstr "Temperatura"
 
 msgid "The system doesn't meet the minimum requirement"
-msgstr ""
+msgstr "El sistema no cumple con los requisitos mínimos"
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr "Este panel soporta hasta 9 tornillos en una grilla 3x3"
@@ -886,7 +886,7 @@ msgid "Unknown Heater"
 msgstr "Calentador Desconocido"
 
 msgid "Unknown security type"
-msgstr ""
+msgstr "Tipo de seguridad desconocido"
 
 msgid "Unload"
 msgstr "Descargar"
