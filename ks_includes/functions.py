@@ -27,28 +27,34 @@ try:
     def get_DPMS_state(display_name_in_byte_string=b':0'):
         state = DPMS_State.Fail
         if not isinstance(display_name_in_byte_string, bytes):
-            raise TypeError
-        display_name = ctypes.c_char_p()
-        display_name.value = display_name_in_byte_string
+            raise TypeError("display_name_in_byte_string must be of type bytes")
+
+        display_name = ctypes.c_char_p(display_name_in_byte_string)
         libXext.XOpenDisplay.restype = ctypes.c_void_p
         display = ctypes.c_void_p(libXext.XOpenDisplay(display_name))
-        dummy1_i_p = ctypes.create_string_buffer(8)
-        dummy2_i_p = ctypes.create_string_buffer(8)
+
+        major_opcode_p = ctypes.create_string_buffer(8)
+        first_event_p = ctypes.create_string_buffer(8)
+
         if display.value:
-            if libXext.DPMSQueryExtension(display, dummy1_i_p, dummy2_i_p) \
-                    and libXext.DPMSCapable(display):
-                onoff_p = ctypes.create_string_buffer(1)
-                state_p = ctypes.create_string_buffer(2)
-                if libXext.DPMSInfo(display, state_p, onoff_p):
-                    onoff = struct.unpack('B', onoff_p.raw)[0]
-                    if onoff:
-                        state = struct.unpack('H', state_p.raw)[0]
-            libXext.XCloseDisplay(display)
+            try:
+                if libXext.DPMSQueryExtension(display, major_opcode_p, first_event_p) \
+                        and libXext.DPMSCapable(display):
+                    onoff_p = ctypes.create_string_buffer(1)
+                    state_p = ctypes.create_string_buffer(2)
+                    if libXext.DPMSInfo(display, state_p, onoff_p):
+                        onoff = struct.unpack('B', onoff_p.raw)[0]
+                        if onoff:
+                            state = struct.unpack('H', state_p.raw)[0]
+            finally:
+                libXext.XCloseDisplay(display)
         return state
 
     dpms_loaded = True
-except Exception as msg:
-    logging.error(f"Couldn't load DPMS: {msg}")
+except OSError as e:
+    logging.error(f"Couldn't load DPMS library: {e}")
+except Exception as e:
+    logging.error(f"An unexpected error occurred: {e}")
 
 
 def get_software_version():
