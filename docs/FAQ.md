@@ -1,29 +1,49 @@
+Got it. Here’s the updated FAQ with the necessary modifications:
+
 # Frequently Asked Questions
 
 ## What is the minimum Python version required?
 
-The minimum version is Python 3.8, this is checked during install.
+The minimum required version of Python is 3.8. This requirement is checked during installation.
 
-##  OctoPrint?
+??? "Using Older Python Versions"
+    If you need to use Python 3.7, you can do so with KlipperScreen v0.4.1 by running:
+    ```sh
+    git reset --hard v0.4.1
+    ```
 
-KlipperScreen was not designed to work with OctoPrint and there are no plans to make it compatible.
+## Does KlipperScreen work with OctoPrint?
 
-## Can i use KlipperScreen as a desktop application?
+KlipperScreen is not designed to work with OctoPrint, and there are no plans to make it compatible.
 
-Yes, First disable the service:
+## Can I use KlipperScreen as a desktop application?
 
-```shell
+Yes, you can use KlipperScreen as a desktop application. During installation, do not install it as a service. If you have already installed it as a service, you can disable it by running:
+```sh
 sudo systemctl disable KlipperScreen
 ```
+Then, you can open the application via the menu when needed. You can also find the shortcut in `KlipperScreen/scripts/KlipperScreen.desktop`.
 
-and open the application via the menu when you need it.
+## Why did the title bar turn red and display CPU and RAM usage?
 
+The red title bar indicating high CPU and RAM usage is a warning system. High resource usage can lead to issues, such as "timer too close" errors in Klipper. If this warning appears during an update or maintenance process, it is generally not an issue—just avoid starting a print job until the warning clears. You can use htop or similar tools from an SSH connection to check what’s consuming the resources.
 
-you can also find the shortcut in `KlipperScreen/scripts/KlipperScreen.desktop`
+## How can I switch between multiple printers?
 
-## Titlebar turned red and says CPU and RAM
+KlipperScreen supports multiple printers. You can switch between them by configuring each printer's IP address in the KlipperScreen settings. This allows you to manage all your printers from a single interface, even if they are running on different hosts.
 
-It's the high resource warning system, having your printer with very high usage of CPU or RAM will lead to issues,
-usually involving timer too close in klipper, if it appears during an update or some maintanance process, it should not be an issue,
-just don't start printing until it clears.
+## Can I customize the KlipperScreen interface?
 
+Yes, you can customize the KlipperScreen interface by editing the configuration files. Detailed instructions and options for customization can be found in the [documentation](https://klipperscreen.github.io/KlipperScreen/).
+
+## What should I do if my touchscreen is not responding correctly?
+
+If your touchscreen is not responding or has touch accuracy issues, check the [Touch Issues section](Troubleshooting/Touch_issues.md) in the troubleshooting guide. You may need to calibrate the touch settings or adjust the touch matrix.
+
+## How do I update KlipperScreen?
+
+To update KlipperScreen, follow the instructions in the [updating guide](Updating.md).
+
+## What if I sometimes see the desktop instead of KlipperScreen?
+
+If you sometimes see the desktop instead of KlipperScreen, and you only want to see KlipperScreen, you may have installed a distro with a full desktop environment. [Check these instructions](Troubleshooting/Desktop.md) on how to properly switch.

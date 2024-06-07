@@ -5,10 +5,10 @@
 
 The network panel requires network-manager to function, (if you are using a fork this may not be the case)
 
-if version of KlipperScreen installed was previous than v0.3.9, then re-run the installer and reboot
+Usually permissions are set with the installer, try a re-run of the installer and reboot
 
 
-??? "Alternative workaround for network-manager not having permissions"
+???+ "Alternative workaround for network-manager not having permissions"
 
     in order to fix this polkit needs to be configured or disabled:
 
