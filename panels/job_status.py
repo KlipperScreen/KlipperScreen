@@ -778,10 +778,12 @@ class Panel(ScreenPanel):
         ellipsized = self.labels['file'].get_layout().is_ellipsized()
         if ellipsized:
             self.animation_timeout = GLib.timeout_add_seconds(1, self.animate_label)
+        else:
+            self.animation_timeout = None
         self.update_file_metadata()
 
     def animate_label(self):
-        if not self.filename_label:
+        if not self.filename_label or not self.animation_timeout:
             return False
         ellipsized = self.labels['file'].get_layout().is_ellipsized()
         if ellipsized:

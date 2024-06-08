@@ -399,11 +399,12 @@ class KlipperScreen(Gtk.Window):
 
     def close_popup_message(self, widget=None):
         if self.popup_message is None:
-            return
+            return False
         self.popup_message.popdown()
         if self.popup_timeout is not None:
             GLib.source_remove(self.popup_timeout)
-        self.popup_message = self.popup_timeout = None
+            self.popup_timeout = None
+        self.popup_message = None
         return False
 
     def show_error_modal(self, title_msg, description="", help_msg=None):
@@ -591,6 +592,9 @@ class KlipperScreen(Gtk.Window):
         logging.debug("Showing Screensaver")
         if self.screensaver is not None:
             self.close_screensaver()
+        if self.screensaver_timeout is not None:
+            GLib.source_remove(self.screensaver_timeout)
+            self.screensaver_timeout = None
         if self.blanking_time == 0:
             return False
         self.remove_keyboard()
