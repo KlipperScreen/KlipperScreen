@@ -325,7 +325,7 @@ class KlipperScreen(Gtk.Window):
                     self.show_error_modal(f"Unable to load panel {panel}", f"{e}\n\n{traceback.format_exc()}")
                     return
             elif panel_name in self.panels_reinit:
-                logging.info("Reinitializing panel")
+                logging.info(f"Reinitializing panel {panel}")
                 self.panels[panel_name].__init__(self, title, **kwargs)
                 self.panels_reinit.remove(panel_name)
             self._cur_panels.append(panel_name)
@@ -806,7 +806,10 @@ class KlipperScreen(Gtk.Window):
         home = self._cur_panels[0]
         self.panels_reinit = list(self.panels)
         self._remove_all_panels()
-        self.show_panel(home)
+        if home == "main_menu":
+            self.show_panel(home, items=self._config.get_menu_items("__main"))
+        else:
+            self.show_panel(home)
 
     def _websocket_callback(self, action, data):
         if self.connecting:
