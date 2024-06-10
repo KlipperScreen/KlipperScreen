@@ -51,6 +51,7 @@ button.color4 {
     background-color: #252525;
     border-color: #252525;
     border-radius: .25em;
+    padding-top: 0.4em;
 }
 
 button.color1:active,
