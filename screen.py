@@ -333,6 +333,9 @@ class KlipperScreen(Gtk.Window):
         except Exception as e:
             logging.exception(f"Error attaching panel:\n{e}\n\n{traceback.format_exc()}")
 
+    def set_panel_title(self, title):
+        self.base_panel.set_title(title)
+
     def attach_panel(self, panel):
         if panel in self.panels_reinit:
             # this happens when the first panel needs a reinit
