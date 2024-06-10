@@ -69,7 +69,7 @@ button {
     background-image: none;
     background-color: @bg;
     margin: .25em;
-    padding: .2em .5em 0;
+    padding: 0 .5em;
     border-radius: 0;
     border: 0;
     -gtk-icon-shadow: none;
@@ -97,9 +97,11 @@ button.color4:disabled label {
     color: grey;
 }
 
-button label {
-    margin-top: .25em;
-    margin-bottom: 0;
+button.color1 image,
+button.color2 image,
+button.color3 image,
+button.color4 image {
+    margin-top: 0.2em;
 }
 
 button.color1 {
