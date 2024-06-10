@@ -309,8 +309,13 @@ class KlipperScreen(Gtk.Window):
             panel_name = panel
         try:
             if remove_all:
-                self._remove_all_panels()
                 self.panels_reinit = list(self.panels)
+                if panel in self._cur_panels:
+                    self._menu_go_back(home=True)
+                else:
+                    self._remove_all_panels()
+                    for dialog in self.dialogs:
+                        self.gtk.remove_dialog(dialog)
             else:
                 self._remove_current_panel()
             if panel_name not in self.panels:
@@ -552,12 +557,12 @@ class KlipperScreen(Gtk.Window):
             self._remove_current_panel()
             del self._cur_panels[-1]
         self._cur_panels.clear()
-        for dialog in self.dialogs:
-            self.gtk.remove_dialog(dialog)
         self.close_screensaver()
         gc.collect()
 
     def _remove_current_panel(self):
+        if not self._cur_panels:
+            return
         if hasattr(self.panels[self._cur_panels[-1]], "deactivate"):
             self.panels[self._cur_panels[-1]].deactivate()
         self.base_panel.remove(self.panels[self._cur_panels[-1]].content)
@@ -570,9 +575,6 @@ class KlipperScreen(Gtk.Window):
             del self._cur_panels[-1]
             if not home:
                 break
-        if len(self._cur_panels) < 1:
-            self.reload_panels()
-            return
         self.attach_panel(self._cur_panels[-1])
 
     def reset_screensaver_timeout(self, *args):
@@ -757,8 +759,6 @@ class KlipperScreen(Gtk.Window):
             self.show_panel("extrude")
 
     def state_printing(self):
-        for dialog in self.dialogs:
-            self.gtk.remove_dialog(dialog)
         self.show_panel("job_status", remove_all=True)
 
     def state_ready(self, wait=True):
@@ -803,9 +803,10 @@ class KlipperScreen(Gtk.Window):
         if "printer_select" in self._cur_panels:
             self.show_printer_select()
             return
+        home = self._cur_panels[0]
+        self.panels_reinit = list(self.panels)
         self._remove_all_panels()
-        if self.printer is not None:
-            self.printer.change_state(self.printer.state)
+        self.show_panel(home)
 
     def _websocket_callback(self, action, data):
         if self.connecting:
