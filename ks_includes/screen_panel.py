@@ -4,6 +4,7 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
+from ks_includes.KlippyGtk import find_widget
 
 
 class ScreenPanel:
@@ -195,22 +196,14 @@ class ScreenPanel:
 
         show_power = self._show_heater_power and power
         if show_power:
-            if lines == 2:
-                # The label should wrap, but it doesn't work
-                # this is a workaround
-                new_label_text += "\n  "
             new_label_text += f" {power * 100:3.0f}%"
 
         if dev in self.labels:
-            self.labels[dev].set_label(new_label_text)
-            if lines == 2:
-                return
-            if show_power:
-                self.labels[dev].get_style_context().add_class("heater-grid-temp-power")
-            else:
-                self.labels[dev].get_style_context().remove_class("heater-grid-temp-power")
+            # Job_Status
+            find_widget(self.labels[dev], Gtk.Label).set_text(new_label_text)
         elif dev in self.devices:
-            self.devices[dev]["temp"].get_child().set_label(new_label_text)
+            # Temperature and Main_Menu
+            find_widget(self.devices[dev]["temp"], Gtk.Label).set_text(new_label_text)
 
     def add_option(self, boxname, opt_array, opt_name, option):
         if option['type'] is None:
