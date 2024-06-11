@@ -89,7 +89,7 @@ class Panel(ScreenPanel):
             self.labels[label].set_halign(Gtk.Align.START)
             self.labels[label].set_ellipsize(Pango.EllipsizeMode.END)
 
-        fi_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, valign=Gtk.Align.CENTER)
+        fi_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         fi_box.add(self.labels['file'])
         fi_box.add(self.labels['lcdmessage'])
         self.grid.attach(fi_box, 1, 0, 3, 1)
@@ -110,7 +110,6 @@ class Panel(ScreenPanel):
 
         self.labels['thumbnail'] = self._gtk.Button("file")
         self.labels['thumbnail'].connect("clicked", self.show_fullscreen_thumbnail)
-        self.labels['thumbnail'].set_hexpand(False)
         self.labels['info_grid'] = Gtk.Grid()
         self.labels['info_grid'].attach(self.labels['thumbnail'], 0, 0, 1, 1)
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
@@ -737,13 +736,18 @@ class Panel(ScreenPanel):
 
     def show_file_thumbnail(self):
         if self._screen.vertical_mode:
-            width = self._screen.width * 0.9
-            height = self._screen.height / 4
+            max_width = self._screen.width * 0.9
+            max_height = self._screen.height / 4
         else:
-            width = self._screen.width * .25
-            height = self._gtk.content_height * 0.47
+            max_width = self._screen.width * .25
+            max_height = self._gtk.content_height * 0.47
+        width = min(self.labels['thumbnail'].get_allocated_width(), max_width)
+        height = min(self.labels['thumbnail'].get_allocated_height(), max_height)
+        if width <= 1 or height <= 1:
+            width = max_width
+            height = max_height
+        self.labels['thumbnail'].set_hexpand(False)
         pixbuf = self.get_file_image(self.filename, width, height)
-        logging.debug(self.filename)
         if pixbuf is None:
             logging.debug("no pixbuf")
             return

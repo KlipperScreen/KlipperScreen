@@ -378,6 +378,7 @@ class Panel(ScreenPanel):
 
         self.labels["da"].add_object(device, "temperatures", rgb, False, False)
         temp = self._gtk.Button(label="", lines=1)
+        find_widget(temp, Gtk.Label).set_ellipsize(False)
 
         if self._printer.device_has_target(device):
             temp.connect("clicked", self.show_numpad, device)

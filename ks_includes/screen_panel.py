@@ -203,6 +203,8 @@ class ScreenPanel:
 
         if dev in self.labels:
             self.labels[dev].set_label(new_label_text)
+            if lines == 2:
+                return
             if show_power:
                 self.labels[dev].get_style_context().add_class("heater-grid-temp-power")
             else:
