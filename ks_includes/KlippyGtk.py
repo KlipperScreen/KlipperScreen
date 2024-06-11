@@ -241,10 +241,10 @@ class KlippyGtk:
         dialog.get_style_context().add_class("dialog")
 
         content_area = dialog.get_content_area()
-        content_area.set_margin_start(15)
-        content_area.set_margin_end(15)
-        content_area.set_margin_top(15)
-        content_area.set_margin_bottom(15)
+        content_area.set_margin_start(10)
+        content_area.set_margin_end(5)
+        content_area.set_margin_top(5)
+        content_area.set_margin_bottom(0)
         content_area.add(content)
 
         dialog.show_all()
