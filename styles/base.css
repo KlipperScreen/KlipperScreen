@@ -608,6 +608,8 @@ trough progress {
 
 .graph_label {border-left-width: .4em; border-left-style: solid;}
 
+button.graph_label {padding-left: 0.15em;}
+
 .dialog-error {
     border-bottom: .4em solid @error;
 }
