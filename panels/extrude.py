@@ -7,6 +7,7 @@ from gi.repository import Gtk, Pango
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.widgets.autogrid import AutoGrid
+from ks_includes.KlippyGtk import find_widget
 
 
 class Panel(ScreenPanel):
@@ -32,7 +33,6 @@ class Panel(ScreenPanel):
                 vel = [str(i.strip()) for i in vel.split(',')]
                 if 1 < len(vel) < 5:
                     self.speeds = vel
-
         self.distance = int(self.distances[1])
         self.speed = int(self.speeds[1])
         self.buttons = {
@@ -66,6 +66,7 @@ class Panel(ScreenPanel):
         limit = 4
         i = 0
         extruder_buttons = []
+        self.labels = {}
         for extruder in self._printer.get_tools():
             if self._printer.extrudercount == 1:
                 self.labels[extruder] = self._gtk.Button("extruder", "")
@@ -80,6 +81,11 @@ class Panel(ScreenPanel):
                 i += 1
             else:
                 extruder_buttons.append(self.labels[extruder])
+        for widget in self.labels.values():
+            label = find_widget(widget, Gtk.Label)
+            label.set_justify(Gtk.Justification.CENTER)
+            label.set_line_wrap(True)
+            label.set_lines(2)
         if extruder_buttons:
             self.labels['extruders'] = AutoGrid(extruder_buttons, vertical=self._screen.vertical_mode)
             self.labels['extruders_menu'] = self._gtk.ScrolledWindow()
@@ -205,7 +211,6 @@ class Panel(ScreenPanel):
                     self._printer.get_stat(x, "temperature"),
                     self._printer.get_stat(x, "target"),
                     self._printer.get_stat(x, "power"),
-                    lines=2,
                 )
         if "current_extruder" in self.labels:
             self.labels["current_extruder"].set_label(self.labels[self.current_extruder].get_label())
@@ -284,3 +289,13 @@ class Panel(ScreenPanel):
             self._screen._ws.klippy.gcode_script(f"SET_FILAMENT_SENSOR SENSOR={name} ENABLE=0")
             self.labels[x]['box'].get_style_context().remove_class("filament_sensor_empty")
             self.labels[x]['box'].get_style_context().remove_class("filament_sensor_detected")
+
+    def update_temp(self, extruder, temp, target, power):
+        if not temp:
+            return
+        new_label_text = f"{temp or 0:.0f}"
+        if target:
+            new_label_text += f"/{target:.0f}°"
+        if self._show_heater_power and power:
+            new_label_text += f" {power * 100:3.0f}%"
+        find_widget(self.labels[extruder], Gtk.Label).set_text(new_label_text)
