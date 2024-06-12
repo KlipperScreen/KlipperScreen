@@ -162,6 +162,7 @@ class KlippyGtk:
         b = Gtk.Button(hexpand=True, vexpand=True, can_focus=False, image_position=position, always_show_image=True)
         if label is not None:
             b.set_label(label.replace("\n", " "))
+            format_label(b, lines)
         if image_name is not None:
             b.set_name(image_name)
             if scale is None:
@@ -175,9 +176,6 @@ class KlippyGtk:
             box = find_widget(b, Gtk.Box)
             if box:
                 box.add(spinner)
-
-        if label is not None:
-            format_label(b, lines)
         if style is not None:
             b.get_style_context().add_class(style)
         b.connect("clicked", self.screen.reset_screensaver_timeout)
