@@ -6,6 +6,7 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gdk, GdkPixbuf, Gio, Gtk, Pango
+from ks_includes.widgets.scroll import CustomScrolledWindow
 
 
 def find_widget(widget, wanted_type):
@@ -270,11 +271,6 @@ class KlippyGtk:
             return
         logging.debug(f"Cannot remove dialog {dialog}")
 
-    def ScrolledWindow(self, steppers=True):
-        scroll = Gtk.ScrolledWindow(hexpand=True, vexpand=True, overlay_scrolling=False)
-        scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK |
-                          Gdk.EventMask.TOUCH_MASK |
-                          Gdk.EventMask.BUTTON_RELEASE_MASK)
-        if self.screen._config.get_main_config().getboolean("show_scroll_steppers", fallback=False) and steppers:
-            scroll.get_vscrollbar().get_style_context().add_class("with-steppers")
-        return scroll
+    def ScrolledWindow(self, steppers=True, **kwargs):
+        steppers = steppers and self.screen._config.get_main_config().getboolean("show_scroll_steppers", fallback=False)
+        return CustomScrolledWindow(steppers, **kwargs)
