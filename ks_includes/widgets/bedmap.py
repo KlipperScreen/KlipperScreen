@@ -155,9 +155,9 @@ class BedMap(Gtk.DrawingArea):
                 ctx.close_path()
                 ctx.fill()
                 ctx.stroke()
-                if rows > 16 or columns > 8:
-                    continue
                 # Numbers
+                if gwidth / columns < self.font_size * 3:
+                    continue
                 ctx.set_source_rgb(0, 0, 0)
                 if column > 0:
                     ctx.move_to((lx + rx) / 2 - self.font_size, (ty + by + self.font_size) / 2)
