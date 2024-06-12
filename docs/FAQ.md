@@ -1,5 +1,3 @@
-Got it. Here’s the updated FAQ with the necessary modifications:
-
 # Frequently Asked Questions
 
 ## What is the minimum Python version required?
