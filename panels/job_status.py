@@ -781,7 +781,7 @@ class Panel(ScreenPanel):
         }
         ellipsized = self.labels['file'].get_layout().is_ellipsized()
         if ellipsized:
-            self.animation_timeout = GLib.timeout_add_seconds(1, self.animate_label)
+            self.animation_timeout = GLib.timeout_add(500, self.animate_label)
         else:
             self.animation_timeout = None
         self.update_file_metadata()
@@ -791,8 +791,8 @@ class Panel(ScreenPanel):
             return False
         ellipsized = self.labels['file'].get_layout().is_ellipsized()
         if ellipsized:
-            self.filename_label['current'] = self.filename_label['current'][2:]
-            self.labels['file'].set_label(self.filename_label['current'])
+            self.filename_label['current'] = self.filename_label['current'][1:]
+            self.labels['file'].set_label(self.filename_label['current'] + " " * 6)
         else:
             self.filename_label['current'] = self.filename_label['complete']
             self.labels['file'].set_label(self.filename_label['complete'])
