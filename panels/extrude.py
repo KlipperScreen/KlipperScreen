@@ -295,7 +295,8 @@ class Panel(ScreenPanel):
             return
         new_label_text = f"{temp or 0:.0f}"
         if target:
-            new_label_text += f"/{target:.0f}°"
+            new_label_text += f"/{target:.0f}"
+        new_label_text += "°\n"
         if self._show_heater_power and power:
-            new_label_text += f" {power * 100:3.0f}%"
+            new_label_text += f" {power * 100:.0f}%"
         find_widget(self.labels[extruder], Gtk.Label).set_text(new_label_text)
