@@ -143,7 +143,10 @@ class Panel(ScreenPanel):
         if self.list_mode:
             label = Gtk.Label(label=basename, hexpand=True, vexpand=False)
             format_label(label)
-            info = Gtk.Label(hexpand=True, halign=Gtk.Align.START, wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
+            info = Gtk.Label(
+                hexpand=True, halign=Gtk.Align.START, xalign=0,
+                wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR,
+            )
             info.get_style_context().add_class("print-info")
             info.set_markup(self.get_info_str(item, path))
             delete = Gtk.Button(hexpand=False, vexpand=False, can_focus=False, always_show_image=True)

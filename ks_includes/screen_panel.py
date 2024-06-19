@@ -210,7 +210,7 @@ class ScreenPanel:
             return
         name = Gtk.Label(
             hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER,
-            wrap=True, wrap_mode=Pango.WrapMode.CHAR)
+            wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR, xalign=0)
         name.set_markup(f"<big><b>{option['name']}</b></big>")
 
         labels = Gtk.Box(spacing=0, orientation=Gtk.Orientation.VERTICAL, valign=Gtk.Align.CENTER)
@@ -219,7 +219,7 @@ class ScreenPanel:
             tooltip = Gtk.Label(
                 label=option['tooltip'],
                 hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER,
-                wrap=True, wrap_mode=Pango.WrapMode.CHAR)
+                wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR, xalign=0)
             labels.add(tooltip)
 
         row_box = Gtk.Box(spacing=5, valign=Gtk.Align.CENTER, hexpand=True, vexpand=False)
