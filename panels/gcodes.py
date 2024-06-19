@@ -310,6 +310,7 @@ class Panel(ScreenPanel):
         action = _("Print") if self._printer.extrudercount > 0 else _("Start")
 
         buttons = [
+            {"name": _("Delete"), "response": Gtk.ResponseType.REJECT, "style": 'dialog-warning'},
             {"name": action, "response": Gtk.ResponseType.OK},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
         ]
@@ -337,9 +338,13 @@ class Panel(ScreenPanel):
 
     def confirm_print_response(self, dialog, response_id, filename):
         self._gtk.remove_dialog(dialog)
-        if response_id == Gtk.ResponseType.OK:
+        if response_id == Gtk.ResponseType.CANCEL:
+            return
+        elif response_id == Gtk.ResponseType.OK:
             logging.info(f"Starting print: {filename}")
             self._screen._ws.klippy.print_start(filename)
+        elif response_id == Gtk.ResponseType.REJECT:
+            self.confirm_delete_file(None, f"gcodes/{filename}")
 
     def get_info_str(self, item, path):
         info = ""
