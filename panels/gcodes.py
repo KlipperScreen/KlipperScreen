@@ -319,25 +319,35 @@ class Panel(ScreenPanel):
         ]
 
         label = Gtk.Label(hexpand=True, vexpand=True, wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
-        label.set_markup(f"<b>{filename}</b>\n")
+        label.set_markup(f"<b>{filename}</b>")
 
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
-        box.pack_start(label, False, False, 0)
+        main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
+        main_box.pack_start(label, False, False, 0)
 
-        height = (self._screen.height - self._gtk.dialog_buttons_height - self._gtk.font_size * 5) * .75
-        pixbuf = self.get_file_image(filename, self._screen.width * .9, height)
+        orientation = Gtk.Orientation.VERTICAL if self._screen.vertical_mode else Gtk.Orientation.HORIZONTAL
+        inside_box = Gtk.Box(orientation=orientation, vexpand=True)
+
+        if self._screen.vertical_mode:
+            width = self._screen.width * .9
+            height = (self._screen.height - self._gtk.dialog_buttons_height - self._gtk.font_size * 5) * .45
+        else:
+            width = self._screen.width * .5
+            height = (self._screen.height - self._gtk.dialog_buttons_height - self._gtk.font_size * 6)
+        pixbuf = self.get_file_image(filename, width, height)
         if pixbuf is not None:
             image = Gtk.Image.new_from_pixbuf(pixbuf)
-            box.pack_start(image, True, True, 0)
+            image_button = self._gtk.Button()
+            image_button.set_image(image)
+            image_button.connect("clicked", self.show_fullscreen_thumbnail, filename)
+            inside_box.pack_start(image_button, True, True, 0)
 
-        fileinfo = self._screen.files.get_file_info(filename)
-        if "estimated_time" in fileinfo:
-            box.pack_start(
-                Gtk.Label(label=_("Estimated Time") + f': {self.format_time(fileinfo["estimated_time"])}'),
-                False, False, 2
-            )
+        info_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
+        fileinfo = Gtk.Label(label=self.get_file_info_extended(filename), use_markup=True)
+        info_box.pack_start(fileinfo, True, True, 0)
 
-        self._gtk.Dialog(f'{action} {filename}', buttons, box, self.confirm_print_response, filename)
+        inside_box.pack_start(info_box, True, True, 0)
+        main_box.pack_start(inside_box, True, True, 0)
+        self._gtk.Dialog(f'{action} {filename}', buttons, main_box, self.confirm_print_response, filename)
 
     def confirm_print_response(self, dialog, response_id, filename):
         self._gtk.remove_dialog(dialog)
@@ -352,7 +362,7 @@ class Panel(ScreenPanel):
     def get_info_str(self, item, path):
         info = ""
         if "modified" in item:
-            info += _("Modified") if 'dirname' in item else _("Uploaded")
+            info += _("Modified")
             if self.time_24:
                 info += f':<b> {datetime.fromtimestamp(item["modified"]):%Y/%m/%d %H:%M}</b>\n'
             else:
@@ -360,15 +370,57 @@ class Panel(ScreenPanel):
         if "size" in item:
             info += _("Size") + f': <b>{self.format_size(item["size"])}</b>\n'
         if 'filename' in item:
-            fileinfo = self._screen.files.get_file_info(path)
-            if "layer_height" in fileinfo:
-                info += _("Layer Height") + f': <b>{fileinfo["layer_height"]}</b>' + _("mm") + '\n'
-            if "filament_type" in fileinfo:
-                info += _("Filament") + f': <b>{fileinfo["filament_type"]}</b>\n'
-            if "filament_name" in fileinfo:
-                info += f'<b>{fileinfo["filament_name"]}</b>\n'
-            if "estimated_time" in fileinfo:
-                info += _("Estimated Time") + f': <b>{self.format_time(fileinfo["estimated_time"])}</b>'
+            info += self.get_file_info(path)
+        return info
+
+    def get_file_info(self, path):
+        info = ""
+        fileinfo = self._screen.files.get_file_info(path)
+        if "layer_height" in fileinfo:
+            info += _("Layer Height") + f': <b>{fileinfo["layer_height"]}</b> ' + _("mm") + '\n'
+        if "filament_type" in fileinfo:
+            info += _("Filament") + f': <b>{fileinfo["filament_type"]}</b>\n'
+        if "filament_name" in fileinfo:
+            info += f'<b>{fileinfo["filament_name"]}</b>\n'
+        if "estimated_time" in fileinfo:
+            info += _("Estimated Time") + f': <b>{self.format_time(fileinfo["estimated_time"])}</b>'
+        return info
+
+    def get_file_info_extended(self, filename):
+        fileinfo = self._screen.files.get_file_info(filename)
+        info = ""
+        if "modified" in fileinfo:
+            info += _("Modified")
+            if self.time_24:
+                info += f':<b> {datetime.fromtimestamp(fileinfo["modified"]):%Y/%m/%d %H:%M}</b>\n'
+            else:
+                info += f':<b> {datetime.fromtimestamp(fileinfo["modified"]):%Y/%m/%d %I:%M %p}</b>\n'
+        if "layer_height" in fileinfo:
+            info += _("Layer Height") + f': <b>{fileinfo["layer_height"]}</b> ' + _("mm") + '\n'
+        if "filament_type" in fileinfo or "filament_name" in fileinfo:
+            info += _("Filament") + ':\n'
+        if "filament_type" in fileinfo:
+            info += f'    <b>{fileinfo["filament_type"]}</b>\n'
+        if "filament_name" in fileinfo:
+            info += f'    <b>{fileinfo["filament_name"]}</b>\n'
+        if "filament_weight_total" in fileinfo:
+            info += f'    <b>{fileinfo["filament_weight_total"]:.2f}</b> ' + _("g") + '\n'
+        if "nozzle_diameter" in fileinfo:
+            info += _("Nozzle diameter") + f': <b>{fileinfo["nozzle_diameter"]}</b> ' + _("mm") + '\n'
+        if "slicer" in fileinfo:
+            info += (
+                _("Slicer") +
+                f': <b>{fileinfo["slicer"]} '
+                f'{fileinfo["slicer_version"] if "slicer_version" in fileinfo else ""}</b>\n'
+            )
+        if "size" in fileinfo:
+            info += _("Size") + f': <b>{self.format_size(fileinfo["size"])}</b>\n'
+        if "estimated_time" in fileinfo:
+            info += _("Estimated Time") + f': <b>{self.format_time(fileinfo["estimated_time"])}</b>\n'
+        if "job_id" in fileinfo:
+            history = self._screen.apiclient.send_request(f"server/history/job?uid={fileinfo['job_id']}")
+            if history and history['job']['status'] == "completed":
+                info += _("Last Duration") + f": <b>{self.format_time(history['job']['print_duration'])}</b>"
         return info
 
     def load_files(self, result, method, params):
@@ -492,3 +544,14 @@ class Panel(ScreenPanel):
             params
         )
         self.back()
+
+    def show_fullscreen_thumbnail(self, widget, filename):
+        pixbuf = self.get_file_image(filename, self._screen.width * .9, self._screen.height * .75)
+        if pixbuf is None:
+            return
+        image = Gtk.Image.new_from_pixbuf(pixbuf)
+        image.set_vexpand(True)
+        self._gtk.Dialog(filename, None, image, self.close_fullscreen_thumbnail)
+
+    def close_fullscreen_thumbnail(self, dialog, response_id):
+        self._gtk.remove_dialog(dialog)
