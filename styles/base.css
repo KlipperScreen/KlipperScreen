@@ -150,9 +150,10 @@ button.invalid {
     font-weight: bold;
 }
 
-combobox box button {
-    border: .05em solid @lines;
-    padding: .5em 1em;
+combobox button {
+    border: .05em solid @bg;
+    padding: 0 0.7em;
+    border-radius: 0.7em;
 }
 
 combobox arrow {
