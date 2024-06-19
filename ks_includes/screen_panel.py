@@ -129,6 +129,7 @@ class ScreenPanel:
 
     @staticmethod
     def format_time(seconds):
+        spc = "\u00A0"  # Non breakable space
         if seconds is None or seconds < 1:
             return "-"
         days = seconds // 86400
@@ -141,10 +142,10 @@ class ScreenPanel:
         min_units = ngettext("minute", "minutes", minutes)
         seconds %= 60
         sec_units = ngettext("second", "seconds", seconds)
-        return f"{f'{days:2.0f} {day_units} ' if days > 0 else ''}" \
-               f"{f'{hours:2.0f} {hour_units} ' if hours > 0 else ''}" \
-               f"{f'{minutes:2.0f} {min_units} ' if minutes > 0 and days == 0 else ''}" \
-               f"{f'{seconds:2.0f} {sec_units}' if days == 0 and hours == 0 and minutes == 0 else ''}"
+        return f"{f'{days:2.0f}{spc}{day_units}{spc}' if days > 0 else ''}" \
+               f"{f'{hours:2.0f}{spc}{hour_units}{spc}' if hours > 0 else ''}" \
+               f"{f'{minutes:2.0f}{spc}{min_units}{spc}' if minutes > 0 and days == 0 else ''}" \
+               f"{f'{seconds:2.0f}{spc}{sec_units}' if days == 0 and hours == 0 and minutes == 0 else ''}"
 
     def format_eta(self, total, elapsed):
         if total is None:
