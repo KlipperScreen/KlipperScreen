@@ -630,7 +630,9 @@ class Panel(ScreenPanel):
         elif timeleft_type == "slicer":
             estimated = slicer_time
         elif estimated < 1:  # Auto
-            if print_duration < slicer_time > 1:
+            if "last_time" in self.file_metadata:
+                estimated = self.file_metadata['last_time']
+            elif print_duration < slicer_time > 1:
                 if progress < 0.15:
                     # At the begining file and filament are innacurate
                     estimated = slicer_time
@@ -816,6 +818,10 @@ class Panel(ScreenPanel):
                     self.labels['total_layers'].set_label(f"{((self.oheight - self.f_layer_h) / self.layer_h) + 1:.0f}")
             if "filament_total" in self.file_metadata:
                 self.labels['filament_total'].set_label(f"{float(self.file_metadata['filament_total']) / 1000:.1f} m")
+            if "job_id" in self.file_metadata:
+                history = self._screen.apiclient.send_request(f"server/history/job?uid={self.file_metadata['job_id']}")
+                if history and history['job']['status'] == "completed":
+                    self.file_metadata["last_time"] = history['job']['print_duration']
         elif not response:
             logging.debug("Cannot find file metadata. Listening for updated metadata")
             self._files.request_metadata(self.filename)
