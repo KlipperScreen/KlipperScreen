@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-02 08:38-0300\n"
-"PO-Revision-Date: 2024-06-03 19:09+0000\n"
-"Last-Translator: wsj20050623 <2129426599@qq.com>\n"
+"PO-Revision-Date: 2024-06-19 21:09+0000\n"
+"Last-Translator: Will Zhai <willzhai55@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "klipperscreen/klipperscreen/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.6-dev\n"
+"X-Generator: Weblate 5.6-rc\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -36,7 +36,7 @@ msgid "ADXL Not Configured"
 msgstr "未配置加速度计"
 
 msgid "Abort"
-msgstr "中止打印"
+msgstr "中止"
 
 msgid "Acceleration:"
 msgstr "加速度："
@@ -65,13 +65,13 @@ msgid "Archived"
 msgstr "已存档"
 
 msgid "Are you sure do you want to exclude the object?"
-msgstr "你确定要排除该对象吗？"
+msgstr "您确定要排除该对象吗？"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "您确定要紧急停止吗？"
 
 msgid "Are you sure you want to stop the calibration?"
-msgstr "您确定要停止校准?"
+msgstr "您确定要停止校准吗？"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "您确定要取消打印吗？"
@@ -86,7 +86,7 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "您确定要关闭系统吗？"
 
 msgid "Asks for confirmation before stopping"
-msgstr "停止打印前需要额外确认"
+msgstr "停止前要求确认"
 
 msgid "Auto"
 msgstr "自动"
@@ -107,7 +107,7 @@ msgid "Bed Level"
 msgstr "热床调平"
 
 msgid "Bed Mesh"
-msgstr "床网"
+msgstr "网床"
 
 msgid "Both"
 msgstr "两个都"
@@ -164,7 +164,7 @@ msgid "Close"
 msgstr "关闭"
 
 msgid "Close messages after a timeout"
-msgstr "超过时间自动关闭信息"
+msgstr "超时自动关闭信息"
 
 msgid "Complete"
 msgstr "完成"
@@ -213,7 +213,7 @@ msgid "Disable Motors"
 msgstr "关闭电机"
 
 msgid "Disable for 12hs with am / pm"
-msgstr "在十二小时显示模式中不现实AM/PM"
+msgstr "12小时制中不显示 am/pm"
 
 msgid "Disconnect"
 msgstr "断开"
@@ -223,10 +223,10 @@ msgstr "挤出长度（mm）"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr "您要忘记或断开%s的连接吗?"
+msgstr "您要忘记或断开%s的连接吗？"
 
 msgid "Do you want to let KlipperScreen try to solve the issue?"
-msgstr "你想让KlipperScreen尝试解决这个问题吗?"
+msgstr "你想让KlipperScreen尝试解决这个问题吗？"
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -239,7 +239,7 @@ msgid "Emergency Stop"
 msgstr "紧急停止"
 
 msgid "Enable screen power management"
-msgstr "开启屏幕功率管理功能"
+msgstr "启用屏幕电源管理"
 
 msgid "Error"
 msgstr "错误"
@@ -471,7 +471,7 @@ msgid "Last Used"
 msgstr "上次使用"
 
 msgid "Layer Height"
-msgstr ""
+msgstr "层高"
 
 msgid "Layer:"
 msgstr "层："
@@ -519,7 +519,7 @@ msgid "Max Velocity"
 msgstr "最大速度"
 
 msgid "Max:"
-msgstr ""
+msgstr "最大："
 
 msgid "Maximum"
 msgstr "最大"
@@ -537,7 +537,7 @@ msgid "Medium"
 msgstr "中"
 
 msgid "Memory"
-msgstr ""
+msgstr "存储"
 
 msgid "Menu"
 msgstr "菜单"
@@ -549,7 +549,7 @@ msgid "Minimum Cruise Ratio"
 msgstr "最小匀速运动比例"
 
 msgid "Minimum:"
-msgstr ""
+msgstr "最小："
 
 msgid "Modified"
 msgstr "已修改"
@@ -573,13 +573,13 @@ msgid "Network"
 msgstr "网络"
 
 msgid "Network connected"
-msgstr ""
+msgstr "网络已连接"
 
 msgid "Network disconnected"
-msgstr ""
+msgstr "网络已断开"
 
 msgid "Network not found"
-msgstr ""
+msgstr "未找到网络"
 
 msgid "Never"
 msgstr "从不"
@@ -612,7 +612,7 @@ msgid "Notifications"
 msgstr "通知"
 
 msgid "Only for the move panel"
-msgstr ""
+msgstr "仅适用于移动面板"
 
 #, python-format
 msgid "Outdated by %d"
@@ -647,7 +647,7 @@ msgid "Please recompile and flash the micro-controller."
 msgstr "请重新编译并更新微控制器固件。"
 
 msgid "Please wait"
-msgstr ""
+msgstr "请稍等"
 
 msgid "Power"
 msgstr "电源"
@@ -710,7 +710,7 @@ msgid "Refresh"
 msgstr "检查更新"
 
 msgid "Remove network"
-msgstr ""
+msgstr "删除网络"
 
 msgid "Rename/Move:"
 msgstr "重命名/移动："
@@ -771,7 +771,7 @@ msgid "Screws Adjust"
 msgstr "螺丝调整"
 
 msgid "Screws not used:"
-msgstr "没有使用螺丝:"
+msgstr "未使用调平螺丝:"
 
 msgid "Send"
 msgstr "发送"
@@ -837,7 +837,7 @@ msgid "Starting update for"
 msgstr "开始更新"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr ""
+msgstr "交换按钮以消除重叠，同时影响其他界面"
 
 msgid "System"
 msgstr "系统"
@@ -849,7 +849,7 @@ msgid "System Shutdown"
 msgstr "关闭系统"
 
 msgid "System:"
-msgstr ""
+msgstr "系统："
 
 msgid "Temp (°C)"
 msgstr "温度 （°C）"
@@ -858,19 +858,19 @@ msgid "Temperature"
 msgstr "温度"
 
 msgid "The system doesn't meet the minimum requirement"
-msgstr ""
+msgstr "当前系统不满足最低要求"
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr "这个界面支持9个调平螺丝以3x3阵列显示"
+msgstr "这个界面支持最多9个调平螺丝以3x3阵列显示"
 
 msgid "This will affect screw positions and mesh graph"
-msgstr ""
+msgstr "这将影响调平螺丝位置和网格图"
 
 msgid "Timeout for screen black-out or power-off"
-msgstr "超过倒计时后关闭屏幕"
+msgstr "自动息屏"
 
 msgid "Timeout for screen black-out or power-off during printing"
-msgstr ""
+msgstr "打印时自动息屏"
 
 msgid "Total:"
 msgstr "合计："
@@ -879,7 +879,7 @@ msgid "Unknown Heater"
 msgstr "未知加热器"
 
 msgid "Unknown security type"
-msgstr ""
+msgstr "未知的安全类型"
 
 msgid "Unload"
 msgstr "卸载耗材"
@@ -903,7 +903,7 @@ msgid "Uploaded"
 msgstr "上传于"
 
 msgid "Useful for un-responsive touchscreens"
-msgstr "可以改善反应慢的触屏"
+msgstr "触屏响应改善"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "不支持传送WebRTC至后台"
@@ -935,7 +935,7 @@ msgstr[0] "更改"
 
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
+msgstr[0] "天"
 
 msgid "hour"
 msgid_plural "hours"
