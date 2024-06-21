@@ -169,7 +169,7 @@ class Panel(ScreenPanel):
                 for command in custom_commands:
                     commands.append({f"{command}"})
 
-        logging.info(f"Available commands for calibration: {commands}")
+        logging.info(f"Available commands for calibration: {[row[0] for row in commands]}")
         return commands
 
     @staticmethod
