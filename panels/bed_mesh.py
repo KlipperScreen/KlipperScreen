@@ -243,7 +243,6 @@ class Panel(ScreenPanel):
             self._screen._ws.klippy.gcode_script("G28")
         self._screen._send_action(widget, "printer.gcode.script", {"script": "BED_MESH_CALIBRATE"})
 
-
     def send_clear_mesh(self, widget):
         self._screen._send_action(widget, "printer.gcode.script", {"script": "BED_MESH_CLEAR"})
 
