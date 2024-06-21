@@ -2,9 +2,10 @@ import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Pango
+from gi.repository import Gtk, Pango, GLib
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.KlippyGtk import find_widget
+from datetime import datetime
 
 
 class Panel(ScreenPanel):
@@ -15,6 +16,7 @@ class Panel(ScreenPanel):
     def __init__(self, screen, title):
         title = title or _("Z Calibrate")
         super().__init__(screen, title)
+        self.last_drop_time = datetime.now()
         self.initialize_mesh_params()
         self.initialize_probe_params()
         self.setup_ui()
@@ -99,6 +101,8 @@ class Panel(ScreenPanel):
         self.buttons['start'].connect("clicked", self.start_calibration)
 
         self.dropdown = Gtk.ComboBox.new_with_model(self.set_commands())
+        self.dropdown.connect("changed", self.on_dropdown_change)
+        self.dropdown.connect("notify::popup-shown", self.on_popup_shown)
         renderer_text = Gtk.CellRendererText()
         renderer_text.set_property("ellipsize", Pango.EllipsizeMode.END)
         self.dropdown.pack_start(renderer_text, True)
@@ -146,6 +150,30 @@ class Panel(ScreenPanel):
             grid.attach(distances, 0, 2, 3, 1)
 
         self.content.add(grid)
+
+    def on_dropdown_change(self, dropdown):
+        iterable = dropdown.get_active_iter()
+        if iterable is None:
+            self._screen.show_popup_message("Unknown error with dropdown")
+            return
+        model = dropdown.get_model()
+        logging.debug(f"Selected {model[iterable][0]}")
+
+    def on_popup_shown(self, combo_box, param):
+        if combo_box.get_property("popup-shown"):
+            logging.debug("Dropdown popup show")
+            self.last_drop_time = datetime.now()
+        else:
+            elapsed = (datetime.now() - self.last_drop_time).total_seconds()
+            if elapsed < 0.2:
+                logging.debug(f"Dropdown closed too fast ({elapsed}s)")
+                GLib.timeout_add(50, self.dropdown_keep_open)
+                return
+            logging.debug("Dropdown popup close")
+
+    def dropdown_keep_open(self):
+        self.dropdown.popup()
+        return False
 
     def set_commands(self):
         commands = Gtk.ListStore(str)
