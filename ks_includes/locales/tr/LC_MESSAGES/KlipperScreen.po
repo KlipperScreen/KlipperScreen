@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-02 08:38-0300\n"
-"PO-Revision-Date: 2024-06-03 19:09+0000\n"
-"Last-Translator: Selim <selim_guner2000@hotmail.com>\n"
+"PO-Revision-Date: 2024-06-11 18:09+0000\n"
+"Last-Translator: Selim <technical50@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/tr/>\n"
 "Language: tr\n"
@@ -55,7 +55,7 @@ msgstr "Uygula"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr "Endstop'a %s%.3f ofset uygulansın mı?"
+msgstr "Endstop'a %s%.3f telafi uygulansın mı?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
@@ -107,7 +107,7 @@ msgid "Bed Level"
 msgstr "Tabla Ayarı"
 
 msgid "Bed Mesh"
-msgstr "Tabla Örgüsü"
+msgstr "Tabla Haritası"
 
 msgid "Both"
 msgstr "ikisi de"
@@ -320,7 +320,7 @@ msgid "Filter"
 msgstr "Filtre"
 
 msgid "Finding ADXL"
-msgstr "ADXL Bulunuyor"
+msgstr "ADXL Aranıyor"
 
 msgid "Fine Tuning"
 msgstr "İnce Ayar"
@@ -495,7 +495,7 @@ msgid "Lost Connection to Moonraker"
 msgstr "Moonraker ile Bağlantı Koptu"
 
 msgid "Lower Nozzle"
-msgstr "Nozzle düşür"
+msgstr "Nozzle indir"
 
 msgid "Macro shortcut on sidebar"
 msgstr "Kenar çubuğunda makro kısayolu"
@@ -543,7 +543,7 @@ msgid "Menu"
 msgstr "Menü"
 
 msgid "Mesh calibrate"
-msgstr "Mesh Kalibre et"
+msgstr "Tabla haritası Kalibre et"
 
 msgid "Minimum Cruise Ratio"
 msgstr "Minimum Gezinme Oranı"
@@ -591,7 +591,7 @@ msgid "No elegible macros:"
 msgstr "Uygun makro yok:"
 
 msgid "No mesh has been loaded"
-msgstr "Herhangi bir mesh yüklenmedi"
+msgstr "Herhangi bir haritalandırma yüklenmedi"
 
 msgid "No wireless interface has been found"
 msgstr "Herhangi bir kablosuz cihazı bulunamadı"
@@ -627,7 +627,7 @@ msgstr[0] "Paket yükseltilecek"
 msgstr[1] "Paketler yükseltilecek"
 
 msgid "Part Fan"
-msgstr "Parça Fan"
+msgstr "Parça Fanı"
 
 msgid "Password saved"
 msgstr "Şifre kaydedildi"
@@ -760,7 +760,7 @@ msgstr "Kaydedildi"
 
 #, python-format
 msgid "Saved offset: %s"
-msgstr "Kaydedilen ofset: %s"
+msgstr "Kaydedilen telafi mesafesi: %s"
 
 msgid "Screen DPMS"
 msgstr "Ekran DPMS"
@@ -769,10 +769,10 @@ msgid "Screen Power Off Time"
 msgstr "Ekran kapatma zamanı"
 
 msgid "Screws Adjust"
-msgstr "Vida Ayarı"
+msgstr "Pin Ayarı"
 
 msgid "Screws not used:"
-msgstr "Kullanılmayan vidalar:"
+msgstr "Kullanılmayan pinler:"
 
 msgid "Send"
 msgstr "Gönder"
@@ -862,10 +862,10 @@ msgid "The system doesn't meet the minimum requirement"
 msgstr "Sistem minimum gereksinimi karşılamıyor"
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr "Bu panel 3x3 Izgarada en fazla 9 vidayı destekler"
+msgstr "Bu panel 3x3 Izgarada en fazla 9 pin destekler"
 
 msgid "This will affect screw positions and mesh graph"
-msgstr "Bu, vida konumlarını ve Örgü grafiğini etkileyecektir"
+msgstr "Bu, pin konumlarını ve haritalandırma grafiğini etkileyecektir"
 
 msgid "Timeout for screen black-out or power-off"
 msgstr "Ekranın kararması veya kapanması için zaman aşımı"
@@ -883,7 +883,7 @@ msgid "Unknown security type"
 msgstr "Bilinmeyen güvenlik türü"
 
 msgid "Unload"
-msgstr "Boşalt"
+msgstr "Çıkart"
 
 msgid "Unretract Extra Length"
 msgstr "İleri İtme Ekstra Uzunluk"
@@ -928,7 +928,7 @@ msgid "Z Tilt"
 msgstr "Z Eğim"
 
 msgid "Z offset:"
-msgstr "Z ofset:"
+msgstr "Z telafi mesafesi:"
 
 msgid "commit"
 msgid_plural "commits"

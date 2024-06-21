@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-02 08:38-0300\n"
-"PO-Revision-Date: 2024-06-01 12:09+0000\n"
+"PO-Revision-Date: 2024-06-11 18:09+0000\n"
 "Last-Translator: \"Zs.Antal\" <zsikaiantal@icloud.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/hu/>\n"
@@ -171,14 +171,14 @@ msgid "Connected"
 msgstr "Csatlakoztatva"
 
 msgid "Connecting"
-msgstr ""
+msgstr "Csatlakozás"
 
 #, python-format
 msgid "Connecting to %s"
 msgstr "Csatlakozás %s"
 
 msgid "Connection failed"
-msgstr ""
+msgstr "Kapcsolat sikertelen"
 
 msgid "Console"
 msgstr "Konzol"
@@ -187,7 +187,7 @@ msgid "Cooldown"
 msgstr "Lehűtés"
 
 msgid "Couldn't add network"
-msgstr ""
+msgstr "Nem tudtam hozzáadni a hálózatot"
 
 msgid "Current percentage and graph line"
 msgstr "Aktuális százalék és grafikonvonal"
@@ -211,17 +211,17 @@ msgid "Disable for 12hs with am / pm"
 msgstr "Letiltás 12 órára am / pm"
 
 msgid "Disconnect"
-msgstr ""
+msgstr "Leválasztás"
 
 msgid "Distance (mm)"
 msgstr "Távolság (mm)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
+msgstr "Szeretnéd elfelejteni vagy leválasztani a %s-t?"
 
 msgid "Do you want to let KlipperScreen try to solve the issue?"
-msgstr ""
+msgstr "Szeretnéd, ha a KlipperScreen megpróbálná megoldani a problémát?"
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -255,7 +255,7 @@ msgid "Error: Couldn't get a position to probe"
 msgstr "Hiba: Nem sikerült beállítani a mérni kívánt pozíciót"
 
 msgid "Estimated Time"
-msgstr ""
+msgstr "Becsült idő"
 
 msgid "Estimated Time Method"
 msgstr "Becsült idő módszer"
@@ -279,10 +279,10 @@ msgid "Extrusion -"
 msgstr "Adagolás -"
 
 msgid "Failed to delete connection"
-msgstr ""
+msgstr "Nem sikerült törölni a kapcsolatot"
 
 msgid "Failed to initialize"
-msgstr ""
+msgstr "Sikertelen inicializálás"
 
 msgid "Failed, adjust position first"
 msgstr "Sikertelen! Előbb állítsd be a pozíciót"
@@ -291,7 +291,7 @@ msgid "Fan"
 msgstr "Hűtés"
 
 msgid "Filament"
-msgstr ""
+msgstr "Nyomtatószál"
 
 msgid "Filament Used"
 msgstr "Használt nyomtatószál"
@@ -336,16 +336,16 @@ msgid "Font Size"
 msgstr "Betűméret"
 
 msgid "Forget"
-msgstr ""
+msgstr "Elfelejtés"
 
 msgid "Full Update"
 msgstr "Teljes frissítés"
 
 msgid "Gcodes"
-msgstr ""
+msgstr "G-Kódok"
 
 msgid "Getting IP address"
-msgstr ""
+msgstr "IP-cím beszerzése"
 
 msgid "Go Back"
 msgstr "Visszalépés"
@@ -402,10 +402,10 @@ msgid "Input Shaper"
 msgstr "Bemeneti alakító"
 
 msgid "Insufficient priviledges detected"
-msgstr ""
+msgstr "Elégtelen jogosultságok észlelése"
 
 msgid "Insufficient privileges"
-msgstr ""
+msgstr "Elégtelen jogosultságok"
 
 msgid "Interface"
 msgstr "Felület"
@@ -467,7 +467,7 @@ msgid "Last Used"
 msgstr "Utoljára használt"
 
 msgid "Layer Height"
-msgstr ""
+msgstr "Rétegmagasság"
 
 msgid "Layer:"
 msgstr "Réteg:"
@@ -515,7 +515,7 @@ msgid "Max Velocity"
 msgstr "Max sebesség"
 
 msgid "Max:"
-msgstr ""
+msgstr "Max:"
 
 msgid "Maximum"
 msgstr "Maximum"
@@ -545,7 +545,7 @@ msgid "Minimum Cruise Ratio"
 msgstr "Minimális utazási arány"
 
 msgid "Minimum:"
-msgstr ""
+msgstr "Minimum:"
 
 msgid "Modified"
 msgstr "Módosított"
@@ -569,13 +569,13 @@ msgid "Network"
 msgstr "Hálózat"
 
 msgid "Network connected"
-msgstr ""
+msgstr "Hálózat csatlakoztatva"
 
 msgid "Network disconnected"
-msgstr ""
+msgstr "A hálózat szétkapcsolt"
 
 msgid "Network not found"
-msgstr ""
+msgstr "Nem található hálózat"
 
 msgid "Never"
 msgstr "Soha"
@@ -707,7 +707,7 @@ msgid "Refresh"
 msgstr "Frissítés"
 
 msgid "Remove network"
-msgstr ""
+msgstr "Hálózat eltávolítása"
 
 msgid "Rename/Move:"
 msgstr "Átnevez/Áthelyez:"
@@ -847,7 +847,7 @@ msgid "System Shutdown"
 msgstr "Rendszer leállitás"
 
 msgid "System:"
-msgstr ""
+msgstr "Rendszer:"
 
 msgid "Temp (°C)"
 msgstr "Hőfok (°C)"
@@ -856,7 +856,7 @@ msgid "Temperature"
 msgstr "Hőfok"
 
 msgid "The system doesn't meet the minimum requirement"
-msgstr ""
+msgstr "A rendszer nem felel meg a minimális követelményeknek"
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
 msgstr "Ez a panel akár 9 csavart is elbír egy 3x3-as rácsban"
@@ -878,7 +878,7 @@ msgid "Unknown Heater"
 msgstr "Ismeretlen melegítő"
 
 msgid "Unknown security type"
-msgstr ""
+msgstr "Ismeretlen biztonsági típus"
 
 msgid "Unload"
 msgstr "Kiadás"
