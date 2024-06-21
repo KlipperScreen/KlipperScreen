@@ -15,32 +15,34 @@ class Panel(ScreenPanel):
     def __init__(self, screen, title):
         title = title or _("Z Calibrate")
         super().__init__(screen, title)
-        self.mesh_min = []
-        self.mesh_max = []
-        self.mesh_radius = None
-        self.mesh_origin = [0, 0]
-        self.zero_ref = []
-        if "BED_MESH_CALIBRATE" in self._printer.available_commands:
-            mesh = self._printer.get_config_section("bed_mesh")
-            if 'mesh_radius' in mesh:
-                self.mesh_radius = float(mesh['mesh_radius'])
-                if 'mesh_origin' in mesh:
-                    self.mesh_origin = self._csv_to_array(mesh['mesh_origin'])
-            elif 'mesh_min' in mesh and 'mesh_max' in mesh:
-                self.mesh_min = self._csv_to_array(mesh['mesh_min'])
-                self.mesh_max = self._csv_to_array(mesh['mesh_max'])
-            elif 'min_x' in mesh and 'min_y' in mesh and 'max_x' in mesh and 'max_y' in mesh:
-                self.mesh_min = [float(mesh['min_x']), float(mesh['min_y'])]
-                self.mesh_max = [float(mesh['max_x']), float(mesh['max_y'])]
-            if 'zero_reference_position' in self._printer.get_config_section("bed_mesh"):
-                self.zero_ref = self._csv_to_array(mesh['zero_reference_position'])
+        self.initialize_mesh_params()
+        self.initialize_probe_params()
+        self.setup_ui()
 
+    def initialize_mesh_params(self):
+        if "BED_MESH_CALIBRATE" not in self._printer.available_commands:
+            return
+        mesh = self._printer.get_config_section("bed_mesh")
+        if 'mesh_radius' in mesh:
+            self.mesh_radius = float(mesh['mesh_radius'])
+            if 'mesh_origin' in mesh:
+                self.mesh_origin = self._csv_to_array(mesh['mesh_origin'])
+        elif 'mesh_min' in mesh and 'mesh_max' in mesh:
+            self.mesh_min = self._csv_to_array(mesh['mesh_min'])
+            self.mesh_max = self._csv_to_array(mesh['mesh_max'])
+        elif 'min_x' in mesh and 'min_y' in mesh and 'max_x' in mesh and 'max_y' in mesh:
+            self.mesh_min = [float(mesh['min_x']), float(mesh['min_y'])]
+            self.mesh_max = [float(mesh['max_x']), float(mesh['max_y'])]
+        if 'zero_reference_position' in self._printer.get_config_section("bed_mesh"):
+            self.zero_ref = self._csv_to_array(mesh['zero_reference_position'])
+
+    def initialize_probe_params(self):
         self.z_hop_speed = 15.0
         self.z_hop = 5.0
         self.probe = self._printer.get_probe()
         if self.probe:
-            self.x_offset = float(self.probe['x_offset']) if "x_offset" in self.probe else 0.0
-            self.y_offset = float(self.probe['y_offset']) if "y_offset" in self.probe else 0.0
+            self.x_offset = float(self.probe.get('x_offset', 0.0))
+            self.y_offset = float(self.probe.get('y_offset', 0.0))
             self.z_offset = float(self.probe['z_offset'])
             if "sample_retract_dist" in self.probe:
                 self.z_hop = float(self.probe['sample_retract_dist'])
@@ -51,20 +53,25 @@ class Panel(ScreenPanel):
             self.y_offset = 0.0
             self.z_offset = 0.0
         logging.info(f"Offset X:{self.x_offset} Y:{self.y_offset} Z:{self.z_offset}")
-        self.widgets['zposition'] = Gtk.Label(label="Z: ?")
 
+    def setup_ui(self):
+        self.widgets['zposition'] = Gtk.Label(label="Z: ?")
         self.widgets['zoffset'] = Gtk.Label(label="?")
+
         pos = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         pos.attach(self.widgets['zposition'], 0, 1, 2, 1)
+
         if self.probe:
             pos.attach(Gtk.Label(label=_("Probe Offset") + ": "), 0, 2, 2, 1)
             pos.attach(Gtk.Label(label=_("Saved")), 0, 3, 1, 1)
             pos.attach(Gtk.Label(label=_("New")), 1, 3, 1, 1)
             pos.attach(Gtk.Label(label=f"{self.z_offset:.3f}"), 0, 4, 1, 1)
             pos.attach(self.widgets['zoffset'], 1, 4, 1, 1)
+
         for label in pos.get_children():
             if isinstance(label, Gtk.Label):
                 label.set_ellipsize(Pango.EllipsizeMode.END)
+
         self.buttons = {
             'zpos': self._gtk.Button('z-farther', _("Raise Nozzle"), 'color4'),
             'zneg': self._gtk.Button('z-closer', _("Lower Nozzle"), 'color1'),
@@ -72,13 +79,18 @@ class Panel(ScreenPanel):
             'complete': self._gtk.Button('complete', _('Accept'), 'color3'),
             'cancel': self._gtk.Button('cancel', _('Abort'), 'color2'),
         }
+
         self.buttons['zpos'].connect("clicked", self.move, "+")
         self.buttons['zneg'].connect("clicked", self.move, "-")
         self.buttons['complete'].connect("clicked", self.accept)
         script = {"script": "ABORT"}
-        self.buttons['cancel'].connect("clicked", self._screen._confirm_send_action,
-                                       _("Are you sure you want to stop the calibration?"),
-                                       "printer.gcode.script", script)
+        self.buttons['cancel'].connect(
+            "clicked",
+            self._screen._confirm_send_action,
+            ("Are you sure you want to stop the calibration?"),
+            "printer.gcode.script",
+            script
+        )
         self.buttons['start'].connect("clicked", self.start_calibration)
 
         self.dropdown = Gtk.ComboBox.new_with_model(self.set_commands())
@@ -110,29 +122,24 @@ class Panel(ScreenPanel):
 
         grid = Gtk.Grid(column_homogeneous=True)
         if self._screen.vertical_mode:
-            if self._config.get_config()["main"].getboolean("invert_z", False):
-                grid.attach(self.buttons['zpos'], 0, 2, 1, 1)
-                grid.attach(self.buttons['zneg'], 0, 1, 1, 1)
-            else:
-                grid.attach(self.buttons['zpos'], 0, 1, 1, 1)
-                grid.attach(self.buttons['zneg'], 0, 2, 1, 1)
+            zpos_row, zneg_row = (2, 1) if self._config.get_config()["main"].getboolean("invert_z", False) else (1, 2)
+            grid.attach(self.buttons['zpos'], 0, zpos_row, 1, 1)
+            grid.attach(self.buttons['zneg'], 0, zneg_row, 1, 1)
             grid.attach(start_box, 0, 0, 1, 1)
             grid.attach(pos, 1, 0, 1, 1)
             grid.attach(self.buttons['complete'], 1, 1, 1, 1)
             grid.attach(self.buttons['cancel'], 1, 2, 1, 1)
             grid.attach(distances, 0, 3, 2, 1)
         else:
-            if self._config.get_config()["main"].getboolean("invert_z", False):
-                grid.attach(self.buttons['zpos'], 0, 1, 1, 1)
-                grid.attach(self.buttons['zneg'], 0, 0, 1, 1)
-            else:
-                grid.attach(self.buttons['zpos'], 0, 0, 1, 1)
-                grid.attach(self.buttons['zneg'], 0, 1, 1, 1)
+            zpos_row, zneg_row = (1, 0) if self._config.get_config()["main"].getboolean("invert_z", False) else (0, 1)
+            grid.attach(self.buttons['zpos'], 0, zpos_row, 1, 1)
+            grid.attach(self.buttons['zneg'], 0, zneg_row, 1, 1)
             grid.attach(start_box, 1, 0, 1, 1)
             grid.attach(pos, 1, 1, 1, 1)
             grid.attach(self.buttons['complete'], 2, 0, 1, 1)
             grid.attach(self.buttons['cancel'], 2, 1, 1, 1)
             grid.attach(distances, 0, 2, 3, 1)
+
         self.content.add(grid)
 
     def set_commands(self):
