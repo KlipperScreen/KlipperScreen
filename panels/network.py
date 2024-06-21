@@ -379,9 +379,10 @@ class Panel(ScreenPanel):
 
     def toggle_wifi(self, switch, gparams):
         enable = switch.get_active()
-        if enable:
-            self.reload_button.show()
-        else:
-            self.reload_button.hide()
         logging.info(f"WiFi {enable}")
         self.sdbus_nm.toggle_wifi(enable)
+        if enable:
+            self.reload_button.show()
+            self.reload_networks()
+        else:
+            self.reload_button.hide()

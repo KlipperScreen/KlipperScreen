@@ -327,7 +327,10 @@ class SdbusNm:
             }
 
     def rescan(self):
-        return self.wlan_device.request_scan({})
+        try:
+            return self.wlan_device.request_scan({})
+        except Exception as e:
+            self.popup(f"Unexpected error: {e}")
 
     def get_connection_path_by_ssid(self, ssid):
         existing_networks = NetworkManagerSettings().list_connections()
