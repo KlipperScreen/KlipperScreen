@@ -20,6 +20,11 @@ class Panel(ScreenPanel):
         self.setup_ui()
 
     def initialize_mesh_params(self):
+        self.mesh_min = []
+        self.mesh_max = []
+        self.mesh_radius = None
+        self.mesh_origin = [0, 0]
+        self.zero_ref = []
         if "BED_MESH_CALIBRATE" not in self._printer.available_commands:
             return
         mesh = self._printer.get_config_section("bed_mesh")
