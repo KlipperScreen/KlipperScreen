@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 XDG_RUNTIME_DIR=/run/user/$(id -u)
 export XDG_RUNTIME_DIR
