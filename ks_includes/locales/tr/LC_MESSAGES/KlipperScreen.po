@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-02 08:38-0300\n"
-"PO-Revision-Date: 2024-06-11 18:09+0000\n"
+"PO-Revision-Date: 2024-06-21 18:03+0000\n"
 "Last-Translator: Selim <technical50@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/tr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6-dev\n"
+"X-Generator: Weblate 5.6-rc\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -248,13 +248,13 @@ msgid "Error clearing active spool"
 msgstr "Aktif makara temizleme hatası"
 
 msgid "Error getting active spool"
-msgstr "Erkin makara hatalı"
+msgstr "Aktif makara hata veriyor"
 
 msgid "Error setting active spool"
 msgstr "Etkin makara ayar hatası"
 
 msgid "Error trying to fetch spools"
-msgstr "Makaraları getirmeye çalışırken hata oluştu"
+msgstr "Makaraları çekmeye çalışırken hata oluştu"
 
 msgid "Error: Couldn't get a position to probe"
 msgstr "Hata: İnceleyici için bir konum alınamadı"
@@ -410,7 +410,7 @@ msgid "Insufficient priviledges detected"
 msgstr "Yetersiz ayrıcalık algılandı"
 
 msgid "Insufficient privileges"
-msgstr "Yetersiz ayrıcalıklar"
+msgstr "Yetersiz yetkilendirmeler"
 
 msgid "Interface"
 msgstr "Arayüz"
@@ -437,7 +437,7 @@ msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "Isıtıcı gücüne bağlı olarak 5 dakikadan fazla sürebilir."
 
 msgid "It's possible that the configuration is not correct"
-msgstr "Bu yapılandırmanın doğru olmama olasılığı var"
+msgstr "Bu yapılandırma doğru olmayabilir"
 
 msgid "Klipper Restart"
 msgstr "Klipper Yeniden başlat"
@@ -606,7 +606,7 @@ msgid "Nothing selected"
 msgstr "Hiçbir şey seçilmedi"
 
 msgid "Notification log empty"
-msgstr "Bildirim geçmişi boş"
+msgstr "Geçmiş bildirim yok"
 
 msgid "Notifications"
 msgstr "Bildirimler"
@@ -654,7 +654,7 @@ msgid "Power"
 msgstr "Güç"
 
 msgid "Power On Printer"
-msgstr "Yazıcıya Güç Ver (aç)"
+msgstr "Yazıcıyı aç"
 
 msgid "Pressure Advance:"
 msgstr "Akış Dengeleme:"
@@ -693,7 +693,7 @@ msgid "Quad Gantry Level"
 msgstr "Dörtlü Köprü Seviyesi"
 
 msgid "Raise Nozzle"
-msgstr "Nozzle yükselt"
+msgstr "Nozulu kaldır"
 
 msgid "Recover"
 msgstr "Kurtar"
