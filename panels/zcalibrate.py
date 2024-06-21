@@ -4,6 +4,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.KlippyGtk import find_widget
 
 
 class Panel(ScreenPanel):
@@ -157,6 +158,9 @@ class Panel(ScreenPanel):
             self.buttons['start'].connect("clicked", self.on_popover_clicked)
         else:
             self.buttons['start'].connect("clicked", self.start_calibration, functions[0])
+            new_label = self.buttons['start'].get_label()
+            label = find_widget(self.buttons['start'], Gtk.Label)
+            label.set_text(new_label + '\n' + self.prettify(functions[0]))
         logging.info(f"Available functions for calibration: {functions}")
 
     @staticmethod
