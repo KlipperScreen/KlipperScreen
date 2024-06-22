@@ -817,9 +817,9 @@ class Panel(ScreenPanel):
                     self.labels['total_layers'].set_label(f"{((self.oheight - self.f_layer_h) / self.layer_h) + 1:.0f}")
             if "filament_total" in self.file_metadata:
                 self.labels['filament_total'].set_label(f"{float(self.file_metadata['filament_total']) / 1000:.1f} m")
-            if "job_id" in self.file_metadata:
+            if "job_id" in self.file_metadata and self.file_metadata['job_id']:
                 history = self._screen.apiclient.send_request(f"server/history/job?uid={self.file_metadata['job_id']}")
-                if history and history['job']['status'] == "completed":
+                if history and history['job']['status'] == "completed" and history['job']['print_duration']:
                     self.file_metadata["last_time"] = history['job']['print_duration']
         elif not response:
             logging.debug("Cannot find file metadata. Listening for updated metadata")
