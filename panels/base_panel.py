@@ -308,8 +308,12 @@ class BasePanel(ScreenPanel):
 
     def set_title(self, title):
         self.titlebar.get_style_context().remove_class("message_popup_error")
+        if self._screen.connecting_to_printer != "Printer":
+            printer = self._screen.connecting_to_printer
+        else:
+            printer = ""
         if not title:
-            self.titlelbl.set_label(f"{self._screen.connecting_to_printer}")
+            self.titlelbl.set_label(f"{printer}")
             return
         try:
             env = Environment(extensions=["jinja2.ext.i18n"], autoescape=True)
@@ -319,7 +323,7 @@ class BasePanel(ScreenPanel):
         except Exception as e:
             logging.debug(f"Error parsing jinja for title: {title}\n{e}")
 
-        self.titlelbl.set_label(f"{self._screen.connecting_to_printer} | {title}")
+        self.titlelbl.set_label(f"{printer} {title}")
 
     def update_time(self):
         now = datetime.now()
