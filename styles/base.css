@@ -480,7 +480,7 @@ trough {
 .printing-filename {
     font-size: 1.4em;
     font-weight: bold;
-    margin: .25em .25em 0 0;
+    margin-right: .25em;
 }
 
 .printing-info {
@@ -498,7 +498,7 @@ trough {
 
 .printing-status {
     font-style: italic;
-    margin: 0;
+    margin-right: .25em;
     font-weight: bold;
 }
 
