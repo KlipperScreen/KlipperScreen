@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"POT-Creation-Date: 2024-06-27 18:24-0300\n"
 "PO-Revision-Date: 2024-04-16 18:02+0000\n"
 "Last-Translator: F1CU <ficu1234@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -66,9 +66,6 @@ msgstr "Czy na pewno chcesz wykluczyć obiekt?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Czy na pewno chcesz zatrzymać awaryjnie?"
-
-msgid "Are you sure you want to stop the calibration?"
-msgstr ""
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Czy na pewno chcesz przerwać drukowanie?"
@@ -191,6 +188,9 @@ msgstr "Studzenie"
 msgid "Couldn't add network"
 msgstr ""
 
+msgid "Current"
+msgstr ""
+
 msgid "Current percentage and graph line"
 msgstr ""
 
@@ -199,6 +199,9 @@ msgstr "Nie udało się wczytać DPMS i został on wyłączony"
 
 msgid "Date"
 msgstr "Data"
+
+msgid "Delete"
+msgstr ""
 
 msgid "Delete Directory?"
 msgstr "Usunąć katalog?"
@@ -220,9 +223,6 @@ msgstr "Dystans (mm)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
-
-msgid "Do you want to let KlipperScreen try to solve the issue?"
 msgstr ""
 
 #, python-format
@@ -261,6 +261,9 @@ msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Metoda szacowanego czasu"
+
+msgid "Example"
+msgstr ""
 
 msgid "Exclude Object"
 msgstr "Wyklucz obiekt"
@@ -403,9 +406,6 @@ msgstr "Rozpoczęcie kalibracji PID dla:"
 msgid "Input Shaper"
 msgstr "Input Shaper"
 
-msgid "Insufficient priviledges detected"
-msgstr ""
-
 msgid "Insufficient privileges"
 msgstr ""
 
@@ -434,6 +434,9 @@ msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "Może to potrwać dłużej niż 5 minut w zależności od mocy grzałki."
 
 msgid "It's possible that the configuration is not correct"
+msgstr ""
+
+msgid "Job Status"
 msgstr ""
 
 msgid "Klipper Restart"
@@ -465,6 +468,9 @@ msgstr "Język"
 
 msgid "Large"
 msgstr "Duży"
+
+msgid "Last Duration"
+msgstr ""
 
 msgid "Last Used"
 msgstr "Ostatnie użycie"
@@ -541,9 +547,6 @@ msgstr ""
 msgid "Menu"
 msgstr "Menu"
 
-msgid "Mesh calibrate"
-msgstr "Kalibracja siatki"
-
 msgid "Minimum Cruise Ratio"
 msgstr ""
 
@@ -589,6 +592,9 @@ msgstr "Nowe"
 msgid "No elegible macros:"
 msgstr "Brak odpowiednich makr:"
 
+msgid "No info available"
+msgstr ""
+
 msgid "No mesh has been loaded"
 msgstr "Nie załadowano żadnej siatki"
 
@@ -609,6 +615,9 @@ msgstr "Dziennik powiadomień jest pusty"
 
 msgid "Notifications"
 msgstr "Powiadomienia"
+
+msgid "Nozzle diameter"
+msgstr ""
 
 msgid "Only for the move panel"
 msgstr ""
@@ -656,11 +665,14 @@ msgstr "Zasilanie"
 msgid "Power On Printer"
 msgstr "Zasilanie włączone"
 
+msgid "Pressure Advance"
+msgstr "Pressure Advance"
+
 msgid "Pressure Advance:"
 msgstr "Pressure Advance:"
 
-msgid "Pressure Advance"
-msgstr "Pressure Advance"
+msgid "Pressure advance"
+msgstr ""
 
 msgid "Print"
 msgstr "Drukuj"
@@ -810,6 +822,9 @@ msgstr "Slicer:"
 msgid "Small"
 msgstr "Mały"
 
+msgid "Smooth time"
+msgstr ""
+
 msgid "Speed (mm/s)"
 msgstr "Prędkość (mm/s)"
 
@@ -900,14 +915,14 @@ msgstr "Aktualizuj"
 msgid "Updating"
 msgstr "Aktualizowanie"
 
-msgid "Uploaded"
-msgstr "Przesłane"
-
 msgid "Useful for un-responsive touchscreens"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC nie jest wspierane przez backend próbujący streamować"
+
+msgid "Working"
+msgstr ""
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Prędkość ruchu XY (mm/s)"
@@ -942,6 +957,9 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
+msgid "g"
+msgstr ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "godzina"
@@ -972,11 +990,20 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+msgid "s"
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+
+#~ msgid "Mesh calibrate"
+#~ msgstr "Kalibracja siatki"
+
+#~ msgid "Uploaded"
+#~ msgstr "Przesłane"
 
 #~ msgid "Ended official support in June 2023"
 #~ msgstr "Oficjalne wsparcie zakończyło się w czerwcu 2023"

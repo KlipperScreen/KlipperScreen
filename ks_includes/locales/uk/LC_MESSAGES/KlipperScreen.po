@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 24-05-17 16.20\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"POT-Creation-Date: 2024-06-27 18:24-0300\n"
 "PO-Revision-Date: 2024-05-12 16:39+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -69,9 +69,6 @@ msgstr "Ви впевнені, що бажаєте виключити об’є�
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Ви впевнені, що хочете зробити аварійну зупинку?"
-
-msgid "Are you sure you want to stop the calibration?"
-msgstr "Ви впевнені, що хочете припинити калібрування?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Ви впевнені, що хочете скасувати друк?"
@@ -194,6 +191,9 @@ msgstr "Охолодження"
 msgid "Couldn't add network"
 msgstr ""
 
+msgid "Current"
+msgstr ""
+
 msgid "Current percentage and graph line"
 msgstr "Поточний відсоток і лінія графіка"
 
@@ -202,6 +202,9 @@ msgstr "DPMS не вдалося завантажити, і його було в
 
 msgid "Date"
 msgstr "Дата"
+
+msgid "Delete"
+msgstr "Видалити"
 
 msgid "Delete Directory?"
 msgstr "Видалити Теку?"
@@ -223,9 +226,6 @@ msgstr "Відстань (мм)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
-
-msgid "Do you want to let KlipperScreen try to solve the issue?"
 msgstr ""
 
 #, python-format
@@ -264,6 +264,9 @@ msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Метод розрахунку часу"
+
+msgid "Example"
+msgstr ""
 
 msgid "Exclude Object"
 msgstr "Виключити об’єкт"
@@ -406,9 +409,6 @@ msgstr "Почати калібрування PID для:"
 msgid "Input Shaper"
 msgstr "Input Shaper"
 
-msgid "Insufficient priviledges detected"
-msgstr ""
-
 msgid "Insufficient privileges"
 msgstr ""
 
@@ -439,6 +439,9 @@ msgstr "Залежно від потужності обігрівача це м�
 msgid "It's possible that the configuration is not correct"
 msgstr "Можливо, конфігурація неправильна"
 
+msgid "Job Status"
+msgstr ""
+
 msgid "Klipper Restart"
 msgstr "Перезапуск Klipper"
 
@@ -468,6 +471,9 @@ msgstr "Мова"
 
 msgid "Large"
 msgstr "Великий"
+
+msgid "Last Duration"
+msgstr ""
 
 msgid "Last Used"
 msgstr "Останнє Використання"
@@ -544,9 +550,6 @@ msgstr ""
 msgid "Menu"
 msgstr "Меню"
 
-msgid "Mesh calibrate"
-msgstr "Калібрування сітки столу"
-
 msgid "Minimum Cruise Ratio"
 msgstr "Мінімальний крейсерський коефіцієнт"
 
@@ -592,6 +595,9 @@ msgstr "Новий"
 msgid "No elegible macros:"
 msgstr "Непридатний макрос:"
 
+msgid "No info available"
+msgstr ""
+
 msgid "No mesh has been loaded"
 msgstr "Не завантажено жодної сітки"
 
@@ -612,6 +618,9 @@ msgstr "Журнал сповіщень порожній"
 
 msgid "Notifications"
 msgstr "Сповіщення"
+
+msgid "Nozzle diameter"
+msgstr ""
 
 msgid "Only for the move panel"
 msgstr ""
@@ -659,11 +668,14 @@ msgstr "Живлення"
 msgid "Power On Printer"
 msgstr "Увімкнути принтер"
 
+msgid "Pressure Advance"
+msgstr "Випередження тиску"
+
 msgid "Pressure Advance:"
 msgstr "Випередження тиску:"
 
-msgid "Pressure Advance"
-msgstr "Випередження тиску"
+msgid "Pressure advance"
+msgstr ""
 
 msgid "Print"
 msgstr "Друк"
@@ -813,6 +825,9 @@ msgstr "Слайсер:"
 msgid "Small"
 msgstr "Малий"
 
+msgid "Smooth time"
+msgstr ""
+
 msgid "Speed (mm/s)"
 msgstr "Швидкість (мм/с)"
 
@@ -903,14 +918,14 @@ msgstr "Оновити"
 msgid "Updating"
 msgstr "Оновлення"
 
-msgid "Uploaded"
-msgstr "Завантажено"
-
 msgid "Useful for un-responsive touchscreens"
 msgstr "Корисно для сенсорних екранів, які не реагують"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC не підтримується бекендом, який намагається використати Stream"
+
+msgid "Working"
+msgstr ""
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Швидкість переміщення XY (мм/с)"
@@ -945,6 +960,9 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
+msgid "g"
+msgstr ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "година"
@@ -975,11 +993,23 @@ msgstr "мм/с²"
 msgid "mm³/s"
 msgstr "мм/с³"
 
+msgid "s"
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+
+#~ msgid "Are you sure you want to stop the calibration?"
+#~ msgstr "Ви впевнені, що хочете припинити калібрування?"
+
+#~ msgid "Mesh calibrate"
+#~ msgstr "Калібрування сітки столу"
+
+#~ msgid "Uploaded"
+#~ msgstr "Завантажено"
 
 #~ msgid "Ended official support in June 2023"
 #~ msgstr "Офіційна підтримка припинена в червні 2023 року"
@@ -1091,9 +1121,6 @@ msgstr[2] ""
 
 #~ msgid "Initializing"
 #~ msgstr "Ініціалізація"
-
-#~ msgid "Delete"
-#~ msgstr "Видалити"
 
 #~ msgid "Off"
 #~ msgstr "Вимк"

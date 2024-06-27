@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"POT-Creation-Date: 2024-06-27 18:24-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/klipperscreen/"
@@ -71,9 +71,6 @@ msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "האם אתה בטוח שאתה רוצה לבצע עצירת חירום?"
-
-msgid "Are you sure you want to stop the calibration?"
-msgstr ""
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "האם אתה בטוח שברצונך לבטל את ההדפסה?"
@@ -196,6 +193,9 @@ msgstr "הפעל קירור"
 msgid "Couldn't add network"
 msgstr ""
 
+msgid "Current"
+msgstr ""
+
 msgid "Current percentage and graph line"
 msgstr ""
 
@@ -204,6 +204,9 @@ msgstr ""
 
 msgid "Date"
 msgstr "תאריך"
+
+msgid "Delete"
+msgstr "מחק"
 
 msgid "Delete Directory?"
 msgstr ""
@@ -225,9 +228,6 @@ msgstr "מרחק (מ\"מ)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
-
-msgid "Do you want to let KlipperScreen try to solve the issue?"
 msgstr ""
 
 #, python-format
@@ -266,6 +266,9 @@ msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "שיטת זמן משוערת"
+
+msgid "Example"
+msgstr ""
 
 msgid "Exclude Object"
 msgstr "ביטול אובייקט"
@@ -408,9 +411,6 @@ msgstr ""
 msgid "Input Shaper"
 msgstr "מעצב גימור"
 
-msgid "Insufficient priviledges detected"
-msgstr ""
-
 msgid "Insufficient privileges"
 msgstr ""
 
@@ -441,6 +441,9 @@ msgstr ""
 msgid "It's possible that the configuration is not correct"
 msgstr ""
 
+msgid "Job Status"
+msgstr ""
+
 msgid "Klipper Restart"
 msgstr "Klipper יאתחל מחדש"
 
@@ -468,6 +471,9 @@ msgstr "שפה"
 
 msgid "Large"
 msgstr "גדול"
+
+msgid "Last Duration"
+msgstr ""
 
 msgid "Last Used"
 msgstr ""
@@ -544,9 +550,6 @@ msgstr ""
 msgid "Menu"
 msgstr "תפריט"
 
-msgid "Mesh calibrate"
-msgstr ""
-
 msgid "Minimum Cruise Ratio"
 msgstr ""
 
@@ -592,6 +595,9 @@ msgstr "חדש"
 msgid "No elegible macros:"
 msgstr ""
 
+msgid "No info available"
+msgstr ""
+
 msgid "No mesh has been loaded"
 msgstr ""
 
@@ -611,6 +617,9 @@ msgid "Notification log empty"
 msgstr ""
 
 msgid "Notifications"
+msgstr ""
+
+msgid "Nozzle diameter"
 msgstr ""
 
 msgid "Only for the move panel"
@@ -660,11 +669,14 @@ msgstr "הפעלה"
 msgid "Power On Printer"
 msgstr "הפעל מדפסת"
 
+msgid "Pressure Advance"
+msgstr "פרשר אדוונס"
+
 msgid "Pressure Advance:"
 msgstr "פרשר אדוונס"
 
-msgid "Pressure Advance"
-msgstr "פרשר אדוונס"
+msgid "Pressure advance"
+msgstr ""
 
 msgid "Print"
 msgstr "הדפסה"
@@ -814,6 +826,9 @@ msgstr ""
 msgid "Small"
 msgstr "קטן"
 
+msgid "Smooth time"
+msgstr ""
+
 msgid "Speed (mm/s)"
 msgstr "מהירות (מ\"מ/שניות)"
 
@@ -904,13 +919,13 @@ msgstr "עדכון"
 msgid "Updating"
 msgstr "מעדכן"
 
-msgid "Uploaded"
-msgstr "הועלה"
-
 msgid "Useful for un-responsive touchscreens"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
+
+msgid "Working"
 msgstr ""
 
 msgid "XY Move Speed (mm/s)"
@@ -948,6 +963,9 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
+msgid "g"
+msgstr ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "שעה"
@@ -980,12 +998,18 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr ""
 
+msgid "s"
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
+
+#~ msgid "Uploaded"
+#~ msgstr "הועלה"
 
 #~ msgid "Hidden"
 #~ msgstr "מוסתר"
@@ -1084,9 +1108,6 @@ msgstr[3] ""
 #~ msgid "Initializing"
 #~ msgstr "מאתחל"
 
-#~ msgid "Delete"
-#~ msgstr "מחק"
-
 #~ msgid "Off"
 #~ msgstr "כבוי"
 
@@ -1135,9 +1156,6 @@ msgstr[3] ""
 
 #~ msgid "Unknown Heater "
 #~ msgstr "מחמם לא ידוע "
-
-#~ msgid "Duration Only"
-#~ msgstr "משך הזמן בלבד"
 
 #~ msgid "Klipper Version"
 #~ msgstr "גרסא של קליפר"

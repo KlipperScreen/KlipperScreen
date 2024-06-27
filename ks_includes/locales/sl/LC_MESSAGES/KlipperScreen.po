@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"POT-Creation-Date: 2024-06-27 18:24-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Dominik <dominik.sostar@gmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -70,9 +70,6 @@ msgstr "Ali ste prepričani da želite izključiti predmet?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Ali ste prepričani, da želite zagnati zaustavitev v sili?"
-
-msgid "Are you sure you want to stop the calibration?"
-msgstr ""
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Ali ste prepričani da želite preklicati to tiskanje?"
@@ -195,6 +192,9 @@ msgstr "Ohlajanje"
 msgid "Couldn't add network"
 msgstr ""
 
+msgid "Current"
+msgstr ""
+
 msgid "Current percentage and graph line"
 msgstr ""
 
@@ -203,6 +203,9 @@ msgstr "DPMS se ni uspel naložiti in je onemogočen"
 
 msgid "Date"
 msgstr "Datum"
+
+msgid "Delete"
+msgstr ""
 
 msgid "Delete Directory?"
 msgstr "Izbrišem imenik?"
@@ -224,9 +227,6 @@ msgstr "Razdalja (mm)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
-
-msgid "Do you want to let KlipperScreen try to solve the issue?"
 msgstr ""
 
 #, python-format
@@ -265,6 +265,9 @@ msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Način predvidenega časa"
+
+msgid "Example"
+msgstr ""
 
 msgid "Exclude Object"
 msgstr "Izključi predmet"
@@ -407,9 +410,6 @@ msgstr "Zaženite kalibracijo PID za:"
 msgid "Input Shaper"
 msgstr "Input Shaper"
 
-msgid "Insufficient priviledges detected"
-msgstr ""
-
 msgid "Insufficient privileges"
 msgstr ""
 
@@ -438,6 +438,9 @@ msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "Lahko traja več kot 5 minut, odvisno od moči grelnika."
 
 msgid "It's possible that the configuration is not correct"
+msgstr ""
+
+msgid "Job Status"
 msgstr ""
 
 msgid "Klipper Restart"
@@ -469,6 +472,9 @@ msgstr "Jezik"
 
 msgid "Large"
 msgstr "Veliko"
+
+msgid "Last Duration"
+msgstr ""
 
 msgid "Last Used"
 msgstr "Nazadnje uporabljeno"
@@ -545,9 +551,6 @@ msgstr ""
 msgid "Menu"
 msgstr "Meni"
 
-msgid "Mesh calibrate"
-msgstr "Umeritev mreže"
-
 msgid "Minimum Cruise Ratio"
 msgstr ""
 
@@ -593,6 +596,9 @@ msgstr "Novo"
 msgid "No elegible macros:"
 msgstr "Neprimerni makri:"
 
+msgid "No info available"
+msgstr ""
+
 msgid "No mesh has been loaded"
 msgstr "Mreža ni naložena"
 
@@ -613,6 +619,9 @@ msgstr "Dnevnik obvestil je prazen"
 
 msgid "Notifications"
 msgstr "Obvestila"
+
+msgid "Nozzle diameter"
+msgstr ""
 
 msgid "Only for the move panel"
 msgstr ""
@@ -661,12 +670,14 @@ msgstr "Vklop"
 msgid "Power On Printer"
 msgstr "Vklopite tiskalnik"
 
+msgid "Pressure Advance"
+msgstr "Pressure Advance"
+
 msgid "Pressure Advance:"
 msgstr "Pressure Advance:"
 
-
-msgid "Pressure Advance"
-msgstr "Pressure Advance"
+msgid "Pressure advance"
+msgstr ""
 
 msgid "Print"
 msgstr "Natisni"
@@ -816,6 +827,9 @@ msgstr "Slicer:"
 msgid "Small"
 msgstr "Majhno"
 
+msgid "Smooth time"
+msgstr ""
+
 msgid "Speed (mm/s)"
 msgstr "Hitrost (mm/s)"
 
@@ -906,13 +920,13 @@ msgstr "Posodobi"
 msgid "Updating"
 msgstr "Posodabljam"
 
-msgid "Uploaded"
-msgstr "Naloženo"
-
 msgid "Useful for un-responsive touchscreens"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
+
+msgid "Working"
 msgstr ""
 
 msgid "XY Move Speed (mm/s)"
@@ -950,6 +964,9 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
+msgid "g"
+msgstr ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "Ura"
@@ -982,12 +999,21 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+msgid "s"
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
+
+#~ msgid "Mesh calibrate"
+#~ msgstr "Umeritev mreže"
+
+#~ msgid "Uploaded"
+#~ msgstr "Naloženo"
 
 #~ msgid "Ended official support in June 2023"
 #~ msgstr "Konec uradne podpore junija 2023"

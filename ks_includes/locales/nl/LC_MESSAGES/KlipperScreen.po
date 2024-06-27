@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"POT-Creation-Date: 2024-06-27 18:24-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Mikachu <micah.sh@proton.me>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/klipperscreen/"
@@ -69,9 +69,6 @@ msgstr "Weet je zeker dat je het object wilt uitsluiten?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Weet je zeker dat je de Noodstop wilt inschakelen?"
-
-msgid "Are you sure you want to stop the calibration?"
-msgstr ""
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Weet je zeker dat je deze print wilt annuleren?"
@@ -194,6 +191,9 @@ msgstr "Afkoelen"
 msgid "Couldn't add network"
 msgstr ""
 
+msgid "Current"
+msgstr ""
+
 msgid "Current percentage and graph line"
 msgstr ""
 
@@ -202,6 +202,9 @@ msgstr "DPMS kon niet worden geladen en is uitgeschakeld"
 
 msgid "Date"
 msgstr "Datum"
+
+msgid "Delete"
+msgstr ""
 
 msgid "Delete Directory?"
 msgstr "Verwijder directory?"
@@ -223,9 +226,6 @@ msgstr "Afstand (mm)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
-
-msgid "Do you want to let KlipperScreen try to solve the issue?"
 msgstr ""
 
 #, python-format
@@ -264,6 +264,9 @@ msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Schatting Tijd Methode"
+
+msgid "Example"
+msgstr ""
 
 msgid "Exclude Object"
 msgstr "Uitsluiten Object"
@@ -406,9 +409,6 @@ msgstr "Initieer een PID-kalibratie voor:"
 msgid "Input Shaper"
 msgstr "Input Shaper"
 
-msgid "Insufficient priviledges detected"
-msgstr ""
-
 msgid "Insufficient privileges"
 msgstr ""
 
@@ -437,6 +437,9 @@ msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "Het kan meer dan 5 minuten duren op basis van de heater power."
 
 msgid "It's possible that the configuration is not correct"
+msgstr ""
+
+msgid "Job Status"
 msgstr ""
 
 msgid "Klipper Restart"
@@ -468,6 +471,9 @@ msgstr "Taal"
 
 msgid "Large"
 msgstr "Groot"
+
+msgid "Last Duration"
+msgstr ""
 
 msgid "Last Used"
 msgstr "Laatst Gebruikt"
@@ -544,9 +550,6 @@ msgstr ""
 msgid "Menu"
 msgstr "Menu"
 
-msgid "Mesh calibrate"
-msgstr "Mesh kalibreren"
-
 msgid "Minimum Cruise Ratio"
 msgstr ""
 
@@ -592,6 +595,9 @@ msgstr "Nieuw"
 msgid "No elegible macros:"
 msgstr "Macros komen niet in aanmerking:"
 
+msgid "No info available"
+msgstr ""
+
 msgid "No mesh has been loaded"
 msgstr "Geen mesh geladen"
 
@@ -612,6 +618,9 @@ msgstr "Notificatie log is leeg"
 
 msgid "Notifications"
 msgstr "Notificaties"
+
+msgid "Nozzle diameter"
+msgstr ""
 
 msgid "Only for the move panel"
 msgstr ""
@@ -658,11 +667,14 @@ msgstr "Stroom"
 msgid "Power On Printer"
 msgstr "Printer Aanzetten"
 
+msgid "Pressure Advance"
+msgstr "Pressure Advance"
+
 msgid "Pressure Advance:"
 msgstr "Pressure Advance:"
 
-msgid "Pressure Advance"
-msgstr "Pressure Advance"
+msgid "Pressure advance"
+msgstr ""
 
 msgid "Print"
 msgstr "Print"
@@ -812,6 +824,9 @@ msgstr "Slicer:"
 msgid "Small"
 msgstr "Klein"
 
+msgid "Smooth time"
+msgstr ""
+
 msgid "Speed (mm/s)"
 msgstr "Snelheid (mm/s)"
 
@@ -902,14 +917,14 @@ msgstr "Update"
 msgid "Updating"
 msgstr "Bezig met updaten"
 
-msgid "Uploaded"
-msgstr "Geupload"
-
 msgid "Useful for un-responsive touchscreens"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC is niet ondersteund door de backend"
+
+msgid "Working"
+msgstr ""
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Move Snelheid (mm/s)"
@@ -942,6 +957,9 @@ msgid_plural "days"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "g"
+msgstr ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "uur"
@@ -970,10 +988,19 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+msgid "s"
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "Mesh calibrate"
+#~ msgstr "Mesh kalibreren"
+
+#~ msgid "Uploaded"
+#~ msgstr "Geupload"
 
 #~ msgid "Ended official support in June 2023"
 #~ msgstr "Ondersteuning officieel beëindigt in juni 2023"

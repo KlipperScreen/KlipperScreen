@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"POT-Creation-Date: 2024-06-27 18:24-0300\n"
 "PO-Revision-Date: 2024-06-01 12:09+0000\n"
 "Last-Translator: 峻瑜哥 <a728728728@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
@@ -69,9 +69,6 @@ msgstr "你確定要排除該目標嗎？"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "您確定要緊急停止嗎？"
-
-msgid "Are you sure you want to stop the calibration?"
-msgstr "您確定要停止校準嗎？"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "您確定要取消列印嗎？"
@@ -194,6 +191,9 @@ msgstr "冷卻"
 msgid "Couldn't add network"
 msgstr ""
 
+msgid "Current"
+msgstr ""
+
 msgid "Current percentage and graph line"
 msgstr "當前百分比和折線圖"
 
@@ -202,6 +202,9 @@ msgstr "DPMS 載入失敗並已停用"
 
 msgid "Date"
 msgstr "日期"
+
+msgid "Delete"
+msgstr "删除"
 
 msgid "Delete Directory?"
 msgstr "刪除資料夾？"
@@ -223,9 +226,6 @@ msgstr "擠出長度（mm）"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
-
-msgid "Do you want to let KlipperScreen try to solve the issue?"
 msgstr ""
 
 #, python-format
@@ -264,6 +264,9 @@ msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "估算剩餘時間方式"
+
+msgid "Example"
+msgstr ""
 
 msgid "Exclude Object"
 msgstr "排除目標"
@@ -406,9 +409,6 @@ msgstr "啟動PID校準："
 msgid "Input Shaper"
 msgstr "共振補償"
 
-msgid "Insufficient priviledges detected"
-msgstr ""
-
 msgid "Insufficient privileges"
 msgstr ""
 
@@ -439,6 +439,9 @@ msgstr "這可能需要5分鐘以上的時間，這取決於加熱器的功率�
 msgid "It's possible that the configuration is not correct"
 msgstr ""
 
+msgid "Job Status"
+msgstr ""
+
 msgid "Klipper Restart"
 msgstr "重啟Klipper"
 
@@ -466,6 +469,9 @@ msgstr "介面語言"
 
 msgid "Large"
 msgstr "大"
+
+msgid "Last Duration"
+msgstr ""
 
 msgid "Last Used"
 msgstr "最後使用"
@@ -542,9 +548,6 @@ msgstr "記憶體"
 msgid "Menu"
 msgstr "選單"
 
-msgid "Mesh calibrate"
-msgstr "床網校準"
-
 msgid "Minimum Cruise Ratio"
 msgstr ""
 
@@ -590,6 +593,9 @@ msgstr "新的值"
 msgid "No elegible macros:"
 msgstr "無可用巨集:"
 
+msgid "No info available"
+msgstr ""
+
 msgid "No mesh has been loaded"
 msgstr "未載入網床"
 
@@ -609,6 +615,9 @@ msgid "Notification log empty"
 msgstr ""
 
 msgid "Notifications"
+msgstr ""
+
+msgid "Nozzle diameter"
 msgstr ""
 
 msgid "Only for the move panel"
@@ -655,11 +664,14 @@ msgstr "電源"
 msgid "Power On Printer"
 msgstr "啟動列印機"
 
+msgid "Pressure Advance"
+msgstr "壓力推進"
+
 msgid "Pressure Advance:"
 msgstr "壓力推進："
 
-msgid "Pressure Advance"
-msgstr "壓力推進"
+msgid "Pressure advance"
+msgstr ""
 
 msgid "Print"
 msgstr "列印"
@@ -809,6 +821,9 @@ msgstr "切片軟體："
 msgid "Small"
 msgstr "小"
 
+msgid "Smooth time"
+msgstr ""
+
 msgid "Speed (mm/s)"
 msgstr "速度(mm/s)"
 
@@ -899,13 +914,13 @@ msgstr "更新"
 msgid "Updating"
 msgstr "正在更新"
 
-msgid "Uploaded"
-msgstr "上傳於"
-
 msgid "Useful for un-responsive touchscreens"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
+
+msgid "Working"
 msgstr ""
 
 msgid "XY Move Speed (mm/s)"
@@ -937,6 +952,9 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] ""
 
+msgid "g"
+msgstr ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "小時"
@@ -963,9 +981,21 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+msgid "s"
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
+
+#~ msgid "Are you sure you want to stop the calibration?"
+#~ msgstr "您確定要停止校準嗎？"
+
+#~ msgid "Mesh calibrate"
+#~ msgstr "床網校準"
+
+#~ msgid "Uploaded"
+#~ msgstr "上傳於"
 
 #~ msgid "Ended official support in June 2023"
 #~ msgstr "2023年6月結束官方支持"
@@ -1052,9 +1082,6 @@ msgstr[0] ""
 #~ msgid "Initializing"
 #~ msgstr "初始化"
 
-#~ msgid "Delete"
-#~ msgstr "删除"
-
 #~ msgid "Off"
 #~ msgstr "关闭"
 
@@ -1091,9 +1118,6 @@ msgstr[0] ""
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6 地址"
-
-#~ msgid "Duration Only"
-#~ msgstr "持续时间"
 
 #~ msgid "Klipper Version"
 #~ msgstr "Klipper 版本"

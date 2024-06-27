@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"POT-Creation-Date: 2024-06-27 18:24-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -64,9 +64,6 @@ msgstr "対象を除外しますか？"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "緊急停止しますか？"
-
-msgid "Are you sure you want to stop the calibration?"
-msgstr ""
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "印刷を中断しますか？"
@@ -189,6 +186,9 @@ msgstr "クールダウン"
 msgid "Couldn't add network"
 msgstr ""
 
+msgid "Current"
+msgstr ""
+
 msgid "Current percentage and graph line"
 msgstr ""
 
@@ -197,6 +197,9 @@ msgstr ""
 
 msgid "Date"
 msgstr "日付"
+
+msgid "Delete"
+msgstr ""
 
 msgid "Delete Directory?"
 msgstr ""
@@ -218,9 +221,6 @@ msgstr "距離(mm)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
-
-msgid "Do you want to let KlipperScreen try to solve the issue?"
 msgstr ""
 
 #, python-format
@@ -259,6 +259,9 @@ msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "予定時刻"
+
+msgid "Example"
+msgstr ""
 
 msgid "Exclude Object"
 msgstr "対象の除外"
@@ -401,9 +404,6 @@ msgstr ""
 msgid "Input Shaper"
 msgstr ""
 
-msgid "Insufficient priviledges detected"
-msgstr ""
-
 msgid "Insufficient privileges"
 msgstr ""
 
@@ -434,6 +434,9 @@ msgstr ""
 msgid "It's possible that the configuration is not correct"
 msgstr ""
 
+msgid "Job Status"
+msgstr ""
+
 msgid "Klipper Restart"
 msgstr "Klipperを再起動する"
 
@@ -461,6 +464,9 @@ msgstr "言語"
 
 msgid "Large"
 msgstr "大"
+
+msgid "Last Duration"
+msgstr ""
 
 msgid "Last Used"
 msgstr ""
@@ -537,9 +543,6 @@ msgstr ""
 msgid "Menu"
 msgstr "メニュー"
 
-msgid "Mesh calibrate"
-msgstr "メッシュ較正"
-
 msgid "Minimum Cruise Ratio"
 msgstr ""
 
@@ -585,6 +588,9 @@ msgstr "新"
 msgid "No elegible macros:"
 msgstr ""
 
+msgid "No info available"
+msgstr ""
+
 msgid "No mesh has been loaded"
 msgstr ""
 
@@ -604,6 +610,9 @@ msgid "Notification log empty"
 msgstr ""
 
 msgid "Notifications"
+msgstr ""
+
+msgid "Nozzle diameter"
 msgstr ""
 
 msgid "Only for the move panel"
@@ -650,10 +659,13 @@ msgstr "電源"
 msgid "Power On Printer"
 msgstr "プリンター電源"
 
+msgid "Pressure Advance"
+msgstr ""
+
 msgid "Pressure Advance:"
 msgstr ""
 
-msgid "Pressure Advance"
+msgid "Pressure advance"
 msgstr ""
 
 msgid "Print"
@@ -804,6 +816,9 @@ msgstr "スライサー:"
 msgid "Small"
 msgstr "小"
 
+msgid "Smooth time"
+msgstr ""
+
 msgid "Speed (mm/s)"
 msgstr ""
 
@@ -894,13 +909,13 @@ msgstr "更新"
 msgid "Updating"
 msgstr "更新中"
 
-msgid "Uploaded"
-msgstr "アップロード済"
-
 msgid "Useful for un-responsive touchscreens"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
+msgstr ""
+
+msgid "Working"
 msgstr ""
 
 msgid "XY Move Speed (mm/s)"
@@ -932,6 +947,9 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] ""
 
+msgid "g"
+msgstr ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] ""
@@ -958,9 +976,18 @@ msgstr ""
 msgid "mm³/s"
 msgstr ""
 
+msgid "s"
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
+
+#~ msgid "Mesh calibrate"
+#~ msgstr "メッシュ較正"
+
+#~ msgid "Uploaded"
+#~ msgstr "アップロード済"
 
 #~ msgid "Hidden"
 #~ msgstr "非表示"

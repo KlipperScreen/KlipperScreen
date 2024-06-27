@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"POT-Creation-Date: 2024-06-27 18:24-0300\n"
 "PO-Revision-Date: 2024-06-21 18:03+0000\n"
 "Last-Translator: Selim <technical50@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -69,9 +69,6 @@ msgstr "Nesneyi hariç tutmak istediğinizden emin misiniz?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Acil Durdurma'yı çalıştırmak istediğinizden emin misiniz?"
-
-msgid "Are you sure you want to stop the calibration?"
-msgstr "Kalibrasyonu durdurmak istediğinizden emin misiniz?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Bu baskıyı iptal etmek istediğinizden emin misiniz?"
@@ -194,6 +191,9 @@ msgstr "Soğutma"
 msgid "Couldn't add network"
 msgstr "Ağ eklenemedi"
 
+msgid "Current"
+msgstr ""
+
 msgid "Current percentage and graph line"
 msgstr "Mevcut yüzde ve grafik çizgisi"
 
@@ -202,6 +202,9 @@ msgstr "DPMS yüklenemedi ve devre dışı bırakıldı"
 
 msgid "Date"
 msgstr "Tarih"
+
+msgid "Delete"
+msgstr "Sil"
 
 msgid "Delete Directory?"
 msgstr "Dizini Sil?"
@@ -224,9 +227,6 @@ msgstr "Uzaklık (mm)"
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
 msgstr "%s'i unutmak mı yoksa bağlantısını kesmek mi istiyorsunuz?"
-
-msgid "Do you want to let KlipperScreen try to solve the issue?"
-msgstr "KlipperScreen'in sorunu çözmeye çalışmasına izin vermek ister misiniz?"
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -264,6 +264,9 @@ msgstr "Tahmini Süre"
 
 msgid "Estimated Time Method"
 msgstr "Tahmini Zaman Metodu"
+
+msgid "Example"
+msgstr ""
 
 msgid "Exclude Object"
 msgstr "Nesneyi Hariç Tut"
@@ -406,9 +409,6 @@ msgstr "PID kalibrasyonu başlatın:"
 msgid "Input Shaper"
 msgstr "İvme Düzenleyicisi"
 
-msgid "Insufficient priviledges detected"
-msgstr "Yetersiz ayrıcalık algılandı"
-
 msgid "Insufficient privileges"
 msgstr "Yetersiz yetkilendirmeler"
 
@@ -439,6 +439,9 @@ msgstr "Isıtıcı gücüne bağlı olarak 5 dakikadan fazla sürebilir."
 msgid "It's possible that the configuration is not correct"
 msgstr "Bu yapılandırma doğru olmayabilir"
 
+msgid "Job Status"
+msgstr ""
+
 msgid "Klipper Restart"
 msgstr "Klipper Yeniden başlat"
 
@@ -466,6 +469,9 @@ msgstr "Dil"
 
 msgid "Large"
 msgstr "Büyük"
+
+msgid "Last Duration"
+msgstr ""
 
 msgid "Last Used"
 msgstr "Son kullanılan"
@@ -542,9 +548,6 @@ msgstr "Hafıza"
 msgid "Menu"
 msgstr "Menü"
 
-msgid "Mesh calibrate"
-msgstr "Tabla haritası Kalibre et"
-
 msgid "Minimum Cruise Ratio"
 msgstr "Minimum Gezinme Oranı"
 
@@ -590,6 +593,9 @@ msgstr "Yeni"
 msgid "No elegible macros:"
 msgstr "Uygun makro yok:"
 
+msgid "No info available"
+msgstr ""
+
 msgid "No mesh has been loaded"
 msgstr "Herhangi bir haritalandırma yüklenmedi"
 
@@ -610,6 +616,9 @@ msgstr "Geçmiş bildirim yok"
 
 msgid "Notifications"
 msgstr "Bildirimler"
+
+msgid "Nozzle diameter"
+msgstr ""
 
 msgid "Only for the move panel"
 msgstr "Sadece paneli taşımak için"
@@ -656,11 +665,14 @@ msgstr "Güç"
 msgid "Power On Printer"
 msgstr "Yazıcıyı aç"
 
+msgid "Pressure Advance"
+msgstr "Akış Dengeleme"
+
 msgid "Pressure Advance:"
 msgstr "Akış Dengeleme:"
 
-msgid "Pressure Advance"
-msgstr "Akış Dengeleme"
+msgid "Pressure advance"
+msgstr ""
 
 msgid "Print"
 msgstr "Yazdır"
@@ -810,6 +822,9 @@ msgstr "Dilimleyici:"
 msgid "Small"
 msgstr "Küçük"
 
+msgid "Smooth time"
+msgstr ""
+
 msgid "Speed (mm/s)"
 msgstr "Hız (mm/s)"
 
@@ -900,14 +915,14 @@ msgstr "Güncelle"
 msgid "Updating"
 msgstr "Güncelleniyor"
 
-msgid "Uploaded"
-msgstr "Yüklendi"
-
 msgid "Useful for un-responsive touchscreens"
 msgstr "Yanıt vermeyen dokunmatik ekranlar için kullanışlıdır"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC, Stream deneyin tarafından desteklenmez"
+
+msgid "Working"
+msgstr ""
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Hareket hızı (mm/s)"
@@ -940,6 +955,9 @@ msgid_plural "days"
 msgstr[0] "gün"
 msgstr[1] "günler"
 
+msgid "g"
+msgstr ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "saat"
@@ -968,10 +986,29 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+msgid "s"
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "saniye"
 msgstr[1] "saniyeler"
+
+#~ msgid "Are you sure you want to stop the calibration?"
+#~ msgstr "Kalibrasyonu durdurmak istediğinizden emin misiniz?"
+
+#~ msgid "Do you want to let KlipperScreen try to solve the issue?"
+#~ msgstr ""
+#~ "KlipperScreen'in sorunu çözmeye çalışmasına izin vermek ister misiniz?"
+
+#~ msgid "Insufficient priviledges detected"
+#~ msgstr "Yetersiz ayrıcalık algılandı"
+
+#~ msgid "Mesh calibrate"
+#~ msgstr "Tabla haritası Kalibre et"
+
+#~ msgid "Uploaded"
+#~ msgstr "Yüklendi"
 
 #~ msgid "Ended official support in June 2023"
 #~ msgstr "Resmi destek Haziran 2023 tarihinde sona ermiştir"
@@ -1083,9 +1120,6 @@ msgstr[1] "saniyeler"
 
 #~ msgid "Initializing"
 #~ msgstr "Başlatılıyor"
-
-#~ msgid "Delete"
-#~ msgstr "Sil"
 
 #~ msgid "Off"
 #~ msgstr "Kapa"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"POT-Creation-Date: 2024-06-27 18:24-0300\n"
 "PO-Revision-Date: 2024-06-01 12:09+0000\n"
 "Last-Translator: Niklas Tecklenborg <niklas.tecklenborg@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
@@ -69,9 +69,6 @@ msgstr "Möchtest du das Objekt wirklich ausschließen?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Bist du sicher, dass du den Not-Aus ausführen möchtest?"
-
-msgid "Are you sure you want to stop the calibration?"
-msgstr "Kalibrierung wirklich abbrechen?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Möchtest du diesen Druck wirklich abbrechen?"
@@ -194,6 +191,9 @@ msgstr "Abkühlen"
 msgid "Couldn't add network"
 msgstr ""
 
+msgid "Current"
+msgstr ""
+
 msgid "Current percentage and graph line"
 msgstr "Momentane Prozent und Diagramm Linie"
 
@@ -202,6 +202,9 @@ msgstr "DPMS konnte nicht geladen werden und wurde deaktiviert"
 
 msgid "Date"
 msgstr "Datum"
+
+msgid "Delete"
+msgstr "Löschen"
 
 msgid "Delete Directory?"
 msgstr "Ordner löschen?"
@@ -223,9 +226,6 @@ msgstr "Entfernung (mm)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
-
-msgid "Do you want to let KlipperScreen try to solve the issue?"
 msgstr ""
 
 #, python-format
@@ -264,6 +264,9 @@ msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Verbleibende Zeit"
+
+msgid "Example"
+msgstr ""
 
 msgid "Exclude Object"
 msgstr "Objekt ausschließen"
@@ -406,9 +409,6 @@ msgstr "Initiieren einer PID-Kalibrierung für:"
 msgid "Input Shaper"
 msgstr "Input Shaper"
 
-msgid "Insufficient priviledges detected"
-msgstr ""
-
 msgid "Insufficient privileges"
 msgstr ""
 
@@ -439,6 +439,9 @@ msgstr "Je nach Leistung der Heizung kann dies mehr als 5 Minuten dauern."
 msgid "It's possible that the configuration is not correct"
 msgstr "Es ist möglich das die Konfiguration nicht korrekt ist"
 
+msgid "Job Status"
+msgstr ""
+
 msgid "Klipper Restart"
 msgstr "Klipper Neustart"
 
@@ -468,6 +471,9 @@ msgstr "Sprache"
 
 msgid "Large"
 msgstr "Groß"
+
+msgid "Last Duration"
+msgstr ""
 
 msgid "Last Used"
 msgstr "Zuletzt verwendet"
@@ -544,9 +550,6 @@ msgstr "Speicher"
 msgid "Menu"
 msgstr "Menü"
 
-msgid "Mesh calibrate"
-msgstr "Mesh kalibrieren"
-
 msgid "Minimum Cruise Ratio"
 msgstr "Minimale Cruise Ratio"
 
@@ -592,6 +595,9 @@ msgstr "Neu"
 msgid "No elegible macros:"
 msgstr "Keine wählbaren Makros:"
 
+msgid "No info available"
+msgstr ""
+
 msgid "No mesh has been loaded"
 msgstr "Es wurde kein Netz geladen"
 
@@ -612,6 +618,9 @@ msgstr "Benachrichtigungslog leer"
 
 msgid "Notifications"
 msgstr "Benachrichtigungen"
+
+msgid "Nozzle diameter"
+msgstr ""
 
 msgid "Only for the move panel"
 msgstr "Nur für das Bewegungspanel"
@@ -658,11 +667,14 @@ msgstr "Ein"
 msgid "Power On Printer"
 msgstr "Drucker einschalten"
 
+msgid "Pressure Advance"
+msgstr "Druckvorlauf"
+
 msgid "Pressure Advance:"
 msgstr "Druckvorlauf:"
 
-msgid "Pressure Advance"
-msgstr "Druckvorlauf"
+msgid "Pressure advance"
+msgstr ""
 
 msgid "Print"
 msgstr "Druck"
@@ -812,6 +824,9 @@ msgstr "Slicer:"
 msgid "Small"
 msgstr "Klein"
 
+msgid "Smooth time"
+msgstr ""
+
 msgid "Speed (mm/s)"
 msgstr "Geschwindigkeit (mm/s)"
 
@@ -906,14 +921,14 @@ msgstr "Aktualsieren"
 msgid "Updating"
 msgstr "Aktualisiere"
 
-msgid "Uploaded"
-msgstr "Hochgeladen"
-
 msgid "Useful for un-responsive touchscreens"
 msgstr "Nützlich für nicht reagierende Touchscreens"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC wird vom Backend nicht unterstützt"
+
+msgid "Working"
+msgstr ""
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Bewegungsgeschwindigkeit (mm/s)"
@@ -946,6 +961,9 @@ msgid_plural "days"
 msgstr[0] "Tag"
 msgstr[1] "Tage"
 
+msgid "g"
+msgstr ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "Stunde"
@@ -974,10 +992,22 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+msgid "s"
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "sekunde"
 msgstr[1] "sekunden"
+
+#~ msgid "Are you sure you want to stop the calibration?"
+#~ msgstr "Kalibrierung wirklich abbrechen?"
+
+#~ msgid "Mesh calibrate"
+#~ msgstr "Mesh kalibrieren"
+
+#~ msgid "Uploaded"
+#~ msgstr "Hochgeladen"
 
 #~ msgid "Ended official support in June 2023"
 #~ msgstr "Offizieller Support wurde im Juni 2023 eingestellt"
@@ -1090,9 +1120,6 @@ msgstr[1] "sekunden"
 #~ msgid "Initializing"
 #~ msgstr "Initialisierung"
 
-#~ msgid "Delete"
-#~ msgstr "Löschen"
-
 #~ msgid "Off"
 #~ msgstr "Aus"
 
@@ -1129,9 +1156,6 @@ msgstr[1] "sekunden"
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6"
-
-#~ msgid "Duration Only"
-#~ msgstr "Reine Druckzeit"
 
 #~ msgid "Klipper Version"
 #~ msgstr "Klipper Version"

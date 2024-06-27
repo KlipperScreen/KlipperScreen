@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"POT-Creation-Date: 2024-06-27 18:24-0300\n"
 "PO-Revision-Date: 2024-04-19 23:07+0000\n"
 "Last-Translator: Matheus Mösken Diegues <dmosken2015@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -69,9 +69,6 @@ msgstr "Tem certeza de que deseja excluir o objeto?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Executar Parada de Emergência ?"
-
-msgid "Are you sure you want to stop the calibration?"
-msgstr ""
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Cancelar a impressão ?"
@@ -194,6 +191,9 @@ msgstr "Resfriar"
 msgid "Couldn't add network"
 msgstr ""
 
+msgid "Current"
+msgstr ""
+
 msgid "Current percentage and graph line"
 msgstr ""
 
@@ -202,6 +202,9 @@ msgstr "Gerenciador de economia de energia não disponível"
 
 msgid "Date"
 msgstr "Data"
+
+msgid "Delete"
+msgstr ""
 
 msgid "Delete Directory?"
 msgstr "Deletar diretório?"
@@ -223,9 +226,6 @@ msgstr "Distancia (mm)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
-
-msgid "Do you want to let KlipperScreen try to solve the issue?"
 msgstr ""
 
 #, python-format
@@ -264,6 +264,9 @@ msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Método de Tempo Estimado"
+
+msgid "Example"
+msgstr ""
 
 msgid "Exclude Object"
 msgstr "Excluir Objeto"
@@ -406,9 +409,6 @@ msgstr "Iniciar calibração do PID para:"
 msgid "Input Shaper"
 msgstr "Moldagem Assistiva"
 
-msgid "Insufficient priviledges detected"
-msgstr ""
-
 msgid "Insufficient privileges"
 msgstr ""
 
@@ -440,6 +440,9 @@ msgstr ""
 msgid "It's possible that the configuration is not correct"
 msgstr ""
 
+msgid "Job Status"
+msgstr ""
+
 msgid "Klipper Restart"
 msgstr "Reiniciar Klipper"
 
@@ -469,6 +472,9 @@ msgstr "Idioma"
 
 msgid "Large"
 msgstr "Grande"
+
+msgid "Last Duration"
+msgstr ""
 
 msgid "Last Used"
 msgstr "Último Usado"
@@ -545,9 +551,6 @@ msgstr ""
 msgid "Menu"
 msgstr "Menu"
 
-msgid "Mesh calibrate"
-msgstr "Calibrar Malha"
-
 msgid "Minimum Cruise Ratio"
 msgstr ""
 
@@ -593,6 +596,9 @@ msgstr "Novo"
 msgid "No elegible macros:"
 msgstr "Sem macros elegíveis:"
 
+msgid "No info available"
+msgstr ""
+
 msgid "No mesh has been loaded"
 msgstr "Nenhuma malha foi carregada"
 
@@ -613,6 +619,9 @@ msgstr "Log de notificação vazio"
 
 msgid "Notifications"
 msgstr "Notificações"
+
+msgid "Nozzle diameter"
+msgstr ""
 
 msgid "Only for the move panel"
 msgstr ""
@@ -659,11 +668,14 @@ msgstr "Ligar"
 msgid "Power On Printer"
 msgstr "Ligar a impressora"
 
+msgid "Pressure Advance"
+msgstr "Avanço de Pressão"
+
 msgid "Pressure Advance:"
 msgstr "Avanço de Pressão:"
 
-msgid "Pressure Advance"
-msgstr "Avanço de Pressão"
+msgid "Pressure advance"
+msgstr ""
 
 msgid "Print"
 msgstr "Imprimir"
@@ -813,6 +825,9 @@ msgstr "Fatiador:"
 msgid "Small"
 msgstr "Pequeno"
 
+msgid "Smooth time"
+msgstr ""
+
 msgid "Speed (mm/s)"
 msgstr "Velocidade (mm/s)"
 
@@ -903,14 +918,14 @@ msgstr "Atualizar"
 msgid "Updating"
 msgstr "Atualizando"
 
-msgid "Uploaded"
-msgstr "Carregado"
-
 msgid "Useful for un-responsive touchscreens"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC não é suportado pela tentativa de Stream do backend"
+
+msgid "Working"
+msgstr ""
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Velocidade de Movimento XY (mm/s)"
@@ -943,6 +958,9 @@ msgid_plural "days"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "g"
+msgstr ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "hora"
@@ -971,10 +989,19 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+msgid "s"
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "Mesh calibrate"
+#~ msgstr "Calibrar Malha"
+
+#~ msgid "Uploaded"
+#~ msgstr "Carregado"
 
 #~ msgid "Ended official support in June 2023"
 #~ msgstr "Suporte oficial encerrado em Junho de 2023"

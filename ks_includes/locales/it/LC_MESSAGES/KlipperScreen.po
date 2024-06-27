@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"POT-Creation-Date: 2024-06-27 18:24-0300\n"
 "PO-Revision-Date: 2024-04-24 20:07+0000\n"
 "Last-Translator: Giadej <Giadej@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -64,9 +64,6 @@ msgstr "Sei sicuro di voler escludere l'oggetto?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Sei sicuro di voler eseguire l'Arresto di Emergenza?"
-
-msgid "Are you sure you want to stop the calibration?"
-msgstr ""
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Sei sicuro di voler annullare questa stampa?"
@@ -189,6 +186,9 @@ msgstr "Raffreddare"
 msgid "Couldn't add network"
 msgstr ""
 
+msgid "Current"
+msgstr ""
+
 msgid "Current percentage and graph line"
 msgstr ""
 
@@ -197,6 +197,9 @@ msgstr "DPMS non è stato caricato ed è stato disabilitato"
 
 msgid "Date"
 msgstr "Data"
+
+msgid "Delete"
+msgstr "Elimina"
 
 msgid "Delete Directory?"
 msgstr "Eliminare Directory?"
@@ -218,9 +221,6 @@ msgstr "Distanza (mm)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
-
-msgid "Do you want to let KlipperScreen try to solve the issue?"
 msgstr ""
 
 #, python-format
@@ -259,6 +259,9 @@ msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Metodo Tempo Stimato"
+
+msgid "Example"
+msgstr ""
 
 msgid "Exclude Object"
 msgstr "Escludi Oggetto"
@@ -401,9 +404,6 @@ msgstr "Inizia una calibrazione PID per:"
 msgid "Input Shaper"
 msgstr "Input Shaper"
 
-msgid "Insufficient priviledges detected"
-msgstr ""
-
 msgid "Insufficient privileges"
 msgstr ""
 
@@ -435,6 +435,9 @@ msgstr ""
 msgid "It's possible that the configuration is not correct"
 msgstr ""
 
+msgid "Job Status"
+msgstr ""
+
 msgid "Klipper Restart"
 msgstr "Riavvia Klipper"
 
@@ -464,6 +467,9 @@ msgstr "Lingua"
 
 msgid "Large"
 msgstr "Grande"
+
+msgid "Last Duration"
+msgstr ""
 
 msgid "Last Used"
 msgstr "Ultimo Utilizzo"
@@ -540,9 +546,6 @@ msgstr ""
 msgid "Menu"
 msgstr "Menù"
 
-msgid "Mesh calibrate"
-msgstr "Calibrazione mesh"
-
 msgid "Minimum Cruise Ratio"
 msgstr "Cruise Ratio Minimo"
 
@@ -588,6 +591,9 @@ msgstr "Nuovo"
 msgid "No elegible macros:"
 msgstr "Nessuna macro elegibile:"
 
+msgid "No info available"
+msgstr ""
+
 msgid "No mesh has been loaded"
 msgstr "Nessuna besh_mesh caricata"
 
@@ -608,6 +614,9 @@ msgstr "Log notifiche vuoto"
 
 msgid "Notifications"
 msgstr "Notifiche"
+
+msgid "Nozzle diameter"
+msgstr ""
 
 msgid "Only for the move panel"
 msgstr ""
@@ -654,11 +663,14 @@ msgstr "Power"
 msgid "Power On Printer"
 msgstr "Accendi la stampante"
 
+msgid "Pressure Advance"
+msgstr "Pressure Advance"
+
 msgid "Pressure Advance:"
 msgstr "Pressure Advance:"
 
-msgid "Pressure Advance"
-msgstr "Pressure Advance"
+msgid "Pressure advance"
+msgstr ""
 
 msgid "Print"
 msgstr "Stampa"
@@ -808,6 +820,9 @@ msgstr "Slicer:"
 msgid "Small"
 msgstr "Piccolo"
 
+msgid "Smooth time"
+msgstr ""
+
 msgid "Speed (mm/s)"
 msgstr "Velocità (mm/s)"
 
@@ -898,14 +913,14 @@ msgstr "Aggiorna"
 msgid "Updating"
 msgstr "Aggiornamento"
 
-msgid "Uploaded"
-msgstr "Caricato"
-
 msgid "Useful for un-responsive touchscreens"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC non è supportato dal backend che sta tentando lo stream"
+
+msgid "Working"
+msgstr ""
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Velocità movimento XY (mm/s)"
@@ -938,6 +953,9 @@ msgid_plural "days"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "g"
+msgstr ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "ora"
@@ -966,10 +984,19 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+msgid "s"
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "Mesh calibrate"
+#~ msgstr "Calibrazione mesh"
+
+#~ msgid "Uploaded"
+#~ msgstr "Caricato"
 
 #~ msgid "Ended official support in June 2023"
 #~ msgstr "Supporto ufficiale terminato in giugno 2023"
@@ -1077,9 +1104,6 @@ msgstr[1] ""
 #~ msgid "Initializing"
 #~ msgstr "Inizializzo"
 
-#~ msgid "Delete"
-#~ msgstr "Elimina"
-
 #~ msgid "Off"
 #~ msgstr "Off"
 
@@ -1116,9 +1140,6 @@ msgstr[1] ""
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6"
-
-#~ msgid "Duration Only"
-#~ msgstr "Solo Durata"
 
 #~ msgid "Klipper Version"
 #~ msgstr "Versione Klipper"

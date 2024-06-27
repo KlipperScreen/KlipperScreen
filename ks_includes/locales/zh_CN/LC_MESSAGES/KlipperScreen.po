@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"POT-Creation-Date: 2024-06-27 18:24-0300\n"
 "PO-Revision-Date: 2024-06-19 21:09+0000\n"
 "Last-Translator: Will Zhai <willzhai55@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -69,9 +69,6 @@ msgstr "您确定要排除该对象吗？"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "您确定要紧急停止吗？"
-
-msgid "Are you sure you want to stop the calibration?"
-msgstr "您确定要停止校准吗？"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "您确定要取消打印吗？"
@@ -194,6 +191,9 @@ msgstr "冷却"
 msgid "Couldn't add network"
 msgstr "无法添加网络"
 
+msgid "Current"
+msgstr ""
+
 msgid "Current percentage and graph line"
 msgstr "当前百分比和走线"
 
@@ -202,6 +202,9 @@ msgstr "屏幕省电管理系统无法加载并已禁用"
 
 msgid "Date"
 msgstr "日期"
+
+msgid "Delete"
+msgstr "删除"
 
 msgid "Delete Directory?"
 msgstr "删除文件夹？"
@@ -224,9 +227,6 @@ msgstr "挤出长度（mm）"
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
 msgstr "您要忘记或断开%s的连接吗？"
-
-msgid "Do you want to let KlipperScreen try to solve the issue?"
-msgstr "你想让KlipperScreen尝试解决这个问题吗？"
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -264,6 +264,9 @@ msgstr "预估时间"
 
 msgid "Estimated Time Method"
 msgstr "估算剩余时间方式"
+
+msgid "Example"
+msgstr ""
 
 msgid "Exclude Object"
 msgstr "排除对象"
@@ -406,9 +409,6 @@ msgstr "启动PID校准："
 msgid "Input Shaper"
 msgstr "共振补偿"
 
-msgid "Insufficient priviledges detected"
-msgstr "检测到权限不足"
-
 msgid "Insufficient privileges"
 msgstr "权限不足"
 
@@ -439,6 +439,9 @@ msgstr "这可能需要5分钟以上的时间，这取决于加热器的功率�
 msgid "It's possible that the configuration is not correct"
 msgstr "设置文件可能存在错误"
 
+msgid "Job Status"
+msgstr ""
+
 msgid "Klipper Restart"
 msgstr "重启Klipper"
 
@@ -466,6 +469,9 @@ msgstr "界面语言"
 
 msgid "Large"
 msgstr "大"
+
+msgid "Last Duration"
+msgstr ""
 
 msgid "Last Used"
 msgstr "上次使用"
@@ -542,9 +548,6 @@ msgstr "存储"
 msgid "Menu"
 msgstr "菜单"
 
-msgid "Mesh calibrate"
-msgstr "床网校准"
-
 msgid "Minimum Cruise Ratio"
 msgstr "最小匀速运动比例"
 
@@ -590,6 +593,9 @@ msgstr "新的值"
 msgid "No elegible macros:"
 msgstr "无可用宏："
 
+msgid "No info available"
+msgstr ""
+
 msgid "No mesh has been loaded"
 msgstr "未加载网床"
 
@@ -610,6 +616,9 @@ msgstr "通知日志为空"
 
 msgid "Notifications"
 msgstr "通知"
+
+msgid "Nozzle diameter"
+msgstr ""
 
 msgid "Only for the move panel"
 msgstr "仅适用于移动面板"
@@ -655,11 +664,14 @@ msgstr "电源"
 msgid "Power On Printer"
 msgstr "打印机通电"
 
+msgid "Pressure Advance"
+msgstr "压力提前"
+
 msgid "Pressure Advance:"
 msgstr "压力提前："
 
-msgid "Pressure Advance"
-msgstr "压力提前"
+msgid "Pressure advance"
+msgstr ""
 
 msgid "Print"
 msgstr "打印"
@@ -809,6 +821,9 @@ msgstr "切片软件："
 msgid "Small"
 msgstr "小"
 
+msgid "Smooth time"
+msgstr ""
+
 msgid "Speed (mm/s)"
 msgstr "速度（mm/s）"
 
@@ -899,14 +914,14 @@ msgstr "更新"
 msgid "Updating"
 msgstr "正在更新"
 
-msgid "Uploaded"
-msgstr "上传于"
-
 msgid "Useful for un-responsive touchscreens"
 msgstr "触屏响应改善"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "不支持传送WebRTC至后台"
+
+msgid "Working"
+msgstr ""
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY轴移动速度（mm/s）"
@@ -937,6 +952,9 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] "天"
 
+msgid "g"
+msgstr ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "小时"
@@ -963,9 +981,27 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+msgid "s"
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "第二"
+
+#~ msgid "Are you sure you want to stop the calibration?"
+#~ msgstr "您确定要停止校准吗？"
+
+#~ msgid "Do you want to let KlipperScreen try to solve the issue?"
+#~ msgstr "你想让KlipperScreen尝试解决这个问题吗？"
+
+#~ msgid "Insufficient priviledges detected"
+#~ msgstr "检测到权限不足"
+
+#~ msgid "Mesh calibrate"
+#~ msgstr "床网校准"
+
+#~ msgid "Uploaded"
+#~ msgstr "上传于"
 
 #~ msgid "Ended official support in June 2023"
 #~ msgstr "2023年6月结束官方支持"
@@ -1058,9 +1094,6 @@ msgstr[0] "第二"
 #~ msgid "Initializing"
 #~ msgstr "初始化"
 
-#~ msgid "Delete"
-#~ msgstr "删除"
-
 #~ msgid "Off"
 #~ msgstr "关闭"
 
@@ -1097,9 +1130,6 @@ msgstr[0] "第二"
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6 地址"
-
-#~ msgid "Duration Only"
-#~ msgstr "持续时间"
 
 #~ msgid "Klipper Version"
 #~ msgstr "Klipper 版本"

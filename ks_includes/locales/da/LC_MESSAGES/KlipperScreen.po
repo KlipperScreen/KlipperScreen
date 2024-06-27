@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"POT-Creation-Date: 2024-06-27 18:24-0300\n"
 "PO-Revision-Date: 2024-06-20 22:09+0000\n"
 "Last-Translator: Hector Foss <hectorfoss@gmail.com>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -64,9 +64,6 @@ msgstr "Er du sikker på, at du ønsker at ekskludere dette objekt?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Er du sikker på, at du vil aktivere nødstop?"
-
-msgid "Are you sure you want to stop the calibration?"
-msgstr "Er du sikker på, at du vil stoppe kalibreringen?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Er du sikker på, at du vil annullere det igangværende print?"
@@ -189,6 +186,9 @@ msgstr "Afkøling"
 msgid "Couldn't add network"
 msgstr "Kunne ikke tilføje netværk"
 
+msgid "Current"
+msgstr ""
+
 msgid "Current percentage and graph line"
 msgstr "Nuværende procent og graf linje"
 
@@ -197,6 +197,9 @@ msgstr "DPMS kunne ikke indlæses og er blevet deaktiveret"
 
 msgid "Date"
 msgstr "Dato"
+
+msgid "Delete"
+msgstr "Slet"
 
 msgid "Delete Directory?"
 msgstr "Slet mappe?"
@@ -219,9 +222,6 @@ msgstr "Længde (mm)"
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
 msgstr "Vil du glemme eller frakoble %s?"
-
-msgid "Do you want to let KlipperScreen try to solve the issue?"
-msgstr "Vil du lade KlipperScreen forsøge at løse problemet?"
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -259,6 +259,9 @@ msgstr "Anslået tid"
 
 msgid "Estimated Time Method"
 msgstr "Metode til beregning af tid"
+
+msgid "Example"
+msgstr ""
 
 msgid "Exclude Object"
 msgstr "Ekskludér objekt"
@@ -401,9 +404,6 @@ msgstr "Start PID kalibrering for:"
 msgid "Input Shaper"
 msgstr "Input Shaper"
 
-msgid "Insufficient priviledges detected"
-msgstr "Utilstrækkelige priviledges fundet"
-
 msgid "Insufficient privileges"
 msgstr "Utilstrækkelige privilegier"
 
@@ -434,6 +434,9 @@ msgstr "Det kan tage mere end 5 minutter, afhængigt af opvarmerens styrke."
 msgid "It's possible that the configuration is not correct"
 msgstr "Det er muligt, at konfigurationen ikke er korrekt"
 
+msgid "Job Status"
+msgstr ""
+
 msgid "Klipper Restart"
 msgstr "Klipper Genstart"
 
@@ -463,6 +466,9 @@ msgstr "Sprog"
 
 msgid "Large"
 msgstr "Stor"
+
+msgid "Last Duration"
+msgstr ""
 
 msgid "Last Used"
 msgstr "Sidst brugt"
@@ -539,9 +545,6 @@ msgstr "Hukommelse"
 msgid "Menu"
 msgstr "Menu"
 
-msgid "Mesh calibrate"
-msgstr "Mesh-kalibrering"
-
 msgid "Minimum Cruise Ratio"
 msgstr "Minimum Cruise Ratio"
 
@@ -587,6 +590,9 @@ msgstr "Ny"
 msgid "No elegible macros:"
 msgstr "Ingen mulige makroer:"
 
+msgid "No info available"
+msgstr ""
+
 msgid "No mesh has been loaded"
 msgstr "Intet mesh er indlæst"
 
@@ -607,6 +613,9 @@ msgstr "Notifikationsloggen er tom"
 
 msgid "Notifications"
 msgstr "Notifikationer"
+
+msgid "Nozzle diameter"
+msgstr ""
 
 msgid "Only for the move panel"
 msgstr "Kun for flyttepanelet"
@@ -653,11 +662,14 @@ msgstr "Strømstyring"
 msgid "Power On Printer"
 msgstr "Tænd printer"
 
+msgid "Pressure Advance"
+msgstr "Pressure Advance"
+
 msgid "Pressure Advance:"
 msgstr "Pressure Advance:"
 
-msgid "Pressure Advance"
-msgstr "Pressure Advance"
+msgid "Pressure advance"
+msgstr ""
 
 msgid "Print"
 msgstr "Print"
@@ -768,9 +780,8 @@ msgstr "Skærm timeout"
 msgid "Screws Adjust"
 msgstr "Skruejustering"
 
-#, fuzzy
 msgid "Screws not used:"
-msgstr "Skruer, der ikke anvendes:"
+msgstr ""
 
 msgid "Send"
 msgstr "Sende"
@@ -807,6 +818,9 @@ msgstr "Slicer:"
 
 msgid "Small"
 msgstr "Lille"
+
+msgid "Smooth time"
+msgstr ""
 
 msgid "Speed (mm/s)"
 msgstr "Hastighed (mm/s)"
@@ -898,14 +912,14 @@ msgstr "Opdater"
 msgid "Updating"
 msgstr "Opdatering"
 
-msgid "Uploaded"
-msgstr "Uploadet"
-
 msgid "Useful for un-responsive touchscreens"
 msgstr "Nyttig for frosset berøringsskærme"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC er ikke understøttet i back-end, forsøger at streame istedet"
+
+msgid "Working"
+msgstr ""
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Flyt hastighed (mm/s)"
@@ -938,6 +952,9 @@ msgid_plural "days"
 msgstr[0] "dag"
 msgstr[1] "dage"
 
+msgid "g"
+msgstr ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "time"
@@ -966,10 +983,28 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+msgid "s"
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "sekund"
 msgstr[1] "sekunder"
+
+#~ msgid "Are you sure you want to stop the calibration?"
+#~ msgstr "Er du sikker på, at du vil stoppe kalibreringen?"
+
+#~ msgid "Do you want to let KlipperScreen try to solve the issue?"
+#~ msgstr "Vil du lade KlipperScreen forsøge at løse problemet?"
+
+#~ msgid "Insufficient priviledges detected"
+#~ msgstr "Utilstrækkelige priviledges fundet"
+
+#~ msgid "Mesh calibrate"
+#~ msgstr "Mesh-kalibrering"
+
+#~ msgid "Uploaded"
+#~ msgstr "Uploadet"
 
 #~ msgid "Ended official support in June 2023"
 #~ msgstr "Officiel support udløb i Juni 2023"
@@ -1076,9 +1111,6 @@ msgstr[1] "sekunder"
 #~ msgid "Initializing"
 #~ msgstr "Initialiserer"
 
-#~ msgid "Delete"
-#~ msgstr "Slet"
-
 #~ msgid "Off"
 #~ msgstr "Sluk"
 
@@ -1115,9 +1147,6 @@ msgstr[1] "sekunder"
 
 #~ msgid "IPv6"
 #~ msgstr "IPv6"
-
-#~ msgid "Duration Only"
-#~ msgstr "Kun varighed"
 
 #~ msgid "Klipper Version"
 #~ msgstr "Klipper version"

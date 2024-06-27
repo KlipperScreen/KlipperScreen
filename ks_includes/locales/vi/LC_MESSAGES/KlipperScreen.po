@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"POT-Creation-Date: 2024-06-27 18:24-0300\n"
 "PO-Revision-Date: 2024-06-02 12:00+0000\n"
 "Last-Translator: ChatGPT <noreply@openai.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -64,9 +64,6 @@ msgstr "Bạn có chắc chắn muốn loại bỏ vật này không?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Bạn có chắc chắn muốn chạy Dừng Khẩn cấp không?"
-
-msgid "Are you sure you want to stop the calibration?"
-msgstr "Bạn có chắc chắn muốn dừng việc hiệu chuẩn không?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Bạn có chắc chắn muốn hủy in này không?"
@@ -189,6 +186,9 @@ msgstr "Làm nguội"
 msgid "Couldn't add network"
 msgstr ""
 
+msgid "Current"
+msgstr ""
+
 msgid "Current percentage and graph line"
 msgstr "Phần trăm hiện tại và đường đồ thị"
 
@@ -197,6 +197,9 @@ msgstr "DPMS không thể tải và đã bị vô hiệu hóa"
 
 msgid "Date"
 msgstr "Ngày"
+
+msgid "Delete"
+msgstr ""
 
 msgid "Delete Directory?"
 msgstr "Xóa Thư mục?"
@@ -218,9 +221,6 @@ msgstr "Khoảng cách (mm)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
-
-msgid "Do you want to let KlipperScreen try to solve the issue?"
 msgstr ""
 
 #, python-format
@@ -259,6 +259,9 @@ msgstr ""
 
 msgid "Estimated Time Method"
 msgstr "Phương thức tính thời gian dự kiến"
+
+msgid "Example"
+msgstr ""
 
 msgid "Exclude Object"
 msgstr "Loại trừ vật in"
@@ -401,9 +404,6 @@ msgstr "Bắt đầu hiệu chỉnh PID cho:"
 msgid "Input Shaper"
 msgstr "Bộ định hình đầu vào"
 
-msgid "Insufficient priviledges detected"
-msgstr ""
-
 msgid "Insufficient privileges"
 msgstr ""
 
@@ -434,6 +434,9 @@ msgstr "Có thể mất hơn 5 phút tùy thuộc vào công suất máy sưởi
 msgid "It's possible that the configuration is not correct"
 msgstr "Cấu hình có thể không chính xác"
 
+msgid "Job Status"
+msgstr ""
+
 msgid "Klipper Restart"
 msgstr "Khởi động lại Klipper"
 
@@ -461,6 +464,9 @@ msgstr "Ngôn ngữ"
 
 msgid "Large"
 msgstr "Lớn"
+
+msgid "Last Duration"
+msgstr ""
 
 msgid "Last Used"
 msgstr "Đã sử dụng lần cuối"
@@ -537,9 +543,6 @@ msgstr "Bộ nhớ"
 msgid "Menu"
 msgstr "Menu"
 
-msgid "Mesh calibrate"
-msgstr "Cân chỉnh lưới"
-
 msgid "Minimum Cruise Ratio"
 msgstr "Tỉ lệ tối thiểu"
 
@@ -585,6 +588,9 @@ msgstr "Mới"
 msgid "No elegible macros:"
 msgstr "Không có macro hợp lệ:"
 
+msgid "No info available"
+msgstr ""
+
 msgid "No mesh has been loaded"
 msgstr "Không có lưới nào được tải"
 
@@ -605,6 +611,9 @@ msgstr "Nhật ký thông báo trống"
 
 msgid "Notifications"
 msgstr "Thông báo"
+
+msgid "Nozzle diameter"
+msgstr ""
 
 msgid "Only for the move panel"
 msgstr "Chỉ dành cho bảng điều khiển di chuyển"
@@ -650,11 +659,14 @@ msgstr "Nguồn điện"
 msgid "Power On Printer"
 msgstr "Bật nguồn máy in"
 
+msgid "Pressure Advance"
+msgstr "Nâng áp suất"
+
 msgid "Pressure Advance:"
 msgstr "Nâng áp suất:"
 
-msgid "Pressure Advance"
-msgstr "Nâng áp suất"
+msgid "Pressure advance"
+msgstr ""
 
 msgid "Print"
 msgstr "In"
@@ -804,6 +816,9 @@ msgstr "Phần mềm chia lớp:"
 msgid "Small"
 msgstr "Nhỏ"
 
+msgid "Smooth time"
+msgstr ""
+
 msgid "Speed (mm/s)"
 msgstr "Tốc độ (mm/s)"
 
@@ -896,14 +911,14 @@ msgstr "Cập nhật"
 msgid "Updating"
 msgstr "Đang cập nhật"
 
-msgid "Uploaded"
-msgstr "Đã tải lên"
-
 msgid "Useful for un-responsive touchscreens"
 msgstr "Hữu ích cho màn hình cảm ứng không phản hồi"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC không được hỗ trợ bởi backend đang thử Stream"
+
+msgid "Working"
+msgstr ""
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Tốc độ Di chuyển XY (mm/s)"
@@ -934,6 +949,9 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] "ngày"
 
+msgid "g"
+msgstr ""
+
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "giờ"
@@ -960,9 +978,21 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+msgid "s"
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "giây"
+
+#~ msgid "Are you sure you want to stop the calibration?"
+#~ msgstr "Bạn có chắc chắn muốn dừng việc hiệu chuẩn không?"
+
+#~ msgid "Mesh calibrate"
+#~ msgstr "Cân chỉnh lưới"
+
+#~ msgid "Uploaded"
+#~ msgstr "Đã tải lên"
 
 #~ msgid "Ended official support in June 2023"
 #~ msgstr "Hỗ trợ chính thức kết thúc vào tháng 6 năm 2023"
