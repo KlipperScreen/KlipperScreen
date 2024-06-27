@@ -466,7 +466,7 @@ class Panel(ScreenPanel):
                 self.set_state("printing")
             return
         elif action == "notify_metadata_update" and data['filename'] == self.filename:
-            self.update_file_metadata(response=True)
+            self.get_file_metadata(response=True)
         elif action != "notify_status_update":
             return
 
@@ -754,8 +754,7 @@ class Panel(ScreenPanel):
         if pixbuf is None:
             logging.debug("no pixbuf")
             return
-        image = find_widget(self.labels['thumbnail'], Gtk.Image)
-        if image:
+        if image := find_widget(self.labels['thumbnail'], Gtk.Image):
             image.set_from_pixbuf(pixbuf)
 
     def show_fullscreen_thumbnail(self, widget):
@@ -775,6 +774,7 @@ class Panel(ScreenPanel):
         if self.animation_timeout is not None:
             GLib.source_remove(self.animation_timeout)
             self.animation_timeout = None
+
         self.filename = filename
         logging.debug(f"Updating filename to {filename}")
         self.labels["file"].set_label(os.path.splitext(self.filename)[0])
@@ -782,18 +782,19 @@ class Panel(ScreenPanel):
             "complete": self.labels['file'].get_label(),
             "current": self.labels['file'].get_label(),
         }
-        ellipsized = self.labels['file'].get_layout().is_ellipsized()
-        if ellipsized:
+
+        if ellipsized := self.labels['file'].get_layout().is_ellipsized():
             self.animation_timeout = GLib.timeout_add(500, self.animate_label)
         else:
             self.animation_timeout = None
-        self.update_file_metadata()
+
+        self.get_file_metadata()
 
     def animate_label(self):
-        if not self.filename_label or not self.animation_timeout:
+        if not self.filename_label or self.animation_timeout is None:
             return False
-        ellipsized = self.labels['file'].get_layout().is_ellipsized()
-        if ellipsized:
+
+        if ellipsized := self.labels['file'].get_layout().is_ellipsized():
             self.filename_label['current'] = self.filename_label['current'][1:]
             self.labels['file'].set_label(self.filename_label['current'] + " " * 6)
         else:
@@ -801,31 +802,35 @@ class Panel(ScreenPanel):
             self.labels['file'].set_label(self.filename_label['complete'])
         return True
 
-    def update_file_metadata(self, response=False):
+    def get_file_metadata(self, response=False):
         if self._files.file_metadata_exists(self.filename):
-            self.file_metadata = self._files.get_file_info(self.filename)
-            logging.info(f"Update Metadata. File: {self.filename} Size: {self.file_metadata['size']}")
-            if "estimated_time" in self.file_metadata and self.timeleft_type == "slicer":
-                self.labels["est_time"].set_label(self.format_time(self.file_metadata['estimated_time']))
-            if "object_height" in self.file_metadata:
-                self.oheight = float(self.file_metadata['object_height'])
-                self.labels['height'].set_label(f"{self.oheight} {self.mm}")
-                if "layer_height" in self.file_metadata:
-                    self.layer_h = float(self.file_metadata['layer_height'])
-                    if "first_layer_height" in self.file_metadata:
-                        self.f_layer_h = float(self.file_metadata['first_layer_height'])
-                    else:
-                        self.f_layer_h = self.layer_h
-                    self.labels['total_layers'].set_label(f"{((self.oheight - self.f_layer_h) / self.layer_h) + 1:.0f}")
-            if "filament_total" in self.file_metadata:
-                self.labels['filament_total'].set_label(f"{float(self.file_metadata['filament_total']) / 1000:.1f} m")
-            if "job_id" in self.file_metadata and self.file_metadata['job_id']:
-                history = self._screen.apiclient.send_request(f"server/history/job?uid={self.file_metadata['job_id']}")
-                if history and history['job']['status'] == "completed" and history['job']['print_duration']:
-                    self.file_metadata["last_time"] = history['job']['print_duration']
+            self._update_file_metadata()
         elif not response:
             logging.debug("Cannot find file metadata. Listening for updated metadata")
             self._files.request_metadata(self.filename)
         else:
             logging.debug("Cannot load file metadata")
         self.show_file_thumbnail()
+
+    def _update_file_metadata(self):
+        self.file_metadata = self._files.get_file_info(self.filename)
+        logging.info(f"Update Metadata. File: {self.filename} Size: {self.file_metadata['size']}")
+        if "estimated_time" in self.file_metadata and self.timeleft_type == "slicer":
+            self.labels["est_time"].set_label(self.format_time(self.file_metadata['estimated_time']))
+        if "object_height" in self.file_metadata:
+            self.oheight = float(self.file_metadata['object_height'])
+            self.labels['height'].set_label(f"{self.oheight} {self.mm}")
+            if "layer_height" in self.file_metadata:
+                self.layer_h = float(self.file_metadata['layer_height'])
+                self.f_layer_h = (
+                    float(self.file_metadata['first_layer_height'])
+                    if "first_layer_height" in self.file_metadata
+                    else self.layer_h
+                )
+                self.labels['total_layers'].set_label(f"{((self.oheight - self.f_layer_h) / self.layer_h) + 1:.0f}")
+        if "filament_total" in self.file_metadata:
+            self.labels['filament_total'].set_label(f"{float(self.file_metadata['filament_total']) / 1000:.1f} m")
+        if "job_id" in self.file_metadata and self.file_metadata['job_id']:
+            history = self._screen.apiclient.send_request(f"server/history/job?uid={self.file_metadata['job_id']}")
+            if history and history['job']['status'] == "completed" and history['job']['print_duration']:
+                self.file_metadata["last_time"] = history['job']['print_duration']
