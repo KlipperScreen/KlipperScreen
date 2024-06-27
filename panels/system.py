@@ -16,10 +16,26 @@ class Panel(ScreenPanel):
         self.labels = {}
         self.grid = Gtk.Grid(column_spacing=10, row_spacing=5)
 
-        sysinfo = screen.printer.system_info
-        logging.info(sysinfo)
+        self.sysinfo = screen.printer.system_info
+        if not self.sysinfo:
+            logging.debug("Asking for info")
+            self.sysinfo = screen.apiclient.send_request("machine/system_info")
+            if 'system_info' in self.sysinfo:
+                screen.printer.system_info = self.sysinfo['system_info']
+                self.sysinfo = self.sysinfo['system_info']
+        logging.debug(self.sysinfo)
+        if self.sysinfo:
+            self.content.add(self.create_layout())
+        else:
+            self.content.add(Gtk.Label(label=_("No info available"), vexpand=True))
 
-        self.cpu_count = int(sysinfo["cpu_info"]["cpu_count"])
+    def back(self):
+        if not self.sysinfo:
+            self._screen.panels_reinit.append("system")
+        return False
+
+    def create_layout(self):
+        self.cpu_count = int(self.sysinfo["cpu_info"]["cpu_count"])
         self.labels["cpu_usage"] = Gtk.Label(label="", xalign=0)
         self.grid.attach(self.labels["cpu_usage"], 0, self.current_row, 1, 1)
         self.scales["cpu_usage"] = Gtk.ProgressBar(
@@ -47,11 +63,11 @@ class Panel(ScreenPanel):
 
         self.grid.attach(Gtk.Separator(), 0, self.current_row, 2, 1)
         self.current_row += 1
-        self.populate_info(sysinfo)
+        self.populate_info()
 
         scroll = self._gtk.ScrolledWindow()
         scroll.add(self.grid)
-        self.content.add(scroll)
+        return scroll
 
     def set_mem_multiplier(self, data):
         memory_units = data.get("memory_units", "kB").lower()
@@ -71,8 +87,8 @@ class Panel(ScreenPanel):
         self.grid.attach(label, column, self.current_row, 1, 1)
         self.current_row += 1
 
-    def populate_info(self, sysinfo):
-        for category, data in sysinfo.items():
+    def populate_info(self):
+        for category, data in self.sysinfo.items():
             if category == "python":
                 self.add_label_to_grid(self.prettify(category), 0, bold=True)
                 self.current_row -= 1
@@ -90,7 +106,7 @@ class Panel(ScreenPanel):
                     "service_state",
                     "instance_ids",
                 )
-                or not sysinfo[category]
+                or not self.sysinfo[category]
             ):
                 continue
 
@@ -126,6 +142,8 @@ class Panel(ScreenPanel):
                         self.add_label_to_grid(f"{self.prettify(key)}: {value}", 1)
 
     def process_update(self, action, data):
+        if not self.sysinfo:
+            return
         if action == "notify_proc_stat_update":
             self.labels["cpu_usage"].set_label(
                 f'CPU: {data["system_cpu_usage"]["cpu"]:.0f}%'
