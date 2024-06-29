@@ -9,6 +9,7 @@ import subprocess
 import pathlib
 import traceback  # noqa
 import locale
+import re
 import sys
 import gi
 
@@ -857,31 +858,32 @@ class KlipperScreen(Gtk.Window):
             self.printer.process_power_update(data)
             self.panels['splash_screen'].check_power_status()
         elif action == "notify_gcode_response" and self.printer.state not in ["error", "shutdown"]:
-            if not (data.startswith("B:") or data.startswith("T:")):
-                if data.startswith("// action:"):
-                    action = data[10:]
-                    if action.startswith('prompt_begin'):
-                        if self.prompt is not None:
-                            self.prompt.end()
-                        self.prompt = Prompt(self)
-                    if self.prompt is None:
-                        return
-                    self.prompt.decode(action)
-                elif data.startswith("echo: "):
-                    self.show_popup_message(data[6:], 1, from_ws=True)
-                elif data.startswith("!! "):
-                    self.show_popup_message(data[3:], 3, from_ws=True)
-                elif "unknown" in data.lower() and \
-                        not ("TESTZ" in data or "MEASURE_AXES_NOISE" in data or "ACCELEROMETER_QUERY" in data):
-                    self.show_popup_message(data, from_ws=True)
-                elif "SAVE_CONFIG" in data and self.printer.state == "ready":
-                    script = {"script": "SAVE_CONFIG"}
-                    self._confirm_send_action(
-                        None,
-                        _("Save configuration?") + "\n\n" + _("Klipper will reboot"),
-                        "printer.gcode.script",
-                        script
-                    )
+            if re.match('^(?:ok\\s+)?(B|C|T\\d*):', data):
+                return
+            if data.startswith("// action:"):
+                action = data[10:]
+                if action.startswith('prompt_begin'):
+                    if self.prompt is not None:
+                        self.prompt.end()
+                    self.prompt = Prompt(self)
+                if self.prompt is None:
+                    return
+                self.prompt.decode(action)
+            elif data.startswith("echo: "):
+                self.show_popup_message(data[6:], 1, from_ws=True)
+            elif data.startswith("!! "):
+                self.show_popup_message(data[3:], 3, from_ws=True)
+            elif "unknown" in data.lower() and \
+                    not ("TESTZ" in data or "MEASURE_AXES_NOISE" in data or "ACCELEROMETER_QUERY" in data):
+                self.show_popup_message(data, from_ws=True)
+            elif "SAVE_CONFIG" in data and self.printer.state == "ready":
+                script = {"script": "SAVE_CONFIG"}
+                self._confirm_send_action(
+                    None,
+                    _("Save configuration?") + "\n\n" + _("Klipper will reboot"),
+                    "printer.gcode.script",
+                    script
+                )
         self.process_update(action, data)
 
     def process_update(self, *args):

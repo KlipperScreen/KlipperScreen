@@ -22,26 +22,19 @@ class Panel(ScreenPanel):
         title = title or _("Console")
         super().__init__(screen, title)
         self.autoscroll = True
-        self.hidetemps = True
 
         o1_button = self._gtk.Button("arrow-down", _("Auto-scroll") + " ", None, self.bts, Gtk.PositionType.RIGHT, 1)
         o1_button.get_style_context().add_class("button_active")
         o1_button.get_style_context().add_class("buttons_slim")
         o1_button.connect("clicked", self.set_autoscroll)
 
-        o2_button = self._gtk.Button("heat-up", _("Hide temp.") + " ", None, self.bts, Gtk.PositionType.RIGHT, 1)
-        o2_button.get_style_context().add_class("button_active")
+        o2_button = self._gtk.Button("refresh", _('Clear') + " ", None, self.bts, Gtk.PositionType.RIGHT, 1)
         o2_button.get_style_context().add_class("buttons_slim")
-        o2_button.connect("clicked", self.hide_temps)
-
-        o3_button = self._gtk.Button("refresh", _('Clear') + " ", None, self.bts, Gtk.PositionType.RIGHT, 1)
-        o3_button.get_style_context().add_class("buttons_slim")
-        o3_button.connect("clicked", self.clear)
+        o2_button.connect("clicked", self.clear)
 
         options = Gtk.Grid(vexpand=False)
         options.attach(o1_button, 0, 0, 1, 1)
         options.attach(o2_button, 1, 0, 1, 1)
-        options.attach(o3_button, 2, 0, 1, 1)
 
         sw = Gtk.ScrolledWindow(hexpand=True, vexpand=True)
 
@@ -94,7 +87,7 @@ class Panel(ScreenPanel):
         elif message.startswith("//"):
             color = COLORS['warning']
             message = message.replace("// ", "")
-        elif self.hidetemps and re.match('^(?:ok\\s+)?(B|C|T\\d*):', message):
+        elif re.match('^(?:ok\\s+)?(B|C|T\\d*):', message):
             return
         else:
             color = COLORS['response']
@@ -122,10 +115,6 @@ class Panel(ScreenPanel):
     def process_update(self, action, data):
         if action == "notify_gcode_response":
             self.add_gcode("response", time.time(), data)
-
-    def hide_temps(self, widget):
-        self.hidetemps ^= True
-        self.toggle_active_class(widget, self.hidetemps)
 
     def set_autoscroll(self, widget):
         self.autoscroll ^= True
