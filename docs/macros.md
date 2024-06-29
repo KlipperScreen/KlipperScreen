@@ -268,3 +268,22 @@ gcode:
     RESPOND TYPE=command MSG="action:prompt_show"
 ```
 ![Prompt_2](img/macros/Prompt_2.png)
+
+## KlipperScreen actions
+
+!!! warning
+    this should be considered experimental
+
+Show a panel:
+```
+RESPOND TYPE=command MSG="action:ks_show extrude"
+```
+
+Show a menu with items:
+
+!!! note
+    you need to escape double quotes because they are used by MSG
+
+```
+RESPOND TYPE=command MSG="action:ks_show menu items=[{'save': {'name': 'Home', 'icon': 'home', 'panel': None, 'method': 'printer.gcode.script', 'enable': 'True', 'params': '{\"script\": \"G28\"}', 'style': None, 'confirm': None}}]"
+```
