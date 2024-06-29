@@ -14,6 +14,11 @@ class Prompt:
         self.buttons = []
         self.id = 1
         self.prompt = None
+        self.scroll_box = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL,
+            halign=Gtk.Align.CENTER
+        )
+        self.groups = []
 
     def _key_press_event(self, widget, event):
         keyval_name = Gdk.keyval_name(event.keyval)
@@ -32,9 +37,8 @@ class Prompt:
         elif data.startswith('prompt_text'):
             self.text = data.replace('prompt_text ', '')
             return
-        elif data.startswith('prompt_button ') or data.startswith('prompt_footer_button'):
+        elif data.startswith('prompt_button '):
             data = data.replace('prompt_button ', '')
-            data = data.replace('prompt_footer_button ', '')
             params = data.split('|')
             if len(params) == 1:
                 params.append(self.text)
@@ -43,20 +47,47 @@ class Prompt:
                 return
             self.set_button(*params)
             return
+        elif data.startswith('prompt_footer_button'):
+            data = data.replace('prompt_footer_button ', '')
+            params = data.split('|')
+            if len(params) == 1:
+                params.append(self.text)
+            if len(params) > 3:
+                logging.error('Unexpected number of parameters on the button')
+                return
+            self.set_footer_button(*params)
+            return
         elif data == 'prompt_show':
             if not self.prompt:
                 self.show()
             return
         elif data == 'prompt_end':
             self.end()
+        elif data == 'prompt_button_group_start':
+            self.groups.append(
+                Gtk.FlowBox(
+                    selection_mode=Gtk.SelectionMode.NONE,
+                    orientation=Gtk.Orientation.HORIZONTAL,
+                    halign=Gtk.Align.CENTER,
+                    min_children_per_line=4,
+                    max_children_per_line=4,
+                )
+            )
+        elif data == 'prompt_button_group_end':
+            if self.groups:
+                self.scroll_box.add(self.groups.pop())
         else:
-            # Not implemented:
-            # prompt_button_group_start
-            # prompt_button_group_end
             logging.debug(f'Unknown option {data}')
 
     def set_button(self, name, gcode, style='default'):
-        logging.info(f'{name} {self.id} {gcode} {style}')
+        button = self.gtk.Button(image_name=None, label=f"{name}", style=f'dialog-{style}')
+        button.connect("clicked", self.screen._send_action, "printer.gcode.script", {'script': gcode})
+        if self.groups:
+            self.groups[-1].add(button)
+        else:
+            self.scroll_box.add(button)
+
+    def set_footer_button(self, name, gcode, style='default'):
         self.buttons.append(
             {"name": name, "response": self.id, 'gcode': gcode, 'style': f'dialog-{style}'}
         )
@@ -72,9 +103,14 @@ class Prompt:
         close.set_vexpand(False)
         close.connect("clicked", self.close)
 
+        label = Gtk.Label(label=self.text, wrap=True, hexpand=True, vexpand=True)
+
+        self.scroll_box.add(label)
+        self.scroll_box.reorder_child(label, 0)
+
         scroll = self.gtk.ScrolledWindow(steppers=False)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        scroll.add(Gtk.Label(label=self.text, wrap=True, hexpand=True, vexpand=True))
+        scroll.add(self.scroll_box)
 
         content = Gtk.Grid()
         if not self.screen.windowed:
