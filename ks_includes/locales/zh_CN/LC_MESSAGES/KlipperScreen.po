@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-06-19 21:09+0000\n"
+"PO-Revision-Date: 2024-06-29 06:09+0000\n"
 "Last-Translator: Will Zhai <willzhai55@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "klipperscreen/klipperscreen/zh_Hans/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.6-rc\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -192,7 +192,7 @@ msgid "Couldn't add network"
 msgstr "无法添加网络"
 
 msgid "Current"
-msgstr ""
+msgstr "当前"
 
 msgid "Current percentage and graph line"
 msgstr "当前百分比和走线"
@@ -266,7 +266,7 @@ msgid "Estimated Time Method"
 msgstr "估算剩余时间方式"
 
 msgid "Example"
-msgstr ""
+msgstr "范例"
 
 msgid "Exclude Object"
 msgstr "排除对象"
@@ -440,7 +440,7 @@ msgid "It's possible that the configuration is not correct"
 msgstr "设置文件可能存在错误"
 
 msgid "Job Status"
-msgstr ""
+msgstr "工作状态"
 
 msgid "Klipper Restart"
 msgstr "重启Klipper"
@@ -471,7 +471,7 @@ msgid "Large"
 msgstr "大"
 
 msgid "Last Duration"
-msgstr ""
+msgstr "上一次的持续时间"
 
 msgid "Last Used"
 msgstr "上次使用"
@@ -594,7 +594,7 @@ msgid "No elegible macros:"
 msgstr "无可用宏："
 
 msgid "No info available"
-msgstr ""
+msgstr "无可用信息"
 
 msgid "No mesh has been loaded"
 msgstr "未加载网床"
@@ -618,7 +618,7 @@ msgid "Notifications"
 msgstr "通知"
 
 msgid "Nozzle diameter"
-msgstr ""
+msgstr "喷嘴直径"
 
 msgid "Only for the move panel"
 msgstr "仅适用于移动面板"
@@ -671,7 +671,7 @@ msgid "Pressure Advance:"
 msgstr "压力提前："
 
 msgid "Pressure advance"
-msgstr ""
+msgstr "压力提前"
 
 msgid "Print"
 msgstr "打印"
@@ -822,7 +822,7 @@ msgid "Small"
 msgstr "小"
 
 msgid "Smooth time"
-msgstr ""
+msgstr "平滑时间"
 
 msgid "Speed (mm/s)"
 msgstr "速度（mm/s）"
@@ -921,7 +921,7 @@ msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "不支持传送WebRTC至后台"
 
 msgid "Working"
-msgstr ""
+msgstr "工作中"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY轴移动速度（mm/s）"
@@ -953,7 +953,7 @@ msgid_plural "days"
 msgstr[0] "天"
 
 msgid "g"
-msgstr ""
+msgstr "克"
 
 msgid "hour"
 msgid_plural "hours"
@@ -982,7 +982,7 @@ msgid "mm³/s"
 msgstr "mm³/s"
 
 msgid "s"
-msgstr ""
+msgstr "秒"
 
 msgid "second"
 msgid_plural "seconds"
