@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-06-03 19:09+0000\n"
+"PO-Revision-Date: 2024-06-29 06:09+0000\n"
 "Last-Translator: Miloslav Kos <kos.m@post.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/cs/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.6-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -192,7 +192,7 @@ msgid "Couldn't add network"
 msgstr "Nepodařilo se přidat síť"
 
 msgid "Current"
-msgstr ""
+msgstr "Aktuální"
 
 msgid "Current percentage and graph line"
 msgstr "Aktuální procento a linie grafu"
@@ -204,7 +204,7 @@ msgid "Date"
 msgstr "Datum"
 
 msgid "Delete"
-msgstr ""
+msgstr "Smazat"
 
 msgid "Delete Directory?"
 msgstr "Smazat adresář?"
@@ -266,7 +266,7 @@ msgid "Estimated Time Method"
 msgstr "Výpočet doby tisku"
 
 msgid "Example"
-msgstr ""
+msgstr "Příklad"
 
 msgid "Exclude Object"
 msgstr "Vyloučit objekt"
@@ -440,7 +440,7 @@ msgid "It's possible that the configuration is not correct"
 msgstr "Je možné, že konfigurace není správná"
 
 msgid "Job Status"
-msgstr ""
+msgstr "Stav úlohy"
 
 msgid "Klipper Restart"
 msgstr "Klipper Restart"
@@ -472,7 +472,7 @@ msgid "Large"
 msgstr "Velký"
 
 msgid "Last Duration"
-msgstr ""
+msgstr "Poslední doba trvání"
 
 msgid "Last Used"
 msgstr "Munulý"
@@ -595,7 +595,7 @@ msgid "No elegible macros:"
 msgstr "Žádná použitelná makra:"
 
 msgid "No info available"
-msgstr ""
+msgstr "Nejsou k dispozici žádné informace"
 
 msgid "No mesh has been loaded"
 msgstr "Nebyla načtena žádná síť"
@@ -619,7 +619,7 @@ msgid "Notifications"
 msgstr "Oznámení"
 
 msgid "Nozzle diameter"
-msgstr ""
+msgstr "Průměr trysky"
 
 msgid "Only for the move panel"
 msgstr "Pouze pro panel pohybů"
@@ -674,7 +674,7 @@ msgid "Pressure Advance:"
 msgstr "Pressure Advance:"
 
 msgid "Pressure advance"
-msgstr ""
+msgstr "Předstih tlaku"
 
 msgid "Print"
 msgstr "Tisk"
@@ -825,7 +825,7 @@ msgid "Small"
 msgstr "Malý"
 
 msgid "Smooth time"
-msgstr ""
+msgstr "Plynulý čas"
 
 msgid "Speed (mm/s)"
 msgstr "Rychlost (mm/s)"
@@ -924,7 +924,7 @@ msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC není podporováno backendem, který se pokouší spustit Stream"
 
 msgid "Working"
-msgstr ""
+msgstr "Pracovní"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Rychlost pohybu XY (mm/s)"
@@ -960,7 +960,7 @@ msgstr[1] "dny"
 msgstr[2] "dny"
 
 msgid "g"
-msgstr ""
+msgstr "g"
 
 msgid "hour"
 msgid_plural "hours"
@@ -993,7 +993,7 @@ msgid "mm³/s"
 msgstr "mm³/s"
 
 msgid "s"
-msgstr ""
+msgstr "s"
 
 msgid "second"
 msgid_plural "seconds"
