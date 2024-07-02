@@ -85,27 +85,15 @@ With the method described in the first section. You may need to press refresh or
     ```sh
     modprobe: FATAL: Module g2d_23 not found in directory /lib/modules/6.1.21-v8+
     ```
-    This error is common on RaspberryOS when using FBturbo, it's not a related issue.
+    This error is common on RaspberryOS when using FBturbo, it's not a related issue, it works correctly with the error present.
 
 !!! abstract "If you see this line in the [system logs](#system-logs):"
     ```sh
     (EE) Cannot run in framebuffer mode. Please specify busIDs for all framebuffer devices
     ```
-    This has been known to happen on RaspberryOS Bookworm Lite on Pi5
 
-    ```sh
-    sudo nano /etc/X11/xorg.conf.d/99-vc4.conf
-    ```
-    paste this into the file:
-    ```
-    Section "OutputClass"
-      Identifier "vc4"
-      MatchDriver "vc4"
-      Driver "modesetting"
-      Option "PrimaryGPU" "true"
-    EndSection
-    ```
-    reboot
+    [Follow this steps](Troubleshooting/Framebuffer_id.md)
+
 
 
 [Maybe it's the wrong framebuffer](Troubleshooting/Framebuffer.md)

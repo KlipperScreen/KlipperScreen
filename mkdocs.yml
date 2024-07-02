@@ -27,6 +27,7 @@ nav:
       - Network: Troubleshooting/Network.md
       - Physical install: Troubleshooting/Physical_Install.md
       - Wrong Framebuffer: Troubleshooting/Framebuffer.md
+      - Framebuffer ID: Troubleshooting/Framebuffer_id.md
       - Screen Rotation: Troubleshooting/Rotation.md
       - Touch: Troubleshooting/Touch_issues.md
       - Virtual Console Error: Troubleshooting/VC_ERROR.md
@@ -40,7 +41,8 @@ nav:
       - Z Calibrate: Panels/Zcalibrate.md
     - Theming.md
     - Translations.md
-    - Breaking Changes: Changelog.md
+    - Changelog: changelog.md
+    - Breaking Changes: breaking.md
     - Developers.md
     - Contact.md
 theme:

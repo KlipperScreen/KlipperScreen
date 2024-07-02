@@ -34,10 +34,6 @@ Usually permissions are set with the installer, try to update and then re-run th
 
 ???+ "Alternative workaround for network-manager not having permissions"
 
-    in order to fix this polkit needs to be configured or disabled:
-
-    here is how to disable polkit for network-manager:
-
     ```sh
     mkdir -p /etc/NetworkManager/conf.d
     sudo nano /etc/NetworkManager/conf.d/any-user.conf
