@@ -16,7 +16,7 @@ def format_label(widget):
         label.set_line_wrap_mode(Pango.WrapMode.CHAR)
         label.set_line_wrap(True)
         label.set_ellipsize(Pango.EllipsizeMode.END)
-        label.set_lines(2)
+        label.set_lines(3)
 
 
 class Panel(ScreenPanel):

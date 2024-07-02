@@ -644,3 +644,8 @@ button.graph_label {padding-left: 0.25em;}
 flowboxchild {
     padding: 0;
 }
+
+flowbox button {
+    margin: 0.1em;
+    padding: .5em;
+}
