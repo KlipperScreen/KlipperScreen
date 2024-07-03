@@ -215,7 +215,7 @@ class KlippyGtk:
             dialog.fullscreen()
 
         if buttons:
-            max_buttons = 3 if self.screen.vertical_mode else 4
+            max_buttons = 4
             if len(buttons) > max_buttons:
                 buttons = buttons[:max_buttons]
             if len(buttons) > 2:

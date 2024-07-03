@@ -204,7 +204,7 @@ RESPOND TYPE=command MSG="action:prompt_begin My Prompt"
 
 Add a button:
 
-Both `prompt_button` and `prompt_footer_button` work but at the moment of writing this they are equal
+`prompt_button` or `prompt_footer_button`
 
 The options are label | gcode | style
 
@@ -215,7 +215,7 @@ RESPOND TYPE=command MSG="action:prompt_button button_text|RESPOND MSG=test|info
 ```
 
 !!! info
-    Only 4 buttons are allowed, the rest will not show due to screen space concerns
+    Only 4 footer buttons are allowed, the rest will not show due to screen space concerns
 
 Show the prompt on the screen:
 ```yaml+jinja title="Show"
@@ -225,6 +225,21 @@ RESPOND TYPE=command MSG="action:prompt_show"
 Optional: Close the Prompt:
 ```yaml+jinja title="Close"
 RESPOND TYPE=command MSG="action:prompt_end"
+```
+
+Groups:
+Footer buttons will be displayed on the same row,
+but regular buttons will default to 1 per row,
+to display them in the same row group them:
+
+```yaml+jinja title="Group Start"
+RESPOND TYPE=command MSG="action:prompt_button_group_start"
+```
+
+add buttons and then:
+
+```yaml+jinja title="Group End"
+RESPOND TYPE=command MSG="action:prompt_button_group_end"
 ```
 
 ### Examples
