@@ -54,6 +54,14 @@ class Panel(ScreenPanel):
             icon = self._screen.env.from_string(item['icon']).render(self.j2_data) if item['icon'] else None
             style = self._screen.env.from_string(item['style']).render(self.j2_data) if item['style'] else None
 
+            if icon == "notifications" and (
+                bool(self._screen.server_info["warnings"])
+                or bool(self._printer.warnings)
+                or bool(self._screen.server_info["failed_components"])
+                or bool(self._screen.server_info["missing_klippy_requirements"])
+            ):
+                icon = "notification_important"
+
             b = self._gtk.Button(icon, name, style or f"color{i % 4 + 1}", scale=scale)
 
             if item['panel']:
