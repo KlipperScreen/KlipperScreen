@@ -29,6 +29,11 @@ class HeaterGraph(Gtk.DrawingArea):
         if fullscreen:
             GLib.timeout_add_seconds(1, self.update_graph)
         self.fs_graph = None
+        self.max_temp = 0
+        for section in self.printer.config:
+            if "max_temp" in self.printer.get_config_section(section):
+                self.max_temp = max(float(self.printer.get_config_section(section)["max_temp"]), self.max_temp)
+        self.max_temp = min(self.max_temp, 999)
 
     def update_graph(self):
         self.queue_draw()
@@ -141,7 +146,7 @@ class HeaterGraph(Gtk.DrawingArea):
 
     def graph_lines(self, ctx: cairoContext, gsize, max_num):
         nscale = 10
-        max_num = min(max_num, 999)
+        max_num = min(max_num, self.max_temp)
         while (max_num / nscale) > 5:
             nscale += 10
         r = int(max_num / nscale) + 1
