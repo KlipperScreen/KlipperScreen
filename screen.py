@@ -362,6 +362,9 @@ class KlipperScreen(Gtk.Window):
         self.notification_log.append(log_entry)
         self.process_update("notify_log", log_entry)
 
+    def notification_log_clear(self):
+        self.notification_log.clear()
+
     def show_popup_message(self, message, level=3, from_ws=False):
         if from_ws:
             if (datetime.now() - self.last_popup_time).seconds < 1:
