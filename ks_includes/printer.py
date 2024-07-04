@@ -28,6 +28,7 @@ class Printer:
         self.spoolman = False
         self.temp_devices = self.sensors = None
         self.system_info = {}
+        self.warnings = []
 
     def reinit(self, printer_info, data):
         self.config = data['configfile']['config']
@@ -45,6 +46,7 @@ class Printer:
         self.temp_devices = self.sensors = None
         self.stop_tempstore_updates()
         self.system_info.clear()
+        self.warnings = []
 
         for x in self.config.keys():
             # Support for hiding devices by name
@@ -111,8 +113,11 @@ class Printer:
             return
 
         for x in data:
-            if x == "configfile" and 'config' in data[x]:
-                self.config.update(data[x]['config'])
+            if x == "configfile":
+                if 'config' in data[x]:
+                    self.config.update(data[x]['config'])
+                if 'warnings' in data[x]:
+                    self.warnings = data[x]['warnings']
             if x not in self.data:
                 self.data[x] = {}
             self.data[x].update(data[x])

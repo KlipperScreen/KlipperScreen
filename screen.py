@@ -176,6 +176,8 @@ class KlipperScreen(Gtk.Window):
             self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking_printing'))
         else:
             self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
+            for warning in self.printer.warnings:
+                self.show_popup_message(f"Klipper:\n{warning['message']}", level=2)
         callback()
         return False
 
@@ -257,7 +259,7 @@ class KlipperScreen(Gtk.Window):
         requested_updates = {
             "objects": {
                 "bed_mesh": ["profile_name", "mesh_max", "mesh_min", "probed_matrix", "profiles"],
-                "configfile": ["config"],
+                "configfile": ["config", "warnings"],
                 "display_status": ["progress", "message"],
                 "fan": ["speed"],
                 "gcode_move": ["extrude_factor", "gcode_position", "homing_origin", "speed_factor", "speed"],
