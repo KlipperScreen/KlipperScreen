@@ -14,7 +14,7 @@ class Panel(ScreenPanel):
     graph_update = None
     active_heater = None
 
-    def __init__(self, screen, title, extra=None):
+    def __init__(self, screen, title, **kwargs):
         title = title or _("Temperature")
         super().__init__(screen, title)
         self.left_panel = None
@@ -30,6 +30,7 @@ class Panel(ScreenPanel):
         self.preheat_options = self._screen._config.get_preheat_options()
         self.grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         self._gtk.reset_temp_color()
+        self.extra_selection = None
 
         if self._screen.vertical_mode:
             self.grid.attach(self.create_left_panel(), 0, 0, 1, 3)
@@ -37,24 +38,6 @@ class Panel(ScreenPanel):
         else:
             self.grid.attach(self.create_left_panel(), 0, 0, 1, 1)
             self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
-
-        # When printing start only select tools
-        selection = []
-        if self._printer.state not in ("printing", "paused"):
-            selection.extend(self._printer.get_temp_devices())
-        elif extra:
-            selection.append(extra)
-
-        # Select heaters
-        for h in selection:
-            if h.startswith("temperature_sensor "):
-                continue
-            name = h.split()[1] if len(h.split()) > 1 else h
-            # Support for hiding devices by name
-            if name.startswith("_"):
-                continue
-            if h not in self.active_heaters:
-                self.select_heater(None, h)
 
         self.content.add(self.grid)
 
@@ -223,6 +206,31 @@ class Panel(ScreenPanel):
         if not self._printer.tempstore:
             self._screen.init_tempstore()
         self.update_graph_visibility()
+        self.set_selection()
+
+    def set_extra(self, extra=None, **kwargs):
+        self.extra_selection = extra
+
+    def set_selection(self):
+        selection = []
+        if self.extra_selection:
+            selection.append(self.extra_selection)
+        elif self._printer.state not in ("printing", "paused"):
+            selection.extend(self._printer.get_temp_devices())
+        elif 'toolhead' in self._printer.data and 'extruder' in self._printer.data['toolhead']:
+            current_extruder = self._printer.data['toolhead']['extruder']
+            selection.append(current_extruder)
+
+        for heater in self.active_heaters:
+            if heater not in selection:
+                self.select_heater(None, heater)
+        for heater in selection:
+            if heater.startswith("temperature_sensor "):
+                continue
+            name = heater.split()[1] if len(heater.split()) > 1 else heater
+            if heater not in self.active_heaters:
+                self.select_heater(None, heater)
+        self.extra_selection = None
 
     def deactivate(self):
         if self.graph_update is not None:

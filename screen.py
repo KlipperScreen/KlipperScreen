@@ -332,6 +332,8 @@ class KlipperScreen(Gtk.Window):
                 self.panels[panel_name].__init__(self, title, **kwargs)
                 self.panels_reinit.remove(panel_name)
             self._cur_panels.append(panel_name)
+            if 'extra' in kwargs and hasattr(self.panels[panel], "set_extra"):
+                self.panels[panel].set_extra(**kwargs)
             self.attach_panel(panel_name)
         except Exception as e:
             logging.exception(f"Error attaching panel:\n{e}\n\n{traceback.format_exc()}")
