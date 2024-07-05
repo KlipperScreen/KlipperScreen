@@ -5,7 +5,7 @@ sdbus_networkmanager==2.0.0;python_version>="3.8"
 
 # libmpv-dev 0.33 is required for 1.0
 python-mpv==0.5.2;python_version<"3.10"
-python-mpv==1.0.6;python_version>="3.10"
+python-mpv==1.0.7;python_version>="3.10"
 
 backports.zoneinfo;python_version<"3.9"
 
