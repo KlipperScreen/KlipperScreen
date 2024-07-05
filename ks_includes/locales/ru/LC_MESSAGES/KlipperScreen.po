@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-04-13 16:48+0000\n"
-"Last-Translator: Dr_Perry_Coke <dr.perrycoke@gmail.com>\n"
+"PO-Revision-Date: 2024-07-05 19:09+0000\n"
+"Last-Translator: Артем <gaz70rus@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/ru/>\n"
 "Language: ru\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 "X-Poedit-Flags-xgettext: --add-comments\n"
 
 #, python-format
@@ -84,7 +84,7 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "Вы хотите выключить принтер?"
 
 msgid "Asks for confirmation before stopping"
-msgstr ""
+msgstr "Запросить подтверждение перед остановкой"
 
 msgid "Auto"
 msgstr "Авто"
@@ -140,11 +140,13 @@ msgstr "Отменить"
 msgid "Cannot connect to Moonraker"
 msgstr "Не удается подключиться к Moonraker"
 
+#, fuzzy
 msgid "Changes how the interface looks"
-msgstr ""
+msgstr "Изменение внешнего вида интерфейса"
 
+#, fuzzy
 msgid "Changes how the time remaining is calculated"
-msgstr ""
+msgstr "Редактировать расчет оставшегося времени"
 
 msgid "Channel"
 msgstr "Канал"
@@ -174,14 +176,14 @@ msgid "Connected"
 msgstr "Подключено"
 
 msgid "Connecting"
-msgstr ""
+msgstr "Подключение"
 
 #, python-format
 msgid "Connecting to %s"
 msgstr "Подключён к %s"
 
 msgid "Connection failed"
-msgstr ""
+msgstr "Не удалось установить соединение"
 
 msgid "Console"
 msgstr "Консоль"
@@ -190,13 +192,14 @@ msgid "Cooldown"
 msgstr "Остудить"
 
 msgid "Couldn't add network"
-msgstr ""
+msgstr "Не удалось добавить сеть"
 
 msgid "Current"
-msgstr ""
+msgstr "Текущий"
 
+#, fuzzy
 msgid "Current percentage and graph line"
-msgstr ""
+msgstr "Текущий процент и линия графика"
 
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS не загрузилась и была отключена"
@@ -237,7 +240,7 @@ msgid "Elapsed:"
 msgstr "Прошло:"
 
 msgid "Emergency Stop"
-msgstr ""
+msgstr "Аварийная остановка"
 
 msgid "Enable screen power management"
 msgstr ""
@@ -245,8 +248,9 @@ msgstr ""
 msgid "Error"
 msgstr "Ошибка"
 
+#, fuzzy
 msgid "Error clearing active spool"
-msgstr ""
+msgstr "Ошибка при очистке активной катушки"
 
 msgid "Error getting active spool"
 msgstr ""

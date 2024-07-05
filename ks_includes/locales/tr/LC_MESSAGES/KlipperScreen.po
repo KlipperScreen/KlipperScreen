@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-06-21 18:03+0000\n"
-"Last-Translator: Selim <technical50@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2024-07-03 13:59+0000\n"
+"Last-Translator: Haktan Altın <hpro2734@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/tr/>\n"
 "Language: tr\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6-rc\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
-msgstr "%s sürüme güncellenecektir"
+msgstr "%s şu sürüme güncellenecektir:"
 
 msgid "(default)"
 msgstr "(varsayılan)"
 
 msgid "24 Hour Time"
-msgstr "24 Saat Zaman"
+msgstr "24 Saatlik Zaman"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "Bir FIRMWARE_RESTART sorunu çözebilir."
@@ -59,7 +59,7 @@ msgstr "Endstop'a %s%.3f telafi uygulansın mı?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr "İnceleyici'ye %s%.3f telafi uygulansın mı?"
+msgstr "Ölçme Çubuğu'na %s%.3f telafi uygulansın mı?"
 
 msgid "Archived"
 msgstr "Arşivlenen"
@@ -68,7 +68,7 @@ msgid "Are you sure do you want to exclude the object?"
 msgstr "Nesneyi hariç tutmak istediğinizden emin misiniz?"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr "Acil Durdurma'yı çalıştırmak istediğinizden emin misiniz?"
+msgstr "Acil Durdurmak istediğinizden emin misiniz?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Bu baskıyı iptal etmek istediğinizden emin misiniz?"
@@ -95,7 +95,7 @@ msgid "Auto-close notifications"
 msgstr "Bildirimleri otomatik kapat"
 
 msgid "Auto-open Extrude On Pause"
-msgstr "Duraklatıldığında Ekstrüzyonu Otomatik-Aç"
+msgstr "Duraklatıldığında Ekstrüzyonu Otomatik Aç"
 
 msgid "Auto-scroll"
 msgstr "Otomatik-kaydırma"
@@ -107,7 +107,7 @@ msgid "Bed Mesh"
 msgstr "Tabla Haritası"
 
 msgid "Both"
-msgstr "ikisi de"
+msgstr "İkisi de"
 
 msgid "Calibrate"
 msgstr "Kalibre et"
@@ -125,7 +125,7 @@ msgid "Can't set above the maximum:"
 msgstr "Maksimumun üzerine ayarlanamıyor:"
 
 msgid "Cancel"
-msgstr "İptal"
+msgstr "İptal et"
 
 msgid "Cancel Print"
 msgstr "Baskıyı iptal et"
@@ -143,7 +143,7 @@ msgid "Changes how the interface looks"
 msgstr "Arayüzün nasıl göründüğünü değiştirir"
 
 msgid "Changes how the time remaining is calculated"
-msgstr "Kalan sürenin hesaplanma şeklini değiştirir"
+msgstr "Kalan sürenin nasıl hesaplandığını değiştirir"
 
 msgid "Channel"
 msgstr "Kanal"
@@ -192,7 +192,7 @@ msgid "Couldn't add network"
 msgstr "Ağ eklenemedi"
 
 msgid "Current"
-msgstr ""
+msgstr "Mevcut"
 
 msgid "Current percentage and graph line"
 msgstr "Mevcut yüzde ve grafik çizgisi"
@@ -266,7 +266,7 @@ msgid "Estimated Time Method"
 msgstr "Tahmini Zaman Metodu"
 
 msgid "Example"
-msgstr ""
+msgstr "Örnek"
 
 msgid "Exclude Object"
 msgstr "Nesneyi Hariç Tut"
@@ -332,7 +332,7 @@ msgid "Finish"
 msgstr "Bitir"
 
 msgid "Firmware Restart"
-msgstr "Firmware Yeniden Başlat"
+msgstr "Firmware'i Yeniden Başlat"
 
 msgid "Flow:"
 msgstr "Akış:"
@@ -440,10 +440,10 @@ msgid "It's possible that the configuration is not correct"
 msgstr "Bu yapılandırma doğru olmayabilir"
 
 msgid "Job Status"
-msgstr ""
+msgstr "İş Durumu"
 
 msgid "Klipper Restart"
-msgstr "Klipper Yeniden başlat"
+msgstr "Klipper'ı Yeniden başlat"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper bağlantısı kesildi"
@@ -471,7 +471,7 @@ msgid "Large"
 msgstr "Büyük"
 
 msgid "Last Duration"
-msgstr ""
+msgstr "Son Süre"
 
 msgid "Last Used"
 msgstr "Son kullanılan"
@@ -594,7 +594,7 @@ msgid "No elegible macros:"
 msgstr "Uygun makro yok:"
 
 msgid "No info available"
-msgstr ""
+msgstr "Bilgi yok"
 
 msgid "No mesh has been loaded"
 msgstr "Herhangi bir haritalandırma yüklenmedi"
@@ -618,7 +618,7 @@ msgid "Notifications"
 msgstr "Bildirimler"
 
 msgid "Nozzle diameter"
-msgstr ""
+msgstr "Nozzle ölçüsü"
 
 msgid "Only for the move panel"
 msgstr "Sadece paneli taşımak için"
@@ -672,7 +672,7 @@ msgid "Pressure Advance:"
 msgstr "Akış Dengeleme:"
 
 msgid "Pressure advance"
-msgstr ""
+msgstr "Basınç avansı"
 
 msgid "Print"
 msgstr "Yazdır"
@@ -823,7 +823,7 @@ msgid "Small"
 msgstr "Küçük"
 
 msgid "Smooth time"
-msgstr ""
+msgstr "Pürüzsüzleştirme süresi"
 
 msgid "Speed (mm/s)"
 msgstr "Hız (mm/s)"
@@ -922,7 +922,7 @@ msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC, Stream deneyin tarafından desteklenmez"
 
 msgid "Working"
-msgstr ""
+msgstr "Çalışıyor"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Hareket hızı (mm/s)"
@@ -956,7 +956,7 @@ msgstr[0] "gün"
 msgstr[1] "günler"
 
 msgid "g"
-msgstr ""
+msgstr "g"
 
 msgid "hour"
 msgid_plural "hours"
@@ -987,7 +987,7 @@ msgid "mm³/s"
 msgstr "mm³/s"
 
 msgid "s"
-msgstr ""
+msgstr "s"
 
 msgid "second"
 msgid_plural "seconds"
