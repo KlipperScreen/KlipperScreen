@@ -226,7 +226,7 @@ class Panel(ScreenPanel):
                 self.labels["current_extruder"].set_image(self._gtk.Image(f"extruder-{n}"))
 
         for x in self._printer.get_filament_sensors():
-            if x in data:
+            if x in data and x in self.labels:
                 if 'enabled' in data[x]:
                     self.labels[x]['switch'].set_active(data[x]['enabled'])
                 if 'filament_detected' in data[x]:
