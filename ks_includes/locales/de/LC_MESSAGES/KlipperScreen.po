@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-06-01 12:09+0000\n"
-"Last-Translator: Niklas Tecklenborg <niklas.tecklenborg@gmail.com>\n"
+"PO-Revision-Date: 2024-07-01 12:10+0000\n"
+"Last-Translator: Jérôme Pirotte <jp353239@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/de/>\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -173,14 +173,14 @@ msgid "Connected"
 msgstr "Verbunden"
 
 msgid "Connecting"
-msgstr ""
+msgstr "Verbinden"
 
 #, python-format
 msgid "Connecting to %s"
 msgstr "Verbinden zu %s"
 
 msgid "Connection failed"
-msgstr ""
+msgstr "Verbindung fehlgeschlagen"
 
 msgid "Console"
 msgstr "Konsole"
@@ -189,7 +189,7 @@ msgid "Cooldown"
 msgstr "Abkühlen"
 
 msgid "Couldn't add network"
-msgstr ""
+msgstr "Netzwerk konnte nicht hinzugefügt werden"
 
 msgid "Current"
 msgstr ""
@@ -226,7 +226,7 @@ msgstr "Entfernung (mm)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
+msgstr "Wollen Sie %s vergessen oder trennen?"
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -260,13 +260,13 @@ msgid "Error: Couldn't get a position to probe"
 msgstr "Fehler: Es konnte keine Position zum Abtasten ermittelt werden"
 
 msgid "Estimated Time"
-msgstr ""
+msgstr "Geschätzte Zeit"
 
 msgid "Estimated Time Method"
 msgstr "Verbleibende Zeit"
 
 msgid "Example"
-msgstr ""
+msgstr "Beispiel"
 
 msgid "Exclude Object"
 msgstr "Objekt ausschließen"
@@ -287,10 +287,10 @@ msgid "Extrusion -"
 msgstr "Extrudieren -"
 
 msgid "Failed to delete connection"
-msgstr ""
+msgstr "Löschen der Verbindung fehlgeschlagen"
 
 msgid "Failed to initialize"
-msgstr ""
+msgstr "Initialisierung fehlgeschlagen"
 
 msgid "Failed, adjust position first"
 msgstr "Fehlgeschlagen, Position zuerst anpassen"
@@ -299,7 +299,7 @@ msgid "Fan"
 msgstr "Lüfter"
 
 msgid "Filament"
-msgstr ""
+msgstr "Filament"
 
 msgid "Filament Used"
 msgstr "Filament verbraucht"
@@ -350,10 +350,10 @@ msgid "Full Update"
 msgstr "Vollständige Aktualisierung"
 
 msgid "Gcodes"
-msgstr ""
+msgstr "Gcodes"
 
 msgid "Getting IP address"
-msgstr ""
+msgstr "Rufe IP Adresse ab"
 
 msgid "Go Back"
 msgstr "Zurück"
@@ -410,7 +410,7 @@ msgid "Input Shaper"
 msgstr "Input Shaper"
 
 msgid "Insufficient privileges"
-msgstr ""
+msgstr "Unzureichende Rechte"
 
 msgid "Interface"
 msgstr "Oberfläche"
