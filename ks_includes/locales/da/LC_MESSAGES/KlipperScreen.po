@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-06-20 22:09+0000\n"
-"Last-Translator: Hector Foss <hectorfoss@gmail.com>\n"
+"PO-Revision-Date: 2024-07-03 13:59+0000\n"
+"Last-Translator: srbjessen <srbjessen@gmail.com>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/da/>\n"
 "Language: da\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6-rc\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -187,7 +187,7 @@ msgid "Couldn't add network"
 msgstr "Kunne ikke tilføje netværk"
 
 msgid "Current"
-msgstr ""
+msgstr "Nuværende"
 
 msgid "Current percentage and graph line"
 msgstr "Nuværende procent og graf linje"
@@ -261,7 +261,7 @@ msgid "Estimated Time Method"
 msgstr "Metode til beregning af tid"
 
 msgid "Example"
-msgstr ""
+msgstr "Eksempel"
 
 msgid "Exclude Object"
 msgstr "Ekskludér objekt"
@@ -435,7 +435,7 @@ msgid "It's possible that the configuration is not correct"
 msgstr "Det er muligt, at konfigurationen ikke er korrekt"
 
 msgid "Job Status"
-msgstr ""
+msgstr "Jobstatus"
 
 msgid "Klipper Restart"
 msgstr "Klipper Genstart"
@@ -468,7 +468,7 @@ msgid "Large"
 msgstr "Stor"
 
 msgid "Last Duration"
-msgstr ""
+msgstr "Sidste varighed"
 
 msgid "Last Used"
 msgstr "Sidst brugt"
@@ -591,7 +591,7 @@ msgid "No elegible macros:"
 msgstr "Ingen mulige makroer:"
 
 msgid "No info available"
-msgstr ""
+msgstr "Ingen info tilgængeligt"
 
 msgid "No mesh has been loaded"
 msgstr "Intet mesh er indlæst"
@@ -615,7 +615,7 @@ msgid "Notifications"
 msgstr "Notifikationer"
 
 msgid "Nozzle diameter"
-msgstr ""
+msgstr "Dyse diameter"
 
 msgid "Only for the move panel"
 msgstr "Kun for flyttepanelet"
@@ -669,7 +669,7 @@ msgid "Pressure Advance:"
 msgstr "Pressure Advance:"
 
 msgid "Pressure advance"
-msgstr ""
+msgstr "Pressure advance"
 
 msgid "Print"
 msgstr "Print"
@@ -781,7 +781,7 @@ msgid "Screws Adjust"
 msgstr "Skruejustering"
 
 msgid "Screws not used:"
-msgstr ""
+msgstr "Skruer der ikke bruges:"
 
 msgid "Send"
 msgstr "Sende"
@@ -820,7 +820,7 @@ msgid "Small"
 msgstr "Lille"
 
 msgid "Smooth time"
-msgstr ""
+msgstr "Smooth time"
 
 msgid "Speed (mm/s)"
 msgstr "Hastighed (mm/s)"
@@ -919,7 +919,7 @@ msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC er ikke understøttet i back-end, forsøger at streame istedet"
 
 msgid "Working"
-msgstr ""
+msgstr "Arbejder"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Flyt hastighed (mm/s)"
@@ -953,7 +953,7 @@ msgstr[0] "dag"
 msgstr[1] "dage"
 
 msgid "g"
-msgstr ""
+msgstr "g"
 
 msgid "hour"
 msgid_plural "hours"
@@ -984,7 +984,7 @@ msgid "mm³/s"
 msgstr "mm³/s"
 
 msgid "s"
-msgstr ""
+msgstr "s"
 
 msgid "second"
 msgid_plural "seconds"
