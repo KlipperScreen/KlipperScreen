@@ -114,6 +114,8 @@ class Panel(ScreenPanel):
             self.labels[f"dist{i}"].connect("clicked", self.change_distance, int(i))
             ctx = self.labels[f"dist{i}"].get_style_context()
             ctx.add_class("horizontal_togglebuttons")
+            if self._screen.vertical_mode:
+                ctx.add_class("horizontal_togglebuttons_smaller")
             if int(i) == self.distance:
                 ctx.add_class("horizontal_togglebuttons_active")
             distgrid.attach(self.labels[f"dist{i}"], j, 0, 1, 1)
@@ -124,6 +126,8 @@ class Panel(ScreenPanel):
             self.labels[f"speed{i}"].connect("clicked", self.change_speed, int(i))
             ctx = self.labels[f"speed{i}"].get_style_context()
             ctx.add_class("horizontal_togglebuttons")
+            if self._screen.vertical_mode:
+                ctx.add_class("horizontal_togglebuttons_smaller")
             if int(i) == self.speed:
                 ctx.add_class("horizontal_togglebuttons_active")
             speedgrid.attach(self.labels[f"speed{i}"], j, 0, 1, 1)
@@ -139,23 +143,32 @@ class Panel(ScreenPanel):
 
         filament_sensors = self._printer.get_filament_sensors()
         sensors = Gtk.Grid(valign=Gtk.Align.CENTER, row_spacing=5, column_spacing=5)
-        if len(filament_sensors) > 0:
-            for s, x in enumerate(filament_sensors):
-                if s > limit:
-                    break
-                name = x[23:].strip()
-                self.labels[x] = {
-                    'label': Gtk.Label(label=self.prettify(name), hexpand=True, halign=Gtk.Align.CENTER,
-                                       ellipsize=Pango.EllipsizeMode.END),
-                    'switch': Gtk.Switch(width_request=round(self._gtk.font_size * 2),
-                                         height_request=round(self._gtk.font_size)),
-                    'box': Gtk.Box()
-                }
+        with_switches = (
+            len(filament_sensors) < 4
+            and not (self._screen.vertical_mode and self._screen.height < 600)
+        )
+        for s, x in enumerate(filament_sensors):
+            if s > 8:
+                break
+            name = x.split(" ", 1)[1].strip()
+            self.labels[x] = {
+                'label': Gtk.Label(
+                    label=self.prettify(name), hexpand=True, halign=Gtk.Align.CENTER,
+                    ellipsize=Pango.EllipsizeMode.START),
+                'box': Gtk.Box()
+            }
+            self.labels[x]['box'].pack_start(self.labels[x]['label'], True, True, 10)
+            if with_switches:
+                self.labels[x]['switch'] = Gtk.Switch()
                 self.labels[x]['switch'].connect("notify::active", self.enable_disable_fs, name, x)
-                self.labels[x]['box'].pack_start(self.labels[x]['label'], True, True, 10)
                 self.labels[x]['box'].pack_start(self.labels[x]['switch'], False, False, 0)
-                self.labels[x]['box'].get_style_context().add_class("filament_sensor")
-                sensors.attach(self.labels[x]['box'], s, 0, 1, 1)
+
+            self.labels[x]['box'].get_style_context().add_class("filament_sensor")
+            if s // 2:
+                self.labels[x]['box'].get_style_context().add_class("filament_sensor_detected")
+            else:
+                self.labels[x]['box'].get_style_context().add_class("filament_sensor_empty")
+            sensors.attach(self.labels[x]['box'], s, 0, 1, 1)
 
         grid = Gtk.Grid(column_homogeneous=True)
         grid.attach(xbox, 0, 0, 4, 1)
@@ -227,17 +240,15 @@ class Panel(ScreenPanel):
 
         for x in self._printer.get_filament_sensors():
             if x in data and x in self.labels:
-                if 'enabled' in data[x]:
+                if 'enabled' in data[x] and 'switch' in self.labels[x]:
                     self.labels[x]['switch'].set_active(data[x]['enabled'])
-                if 'filament_detected' in data[x]:
-                    if self._printer.get_stat(x, "enabled"):
-                        if data[x]['filament_detected']:
-                            self.labels[x]['box'].get_style_context().remove_class("filament_sensor_empty")
-                            self.labels[x]['box'].get_style_context().add_class("filament_sensor_detected")
-                        else:
-                            self.labels[x]['box'].get_style_context().remove_class("filament_sensor_detected")
-                            self.labels[x]['box'].get_style_context().add_class("filament_sensor_empty")
-                logging.info(f"{x}: {self._printer.get_stat(x)}")
+                if 'filament_detected' in data[x] and self._printer.get_stat(x, "enabled"):
+                    if data[x]['filament_detected']:
+                        self.labels[x]['box'].get_style_context().remove_class("filament_sensor_empty")
+                        self.labels[x]['box'].get_style_context().add_class("filament_sensor_detected")
+                    else:
+                        self.labels[x]['box'].get_style_context().remove_class("filament_sensor_detected")
+                        self.labels[x]['box'].get_style_context().add_class("filament_sensor_empty")
 
     def change_distance(self, widget, distance):
         logging.info(f"### Distance {distance}")

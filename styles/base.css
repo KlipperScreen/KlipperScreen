@@ -321,6 +321,10 @@ trough {
     min-height: 3em;
 }
 
+.horizontal_togglebuttons_smaller {
+    min-height: 0;
+}
+
 .horizontal_togglebuttons:first-child {
     border-top-left-radius: .75em;
     border-bottom-left-radius: .75em;
