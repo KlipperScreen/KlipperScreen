@@ -1191,7 +1191,7 @@ class KlipperScreen(Gtk.Window):
     def update_size(self, *args):
         width, height = self.get_size()
         if width != self.width or height != self.height:
-            logging.info(f"Size changed: {self.width}x{self.height}")
+            logging.info(f"Size changed: {width}x{height}")
         self.width, self.height = width, height
         new_ratio = self.width / self.height
         new_mode = new_ratio < 1.0
