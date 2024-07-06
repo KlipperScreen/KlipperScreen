@@ -45,10 +45,10 @@ class Panel(ScreenPanel):
             'pressure': self._gtk.Button("settings", _("Pressure Advance"), "color2"),
             'retraction': self._gtk.Button("settings", _("Retraction"), "color1")
         }
-        self.buttons['extrude'].connect("clicked", self.extrude, "+")
-        self.buttons['load'].connect("clicked", self.load_unload, "+")
-        self.buttons['unload'].connect("clicked", self.load_unload, "-")
-        self.buttons['retract'].connect("clicked", self.extrude, "-")
+        self.buttons['extrude'].connect("clicked", self.check_min_temp, "extrude", "+")
+        self.buttons['load'].connect("clicked", self.check_min_temp, "load_unload", "+")
+        self.buttons['unload'].connect("clicked", self.check_min_temp, "load_unload", "-")
+        self.buttons['retract'].connect("clicked", self.check_min_temp, "extrude", "-")
         self.buttons['temperature'].connect("clicked", self.menu_item_clicked, {
             "panel": "temperature"
         })
@@ -269,6 +269,28 @@ class Panel(ScreenPanel):
         self.labels[f"speed{self.speed}"].get_style_context().remove_class("horizontal_togglebuttons_active")
         self.labels[f"speed{speed}"].get_style_context().add_class("horizontal_togglebuttons_active")
         self.speed = speed
+
+    def check_min_temp(self, widget, method, direction):
+        temp = float(self._printer.get_stat(self.current_extruder, 'temperature'))
+        target = float(self._printer.get_stat(self.current_extruder, 'target'))
+        min_extrude_temp = float(self._printer.config[self.current_extruder]['min_extrude_temp'])
+        if temp < min_extrude_temp:
+            if target > min_extrude_temp:
+                self._screen._send_action(
+                    widget, "printer.gcode.script",
+                    {"script": f"M109 S{target}"}
+                )
+            else:
+                self._screen.show_popup_message(_("Temperature too low to extrude"))
+                self.menu_item_clicked(
+                    widget,
+                    {"panel": "temperature", 'extra': self.current_extruder}
+                )
+                return
+        if method == "extrude":
+            self.extrude(widget, direction)
+        elif method == "load_unload":
+            self.load_unload(widget, direction)
 
     def extrude(self, widget, direction):
         self._screen._ws.klippy.gcode_script(KlippyGcodes.EXTRUDE_REL)
