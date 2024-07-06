@@ -252,7 +252,7 @@ textview .time {
 }
 
 .dialog-warning {
-    border-bottom-color: @olarized-yellow;
+    border-bottom-color: @solarized-yellow;
 }
 
 .dialog-info {
