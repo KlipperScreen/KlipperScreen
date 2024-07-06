@@ -16,7 +16,6 @@ class Prompt:
         self.prompt = None
         self.scroll_box = Gtk.Box(
             orientation=Gtk.Orientation.VERTICAL,
-            halign=Gtk.Align.CENTER
         )
         self.groups = []
 
@@ -68,9 +67,6 @@ class Prompt:
                 Gtk.FlowBox(
                     selection_mode=Gtk.SelectionMode.NONE,
                     orientation=Gtk.Orientation.HORIZONTAL,
-                    halign=Gtk.Align.CENTER,
-                    min_children_per_line=4,
-                    max_children_per_line=4,
                 )
             )
         elif data == 'prompt_button_group_end':
@@ -84,6 +80,10 @@ class Prompt:
         button.connect("clicked", self.screen._send_action, "printer.gcode.script", {'script': gcode})
         if self.groups:
             self.groups[-1].add(button)
+            # Workaround to expand the buttons horizontally
+            max_childs = len(self.groups[-1].get_children())
+            self.groups[-1].set_max_children_per_line(min(4, max_childs))
+            self.groups[-1].set_min_children_per_line(min(4, max_childs))
         else:
             self.scroll_box.add(button)
 

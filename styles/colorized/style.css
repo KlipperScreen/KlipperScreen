@@ -252,7 +252,7 @@ textview .time {
 }
 
 .dialog-warning {
-    border-bottom-color: @solarized-yellow;
+    border-bottom-color: @solarized-orange;
 }
 
 .dialog-info {
@@ -260,7 +260,7 @@ textview .time {
 }
 
 .dialog-default {
-    border-bottom-color: @solarized-green;
+    border-bottom-color: @solarized-blue;
 }
 
 .dialog-secondary {
@@ -268,5 +268,5 @@ textview .time {
 }
 
 .dialog-primary {
-     border-bottom-color: @solarized-orange;
+     border-bottom-color: @solarized-green;
 }
