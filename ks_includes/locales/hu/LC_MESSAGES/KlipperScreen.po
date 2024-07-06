@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-06-11 18:09+0000\n"
-"Last-Translator: \"Zs.Antal\" <zsikaiantal@icloud.com>\n"
+"PO-Revision-Date: 2024-07-06 18:04+0000\n"
+"Last-Translator: \"Zs.Antal\" <antonio092130@icloud.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/hu/>\n"
 "Language: hu\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -187,7 +187,7 @@ msgid "Couldn't add network"
 msgstr "Nem tudtam hozzáadni a hálózatot"
 
 msgid "Current"
-msgstr ""
+msgstr "Aktuális"
 
 msgid "Current percentage and graph line"
 msgstr "Aktuális százalék és grafikonvonal"
@@ -199,7 +199,7 @@ msgid "Date"
 msgstr "Dátum"
 
 msgid "Delete"
-msgstr ""
+msgstr "Törlés"
 
 msgid "Delete Directory?"
 msgstr "Törlöd a könyvtárat?"
@@ -261,7 +261,7 @@ msgid "Estimated Time Method"
 msgstr "Becsült idő módszer"
 
 msgid "Example"
-msgstr ""
+msgstr "Példa"
 
 msgid "Exclude Object"
 msgstr "Objektum kizárása"
@@ -435,7 +435,7 @@ msgid "It's possible that the configuration is not correct"
 msgstr "Lehetséges, hogy a konfiguráció nem megfelelő"
 
 msgid "Job Status"
-msgstr ""
+msgstr "Állás státusz"
 
 msgid "Klipper Restart"
 msgstr "A Klipper újraindítása"
@@ -467,7 +467,7 @@ msgid "Large"
 msgstr "Nagy"
 
 msgid "Last Duration"
-msgstr ""
+msgstr "Utolsó időtartam"
 
 msgid "Last Used"
 msgstr "Utoljára használt"
@@ -590,7 +590,7 @@ msgid "No elegible macros:"
 msgstr "Nincs választható makró:"
 
 msgid "No info available"
-msgstr ""
+msgstr "Nincs információ"
 
 msgid "No mesh has been loaded"
 msgstr "Nincs háló betöltve"
@@ -614,7 +614,7 @@ msgid "Notifications"
 msgstr "Értesítések"
 
 msgid "Nozzle diameter"
-msgstr ""
+msgstr "Fúvóka átmérő"
 
 msgid "Only for the move panel"
 msgstr "Csak a mozgatópanelhez"
@@ -668,7 +668,7 @@ msgid "Pressure Advance:"
 msgstr "Nyomás előtolás:"
 
 msgid "Pressure advance"
-msgstr ""
+msgstr "Nyomáselőtolás"
 
 msgid "Print"
 msgstr "Nyomtatás"
@@ -819,7 +819,7 @@ msgid "Small"
 msgstr "Kicsi"
 
 msgid "Smooth time"
-msgstr ""
+msgstr "Simítási idő"
 
 msgid "Speed (mm/s)"
 msgstr "Sebesség (mm/s)"
@@ -920,7 +920,7 @@ msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "A WebRTC-t a Streamet próbáló háttérrendszer nem támogatja"
 
 msgid "Working"
-msgstr ""
+msgstr "Munkavégzés"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Mozgási seb. (mm/s)"
@@ -954,7 +954,7 @@ msgstr[0] "nap"
 msgstr[1] "napok"
 
 msgid "g"
-msgstr ""
+msgstr "g"
 
 msgid "hour"
 msgid_plural "hours"
@@ -985,7 +985,7 @@ msgid "mm³/s"
 msgstr "mm³/s"
 
 msgid "s"
-msgstr ""
+msgstr "s"
 
 msgid "second"
 msgid_plural "seconds"
