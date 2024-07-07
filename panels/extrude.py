@@ -273,7 +273,7 @@ class Panel(ScreenPanel):
     def check_min_temp(self, widget, method, direction):
         temp = float(self._printer.get_stat(self.current_extruder, 'temperature'))
         target = float(self._printer.get_stat(self.current_extruder, 'target'))
-        min_extrude_temp = float(self._printer.config[self.current_extruder]['min_extrude_temp'])
+        min_extrude_temp = float(self._printer.config[self.current_extruder].get('min_extrude_temp', 170))
         if temp < min_extrude_temp:
             if target > min_extrude_temp:
                 self._screen._send_action(
