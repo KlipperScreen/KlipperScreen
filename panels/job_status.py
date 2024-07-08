@@ -566,8 +566,10 @@ class Panel(ScreenPanel):
                     f"{float(data['print_stats']['filament_used']) / 1000:.1f} m"
                 )
             if 'info' in data["print_stats"]:
-                if 'total_layer' in data['print_stats']['info'] and 'current_layer' in data['print_stats']['info']:
-                    if data["print_stats"]['info']['total_layer'] is not None and data['print_stats']['info']['current_layer'] is not None:
+                if ('total_layer' in data['print_stats']['info']
+                        and 'current_layer' in data['print_stats']['info']):
+                    if (data["print_stats"]['info']['total_layer'] is not None
+                            and data['print_stats']['info']['current_layer'] is not None):
                         self.missing_print_stats_info = False
                     else:
                         self.missing_print_stats_info = True
