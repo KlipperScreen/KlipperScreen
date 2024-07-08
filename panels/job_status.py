@@ -39,6 +39,7 @@ class Panel(ScreenPanel):
         self.mms2 = _("mm/s²")
         self.mms3 = _("mm³/s")
         self.status_grid = self.move_grid = self.time_grid = self.extrusion_grid = None
+        self.missing_print_stats_info = True
 
         data = ['pos_x', 'pos_y', 'pos_z', 'time_left', 'duration', 'slicer_time', 'file_time',
                 'filament_time', 'est_time', 'speed_factor', 'req_speed', 'max_accel', 'extrude_factor', 'zoffset',
@@ -565,6 +566,12 @@ class Panel(ScreenPanel):
                     f"{float(data['print_stats']['filament_used']) / 1000:.1f} m"
                 )
             if 'info' in data["print_stats"]:
+                if 'total_layer' in data['print_stats']['info'] and 'current_layer' in data['print_stats']['info']:
+                    if data["print_stats"]['info']['total_layer'] is not None and data['print_stats']['info']['current_layer'] is not None:
+                        self.missing_print_stats_info = False
+                    else:
+                        self.missing_print_stats_info = True
+
                 if ('total_layer' in data['print_stats']['info']
                         and data["print_stats"]['info']['total_layer'] is not None):
                     self.labels['total_layers'].set_label(f"{data['print_stats']['info']['total_layer']}")
@@ -574,11 +581,12 @@ class Panel(ScreenPanel):
                         f"{data['print_stats']['info']['current_layer']} / "
                         f"{self.labels['total_layers'].get_text()}"
                     )
-            elif "layer_height" in self.file_metadata and "object_height" in self.file_metadata:
-                self.labels['layer'].set_label(
-                    f"{1 + round((self.pos_z - self.f_layer_h) / self.layer_h)} / "
-                    f"{self.labels['total_layers'].get_text()}"
-                )
+            elif self.missing_print_stats_info:
+                if "layer_height" in self.file_metadata and "object_height" in self.file_metadata:
+                    self.labels['layer'].set_label(
+                        f"{1 + round((self.pos_z - self.f_layer_h) / self.layer_h)} / "
+                        f"{self.labels['total_layers'].get_text()}"
+                    )
             if self.state in ["printing", "paused"]:
                 self.update_time_left()
 
