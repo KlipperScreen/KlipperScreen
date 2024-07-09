@@ -785,7 +785,7 @@ class Panel(ScreenPanel):
         self._gtk.remove_dialog(dialog)
 
     def update_filename(self, filename):
-        if not filename:
+        if not filename or filename == self.filename:
             return
         if self.animation_timeout is not None:
             GLib.source_remove(self.animation_timeout)
