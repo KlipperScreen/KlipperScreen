@@ -199,7 +199,7 @@ class BasePanel(ScreenPanel):
         self.control['shutdown'].set_visible(not printing)
         self.show_shortcut(connected)
         self.show_heaters(connected)
-        self.show_printer_select()
+        self.show_printer_select(len(self._config.get_printers()) > 1)
         for control in ('back', 'home'):
             self.set_control_sensitive(len(self._screen._cur_panels) > 1, control=control)
         self.current_panel = panel
