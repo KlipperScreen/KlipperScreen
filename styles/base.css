@@ -32,6 +32,10 @@ window {
     -gtk-icon-shadow: none;
 }
 
+junction {
+    background-color: @bg;
+}
+
 switch slider {
     border: 0;
 }
