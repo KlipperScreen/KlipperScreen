@@ -22,7 +22,6 @@ class Panel(ScreenPanel):
         self.speed_factor = 1.0
         self.speed = 100
         self.req_speed = 0
-        self.f_layer_h = self.layer_h = 1
         self.oheight = 0.0
         self.current_extruder = None
         self.fila_section = pi * ((1.75 / 2) ** 2)
@@ -574,11 +573,6 @@ class Panel(ScreenPanel):
                         f"{data['print_stats']['info']['current_layer']} / "
                         f"{self.labels['total_layers'].get_text()}"
                     )
-            elif "layer_height" in self.file_metadata and "object_height" in self.file_metadata:
-                self.labels['layer'].set_label(
-                    f"{1 + round((self.pos_z - self.f_layer_h) / self.layer_h)} / "
-                    f"{self.labels['total_layers'].get_text()}"
-                )
             if 'total_duration' in data["print_stats"]:
                 self.labels["duration"].set_label(self.format_time(data["print_stats"]["total_duration"]))
             if self.state in ["printing", "paused"]:
@@ -837,14 +831,6 @@ class Panel(ScreenPanel):
         if "object_height" in self.file_metadata:
             self.oheight = float(self.file_metadata['object_height'])
             self.labels['height'].set_label(f"{self.oheight} {self.mm}")
-            if "layer_height" in self.file_metadata:
-                self.layer_h = float(self.file_metadata['layer_height'])
-                self.f_layer_h = (
-                    float(self.file_metadata['first_layer_height'])
-                    if "first_layer_height" in self.file_metadata
-                    else self.layer_h
-                )
-                self.labels['total_layers'].set_label(f"{((self.oheight - self.f_layer_h) / self.layer_h) + 1:.0f}")
         if "filament_total" in self.file_metadata:
             self.labels['filament_total'].set_label(f"{float(self.file_metadata['filament_total']) / 1000:.1f} m")
         if "job_id" in self.file_metadata and self.file_metadata['job_id']:
