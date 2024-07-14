@@ -10,6 +10,7 @@ from datetime import datetime
 from math import log
 from ks_includes.screen_panel import ScreenPanel
 
+import psutil
 
 class BasePanel(ScreenPanel):
     def __init__(self, screen, title=None):
@@ -78,6 +79,9 @@ class BasePanel(ScreenPanel):
 
         # This box will be populated by show_heaters
         self.control['temp_box'] = Gtk.Box(spacing=10)
+        self.control['battery_box'] = Gtk.Box(spacing=10, halign=Gtk.Align.END)
+
+        # self.control['battery_box'].pack_end(self.control['battery'], True, True, 10)
 
         self.titlelbl = Gtk.Label(hexpand=True, halign=Gtk.Align.CENTER, ellipsize=Pango.EllipsizeMode.END)
 
@@ -90,6 +94,7 @@ class BasePanel(ScreenPanel):
         self.titlebar.add(self.control['temp_box'])
         self.titlebar.add(self.titlelbl)
         self.titlebar.add(self.control['time_box'])
+        self.titlebar.add(self.control['battery_box'])
         self.set_title(title)
 
         # Main layout
@@ -336,7 +341,34 @@ class BasePanel(ScreenPanel):
                 self.control['time'].set_text(f'{now:%I:%M %p}')
             self.time_min = now.minute
             self.time_format = confopt
+            self.battery_percentage()
         return True
+
+    def battery_percentage(self, show=True):
+        for child in self.control['battery_box'].get_children():
+            self.control['battery_box'].remove(child)
+        if not show:
+            return
+
+        img_size = self._gtk.img_scale * self.bts
+        self.labels['battery'] = Gtk.Label(ellipsize=Pango.EllipsizeMode.START)
+        self.labels['battery_box'] = Gtk.Box()
+        icon = self._gtk.Image("arrow-up", img_size, img_size)
+        if icon is not None:
+            self.labels['battery_box'].pack_start(icon, False, False, 3)
+        self.labels['battery_box'].pack_start(self.labels['battery'], False, False, 0)
+
+        self.control['battery_box'].add(self.labels["battery_box"])
+        self.control['battery_box'].show_all()
+        battery = psutil.sensors_battery()
+        if battery:
+            battery_percent = int(battery.percent)  # Convert percentage to integer
+            battery_percent_str = str(battery_percent)[:2]  # Extract first two digits as string
+            print(f"Battery percentage: {battery_percent_str}%")
+            # self.control['battery'].set_text(f'BAT: {battery_percent}%')
+            print(f"Power plugged in: {'Yes' if battery.power_plugged else 'No'}")
+        else:
+            print("Battery information not available.")
 
     def set_ks_printer_cfg(self, printer):
         ScreenPanel.ks_printer_cfg = self._config.get_printer_config(printer)
