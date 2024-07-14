@@ -505,7 +505,10 @@ class Panel(ScreenPanel):
         if 'gcode_move' in data:
             if 'gcode_position' in data['gcode_move']:
                 self.pos_z = round(float(data['gcode_move']['gcode_position'][2]), 2)
-                self.buttons['z'].set_label(f"Z: {self.pos_z:6.2f}{f'/{self.oheight}' if self.oheight > 0 else ''}")
+                self.buttons['z'].set_label(
+                    f"Z: {self.pos_z:6.2f}{f'/{self.oheight}' if self.oheight > 0 else ''} "
+                    f"{f'{self.mm}' if self._screen.width > 500 else ''}"
+                )
             if 'extrude_factor' in data['gcode_move']:
                 self.extrusion = round(float(data['gcode_move']['extrude_factor']) * 100)
                 self.labels['extrude_factor'].set_label(f"{self.extrusion:3}%")
