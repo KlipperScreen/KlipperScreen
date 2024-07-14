@@ -762,7 +762,6 @@ class Panel(ScreenPanel):
         if width <= 1 or height <= 1:
             width = max_width
             height = max_height
-        self.labels['thumbnail'].set_hexpand(False)
         pixbuf = self.get_file_image(self.filename, width, height)
         if pixbuf is None:
             logging.debug("no pixbuf")
