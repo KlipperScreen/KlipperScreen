@@ -161,7 +161,7 @@ class KlipperScreenConfig:
                 bools = (
                     'invert_x', 'invert_y', 'invert_z', '24htime', 'only_heaters', 'show_cursor', 'confirm_estop',
                     'autoclose_popups', 'use_dpms', 'use_default_menu', 'side_macro_shortcut', 'use-matchbox-keyboard',
-                    'show_heater_power', "show_scroll_steppers", "auto_open_extrude"
+                    'show_heater_power', "show_scroll_steppers", "auto_open_extrude", "show_battery"
                 )
                 strs = (
                     'default_printer', 'language', 'print_sort_dir', 'theme', 'screen_blanking_printing', 'font_size',
@@ -309,6 +309,9 @@ class KlipperScreenConfig:
                                       "value": "False", "callback": screen.reload_panels}},
             {"auto_open_extrude": {"section": "main", "name": _("Auto-open Extrude On Pause"), "type": "binary",
                                    "value": "True", "callback": screen.reload_panels}},
+            {"show_battery": {"section": "main", "name": _("Show Battery"), "type": "binary",
+                                  "tooltip": _("For Laptops/Tablets. Show battery percentage and charge state"),
+                                   "value": "False", "callback": screen.reload_panels}}
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
 
