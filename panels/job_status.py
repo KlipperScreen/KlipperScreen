@@ -22,7 +22,6 @@ class Panel(ScreenPanel):
         self.speed_factor = 1.0
         self.speed = 100
         self.req_speed = 0
-        self.f_layer_h = self.layer_h = 1
         self.oheight = 0.0
         self.current_extruder = None
         self.fila_section = pi * ((1.75 / 2) ** 2)
@@ -506,7 +505,10 @@ class Panel(ScreenPanel):
         if 'gcode_move' in data:
             if 'gcode_position' in data['gcode_move']:
                 self.pos_z = round(float(data['gcode_move']['gcode_position'][2]), 2)
-                self.buttons['z'].set_label(f"Z: {self.pos_z:6.2f}{f'/{self.oheight}' if self.oheight > 0 else ''}")
+                self.buttons['z'].set_label(
+                    f"Z: {self.pos_z:6.2f}{f'/{self.oheight}' if self.oheight > 0 else ''} "
+                    f"{f'{self.mm}' if self._screen.width > 500 else ''}"
+                )
             if 'extrude_factor' in data['gcode_move']:
                 self.extrusion = round(float(data['gcode_move']['extrude_factor']) * 100)
                 self.labels['extrude_factor'].set_label(f"{self.extrusion:3}%")
@@ -574,11 +576,8 @@ class Panel(ScreenPanel):
                         f"{data['print_stats']['info']['current_layer']} / "
                         f"{self.labels['total_layers'].get_text()}"
                     )
-            elif "layer_height" in self.file_metadata and "object_height" in self.file_metadata:
-                self.labels['layer'].set_label(
-                    f"{1 + round((self.pos_z - self.f_layer_h) / self.layer_h)} / "
-                    f"{self.labels['total_layers'].get_text()}"
-                )
+            if 'total_duration' in data["print_stats"]:
+                self.labels["duration"].set_label(self.format_time(data["print_stats"]["total_duration"]))
             if self.state in ["printing", "paused"]:
                 self.update_time_left()
 
@@ -592,61 +591,50 @@ class Panel(ScreenPanel):
         return True
 
     def update_time_left(self):
-        total_duration = float(self._printer.get_stat('print_stats', 'total_duration'))
-        print_duration = float(self._printer.get_stat('print_stats', 'print_duration'))
-        fila_used = float(self._printer.get_stat('print_stats', 'filament_used'))
-        if "gcode_start_byte" in self.file_metadata:
-            progress = (max(self._printer.get_stat('virtual_sdcard', 'file_position') -
-                        self.file_metadata['gcode_start_byte'], 0) / (self.file_metadata['gcode_end_byte'] -
-                        self.file_metadata['gcode_start_byte']))
-        else:
-            progress = self._printer.get_stat('virtual_sdcard', 'progress')
-        self.labels["duration"].set_label(self.format_time(total_duration))
+        progress = (
+            max(self._printer.get_stat('virtual_sdcard', 'file_position') - self.file_metadata['gcode_start_byte'], 0)
+            / (self.file_metadata['gcode_end_byte'] - self.file_metadata['gcode_start_byte'])
+        ) if "gcode_start_byte" in self.file_metadata else self._printer.get_stat('virtual_sdcard', 'progress')
+
         elapsed_label = f"{self.labels['elapsed'].get_text()}  {self.labels['duration'].get_text()}"
         self.buttons['elapsed'].set_label(elapsed_label)
         find_widget(self.buttons['elapsed'], Gtk.Label).set_ellipsize(Pango.EllipsizeMode.END)
-        estimated = slicer_time = filament_time = file_time = 0
-        timeleft_type = self._config.get_config()['main'].get('print_estimate_method', 'auto')
 
-        if 'estimated_time' in self.file_metadata and self.file_metadata['estimated_time'] > 1:
-            spdcomp = sqrt(self.speed_factor)
-            slicer_time = ((self.file_metadata['estimated_time']) / spdcomp)
-            self.labels["slicer_time"].set_label(self.format_time(slicer_time))
-            if print_duration < 1:
+        last_time = self.file_metadata['last_time'] if "last_time" in self.file_metadata else 0
+        slicer_time = self.file_metadata['estimated_time'] if 'estimated_time' in self.file_metadata else 0
+        print_duration = float(self._printer.get_stat('print_stats', 'print_duration'))
+        if print_duration < 1:  # No-extrusion
+            if last_time:
+                print_duration = last_time * progress
+            elif slicer_time:
                 print_duration = slicer_time * progress
-        elif print_duration < 1:  # No-extrusion
-            print_duration = total_duration
+            else:
+                print_duration = float(self._printer.get_stat('print_stats', 'total_duration'))
 
+        fila_used = float(self._printer.get_stat('print_stats', 'filament_used'))
         if 'filament_total' in self.file_metadata and self.file_metadata['filament_total'] >= fila_used > 0:
             filament_time = (print_duration / (fila_used / self.file_metadata['filament_total']))
             self.labels["filament_time"].set_label(self.format_time(filament_time))
+        else:
+            filament_time = 0
         if progress > 0:
             file_time = (print_duration / progress)
             self.labels["file_time"].set_label(self.format_time(file_time))
+        else:
+            file_time = 0
 
+        estimated = 0
+        timeleft_type = self._config.get_config()['main'].get('print_estimate_method', 'auto')
         if timeleft_type == "file":
             estimated = file_time
         elif timeleft_type == "filament":
             estimated = filament_time
         elif timeleft_type == "slicer":
             estimated = slicer_time
-        elif estimated < 1:  # Auto
-            if "last_time" in self.file_metadata:
-                estimated = self.file_metadata['last_time']
-            elif print_duration < slicer_time > 1:
-                if progress < 0.15:
-                    # At the begining file and filament are innacurate
-                    estimated = slicer_time
-                elif filament_time > 1 and file_time > 1:
-                    # Weighted arithmetic mean (Slicer is the most accurate)
-                    estimated = (slicer_time * 3 + filament_time + file_time) / 5
-                elif file_time > 1:
-                    # Weighted arithmetic mean (Slicer is the most accurate)
-                    estimated = (slicer_time * 2 + file_time) / 3
-            elif print_duration < filament_time > 1 and file_time > 1:
-                estimated = (filament_time + file_time) / 2
-            elif file_time > 1:
-                estimated = file_time
+        else:
+            estimated = self.estimate_time(
+                progress, print_duration, file_time, filament_time, slicer_time, last_time
+            )
         if estimated > 1:
             progress = min(max(print_duration / estimated, 0), 1)
             self.labels["est_time"].set_label(self.format_time(estimated))
@@ -655,6 +643,31 @@ class Panel(ScreenPanel):
             self.buttons['left'].set_label(remaining_label)
             find_widget(self.buttons['left'], Gtk.Label).set_ellipsize(Pango.EllipsizeMode.END)
         self.update_progress(progress)
+
+    def estimate_time(self, progress, print_duration, file_time, filament_time, slicer_time, last_time):
+        estimate_above = 0.3
+        slicer_time /= sqrt(self.speed_factor)
+        if progress <= estimate_above:
+            return last_time or slicer_time or filament_time or file_time
+        objects = self._printer.get_stat("exclude_object", "objects")
+        excluded_objects = self._printer.get_stat("exclude_object", "excluded_objects")
+        exclude_compensation = 3 * (len(excluded_objects) / len(objects)) if len(objects) > 0 else 0
+        weight_last = 4.0 - exclude_compensation if print_duration < last_time else 0
+        weight_slicer = 1.0 + estimate_above - progress - exclude_compensation if print_duration < slicer_time else 0
+        weight_filament = min(progress - estimate_above, 0.33) if print_duration < filament_time else 0
+        weight_file = progress - estimate_above
+        total_weight = weight_last + weight_slicer + weight_filament + weight_file
+        if total_weight == 0:
+            return 0
+        return (
+            (
+                last_time * weight_last
+                + slicer_time * weight_slicer
+                + filament_time * weight_filament
+                + file_time * weight_file
+            )
+            / total_weight
+        )
 
     def update_progress(self, progress: float):
         self.progress = progress
@@ -749,7 +762,6 @@ class Panel(ScreenPanel):
         if width <= 1 or height <= 1:
             width = max_width
             height = max_height
-        self.labels['thumbnail'].set_hexpand(False)
         pixbuf = self.get_file_image(self.filename, width, height)
         if pixbuf is None:
             logging.debug("no pixbuf")
@@ -769,7 +781,7 @@ class Panel(ScreenPanel):
         self._gtk.remove_dialog(dialog)
 
     def update_filename(self, filename):
-        if not filename:
+        if not filename or filename == self.filename:
             return
         if self.animation_timeout is not None:
             GLib.source_remove(self.animation_timeout)
@@ -817,17 +829,10 @@ class Panel(ScreenPanel):
         logging.info(f"Update Metadata. File: {self.filename} Size: {self.file_metadata['size']}")
         if "estimated_time" in self.file_metadata and self.timeleft_type == "slicer":
             self.labels["est_time"].set_label(self.format_time(self.file_metadata['estimated_time']))
+            self.labels["slicer_time"].set_label(self.format_time(self.file_metadata['estimated_time']))
         if "object_height" in self.file_metadata:
             self.oheight = float(self.file_metadata['object_height'])
             self.labels['height'].set_label(f"{self.oheight} {self.mm}")
-            if "layer_height" in self.file_metadata:
-                self.layer_h = float(self.file_metadata['layer_height'])
-                self.f_layer_h = (
-                    float(self.file_metadata['first_layer_height'])
-                    if "first_layer_height" in self.file_metadata
-                    else self.layer_h
-                )
-                self.labels['total_layers'].set_label(f"{((self.oheight - self.f_layer_h) / self.layer_h) + 1:.0f}")
         if "filament_total" in self.file_metadata:
             self.labels['filament_total'].set_label(f"{float(self.file_metadata['filament_total']) / 1000:.1f} m")
         if "job_id" in self.file_metadata and self.file_metadata['job_id']:

@@ -4,6 +4,7 @@
 import subprocess
 import logging
 
+import sdbus
 from sdbus_block.networkmanager import (
     NetworkManager,
     NetworkDeviceGeneric,
@@ -17,7 +18,6 @@ from sdbus_block.networkmanager import (
     enums,
     exceptions,
 )
-from sdbus import sd_bus_open_system, set_default_bus
 from gi.repository import GLib
 from uuid import uuid4
 
@@ -91,10 +91,10 @@ class SdbusNm:
 
     def __init__(self, popup_callback):
         self.ensure_nm_running()
-        self.system_bus = sd_bus_open_system()  # We need system bus
+        self.system_bus = sdbus.sd_bus_open_system()  # We need system bus
         if self.system_bus is None:
             return None
-        set_default_bus(self.system_bus)
+        sdbus.set_default_bus(self.system_bus)
         self.nm = NetworkManager()
         self.wlan_device = (
             self.get_wireless_interfaces()[0]

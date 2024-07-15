@@ -115,18 +115,24 @@ check_requirements()
 
 create_virtualenv()
 {
-    if [ -d $KSENV ]; then
+    if [ "${KSENV}" = "/" ]; then
+        echo_error "Failed to resolve venv location. Aborting."
+        exit 1
+    fi
+
+    if [ -d "$KSENV" ]; then
         echo_text "Removing old virtual environment"
-        rm -rf ${KSENV}
+        rm -rf "${KSENV}"
     fi
     
     echo_text "Creating virtual environment"
-    python3 -m venv ${KSENV}
+    python3 -m venv "${KSENV}"
 
-    if ! source ${KSENV}/bin/activate; then
+    if ! . "${KSENV}/bin/activate"; then
         echo_error "Could not activate the enviroment, try deleting ${KSENV} and retry"
         exit 1
     fi
+
     if [[ "$(uname -m)" =~ armv[67]l ]]; then
         echo_text "Using armv[67]l! Adding piwheels.org as extra index..."
         pip --disable-pip-version-check install --extra-index-url https://www.piwheels.org/simple -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
@@ -136,7 +142,7 @@ create_virtualenv()
     if [ $? -gt 0 ]; then
         echo_error "Error: pip install exited with status code $?"
         echo_text "Trying again with new tools..."
-        sudo apt install -y build-essential cmake
+        sudo apt install -y build-essential cmake libsystemd-dev
         if [[ "$(uname -m)" =~ armv[67]l ]]; then
             echo_text "Adding piwheels.org as extra index..."
             pip install --extra-index-url https://www.piwheels.org/simple --upgrade pip setuptools
@@ -152,7 +158,7 @@ create_virtualenv()
         fi
     fi
     deactivate
-    echo_ok "Virtual enviroment created"
+    echo_ok "Virtual environment created"
 }
 
 install_systemd_service()
