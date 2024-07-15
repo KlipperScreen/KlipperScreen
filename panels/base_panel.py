@@ -113,7 +113,6 @@ class BasePanel(ScreenPanel):
             self.main_grid.attach(self.content, 1, 1, 1, 1)
 
         self.update_time()
-        self.battery_percentage()
 
     def reload_icons(self):
         button: Gtk.Button
@@ -124,6 +123,8 @@ class BasePanel(ScreenPanel):
             width = pixbuf.get_width()
             height = pixbuf.get_height()
             button.set_image(self._gtk.Image(name, width, height))
+        
+        self.battery_percentage()
 
     def show_heaters(self, show=True):
         try:
