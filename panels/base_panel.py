@@ -344,7 +344,7 @@ class BasePanel(ScreenPanel):
             self.battery_percentage()
         return True
 
-    def battery_percentage(self, show=True):
+def battery_percentage(self, show=True):
         for child in self.control['battery_box'].get_children():
             self.control['battery_box'].remove(child)
         if not show:
@@ -353,19 +353,31 @@ class BasePanel(ScreenPanel):
         img_size = self._gtk.img_scale * self.bts
         self.labels['battery'] = Gtk.Label(ellipsize=Pango.EllipsizeMode.START)
         self.labels['battery_box'] = Gtk.Box()
-        icon = self._gtk.Image("arrow-up", img_size, img_size)
-        if icon is not None:
-            self.labels['battery_box'].pack_start(icon, False, False, 3)
-        self.labels['battery_box'].pack_start(self.labels['battery'], False, False, 0)
+        self.labels['battery_box'].pack_end(self.labels['battery'], False, False, 0)
 
         self.control['battery_box'].add(self.labels["battery_box"])
         self.control['battery_box'].show_all()
         battery = psutil.sensors_battery()
         if battery:
             battery_percent = int(battery.percent)  # Convert percentage to integer
+
+            if battery_percent < 33:
+              icon = self._gtk.Image("low-battery", img_size, img_size)
+              self.labels['battery_box'].pack_start(icon, False, False, 3)
+            elif battery_percent < 66:
+              icon = self._gtk.Image("medium-battery", img_size, img_size)
+              self.labels['battery_box'].pack_start(icon, False, False, 3)
+            elif battery.power_plugged:
+              icon = self._gtk.Image("charging-battery", img_size, img_size)
+              self.labels['battery_box'].pack_start(icon, False, False, 3)
+            else:
+              icon = self._gtk.Image("full-battery", img_size, img_size)
+              self.labels['battery_box'].pack_start(icon, False, False, 3)
+            
+            self.control['battery_box'].show_all()
             battery_percent_str = str(battery_percent)[:2]  # Extract first two digits as string
             print(f"Battery percentage: {battery_percent_str}%")
-            # self.control['battery'].set_text(f'BAT: {battery_percent}%')
+            self.labels['battery'].set_text(f'{battery_percent}%')
             print(f"Power plugged in: {'Yes' if battery.power_plugged else 'No'}")
         else:
             print("Battery information not available.")
