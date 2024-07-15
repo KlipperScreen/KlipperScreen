@@ -19,6 +19,7 @@ class BasePanel(ScreenPanel):
         self.time_min = -1
         self.time_format = self._config.get_main_config().getboolean("24htime", True)
         self.time_update = None
+        self.battery_update = None
         self.titlebar_items = []
         self.titlebar_name_type = None
         self.current_extruder = None
@@ -112,6 +113,7 @@ class BasePanel(ScreenPanel):
             self.main_grid.attach(self.content, 1, 1, 1, 1)
 
         self.update_time()
+        self.battery_percentage()
 
     def reload_icons(self):
         button: Gtk.Button
@@ -196,6 +198,8 @@ class BasePanel(ScreenPanel):
     def activate(self):
         if self.time_update is None:
             self.time_update = GLib.timeout_add_seconds(1, self.update_time)
+        if self.battery_update is None:
+            self.battery_update = GLib.timeout_add_seconds(30, self.battery_percentage)
 
     def add_content(self, panel):
         printing = self._printer and self._printer.state in {"printing", "paused"}
@@ -341,10 +345,10 @@ class BasePanel(ScreenPanel):
                 self.control['time'].set_text(f'{now:%I:%M %p}')
             self.time_min = now.minute
             self.time_format = confopt
-            self.battery_percentage()
         return True
 
     def battery_percentage(self, show=True):
+        show = self._config.get_main_config().getboolean("show_battery", False)
         for child in self.control['battery_box'].get_children():
             self.control['battery_box'].remove(child)
         if not show:
@@ -381,6 +385,8 @@ class BasePanel(ScreenPanel):
             print(f"Power plugged in: {'Yes' if battery.power_plugged else 'No'}")
         else:
             print("Battery information not available.")
+
+        return True
 
     def set_ks_printer_cfg(self, printer):
         ScreenPanel.ks_printer_cfg = self._config.get_printer_config(printer)
