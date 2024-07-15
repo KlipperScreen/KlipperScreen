@@ -344,7 +344,7 @@ class BasePanel(ScreenPanel):
             self.battery_percentage()
         return True
 
-def battery_percentage(self, show=True):
+    def battery_percentage(self, show=True):
         for child in self.control['battery_box'].get_children():
             self.control['battery_box'].remove(child)
         if not show:
@@ -361,10 +361,10 @@ def battery_percentage(self, show=True):
         if battery:
             battery_percent = int(battery.percent)  # Convert percentage to integer
 
-            if battery_percent < 33:
+            if battery_percent < 33 and not battery.power_plugged:
               icon = self._gtk.Image("low-battery", img_size, img_size)
               self.labels['battery_box'].pack_start(icon, False, False, 3)
-            elif battery_percent < 66:
+            elif battery_percent < 66 and not battery.power_plugged:
               icon = self._gtk.Image("medium-battery", img_size, img_size)
               self.labels['battery_box'].pack_start(icon, False, False, 3)
             elif battery.power_plugged:
