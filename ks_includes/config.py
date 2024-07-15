@@ -311,7 +311,7 @@ class KlipperScreenConfig:
                                    "value": "True", "callback": screen.reload_panels}},
             {"show_battery": {"section": "main", "name": _("Show Battery"), "type": "binary",
                                   "tooltip": _("For Laptops/Tablets. Show battery percentage and charge state"),
-                                   "value": "False", "callback": screen.reload_panels}}
+                                   "value": "False", "callback": screen.restart_ks}}
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
 
