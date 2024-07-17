@@ -164,7 +164,8 @@ class SdbusNm:
         return any(net["SSID"] == ssid for net in self.get_known_networks())
 
     def is_open(self, ssid):
-        return self.get_security_type(ssid) == "Open"
+        security_type = self.get_security_type(ssid)
+        return security_type == "Open" or "OWE" in security_type
 
     def get_ip_address(self):
         active_connection_path = self.nm.primary_connection
@@ -250,45 +251,45 @@ class SdbusNm:
                 "s",
                 "802-11-wireless-security",
             )
-        if "WPA-PSK" in security_type:
-            properties["802-11-wireless-security"] = {
-                "key-mgmt": ("s", "wpa-psk"),
-                "psk": ("s", psk),
-            }
-        elif "SAE" in security_type:
-            properties["802-11-wireless-security"] = {
-                "key-mgmt": ("s", "sae"),
-                "psk": ("s", psk),
-            }
-        elif "WPA3-B192" in security_type:
-            properties["802-11-wireless-security"] = {
-                "key-mgmt": ("s", "wpa-eap-suite-b-192"),
-                "psk": ("s", psk),
-            }
-        elif "OWE" in security_type:
-            properties["802-11-wireless-security"] = {
-                "key-mgmt": ("s", "owe"),
-                "psk": ("s", psk),
-            }
-        elif "802.1x" in security_type:
-            properties["802-11-wireless-security"] = {
-                "key-mgmt": ("s", "ieee8021x"),
-                "wep-key-type": ("u", 2),
-                "wep-key0": ("s", psk),
-                "auth-alg": ("s", "shared"),
-            }
-        elif "WEP" in security_type:
-            properties["802-11-wireless-security"] = {
-                "key-mgmt": ("s", "none"),
-                "wep-key-type": ("u", 2),
-                "wep-key0": ("s", psk),
-                "auth-alg": ("s", "shared"),
-            }
-        else:
-            return {
-                "error": "unknown_security_type",
-                "message": _("Unknown security type"),
-            }
+            if "WPA-PSK" in security_type:
+                properties["802-11-wireless-security"] = {
+                    "key-mgmt": ("s", "wpa-psk"),
+                    "psk": ("s", psk),
+                }
+            elif "SAE" in security_type:
+                properties["802-11-wireless-security"] = {
+                    "key-mgmt": ("s", "sae"),
+                    "psk": ("s", psk),
+                }
+            elif "WPA3-B192" in security_type:
+                properties["802-11-wireless-security"] = {
+                    "key-mgmt": ("s", "wpa-eap-suite-b-192"),
+                    "psk": ("s", psk),
+                }
+            elif "OWE" in security_type:
+                properties["802-11-wireless-security"] = {
+                    "key-mgmt": ("s", "owe"),
+                    "psk": ("s", psk),
+                }
+            elif "802.1x" in security_type:
+                properties["802-11-wireless-security"] = {
+                    "key-mgmt": ("s", "ieee8021x"),
+                    "wep-key-type": ("u", 2),
+                    "wep-key0": ("s", psk),
+                    "auth-alg": ("s", "shared"),
+                }
+            elif "WEP" in security_type:
+                properties["802-11-wireless-security"] = {
+                    "key-mgmt": ("s", "none"),
+                    "wep-key-type": ("u", 2),
+                    "wep-key0": ("s", psk),
+                    "auth-alg": ("s", "shared"),
+                }
+            else:
+                return {
+                    "error": "unknown_security_type",
+                    "message": _("Unknown security type"),
+                }
 
         try:
             NetworkManagerSettings().add_connection(properties)
