@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-06-04 17:51+0000\n"
-"Last-Translator: Vidmantas Jurka <vjurka@gmail.com>\n"
+"PO-Revision-Date: 2024-07-16 13:09+0000\n"
+"Last-Translator: vjurka <v@jurka.lt>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/lt/>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"(n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.6-dev\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && ("
+"n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -193,7 +193,7 @@ msgid "Couldn't add network"
 msgstr "Nepavyko pridėti tinklo"
 
 msgid "Current"
-msgstr ""
+msgstr "Dabartinis"
 
 msgid "Current percentage and graph line"
 msgstr "Galios procentai ir grafiko linija"
@@ -205,7 +205,7 @@ msgid "Date"
 msgstr "Data"
 
 msgid "Delete"
-msgstr ""
+msgstr "Naikinti"
 
 msgid "Delete Directory?"
 msgstr "Šalinti katalogą?"
@@ -267,7 +267,7 @@ msgid "Estimated Time Method"
 msgstr "Numatomas laikas"
 
 msgid "Example"
-msgstr ""
+msgstr "Pavyzdys"
 
 msgid "Exclude Object"
 msgstr "Atmesti objektą"
@@ -442,7 +442,7 @@ msgid "It's possible that the configuration is not correct"
 msgstr "Gali būti, kad konfigūracija neteisinga"
 
 msgid "Job Status"
-msgstr ""
+msgstr "Darbo statusas"
 
 msgid "Klipper Restart"
 msgstr "Perkrauti Klipper'į"
@@ -475,7 +475,7 @@ msgid "Large"
 msgstr "Didelis"
 
 msgid "Last Duration"
-msgstr ""
+msgstr "Paskutinė trukmė"
 
 msgid "Last Used"
 msgstr "Paskutinis naudotas"
@@ -598,7 +598,7 @@ msgid "No elegible macros:"
 msgstr "Nėra teisingų makro komandų:"
 
 msgid "No info available"
-msgstr ""
+msgstr "Nėra informacijos"
 
 msgid "No mesh has been loaded"
 msgstr "Tinklelis nebuvo įkeltas"
@@ -622,7 +622,7 @@ msgid "Notifications"
 msgstr "Pranešimai"
 
 msgid "Nozzle diameter"
-msgstr ""
+msgstr "Purkštuko diametras"
 
 msgid "Only for the move panel"
 msgstr "Tik perkėlimo skydeliui"
@@ -677,7 +677,7 @@ msgid "Pressure Advance:"
 msgstr "Slėgio kontrolė:"
 
 msgid "Pressure advance"
-msgstr ""
+msgstr "Slėgio reguliavimas"
 
 msgid "Print"
 msgstr "Spausdinti"
@@ -828,7 +828,7 @@ msgid "Small"
 msgstr "Mažas"
 
 msgid "Smooth time"
-msgstr ""
+msgstr "Išlyginimo laikas"
 
 msgid "Speed (mm/s)"
 msgstr "Greitis (mm/s)"
@@ -928,7 +928,7 @@ msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC nepalaikoma, bandoma Stream"
 
 msgid "Working"
-msgstr ""
+msgstr "Dirbama"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY judėjimo greitis (mm/s)"
@@ -964,7 +964,7 @@ msgstr[1] "dienos"
 msgstr[2] "dienų"
 
 msgid "g"
-msgstr ""
+msgstr "g"
 
 msgid "hour"
 msgid_plural "hours"
@@ -997,7 +997,7 @@ msgid "mm³/s"
 msgstr "mm³/s"
 
 msgid "s"
-msgstr ""
+msgstr "s"
 
 msgid "second"
 msgid_plural "seconds"
