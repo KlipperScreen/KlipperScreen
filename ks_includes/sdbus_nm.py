@@ -237,17 +237,17 @@ class SdbusNm:
             "802-11-wireless": {
                 "mode": ("s", "infrastructure"),
                 "ssid": ("ay", ssid.encode("utf-8")),
+                "security": ("s", "802-11-wireless-security"),
             },
             "ipv4": {"method": ("s", "auto")},
             "ipv6": {"method": ("s", "auto")},
         }
 
-        if security_type != "Open":
-            properties["802-11-wireless"]["security"] = (
-                "s",
-                "802-11-wireless-security",
-            )
-        if "WPA-PSK" in security_type:
+        if security_type == "Open":
+            properties["802-11-wireless-security"] = {
+                "key-mgmt": ("s", "none"),
+            }
+        elif "WPA-PSK" in security_type:
             properties["802-11-wireless-security"] = {
                 "key-mgmt": ("s", "wpa-psk"),
                 "psk": ("s", psk),
