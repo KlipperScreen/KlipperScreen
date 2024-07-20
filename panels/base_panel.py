@@ -82,8 +82,6 @@ class BasePanel(ScreenPanel):
         self.control['temp_box'] = Gtk.Box(spacing=10)
         self.control['battery_box'] = Gtk.Box(spacing=10, halign=Gtk.Align.END)
 
-        # self.control['battery_box'].pack_end(self.control['battery'], True, True, 10)
-
         self.titlelbl = Gtk.Label(hexpand=True, halign=Gtk.Align.CENTER, ellipsize=Pango.EllipsizeMode.END)
 
         self.control['time'] = Gtk.Label(label="00:00 AM")
