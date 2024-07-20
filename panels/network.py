@@ -226,7 +226,7 @@ class Panel(ScreenPanel):
     def connect_network(self, widget, ssid, showadd=True):
         self.deactivate()
         if showadd and not self.sdbus_nm.is_known(ssid):
-            if self.sdbus_nm.is_open(ssid):
+            if self.sdbus_nm.get_security_type(ssid) in ("Open", "OWE"):
                 logging.debug("Network is Open do not show psk")
                 result = self.sdbus_nm.add_network(ssid, '')
                 if "error" in result:
