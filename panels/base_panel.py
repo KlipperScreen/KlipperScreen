@@ -390,12 +390,11 @@ class BasePanel(ScreenPanel):
               self.labels['battery_box'].pack_start(icon, False, False, 3)
             
             self.control['battery_box'].show_all()
-            battery_percent_str = str(battery_percent)[:2]  # Extract first two digits as string
-            print(f"Battery percentage: {battery_percent_str}%")
+            logging.debug(f"Battery percentage: {str(battery_percent)[:2]}%")
             self.labels['battery'].set_text(f'{battery_percent}%')
-            print(f"Power plugged in: {'Yes' if battery.power_plugged else 'No'}")
+            logging.debug(f"Power plugged in: {'Yes' if battery.power_plugged else 'No'}")
         else:
-            print("Battery information not available.")
+            logging.debug("Battery information not available.")
 
         return True
 
