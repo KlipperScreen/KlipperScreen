@@ -20,48 +20,13 @@ fan1 will show in the interface, but _fan2 will be hidden.
 
 ## Layer Progress
 
-### Accurate layer progress as a message below the status:
-
-* [PrusaSlicer](#prusaslicer)
-* [Cura](#cura)
-* [ideaMaker](#ideamaker)
-
-#### PrusaSlicer
-
-* Open PrusaSlicer
-* Go to: `Printer Settings` > `Custom Gcode` > `After layer change Gcode`
-* Add this:
-
-```ini
-M117 Layer {layer_num+1}/[total_layer_count] : {filament_settings_id[0]}
-```
-
-![Layer_progress](img/quicktips/PS_SS_Layer_progress.png)
-
-#### Cura
-
-Install the extension: `Display Filename and Layer on LCD`
-
-
-#### IdeaMaker
-
-* Open IdeaMaker
-* Got to: `Slice` > `Manage templates` > `Click on your template` > `Edit`
-* Select the tab named `Gcode` > `Layer Change Gcode`
-* Paste this:
-
-```ini
-M117 Layer {layer_index} / {total_layers}
-```
-
 ### Accurate layer progress in the secondary screen of the printing panel:
 
 * [PrusaSlicer](#prusaslicer_1)
 * [Cura](#cura_1)
 * [ideaMaker](#ideamaker_1)
 
-The layer number in the secondary screen of the printing panelis calculated according to object height and provided layer height.
-It will be innacurate when using variable layer height, but can be fixed by providing klipper with the correct data.
+Follow this steps to provide the current layer in the printing information.
 
 ![speed_screenshot](img/panels/job_status_speed.png)
 
@@ -138,3 +103,38 @@ SET_PRINT_STATS_INFO CURRENT_LAYER={layer_index}
 
 !!! note
     `{total_layers}` doesn't seem to be available in the Start gcode (at least on IdeaMaker 4.3.2)
+
+
+### Accurate layer progress as a message below the status:
+
+* [PrusaSlicer](#prusaslicer)
+* [Cura](#cura)
+* [ideaMaker](#ideamaker)
+
+#### PrusaSlicer
+
+* Open PrusaSlicer
+* Go to: `Printer Settings` > `Custom Gcode` > `After layer change Gcode`
+* Add this:
+
+```ini
+M117 Layer {layer_num+1}/[total_layer_count] : {filament_settings_id[0]}
+```
+
+![Layer_progress](img/quicktips/PS_SS_Layer_progress.png)
+
+#### Cura
+
+Install the extension: `Display Filename and Layer on LCD`
+
+
+#### IdeaMaker
+
+* Open IdeaMaker
+* Got to: `Slice` > `Manage templates` > `Click on your template` > `Edit`
+* Select the tab named `Gcode` > `Layer Change Gcode`
+* Paste this:
+
+```ini
+M117 Layer {layer_index} / {total_layers}
+```
