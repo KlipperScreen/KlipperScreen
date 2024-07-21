@@ -111,6 +111,7 @@ class BasePanel(ScreenPanel):
             self.main_grid.attach(self.content, 1, 1, 1, 1)
 
         self.update_time()
+        self.battery_init()
 
     def reload_icons(self):
         button: Gtk.Button
