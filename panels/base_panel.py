@@ -347,6 +347,17 @@ class BasePanel(ScreenPanel):
             self.time_format = confopt
         return True
 
+    def battery_init(self, show=True):
+        show = self._config.get_main_config().getboolean("show_battery", False)
+        if not show:
+            return
+
+        self.labels['battery'] = Gtk.Label(ellipsize=Pango.EllipsizeMode.START)
+        self.labels['battery_box'] = Gtk.Box()
+        self.labels['battery_box'].pack_end(self.labels['battery'], False, False, 0)
+
+        self.control['battery_box'].add(self.labels["battery_box"])
+
     def battery_percentage(self, show=True):
         show = self._config.get_main_config().getboolean("show_battery", False)
         for child in self.control['battery_box'].get_children():
