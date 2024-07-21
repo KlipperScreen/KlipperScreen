@@ -122,7 +122,8 @@ class BasePanel(ScreenPanel):
             height = pixbuf.get_height()
             button.set_image(self._gtk.Image(name, width, height))
         
-        self.battery_percentage()
+        if self._config.get_main_config().getboolean("Show_battery", False) is True:
+            self.battery_percentage()
 
     def show_heaters(self, show=True):
         try:
