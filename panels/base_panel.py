@@ -360,35 +360,31 @@ class BasePanel(ScreenPanel):
 
     def battery_percentage(self, show=True):
         show = self._config.get_main_config().getboolean("show_battery", False)
-        for child in self.control['battery_box'].get_children():
-            self.control['battery_box'].remove(child)
         if not show:
             return
 
-        img_size = self._gtk.img_scale * self.bts
-        self.labels['battery'] = Gtk.Label(ellipsize=Pango.EllipsizeMode.START)
-        self.labels['battery_box'] = Gtk.Box()
-        self.labels['battery_box'].pack_end(self.labels['battery'], False, False, 0)
+        for child in self.labels['battery_box'].get_children():
+            if isinstance(child, Gtk.Image):
+                self.labels['battery_box'].remove(child)
+                child.destroy()
 
-        self.control['battery_box'].add(self.labels["battery_box"])
-        self.control['battery_box'].show_all()
         battery = psutil.sensors_battery()
         if battery:
             battery_percent = int(battery.percent)  # Convert percentage to integer
 
+            img_size = self._gtk.img_scale * self.bts
             if battery_percent < 33 and not battery.power_plugged:
-              icon = self._gtk.Image("low-battery", img_size, img_size)
-              self.labels['battery_box'].pack_start(icon, False, False, 3)
+              icon = self._gtk.Image("battery-low", img_size, img_size)
             elif battery_percent < 66 and not battery.power_plugged:
-              icon = self._gtk.Image("medium-battery", img_size, img_size)
-              self.labels['battery_box'].pack_start(icon, False, False, 3)
+              icon = self._gtk.Image("battery-medium", img_size, img_size)
+            elif battery_percent > 66 and not battery.power_plugged:
+              icon = self._gtk.Image("battery-high", img_size, img_size)
             elif battery.power_plugged:
-              icon = self._gtk.Image("charging-battery", img_size, img_size)
-              self.labels['battery_box'].pack_start(icon, False, False, 3)
+              icon = self._gtk.Image("battery-charging-outline", img_size, img_size)
             else:
-              icon = self._gtk.Image("full-battery", img_size, img_size)
-              self.labels['battery_box'].pack_start(icon, False, False, 3)
-            
+              icon = self._gtk.Image("battery-unknown", img_size, img_size)
+
+            self.labels['battery_box'].pack_start(icon, False, False, 3)
             self.control['battery_box'].show_all()
             logging.debug(f"Battery percentage: {str(battery_percent)[:2]}%")
             self.labels['battery'].set_text(f'{battery_percent}%')
