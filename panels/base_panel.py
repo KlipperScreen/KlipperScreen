@@ -198,7 +198,7 @@ class BasePanel(ScreenPanel):
     def activate(self):
         if self.time_update is None:
             self.time_update = GLib.timeout_add_seconds(1, self.update_time)
-        if self.battery_update is None:
+        if self.battery_update is None and self._config.get_main_config().getboolean("Show_battery", False) is True:
             self.battery_update = GLib.timeout_add_seconds(30, self.battery_percentage)
 
     def add_content(self, panel):
