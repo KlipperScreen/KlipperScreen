@@ -310,7 +310,7 @@ class KlipperScreenConfig:
             {"auto_open_extrude": {"section": "main", "name": _("Auto-open Extrude On Pause"), "type": "binary",
                                    "value": "True", "callback": screen.reload_panels}},
             {"show_battery": {"section": "main", "name": _("Show Battery"), "type": "binary",
-                                  "tooltip": _("For Laptops/Tablets. Show battery percentage and charge state"),
+                                  "tooltip": _("Show battery state if available"),
                                    "value": "False", "callback": screen.restart_ks}}
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
