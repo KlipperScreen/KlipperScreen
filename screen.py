@@ -73,6 +73,7 @@ class KlipperScreen(Gtk.Window):
     windowed = False
     notification_log = []
     prompt = None
+    tempstore_timeout = None
 
     def __init__(self, args):
         self.server_info = None
@@ -1104,19 +1105,26 @@ class KlipperScreen(Gtk.Window):
 
     def init_tempstore(self):
         if len(self.printer.get_temp_devices()) == 0:
-            return
+            return False
         tempstore = self.apiclient.send_request("server/temperature_store")
         if tempstore:
             self.printer.init_temp_store(tempstore)
             if hasattr(self.panels[self._cur_panels[-1]], "update_graph_visibility"):
                 self.panels[self._cur_panels[-1]].update_graph_visibility()
+            if self.tempstore_timeout:
+                self.remove_tempstore_timeout()
         else:
             logging.error(f'Tempstore not ready: {tempstore} Retrying in 5 seconds')
-            GLib.timeout_add_seconds(5, self.init_tempstore)
-            return
-        if set(self.printer.tempstore) != set(self.printer.get_temp_devices()):
-            GLib.timeout_add_seconds(5, self.init_tempstore)
-            return
+            if self.tempstore_timeout:
+                return False
+            if self.reinit_count < self.max_retries:
+                self.reinit_count += 1
+                self.tempstore_timeout = GLib.timeout_add_seconds(5, self.retry_init_tempstore)
+            else:
+                logging.error("Max retries reached. Stopping attempts to initialize tempstore.")
+                self.remove_tempstore_timeout()
+            return False
+
         server_config = self.apiclient.send_request("server/config")
         if server_config:
             try:
@@ -1125,6 +1133,15 @@ class KlipperScreen(Gtk.Window):
             except KeyError:
                 logging.error("Couldn't get the temperature store size")
         return False
+
+    def remove_tempstore_timeout(self):
+        GLib.source_remove(self.tempstore_timeout)
+        self.tempstore_timeout = None
+        self.reinit_count = 0
+
+    def retry_init_tempstore(self):
+        self.remove_tempstore_timeout()
+        return self.init_tempstore()
 
     def show_keyboard(self, entry=None, event=None):
         if self.keyboard is not None:
