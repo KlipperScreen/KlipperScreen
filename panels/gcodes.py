@@ -323,7 +323,11 @@ class Panel(ScreenPanel):
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-secondary'}
         ]
 
-        label = Gtk.Label(hexpand=True, vexpand=True, wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
+        label = Gtk.Label(
+            hexpand=True, vexpand=True, lines=2,
+            wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR,
+            ellipsize=Pango.EllipsizeMode.END
+        )
         label.set_markup(f"<b>{filename}</b>")
 
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
@@ -347,7 +351,9 @@ class Panel(ScreenPanel):
             inside_box.pack_start(image_button, True, True, 0)
 
         info_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
-        fileinfo = Gtk.Label(label=self.get_file_info_extended(filename), use_markup=True)
+        fileinfo = Gtk.Label(
+            label=self.get_file_info_extended(filename), use_markup=True, ellipsize=Pango.EllipsizeMode.END
+        )
         info_box.pack_start(fileinfo, True, True, 0)
 
         inside_box.pack_start(info_box, True, True, 0)
