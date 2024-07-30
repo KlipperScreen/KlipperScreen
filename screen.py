@@ -173,6 +173,9 @@ class KlipperScreen(Gtk.Window):
 
     def state_execute(self, state, callback):
         self.close_screensaver()
+        if 'printer_select' in self._cur_panels:
+            logging.debug(f"Connected printer chaged {state}")
+            return False
         if state in ("printing", "paused"):
             self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking_printing'))
         else:
