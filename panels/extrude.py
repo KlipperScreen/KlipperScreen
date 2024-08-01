@@ -280,13 +280,6 @@ class Panel(ScreenPanel):
                     widget, "printer.gcode.script",
                     {"script": f"M109 S{target}"}
                 )
-            else:
-                self._screen.show_popup_message(_("Temperature too low to extrude"))
-                self.menu_item_clicked(
-                    widget,
-                    {"panel": "temperature", 'extra': self.current_extruder}
-                )
-                return
         if method == "extrude":
             self.extrude(widget, direction)
         elif method == "load_unload":
