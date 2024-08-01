@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-07-16 13:09+0000\n"
-"Last-Translator: BIGTREETECH <bigtreetech@sexycyborg.net>\n"
+"PO-Revision-Date: 2024-07-30 23:09+0000\n"
+"Last-Translator: Will Zhai <willzhai55@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "klipperscreen/klipperscreen/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -95,7 +95,7 @@ msgid "Auto-close notifications"
 msgstr "自动关闭通知"
 
 msgid "Auto-open Extrude On Pause"
-msgstr "暂停打印时自动打开挤出控制界面"
+msgstr "暂停打印时自动打开挤出控制面板"
 
 msgid "Auto-scroll"
 msgstr "自动滚屏"
@@ -140,7 +140,7 @@ msgid "Cannot connect to Moonraker"
 msgstr "无法连接到Moonraker"
 
 msgid "Changes how the interface looks"
-msgstr "调整界面外观"
+msgstr "调整用户界面皮肤"
 
 msgid "Changes how the time remaining is calculated"
 msgstr "调整剩余时间计算方法"
@@ -161,7 +161,7 @@ msgid "Close"
 msgstr "关闭"
 
 msgid "Close messages after a timeout"
-msgstr "超时自动关闭信息"
+msgstr "超时自动关闭通知"
 
 msgid "Complete"
 msgstr "完成"
@@ -216,7 +216,7 @@ msgid "Disable Motors"
 msgstr "关闭电机"
 
 msgid "Disable for 12hs with am / pm"
-msgstr "12小时制中不显示 am/pm"
+msgstr "禁用以启用12小时制 （AM/PM）"
 
 msgid "Disconnect"
 msgstr "断开"
@@ -353,7 +353,7 @@ msgid "Gcodes"
 msgstr "g代码"
 
 msgid "Getting IP address"
-msgstr "获取IP地址"
+msgstr "获取IP地址中"
 
 msgid "Go Back"
 msgstr "返回"
@@ -365,7 +365,7 @@ msgid "Hide"
 msgstr "隐藏"
 
 msgid "Hide sensors in Temp."
-msgstr "在温度显示中隐藏传感器"
+msgstr "在温度显示中隐藏传感器的温度"
 
 msgid "Hide temp."
 msgstr "隐藏温度"
@@ -422,7 +422,7 @@ msgid "Invalid password"
 msgstr "密码无效"
 
 msgid "Inversely affects the icon size"
-msgstr "和预览图大小成反比"
+msgstr "与预览图大小成反比"
 
 msgid "Invert X"
 msgstr "反转X轴"
@@ -504,7 +504,7 @@ msgid "Lower Nozzle"
 msgstr "降低喷嘴"
 
 msgid "Macro shortcut on sidebar"
-msgstr "在侧边栏显示宏按钮"
+msgstr "在侧边栏中显示宏按钮"
 
 msgid "Macros"
 msgstr "宏"
@@ -728,7 +728,7 @@ msgid "Rename/Move:"
 msgstr "重命名/移动："
 
 msgid "Restart"
-msgstr "重新开始"
+msgstr "重启"
 
 msgid "Resume"
 msgstr "继续"
@@ -804,7 +804,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "显示滚动条按钮"
 
 msgid "Show only devices that are able to be set"
-msgstr "只显示可以设置的设备"
+msgstr "只显示可以主动控制温度的设备"
 
 msgid "Shutdown"
 msgstr "关闭"
@@ -852,7 +852,7 @@ msgid "Starting update for"
 msgstr "开始更新"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr "交换按钮以消除重叠，同时影响其他界面"
+msgstr "交换Z轴按钮位置，同时会改变其他的控制面板"
 
 msgid "System"
 msgstr "系统"
@@ -882,10 +882,10 @@ msgid "This will affect screw positions and mesh graph"
 msgstr "这将影响调平螺丝位置和网格图"
 
 msgid "Timeout for screen black-out or power-off"
-msgstr "自动息屏"
+msgstr "自动息屏的时间"
 
 msgid "Timeout for screen black-out or power-off during printing"
-msgstr "打印时自动息屏"
+msgstr "打印中自动息屏的时间"
 
 msgid "Total:"
 msgstr "合计："
@@ -915,7 +915,7 @@ msgid "Updating"
 msgstr "正在更新"
 
 msgid "Useful for un-responsive touchscreens"
-msgstr "触屏响应改善"
+msgstr "帮助控制触摸响应不良的屏幕"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "不支持传送WebRTC至后台"
@@ -986,7 +986,7 @@ msgstr "秒"
 
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "秒钟"
+msgstr[0] "秒"
 
 #~ msgid "Are you sure you want to stop the calibration?"
 #~ msgstr "您确定要停止校准吗？"
