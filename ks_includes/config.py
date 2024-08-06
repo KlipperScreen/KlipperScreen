@@ -312,7 +312,7 @@ class KlipperScreenConfig:
             {"show_cursor": {"section": "main", "name": _("Show cursor"), "type": "binary",
                              "tooltip": _("For mouse control or to verify touchscreen accuracy"),
                              "value": "False", "callback": screen.update_cursor}},
-            {"show_battery": {"section": "main", "name": _("Show Battery"), "type": "binary",==
+            {"show_battery": {"section": "main", "name": _("Show Battery"), "type": "binary",
                               "tooltip": _("Show battery state if available"),
                               "value": "False", "callback": screen.restart_ks}},
             # {"": {"section": "main", "name": _(""), "type": ""}}
