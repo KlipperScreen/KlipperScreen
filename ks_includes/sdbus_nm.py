@@ -219,8 +219,9 @@ class SdbusNm:
             None,
         )
 
-    def add_network(self, ssid, psk):
+    def add_network(self, ssid, psk, eap_method, identity="", phase2=None):
         security_type = self.get_security_type(ssid)
+        logging.debug(f"Adding network of type: {security_type}")
         if security_type is None:
             return {"error": "network_not_found", "message": _("Network not found")}
 
@@ -268,11 +269,13 @@ class SdbusNm:
             }
         elif "802.1x" in security_type:
             properties["802-11-wireless-security"] = {
-                "key-mgmt": ("s", "ieee8021x"),
-                "wep-key-type": ("u", 2),
-                "wep-key0": ("s", psk),
-                "auth-alg": ("s", "shared"),
+                "key-mgmt": ("s", "wpa-eap"),
+                "eap": ("as", [eap_method]),
+                "identity": ("s", identity),
+                "password": ("s", psk),
             }
+            if phase2:
+                properties["802-11-wireless-security"]["phase2_auth"] = ("s", phase2)
         elif "WEP" in security_type:
             properties["802-11-wireless-security"] = {
                 "key-mgmt": ("s", "none"),
