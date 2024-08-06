@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
-
+import psutil
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -10,7 +10,6 @@ from datetime import datetime
 from math import log
 from ks_includes.screen_panel import ScreenPanel
 
-import psutil
 
 class BasePanel(ScreenPanel):
     def __init__(self, screen, title=None):
@@ -122,7 +121,7 @@ class BasePanel(ScreenPanel):
             width = pixbuf.get_width()
             height = pixbuf.get_height()
             button.set_image(self._gtk.Image(name, width, height))
-        
+
         if self._config.get_main_config().getboolean("Show_battery", False) is True:
             self.battery_percentage()
 
@@ -375,15 +374,15 @@ class BasePanel(ScreenPanel):
 
             img_size = self._gtk.img_scale * self.bts
             if battery_percent < 33 and not battery.power_plugged:
-              icon = self._gtk.Image("battery-low", img_size, img_size)
+                icon = self._gtk.Image("battery-low", img_size, img_size)
             elif battery_percent < 66 and not battery.power_plugged:
-              icon = self._gtk.Image("battery-medium", img_size, img_size)
+                icon = self._gtk.Image("battery-medium", img_size, img_size)
             elif battery_percent > 66 and not battery.power_plugged:
-              icon = self._gtk.Image("battery-high", img_size, img_size)
+                icon = self._gtk.Image("battery-high", img_size, img_size)
             elif battery.power_plugged:
-              icon = self._gtk.Image("battery-charging-outline", img_size, img_size)
+                icon = self._gtk.Image("battery-charging-outline", img_size, img_size)
             else:
-              icon = self._gtk.Image("battery-unknown", img_size, img_size)
+                icon = self._gtk.Image("battery-unknown", img_size, img_size)
 
             self.labels['battery_box'].pack_start(icon, False, False, 3)
             self.control['battery_box'].show_all()
