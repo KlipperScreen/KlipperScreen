@@ -487,7 +487,7 @@ class Panel(ScreenPanel):
     def pid_calibrate(self, temp):
         if self.verify_max_temp(temp):
             script = {
-                "script": f"PID_CALIBRATE HEATER={self.active_heater} TARGET={temp}"
+                "script": f"PID_CALIBRATE HEATER={self.active_heater.split()[1]} TARGET={temp}"
             }
             self._screen._confirm_send_action(
                 None,
