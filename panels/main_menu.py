@@ -204,7 +204,7 @@ class Panel(MenuPanel):
 
     def pid_calibrate(self, temp):
         if self.verify_max_temp(temp):
-            script = {"script": f"PID_CALIBRATE HEATER={self.active_heater} TARGET={temp}"}
+            script = {"script": f"PID_CALIBRATE HEATER={self.active_heater.split()[2]} TARGET={temp}"}
             self._screen._confirm_send_action(
                 None,
                 _("Initiate a PID calibration for:") + f" {self.active_heater} @ {temp} ºC"
