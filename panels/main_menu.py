@@ -203,8 +203,9 @@ class Panel(MenuPanel):
         return max(temp, 0)
 
     def pid_calibrate(self, temp):
+        name = self.active_heater.split()[1] if len(self.active_heater.split()) > 1 else self.active_heater
         if self.verify_max_temp(temp):
-            script = {"script": f"PID_CALIBRATE HEATER={self.active_heater.split()[1]} TARGET={temp}"}
+            script = {"script": f"PID_CALIBRATE HEATER={name} TARGET={temp}"}
             self._screen._confirm_send_action(
                 None,
                 _("Initiate a PID calibration for:") + f" {self.active_heater} @ {temp} ºC"
