@@ -79,13 +79,27 @@ class BasePanel(ScreenPanel):
 
         # This box will be populated by show_heaters
         self.control['temp_box'] = Gtk.Box(spacing=10)
-        self.control['battery_box'] = Gtk.Box(spacing=10, halign=Gtk.Align.END)
 
         self.titlelbl = Gtk.Label(hexpand=True, halign=Gtk.Align.CENTER, ellipsize=Pango.EllipsizeMode.END)
 
         self.control['time'] = Gtk.Label(label="00:00 AM")
         self.control['time_box'] = Gtk.Box(halign=Gtk.Align.END)
         self.control['time_box'].pack_end(self.control['time'], True, True, 10)
+
+        img_size = self._gtk.img_scale * self.bts
+        self.battery_icons = {
+            'charging': self._gtk.PixbufFromIcon('battery-charging-outline', img_size, img_size),
+            'high': self._gtk.PixbufFromIcon('battery-high', img_size, img_size),
+            'medium': self._gtk.PixbufFromIcon('battery-medium', img_size, img_size),
+            'low': self._gtk.PixbufFromIcon('battery-low', img_size, img_size),
+            'unknown': self._gtk.PixbufFromIcon('battery-unknown', img_size, img_size),
+        }
+        self.labels['battery'] = Gtk.Label()
+        self.labels['battery_icon'] = self._gtk.Image()
+        self.labels['battery_icon'].set_from_pixbuf(self.battery_icons['unknown'])
+        self.control['battery_box'] = Gtk.Box(spacing=10, halign=Gtk.Align.END)
+        self.control['battery_box'].add(self.labels['battery'])
+        self.control['battery_box'].add(self.labels['battery_icon'])
 
         self.titlebar = Gtk.Box(spacing=5, valign=Gtk.Align.CENTER)
         self.titlebar.get_style_context().add_class("title_bar")
@@ -110,7 +124,6 @@ class BasePanel(ScreenPanel):
             self.main_grid.attach(self.content, 1, 1, 1, 1)
 
         self.update_time()
-        self.battery_init()
 
     def reload_icons(self):
         button: Gtk.Button
@@ -122,7 +135,7 @@ class BasePanel(ScreenPanel):
             height = pixbuf.get_height()
             button.set_image(self._gtk.Image(name, width, height))
 
-        if self._config.get_main_config().getboolean("Show_battery", False) is True:
+        if self._config.get_main_config().getboolean("show_battery", False):
             self.battery_percentage()
 
     def show_heaters(self, show=True):
@@ -198,8 +211,9 @@ class BasePanel(ScreenPanel):
     def activate(self):
         if self.time_update is None:
             self.time_update = GLib.timeout_add_seconds(1, self.update_time)
-        if self.battery_update is None and self._config.get_main_config().getboolean("Show_battery", False) is True:
-            self.battery_update = GLib.timeout_add_seconds(30, self.battery_percentage)
+        if self.battery_update is None and self._config.get_main_config().getboolean("show_battery", False):
+            self.battery_percentage()
+            self.battery_update = GLib.timeout_add_seconds(60, self.battery_percentage)
 
     def add_content(self, panel):
         printing = self._printer and self._printer.state in {"printing", "paused"}
@@ -347,52 +361,29 @@ class BasePanel(ScreenPanel):
             self.time_format = confopt
         return True
 
-    def battery_init(self, show=True):
-        show = self._config.get_main_config().getboolean("show_battery", False)
-        if not show:
-            return
+    def get_battery_icon(self, charge: float, plugged: bool):
+        if plugged:
+            return self.battery_icons['charging']
+        elif charge > 66:
+            return self.battery_icons['high']
+        elif charge > 33:
+            return self.battery_icons['medium']
+        elif charge >= 0:
+            return self.battery_icons['low']
+        else:
+            return self.battery_icons['unknown']
 
-        self.labels['battery'] = Gtk.Label(ellipsize=Pango.EllipsizeMode.START)
-        self.labels['battery_box'] = Gtk.Box()
-        self.labels['battery_box'].pack_end(self.labels['battery'], False, False, 0)
-
-        self.control['battery_box'].add(self.labels["battery_box"])
-
-    def battery_percentage(self, show=True):
-        show = self._config.get_main_config().getboolean("show_battery", False)
-        if not show:
-            return
-
-        for child in self.labels['battery_box'].get_children():
-            if isinstance(child, Gtk.Image):
-                self.labels['battery_box'].remove(child)
-                child.destroy()
-
+    def battery_percentage(self):
         battery = psutil.sensors_battery()
-        if battery:
-            battery_percent = int(battery.percent)  # Convert percentage to integer
-
-            img_size = self._gtk.img_scale * self.bts
-            if battery_percent < 33 and not battery.power_plugged:
-                icon = self._gtk.Image("battery-low", img_size, img_size)
-            elif battery_percent < 66 and not battery.power_plugged:
-                icon = self._gtk.Image("battery-medium", img_size, img_size)
-            elif battery_percent > 66 and not battery.power_plugged:
-                icon = self._gtk.Image("battery-high", img_size, img_size)
-            elif battery.power_plugged:
-                icon = self._gtk.Image("battery-charging-outline", img_size, img_size)
-            else:
-                icon = self._gtk.Image("battery-unknown", img_size, img_size)
-
-            self.labels['battery_box'].pack_start(icon, False, False, 3)
-            self.control['battery_box'].show_all()
-            logging.debug(f"Battery percentage: {str(battery_percent)[:2]}%")
-            self.labels['battery'].set_text(f'{battery_percent}%')
-            logging.debug(f"Power plugged in: {'Yes' if battery.power_plugged else 'No'}")
+        if battery and battery.percent:
+            self.labels['battery_icon'].set_from_pixbuf(
+                self.get_battery_icon(battery.percent, battery.power_plugged)
+            )
+            self.labels['battery'].set_text(f'{battery.percent:.0f}%')
+            logging.debug(f"Battery: {battery.percent}% Power plugged in: {'Yes' if battery.power_plugged else 'No'}")
         else:
             logging.debug("Battery information not available.")
-
-        return True
+        return self._config.get_main_config().getboolean("show_battery", False)
 
     def set_ks_printer_cfg(self, printer):
         ScreenPanel.ks_printer_cfg = self._config.get_printer_config(printer)
