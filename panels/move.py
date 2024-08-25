@@ -129,9 +129,9 @@ class Panel(ScreenPanel):
         # The minimum is 1, but least 2 values are needed to create a scale
         max_velocity = max(int(float(printer_cfg["max_velocity"])), 2)
         if "max_z_velocity" in printer_cfg:
-            max_z_velocity = max(int(float(printer_cfg["max_z_velocity"])), 2)
+            self.max_z_velocity = max(int(float(printer_cfg["max_z_velocity"])), 2)
         else:
-            max_z_velocity = max_velocity
+            self.max_z_velocity = max_velocity
 
         configurable_options = [
             {
@@ -184,7 +184,7 @@ class Panel(ScreenPanel):
                     "type": "scale",
                     "tooltip": _("Only for the move panel"),
                     "value": "10",
-                    "range": [1, max_z_velocity],
+                    "range": [1, self.max_z_velocity],
                     "step": 1,
                 }
             },
@@ -249,14 +249,14 @@ class Panel(ScreenPanel):
             direction = "-" if direction == "+" else "+"
 
         dist = f"{direction}{self.distance}"
-        config_key = "move_speed_z" if axis == "Z" else "move_speed_xy"
+        config_key = "move_speed_z" if axis == "z" else "move_speed_xy"
         speed = (
             None
             if self.ks_printer_cfg is None
             else self.ks_printer_cfg.getint(config_key, None)
         )
         if speed is None:
-            speed = self._config.get_config()["main"].getint(config_key, 20)
+            speed = self._config.get_config()["main"].getint(config_key, self.max_z_velocity)
         speed = 60 * max(1, speed)
         script = f"{KlippyGcodes.MOVE_RELATIVE}\nG0 {axis}{dist} F{speed}"
         self._screen._send_action(widget, "printer.gcode.script", {"script": script})
