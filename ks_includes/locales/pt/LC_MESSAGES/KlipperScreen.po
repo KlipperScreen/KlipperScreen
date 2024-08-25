@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-04-19 23:07+0000\n"
+"PO-Revision-Date: 2024-08-09 23:09+0000\n"
 "Last-Translator: Matheus Mösken Diegues <dmosken2015@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/pt/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -83,7 +83,7 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "Desligar o sistema ?"
 
 msgid "Asks for confirmation before stopping"
-msgstr ""
+msgstr "Pergunta por confirmação antes de parar"
 
 msgid "Auto"
 msgstr "Automatico"
@@ -140,10 +140,10 @@ msgid "Cannot connect to Moonraker"
 msgstr "Não foi possível conectar ao Moonraker"
 
 msgid "Changes how the interface looks"
-msgstr ""
+msgstr "Muda como a interface parece"
 
 msgid "Changes how the time remaining is calculated"
-msgstr ""
+msgstr "Altera como o tempo restante é calculado"
 
 msgid "Channel"
 msgstr "Canal"
@@ -161,7 +161,7 @@ msgid "Close"
 msgstr "Fechar"
 
 msgid "Close messages after a timeout"
-msgstr ""
+msgstr "Fecha as mensagens depois do tempo esgotado"
 
 msgid "Complete"
 msgstr "Completado"
@@ -173,14 +173,14 @@ msgid "Connected"
 msgstr "Conectado"
 
 msgid "Connecting"
-msgstr ""
+msgstr "Conectando"
 
 #, python-format
 msgid "Connecting to %s"
 msgstr "Conectando %s"
 
 msgid "Connection failed"
-msgstr ""
+msgstr "Falha na Conexão"
 
 msgid "Console"
 msgstr "Terminal"
@@ -189,13 +189,13 @@ msgid "Cooldown"
 msgstr "Resfriar"
 
 msgid "Couldn't add network"
-msgstr ""
+msgstr "Não foi possível adicionar a rede"
 
 msgid "Current"
-msgstr ""
+msgstr "Atual"
 
 msgid "Current percentage and graph line"
-msgstr ""
+msgstr "Porcentagem e gráficos atuais"
 
 msgid "DPMS has failed to load and has been disabled"
 msgstr "Gerenciador de economia de energia não disponível"
@@ -204,7 +204,7 @@ msgid "Date"
 msgstr "Data"
 
 msgid "Delete"
-msgstr ""
+msgstr "Apagar"
 
 msgid "Delete Directory?"
 msgstr "Deletar diretório?"
