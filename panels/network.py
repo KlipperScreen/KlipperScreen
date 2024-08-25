@@ -195,7 +195,13 @@ class Panel(ScreenPanel):
 
     def add_new_network(self, widget, ssid):
         self._screen.remove_keyboard()
-        result = self.sdbus_nm.add_network(ssid, self.labels['network_psk'].get_text())
+        psk = self.labels['network_psk'].get_text()
+        identity = self.labels['network_identity'].get_text()
+        eap_method = self.get_dropdown_value(self.labels['network_eap_method'])
+        phase2 = self.get_dropdown_value(self.labels['network_phase2'])
+        logging.debug(f"{phase2=}")
+        logging.debug(f"{eap_method=}")
+        result = self.sdbus_nm.add_network(ssid, psk, eap_method, identity, phase2)
         if "error" in result:
             self._screen.show_popup_message(result["message"])
             if result["error"] == "psk_invalid":
@@ -203,6 +209,12 @@ class Panel(ScreenPanel):
         else:
             self.connect_network(widget, ssid, showadd=False)
         self.close_add_network()
+
+    def get_dropdown_value(self, dropdown, default=None):
+        tree_iter = dropdown.get_active_iter()
+        model = dropdown.get_model()
+        result = model[tree_iter][0]
+        return result if result != "disabled" else None
 
     def back(self):
         if self.show_add:
@@ -218,7 +230,7 @@ class Panel(ScreenPanel):
             self.content.remove(child)
         self.content.add(self.labels['main_box'])
         self.content.show()
-        for i in ['add_network', 'network_psk']:
+        for i in ['add_network', 'network_psk', 'network_identity']:
             if i in self.labels:
                 del self.labels[i]
         self.show_add = False
@@ -260,7 +272,25 @@ class Panel(ScreenPanel):
         if "add_network" in self.labels:
             del self.labels['add_network']
 
-        label = Gtk.Label(label=_("PSK for") + f' {ssid}', hexpand=False)
+        eap_method = Gtk.ComboBoxText(hexpand=True)
+        for method in ("peap", "ttls", "pwd", "leap", "md5"):
+            eap_method.append(method, method.upper())
+        self.labels['network_eap_method'] = eap_method
+        eap_method.set_active(0)
+
+        phase2 = Gtk.ComboBoxText(hexpand=True)
+        for method in ("mschapv2", "gtc", "pap", "chap", "mschap", "disabled"):
+            phase2.append(method, method.upper())
+        self.labels['network_phase2'] = phase2
+        phase2.set_active(0)
+
+        auth_selection_box = Gtk.Box(no_show_all=True)
+        auth_selection_box.add(self.labels['network_eap_method'])
+        auth_selection_box.add(self.labels['network_phase2'])
+
+        self.labels['network_identity'] = Gtk.Entry(hexpand=True, no_show_all=True)
+        self.labels['network_identity'].connect("focus-in-event", self._screen.show_keyboard)
+
         self.labels['network_psk'] = Gtk.Entry(hexpand=True)
         self.labels['network_psk'].connect("activate", self.add_new_network, ssid)
         self.labels['network_psk'].connect("focus-in-event", self._screen.show_keyboard)
@@ -269,16 +299,31 @@ class Panel(ScreenPanel):
         save.set_hexpand(False)
         save.connect("clicked", self.add_new_network, ssid)
 
-        box = Gtk.Box()
-        box.pack_start(self.labels['network_psk'], True, True, 5)
-        box.pack_start(save, False, False, 5)
+        user_label = Gtk.Label(label=_("User"), hexpand=False, no_show_all=True)
+        auth_grid = Gtk.Grid()
+        auth_grid.attach(user_label, 0, 0, 1, 1)
+        auth_grid.attach(self.labels['network_identity'], 1, 0, 1, 1)
+        auth_grid.attach(Gtk.Label(label=_("Password"), hexpand=False), 0, 1, 1, 1)
+        auth_grid.attach(self.labels['network_psk'], 1, 1, 1, 1)
+        auth_grid.attach(save, 2, 0, 1, 2)
 
-        self.labels['add_network'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5, valign=Gtk.Align.CENTER,
-                                             hexpand=True, vexpand=True)
-        self.labels['add_network'].pack_start(label, True, True, 5)
-        self.labels['add_network'].pack_start(box, True, True, 5)
+        if self.sdbus_nm.get_security_type(ssid) == "802.1x":
+            user_label.show()
+            self.labels['network_eap_method'].show()
+            self.labels['network_phase2'].show()
+            self.labels['network_identity'].show()
+            auth_selection_box.show()
 
-        self.content.add(self.labels['add_network'])
+        self.labels['add_network'] = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL, spacing=5, valign=Gtk.Align.CENTER,
+            hexpand=True, vexpand=True
+        )
+        self.labels['add_network'].add(Gtk.Label(label=_("Connecting to %s") % ssid))
+        self.labels['add_network'].add(auth_selection_box)
+        self.labels['add_network'].add(auth_grid)
+        scroll = self._gtk.ScrolledWindow()
+        scroll.add(self.labels['add_network'])
+        self.content.add(scroll)
         self.labels['network_psk'].grab_focus_without_selecting()
         self.content.show_all()
         self.show_add = True
