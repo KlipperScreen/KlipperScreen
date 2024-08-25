@@ -203,12 +203,15 @@ class Panel(MenuPanel):
         return max(temp, 0)
 
     def pid_calibrate(self, temp):
+        heater = self.active_heater.split(' ', maxsplit=1)[-1]
         if self.verify_max_temp(temp):
-            script = {"script": f"PID_CALIBRATE HEATER={self.active_heater} TARGET={temp}"}
+            script = {"script": f"PID_CALIBRATE HEATER={heater} TARGET={temp}"}
             self._screen._confirm_send_action(
                 None,
-                _("Initiate a PID calibration for:") + f" {self.active_heater} @ {temp} ºC"
-                + "\n\n" + _("It may take more than 5 minutes depending on the heater power."),
+                _("Initiate a PID calibration for:")
+                + f" {heater} @ {temp} ºC"
+                + "\n\n"
+                + _("It may take more than 5 minutes depending on the heater power."),
                 "printer.gcode.script",
                 script
             )
