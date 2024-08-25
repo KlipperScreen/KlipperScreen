@@ -2,6 +2,7 @@
 This just tracks the most notable changes, if you want all the details checkout the commit history. Probably all versions contain changes regarding documentation, translation, fixes and other minor refactors
 
 ## Untagged
+* some wpa-eap support, adds the security type selector and user field
 * extrude: wait for temp or open temp panel automatically close #1416
 * extrude: show more filament sensors (up to 9)
 * notifications: change icon if warnings were issued
