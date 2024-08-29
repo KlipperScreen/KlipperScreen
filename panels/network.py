@@ -358,10 +358,11 @@ class Panel(ScreenPanel):
         self.networks[net['BSSID']]['info'].set_markup(
             "<small>"
             f"{info}"
-            f"{net['security']}\n"
+            # f"{net['security']}\n"
             f"{max_bitrate}\n"
-            f"{net['frequency']} Ghz  {chan}  {net['signal_level']} %\n"
-            f"{net['BSSID']}"
+            f"{net['frequency']} Ghz"
+            # f"{net['frequency']} Ghz  {chan}  {net['signal_level']} %\n"
+            # f"{net['BSSID']}"
             "</small>"
         )
 
