@@ -14,6 +14,7 @@ class Panel(ScreenPanel):
     def __init__(self, screen, title):
         title = title or _("Network")
         super().__init__(screen, title)
+        self.filename = "/home/pi/qrcode.png"
         self.show_add = False
         try:
             self.sdbus_nm = SdbusNm(self.popup_callback)
@@ -132,6 +133,11 @@ class Panel(ScreenPanel):
         delete.set_hexpand(False)
         delete.set_halign(Gtk.Align.END)
 
+        qrcode = self._gtk.Button("qrcode", None, "color1")
+        qrcode.connect("clicked", self.show_fullscreen_qrcode)
+        qrcode.set_hexpand(False)
+        qrcode.set_halign(Gtk.Align.END)
+
         buttons = Gtk.Box(spacing=5)
 
         name = Gtk.Label(hexpand=True, halign=Gtk.Align.START, wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
@@ -142,6 +148,7 @@ class Panel(ScreenPanel):
             name.set_markup(f"<b>{ssid}</b>")
         if net['known']:
             buttons.add(delete)
+            buttons.add(qrcode)
         buttons.add(connect)
 
         info = Gtk.Label(halign=Gtk.Align.START)
@@ -432,3 +439,24 @@ class Panel(ScreenPanel):
             self.reload_networks()
         else:
             self.reload_button.hide()
+
+    def show_fullscreen_qrcode(self, widget):
+    
+        curr_ip = self.sdbus_nm.get_ip_address()
+        logging.info(f"Generate QR-code with IP: {curr_ip}")
+        os.system(f'qrencode -s 10 -l H -o "{self.filename}" "{curr_ip}"')
+        logging.info(f"Generate QR-code")
+    
+        buttons = [
+            {"name": _("Close"), "response": Gtk.ResponseType.CANCEL}
+        ]
+    
+        image = Gtk.Image.new_from_file(self.filename)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        box.add(image)
+        box.set_vexpand(True)
+        self._gtk.Dialog(self.filename, buttons, box, self._gtk.remove_dialog)
+        logging.info(f"Show QR-code")
+    
+    def close_fullscreen_qrcode(self, dialog):
+        self._gtk.remove_dialog
