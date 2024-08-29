@@ -188,8 +188,8 @@ class BasePanel(ScreenPanel):
             return self._gtk.Image("fan", img_size, img_size)
         elif device.startswith("heater_generic"):
             return self._gtk.Image("heater", img_size, img_size)
-        elif device.startswith("temperature_sensor"):
-            return self._gtk.Image("heater", img_size, img_size)
+        # elif device.startswith("temperature_sensor"):
+        #     return self._gtk.Image("heat-up", img_size, img_size)
         else:
             return self._gtk.Image("heat-up", img_size, img_size)
 
