@@ -133,7 +133,7 @@ class Panel(ScreenPanel):
         delete.set_hexpand(False)
         delete.set_halign(Gtk.Align.END)
 
-        qrcode = self._gtk.Button("qrcode", None, "color1")
+        qrcode = self._gtk.Button("qrcode", None, "color1", .88)
         qrcode.connect("clicked", self.show_fullscreen_qrcode)
         qrcode.set_hexpand(False)
         qrcode.set_halign(Gtk.Align.END)
