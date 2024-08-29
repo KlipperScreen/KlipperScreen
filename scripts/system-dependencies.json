@@ -12,7 +12,8 @@
         "librsvg2-common",
         "libopenjp2-7",
         "libdbus-glib-1-dev",
-        "autoconf"
+        "autoconf",
+        "qrencode"
     ],
     "arch": [
         "cairo",
