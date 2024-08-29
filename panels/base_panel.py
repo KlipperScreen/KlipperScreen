@@ -153,6 +153,9 @@ class BasePanel(ScreenPanel):
                 elif device.startswith("heater"):
                     self.control['temp_box'].add(self.labels[f"{device}_box"])
                     n += 1
+                elif device.startswith("temperature_sensor"):
+                    self.control['temp_box'].add(self.labels[f"{device}_box"])
+                    n += 1
             for device in devices:
                 # Users can fill the bar if they want
                 if n >= nlimit + 1:
@@ -184,6 +187,8 @@ class BasePanel(ScreenPanel):
         elif device.startswith("temperature_fan"):
             return self._gtk.Image("fan", img_size, img_size)
         elif device.startswith("heater_generic"):
+            return self._gtk.Image("heater", img_size, img_size)
+        elif device.startswith("temperature_sensor"):
             return self._gtk.Image("heater", img_size, img_size)
         else:
             return self._gtk.Image("heat-up", img_size, img_size)
