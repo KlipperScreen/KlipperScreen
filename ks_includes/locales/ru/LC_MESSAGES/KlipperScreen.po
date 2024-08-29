@@ -278,6 +278,9 @@ msgstr "Очень большой"
 msgid "Extrude"
 msgstr "Экструзия"
 
+msgid "Unretract"
+msgstr "Выдавить"
+
 msgid "Extruders"
 msgstr "Экструдеры"
 
