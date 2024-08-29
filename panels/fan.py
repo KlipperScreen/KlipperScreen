@@ -56,7 +56,8 @@ class Panel(ScreenPanel):
         changeable = any(fan.startswith(x) or fan == x for x in CHANGEABLE_FANS)
         name = Gtk.Label(halign=Gtk.Align.START, valign=Gtk.Align.CENTER, hexpand=True, vexpand=True,
                          wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
-        fan_name = _("Part Fan") if fan == "fan" else fan.split()[1] or _("Chamber fan") if fan == "Chamber_fan" else fan.split()[1]
+        fan_name = _("Part Fan") if fan == "fan" else fan.split()[1]
+        fan_name = _("Chamber Fan") if fan.split("_")[0] == "Chamber" else fan.split()[1]
         name.set_markup(f"\n<big><b>{fan_name}</b></big>\n")
 
         fan_col = Gtk.Box(spacing=5)
