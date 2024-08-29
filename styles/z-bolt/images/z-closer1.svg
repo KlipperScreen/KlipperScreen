@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="z-closer.svg"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <metadata
+     id="metadata16">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>folder</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     pagecolor="#bfbfbf"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="855"
+     id="namedview12"
+     showgrid="false"
+     inkscape:pagecheckerboard="false"
+     inkscape:zoom="3.8281298"
+     inkscape:cx="13.322432"
+     inkscape:cy="14.236717"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g2"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:document-rotation="0"
+     inkscape:showpageshadow="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title2">folder</title>
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <g
+     id="g1"
+     transform="rotate(-135,32.065757,32.115897)">
+    <g
+       id="g2">
+      <path
+         id="Arrow_1_"
+         fill="none"
+         stroke="#ffffff"
+         stroke-width="2.4221"
+         stroke-linejoin="round"
+         d="m 20.774959,2.9232017 5.780263,5.8282333 -0.0013,-13.4922697 10.467486,4e-7 10e-7,13.6656675 5.961787,-5.886466 7.363415,7.4250468 L 31.744234,28.837115 13.337646,10.270608 Z"
+         style="stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none"
+         sodipodi:nodetypes="cccccccccc" />
+      <path
+         id="Arrow_1_-3"
+         fill="none"
+         stroke="#ffffff"
+         stroke-width="2.4221"
+         stroke-linejoin="round"
+         d="m 42.87128,61.308591 -5.780263,-5.828233 0.0013,13.49227 -10.467487,10e-7 V 55.306961 l -5.961787,5.886466 -7.363417,-7.425048 18.602375,-18.3737 18.40659,18.566506 z"
+         style="stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none"
+         sodipodi:nodetypes="cccccccccc" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="z-farther.svg"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <metadata
+     id="metadata16">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>folder</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     pagecolor="#bfbfbf"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="855"
+     id="namedview12"
+     showgrid="false"
+     inkscape:pagecheckerboard="false"
+     inkscape:zoom="5.4137931"
+     inkscape:cx="22.719745"
+     inkscape:cy="36.665605"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g2"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:document-rotation="0"
+     inkscape:showpageshadow="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+  <title
+     id="title2">folder</title>
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <g
+     id="g1"
+     transform="rotate(-135,32.065757,32.115897)">
+    <g
+       id="g2">
+      <g
+         id="g3"
+         transform="rotate(-45,32.065756,32.115896)">
+        <path
+           id="Arrow_1_"
+           fill="none"
+           stroke="#ffffff"
+           stroke-width="2.4221"
+           stroke-linejoin="round"
+           d="m 51.06406,28.742051 0.03392,-8.208447 -9.539556,9.541395 -7.401631,-7.40163 9.663087,-9.663087 -8.37798,-0.05326 0.04358,-10.4570229 26.146034,0.161699 -0.113079,26.1439259 z"
+           style="stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none"
+           sodipodi:nodetypes="cccccccccc" />
+        <path
+           id="Arrow_1_-3"
+           fill="none"
+           stroke="#ffffff"
+           stroke-width="2.4221"
+           stroke-linejoin="round"
+           d="m 13.067451,35.489741 -0.03392,8.208447 9.539557,-9.541395 7.40163,7.40163 -9.663086,9.663087 8.37798,0.05326 -0.04358,10.457024 -26.1460326,-0.161699 0.113078,-26.143926 z"
+           style="stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none"
+           sodipodi:nodetypes="cccccccccc" />
+      </g>
+    </g>
+  </g>
+</svg>
