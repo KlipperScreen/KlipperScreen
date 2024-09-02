@@ -146,6 +146,7 @@ class KlipperScreen(Gtk.Window):
         self.change_theme(self.theme)
         self.add(self.base_panel.main_grid)
         self.show_all()
+        self.update_cursor(self.show_cursor)
         min_ver = (3, 8)
         if sys.version_info < min_ver:
             self.show_error_modal(
@@ -158,18 +159,14 @@ class KlipperScreen(Gtk.Window):
         if self._config.errors:
             self.show_error_modal("Invalid config file", self._config.get_errors())
             return
-        if self.show_cursor:
-            self.get_window().set_cursor(
-                Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.ARROW))
-            os.system("xsetroot  -cursor_name  arrow")
-        else:
-            self.get_window().set_cursor(
-                Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.BLANK_CURSOR))
-            os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
         self.base_panel.activate()
         self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
         self.log_notification("KlipperScreen Started", 1)
         self.initial_connection()
+
+    def update_cursor(self, show: bool):
+        self.show_cursor = show
+        self.gtk.set_cursor(show, window=self.get_window())
 
     def state_execute(self, state, callback):
         self.close_screensaver()
@@ -633,6 +630,8 @@ class KlipperScreen(Gtk.Window):
 
         # Avoid leaving a cursor-handle
         close.grab_focus()
+        self.gtk.set_cursor(False, window=self.get_window())
+
         self.screensaver = box
         self.screensaver.show_all()
         self.power_devices(None, self._config.get_main_config().get("screen_off_devices", ""), on=False)
@@ -652,6 +651,7 @@ class KlipperScreen(Gtk.Window):
         for dialog in self.dialogs:
             logging.info(f"Restoring Dialog {dialog}")
             dialog.show()
+        self.gtk.set_cursor(self.show_cursor, window=self.get_window())
         self.show_all()
         self.power_devices(None, self._config.get_main_config().get("screen_on_devices", ""), on=True)
 

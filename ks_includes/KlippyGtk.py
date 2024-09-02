@@ -35,7 +35,6 @@ class KlippyGtk:
     def __init__(self, screen):
         self.screen = screen
         self.themedir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles", screen.theme, "images")
-        self.cursor = screen.show_cursor
         self.font_size_type = screen._config.get_main_config().get("font_size", "medium")
         self.width = screen.width
         self.height = screen.height
@@ -250,12 +249,7 @@ class KlippyGtk:
 
         dialog.show_all()
         # Change cursor to blank
-        if self.cursor:
-            dialog.get_window().set_cursor(
-                Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.ARROW))
-        else:
-            dialog.get_window().set_cursor(
-                Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.BLANK_CURSOR))
+        self.set_cursor(show=self.screen.show_cursor, window=dialog.get_window())
 
         self.screen.dialogs.append(dialog)
         logging.info(f"Showing dialog {dialog.get_title()} {dialog.get_size()}")
@@ -274,3 +268,13 @@ class KlippyGtk:
     def ScrolledWindow(self, steppers=True, **kwargs):
         steppers = steppers and self.screen._config.get_main_config().getboolean("show_scroll_steppers", fallback=False)
         return CustomScrolledWindow(steppers, **kwargs)
+
+    def set_cursor(self, show: bool, window: Gdk.Window):
+        if show:
+            window.set_cursor(
+                Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.ARROW))
+            os.system("xsetroot  -cursor_name  arrow")
+        else:
+            window.set_cursor(
+                Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.BLANK_CURSOR))
+            os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")

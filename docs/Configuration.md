@@ -24,9 +24,6 @@ The options listed here are not editable from within the user interface.
 # Time in seconds before the Job Status closes itself if an error is encountered
 # job_error_timeout: 0
 
-# Allows the cursor to be displayed on the screen
-# show_cursor: False
-
 # If multiple printers are defined, this can be set the name of the one to show at startup.
 # default_printer: MyPrinter
 
