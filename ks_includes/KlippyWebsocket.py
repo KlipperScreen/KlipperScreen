@@ -20,7 +20,7 @@ class KlippyWebsocket(threading.Thread):
     reconnect_count = 0
     max_retries = 4
 
-    def __init__(self, callback, host, port, api_key):
+    def __init__(self, callback, host, port, api_key, path='', ssl=None):
         threading.Thread.__init__(self)
         self._wst = None
         self.ws_url = None
@@ -30,16 +30,29 @@ class KlippyWebsocket(threading.Thread):
         self.closing = False
         self.host = host
         self.port = port
+        self.path = path
+        self.ssl = ssl
+        if (ssl == None):
+            if (self.port in {443, 7130}):
+                self.ssl = True
+            else:
+                self.ssl = False
         self.header = {"x-api-key": api_key} if api_key else {}
         self.api_key = api_key
 
     @property
     def _url(self):
-        return f"{self.host}:{self.port}"
+        if (self.path == ''):
+            return f"{self.host}:{self.port}"
+        else:
+            return f"{self.host}:{self.port}/{self.path}"
 
     @property
     def ws_proto(self):
-        return "wss" if int(self.port) in {443, 7130} else "ws"
+        if (self.ssl == True):
+            return "wss"
+        else:
+            return "ws"
 
     def initial_connect(self):
         if self.connect() is not False:
