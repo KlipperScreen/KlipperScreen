@@ -33,7 +33,7 @@ class KlippyWebsocket(threading.Thread):
         self.path = path
         self.ssl = ssl
         if (ssl == None):
-            if (self.port in {443, 7130}):
+            if (int(self.port) in {443, 7130}):
                 self.ssl = True
             else:
                 self.ssl = False
