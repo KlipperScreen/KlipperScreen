@@ -8,7 +8,7 @@ class KlippyRest:
         self.ip = ip
         self.port = port
         self.path = path
-        self.ssl = bool(ssl)
+        self.ssl = ssl
         self.api_key = api_key
         if (ssl == None):
             if (int(self.port) in {443, 7130}):
