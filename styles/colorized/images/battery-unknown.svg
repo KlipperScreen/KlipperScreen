@@ -42,9 +42,9 @@
      id="namedview12"
      showgrid="false"
      inkscape:pagecheckerboard="false"
-     inkscape:zoom="15.312519"
-     inkscape:cx="25.991804"
-     inkscape:cy="30.367309"
+     inkscape:zoom="9.5625"
+     inkscape:cx="32"
+     inkscape:cy="32"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -56,56 +56,29 @@
      inkscape:deskcolor="#bfbfbf"
      showguides="true">
     <sodipodi:guide
-       position="30.4,39"
-       orientation="1,0"
-       id="guide959"
+       position="22.900002,29.919999"
+       orientation="0,-1"
+       id="guide796"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="15,32"
-       orientation="1,0"
-       id="guide1021"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="45.8,32"
-       orientation="1,0"
-       id="guide1023"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="20.318471,25"
-       orientation="0,1"
-       id="guide1025"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="22.7,39"
-       orientation="1,0"
-       id="guide1083"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="38.099999,39"
-       orientation="1,0"
-       id="guide1085"
+       position="22.900002,19.909998"
+       orientation="0,-1"
+       id="guide851"
        inkscape:locked="false" />
   </sodipodi:namedview>
   <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
   <title
      id="title2">folder</title>
-  <rect
-     style="fill:#eee8d5;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none;stop-color:#000000;font-variation-settings:normal;opacity:0.998;vector-effect:none;fill-opacity:1;stroke:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-opacity:1"
-     id="rect295"
-     width="30.800781"
-     height="14"
-     x="15"
-     y="25" />
   <desc
      id="desc4">Created with Sketch.</desc>
   <path
+     d="M 45,12.109999 C 45,11.5575 44.813016,11.094483 44.43905,10.720949 44.065517,10.346983 43.6025,10.16 43.05,10.16 H 37.199999 V 5.9999999 H 26.8 V 10.16 h -5.85 c -0.5525,0 -1.015733,0.186983 -1.3897,0.560949 C 19.186766,11.094483 19,11.5575 19,12.109999 V 56.05 c 0,0.5525 0.186766,1.015733 0.5603,1.389699 C 19.934267,57.813233 20.3975,58 20.95,58 h 22.1 c 0.5525,0 1.015517,-0.186767 1.38905,-0.560301 C 44.813016,57.065733 45,56.6025 45,56.05 Z"
      id="path182"
-     style="fill:#eee8d5;fill-opacity:1;stroke-width:1;font-variation-settings:normal;opacity:0.998;vector-effect:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
-     d="m 13.5,22 c -0.425,0 -0.780693,0.144308 -1.068359,0.431641 C 12.144308,22.719307 12,23.075 12,23.5 v 17 c 0,0.425 0.144308,0.781027 0.431641,1.068359 C 12.719307,41.856026 13.075,42 13.5,42 h 33.800781 c 0.425,0 0.781027,-0.143974 1.06836,-0.431641 C 48.656807,41.281027 48.800781,40.925 48.800781,40.5 V 36 H 52 v -8 h -3.199219 v -4.5 c 0,-0.425 -0.143974,-0.780693 -0.43164,-1.068359 C 48.081808,22.144308 47.725781,22 47.300781,22 Z m 32.300781,3 V 39 H 15 V 25 Z"
-     sodipodi:nodetypes="scssssscsccccssssccccc" />
+     style="font-variation-settings:normal;opacity:0.998;vector-effect:none;fill:#eee8d5;fill-opacity:1;stroke:none;stroke-width:0.999997;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
+     sodipodi:nodetypes="scsccccsssscsssss" />
   <path
-     d="m 33.239844,31.75 -0.9,0.92 c -0.54,0.54 -0.92,1.01 -1.08,1.83 h -2.04 c 0.11,-0.9 0.51,-1.72 1.12,-2.33 l 1.24,-1.26 c 0.37,-0.36 0.59,-0.86 0.59,-1.41 0,-1.11 -0.9,-2 -2,-2 -1.104569,0 -2,0.895431 -2,2 h -2 c 0,-2.209139 1.790861,-4 4,-4 2.209139,0 4,1.790861 4,4 0,0.88 -0.36,1.68 -0.93,2.25 m -2.07,6.75 h -2 v -2 h 2"
-     style="fill:#dc322f;font-variation-settings:normal;opacity:1;vector-effect:none;fill-opacity:1;stroke-width:5.99999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1;stroke:none"
+     d="m 39.480907,33.470803 -2.193099,2.241835 c -1.31586,1.31586 -2.241836,2.461145 -2.63172,4.459302 h -4.971026 c 0.268046,-2.193099 1.242757,-4.191257 2.729191,-5.677691 l 3.021604,-3.070339 c 0.901607,-0.87724 1.437698,-2.095629 1.437698,-3.435857 0,-2.704822 -2.193099,-4.873554 -4.873554,-4.873554 -2.691589,0 -4.873555,2.181966 -4.873555,4.873554 h -4.873555 c 0,-5.38318 4.36393,-9.747109 9.74711,-9.747109 5.38318,0 9.747109,4.363929 9.747109,9.747109 0,2.144365 -0.87724,4.093786 -2.266203,5.48275 M 34.436778,49.91905 h -4.873555 v -4.873555 h 4.873555"
+     style="font-variation-settings:normal;vector-effect:none;fill:#dc322f;fill-opacity:1;stroke:none;stroke-width:5.99998;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000"
      id="path1360"
      sodipodi:nodetypes="ccccccssccssccccc" />
 </svg>

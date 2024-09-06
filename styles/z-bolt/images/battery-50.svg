@@ -43,7 +43,7 @@
      showgrid="false"
      inkscape:pagecheckerboard="false"
      inkscape:zoom="10.827586"
-     inkscape:cx="33.063694"
+     inkscape:cx="18.794586"
      inkscape:cy="30.292994"
      inkscape:window-x="0"
      inkscape:window-y="0"
@@ -54,45 +54,14 @@
      inkscape:document-rotation="0"
      inkscape:showpageshadow="2"
      inkscape:deskcolor="#bfbfbf"
-     showguides="true">
-    <sodipodi:guide
-       position="30.4,39"
-       orientation="1,0"
-       id="guide959"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="15,32"
-       orientation="1,0"
-       id="guide1021"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="45.8,32"
-       orientation="1,0"
-       id="guide1023"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="20.318471,25"
-       orientation="0,1"
-       id="guide1025"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="22.7,39"
-       orientation="1,0"
-       id="guide1083"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="38.099999,39"
-       orientation="1,0"
-       id="guide1085"
-       inkscape:locked="false" />
-  </sodipodi:namedview>
+     showguides="true" />
   <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
   <title
      id="title2">folder</title>
   <desc
      id="desc4">Created with Sketch.</desc>
   <path
-     d="m 47.3,42 c 0.425,0 0.781167,-0.143833 1.0685,-0.4315 C 48.656167,41.281167 48.8,40.925 48.8,40.5 V 36 H 52 v -8 h -3.2 v -4.5 c 0,-0.425 -0.143833,-0.781333 -0.4315,-1.069 C 48.081167,22.143667 47.725,22 47.3,22 H 13.5 c -0.425,0 -0.781333,0.143667 -1.069,0.431 C 12.143667,22.718667 12,23.075 12,23.5 v 17 c 0,0.425 0.143667,0.781167 0.431,1.0685 C 12.718667,41.856167 13.075,42 13.5,42 Z M 45.8,39 H 30.4 V 25 h 15.4 z"
+     d="M 46,10.579999 C 46,9.984999 45.798634,9.4863661 45.3959,9.0841 44.993634,8.681366 44.495,8.479999 43.9,8.479999 H 37.600001 V 4 H 26.4 v 4.479999 h -6.3 c -0.595,0 -1.093866,0.201367 -1.4966,0.604101 C 18.201134,9.486366 18,9.984999 18,10.579999 V 57.9 c 0,0.595 0.201134,1.093866 0.6034,1.4966 C 19.006134,59.798866 19.505,60 20.1,60 h 23.8 c 0.595,0 1.093634,-0.201134 1.4959,-0.6034 C 45.798634,58.993866 46,58.495 46,57.9 Z M 41.8,12.68 V 34.24 H 22.2 V 12.68 Z"
      id="path182"
      style="fill:#ffffff;fill-opacity:1;stroke-width:0.05"
      sodipodi:nodetypes="scsccccsssscsssssccccc" />

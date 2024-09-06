@@ -42,9 +42,9 @@
      id="namedview12"
      showgrid="false"
      inkscape:pagecheckerboard="false"
-     inkscape:zoom="10.827586"
-     inkscape:cx="26.044586"
-     inkscape:cy="30.292994"
+     inkscape:zoom="9.5625"
+     inkscape:cx="32"
+     inkscape:cy="32"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -54,46 +54,15 @@
      inkscape:document-rotation="0"
      inkscape:showpageshadow="2"
      inkscape:deskcolor="#bfbfbf"
-     showguides="true">
-    <sodipodi:guide
-       position="30.4,39"
-       orientation="1,0"
-       id="guide959"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="15,32"
-       orientation="1,0"
-       id="guide1021"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="45.8,32"
-       orientation="1,0"
-       id="guide1023"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="20.318471,25"
-       orientation="0,1"
-       id="guide1025"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="22.7,39"
-       orientation="1,0"
-       id="guide1083"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="38.099999,39"
-       orientation="1,0"
-       id="guide1085"
-       inkscape:locked="false" />
-  </sodipodi:namedview>
+     showguides="true" />
   <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
   <title
      id="title2">folder</title>
   <desc
      id="desc4">Created with Sketch.</desc>
   <path
-     d="m 47.3,42 c 0.425,0 0.781167,-0.143833 1.0685,-0.4315 C 48.656167,41.281167 48.8,40.925 48.8,40.5 V 36 H 52 v -8 h -3.2 v -4.5 c 0,-0.425 -0.143833,-0.781333 -0.4315,-1.069 C 48.081167,22.143667 47.725,22 47.3,22 H 13.5 c -0.425,0 -0.781333,0.143667 -1.069,0.431 C 12.143667,22.718667 12,23.075 12,23.5 v 17 c 0,0.425 0.143667,0.781167 0.431,1.0685 C 12.718667,41.856167 13.075,42 13.5,42 Z M 45.8,39 H 15 V 25 h 30.8 z"
+     d="M 45,12.109999 C 45,11.5575 44.813016,11.094483 44.43905,10.720949 44.065517,10.346983 43.6025,10.16 43.05,10.16 H 37.199999 V 5.9999999 H 26.8 V 10.16 h -5.85 c -0.5525,0 -1.015733,0.186983 -1.3897,0.560949 C 19.186766,11.094483 19,11.5575 19,12.109999 V 56.05 c 0,0.5525 0.186766,1.015733 0.5603,1.389699 C 19.934267,57.813233 20.3975,58 20.95,58 h 22.1 c 0.5525,0 1.015517,-0.186767 1.38905,-0.560301 C 44.813016,57.065733 45,56.6025 45,56.05 Z m -3.9,1.95 V 54.1 H 22.9 V 14.059999 Z"
      id="path182"
-     style="fill:#eee8d5;fill-opacity:1;stroke-width:1;font-variation-settings:normal;opacity:0.998;vector-effect:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
+     style="font-variation-settings:normal;opacity:0.998;vector-effect:none;fill:#eee8d5;fill-opacity:1;stroke:none;stroke-width:0.999997;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
      sodipodi:nodetypes="scsccccsssscsssssccccc" />
 </svg>

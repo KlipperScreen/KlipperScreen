@@ -42,9 +42,9 @@
      id="namedview12"
      showgrid="false"
      inkscape:pagecheckerboard="false"
-     inkscape:zoom="21.655172"
-     inkscape:cx="26.921975"
-     inkscape:cy="33.4793"
+     inkscape:zoom="10.827586"
+     inkscape:cx="25.813695"
+     inkscape:cy="34.541402"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -54,51 +54,20 @@
      inkscape:document-rotation="0"
      inkscape:showpageshadow="2"
      inkscape:deskcolor="#bfbfbf"
-     showguides="true">
-    <sodipodi:guide
-       position="30.4,39"
-       orientation="1,0"
-       id="guide959"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="15,32"
-       orientation="1,0"
-       id="guide1021"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="45.8,32"
-       orientation="1,0"
-       id="guide1023"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="20.318471,25"
-       orientation="0,1"
-       id="guide1025"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="22.7,39"
-       orientation="1,0"
-       id="guide1083"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="38.099999,39"
-       orientation="1,0"
-       id="guide1085"
-       inkscape:locked="false" />
-  </sodipodi:namedview>
+     showguides="true" />
   <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
   <title
      id="title2">folder</title>
   <desc
      id="desc4">Created with Sketch.</desc>
   <path
+     d="M 46,10.579999 C 46,9.984999 45.798634,9.4863661 45.3959,9.0841 44.993634,8.681366 44.495,8.479999 43.9,8.479999 H 37.600001 V 4 H 26.4 v 4.479999 h -6.3 c -0.595,0 -1.093866,0.201367 -1.4966,0.604101 C 18.201134,9.486366 18,9.984999 18,10.579999 V 57.9 c 0,0.595 0.201134,1.093866 0.6034,1.4966 C 19.006134,59.798866 19.505,60 20.1,60 h 23.8 c 0.595,0 1.093634,-0.201134 1.4959,-0.6034 C 45.798634,58.993866 46,58.495 46,57.9 Z M 41.8,12.68 V 55.8 H 22.2 V 12.68 Z"
      id="path182"
      style="fill:#ffffff;fill-opacity:1;stroke-width:0.05"
-     d="m 13.5,22 c -0.425,0 -0.780693,0.144308 -1.068359,0.431641 C 12.144308,22.719307 12,23.075 12,23.5 v 17 c 0,0.425 0.144308,0.781027 0.431641,1.068359 C 12.719307,41.856026 13.075,42 13.5,42 h 33.800781 c 0.425,0 0.781027,-0.143974 1.06836,-0.431641 C 48.656807,41.281027 48.800781,40.925 48.800781,40.5 V 36 H 52 v -8 h -3.199219 v -4.5 c 0,-0.425 -0.143974,-0.780693 -0.43164,-1.068359 C 48.081808,22.144308 47.725781,22 47.300781,22 Z m 32.300781,3 V 39 H 15 V 25 Z"
-     sodipodi:nodetypes="scssssscsccccssssccccc" />
+     sodipodi:nodetypes="scsccccsssscsssssccccc" />
   <path
-     d="m 33.239844,31.75 -0.9,0.92 c -0.54,0.54 -0.92,1.01 -1.08,1.83 h -2.04 c 0.11,-0.9 0.51,-1.72 1.12,-2.33 l 1.24,-1.26 c 0.37,-0.36 0.59,-0.86 0.59,-1.41 0,-1.11 -0.9,-2 -2,-2 -1.104569,0 -2,0.895431 -2,2 h -2 c 0,-2.209139 1.790861,-4 4,-4 2.209139,0 4,1.790861 4,4 0,0.88 -0.36,1.68 -0.93,2.25 m -2.07,6.75 h -2 v -2 h 2"
-     style="fill:#ff0000;font-variation-settings:normal;opacity:1;vector-effect:none;fill-opacity:1;stroke-width:0.05;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
+     d="m 38.612307,33.701539 -1.938461,1.981538 c -1.163077,1.163077 -1.981539,2.175385 -2.326154,3.941538 H 29.953846 C 30.190769,37.686154 31.052307,35.92 32.366154,34.606154 l 2.670769,-2.713846 c 0.796924,-0.775385 1.27077,-1.852308 1.27077,-3.036923 0,-2.39077 -1.938463,-4.307693 -4.307692,-4.307693 -2.379072,0 -4.307693,1.928621 -4.307693,4.307693 H 23.384615 C 23.384615,24.097239 27.241854,20.24 32,20.24 c 4.758145,0 8.615385,3.857239 8.615385,8.615385 0,1.895384 -0.775384,3.618461 -2.003078,4.846154 M 34.153846,48.24 h -4.307692 v -4.307692 h 4.307692"
+     style="font-variation-settings:normal;vector-effect:none;fill:#ff0000;fill-opacity:1;stroke-width:0.0500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000"
      id="path1360"
      sodipodi:nodetypes="ccccccssccssccccc" />
 </svg>
