@@ -88,10 +88,12 @@ class BasePanel(ScreenPanel):
 
         img_size = self._gtk.img_scale * self.bts
         self.battery_icons = {
-            'charging': self._gtk.PixbufFromIcon('battery-charging-outline', img_size, img_size),
-            'high': self._gtk.PixbufFromIcon('battery-high', img_size, img_size),
-            'medium': self._gtk.PixbufFromIcon('battery-medium', img_size, img_size),
-            'low': self._gtk.PixbufFromIcon('battery-low', img_size, img_size),
+            'charging': self._gtk.PixbufFromIcon('battery-charging', img_size, img_size),
+            '100': self._gtk.PixbufFromIcon('battery-100', img_size, img_size),
+            '75': self._gtk.PixbufFromIcon('battery-75', img_size, img_size),
+            '50': self._gtk.PixbufFromIcon('battery-50', img_size, img_size),
+            '25': self._gtk.PixbufFromIcon('battery-25', img_size, img_size),
+            '0': self._gtk.PixbufFromIcon('battery-0', img_size, img_size),
             'unknown': self._gtk.PixbufFromIcon('battery-unknown', img_size, img_size),
         }
         self.labels['battery'] = Gtk.Label()
@@ -364,12 +366,16 @@ class BasePanel(ScreenPanel):
     def get_battery_icon(self, charge: float, plugged: bool):
         if plugged:
             return self.battery_icons['charging']
-        elif charge > 66:
-            return self.battery_icons['high']
-        elif charge > 33:
-            return self.battery_icons['medium']
+        elif charge > 75:
+            return self.battery_icons['100']
+        elif charge > 50:
+            return self.battery_icons['75']
+        elif charge > 25:
+            return self.battery_icons['50']
+        elif charge > 10:
+            return self.battery_icons['25']
         elif charge >= 0:
-            return self.battery_icons['low']
+            return self.battery_icons['0']
         else:
             return self.battery_icons['unknown']
 
