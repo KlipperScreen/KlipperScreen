@@ -30,29 +30,18 @@ class KlippyWebsocket(threading.Thread):
         self.closing = False
         self.host = host
         self.port = port
-        self.path = path
-        self.ssl = ssl
-        if (ssl == None):
-            if (int(self.port) in {443, 7130}):
-                self.ssl = True
-            else:
-                self.ssl = False
+        self.path = f"/{path}" if path else ''
+        self.ssl = int(self.port) in {443, 7130} if ssl is None else bool(ssl)
         self.header = {"x-api-key": api_key} if api_key else {}
         self.api_key = api_key
 
     @property
     def _url(self):
-        if (self.path == ''):
-            return f"{self.host}:{self.port}"
-        else:
-            return f"{self.host}:{self.port}/{self.path}"
+        return f"{self.host}:{self.port}{self.path}"
 
     @property
     def ws_proto(self):
-        if (self.ssl == True):
-            return "wss"
-        else:
-            return "ws"
+        return "wss" if self.ssl else "ws"
 
     def initial_connect(self):
         if self.connect() is not False:
