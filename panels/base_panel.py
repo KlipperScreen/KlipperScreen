@@ -86,22 +86,16 @@ class BasePanel(ScreenPanel):
         self.control['time_box'] = Gtk.Box(halign=Gtk.Align.END)
         self.control['time_box'].pack_end(self.control['time'], True, True, 10)
 
-        img_size = self._gtk.img_scale * self.bts
-        self.battery_icons = {
-            'charging': self._gtk.PixbufFromIcon('battery-charging', img_size, img_size),
-            '100': self._gtk.PixbufFromIcon('battery-100', img_size, img_size),
-            '75': self._gtk.PixbufFromIcon('battery-75', img_size, img_size),
-            '50': self._gtk.PixbufFromIcon('battery-50', img_size, img_size),
-            '25': self._gtk.PixbufFromIcon('battery-25', img_size, img_size),
-            '0': self._gtk.PixbufFromIcon('battery-0', img_size, img_size),
-            'unknown': self._gtk.PixbufFromIcon('battery-unknown', img_size, img_size),
-        }
+        self.battery_icons = self.load_battery_icons()
         self.labels['battery'] = Gtk.Label()
         self.labels['battery_icon'] = self._gtk.Image()
         self.labels['battery_icon'].set_from_pixbuf(self.battery_icons['unknown'])
-        self.control['battery_box'] = Gtk.Box(spacing=10, halign=Gtk.Align.END)
+        self.control['battery_box'] = Gtk.Box(halign=Gtk.Align.END)
+        self.control['battery_box'].set_no_show_all(True)
         self.control['battery_box'].add(self.labels['battery'])
         self.control['battery_box'].add(self.labels['battery_icon'])
+        for widget in self.control['battery_box']:
+            widget.show()
 
         self.titlebar = Gtk.Box(spacing=5, valign=Gtk.Align.CENTER)
         self.titlebar.get_style_context().add_class("title_bar")
@@ -127,6 +121,18 @@ class BasePanel(ScreenPanel):
 
         self.update_time()
 
+    def load_battery_icons(self):
+        img_size = self._gtk.img_scale * self.bts
+        return {
+            'charging': self._gtk.PixbufFromIcon('battery-charging', img_size, img_size),
+            '100': self._gtk.PixbufFromIcon('battery-100', img_size, img_size),
+            '75': self._gtk.PixbufFromIcon('battery-75', img_size, img_size),
+            '50': self._gtk.PixbufFromIcon('battery-50', img_size, img_size),
+            '25': self._gtk.PixbufFromIcon('battery-25', img_size, img_size),
+            '0': self._gtk.PixbufFromIcon('battery-0', img_size, img_size),
+            'unknown': self._gtk.PixbufFromIcon('battery-unknown', img_size, img_size),
+        }
+
     def reload_icons(self):
         button: Gtk.Button
         for button in self.action_bar.get_children():
@@ -137,8 +143,8 @@ class BasePanel(ScreenPanel):
             height = pixbuf.get_height()
             button.set_image(self._gtk.Image(name, width, height))
 
-        if self._config.get_main_config().getboolean("show_battery", False):
-            self.battery_percentage()
+        self.battery_icons = self.load_battery_icons()
+        self.battery_percentage()
 
     def show_heaters(self, show=True):
         try:
@@ -213,8 +219,7 @@ class BasePanel(ScreenPanel):
     def activate(self):
         if self.time_update is None:
             self.time_update = GLib.timeout_add_seconds(1, self.update_time)
-        if self.battery_update is None and self._config.get_main_config().getboolean("show_battery", False):
-            self.battery_percentage()
+        if self.battery_update is None:
             self.battery_update = GLib.timeout_add_seconds(60, self.battery_percentage)
 
     def add_content(self, panel):
@@ -387,9 +392,12 @@ class BasePanel(ScreenPanel):
             )
             self.labels['battery'].set_text(f'{battery.percent:.0f}%')
             logging.debug(f"Battery: {battery.percent}% Power plugged in: {'Yes' if battery.power_plugged else 'No'}")
+            self.control['battery_box'].show()
+            return True
         else:
             logging.debug("Battery information not available.")
-        return self._config.get_main_config().getboolean("show_battery", False)
+            self.control['battery_box'].hide()
+            return False
 
     def set_ks_printer_cfg(self, printer):
         ScreenPanel.ks_printer_cfg = self._config.get_printer_config(printer)
