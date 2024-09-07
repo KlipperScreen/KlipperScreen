@@ -83,7 +83,7 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "Möchten Sie das System wirklich herunterfahren?"
 
 msgid "Asks for confirmation before stopping"
-msgstr ""
+msgstr "Bittet sie vor dem aufhören um Bestätigung"
 
 msgid "Auto"
 msgstr "Auto"
@@ -140,7 +140,7 @@ msgid "Cannot connect to Moonraker"
 msgstr "Es kann keine Verbindung zu Moonraker hergestellt werden"
 
 msgid "Changes how the interface looks"
-msgstr ""
+msgstr "Ändert das Aussehen der Oberfläche"
 
 msgid "Changes how the time remaining is calculated"
 msgstr "Verändert, wie die verbleibende Zeit berechnet wird"
@@ -161,7 +161,7 @@ msgid "Close"
 msgstr "Schließen"
 
 msgid "Close messages after a timeout"
-msgstr ""
+msgstr "Schließe Nachrichten nach einer bestimmten Zeit"
 
 msgid "Complete"
 msgstr "Fertiggestellt"
@@ -189,13 +189,13 @@ msgid "Cooldown"
 msgstr "Abkühlen"
 
 msgid "Couldn't add network"
-msgstr ""
+msgstr "Netzwerk konnte nicht hinzugefügt werden"
 
 msgid "Current"
 msgstr ""
 
 msgid "Current percentage and graph line"
-msgstr ""
+msgstr "Momentane Prozent und Diagramm Linie"
 
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS konnte nicht geladen werden und wurde deaktiviert"
@@ -216,7 +216,7 @@ msgid "Disable Motors"
 msgstr "Motoren deaktivieren"
 
 msgid "Disable for 12hs with am / pm"
-msgstr ""
+msgstr "Deaktivieren für 12h Anzeige mit AM/PM"
 
 msgid "Disconnect"
 msgstr "Trennen"
@@ -226,7 +226,7 @@ msgstr "Entfernung (mm)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
+msgstr "Wollen Sie %s vergessen oder trennen?"
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -236,7 +236,7 @@ msgid "Elapsed:"
 msgstr "Laufzeit:"
 
 msgid "Emergency Stop"
-msgstr ""
+msgstr "Notaus"
 
 msgid "Enable screen power management"
 msgstr ""
