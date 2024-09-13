@@ -98,6 +98,8 @@ class KlipperScreenConfig:
             {printer[8:]: {
                 "moonraker_host": self.config.get(printer, "moonraker_host", fallback="127.0.0.1"),
                 "moonraker_port": self.config.get(printer, "moonraker_port", fallback="7125"),
+                "moonraker_path": self.config.get(printer, "moonraker_path", fallback='').strip('/'),
+                "moonraker_ssl": self.config.getboolean(printer, "moonraker_ssl", fallback=None),
                 "moonraker_api_key": self.config.get(printer, "moonraker_api_key", fallback="").replace('"', '')
             }} for printer in printers
         ]
@@ -173,10 +175,10 @@ class KlipperScreenConfig:
                 )
             elif section.startswith('printer '):
                 bools = (
-                    'invert_x', 'invert_y', 'invert_z',
+                    'invert_x', 'invert_y', 'invert_z', 'moonraker_ssl',
                 )
                 strs = (
-                    'moonraker_api_key', 'moonraker_host', 'titlebar_name_type',
+                    'moonraker_api_key', 'moonraker_host', 'moonraker_path', 'titlebar_name_type',
                     'screw_positions', 'power_devices', 'titlebar_items', 'z_babystep_values',
                     'extrude_distances', 'extrude_speeds', 'move_distances', 'zcalibrate_custom_commands'
                 )

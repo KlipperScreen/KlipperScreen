@@ -4,15 +4,18 @@ import requests
 
 
 class KlippyRest:
-    def __init__(self, ip, port=7125, api_key=False):
+    def __init__(self, ip, port=7125, api_key=False, path='', ssl=None):
         self.ip = ip
         self.port = port
+        self.path = f"/{path}" if path else ''
+        self.ssl = ssl
         self.api_key = api_key
+        self.ssl = int(self.port) in {443, 7130} if ssl is None else bool(ssl)
         self.status = ''
 
     @property
     def endpoint(self):
-        return f"{'https' if int(self.port) in {443, 7130} else 'http'}://{self.ip}:{self.port}"
+        return f"{'https' if self.ssl else 'http'}://{self.ip}:{self.port}{self.path}"
 
     @staticmethod
     def process_response(response):
