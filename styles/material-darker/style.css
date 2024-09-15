@@ -101,6 +101,10 @@ switch:checked {
     background-color: #2f5631;
 }
 
+treeview.view check:checked {
+    -gtk-icon-source: url("./styles/material-darker/images/complete.svg");
+}
+
 label {
     color: #e2e2e2;
 }

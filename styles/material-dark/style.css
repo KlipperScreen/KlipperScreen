@@ -103,6 +103,10 @@ switch:checked {
     background-color: @echo;
 }
 
+treeview.view check:checked {
+    -gtk-icon-source: url("./styles/material-dark/images/complete.svg");
+}
+
 entry {
     background-color: @active-dark;
     border-color: @active-dark;

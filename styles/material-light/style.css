@@ -122,6 +122,10 @@ switch:checked {
     background-color: @color3;
 }
 
+treeview.view check:checked {
+    -gtk-icon-source: url("./styles/material-light/images/complete.svg");
+}
+
 treeview.view check,
 switch slider,
 scale trough,

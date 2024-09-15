@@ -32,6 +32,10 @@ window {
     -gtk-icon-shadow: none;
 }
 
+treeview.view{
+    padding-right: 0.25em;
+}
+
 junction {
     background-color: @bg;
 }
@@ -40,8 +44,7 @@ switch slider {
     border: 0;
 }
 
-switch,
-treeview.view check {
+switch {
     margin: 0.75em;
     min-width: 5em;
     min-height: 2.5em;
@@ -50,23 +53,14 @@ treeview.view check {
 }
 
 treeview.view check {
-    background-color: rgb(32,41,47);
-    -gtk-icon-source: -gtk-icontheme("switch-off-symbolic");
-    background-repeat: no-repeat;
-    background-position: left center;
-    background-size : 3em 3em;
-    background-image: image(url("./styles/circle.svg"));
-    -gtk-icon-transform: translateX(1.5em);
-}
-treeview.view check:checked {
-    background-color : rgb(53,132,228);
-    background-position: right center;
-    -gtk-icon-source: -gtk-icontheme("switch-on-symbolic");
-    -gtk-icon-transform: translateX(-1.5em);
+    min-height: 2em;
+    min-width: 2em;
+    background-image: none;
 }
 
-expander label {
-    padding : 1em;
+treeview.view check:checked {
+    background-image: none;
+    -gtk-icon-source: url("./styles/complete.svg");
 }
 
 button {

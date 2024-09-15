@@ -76,9 +76,14 @@ treeview.view check,
 switch {
     background-color: @active;
 }
+
 treeview.view check:checked,
 switch:checked {
     background-color: @switch-scale-bg;
+}
+
+treeview.view check:checked {
+    -gtk-icon-source: url("./styles/z-bolt/images/complete.svg");
 }
 
 entry {
