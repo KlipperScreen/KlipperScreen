@@ -16,13 +16,26 @@ except ImportError:
 
 
 def format_date(date):
-    try:
-        return datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%f').replace(tzinfo=ZoneInfo('UTC'))
-    except ValueError:
+    if date.endswith('Z'):
+        date = f'{date[:-1]}+00:00'
+
+    formats = [
+        '%Y-%m-%dT%H:%M:%S.%f%z',
+        '%Y-%m-%dT%H:%M:%S%z',
+        '%Y-%m-%dT%H:%M:%S'
+    ]
+    for fmt in formats:
         try:
-            return datetime.strptime(date, '%Y-%m-%dT%H:%M:%S').replace(tzinfo=ZoneInfo('UTC'))
+            parsed_date = datetime.strptime(date, fmt)
+            # If there's no timezone info, assume UTC
+            if parsed_date.tzinfo is None:
+                parsed_date = parsed_date.replace(tzinfo=ZoneInfo('UTC'))
+            return parsed_date
         except ValueError:
-            return None
+            continue
+
+    logging.error(f"Date parsing failed for: {date}")
+    return None
 
 
 class SpoolmanVendor:
