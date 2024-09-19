@@ -58,6 +58,7 @@ button.color4 {
     border-radius: 1em;
 }
 
+.active image,
 button.color1:active,
 button.color2:active,
 button.color3:active,

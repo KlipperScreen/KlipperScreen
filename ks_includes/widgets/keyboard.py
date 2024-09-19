@@ -209,7 +209,7 @@ class Keyboard(Gtk.Box):
         if key == "⌫":
             Gtk.Entry.do_backspace(self.entry)
         elif key == "↓":
-            self.close_cb()
+            self.close_cb(entry=self.entry)
             return
         elif key == "↑":
             self.toggle_shift()

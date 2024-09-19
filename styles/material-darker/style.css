@@ -66,6 +66,7 @@ button.invalid:active,
     background-color: #424242;
 }
 
+.active image,
 button.update {
     color: #2196f3;
     background-color: #121212;

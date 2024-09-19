@@ -86,18 +86,40 @@ class Panel(ScreenPanel):
                 if result:
                     result = result.groupdict()
                     default = result["default"] if "default" in result else ""
-                    entry = Gtk.Entry(placeholder_text=default)
+                    entry = Gtk.Entry(placeholder_text=default, input_purpose=Gtk.InputPurpose.ALPHA)
+                    icon = self._gtk.PixbufFromIcon("hashtag")
+                    entry.set_icon_from_pixbuf(Gtk.EntryIconPosition.SECONDARY, icon)
+                    entry.connect("icon-press", self.on_icon_pressed)
                     self.macros[macro]["params"].update({result["param"]: entry})
 
         for param in self.macros[macro]["params"]:
             labels.add(Gtk.Label(param))
             self.macros[macro]["params"][param].connect("focus-in-event", self._screen.show_keyboard)
+            self.macros[macro]["params"][param].connect("focus-in-event", self.scroll_to_entry)
             self.macros[macro]["params"][param].connect("focus-out-event", self._screen.remove_keyboard)
             labels.add(self.macros[macro]["params"][param])
+
+    def scroll_to_entry(self, entry, event):
+        self.labels['macros_list'].get_vadjustment().set_value(
+            entry.get_allocation().y - 50
+        )
+
+    def on_icon_pressed(self, entry, icon_pos, event):
+        entry.grab_focus()
+        self._screen.remove_keyboard()
+        if entry.get_input_purpose() == Gtk.InputPurpose.ALPHA:
+            entry.set_input_purpose(Gtk.InputPurpose.DIGITS)
+            entry.get_style_context().add_class("active")
+        else:
+            entry.set_input_purpose(Gtk.InputPurpose.ALPHA)
+            entry.get_style_context().remove_class("active")
+        self._screen.show_keyboard(entry)
 
     def run_gcode_macro(self, widget, macro):
         params = ""
         for param in self.macros[macro]["params"]:
+            self.macros[macro]["params"][param].set_sensitive(False)  # Move focus to prevent
+            self.macros[macro]["params"][param].set_sensitive(True)  # reopening the osk
             value = self.macros[macro]["params"][param].get_text()
             if value:
                 if re.findall(r'[G|M]\d{1,3}', macro):
