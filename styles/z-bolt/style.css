@@ -58,6 +58,7 @@ button.active {
     background-color: @active;
 }
 
+.active image,
 button.update {
     background: @color3;
     border-color: @color3;

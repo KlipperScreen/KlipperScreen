@@ -1207,13 +1207,16 @@ class KlipperScreen(Gtk.Window):
         }
         return
 
-    def remove_keyboard(self, widget=None, event=None):
+    def remove_keyboard(self, entry=None, event=None):
         if self.keyboard is None:
             return
         if 'process' in self.keyboard:
             os.kill(self.keyboard['process'].pid, SIGTERM)
         self.base_panel.content.remove(self.keyboard['box'])
         self.keyboard = None
+        if entry:
+            entry.set_sensitive(False)  # Move the focus
+            entry.set_sensitive(True)
 
     def _key_press_event(self, widget, event):
         keyval_name = Gdk.keyval_name(event.keyval)
