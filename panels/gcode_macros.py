@@ -79,14 +79,23 @@ class Panel(ScreenPanel):
             "row": row,
             "params": {},
         }
-        pattern = r'params\.(?P<param>[a-zA-Z0-9_]+)(?:\s*\|.*\s*default\(\s*(?P<default>[^\)]+)\))?'
+
+        pattern = re.compile(r'params\.(?P<param>[a-zA-Z0-9_]+)'
+                             r'(?:\s*\|\s*default\(\s*(?P<default>[^\)]+)\s*\))?'
+                             r'(?:\s*\|\s*(?P<hint>[a-zA-Z]+))?')
         for line in gcode:
             if line.startswith("{") and "params." in line:
                 result = re.search(pattern, line)
                 if result:
                     result = result.groupdict()
-                    default = result["default"] if "default" in result else ""
-                    entry = Gtk.Entry(placeholder_text=default, input_purpose=Gtk.InputPurpose.ALPHA)
+                    default = result.get("default", "")
+                    hint = result.get("hint", "")
+                    entry = Gtk.Entry(placeholder_text=default)
+                    if hint in ("int", "float"):
+                        entry.set_input_purpose(Gtk.InputPurpose.DIGITS)
+                        entry.get_style_context().add_class("active")
+                    else:
+                        entry.set_input_purpose(Gtk.InputPurpose.ALPHA)
                     icon = self._gtk.PixbufFromIcon("hashtag")
                     entry.set_icon_from_pixbuf(Gtk.EntryIconPosition.SECONDARY, icon)
                     entry.connect("icon-press", self.on_icon_pressed)
