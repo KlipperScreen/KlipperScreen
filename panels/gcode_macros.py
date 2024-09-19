@@ -103,12 +103,15 @@ class Panel(ScreenPanel):
 
         for param in self.macros[macro]["params"]:
             labels.add(Gtk.Label(param))
-            self.macros[macro]["params"][param].connect("focus-in-event", self._screen.show_keyboard)
-            self.macros[macro]["params"][param].connect("focus-in-event", self.scroll_to_entry)
+            self.macros[macro]["params"][param].connect("focus-in-event", self.show_keyboard)
             self.macros[macro]["params"][param].connect("focus-out-event", self._screen.remove_keyboard)
             labels.add(self.macros[macro]["params"][param])
 
-    def scroll_to_entry(self, entry, event):
+    def show_keyboard(self, entry, event):
+        self._screen.show_keyboard(entry, event)
+        GLib.timeout_add(100, self.scroll_to_entry, entry)
+
+    def scroll_to_entry(self, entry):
         self.labels['macros_list'].get_vadjustment().set_value(
             entry.get_allocation().y - 50
         )
