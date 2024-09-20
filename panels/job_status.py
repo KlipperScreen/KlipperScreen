@@ -16,6 +16,7 @@ class Panel(ScreenPanel):
     def __init__(self, screen, title):
         title = title or _("Job Status")
         super().__init__(screen, title)
+        self.thumb_dialog = None
         self.grid = Gtk.Grid(column_homogeneous=True)
         self.pos_z = 0.0
         self.extrusion = 100
@@ -700,6 +701,8 @@ class Panel(ScreenPanel):
         if self.state != state:
             logging.debug(f"Changing job_status state from '{self.state}' to '{state}'")
             self.state = state
+            if self.thumb_dialog:
+                self.close_dialog(self.thumb_dialog)
         self.show_buttons_for_state()
 
     def _add_timeout(self, timeout):
@@ -775,10 +778,11 @@ class Panel(ScreenPanel):
             return
         image = Gtk.Image.new_from_pixbuf(pixbuf)
         image.set_vexpand(True)
-        self._gtk.Dialog(self.filename, None, image, self.close_fullscreen_thumbnail)
+        self.thumb_dialog = self._gtk.Dialog(self.filename, None, image, self.close_dialog)
 
-    def close_fullscreen_thumbnail(self, dialog, response_id):
+    def close_dialog(self, dialog=None, response_id=None):
         self._gtk.remove_dialog(dialog)
+        self.thumb_dialog = None
 
     def update_filename(self, filename):
         if not filename or filename == self.filename:
