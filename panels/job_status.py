@@ -833,7 +833,7 @@ class Panel(ScreenPanel):
             self.labels["slicer_time"].set_label(self.format_time(self.file_metadata['estimated_time']))
         if "object_height" in self.file_metadata:
             self.oheight = float(self.file_metadata['object_height'])
-            self.labels['height'].set_label(f"{self.oheight} {self.mm}")
+            self.labels['height'].set_label(f"{self.oheight:.2f} {self.mm}")
         if "filament_total" in self.file_metadata:
             self.labels['filament_total'].set_label(f"{float(self.file_metadata['filament_total']) / 1000:.1f} m")
         if "job_id" in self.file_metadata and self.file_metadata['job_id']:
