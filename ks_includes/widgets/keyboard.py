@@ -23,7 +23,16 @@ class Keyboard(Gtk.Box):
         language = self.detect_language(screen._config.get_main_config().get("language", None))
         logging.info(f"Keyboard {language}")
 
-        if language == "de":
+        if self.entry_is_digital():
+            self.keys = [
+                [
+                    ["7", "8", "9"],
+                    ["4", "5", "6"],
+                    ["1", "2", "3"],
+                    ["↓", "0", "⌫"]
+                ]
+            ]
+        elif language == "de":
             self.keys = [
                 [
                     ["q", "w", "e", "r", "t", "z", "u", "i", "o", "p", "ü"],
@@ -145,6 +154,17 @@ class Keyboard(Gtk.Box):
             self.keyboard.remove_row(0)
         self.pallet_nr = p
         columns = 0
+
+        if self.entry_is_digital():
+            for r, row in enumerate(self.keys[p]):
+                for k, key in enumerate(row):
+                    x = k * 2
+                    self.keyboard.attach(self.buttons[p][r][k], x, r, 2, 1)
+                    if x > columns:
+                        columns = x
+            self.show_all()
+            return
+
         for r, row in enumerate(self.keys[p][:-1]):
             for k, key in enumerate(row):
                 x = k * 2 + 1 if r == 1 else k * 2
@@ -233,3 +253,6 @@ class Keyboard(Gtk.Box):
                 widget.get_style_context().add_class("active")
             else:
                 widget.get_style_context().remove_class("active")
+
+    def entry_is_digital(self):
+        return self.entry.get_input_purpose() == Gtk.InputPurpose.DIGITS
