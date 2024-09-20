@@ -82,20 +82,26 @@ class Panel(ScreenPanel):
 
         pattern = re.compile(r'params\.(?P<param>[a-zA-Z0-9_]+)'
                              r'(?:\s*\|\s*default\(\s*(?P<default>[^\)]+)\s*\))?'
-                             r'(?:\s*\|\s*(?P<hint>[a-zA-Z]+))?')
+                             r'(?:\s*\|\s*(?P<type_hint>[a-zA-Z]+))?')
         for line in gcode:
             if line.startswith("{") and "params." in line:
                 result = re.search(pattern, line)
                 if result:
                     result = result.groupdict()
                     default = result.get("default", "")
-                    hint = result.get("hint", "")
+                    type_hint = result.get("type_hint", "")
                     entry = Gtk.Entry(placeholder_text=default)
-                    if hint in ("int", "float"):
+                    if type_hint == "int":
                         entry.set_input_purpose(Gtk.InputPurpose.DIGITS)
+                        entry.set_input_hints(Gtk.InputHints.NO_EMOJI)
+                        entry.get_style_context().add_class("active")
+                    elif type_hint == "float":
+                        entry.set_input_purpose(Gtk.InputPurpose.NUMBER)
+                        entry.set_input_hints(Gtk.InputHints.EMOJI)
                         entry.get_style_context().add_class("active")
                     else:
                         entry.set_input_purpose(Gtk.InputPurpose.ALPHA)
+                        entry.set_input_hints(Gtk.InputHints.NONE)
                     icon = self._gtk.PixbufFromIcon("hashtag")
                     entry.set_icon_from_pixbuf(Gtk.EntryIconPosition.SECONDARY, icon)
                     entry.connect("icon-press", self.on_icon_pressed)
@@ -120,12 +126,15 @@ class Panel(ScreenPanel):
         entry.grab_focus()
         self._screen.remove_keyboard()
         if entry.get_input_purpose() == Gtk.InputPurpose.ALPHA:
-            entry.set_input_purpose(Gtk.InputPurpose.DIGITS)
+            if entry.get_input_hints() in (Gtk.InputHints.NONE, Gtk.InputHints.EMOJI):
+                entry.set_input_purpose(Gtk.InputPurpose.NUMBER)
+            else:
+                entry.set_input_purpose(Gtk.InputPurpose.DIGITS)
             entry.get_style_context().add_class("active")
         else:
             entry.set_input_purpose(Gtk.InputPurpose.ALPHA)
             entry.get_style_context().remove_class("active")
-        self._screen.show_keyboard(entry)
+        self.show_keyboard(entry, event)
 
     def run_gcode_macro(self, widget, macro):
         params = ""
