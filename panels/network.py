@@ -238,7 +238,8 @@ class Panel(ScreenPanel):
     def connect_network(self, widget, ssid, showadd=True):
         self.deactivate()
         if showadd and not self.sdbus_nm.is_known(ssid):
-            if self.sdbus_nm.get_security_type(ssid) in ("Open", "OWE"):
+            sec_type = self.sdbus_nm.get_security_type(ssid)
+            if sec_type == "Open" or "OWE" in sec_type:
                 logging.debug("Network is Open do not show psk")
                 result = self.sdbus_nm.add_network(ssid, '')
                 if "error" in result:
@@ -307,7 +308,7 @@ class Panel(ScreenPanel):
         auth_grid.attach(self.labels['network_psk'], 1, 1, 1, 1)
         auth_grid.attach(save, 2, 0, 1, 2)
 
-        if self.sdbus_nm.get_security_type(ssid) == "802.1x":
+        if "802.1x" in self.sdbus_nm.get_security_type(ssid):
             user_label.show()
             self.labels['network_eap_method'].show()
             self.labels['network_phase2'].show()
