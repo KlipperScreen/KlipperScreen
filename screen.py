@@ -101,7 +101,12 @@ class KlipperScreen(Gtk.Window):
         self.connect("key-press-event", self._key_press_event)
         self.connect("configure_event", self.update_size)
         display = Gdk.Display.get_default()
+        self.display_number = os.environ.get('DISPLAY') or ':0'
+        logging.debug(f"Display for xset: {self.display_number}")
         monitor_amount = Gdk.Display.get_n_monitors(display)
+        for i in range(monitor_amount):
+            m = display.get_monitor(i)
+            logging.info(f"Screen {i}: {m.get_geometry().width}x{m.get_geometry().height}")
         try:
             mon_n = int(args.monitor)
             if not (-1 < mon_n < monitor_amount):
@@ -677,7 +682,7 @@ class KlipperScreen(Gtk.Window):
         if self._config.get_main_config().get('screen_blanking') != "off":
             logging.debug("Screen wake up")
             if not self.wayland:
-                os.system("xset -display :0 dpms force on")
+                os.system(f"xset -display {self.display_number} dpms force on")
 
     def set_dpms(self, use_dpms):
         self.use_dpms = use_dpms
@@ -693,21 +698,21 @@ class KlipperScreen(Gtk.Window):
 
     def set_screenblanking_timeout(self, time):
         if not self.wayland:
-            os.system("xset -display :0 s off")
+            os.system(f"xset -display {self.display_number} s off")
         self.use_dpms = self._config.get_main_config().getboolean("use_dpms", fallback=True)
 
         if time == "off":
             logging.debug(f"Screen blanking: {time}")
             self.blanking_time = 0
             if not self.wayland:
-                os.system("xset -display :0 dpms 0 0 0")
+                os.system(f"xset -display {self.display_number} dpms 0 0 0")
             return
 
         self.blanking_time = abs(int(time))
         logging.debug(f"Changing screen blanking to: {self.blanking_time}")
         if self.use_dpms and functions.dpms_loaded is True:
             if not self.wayland:
-                os.system("xset -display :0 +dpms")
+                os.system(f"xset -display {self.display_number} +dpms")
             if functions.get_DPMS_state() == functions.DPMS_State.Fail:
                 logging.info("DPMS State FAIL")
                 self.show_popup_message(_("DPMS has failed to load and has been disabled"))
@@ -716,13 +721,13 @@ class KlipperScreen(Gtk.Window):
             else:
                 logging.debug("Using DPMS")
                 if not self.wayland:
-                    os.system(f"xset -display :0 dpms 0 {self.blanking_time} 0")
+                    os.system(f"xset -display {self.display_number} dpms 0 {self.blanking_time} 0")
                 GLib.timeout_add_seconds(1, self.check_dpms_state)
                 return
         # Without dpms just blank the screen
         logging.debug("Not using DPMS")
         if not self.wayland:
-            os.system("xset -display :0 dpms 0 0 0")
+            os.system(f"xset -display {self.display_number} dpms 0 0 0")
         self.reset_screensaver_timeout()
         return
 
