@@ -123,8 +123,6 @@ class Panel(ScreenPanel):
         )
 
     def on_icon_pressed(self, entry, icon_pos, event):
-        entry.grab_focus()
-        self._screen.remove_keyboard()
         if entry.get_input_purpose() == Gtk.InputPurpose.ALPHA:
             if entry.get_input_hints() in (Gtk.InputHints.NONE, Gtk.InputHints.EMOJI):
                 entry.set_input_purpose(Gtk.InputPurpose.NUMBER)

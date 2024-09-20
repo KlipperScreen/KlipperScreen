@@ -1161,18 +1161,18 @@ class KlipperScreen(Gtk.Window):
         return self.init_tempstore()
 
     def show_keyboard(self, entry=None, event=None):
-        if self.keyboard is not None:
+        if entry is None:
+            logging.debug("Error: no entry provided for keyboard")
             return
-
+        if self.keyboard is not None:
+            self.remove_keyboard()
+            entry.grab_focus()
         kbd_grid = Gtk.Grid()
         kbd_grid.set_size_request(self.gtk.content_width, self.gtk.keyboard_height)
         kbd_grid.set_vexpand(False)
 
         if self._config.get_main_config().getboolean("use-matchbox-keyboard", False):
             return self._show_matchbox_keyboard(kbd_grid)
-        if entry is None:
-            logging.debug("Error: no entry provided for keyboard")
-            return
         purpose = entry.get_input_purpose()
         kbd_width = 1
         if not self.vertical_mode and purpose in (Gtk.InputPurpose.DIGITS, Gtk.InputPurpose.NUMBER):

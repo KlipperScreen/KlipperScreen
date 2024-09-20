@@ -22,7 +22,6 @@ class Keyboard(Gtk.Box):
         self.purpose = self.entry.get_input_purpose()
 
         language = self.detect_language(screen._config.get_main_config().get("language", None))
-        logging.info(f"Keyboard {language}")
 
         if self.purpose == Gtk.InputPurpose.DIGITS:
             self.keys = [
