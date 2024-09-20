@@ -644,3 +644,7 @@ flowbox button {
     margin: 0.1em;
     padding: .5em;
 }
+
+keyboard_box {
+    padding: 0 20em;
+}

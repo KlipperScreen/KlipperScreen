@@ -1164,22 +1164,28 @@ class KlipperScreen(Gtk.Window):
         if self.keyboard is not None:
             return
 
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        box.set_size_request(self.gtk.content_width, self.gtk.keyboard_height)
-        box.set_vexpand(False)
+        kbd_grid = Gtk.Grid()
+        kbd_grid.set_size_request(self.gtk.content_width, self.gtk.keyboard_height)
+        kbd_grid.set_vexpand(False)
 
         if self._config.get_main_config().getboolean("use-matchbox-keyboard", False):
-            return self._show_matchbox_keyboard(box)
+            return self._show_matchbox_keyboard(kbd_grid)
         if entry is None:
             logging.debug("Error: no entry provided for keyboard")
             return
-        box.get_style_context().add_class("keyboard_box")
-        box.add(Keyboard(self, self.remove_keyboard, entry=entry))
-        self.keyboard = {"box": box}
-        self.base_panel.content.pack_end(box, False, False, 0)
+        purpose = entry.get_input_purpose()
+        kbd_width = 1
+        if not self.vertical_mode and purpose in (Gtk.InputPurpose.DIGITS, Gtk.InputPurpose.NUMBER):
+            kbd_grid.set_column_homogeneous(True)
+            kbd_width = 2 if purpose == Gtk.InputPurpose.DIGITS else 3
+        kbd_grid.attach(Gtk.Box(), 0, 0, 1, 1)
+        kbd_grid.attach(Keyboard(self, self.remove_keyboard, entry=entry), 1, 0, kbd_width, 1)
+        kbd_grid.attach(Gtk.Box(), kbd_width + 1, 0, 1, 1)
+        self.keyboard = {"box": kbd_grid}
+        self.base_panel.content.pack_end(kbd_grid, False, False, 0)
         self.base_panel.content.show_all()
 
-    def _show_matchbox_keyboard(self, box):
+    def _show_matchbox_keyboard(self, kbd_grid):
         env = os.environ.copy()
         usrkbd = os.path.expanduser("~/.matchbox/keyboard.xml")
         if os.path.isfile(usrkbd):
@@ -1193,8 +1199,8 @@ class KlipperScreen(Gtk.Window):
         logging.debug(f"PID {p.pid}")
 
         keyboard = Gtk.Socket()
-        box.get_style_context().add_class("keyboard_matchbox")
-        box.pack_start(keyboard, True, True, 0)
+        kbd_grid.get_style_context().add_class("keyboard_matchbox")
+        kbd_grid.attach(keyboard, 0, 0, 1, 1)
         self.base_panel.content.pack_end(box, False, False, 0)
 
         self.show_all()
