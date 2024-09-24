@@ -22,6 +22,7 @@ nav:
       - Remote screens:
         - VNC.md
         - Xserver-XSDL (Android): Android.md
+        - Multi_instance.md
     - Troubleshooting:
       - First Steps/Log: Troubleshooting.md
       - Network: Troubleshooting/Network.md
