@@ -9,6 +9,7 @@ ConditionPathExists=/dev/tty0
 # D-Bus is necessary for contacting logind, which is required.
 Wants=dbus.socket systemd-logind.service
 After=dbus.socket systemd-logind.service
+After=moonraker.service
 
 [Service]
 Type=simple
