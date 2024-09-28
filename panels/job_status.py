@@ -26,19 +26,29 @@ class Panel(ScreenPanel):
         self.oheight = 0.0
         self.current_extruder = None
         self.fila_section = pi * ((1.75 / 2) ** 2)
-        self.filename_label = self.filename = self.prev_pos = self.prev_gpos = None
+        self.filename_label = None
+        self.filename = None
+        self.prev_pos = None
+        self.prev_gpos = None
         self.can_close = False
-        self.flow_timeout = self.animation_timeout = None
+        self.flow_timeout = None
+        self.animation_timeout = None
         self.file_metadata = self.fans = {}
         self.state = "standby"
         self.timeleft_type = "auto"
-        self.progress = self.zoffset = self.flowrate = self.vel = 0.0
+        self.progress = 0.0
+        self.zoffset = 0.0
+        self.flowrate = 0.0
+        self.vel = 0.0
         self.flowstore = []
         self.mm = _("mm")
         self.mms = _("mm/s")
         self.mms2 = _("mm/s²")
         self.mms3 = _("mm³/s")
-        self.status_grid = self.move_grid = self.time_grid = self.extrusion_grid = None
+        self.status_grid = None
+        self.move_grid = None
+        self.time_grid = None
+        self.extrusion_grid = None
 
         data = ['pos_x', 'pos_y', 'pos_z', 'time_left', 'duration', 'slicer_time', 'file_time',
                 'filament_time', 'est_time', 'speed_factor', 'req_speed', 'max_accel', 'extrude_factor', 'zoffset',
