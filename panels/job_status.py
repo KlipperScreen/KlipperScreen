@@ -339,11 +339,16 @@ class Panel(ScreenPanel):
     def activate(self):
         if self.flow_timeout is None:
             self.flow_timeout = GLib.timeout_add_seconds(2, self.update_flow)
+        if self.animation_timeout is None:
+            self.animation_timeout = GLib.timeout_add(500, self.animate_label)
 
     def deactivate(self):
         if self.flow_timeout is not None:
             GLib.source_remove(self.flow_timeout)
             self.flow_timeout = None
+        if self.animation_timeout is not None:
+            GLib.source_remove(self.animation_timeout)
+            self.animation_timeout = None
 
     def create_buttons(self):
 
@@ -797,9 +802,6 @@ class Panel(ScreenPanel):
     def update_filename(self, filename):
         if not filename or filename == self.filename:
             return
-        if self.animation_timeout is not None:
-            GLib.source_remove(self.animation_timeout)
-            self.animation_timeout = None
 
         self.filename = filename
         logging.debug(f"Updating filename to {filename}")
@@ -808,18 +810,9 @@ class Panel(ScreenPanel):
             "complete": self.labels['file'].get_label(),
             "current": self.labels['file'].get_label(),
         }
-
-        if ellipsized := self.labels['file'].get_layout().is_ellipsized():
-            self.animation_timeout = GLib.timeout_add(500, self.animate_label)
-        else:
-            self.animation_timeout = None
-
         self.get_file_metadata()
 
     def animate_label(self):
-        if not self.filename_label or self.animation_timeout is None:
-            return False
-
         if ellipsized := self.labels['file'].get_layout().is_ellipsized():
             self.filename_label['current'] = self.filename_label['current'][1:]
             self.labels['file'].set_label(self.filename_label['current'] + " " * 6)
