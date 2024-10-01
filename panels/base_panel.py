@@ -24,23 +24,23 @@ class BasePanel(ScreenPanel):
         self.last_usage_report = datetime.now()
         self.usage_report = 0
         # Action bar buttons
-        abscale = self.bts * 1.1
-        self.control['back'] = self._gtk.Button('back', scale=abscale)
+        self.abscale = self.bts * 1.1
+        self.control['back'] = self._gtk.Button('back', scale=self.abscale)
         self.control['back'].connect("clicked", self.back)
-        self.control['home'] = self._gtk.Button('main', scale=abscale)
+        self.control['home'] = self._gtk.Button('main', scale=self.abscale)
         self.control['home'].connect("clicked", self._screen._menu_go_back, True)
         for control in self.control:
             self.set_control_sensitive(False, control)
-        self.control['estop'] = self._gtk.Button('emergency', scale=abscale)
+        self.control['estop'] = self._gtk.Button('emergency', scale=self.abscale)
         self.control['estop'].connect("clicked", self.emergency_stop)
         self.control['estop'].set_no_show_all(True)
         self.shutdown = {
             "panel": "shutdown",
         }
-        self.control['shutdown'] = self._gtk.Button('shutdown', scale=abscale)
+        self.control['shutdown'] = self._gtk.Button('shutdown', scale=self.abscale)
         self.control['shutdown'].connect("clicked", self.menu_item_clicked, self.shutdown)
         self.control['shutdown'].set_no_show_all(True)
-        self.control['printer_select'] = self._gtk.Button('shuffle', scale=abscale)
+        self.control['printer_select'] = self._gtk.Button('shuffle', scale=self.abscale)
         self.control['printer_select'].connect("clicked", self._screen.show_printer_select)
         self.control['printer_select'].set_no_show_all(True)
 
@@ -48,7 +48,7 @@ class BasePanel(ScreenPanel):
             "panel": "gcode_macros",
             "icon": "custom-script",
         }
-        self.control['shortcut'] = self._gtk.Button(self.shorcut['icon'], scale=abscale)
+        self.control['shortcut'] = self._gtk.Button(self.shorcut['icon'], scale=self.abscale)
         self.control['shortcut'].connect("clicked", self.menu_item_clicked, self.shorcut)
         self.control['shortcut'].set_no_show_all(True)
 
@@ -114,9 +114,13 @@ class BasePanel(ScreenPanel):
             img = button.get_image()
             name = button.get_name()
             pixbuf = img.get_pixbuf()
-            width = pixbuf.get_width()
-            height = pixbuf.get_height()
-            button.set_image(self._gtk.Image(name, width, height))
+            if pixbuf is not None:
+                logging.error(f"Couldn't get pixbuf for {name},"
+                              f"a custom theme may have caused this")
+                size = pixbuf.get_width()
+            else:
+                size = self._gtk.img_scale * self.abscale * 1.4
+            button.set_image(self._gtk.Image(name, size, size))
 
     def show_heaters(self, show=True):
         try:
