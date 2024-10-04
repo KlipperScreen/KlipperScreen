@@ -151,13 +151,14 @@ class BasePanel(ScreenPanel):
         self.battery_percentage()
 
     def show_heaters(self, show=True):
+        for child in self.control['temp_box'].get_children():
+            self.control['temp_box'].remove(child)
+        if self._printer is None or not show:
+            return
         try:
-            for child in self.control['temp_box'].get_children():
-                self.control['temp_box'].remove(child)
             devices = self._printer.get_temp_devices()
-            if not show or not devices:
+            if not devices:
                 return
-
             img_size = self._gtk.img_scale * self.bts
             for device in devices:
                 self.labels[device] = Gtk.Label(ellipsize=Pango.EllipsizeMode.START)
@@ -229,10 +230,11 @@ class BasePanel(ScreenPanel):
     def add_content(self, panel):
         printing = self._printer and self._printer.state in {"printing", "paused"}
         connected = self._printer and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'}
+        printer_select = 'printer_select' not in self._screen._cur_panels
         self.control['estop'].set_visible(printing)
         self.control['shutdown'].set_visible(not printing)
-        self.show_shortcut(connected)
-        self.show_heaters(connected)
+        self.show_shortcut(connected and printer_select)
+        self.show_heaters(connected and printer_select)
         self.show_printer_select(len(self._config.get_printers()) > 1)
         for control in ('back', 'home'):
             self.set_control_sensitive(len(self._screen._cur_panels) > 1, control=control)
@@ -293,10 +295,12 @@ class BasePanel(ScreenPanel):
                         for dialog in self._screen.dialogs:
                             self._gtk.remove_dialog(dialog)
             return
-
         if action != "notify_status_update" or self._screen.printer is None:
             return
-        for device in self._printer.get_temp_devices():
+        devices = self._printer.get_temp_devices()
+        if not devices:
+            return
+        for device in devices:
             temp = self._printer.get_stat(device, "temperature")
             if temp and device in self.labels:
                 name = ""
@@ -343,7 +347,10 @@ class BasePanel(ScreenPanel):
 
     def set_title(self, title):
         self.titlebar.get_style_context().remove_class("message_popup_error")
-        if self._screen.connecting_to_printer != "Printer":
+        if (
+                self._screen.connecting_to_printer != "Printer"
+                and 'printer_select' not in self._screen._cur_panels
+        ):
             printer = self._screen.connecting_to_printer
         else:
             printer = ""
