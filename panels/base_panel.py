@@ -140,10 +140,10 @@ class BasePanel(ScreenPanel):
             name = button.get_name()
             pixbuf = img.get_pixbuf()
             if pixbuf is not None:
-                logging.error(f"Couldn't get pixbuf for {name},"
-                              f"a custom theme may have caused this")
                 size = pixbuf.get_width()
             else:
+                logging.error(f"Couldn't get pixbuf for {name},"
+                              f"a custom theme may have caused this")
                 size = self._gtk.img_scale * self.abscale * 1.4
             button.set_image(self._gtk.Image(name, size, size))
 
