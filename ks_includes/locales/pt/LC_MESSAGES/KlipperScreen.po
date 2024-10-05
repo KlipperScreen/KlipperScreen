@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-08-09 23:09+0000\n"
-"Last-Translator: Matheus Mösken Diegues <dmosken2015@gmail.com>\n"
+"PO-Revision-Date: 2024-10-05 13:15+0000\n"
+"Last-Translator: Paulo Henrique <pauloh.programador@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/pt/>\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -92,13 +92,13 @@ msgid "Auto-calibrate"
 msgstr "Calibrar automaticamente"
 
 msgid "Auto-close notifications"
-msgstr "Fechar notificações autom."
+msgstr "Fechamento Automático das Notificações"
 
 msgid "Auto-open Extrude On Pause"
 msgstr "Abrir Ext. automaticamente em Pausa"
 
 msgid "Auto-scroll"
-msgstr "Acompanhar Conteúdo"
+msgstr "Rolar Automaticamente"
 
 msgid "Bed Level"
 msgstr "Nível da Mesa"
@@ -219,7 +219,7 @@ msgid "Disable for 12hs with am / pm"
 msgstr ""
 
 msgid "Disconnect"
-msgstr ""
+msgstr "Desconectar"
 
 msgid "Distance (mm)"
 msgstr "Distancia (mm)"
@@ -260,13 +260,13 @@ msgid "Error: Couldn't get a position to probe"
 msgstr "Erro: Não foi possível obter uma posição para a sonda"
 
 msgid "Estimated Time"
-msgstr ""
+msgstr "Tempo estimado"
 
 msgid "Estimated Time Method"
 msgstr "Método de Tempo Estimado"
 
 msgid "Example"
-msgstr ""
+msgstr "Exemplo"
 
 msgid "Exclude Object"
 msgstr "Excluir Objeto"
@@ -290,7 +290,7 @@ msgid "Failed to delete connection"
 msgstr ""
 
 msgid "Failed to initialize"
-msgstr ""
+msgstr "Falha ao inicializar"
 
 msgid "Failed, adjust position first"
 msgstr "Falhou, ajuste a posição primeiro"
@@ -344,16 +344,16 @@ msgid "Font Size"
 msgstr "Tamanho da fonte"
 
 msgid "Forget"
-msgstr ""
+msgstr "Esquecer"
 
 msgid "Full Update"
 msgstr "Atualizar Tudo"
 
 msgid "Gcodes"
-msgstr ""
+msgstr "Gcodes"
 
 msgid "Getting IP address"
-msgstr ""
+msgstr "Obter Endereço IP"
 
 msgid "Go Back"
 msgstr "Voltar"
@@ -410,7 +410,7 @@ msgid "Input Shaper"
 msgstr "Moldagem Assistiva"
 
 msgid "Insufficient privileges"
-msgstr ""
+msgstr "Privilégios insuficientes"
 
 msgid "Interface"
 msgstr "Interface"
@@ -480,7 +480,7 @@ msgid "Last Used"
 msgstr "Último Usado"
 
 msgid "Layer Height"
-msgstr ""
+msgstr "Altura da Camada"
 
 msgid "Layer:"
 msgstr "Camada:"
@@ -528,7 +528,7 @@ msgid "Max Velocity"
 msgstr "Velocidade máxima"
 
 msgid "Max:"
-msgstr ""
+msgstr "Max:"
 
 msgid "Maximum"
 msgstr "Máximo"
@@ -546,7 +546,7 @@ msgid "Medium"
 msgstr "Médio"
 
 msgid "Memory"
-msgstr ""
+msgstr "Memória"
 
 msgid "Menu"
 msgstr "Menu"
@@ -555,7 +555,7 @@ msgid "Minimum Cruise Ratio"
 msgstr ""
 
 msgid "Minimum:"
-msgstr ""
+msgstr "Minimo:"
 
 msgid "Modified"
 msgstr "Modificado"
@@ -579,13 +579,13 @@ msgid "Network"
 msgstr "Rede"
 
 msgid "Network connected"
-msgstr ""
+msgstr "Conectado à rede"
 
 msgid "Network disconnected"
-msgstr ""
+msgstr "desconectado da rede"
 
 msgid "Network not found"
-msgstr ""
+msgstr "Rede não encontrada"
 
 msgid "Never"
 msgstr "Nunca"
@@ -597,7 +597,7 @@ msgid "No elegible macros:"
 msgstr "Sem macros elegíveis:"
 
 msgid "No info available"
-msgstr ""
+msgstr "Sem informações disponíveis"
 
 msgid "No mesh has been loaded"
 msgstr "Nenhuma malha foi carregada"
@@ -621,7 +621,7 @@ msgid "Notifications"
 msgstr "Notificações"
 
 msgid "Nozzle diameter"
-msgstr ""
+msgstr "Diâmetro do Bico"
 
 msgid "Only for the move panel"
 msgstr ""
@@ -660,7 +660,7 @@ msgid "Please recompile and flash the micro-controller."
 msgstr "Por favor, recompile e atualize o microcontrolador."
 
 msgid "Please wait"
-msgstr ""
+msgstr "Por favor, aguarde"
 
 msgid "Power"
 msgstr "Ligar"
@@ -726,7 +726,7 @@ msgid "Refresh"
 msgstr "Recarregar"
 
 msgid "Remove network"
-msgstr ""
+msgstr "Remover Rede"
 
 msgid "Rename/Move:"
 msgstr "Renomear/Mover:"
@@ -762,7 +762,7 @@ msgid "Save"
 msgstr "Salvar"
 
 msgid "Save Config"
-msgstr "Salvar Config."
+msgstr "Salvar Configurações"
 
 msgid "Save Z"
 msgstr "Salvar Eixo Z"
@@ -796,7 +796,7 @@ msgid "Set Temp"
 msgstr "Definir Temperatura"
 
 msgid "Settings"
-msgstr "Definições"
+msgstr "Configurações"
 
 msgid "Show"
 msgstr "Mostrar"
@@ -868,10 +868,10 @@ msgid "System Shutdown"
 msgstr "Desligar Sistema"
 
 msgid "System:"
-msgstr ""
+msgstr "Sistema:"
 
 msgid "Temp (°C)"
-msgstr "Temp (°C)"
+msgstr "Temperatura (°C)"
 
 msgid "Temperature"
 msgstr "Temperatura"
@@ -955,8 +955,8 @@ msgstr[1] "compromete"
 
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Dia"
+msgstr[1] "Dias"
 
 msgid "g"
 msgstr ""
@@ -994,8 +994,8 @@ msgstr ""
 
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Segundo"
+msgstr[1] "Segundos"
 
 #~ msgid "Mesh calibrate"
 #~ msgstr "Calibrar Malha"
