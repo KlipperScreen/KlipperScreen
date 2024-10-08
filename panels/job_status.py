@@ -470,6 +470,7 @@ class Panel(ScreenPanel):
             logging.info("reseting progress")
             self._printer.data["virtual_sdcard"]["progress"] = 0
         self.update_progress(0.0)
+        self.set_state("printing")
 
     def process_update(self, action, data):
         if action == "notify_gcode_response":
