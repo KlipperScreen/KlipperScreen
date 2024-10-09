@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -342,6 +342,9 @@ msgstr ""
 msgid "Font Size"
 msgstr ""
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr ""
 
@@ -364,9 +367,6 @@ msgid "Hide"
 msgstr ""
 
 msgid "Hide sensors in Temp."
-msgstr ""
-
-msgid "Hide temp."
 msgstr ""
 
 msgid "Home"
@@ -418,6 +418,9 @@ msgid "Invalid"
 msgstr ""
 
 msgid "Invalid password"
+msgstr ""
+
+msgid "Invalid temperature"
 msgstr ""
 
 msgid "Inversely affects the icon size"
@@ -626,15 +629,15 @@ msgstr ""
 msgid "Outdated by %d"
 msgstr ""
 
-msgid "PSK for"
-msgstr ""
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] ""
 msgstr[1] ""
 
 msgid "Part Fan"
+msgstr ""
+
+msgid "Password"
 msgstr ""
 
 msgid "Password saved"
@@ -803,6 +806,9 @@ msgstr ""
 msgid "Show Scrollbars Buttons"
 msgstr ""
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr ""
 
@@ -872,6 +878,9 @@ msgstr ""
 msgid "Temperature"
 msgstr ""
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr ""
 
@@ -915,6 +924,9 @@ msgid "Updating"
 msgstr ""
 
 msgid "Useful for un-responsive touchscreens"
+msgstr ""
+
+msgid "User"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
