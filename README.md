@@ -47,6 +47,6 @@ We extend our gratitude to all contributors who have helped along the way. [Meet
 
 ### Sponsors
 
-![LDO](docs/img/LDO-LOGO_SQ.png) ![YUMI](docs/img/YUMI.png)
+![LDO](docs/img/sponsors/LDO.png) ![YUMI](docs/img/sponsors/YUMI.png)
 
 Special thanks to [LDO](https://ldomotors.com/) and [YUMI](https://wiki.yumi-lab.com/) for sponsoring KlipperScreen and the open-source community.
