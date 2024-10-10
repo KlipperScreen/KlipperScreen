@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-07-23 00:09+0000\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"PO-Revision-Date: 2024-10-10 13:25+0000\n"
 "Last-Translator: Thijs Triemstra <info@collab.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/nl/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -343,6 +343,9 @@ msgstr "Flowrate:"
 msgid "Font Size"
 msgstr "Lettertype Grootte"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr "Vergeet"
 
@@ -366,9 +369,6 @@ msgstr "Verberg"
 
 msgid "Hide sensors in Temp."
 msgstr "Verberg sensoren in Temp."
-
-msgid "Hide temp."
-msgstr "Verberg temp."
 
 msgid "Home"
 msgstr "Home"
@@ -410,7 +410,7 @@ msgid "Input Shaper"
 msgstr "Input Shaper"
 
 msgid "Insufficient privileges"
-msgstr ""
+msgstr "Onvoldoende rechten"
 
 msgid "Interface"
 msgstr "Interface"
@@ -420,6 +420,9 @@ msgstr "Ongeldig"
 
 msgid "Invalid password"
 msgstr "Ongeldig wachtwoord"
+
+msgid "Invalid temperature"
+msgstr "Ongeldige temperatuur"
 
 msgid "Inversely affects the icon size"
 msgstr ""
@@ -437,7 +440,7 @@ msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "Het kan meer dan 5 minuten duren op basis van de heater power."
 
 msgid "It's possible that the configuration is not correct"
-msgstr ""
+msgstr "Het is mogelijk dat de configuratie incorrect is"
 
 msgid "Job Status"
 msgstr ""
@@ -479,7 +482,7 @@ msgid "Last Used"
 msgstr "Laatst Gebruikt"
 
 msgid "Layer Height"
-msgstr ""
+msgstr "Laag Hoogte"
 
 msgid "Layer:"
 msgstr "Laag:"
@@ -527,7 +530,7 @@ msgid "Max Velocity"
 msgstr "Max Velocity"
 
 msgid "Max:"
-msgstr ""
+msgstr "Max:"
 
 msgid "Maximum"
 msgstr "Maximum"
@@ -545,7 +548,7 @@ msgid "Medium"
 msgstr "Medium"
 
 msgid "Memory"
-msgstr ""
+msgstr "Geheugen"
 
 msgid "Menu"
 msgstr "Menu"
@@ -554,7 +557,7 @@ msgid "Minimum Cruise Ratio"
 msgstr ""
 
 msgid "Minimum:"
-msgstr ""
+msgstr "Minimum:"
 
 msgid "Modified"
 msgstr "Aangepast"
@@ -578,13 +581,13 @@ msgid "Network"
 msgstr "Netwerk"
 
 msgid "Network connected"
-msgstr ""
+msgstr "Netwerk verbonden"
 
 msgid "Network disconnected"
-msgstr ""
+msgstr "Network verbroken"
 
 msgid "Network not found"
-msgstr ""
+msgstr "Netwerk niet gevonden"
 
 msgid "Never"
 msgstr "Nooit"
@@ -596,7 +599,7 @@ msgid "No elegible macros:"
 msgstr "Macros komen niet in aanmerking:"
 
 msgid "No info available"
-msgstr ""
+msgstr "Geen info beschikbaar"
 
 msgid "No mesh has been loaded"
 msgstr "Geen mesh geladen"
@@ -605,7 +608,7 @@ msgid "No wireless interface has been found"
 msgstr "Geen draadloze netwerk interface gevonden"
 
 msgid "Not all screens support this"
-msgstr ""
+msgstr "Niet alle schermen ondersteunen dit"
 
 msgid "Not working or not configured"
 msgstr "Niet werkend of niet geconfigureerd"
@@ -629,9 +632,6 @@ msgstr ""
 msgid "Outdated by %d"
 msgstr "Verouderd sinds %d"
 
-msgid "PSK for"
-msgstr "PSK voor"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "Pakket word ge-update"
@@ -639,6 +639,9 @@ msgstr[1] "Pakketten worden ge-update"
 
 msgid "Part Fan"
 msgstr "Part Ventilator"
+
+msgid "Password"
+msgstr "Wachtwoord"
 
 msgid "Password saved"
 msgstr "Wachtwoord opgeslagen"
@@ -659,7 +662,7 @@ msgid "Please recompile and flash the micro-controller."
 msgstr "Hercompileer en flash de micro-controller aub."
 
 msgid "Please wait"
-msgstr ""
+msgstr "Even geduld aub"
 
 msgid "Power"
 msgstr "Stroom"
@@ -725,7 +728,7 @@ msgid "Refresh"
 msgstr "Refresh"
 
 msgid "Remove network"
-msgstr ""
+msgstr "Verwijder netwerk"
 
 msgid "Rename/Move:"
 msgstr "Hernoem/beweeg:"
@@ -755,7 +758,7 @@ msgid "Retrying"
 msgstr "Probeert opnieuw"
 
 msgid "Rotation invalid"
-msgstr ""
+msgstr "Rotatie ongeldig"
 
 msgid "Save"
 msgstr "Opslaan"
@@ -805,6 +808,9 @@ msgstr "Toon Heater Stroom"
 
 msgid "Show Scrollbars Buttons"
 msgstr "Toon Scrollbars Knoppen"
+
+msgid "Show cursor"
+msgstr "Toon cursor"
 
 msgid "Show only devices that are able to be set"
 msgstr ""
@@ -867,13 +873,16 @@ msgid "System Shutdown"
 msgstr "Systeem Afsluiten"
 
 msgid "System:"
-msgstr ""
+msgstr "Systeem:"
 
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
 
 msgid "Temperature"
 msgstr "Temperatuur"
+
+msgid "Temperature too low to extrude"
+msgstr "Temperatuur te laag voor extrude"
 
 msgid "The system doesn't meet the minimum requirement"
 msgstr ""
@@ -897,7 +906,7 @@ msgid "Unknown Heater"
 msgstr "Onbekende Heater"
 
 msgid "Unknown security type"
-msgstr ""
+msgstr "Onbekend beveiliging type"
 
 msgid "Unload"
 msgstr "Uitladen"
@@ -919,6 +928,9 @@ msgstr "Bezig met updaten"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr ""
+
+msgid "User"
+msgstr "Gebruiker"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC is niet ondersteund door de backend"
@@ -954,8 +966,8 @@ msgstr[1] "commits"
 
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "dag"
+msgstr[1] "dagen"
 
 msgid "g"
 msgstr ""
@@ -993,8 +1005,14 @@ msgstr ""
 
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "seconde"
+msgstr[1] "seconden"
+
+#~ msgid "Hide temp."
+#~ msgstr "Verberg temp."
+
+#~ msgid "PSK for"
+#~ msgstr "PSK voor"
 
 #~ msgid "Mesh calibrate"
 #~ msgstr "Mesh kalibreren"

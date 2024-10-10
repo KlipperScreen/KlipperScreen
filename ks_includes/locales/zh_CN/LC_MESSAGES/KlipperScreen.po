@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-09-24 00:13+0000\n"
 "Last-Translator: \"Neko.vecter\" <Vecterfang@icloud.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -343,6 +343,9 @@ msgstr "流速："
 msgid "Font Size"
 msgstr "字体大小"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr "忘记"
 
@@ -366,9 +369,6 @@ msgstr "隐藏"
 
 msgid "Hide sensors in Temp."
 msgstr "在温度显示中隐藏传感器的温度"
-
-msgid "Hide temp."
-msgstr "隐藏温度"
 
 msgid "Home"
 msgstr "归零"
@@ -420,6 +420,11 @@ msgstr "无效"
 
 msgid "Invalid password"
 msgstr "密码无效"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "温度"
 
 msgid "Inversely affects the icon size"
 msgstr "与预览图大小成反比"
@@ -627,15 +632,17 @@ msgstr "仅适用于移动面板"
 msgid "Outdated by %d"
 msgstr "已落后 %d"
 
-msgid "PSK for"
-msgstr "PSK"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "软件包将被更新"
 
 msgid "Part Fan"
 msgstr "模型风扇"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "密码已保存"
 
 msgid "Password saved"
 msgstr "密码已保存"
@@ -803,6 +810,9 @@ msgstr "显示加热器功率（%）"
 msgid "Show Scrollbars Buttons"
 msgstr "显示滚动条按钮"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr "只显示可以主动控制温度的设备"
 
@@ -872,6 +882,9 @@ msgstr "温度 （°C）"
 msgid "Temperature"
 msgstr "温度"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr "当前系统不满足最低要求"
 
@@ -916,6 +929,9 @@ msgstr "正在更新"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "帮助控制触摸响应不良的屏幕"
+
+msgid "User"
+msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "不支持传送WebRTC至后台"
@@ -987,6 +1003,12 @@ msgstr "秒"
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "秒"
+
+#~ msgid "Hide temp."
+#~ msgstr "隐藏温度"
+
+#~ msgid "PSK for"
+#~ msgstr "PSK"
 
 #~ msgid "Are you sure you want to stop the calibration?"
 #~ msgstr "您确定要停止校准吗？"

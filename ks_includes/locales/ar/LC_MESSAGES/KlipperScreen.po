@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-08-14 14:09+0000\n"
 "Last-Translator: Rashid Al Haqbany <haqbany@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/klipperscreen/"
@@ -344,6 +344,9 @@ msgstr "معدل التدفق:"
 msgid "Font Size"
 msgstr "حجم الخط"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr "نسي"
 
@@ -367,9 +370,6 @@ msgstr "إخفاء"
 
 msgid "Hide sensors in Temp."
 msgstr "إخفاء جهاز استشعار درجة الحرارة."
-
-msgid "Hide temp."
-msgstr "إخفاء درجة الحرارة."
 
 msgid "Home"
 msgstr "المنزل"
@@ -421,6 +421,11 @@ msgstr "باطل"
 
 msgid "Invalid password"
 msgstr "كلمة سر غير صالحة"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "درجة الحرارة"
 
 msgid "Inversely affects the icon size"
 msgstr "يؤثر عكسيا على حجم الأيقونة"
@@ -628,9 +633,6 @@ msgstr "فقط من أجل لوحة الحركة"
 msgid "Outdated by %d"
 msgstr "عفا عليها الزمن بنسبة %d"
 
-msgid "PSK for"
-msgstr "PSK من أجل"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "لايوجد تحديث"
@@ -642,6 +644,11 @@ msgstr[5] "تحديث الحزم"
 
 msgid "Part Fan"
 msgstr "مروحة تبريد المطبوعات"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "تم حفظ كلمة المرور"
 
 msgid "Password saved"
 msgstr "تم حفظ كلمة المرور"
@@ -809,6 +816,9 @@ msgstr "أظهر قوة السخان"
 msgid "Show Scrollbars Buttons"
 msgstr "أظهر أزرار أشرطة التمرير"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr "أظهر فقط الأجهزة التي يمكن ضبطها"
 
@@ -878,6 +888,9 @@ msgstr "درجة الحرارة (°م)"
 msgid "Temperature"
 msgstr "درجة الحرارة"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr "النظام لا يفي بالحد الأدنى من المتطلبات"
 
@@ -922,6 +935,9 @@ msgstr "يتم التحديث الان"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "مفيد لشاشات اللمس غير المستجيبة"
+
+msgid "User"
+msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC غير مدعوم من قبل الواجهة الخلفية التي تحاول البث"
@@ -1018,3 +1034,9 @@ msgstr[2] "ثانيتين"
 msgstr[3] "ثواني"
 msgstr[4] "ثواني"
 msgstr[5] "الثانية"
+
+#~ msgid "Hide temp."
+#~ msgstr "إخفاء درجة الحرارة."
+
+#~ msgid "PSK for"
+#~ msgstr "PSK من أجل"

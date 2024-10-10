@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-07-06 18:04+0000\n"
 "Last-Translator: \"Zs.Antal\" <antonio092130@icloud.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -338,6 +338,9 @@ msgstr "Áramlás:"
 msgid "Font Size"
 msgstr "Betűméret"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr "Elfelejtés"
 
@@ -361,9 +364,6 @@ msgstr "Elrejt"
 
 msgid "Hide sensors in Temp."
 msgstr "Hőfok szenzorok elrejtése"
-
-msgid "Hide temp."
-msgstr "Hőfok elrejtése"
 
 msgid "Home"
 msgstr "Kezdőpontok"
@@ -415,6 +415,11 @@ msgstr "Érvénytelen"
 
 msgid "Invalid password"
 msgstr "Érvénytelen jelszó"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "Hőfok"
 
 msgid "Inversely affects the icon size"
 msgstr "Fordítottan befolyásolja az ikon méretét"
@@ -623,9 +628,6 @@ msgstr "Csak a mozgatópanelhez"
 msgid "Outdated by %d"
 msgstr "%d által elavult"
 
-msgid "PSK for"
-msgstr "PSK-nak"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "A csomag frissítésre kerül"
@@ -633,6 +635,11 @@ msgstr[1] "Csomag frissül"
 
 msgid "Part Fan"
 msgstr "Tárgyhűtő"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "Jelszó mentve"
 
 msgid "Password saved"
 msgstr "Jelszó mentve"
@@ -800,6 +807,9 @@ msgstr "A fűtésteljesítmény megjelenítése"
 msgid "Show Scrollbars Buttons"
 msgstr "Görgetősáv gombok megjelenítése"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr "Csak a beállítható eszközök megjelenítése"
 
@@ -870,6 +880,9 @@ msgstr "Hőfok (°C)"
 msgid "Temperature"
 msgstr "Hőfok"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr "A rendszer nem felel meg a minimális követelményeknek"
 
@@ -915,6 +928,9 @@ msgstr "Frissítés"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Hasznos a nem reagáló érintőképernyőknél"
+
+msgid "User"
+msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "A WebRTC-t a Streamet próbáló háttérrendszer nem támogatja"
@@ -991,6 +1007,12 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] "másodperc"
 msgstr[1] "másodperc"
+
+#~ msgid "Hide temp."
+#~ msgstr "Hőfok elrejtése"
+
+#~ msgid "PSK for"
+#~ msgstr "PSK-nak"
 
 #~ msgid "Are you sure you want to stop the calibration?"
 #~ msgstr "Biztos, hogy leállítod a kalibrálást?"
