@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-09 18:08-0300\n"
-"PO-Revision-Date: 2024-07-12 00:09+0000\n"
-"Last-Translator: Radiotbo <santiago@esolva.com>\n"
+"PO-Revision-Date: 2024-10-10 07:43+0000\n"
+"Last-Translator: Alfredo Monclus <alfredomonclus@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/es/>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -344,7 +344,7 @@ msgid "Font Size"
 msgstr "Tamaño del texto"
 
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "Para usar el mouse o comprobar la precisión de la pantalla"
 
 msgid "Forget"
 msgstr "Olvidar"
@@ -421,10 +421,8 @@ msgstr "Invalido"
 msgid "Invalid password"
 msgstr "Contraseña invalida"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "Temperatura"
+msgstr "Temperatura invalida"
 
 msgid "Inversely affects the icon size"
 msgstr "Afecta inversamente al tamaño del icono"
@@ -643,10 +641,8 @@ msgstr[1] "Paquetes serán actualizados"
 msgid "Part Fan"
 msgstr "Ventilador de parte"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "Contraseña guardada"
+msgstr "Contraseña"
 
 msgid "Password saved"
 msgstr "Contraseña guardada"
@@ -815,7 +811,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "Mostrar botones de desplazamiento"
 
 msgid "Show cursor"
-msgstr ""
+msgstr "Mostrar cursor"
 
 msgid "Show only devices that are able to be set"
 msgstr "Mostrar solo los dispositivos que se pueden configurar"
@@ -888,7 +884,7 @@ msgid "Temperature"
 msgstr "Temperatura"
 
 msgid "Temperature too low to extrude"
-msgstr ""
+msgstr "Temperatura muy baja para extruir"
 
 msgid "The system doesn't meet the minimum requirement"
 msgstr "El sistema no cumple con los requisitos mínimos"
@@ -938,7 +934,7 @@ msgid "Useful for un-responsive touchscreens"
 msgstr "Útil para pantallas táctiles poco responsivas"
 
 msgid "User"
-msgstr ""
+msgstr "Usuario"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC no es soportado por el backend intentando con Stream"
