@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-05-07 02:10+0000\n"
 "Last-Translator: Rui Menezes <ruizivo.menezes@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -343,6 +343,9 @@ msgstr "Taxa de fluxo:"
 msgid "Font Size"
 msgstr "Tamanho da Fonte"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr ""
 
@@ -366,9 +369,6 @@ msgstr "Esconder"
 
 msgid "Hide sensors in Temp."
 msgstr "Esconder sensores em Temp."
-
-msgid "Hide temp."
-msgstr "Esconder temp."
 
 msgid "Home"
 msgstr "Posicionar na Origem"
@@ -420,6 +420,11 @@ msgstr "Inválido"
 
 msgid "Invalid password"
 msgstr "Senha Inválida"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "Temperatura"
 
 msgid "Inversely affects the icon size"
 msgstr "Afeta inversamente o tamanho do ícone"
@@ -629,9 +634,6 @@ msgstr ""
 msgid "Outdated by %d"
 msgstr "Desatualizado por %d"
 
-msgid "PSK for"
-msgstr "PSK para"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "O pacote será atualizado"
@@ -639,6 +641,11 @@ msgstr[1] "Os pacotes serão atualizados"
 
 msgid "Part Fan"
 msgstr "Ventilador da Peça"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "Senha salva"
 
 msgid "Password saved"
 msgstr "Senha salva"
@@ -806,6 +813,9 @@ msgstr "Mostrar Potência do Aquecedor"
 msgid "Show Scrollbars Buttons"
 msgstr "Mostrar Botões das Barras de Rolagem"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr "Mostrar apenas dispositivos que podem ser configurados"
 
@@ -875,6 +885,9 @@ msgstr "Temp (°C)"
 msgid "Temperature"
 msgstr "Temperatura"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr ""
 
@@ -919,6 +932,9 @@ msgstr "Atualizando"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Útil para telas sensíveis ao toque não responsivas"
+
+msgid "User"
+msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC não é suportado pelo backend de transmissão"
@@ -995,6 +1011,12 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "Hide temp."
+#~ msgstr "Esconder temp."
+
+#~ msgid "PSK for"
+#~ msgstr "PSK para"
 
 #~ msgid "Are you sure you want to stop the calibration?"
 #~ msgstr "Tem certeza de que deseja interromper a calibração?"

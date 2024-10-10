@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-06-01 12:09+0000\n"
 "Last-Translator: 峻瑜哥 <a728728728@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
@@ -343,6 +343,9 @@ msgstr "流速："
 msgid "Font Size"
 msgstr "字型大小"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr ""
 
@@ -366,9 +369,6 @@ msgstr "隱藏"
 
 msgid "Hide sensors in Temp."
 msgstr "在溫度顯示中隱藏其他感測器"
-
-msgid "Hide temp."
-msgstr "隱藏溫度"
 
 msgid "Home"
 msgstr "歸零"
@@ -420,6 +420,11 @@ msgstr "無效"
 
 msgid "Invalid password"
 msgstr "密碼無效"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "溫度"
 
 msgid "Inversely affects the icon size"
 msgstr ""
@@ -627,15 +632,17 @@ msgstr ""
 msgid "Outdated by %d"
 msgstr "已過時 %d"
 
-msgid "PSK for"
-msgstr "PSK"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "軟體包將被更新"
 
 msgid "Part Fan"
 msgstr "模型風扇"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "密碼已儲存"
 
 msgid "Password saved"
 msgstr "密碼已儲存"
@@ -803,6 +810,9 @@ msgstr "顯示加熱器功率"
 msgid "Show Scrollbars Buttons"
 msgstr ""
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr ""
 
@@ -872,6 +882,9 @@ msgstr "溫度 (°C)"
 msgid "Temperature"
 msgstr "溫度"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr ""
 
@@ -915,6 +928,9 @@ msgid "Updating"
 msgstr "正在更新"
 
 msgid "Useful for un-responsive touchscreens"
+msgstr ""
+
+msgid "User"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
@@ -987,6 +1003,12 @@ msgstr ""
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
+
+#~ msgid "Hide temp."
+#~ msgstr "隱藏溫度"
+
+#~ msgid "PSK for"
+#~ msgstr "PSK"
 
 #~ msgid "Are you sure you want to stop the calibration?"
 #~ msgstr "您確定要停止校準嗎？"

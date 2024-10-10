@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/klipperscreen/"
@@ -345,6 +345,9 @@ msgstr "קצב זרימה"
 msgid "Font Size"
 msgstr "גודל טקסט"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr ""
 
@@ -368,9 +371,6 @@ msgstr "הסתר"
 
 msgid "Hide sensors in Temp."
 msgstr "הסתר חיישנים בטמפ'."
-
-msgid "Hide temp."
-msgstr "הסתר טמפרטורה"
 
 msgid "Home"
 msgstr "איפוס"
@@ -422,6 +422,11 @@ msgstr "לא חוקי"
 
 msgid "Invalid password"
 msgstr ""
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "טמפרטורה"
 
 msgid "Inversely affects the icon size"
 msgstr ""
@@ -629,9 +634,6 @@ msgstr ""
 msgid "Outdated by %d"
 msgstr "מיושן על ידי %d"
 
-msgid "PSK for"
-msgstr "PSK עבור"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "חבילה אחת תעודכן"
@@ -641,6 +643,11 @@ msgstr[3] "חבילות יעודכנו"
 
 msgid "Part Fan"
 msgstr "מאוורר חומר"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "הסיסמה נשמרה"
 
 msgid "Password saved"
 msgstr "הסיסמה נשמרה"
@@ -808,6 +815,9 @@ msgstr "הצג זרם מיטה"
 msgid "Show Scrollbars Buttons"
 msgstr ""
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr ""
 
@@ -877,6 +887,9 @@ msgstr "טמפ' (°C)"
 msgid "Temperature"
 msgstr "טמפרטורה"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr ""
 
@@ -920,6 +933,9 @@ msgid "Updating"
 msgstr "מעדכן"
 
 msgid "Useful for un-responsive touchscreens"
+msgstr ""
+
+msgid "User"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
@@ -1007,6 +1023,12 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
+
+#~ msgid "Hide temp."
+#~ msgstr "הסתר טמפרטורה"
+
+#~ msgid "PSK for"
+#~ msgstr "PSK עבור"
 
 #~ msgid "Uploaded"
 #~ msgstr "הועלה"

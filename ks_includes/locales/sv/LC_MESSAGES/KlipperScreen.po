@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -343,6 +343,9 @@ msgstr "Flödeshastighet:"
 msgid "Font Size"
 msgstr "Textstorlek"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr ""
 
@@ -366,9 +369,6 @@ msgstr "Dölj"
 
 msgid "Hide sensors in Temp."
 msgstr "Dölj sensorer i Temp."
-
-msgid "Hide temp."
-msgstr "Dölj temp."
 
 msgid "Home"
 msgstr "Hem"
@@ -420,6 +420,11 @@ msgstr "Ogiltig"
 
 msgid "Invalid password"
 msgstr "Felaktigt lösenord"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "Temperatur"
 
 msgid "Inversely affects the icon size"
 msgstr ""
@@ -628,9 +633,6 @@ msgstr ""
 msgid "Outdated by %d"
 msgstr "Föråldrad av %d"
 
-msgid "PSK for"
-msgstr "PSK för"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "Paketet kommer att uppdateras"
@@ -638,6 +640,11 @@ msgstr[1] "Paketen kommer att uppdateras"
 
 msgid "Part Fan"
 msgstr "Del Fläkt"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "Lösenordet har sparats"
 
 msgid "Password saved"
 msgstr "Lösenordet har sparats"
@@ -805,6 +812,9 @@ msgstr "Visa kraft värmare"
 msgid "Show Scrollbars Buttons"
 msgstr "Visa rullningslistknappar"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr ""
 
@@ -874,6 +884,9 @@ msgstr "Temperatur (°C)"
 msgid "Temperature"
 msgstr "Temperatur"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr ""
 
@@ -917,6 +930,9 @@ msgid "Updating"
 msgstr "Uppdaterar"
 
 msgid "Useful for un-responsive touchscreens"
+msgstr ""
+
+msgid "User"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
@@ -994,6 +1010,12 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "Hide temp."
+#~ msgstr "Dölj temp."
+
+#~ msgid "PSK for"
+#~ msgstr "PSK för"
 
 #~ msgid "Mesh calibrate"
 #~ msgstr "Mesh kalibrera"
