@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-07-16 13:09+0000\n"
 "Last-Translator: vjurka <v@jurka.lt>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && ("
-"n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"(n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.7-dev\n"
 
 #, python-format
@@ -344,6 +344,9 @@ msgstr "Sąnaudos:"
 msgid "Font Size"
 msgstr "Šrifto dydis"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr "Užmiršti"
 
@@ -367,9 +370,6 @@ msgstr "Paslėpti"
 
 msgid "Hide sensors in Temp."
 msgstr "Slėpti temperatūros daviklius."
-
-msgid "Hide temp."
-msgstr "Slėpti temperatūrą."
 
 msgid "Home"
 msgstr "Parkavimas"
@@ -421,6 +421,11 @@ msgstr "Neteisinga"
 
 msgid "Invalid password"
 msgstr "Blogas slaptažodis"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "Temperatūra"
 
 msgid "Inversely affects the icon size"
 msgstr "Atvirkščiai veikia piktogramos dydį"
@@ -631,9 +636,6 @@ msgstr "Tik perkėlimo skydeliui"
 msgid "Outdated by %d"
 msgstr "Pasenę %d"
 
-msgid "PSK for"
-msgstr "PSK"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "Paketas bus atnaujintas"
@@ -642,6 +644,11 @@ msgstr[2] "Paketai bus atnaujinti"
 
 msgid "Part Fan"
 msgstr "Dirbinio ventiliatorius"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "Slaptažodis išsaugotas"
 
 msgid "Password saved"
 msgstr "Slaptažodis išsaugotas"
@@ -809,6 +816,9 @@ msgstr "Rodyti šildytuvo galią"
 msgid "Show Scrollbars Buttons"
 msgstr "Rodyti stumdymo juostą"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr "Rodyti tik tuos įrenginius, kuriuos galima nustatyti"
 
@@ -879,6 +889,9 @@ msgstr "Temperatūra (°С)"
 msgid "Temperature"
 msgstr "Temperatūra"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr "Sistema neatitinka minimalių reikalavimų"
 
@@ -923,6 +936,9 @@ msgstr "Atnaujinama"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Naudinga nereaguojantiems jutikliniams ekranams"
+
+msgid "User"
+msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC nepalaikoma, bandoma Stream"
@@ -1004,6 +1020,12 @@ msgid_plural "seconds"
 msgstr[0] "sekundė"
 msgstr[1] "sekundės"
 msgstr[2] "sekundžių"
+
+#~ msgid "Hide temp."
+#~ msgstr "Slėpti temperatūrą."
+
+#~ msgid "PSK for"
+#~ msgstr "PSK"
 
 #~ msgid "Are you sure you want to stop the calibration?"
 #~ msgstr "Ar tikrai norite sustabdyti kalibraciją?"

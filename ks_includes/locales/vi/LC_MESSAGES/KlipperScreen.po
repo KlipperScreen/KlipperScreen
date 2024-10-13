@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-08-12 07:09+0000\n"
 "Last-Translator: Hiep Nguyen <tanhiep26@gmail.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -338,6 +338,9 @@ msgstr "Lưu lượng nhựa đùn ra:"
 msgid "Font Size"
 msgstr "Kích thước hiển thị chữ"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr ""
 
@@ -361,9 +364,6 @@ msgstr "Ẩn"
 
 msgid "Hide sensors in Temp."
 msgstr "Ẩn các cảm biến trong nhệt."
-
-msgid "Hide temp."
-msgstr "Ẩn nhiệt độ."
 
 msgid "Home"
 msgstr "Home"
@@ -415,6 +415,11 @@ msgstr "Không hợp lệ"
 
 msgid "Invalid password"
 msgstr "Mật khẩu không hợp lệ"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "Nhiệt độ"
 
 msgid "Inversely affects the icon size"
 msgstr "Mật khẩu không hợp lệ"
@@ -622,15 +627,17 @@ msgstr "Chỉ dành cho bảng điều khiển di chuyển"
 msgid "Outdated by %d"
 msgstr "Lỗi thời bởi %d"
 
-msgid "PSK for"
-msgstr "PSK cho"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "Gói sẽ được cập nhật"
 
 msgid "Part Fan"
 msgstr "Quạt phần"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "Mật khẩu đã lưu"
 
 msgid "Password saved"
 msgstr "Mật khẩu đã lưu"
@@ -798,6 +805,9 @@ msgstr "Hiển thị Công suất Bộ sưởi"
 msgid "Show Scrollbars Buttons"
 msgstr "Hiển thị Nút Thanh cuộn"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr "Chỉ hiển thị các thiết bị có thể được đặt"
 
@@ -869,6 +879,9 @@ msgstr "Nhiệt độ (°C)"
 msgid "Temperature"
 msgstr "Nhiệt độ"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr ""
 
@@ -913,6 +926,9 @@ msgstr "Đang cập nhật"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Hữu ích cho màn hình cảm ứng không phản hồi"
+
+msgid "User"
+msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC không được hỗ trợ bởi backend đang thử Stream"
@@ -984,6 +1000,12 @@ msgstr ""
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "giây"
+
+#~ msgid "Hide temp."
+#~ msgstr "Ẩn nhiệt độ."
+
+#~ msgid "PSK for"
+#~ msgstr "PSK cho"
 
 #~ msgid "Are you sure you want to stop the calibration?"
 #~ msgstr "Bạn có chắc chắn muốn dừng việc hiệu chuẩn không?"

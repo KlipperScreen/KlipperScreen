@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-07-16 13:09+0000\n"
 "Last-Translator: Marcin Laber <marcin@laber.pl>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -340,6 +340,9 @@ msgstr "Przepływ:"
 msgid "Font Size"
 msgstr "Rozmiar czcionki"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr "Zapomnij"
 
@@ -363,9 +366,6 @@ msgstr "Ukryj"
 
 msgid "Hide sensors in Temp."
 msgstr "Ukryj sensory w sekcji temperatur"
-
-msgid "Hide temp."
-msgstr "Ukryj temp."
 
 msgid "Home"
 msgstr "Bazuj"
@@ -417,6 +417,11 @@ msgstr "Nieprawidłowy"
 
 msgid "Invalid password"
 msgstr "Nieprawidłowe hasło"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "Temperatura"
 
 msgid "Inversely affects the icon size"
 msgstr "Wpływa proporcjonalnie na rozmiar ikon"
@@ -626,9 +631,6 @@ msgstr "Tylko dla panelu ruchu"
 msgid "Outdated by %d"
 msgstr "Nieaktualny o %d"
 
-msgid "PSK for"
-msgstr "PSK dla"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "pakiet zostanie zaktualizowany"
@@ -637,6 +639,11 @@ msgstr[2] "pakietów zostanie zaktualizowanych"
 
 msgid "Part Fan"
 msgstr "Chłodzenie wydruku"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "Hasło zostało zapisane"
 
 msgid "Password saved"
 msgstr "Hasło zostało zapisane"
@@ -804,6 +811,9 @@ msgstr "Pokaż moc grzałki"
 msgid "Show Scrollbars Buttons"
 msgstr "Pokaż przyciski pasków przewijania"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr "Pokaż tylko urządzenia możliwe do ustawienia"
 
@@ -873,6 +883,9 @@ msgstr "Temperatura (°C)"
 msgid "Temperature"
 msgstr "Temperatura"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr "System nie spełnia wymagań minimalnych"
 
@@ -919,6 +932,9 @@ msgstr "Aktualizowanie"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Przydatne na mniej responsywnych ekranach dotykowych"
+
+msgid "User"
+msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC nie jest wspierane przez backend próbujący streamować"
@@ -1000,6 +1016,12 @@ msgid_plural "seconds"
 msgstr[0] "sekunda"
 msgstr[1] "sekundy"
 msgstr[2] "sekund"
+
+#~ msgid "Hide temp."
+#~ msgstr "Ukryj temp."
+
+#~ msgid "PSK for"
+#~ msgstr "PSK dla"
 
 #~ msgid "Mesh calibrate"
 #~ msgstr "Kalibracja siatki"

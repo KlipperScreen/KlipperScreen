@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-07-23 00:09+0000\n"
 "Last-Translator: Thijs Triemstra <info@collab.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/klipperscreen/"
@@ -343,6 +343,9 @@ msgstr "Flowrate:"
 msgid "Font Size"
 msgstr "Lettertype Grootte"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr "Vergeet"
 
@@ -366,9 +369,6 @@ msgstr "Verberg"
 
 msgid "Hide sensors in Temp."
 msgstr "Verberg sensoren in Temp."
-
-msgid "Hide temp."
-msgstr "Verberg temp."
 
 msgid "Home"
 msgstr "Home"
@@ -420,6 +420,11 @@ msgstr "Ongeldig"
 
 msgid "Invalid password"
 msgstr "Ongeldig wachtwoord"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "Temperatuur"
 
 msgid "Inversely affects the icon size"
 msgstr ""
@@ -629,9 +634,6 @@ msgstr ""
 msgid "Outdated by %d"
 msgstr "Verouderd sinds %d"
 
-msgid "PSK for"
-msgstr "PSK voor"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "Pakket word ge-update"
@@ -639,6 +641,11 @@ msgstr[1] "Pakketten worden ge-update"
 
 msgid "Part Fan"
 msgstr "Part Ventilator"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "Wachtwoord opgeslagen"
 
 msgid "Password saved"
 msgstr "Wachtwoord opgeslagen"
@@ -806,6 +813,9 @@ msgstr "Toon Heater Stroom"
 msgid "Show Scrollbars Buttons"
 msgstr "Toon Scrollbars Knoppen"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr ""
 
@@ -875,6 +885,9 @@ msgstr "Temp (°C)"
 msgid "Temperature"
 msgstr "Temperatuur"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr ""
 
@@ -918,6 +931,9 @@ msgid "Updating"
 msgstr "Bezig met updaten"
 
 msgid "Useful for un-responsive touchscreens"
+msgstr ""
+
+msgid "User"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
@@ -995,6 +1011,12 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "Hide temp."
+#~ msgstr "Verberg temp."
+
+#~ msgid "PSK for"
+#~ msgstr "PSK voor"
 
 #~ msgid "Mesh calibrate"
 #~ msgstr "Mesh kalibreren"

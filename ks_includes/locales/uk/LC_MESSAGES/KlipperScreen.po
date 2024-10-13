@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 24-05-17 16.20\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-05-12 16:39+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -343,6 +343,9 @@ msgstr "Швидкість потоку:"
 msgid "Font Size"
 msgstr "Розмір шрифту"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr "Забути"
 
@@ -366,9 +369,6 @@ msgstr "Сховати"
 
 msgid "Hide sensors in Temp."
 msgstr "Сховати датчик t°."
-
-msgid "Hide temp."
-msgstr "Приховати темп."
 
 msgid "Home"
 msgstr "Домашня сторінка"
@@ -420,6 +420,11 @@ msgstr "Недійсний"
 
 msgid "Invalid password"
 msgstr "Недійсний пароль"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "Температура"
 
 msgid "Inversely affects the icon size"
 msgstr "Зворотно впливає на розмір іконки"
@@ -629,9 +634,6 @@ msgstr "Лише для панелі переміщення"
 msgid "Outdated by %d"
 msgstr "Застаріло на %d"
 
-msgid "PSK for"
-msgstr "PSK для"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "Пакет буде оновлено"
@@ -640,6 +642,11 @@ msgstr[2] "Пакети будуть оновлені"
 
 msgid "Part Fan"
 msgstr "Охолодження моделі"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "Пароль збережено"
 
 msgid "Password saved"
 msgstr "Пароль збережено"
@@ -807,6 +814,9 @@ msgstr "Показати Потужність Нагрівача"
 msgid "Show Scrollbars Buttons"
 msgstr "Показати кнопку смуги прокрутки"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr "Показувати лише пристрої, які можна налаштувати"
 
@@ -856,7 +866,9 @@ msgid "Starting update for"
 msgstr "Початок оновлення для"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr "Міняти місцями кнопки, якщо вони розташовані одна поверх іншої. Впливає на решту панелей"
+msgstr ""
+"Міняти місцями кнопки, якщо вони розташовані одна поверх іншої. Впливає на "
+"решту панелей"
 
 msgid "System"
 msgstr "Системна"
@@ -875,6 +887,9 @@ msgstr "Teмп (°C)"
 
 msgid "Temperature"
 msgstr "Температура"
+
+msgid "Temperature too low to extrude"
+msgstr ""
 
 msgid "The system doesn't meet the minimum requirement"
 msgstr "Система не відповідає мінімальним вимогам"
@@ -920,6 +935,9 @@ msgstr "Оновлення"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Корисно для сенсорних екранів, які не реагують"
+
+msgid "User"
+msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC не підтримується бекендом, який намагається використати Stream"
@@ -1001,6 +1019,12 @@ msgid_plural "seconds"
 msgstr[0] "секунда"
 msgstr[1] "секунди"
 msgstr[2] "секунд"
+
+#~ msgid "Hide temp."
+#~ msgstr "Приховати темп."
+
+#~ msgid "PSK for"
+#~ msgstr "PSK для"
 
 #~ msgid "Are you sure you want to stop the calibration?"
 #~ msgstr "Ви впевнені, що хочете припинити калібрування?"
