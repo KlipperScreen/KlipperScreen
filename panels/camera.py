@@ -97,5 +97,10 @@ class Panel(ScreenPanel):
 
     def log(self, loglevel, component, message):
         logging.debug(f'[{loglevel}] {component}: {message}')
-        if loglevel == 'error' and 'No Xvideo support found' not in message and 'youtube-dl' not in message:
+        if (
+            loglevel == 'error'
+            and 'unable to decode' not in message  # skip proprietary app fields errors
+            and 'No Xvideo support found' not in message  # will fall back automatically
+            and 'youtube-dl' not in message  # needed for some streams, not relevant for our case
+        ):
             self._screen.show_popup_message(f'{message}')
