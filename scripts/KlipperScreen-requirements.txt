@@ -9,7 +9,7 @@ python-mpv==1.0.7;python_version>="3.10"
 
 backports.zoneinfo;python_version<"3.9"
 
-PyGObject==3.48.2;python_version=="3.8"
+PyGObject==3.50.0;python_version=="3.8"
 pycairo==1.26.1;python_version=="3.8"
 
 PyGObject==3.50.0;python_version>"3.8"
