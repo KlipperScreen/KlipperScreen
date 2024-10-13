@@ -41,7 +41,11 @@ class Panel(ScreenPanel):
             label.set_label(_("Are you sure you wish to shutdown the system?"))
             title = _("Shutdown")
         buttons = []
-        if self._screen.apiclient is None or self._screen.apiclient.endpoint in ("127.0.0.1", "localhost"):
+        if (
+            self._screen.apiclient is None
+            or "127.0.0.1" in self._screen.apiclient.endpoint
+            or "localhost" in self._screen.apiclient.endpoint
+        ):
             buttons.append({"name": _("Accept"), "response": Gtk.ResponseType.ACCEPT, "style": 'dialog-primary'})
         else:
             logging.info(self._screen.apiclient.endpoint)
