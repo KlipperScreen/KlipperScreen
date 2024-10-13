@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import ast
 import argparse
 import gc
 import json
@@ -320,6 +321,9 @@ class KlipperScreen(Gtk.Window):
     def show_panel(self, panel, title=None, remove_all=False, panel_name=None, **kwargs):
         if panel_name is None:
             panel_name = panel
+        if self._cur_panels and panel_name == self._cur_panels[-1]:
+            logging.error("Panel is already is in view")
+            return
         try:
             if remove_all:
                 self.panels_reinit = list(self.panels)
@@ -571,6 +575,7 @@ class KlipperScreen(Gtk.Window):
         menuitems = self._config.get_menu_items(menu, name)
         if len(menuitems) != 0:
             self.show_panel("menu", disname, panel_name=name, items=menuitems)
+            logging.info(f"menu, {disname}, panel_name={name}, items={menuitems}")
         else:
             logging.info("No items in menu")
 
@@ -881,14 +886,8 @@ class KlipperScreen(Gtk.Window):
             if re.match('^(?:ok\\s+)?(B|C|T\\d*):', data):
                 return
             if data.startswith("// action:"):
-                action = data[10:]
-                if action.startswith('prompt_begin'):
-                    if self.prompt is not None:
-                        self.prompt.end()
-                    self.prompt = Prompt(self)
-                if self.prompt is None:
-                    return
-                self.prompt.decode(action)
+                self.process_action(data[10:])
+                return
             elif data.startswith("echo: "):
                 self.show_popup_message(data[6:], 1, from_ws=True)
             elif "!! Extrude below minimum temp" in data:
@@ -898,8 +897,12 @@ class KlipperScreen(Gtk.Window):
                 return
             elif data.startswith("!! "):
                 self.show_popup_message(data[3:], 3, from_ws=True)
-            elif "unknown" in data.lower() and \
-                    not ("TESTZ" in data or "MEASURE_AXES_NOISE" in data or "ACCELEROMETER_QUERY" in data):
+            elif (
+                "unknown" in data.lower()
+                and "TESTZ" not in data
+                and "MEASURE_AXES_NOISE" not in data
+                and "ACCELEROMETER_QUERY" not in data
+            ):
                 self.show_popup_message(data, from_ws=True)
             elif "SAVE_CONFIG" in data and self.printer.state == "ready":
                 script = {"script": "SAVE_CONFIG"}
@@ -910,6 +913,30 @@ class KlipperScreen(Gtk.Window):
                     script
                 )
         self.process_update(action, data)
+
+    def process_action(self, action):
+        if action.startswith("prompt"):
+            if action.startswith("prompt_begin"):
+                if self.prompt is not None:
+                    self.prompt.end()
+                self.prompt = Prompt(self)
+            if self.prompt is None:
+                return
+            self.prompt.decode(action)
+        if action.startswith("ks_show"):
+            self.parse_ks_action(action[8:].strip())
+
+    def parse_ks_action(self, action):
+        action = action.split(" ", 1)
+        if len(action) == 2:
+            panel, params = action
+            key, value = params.split("=", 1)
+            key = key.strip()
+            value = value.strip()
+            params = {key: ast.literal_eval(value)}
+            self.show_panel(panel, **params)
+        else:
+            self.show_panel(*action)
 
     def process_update(self, *args):
         self.base_panel.process_update(*args)
