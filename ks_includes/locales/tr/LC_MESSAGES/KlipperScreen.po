@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-07-06 18:04+0000\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"PO-Revision-Date: 2024-10-11 06:01+0000\n"
 "Last-Translator: Selim <technical50@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/tr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -343,6 +343,9 @@ msgstr "Akış oranı:"
 msgid "Font Size"
 msgstr "Yazı boyutu"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr "Fare yada dokunmatik ekranın kesinliğini doğrulamak için"
+
 msgid "Forget"
 msgstr "Unut"
 
@@ -366,9 +369,6 @@ msgstr "Gizle"
 
 msgid "Hide sensors in Temp."
 msgstr "Sıcaklıktaki sensörleri gizleyin."
-
-msgid "Hide temp."
-msgstr "Sıcaklığı gizle."
 
 msgid "Home"
 msgstr "Ana Konum"
@@ -420,6 +420,9 @@ msgstr "Geçersiz"
 
 msgid "Invalid password"
 msgstr "Geçersiz şifre"
+
+msgid "Invalid temperature"
+msgstr "Geçersiz Sıcaklık"
 
 msgid "Inversely affects the icon size"
 msgstr "Simge boyutunu ters yönde etkiler"
@@ -627,9 +630,6 @@ msgstr "Sadece paneli taşımak için"
 msgid "Outdated by %d"
 msgstr "Güncelliğini yitiren %d"
 
-msgid "PSK for"
-msgstr "PSK için"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "Paket yükseltilecek"
@@ -637,6 +637,9 @@ msgstr[1] "Paketler yükseltilecek"
 
 msgid "Part Fan"
 msgstr "Parça Fanı"
+
+msgid "Password"
+msgstr "Şifre"
 
 msgid "Password saved"
 msgstr "Şifre kaydedildi"
@@ -804,6 +807,9 @@ msgstr "Isıtıcı Gücünü Göster"
 msgid "Show Scrollbars Buttons"
 msgstr "Kaydırma çubuklarında düğmeleri göster"
 
+msgid "Show cursor"
+msgstr "İmleci göster"
+
 msgid "Show only devices that are able to be set"
 msgstr "Yalnızca ayarlanabilecek cihazları göster"
 
@@ -873,6 +879,9 @@ msgstr "Sıcaklık (°C)"
 msgid "Temperature"
 msgstr "Sıcaklık"
 
+msgid "Temperature too low to extrude"
+msgstr "Sıcaklık ekstrüzyon için çok düşük"
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr "Sistem minimum gereksinimi karşılamıyor"
 
@@ -917,6 +926,9 @@ msgstr "Güncelleniyor"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Yanıt vermeyen dokunmatik ekranlar için kullanışlıdır"
+
+msgid "User"
+msgstr "Kullanıcı"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC, Stream deneyin tarafından desteklenmez"
@@ -993,6 +1005,12 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] "saniye"
 msgstr[1] "saniyeler"
+
+#~ msgid "Hide temp."
+#~ msgstr "Sıcaklığı gizle."
+
+#~ msgid "PSK for"
+#~ msgstr "PSK için"
 
 #~ msgid "Are you sure you want to stop the calibration?"
 #~ msgstr "Kalibrasyonu durdurmak istediğinizden emin misiniz?"

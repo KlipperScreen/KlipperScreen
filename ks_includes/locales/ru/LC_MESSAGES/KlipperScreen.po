@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-07-05 19:09+0000\n"
 "Last-Translator: Артем <gaz70rus@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -348,6 +348,9 @@ msgstr "Расход:"
 msgid "Font Size"
 msgstr "Размер шрифта"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr "Забыть"
 
@@ -371,9 +374,6 @@ msgstr "Скрывать"
 
 msgid "Hide sensors in Temp."
 msgstr "Скрыть датчики в Temp."
-
-msgid "Hide temp."
-msgstr "Скрыть температуру."
 
 msgid "Home"
 msgstr "Парковка"
@@ -425,6 +425,11 @@ msgstr "Неверный"
 
 msgid "Invalid password"
 msgstr "Неверный пароль"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "Tемпература"
 
 msgid "Inversely affects the icon size"
 msgstr ""
@@ -633,9 +638,6 @@ msgstr ""
 msgid "Outdated by %d"
 msgstr "Устарело на %d"
 
-msgid "PSK for"
-msgstr "Пароль для"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "Пакет будет обновлен"
@@ -644,6 +646,11 @@ msgstr[2] "Пакеты будут обновляться"
 
 msgid "Part Fan"
 msgstr "Вентилятор обдува детали"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "Пароль сохранен"
 
 msgid "Password saved"
 msgstr "Пароль сохранен"
@@ -811,6 +818,9 @@ msgstr "Показать мощность нагрева"
 msgid "Show Scrollbars Buttons"
 msgstr "Показать полосу прокрутки"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr ""
 
@@ -880,6 +890,9 @@ msgstr "Температура (°С)"
 msgid "Temperature"
 msgstr "Tемпература"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr ""
 
@@ -923,6 +936,9 @@ msgid "Updating"
 msgstr "Обновление"
 
 msgid "Useful for un-responsive touchscreens"
+msgstr ""
+
+msgid "User"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
@@ -1006,6 +1022,12 @@ msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+
+#~ msgid "Hide temp."
+#~ msgstr "Скрыть температуру."
+
+#~ msgid "PSK for"
+#~ msgstr "Пароль для"
 
 #~ msgid "Mesh calibrate"
 #~ msgstr "Калибровка сетки"

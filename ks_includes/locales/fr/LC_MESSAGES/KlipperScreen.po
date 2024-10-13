@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-08-29 20:09+0000\n"
 "Last-Translator: Nackophilz <zrv4flra@anonaddy.me>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/klipperscreen/"
@@ -343,6 +343,9 @@ msgstr "Débit:"
 msgid "Font Size"
 msgstr "Taille de la police"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr "Oublier"
 
@@ -366,9 +369,6 @@ msgstr "Masquer"
 
 msgid "Hide sensors in Temp."
 msgstr "Masquer les capteurs dans Températures"
-
-msgid "Hide temp."
-msgstr "Masquer les températures"
 
 msgid "Home"
 msgstr "Accueil"
@@ -420,6 +420,11 @@ msgstr "Invalide"
 
 msgid "Invalid password"
 msgstr "Mot de passe invalide"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "Température"
 
 msgid "Inversely affects the icon size"
 msgstr "Inverse de la taille de l'icône"
@@ -630,9 +635,6 @@ msgstr "Seulement pour bouger le panneau"
 msgid "Outdated by %d"
 msgstr "Obsolète par %d"
 
-msgid "PSK for"
-msgstr "PSK pour"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "Le paquet sera mis à jour"
@@ -640,6 +642,11 @@ msgstr[1] "Les paquets seront mis à jour"
 
 msgid "Part Fan"
 msgstr "Ventilateurs de refroidissement"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "Mot de passe enregistré"
 
 msgid "Password saved"
 msgstr "Mot de passe enregistré"
@@ -808,6 +815,9 @@ msgstr "Afficher la puissance de chauffe"
 msgid "Show Scrollbars Buttons"
 msgstr "Boutons d'affichage des barres de défilement"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr "Afficher uniquement les appareils pouvant être configurés"
 
@@ -878,6 +888,9 @@ msgstr "Temp (°C)"
 msgid "Temperature"
 msgstr "Température"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr "Le système ne répond pas aux exigences minimales"
 
@@ -923,6 +936,9 @@ msgstr "Mise à jour"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Utile pour les écrans tactiles peu réactifs"
+
+msgid "User"
+msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC n'est pas pris en charge par le backend essai du Stream"
@@ -999,6 +1015,12 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] "seconde"
 msgstr[1] "secondes"
+
+#~ msgid "Hide temp."
+#~ msgstr "Masquer les températures"
+
+#~ msgid "PSK for"
+#~ msgstr "PSK pour"
 
 #~ msgid "Mesh calibrate"
 #~ msgstr "Calibration du maillage"

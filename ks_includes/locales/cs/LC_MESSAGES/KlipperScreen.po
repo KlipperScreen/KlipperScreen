@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-06-29 06:09+0000\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"PO-Revision-Date: 2024-10-10 07:43+0000\n"
 "Last-Translator: Miloslav Kos <kos.m@post.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/cs/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -343,6 +343,9 @@ msgstr "Rychlost toku:"
 msgid "Font Size"
 msgstr "Velikost fontu"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr "ro ovládání myší nebo ověření přesnosti dotykového displeje"
+
 msgid "Forget"
 msgstr "Zapomenout"
 
@@ -366,9 +369,6 @@ msgstr "Skrýt"
 
 msgid "Hide sensors in Temp."
 msgstr "Skrýt senzory v Temp."
-
-msgid "Hide temp."
-msgstr "Skrýt teplotu"
 
 msgid "Home"
 msgstr "Domů"
@@ -420,6 +420,9 @@ msgstr "Špatně"
 
 msgid "Invalid password"
 msgstr "Špatné heslo"
+
+msgid "Invalid temperature"
+msgstr "Chybná teplota"
 
 msgid "Inversely affects the icon size"
 msgstr "Inverzně ovlivňuje velikost ikony"
@@ -628,9 +631,6 @@ msgstr "Pouze pro panel pohybů"
 msgid "Outdated by %d"
 msgstr "Zastaralý %d"
 
-msgid "PSK for"
-msgstr "PSK pro"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "Balíček bude aktualizován"
@@ -639,6 +639,9 @@ msgstr[2] "Balíčky budou aktualizovány"
 
 msgid "Part Fan"
 msgstr "Částečný ofuk"
+
+msgid "Password"
+msgstr "Heslo"
 
 msgid "Password saved"
 msgstr "Heslo uloženo"
@@ -806,6 +809,9 @@ msgstr "Ukaž odběr topení"
 msgid "Show Scrollbars Buttons"
 msgstr "Ukaž rolovací tlačítka"
 
+msgid "Show cursor"
+msgstr "Zobrazit kurzor"
+
 msgid "Show only devices that are able to be set"
 msgstr "Zobrazit pouze zařízení, která lze nastavit"
 
@@ -875,6 +881,9 @@ msgstr "Teplota (°C)"
 msgid "Temperature"
 msgstr "Teplota"
 
+msgid "Temperature too low to extrude"
+msgstr "Příliš nízká teplota pro extruzi"
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr "Systém nesplňuje minimální požadavky"
 
@@ -919,6 +928,9 @@ msgstr "Aktualizuji"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Užitečné pro nereagující dotykové obrazovky"
+
+msgid "User"
+msgstr "Uživatel"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC není podporováno backendem, který se pokouší spustit Stream"
@@ -1000,6 +1012,12 @@ msgid_plural "seconds"
 msgstr[0] "sekunda"
 msgstr[1] "sekundy"
 msgstr[2] "sekundy"
+
+#~ msgid "Hide temp."
+#~ msgstr "Skrýt teplotu"
+
+#~ msgid "PSK for"
+#~ msgstr "PSK pro"
 
 #~ msgid "Are you sure you want to stop the calibration?"
 #~ msgstr "Opravdu chcete kalibraci zastavit?"

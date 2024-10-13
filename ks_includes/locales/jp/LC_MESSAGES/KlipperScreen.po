@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -338,6 +338,9 @@ msgstr "フローレート:"
 msgid "Font Size"
 msgstr "フォントサイズ"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr ""
 
@@ -360,9 +363,6 @@ msgid "Hide"
 msgstr "隠す"
 
 msgid "Hide sensors in Temp."
-msgstr "温度を非表示にする"
-
-msgid "Hide temp."
 msgstr "温度を非表示にする"
 
 msgid "Home"
@@ -415,6 +415,11 @@ msgstr "不正"
 
 msgid "Invalid password"
 msgstr ""
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "温度"
 
 msgid "Inversely affects the icon size"
 msgstr ""
@@ -622,15 +627,17 @@ msgstr ""
 msgid "Outdated by %d"
 msgstr ""
 
-msgid "PSK for"
-msgstr ""
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] ""
 
 msgid "Part Fan"
 msgstr ""
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "パスワードを保存しました"
 
 msgid "Password saved"
 msgstr "パスワードを保存しました"
@@ -798,6 +805,9 @@ msgstr ""
 msgid "Show Scrollbars Buttons"
 msgstr ""
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr ""
 
@@ -867,6 +877,9 @@ msgstr "温度 (°C)"
 msgid "Temperature"
 msgstr "温度"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr ""
 
@@ -910,6 +923,9 @@ msgid "Updating"
 msgstr "更新中"
 
 msgid "Useful for un-responsive touchscreens"
+msgstr ""
+
+msgid "User"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
@@ -982,6 +998,9 @@ msgstr ""
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
+
+#~ msgid "Hide temp."
+#~ msgstr "温度を非表示にする"
 
 #~ msgid "Mesh calibrate"
 #~ msgstr "メッシュ較正"

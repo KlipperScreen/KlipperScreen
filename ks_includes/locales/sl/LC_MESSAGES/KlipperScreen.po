@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Dominik <dominik.sostar@gmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -344,6 +344,9 @@ msgstr ""
 msgid "Font Size"
 msgstr "Velikost pisave"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr ""
 
@@ -367,9 +370,6 @@ msgstr "Skrij"
 
 msgid "Hide sensors in Temp."
 msgstr "Skrij senzorje v temp."
-
-msgid "Hide temp."
-msgstr "Skrij temp."
 
 msgid "Home"
 msgstr "Nuliraj"
@@ -421,6 +421,11 @@ msgstr "Napačno"
 
 msgid "Invalid password"
 msgstr "Napačno geslo"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "Temperatura"
 
 msgid "Inversely affects the icon size"
 msgstr ""
@@ -630,9 +635,6 @@ msgstr ""
 msgid "Outdated by %d"
 msgstr "Zastarelo za %d"
 
-msgid "PSK for"
-msgstr "PSK za"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "Paket bo posodobljen"
@@ -642,6 +644,11 @@ msgstr[3] "Paketov bo posodobljenih"
 
 msgid "Part Fan"
 msgstr "Ventilator za dele"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "Geslo shranjeno"
 
 msgid "Password saved"
 msgstr "Geslo shranjeno"
@@ -809,6 +816,9 @@ msgstr "Pokaži moč grelnika"
 msgid "Show Scrollbars Buttons"
 msgstr "Pokaži gumbe drsnih trakov"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr ""
 
@@ -878,6 +888,9 @@ msgstr "Temperatura (°C)"
 msgid "Temperature"
 msgstr "Temperatura"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr ""
 
@@ -921,6 +934,9 @@ msgid "Updating"
 msgstr "Posodabljam"
 
 msgid "Useful for un-responsive touchscreens"
+msgstr ""
+
+msgid "User"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
@@ -1008,6 +1024,12 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
+
+#~ msgid "Hide temp."
+#~ msgstr "Skrij temp."
+
+#~ msgid "PSK for"
+#~ msgstr "PSK za"
 
 #~ msgid "Mesh calibrate"
 #~ msgstr "Umeritev mreže"

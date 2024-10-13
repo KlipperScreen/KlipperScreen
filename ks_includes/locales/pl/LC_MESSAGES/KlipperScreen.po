@@ -3,9 +3,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-07-16 13:09+0000\n"
-"Last-Translator: Marcin Laber <marcin@laber.pl>\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"PO-Revision-Date: 2024-10-13 14:16+0000\n"
+"Last-Translator: Daviteusz <daviteusz0@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/pl/>\n"
 "Language: pl\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -340,6 +340,9 @@ msgstr "Przepływ:"
 msgid "Font Size"
 msgstr "Rozmiar czcionki"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr "Do obsługi myszą lub zweryfikowania dokładności ekranu dotykowego"
+
 msgid "Forget"
 msgstr "Zapomnij"
 
@@ -363,9 +366,6 @@ msgstr "Ukryj"
 
 msgid "Hide sensors in Temp."
 msgstr "Ukryj sensory w sekcji temperatur"
-
-msgid "Hide temp."
-msgstr "Ukryj temp."
 
 msgid "Home"
 msgstr "Bazuj"
@@ -417,6 +417,9 @@ msgstr "Nieprawidłowy"
 
 msgid "Invalid password"
 msgstr "Nieprawidłowe hasło"
+
+msgid "Invalid temperature"
+msgstr "Nieprawidłowa temperatura"
 
 msgid "Inversely affects the icon size"
 msgstr "Wpływa proporcjonalnie na rozmiar ikon"
@@ -626,9 +629,6 @@ msgstr "Tylko dla panelu ruchu"
 msgid "Outdated by %d"
 msgstr "Nieaktualny o %d"
 
-msgid "PSK for"
-msgstr "PSK dla"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "pakiet zostanie zaktualizowany"
@@ -637,6 +637,9 @@ msgstr[2] "pakietów zostanie zaktualizowanych"
 
 msgid "Part Fan"
 msgstr "Chłodzenie wydruku"
+
+msgid "Password"
+msgstr "Hasło"
 
 msgid "Password saved"
 msgstr "Hasło zostało zapisane"
@@ -804,6 +807,9 @@ msgstr "Pokaż moc grzałki"
 msgid "Show Scrollbars Buttons"
 msgstr "Pokaż przyciski pasków przewijania"
 
+msgid "Show cursor"
+msgstr "Pokaż kursor"
+
 msgid "Show only devices that are able to be set"
 msgstr "Pokaż tylko urządzenia możliwe do ustawienia"
 
@@ -873,6 +879,9 @@ msgstr "Temperatura (°C)"
 msgid "Temperature"
 msgstr "Temperatura"
 
+msgid "Temperature too low to extrude"
+msgstr "Zbyt niska temperatura do wytłaczania"
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr "System nie spełnia wymagań minimalnych"
 
@@ -919,6 +928,9 @@ msgstr "Aktualizowanie"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Przydatne na mniej responsywnych ekranach dotykowych"
+
+msgid "User"
+msgstr "Użytkownik"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC nie jest wspierane przez backend próbujący streamować"
@@ -1000,6 +1012,12 @@ msgid_plural "seconds"
 msgstr[0] "sekunda"
 msgstr[1] "sekundy"
 msgstr[2] "sekund"
+
+#~ msgid "Hide temp."
+#~ msgstr "Ukryj temp."
+
+#~ msgid "PSK for"
+#~ msgstr "PSK dla"
 
 #~ msgid "Mesh calibrate"
 #~ msgstr "Kalibracja siatki"

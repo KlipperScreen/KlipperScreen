@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-07-03 13:59+0000\n"
 "Last-Translator: srbjessen <srbjessen@gmail.com>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -338,6 +338,9 @@ msgstr "Flowrate:"
 msgid "Font Size"
 msgstr "Skriftstørrelse"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr "Glem"
 
@@ -361,9 +364,6 @@ msgstr "Skjule"
 
 msgid "Hide sensors in Temp."
 msgstr "Skjul sensorer i Temp."
-
-msgid "Hide temp."
-msgstr "Skjul temperaturer"
 
 msgid "Home"
 msgstr "Home"
@@ -415,6 +415,11 @@ msgstr "Ugyldig"
 
 msgid "Invalid password"
 msgstr "Ugyldigt kodeord"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "Temperatur"
 
 msgid "Inversely affects the icon size"
 msgstr "Omvendt påvirker ikonstørrelsen"
@@ -624,9 +629,6 @@ msgstr "Kun for flyttepanelet"
 msgid "Outdated by %d"
 msgstr "Forældet med %d"
 
-msgid "PSK for"
-msgstr "PSK for"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "Pakken vil blive opdateret"
@@ -634,6 +636,11 @@ msgstr[1] "Pakker vil blive opdateret"
 
 msgid "Part Fan"
 msgstr "Print blæser"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "Adgangskode gemt"
 
 msgid "Password saved"
 msgstr "Adgangskode gemt"
@@ -801,6 +808,9 @@ msgstr "Vis opvarmerens styrke"
 msgid "Show Scrollbars Buttons"
 msgstr "Vis knapper på rullelinjen"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr "Vis kun enheder, der er i stand til at blive ændret"
 
@@ -870,6 +880,9 @@ msgstr "Temp (°C)"
 msgid "Temperature"
 msgstr "Temperatur"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr "Systemet opfylder ikke mindstekrav"
 
@@ -914,6 +927,9 @@ msgstr "Opdatering"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Nyttig for frosset berøringsskærme"
+
+msgid "User"
+msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC er ikke understøttet i back-end, forsøger at streame istedet"
@@ -990,6 +1006,12 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] "sekund"
 msgstr[1] "sekunder"
+
+#~ msgid "Hide temp."
+#~ msgstr "Skjul temperaturer"
+
+#~ msgid "PSK for"
+#~ msgstr "PSK for"
 
 #~ msgid "Are you sure you want to stop the calibration?"
 #~ msgstr "Er du sikker på, at du vil stoppe kalibreringen?"

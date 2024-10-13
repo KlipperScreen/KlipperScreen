@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-07-26 19:09+0000\n"
 "Last-Translator: Jegert Uusküla <jegertuuskula@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -338,6 +338,9 @@ msgstr "Voolukiirus:"
 msgid "Font Size"
 msgstr "Fondi suurus"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr "Unusta"
 
@@ -361,9 +364,6 @@ msgstr "Peida"
 
 msgid "Hide sensors in Temp."
 msgstr "Peida andurid temperatuuri all"
-
-msgid "Hide temp."
-msgstr "Peida temp."
 
 msgid "Home"
 msgstr "Kodu"
@@ -415,6 +415,11 @@ msgstr "Kehtetu"
 
 msgid "Invalid password"
 msgstr "Kehtetu parool"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "Temperatuur"
 
 msgid "Inversely affects the icon size"
 msgstr "Mõjutab pöördeliselt ikooni suurust"
@@ -624,9 +629,6 @@ msgstr "Ainult liigutuspaneelile"
 msgid "Outdated by %d"
 msgstr "Aegunud %d võrra"
 
-msgid "PSK for"
-msgstr "PSK jaoks"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "Pakett uuendatakse"
@@ -634,6 +636,11 @@ msgstr[1] "Paketid uuendatakse"
 
 msgid "Part Fan"
 msgstr "Osaventilaator"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "Parool salvestatud"
 
 msgid "Password saved"
 msgstr "Parool salvestatud"
@@ -801,6 +808,9 @@ msgstr "Näita küttekeha võimsust"
 msgid "Show Scrollbars Buttons"
 msgstr "Näita kerimisriba nuppe"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr "Näita ainult seadmeid, mida saab seadistada"
 
@@ -870,6 +880,9 @@ msgstr "Temperatuur (°C)"
 msgid "Temperature"
 msgstr "Temperatuur"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr "Süsteem ei vasta minimaalsetele nõudmistele"
 
@@ -914,6 +927,9 @@ msgstr "Uuendamine"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Kasulik mitte reageerivate puuteekraanide jaoks"
+
+msgid "User"
+msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC-d ei toeta taustsüsteem, mis proovib voogu"
@@ -990,6 +1006,12 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] "sekund"
 msgstr[1] "sekundit"
+
+#~ msgid "Hide temp."
+#~ msgstr "Peida temp."
+
+#~ msgid "PSK for"
+#~ msgstr "PSK jaoks"
 
 #~ msgid "Are you sure you want to stop the calibration?"
 #~ msgstr "Kas olete kindel, et soovite kalibreerimise peatada?"

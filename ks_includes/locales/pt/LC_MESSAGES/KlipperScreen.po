@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-10-05 13:15+0000\n"
 "Last-Translator: Paulo Henrique <pauloh.programador@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -343,6 +343,9 @@ msgstr "Flow:"
 msgid "Font Size"
 msgstr "Tamanho da fonte"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr "Esquecer"
 
@@ -366,9 +369,6 @@ msgstr "Ocultar"
 
 msgid "Hide sensors in Temp."
 msgstr "Ocultar sensores na Temperatura."
-
-msgid "Hide temp."
-msgstr "Ocultar Temp."
 
 msgid "Home"
 msgstr "Zerar"
@@ -420,6 +420,11 @@ msgstr "Inválido"
 
 msgid "Invalid password"
 msgstr "Senha Inválida"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "Temperatura"
 
 msgid "Inversely affects the icon size"
 msgstr ""
@@ -630,9 +635,6 @@ msgstr ""
 msgid "Outdated by %d"
 msgstr "Desatualizado por %d"
 
-msgid "PSK for"
-msgstr "PSK por"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "O pacote será atualizado"
@@ -640,6 +642,11 @@ msgstr[1] "Os pacotes serão atualizados"
 
 msgid "Part Fan"
 msgstr "Controle da Ventoinha"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "Senha Salva"
 
 msgid "Password saved"
 msgstr "Senha Salva"
@@ -807,6 +814,9 @@ msgstr "Exibir Potência do Aquecedor"
 msgid "Show Scrollbars Buttons"
 msgstr "Botões auxiliares de Rolagem"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr ""
 
@@ -876,6 +886,9 @@ msgstr "Temperatura (°C)"
 msgid "Temperature"
 msgstr "Temperatura"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr ""
 
@@ -919,6 +932,9 @@ msgid "Updating"
 msgstr "Atualizando"
 
 msgid "Useful for un-responsive touchscreens"
+msgstr ""
+
+msgid "User"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
@@ -996,6 +1012,12 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] "Segundo"
 msgstr[1] "Segundos"
+
+#~ msgid "Hide temp."
+#~ msgstr "Ocultar Temp."
+
+#~ msgid "PSK for"
+#~ msgstr "PSK por"
 
 #~ msgid "Mesh calibrate"
 #~ msgstr "Calibrar Malha"

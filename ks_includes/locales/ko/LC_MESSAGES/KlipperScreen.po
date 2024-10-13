@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
 "PO-Revision-Date: 2024-07-06 14:10+0900\n"
-"Last-Translator: ElectricalBoy <15651807+ElectricalBoy@users.noreply.github.com>\n"
+"Last-Translator: ElectricalBoy <15651807+ElectricalBoy@users.noreply.github."
+"com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/ko/>\n"
 "Language: ko\n"
@@ -338,6 +339,9 @@ msgstr "유량 비율:"
 msgid "Font Size"
 msgstr "글꼴 크기"
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr ""
 
@@ -361,9 +365,6 @@ msgstr "가리기"
 
 msgid "Hide sensors in Temp."
 msgstr "온도 섹션에서 센서 항목 숨김."
-
-msgid "Hide temp."
-msgstr "온도 숨김."
 
 msgid "Home"
 msgstr "원점 이동"
@@ -415,6 +416,11 @@ msgstr "존재하지 않음"
 
 msgid "Invalid password"
 msgstr "잘못된 패스워드"
+
+#, fuzzy
+#| msgid "Temperature"
+msgid "Invalid temperature"
+msgstr "온도"
 
 msgid "Inversely affects the icon size"
 msgstr ""
@@ -623,15 +629,17 @@ msgstr ""
 msgid "Outdated by %d"
 msgstr "%d 보다 오래됨"
 
-msgid "PSK for"
-msgstr "PSK 키 값(비밀번호)"
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "패키지가 업데이트 됩니다"
 
 msgid "Part Fan"
 msgstr "파트 쿨링 팬"
+
+#, fuzzy
+#| msgid "Password saved"
+msgid "Password"
+msgstr "비밀번호 저장됨"
 
 msgid "Password saved"
 msgstr "비밀번호 저장됨"
@@ -799,6 +807,9 @@ msgstr "히터 전원 보기"
 msgid "Show Scrollbars Buttons"
 msgstr "스크롤바 버튼 보기"
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr ""
 
@@ -868,6 +879,9 @@ msgstr "온도 (°C)"
 msgid "Temperature"
 msgstr "온도"
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr "시스템이 최소 요구 조건을 충족하지 않습니다"
 
@@ -912,6 +926,9 @@ msgstr "업데이트 중"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "응답 없는 터치스크린에 유용함"
+
+msgid "User"
+msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC는 백엔드 trying Stream에서 지원되지 않습니다"
@@ -984,6 +1001,12 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] "초"
 
+#~ msgid "Hide temp."
+#~ msgstr "온도 숨김."
+
+#~ msgid "PSK for"
+#~ msgstr "PSK 키 값(비밀번호)"
+
 #~ msgid "Mesh calibrate"
 #~ msgstr "메쉬 보정"
 
@@ -1023,8 +1046,7 @@ msgstr[0] "초"
 #~ msgid ""
 #~ "Not supported for auto-detection, it needs to be configured in "
 #~ "klipperscreen.conf"
-#~ msgstr ""
-#~ "자동 감지는 지원되지 않으므로 klipperscreen.conf로 구성해야 합니다"
+#~ msgstr "자동 감지는 지원되지 않으므로 klipperscreen.conf로 구성해야 합니다"
 
 #~ msgid "Unknown screw position"
 #~ msgstr "알 수 없는 스크류 위치"
