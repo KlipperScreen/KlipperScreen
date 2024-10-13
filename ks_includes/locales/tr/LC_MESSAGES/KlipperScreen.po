@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-09 18:08-0300\n"
-"PO-Revision-Date: 2024-07-06 18:04+0000\n"
+"PO-Revision-Date: 2024-10-11 06:01+0000\n"
 "Last-Translator: Selim <technical50@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/tr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -344,7 +344,7 @@ msgid "Font Size"
 msgstr "Yazı boyutu"
 
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "Fare yada dokunmatik ekranın kesinliğini doğrulamak için"
 
 msgid "Forget"
 msgstr "Unut"
@@ -421,10 +421,8 @@ msgstr "Geçersiz"
 msgid "Invalid password"
 msgstr "Geçersiz şifre"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "Sıcaklık"
+msgstr "Geçersiz Sıcaklık"
 
 msgid "Inversely affects the icon size"
 msgstr "Simge boyutunu ters yönde etkiler"
@@ -640,10 +638,8 @@ msgstr[1] "Paketler yükseltilecek"
 msgid "Part Fan"
 msgstr "Parça Fanı"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "Şifre kaydedildi"
+msgstr "Şifre"
 
 msgid "Password saved"
 msgstr "Şifre kaydedildi"
@@ -812,7 +808,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "Kaydırma çubuklarında düğmeleri göster"
 
 msgid "Show cursor"
-msgstr ""
+msgstr "İmleci göster"
 
 msgid "Show only devices that are able to be set"
 msgstr "Yalnızca ayarlanabilecek cihazları göster"
@@ -884,7 +880,7 @@ msgid "Temperature"
 msgstr "Sıcaklık"
 
 msgid "Temperature too low to extrude"
-msgstr ""
+msgstr "Sıcaklık ekstrüzyon için çok düşük"
 
 msgid "The system doesn't meet the minimum requirement"
 msgstr "Sistem minimum gereksinimi karşılamıyor"
@@ -932,7 +928,7 @@ msgid "Useful for un-responsive touchscreens"
 msgstr "Yanıt vermeyen dokunmatik ekranlar için kullanışlıdır"
 
 msgid "User"
-msgstr ""
+msgstr "Kullanıcı"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC, Stream deneyin tarafından desteklenmez"
