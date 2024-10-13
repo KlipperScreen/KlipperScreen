@@ -83,15 +83,31 @@ class Panel(ScreenPanel):
                     b.connect("clicked", self._screen._send_action, item['method'], params)
             else:
                 b.connect("clicked", self._screen._go_to_submenu, key)
+            b.set_name(key)
             self.labels[key] = b
 
     def evaluate_enable(self, enable):
+        if enable is None:
+            return False
         if enable == "{{ moonraker_connected }}":
             logging.info(f"moonraker connected {self._screen._ws.connected}")
             return self._screen._ws.connected
         try:
             j2_temp = Template(enable, autoescape=True)
-            return j2_temp.render(self.j2_data) == 'True'
+            return j2_temp.render(self._printer.get_printer_status_data()) == 'True'
         except Exception as e:
             logging.debug(f"Error evaluating enable statement: {enable}\n{e}")
             return False
+
+    def process_update(self, action, data):
+        if action != "notify_status_update":
+            return
+        for item in self.autogrid:
+            key = item.get_name()
+            for item_dict in self.items:
+                if key in item_dict and 'active' in item_dict[key]:
+                    if self.evaluate_enable(item_dict[key]['active']):
+                        item.get_style_context().add_class("button_active")
+                    else:
+                        item.get_style_context().remove_class("button_active")
+                    break
