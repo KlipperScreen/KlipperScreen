@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 24-05-17 16.20\n"
+"Project-Id-Version: 24-10-14 10.00\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-09 18:08-0300\n"
-"PO-Revision-Date: 2024-05-12 16:39+0300\n"
+"PO-Revision-Date: 2024-10-14 09:59+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
 "Language: uk\n"
@@ -344,7 +344,7 @@ msgid "Font Size"
 msgstr "Розмір шрифту"
 
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "Для керування мишею або для перевірки точності сенсорного екрана"
 
 msgid "Forget"
 msgstr "Забути"
@@ -421,10 +421,8 @@ msgstr "Недійсний"
 msgid "Invalid password"
 msgstr "Недійсний пароль"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "Температура"
+msgstr "Недійсна температура"
 
 msgid "Inversely affects the icon size"
 msgstr "Зворотно впливає на розмір іконки"
@@ -643,10 +641,8 @@ msgstr[2] "Пакети будуть оновлені"
 msgid "Part Fan"
 msgstr "Охолодження моделі"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "Пароль збережено"
+msgstr "Пароль"
 
 msgid "Password saved"
 msgstr "Пароль збережено"
@@ -815,7 +811,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "Показати кнопку смуги прокрутки"
 
 msgid "Show cursor"
-msgstr ""
+msgstr "Відображати курсор"
 
 msgid "Show only devices that are able to be set"
 msgstr "Показувати лише пристрої, які можна налаштувати"
@@ -889,7 +885,7 @@ msgid "Temperature"
 msgstr "Температура"
 
 msgid "Temperature too low to extrude"
-msgstr ""
+msgstr "Занизька температура для видавлювання"
 
 msgid "The system doesn't meet the minimum requirement"
 msgstr "Система не відповідає мінімальним вимогам"
@@ -937,7 +933,7 @@ msgid "Useful for un-responsive touchscreens"
 msgstr "Корисно для сенсорних екранів, які не реагують"
 
 msgid "User"
-msgstr ""
+msgstr "Користувач"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC не підтримується бекендом, який намагається використати Stream"
