@@ -111,6 +111,8 @@ class Panel(ScreenPanel):
                 continue
 
             self.add_label_to_grid(self.prettify(category), 0, bold=True)
+            
+            self.add_label_to_grid(self.prettify(category), 0, bold=True)
 
             if isinstance(data, dict):
                 for key, value in data.items():
