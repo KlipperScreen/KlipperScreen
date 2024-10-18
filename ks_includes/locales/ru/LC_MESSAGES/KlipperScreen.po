@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-08-29 15:57+0300\n"
+"PO-Revision-Date: 2024-10-18 13:27+0300\n"
 "Last-Translator: Артем <gaz70rus@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/ru/>\n"
@@ -63,7 +63,7 @@ msgid "Apply %s%.3f offset to Probe?"
 msgstr "Применить смещение %s%.3f к пробе?"
 
 msgid "Archived"
-msgstr "Архивированные"
+msgstr "Показ. архив."
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Вы уверены, что хотите исключить объект?"
@@ -96,7 +96,7 @@ msgid "Auto-close notifications"
 msgstr "Автозакрытие уведомлений"
 
 msgid "Auto-open Extrude On Pause"
-msgstr "Автооткрытие меню Extrude при паузе"
+msgstr "Автооткрытие меню \"Экструзия\" при паузе"
 
 msgid "Auto-scroll"
 msgstr "Автопрокрутка"
@@ -162,13 +162,13 @@ msgid "Close"
 msgstr "Закрыть"
 
 msgid "Close messages after a timeout"
-msgstr "Сообщение закрыто после таймаута"
+msgstr "Закрывать уведомление через время"
 
 msgid "Complete"
 msgstr "Готово"
 
 msgid "Confirm Emergency Stop"
-msgstr "Подтвердить аварийную остановку"
+msgstr "Подтверждение аварийной остановки"
 
 msgid "Connected"
 msgstr "Подключено"
@@ -211,7 +211,7 @@ msgid "Delete Directory?"
 msgstr "Удалить каталог?"
 
 msgid "Delete File?"
-msgstr "Удалить Файл?"
+msgstr "Удалить файл?"
 
 msgid "Disable Motors"
 msgstr "Отключить моторы"
@@ -223,7 +223,7 @@ msgid "Disconnect"
 msgstr "Отключить"
 
 msgid "Distance (mm)"
-msgstr "Расстояние (mm)"
+msgstr "Расстояние (мм)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -240,7 +240,7 @@ msgid "Emergency Stop"
 msgstr "Аварийная остановка"
 
 msgid "Enable screen power management"
-msgstr "Включить управление питанием экрана"
+msgstr "Включить панель управление питанием"
 
 msgid "Error"
 msgstr "Ошибка"
@@ -369,7 +369,7 @@ msgid "Hide"
 msgstr "Скрывать"
 
 msgid "Hide sensors in Temp."
-msgstr "Скрыть датчики в Temp."
+msgstr "Скрыть датчики в панели \"Температура\"."
 
 msgid "Hide temp."
 msgstr "Скрыть температуру."
@@ -479,7 +479,7 @@ msgid "Last Duration"
 msgstr "Последняя продолжительность"
 
 msgid "Last Used"
-msgstr "Последнее использование"
+msgstr "Посл. использование"
 
 msgid "Layer Height"
 msgstr "Высота слоя"
@@ -814,7 +814,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "Показать полосу прокрутки"
 
 msgid "Show only devices that are able to be set"
-msgstr "Показывать только те устройства, которые можно настроить"
+msgstr "Показывать только те , которые можно настроить"
 
 msgid "Shutdown"
 msgstr "Выключить"
@@ -894,16 +894,22 @@ msgid "This will affect screw positions and mesh graph"
 msgstr "Это повлияет на положение винтов и график сетки"
 
 msgid "Timeout for screen black-out or power-off"
-msgstr "Тайм-аут для затемнения экрана или отключения питания"
+msgstr "Время до затемнения экрана"
 
 msgid "Timeout for screen black-out or power-off during printing"
-msgstr "Тайм-аут для затемнения экрана или отключения питания во время печати"
+msgstr "Время до затемнения экрана во время печати"
 
 msgid "Total:"
 msgstr "Итого:"
 
 msgid "Unknown Heater"
 msgstr "Неизвестный нагреватель"
+
+msgid "Remaining weight"
+msgstr "Оставшийся вес"
+
+msgid "Remaining length"
+msgstr "Оставшаяся длина"
 
 msgid "Unknown security type"
 msgstr "Неизвестный тип безопасности"
@@ -1184,7 +1190,7 @@ msgstr[2] "секунд"
 #~ msgstr "Версия KlipperScreen"
 
 #~ msgid "Show Only Heaters in Temp."
-#~ msgstr "Показать только нагреватели в темп."
+#~ msgstr "Показать только управляемые нагреватели"
 
 #~ msgid "Temp"
 #~ msgstr "Температура"
@@ -1214,7 +1220,7 @@ msgstr[2] "секунд"
 #~ msgstr "Bыключить"
 
 #~ msgid "Fan On"
-#~ msgstr "Bключи"
+#~ msgstr "Bключить"
 
 #~ msgid "Fast"
 #~ msgstr "Быстро"
