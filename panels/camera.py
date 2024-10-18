@@ -59,7 +59,12 @@ class Panel(ScreenPanel):
             vf += "hflip,"
         if cam["flip_vertical"]:
             vf += "vflip,"
-        vf += f"rotate:{cam['rotation'] * 3.14159 / 180}"
+        # Rotation filter is expensive. Omit it if angle is 0
+        if cam["rotation"] != 0:
+            vf += f"rotate:{cam['rotation'] * 3.14159 / 180}"
+        # Remove trailing comma is there is any
+        if len(vf) > 0 and vf[-1] == ',':
+            vf = vf[:-1]
         logging.info(f"video filters: {vf}")
 
         if self.mpv:
