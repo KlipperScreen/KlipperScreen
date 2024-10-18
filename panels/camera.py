@@ -54,24 +54,20 @@ class Panel(ScreenPanel):
         if '/webrtc' in url:
             self._screen.show_popup_message(_('WebRTC is not supported by the backend trying Stream'))
             url = url.replace('/webrtc', '/stream')
-        vf = ""
+        vf_list = []
         if cam["flip_horizontal"]:
-            vf += "hflip,"
+            vf_list.append("hflip")
         if cam["flip_vertical"]:
-            vf += "vflip,"
-        # Rotation filter is expensive. Omit it if angle is 0
+            vf_list.append("vflip")
         if cam["rotation"] != 0:
-            vf += f"rotate:{cam['rotation'] * 3.14159 / 180}"
-        # Remove trailing comma is there is any
-        if len(vf) > 0 and vf[-1] == ',':
-            vf = vf[:-1]
-        logging.info(f"video filters: {vf}")
+            vf_list.append(f"rotate:{cam['rotation'] * 3.14159 / 180}")
+        logging.info(f"video filters: {vf_list}")
 
         if self.mpv:
             self.mpv.terminate()
         self.mpv = mpv.MPV(fullscreen=True, log_handler=self.log, vo='gpu,wlshm,xv,x11')
 
-        self.mpv.vf = vf
+        self.mpv.vf = ','.join(vf_list)
 
         with suppress(Exception):
             self.mpv.profile = 'sw-fast'
@@ -101,13 +97,14 @@ class Panel(ScreenPanel):
             self._screen._menu_go_back()
 
     def log(self, loglevel, component, message):
-        if 'unable to decode' in message:  # skip proprietary app fields errors
-            return
         if (
-            loglevel == 'error'
-            and 'No Xvideo support found' not in message  # will fall back automatically
-            and 'youtube-dl' not in message  # needed for some streams, not relevant for our case
+            'unable to decode' in message  # skip proprietary app fields errors
+            or 'No Xvideo support found' in message  # will fall back to other vo automatically
+            or 'GBM' in message  # will fall back to other vo automatically
+            or 'open TTY for VT control' in message  # not important to notify in the UI
+            or 'youtube-dl' in message  # needed for some streams, not relevant for our case
         ):
+            return
+        if loglevel == 'error':
             self._screen.show_popup_message(f'{message}')
-        else:
             logging.debug(f'[{loglevel}] {component}: {message}')
