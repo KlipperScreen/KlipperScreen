@@ -107,4 +107,4 @@ class Panel(ScreenPanel):
             return
         if loglevel == 'error':
             self._screen.show_popup_message(f'{message}')
-            logging.debug(f'[{loglevel}] {component}: {message}')
+        logging.debug(f'[{loglevel}] {component}: {message}')
