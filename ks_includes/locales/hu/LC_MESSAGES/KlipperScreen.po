@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-09 18:08-0300\n"
-"PO-Revision-Date: 2024-07-06 18:04+0000\n"
+"PO-Revision-Date: 2024-10-18 14:01+0000\n"
 "Last-Translator: \"Zs.Antal\" <antonio092130@icloud.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/hu/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-rc\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -339,7 +339,7 @@ msgid "Font Size"
 msgstr "Betűméret"
 
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "Egérvezérlés vagy az érintőképernyő pontosságának ellenőrzése"
 
 msgid "Forget"
 msgstr "Elfelejtés"
@@ -416,10 +416,8 @@ msgstr "Érvénytelen"
 msgid "Invalid password"
 msgstr "Érvénytelen jelszó"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "Hőfok"
+msgstr "Rossz hőmérséklet"
 
 msgid "Inversely affects the icon size"
 msgstr "Fordítottan befolyásolja az ikon méretét"
@@ -636,10 +634,8 @@ msgstr[1] "Csomag frissül"
 msgid "Part Fan"
 msgstr "Tárgyhűtő"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "Jelszó mentve"
+msgstr "Jelszó"
 
 msgid "Password saved"
 msgstr "Jelszó mentve"
@@ -808,7 +804,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "Görgetősáv gombok megjelenítése"
 
 msgid "Show cursor"
-msgstr ""
+msgstr "Kurzor mutatása"
 
 msgid "Show only devices that are able to be set"
 msgstr "Csak a beállítható eszközök megjelenítése"
@@ -881,7 +877,7 @@ msgid "Temperature"
 msgstr "Hőfok"
 
 msgid "Temperature too low to extrude"
-msgstr ""
+msgstr "Extrudálási hőmérséklet túl alacsony"
 
 msgid "The system doesn't meet the minimum requirement"
 msgstr "A rendszer nem felel meg a minimális követelményeknek"
@@ -930,7 +926,7 @@ msgid "Useful for un-responsive touchscreens"
 msgstr "Hasznos a nem reagáló érintőképernyőknél"
 
 msgid "User"
-msgstr ""
+msgstr "Felhasználó"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "A WebRTC-t a Streamet próbáló háttérrendszer nem támogatja"
