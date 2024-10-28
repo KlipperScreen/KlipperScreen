@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-09 18:08-0300\n"
-"PO-Revision-Date: 2024-09-24 00:13+0000\n"
-"Last-Translator: \"Neko.vecter\" <Vecterfang@icloud.com>\n"
+"PO-Revision-Date: 2024-10-28 08:38+0000\n"
+"Last-Translator: China-Mr-Hou <kaixinowen@163.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/klipperscreen/klipperscreen/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -104,7 +104,7 @@ msgid "Bed Level"
 msgstr "热床调平"
 
 msgid "Bed Mesh"
-msgstr "网床"
+msgstr "床网"
 
 msgid "Both"
 msgstr "两个都"
@@ -344,7 +344,7 @@ msgid "Font Size"
 msgstr "字体大小"
 
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "用于鼠标控制或验证触摸屏的准确性"
 
 msgid "Forget"
 msgstr "忘记"
@@ -421,10 +421,8 @@ msgstr "无效"
 msgid "Invalid password"
 msgstr "密码无效"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "温度"
+msgstr "无效的温度"
 
 msgid "Inversely affects the icon size"
 msgstr "与预览图大小成反比"
@@ -476,7 +474,7 @@ msgid "Large"
 msgstr "大"
 
 msgid "Last Duration"
-msgstr "上一次的持续时间"
+msgstr "上次用时"
 
 msgid "Last Used"
 msgstr "上次使用"
@@ -639,10 +637,8 @@ msgstr[0] "软件包将被更新"
 msgid "Part Fan"
 msgstr "模型风扇"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "密码已保存"
+msgstr "密码"
 
 msgid "Password saved"
 msgstr "密码已保存"
@@ -811,7 +807,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "显示滚动条按钮"
 
 msgid "Show cursor"
-msgstr ""
+msgstr "显示光标"
 
 msgid "Show only devices that are able to be set"
 msgstr "只显示可以主动控制温度的设备"
@@ -862,7 +858,7 @@ msgid "Starting update for"
 msgstr "开始更新"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr "交换Z轴按钮位置，同时会改变其他的控制面板"
+msgstr "交换Z轴按钮位置，此设置影响其他的控制面板"
 
 msgid "System"
 msgstr "系统"
@@ -883,7 +879,7 @@ msgid "Temperature"
 msgstr "温度"
 
 msgid "Temperature too low to extrude"
-msgstr ""
+msgstr "温度过低无法挤出"
 
 msgid "The system doesn't meet the minimum requirement"
 msgstr "当前系统不满足最低要求"
@@ -931,7 +927,7 @@ msgid "Useful for un-responsive touchscreens"
 msgstr "帮助控制触摸响应不良的屏幕"
 
 msgid "User"
-msgstr ""
+msgstr "用户"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "不支持传送WebRTC至后台"
