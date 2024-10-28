@@ -30,6 +30,7 @@ from ks_includes.printer import Printer
 from ks_includes.widgets.keyboard import Keyboard
 from ks_includes.widgets.prompts import Prompt
 from ks_includes.widgets.lockscreen import LockScreen
+from ks_includes.widgets.screensaver import ScreenSaver
 from ks_includes.config import KlipperScreenConfig
 from panels.base_panel import BasePanel
 
@@ -63,12 +64,10 @@ class KlipperScreen(Gtk.Window):
     keyboard = None
     panels = {}
     popup_message = None
-    screensaver = None
     printers = None
     printer = None
     updating = False
     _ws = None
-    screensaver_timeout = None
     reinit_count = 0
     max_retries = 4
     initialized = False
@@ -78,7 +77,6 @@ class KlipperScreen(Gtk.Window):
     notification_log = []
     prompt = None
     tempstore_timeout = None
-
 
     def __init__(self, args):
         self.server_info = None
@@ -147,6 +145,7 @@ class KlipperScreen(Gtk.Window):
         self.show_cursor = self._config.get_main_config().getboolean("show_cursor", fallback=False)
         self.setup_gtk_settings()
         self.style_provider = Gtk.CssProvider()
+        self.screensaver = ScreenSaver(self)
         self.gtk = KlippyGtk(self)
         self.base_css = ""
         self.load_base_styles()
@@ -181,7 +180,7 @@ class KlipperScreen(Gtk.Window):
         self.gtk.set_cursor(show, window=self.get_window())
 
     def state_execute(self, state, callback):
-        self.close_screensaver()
+        self.screensaver.close()
         if 'printer_select' in self._cur_panels:
             logging.debug(f"Connected printer chaged {state}")
             return False
@@ -393,7 +392,7 @@ class KlipperScreen(Gtk.Window):
                 return
             self.last_popup_time = datetime.now()
 
-        self.close_screensaver()
+        self.screensaver.close()
         if self.popup_message is not None:
             self.close_popup_message()
 
@@ -591,7 +590,7 @@ class KlipperScreen(Gtk.Window):
             self._remove_current_panel()
             del self._cur_panels[-1]
         self._cur_panels.clear()
-        self.close_screensaver()
+        self.screensaver.close()
         gc.collect()
 
     def _remove_current_panel(self):
@@ -611,68 +610,6 @@ class KlipperScreen(Gtk.Window):
                 break
         self.attach_panel(self._cur_panels[-1])
 
-    def reset_screensaver_timeout(self, *args):
-        if self.screensaver_timeout is not None:
-            GLib.source_remove(self.screensaver_timeout)
-            self.screensaver_timeout = None
-        if self.use_dpms:
-            return
-        if self.printer and self.printer.state in ("printing", "paused"):
-            use_screensaver = self._config.get_main_config().get('screen_blanking_printing') != "off"
-        else:
-            use_screensaver = self._config.get_main_config().get('screen_blanking') != "off"
-        if use_screensaver:
-            self.screensaver_timeout = GLib.timeout_add_seconds(self.blanking_time, self.show_screensaver)
-
-    def show_screensaver(self):
-        logging.debug("Showing Screensaver")
-        if self.screensaver is not None:
-            self.close_screensaver()
-        if self.screensaver_timeout is not None:
-            GLib.source_remove(self.screensaver_timeout)
-            self.screensaver_timeout = None
-        if self.blanking_time == 0:
-            return False
-        self.remove_keyboard()
-        self.close_popup_message()
-        for dialog in self.dialogs:
-            logging.debug("Hiding dialog")
-            dialog.hide()
-
-        close = Gtk.Button()
-        close.connect("clicked", self.close_screensaver)
-
-        box = Gtk.Box(halign=Gtk.Align.CENTER, width_request=self.width, height_request=self.height)
-        box.pack_start(close, True, True, 0)
-        box.get_style_context().add_class("screensaver")
-        self.overlay.add_overlay(box)
-
-        # Avoid leaving a cursor-handle
-        close.grab_focus()
-        self.gtk.set_cursor(False, window=self.get_window())
-
-        self.screensaver = box
-        self.screensaver.show_all()
-        self.power_devices(None, self._config.get_main_config().get("screen_off_devices", ""), on=False)
-        return False
-
-    def close_screensaver(self, widget=None):
-        if self.screensaver is None:
-            return False
-        logging.debug("Closing Screensaver")
-        self.overlay.remove(self.screensaver)
-        self.screensaver = None
-        if self.use_dpms:
-            self.wake_screen()
-        else:
-            self.reset_screensaver_timeout()
-        for dialog in self.dialogs:
-            logging.info(f"Restoring Dialog {dialog}")
-            dialog.show()
-        self.gtk.set_cursor(self.show_cursor, window=self.get_window())
-        self.power_devices(None, self._config.get_main_config().get("screen_on_devices", ""), on=True)
-        self.lock_screen.relock()
-
     def check_dpms_state(self):
         if not self.use_dpms:
             return False
@@ -682,8 +619,7 @@ class KlipperScreen(Gtk.Window):
             self.set_dpms(False)
             return False
         elif state != functions.DPMS_State.On:
-            if self.screensaver is None:
-                self.show_screensaver()
+            self.screensaver.show()
         return True
 
     def wake_screen(self):
@@ -737,7 +673,7 @@ class KlipperScreen(Gtk.Window):
         logging.debug("Not using DPMS")
         if not self.wayland:
             os.system(f"xset -display {self.display_number} dpms 0 0 0")
-        self.reset_screensaver_timeout()
+        self.screensaver.reset_timeout()
         return
 
     def show_printer_select(self, widget=None):
