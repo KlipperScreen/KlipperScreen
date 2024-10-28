@@ -29,8 +29,10 @@ from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.printer import Printer
 from ks_includes.widgets.keyboard import Keyboard
 from ks_includes.widgets.prompts import Prompt
+from ks_includes.widgets.lockscreen import LockScreen
 from ks_includes.config import KlipperScreenConfig
 from panels.base_panel import BasePanel
+
 
 logging.getLogger("urllib3").setLevel(logging.WARNING)
 
@@ -76,6 +78,7 @@ class KlipperScreen(Gtk.Window):
     notification_log = []
     prompt = None
     tempstore_timeout = None
+
 
     def __init__(self, args):
         self.server_info = None
@@ -150,7 +153,9 @@ class KlipperScreen(Gtk.Window):
         self.set_icon_from_file(os.path.join(klipperscreendir, "styles", "icon.svg"))
         self.base_panel = BasePanel(self)
         self.change_theme(self.theme)
-        self.add(self.base_panel.main_grid)
+        self.overlay = Gtk.Overlay()
+        self.add(self.overlay)
+        self.overlay.add_overlay(self.base_panel.main_grid)
         self.show_all()
         self.update_cursor(self.show_cursor)
         min_ver = (3, 8)
@@ -167,6 +172,7 @@ class KlipperScreen(Gtk.Window):
             return
         self.base_panel.activate()
         self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
+        self.lock_screen = LockScreen(self)
         self.log_notification("KlipperScreen Started", 1)
         self.initial_connection()
 
@@ -639,8 +645,7 @@ class KlipperScreen(Gtk.Window):
         box = Gtk.Box(halign=Gtk.Align.CENTER, width_request=self.width, height_request=self.height)
         box.pack_start(close, True, True, 0)
         box.get_style_context().add_class("screensaver")
-        self.remove(self.base_panel.main_grid)
-        self.add(box)
+        self.overlay.add_overlay(box)
 
         # Avoid leaving a cursor-handle
         close.grab_focus()
@@ -655,9 +660,8 @@ class KlipperScreen(Gtk.Window):
         if self.screensaver is None:
             return False
         logging.debug("Closing Screensaver")
-        self.remove(self.screensaver)
+        self.overlay.remove(self.screensaver)
         self.screensaver = None
-        self.add(self.base_panel.main_grid)
         if self.use_dpms:
             self.wake_screen()
         else:
@@ -666,8 +670,8 @@ class KlipperScreen(Gtk.Window):
             logging.info(f"Restoring Dialog {dialog}")
             dialog.show()
         self.gtk.set_cursor(self.show_cursor, window=self.get_window())
-        self.show_all()
         self.power_devices(None, self._config.get_main_config().get("screen_on_devices", ""), on=True)
+        self.lock_screen.relock()
 
     def check_dpms_state(self):
         if not self.use_dpms:
@@ -1187,12 +1191,16 @@ class KlipperScreen(Gtk.Window):
         self.remove_tempstore_timeout()
         return self.init_tempstore()
 
-    def show_keyboard(self, entry=None, event=None):
+    def show_keyboard(self, entry=None, event=None, box=None, close_cb=None):
         if entry is None:
             logging.debug("Error: no entry provided for keyboard")
             return
+        if box is None:
+            box = self.base_panel.content
+        if close_cb is None:
+            close_cb = self.remove_keyboard
         if self.keyboard is not None:
-            self.remove_keyboard()
+            self.remove_keyboard(box=box)
             entry.grab_focus()
         kbd_grid = Gtk.Grid()
         kbd_grid.set_size_request(self.gtk.content_width, self.gtk.keyboard_height)
@@ -1206,11 +1214,12 @@ class KlipperScreen(Gtk.Window):
             kbd_grid.set_column_homogeneous(True)
             kbd_width = 2 if purpose == Gtk.InputPurpose.DIGITS else 3
         kbd_grid.attach(Gtk.Box(), 0, 0, 1, 1)
-        kbd_grid.attach(Keyboard(self, self.remove_keyboard, entry=entry), 1, 0, kbd_width, 1)
+        kbd = Keyboard(self, close_cb, entry=entry, box=box)
+        kbd_grid.attach(kbd, 1, 0, kbd_width, 1)
         kbd_grid.attach(Gtk.Box(), kbd_width + 1, 0, 1, 1)
         self.keyboard = {"box": kbd_grid}
-        self.base_panel.content.pack_end(kbd_grid, False, False, 0)
-        self.base_panel.content.show_all()
+        box.pack_end(kbd_grid, False, False, 0)
+        box.show_all()
 
     def _show_matchbox_keyboard(self, kbd_grid):
         env = os.environ.copy()
@@ -1240,12 +1249,14 @@ class KlipperScreen(Gtk.Window):
         }
         return
 
-    def remove_keyboard(self, entry=None, event=None):
+    def remove_keyboard(self, entry=None, event=None, box=None):
         if self.keyboard is None:
             return
+        if box is None:
+            box = self.base_panel.content
         if 'process' in self.keyboard:
             os.kill(self.keyboard['process'].pid, SIGTERM)
-        self.base_panel.content.remove(self.keyboard['box'])
+        box.remove(self.keyboard['box'])
         self.keyboard = None
         if entry:
             entry.set_sensitive(False)  # Move the focus

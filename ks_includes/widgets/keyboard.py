@@ -10,7 +10,7 @@ from gi.repository import Gtk, GLib
 class Keyboard(Gtk.Box):
     langs = ["de", "en", "fr", "es"]
 
-    def __init__(self, screen, close_cb, entry=None):
+    def __init__(self, screen, close_cb, entry=None, box=None):
         super().__init__(orientation=Gtk.Orientation.VERTICAL)
         self.shift = []
         self.shift_active = False
@@ -20,6 +20,7 @@ class Keyboard(Gtk.Box):
         self.timeout = self.clear_timeout = None
         self.entry = entry
         self.purpose = self.entry.get_input_purpose()
+        self.box = box or None
 
         language = self.detect_language(screen._config.get_main_config().get("language", None))
 
@@ -218,7 +219,7 @@ class Keyboard(Gtk.Box):
         if key == "⌫":
             Gtk.Entry.do_backspace(self.entry)
         elif key == "↓":
-            self.close_cb(entry=self.entry)
+            self.close_cb(entry=self.entry, box=self.box)
             return
         elif key == "↑":
             self.toggle_shift()

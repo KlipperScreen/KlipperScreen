@@ -24,12 +24,16 @@ class Panel(ScreenPanel):
         restart_ks = self._gtk.Button("refresh", _("Restart") + " KlipperScreen", "color3")
         restart_ks.connect("clicked", self._screen.restart_ks)
 
+        lock_screen = self._gtk.Button("lock", _("Lock"), "color3")
+        lock_screen.connect("clicked", self._screen.lock_screen.lock)
+
         self.main = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         if self._printer and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'}:
-            self.main.attach(estop, 0, 0, 1, 1)
+            self.main.attach(estop, 0, 0, 1, 2)
         self.main.attach(restart_ks, 1, 0, 1, 1)
-        self.main.attach(poweroff, 0, 1, 1, 1)
-        self.main.attach(restart, 1, 1, 1, 1)
+        self.main.attach(lock_screen, 2, 0, 1, 1)
+        self.main.attach(poweroff, 1, 1, 1, 1)
+        self.main.attach(restart, 2, 1, 1, 1)
         self.content.add(self.main)
 
     def reboot_poweroff(self, widget, method):
