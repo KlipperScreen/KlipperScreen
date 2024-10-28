@@ -563,6 +563,24 @@ popover button {
     margin: 0;
 }
 
+.lock
+.lock button
+.lock button:hover,
+.lock button:focus,
+.lock button:active {
+    border: 0;
+    margin: 0;
+    background-color: Transparent;
+}
+
+.lockscreen_entry {
+    margin: 2em;
+}
+
+.lockscreen_button {
+    padding: 2em;
+}
+
 .screensaver,
 .screensaver button,
 .screensaver button:hover,
