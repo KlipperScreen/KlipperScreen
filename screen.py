@@ -1228,13 +1228,13 @@ class KlipperScreen(Gtk.Window):
         keyboard = Gtk.Socket()
         kbd_grid.get_style_context().add_class("keyboard_matchbox")
         kbd_grid.attach(keyboard, 0, 0, 1, 1)
-        self.base_panel.content.pack_end(box, False, False, 0)
+        self.base_panel.content.pack_end(kbd_grid, False, False, 0)
 
         self.show_all()
         keyboard.add_id(xid)
 
         self.keyboard = {
-            "box": box,
+            "box": kbd_grid,
             "process": p,
             "socket": keyboard
         }
