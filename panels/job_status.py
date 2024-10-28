@@ -465,7 +465,7 @@ class Panel(ScreenPanel):
             self.buttons[arg].set_sensitive(False)
 
     def new_print(self):
-        self._screen.close_screensaver()
+        self._screen.screensaver.close()
         if "virtual_sdcard" in self._printer.data:
             logging.info("reseting progress")
             self._printer.data["virtual_sdcard"]["progress"] = 0
@@ -722,7 +722,7 @@ class Panel(ScreenPanel):
         self.show_buttons_for_state()
 
     def _add_timeout(self, timeout):
-        self._screen.close_screensaver()
+        self._screen.screensaver.close()
         if timeout != 0:
             GLib.timeout_add_seconds(timeout, self.close_panel)
 
