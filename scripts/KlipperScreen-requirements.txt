@@ -1,6 +1,6 @@
 jinja2==3.1.4;python_version>="3.6"
 requests==2.32.3;python_version>="3.8"
-sdbus==0.11.1;python_version>="3.8"
+sdbus==0.13.0;python_version>="3.8"
 sdbus_networkmanager==2.0.0;python_version>="3.8"
 
 # libmpv-dev 0.33 is required for 1.0
