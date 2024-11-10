@@ -7,6 +7,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib, Pango
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.sdbus_nm import SdbusNm
+from datetime import datetime
 
 
 class Panel(ScreenPanel):
@@ -14,6 +15,7 @@ class Panel(ScreenPanel):
     def __init__(self, screen, title):
         title = title or _("Network")
         super().__init__(screen, title)
+        self.last_drop_time = datetime.now()
         self.show_add = False
         try:
             self.sdbus_nm = SdbusNm(self.popup_callback)
@@ -263,6 +265,18 @@ class Panel(ScreenPanel):
         del self.networks[bssid]
         return
 
+    def on_popup_shown(self, combo_box, params):
+        if combo_box.get_property("popup-shown"):
+            logging.debug("Dropdown popup show")
+            self.last_drop_time = datetime.now()
+        else:
+            elapsed = (datetime.now() - self.last_drop_time).total_seconds()
+            if elapsed < 0.2:
+                logging.debug(f"Dropdown closed too fast ({elapsed}s)")
+                GLib.timeout_add(50, combo_box.popup)
+                return
+            logging.debug("Dropdown popup close")
+
     def show_add_network(self, widget, ssid):
         if self.show_add:
             return
@@ -274,12 +288,14 @@ class Panel(ScreenPanel):
             del self.labels['add_network']
 
         eap_method = Gtk.ComboBoxText(hexpand=True)
+        eap_method.connect("notify::popup-shown", self.on_popup_shown)
         for method in ("peap", "ttls", "pwd", "leap", "md5"):
             eap_method.append(method, method.upper())
         self.labels['network_eap_method'] = eap_method
         eap_method.set_active(0)
 
         phase2 = Gtk.ComboBoxText(hexpand=True)
+        phase2.connect("notify::popup-shown", self.on_popup_shown)
         for method in ("mschapv2", "gtc", "pap", "chap", "mschap", "disabled"):
             phase2.append(method, method.upper())
         self.labels['network_phase2'] = phase2
