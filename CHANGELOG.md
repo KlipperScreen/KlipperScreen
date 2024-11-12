@@ -2,12 +2,17 @@
 This just tracks the most notable changes, if you want all the details checkout the commit history.
 Probably all versions contain changes regarding documentation, translation, fixes and other minor refactors
 
+## v0.4.5-*
+
+* menu buttons can have an 'active' status to change their appearance
+* basic lockscreen for shows or kids
+
 ## v0.4.5  (Oct 28, 2024)
 
-* feat: allow calling KlipperScreen panels from gcode
-* feat: mesh will automatically call for z_tilt or quad_level if not applied
-* feat: show battery status in the topbar
-* feat: keyboard to keypad input switch with auto pre-selection
+* allow calling KlipperScreen panels from gcode
+* bed_mesh: automatically call for z_tilt or quad_level if not applied
+* show battery status in the topbar
+* macros: keyboard to keypad input switch with auto pre-selection
 
 ## v0.4.4  (Sep 16, 2024)
 * support for different moonraker routes
