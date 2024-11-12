@@ -107,7 +107,7 @@ class Panel(ScreenPanel):
             for item_dict in self.items:
                 if key in item_dict and 'active' in item_dict[key]:
                     if self.evaluate_enable(item_dict[key]['active']):
-                        item.get_style_context().add_class("button_active")
+                        item.get_style_context().add_class("menu_active")
                     else:
-                        item.get_style_context().remove_class("button_active")
+                        item.get_style_context().remove_class("menu_active")
                     break

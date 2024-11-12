@@ -80,6 +80,13 @@ button.active {
     background-color: @active;
 }
 
+
+button.menu_active {
+    border-width: 0.25em;
+    border-style: dashed;
+    border-color: @active;
+}
+
 button:disabled,
 button.color1:disabled,
 button.color2:disabled,
