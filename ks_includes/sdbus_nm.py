@@ -272,10 +272,13 @@ class SdbusNm:
                 "key-mgmt": ("s", "wpa-eap"),
                 "eap": ("as", [eap_method]),
                 "identity": ("s", identity),
-                "password": ("s", psk),
+                "password": ("s", psk.encode("utf-8")),
             }
             if phase2:
-                properties["802-11-wireless-security"]["phase2_auth"] = ("s", phase2)
+                if eap_method == "ttls":
+                    properties["802-11-wireless-security"]["phase2_autheap"] = ("s", phase2)
+                else:
+                    properties["802-11-wireless-security"]["phase2_auth"] = ("s", phase2)
         elif "WEP" in security_type:
             properties["802-11-wireless-security"] = {
                 "key-mgmt": ("s", "none"),
