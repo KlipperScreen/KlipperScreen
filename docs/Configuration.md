@@ -31,6 +31,9 @@ The options listed here are not editable from within the user interface.
 # set this to False. See Menu section below.
 # use_default_menu: True
 
+# Only show temperature devices that are able to be set (e.g. heater and bed)
+# only_heaters: True
+
 # Define one or more moonraker power devices that turn on/off with the screensaver (CSV list)
 # screen_on_devices: example1, example2
 # screen_off_devices:  example1, example2
