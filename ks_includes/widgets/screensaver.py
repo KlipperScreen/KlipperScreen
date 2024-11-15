@@ -31,9 +31,10 @@ class ScreenSaver:
                 self.screen.blanking_time, self.show)
 
     def show(self):
-        logging.debug("Showing Screensaver")
         if self.blackbox is not None:
-            self.close()
+            logging.debug("Screensaver active")
+            return
+        logging.debug("Showing Screensaver")
         if self.screensaver_timeout is not None:
             GLib.source_remove(self.screensaver_timeout)
             self.screensaver_timeout = None
