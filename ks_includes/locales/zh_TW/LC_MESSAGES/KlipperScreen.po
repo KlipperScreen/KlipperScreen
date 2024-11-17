@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-09 18:08-0300\n"
-"PO-Revision-Date: 2024-10-28 08:38+0000\n"
-"Last-Translator: China-Mr-Hou <kaixinowen@163.com>\n"
+"PO-Revision-Date: 2024-11-15 16:00+0000\n"
+"Last-Translator: Kayz C <kayzed.x@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/klipperscreen/klipperscreen/zh_Hant/>\n"
 "Language: zh_TW\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.8.2-dev\n"
+"X-Generator: Weblate 5.9-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -36,10 +36,10 @@ msgid "ADXL Not Configured"
 msgstr "未設定ADXL"
 
 msgid "Abort"
-msgstr "取消"
+msgstr "中止"
 
 msgid "Acceleration:"
-msgstr "加速度"
+msgstr "加速度："
 
 msgid "Accept"
 msgstr "接受"
@@ -51,15 +51,15 @@ msgid "All"
 msgstr "全部"
 
 msgid "Apply"
-msgstr "應用"
+msgstr "套用"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr "將 %s%.3f 偏移量應用於限位？"
+msgstr "將 %s%.3f 偏移套用於限位？"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr "將 %s%.3f 偏移量應用於探針？"
+msgstr "將 %s%.3f 偏移套用於探針？"
 
 msgid "Archived"
 msgstr "歸檔"
@@ -98,7 +98,7 @@ msgid "Auto-open Extrude On Pause"
 msgstr "暫停時自動打開擠出"
 
 msgid "Auto-scroll"
-msgstr "自動滾屏"
+msgstr "自動捲動"
 
 msgid "Bed Level"
 msgstr "熱床調平"
@@ -140,7 +140,7 @@ msgid "Cannot connect to Moonraker"
 msgstr "无法连接到Moonraker"
 
 msgid "Changes how the interface looks"
-msgstr "改变界面外观"
+msgstr "變更介面外觀"
 
 msgid "Changes how the time remaining is calculated"
 msgstr "更改剩餘時間的計算方式"
@@ -173,14 +173,14 @@ msgid "Connected"
 msgstr "已連線"
 
 msgid "Connecting"
-msgstr ""
+msgstr "連接中"
 
 #, python-format
 msgid "Connecting to %s"
 msgstr "連線到 %s"
 
 msgid "Connection failed"
-msgstr ""
+msgstr "連接失敗"
 
 msgid "Console"
 msgstr "控制台"
@@ -189,10 +189,10 @@ msgid "Cooldown"
 msgstr "冷卻"
 
 msgid "Couldn't add network"
-msgstr ""
+msgstr "無法新增網路"
 
 msgid "Current"
-msgstr ""
+msgstr "目前"
 
 msgid "Current percentage and graph line"
 msgstr "當前百分比和折線圖"
@@ -226,7 +226,7 @@ msgstr "擠出長度（mm）"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
+msgstr "您想忘記或斷開%s嗎？"
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -245,28 +245,28 @@ msgid "Error"
 msgstr "錯誤"
 
 msgid "Error clearing active spool"
-msgstr ""
+msgstr "清除使用中的線盤時發生錯誤"
 
 msgid "Error getting active spool"
-msgstr ""
+msgstr "取得使用中的線盤時發生錯誤"
 
 msgid "Error setting active spool"
-msgstr ""
+msgstr "設定使用中的線盤時發生錯誤"
 
 msgid "Error trying to fetch spools"
-msgstr ""
+msgstr "嘗試獲取線盤時發生錯誤"
 
 msgid "Error: Couldn't get a position to probe"
 msgstr "錯誤：無法取得要探測的位置"
 
 msgid "Estimated Time"
-msgstr ""
+msgstr "預計時間"
 
 msgid "Estimated Time Method"
 msgstr "估算剩餘時間方式"
 
 msgid "Example"
-msgstr ""
+msgstr "範例"
 
 msgid "Exclude Object"
 msgstr "排除目標"
@@ -287,10 +287,10 @@ msgid "Extrusion -"
 msgstr "擠壓 -"
 
 msgid "Failed to delete connection"
-msgstr ""
+msgstr "刪除連線失敗"
 
 msgid "Failed to initialize"
-msgstr ""
+msgstr "初始化失敗"
 
 msgid "Failed, adjust position first"
 msgstr "失敗，請先調整位置"
@@ -299,7 +299,7 @@ msgid "Fan"
 msgstr "風扇"
 
 msgid "Filament"
-msgstr ""
+msgstr "線材"
 
 msgid "Filament Used"
 msgstr "已消耗耗材"
@@ -344,10 +344,10 @@ msgid "Font Size"
 msgstr "字型大小"
 
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "用於滑鼠控制或驗證觸控螢幕的準確性"
 
 msgid "Forget"
-msgstr ""
+msgstr "忘記"
 
 msgid "Full Update"
 msgstr "全部更新"
@@ -356,7 +356,7 @@ msgid "Gcodes"
 msgstr ""
 
 msgid "Getting IP address"
-msgstr ""
+msgstr "取得IP位址"
 
 msgid "Go Back"
 msgstr "返回"
@@ -410,7 +410,7 @@ msgid "Input Shaper"
 msgstr "共振補償"
 
 msgid "Insufficient privileges"
-msgstr ""
+msgstr "權限不足"
 
 msgid "Interface"
 msgstr "介面"
@@ -421,13 +421,11 @@ msgstr "無效"
 msgid "Invalid password"
 msgstr "密碼無效"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "溫度"
+msgstr "無效的溫度"
 
 msgid "Inversely affects the icon size"
-msgstr ""
+msgstr "反轉圖示大小效果"
 
 msgid "Invert X"
 msgstr "反轉X軸"
@@ -442,10 +440,10 @@ msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "這可能需要5分鐘以上的時間，這取決於加熱器的功率。"
 
 msgid "It's possible that the configuration is not correct"
-msgstr ""
+msgstr "配置可能不正確"
 
 msgid "Job Status"
-msgstr ""
+msgstr "工作狀態"
 
 msgid "Klipper Restart"
 msgstr "重啟Klipper"
@@ -467,7 +465,7 @@ msgstr "Klipper將重新啟動"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
+msgstr "OAD_FILAMENT/UNLOAD_FILAMENT 已被隱藏，應從擠出功能中使用"
 
 msgid "Language"
 msgstr "介面語言"
@@ -476,19 +474,19 @@ msgid "Large"
 msgstr "大"
 
 msgid "Last Duration"
-msgstr ""
+msgstr "上次耗時"
 
 msgid "Last Used"
 msgstr "最後使用"
 
 msgid "Layer Height"
-msgstr ""
+msgstr "層高"
 
 msgid "Layer:"
 msgstr "層："
 
 msgid "Leds"
-msgstr ""
+msgstr "LED"
 
 msgid "Left:"
 msgstr "剩餘時間："
@@ -530,7 +528,7 @@ msgid "Max Velocity"
 msgstr "最大速度"
 
 msgid "Max:"
-msgstr ""
+msgstr "最大："
 
 msgid "Maximum"
 msgstr "最大"
@@ -554,10 +552,10 @@ msgid "Menu"
 msgstr "選單"
 
 msgid "Minimum Cruise Ratio"
-msgstr ""
+msgstr "最小巡航率"
 
 msgid "Minimum:"
-msgstr ""
+msgstr "最小："
 
 msgid "Modified"
 msgstr "已修改"
@@ -581,13 +579,13 @@ msgid "Network"
 msgstr "網路"
 
 msgid "Network connected"
-msgstr ""
+msgstr "網路已連線"
 
 msgid "Network disconnected"
-msgstr ""
+msgstr "網路已斷線"
 
 msgid "Network not found"
-msgstr ""
+msgstr "未找到網路"
 
 msgid "Never"
 msgstr "從不"
@@ -599,7 +597,7 @@ msgid "No elegible macros:"
 msgstr "無可用巨集:"
 
 msgid "No info available"
-msgstr ""
+msgstr "沒有可用的資訊"
 
 msgid "No mesh has been loaded"
 msgstr "未載入網床"
@@ -608,25 +606,25 @@ msgid "No wireless interface has been found"
 msgstr "未找到wifi介面"
 
 msgid "Not all screens support this"
-msgstr ""
+msgstr "並非所有螢幕都支持此功能"
 
 msgid "Not working or not configured"
-msgstr ""
+msgstr "無法運作或未配置"
 
 msgid "Nothing selected"
 msgstr "未選擇任何內容"
 
 msgid "Notification log empty"
-msgstr ""
+msgstr "通知紀錄為空"
 
 msgid "Notifications"
-msgstr ""
+msgstr "通知"
 
 msgid "Nozzle diameter"
-msgstr ""
+msgstr "噴嘴直徑"
 
 msgid "Only for the move panel"
-msgstr ""
+msgstr "僅用於移動面板"
 
 #, python-format
 msgid "Outdated by %d"
@@ -639,10 +637,8 @@ msgstr[0] "軟體包將被更新"
 msgid "Part Fan"
 msgstr "模型風扇"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "密碼已儲存"
+msgstr "密碼"
 
 msgid "Password saved"
 msgstr "密碼已儲存"
@@ -663,7 +659,7 @@ msgid "Please recompile and flash the micro-controller."
 msgstr "請重新編譯並燒錄微控制器。"
 
 msgid "Please wait"
-msgstr ""
+msgstr "請稍候"
 
 msgid "Power"
 msgstr "電源"
@@ -672,13 +668,13 @@ msgid "Power On Printer"
 msgstr "啟動列印機"
 
 msgid "Pressure Advance"
-msgstr "壓力推進"
+msgstr "壓力提前"
 
 msgid "Pressure Advance:"
 msgstr "壓力推進："
 
 msgid "Pressure advance"
-msgstr ""
+msgstr "壓力提前"
 
 msgid "Print"
 msgstr "列印"
@@ -705,7 +701,7 @@ msgid "Profile Name:"
 msgstr "設定檔名稱："
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "在尋求幫助時，請提供 KlipperScreen.log。\n"
 
 msgid "Quad Gantry Level"
 msgstr "龍門架調平"
@@ -729,7 +725,7 @@ msgid "Refresh"
 msgstr "重新整理"
 
 msgid "Remove network"
-msgstr ""
+msgstr "移除網路"
 
 msgid "Rename/Move:"
 msgstr "重新命名/移動："
@@ -759,7 +755,7 @@ msgid "Retrying"
 msgstr "正在重試"
 
 msgid "Rotation invalid"
-msgstr ""
+msgstr "旋轉無效"
 
 msgid "Save"
 msgstr "儲存"
@@ -790,7 +786,7 @@ msgid "Screws Adjust"
 msgstr "螺絲調整"
 
 msgid "Screws not used:"
-msgstr ""
+msgstr "未使用的螺絲："
 
 msgid "Send"
 msgstr "發送"
@@ -808,13 +804,13 @@ msgid "Show Heater Power"
 msgstr "顯示加熱器功率"
 
 msgid "Show Scrollbars Buttons"
-msgstr ""
+msgstr "顯示捲軸按鈕"
 
 msgid "Show cursor"
-msgstr ""
+msgstr "顯示游標"
 
 msgid "Show only devices that are able to be set"
-msgstr ""
+msgstr "僅顯示可以設置的設備"
 
 msgid "Shutdown"
 msgstr "關閉"
@@ -832,7 +828,7 @@ msgid "Small"
 msgstr "小"
 
 msgid "Smooth time"
-msgstr ""
+msgstr "平滑時間"
 
 msgid "Speed (mm/s)"
 msgstr "速度(mm/s)"
@@ -850,7 +846,7 @@ msgid "Square Corner Velocity"
 msgstr "直角速度"
 
 msgid "Standby"
-msgstr ""
+msgstr "待機"
 
 msgid "Start"
 msgstr "開始"
@@ -862,7 +858,7 @@ msgid "Starting update for"
 msgstr "開始更新"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr ""
+msgstr "交換按鈕位置，此選項將影響其他面板"
 
 msgid "System"
 msgstr "系統"
@@ -874,7 +870,7 @@ msgid "System Shutdown"
 msgstr "關閉系統"
 
 msgid "System:"
-msgstr ""
+msgstr "系統："
 
 msgid "Temp (°C)"
 msgstr "溫度 (°C)"
@@ -883,22 +879,22 @@ msgid "Temperature"
 msgstr "溫度"
 
 msgid "Temperature too low to extrude"
-msgstr ""
+msgstr "溫度過低無法擠出"
 
 msgid "The system doesn't meet the minimum requirement"
-msgstr ""
+msgstr "系統不符合最低要求"
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr ""
+msgstr "此面板最多支援 9 顆調平螺絲排列於 3x3 格網中"
 
 msgid "This will affect screw positions and mesh graph"
-msgstr ""
+msgstr "這將影響螺絲位置和網格圖表"
 
 msgid "Timeout for screen black-out or power-off"
-msgstr ""
+msgstr "螢幕轉黑或關機的超時設定"
 
 msgid "Timeout for screen black-out or power-off during printing"
-msgstr ""
+msgstr "列印過程中螢幕轉黑或關機的超時設定"
 
 msgid "Total:"
 msgstr "合計："
@@ -907,7 +903,7 @@ msgid "Unknown Heater"
 msgstr "未知加熱器"
 
 msgid "Unknown security type"
-msgstr ""
+msgstr "未知的安全類型"
 
 msgid "Unload"
 msgstr "解除安裝"
@@ -928,16 +924,16 @@ msgid "Updating"
 msgstr "正在更新"
 
 msgid "Useful for un-responsive touchscreens"
-msgstr ""
+msgstr "對於無回應的觸控螢幕很有幫助"
 
 msgid "User"
-msgstr ""
+msgstr "使用者"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr ""
 
 msgid "Working"
-msgstr ""
+msgstr "工作中"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY軸移動速度(mm/s)"
@@ -966,27 +962,27 @@ msgstr[0] "更改"
 
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
+msgstr[0] "天"
 
 msgid "g"
-msgstr ""
+msgstr "g"
 
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "小時"
 
 msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
+msgstr "使用 rename_existing 的巨集將會被隱藏"
 
 msgid "macros with a name starting with '_' are hidden"
-msgstr ""
+msgstr "以 ' _ '開頭的巨集將會被隱藏"
 
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "分"
 
 msgid "mm"
-msgstr "秒"
+msgstr "mm"
 
 msgid "mm/s"
 msgstr "mm/s"
@@ -998,11 +994,11 @@ msgid "mm³/s"
 msgstr "mm³/s"
 
 msgid "s"
-msgstr ""
+msgstr "s"
 
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
+msgstr[0] "秒"
 
 #~ msgid "Hide temp."
 #~ msgstr "隱藏溫度"
