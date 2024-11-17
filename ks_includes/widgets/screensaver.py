@@ -13,6 +13,9 @@ class ScreenSaver:
         self.screensaver_timeout = None
         self.blackbox = None
 
+    def is_showing(self):
+        return self.blackbox is not None
+
     def reset_timeout(self, *args):
         if self.screensaver_timeout is not None:
             GLib.source_remove(self.screensaver_timeout)
