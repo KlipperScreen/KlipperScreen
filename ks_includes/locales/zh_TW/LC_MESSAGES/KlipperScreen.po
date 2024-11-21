@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-09 18:08-0300\n"
-"PO-Revision-Date: 2024-11-15 16:00+0000\n"
+"PO-Revision-Date: 2024-11-21 13:02+0000\n"
 "Last-Translator: Kayz C <kayzed.x@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/klipperscreen/klipperscreen/zh_Hant/>\n"
@@ -62,7 +62,7 @@ msgid "Apply %s%.3f offset to Probe?"
 msgstr "將 %s%.3f 偏移套用於探針？"
 
 msgid "Archived"
-msgstr "歸檔"
+msgstr "已封存"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "你確定要排除該目標嗎？"
@@ -119,7 +119,7 @@ msgid "Calibrating"
 msgstr "正在校準"
 
 msgid "Camera"
-msgstr "相機"
+msgstr "攝影機"
 
 msgid "Can't set above the maximum:"
 msgstr "設定值超出最大值："
@@ -137,7 +137,7 @@ msgid "Cancelling"
 msgstr "正在取消"
 
 msgid "Cannot connect to Moonraker"
-msgstr "无法连接到Moonraker"
+msgstr "無法連接到Moonraker"
 
 msgid "Changes how the interface looks"
 msgstr "變更介面外觀"
@@ -219,7 +219,7 @@ msgid "Disable for 12hs with am / pm"
 msgstr "在十二小時顯示模式中不顯示AM/PM"
 
 msgid "Disconnect"
-msgstr "断开"
+msgstr "斷開連線"
 
 msgid "Distance (mm)"
 msgstr "擠出長度（mm）"
@@ -239,7 +239,7 @@ msgid "Emergency Stop"
 msgstr "緊急停止"
 
 msgid "Enable screen power management"
-msgstr "開啟螢幕功率管理功能"
+msgstr "開啟螢幕電源管理功能"
 
 msgid "Error"
 msgstr "錯誤"
@@ -302,16 +302,16 @@ msgid "Filament"
 msgstr "線材"
 
 msgid "Filament Used"
-msgstr "已消耗耗材"
+msgstr "已用線材"
 
 msgid "Filament total:"
-msgstr "使用耗材總數："
+msgstr "使用線材總數："
 
 msgid "Filament used:"
-msgstr "使用耗材："
+msgstr "已用線材："
 
 msgid "Filament:"
-msgstr "耗材："
+msgstr "線材："
 
 msgid "File"
 msgstr "檔案"
@@ -323,7 +323,7 @@ msgid "Filter"
 msgstr "過濾器"
 
 msgid "Finding ADXL"
-msgstr "查詢ADXL"
+msgstr "尋找ADXL中"
 
 msgid "Fine Tuning"
 msgstr "微調"
@@ -353,7 +353,7 @@ msgid "Full Update"
 msgstr "全部更新"
 
 msgid "Gcodes"
-msgstr ""
+msgstr "Gcode"
 
 msgid "Getting IP address"
 msgstr "取得IP位址"
@@ -368,25 +368,25 @@ msgid "Hide"
 msgstr "隱藏"
 
 msgid "Hide sensors in Temp."
-msgstr "在溫度顯示中隱藏其他感測器"
+msgstr "在溫度顯示中隱藏感測器"
 
 msgid "Home"
-msgstr "歸零"
+msgstr "歸位"
 
 msgid "Home All"
-msgstr "全部歸零"
+msgstr "全部歸位"
 
 msgid "Home X"
-msgstr "X軸歸零"
+msgstr "歸位X軸"
 
 msgid "Home XY"
-msgstr "XY軸歸零"
+msgstr "歸位XY軸"
 
 msgid "Home Y"
-msgstr "Y軸歸零"
+msgstr "歸位Y軸"
 
 msgid "Home Z"
-msgstr "Z軸歸零"
+msgstr "歸位Z軸"
 
 msgid "Host"
 msgstr "主機"
@@ -407,7 +407,7 @@ msgid "Initiate a PID calibration for:"
 msgstr "啟動PID校準："
 
 msgid "Input Shaper"
-msgstr "共振補償"
+msgstr "輸入整形"
 
 msgid "Insufficient privileges"
 msgstr "權限不足"
@@ -465,10 +465,10 @@ msgstr "Klipper將重新啟動"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "OAD_FILAMENT/UNLOAD_FILAMENT 已被隱藏，應從擠出功能中使用"
+msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT 已被隱藏，應從擠出功能中使用"
 
 msgid "Language"
-msgstr "介面語言"
+msgstr "語言"
 
 msgid "Large"
 msgstr "大"
@@ -483,7 +483,7 @@ msgid "Layer Height"
 msgstr "層高"
 
 msgid "Layer:"
-msgstr "層："
+msgstr "層數："
 
 msgid "Leds"
 msgstr "LED"
@@ -495,10 +495,10 @@ msgid "Limits"
 msgstr "列印機限制"
 
 msgid "Load"
-msgstr "載入耗材"
+msgstr "裝載線材"
 
 msgid "Loading..."
-msgstr "載入中..."
+msgstr "裝載中..."
 
 msgid "Lost Connection to Moonraker"
 msgstr "與Moonraker失去連接"
@@ -564,7 +564,7 @@ msgid "Moonraker: connected"
 msgstr "Moonraker：已連線"
 
 msgid "More"
-msgstr "更多設定"
+msgstr "更多"
 
 msgid "Move"
 msgstr "移動"
@@ -600,13 +600,13 @@ msgid "No info available"
 msgstr "沒有可用的資訊"
 
 msgid "No mesh has been loaded"
-msgstr "未載入網床"
+msgstr "未載入網格"
 
 msgid "No wireless interface has been found"
-msgstr "未找到wifi介面"
+msgstr "未找到WiFi介面"
 
 msgid "Not all screens support this"
-msgstr "並非所有螢幕都支持此功能"
+msgstr "並非所有螢幕都支援此功能"
 
 msgid "Not working or not configured"
 msgstr "無法運作或未配置"
@@ -632,10 +632,10 @@ msgstr "已過時 %d"
 
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
-msgstr[0] "軟體包將被更新"
+msgstr[0] "套件將被更新"
 
 msgid "Part Fan"
-msgstr "模型風扇"
+msgstr "列印件風扇"
 
 msgid "Password"
 msgstr "密碼"
@@ -671,7 +671,7 @@ msgid "Pressure Advance"
 msgstr "壓力提前"
 
 msgid "Pressure Advance:"
-msgstr "壓力推進："
+msgstr "壓力提前："
 
 msgid "Pressure advance"
 msgstr "壓力提前"
@@ -710,7 +710,7 @@ msgid "Raise Nozzle"
 msgstr "升高噴嘴"
 
 msgid "Recover"
-msgstr "恢復"
+msgstr "還原"
 
 msgid "Recover Hard"
 msgstr "硬恢復(git recover hard)"
@@ -737,7 +737,7 @@ msgid "Resume"
 msgstr "繼續"
 
 msgid "Retract"
-msgstr "抽回"
+msgstr "回抽"
 
 msgid "Retraction"
 msgstr "回抽"
@@ -813,7 +813,7 @@ msgid "Show only devices that are able to be set"
 msgstr "僅顯示可以設置的設備"
 
 msgid "Shutdown"
-msgstr "關閉"
+msgstr "關機"
 
 msgid "Size"
 msgstr "大小"
@@ -897,10 +897,10 @@ msgid "Timeout for screen black-out or power-off during printing"
 msgstr "列印過程中螢幕轉黑或關機的超時設定"
 
 msgid "Total:"
-msgstr "合計："
+msgstr "總計："
 
 msgid "Unknown Heater"
-msgstr "未知加熱器"
+msgstr "未知的加熱器"
 
 msgid "Unknown security type"
 msgstr "未知的安全類型"
@@ -930,7 +930,7 @@ msgid "User"
 msgstr "使用者"
 
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
+msgstr "WebRTC 不被目前後端支持，請嘗試使用其他串流媒體方式"
 
 msgid "Working"
 msgstr "工作中"
