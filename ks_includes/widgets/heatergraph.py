@@ -1,6 +1,7 @@
 import datetime
 import logging
 import math
+from array import array
 
 import gi
 
@@ -69,9 +70,11 @@ class HeaterGraph(Gtk.DrawingArea):
         mnum = [0]
         for device in self.store:
             if self.store[device]['show']:
-                if temp := self.printer.get_temp_store(device, "temperatures", data_points):
+                temp = self.printer.get_temp_store(device, "temperatures", data_points)
+                if isinstance(temp, list):
                     mnum.append(max(temp))
-                if target := self.printer.get_temp_store(device, "targets", data_points):
+                target = self.printer.get_temp_store(device, "targets", data_points)
+                if isinstance(target, list):
                     mnum.append(max(target))
         return max(mnum)
 
