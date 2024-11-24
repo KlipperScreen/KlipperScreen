@@ -91,6 +91,12 @@ combobox menuitem {
     border-color: #121212;
 }
 
+button.menu_active {
+    border-width: 0.25em;
+    border-style: solid;
+    border-color: #006412;
+}
+
 treeview.view check,
 switch {
     background-color: #1c1c1c;

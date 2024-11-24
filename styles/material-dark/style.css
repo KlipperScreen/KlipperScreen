@@ -93,6 +93,12 @@ combobox menuitem {
     border-color: @bg;
 }
 
+button.menu_active {
+    border-width: 0.25em;
+    border-style: dashed;
+    border-color: @echo;
+}
+
 treeview.view check,
 switch {
     background-color: @active-dark;

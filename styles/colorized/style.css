@@ -109,6 +109,12 @@ popover button {
     border-color: @solarized-base03;
 }
 
+button.menu_active {
+    border-width: 0.25em;
+    border-style: dashed;
+    border-color: @solarized-green;
+}
+
 treeview.view check,
 switch {
     background-color: @solarized-base02;

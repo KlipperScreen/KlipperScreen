@@ -100,6 +100,11 @@ menuitem {
     border-color: @lines;
 }
 
+button.menu_active {
+    border-width: 0;
+    background-color: @active;
+}
+
 trough {
     background-color: @active;
     color: @text;
