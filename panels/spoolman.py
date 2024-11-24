@@ -335,6 +335,8 @@ class Panel(ScreenPanel):
             result = f'<big><b>{spool.name}</b></big>\n'
         else:
             result = f'<big>{spool.name}</big>\n'
+        if hasattr(spool, "comment"):
+            result += f'{_("Comment")}:<b> {spool.comment}</b>\n'
         if spool.last_used:
             result += f'{_("Last used")}:<b> {spool.last_used.astimezone():{self.timeFormat}}</b>\n'
         if hasattr(spool, "remaining_weight"):
