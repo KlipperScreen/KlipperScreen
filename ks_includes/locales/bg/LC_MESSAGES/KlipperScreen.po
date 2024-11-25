@@ -1,0 +1,1091 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: KlipperScreen\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"PO-Revision-Date: 2024-10-10 10:54+0300\n"
+"Last-Translator: \n"
+"Language-Team: Bulgarian <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/bg/>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.5\n"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s ще бъде актуализиран до версия"
+
+msgid "(default)"
+msgstr "(по подразбиране)"
+
+msgid "24 Hour Time"
+msgstr "24 часово време"
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr "Рестартиране на фърмуера може да реши проблема."
+
+msgid "ADXL Not Configured"
+msgstr "ADXL не е конфигуриран"
+
+msgid "Abort"
+msgstr "Прекъсване"
+
+msgid "Acceleration:"
+msgstr "Ускорение:"
+
+msgid "Accept"
+msgstr "Приложи"
+
+msgid "Add profile"
+msgstr "Добавете профил"
+
+msgid "All"
+msgstr "Всички"
+
+msgid "Apply"
+msgstr "Приложи"
+
+#, python-format
+msgid "Apply %s%.3f offset to Endstop?"
+msgstr "Да се ​​приложи ли отместване на %s%.3f към Endstop?"
+
+#, python-format
+msgid "Apply %s%.3f offset to Probe?"
+msgstr "Прилагане на %s%.3f отместване към сонда?"
+
+msgid "Archived"
+msgstr "Архивирано"
+
+msgid "Are you sure do you want to exclude the object?"
+msgstr "Сигурни ли сте, че искате да изключите обекта?"
+
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "Сигурни ли сте, че искате да стартирате аварийно спиране?"
+
+msgid "Are you sure you wish to cancel this print?"
+msgstr "Сигурни ли сте, че искате да отмените този печат?"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "Сигурни ли сте, че искате да деактивирате двигателите?"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "Сигурни ли сте, че искате да рестартирате системата?"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "Сигурни ли сте, че искате да изключите системата?"
+
+msgid "Asks for confirmation before stopping"
+msgstr "Иска потвърждение преди спиране"
+
+msgid "Auto"
+msgstr "Авто"
+
+msgid "Auto-calibrate"
+msgstr "Автоматично калибриране"
+
+msgid "Auto-close notifications"
+msgstr "Известия за автоматично затваряне"
+
+msgid "Auto-open Extrude On Pause"
+msgstr "Автоматично отваряне на екструдиране при пауза"
+
+msgid "Auto-scroll"
+msgstr "Автоматично превъртане"
+
+msgid "Bed Level"
+msgstr "Ниво на леглото"
+
+msgid "Bed Mesh"
+msgstr "Мрежа за легло"
+
+msgid "Both"
+msgstr "И двете"
+
+msgid "Calibrate"
+msgstr "Калибриране"
+
+msgid "Calibrated"
+msgstr "Калибриран"
+
+msgid "Calibrating"
+msgstr "Калибриране"
+
+msgid "Camera"
+msgstr "Камера"
+
+msgid "Can't set above the maximum:"
+msgstr "Не може да се зададе над максимума:"
+
+msgid "Cancel"
+msgstr "Отказ"
+
+msgid "Cancel Print"
+msgstr "Край на печата"
+
+msgid "Cancelled"
+msgstr "Отменен"
+
+msgid "Cancelling"
+msgstr "Отмяна"
+
+msgid "Cannot connect to Moonraker"
+msgstr "Не може да се свърже с Moonraker"
+
+msgid "Changes how the interface looks"
+msgstr "Променя начина, по който изглежда интерфейсът"
+
+msgid "Changes how the time remaining is calculated"
+msgstr "Променя начина на изчисляване на оставащото време"
+
+msgid "Channel"
+msgstr "Канал"
+
+msgid "Check ADXL Wiring"
+msgstr "Проверете ADXL свързването"
+
+msgid "Checking for updates, please wait..."
+msgstr "Проверява се за актуализации, моля изчакайте..."
+
+msgid "Clear"
+msgstr "Изчисти"
+
+msgid "Close"
+msgstr "Затваряне"
+
+msgid "Close messages after a timeout"
+msgstr "Затваряне на съобщения след изчакване"
+
+msgid "Complete"
+msgstr "Завършено"
+
+msgid "Confirm Emergency Stop"
+msgstr "Потвърдете аварийно спиране"
+
+msgid "Connected"
+msgstr "Свързан"
+
+msgid "Connecting"
+msgstr "Свързване"
+
+#, python-format
+msgid "Connecting to %s"
+msgstr "Свързан с  %s"
+
+msgid "Connection failed"
+msgstr "Връзката е неуспешна"
+
+msgid "Console"
+msgstr "Конзола"
+
+msgid "Cooldown"
+msgstr "Охлади"
+
+msgid "Couldn't add network"
+msgstr "Неуспешно добавяне на мрежа"
+
+msgid "Current"
+msgstr "Текущ"
+
+msgid "Current percentage and graph line"
+msgstr "Текущ процент и графика"
+
+msgid "DPMS has failed to load and has been disabled"
+msgstr "DPMS не успя да се зареди и е деактивиран"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Delete"
+msgstr "Изтриване"
+
+msgid "Delete Directory?"
+msgstr "Изтриване на директория?"
+
+msgid "Delete File?"
+msgstr "Изтрий файла?"
+
+msgid "Disable Motors"
+msgstr "Изкл. моторите"
+
+msgid "Disable for 12hs with am / pm"
+msgstr "Деактивирайте за 12 часа с am / pm"
+
+msgid "Disconnect"
+msgstr "Прекъснете връзката"
+
+msgid "Distance (mm)"
+msgstr "Растояние (mm)"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr "Искате ли да забравите или да прекъснете връзката с %s?"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "Искате ли да възстановите %s?"
+
+msgid "Elapsed:"
+msgstr "Изминало:"
+
+msgid "Emergency Stop"
+msgstr "Аварийно спиране"
+
+msgid "Enable screen power management"
+msgstr "Активирайте управлението на захранването на екрана"
+
+msgid "Error"
+msgstr "Грешка"
+
+msgid "Error clearing active spool"
+msgstr "Грешка при изчистване на активния спул"
+
+msgid "Error getting active spool"
+msgstr "Грешка при активиране на спула"
+
+msgid "Error setting active spool"
+msgstr "Грешка при настройване на активен спул"
+
+msgid "Error trying to fetch spools"
+msgstr "Грешка при опит за извличане на шпули"
+
+msgid "Error: Couldn't get a position to probe"
+msgstr "Грешка: Не може да се намери позиция за сондиране"
+
+msgid "Estimated Time"
+msgstr "Очаквано време"
+
+msgid "Estimated Time Method"
+msgstr "Расчетно време"
+
+msgid "Example"
+msgstr "Пример"
+
+msgid "Exclude Object"
+msgstr "Изключване на обект"
+
+msgid "Extra Large"
+msgstr "Много голям"
+
+msgid "Extrude"
+msgstr "Екструзия"
+
+msgid "Extruders"
+msgstr "Екструдери"
+
+msgid "Extrusion +"
+msgstr "Екструзия +"
+
+msgid "Extrusion -"
+msgstr "Екструзия -"
+
+msgid "Failed to delete connection"
+msgstr "Неуспешно изтриване на връзката"
+
+msgid "Failed to initialize"
+msgstr "Неуспешно инициализиране"
+
+msgid "Failed, adjust position first"
+msgstr "Грешка. Първо сменете позицията"
+
+msgid "Fan"
+msgstr "Охлаждане"
+
+msgid "Filament"
+msgstr "Филамент"
+
+msgid "Filament Used"
+msgstr "Използване на филамента"
+
+msgid "Filament total:"
+msgstr "Общо нишка:"
+
+msgid "Filament used:"
+msgstr "Използван филамент:"
+
+msgid "Filament:"
+msgstr "Филамент:"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "File:"
+msgstr "Файл:"
+
+msgid "Filter"
+msgstr "Филтър"
+
+msgid "Finding ADXL"
+msgstr "ADXL Търсене"
+
+msgid "Fine Tuning"
+msgstr "Фина настройка"
+
+msgid "Finish"
+msgstr "Край"
+
+msgid "Firmware Restart"
+msgstr "Рестартиране на фърмуера"
+
+msgid "Flow:"
+msgstr "Поток:"
+
+msgid "Flowrate:"
+msgstr "Расход:"
+
+msgid "Font Size"
+msgstr "Размер на шрифта"
+
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr "За управление с мишка или за проверка на точността на сензорния екран"
+
+msgid "Forget"
+msgstr "Забравете"
+
+msgid "Full Update"
+msgstr "Пълна актуализация"
+
+msgid "Gcodes"
+msgstr "Gcodes"
+
+msgid "Getting IP address"
+msgstr "Получаване на IP адрес"
+
+msgid "Go Back"
+msgstr "Назад"
+
+msgid "Height:"
+msgstr "Височина:"
+
+msgid "Hide"
+msgstr "Скрий"
+
+msgid "Hide sensors in Temp."
+msgstr "Скрий датчиците в Temp."
+
+msgid "Home"
+msgstr "Паркирай X"
+
+msgid "Home All"
+msgstr "Паркирай всички"
+
+msgid "Home X"
+msgstr "Паркирай X"
+
+msgid "Home XY"
+msgstr "Паркирай XY"
+
+msgid "Home Y"
+msgstr "Паркирай Y"
+
+msgid "Home Z"
+msgstr "Паркирай Z"
+
+msgid "Host"
+msgstr "Хост"
+
+msgid "Hostname"
+msgstr "Име на хоста"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Icon Theme"
+msgstr "Тема"
+
+msgid "Initializing printer..."
+msgstr "Принтера стартира..."
+
+msgid "Initiate a PID calibration for:"
+msgstr "Започнете PID калибриране за:"
+
+msgid "Input Shaper"
+msgstr "Входен шейпер"
+
+msgid "Insufficient privileges"
+msgstr "Недостатъчни привилегии"
+
+msgid "Interface"
+msgstr "Интерфейс"
+
+msgid "Invalid"
+msgstr "Неправилно"
+
+msgid "Invalid password"
+msgstr "Грешна парола"
+
+msgid "Invalid temperature"
+msgstr "Невалидна температура"
+
+msgid "Inversely affects the icon size"
+msgstr "Обратно влияе върху размера на иконата"
+
+msgid "Invert X"
+msgstr "Инверсиране X"
+
+msgid "Invert Y"
+msgstr "Инверсиране Y"
+
+msgid "Invert Z"
+msgstr "Инверсиране Z"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
+"Може да отнеме повече от 5 минути в зависимост от мощността на нагревателя."
+
+msgid "It's possible that the configuration is not correct"
+msgstr "Възможно е конфигурацията да не е правилна"
+
+msgid "Job Status"
+msgstr "Статус на работа"
+
+msgid "Klipper Restart"
+msgstr "Klipper Рестарт"
+
+msgid "Klipper has disconnected"
+msgstr "Няма връзка с Klipper"
+
+msgid "Klipper has encountered an error."
+msgstr "Klipper откри грешка."
+
+msgid "Klipper has shutdown"
+msgstr "Klipper се изключи"
+
+msgid "Klipper is attempting to start"
+msgstr "Klipper е готов"
+
+msgid "Klipper will reboot"
+msgstr "Klipper се рестартира"
+
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT са скрити и трябва да се използват от "
+"екструдиране"
+
+msgid "Language"
+msgstr "Език"
+
+msgid "Large"
+msgstr "Голям"
+
+msgid "Last Duration"
+msgstr "Ретракт"
+
+msgid "Last Used"
+msgstr "Използване на филамента"
+
+msgid "Layer Height"
+msgstr "Височина на слоя"
+
+msgid "Layer:"
+msgstr "Слой:"
+
+msgid "Leds"
+msgstr "LEDs"
+
+msgid "Left:"
+msgstr "Остава:"
+
+msgid "Limits"
+msgstr "Лимити"
+
+msgid "Load"
+msgstr "Зареди"
+
+msgid "Loading..."
+msgstr "Зареждане..."
+
+msgid "Lost Connection to Moonraker"
+msgstr "Не може да се свърже с Moonraker"
+
+msgid "Lower Nozzle"
+msgstr "Спусни дюзата"
+
+msgid "Macro shortcut on sidebar"
+msgstr "Покажи макроси в панела"
+
+msgid "Macros"
+msgstr "Макроси"
+
+msgid "Main Menu"
+msgstr "Главно меню"
+
+msgid "Material"
+msgstr "Материал"
+
+msgid "Max"
+msgstr "Макс"
+
+msgid "Max Acceleration"
+msgstr "Максимално ускорение"
+
+msgid "Max Velocity"
+msgstr "Скорост"
+
+msgid "Max:"
+msgstr "Макс:"
+
+msgid "Maximum"
+msgstr "Максимум"
+
+msgid "Measure Both"
+msgstr "Измерете и двете"
+
+msgid "Measure X"
+msgstr "Измерете X"
+
+msgid "Measure Y"
+msgstr "Измерете Y"
+
+msgid "Medium"
+msgstr "Средно"
+
+msgid "Memory"
+msgstr "Памет"
+
+msgid "Menu"
+msgstr "Меню"
+
+msgid "Minimum Cruise Ratio"
+msgstr "Минимално круизно съотношение"
+
+msgid "Minimum:"
+msgstr "Минимум:"
+
+msgid "Modified"
+msgstr "Променено"
+
+msgid "Moonraker: connected"
+msgstr "Moonraker: Свързан"
+
+msgid "More"
+msgstr "Повече"
+
+msgid "Move"
+msgstr "Ход"
+
+msgid "Move Distance (mm)"
+msgstr "Дистанция на движение (мм)"
+
+msgid "Name"
+msgstr "Име"
+
+msgid "Network"
+msgstr "Мрежа"
+
+msgid "Network connected"
+msgstr "Мрежата е свързана"
+
+msgid "Network disconnected"
+msgstr "Няма връзка с мрежата"
+
+msgid "Network not found"
+msgstr "Мрежата не е намерена"
+
+msgid "Never"
+msgstr "Никога"
+
+msgid "New"
+msgstr "Нов"
+
+msgid "No elegible macros:"
+msgstr "Няма избираеми макроси:"
+
+msgid "No info available"
+msgstr "Няма налична информация"
+
+msgid "No mesh has been loaded"
+msgstr "Не е заредена мрежа"
+
+msgid "No wireless interface has been found"
+msgstr "Не е открит безжичен интерфейс"
+
+msgid "Not all screens support this"
+msgstr "Не всички екрани поддържат това"
+
+msgid "Not working or not configured"
+msgstr "Не работи или не е конфигуриран"
+
+msgid "Nothing selected"
+msgstr "Нищо не е избрано"
+
+msgid "Notification log empty"
+msgstr "Дневникът на известията е празен"
+
+msgid "Notifications"
+msgstr "Известия"
+
+msgid "Nozzle diameter"
+msgstr "Диаметър на дюзата"
+
+msgid "Only for the move panel"
+msgstr "Само за панела за движение"
+
+#, python-format
+msgid "Outdated by %d"
+msgstr "Остарял на %d"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "Пакета ще бъде обновен"
+msgstr[1] "Пакетите ще бъдат обновени"
+
+msgid "Part Fan"
+msgstr "Частичен вентилатор"
+
+msgid "Password"
+msgstr "Паролата"
+
+msgid "Password saved"
+msgstr "Паролата е записана"
+
+msgid "Pause"
+msgstr "Пауза"
+
+msgid "Paused"
+msgstr "Спряно"
+
+msgid "Perform a full upgrade?"
+msgstr "Пълна актуализация?"
+
+msgid "Pins"
+msgstr "Пинове"
+
+msgid "Please recompile and flash the micro-controller."
+msgstr "Моля, прекомпилирайте и флашнете микроконтролера."
+
+msgid "Please wait"
+msgstr "Моля изчакайте"
+
+msgid "Power"
+msgstr "Изк. принтера"
+
+msgid "Power On Printer"
+msgstr "Вкл. принтера"
+
+msgid "Pressure Advance"
+msgstr "Предварително налягане"
+
+msgid "Pressure Advance:"
+msgstr "Предварително налягане:"
+
+msgid "Pressure advance"
+msgstr "Предварително налягане"
+
+msgid "Print"
+msgstr "Печат"
+
+msgid "Print Control"
+msgstr "Контрол на печата"
+
+msgid "Printer"
+msgstr "Принтер"
+
+msgid "Printer Connections"
+msgstr "Свързване на принтер"
+
+msgid "Printer Select"
+msgstr "Избор на принтер"
+
+msgid "Printing"
+msgstr "Печатане"
+
+msgid "Probe Offset"
+msgstr "Отместване на сондата"
+
+msgid "Profile Name:"
+msgstr "Име на профила:"
+
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr "Осигурете KlipperScreen.log, когато поискате помощ.\n"
+
+msgid "Quad Gantry Level"
+msgstr "Ниво Quad Gantry"
+
+msgid "Raise Nozzle"
+msgstr "Повдигнете дюзата"
+
+msgid "Recover"
+msgstr "Възстановяване"
+
+msgid "Recover Hard"
+msgstr "Възстановяване Hard"
+
+msgid "Recover Soft"
+msgstr "Възстановяване Soft"
+
+msgid "Reference"
+msgstr "Връзка"
+
+msgid "Refresh"
+msgstr "Опресняване"
+
+msgid "Remove network"
+msgstr "Премахване на мрежата"
+
+msgid "Rename/Move:"
+msgstr "Преименуване/Преместване:"
+
+msgid "Restart"
+msgstr "Рестарт"
+
+msgid "Resume"
+msgstr "Продължи"
+
+msgid "Retract"
+msgstr "Ретракт"
+
+msgid "Retraction"
+msgstr "Ретракт"
+
+msgid "Retraction Length"
+msgstr "Дължина на ретракта"
+
+msgid "Retraction Speed"
+msgstr "Скорост на ретракта"
+
+msgid "Retry"
+msgstr "Повтори"
+
+msgid "Retrying"
+msgstr "Повторен опит"
+
+msgid "Rotation invalid"
+msgstr "Завъртането е невалидно"
+
+msgid "Save"
+msgstr "Запиши"
+
+msgid "Save Config"
+msgstr "Зап. Конфиг"
+
+msgid "Save Z"
+msgstr "Запиши Z"
+
+msgid "Save configuration?"
+msgstr "Запиши конфигурацията?"
+
+msgid "Saved"
+msgstr "Записано"
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr "Записан офсет: %s"
+
+msgid "Screen DPMS"
+msgstr "Екран DPMS"
+
+msgid "Screen Power Off Time"
+msgstr "Време за изключване на екрана"
+
+msgid "Screws Adjust"
+msgstr "Настройки на винтовете"
+
+msgid "Screws not used:"
+msgstr "Неизползвани винтове:"
+
+msgid "Send"
+msgstr "Изпрати"
+
+msgid "Set Temp"
+msgstr "Задайте температура"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Show"
+msgstr "Покажи"
+
+msgid "Show Heater Power"
+msgstr "Показване на мощността на нагревателя"
+
+msgid "Show Scrollbars Buttons"
+msgstr "Показване на бутони за ленти за превъртане"
+
+msgid "Show cursor"
+msgstr "Показване на курсора"
+
+msgid "Show only devices that are able to be set"
+msgstr "Показване само на устройства, които могат да бъдат настроени"
+
+msgid "Shutdown"
+msgstr "Изключване"
+
+msgid "Size"
+msgstr "Размер"
+
+msgid "Slicer"
+msgstr "Слайсер"
+
+msgid "Slicer:"
+msgstr "Слайсер:"
+
+msgid "Small"
+msgstr "Малък"
+
+msgid "Smooth time"
+msgstr "Гладко време"
+
+msgid "Speed (mm/s)"
+msgstr "Скорост (мм/с)"
+
+msgid "Speed +"
+msgstr "Скорост +"
+
+msgid "Speed -"
+msgstr "Скорост -"
+
+msgid "Speed:"
+msgstr "Скорост:"
+
+msgid "Square Corner Velocity"
+msgstr "Квадратна ъглова скорост"
+
+msgid "Standby"
+msgstr "В режим на готовност"
+
+msgid "Start"
+msgstr "Старт"
+
+msgid "Starting recovery for"
+msgstr "Започнете възстановяване за"
+
+msgid "Starting update for"
+msgstr "Стартиране на актуализация за"
+
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr "Разменя бутоните, ако са един върху друг, засяга други панели"
+
+msgid "System"
+msgstr "Система"
+
+msgid "System Restart"
+msgstr "Рестартиране на системата"
+
+msgid "System Shutdown"
+msgstr "Изключване на системата"
+
+msgid "System:"
+msgstr "Система:"
+
+msgid "Temp (°C)"
+msgstr "Темп  (°С)"
+
+msgid "Temperature"
+msgstr "Tемпература"
+
+msgid "Temperature too low to extrude"
+msgstr "Температурата е твърде ниска за екструдиране"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr "Системата не отговаря на минималните изисквания"
+
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr "Този панел поддържа до 9 винта в мрежа 3x3"
+
+msgid "This will affect screw positions and mesh graph"
+msgstr "Това ще повлияе на позициите на винтовете и графиката на мрежата"
+
+msgid "Timeout for screen black-out or power-off"
+msgstr "Време за изчакване за затъмняване на екрана или изключване"
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr ""
+"Изчакване за затъмняване на екрана или изключване на захранването по време "
+"на печат"
+
+msgid "Total:"
+msgstr "Всичко:"
+
+msgid "Unknown Heater"
+msgstr "Неизвестен нагревател"
+
+msgid "Unknown security type"
+msgstr "Неизвестен тип защита"
+
+msgid "Unload"
+msgstr "Извади"
+
+msgid "Unretract Extra Length"
+msgstr "Отмяна на прибиране на допълнителната дължина"
+
+msgid "Unretract Speed"
+msgstr "Скорост на оттегляне"
+
+msgid "Up To Date"
+msgstr "Актуално"
+
+msgid "Update"
+msgstr "Обнови"
+
+msgid "Updating"
+msgstr "Обновяване"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr "Полезно за неотзивчиви сензорни екрани"
+
+msgid "User"
+msgstr "Потребител"
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr "WebRTC не се поддържа от бекенда, опитващ Stream"
+
+msgid "Working"
+msgstr "Работещ"
+
+msgid "XY Move Speed (mm/s)"
+msgstr "Скорост по оси XY (мм/с)"
+
+msgid "XY Speed (mm/s)"
+msgstr "XY скорост (mm/s)"
+
+msgid "Z Calibrate"
+msgstr "Калибр. Z"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "Скорост по ос Z (мм/с)"
+
+msgid "Z Speed (mm/s)"
+msgstr "Z скорост (mm/s)"
+
+msgid "Z Tilt"
+msgstr "Z Наклон"
+
+msgid "Z offset:"
+msgstr "Z отместване:"
+
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "промяна"
+msgstr[1] "промяна"
+
+msgid "day"
+msgid_plural "days"
+msgstr[0] "ден"
+msgstr[1] "дни"
+
+msgid "g"
+msgstr "г"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "час"
+msgstr[1] "часа"
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "макросите, които използват 'rename_existing' са скрити"
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "макросите с име, започващо с '_' са скрити"
+
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "минута"
+msgstr[1] "минути"
+
+msgid "mm"
+msgstr "мм"
+
+msgid "mm/s"
+msgstr "мм/с"
+
+msgid "mm/s²"
+msgstr "мм/с²"
+
+msgid "mm³/s"
+msgstr "мм³/s"
+
+msgid "s"
+msgstr "с"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "секунда"
+msgstr[1] "секунди"
+
+#~ msgid "Hide temp."
+#~ msgstr "Скрий температурата."
+
+#~ msgid "PSK for"
+#~ msgstr "PSK за"
+
+#~ msgid "Actions"
+#~ msgstr "Действия"
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "Конфигурация на винта на леглото:"
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "Калибриран, запазете конфигурацията, за да стане постоянна"
+
+#~ msgid "Configuration"
+#~ msgstr "Конфигурация"
+
+#~ msgid "Continue"
+#~ msgstr "Продължи"
+
+#~ msgid "Decrease"
+#~ msgstr "Намали"
+
+#~ msgid "Deselect"
+#~ msgstr "Отмени"
+
+#~ msgid "Disable XY"
+#~ msgstr "Изключи XY"
+
+#~ msgid "Hidden"
+#~ msgstr "Скрит"
+
+#~ msgid "Homing"
+#~ msgstr "Паркирай"
+
+#~ msgid "Increase"
+#~ msgstr "Повдигане"
+
+#~ msgid "KlipperScreen will reboot"
+#~ msgstr "KlipperScreen ще се рестартира"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Ускорение на забавяне"
+
+#~ msgid "Mesh calibrate"
+#~ msgstr "Калибриране на мрежата"
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr ""
+#~ "Не се поддържа за автоматично откриване, трябва да се конфигурира в "
+#~ "klipperscreen.conf"
+
+#~ msgid "Print Time"
+#~ msgstr "Време за печат"
+
+#~ msgid "Select"
+#~ msgstr "Избери"
+
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "Изпращане на сигнал за включване до: %s"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "Корекция на времето на слайсера (%)"
+
+#~ msgid "Starting WiFi Association"
+#~ msgstr "Сдвояване"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "Неизвестна позиция на винта"
+
+#~ msgid "Uploaded"
+#~ msgstr "Качено"
+
+#~ msgid "dBm"
+#~ msgstr "dBm"
