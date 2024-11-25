@@ -210,6 +210,7 @@ printer.gcode_macros.count # Number of gcode macros
 printer.gcode_macros.list # List of names of the gcode macros
 printer.leds.count # Number of leds
 printer.config_sections # Array of section headers of Klipper config (printer.cfg)
+printer.available_commands # List of all the commands that the printer supports
 ```
 
 
