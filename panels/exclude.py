@@ -75,7 +75,10 @@ class Panel(ScreenPanel):
         )
 
     def exclude_current(self, widget):
-        self.exclude_object(widget, f"{self.current_object.get_label()}")
+        current = self._printer.data["exclude_object"]["current_object"]
+        if current is None:
+            return
+        self.exclude_object(widget, f"{current}")
 
     def process_update(self, action, data):
         if action == "notify_status_update":
