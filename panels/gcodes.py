@@ -69,7 +69,7 @@ class Panel(ScreenPanel):
         self.labels['path'] = Gtk.Label(label=self.loading_msg, vexpand=True, no_show_all=True)
         self.labels['path'].show()
         self.thumbsize = self._gtk.img_scale * self._gtk.button_image_scale * 2.5
-        logging.info(f"Thumbsize: {self.thumbsize}")
+        logging.info(f"Thumbsize: {self.thumbsize:.1f}")
 
         self.flowbox = Gtk.FlowBox(selection_mode=Gtk.SelectionMode.NONE,
                                    column_spacing=0, row_spacing=0)
