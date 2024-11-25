@@ -261,6 +261,8 @@ class KlippyGtk:
             return
         if self.screen.updating:
             return
+        if dialog == self.screen.confirm:
+            self.screen.confirm = None
         dialog.destroy()
         if dialog in self.screen.dialogs:
             logging.info("Removing Dialog")
