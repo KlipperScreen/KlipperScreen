@@ -1,16 +1,13 @@
+import ctypes
 import logging
 import logging.handlers
 import os
-import re
+import struct
 import subprocess
 import sys
 import threading
-import time
 import traceback
 from queue import SimpleQueue as Queue
-
-import ctypes
-import struct
 
 dpms_loaded = False
 try:

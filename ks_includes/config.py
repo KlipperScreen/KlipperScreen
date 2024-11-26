@@ -1,13 +1,12 @@
 import configparser
-import gettext
-import os
-import logging
-import json
-import re
 import copy
-import pathlib
+import gettext
+import json
 import locale
-
+import logging
+import os
+import pathlib
+import re
 from io import StringIO
 
 SCREEN_BLANKING_OPTIONS = [

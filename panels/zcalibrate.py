@@ -1,10 +1,10 @@
 import logging
+
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango, GLib
 from ks_includes.screen_panel import ScreenPanel
-from ks_includes.KlippyGtk import find_widget
 from datetime import datetime
 
 

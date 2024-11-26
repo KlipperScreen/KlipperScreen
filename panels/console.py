@@ -1,5 +1,6 @@
-import time
 import re
+import time
+
 import gi
 
 gi.require_version("Gtk", "3.0")

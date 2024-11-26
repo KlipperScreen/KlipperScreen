@@ -1,6 +1,7 @@
 import logging
-import re
 import math
+import re
+
 import gi
 
 gi.require_version("Gtk", "3.0")

@@ -1,7 +1,6 @@
 import datetime
 import logging
 import math
-from array import array
 
 import gi
 

@@ -1,6 +1,7 @@
+import logging
 import os.path
 import pathlib
-import logging
+
 import gi
 
 gi.require_version("Gtk", "3.0")

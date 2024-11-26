@@ -1,8 +1,9 @@
 # This is the backend of the UI panel that communicates to sdbus-networkmanager
 # TODO device selection/swtichability
 # Alfredo Monclus (alfrix) 2024
-import subprocess
 import logging
+import subprocess
+from uuid import uuid4
 
 import sdbus
 from sdbus_block.networkmanager import (
@@ -18,8 +19,6 @@ from sdbus_block.networkmanager import (
     enums,
     exceptions,
 )
-from gi.repository import GLib
-from uuid import uuid4
 
 NONE = 0  # The access point has no special security requirements.
 PAIR_WEP40 = 1  # 40/64-bit WEP is supported for pairwise/unicast encryption.

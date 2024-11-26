@@ -1,5 +1,6 @@
-import mpv
 import logging
+import mpv
+
 import gi
 
 gi.require_version("Gtk", "3.0")

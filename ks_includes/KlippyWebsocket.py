@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-import threading
 import json
 import logging
+import threading
 
 import gi
 import websocket
