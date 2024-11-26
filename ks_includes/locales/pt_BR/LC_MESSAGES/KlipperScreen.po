@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-05-07 02:10+0000\n"
 "Last-Translator: Rui Menezes <ruizivo.menezes@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -421,10 +421,8 @@ msgstr "Inválido"
 msgid "Invalid password"
 msgstr "Senha Inválida"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "Temperatura"
+msgstr ""
 
 msgid "Inversely affects the icon size"
 msgstr "Afeta inversamente o tamanho do ícone"
@@ -503,6 +501,9 @@ msgstr "Carregar"
 
 msgid "Loading..."
 msgstr "Carregando..."
+
+msgid "Lock"
+msgstr ""
 
 msgid "Lost Connection to Moonraker"
 msgstr "Conexão perdida com o Moonraker"
@@ -642,10 +643,8 @@ msgstr[1] "Os pacotes serão atualizados"
 msgid "Part Fan"
 msgstr "Ventilador da Peça"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "Senha salva"
+msgstr ""
 
 msgid "Password saved"
 msgstr "Senha salva"
@@ -914,6 +913,12 @@ msgstr ""
 
 msgid "Unload"
 msgstr "Descarregar"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr "Comprimento Extra da inversão de retração"

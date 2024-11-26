@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Dominik <dominik.sostar@gmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -422,10 +422,8 @@ msgstr "Napačno"
 msgid "Invalid password"
 msgstr "Napačno geslo"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "Temperatura"
+msgstr ""
 
 msgid "Inversely affects the icon size"
 msgstr ""
@@ -504,6 +502,9 @@ msgstr "Naloži"
 
 msgid "Loading..."
 msgstr "Nalagam..."
+
+msgid "Lock"
+msgstr ""
 
 msgid "Lost Connection to Moonraker"
 msgstr "Izgubljena poveza z Moonrakerjem"
@@ -645,10 +646,8 @@ msgstr[3] "Paketov bo posodobljenih"
 msgid "Part Fan"
 msgstr "Ventilator za dele"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "Geslo shranjeno"
+msgstr ""
 
 msgid "Password saved"
 msgstr "Geslo shranjeno"
@@ -916,6 +915,12 @@ msgid "Unknown security type"
 msgstr ""
 
 msgid "Unload"
+msgstr ""
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
 msgstr ""
 
 msgid "Unretract Extra Length"

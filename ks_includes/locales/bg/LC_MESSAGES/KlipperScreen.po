@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-10-10 10:54+0300\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -503,6 +503,9 @@ msgstr "Зареди"
 msgid "Loading..."
 msgstr "Зареждане..."
 
+msgid "Lock"
+msgstr ""
+
 msgid "Lost Connection to Moonraker"
 msgstr "Не може да се свърже с Moonraker"
 
@@ -913,6 +916,12 @@ msgstr "Неизвестен тип защита"
 
 msgid "Unload"
 msgstr "Извади"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr "Отмяна на прибиране на допълнителната дължина"

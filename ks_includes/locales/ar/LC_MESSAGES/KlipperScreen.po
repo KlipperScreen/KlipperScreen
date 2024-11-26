@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-08-14 14:09+0000\n"
 "Last-Translator: Rashid Al Haqbany <haqbany@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/klipperscreen/"
@@ -422,10 +422,8 @@ msgstr "باطل"
 msgid "Invalid password"
 msgstr "كلمة سر غير صالحة"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "درجة الحرارة"
+msgstr ""
 
 msgid "Inversely affects the icon size"
 msgstr "يؤثر عكسيا على حجم الأيقونة"
@@ -502,6 +500,9 @@ msgstr "حمل"
 
 msgid "Loading..."
 msgstr "جاري التحميل..."
+
+msgid "Lock"
+msgstr ""
 
 msgid "Lost Connection to Moonraker"
 msgstr "فقد الاتصال ب Moonraker"
@@ -645,10 +646,8 @@ msgstr[5] "تحديث الحزم"
 msgid "Part Fan"
 msgstr "مروحة تبريد المطبوعات"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "تم حفظ كلمة المرور"
+msgstr ""
 
 msgid "Password saved"
 msgstr "تم حفظ كلمة المرور"
@@ -917,6 +916,12 @@ msgstr "نوع أمان غير معروف"
 
 msgid "Unload"
 msgstr "أفرغ"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr "لا تتراجع عن الطول الإضافي"

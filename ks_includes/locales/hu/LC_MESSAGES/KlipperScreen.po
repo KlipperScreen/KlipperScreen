@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-10-18 14:01+0000\n"
 "Last-Translator: \"Zs.Antal\" <antonio092130@icloud.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -496,6 +496,9 @@ msgstr "Betöltés"
 msgid "Loading..."
 msgstr "Betöltés..."
 
+msgid "Lock"
+msgstr ""
+
 msgid "Lost Connection to Moonraker"
 msgstr "Megszakadt a kapcsolat a Moonraker-el"
 
@@ -906,6 +909,12 @@ msgstr "Ismeretlen biztonsági típus"
 
 msgid "Unload"
 msgstr "Kiadás"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr "Extra visszahúzás hossza"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -421,10 +421,8 @@ msgstr "Ogiltig"
 msgid "Invalid password"
 msgstr "Felaktigt lösenord"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "Temperatur"
+msgstr ""
 
 msgid "Inversely affects the icon size"
 msgstr ""
@@ -502,6 +500,9 @@ msgstr "Ladda"
 
 msgid "Loading..."
 msgstr "Läser in..."
+
+msgid "Lock"
+msgstr ""
 
 msgid "Lost Connection to Moonraker"
 msgstr ""
@@ -641,10 +642,8 @@ msgstr[1] "Paketen kommer att uppdateras"
 msgid "Part Fan"
 msgstr "Del Fläkt"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "Lösenordet har sparats"
+msgstr ""
 
 msgid "Password saved"
 msgstr "Lösenordet har sparats"
@@ -913,6 +912,12 @@ msgstr ""
 
 msgid "Unload"
 msgstr "Lasta av"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr "Dra tillbaka, extra längd"

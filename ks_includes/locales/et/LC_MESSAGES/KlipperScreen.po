@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-07-26 19:09+0000\n"
 "Last-Translator: Jegert Uusküla <jegertuuskula@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -416,10 +416,8 @@ msgstr "Kehtetu"
 msgid "Invalid password"
 msgstr "Kehtetu parool"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "Temperatuur"
+msgstr ""
 
 msgid "Inversely affects the icon size"
 msgstr "Mõjutab pöördeliselt ikooni suurust"
@@ -498,6 +496,9 @@ msgstr "Laadimine"
 
 msgid "Loading..."
 msgstr "Laadimine..."
+
+msgid "Lock"
+msgstr ""
 
 msgid "Lost Connection to Moonraker"
 msgstr "Ühendus Moonrakeriga katkes"
@@ -637,10 +638,8 @@ msgstr[1] "Paketid uuendatakse"
 msgid "Part Fan"
 msgstr "Osaventilaator"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "Parool salvestatud"
+msgstr ""
 
 msgid "Password saved"
 msgstr "Parool salvestatud"
@@ -909,6 +908,12 @@ msgstr "Tundmatu turvatüüp"
 
 msgid "Unload"
 msgstr "Laadi maha"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr "Tagasitõmbamise lisapikkus"

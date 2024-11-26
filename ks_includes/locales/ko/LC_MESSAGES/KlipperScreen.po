@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-07-06 14:10+0900\n"
 "Last-Translator: ElectricalBoy <15651807+ElectricalBoy@users.noreply.github."
 "com>\n"
@@ -417,10 +417,8 @@ msgstr "존재하지 않음"
 msgid "Invalid password"
 msgstr "잘못된 패스워드"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "온도"
+msgstr ""
 
 msgid "Inversely affects the icon size"
 msgstr ""
@@ -498,6 +496,9 @@ msgstr "필라멘트 로드"
 
 msgid "Loading..."
 msgstr "로딩중..."
+
+msgid "Lock"
+msgstr ""
 
 msgid "Lost Connection to Moonraker"
 msgstr "문레이커와 연결이 끊어졌습니다"
@@ -636,10 +637,8 @@ msgstr[0] "패키지가 업데이트 됩니다"
 msgid "Part Fan"
 msgstr "파트 쿨링 팬"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "비밀번호 저장됨"
+msgstr ""
 
 msgid "Password saved"
 msgstr "비밀번호 저장됨"
@@ -908,6 +907,12 @@ msgstr "알 수 없는 보안 유형"
 
 msgid "Unload"
 msgstr "필라멘트 꺼내기"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr "필라멘트 언리트렉션 길이"

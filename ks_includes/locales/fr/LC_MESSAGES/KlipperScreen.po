@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-08-29 20:09+0000\n"
 "Last-Translator: Nackophilz <zrv4flra@anonaddy.me>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/klipperscreen/"
@@ -421,10 +421,8 @@ msgstr "Invalide"
 msgid "Invalid password"
 msgstr "Mot de passe invalide"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "Température"
+msgstr ""
 
 msgid "Inversely affects the icon size"
 msgstr "Inverse de la taille de l'icône"
@@ -504,6 +502,9 @@ msgstr "Charger"
 
 msgid "Loading..."
 msgstr "Chargement..."
+
+msgid "Lock"
+msgstr ""
 
 msgid "Lost Connection to Moonraker"
 msgstr "Perte de connexion avec Moonraker"
@@ -643,10 +644,8 @@ msgstr[1] "Les paquets seront mis à jour"
 msgid "Part Fan"
 msgstr "Ventilateurs de refroidissement"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "Mot de passe enregistré"
+msgstr ""
 
 msgid "Password saved"
 msgstr "Mot de passe enregistré"
@@ -918,6 +917,12 @@ msgstr "Type de sécurité inconnu"
 
 msgid "Unload"
 msgstr "Décharger"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr "Longueur supplémentaire non rétractée"

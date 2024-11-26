@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-11-13 17:00+0000\n"
 "Last-Translator: Giadej <Giadej@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -498,6 +498,9 @@ msgstr "Carica"
 msgid "Loading..."
 msgstr "Caricamento..."
 
+msgid "Lock"
+msgstr ""
+
 msgid "Lost Connection to Moonraker"
 msgstr "Connessione persa con Moonraker"
 
@@ -906,6 +909,12 @@ msgstr "Tipo di sicurezza sconosciuto"
 
 msgid "Unload"
 msgstr "Scarica"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr "Lunghezza Extra De-Retrazione"

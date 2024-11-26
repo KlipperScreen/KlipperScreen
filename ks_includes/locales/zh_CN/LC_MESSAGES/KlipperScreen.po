@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-10-29 18:12+0000\n"
 "Last-Translator: Will Zhai <willzhai55@gmail.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -500,6 +500,9 @@ msgstr "载入耗材"
 msgid "Loading..."
 msgstr "加载中..."
 
+msgid "Lock"
+msgstr ""
+
 msgid "Lost Connection to Moonraker"
 msgstr "与 Moonraker 失去连接"
 
@@ -907,6 +910,12 @@ msgstr "未知的安全类型"
 
 msgid "Unload"
 msgstr "卸载耗材"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr "回料长度"

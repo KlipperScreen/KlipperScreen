@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-10-20 01:16+0000\n"
 "Last-Translator: Hideki Matsunobu <maznobu@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -416,10 +416,8 @@ msgstr "不正"
 msgid "Invalid password"
 msgstr "パスワードが無効です"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "温度"
+msgstr ""
 
 msgid "Inversely affects the icon size"
 msgstr "アイコンのサイズに逆影響を及ぼします"
@@ -462,8 +460,9 @@ msgstr "Klipperは再起動します"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT "
-"は非表示になっているため、押し出しから使用する必要があります"
+msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT は非表示になっているため、押し出しから使用する"
+"必要があります"
 
 msgid "Language"
 msgstr "言語"
@@ -497,6 +496,9 @@ msgstr "ロード"
 
 msgid "Loading..."
 msgstr "ロード中..."
+
+msgid "Lock"
+msgstr ""
 
 msgid "Lost Connection to Moonraker"
 msgstr "Moonraker への接続が失われました"
@@ -635,10 +637,8 @@ msgstr[0] ""
 msgid "Part Fan"
 msgstr ""
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "パスワードを保存しました"
+msgstr ""
 
 msgid "Password saved"
 msgstr "パスワードを保存しました"
@@ -858,7 +858,8 @@ msgid "Starting update for"
 msgstr "更新中"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr "ボタンが重なっている場合はボタンを交換しますが、他のパネルに影響を与えます"
+msgstr ""
+"ボタンが重なっている場合はボタンを交換しますが、他のパネルに影響を与えます"
 
 msgid "System"
 msgstr "システム"
@@ -907,6 +908,12 @@ msgstr "不明なセキュリティタイプ"
 
 msgid "Unload"
 msgstr "アンロード"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr ""

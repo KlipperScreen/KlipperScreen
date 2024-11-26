@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-11-13 17:00+0000\n"
 "Last-Translator: Владимир Чернояров <s3mpau@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -140,9 +140,8 @@ msgstr "Отмена"
 msgid "Cannot connect to Moonraker"
 msgstr "Не удается подключиться к Moonraker"
 
-#, fuzzy
 msgid "Changes how the interface looks"
-msgstr "Изменение внешнего вида интерфейса"
+msgstr ""
 
 msgid "Changes how the time remaining is calculated"
 msgstr "Изменить расчет оставшегося времени"
@@ -196,9 +195,8 @@ msgstr "Не удалось добавить сеть"
 msgid "Current"
 msgstr "Текущий"
 
-#, fuzzy
 msgid "Current percentage and graph line"
-msgstr "Текущий процент и линия графика"
+msgstr ""
 
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS не загрузилась и была отключена"
@@ -247,9 +245,8 @@ msgstr "Включить управление питанием дисплея"
 msgid "Error"
 msgstr "Ошибка"
 
-#, fuzzy
 msgid "Error clearing active spool"
-msgstr "Ошибка при очистке активной катушки"
+msgstr ""
 
 msgid "Error getting active spool"
 msgstr "Ошибка при получении активной катушки"
@@ -505,6 +502,9 @@ msgstr "Загрузить"
 msgid "Loading..."
 msgstr "Загрузка..."
 
+msgid "Lock"
+msgstr ""
+
 msgid "Lost Connection to Moonraker"
 msgstr "Потеряно соединение с Moonraker"
 
@@ -644,10 +644,8 @@ msgstr[2] "Пакеты будут обновляться"
 msgid "Part Fan"
 msgstr "Вентилятор обдува детали"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "Пароль сохранен"
+msgstr ""
 
 msgid "Password saved"
 msgstr "Пароль сохранен"
@@ -918,6 +916,12 @@ msgstr "Неизвестный тип шифрования"
 
 msgid "Unload"
 msgstr "Выгрузить"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr "Дополнительная длина подачи перед возобновлением печати"

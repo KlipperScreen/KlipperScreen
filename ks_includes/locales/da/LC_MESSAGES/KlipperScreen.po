@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-07-03 13:59+0000\n"
 "Last-Translator: srbjessen <srbjessen@gmail.com>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -416,10 +416,8 @@ msgstr "Ugyldig"
 msgid "Invalid password"
 msgstr "Ugyldigt kodeord"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "Temperatur"
+msgstr ""
 
 msgid "Inversely affects the icon size"
 msgstr "Omvendt påvirker ikonstørrelsen"
@@ -498,6 +496,9 @@ msgstr "Indlæs"
 
 msgid "Loading..."
 msgstr "Indlæser..."
+
+msgid "Lock"
+msgstr ""
 
 msgid "Lost Connection to Moonraker"
 msgstr "Tabte forbindelse til Moonraker"
@@ -637,10 +638,8 @@ msgstr[1] "Pakker vil blive opdateret"
 msgid "Part Fan"
 msgstr "Print blæser"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "Adgangskode gemt"
+msgstr ""
 
 msgid "Password saved"
 msgstr "Adgangskode gemt"
@@ -909,6 +908,12 @@ msgstr "Ukendt sikkerhedstype"
 
 msgid "Unload"
 msgstr "Tilbagetræk"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr "Un-retract ekstra længde"

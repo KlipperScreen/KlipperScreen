@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-10-11 06:01+0000\n"
 "Last-Translator: Selim <technical50@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -500,6 +500,9 @@ msgstr "Yükle"
 msgid "Loading..."
 msgstr "Yükleniyor..."
 
+msgid "Lock"
+msgstr ""
+
 msgid "Lost Connection to Moonraker"
 msgstr "Moonraker ile Bağlantı Koptu"
 
@@ -908,6 +911,12 @@ msgstr "Bilinmeyen güvenlik türü"
 
 msgid "Unload"
 msgstr "Çıkart"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr "İleri İtme Ekstra Uzunluk"

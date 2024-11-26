@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-10-10 13:25+0000\n"
 "Last-Translator: Thijs Triemstra <info@collab.nl>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/klipperscreen/"
@@ -502,6 +502,9 @@ msgstr "Laad"
 msgid "Loading..."
 msgstr "Laden..."
 
+msgid "Lock"
+msgstr ""
+
 msgid "Lost Connection to Moonraker"
 msgstr "Verbinding met Moonraker verbroken"
 
@@ -910,6 +913,12 @@ msgstr "Onbekend beveiliging type"
 
 msgid "Unload"
 msgstr "Uitladen"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr "Unretract Extra Lengte"

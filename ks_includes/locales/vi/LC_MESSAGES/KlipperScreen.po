@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-08-12 07:09+0000\n"
 "Last-Translator: Hiep Nguyen <tanhiep26@gmail.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -416,10 +416,8 @@ msgstr "Không hợp lệ"
 msgid "Invalid password"
 msgstr "Mật khẩu không hợp lệ"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "Nhiệt độ"
+msgstr ""
 
 msgid "Inversely affects the icon size"
 msgstr "Mật khẩu không hợp lệ"
@@ -496,6 +494,9 @@ msgstr "Tải"
 
 msgid "Loading..."
 msgstr "Đang tải..."
+
+msgid "Lock"
+msgstr ""
 
 msgid "Lost Connection to Moonraker"
 msgstr "Mất kết nối tới Moonraker"
@@ -634,10 +635,8 @@ msgstr[0] "Gói sẽ được cập nhật"
 msgid "Part Fan"
 msgstr "Quạt phần"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "Mật khẩu đã lưu"
+msgstr ""
 
 msgid "Password saved"
 msgstr "Mật khẩu đã lưu"
@@ -908,6 +907,12 @@ msgstr ""
 
 msgid "Unload"
 msgstr "Đã tải"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr "Độ dài rút thêm"

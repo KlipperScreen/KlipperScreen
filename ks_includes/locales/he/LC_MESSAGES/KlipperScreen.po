@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/klipperscreen/"
@@ -423,10 +423,8 @@ msgstr "לא חוקי"
 msgid "Invalid password"
 msgstr ""
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "טמפרטורה"
+msgstr ""
 
 msgid "Inversely affects the icon size"
 msgstr ""
@@ -502,6 +500,9 @@ msgid "Load"
 msgstr "טעינה"
 
 msgid "Loading..."
+msgstr ""
+
+msgid "Lock"
 msgstr ""
 
 msgid "Lost Connection to Moonraker"
@@ -644,10 +645,8 @@ msgstr[3] "חבילות יעודכנו"
 msgid "Part Fan"
 msgstr "מאוורר חומר"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "הסיסמה נשמרה"
+msgstr ""
 
 msgid "Password saved"
 msgstr "הסיסמה נשמרה"
@@ -916,6 +915,12 @@ msgstr ""
 
 msgid "Unload"
 msgstr "העלה"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -337,6 +337,9 @@ msgstr ""
 msgid "Font Size"
 msgstr ""
 
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+
 msgid "Forget"
 msgstr ""
 
@@ -359,9 +362,6 @@ msgid "Hide"
 msgstr ""
 
 msgid "Hide sensors in Temp."
-msgstr ""
-
-msgid "Hide temp."
 msgstr ""
 
 msgid "Home"
@@ -413,6 +413,9 @@ msgid "Invalid"
 msgstr ""
 
 msgid "Invalid password"
+msgstr ""
+
+msgid "Invalid temperature"
 msgstr ""
 
 msgid "Inversely affects the icon size"
@@ -489,6 +492,9 @@ msgid "Load"
 msgstr ""
 
 msgid "Loading..."
+msgstr ""
+
+msgid "Lock"
 msgstr ""
 
 msgid "Lost Connection to Moonraker"
@@ -621,15 +627,15 @@ msgstr ""
 msgid "Outdated by %d"
 msgstr ""
 
-msgid "PSK for"
-msgstr ""
-
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] ""
 msgstr[1] ""
 
 msgid "Part Fan"
+msgstr ""
+
+msgid "Password"
 msgstr ""
 
 msgid "Password saved"
@@ -798,6 +804,9 @@ msgstr ""
 msgid "Show Scrollbars Buttons"
 msgstr ""
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr ""
 
@@ -867,6 +876,9 @@ msgstr ""
 msgid "Temperature"
 msgstr ""
 
+msgid "Temperature too low to extrude"
+msgstr ""
+
 msgid "The system doesn't meet the minimum requirement"
 msgstr ""
 
@@ -894,6 +906,12 @@ msgstr ""
 msgid "Unload"
 msgstr ""
 
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
+
 msgid "Unretract Extra Length"
 msgstr ""
 
@@ -910,6 +928,9 @@ msgid "Updating"
 msgstr ""
 
 msgid "Useful for un-responsive touchscreens"
+msgstr ""
+
+msgid "User"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"

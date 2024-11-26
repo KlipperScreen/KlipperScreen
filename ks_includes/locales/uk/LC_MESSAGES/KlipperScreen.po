@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 24-10-14 10.00\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2024-11-26 12:31-0300\n"
 "PO-Revision-Date: 2024-10-14 09:59+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -502,6 +502,9 @@ msgstr "Завантажити"
 msgid "Loading..."
 msgstr "Завантаження..."
 
+msgid "Lock"
+msgstr ""
+
 msgid "Lost Connection to Moonraker"
 msgstr "Втрачено з’єднання з Moonraker"
 
@@ -913,6 +916,12 @@ msgstr "Невідомий тип безпеки"
 
 msgid "Unload"
 msgstr "Вийняти"
+
+msgid "Unlock"
+msgstr ""
+
+msgid "Unlock failed"
+msgstr ""
 
 msgid "Unretract Extra Length"
 msgstr "Додаткова довжина втягування"
