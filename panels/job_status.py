@@ -172,6 +172,8 @@ class Panel(ScreenPanel):
                 break
             if dev == "heater_bed":
                 self.buttons['heater'][dev] = self._gtk.Button("bed", "", None, self.bts, Gtk.PositionType.LEFT, 1)
+            elif dev == "heater_generic":
+                self.buttons['heater'][dev] = self._gtk.Button("heater", "", None, self.bts, Gtk.PositionType.LEFT, 1)
             else:
                 self.buttons['heater'][dev] = self._gtk.Button("heater", "", None, self.bts, Gtk.PositionType.LEFT, 1)
             self.labels[dev] = Gtk.Label(label="-")
