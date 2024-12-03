@@ -170,7 +170,7 @@ class Panel(ScreenPanel):
             row.attach(info, 1, 1, 1, 1)
             row.attach(rename, 2, 1, 1, 1)
             row.attach(delete, 3, 1, 1, 1)
-            row.attach(move, 4, 1, 1, 1)
+            # row.attach(move, 4, 1, 1, 1)
             if 'filename' in item:
                 icon.connect("clicked", self.confirm_print, path)
                 image_args = (path, icon, self.thumbsize / 2, True, "file")
@@ -243,7 +243,7 @@ class Panel(ScreenPanel):
         )
 
     def confirm_move_file(self, widget, filepath):
-        logging.debug(f"Sending copy_file {filepath}")
+        logging.debug(f"Sending move_file {filepath}")
         filename = filepath.split("/")[-1]
         dest = "gcodes/" + filename
         params = {"source": f"{filepath}",
@@ -337,7 +337,7 @@ class Panel(ScreenPanel):
 
         buttons = [
             {"name": _("Delete"), "response": Gtk.ResponseType.REJECT, "style": 'dialog-error'},
-            {"name": _("Move"), "response": Gtk.ResponseType.OK, "style": 'dialog-primary'},
+            {"name": _("Move on internal storage"), "response": Gtk.ResponseType.OK, "style": 'dialog-secondary'},
             {"name": action, "response": Gtk.ResponseType.OK, "style": 'dialog-primary'},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-secondary'}
         ]
@@ -379,7 +379,7 @@ class Panel(ScreenPanel):
         main_box.pack_start(inside_box, True, True, 0)
         self._gtk.Dialog(f'{action} {filename}', buttons, main_box, self.confirm_print_response, filename)
 
-    def confirm_print_response(self, dialog, response_id, filename):
+    def confirm_print_response(self, dialog, response_id, filename, filepath):
         self._gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.CANCEL:
             return
@@ -387,8 +387,15 @@ class Panel(ScreenPanel):
             logging.info(f"Starting print: {filename}")
             self._screen._ws.klippy.print_start(filename)
         elif response_id == Gtk.ResponseType.OK:
-            logging.info(f"Starting print: {filename}")
-            self.confirm_move_file(self, f"gcodes/{path}")
+            file_check = os.path.isfile(f"gcodes/{filename}")
+            # file = filepath.split("/")
+            if file_check == 0:
+                logging.info(f"Move file {filename} to internal storage")
+                # filename = filepath.split("/")[-1]
+                # dest = "gcodes/" + filename
+                self.confirm_move_file(self, f"gcodes/{path}")
+            else:
+                logging.info(f"{filename} is already on the internal storage")
         elif response_id == Gtk.ResponseType.REJECT:
             self.confirm_delete_file(None, f"gcodes/{filename}")
 
