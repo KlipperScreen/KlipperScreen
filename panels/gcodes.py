@@ -235,12 +235,16 @@ class Panel(ScreenPanel):
     def confirm_delete_file(self, widget, filepath):
         logging.debug(f"Sending delete_file {filepath}")
         params = {"path": f"{filepath}"}
-        self._screen._confirm_send_action(
-            None,
-            _("Delete File?") + "\n\n" + filepath,
-            "server.files.delete_file",
-            params
-        )
+        check_file = os.path.isfile(dest)
+        if check_file == False:
+            self._screen._confirm_send_action(
+                None,
+                _("Used only for files on removable media") + "\n\n"+ _("Move file to internal storage?") + "\n\n" + filepath,
+                "server.files.move",
+                params
+            )
+        else:
+            pass
 
     def confirm_move_file(self, widget, filepath):
         logging.debug(f"Sending move_file {filepath}")
@@ -248,12 +252,16 @@ class Panel(ScreenPanel):
         dest = "gcodes/" + filename
         params = {"source": f"{filepath}",
                   "dest": f"{dest}"}
-        self._screen._confirm_send_action(
-            None,
-            _("Used only for files on removable media") + "\n\n"+ _("Move file to internal storage?") + "\n\n" + filepath,
-            "server.files.move",
-            params
-        )
+        check_file = os.path.isfile(dest)
+        if check_file == False:
+            self._screen._confirm_send_action(
+                None,
+                _("Used only for files on removable media") + "\n\n"+ _("Move file to internal storage?") + "\n\n" + filepath,
+                "server.files.move",
+                params
+            )
+        else:
+            pass
 
     def confirm_delete_directory(self, widget, dirpath):
         logging.debug(f"Sending delete_directory {dirpath}")
@@ -387,12 +395,8 @@ class Panel(ScreenPanel):
             logging.info(f"Starting print: {filename}")
             self._screen._ws.klippy.print_start(filename)
         elif response_id == Gtk.ResponseType.APPLY:
-            file_check = os.path.isfile(f"/home/pi/printer_data/gcodes/{filename}")
-            if file_check == True:
-                logging.info(f"Move file {filename} to internal storage")
-                self.confirm_move_file(self, f"gcodes/{filename}")
-            else:
-                logging.info(f"{filename} is already on the internal storage")
+            logging.info(f"Move file {filename} to internal storage")
+            self.confirm_move_file(self, f"gcodes/{filename}")
         elif response_id == Gtk.ResponseType.REJECT:
             self.confirm_delete_file(None, f"gcodes/{filename}")
 
