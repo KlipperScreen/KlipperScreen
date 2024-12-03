@@ -235,16 +235,12 @@ class Panel(ScreenPanel):
     def confirm_delete_file(self, widget, filepath):
         logging.debug(f"Sending delete_file {filepath}")
         params = {"path": f"{filepath}"}
-        check_file = os.path.isfile(dest)
-        if check_file == False:
-            self._screen._confirm_send_action(
-                None,
-                _("Used only for files on removable media") + "\n\n"+ _("Move file to internal storage?") + "\n\n" + filepath,
-                "server.files.move",
-                params
-            )
-        else:
-            pass
+        self._screen._confirm_send_action(
+            None,
+            _("Delete File?") + "\n\n" + filepath,
+            "server.files.delete_file",
+            params
+        )
 
     def confirm_move_file(self, widget, filepath):
         logging.debug(f"Sending move_file {filepath}")
