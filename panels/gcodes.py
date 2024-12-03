@@ -387,10 +387,10 @@ class Panel(ScreenPanel):
             logging.info(f"Starting print: {filename}")
             self._screen._ws.klippy.print_start(filename)
         elif response_id == Gtk.ResponseType.APPLY:
-            file_check = os.path.isfile(f"gcodes/{filename}")
+            file_check = os.path.isfile(f"/home/pi/printer_data/gcodes/{filename}")
             if file_check == 0:
                 logging.info(f"Move file {filename} to internal storage")
-                self.confirm_move_file(self, f"gcodes/{path}")
+                self.confirm_move_file(self, f"gcodes/{filename}")
             else:
                 logging.info(f"{filename} is already on the internal storage")
         elif response_id == Gtk.ResponseType.REJECT:
