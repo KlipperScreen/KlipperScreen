@@ -379,7 +379,7 @@ class Panel(ScreenPanel):
         main_box.pack_start(inside_box, True, True, 0)
         self._gtk.Dialog(f'{action} {filename}', buttons, main_box, self.confirm_print_response, filename)
 
-    def confirm_print_response(self, dialog, response_id, filename, filepath):
+    def confirm_print_response(self, dialog, response_id, filename):
         self._gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.CANCEL:
             return
@@ -388,11 +388,8 @@ class Panel(ScreenPanel):
             self._screen._ws.klippy.print_start(filename)
         elif response_id == Gtk.ResponseType.OK:
             file_check = os.path.isfile(f"gcodes/{filename}")
-            # file = filepath.split("/")
             if file_check == 0:
                 logging.info(f"Move file {filename} to internal storage")
-                # filename = filepath.split("/")[-1]
-                # dest = "gcodes/" + filename
                 self.confirm_move_file(self, f"gcodes/{path}")
             else:
                 logging.info(f"{filename} is already on the internal storage")
