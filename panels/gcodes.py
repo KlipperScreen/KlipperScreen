@@ -393,11 +393,11 @@ class Panel(ScreenPanel):
 
         inside_box.pack_start(info_box, True, True, 0)
         main_box.pack_start(inside_box, True, True, 0)
-        dir_path = "/home/pi/printer_data/gcodes"
+        dir_path = "/home/pi/printer_data/gcodes/"
         if os.path.exists(f"{dir_path} + {filename}"):
-            self._gtk.Dialog(f'{action} {filename}', buttons_usb, main_box, self.confirm_print_response, filename)
-        else:
             self._gtk.Dialog(f'{action} {filename}', buttons, main_box, self.confirm_print_response, filename)
+        else:
+            self._gtk.Dialog(f'{action} {filename}', buttons_usb, main_box, self.confirm_print_response, filename)
 
     def confirm_print_response(self, dialog, response_id, filename):
         self._gtk.remove_dialog(dialog)
