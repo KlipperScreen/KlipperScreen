@@ -249,7 +249,7 @@ class Panel(ScreenPanel):
         params = {"source": f"{filepath}",
                   "dest": f"{dest}"}
         check_file = os.path.isfile(dest)
-        if check_file == False:
+        if os.path.isfile(dest) == False:
             self._screen._confirm_send_action(
                 None,
                 _("Used only for files on removable media") + "\n\n"+ _("Move file to internal storage?") + "\n\n" + filepath,
