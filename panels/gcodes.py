@@ -248,8 +248,8 @@ class Panel(ScreenPanel):
         dest = "gcodes/" + filename
         params = {"source": f"{filepath}",
                   "dest": f"{dest}"}
-        check_file = os.path.exists(dest)
-        if os.path.exists(dest) == False:
+        check_file = os.path.exists("/home/pi/printer_data/" + dest)
+        if check_file == True:
             self._screen.gtk.remove_dialog(dialog)
         else:
             self._screen._confirm_send_action(
