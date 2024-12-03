@@ -251,7 +251,11 @@ class Panel(ScreenPanel):
         gcodes_path = "/home/pi/printer_data/"
         check_file = os.path.exists(gcodes_path + dest)
         if check_file == True:
-            self._screen.gtk.remove_dialog(dialog)
+            self._screen._send_action(
+                None,
+                "server.files.copy",
+                params
+            )
         else:
             self._screen._confirm_send_action(
                 None,
