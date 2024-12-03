@@ -152,6 +152,9 @@ class Panel(ScreenPanel):
             delete = Gtk.Button(hexpand=False, vexpand=False, can_focus=False, always_show_image=True)
             delete.get_style_context().add_class("color1")
             delete.set_image(self._gtk.Image("delete", self.list_button_size, self.list_button_size))
+            copy = Gtk.Button(hexpand=False, vexpand=False, can_focus=False, always_show_image=True)
+            copy.get_style_context().add_class("color1")
+            copy.set_image(self._gtk.Image("sd", self.list_button_size, self.list_button_size))
             rename = Gtk.Button(hexpand=False, vexpand=False, can_focus=False, always_show_image=True)
             rename.get_style_context().add_class("color2")
             rename.set_image(self._gtk.Image("files", self.list_button_size, self.list_button_size))
@@ -167,10 +170,12 @@ class Panel(ScreenPanel):
             row.attach(info, 1, 1, 1, 1)
             row.attach(rename, 2, 1, 1, 1)
             row.attach(delete, 3, 1, 1, 1)
+            row.attach(copy, 3, 1, 1, 1)
             if 'filename' in item:
                 icon.connect("clicked", self.confirm_print, path)
                 image_args = (path, icon, self.thumbsize / 2, True, "file")
                 delete.connect("clicked", self.confirm_delete_file, f"gcodes/{path}")
+                copy.connect("clicked", self.confirm_copy_file, f"gcodes/{path}")
                 rename.connect("clicked", self.show_rename, f"gcodes/{path}")
                 action_icon = "printer" if self._printer.extrudercount > 0 else "load"
                 action = self._gtk.Button(action_icon, style="color3")
@@ -234,6 +239,19 @@ class Panel(ScreenPanel):
             None,
             _("Delete File?") + "\n\n" + filepath,
             "server.files.delete_file",
+            params
+        )
+
+    def confirm_copy_file(self, widget, filepath):
+        logging.debug(f"Sending copy_file {filepath}")
+        filename = filepath.split("/")[-1]
+        dest = "gcodes/" + filename
+        params = {"source": f"{filepath}",
+                  "dest": f"{dest}"}
+        self._screen._confirm_send_action(
+            None,
+            _("Used only for files on removable media") + "\n\n"+ _("Copy file to internal storage?") + "\n\n" + filepath,
+            "server.files.copy",
             params
         )
 
