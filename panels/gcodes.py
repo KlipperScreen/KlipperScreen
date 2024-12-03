@@ -249,15 +249,15 @@ class Panel(ScreenPanel):
         params = {"source": f"{filepath}",
                   "dest": f"{dest}"}
         check_file = os.path.exists(dest)
-        if os.path.exists(dest) == False:
+        if os.path.exists(dest) == True:
+            self._screen.gtk.remove_dialog(dialog)
+        else:
             self._screen._confirm_send_action(
                 None,
                 _("Used only for files on removable media") + "\n\n"+ _("Move file to internal storage?") + "\n\n" + filepath,
                 "server.files.move",
                 params
             )
-        else:
-            self._screen.gtk.remove_dialog(dialog)
 
     def confirm_delete_directory(self, widget, dirpath):
         logging.debug(f"Sending delete_directory {dirpath}")
