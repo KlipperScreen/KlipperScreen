@@ -337,7 +337,7 @@ class Panel(ScreenPanel):
 
         buttons = [
             {"name": _("Delete"), "response": Gtk.ResponseType.REJECT, "style": 'dialog-error'},
-            {"name": _("Move on internal storage"), "response": Gtk.ResponseType.OK, "style": 'dialog-secondary'},
+            {"name": _("Move on internal storage"), "response": Gtk.ResponseType.APPLY, "style": 'dialog-secondary'},
             {"name": action, "response": Gtk.ResponseType.OK, "style": 'dialog-primary'},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-secondary'}
         ]
@@ -386,7 +386,7 @@ class Panel(ScreenPanel):
         elif response_id == Gtk.ResponseType.OK:
             logging.info(f"Starting print: {filename}")
             self._screen._ws.klippy.print_start(filename)
-        elif response_id == Gtk.ResponseType.OK:
+        elif response_id == Gtk.ResponseType.APPLY:
             file_check = os.path.isfile(f"gcodes/{filename}")
             if file_check == 0:
                 logging.info(f"Move file {filename} to internal storage")
