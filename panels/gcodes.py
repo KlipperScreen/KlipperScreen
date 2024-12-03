@@ -251,9 +251,10 @@ class Panel(ScreenPanel):
         gcodes_path = "/home/pi/printer_data/"
         check_file = os.path.exists(gcodes_path + dest)
         if check_file == True:
-            self._screen._send_action(
+            self._screen._confirm_send_action(
                 None,
-                "server.files.copy",
+                _("A file with this name already exists") + "\n\n"+ _("Replace it?") + "\n\n" + filepath,
+                "server.files.move",
                 params
             )
         else:

@@ -1026,6 +1026,12 @@ msgstr "Переместить файл на внутреннее хранили
 msgid "Resave"
 msgstr "Перенести"
 
+msgid "A file with this name already exists"
+msgstr "Файл с таким именем уже существует"
+
+msgid "Replace it?"
+msgstr "Заменить его?"
+
 #~ msgid "Mesh calibrate"
 #~ msgstr "Калибровка сетки"
 
