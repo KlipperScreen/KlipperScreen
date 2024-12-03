@@ -250,7 +250,7 @@ class Panel(ScreenPanel):
                   "dest": f"{dest}"}
         gcodes_path = "/home/pi/printer_data/"
         check_file = os.path.exists(gcodes_path + dest)
-        if check_file == True:
+        if check_file:
             self._screen._confirm_send_action(
                 None,
                 _("A file with this name already exists") + "\n\n"+ _("Replace it?") + "\n\n" + filepath,
@@ -347,6 +347,12 @@ class Panel(ScreenPanel):
 
         buttons = [
             {"name": _("Delete"), "response": Gtk.ResponseType.REJECT, "style": 'dialog-error'},
+            {"name": action, "response": Gtk.ResponseType.OK, "style": 'dialog-primary'},
+            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-secondary'}
+        ]
+
+        buttons_usb = [
+            {"name": _("Delete"), "response": Gtk.ResponseType.REJECT, "style": 'dialog-error'},
             {"name": _("Resave"), "response": Gtk.ResponseType.APPLY, "style": 'dialog-secondary'},
             {"name": action, "response": Gtk.ResponseType.OK, "style": 'dialog-primary'},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-secondary'}
@@ -387,7 +393,11 @@ class Panel(ScreenPanel):
 
         inside_box.pack_start(info_box, True, True, 0)
         main_box.pack_start(inside_box, True, True, 0)
-        self._gtk.Dialog(f'{action} {filename}', buttons, main_box, self.confirm_print_response, filename)
+        dir_path = "/home/pi/printer_data/gcodes"
+        if os.path.exists(f"{dir_path} + {filename}"):
+            self._gtk.Dialog(f'{action} {filename}', buttons_usb, main_box, self.confirm_print_response, filename)
+        else:
+            self._gtk.Dialog(f'{action} {filename}', buttons, main_box, self.confirm_print_response, filename)
 
     def confirm_print_response(self, dialog, response_id, filename):
         self._gtk.remove_dialog(dialog)
@@ -396,7 +406,7 @@ class Panel(ScreenPanel):
         elif response_id == Gtk.ResponseType.OK:
             logging.info(f"Starting print: {filename}")
             self._screen._ws.klippy.print_start(filename)
-        elif response_id == Gtk.ResponseType.APPLY:
+        elif response_id == Gtk.ResponseType.APPLY and:
             logging.info(f"Move file {filename} to internal storage")
             self.confirm_move_file(self, f"gcodes/{filename}")
         elif response_id == Gtk.ResponseType.REJECT:
