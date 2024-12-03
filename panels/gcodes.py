@@ -250,8 +250,8 @@ class Panel(ScreenPanel):
                   "dest": f"{dest}"}
         self._screen._confirm_send_action(
             None,
-            _("Used only for files on removable media") + "\n\n"+ _("Copy file to internal storage?") + "\n\n" + filepath,
-            "server.files.copy",
+            _("Used only for files on removable media") + "\n\n"+ _("Move file to internal storage?") + "\n\n" + filepath,
+            "server.files.move",
             params
         )
 
