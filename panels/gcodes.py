@@ -257,7 +257,7 @@ class Panel(ScreenPanel):
                 params
             )
         else:
-            pass
+            self._screen.gtk.remove_dialog(dialog)
 
     def confirm_delete_directory(self, widget, dirpath):
         logging.debug(f"Sending delete_directory {dirpath}")
