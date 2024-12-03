@@ -406,7 +406,7 @@ class Panel(ScreenPanel):
         elif response_id == Gtk.ResponseType.OK:
             logging.info(f"Starting print: {filename}")
             self._screen._ws.klippy.print_start(filename)
-        elif response_id == Gtk.ResponseType.APPLY and:
+        elif response_id == Gtk.ResponseType.APPLY:
             logging.info(f"Move file {filename} to internal storage")
             self.confirm_move_file(self, f"gcodes/{filename}")
         elif response_id == Gtk.ResponseType.REJECT:
