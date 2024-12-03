@@ -155,9 +155,9 @@ class Panel(ScreenPanel):
             rename = Gtk.Button(hexpand=False, vexpand=False, can_focus=False, always_show_image=True)
             rename.get_style_context().add_class("color2")
             rename.set_image(self._gtk.Image("files", self.list_button_size, self.list_button_size))
-            copy = Gtk.Button(hexpand=False, vexpand=False, can_focus=False, always_show_image=True)
-            copy.get_style_context().add_class("color3")
-            copy.set_image(self._gtk.Image("sd", self.list_button_size, self.list_button_size))
+            move = Gtk.Button(hexpand=False, vexpand=False, can_focus=False, always_show_image=True)
+            move.get_style_context().add_class("color3")
+            move.set_image(self._gtk.Image("sd", self.list_button_size, self.list_button_size))
             itemname = Gtk.Label(hexpand=True, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END)
             itemname.get_style_context().add_class("print-filename")
             itemname.set_markup(f"<big><b>{basename}</b></big>")
@@ -175,7 +175,7 @@ class Panel(ScreenPanel):
                 icon.connect("clicked", self.confirm_print, path)
                 image_args = (path, icon, self.thumbsize / 2, True, "file")
                 delete.connect("clicked", self.confirm_delete_file, f"gcodes/{path}")
-                copy.connect("clicked", self.confirm_copy_file, f"gcodes/{path}")
+                copy.connect("clicked", self.confirm_move_file, f"gcodes/{path}")
                 rename.connect("clicked", self.show_rename, f"gcodes/{path}")
                 action_icon = "printer" if self._printer.extrudercount > 0 else "load"
                 action = self._gtk.Button(action_icon, style="color3")
@@ -242,7 +242,7 @@ class Panel(ScreenPanel):
             params
         )
 
-    def confirm_copy_file(self, widget, filepath):
+    def confirm_move_file(self, widget, filepath):
         logging.debug(f"Sending copy_file {filepath}")
         filename = filepath.split("/")[-1]
         dest = "gcodes/" + filename
@@ -337,6 +337,7 @@ class Panel(ScreenPanel):
 
         buttons = [
             {"name": _("Delete"), "response": Gtk.ResponseType.REJECT, "style": 'dialog-error'},
+            {"name": _("Move"), "response": Gtk.ResponseType.OK, "style": 'dialog-primary'},
             {"name": action, "response": Gtk.ResponseType.OK, "style": 'dialog-primary'},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-secondary'}
         ]
@@ -385,6 +386,9 @@ class Panel(ScreenPanel):
         elif response_id == Gtk.ResponseType.OK:
             logging.info(f"Starting print: {filename}")
             self._screen._ws.klippy.print_start(filename)
+        elif response_id == Gtk.ResponseType.OK:
+            logging.info(f"Starting print: {filename}")
+            self.confirm_move_file(self, f"gcodes/{path}")
         elif response_id == Gtk.ResponseType.REJECT:
             self.confirm_delete_file(None, f"gcodes/{filename}")
 
