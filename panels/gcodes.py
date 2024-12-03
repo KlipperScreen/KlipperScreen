@@ -170,12 +170,12 @@ class Panel(ScreenPanel):
             row.attach(info, 1, 1, 1, 1)
             row.attach(rename, 2, 1, 1, 1)
             row.attach(delete, 3, 1, 1, 1)
-            row.attach(copy, 4, 1, 1, 1)
+            row.attach(move, 4, 1, 1, 1)
             if 'filename' in item:
                 icon.connect("clicked", self.confirm_print, path)
                 image_args = (path, icon, self.thumbsize / 2, True, "file")
                 delete.connect("clicked", self.confirm_delete_file, f"gcodes/{path}")
-                copy.connect("clicked", self.confirm_move_file, f"gcodes/{path}")
+                move.connect("clicked", self.confirm_move_file, f"gcodes/{path}")
                 rename.connect("clicked", self.show_rename, f"gcodes/{path}")
                 action_icon = "printer" if self._printer.extrudercount > 0 else "load"
                 action = self._gtk.Button(action_icon, style="color3")
