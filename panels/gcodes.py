@@ -249,7 +249,7 @@ class Panel(ScreenPanel):
         params = {"source": f"{filepath}",
                   "dest": f"{dest}"}
         check_file = os.path.exists(dest)
-        if os.path.exists(dest) == True:
+        if os.path.exists(dest) == False:
             self._screen.gtk.remove_dialog(dialog)
         else:
             self._screen._confirm_send_action(
