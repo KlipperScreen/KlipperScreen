@@ -1035,6 +1035,27 @@ msgstr "Возможно Вы пытаетесь переместить файл
 msgid "Replace it?"
 msgstr "Заменить его?"
 
+msgid "Calibration"
+msgstr "Калибровки"
+
+msgid "Bed calibrate"
+msgstr "Автокалибровка карты"
+
+msgid "Autocalibration of PID hotend"
+msgstr "Автокалибровка PID хотенда"
+
+msgid "Autocalibration of PID 1st head"
+msgstr "Автокалибровка PID 1-й головы"
+
+msgid "Autocalibration of PID 2nd head"
+msgstr "Автокалибровка PID 1-й головы"
+
+msgid "Autocalibration of PID bed"
+msgstr "Автокалибровка PID стола"
+
+msgid "Autocalibration of Z-offset of the 2nd head"
+msgstr "Автокалибровка Z-офсета 2-й головы"
+
 #~ msgid "Mesh calibrate"
 #~ msgstr "Калибровка сетки"
 
