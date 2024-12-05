@@ -1026,8 +1026,8 @@ msgstr "Переместить файл в главную директорию?"
 msgid "Resave"
 msgstr "Перенести"
 
-msgid "A file with this name already exists!"
-msgstr "Файл с таким именем уже существует!"
+msgid "A file with this name already exists"
+msgstr "Файл с таким именем уже существует"
 
 msgid "You may be trying to move a file that is already in the main directory"
 msgstr "Возможно Вы пытаетесь переместить файл, который уже находится в главной директории"
