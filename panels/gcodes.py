@@ -253,14 +253,14 @@ class Panel(ScreenPanel):
         if check_file:
             self._screen._confirm_send_action(
                 None,
-                _("A file with this name already exists") + "\n\n"+ _("Replace it?") + "\n\n" + filepath,
+                _("A file with this name already exists") + "\n\n" + _("You may be trying to move a file that is already in the main directory") + "\n\n" + _("Replace it?") + "\n\n" + filepath,
                 "server.files.move",
                 params
             )
         else:
             self._screen._confirm_send_action(
                 None,
-                _("Used only for files on removable media") + "\n\n"+ _("Move file to internal storage?") + "\n\n" + filepath,
+                _("This function is designed to move a file to the main directory") + "\n\n"+ _("Move file to main directory?") + "\n\n" + filepath,
                 "server.files.move",
                 params
             )
@@ -393,8 +393,9 @@ class Panel(ScreenPanel):
 
         inside_box.pack_start(info_box, True, True, 0)
         main_box.pack_start(inside_box, True, True, 0)
+
         dir_path = "/home/pi/printer_data/gcodes/"
-        if os.path.exists(f"{dir_path} + {filename}"):
+        if os.path.isfile(f"{dir_path} + {filename}"):
             self._gtk.Dialog(f'{action} {filename}', buttons, main_box, self.confirm_print_response, filename)
         else:
             self._gtk.Dialog(f'{action} {filename}', buttons_usb, main_box, self.confirm_print_response, filename)

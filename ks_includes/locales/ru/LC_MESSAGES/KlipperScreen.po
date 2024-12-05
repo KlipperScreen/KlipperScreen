@@ -1017,17 +1017,20 @@ msgstr[0] "секунда"
 msgstr[1] "секунды"
 msgstr[2] "секунд"
 
-msgid "Used only for files on removable media"
-msgstr "Используется только для файлов на съемных носителях"
+msgid "This function is designed to move a file to the main directory"
+msgstr "Данная функция предназначена для переноса файла в главную директорию"
 
-msgid "Move file to internal storage?"
-msgstr "Переместить файл на внутреннее хранилище?"
+msgid "Move file to main directory?"
+msgstr "Переместить файл в главную директорию?"
 
 msgid "Resave"
 msgstr "Перенести"
 
-msgid "A file with this name already exists"
-msgstr "Файл с таким именем уже существует"
+msgid "A file with this name already exists!"
+msgstr "Файл с таким именем уже существует!"
+
+msgid "You may be trying to move a file that is already in the main directory"
+msgstr "Возможно Вы пытаетесь переместить файл, который уже находится в главной директории"
 
 msgid "Replace it?"
 msgstr "Заменить его?"
