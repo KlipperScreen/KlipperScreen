@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 24-10-14 10.00\n"
+"Project-Id-Version: 24-11-26 10.00\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-26 12:31-0300\n"
-"PO-Revision-Date: 2024-10-14 09:59+0300\n"
+"PO-Revision-Date: 2024-11-26 22:47+0200\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
 "Language: uk\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.4.1\n"
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.5\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -173,14 +173,14 @@ msgid "Connected"
 msgstr "Підключено"
 
 msgid "Connecting"
-msgstr "Відбувається підключення"
+msgstr "Підключення"
 
 #, python-format
 msgid "Connecting to %s"
 msgstr "Підключення до %s"
 
 msgid "Connection failed"
-msgstr "Підключення невдале"
+msgstr "Помилка підключення"
 
 msgid "Console"
 msgstr "Консоль"
@@ -189,7 +189,7 @@ msgid "Cooldown"
 msgstr "Охолодження"
 
 msgid "Couldn't add network"
-msgstr "Неможливо додати мережу"
+msgstr "Не вдалося додати мережу"
 
 msgid "Current"
 msgstr "Поточний"
@@ -219,14 +219,14 @@ msgid "Disable for 12hs with am / pm"
 msgstr "Вимкнути на 12 годин за допомогою am / pm"
 
 msgid "Disconnect"
-msgstr "Від'єднатись"
+msgstr "Відключати"
 
 msgid "Distance (mm)"
 msgstr "Відстань (мм)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr "Забути або від'єднатись від %s?"
+msgstr "Ви хочете забути чи відключити %s?"
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -260,7 +260,7 @@ msgid "Error: Couldn't get a position to probe"
 msgstr "Помилка: не вдалося отримати позицію для проби"
 
 msgid "Estimated Time"
-msgstr "Розрахований час"
+msgstr "Розрахунковий Час"
 
 msgid "Estimated Time Method"
 msgstr "Метод розрахунку часу"
@@ -275,19 +275,21 @@ msgid "Extra Large"
 msgstr "Дуже Великий"
 
 msgid "Extrude"
-msgstr "Видавити"
+msgstr ""
+"Заміна пластику\n"
+"Продавлювити"
 
 msgid "Extruders"
 msgstr "Екструдери"
 
 msgid "Extrusion +"
-msgstr "Видавити +"
+msgstr "Екструзія +"
 
 msgid "Extrusion -"
-msgstr "Втягнути -"
+msgstr "Екструзія -"
 
 msgid "Failed to delete connection"
-msgstr "Не вдалося видалити з'єднання"
+msgstr "Не вдалося видалити з’єднання"
 
 msgid "Failed to initialize"
 msgstr "Не вдалося ініціалізувати"
@@ -299,7 +301,7 @@ msgid "Fan"
 msgstr "Вентилятор"
 
 msgid "Filament"
-msgstr "Пруток"
+msgstr "Профиль прутка"
 
 msgid "Filament Used"
 msgstr "Використання Прутка"
@@ -350,13 +352,15 @@ msgid "Forget"
 msgstr "Забути"
 
 msgid "Full Update"
-msgstr "Повне оновлення"
+msgstr ""
+"Повне\n"
+"Оновлення"
 
 msgid "Gcodes"
-msgstr "G-коди"
+msgstr "G-код"
 
 msgid "Getting IP address"
-msgstr "Отримання IP адреси"
+msgstr "Отримання IP-адреси"
 
 msgid "Go Back"
 msgstr "Назад"
@@ -371,7 +375,7 @@ msgid "Hide sensors in Temp."
 msgstr "Сховати датчик t°."
 
 msgid "Home"
-msgstr "Домашня сторінка"
+msgstr "Дім"
 
 msgid "Home All"
 msgstr "Дім Всі"
@@ -398,7 +402,7 @@ msgid "ID"
 msgstr "ID"
 
 msgid "Icon Theme"
-msgstr "Тема оформлення"
+msgstr "Іконка тема"
 
 msgid "Initializing printer..."
 msgstr "Ініціалізація принтера..."
@@ -410,7 +414,7 @@ msgid "Input Shaper"
 msgstr "Input Shaper"
 
 msgid "Insufficient privileges"
-msgstr "Недостатні привілеї"
+msgstr "Недостатньо прав"
 
 msgid "Interface"
 msgstr "Інтерфейс"
@@ -443,10 +447,12 @@ msgid "It's possible that the configuration is not correct"
 msgstr "Можливо, конфігурація неправильна"
 
 msgid "Job Status"
-msgstr "Стан завдання"
+msgstr "Статус роботи"
 
 msgid "Klipper Restart"
-msgstr "Перезапуск Klipper"
+msgstr ""
+"Перезапуск\n"
+"Klipper"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper загубив зв'язок"
@@ -466,8 +472,8 @@ msgstr "Klipper перезавантажиться"
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT приховані, і їх слід використовувати з меню "
-"Заміна пластику"
+"LOAD_FILAMENT/UNLOAD_FILAMENT приховані, і їх слід використовувати під час "
+"видавлювання"
 
 msgid "Language"
 msgstr "Мова"
@@ -476,7 +482,7 @@ msgid "Large"
 msgstr "Великий"
 
 msgid "Last Duration"
-msgstr "Остання тривалість"
+msgstr "Остання Тривалість"
 
 msgid "Last Used"
 msgstr "Останнє Використання"
@@ -488,7 +494,7 @@ msgid "Layer:"
 msgstr "Шар:"
 
 msgid "Leds"
-msgstr "Освітлення"
+msgstr "Світлодіоди"
 
 msgid "Left:"
 msgstr "Залишилось:"
@@ -503,7 +509,7 @@ msgid "Loading..."
 msgstr "Завантаження..."
 
 msgid "Lock"
-msgstr ""
+msgstr "Заблоковано"
 
 msgid "Lost Connection to Moonraker"
 msgstr "Втрачено з’єднання з Moonraker"
@@ -584,13 +590,13 @@ msgid "Network"
 msgstr "Мережа"
 
 msgid "Network connected"
-msgstr "Під'єднано до мережі"
+msgstr "Підключено до мережі"
 
 msgid "Network disconnected"
-msgstr "Від'єднано від мережі"
+msgstr "Мережа відключена"
 
 msgid "Network not found"
-msgstr "Мережу не знайдено"
+msgstr "Мережа не знайдена"
 
 msgid "Never"
 msgstr "Ніколи"
@@ -605,7 +611,7 @@ msgid "No info available"
 msgstr "Немає інформації"
 
 msgid "No mesh has been loaded"
-msgstr "Не завантажено жодної сітки"
+msgstr "Жодна сітка не завантажена"
 
 msgid "No wireless interface has been found"
 msgstr "Бездротовий інтерфейс не знайдено"
@@ -626,10 +632,10 @@ msgid "Notifications"
 msgstr "Сповіщення"
 
 msgid "Nozzle diameter"
-msgstr "Діаметр сопла"
+msgstr "Диаметр сопла"
 
 msgid "Only for the move panel"
-msgstr "Лише для панелі переміщення"
+msgstr "Тільки для панелі переміщення"
 
 #, python-format
 msgid "Outdated by %d"
@@ -660,13 +666,15 @@ msgid "Perform a full upgrade?"
 msgstr "Виконати повне оновлення?"
 
 msgid "Pins"
-msgstr "Піни"
+msgstr ""
+"Керування\n"
+"контактами"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Будь ласка, перекомпілюйте та перепрошійте мікроконтролер."
 
 msgid "Please wait"
-msgstr "Очікуйте, будь ласка"
+msgstr "Будь ласка, зачекайте"
 
 msgid "Power"
 msgstr "Живлення"
@@ -675,10 +683,10 @@ msgid "Power On Printer"
 msgstr "Увімкнути принтер"
 
 msgid "Pressure Advance"
-msgstr "Випередження тиску"
+msgstr "Випередження Тиску"
 
 msgid "Pressure Advance:"
-msgstr "Випередження тиску:"
+msgstr "Випередження Тиску:"
 
 msgid "Pressure advance"
 msgstr "Випередження тиску"
@@ -732,7 +740,7 @@ msgid "Refresh"
 msgstr "Оновити"
 
 msgid "Remove network"
-msgstr "Вийняти мережу"
+msgstr "Видалити мережу"
 
 msgid "Rename/Move:"
 msgstr "Перейменувати/перемістити:"
@@ -866,8 +874,8 @@ msgstr "Початок оновлення для"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
 msgstr ""
-"Міняти місцями кнопки, якщо вони розташовані одна поверх іншої. Впливає на "
-"решту панелей"
+"Міняти місцями кнопки, якщо вони розташовані одна поверх іншої. \n"
+"Впливає нарешту панелей"
 
 msgid "System"
 msgstr "Системна"
@@ -918,10 +926,10 @@ msgid "Unload"
 msgstr "Вийняти"
 
 msgid "Unlock"
-msgstr ""
+msgstr "Розблокувати"
 
 msgid "Unlock failed"
-msgstr ""
+msgstr "Помилка розблокування"
 
 msgid "Unretract Extra Length"
 msgstr "Додаткова довжина втягування"
@@ -933,7 +941,7 @@ msgid "Up To Date"
 msgstr "Актуально"
 
 msgid "Update"
-msgstr "Оновити"
+msgstr "Оновлення"
 
 msgid "Updating"
 msgstr "Оновлення"
@@ -1014,7 +1022,7 @@ msgid "mm/s²"
 msgstr "мм/с²"
 
 msgid "mm³/s"
-msgstr "мм/с³"
+msgstr "мм³/с"
 
 msgid "s"
 msgstr "с"
@@ -1025,151 +1033,151 @@ msgstr[0] "секунда"
 msgstr[1] "секунди"
 msgstr[2] "секунд"
 
-#~ msgid "Hide temp."
-#~ msgstr "Приховати темп."
+msgid "Hide temp."
+msgstr "Приховати темп."
 
-#~ msgid "PSK for"
-#~ msgstr "PSK для"
+msgid "PSK for"
+msgstr "PSK для"
 
-#~ msgid "Are you sure you want to stop the calibration?"
-#~ msgstr "Ви впевнені, що хочете припинити калібрування?"
+msgid "Are you sure you want to stop the calibration?"
+msgstr "Ви впевнені, що хочете припинити калібрування?"
 
-#~ msgid "Mesh calibrate"
-#~ msgstr "Калібрування сітки столу"
+msgid "Mesh calibrate"
+msgstr "Калібрування сітки столу"
 
-#~ msgid "Uploaded"
-#~ msgstr "Завантажено"
+msgid "Uploaded"
+msgstr "Завантажено"
 
-#~ msgid "Ended official support in June 2023"
-#~ msgstr "Офіційна підтримка припинена в червні 2023 року"
+msgid "Ended official support in June 2023"
+msgstr "Офіційна підтримка припинена в червні 2023 року"
 
-#~ msgid "Hidden"
-#~ msgstr "Прихований"
+msgid "Hidden"
+msgstr "Прихований"
 
-#~ msgid "KlipperScreen will drop support in June 2024"
-#~ msgstr "KlipperScreen припинить підтримку в червні 2024 року"
+msgid "KlipperScreen will drop support in June 2024"
+msgstr "KlipperScreen припинить підтримку в червні 2024 року"
 
-#~ msgid "Print Time"
-#~ msgstr "Час друку"
+msgid "Print Time"
+msgstr "Час друку"
 
-#~ msgid "Starting WiFi Association"
-#~ msgstr "Запуск асоціації WiFi"
+msgid "Starting WiFi Association"
+msgstr "Запуск асоціації WiFi"
 
-#~ msgid "Warning"
-#~ msgstr "Попередження"
+msgid "Warning"
+msgstr "Попередження"
 
-#~ msgid "dBm"
-#~ msgstr "dBm"
+msgid "dBm"
+msgstr "dBm"
 
-#~ msgid "Deselect"
-#~ msgstr "Скасувати вибір"
+msgid "Deselect"
+msgstr "Скасувати вибір"
 
-#~ msgid "Select"
-#~ msgstr "Вибрати"
+msgid "Select"
+msgstr "Вибрати"
 
-#~ msgid "Bed screw configuration:"
-#~ msgstr "Конфігурація гвинтів ліжка:"
+msgid "Bed screw configuration:"
+msgstr "Конфігурація гвинтів ліжка:"
 
-#~ msgid ""
-#~ "Not supported for auto-detection, it needs to be configured in "
-#~ "klipperscreen.conf"
-#~ msgstr ""
-#~ "Автоматичне визначення не підтримується, його потрібно налаштувати у "
-#~ "klipperscreen.conf"
+msgid ""
+"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"conf"
+msgstr ""
+"Автоматичне визначення не підтримується, його потрібно налаштувати у "
+"klipperscreen.conf"
 
-#~ msgid "Unknown screw position"
-#~ msgstr "Невідоме положення гвинта"
+msgid "Unknown screw position"
+msgstr "Невідоме положення гвинта"
 
-#~ msgid "Max Acceleration to Deceleration"
-#~ msgstr "Макс. прискорення до гальмування"
+msgid "Max Acceleration to Deceleration"
+msgstr "Макс. прискорення до гальмування"
 
-#~ msgid "Continue"
-#~ msgstr "Продовжити"
+msgid "Continue"
+msgstr "Продовжити"
 
-#~ msgid "Fullscreen"
-#~ msgstr "Повноекранний режим"
+msgid "Fullscreen"
+msgstr "Повноекранний режим"
 
-#~ msgid "Actions"
-#~ msgstr "Дії"
+msgid "Actions"
+msgstr "Дії"
 
-#~ msgid "Configuration"
-#~ msgstr "Конфігурація"
+msgid "Configuration"
+msgstr "Конфігурація"
 
-#~ msgid "Homing"
-#~ msgstr "До дому"
+msgid "Homing"
+msgstr "До дому"
 
-#~ msgid "Disable XY"
-#~ msgstr "Вимкнути XY"
+msgid "Disable XY"
+msgstr "Вимкнути XY"
 
-#~ msgid "Slicer Time correction (%)"
-#~ msgstr "Виправлення часу слайсера (%)"
+msgid "Slicer Time correction (%)"
+msgstr "Виправлення часу слайсера (%)"
 
-#~ msgid "Calibrated, save configuration to make it permanent"
-#~ msgstr "Відкалібровано, збережіть конфігурацію, щоб зробити її постійною"
+msgid "Calibrated, save configuration to make it permanent"
+msgstr "Відкалібровано, збережіть конфігурацію, щоб зробити її постійною"
 
-#~ msgid "Decrease"
-#~ msgstr "Зменшити"
+msgid "Decrease"
+msgstr "Зменшити"
 
-#~ msgid "Increase"
-#~ msgstr "Збільшити"
-
-#, python-format
-#~ msgid "Sending Power ON signal to: %s"
-#~ msgstr "Надсилання сигналу увімкнення живлення на: %s"
-
-#~ msgid "Sort:"
-#~ msgstr "Сортувати:"
-
-#~ msgid "Calibrating..."
-#~ msgstr "Калібрування..."
-
-#~ msgid "Z+"
-#~ msgstr "Бебістеп Z+"
-
-#~ msgid "Z-"
-#~ msgstr "Бебістеп Z-"
-
-#~ msgid "X+"
-#~ msgstr "X+"
-
-#~ msgid "X-"
-#~ msgstr "X-"
-
-#~ msgid "Y+"
-#~ msgstr "Y+"
-
-#~ msgid "Y-"
-#~ msgstr "Y-"
+msgid "Increase"
+msgstr "Збільшити"
 
 #, python-format
-#~ msgid "Retry #%s"
-#~ msgstr "Повторіть #%s"
+msgid "Sending Power ON signal to: %s"
+msgstr "Надсилання сигналу увімкнення живлення на: %s"
 
-#~ msgid "Add Printer"
-#~ msgstr "Додати принтер"
+msgid "Sort:"
+msgstr "Сортувати:"
 
-#~ msgid "Initializing"
-#~ msgstr "Ініціалізація"
+msgid "Calibrating..."
+msgstr "Калібрування..."
 
-#~ msgid "Off"
-#~ msgstr "Вимк"
+msgid "Z+"
+msgstr "Бебістеп Z+"
 
-#~ msgid "View Mesh"
-#~ msgstr "Показати сітку"
+msgid "Z-"
+msgstr "Бебістеп Z-"
 
-#~ msgid "Machine"
-#~ msgstr "Машина"
+msgid "X+"
+msgstr "X+"
 
-#~ msgid "Sort by: "
-#~ msgstr "Сортувати за: "
+msgid "X-"
+msgstr "X-"
 
-#~ msgid "Auto Calibration"
-#~ msgstr "Автоматичне калібрування"
+msgid "Y+"
+msgstr "Y+"
 
-#~ msgid "Manual Calibration"
-#~ msgstr "Ручне калібрування"
+msgid "Y-"
+msgstr "Y-"
 
-#~ msgid "NOTE: Edit your printer.cfg to save manual calibration changes."
-#~ msgstr ""
-#~ "ПРИМІТКА. Відредагуйте файл printer.cfg, щоб зберегти зміни калібрування "
-#~ "вручну."
+#, python-format
+msgid "Retry #%s"
+msgstr "Повторіть #%s"
+
+msgid "Add Printer"
+msgstr "Додати принтер"
+
+msgid "Initializing"
+msgstr "Ініціалізація"
+
+msgid "Off"
+msgstr "Вимк"
+
+msgid "View Mesh"
+msgstr "Показати сітку"
+
+msgid "Machine"
+msgstr "Машина"
+
+msgid "Sort by: "
+msgstr "Сортувати за: "
+
+msgid "Auto Calibration"
+msgstr "Автоматичне калібрування"
+
+msgid "Manual Calibration"
+msgstr "Ручне калібрування"
+
+msgid "NOTE: Edit your printer.cfg to save manual calibration changes."
+msgstr ""
+"ПРИМІТКА. Відредагуйте файл printer.cfg, щоб зберегти зміни калібрування "
+"вручну."
