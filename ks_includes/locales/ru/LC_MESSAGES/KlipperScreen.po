@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-12-06 09:24+0300\n"
+"PO-Revision-Date: 2024-12-06 09:31+0300\n"
 "Last-Translator: Артем <gaz70rus@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/ru/>\n"
 "Language: ru\n"
@@ -1060,3 +1060,18 @@ msgstr "Стол вниз"
 
 msgid "Bed Down 10mm"
 msgstr "Стол вниз на 10мм"
+
+msgid "After confirmation, the auto-calibration of the 2nd head offset will begin"
+msgstr "После подтверждения начнется автокалибровка z-офсета 2-й головы"
+
+msgid "After confirmation, the PID bed autocalibration will begin"
+msgstr "После подтверждения начнется автокалибровка PID стола"
+
+msgid "After confirmation, the PID hotend autocalibration will begin"
+msgstr "После подтверждения начнется автокалибровка PID хотенда"
+
+msgid "After confirmation, the autocalibration of PID 1st head will begin"
+msgstr "После подтверждения начнется автокалибровка PID 1-й головы"
+
+msgid "After confirmation, the autocalibration of PID 2nd head will begin"
+msgstr "После подтверждения начнется автокалибровка PID 2-й головы"
