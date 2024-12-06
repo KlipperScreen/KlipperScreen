@@ -1056,6 +1056,12 @@ msgstr "Автокалибровка PID стола"
 msgid "Autocalibration of Z-offset of the 2nd head"
 msgstr "Автокалибровка Z-офсета 2-й головы"
 
+msgid "Bed Up"
+msgstr "Стол вверх"
+
+msgid "Bed Down"
+msgstr "Стол вниз"
+
 #~ msgid "Mesh calibrate"
 #~ msgstr "Калибровка сетки"
 
