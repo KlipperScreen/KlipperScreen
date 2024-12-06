@@ -1062,6 +1062,12 @@ msgstr "Стол вверх"
 msgid "Bed Down"
 msgstr "Стол вниз"
 
+msgid "Bed Down 10mm"
+msgstr "Стол вниз на 10мм"
+
+msgid "Make sure that moving the bed 10mm down will be safe for the printer!"
+msgstr "Убедитесь, что перемещение стола на 10 мм вниз безопасно для принтера!"
+
 #~ msgid "Mesh calibrate"
 #~ msgstr "Калибровка сетки"
 
