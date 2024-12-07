@@ -305,6 +305,15 @@ class Printer:
         else:
             return self.data.get(stat, {})
 
+    def set_stat(self, stat, data):
+        if self.data is None:
+            logging.error("Data is not initialized")
+            return
+        if stat not in self.data:
+            logging.error(f"Stat '{stat}' not found in data")
+            return
+        self.data[stat].update(data)
+
     def get_fan_speed(self, fan="fan"):
         speed = 0
         if fan not in self.config or fan not in self.data:
