@@ -149,15 +149,6 @@ menu {
     border-color: @border;
 }
 
-button.menu_active {
-    border-color: @border;
-    border-style: solid;
-    border-width: .25em;
-    background-color: @bg;
-    box-shadow: .1em .1em @border;
-    border-radius: 1em;
-}
-
 menuitem {
     background-color: @bg;
     border-color: @border;

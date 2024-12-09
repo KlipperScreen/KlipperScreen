@@ -101,11 +101,6 @@ menu {
     border-color: @lines;
 }
 
-button.menu_active {
-    border-width: 0;
-    background-color: @active;
-}
-
 menuitem {
     background-color: @bg;
     border-color: @lines;
