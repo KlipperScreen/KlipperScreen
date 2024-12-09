@@ -1,7 +1,7 @@
 # KlipperScreen
 
 > [!IMPORTANT]
-> This fork has modifications from the original software, see the [Syncraft section](#syncraft).
+> This fork has modifications from the original software, see the [Syncraft document](SYNCRAFT.md).
 
 KlipperScreen is a touchscreen GUI that interfaces with [Klipper](https://github.com/Klipper3d/klipper) via [Moonraker](https://github.com/arksine/moonraker). It allows you to switch between multiple printers and access them from a single location. Notably, it doesn't need to run on the same host as your printer; you can install it on another device and configure the IP address to connect to the printer.
 
@@ -53,15 +53,3 @@ We extend our gratitude to all contributors who have helped along the way. [Meet
 ![LDO](docs/img/sponsors/LDO.png) ![YUMI](docs/img/sponsors/YUMI.png)
 
 Special thanks to [LDO](https://ldomotors.com/) and [YUMI](https://wiki.yumi-lab.com/) for sponsoring KlipperScreen and the open-source community.
-
-# Syncraft
-
-This is a modification of the original software, adapted to meet the specific needs of Syncraft printers.
-
-## Extra panels
-
-### `filament.py`
-
-Used to set the [printer variables](https://www.klipper3d.org/Config_Reference.html#save_variables) `nozzle0` or `nozzle1` based on the currently active extruder.
-
-This ensures the printer can cancel a print via `PARAMETERS_MATCH` macro if its 3D model has been sliced for a different nozzle.
