@@ -203,6 +203,20 @@ sudo reboot
 
     As an alternative **if the above doesn't work**:
 
+    determine the touchscreen driver (usually libinput):
+
+    ```bash
+    cat /var/log/Xorg.0.log
+    ```
+
+    ```bash title="example of /var/log/Xorg.0.log"
+    ...
+    (II) Using input driver 'libinput' for 'ADS7846 Touchscreen'
+    ...
+    ```
+
+    if it says `evdev` instead, then change `libinput` to `evdev` below, both in the filename and in the file
+
     ```bash
     sudo nano /usr/share/X11/xorg.conf.d/40-libinput.conf
     ```
@@ -216,6 +230,11 @@ sudo reboot
             Option "TransformationMatrix" "0 -1 1 1 0 0 0 0 1"
     EndSection
     ```
+
+    !!! note
+        the number of the filename determines the order of loading, if you have issues
+        check if there are other files overriding your config or just use 99-touch_calibration.conf as a name.
+
     Close the nano editor using `ctrl`+`x` (exit), then `y` for yes (save).
     ```sh
     sudo reboot
