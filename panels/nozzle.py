@@ -32,8 +32,8 @@ class Panel(ScreenPanel):
         self.content.add(self.below)
 
     def image_from_styles(self, image_name):
-        # Get it from styles instead of theme_dir
-        styles_dir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles")
+        # Get it from syncraft instead of theme_dir
+        styles_dir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "syncraft", "images")
         width = self._gtk.content_width * 4
         height = self._gtk.content_height * .4
         filename = os.path.join(styles_dir, image_name)
