@@ -5,13 +5,17 @@ import pathlib
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from ks_includes.screen_panel import ScreenPanel
-from ks_includes.KlippyGtk import KlippyGtk
+from screen import (
+    KlipperScreen,
+    KlippyGtk
+)
 
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        self._screen: KlipperScreen
         self._gtk: KlippyGtk
-        
+
         title = title or _("Nozzle")
         super().__init__(screen, title)
 
@@ -31,9 +35,9 @@ class Panel(ScreenPanel):
         self.content.add(self.above)
         self.content.add(self.below)
 
-    def image_from_styles(self, image_name):
-        # Get it from syncraft instead of theme_dir
-        styles_dir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "syncraft", "images")
+    def image_from_directory(self, image_name, directory):
+        # Get it from specific directory instead of theme_dir
+        styles_dir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, directory)
         width = self._gtk.content_width * 4
         height = self._gtk.content_height * .4
         filename = os.path.join(styles_dir, image_name)
@@ -42,7 +46,7 @@ class Panel(ScreenPanel):
         return Gtk.Image.new_from_pixbuf(pixbuf) if pixbuf is not None else Gtk.Image()
 
     def create_nozzle_image_button(self, image_name, box, nozzle):
-        image = self.image_from_styles(image_name)
+        image = self.image_from_directory(image_name, os.path.join("syncraft", "images"))
         event_box = Gtk.EventBox()
         event_box.add(image)
         event_box.connect("button-press-event", self.on_image_clicked, nozzle)
