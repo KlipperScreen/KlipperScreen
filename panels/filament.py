@@ -42,7 +42,6 @@ class Panel(ScreenPanel):
             'unload': self._gtk.Button("arrow-up", _("Unload"), "color2"),
             'retract': self._gtk.Button("retract", _("Retract"), "color1"),
             'spoolman': self._gtk.Button("spoolman", "Spoolman", "color3"),
-            'retraction': self._gtk.Button("settings", _("Retraction"), "color1"),
             'nozzle': self._gtk.Button("extrude", _("Nozzle"), "color1"),
             'materials': self._gtk.Button("filament", _("Materials"), "color1")
         }
@@ -52,9 +51,6 @@ class Panel(ScreenPanel):
         self.buttons['retract'].connect("clicked", self.check_min_temp, "extrude", "-")
         self.buttons['spoolman'].connect("clicked", self.menu_item_clicked, {
             "panel": "spoolman"
-        })
-        self.buttons['retraction'].connect("clicked", self.menu_item_clicked, {
-            "panel": "retraction"
         })
         self.buttons['nozzle'].connect("clicked", self.menu_item_clicked, {
             "panel": "nozzle"
@@ -98,9 +94,6 @@ class Panel(ScreenPanel):
             self.labels["current_extruder"] = self._gtk.Button("extruder", "")
             xbox.add(self.labels["current_extruder"])
             self.labels["current_extruder"].connect("clicked", self.load_menu, 'extruders', _('Extruders'))
-        if self._printer.get_config_section("firmware_retraction") and not self._screen.vertical_mode:
-            xbox.add(self.buttons['retraction'])
-            i += 1
         if i < (limit - 1) and self._printer.spoolman:
             xbox.add(self.buttons['spoolman'])
 
@@ -148,8 +141,6 @@ class Panel(ScreenPanel):
             grid.attach(self.buttons['load'], 0, 2, 2, 1)
             grid.attach(self.buttons['unload'], 2, 2, 2, 1)
             settings_box = Gtk.Box(homogeneous=True)
-            if self._printer.get_config_section("firmware_retraction"):
-                settings_box.add(self.buttons['retraction'])
             grid.attach(settings_box, 0, 3, 4, 1)
             grid.attach(distbox, 0, 4, 4, 1)
             grid.attach(speedbox, 0, 5, 4, 1)
