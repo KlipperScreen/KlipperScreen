@@ -114,7 +114,20 @@ class KlippyGtk:
         for key in self.color_list:
             self.color_list[key]['state'] = 0
 
-    def Image(self, image_name=None, width=None, height=None):
+    # Additional parameter added so it can search it from another directory
+    def Image(self, image_name=None, width=None, height=None, directory=None):
+        if directory:
+            width = width if width is not None else self.img_width
+            height = height if height is not None else self.img_height
+            filename = os.path.join(directory, image_name)
+            pixbuf = None
+            for ext in ["svg", "png"]:
+                file = f"{filename}.{ext}"
+                pixbuf = self.PixbufFromFile(file, int(width), int(height)) if os.path.exists(file) else None
+                if pixbuf is not None:
+                    return Gtk.Image.new_from_pixbuf(pixbuf)
+            return Gtk.Image()
+        
         if image_name is None:
             return Gtk.Image()
         pixbuf = self.PixbufFromIcon(image_name, width, height)
@@ -156,7 +169,8 @@ class KlippyGtk:
         stream.close_async(2)
         return pixbuf
 
-    def Button(self, image_name=None, label=None, style=None, scale=None, position=Gtk.PositionType.TOP, lines=2):
+    # Additional parameter added so it can search images from another directory
+    def Button(self, image_name=None, label=None, style=None, scale=None, position=Gtk.PositionType.TOP, lines=2, directory=None):
         if self.font_size_type == "max" and label is not None:
             image_name = None
         b = Gtk.Button(hexpand=True, vexpand=True, can_focus=False, image_position=position, always_show_image=True)
@@ -169,7 +183,7 @@ class KlippyGtk:
             if label is None:
                 scale = scale * 1.4
             width = height = self.img_scale * scale
-            b.set_image(self.Image(image_name, width, height))
+            b.set_image(self.Image(image_name, width, height, directory))
             spinner = Gtk.Spinner(width_request=width, height_request=height, no_show_all=True)
             spinner.hide()
             box = find_widget(b, Gtk.Box)
