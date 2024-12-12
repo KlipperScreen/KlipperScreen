@@ -1,0 +1,406 @@
+[
+    {
+        "name": "Breakaway",
+        "code": "Breakaway",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.25mm",
+            "Standard 0.4mm"
+        ],
+        "experimental": [
+            "Standard 0.8mm"
+        ],
+        "temp": 220,
+        "print_temp": 225
+    },
+    {
+        "name": "ABS",
+        "code": "ABS",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.25mm",
+            "Standard 0.4mm",
+            "Standard 0.8mm"
+        ],
+        "experimental": [
+            "Fiber 0.6mm",
+            "Metal 0.4mm"
+        ],
+        "temp": 245,
+        "print_temp": 230
+    },
+    {
+        "name": "ASA",
+        "code": "ASA",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.4mm"
+        ],
+        "experimental": [],
+        "temp": 255,
+        "print_temp": 260
+    },
+    {
+        "name": "BVOH",
+        "code": "BVOH",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.4mm"
+        ],
+        "experimental": [],
+        "temp": 210,
+        "print_temp": 205
+    },
+    {
+        "name": "CPE",
+        "code": "CPE",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.4mm",
+            "Standard 0.8mm"
+        ],
+        "experimental": [
+            "Standard 0.25mm",
+            "Fiber 0.6mm",
+            "Metal 0.4mm"
+        ],
+        "temp": 255,
+        "print_temp": 245
+    },
+    {
+        "name": "CPE +",
+        "code": "CPE+",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.4mm"
+        ],
+        "experimental": [
+            "Standard 0.25mm",
+            "Standard 0.8mm",
+            "Fiber 0.6mm",
+            "Metal 0.4mm"
+        ],
+        "temp": 275,
+        "print_temp": 270
+    },
+    {
+        "name": "I 150",
+        "code": "I150",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.4mm"
+        ],
+        "experimental": [
+            "Fiber 0.6mm",
+            "Metal 0.4mm"
+        ],
+        "temp": 250,
+        "print_temp": 235
+    },
+    {
+        "name": "I 151",
+        "code": "I151",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Metal 0.4mm"
+        ],
+        "experimental": [],
+        "temp": 245,
+        "print_temp": 240
+    },
+    {
+        "name": "I 180",
+        "code": "I180",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Fiber 0.6mm",
+            "Metal 0.4mm"
+        ],
+        "experimental": [],
+        "temp": 255,
+        "print_temp": 260
+    },
+    {
+        "name": "NYLON",
+        "code": "Nylon",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.4mm",
+            "Standard 0.8mm"
+        ],
+        "experimental": [
+            "Standard 0.25mm",
+            "Fiber 0.6mm",
+            "Metal 0.4mm"
+        ],
+        "temp": 250,
+        "print_temp": 250
+    },
+    {
+        "name": "PAHT CF15",
+        "code": "PAHT CF15",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Fiber 0.6mm"
+        ],
+        "experimental": [],
+        "temp": 275,
+        "print_temp": 270
+    },
+    {
+        "name": "PC",
+        "code": "PC",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.4mm"
+        ],
+        "experimental": [
+            "Standard 0.25mm",
+            "Standard 0.8mm",
+            "Fiber 0.6mm",
+            "Metal 0.4mm"
+        ],
+        "temp": 285,
+        "print_temp": 280
+    },
+    {
+        "name": "PC/ABS",
+        "code": "PC-ABS",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Fiber 0.6mm"
+        ],
+        "experimental": [
+            "Standard 0.4mm",
+            "Standard 0.8mm",
+            "Metal 0.4mm"
+        ],
+        "temp": 280,
+        "print_temp": 280
+    },
+    {
+        "name": "PET",
+        "code": "PET",
+        "brand": null,
+        "color": null,
+        "compatible": [],
+        "experimental": [
+            "Standard 0.25mm",
+            "Standard 0.4mm",
+            "Standard 0.8mm",
+            "Fiber 0.6mm",
+            "Metal 0.4mm"
+        ],
+        "temp": 250,
+        "print_temp": 225
+    },
+    {
+        "name": "PET CF15",
+        "code": "PET CF15",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Fiber 0.6mm"
+        ],
+        "experimental": [],
+        "temp": 270,
+        "print_temp": 270
+    },
+    {
+        "name": "PETG",
+        "code": "PETG",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.4mm",
+            "Standard 0.8mm"
+        ],
+        "experimental": [
+            "Standard 0.25mm",
+            "Fiber 0.6mm",
+            "Metal 0.4mm"
+        ],
+        "temp": 250,
+        "print_temp": 240
+    },
+    {
+        "name": "PLA",
+        "code": "PLA",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.25mm",
+            "Standard 0.4mm",
+            "Standard 0.8mm"
+        ],
+        "experimental": [
+            "Fiber 0.6mm",
+            "Metal 0.4mm"
+        ],
+        "temp": 225,
+        "print_temp": 205
+    },
+    {
+        "name": "PLA +",
+        "code": "PLA",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.25mm",
+            "Standard 0.4mm",
+            "Standard 0.8mm"
+        ],
+        "experimental": [
+            "Fiber 0.6mm",
+            "Metal 0.4mm"
+        ],
+        "temp": 230,
+        "print_temp": 205
+    },
+    {
+        "name": "PLA HT",
+        "code": "PLA HT",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.25mm",
+            "Standard 0.4mm",
+            "Standard 0.8mm"
+        ],
+        "experimental": [
+            "Fiber 0.6mm",
+            "Metal 0.4mm"
+        ],
+        "temp": 240,
+        "print_temp": 205
+    },
+    {
+        "name": "PP",
+        "code": "PP",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.4mm"
+        ],
+        "experimental": [
+            "Standard 0.25mm",
+            "Standard 0.8mm",
+            "Fiber 0.6mm",
+            "Metal 0.4mm"
+        ],
+        "temp": 225,
+        "print_temp": 207
+    },
+    {
+        "name": "PP GF30",
+        "code": "PP GF30",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Fiber 0.6mm"
+        ],
+        "experimental": [],
+        "temp": 260,
+        "print_temp": 250
+    },
+    {
+        "name": "PVA",
+        "code": "PVA",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.4mm"
+        ],
+        "experimental": [],
+        "temp": 215,
+        "print_temp": 210
+    },
+    {
+        "name": "TO. PLA",
+        "code": "Tough PLA",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.25mm",
+            "Standard 0.4mm",
+            "Standard 0.8mm"
+        ],
+        "experimental": [
+            "Fiber 0.6mm",
+            "Metal 0.4mm"
+        ],
+        "temp": 225,
+        "print_temp": 215
+    },
+    {
+        "name": "TPU 64D",
+        "code": "TPU 64D",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.4mm",
+            "Standard 0.8mm"
+        ],
+        "experimental": [
+            "Standard 0.25mm",
+            "Fiber 0.6mm",
+            "Metal 0.4mm"
+        ],
+        "temp": 235,
+        "print_temp": 225
+    },
+    {
+        "name": "TPU 95A",
+        "code": "TPU 95A",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Standard 0.4mm",
+            "Standard 0.8mm"
+        ],
+        "experimental": [
+            "Standard 0.25mm",
+            "Fiber 0.6mm",
+            "Metal 0.4mm"
+        ],
+        "temp": 235,
+        "print_temp": 225
+    },
+    {
+        "name": "17-4PH",
+        "code": "17-4PH",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Metal 0.4mm"
+        ],
+        "experimental": [],
+        "temp": 260,
+        "print_temp": 245
+    },
+    {
+        "name": "316 L",
+        "code": "316L",
+        "brand": null,
+        "color": null,
+        "compatible": [
+            "Metal 0.4mm"
+        ],
+        "experimental": [],
+        "temp": 260,
+        "print_temp": 240
+    }
+]
