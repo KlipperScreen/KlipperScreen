@@ -757,16 +757,6 @@ class KlipperScreen(Gtk.Window):
         msg = self.printer.get_stat("webhooks", "state_message")
         self.printer_initializing(_("Klipper has shutdown") + "\n\n" + msg, go_to_splash=True)
 
-    def toggle_shortcut(self, show):
-        if show and not self.printer.get_printer_status_data()["printer"]["gcode_macros"]["count"] > 0:
-            self.show_popup_message(
-                _("No elegible macros:") + "\n"
-                + _("macros with a name starting with '_' are hidden") + "\n"
-                + _("macros that use 'rename_existing' are hidden") + "\n"
-                + _("LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude") + "\n"
-            )
-        self.base_panel.show_shortcut(show)
-
     def change_language(self, widget, lang):
         self._config.install_language(lang)
         self.lang_ltr = set_text_direction(lang)
