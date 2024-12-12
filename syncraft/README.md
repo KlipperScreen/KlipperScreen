@@ -4,6 +4,8 @@ This is a modification of [KlipperScreen](https://github.com/klipperscreen/klipp
 
 ## Extra panels
 
+Panels that are not original from KlipperScreen.
+
 ### `filament.py`
 
 Copy from original panel `extrude.py`.
@@ -24,8 +26,25 @@ Used to set the [printer variables](https://www.klipper3d.org/Config_Reference.h
 
 This ensures the printer can cancel a print via `PARAMETERS_MATCH` macro if its 3D model has been sliced for a different material.
 
-## Hidden panels
+## Modifications
 
-- `extrude.py`
-- `temperature.py`
-- `gcode_macros.py`
+### `config/*.conf`
+
+- Hide these menu panels:
+	- `extrude.py`
+	- `temperature.py`
+	- `gcode_macros.py`
+- Add these menu panels:
+	- `filament.py`
+
+### `KlippyGtk.py`
+
+- Allow `Image` and `Button` functions to search from specific directory.
+
+### `config.py`
+
+- Remove `side_macro_shortcut` toggle option.
+
+### `screen.py`
+
+- Remove function `toggle_shortcut` related to `side_macro_shortcut` toggling.
