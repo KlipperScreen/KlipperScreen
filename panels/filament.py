@@ -1,5 +1,7 @@
 import logging
 import re
+import configparser
+import os
 
 import gi
 
@@ -9,11 +11,15 @@ from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.widgets.autogrid import AutoGrid
 from ks_includes.KlippyGtk import find_widget
-
+from ks_includes.printer import Printer
+from ks_includes.config import KlipperScreenConfig
 
 class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
+        self._printer: Printer
+        self._config: KlipperScreenConfig
+
         title = title or _("Filament")
         super().__init__(screen, title)
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
@@ -42,8 +48,6 @@ class Panel(ScreenPanel):
             'unload': self._gtk.Button("arrow-up", _("Unload"), "color2"),
             'retract': self._gtk.Button("retract", _("Retract"), "color1"),
             'spoolman': self._gtk.Button("spoolman", "Spoolman", "color3"),
-            'nozzle': self._gtk.Button("extrude", _("Nozzle"), "color1"),
-            'materials': self._gtk.Button("filament", _("Materials"), "color1")
         }
         self.buttons['extrude'].connect("clicked", self.check_min_temp, "extrude", "+")
         self.buttons['load'].connect("clicked", self.check_min_temp, "load_unload", "+")
@@ -51,12 +55,6 @@ class Panel(ScreenPanel):
         self.buttons['retract'].connect("clicked", self.check_min_temp, "extrude", "-")
         self.buttons['spoolman'].connect("clicked", self.menu_item_clicked, {
             "panel": "spoolman"
-        })
-        self.buttons['nozzle'].connect("clicked", self.menu_item_clicked, {
-            "panel": "nozzle"
-        })
-        self.buttons['materials'].connect("clicked", self.menu_item_clicked, {
-            "panel": "materials"
         })
 
         xbox = Gtk.Box(homogeneous=True)
@@ -74,9 +72,32 @@ class Panel(ScreenPanel):
             if extruder == self.current_extruder:
                 self.labels[extruder].get_style_context().add_class("button_active")
             if self._printer.extrudercount < limit:
-                xbox.add(self.labels[extruder])
+                extruder_grid = Gtk.Grid()
+                extruder_grid.attach(self.labels[extruder], 0, 0, 2, 1)
+
+                materials_button = self._gtk.Button("filament", _("Materials"), "color4")
+                materials_button.connect("clicked", self.delete_panel, "materials")
+                materials_button.connect("clicked", self.change_config_extruder, extruder)
+                materials_button.connect("clicked", self.menu_item_clicked, {
+                    "panel": "materials"
+                })
+
+                if not extruder.startswith("extruder_stepper"):
+                    nozzle_button = self._gtk.Button("extrude", _("Nozzle"), "color4")
+                    nozzle_button.connect("clicked", self.change_config_extruder, extruder)
+                    nozzle_button.connect("clicked", self.menu_item_clicked, {
+                        "panel": "nozzle"
+                    })
+                            
+                    extruder_grid.attach(nozzle_button, 0, 1, 1, 1)
+                    extruder_grid.attach(materials_button, 1, 1, 1, 1)
+                else:
+                    extruder_grid.attach(materials_button, 0, 1, 2, 1)
+                
+                xbox.add(extruder_grid)
                 i += 1
             else:
+                # TODO: Support more extruders
                 extruder_buttons.append(self.labels[extruder])
         for widget in self.labels.values():
             label = find_widget(widget, Gtk.Label)
@@ -131,9 +152,7 @@ class Panel(ScreenPanel):
         speedbox.add(speedgrid)
 
         grid = Gtk.Grid(column_homogeneous=True)
-        grid.attach(xbox, 0, 0, 2, 1)
-        grid.attach(self.buttons['nozzle'], 2, 0, 1, 1)
-        grid.attach(self.buttons['materials'], 3, 0, 1, 1)
+        grid.attach(xbox, 0, 0, 4, 1)
 
         if self._screen.vertical_mode:
             grid.attach(self.buttons['extrude'], 0, 1, 2, 1)
@@ -158,7 +177,7 @@ class Panel(ScreenPanel):
 
     def enable_buttons(self, enable):
         for button in self.buttons:
-            if button in ("retraction", "spoolman"):
+            if button in ("spoolman"):
                 continue
             self.buttons[button].set_sensitive(enable)
 
@@ -271,3 +290,20 @@ class Panel(ScreenPanel):
         if self._show_heater_power and power:
             new_label_text += f" {power * 100:.0f}%"
         find_widget(self.labels[extruder], Gtk.Label).set_text(new_label_text)
+
+    def change_config_extruder(self, widget, extruder: str):
+        self._config.extruder = extruder
+        # Try to read nozzle variable
+        try:
+            variables_path = os.path.join(os.path.expanduser("~"), "printer_data/config/variables.cfg")
+            config = configparser.ConfigParser()
+            config.read(variables_path)
+            nozzle = config.get("Variables", f'{extruder.replace(" ", "-")}_nozzle')
+            self._config.nozzle = nozzle.replace("'", "")
+            print(self._config.nozzle)
+        except Exception as e:
+            print(e)
+
+    def delete_panel(self, widget, panel_name):
+        if panel_name in self._screen.panels:
+            del self._screen.panels[panel_name]

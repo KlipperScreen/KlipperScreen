@@ -37,6 +37,10 @@ class KlipperScreenConfig:
     do_not_edit_prefix = "#~#"
 
     def __init__(self, configfile, screen=None):
+        # Syncraft variables
+        self.extruder = None
+        self.nozzle = None
+
         self.lang_list = None
         self.errors = []
         self.default_config_path = os.path.join(klipperscreendir, "config", "defaults.conf")

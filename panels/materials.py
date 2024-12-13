@@ -29,13 +29,10 @@ class Panel(ScreenPanel):
         scroll.add(grid)
         self.content.add(scroll)
 
-        # TODO: Check active nozzle
-        self.nozzle = "Standard 0.4mm"
-
         self.materials = self.get_materials()
 
         for material in self.materials:
-            if self.nozzle in material["compatible"]:
+            if self._config.nozzle in material["compatible"]:
                 index_button = self._gtk.Button(
                     "circle-green",
                     material["name"],
@@ -59,7 +56,7 @@ class Panel(ScreenPanel):
 
             allowed_for_experimental = ["Standard 0.25mm", "Standard 0.4mm", "Standard 0.8mm"]
             
-            if self.nozzle in material["experimental"] and self.nozzle in allowed_for_experimental:
+            if self._config.nozzle in material["experimental"] and self._config.nozzle in allowed_for_experimental:
                 index_button = self._gtk.Button(
                     "circle-orange",
                     material["name"],
@@ -95,5 +92,7 @@ class Panel(ScreenPanel):
         
     def set_material(self, widget, material=None):
         material_name = material["name"] if material else "empty"
-        self._screen._ws.klippy.gcode_script(f"CHANGE_MATERIAL M='{material_name}'")
+        self._screen._ws.klippy.gcode_script(
+            f"CHANGE_MATERIAL M='{material_name}' EXTRUDER='{self._config.extruder}'"
+        )
         self._screen._menu_go_back()

@@ -8,7 +8,7 @@ Panels that are not original from KlipperScreen.
 
 ### `filament.py`
 
-Copy from original panel `extrude.py`.
+Copy from original panel `extrude.py`. Used to set both nozzle and material from `extruder`.
 
 ### `nozzle.py`
 
@@ -44,6 +44,7 @@ This ensures the printer can cancel a print via `PARAMETERS_MATCH` macro if its 
 ### `config.py`
 
 - Remove `side_macro_shortcut` toggle option.
+- Add Syncraft required variables
 
 ### `screen.py`
 
