@@ -62,6 +62,7 @@ class Panel(ScreenPanel):
         i = 0
         extruder_buttons = []
         self.labels = {}
+        self.extruder_grids = {}
         for extruder in self._printer.get_tools():
             if self._printer.extrudercount == 1:
                 self.labels[extruder] = self._gtk.Button("extruder", "")
@@ -75,12 +76,16 @@ class Panel(ScreenPanel):
                 extruder_grid = Gtk.Grid()
                 extruder_grid.attach(self.labels[extruder], 0, 0, 2, 1)
 
+                self.extruder_grids[extruder] = {}
+                self.extruder_grids[extruder]["grid"] = extruder_grid
+
                 materials_button = self._gtk.Button("filament", _("Materials"), "color4")
                 materials_button.connect("clicked", self.delete_panel, "materials")
                 materials_button.connect("clicked", self.change_config_extruder, extruder)
                 materials_button.connect("clicked", self.menu_item_clicked, {
                     "panel": "materials"
                 })
+                self.extruder_grids[extruder]["materials_button"] = materials_button
 
                 if not extruder.startswith("extruder_stepper"):
                     nozzle_button = self._gtk.Button("extrude", _("Nozzle"), "color4")
@@ -91,6 +96,7 @@ class Panel(ScreenPanel):
                             
                     extruder_grid.attach(nozzle_button, 0, 1, 1, 1)
                     extruder_grid.attach(materials_button, 1, 1, 1, 1)
+                    self.extruder_grids[extruder]["nozzle_button"] = nozzle_button
                 else:
                     extruder_grid.attach(materials_button, 0, 1, 2, 1)
                 
@@ -307,3 +313,25 @@ class Panel(ScreenPanel):
     def delete_panel(self, widget, panel_name):
         if panel_name in self._screen.panels:
             del self._screen.panels[panel_name]
+
+    def process_update(self, action, data):
+        try:
+            variables_path = os.path.join(os.path.expanduser("~"), "printer_data/config/variables.cfg")
+            config = configparser.ConfigParser()
+            config.read(variables_path)
+            if config.has_section("Variables"):
+                variables = config["Variables"].keys()
+            else:
+                return
+            for extruder in self.extruder_grids:
+                extruder = extruder.replace(' ', '-')
+                if f"{extruder}_material" in variables:
+                    # Change material label
+                    material = config.get("Variables", f"{extruder}_material")
+                    self.extruder_grids[extruder]["materials_button"].set_label(material)
+                if f"{extruder}_nozzle" in variables:
+                    # Change nozzle label
+                    nozzle = config.get("Variables", f"{extruder}_nozzle")
+                    self.extruder_grids[extruder]["nozzle_button"].set_label(nozzle)
+        except:
+            pass
