@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-26 12:31-0300\n"
-"PO-Revision-Date: 2024-09-07 00:09+0000\n"
-"Last-Translator: Leart Dukaj <premtimdukaj@hotmail.com>\n"
+"PO-Revision-Date: 2024-12-15 14:02+0000\n"
+"Last-Translator: Exp3rt <jannik.homberg@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/de/>\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.9-rc\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -344,7 +344,7 @@ msgid "Font Size"
 msgstr "Schriftgröße"
 
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "Für Maus Kontroller oder um Touchscreen Genauigkeit zu überprüfen"
 
 msgid "Forget"
 msgstr "Vergessen"
@@ -422,7 +422,7 @@ msgid "Invalid password"
 msgstr "Ungültiges Passwort"
 
 msgid "Invalid temperature"
-msgstr ""
+msgstr "Ungültige Temperatur"
 
 msgid "Inversely affects the icon size"
 msgstr "Beeinflusst die Symbolgröße umgekehrt"
@@ -503,7 +503,7 @@ msgid "Loading..."
 msgstr "Lädt..."
 
 msgid "Lock"
-msgstr ""
+msgstr "Sperren"
 
 msgid "Lost Connection to Moonraker"
 msgstr "Verbindung zu Moonraker verloren"
@@ -644,7 +644,7 @@ msgid "Part Fan"
 msgstr "Bauteil Lüfter"
 
 msgid "Password"
-msgstr ""
+msgstr "Passwort"
 
 msgid "Password saved"
 msgstr "Passwort gespeichert"
@@ -813,7 +813,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "Zeige Scrollbar Schaltfläche"
 
 msgid "Show cursor"
-msgstr ""
+msgstr "Cursor anzeigen"
 
 msgid "Show only devices that are able to be set"
 msgstr "Zeige nur Geräte die eingestellt werden können"
@@ -887,7 +887,7 @@ msgid "Temperature"
 msgstr "Temperatur"
 
 msgid "Temperature too low to extrude"
-msgstr ""
+msgstr "Temperatur zu niedrig zum extrudieren"
 
 msgid "The system doesn't meet the minimum requirement"
 msgstr "Das System erfüllt die minimalen Anforderungen nicht"
@@ -917,10 +917,10 @@ msgid "Unload"
 msgstr "Entladen"
 
 msgid "Unlock"
-msgstr ""
+msgstr "Entsperren"
 
 msgid "Unlock failed"
-msgstr ""
+msgstr "Entsperren fehlgeschlagen"
 
 msgid "Unretract Extra Length"
 msgstr "Überlänge ausfahren"
@@ -943,7 +943,7 @@ msgid "Useful for un-responsive touchscreens"
 msgstr "Nützlich für nicht reagierende Touchscreens"
 
 msgid "User"
-msgstr ""
+msgstr "Benutzer"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC wird vom Backend nicht unterstützt"
