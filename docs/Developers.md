@@ -23,6 +23,8 @@ cd ~/KlipperScreen
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r scripts/klipperscreen-requirements.txt
+# this one is optional:
+pip install -r scripts/dev-requirements.txt
 ```
 # Set configurations
 Create klipperscreen.conf and place it on the repo folder
