@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-26 12:31-0300\n"
-"PO-Revision-Date: 2024-11-28 16:42+0000\n"
+"PO-Revision-Date: 2024-12-13 06:00+0000\n"
 "Last-Translator: Selim <technical50@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/tr/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #, python-format
 msgid "%s will be updated to version"
-msgstr "%s şu sürüme güncellenecektir:"
+msgstr "%s bu sürüme güncellenecektir:"
 
 msgid "(default)"
 msgstr "(varsayılan)"
@@ -55,17 +55,17 @@ msgstr "Uygula"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr "Endstop'a %s%.3f telafi uygulansın mı?"
+msgstr "Endstop'a %s%.3f telafisi uygulansın mı?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr "Ölçme Çubuğu'na %s%.3f telafi uygulansın mı?"
+msgstr "Ölçme Çubuğu'na %s%.3f telafisi uygulansın mı?"
 
 msgid "Archived"
 msgstr "Arşivlenen"
 
 msgid "Are you sure do you want to exclude the object?"
-msgstr "Nesneyi hariç tutmak istediğinizden emin misiniz?"
+msgstr "Nesneyi çıkarmak istediğinizden emin misiniz?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Acil Durdurmak istediğinizden emin misiniz?"
@@ -83,7 +83,7 @@ msgid "Are you sure you wish to shutdown the system?"
 msgstr "Sistemi kapatmak istediğinizden emin misiniz?"
 
 msgid "Asks for confirmation before stopping"
-msgstr "Durmadan önce onay ister"
+msgstr "Durmadan önce onay istemektedir"
 
 msgid "Auto"
 msgstr "Otomatik"
