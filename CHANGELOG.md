@@ -4,7 +4,6 @@ Probably all versions contain changes regarding documentation, translation, fixe
 
 ## v0.4.5-*
 
-* menu buttons can have an 'active' status to change their appearance
 * basic lockscreen for shows or kids
 
 ## v0.4.5  (Oct 28, 2024)
