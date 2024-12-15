@@ -9,15 +9,32 @@ from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
 
+def rgb_to_hex(color):
+    hex_color = '#'
+    for value in color:
+        int_value = round(value * 255)
+        hex_color += hex(int_value)[2:].zfill(2)
+    return hex_color.upper()
+
+
+def rgbw_to_rgb(color):
+    # The idea here is to use the white channel as a saturation control
+    # The white channel 'washes' the color
+    return (
+        [color[3] for i in range(3)]  # Special case of only white channel
+        if color[0] == 0 and color[1] == 0 and color[2] == 0
+        else [color[i] + (1 - color[i]) * color[3] / 3 for i in range(3)]
+    )
+
+
 class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
         title = title or _("Leds")
         super().__init__(screen, title)
         self.da_size = self._gtk.img_scale * 2
-        self.preview = Gtk.DrawingArea(width_request=self.da_size, height_request=self.da_size)
+        self.preview = ColorPreviewArea(size=self.da_size)
         self.preview.set_size_request(-1, self.da_size * 2)
-        self.preview.connect("draw", self.on_draw)
         self.preview_label = Gtk.Label()
         self.preset_list = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         self.color_data = [0, 0, 0, 0]
@@ -92,8 +109,8 @@ class Panel(ScreenPanel):
             color = [0, 0, 0, 0]
             color[idx] = 1
             button = self._gtk.Button()
-            preview = Gtk.DrawingArea(width_request=self.da_size, height_request=self.da_size)
-            preview.connect("draw", self.on_draw, color)
+            preview = ColorPreviewArea(size=self.da_size)
+            preview.set_color(color)
             button.set_image(preview)
             button.connect("clicked", self.apply_preset, color)
             button.set_hexpand(False)
@@ -104,7 +121,7 @@ class Panel(ScreenPanel):
             scale.set_has_origin(True)
             scale.get_style_context().add_class("fan_slider")
             scale.connect("button-release-event", self.apply_scales)
-            scale.connect("value_changed", self.update_preview)
+            scale.connect("value_changed", self.update_preview_label)
             self.scales[idx] = scale
             scale_grid.attach(button, 0, idx, 1, 1)
             scale_grid.attach(scale, 1, idx, 3, 1)
@@ -119,8 +136,8 @@ class Panel(ScreenPanel):
                 self.presets.update(self.parse_presets(presets_data))
         for i, key in enumerate(self.presets):
             logging.info(f'Adding preset: {key}')
-            preview = Gtk.DrawingArea(width_request=self.da_size, height_request=self.da_size)
-            preview.connect("draw", self.on_draw, self.presets[key])
+            preview = ColorPreviewArea(size=self.da_size)
+            preview.set_color(self.presets[key])
             button = self._gtk.Button()
             button.set_image(preview)
             button.connect("clicked", self.apply_preset, self.presets[key])
@@ -140,33 +157,15 @@ class Panel(ScreenPanel):
             grid.attach(box, 3, 0, 2, 1)
         return grid
 
-    def on_draw(self, da, ctx, color=None):
-        if color is None:
-            color = self.color_data
-        ctx.set_source_rgb(*self.rgbw_to_rgb(color))
-        # Set the size of the rectangle
-        width = height = da.get_allocated_width() * .9
-        x = da.get_allocated_width() * .05
-        # Set the radius of the corners
-        radius = width / 2 * 0.2
-        ctx.arc(x + radius, radius, radius, pi, 3 * pi / 2)
-        ctx.arc(x + width - radius, radius, radius, 3 * pi / 2, 0)
-        ctx.arc(x + width - radius, height - radius, radius, 0, pi / 2)
-        ctx.arc(x + radius, height - radius, radius, pi / 2, pi)
-        ctx.close_path()
-        ctx.fill()
-
-    def update_preview(self, args):
-        self.update_color_data()
-        self.preview.queue_draw()
-        self.preview_label.set_label(self.rgb_to_hex(self.rgbw_to_rgb(self.color_data)))
+    def update_preview_label(self, args):
+        self.preview_label.set_label(rgb_to_hex(rgbw_to_rgb(self.color_data)))
 
     def process_update(self, action, data):
         if action != 'notify_status_update':
             return
         if self.current_led in data and "color_data" in data[self.current_led]:
             self.update_scales(data[self.current_led]["color_data"][0])
-            self.preview.queue_draw()
+        self.preview.set_color(self.color_data)
 
     def update_scales(self, color_data):
         for idx in self.scales:
@@ -176,6 +175,7 @@ class Panel(ScreenPanel):
     def update_color_data(self):
         for idx in self.scales:
             self.color_data[idx] = self.scales[idx].get_value() / 255
+        self.preview.set_color(self.color_data)
 
     def apply_preset(self, widget, color_data):
         self.update_scales(color_data)
@@ -203,20 +203,30 @@ class Panel(ScreenPanel):
                 parsed[name].append(preset[color] / 255)
         return parsed
 
-    @staticmethod
-    def rgb_to_hex(color):
-        hex_color = '#'
-        for value in color:
-            int_value = round(value * 255)
-            hex_color += hex(int_value)[2:].zfill(2)
-        return hex_color.upper()
 
-    @staticmethod
-    def rgbw_to_rgb(color):
-        # The idea here is to use the white channel as a saturation control
-        # The white channel 'washes' the color
-        return (
-            [color[3] for i in range(3)]  # Special case of only white channel
-            if color[0] == 0 and color[1] == 0 and color[2] == 0
-            else [color[i] + (1 - color[i]) * color[3] / 3 for i in range(3)]
-        )
+class ColorPreviewArea(Gtk.DrawingArea):
+    color = [0, 0, 0]
+
+    def __init__(self, size=-1):
+        super().__init__(width_request=size, height_request=size)
+        self.connect("draw", self.on_draw)
+
+    def set_color(self, value):
+        logging.debug(f"color: {value}")
+        self.color = rgbw_to_rgb(value)
+        self.queue_draw()
+
+    def on_draw(self, da, ctx):
+        ctx.set_source_rgb(*self.color)
+        # Set the size of the rectangle
+        width = da.get_allocated_width() * .9
+        height = da.get_allocated_height() * .9
+        x = da.get_allocated_width() * .05
+        # Set the radius of the corners
+        radius = width / 2 * 0.2
+        ctx.arc(x + radius, radius, radius, pi, 3 * pi / 2)
+        ctx.arc(x + width - radius, radius, radius, 3 * pi / 2, 0)
+        ctx.arc(x + width - radius, height - radius, radius, 0, pi / 2)
+        ctx.arc(x + radius, height - radius, radius, pi / 2, pi)
+        ctx.close_path()
+        ctx.fill()
