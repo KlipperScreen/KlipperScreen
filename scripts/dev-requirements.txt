@@ -1,2 +1,2 @@
 pycodestyle
-pygobject-stubs
+pygobject-stubs --config-settings=config=Gtk3,Gdk3
