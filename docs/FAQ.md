@@ -5,8 +5,10 @@
 The minimum required version of Python is 3.8. This requirement is checked during installation.
 
 ??? "Using Older Python Versions"
-    If you need to use Python 3.7, you can do so with KlipperScreen v0.4.1 by running:
+    If you need to use Python 3.7, you can revert KlipperScreen to v0.4.1
+    Connect to the printer via SSH and:
     ```sh
+    cd ~/KlipperScreen
     git reset --hard v0.4.1
     ```
 
