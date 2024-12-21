@@ -1,0 +1,2407 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="KlipperScreen documentation.">
+      
+      
+      
+        <link rel="canonical" href="https://klipperscreen.readthedocs.io/changelog/">
+      
+      
+        <link rel="prev" href="../Translations/">
+      
+      
+        <link rel="next" href="../breaking/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Changelog - KlipperScreen</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#changelog" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="KlipperScreen" class="md-header__button md-logo" aria-label="KlipperScreen" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KlipperScreen
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Changelog
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/KlipperScreen/KlipperScreen/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    KlipperScreen/KlipperScreen/
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="KlipperScreen" class="md-nav__button md-logo" aria-label="KlipperScreen" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    KlipperScreen
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/KlipperScreen/KlipperScreen/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    KlipperScreen/KlipperScreen/
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FAQ/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Setup
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Hardware/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hardware
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Hardware specific
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Hardware specific
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Hardware/GPIO_35/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPIO 3.5"
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Hardware/HDMI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HDMI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Updating/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Updating
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Configuration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Quicktips/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quicktips
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../macros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Macros
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Thumbnails/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Thumbnails
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Remote screens
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            Remote screens
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VNC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VNC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Android/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Xserver-XSDL (Android)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Multi_instance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi instance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Troubleshooting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Troubleshooting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    First Steps/Log
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Troubleshooting/Network/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Network
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Troubleshooting/Physical_Install/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Physical install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Troubleshooting/Framebuffer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wrong Framebuffer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Troubleshooting/Framebuffer_id/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Framebuffer ID
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Troubleshooting/Rotation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Screen Rotation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Troubleshooting/Touch_issues/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Touch
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Troubleshooting/VC_ERROR/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtual Console Error
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Troubleshooting/FBturbo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FBturbo
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Troubleshooting/Last_resort/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Last resort
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Panels/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Screenshots
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Panels
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Panels
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Panels/Screws/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bed Level/Screws
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Panels/Job_status/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Job_status/Printing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Panels/Temperature/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Temperature
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Panels/Zcalibrate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Z Calibrate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Theming/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Theming
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Translations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Translations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Changelog
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Changelog
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#v045-" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.4.5-*
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v045-oct-28-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.4.5 (Oct 28, 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v044-sep-16-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.4.4 (Sep 16, 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v043-jun-29-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.4.3 (Jun 29, 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v042-jun-10-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.4.2 (Jun 10, 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v041-may-24-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.4.1 (May 24, 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v040-apr-14-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.4.0 (Apr 14, 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v039-feb-29-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.9 (Feb 29, 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v038-dec-23-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.8 (Dec 23, 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v037-nov-24-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.7 (Nov 24, 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v036-sep-24-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.6 (Sep 24, 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v035-aug-21-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.5 (Aug 21, 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v034-jul-30-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.4 (Jul 30, 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v033-jul-2-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.3 (Jul 2, 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v032-feb-20-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.2 (Feb 20, 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v031-dec-11-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.1 (Dec 11, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v030-dec-5-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.0 (Dec 5, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v029-nov-18-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.9 (Nov 18, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v028-oct-27-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.8 (Oct 27, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v027-oct-4-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.7 (Oct 4, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v026-sep-2-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.6 (Sep 2, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v025-aug-1-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.5 (Aug 1, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v024-jul-3-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.4 (Jul 3, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v023-may-31-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.3 (May 31, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v022-may-1-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.2 (May 1, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v021-apr-1-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.1 (Apr 1, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v020-dec-7-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.0 (Dec 7, 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v016-may-13-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.1.6 (May 13, 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v015-may-10-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.1.5 (May 10, 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v014-feb-15-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.1.4 (Feb 15, 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v013-jan-7-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.1.3 (Jan 7, 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v012-dec-2-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.1.2 (Dec 2, 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v011-nov-28-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.1.1 (Nov 28, 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v010-nov-14-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.1.0 (Nov 14, 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v000-jul-6-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.0.0 (Jul 6, 2020)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../breaking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Breaking Changes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Developers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Developer Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Contact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contact
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#v045-" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.4.5-*
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v045-oct-28-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.4.5 (Oct 28, 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v044-sep-16-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.4.4 (Sep 16, 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v043-jun-29-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.4.3 (Jun 29, 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v042-jun-10-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.4.2 (Jun 10, 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v041-may-24-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.4.1 (May 24, 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v040-apr-14-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.4.0 (Apr 14, 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v039-feb-29-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.9 (Feb 29, 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v038-dec-23-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.8 (Dec 23, 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v037-nov-24-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.7 (Nov 24, 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v036-sep-24-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.6 (Sep 24, 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v035-aug-21-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.5 (Aug 21, 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v034-jul-30-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.4 (Jul 30, 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v033-jul-2-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.3 (Jul 2, 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v032-feb-20-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.2 (Feb 20, 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v031-dec-11-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.1 (Dec 11, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v030-dec-5-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.3.0 (Dec 5, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v029-nov-18-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.9 (Nov 18, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v028-oct-27-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.8 (Oct 27, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v027-oct-4-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.7 (Oct 4, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v026-sep-2-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.6 (Sep 2, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v025-aug-1-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.5 (Aug 1, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v024-jul-3-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.4 (Jul 3, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v023-may-31-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.3 (May 31, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v022-may-1-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.2 (May 1, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v021-apr-1-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.1 (Apr 1, 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v020-dec-7-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.2.0 (Dec 7, 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v016-may-13-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.1.6 (May 13, 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v015-may-10-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.1.5 (May 10, 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v014-feb-15-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.1.4 (Feb 15, 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v013-jan-7-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.1.3 (Jan 7, 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v012-dec-2-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.1.2 (Dec 2, 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v011-nov-28-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.1.1 (Nov 28, 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v010-nov-14-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.1.0 (Nov 14, 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v000-jul-6-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.0.0 (Jul 6, 2020)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="changelog">Changelog</h1>
+<p>This just tracks the most notable changes, if you want all the details checkout the commit history.
+Probably all versions contain changes regarding documentation, translation, fixes and other minor refactors</p>
+<h2 id="v045-">v0.4.5-*</h2>
+<ul>
+<li>basic lockscreen for shows or kids</li>
+</ul>
+<h2 id="v045-oct-28-2024">v0.4.5  (Oct 28, 2024)</h2>
+<ul>
+<li>allow calling KlipperScreen panels from gcode</li>
+<li>bed_mesh: automatically call for z_tilt or quad_level if not applied</li>
+<li>show battery status in the topbar</li>
+<li>macros: keyboard to keypad input switch with auto pre-selection</li>
+</ul>
+<h2 id="v044-sep-16-2024">v0.4.4  (Sep 16, 2024)</h2>
+<ul>
+<li>support for different moonraker routes</li>
+<li>allow showing/hiding cursor from the settings</li>
+<li>some wpa-eap support, adds the security type selector and user field</li>
+<li>extrude: wait for temp or open temp panel automatically close #1416</li>
+<li>extrude: show more filament sensors (up to 9)</li>
+<li>notifications: change icon if warnings were issued</li>
+<li>notifications: add clear close #1178</li>
+<li>notifications: klipper config warnings</li>
+</ul>
+<h2 id="v043-jun-29-2024">v0.4.3  (Jun 29, 2024)</h2>
+<ul>
+<li>prompts: add regular buttons and groups</li>
+<li>refactor: always ignore and hide console temp responses</li>
+<li>gcodes: vertical: remove left icons if low resolution</li>
+<li>keypad: support floating point temp</li>
+<li>gcodes: add extra info to confirm print</li>
+<li>zcalibrate: add a dropdown with the function name to select</li>
+<li>job_status: auto-estimated time: use last print time if available</li>
+<li>gcodes: add option to delete in the confirmation</li>
+</ul>
+<h2 id="v042-jun-10-2024">v0.4.2  (Jun 10, 2024)</h2>
+<ul>
+<li>job_status: remove the status message and use the titlebar for that</li>
+<li>shutdown: add restart ks</li>
+<li>extrude: move firmware retraction into the panel, add pressure advance control closes #724</li>
+<li>screen: theme doesn't need a restart anymore</li>
+<li>splash: show the message when klipper is shutdown</li>
+<li>rename print panel to gcodes</li>
+<li>job_status: add extra info to print list and dialog</li>
+<li>network: new NetworkManager backend using sdbus (#1269)</li>
+<li>drop python 3.7 support (#1271)</li>
+</ul>
+<h2 id="v041-may-24-2024">v0.4.1  (May 24, 2024)</h2>
+<ul>
+<li>vertical layout: increase font size</li>
+<li>main_menu and temp: change layout to accomodate a bigger graph and list in vertical mode</li>
+<li>pins: add pwm_tool</li>
+<li>menu: add pins panel access while printing</li>
+<li>move and zcalibrate: changes in z invert</li>
+<li>system: add cpu and memory usage tracking</li>
+<li>add system info panel</li>
+<li>updater: add distro name</li>
+<li>menu: rename system to update</li>
+<li>allow 2 different screen timeouts, one while printing the other if not</li>
+<li>settings: Add tooltips</li>
+<li>printer_select: support custom icons #1240</li>
+<li>bed_mesh: show round bed without padded values</li>
+<li>macros: send gcode style (G/M) macros without =</li>
+<li>bed_mesh: bedmap draw axis</li>
+<li>zcalibrate: add support for axis twist compensation</li>
+<li>zcalibrate: add confirmation for abort close #1326</li>
+</ul>
+<h2 id="v040-apr-14-2024">v0.4.0  (Apr 14, 2024)</h2>
+<ul>
+<li>move: support rescaling the slider if machine limits are changed</li>
+<li>bed_mesh: add support for rotation and inversion to the meshMap</li>
+<li>bed_level: add a warning for the screws not being used</li>
+<li>heatergraph: add the ability to go fullscreen when clicked close #740</li>
+<li>Add an alternative to X close #1289 (#1306) (Wayland)</li>
+<li>limits: change to minimum cruise ratio</li>
+<li>heatergraph: add power representation (if set to show power in settings)</li>
+<li>base_panel: titlebar: turn red if high cpu or memory is in use, show usage</li>
+<li>create the shutdown panel, add it to the action bar, remove items from system panel</li>
+<li>job_status: show current offset when saving to endstop close #1286</li>
+</ul>
+<h2 id="v039-feb-29-2024">v0.3.9  (Feb 29, 2024)</h2>
+<ul>
+<li>
+<p>print panel refactor and new features (#1270)
+    Adds a grid/thumbnail mode (switchable to the list mode)
+    last mode used is saved
+    faster load and less memory usage
+    add sort by size</p>
+</li>
+<li>
+<p>extrude: add an extruder selector for machines with more than 5 extruders (#1249)</p>
+</li>
+<li>pins: make the non pwm pins on-off pwm pins as a scale</li>
+<li>popups: rate limit to every second close #1225</li>
+<li>feat: macro prompts close #1216 (#1219)</li>
+</ul>
+<h2 id="v038-dec-23-2023">v0.3.8  (Dec 23, 2023)</h2>
+<ul>
+<li>add move_distances config option (#1211)</li>
+<li>printer_select: do not sort, this allows the users to sort how they want by defining them in the config in the order they want</li>
+</ul>
+<h2 id="v037-nov-24-2023">v0.3.7  (Nov 24, 2023)</h2>
+<ul>
+<li>wifi: add icons</li>
+<li>initial notifications panel</li>
+<li>add moonraker warnings</li>
+</ul>
+<h2 id="v036-sep-24-2023">v0.3.6  (Sep 24, 2023)</h2>
+<ul>
+<li>LED light control, close #991 (#1106)</li>
+<li>pause will auto-open extrude</li>
+<li>macros: hide the panel if there are no elegible macros</li>
+<li>job_status: click thumbnail for fullscreen thumbnail</li>
+</ul>
+<h2 id="v035-aug-21-2023">v0.3.5  (Aug 21, 2023)</h2>
+<ul>
+<li>camera: relative url support close #1086 (#1088)</li>
+<li>Spoolman support close #1060</li>
+<li>Use callbacks to disable and enable buttons to improve user feedback</li>
+<li>main_menu: allow closing the keypad with the back button</li>
+<li>camera: add support for moonraker cameras, deprecates camera_url</li>
+</ul>
+<h2 id="v034-jul-30-2023">v0.3.4  (Jul 30, 2023)</h2>
+<ul>
+<li>fine_tune: split speed and flow selectors close #935</li>
+<li>job_status: show save to endstop to apply offset for deltas close #916</li>
+<li>job_status: change progress percentage to time-based instead of file-based</li>
+</ul>
+<h2 id="v033-jul-2-2023">v0.3.3  (Jul 2, 2023)</h2>
+<ul>
+<li>Menu reorganization (#1029)</li>
+<li>temp: add pid calibrate to the keypad (#1026)</li>
+<li>bed_level: add center screw close #863</li>
+</ul>
+<h2 id="v032-feb-20-2023">v0.3.2  (Feb 20, 2023)</h2>
+<ul>
+<li>add ability to style and template menu buttons (#866)</li>
+<li>Update on-screen keyboard (#874)</li>
+</ul>
+<h2 id="v031-dec-11-2022">v0.3.1  (Dec 11, 2022)</h2>
+<ul>
+<li>feat: camera support, using mpv as backend</li>
+<li>resizability</li>
+<li>print: add move/rename, make delete a visible button close #636</li>
+</ul>
+<h2 id="v030-dec-5-2022">v0.3.0  (Dec 5, 2022)</h2>
+<ul>
+<li>feat: turn on_off power devices with the screensaver close #518</li>
+<li>macros add parameters</li>
+<li>print: allow directory deletion</li>
+<li>job_status: add eta</li>
+<li>Added support for network manager</li>
+<li>settings: add extra large font close #798</li>
+</ul>
+<h2 id="v029-nov-18-2022">v0.2.9  (Nov 18, 2022)</h2>
+<ul>
+<li>job_status: use the new print_stats layer info</li>
+<li>functions: logging: use printer_data</li>
+<li>keyboard: add spanish and german, change backscpace, clear and accept to icons</li>
+</ul>
+<h2 id="v028-oct-27-2022">v0.2.8  (Oct 27, 2022)</h2>
+<ul>
+<li>config: add printer_data to default config search locations</li>
+<li>extrude: make the speed and distance configurable close #673</li>
+<li>limits and retraction: infinite sliders</li>
+<li>print: hide files and directories starting with .</li>
+</ul>
+<h2 id="v027-oct-4-2022">v0.2.7  (Oct 4, 2022)</h2>
+<ul>
+<li>exclude: graph (#743)</li>
+<li>Add current heater power % to job status (#708)</li>
+</ul>
+<h2 id="v026-sep-2-2022">v0.2.6  (Sep 2, 2022)</h2>
+<ul>
+<li>Change URL protocol to HTTPS and WSS when connecting to port 443</li>
+<li>main temp: add the ability to hide the graph</li>
+<li>system: add shutdown and restart host</li>
+<li>exclude: add exclude objects support</li>
+</ul>
+<h2 id="v025-aug-1-2022">v0.2.5  (Aug 1, 2022)</h2>
+<ul>
+<li>system: Add check for updates close #681</li>
+<li>bed_level: support 3 screws close #606</li>
+<li>job_status: now works without extruders or fans</li>
+<li>print: add delete file</li>
+<li>screen: Always ask to save config if we detect it on responses</li>
+<li>output_pin panel close #546</li>
+<li>built-in keyboard</li>
+</ul>
+<h2 id="v024-jul-3-2022">v0.2.4  (Jul 3, 2022)</h2>
+<ul>
+<li>Enable users to inject a custom script to start KlipperScreen (#660)</li>
+<li>basic support for extruder_stepper</li>
+<li>fan: add max and stop buttons</li>
+</ul>
+<h2 id="v023-may-31-2022">v0.2.3  (May 31, 2022)</h2>
+<ul>
+<li>job_status: ask for confirmation, and show saved offset</li>
+<li>extrude: add filament sensor support</li>
+<li>limits: add reset, allow to set above the configured maximum but turn the slider red</li>
+<li>job_status: animate filename if it's too long</li>
+<li>macros: allow reverse sorting</li>
+<li>Add Input Shaper panel</li>
+<li>zcalibrate: show the saved offset and offset to be saved</li>
+<li>Allow setting 0 in preheat options (#612)</li>
+</ul>
+<h2 id="v022-may-1-2022">v0.2.2  (May 1, 2022)</h2>
+<ul>
+<li>
+<p>Improve Job status (#592)</p>
+<p>Adds heater_generic and/or temp_sensors besides extruder/bed (because of the limited space maybe only 1)</p>
+<p>Temps are now buttons and act as a shortcut to the temp panel</p>
+<p>Adds fan_generic to the fan label and it's now a shortcut to the fan panel</p>
+<p>The colors and size of the progress circle were changed to be more subtle.</p>
+<p>Margins between items were augmented, because they are buttons now</p>
+<p>Adds 3 information pages: move, extrusion and time:
+* move can be opened with speed or z buttons
+* time with elapsed/remaining buttons
+* extrusion with the extrude_factor / flowrate button</p>
+</li>
+<li>
+<p>limits: add units</p>
+</li>
+<li>Add firmware retraction panel close #101</li>
+<li>Add possibility to define custom code for cooling (#579)</li>
+<li>job_status: add save z button to save babystepping</li>
+<li>console: hide temps, clear button, button icons</li>
+</ul>
+<h2 id="v021-apr-1-2022">v0.2.1  (Apr 1, 2022)</h2>
+<ul>
+<li>Vertical mode (#480)</li>
+<li>Use extruder icon without number if there is only 1</li>
+<li>Screensaver if dpms is off</li>
+<li>fine_tune: add reset button, do not set babystepping prior to homing, reorganize a bit</li>
+<li>menu and printer_select: support more than 8 items</li>
+<li>zcalibrate: add selector for the different modes zcalibrate supports</li>
+<li>system: feature: add Full Update</li>
+<li>Added option to select default printer at startup. (#542)</li>
+<li>Show fan speed according to max_power and off_below (#543)</li>
+<li>console: add switch to turn off autoscroll (#540)</li>
+<li>base_panel: allow titlebar items to be configured</li>
+<li>splash_screen: allow power_devices to be configured</li>
+<li>Bed_level: Support 6 and 8 Screws and rotation (#484)</li>
+<li>Show position including offsets in the move panel (#516)</li>
+<li>Start in configurations without fans or extruders or temp devices</li>
+<li>Extrude panel: Support 5 extruders (#441)</li>
+<li>Support hiding by name using underscore (#437)</li>
+<li>Support Manual Mesh calibration (#388)</li>
+<li>Support the "enter" key from a physical keyboard (#379)</li>
+<li>Support multiple power devices. (#350)</li>
+<li>add speed as parameter to UN/LOAD_FILAMENT macro (#359)</li>
+</ul>
+<h2 id="v020-dec-7-2021">v0.2.0  (Dec 7, 2021)</h2>
+<p>The Project changed maintainer <a href="github.com/alfrix">alfrix</a>
+(Thats the reason for the version jump)</p>
+<ul>
+<li>Temp graph (#357)</li>
+<li>Create keypad widget and include set temp on the main menu</li>
+<li>Switch from vext.gi to PyGObject (#348)</li>
+<li>Add the full message of the commits in the updater (#343)</li>
+<li>Wakeup touch block (#340)</li>
+<li>screen: RESPOND echo will now show a message on the screen.</li>
+<li>Zcal panel: Support for Z_ENDSTOP_CALIBRATE (#327)</li>
+<li>Move panel: Add Z-tilt/Quad-gantry-level/HomeXY button (#326)</li>
+<li>Add temperature_fan to heaters (#325)</li>
+<li>Configurable xy position for z-calibrate (#310)</li>
+<li>Material themes (#297)</li>
+<li>Support custom themes (#288)</li>
+<li>Allow gcode commands with preheat options (#274)</li>
+<li>Add printer limits panel</li>
+<li>Add unload/load and reorganize extrude panel (#250)</li>
+<li>Font Size Selector (#245)</li>
+<li>Wake the screen at print start and end (#229)</li>
+<li>system: Add restart option to services that moonraker supports</li>
+<li>base_panel: Add extruder/heater bed temperatures to the title bar</li>
+</ul>
+<h2 id="v016-may-13-2021">v0.1.6  (May 13, 2021)</h2>
+<ul>
+<li>Wifi manager: Updates to include ability to change wifi networks</li>
+</ul>
+<h2 id="v015-may-10-2021">v0.1.5  (May 10, 2021)</h2>
+<ul>
+<li>New Style - Solarized (#144)</li>
+<li>M117 messages display (#150)</li>
+<li>print: Include refresh button for files</li>
+<li>bed_mesh: Include ability to view mesh Added ability to visualize bed meshes. The active bed mesh will have more points available to view than inactive bed meshes.</li>
+<li>Multiple printers (#85)</li>
+<li>screen: Enable DPMS so screens can power down.</li>
+<li>screen: Allow cursor to be displayed #51</li>
+<li>temperature: add heater_generic</li>
+<li>screen: Only process current panel's subscription</li>
+</ul>
+<h2 id="v014-feb-15-2021">v0.1.4  (Feb 15, 2021)</h2>
+<ul>
+<li>network: Show wifi information</li>
+<li>screen_panel: Put icons on a sidebar instead of on the header</li>
+<li>printer: Include quad_gantry_level</li>
+<li>wifi: Initial wifi class</li>
+<li>job_status/settings: Allow different file estimation methods</li>
+<li>print: Allow sorting by date and name.</li>
+</ul>
+<h2 id="v013-jan-7-2021">v0.1.3  (Jan 7, 2021)</h2>
+<ul>
+<li>gcode_macros: Update to hide macros based on settings</li>
+<li>settings: Create settings panel for KlipperScreen settings</li>
+<li>job_status: updates to show active extruder</li>
+<li>KlippyWebsocket: changes to allow for moonraker api key</li>
+<li>gcode_macros: add a panel for gcode macros</li>
+<li>screen: allow custom moonraker url/port</li>
+<li>config: Allow specifying configfile location from command line</li>
+<li>UI scaling (#28)</li>
+<li>move: Allow inverting of the axis</li>
+<li>bed_level: include screws_tilt_calculate command</li>
+<li>fine_tune: Remove fan from fine tune panel. Add fan to print menu</li>
+<li>configuration: hide extrude while printing</li>
+<li>bed_mesh: Add panel for bed_mesh</li>
+<li>screen: add popup message capability</li>
+</ul>
+<h2 id="v012-dec-2-2020">v0.1.2  (Dec 2, 2020)</h2>
+<ul>
+<li>Change panel layout. Add title and move back button</li>
+<li>system: add klipper version</li>
+</ul>
+<h2 id="v011-nov-28-2020">v0.1.1  (Nov 28, 2020)</h2>
+<ul>
+<li>Add power panel</li>
+<li>menu: add ability to hide certain menus</li>
+<li>Dynamically load panels</li>
+<li>Add HOME XY button</li>
+<li>Highlight all heaters by default on preheat panel</li>
+</ul>
+<h2 id="v010-nov-14-2020">v0.1.0  (Nov 14, 2020)</h2>
+<ul>
+<li>first release</li>
+</ul>
+<h2 id="v000-jul-6-2020">v0.0.0  (Jul 6, 2020)</h2>
+<ul>
+<li>first commit</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/KlipperScreen/KlipperScreen/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.klipper3d.org/" target="_blank" rel="noopener" title="discord.klipper3d.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6M286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3M167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4m-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate", "content.tooltips", "navigation.expand", "navigation.indexes", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>
