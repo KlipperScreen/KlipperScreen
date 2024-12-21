@@ -27,8 +27,8 @@ class Panel(ScreenPanel):
         self.oheight = 0.0
         self.current_extruder = None
         self.fila_section = pi * ((1.75 / 2) ** 2)
-        self.filename_label = None
-        self.filename = None
+        self.filename_label = {'complete': "Filename"}
+        self.filename = ""
         self.prev_pos = None
         self.prev_gpos = None
         self.can_close = False
