@@ -616,7 +616,7 @@ class KlipperScreen(Gtk.Window):
             return False
         state = functions.get_DPMS_state()
         if state == functions.DPMS_State.Fail:
-            logging.info("DPMS State FAIL: Stopping DPMS Check")
+            self.show_popup_message(_("DPMS has failed and has been disabled"))
             self.set_dpms(False)
             return False
         elif state != functions.DPMS_State.On:
@@ -626,61 +626,73 @@ class KlipperScreen(Gtk.Window):
 
     def wake_screen(self):
         # Wake the screen (it will go to standby as configured)
+        if not self.use_dpms:
+            logging.debug("DPMS is disabled cannot wake the screen")
+            return
         if self._config.get_main_config().get('screen_blanking') != "off":
             logging.debug("Screen wake up")
-            if not self.wayland:
-                os.system(f"xset -display {self.display_number} dpms force on")
+        try:
+            subprocess.run(
+                f"xset -display {self.display_number} dpms force on",
+                shell=True, check=True
+            )
+        except subprocess.CalledProcessError as e:
+            self.show_popup_message(f"Error: {e}")
+            self.set_dpms(False)
+            return
 
     def set_dpms(self, use_dpms):
         if not use_dpms:
-            GLib.source_remove(self.check_dpms_timeout)
+            if self.check_dpms_timeout is not None:
+                GLib.source_remove(self.check_dpms_timeout)
             self.check_dpms_timeout = None
         self.use_dpms = use_dpms
+        self._config.set("main", "use_dpms", use_dpms)
+        self._config.save_user_config_options()
         logging.info(f"DPMS set to: {self.use_dpms}")
         if self.printer.state in ("printing", "paused"):
             self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking_printing'))
         else:
             self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
 
+    def set_dpms_timeout(self):
+        try:
+            subprocess.run(
+                f"xset -display {self.display_number} s off",
+                shell=True, check=True
+            )
+            subprocess.run(
+                f"xset -display {self.display_number} dpms 0 {self.blanking_time} 0",
+                shell=True, check=True
+            )
+        except subprocess.CalledProcessError as e:
+            self.show_popup_message(f"Error: {e}")
+            self.set_dpms(False)
+            return
+        if self.blanking_time > 0 and self.check_dpms_timeout is None:
+            self.check_dpms_timeout = GLib.timeout_add_seconds(1, self.check_dpms_state)
+            return
+
     def set_screenblanking_printing_timeout(self, time):
         if self.printer.state in ("printing", "paused"):
             self.set_screenblanking_timeout(time)
 
     def set_screenblanking_timeout(self, time):
-        if not self.wayland:
-            os.system(f"xset -display {self.display_number} s off")
-        self.use_dpms = self._config.get_main_config().getboolean("use_dpms", fallback=True)
-
         if time == "off":
-            logging.debug(f"Screen blanking: {time}")
             self.blanking_time = 0
-            if not self.wayland:
-                os.system(f"xset -display {self.display_number} dpms 0 0 0")
-            return
+        else:
+            try:
+                self.blanking_time = abs(int(time))
+            except Exception as exc:
+                logging.exception(exc)
+        self.use_dpms = self._config.get_main_config().getboolean("use_dpms", fallback=False)
+        self.use_dpms &= functions.dpms_loaded
 
-        self.blanking_time = abs(int(time))
-        logging.debug(f"Changing screen blanking to: {self.blanking_time}")
-        if self.use_dpms and functions.dpms_loaded is True:
-            if not self.wayland:
-                os.system(f"xset -display {self.display_number} +dpms")
-            if functions.get_DPMS_state() == functions.DPMS_State.Fail:
-                logging.info("DPMS State FAIL")
-                self.show_popup_message(_("DPMS has failed to load and has been disabled"))
-                self._config.set("main", "use_dpms", "False")
-                self._config.save_user_config_options()
-            else:
-                logging.debug("Using DPMS")
-                if not self.wayland:
-                    os.system(f"xset -display {self.display_number} dpms 0 {self.blanking_time} 0")
-                if self.check_dpms_timeout is None:
-                    self.check_dpms_timeout = GLib.timeout_add_seconds(1, self.check_dpms_state)
-                return
-        # Without dpms just blank the screen
-        logging.debug("Not using DPMS")
-        if not self.wayland:
-            os.system(f"xset -display {self.display_number} dpms 0 0 0")
-        self.screensaver.reset_timeout()
-        return
+        if self.use_dpms:
+            self.set_dpms_timeout()
+        else:
+            self.screensaver.reset_timeout()
+        logging.debug(f"Blanking timeout: {time} DPMS:{self.use_dpms}")
 
     def show_printer_select(self, widget=None):
         self.base_panel.show_heaters(False)
