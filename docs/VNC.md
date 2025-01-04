@@ -38,30 +38,15 @@ The host device could be for example a Raspberry Pi
     sudo systemctl restart KlipperScreen.service
     ```
 
-6. On KlipperScreen set the following configuration:
-
-Turn off DPMS and Display timeout:
-
-![disable_dpms_poweroff](img/disable_dpms_poweroff.png)
-
 ## On the remote device:
 
-1. Install a VNC viewer and  configure it to the ip of the host.
+Install a VNC viewer and  configure it to the ip of the host.
 
 
-???+ example "Example using an iPad"
+??? example "Example using an iPad"
     #### Example using an iPad
     * Install a VNC viewer for example: `RealVNC Viewer: Remote Desktop`
-    ##### Prevent unwanted rotation of UI:
-    * Go to `Settings` > `General` >  Set `Use side switch to` to `Lock Rotation`
-    ##### Avoid accidentally switching between apps:
-    * Go to `Restrictions` > Set passcode > Enable restrictions.
-    * Open
-    * Triple-click "Home" button
-    * Guided access pops up
-    * Press "Start"
-    * Now iPad is locked to VNC viewer until "Guided access" mode is disabled by triple-clicking "Home" button and entering the password.
-    ##### On the VNC viewer:
+    * Open the VNC viewer app
     * Press "+" button at the top right
     * Enter IP address of your print host.
     * Press "Save"
@@ -71,4 +56,28 @@ Turn off DPMS and Display timeout:
     * VNC client will complain about unencrypted connection. Disable the warning and say "Connect"
     * Use or skip tutorial
     * Press the "Pin" icon to hide the panel.
-    * Enjoy!
+    ##### Prevent unwanted rotation of UI
+    * Go to `Settings` > `General` >  Set `Use side switch to` to `Lock Rotation`
+    ##### Avoid accidentally switching between apps
+    * Go to `Restrictions` > Set passcode > Enable restrictions.
+    * Open
+    * Triple-click "Home" button
+    * Guided access pops up
+    * Press "Start"
+    * Now iPad is locked to VNC viewer until "Guided access" mode is disabled by triple-clicking "Home" button and entering the password.
+
+??? example "Example using an Android device"
+    #### Example using an Android device
+    * Install a VNC viewer for example: `RealVNC Viewer: Remote Desktop`
+    * Open the VNC viewer app
+    * Press "+" button at the right
+    * Enter IP address of your print host.
+    * Press "Save"
+    * Double-click on an icon with name or IP address you have just added.
+    * VNC client may complain about unencrypted connection. Disable the warning and say "Connect"
+    ##### Prevent unwanted rotation of UI
+    * Lock the rotation using the buttons in the notification bar or in device Settings > Screen > Disable "Rotate automatically"
+
+It's recommended to turn off DPMS and Display timeout:
+
+![disable_dpms_poweroff](img/disable_dpms_poweroff.png)
