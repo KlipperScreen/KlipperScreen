@@ -21,6 +21,24 @@
     border: 0;
 }
 
+#large_text {
+    font-family: "Montserrat";
+    font-size: 20pt;  /* Increase font size */
+}
+
+.rounded-button {
+    background-color: #FFA500; /* Orange background */
+    border-radius: 25px;      /* Rounded corners */
+    min-width: 100px;         /* Minimum width */
+    min-height: 100px;        /* Minimum height */
+    color: white;             /* Text color */
+    font-weight: bold;        /* Bold text */
+    border: 2px solid #CC8400; /* Optional border */
+}
+.rounded-button:hover {
+    background-color: #FF8C00; /* Darker orange on hover */
+}
+
 button:disabled {
     opacity: .5;
 }
