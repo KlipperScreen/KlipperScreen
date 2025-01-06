@@ -2,7 +2,7 @@
 
 Built off of KlipperScreen, inspired by [Cocoa Press's PressPrintUI](https://cocoapress.com/cdn/shop/files/Untitled.png?v=1727325369&width=1445)
 
-[Main Menu](https://github.com/VT-CRO/Workcell-Klipperscreen/blob/master/docs/img/main-menu.png?raw=true)
+![Main Menu](https://raw.githubusercontent.com/VT-CRO/Workcell-Klipperscreen/refs/heads/master/docs/img/main-menu.png)
 
 ---
 # KlipperScreen
