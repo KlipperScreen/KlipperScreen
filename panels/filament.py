@@ -80,19 +80,12 @@ class Panel(ScreenPanel):
                 self.extruder_grids[extruder]["grid"] = extruder_grid
 
                 materials_button = self._gtk.Button("filament", _("Materials"), "color4")
-                materials_button.connect("clicked", self.delete_panel, "materials")
-                materials_button.connect("clicked", self.change_config_extruder, extruder)
-                materials_button.connect("clicked", self.menu_item_clicked, {
-                    "panel": "materials"
-                })
+                materials_button.connect("clicked", self.open_materials_panel, extruder)
                 self.extruder_grids[extruder]["materials_button"] = materials_button
 
                 if not extruder.startswith("extruder_stepper"):
                     nozzle_button = self._gtk.Button("extrude", _("Nozzle"), "color4")
-                    nozzle_button.connect("clicked", self.change_config_extruder, extruder)
-                    nozzle_button.connect("clicked", self.menu_item_clicked, {
-                        "panel": "nozzle"
-                    })
+                    nozzle_button.connect("clicked", self.open_nozzle_panel, extruder)
                             
                     extruder_grid.attach(nozzle_button, 0, 1, 1, 1)
                     extruder_grid.attach(materials_button, 1, 1, 1, 1)
@@ -180,6 +173,17 @@ class Panel(ScreenPanel):
         self.menu = ['extrude_menu']
         self.labels['extrude_menu'] = grid
         self.content.add(self.labels['extrude_menu'])
+
+    def open_materials_panel(self, widget, extruder):
+        # HACK: Do this to ensure it is done in the right sequence
+        self.delete_panel("materials")
+        self.change_config_extruder(extruder)
+        self.menu_item_clicked(None, { "panel": "materials" })
+
+    def open_nozzle_panel(self, widget, extruder):
+        # HACK: Do this to ensure it is done in the right sequence
+        self.change_config_extruder(extruder)
+        self.menu_item_clicked(None, { "panel": "nozzle" })
 
     def enable_buttons(self, enable):
         for button in self.buttons:
@@ -297,7 +301,7 @@ class Panel(ScreenPanel):
             new_label_text += f" {power * 100:.0f}%"
         find_widget(self.labels[extruder], Gtk.Label).set_text(new_label_text)
 
-    def change_config_extruder(self, widget, extruder: str):
+    def change_config_extruder(self, extruder: str):
         self._config.extruder = extruder
         # Try to read nozzle variable
         try:
@@ -306,16 +310,17 @@ class Panel(ScreenPanel):
             config.read(variables_path)
             nozzle = config.get("Variables", f'{extruder.replace(" ", "-")}_nozzle')
             self._config.nozzle = nozzle.replace("'", "")
-            print(self._config.nozzle)
+            logging.info(self._config.nozzle)
         except Exception as e:
-            print(e)
+            logging.error(e)
 
-    def delete_panel(self, widget, panel_name):
+    def delete_panel(self, panel_name):
         if panel_name in self._screen.panels:
             del self._screen.panels[panel_name]
 
     def process_update(self, action, data):
         try:
+            # Hardcoded assuming user running KlipperScreen has variables at this path
             variables_path = os.path.join(os.path.expanduser("~"), "printer_data/config/variables.cfg")
             config = configparser.ConfigParser()
             config.read(variables_path)
