@@ -1036,6 +1036,10 @@ class KlipperScreen(Gtk.Window):
         if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:
             logging.info("Stopping Retries")
             return False
+        if not self.server_info:
+            logging.debug("Connection Lost Retrying")
+            self.connect_to_moonraker()
+            return False
         self.reinit_count += 1
         self.server_info = self.apiclient.get_server_info()
         logging.info(f"Moonraker info {self.server_info}")
