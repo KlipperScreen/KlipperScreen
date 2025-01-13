@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-12-06 13:54+0300\n"
+"PO-Revision-Date: 2025-01-13 09:51+0300\n"
 "Last-Translator: Артем <gaz70rus@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/ru/>\n"
 "Language: ru\n"
@@ -1075,3 +1075,9 @@ msgstr "После подтверждения начнется автокали�
 
 msgid "After confirmation, the autocalibration of PID 2nd head will begin"
 msgstr "После подтверждения начнется автокалибровка PID 2-й головы"
+
+msgid "Are you sure want to unload the current filament spool?"
+msgstr "Вы уверены, что хотите выгрузить текущую катушку филамента?"
+
+msgid "Are you sure want to load a NEW reel of filament?"
+msgstr "Вы уверены, что хотите загрузить НОВУЮ катушку филамента?"
