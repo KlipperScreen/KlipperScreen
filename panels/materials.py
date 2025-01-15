@@ -93,6 +93,6 @@ class Panel(ScreenPanel):
     def set_material(self, widget, material=None):
         material_name = material["name"] if material else "empty"
         self._screen._ws.klippy.gcode_script(
-            f"CHANGE_MATERIAL M='{material_name}' EXTRUDER='{self._config.extruder}'"
+            f"CHANGE_MATERIAL M='{material_name}' EXT='{self._config.extruder}'"
         )
         self._screen._menu_go_back()
