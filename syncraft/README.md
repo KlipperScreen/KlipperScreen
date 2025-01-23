@@ -2,6 +2,8 @@
 
 This is a modification of [KlipperScreen](https://github.com/klipperscreen/klipperscreen.git), adapted to meet the specific needs of Syncraft printers. Within this directory you can find Syncraft additional assets.
 
+--- 
+
 ## Extra panels
 
 Panels that are not original from KlipperScreen.
@@ -25,6 +27,8 @@ Uses the `materials.json` file to render the available materials to the current 
 Used to set the [printer variables](https://www.klipper3d.org/Config_Reference.html#save_variables) `material_ext0` or `material_ext1` based on the currently active extruder.
 
 This ensures the printer can cancel a print via `PARAMETERS_MATCH` macro if its 3D model has been sliced for a different material.
+
+---
 
 ## Modifications
 
