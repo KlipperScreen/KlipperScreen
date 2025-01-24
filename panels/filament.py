@@ -275,8 +275,13 @@ class Panel(ScreenPanel):
             if not self.load_filament:
                 self._screen.show_popup_message("Macro LOAD_FILAMENT not found")
             else:
+                current_extruder = self._printer.get_stat("toolhead", "extruder")
+                current_extruder = current_extruder.replace(' ', '-')
+                material = self._config.materials[current_extruder]
+                nozzle = self._config.nozzles[current_extruder]
+                load_filament = f"LOAD_FILAMENT M=\"'{material}'\" NZ=\"'{nozzle}'\" SPEED={self.speed * 60}"
                 self._screen._send_action(widget, "printer.gcode.script",
-                                          {"script": f"LOAD_FILAMENT SPEED={self.speed * 60}"})
+                                          {"script": load_filament})
 
     def enable_disable_fs(self, switch, gparams, name, x):
         if switch.get_active():
@@ -333,10 +338,18 @@ class Panel(ScreenPanel):
                 if f"{extruder}_material" in variables:
                     # Change material label
                     material = config.get("Variables", f"{extruder}_material")
+                    material = material.replace("'", "")
                     self.extruder_grids[extruder]["materials_button"].set_label(material)
+
+                    # Save material variable
+                    self._config.materials[extruder] = material
                 if f"{extruder}_nozzle" in variables:
                     # Change nozzle label
                     nozzle = config.get("Variables", f"{extruder}_nozzle")
+                    nozzle = nozzle.replace("'", "")
                     self.extruder_grids[extruder]["nozzle_button"].set_label(nozzle)
+
+                    # Save nozzle variable
+                    self._config.nozzles[extruder] = nozzle
         except:
             pass
