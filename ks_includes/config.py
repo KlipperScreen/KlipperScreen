@@ -40,6 +40,8 @@ class KlipperScreenConfig:
         # Syncraft variables
         self.extruder = None
         self.nozzle = None
+        self.materials = {}
+        self.nozzles = {}
 
         self.lang_list = None
         self.errors = []
