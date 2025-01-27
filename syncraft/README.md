@@ -49,6 +49,7 @@ This ensures the printer can cancel a print via `PARAMETERS_MATCH` macro if its 
 
 - Remove `side_macro_shortcut` toggle option.
 - Add Syncraft required variables
+- Implement `if` statement on `validate_config` function to enable `[syncraft]` section on configuration.
 
 ### `screen.py`
 
