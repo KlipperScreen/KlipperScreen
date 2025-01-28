@@ -1009,6 +1009,24 @@ msgstr ""
 msgid "s"
 msgstr ""
 
+msgid "Welcome"
+msgstr ""
+
+msgid "Welcome to Syncraft"
+msgstr ""
+
+msgid "Here are some recommended steps to get started"
+msgstr ""
+
+msgid "If you want, you can adjust all of this later"
+msgstr ""
+
+msgid "Accessibility"
+msgstr ""
+
+msgid "Connect"
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""

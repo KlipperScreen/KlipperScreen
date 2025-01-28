@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-26 12:31-0300\n"
-"PO-Revision-Date: 2024-05-07 02:10+0000\n"
+"PO-Revision-Date: 2025-01-28 14:20-0300\n"
 "Last-Translator: Rui Menezes <ruizivo.menezes@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "klipperscreen/klipperscreen/pt_BR/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.5.4-dev\n"
+"X-Generator: Poedit 3.5\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -1011,6 +1011,24 @@ msgstr "mm³/s"
 
 msgid "s"
 msgstr ""
+
+msgid "Welcome"
+msgstr "Bem vindo(a)"
+
+msgid "Welcome to Syncraft"
+msgstr "Bem-vindo à Syncraft"
+
+msgid "Here are some recommended steps to get started"
+msgstr "Aqui estão algumas etapas recomendadas para começar"
+
+msgid "If you want, you can adjust all of this later"
+msgstr "Se quiser, você pode ajustar tudo isso mais tarde"
+
+msgid "Accessibility"
+msgstr "Acessibilidade"
+
+msgid "Connect"
+msgstr "Conectar"
 
 msgid "second"
 msgid_plural "seconds"
