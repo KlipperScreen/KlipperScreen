@@ -28,6 +28,10 @@ Used to set the [printer variables](https://www.klipper3d.org/Config_Reference.h
 
 This ensures the printer can cancel a print via `PARAMETERS_MATCH` macro if its 3D model has been sliced for a different material.
 
+### `welcome.py`
+
+Setup panel that replaces `main_menu.py` if the option `welcome` from the `[syncraft]` section is set to `True` at the KlipperScreen configuration file (it is by default). After clicking on the finish button, the `welcome` will be set to `False`, so the panel `main_menu.py` will be the first panel in the next startup.
+
 ---
 
 ## Modifications
@@ -41,6 +45,12 @@ This ensures the printer can cancel a print via `PARAMETERS_MATCH` macro if its 
 - Add these menu panels:
 	- `filament.py`
 
+### `config/defaults.conf`
+
+- Disable `side_macro_shortcut`.
+- Set default theme to `material-darker`.
+- Default welcome screen when start screen.
+
 ### `KlippyGtk.py`
 
 - Allow `Image` and `Button` functions to search from specific directory.
@@ -50,7 +60,9 @@ This ensures the printer can cancel a print via `PARAMETERS_MATCH` macro if its 
 - Remove `side_macro_shortcut` toggle option.
 - Add Syncraft required variables
 - Implement `if` statement on `validate_config` function to enable `[syncraft]` section on configuration.
+- Enable `[syncraft]` section to be saved on save config at `save_user_config_options` function.
 
 ### `screen.py`
 
 - Remove function `toggle_shortcut` related to `side_macro_shortcut` toggling.
+- Retrieves option `welcome` from `[syncraft]` section to start screen with panel `welcome.py` dinamically.
