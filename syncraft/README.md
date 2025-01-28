@@ -65,4 +65,4 @@ Setup panel that replaces `main_menu.py` if the option `welcome` from the `[sync
 ### `screen.py`
 
 - Remove function `toggle_shortcut` related to `side_macro_shortcut` toggling.
-- Retrieves option `welcome` from `[syncraft]` section to start screen with panel `welcome.py` dinamically.
+- Retrieves option `welcome` from `[syncraft]` section to start screen with panel `welcome.py` dinamically at function `state_ready`.
