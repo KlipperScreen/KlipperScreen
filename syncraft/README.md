@@ -38,12 +38,7 @@ Setup panel that replaces `main_menu.py` if the option `welcome` from the `[sync
 
 ### `config/*.conf`
 
-- Hide these menu panels:
-	- `extrude.py`
-	- `temperature.py`
-	- `gcode_macros.py`
-- Add these menu panels:
-	- `filament.py`
+- Hide and add menu panels.
 
 ### `config/defaults.conf`
 
