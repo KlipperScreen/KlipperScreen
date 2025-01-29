@@ -37,7 +37,7 @@ class Panel(ScreenPanel):
 
         self.buttons = {
             'STEP_01': self._gtk.Button("network", _("Connect"), "color3"),
-            'STEP_02': self._gtk.Button ("accessibility", _("Accessibility"), "color1", directory=syncraft_images_path),
+            'STEP_02': self._gtk.Button ("settings", _("Settings"), "color1"),
             'STEP_03': self._gtk.Button("bed-level", _("Calibrate"), "color2"),
             'FINISH': self._gtk.Button("complete", _("Finish"), None),
         }
@@ -46,7 +46,7 @@ class Panel(ScreenPanel):
             "panel": "network"
         })
         self.buttons['STEP_02'].connect("clicked", self.menu_item_clicked, {
-            "name":_("Accessibility"),
+            "name":_("Settings"),
             "panel": "settings"
         })
         self.buttons['STEP_03'].connect("clicked", self.menu_item_clicked, {
