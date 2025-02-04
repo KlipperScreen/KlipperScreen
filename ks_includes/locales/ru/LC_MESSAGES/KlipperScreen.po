@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2025-01-13 09:51+0300\n"
+"PO-Revision-Date: 2025-02-04 13:18+0300\n"
 "Last-Translator: Артем <gaz70rus@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/ru/>\n"
 "Language: ru\n"
@@ -572,6 +572,9 @@ msgstr "Дистанция перемещения (мм)"
 
 msgid "Name"
 msgstr "Имя"
+
+msgid "Actions"
+msgstr "Действия"
 
 msgid "Network"
 msgstr "Сеть"
