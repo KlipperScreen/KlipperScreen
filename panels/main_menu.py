@@ -19,6 +19,9 @@ class Panel(MenuPanel):
         super().__init__(screen, title, items)
         self.content.get_style_context().add_class("customBG")
         iconPath = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles", "crologo.svg")
+        settingsPath = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles", "gear.svg")
+        movePath = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles", "move.svg")
+        printPath = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles", "print.svg")
         self.devices = {}
         self.graph_update = None
         self.active_heater = None
@@ -58,9 +61,9 @@ class Panel(MenuPanel):
         buttons.set_margin_start(20)
         buttons.set_margin_end(20)
 
-        button1 = self.create_rounded_button(None, "Move", self.button1_clicked)
-        button2 = self.create_rounded_button(None, "Settings", self.button2_clicked)
-        button3 = self.create_rounded_button(None, "Print", self.button3_clicked)
+        button1 = self.create_rounded_button(movePath, "Move", self.button1_clicked)
+        button2 = self.create_rounded_button(settingsPath, "Settings", self.button2_clicked)
+        button3 = self.create_rounded_button(printPath, "Print", self.button3_clicked)
 
         buttons.pack_start(button1, True, True, 0)
         buttons.pack_start(button2, True, True, 0)
@@ -293,4 +296,7 @@ class Panel(MenuPanel):
         self._screen.show_panel("settings")
 
     def button3_clicked(self, button):
-        self._screen._ws.klippy.gcode_script("K_ROS MESSAGE=GCODE,Start")
+        #self._screen._ws.klippy.gcode_script("K_ROS MESSAGE=GCODE,Start")
+        self._screen.show_panel("print_screen")
+        #self.back()
+        #print("Going back")

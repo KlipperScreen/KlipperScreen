@@ -89,8 +89,6 @@ class Panel(ScreenPanel):
         self.scroll.add(self.flowbox)
 
         self.main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
-        button1 = self.create_rounded_button(None, "Test", self._screen._menu_go_back)
-        self.main.add(button1)
         self.main.add(self.headerbox)
         self.main.add(self.labels['path'])
         self.main.add(self.scroll)
@@ -111,28 +109,6 @@ class Panel(ScreenPanel):
         self._config.set("main", "print_view", 'list' if self.list_mode else 'thumbs')
         self._config.save_user_config_options()
         self._refresh_files()
-        
-    def create_rounded_button(self, icon_path, label_text, callback):
-        button = Gtk.Button()
-        button.get_style_context().add_class("rounded-button")
-        if label_text == "Print":
-            button.get_style_context().add_class("print-button")
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-
-        if icon_path:
-            image = Gtk.Image.new_from_file(icon_path)
-            image.set_valign(Gtk.Align.CENTER)
-            vbox.pack_start(image, True, True, 0)
-
-        label = Gtk.Label(label=label_text)
-        label.set_valign(Gtk.Align.CENTER)
-        label.set_halign(Gtk.Align.CENTER)
-        vbox.pack_start(label, False, False, 0)
-
-        vbox.set_valign(Gtk.Align.CENTER)
-        button.add(vbox)
-        button.connect("clicked", callback)
-        return button
 
     def activate(self):
         if self.cur_directory != "gcodes":
