@@ -132,7 +132,7 @@ class HeaterGraph(Gtk.DrawingArea):
         for i, d in enumerate(data):
             if d is None:
                 continue
-                
+
             p_x = i * swidth + gsize[0][0] if i != d_len else gsize[1][0] - 1
             if dashed:  # d between 0 and 1
                 p_y = gsize[1][1] - (d * (gsize[1][1] - gsize[0][1]))
