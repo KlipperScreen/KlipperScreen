@@ -32,6 +32,16 @@ This ensures the printer can cancel a print via `PARAMETERS_MATCH` macro if its 
 
 Setup panel that replaces `main_menu.py` if the option `welcome` from the `[syncraft]` section is set to `True` at the KlipperScreen configuration file (it is by default). After clicking on the finish button, the `welcome` will be set to `False`, so the panel `main_menu.py` will be the first panel in the next startup.
 
+### `calibrate.py` and `calibrate_*.py` panels
+
+#### `calibrate.py`
+
+Menu to select Syncraft calibration panels more easiliy.
+
+#### `calibrate_*.py`
+
+Syncraft calibration panels.
+
 ---
 
 ## Modifications
