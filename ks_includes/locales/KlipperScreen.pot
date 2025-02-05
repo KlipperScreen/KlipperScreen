@@ -1027,6 +1027,39 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
+msgid "Bed Calibration"
+msgstr ""
+
+msgid "Probe Calibration"
+msgstr ""
+
+msgid "IDEX Calibration for Z Axis"
+msgstr ""
+
+msgid "Print IDEX Calibration File for XY Axes"
+msgstr ""
+
+msgid "Adjust"
+msgstr ""
+
+msgid "This screw is now Adjusted"
+msgstr ""
+
+msgid "This screw is already Adjusted"
+msgstr ""
+
+msgid "Adjust the screws of the secondary extruder, on the right side."
+msgstr ""
+
+msgid "After completing the procedure, press the button to finish."
+msgstr ""
+
+msgid "Nozzle height will be checked."
+msgstr ""
+
+msgid "If not properly leveled, perform a mechanical calibration."
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
