@@ -18,7 +18,7 @@ class Panel(ScreenPanel):
         title = title or _("Job Status")
         super().__init__(screen, title)
         self.thumb_dialog = None
-        self.grid = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10) #Gtk.Grid(column_homogeneous=True)
+        self.grid = Gtk.Grid(column_homogeneous=True)
         self.pos_z = 0.0
         self.extrusion = 100
         self.speed_factor = 1.0
@@ -76,40 +76,48 @@ class Panel(ScreenPanel):
         self.labels['height_lbl'] = Gtk.Label(_("Height:"))
         self.labels['layer_lbl'] = Gtk.Label(_("Layer:"))
 
+        for fan in self._printer.get_fans():
+            # fan_types = ["controller_fan", "fan_generic", "heater_fan"]
+            if fan == "fan":
+                name = " "
+            elif fan.startswith("fan_generic"):
+                name = " ".join(fan.split(" ")[1:])[:1].upper() + ":"
+                if name.startswith("_"):
+                    continue
+            else:
+                continue
+            self.fans[fan] = {
+                "name": name,
+                "speed": "-"
+            }
+
         self.labels['file'] = Gtk.Label(label="Filename", hexpand=True)
         self.labels['file'].get_style_context().add_class("printing-filename")
         self.labels['lcdmessage'] = Gtk.Label(no_show_all=True)
         self.labels['lcdmessage'].get_style_context().add_class("printing-status")
 
-        # Aligns stuff
         for label in self.labels:
             self.labels[label].set_halign(Gtk.Align.START)
             self.labels[label].set_ellipsize(Pango.EllipsizeMode.END)
 
-        # File Name
-        fi_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10, valign=Gtk.Align.CENTER, halign=Gtk.Align.CENTER)
+        fi_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10, valign=Gtk.Align.CENTER)
         fi_box.add(self.labels['file'])
         fi_box.add(self.labels['lcdmessage'])
-        self.grid.add(fi_box)
+        self.grid.attach(fi_box, 1, 0, 3, 1)
 
         self.labels['darea'] = Gtk.DrawingArea()
         self.labels['darea'].connect("draw", self.on_draw)
 
-        # Percentage
         box = Gtk.Box(halign=Gtk.Align.CENTER)
         self.labels['progress_text'] = Gtk.Label(label="0%")
         self.labels['progress_text'].get_style_context().add_class("printing-progress-text")
         box.add(self.labels['progress_text'])
 
-        # Progress Bar
         overlay = Gtk.Overlay(hexpand=True)
-        height = self._gtk.font_size * 2  # Reduced height
-        width = self._gtk.font_size * 5
-        overlay.set_size_request(width, height)
+        overlay.set_size_request(*(self._gtk.font_size * 5,) * 2)
         overlay.add(self.labels['darea'])
         overlay.add_overlay(box)
-        self.grid.add(overlay)
-
+        self.grid.attach(overlay, 0, 0, 1, 1)
 
         self.labels['thumbnail'] = self._gtk.Button("file")
         self.labels['thumbnail'].connect("clicked", self.show_fullscreen_thumbnail)
@@ -123,34 +131,28 @@ class Panel(ScreenPanel):
         self.buttons = {}
         self.create_buttons()
         self.buttons['button_grid'] = Gtk.Grid(row_homogeneous=True, column_homogeneous=True, vexpand=False)
-        
+        self.grid.attach(self.buttons['button_grid'], 0, 3, 4, 1)
 
         self.create_status_grid()
-        # self.create_extrusion_grid()
-        # self.create_time_grid()
-        # self.create_move_grid()
-        self.grid.add(self.labels['info_grid'])
-        self.grid.add(self.buttons['button_grid'])
+        self.create_extrusion_grid()
+        self.create_time_grid()
+        self.create_move_grid()
+        self.grid.attach(self.labels['info_grid'], 0, 1, 4, 2)
         self.switch_info(info=self.status_grid)
         self.content.add(self.grid)
 
     def create_status_grid(self, widget=None):
-        # buttons = {
-        #     'speed': self._gtk.Button("speed+", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
-        #     'z': self._gtk.Button("home-z", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
-        #     'extrusion': self._gtk.Button("extrude", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
-        #     'fan': self._gtk.Button("fan", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
-        #     'elapsed': self._gtk.Button("clock", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
-        #     'left': self._gtk.Button("hourglass", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
-        # }
-        
         buttons = {
+            'speed': self._gtk.Button("speed+", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
+            'z': self._gtk.Button("home-z", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
+            'extrusion': self._gtk.Button("extrude", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
+            'fan': self._gtk.Button("fan", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
             'elapsed': self._gtk.Button("clock", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
             'left': self._gtk.Button("hourglass", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
         }
-        
         for button in buttons:
             buttons[button].set_halign(Gtk.Align.START)
+        buttons['fan'].connect("clicked", self.menu_item_clicked, {"panel": "fan"})
         self.buttons.update(buttons)
 
         self.buttons['extruder'] = {}
@@ -219,6 +221,12 @@ class Panel(ScreenPanel):
                             break
 
         szfe = Gtk.Grid(column_homogeneous=True)
+        szfe.attach(self.buttons['speed'], 0, 0, 3, 1)
+        szfe.attach(self.buttons['z'], 2, 0, 2, 1)
+        if self._printer.get_tools():
+            szfe.attach(self.buttons['extrusion'], 0, 1, 3, 1)
+        if self._printer.get_fans():
+            szfe.attach(self.buttons['fan'], 2, 1, 2, 1)
 
         info = Gtk.Grid(row_homogeneous=True)
         info.get_style_context().add_class("printing-info")
@@ -249,7 +257,6 @@ class Panel(ScreenPanel):
         info.attach(self.labels['filament_total'], 2, 4, 1, 1)
         self.extrusion_grid = info
         self.buttons['extrusion'].connect("clicked", self.switch_info, self.extrusion_grid)
-        
 
     def create_move_grid(self, widget=None):
         goback = self._gtk.Button("back", None, "color2", self.bts, Gtk.PositionType.TOP, False)
@@ -277,6 +284,8 @@ class Panel(ScreenPanel):
         info.attach(self.labels['layer_lbl'], 1, 5, 1, 1)
         info.attach(self.labels['layer'], 2, 5, 1, 1)
         self.move_grid = info
+        self.buttons['z'].connect("clicked", self.switch_info, self.move_grid)
+        self.buttons['speed'].connect("clicked", self.switch_info, self.move_grid)
 
     def create_time_grid(self, widget=None):
         goback = self._gtk.Button("back", None, "color3", self.bts, Gtk.PositionType.TOP, False)
@@ -315,23 +324,18 @@ class Panel(ScreenPanel):
         self.labels['info_grid'].show_all()
 
     def on_draw(self, da, ctx):
-        width = da.get_allocated_width()
-        height = da.get_allocated_height()
+        w = da.get_allocated_width()
+        h = da.get_allocated_height()
+        r = min(w, h) * .42
 
-        # Background of the progress bar
         ctx.set_source_rgb(0.13, 0.13, 0.13)
-        ctx.rectangle(0, 0, width, height)
-        ctx.fill()
-
-        # Calculate the filled portion of the rectangle
-        filled_width = width * self.progress
-
-        # Filled portion of the progress bar
+        ctx.set_line_width(self._gtk.font_size * .75)
+        ctx.translate(w / 2, h / 2)
+        ctx.arc(0, 0, r, 0, 2 * pi)
+        ctx.stroke()
         ctx.set_source_rgb(0.718, 0.110, 0.110)
-        ctx.rectangle(0, 0, filled_width, height)
-        ctx.fill()
-
-        return True
+        ctx.arc(0, 0, r, 3 / 2 * pi, 3 / 2 * pi + (self.progress * 2 * pi))
+        ctx.stroke()
 
     def activate(self):
         if self.flow_timeout is None:
@@ -350,40 +354,26 @@ class Panel(ScreenPanel):
     def create_buttons(self):
 
         self.buttons = {
-            'cancel': self.create_rounded_button(None, "Cancel", self.cancel),
+            'cancel': self._gtk.Button("stop", _("Cancel"), "color2"),
             'control': self._gtk.Button("settings", _("Settings"), "color3"),
             'fine_tune': self._gtk.Button("fine-tune", _("Fine Tuning"), "color4"),
-            'menu': self.create_rounded_button(None, "Main Menu", self.close_panel),
-            'pause': self.create_rounded_button(None, "Pause", self.pause),
-            'restart': self.create_rounded_button(None, "Restart", self.restart),
-            'resume': self.create_rounded_button(None, "Resume", self.resume),
+            'menu': self._gtk.Button("complete", _("Main Menu"), "color4"),
+            'pause': self._gtk.Button("pause", _("Pause"), "color1"),
+            'restart': self._gtk.Button("refresh", _("Restart"), "color3"),
+            'resume': self._gtk.Button("resume", _("Resume"), "color1"),
             'save_offset_probe': self._gtk.Button("home-z", _("Save Z") + "\n" + "Probe", "color1"),
             'save_offset_endstop': self._gtk.Button("home-z", _("Save Z") + "\n" + "Endstop", "color2"),
         }
+        self.buttons['cancel'].connect("clicked", self.cancel)
+        self.buttons['control'].connect("clicked", self._screen._go_to_submenu, "")
+        self.buttons['fine_tune'].connect("clicked", self.menu_item_clicked, {
+            "panel": "fine_tune"})
+        self.buttons['menu'].connect("clicked", self.close_panel)
+        self.buttons['pause'].connect("clicked", self.pause)
+        self.buttons['restart'].connect("clicked", self.restart)
+        self.buttons['resume'].connect("clicked", self.resume)
         self.buttons['save_offset_probe'].connect("clicked", self.save_offset, "probe")
         self.buttons['save_offset_endstop'].connect("clicked", self.save_offset, "endstop")
-        
-    def create_rounded_button(self, icon_path, label_text, callback):
-        button = Gtk.Button()
-        button.get_style_context().add_class("rounded-button")
-        if label_text == "Print":
-            button.get_style_context().add_class("print-button")
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-
-        if icon_path:
-            image = Gtk.Image.new_from_file(icon_path)
-            image.set_valign(Gtk.Align.CENTER)
-            vbox.pack_start(image, True, True, 0)
-
-        label = Gtk.Label(label=label_text)
-        label.set_valign(Gtk.Align.CENTER)
-        label.set_halign(Gtk.Align.CENTER)
-        vbox.pack_start(label, False, False, 0)
-
-        vbox.set_valign(Gtk.Align.CENTER)
-        button.add(vbox)
-        button.connect("clicked", callback)
-        return button
 
     def save_offset(self, widget, device):
         sign = "+" if self.zoffset > 0 else "-"
@@ -533,6 +523,10 @@ class Panel(ScreenPanel):
         if 'gcode_move' in data:
             if 'gcode_position' in data['gcode_move']:
                 self.pos_z = round(float(data['gcode_move']['gcode_position'][2]), 2)
+                self.buttons['z'].set_label(
+                    f"Z: {self.pos_z:6.2f}{f'/{self.oheight}' if self.oheight > 0 else ''} "
+                    f"{f'{self.mm}' if self._screen.width > 500 else ''}"
+                )
             if 'extrude_factor' in data['gcode_move']:
                 self.extrusion = round(float(data['gcode_move']['extrude_factor']) * 100)
                 self.labels['extrude_factor'].set_label(f"{self.extrusion:3}%")
@@ -540,6 +534,13 @@ class Panel(ScreenPanel):
                 self.speed = round(float(data['gcode_move']['speed_factor']) * 100)
                 self.speed_factor = float(data['gcode_move']['speed_factor'])
                 self.labels['speed_factor'].set_label(f"{self.speed:3}%")
+            if 'speed' in data['gcode_move']:
+                self.req_speed = round(float(data["gcode_move"]["speed"]) / 60 * self.speed_factor)
+                self.labels['req_speed'].set_label(
+                    f"{self.speed}% {self.vel:3.0f}/{self.req_speed:3.0f} "
+                    f"{f'{self.mms}' if self.vel < 1000 and self.req_speed < 1000 and self._screen.width > 500 else ''}"
+                )
+                self.buttons['speed'].set_label(self.labels['req_speed'].get_label())
             if 'homing_origin' in data['gcode_move']:
                 self.zoffset = float(data['gcode_move']['homing_origin'][2])
                 self.labels['zoffset'].set_label(f"{self.zoffset:.3f} {self.mm}")
@@ -562,8 +563,15 @@ class Panel(ScreenPanel):
                     f"{self.speed}% {self.vel:3.0f}/{self.req_speed:3.0f} "
                     f"{f'{self.mms}' if self.vel < 1000 and self.req_speed < 1000 and self._screen.width > 500 else ''}"
                 )
+                self.buttons['speed'].set_label(self.labels['req_speed'].get_label())
             if 'live_extruder_velocity' in data['motion_report']:
                 self.flowstore.append(self.fila_section * float(data["motion_report"]["live_extruder_velocity"]))
+        fan_label = ""
+        for fan in self.fans:
+            self.fans[fan]['speed'] = f"{self._printer.get_fan_speed(fan) * 100:3.0f}%"
+            fan_label += f" {self.fans[fan]['name']}{self.fans[fan]['speed']}"
+        if fan_label:
+            self.buttons['fan'].set_label(fan_label[:12])
         if "print_stats" in data:
             if 'state' in data['print_stats']:
                 self.set_state(
@@ -725,11 +733,15 @@ class Panel(ScreenPanel):
         if self.state == "printing":
             self.buttons['button_grid'].attach(self.buttons['pause'], 0, 0, 1, 1)
             self.buttons['button_grid'].attach(self.buttons['cancel'], 1, 0, 1, 1)
+            self.buttons['button_grid'].attach(self.buttons['fine_tune'], 2, 0, 1, 1)
+            self.buttons['button_grid'].attach(self.buttons['control'], 3, 0, 1, 1)
             self.enable_button("pause", "cancel")
             self.can_close = False
         elif self.state == "paused":
             self.buttons['button_grid'].attach(self.buttons['resume'], 0, 0, 1, 1)
             self.buttons['button_grid'].attach(self.buttons['cancel'], 1, 0, 1, 1)
+            self.buttons['button_grid'].attach(self.buttons['fine_tune'], 2, 0, 1, 1)
+            self.buttons['button_grid'].attach(self.buttons['control'], 3, 0, 1, 1)
             self.enable_button("resume", "cancel")
             self.can_close = False
         else:
