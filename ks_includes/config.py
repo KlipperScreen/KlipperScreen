@@ -538,6 +538,7 @@ class KlipperScreenConfig:
         extra_sections = [i for i in self.config.sections() if i.startswith("displayed_macros")]
         extra_sections.extend([i for i in self.config.sections() if i.startswith("graph")])
         extra_sections.extend([i for i in self.config.sections() if i.startswith("spoolman")])
+        extra_sections.extend([i for i in self.config.sections() if i.startswith("syncraft")])
         for section in extra_sections:
             for item in self.config.options(section):
                 value = self.config[section].getboolean(item, fallback=True)

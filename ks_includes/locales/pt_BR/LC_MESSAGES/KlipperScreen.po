@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-26 12:31-0300\n"
-"PO-Revision-Date: 2024-05-07 02:10+0000\n"
+"PO-Revision-Date: 2025-01-28 14:20-0300\n"
 "Last-Translator: Rui Menezes <ruizivo.menezes@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "klipperscreen/klipperscreen/pt_BR/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.5.4-dev\n"
+"X-Generator: Poedit 3.5\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -1011,6 +1011,57 @@ msgstr "mm³/s"
 
 msgid "s"
 msgstr ""
+
+msgid "Welcome"
+msgstr "Bem vindo(a)"
+
+msgid "Welcome to Syncraft"
+msgstr "Bem-vindo à Syncraft"
+
+msgid "Here are some recommended steps to get started"
+msgstr "Aqui estão algumas etapas recomendadas para começar"
+
+msgid "If you want, you can adjust all of this later"
+msgstr "Se quiser, você pode ajustar tudo isso mais tarde"
+
+msgid "Accessibility"
+msgstr "Acessibilidade"
+
+msgid "Connect"
+msgstr "Conectar"
+
+msgid "Bed Calibration"
+msgstr "Calibração de mesa"
+
+msgid "Probe Calibration"
+msgstr "Calibração de probe"
+
+msgid "IDEX Calibration for Z Axis"
+msgstr "Calibração mecânica IDEX Z"
+
+msgid "Print IDEX Calibration File for XY Axes"
+msgstr "Imprimir peça de calibração IDEX XY"
+
+msgid "Adjust"
+msgstr "Ajustar"
+
+msgid "This screw is now Adjusted"
+msgstr "O parafuso foi ajustado"
+
+msgid "This screw is already Adjusted"
+msgstr "Este parafuso já está ajustado"
+
+msgid "Adjust the screws of the secondary extruder, on the right side."
+msgstr "Ajuste os parafusos do extrusor direito."
+
+msgid "After completing the procedure, press the button to finish."
+msgstr "Após concluir o procedimento, clique no botão para finalizar."
+
+msgid "Nozzle height will be checked."
+msgstr "A altura dos extrusores será verificada."
+
+msgid "If not properly leveled, perform a mechanical calibration."
+msgstr "Se os extrusores não estiverem corretamente nivelados, execute uma calibração mecânica."
 
 msgid "second"
 msgid_plural "seconds"
