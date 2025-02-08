@@ -20,7 +20,6 @@ def find_widget(widget, wanted_type):
             if result is not None:
                 return result
 
-
 def format_label(widget, lines=2):
     label = find_widget(widget, Gtk.Label)
     if label is not None:

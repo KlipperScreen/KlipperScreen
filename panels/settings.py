@@ -54,4 +54,28 @@ class Panel(ScreenPanel):
             }
             self.add_option("printers", self.printers, pname, self.printers[pname])
 
+        button1 = self.create_rounded_button(None, "Back", self._screen._menu_go_back)
+        self.content.add(button1)
         self.content.add(self.labels['settings_menu'])
+        
+    def create_rounded_button(self, icon_path, label_text, callback):
+        button = Gtk.Button()
+        button.get_style_context().add_class("rounded-button")
+        if label_text == "Print":
+            button.get_style_context().add_class("print-button")
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+
+        if icon_path:
+            image = Gtk.Image.new_from_file(icon_path)
+            image.set_valign(Gtk.Align.CENTER)
+            vbox.pack_start(image, True, True, 0)
+
+        label = Gtk.Label(label=label_text)
+        label.set_valign(Gtk.Align.CENTER)
+        label.set_halign(Gtk.Align.CENTER)
+        vbox.pack_start(label, False, False, 0)
+
+        vbox.set_valign(Gtk.Align.CENTER)
+        button.add(vbox)
+        button.connect("clicked", callback)
+        return button

@@ -32,6 +32,7 @@ class Panel(MenuPanel):
         self.content.add(self.overlay)
         
         self.main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        self.main_box.set_margin_top(30)
         self.overlay.add(self.main_box)
 
         # Header with logo and title
@@ -92,7 +93,7 @@ class Panel(MenuPanel):
         button = Gtk.Button()
         button.get_style_context().add_class("rounded-button")
         if label_text == "Print":
-            button.get_style_context().add_class("print-button")
+            button.get_style_context().add_class("rounded-button")
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
 
         if icon_path:

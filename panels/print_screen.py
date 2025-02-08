@@ -27,6 +27,7 @@ class Panel(ScreenPanel):
         self.content.add(self.overlay)
         
         self.main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        self.main_box.set_margin_top(30)
         self.overlay.add(self.main_box)
 
         # Header with logo and title
@@ -68,7 +69,9 @@ class Panel(ScreenPanel):
             button1 = self.create_rounded_button(None, "Queue Start", self.button1_clicked)
             buttonList.append(button1)
         button2 = self.create_rounded_button(None, "Manual Print", self.button2_clicked)
+        button3 = self.create_rounded_button(None, "Back", self.button3_clicked)
         buttonList.append(button2)
+        buttonList.append(button3)
 
         for button in buttonList:
             buttons.pack_start(button, True, True, 0)
@@ -104,3 +107,6 @@ class Panel(ScreenPanel):
 
     def button2_clicked(self, button):
         self._screen.show_panel("gcodes")
+        
+    def button3_clicked(self, button):
+        self._screen._menu_go_back()

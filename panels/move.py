@@ -53,9 +53,9 @@ class Panel(ScreenPanel):
             script,
         )
         adjust = self._gtk.Button(
-            "settings", None, "color2", 1, Gtk.PositionType.LEFT, 1
+            "back", None, "color2", 1, Gtk.PositionType.LEFT, 1
         )
-        adjust.connect("clicked", self.load_menu, "options", _("Settings"))
+        adjust.connect("clicked", self._screen._menu_go_back)
         adjust.set_hexpand(False)
         grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         if self._screen.vertical_mode:

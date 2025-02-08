@@ -89,7 +89,7 @@ class Panel(ScreenPanel):
         self.scroll.add(self.flowbox)
 
         self.main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
-        button1 = self.create_rounded_button(None, "Test", self._screen._menu_go_back)
+        button1 = self.create_rounded_button(None, "Back", self._screen._menu_go_back)
         self.main.add(button1)
         self.main.add(self.headerbox)
         self.main.add(self.labels['path'])

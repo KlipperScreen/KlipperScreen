@@ -6,11 +6,14 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Pango
+from gi.repository import Gdk, GdkPixbuf, Gio, Gtk, Pango
 from math import pi, sqrt, trunc
 from statistics import median
 from time import time
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.KlippyGtk import find_widget
+import os
+import pathlib
 
 
 class Panel(ScreenPanel):
@@ -18,7 +21,8 @@ class Panel(ScreenPanel):
         title = title or _("Job Status")
         super().__init__(screen, title)
         self.thumb_dialog = None
-        self.grid = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10) #Gtk.Grid(column_homogeneous=True)
+        self.grid = Gtk.Box(orientation=Gtk.Orientation.VERTICAL) #Gtk.Grid(column_homogeneous=True)
+        iconPath = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles", "crologo.svg")
         self.pos_z = 0.0
         self.extrusion = 100
         self.speed_factor = 1.0
@@ -76,25 +80,50 @@ class Panel(ScreenPanel):
         self.labels['height_lbl'] = Gtk.Label(_("Height:"))
         self.labels['layer_lbl'] = Gtk.Label(_("Layer:"))
 
-        self.labels['file'] = Gtk.Label(label="Filename", hexpand=True)
-        self.labels['file'].get_style_context().add_class("printing-filename")
+        self.labels['file'] = Gtk.Label(label="Filename")
+        # self.labels['file'].get_style_context().add_class("printing-filename")
         self.labels['lcdmessage'] = Gtk.Label(no_show_all=True)
         self.labels['lcdmessage'].get_style_context().add_class("printing-status")
 
+        self.grid.set_margin_top(10)
+        self.grid.set_margin_bottom(75)
+        self.grid.set_margin_right(30)
+        self.grid.set_margin_left(30)
         # Aligns stuff
         for label in self.labels:
             self.labels[label].set_halign(Gtk.Align.START)
             self.labels[label].set_ellipsize(Pango.EllipsizeMode.END)
+            
+        # Header with logo and title
+        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(iconPath, 84, 84)
+        image = Gtk.Image.new_from_pixbuf(pixbuf)
+        hbox.pack_start(image, False, False, 0)
 
-        # File Name
-        fi_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10, valign=Gtk.Align.CENTER, halign=Gtk.Align.CENTER)
-        fi_box.add(self.labels['file'])
-        fi_box.add(self.labels['lcdmessage'])
-        self.grid.add(fi_box)
+        titleLabel = Gtk.Label()
+        titleLabel.set_markup("<b>VT CRO</b>")
+        titleLabel.set_name("large_text")
+        titleLabel.set_justify(Gtk.Justification.CENTER)
+        hbox.pack_start(titleLabel, False, False, 0)
 
+        hbox.set_hexpand(False)
+        hbox.set_vexpand(False)
+        hbox.set_halign(Gtk.Align.CENTER)
+        hbox.set_valign(Gtk.Align.START)
+        self.grid.add(hbox)
+
+        self.labels['thumbnail'] = self._gtk.Button("file")
+        self.labels['thumbnail'].connect("clicked", self.show_fullscreen_thumbnail)
+        self.labels['info_grid'] = Gtk.Grid()
+        self.labels['info_grid'].attach(self.labels['thumbnail'], 0, 0, 1, 1)
+        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+        if self.current_extruder:
+            diameter = float(self._printer.get_config_section(self.current_extruder)['filament_diameter'])
+            self.fila_section = pi * ((diameter / 2) ** 2)
+            
+                
         self.labels['darea'] = Gtk.DrawingArea()
         self.labels['darea'].connect("draw", self.on_draw)
-
         # Percentage
         box = Gtk.Box(halign=Gtk.Align.CENTER)
         self.labels['progress_text'] = Gtk.Label(label="0%")
@@ -110,19 +139,9 @@ class Panel(ScreenPanel):
         overlay.add_overlay(box)
         self.grid.add(overlay)
 
-
-        self.labels['thumbnail'] = self._gtk.Button("file")
-        self.labels['thumbnail'].connect("clicked", self.show_fullscreen_thumbnail)
-        self.labels['info_grid'] = Gtk.Grid()
-        self.labels['info_grid'].attach(self.labels['thumbnail'], 0, 0, 1, 1)
-        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-        if self.current_extruder:
-            diameter = float(self._printer.get_config_section(self.current_extruder)['filament_diameter'])
-            self.fila_section = pi * ((diameter / 2) ** 2)
-
         self.buttons = {}
         self.create_buttons()
-        self.buttons['button_grid'] = Gtk.Grid(row_homogeneous=True, column_homogeneous=True, vexpand=False)
+        self.buttons['button_grid'] = Gtk.Grid(row_homogeneous=True, column_homogeneous=True, vexpand=False, column_spacing=20)
         
 
         self.create_status_grid()
@@ -131,7 +150,10 @@ class Panel(ScreenPanel):
         # self.create_move_grid()
         self.grid.add(self.labels['info_grid'])
         self.grid.add(self.buttons['button_grid'])
+        
         self.switch_info(info=self.status_grid)
+        
+        
         self.content.add(self.grid)
 
     def create_status_grid(self, widget=None):
@@ -153,79 +175,18 @@ class Panel(ScreenPanel):
             buttons[button].set_halign(Gtk.Align.START)
         self.buttons.update(buttons)
 
-        self.buttons['extruder'] = {}
-        for i, extruder in enumerate(self._printer.get_tools()):
-            self.labels[extruder] = Gtk.Label(label="-")
-            self.buttons['extruder'][extruder] = self._gtk.Button(f"extruder-{i}", "", None, self.bts,
-                                                                  Gtk.PositionType.LEFT, 1)
-            self.buttons['extruder'][extruder].set_label(self.labels[extruder].get_text())
-            self.buttons['extruder'][extruder].connect("clicked", self.menu_item_clicked,
-                                                       {"panel": "temperature",
-                                                        'extra': extruder})
-            self.buttons['extruder'][extruder].set_halign(Gtk.Align.START)
-
-        self.labels['temp_grid'] = Gtk.Grid()
-        nlimit = 2 if self._screen.width <= 500 else 3
-        n = 0
-        if nlimit > 2 and len(self._printer.get_tools()) == 2:
-            for extruder in self.buttons['extruder']:
-                self.labels['temp_grid'].attach(self.buttons['extruder'][extruder], n, 0, 1, 1)
-                n += 1
-        else:
-            self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-            if self.current_extruder:
-                self.labels['temp_grid'].attach(self.buttons['extruder'][self.current_extruder], n, 0, 1, 1)
-                n += 1
-        self.buttons['heater'] = {}
-        for dev in self._printer.get_heaters():
-            if n >= nlimit:
-                break
-            if dev == "heater_bed":
-                self.buttons['heater'][dev] = self._gtk.Button("bed", "", None, self.bts, Gtk.PositionType.LEFT, 1)
-            else:
-                self.buttons['heater'][dev] = self._gtk.Button("heater", "", None, self.bts, Gtk.PositionType.LEFT, 1)
-            self.labels[dev] = Gtk.Label(label="-")
-
-            self.buttons['heater'][dev].set_label(self.labels[dev].get_text())
-            self.buttons['heater'][dev].connect("clicked", self.menu_item_clicked,
-                                                {"panel": "temperature", "extra": dev})
-            self.buttons['heater'][dev].set_halign(Gtk.Align.START)
-            self.labels['temp_grid'].attach(self.buttons['heater'][dev], n, 0, 1, 1)
-            n += 1
-        extra_item = not self._show_heater_power
-        if self.ks_printer_cfg is not None:
-            titlebar_items = self.ks_printer_cfg.get("titlebar_items", "")
-            if titlebar_items is not None:
-                titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
-                logging.info(f"Titlebar items: {titlebar_items}")
-                for device in self._printer.get_temp_sensors():
-                    name = " ".join(device.split(" ")[1:])
-                    for item in titlebar_items:
-                        if name == item:
-                            if extra_item:
-                                extra_item = False
-                                nlimit += 1
-                            if n >= nlimit:
-                                break
-                            self.buttons['heater'][device] = self._gtk.Button("heat-up", "", None, self.bts,
-                                                                              Gtk.PositionType.LEFT, 1)
-                            self.labels[device] = Gtk.Label(label="-")
-                            self.buttons['heater'][device].set_label(self.labels[device].get_text())
-                            self.buttons['heater'][device].connect("clicked", self.menu_item_clicked,
-                                                                   {"panel": "temperature"})
-                            self.buttons['heater'][device].set_halign(Gtk.Align.START)
-                            self.labels['temp_grid'].attach(self.buttons['heater'][device], n, 0, 1, 1)
-                            n += 1
-                            break
-
         szfe = Gtk.Grid(column_homogeneous=True)
 
         info = Gtk.Grid(row_homogeneous=True)
-        info.get_style_context().add_class("printing-info")
-        info.attach(self.labels['temp_grid'], 0, 0, 1, 1)
+        # File Name
+        fi_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, halign=Gtk.Align.START)
+        fi_box.add(Gtk.Label(label="  Filename: "))
+        fi_box.add(self.labels['file'])
+        info.attach(fi_box,0,0,1,1)
+        # info.get_style_context().add_class("printing-info")
         info.attach(szfe, 0, 1, 1, 2)
-        info.attach(self.buttons['elapsed'], 0, 3, 1, 1)
-        info.attach(self.buttons['left'], 0, 4, 1, 1)
+        info.attach(self.buttons['elapsed'], 0, 1, 1, 1)
+        info.attach(self.buttons['left'], 0, 2, 1, 1)
         self.status_grid = info
 
     def create_extrusion_grid(self, widget=None):
@@ -312,6 +273,7 @@ class Panel(ScreenPanel):
         else:
             self.labels['info_grid'].remove_column(1)
             self.labels['info_grid'].attach(info, 1, 0, 1, 1)
+            pass
         self.labels['info_grid'].show_all()
 
     def on_draw(self, da, ctx):
@@ -506,10 +468,10 @@ class Panel(ScreenPanel):
                     self._printer.get_stat(x, "power"),
                     digits=0
                 )
-                if x in self.buttons['extruder']:
-                    self.buttons['extruder'][x].set_label(self.labels[x].get_text())
-                elif x in self.buttons['heater']:
-                    self.buttons['heater'][x].set_label(self.labels[x].get_text())
+                # if x in self.buttons['extruder']:
+                #     self.buttons['extruder'][x].set_label(self.labels[x].get_text())
+                # elif x in self.buttons['heater']:
+                #     self.buttons['heater'][x].set_label(self.labels[x].get_text())
 
         if "display_status" in data and "message" in data["display_status"]:
             if data['display_status']['message']:
@@ -760,13 +722,13 @@ class Panel(ScreenPanel):
 
     def show_file_thumbnail(self):
         if self._screen.vertical_mode:
-            max_width = self._screen.width * 0.9
-            max_height = self._screen.height / 4
+            max_width = self._screen.width
+            max_height = self._screen.height
         else:
-            max_width = self._screen.width * .25
-            max_height = self._gtk.content_height * 0.47
-        width = min(self.labels['thumbnail'].get_allocated_width(), max_width)
-        height = min(self.labels['thumbnail'].get_allocated_height(), max_height)
+            max_width = self._screen.width
+            max_height = self._gtk.content_height * .46
+        width = max(self.labels['thumbnail'].get_allocated_width(), max_width)
+        height = max(self.labels['thumbnail'].get_allocated_height(), max_height)
         if width <= 1 or height <= 1:
             width = max_width
             height = max_height
