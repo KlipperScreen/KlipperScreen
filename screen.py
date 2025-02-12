@@ -658,10 +658,6 @@ class KlipperScreen(Gtk.Window):
     def set_dpms_timeout(self):
         try:
             subprocess.run(
-                f"xset -display {self.display_number} s off",
-                shell=True, check=True
-            )
-            subprocess.run(
                 f"xset -display {self.display_number} dpms 0 {self.blanking_time} 0",
                 shell=True, check=True
             )
@@ -678,6 +674,8 @@ class KlipperScreen(Gtk.Window):
             self.set_screenblanking_timeout(time)
 
     def set_screenblanking_timeout(self, time):
+        # we do our own manual version of blanking (turning screen black)
+        os.system(f"xset -display {self.display_number} s off")
         if time == "off":
             self.blanking_time = 0
         else:
