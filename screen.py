@@ -748,7 +748,7 @@ class KlipperScreen(Gtk.Window):
             return
         self.files.refresh_files()
         if self._config.get_config()["syncraft"].getboolean("welcome"):
-            self.show_panel("welcome", remove_all=True)
+            self.show_panel("sx_welcome", remove_all=True)
         else:
             self.show_panel("main_menu", remove_all=True, items=self._config.get_menu_items("__main"))
 

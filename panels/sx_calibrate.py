@@ -19,12 +19,12 @@ class Panel(ScreenPanel):
 
         calibration_buttons["BED_CALIBRATION"].connect("clicked", self.menu_item_clicked, {
             "name": _("Bed Calibration"),
-            "panel": "calibrate_bed"
+            "panel": "sx_calibrate_bed"
         })
 
         calibration_buttons["PROBE_CALIBRATION"].connect("clicked", self.menu_item_clicked, {
             "name": _("Probe Calibration"),
-            "panel": "calibrate_probe"
+            "panel": "sx_calibrate_probe"
         })
 
         if "EXTRUDER_SCREW_PLACEMENT" in self._printer.available_commands:
@@ -32,7 +32,7 @@ class Panel(ScreenPanel):
             calibration_buttons["MECHANICAL_CALIBRATION"] = button
             calibration_buttons["MECHANICAL_CALIBRATION"].connect("clicked", self.menu_item_clicked, {
                 "name": _("Mechanical Calibration"),
-                "panel": "calibrate_mechanical"
+                "panel": "sx_calibrate_mechanical"
             })
 
         if "PRINT_CALIBRATION" in self._printer.available_commands:
@@ -53,7 +53,7 @@ class Panel(ScreenPanel):
                 idex_calibration_button = self._gtk.Button("extruder", _("Adjust"), "color2")
                 idex_calibration_button.connect("clicked", self.menu_item_clicked, {
                     "name": _("IDEX Calibration"),
-                    "panel": "calibrate_idex"
+                    "panel": "sx_calibrate_idex"
                 })
                 grid.attach(idex_calibration_button, 5, current_row, 1, 1)
                 continue

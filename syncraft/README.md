@@ -6,20 +6,20 @@ This is a modification of [KlipperScreen](https://github.com/klipperscreen/klipp
 
 ## Extra panels
 
-Panels that are not original from KlipperScreen.
+Panels from Syncraft have the `sx_` prefix.
 
-### `filament.py`
+### `sx_filament.py`
 
 Copy from original panel `extrude.py`. Used to set both nozzle and material from `extruder`.
 
-### `nozzle.py`
+### `sx_nozzle.py`
 
 <!-- TODO: Change name of nozzle0 and nozzle1 variables -->
 Used to set the [printer variables](https://www.klipper3d.org/Config_Reference.html#save_variables) `nozzle0` or `nozzle1` based on the currently active extruder.
 
 This ensures the printer can cancel a print via `PARAMETERS_MATCH` macro if its 3D model has been sliced for a different nozzle.
 
-### `materials.py`
+### `sx_materials.py`
 
 Uses the `materials.json` file to render the available materials to the current active extruder.
 
@@ -28,11 +28,11 @@ Used to set the [printer variables](https://www.klipper3d.org/Config_Reference.h
 
 This ensures the printer can cancel a print via `PARAMETERS_MATCH` macro if its 3D model has been sliced for a different material.
 
-### `welcome.py`
+### `sx_welcome.py`
 
 Setup panel that replaces `main_menu.py` if the option `welcome` from the `[syncraft]` section is set to `True` at the KlipperScreen configuration file (it is by default). After clicking on the finish button, the `welcome` will be set to `False`, so the panel `main_menu.py` will be the first panel in the next startup.
 
-### `calibrate.py` and `calibrate_*.py` panels
+### `sx_calibrate.py` and `sx_calibrate_*.py` panels
 
 #### `calibrate.py`
 

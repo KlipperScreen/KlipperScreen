@@ -181,12 +181,12 @@ class Panel(ScreenPanel):
         # HACK: Do this to ensure it is done in the right sequence
         self.delete_panel("materials")
         self.change_config_extruder(extruder)
-        self.menu_item_clicked(None, { "panel": "materials" })
+        self.menu_item_clicked(None, { "panel": "sx_materials" })
 
     def open_nozzle_panel(self, widget, extruder):
         # HACK: Do this to ensure it is done in the right sequence
         self.change_config_extruder(extruder)
-        self.menu_item_clicked(None, { "panel": "nozzle" })
+        self.menu_item_clicked(None, { "panel": "sx_nozzle" })
 
     def enable_buttons(self, enable):
         for button in self.buttons:
