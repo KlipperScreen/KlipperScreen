@@ -5,6 +5,8 @@ Probably all versions contain changes regarding documentation, translation, fixe
 ## v0.4.5-*
 
 * basic lockscreen for shows or kids
+* add fine-tune panel on the main/more menu
+* add comment field if available in Spoolman
 
 ## v0.4.5  (Oct 28, 2024)
 
