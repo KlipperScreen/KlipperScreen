@@ -2,6 +2,7 @@ import logging
 import re
 import configparser
 import os
+import io
 
 import gi
 
@@ -13,12 +14,14 @@ from ks_includes.widgets.autogrid import AutoGrid
 from ks_includes.KlippyGtk import find_widget
 from ks_includes.printer import Printer
 from ks_includes.config import KlipperScreenConfig
+from ks_includes.KlippyRest import KlippyRest
 
 class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
         self._printer: Printer
         self._config: KlipperScreenConfig
+        self.apiclient: KlippyRest = screen.apiclient
 
         title = title or _("Filament")
         super().__init__(screen, title)
@@ -310,13 +313,17 @@ class Panel(ScreenPanel):
         self._config.extruder = extruder
         # Try to read nozzle variable
         try:
-            variables_path = os.path.join(os.path.expanduser("~"), "printer_data/config/variables.cfg")
+            variables_content = self.apiclient.send_request("/server/files/config/variables.cfg", json=False)
+            variables_str = variables_content.decode("utf-8")
+            variables_file = io.StringIO(variables_str)
+
             config = configparser.ConfigParser()
-            config.read(variables_path)
+            config.read_file(variables_file)
             nozzle = config.get("Variables", f'{extruder.replace(" ", "-")}_nozzle')
             self._config.nozzle = nozzle.replace("'", "")
             logging.info(self._config.nozzle)
         except Exception as e:
+            # nozzle variable not found
             logging.error(e)
 
     def delete_panel(self, panel_name):
@@ -325,19 +332,21 @@ class Panel(ScreenPanel):
 
     def process_update(self, action, data):
         try:
-            # Hardcoded assuming user running KlipperScreen has variables at this path
-            variables_path = os.path.join(os.path.expanduser("~"), "printer_data/config/variables.cfg")
+            variables_content = self.apiclient.send_request("/server/files/config/variables.cfg", json=False)
+            variables_str = variables_content.decode("utf-8")
+            variables_file = io.StringIO(variables_str)
+            
             config = configparser.ConfigParser()
-            config.read(variables_path)
+            config.read_file(variables_file)
             if config.has_section("Variables"):
                 variables = config["Variables"].keys()
             else:
                 return
             for extruder in self.extruder_grids:
-                extruder = extruder.replace(' ', '-')
-                if f"{extruder}_material" in variables:
+                extruder_str = extruder.replace(' ', '-')
+                if f"{extruder_str}_material" in variables:
                     # Change material label
-                    material = config.get("Variables", f"{extruder}_material")
+                    material = config.get("Variables", f"{extruder_str}_material")
                     material = material.replace("'", "")
                     self.extruder_grids[extruder]["materials_button"].set_label(material)
 
