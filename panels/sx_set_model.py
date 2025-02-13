@@ -47,8 +47,8 @@ class Panel(ScreenPanel):
     def on_dropdown_change(self, combo):
         selected_model = combo.get_active_text()
         self._config.set("syncraft", "model", selected_model)
-        self._config.save_user_config_options()
         logging.info(f"Selected: {selected_model}")
 
     def finish(self, button):
+        self._config.save_user_config_options()
         self._screen.restart_ks()
