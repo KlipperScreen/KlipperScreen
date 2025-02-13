@@ -747,7 +747,13 @@ class KlipperScreen(Gtk.Window):
             self.printer.state = "not ready"
             return
         self.files.refresh_files()
-        if self._config.get_config()["syncraft"].getboolean("welcome"):
+
+        # This will always exist because config/defaults.conf has it
+        syncraft_section = self._config.get_config()["syncraft"]
+
+        if not syncraft_section.get("model"):
+            self.show_panel("sx_set_model", remove_all=True)
+        elif syncraft_section.getboolean("welcome"):
             self.show_panel("sx_welcome", remove_all=True)
         else:
             self.show_panel("main_menu", remove_all=True, items=self._config.get_menu_items("__main"))

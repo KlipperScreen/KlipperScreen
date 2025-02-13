@@ -42,6 +42,10 @@ Menu to select Syncraft calibration panels more easiliy.
 
 Syncraft calibration panels.
 
+### `sx_set_model.py`
+
+Panel shown at startup when no `model` option is found at `[syncraft]` section in KlipperScreen configuration file.
+
 ---
 
 ## Modifications
