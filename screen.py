@@ -901,6 +901,53 @@ class KlipperScreen(Gtk.Window):
         if self._cur_panels and hasattr(self.panels[self._cur_panels[-1]], "process_update"):
             self.panels[self._cur_panels[-1]].process_update(*args)
 
+    def confirm_save(self, widget):
+        buttons = [
+            {"name": _("Save"), "response": Gtk.ResponseType.OK, "style": 'dialog-info'},
+            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
+        ]
+        label = Gtk.Label(label=_("Save configuration?") + "\n\n" + _("Klipper will reboot"),
+                          hexpand=True, vexpand=True,
+                          halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER,
+                          wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
+        grid = Gtk.Grid()
+        grid.attach(label, 0, 3, 2, 1)
+        offset = self.printer.get_stat("gcode_move", "homing_origin")
+        zoffset = float(offset[2]) if offset else 0
+        if zoffset != 0:
+            sign = "+" if zoffset > 0 else "-"
+            msg = f"Apply {sign}{abs(zoffset)} offset?"
+            zlabel = Gtk.Label(label=msg, hexpand=True, vexpand=True, wrap=True)
+            grid.attach(zlabel, 0, 1, 2, 1)
+            if "Z_OFFSET_APPLY_PROBE" in self.printer.available_commands:
+                apply_probe = self.gtk.Button(label=_("Save Z") + "\n" + "Probe", style="color1")
+                apply_probe.set_vexpand(False)
+                apply_probe.set_size_request(-1, self.gtk.dialog_buttons_height)
+                apply_probe.connect("clicked", self.save, "Z_OFFSET_APPLY_PROBE")
+                grid.attach(apply_probe, 0, 2, 1, 1)
+            if "Z_OFFSET_APPLY_ENDSTOP" in self.printer.available_commands:
+                apply_end = self.gtk.Button(label=_("Save Z") + "\n" + "Endstop", style="color2")
+                apply_end.set_vexpand(False)
+                apply_end.set_size_request(-1, self.gtk.dialog_buttons_height)
+                apply_end.connect("clicked", self.save, "Z_OFFSET_APPLY_ENDSTOP")
+                grid.attach(apply_end, 1, 2, 1, 1)
+        if self.confirm is not None:
+            self.gtk.remove_dialog(self.confirm)
+        self.confirm = self.gtk.Dialog(
+            "KlipperScreen", buttons, grid, self.save
+        )
+
+    def save(self, dialog, response_id):
+        self.gtk.remove_dialog(dialog)
+        if response_id == Gtk.ResponseType.OK:
+            self._ws.klippy.gcode_script("SAVE_CONFIG")
+        if response_id == "Z_OFFSET_APPLY_PROBE":
+            self._ws.klippy.gcode_script("Z_OFFSET_APPLY_PROBE")
+            self._ws.klippy.gcode_script("SAVE_CONFIG")
+        if response_id == "Z_OFFSET_APPLY_ENDSTOP":
+            self._ws.klippy.gcode_script("Z_OFFSET_APPLY_ENDSTOP")
+            self._ws.klippy.gcode_script("SAVE_CONFIG")
+
     def _confirm_send_action(self, widget, text, method, params=None):
         buttons = [
             {"name": _("Accept"), "response": Gtk.ResponseType.OK, "style": 'dialog-info'},
