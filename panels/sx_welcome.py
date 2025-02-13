@@ -73,4 +73,4 @@ class Panel(ScreenPanel):
     def finish(self, button):
         self._config.set("syncraft", "welcome", "False")
         self._config.save_user_config_options()
-        self._screen.show_panel("main_menu", remove_all=True, items=self._config.get_menu_items("__main"))
+        self._screen.restart_ks()
