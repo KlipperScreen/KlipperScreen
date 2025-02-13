@@ -65,7 +65,7 @@ Syncraft calibration panels.
 - Remove `side_macro_shortcut` toggle option.
 - Add Syncraft required variables
 - Implement `if` statement on `validate_config` function to enable `[syncraft]` section on configuration.
-- Enable `[syncraft]` section to be saved on save config at `save_user_config_options` function.
+- Implement `[syncraft]` options at `_create_configurable_options`. 
 
 ### `screen.py`
 
