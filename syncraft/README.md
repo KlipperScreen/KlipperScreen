@@ -74,4 +74,4 @@ Panel shown at startup when no `model` option is found at `[syncraft]` section i
 ### `screen.py`
 
 - Remove function `toggle_shortcut` related to `side_macro_shortcut` toggling.
-- Retrieves option `welcome` from `[syncraft]` section to start screen with panel `welcome.py` dinamically at function `state_ready`.
+- Retrieves options `[syncraft]` section to start screen with different panels dinamically at function `state_ready`.
