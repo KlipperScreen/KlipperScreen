@@ -84,3 +84,7 @@ Panel shown at startup when no `model` option is found at `[syncraft]` section i
 	if name in ignore_options:
 		continue
 	```
+
+### `panels/menu.py`
+
+- Hardcode `sx_filament` button behaviour at function `create_menu_items` to open different menu items based on the option `model` from `[syncraft]`.
