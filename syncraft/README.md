@@ -75,3 +75,12 @@ Panel shown at startup when no `model` option is found at `[syncraft]` section i
 
 - Remove function `toggle_shortcut` related to `side_macro_shortcut` toggling.
 - Retrieves options `[syncraft]` section to start screen with different panels dinamically at function `state_ready`.
+
+### `panels/settings.py`
+
+- Prevent some options from `KlipperScreenConfig` `configurable_options` to be shown:
+	```python
+	ignore_options = (...)
+	if name in ignore_options:
+		continue
+	```

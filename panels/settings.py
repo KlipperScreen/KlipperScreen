@@ -27,6 +27,9 @@ class Panel(ScreenPanel):
         self.labels['settings_menu'].add(self.labels['settings'])
         for option in options:
             name = list(option)[0]
+            ignore_options = ("model", )
+            if name in ignore_options:
+                continue
             self.add_option('settings', self.settings, name, option[name])
 
         self.labels['lang_menu'] = self._gtk.ScrolledWindow()
