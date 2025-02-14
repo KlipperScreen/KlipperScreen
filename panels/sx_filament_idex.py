@@ -178,7 +178,7 @@ class Panel(ScreenPanel):
 
     def open_materials_panel(self, widget, extruder):
         # HACK: Do this to ensure it is done in the right sequence
-        self.delete_panel("materials")
+        self.delete_panel("sx_materials")
         self.change_config_extruder(extruder)
         self.menu_item_clicked(None, { "panel": "sx_materials" })
 
