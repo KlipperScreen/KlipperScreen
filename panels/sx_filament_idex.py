@@ -318,9 +318,12 @@ class Panel(ScreenPanel):
 
             config = configparser.ConfigParser()
             config.read_file(variables_file)
-            nozzle = config.get("Variables", f'{extruder.replace(" ", "-")}_nozzle')
-            self._config.nozzle = nozzle.replace("'", "")
-            logging.info(self._config.nozzle)
+            if extruder == "extruder":
+                nozzle = config.get("Variables", 'nozzle0')
+            elif extruder == "extruder1":
+                nozzle = config.get("Variables", 'nozzle1')
+            self._config.nozzle = nozzle.replace("'", "") if nozzle else None
+            logging.info(f"Selected {self._config.nozzle}")
         except Exception as e:
             # nozzle variable not found
             logging.error(e)
