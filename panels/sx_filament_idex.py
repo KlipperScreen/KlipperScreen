@@ -178,7 +178,7 @@ class Panel(ScreenPanel):
 
     def open_materials_panel(self, widget, extruder):
         # HACK: Do this to ensure it is done in the right sequence
-        self.delete_panel("materials")
+        self.delete_panel("sx_materials")
         self.change_config_extruder(extruder)
         self.menu_item_clicked(None, { "panel": "sx_materials" })
 
@@ -318,9 +318,12 @@ class Panel(ScreenPanel):
 
             config = configparser.ConfigParser()
             config.read_file(variables_file)
-            nozzle = config.get("Variables", f'{extruder.replace(" ", "-")}_nozzle')
-            self._config.nozzle = nozzle.replace("'", "")
-            logging.info(self._config.nozzle)
+            if extruder == "extruder":
+                nozzle = config.get("Variables", 'nozzle0')
+            elif extruder == "extruder1":
+                nozzle = config.get("Variables", 'nozzle1')
+            self._config.nozzle = nozzle.replace("'", "") if nozzle else None
+            logging.info(f"Selected {self._config.nozzle}")
         except Exception as e:
             # nozzle variable not found
             logging.error(e)
@@ -342,18 +345,27 @@ class Panel(ScreenPanel):
             else:
                 return
             for extruder in self.extruder_grids:
-                extruder_str = extruder.replace(' ', '-')
-                if f"{extruder_str}_material" in variables:
+                if extruder == "extruder":
+                    nozzle_str = "nozzle0"
+                    material_str = "material_ext0"
+                elif extruder == "extruder1":
+                    nozzle_str = "nozzle1"
+                    material_str = "material_ext1"
+                else:
+                    logging.error("Unknown extruder found")
+                    return
+
+                if material_str in variables:
                     # Change material label
-                    material = config.get("Variables", f"{extruder_str}_material")
+                    material = config.get("Variables", material_str)
                     material = material.replace("'", "")
                     self.extruder_grids[extruder]["materials_button"].set_label(material)
 
                     # Save material variable
                     self._config.materials[extruder] = material
-                if f"{extruder}_nozzle" in variables:
+                if nozzle_str in variables:
                     # Change nozzle label
-                    nozzle = config.get("Variables", f"{extruder}_nozzle")
+                    nozzle = config.get("Variables", nozzle_str)
                     nozzle = nozzle.replace("'", "")
                     self.extruder_grids[extruder]["nozzle_button"].set_label(nozzle)
 

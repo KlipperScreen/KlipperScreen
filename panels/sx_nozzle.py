@@ -57,6 +57,9 @@ class Panel(ScreenPanel):
         self._screen._menu_go_back()
 
     def nozzlegcodescript(self, nozzle):
+        carriage = 0
+        if self._config.extruder == "extruder1":
+            carriage = 1
         self._screen._ws.klippy.gcode_script(
-            f"NOZZLE_SET NZ='{nozzle}' CARRIAGE='{self._config.extruder}'"
+            f"NOZZLE_SET NZ='{nozzle}' CARRIAGE='{carriage}'"
         )
