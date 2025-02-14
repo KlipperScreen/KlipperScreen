@@ -130,7 +130,7 @@ class Panel(ScreenPanel):
             fbchild.set_as_dir(True)
         elif 'filename' in item:
             if (item['filename'].startswith(".") or
-                    os.path.splitext(item['filename'])[1] not in {'.gcode', '.gco', '.g'}):
+                    os.path.splitext(item['filename'])[1] not in {'.gcode', '.gco', '.g', '.ufp'}):
                 return
             name = item['filename']
             path = f"{self.cur_directory}/{name}"
@@ -435,7 +435,9 @@ class Panel(ScreenPanel):
                 info += _("Last Duration") + f": <b>{self.format_time(history['job']['print_duration'])}</b>"
         return info
 
+    # This is the callback from self._screen._ws.klippy.get_dir_info(self.load_files, self.cur_directory)
     def load_files(self, result, method, params):
+        print(result)
         start = datetime.now()
         self.set_loading(True)
         if not result.get("result") or not isinstance(result["result"], dict):

@@ -59,8 +59,12 @@ class Panel(ScreenPanel):
                 continue
             
             grid.attach(calibration_buttons[button], 0, current_row, 6, 1)
+        
+        scroll = self.gtk.ScrolledWindow()
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.add(grid)
 
-        self.content.add(grid)
+        self.content.add(scroll)
 
 
     def print_calibration(self, button):
