@@ -342,18 +342,27 @@ class Panel(ScreenPanel):
             else:
                 return
             for extruder in self.extruder_grids:
-                extruder_str = extruder.replace(' ', '-')
-                if f"{extruder_str}_material" in variables:
+                if extruder == "extruder":
+                    nozzle_str = "nozzle0"
+                    material_str = "material_ext0"
+                elif extruder == "extruder1":
+                    nozzle_str = "nozzle1"
+                    material_str = "material_ext1"
+                else:
+                    logging.error("Unknown extruder found")
+                    return
+
+                if material_str in variables:
                     # Change material label
-                    material = config.get("Variables", f"{extruder_str}_material")
+                    material = config.get("Variables", material_str)
                     material = material.replace("'", "")
                     self.extruder_grids[extruder]["materials_button"].set_label(material)
 
                     # Save material variable
                     self._config.materials[extruder] = material
-                if f"{extruder}_nozzle" in variables:
+                if nozzle_str in variables:
                     # Change nozzle label
-                    nozzle = config.get("Variables", f"{extruder}_nozzle")
+                    nozzle = config.get("Variables", nozzle_str)
                     nozzle = nozzle.replace("'", "")
                     self.extruder_grids[extruder]["nozzle_button"].set_label(nozzle)
 
