@@ -71,10 +71,10 @@ class HeaterGraph(Gtk.DrawingArea):
             if self.store[device]['show']:
                 temp = self.printer.get_temp_store(device, "temperatures", data_points)
                 if isinstance(temp, list):
-                    mnum.append(max(temp))
+                    mnum.append(max([v for v in temp if v is not None]))
                 target = self.printer.get_temp_store(device, "targets", data_points)
                 if isinstance(target, list):
-                    mnum.append(max(target))
+                    mnum.append(max([v for v in target if v is not None]))
         return max(mnum)
 
     def draw_graph(self, da: Gtk.DrawingArea, ctx: cairoContext):
@@ -129,8 +129,16 @@ class HeaterGraph(Gtk.DrawingArea):
             ctx.set_dash([1, 0])
         d_len = len(data) - 1
 
+        start_x = gsize[1][0]
+        end_x = gsize[0][0]
+
         for i, d in enumerate(data):
+            if d is None:
+                continue
+
             p_x = i * swidth + gsize[0][0] if i != d_len else gsize[1][0] - 1
+            start_x = min(start_x, p_x)
+            end_x = max(end_x, p_x)
             if dashed:  # d between 0 and 1
                 p_y = gsize[1][1] - (d * (gsize[1][1] - gsize[0][1]))
             else:
@@ -140,8 +148,8 @@ class HeaterGraph(Gtk.DrawingArea):
             ctx.line_to(p_x, p_y)
         if fill:
             ctx.stroke_preserve()
-            ctx.line_to(gsize[1][0] - 1, gsize[1][1] - 1)
-            ctx.line_to(gsize[0][0] + 1, gsize[1][1] - 1)
+            ctx.line_to(end_x - 1, gsize[1][1] - 1)
+            ctx.line_to(start_x + 1, gsize[1][1] - 1)
             ctx.fill()
         else:
             ctx.stroke()
