@@ -37,7 +37,7 @@ install_graphical_backend()
       echo_text ""
       echo_text "Choose graphical backend"
       echo_ok "Default is Xserver"
-      echo_text "Wayland is EXPERIMENTAL needs kms/drm drivers doesn't support DPMS and may need autologin"
+      echo_text "Wayland is EXPERIMENTAL, needs kms/drm drivers, and doesn't support DPMS"
       echo_text ""
       echo "Press enter for default (Xserver)"
       read -r -e -p "Backend Xserver or Wayland (cage)? [X/w]" BACKEND
