@@ -91,10 +91,21 @@ class Panel(ScreenPanel):
             return json.load(materials)
         
     def set_material(self, widget, material=None):
+        syncraft_section = self._config.get_config()["syncraft"]
+        model = syncraft_section.get("model")
+
         material_name = material["name"] if material else "empty"
-        ext = 0
-        if self._config.extruder == "extruder1":
-            ext = 1
+
+        if model == "Syncraft IDEX":
+            ext = 0
+            if self._config.extruder == "extruder1":
+                ext = 1
+
+        if model == "Syncraft X1":
+            ext = "extruder"
+            if self._config.extruder == "extruder_stepper extruder1":
+                ext = "extruder_stepper extruder1"
+
         self._screen._ws.klippy.gcode_script(
             f"CHANGE_MATERIAL M='{material_name}' EXT='{ext}'"
         )

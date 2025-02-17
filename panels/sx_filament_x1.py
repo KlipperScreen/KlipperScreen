@@ -65,41 +65,28 @@ class Panel(ScreenPanel):
         extruder_buttons = []
         self.labels = {}
         self.extruder_grids = {}
+        self.nozzle_button = self._gtk.Button("extrude", _("Nozzle"), "color4")
+        self.nozzle_button.connect("clicked", self.open_nozzle_panel, "extruder")
+        xbox.add(self.nozzle_button)
         for extruder in self._printer.get_tools():
-            if self._printer.extrudercount == 1:
-                self.labels[extruder] = self._gtk.Button("extruder", "")
-            else:
-                n = self._printer.get_tool_number(extruder)
-                self.labels[extruder] = self._gtk.Button(f"extruder-{n}", f"T{n}")
-                self.labels[extruder].connect("clicked", self.change_extruder, extruder)
+            n = self._printer.get_tool_number(extruder)
+            self.labels[extruder] = self._gtk.Button(f"extruder-{n}", f"T{n}")
+            self.labels[extruder].connect("clicked", self.change_extruder, extruder)
             if extruder == self.current_extruder:
                 self.labels[extruder].get_style_context().add_class("button_active")
-            if self._printer.extrudercount < limit:
-                extruder_grid = Gtk.Grid()
-                extruder_grid.attach(self.labels[extruder], 0, 0, 2, 1)
+            extruder_grid = Gtk.Grid()
+            extruder_grid.attach(self.labels[extruder], 0, 0, 2, 1)
 
-                self.extruder_grids[extruder] = {}
-                self.extruder_grids[extruder]["grid"] = extruder_grid
+            self.extruder_grids[extruder] = {}
+            self.extruder_grids[extruder]["grid"] = extruder_grid
 
-                materials_button = self._gtk.Button("filament", _("Materials"), "color4")
-                materials_button.connect("clicked", self.open_materials_panel, extruder)
-                self.extruder_grids[extruder]["materials_button"] = materials_button
+            materials_button = self._gtk.Button("filament", _("Materials"), "color4")
+            materials_button.connect("clicked", self.open_materials_panel, extruder)
+            self.extruder_grids[extruder]["materials_button"] = materials_button
 
-                if not extruder.startswith("extruder_stepper"):
-                    nozzle_button = self._gtk.Button("extrude", _("Nozzle"), "color4")
-                    nozzle_button.connect("clicked", self.open_nozzle_panel, extruder)
-                            
-                    extruder_grid.attach(nozzle_button, 0, 1, 1, 1)
-                    extruder_grid.attach(materials_button, 1, 1, 1, 1)
-                    self.extruder_grids[extruder]["nozzle_button"] = nozzle_button
-                else:
-                    extruder_grid.attach(materials_button, 0, 1, 2, 1)
-                
-                xbox.add(extruder_grid)
-                i += 1
-            else:
-                # TODO: Support more extruders
-                extruder_buttons.append(self.labels[extruder])
+            extruder_grid.attach(materials_button, 0, 1, 2, 1)
+            
+            xbox.add(extruder_grid)
         for widget in self.labels.values():
             label = find_widget(widget, Gtk.Label)
             label.set_justify(Gtk.Justification.CENTER)
@@ -178,7 +165,7 @@ class Panel(ScreenPanel):
 
     def open_materials_panel(self, widget, extruder):
         # HACK: Do this to ensure it is done in the right sequence
-        self.delete_panel("materials")
+        self.delete_panel("sx_materials")
         self.change_config_extruder(extruder)
         self.menu_item_clicked(None, { "panel": "sx_materials" })
 
@@ -195,36 +182,6 @@ class Panel(ScreenPanel):
 
     def activate(self):
         self.enable_buttons(self._printer.state in ("ready", "paused"))
-
-    def process_update(self, action, data):
-        if action == "notify_gcode_response":
-            if "action:cancel" in data or "action:paused" in data:
-                self.enable_buttons(True)
-            elif "action:resumed" in data:
-                self.enable_buttons(False)
-            return
-        if action != "notify_status_update":
-            return
-        for x in self._printer.get_tools():
-            if x in data:
-                self.update_temp(
-                    x,
-                    self._printer.get_stat(x, "temperature"),
-                    self._printer.get_stat(x, "target"),
-                    self._printer.get_stat(x, "power"),
-                )
-        if "current_extruder" in self.labels:
-            self.labels["current_extruder"].set_label(self.labels[self.current_extruder].get_label())
-
-        if ("toolhead" in data and "extruder" in data["toolhead"] and
-                data["toolhead"]["extruder"] != self.current_extruder):
-            for extruder in self._printer.get_tools():
-                self.labels[extruder].get_style_context().remove_class("button_active")
-            self.current_extruder = data["toolhead"]["extruder"]
-            self.labels[self.current_extruder].get_style_context().add_class("button_active")
-            if "current_extruder" in self.labels:
-                n = self._printer.get_tool_number(self.current_extruder)
-                self.labels["current_extruder"].set_image(self._gtk.Image(f"extruder-{n}"))
 
     def change_distance(self, widget, distance):
         logging.info(f"### Distance {distance}")
@@ -318,7 +275,7 @@ class Panel(ScreenPanel):
 
             config = configparser.ConfigParser()
             config.read_file(variables_file)
-            nozzle = config.get("Variables", f'{extruder.replace(" ", "-")}_nozzle')
+            nozzle = config.get("Variables", "nozzle")
             self._config.nozzle = nozzle.replace("'", "")
             logging.info(self._config.nozzle)
         except Exception as e:
@@ -330,6 +287,34 @@ class Panel(ScreenPanel):
             del self._screen.panels[panel_name]
 
     def process_update(self, action, data):
+        # if action == "notify_gcode_response":
+        #     if "action:cancel" in data or "action:paused" in data:
+        #         self.enable_buttons(True)
+        #     elif "action:resumed" in data:
+        #         self.enable_buttons(False)
+        #     return
+        # if action != "notify_status_update":
+        #     return
+        # for x in self._printer.get_tools():
+        #     if x in data:
+        #         self.update_temp(
+        #             x,
+        #             self._printer.get_stat(x, "temperature"),
+        #             self._printer.get_stat(x, "target"),
+        #             self._printer.get_stat(x, "power"),
+        #         )
+        # if "current_extruder" in self.labels:
+        #     self.labels["current_extruder"].set_label(self.labels[self.current_extruder].get_label())
+
+        # if ("toolhead" in data and "extruder" in data["toolhead"] and
+        #         data["toolhead"]["extruder"] != self.current_extruder):
+        #     for extruder in self._printer.get_tools():
+        #         self.labels[extruder].get_style_context().remove_class("button_active")
+        #     self.current_extruder = data["toolhead"]["extruder"]
+        #     self.labels[self.current_extruder].get_style_context().add_class("button_active")
+        #     if "current_extruder" in self.labels:
+        #         n = self._printer.get_tool_number(self.current_extruder)
+        #         self.labels["current_extruder"].set_image(self._gtk.Image(f"extruder-{n}"))
         try:
             variables_content = self.apiclient.send_request("/server/files/config/variables.cfg", json=False)
             variables_str = variables_content.decode("utf-8")
@@ -341,23 +326,28 @@ class Panel(ScreenPanel):
                 variables = config["Variables"].keys()
             else:
                 return
-            for extruder in self.extruder_grids:
-                extruder_str = extruder.replace(' ', '-')
-                if f"{extruder_str}_material" in variables:
-                    # Change material label
-                    material = config.get("Variables", f"{extruder_str}_material")
-                    material = material.replace("'", "")
-                    self.extruder_grids[extruder]["materials_button"].set_label(material)
+            if "material_ext0" in variables:
+                # Change material label
+                material = config.get("Variables", "material_ext0")
+                material = material.replace("'", "")
+                self.extruder_grids["extruder"]["materials_button"].set_label(material)
 
-                    # Save material variable
-                    self._config.materials[extruder] = material
-                if f"{extruder}_nozzle" in variables:
-                    # Change nozzle label
-                    nozzle = config.get("Variables", f"{extruder}_nozzle")
-                    nozzle = nozzle.replace("'", "")
-                    self.extruder_grids[extruder]["nozzle_button"].set_label(nozzle)
+                # Save material variable
+                self._config.materials["extruder"] = material
+            if "material_ext1" in variables:
+                # Change nozzle label
+                material = config.get("Variables", "material_ext1")
+                material = material.replace("'", "")
+                self.extruder_grids["extruder_stepper extruder1"]["materials_button"].set_label(material)
 
-                    # Save nozzle variable
-                    self._config.nozzles[extruder] = nozzle
+                self._config.materials["extruder_stepper extruder1"] = material
+            if "nozzle" in variables:
+                # Change nozzle label
+                nozzle = config.get("Variables", "nozzle")
+                nozzle = nozzle.replace("'", "")
+                self.nozzle_button.set_label(nozzle)
+
+                # Save nozzle variable
+                self._config.nozzles["extruder"] = nozzle
         except:
             pass
