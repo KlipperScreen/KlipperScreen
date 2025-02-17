@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-26 12:31-0300\n"
-"PO-Revision-Date: 2025-01-28 14:20-0300\n"
+"PO-Revision-Date: 2025-02-13 11:47-0300\n"
 "Last-Translator: Rui Menezes <ruizivo.menezes@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "klipperscreen/klipperscreen/pt_BR/>\n"
@@ -1061,7 +1061,26 @@ msgid "Nozzle height will be checked."
 msgstr "A altura dos extrusores será verificada."
 
 msgid "If not properly leveled, perform a mechanical calibration."
-msgstr "Se os extrusores não estiverem corretamente nivelados, execute uma calibração mecânica."
+msgstr ""
+"Se os extrusores não estiverem corretamente nivelados, execute uma "
+"calibração mecânica."
+
+msgid "Set printer model"
+msgstr "Definir o modelo da impressora"
+
+msgid "Choose the Syncraft 3D printer model"
+msgstr "Escolha o modelo da impressora 3D Syncraft"
+
+msgid "Show welcome panel"
+msgstr "Mostrar painel de boas-vindas"
+
+msgid "Syncraft welcome panel will be the first to be shown on startup"
+msgstr ""
+"O painel de boas-vindas da Syncraft será o primeiro a ser exibido na "
+"inicialização"
+
+msgid "Model type"
+msgstr "Tipo de modelo"
 
 msgid "second"
 msgid_plural "seconds"

@@ -202,7 +202,8 @@ class KlipperScreenConfig:
                     or section.startswith('spoolman'):
                 bools = [f'{option}' for option in config[section]]
             elif section == 'syncraft':
-                bools = ('welcome')
+                bools = ('welcome', '')
+                strs = ('model', '')
             else:
                 self.errors.append(f'Section [{section}] not recognized')
 
@@ -319,6 +320,20 @@ class KlipperScreenConfig:
             {"show_cursor": {"section": "main", "name": _("Show cursor"), "type": "binary",
                              "tooltip": _("For mouse control or to verify touchscreen accuracy"),
                              "value": "False", "callback": screen.update_cursor}},
+            {"welcome": {
+                "section": "syncraft", "name": _("Show welcome panel"), "type": "binary",
+                "tooltip": _("Syncraft welcome panel will be the first to be shown on startup"),
+                "value": "True"
+            }},
+            {"model": {
+                "section": "syncraft", "name": _("Model type"), "type": "dropdown",
+                "tooltip": _("Choose the Syncraft 3D printer model"),
+                "value": "", # Set to empty so sx_set_model.py is shown at state_ready function at screen.py
+                "options": [
+                    {"name": "Syncraft X1", "value": "Syncraft X1"},
+                    {"name": "Syncraft IDEX", "value": "Syncraft IDEX"}
+                ]
+            }}
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
 
@@ -538,7 +553,6 @@ class KlipperScreenConfig:
         extra_sections = [i for i in self.config.sections() if i.startswith("displayed_macros")]
         extra_sections.extend([i for i in self.config.sections() if i.startswith("graph")])
         extra_sections.extend([i for i in self.config.sections() if i.startswith("spoolman")])
-        extra_sections.extend([i for i in self.config.sections() if i.startswith("syncraft")])
         for section in extra_sections:
             for item in self.config.options(section):
                 value = self.config[section].getboolean(item, fallback=True)

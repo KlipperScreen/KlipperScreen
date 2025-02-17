@@ -42,6 +42,10 @@ Menu to select Syncraft calibration panels more easiliy.
 
 Syncraft calibration panels.
 
+### `sx_set_model.py`
+
+Panel shown at startup when no `model` option is found at `[syncraft]` section in KlipperScreen configuration file.
+
 ---
 
 ## Modifications
@@ -65,9 +69,22 @@ Syncraft calibration panels.
 - Remove `side_macro_shortcut` toggle option.
 - Add Syncraft required variables
 - Implement `if` statement on `validate_config` function to enable `[syncraft]` section on configuration.
-- Enable `[syncraft]` section to be saved on save config at `save_user_config_options` function.
+- Implement `[syncraft]` options at `_create_configurable_options`. 
 
 ### `screen.py`
 
 - Remove function `toggle_shortcut` related to `side_macro_shortcut` toggling.
-- Retrieves option `welcome` from `[syncraft]` section to start screen with panel `welcome.py` dinamically at function `state_ready`.
+- Retrieves options `[syncraft]` section to start screen with different panels dinamically at function `state_ready`.
+
+### `panels/settings.py`
+
+- Prevent some options from `KlipperScreenConfig` `configurable_options` to be shown:
+	```python
+	ignore_options = (...)
+	if name in ignore_options:
+		continue
+	```
+
+### `panels/menu.py`
+
+- Hardcode `sx_filament` button behaviour at function `create_menu_items` to open different menu items based on the option `model` from `[syncraft]`.

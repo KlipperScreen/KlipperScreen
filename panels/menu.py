@@ -65,7 +65,22 @@ class Panel(ScreenPanel):
 
             b = self._gtk.Button(icon, name, style or f"color{i % 4 + 1}", scale=scale)
 
-            if item['panel']:
+            if key == 'sx_filament':
+                # HACK: Hardcoded this menu item to move to menu dynamically
+                syncraft_section = self._config.get_config()["syncraft"]
+                if "model" in syncraft_section:
+                    model = syncraft_section.get("model")
+                    if model == "Syncraft X1":
+                        b.connect("clicked", self.menu_item_clicked, {
+                            "panel": "sx_filament_x1"
+                        })
+                    elif model == "Syncraft IDEX":
+                        b.connect("clicked", self.menu_item_clicked, {
+                            "panel": "sx_filament_idex"
+                        })
+                else:
+                    logging.error("Printer model not found at Syncraft section")
+            elif item['panel']:
                 b.connect("clicked", self.menu_item_clicked, item)
             elif item['method']:
                 params = {}

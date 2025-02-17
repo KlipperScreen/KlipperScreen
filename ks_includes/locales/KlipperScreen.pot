@@ -1060,6 +1060,24 @@ msgstr ""
 msgid "If not properly leveled, perform a mechanical calibration."
 msgstr ""
 
+msgid "Set printer model"
+msgstr ""
+
+msgid "Choose the Syncraft 3D printer model"
+msgstr ""
+
+msgid "Show welcome panel"
+msgstr ""
+
+msgid "Syncraft welcome panel will be the first to be shown on startup"
+msgstr ""
+
+msgid "Model type"
+msgstr ""
+
+msgid "Choose the Syncraft 3D printer model"
+msgstr ""
+
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
