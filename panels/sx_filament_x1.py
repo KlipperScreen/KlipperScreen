@@ -235,10 +235,9 @@ class Panel(ScreenPanel):
                 self._screen.show_popup_message("Macro LOAD_FILAMENT not found")
             else:
                 current_extruder = self._printer.get_stat("toolhead", "extruder")
-                current_extruder = current_extruder.replace(' ', '-')
                 material = self._config.materials[current_extruder]
                 nozzle = self._config.nozzles[current_extruder]
-                load_filament = f"LOAD_FILAMENT M=\"'{material}'\" NZ=\"'{nozzle}'\" SPEED={self.speed * 60}"
+                load_filament = f"LOAD_FILAMENT M='{material}' NZ='{nozzle}'"
                 self._screen._send_action(widget, "printer.gcode.script",
                                           {"script": load_filament})
 
