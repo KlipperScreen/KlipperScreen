@@ -2,6 +2,7 @@ import logging
 import re
 import configparser
 import io
+from time import sleep
 
 import gi
 
@@ -166,6 +167,7 @@ class Panel(ScreenPanel):
     def open_materials_panel(self, widget, extruder):
         # HACK: Do this to ensure it is done in the right sequence
         self.delete_panel("sx_materials")
+        sleep(1)
         self.change_config_extruder(extruder)
         self.menu_item_clicked(None, { "panel": "sx_materials" })
 
