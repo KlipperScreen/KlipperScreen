@@ -5,6 +5,7 @@ import pathlib
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.printer import Printer
 from screen import (
     KlipperScreen,
     KlippyGtk
@@ -12,12 +13,15 @@ from screen import (
 
 
 class Panel(ScreenPanel):
-    def __init__(self, screen, title):
+    def __init__(self, screen, title, sensor=False):
         self._screen: KlipperScreen
         self._gtk: KlippyGtk
+        self._printer: Printer
 
         title = title or _("Nozzle")
         super().__init__(screen, title)
+
+        self.sensor = sensor
 
         # HACK: to make it centered
         self.labels['text'] = Gtk.Label(f"\n")
@@ -52,9 +56,14 @@ class Panel(ScreenPanel):
         event_box.connect("button-press-event", self.on_image_clicked, nozzle)
         box.pack_start(event_box, True, True, 8)
 
-    def on_image_clicked(self, widget, event, nozzle):
+    def on_image_clicked(self, widget, event, nozzle: str):
         self.nozzlegcodescript(nozzle)
-        self._screen._menu_go_back()
+        if self.sensor:
+            self._config.nozzle = nozzle.replace("'", "")
+            self._screen.delete_panel("sx_materials")
+            self._screen.show_panel("sx_materials",  sensor=True)
+        else:
+            self._screen._menu_go_back()
 
     def nozzlegcodescript(self, nozzle):
         carriage = 0

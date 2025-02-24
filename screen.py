@@ -80,6 +80,10 @@ class KlipperScreen(Gtk.Window):
     check_dpms_timeout = None
 
     def __init__(self, args):
+        # Syncraft variable
+        self.detected_filament = {}
+        self.inserting_filament = False
+
         self.server_info = None
         try:
             super().__init__(title="KlipperScreen")
@@ -883,7 +887,60 @@ class KlipperScreen(Gtk.Window):
         else:
             self.show_panel(*action)
 
+    def delete_panel(self, panel_name):
+        if panel_name in self.panels:
+            del self.panels[panel_name]
+
+    def run_state_callback(self, printer: Printer):
+        printer_state = printer.state
+        printer_state_callback = printer.state_callbacks[printer.state]
+        self.state_execute(printer_state, printer_state_callback)
+
+    def syncraft_get_model(self):
+        syncraft_section = self._config.get_config()["syncraft"]
+        syncraft_model = syncraft_section.get("model")
+        return syncraft_model
+
     def process_update(self, *args):
+        action, data = args
+
+        syncraft_model = self.syncraft_get_model()
+
+        if syncraft_model == "Syncraft IDEX":
+            sensors = (
+                "filament_switch_sensor spool_one",
+                "filament_switch_sensor spool_two"
+            )
+            for sensor in sensors:
+                if sensor in data:
+                    filament_detected = data[sensor].get("filament_detected")
+                    if sensor not in self.detected_filament:
+                        self.detected_filament[sensor] = filament_detected
+                    # This means the filament was inserted
+                    if not self.detected_filament[sensor] and filament_detected:
+                        if self.inserting_filament:
+                            raise Exception("User should finish inserting one filament before inserting another")
+                        self.inserting_filament = True
+                        self.show_panel("sx_nozzle", remove_all=True, sensor=True)
+                    # This means the filament was removed
+                    if self.detected_filament[sensor] and not filament_detected:
+                        # HACK: run self._printer.state related callback
+                        if self.inserting_filament and self.printer:
+                            self.inserting_filament = False
+                            self.run_state_callback(self.printer)
+                    self.detected_filament[sensor] = filament_detected
+        elif syncraft_model == "Syncraft X1":
+            # If both sensors are empty
+                # If filament is inserted
+                        # If filament is removed run printer.state function
+                    # Show sx_nozzle panel as sensor=True and remove_all
+                    # Show sx_materials when set nozzle
+                    # When finish run printer.state function
+            # If filament is inserted
+                # Check sensor extruder
+                # Set material and nozzle to this extruder as same as other inserted filament
+            ...
+
         self.base_panel.process_update(*args)
         if self._cur_panels and hasattr(self.panels[self._cur_panels[-1]], "process_update"):
             self.panels[self._cur_panels[-1]].process_update(*args)

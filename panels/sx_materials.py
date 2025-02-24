@@ -13,11 +13,13 @@ syncraft_images_path = os.path.join(syncraft_path, "images")
 materials_path = os.path.join(syncraft_path, "materials.json")
 
 class Panel(ScreenPanel):
-    def __init__(self, screen, title):
+    def __init__(self, screen, title, sensor=False):
         self._screen: KlipperScreen
 
         title = title or _("Materials")
         super().__init__(screen, title)
+
+        self.sensor = sensor
 
         grid = Gtk.Grid(column_homogeneous=True)
 
@@ -109,4 +111,8 @@ class Panel(ScreenPanel):
         self._screen._ws.klippy.gcode_script(
             f"CHANGE_MATERIAL M='{material_name}' EXT='{ext}'"
         )
-        self._screen._menu_go_back()
+        if self.sensor:
+            self._screen.inserting_filament = False
+            self._screen.run_state_callback(self._printer)
+        else:
+            self._screen._menu_go_back()
