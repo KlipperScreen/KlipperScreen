@@ -112,7 +112,6 @@ class Panel(ScreenPanel):
             f"CHANGE_MATERIAL M='{material_name}' EXT='{ext}'"
         )
         if self.sensor:
-            self._screen.inserting_filament = False
-            self._screen.run_state_callback(self._printer)
+            self._screen.finish_inserting_filament()
         else:
             self._screen._menu_go_back()
