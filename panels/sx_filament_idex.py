@@ -179,8 +179,7 @@ class Panel(ScreenPanel):
 
     def open_materials_panel(self, widget, extruder):
         # HACK: Do this to ensure it is done in the right sequence
-        self.delete_panel("sx_materials")
-        sleep(1)
+        self._screen.delete_panel("sx_materials")
         self.change_config_extruder(extruder)
         self.menu_item_clicked(None, { "panel": "sx_materials" })
 
@@ -328,10 +327,6 @@ class Panel(ScreenPanel):
         except Exception as e:
             # nozzle variable not found
             logging.error(e)
-
-    def delete_panel(self, panel_name):
-        if panel_name in self._screen.panels:
-            del self._screen.panels[panel_name]
 
     def process_update(self, action, data):
         try:
