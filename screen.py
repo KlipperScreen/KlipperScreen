@@ -914,11 +914,11 @@ class KlipperScreen(Gtk.Window):
         syncraft_model = self.syncraft_get_model()
 
         if syncraft_model == "Syncraft IDEX":
-            sensors = (
-                "filament_switch_sensor spool_one",
-                "filament_switch_sensor spool_two"
-            )
-            for sensor in sensors:
+            sensors_extruders = {
+                "filament_switch_sensor spool_one": "extruder",
+                "filament_switch_sensor spool_two": "extruder1"
+            }
+            for sensor in sensors_extruders:
                 if sensor in data:
                     filament_detected = data[sensor].get("filament_detected")
                     if sensor not in self.detected_filament:
@@ -928,6 +928,7 @@ class KlipperScreen(Gtk.Window):
                         if self.inserting_filament:
                             raise Exception("User should finish inserting one filament before inserting another")
                         self.inserting_filament = True
+                        self._config.extruder = sensors_extruders[sensor]
                         self.show_panel("sx_nozzle", remove_all=True, sensor=True)
                     # This means the filament was removed
                     if self.detected_filament[sensor] and not filament_detected:
