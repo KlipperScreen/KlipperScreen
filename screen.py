@@ -13,6 +13,8 @@ import locale
 import re
 import sys
 import gi
+import io
+import configparser
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
@@ -83,6 +85,7 @@ class KlipperScreen(Gtk.Window):
         # Syncraft variable
         self.detected_filament = {}
         self.inserting_filament = False
+        self.variables = None
 
         self.server_info = None
         try:
@@ -911,6 +914,17 @@ class KlipperScreen(Gtk.Window):
         else:
             raise Exception("Printer not found")
 
+    def save_variables_file(self):
+        variables_content = self.apiclient.send_request("/server/files/config/variables.cfg", json=False)
+        variables_str = variables_content.decode("utf-8")
+        variables_file = io.StringIO(variables_str)
+        config = configparser.ConfigParser()
+        config.read_file(variables_file)
+        if config.has_section("Variables"):
+            self.variables = config
+        else:
+            raise Exception("variables file has no Variables section")
+
     def process_update(self, *args):
         action, data = args
 
@@ -939,16 +953,49 @@ class KlipperScreen(Gtk.Window):
                             self.finish_inserting_filament()
                     self.detected_filament[sensor] = filament_detected
         elif syncraft_model == "Syncraft X1":
-            # If both sensors are empty
-                # If filament is inserted
-                        # If filament is removed run printer.state function
-                    # Show sx_nozzle panel as sensor=True and remove_all
-                    # Show sx_materials when set nozzle
-                    # When finish run printer.state function
-            # If filament is inserted
-                # Check sensor extruder
-                # Set material and nozzle to this extruder as same as other inserted filament
-            ...
+            sensors_extruders = {
+                "filament_switch_sensor spool_one": "extruder",
+                "filament_switch_sensor spool_two": "extruder_stepper extruder1"
+            }
+            for sensor in sensors_extruders:
+                if sensor not in data:
+                    continue
+                filament_detected = data[sensor].get("filament_detected")
+                if sensor not in self.detected_filament:
+                    self.detected_filament[sensor] = filament_detected
+                is_sensors_detected = set(sensors_extruders.keys()).issubset(self.detected_filament.keys())
+                if is_sensors_detected:
+                    # This means the filament was inserted
+                    if not self.detected_filament[sensor] and filament_detected:
+                        if self.inserting_filament:
+                            raise Exception("User should finish inserting one filament before inserting another")
+                        is_sensors_empty = all(not detected for detected in self.detected_filament.values())
+                        if is_sensors_empty:
+                            self.inserting_filament = True
+                            self._config.extruder = sensors_extruders[sensor]
+                            self.show_panel("sx_nozzle", remove_all=True, sensor=True)
+                        else:
+                            other_sensor = (set(sensors_extruders.keys()) - {sensor}).pop()
+                            extruder = sensors_extruders[sensor]
+                            other_extruder = sensors_extruders[other_sensor]
+
+                            # Get extruder material
+                            self.save_variables_file()
+                            if extruder == "extruder":
+                                materials_str = "material_ext0"
+                            elif extruder == "extruder_stepper extruder1":
+                                materials_str = "material_ext1"
+
+                            material = self.variables.get("Variables", materials_str)
+                            material = material.replace("'", "")
+
+                            # Set other_extruder material to same
+                            self._ws.klippy.gcode_script(f"CHANGE_MATERIAL M='{material}' EXT='{other_extruder}'")
+                    # This means the filament was removed
+                    if self.detected_filament[sensor] and not filament_detected:
+                        if self.inserting_filament:
+                            self.finish_inserting_filament()
+                self.detected_filament[sensor] = filament_detected
 
         self.base_panel.process_update(*args)
         if self._cur_panels and hasattr(self.panels[self._cur_panels[-1]], "process_update"):
