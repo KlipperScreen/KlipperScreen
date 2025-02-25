@@ -905,8 +905,11 @@ class KlipperScreen(Gtk.Window):
     
     def finish_inserting_filament(self):
         # HACK: run self.printer.state related callback
-        self.inserting_filament = False
-        self.run_state_callback(self.printer)
+        if self.printer:
+            self.inserting_filament = False
+            self.run_state_callback(self.printer)
+        else:
+            raise Exception("Printer not found")
 
     def process_update(self, *args):
         action, data = args
@@ -932,7 +935,7 @@ class KlipperScreen(Gtk.Window):
                         self.show_panel("sx_nozzle", remove_all=True, sensor=True)
                     # This means the filament was removed
                     if self.detected_filament[sensor] and not filament_detected:
-                        if self.inserting_filament and self.printer:
+                        if self.inserting_filament:
                             self.finish_inserting_filament()
                     self.detected_filament[sensor] = filament_detected
         elif syncraft_model == "Syncraft X1":
