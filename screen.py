@@ -1148,6 +1148,7 @@ class KlipperScreen(Gtk.Window):
         self.ws_subscribe()
 
         self.files.set_gcodes_path()
+        self.power_devices(None, self._config.get_main_config().get("screen_on_devices", ""), on=True)
 
         logging.info("Printer initialized")
         self.initialized = True
