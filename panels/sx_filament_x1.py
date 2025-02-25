@@ -2,7 +2,6 @@ import logging
 import re
 import configparser
 import io
-from time import sleep
 
 import gi
 
