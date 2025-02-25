@@ -665,7 +665,7 @@ class KlipperScreen(Gtk.Window):
         self.use_dpms = use_dpms
         self._config.set("main", "use_dpms", use_dpms)
         self._config.save_user_config_options()
-        if self.printer.state in ("printing", "paused"):
+        if self.printer and self.printer.state in ("printing", "paused"):
             self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking_printing'))
         else:
             self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
@@ -686,7 +686,7 @@ class KlipperScreen(Gtk.Window):
             return
 
     def set_screenblanking_printing_timeout(self, time):
-        if self.printer.state in ("printing", "paused"):
+        if self.printer and self.printer.state in ("printing", "paused"):
             self.set_screenblanking_timeout(time)
 
     def set_screenblanking_timeout(self, time):
