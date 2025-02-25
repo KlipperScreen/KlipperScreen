@@ -891,7 +891,7 @@ class KlipperScreen(Gtk.Window):
         if panel_name in self.panels:
             del self.panels[panel_name]
         if panel_name in self.panels_reinit:
-            del self.panels_reinit[panel_name]
+            self.panels_reinit.remove(panel_name)
 
     def run_state_callback(self, printer: Printer):
         printer_state = printer.state
