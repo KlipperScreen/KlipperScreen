@@ -171,7 +171,9 @@ class KlipperScreen(Gtk.Window):
             self.show_error_modal("Invalid config file", self._config.get_errors())
             return
         self.base_panel.activate()
-        self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
+        self.use_dpms = self._config.get_main_config().getboolean("use_dpms", fallback=True)
+        self.use_dpms &= functions.dpms_loaded
+        self.set_dpms(self.use_dpms)
         self.lock_screen = LockScreen(self)
         self.log_notification("KlipperScreen Started", 1)
         self.initial_connection()
@@ -646,13 +648,24 @@ class KlipperScreen(Gtk.Window):
             if self.check_dpms_timeout is not None:
                 GLib.source_remove(self.check_dpms_timeout)
             self.check_dpms_timeout = None
-            os.system(f"xset -display {self.display_number} dpms 0 0 0")
-            os.system(f"xset -display {self.display_number} -dpms")
+            state = functions.get_DPMS_state()
+            if state != functions.DPMS_State.Fail:
+                try:
+                    subprocess.run(
+                        f"xset -display {self.display_number} dpms 0 0 0",
+                        shell=True, check=True
+                    )
+                    subprocess.run(
+                        f"xset -display {self.display_number} -dpms",
+                        shell=True, check=True
+                    )
+                except subprocess.CalledProcessError as e:
+                    self.show_popup_message(f"FAILED to turn DPMS off on {self.display_number}:\n {e}")
+                    return
         self.use_dpms = use_dpms
         self._config.set("main", "use_dpms", use_dpms)
         self._config.save_user_config_options()
-        logging.info(f"DPMS set to: {self.use_dpms}")
-        if self.printer.state in ("printing", "paused"):
+        if self.printer and self.printer.state in ("printing", "paused"):
             self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking_printing'))
         else:
             self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
@@ -663,8 +676,9 @@ class KlipperScreen(Gtk.Window):
                 f"xset -display {self.display_number} dpms 0 {self.blanking_time} 0",
                 shell=True, check=True
             )
+            logging.info(f"DPMS on {self.display_number} set to: {self.blanking_time}")
         except subprocess.CalledProcessError as e:
-            self.show_popup_message(f"Error: {e}")
+            self.show_popup_message(f"DPMS Error:\n {e}")
             self.set_dpms(False)
             return
         if self.blanking_time > 0 and self.check_dpms_timeout is None:
@@ -672,7 +686,7 @@ class KlipperScreen(Gtk.Window):
             return
 
     def set_screenblanking_printing_timeout(self, time):
-        if self.printer.state in ("printing", "paused"):
+        if self.printer and self.printer.state in ("printing", "paused"):
             self.set_screenblanking_timeout(time)
 
     def set_screenblanking_timeout(self, time):
@@ -686,9 +700,6 @@ class KlipperScreen(Gtk.Window):
                 self.blanking_time = abs(int(time))
             except Exception as exc:
                 logging.exception(exc)
-        self.use_dpms = self._config.get_main_config().getboolean("use_dpms", fallback=False)
-        self.use_dpms &= functions.dpms_loaded
-
         if self.use_dpms:
             self.set_dpms_timeout()
         else:
