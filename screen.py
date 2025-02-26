@@ -989,8 +989,27 @@ class KlipperScreen(Gtk.Window):
                             other_material = self.variables.get("Variables", other_material_str)
                             other_material = other_material.replace("'", "")
 
+                            current_panel = None
+                            if self.panels:
+                                current_panel = self.panels[self._cur_panels[-1]]
+
+                            def callback(jsonrpc, method, params):
+                                # Try except because current_panel might be deleted
+                                try:
+                                    current_panel.content.set_sensitive(True)
+                                except:
+                                    pass
+
                             # Set extruder material to same as other extruder
-                            self._ws.klippy.gcode_script(f"CHANGE_MATERIAL M='{other_material}' EXT='{extruder}'")
+                            self._ws.klippy.gcode_script(
+                                f"CHANGE_MATERIAL M='{other_material}' EXT='{extruder}'",
+                                callback
+                            )
+
+                            if current_panel:
+                                # TODO: tell user to wait
+                                # freeze current panel
+                                current_panel.content.set_sensitive(False)
                     # This means the filament was removed
                     if self.detected_filament[sensor] and not filament_detected:
                         if self.inserting_filament:
