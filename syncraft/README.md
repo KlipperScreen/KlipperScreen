@@ -8,7 +8,7 @@ This is a modification of [KlipperScreen](https://github.com/klipperscreen/klipp
 
 Panels from Syncraft have the `sx_` prefix.
 
-### `sx_filament.py`
+### `sx_filament_(idex|x1).py`
 
 Copy from original panel `extrude.py`. Used to set both nozzle and material from `extruder`.
 
@@ -19,6 +19,8 @@ Used to set the [printer variables](https://www.klipper3d.org/Config_Reference.h
 
 This ensures the printer can cancel a print via `PARAMETERS_MATCH` macro if its 3D model has been sliced for a different nozzle.
 
+A `sensor` boolean parameter can be passed, making it behave diferently at the function `on_image_clicked`.
+
 ### `sx_materials.py`
 
 Uses the `materials.json` file to render the available materials to the current active extruder.
@@ -27,6 +29,8 @@ Uses the `materials.json` file to render the available materials to the current 
 Used to set the [printer variables](https://www.klipper3d.org/Config_Reference.html#save_variables) `material_ext0` or `material_ext1` based on the currently active extruder.
 
 This ensures the printer can cancel a print via `PARAMETERS_MATCH` macro if its 3D model has been sliced for a different material.
+
+A `sensor` boolean parameter can be passed, making it behave diferently at the function `set_material`.
 
 ### `sx_welcome.py`
 
@@ -75,6 +79,9 @@ Panel shown at startup when no `model` option is found at `[syncraft]` section i
 
 - Remove function `toggle_shortcut` related to `side_macro_shortcut` toggling.
 - Retrieves options `[syncraft]` section to start screen with different panels dinamically at function `state_ready`.
+- Add extra functions `delete_panel`, `run_state_callback`, `syncraft_get_model`, `finish_inserting_filament` and `save_variables_file`.
+- Detect filament based on model at `process_update` before passing it to current panel.
+- Add properties `detected_filament`, `inserting_filament`, and `variables` to help with filament detection.
 
 ### `panels/settings.py`
 
