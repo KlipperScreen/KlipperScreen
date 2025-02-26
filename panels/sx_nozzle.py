@@ -58,8 +58,7 @@ class Panel(ScreenPanel):
 
     def on_image_clicked(self, widget, event, nozzle: str):
         def callback(jsonrpc, method, params):
-            # unfreeze screen
-            self.content.set_sensitive(True)
+            self._screen.toggle_screen_freeze(False)
             if self.sensor:
                 self._config.nozzle = nozzle.replace("'", "")
                 self._screen.delete_panel("sx_materials")
@@ -74,5 +73,4 @@ class Panel(ScreenPanel):
             f"NOZZLE_SET NZ='{nozzle}' CARRIAGE='{carriage}'",
             callback
         )
-        # freeze screen
-        self.content.set_sensitive(False)
+        self._screen.toggle_screen_freeze(True)

@@ -94,7 +94,7 @@ class Panel(ScreenPanel):
         
     def set_material(self, widget, material=None):
         def callback(jsonrpc, method, params):
-            # no need to unfreeze screen here, since this panel will always be deleted before opening
+            self._screen.toggle_screen_freeze(False)
             if self.sensor:
                 self._screen.finish_inserting_filament()
             else:
@@ -119,5 +119,4 @@ class Panel(ScreenPanel):
             f"CHANGE_MATERIAL M='{material_name}' EXT='{ext}'",
             callback
         )
-        # freeze screen
-        self.content.set_sensitive(False)
+        self._screen.toggle_screen_freeze(True)
