@@ -910,7 +910,7 @@ class KlipperScreen(Gtk.Window):
         if self.panels:
             return self.panels[self._cur_panels[-1]]
 
-    def toggle_screen_freeze(self, freeze):
+    def toggle_screen_freeze(self, freeze: bool):
         if freeze:
             self.show_popup_message(_("Please wait"), level=1)
         else:
