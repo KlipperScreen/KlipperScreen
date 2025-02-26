@@ -940,85 +940,91 @@ class KlipperScreen(Gtk.Window):
         else:
             raise Exception("variables file has no Variables section")
 
+    def check_idex_sensors(self, data):
+        sensors_extruders = {
+            "filament_switch_sensor spool_one": "extruder",
+            "filament_switch_sensor spool_two": "extruder1"
+        }
+        for sensor in sensors_extruders:
+            if sensor in data:
+                filament_detected = data[sensor].get("filament_detected")
+                if sensor not in self.detected_filament:
+                    self.detected_filament[sensor] = filament_detected
+                # This means the filament was inserted
+                if not self.detected_filament[sensor] and filament_detected:
+                    if self.inserting_filament:
+                        raise Exception("User should finish inserting one filament before inserting another")
+                    self.inserting_filament = True
+                    self._config.extruder = sensors_extruders[sensor]
+                    self.show_panel("sx_nozzle", remove_all=True, sensor=True)
+                # This means the filament was removed
+                if self.detected_filament[sensor] and not filament_detected:
+                    if self.inserting_filament:
+                        self.finish_inserting_filament()
+                self.detected_filament[sensor] = filament_detected
+
+    def check_x1_sensors(self, data):
+        sensors_extruders = {
+            "filament_switch_sensor spool_one": "extruder",
+            "filament_switch_sensor spool_two": "extruder_stepper extruder1"
+        }
+        for sensor in sensors_extruders:
+            if sensor not in data:
+                continue
+            filament_detected = data[sensor].get("filament_detected")
+            if sensor not in self.detected_filament:
+                self.detected_filament[sensor] = filament_detected
+            is_sensors_detected = set(sensors_extruders.keys()).issubset(self.detected_filament.keys())
+            if is_sensors_detected:
+                # This means the filament was inserted
+                if not self.detected_filament[sensor] and filament_detected:
+                    if self.inserting_filament:
+                        raise Exception("User should finish inserting one filament before inserting another")
+                    is_sensors_empty = all(not detected for detected in self.detected_filament.values())
+                    if is_sensors_empty:
+                        self.inserting_filament = True
+                        self._config.extruder = sensors_extruders[sensor]
+                        self.show_panel("sx_nozzle", remove_all=True, sensor=True)
+                    else:
+                        extruder = sensors_extruders[sensor]
+                        other_sensor = (set(sensors_extruders.keys()) - {sensor}).pop()
+                        other_extruder = sensors_extruders[other_sensor]
+
+                        # Get extruder material
+                        self.save_variables_file()
+                        if other_extruder == "extruder":
+                            other_material_str = "material_ext0"
+                        elif other_extruder == "extruder_stepper extruder1":
+                            other_material_str = "material_ext1"
+
+                        other_material = self.variables.get("Variables", other_material_str)
+                        other_material = other_material.replace("'", "")
+
+                        def callback(jsonrpc, method, params):
+                            self.toggle_screen_freeze(False)
+
+                        # Set extruder material to same as other extruder
+                        self._ws.klippy.gcode_script(
+                            f"CHANGE_MATERIAL M='{other_material}' EXT='{extruder}'",
+                            callback
+                        )
+
+                        self.toggle_screen_freeze(True)
+                # This means the filament was removed
+                if self.detected_filament[sensor] and not filament_detected:
+                    if self.inserting_filament:
+                        self.finish_inserting_filament()
+            self.detected_filament[sensor] = filament_detected
+
     def process_update(self, *args):
         action, data = args
 
         syncraft_model = self.syncraft_get_model()
 
         if syncraft_model == "Syncraft IDEX":
-            sensors_extruders = {
-                "filament_switch_sensor spool_one": "extruder",
-                "filament_switch_sensor spool_two": "extruder1"
-            }
-            for sensor in sensors_extruders:
-                if sensor in data:
-                    filament_detected = data[sensor].get("filament_detected")
-                    if sensor not in self.detected_filament:
-                        self.detected_filament[sensor] = filament_detected
-                    # This means the filament was inserted
-                    if not self.detected_filament[sensor] and filament_detected:
-                        if self.inserting_filament:
-                            raise Exception("User should finish inserting one filament before inserting another")
-                        self.inserting_filament = True
-                        self._config.extruder = sensors_extruders[sensor]
-                        self.show_panel("sx_nozzle", remove_all=True, sensor=True)
-                    # This means the filament was removed
-                    if self.detected_filament[sensor] and not filament_detected:
-                        if self.inserting_filament:
-                            self.finish_inserting_filament()
-                    self.detected_filament[sensor] = filament_detected
+            self.check_idex_sensors(data)
         elif syncraft_model == "Syncraft X1":
-            sensors_extruders = {
-                "filament_switch_sensor spool_one": "extruder",
-                "filament_switch_sensor spool_two": "extruder_stepper extruder1"
-            }
-            for sensor in sensors_extruders:
-                if sensor not in data:
-                    continue
-                filament_detected = data[sensor].get("filament_detected")
-                if sensor not in self.detected_filament:
-                    self.detected_filament[sensor] = filament_detected
-                is_sensors_detected = set(sensors_extruders.keys()).issubset(self.detected_filament.keys())
-                if is_sensors_detected:
-                    # This means the filament was inserted
-                    if not self.detected_filament[sensor] and filament_detected:
-                        if self.inserting_filament:
-                            raise Exception("User should finish inserting one filament before inserting another")
-                        is_sensors_empty = all(not detected for detected in self.detected_filament.values())
-                        if is_sensors_empty:
-                            self.inserting_filament = True
-                            self._config.extruder = sensors_extruders[sensor]
-                            self.show_panel("sx_nozzle", remove_all=True, sensor=True)
-                        else:
-                            extruder = sensors_extruders[sensor]
-                            other_sensor = (set(sensors_extruders.keys()) - {sensor}).pop()
-                            other_extruder = sensors_extruders[other_sensor]
-
-                            # Get extruder material
-                            self.save_variables_file()
-                            if other_extruder == "extruder":
-                                other_material_str = "material_ext0"
-                            elif other_extruder == "extruder_stepper extruder1":
-                                other_material_str = "material_ext1"
-
-                            other_material = self.variables.get("Variables", other_material_str)
-                            other_material = other_material.replace("'", "")
-
-                            def callback(jsonrpc, method, params):
-                                self.toggle_screen_freeze(False)
-
-                            # Set extruder material to same as other extruder
-                            self._ws.klippy.gcode_script(
-                                f"CHANGE_MATERIAL M='{other_material}' EXT='{extruder}'",
-                                callback
-                            )
-
-                            self.toggle_screen_freeze(True)
-                    # This means the filament was removed
-                    if self.detected_filament[sensor] and not filament_detected:
-                        if self.inserting_filament:
-                            self.finish_inserting_filament()
-                self.detected_filament[sensor] = filament_detected
+            self.check_x1_sensors(data)
 
         self.base_panel.process_update(*args)
         if self._cur_panels and hasattr(self.panels[self._cur_panels[-1]], "process_update"):
