@@ -975,22 +975,22 @@ class KlipperScreen(Gtk.Window):
                             self._config.extruder = sensors_extruders[sensor]
                             self.show_panel("sx_nozzle", remove_all=True, sensor=True)
                         else:
-                            other_sensor = (set(sensors_extruders.keys()) - {sensor}).pop()
                             extruder = sensors_extruders[sensor]
+                            other_sensor = (set(sensors_extruders.keys()) - {sensor}).pop()
                             other_extruder = sensors_extruders[other_sensor]
 
                             # Get extruder material
                             self.save_variables_file()
-                            if extruder == "extruder":
-                                materials_str = "material_ext0"
-                            elif extruder == "extruder_stepper extruder1":
-                                materials_str = "material_ext1"
+                            if other_extruder == "extruder":
+                                other_material_str = "material_ext0"
+                            elif other_extruder == "extruder_stepper extruder1":
+                                other_material_str = "material_ext1"
 
-                            material = self.variables.get("Variables", materials_str)
-                            material = material.replace("'", "")
+                            other_material = self.variables.get("Variables", other_material_str)
+                            other_material = other_material.replace("'", "")
 
-                            # Set other_extruder material to same
-                            self._ws.klippy.gcode_script(f"CHANGE_MATERIAL M='{material}' EXT='{other_extruder}'")
+                            # Set extruder material to same as other extruder
+                            self._ws.klippy.gcode_script(f"CHANGE_MATERIAL M='{other_material}' EXT='{extruder}'")
                     # This means the filament was removed
                     if self.detected_filament[sensor] and not filament_detected:
                         if self.inserting_filament:
