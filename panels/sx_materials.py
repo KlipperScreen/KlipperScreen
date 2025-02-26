@@ -93,6 +93,13 @@ class Panel(ScreenPanel):
             return json.load(materials)
         
     def set_material(self, widget, material=None):
+        def callback(jsonrpc, method, params):
+            # no need to unfreeze screen here, since this panel will always be deleted before opening
+            if self.sensor:
+                self._screen.finish_inserting_filament()
+            else:
+                self._screen._menu_go_back()
+
         syncraft_section = self._config.get_config()["syncraft"]
         model = syncraft_section.get("model")
 
@@ -109,9 +116,8 @@ class Panel(ScreenPanel):
                 ext = "extruder_stepper extruder1"
 
         self._screen._ws.klippy.gcode_script(
-            f"CHANGE_MATERIAL M='{material_name}' EXT='{ext}'"
+            f"CHANGE_MATERIAL M='{material_name}' EXT='{ext}'",
+            callback
         )
-        if self.sensor:
-            self._screen.finish_inserting_filament()
-        else:
-            self._screen._menu_go_back()
+        # freeze screen
+        self.content.set_sensitive(False)

@@ -57,18 +57,22 @@ class Panel(ScreenPanel):
         box.pack_start(event_box, True, True, 8)
 
     def on_image_clicked(self, widget, event, nozzle: str):
-        self.nozzlegcodescript(nozzle)
-        if self.sensor:
-            self._config.nozzle = nozzle.replace("'", "")
-            self._screen.delete_panel("sx_materials")
-            self._screen.show_panel("sx_materials",  sensor=True)
-        else:
-            self._screen._menu_go_back()
+        def callback(jsonrpc, method, params):
+            # unfreeze screen
+            self.content.set_sensitive(True)
+            if self.sensor:
+                self._config.nozzle = nozzle.replace("'", "")
+                self._screen.delete_panel("sx_materials")
+                self._screen.show_panel("sx_materials",  sensor=True)
+            else:
+                self._screen._menu_go_back()
 
-    def nozzlegcodescript(self, nozzle):
         carriage = 0
         if self._config.extruder == "extruder1":
             carriage = 1
         self._screen._ws.klippy.gcode_script(
-            f"NOZZLE_SET NZ='{nozzle}' CARRIAGE='{carriage}'"
+            f"NOZZLE_SET NZ='{nozzle}' CARRIAGE='{carriage}'",
+            callback
         )
+        # freeze screen
+        self.content.set_sensitive(False)
