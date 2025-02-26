@@ -911,6 +911,10 @@ class KlipperScreen(Gtk.Window):
             return self.panels[self._cur_panels[-1]]
 
     def toggle_screen_freeze(self, freeze):
+        if freeze:
+            self.show_popup_message(_("Please wait"), level=1)
+        else:
+            self.close_popup_message()
         current_panel = self.get_current_panel()
         if current_panel:
             current_panel.content.set_sensitive(not freeze)
@@ -1009,7 +1013,6 @@ class KlipperScreen(Gtk.Window):
                                 callback
                             )
 
-                            # TODO: tell user to wait
                             self.toggle_screen_freeze(True)
                     # This means the filament was removed
                     if self.detected_filament[sensor] and not filament_detected:
