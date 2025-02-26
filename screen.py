@@ -906,6 +906,17 @@ class KlipperScreen(Gtk.Window):
         syncraft_model = syncraft_section.get("model")
         return syncraft_model
     
+    def get_current_panel(self):
+        if self.panels:
+            return self.panels[self._cur_panels[-1]]
+
+    def toggle_screen_freeze(self, freeze):
+        current_panel = self.get_current_panel()
+        if current_panel:
+            current_panel.content.set_sensitive(not freeze)
+        self.base_panel.control["back"].set_sensitive(not freeze)
+        self.base_panel.control["home"].set_sensitive(not freeze)
+
     def finish_inserting_filament(self):
         # HACK: run self.printer.state related callback
         if self.printer:
@@ -989,16 +1000,8 @@ class KlipperScreen(Gtk.Window):
                             other_material = self.variables.get("Variables", other_material_str)
                             other_material = other_material.replace("'", "")
 
-                            current_panel = None
-                            if self.panels:
-                                current_panel = self.panels[self._cur_panels[-1]]
-
                             def callback(jsonrpc, method, params):
-                                # Try except because current_panel might be deleted
-                                try:
-                                    current_panel.content.set_sensitive(True)
-                                except:
-                                    pass
+                                self.toggle_screen_freeze(False)
 
                             # Set extruder material to same as other extruder
                             self._ws.klippy.gcode_script(
@@ -1006,10 +1009,8 @@ class KlipperScreen(Gtk.Window):
                                 callback
                             )
 
-                            if current_panel:
-                                # TODO: tell user to wait
-                                # freeze current panel
-                                current_panel.content.set_sensitive(False)
+                            # TODO: tell user to wait
+                            self.toggle_screen_freeze(True)
                     # This means the filament was removed
                     if self.detected_filament[sensor] and not filament_detected:
                         if self.inserting_filament:

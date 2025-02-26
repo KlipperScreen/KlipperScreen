@@ -79,7 +79,7 @@ Panel shown at startup when no `model` option is found at `[syncraft]` section i
 
 - Remove function `toggle_shortcut` related to `side_macro_shortcut` toggling.
 - Retrieves options `[syncraft]` section to start screen with different panels dinamically at function `state_ready`.
-- Add extra functions `delete_panel`, `run_state_callback`, `syncraft_get_model`, `finish_inserting_filament` and `save_variables_file`.
+- Add extra functions `delete_panel`, `run_state_callback`, `syncraft_get_model`, `finish_inserting_filament`, `save_variables_file`, `get_current_panel` and `toggle_screen_freeze`.
 - Detect filament based on model at `process_update` before passing it to current panel.
 - Add properties `detected_filament`, `inserting_filament`, and `variables` to help with filament detection.
 
