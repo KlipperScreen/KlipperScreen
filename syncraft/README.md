@@ -99,3 +99,7 @@ Panel shown at startup when no `model` option is found at `[syncraft]` section i
 ### `styles`
 
 - `main.svg` is set to the same as from `material-dark` at every theme except for `material-light`.
+
+### `splash_screen.py`
+
+- Change `klipper` image to `syncraft`.

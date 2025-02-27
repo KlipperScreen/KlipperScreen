@@ -13,7 +13,7 @@ class Panel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         image = self._gtk.Image(
-            "klipper", self._gtk.content_width * 0.2, self._gtk.content_height * 0.5
+            "syncraft", self._gtk.content_width * 0.2, self._gtk.content_height * 0.5
         )
         self.labels["text"] = Gtk.Label(
             label=_("Initializing printer..."),
