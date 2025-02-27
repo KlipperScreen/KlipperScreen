@@ -95,3 +95,7 @@ Panel shown at startup when no `model` option is found at `[syncraft]` section i
 ### `panels/menu.py`
 
 - Hardcode `sx_filament` button behaviour at function `create_menu_items` to open different menu items based on the option `model` from `[syncraft]`.
+
+### `styles`
+
+- `main.svg` is set to the same as from `material-dark` at every theme except for `material-light`.
