@@ -133,20 +133,39 @@ class ScreenPanel:
         spc = "\u00A0"  # Non breakable space
         if seconds is None or seconds < 1:
             return "-"
+
         days = seconds // 86400
+        secondsRemaining = seconds - (days * 86400)
+        hours = secondsRemaining // 3600
+        secondsRemaining = secondsRemaining - (hours * 3600)
+        minutes = secondsRemaining // 60
+        secondsRemaining = secondsRemaining - (minutes * 60)
+
+        # Round 60 seconds up a minute
+        if secondsRemaining > 59:
+            minutes += 1
+            secondsRemaining = 0
+
+        # If we've rounded to 60 minutes or more than 59m30s round up an hour
+        if minutes > 59 or (minutes == 59 and secondsRemaining >= 30):
+            hours += 1
+            minutes = 0
+
+        # If we've rounded to 24 hours or more than 23h30m round up a day
+        if hours > 23 or (hours >= 23 and minutes >= 30):
+            days += 1
+            hours = 0
+
+        # Determine all of the units after adjustments
         day_units = ngettext("day", "days", days)
-        seconds %= 86400
-        hours = seconds // 3600
         hour_units = ngettext("hour", "hours", hours)
-        seconds %= 3600
-        minutes = round(seconds / 60)
         min_units = ngettext("minute", "minutes", minutes)
-        seconds %= 60
-        sec_units = ngettext("second", "seconds", seconds)
+        sec_units = ngettext("second", "seconds", secondsRemaining)
+
         return f"{f'{days:2.0f}{spc}{day_units}{spc}' if days > 0 else ''}" \
                f"{f'{hours:2.0f}{spc}{hour_units}{spc}' if hours > 0 else ''}" \
                f"{f'{minutes:2.0f}{spc}{min_units}{spc}' if minutes > 0 and days == 0 else ''}" \
-               f"{f'{seconds:2.0f}{spc}{sec_units}' if days == 0 and hours == 0 and minutes == 0 else ''}"
+               f"{f'{secondsRemaining:2.0f}{spc}{sec_units}' if days == 0 and hours == 0 else ''}"
 
     def format_eta(self, total, elapsed):
         if total is None:
