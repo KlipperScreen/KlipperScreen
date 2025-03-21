@@ -152,7 +152,7 @@ class ScreenPanel:
             minutes = 0
 
         # If we've rounded to 24 hours or more than 23h30m round up a day
-        if hours > 23 or (hours >= 23 and minutes >= 30):
+        if hours > 23 or (hours == 23 and minutes >= 30):
             days += 1
             hours = 0
 
