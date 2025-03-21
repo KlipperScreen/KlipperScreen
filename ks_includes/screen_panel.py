@@ -165,7 +165,7 @@ class ScreenPanel:
         return f"{f'{days:2.0f}{spc}{day_units}{spc}' if days > 0 else ''}" \
                f"{f'{hours:2.0f}{spc}{hour_units}{spc}' if hours > 0 else ''}" \
                f"{f'{minutes:2.0f}{spc}{min_units}{spc}' if minutes > 0 and days == 0 else ''}" \
-               f"{f'{secondsRemaining:2.0f}{spc}{sec_units}' if days == 0 and hours == 0 else ''}"
+               f"{f'{secondsRemaining:2.0f}{spc}{sec_units}' if days == 0 and hours == 0 and secondsRemaining > 0 else ''}"
 
     def format_eta(self, total, elapsed):
         if total is None:
