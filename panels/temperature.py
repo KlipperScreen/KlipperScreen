@@ -32,6 +32,7 @@ class Panel(ScreenPanel):
         self.grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         self._gtk.reset_temp_color()
         self.extra_selection = None
+        self.numpad_visible = False
 
         if self._screen.vertical_mode:
             self.grid.attach(self.create_left_panel(), 0, 0, 1, 3)
@@ -481,6 +482,8 @@ class Panel(ScreenPanel):
                 _("Unknown Heater") + " " + self.active_heater
             )
         self._printer.set_stat(name, {"target": temp})
+        if self.numpad_visible:
+            self.hide_numpad()
 
     def verify_max_temp(self, temp):
         temp = int(temp)
@@ -577,6 +580,7 @@ class Panel(ScreenPanel):
             self.grid.remove_column(1)
             self.grid.attach(self.create_right_panel(), 1, 0, 1, 1)
         self.grid.show_all()
+        self.numpad_visible = False
 
     def popover_closed(self, widget):
         self.popover_device = None
@@ -646,7 +650,7 @@ class Panel(ScreenPanel):
             self.grid.remove_column(1)
             self.grid.attach(self.labels["keypad"], 1, 0, 1, 1)
         self.grid.show_all()
-
+        self.numpad_visible = True
         self.popover.popdown()
 
     def update_graph(self):

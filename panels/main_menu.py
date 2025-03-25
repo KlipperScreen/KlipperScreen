@@ -194,6 +194,8 @@ class Panel(MenuPanel):
             logging.info(f"Unknown heater: {self.active_heater}")
             self._screen.show_popup_message(_("Unknown Heater") + " " + self.active_heater)
         self._printer.set_stat(name, {"target": temp})
+        if self.numpad_visible:
+            self.hide_numpad()
 
     def verify_max_temp(self, temp):
         temp = int(temp)
