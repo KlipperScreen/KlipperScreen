@@ -15,7 +15,7 @@ import os
 import pathlib
 import requests
 
-FRONTEND_URL = "https://queue.andrewviola.com"
+FRONTEND_URL = "https://queue.vtcro.org"
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
@@ -103,7 +103,7 @@ class Panel(ScreenPanel):
 
 
     def button1_clicked(self, button):
-        self._screen.show_panel("move")
+        self._screen._send_action(button, "printer.gcode.script", {"script": "START_QUEUE"})
 
     def button2_clicked(self, button):
         self._screen.show_panel("gcodes")
