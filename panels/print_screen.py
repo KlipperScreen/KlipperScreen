@@ -65,9 +65,9 @@ class Panel(ScreenPanel):
             self.status = False
 
         buttonList = []
-        if self.status:
-            button1 = self.create_rounded_button(None, "Queue Start", self.button1_clicked)
-            buttonList.append(button1)
+        # if self.status:
+        button1 = self.create_rounded_button(None, "Queue Start", self.button1_clicked)
+        buttonList.append(button1)
         button2 = self.create_rounded_button(None, "Manual Print", self.button2_clicked)
         button3 = self.create_rounded_button(None, "Back", self.button3_clicked)
         buttonList.append(button2)
