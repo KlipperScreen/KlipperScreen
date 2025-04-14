@@ -151,6 +151,7 @@ class KlipperScreen(Gtk.Window):
         self.base_css = ""
         self.load_base_styles()
         self.set_icon_from_file(os.path.join(klipperscreendir, "styles", "icon.svg"))
+        self.lock_screen = LockScreen(self)
         self.base_panel = BasePanel(self)
         self.change_theme(self.theme)
         self.overlay = Gtk.Overlay()
@@ -174,7 +175,6 @@ class KlipperScreen(Gtk.Window):
         self.use_dpms = self._config.get_main_config().getboolean("use_dpms", fallback=True)
         self.use_dpms &= functions.dpms_loaded
         self.set_dpms(self.use_dpms)
-        self.lock_screen = LockScreen(self)
         self.log_notification("KlipperScreen Started", 1)
         self.initial_connection()
 
