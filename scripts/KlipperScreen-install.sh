@@ -292,20 +292,17 @@ install_network_manager()
 {
     if [ -z "$NETWORK" ]; then
         echo "Press enter for default (Yes)"
-        read -r -e -p "Install NetworkManager for the network panel [Y/n] " NETWORK
+        read -r -e -p "Install NetworkManager for the network panel [Y/n]" NETWORK
     fi
-
-    # Normalize to lowercase
-    NETWORK=$(echo "$NETWORK" | tr '[:upper:]' '[:lower:]')
-
-    if [[ "$NETWORK" == "n" || "$NETWORK" == "no" ]]; then
+    
+    if [[ $NETWORK =~ ^[nN]$ ]]; then
         echo_error "Not installing NetworkManager for the network panel"
     else
         echo_ok "Installing NetworkManager for the network panel"
         echo_text ""
         echo_text "If you were not using NetworkManager"
         echo_text "You will need to reconnect to the network using KlipperScreen or nmtui or nmcli"
-        sudo apt install -y network-manager
+        sudo apt install network-manager
         sudo mkdir -p /etc/NetworkManager/conf.d
         sudo tee /etc/NetworkManager/conf.d/any-user.conf > /dev/null << EOF
 [main]
