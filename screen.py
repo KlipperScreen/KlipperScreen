@@ -70,10 +70,10 @@ class KlipperScreen(Gtk.Window):
     _ws = None
     reinit_count = 0
     max_retries = 4
-    initialized = False
-    initializing = False
+    initialized = initializing = False
     popup_timeout = None
     wayland = False
+    windowed = False
     notification_log = []
     prompt = None
     tempstore_timeout = None
@@ -134,6 +134,7 @@ class KlipperScreen(Gtk.Window):
             if mon_n > 0:
                 logging.error("Monitor selection is only supported for fullscreen")
             self.set_resizable(True)
+            self.windowed = True
         else:
             self.width = monitor.get_geometry().width
             self.height = monitor.get_geometry().height
