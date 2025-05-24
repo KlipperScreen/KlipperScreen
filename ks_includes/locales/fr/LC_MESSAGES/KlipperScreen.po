@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-26 12:31-0300\n"
-"PO-Revision-Date: 2024-08-29 20:09+0000\n"
-"Last-Translator: Nackophilz <zrv4flra@anonaddy.me>\n"
+"PO-Revision-Date: 2025-05-24 19:01+0000\n"
+"Last-Translator: Jean-Yves Leduc <leduc.jy@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/fr/>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.7.1-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -39,7 +39,7 @@ msgid "Abort"
 msgstr "Annuler"
 
 msgid "Acceleration:"
-msgstr "Accélération:"
+msgstr "Accélération :"
 
 msgid "Accept"
 msgstr "Accepter"
@@ -55,23 +55,23 @@ msgstr "Appliquer"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr "Appliquer une compensation de %s%.3f au Endstop ?"
+msgstr "Appliquer une compensation de %s%.3f à la fin de course ?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr "Appliquer une compensation de %s%.3f au Z-Offset du palpeur ?"
+msgstr "Appliquer une compensation de %s%.3f au palpeur ?"
 
 msgid "Archived"
 msgstr "Archivé"
 
 msgid "Are you sure do you want to exclude the object?"
-msgstr "Êtes-vous sûr de vouloir exclure l’objet ?"
+msgstr "Êtes-vous sûr de vouloir exclure l’objet ?"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr "Êtes-vous sûr de vouloir exécuter l'arrêt d'urgence ?"
+msgstr "Êtes-vous sûr de vouloir lancer un arrêt d'urgence ?"
 
 msgid "Are you sure you wish to cancel this print?"
-msgstr "Êtes-vous sûr de vouloir annuler cette impression ?"
+msgstr "Êtes-vous sûr de vouloir annuler cette impression ?"
 
 msgid "Are you sure you wish to disable motors?"
 msgstr "Voulez-vous vraiment désactiver les moteurs ?"
@@ -92,7 +92,7 @@ msgid "Auto-calibrate"
 msgstr "Calibration Automatique"
 
 msgid "Auto-close notifications"
-msgstr "Fermeture automatique des notifications"
+msgstr "Fermer automatiquement les notifications"
 
 msgid "Auto-open Extrude On Pause"
 msgstr "Ouvrir le menu Extrusion lors d’une pause"
@@ -122,7 +122,7 @@ msgid "Camera"
 msgstr "Caméra"
 
 msgid "Can't set above the maximum:"
-msgstr "Impossible de définir au-dessus du maximum :"
+msgstr "Impossible de définir une valeur au-dessus du maximum :"
 
 msgid "Cancel"
 msgstr "Annuler"
@@ -131,13 +131,13 @@ msgid "Cancel Print"
 msgstr "Annuler l'impression"
 
 msgid "Cancelled"
-msgstr "Annulée"
+msgstr "Annulé"
 
 msgid "Cancelling"
 msgstr "Annulation"
 
 msgid "Cannot connect to Moonraker"
-msgstr "Impossible de se connecter à Moonraker"
+msgstr "Ne peut pas se connecter à Moonraker"
 
 msgid "Changes how the interface looks"
 msgstr "Modifie l'aspect de l'interface"
@@ -149,7 +149,7 @@ msgid "Channel"
 msgstr "Canal"
 
 msgid "Check ADXL Wiring"
-msgstr "Vérifier le câblage ADXL"
+msgstr "Vérifier le câblage de l'ADXL"
 
 msgid "Checking for updates, please wait..."
 msgstr "Recherche de mises à jour, veuillez patienter..."
@@ -216,7 +216,7 @@ msgid "Disable Motors"
 msgstr "Désactiver les moteurs"
 
 msgid "Disable for 12hs with am / pm"
-msgstr "Désactivation pour 12hs avec am / pm"
+msgstr "Désactivation pour 12h avec am / pm"
 
 msgid "Disconnect"
 msgstr "Déconnecter"
@@ -233,7 +233,7 @@ msgid "Do you want to recover %s?"
 msgstr "Voulez-vous récupérer %s ?"
 
 msgid "Elapsed:"
-msgstr "Écoulé:"
+msgstr "Écoulé :"
 
 msgid "Emergency Stop"
 msgstr "Arrêt d'urgence"
@@ -245,19 +245,19 @@ msgid "Error"
 msgstr "Erreur"
 
 msgid "Error clearing active spool"
-msgstr "Erreur lors de l'effacement de la bobine active"
+msgstr "Erreur d'effacement de la bobine active"
 
 msgid "Error getting active spool"
-msgstr "Erreur dans l'obtention de la bobine active"
+msgstr "Erreur d'obtention de la bobine active"
 
 msgid "Error setting active spool"
-msgstr "Erreur dans le réglage de la bobine active"
+msgstr "Erreur de réglage de la bobine active"
 
 msgid "Error trying to fetch spools"
-msgstr "Erreur lors de la récupération des spools"
+msgstr "Erreur de récupération des bobines"
 
 msgid "Error: Couldn't get a position to probe"
-msgstr "Erreur : Impossible d'obtenir une position pour la sonde"
+msgstr "Erreur : Impossible d'obtenir une position à évaluer"
 
 msgid "Estimated Time"
 msgstr "Temps estimé"
@@ -269,16 +269,16 @@ msgid "Example"
 msgstr "Exemple"
 
 msgid "Exclude Object"
-msgstr "Exclure Objet"
+msgstr "Exclure un objet"
 
 msgid "Extra Large"
-msgstr "Extra Grande"
+msgstr "Extra Large"
 
 msgid "Extrude"
 msgstr "Extrusion"
 
 msgid "Extruders"
-msgstr "Extrudeuse"
+msgstr "Extrudeurs"
 
 msgid "Extrusion +"
 msgstr "Extrusion +"
@@ -287,7 +287,7 @@ msgid "Extrusion -"
 msgstr "Extrusion -"
 
 msgid "Failed to delete connection"
-msgstr "Échec de la suppression de la connexion"
+msgstr "Échec de suppression de la connexion"
 
 msgid "Failed to initialize"
 msgstr "Échec de l'initialisation"
@@ -305,19 +305,19 @@ msgid "Filament Used"
 msgstr "Filament utilisé"
 
 msgid "Filament total:"
-msgstr "Total filament:"
+msgstr "Total filament :"
 
 msgid "Filament used:"
-msgstr "Filament utilisé:"
+msgstr "Filament utilisé :"
 
 msgid "Filament:"
-msgstr "Filament:"
+msgstr "Filament :"
 
 msgid "File"
 msgstr "Fichier"
 
 msgid "File:"
-msgstr "Fichier:"
+msgstr "Fichier :"
 
 msgid "Filter"
 msgstr "Filtre"
@@ -332,37 +332,38 @@ msgid "Finish"
 msgstr "Terminer"
 
 msgid "Firmware Restart"
-msgstr "Redémarrer Firmware"
+msgstr "Redémarrage du Firmware"
 
 msgid "Flow:"
-msgstr "Débit :"
+msgstr "Débit :"
 
 msgid "Flowrate:"
-msgstr "Débit:"
+msgstr "Débit :"
 
 msgid "Font Size"
 msgstr "Taille de la police"
 
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr ""
+"Pour le contrôle de la souris ou vérifier la précision de l'écran tactile"
 
 msgid "Forget"
 msgstr "Oublier"
 
 msgid "Full Update"
-msgstr "Mettre à jour"
+msgstr "Tout mettre à jour"
 
 msgid "Gcodes"
 msgstr "Gcodes"
 
 msgid "Getting IP address"
-msgstr "Récupérer l'adresse IP"
+msgstr "Récupération de l'adresse IP"
 
 msgid "Go Back"
 msgstr "Retour"
 
 msgid "Height:"
-msgstr "Hauteur:"
+msgstr "Hauteur :"
 
 msgid "Hide"
 msgstr "Masquer"
@@ -398,34 +399,34 @@ msgid "ID"
 msgstr "ID"
 
 msgid "Icon Theme"
-msgstr "Thème"
+msgstr "Thème d'icônes"
 
 msgid "Initializing printer..."
 msgstr "Démarrage de l'imprimante..."
 
 msgid "Initiate a PID calibration for:"
-msgstr "Lancer un étalonnage PID pour :"
+msgstr "Lancer un étalonnage PID pour :"
 
 msgid "Input Shaper"
 msgstr "Input Shaper"
 
 msgid "Insufficient privileges"
-msgstr "Privilèges insuffisant"
+msgstr "Privilèges insuffisants"
 
 msgid "Interface"
 msgstr "Interface"
 
 msgid "Invalid"
-msgstr "Invalide"
+msgstr "Incorrect"
 
 msgid "Invalid password"
-msgstr "Mot de passe invalide"
+msgstr "Mot de passe incorrect"
 
 msgid "Invalid temperature"
-msgstr ""
+msgstr "Température incorrecte"
 
 msgid "Inversely affects the icon size"
-msgstr "Inverse de la taille de l'icône"
+msgstr "Affecte la taille de l'icône"
 
 msgid "Invert X"
 msgstr "Inverser l'axe X"
@@ -444,7 +445,7 @@ msgid "It's possible that the configuration is not correct"
 msgstr "Il est possible que la configuration ne soit pas correcte"
 
 msgid "Job Status"
-msgstr "Statut du job"
+msgstr "Statut du travail en cours"
 
 msgid "Klipper Restart"
 msgstr "Redémarrer Klipper"
@@ -486,13 +487,13 @@ msgid "Layer Height"
 msgstr "Hauteur de couche"
 
 msgid "Layer:"
-msgstr "Couche:"
+msgstr "Couche :"
 
 msgid "Leds"
 msgstr "Leds"
 
 msgid "Left:"
-msgstr "Restant:"
+msgstr "Restant :"
 
 msgid "Limits"
 msgstr "Limites"
@@ -504,7 +505,7 @@ msgid "Loading..."
 msgstr "Chargement..."
 
 msgid "Lock"
-msgstr ""
+msgstr "Verrouiller"
 
 msgid "Lost Connection to Moonraker"
 msgstr "Perte de connexion avec Moonraker"
@@ -534,7 +535,7 @@ msgid "Max Velocity"
 msgstr "Vélocité maximale"
 
 msgid "Max:"
-msgstr "Max:"
+msgstr "Max :"
 
 msgid "Maximum"
 msgstr "Maximum"
@@ -543,10 +544,10 @@ msgid "Measure Both"
 msgstr "Mesurer les deux"
 
 msgid "Measure X"
-msgstr "Mesure X"
+msgstr "Mesurer X"
 
 msgid "Measure Y"
-msgstr "Mesure Y"
+msgstr "Mesurer Y"
 
 msgid "Medium"
 msgstr "Moyenne"
@@ -561,22 +562,22 @@ msgid "Minimum Cruise Ratio"
 msgstr "Ratio de croisière minimum"
 
 msgid "Minimum:"
-msgstr "Minimum:"
+msgstr "Minimum :"
 
 msgid "Modified"
 msgstr "Modifié"
 
 msgid "Moonraker: connected"
-msgstr "Moonraker: connecté"
+msgstr "Moonraker : connecté"
 
 msgid "More"
 msgstr "Plus"
 
 msgid "Move"
-msgstr "Mouvement"
+msgstr "Déplacer"
 
 msgid "Move Distance (mm)"
-msgstr "Distance de mouvement (mm)"
+msgstr "Distance de déplacement (mm)"
 
 msgid "Name"
 msgstr "Nom"
@@ -600,7 +601,7 @@ msgid "New"
 msgstr "Nouveau"
 
 msgid "No elegible macros:"
-msgstr "Macros non éligibles :"
+msgstr "Macros non éligibles :"
 
 msgid "No info available"
 msgstr "Pas d'information disponible"
@@ -612,7 +613,7 @@ msgid "No wireless interface has been found"
 msgstr "Pas de périphérique sans-fil trouvé"
 
 msgid "Not all screens support this"
-msgstr "Tout les écrans ne supporte pas cela"
+msgstr "Tout les écrans ne le supporte pas"
 
 msgid "Not working or not configured"
 msgstr "Ne fonctionne pas ou n'est pas configuré"
@@ -645,7 +646,7 @@ msgid "Part Fan"
 msgstr "Ventilateurs de refroidissement"
 
 msgid "Password"
-msgstr ""
+msgstr "Mot de passe"
 
 msgid "Password saved"
 msgstr "Mot de passe enregistré"
@@ -657,7 +658,7 @@ msgid "Paused"
 msgstr "En pause"
 
 msgid "Perform a full upgrade?"
-msgstr "Effectuer une mise à jour complète?"
+msgstr "Effectuer une mise à jour complète ?"
 
 msgid "Pins"
 msgstr "Pins"
@@ -678,7 +679,7 @@ msgid "Pressure Advance"
 msgstr "Avance de pression"
 
 msgid "Pressure Advance:"
-msgstr "Avance de pression:"
+msgstr "Avance de pression :"
 
 msgid "Pressure advance"
 msgstr "Avance de pression"
@@ -815,7 +816,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "Boutons d'affichage des barres de défilement"
 
 msgid "Show cursor"
-msgstr ""
+msgstr "Afficher le curseur"
 
 msgid "Show only devices that are able to be set"
 msgstr "Afficher uniquement les appareils pouvant être configurés"
@@ -888,7 +889,7 @@ msgid "Temperature"
 msgstr "Température"
 
 msgid "Temperature too low to extrude"
-msgstr ""
+msgstr "Température d'extrusion trop basse"
 
 msgid "The system doesn't meet the minimum requirement"
 msgstr "Le système ne répond pas aux exigences minimales"
@@ -919,10 +920,10 @@ msgid "Unload"
 msgstr "Décharger"
 
 msgid "Unlock"
-msgstr ""
+msgstr "Déverouiller"
 
 msgid "Unlock failed"
-msgstr ""
+msgstr "Échec du déverrouillage"
 
 msgid "Unretract Extra Length"
 msgstr "Longueur supplémentaire non rétractée"
@@ -943,7 +944,7 @@ msgid "Useful for un-responsive touchscreens"
 msgstr "Utile pour les écrans tactiles peu réactifs"
 
 msgid "User"
-msgstr ""
+msgstr "Utilisateur"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC n'est pas pris en charge par le backend essai du Stream"
