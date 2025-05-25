@@ -70,7 +70,8 @@ class KlipperScreen(Gtk.Window):
     _ws = None
     reinit_count = 0
     max_retries = 4
-    initialized = initializing = False
+    initialized = False
+    initializing = False
     popup_timeout = None
     wayland = False
     windowed = False
