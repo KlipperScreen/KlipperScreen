@@ -525,7 +525,7 @@ class Panel(ScreenPanel):
         lbl = Gtk.Label(label=_("Rename/Move:"), halign=Gtk.Align.START, hexpand=False)
         self.labels['new_name'] = Gtk.Entry(text=fullpath, hexpand=True)
         self.labels['new_name'].connect("activate", self.rename)
-        self.labels['new_name'].connect("focus-in-event", self._screen.show_keyboard)
+        self.labels['new_name'].connect("touch-event", self._screen.show_keyboard)
 
         save = self._gtk.Button("complete", _("Save"), "color3")
         save.set_hexpand(False)
