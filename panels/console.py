@@ -43,6 +43,7 @@ class Panel(ScreenPanel):
         tv = Gtk.TextView(buffer=tb, editable=False, cursor_visible=False)
         tv.connect("size-allocate", self._autoscroll)
         tv.connect("touch-event", self._screen.remove_keyboard)
+        tv.connect("button-press-event", self._screen.remove_keyboard)
 
         sw.add(tv)
 
@@ -51,6 +52,7 @@ class Panel(ScreenPanel):
         entry = Gtk.Entry(hexpand=True, vexpand=False)
         entry.connect("button-press-event", self._screen.show_keyboard)
         entry.connect("touch-event", self._screen.show_keyboard)
+        entry.connect("button-press-event", self._screen.show_keyboard)
         entry.connect("activate", self._send_command)
         entry.grab_focus_without_selecting()
 

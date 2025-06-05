@@ -44,6 +44,7 @@ class LockScreen:
         entry.set_input_purpose(Gtk.InputPurpose.PASSWORD)
         entry.set_visibility(False)
         entry.connect("touch-event", self.screen.show_keyboard, box, self.relock)
+        entry.connect("button-press-event", self.screen.show_keyboard, box, self.relock)
         entry.connect("activate", self.unlock_attempt, entry)
         entry.get_style_context().add_class("lockscreen_entry")
         entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "view-reveal-symbolic")

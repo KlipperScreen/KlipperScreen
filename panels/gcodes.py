@@ -526,6 +526,7 @@ class Panel(ScreenPanel):
         self.labels['new_name'] = Gtk.Entry(text=fullpath, hexpand=True)
         self.labels['new_name'].connect("activate", self.rename)
         self.labels['new_name'].connect("touch-event", self._screen.show_keyboard)
+        self.labels['new_name'].connect("button-press-event", self._screen.show_keyboard)
 
         save = self._gtk.Button("complete", _("Save"), "color3")
         save.set_hexpand(False)
