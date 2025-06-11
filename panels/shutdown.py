@@ -16,6 +16,9 @@ class Panel(ScreenPanel):
         estop = self._gtk.Button("emergency", _("Emergency Stop"), "color2")
         estop.connect("clicked", self.emergency_stop)
 
+        power_devices_toggle = self._gtk.Button("shutdown", _("Toggle Power"), "color2")
+        power_devices_toggle.connect("clicked", self.toggle_power_devices)
+
         poweroff = self._gtk.Button("shutdown", _("Shutdown"), "color1")
         poweroff.connect("clicked", self.reboot_poweroff, "shutdown")
 
@@ -29,8 +32,22 @@ class Panel(ScreenPanel):
         lock_screen.connect("clicked", self._screen.lock_screen.lock)
 
         self.main = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
-        if self._printer and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'}:
+
+        show_estop = self._printer and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'}
+        show_power_toggle = False
+        if self.ks_printer_cfg is not None and self._screen._ws.connected:
+            power_devices = self.ks_printer_cfg.get("power_devices", "")
+            if power_devices and self._printer.get_power_devices():
+                show_power_toggle = True
+
+        if show_estop and show_power_toggle:
+            self.main.attach(estop, 0, 0, 1, 1)
+            self.main.attach(power_devices_toggle, 0, 1, 1, 1)
+        elif show_estop:
             self.main.attach(estop, 0, 0, 1, 2)
+        elif show_power_toggle:
+            self.main.attach(power_devices_toggle, 0, 0, 1, 2)
+
         self.main.attach(restart_ks, 1, 0, 1, 1)
         self.main.attach(lock_screen, 2, 0, 1, 1)
         self.main.attach(poweroff, 1, 1, 1, 1)
@@ -89,3 +106,15 @@ class Panel(ScreenPanel):
             if power_devices and self._printer.get_power_devices():
                 logging.info(f"Turning off associated power devices: {power_devices}")
                 self._screen.power_devices(widget=None, devices=power_devices, on=False)
+
+    def toggle_power_devices(self, widget):
+        if self.ks_printer_cfg is not None and self._screen._ws.connected:
+            power_devices = self.ks_printer_cfg.get("power_devices", "")
+            if power_devices and self._printer.get_power_devices():
+                if self._printer.get_power_device_status(power_devices) == "on":
+                    logging.info(f"Turning off associated power devices: {power_devices}")
+                    self._screen.power_devices(widget=None, devices=power_devices, on=False)
+                else:
+                    logging.info(f"Turning on associated power devices: {power_devices}")
+                    self._screen.power_devices(widget=None, devices=power_devices, on=True)
+
