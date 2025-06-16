@@ -1,3 +1,4 @@
+import datetime
 import logging
 
 import gi
@@ -89,6 +90,11 @@ class Panel(ScreenPanel):
         self.current_row += 1
 
     def populate_info(self):
+        self.add_label_to_grid(self.prettify("date"), 0, bold=True)
+        self.labels["date"] = Gtk.Label(label="", xalign=0)
+        self.grid.attach(self.labels["date"], 1, self.current_row - 1, 1, 1)
+        self.add_label_to_grid("", 0)
+
         for category, data in self.sysinfo.items():
             if category == "python":
                 self.add_label_to_grid(self.prettify(category), 0, bold=True)
@@ -141,6 +147,8 @@ class Panel(ScreenPanel):
                             )
                     else:
                         self.add_label_to_grid(f"{self.prettify(key)}: {value}", 1)
+            # Add empty line
+            self.add_label_to_grid("", 0)
 
     def process_update(self, action, data):
         if not self.sysinfo:
@@ -168,3 +176,5 @@ class Panel(ScreenPanel):
                 float(data["system_memory"]["used"])
                 / float(data["system_memory"]["total"])
             )
+            now = datetime.datetime.now().astimezone()
+            self.labels["date"].set_label(now.strftime("%a %b %e %H:%M:%S %Z %Y"))
