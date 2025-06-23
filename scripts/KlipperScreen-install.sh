@@ -232,7 +232,6 @@ polkit.addRule(function(action, subject) {
         subject.user == "$USER") {
         return polkit.Result.YES;
         }
-    }
 });
 EOF
 }
