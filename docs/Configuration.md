@@ -68,6 +68,7 @@ moonraker_port: 7125
 # For the 'Power on' button on the splash screen:
 # Define one or more moonraker power devices that turn on this printer (CSV list)
 # By Default it tries to match the printer name defined in this section header to the moonraker power device name.
+# This devices will be turned OFF when using the shutdown button
 # power_devices: example1, example2
 
 # Define what items should be shown in titlebar besides the extruder and bed

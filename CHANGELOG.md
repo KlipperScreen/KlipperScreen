@@ -8,6 +8,7 @@ Probably all versions contain changes regarding documentation, translation, fixe
 * add fine-tune panel on the main/more menu
 * add comment field if available in Spoolman
 * save dialog asks to save z probe/endstop if it was modified
+* power_devices defined in the config will turn off when using the shutdown button
 
 ## v0.4.5  (Oct 28, 2024)
 
