@@ -16,5 +16,5 @@ sdbus_networkmanager>=2.0.0;python_version>="3.8"
 pycairo>=1.27.0;python_version>"3.8"
 websocket-client>=1.8.0;python_version>"3.8"
 psutil>=6.0.0;python_version>"3.6"
-# PyGObject 3.51+ requires girepository 2.0 not available in (bookworm python 3.11)
-PyGObject<3.51; python_version >= "3.8"
+# PyGObject 3.51+ requires girepository 2.0 not available in bookworm (python 3.11)
+PyGObject<3.51;python_version>"3.8"
