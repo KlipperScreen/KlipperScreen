@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-26 12:31-0300\n"
-"PO-Revision-Date: 2024-07-03 13:59+0000\n"
-"Last-Translator: srbjessen <srbjessen@gmail.com>\n"
+"PO-Revision-Date: 2025-07-09 06:02+0000\n"
+"Last-Translator: Simon B <simon.buro@hotmail.com>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/da/>\n"
 "Language: da\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -31,7 +31,7 @@ msgid "ADXL Not Configured"
 msgstr "ADXL ikke konfigureret"
 
 msgid "Abort"
-msgstr "Annuller"
+msgstr "Afbryd"
 
 msgid "Acceleration:"
 msgstr "Acceleration:"
@@ -43,14 +43,14 @@ msgid "Add profile"
 msgstr "Tilføj profil"
 
 msgid "All"
-msgstr "Alle"
+msgstr "Vis alt"
 
 msgid "Apply"
 msgstr "Anvend"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr "Tilføj %s%.3f offset til endestoppet?"
+msgstr "Tilføj %s%.3f offset til endestop?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
@@ -339,7 +339,7 @@ msgid "Font Size"
 msgstr "Skriftstørrelse"
 
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "Til brug af mus eller for at kontrollere nøjagtigheden af touchskærmen"
 
 msgid "Forget"
 msgstr "Glem"
@@ -417,7 +417,7 @@ msgid "Invalid password"
 msgstr "Ugyldigt kodeord"
 
 msgid "Invalid temperature"
-msgstr ""
+msgstr "Ugyldig temperatur"
 
 msgid "Inversely affects the icon size"
 msgstr "Omvendt påvirker ikonstørrelsen"
@@ -498,7 +498,7 @@ msgid "Loading..."
 msgstr "Indlæser..."
 
 msgid "Lock"
-msgstr ""
+msgstr "Lås"
 
 msgid "Lost Connection to Moonraker"
 msgstr "Tabte forbindelse til Moonraker"
@@ -639,7 +639,7 @@ msgid "Part Fan"
 msgstr "Print blæser"
 
 msgid "Password"
-msgstr ""
+msgstr "Kodeord"
 
 msgid "Password saved"
 msgstr "Adgangskode gemt"
@@ -808,7 +808,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "Vis knapper på rullelinjen"
 
 msgid "Show cursor"
-msgstr ""
+msgstr "Vis musemarkør"
 
 msgid "Show only devices that are able to be set"
 msgstr "Vis kun enheder, der er i stand til at blive ændret"
@@ -880,7 +880,7 @@ msgid "Temperature"
 msgstr "Temperatur"
 
 msgid "Temperature too low to extrude"
-msgstr ""
+msgstr "Temperaturen er for lav til at ekstrudere"
 
 msgid "The system doesn't meet the minimum requirement"
 msgstr "Systemet opfylder ikke mindstekrav"
@@ -910,10 +910,10 @@ msgid "Unload"
 msgstr "Tilbagetræk"
 
 msgid "Unlock"
-msgstr ""
+msgstr "Lås op"
 
 msgid "Unlock failed"
-msgstr ""
+msgstr "Kunne ikke låse op"
 
 msgid "Unretract Extra Length"
 msgstr "Un-retract ekstra længde"
@@ -934,7 +934,7 @@ msgid "Useful for un-responsive touchscreens"
 msgstr "Nyttig for frosset berøringsskærme"
 
 msgid "User"
-msgstr ""
+msgstr "Bruger"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC er ikke understøttet i back-end, forsøger at streame istedet"
