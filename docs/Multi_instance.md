@@ -1,6 +1,6 @@
 Multiple instances of KlipperScreen
 
-*Dificulty: Advanced*
+*Difficulty: Advanced*
 
 This article describes different methods of adding remote desktop clients (VNC or Xserver-XSDL) that do not support installing KS directly.
 If your remote device runs GNU/Linux then you should install KlipperScreen directly, instead of the methods described below.
@@ -96,7 +96,7 @@ Test your new service
 sudo systemctl start KlipperScreen_tablet
 ```
 
-Optional: After veryfing it works, make it load when the system starts
+Optional: After verifying it works, make it load when the system starts
 ```sh
 sudo systemctl enable KlipperScreen_tablet
 ```
