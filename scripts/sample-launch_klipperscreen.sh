@@ -9,7 +9,7 @@ export XCLIENT=change_me
 export DISPLAY=change_me
 
 if [ $XCLIENT == "change_me" ]; then
-	echo "launch_klipperscreen.sh for XSDL/XServer Clients has not been cofigured properly. Please edit this file to point to your XServer Client"
+	echo "launch_klipperscreen.sh for XSDL/XServer Clients has not been configured properly. Please edit this file to point to your XServer Client"
 	exit 
 fi
 
@@ -34,12 +34,12 @@ fi
 
 case "$1" in
       start)
-	      echo -n "Starting Klipper Screen Xclient Deamon .... "
+	      echo -n "Starting Klipper Screen Xclient Daemon .... "
 	      setsid "$PYKLIPPERSCREEN" "$PYKLIPPERPARAM" #>/dev/null 2>&1 < /dev/null &
 	      echo "running"
 		;;
 	stop)
-		echo -n "Stopping Klipper Screen Xclient Deamon .... "
+		echo -n "Stopping Klipper Screen Xclient Daemon .... "
 		PID=`ps -ef|grep KlipperScreen-env/bin/python|awk '{print $2}'`
 		kill -9 $PID 
 		echo "stopping"

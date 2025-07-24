@@ -30,7 +30,7 @@ class Panel(ScreenPanel):
             message = (
                 _("Failed to initialize") + "\n"
                 + "This panel needs NetworkManager installed into the system\n"
-                + "And the apropriate permissions, without them it will not function.\n"
+                + "And the appropriate permissions, without them it will not function.\n"
                 + f"\n{e}\n"
             )
             self.error_box.add(

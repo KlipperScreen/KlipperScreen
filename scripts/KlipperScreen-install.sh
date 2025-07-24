@@ -129,7 +129,7 @@ create_virtualenv()
     python3 -m venv "${KSENV}"
 
     if ! . "${KSENV}/bin/activate"; then
-        echo_error "Could not activate the enviroment, try deleting ${KSENV} and retry"
+        echo_error "Could not activate the environment, try deleting ${KSENV} and retry"
         exit 1
     fi
 
