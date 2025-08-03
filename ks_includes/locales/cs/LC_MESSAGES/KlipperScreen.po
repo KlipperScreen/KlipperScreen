@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-26 12:31-0300\n"
-"PO-Revision-Date: 2024-11-27 21:00+0000\n"
-"Last-Translator: Michal Bitala <yzeroy14@gmail.com>\n"
+"PO-Revision-Date: 2025-07-28 13:11+0000\n"
+"Last-Translator: Miloslav Kos <kos.m@post.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/cs/>\n"
 "Language: cs\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -30,7 +30,7 @@ msgid "24 Hour Time"
 msgstr "24 hod formát"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr "FW restart může fixnout chyby."
+msgstr "FW restart může opravit chyby."
 
 msgid "ADXL Not Configured"
 msgstr "ADXL není nastaven"
@@ -65,19 +65,19 @@ msgid "Archived"
 msgstr "Archivováno"
 
 msgid "Are you sure do you want to exclude the object?"
-msgstr "Opravdu chceš vyjmout objekt?"
+msgstr "Opravdu chcete vyloučit objekt?"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr "Opravdu okamžitě zastavit?"
+msgstr "Opravdu okamžitě nouzově zastavit?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Opravdu chcete zrušit tisk?"
 
 msgid "Are you sure you wish to disable motors?"
-msgstr "Opravdu chcete uvolnit motory?"
+msgstr "Opravdu chcete vypnout motory?"
 
 msgid "Are you sure you wish to reboot the system?"
-msgstr "Opravdu chcete rebootovat systém?"
+msgstr "Opravdu chcete restartovat systém?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Opravdu chcete vypnout systém?"
@@ -107,7 +107,7 @@ msgid "Bed Mesh"
 msgstr "Mapa podložky"
 
 msgid "Both"
-msgstr "Obě"
+msgstr "Oba"
 
 msgid "Calibrate"
 msgstr "Kalibrace"
@@ -122,7 +122,7 @@ msgid "Camera"
 msgstr "Kamera"
 
 msgid "Can't set above the maximum:"
-msgstr "Nemohu nastavit víc než max:"
+msgstr "Nemůže být nastaveno více než max:"
 
 msgid "Cancel"
 msgstr "Zrušit"
@@ -137,7 +137,7 @@ msgid "Cancelling"
 msgstr "Ruším"
 
 msgid "Cannot connect to Moonraker"
-msgstr "Nelze se připojit k Moonraker"
+msgstr "Nelze se připojit k Moonrakeru"
 
 msgid "Changes how the interface looks"
 msgstr "Změna vzhledu rozhraní"
@@ -152,10 +152,10 @@ msgid "Check ADXL Wiring"
 msgstr "Zkontroluj zapojení ADXL"
 
 msgid "Checking for updates, please wait..."
-msgstr "Kontrola aktualizací, čekej ..."
+msgstr "Kontrola aktualizací, prosím počkejte..."
 
 msgid "Clear"
-msgstr "Vymaž"
+msgstr "Vymazat"
 
 msgid "Close"
 msgstr "Zavřít"
@@ -173,7 +173,7 @@ msgid "Connected"
 msgstr "Připojeno"
 
 msgid "Connecting"
-msgstr "Připojení"
+msgstr "Připojování"
 
 #, python-format
 msgid "Connecting to %s"
@@ -183,7 +183,7 @@ msgid "Connection failed"
 msgstr "Připojení se nezdařilo"
 
 msgid "Console"
-msgstr "Konsole"
+msgstr "Konzole"
 
 msgid "Cooldown"
 msgstr "Zchladit"
@@ -213,13 +213,13 @@ msgid "Delete File?"
 msgstr "Smazat soubor?"
 
 msgid "Disable Motors"
-msgstr "Uvolnit motory"
+msgstr "Vypnout motory"
 
 msgid "Disable for 12hs with am / pm"
 msgstr "Vypnout na 12 hodin am / pm"
 
 msgid "Disconnect"
-msgstr "Odpojení"
+msgstr "Odpojit"
 
 msgid "Distance (mm)"
 msgstr "Vzdálenost (mm)"
@@ -275,10 +275,10 @@ msgid "Extra Large"
 msgstr "Extra velký"
 
 msgid "Extrude"
-msgstr "Extruze"
+msgstr "Extrudovat"
 
 msgid "Extruders"
-msgstr "Extrudéry"
+msgstr "Extrudery"
 
 msgid "Extrusion +"
 msgstr "Extruze +"
@@ -293,16 +293,16 @@ msgid "Failed to initialize"
 msgstr "Inicializace se nezdařila"
 
 msgid "Failed, adjust position first"
-msgstr "Chyba, nastav nejprve pozici"
+msgstr "Chyba, nastavte nejprve pozici"
 
 msgid "Fan"
-msgstr "Větrák"
+msgstr "Ventilátor"
 
 msgid "Filament"
 msgstr "Filament"
 
 msgid "Filament Used"
-msgstr "Typ filamentu"
+msgstr "Spotřebovaný filament"
 
 msgid "Filament total:"
 msgstr "Filament celkem:"
@@ -326,7 +326,7 @@ msgid "Finding ADXL"
 msgstr "Hledání ADXL"
 
 msgid "Fine Tuning"
-msgstr "Ladění"
+msgstr "Jemné ladění"
 
 msgid "Finish"
 msgstr "Konec"
@@ -338,22 +338,22 @@ msgid "Flow:"
 msgstr "Tok:"
 
 msgid "Flowrate:"
-msgstr "Rychlost toku:"
+msgstr "Průtok:"
 
 msgid "Font Size"
 msgstr "Velikost fontu"
 
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr "ro ovládání myší nebo ověření přesnosti dotykového displeje"
+msgstr "Pro ovládání myší nebo ověření přesnosti dotykového displeje"
 
 msgid "Forget"
 msgstr "Zapomenout"
 
 msgid "Full Update"
-msgstr "Úplný update"
+msgstr "Kompletní aktualizace"
 
 msgid "Gcodes"
-msgstr "Gkódy"
+msgstr "G-kódy"
 
 msgid "Getting IP address"
 msgstr "Získání IP adresy"
@@ -398,10 +398,10 @@ msgid "ID"
 msgstr "ID"
 
 msgid "Icon Theme"
-msgstr "Sada ikon"
+msgstr "Motiv ikon"
 
 msgid "Initializing printer..."
-msgstr "Startuji tiskárnu ..."
+msgstr "Startování tiskárny..."
 
 msgid "Initiate a PID calibration for:"
 msgstr "Spustit PID kalibraci:"
@@ -446,7 +446,7 @@ msgid "Job Status"
 msgstr "Stav úlohy"
 
 msgid "Klipper Restart"
-msgstr "Klipper Restart"
+msgstr "Restart Klipperu"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper odpojen"
@@ -478,7 +478,7 @@ msgid "Last Duration"
 msgstr "Poslední doba trvání"
 
 msgid "Last Used"
-msgstr "Munulý"
+msgstr "Naposledy použitý"
 
 msgid "Layer Height"
 msgstr "Výška vrstvy"
@@ -487,7 +487,7 @@ msgid "Layer:"
 msgstr "Vrstva:"
 
 msgid "Leds"
-msgstr "Ledky"
+msgstr "LEDky"
 
 msgid "Left:"
 msgstr "Zbývá:"
@@ -505,7 +505,7 @@ msgid "Lock"
 msgstr "Uzamknout"
 
 msgid "Lost Connection to Moonraker"
-msgstr "Ztracené spojení s Moonrakerem"
+msgstr "Ztraceno spojení s Moonrakerem"
 
 msgid "Lower Nozzle"
 msgstr "Trysku níž"
@@ -538,7 +538,7 @@ msgid "Maximum"
 msgstr "Maximum"
 
 msgid "Measure Both"
-msgstr "Změřit oboje"
+msgstr "Změřit obojí"
 
 msgid "Measure X"
 msgstr "Změřit X"
@@ -586,7 +586,7 @@ msgid "Network connected"
 msgstr "Připojeno k síti"
 
 msgid "Network disconnected"
-msgstr "Síť odpojena"
+msgstr "Odpojeno od sítě"
 
 msgid "Network not found"
 msgstr "Síť nebyla nalezena"
@@ -641,7 +641,7 @@ msgstr[1] "Balíčky budou aktualizovány"
 msgstr[2] "Balíčky budou aktualizovány"
 
 msgid "Part Fan"
-msgstr "Částečný ofuk"
+msgstr "Ventilátor chlazení modelu"
 
 msgid "Password"
 msgstr "Heslo"
@@ -650,7 +650,7 @@ msgid "Password saved"
 msgstr "Heslo uloženo"
 
 msgid "Pause"
-msgstr "Pauza"
+msgstr "Pozastavit"
 
 msgid "Paused"
 msgstr "Pozastaveno"
@@ -662,7 +662,7 @@ msgid "Pins"
 msgstr "Piny"
 
 msgid "Please recompile and flash the micro-controller."
-msgstr "Znovu přelož a flashni micro-controller."
+msgstr "Znovu zkompilujte a flashněte micro-controller."
 
 msgid "Please wait"
 msgstr "Čekejte prosím"
@@ -671,7 +671,7 @@ msgid "Power"
 msgstr "Zdroj"
 
 msgid "Power On Printer"
-msgstr "Zapni tiskárnu"
+msgstr "Zapněte tiskárnu"
 
 msgid "Pressure Advance"
 msgstr "Pressure Advance"
@@ -692,7 +692,7 @@ msgid "Printer"
 msgstr "Tiskárna"
 
 msgid "Printer Connections"
-msgstr "Připojení"
+msgstr "Připojení tiskárny"
 
 msgid "Printer Select"
 msgstr "Výběr tiskárny"
@@ -713,10 +713,10 @@ msgid "Quad Gantry Level"
 msgstr "QGL"
 
 msgid "Raise Nozzle"
-msgstr "Zvedni trysku"
+msgstr "Zvednout trysku"
 
 msgid "Recover"
-msgstr "Obnovit"
+msgstr "Obnovení"
 
 msgid "Recover Hard"
 msgstr "Tvrdé obnovení"
@@ -728,7 +728,7 @@ msgid "Reference"
 msgstr "Odkaz"
 
 msgid "Refresh"
-msgstr "Obnovit"
+msgstr "Znovu načíst"
 
 msgid "Remove network"
 msgstr "Odebrat síť"
@@ -740,7 +740,7 @@ msgid "Restart"
 msgstr "Restart"
 
 msgid "Resume"
-msgstr "Pokračuj"
+msgstr "Obnovit"
 
 msgid "Retract"
 msgstr "Retrakce"
@@ -755,7 +755,7 @@ msgid "Retraction Speed"
 msgstr "Rychlost retrakce"
 
 msgid "Retry"
-msgstr "Znovu"
+msgstr "Zkusit znovu"
 
 msgid "Retrying"
 msgstr "Zkouším znovu"
@@ -767,7 +767,7 @@ msgid "Save"
 msgstr "Uložit"
 
 msgid "Save Config"
-msgstr "Ulož nastavení"
+msgstr "Uložit nastavení"
 
 msgid "Save Z"
 msgstr "Uložit Z"
@@ -792,25 +792,25 @@ msgid "Screws Adjust"
 msgstr "Nastavit šrouby"
 
 msgid "Screws not used:"
-msgstr "Nepoužívané šrouby:"
+msgstr "Nepoužité šrouby:"
 
 msgid "Send"
 msgstr "Odeslat"
 
 msgid "Set Temp"
-msgstr "Nastav teplotu"
+msgstr "Nastavit teplotu"
 
 msgid "Settings"
 msgstr "Nastavení"
 
 msgid "Show"
-msgstr "Ukaž"
+msgstr "Ukázat"
 
 msgid "Show Heater Power"
-msgstr "Ukaž odběr topení"
+msgstr "Ukázat odběr topení"
 
 msgid "Show Scrollbars Buttons"
-msgstr "Ukaž rolovací tlačítka"
+msgstr "Ukázat rolovací tlačítka"
 
 msgid "Show cursor"
 msgstr "Zobrazit kurzor"
@@ -840,7 +840,7 @@ msgid "Speed (mm/s)"
 msgstr "Rychlost (mm/s)"
 
 msgid "Speed +"
-msgstr "Rychlost ₊"
+msgstr "Rychlost +"
 
 msgid "Speed -"
 msgstr "Rychlost -"
@@ -861,7 +861,7 @@ msgid "Starting recovery for"
 msgstr "Obnovuji"
 
 msgid "Starting update for"
-msgstr "Spuštění aktualizace pro"
+msgstr "Spouštění aktualizace pro"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
 msgstr "Vymění tlačítka, pokud jsou nad sebou, ovlivní ostatní panely"
@@ -873,7 +873,7 @@ msgid "System Restart"
 msgstr "Restart systému"
 
 msgid "System Shutdown"
-msgstr "Vypnutí"
+msgstr "Vypnutí systému"
 
 msgid "System:"
 msgstr "Systém:"
@@ -903,7 +903,7 @@ msgid "Timeout for screen black-out or power-off during printing"
 msgstr "Časový limit pro výpadek obrazovky nebo vypnutí napájení během tisku"
 
 msgid "Total:"
-msgstr "Total:"
+msgstr "Celkem:"
 
 msgid "Unknown Heater"
 msgstr "Neznámé topení"
@@ -912,7 +912,7 @@ msgid "Unknown security type"
 msgstr "Neznámý typ zabezpečení"
 
 msgid "Unload"
-msgstr "Vysuň"
+msgstr "Vysunout"
 
 msgid "Unlock"
 msgstr "Odemknout"
@@ -921,7 +921,7 @@ msgid "Unlock failed"
 msgstr "Odemknutí selhalo"
 
 msgid "Unretract Extra Length"
-msgstr "Vysuň extra délku"
+msgstr "Vysunout extra délku"
 
 msgid "Unretract Speed"
 msgstr "Vysunovací rychlost"
@@ -930,7 +930,7 @@ msgid "Up To Date"
 msgstr "Aktuální"
 
 msgid "Update"
-msgstr "Aktualizuj"
+msgstr "Aktualizovat"
 
 msgid "Updating"
 msgstr "Aktualizuji"
@@ -945,7 +945,7 @@ msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC není podporováno backendem, který se pokouší spustit Stream"
 
 msgid "Working"
-msgstr "Pracovní"
+msgstr "Pracuje"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Rychlost pohybu XY (mm/s)"
@@ -978,7 +978,7 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] "den"
 msgstr[1] "dny"
-msgstr[2] "dny"
+msgstr[2] "dní"
 
 msgid "g"
 msgstr "g"
@@ -1020,7 +1020,7 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] "sekunda"
 msgstr[1] "sekundy"
-msgstr[2] "sekundy"
+msgstr[2] "sekund"
 
 #~ msgid "Hide temp."
 #~ msgstr "Skrýt teplotu"
