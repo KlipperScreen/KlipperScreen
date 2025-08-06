@@ -3,21 +3,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-26 12:31-0300\n"
-"PO-Revision-Date: 2025-08-02 23:37+0200\n"
+"PO-Revision-Date: 2025-08-06 16:01+0000\n"
 "Last-Translator: Pavol Vrba <pvrba2000@gmail.com>\n"
-"Language-Team: \n"
-"Language: sk_SK\n"
+"Language-Team: Slovak <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/sk/>\n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
-"X-Generator: Poedit 3.6\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -170,7 +170,7 @@ msgid "Confirm Emergency Stop"
 msgstr "Potvrdenie núdzového zastavenia"
 
 msgid "Connected"
-msgstr "Sieť pripojená"
+msgstr "Pripojenie"
 
 msgid "Connecting"
 msgstr "Pripájam"
@@ -759,7 +759,7 @@ msgid "Retrying"
 msgstr "Opakovanie"
 
 msgid "Rotation invalid"
-msgstr "Rotation invalid"
+msgstr "Neplatná rotácia"
 
 msgid "Save"
 msgstr "Uložiť"
