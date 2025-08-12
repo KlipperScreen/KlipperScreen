@@ -62,6 +62,7 @@ class KlipperScreen(Gtk.Window):
     connected_printer = None
     files = None
     keyboard = None
+    keyboard_cache = {}
     panels = {}
     popup_message = None
     printers = None
@@ -1234,12 +1235,22 @@ class KlipperScreen(Gtk.Window):
             kbd_grid.set_column_homogeneous(True)
             kbd_width = 2 if purpose == Gtk.InputPurpose.DIGITS else 3
         kbd_grid.attach(Gtk.Box(), 0, 0, 1, 1)
-        kbd = Keyboard(self, close_cb, entry=entry, box=box)
+        kbd = self._get_keyboard(entry.get_input_purpose())
+        kbd.reinit(close_cb=close_cb, entry=entry, box=box)
         kbd_grid.attach(kbd, 1, 0, kbd_width, 1)
         kbd_grid.attach(Gtk.Box(), kbd_width + 1, 0, 1, 1)
-        self.keyboard = {"box": kbd_grid}
+        self.keyboard = {
+            "box": kbd_grid,
+            "kbd": kbd
+        }
         box.pack_end(kbd_grid, False, False, 0)
         box.show_all()
+
+    def _get_keyboard(self, input_purpose):
+        if input_purpose in self.keyboard_cache:
+            return self.keyboard_cache[input_purpose]
+        k = self.keyboard_cache[input_purpose] = Keyboard(self, lambda *args, **kwargs: None, purpose=input_purpose)
+        return k
 
     def _show_matchbox_keyboard(self, kbd_grid):
         env = os.environ.copy()
@@ -1276,6 +1287,8 @@ class KlipperScreen(Gtk.Window):
             box = self.base_panel.content
         if 'process' in self.keyboard:
             os.kill(self.keyboard['process'].pid, SIGTERM)
+        if 'kbd' in self.keyboard:
+            self.keyboard['box'].remove(self.keyboard['kbd'])
         box.remove(self.keyboard['box'])
         self.keyboard = None
         if entry:
