@@ -8,236 +8,238 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-26 12:31-0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-11-15 19:51+0000\n"
+"Last-Translator: Pouriya Zolghadry <merdasss@yahoo.com>\n"
+"Language-Team: Persian <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/fa/>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
-msgstr ""
+msgstr "به ورژن %s به روز رسانی خواهد شد"
 
 msgid "(default)"
-msgstr ""
+msgstr "(پیشفرض)"
 
 msgid "24 Hour Time"
-msgstr ""
+msgstr "بازه زمانی 24 ساعته"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr ""
+msgstr "شاید ریستارت_فریمور مشکل را حل نماید."
 
 msgid "ADXL Not Configured"
-msgstr ""
+msgstr "ADXL تنظیم نشده است"
 
 msgid "Abort"
-msgstr ""
+msgstr "لغو"
 
 msgid "Acceleration:"
-msgstr ""
+msgstr "شتاب:"
 
 msgid "Accept"
-msgstr ""
+msgstr "پذیرش"
 
 msgid "Add profile"
-msgstr ""
+msgstr "اضافه کردن پروفایل"
 
 msgid "All"
-msgstr ""
+msgstr "همگی"
 
 msgid "Apply"
-msgstr ""
+msgstr "اعمال"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr ""
+msgstr "میزان آفست %s%.3f به سوئیچ انتهایی اعمال شود؟"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr ""
+msgstr "میزان آفست %s%.3f به پراب اعمال شود؟"
 
 msgid "Archived"
-msgstr ""
+msgstr "آرشیو شد"
 
 msgid "Are you sure do you want to exclude the object?"
-msgstr ""
+msgstr "مطمئنید میخواهید این شی را مستثنی کنید؟"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr ""
+msgstr "مطمئنید میخواهید توقف اضطراری را فعال نمایید؟"
 
 msgid "Are you sure you wish to cancel this print?"
-msgstr ""
+msgstr "مطمئنید میخواهید فرایند چاپ را لغو نمایید؟"
 
 msgid "Are you sure you wish to disable motors?"
-msgstr ""
+msgstr "آیا مطمئنید میخواهید موتور ها را غیرفعال نمایید؟"
 
 msgid "Are you sure you wish to reboot the system?"
-msgstr ""
+msgstr "آیا مطمئنید میخواهید سیستم را مجددا راه اندازی نمایید؟"
 
 msgid "Are you sure you wish to shutdown the system?"
-msgstr ""
+msgstr "مطمئنید میخواهید سیستم را خاموش نمایید؟"
 
 msgid "Asks for confirmation before stopping"
-msgstr ""
+msgstr "قبل از توقف عملکرد ها تاییده میگیرد"
 
 msgid "Auto"
-msgstr ""
+msgstr "اتوماتیک"
 
 msgid "Auto-calibrate"
-msgstr ""
+msgstr "کالیبراسیون اتوماتیک"
 
 msgid "Auto-close notifications"
-msgstr ""
+msgstr "بستن اتوماتیک اعلانات"
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "باز کردن اتوماتیک اکسترود در هنگام توقف"
 
 msgid "Auto-scroll"
-msgstr ""
+msgstr "چرخش اتوماتیک"
 
 msgid "Bed Level"
-msgstr ""
+msgstr "تراز سازی بستر چاپ"
 
 msgid "Bed Mesh"
-msgstr ""
+msgstr "مش بستر چاپ"
 
 msgid "Both"
-msgstr ""
+msgstr "هر دو"
 
 msgid "Calibrate"
-msgstr ""
+msgstr "کالیبراسیون"
 
 msgid "Calibrated"
-msgstr ""
+msgstr "کالیبره شد"
 
 msgid "Calibrating"
-msgstr ""
+msgstr "در حال کالیبره کردن"
 
 msgid "Camera"
-msgstr ""
+msgstr "دوربین"
 
 msgid "Can't set above the maximum:"
-msgstr ""
+msgstr "نمیتوان بیشتر از حد ماکزیمم تعیین نمود:"
 
 msgid "Cancel"
-msgstr ""
+msgstr "لغو"
 
 msgid "Cancel Print"
-msgstr ""
+msgstr "لغو چاپ"
 
 msgid "Cancelled"
-msgstr ""
+msgstr "لغو شد"
 
 msgid "Cancelling"
-msgstr ""
+msgstr "در حال لغو کردن"
 
 msgid "Cannot connect to Moonraker"
-msgstr ""
+msgstr "اتصال به Moonraker میسر نیست"
 
 msgid "Changes how the interface looks"
-msgstr ""
+msgstr "نحوه نمایش رابط کاربری را تغییر میدهد"
 
 msgid "Changes how the time remaining is calculated"
-msgstr ""
+msgstr "نحوه محاسبه زمان باقی مانده را تغییر میدهد"
 
 msgid "Channel"
-msgstr ""
+msgstr "کانال"
 
 msgid "Check ADXL Wiring"
-msgstr ""
+msgstr "بررسی سیم کشی ADXL"
 
 msgid "Checking for updates, please wait..."
-msgstr ""
+msgstr "در حال بررسی به روزرسانی ها، لطفا صبر کنید..."
 
 msgid "Clear"
-msgstr ""
+msgstr "پاکسازی"
 
 msgid "Close"
-msgstr ""
+msgstr "بستن"
 
 msgid "Close messages after a timeout"
-msgstr ""
+msgstr "بعد از گذر زمان معینی پیام ها را میبندد."
 
 msgid "Complete"
-msgstr ""
+msgstr "کامل شد"
 
 msgid "Confirm Emergency Stop"
-msgstr ""
+msgstr "تایید توقف اضطراری"
 
 msgid "Connected"
-msgstr ""
+msgstr "متصل شد"
 
 msgid "Connecting"
-msgstr ""
+msgstr "در حال اتصال"
 
 #, python-format
 msgid "Connecting to %s"
-msgstr ""
+msgstr "در حال اتصال به %s"
 
 msgid "Connection failed"
-msgstr ""
+msgstr "فرایند اتصال ناموفق بود"
 
 msgid "Console"
-msgstr ""
+msgstr "کنسول"
 
 msgid "Cooldown"
-msgstr ""
+msgstr "خنک شدن"
 
 msgid "Couldn't add network"
-msgstr ""
+msgstr "اضافه کردن شبکه ناموفق بود"
 
 msgid "Current"
-msgstr ""
+msgstr "جریان"
 
 msgid "Current percentage and graph line"
-msgstr ""
+msgstr "درصد کنونی و خط گراف"
 
 msgid "DPMS has failed to load and has been disabled"
-msgstr ""
+msgstr "بارگذاری DPMS ناموفق بوده و فعال سازی آن لغو شد"
 
 msgid "Date"
-msgstr ""
+msgstr "تاریخ"
 
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 msgid "Delete Directory?"
-msgstr ""
+msgstr "پوشه حذف شود؟"
 
 msgid "Delete File?"
-msgstr ""
+msgstr "فایل حذف شود؟"
 
 msgid "Disable Motors"
-msgstr ""
+msgstr "غیر فعال سازی موتورها"
 
 msgid "Disable for 12hs with am / pm"
-msgstr ""
+msgstr "در باز 12 ساعته قبل/بعد از ظهر غیر فعال شود"
 
 msgid "Disconnect"
-msgstr ""
+msgstr "قطع اتصال"
 
 msgid "Distance (mm)"
-msgstr ""
+msgstr "فاصله (mm)"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
+msgstr "میخواهید اتصال %s فراموش و یا قطع شود؟"
 
 #, python-format
 msgid "Do you want to recover %s?"
-msgstr ""
+msgstr "میخواهید %s بازیابی شود؟"
 
 msgid "Elapsed:"
-msgstr ""
+msgstr "زمان گذر شده:"
 
 msgid "Emergency Stop"
-msgstr ""
+msgstr "توقف اضطراری"
 
 msgid "Enable screen power management"
-msgstr ""
+msgstr "فعال سازی کنترل برق صفحه نمایشگر"
 
 msgid "Error"
 msgstr ""
