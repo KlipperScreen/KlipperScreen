@@ -47,7 +47,7 @@ options on brackets are optional
 |-----------------|----------------------------------------------------------------------------------------|
 | M               | Calculate timings using [CVT](https://en.wikipedia.org/wiki/Coordinated_Video_Timings) |
 | R               | CVT reduced blanking (refresh rate must be 60Hz)                                       |
-| -<bpp>          | Bits per pixel, A.K.A. BitDepth usuallly 24                                            |
+| -<bpp>          | Bits per pixel, A.K.A. BitDepth usually 24                                             |
 | @<refresh-rate> | acceptable refresh rates are 50, 60, 70 or 85 Hz only                                  |
 | e               | Force enable                                                                           |
 | D               | Force enable Digital mode                                                              |

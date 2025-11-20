@@ -110,7 +110,8 @@ class Panel(ScreenPanel):
 
         for param in self.macros[macro]["params"]:
             labels.add(Gtk.Label(param))
-            self.macros[macro]["params"][param].connect("focus-in-event", self.show_keyboard)
+            self.macros[macro]["params"][param].connect("touch-event", self.show_keyboard)
+            self.macros[macro]["params"][param].connect("button-press-event", self.show_keyboard)
             self.macros[macro]["params"][param].connect("focus-out-event", self._screen.remove_keyboard)
             labels.add(self.macros[macro]["params"][param])
 

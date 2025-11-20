@@ -411,7 +411,6 @@ class BasePanel(ScreenPanel):
                 self.get_battery_icon(battery.percent, battery.power_plugged)
             )
             self.labels['battery'].set_text(f'{battery.percent:.0f}%')
-            logging.debug(f"Battery: {battery.percent}% Power plugged in: {'Yes' if battery.power_plugged else 'No'}")
             self.control['battery_box'].show()
             return True
         else:

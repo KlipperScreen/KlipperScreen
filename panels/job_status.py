@@ -468,7 +468,7 @@ class Panel(ScreenPanel):
     def new_print(self):
         self._screen.screensaver.close()
         if "virtual_sdcard" in self._printer.data:
-            logging.info("reseting progress")
+            logging.info("resetting progress")
             self._printer.data["virtual_sdcard"]["progress"] = 0
         self.update_progress(0.0)
         self.set_state("printing")

@@ -132,6 +132,13 @@ If you find a way of turning it off, please share it: [Contact](Contact.md)
 
 [Follow this steps](Troubleshooting/Desktop.md)
 
+## Unauthorized
+
+Unauthorized means that you need add the IP of the device that runs KlipperScreen to the moonraker trusted clients
+or the Moonraker api-key to klipperscreen.conf
+
+[Follow this steps](Installation.md#moonraker-configuration)
+
 ## Other issues
 
 If you found an issue not listed here, or can't make it work, please provide all the log files

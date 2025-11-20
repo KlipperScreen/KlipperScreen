@@ -1,6 +1,6 @@
 # Temperature
 
-This panel is available when there is at least one device with a temperature sensor asociated,
+This panel is available when there is at least one device with a temperature sensor associated,
 this includes extruders, heaters, sensors and temperature_fans.
 
 There are 3 main modes of operation:

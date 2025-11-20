@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-26 12:31-0300\n"
-"PO-Revision-Date: 2024-10-10 13:25+0000\n"
-"Last-Translator: Thijs Triemstra <info@collab.nl>\n"
+"PO-Revision-Date: 2025-04-29 16:26+0000\n"
+"Last-Translator: Themechanic1987 <Nigel_andreas@hotmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/nl/>\n"
 "Language: nl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -219,7 +219,7 @@ msgid "Disable for 12hs with am / pm"
 msgstr "Uitschakelen gedurende 12 uur met am / pm"
 
 msgid "Disconnect"
-msgstr ""
+msgstr "Ontkoppelen"
 
 msgid "Distance (mm)"
 msgstr "Afstand (mm)"
@@ -345,6 +345,8 @@ msgstr "Lettertype Grootte"
 
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr ""
+"Voor muisbediening of om de nauwkeurigheid van het aanraakscherm te "
+"verifiëren"
 
 msgid "Forget"
 msgstr "Vergeet"
@@ -425,7 +427,7 @@ msgid "Invalid temperature"
 msgstr "Ongeldige temperatuur"
 
 msgid "Inversely affects the icon size"
-msgstr ""
+msgstr "Beïnvloedt de icoongrootte omgekeerd"
 
 msgid "Invert X"
 msgstr "Invert X"
@@ -443,7 +445,7 @@ msgid "It's possible that the configuration is not correct"
 msgstr "Het is mogelijk dat de configuratie incorrect is"
 
 msgid "Job Status"
-msgstr ""
+msgstr "Opdrachtstatus"
 
 msgid "Klipper Restart"
 msgstr "Klipper Herstarten"
@@ -476,7 +478,7 @@ msgid "Large"
 msgstr "Groot"
 
 msgid "Last Duration"
-msgstr ""
+msgstr "Laatste duur"
 
 msgid "Last Used"
 msgstr "Laatst Gebruikt"
@@ -503,7 +505,7 @@ msgid "Loading..."
 msgstr "Laden..."
 
 msgid "Lock"
-msgstr ""
+msgstr "Vergrendelen"
 
 msgid "Lost Connection to Moonraker"
 msgstr "Verbinding met Moonraker verbroken"
@@ -557,7 +559,7 @@ msgid "Menu"
 msgstr "Menu"
 
 msgid "Minimum Cruise Ratio"
-msgstr ""
+msgstr "Minimale Cruise Ratio"
 
 msgid "Minimum:"
 msgstr "Minimum:"
@@ -626,10 +628,10 @@ msgid "Notifications"
 msgstr "Notificaties"
 
 msgid "Nozzle diameter"
-msgstr ""
+msgstr "Diameter mondstuk"
 
 msgid "Only for the move panel"
-msgstr ""
+msgstr "Enkel voor het bewegingspaneel"
 
 #, python-format
 msgid "Outdated by %d"
@@ -680,7 +682,7 @@ msgid "Pressure Advance:"
 msgstr "Pressure Advance:"
 
 msgid "Pressure advance"
-msgstr ""
+msgstr "Pressure advance"
 
 msgid "Print"
 msgstr "Print"
@@ -792,7 +794,7 @@ msgid "Screws Adjust"
 msgstr "Schroeven Aanpassen"
 
 msgid "Screws not used:"
-msgstr ""
+msgstr "Ongebruikte schroeven:"
 
 msgid "Send"
 msgstr "Verstuur"
@@ -816,7 +818,7 @@ msgid "Show cursor"
 msgstr "Toon cursor"
 
 msgid "Show only devices that are able to be set"
-msgstr ""
+msgstr "Toon enkel apparaten die ingesteld kunnen worden"
 
 msgid "Shutdown"
 msgstr "Afsluiten"
@@ -864,7 +866,7 @@ msgid "Starting update for"
 msgstr "Update starten voor"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr ""
+msgstr "Wissel knoppen als ze over elkaar staan, beïnvloedt andere panelen"
 
 msgid "System"
 msgstr "Systeem"
@@ -888,19 +890,19 @@ msgid "Temperature too low to extrude"
 msgstr "Temperatuur te laag voor extrude"
 
 msgid "The system doesn't meet the minimum requirement"
-msgstr ""
+msgstr "Het systeem voldoet niet aan de minimum vereisten"
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr ""
+msgstr "Dit paneel ondersteunt tot 9 schroeven in een 3x3 raster"
 
 msgid "This will affect screw positions and mesh graph"
-msgstr ""
+msgstr "Dit zal de schroefposities en mesh graph beïnvloeden"
 
 msgid "Timeout for screen black-out or power-off"
-msgstr ""
+msgstr "Timeout voor schermbeveiliging of uitschakelen"
 
 msgid "Timeout for screen black-out or power-off during printing"
-msgstr ""
+msgstr "Timeout voor schermbeveiliging of uitschakelen tijdens printen"
 
 msgid "Total:"
 msgstr "Totaal:"
@@ -915,10 +917,10 @@ msgid "Unload"
 msgstr "Uitladen"
 
 msgid "Unlock"
-msgstr ""
+msgstr "Ontgrendelen"
 
 msgid "Unlock failed"
-msgstr ""
+msgstr "Ontgrendelen mislukt"
 
 msgid "Unretract Extra Length"
 msgstr "Unretract Extra Lengte"
@@ -936,7 +938,7 @@ msgid "Updating"
 msgstr "Bezig met updaten"
 
 msgid "Useful for un-responsive touchscreens"
-msgstr ""
+msgstr "Nuttig voor niet-reagerende aanraakschermen"
 
 msgid "User"
 msgstr "Gebruiker"
@@ -945,7 +947,7 @@ msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC is niet ondersteund door de backend"
 
 msgid "Working"
-msgstr ""
+msgstr "Werkend"
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Move Snelheid (mm/s)"
@@ -979,7 +981,7 @@ msgstr[0] "dag"
 msgstr[1] "dagen"
 
 msgid "g"
-msgstr ""
+msgstr "g"
 
 msgid "hour"
 msgid_plural "hours"
@@ -1010,7 +1012,7 @@ msgid "mm³/s"
 msgstr "mm³/s"
 
 msgid "s"
-msgstr ""
+msgstr "s"
 
 msgid "second"
 msgid_plural "seconds"

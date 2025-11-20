@@ -139,7 +139,7 @@ class ScreenPanel:
         hours = seconds // 3600
         hour_units = ngettext("hour", "hours", hours)
         seconds %= 3600
-        minutes = round(seconds / 60)
+        minutes = seconds // 60
         min_units = ngettext("minute", "minutes", minutes)
         seconds %= 60
         sec_units = ngettext("second", "seconds", seconds)

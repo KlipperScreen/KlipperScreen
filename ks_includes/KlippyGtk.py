@@ -2,6 +2,7 @@
 import logging
 import os
 import pathlib
+from functools import lru_cache
 
 import gi
 
@@ -126,15 +127,21 @@ class KlippyGtk:
     def PixbufFromIcon(self, filename, width=None, height=None):
         width = width if width is not None else self.img_width
         height = height if height is not None else self.img_height
-        filename = os.path.join(self.themedir, filename)
+        return self._PixbufFromIcon(filename, self.themedir, int(width), int(height))
+
+    @staticmethod
+    @lru_cache(maxsize=500)
+    def _PixbufFromIcon(filename, themedir, width, height):
+        filename = os.path.join(themedir, filename)
         for ext in ["svg", "png"]:
             file = f"{filename}.{ext}"
-            pixbuf = self.PixbufFromFile(file, int(width), int(height)) if os.path.exists(file) else None
+            pixbuf = KlippyGtk.PixbufFromFile(file, width, height) if os.path.exists(file) else None
             if pixbuf is not None:
                 return pixbuf
         return None
 
     @staticmethod
+    @lru_cache(maxsize=500)
     def PixbufFromFile(filename, width=-1, height=-1):
         try:
             return GdkPixbuf.Pixbuf.new_from_file_at_size(filename, int(width), int(height))
@@ -211,7 +218,7 @@ class KlippyGtk:
         dialog = Gtk.Dialog(title=title, modal=True, transient_for=self.screen,
                             default_width=self.width, default_height=self.height)
         dialog.set_size_request(self.width, self.height)
-        if not self.screen.get_resizable():
+        if not self.screen.windowed:
             dialog.fullscreen()
 
         if buttons:

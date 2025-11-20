@@ -41,7 +41,7 @@ here are some examples:
         # Valid rotation options are normal,inverted,left,right
 
         Option "PreferredMode" "1920x1080"
-        # May be necesary if you are not getting your prefered resolution.
+        # May be necessary if you are not getting your preferred resolution.
     EndSection
     ```
     Save the file and restart KlipperScreen.

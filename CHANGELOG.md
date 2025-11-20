@@ -2,9 +2,13 @@
 This just tracks the most notable changes, if you want all the details checkout the commit history.
 Probably all versions contain changes regarding documentation, translation, fixes and other minor refactors
 
-## v0.4.5-*
+## v0.4.6  (Jul 2, 2025)
 
 * basic lockscreen for shows or kids
+* add fine-tune panel on the main/more menu
+* add comment field if available in Spoolman
+* save dialog asks to save z probe/endstop if it was modified
+* power_devices defined in the config will turn off when using the shutdown button
 
 ## v0.4.5  (Oct 28, 2024)
 

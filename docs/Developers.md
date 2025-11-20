@@ -1,9 +1,9 @@
 # Developer Guide
 
-Basic setup for an enviroment to do development of KlipperScreen.
+Basic setup for an environment to do development of KlipperScreen.
 
 !!! note "Alfrix Note:"
-    I use a standard Linux distro with a desktop enviroment.
+    I use a standard Linux distro with a desktop environment.
 
 ## Clone the repo
 Clone your fork, for example:

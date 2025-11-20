@@ -1,5 +1,5 @@
 
-How i installed the 3.5" (A) type of screen on RaspberryOS Bookworm (Debian 12)
+How I installed the 3.5" (A) type of screen on RaspberryOS Bookworm (Debian 12)
 
 Update: I've tested Bullseye (Debian 11) and it works, but [rotation was not working](#rotation)
 
@@ -43,7 +43,7 @@ sudo reboot
 
 Some screens will not behave correctly and/or display wrong colors,
 this usually due to the wrong [SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface) speed
-In my case the maximum i could achieve is 22.22Mhz
+In my case the maximum I could achieve is 22.22Mhz
 ```
 dtoverlay=piscreen,drm,speed=22222222
 ```
@@ -62,7 +62,7 @@ dtoverlay=piscreen,drm,speed=22222222
 
     So even if you can enter any number, it will be approximated to a value from that formula
 
-    That's why i used 22.222.222 (400 / 18)
+    That's why I used 22.222.222 (400 / 18)
 
 reboot to test any changes.
 
@@ -104,7 +104,7 @@ fbcon=map:11
 I have tried the type (B) version 2, and it's quite different, this screen has a different initialization sequence,
 probably due to being IPS
 
-so you will need the waveshare35b-v2 dtb of the [waveshare repo](https://github.com/waveshare/LCD-show), to be copied into the apropriate folder
+so you will need the waveshare35b-v2 dtb of the [waveshare repo](https://github.com/waveshare/LCD-show), to be copied into the appropriate folder:
 
 ```
 git clone https://github.com/waveshare/LCD-show
@@ -113,9 +113,9 @@ sudo cp LCD-show/waveshare35b-v2-overlay.dtb /boot/firmware/overlays/waveshare35
 
 the config would be something like this, another major difference is that this display will default to vertical
 
-the maximum speed i could achieve with mine was 33mhz (400mhz/12) without color aberration,
-but i ended up with 30mhz to have some margin
-this overlay supports an fps value, default is 30 i changed it to 60
+the maximum speed I could achieve with mine was 33mhz (400mhz/12) without color aberration,
+but I ended up with 30mhz to have some margin
+this overlay supports an fps value, default is 30 I changed it to 60
 this screen was never super responsive but with this configuration is quite tolerable in my opinion.
 
 ``` title="/boot/firmware/config.txt"
@@ -150,7 +150,7 @@ EndSection
 ```
 
 !!! tip
-    notice that i'm using fbdev and not fbturbo, you can use fbturbo if you like (remeber to install it)
+    notice that I'm using fbdev and not fbturbo, you can use fbturbo if you like (remember to install it)
 
 
 at this point this still did not work:
@@ -173,7 +173,7 @@ Fatal server error:
 [   172.068] (EE) no screens found(EE)
 
 ```
-so i checked out the configuration and found:
+so I checked out the configuration and found:
 
 ``` title="default contents of /usr/share/X11/xorg.conf.d/20-noglamor.conf"
 Section "Device"

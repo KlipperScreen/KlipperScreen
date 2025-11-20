@@ -140,7 +140,7 @@ Output:
 
 In this case the device is the ADS7846 Touchscreen, yours may be different
 
-Reset the old calibration: (set the 0° roation matrix: 1 0 0 0 1 0 0 0 1)
+Reset the old calibration: (set the 0° rotation matrix: 1 0 0 0 1 0 0 0 1)
 ```sh
 DISPLAY=:0 xinput set-prop "ADS7846 Touchscreen" 'Coordinate Transformation Matrix' 1 0 0 0 1 0 0 0 1
 ```

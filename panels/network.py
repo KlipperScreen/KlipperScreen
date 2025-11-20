@@ -30,7 +30,7 @@ class Panel(ScreenPanel):
             message = (
                 _("Failed to initialize") + "\n"
                 + "This panel needs NetworkManager installed into the system\n"
-                + "And the apropriate permissions, without them it will not function.\n"
+                + "And the appropriate permissions, without them it will not function.\n"
                 + f"\n{e}\n"
             )
             self.error_box.add(
@@ -306,11 +306,13 @@ class Panel(ScreenPanel):
         auth_selection_box.add(self.labels['network_phase2'])
 
         self.labels['network_identity'] = Gtk.Entry(hexpand=True, no_show_all=True)
-        self.labels['network_identity'].connect("focus-in-event", self._screen.show_keyboard)
+        self.labels['network_identity'].connect("touch-event", self._screen.show_keyboard)
+        self.labels['network_identity'].connect("button-press-event", self._screen.show_keyboard)
 
         self.labels['network_psk'] = Gtk.Entry(hexpand=True)
         self.labels['network_psk'].connect("activate", self.add_new_network, ssid)
-        self.labels['network_psk'].connect("focus-in-event", self._screen.show_keyboard)
+        self.labels['network_psk'].connect("touch-event", self._screen.show_keyboard)
+        self.labels['network_psk'].connect("button-press-event", self._screen.show_keyboard)
 
         save = self._gtk.Button("sd", _("Save"), "color3")
         save.set_hexpand(False)

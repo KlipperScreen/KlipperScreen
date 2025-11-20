@@ -581,7 +581,7 @@ class KlipperScreenConfig:
             logging.error(f"Error writing configuration file in {filepath}:\n{e}")
 
     def set(self, section, name, value):
-        self.config.set(section, name, value)
+        self.config.set(section, name, str(value))
 
     def log_config(self, config):
         sensitive_keys = [

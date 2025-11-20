@@ -12,7 +12,7 @@ This article describe how to use KlipperScreen from an Android device using XSer
     It's recommended that you use [VNC](VNC.md) instead or at least install [earlyoom](https://packages.debian.org/en/stable/earlyoom)
 
 
-1. [First installl KlipperScreen](Installation.md)
+1. [First install KlipperScreen](Installation.md)
 
 2. Download the apk of XServer-XSDL or ViewTouch from the [official sourceforge](https://sourceforge.net/projects/libsdl-android/files/apk/XServer-XSDL/).
 
@@ -113,7 +113,7 @@ Even after enabling the "Stay Awake" option in the Developer/USB Debugging optio
 the Xserver-XSDL may still go to a black screen but keep the backlight of your device on.
 To keep the screen always active, upon start up of Xserver-XSDL app, select the `Change Device Configuration`
 at the top of the splash screen and then select the `Command line parameters, one argument per line` option.
-Append the following argument (must be on seperate lines):
+Append the following argument (must be on separate lines):
 ```
 -s
 0

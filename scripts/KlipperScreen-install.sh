@@ -37,11 +37,12 @@ install_graphical_backend()
       echo_text ""
       echo_text "Choose graphical backend"
       echo_ok "Default is Xserver"
-      echo_text "Wayland is EXPERIMENTAL needs kms/drm drivers doesn't support DPMS and may need autologin"
+      echo_text "Wayland is EXPERIMENTAL, needs kms/drm drivers, and doesn't support DPMS"
       echo_text ""
       echo "Press enter for default (Xserver)"
       read -r -e -p "Backend Xserver or Wayland (cage)? [X/w]" BACKEND
-      if [[ "$BACKEND" =~ ^[wW]$ ]]; then
+    fi
+    if [[ "$BACKEND" =~ ^[wW]$ ]]; then
         echo_text "Installing Wayland Cage Kiosk"
         if sudo apt install -y $CAGE; then
             echo_ok "Installed Cage"
@@ -62,7 +63,6 @@ install_graphical_backend()
             echo_error "Installation of X-server dependencies failed ($XSERVER)"
             exit 1
         fi
-      fi
     fi
   done
 }
@@ -129,7 +129,7 @@ create_virtualenv()
     python3 -m venv "${KSENV}"
 
     if ! . "${KSENV}/bin/activate"; then
-        echo_error "Could not activate the enviroment, try deleting ${KSENV} and retry"
+        echo_error "Could not activate the environment, try deleting ${KSENV} and retry"
         exit 1
     fi
 
@@ -146,10 +146,10 @@ create_virtualenv()
         if [[ "$(uname -m)" =~ armv[67]l ]]; then
             echo_text "Adding piwheels.org as extra index..."
             pip install --extra-index-url https://www.piwheels.org/simple --upgrade pip setuptools
-            pip install --extra-index-url https://www.piwheels.org/simple -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
+            pip install --extra-index-url https://www.piwheels.org/simple -r ${KSPATH}/scripts/KlipperScreen-requirements.txt --prefer-binary
         else
             pip install --upgrade pip setuptools
-            pip install -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
+            pip install -r ${KSPATH}/scripts/KlipperScreen-requirements.txt --prefer-binary
         fi
         if [ $? -gt 0 ]; then
             echo_error "Unable to install dependencies, aborting install."
@@ -232,7 +232,6 @@ polkit.addRule(function(action, subject) {
         subject.user == "$USER") {
         return polkit.Result.YES;
         }
-    }
 });
 EOF
 }
@@ -293,26 +292,27 @@ install_network_manager()
     if [ -z "$NETWORK" ]; then
         echo "Press enter for default (Yes)"
         read -r -e -p "Install NetworkManager for the network panel [Y/n]" NETWORK
-        if [[ $NETWORK =~ ^[nN]$ ]]; then
-            echo_error "Not installing NetworkManager for the network panel"
-        else
-            echo_ok "Installing NetworkManager for the network panel"
-            echo_text ""
-            echo_text "If you were not using NetworkManager"
-            echo_text "You will need to reconnect to the network using KlipperScreen or nmtui or nmcli"
-            sudo apt install network-manager
-            sudo mkdir -p /etc/NetworkManager/conf.d
-            sudo tee /etc/NetworkManager/conf.d/any-user.conf > /dev/null << EOF
+    fi
+    
+    if [[ $NETWORK =~ ^[nN]$ ]]; then
+        echo_error "Not installing NetworkManager for the network panel"
+    else
+        echo_ok "Installing NetworkManager for the network panel"
+        echo_text ""
+        echo_text "If you were not using NetworkManager"
+        echo_text "You will need to reconnect to the network using KlipperScreen or nmtui or nmcli"
+        sudo apt install network-manager
+        sudo mkdir -p /etc/NetworkManager/conf.d
+        sudo tee /etc/NetworkManager/conf.d/any-user.conf > /dev/null << EOF
 [main]
 auth-polkit=false
 EOF
-            sudo systemctl -q disable dhcpcd 2> /dev/null
-            sudo systemctl -q stop dhcpcd 2> /dev/null
-            sudo systemctl enable NetworkManager
-            sudo systemctl -q --no-block start NetworkManager
-            sync
-            systemctl reboot
-        fi
+        sudo systemctl -q disable dhcpcd 2> /dev/null
+        sudo systemctl -q stop dhcpcd 2> /dev/null
+        sudo systemctl enable NetworkManager
+        sudo systemctl -q --no-block start NetworkManager
+        sync
+        systemctl reboot
     fi
 }
 
@@ -331,17 +331,19 @@ if [ -z "$SERVICE" ]; then
     echo_text ""
     echo "Press enter for default (Yes)"
     read -r -e -p "[Y/n]" SERVICE
-    if [[ $SERVICE =~ ^[nN]$ ]]; then
-        echo_text "Not installing the service"
-        echo_text "The graphical backend will NOT be installed"
-    else
-        install_graphical_backend
-        install_systemd_service
-        if [ -z "$START" ]; then
-            START=1
-        fi
+fi
+
+if [[ $SERVICE =~ ^[nN]$ ]]; then
+    echo_text "Not installing the service"
+    echo_text "The graphical backend will NOT be installed"
+else
+    install_graphical_backend
+    install_systemd_service
+    if [ -z "$START" ]; then
+        START=1
     fi
 fi
+
 
 install_packages
 create_virtualenv

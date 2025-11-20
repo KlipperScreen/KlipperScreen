@@ -67,6 +67,8 @@ class Panel(ScreenPanel):
 
             if item['panel']:
                 b.connect("clicked", self.menu_item_clicked, item)
+            elif item['method'] == "ks_confirm_save":
+                b.connect("clicked", self._screen.confirm_save)
             elif item['method']:
                 params = {}
 

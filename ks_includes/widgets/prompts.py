@@ -114,7 +114,7 @@ class Prompt:
         scroll.add(self.scroll_box)
 
         content = Gtk.Grid()
-        if not self.screen.get_resizable():
+        if not self.screen.windowed:
             content.attach(title, 0, 0, 1, 1)
             content.attach(close, 1, 0, 1, 1)
         content.attach(scroll, 0, 1, 2, 1)
