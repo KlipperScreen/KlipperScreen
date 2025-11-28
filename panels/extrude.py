@@ -161,7 +161,8 @@ class Panel(ScreenPanel):
             self.labels[x]['box'].pack_start(self.labels[x]['label'], True, True, 10)
             if with_switches:
                 self.labels[x]['switch'] = Gtk.Switch()
-                self.labels[x]['switch'].connect("notify::active", self.enable_disable_fs, name, x)
+                handler_id = self.labels[x]['switch'].connect("notify::active", self.enable_disable_fs, name, x)
+                self.labels[x]['handler_id'] = handler_id
                 self.labels[x]['box'].pack_start(self.labels[x]['switch'], False, False, 0)
 
             self.labels[x]['box'].get_style_context().add_class("filament_sensor")
@@ -242,7 +243,14 @@ class Panel(ScreenPanel):
         for x in self._printer.get_filament_sensors():
             if x in data and x in self.labels:
                 if 'enabled' in data[x] and 'switch' in self.labels[x]:
-                    self.labels[x]['switch'].set_active(data[x]['enabled'])
+                    switch = self.labels[x]['switch']
+                    handler_id = self.labels[x].get('handler_id')
+                    if handler_id is not None:
+                        switch.handler_block(handler_id)
+                        switch.set_active(data[x]['enabled'])
+                        switch.handler_unblock(handler_id)
+                    else:
+                        switch.set_active(data[x]['enabled'])
                 if 'filament_detected' in data[x] and self._printer.get_stat(x, "enabled"):
                     if data[x]['filament_detected']:
                         self.labels[x]['box'].get_style_context().remove_class("filament_sensor_empty")
