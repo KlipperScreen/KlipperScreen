@@ -176,8 +176,8 @@ class SdbusNm:
             all_aps = [AccessPoint(result) for result in self.wlan_device.access_points]
             networks.extend(
                 {
-                    "SSID": ap.ssid.decode("utf-8"),
-                    "known": self.is_known(ap.ssid.decode("utf-8")),
+                    "SSID": ap.ssid.decode("utf-8", errors='ignore'),
+                    "known": self.is_known(ap.ssid.decode("utf-8", errors='ignore')),
                     "security": get_encryption(
                         ap.rsn_flags or ap.wpa_flags or ap.flags
                     ),
@@ -236,7 +236,7 @@ class SdbusNm:
             },
             "802-11-wireless": {
                 "mode": ("s", "infrastructure"),
-                "ssid": ("ay", ssid.encode("utf-8")),
+                "ssid": ("ay", ssid.encode("utf-8", errors='ignore')),
                 "security": ("s", "802-11-wireless-security"),
             },
             "ipv4": {"method": ("s", "auto")},
