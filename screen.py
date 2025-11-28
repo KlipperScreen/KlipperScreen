@@ -300,7 +300,7 @@ class KlipperScreen(Gtk.Window):
                 "motion_report": ["live_position", "live_velocity", "live_extruder_velocity"],
                 "exclude_object": ["current_object", "objects", "excluded_objects"],
                 "manual_probe": ['is_active'],
-                "screws_tilt_adjust": ['results', 'error'],
+                "screws_tilt_adjust": ['results', 'error', 'max_deviation'],
             }
         }
         for extruder in self.printer.get_tools():
@@ -839,7 +839,8 @@ class KlipperScreen(Gtk.Window):
             self.printer.process_update(data)
             if 'manual_probe' in data and data['manual_probe']['is_active'] and 'zcalibrate' not in self._cur_panels:
                 self.show_panel("zcalibrate")
-            if "screws_tilt_adjust" in data and 'bed_level' not in self._cur_panels:
+            if ("screws_tilt_adjust" in data and not data['screws_tilt_adjust']['max_deviation']
+                    and 'bed_level' not in self._cur_panels):
                 self.show_panel("bed_level")
         elif action == "notify_filelist_changed":
             if self.files is not None:
