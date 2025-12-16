@@ -839,7 +839,8 @@ class KlipperScreen(Gtk.Window):
             self.printer.process_update(data)
             if 'manual_probe' in data and data['manual_probe']['is_active'] and 'zcalibrate' not in self._cur_panels:
                 self.show_panel("zcalibrate")
-            if ("screws_tilt_adjust" in data and not data['screws_tilt_adjust']['max_deviation']
+            if ("screws_tilt_adjust" in data and "max_deviation" in data['screws_tilt_adjust']
+                and not data['screws_tilt_adjust']['max_deviation']
                     and 'bed_level' not in self._cur_panels):
                 self.show_panel("bed_level")
         elif action == "notify_filelist_changed":
