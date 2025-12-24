@@ -278,13 +278,13 @@ class Printer:
             return self.config[led]["color_order"]
         colors = ''
         for option in self.config[led]:
-            if option in ("red_pin", 'initial_RED') and 'R' not in colors:
+            if option in ("red_pin", 'initial_red') and 'R' not in colors:
                 colors += 'R'
-            elif option in ("green_pin", 'initial_GREEN') and 'G' not in colors:
+            elif option in ("green_pin", 'initial_green') and 'G' not in colors:
                 colors += 'G'
-            elif option in ("blue_pin", 'initial_BLUE') and 'B' not in colors:
+            elif option in ("blue_pin", 'initial_blue') and 'B' not in colors:
                 colors += 'B'
-            elif option in ("white_pin", 'initial_WHITE') and 'W' not in colors:
+            elif option in ("white_pin", 'initial_white') and 'W' not in colors:
                 colors += 'W'
         logging.debug(f"Colors in led: {colors}")
         return colors
