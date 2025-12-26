@@ -1316,10 +1316,10 @@ class KlipperScreen(Gtk.Window):
         new_mode = new_ratio < 1.0
         ratio_delta = abs(self.aspect_ratio - new_ratio)
         if ratio_delta > 0.1 and self.vertical_mode != new_mode:
-            self.reload_panels()
             self.vertical_mode = new_mode
             self.aspect_ratio = new_ratio
             logging.info(f"Vertical mode: {self.vertical_mode}")
+            self.reload_panels()
 
 
 def main():
