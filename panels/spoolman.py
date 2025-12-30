@@ -315,7 +315,7 @@ class Panel(ScreenPanel):
         sort_btn_used.clicked()
 
         if self._screen.vertical_mode:
-            scrollbar_width = self.scroll.get_vscrollbar().get_preferred_width()[1]
+            scrollbar_width = 10
             self._treeview.set_margin_right(scrollbar_width)
 
         self.scroll.add(self._treeview)
