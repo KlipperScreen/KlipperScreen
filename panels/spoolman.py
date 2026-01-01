@@ -184,10 +184,6 @@ class Panel(ScreenPanel):
         sortable.set_sort_func(1, self.spool_compare_date)
 
         self.scroll = self._gtk.ScrolledWindow()
-        if self._screen.vertical_mode:
-            self.scroll.set_property("overlay-scrolling", True)
-        else:
-            self.scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
         clear_active_spool = self._gtk.Button("cancel", _("Clear"), "color2", self.bts, Gtk.PositionType.LEFT, 1)
         clear_active_spool.get_style_context().add_class("buttons_slim")
