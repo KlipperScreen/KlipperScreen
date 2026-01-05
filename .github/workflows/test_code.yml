@@ -12,7 +12,7 @@ jobs:
   lint-python-code:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ricardochaves/python-lint@v1.4.0
         with:
           python-root-list: "screen.py ks_includes panels"
