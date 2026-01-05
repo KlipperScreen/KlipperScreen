@@ -139,7 +139,7 @@ class Panel(ScreenPanel):
                             ):
                                 for _ip in sub_value:
                                     self.add_label_to_grid(
-                                        f"{self.prettify(sub_key)}: {_ip['address']}", 1
+                                        f"{_('IP Address')}: {_ip['address']}", 1
                                     )
                                 continue
                             self.add_label_to_grid(
