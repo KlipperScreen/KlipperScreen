@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-26 12:31-0300\n"
-"PO-Revision-Date: 2024-08-14 14:09+0000\n"
-"Last-Translator: Rashid Al Haqbany <haqbany@gmail.com>\n"
+"PO-Revision-Date: 2026-01-10 23:01+0000\n"
+"Last-Translator: Joe <alawadhi3000@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/ar/>\n"
 "Language: ar\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -345,7 +345,7 @@ msgid "Font Size"
 msgstr "حجم الخط"
 
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "للتحكم بالفأرة أو للتأكد من دقة شاشة اللمس"
 
 msgid "Forget"
 msgstr "نسي"
@@ -423,7 +423,7 @@ msgid "Invalid password"
 msgstr "كلمة سر غير صالحة"
 
 msgid "Invalid temperature"
-msgstr ""
+msgstr "درجة حرارة غير صحيحة"
 
 msgid "Inversely affects the icon size"
 msgstr "يؤثر عكسيا على حجم الأيقونة"
@@ -502,7 +502,7 @@ msgid "Loading..."
 msgstr "جاري التحميل..."
 
 msgid "Lock"
-msgstr ""
+msgstr "قفل"
 
 msgid "Lost Connection to Moonraker"
 msgstr "فقد الاتصال ب Moonraker"
@@ -647,7 +647,7 @@ msgid "Part Fan"
 msgstr "مروحة تبريد المطبوعات"
 
 msgid "Password"
-msgstr ""
+msgstr "كلمة المرور"
 
 msgid "Password saved"
 msgstr "تم حفظ كلمة المرور"
@@ -816,7 +816,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "أظهر أزرار أشرطة التمرير"
 
 msgid "Show cursor"
-msgstr ""
+msgstr "أظهر المؤشر"
 
 msgid "Show only devices that are able to be set"
 msgstr "أظهر فقط الأجهزة التي يمكن ضبطها"
@@ -888,7 +888,7 @@ msgid "Temperature"
 msgstr "درجة الحرارة"
 
 msgid "Temperature too low to extrude"
-msgstr ""
+msgstr "درجة الحرارة قليلة جدا لبدء التدفق"
 
 msgid "The system doesn't meet the minimum requirement"
 msgstr "النظام لا يفي بالحد الأدنى من المتطلبات"
@@ -918,10 +918,10 @@ msgid "Unload"
 msgstr "أفرغ"
 
 msgid "Unlock"
-msgstr ""
+msgstr "فتح"
 
 msgid "Unlock failed"
-msgstr ""
+msgstr "خطأ في الفتح"
 
 msgid "Unretract Extra Length"
 msgstr "لا تتراجع عن الطول الإضافي"
@@ -942,7 +942,7 @@ msgid "Useful for un-responsive touchscreens"
 msgstr "مفيد لشاشات اللمس غير المستجيبة"
 
 msgid "User"
-msgstr ""
+msgstr "المستخدم"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC غير مدعوم من قبل الواجهة الخلفية التي تحاول البث"
