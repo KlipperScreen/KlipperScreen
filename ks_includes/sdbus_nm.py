@@ -130,6 +130,11 @@ class SdbusNm:
             NetworkDeviceWireless(path)
             for path, device in devices.items()
             if device.device_type == enums.DeviceType.WIFI
+            and device.state not in {
+                enums.DeviceState.UNKNOWN,
+                enums.DeviceState.UNMANAGED,
+                enums.DeviceState.UNAVAILABLE,
+            }
         ]
 
     def get_primary_interface(self):
