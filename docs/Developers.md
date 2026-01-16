@@ -22,7 +22,7 @@ For example:
 cd ~/KlipperScreen
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r scripts/Klipperscreen-requirements.txt
+pip install -r scripts/KlipperScreen-requirements.txt
 # this one is optional:
 pip install -r scripts/dev-requirements.txt
 ```
