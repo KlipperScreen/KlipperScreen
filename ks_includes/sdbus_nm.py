@@ -1,5 +1,4 @@
 # This is the backend of the UI panel that communicates to sdbus-networkmanager
-# TODO device selection/swtichability
 # Alfredo Monclus (alfrix) 2024
 import logging
 import subprocess
@@ -394,3 +393,14 @@ class SdbusNm:
 
     def enable_monitoring(self, enable):
         self.monitor_connection = enable
+
+    def set_wlan_device(self, iface_name):
+        for wireless in self.get_wireless_interfaces():
+            if wireless.interface == iface_name:
+                if wireless.state == enums.DeviceState.UNMANAGED:
+                    self.popup(f"{iface_name} is not managed by NetworkManager and cannot be controlled by this app")
+                    return
+                self.wlan_device = wireless
+                logging.debug(f"Switched wlan_device to {iface_name}")
+                return
+        raise ValueError(f"No Wi‑Fi interface named '{iface_name}' found.")
