@@ -46,7 +46,7 @@ class Panel(ScreenPanel):
 
     def create_menu_items(self):
         count = sum(bool(self.evaluate_enable(i[next(iter(i))]['enable'])) for i in self.items)
-        scale = 1.1 if 12 < count <= 16 else None  # hack to fit a 4th row
+        scale = 1.08 if 12 < count <= 16 else None  # hack to fit a 4th row
         for i in range(len(self.items)):
             key = list(self.items[i])[0]
             item = self.items[i][key]
