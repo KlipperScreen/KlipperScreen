@@ -103,7 +103,9 @@ if you missed it, restart the app.
 
 ## Recommended configuration for this use case
 
-Turn off DPMS and Display timeout:
+It's recommended to set Display timeout to never:
+
+Also for X11 installs turn off DPMS:
 
 ![disable_dpms_poweroff](img/disable_dpms_poweroff.png)
 

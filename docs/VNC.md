@@ -78,6 +78,8 @@ Install a VNC viewer and  configure it to the ip of the host.
     ##### Prevent unwanted rotation of UI
     * Lock the rotation using the buttons in the notification bar or in device Settings > Screen > Disable "Rotate automatically"
 
-It's recommended to turn off DPMS and Display timeout:
+It's recommended to set Display timeout to never:
+
+Also for X11 installs turn off DPMS:
 
 ![disable_dpms_poweroff](img/disable_dpms_poweroff.png)

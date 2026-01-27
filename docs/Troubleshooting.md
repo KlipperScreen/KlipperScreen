@@ -111,6 +111,9 @@ If the screen never shows the console even during startup, Then it's typically a
 
 ## The screen shows colors or 'No signal' when idle
 
+!!! warning
+    Only applicable to X11 not for Wayland
+
 In KliperScreen settings find 'Screen DPMS' and turn it off.
 
 ![dpms](img/troubleshooting/dpms.gif)
