@@ -286,8 +286,10 @@ class KlippyGtk:
         if show:
             window.set_cursor(
                 Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.ARROW))
-            os.system("xsetroot  -cursor_name  arrow")
+            if not self.screen.wayland:
+                os.system("xsetroot  -cursor_name  arrow")
         else:
             window.set_cursor(
                 Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.BLANK_CURSOR))
-            os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
+            if not self.screen.wayland:
+                os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")

@@ -27,6 +27,8 @@ class Panel(ScreenPanel):
         self.labels['settings_menu'].add(self.labels['settings'])
         for option in options:
             name = list(option)[0]
+            if name == "use_dpms" and screen.wayland:
+                continue
             self.add_option('settings', self.settings, name, option[name])
 
         self.labels['lang_menu'] = self._gtk.ScrolledWindow()
