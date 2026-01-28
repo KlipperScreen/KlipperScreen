@@ -112,6 +112,8 @@ class Panel(ScreenPanel):
 
     def load_networks(self):
         for net in self.sdbus_nm.get_networks():
+            if 'BSSID' not in net:
+                continue
             self.add_network(net['BSSID'])
         GLib.timeout_add_seconds(10, self._gtk.Button_busy, self.reload_button, False)
         self.content.show_all()
