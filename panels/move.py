@@ -59,27 +59,17 @@ class Panel(ScreenPanel):
         adjust.set_hexpand(False)
         grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         if self._screen.vertical_mode:
-            if self._screen.lang_ltr:
-                grid.attach(self.buttons["x+"], 2, 1, 1, 1)
-                grid.attach(self.buttons["x-"], 0, 1, 1, 1)
-                grid.attach(self.buttons["z+"], 2, 2, 1, 1)
-                grid.attach(self.buttons["z-"], 0, 2, 1, 1)
-            else:
-                grid.attach(self.buttons["x+"], 0, 1, 1, 1)
-                grid.attach(self.buttons["x-"], 2, 1, 1, 1)
-                grid.attach(self.buttons["z+"], 0, 2, 1, 1)
-                grid.attach(self.buttons["z-"], 2, 2, 1, 1)
+            grid.attach(self.buttons["x+"], 2, 1, 1, 1)
+            grid.attach(self.buttons["x-"], 0, 1, 1, 1)
+            grid.attach(self.buttons["z+"], 2, 2, 1, 1)
+            grid.attach(self.buttons["z-"], 0, 2, 1, 1)
             grid.attach(adjust, 1, 2, 1, 1)
             grid.attach(self.buttons["y+"], 1, 0, 1, 1)
             grid.attach(self.buttons["y-"], 1, 1, 1, 1)
 
         else:
-            if self._screen.lang_ltr:
-                grid.attach(self.buttons["x+"], 2, 1, 1, 1)
-                grid.attach(self.buttons["x-"], 0, 1, 1, 1)
-            else:
-                grid.attach(self.buttons["x+"], 0, 1, 1, 1)
-                grid.attach(self.buttons["x-"], 2, 1, 1, 1)
+            grid.attach(self.buttons["x+"], 2, 1, 1, 1)
+            grid.attach(self.buttons["x-"], 0, 1, 1, 1)
             grid.attach(self.buttons["y+"], 1, 0, 1, 1)
             grid.attach(self.buttons["y-"], 1, 1, 1, 1)
             if self._config.get_config()["main"].getboolean("invert_z", False):
