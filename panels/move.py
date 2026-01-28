@@ -57,27 +57,47 @@ class Panel(ScreenPanel):
         )
         adjust.connect("clicked", self.load_menu, "options", _("Settings"))
         adjust.set_hexpand(False)
+
+        xm = "x-"
+        xp = "x+"
+        ym = "y-"
+        yp = "y+"
+        zm = "z-"
+        zp = "z+"
+
+        rotation = self.ks_printer_cfg.getint("screw_rotation", 0)
+        if rotation == 90:
+            xm, yp, xp, ym = ym, xm, yp, xp
+        elif rotation == 180:
+            xm, yp, xp, ym = xp, ym, xm, yp
+        elif rotation == 270:
+            xm, yp, xp, ym = yp, xp, ym, xm
+
+        if self._config.get_config()["main"].getboolean("invert_z", False):
+            zm, zp = zp, zm
+
+        scale = self._gtk.img_scale * self._gtk.button_image_scale
+        self.buttons[xm].set_image(self._gtk.Image("arrow-left", scale, scale))
+        self.buttons[yp].set_image(self._gtk.Image("arrow-up", scale, scale))
+        self.buttons[xp].set_image(self._gtk.Image("arrow-right", scale, scale))
+        self.buttons[ym].set_image(self._gtk.Image("arrow-down", scale, scale))
+
         grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         if self._screen.vertical_mode:
-            grid.attach(self.buttons["x+"], 2, 1, 1, 1)
-            grid.attach(self.buttons["x-"], 0, 1, 1, 1)
-            grid.attach(self.buttons["z+"], 2, 2, 1, 1)
-            grid.attach(self.buttons["z-"], 0, 2, 1, 1)
+            grid.attach(self.buttons[xm], 0, 1, 1, 1)
+            grid.attach(self.buttons[xp], 2, 1, 1, 1)
+            grid.attach(self.buttons[ym], 1, 1, 1, 1)
+            grid.attach(self.buttons[yp], 1, 0, 1, 1)
+            grid.attach(self.buttons[zm], 0, 2, 1, 1)
+            grid.attach(self.buttons[zp], 2, 2, 1, 1)
             grid.attach(adjust, 1, 2, 1, 1)
-            grid.attach(self.buttons["y+"], 1, 0, 1, 1)
-            grid.attach(self.buttons["y-"], 1, 1, 1, 1)
-
         else:
-            grid.attach(self.buttons["x+"], 2, 1, 1, 1)
-            grid.attach(self.buttons["x-"], 0, 1, 1, 1)
-            grid.attach(self.buttons["y+"], 1, 0, 1, 1)
-            grid.attach(self.buttons["y-"], 1, 1, 1, 1)
-            if self._config.get_config()["main"].getboolean("invert_z", False):
-                grid.attach(self.buttons["z+"], 3, 1, 1, 1)
-                grid.attach(self.buttons["z-"], 3, 0, 1, 1)
-            else:
-                grid.attach(self.buttons["z+"], 3, 0, 1, 1)
-                grid.attach(self.buttons["z-"], 3, 1, 1, 1)
+            grid.attach(self.buttons[xm], 0, 1, 1, 1)
+            grid.attach(self.buttons[xp], 2, 1, 1, 1)
+            grid.attach(self.buttons[ym], 1, 1, 1, 1)
+            grid.attach(self.buttons[yp], 1, 0, 1, 1)
+            grid.attach(self.buttons[zm], 3, 1, 1, 1)
+            grid.attach(self.buttons[zp], 3, 0, 1, 1)
 
         grid.attach(self.buttons["home"], 0, 0, 1, 1)
         grid.attach(self.buttons["motors_off"], 2, 0, 1, 1)
