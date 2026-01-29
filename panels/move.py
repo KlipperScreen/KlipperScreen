@@ -65,7 +65,11 @@ class Panel(ScreenPanel):
         zm = "z-"
         zp = "z+"
 
-        rotation = self.ks_printer_cfg.getint("screw_rotation", 0)
+        rotation = (
+            0
+            if self.ks_printer_cfg is None
+            else self.ks_printer_cfg.getint("screw_rotation", 0)
+        )
         if rotation == 90:
             xm, yp, xp, ym = ym, xm, yp, xp
         elif rotation == 180:
