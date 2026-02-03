@@ -374,13 +374,11 @@ class Panel(ScreenPanel):
             return
         info = _("Password saved") + '\n' if net['known'] else ""
         chan = _("Channel") + f' {net["channel"]}'
-        max_bitrate = _("Max:") + f"{self.format_speed(net['max_bitrate'])}"
         self.networks[net['BSSID']]['icon'].set_from_pixbuf(self.get_signal_strength_icon(net["signal_level"]))
         self.networks[net['BSSID']]['info'].set_markup(
             "<small>"
             f"{info}"
             f"{net['security']}\n"
-            f"{max_bitrate}\n"
             f"{net['frequency']} Ghz  {chan}  {net['signal_level']} %\n"
             f"{net['BSSID']}"
             "</small>"
