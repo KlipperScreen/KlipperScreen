@@ -333,6 +333,9 @@ class KlipperScreen(Gtk.Window):
     def show_panel(self, panel, title=None, remove_all=False, panel_name=None, **kwargs):
         if panel_name is None:
             panel_name = panel
+        if panel == "lock_screen":
+            self.lock_screen.lock(None)
+            return
         if self._cur_panels and panel_name == self._cur_panels[-1]:
             logging.error("Panel is already is in view")
             return
