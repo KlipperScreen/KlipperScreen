@@ -64,7 +64,7 @@ class Panel(MenuPanel):
 
         button1 = self.create_rounded_button(movePath, "Move", self.button1_clicked)
         button2 = self.create_rounded_button(settingsPath, "Settings", self.button2_clicked)
-        button3 = self.create_rounded_button(printPath, "Print", self.button3_clicked)
+        button3 = self.create_rounded_button(printPath, "Andrew Da Best", self.button3_clicked)
 
         buttons.pack_start(button1, True, True, 0)
         buttons.pack_start(button2, True, True, 0)
