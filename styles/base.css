@@ -44,7 +44,7 @@
     font-size: 15pt;  /* Increase font size */
 }
 .temperature-button {
-    background-color: #f15050; /* Orange background */
+    background-color: #f15050; /* Red background */
     border-radius: 15px;      /* Rounded corners */
     min-width: 165px;
     min-height: 50px;
