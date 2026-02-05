@@ -64,10 +64,14 @@ class Panel(ScreenPanel):
         self.interface = self.sdbus_nm.get_primary_interface()
         logging.info(f"Primary interface: {self.interface}")
 
-        self.labels['interface'] = Gtk.Label(hexpand=True)
+        iface_label = Gtk.Label(_("Interface") + ": ")
+        self.labels['interface'] = Gtk.ComboBoxText()
+        self.labels['interface'].connect("changed", self.iface_changed)
+        for iface in self.wireless_interfaces:
+            self.labels['interface'].append(iface, iface)
         self.labels['ip'] = Gtk.Label(hexpand=True)
         if self.interface is not None:
-            self.labels['interface'].set_text(_("Interface") + f': {self.interface}')
+            self.labels['interface'].set_active_id(self.interface)
             self.labels['ip'].set_text(f"IP: {self.sdbus_nm.get_ip_address()}")
 
         self.reload_button = self._gtk.Button("refresh", None, "color1", self.bts)
@@ -84,6 +88,8 @@ class Panel(ScreenPanel):
         self.wifi_toggle.connect("notify::active", self.toggle_wifi)
 
         sbox = Gtk.Box(hexpand=True, vexpand=False)
+        if (self._screen.width > 400):
+            sbox.add(iface_label)
         sbox.add(self.labels['interface'])
         sbox.add(self.labels['ip'])
         sbox.add(self.reload_button)
@@ -171,6 +177,12 @@ class Panel(ScreenPanel):
         }
 
         self.network_list.add(self.network_rows[bssid])
+
+    def iface_changed(self, combo):
+        selected_iface = combo.get_active_id()
+        logging.info(f"Selected interace: {selected_iface}")
+        self.interace = selected_iface
+        self.sdbus_nm.set_wlan_device(selected_iface)
 
     def remove_confirm_dialog(self, widget, ssid, bssid):
 
@@ -351,7 +363,6 @@ class Panel(ScreenPanel):
 
     def update_all_networks(self):
         self.interface = self.sdbus_nm.get_primary_interface()
-        self.labels['interface'].set_text(_("Interface") + f': {self.interface}')
         self.labels['ip'].set_text(f"IP: {self.sdbus_nm.get_ip_address()}")
         nets = self.sdbus_nm.get_networks()
         remove = [bssid for bssid in self.network_rows.keys() if bssid not in [net['BSSID'] for net in nets]]

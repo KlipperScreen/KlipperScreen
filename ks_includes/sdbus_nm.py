@@ -394,3 +394,12 @@ class SdbusNm:
 
     def enable_monitoring(self, enable):
         self.monitor_connection = enable
+
+    def set_wlan_device(self, iface_name):
+        for path in self.nm.get_devices():
+            wireless = NetworkDeviceWireless(path)
+            if wireless.interface == iface_name:
+                self.wlan_device = wireless
+                logging.debug(f"Switched wlan_device to {iface_name}")
+                return
+        raise ValueError(f"No Wi‑Fi interface named '{iface_name}' found.")
