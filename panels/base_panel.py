@@ -48,6 +48,9 @@ class BasePanel(ScreenPanel):
         self.control['shutdown'] = self._gtk.Button('shutdown', scale=self.abscale)
         self.control['shutdown'].connect("clicked", self.menu_item_clicked, self.shutdown)
         self.control['shutdown'].set_no_show_all(True)
+        self.control['lock'] = self._gtk.Button("lock", scale=self.abscale)
+        self.control['lock'].connect("clicked", self._screen.lock_screen.lock)
+        self.control['lock'].set_no_show_all(True)
         self.control['printer_select'] = self._gtk.Button('shuffle', scale=self.abscale)
         self.control['printer_select'].connect("clicked", self._screen.show_printer_select)
         self.control['printer_select'].set_no_show_all(True)
@@ -77,6 +80,7 @@ class BasePanel(ScreenPanel):
         self.action_bar.add(self.control['back'])
         self.action_bar.add(self.control['home'])
         self.action_bar.add(self.control['printer_select'])
+        self.action_bar.add(self.control['lock'])
         self.action_bar.add(self.control['shortcut'])
         self.action_bar.add(self.control['estop'])
         self.action_bar.add(self.control['shutdown'])
@@ -238,6 +242,7 @@ class BasePanel(ScreenPanel):
         printing = self._printer and self._printer.state in {"printing", "paused"}
         connected = self._printer and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'}
         printer_select = 'printer_select' not in self._screen._cur_panels
+        self.control['lock'].set_visible(printing)
         self.control['estop'].set_visible(printing)
         self.control['shutdown'].set_visible(not printing)
         self.show_shortcut(connected and printer_select)
