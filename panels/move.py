@@ -9,7 +9,7 @@ from ks_includes.screen_panel import ScreenPanel
 
 
 class Panel(ScreenPanel):
-    distances = ["1", "10", "50"]
+    distances = ["1", "5", "10", "25", "50", "100"]
     distance = "10"
     temp_increment = 5
 
@@ -32,7 +32,7 @@ class Panel(ScreenPanel):
         self.content.add(main_box)
 
         # ===== Top Row: Z (left), X/Y (center), Speed Selector (right) =====
-        top_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=48)
+        top_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=72)
         top_row.set_halign(Gtk.Align.CENTER)
         top_row.set_valign(Gtk.Align.CENTER)
         top_row.set_vexpand(True)
@@ -40,7 +40,7 @@ class Panel(ScreenPanel):
         # Z Section (left)
         z_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
         z_box.set_valign(Gtk.Align.CENTER)
-        z_label = Gtk.Label(label="Z")
+        z_label = Gtk.Label(label="")
         z_label.get_style_context().add_class("section-label")
         z_label.set_halign(Gtk.Align.CENTER)
         z_box.pack_start(z_label, False, False, 0)
@@ -64,7 +64,7 @@ class Panel(ScreenPanel):
         # X/Y Section (center)
         xy_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
         xy_box.set_valign(Gtk.Align.CENTER)
-        xy_label = Gtk.Label(label="X/Y")
+        xy_label = Gtk.Label(label="")
         xy_label.get_style_context().add_class("section-label")
         xy_label.set_halign(Gtk.Align.START)
         xy_label.set_margin_start(4)
