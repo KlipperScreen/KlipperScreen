@@ -185,7 +185,7 @@ class BasePanel(ScreenPanel):
             self.time_update = GLib.timeout_add_seconds(1, self.update_time)
 
     def show_nav_bar(self, show=True):
-        """Show or hide the sidebar navigation bar."""
+        #"""Show or hide the sidebar navigation bar."""
         if show:
             self.nav_bar.show()
         else:

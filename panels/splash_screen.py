@@ -59,7 +59,6 @@ class Panel(ScreenPanel):
         main.pack_end(self.labels["actions"], False, False, 0)
 
         self.show_restart_buttons()
-
         self.content.add(main)
 
     def update_text(self, text):
