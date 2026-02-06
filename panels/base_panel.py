@@ -37,7 +37,7 @@ class BasePanel(ScreenPanel):
 
         styles_dir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles")
 
-        # ===== Navigation Bar =====
+        # ===== Navigation Bar =====----------------------------------------------------------------------------------------------
         self.nav_bar = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         self.nav_bar.set_hexpand(False)
         self.nav_bar.set_vexpand(True)
@@ -45,7 +45,7 @@ class BasePanel(ScreenPanel):
         self.nav_bar.set_size_request(70, -1)
 
         # WorkCell logo at top
-        logo_path = os.path.join(styles_dir, "workcell_logo.png")
+        logo_path = os.path.join(styles_dir, "workcell_logo.svg")
         if os.path.exists(logo_path):
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(logo_path, 48, 48)
             logo_image = Gtk.Image.new_from_pixbuf(pixbuf)
