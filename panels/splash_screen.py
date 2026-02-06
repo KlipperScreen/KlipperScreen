@@ -53,52 +53,53 @@ class Panel(ScreenPanel):
         main_box.pack_start(center_box, True, True, 0)
 
         # Action buttons bar
+        # Action buttons bar
+        self.action_css = Gtk.CssProvider()
+        self.action_css.load_from_data(b"button { border-bottom-color: #2cdb1a; }")
+
         self.labels["menu"] = self._gtk.Button("settings", _("Menu"), "color4")
+        self.labels["menu"].get_style_context().add_provider(
+            self.action_css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION + 1
+        )
         self.labels["menu"].connect("clicked", self._screen._go_to_submenu, "")
         self.labels["restart"] = self._gtk.Button(
             "refresh", _("Klipper Restart"), "color1"
+        )
+        self.labels["restart"].get_style_context().add_provider(
+            self.action_css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION + 1
         )
         self.labels["restart"].connect("clicked", self.restart_klipper)
         self.labels["firmware_restart"] = self._gtk.Button(
             "refresh", _("Firmware Restart"), "color2"
         )
+        self.labels["firmware_restart"].get_style_context().add_provider(
+            self.action_css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION + 1
+        )
         self.labels["firmware_restart"].connect("clicked", self.firmware_restart)
         self.labels["restart_system"] = self._gtk.Button(
             "refresh", _("System Restart"), "color1"
+        )
+        self.labels["restart_system"].get_style_context().add_provider(
+            self.action_css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION + 1
         )
         self.labels["restart_system"].connect("clicked", self.reboot_poweroff, "reboot")
         self.labels["shutdown"] = self._gtk.Button(
             "shutdown", _("System Shutdown"), "color2"
         )
+        self.labels["shutdown"].get_style_context().add_provider(
+            self.action_css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION + 1
+        )
         self.labels["shutdown"].connect("clicked", self.reboot_poweroff, "shutdown")
         self.labels["retry"] = self._gtk.Button("load", _("Retry"), "color3")
+        self.labels["retry"].get_style_context().add_provider(
+            self.action_css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION + 1
+        )
         self.labels["retry"].connect("clicked", self.retry)
 
         self.labels["actions"] = Gtk.Box(hexpand=True, vexpand=False, homogeneous=True)
-        main_box.pack_start(self.labels["actions"], False, False, 0)
-
-        # Bottom temperature bar
-        temp_bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=16)
-        temp_bar.set_halign(Gtk.Align.CENTER)
-        temp_bar.set_valign(Gtk.Align.END)
-        temp_bar.set_margin_bottom(12)
-        temp_bar.set_margin_start(20)
-        temp_bar.set_margin_end(20)
-
-        # Nozzle temperature card
-        nozzle_card = self._create_temp_card("Nozzle", "nozzle_blue", "extruder")
-        temp_bar.pack_start(nozzle_card, False, False, 0)
-
-        # Bed temperature card
-        bed_card = self._create_temp_card("Bed", "bed_orange", "heater_bed")
-        temp_bar.pack_start(bed_card, False, False, 0)
-
-        main_box.pack_end(temp_bar, False, False, 0)
+        main_box.pack_end(self.labels["actions"], False, False, 0)
 
         self.show_restart_buttons()
-
-        # Start temperature update timer
-        GLib.timeout_add_seconds(1, self._update_temps)
 
     def _create_temp_card(self, label_text, icon_type, device):
         """Create a temperature display card matching the mockup."""
