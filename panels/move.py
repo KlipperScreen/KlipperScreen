@@ -32,7 +32,7 @@ class Panel(ScreenPanel):
         self.content.add(main_box)
 
         # ===== Top Row: Z (left), X/Y (center), Speed Selector (right) =====
-        top_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=24)
+        top_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=48)
         top_row.set_halign(Gtk.Align.CENTER)
         top_row.set_valign(Gtk.Align.CENTER)
         top_row.set_vexpand(True)
@@ -51,11 +51,11 @@ class Panel(ScreenPanel):
         z_grid.set_halign(Gtk.Align.CENTER)
 
         # Z+ (up)
-        btn_zp = self._create_jog_button("∧", "Z", "+")
+        btn_zp = self._create_jog_button("Z+", "Z", "+")
         z_grid.attach(btn_zp, 0, 0, 1, 1)
 
         # Z- (down)
-        btn_zm = self._create_jog_button("∨", "Z", "-")
+        btn_zm = self._create_jog_button("Z-", "Z", "-")
         z_grid.attach(btn_zm, 0, 1, 1, 1)
 
         z_box.pack_start(z_grid, False, False, 0)
@@ -76,11 +76,11 @@ class Panel(ScreenPanel):
         xy_grid.set_halign(Gtk.Align.CENTER)
 
         # Y+ (up arrow) - row 0, col 1
-        btn_yp = self._create_jog_button("∧", "Y", "+")
+        btn_yp = self._create_jog_button("Y+", "Y", "+") #-=---------------------------------------------------
         xy_grid.attach(btn_yp, 1, 0, 1, 1)
 
         # X- (left arrow) - row 1, col 0
-        btn_xm = self._create_jog_button("<", "X", "-")
+        btn_xm = self._create_jog_button("X-", "X", "-")
         xy_grid.attach(btn_xm, 0, 1, 1, 1)
 
         # Home button - row 1, col 1 (center)
@@ -94,11 +94,11 @@ class Panel(ScreenPanel):
         xy_grid.attach(btn_home, 1, 1, 1, 1)
 
         # X+ (right arrow) - row 1, col 2
-        btn_xp = self._create_jog_button(">", "X", "+")
+        btn_xp = self._create_jog_button("X+", "X", "+")
         xy_grid.attach(btn_xp, 2, 1, 1, 1)
 
         # Y- (down arrow) - row 2, col 1
-        btn_ym = self._create_jog_button("∨", "Y", "-")
+        btn_ym = self._create_jog_button("Y-", "Y", "-")
         xy_grid.attach(btn_ym, 1, 2, 1, 1)
 
         xy_box.pack_start(xy_grid, False, False, 0)
