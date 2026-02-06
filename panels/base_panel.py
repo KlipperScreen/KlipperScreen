@@ -43,6 +43,7 @@ class BasePanel(ScreenPanel):
         self.nav_bar.set_vexpand(True)
         self.nav_bar.get_style_context().add_class('nav-bar')
         self.nav_bar.set_size_request(70, -1)
+        self.nav_bar.set_no_show_all(True)
 
         # WorkCell logo at top
         logo_path = os.path.join(styles_dir, "workcell_logo.svg")
@@ -185,11 +186,12 @@ class BasePanel(ScreenPanel):
             self.time_update = GLib.timeout_add_seconds(1, self.update_time)
 
     def show_nav_bar(self, show=True):
-        #"""Show or hide the sidebar navigation bar."""
         if show:
-            self.nav_bar.show()
+            self.nav_bar.set_no_show_all(False)
+            self.nav_bar.show_all()
         else:
             self.nav_bar.hide()
+            self.nav_bar.set_no_show_all(True)
 
     def add_content(self, panel):
         self.current_panel = panel
