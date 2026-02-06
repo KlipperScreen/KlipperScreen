@@ -31,31 +31,39 @@ class Panel(ScreenPanel):
         main_box.set_margin_end(12)
         self.content.add(main_box)
 
-        # ===== Top: Jog Distance Selector =====
-        dist_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-        dist_box.set_halign(Gtk.Align.CENTER)
-        dist_box.set_margin_bottom(8)
+        # ===== Top Row: Z (left), X/Y (center), Speed Selector (right) =====
+        top_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=24)
+        top_row.set_halign(Gtk.Align.CENTER)
+        top_row.set_valign(Gtk.Align.CENTER)
+        top_row.set_vexpand(True)
 
-        for d in self.distances:
-            btn = Gtk.Button(label=f"{d}mm")
-            btn.get_style_context().add_class("jog-distance")
-            if d == self.distance:
-                btn.get_style_context().add_class("jog-distance-active")
-            btn.connect("clicked", self.change_distance, d)
-            btn.set_size_request(100, 44)
-            self.labels[f"dist_{d}"] = btn
-            dist_box.pack_start(btn, False, False, 0)
+        # Z Section (left)
+        z_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+        z_box.set_valign(Gtk.Align.CENTER)
+        z_label = Gtk.Label(label="Z")
+        z_label.get_style_context().add_class("section-label")
+        z_label.set_halign(Gtk.Align.CENTER)
+        z_box.pack_start(z_label, False, False, 0)
 
-        main_box.pack_start(dist_box, False, False, 0)
+        z_grid = Gtk.Grid()
+        z_grid.set_row_spacing(4)
+        z_grid.set_column_spacing(4)
+        z_grid.set_halign(Gtk.Align.CENTER)
 
-        # ===== Middle: Movement Controls =====
-        move_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=24)
-        move_box.set_halign(Gtk.Align.CENTER)
-        move_box.set_valign(Gtk.Align.CENTER)
-        move_box.set_vexpand(True)
+        # Z+ (up)
+        btn_zp = self._create_jog_button("∧", "Z", "+")
+        z_grid.attach(btn_zp, 0, 0, 1, 1)
 
-        # X/Y Section
+        # Z- (down)
+        btn_zm = self._create_jog_button("∨", "Z", "-")
+        z_grid.attach(btn_zm, 0, 1, 1, 1)
+
+        z_box.pack_start(z_grid, False, False, 0)
+        top_row.pack_start(z_box, False, False, 0)
+
+        # X/Y Section (center)
         xy_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+        xy_box.set_valign(Gtk.Align.CENTER)
         xy_label = Gtk.Label(label="X/Y")
         xy_label.get_style_context().add_class("section-label")
         xy_label.set_halign(Gtk.Align.START)
@@ -94,37 +102,25 @@ class Panel(ScreenPanel):
         xy_grid.attach(btn_ym, 1, 2, 1, 1)
 
         xy_box.pack_start(xy_grid, False, False, 0)
-        move_box.pack_start(xy_box, False, False, 0)
+        top_row.pack_start(xy_box, False, False, 0)
 
-        # Spacer between X/Y and Z
-        spacer = Gtk.Box()
-        spacer.set_size_request(40, -1)
-        move_box.pack_start(spacer, False, False, 0)
+        # Jog Distance Selector (right, vertical stack)
+        dist_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        dist_box.set_valign(Gtk.Align.CENTER)
 
-        # Z Section
-        z_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
-        z_label = Gtk.Label(label="Z")
-        z_label.get_style_context().add_class("section-label")
-        z_label.set_halign(Gtk.Align.CENTER)
-        z_box.pack_start(z_label, False, False, 0)
+        for d in self.distances:
+            btn = Gtk.Button(label=f"{d}mm")
+            btn.get_style_context().add_class("jog-distance")
+            if d == self.distance:
+                btn.get_style_context().add_class("jog-distance-active")
+            btn.connect("clicked", self.change_distance, d)
+            btn.set_size_request(100, 44)
+            self.labels[f"dist_{d}"] = btn
+            dist_box.pack_start(btn, False, False, 0)
 
-        z_grid = Gtk.Grid()
-        z_grid.set_row_spacing(4)
-        z_grid.set_column_spacing(4)
-        z_grid.set_halign(Gtk.Align.CENTER)
+        top_row.pack_start(dist_box, False, False, 0)
 
-        # Z+ (up)
-        btn_zp = self._create_jog_button("∧", "Z", "+")
-        z_grid.attach(btn_zp, 0, 0, 1, 1)
-
-        # Z- (down)
-        btn_zm = self._create_jog_button("∨", "Z", "-")
-        z_grid.attach(btn_zm, 0, 1, 1, 1)
-
-        z_box.pack_start(z_grid, False, False, 0)
-        move_box.pack_start(z_box, False, False, 0)
-
-        main_box.pack_start(move_box, True, True, 0)
+        main_box.pack_start(top_row, True, True, 0)
 
         # ===== Bottom: Temperature Controls =====
         temp_bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=16)
