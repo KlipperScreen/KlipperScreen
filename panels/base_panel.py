@@ -73,7 +73,7 @@ class BasePanel(ScreenPanel):
             btn = Gtk.Button()
             btn.set_can_focus(False)
             if os.path.exists(icon_path):
-                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(icon_path, 32, 32)
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(icon_path, 48, 48)
                 img = Gtk.Image.new_from_pixbuf(pixbuf)
             else:
                 img = Gtk.Image()
