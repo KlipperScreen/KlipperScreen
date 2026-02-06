@@ -367,6 +367,8 @@ class KlipperScreen(Gtk.Window):
             self.reload_panels()
             return
         self.base_panel.add_content(self.panels[panel])
+        # Update nav bar active state
+        self.base_panel.update_nav_from_panel(panel)
         logging.debug(f"Current panel hierarchy: {' > '.join(self._cur_panels)}")
         while len(self.panels[panel].menu) > 1:
             self.panels[panel].unload_menu()
@@ -417,7 +419,7 @@ class KlipperScreen(Gtk.Window):
             msg.get_style_context().add_class("message_popup_error")
             logging.info(f'error: {message}')
 
-        popup = Gtk.Popover(relative_to=self.base_panel.titlebar,
+        popup = Gtk.Popover(relative_to=self.base_panel.nav_bar,
                             halign=Gtk.Align.CENTER, width_request=int(self.width * .9))
         popup.get_style_context().add_class("message_popup_popover")
         popup.add(msg)

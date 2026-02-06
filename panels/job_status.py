@@ -1,28 +1,29 @@
 # -*- coding: utf-8 -*-
 import logging
 import os
+import pathlib
 
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import GLib, Gtk, Pango
-from gi.repository import Gdk, GdkPixbuf, Gio, Gtk, Pango
+from gi.repository import GLib, Gtk, Pango, GdkPixbuf
 from math import pi, sqrt, trunc
 from statistics import median
 from time import time
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.KlippyGtk import find_widget
-import os
-import pathlib
 
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
         title = title or _("Job Status")
         super().__init__(screen, title)
+        self.content.get_style_context().add_class("customBG")
+
+        styles_dir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles")
+        eagle_path = os.path.join(styles_dir, "cro_eagle.png")
+
         self.thumb_dialog = None
-        self.grid = Gtk.Box(orientation=Gtk.Orientation.VERTICAL) #Gtk.Grid(column_homogeneous=True)
-        iconPath = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles", "crologo.svg")
         self.pos_z = 0.0
         self.extrusion = 100
         self.speed_factor = 1.0
@@ -50,250 +51,278 @@ class Panel(ScreenPanel):
         self.mms = _("mm/s")
         self.mms2 = _("mm/s²")
         self.mms3 = _("mm³/s")
-        self.status_grid = None
-        self.move_grid = None
-        self.time_grid = None
-        self.extrusion_grid = None
+        self.temp_labels = {}
+        self.buttons = {}
 
-        data = ['pos_x', 'pos_y', 'pos_z', 'time_left', 'duration', 'slicer_time', 'file_time',
-                'filament_time', 'est_time', 'speed_factor', 'req_speed', 'max_accel', 'extrude_factor', 'zoffset',
-                'zoffset', 'filament_used', 'filament_total', 'advance', 'layer', 'total_layers', 'height',
-                'flowrate']
-
-        for item in data:
-            self.labels[item] = Gtk.Label(label="-", hexpand=True, vexpand=True)
-
-        self.labels['left'] = Gtk.Label(_("Left:"))
-        self.labels['elapsed'] = Gtk.Label(_("Elapsed:"))
-        self.labels['total'] = Gtk.Label(_("Total:"))
-        self.labels['slicer'] = Gtk.Label(_("Slicer:"))
-        self.labels['file_tlbl'] = Gtk.Label(_("File:"))
-        self.labels['fila_tlbl'] = Gtk.Label(_("Filament:"))
-        self.labels['speed_lbl'] = Gtk.Label(_("Speed:"))
-        self.labels['accel_lbl'] = Gtk.Label(_("Acceleration:"))
-        self.labels['flow'] = Gtk.Label(_("Flow:"))
-        self.labels['zoffset_lbl'] = Gtk.Label(_("Z offset:"))
-        self.labels['fila_used_lbl'] = Gtk.Label(_("Filament used:"))
-        self.labels['fila_total_lbl'] = Gtk.Label(_("Filament total:"))
-        self.labels['pa_lbl'] = Gtk.Label(_("Pressure Advance:"))
-        self.labels['flowrate_lbl'] = Gtk.Label(_("Flowrate:"))
-        self.labels['height_lbl'] = Gtk.Label(_("Height:"))
-        self.labels['layer_lbl'] = Gtk.Label(_("Layer:"))
-
-        self.labels['file'] = Gtk.Label(label="Filename")
-        # self.labels['file'].get_style_context().add_class("printing-filename")
-        self.labels['lcdmessage'] = Gtk.Label(no_show_all=True)
-        self.labels['lcdmessage'].get_style_context().add_class("printing-status")
-
-        self.grid.set_margin_top(10)
-        self.grid.set_margin_bottom(75)
-        self.grid.set_margin_right(30)
-        self.grid.set_margin_left(30)
-        # Aligns stuff
-        for label in self.labels:
-            self.labels[label].set_halign(Gtk.Align.START)
-            self.labels[label].set_ellipsize(Pango.EllipsizeMode.END)
-            
-        # Header with logo and title
-        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(iconPath, 84, 84)
-        image = Gtk.Image.new_from_pixbuf(pixbuf)
-        hbox.pack_start(image, False, False, 0)
-
-        titleLabel = Gtk.Label()
-        titleLabel.set_markup("<b>VT CRO</b>")
-        titleLabel.set_name("large_text")
-        titleLabel.set_justify(Gtk.Justification.CENTER)
-        hbox.pack_start(titleLabel, False, False, 0)
-
-        hbox.set_hexpand(False)
-        hbox.set_vexpand(False)
-        hbox.set_halign(Gtk.Align.CENTER)
-        hbox.set_valign(Gtk.Align.START)
-        self.grid.add(hbox)
-
-        self.labels['thumbnail'] = self._gtk.Button("file")
-        self.labels['thumbnail'].connect("clicked", self.show_fullscreen_thumbnail)
-        self.labels['info_grid'] = Gtk.Grid()
-        self.labels['info_grid'].attach(self.labels['thumbnail'], 0, 0, 1, 1)
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
         if self.current_extruder:
             diameter = float(self._printer.get_config_section(self.current_extruder)['filament_diameter'])
             self.fila_section = pi * ((diameter / 2) ** 2)
-            
-                
-        self.labels['darea'] = Gtk.DrawingArea()
-        self.labels['darea'].connect("draw", self.on_draw)
-        # Percentage
-        box = Gtk.Box(halign=Gtk.Align.CENTER)
+
+        # ===== Main layout: horizontal split =====
+        main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        main_box.set_hexpand(True)
+        main_box.set_vexpand(True)
+        self.content.add(main_box)
+
+        # Top content area (thumbnail left, info right)
+        top_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
+        top_box.set_hexpand(True)
+        top_box.set_vexpand(True)
+        top_box.set_margin_top(8)
+        top_box.set_margin_start(12)
+        top_box.set_margin_end(12)
+
+        # Left: Thumbnail
+        self.labels = {}
+        self.labels['thumbnail'] = self._gtk.Button("file")
+        self.labels['thumbnail'].connect("clicked", self.show_fullscreen_thumbnail)
+        self.labels['thumbnail'].set_hexpand(True)
+        self.labels['thumbnail'].set_vexpand(True)
+        self.labels['thumbnail'].set_size_request(300, 260)
+        thumb_box = Gtk.Box()
+        thumb_box.set_hexpand(True)
+        thumb_box.set_vexpand(True)
+        thumb_box.add(self.labels['thumbnail'])
+        top_box.pack_start(thumb_box, True, True, 0)
+
+        # Right: Info panel
+        info_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
+        info_box.set_hexpand(True)
+        info_box.set_margin_end(4)
+
+        # Eagle logo (top-right, small)
+        if os.path.exists(eagle_path):
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(eagle_path, 36, 36)
+            eagle_img = Gtk.Image.new_from_pixbuf(pixbuf)
+            eagle_img.set_halign(Gtk.Align.END)
+            eagle_img.set_margin_bottom(2)
+            info_box.pack_start(eagle_img, False, False, 0)
+
+        # Filename
+        self.labels['file'] = Gtk.Label(label="Filename")
+        self.labels['file'].get_style_context().add_class("print-filename-label")
+        self.labels['file'].set_halign(Gtk.Align.START)
+        self.labels['file'].set_ellipsize(Pango.EllipsizeMode.END)
+        self.labels['file'].set_max_width_chars(22)
+        info_box.pack_start(self.labels['file'], False, False, 0)
+
+        # Author
+        self.labels['author'] = Gtk.Label(label="Author Name")
+        self.labels['author'].get_style_context().add_class("print-author-label")
+        self.labels['author'].set_halign(Gtk.Align.START)
+        info_box.pack_start(self.labels['author'], False, False, 0)
+
+        # Spacer
+        info_box.pack_start(Gtk.Box(), False, False, 2)
+
+        # Pause button
+        pause_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        pause_icon = Gtk.Label(label="⏸")
+        pause_icon.set_margin_start(12)
+        self.buttons['pause'] = Gtk.Button()
+        self.buttons['pause'].get_style_context().add_class("control-button")
+        pause_inner = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        pause_inner.pack_start(Gtk.Label(label="  ⏸"), False, False, 0)
+        pause_lbl = Gtk.Label(label="PAUSE")
+        pause_lbl.set_hexpand(True)
+        pause_inner.pack_start(pause_lbl, True, True, 0)
+        self.buttons['pause'].add(pause_inner)
+        self.buttons['pause'].set_hexpand(True)
+        self.buttons['pause'].connect("clicked", self.pause)
+        info_box.pack_start(self.buttons['pause'], False, False, 0)
+
+        # Resume button (hidden initially)
+        self.buttons['resume'] = Gtk.Button()
+        self.buttons['resume'].get_style_context().add_class("control-button")
+        resume_inner = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        resume_inner.pack_start(Gtk.Label(label="  ▶"), False, False, 0)
+        resume_lbl = Gtk.Label(label="RESUME")
+        resume_lbl.set_hexpand(True)
+        resume_inner.pack_start(resume_lbl, True, True, 0)
+        self.buttons['resume'].add(resume_inner)
+        self.buttons['resume'].set_hexpand(True)
+        self.buttons['resume'].connect("clicked", self.resume)
+        self.buttons['resume'].set_no_show_all(True)
+        info_box.pack_start(self.buttons['resume'], False, False, 0)
+
+        # Cancel button
+        self.buttons['cancel'] = Gtk.Button()
+        self.buttons['cancel'].get_style_context().add_class("control-button")
+        cancel_inner = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        cancel_inner.pack_start(Gtk.Label(label="  ⊗"), False, False, 0)
+        cancel_lbl = Gtk.Label(label="CANCEL")
+        cancel_lbl.set_hexpand(True)
+        cancel_inner.pack_start(cancel_lbl, True, True, 0)
+        self.buttons['cancel'].add(cancel_inner)
+        self.buttons['cancel'].set_hexpand(True)
+        self.buttons['cancel'].connect("clicked", self.cancel)
+        info_box.pack_start(self.buttons['cancel'], False, False, 0)
+
+        # Spacer
+        info_box.pack_start(Gtk.Box(), False, False, 2)
+
+        # Progress section
+        progress_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+
+        # Percentage + time remaining row
+        progress_top = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         self.labels['progress_text'] = Gtk.Label(label="0%")
-        self.labels['progress_text'].get_style_context().add_class("printing-progress-text")
-        box.add(self.labels['progress_text'])
+        self.labels['progress_text'].get_style_context().add_class("print-progress-text")
+        self.labels['progress_text'].set_halign(Gtk.Align.START)
+        progress_top.pack_start(self.labels['progress_text'], False, False, 0)
 
-        # Progress Bar
-        overlay = Gtk.Overlay(hexpand=True)
-        height = self._gtk.font_size * 2  # Reduced height
-        width = self._gtk.font_size * 5
-        overlay.set_size_request(width, height)
-        overlay.add(self.labels['darea'])
-        overlay.add_overlay(box)
-        self.grid.add(overlay)
+        self.labels['time_left'] = Gtk.Label(label="--")
+        self.labels['time_left'].get_style_context().add_class("print-time-text")
+        self.labels['time_left'].set_halign(Gtk.Align.END)
+        progress_top.pack_end(self.labels['time_left'], False, False, 0)
+        progress_box.add(progress_top)
 
-        self.buttons = {}
-        self.create_buttons()
-        self.buttons['button_grid'] = Gtk.Grid(row_homogeneous=True, column_homogeneous=True, vexpand=False, column_spacing=20)
-        
+        # Progress bar (custom drawn)
+        self.labels['darea'] = Gtk.DrawingArea()
+        self.labels['darea'].set_size_request(-1, 8)
+        self.labels['darea'].connect("draw", self.on_draw)
+        progress_box.add(self.labels['darea'])
 
-        self.create_status_grid()
-        # self.create_extrusion_grid()
-        # self.create_time_grid()
-        # self.create_move_grid()
-        self.grid.add(self.labels['info_grid'])
-        self.grid.add(self.buttons['button_grid'])
-        
-        self.switch_info(info=self.status_grid)
-        
-        
-        self.content.add(self.grid)
+        # Layer count
+        self.labels['layer'] = Gtk.Label(label="0/0")
+        self.labels['layer'].get_style_context().add_class("print-layer-text")
+        self.labels['layer'].set_halign(Gtk.Align.START)
+        self.labels['total_layers'] = Gtk.Label(label="0")
+        progress_box.add(self.labels['layer'])
 
-    def create_status_grid(self, widget=None):
-        # buttons = {
-        #     'speed': self._gtk.Button("speed+", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
-        #     'z': self._gtk.Button("home-z", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
-        #     'extrusion': self._gtk.Button("extrude", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
-        #     'fan': self._gtk.Button("fan", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
-        #     'elapsed': self._gtk.Button("clock", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
-        #     'left': self._gtk.Button("hourglass", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
-        # }
-        
-        buttons = {
-            'elapsed': self._gtk.Button("clock", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
-            'left': self._gtk.Button("hourglass", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
-        }
-        
-        for button in buttons:
-            buttons[button].set_halign(Gtk.Align.START)
-        self.buttons.update(buttons)
+        info_box.pack_start(progress_box, False, False, 0)
 
-        szfe = Gtk.Grid(column_homogeneous=True)
+        top_box.pack_start(info_box, True, True, 0)
+        main_box.pack_start(top_box, True, True, 0)
 
-        info = Gtk.Grid(row_homogeneous=True)
-        # File Name
-        fi_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, halign=Gtk.Align.START)
-        fi_box.add(Gtk.Label(label="  Filename: "))
-        fi_box.add(self.labels['file'])
-        info.attach(fi_box,0,0,1,1)
-        # info.get_style_context().add_class("printing-info")
-        info.attach(szfe, 0, 1, 1, 2)
-        info.attach(self.buttons['elapsed'], 0, 1, 1, 1)
-        info.attach(self.buttons['left'], 0, 2, 1, 1)
-        self.status_grid = info
+        # Bottom temperature bar
+        temp_bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=16)
+        temp_bar.set_halign(Gtk.Align.CENTER)
+        temp_bar.set_valign(Gtk.Align.END)
+        temp_bar.set_margin_bottom(10)
+        temp_bar.set_margin_start(20)
+        temp_bar.set_margin_end(20)
 
-    def create_extrusion_grid(self, widget=None):
-        goback = self._gtk.Button("back", None, "color1", self.bts, Gtk.PositionType.TOP, False)
-        goback.connect("clicked", self.switch_info, self.status_grid)
-        goback.set_hexpand(False)
-        goback.get_style_context().add_class("printing-info")
+        nozzle_card = self._create_temp_card("Nozzle", "nozzle_blue", "extruder")
+        temp_bar.pack_start(nozzle_card, False, False, 0)
 
-        info = Gtk.Grid(hexpand=True, vexpand=True, halign=Gtk.Align.START)
-        info.get_style_context().add_class("printing-info-secondary")
-        info.attach(goback, 0, 0, 1, 6)
-        info.attach(self.labels['flow'], 1, 0, 1, 1)
-        info.attach(self.labels['extrude_factor'], 2, 0, 1, 1)
-        info.attach(self.labels['flowrate_lbl'], 1, 1, 1, 1)
-        info.attach(self.labels['flowrate'], 2, 1, 1, 1)
-        info.attach(self.labels['pa_lbl'], 1, 2, 1, 1)
-        info.attach(self.labels['advance'], 2, 2, 1, 1)
-        info.attach(self.labels['fila_used_lbl'], 1, 3, 1, 1)
-        info.attach(self.labels['filament_used'], 2, 3, 1, 1)
-        info.attach(self.labels['fila_total_lbl'], 1, 4, 1, 1)
-        info.attach(self.labels['filament_total'], 2, 4, 1, 1)
-        self.extrusion_grid = info
-        self.buttons['extrusion'].connect("clicked", self.switch_info, self.extrusion_grid)
-        
+        bed_card = self._create_temp_card("Bed", "bed_orange", "heater_bed")
+        temp_bar.pack_start(bed_card, False, False, 0)
 
-    def create_move_grid(self, widget=None):
-        goback = self._gtk.Button("back", None, "color2", self.bts, Gtk.PositionType.TOP, False)
-        goback.connect("clicked", self.switch_info, self.status_grid)
-        goback.set_hexpand(False)
-        goback.get_style_context().add_class("printing-info")
+        main_box.pack_end(temp_bar, False, False, 0)
 
-        pos_box = Gtk.Box(spacing=5)
-        pos_box.add(self.labels['pos_x'])
-        pos_box.add(self.labels['pos_y'])
-        pos_box.add(self.labels['pos_z'])
+        # Hidden labels for compatibility with process_update
+        data_keys = ['pos_x', 'pos_y', 'pos_z', 'duration', 'slicer_time', 'file_time',
+                     'filament_time', 'est_time', 'speed_factor', 'req_speed', 'max_accel',
+                     'extrude_factor', 'zoffset', 'filament_used', 'filament_total',
+                     'advance', 'height', 'flowrate']
+        for item in data_keys:
+            self.labels[item] = Gtk.Label(label="-")
 
-        info = Gtk.Grid(hexpand=True, vexpand=True, halign=Gtk.Align.START)
-        info.get_style_context().add_class("printing-info-secondary")
-        info.attach(goback, 0, 0, 1, 6)
-        info.attach(self.labels['speed_lbl'], 1, 0, 1, 1)
-        info.attach(self.labels['req_speed'], 2, 0, 1, 1)
-        info.attach(self.labels['accel_lbl'], 1, 1, 1, 1)
-        info.attach(self.labels['max_accel'], 2, 1, 1, 1)
-        info.attach(pos_box, 1, 2, 2, 1)
-        info.attach(self.labels['zoffset_lbl'], 1, 3, 1, 1)
-        info.attach(self.labels['zoffset'], 2, 3, 1, 1)
-        info.attach(self.labels['height_lbl'], 1, 4, 1, 1)
-        info.attach(self.labels['height'], 2, 4, 1, 1)
-        info.attach(self.labels['layer_lbl'], 1, 5, 1, 1)
-        info.attach(self.labels['layer'], 2, 5, 1, 1)
-        self.move_grid = info
+        self.labels['left'] = Gtk.Label(_("Left:"))
+        self.labels['elapsed'] = Gtk.Label(_("Elapsed:"))
+        self.labels['lcdmessage'] = Gtk.Label(no_show_all=True)
 
-    def create_time_grid(self, widget=None):
-        goback = self._gtk.Button("back", None, "color3", self.bts, Gtk.PositionType.TOP, False)
-        goback.connect("clicked", self.switch_info, self.status_grid)
-        goback.set_hexpand(False)
+        # Restart and menu buttons (for end-of-print state)
+        self.buttons['restart'] = Gtk.Button(label="Restart")
+        self.buttons['restart'].get_style_context().add_class("control-button")
+        self.buttons['restart'].connect("clicked", self.restart)
+        self.buttons['menu'] = Gtk.Button(label="Main Menu")
+        self.buttons['menu'].get_style_context().add_class("control-button")
+        self.buttons['menu'].connect("clicked", self.close_panel)
 
-        info = Gtk.Grid()
-        info.get_style_context().add_class("printing-info-secondary")
-        info.attach(goback, 0, 0, 1, 6)
-        info.attach(self.labels['elapsed'], 1, 0, 1, 1)
-        info.attach(self.labels['duration'], 2, 0, 1, 1)
-        info.attach(self.labels['left'], 1, 1, 1, 1)
-        info.attach(self.labels['time_left'], 2, 1, 1, 1)
-        info.attach(self.labels['total'], 1, 2, 1, 1)
-        info.attach(self.labels['est_time'], 2, 2, 1, 1)
-        info.attach(self.labels['slicer'], 1, 3, 1, 1)
-        info.attach(self.labels['slicer_time'], 2, 3, 1, 1)
-        info.attach(self.labels['file_tlbl'], 1, 4, 1, 1)
-        info.attach(self.labels['file_time'], 2, 4, 1, 1)
-        info.attach(self.labels['fila_tlbl'], 1, 5, 1, 1)
-        info.attach(self.labels['filament_time'], 2, 5, 1, 1)
-        self.time_grid = info
-        self.buttons['elapsed'].connect("clicked", self.switch_info, self.time_grid)
-        self.buttons['left'].connect("clicked", self.switch_info, self.time_grid)
+        # Compatibility buttons
+        self.buttons['save_offset_probe'] = Gtk.Button(label="Save Z Probe")
+        self.buttons['save_offset_probe'].connect("clicked", self.save_offset, "probe")
+        self.buttons['save_offset_endstop'] = Gtk.Button(label="Save Z Endstop")
+        self.buttons['save_offset_endstop'].connect("clicked", self.save_offset, "endstop")
 
-    def switch_info(self, widget=None, info=None):
-        if not info:
-            logging.debug("No info to attach")
-            return
-        if self._screen.vertical_mode:
-            self.labels['info_grid'].remove_row(1)
-            self.labels['info_grid'].attach(info, 0, 1, 1, 1)
+    def _create_temp_card(self, label_text, icon_type, device):
+        """Create a temperature display card."""
+        card = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        card.get_style_context().add_class("temp-card")
+        card.set_size_request(280, 56)
+
+        # Thermometer indicator
+        icon_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        icon_box.set_valign(Gtk.Align.CENTER)
+        icon_box.set_margin_start(8)
+
+        indicator = Gtk.DrawingArea()
+        indicator.set_size_request(6, 32)
+        if icon_type == "nozzle_blue":
+            indicator.connect("draw", self._draw_indicator, 0.2, 0.6, 1.0)
         else:
-            self.labels['info_grid'].remove_column(1)
-            self.labels['info_grid'].attach(info, 1, 0, 1, 1)
-            pass
-        self.labels['info_grid'].show_all()
+            indicator.connect("draw", self._draw_indicator, 1.0, 0.5, 0.2)
+        icon_box.add(indicator)
+        card.pack_start(icon_box, False, False, 0)
+
+        # Temperature info
+        info_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        info_box.set_valign(Gtk.Align.CENTER)
+
+        name_label = Gtk.Label(label=label_text)
+        name_label.get_style_context().add_class("temp-label")
+        name_label.set_halign(Gtk.Align.START)
+        info_box.add(name_label)
+
+        temp_label = Gtk.Label(label="--°")
+        temp_label.get_style_context().add_class("temp-value")
+        temp_label.set_halign(Gtk.Align.START)
+        info_box.add(temp_label)
+
+        card.pack_start(info_box, True, True, 0)
+
+        state_label = Gtk.Label(label="Printing")
+        state_label.get_style_context().add_class("temp-state")
+        state_label.set_valign(Gtk.Align.CENTER)
+        state_label.set_margin_end(12)
+        card.pack_end(state_label, False, False, 0)
+
+        self.temp_labels[device] = {
+            'temp': temp_label,
+            'state': state_label,
+        }
+
+        return card
+
+    def _draw_indicator(self, widget, ctx, r, g, b):
+        width = widget.get_allocated_width()
+        height = widget.get_allocated_height()
+        radius = width / 2
+        ctx.set_source_rgb(r, g, b)
+        ctx.arc(width / 2, radius, radius, 3.14159, 0)
+        ctx.arc(width / 2, height - radius, radius, 0, 3.14159)
+        ctx.close_path()
+        ctx.fill()
+        return True
 
     def on_draw(self, da, ctx):
         width = da.get_allocated_width()
         height = da.get_allocated_height()
+        radius = height / 2
 
-        # Background of the progress bar
-        ctx.set_source_rgb(0.13, 0.13, 0.13)
-        ctx.rectangle(0, 0, width, height)
+        # Background
+        ctx.set_source_rgb(0.2, 0.21, 0.25)
+        self._rounded_rect(ctx, 0, 0, width, height, radius)
         ctx.fill()
 
-        # Calculate the filled portion of the rectangle
-        filled_width = width * self.progress
-
-        # Filled portion of the progress bar
-        ctx.set_source_rgb(0.718, 0.110, 0.110)
-        ctx.rectangle(0, 0, filled_width, height)
+        # Filled portion
+        filled_width = max(width * self.progress, height)
+        ctx.set_source_rgb(0.898, 0.224, 0.208)
+        self._rounded_rect(ctx, 0, 0, filled_width, height, radius)
         ctx.fill()
 
         return True
+
+    def _rounded_rect(self, ctx, x, y, w, h, r):
+        from math import pi
+        ctx.arc(x + r, y + r, r, pi, 1.5 * pi)
+        ctx.arc(x + w - r, y + r, r, 1.5 * pi, 2 * pi)
+        ctx.arc(x + w - r, y + h - r, r, 0, 0.5 * pi)
+        ctx.arc(x + r, y + h - r, r, 0.5 * pi, pi)
+        ctx.close_path()
 
     def activate(self):
         if self.flow_timeout is None:
@@ -308,44 +337,6 @@ class Panel(ScreenPanel):
         if self.animation_timeout is not None:
             GLib.source_remove(self.animation_timeout)
             self.animation_timeout = None
-
-    def create_buttons(self):
-
-        self.buttons = {
-            'cancel': self.create_rounded_button(None, "Cancel", self.cancel),
-            'control': self._gtk.Button("settings", _("Settings"), "color3"),
-            'fine_tune': self._gtk.Button("fine-tune", _("Fine Tuning"), "color4"),
-            'menu': self.create_rounded_button(None, "Main Menu", self.close_panel),
-            'pause': self.create_rounded_button(None, "Pause", self.pause),
-            'restart': self.create_rounded_button(None, "Restart", self.restart),
-            'resume': self.create_rounded_button(None, "Resume", self.resume),
-            'save_offset_probe': self._gtk.Button("home-z", _("Save Z") + "\n" + "Probe", "color1"),
-            'save_offset_endstop': self._gtk.Button("home-z", _("Save Z") + "\n" + "Endstop", "color2"),
-        }
-        self.buttons['save_offset_probe'].connect("clicked", self.save_offset, "probe")
-        self.buttons['save_offset_endstop'].connect("clicked", self.save_offset, "endstop")
-        
-    def create_rounded_button(self, icon_path, label_text, callback):
-        button = Gtk.Button()
-        button.get_style_context().add_class("rounded-button")
-        if label_text == "Print":
-            button.get_style_context().add_class("print-button")
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-
-        if icon_path:
-            image = Gtk.Image.new_from_file(icon_path)
-            image.set_valign(Gtk.Align.CENTER)
-            vbox.pack_start(image, True, True, 0)
-
-        label = Gtk.Label(label=label_text)
-        label.set_valign(Gtk.Align.CENTER)
-        label.set_halign(Gtk.Align.CENTER)
-        vbox.pack_start(label, False, False, 0)
-
-        vbox.set_valign(Gtk.Align.CENTER)
-        button.add(vbox)
-        button.connect("clicked", callback)
-        return button
 
     def save_offset(self, widget, device):
         sign = "+" if self.zoffset > 0 else "-"
@@ -382,7 +373,7 @@ class Panel(ScreenPanel):
 
     def restart(self, widget):
         if self.filename:
-            self.disable_button("restart")
+            self.buttons['restart'].set_sensitive(False)
             if self.state == "error":
                 self._screen._ws.klippy.gcode_script("SDCARD_RESET_FILE")
             self._screen._ws.klippy.print_start(self.filename)
@@ -396,7 +387,8 @@ class Panel(ScreenPanel):
         self._screen.show_all()
 
     def pause(self, widget):
-        self.disable_button("pause", "resume")
+        self.buttons['pause'].set_sensitive(False)
+        self.buttons['resume'].set_sensitive(False)
         self._screen._ws.klippy.print_pause()
         self._screen.show_all()
 
@@ -417,11 +409,14 @@ class Panel(ScreenPanel):
             self.menu_item_clicked(None, {"panel": "exclude"})
             return
         if response_id == Gtk.ResponseType.CANCEL:
-            self.enable_button("pause", "cancel")
+            self.buttons['pause'].set_sensitive(True)
+            self.buttons['cancel'].set_sensitive(True)
             return
         logging.debug("Canceling print")
         self.set_state("cancelling")
-        self.disable_button("pause", "resume", "cancel")
+        self.buttons['pause'].set_sensitive(False)
+        self.buttons['resume'].set_sensitive(False)
+        self.buttons['cancel'].set_sensitive(False)
         self._screen._ws.klippy.print_cancel()
 
     def close_panel(self, widget=None):
@@ -431,16 +426,18 @@ class Panel(ScreenPanel):
 
     def enable_button(self, *args):
         for arg in args:
-            self.buttons[arg].set_sensitive(True)
+            if arg in self.buttons:
+                self.buttons[arg].set_sensitive(True)
 
     def disable_button(self, *args):
         for arg in args:
-            self.buttons[arg].set_sensitive(False)
+            if arg in self.buttons:
+                self.buttons[arg].set_sensitive(False)
 
     def new_print(self):
         self._screen.screensaver.close()
         if "virtual_sdcard" in self._printer.data:
-            logging.info("reseting progress")
+            logging.info("resetting progress")
             self._printer.data["virtual_sdcard"]["progress"] = 0
         self.update_progress(0.0)
         self.set_state("printing")
@@ -459,19 +456,19 @@ class Panel(ScreenPanel):
         elif action != "notify_status_update":
             return
 
+        # Update temperatures
         for x in self._printer.get_temp_devices():
             if x in data:
-                self.update_temp(
-                    x,
-                    self._printer.get_stat(x, "temperature"),
-                    self._printer.get_stat(x, "target"),
-                    self._printer.get_stat(x, "power"),
-                    digits=0
-                )
-                # if x in self.buttons['extruder']:
-                #     self.buttons['extruder'][x].set_label(self.labels[x].get_text())
-                # elif x in self.buttons['heater']:
-                #     self.buttons['heater'][x].set_label(self.labels[x].get_text())
+                temp = self._printer.get_stat(x, "temperature")
+                target = self._printer.get_stat(x, "target")
+                if x in self.temp_labels and temp is not None:
+                    self.temp_labels[x]['temp'].set_label(f"{temp:.0f}°")
+                    if self.state in ("printing", "paused"):
+                        self.temp_labels[x]['state'].set_label("Printing")
+                    elif target and target > 0:
+                        self.temp_labels[x]['state'].set_label("Heating")
+                    else:
+                        self.temp_labels[x]['state'].set_label("Idle")
 
         if "display_status" in data and "message" in data["display_status"]:
             if data['display_status']['message']:
@@ -479,18 +476,6 @@ class Panel(ScreenPanel):
                 self.labels['lcdmessage'].show()
             else:
                 self.labels['lcdmessage'].hide()
-
-        if 'toolhead' in data:
-            if 'extruder' in data['toolhead'] and data['toolhead']['extruder'] != self.current_extruder:
-                self.labels['temp_grid'].remove_column(0)
-                self.labels['temp_grid'].insert_column(0)
-                self.current_extruder = data["toolhead"]["extruder"]
-                self.labels['temp_grid'].attach(self.buttons['extruder'][self.current_extruder], 0, 0, 1, 1)
-                self._screen.show_all()
-            if "max_accel" in data["toolhead"]:
-                self.labels['max_accel'].set_label(f"{data['toolhead']['max_accel']:.0f} {self.mms2}")
-        if 'extruder' in data and 'pressure_advance' in data['extruder']:
-            self.labels['advance'].set_label(f"{data['extruder']['pressure_advance']:.2f}")
 
         if 'gcode_move' in data:
             if 'gcode_position' in data['gcode_move']:
@@ -505,27 +490,19 @@ class Panel(ScreenPanel):
             if 'homing_origin' in data['gcode_move']:
                 self.zoffset = float(data['gcode_move']['homing_origin'][2])
                 self.labels['zoffset'].set_label(f"{self.zoffset:.3f} {self.mm}")
+
         if 'motion_report' in data:
             if 'live_position' in data['motion_report']:
-                self.labels['pos_x'].set_label(f"X: {data['motion_report']['live_position'][0]:6.2f}")
-                self.labels['pos_y'].set_label(f"Y: {data['motion_report']['live_position'][1]:6.2f}")
-                self.labels['pos_z'].set_label(f"Z: {data['motion_report']['live_position'][2]:6.2f}")
                 pos = data["motion_report"]["live_position"]
                 now = time()
                 if self.prev_pos is not None:
                     interval = (now - self.prev_pos[1])
-                    # Calculate Flowrate
                     evelocity = (pos[3] - self.prev_pos[0][3]) / interval
                     self.flowstore.append(self.fila_section * evelocity)
                 self.prev_pos = [pos, now]
-            if 'live_velocity' in data['motion_report']:
-                self.vel = float(data["motion_report"]["live_velocity"])
-                self.labels['req_speed'].set_label(
-                    f"{self.speed}% {self.vel:3.0f}/{self.req_speed:3.0f} "
-                    f"{f'{self.mms}' if self.vel < 1000 and self.req_speed < 1000 and self._screen.width > 500 else ''}"
-                )
             if 'live_extruder_velocity' in data['motion_report']:
                 self.flowstore.append(self.fila_section * float(data["motion_report"]["live_extruder_velocity"]))
+
         if "print_stats" in data:
             if 'state' in data['print_stats']:
                 self.set_state(
@@ -545,7 +522,7 @@ class Panel(ScreenPanel):
                 if ('current_layer' in data['print_stats']['info']
                         and data['print_stats']['info']['current_layer'] is not None):
                     self.labels['layer'].set_label(
-                        f"{data['print_stats']['info']['current_layer']} / "
+                        f"{data['print_stats']['info']['current_layer']}/"
                         f"{self.labels['total_layers'].get_text()}"
                     )
             if 'total_duration' in data["print_stats"]:
@@ -559,23 +536,18 @@ class Panel(ScreenPanel):
         self.flowrate = median(self.flowstore)
         self.flowstore = []
         self.labels['flowrate'].set_label(f"{self.flowrate:.1f} {self.mms3}")
-        self.buttons['extrusion'].set_label(f"{self.extrusion:3}% {self.flowrate:5.1f} {self.mms3}")
         return True
 
     def update_time_left(self):
         progress = (
-            max(self._printer.get_stat('virtual_sdcard', 'file_position') - self.file_metadata['gcode_start_byte'], 0)
-            / (self.file_metadata['gcode_end_byte'] - self.file_metadata['gcode_start_byte'])
+            max(self._printer.get_stat('virtual_sdcard', 'file_position') - self.file_metadata.get('gcode_start_byte', 0), 0)
+            / max((self.file_metadata.get('gcode_end_byte', 1) - self.file_metadata.get('gcode_start_byte', 0)), 1)
         ) if "gcode_start_byte" in self.file_metadata else self._printer.get_stat('virtual_sdcard', 'progress')
 
-        elapsed_label = f"{self.labels['elapsed'].get_text()}  {self.labels['duration'].get_text()}"
-        self.buttons['elapsed'].set_label(elapsed_label)
-        find_widget(self.buttons['elapsed'], Gtk.Label).set_ellipsize(Pango.EllipsizeMode.END)
-
-        last_time = self.file_metadata['last_time'] if "last_time" in self.file_metadata else 0
-        slicer_time = self.file_metadata['estimated_time'] if 'estimated_time' in self.file_metadata else 0
+        last_time = self.file_metadata.get('last_time', 0)
+        slicer_time = self.file_metadata.get('estimated_time', 0)
         print_duration = float(self._printer.get_stat('print_stats', 'print_duration'))
-        if print_duration < 1:  # No-extrusion
+        if print_duration < 1:
             if last_time:
                 print_duration = last_time * progress
             elif slicer_time:
@@ -584,16 +556,10 @@ class Panel(ScreenPanel):
                 print_duration = float(self._printer.get_stat('print_stats', 'total_duration'))
 
         fila_used = float(self._printer.get_stat('print_stats', 'filament_used'))
+        filament_time = 0
         if 'filament_total' in self.file_metadata and self.file_metadata['filament_total'] >= fila_used > 0:
             filament_time = (print_duration / (fila_used / self.file_metadata['filament_total']))
-            self.labels["filament_time"].set_label(self.format_time(filament_time))
-        else:
-            filament_time = 0
-        if progress > 0:
-            file_time = (print_duration / progress)
-            self.labels["file_time"].set_label(self.format_time(file_time))
-        else:
-            file_time = 0
+        file_time = (print_duration / progress) if progress > 0 else 0
 
         estimated = 0
         timeleft_type = self._config.get_config()['main'].get('print_estimate_method', 'auto')
@@ -609,16 +575,21 @@ class Panel(ScreenPanel):
             )
         if estimated > 1:
             progress = min(max(print_duration / estimated, 0), 1)
-            self.labels["est_time"].set_label(self.format_time(estimated))
-            self.labels["time_left"].set_label(self.format_eta(estimated, print_duration))
-            remaining_label = f"{self.labels['left'].get_text()}  {self.labels['time_left'].get_text()}"
-            self.buttons['left'].set_label(remaining_label)
-            find_widget(self.buttons['left'], Gtk.Label).set_ellipsize(Pango.EllipsizeMode.END)
+            remaining = estimated - print_duration
+            if remaining > 0:
+                hours = int(remaining // 3600)
+                minutes = int((remaining % 3600) // 60)
+                if hours > 0:
+                    self.labels['time_left'].set_label(f"{hours}h {minutes:02d}m")
+                else:
+                    self.labels['time_left'].set_label(f"{minutes}m")
+            else:
+                self.labels['time_left'].set_label("--")
         self.update_progress(progress)
 
     def estimate_time(self, progress, print_duration, file_time, filament_time, slicer_time, last_time):
         estimate_above = 0.3
-        slicer_time /= sqrt(self.speed_factor)
+        slicer_time /= sqrt(self.speed_factor) if self.speed_factor > 0 else 1
         if progress <= estimate_above:
             return last_time or slicer_time or filament_time or file_time
         objects = self._printer.get_stat("exclude_object", "objects")
@@ -632,12 +603,8 @@ class Panel(ScreenPanel):
         if total_weight == 0:
             return 0
         return (
-            (
-                last_time * weight_last
-                + slicer_time * weight_slicer
-                + filament_time * weight_filament
-                + file_time * weight_file
-            )
+            (last_time * weight_last + slicer_time * weight_slicer
+             + filament_time * weight_filament + file_time * weight_file)
             / total_weight
         )
 
@@ -648,85 +615,53 @@ class Panel(ScreenPanel):
 
     def set_state(self, state, msg=""):
         if state == "printing":
-            self._screen.set_panel_title(
-                _("Printing") if self._printer.extrudercount > 0 else _("Working")
-            )
+            self.buttons['pause'].show()
+            self.buttons['resume'].hide()
+            self.buttons['cancel'].show()
+            self.buttons['pause'].set_sensitive(True)
+            self.buttons['cancel'].set_sensitive(True)
+            self.can_close = False
+        elif state == "paused":
+            self.buttons['pause'].hide()
+            self.buttons['resume'].show()
+            self.buttons['resume'].set_sensitive(True)
+            self.buttons['cancel'].show()
+            self.buttons['cancel'].set_sensitive(True)
+            self.can_close = False
         elif state == "complete":
             self.update_progress(1)
-            self._screen.set_panel_title(_("Complete"))
-            self.buttons['left'].set_label("-")
+            self.can_close = True
             self._add_timeout(self._config.get_main_config().getint("job_complete_timeout", 0))
         elif state == "error":
-            self._screen.set_panel_title(_("Error"))
             self._screen.show_popup_message(msg)
+            self.can_close = True
             self._add_timeout(self._config.get_main_config().getint("job_error_timeout", 0))
         elif state == "cancelling":
-            self._screen.set_panel_title(_("Cancelling"))
+            self.can_close = False
         elif state == "cancelled" or (state == "standby" and self.state == "cancelled"):
-            self._screen.set_panel_title(_("Cancelled"))
+            self.can_close = True
             self._add_timeout(self._config.get_main_config().getint("job_cancelled_timeout", 0))
-        elif state == "paused":
-            self._screen.set_panel_title(_("Paused"))
-        elif state == "standby":
-            self._screen.set_panel_title(_("Standby"))
+
         if self.state != state:
             logging.debug(f"Changing job_status state from '{self.state}' to '{state}'")
             self.state = state
             if self.thumb_dialog:
                 self.close_dialog(self.thumb_dialog)
-        self.show_buttons_for_state()
+        self.content.show_all()
+        # Re-hide resume if printing
+        if self.state == "printing":
+            self.buttons['resume'].hide()
+        elif self.state == "paused":
+            self.buttons['pause'].hide()
 
     def _add_timeout(self, timeout):
         self._screen.screensaver.close()
         if timeout != 0:
             GLib.timeout_add_seconds(timeout, self.close_panel)
 
-    def show_buttons_for_state(self):
-        self.buttons['button_grid'].remove_row(0)
-        self.buttons['button_grid'].insert_row(0)
-        if self.state == "printing":
-            self.buttons['button_grid'].attach(self.buttons['pause'], 0, 0, 1, 1)
-            self.buttons['button_grid'].attach(self.buttons['cancel'], 1, 0, 1, 1)
-            self.enable_button("pause", "cancel")
-            self.can_close = False
-        elif self.state == "paused":
-            self.buttons['button_grid'].attach(self.buttons['resume'], 0, 0, 1, 1)
-            self.buttons['button_grid'].attach(self.buttons['cancel'], 1, 0, 1, 1)
-            self.enable_button("resume", "cancel")
-            self.can_close = False
-        else:
-            offset = self._printer.get_stat("gcode_move", "homing_origin")
-            self.zoffset = float(offset[2]) if offset else 0
-            if self.zoffset != 0:
-                if "Z_OFFSET_APPLY_ENDSTOP" in self._printer.available_commands:
-                    self.buttons['button_grid'].attach(self.buttons["save_offset_endstop"], 0, 0, 1, 1)
-                else:
-                    self.buttons['button_grid'].attach(Gtk.Label(), 0, 0, 1, 1)
-                if "Z_OFFSET_APPLY_PROBE" in self._printer.available_commands:
-                    self.buttons['button_grid'].attach(self.buttons["save_offset_probe"], 1, 0, 1, 1)
-                else:
-                    self.buttons['button_grid'].attach(Gtk.Label(), 1, 0, 1, 1)
-            else:
-                self.buttons['button_grid'].attach(Gtk.Label(), 0, 0, 1, 1)
-                self.buttons['button_grid'].attach(Gtk.Label(), 1, 0, 1, 1)
-
-            if self.filename:
-                self.buttons['button_grid'].attach(self.buttons['restart'], 2, 0, 1, 1)
-                self.enable_button("restart")
-            else:
-                self.disable_button("restart")
-            if self.state != "cancelling":
-                self.buttons['button_grid'].attach(self.buttons['menu'], 3, 0, 1, 1)
-                self.can_close = True
-        self.content.show_all()
-
     def show_file_thumbnail(self):
-        if self._screen.vertical_mode:
-            max_width = self._screen.width
-            max_height = self._screen.height
-        else:
-            max_width = self._screen.width
-            max_height = self._gtk.content_height * .46
+        max_width = 300
+        max_height = 260
         width = max(self.labels['thumbnail'].get_allocated_width(), max_width)
         height = max(self.labels['thumbnail'].get_allocated_height(), max_height)
         if width <= 1 or height <= 1:
@@ -734,7 +669,6 @@ class Panel(ScreenPanel):
             height = max_height
         pixbuf = self.get_file_image(self.filename, width, height)
         if pixbuf is None:
-            logging.debug("no pixbuf")
             return
         if image := find_widget(self.labels['thumbnail'], Gtk.Image):
             image.set_from_pixbuf(pixbuf)
@@ -754,7 +688,6 @@ class Panel(ScreenPanel):
     def update_filename(self, filename):
         if not filename or filename == self.filename:
             return
-
         self.filename = filename
         logging.debug(f"Updating filename to {filename}")
         self.labels["file"].set_label(os.path.splitext(self.filename)[0])
@@ -765,7 +698,7 @@ class Panel(ScreenPanel):
         self.get_file_metadata()
 
     def animate_label(self):
-        if ellipsized := self.labels['file'].get_layout().is_ellipsized():
+        if self.labels['file'].get_layout().is_ellipsized():
             self.filename_label['current'] = self.filename_label['current'][1:]
             self.labels['file'].set_label(self.filename_label['current'] + " " * 6)
         else:
@@ -786,15 +719,8 @@ class Panel(ScreenPanel):
     def _update_file_metadata(self):
         self.file_metadata = self._files.get_file_info(self.filename)
         logging.info(f"Update Metadata. File: {self.filename} Size: {self.file_metadata['size']}")
-        if "estimated_time" in self.file_metadata:
-            if self.timeleft_type == "slicer":
-                self.labels["est_time"].set_label(self.format_time(self.file_metadata['estimated_time']))
-            self.labels["slicer_time"].set_label(self.format_time(self.file_metadata['estimated_time']))
         if "object_height" in self.file_metadata:
             self.oheight = float(self.file_metadata['object_height'])
-            self.labels['height'].set_label(f"{self.oheight:.2f} {self.mm}")
-        if "filament_total" in self.file_metadata:
-            self.labels['filament_total'].set_label(f"{float(self.file_metadata['filament_total']) / 1000:.1f} m")
         if "job_id" in self.file_metadata and self.file_metadata['job_id']:
             history = self._screen.apiclient.send_request(f"server/history/job?uid={self.file_metadata['job_id']}")
             if history and history['job']['status'] == "completed" and history['job']['print_duration']:

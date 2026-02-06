@@ -2,7 +2,7 @@
 @define-color color2 #B10080;
 @define-color color3 #009384;
 @define-color color4 #A7E100;
-@define-color bg #FFFFFF;
+@define-color bg #1E2028;
 @define-color active #404E57;
 @define-color echo #367554;
 @define-color warning #f9a825;
@@ -21,80 +21,328 @@
     border: 0;
 }
 
+/* ===== WORKCELL CUSTOM UI ===== */
+
+/* Dark background for all custom panels */
+.customBG {
+    background-color: #1E2028;
+}
+
+/* --- Navigation Bar --- */
+.nav-bar {
+    background-color: #2A2D35;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-bar button {
+    background-color: transparent;
+    border-radius: 10px;
+    min-width: 56px;
+    min-height: 56px;
+    padding: 8px;
+    margin: 4px 6px;
+    border: 0;
+}
+
+.nav-bar button:active,
+.nav-bar button.nav-active {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.nav-logo {
+    background-color: transparent;
+    min-width: 56px;
+    min-height: 56px;
+    padding: 4px;
+    margin: 6px;
+    border: 0;
+}
+
+/* --- Temperature Cards --- */
+.temp-card {
+    background-color: #3A3D45;
+    border-radius: 12px;
+    padding: 8px 16px;
+    margin: 4px 8px;
+    min-height: 52px;
+}
+
+.temp-card label {
+    color: white;
+}
+
+.temp-card .temp-value {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: white;
+}
+
+.temp-card .temp-label {
+    font-size: 0.75em;
+    color: #AAAAAA;
+}
+
+.temp-card .temp-state {
+    font-size: 0.7em;
+    color: #888888;
+}
+
+/* --- Jog / Control Buttons --- */
+.jog-button {
+    background-color: #3A3D45;
+    border-radius: 8px;
+    min-width: 64px;
+    min-height: 64px;
+    margin: 3px;
+    padding: 4px;
+    border: 0;
+}
+
+.jog-button:active {
+    background-color: #555860;
+}
+
+.jog-button label {
+    color: white;
+    font-size: 1.2em;
+}
+
+.jog-home-button {
+    background-color: #4A4D55;
+    border-radius: 8px;
+    min-width: 64px;
+    min-height: 64px;
+    margin: 3px;
+    padding: 4px;
+    border: 0;
+}
+
+.jog-home-button:active {
+    background-color: #666970;
+}
+
+/* --- Jog Distance Toggle --- */
+.jog-distance {
+    background-color: #3A3D45;
+    border-radius: 8px;
+    min-width: 80px;
+    min-height: 40px;
+    margin: 3px;
+    padding: 4px 12px;
+    border: 0;
+}
+
+.jog-distance label {
+    color: white;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.jog-distance-active {
+    background-color: #FFFFFF;
+}
+
+.jog-distance-active label {
+    color: #1E2028;
+}
+
+/* --- Temperature +/- Controls --- */
+.temp-adjust-btn {
+    background-color: #3A3D45;
+    border-radius: 8px;
+    min-width: 44px;
+    min-height: 44px;
+    margin: 2px;
+    padding: 4px;
+    border: 0;
+}
+
+.temp-adjust-btn label {
+    color: white;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.temp-adjust-btn:active {
+    background-color: #555860;
+}
+
+/* --- Control / Action Buttons (Pause, Cancel, Queue) --- */
+.control-button {
+    background-color: #3A3D45;
+    border-radius: 12px;
+    min-height: 52px;
+    padding: 8px 20px;
+    margin: 4px 0;
+    border: 0;
+}
+
+.control-button label {
+    color: white;
+    font-size: 1.15em;
+    font-weight: bold;
+}
+
+.control-button:active {
+    background-color: #555860;
+}
+
+/* --- Queue Buttons --- */
+.queue-button {
+    background-color: #3A3D45;
+    border-radius: 16px;
+    min-height: 70px;
+    min-width: 400px;
+    padding: 12px 24px;
+    margin: 10px 0;
+    border: 0;
+}
+
+.queue-button label {
+    color: white;
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.queue-button:active {
+    background-color: #555860;
+}
+
+/* --- Filament Buttons --- */
+.filament-button {
+    background-color: #3A3D45;
+    border-radius: 14px;
+    min-height: 80px;
+    min-width: 160px;
+    padding: 10px 16px;
+    margin: 6px;
+    border: 0;
+}
+
+.filament-button label {
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.filament-button:active {
+    background-color: #555860;
+}
+
+.filament-selected {
+    border: 2px solid #4FC3F7;
+    background-color: #3A4D55;
+}
+
+.filament-unload {
+    background-color: #3A3D45;
+    border-radius: 14px;
+    min-height: 56px;
+    padding: 8px 24px;
+    margin: 8px 20px;
+    border: 0;
+}
+
+.filament-unload label {
+    color: #CCCCCC;
+    font-size: 1.15em;
+    font-weight: 500;
+}
+
+.filament-unload:active {
+    background-color: #555860;
+}
+
+/* --- Progress Bar (Job Status) --- */
+.progress-bar-bg {
+    background-color: #333640;
+    border-radius: 4px;
+    min-height: 8px;
+}
+
+.progress-bar-fill {
+    background-color: #E53935;
+    border-radius: 4px;
+    min-height: 8px;
+}
+
+/* --- Printing Info Labels --- */
+.print-filename-label {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: white;
+}
+
+.print-author-label {
+    font-size: 0.95em;
+    color: #AAAAAA;
+}
+
+.print-progress-text {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: white;
+}
+
+.print-time-text {
+    font-size: 1.1em;
+    color: #AAAAAA;
+}
+
+.print-layer-text {
+    font-size: 0.85em;
+    color: #888888;
+}
+
+/* --- Section Labels --- */
+.section-label {
+    font-size: 1.0em;
+    font-weight: bold;
+    color: #AAAAAA;
+}
+
+/* Legacy compat */
 #large_text {
     font-family: "Montserrat";
-    font-size: 35pt;  /* Increase font size */
+    font-size: 35pt;
 }
 
 #numpad-placeholder {
-    background-color: #16181D; /* Black background */
-    opacity: 1.0;             /* Fully opaque */
-    border-radius: 10px;      /* Optional rounded corners */
+    background-color: #1E2028;
+    opacity: 1.0;
+    border-radius: 10px;
 }
 
 #keypad {
-    background-color: #16181D; /* Black background */
-    opacity: 1.0;             /* Fully opaque */
+    background-color: #1E2028;
+    opacity: 1.0;
 }
-
 
 #temperature_text {
     font-family: "Montserrat";
-    font-weight:bold;
-    font-size: 15pt;  /* Increase font size */
-}
-.temperature-button {
-    background-color: #f15050; /* Red background */
-    border-radius: 15px;      /* Rounded corners */
-    min-width: 165px;
-    min-height: 50px;
-    color: white;             /* Text color */
-    font-weight: bold;        /* Bold text */
+    font-weight: bold;
+    font-size: 15pt;
 }
 
-.temperature-button:hover {
-    background-color: white; /* Darker orange on hover */
-    color: #f15050;
-}
-
-.temperature-button:hover * {
-    color: #f15050;
-}
-
-.temperature-button label {
-    font-size: 24px; /* Larger font size for the label inside the button */
-    color: inherit;  /* Inherit the color from the parent button */
-}
-
-.customBG {
-    background-color: #16181D;
-}
-
+/* Keep old rounded-button for dialogs/compatibility */
 .rounded-button {
-    background-color: #EE2424; /* Orange background */
-    border-radius: 25px;      /* Rounded corners */
-    min-width: 100px;         /* Minimum width */
-    min-height: 100px;        /* Minimum height */
-    color: white;             /* Text color */
-    font-weight: bold;        /* Bold text */
+    background-color: #3A3D45;
+    border-radius: 14px;
+    min-width: 100px;
+    min-height: 60px;
+    color: white;
+    font-weight: bold;
+    border: 0;
 }
 
-.print-button {
-    background-color: #5f0e0e;
-}
-
-.rounded-button:hover {
-    background-color: white; /* Darker orange on hover */
-    color: #EE2424;
-}
-
-.rounded-button:hover * {
-    color: #EE2424;
+.rounded-button:active {
+    background-color: #555860;
 }
 
 .rounded-button label {
-    font-size: 24px; /* Larger font size for the label inside the button */
-    color: inherit;  /* Inherit the color from the parent button */
+    font-size: 1.1em;
+    color: inherit;
 }
 
 button:disabled {

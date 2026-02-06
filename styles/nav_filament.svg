@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <!-- Filament spool icon -->
+  <ellipse cx="12" cy="12" rx="10" ry="10" fill="none" stroke="#e2e2e2" stroke-width="2"/>
+  <ellipse cx="12" cy="12" rx="4" ry="4" fill="none" stroke="#e2e2e2" stroke-width="2"/>
+  <line x1="12" y1="2" x2="12" y2="8" stroke="#e2e2e2" stroke-width="1.5"/>
+  <line x1="12" y1="16" x2="12" y2="22" stroke="#e2e2e2" stroke-width="1.5"/>
+  <line x1="2" y1="12" x2="8" y2="12" stroke="#e2e2e2" stroke-width="1.5"/>
+  <line x1="16" y1="12" x2="22" y2="12" stroke="#e2e2e2" stroke-width="1.5"/>
+</svg>

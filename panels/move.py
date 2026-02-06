@@ -1,263 +1,291 @@
 import logging
-import re
 
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, GLib
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
 
 class Panel(ScreenPanel):
-    distances = [".1", ".5", "1", "5", "10", "25", "50"]
-    distance = distances[-2]
+    distances = ["1", "10", "50"]
+    distance = "10"
+    temp_increment = 5
 
     def __init__(self, screen, title):
         title = title or _("Move")
         super().__init__(screen, title)
-
-        if self.ks_printer_cfg is not None:
-            dis = self.ks_printer_cfg.get("move_distances", "")
-            if re.match(r"^[0-9,\.\s]+$", dis):
-                dis = [str(i.strip()) for i in dis.split(",")]
-                if 1 < len(dis) <= 7:
-                    self.distances = dis
-                    self.distance = self.distances[-2]
+        self.content.get_style_context().add_class("customBG")
 
         self.settings = {}
-        self.menu.append("move_menu")
-        self.buttons = {
-            "x+": self._gtk.Button("arrow-right", "X+", "color1"),
-            "x-": self._gtk.Button("arrow-left", "X-", "color1"),
-            "y+": self._gtk.Button("arrow-up", "Y+", "color2"),
-            "y-": self._gtk.Button("arrow-down", "Y-", "color2"),
-            "z+": self._gtk.Button("z-farther", "Z+", "color3"),
-            "z-": self._gtk.Button("z-closer", "Z-", "color3"),
-            "home": self._gtk.Button("home", _("Home"), "color4"),
-            "motors_off": self._gtk.Button("motor-off", _("Disable Motors"), "color4"),
-        }
-        self.buttons["x+"].connect("clicked", self.move, "X", "+")
-        self.buttons["x-"].connect("clicked", self.move, "X", "-")
-        self.buttons["y+"].connect("clicked", self.move, "Y", "+")
-        self.buttons["y-"].connect("clicked", self.move, "Y", "-")
-        self.buttons["z+"].connect("clicked", self.move, "Z", "+")
-        self.buttons["z-"].connect("clicked", self.move, "Z", "-")
-        self.buttons["home"].connect("clicked", self.home)
-        script = {"script": "M18"}
-        self.buttons["motors_off"].connect(
-            "clicked",
-            self._screen._confirm_send_action,
-            _("Are you sure you wish to disable motors?"),
-            "printer.gcode.script",
-            script,
-        )
-        adjust = self._gtk.Button(
-            "back", None, "color2", 1, Gtk.PositionType.LEFT, 1
-        )
-        adjust.connect("clicked", self._screen._menu_go_back)
-        adjust.set_hexpand(False)
-        grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
-        if self._screen.vertical_mode:
-            if self._screen.lang_ltr:
-                grid.attach(self.buttons["x+"], 2, 1, 1, 1)
-                grid.attach(self.buttons["x-"], 0, 1, 1, 1)
-                grid.attach(self.buttons["z+"], 2, 2, 1, 1)
-                grid.attach(self.buttons["z-"], 0, 2, 1, 1)
-            else:
-                grid.attach(self.buttons["x+"], 0, 1, 1, 1)
-                grid.attach(self.buttons["x-"], 2, 1, 1, 1)
-                grid.attach(self.buttons["z+"], 0, 2, 1, 1)
-                grid.attach(self.buttons["z-"], 2, 2, 1, 1)
-            grid.attach(adjust, 1, 2, 1, 1)
-            grid.attach(self.buttons["y+"], 1, 0, 1, 1)
-            grid.attach(self.buttons["y-"], 1, 1, 1, 1)
+        self.labels = {}
+        self.temp_labels = {}
 
-        else:
-            if self._screen.lang_ltr:
-                grid.attach(self.buttons["x+"], 2, 1, 1, 1)
-                grid.attach(self.buttons["x-"], 0, 1, 1, 1)
-            else:
-                grid.attach(self.buttons["x+"], 0, 1, 1, 1)
-                grid.attach(self.buttons["x-"], 2, 1, 1, 1)
-            grid.attach(self.buttons["y+"], 1, 0, 1, 1)
-            grid.attach(self.buttons["y-"], 1, 1, 1, 1)
-            if self._config.get_config()["main"].getboolean("invert_z", False):
-                grid.attach(self.buttons["z+"], 3, 1, 1, 1)
-                grid.attach(self.buttons["z-"], 3, 0, 1, 1)
-            else:
-                grid.attach(self.buttons["z+"], 3, 0, 1, 1)
-                grid.attach(self.buttons["z-"], 3, 1, 1, 1)
+        # Main vertical layout
+        main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
+        main_box.set_hexpand(True)
+        main_box.set_vexpand(True)
+        main_box.set_margin_top(8)
+        main_box.set_margin_start(12)
+        main_box.set_margin_end(12)
+        self.content.add(main_box)
 
-        grid.attach(self.buttons["home"], 0, 0, 1, 1)
-        grid.attach(self.buttons["motors_off"], 2, 0, 1, 1)
+        # ===== Top: Jog Distance Selector =====
+        dist_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        dist_box.set_halign(Gtk.Align.CENTER)
+        dist_box.set_margin_bottom(8)
 
-        distgrid = Gtk.Grid()
-        for j, i in enumerate(self.distances):
-            self.labels[i] = self._gtk.Button(label=i)
-            self.labels[i].set_direction(Gtk.TextDirection.LTR)
-            self.labels[i].connect("clicked", self.change_distance, i)
-            ctx = self.labels[i].get_style_context()
-            ctx.add_class("horizontal_togglebuttons")
-            if i == self.distance:
-                ctx.add_class("horizontal_togglebuttons_active")
-            distgrid.attach(self.labels[i], j, 0, 1, 1)
+        for d in self.distances:
+            btn = Gtk.Button(label=f"{d}mm")
+            btn.get_style_context().add_class("jog-distance")
+            if d == self.distance:
+                btn.get_style_context().add_class("jog-distance-active")
+            btn.connect("clicked", self.change_distance, d)
+            btn.set_size_request(100, 44)
+            self.labels[f"dist_{d}"] = btn
+            dist_box.pack_start(btn, False, False, 0)
 
-        for p in ("pos_x", "pos_y", "pos_z"):
-            self.labels[p] = Gtk.Label()
-        self.labels["move_dist"] = Gtk.Label(label=_("Move Distance (mm)"))
+        main_box.pack_start(dist_box, False, False, 0)
 
-        bottomgrid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
-        bottomgrid.set_direction(Gtk.TextDirection.LTR)
-        bottomgrid.attach(self.labels["pos_x"], 0, 0, 1, 1)
-        bottomgrid.attach(self.labels["pos_y"], 1, 0, 1, 1)
-        bottomgrid.attach(self.labels["pos_z"], 2, 0, 1, 1)
-        bottomgrid.attach(self.labels["move_dist"], 0, 1, 3, 1)
-        if not self._screen.vertical_mode:
-            bottomgrid.attach(adjust, 3, 0, 1, 2)
+        # ===== Middle: Movement Controls =====
+        move_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=24)
+        move_box.set_halign(Gtk.Align.CENTER)
+        move_box.set_valign(Gtk.Align.CENTER)
+        move_box.set_vexpand(True)
 
-        self.labels["move_menu"] = Gtk.Grid(
-            row_homogeneous=True, column_homogeneous=True
-        )
-        self.labels["move_menu"].attach(grid, 0, 0, 1, 3)
-        self.labels["move_menu"].attach(bottomgrid, 0, 3, 1, 1)
-        self.labels["move_menu"].attach(distgrid, 0, 4, 1, 1)
+        # X/Y Section
+        xy_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+        xy_label = Gtk.Label(label="X/Y")
+        xy_label.get_style_context().add_class("section-label")
+        xy_label.set_halign(Gtk.Align.START)
+        xy_label.set_margin_start(4)
+        xy_box.pack_start(xy_label, False, False, 0)
 
-        self.content.add(self.labels["move_menu"])
+        xy_grid = Gtk.Grid()
+        xy_grid.set_row_spacing(4)
+        xy_grid.set_column_spacing(4)
+        xy_grid.set_halign(Gtk.Align.CENTER)
 
+        # Y+ (up arrow) - row 0, col 1
+        btn_yp = self._create_jog_button("∧", "Y", "+")
+        xy_grid.attach(btn_yp, 1, 0, 1, 1)
+
+        # X- (left arrow) - row 1, col 0
+        btn_xm = self._create_jog_button("<", "X", "-")
+        xy_grid.attach(btn_xm, 0, 1, 1, 1)
+
+        # Home button - row 1, col 1 (center)
+        btn_home = Gtk.Button()
+        btn_home.get_style_context().add_class("jog-home-button")
+        home_icon = Gtk.Label(label="⌂")
+        home_icon.set_markup("<span size='x-large'>⌂</span>")
+        btn_home.add(home_icon)
+        btn_home.set_size_request(72, 72)
+        btn_home.connect("clicked", self.home)
+        xy_grid.attach(btn_home, 1, 1, 1, 1)
+
+        # X+ (right arrow) - row 1, col 2
+        btn_xp = self._create_jog_button(">", "X", "+")
+        xy_grid.attach(btn_xp, 2, 1, 1, 1)
+
+        # Y- (down arrow) - row 2, col 1
+        btn_ym = self._create_jog_button("∨", "Y", "-")
+        xy_grid.attach(btn_ym, 1, 2, 1, 1)
+
+        xy_box.pack_start(xy_grid, False, False, 0)
+        move_box.pack_start(xy_box, False, False, 0)
+
+        # Spacer between X/Y and Z
+        spacer = Gtk.Box()
+        spacer.set_size_request(40, -1)
+        move_box.pack_start(spacer, False, False, 0)
+
+        # Z Section
+        z_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+        z_label = Gtk.Label(label="Z")
+        z_label.get_style_context().add_class("section-label")
+        z_label.set_halign(Gtk.Align.CENTER)
+        z_box.pack_start(z_label, False, False, 0)
+
+        z_grid = Gtk.Grid()
+        z_grid.set_row_spacing(4)
+        z_grid.set_column_spacing(4)
+        z_grid.set_halign(Gtk.Align.CENTER)
+
+        # Z+ (up)
+        btn_zp = self._create_jog_button("∧", "Z", "+")
+        z_grid.attach(btn_zp, 0, 0, 1, 1)
+
+        # Z- (down)
+        btn_zm = self._create_jog_button("∨", "Z", "-")
+        z_grid.attach(btn_zm, 0, 1, 1, 1)
+
+        z_box.pack_start(z_grid, False, False, 0)
+        move_box.pack_start(z_box, False, False, 0)
+
+        main_box.pack_start(move_box, True, True, 0)
+
+        # ===== Bottom: Temperature Controls =====
+        temp_bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=16)
+        temp_bar.set_halign(Gtk.Align.CENTER)
+        temp_bar.set_margin_bottom(10)
+        temp_bar.set_margin_top(4)
+
+        # Nozzle temp control
+        nozzle_ctrl = self._create_temp_control("Nozzle", "extruder", 0.2, 0.6, 1.0)
+        temp_bar.pack_start(nozzle_ctrl, False, False, 0)
+
+        # Bed temp control
+        bed_ctrl = self._create_temp_control("Bed", "heater_bed", 1.0, 0.5, 0.2)
+        temp_bar.pack_start(bed_ctrl, False, False, 0)
+
+        main_box.pack_end(temp_bar, False, False, 0)
+
+        # Get printer config for speed limits
         printer_cfg = self._printer.get_config_section("printer")
-        # The max_velocity parameter is not optional in klipper config.
-        # The minimum is 1, but least 2 values are needed to create a scale
         max_velocity = max(int(float(printer_cfg["max_velocity"])), 2)
         if "max_z_velocity" in printer_cfg:
             self.max_z_velocity = max(int(float(printer_cfg["max_z_velocity"])), 2)
         else:
             self.max_z_velocity = max_velocity
 
-        configurable_options = [
-            {
-                "invert_x": {
-                    "section": "main",
-                    "name": _("Invert X"),
-                    "type": "binary",
-                    "tooltip": _("This will affect screw positions and mesh graph"),
-                    "value": "False",
-                    "callback": self.reinit_panels,
-                }
-            },
-            {
-                "invert_y": {
-                    "section": "main",
-                    "name": _("Invert Y"),
-                    "type": "binary",
-                    "tooltip": _("This will affect screw positions and mesh graph"),
-                    "value": "False",
-                    "callback": self.reinit_panels,
-                }
-            },
-            {
-                "invert_z": {
-                    "section": "main",
-                    "name": _("Invert Z"),
-                    "tooltip": _(
-                        "Swaps buttons if they are on top of each other, affects other panels"
-                    ),
-                    "type": "binary",
-                    "value": "False",
-                    "callback": self.reinit_move,
-                }
-            },
-            {
-                "move_speed_xy": {
-                    "section": "main",
-                    "name": _("XY Speed (mm/s)"),
-                    "type": "scale",
-                    "tooltip": _("Only for the move panel"),
-                    "value": "50",
-                    "range": [1, max_velocity],
-                    "step": 1,
-                }
-            },
-            {
-                "move_speed_z": {
-                    "section": "main",
-                    "name": _("Z Speed (mm/s)"),
-                    "type": "scale",
-                    "tooltip": _("Only for the move panel"),
-                    "value": "10",
-                    "range": [1, self.max_z_velocity],
-                    "step": 1,
-                }
-            },
-        ]
+        # Start temp update timer
+        GLib.timeout_add_seconds(1, self._update_temps)
 
-        self.labels["options_menu"] = self._gtk.ScrolledWindow()
-        self.labels["options"] = Gtk.Grid()
-        self.labels["options_menu"].add(self.labels["options"])
-        self.options = {}
-        for option in configurable_options:
-            name = list(option)[0]
-            self.options.update(
-                self.add_option("options", self.settings, name, option[name])
-            )
+    def _create_jog_button(self, symbol, axis, direction):
+        """Create a jog movement button."""
+        btn = Gtk.Button()
+        btn.get_style_context().add_class("jog-button")
+        lbl = Gtk.Label()
+        lbl.set_markup(f"<span size='large'>{symbol}</span>")
+        btn.add(lbl)
+        btn.set_size_request(72, 72)
+        btn.connect("clicked", self.move, axis, direction)
+        return btn
 
-    def reinit_panels(self, value):
-        self._screen.panels_reinit.append("bed_level")
-        self._screen.panels_reinit.append("bed_mesh")
+    def _create_temp_control(self, label_text, device, r, g, b):
+        """Create a temperature control with +/- buttons."""
+        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
 
-    def reinit_move(self, widget):
-        self._screen.panels_reinit.append("move")
-        self._screen.panels_reinit.append("zcalibrate")
-        self.menu.clear()
+        # Minus button
+        minus_btn = Gtk.Button(label="-")
+        minus_btn.get_style_context().add_class("temp-adjust-btn")
+        minus_btn.set_size_request(44, 48)
+        minus_btn.connect("clicked", self._adjust_temp, device, -self.temp_increment)
+        box.pack_start(minus_btn, False, False, 0)
 
-    def process_update(self, action, data):
-        if action != "notify_status_update":
-            return
-        if "toolhead" in data and "max_velocity" in data["toolhead"]:
-            max_vel = max(int(float(data["toolhead"]["max_velocity"])), 2)
-            adj = self.options["move_speed_xy"].get_adjustment()
-            adj.set_upper(max_vel)
-        if (
-            "gcode_move" in data
-            or "toolhead" in data
-            and "homed_axes" in data["toolhead"]
-        ):
-            homed_axes = self._printer.get_stat("toolhead", "homed_axes")
-            for i, axis in enumerate(("x", "y", "z")):
-                if axis not in homed_axes:
-                    self.labels[f"pos_{axis}"].set_text(f"{axis.upper()}: ?")
-                elif "gcode_move" in data and "gcode_position" in data["gcode_move"]:
-                    self.labels[f"pos_{axis}"].set_text(
-                        f"{axis.upper()}: {data['gcode_move']['gcode_position'][i]:.2f}"
-                    )
+        # Temperature card
+        card = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        card.get_style_context().add_class("temp-card")
+        card.set_size_request(180, 52)
+
+        # Indicator
+        indicator = Gtk.DrawingArea()
+        indicator.set_size_request(6, 28)
+        indicator.connect("draw", self._draw_indicator, r, g, b)
+        ind_box = Gtk.Box()
+        ind_box.set_valign(Gtk.Align.CENTER)
+        ind_box.set_margin_start(6)
+        ind_box.add(indicator)
+        card.pack_start(ind_box, False, False, 0)
+
+        # Label and temp
+        info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        info.set_valign(Gtk.Align.CENTER)
+        name_lbl = Gtk.Label(label=label_text)
+        name_lbl.get_style_context().add_class("temp-label")
+        name_lbl.set_halign(Gtk.Align.START)
+        info.add(name_lbl)
+
+        temp_lbl = Gtk.Label(label="--°")
+        temp_lbl.get_style_context().add_class("temp-value")
+        temp_lbl.set_halign(Gtk.Align.START)
+        info.add(temp_lbl)
+
+        card.pack_start(info, True, True, 0)
+        box.pack_start(card, False, False, 0)
+
+        # Plus button
+        plus_btn = Gtk.Button(label="+")
+        plus_btn.get_style_context().add_class("temp-adjust-btn")
+        plus_btn.set_size_request(44, 48)
+        plus_btn.connect("clicked", self._adjust_temp, device, self.temp_increment)
+        box.pack_start(plus_btn, False, False, 0)
+
+        # Store temp label for updates
+        self.temp_labels[device] = temp_lbl
+
+        return box
+
+    def _draw_indicator(self, widget, ctx, r, g, b):
+        width = widget.get_allocated_width()
+        height = widget.get_allocated_height()
+        radius = width / 2
+        ctx.set_source_rgb(r, g, b)
+        ctx.arc(width / 2, radius, radius, 3.14159, 0)
+        ctx.arc(width / 2, height - radius, radius, 0, 3.14159)
+        ctx.close_path()
+        ctx.fill()
+        return True
+
+    def _adjust_temp(self, widget, device, increment):
+        """Adjust temperature by increment."""
+        current_target = self._printer.get_stat(device, "target") or 0
+        new_target = max(0, current_target + increment)
+
+        # Enforce max temp
+        max_temp = int(float(self._printer.get_config_section(device).get('max_temp', 300)))
+        new_target = min(new_target, max_temp)
+
+        if device == "extruder":
+            self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(device), new_target)
+        elif device == "heater_bed":
+            self._screen._ws.klippy.set_bed_temp(new_target)
+
+    def _update_temps(self):
+        """Update temperature displays."""
+        for device, lbl in self.temp_labels.items():
+            temp = self._printer.get_stat(device, "temperature")
+            if temp is not None:
+                lbl.set_label(f"{temp:.0f}°")
+            else:
+                lbl.set_label("--°")
+        return True
 
     def change_distance(self, widget, distance):
+        """Change jog distance selection."""
         logging.info(f"### Distance {distance}")
-        self.labels[f"{self.distance}"].get_style_context().remove_class(
-            "horizontal_togglebuttons_active"
-        )
-        self.labels[f"{distance}"].get_style_context().add_class(
-            "horizontal_togglebuttons_active"
-        )
+        # Remove active from old
+        old_key = f"dist_{self.distance}"
+        if old_key in self.labels:
+            self.labels[old_key].get_style_context().remove_class("jog-distance-active")
+        # Add active to new
+        new_key = f"dist_{distance}"
+        if new_key in self.labels:
+            self.labels[new_key].get_style_context().add_class("jog-distance-active")
         self.distance = distance
 
     def move(self, widget, axis, direction):
-        axis = axis.lower()
-        if (
-            self._config.get_config()["main"].getboolean(f"invert_{axis}", False)
-            and axis != "z"
-        ):
+        """Execute a jog movement."""
+        # Safety: don't allow motion while printing
+        if self._printer.state in ("printing",):
+            self._screen.show_popup_message(_("Cannot move while printing"))
+            return
+
+        a = axis.lower()
+        if self._config.get_config()["main"].getboolean(f"invert_{a}", False) and a != "z":
             direction = "-" if direction == "+" else "+"
 
         dist = f"{direction}{self.distance}"
-        config_key = "move_speed_z" if axis == "z" else "move_speed_xy"
+        config_key = "move_speed_z" if a == "z" else "move_speed_xy"
         speed = (
             None
             if self.ks_printer_cfg is None
             else self.ks_printer_cfg.getint(config_key, None)
         )
         if speed is None:
-            speed = self._config.get_config()["main"].getint(config_key, self.max_z_velocity)
+            speed = self._config.get_config()["main"].getint(config_key, 50)
         speed = 60 * max(1, speed)
         script = f"{KlippyGcodes.MOVE_RELATIVE}\nG0 {axis}{dist} F{speed}"
         self._screen._send_action(widget, "printer.gcode.script", {"script": script})
@@ -265,10 +293,22 @@ class Panel(ScreenPanel):
             self._screen._ws.klippy.gcode_script("G90")
 
     def home(self, widget):
+        """Home all axes."""
+        if self._printer.state in ("printing",):
+            self._screen.show_popup_message(_("Cannot home while printing"))
+            return
+
         if "delta" in self._printer.get_config_section("printer")["kinematics"]:
             self._screen._send_action(widget, "printer.gcode.script", {"script": "G28"})
             return
-        name = "homing"
-        disname = self._screen._config.get_menu_name("move", name)
-        menuitems = self._screen._config.get_menu_items("move", name)
-        self._screen.show_panel("menu", disname, items=menuitems)
+        self._screen._send_action(widget, "printer.gcode.script", {"script": "G28"})
+
+    def process_update(self, action, data):
+        if action != "notify_status_update":
+            return
+        # Update temperatures from live data
+        for device, lbl in self.temp_labels.items():
+            if device in data:
+                temp = self._printer.get_stat(device, "temperature")
+                if temp is not None:
+                    lbl.set_label(f"{temp:.0f}°")
