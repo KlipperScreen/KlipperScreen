@@ -367,6 +367,9 @@ class KlipperScreen(Gtk.Window):
             self.reload_panels()
             return
         self.base_panel.add_content(self.panels[panel])
+        # Hide nav bar on connecting/splash screens, show on all others
+        hide_nav_panels = ('splash_screen', 'printer_select')
+        self.base_panel.show_nav_bar(panel not in hide_nav_panels)
         # Update nav bar active state
         self.base_panel.update_nav_from_panel(panel)
         logging.debug(f"Current panel hierarchy: {' > '.join(self._cur_panels)}")
