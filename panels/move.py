@@ -194,7 +194,7 @@ class Panel(ScreenPanel):
         name_lbl.set_halign(Gtk.Align.START)
         info.add(name_lbl)
 
-        temp_lbl = Gtk.Label(label="--°")
+        temp_lbl = Gtk.Label(label="--°/--°")
         temp_lbl.get_style_context().add_class("temp-value")
         temp_lbl.set_halign(Gtk.Align.START)
         info.add(temp_lbl)
@@ -243,10 +243,10 @@ class Panel(ScreenPanel):
         """Update temperature displays."""
         for device, lbl in self.temp_labels.items():
             temp = self._printer.get_stat(device, "temperature")
-            if temp is not None:
-                lbl.set_label(f"{temp:.0f}°")
-            else:
-                lbl.set_label("--°")
+            target = self._printer.get_stat(device, "target")
+            temp_str = f"{temp:.0f}°" if temp is not None else "--°"
+            target_str = f"{target:.0f}°" if target is not None else "--°"
+            lbl.set_label(f"{temp_str}/{target_str}")
         return True
 
     def change_distance(self, widget, distance):
@@ -306,5 +306,8 @@ class Panel(ScreenPanel):
         for device, lbl in self.temp_labels.items():
             if device in data:
                 temp = self._printer.get_stat(device, "temperature")
+                target = self._printer.get_stat(device, "target")
                 if temp is not None:
-                    lbl.set_label(f"{temp:.0f}°")
+                    temp_str = f"{temp:.0f}°"
+                    target_str = f"{target:.0f}°" if target is not None else "--°"
+                    lbl.set_label(f"{temp_str}/{target_str}")
