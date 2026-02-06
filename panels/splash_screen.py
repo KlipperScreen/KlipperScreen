@@ -16,7 +16,7 @@ class Panel(ScreenPanel):
             "klipper", self._gtk.content_width * 0.2, self._gtk.content_height * 0.5
         )
         self.labels["text"] = Gtk.Label(
-            label=_("Initializing printer..."),
+            label=_(" ANDEEZ NUTZ Initializing printer..."),
             wrap=True,
             wrap_mode=Pango.WrapMode.WORD_CHAR,
             halign=Gtk.Align.CENTER,
