@@ -47,7 +47,7 @@ class BasePanel(ScreenPanel):
         # WorkCell logo at top
         logo_path = os.path.join(styles_dir, "workcell_logo.svg")
         if os.path.exists(logo_path):
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(logo_path, 48, 48)
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(logo_path, 56, 56)
             logo_image = Gtk.Image.new_from_pixbuf(pixbuf)
         else:
             logo_image = Gtk.Image()
