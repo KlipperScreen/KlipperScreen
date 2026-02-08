@@ -47,6 +47,7 @@ class Panel(ScreenPanel):
         for name, val in self.sort_items.items():
             s = self._gtk.Button(None, val, f"color{n % 4 + 1}", .5, Gtk.PositionType.RIGHT, 1)
             s.get_style_context().add_class("buttons_slim")
+            s.get_style_context().add_class("gcodes-header-btn")
             if name == self.sort_current[0]:
                 s.set_image(self._gtk.Image(self.sort_icon[self.sort_current[1]], self._gtk.img_scale * self.bts))
             s.connect("clicked", self.change_sort, name)
@@ -56,6 +57,7 @@ class Panel(ScreenPanel):
 
         self.refresh = self._gtk.Button("refresh", style=f"color{n % 4 + 1}", scale=self.bts)
         self.refresh.get_style_context().add_class("buttons_slim")
+        self.refresh.get_style_context().add_class("gcodes-header-btn")
         self.refresh.connect('clicked', self._refresh_files)
         n += 1
         self.headerbox.add(self.refresh)
