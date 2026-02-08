@@ -944,10 +944,6 @@ trough progress {
     padding-bottom: 0;
 }
 
-.gcodes-header-btn {
-    border-bottom-color: #2cdb1a;
-}
-
 .graph_label {border-left-width: .4em; border-left-style: solid;}
 
 button.graph_label {padding-left: 0.25em;}

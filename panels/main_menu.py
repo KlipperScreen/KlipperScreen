@@ -15,7 +15,7 @@ class Panel(ScreenPanel):
         self.content.get_style_context().add_class("customBG")
 
         styles_dir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles")
-        eagle_path = os.path.join(styles_dir, "cro_eagle.png")
+        eagle_path = os.path.join(styles_dir, "cro_eagle.svg")
 
         self.temp_labels = {}
 
