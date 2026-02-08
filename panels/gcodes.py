@@ -125,7 +125,7 @@ class Panel(ScreenPanel):
             button.get_style_context().add_class("print-button")
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
 
-        if icon_path:
+        if icon_path: 
             image = Gtk.Image.new_from_file(icon_path)
             image.set_valign(Gtk.Align.CENTER)
             vbox.pack_start(image, True, True, 0)

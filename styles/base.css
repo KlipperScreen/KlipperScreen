@@ -945,8 +945,6 @@ trough progress {
 }
 
 .gcodes-header-btn {
-    border-bottom-width: 4px;
-    border-bottom-style: solid;
     border-bottom-color: #2cdb1a;
 }
 
