@@ -19,7 +19,7 @@ class Panel(ScreenPanel):
         main_box.set_halign(Gtk.Align.CENTER)
         main_box.set_valign(Gtk.Align.CENTER)
         self.content.add(main_box)
-
+ 
         # Queue Start button
         queue_btn = Gtk.Button()
         queue_btn.get_style_context().add_class("queue-button")

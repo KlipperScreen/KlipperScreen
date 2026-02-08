@@ -29,7 +29,7 @@ class Panel(ScreenPanel):
         self.sort_items = {
             "name": _("Name"),
             "date": _("Date"),
-            "size": _("Size"),
+            # "size": _("Size"),
         }
         if sortdir[0] not in self.sort_items or sortdir[1] not in ["asc", "desc"]:
             sortdir = ["name", "asc"]
@@ -60,11 +60,11 @@ class Panel(ScreenPanel):
         n += 1
         self.headerbox.add(self.refresh)
 
-        self.switch_mode = self._gtk.Button("fine-tune", style=f"color{n % 4 + 1}", scale=self.bts)
-        self.switch_mode.get_style_context().add_class("buttons_slim")
-        self.switch_mode.connect('clicked', self.switch_view_mode)
-        n += 1
-        self.headerbox.add(self.switch_mode)
+        # self.switch_mode = self._gtk.Button("fine-tune", style=f"color{n % 4 + 1}", scale=self.bts)
+        # self.switch_mode.get_style_context().add_class("buttons_slim")
+        # self.switch_mode.connect('clicked', self.switch_view_mode)
+        # n += 1
+        # self.headerbox.add(self.switch_mode)
 
         self.loading_msg = _('Loading...')
         self.labels['path'] = Gtk.Label(label=self.loading_msg, vexpand=True, no_show_all=True)
@@ -90,6 +90,10 @@ class Panel(ScreenPanel):
 
         self.main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
         button1 = self.create_rounded_button(None, "Back", self._screen._menu_go_back)
+        button1.set_margin_top(5)
+        button1.set_margin_bottom(5)
+        button1.set_margin_start(30)
+        button1.set_margin_end(30)
         self.main.add(button1)
         self.main.add(self.headerbox)
         self.main.add(self.labels['path'])
