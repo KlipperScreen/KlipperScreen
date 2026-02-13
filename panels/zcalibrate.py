@@ -189,6 +189,8 @@ class Panel(ScreenPanel):
             commands.append({"DELTA_CALIBRATE METHOD=manual"})
         if "AXIS_TWIST_COMPENSATION_CALIBRATE" in self._printer.available_commands:
             commands.append({"AXIS_TWIST_COMPENSATION_CALIBRATE"})
+        if "CARTOGRAPHER_SCAN_CALIBRATE" in self._printer.available_commands:
+            commands.append({"CARTOGRAPHER_SCAN_CALIBRATE"})
 
         # Custom commands
         if self.ks_printer_cfg is not None:
