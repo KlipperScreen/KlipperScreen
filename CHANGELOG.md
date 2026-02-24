@@ -4,6 +4,8 @@ Probably all versions contain changes regarding documentation, translation, fixe
 
 ## Current master
 
+* allow starting in locked state
+* option to auto-lock the screen
 * if printer power_devices in ks config add shortcut to shutdown panel
 * change default value on macro shortcut to false
 * rotate the move buttons according to screw_rotation
