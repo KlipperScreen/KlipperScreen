@@ -44,6 +44,9 @@ The options listed here are not editable from within the user interface.
 # Auto-lock the screen after a period of inactivity (in seconds)
 # 0 means disabled
 # autolock_timeout: 0
+
+# Start KlipperScreen with the screen locked
+# start_locked: False
 ```
 
 !!! tip

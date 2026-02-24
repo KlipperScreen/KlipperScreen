@@ -183,6 +183,8 @@ class KlipperScreen(Gtk.Window):
         self.lock_screen.set_autolock_timeout(autolock)
         self.log_notification("KlipperScreen Started", 1)
         self.initial_connection()
+        if self._config.get_main_config().getboolean('start_locked', False):
+            self.lock_screen.lock(None)
 
     def update_cursor(self, show: bool):
         self.show_cursor = show
