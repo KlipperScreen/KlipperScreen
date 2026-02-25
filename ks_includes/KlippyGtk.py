@@ -188,6 +188,7 @@ class KlippyGtk:
         if style is not None:
             b.get_style_context().add_class(style)
         b.connect("clicked", self.screen.screensaver.reset_timeout)
+        b.connect("clicked", self.screen.lock_screen.reset_timeout)
         return b
 
     @staticmethod
@@ -245,6 +246,7 @@ class KlippyGtk:
             dialog.connect("button-release-event", self.remove_dialog)
 
         dialog.connect("response", self.screen.screensaver.reset_timeout)
+        dialog.connect("response", self.screen.lock_screen.reset_timeout)
         dialog.connect("response", callback, *args)
         dialog.get_style_context().add_class("dialog")
 

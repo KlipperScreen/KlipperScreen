@@ -171,7 +171,8 @@ class KlipperScreenConfig:
                 )
                 numbers = (
                     'job_complete_timeout', 'job_error_timeout', 'move_speed_xy', 'move_speed_z',
-                    'print_estimate_compensation', 'width', 'height',
+                    'print_estimate_compensation', 'width', 'height', 'autolock_timeout',
+
                 )
             elif section.startswith('printer '):
                 bools = (
@@ -314,6 +315,17 @@ class KlipperScreenConfig:
             {"show_cursor": {"section": "main", "name": _("Show cursor"), "type": "binary",
                              "tooltip": _("For mouse control or to verify touchscreen accuracy"),
                              "value": "False", "callback": screen.update_cursor}},
+            {"autolock_timeout": {
+                "section": "main", "name": _("Auto-lock Timeout"), "type": "dropdown",
+                "tooltip": _("Automatically lock the screen after a period of inactivity"),
+                "value": "0", "callback": screen.set_autolock_timeout, "options": [
+                    {"name": _("Off") + " " + _("(default)"), "value": "0"},
+                    {"name": _("15s"), "value": "15"},
+                    {"name": _("30s"), "value": "30"},
+                    {"name": _("60s"), "value": "60"},
+                    {"name": _("2min"), "value": "120"},
+                    {"name": _("5min"), "value": "300"}]
+            }},
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
 
