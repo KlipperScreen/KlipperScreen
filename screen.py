@@ -179,9 +179,9 @@ class KlipperScreen(Gtk.Window):
         self.use_dpms = self._config.get_main_config().getboolean("use_dpms", fallback=(not self.wayland))
         self.use_dpms &= functions.dpms_loaded
         self.set_dpms(self.use_dpms)
-        self.log_notification("KlipperScreen Started", 1)
         autolock = self._config.get_main_config().getint("autolock_timeout", fallback=0)
         self.lock_screen.set_autolock_timeout(autolock)
+        self.log_notification("KlipperScreen Started", 1)
 
         self.initial_connection()
 
