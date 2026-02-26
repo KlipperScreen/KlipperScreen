@@ -2,6 +2,12 @@
 This just tracks the most notable changes, if you want all the details checkout the commit history.
 Probably all versions contain changes regarding documentation, translation, fixes and other minor refactors
 
+## Current master
+
+* change default value on macro shortcut to false
+* rotate the move buttons according to screw_rotation
+* add caching of some resources for perfomance
+
 ## v0.4.6  (Jul 2, 2025)
 
 * basic lockscreen for shows or kids

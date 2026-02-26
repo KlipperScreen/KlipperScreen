@@ -93,7 +93,10 @@ moonraker_port: 7125
 
 # Custom commands for zcalibrate
 # the zcalibrate panel provides quick access to test_z, accept and cancel commands
-# zcalibrate_custom_commands: CUSTOM_CALIBRATE, CUSTOM_CALIBRATE method=manual, CUSTOM_TEST
+# if you have a command that makes use of this functions and it's not in the main klipper repository
+# add it to this list.
+# examples:
+# zcalibrate_custom_commands: MYCUSTOMPROBE_CALIBRATE, CUSTOM_CALIBRATE method=manual, CUSTOM_TEST
 
 # Rotation is useful if the screen is not directly in front of the machine.
 # It will affect the bed mesh visualization.

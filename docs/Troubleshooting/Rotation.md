@@ -57,7 +57,7 @@ here are some examples:
 
     you may have to adjust the [touch rotation](../Touch_issues/#touch-rotation-and-matrix)
 
-??? example "Raspberry Pi using kernel cmdline"
+???+ example "Raspberry Pi using kernel cmdline"
 
     #### Raspberry Pi using kernel cmdline
     To set screen orientation when in console mode, you will need to edit the kernel command-line
@@ -77,18 +77,18 @@ here are some examples:
 
     To find the identifier on a terminal run:
     ```bash
-    DISPLAY=:0 xrandr
+    grep -H . /sys/class/drm/card*-*/status | grep :connected
     ```
-    it will output something like:
 
+    you will get somthing like:
     ```bash
-    Screen 0: minimum 320 x 200, current 1024 x 600, maximum 8192 x 8192
-    HDMI-1 connected primary 1024x600+0+0 (normal left inverted right x axis y axis) 800mm x 450mm
+    /sys/class/drm/card0-HDMI-A-1/status:connected
     ```
+    where HDMI-A-1 would be the identifier
 
     in this case the identifier is HDMI-1 and a simple cmdline arg would be something like:
     ```bash
-    video=HDMI-1:1024x600@60
+    video=HDMI-A-1:1024x600@60
     ```
 
     To apply changes do a reboot:
@@ -98,6 +98,16 @@ here are some examples:
     [Read the official docs for more info](https://www.raspberrypi.com/documentation/computers/config_txt.html)
 
     [Raspberry Display docs](https://www.raspberrypi.com/documentation/accessories/display.html)
+
+???+ example "Using a dtoverlay config on a Raspberry Pi"
+
+    #### Using a dtoverlay config on a Raspberry Pi
+    In /boot/config.txt (or /boot/firmware/config.txt)
+
+    with some display you can add rotate, like this example for a 3.5" 
+    ```bash
+    dtoverlay=waveshare35b-v2,rotate=270,drm,speed=30000000,fps=60
+    ```
 
 ??? example "Raspberry Pi legacy mode (works with vc4-fkms-v3d)"
 

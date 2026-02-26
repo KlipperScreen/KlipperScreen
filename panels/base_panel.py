@@ -339,7 +339,7 @@ class BasePanel(ScreenPanel):
     def show_shortcut(self, show=True):
         show = (
             show
-            and self._config.get_main_config().getboolean('side_macro_shortcut', True)
+            and self._config.get_main_config().getboolean('side_macro_shortcut', False)
             and self._printer.get_printer_status_data()["printer"]["gcode_macros"]["count"] > 0
             and self._screen._cur_panels[-1] != 'printer_select'
         )

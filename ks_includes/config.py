@@ -281,7 +281,7 @@ class KlipperScreenConfig:
                          "value": "True"}},
             {"side_macro_shortcut": {
                 "section": "main", "name": _("Macro shortcut on sidebar"), "type": "binary",
-                "value": "True", "callback": screen.toggle_shortcut}},
+                "value": "False", "callback": screen.toggle_shortcut}},
             {"font_size": {
                 "section": "main", "name": _("Font Size"), "type": "dropdown",
                 "tooltip": _("Inversely affects the icon size"),

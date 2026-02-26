@@ -76,18 +76,20 @@ class Panel(ScreenPanel):
         self.reload_button.connect("clicked", self.reload_networks)
         self.reload_button.set_hexpand(False)
 
-        self.wifi_toggle = Gtk.Switch(
+        self.wifi_toggle_switch = Gtk.Switch(
             width_request=round(self._gtk.font_size * 2),
             height_request=round(self._gtk.font_size),
             active=self.sdbus_nm.is_wifi_enabled()
         )
-        self.wifi_toggle.connect("notify::active", self.toggle_wifi)
+        self.wifi_toggle_switch.connect("notify::active", self.toggle_wifi)
+        wifi_toggle = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        wifi_toggle.add(self.wifi_toggle_switch)
 
         sbox = Gtk.Box(hexpand=True, vexpand=False)
         sbox.add(self.labels['interface'])
         sbox.add(self.labels['ip'])
         sbox.add(self.reload_button)
-        sbox.add(self.wifi_toggle)
+        sbox.add(wifi_toggle)
 
         scroll = self._gtk.ScrolledWindow()
         self.labels['main_box'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
