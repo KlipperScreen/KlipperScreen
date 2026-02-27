@@ -75,6 +75,7 @@ button {
 
 .active image,
 button:active,
+button:focus,
 .button_active,
 button.active {
     background-color: @active;

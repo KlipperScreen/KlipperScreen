@@ -166,7 +166,9 @@ class KlippyGtk:
     def Button(self, image_name=None, label=None, style=None, scale=None, position=Gtk.PositionType.TOP, lines=2):
         if self.font_size_type == "max" and label is not None:
             image_name = None
-        b = Gtk.Button(hexpand=True, vexpand=True, can_focus=False, image_position=position, always_show_image=True)
+        b = Gtk.Button(hexpand=True, vexpand=True, image_position=position, always_show_image=True)
+        focusable = self.screen._config.get_main_config().getboolean("allow_button_focus", fallback=False)
+        b.set_can_focus(focusable)
         if label is not None:
             b.set_label(label.replace("\n", " "))
         if image_name is not None:
