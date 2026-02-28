@@ -3,7 +3,7 @@ import logging
 import gi
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+from gi.repository import GLib, Gtk
 
 
 class LockScreen:
@@ -11,6 +11,33 @@ class LockScreen:
         self.screen = screen
         self.lock_box = None
         self.unlock_box = None
+        self.autolock_timeout = None
+        self.autolock_time = 0
+
+    def set_autolock_timeout(self, timeout):
+        """Set the auto-lock timeout in seconds. 0 means disabled."""
+        try:
+            self.autolock_time = abs(int(timeout))
+        except (ValueError, TypeError):
+            self.autolock_time = 0
+        self.reset_timeout()
+
+    def reset_timeout(self, *args):
+        """Reset the auto-lock timer. Called on user interaction."""
+        if self.autolock_timeout is not None:
+            GLib.source_remove(self.autolock_timeout)
+            self.autolock_timeout = None
+        if self.autolock_time > 0 and self.lock_box is None:
+            self.autolock_timeout = GLib.timeout_add_seconds(
+                self.autolock_time, self._auto_lock)
+
+    def _auto_lock(self):
+        """Called when the auto-lock timer expires."""
+        self.autolock_timeout = None
+        if self.lock_box is None:
+            logging.info("Auto-locking screen")
+            self.lock(None)
+        return False
 
     def lock(self, widget):
         self.screen._menu_go_back(None, True)
@@ -96,3 +123,4 @@ class LockScreen:
         self.screen.remove_keyboard()
         self.screen.overlay.get_children()[0].show()
         logging.info("Unlocked")
+        self.reset_timeout()
