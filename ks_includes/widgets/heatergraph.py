@@ -83,6 +83,8 @@ class HeaterGraph(Gtk.DrawingArea):
             logging.info("Tempstore not initialized!")
             self._screen.init_tempstore()
             return
+        Gtk.render_background(da.get_style_context(), ctx, 0, 0,
+                              da.get_allocated_width(), da.get_allocated_height())
         x = round(self.font_size * 2.75)
         y = 10
         width = da.get_allocated_width() - 15
