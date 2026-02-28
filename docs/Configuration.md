@@ -48,9 +48,9 @@ The options listed here are not editable from within the user interface.
 # Start KlipperScreen with the screen locked
 # start_locked: False
 
-# Allow the buttons to focus to navigate with the keyboard
+# Allow button focus to navigate with the keyboard
 # a scroll wheel mapped to tab/shift+tab and enter button can work
-# Beware that the UI is coded to be touchscreen controlled, this is secondary and
+# Beware that the UI is coded to be touchscreen controlled, this is
 # not recommended as the only way to control
 # keyboard_navigation: False
 ```

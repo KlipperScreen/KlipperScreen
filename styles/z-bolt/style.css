@@ -29,6 +29,7 @@ button {
     background-color: @bg;
 }
 
+button:focus,
 button:active {
     background-color: @active;
 }

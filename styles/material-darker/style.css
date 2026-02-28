@@ -55,6 +55,20 @@ button.color4 {
     padding-top: 0.4em;
 }
 
+
+button:focus,
+button.color1:focus,
+button.color2:focus,
+button.color3:focus,
+button.color4:focus,
+button.update:focus,
+button.invalid:focus,
+.dialog button:focus
+{
+    background-color: #424242;
+    border-color: #424242;
+}
+
 button.color1:active,
 button.color2:active,
 button.color3:active,
