@@ -42,7 +42,7 @@ The options listed here are not editable from within the user interface.
 # lock_password: example_password
 
 # Auto-lock the screen after a period of inactivity (in seconds)
-# 0 means disabled (default), max 300 (5 minutes)
+# 0 means disabled
 # autolock_timeout: 0
 ```
 
