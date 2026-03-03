@@ -400,14 +400,12 @@ class Panel(ScreenPanel):
         if net['BSSID'] not in self.network_rows.keys() or net['BSSID'] not in self.networks:
             logging.info(f"Unknown SSID {net['SSID']}")
             return
-        info = _("Password saved") + '\n' if net['known'] else ""
         chan = _("Channel") + f' {net["channel"]}'
         self.networks[net['BSSID']]['icon'].set_from_pixbuf(self.get_signal_strength_icon(net["signal_level"]))
         self.networks[net['BSSID']]['info'].set_markup(
             "<small>"
-            f"{info}"
-            f"{net['security']}\n"
             f"{net['frequency']} Ghz  {chan}  {net['signal_level']} %\n"
+            f"{net['security']}\n"
             f"{net['BSSID']}"
             "</small>"
         )
