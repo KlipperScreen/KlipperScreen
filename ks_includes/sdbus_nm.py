@@ -124,12 +124,13 @@ class SdbusNm:
         ]
 
     def get_wireless_interfaces(self):
-        devices = {path: NetworkDeviceGeneric(path) for path in self.nm.get_devices()}
-        return [
-            NetworkDeviceWireless(path)
-            for path, device in devices.items()
-            if device.device_type == enums.DeviceType.WIFI
-        ]
+        wireless_interfaces = []
+        for path in self.nm.get_devices():
+            dev = NetworkDeviceGeneric(path)
+            if dev.device_type == enums.DeviceType.WIFI:
+                wireless_interfaces.append(NetworkDeviceWireless(path))
+                
+        return wireless_interfaces
 
     def get_interface_status(self):
         return self.wlan_device.state
