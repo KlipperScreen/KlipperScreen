@@ -399,7 +399,7 @@ class SdbusNm:
                 enums.DeviceState.DISCONNECTED,
                 enums.DeviceState.DEACTIVATING,
             ]:
-                self.popup(_("Network disconnected"))
+                self.popup(_("Network disconnected"), 2)
             elif state == enums.DeviceState.FAILED:
                 self.popup(_("Connection failed"))
             self.wifi_state = state
