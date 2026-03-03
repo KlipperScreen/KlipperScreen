@@ -103,6 +103,9 @@ class SdbusNm:
         self.monitor_connection = False
         self.wifi_state = -1
         self.popup = popup_callback
+        if self.wlan_device.state == enums.DeviceState.UNMANAGED:
+            self.popup(f"{iface_name} is not managed by NetworkManager and cannot be controlled by this app")
+            return
 
     def ensure_nm_running(self):
         try:
