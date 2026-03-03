@@ -131,6 +131,9 @@ class SdbusNm:
             if device.device_type == enums.DeviceType.WIFI
         ]
 
+    def get_interface_status(self):
+        return self.wlan_device.state
+
     def get_primary_interface(self):
         if self.nm.primary_connection == "/":
             if self.wlan_device:
@@ -327,6 +330,10 @@ class SdbusNm:
 
     def rescan(self):
         try:
+            state = self.get_interface_status()
+            if state < enums.DeviceState.DISCONNECTED or state > enums.DeviceState.ACTIVATED:
+                logging.debug(f"Interface not ready: {state}")
+                return
             return self.wlan_device.request_scan({})
         except Exception as e:
             self.popup(f"Unexpected error: {e}")
