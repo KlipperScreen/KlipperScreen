@@ -361,6 +361,9 @@ class SdbusNm:
         self.nm.wireless_enabled = enable
 
     def monitor_connection_status(self):
+        if not self.wlan_device:
+            self.set_connection_monitoring(False)
+            return False
         state = self.wlan_device.state
         if self.wifi_state != state:
             logging.debug(f"State changed: {state} {self.wlan_device.state_reason}")
@@ -391,7 +394,7 @@ class SdbusNm:
             self.wifi_state = state
         return self.monitor_connection
 
-    def enable_monitoring(self, enable):
+    def set_connection_monitoring(self, enable):
         self.monitor_connection = enable
 
     def set_wlan_device(self, iface_name):
