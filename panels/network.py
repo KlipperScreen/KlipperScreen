@@ -374,17 +374,25 @@ class Panel(ScreenPanel):
         self.interface = self.sdbus_nm.get_primary_interface()
         self.labels['ip'].set_text(f"IP: {self.sdbus_nm.get_ip_address()}")
         nets = self.sdbus_nm.get_networks()
-        remove = [bssid for bssid in self.network_rows.keys() if bssid not in [net['BSSID'] for net in nets]]
-        for bssid in remove:
+
+        current_bssids = {net['BSSID'] for net in nets if 'BSSID' in net}
+        to_remove = [bssid for bssid in self.network_rows if bssid not in current_bssids]
+        for bssid in to_remove:
             self.remove_network_from_list(bssid)
+
         for net in nets:
-            if net['BSSID'] not in self.network_rows.keys():
-                self.add_network(net['BSSID'])
+            bssid = net.get('BSSID')
+            if not bssid:
+                continue
+            if bssid not in self.network_rows:
+                self.add_network(bssid)
             self.update_network_info(net)
+
         for i, net in enumerate(nets):
-            for child in self.network_list.get_children():
-                if child == self.network_rows[net['BSSID']]:
-                    self.network_list.reorder_child(child, i)
+            bssid = net.get('BSSID')
+            widget = self.network_rows.get(bssid)
+            if widget:
+                self.network_list.reorder_child(widget, i)
         self.network_list.show_all()
         return True
 
