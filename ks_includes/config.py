@@ -43,37 +43,46 @@ class KlipperScreenConfig:
         self.config = configparser.ConfigParser()
         self.config_path = self.get_config_file_location(configfile)
         logging.debug(f"Config path location: {self.config_path}")
-        self.defined_config = None
+        self.user_cfg = None
         self.lang = None
         self.langs = {}
 
         try:
+            # parse defaults.conf
             self.config.read(self.default_config_path)
             includes = [i[8:] for i in self.config.sections() if i.startswith("include ")]
             for include in includes:
-                self._include_config("/".join(self.default_config_path.split("/")[:-1]), include, log=False)
-            # In case a user altered defaults.conf
-            self.validate_config(self.config)
+                directory = "/".join(self.default_config_path.split("/")[:-1])
+                self._include_config(self.config, directory, include, log=False)
+            self.validate_config(self.config)  # In case a user altered defaults
+            # parse KlipperScreen.conf
             if self.config_path != self.default_config_path:
                 user_def, saved_def = self.separate_saved_config(self.config_path)
-                self.defined_config = configparser.ConfigParser()
-                self.defined_config.read_string(user_def)
+                self.user_cfg = configparser.ConfigParser()
+                self.user_cfg.read_string(user_def)
 
-                includes = [i[8:] for i in self.defined_config.sections() if i.startswith("include ")]
+                includes = [i[8:] for i in self.user_cfg.sections() if i.startswith("include ")]
                 for include in includes:
-                    self._include_config("/".join(self.config_path.split("/")[:-1]), include)
+                    directory = "/".join(self.config_path.split("/")[:-1])
+                    self._include_config(self.user_cfg, directory, include)
 
-                self.exclude_from_config(self.defined_config)
+                if not self.user_cfg.getboolean('main', "use_default_menu", fallback=True):
+                    self.exclude_menu_from_config(self.config)
 
-                self.log_config(self.defined_config)
-                if self.validate_config(self.defined_config, string=user_def):
-                    self.config.read_string(user_def)
+                if any(sec.startswith("preheat") for sec in self.user_cfg.sections()):
+                    self.exclude_preheat_from_config(self.config)
+
+                self.log_config(self.user_cfg)
+                if self.validate_config(self.user_cfg, string=user_def):
+                    merged_user_text = self._build_config_string(self.user_cfg)
+                    self.config.read_string(merged_user_text)  # Merge user config
+                # Parse configs saved from the UI
                 if saved_def is not None:
                     auto_gen = configparser.ConfigParser()
                     auto_gen.read_string(saved_def)
                     if self.validate_config(auto_gen, string=saved_def, remove=True):
-                        self.config.read_string(saved_def)
-                        logging.info(f"====== Saved Def ======\n{saved_def}\n=======================")
+                        self.config.read_string(saved_def) # Merge ui saved config
+                        logging.info(f"\n====== Saved ======\n{saved_def}\n")
             # This is the final config
             # self.log_config(self.config)
         except KeyError as Kerror:
@@ -379,52 +388,81 @@ class KlipperScreenConfig:
             if name not in list(self.config[vals['section']]):
                 self.config.set(vals['section'], name, vals['value'])
 
-    def exclude_from_config(self, config):
-        exclude_list = ['preheat']
-        if self.defined_config and not self.defined_config.getboolean('main', "use_default_menu", fallback=True):
-            logging.info("Using custom menu, removing default menu entries.")
-            exclude_list.extend(('menu __main', 'menu __print', 'menu __splashscreen'))
-        for i in exclude_list:
-            for j in config.sections():
-                if j.startswith(i):
-                    for k in list(self.config.sections()):
-                        if k.startswith(i):
-                            del self.config[k]
+    def exclude_menu_from_config(self, config):
+        logging.info("Using custom menu, removing default menu entries.")
+        exclude_list = ('menu __main', 'menu __print', 'menu __splashscreen')
+        self.exclude_from_config(config, exclude_list)
 
-    def _include_config(self, directory, filepath, log=True):
-        full_path = filepath if filepath[0] == "/" else f"{directory}/{filepath}"
-        parse_files = []
+    def exclude_preheat_from_config(self, config):
+        exclude_list = ('preheat',)
+        self.exclude_from_config(config, exclude_list)
 
-        if "*" in full_path:
-            parent_dir = "/".join(full_path.split("/")[:-1])
-            file = full_path.split("/")[-1]
-            if not os.path.exists(parent_dir):
-                logging.error(f"Config Error: Directory {parent_dir} does not exist")
-                return
-            files = os.listdir(parent_dir)
-            regex = f"^{file.replace('*', '.*')}$"
-            parse_files.extend(os.path.join(parent_dir, file) for file in files if re.match(regex, file))
+    def exclude_from_config(self, config, exclude_list):
+        for prefix in exclude_list:
+            if any(sec.startswith(prefix) for sec in config.sections()):
+                for key in list(self.config.keys()):
+                    if key.startswith(prefix):
+                        del self.config[key]
 
+    def _include_config(self,
+                        config_to_integrate: configparser.ConfigParser,
+                        base_dir: str,
+                        filepath: str,
+                        log: bool = True) -> None:
+        # ---------- Resolve absolute path ----------
+        if os.path.isabs(filepath):
+            full_path = filepath
         else:
-            if not os.path.exists(os.path.join(full_path)):
-                logging.error(f"Config Error: {full_path} does not exist")
-                return
-            parse_files.append(full_path)
+            full_path = os.path.join(base_dir, filepath)
 
-        logging.info(f"Parsing files: {parse_files}")
-        for file in parse_files:
-            config = configparser.ConfigParser()
-            config.read(file)
-            includes = [i[8:] for i in config.sections() if i.startswith("include ")]
-            for include in includes:
-                self._include_config("/".join(full_path.split("/")[:-1]), include)
-            self.exclude_from_config(config)
-            if log:
-                self.log_config(config)
-            with open(file, 'r') as f:
-                string = f.read()
-                if self.validate_config(config, string=string):
-                    self.config.read(file)
+        files_to_process = []
+
+        if '*' in full_path:
+            parent_dir = os.path.dirname(full_path)
+            pattern = re.escape(os.path.basename(full_path)).replace(r'\*', r'.*')
+            regex = re.compile(f'^{pattern}$')
+
+            try:
+                for fname in os.listdir(parent_dir):
+                    if regex.match(fname):
+                        files_to_process.append(os.path.join(parent_dir, fname))
+            except Exception as e:
+                logging.error(f"Config Error: unable to list directory {parent_dir}: {e}")
+                return
+        else:
+            if not os.path.isfile(full_path):
+                logging.error(f"Config Error: include file '{full_path}' does not exist")
+                return
+            files_to_process.append(full_path)
+
+        for fp in files_to_process:
+            try:
+                with open(fp, 'r', encoding='utf-8') as f:
+                    cfg_text = f.read()
+            except Exception as e:
+                logging.error(f"Config Error: failed to read '{fp}': {e}")
+                continue
+
+            temp_cfg = configparser.ConfigParser()
+            try:
+                temp_cfg.read_string(cfg_text)
+            except Exception as e:
+                logging.error(f"Config Error: failed to parse '{fp}': {e}")
+                continue
+
+            # nested includes
+            nested_includes = [s[8:] for s in temp_cfg.sections() if s.startswith("include ")]
+            for inc_file in nested_includes:
+                self._include_config(
+                    config_to_integrate=config_to_integrate,
+                    base_dir=os.path.dirname(fp),
+                    filepath=inc_file,
+                    log=False
+                )
+            if self.validate_config(config_to_integrate, string=cfg_text):
+                config_to_integrate.read_string(cfg_text)
+                if log:
+                    self.log_config(config_to_integrate)
 
     def separate_saved_config(self, config_path):
         user_def = []
@@ -526,8 +564,8 @@ class KlipperScreenConfig:
             opt = item[name]
             curval = self.config[opt['section']].get(name)
             if curval != opt["value"] or (
-                    self.defined_config is not None and opt['section'] in self.defined_config.sections() and
-                    self.defined_config[opt['section']].get(name, None) not in (None, curval)):
+                    self.user_cfg is not None and opt['section'] in self.user_cfg.sections() and
+                    self.user_cfg[opt['section']].get(name, None) not in (None, curval)):
                 if opt['section'] not in save_config.sections():
                     save_config.add_section(opt['section'])
                 save_config.set(opt['section'], name, str(curval))
@@ -538,10 +576,10 @@ class KlipperScreenConfig:
         for section in extra_sections:
             for item in self.config.options(section):
                 value = self.config[section].getboolean(item, fallback=True)
-                if value is False or (self.defined_config is not None and
-                                      section in self.defined_config.sections() and
-                                      self.defined_config[section].getboolean(item, fallback=True) is False and
-                                      self.defined_config[section].getboolean(item, fallback=True) != value):
+                if value is False or (self.user_cfg is not None and
+                                      section in self.user_cfg.sections() and
+                                      self.user_cfg[section].getboolean(item, fallback=True) is False and
+                                      self.user_cfg[section].getboolean(item, fallback=True) != value):
                     if section not in save_config.sections():
                         save_config.add_section(section)
                     save_config.set(section, item, str(value))
