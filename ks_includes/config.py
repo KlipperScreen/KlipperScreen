@@ -81,7 +81,7 @@ class KlipperScreenConfig:
                     auto_gen = configparser.ConfigParser()
                     auto_gen.read_string(saved_def)
                     if self.validate_config(auto_gen, string=saved_def, remove=True):
-                        self.config.read_string(saved_def) # Merge ui saved config
+                        self.config.read_string(saved_def)  # Merge ui saved config
                         logging.info(f"\n====== Saved ======\n{saved_def}\n")
             # This is the final config
             # self.log_config(self.config)
