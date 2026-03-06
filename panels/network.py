@@ -64,10 +64,21 @@ class Panel(ScreenPanel):
         self.interface = self.sdbus_nm.get_primary_interface()
         logging.info(f"Primary interface: {self.interface}")
 
-        self.labels['interface'] = Gtk.Label(hexpand=True)
+        iface_label = Gtk.Label(_("Interface") + ": ")
+        if len(self.wireless_interfaces) <= 1:
+            self.labels['interface'] = Gtk.Label(hexpand=True, halign=Gtk.Align.START)
+            if self.interface is not None:
+                self.labels['interface'].set_text(f'{self.interface}')
+        else:
+            self.labels['interface'] = Gtk.ComboBoxText()
+            self.labels['interface'].connect("changed", self.iface_changed)
+            for iface in self.wireless_interfaces:
+                self.labels['interface'].append(iface, iface)
+            if self.interface is not None:
+                self.labels['interface'].set_active_id(self.interface)
+
         self.labels['ip'] = Gtk.Label(hexpand=True)
         if self.interface is not None:
-            self.labels['interface'].set_text(_("Interface") + f': {self.interface}')
             self.labels['ip'].set_text(f"IP: {self.sdbus_nm.get_ip_address()}")
 
         self.reload_button = self._gtk.Button("refresh", None, "color1", self.bts)
@@ -86,6 +97,8 @@ class Panel(ScreenPanel):
         wifi_toggle.add(self.wifi_toggle_switch)
 
         sbox = Gtk.Box(hexpand=True, vexpand=False)
+        if (self._screen.width > 400):
+            sbox.add(iface_label)
         sbox.add(self.labels['interface'])
         sbox.add(self.labels['ip'])
         sbox.add(self.reload_button)
@@ -98,7 +111,7 @@ class Panel(ScreenPanel):
             self.labels['main_box'].pack_start(sbox, False, False, 5)
             GLib.idle_add(self.load_networks)
             scroll.add(self.network_list)
-            self.sdbus_nm.enable_monitoring(True)
+            self.sdbus_nm.set_connection_monitoring(True)
             self.conn_status = GLib.timeout_add_seconds(1, self.sdbus_nm.monitor_connection_status)
         else:
             self._screen.show_popup_message(_("No wireless interface has been found"), level=2)
@@ -173,6 +186,12 @@ class Panel(ScreenPanel):
         }
 
         self.network_list.add(self.network_rows[bssid])
+
+    def iface_changed(self, combo):
+        selected_iface = combo.get_active_id()
+        logging.info(f"Selected interace: {selected_iface}")
+        self.interace = selected_iface
+        self.sdbus_nm.set_wlan_device(selected_iface)
 
     def remove_confirm_dialog(self, widget, ssid, bssid):
 
@@ -353,20 +372,27 @@ class Panel(ScreenPanel):
 
     def update_all_networks(self):
         self.interface = self.sdbus_nm.get_primary_interface()
-        self.labels['interface'].set_text(_("Interface") + f': {self.interface}')
         self.labels['ip'].set_text(f"IP: {self.sdbus_nm.get_ip_address()}")
         nets = self.sdbus_nm.get_networks()
-        remove = [bssid for bssid in self.network_rows.keys() if bssid not in [net['BSSID'] for net in nets]]
-        for bssid in remove:
+
+        current_bssids = {net['BSSID'] for net in nets if 'BSSID' in net}
+        to_remove = [bssid for bssid in self.network_rows if bssid not in current_bssids]
+        for bssid in to_remove:
             self.remove_network_from_list(bssid)
+
         for net in nets:
-            if net['BSSID'] not in self.network_rows.keys():
-                self.add_network(net['BSSID'])
+            bssid = net.get('BSSID')
+            if not bssid:
+                continue
+            if bssid not in self.network_rows:
+                self.add_network(bssid)
             self.update_network_info(net)
+
         for i, net in enumerate(nets):
-            for child in self.network_list.get_children():
-                if child == self.network_rows[net['BSSID']]:
-                    self.network_list.reorder_child(child, i)
+            bssid = net.get('BSSID')
+            widget = self.network_rows.get(bssid)
+            if widget:
+                self.network_list.reorder_child(widget, i)
         self.network_list.show_all()
         return True
 
@@ -374,14 +400,12 @@ class Panel(ScreenPanel):
         if net['BSSID'] not in self.network_rows.keys() or net['BSSID'] not in self.networks:
             logging.info(f"Unknown SSID {net['SSID']}")
             return
-        info = _("Password saved") + '\n' if net['known'] else ""
         chan = _("Channel") + f' {net["channel"]}'
         self.networks[net['BSSID']]['icon'].set_from_pixbuf(self.get_signal_strength_icon(net["signal_level"]))
         self.networks[net['BSSID']]['info'].set_markup(
             "<small>"
-            f"{info}"
-            f"{net['security']}\n"
             f"{net['frequency']} Ghz  {chan}  {net['signal_level']} %\n"
+            f"{net['security']}\n"
             f"{net['BSSID']}"
             "</small>"
         )
@@ -440,8 +464,7 @@ class Panel(ScreenPanel):
         if self.update_timeout is not None:
             GLib.source_remove(self.update_timeout)
             self.update_timeout = None
-        if self.sdbus_nm.wifi:
-            self.sdbus_nm.enable_monitoring(False)
+        self.sdbus_nm.set_connection_monitoring(False)
 
     def toggle_wifi(self, switch, gparams):
         enable = switch.get_active()

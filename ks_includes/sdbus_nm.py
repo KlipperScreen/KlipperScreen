@@ -1,5 +1,4 @@
 # This is the backend of the UI panel that communicates to sdbus-networkmanager
-# TODO device selection/swtichability
 # Alfredo Monclus (alfrix) 2024
 import logging
 import subprocess
@@ -104,6 +103,9 @@ class SdbusNm:
         self.monitor_connection = False
         self.wifi_state = -1
         self.popup = popup_callback
+        if wlan_device.state == enums.DeviceState.UNMANAGED:
+            self.popup(f"{iface_name} is not managed by NetworkManager and cannot be controlled by this app")
+            return
 
     def ensure_nm_running(self):
         try:
@@ -125,12 +127,16 @@ class SdbusNm:
         ]
 
     def get_wireless_interfaces(self):
-        devices = {path: NetworkDeviceGeneric(path) for path in self.nm.get_devices()}
-        return [
-            NetworkDeviceWireless(path)
-            for path, device in devices.items()
-            if device.device_type == enums.DeviceType.WIFI
-        ]
+        wireless_interfaces = []
+        for path in self.nm.get_devices():
+            dev = NetworkDeviceGeneric(path)
+            if dev.device_type == enums.DeviceType.WIFI:
+                wireless_interfaces.append(NetworkDeviceWireless(path))
+                
+        return wireless_interfaces
+
+    def get_interface_status(self):
+        return self.wlan_device.state
 
     def get_primary_interface(self):
         if self.nm.primary_connection == "/":
@@ -328,6 +334,10 @@ class SdbusNm:
 
     def rescan(self):
         try:
+            state = self.get_interface_status()
+            if state < enums.DeviceState.DISCONNECTED or state > enums.DeviceState.ACTIVATED:
+                logging.debug(f"Interface not ready: {state}")
+                return
             return self.wlan_device.request_scan({})
         except Exception as e:
             self.popup(f"Unexpected error: {e}")
@@ -362,6 +372,9 @@ class SdbusNm:
         self.nm.wireless_enabled = enable
 
     def monitor_connection_status(self):
+        if not self.wlan_device:
+            self.set_connection_monitoring(False)
+            return False
         state = self.wlan_device.state
         if self.wifi_state != state:
             logging.debug(f"State changed: {state} {self.wlan_device.state_reason}")
@@ -386,11 +399,22 @@ class SdbusNm:
                 enums.DeviceState.DISCONNECTED,
                 enums.DeviceState.DEACTIVATING,
             ]:
-                self.popup(_("Network disconnected"))
+                self.popup(_("Network disconnected"), 2)
             elif state == enums.DeviceState.FAILED:
                 self.popup(_("Connection failed"))
             self.wifi_state = state
         return self.monitor_connection
 
-    def enable_monitoring(self, enable):
+    def set_connection_monitoring(self, enable):
         self.monitor_connection = enable
+
+    def set_wlan_device(self, iface_name):
+        for wireless in self.get_wireless_interfaces():
+            if wireless.interface == iface_name:
+                if wireless.state == enums.DeviceState.UNMANAGED:
+                    self.popup(f"{iface_name} is not managed by NetworkManager and cannot be controlled by this app")
+                    return
+                self.wlan_device = wireless
+                logging.debug(f"Switched wlan_device to {iface_name}")
+                return
+        raise ValueError(f"No Wi‑Fi interface named '{iface_name}' found.")
