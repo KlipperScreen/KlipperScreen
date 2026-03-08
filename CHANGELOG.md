@@ -4,6 +4,8 @@ Probably all versions contain changes regarding documentation, translation, fixe
 
 ## Current master
 
+* add a wifi interface selector in the network panel
+* option to use keyboard navigation
 * allow starting in locked state
 * option to auto-lock the screen
 * if printer power_devices in ks config add shortcut to shutdown panel
