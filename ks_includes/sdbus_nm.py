@@ -365,6 +365,14 @@ class SdbusNm:
         if target_connection := self.get_connection_path_by_ssid(ssid):
             self.popup(f"{ssid}\n{_('Starting WiFi Association')}", 1)
             try:
+                # Update the “interface‑name”
+                con = NetworkConnectionSettings(target_connection)
+                settings = con.get_settings()
+
+                if ("802-11-wireless" in settings
+                        and settings["802-11-wireless"].get("mode") == ("s", "infrastructure")):
+                    settings["connection"]["interface-name"] = ("s", self.wlan_device.interface)
+                    con.update(settings)
                 active_connection = self.nm.activate_connection(target_connection)
                 return target_connection
             except Exception as e:
