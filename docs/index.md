@@ -40,9 +40,10 @@ thanks to all the [contributors](https://github.com/KlipperScreen/KlipperScreen/
 
 ### Sponsors
 
-![LDO](img/sponsors/LDO.png) ![YUMI](img/sponsors/YUMI.png)
+| | Thank you for sponsoring KlipperScreen and the open source community. |
+| - | - |
+| ![LDO](img/sponsors/LDO.png) | [LDO](https://ldomotors.com/) |
+|  ![YUMI](img/sponsors/YUMI.png) | [YUMI](https://wiki.yumi-lab.com/) |
 
 
-Thank you [LDO](https://ldomotors.com/) for sponsoring KlipperScreen and the open source community.
 
-Thanks  [YUMI](https://wiki.yumi-lab.com/) for sponsoring KlipperScreen and the open source community.
