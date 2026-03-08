@@ -173,7 +173,13 @@ class SdbusNm:
             return "?"
         active_connection = ActiveConnection(active_connection_path)
         ip_info = IPv4Config(active_connection.ip4_config)
-        return ip_info.address_data[0]["address"][1]
+        ip = ip_info.address_data[0]["address"][1]
+
+        dev_obj = NetworkDeviceGeneric(active_connection.devices[0])
+        iface_name = dev_obj.interface
+        if iface_name == self.wlan_device.interface:
+            return ip
+        return f"{ip} ({iface_name})"
 
     def get_networks(self):
         networks = []
