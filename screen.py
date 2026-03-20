@@ -706,8 +706,10 @@ class KlipperScreen(Gtk.Window):
     def set_screenblanking_timeout(self, time):
         # disable screensaver we have our own
         if not self.wayland:
-            os.system(f"xset -display {self.display_number} s off")
-            os.system(f"xset -display {self.display_number} s noblank")
+            cmd = ["xset", "-display", self.display_number, "s", "off"]
+            subprocess.call(cmd)
+            cmd = ["xset", "-display", self.display_number, "s", "noblank"]
+            subprocess.call(cmd)
         if time == "off":
             self.blanking_time = 0
         else:
