@@ -50,7 +50,7 @@ Cmnd_Alias IWLIST = /sbin/iwlist wlan[0-9] scan
 Cmnd_Alias IWCONFIG = /sbin/iwconfig wlan[0-9]
 Cmnd_Alias SYSTEMCTL_KS_RESTART = /bin/systemctl restart KlipperScreen
 
-%GROUPNAME ALL=(ALL) NOPASSWD: IWCONFGI, IWLIST, SYSTEMCTL_KS_RESTART
+%GROUPNAME ALL=(ALL) NOPASSWD: IWCONFIG, IWLIST, SYSTEMCTL_KS_RESTART
 #EOF
 
   report_status "\e[1;32m...done\e[0m"
