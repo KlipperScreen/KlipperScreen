@@ -647,10 +647,8 @@ class KlipperScreen(Gtk.Window):
         if self._config.get_main_config().get('screen_blanking') != "off":
             logging.debug("Screen wake up")
         try:
-            subprocess.run(
-                f"xset -display {self.display_number} dpms force on",
-                shell=True, check=True
-            )
+            cmd = ["xset", "-display", self.display_number, "dpms", "force", "on"]
+            subprocess.run(cmd, check=True)
         except subprocess.CalledProcessError as e:
             self.show_popup_message(f"Error: {e}")
             self.set_dpms(False)
@@ -670,14 +668,10 @@ class KlipperScreen(Gtk.Window):
             state = functions.get_DPMS_state()
             if state != functions.DPMS_State.Fail:
                 try:
-                    subprocess.run(
-                        f"xset -display {self.display_number} dpms 0 0 0",
-                        shell=True, check=True
-                    )
-                    subprocess.run(
-                        f"xset -display {self.display_number} -dpms",
-                        shell=True, check=True
-                    )
+                    cmd = ["xset", "-display", self.display_number, "dpms", "0", "0", "0"]
+                    subprocess.run(cmd, check=True)
+                    cmd = ["xset", "-display", self.display_number, "-dpms"]
+                    subprocess.run(cmd, check=True)
                 except subprocess.CalledProcessError as e:
                     self.show_popup_message(f"FAILED to turn DPMS off on {self.display_number}:\n {e}")
                     return
@@ -691,10 +685,8 @@ class KlipperScreen(Gtk.Window):
 
     def set_dpms_timeout(self):
         try:
-            subprocess.run(
-                f"xset -display {self.display_number} dpms 0 {self.blanking_time} 0",
-                shell=True, check=True
-            )
+            cmd = ["xset", "-display", self.display_number, "dpms", "0", f"{self.blanking_time}", "0"]
+            subprocess.run(cmd, check=True)
             logging.info(f"DPMS on {self.display_number} set to: {self.blanking_time}")
         except subprocess.CalledProcessError as e:
             self.show_popup_message(f"DPMS Error:\n {e}")
