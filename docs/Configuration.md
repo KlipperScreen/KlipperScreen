@@ -85,9 +85,10 @@ moonraker_port: 7125
 # power_devices: example1, example2
 
 # Define what items should be shown in titlebar besides the extruder and bed
-# the name must be the same as defined in the klipper config
-# valid options are temperature_sensors or temperature_fans, or heater_generic
-# titlebar_items: chamber, MCU, Pi
+# temperature items must match names defined in the klipper config
+# valid temperature options are temperature_sensors, temperature_fans, or heater_generic
+# special runtime items: spoolman
+# titlebar_items: chamber, MCU, Pi, spoolman
 
 # The style of the user defined items in the titlebar
 # Can be 'full' indicating that the full name is shown, 'short' for the first letter, or None (default) for no name

@@ -24,6 +24,7 @@ from datetime import datetime
 from ks_includes import functions
 from ks_includes.KlippyWebsocket import KlippyWebsocket
 from ks_includes.KlippyRest import KlippyRest
+from ks_includes.SpoolmanWebsocket import SpoolmanWebsocket
 from ks_includes.files import KlippyFiles
 from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.printer import Printer
@@ -80,6 +81,9 @@ class KlipperScreen(Gtk.Window):
     prompt = None
     tempstore_timeout = None
     check_dpms_timeout = None
+    spoolman_ws = None
+    spoolman_poll_timer = None
+    spoolman_retry_timer = None
 
     def __init__(self, args):
         self.server_info = None
@@ -104,6 +108,7 @@ class KlipperScreen(Gtk.Window):
 
         self.connect("key-press-event", self._key_press_event)
         self.connect("configure_event", self.update_size)
+        self.connect("destroy", self.on_destroy)
         display = Gdk.Display.get_default()
         self.display_number = os.environ.get('DISPLAY') or ':0'
         logging.debug(f"Display for xset: {self.display_number}")
@@ -229,12 +234,14 @@ class KlipperScreen(Gtk.Window):
             self.show_printer_select()
 
     def close_websocket(self):
+        self.reset_spoolman_tracking()
         self._ws.close()
         self.connected_printer = None
         self.printer.state = "disconnected"
 
     def connect_printer(self, name):
         self.connecting_to_printer = name
+        self.reset_spoolman_tracking()
         if self._ws is not None and self._ws.connected:
             self.printer_initializing("Waiting Websocket closure")
             self.close_websocket()
@@ -277,10 +284,177 @@ class KlipperScreen(Gtk.Window):
             self.files = KlippyFiles(self)
         else:
             self.files.reinit()
-
         self.reinit_count = 0
         self.printer_initializing(_("Connecting to %s") % name, True)
         self.connect_to_moonraker()
+
+    def on_destroy(self, *args):
+        self.reset_spoolman_tracking()
+
+    def spoolman_titlebar_enabled(self):
+        return any(item.lower() == "spoolman" for item in self.base_panel.titlebar_items)
+
+    def manage_spoolman_titlebar(self):
+        return self.printer is not None and self.printer.spoolman and self.spoolman_titlebar_enabled()
+
+    def remove_spoolman_polling(self):
+        if self.spoolman_poll_timer is not None:
+            GLib.source_remove(self.spoolman_poll_timer)
+            self.spoolman_poll_timer = None
+
+    def ensure_spoolman_polling(self):
+        if (
+            self.spoolman_poll_timer is None
+            and self.manage_spoolman_titlebar()
+            and self.printer.active_spool_id is not None
+        ):
+            self.spoolman_poll_timer = GLib.timeout_add_seconds(20, self.poll_spoolman_spool)
+
+    def remove_spoolman_retry_timer(self):
+        if self.spoolman_retry_timer is not None:
+            GLib.source_remove(self.spoolman_retry_timer)
+            self.spoolman_retry_timer = None
+
+    def schedule_spoolman_retry(self):
+        if (
+            self.spoolman_retry_timer is None
+            and self.manage_spoolman_titlebar()
+            and self.printer.spoolman_connected
+            and self.printer.active_spool_id is not None
+            and self.printer.spoolman_server
+        ):
+            self.spoolman_retry_timer = GLib.timeout_add_seconds(15, self.retry_spoolman_stream)
+
+    def retry_spoolman_stream(self):
+        self.spoolman_retry_timer = None
+        if (
+            not self.manage_spoolman_titlebar()
+            or not self.printer.spoolman_connected
+            or self.printer.active_spool_id is None
+            or self.printer.spoolman_stream_connected
+        ):
+            return False
+        self.start_spoolman_stream()
+        return False
+
+    def stop_spoolman_stream(self):
+        ws = self.spoolman_ws
+        self.spoolman_ws = None
+        if self.printer is not None:
+            self.printer.set_spoolman_stream_connected(False)
+        if ws is not None:
+            ws.close()
+
+    def reset_spoolman_tracking(self):
+        self.stop_spoolman_stream()
+        self.remove_spoolman_polling()
+        self.remove_spoolman_retry_timer()
+        if self.printer is not None:
+            self.printer.reset_spoolman_runtime()
+
+    def load_spoolman_server(self):
+        if self.printer.spoolman_server:
+            return True
+        server_config = self.apiclient.get_server_config()
+        if not server_config:
+            return False
+        server = server_config.get("config", {}).get("spoolman", {}).get("server")
+        if not server:
+            return False
+        self.printer.set_spoolman_server(server)
+        return True
+
+    def fetch_spoolman_spool(self):
+        if not self.manage_spoolman_titlebar() or self.printer.active_spool_id is None:
+            return False
+        spool = self.apiclient.get_spoolman_spool(self.printer.active_spool_id)
+        if not spool:
+            return False
+        self.printer.update_spoolman_spool(spool)
+        self.process_update("notify_spoolman_spool_update", spool)
+        return True
+
+    def start_spoolman_stream(self):
+        if not self.manage_spoolman_titlebar():
+            return False
+        if (
+            not self.printer.spoolman_connected
+            or self.printer.active_spool_id is None
+        ):
+            return False
+        if not self.load_spoolman_server():
+            self.ensure_spoolman_polling()
+            return False
+        if (
+            self.spoolman_ws is not None
+            and self.spoolman_ws.spool_id == self.printer.active_spool_id
+        ):
+            return True
+        self.stop_spoolman_stream()
+        self.spoolman_ws = SpoolmanWebsocket({
+            "on_connect": self.spoolman_stream_connected,
+            "on_message": self.spoolman_stream_message,
+            "on_close": self.spoolman_stream_closed,
+        })
+        if not self.spoolman_ws.connect(self.printer.spoolman_server, self.printer.active_spool_id):
+            self.spoolman_ws = None
+            self.ensure_spoolman_polling()
+            self.schedule_spoolman_retry()
+            return False
+        return True
+
+    def sync_spoolman_active_spool(self):
+        self.stop_spoolman_stream()
+        self.remove_spoolman_polling()
+        self.remove_spoolman_retry_timer()
+        if not self.manage_spoolman_titlebar() or self.printer.active_spool_id is None:
+            return
+        fetched = self.fetch_spoolman_spool()
+        stream_started = self.start_spoolman_stream()
+        if not stream_started:
+            self.ensure_spoolman_polling()
+            self.schedule_spoolman_retry()
+        elif not fetched:
+            self.ensure_spoolman_polling()
+
+    def poll_spoolman_spool(self):
+        if (
+            not self.manage_spoolman_titlebar()
+            or self.printer.active_spool_id is None
+            or self.printer.spoolman_stream_connected
+        ):
+            self.remove_spoolman_polling()
+            return False
+        self.fetch_spoolman_spool()
+        return True
+
+    def spoolman_stream_connected(self, ws):
+        if ws is not self.spoolman_ws or self.printer is None:
+            return False
+        self.printer.set_spoolman_stream_connected(True)
+        self.remove_spoolman_polling()
+        self.remove_spoolman_retry_timer()
+        return False
+
+    def spoolman_stream_message(self, ws, data):
+        if ws is not self.spoolman_ws or self.printer is None or not isinstance(data, dict):
+            return False
+        payload = data.get("payload")
+        if not isinstance(payload, dict):
+            return False
+        self.printer.update_spoolman_spool(payload)
+        self.process_update("notify_spoolman_spool_update", payload)
+        return False
+
+    def spoolman_stream_closed(self, ws):
+        if ws is not self.spoolman_ws or self.printer is None:
+            return False
+        self.spoolman_ws = None
+        self.printer.set_spoolman_stream_connected(False)
+        if self.manage_spoolman_titlebar() and self.printer.active_spool_id is not None:
+            self.ensure_spoolman_polling()
+            self.schedule_spoolman_retry()
+        return False
 
     def ws_subscribe(self):
         requested_updates = {
@@ -751,6 +925,7 @@ class KlipperScreen(Gtk.Window):
 
     def websocket_disconnected(self):
         logging.debug("### websocket_disconnected")
+        self.reset_spoolman_tracking()
         self.printer.state = "disconnected"
         self.connecting = True
         self.connected_printer = None
@@ -763,6 +938,7 @@ class KlipperScreen(Gtk.Window):
 
     def state_disconnected(self):
         logging.debug("### Going to disconnected")
+        self.reset_spoolman_tracking()
         self.printer.stop_tempstore_updates()
         self.initialized = False
         self.reinit_count = 0
@@ -851,6 +1027,17 @@ class KlipperScreen(Gtk.Window):
                 return
             self.printer.process_update({'webhooks': {'state': "ready"}})
             return
+        elif action == "notify_active_spool_set":
+            self.printer.set_active_spool(data.get("spool_id"))
+            self.sync_spoolman_active_spool()
+        elif action == "notify_spoolman_status_changed":
+            self.printer.update_spoolman_status(data)
+            if self.printer.spoolman_connected:
+                self.sync_spoolman_active_spool()
+            else:
+                self.stop_spoolman_stream()
+                self.printer.update_spoolman_spool({})
+                self.process_update("notify_spoolman_spool_update", {})
         elif action == "notify_status_update" and self.printer.state != "shutdown":
             self.printer.process_update(data)
             if 'manual_probe' in data and data['manual_probe']['is_active'] and 'zcalibrate' not in self._cur_panels:
@@ -1114,6 +1301,12 @@ class KlipperScreen(Gtk.Window):
                 self.printer.configure_cameras(cameras['webcams'])
         if "spoolman" in self.server_info["components"]:
             self.printer.enable_spoolman()
+            if self.manage_spoolman_titlebar():
+                self.load_spoolman_server()
+                spoolman_status = self.apiclient.get_spoolman_status()
+                if spoolman_status:
+                    self.printer.update_spoolman_status(spoolman_status)
+                    self.sync_spoolman_active_spool()
 
     def init_klipper(self):
         if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:
