@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
+from pathlib import Path
 
 import gi
 
@@ -9,6 +10,8 @@ from jinja2 import Environment
 from datetime import datetime
 from math import log
 from ks_includes.screen_panel import ScreenPanel
+
+SPOOLMAN_ALERT_ICON = Path(__file__).resolve().parent.parent / "styles" / "spool-alert.svg"
 
 try:
     import psutil
@@ -28,6 +31,10 @@ class BasePanel(ScreenPanel):
         self.battery_update = None
         self.titlebar_items = []
         self.titlebar_name_type = None
+        self.spoolman_low_limit = 0
+        self.spoolman_blink_state = False
+        self.spoolman_blink_timer = None
+        self.spoolman_icon_size = None
         self.current_extruder = None
         self.last_usage_report = datetime.now()
         self.usage_report = 0
@@ -140,18 +147,74 @@ class BasePanel(ScreenPanel):
             'unknown': self._gtk.PixbufFromIcon('battery-unknown', img_size, img_size),
         }
 
-    def get_spoolman_titlebar_text(self):
+    def get_spoolman_remaining_weight(self):
         if self._printer is None or self._printer.active_spool_id is None:
-            return "N/A"
-        remaining_weight = self._printer.active_spool_remaining_weight
+            return None
         try:
-            return f"{float(remaining_weight):.0f} g"
+            return float(self._printer.active_spool_remaining_weight)
         except (TypeError, ValueError):
+            return None
+
+    def get_spoolman_titlebar_text(self):
+        remaining_weight = self.get_spoolman_remaining_weight()
+        if remaining_weight is None:
             return "N/A"
+        return f"{remaining_weight:.0f} g"
+
+    def stop_spoolman_blink(self):
+        if self.spoolman_blink_timer is not None:
+            GLib.source_remove(self.spoolman_blink_timer)
+            self.spoolman_blink_timer = None
+        self.spoolman_blink_state = False
+        self.set_spoolman_low_alert(False)
+
+    def is_spoolman_low(self):
+        remaining_weight = self.get_spoolman_remaining_weight()
+        return (
+            remaining_weight is not None
+            and self.spoolman_low_limit > 0
+            and remaining_weight <= self.spoolman_low_limit
+        )
+
+    def get_spoolman_icon_pixbuf(self, alert=False):
+        if self.spoolman_icon_size is None:
+            return None
+        if alert and SPOOLMAN_ALERT_ICON.exists():
+            return self._gtk.PixbufFromFile(str(SPOOLMAN_ALERT_ICON), self.spoolman_icon_size, self.spoolman_icon_size)
+        return self._gtk.PixbufFromIcon("spool", self.spoolman_icon_size, self.spoolman_icon_size)
+
+    def set_spoolman_low_alert(self, alert=False):
+        if "spoolman" in self.labels:
+            ctx = self.labels["spoolman"].get_style_context()
+            if alert:
+                ctx.add_class("spoolman_low_alert")
+            else:
+                ctx.remove_class("spoolman_low_alert")
+        if "spoolman_icon" in self.labels:
+            pixbuf = self.get_spoolman_icon_pixbuf(alert)
+            if pixbuf is not None:
+                self.labels["spoolman_icon"].set_from_pixbuf(pixbuf)
+
+    def spoolman_blink_cb(self):
+        if not self.is_spoolman_low():
+            self.stop_spoolman_blink()
+            return False
+        self.spoolman_blink_state = not self.spoolman_blink_state
+        self.set_spoolman_low_alert(self.spoolman_blink_state)
+        return True
 
     def update_spoolman_titlebar(self):
         if "spoolman" in self.labels:
             self.labels["spoolman"].set_label(self.get_spoolman_titlebar_text())
+        if self.is_spoolman_low():
+            if self.spoolman_blink_timer is None:
+                self.spoolman_blink_state = True
+                self.set_spoolman_low_alert(True)
+                self.spoolman_blink_timer = GLib.timeout_add(500, self.spoolman_blink_cb)
+            else:
+                self.set_spoolman_low_alert(self.spoolman_blink_state)
+        else:
+            self.stop_spoolman_blink()
 
     def reload_icons(self):
         button: Gtk.Button
@@ -174,10 +237,13 @@ class BasePanel(ScreenPanel):
         for child in self.control['temp_box'].get_children():
             self.control['temp_box'].remove(child)
         if self._printer is None or not show:
+            self.stop_spoolman_blink()
             return
         try:
             devices = self._printer.get_temp_devices()
-            if not devices and not any(item.lower() == "spoolman" for item in self.titlebar_items):
+            show_spoolman = any(item.lower() == "spoolman" for item in self.titlebar_items)
+            if not devices and not show_spoolman:
+                self.stop_spoolman_blink()
                 return
             devices = devices or []
             img_size = self._gtk.img_scale * self.bts
@@ -188,14 +254,18 @@ class BasePanel(ScreenPanel):
                 if icon is not None:
                     self.labels[f'{device}_box'].pack_start(icon, False, False, 3)
                 self.labels[f'{device}_box'].pack_start(self.labels[device], False, False, 0)
-            if any(item.lower() == "spoolman" for item in self.titlebar_items):
+            if show_spoolman:
                 self.labels["spoolman"] = Gtk.Label(ellipsize=Pango.EllipsizeMode.START)
                 self.labels["spoolman_box"] = Gtk.Box()
+                self.spoolman_icon_size = img_size
                 icon = self.get_icon("spoolman", img_size)
                 if icon is not None:
+                    self.labels["spoolman_icon"] = icon
                     self.labels["spoolman_box"].pack_start(icon, False, False, 3)
                 self.labels["spoolman_box"].pack_start(self.labels["spoolman"], False, False, 0)
                 self.update_spoolman_titlebar()
+            else:
+                self.stop_spoolman_blink()
 
             # Limit the number of items according to resolution
             nlimit = int(round(log(self._screen.width, 10) * 5 - 10.5))
@@ -242,6 +312,9 @@ class BasePanel(ScreenPanel):
             return self._gtk.Image("extruder", img_size, img_size)
         elif device.startswith("heater_bed"):
             return self._gtk.Image("bed", img_size, img_size)
+        elif device == "spoolman-alert":
+            pixbuf = self.get_spoolman_icon_pixbuf(True)
+            return Gtk.Image.new_from_pixbuf(pixbuf) if pixbuf is not None else Gtk.Image()
         elif device == "spoolman":
             if self.titlebar_name_type is not None:
                 return None
@@ -454,12 +527,15 @@ class BasePanel(ScreenPanel):
         ScreenPanel.ks_printer_cfg = self._config.get_printer_config(printer)
         if self.ks_printer_cfg is not None:
             self.titlebar_name_type = self.ks_printer_cfg.get("titlebar_name_type", None)
+            self.spoolman_low_limit = max(self.ks_printer_cfg.getfloat("spoolman_low_limit", fallback=0), 0)
             titlebar_items = self.ks_printer_cfg.get("titlebar_items", None)
             if titlebar_items is not None:
                 self.titlebar_items = [str(i.strip()) for i in titlebar_items.split(',')]
                 logging.info(f"Titlebar name type: {self.titlebar_name_type} items: {self.titlebar_items}")
             else:
                 self.titlebar_items = []
+        else:
+            self.spoolman_low_limit = 0
 
     def show_update_dialog(self):
         if self.update_dialog is not None:

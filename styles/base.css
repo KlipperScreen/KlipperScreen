@@ -414,6 +414,11 @@ trough {
     background-color: @error;
 }
 
+.spoolman_low_alert {
+    color: @error;
+    font-weight: 700;
+}
+
 .numpad_key {
     border: .15em;
     border-style: solid;

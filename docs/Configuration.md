@@ -90,6 +90,10 @@ moonraker_port: 7125
 # special runtime items: spoolman
 # titlebar_items: chamber, MCU, Pi, spoolman
 
+# When spoolman is shown in the titlebar, start a red blinking warning at or below this many grams.
+# Set to 0 to disable the warning.
+# spoolman_low_limit: 20
+
 # The style of the user defined items in the titlebar
 # Can be 'full' indicating that the full name is shown, 'short' for the first letter, or None (default) for no name
 # titlebar_name_type: None
