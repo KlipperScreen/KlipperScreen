@@ -49,8 +49,6 @@ class Printer:
         self.tempstore.clear()
         self.tempstore_size = 1200
         self.available_commands.clear()
-        self.spoolman = False
-        self.reset_spoolman_runtime()
         self.temp_devices = self.sensors = None
         self.stop_tempstore_updates()
         self.system_info.clear()
