@@ -1299,13 +1299,22 @@ class KlipperScreen(Gtk.Window):
             cameras = self.apiclient.send_request("server/webcams/list")
             if cameras is not False:
                 self.printer.configure_cameras(cameras['webcams'])
+        spoolman_status = False
         if "spoolman" in self.server_info["components"]:
             self.printer.enable_spoolman()
+        else:
+            spoolman_status = self.apiclient.get_spoolman_status()
+            if spoolman_status is not False:
+                logging.info("Spoolman detected via server/spoolman/status")
+                self.printer.enable_spoolman()
+        if self.printer.spoolman:
+            if spoolman_status is False:
+                spoolman_status = self.apiclient.get_spoolman_status()
+            if spoolman_status:
+                self.printer.update_spoolman_status(spoolman_status)
             if self.manage_spoolman_titlebar():
                 self.load_spoolman_server()
-                spoolman_status = self.apiclient.get_spoolman_status()
                 if spoolman_status:
-                    self.printer.update_spoolman_status(spoolman_status)
                     self.sync_spoolman_active_spool()
 
     def init_klipper(self):
