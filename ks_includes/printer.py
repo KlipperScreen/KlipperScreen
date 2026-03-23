@@ -27,6 +27,11 @@ class Printer:
         self.cameras = []
         self.available_commands = {}
         self.spoolman = False
+        self.spoolman_server = None
+        self.spoolman_connected = False
+        self.spoolman_stream_connected = False
+        self.active_spool_id = None
+        self.active_spool_remaining_weight = None
         self.temp_devices = self.sensors = None
         self.system_info = {}
         self.warnings = []
@@ -44,6 +49,8 @@ class Printer:
         self.tempstore.clear()
         self.tempstore_size = 1200
         self.available_commands.clear()
+        self.spoolman = False
+        self.reset_spoolman_runtime()
         self.temp_devices = self.sensors = None
         self.stop_tempstore_updates()
         self.system_info.clear()
@@ -420,3 +427,40 @@ class Printer:
     def enable_spoolman(self):
         logging.info("Enabling Spoolman")
         self.spoolman = True
+
+    def reset_spoolman_runtime(self):
+        self.spoolman_server = None
+        self.spoolman_connected = False
+        self.spoolman_stream_connected = False
+        self.active_spool_id = None
+        self.active_spool_remaining_weight = None
+
+    def set_spoolman_server(self, server):
+        self.spoolman_server = server
+
+    def update_spoolman_status(self, data):
+        if data is None:
+            return
+        if "spoolman_connected" in data:
+            self.spoolman_connected = bool(data["spoolman_connected"])
+        if "spool_id" in data:
+            self.set_active_spool(data["spool_id"])
+
+    def set_active_spool(self, spool_id):
+        if spool_id != self.active_spool_id:
+            self.active_spool_remaining_weight = None
+        self.active_spool_id = spool_id
+        if spool_id is None:
+            self.spoolman_stream_connected = False
+            self.active_spool_remaining_weight = None
+
+    def update_spoolman_spool(self, spool):
+        if not spool:
+            self.active_spool_remaining_weight = None
+            return
+        if "id" in spool and spool["id"] is not None:
+            self.active_spool_id = spool["id"]
+        self.active_spool_remaining_weight = spool.get("remaining_weight")
+
+    def set_spoolman_stream_connected(self, connected):
+        self.spoolman_stream_connected = bool(connected)

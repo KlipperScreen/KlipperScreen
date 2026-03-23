@@ -140,6 +140,19 @@ class BasePanel(ScreenPanel):
             'unknown': self._gtk.PixbufFromIcon('battery-unknown', img_size, img_size),
         }
 
+    def get_spoolman_titlebar_text(self):
+        if self._printer is None or self._printer.active_spool_id is None:
+            return "N/A"
+        remaining_weight = self._printer.active_spool_remaining_weight
+        try:
+            return f"{float(remaining_weight):.0f} g"
+        except (TypeError, ValueError):
+            return "N/A"
+
+    def update_spoolman_titlebar(self):
+        if "spoolman" in self.labels:
+            self.labels["spoolman"].set_label(self.get_spoolman_titlebar_text())
+
     def reload_icons(self):
         button: Gtk.Button
         for button in self.action_bar.get_children():
@@ -164,8 +177,9 @@ class BasePanel(ScreenPanel):
             return
         try:
             devices = self._printer.get_temp_devices()
-            if not devices:
+            if not devices and not any(item.lower() == "spoolman" for item in self.titlebar_items):
                 return
+            devices = devices or []
             img_size = self._gtk.img_scale * self.bts
             for device in devices:
                 self.labels[device] = Gtk.Label(ellipsize=Pango.EllipsizeMode.START)
@@ -174,6 +188,14 @@ class BasePanel(ScreenPanel):
                 if icon is not None:
                     self.labels[f'{device}_box'].pack_start(icon, False, False, 3)
                 self.labels[f'{device}_box'].pack_start(self.labels[device], False, False, 0)
+            if any(item.lower() == "spoolman" for item in self.titlebar_items):
+                self.labels["spoolman"] = Gtk.Label(ellipsize=Pango.EllipsizeMode.START)
+                self.labels["spoolman_box"] = Gtk.Box()
+                icon = self.get_icon("spoolman", img_size)
+                if icon is not None:
+                    self.labels["spoolman_box"].pack_start(icon, False, False, 3)
+                self.labels["spoolman_box"].pack_start(self.labels["spoolman"], False, False, 0)
+                self.update_spoolman_titlebar()
 
             # Limit the number of items according to resolution
             nlimit = int(round(log(self._screen.width, 10) * 5 - 10.5))
@@ -203,6 +225,9 @@ class BasePanel(ScreenPanel):
                         self.control['temp_box'].add(self.labels[f"{device}_box"])
                         n += 1
                         break
+            if "spoolman_box" in self.labels and n < nlimit + 1:
+                self.control['temp_box'].add(self.labels["spoolman_box"])
+                n += 1
 
             self.control['temp_box'].show_all()
         except Exception as e:
@@ -217,6 +242,10 @@ class BasePanel(ScreenPanel):
             return self._gtk.Image("extruder", img_size, img_size)
         elif device.startswith("heater_bed"):
             return self._gtk.Image("bed", img_size, img_size)
+        elif device == "spoolman":
+            if self.titlebar_name_type is not None:
+                return None
+            return self._gtk.Image("spool", img_size, img_size)
         # Extra items
         elif self.titlebar_name_type is not None:
             # The item has a name, do not use an icon
@@ -301,6 +330,9 @@ class BasePanel(ScreenPanel):
                         self._screen.updating = False
                         for dialog in self._screen.dialogs:
                             self._gtk.remove_dialog(dialog)
+            return
+        if action in {"notify_active_spool_set", "notify_spoolman_spool_update", "notify_spoolman_status_changed"}:
+            self.update_spoolman_titlebar()
             return
         if action != "notify_status_update" or self._screen.printer is None:
             return
