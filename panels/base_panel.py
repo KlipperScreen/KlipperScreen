@@ -35,7 +35,6 @@ class BasePanel(ScreenPanel):
         self.spoolman_blink_timeout = None
         self.spoolman_blink_state = False
         self.spoolman_icon_size = int(self._gtk.font_size * 1.1)
-        self.spoolman_icon_pixbuf = None
         self.spoolman_icon_alert_pixbuf = None
         self.current_extruder = None
         self.last_usage_report = datetime.now()
@@ -175,13 +174,10 @@ class BasePanel(ScreenPanel):
 
         self.battery_icons = self.load_battery_icons()
         self.battery_percentage()
-        self.load_spoolman_icons()
         self.update_spoolman_alert_visuals(self.spoolman_blink_state)
 
     def load_spoolman_icons(self):
-        self.spoolman_icon_pixbuf = self.get_spoolman_icon_pixbuf("FFFFFF")
         self.spoolman_icon_alert_pixbuf = self.get_spoolman_icon_pixbuf("981E1F")
-        self.labels['spoolman_icon'].set_from_pixbuf(self.spoolman_icon_pixbuf)
 
     def get_spoolman_icon_pixbuf(self, color):
         klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
@@ -199,6 +195,20 @@ class BasePanel(ScreenPanel):
         except Exception as e:
             logging.error(f"Couldn't load spoolman icon: {e}")
             return self._gtk.PixbufFromIcon("spool", self.spoolman_icon_size, self.spoolman_icon_size)
+
+    def get_active_spoolman_color(self):
+        if (
+                self._printer is None
+                or not self._printer.active_spool
+                or "filament" not in self._printer.active_spool
+                or not self._printer.active_spool["filament"]
+        ):
+            return "FFFFFF"
+        filament = self._printer.active_spool["filament"]
+        color = filament.get("color_hex", "FFFFFF")
+        if not color:
+            return "FFFFFF"
+        return color.lstrip("#")
 
     def show_heaters(self, show=True):
         for child in self.control['temp_box'].get_children():
@@ -304,7 +314,9 @@ class BasePanel(ScreenPanel):
             self.labels['spoolman_icon'].set_from_pixbuf(self.spoolman_icon_alert_pixbuf)
             self.labels['spoolman_weight'].get_style_context().add_class("spoolman_low")
         else:
-            self.labels['spoolman_icon'].set_from_pixbuf(self.spoolman_icon_pixbuf)
+            self.labels['spoolman_icon'].set_from_pixbuf(
+                self.get_spoolman_icon_pixbuf(self.get_active_spoolman_color())
+            )
             self.labels['spoolman_weight'].get_style_context().remove_class("spoolman_low")
 
     def blink_spoolman_low(self):
