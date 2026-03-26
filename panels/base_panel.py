@@ -237,20 +237,15 @@ class BasePanel(ScreenPanel):
                 elif device.startswith("heater"):
                     self.control['temp_box'].add(self.labels[f"{device}_box"])
                     n += 1
-            for device in devices:
-                # Users can fill the bar if they want
-                if n >= nlimit + 1:
-                    break
-                name = device.split()[1] if len(device.split()) > 1 else device
-                for item in self.titlebar_items:
-                    if name == item:
+            for item in self.titlebar_items:
+                if item == "spoolman" and self._printer.spoolman:
+                    self.control['temp_box'].add(self.control['spoolman_box'])
+                    continue
+                for device in devices:
+                    name = device.split()[1] if len(device.split()) > 1 else device
+                    if name == item and self.labels[f"{device}_box"].get_parent() is None:
                         self.control['temp_box'].add(self.labels[f"{device}_box"])
-                        n += 1
                         break
-
-            if self.show_spoolman_in_title and self._printer.spoolman and n < nlimit + 1:
-                self.control['temp_box'].add(self.control['spoolman_box'])
-                n += 1
 
             self.control['temp_box'].show_all()
         except Exception as e:
