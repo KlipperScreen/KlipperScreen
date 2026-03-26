@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 import logging
+import os
+import pathlib
 
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import GLib, Gtk, Pango
+from gi.repository import GLib, Gtk, Pango, GdkPixbuf
 from jinja2 import Environment
 from datetime import datetime
 from math import log
@@ -28,6 +30,13 @@ class BasePanel(ScreenPanel):
         self.battery_update = None
         self.titlebar_items = []
         self.titlebar_name_type = None
+        self.show_spoolman_in_title = False
+        self.spoolman_low_limit = 0
+        self.spoolman_blink_timeout = None
+        self.spoolman_blink_state = False
+        self.spoolman_icon_size = int(self._gtk.font_size * 1.1)
+        self.spoolman_icon_pixbuf = None
+        self.spoolman_icon_alert_pixbuf = None
         self.current_extruder = None
         self.last_usage_report = datetime.now()
         self.usage_report = 0
@@ -104,10 +113,21 @@ class BasePanel(ScreenPanel):
         for widget in self.control['battery_box']:
             widget.show()
 
+        self.labels['spoolman_icon'] = Gtk.Image()
+        self.labels['spoolman_weight'] = Gtk.Label()
+        self.control['spoolman_box'] = Gtk.Box(halign=Gtk.Align.END, spacing=4)
+        self.control['spoolman_box'].set_no_show_all(True)
+        self.control['spoolman_box'].add(self.labels['spoolman_icon'])
+        self.control['spoolman_box'].add(self.labels['spoolman_weight'])
+        self.labels['spoolman_icon'].show()
+        self.labels['spoolman_weight'].show()
+        self.load_spoolman_icons()
+
         self.titlebar = Gtk.Box(spacing=5, valign=Gtk.Align.CENTER)
         self.titlebar.get_style_context().add_class("title_bar")
         self.titlebar.add(self.control['temp_box'])
         self.titlebar.add(self.titlelbl)
+        self.titlebar.add(self.control['spoolman_box'])
         self.titlebar.add(self.control['time_box'])
         self.titlebar.add(self.control['battery_box'])
         self.set_title(title)
@@ -156,6 +176,30 @@ class BasePanel(ScreenPanel):
 
         self.battery_icons = self.load_battery_icons()
         self.battery_percentage()
+        self.load_spoolman_icons()
+        self.update_spoolman_alert_visuals(self.spoolman_blink_state)
+
+    def load_spoolman_icons(self):
+        self.spoolman_icon_pixbuf = self.get_spoolman_icon_pixbuf("FFFFFF")
+        self.spoolman_icon_alert_pixbuf = self.get_spoolman_icon_pixbuf("981E1F")
+        self.labels['spoolman_icon'].set_from_pixbuf(self.spoolman_icon_pixbuf)
+
+    def get_spoolman_icon_pixbuf(self, color):
+        klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
+        icon_path = os.path.join(klipperscreendir, "styles", self._screen.theme, "images", "spool.svg")
+        if not os.path.isfile(icon_path):
+            icon_path = os.path.join(klipperscreendir, "styles", "spool.svg")
+        try:
+            svg = pathlib.Path(icon_path).read_text(encoding="utf-8")
+            svg = svg.replace("var(--filament-color)", f"#{color}")
+            loader = GdkPixbuf.PixbufLoader()
+            loader.set_size(self.spoolman_icon_size, self.spoolman_icon_size)
+            loader.write(svg.encode())
+            loader.close()
+            return loader.get_pixbuf()
+        except Exception as e:
+            logging.error(f"Couldn't load spoolman icon: {e}")
+            return self._gtk.PixbufFromIcon("spool", self.spoolman_icon_size, self.spoolman_icon_size)
 
     def show_heaters(self, show=True):
         for child in self.control['temp_box'].get_children():
@@ -242,12 +286,95 @@ class BasePanel(ScreenPanel):
         self.control['shutdown'].set_visible(not printing)
         self.show_shortcut(connected and printer_select)
         self.show_heaters(connected and printer_select)
+        self.refresh_spoolman_weight(connected and printer_select)
         self.show_printer_select(len(self._config.get_printers()) > 1)
         for control in ('back', 'home'):
             self.set_control_sensitive(len(self._screen._cur_panels) > 1, control=control)
         self.current_panel = panel
         self.set_title(panel.title)
         self.content.add(panel.content)
+
+    def stop_spoolman_blink(self):
+        if self.spoolman_blink_timeout is not None:
+            GLib.source_remove(self.spoolman_blink_timeout)
+            self.spoolman_blink_timeout = None
+        self.spoolman_blink_state = False
+
+    def update_spoolman_alert_visuals(self, alert):
+        if alert:
+            self.labels['spoolman_icon'].set_from_pixbuf(self.spoolman_icon_alert_pixbuf)
+            self.labels['spoolman_weight'].get_style_context().add_class("spoolman_low")
+        else:
+            self.labels['spoolman_icon'].set_from_pixbuf(self.spoolman_icon_pixbuf)
+            self.labels['spoolman_weight'].get_style_context().remove_class("spoolman_low")
+
+    def blink_spoolman_low(self):
+        self.spoolman_blink_state = not self.spoolman_blink_state
+        self.update_spoolman_alert_visuals(self.spoolman_blink_state)
+        return True
+
+    def update_spoolman_weight_label(self):
+        if (
+                self._printer is None
+                or not self._printer.spoolman
+                or not self.show_spoolman_in_title
+                or not self._printer.active_spool
+                or "remaining_weight" not in self._printer.active_spool
+                or self._printer.active_spool["remaining_weight"] is None
+        ):
+            self.stop_spoolman_blink()
+            self.update_spoolman_alert_visuals(False)
+            self.control['spoolman_box'].hide()
+            return
+        remaining_weight = self._printer.active_spool["remaining_weight"]
+        self.labels['spoolman_weight'].set_label(f'{round(remaining_weight):.0f}g')
+        if self.spoolman_low_limit > 0 and remaining_weight < self.spoolman_low_limit:
+            if self.spoolman_blink_timeout is None:
+                self.spoolman_blink_state = True
+                self.update_spoolman_alert_visuals(True)
+                self.spoolman_blink_timeout = GLib.timeout_add(700, self.blink_spoolman_low)
+        else:
+            self.stop_spoolman_blink()
+            self.update_spoolman_alert_visuals(False)
+        self.control['spoolman_box'].show()
+
+    def refresh_spoolman_weight(self, show=True, spool_id=None):
+        if self._printer is None or not self._printer.spoolman or not self.show_spoolman_in_title or not show:
+            self.stop_spoolman_blink()
+            self.update_spoolman_alert_visuals(False)
+            self.control['spoolman_box'].hide()
+            return
+        if spool_id is None and self._printer.active_spool_checked:
+            self.update_spoolman_weight_label()
+            return
+        if spool_id is None:
+            result = self._screen.apiclient.send_request("server/spoolman/spool_id")
+            if result is False:
+                logging.error("Error trying to fetch active spool id")
+                self._printer.set_active_spool(checked=False)
+                self.update_spoolman_weight_label()
+                return
+            if "spool_id" not in result or not result["spool_id"]:
+                self._printer.set_active_spool()
+                self.update_spoolman_weight_label()
+                return
+            spool_id = result["spool_id"]
+        elif not spool_id:
+            self._printer.set_active_spool()
+            self.update_spoolman_weight_label()
+            return
+
+        spool = self._screen.apiclient.post_request("server/spoolman/proxy", json={
+            "request_method": "GET",
+            "path": f"/v1/spool/{spool_id}",
+        })
+        if not spool or "result" not in spool:
+            logging.error("Error trying to fetch active spool information")
+            self._printer.set_active_spool(spool_id=spool_id, checked=False)
+            self.update_spoolman_weight_label()
+            return
+        self._printer.set_active_spool(spool_id=spool_id, spool=spool["result"])
+        self.update_spoolman_weight_label()
 
     def back(self, widget=None):
         if self.current_panel is None:
@@ -259,6 +386,13 @@ class BasePanel(ScreenPanel):
             self._screen._menu_go_back()
 
     def process_update(self, action, data):
+        if action == "notify_active_spool_set":
+            spool_id = data.get("spool_id") if isinstance(data, dict) else None
+            self.refresh_spoolman_weight(
+                self._printer is not None and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'},
+                spool_id=spool_id
+            )
+            return
         if action == "notify_proc_stat_update":
             cpu = data["system_cpu_usage"]["cpu"]
             memory = (data["system_memory"]["used"] / data["system_memory"]["total"]) * 100
@@ -428,6 +562,15 @@ class BasePanel(ScreenPanel):
                 logging.info(f"Titlebar name type: {self.titlebar_name_type} items: {self.titlebar_items}")
             else:
                 self.titlebar_items = []
+            self.show_spoolman_in_title = "spoolman" in self.titlebar_items
+            self.spoolman_low_limit = self.ks_printer_cfg.getfloat("spoolman_low_limit", fallback=0)
+        else:
+            self.titlebar_items = []
+            self.show_spoolman_in_title = False
+            self.spoolman_low_limit = 0
+        self.refresh_spoolman_weight(
+            self._printer is not None and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'}
+        )
 
     def show_update_dialog(self):
         if self.update_dialog is not None:

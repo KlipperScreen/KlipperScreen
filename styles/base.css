@@ -290,6 +290,10 @@ trough {
     min-height: 2em;
 }
 
+.spoolman_low {
+    color: @error;
+}
+
 .content {
     margin: 0 .1em;
 }

@@ -86,12 +86,16 @@ moonraker_port: 7125
 
 # Define what items should be shown in titlebar besides the extruder and bed
 # the name must be the same as defined in the klipper config
-# valid options are temperature_sensors or temperature_fans, or heater_generic
-# titlebar_items: chamber, MCU, Pi
+# valid options are temperature_sensors or temperature_fans, heater_generic, or spoolman
+# titlebar_items: chamber, spoolman, MCU, Pi
 
 # The style of the user defined items in the titlebar
 # Can be 'full' indicating that the full name is shown, 'short' for the first letter, or None (default) for no name
 # titlebar_name_type: None
+
+# Low limit for remaining spool weight in the title bar, in grams.
+# When the active spool drops below this value, the spool icon and weight blink red.
+# spoolman_low_limit: 20
 
 # Z probe calibrate position
 # By default it tries to guess the correct location
