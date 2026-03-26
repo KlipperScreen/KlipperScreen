@@ -330,15 +330,23 @@ class BasePanel(ScreenPanel):
     def update_spoolman_weight_label(self):
         if (
                 self._printer is None
-                or not self._printer.spoolman
                 or not self.show_spoolman_in_title
+        ):
+            self.stop_spoolman_blink()
+            self.update_spoolman_alert_visuals(False)
+            self.labels['spoolman_weight'].set_label("- g")
+            self.control['spoolman_box'].show()
+            return
+        if (
+                not self._printer.spoolman
                 or not self._printer.active_spool
                 or "remaining_weight" not in self._printer.active_spool
                 or self._printer.active_spool["remaining_weight"] is None
         ):
             self.stop_spoolman_blink()
             self.update_spoolman_alert_visuals(False)
-            self.control['spoolman_box'].hide()
+            self.labels['spoolman_weight'].set_label("- g")
+            self.control['spoolman_box'].show()
             return
         remaining_weight = self._printer.active_spool["remaining_weight"]
         self.labels['spoolman_weight'].set_label(f'{round(remaining_weight):.0f}g')
@@ -353,10 +361,19 @@ class BasePanel(ScreenPanel):
         self.control['spoolman_box'].show()
 
     def refresh_spoolman_weight(self, show=True, spool_id=None):
-        if self._printer is None or not self._printer.spoolman or not self.show_spoolman_in_title or not show:
+        if self._printer is None or not self.show_spoolman_in_title:
             self.stop_spoolman_blink()
             self.update_spoolman_alert_visuals(False)
             self.control['spoolman_box'].hide()
+            return
+        if not show:
+            self.stop_spoolman_blink()
+            self.update_spoolman_alert_visuals(False)
+            self.control['spoolman_box'].hide()
+            return
+        if not self._printer.spoolman:
+            self._printer.set_active_spool(checked=False)
+            self.update_spoolman_weight_label()
             return
         if spool_id is None and self._printer.active_spool_checked:
             self.update_spoolman_weight_label()
