@@ -177,9 +177,9 @@ class BasePanel(ScreenPanel):
         self.update_spoolman_alert_visuals(self.spoolman_blink_state)
 
     def load_spoolman_icons(self):
-        self.spoolman_icon_alert_pixbuf = self.get_spoolman_icon_pixbuf("981E1F")
+        self.spoolman_icon_alert_pixbuf = self.get_spoolman_icon_pixbuf("981E1F", full_icon=True)
 
-    def get_spoolman_icon_pixbuf(self, color):
+    def get_spoolman_icon_pixbuf(self, color, full_icon=False):
         klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
         icon_path = os.path.join(klipperscreendir, "styles", self._screen.theme, "images", "spool.svg")
         if not os.path.isfile(icon_path):
@@ -187,6 +187,10 @@ class BasePanel(ScreenPanel):
         try:
             svg = pathlib.Path(icon_path).read_text(encoding="utf-8")
             svg = svg.replace("var(--filament-color)", f"#{color}")
+            if full_icon:
+                svg = svg.replace("fill:#ffffff", f"fill:#{color}")
+                svg = svg.replace("fill:#343434", f"fill:#{color}")
+                svg = svg.replace("fill:#111", f"fill:#{color}")
             loader = GdkPixbuf.PixbufLoader()
             loader.set_size(self.spoolman_icon_size, self.spoolman_icon_size)
             loader.write(svg.encode())
