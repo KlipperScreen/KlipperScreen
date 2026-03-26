@@ -2,6 +2,7 @@
 import logging
 import os
 import pathlib
+import re
 
 import gi
 
@@ -188,9 +189,7 @@ class BasePanel(ScreenPanel):
             svg = pathlib.Path(icon_path).read_text(encoding="utf-8")
             svg = svg.replace("var(--filament-color)", f"#{color}")
             if full_icon:
-                svg = svg.replace("fill:#ffffff", f"fill:#{color}")
-                svg = svg.replace("fill:#343434", f"fill:#{color}")
-                svg = svg.replace("fill:#111", f"fill:#{color}")
+                svg = re.sub(r'fill:\s*(?!none)[^;"\']+', f'fill:#{color}', svg)
             loader = GdkPixbuf.PixbufLoader()
             loader.set_size(self.spoolman_icon_size, self.spoolman_icon_size)
             loader.write(svg.encode())
