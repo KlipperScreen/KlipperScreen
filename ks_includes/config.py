@@ -196,7 +196,6 @@ class KlipperScreenConfig:
                 numbers = (
                     'moonraker_port', 'move_speed_xy', 'move_speed_z', 'screw_rotation',
                     'calibrate_x_position', 'calibrate_y_position', 'spool_low_limit',
-                    'spoolman_low_limit',
                 )
             elif section.startswith('preheat '):
                 strs = ('gcode', '')
