@@ -115,7 +115,7 @@ class BasePanel(ScreenPanel):
 
         self.labels['spoolman_icon'] = Gtk.Image()
         self.labels['spoolman_weight'] = Gtk.Label()
-        self.control['spoolman_box'] = Gtk.Box(halign=Gtk.Align.END, spacing=4)
+        self.control['spoolman_box'] = Gtk.Box(halign=Gtk.Align.END, spacing=1)
         self.control['spoolman_box'].set_no_show_all(True)
         self.control['spoolman_box'].add(self.labels['spoolman_icon'])
         self.control['spoolman_box'].add(self.labels['spoolman_weight'])
