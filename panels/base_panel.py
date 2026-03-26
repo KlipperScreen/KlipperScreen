@@ -127,7 +127,6 @@ class BasePanel(ScreenPanel):
         self.titlebar.get_style_context().add_class("title_bar")
         self.titlebar.add(self.control['temp_box'])
         self.titlebar.add(self.titlelbl)
-        self.titlebar.add(self.control['spoolman_box'])
         self.titlebar.add(self.control['time_box'])
         self.titlebar.add(self.control['battery_box'])
         self.set_title(title)
@@ -204,6 +203,7 @@ class BasePanel(ScreenPanel):
     def show_heaters(self, show=True):
         for child in self.control['temp_box'].get_children():
             self.control['temp_box'].remove(child)
+        self.control['spoolman_box'].hide()
         if self._printer is None or not show:
             return
         try:
@@ -247,6 +247,10 @@ class BasePanel(ScreenPanel):
                         self.control['temp_box'].add(self.labels[f"{device}_box"])
                         n += 1
                         break
+
+            if self.show_spoolman_in_title and self._printer.spoolman and n < nlimit + 1:
+                self.control['temp_box'].add(self.control['spoolman_box'])
+                n += 1
 
             self.control['temp_box'].show_all()
         except Exception as e:
