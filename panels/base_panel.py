@@ -251,7 +251,7 @@ class BasePanel(ScreenPanel):
                     self.control['temp_box'].add(self.labels[f"{device}_box"])
                     n += 1
             for item in self.titlebar_items:
-                if item == "spoolman" and self._printer.spoolman:
+                if item in {"spool", "spoolman"} and self._printer.spoolman:
                     self.control['temp_box'].add(self.control['spoolman_box'])
                     continue
                 for device in devices:
@@ -593,8 +593,11 @@ class BasePanel(ScreenPanel):
                 logging.info(f"Titlebar name type: {self.titlebar_name_type} items: {self.titlebar_items}")
             else:
                 self.titlebar_items = []
-            self.show_spoolman_in_title = "spoolman" in self.titlebar_items
-            self.spoolman_low_limit = self.ks_printer_cfg.getfloat("spoolman_low_limit", fallback=0)
+            self.show_spoolman_in_title = any(item in {"spool", "spoolman"} for item in self.titlebar_items)
+            self.spoolman_low_limit = self.ks_printer_cfg.getfloat(
+                "spool_low_limit",
+                fallback=self.ks_printer_cfg.getfloat("spoolman_low_limit", fallback=0)
+            )
         else:
             self.titlebar_items = []
             self.show_spoolman_in_title = False
