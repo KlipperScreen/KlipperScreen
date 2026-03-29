@@ -1108,6 +1108,7 @@ class KlipperScreen(Gtk.Window):
                 self.printer.configure_cameras(cameras['webcams'])
         if "spoolman" in self.server_info["components"]:
             self.printer.enable_spoolman()
+            self.base_panel.refresh_spoolman_weight()
 
     def init_klipper(self):
         if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:
