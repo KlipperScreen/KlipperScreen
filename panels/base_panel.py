@@ -420,7 +420,8 @@ class BasePanel(ScreenPanel):
         if action == "notify_active_spool_set":
             spool_id = data.get("spool_id") if isinstance(data, dict) else None
             self.refresh_spoolman_weight(
-                self._printer is not None and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'},
+                self._printer is not None
+                and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'},
                 spool_id=spool_id
             )
             return
