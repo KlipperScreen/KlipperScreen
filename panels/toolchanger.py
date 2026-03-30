@@ -268,7 +268,7 @@ class ToolState:
     spool_id: Optional[int] = None
     reachable: bool = True
     spool_error: bool = False
-    ktc_state: str = "unknown"  # PART 1: KTC state field
+    ktc_state: str = "unknown"
 
     @property
     def display_title(self) -> str:
@@ -278,7 +278,6 @@ class ToolState:
     def is_heating(self) -> bool:
         return self.target > 0 and self.temperature + 5 < self.target
 
-    # PART 3: KTC-driven status logic
     @property
     def status_label(self) -> str:
         if not self.reachable:
@@ -286,6 +285,9 @@ class ToolState:
         if self.spool_error:
             return "ERROR"
 
+        # PATCH: explicit error state from KTC
+        if self.ktc_state == "error":
+            return "ERROR"
         if self.ktc_state == "active":
             return "ACTIVE"
         if self.ktc_state == "changing":
@@ -301,6 +303,9 @@ class ToolState:
     @property
     def status_css(self) -> str:
         if not self.reachable or self.spool_error:
+            return "tc-badge-error"
+        # PATCH: explicit error state from KTC
+        if self.ktc_state == "error":
             return "tc-badge-error"
         if self.ktc_state == "active":
             return "tc-badge-active"
@@ -502,7 +507,6 @@ class ToolchangerPanel:
         frame.get_style_context().add_class("tc-card")
         frame.set_size_request(185, 320)
 
-        # PART 6: Make cards clickable
         frame.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
         frame.connect("button-press-event", lambda _w, _e, idx=state.index: self._select_tool(idx))
 
@@ -812,22 +816,27 @@ class ToolchangerPanel:
         save_variables = status.get("save_variables", {}).get("variables", {})
         active_name = status.get("toolhead", {}).get("extruder", "")
 
+        tc_status = status.get("toolchanger", {}) or {}
+        tc_status_str = str(tc_status.get("status", "ready")).lower()
+        tc_active_tool = tc_status.get("tool_number", -1)
+
+        # PATCH: only treat "changing" as a change in progress;
+        # "error", "unknown", etc. are handled explicitly below.
+        tc_is_changing = tc_status_str == "changing"
+
         for state in base_states:
             heater = status.get(state.heater_name, {}) or {}
             state.temperature = float(heater.get("temperature", 0) or 0)
             state.target = float(heater.get("target", 0) or 0)
             state.active = active_name == state.heater_name or (state.index == 0 and active_name == "extruder")
 
-            # Read active flag from native tool object (tool T0, tool T1, etc.)
             tool_obj = status.get(f"tool T{state.index}", {}) or {}
             tool_active = tool_obj.get("active", None)
 
-            # Detect changing state from toolchanger object if available
-            tc_status = status.get("toolchanger", {}) or {}
-            tc_changing = str(tc_status.get("status", "")).lower() in ("changing", "dropoff", "pickup")
-            tc_tool = tc_status.get("tool_number", -1)
-
-            if tc_changing and tc_tool == state.index:
+            # PATCH: explicit error branch first, then changing, then per-tool active flag
+            if tc_status_str == "error":
+                state.ktc_state = "error"
+            elif tc_is_changing and tc_active_tool == state.index:
                 state.ktc_state = "changing"
             elif tool_active is True:
                 state.ktc_state = "active"
@@ -941,13 +950,12 @@ class ToolchangerPanel:
             self._active_popup = None
 
     # ------------------------------------------------------------------
-    # Tool selection (PART 5)
+    # Tool selection
     # ------------------------------------------------------------------
 
     def _select_tool(self, tool_index: int) -> None:
         state = self._tool_states[tool_index]
 
-        # Safety checks
         if not state.spool_id:
             self._show_message(f"Tool {tool_index + 1} has no spool assigned")
             return
@@ -960,15 +968,18 @@ class ToolchangerPanel:
             self._show_message(f"Tool {tool_index + 1} already active")
             return
 
+        if state.ktc_state == "error":
+            self._show_message(f"Tool {tool_index + 1} is in error state")
+            return
+
         # Instant UI feedback
         state.ktc_state = "changing"
         GLib.idle_add(self._apply_snapshot, RuntimeSnapshot(self._tool_states))
 
-        # Send command
         self._queue_gcode(f"T{tool_index}")
 
     # ------------------------------------------------------------------
-    # Simple message popup (PART 7)
+    # Simple message popup
     # ------------------------------------------------------------------
 
     def _show_message(self, text: str) -> None:
