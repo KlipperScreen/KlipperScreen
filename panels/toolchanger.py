@@ -730,7 +730,9 @@ class ToolchangerPanel:
     # ------------------------------------------------------------------
 
     def _moonraker_query(self) -> Optional[Dict[str, Any]]:
-        query = "&".join([state.heater_name for state in self._tool_states] + ["save_variables", "toolhead"])
+        tool_objects = [f"tool%20T{state.index}" for state in self._tool_states]
+        heater_objects = [state.heater_name for state in self._tool_states]
+        query = "&".join(heater_objects + ["save_variables", "toolhead", "toolchanger"] + tool_objects)
         url = f"{MOONRAKER}/printer/objects/query?{query}"
 
         last_error = None
@@ -816,9 +818,23 @@ class ToolchangerPanel:
             state.target = float(heater.get("target", 0) or 0)
             state.active = active_name == state.heater_name or (state.index == 0 and active_name == "extruder")
 
-            # PART 2: Read KTC state from save_variables
-            tool_state = save_variables.get(f"t{state.index}_state", "unknown")
-            state.ktc_state = str(tool_state).lower()
+            # Read active flag from native tool object (tool T0, tool T1, etc.)
+            tool_obj = status.get(f"tool T{state.index}", {}) or {}
+            tool_active = tool_obj.get("active", None)
+
+            # Detect changing state from toolchanger object if available
+            tc_status = status.get("toolchanger", {}) or {}
+            tc_changing = str(tc_status.get("status", "")).lower() in ("changing", "dropoff", "pickup")
+            tc_tool = tc_status.get("tool_number", -1)
+
+            if tc_changing and tc_tool == state.index:
+                state.ktc_state = "changing"
+            elif tool_active is True:
+                state.ktc_state = "active"
+            elif tool_active is False:
+                state.ktc_state = "docked"
+            else:
+                state.ktc_state = "unknown"
 
             spool_key = f"t{state.index}__spool_id"
             raw_spool_id = save_variables.get(spool_key)
