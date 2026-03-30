@@ -13,6 +13,8 @@ from datetime import datetime
 from math import log
 from ks_includes.screen_panel import ScreenPanel
 
+SPOOL_ID_UNSET = object()
+
 try:
     import psutil
     psutil_available = True
@@ -363,7 +365,7 @@ class BasePanel(ScreenPanel):
             self.update_spoolman_alert_visuals(False)
         self.control['spoolman_box'].show()
 
-    def refresh_spoolman_weight(self, show=True, spool_id=None):
+    def refresh_spoolman_weight(self, show=True, spool_id=SPOOL_ID_UNSET):
         if self._printer is None or not self.show_spoolman_in_title:
             self.stop_spoolman_blink()
             self.update_spoolman_alert_visuals(False)
@@ -378,10 +380,10 @@ class BasePanel(ScreenPanel):
             self._printer.set_active_spool(checked=False)
             self.update_spoolman_weight_label()
             return
-        if spool_id is None and self._printer.active_spool_checked:
+        if spool_id is SPOOL_ID_UNSET and self._printer.active_spool_checked:
             self.update_spoolman_weight_label()
             return
-        if spool_id is None:
+        if spool_id is SPOOL_ID_UNSET:
             result = self._screen.apiclient.send_request("server/spoolman/spool_id")
             if result is False:
                 logging.error("Error trying to fetch active spool id")
@@ -426,7 +428,7 @@ class BasePanel(ScreenPanel):
                 # Force a refetch when the event arrives without an explicit spool_id
                 # so the titlebar doesn't keep showing a stale cached spool.
                 self._printer.set_active_spool(checked=False)
-            spool_id = data.get("spool_id") if has_spool_id else None
+            spool_id = data.get("spool_id") if has_spool_id else SPOOL_ID_UNSET
             self.refresh_spoolman_weight(
                 self._printer is not None
                 and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'},
