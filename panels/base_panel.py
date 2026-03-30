@@ -206,12 +206,15 @@ class BasePanel(ScreenPanel):
                 or "filament" not in self._printer.active_spool
                 or not self._printer.active_spool["filament"]
         ):
-            return "FFFFFF"
+            return "000000"
         filament = self._printer.active_spool["filament"]
-        color = filament.get("color_hex", "FFFFFF")
-        if not color:
-            return "FFFFFF"
-        return color.lstrip("#")
+        color = filament.get("color_hex", "000000")
+        if not isinstance(color, str):
+            return "000000"
+        color = color.strip().lstrip("#")
+        if not color or not re.fullmatch(r"[0-9a-fA-F]{3}|[0-9a-fA-F]{6}", color):
+            return "000000"
+        return color
 
     def show_heaters(self, show=True):
         for child in self.control['temp_box'].get_children():
