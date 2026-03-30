@@ -37,7 +37,7 @@ from gi.repository import Gdk, GLib, Gtk
 
 
 MOONRAKER = "http://localhost:7125"
-SPOOLMAN = "http://192.168.88.135:7912/api/v1"
+DEFAULT_SPOOLMAN = "http://192.168.88.135:7912/api/v1"
 CONFIG_PATH = os.path.expanduser("~/.toolchanger_settings.json")
 POLL_INTERVAL_SECONDS = 1.0
 REQUEST_TIMEOUT_MOONRAKER = 1.0
@@ -385,6 +385,7 @@ class ToolchangerPanel:
         self.num_tools = max(1, min(4, int(config.get("num_tools", 2))))
         self._theme_name = config.get("theme", "Ocean")
         self._custom = config.get("custom")
+        self._spoolman_url = self._normalize_spoolman_url(config.get("spoolman_url", ""))
         self._theme = self._resolve_theme()
         self._apply_theme()
 
@@ -416,6 +417,7 @@ class ToolchangerPanel:
             "num_tools": self.num_tools,
             "theme": self._theme_name,
             "custom": self._custom,
+            "spoolman_url": self._spoolman_url,
         }
         try:
             with open(CONFIG_PATH, "w", encoding="utf-8") as handle:
@@ -434,7 +436,25 @@ class ToolchangerPanel:
     def _apply_theme(self) -> None:
         self._theme = self._resolve_theme()
         self._css_provider.load_from_data(make_css(self._theme))
-
+    
+    def _normalize_spoolman_url(self, value: Any) -> str:
+        raw = str(value or "").strip()
+        if not raw:
+            return ""
+    
+        if not raw.startswith(("http://", "https://")):
+            raw = f"http://{raw}"
+    
+        raw = raw.rstrip("/")
+    
+        if not raw.endswith("/api/v1"):
+            raw = f"{raw}/api/v1"
+    
+        return raw
+    
+    
+    def _effective_spoolman_url(self) -> str:
+        return self._spoolman_url or DEFAULT_SPOOLMAN
     # ------------------------------------------------------------------
     # Root layout
     # ------------------------------------------------------------------
@@ -752,7 +772,7 @@ class ToolchangerPanel:
 
     def _spoolman_list(self) -> List[Dict[str, Any]]:
         try:
-            response = self._session.get(f"{SPOOLMAN}/spool", timeout=REQUEST_TIMEOUT_SPOOLMAN)
+            response = self._session.get(f"{self._effective_spoolman_url()}/spool", timeout=REQUEST_TIMEOUT_SPOOLMAN)
             response.raise_for_status()
             payload = response.json()
         except Exception:
@@ -780,7 +800,7 @@ class ToolchangerPanel:
         if not spool_id:
             return None
         try:
-            response = self._session.get(f"{SPOOLMAN}/spool/{spool_id}", timeout=REQUEST_TIMEOUT_SPOOLMAN)
+            response = self._session.get(f"{self._effective_spoolman_url()}/spool/{spool_id}", timeout=REQUEST_TIMEOUT_SPOOLMAN)
             response.raise_for_status()
             payload = response.json()
             return payload if isinstance(payload, dict) else None
@@ -1265,7 +1285,7 @@ class ToolchangerPanel:
 
         outer = box(spacing=16)
         outer.get_style_context().add_class("tc-popup")
-        outer.set_size_request(400, 280)
+        outer.set_size_request(520, 320)
         outer.set_margin_top(20)
         outer.set_margin_bottom(20)
         outer.set_margin_start(20)
@@ -1275,24 +1295,99 @@ class ToolchangerPanel:
         header.get_style_context().add_class("tc-tool-label")
         outer.pack_start(header, False, False, 0)
 
-        row = box(Gtk.Orientation.HORIZONTAL, 12)
-        row.set_halign(Gtk.Align.CENTER)
+        grid = Gtk.Grid()
+        grid.set_row_spacing(12)
+        grid.set_column_spacing(12)
+        grid.set_halign(Gtk.Align.CENTER)
 
         actions = [
             ("TOOL COUNT", lambda _w: (popup.destroy(), self._show_tool_count())),
             ("PID TUNE", lambda _w: (popup.destroy(), self._show_pid_select())),
             ("THEME", lambda _w: (popup.destroy(), self._show_theme())),
+            ("SPOOLMAN", lambda _w: (popup.destroy(), self._show_spoolman_settings())),
         ]
-        for label, callback in actions:
-            b = button(label, "tc-btn-select", callback)
-            b.set_size_request(110, 80)
-            row.pack_start(b, False, False, 0)
 
-        outer.pack_start(row, True, True, 0)
+        for idx, (label, callback) in enumerate(actions):
+            col = idx % 2
+            row = idx // 2
+            b = button(label, "tc-btn-select", callback)
+            b.set_size_request(180, 80)
+            grid.attach(b, col, row, 1, 1)
+
+        outer.pack_start(grid, True, True, 0)
         outer.pack_start(button("CLOSE", "tc-btn-global", lambda _w: popup.destroy()), False, False, 0)
 
         popup.add(outer)
         popup.show_all()
+
+    def _show_spoolman_settings(self) -> None:
+        popup = self._register_popup(popup_window(self._screen))
+
+        outer = box(spacing=14)
+        outer.get_style_context().add_class("tc-popup")
+        outer.set_size_request(520, 260)
+        outer.set_margin_top(20)
+        outer.set_margin_bottom(20)
+        outer.set_margin_start(20)
+        outer.set_margin_end(20)
+
+        header = Gtk.Label(label="SPOOLMAN SETTINGS")
+        header.get_style_context().add_class("tc-tool-label")
+        outer.pack_start(header, False, False, 0)
+
+        info = Gtk.Label(
+            label="Enter the Spoolman server URL. Leave blank to use the default address."
+        )
+        info.set_line_wrap(True)
+        info.set_max_width_chars(48)
+        info.get_style_context().add_class("tc-mat-label-empty")
+        outer.pack_start(info, False, False, 0)
+
+        entry = Gtk.Entry()
+        entry.set_placeholder_text(DEFAULT_SPOOLMAN)
+        entry.set_text(self._spoolman_url)
+        outer.pack_start(entry, False, False, 0)
+
+        current_label = Gtk.Label(label=f"Default: {DEFAULT_SPOOLMAN}")
+        current_label.set_line_wrap(True)
+        current_label.set_max_width_chars(48)
+        current_label.get_style_context().add_class("tc-mat-label-empty")
+        outer.pack_start(current_label, False, False, 0)
+
+        def save_spoolman(_w: Gtk.Widget) -> None:
+            self._spoolman_url = self._normalize_spoolman_url(entry.get_text())
+            self._save_config()
+            popup.destroy()
+
+        button_row = box(Gtk.Orientation.HORIZONTAL, 10)
+        button_row.set_halign(Gtk.Align.CENTER)
+
+        save_btn = button("SAVE", "tc-btn-select", save_spoolman)
+        save_btn.set_size_request(130, 48)
+
+        clear_btn = button(
+            "USE DEFAULT",
+            "tc-btn-global",
+            lambda _w: (entry.set_text(""), entry.grab_focus()),
+        )
+        clear_btn.set_size_request(130, 48)
+
+        back_btn = button(
+            "BACK",
+            "tc-btn-global",
+            lambda _w: (popup.destroy(), self._show_settings(None)),
+        )
+        back_btn.set_size_request(130, 48)
+
+        button_row.pack_start(save_btn, False, False, 0)
+        button_row.pack_start(clear_btn, False, False, 0)
+        button_row.pack_start(back_btn, False, False, 0)
+
+        outer.pack_start(button_row, False, False, 0)
+
+        popup.add(outer)
+        popup.show_all()
+        entry.grab_focus()
 
     def _show_tool_count(self) -> None:
         popup = self._register_popup(popup_window(self._screen))
