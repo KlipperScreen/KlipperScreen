@@ -646,11 +646,11 @@ class ToolchangerPanel:
         hub = 10
         mid = (outer + inner) / 2.0
         full = 2 * math.pi
-        accent = hex_to_gdk(self._theme["accent"])
+        active_glow = hex_to_gdk(color)
 
         if state.active:
             for i in range(10, 0, -1):
-                cr.set_source_rgba(accent.red, accent.green, accent.blue, 0.03 * (11 - i))
+                cr.set_source_rgba(active_glow.red, active_glow.green, active_glow.blue, 0.03 * (11 - i))
                 cr.set_line_width(i * 2)
                 cr.arc(cx, cy, outer + 1, 0, full)
                 cr.stroke()
@@ -678,7 +678,7 @@ class ToolchangerPanel:
         cr.fill()
 
         if state.active:
-            cr.set_source_rgb(accent.red, accent.green, accent.blue)
+            cr.set_source_rgb(active_glow.red, active_glow.green, active_glow.blue)
         elif state.is_heating:
             wr, wg, wb = hex_to_rgb01(self._theme["warn"])
             cr.set_source_rgb(wr, wg, wb)
