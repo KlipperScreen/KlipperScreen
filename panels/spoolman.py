@@ -106,10 +106,15 @@ class SpoolmanSpool(GObject.GObject):
 
     @property
     def name(self):
-        result = self.filament.name
-        if self.filament.vendor:
-            result = " ".join([self.filament.vendor.name, "-", result])
-        return result
+        parts = []
+        vendor_name = getattr(self.filament.vendor, "name", None) if self.filament.vendor else None
+        if vendor_name:
+            parts.append(vendor_name)
+        if getattr(self.filament, "name", None):
+            parts.append(self.filament.name)
+        if getattr(self.filament, "material", None):
+            parts.append(self.filament.material)
+        return " - ".join(parts) if parts else self.filament.name
 
     @property
     def icon(self):
@@ -285,12 +290,17 @@ class Panel(ScreenPanel):
         column_last_used.set_visible(False)
         column_last_used.set_sort_column_id(1)
 
-        column_material = Gtk.TreeViewColumn(cell_renderer=text_renderer)
-        column_material.set_cell_data_func(
-            text_renderer,
+        edit_renderer = Gtk.CellRendererPixbuf(xpad=8, ypad=8)
+        self._column_edit = Gtk.TreeViewColumn(cell_renderer=edit_renderer)
+        self._column_edit.set_sizing(Gtk.TreeViewColumnSizing.FIXED)
+        edit_icon_size = self._gtk.img_scale * self.bts * 1.8
+        self._column_edit.set_fixed_width(max(edit_icon_size + 20, round(self._gtk.font_size * 6.5)))
+        edit_icon = self._gtk.PixbufFromIcon("settings", edit_icon_size, edit_icon_size)
+        self._column_edit.set_cell_data_func(
+            edit_renderer,
             lambda column, cell, model, it, data:
             self._set_cell_background(cell, model.get_value(it, 0)) and
-            cell.set_property('text', model.get_value(it, 0).filament.material)
+            cell.set_property('pixbuf', edit_icon)
         )
 
         checkbox_renderer.connect("toggled", self._set_active_spool)
@@ -306,14 +316,29 @@ class Panel(ScreenPanel):
         self._treeview.append_column(column_icon)
         self._treeview.append_column(column_spool)
         self._treeview.append_column(column_last_used)
-        self._treeview.append_column(column_material)
+        self._treeview.append_column(self._column_edit)
         self._treeview.append_column(column_toggle_active_spool)
+        self._treeview.connect("button-press-event", self._open_spool_detail)
 
         self.current_sort_widget = sort_btn_id
         sort_btn_used.clicked()
 
         self.scroll.add(self._treeview)
         self.content.add(self.main)
+
+    def _open_spool_detail(self, treeview, event):
+        if event.button != 1:
+            return False
+        path_info = treeview.get_path_at_pos(int(event.x), int(event.y))
+        if path_info is not None:
+            path, column, cell_x, cell_y = path_info
+            if column == self._column_edit:
+                model = treeview.get_model()
+                it = model.get_iter(path)
+                spool = model.get_value(it, 0)
+                self._screen.show_panel("spool", title=spool.name, extra=spool)
+                return True
+        return False
 
     def _filter_spools(self, model, i, data):
         spool: SpoolmanSpool = model[i][0]
