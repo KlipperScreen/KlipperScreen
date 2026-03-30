@@ -1067,10 +1067,14 @@ class ToolchangerPanel:
         row = box(Gtk.Orientation.HORIZONTAL, 15)
         row.set_halign(Gtk.Align.CENTER)
         for state in self._tool_states:
+            def on_pick(_w: Gtk.Widget, idx: int = state.index) -> None:
+                self._select_tool(idx)
+                popup.destroy()
+
             b = button(
                 f"T{state.index}",
                 "tc-btn-select",
-                lambda _w, idx=state.index: (self._queue_gcode(f"T{idx}"), popup.destroy()),
+                on_pick,
             )
             b.set_size_request(100, 100)
             row.pack_start(b, False, False, 0)
@@ -1559,38 +1563,41 @@ class ToolchangerPanel:
 
         outer.pack_start(grid, True, True, 0)
 
-        def redraw_preview(_w=None):
+        preview_state = {"theme": derive_theme_fields({k: gdk_to_hex(p.get_rgba()) for k, p in pickers.items()})}
+
+        def draw_preview(widget: Gtk.DrawingArea, cr: cairo.Context) -> bool:
+            derived = preview_state["theme"]
+            w = widget.get_allocated_width()
+            h = widget.get_allocated_height()
+
+            bg = hex_to_gdk(derived["bg"])
+            cr.set_source_rgb(bg.red, bg.green, bg.blue)
+            cr.rectangle(0, 0, w, h)
+            cr.fill()
+
+            card = hex_to_gdk(derived["card"])
+            cr.set_source_rgb(card.red, card.green, card.blue)
+            cr.rectangle(10, 10, w - 20, h - 20)
+            cr.fill()
+
+            accent = hex_to_gdk(derived["accent"])
+            cr.set_source_rgb(accent.red, accent.green, accent.blue)
+            cr.rectangle(10, h - 20, w - 20, 10)
+            cr.fill()
+
+            return False
+
+        def redraw_preview(_w=None) -> None:
             theme_preview = {k: gdk_to_hex(p.get_rgba()) for k, p in pickers.items()}
-            derived = derive_theme_fields(theme_preview)
-
-            def draw(widget, cr):
-                w = widget.get_allocated_width()
-                h = widget.get_allocated_height()
-
-                bg = hex_to_gdk(derived["bg"])
-                cr.set_source_rgb(bg.red, bg.green, bg.blue)
-                cr.rectangle(0, 0, w, h)
-                cr.fill()
-
-                card = hex_to_gdk(derived["card"])
-                cr.set_source_rgb(card.red, card.green, card.blue)
-                cr.rectangle(10, 10, w - 20, h - 20)
-                cr.fill()
-
-                accent = hex_to_gdk(derived["accent"])
-                cr.set_source_rgb(accent.red, accent.green, accent.blue)
-                cr.rectangle(10, h - 20, w - 20, 10)
-                cr.fill()
-
-                return False
-
-            preview.connect("draw", draw)
+            preview_state["theme"] = derive_theme_fields(theme_preview)
             preview.queue_draw()
 
+        preview.connect("draw", draw_preview)
         for p in pickers.values():
             p.connect("color-set", redraw_preview)
 
         outer.pack_start(preview, False, False, 0)
+        redraw_preview()
 
         def apply_custom(_w):
             custom = {k: gdk_to_hex(p.get_rgba()) for k, p in pickers.items()}
@@ -1622,8 +1629,9 @@ class ToolchangerPanel:
     # ------------------------------------------------------------------
 
     def activate(self) -> None:
-        if self._poll_stop.is_set():
-            self._start_polling_worker()
+        self._poll_stop.clear()
+        self._start_command_worker()
+        self._start_polling_worker()
 
     def deactivate(self) -> None:
         self._poll_stop.set()
