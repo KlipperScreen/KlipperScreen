@@ -542,17 +542,20 @@ class Panel(ScreenPanel):
                             n += 1
                             break
 
-        szfe = Gtk.Grid(column_homogeneous=True)
-        szfe.attach(self.buttons["speed"], 0, 0, 3, 1)
-        szfe.attach(self.buttons["z"], 2, 0, 2, 1)
-        if self._printer.get_tools():
-            szfe.attach(self.buttons["extrusion"], 0, 1, 3, 1)
+        # Move Fan and Layer buttons to the top row beside the heater tiles
         if self._printer.get_fans():
-            szfe.attach(self.buttons["fan"], 2, 1, 2, 1)
+            self.labels["temp_grid"].attach(self.buttons["fan"], n, 0, 1, 1)
+            n += 1
+        self.labels["temp_grid"].attach(self.buttons["z"], n, 0, 1, 1)
+
+        szfe = Gtk.Grid(column_homogeneous=True)
+        szfe.attach(self.buttons["speed"], 0, 0, 4, 1)
+        if self._printer.get_tools():
+            szfe.attach(self.buttons["extrusion"], 0, 1, 4, 1)
 
         info = Gtk.Grid(row_homogeneous=True)
         info.get_style_context().add_class("printing-info")
-        info.set_margin_start(100)
+        info.set_margin_start(20)
         info.attach(self.labels["temp_grid"], 0, 0, 1, 1)
         info.attach(szfe, 0, 1, 1, 2)
         info.attach(self.buttons["left"], 0, 3, 1, 1)
@@ -565,7 +568,7 @@ class Panel(ScreenPanel):
         goback.get_style_context().add_class("printing-info")
         info = Gtk.Grid(hexpand=True, vexpand=True, halign=Gtk.Align.START)
         info.get_style_context().add_class("printing-info-secondary")
-        info.set_margin_start(100)
+        info.set_margin_start(20)
         info.attach(goback, 0, 0, 1, 6)
         info.attach(self.labels["flow"], 1, 0, 1, 1)
         info.attach(self.labels["extrude_factor"], 2, 0, 1, 1)
@@ -591,7 +594,7 @@ class Panel(ScreenPanel):
         pos_box.add(self.labels["pos_z"])
         info = Gtk.Grid(hexpand=True, vexpand=True, halign=Gtk.Align.START)
         info.get_style_context().add_class("printing-info-secondary")
-        info.set_margin_start(100)
+        info.set_margin_start(20)
         info.attach(goback, 0, 0, 1, 6)
         info.attach(self.labels["speed_lbl"], 1, 0, 1, 1)
         info.attach(self.labels["req_speed"], 2, 0, 1, 1)
@@ -614,7 +617,7 @@ class Panel(ScreenPanel):
         goback.set_hexpand(False)
         info = Gtk.Grid()
         info.get_style_context().add_class("printing-info-secondary")
-        info.set_margin_start(100)
+        info.set_margin_start(20)
         info.attach(goback, 0, 0, 1, 6)
         info.attach(self.labels["elapsed"], 1, 0, 1, 1)
         info.attach(self.labels["duration"], 2, 0, 1, 1)
