@@ -224,8 +224,19 @@ class Panel(ScreenPanel):
             return 1
 
     def _get_active_tool_fan_percent(self):
+        active = self._printer.get_stat("toolhead", "extruder")
+        if not active or active == "extruder":
+            fan_name = "fan_generic t0_partfan"
+        else:
+            try:
+                tool_idx = int(str(active).replace("extruder", ""))
+            except Exception:
+                tool_idx = 0
+            fan_name = f"fan_generic t{tool_idx}_partfan"
+
         try:
-            return float(self._printer.get_fan_speed("fan") or 0) * 100.0
+            speed = self._printer.get_fan_speed(fan_name)
+            return float(speed or 0) * 100.0
         except Exception:
             return 0.0
 
@@ -541,11 +552,10 @@ class Panel(ScreenPanel):
 
         info = Gtk.Grid(row_homogeneous=True)
         info.get_style_context().add_class("printing-info")
-        info.set_margin_start(55)
+        info.set_margin_start(100)
         info.attach(self.labels["temp_grid"], 0, 0, 1, 1)
         info.attach(szfe, 0, 1, 1, 2)
-        info.attach(self.buttons["elapsed"], 0, 3, 1, 1)
-        info.attach(self.buttons["left"], 0, 4, 1, 1)
+        info.attach(self.buttons["left"], 0, 3, 1, 1)
         self.status_grid = info
 
     def create_extrusion_grid(self, widget=None):
@@ -555,7 +565,7 @@ class Panel(ScreenPanel):
         goback.get_style_context().add_class("printing-info")
         info = Gtk.Grid(hexpand=True, vexpand=True, halign=Gtk.Align.START)
         info.get_style_context().add_class("printing-info-secondary")
-        info.set_margin_start(55)
+        info.set_margin_start(100)
         info.attach(goback, 0, 0, 1, 6)
         info.attach(self.labels["flow"], 1, 0, 1, 1)
         info.attach(self.labels["extrude_factor"], 2, 0, 1, 1)
@@ -581,7 +591,7 @@ class Panel(ScreenPanel):
         pos_box.add(self.labels["pos_z"])
         info = Gtk.Grid(hexpand=True, vexpand=True, halign=Gtk.Align.START)
         info.get_style_context().add_class("printing-info-secondary")
-        info.set_margin_start(55)
+        info.set_margin_start(100)
         info.attach(goback, 0, 0, 1, 6)
         info.attach(self.labels["speed_lbl"], 1, 0, 1, 1)
         info.attach(self.labels["req_speed"], 2, 0, 1, 1)
@@ -604,7 +614,7 @@ class Panel(ScreenPanel):
         goback.set_hexpand(False)
         info = Gtk.Grid()
         info.get_style_context().add_class("printing-info-secondary")
-        info.set_margin_start(55)
+        info.set_margin_start(100)
         info.attach(goback, 0, 0, 1, 6)
         info.attach(self.labels["elapsed"], 1, 0, 1, 1)
         info.attach(self.labels["duration"], 2, 0, 1, 1)
@@ -904,6 +914,9 @@ class Panel(ScreenPanel):
                     self.format_time(data["print_stats"]["total_duration"]))
             if self.state in ["printing", "paused"]:
                 self.update_time_left()
+
+        active_fan = self._get_active_tool_fan_percent()
+        self.buttons["fan"].set_label(f"{active_fan:.0f}%")
 
         self._update_tool_strip_runtime()
 
