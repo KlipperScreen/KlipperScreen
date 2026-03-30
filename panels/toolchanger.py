@@ -1323,36 +1323,59 @@ class ToolchangerPanel:
     def _show_spoolman_settings(self) -> None:
         popup = self._register_popup(popup_window(self._screen))
 
-        outer = box(spacing=14)
+        outer = box(Gtk.Orientation.HORIZONTAL, 16)
         outer.get_style_context().add_class("tc-popup")
-        outer.set_size_request(520, 260)
+        outer.set_size_request(900, 320)
         outer.set_margin_top(20)
         outer.set_margin_bottom(20)
         outer.set_margin_start(20)
         outer.set_margin_end(20)
 
+        left = box(spacing=14)
+        left.set_size_request(520, 260)
+
         header = Gtk.Label(label="SPOOLMAN SETTINGS")
         header.get_style_context().add_class("tc-tool-label")
-        outer.pack_start(header, False, False, 0)
+        left.pack_start(header, False, False, 0)
 
         info = Gtk.Label(
             label="Enter the Spoolman server URL. Leave blank to use the default address."
         )
         info.set_line_wrap(True)
-        info.set_max_width_chars(48)
+        info.set_max_width_chars(40)
+        info.set_xalign(0)
         info.get_style_context().add_class("tc-mat-label-empty")
-        outer.pack_start(info, False, False, 0)
+        left.pack_start(info, False, False, 0)
 
         entry = Gtk.Entry()
         entry.set_placeholder_text(DEFAULT_SPOOLMAN)
         entry.set_text(self._spoolman_url)
-        outer.pack_start(entry, False, False, 0)
+        left.pack_start(entry, False, False, 0)
 
         current_label = Gtk.Label(label=f"Default: {DEFAULT_SPOOLMAN}")
         current_label.set_line_wrap(True)
-        current_label.set_max_width_chars(48)
+        current_label.set_max_width_chars(40)
+        current_label.set_xalign(0)
         current_label.get_style_context().add_class("tc-mat-label-empty")
-        outer.pack_start(current_label, False, False, 0)
+        left.pack_start(current_label, False, False, 0)
+
+        def insert_text(value: str) -> None:
+            position = entry.get_position()
+            entry.insert_text(value, position)
+            entry.set_position(position + len(value))
+            entry.grab_focus()
+
+        def backspace_text(_w: Gtk.Widget) -> None:
+            text = entry.get_text()
+            position = entry.get_position()
+            if position > 0:
+                entry.delete_text(position - 1, position)
+                entry.set_position(position - 1)
+            entry.grab_focus()
+
+        def clear_text(_w: Gtk.Widget) -> None:
+            entry.set_text("")
+            entry.grab_focus()
 
         def save_spoolman(_w: Gtk.Widget) -> None:
             self._spoolman_url = self._normalize_spoolman_url(entry.get_text())
@@ -1382,8 +1405,51 @@ class ToolchangerPanel:
         button_row.pack_start(save_btn, False, False, 0)
         button_row.pack_start(clear_btn, False, False, 0)
         button_row.pack_start(back_btn, False, False, 0)
+        left.pack_end(button_row, False, False, 0)
 
-        outer.pack_start(button_row, False, False, 0)
+        keypad_wrap = box(spacing=8)
+        keypad_wrap.set_size_request(320, 260)
+
+        keypad_header = Gtk.Label(label="KEYPAD")
+        keypad_header.get_style_context().add_class("tc-tool-label")
+        keypad_wrap.pack_start(keypad_header, False, False, 0)
+
+        keypad = Gtk.Grid()
+        keypad.set_row_spacing(8)
+        keypad.set_column_spacing(8)
+        keypad.set_halign(Gtk.Align.CENTER)
+
+        keys = [
+            "7", "8", "9", ".",
+            "4", "5", "6", ":",
+            "1", "2", "3", "/",
+            "0", "http://", "https://", "api/v1",
+        ]
+
+        for idx, value in enumerate(keys):
+            btn = button(value, "tc-btn-global", lambda _w, v=value: insert_text(v))
+            btn.set_size_request(72, 52)
+            keypad.attach(btn, idx % 4, idx // 4, 1, 1)
+
+        row2 = box(Gtk.Orientation.HORIZONTAL, 8)
+        row2.set_halign(Gtk.Align.CENTER)
+
+        del_btn = button("⌫", "tc-btn-global", backspace_text)
+        del_btn.set_size_request(98, 52)
+        clr_btn = button("CLEAR", "tc-btn-global", clear_text)
+        clr_btn.set_size_request(98, 52)
+        slash_btn = button(".local", "tc-btn-global", lambda _w: insert_text('.local'))
+        slash_btn.set_size_request(98, 52)
+
+        row2.pack_start(del_btn, False, False, 0)
+        row2.pack_start(clr_btn, False, False, 0)
+        row2.pack_start(slash_btn, False, False, 0)
+
+        keypad_wrap.pack_start(keypad, False, False, 0)
+        keypad_wrap.pack_start(row2, False, False, 0)
+
+        outer.pack_start(left, True, True, 0)
+        outer.pack_start(keypad_wrap, False, False, 0)
 
         popup.add(outer)
         popup.show_all()
