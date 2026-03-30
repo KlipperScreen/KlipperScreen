@@ -244,6 +244,7 @@ def make_css(theme: Dict[str, str]) -> bytes:
 .tc-badge-heating {{ background-color: #3f2700; color: #ffbf40; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #ffb020; }}
 .tc-badge-parked {{ background-color: #e0e0e0; color: #555555; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #c0c0c0; }}
 .tc-badge-error {{ background-color: #3a0a0a; color: #ff4444; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #aa2222; }}
+.tc-badge-changing {{ background-color: #002a4a; color: #44c8ff; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #44c8ff; }}
 
 .tc-popup {{ background-color: {theme['card']}; border: 2px solid {accent}; border-radius: 15px; }}
 """
@@ -267,6 +268,7 @@ class ToolState:
     spool_id: Optional[int] = None
     reachable: bool = True
     spool_error: bool = False
+    ktc_state: str = "unknown"  # PART 1: KTC state field
 
     @property
     def display_title(self) -> str:
@@ -276,24 +278,36 @@ class ToolState:
     def is_heating(self) -> bool:
         return self.target > 0 and self.temperature + 5 < self.target
 
+    # PART 3: KTC-driven status logic
     @property
     def status_label(self) -> str:
         if not self.reachable:
             return "OFFLINE"
         if self.spool_error:
             return "ERROR"
-        if self.active:
+
+        if self.ktc_state == "active":
             return "ACTIVE"
+        if self.ktc_state == "changing":
+            return "CHANGING"
+        if self.ktc_state == "docked":
+            return "PARKED"
+
         if self.is_heating:
             return "HEATING"
-        return "PARKED"
+
+        return "UNKNOWN"
 
     @property
     def status_css(self) -> str:
         if not self.reachable or self.spool_error:
             return "tc-badge-error"
-        if self.active:
+        if self.ktc_state == "active":
             return "tc-badge-active"
+        if self.ktc_state == "changing":
+            return "tc-badge-changing"
+        if self.ktc_state == "docked":
+            return "tc-badge-parked"
         if self.is_heating:
             return "tc-badge-heating"
         return "tc-badge-parked"
@@ -487,6 +501,10 @@ class ToolchangerPanel:
         frame = box(spacing=5)
         frame.get_style_context().add_class("tc-card")
         frame.set_size_request(185, 320)
+
+        # PART 6: Make cards clickable
+        frame.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        frame.connect("button-press-event", lambda _w, _e, idx=state.index: self._select_tool(idx))
 
         inner = box(spacing=2)
         inner.set_margin_top(8)
@@ -798,6 +816,10 @@ class ToolchangerPanel:
             state.target = float(heater.get("target", 0) or 0)
             state.active = active_name == state.heater_name or (state.index == 0 and active_name == "extruder")
 
+            # PART 2: Read KTC state from save_variables
+            tool_state = save_variables.get(f"t{state.index}_state", "unknown")
+            state.ktc_state = str(tool_state).lower()
+
             spool_key = f"t{state.index}__spool_id"
             raw_spool_id = save_variables.get(spool_key)
             try:
@@ -849,7 +871,7 @@ class ToolchangerPanel:
                 frame_ctx.remove_class("tc-card-active")
 
             badge_ctx = widgets.badge.get_style_context()
-            for cls in ("tc-badge-active", "tc-badge-heating", "tc-badge-parked", "tc-badge-error"):
+            for cls in ("tc-badge-active", "tc-badge-heating", "tc-badge-parked", "tc-badge-error", "tc-badge-changing"):
                 badge_ctx.remove_class(cls)
             widgets.badge.set_text(state.status_label)
             badge_ctx.add_class(state.status_css)
@@ -901,6 +923,56 @@ class ToolchangerPanel:
     def _on_popup_destroy(self, popup: Gtk.Window) -> None:
         if self._active_popup is popup:
             self._active_popup = None
+
+    # ------------------------------------------------------------------
+    # Tool selection (PART 5)
+    # ------------------------------------------------------------------
+
+    def _select_tool(self, tool_index: int) -> None:
+        state = self._tool_states[tool_index]
+
+        # Safety checks
+        if not state.spool_id:
+            self._show_message(f"Tool {tool_index + 1} has no spool assigned")
+            return
+
+        if state.ktc_state == "changing":
+            self._show_message("Tool change already in progress")
+            return
+
+        if state.ktc_state == "active":
+            self._show_message(f"Tool {tool_index + 1} already active")
+            return
+
+        # Instant UI feedback
+        state.ktc_state = "changing"
+        GLib.idle_add(self._apply_snapshot, RuntimeSnapshot(self._tool_states))
+
+        # Send command
+        self._queue_gcode(f"T{tool_index}")
+
+    # ------------------------------------------------------------------
+    # Simple message popup (PART 7)
+    # ------------------------------------------------------------------
+
+    def _show_message(self, text: str) -> None:
+        popup = self._register_popup(popup_window(self._screen))
+
+        layout = box(spacing=10)
+        layout.get_style_context().add_class("tc-popup")
+        layout.set_margin_top(20)
+        layout.set_margin_bottom(20)
+        layout.set_margin_start(20)
+        layout.set_margin_end(20)
+
+        label = Gtk.Label(label=text)
+        layout.pack_start(label, True, True, 0)
+
+        btn = button("OK", "tc-btn-select", lambda _w: popup.destroy())
+        layout.pack_start(btn, False, False, 0)
+
+        popup.add(layout)
+        popup.show_all()
 
     # ------------------------------------------------------------------
     # Popups
