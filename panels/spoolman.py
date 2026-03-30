@@ -164,6 +164,7 @@ class Panel(ScreenPanel):
     def __init__(self, screen, title):
         title = title or "Spoolman"
         super().__init__(screen, title)
+        self.menu = ['spoolman_menu']
         self.apiClient = screen.apiclient
         if self._config.get_main_config().getboolean("24htime", True):
             self.timeFormat = '%Y-%m-%d %H:%M'
@@ -244,14 +245,15 @@ class Panel(ScreenPanel):
 
         filter_box.add(row)
 
-        self.main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
-        self.main.pack_start(sbox, False, False, 0)
-        self.main.pack_start(self._filter_expander, False, True, 0)
-        self.main.pack_start(self.scroll, True, True, 0)
+        self.labels['spoolman_menu'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
+        self.labels['spoolman_menu'].pack_start(sbox, False, False, 0)
+        self.labels['spoolman_menu'].pack_start(self._filter_expander, False, True, 0)
+        self.labels['spoolman_menu'].pack_start(self.scroll, True, True, 0)
 
         self.load_spools()
         self.get_active_spool()
         self._treeview = Gtk.TreeView(model=sortable, headers_visible=False, show_expanders=False)
+        self._treeview.set_activate_on_single_click(True)
 
         text_renderer = Gtk.CellRendererText(wrap_width=self._gtk.content_width / 4)
         pixbuf_renderer = Gtk.CellRendererPixbuf(xpad=5, ypad=5)
@@ -295,8 +297,8 @@ class Panel(ScreenPanel):
         )
 
         checkbox_renderer.connect("toggled", self._set_active_spool)
-        column_toggle_active_spool = Gtk.TreeViewColumn(cell_renderer=checkbox_renderer)
-        column_toggle_active_spool.set_cell_data_func(
+        self._column_toggle_active_spool = Gtk.TreeViewColumn(cell_renderer=checkbox_renderer)
+        self._column_toggle_active_spool.set_cell_data_func(
             checkbox_renderer,
             lambda column, cell, model, it, data:
             self._set_cell_background(cell, model.get_value(it, 0)) and
@@ -308,13 +310,14 @@ class Panel(ScreenPanel):
         self._treeview.append_column(column_spool)
         self._treeview.append_column(column_last_used)
         self._treeview.append_column(column_material)
-        self._treeview.append_column(column_toggle_active_spool)
+        self._treeview.append_column(self._column_toggle_active_spool)
+        self._treeview.connect("row-activated", self.open_spool_detail)
 
         self.current_sort_widget = sort_btn_id
         sort_btn_used.clicked()
 
         self.scroll.add(self._treeview)
-        self.content.add(self.main)
+        self.content.add(self.labels['spoolman_menu'])
 
     def _filter_spools(self, model, i, data):
         spool: SpoolmanSpool = model[i][0]
@@ -351,6 +354,14 @@ class Panel(ScreenPanel):
             self.clear_active_spool()
         else:
             self.set_active_spool(spool)
+
+    def open_spool_detail(self, treeview, path, column):
+        if column == self._column_toggle_active_spool:
+            return
+        model = treeview.get_model()
+        it = model.get_iter(path)
+        spool = model.get_value(it, 0)
+        self._screen.show_panel("spool", title=spool.name, extra=spool)
 
     def change_sort(self, widget, sort_type):
         self.current_sort_widget.set_image(None)

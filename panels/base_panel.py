@@ -34,6 +34,7 @@ class BasePanel(ScreenPanel):
         self.titlebar_items = []
         self.titlebar_name_type = None
         self.show_spoolman_in_title = False
+        self.spool_shortcut = "spoolman"
         self.spoolman_low_limit = 0
         self.spoolman_blink_timeout = None
         self.spoolman_blink_state = False
@@ -117,12 +118,18 @@ class BasePanel(ScreenPanel):
 
         self.labels['spoolman_icon'] = Gtk.Image()
         self.labels['spoolman_weight'] = Gtk.Label()
-        self.control['spoolman_box'] = Gtk.Box(halign=Gtk.Align.END, spacing=1)
+        self.control['spoolman_content'] = Gtk.Box(halign=Gtk.Align.END, spacing=1)
+        self.control['spoolman_content'].add(self.labels['spoolman_icon'])
+        self.control['spoolman_content'].add(self.labels['spoolman_weight'])
+        self.control['spoolman_box'] = Gtk.Button()
+        self.control['spoolman_box'].set_relief(Gtk.ReliefStyle.NONE)
+        self.control['spoolman_box'].set_can_focus(False)
         self.control['spoolman_box'].set_no_show_all(True)
-        self.control['spoolman_box'].add(self.labels['spoolman_icon'])
-        self.control['spoolman_box'].add(self.labels['spoolman_weight'])
+        self.control['spoolman_box'].add(self.control['spoolman_content'])
+        self.control['spoolman_box'].connect("clicked", self.open_spool_shortcut)
         self.labels['spoolman_icon'].show()
         self.labels['spoolman_weight'].show()
+        self.control['spoolman_content'].show()
         self.load_spoolman_icons()
 
         self.titlebar = Gtk.Box(spacing=5, valign=Gtk.Align.CENTER)
@@ -412,6 +419,34 @@ class BasePanel(ScreenPanel):
         self._printer.set_active_spool(spool_id=spool_id, spool=spool["result"])
         self.update_spoolman_weight_label()
 
+    def open_spool_shortcut(self, widget=None):
+        if self.spool_shortcut != "spool":
+            self._screen.show_panel("spoolman")
+            return
+
+        active_spool_id = None
+        if self._printer is not None:
+            active_spool_id = self._printer.active_spool_id
+
+        if not active_spool_id:
+            result = self._screen.apiclient.send_request("server/spoolman/spool_id")
+            if not result or not result.get("spool_id"):
+                self._screen.show_panel("spoolman")
+                return
+            active_spool_id = result["spool_id"]
+
+        spool = self._screen.apiclient.post_request("server/spoolman/proxy", json={
+            "request_method": "GET",
+            "path": f"/v1/spool/{active_spool_id}",
+        })
+        if not spool or "result" not in spool:
+            self._screen.show_panel("spoolman")
+            return
+
+        from panels.spoolman import SpoolmanSpool
+        spool_object = SpoolmanSpool(**spool["result"])
+        self._screen.show_panel("spool", title=spool_object.name, extra=spool_object)
+
     def back(self, widget=None):
         if self.current_panel is None:
             return
@@ -605,10 +640,14 @@ class BasePanel(ScreenPanel):
             else:
                 self.titlebar_items = []
             self.show_spoolman_in_title = "spool" in self.titlebar_items
+            self.spool_shortcut = self.ks_printer_cfg.get("spool_shortcut", "spoolman").strip().lower()
+            if self.spool_shortcut not in {"spoolman", "spool"}:
+                self.spool_shortcut = "spoolman"
             self.spoolman_low_limit = self.ks_printer_cfg.getfloat("spool_low_limit", fallback=0)
         else:
             self.titlebar_items = []
             self.show_spoolman_in_title = False
+            self.spool_shortcut = "spoolman"
             self.spoolman_low_limit = 0
         self.refresh_spoolman_weight(
             self._printer is not None and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'}
