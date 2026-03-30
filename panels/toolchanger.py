@@ -507,8 +507,8 @@ class ToolchangerPanel:
         frame.get_style_context().add_class("tc-card")
         frame.set_size_request(185, 320)
 
-        frame.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-        frame.connect("button-press-event", lambda _w, _e, idx=state.index: self._select_tool(idx))
+        # PATCH: tool card itself is no longer clickable for selection.
+        # This avoids interfering with the dedicated spool and temperature controls.
 
         inner = box(spacing=2)
         inner.set_margin_top(8)
