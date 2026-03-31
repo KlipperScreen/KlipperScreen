@@ -9,6 +9,9 @@ Updated to use KlipperScreen/Moonraker's shared Spoolman proxy instead of a
 panel-local Spoolman URL. This removes the broken custom Spoolman IP handling
 and reuses the same configured Spoolman connection that the built-in
 KlipperScreen Spoolman panel uses.
+
+Also updated to auto-detect tool count from Moonraker's toolchanger status
+(tool_numbers / tool_names) and remove the manual tool count setting.
 """
 
 from __future__ import annotations
@@ -360,7 +363,7 @@ class ToolchangerPanel:
         )
 
         config = self._load_config()
-        self.num_tools = max(1, min(4, int(config.get("num_tools", 2))))
+        self.num_tools = 2
         self._theme_name = config.get("theme", "Ocean")
         self._custom = config.get("custom")
         self._theme = self._resolve_theme()
@@ -391,7 +394,6 @@ class ToolchangerPanel:
 
     def _save_config(self) -> None:
         payload = {
-            "num_tools": self.num_tools,
             "theme": self._theme_name,
             "custom": self._custom,
         }
@@ -772,6 +774,7 @@ class ToolchangerPanel:
     def _start_polling_worker(self) -> None:
         if self._poll_thread and self._poll_thread.is_alive():
             return
+        self._refresh_tool_count_from_moonraker()
         self._poll_stop.clear()
         self._poll_thread = threading.Thread(target=self._poll_loop, daemon=True)
         self._poll_thread.start()
@@ -848,6 +851,38 @@ class ToolchangerPanel:
                 state.remaining_ratio = -1.0
 
         return RuntimeSnapshot(tools=base_states, moonraker_ok=True)
+
+    def _refresh_tool_count_from_moonraker(self) -> None:
+        try:
+            result = self._session.get(f"{MOONRAKER}/printer/objects/query?toolchanger", timeout=REQUEST_TIMEOUT_MOONRAKER)
+            result.raise_for_status()
+            payload = result.json()
+            status = payload.get("result", {}).get("status", {})
+        except Exception:
+            status = None
+
+        if not isinstance(status, dict):
+            return
+
+        tc = status.get("toolchanger", {}) or {}
+        tool_numbers = tc.get("tool_numbers")
+        tool_names = tc.get("tool_names")
+
+        detected_count = None
+        if isinstance(tool_numbers, list) and tool_numbers:
+            detected_count = len(tool_numbers)
+        elif isinstance(tool_names, list) and tool_names:
+            detected_count = len(tool_names)
+        elif isinstance(tc.get("tool_number"), int):
+            detected_count = max(1, int(tc.get("tool_number")) + 1)
+
+        if detected_count is None:
+            return
+
+        detected_count = max(1, detected_count)
+        if detected_count != self.num_tools:
+            self.num_tools = detected_count
+            self._rebuild_cards()
 
     def _apply_snapshot(self, snapshot: RuntimeSnapshot) -> bool:
         self._tool_states = snapshot.tools
@@ -1250,7 +1285,6 @@ class ToolchangerPanel:
         grid.set_halign(Gtk.Align.CENTER)
 
         actions = [
-            ("TOOL COUNT", lambda _w: (popup.destroy(), self._show_tool_count())),
             ("PID TUNE", lambda _w: (popup.destroy(), self._show_pid_select())),
             ("THEME", lambda _w: (popup.destroy(), self._show_theme())),
         ]
@@ -1266,53 +1300,6 @@ class ToolchangerPanel:
         outer.pack_start(button("CLOSE", "tc-btn-global", lambda _w: popup.destroy()), False, False, 0)
 
         popup.add(outer)
-        popup.show_all()
-
-    def _show_tool_count(self) -> None:
-        popup = self._register_popup(popup_window(self._screen))
-
-        inner = box(spacing=20)
-        inner.get_style_context().add_class("tc-popup")
-        inner.set_size_request(320, 240)
-        inner.set_margin_top(24)
-        inner.set_margin_bottom(24)
-        inner.set_margin_start(24)
-        inner.set_margin_end(24)
-
-        header = Gtk.Label(label="TOOL COUNT")
-        header.get_style_context().add_class("tc-tool-label")
-        inner.pack_start(header, False, False, 0)
-
-        row = box(Gtk.Orientation.HORIZONTAL, 20)
-        row.set_halign(Gtk.Align.CENTER)
-        value_label = Gtk.Label(label=str(self.num_tools))
-        value_label.get_style_context().add_class("tc-temp-label")
-
-        def adjust(delta: int) -> None:
-            self.num_tools = max(1, min(4, self.num_tools + delta))
-            value_label.set_text(str(self.num_tools))
-
-        minus = button("-", "tc-btn-global", lambda _w: adjust(-1))
-        minus.set_size_request(60, 60)
-        plus = button("+", "tc-btn-global", lambda _w: adjust(1))
-        plus.set_size_request(60, 60)
-
-        row.pack_start(minus, False, False, 0)
-        row.pack_start(value_label, False, False, 10)
-        row.pack_start(plus, False, False, 0)
-        inner.pack_start(row, False, False, 0)
-
-        def save_and_rebuild(_w: Gtk.Widget) -> None:
-            self._save_config()
-            self._rebuild_cards()
-            popup.destroy()
-
-        save = button("SAVE & REBUILD", "tc-btn-select", save_and_rebuild)
-        save.set_size_request(200, 50)
-        inner.pack_start(save, False, False, 0)
-        inner.pack_start(button("BACK", "tc-btn-global", lambda _w: (popup.destroy(), self._show_settings(None))), False, False, 0)
-
-        popup.add(inner)
         popup.show_all()
 
     def _show_pid_select(self) -> None:
