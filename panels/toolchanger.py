@@ -520,6 +520,18 @@ class ToolchangerPanel:
         spool_button.set_relief(Gtk.ReliefStyle.NONE)
         spool_button.set_focus_on_click(False)
         spool_button.set_size_request(110, 110)
+        spool_button.set_can_focus(False)
+        spool_button.set_always_show_image(False)
+        spool_button.set_image_position(Gtk.PositionType.LEFT)
+
+        spool_ctx = spool_button.get_style_context()
+        spool_ctx.add_class("flat")
+        try:
+            spool_ctx.remove_class("button")
+        except Exception:
+            pass
+
+        spool_button.set_border_width(0)
 
         spool_area = Gtk.DrawingArea()
         spool_area.set_size_request(110, 110)
