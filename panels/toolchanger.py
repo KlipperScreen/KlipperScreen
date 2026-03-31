@@ -518,18 +518,19 @@ class ToolchangerPanel:
 
         spool_click = Gtk.EventBox()
         spool_click.set_visible_window(False)
-        spool_click.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-        spool_click.set_above_child(False)
+        spool_click.add_events(Gdk.EventMask.BUTTON_PRESS_MASK | Gdk.EventMask.BUTTON_RELEASE_MASK)
         spool_click.set_size_request(110, 110)
 
         spool_area = Gtk.DrawingArea()
         spool_area.set_size_request(110, 110)
         spool_area.connect("draw", self._draw_spool, state.index)
         spool_click.add(spool_area)
-        spool_click.connect(
-            "button-press-event",
-            lambda _w, _e, idx=state.index: (self._show_spool_assign_popup(idx), True)[1],
-        )
+
+        def on_spool_click(_widget: Gtk.Widget, _event: Gdk.EventButton, idx: int = state.index) -> bool:
+            self._show_spool_assign_popup(idx)
+            return True
+
+        spool_click.connect("button-release-event", on_spool_click)
 
         spool_wrap = box(Gtk.Orientation.HORIZONTAL, 0)
         spool_wrap.set_halign(Gtk.Align.CENTER)
@@ -1070,11 +1071,12 @@ class ToolchangerPanel:
 
         outer = box(spacing=14)
         outer.get_style_context().add_class("tc-popup")
-        outer.set_size_request(360, 260)
-        outer.set_margin_top(18)
-        outer.set_margin_bottom(18)
-        outer.set_margin_start(18)
-        outer.set_margin_end(18)
+        outer.set_size_request(320, 220)
+        outer.set_margin_top(0)
+        outer.set_margin_bottom(0)
+        outer.set_margin_start(0)
+        outer.set_margin_end(0)
+        outer.set_border_width(16)
 
         header = Gtk.Label(label="SELECT TOOL")
         header.get_style_context().add_class("tc-tool-label")
@@ -1087,12 +1089,12 @@ class ToolchangerPanel:
         row = box(Gtk.Orientation.HORIZONTAL, 14)
         row.set_halign(Gtk.Align.CENTER)
         row.set_valign(Gtk.Align.CENTER)
-        row.set_vexpand(True)
+        row.set_vexpand(False)
 
         for state in self._tool_states:
             btn = Gtk.Button()
             btn.get_style_context().add_class("tc-btn-select")
-            btn.set_size_request(120, 120)
+            btn.set_size_request(110, 110)
             btn.set_relief(Gtk.ReliefStyle.NONE)
             btn.set_focus_on_click(False)
 
@@ -1126,7 +1128,7 @@ class ToolchangerPanel:
         outer.pack_start(row, True, True, 0)
 
         cancel = button("CANCEL", "tc-btn-global", lambda _w: popup.destroy())
-        cancel.set_size_request(180, 46)
+        cancel.set_size_request(160, 42)
         cancel.set_halign(Gtk.Align.CENTER)
         outer.pack_start(cancel, False, False, 0)
 
