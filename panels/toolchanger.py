@@ -219,7 +219,7 @@ def make_css(theme: Dict[str, str]) -> bytes:
 
     css = f"""
 .tc-root {{ background-color: {theme['bg']}; }}
-.tc-card { background-color: {theme['card']}; border-radius: 14px; border: 2px solid {theme['card_border']}; }
+.tc-card {{ background-color: {theme['card']}; border-radius: 14px; border: 2px solid {theme['card_border']}; }}
 .tc-card-active {{ background-color: {theme['card']}; border-radius: 14px; border: 3px solid {accent}; }}
 .tc-tool-label {{ color: {accent}; font-size: 18px; font-weight: 800; }}
 .tc-mat-label {{ color: {theme['text']}; font-size: 16px; font-weight: 800; }}
@@ -227,10 +227,10 @@ def make_css(theme: Dict[str, str]) -> bytes:
 .tc-temp-label {{ color: {theme['text']}; font-size: 26px; font-weight: 800; padding: 4px; }}
 .tc-bottom-bar {{ background-color: {theme['bar_bg']}; border-top: 1px solid {theme['card_border']}; }}
 .tc-btn-global {{ background: {theme['btn_bg']}; color: {theme['text']}; border-radius: 8px; font-size: 12px; font-weight: 700; border: 1px solid {theme['btn_border']}; }}
-.tc-btn-select { background: {accent_dark}; color: {btn_text}; border-radius: 8px; font-size: 12px; font-weight: 800; border: 1px solid {accent}; }
+.tc-btn-select {{ background: {accent_dark}; color: {btn_text}; border-radius: 8px; font-size: 12px; font-weight: 800; border: 1px solid {accent}; }}
 .tc-badge-active {{ background-color: #003a20; color: #00ff88; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #00cc66; }}
 .tc-badge-heating {{ background-color: #3f2700; color: #ffbf40; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #ffb020; }}
-.tc-badge-parked { background-color: {theme['btn_bg']}; color: {theme['text']}; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid {theme['btn_border']}; }
+.tc-badge-parked {{ background-color: {theme['btn_bg']}; color: {theme['text']}; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid {theme['btn_border']}; }}
 .tc-badge-error {{ background-color: #3a0a0a; color: #ff4444; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #aa2222; }}
 .tc-badge-changing {{ background-color: #002a4a; color: #44c8ff; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #44c8ff; }}
 .tc-popup {{ background-color: {theme['card']}; border: 2px solid {accent}; border-radius: 15px; }}
@@ -1028,7 +1028,7 @@ class ToolchangerPanel:
         layout.set_margin_start(15)
         layout.set_margin_end(15)
 
-        value_label = Gtk.Label(label=f"{int(state.target)} C")
+        value_label = Gtk.Label(label=f"{int(state.target)} °C")
         value_label.get_style_context().add_class("tc-temp-label")
 
         adjustment = Gtk.Adjustment(value=state.target, lower=0, upper=310, step_increment=1, page_increment=10)
@@ -1036,7 +1036,7 @@ class ToolchangerPanel:
         slider.set_inverted(True)
         slider.set_vexpand(True)
         slider.set_draw_value(False)
-        slider.connect("value-changed", lambda s: value_label.set_text(f"{int(s.get_value())} C"))
+        slider.connect("value-changed", lambda s: value_label.set_text(f"{int(s.get_value())} °C"))
 
         slider_box = box(spacing=10)
         slider_box.pack_start(value_label, False, False, 0)
@@ -1350,7 +1350,7 @@ class ToolchangerPanel:
         layout.set_margin_end(15)
 
         default = 200
-        value_label = Gtk.Label(label=f"{default} C")
+        value_label = Gtk.Label(label=f"{default} °C")
         value_label.get_style_context().add_class("tc-temp-label")
 
         adjustment = Gtk.Adjustment(value=default, lower=0, upper=310, step_increment=1, page_increment=10)
@@ -1358,7 +1358,7 @@ class ToolchangerPanel:
         slider.set_inverted(True)
         slider.set_vexpand(True)
         slider.set_draw_value(False)
-        slider.connect("value-changed", lambda s: value_label.set_text(f"{int(s.get_value())} C"))
+        slider.connect("value-changed", lambda s: value_label.set_text(f"{int(s.get_value())} °C"))
 
         left = box(spacing=10)
         left.pack_start(value_label, False, False, 0)
