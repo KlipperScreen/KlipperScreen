@@ -5,16 +5,10 @@
 ToolchangerPanel rewritten from scratch with a cleaner architecture, safer polling,
 and stricter separation between bg I/O and GTK UI updates.
 
-Key goals:
-- Single polling loop instead of unbounded thread creation
-- Centralized network access helpers with timeouts and validation
-- Safer GTK interaction via GLib.idle_add only
-- Better theme derivation for custom themes
-- Improved status/badge model (ACTIVE / HEATING / PARKED / ERROR / OFFLINE)
-- Popup lifecycle tracking to avoid popup stacking
-- More structured code while preserving the original feature set
-
-This file is intended to be dropped in as a replacement panel module.
+Updated to use KlipperScreen/Moonraker's shared Spoolman proxy instead of a
+panel-local Spoolman URL. This removes the broken custom Spoolman IP handling
+and reuses the same configured Spoolman connection that the built-in
+KlipperScreen Spoolman panel uses.
 """
 
 from __future__ import annotations
@@ -26,8 +20,7 @@ import math
 import os
 import queue
 import threading
-import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional
 
 import requests
@@ -37,11 +30,9 @@ from gi.repository import Gdk, GLib, Gtk
 
 
 MOONRAKER = "http://localhost:7125"
-DEFAULT_SPOOLMAN = "http://192.168.88.135:7912/api/v1"
 CONFIG_PATH = os.path.expanduser("~/.toolchanger_settings.json")
 POLL_INTERVAL_SECONDS = 1.0
 REQUEST_TIMEOUT_MOONRAKER = 1.0
-REQUEST_TIMEOUT_SPOOLMAN = 1.25
 
 
 # -----------------------------------------------------------------------------
@@ -162,8 +153,6 @@ BASE_THEMES: Dict[str, Dict[str, str]] = {
         "bar_bg": "#060f18",
         "btn_bg": "#0d1e2e",
     },
-
-    # --- New themes ---
     "Sunset": {
         "bg": "#2a0f0f",
         "card": "#3a1a1a",
@@ -199,7 +188,7 @@ def derive_theme_fields(base: Dict[str, str]) -> Dict[str, str]:
     bar_bg = normalize_hex(base["bar_bg"])
     btn_bg = normalize_hex(base["btn_bg"])
 
-    theme = {
+    return {
         "bg": bg,
         "card": card,
         "card_border": mix_colors(card, accent, 0.28),
@@ -215,7 +204,6 @@ def derive_theme_fields(base: Dict[str, str]) -> Dict[str, str]:
         "ok": "#12d67a",
         "muted": mix_colors(text, bg, 0.55),
     }
-    return theme
 
 
 THEMES = {name: derive_theme_fields(values) for name, values in BASE_THEMES.items()}
@@ -223,10 +211,8 @@ THEMES = {name: derive_theme_fields(values) for name, values in BASE_THEMES.item
 
 def make_css(theme: Dict[str, str]) -> bytes:
     accent = theme["accent"]
-    accent_dark = theme["accent_dark"]
     btn_text = "#001820" if luminance(accent) > 0.45 else theme["text"]
 
-    # IMPORTANT: all CSS braces must be doubled {{ }} so f-string doesn't break
     css = f"""
 .tc-root {{ background-color: {theme['bg']}; }}
 .tc-card {{ background-color: {theme['card']}; border-radius: 14px; border: 1px solid {theme['card_border']}; }}
@@ -236,16 +222,13 @@ def make_css(theme: Dict[str, str]) -> bytes:
 .tc-mat-label-empty {{ color: {theme['text']}; font-size: 16px; font-weight: 800; }}
 .tc-temp-label {{ color: {theme['text']}; font-size: 26px; font-weight: 800; padding: 4px; }}
 .tc-bottom-bar {{ background-color: {theme['bar_bg']}; border-top: 1px solid {theme['card_border']}; }}
-
 .tc-btn-global {{ background: {theme['btn_bg']}; color: {theme['text']}; border-radius: 8px; font-size: 12px; font-weight: 700; border: 1px solid {theme['btn_border']}; }}
 .tc-btn-select {{ background: {accent}; color: {btn_text}; border-radius: 8px; font-size: 12px; font-weight: 800; border: 1px solid {accent}; }}
-
 .tc-badge-active {{ background-color: #003a20; color: #00ff88; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #00cc66; }}
 .tc-badge-heating {{ background-color: #3f2700; color: #ffbf40; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #ffb020; }}
 .tc-badge-parked {{ background-color: #e0e0e0; color: #555555; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #c0c0c0; }}
 .tc-badge-error {{ background-color: #3a0a0a; color: #ff4444; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #aa2222; }}
 .tc-badge-changing {{ background-color: #002a4a; color: #44c8ff; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #44c8ff; }}
-
 .tc-popup {{ background-color: {theme['card']}; border: 2px solid {accent}; border-radius: 15px; }}
 """
     return css.encode("utf-8")
@@ -284,8 +267,6 @@ class ToolState:
             return "OFFLINE"
         if self.spool_error:
             return "ERROR"
-
-        # PATCH: explicit error state from KTC
         if self.ktc_state == "error":
             return "ERROR"
         if self.ktc_state == "active":
@@ -294,17 +275,14 @@ class ToolState:
             return "CHANGING"
         if self.ktc_state == "docked":
             return "PARKED"
-
         if self.is_heating:
             return "HEATING"
-
         return "UNKNOWN"
 
     @property
     def status_css(self) -> str:
         if not self.reachable or self.spool_error:
             return "tc-badge-error"
-        # PATCH: explicit error state from KTC
         if self.ktc_state == "error":
             return "tc-badge-error"
         if self.ktc_state == "active":
@@ -385,7 +363,6 @@ class ToolchangerPanel:
         self.num_tools = max(1, min(4, int(config.get("num_tools", 2))))
         self._theme_name = config.get("theme", "Ocean")
         self._custom = config.get("custom")
-        self._spoolman_url = self._normalize_spoolman_url(config.get("spoolman_url", ""))
         self._theme = self._resolve_theme()
         self._apply_theme()
 
@@ -417,7 +394,6 @@ class ToolchangerPanel:
             "num_tools": self.num_tools,
             "theme": self._theme_name,
             "custom": self._custom,
-            "spoolman_url": self._spoolman_url,
         }
         try:
             with open(CONFIG_PATH, "w", encoding="utf-8") as handle:
@@ -436,25 +412,7 @@ class ToolchangerPanel:
     def _apply_theme(self) -> None:
         self._theme = self._resolve_theme()
         self._css_provider.load_from_data(make_css(self._theme))
-    
-    def _normalize_spoolman_url(self, value: Any) -> str:
-        raw = str(value or "").strip()
-        if not raw:
-            return ""
-    
-        if not raw.startswith(("http://", "https://")):
-            raw = f"http://{raw}"
-    
-        raw = raw.rstrip("/")
-    
-        if not raw.endswith("/api/v1"):
-            raw = f"{raw}/api/v1"
-    
-        return raw
-    
-    
-    def _effective_spoolman_url(self) -> str:
-        return self._spoolman_url or DEFAULT_SPOOLMAN
+
     # ------------------------------------------------------------------
     # Root layout
     # ------------------------------------------------------------------
@@ -463,10 +421,12 @@ class ToolchangerPanel:
         root = box(spacing=0)
         root.get_style_context().add_class("tc-root")
         root.set_size_request(800, 480)
+        root.set_vexpand(True)
 
         wrap = box(Gtk.Orientation.HORIZONTAL, 0)
         wrap.set_halign(Gtk.Align.CENTER)
         wrap.set_valign(Gtk.Align.CENTER)
+        wrap.set_vexpand(True)
 
         self.card_area = box(Gtk.Orientation.HORIZONTAL, 15)
         wrap.add(self.card_area)
@@ -475,7 +435,8 @@ class ToolchangerPanel:
         bar = box(Gtk.Orientation.HORIZONTAL, 6)
         bar.get_style_context().add_class("tc-bottom-bar")
         bar.set_size_request(800, 72)
-        bar.set_halign(Gtk.Align.CENTER)
+        bar.set_halign(Gtk.Align.FILL)
+        bar.set_valign(Gtk.Align.END)
 
         controls = box(Gtk.Orientation.HORIZONTAL, 6)
         controls.set_margin_top(6)
@@ -526,9 +487,6 @@ class ToolchangerPanel:
         frame = box(spacing=5)
         frame.get_style_context().add_class("tc-card")
         frame.set_size_request(185, 320)
-
-        # PATCH: tool card itself is no longer clickable for selection.
-        # This avoids interfering with the dedicated spool and temperature controls.
 
         inner = box(spacing=2)
         inner.set_margin_top(8)
@@ -708,10 +666,6 @@ class ToolchangerPanel:
         cr.arc(cx, cy, hub + 2, 0, full)
         cr.stroke()
 
-        # Removed center fill for active tool so percentage text remains visible
-        if state.active:
-            pass
-
         cr.set_source_rgba(0, 0, 0, 0.4)
         cr.set_line_width(1.5)
         for angle in [0, full / 3, full * 2 / 3]:
@@ -759,37 +713,35 @@ class ToolchangerPanel:
         query = "&".join(heater_objects + ["save_variables", "toolhead", "toolchanger"] + tool_objects)
         url = f"{MOONRAKER}/printer/objects/query?{query}"
 
-        last_error = None
         for _ in range(2):
             try:
                 response = self._session.get(url, timeout=REQUEST_TIMEOUT_MOONRAKER)
                 response.raise_for_status()
                 payload = response.json()
                 return payload.get("result", {}).get("status", {})
-            except Exception as exc:
-                last_error = exc
+            except Exception:
+                pass
+        return None
+
+    def _spoolman_proxy_get(self, path: str) -> Any:
+        try:
+            result = self._screen.apiclient.post_request(
+                "server/spoolman/proxy",
+                json={
+                    "request_method": "GET",
+                    "path": path,
+                },
+            )
+            if isinstance(result, dict):
+                return result.get("result")
+        except Exception:
+            pass
         return None
 
     def _spoolman_list(self) -> List[Dict[str, Any]]:
-        try:
-            response = self._session.get(f"{self._effective_spoolman_url()}/spool", timeout=REQUEST_TIMEOUT_SPOOLMAN)
-            response.raise_for_status()
-            payload = response.json()
-        except Exception:
+        items = self._spoolman_proxy_get("/v1/spool?allow_archived=false")
+        if not isinstance(items, list):
             return []
-
-        if isinstance(payload, list):
-            items = payload
-        elif isinstance(payload, dict):
-            if isinstance(payload.get("result"), list):
-                items = payload["result"]
-            elif isinstance(payload.get("items"), list):
-                items = payload["items"]
-            else:
-                items = []
-        else:
-            items = []
-
         try:
             items = sorted(items, key=lambda item: int(item.get("id", 0)))
         except Exception:
@@ -799,13 +751,19 @@ class ToolchangerPanel:
     def _spoolman_get_spool(self, spool_id: int) -> Optional[Dict[str, Any]]:
         if not spool_id:
             return None
+        item = self._spoolman_proxy_get(f"/v1/spool/{spool_id}")
+        return item if isinstance(item, dict) else None
+
+    def _set_active_spoolman_spool(self, spool_id: Optional[int]) -> bool:
         try:
-            response = self._session.get(f"{self._effective_spoolman_url()}/spool/{spool_id}", timeout=REQUEST_TIMEOUT_SPOOLMAN)
-            response.raise_for_status()
-            payload = response.json()
-            return payload if isinstance(payload, dict) else None
+            payload = {} if not spool_id else {"spool_id": int(spool_id)}
+            result = self._screen.apiclient.post_request(
+                "server/spoolman/spool_id",
+                json=payload,
+            )
+            return bool(result)
         except Exception:
-            return None
+            return False
 
     # ------------------------------------------------------------------
     # Polling and snapshots
@@ -839,9 +797,6 @@ class ToolchangerPanel:
         tc_status = status.get("toolchanger", {}) or {}
         tc_status_str = str(tc_status.get("status", "ready")).lower()
         tc_active_tool = tc_status.get("tool_number", -1)
-
-        # PATCH: only treat "changing" as a change in progress;
-        # "error", "unknown", etc. are handled explicitly below.
         tc_is_changing = tc_status_str == "changing"
 
         for state in base_states:
@@ -853,7 +808,6 @@ class ToolchangerPanel:
             tool_obj = status.get(f"tool T{state.index}", {}) or {}
             tool_active = tool_obj.get("active", None)
 
-            # PATCH: explicit error branch first, then changing, then per-tool active flag
             if tc_status_str == "error":
                 state.ktc_state = "error"
             elif tc_is_changing and tc_active_tool == state.index:
@@ -992,10 +946,8 @@ class ToolchangerPanel:
             self._show_message(f"Tool {tool_index + 1} is in error state")
             return
 
-        # Instant UI feedback
         state.ktc_state = "changing"
         GLib.idle_add(self._apply_snapshot, RuntimeSnapshot(self._tool_states))
-
         self._queue_gcode(f"T{tool_index}")
 
     # ------------------------------------------------------------------
@@ -1091,11 +1043,7 @@ class ToolchangerPanel:
                 self._select_tool(idx)
                 popup.destroy()
 
-            b = button(
-                f"T{state.index}",
-                "tc-btn-select",
-                on_pick,
-            )
+            b = button(f"T{state.index}", "tc-btn-select", on_pick)
             b.set_size_request(100, 100)
             row.pack_start(b, False, False, 0)
 
@@ -1159,6 +1107,7 @@ class ToolchangerPanel:
         def assign_spool(spool_id: int) -> None:
             self._queue_gcode(f"SAVE_VARIABLE VARIABLE=t{tool_index}__spool_id VALUE={spool_id}")
             self._queue_gcode(f"SET_GCODE_VARIABLE MACRO=T{tool_index} VARIABLE=spool_id VALUE={spool_id}")
+            self._set_active_spoolman_spool(spool_id)
             popup.destroy()
 
         def build_row(spool: Dict[str, Any]) -> Gtk.Button:
@@ -1213,7 +1162,6 @@ class ToolchangerPanel:
             row.pack_start(color_da, False, False, 0)
 
             text_box = box(spacing=2)
-
             name_label = Gtk.Label()
             name_label.set_xalign(0)
             name_label.get_style_context().add_class("tc-spool-name")
@@ -1278,6 +1226,7 @@ class ToolchangerPanel:
     def _clear_spool_assignment(self, tool_index: int, popup: Gtk.Window) -> None:
         self._queue_gcode(f"SAVE_VARIABLE VARIABLE=t{tool_index}__spool_id VALUE=0")
         self._queue_gcode(f"SET_GCODE_VARIABLE MACRO=T{tool_index} VARIABLE=spool_id VALUE=0")
+        self._set_active_spoolman_spool(None)
         popup.destroy()
 
     def _show_settings(self, _widget: Gtk.Widget) -> None:
@@ -1285,7 +1234,7 @@ class ToolchangerPanel:
 
         outer = box(spacing=16)
         outer.get_style_context().add_class("tc-popup")
-        outer.set_size_request(520, 320)
+        outer.set_size_request(520, 260)
         outer.set_margin_top(20)
         outer.set_margin_bottom(20)
         outer.set_margin_start(20)
@@ -1304,7 +1253,6 @@ class ToolchangerPanel:
             ("TOOL COUNT", lambda _w: (popup.destroy(), self._show_tool_count())),
             ("PID TUNE", lambda _w: (popup.destroy(), self._show_pid_select())),
             ("THEME", lambda _w: (popup.destroy(), self._show_theme())),
-            ("SPOOLMAN", lambda _w: (popup.destroy(), self._show_spoolman_settings())),
         ]
 
         for idx, (label, callback) in enumerate(actions):
@@ -1319,141 +1267,6 @@ class ToolchangerPanel:
 
         popup.add(outer)
         popup.show_all()
-
-    def _show_spoolman_settings(self) -> None:
-        popup = self._register_popup(popup_window(self._screen))
-
-        outer = box(Gtk.Orientation.HORIZONTAL, 16)
-        outer.get_style_context().add_class("tc-popup")
-        outer.set_size_request(900, 320)
-        outer.set_margin_top(20)
-        outer.set_margin_bottom(20)
-        outer.set_margin_start(20)
-        outer.set_margin_end(20)
-
-        left = box(spacing=14)
-        left.set_size_request(520, 260)
-
-        header = Gtk.Label(label="SPOOLMAN SETTINGS")
-        header.get_style_context().add_class("tc-tool-label")
-        left.pack_start(header, False, False, 0)
-
-        info = Gtk.Label(
-            label="Enter the Spoolman server URL. Leave blank to use the default address."
-        )
-        info.set_line_wrap(True)
-        info.set_max_width_chars(40)
-        info.set_xalign(0)
-        info.get_style_context().add_class("tc-mat-label-empty")
-        left.pack_start(info, False, False, 0)
-
-        entry = Gtk.Entry()
-        entry.set_placeholder_text(DEFAULT_SPOOLMAN)
-        entry.set_text(self._spoolman_url)
-        left.pack_start(entry, False, False, 0)
-
-        current_label = Gtk.Label(label=f"Default: {DEFAULT_SPOOLMAN}")
-        current_label.set_line_wrap(True)
-        current_label.set_max_width_chars(40)
-        current_label.set_xalign(0)
-        current_label.get_style_context().add_class("tc-mat-label-empty")
-        left.pack_start(current_label, False, False, 0)
-
-        def insert_text(value: str) -> None:
-            position = entry.get_position()
-            entry.insert_text(value, position)
-            entry.set_position(position + len(value))
-            entry.grab_focus()
-
-        def backspace_text(_w: Gtk.Widget) -> None:
-            text = entry.get_text()
-            position = entry.get_position()
-            if position > 0:
-                entry.delete_text(position - 1, position)
-                entry.set_position(position - 1)
-            entry.grab_focus()
-
-        def clear_text(_w: Gtk.Widget) -> None:
-            entry.set_text("")
-            entry.grab_focus()
-
-        def save_spoolman(_w: Gtk.Widget) -> None:
-            self._spoolman_url = self._normalize_spoolman_url(entry.get_text())
-            self._save_config()
-            popup.destroy()
-
-        button_row = box(Gtk.Orientation.HORIZONTAL, 10)
-        button_row.set_halign(Gtk.Align.CENTER)
-
-        save_btn = button("SAVE", "tc-btn-select", save_spoolman)
-        save_btn.set_size_request(130, 48)
-
-        clear_btn = button(
-            "USE DEFAULT",
-            "tc-btn-global",
-            lambda _w: (entry.set_text(""), entry.grab_focus()),
-        )
-        clear_btn.set_size_request(130, 48)
-
-        back_btn = button(
-            "BACK",
-            "tc-btn-global",
-            lambda _w: (popup.destroy(), self._show_settings(None)),
-        )
-        back_btn.set_size_request(130, 48)
-
-        button_row.pack_start(save_btn, False, False, 0)
-        button_row.pack_start(clear_btn, False, False, 0)
-        button_row.pack_start(back_btn, False, False, 0)
-        left.pack_end(button_row, False, False, 0)
-
-        keypad_wrap = box(spacing=8)
-        keypad_wrap.set_size_request(320, 260)
-
-        keypad_header = Gtk.Label(label="KEYPAD")
-        keypad_header.get_style_context().add_class("tc-tool-label")
-        keypad_wrap.pack_start(keypad_header, False, False, 0)
-
-        keypad = Gtk.Grid()
-        keypad.set_row_spacing(8)
-        keypad.set_column_spacing(8)
-        keypad.set_halign(Gtk.Align.CENTER)
-
-        keys = [
-            "7", "8", "9", ".",
-            "4", "5", "6", ":",
-            "1", "2", "3", "/",
-            "0", "http://", "https://", "api/v1",
-        ]
-
-        for idx, value in enumerate(keys):
-            btn = button(value, "tc-btn-global", lambda _w, v=value: insert_text(v))
-            btn.set_size_request(72, 52)
-            keypad.attach(btn, idx % 4, idx // 4, 1, 1)
-
-        row2 = box(Gtk.Orientation.HORIZONTAL, 8)
-        row2.set_halign(Gtk.Align.CENTER)
-
-        del_btn = button("⌫", "tc-btn-global", backspace_text)
-        del_btn.set_size_request(98, 52)
-        clr_btn = button("CLEAR", "tc-btn-global", clear_text)
-        clr_btn.set_size_request(98, 52)
-        slash_btn = button(".local", "tc-btn-global", lambda _w: insert_text('.local'))
-        slash_btn.set_size_request(98, 52)
-
-        row2.pack_start(del_btn, False, False, 0)
-        row2.pack_start(clr_btn, False, False, 0)
-        row2.pack_start(slash_btn, False, False, 0)
-
-        keypad_wrap.pack_start(keypad, False, False, 0)
-        keypad_wrap.pack_start(row2, False, False, 0)
-
-        outer.pack_start(left, True, True, 0)
-        outer.pack_start(keypad_wrap, False, False, 0)
-
-        popup.add(outer)
-        popup.show_all()
-        entry.grab_focus()
 
     def _show_tool_count(self) -> None:
         popup = self._register_popup(popup_window(self._screen))
