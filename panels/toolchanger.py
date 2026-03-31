@@ -1411,8 +1411,11 @@ class ToolchangerPanel:
         for idx, (name, theme) in enumerate(THEMES.items()):
             col, row = idx % 3, idx // 3
 
-            card = box(spacing=4)
-            card.set_halign(Gtk.Align.CENTER)
+            theme_button = Gtk.Button()
+            theme_button.set_relief(Gtk.ReliefStyle.NONE)
+            theme_button.set_focus_on_click(False)
+            theme_button.set_can_focus(False)
+            theme_button.get_style_context().add_class("flat")
 
             da = Gtk.DrawingArea()
             da.set_size_request(150, 52)
@@ -1459,24 +1462,18 @@ class ToolchangerPanel:
 
             da.connect("draw", draw_swatch)
             swatches[name] = da
+            theme_button.add(da)
 
-            click = Gtk.EventBox()
-            click.set_visible_window(False)
-            click.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-            click.add(da)
-
-            def on_pick(_w: Gtk.Widget, _e: Gdk.EventButton, theme_name: str = name) -> bool:
+            def on_pick(_w: Gtk.Widget, theme_name: str = name) -> None:
                 self._theme_name = theme_name
                 self._custom = None
                 self._apply_theme()
                 self._save_config()
                 for area in swatches.values():
                     area.queue_draw()
-                return True
 
-            click.connect("button-press-event", on_pick)
-            card.pack_start(click, False, False, 0)
-            grid.attach(card, col, row, 1, 1)
+            theme_button.connect("clicked", on_pick)
+            grid.attach(theme_button, col, row, 1, 1)
 
         outer.pack_start(grid, True, True, 0)
 
