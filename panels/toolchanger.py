@@ -515,33 +515,24 @@ class ToolchangerPanel:
         temp_event.connect("button-press-event", lambda _w, _e, idx=state.index: self._show_temp_popup(idx))
         inner.pack_start(temp_event, False, False, 0)
 
-        spool_button = Gtk.Button()
-        spool_button.get_style_context().add_class("tc-spool-btn")
-        spool_button.set_relief(Gtk.ReliefStyle.NONE)
-        spool_button.set_focus_on_click(False)
-        spool_button.set_size_request(110, 110)
-        spool_button.set_can_focus(False)
-        spool_button.set_always_show_image(False)
-        spool_button.set_image_position(Gtk.PositionType.LEFT)
-
-        spool_ctx = spool_button.get_style_context()
-        spool_ctx.add_class("flat")
-        try:
-            spool_ctx.remove_class("button")
-        except Exception:
-            pass
-
-        spool_button.set_border_width(0)
+        spool_click = Gtk.EventBox()
+        spool_click.set_visible_window(False)
+        spool_click.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        spool_click.set_above_child(False)
+        spool_click.set_size_request(110, 110)
 
         spool_area = Gtk.DrawingArea()
         spool_area.set_size_request(110, 110)
         spool_area.connect("draw", self._draw_spool, state.index)
-        spool_button.add(spool_area)
-        spool_button.connect("clicked", lambda _w, idx=state.index: self._show_spool_assign_popup(idx))
+        spool_click.add(spool_area)
+        spool_click.connect(
+            "button-press-event",
+            lambda _w, _e, idx=state.index: (self._show_spool_assign_popup(idx), True)[1],
+        )
 
         spool_wrap = box(Gtk.Orientation.HORIZONTAL, 0)
         spool_wrap.set_halign(Gtk.Align.CENTER)
-        spool_wrap.pack_start(spool_button, False, False, 0)
+        spool_wrap.pack_start(spool_click, False, False, 0)
         inner.pack_start(spool_wrap, True, True, 5)
 
         material = Gtk.Label(label="EMPTY")
