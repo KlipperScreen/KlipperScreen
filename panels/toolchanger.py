@@ -214,11 +214,12 @@ THEMES = {name: derive_theme_fields(values) for name, values in BASE_THEMES.item
 
 def make_css(theme: Dict[str, str]) -> bytes:
     accent = theme["accent"]
+    accent_dark = theme["accent_dark"]
     btn_text = "#001820" if luminance(accent) > 0.45 else theme["text"]
 
     css = f"""
 .tc-root {{ background-color: {theme['bg']}; }}
-.tc-card {{ background-color: {theme['card']}; border-radius: 14px; border: 1px solid {theme['card_border']}; }}
+.tc-card { background-color: {theme['card']}; border-radius: 14px; border: 2px solid {theme['card_border']}; }
 .tc-card-active {{ background-color: {theme['card']}; border-radius: 14px; border: 3px solid {accent}; }}
 .tc-tool-label {{ color: {accent}; font-size: 18px; font-weight: 800; }}
 .tc-mat-label {{ color: {theme['text']}; font-size: 16px; font-weight: 800; }}
@@ -226,10 +227,10 @@ def make_css(theme: Dict[str, str]) -> bytes:
 .tc-temp-label {{ color: {theme['text']}; font-size: 26px; font-weight: 800; padding: 4px; }}
 .tc-bottom-bar {{ background-color: {theme['bar_bg']}; border-top: 1px solid {theme['card_border']}; }}
 .tc-btn-global {{ background: {theme['btn_bg']}; color: {theme['text']}; border-radius: 8px; font-size: 12px; font-weight: 700; border: 1px solid {theme['btn_border']}; }}
-.tc-btn-select {{ background: {accent}; color: {btn_text}; border-radius: 8px; font-size: 12px; font-weight: 800; border: 1px solid {accent}; }}
+.tc-btn-select { background: {accent_dark}; color: {btn_text}; border-radius: 8px; font-size: 12px; font-weight: 800; border: 1px solid {accent}; }
 .tc-badge-active {{ background-color: #003a20; color: #00ff88; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #00cc66; }}
 .tc-badge-heating {{ background-color: #3f2700; color: #ffbf40; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #ffb020; }}
-.tc-badge-parked {{ background-color: #e0e0e0; color: #555555; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #c0c0c0; }}
+.tc-badge-parked { background-color: {theme['btn_bg']}; color: {theme['text']}; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid {theme['btn_border']}; }
 .tc-badge-error {{ background-color: #3a0a0a; color: #ff4444; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #aa2222; }}
 .tc-badge-changing {{ background-color: #002a4a; color: #44c8ff; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #44c8ff; }}
 .tc-popup {{ background-color: {theme['card']}; border: 2px solid {accent}; border-radius: 15px; }}
@@ -509,7 +510,7 @@ class ToolchangerPanel:
 
         temp_event = Gtk.EventBox()
         temp_event.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-        temp_label = Gtk.Label(label="--C")
+        temp_label = Gtk.Label(label="--°C")
         temp_label.get_style_context().add_class("tc-temp-label")
         temp_event.add(temp_label)
         temp_event.connect("button-press-event", lambda _w, _e, idx=state.index: self._show_temp_popup(idx))
@@ -895,7 +896,7 @@ class ToolchangerPanel:
                 continue
 
             widgets.temp.set_text(
-                f"{state.temperature:.0f}C" + (f" / {state.target:.0f}" if state.target > 0 else "")
+                f"{state.temperature:.0f}°C" + (f" / {state.target:.0f}°" if state.target > 0 else "")
             )
             widgets.mat.set_text(state.material)
 
