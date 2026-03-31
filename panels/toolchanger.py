@@ -1111,7 +1111,7 @@ class ToolchangerPanel:
         header_box.pack_start(subtitle, False, False, 0)
         outer.pack_start(header_box, False, False, 0)
 
-        cards_row = box(Gtk.Orientation.HORIZONTAL, 12)
+        cards_row = box(Gtk.Orientation.HORIZONTAL, 18)
         cards_row.set_halign(Gtk.Align.CENTER)
         cards_row.set_valign(Gtk.Align.CENTER)
         cards_row.set_hexpand(True)
@@ -1125,16 +1125,16 @@ class ToolchangerPanel:
             card_button = Gtk.Button()
             card_button.set_relief(Gtk.ReliefStyle.NONE)
             card_button.get_style_context().add_class("tc-popup-flat-btn")
-            card_button.set_size_request(200, 160)
+            card_button.set_size_request(185, 170)
             card_button.connect("clicked", on_pick)
 
-            card = box(spacing=5)
+            card = box(spacing=6)
             card.set_halign(Gtk.Align.CENTER)
             card.set_valign(Gtk.Align.CENTER)
-            card.set_margin_top(10)
-            card.set_margin_bottom(10)
-            card.set_margin_start(10)
-            card.set_margin_end(10)
+            card.set_margin_top(12)
+            card.set_margin_bottom(12)
+            card.set_margin_start(12)
+            card.set_margin_end(12)
 
             card_ctx = card.get_style_context()
             if state.active:
@@ -1142,56 +1142,74 @@ class ToolchangerPanel:
             else:
                 card_ctx.add_class("tc-popup-card")
 
-            top = box(Gtk.Orientation.VERTICAL, 4)
-            top.set_halign(Gtk.Align.CENTER)
-
             tool_label = Gtk.Label(label=f"T{state.index}")
             tool_label.get_style_context().add_class("tc-popup-card-title")
             tool_label.set_xalign(0.5)
             tool_label.set_justify(Gtk.Justification.CENTER)
+            card.pack_start(tool_label, False, False, 0)
 
-            badge = Gtk.Label(label=state.status_label)
-            badge.get_style_context().add_class(state.status_css)
+            spool_logo = Gtk.DrawingArea()
+            spool_logo.set_size_request(44, 44)
 
-            top.pack_start(tool_label, False, False, 0)
-            top.pack_start(badge, False, False, 0)
-            card.pack_start(top, False, False, 0)
+            def draw_mini_spool(widget: Gtk.DrawingArea, cr: cairo.Context, s: ToolState = state) -> bool:
+                w = widget.get_allocated_width()
+                h = widget.get_allocated_height()
+                cx = w / 2.0
+                cy = h / 2.0
+                outer_r = 16
+                inner_r = 9
+                hub_r = 4
+                color = normalize_hex(s.color_hex if s.spool_id else "#4a5675")
+                r, g, b = hex_to_rgb01(color)
+
+                cr.set_source_rgba(1, 1, 1, 0.08)
+                cr.set_line_width(8)
+                cr.arc(cx, cy, (outer_r + inner_r) / 2.0, 0, 2 * math.pi)
+                cr.stroke()
+
+                grad = cairo.LinearGradient(cx - outer_r, cy - outer_r, cx + outer_r, cy + outer_r)
+                grad.add_color_stop_rgb(0.0, min(1, r * 1.08 + 0.06), min(1, g * 1.08 + 0.06), min(1, b * 1.08 + 0.06))
+                grad.add_color_stop_rgb(1.0, max(0, r * 0.55), max(0, g * 0.55), max(0, b * 0.55))
+                cr.set_source(grad)
+                cr.set_line_width(7)
+                cr.arc(cx, cy, (outer_r + inner_r) / 2.0, 0, 2 * math.pi)
+                cr.stroke()
+
+                cr.set_source_rgba(0.15, 0.20, 0.32, 1.0)
+                cr.arc(cx, cy, inner_r, 0, 2 * math.pi)
+                cr.fill()
+
+                cr.set_source_rgba(1, 1, 1, 0.30)
+                cr.set_line_width(1.2)
+                cr.arc(cx, cy, outer_r, -1.9, -0.8)
+                cr.stroke()
+
+                cr.set_source_rgba(1, 1, 1, 0.22)
+                cr.set_line_width(1.0)
+                cr.arc(cx, cy, hub_r, 0, 2 * math.pi)
+                cr.stroke()
+
+                return False
+
+            spool_logo.connect("draw", draw_mini_spool)
+            card.pack_start(spool_logo, False, False, 0)
+
+            if state.spool_id:
+                filament_line = state.material
+            else:
+                filament_line = "EMPTY"
+
+            filament = Gtk.Label(label=filament_line)
+            filament.get_style_context().add_class("tc-popup-card-sub")
+            filament.set_xalign(0.5)
+            filament.set_justify(Gtk.Justification.CENTER)
+            card.pack_start(filament, False, False, 0)
 
             temp = Gtk.Label(label=f"{state.temperature:.0f}°C")
             temp.get_style_context().add_class("tc-popup-card-temp")
             temp.set_xalign(0.5)
             temp.set_justify(Gtk.Justification.CENTER)
             card.pack_start(temp, False, False, 0)
-
-            if state.spool_id:
-                spool_line = f"{state.material} • Spool {state.spool_id}"
-            else:
-                spool_line = "No spool assigned"
-
-            material = Gtk.Label(label=spool_line)
-            material.get_style_context().add_class("tc-popup-card-sub")
-            material.set_xalign(0.5)
-            material.set_justify(Gtk.Justification.CENTER)
-            material.set_line_wrap(True)
-            material.set_max_width_chars(20)
-            card.pack_start(material, False, False, 0)
-
-            if state.active:
-                hint_text = "Currently selected"
-            elif state.ktc_state == "changing":
-                hint_text = "Tool change in progress"
-            elif not state.spool_id:
-                hint_text = "Assign spool before use"
-            else:
-                hint_text = "Tap to activate"
-
-            hint_label = Gtk.Label(label=hint_text)
-            hint_label.get_style_context().add_class("tc-settings-meta")
-            hint_label.set_xalign(0.5)
-            hint_label.set_justify(Gtk.Justification.CENTER)
-            hint_label.set_line_wrap(True)
-            hint_label.set_max_width_chars(20)
-            card.pack_end(hint_label, False, False, 0)
 
             card_button.add(card)
             cards_row.pack_start(card_button, False, False, 0)
