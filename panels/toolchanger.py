@@ -242,6 +242,7 @@ def make_css(theme: Dict[str, str]) -> bytes:
 .tc-popup-card-sub {{ color: {theme['muted']}; font-size: 11px; font-weight: 700; }}
 .tc-popup-card-temp {{ color: {accent}; font-size: 20px; font-weight: 900; }}
 .tc-settings-meta {{ color: {theme['muted']}; font-size: 11px; font-weight: 700; }}
+.tc-popup-flat-btn, .tc-popup-flat-btn:hover, .tc-popup-flat-btn:active, .tc-popup-flat-btn:checked {{ background: transparent; background-image: none; border: none; box-shadow: none; padding: 0; }}
 """
     return css.encode("utf-8")
 
@@ -1096,14 +1097,15 @@ class ToolchangerPanel:
         outer.set_margin_end(16)
 
         header_box = box(spacing=2)
+        header_box.set_halign(Gtk.Align.CENTER)
 
         title = Gtk.Label(label="SELECT TOOL")
         title.get_style_context().add_class("tc-popup-title")
-        title.set_xalign(0)
+        title.set_xalign(0.5)
 
         subtitle = Gtk.Label(label="Tap a tool card to activate it.")
         subtitle.get_style_context().add_class("tc-popup-subtitle")
-        subtitle.set_xalign(0)
+        subtitle.set_xalign(0.5)
 
         header_box.pack_start(title, False, False, 0)
         header_box.pack_start(subtitle, False, False, 0)
@@ -1122,10 +1124,13 @@ class ToolchangerPanel:
 
             card_button = Gtk.Button()
             card_button.set_relief(Gtk.ReliefStyle.NONE)
+            card_button.get_style_context().add_class("tc-popup-flat-btn")
             card_button.set_size_request(200, 160)
             card_button.connect("clicked", on_pick)
 
-            card = box(spacing=4)
+            card = box(spacing=5)
+            card.set_halign(Gtk.Align.CENTER)
+            card.set_valign(Gtk.Align.CENTER)
             card.set_margin_top(10)
             card.set_margin_bottom(10)
             card.set_margin_start(10)
@@ -1137,22 +1142,25 @@ class ToolchangerPanel:
             else:
                 card_ctx.add_class("tc-popup-card")
 
-            top = box(Gtk.Orientation.HORIZONTAL, 6)
+            top = box(Gtk.Orientation.VERTICAL, 4)
+            top.set_halign(Gtk.Align.CENTER)
 
             tool_label = Gtk.Label(label=f"T{state.index}")
             tool_label.get_style_context().add_class("tc-popup-card-title")
-            tool_label.set_xalign(0)
+            tool_label.set_xalign(0.5)
+            tool_label.set_justify(Gtk.Justification.CENTER)
 
             badge = Gtk.Label(label=state.status_label)
             badge.get_style_context().add_class(state.status_css)
 
             top.pack_start(tool_label, False, False, 0)
-            top.pack_end(badge, False, False, 0)
+            top.pack_start(badge, False, False, 0)
             card.pack_start(top, False, False, 0)
 
             temp = Gtk.Label(label=f"{state.temperature:.0f}°C")
             temp.get_style_context().add_class("tc-popup-card-temp")
-            temp.set_xalign(0)
+            temp.set_xalign(0.5)
+            temp.set_justify(Gtk.Justification.CENTER)
             card.pack_start(temp, False, False, 0)
 
             if state.spool_id:
@@ -1162,7 +1170,8 @@ class ToolchangerPanel:
 
             material = Gtk.Label(label=spool_line)
             material.get_style_context().add_class("tc-popup-card-sub")
-            material.set_xalign(0)
+            material.set_xalign(0.5)
+            material.set_justify(Gtk.Justification.CENTER)
             material.set_line_wrap(True)
             material.set_max_width_chars(20)
             card.pack_start(material, False, False, 0)
@@ -1178,7 +1187,8 @@ class ToolchangerPanel:
 
             hint_label = Gtk.Label(label=hint_text)
             hint_label.get_style_context().add_class("tc-settings-meta")
-            hint_label.set_xalign(0)
+            hint_label.set_xalign(0.5)
+            hint_label.set_justify(Gtk.Justification.CENTER)
             hint_label.set_line_wrap(True)
             hint_label.set_max_width_chars(20)
             card.pack_end(hint_label, False, False, 0)
@@ -1379,79 +1389,51 @@ class ToolchangerPanel:
     def _show_settings(self, _widget: Gtk.Widget) -> None:
         popup = self._register_popup(popup_window(self._screen))
 
-        outer = box(spacing=10)
+        outer = box(spacing=12)
         outer.get_style_context().add_class("tc-popup")
-        outer.set_size_request(620, 300)
+        outer.set_size_request(560, 260)
         outer.set_margin_top(16)
         outer.set_margin_bottom(16)
         outer.set_margin_start(16)
         outer.set_margin_end(16)
 
         header_box = box(spacing=2)
+        header_box.set_halign(Gtk.Align.CENTER)
 
         header = Gtk.Label(label="SETTINGS")
         header.get_style_context().add_class("tc-popup-title")
-        header.set_xalign(0)
+        header.set_xalign(0.5)
 
-        subtitle = Gtk.Label(label="Choose a panel option.")
+        subtitle = Gtk.Label(label="Choose an option.")
         subtitle.get_style_context().add_class("tc-popup-subtitle")
-        subtitle.set_xalign(0)
+        subtitle.set_xalign(0.5)
 
         header_box.pack_start(header, False, False, 0)
         header_box.pack_start(subtitle, False, False, 0)
         outer.pack_start(header_box, False, False, 0)
 
-        tiles = box(Gtk.Orientation.HORIZONTAL, 14)
-        tiles.set_halign(Gtk.Align.CENTER)
-        tiles.set_valign(Gtk.Align.CENTER)
-        tiles.set_vexpand(True)
+        row = box(Gtk.Orientation.HORIZONTAL, 18)
+        row.set_halign(Gtk.Align.CENTER)
+        row.set_valign(Gtk.Align.CENTER)
+        row.set_vexpand(True)
 
         actions = [
-            ("PID TUNE", "Tune the selected tool heater", lambda _w: (popup.destroy(), self._show_pid_select())),
-            ("THEME", "Switch presets or build a custom theme", lambda _w: (popup.destroy(), self._show_theme())),
+            ("PID TUNE", lambda _w: (popup.destroy(), self._show_pid_select())),
+            ("THEME", lambda _w: (popup.destroy(), self._show_theme())),
         ]
 
-        for label, desc, callback in actions:
-            tile_button = Gtk.Button()
-            tile_button.set_relief(Gtk.ReliefStyle.NONE)
-            tile_button.set_size_request(230, 120)
-            tile_button.connect("clicked", callback)
+        for label, callback in actions:
+            b = button(label, "tc-btn-select", callback)
+            b.set_size_request(190, 90)
+            row.pack_start(b, False, False, 0)
 
-            tile = box(spacing=6)
-            tile.set_margin_top(12)
-            tile.set_margin_bottom(12)
-            tile.set_margin_start(12)
-            tile.set_margin_end(12)
-            tile.get_style_context().add_class("tc-popup-card")
-
-            title = Gtk.Label(label=label)
-            title.get_style_context().add_class("tc-popup-card-title")
-            title.set_xalign(0)
-
-            desc_label = Gtk.Label(label=desc)
-            desc_label.get_style_context().add_class("tc-popup-card-sub")
-            desc_label.set_xalign(0)
-            desc_label.set_line_wrap(True)
-            desc_label.set_max_width_chars(24)
-
-            cta = Gtk.Label(label="Tap to open")
-            cta.get_style_context().add_class("tc-settings-meta")
-            cta.set_xalign(0)
-
-            tile.pack_start(title, False, False, 0)
-            tile.pack_start(desc_label, True, True, 0)
-            tile.pack_end(cta, False, False, 0)
-
-            tile_button.add(tile)
-            tiles.pack_start(tile_button, False, False, 0)
-
-        outer.pack_start(tiles, True, True, 0)
+        outer.pack_start(row, True, True, 0)
 
         footer = box(Gtk.Orientation.HORIZONTAL, 10)
         footer.set_halign(Gtk.Align.CENTER)
 
         close = button("CLOSE", "tc-btn-global", lambda _w: popup.destroy())
-        close.set_size_request(160, 42)
+        close.set_size_request(150, 42)
         footer.pack_start(close, False, False, 0)
 
         outer.pack_start(footer, False, False, 0)
