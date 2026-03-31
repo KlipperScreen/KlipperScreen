@@ -325,6 +325,20 @@ def popup_window(parent: Gtk.Window) -> Gtk.Window:
     win.set_modal(True)
     win.set_decorated(False)
     win.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+    win.set_app_paintable(True)
+
+    visual = win.get_screen().get_rgba_visual() if win.get_screen() else None
+    if visual is not None:
+        win.set_visual(visual)
+
+    def draw_transparent(_widget: Gtk.Widget, cr: cairo.Context) -> bool:
+        cr.set_source_rgba(0, 0, 0, 0)
+        cr.set_operator(cairo.OPERATOR_SOURCE)
+        cr.paint()
+        cr.set_operator(cairo.OPERATOR_OVER)
+        return False
+
+    win.connect("draw", draw_transparent)
     return win
 
 
