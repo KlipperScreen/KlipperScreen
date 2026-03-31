@@ -517,19 +517,30 @@ class ToolchangerPanel:
         inner.pack_start(temp_event, False, False, 0)
 
         spool_click = Gtk.EventBox()
-        spool_click.set_visible_window(False)
-        spool_click.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-        spool_click.set_above_child(False)
+        spool_click.set_visible_window(True)
+        spool_click.add_events(
+            Gdk.EventMask.BUTTON_PRESS_MASK
+            | Gdk.EventMask.BUTTON_RELEASE_MASK
+            | Gdk.EventMask.TOUCH_MASK
+        )
         spool_click.set_size_request(110, 110)
 
         spool_area = Gtk.DrawingArea()
         spool_area.set_size_request(110, 110)
+        spool_area.add_events(
+            Gdk.EventMask.BUTTON_PRESS_MASK
+            | Gdk.EventMask.BUTTON_RELEASE_MASK
+            | Gdk.EventMask.TOUCH_MASK
+        )
         spool_area.connect("draw", self._draw_spool, state.index)
         spool_click.add(spool_area)
-        spool_click.connect(
-            "button-press-event",
-            lambda _w, _e, idx=state.index: (self._show_spool_assign_popup(idx), True)[1],
-        )
+
+        def on_spool_clicked(_widget: Gtk.Widget, _event: Any, idx: int = state.index) -> bool:
+            self._show_spool_assign_popup(idx)
+            return True
+
+        spool_click.connect("button-release-event", on_spool_clicked)
+        spool_area.connect("button-release-event", on_spool_clicked)
 
         spool_wrap = box(Gtk.Orientation.HORIZONTAL, 0)
         spool_wrap.set_halign(Gtk.Align.CENTER)
