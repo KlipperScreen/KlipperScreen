@@ -234,6 +234,16 @@ def make_css(theme: Dict[str, str]) -> bytes:
 .tc-badge-error {{ background-color: #3a0a0a; color: #ff4444; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #aa2222; }}
 .tc-badge-changing {{ background-color: #002a4a; color: #44c8ff; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #44c8ff; }}
 .tc-popup {{ background-color: {theme['card']}; border: 2px solid {accent}; border-radius: 15px; }}
+.tc-popup-title {{ color: {theme['text']}; font-size: 28px; font-weight: 900; }}
+.tc-popup-subtitle {{ color: {theme['muted']}; font-size: 13px; font-weight: 700; }}
+.tc-popup-divider {{ background-color: {theme['card_border']}; min-height: 2px; }}
+.tc-popup-card {{ background-color: {mix_colors(theme['card'], theme['bg'], 0.25)}; border-radius: 14px; border: 1px solid {theme['card_border']}; }}
+.tc-popup-card-active {{ background-color: {mix_colors(theme['card'], accent, 0.10)}; border-radius: 14px; border: 2px solid {accent}; }}
+.tc-popup-card-title {{ color: {theme['text']}; font-size: 18px; font-weight: 900; }}
+.tc-popup-card-sub {{ color: {theme['muted']}; font-size: 12px; font-weight: 700; }}
+.tc-popup-card-temp {{ color: {accent}; font-size: 22px; font-weight: 900; }}
+.tc-settings-tile {{ background: {mix_colors(theme['btn_bg'], accent, 0.12)}; color: {theme['text']}; border-radius: 14px; border: 1px solid {theme['btn_border']}; font-size: 16px; font-weight: 900; }}
+.tc-settings-meta {{ color: {theme['muted']}; font-size: 12px; font-weight: 700; }}
 """
     return css.encode("utf-8")
 
