@@ -1111,7 +1111,7 @@ class ToolchangerPanel:
         header_box.pack_start(subtitle, False, False, 0)
         outer.pack_start(header_box, False, False, 0)
 
-        cards_row = box(Gtk.Orientation.HORIZONTAL, 18)
+        cards_row = box(Gtk.Orientation.HORIZONTAL, 22)
         cards_row.set_halign(Gtk.Align.CENTER)
         cards_row.set_valign(Gtk.Align.CENTER)
         cards_row.set_hexpand(True)
@@ -1125,16 +1125,16 @@ class ToolchangerPanel:
             card_button = Gtk.Button()
             card_button.set_relief(Gtk.ReliefStyle.NONE)
             card_button.get_style_context().add_class("tc-popup-flat-btn")
-            card_button.set_size_request(185, 170)
+            card_button.set_size_request(205, 190)
             card_button.connect("clicked", on_pick)
 
-            card = box(spacing=6)
+            card = box(spacing=7)
             card.set_halign(Gtk.Align.CENTER)
             card.set_valign(Gtk.Align.CENTER)
-            card.set_margin_top(12)
-            card.set_margin_bottom(12)
-            card.set_margin_start(12)
-            card.set_margin_end(12)
+            card.set_margin_top(16)
+            card.set_margin_bottom(16)
+            card.set_margin_start(18)
+            card.set_margin_end(18)
 
             card_ctx = card.get_style_context()
             if state.active:
@@ -1149,7 +1149,7 @@ class ToolchangerPanel:
             card.pack_start(tool_label, False, False, 0)
 
             spool_logo = Gtk.DrawingArea()
-            spool_logo.set_size_request(44, 44)
+            spool_logo.set_size_request(46, 46)
 
             def draw_mini_spool(widget: Gtk.DrawingArea, cr: cairo.Context, s: ToolState = state) -> bool:
                 w = widget.get_allocated_width()
@@ -1194,15 +1194,11 @@ class ToolchangerPanel:
             spool_logo.connect("draw", draw_mini_spool)
             card.pack_start(spool_logo, False, False, 0)
 
-            if state.spool_id:
-                filament_line = state.material
-            else:
-                filament_line = "EMPTY"
-
-            filament = Gtk.Label(label=filament_line)
+            filament = Gtk.Label(label=state.material if state.spool_id else "EMPTY")
             filament.get_style_context().add_class("tc-popup-card-sub")
             filament.set_xalign(0.5)
             filament.set_justify(Gtk.Justification.CENTER)
+            filament.set_line_wrap(True)
             card.pack_start(filament, False, False, 0)
 
             temp = Gtk.Label(label=f"{state.temperature:.0f}°C")
