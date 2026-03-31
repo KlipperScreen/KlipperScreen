@@ -1068,28 +1068,69 @@ class ToolchangerPanel:
     def _show_tool_selector(self, _widget: Gtk.Widget) -> None:
         popup = self._register_popup(popup_window(self._screen))
 
-        inner = box(spacing=15)
-        inner.get_style_context().add_class("tc-popup")
-        inner.set_margin_top(20)
-        inner.set_margin_bottom(20)
-        inner.set_margin_start(20)
-        inner.set_margin_end(20)
+        outer = box(spacing=14)
+        outer.get_style_context().add_class("tc-popup")
+        outer.set_size_request(360, 260)
+        outer.set_margin_top(18)
+        outer.set_margin_bottom(18)
+        outer.set_margin_start(18)
+        outer.set_margin_end(18)
 
-        row = box(Gtk.Orientation.HORIZONTAL, 15)
+        header = Gtk.Label(label="SELECT TOOL")
+        header.get_style_context().add_class("tc-tool-label")
+        outer.pack_start(header, False, False, 0)
+
+        subtitle = Gtk.Label(label="Choose which tool to pick up.")
+        subtitle.get_style_context().add_class("tc-mat-label-empty")
+        outer.pack_start(subtitle, False, False, 0)
+
+        row = box(Gtk.Orientation.HORIZONTAL, 14)
         row.set_halign(Gtk.Align.CENTER)
+        row.set_valign(Gtk.Align.CENTER)
+        row.set_vexpand(True)
+
         for state in self._tool_states:
+            btn = Gtk.Button()
+            btn.get_style_context().add_class("tc-btn-select")
+            btn.set_size_request(120, 120)
+            btn.set_relief(Gtk.ReliefStyle.NONE)
+            btn.set_focus_on_click(False)
+
+            inner = box(spacing=6)
+            inner.set_halign(Gtk.Align.CENTER)
+            inner.set_valign(Gtk.Align.CENTER)
+            inner.set_margin_top(10)
+            inner.set_margin_bottom(10)
+            inner.set_margin_start(10)
+            inner.set_margin_end(10)
+
+            title = Gtk.Label(label=f"T{state.index}")
+            title.get_style_context().add_class("tc-temp-label")
+
+            detail = Gtk.Label(label=state.material if state.material and state.material != "EMPTY" else "NO SPOOL")
+            detail.get_style_context().add_class("tc-mat-label-empty")
+            detail.set_max_width_chars(10)
+            detail.set_ellipsize(3)
+
+            inner.pack_start(title, False, False, 0)
+            inner.pack_start(detail, False, False, 0)
+            btn.add(inner)
+
             def on_pick(_w: Gtk.Widget, idx: int = state.index) -> None:
                 self._select_tool(idx)
                 popup.destroy()
 
-            b = button(f"T{state.index}", "tc-btn-select", on_pick)
-            b.set_size_request(100, 100)
-            row.pack_start(b, False, False, 0)
+            btn.connect("clicked", on_pick)
+            row.pack_start(btn, False, False, 0)
 
-        inner.pack_start(row, True, True, 0)
-        inner.pack_start(button("CANCEL", "tc-btn-global", lambda _w: popup.destroy()), False, False, 0)
+        outer.pack_start(row, True, True, 0)
 
-        popup.add(inner)
+        cancel = button("CANCEL", "tc-btn-global", lambda _w: popup.destroy())
+        cancel.set_size_request(180, 46)
+        cancel.set_halign(Gtk.Align.CENTER)
+        outer.pack_start(cancel, False, False, 0)
+
+        popup.add(outer)
         popup.show_all()
 
     def _show_spool_assign_popup(self, tool_index: int) -> None:
