@@ -35,8 +35,6 @@ class BasePanel(ScreenPanel):
         self.titlebar_name_type = None
         self.show_spoolman_in_title = False
         self.spoolman_low_limit = 0
-        self.spoolman_blink_timeout = None
-        self.spoolman_blink_state = False
         self.spoolman_icon_size = int(self._gtk.font_size * 1.1)
         self.spoolman_icon_alert_pixbuf = None
         self.current_extruder = None
@@ -177,7 +175,7 @@ class BasePanel(ScreenPanel):
 
         self.battery_icons = self.load_battery_icons()
         self.battery_percentage()
-        self.update_spoolman_alert_visuals(self.spoolman_blink_state)
+        self.update_spoolman_alert_visuals(False)
 
     def load_spoolman_icons(self):
         self.spoolman_icon_alert_pixbuf = self.get_spoolman_icon_pixbuf("981E1F", full_icon=True)
@@ -256,13 +254,17 @@ class BasePanel(ScreenPanel):
                     self.control['temp_box'].add(self.labels[f"{device}_box"])
                     n += 1
             for item in self.titlebar_items:
+                if n >= nlimit:
+                    break
                 if item == "spool" and self._printer.spoolman:
                     self.control['temp_box'].add(self.control['spoolman_box'])
+                    n += 1
                     continue
                 for device in devices:
                     name = device.split()[1] if len(device.split()) > 1 else device
                     if name == item and self.labels[f"{device}_box"].get_parent() is None:
                         self.control['temp_box'].add(self.labels[f"{device}_box"])
+                        n += 1
                         break
 
             self.control['temp_box'].show_all()
@@ -311,12 +313,6 @@ class BasePanel(ScreenPanel):
         self.set_title(panel.title)
         self.content.add(panel.content)
 
-    def stop_spoolman_blink(self):
-        if self.spoolman_blink_timeout is not None:
-            GLib.source_remove(self.spoolman_blink_timeout)
-            self.spoolman_blink_timeout = None
-        self.spoolman_blink_state = False
-
     def update_spoolman_alert_visuals(self, alert):
         if alert:
             self.labels['spoolman_icon'].set_from_pixbuf(self.spoolman_icon_alert_pixbuf)
@@ -327,17 +323,11 @@ class BasePanel(ScreenPanel):
             )
             self.labels['spoolman_weight'].get_style_context().remove_class("spoolman_low")
 
-    def blink_spoolman_low(self):
-        self.spoolman_blink_state = not self.spoolman_blink_state
-        self.update_spoolman_alert_visuals(self.spoolman_blink_state)
-        return True
-
     def update_spoolman_weight_label(self):
         if (
                 self._printer is None
                 or not self.show_spoolman_in_title
         ):
-            self.stop_spoolman_blink()
             self.update_spoolman_alert_visuals(False)
             self.labels['spoolman_weight'].set_label("- g")
             self.control['spoolman_box'].show()
@@ -348,31 +338,23 @@ class BasePanel(ScreenPanel):
                 or "remaining_weight" not in self._printer.active_spool
                 or self._printer.active_spool["remaining_weight"] is None
         ):
-            self.stop_spoolman_blink()
             self.update_spoolman_alert_visuals(False)
             self.labels['spoolman_weight'].set_label("- g")
             self.control['spoolman_box'].show()
             return
         remaining_weight = self._printer.active_spool["remaining_weight"]
         self.labels['spoolman_weight'].set_label(f'{round(remaining_weight):.0f}g')
-        if self.spoolman_low_limit > 0 and remaining_weight < self.spoolman_low_limit:
-            if self.spoolman_blink_timeout is None:
-                self.spoolman_blink_state = True
-                self.update_spoolman_alert_visuals(True)
-                self.spoolman_blink_timeout = GLib.timeout_add(700, self.blink_spoolman_low)
-        else:
-            self.stop_spoolman_blink()
-            self.update_spoolman_alert_visuals(False)
+        self.update_spoolman_alert_visuals(
+            self.spoolman_low_limit > 0 and remaining_weight < self.spoolman_low_limit
+        )
         self.control['spoolman_box'].show()
 
     def refresh_spoolman_weight(self, show=True, spool_id=SPOOL_ID_UNSET):
         if self._printer is None or not self.show_spoolman_in_title:
-            self.stop_spoolman_blink()
             self.update_spoolman_alert_visuals(False)
             self.control['spoolman_box'].hide()
             return
         if not show:
-            self.stop_spoolman_blink()
             self.update_spoolman_alert_visuals(False)
             self.control['spoolman_box'].hide()
             return
