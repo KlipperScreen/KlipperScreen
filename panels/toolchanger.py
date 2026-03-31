@@ -1386,88 +1386,66 @@ class ToolchangerPanel:
     def _show_theme(self) -> None:
         popup = self._register_popup(popup_window(self._screen))
 
-        outer = box(spacing=12)
+        outer = box(spacing=14)
         outer.get_style_context().add_class("tc-popup")
-        outer.set_size_request(560, 330)
-        outer.set_margin_top(16)
-        outer.set_margin_bottom(16)
-        outer.set_margin_start(16)
-        outer.set_margin_end(16)
+        outer.set_size_request(520, 340)
+        outer.set_margin_top(18)
+        outer.set_margin_bottom(18)
+        outer.set_margin_start(18)
+        outer.set_margin_end(18)
 
-        header = Gtk.Label(label="THEME STUDIO")
+        header = Gtk.Label(label="THEME")
         header.get_style_context().add_class("tc-tool-label")
         outer.pack_start(header, False, False, 0)
 
-        subtitle = Gtk.Label(label="Pick a preset or open the custom builder.")
-        subtitle.get_style_context().add_class("tc-mat-label-empty")
-        outer.pack_start(subtitle, False, False, 0)
-
         grid = Gtk.Grid()
-        grid.set_column_spacing(12)
-        grid.set_row_spacing(10)
+        grid.set_column_spacing(10)
+        grid.set_row_spacing(8)
         grid.set_halign(Gtk.Align.CENTER)
         swatches: Dict[str, Gtk.DrawingArea] = {}
 
         for idx, (name, theme) in enumerate(THEMES.items()):
             col, row = idx % 3, idx // 3
-
-            card = box(spacing=4)
-            card.set_halign(Gtk.Align.CENTER)
-
-
-
+            slot = box(spacing=4)
+            slot.set_halign(Gtk.Align.CENTER)
 
             da = Gtk.DrawingArea()
-            da.set_size_request(150, 52)
+            da.set_size_request(140, 40)
 
             def draw_swatch(widget: Gtk.DrawingArea, cr: cairo.Context, t: Dict[str, str] = theme, theme_name: str = name) -> bool:
                 width = widget.get_allocated_width()
-                height = widget.get_allocated_height()
-
                 bg = hex_to_gdk(t["bg"])
-                card_rgba = hex_to_gdk(t["card"])
-                accent = hex_to_gdk(t["accent"])
-                text = hex_to_gdk(t["text"])
-
                 cr.set_source_rgb(bg.red, bg.green, bg.blue)
-                cr.rectangle(0, 0, width, height)
+                cr.rectangle(0, 0, width, 40)
                 cr.fill()
 
-                cr.set_source_rgb(card_rgba.red, card_rgba.green, card_rgba.blue)
-                cr.rectangle(8, 8, width - 16, height - 18)
+                ac = hex_to_gdk(t["accent"])
+                cr.set_source_rgb(ac.red, ac.green, ac.blue)
+                cr.rectangle(0, 32, width, 8)
                 cr.fill()
 
-                cr.set_source_rgb(accent.red, accent.green, accent.blue)
-                cr.rectangle(8, height - 10, width - 16, 5)
+                card = hex_to_gdk(t["card"])
+                cr.set_source_rgb(card.red, card.green, card.blue)
+                cr.rectangle(8, 5, 30, 22)
                 cr.fill()
-
-                cr.set_source_rgb(text.red, text.green, text.blue)
-                cr.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
-                cr.set_font_size(11)
-                ext = cr.text_extents(theme_name)
-                cr.move_to((width - ext.width) / 2 - ext.x_bearing, 30 - ext.y_bearing)
-                cr.show_text(theme_name)
 
                 if self._theme_name == theme_name:
-                    cr.set_source_rgb(accent.red, accent.green, accent.blue)
+                    cr.set_source_rgb(ac.red, ac.green, ac.blue)
                     cr.set_line_width(3)
-                    cr.rectangle(1.5, 1.5, width - 3, height - 3)
-                    cr.stroke()
-                else:
-                    cr.set_source_rgba(1, 1, 1, 0.08)
-                    cr.set_line_width(1.5)
-                    cr.rectangle(1.5, 1.5, width - 3, height - 3)
+                    cr.rectangle(1, 1, width - 2, 38)
                     cr.stroke()
                 return False
 
             da.connect("draw", draw_swatch)
             swatches[name] = da
 
+            label = Gtk.Label(label=name)
+            label.get_style_context().add_class("tc-mat-label-empty")
+            label.set_size_request(140, -1)
 
-            click = Gtk.EventBox()
-            click.set_visible_window(False)
-            click.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-            click.add(da)
+            event = Gtk.EventBox()
+            event.add(da)
+            event.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
 
             def on_pick(_w: Gtk.Widget, _e: Gdk.EventButton, theme_name: str = name) -> bool:
                 self._theme_name = theme_name
@@ -1478,51 +1456,46 @@ class ToolchangerPanel:
                     area.queue_draw()
                 return True
 
-            click.connect("button-press-event", on_pick)
-            card.pack_start(click, False, False, 0)
-            grid.attach(card, col, row, 1, 1)
+            event.connect("button-press-event", on_pick)
+            slot.pack_start(event, False, False, 0)
+            slot.pack_start(label, False, False, 0)
+            grid.attach(slot, col, row, 1, 1)
 
         outer.pack_start(grid, True, True, 0)
 
-        actions = box(Gtk.Orientation.HORIZONTAL, 10)
-        actions.set_halign(Gtk.Align.CENTER)
+        bottom = box(Gtk.Orientation.HORIZONTAL, 10)
+        bottom.set_halign(Gtk.Align.CENTER)
+        custom = button("CUSTOM", "tc-btn-global", lambda _w: (popup.destroy(), self._show_custom_theme()))
+        custom.set_size_request(130, 44)
+        back = button("BACK", "tc-btn-global", lambda _w: (popup.destroy(), self._show_settings(None)))
+        back.set_size_request(130, 44)
+        bottom.pack_start(custom, False, False, 0)
+        bottom.pack_start(back, False, False, 0)
 
-        custom_btn = button("CUSTOM BUILDER", "tc-btn-select", lambda _w: (popup.destroy(), self._show_custom_theme()))
-        custom_btn.set_size_request(180, 46)
-
-        close_btn = button("BACK", "tc-btn-global", lambda _w: (popup.destroy(), self._show_settings(None)))
-        close_btn.set_size_request(140, 46)
-
-        actions.pack_start(custom_btn, False, False, 0)
-        actions.pack_start(close_btn, False, False, 0)
-        outer.pack_start(actions, False, False, 0)
-
+        outer.pack_start(bottom, False, False, 0)
         popup.add(outer)
         popup.show_all()
 
     def _show_custom_theme(self) -> None:
         popup = self._register_popup(popup_window(self._screen))
 
-        outer = box(spacing=10)
+        outer = box(spacing=12)
         outer.get_style_context().add_class("tc-popup")
-        outer.set_size_request(560, 400)
-        outer.set_margin_top(16)
-        outer.set_margin_bottom(16)
-        outer.set_margin_start(16)
-        outer.set_margin_end(16)
+        outer.set_size_request(460, 420)
+        outer.set_margin_top(18)
+        outer.set_margin_bottom(18)
+        outer.set_margin_start(18)
+        outer.set_margin_end(18)
 
         header = Gtk.Label(label="CUSTOM THEME BUILDER")
         header.get_style_context().add_class("tc-tool-label")
         outer.pack_start(header, False, False, 0)
 
-        subtitle = Gtk.Label(label="Tune the six core colors, then apply the preview.")
-        subtitle.get_style_context().add_class("tc-mat-label-empty")
-        outer.pack_start(subtitle, False, False, 0)
-
         preview = Gtk.DrawingArea()
-        preview.set_size_request(520, 95)
+        preview.set_size_request(420, 80)
 
         base = self._custom if isinstance(self._custom, dict) else BASE_THEMES.get(self._theme_name, BASE_THEMES["Ocean"])
+
         fields = [
             ("Background", "bg"),
             ("Card", "card"),
@@ -1531,11 +1504,12 @@ class ToolchangerPanel:
             ("Text", "text"),
             ("Bar", "bar_bg"),
         ]
+
         pickers: Dict[str, Gtk.ColorButton] = {}
 
         grid = Gtk.Grid()
-        grid.set_column_spacing(18)
-        grid.set_row_spacing(10)
+        grid.set_column_spacing(14)
+        grid.set_row_spacing(12)
         grid.set_halign(Gtk.Align.CENTER)
 
         for row, (label, key) in enumerate(fields):
@@ -1545,11 +1519,14 @@ class ToolchangerPanel:
 
             picker = Gtk.ColorButton()
             picker.set_rgba(hex_to_gdk(base.get(key, "#ffffff")))
-            picker.set_size_request(150, 36)
+            picker.set_size_request(140, 40)
+
             pickers[key] = picker
 
             grid.attach(lbl, 0, row, 1, 1)
             grid.attach(picker, 1, row, 1, 1)
+
+        outer.pack_start(grid, True, True, 0)
 
         preview_state = {"theme": derive_theme_fields({k: gdk_to_hex(p.get_rgba()) for k, p in pickers.items()})}
 
@@ -1559,43 +1536,20 @@ class ToolchangerPanel:
             h = widget.get_allocated_height()
 
             bg = hex_to_gdk(derived["bg"])
-            card_rgba = hex_to_gdk(derived["card"])
-            accent = hex_to_gdk(derived["accent"])
-            btn = hex_to_gdk(derived["btn_bg"])
-            text = hex_to_gdk(derived["text"])
-            bar = hex_to_gdk(derived["bar_bg"])
-
             cr.set_source_rgb(bg.red, bg.green, bg.blue)
             cr.rectangle(0, 0, w, h)
             cr.fill()
 
-            cr.set_source_rgb(card_rgba.red, card_rgba.green, card_rgba.blue)
-            cr.rectangle(12, 12, 160, 52)
+            card = hex_to_gdk(derived["card"])
+            cr.set_source_rgb(card.red, card.green, card.blue)
+            cr.rectangle(10, 10, w - 20, h - 20)
             cr.fill()
 
+            accent = hex_to_gdk(derived["accent"])
             cr.set_source_rgb(accent.red, accent.green, accent.blue)
-            cr.set_line_width(3)
-            cr.rectangle(12, 12, 160, 52)
-            cr.stroke()
-
-            cr.set_source_rgb(text.red, text.green, text.blue)
-            cr.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
-            cr.set_font_size(12)
-            cr.move_to(28, 32)
-            cr.show_text("TOOL 1")
-            cr.move_to(28, 50)
-            cr.show_text("PARKED")
-
-            cr.set_source_rgb(btn.red, btn.green, btn.blue)
-            cr.rectangle(190, 18, 110, 34)
+            cr.rectangle(10, h - 20, w - 20, 10)
             cr.fill()
-            cr.set_source_rgb(text.red, text.green, text.blue)
-            cr.move_to(220, 40)
-            cr.show_text("BUTTON")
 
-            cr.set_source_rgb(bar.red, bar.green, bar.blue)
-            cr.rectangle(0, h - 14, w, 14)
-            cr.fill()
             return False
 
         def redraw_preview(_w=None) -> None:
@@ -1608,13 +1562,9 @@ class ToolchangerPanel:
             p.connect("color-set", redraw_preview)
 
         outer.pack_start(preview, False, False, 0)
-        outer.pack_start(grid, True, True, 0)
         redraw_preview()
 
-        actions = box(Gtk.Orientation.HORIZONTAL, 10)
-        actions.set_halign(Gtk.Align.CENTER)
-
-        def apply_custom(_w: Gtk.Widget) -> None:
+        def apply_custom(_w):
             custom = {k: gdk_to_hex(p.get_rgba()) for k, p in pickers.items()}
             self._custom = custom
             self._theme_name = "Custom"
@@ -1622,25 +1572,19 @@ class ToolchangerPanel:
             self._save_config()
             popup.destroy()
 
-        def reset_to_current(_w: Gtk.Widget) -> None:
-            source = self._custom if isinstance(self._custom, dict) else BASE_THEMES.get(self._theme_name, BASE_THEMES["Ocean"])
-            for key, picker in pickers.items():
-                picker.set_rgba(hex_to_gdk(source.get(key, "#ffffff")))
-            redraw_preview()
+        btn_row = box(Gtk.Orientation.HORIZONTAL, 10)
+        btn_row.set_halign(Gtk.Align.CENTER)
 
         apply_btn = button("APPLY", "tc-btn-select", apply_custom)
-        apply_btn.set_size_request(130, 46)
-
-        reset_btn = button("RESET", "tc-btn-global", reset_to_current)
-        reset_btn.set_size_request(130, 46)
+        apply_btn.set_size_request(130, 48)
 
         back_btn = button("BACK", "tc-btn-global", lambda _w: (popup.destroy(), self._show_theme()))
-        back_btn.set_size_request(130, 46)
+        back_btn.set_size_request(130, 48)
 
-        actions.pack_start(apply_btn, False, False, 0)
-        actions.pack_start(reset_btn, False, False, 0)
-        actions.pack_start(back_btn, False, False, 0)
-        outer.pack_start(actions, False, False, 0)
+        btn_row.pack_start(apply_btn, False, False, 0)
+        btn_row.pack_start(back_btn, False, False, 0)
+
+        outer.pack_start(btn_row, False, False, 0)
 
         popup.add(outer)
         popup.show_all()
