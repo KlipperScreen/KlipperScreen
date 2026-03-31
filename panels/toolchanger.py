@@ -234,14 +234,14 @@ def make_css(theme: Dict[str, str]) -> bytes:
 .tc-badge-error {{ background-color: #3a0a0a; color: #ff4444; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #aa2222; }}
 .tc-badge-changing {{ background-color: #002a4a; color: #44c8ff; border-radius: 6px; font-size: 11px; font-weight: 800; padding: 2px 8px; border: 1px solid #44c8ff; }}
 .tc-popup {{ background-color: {theme['card']}; border: 2px solid {accent}; border-radius: 15px; }}
-.tc-popup-title {{ color: {theme['text']}; font-size: 28px; font-weight: 900; }}
-.tc-popup-subtitle {{ color: {theme['muted']}; font-size: 13px; font-weight: 700; }}
-.tc-popup-card {{ background-color: {mix_colors(theme['card'], theme['bg'], 0.25)}; border-radius: 14px; border: 1px solid {theme['card_border']}; }}
-.tc-popup-card-active {{ background-color: {mix_colors(theme['card'], accent, 0.10)}; border-radius: 14px; border: 2px solid {accent}; }}
-.tc-popup-card-title {{ color: {theme['text']}; font-size: 18px; font-weight: 900; }}
-.tc-popup-card-sub {{ color: {theme['muted']}; font-size: 12px; font-weight: 700; }}
-.tc-popup-card-temp {{ color: {accent}; font-size: 22px; font-weight: 900; }}
-.tc-settings-meta {{ color: {theme['muted']}; font-size: 12px; font-weight: 700; }}
+.tc-popup-title {{ color: {theme['text']}; font-size: 24px; font-weight: 900; }}
+.tc-popup-subtitle {{ color: {theme['muted']}; font-size: 11px; font-weight: 700; }}
+.tc-popup-card {{ background-color: {mix_colors(theme['card'], theme['bg'], 0.20)}; border-radius: 14px; border: 1px solid {theme['card_border']}; }}
+.tc-popup-card-active {{ background-color: {mix_colors(theme['card'], accent, 0.08)}; border-radius: 14px; border: 2px solid {accent}; }}
+.tc-popup-card-title {{ color: {theme['text']}; font-size: 16px; font-weight: 900; }}
+.tc-popup-card-sub {{ color: {theme['muted']}; font-size: 11px; font-weight: 700; }}
+.tc-popup-card-temp {{ color: {accent}; font-size: 20px; font-weight: 900; }}
+.tc-settings-meta {{ color: {theme['muted']}; font-size: 11px; font-weight: 700; }}
 """
     return css.encode("utf-8")
 
@@ -1087,21 +1087,21 @@ class ToolchangerPanel:
     def _show_tool_selector(self, _widget: Gtk.Widget) -> None:
         popup = self._register_popup(popup_window(self._screen))
 
-        outer = box(spacing=12)
+        outer = box(spacing=10)
         outer.get_style_context().add_class("tc-popup")
-        outer.set_size_request(640, 340)
-        outer.set_margin_top(18)
-        outer.set_margin_bottom(18)
-        outer.set_margin_start(18)
-        outer.set_margin_end(18)
+        outer.set_size_request(660, 320)
+        outer.set_margin_top(16)
+        outer.set_margin_bottom(16)
+        outer.set_margin_start(16)
+        outer.set_margin_end(16)
 
-        header_box = box(spacing=4)
+        header_box = box(spacing=2)
 
         title = Gtk.Label(label="SELECT TOOL")
         title.get_style_context().add_class("tc-popup-title")
         title.set_xalign(0)
 
-        subtitle = Gtk.Label(label="Pick a tool to activate. Status, temperature, and spool assignment are shown below.")
+        subtitle = Gtk.Label(label="Tap a tool card to activate it.")
         subtitle.get_style_context().add_class("tc-popup-subtitle")
         subtitle.set_xalign(0)
 
@@ -1109,7 +1109,7 @@ class ToolchangerPanel:
         header_box.pack_start(subtitle, False, False, 0)
         outer.pack_start(header_box, False, False, 0)
 
-        cards_row = box(Gtk.Orientation.HORIZONTAL, 14)
+        cards_row = box(Gtk.Orientation.HORIZONTAL, 12)
         cards_row.set_halign(Gtk.Align.CENTER)
         cards_row.set_valign(Gtk.Align.CENTER)
         cards_row.set_hexpand(True)
@@ -1122,14 +1122,14 @@ class ToolchangerPanel:
 
             card_button = Gtk.Button()
             card_button.set_relief(Gtk.ReliefStyle.NONE)
-            card_button.set_size_request(190, 185)
+            card_button.set_size_request(200, 160)
             card_button.connect("clicked", on_pick)
 
-            card = box(spacing=6)
-            card.set_margin_top(12)
-            card.set_margin_bottom(12)
-            card.set_margin_start(12)
-            card.set_margin_end(12)
+            card = box(spacing=4)
+            card.set_margin_top(10)
+            card.set_margin_bottom(10)
+            card.set_margin_start(10)
+            card.set_margin_end(10)
 
             card_ctx = card.get_style_context()
             if state.active:
@@ -1137,7 +1137,7 @@ class ToolchangerPanel:
             else:
                 card_ctx.add_class("tc-popup-card")
 
-            top = box(Gtk.Orientation.HORIZONTAL, 8)
+            top = box(Gtk.Orientation.HORIZONTAL, 6)
 
             tool_label = Gtk.Label(label=f"T{state.index}")
             tool_label.get_style_context().add_class("tc-popup-card-title")
@@ -1155,35 +1155,32 @@ class ToolchangerPanel:
             temp.set_xalign(0)
             card.pack_start(temp, False, False, 0)
 
-            material_text = state.material if state.material else "EMPTY"
             if state.spool_id:
-                sub_text = f"{material_text}  •  Spool {state.spool_id}"
+                spool_line = f"{state.material} • Spool {state.spool_id}"
             else:
-                sub_text = f"{material_text}  •  No spool assigned"
+                spool_line = "No spool assigned"
 
-            material = Gtk.Label(label=sub_text)
+            material = Gtk.Label(label=spool_line)
             material.get_style_context().add_class("tc-popup-card-sub")
             material.set_xalign(0)
             material.set_line_wrap(True)
+            material.set_max_width_chars(20)
             card.pack_start(material, False, False, 0)
 
-            hints = []
             if state.active:
-                hints.append("Currently selected")
+                hint_text = "Currently selected"
             elif state.ktc_state == "changing":
-                hints.append("Tool change in progress")
+                hint_text = "Tool change in progress"
             elif not state.spool_id:
-                hints.append("Assign spool before use")
+                hint_text = "Assign spool before use"
             else:
-                hints.append("Tap to activate")
+                hint_text = "Tap to activate"
 
-            if state.target > 0:
-                hints.append(f"Target {state.target:.0f}°")
-
-            hint_label = Gtk.Label(label="  •  ".join(hints))
+            hint_label = Gtk.Label(label=hint_text)
             hint_label.get_style_context().add_class("tc-settings-meta")
             hint_label.set_xalign(0)
             hint_label.set_line_wrap(True)
+            hint_label.set_max_width_chars(20)
             card.pack_end(hint_label, False, False, 0)
 
             card_button.add(card)
@@ -1195,7 +1192,7 @@ class ToolchangerPanel:
         footer.set_halign(Gtk.Align.CENTER)
 
         cancel = button("CANCEL", "tc-btn-global", lambda _w: popup.destroy())
-        cancel.set_size_request(180, 46)
+        cancel.set_size_request(160, 42)
         footer.pack_start(cancel, False, False, 0)
 
         outer.pack_start(footer, False, False, 0)
@@ -1382,21 +1379,21 @@ class ToolchangerPanel:
     def _show_settings(self, _widget: Gtk.Widget) -> None:
         popup = self._register_popup(popup_window(self._screen))
 
-        outer = box(spacing=14)
+        outer = box(spacing=10)
         outer.get_style_context().add_class("tc-popup")
-        outer.set_size_request(620, 340)
-        outer.set_margin_top(20)
-        outer.set_margin_bottom(20)
-        outer.set_margin_start(20)
-        outer.set_margin_end(20)
+        outer.set_size_request(620, 300)
+        outer.set_margin_top(16)
+        outer.set_margin_bottom(16)
+        outer.set_margin_start(16)
+        outer.set_margin_end(16)
 
-        header_box = box(spacing=4)
+        header_box = box(spacing=2)
 
         header = Gtk.Label(label="SETTINGS")
         header.get_style_context().add_class("tc-popup-title")
         header.set_xalign(0)
 
-        subtitle = Gtk.Label(label="Tune heaters or customize the panel appearance.")
+        subtitle = Gtk.Label(label="Choose a panel option.")
         subtitle.get_style_context().add_class("tc-popup-subtitle")
         subtitle.set_xalign(0)
 
@@ -1404,7 +1401,7 @@ class ToolchangerPanel:
         header_box.pack_start(subtitle, False, False, 0)
         outer.pack_start(header_box, False, False, 0)
 
-        tiles = box(Gtk.Orientation.HORIZONTAL, 18)
+        tiles = box(Gtk.Orientation.HORIZONTAL, 14)
         tiles.set_halign(Gtk.Align.CENTER)
         tiles.set_valign(Gtk.Align.CENTER)
         tiles.set_vexpand(True)
@@ -1417,14 +1414,14 @@ class ToolchangerPanel:
         for label, desc, callback in actions:
             tile_button = Gtk.Button()
             tile_button.set_relief(Gtk.ReliefStyle.NONE)
-            tile_button.set_size_request(220, 150)
+            tile_button.set_size_request(230, 120)
             tile_button.connect("clicked", callback)
 
-            tile = box(spacing=8)
-            tile.set_margin_top(16)
-            tile.set_margin_bottom(16)
-            tile.set_margin_start(16)
-            tile.set_margin_end(16)
+            tile = box(spacing=6)
+            tile.set_margin_top(12)
+            tile.set_margin_bottom(12)
+            tile.set_margin_start(12)
+            tile.set_margin_end(12)
             tile.get_style_context().add_class("tc-popup-card")
 
             title = Gtk.Label(label=label)
@@ -1435,6 +1432,7 @@ class ToolchangerPanel:
             desc_label.get_style_context().add_class("tc-popup-card-sub")
             desc_label.set_xalign(0)
             desc_label.set_line_wrap(True)
+            desc_label.set_max_width_chars(24)
 
             cta = Gtk.Label(label="Tap to open")
             cta.get_style_context().add_class("tc-settings-meta")
@@ -1453,7 +1451,7 @@ class ToolchangerPanel:
         footer.set_halign(Gtk.Align.CENTER)
 
         close = button("CLOSE", "tc-btn-global", lambda _w: popup.destroy())
-        close.set_size_request(180, 46)
+        close.set_size_request(160, 42)
         footer.pack_start(close, False, False, 0)
 
         outer.pack_start(footer, False, False, 0)
