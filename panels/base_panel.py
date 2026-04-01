@@ -444,6 +444,9 @@ class BasePanel(ScreenPanel):
             return
 
         from panels.spoolman import SpoolmanSpool
+        if SpoolmanSpool.theme_path != self._screen.theme:
+            SpoolmanSpool.theme_path = self._screen.theme
+            SpoolmanSpool._spool_icon = None
         spool_object = SpoolmanSpool(**spool["result"])
         self._screen.show_panel("spool", title=spool_object.name, extra=spool_object)
 
