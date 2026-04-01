@@ -57,6 +57,7 @@ class Panel(ScreenPanel):
 
         icon_box = Gtk.Box(hexpand=True)
         icon_box.set_halign(Gtk.Align.CENTER)
+        icon_box.set_margin_bottom(round(self._gtk.font_size * 0.9))
         icon_pixbuf = self.spool.icon
         if icon_pixbuf is not None:
             icon_pixbuf = icon_pixbuf.scale_simple(
