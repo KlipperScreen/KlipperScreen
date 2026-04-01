@@ -191,7 +191,7 @@ class BasePanel(ScreenPanel):
             if full_icon:
                 svg = re.sub(r'fill:\s*(?!none)[^;"\']+', f'fill:#{color}', svg)
             loader = GdkPixbuf.PixbufLoader()
-            loader.set_size(self.spoolman_icon_size)
+            loader.set_size(self.spoolman_icon_size, self.spoolman_icon_size)
             loader.write(svg.encode())
             loader.close()
             return loader.get_pixbuf()
@@ -343,7 +343,7 @@ class BasePanel(ScreenPanel):
             self.control['spoolman_box'].show()
             return
         remaining_weight = self._printer.active_spool["remaining_weight"]
-        self.labels['spoolman_weight'].set_label(f' {round(remaining_weight):.0f} g')
+        self.labels['spoolman_weight'].set_label(f'{round(remaining_weight):.0f} g')
         self.update_spoolman_alert_visuals(
             self.spoolman_low_limit > 0 and remaining_weight < self.spoolman_low_limit
         )
