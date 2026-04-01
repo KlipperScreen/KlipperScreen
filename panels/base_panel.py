@@ -330,8 +330,7 @@ class BasePanel(ScreenPanel):
                 or not self.show_spoolman_in_title
         ):
             self.update_spoolman_alert_visuals(False)
-            self.labels['spoolman_weight'].set_label("- g")
-            self.control['spoolman_box'].show()
+            self.control['spoolman_box'].hide()
             return
         if (
                 not self._printer.spoolman
@@ -340,11 +339,11 @@ class BasePanel(ScreenPanel):
                 or self._printer.active_spool["remaining_weight"] is None
         ):
             self.update_spoolman_alert_visuals(False)
-            self.labels['spoolman_weight'].set_label("- g")
+            self.labels['spoolman_weight'].set_label(" ?")
             self.control['spoolman_box'].show()
             return
         remaining_weight = self._printer.active_spool["remaining_weight"]
-        self.labels['spoolman_weight'].set_label(f'{round(remaining_weight):.0f}g')
+        self.labels['spoolman_weight'].set_label(f' {round(remaining_weight):.0f} g')
         self.update_spoolman_alert_visuals(
             self.spoolman_low_limit > 0 and remaining_weight < self.spoolman_low_limit
         )
