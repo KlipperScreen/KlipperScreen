@@ -70,7 +70,7 @@ moonraker_port: 7125
 # moonraker_ssl: False
 # If you're using the route_prefix option in your moonraker config, specify it here.
 # This can be useful for running multiple printers behind a path-based reverse proxy.
-# Most installs will not need this. 
+# Most installs will not need this.
 # moonraker_path: printer1
 # Moonraker API key if this host is not connecting from a trusted client IP
 # moonraker_api_key: False
@@ -85,11 +85,10 @@ moonraker_port: 7125
 # power_devices: example1, example2
 
 # Define what items should be shown in titlebar besides the extruder and bed
-# Device names must match the names defined in the Klipper config.
-# The special item "spool" depends on Spoolman data provided through Moonraker,
-# it is not a Klipper device name.
-# valid options are device names from Klipper or the special item "spool"
-# titlebar_items: chamber, spool, MCU, Pi
+# the name must be the same as defined in the klipper config
+# valid options are temperature_sensors or temperature_fans, or heater_generic
+# There is a special item named "spool" that depends on Spoolman data provided through Moonraker
+# titlebar_items: chamber, MCU, Pi, spool
 
 # The style of the user defined items in the titlebar
 # Can be 'full' indicating that the full name is shown, 'short' for the first letter, or None (default) for no name

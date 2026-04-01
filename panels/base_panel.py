@@ -35,7 +35,7 @@ class BasePanel(ScreenPanel):
         self.titlebar_name_type = None
         self.show_spoolman_in_title = False
         self.spoolman_low_limit = 0
-        self.spoolman_icon_size = int(self._gtk.font_size * 1.1)
+        self.spoolman_icon_size = self._gtk.img_scale * self.bts * .9
         self.spoolman_icon_alert_pixbuf = None
         self.current_extruder = None
         self.last_usage_report = datetime.now()
@@ -191,7 +191,7 @@ class BasePanel(ScreenPanel):
             if full_icon:
                 svg = re.sub(r'fill:\s*(?!none)[^;"\']+', f'fill:#{color}', svg)
             loader = GdkPixbuf.PixbufLoader()
-            loader.set_size(self.spoolman_icon_size, self.spoolman_icon_size)
+            loader.set_size(self.spoolman_icon_size)
             loader.write(svg.encode())
             loader.close()
             return loader.get_pixbuf()
@@ -254,7 +254,8 @@ class BasePanel(ScreenPanel):
                     self.control['temp_box'].add(self.labels[f"{device}_box"])
                     n += 1
             for item in self.titlebar_items:
-                if n >= nlimit:
+                # Users can fill the bar if they want
+                if n >= nlimit + 1:
                     break
                 if item == "spool" and self._printer.spoolman:
                     self.control['temp_box'].add(self.control['spoolman_box'])
