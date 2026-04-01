@@ -3,7 +3,7 @@ from datetime import datetime
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Pango
+from gi.repository import GdkPixbuf, Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
@@ -57,7 +57,14 @@ class Panel(ScreenPanel):
 
         icon_box = Gtk.Box(hexpand=True)
         icon_box.set_halign(Gtk.Align.CENTER)
-        icon = Gtk.Image.new_from_pixbuf(self.spool.icon)
+        icon_pixbuf = self.spool.icon
+        if icon_pixbuf is not None:
+            icon_pixbuf = icon_pixbuf.scale_simple(
+                int(round(icon_pixbuf.get_width() * 1.5)),
+                int(round(icon_pixbuf.get_height() * 1.5)),
+                GdkPixbuf.InterpType.BILINEAR,
+            )
+        icon = Gtk.Image.new_from_pixbuf(icon_pixbuf)
         icon.set_halign(Gtk.Align.CENTER)
         icon_box.pack_start(icon, False, False, 0)
         info.pack_start(icon_box, False, False, 0)
