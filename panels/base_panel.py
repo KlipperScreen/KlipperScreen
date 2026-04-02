@@ -7,7 +7,7 @@ import re
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import GLib, Gtk, Pango, GdkPixbuf
+from gi.repository import Gio, GLib, Gtk, Pango, GdkPixbuf
 from jinja2 import Environment
 from datetime import datetime
 from math import log
@@ -115,10 +115,10 @@ class BasePanel(ScreenPanel):
 
         self.labels['spoolman_icon'] = Gtk.Image()
         self.labels['spoolman_weight'] = Gtk.Label()
-        self.control['spoolman_box'] = Gtk.Box(halign=Gtk.Align.END, spacing=1)
+        self.control['spoolman_box'] = Gtk.Box()
         self.control['spoolman_box'].set_no_show_all(True)
-        self.control['spoolman_box'].add(self.labels['spoolman_icon'])
-        self.control['spoolman_box'].add(self.labels['spoolman_weight'])
+        self.control['spoolman_box'].pack_start(self.labels['spoolman_icon'], False, False, 7)
+        self.control['spoolman_box'].pack_start(self.labels['spoolman_weight'], False, False, 0)
         self.labels['spoolman_icon'].show()
         self.labels['spoolman_weight'].show()
         self.load_spoolman_icons()
@@ -180,6 +180,20 @@ class BasePanel(ScreenPanel):
     def load_spoolman_icons(self):
         self.spoolman_icon_alert_pixbuf = self.get_spoolman_icon_pixbuf("981E1F", full_icon=True)
 
+    def get_spoolman_icon_size(self, svg):
+        match = re.search(r'viewBox="\s*[\d.]+\s+[\d.]+\s+([\d.]+)\s+([\d.]+)\s*"', svg)
+        if not match:
+            match = re.search(r'width="([\d.]+)".*height="([\d.]+)"', svg, re.DOTALL)
+        if not match:
+            return self.spoolman_icon_size, self.spoolman_icon_size
+        width = float(match.group(1))
+        height = float(match.group(2))
+        if width <= 0 or height <= 0:
+            return self.spoolman_icon_size, self.spoolman_icon_size
+        target_height = self.spoolman_icon_size
+        target_width = max(1, round(target_height * width / height))
+        return target_width, target_height
+
     def get_spoolman_icon_pixbuf(self, color, full_icon=False):
         klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
         icon_path = os.path.join(klipperscreendir, "styles", self._screen.theme, "images", "spool.svg")
@@ -190,11 +204,17 @@ class BasePanel(ScreenPanel):
             svg = svg.replace("var(--filament-color)", f"#{color}")
             if full_icon:
                 svg = re.sub(r'fill:\s*(?!none)[^;"\']+', f'fill:#{color}', svg)
-            loader = GdkPixbuf.PixbufLoader()
-            loader.set_size(self.spoolman_icon_size, self.spoolman_icon_size)
-            loader.write(svg.encode())
-            loader.close()
-            return loader.get_pixbuf()
+            target_width, target_height = self.get_spoolman_icon_size(svg)
+            stream = Gio.MemoryInputStream.new_from_data(svg.encode(), None)
+            pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
+                stream,
+                target_width,
+                target_height,
+                True,
+                None,
+            )
+            stream.close_async(2)
+            return pixbuf
         except Exception as e:
             logging.error(f"Couldn't load spoolman icon: {e}")
             return self._gtk.PixbufFromIcon("spool", self.spoolman_icon_size, self.spoolman_icon_size)
@@ -339,7 +359,7 @@ class BasePanel(ScreenPanel):
                 or self._printer.active_spool["remaining_weight"] is None
         ):
             self.update_spoolman_alert_visuals(False)
-            self.labels['spoolman_weight'].set_label(" ?")
+            self.labels['spoolman_weight'].set_label("?")
             self.control['spoolman_box'].show()
             return
         remaining_weight = self._printer.active_spool["remaining_weight"]
