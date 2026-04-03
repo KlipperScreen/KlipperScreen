@@ -2,7 +2,6 @@
 import logging
 import os
 import pathlib
-import re
 
 import gi
 
@@ -121,7 +120,6 @@ class BasePanel(ScreenPanel):
         self.control['spoolman_box'].pack_start(self.labels['spoolman_weight'], False, False, 0)
         self.labels['spoolman_icon'].show()
         self.labels['spoolman_weight'].show()
-        self.load_spoolman_icons()
 
         self.titlebar = Gtk.Box(spacing=5, valign=Gtk.Align.CENTER)
         self.titlebar.get_style_context().add_class("title_bar")
@@ -177,24 +175,7 @@ class BasePanel(ScreenPanel):
         self.battery_percentage()
         self.update_spoolman_alert_visuals(False)
 
-    def load_spoolman_icons(self):
-        self.spoolman_icon_alert_pixbuf = self.get_spoolman_icon_pixbuf("981E1F", full_icon=True)
-
-    def get_spoolman_icon_size(self, svg):
-        match = re.search(r'viewBox="\s*[\d.]+\s+[\d.]+\s+([\d.]+)\s+([\d.]+)\s*"', svg)
-        if not match:
-            match = re.search(r'width="([\d.]+)".*height="([\d.]+)"', svg, re.DOTALL)
-        if not match:
-            return self.spoolman_icon_size, self.spoolman_icon_size
-        width = float(match.group(1))
-        height = float(match.group(2))
-        if width <= 0 or height <= 0:
-            return self.spoolman_icon_size, self.spoolman_icon_size
-        target_height = self.spoolman_icon_size
-        target_width = max(1, round(target_height * width / height))
-        return target_width, target_height
-
-    def get_spoolman_icon_pixbuf(self, color, full_icon=False):
+    def get_spoolman_icon_pixbuf(self, color):
         klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
         icon_path = os.path.join(klipperscreendir, "styles", self._screen.theme, "images", "spool.svg")
         if not os.path.isfile(icon_path):
@@ -202,14 +183,11 @@ class BasePanel(ScreenPanel):
         try:
             svg = pathlib.Path(icon_path).read_text(encoding="utf-8")
             svg = svg.replace("var(--filament-color)", f"#{color}")
-            if full_icon:
-                svg = re.sub(r'fill:\s*(?!none)[^;"\']+', f'fill:#{color}', svg)
-            target_width, target_height = self.get_spoolman_icon_size(svg)
             stream = Gio.MemoryInputStream.new_from_data(svg.encode(), None)
             pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
                 stream,
-                target_width,
-                target_height,
+                -1,
+                self.spoolman_icon_size,
                 True,
                 None,
             )
@@ -220,21 +198,19 @@ class BasePanel(ScreenPanel):
             return self._gtk.PixbufFromIcon("spool", self.spoolman_icon_size, self.spoolman_icon_size)
 
     def get_active_spoolman_color(self):
+        default_color = "000000"
         if (
                 self._printer is None
                 or not self._printer.active_spool
                 or "filament" not in self._printer.active_spool
                 or not self._printer.active_spool["filament"]
         ):
-            return "000000"
+            return default_color
         filament = self._printer.active_spool["filament"]
-        color = filament.get("color_hex", "000000")
-        if not isinstance(color, str):
-            return "000000"
-        color = color.strip().lstrip("#")
-        if not color or not re.fullmatch(r"[0-9a-fA-F]{3}|[0-9a-fA-F]{6}", color):
-            return "000000"
-        return color
+        color = filament.get("color_hex")
+        if isinstance(color, str):
+            return color.strip().lstrip("#") or default_color
+        return default_color
 
     def show_heaters(self, show=True):
         for child in self.control['temp_box'].get_children():
@@ -335,13 +311,12 @@ class BasePanel(ScreenPanel):
         self.content.add(panel.content)
 
     def update_spoolman_alert_visuals(self, alert):
+        self.labels['spoolman_icon'].set_from_pixbuf(
+            self.get_spoolman_icon_pixbuf(self.get_active_spoolman_color())
+        )
         if alert:
-            self.labels['spoolman_icon'].set_from_pixbuf(self.spoolman_icon_alert_pixbuf)
             self.labels['spoolman_weight'].get_style_context().add_class("spoolman_low")
         else:
-            self.labels['spoolman_icon'].set_from_pixbuf(
-                self.get_spoolman_icon_pixbuf(self.get_active_spoolman_color())
-            )
             self.labels['spoolman_weight'].get_style_context().remove_class("spoolman_low")
 
     def update_spoolman_weight_label(self):
