@@ -49,6 +49,8 @@ class Panel(ScreenPanel):
         self.flowstore = []
         self.toolchange_count = 0
         self._last_toolchange_tool = None
+        self.toolchange_per_tool = {}
+        self.toolchange_grid = None
         self.mm = _("mm")
         self.mms = _("mm/s")
         self.mms2 = _("mm/s2")
@@ -159,6 +161,7 @@ class Panel(ScreenPanel):
         self.create_status_grid()
         self.create_extrusion_grid()
         self.create_time_grid()
+        self.create_toolchange_grid()
         self.create_move_grid()
         self.grid.attach(self.labels["info_grid"], 0, 1, 4, 2)
         self.switch_info(info=self.status_grid)
@@ -231,23 +234,52 @@ class Panel(ScreenPanel):
             return None
         return str(tool_name).strip()
 
+    def _toolchange_tool_label(self, tool_name):
+        tool_name = self._normalize_tool_name(tool_name)
+        if not tool_name:
+            return "--"
+        if tool_name == "extruder":
+            return "T0"
+        if tool_name.startswith("extruder"):
+            suffix = tool_name.replace("extruder", "", 1)
+            if suffix.isdigit():
+                return f"T{int(suffix)}"
+        return str(tool_name).upper()
+
+    def _toolchange_tool_names(self):
+        return [self._tool_heater_name(i) for i in range(self._configured_tool_count())]
+
     def _reset_toolchange_counter(self, seed_tool=None):
         self.toolchange_count = 0
+        self.toolchange_per_tool = {tool_name: 0 for tool_name in self._toolchange_tool_names()}
         if seed_tool is None:
             seed_tool = self._printer.get_stat("toolhead", "extruder")
         self._last_toolchange_tool = self._normalize_tool_name(seed_tool)
+        if self._last_toolchange_tool is not None:
+            self.toolchange_per_tool.setdefault(self._last_toolchange_tool, 0)
         self._update_toolchange_display()
 
     def _update_toolchange_display(self):
-        if "toolchanges" not in getattr(self, "buttons", {}):
-            return
-        self.buttons["toolchanges"].set_label(f"TC: {self.toolchange_count}")
+        if "toolchanges" in getattr(self, "buttons", {}):
+            self.buttons["toolchanges"].set_label(f"TC: {self.toolchange_count}")
+
+        if "toolchange_total" in self.labels:
+            self.labels["toolchange_total"].set_label(str(self.toolchange_count))
+
+        if "toolchange_current" in self.labels:
+            self.labels["toolchange_current"].set_label(
+                self._toolchange_tool_label(self._last_toolchange_tool)
+            )
+
+        for tool_name, label in getattr(self, "toolchange_tool_labels", {}).items():
+            label.set_label(str(self.toolchange_per_tool.get(tool_name, 0)))
 
     def _track_toolchange(self, tool_name, state=None):
         tool_name = self._normalize_tool_name(tool_name)
         if tool_name is None:
             return
 
+        self.toolchange_per_tool.setdefault(tool_name, 0)
         state = state or self.state
         if state not in ["printing", "paused"]:
             self._last_toolchange_tool = tool_name
@@ -258,6 +290,7 @@ class Panel(ScreenPanel):
             self._last_toolchange_tool = tool_name
         elif tool_name != self._last_toolchange_tool:
             self.toolchange_count += 1
+            self.toolchange_per_tool[tool_name] = self.toolchange_per_tool.get(tool_name, 0) + 1
             self._last_toolchange_tool = tool_name
 
         self._update_toolchange_display()
@@ -315,7 +348,7 @@ class Panel(ScreenPanel):
             frame.set_size_request(card_w, card_h)
             frame.get_style_context().add_class("ks-toolcard")
 
-            title = Gtk.Label(label=f"T{i + 1}")
+            title = Gtk.Label(label=self._toolchange_tool_label(self._tool_heater_name(i)))
             title.get_style_context().add_class("ks-tool-title")
             title.set_halign(Gtk.Align.CENTER)
 
@@ -424,7 +457,7 @@ class Panel(ScreenPanel):
             else:
                 state["temp"].set_label(f"{temp:.0f}C")
             state["material"].set_label(material[:12])
-            state["title"].set_label(f"T{idx + 1}")
+            state["title"].set_label(self._toolchange_tool_label(heater))
             badge_ctx = state["badge"].get_style_context()
             badge_ctx.remove_class("ks-tool-badge-active")
             badge_ctx.remove_class("ks-tool-badge-parked")
@@ -516,7 +549,6 @@ class Panel(ScreenPanel):
         buttons["fan"].connect("clicked", self.menu_item_clicked, {"panel": "fan"})
         buttons["toolchanges"].set_can_focus(False)
         buttons["toolchanges"].set_halign(Gtk.Align.START)
-        buttons["toolchanges"].set_size_request(90, -1)
         buttons["toolchanges"].get_style_context().add_class("printing-info")
         self.buttons.update(buttons)
 
@@ -586,18 +618,18 @@ class Panel(ScreenPanel):
                             n += 1
                             break
 
-        # Move Fan and Layer buttons to the top row beside the heater tiles
-        # Keep the elapsed/clock button off the top row to preserve width on smaller screens.
+        # Move Fan and Layer buttons to the top row beside the heater tiles.
+        # Keep the TC button on the next row beside Speed so the top row stays within screen width.
         if self._printer.get_fans():
             self.labels["temp_grid"].attach(self.buttons["fan"], n, 0, 1, 1)
             n += 1
         self.labels["temp_grid"].attach(self.buttons["z"], n, 0, 1, 1)
-        n += 1
-        self.labels["temp_grid"].attach(self.buttons["toolchanges"], n, 0, 1, 1)
         self._update_toolchange_display()
 
         szfe = Gtk.Grid(column_homogeneous=True)
-        szfe.attach(self.buttons["speed"], 0, 0, 4, 1)
+        szfe.set_column_spacing(8)
+        szfe.attach(self.buttons["toolchanges"], 0, 0, 1, 1)
+        szfe.attach(self.buttons["speed"], 1, 0, 3, 1)
         if self._printer.get_tools():
             szfe.attach(self.buttons["extrusion"], 0, 1, 4, 1)
 
@@ -682,6 +714,64 @@ class Panel(ScreenPanel):
         self.time_grid = info
         self.buttons["elapsed"].connect("clicked", self.switch_info, self.time_grid)
         self.buttons["left"].connect("clicked", self.switch_info, self.time_grid)
+
+    def create_toolchange_grid(self, widget=None):
+        goback = self._gtk.Button("back", None, "color4", self.bts, Gtk.PositionType.TOP, False)
+        goback.connect("clicked", self.switch_info, self.status_grid)
+        goback.set_hexpand(False)
+        goback.get_style_context().add_class("printing-info")
+
+        info = Gtk.Grid()
+        info.get_style_context().add_class("printing-info-secondary")
+        info.set_margin_start(20)
+
+        tool_names = self._toolchange_tool_names()
+        row_span = max(4, len(tool_names) + 2)
+        info.attach(goback, 0, 0, 1, row_span)
+
+        total_lbl = Gtk.Label(_("Total changes:"))
+        total_lbl.set_halign(Gtk.Align.START)
+        total_lbl.set_ellipsize(Pango.EllipsizeMode.END)
+        self.labels["toolchange_total_lbl"] = total_lbl
+
+        total_val = Gtk.Label(label="0")
+        total_val.set_halign(Gtk.Align.START)
+        total_val.set_ellipsize(Pango.EllipsizeMode.END)
+        self.labels["toolchange_total"] = total_val
+
+        current_lbl = Gtk.Label(_("Current tool:"))
+        current_lbl.set_halign(Gtk.Align.START)
+        current_lbl.set_ellipsize(Pango.EllipsizeMode.END)
+        self.labels["toolchange_current_lbl"] = current_lbl
+
+        current_val = Gtk.Label(label="--")
+        current_val.set_halign(Gtk.Align.START)
+        current_val.set_ellipsize(Pango.EllipsizeMode.END)
+        self.labels["toolchange_current"] = current_val
+
+        info.attach(self.labels["toolchange_total_lbl"], 1, 0, 1, 1)
+        info.attach(self.labels["toolchange_total"], 2, 0, 1, 1)
+        info.attach(self.labels["toolchange_current_lbl"], 1, 1, 1, 1)
+        info.attach(self.labels["toolchange_current"], 2, 1, 1, 1)
+
+        self.toolchange_tool_labels = {}
+        for row, tool_name in enumerate(tool_names, start=2):
+            label = Gtk.Label(label=f"{self._toolchange_tool_label(tool_name)}:")
+            label.set_halign(Gtk.Align.START)
+            label.set_ellipsize(Pango.EllipsizeMode.END)
+            value = Gtk.Label(label="0")
+            value.set_halign(Gtk.Align.START)
+            value.set_ellipsize(Pango.EllipsizeMode.END)
+
+            self.labels[f"toolchange_tool_lbl_{tool_name}"] = label
+            self.toolchange_tool_labels[tool_name] = value
+
+            info.attach(label, 1, row, 1, 1)
+            info.attach(value, 2, row, 1, 1)
+
+        self.toolchange_grid = info
+        self.buttons["toolchanges"].connect("clicked", self.switch_info, self.toolchange_grid)
+        self._update_toolchange_display()
 
     def switch_info(self, widget=None, info=None):
         if not info:
