@@ -70,7 +70,7 @@ moonraker_port: 7125
 # moonraker_ssl: False
 # If you're using the route_prefix option in your moonraker config, specify it here.
 # This can be useful for running multiple printers behind a path-based reverse proxy.
-# Most installs will not need this. 
+# Most installs will not need this.
 # moonraker_path: printer1
 # Moonraker API key if this host is not connecting from a trusted client IP
 # moonraker_api_key: False
@@ -86,20 +86,22 @@ moonraker_port: 7125
 
 # Define what items should be shown in titlebar besides the extruder and bed
 # the name must be the same as defined in the klipper config
-# valid options are temperature_sensors or temperature_fans, heater_generic, or spool
-# titlebar_items: chamber, spool, MCU, Pi
+# valid options are temperature_sensors or temperature_fans, or heater_generic
+# There is a special item named "spool" that depends on Spoolman data provided through Moonraker
+# titlebar_items: chamber, MCU, Pi, spool
 
 # The style of the user defined items in the titlebar
 # Can be 'full' indicating that the full name is shown, 'short' for the first letter, or None (default) for no name
 # titlebar_name_type: None
 
 # Low limit for remaining spool weight in the title bar, in grams.
-# When the active spool drops below this value, the spool icon and weight blink red.
+# When the active spool drops below this value, the spool icon and weight turn red.
 # spool_low_limit: 20
 
 # Defines what the spool item in the title bar opens when tapped.
 # spoolman = Spoolman list
 # spool    = active spool editor
+# If not set, or if an invalid value is provided, the default is spoolman.
 # spool_shortcut: spoolman
 
 # Z probe calibrate position
