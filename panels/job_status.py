@@ -47,6 +47,8 @@ class Panel(ScreenPanel):
         self.flowrate = 0.0
         self.vel = 0.0
         self.flowstore = []
+        self.toolchange_count = 0
+        self._last_toolchange_tool = None
         self.mm = _("mm")
         self.mms = _("mm/s")
         self.mms2 = _("mm/s2")
@@ -146,6 +148,7 @@ class Panel(ScreenPanel):
         if self.current_extruder:
             diameter = float(self._printer.get_config_section(self.current_extruder)["filament_diameter"])
             self.fila_section = pi * ((diameter / 2) ** 2)
+        self._reset_toolchange_counter(seed_tool=self.current_extruder)
 
         self.buttons = {}
         self.create_buttons()
@@ -222,6 +225,42 @@ class Panel(ScreenPanel):
             return int(active.replace("extruder", "")) + 1
         except Exception:
             return 1
+
+    def _normalize_tool_name(self, tool_name):
+        if not tool_name:
+            return None
+        return str(tool_name).strip()
+
+    def _reset_toolchange_counter(self, seed_tool=None):
+        self.toolchange_count = 0
+        if seed_tool is None:
+            seed_tool = self._printer.get_stat("toolhead", "extruder")
+        self._last_toolchange_tool = self._normalize_tool_name(seed_tool)
+        self._update_toolchange_display()
+
+    def _update_toolchange_display(self):
+        if "toolchanges" not in getattr(self, "buttons", {}):
+            return
+        self.buttons["toolchanges"].set_label(f"TC: {self.toolchange_count}")
+
+    def _track_toolchange(self, tool_name, state=None):
+        tool_name = self._normalize_tool_name(tool_name)
+        if tool_name is None:
+            return
+
+        state = state or self.state
+        if state not in ["printing", "paused"]:
+            self._last_toolchange_tool = tool_name
+            self._update_toolchange_display()
+            return
+
+        if self._last_toolchange_tool is None:
+            self._last_toolchange_tool = tool_name
+        elif tool_name != self._last_toolchange_tool:
+            self.toolchange_count += 1
+            self._last_toolchange_tool = tool_name
+
+        self._update_toolchange_display()
 
     def _get_active_tool_fan_percent(self):
         active = self._printer.get_stat("toolhead", "extruder")
@@ -466,6 +505,7 @@ class Panel(ScreenPanel):
         buttons = {
             "speed": self._gtk.Button("speed+", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
             "z": self._gtk.Button("home-z", _("Layer:") + " --/--", None, self.bts, Gtk.PositionType.LEFT, 1),
+            "toolchanges": self._gtk.Button("extrude", "TC: 0", None, self.bts, Gtk.PositionType.LEFT, 1),
             "extrusion": self._gtk.Button("extrude", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
             "fan": self._gtk.Button("fan", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
             "elapsed": self._gtk.Button("clock", "-", None, self.bts, Gtk.PositionType.LEFT, 1),
@@ -474,6 +514,10 @@ class Panel(ScreenPanel):
         for button in buttons:
             buttons[button].set_halign(Gtk.Align.START)
         buttons["fan"].connect("clicked", self.menu_item_clicked, {"panel": "fan"})
+        buttons["toolchanges"].set_can_focus(False)
+        buttons["toolchanges"].set_halign(Gtk.Align.START)
+        buttons["toolchanges"].set_size_request(90, -1)
+        buttons["toolchanges"].get_style_context().add_class("printing-info")
         self.buttons.update(buttons)
 
         self.buttons["extruder"] = {}
@@ -543,10 +587,14 @@ class Panel(ScreenPanel):
                             break
 
         # Move Fan and Layer buttons to the top row beside the heater tiles
+        # Keep the elapsed/clock button off the top row to preserve width on smaller screens.
         if self._printer.get_fans():
             self.labels["temp_grid"].attach(self.buttons["fan"], n, 0, 1, 1)
             n += 1
         self.labels["temp_grid"].attach(self.buttons["z"], n, 0, 1, 1)
+        n += 1
+        self.labels["temp_grid"].attach(self.buttons["toolchanges"], n, 0, 1, 1)
+        self._update_toolchange_display()
 
         szfe = Gtk.Grid(column_homogeneous=True)
         szfe.attach(self.buttons["speed"], 0, 0, 4, 1)
@@ -790,12 +838,14 @@ class Panel(ScreenPanel):
         if "virtual_sdcard" in self._printer.data:
             logging.info("resetting progress")
             self._printer.data["virtual_sdcard"]["progress"] = 0
+        self._reset_toolchange_counter()
         self.update_progress(0.0)
         self.set_state("printing")
 
     # ------------------------------------------------------------------ process_update
 
     def process_update(self, action, data):
+        incoming_state = data.get("print_stats", {}).get("state", self.state) if isinstance(data, dict) else self.state
         if action == "notify_gcode_response":
             if "action:cancel" in data:
                 self.set_state("cancelled")
@@ -833,6 +883,7 @@ class Panel(ScreenPanel):
         if "toolhead" in data:
             if "extruder" in data["toolhead"]:
                 self.current_extruder = data["toolhead"]["extruder"]
+                self._track_toolchange(self.current_extruder, state=incoming_state)
             if "max_accel" in data["toolhead"]:
                 self.labels["max_accel"].set_label(f"{data['toolhead']['max_accel']:.0f} {self.mms2}")
 
@@ -1011,6 +1062,8 @@ class Panel(ScreenPanel):
         if state == "printing":
             self._screen.set_panel_title(
                 _("Printing") if self._printer.extrudercount > 0 else _("Working"))
+            if self.state not in ["printing", "paused"]:
+                self._reset_toolchange_counter()
         elif state == "complete":
             self.update_progress(1)
             self._screen.set_panel_title(_("Complete"))
