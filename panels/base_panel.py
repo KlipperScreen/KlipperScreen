@@ -34,7 +34,7 @@ class BasePanel(ScreenPanel):
         self.titlebar_items = []
         self.titlebar_name_type = None
         self.show_spoolman_in_title = False
-        self.spoolman_low_limit = 0
+        self.spoolman_low_limit = 20
         self.spoolman_icon_size = self._gtk.img_scale * self.bts * .9
         self.spoolman_icon_alert_pixbuf = None
         self.current_extruder = None
@@ -364,9 +364,7 @@ class BasePanel(ScreenPanel):
             return
         remaining_weight = self._printer.active_spool["remaining_weight"]
         self.labels['spoolman_weight'].set_label(f'{round(remaining_weight):.0f} g')
-        self.update_spoolman_alert_visuals(
-            self.spoolman_low_limit > 0 and remaining_weight < self.spoolman_low_limit
-        )
+        self.update_spoolman_alert_visuals(remaining_weight < self.spoolman_low_limit)
         self.control['spoolman_box'].show()
 
     def refresh_spoolman_weight(self, show=True, spool_id=SPOOL_ID_UNSET):
@@ -607,11 +605,11 @@ class BasePanel(ScreenPanel):
             else:
                 self.titlebar_items = []
             self.show_spoolman_in_title = "spool" in self.titlebar_items
-            self.spoolman_low_limit = self.ks_printer_cfg.getfloat("spool_low_limit", fallback=0)
+            self.spoolman_low_limit = self.ks_printer_cfg.getfloat("spool_low_limit", fallback=20)
         else:
             self.titlebar_items = []
             self.show_spoolman_in_title = False
-            self.spoolman_low_limit = 0
+            self.spoolman_low_limit = 20
         self.refresh_spoolman_weight(
             self._printer is not None and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'}
         )
