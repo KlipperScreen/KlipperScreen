@@ -291,7 +291,7 @@ trough {
 }
 
 .spoolman_low {
-    color: @error;
+    color: @warning;
 }
 
 .content {
