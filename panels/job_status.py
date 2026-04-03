@@ -104,6 +104,8 @@ class Panel(ScreenPanel):
         self.tool_widgets = []
         self.tool_spools = {}
         self._tool_css_provider = None
+        self._progress_css_provider = None
+        self._progress_bar_color = None
 
         for label in self.labels:
             self.labels[label].set_halign(Gtk.Align.START)
@@ -172,9 +174,8 @@ class Panel(ScreenPanel):
 
     # ------------------------------------------------------------------ CSS
 
-    def _init_tool_strip_css(self):
-        provider = Gtk.CssProvider()
-        provider.load_from_data(b"""
+    def _tool_strip_css_data(self):
+        return b"""
 .ks-toolcard {background:rgba(33,34,88,0.74);border-radius:12px;border:2px solid rgba(112,150,255,0.22);padding:4px;}
 .ks-toolcard-active {background:rgba(24,34,102,0.88);border-radius:12px;border:3px solid rgba(85,235,255,0.95);padding:3px;}
 .ks-tool-title {color:#bfe8ff;font-weight:800;font-size:13px;}
@@ -182,13 +183,37 @@ class Panel(ScreenPanel):
 .ks-tool-mat {color:#d7e7ff;font-weight:700;font-size:11px;}
 .ks-tool-badge-active {background:#11a84f;color:#ffffff;border-radius:6px;padding:1px 6px;font-size:9px;font-weight:800;}
 .ks-tool-badge-parked {background:rgba(255,255,255,0.82);color:#6c6c6c;border-radius:6px;padding:1px 6px;font-size:9px;font-weight:800;}
-.printing-progress-bar trough {border-radius:6px;background:rgba(255,255,255,0.12);min-height:14px;}
-.printing-progress-bar progress {border-radius:6px;background:#b71c1c;min-height:14px;}
-.printing-progress-bar text {color:#ffffff;font-weight:800;font-size:12px;}
-""")
+"""
+
+    def _progress_bar_css_data(self, color=None):
+        color = self._normalize_tool_color(color or "#b71c1c")
+        return f"""
+.printing-progress-bar trough {{border-radius:6px;background:rgba(255,255,255,0.12);min-height:14px;}}
+.printing-progress-bar progress {{border-radius:6px;background:{color};min-height:14px;}}
+.printing-progress-bar text {{color:#ffffff;font-weight:800;font-size:12px;}}
+""".encode("utf-8")
+
+    def _set_progress_bar_color(self, color=None):
+        color = self._normalize_tool_color(color or "#b71c1c")
+        if self._progress_css_provider is None:
+            return
+        if color == self._progress_bar_color:
+            return
+        self._progress_css_provider.load_from_data(self._progress_bar_css_data(color))
+        self._progress_bar_color = color
+
+    def _init_tool_strip_css(self):
+        provider = Gtk.CssProvider()
+        provider.load_from_data(self._tool_strip_css_data())
         Gtk.StyleContext.add_provider_for_screen(
             Gdk.Screen.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
         self._tool_css_provider = provider
+
+        progress_provider = Gtk.CssProvider()
+        Gtk.StyleContext.add_provider_for_screen(
+            Gdk.Screen.get_default(), progress_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        self._progress_css_provider = progress_provider
+        self._set_progress_bar_color("#b71c1c")
 
     # ------------------------------------------------------------------ Config helpers
 
@@ -245,6 +270,25 @@ class Panel(ScreenPanel):
             if suffix.isdigit():
                 return f"T{int(suffix)}"
         return str(tool_name).upper()
+
+    def _tool_index_from_name(self, tool_name):
+        tool_name = self._normalize_tool_name(tool_name)
+        if not tool_name or tool_name == "extruder":
+            return 0
+        if tool_name.startswith("extruder"):
+            suffix = tool_name.replace("extruder", "", 1)
+            if suffix.isdigit():
+                return int(suffix)
+        return 0
+
+    def _active_tool_filament_color(self):
+        active_tool = self.current_extruder or self._printer.get_stat("toolhead", "extruder")
+        spool = self.tool_spools.get(self._tool_index_from_name(active_tool), {})
+        color = spool.get("color")
+        return self._normalize_tool_color(color) if color else "#b71c1c"
+
+    def _update_status_bar_color(self):
+        self._set_progress_bar_color(self._active_tool_filament_color())
 
     def _toolchange_tool_names(self):
         return [self._tool_heater_name(i) for i in range(self._configured_tool_count())]
@@ -473,6 +517,7 @@ class Panel(ScreenPanel):
                 badge_ctx.add_class("ks-tool-badge-parked")
                 frame_ctx.add_class("ks-toolcard")
             state["ring"].queue_draw()
+        self._update_status_bar_color()
 
     # ------------------------------------------------------------------ Spoolman
 
@@ -565,6 +610,7 @@ class Panel(ScreenPanel):
         self.labels["temp_grid"] = Gtk.Grid()
         self.labels["temp_grid"].set_column_spacing(8)
         self.buttons["heater"] = {}
+        top_row_heaters = []
         n = 0
         nlimit = 2 if self._screen.width <= 500 else 3
 
@@ -590,7 +636,7 @@ class Panel(ScreenPanel):
             self.buttons["heater"][dev].connect(
                 "clicked", self.menu_item_clicked, {"panel": "temperature", "extra": dev})
             self.buttons["heater"][dev].set_halign(Gtk.Align.START)
-            self.labels["temp_grid"].attach(self.buttons["heater"][dev], n, 0, 1, 1)
+            top_row_heaters.append((dev, self.buttons["heater"][dev]))
             n += 1
 
         extra_item = not self._show_heater_power
@@ -614,16 +660,27 @@ class Panel(ScreenPanel):
                             self.buttons["heater"][device].connect(
                                 "clicked", self.menu_item_clicked, {"panel": "temperature"})
                             self.buttons["heater"][device].set_halign(Gtk.Align.START)
-                            self.labels["temp_grid"].attach(self.buttons["heater"][device], n, 0, 1, 1)
+                            top_row_heaters.append((device, self.buttons["heater"][device]))
                             n += 1
                             break
 
-        # Move Fan and Layer buttons to the top row beside the heater tiles.
-        # Keep the TC button on the next row beside Speed so the top row stays within screen width.
+        # Keep the existing heater tiles on the row, but group Bed/Fan/Layer into a
+        # compact strip so they sit visibly closer together.
+        compact_col = 0
+        for dev, button in top_row_heaters:
+            if dev == "heater_bed":
+                continue
+            self.labels["temp_grid"].attach(button, compact_col, 0, 1, 1)
+            compact_col += 1
+
+        top_row_compact = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
+        top_row_compact.set_halign(Gtk.Align.START)
+        if "heater_bed" in self.buttons["heater"]:
+            top_row_compact.pack_start(self.buttons["heater"]["heater_bed"], False, False, 0)
         if self._printer.get_fans():
-            self.labels["temp_grid"].attach(self.buttons["fan"], n, 0, 1, 1)
-            n += 1
-        self.labels["temp_grid"].attach(self.buttons["z"], n, 0, 1, 1)
+            top_row_compact.pack_start(self.buttons["fan"], False, False, 0)
+        top_row_compact.pack_start(self.buttons["z"], False, False, 0)
+        self.labels["temp_grid"].attach(top_row_compact, compact_col, 0, 1, 1)
         self._update_toolchange_display()
 
         szfe = Gtk.Grid(column_homogeneous=True)
