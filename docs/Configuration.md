@@ -101,7 +101,8 @@ moonraker_port: 7125
 # Defines what the spool item in the title bar opens when tapped.
 # spoolman = Spoolman list
 # spool    = active spool editor
-# If not set, or if an invalid value is provided, the default is spoolman.
+# If not set, or if an invalid value is provided, the title-bar spool item
+# remains informational only and does not open a panel.
 # spool_shortcut: spoolman
 
 # Z probe calibrate position

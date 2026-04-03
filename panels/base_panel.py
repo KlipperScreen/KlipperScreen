@@ -33,7 +33,7 @@ class BasePanel(ScreenPanel):
         self.titlebar_items = []
         self.titlebar_name_type = None
         self.show_spoolman_in_title = False
-        self.spool_shortcut = "spoolman"
+        self.spool_shortcut = None
         self.spoolman_low_limit = 20
         self.spoolman_icon_size = self._gtk.img_scale * self.bts * .9
         self.spoolman_icon_alert_pixbuf = None
@@ -395,6 +395,8 @@ class BasePanel(ScreenPanel):
         self.update_spoolman_weight_label()
 
     def open_spool_shortcut(self, widget=None):
+        if self.spool_shortcut is None:
+            return
         if self.spool_shortcut != "spool":
             self._screen.show_panel("spoolman")
             return
@@ -618,14 +620,15 @@ class BasePanel(ScreenPanel):
             else:
                 self.titlebar_items = []
             self.show_spoolman_in_title = "spool" in self.titlebar_items
-            self.spool_shortcut = self.ks_printer_cfg.get("spool_shortcut", "spoolman").strip().lower()
-            if self.spool_shortcut not in {"spoolman", "spool"}:
-                self.spool_shortcut = "spoolman"
+            raw_spool_shortcut = self.ks_printer_cfg.get("spool_shortcut", fallback=None)
+            if isinstance(raw_spool_shortcut, str):
+                raw_spool_shortcut = raw_spool_shortcut.strip().lower()
+            self.spool_shortcut = raw_spool_shortcut if raw_spool_shortcut in {"spoolman", "spool"} else None
             self.spoolman_low_limit = self.ks_printer_cfg.getfloat("spool_low_limit", fallback=20)
         else:
             self.titlebar_items = []
             self.show_spoolman_in_title = False
-            self.spool_shortcut = "spoolman"
+            self.spool_shortcut = None
             self.spoolman_low_limit = 20
         self.refresh_spoolman_weight(
             self._printer is not None and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'}
