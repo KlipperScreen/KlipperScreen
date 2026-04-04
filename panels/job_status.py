@@ -415,6 +415,7 @@ class Panel(ScreenPanel):
             cfg_url = self._tool_cfg.get("spoolman_url")
         return cfg_url or "http://192.168.88.135:7912/api/v1"
 
+
     # ------------------------------------------------------------------ Tool strip
 
     def _build_tool_strip(self):
@@ -640,6 +641,7 @@ class Panel(ScreenPanel):
         buttons["toolchanges"].get_style_context().add_class("printing-info")
         self.buttons.update(buttons)
 
+
         self.buttons["extruder"] = {}
         for i, extruder in enumerate(self._printer.get_tools()):
             self.labels[extruder] = Gtk.Label(label="-")
@@ -682,30 +684,7 @@ class Panel(ScreenPanel):
             top_row_heaters.append((dev, self.buttons["heater"][dev]))
             n += 1
 
-        extra_item = not self._show_heater_power
-        if self.ks_printer_cfg is not None:
-            titlebar_items = self.ks_printer_cfg.get("titlebar_items", "")
-            if titlebar_items is not None:
-                titlebar_items = [str(i.strip()) for i in titlebar_items.split(",")]
-                for device in self._printer.get_temp_sensors():
-                    name = " ".join(device.split(" ")[1:])
-                    for item in titlebar_items:
-                        if name == item:
-                            if extra_item:
-                                extra_item = False
-                                nlimit += 1
-                            if n >= nlimit:
-                                break
-                            self.buttons["heater"][device] = self._gtk.Button(
-                                "heat-up", "", None, self.bts, Gtk.PositionType.LEFT, 1)
-                            self.labels[device] = Gtk.Label(label="-")
-                            self.buttons["heater"][device].set_label(self.labels[device].get_text())
-                            self.buttons["heater"][device].connect(
-                                "clicked", self.menu_item_clicked, {"panel": "temperature"})
-                            self.buttons["heater"][device].set_halign(Gtk.Align.START)
-                            top_row_heaters.append((device, self.buttons["heater"][device]))
-                            n += 1
-                            break
+
 
         # Keep the existing heater tiles on the row, but group Bed/Fan/Layer into a
         # compact strip so they sit visibly closer together.
