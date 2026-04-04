@@ -1,6 +1,7 @@
 import logging
 import os.path
 import pathlib
+import re
 
 import gi
 
@@ -122,13 +123,23 @@ class SpoolmanSpool(GObject.GObject):
                 SpoolmanSpool._spool_icon = pathlib.Path(_spool_icon_path).read_text()
 
             loader = GdkPixbuf.PixbufLoader()
-            color = self.filament.color_hex if hasattr(self.filament, 'color_hex') else '000000'
+            color = self._get_filament_color()
             loader.write(
                 SpoolmanSpool._spool_icon.replace('var(--filament-color)', f'#{color}').encode()
             )
             loader.close()
             self._icon = loader.get_pixbuf()
         return self._icon
+
+    def _get_filament_color(self):
+        default_color = "000000"
+        color = getattr(self.filament, "color_hex", None)
+        if not isinstance(color, str):
+            return default_color
+        color = color.strip().lstrip("#")
+        if not color or not re.fullmatch(r"[0-9a-fA-F]{3}|[0-9a-fA-F]{6}", color):
+            return default_color
+        return color
 
 
 class Panel(ScreenPanel):
@@ -386,7 +397,10 @@ class Panel(ScreenPanel):
 
     def process_update(self, action, data):
         if action == "notify_active_spool_set":
-            self._active_spool_id = data['spool_id']
+            if isinstance(data, dict) and "spool_id" in data:
+                self._active_spool_id = data["spool_id"]
+            else:
+                self.get_active_spool()
             self._treeview.get_model().foreach(lambda store, treepath, treeiter:
                                                store.row_changed(treepath, treeiter)
                                                )
