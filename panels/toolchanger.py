@@ -519,7 +519,7 @@ class ToolchangerPanel:
 
         temp_event = Gtk.EventBox()
         temp_event.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-        temp_label = Gtk.Label(label="--°C")
+        temp_label = Gtk.Label(label="--C")
         temp_label.get_style_context().add_class("tc-temp-label")
         temp_event.add(temp_label)
         temp_event.connect("button-press-event", lambda _w, _e, idx=state.index: self._show_temp_popup(idx))
@@ -916,7 +916,7 @@ class ToolchangerPanel:
                 continue
 
             widgets.temp.set_text(
-                f"{state.temperature:.0f}°C" + (f" / {state.target:.0f}°" if state.target > 0 else "")
+                f"{state.temperature:.0f}C" + (f" / {state.target:.0f}" if state.target > 0 else "")
             )
             widgets.mat.set_text(state.material)
 
@@ -1048,7 +1048,7 @@ class ToolchangerPanel:
         layout.set_margin_start(15)
         layout.set_margin_end(15)
 
-        value_label = Gtk.Label(label=f"{int(state.target)} °C")
+        value_label = Gtk.Label(label=f"{int(state.target)} C")
         value_label.get_style_context().add_class("tc-temp-label")
 
         adjustment = Gtk.Adjustment(value=state.target, lower=0, upper=310, step_increment=1, page_increment=10)
@@ -1056,7 +1056,7 @@ class ToolchangerPanel:
         slider.set_inverted(True)
         slider.set_vexpand(True)
         slider.set_draw_value(False)
-        slider.connect("value-changed", lambda s: value_label.set_text(f"{int(s.get_value())} °C"))
+        slider.connect("value-changed", lambda s: value_label.set_text(f"{int(s.get_value())} C"))
 
         slider_box = box(spacing=10)
         slider_box.pack_start(value_label, False, False, 0)
@@ -1201,7 +1201,7 @@ class ToolchangerPanel:
             filament.set_line_wrap(True)
             card.pack_start(filament, False, False, 0)
 
-            temp = Gtk.Label(label=f"{state.temperature:.0f}°C")
+            temp = Gtk.Label(label=f"{state.temperature:.0f}C")
             temp.get_style_context().add_class("tc-popup-card-temp")
             temp.set_xalign(0.5)
             temp.set_justify(Gtk.Justification.CENTER)
@@ -1499,7 +1499,7 @@ class ToolchangerPanel:
         layout.set_margin_end(15)
 
         default = 200
-        value_label = Gtk.Label(label=f"{default} °C")
+        value_label = Gtk.Label(label=f"{default} C")
         value_label.get_style_context().add_class("tc-temp-label")
 
         adjustment = Gtk.Adjustment(value=default, lower=0, upper=310, step_increment=1, page_increment=10)
@@ -1507,7 +1507,7 @@ class ToolchangerPanel:
         slider.set_inverted(True)
         slider.set_vexpand(True)
         slider.set_draw_value(False)
-        slider.connect("value-changed", lambda s: value_label.set_text(f"{int(s.get_value())} °C"))
+        slider.connect("value-changed", lambda s: value_label.set_text(f"{int(s.get_value())} C"))
 
         left = box(spacing=10)
         left.pack_start(value_label, False, False, 0)
