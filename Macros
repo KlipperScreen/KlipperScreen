@@ -2,6 +2,15 @@
 # REQUIRED MACROS FOR KLIPPERSCREEN TOOLCHANGER FORK
 ################################################################################
 
+
+#------------------------------------------------------------------------------
+#VARIABLE STORAGE
+#------------------------------------------------------------------------------
+#Persistent storage for variables across restarts
+[save_variables]
+filename = ~/printer_data/config/saved_variables.cfg
+
+
 # ------------------------------------------------------------------------------
 # TOOL SELECT MACROS
 # Each tool macro must expose variable_spool_id because KlipperScreen writes it.
