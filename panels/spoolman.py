@@ -1,4 +1,5 @@
 import logging
+import math
 import os.path
 import pathlib
 import re
@@ -304,17 +305,17 @@ class Panel(ScreenPanel):
         column_last_used.set_visible(False)
         column_last_used.set_sort_column_id(1)
 
-        edit_renderer = Gtk.CellRendererText(xpad=10, ypad=8)
-        edit_renderer.set_property("xalign", 0.5)
-        edit_renderer.set_property("yalign", 0.5)
+        edit_renderer = Gtk.CellRendererPixbuf(xpad=8, ypad=8)
         self._column_edit = Gtk.TreeViewColumn(cell_renderer=edit_renderer)
         self._column_edit.set_sizing(Gtk.TreeViewColumnSizing.FIXED)
         self._column_edit.set_fixed_width(max(72, round(self._gtk.font_size * 4.8)))
+        edit_icon_size = max(16, math.ceil(self._gtk.img_scale * self.bts * .6))
+        edit_icon = self._gtk.PixbufFromIcon("settings", edit_icon_size, edit_icon_size)
         self._column_edit.set_cell_data_func(
             edit_renderer,
             lambda column, cell, model, it, data:
             self._set_cell_background(cell, model.get_value(it, 0)) and
-            cell.set_property('markup', f'<b>{_("Edit")}</b>')
+            cell.set_property('pixbuf', edit_icon)
         )
 
         checkbox_renderer.connect("toggled", self._set_active_spool)
