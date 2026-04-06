@@ -296,7 +296,7 @@ class BasePanel(ScreenPanel):
         if self.battery_update is None:
             self.battery_update = GLib.timeout_add_seconds(60, self.battery_percentage)
         if self.spoolman_update is None:
-            self.spoolman_update = GLib.timeout_add_seconds(10, self.update_spoolman_during_print)
+            self.spoolman_update = GLib.timeout_add_seconds(60, self.update_spoolman_during_print)
 
     def add_content(self, panel):
         printing = self._printer and self._printer.state in {"printing", "paused"}
