@@ -35,7 +35,6 @@ class BasePanel(ScreenPanel):
         self.titlebar_name_type = None
         self.show_spoolman_in_title = False
         self.spoolman_low_limit = 20
-        self.spoolman_icon_alert_pixbuf = None
         self.spoolman_printing = False
         self.current_extruder = None
         self.last_usage_report = datetime.now()
