@@ -409,11 +409,26 @@ class Panel(ScreenPanel):
             return "#4d6df3"
         return f"#{color.lower()}"
 
-    def _spoolman_url(self):
-        cfg_url = None
-        if isinstance(self._tool_cfg, dict):
-            cfg_url = self._tool_cfg.get("spoolman_url")
-        return cfg_url or "http://192.168.88.135:7912/api/v1"
+        def _spoolman_proxy_get(self, path):
+        try:
+            result = self._screen.apiclient.post_request(
+                "server/spoolman/proxy",
+                json={
+                    "request_method": "GET",
+                    "path": path,
+                },
+            )
+            if isinstance(result, dict):
+                return result.get("result")
+        except Exception as exc:
+            logging.debug(f"Spoolman proxy GET failed for {path}: {exc}")
+        return None
+
+    def _spoolman_get_spool(self, spool_id):
+        if not spool_id:
+            return None
+        item = self._spoolman_proxy_get(f"/v1/spool/{int(spool_id)}")
+        return item if isinstance(item, dict) else None
 
 
     # ------------------------------------------------------------------ Tool strip
