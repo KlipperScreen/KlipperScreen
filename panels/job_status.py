@@ -49,9 +49,10 @@ class Panel(ScreenPanel):
         self.flowstore = []
         self.toolchange_count = 0
         self._last_toolchange_tool = None
+        self.toolchange_last_change = None
         self.toolchange_per_tool = {}
-        self.tool_filament_per_tool = {}
-        self._last_filament_used_total = 0.0
+        self.toolchange_filament_mm = {}
+        self.toolchange_spool_state = {}
         self.toolchange_grid = None
         self.mm = _("mm")
         self.mms = _("mm/s")
@@ -171,6 +172,7 @@ class Panel(ScreenPanel):
         self.switch_info(info=self.status_grid)
 
         GLib.timeout_add_seconds(10, self.update_spool_data)
+        self._reset_toolchange_counter()
         self._update_tool_strip_runtime()
         self.content.add(self.grid)
 
@@ -295,25 +297,91 @@ class Panel(ScreenPanel):
     def _toolchange_tool_names(self):
         return [self._tool_heater_name(i) for i in range(self._configured_tool_count())]
 
+    def _format_toolchange_length(self, mm_value):
+        try:
+            mm_value = float(mm_value or 0.0)
+        except Exception:
+            mm_value = 0.0
+        return f"{mm_value / 1000:.1f} m"
+
+    def _spool_used_length_mm(self, spool):
+        if not isinstance(spool, dict):
+            return None
+        candidates = (
+            spool.get("used_length"),
+            spool.get("used_length_mm"),
+            spool.get("usedLength"),
+        )
+        for candidate in candidates:
+            if candidate is None:
+                continue
+            try:
+                return max(0.0, float(candidate))
+            except Exception:
+                continue
+        return None
+
+    def _reset_toolchange_filament_tracking(self):
+        self.toolchange_filament_mm = {tool_name: 0.0 for tool_name in self._toolchange_tool_names()}
+        self.toolchange_spool_state = {}
+        for tool_name in self._toolchange_tool_names():
+            tool_idx = self._tool_index_from_name(tool_name)
+            spool = self.tool_spools.get(tool_idx, {})
+            spool_id = spool.get("spool_id")
+            used_length_mm = spool.get("used_length_mm")
+            self.toolchange_spool_state[tool_name] = {
+                "spool_id": spool_id,
+                "last_used_length_mm": float(used_length_mm) if used_length_mm is not None else None,
+            }
+
+    def _update_toolchange_filament_usage(self):
+        for tool_name in self._toolchange_tool_names():
+            self.toolchange_filament_mm.setdefault(tool_name, 0.0)
+            tool_idx = self._tool_index_from_name(tool_name)
+            spool = self.tool_spools.get(tool_idx, {})
+            spool_id = spool.get("spool_id")
+            used_length_mm = spool.get("used_length_mm")
+            state = self.toolchange_spool_state.setdefault(tool_name, {
+                "spool_id": spool_id,
+                "last_used_length_mm": None,
+            })
+
+            if spool_id is None or used_length_mm is None:
+                state["spool_id"] = spool_id
+                state["last_used_length_mm"] = used_length_mm
+                continue
+
+            try:
+                used_length_mm = float(used_length_mm)
+            except Exception:
+                continue
+
+            previous_spool_id = state.get("spool_id")
+            previous_used_length = state.get("last_used_length_mm")
+
+            if previous_spool_id != spool_id or previous_used_length is None:
+                state["spool_id"] = spool_id
+                state["last_used_length_mm"] = used_length_mm
+                continue
+
+            delta = used_length_mm - float(previous_used_length)
+            if self.state == "printing" and delta > 0:
+                self.toolchange_filament_mm[tool_name] += delta
+
+            state["spool_id"] = spool_id
+            state["last_used_length_mm"] = used_length_mm
+
     def _reset_toolchange_counter(self, seed_tool=None):
         self.toolchange_count = 0
-        tool_names = self._toolchange_tool_names()
-        self.toolchange_per_tool = {tool_name: 0 for tool_name in tool_names}
-        self.tool_filament_per_tool = {tool_name: 0.0 for tool_name in tool_names}
-        self._last_filament_used_total = 0.0
+        self.toolchange_last_change = None
+        self.toolchange_per_tool = {tool_name: 0 for tool_name in self._toolchange_tool_names()}
         if seed_tool is None:
             seed_tool = self._printer.get_stat("toolhead", "extruder")
         self._last_toolchange_tool = self._normalize_tool_name(seed_tool)
         if self._last_toolchange_tool is not None:
             self.toolchange_per_tool.setdefault(self._last_toolchange_tool, 0)
-            self.tool_filament_per_tool.setdefault(self._last_toolchange_tool, 0.0)
+        self._reset_toolchange_filament_tracking()
         self._update_toolchange_display()
-
-    def _format_tool_filament_length(self, length_mm):
-        try:
-            return f"{float(length_mm) / 1000:.1f} m"
-        except Exception:
-            return "0.0 m"
 
     def _update_toolchange_display(self):
         if "toolchanges" in getattr(self, "buttons", {}):
@@ -327,11 +395,20 @@ class Panel(ScreenPanel):
                 self._toolchange_tool_label(self._last_toolchange_tool)
             )
 
-        for tool_name, label in getattr(self, "toolchange_tool_labels", {}).items():
-            label.set_label(str(self.toolchange_per_tool.get(tool_name, 0)))
+        if "toolchange_last_change" in self.labels:
+            if self.toolchange_last_change:
+                last_from, last_to = self.toolchange_last_change
+                self.labels["toolchange_last_change"].set_label(
+                    f"{self._toolchange_tool_label(last_from)} -> {self._toolchange_tool_label(last_to)}"
+                )
+            else:
+                self.labels["toolchange_last_change"].set_label("--")
 
-        for tool_name, label in getattr(self, "toolchange_tool_filament_labels", {}).items():
-            label.set_label(self._format_tool_filament_length(self.tool_filament_per_tool.get(tool_name, 0.0)))
+        for tool_name, label in getattr(self, "toolchange_tool_labels", {}).items():
+            changes = self.toolchange_per_tool.get(tool_name, 0)
+            length_mm = self.toolchange_filament_mm.get(tool_name, 0.0)
+            change_word = _("change") if changes == 1 else _("changes")
+            label.set_label(f"{changes} {change_word}  {self._format_toolchange_length(length_mm)}")
 
     def _track_toolchange(self, tool_name, state=None):
         tool_name = self._normalize_tool_name(tool_name)
@@ -339,8 +416,9 @@ class Panel(ScreenPanel):
             return
 
         self.toolchange_per_tool.setdefault(tool_name, 0)
+        self.toolchange_filament_mm.setdefault(tool_name, 0.0)
         state = state or self.state
-        if state not in ["printing", "paused"]:
+        if state != "printing":
             self._last_toolchange_tool = tool_name
             self._update_toolchange_display()
             return
@@ -348,38 +426,12 @@ class Panel(ScreenPanel):
         if self._last_toolchange_tool is None:
             self._last_toolchange_tool = tool_name
         elif tool_name != self._last_toolchange_tool:
+            previous_tool = self._last_toolchange_tool
             self.toolchange_count += 1
             self.toolchange_per_tool[tool_name] = self.toolchange_per_tool.get(tool_name, 0) + 1
+            self.toolchange_last_change = (previous_tool, tool_name)
             self._last_toolchange_tool = tool_name
 
-        self._update_toolchange_display()
-
-    def _track_tool_filament_usage(self, total_filament_used, tool_name=None, state=None):
-        try:
-            total_filament_used = float(total_filament_used or 0.0)
-        except Exception:
-            return
-
-        state = state or self.state
-        tool_name = self._normalize_tool_name(tool_name or self.current_extruder or self._last_toolchange_tool)
-        if tool_name is not None:
-            self.tool_filament_per_tool.setdefault(tool_name, 0.0)
-
-        if state not in ["printing", "paused"]:
-            self._last_filament_used_total = max(0.0, total_filament_used)
-            self._update_toolchange_display()
-            return
-
-        delta = total_filament_used - float(self._last_filament_used_total or 0.0)
-        if delta < 0:
-            self._last_filament_used_total = max(0.0, total_filament_used)
-            self._update_toolchange_display()
-            return
-
-        if delta > 0 and tool_name is not None:
-            self.tool_filament_per_tool[tool_name] = self.tool_filament_per_tool.get(tool_name, 0.0) + delta
-
-        self._last_filament_used_total = max(0.0, total_filament_used)
         self._update_toolchange_display()
 
     def _get_active_tool_fan_percent(self):
@@ -616,10 +668,19 @@ class Panel(ScreenPanel):
             ratio = None
             if total_weight > 0:
                 ratio = max(0.0, min(1.0, 1.0 - (used_weight / total_weight)))
+
+            used_length_mm = self._spool_used_length_mm(spool)
             self.tool_spools[int(tool_idx)] = {
-                "material": material, "color": color_hex,
-                "ratio": ratio, "spool_id": int(spool_id),
+                "material": material,
+                "color": color_hex,
+                "ratio": ratio,
+                "spool_id": int(spool_id),
+                "used_length_mm": used_length_mm,
+                "used_weight": used_weight,
             }
+
+        self._update_toolchange_filament_usage()
+        self._update_toolchange_display()
         self._update_tool_strip_runtime()
         return True
 
@@ -684,6 +745,31 @@ class Panel(ScreenPanel):
             self.buttons["heater"][dev].set_halign(Gtk.Align.START)
             top_row_heaters.append((dev, self.buttons["heater"][dev]))
             n += 1
+
+        extra_item = not self._show_heater_power
+        if self.ks_printer_cfg is not None:
+            titlebar_items = self.ks_printer_cfg.get("titlebar_items", "")
+            if titlebar_items is not None:
+                titlebar_items = [str(i.strip()) for i in titlebar_items.split(",")]
+                for device in self._printer.get_temp_sensors():
+                    name = " ".join(device.split(" ")[1:])
+                    for item in titlebar_items:
+                        if name == item:
+                            if extra_item:
+                                extra_item = False
+                                nlimit += 1
+                            if n >= nlimit:
+                                break
+                            self.buttons["heater"][device] = self._gtk.Button(
+                                "heat-up", "", None, self.bts, Gtk.PositionType.LEFT, 1)
+                            self.labels[device] = Gtk.Label(label="-")
+                            self.buttons["heater"][device].set_label(self.labels[device].get_text())
+                            self.buttons["heater"][device].connect(
+                                "clicked", self.menu_item_clicked, {"panel": "temperature"})
+                            self.buttons["heater"][device].set_halign(Gtk.Align.START)
+                            top_row_heaters.append((device, self.buttons["heater"][device]))
+                            n += 1
+                            break
 
         # Keep the existing heater tiles on the row, but group Bed/Fan/Layer into a
         # compact strip so they sit visibly closer together.
@@ -802,67 +888,48 @@ class Panel(ScreenPanel):
         info = Gtk.Grid()
         info.get_style_context().add_class("printing-info-secondary")
         info.set_margin_start(20)
+        info.set_column_spacing(12)
 
         tool_names = self._toolchange_tool_names()
         row_span = max(5, len(tool_names) + 3)
         info.attach(goback, 0, 0, 1, row_span)
 
-        total_lbl = Gtk.Label(_("Total changes:"))
-        total_lbl.set_halign(Gtk.Align.START)
-        total_lbl.set_ellipsize(Pango.EllipsizeMode.END)
-        self.labels["toolchange_total_lbl"] = total_lbl
+        summary_rows = [
+            ("toolchange_total_lbl", _("Total changes:"), "toolchange_total", "0"),
+            ("toolchange_current_lbl", _("Current tool:"), "toolchange_current", "--"),
+            ("toolchange_last_change_lbl", _("Last change:"), "toolchange_last_change", "--"),
+        ]
 
-        total_val = Gtk.Label(label="0")
-        total_val.set_halign(Gtk.Align.START)
-        total_val.set_ellipsize(Pango.EllipsizeMode.END)
-        self.labels["toolchange_total"] = total_val
+        for row, (label_key, label_text, value_key, value_text) in enumerate(summary_rows):
+            label = Gtk.Label(label_text)
+            label.set_halign(Gtk.Align.START)
+            label.set_ellipsize(Pango.EllipsizeMode.END)
+            self.labels[label_key] = label
 
-        current_lbl = Gtk.Label(_("Current tool:"))
-        current_lbl.set_halign(Gtk.Align.START)
-        current_lbl.set_ellipsize(Pango.EllipsizeMode.END)
-        self.labels["toolchange_current_lbl"] = current_lbl
+            value = Gtk.Label(label=value_text)
+            value.set_halign(Gtk.Align.START)
+            value.set_ellipsize(Pango.EllipsizeMode.END)
+            self.labels[value_key] = value
 
-        current_val = Gtk.Label(label="--")
-        current_val.set_halign(Gtk.Align.START)
-        current_val.set_ellipsize(Pango.EllipsizeMode.END)
-        self.labels["toolchange_current"] = current_val
-
-        info.attach(self.labels["toolchange_total_lbl"], 1, 0, 1, 1)
-        info.attach(self.labels["toolchange_total"], 2, 0, 1, 1)
-        info.attach(self.labels["toolchange_current_lbl"], 1, 1, 1, 1)
-        info.attach(self.labels["toolchange_current"], 2, 1, 1, 1)
-
-        changes_hdr = Gtk.Label(label=_("Changes"))
-        changes_hdr.set_halign(Gtk.Align.START)
-        changes_hdr.set_ellipsize(Pango.EllipsizeMode.END)
-        filament_hdr = Gtk.Label(label=_("Filament used"))
-        filament_hdr.set_halign(Gtk.Align.START)
-        filament_hdr.set_ellipsize(Pango.EllipsizeMode.END)
-        self.labels["toolchange_changes_hdr"] = changes_hdr
-        self.labels["toolchange_filament_hdr"] = filament_hdr
-        info.attach(self.labels["toolchange_changes_hdr"], 2, 2, 1, 1)
-        info.attach(self.labels["toolchange_filament_hdr"], 3, 2, 1, 1)
+            info.attach(self.labels[label_key], 1, row, 1, 1)
+            info.attach(self.labels[value_key], 2, row, 1, 1)
 
         self.toolchange_tool_labels = {}
-        self.toolchange_tool_filament_labels = {}
-        for row, tool_name in enumerate(tool_names, start=3):
+        start_row = len(summary_rows)
+        for row, tool_name in enumerate(tool_names, start=start_row):
             label = Gtk.Label(label=f"{self._toolchange_tool_label(tool_name)}:")
             label.set_halign(Gtk.Align.START)
             label.set_ellipsize(Pango.EllipsizeMode.END)
-            value = Gtk.Label(label="0")
+
+            value = Gtk.Label(label=f"0 {_('changes')}  0.0 m")
             value.set_halign(Gtk.Align.START)
             value.set_ellipsize(Pango.EllipsizeMode.END)
-            filament = Gtk.Label(label="0.0 m")
-            filament.set_halign(Gtk.Align.START)
-            filament.set_ellipsize(Pango.EllipsizeMode.END)
 
             self.labels[f"toolchange_tool_lbl_{tool_name}"] = label
             self.toolchange_tool_labels[tool_name] = value
-            self.toolchange_tool_filament_labels[tool_name] = filament
 
             info.attach(label, 1, row, 1, 1)
             info.attach(value, 2, row, 1, 1)
-            info.attach(filament, 3, row, 1, 1)
 
         self.toolchange_grid = info
         self.buttons["toolchanges"].connect("clicked", self.switch_info, self.toolchange_grid)
@@ -1008,6 +1075,8 @@ class Panel(ScreenPanel):
     def close_panel(self, widget=None):
         if self.can_close:
             logging.debug("Closing job_status panel")
+            if self.state not in ["printing", "paused"]:
+                self._reset_toolchange_counter()
             self._screen.state_ready(wait=False)
 
     def enable_button(self, *args):
@@ -1133,10 +1202,8 @@ class Panel(ScreenPanel):
             if "filename" in data["print_stats"]:
                 self.update_filename(data["print_stats"]["filename"])
             if "filament_used" in data["print_stats"]:
-                filament_used_total = float(data["print_stats"]["filament_used"])
                 self.labels["filament_used"].set_label(
-                    f"{filament_used_total / 1000:.1f} m")
-                self._track_tool_filament_usage(filament_used_total, state=incoming_state)
+                    f"{float(data['print_stats']['filament_used']) / 1000:.1f} m")
             if "info" in data["print_stats"]:
                 if (data["print_stats"]["info"].get("total_layer") is not None):
                     self.labels["total_layers"].set_label(
