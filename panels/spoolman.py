@@ -308,8 +308,8 @@ class Panel(ScreenPanel):
         edit_renderer = Gtk.CellRendererPixbuf(xpad=8, ypad=8)
         self._column_edit = Gtk.TreeViewColumn(cell_renderer=edit_renderer)
         self._column_edit.set_sizing(Gtk.TreeViewColumnSizing.FIXED)
-        self._column_edit.set_fixed_width(max(72, round(self._gtk.font_size * 4.8)))
-        edit_icon_size = max(16, math.ceil(self._gtk.img_scale * self.bts * .6))
+        edit_icon_size = max(16, math.ceil(self._gtk.img_scale * self.bts * 1.8))
+        self._column_edit.set_fixed_width(max(edit_icon_size + 20, round(self._gtk.font_size * 6.5)))
         edit_icon = self._gtk.PixbufFromIcon("settings", edit_icon_size, edit_icon_size)
         self._column_edit.set_cell_data_func(
             edit_renderer,
