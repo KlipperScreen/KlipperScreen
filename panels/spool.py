@@ -21,8 +21,7 @@ class Panel(ScreenPanel):
         self.spool = extra
         if self.selected_weight_mode not in {"measured", "filament"}:
             self.selected_weight_mode = "filament"
-        if self.spool is not None:
-            self.title = self._get_display_name()
+        self.title = _("Spool")
         for child in self.content.get_children():
             self.content.remove(child)
         self._build_grid()
@@ -136,7 +135,7 @@ class Panel(ScreenPanel):
             })
             rows.append({
                 "mode": "filament",
-                "label": _("Filament weight"),
+                "label": _("Remaining weight"),
                 "value": remaining_weight,
                 "selectable": True,
             })
