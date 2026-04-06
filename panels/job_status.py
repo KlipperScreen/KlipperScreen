@@ -409,7 +409,7 @@ class Panel(ScreenPanel):
             return "#4d6df3"
         return f"#{color.lower()}"
 
-        def _spoolman_proxy_get(self, path):
+    def _spoolman_proxy_get(self, path):
         try:
             result = self._screen.apiclient.post_request(
                 "server/spoolman/proxy",
@@ -429,7 +429,6 @@ class Panel(ScreenPanel):
             return None
         item = self._spoolman_proxy_get(f"/v1/spool/{int(spool_id)}")
         return item if isinstance(item, dict) else None
-
 
     # ------------------------------------------------------------------ Tool strip
 
@@ -600,18 +599,6 @@ class Panel(ScreenPanel):
                 mapping[idx] = 0
         return mapping
 
-    def _spoolman_get_spool(self, spool_id):
-        if not spool_id:
-            return None
-        try:
-            response = requests.get(f"{self._spoolman_url()}/spool/{int(spool_id)}", timeout=2.0)
-            response.raise_for_status()
-            payload = response.json()
-            return payload if isinstance(payload, dict) else None
-        except Exception as exc:
-            logging.debug(f"Spoolman spool lookup failed for {spool_id}: {exc}")
-            return None
-
     def update_spool_data(self):
         spool_ids = self._moonraker_tool_spool_ids()
         self.tool_spools = {}
@@ -656,7 +643,6 @@ class Panel(ScreenPanel):
         buttons["toolchanges"].get_style_context().add_class("printing-info")
         self.buttons.update(buttons)
 
-
         self.buttons["extruder"] = {}
         for i, extruder in enumerate(self._printer.get_tools()):
             self.labels[extruder] = Gtk.Label(label="-")
@@ -698,8 +684,6 @@ class Panel(ScreenPanel):
             self.buttons["heater"][dev].set_halign(Gtk.Align.START)
             top_row_heaters.append((dev, self.buttons["heater"][dev]))
             n += 1
-
-
 
         # Keep the existing heater tiles on the row, but group Bed/Fan/Layer into a
         # compact strip so they sit visibly closer together.
