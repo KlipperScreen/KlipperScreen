@@ -1,3 +1,20 @@
+ obvisly set this for per tool
+
+################################################################################
+[gcode_macro T0]
+variable_active: 0
+variable_color: ""
+variable_spool_id: None
+gcode:
+    {% set svv = printer.save_variables.variables %}
+    SELECT_TOOL T=0
+    {% if svv.t0__spool_id is defined and svv.t0__spool_id %}
+        SET_GCODE_VARIABLE MACRO=T0 VARIABLE=spool_id VALUE={svv.t0__spool_id}
+        SET_ACTIVE_SPOOL ID={svv.t0__spool_id}
+    {% endif %}
+
+
+
 # PID Tuning Macros for Klipper - System-Aware Version
 # Add this to your printer.cfg file
 
