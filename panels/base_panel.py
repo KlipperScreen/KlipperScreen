@@ -35,7 +35,6 @@ class BasePanel(ScreenPanel):
         self.titlebar_name_type = None
         self.show_spoolman_in_title = False
         self.spoolman_low_limit = 20
-        self.spoolman_icon_size = self._gtk.img_scale * self.bts * .9
         self.spoolman_icon_alert_pixbuf = None
         self.spoolman_printing = False
         self.current_extruder = None
@@ -180,6 +179,7 @@ class BasePanel(ScreenPanel):
     def get_spoolman_icon_pixbuf(self, color):
         klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
         icon_path = os.path.join(klipperscreendir, "styles", self._screen.theme, "images", "spool.svg")
+        icon_size = self._gtk.img_scale * self.bts * .9
         if not os.path.isfile(icon_path):
             icon_path = os.path.join(klipperscreendir, "styles", "spool.svg")
         try:
@@ -189,7 +189,7 @@ class BasePanel(ScreenPanel):
             pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
                 stream,
                 -1,
-                self.spoolman_icon_size,
+                icon_size,
                 True,
                 None,
             )
@@ -197,7 +197,7 @@ class BasePanel(ScreenPanel):
             return pixbuf
         except Exception as e:
             logging.error(f"Couldn't load spoolman icon: {e}")
-            return self._gtk.PixbufFromIcon("spool", self.spoolman_icon_size, self.spoolman_icon_size)
+            return self._gtk.PixbufFromIcon("spool", icon_size, icon_size)
 
     def get_active_spoolman_color(self):
         default_color = "000000"
