@@ -435,6 +435,7 @@ class Panel(ScreenPanel):
         self._update_toolchange_display()
 
     def _get_active_tool_fan_percent(self):
+
         active = self._printer.get_stat("toolhead", "extruder")
         if not active or active == "extruder":
             fan_name = "fan_generic t0_partfan"
@@ -650,6 +651,18 @@ class Panel(ScreenPanel):
             except Exception:
                 mapping[idx] = 0
         return mapping
+
+    def _spoolman_get_spool(self, spool_id):
+        if not spool_id:
+            return None
+        try:
+            response = requests.get(f"{self._spoolman_url()}/spool/{int(spool_id)}", timeout=2.0)
+            response.raise_for_status()
+            payload = response.json()
+            return payload if isinstance(payload, dict) else None
+        except Exception as exc:
+            logging.debug(f"Spoolman spool lookup failed for {spool_id}: {exc}")
+            return None
 
     def update_spool_data(self):
         spool_ids = self._moonraker_tool_spool_ids()
@@ -936,6 +949,7 @@ class Panel(ScreenPanel):
         self._update_toolchange_display()
 
     def switch_info(self, widget=None, info=None):
+
         if not info:
             logging.debug("No info to attach")
             return
