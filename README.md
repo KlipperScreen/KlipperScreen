@@ -97,7 +97,7 @@ gcode:
 
 [gcode_macro UNSELECT_TOOL]
 gcode:
-    DROP_CURRENT_TOOL
+    UNSELECT_TOOL
 
 # ------------------------------------------------------------------------------
 # PID TUNE
