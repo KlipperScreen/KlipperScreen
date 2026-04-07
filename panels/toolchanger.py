@@ -559,8 +559,26 @@ class ToolchangerPanel:
 
         buttons_row = box(Gtk.Orientation.HORIZONTAL, 8)
         buttons_row.set_halign(Gtk.Align.CENTER)
-        buttons_row.pack_start(self._make_longpress_button("LOAD", "tc-btn-load", f"LOAD_FILAMENT TOOL={state.index}"), False, False, 0)
-        buttons_row.pack_start(self._make_longpress_button("UNLOAD", "tc-btn-unload", f"UNLOAD_FILAMENT TOOL={state.index}"), False, False, 0)
+        buttons_row.pack_start(
+            self._make_longpress_button(
+                "LOAD",
+                "tc-btn-load",
+                lambda idx=state.index: self._run_tool_filament_action(idx, "LOAD_FILAMENT"),
+            ),
+            False,
+            False,
+            0,
+        )
+        buttons_row.pack_start(
+            self._make_longpress_button(
+                "UNLOAD",
+                "tc-btn-unload",
+                lambda idx=state.index: self._run_tool_filament_action(idx, "UNLOAD_FILAMENT"),
+            ),
+            False,
+            False,
+            0,
+        )
         inner.pack_start(buttons_row, False, False, 10)
 
         frame.add(inner)
@@ -573,7 +591,7 @@ class ToolchangerPanel:
             spool_area=spool_area,
         )
 
-    def _make_longpress_button(self, label: str, css_class: str, gcode: str) -> Gtk.Button:
+    def _make_longpress_button(self, label: str, css_class: str, action: Any) -> Gtk.Button:
         steps = 35
         b = Gtk.Button(label=label)
         b.get_style_context().add_class(css_class)
@@ -604,7 +622,10 @@ class ToolchangerPanel:
                 state["running"] = False
                 state["ticks"] = 0
                 b.queue_draw()
-                self._queue_gcode(gcode)
+                if isinstance(action, str):
+                    self._queue_gcode(action)
+                else:
+                    action()
                 return False
             return True
 
@@ -992,28 +1013,85 @@ class ToolchangerPanel:
     # Tool selection
     # ------------------------------------------------------------------
 
-    def _select_tool(self, tool_index: int) -> None:
+    def _request_tool_activation(
+        self,
+        tool_index: int,
+        require_spool: bool = True,
+        notify_if_active: bool = True,
+    ) -> bool:
         state = self._tool_states[tool_index]
 
-        if not state.spool_id:
+        if require_spool and not state.spool_id:
             self._show_message(f"Tool {tool_index + 1} has no spool assigned")
-            return
+            return False
 
         if state.ktc_state == "changing":
             self._show_message("Tool change already in progress")
-            return
+            return False
 
-        if state.ktc_state == "active":
-            self._show_message(f"Tool {tool_index + 1} already active")
+        if state.ktc_state == "active" or state.active:
+            if notify_if_active:
+                self._show_message(f"Tool {tool_index + 1} already active")
+            return True
+
+        if state.ktc_state == "error":
+            self._show_message(f"Tool {tool_index + 1} is in error state")
+            return False
+
+        state.ktc_state = "changing"
+        GLib.idle_add(self._apply_snapshot, RuntimeSnapshot(self._tool_states))
+        self._queue_gcode(f"T{tool_index}")
+        return True
+
+    def _wait_for_tool_active_then_run(self, tool_index: int, command: str) -> None:
+        attempts = {"count": 0}
+        max_attempts = 40
+
+        def poll() -> bool:
+            if tool_index >= len(self._tool_states):
+                return False
+
+            state = self._tool_states[tool_index]
+
+            if state.ktc_state == "error":
+                self._show_message(f"Tool {tool_index + 1} entered an error state")
+                return False
+
+            if state.active or state.ktc_state == "active":
+                self._queue_gcode(command)
+                return False
+
+            attempts["count"] += 1
+            if attempts["count"] >= max_attempts:
+                self._show_message(f"Tool {tool_index + 1} did not become active in time")
+                return False
+
+            return True
+
+        GLib.timeout_add(250, poll)
+
+    def _run_tool_filament_action(self, tool_index: int, action_name: str) -> None:
+        state = self._tool_states[tool_index]
+        command = f"{action_name} TOOL={tool_index}"
+
+        if state.ktc_state == "changing":
+            self._show_message("Tool change already in progress")
             return
 
         if state.ktc_state == "error":
             self._show_message(f"Tool {tool_index + 1} is in error state")
             return
 
-        state.ktc_state = "changing"
-        GLib.idle_add(self._apply_snapshot, RuntimeSnapshot(self._tool_states))
-        self._queue_gcode(f"T{tool_index}")
+        if state.active or state.ktc_state == "active":
+            self._queue_gcode(command)
+            return
+
+        if self._request_tool_activation(tool_index, require_spool=False, notify_if_active=False):
+            self._wait_for_tool_active_then_run(tool_index, command)
+
+    def _select_tool(self, tool_index: int) -> None:
+        self._request_tool_activation(tool_index, require_spool=True, notify_if_active=True)
+
 
     # ------------------------------------------------------------------
     # Simple message popup
