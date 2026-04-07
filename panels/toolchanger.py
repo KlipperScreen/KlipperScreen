@@ -849,7 +849,6 @@ class ToolchangerPanel:
             return RuntimeSnapshot(tools=base_states, moonraker_ok=False)
 
         save_variables = status.get("save_variables", {}).get("variables", {})
-        active_name = status.get("toolhead", {}).get("extruder", "")
 
         tc_status = status.get("toolchanger", {}) or {}
         tc_status_str = str(tc_status.get("status", "ready")).lower()
@@ -860,10 +859,13 @@ class ToolchangerPanel:
             heater = status.get(state.heater_name, {}) or {}
             state.temperature = float(heater.get("temperature", 0) or 0)
             state.target = float(heater.get("target", 0) or 0)
-            state.active = active_name == state.heater_name or (state.index == 0 and active_name == "extruder")
 
             tool_obj = status.get(f"tool T{state.index}", {}) or {}
             tool_active = tool_obj.get("active", None)
+
+            # Use the toolchanger's reported tool state instead of toolhead.extruder.
+            # This prevents T0 from appearing active on boot when no tool is mounted.
+            state.active = (tool_active is True)
 
             if tc_status_str == "error":
                 state.ktc_state = "error"
