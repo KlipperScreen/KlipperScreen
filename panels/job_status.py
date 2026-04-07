@@ -5,7 +5,7 @@ import math
 import os
 
 import cairo
-import requests
+#import requests
 
 import gi
 
@@ -583,13 +583,22 @@ class Panel(ScreenPanel):
         try:
             heater_names = [self._tool_heater_name(i) for i in range(self._configured_tool_count())]
             query = "&".join(heater_names + ["save_variables", "toolhead"])
-            response = requests.get(f"http://localhost:7125/printer/objects/query?{query}", timeout=1.5)
-            response.raise_for_status()
-            status = response.json().get("result", {}).get("status", {})
+
+            response = self._screen.apiclient.send_request(f"printer/objects/query?{query}") or {}
+
+            if isinstance(response, dict) and "result" in response and isinstance(response.get("result"), dict):
+                status = response.get("result", {}).get("status", {}) or {}
+            elif isinstance(response, dict):
+                status = response.get("status", {}) or {}
+            else:
+                status = {}
+
             variables = status.get("save_variables", {}).get("variables", {}) or {}
+
         except Exception as exc:
             logging.debug(f"Moonraker spool-id refresh failed: {exc}")
             return {}
+
         mapping = {}
         for idx in range(self._configured_tool_count()):
             raw = variables.get(f"t{idx}__spool_id")
