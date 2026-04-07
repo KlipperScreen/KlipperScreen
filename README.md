@@ -32,6 +32,19 @@ Each `Tn` macro must expose `variable_spool_id`, because KlipperScreen writes sp
 ### Example macro pack
 
 ```ini
+## KlipperScreen menu entry
+
+
+Add this to your KlipperScreen menu config to show the **Tools** button on the main menu:
+
+[menu __main toolchanger]
+name: Tools
+icon: extruder
+panel: toolchanger
+
+[printer]
+titlebar_items: Chamber
+
 ################################################################################
 # REQUIRED MACROS FOR KLIPPERSCREEN TOOLCHANGER-UI
 ################################################################################
