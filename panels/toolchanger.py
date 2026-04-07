@@ -1698,38 +1698,216 @@ class ToolchangerPanel:
     def _show_pid_temp(self, tool_index: int, heater_name: str) -> None:
         popup = self._register_popup(popup_window(self._screen))
 
-        layout = box(Gtk.Orientation.HORIZONTAL, 20)
-        layout.get_style_context().add_class("tc-popup")
-        layout.set_size_request(320, 360)
-        layout.set_margin_top(15)
-        layout.set_margin_bottom(15)
-        layout.set_margin_start(15)
-        layout.set_margin_end(15)
+        outer = box(spacing=14)
+        outer.get_style_context().add_class("tc-popup")
+        outer.set_size_request(640, 430)
+        outer.set_margin_top(15)
+        outer.set_margin_bottom(15)
+        outer.set_margin_start(15)
+        outer.set_margin_end(15)
+
+        top = box(Gtk.Orientation.HORIZONTAL, 20)
 
         default = 200
-        value_label = Gtk.Label(label=f"{default} C")
-        value_label.get_style_context().add_class("tc-temp-label")
+        value_state = {"text": str(default), "replace": True}
+        slider_guard = {"active": False}
 
-        adjustment = Gtk.Adjustment(value=default, lower=0, upper=310, step_increment=1, page_increment=10)
-        slider = Gtk.Scale(orientation=Gtk.Orientation.VERTICAL, adjustment=adjustment)
-        slider.set_inverted(True)
-        slider.set_vexpand(True)
-        slider.set_draw_value(False)
-        slider.connect("value-changed", lambda s: value_label.set_text(f"{int(s.get_value())} C"))
+        temp_value_label = Gtk.Label(label=f"{default} C")
+        temp_value_label.get_style_context().add_class("tc-temp-label")
 
-        left = box(spacing=10)
-        left.pack_start(value_label, False, False, 0)
-        left.pack_start(slider, True, True, 0)
-        layout.pack_start(left, True, True, 0)
+        temp_adjustment = Gtk.Adjustment(value=default, lower=0, upper=310, step_increment=1, page_increment=10)
+        temp_slider = Gtk.Scale(orientation=Gtk.Orientation.VERTICAL, adjustment=temp_adjustment)
+        temp_slider.set_inverted(True)
+        temp_slider.set_vexpand(True)
+        temp_slider.set_draw_value(False)
 
-        controls = box(spacing=12)
+        def apply_temp_value(value: int, replace_next: bool = False) -> None:
+            clamped = max(0, min(310, int(value)))
+            value_state["text"] = str(clamped)
+            value_state["replace"] = replace_next
+            temp_value_label.set_text(f"{clamped} C")
+            if int(round(temp_slider.get_value())) != clamped:
+                slider_guard["active"] = True
+                temp_slider.set_value(clamped)
+                slider_guard["active"] = False
+
+        def on_temp_slider_changed(scale: Gtk.Scale) -> None:
+            if slider_guard["active"]:
+                return
+            apply_temp_value(int(round(scale.get_value())), replace_next=True)
+
+        temp_slider.connect("value-changed", on_temp_slider_changed)
+
+        fan_adjustment = Gtk.Adjustment(value=100, lower=0, upper=100, step_increment=1, page_increment=10)
+        fan_slider = Gtk.Scale(orientation=Gtk.Orientation.VERTICAL, adjustment=fan_adjustment)
+        fan_slider.set_inverted(True)
+        fan_slider.set_vexpand(True)
+        fan_slider.set_draw_value(False)
+
+        fan_percent_label = Gtk.Label(label="100%")
+        fan_percent_label.get_style_context().add_class("tc-temp-label")
+        fan_slider.connect(
+            "value-changed",
+            lambda s: fan_percent_label.set_text(f"{int(round(s.get_value()))}%")
+        )
+
+        left = box(spacing=8)
+        left.set_size_request(190, -1)
+
+        fan_title = Gtk.Label(label=f"PART COOLING FAN - T{tool_index}")
+        fan_title.get_style_context().add_class("tc-mat-label")
+        fan_title.set_xalign(0)
+        left.pack_start(fan_title, False, False, 0)
+
+        fan_toggle_row = box(Gtk.Orientation.HORIZONTAL, 8)
+        fan_toggle_label = Gtk.Label(label="Use during PID")
+        fan_toggle_label.get_style_context().add_class("tc-mat-label-empty")
+        fan_toggle_label.set_xalign(0)
+
+        fan_enable = Gtk.Switch()
+        fan_enable.set_active(False)
+
+        fan_toggle_row.pack_start(fan_toggle_label, True, True, 0)
+        fan_toggle_row.pack_end(fan_enable, False, False, 0)
+        left.pack_start(fan_toggle_row, False, False, 0)
+
+        fan_level_label = Gtk.Label(label="Fan level")
+        fan_level_label.get_style_context().add_class("tc-mat-label-empty")
+        fan_level_label.set_xalign(0)
+        left.pack_start(fan_level_label, False, False, 6)
+
+        fan_live_label = Gtk.Label(label="100%")
+        fan_live_label.get_style_context().add_class("tc-mat-label")
+        fan_live_label.set_xalign(0)
+        left.pack_start(fan_live_label, False, False, 0)
+
+        def update_fan_labels(scale: Gtk.Scale) -> None:
+            text = f"{int(round(scale.get_value()))}%"
+            fan_live_label.set_text(text)
+            fan_percent_label.set_text(text)
+
+        fan_slider.connect("value-changed", update_fan_labels)
+
+        fan_presets = box(Gtk.Orientation.HORIZONTAL, 6)
+        preset_buttons = []
+
+        def set_fan_percent(value: int) -> None:
+            fan_slider.set_value(value)
+
+        for pct in (0, 25, 50, 75, 100):
+            label = "OFF" if pct == 0 else f"{pct}%"
+            preset = button(label, "tc-btn-global", lambda _w, p=pct: set_fan_percent(p))
+            preset.set_size_request(58, 38)
+            fan_presets.pack_start(preset, False, False, 0)
+            preset_buttons.append(preset)
+
+        left.pack_start(fan_presets, False, False, 0)
+
+        center = box(Gtk.Orientation.HORIZONTAL, 20)
+        center.set_hexpand(True)
+        center.set_halign(Gtk.Align.CENTER)
+
+        temp_box = box(spacing=8)
+        temp_box.set_halign(Gtk.Align.CENTER)
+        temp_box.pack_start(temp_value_label, False, False, 0)
+        temp_box.pack_start(temp_slider, True, True, 0)
+
+        fan_box = box(spacing=8)
+        fan_box.set_halign(Gtk.Align.CENTER)
+        fan_box.pack_start(fan_percent_label, False, False, 0)
+        fan_box.pack_start(fan_slider, True, True, 0)
+
+        center.pack_start(fan_box, False, False, 0)
+        center.pack_start(temp_box, False, False, 0)
+
+        right = box(spacing=10)
+        right.set_size_request(250, -1)
+
+        keypad_grid = Gtk.Grid()
+        keypad_grid.set_row_spacing(8)
+        keypad_grid.set_column_spacing(8)
+        keypad_grid.set_halign(Gtk.Align.CENTER)
+
+        def append_digit(digit: str) -> None:
+            if value_state["replace"]:
+                candidate = digit
+            else:
+                candidate = f"{value_state['text']}{digit}"
+            candidate = candidate.lstrip("0") or "0"
+            apply_temp_value(int(candidate), replace_next=False)
+
+        def clear_value() -> None:
+            apply_temp_value(0, replace_next=True)
+
+        def backspace_value() -> None:
+            if value_state["replace"]:
+                apply_temp_value(0, replace_next=True)
+                return
+            candidate = value_state["text"][:-1]
+            if not candidate:
+                apply_temp_value(0, replace_next=True)
+                return
+            apply_temp_value(int(candidate), replace_next=False)
+
+        keypad_buttons = [
+            ("7", lambda _w: append_digit("7")),
+            ("8", lambda _w: append_digit("8")),
+            ("9", lambda _w: append_digit("9")),
+            ("4", lambda _w: append_digit("4")),
+            ("5", lambda _w: append_digit("5")),
+            ("6", lambda _w: append_digit("6")),
+            ("1", lambda _w: append_digit("1")),
+            ("2", lambda _w: append_digit("2")),
+            ("3", lambda _w: append_digit("3")),
+            ("CLR", lambda _w: clear_value()),
+            ("0", lambda _w: append_digit("0")),
+            ("DEL", lambda _w: backspace_value()),
+        ]
+
+        for idx, (label, callback) in enumerate(keypad_buttons):
+            row, col = divmod(idx, 3)
+            key = button(label, "tc-btn-global", callback)
+            key.set_size_request(74, 54)
+            keypad_grid.attach(key, col, row, 1, 1)
+
+        right.pack_start(keypad_grid, False, False, 0)
+
+        def update_fan_controls(*_args) -> None:
+            enabled = fan_enable.get_active()
+            fan_level_label.set_sensitive(enabled)
+            fan_live_label.set_sensitive(enabled)
+            fan_percent_label.set_sensitive(enabled)
+            fan_slider.set_sensitive(enabled)
+            for btn in preset_buttons:
+                btn.set_sensitive(enabled)
+
+        fan_enable.connect("notify::active", update_fan_controls)
+        update_fan_controls()
+
+        top.pack_start(left, False, False, 0)
+        top.pack_start(center, True, True, 0)
+        top.pack_start(right, False, False, 0)
+
+        outer.pack_start(top, True, True, 0)
+
+        def build_pid_command() -> str:
+            commands = []
+
+            if fan_enable.get_active():
+                fan_percent = int(round(fan_slider.get_value()))
+                fan_speed = max(0.0, min(1.0, fan_percent / 100.0))
+                fan_name = f"t{tool_index}_partfan"
+                commands.append(f"SET_FAN_SPEED FAN={fan_name} SPEED={fan_speed:.2f}")
+
+            commands.append(f"PID_TUNE HEATER={heater_name} TARGET={int(temp_slider.get_value())}")
+            return "\n".join(commands)
 
         def run_pid(_w: Gtk.Widget) -> None:
             if tool_index >= len(self._tool_states):
                 self._show_message("Selected tool is no longer available")
                 return
 
-            command = f"PID_TUNE HEATER={heater_name} TARGET={int(slider.get_value())}"
+            command = build_pid_command()
             state = self._tool_states[tool_index]
 
             if state.ktc_state == "changing":
@@ -1749,21 +1927,29 @@ class ToolchangerPanel:
                 self._wait_for_tool_active_then_run(tool_index, command)
                 popup.destroy()
 
-        run = button(
-            "RUN PID",
-            "tc-btn-select",
-            run_pid,
+        bottom = box(Gtk.Orientation.HORIZONTAL, 12)
+        bottom.set_halign(Gtk.Align.CENTER)
+
+        back_btn = button(
+            "BACK",
+            "tc-btn-global",
+            lambda _w: (popup.destroy(), self._show_pid_select()),
         )
-        run.set_size_request(110, 58)
+        back_btn.set_size_request(120, 48)
 
-        cancel = button("CANCEL", "tc-btn-global", lambda _w: popup.destroy())
-        cancel.set_size_request(110, 48)
+        cancel_btn = button("CANCEL", "tc-btn-global", lambda _w: popup.destroy())
+        cancel_btn.set_size_request(120, 48)
 
-        controls.pack_start(run, False, False, 0)
-        controls.pack_end(cancel, False, False, 0)
-        layout.pack_start(controls, False, False, 0)
+        run_btn = button("RUN PID", "tc-btn-select", run_pid)
+        run_btn.set_size_request(170, 58)
 
-        popup.add(layout)
+        bottom.pack_start(back_btn, False, False, 0)
+        bottom.pack_start(cancel_btn, False, False, 0)
+        bottom.pack_start(run_btn, False, False, 0)
+
+        outer.pack_start(bottom, False, False, 0)
+
+        popup.add(outer)
         popup.show_all()
 
     def _show_theme(self) -> None:
