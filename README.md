@@ -15,13 +15,14 @@ This branch adds a dedicated toolchanger workflow to KlipperScreen for multi-too
 The `toolchanger-ui` branch includes:
 
 - a dedicated **Tools** panel for selecting tools, assigning spools, loading and unloading filament, setting temperatures, and running PID tuning
-- tool-aware status handling in the UI
-- Spoolman-aware spool assignment and restore behavior
-- recent UX refinements including:
-  - confirmation before activating a tool with no spool assigned
-  - automatic tool selection before load/unload actions
-  - numeric keypad entry in the per-tool temperature popup
-  - improved tool selection popup layout for better touchscreen usability
+- automatic tool-count detection from Moonraker toolchanger status (`tool_numbers` / `tool_names`)
+- tool-aware status handling in the UI, including **ACTIVE**, **CHANGING**, **PARKED**, **HEATING**, **ERROR**, and **PID TUNE**
+- Spoolman-aware spool assignment, spool restore, and active spool sync
+- confirmation before activating a tool with no spool assigned
+- automatic tool pickup before load, unload, and PID tune actions when required
+- card-style tool selection popups for both normal tool selection and PID tune selection
+- numeric keypad entry for tool temperature and PID temperature popups
+- optional per-tool part-cooling fan control during PID tuning
 
 ### Assumptions and requirements
 
@@ -47,6 +48,11 @@ The toolchanger panel uses these commands:
 - `LOAD_FILAMENT TOOL=<n>` to load filament for a specific tool
 - `UNLOAD_FILAMENT TOOL=<n>` to unload filament for a specific tool
 - `PID_TUNE HEATER=<heater> TARGET=<temp>` from the settings popup
+
+ 
+- The PID popup can optionally enable the selected tool's part-cooling fan before running PID tune.
+- The current panel implementation expects per-tool part-cooling fans to be named like `t0_partfan`, `t1_partfan`, `t2_partfan`, etc.
+- If your printer uses different fan names, adjust the panel code accordingly.
 
 Each `Tn` macro must expose `variable_spool_id`, because KlipperScreen writes spool assignments into the macro with `SET_GCODE_VARIABLE MACRO=Tn VARIABLE=spool_id VALUE=...`.
 
