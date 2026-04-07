@@ -32,9 +32,18 @@ Each `Tn` macro must expose `variable_spool_id`, because KlipperScreen writes sp
 ### Example macro pack
 
 ```ini
+
 ################################################################################
 # REQUIRED MACROS FOR KLIPPERSCREEN TOOLCHANGER-UI
 ################################################################################
+
+
+# ------------------------------------------------------------------------------
+# DROP TOOL
+# KlipperScreen calls UNSELECT_TOOL directly.
+# Your toolchanger config must provide a working UNSELECT_TOOL command.
+# ------------------------------------------------------------------------------
+
 
 # ------------------------------------------------------------------------------
 # TOOL SELECT MACROS
@@ -89,15 +98,9 @@ gcode:
         SET_ACTIVE_SPOOL ID={svv.t3__spool_id} TOOL=3
     {% endif %}
 
-# ------------------------------------------------------------------------------
-# DROP TOOL
-# KlipperScreen calls UNSELECT_TOOL directly.
-# Replace DROP_CURRENT_TOOL with your own undock/drop command if needed.
-# ------------------------------------------------------------------------------
 
-[gcode_macro UNSELECT_TOOL]
-gcode:
-    UNSELECT_TOOL
+
+
 
 # ------------------------------------------------------------------------------
 # PID TUNE
@@ -192,10 +195,7 @@ gcode:
         SET_GCODE_VARIABLE MACRO=T3 VARIABLE=spool_id VALUE={svv.t3__spool_id}
     {% endif %}
 
-[delayed_gcode _auto_spoolman_sync]
-initial_duration: 0
-gcode:
-    SYNC_SPOOLMAN
+
 
 # ------------------------------------------------------------------------------
 # FILAMENT LOAD / UNLOAD WRAPPERS
@@ -231,8 +231,21 @@ gcode:
 At minimum, users should also have:
 
 ```ini
+
 [save_variables]
 filename: ~/printer_data/config/saved_variables.cfg
+
+
+Add this to your KlipperScreen menu config to show the **Tools** button on the main menu:
+
+[menu __main toolchanger]
+name: Tools
+icon: extruder
+panel: toolchanger
+
+[printer]
+titlebar_items: Chamber
+
 ```
 
 Users also need a working toolchanger setup in Klipper/Moonraker plus Spoolman integration for spool assignment and spool restore to function correctly.
