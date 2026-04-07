@@ -1018,11 +1018,20 @@ class ToolchangerPanel:
         tool_index: int,
         require_spool: bool = True,
         notify_if_active: bool = True,
+        confirmed_empty: bool = False,
     ) -> bool:
         state = self._tool_states[tool_index]
 
-        if require_spool and not state.spool_id:
-            self._show_message(f"Tool {tool_index + 1} has no spool assigned")
+        if require_spool and not state.spool_id and not confirmed_empty:
+            self._show_confirm_popup(
+                f"Tool {tool_index + 1} has no spool assigned.\n\nPick up this empty tool anyway?",
+                lambda: self._request_tool_activation(
+                    tool_index,
+                    require_spool=require_spool,
+                    notify_if_active=notify_if_active,
+                    confirmed_empty=True,
+                ),
+            )
             return False
 
         if state.ktc_state == "changing":
@@ -1112,6 +1121,42 @@ class ToolchangerPanel:
 
         btn = button("OK", "tc-btn-select", lambda _w: popup.destroy())
         layout.pack_start(btn, False, False, 0)
+
+        popup.add(layout)
+        popup.show_all()
+
+    def _show_confirm_popup(self, text: str, on_yes: Callable[[], None]) -> None:
+        popup = self._register_popup(popup_window(self._screen))
+
+        layout = box(spacing=12)
+        layout.get_style_context().add_class("tc-popup")
+        layout.set_margin_top(20)
+        layout.set_margin_bottom(20)
+        layout.set_margin_start(20)
+        layout.set_margin_end(20)
+
+        label = Gtk.Label(label=text)
+        label.set_line_wrap(True)
+        label.set_justify(Gtk.Justification.CENTER)
+        layout.pack_start(label, True, True, 0)
+
+        buttons = box(Gtk.Orientation.HORIZONTAL, 12)
+        buttons.set_halign(Gtk.Align.CENTER)
+
+        def yes_clicked(_w: Gtk.Widget) -> None:
+            popup.destroy()
+            on_yes()
+
+        yes_btn = button("YES", "tc-btn-select", yes_clicked)
+        yes_btn.set_size_request(120, 44)
+
+        no_btn = button("NO", "tc-btn-global", lambda _w: popup.destroy())
+        no_btn.set_size_request(120, 44)
+
+        buttons.pack_start(yes_btn, False, False, 0)
+        buttons.pack_start(no_btn, False, False, 0)
+
+        layout.pack_start(buttons, False, False, 0)
 
         popup.add(layout)
         popup.show_all()
@@ -1244,7 +1289,6 @@ class ToolchangerPanel:
 
         popup.add(layout)
         popup.show_all()
-
     def _show_tool_selector(self, _widget: Gtk.Widget) -> None:
         popup = self._register_popup(popup_window(self._screen))
 
@@ -1271,7 +1315,7 @@ class ToolchangerPanel:
         header_box.pack_start(subtitle, False, False, 0)
         outer.pack_start(header_box, False, False, 0)
 
-        cards_row = box(Gtk.Orientation.HORIZONTAL, 22)
+        cards_row = box(Gtk.Orientation.HORIZONTAL, 18)
         cards_row.set_halign(Gtk.Align.CENTER)
         cards_row.set_valign(Gtk.Align.CENTER)
         cards_row.set_hexpand(True)
@@ -1291,10 +1335,11 @@ class ToolchangerPanel:
             card = box(spacing=7)
             card.set_halign(Gtk.Align.CENTER)
             card.set_valign(Gtk.Align.CENTER)
-            card.set_margin_top(16)
-            card.set_margin_bottom(16)
-            card.set_margin_start(18)
-            card.set_margin_end(18)
+            card.set_size_request(120, 160)
+            card.set_margin_top(10)
+            card.set_margin_bottom(10)
+            card.set_margin_start(10)
+            card.set_margin_end(10)
 
             card_ctx = card.get_style_context()
             if state.active:
@@ -1309,7 +1354,7 @@ class ToolchangerPanel:
             card.pack_start(tool_label, False, False, 0)
 
             spool_logo = Gtk.DrawingArea()
-            spool_logo.set_size_request(46, 46)
+            spool_logo.set_size_request(52, 52)
 
             def draw_mini_spool(widget: Gtk.DrawingArea, cr: cairo.Context, s: ToolState = state) -> bool:
                 w = widget.get_allocated_width()
