@@ -6,6 +6,34 @@ KlipperScreen is a touchscreen GUI that interfaces with [Klipper](https://github
 
 For detailed information, [click here to access the documentation](https://klipperscreen.github.io/KlipperScreen/).
 
+## `toolchanger-ui` branch
+
+This branch adds a dedicated toolchanger workflow to KlipperScreen for multi-tool printers. The goal is to make common toolchanger actions feel native on the touchscreen instead of relying on generic single-extruder flows.
+
+### What this branch adds
+
+The `toolchanger-ui` branch includes:
+
+- a dedicated **Tools** panel for selecting tools, assigning spools, loading and unloading filament, setting temperatures, and running PID tuning
+- tool-aware status handling in the UI
+- Spoolman-aware spool assignment and restore behavior
+- recent UX refinements including:
+  - confirmation before activating a tool with no spool assigned
+  - automatic tool selection before load/unload actions
+  - numeric keypad entry in the per-tool temperature popup
+  - improved tool selection popup layout for better touchscreen usability
+
+### Assumptions and requirements
+
+This branch is intended for printers that already have:
+
+- a working Klipper toolchanger setup
+- Moonraker access to the printer's toolchanger-related objects
+- Spoolman configured if you want spool assignment, spool restore, and spool metadata in the UI
+- `save_variables` enabled if you want spool assignments to persist across restarts
+
+This is not a complete drop-in toolchanger configuration by itself. It expects the printer-side toolchanger logic to already exist.
+
 ## Required printer macros for `toolchanger-ui`
 
 The `toolchanger-ui` branch expects a small set of printer-side macros to exist for tool selection, tool drop, filament loading and unloading, PID tuning, and spool assignment persistence.
@@ -29,14 +57,28 @@ Each `Tn` macro must expose `variable_spool_id`, because KlipperScreen writes sp
 - `job_status.py` can also use `Z_OFFSET_APPLY_PROBE` and `Z_OFFSET_APPLY_ENDSTOP` for its save-Z buttons, but those are optional and are not required for the main toolchanger panel.
 - Duplicate the `Tn` pattern below for however many tools your machine uses.
 
-### Recent toolchanger-ui refinements
+### Printer config required outside the macro pack
 
-Recent updates to the `toolchanger-ui` branch include:
+Add this to your printer config if you want persistent spool assignment support:
 
-- confirmation before activating a tool with no spool assigned
-- automatic tool selection before load/unload actions
-- numeric keypad entry in the per-tool temperature popup
-- improved tool selection popup layout for better touchscreen usability
+```ini
+[save_variables]
+filename: ~/printer_data/config/saved_variables.cfg
+```
+
+### KlipperScreen menu config
+
+Add this to your KlipperScreen menu config to show the **Tools** button on the main menu:
+
+```ini
+[menu __main toolchanger]
+name: Tools
+icon: extruder
+panel: toolchanger
+
+[printer]
+titlebar_items: Chamber
+```
 
 ### Example macro pack
 
@@ -233,28 +275,6 @@ gcode:
   {% else %}
     UNLOAD_ONE_FILAMENT TOOL={TOOL_NUM}
   {% endif %}
-```
-
-### Required supporting config
-
-At minimum, users should also have:
-
-```ini
-
-[save_variables]
-filename: ~/printer_data/config/saved_variables.cfg
-
-
-Add this to your KlipperScreen menu config to show the **Tools** button on the main menu:
-
-[menu __main toolchanger]
-name: Tools
-icon: extruder
-panel: toolchanger
-
-[printer]
-titlebar_items: Chamber
-
 ```
 
 Users also need a working toolchanger setup in Klipper/Moonraker plus Spoolman integration for spool assignment and spool restore to function correctly.
