@@ -26,16 +26,14 @@ import threading
 from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional
 
-#import requests
+
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gdk, GLib, Gtk
 
-
-#MOONRAKER = "http://localhost:7125"
 CONFIG_PATH = os.path.expanduser("~/.toolchanger_settings.json")
 POLL_INTERVAL_SECONDS = 1.0
-#REQUEST_TIMEOUT_MOONRAKER = 1.0
+
 
 
 # -----------------------------------------------------------------------------
