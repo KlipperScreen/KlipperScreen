@@ -1040,47 +1040,123 @@ class ToolchangerPanel:
         state = self._tool_states[tool_index]
         popup = self._register_popup(popup_window(self._screen))
 
-        layout = box(Gtk.Orientation.HORIZONTAL, 20)
+        layout = box(Gtk.Orientation.HORIZONTAL, 18)
         layout.get_style_context().add_class("tc-popup")
-        layout.set_size_request(320, 380)
+        layout.set_size_request(520, 400)
         layout.set_margin_top(15)
         layout.set_margin_bottom(15)
         layout.set_margin_start(15)
         layout.set_margin_end(15)
 
-        value_label = Gtk.Label(label=f"{int(state.target)} C")
+        current_value = max(0, min(310, int(round(state.target or 0))))
+        value_state = {"text": str(current_value), "replace": True}
+        slider_guard = {"active": False}
+
+        value_label = Gtk.Label(label=f"{current_value} C")
         value_label.get_style_context().add_class("tc-temp-label")
 
-        adjustment = Gtk.Adjustment(value=state.target, lower=0, upper=310, step_increment=1, page_increment=10)
+        adjustment = Gtk.Adjustment(value=current_value, lower=0, upper=310, step_increment=1, page_increment=10)
         slider = Gtk.Scale(orientation=Gtk.Orientation.VERTICAL, adjustment=adjustment)
         slider.set_inverted(True)
         slider.set_vexpand(True)
         slider.set_draw_value(False)
-        slider.connect("value-changed", lambda s: value_label.set_text(f"{int(s.get_value())} C"))
+
+        def apply_value(value: int, replace_next: bool = False) -> None:
+            clamped = max(0, min(310, int(value)))
+            value_state["text"] = str(clamped)
+            value_state["replace"] = replace_next
+            value_label.set_text(f"{clamped} C")
+            if int(round(slider.get_value())) != clamped:
+                slider_guard["active"] = True
+                slider.set_value(clamped)
+                slider_guard["active"] = False
+
+        def on_slider_changed(scale: Gtk.Scale) -> None:
+            if slider_guard["active"]:
+                return
+            apply_value(int(round(scale.get_value())), replace_next=True)
+
+        slider.connect("value-changed", on_slider_changed)
 
         slider_box = box(spacing=10)
+        slider_box.set_hexpand(True)
         slider_box.pack_start(value_label, False, False, 0)
         slider_box.pack_start(slider, True, True, 0)
         layout.pack_start(slider_box, True, True, 0)
+
+        keypad_wrap = box(spacing=10)
+        keypad_wrap.set_hexpand(True)
+
+        keypad_grid = Gtk.Grid()
+        keypad_grid.set_row_spacing(8)
+        keypad_grid.set_column_spacing(8)
+        keypad_grid.set_halign(Gtk.Align.CENTER)
+
+        def append_digit(digit: str) -> None:
+            if value_state["replace"]:
+                candidate = digit
+            else:
+                candidate = f"{value_state['text']}{digit}"
+            candidate = candidate.lstrip("0") or "0"
+            apply_value(int(candidate), replace_next=False)
+
+        def clear_value() -> None:
+            apply_value(0, replace_next=True)
+
+        def backspace_value() -> None:
+            if value_state["replace"]:
+                apply_value(0, replace_next=True)
+                return
+            candidate = value_state["text"][:-1]
+            if not candidate:
+                apply_value(0, replace_next=True)
+                return
+            apply_value(int(candidate), replace_next=False)
+
+        keypad_buttons = [
+            ("7", lambda _w: append_digit("7")),
+            ("8", lambda _w: append_digit("8")),
+            ("9", lambda _w: append_digit("9")),
+            ("4", lambda _w: append_digit("4")),
+            ("5", lambda _w: append_digit("5")),
+            ("6", lambda _w: append_digit("6")),
+            ("1", lambda _w: append_digit("1")),
+            ("2", lambda _w: append_digit("2")),
+            ("3", lambda _w: append_digit("3")),
+            ("CLR", lambda _w: clear_value()),
+            ("0", lambda _w: append_digit("0")),
+            ("DEL", lambda _w: backspace_value()),
+        ]
+
+        for idx, (label, callback) in enumerate(keypad_buttons):
+            row, col = divmod(idx, 3)
+            key = button(label, "tc-btn-global", callback)
+            key.set_size_request(74, 54)
+            keypad_grid.attach(key, col, row, 1, 1)
+
+        keypad_wrap.pack_start(keypad_grid, False, False, 0)
 
         def set_temperature(target: float) -> None:
             self._queue_gcode(f"SET_HEATER_TEMPERATURE HEATER={state.heater_name} TARGET={int(target)}")
             popup.destroy()
 
-        controls = box(spacing=12)
-        off_btn = button("OFF", "tc-btn-preset", lambda _w: set_temperature(0))
-        off_btn.set_size_request(110, 58)
+        actions = box(spacing=10)
 
-        set_btn = button("SET", "tc-btn-select", lambda _w: set_temperature(slider.get_value()))
-        set_btn.set_size_request(110, 58)
+        off_btn = button("OFF", "tc-btn-global", lambda _w: set_temperature(0))
+        off_btn.set_size_request(150, 52)
+
+        set_btn = button("SET", "tc-btn-select", lambda _w: set_temperature(int(slider.get_value())))
+        set_btn.set_size_request(150, 58)
 
         close_btn = button("CLOSE", "tc-btn-global", lambda _w: popup.destroy())
-        close_btn.set_size_request(110, 48)
+        close_btn.set_size_request(150, 48)
 
-        controls.pack_start(off_btn, False, False, 0)
-        controls.pack_end(close_btn, False, False, 0)
-        controls.pack_end(set_btn, False, False, 0)
-        layout.pack_start(controls, False, False, 0)
+        actions.pack_start(off_btn, False, False, 0)
+        actions.pack_start(set_btn, False, False, 0)
+        actions.pack_start(close_btn, False, False, 0)
+
+        keypad_wrap.pack_start(actions, False, False, 0)
+        layout.pack_start(keypad_wrap, False, False, 0)
 
         popup.add(layout)
         popup.show_all()
