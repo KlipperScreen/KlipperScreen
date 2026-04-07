@@ -26,16 +26,16 @@ import threading
 from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional
 
-import requests
+#import requests
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gdk, GLib, Gtk
 
 
-MOONRAKER = "http://localhost:7125"
+#MOONRAKER = "http://localhost:7125"
 CONFIG_PATH = os.path.expanduser("~/.toolchanger_settings.json")
 POLL_INTERVAL_SECONDS = 1.0
-REQUEST_TIMEOUT_MOONRAKER = 1.0
+#REQUEST_TIMEOUT_MOONRAKER = 1.0
 
 
 # -----------------------------------------------------------------------------
@@ -358,7 +358,6 @@ class ToolchangerPanel:
         self.title = "Tool Changer"
         self.menu = [title]
 
-        self._session = requests.Session()
         self._poll_stop = threading.Event()
         self._poll_thread: Optional[threading.Thread] = None
         self._command_queue: "queue.Queue[str]" = queue.Queue()
@@ -737,16 +736,20 @@ class ToolchangerPanel:
         tool_objects = [f"tool%20T{state.index}" for state in self._tool_states]
         heater_objects = [state.heater_name for state in self._tool_states]
         query = "&".join(heater_objects + ["save_variables", "toolhead", "toolchanger"] + tool_objects)
-        url = f"{MOONRAKER}/printer/objects/query?{query}"
 
         for _ in range(2):
             try:
-                response = self._session.get(url, timeout=REQUEST_TIMEOUT_MOONRAKER)
-                response.raise_for_status()
-                payload = response.json()
-                return payload.get("result", {}).get("status", {})
+                response = self._screen.apiclient.send_request(f"printer/objects/query?{query}") or {}
+
+                if isinstance(response, dict) and "result" in response and isinstance(response.get("result"), dict):
+                    return response.get("result", {}).get("status", {}) or {}
+
+                if isinstance(response, dict):
+                    return response.get("status", {}) or {}
+
             except Exception:
                 pass
+
         return None
 
     def _spoolman_proxy_get(self, path: str) -> Any:
@@ -878,10 +881,15 @@ class ToolchangerPanel:
 
     def _refresh_tool_count_from_moonraker(self) -> None:
         try:
-            result = self._session.get(f"{MOONRAKER}/printer/objects/query?toolchanger", timeout=REQUEST_TIMEOUT_MOONRAKER)
-            result.raise_for_status()
-            payload = result.json()
-            status = payload.get("result", {}).get("status", {})
+            response = self._screen.apiclient.send_request("printer/objects/query?toolchanger") or {}
+
+            if isinstance(response, dict) and "result" in response and isinstance(response.get("result"), dict):
+                status = response.get("result", {}).get("status", {}) or {}
+            elif isinstance(response, dict):
+                status = response.get("status", {}) or {}
+            else:
+                status = {}
+
         except Exception:
             status = None
 
