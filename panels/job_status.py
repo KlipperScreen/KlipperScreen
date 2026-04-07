@@ -433,61 +433,111 @@ class Panel(ScreenPanel):
     # ------------------------------------------------------------------ Tool strip
 
     def _build_tool_strip(self):
-        if "tool_strip" in self.labels:
+        existing_strip = self.labels.get("tool_strip")
+    
+        if existing_strip is None or not isinstance(existing_strip, Gtk.Grid):
+            if existing_strip is not None:
+                try:
+                    self.labels["toolstrip_box"].remove(existing_strip)
+                except Exception:
+                    pass
+    
+            self.labels["tool_strip"] = Gtk.Grid()
+            self.labels["tool_strip"].set_row_spacing(6)
+            self.labels["tool_strip"].set_column_spacing(6)
+            self.labels["tool_strip"].set_halign(Gtk.Align.CENTER)
+            self.labels["tool_strip"].set_valign(Gtk.Align.CENTER)
+            self.labels["toolstrip_box"].pack_start(self.labels["tool_strip"], False, False, 0)
+        else:
             for child in self.labels["tool_strip"].get_children():
                 self.labels["tool_strip"].remove(child)
-        else:
-            self.labels["tool_strip"] = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-            self.labels["toolstrip_box"].pack_start(self.labels["tool_strip"], False, False, 0)
-
+    
         self.tool_widgets = []
         n = self._configured_tool_count()
-        card_w = max(100, min(140, (258 - (n - 1) * 6) // n))
-        card_h = 158
-
+    
+        cols = n if n <= 4 else 3
+        rows = max(1, math.ceil(n / cols))
+        compact = rows > 1
+        spacing = 6
+    
+        if compact:
+            target_width = 312
+            card_w = max(92, min(108, (target_width - (cols - 1) * spacing) // cols))
+            card_h = 106
+            ring_size = min(card_w - 18, 44)
+            inner_spacing = 1
+        else:
+            target_width = 420
+            card_w = max(100, min(140, (target_width - (cols - 1) * spacing) // cols))
+            card_h = 158
+            ring_size = card_w - 20
+            inner_spacing = 2
+    
         for i in range(n):
-            frame = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+            row = i // cols
+            col = i % cols
+    
+            frame = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=inner_spacing)
             frame.set_size_request(card_w, card_h)
+            frame.set_hexpand(False)
+            frame.set_vexpand(False)
             frame.get_style_context().add_class("ks-toolcard")
-
+    
             title = Gtk.Label(label=self._toolchange_tool_label(self._tool_heater_name(i)))
             title.get_style_context().add_class("ks-tool-title")
             title.set_halign(Gtk.Align.CENTER)
-
+            title.set_justify(Gtk.Justification.CENTER)
+            title.set_ellipsize(Pango.EllipsizeMode.END)
+            title.set_max_width_chars(8)
+    
             badge = Gtk.Label(label=_("PARKED"))
             badge.get_style_context().add_class("ks-tool-badge-parked")
             badge.set_halign(Gtk.Align.CENTER)
-
+    
             temp = Gtk.Label(label="--C")
             temp.get_style_context().add_class("ks-tool-temp")
             temp.set_halign(Gtk.Align.CENTER)
-
-            ring_size = card_w - 20
+    
             ring = Gtk.DrawingArea()
             ring.set_size_request(ring_size, ring_size)
+    
             ring_wrap = Gtk.Box()
             ring_wrap.set_halign(Gtk.Align.CENTER)
+            ring_wrap.set_valign(Gtk.Align.CENTER)
             ring_wrap.pack_start(ring, False, False, 0)
-
+    
             material = Gtk.Label(label="")
             material.get_style_context().add_class("ks-tool-mat")
             material.set_halign(Gtk.Align.CENTER)
-
+            material.set_justify(Gtk.Justification.CENTER)
+            material.set_ellipsize(Pango.EllipsizeMode.END)
+            material.set_max_width_chars(10)
+    
             frame.pack_start(title, False, False, 0)
             frame.pack_start(badge, False, False, 0)
             frame.pack_start(temp, False, False, 0)
-            frame.pack_start(ring_wrap, True, True, 2)
-            frame.pack_start(material, False, False, 2)
-            self.labels["tool_strip"].pack_start(frame, False, False, 0)
-
+            frame.pack_start(ring_wrap, True, True, 1 if compact else 2)
+            frame.pack_start(material, False, False, 1 if compact else 2)
+    
+            self.labels["tool_strip"].attach(frame, col, row, 1, 1)
+    
             state = {
-                "frame": frame, "title": title, "badge": badge, "temp": temp,
-                "ring": ring, "material": material, "index": i,
-                "active": False, "temperature": 0.0, "target": 0.0,
-                "color": "#4d6df3", "ratio": None,
+                "frame": frame,
+                "title": title,
+                "badge": badge,
+                "temp": temp,
+                "ring": ring,
+                "material": material,
+                "index": i,
+                "active": False,
+                "temperature": 0.0,
+                "target": 0.0,
+                "color": "#4d6df3",
+                "ratio": None,
             }
             ring.connect("draw", self._draw_tool_ring, state)
             self.tool_widgets.append(state)
+    
         self.labels["tool_strip"].show_all()
 
     def _draw_tool_ring(self, widget, cr, state):
