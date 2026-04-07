@@ -261,26 +261,37 @@ gcode:
 # ------------------------------------------------------------------------------
 
 [gcode_macro LOAD_FILAMENT]
-description: Load filament for a specific tool or current tool
+description: UI-facing wrapper - load filament for TOOL=<n>; forwards to LOAD_ONE_FILAMENT
 gcode:
-  {% set TOOL_NUM = params.TOOL|default(0)|int %}
-  {% set TEMP_ARG = params.TEMP|default("") %}
-  {% if TEMP_ARG != "" %}
-    LOAD_ONE_FILAMENT TOOL={TOOL_NUM} TEMP={TEMP_ARG}
+  {% if 'TOOL' not in params %}
+    RESPOND TYPE=error MSG="TOOL parameter required! Usage: LOAD_FILAMENT TOOL=0"
+    M117 Error: Missing TOOL
   {% else %}
-    LOAD_ONE_FILAMENT TOOL={TOOL_NUM}
+    {% set TOOL_NUM = params.TOOL|int %}
+    {% set TEMP_ARG = params.TEMP|default("") %}
+    {% if TEMP_ARG != "" %}
+      LOAD_ONE_FILAMENT TOOL={TOOL_NUM} TEMP={TEMP_ARG}
+    {% else %}
+      LOAD_ONE_FILAMENT TOOL={TOOL_NUM}
+    {% endif %}
   {% endif %}
 
 [gcode_macro UNLOAD_FILAMENT]
-description: Unload filament for a specific tool or current tool
+description: UI-facing wrapper - unload filament for TOOL=<n>; forwards to UNLOAD_ONE_FILAMENT
 gcode:
-  {% set TOOL_NUM = params.TOOL|default(0)|int %}
-  {% set TEMP_ARG = params.TEMP|default("") %}
-  {% if TEMP_ARG != "" %}
-    UNLOAD_ONE_FILAMENT TOOL={TOOL_NUM} TEMP={TEMP_ARG}
+  {% if 'TOOL' not in params %}
+    RESPOND TYPE=error MSG="TOOL parameter required! Usage: UNLOAD_FILAMENT TOOL=0"
+    M117 Error: Missing TOOL
   {% else %}
-    UNLOAD_ONE_FILAMENT TOOL={TOOL_NUM}
+    {% set TOOL_NUM = params.TOOL|int %}
+    {% set TEMP_ARG = params.TEMP|default("") %}
+    {% if TEMP_ARG != "" %}
+      UNLOAD_ONE_FILAMENT TOOL={TOOL_NUM} TEMP={TEMP_ARG}
+    {% else %}
+      UNLOAD_ONE_FILAMENT TOOL={TOOL_NUM}
+    {% endif %}
   {% endif %}
+
 ```
 
 Users also need a working toolchanger setup in Klipper/Moonraker plus Spoolman integration for spool assignment and spool restore to function correctly.
