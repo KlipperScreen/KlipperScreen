@@ -29,6 +29,15 @@ Each `Tn` macro must expose `variable_spool_id`, because KlipperScreen writes sp
 - `job_status.py` can also use `Z_OFFSET_APPLY_PROBE` and `Z_OFFSET_APPLY_ENDSTOP` for its save-Z buttons, but those are optional and are not required for the main toolchanger panel.
 - Duplicate the `Tn` pattern below for however many tools your machine uses.
 
+### Recent toolchanger-ui refinements
+
+Recent updates to the `toolchanger-ui` branch include:
+
+- confirmation before activating a tool with no spool assigned
+- automatic tool selection before load/unload actions
+- numeric keypad entry in the per-tool temperature popup
+- improved tool selection popup layout for better touchscreen usability
+
 ### Example macro pack
 
 ```ini

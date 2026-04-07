@@ -559,8 +559,26 @@ class ToolchangerPanel:
 
         buttons_row = box(Gtk.Orientation.HORIZONTAL, 8)
         buttons_row.set_halign(Gtk.Align.CENTER)
-        buttons_row.pack_start(self._make_longpress_button("LOAD", "tc-btn-load", f"LOAD_FILAMENT TOOL={state.index}"), False, False, 0)
-        buttons_row.pack_start(self._make_longpress_button("UNLOAD", "tc-btn-unload", f"UNLOAD_FILAMENT TOOL={state.index}"), False, False, 0)
+        buttons_row.pack_start(
+            self._make_longpress_button(
+                "LOAD",
+                "tc-btn-load",
+                lambda idx=state.index: self._run_tool_filament_action(idx, "LOAD_FILAMENT"),
+            ),
+            False,
+            False,
+            0,
+        )
+        buttons_row.pack_start(
+            self._make_longpress_button(
+                "UNLOAD",
+                "tc-btn-unload",
+                lambda idx=state.index: self._run_tool_filament_action(idx, "UNLOAD_FILAMENT"),
+            ),
+            False,
+            False,
+            0,
+        )
         inner.pack_start(buttons_row, False, False, 10)
 
         frame.add(inner)
@@ -573,7 +591,7 @@ class ToolchangerPanel:
             spool_area=spool_area,
         )
 
-    def _make_longpress_button(self, label: str, css_class: str, gcode: str) -> Gtk.Button:
+    def _make_longpress_button(self, label: str, css_class: str, action: Any) -> Gtk.Button:
         steps = 35
         b = Gtk.Button(label=label)
         b.get_style_context().add_class(css_class)
@@ -604,7 +622,10 @@ class ToolchangerPanel:
                 state["running"] = False
                 state["ticks"] = 0
                 b.queue_draw()
-                self._queue_gcode(gcode)
+                if isinstance(action, str):
+                    self._queue_gcode(action)
+                else:
+                    action()
                 return False
             return True
 
@@ -992,28 +1013,94 @@ class ToolchangerPanel:
     # Tool selection
     # ------------------------------------------------------------------
 
-    def _select_tool(self, tool_index: int) -> None:
+    def _request_tool_activation(
+        self,
+        tool_index: int,
+        require_spool: bool = True,
+        notify_if_active: bool = True,
+        confirmed_empty: bool = False,
+    ) -> bool:
         state = self._tool_states[tool_index]
 
-        if not state.spool_id:
-            self._show_message(f"Tool {tool_index + 1} has no spool assigned")
-            return
+        if require_spool and not state.spool_id and not confirmed_empty:
+            self._show_confirm_popup(
+                f"Tool {tool_index + 1} has no spool assigned.\n\nPick up this empty tool anyway?",
+                lambda: self._request_tool_activation(
+                    tool_index,
+                    require_spool=require_spool,
+                    notify_if_active=notify_if_active,
+                    confirmed_empty=True,
+                ),
+            )
+            return False
 
         if state.ktc_state == "changing":
             self._show_message("Tool change already in progress")
-            return
+            return False
 
-        if state.ktc_state == "active":
-            self._show_message(f"Tool {tool_index + 1} already active")
+        if state.ktc_state == "active" or state.active:
+            if notify_if_active:
+                self._show_message(f"Tool {tool_index + 1} already active")
+            return True
+
+        if state.ktc_state == "error":
+            self._show_message(f"Tool {tool_index + 1} is in error state")
+            return False
+
+        state.ktc_state = "changing"
+        GLib.idle_add(self._apply_snapshot, RuntimeSnapshot(self._tool_states))
+        self._queue_gcode(f"T{tool_index}")
+        return True
+
+    def _wait_for_tool_active_then_run(self, tool_index: int, command: str) -> None:
+        attempts = {"count": 0}
+        max_attempts = 40
+
+        def poll() -> bool:
+            if tool_index >= len(self._tool_states):
+                return False
+
+            state = self._tool_states[tool_index]
+
+            if state.ktc_state == "error":
+                self._show_message(f"Tool {tool_index + 1} entered an error state")
+                return False
+
+            if state.active or state.ktc_state == "active":
+                self._queue_gcode(command)
+                return False
+
+            attempts["count"] += 1
+            if attempts["count"] >= max_attempts:
+                self._show_message(f"Tool {tool_index + 1} did not become active in time")
+                return False
+
+            return True
+
+        GLib.timeout_add(250, poll)
+
+    def _run_tool_filament_action(self, tool_index: int, action_name: str) -> None:
+        state = self._tool_states[tool_index]
+        command = f"{action_name} TOOL={tool_index}"
+
+        if state.ktc_state == "changing":
+            self._show_message("Tool change already in progress")
             return
 
         if state.ktc_state == "error":
             self._show_message(f"Tool {tool_index + 1} is in error state")
             return
 
-        state.ktc_state = "changing"
-        GLib.idle_add(self._apply_snapshot, RuntimeSnapshot(self._tool_states))
-        self._queue_gcode(f"T{tool_index}")
+        if state.active or state.ktc_state == "active":
+            self._queue_gcode(command)
+            return
+
+        if self._request_tool_activation(tool_index, require_spool=False, notify_if_active=False):
+            self._wait_for_tool_active_then_run(tool_index, command)
+
+    def _select_tool(self, tool_index: int) -> None:
+        self._request_tool_activation(tool_index, require_spool=True, notify_if_active=True)
+
 
     # ------------------------------------------------------------------
     # Simple message popup
@@ -1034,6 +1121,42 @@ class ToolchangerPanel:
 
         btn = button("OK", "tc-btn-select", lambda _w: popup.destroy())
         layout.pack_start(btn, False, False, 0)
+
+        popup.add(layout)
+        popup.show_all()
+
+    def _show_confirm_popup(self, text: str, on_yes: Callable[[], None]) -> None:
+        popup = self._register_popup(popup_window(self._screen))
+
+        layout = box(spacing=12)
+        layout.get_style_context().add_class("tc-popup")
+        layout.set_margin_top(20)
+        layout.set_margin_bottom(20)
+        layout.set_margin_start(20)
+        layout.set_margin_end(20)
+
+        label = Gtk.Label(label=text)
+        label.set_line_wrap(True)
+        label.set_justify(Gtk.Justification.CENTER)
+        layout.pack_start(label, True, True, 0)
+
+        buttons = box(Gtk.Orientation.HORIZONTAL, 12)
+        buttons.set_halign(Gtk.Align.CENTER)
+
+        def yes_clicked(_w: Gtk.Widget) -> None:
+            popup.destroy()
+            on_yes()
+
+        yes_btn = button("YES", "tc-btn-select", yes_clicked)
+        yes_btn.set_size_request(120, 44)
+
+        no_btn = button("NO", "tc-btn-global", lambda _w: popup.destroy())
+        no_btn.set_size_request(120, 44)
+
+        buttons.pack_start(yes_btn, False, False, 0)
+        buttons.pack_start(no_btn, False, False, 0)
+
+        layout.pack_start(buttons, False, False, 0)
 
         popup.add(layout)
         popup.show_all()
@@ -1166,7 +1289,6 @@ class ToolchangerPanel:
 
         popup.add(layout)
         popup.show_all()
-
     def _show_tool_selector(self, _widget: Gtk.Widget) -> None:
         popup = self._register_popup(popup_window(self._screen))
 
@@ -1193,7 +1315,7 @@ class ToolchangerPanel:
         header_box.pack_start(subtitle, False, False, 0)
         outer.pack_start(header_box, False, False, 0)
 
-        cards_row = box(Gtk.Orientation.HORIZONTAL, 22)
+        cards_row = box(Gtk.Orientation.HORIZONTAL, 18)
         cards_row.set_halign(Gtk.Align.CENTER)
         cards_row.set_valign(Gtk.Align.CENTER)
         cards_row.set_hexpand(True)
@@ -1213,10 +1335,11 @@ class ToolchangerPanel:
             card = box(spacing=7)
             card.set_halign(Gtk.Align.CENTER)
             card.set_valign(Gtk.Align.CENTER)
-            card.set_margin_top(16)
-            card.set_margin_bottom(16)
-            card.set_margin_start(18)
-            card.set_margin_end(18)
+            card.set_size_request(120, 160)
+            card.set_margin_top(10)
+            card.set_margin_bottom(10)
+            card.set_margin_start(10)
+            card.set_margin_end(10)
 
             card_ctx = card.get_style_context()
             if state.active:
@@ -1231,7 +1354,7 @@ class ToolchangerPanel:
             card.pack_start(tool_label, False, False, 0)
 
             spool_logo = Gtk.DrawingArea()
-            spool_logo.set_size_request(46, 46)
+            spool_logo.set_size_request(52, 52)
 
             def draw_mini_spool(widget: Gtk.DrawingArea, cr: cairo.Context, s: ToolState = state) -> bool:
                 w = widget.get_allocated_width()
