@@ -37,6 +37,14 @@ Each `Tn` macro must expose `variable_spool_id`, because KlipperScreen writes sp
 # REQUIRED MACROS FOR KLIPPERSCREEN TOOLCHANGER-UI
 ################################################################################
 
+
+# ------------------------------------------------------------------------------
+# DROP TOOL
+# KlipperScreen calls UNSELECT_TOOL directly.
+# Your toolchanger config must provide a working UNSELECT_TOOL command.
+# ------------------------------------------------------------------------------
+
+
 # ------------------------------------------------------------------------------
 # TOOL SELECT MACROS
 # Each tool macro must expose variable_spool_id because KlipperScreen writes it.
@@ -90,15 +98,9 @@ gcode:
         SET_ACTIVE_SPOOL ID={svv.t3__spool_id} TOOL=3
     {% endif %}
 
-# ------------------------------------------------------------------------------
-# DROP TOOL
-# KlipperScreen calls UNSELECT_TOOL directly.
-# Replace DROP_CURRENT_TOOL with your own undock/drop command if needed.
-# ------------------------------------------------------------------------------
 
-[gcode_macro UNSELECT_TOOL]
-gcode:
-    UNSELECT_TOOL
+
+
 
 # ------------------------------------------------------------------------------
 # PID TUNE
