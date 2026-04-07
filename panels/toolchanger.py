@@ -1681,7 +1681,10 @@ class ToolchangerPanel:
             b = button(
                 f"T{state.index}",
                 "tc-btn-select",
-                lambda _w, heater=state.heater_name: (popup.destroy(), self._show_pid_temp(heater)),
+                lambda _w, idx=state.index, heater=state.heater_name: (
+                    popup.destroy(),
+                    self._show_pid_temp(idx, heater),
+                ),
             )
             b.set_size_request(80, 80)
             row.pack_start(b, False, False, 0)
@@ -1692,7 +1695,7 @@ class ToolchangerPanel:
         popup.add(inner)
         popup.show_all()
 
-    def _show_pid_temp(self, heater_name: str) -> None:
+    def _show_pid_temp(self, tool_index: int, heater_name: str) -> None:
         popup = self._register_popup(popup_window(self._screen))
 
         layout = box(Gtk.Orientation.HORIZONTAL, 20)
@@ -1720,10 +1723,36 @@ class ToolchangerPanel:
         layout.pack_start(left, True, True, 0)
 
         controls = box(spacing=12)
+
+        def run_pid(_w: Gtk.Widget) -> None:
+            if tool_index >= len(self._tool_states):
+                self._show_message("Selected tool is no longer available")
+                return
+
+            command = f"PID_TUNE HEATER={heater_name} TARGET={int(slider.get_value())}"
+            state = self._tool_states[tool_index]
+
+            if state.ktc_state == "changing":
+                self._show_message("Tool change already in progress")
+                return
+
+            if state.ktc_state == "error":
+                self._show_message(f"Tool {tool_index + 1} is in error state")
+                return
+
+            if state.active or state.ktc_state == "active":
+                self._queue_gcode(command)
+                popup.destroy()
+                return
+
+            if self._request_tool_activation(tool_index, require_spool=False, notify_if_active=False):
+                self._wait_for_tool_active_then_run(tool_index, command)
+                popup.destroy()
+
         run = button(
             "RUN PID",
             "tc-btn-select",
-            lambda _w: (self._queue_gcode(f"PID_TUNE HEATER={heater_name} TARGET={int(slider.get_value())}"), popup.destroy()),
+            run_pid,
         )
         run.set_size_request(110, 58)
 
