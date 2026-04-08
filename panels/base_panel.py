@@ -172,7 +172,6 @@ class BasePanel(ScreenPanel):
 
         self.battery_icons = self.load_battery_icons()
         self.battery_percentage()
-        self.update_spoolman_alert_visuals(False)
 
     def get_spoolman_icon_pixbuf(self, color):
         klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
@@ -315,9 +314,6 @@ class BasePanel(ScreenPanel):
         self.content.add(panel.content)
 
     def update_spoolman_alert_visuals(self, alert):
-        self.labels['spoolman_icon'].set_from_pixbuf(
-            self.get_spoolman_icon_pixbuf(self.get_active_spoolman_color())
-        )
         if alert:
             self.labels['spoolman_weight'].get_style_context().add_class("spoolman_low")
         else:
@@ -328,7 +324,6 @@ class BasePanel(ScreenPanel):
                 self._printer is None
                 or not self.show_spoolman_in_title
         ):
-            self.update_spoolman_alert_visuals(False)
             self.control['spoolman_box'].hide()
             return
         if (
@@ -348,11 +343,9 @@ class BasePanel(ScreenPanel):
 
     def refresh_spoolman_weight(self, show=True, spool_id=SPOOL_ID_UNSET, force=False):
         if self._printer is None or not self.show_spoolman_in_title:
-            self.update_spoolman_alert_visuals(False)
             self.control['spoolman_box'].hide()
             return
         if not show:
-            self.update_spoolman_alert_visuals(False)
             self.control['spoolman_box'].hide()
             return
         if not self._printer.spoolman:
@@ -390,6 +383,9 @@ class BasePanel(ScreenPanel):
             return
         self._printer.set_active_spool(spool_id=spool_id, spool=spool["result"])
         self.update_spoolman_weight_label()
+        self.labels['spoolman_icon'].set_from_pixbuf(
+            self.get_spoolman_icon_pixbuf(self.get_active_spoolman_color())
+        )
 
     def fetch_spoolman(self):
         printing = self._printer.state in {"printing", "paused"}
