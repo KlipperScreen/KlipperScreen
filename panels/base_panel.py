@@ -35,6 +35,7 @@ class BasePanel(ScreenPanel):
         self.titlebar_name_type = None
         self.show_spoolman_in_title = False
         self.spoolman_low_limit = 20
+        self.spoolman_current_color = None
         self.current_extruder = None
         self.last_usage_report = datetime.now()
         self.usage_report = 0
@@ -383,9 +384,10 @@ class BasePanel(ScreenPanel):
             return
         self._printer.set_active_spool(spool_id=spool_id, spool=spool["result"])
         self.update_spoolman_weight_label()
-        self.labels['spoolman_icon'].set_from_pixbuf(
-            self.get_spoolman_icon_pixbuf(self.get_active_spoolman_color())
-        )
+        color = self.get_active_spoolman_color()
+        if color != self.spoolman_current_color:
+            self.labels['spoolman_icon'].set_from_pixbuf(self.get_spoolman_icon_pixbuf(color))
+            self.spoolman_current_color = color
 
     def fetch_spoolman(self):
         printing = self._printer.state in {"printing", "paused"}
