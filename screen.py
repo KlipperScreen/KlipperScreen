@@ -778,6 +778,8 @@ class KlipperScreen(Gtk.Window):
 
     def state_printing(self):
         self.show_panel("job_status", remove_all=True)
+        if self.spoolman:
+            self.base_panel.set_spoolman_refresh(True)
 
     def state_ready(self, wait=True):
         # Do not return to main menu if completing a job, timeouts/user input will return

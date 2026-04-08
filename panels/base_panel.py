@@ -35,7 +35,6 @@ class BasePanel(ScreenPanel):
         self.titlebar_name_type = None
         self.show_spoolman_in_title = False
         self.spoolman_low_limit = 20
-        self.spoolman_printing = False
         self.current_extruder = None
         self.last_usage_report = datetime.now()
         self.usage_report = 0
@@ -294,8 +293,10 @@ class BasePanel(ScreenPanel):
             self.time_update = GLib.timeout_add_seconds(1, self.update_time)
         if self.battery_update is None:
             self.battery_update = GLib.timeout_add_seconds(60, self.battery_percentage)
-        if self.spoolman_update is None:
-            self.spoolman_update = GLib.timeout_add_seconds(60, self.update_spoolman_during_print)
+
+    def set_spoolman_refresh(self):
+        if not self.spoolman_update:
+            self.spoolman_update = GLib.timeout_add_seconds(60, self.fetch_spoolman)
 
     def add_content(self, panel):
         printing = self._printer and self._printer.state in {"printing", "paused"}
@@ -390,21 +391,12 @@ class BasePanel(ScreenPanel):
         self._printer.set_active_spool(spool_id=spool_id, spool=spool["result"])
         self.update_spoolman_weight_label()
 
-    def update_spoolman_during_print(self):
-        if self._printer is None:
-            self.spoolman_printing = False
-            return True
-
-        connected = self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'}
-        printer_select = 'printer_select' not in self._screen._cur_panels
-        is_printing = self._printer.state in {"printing", "paused"}
-
-        if is_printing:
-            self.refresh_spoolman_weight(connected and printer_select, force=True)
-        elif self.spoolman_printing:
-            self.refresh_spoolman_weight(connected and printer_select, force=True)
-
-        self.spoolman_printing = is_printing
+    def fetch_spoolman(self):
+        printing = self._printer.state in {"printing", "paused"}
+        printer_select = 'printer_select' in self._screen._cur_panels
+        if printer_select or not printing:
+            return False
+        self.refresh_spoolman_weight(force=True)
         return True
 
     def back(self, widget=None):
@@ -475,17 +467,6 @@ class BasePanel(ScreenPanel):
             return
         if action != "notify_status_update" or self._screen.printer is None:
             return
-        is_printing = self._printer.state in {"printing", "paused"}
-        if is_printing != self.spoolman_printing:
-            connected = (
-                self._printer is not None
-                and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'}
-            )
-            self.refresh_spoolman_weight(
-                connected and 'printer_select' not in self._screen._cur_panels,
-                force=True
-            )
-            self.spoolman_printing = is_printing
         devices = self._printer.get_temp_devices()
         if not devices:
             return
