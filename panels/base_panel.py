@@ -343,46 +343,41 @@ class BasePanel(ScreenPanel):
         self.control['spoolman_box'].show()
 
     def refresh_spoolman_weight(self, show=True, spool_id=SPOOL_ID_UNSET, force=False):
-        if self._printer is None or not self.show_spoolman_in_title:
+        if (
+            self._printer is None
+            or not self._printer.spoolman
+            or not self.show_spoolman_in_title
+            or not show
+        ):
             self.control['spoolman_box'].hide()
             return
-        if not show:
-            self.control['spoolman_box'].hide()
-            return
-        if not self._printer.spoolman:
-            self._printer.set_active_spool(checked=False)
+        if (
+            not force
+            and spool_id is SPOOL_ID_UNSET
+            and self._printer.active_spool_checked
+        ):
             self.update_spoolman_weight_label()
             return
-        if not force and spool_id is SPOOL_ID_UNSET and self._printer.active_spool_checked:
+        def reset_spool_ui(sid=None, checked=False):
+            self._printer.set_active_spool(spool_id=sid, checked=checked)
             self.update_spoolman_weight_label()
-            return
+
         if spool_id is SPOOL_ID_UNSET:
             result = self._screen.apiclient.send_request("server/spoolman/spool_id")
-            if result is False:
+            if not result or not result.get("spool_id"):
                 logging.error("Error trying to fetch active spool id")
-                self._printer.set_active_spool(checked=False)
-                self.update_spoolman_weight_label()
-                return
-            if "spool_id" not in result or not result["spool_id"]:
-                self._printer.set_active_spool()
-                self.update_spoolman_weight_label()
+                reset_spool_ui(checked=False)
                 return
             spool_id = result["spool_id"]
-        elif not spool_id:
-            self._printer.set_active_spool()
-            self.update_spoolman_weight_label()
-            return
-
-        spool = self._screen.apiclient.post_request("server/spoolman/proxy", json={
+        spool_resp = self._screen.apiclient.post_request("server/spoolman/proxy", json={
             "request_method": "GET",
             "path": f"/v1/spool/{spool_id}",
         })
-        if not spool or "result" not in spool:
+        if not spool_resp or "result" not in spool_resp:
             logging.error("Error trying to fetch active spool information")
-            self._printer.set_active_spool(spool_id=spool_id, checked=False)
-            self.update_spoolman_weight_label()
+            reset_spool_ui(sid=spool_id, checked=False)
             return
-        self._printer.set_active_spool(spool_id=spool_id, spool=spool["result"])
+        self._printer.set_active_spool(spool_id=spool_id, spool=spool_resp["result"])
         self.update_spoolman_weight_label()
         color = self.get_active_spoolman_color()
         if color != self.spoolman_current_color:
