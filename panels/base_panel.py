@@ -358,6 +358,7 @@ class BasePanel(ScreenPanel):
         ):
             self.update_spoolman_weight_label()
             return
+
         def reset_spool_ui(sid=None, checked=False):
             self._printer.set_active_spool(spool_id=sid, checked=checked)
             self.update_spoolman_weight_label()
