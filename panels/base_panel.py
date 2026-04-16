@@ -389,7 +389,7 @@ class BasePanel(ScreenPanel):
         printing = self._printer.state in {"printing", "paused"}
         printer_select = 'printer_select' in self._screen._cur_panels
         if printer_select or not printing:
-            return False
+            return True
         self.refresh_spoolman_weight(force=True)
         return True
 
