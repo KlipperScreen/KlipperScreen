@@ -778,6 +778,8 @@ class KlipperScreen(Gtk.Window):
 
     def state_printing(self):
         self.show_panel("job_status", remove_all=True)
+        if self.printer.spoolman:
+            self.base_panel.set_spoolman_refresh()
 
     def state_ready(self, wait=True):
         # Do not return to main menu if completing a job, timeouts/user input will return
@@ -1108,6 +1110,7 @@ class KlipperScreen(Gtk.Window):
                 self.printer.configure_cameras(cameras['webcams'])
         if "spoolman" in self.server_info["components"]:
             self.printer.enable_spoolman()
+            self.base_panel.refresh_spoolman_weight()
 
     def init_klipper(self):
         if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:
