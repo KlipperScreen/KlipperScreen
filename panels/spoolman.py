@@ -6,6 +6,7 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GdkPixbuf, GObject, Pango, Gdk
+from ks_includes.widgets.combo import ComboBoxPlus
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.KlippyRest import KlippyRest
 from datetime import datetime
@@ -228,7 +229,7 @@ class Panel(ScreenPanel):
         row.add(hbox)
 
         label = Gtk.Label(_("Material"))
-        _material_filter = Gtk.ComboBox(model=self._materials, hexpand=True)
+        _material_filter = ComboBoxPlus(model=self._materials, hexpand=True)
         _material_filter.connect("changed", self._on_material_filter_changed)
         cellrenderertext = Gtk.CellRendererText()
         _material_filter.pack_start(cellrenderertext, True)
