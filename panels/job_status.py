@@ -409,6 +409,15 @@ class Panel(ScreenPanel):
             self._screen._ws.klippy.gcode_script("SAVE_CONFIG")
 
     def restart(self, widget):
+        buttons = [
+            {"name": _("Restart Print"), "response": Gtk.ResponseType.OK, "style": 'dialog-default'},
+            {"name": _("Go Back"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-info'}
+        ]
+        label = Gtk.Label(hexpand=True, vexpand=True, wrap=True)
+        label.set_markup(_("Are you sure you wish to restart this print?"))
+        self._gtk.Dialog(_("Restart"), buttons, label, self.restart_confirm)
+
+    def restart_print(self):
         if self.filename:
             self.disable_button("restart")
             if self.state == "error":
@@ -418,6 +427,11 @@ class Panel(ScreenPanel):
             self.new_print()
         else:
             logging.info(f"Could not restart {self.filename}")
+
+    def restart_confirm(self, dialog, response_id):
+        self._gtk.remove_dialog(dialog)
+        if response_id == Gtk.ResponseType.OK:
+            self.restart_print()
 
     def resume(self, widget):
         self._screen._ws.klippy.print_resume()
