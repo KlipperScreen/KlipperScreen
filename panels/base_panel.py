@@ -33,7 +33,6 @@ class BasePanel(ScreenPanel):
         self.spoolman_update = None
         self.titlebar_items = []
         self.titlebar_name_type = None
-        self.show_spoolman_in_title = False
         self.spoolman_low_limit = 20
         self.spoolman_current_color = None
         self.current_extruder = None
@@ -115,11 +114,8 @@ class BasePanel(ScreenPanel):
         self.labels['spoolman_icon'] = Gtk.Image()
         self.labels['spoolman_weight'] = Gtk.Label()
         self.control['spoolman_box'] = Gtk.Box()
-        self.control['spoolman_box'].set_no_show_all(True)
         self.control['spoolman_box'].pack_start(self.labels['spoolman_icon'], False, False, 7)
         self.control['spoolman_box'].pack_start(self.labels['spoolman_weight'], False, False, 0)
-        self.labels['spoolman_icon'].show()
-        self.labels['spoolman_weight'].show()
 
         self.titlebar = Gtk.Box(spacing=5, valign=Gtk.Align.CENTER)
         self.titlebar.get_style_context().add_class("title_bar")
@@ -254,6 +250,7 @@ class BasePanel(ScreenPanel):
                 if n >= nlimit + 1:
                     break
                 if item == "spool" and self._printer.spoolman:
+                    self.set_spoolman_refresh()
                     self.control['temp_box'].add(self.control['spoolman_box'])
                     n += 1
                     continue
@@ -321,11 +318,7 @@ class BasePanel(ScreenPanel):
             self.labels['spoolman_weight'].get_style_context().remove_class("spoolman_low")
 
     def update_spoolman_weight_label(self):
-        if (
-                self._printer is None
-                or not self.show_spoolman_in_title
-        ):
-            self.control['spoolman_box'].hide()
+        if self._printer is None:
             return
         if (
                 not self._printer.spoolman
@@ -335,21 +328,17 @@ class BasePanel(ScreenPanel):
         ):
             self.update_spoolman_alert_visuals(False)
             self.labels['spoolman_weight'].set_label("?")
-            self.control['spoolman_box'].show()
             return
         remaining_weight = self._printer.active_spool["remaining_weight"]
         self.labels['spoolman_weight'].set_label(f'{round(remaining_weight):.0f} g')
         self.update_spoolman_alert_visuals(remaining_weight < self.spoolman_low_limit)
-        self.control['spoolman_box'].show()
 
     def refresh_spoolman_weight(self, show=True, spool_id=SPOOL_ID_UNSET, force=False):
         if (
             self._printer is None
             or not self._printer.spoolman
-            or not self.show_spoolman_in_title
             or not show
         ):
-            self.control['spoolman_box'].hide()
             return
         if (
             not force
@@ -386,9 +375,11 @@ class BasePanel(ScreenPanel):
             self.spoolman_current_color = color
 
     def fetch_spoolman(self):
-        printing = self._printer.state in {"printing", "paused"}
-        printer_select = 'printer_select' in self._screen._cur_panels
-        if printer_select or not printing:
+        if (
+            "spool" not in self.titlebar_items
+            or 'printer_select' in self._screen._cur_panels
+        ):
+            self.spoolman_update = None
             return False
         self.refresh_spoolman_weight(force=True)
         return True
@@ -585,11 +576,9 @@ class BasePanel(ScreenPanel):
                 logging.info(f"Titlebar name type: {self.titlebar_name_type} items: {self.titlebar_items}")
             else:
                 self.titlebar_items = []
-            self.show_spoolman_in_title = "spool" in self.titlebar_items
             self.spoolman_low_limit = self.ks_printer_cfg.getfloat("spool_low_limit", fallback=20)
         else:
             self.titlebar_items = []
-            self.show_spoolman_in_title = False
             self.spoolman_low_limit = 20
         self.refresh_spoolman_weight(
             self._printer is not None and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'}
