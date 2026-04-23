@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-23 16:27-0300\n"
-"PO-Revision-Date: 2024-04-13 16:48+0000\n"
+"PO-Revision-Date: 2026-04-23 21:28+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/he/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.17.1-dev\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 msgid "Main Menu"
@@ -794,7 +794,7 @@ msgstr ","
 msgid "Connected"
 msgstr "מחובר"
 
-#, python-format
+#, fuzzy, python-format
 msgid "Do you want to forget or disconnect %s?"
 msgstr ","
 
