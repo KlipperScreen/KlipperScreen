@@ -6,11 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2025-06-10 01:04+0000\n"
 "Last-Translator: Juverley Junior <juverley@gmail.com>\n"
-"Language-Team: Portuguese <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/pt/>\n"
+"Language-Team: Portuguese <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -153,8 +152,9 @@ msgstr "Fatiador"
 msgid "Screen Power Off Time"
 msgstr "Descanso de Tela"
 
+#, fuzzy
 msgid "Timeout for screen black-out or power-off"
-msgstr ""
+msgstr "Tempo limite para apagar ou desligar tela"
 
 msgid "Never"
 msgstr "Nunca"
@@ -162,14 +162,16 @@ msgstr "Nunca"
 msgid "Printing"
 msgstr "Imprimindo"
 
+#, fuzzy
 msgid "Timeout for screen black-out or power-off during printing"
-msgstr ""
+msgstr "Tempo limite para apagar ou desligar tela durante impressão"
 
 msgid "24 Hour Time"
 msgstr "Relógio de 24 Horas"
 
+#, fuzzy
 msgid "Disable for 12hs with am / pm"
-msgstr ""
+msgstr "Desativar por 12h com am/pm"
 
 msgid "Macro shortcut on sidebar"
 msgstr "Atalho dedicado para Macros"
@@ -231,8 +233,9 @@ msgstr "Porcentagem e gráficos atuais"
 msgid "Show Scrollbars Buttons"
 msgstr "Botões auxiliares de Rolagem"
 
+#, fuzzy
 msgid "Useful for un-responsive touchscreens"
-msgstr ""
+msgstr "Útil para touchscreens não responsivos"
 
 msgid "Auto-open Extrude On Pause"
 msgstr "Abrir Ext. automaticamente em Pausa"
@@ -242,7 +245,8 @@ msgstr "Mostrar cursor"
 
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr ""
-"Para controle do mouse ou para verificar a precisão da tela sensível ao toque"
+"Para controle do mouse ou para verificar a precisão da tela sensível ao "
+"toque"
 
 msgid "Invert X"
 msgstr "Inverter X"
@@ -288,8 +292,9 @@ msgstr[1] "Segundos"
 msgid "Network not found"
 msgstr "Rede não encontrada"
 
+#, fuzzy
 msgid "Unknown security type"
-msgstr ""
+msgstr "Tipo de segurança desconhecido"
 
 msgid "Insufficient privileges"
 msgstr "Privilégios insuficientes"
@@ -357,8 +362,9 @@ msgstr "Nivelamento Manual"
 msgid "Rotation invalid"
 msgstr "Rotação inválida"
 
+#, fuzzy
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr ""
+msgstr "Este painel suporta até 9 parafusos em grade 3x3"
 
 msgid "It's possible that the configuration is not correct"
 msgstr "É popssível que a configuração não esteja correta"
@@ -489,8 +495,9 @@ msgstr "Filamento"
 msgid "Estimated Time"
 msgstr "Tempo estimado"
 
+#, fuzzy
 msgid "g"
-msgstr ""
+msgstr "g"
 
 msgid "Nozzle diameter"
 msgstr "Diâmetro do Bico"
@@ -603,13 +610,15 @@ msgstr "Resumir"
 msgid "Save Z"
 msgstr "Salvar Eixo Z"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "Aplicar deslocamento {sign}{offset:.3f} à Sonda?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "Aplicar deslocamento {sign}{offset:.3f} ao Finalstop?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -682,8 +691,9 @@ msgstr "Desativar os motores ?"
 msgid "Move Distance (mm)"
 msgstr "Distancia de movimento (mm)"
 
+#, fuzzy
 msgid "This will affect screw positions and mesh graph"
-msgstr ""
+msgstr "Isso afetará posições dos parafusos e gráfico de malha"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
 msgstr ""
@@ -692,8 +702,9 @@ msgstr ""
 msgid "XY Speed (mm/s)"
 msgstr "Velocidade XY (mm/s)"
 
+#, fuzzy
 msgid "Only for the move panel"
-msgstr ""
+msgstr "Apenas para o painel de movimento"
 
 msgid "Z Speed (mm/s)"
 msgstr "Velocidade Z (mm/s)"
@@ -710,9 +721,10 @@ msgstr "Nenhuma interface sem fio foi encontrada"
 msgid "Connected"
 msgstr "Conectado"
 
+#, fuzzy
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
+msgstr "Esquecer ou desconectar %s?"
 
 msgid "Forget"
 msgstr "Esquecer"
@@ -739,17 +751,20 @@ msgstr "Nome do Host"
 msgid "Notification log empty"
 msgstr "Log de notificação vazio"
 
+#, fuzzy
 msgid "Pressure advance"
-msgstr ""
+msgstr "Avanço de pressão"
 
 msgid "Current"
 msgstr "Atual"
 
+#, fuzzy
 msgid "Smooth time"
-msgstr ""
+msgstr "Tempo de suavização"
 
+#, fuzzy
 msgid "s"
-msgstr ""
+msgstr "s"
 
 msgid "Printer Select"
 msgstr "Selecione a impressora"
@@ -832,17 +847,21 @@ msgstr "Filtro"
 msgid "Material"
 msgstr "Material"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Comentário"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "Último uso"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "Peso restante"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "Comprimento restante"
 
 msgid "Error trying to fetch spools"
 msgstr "Erro ao tentar buscar filas"
@@ -856,11 +875,15 @@ msgstr "Erro ao limpar a fila ativa"
 msgid "Error setting active spool"
 msgstr "Erro ao definir a fila ativa"
 
+msgid "Error getting active spool"
+msgstr "Erro ao obter a fila ativa"
+
 msgid "No info available"
 msgstr "Sem informações disponíveis"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "Endereço IP"
 
 msgid "Memory"
 msgstr "Memória"
@@ -892,8 +915,9 @@ msgstr "Verificando atualizações, aguarde..."
 msgid "Not working or not configured"
 msgstr "Não funciona ou não está configurado"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "Tem certeza?"
 
 msgid "Perform a full upgrade?"
 msgstr "Realizar uma Atualização Completa?"
@@ -980,8 +1004,9 @@ msgstr "Forneça o KlipperScreen.log quando pedir ajuda.\n"
 msgid "Close"
 msgstr "Fechar"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "DPMS falhou e foi desativado"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Não foi possível conectar ao Moonraker"
@@ -1007,8 +1032,9 @@ msgstr "Klipper está iniciando"
 msgid "Klipper has shutdown"
 msgstr "Klipper foi desligado"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "Sem macros elegíveis:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "macros que iniciam com '_' são ocultos"
@@ -1030,9 +1056,6 @@ msgstr "Tentando Novamente"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: Conectado"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Erro ao obter a fila ativa"
 
 #~ msgid "Max:"
 #~ msgstr "Max:"

@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2025-04-29 16:26+0000\n"
 "Last-Translator: Themechanic1987 <Nigel_andreas@hotmail.com>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/nl/>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -605,13 +604,15 @@ msgstr "Hervatten"
 msgid "Save Z"
 msgstr "Z Opslaan"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "{sign}{offset:.3f} offset toepassen op Probe?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "{sign}{offset:.3f} offset toepassen op Endstop?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -745,8 +746,9 @@ msgstr "Pressure advance"
 msgid "Current"
 msgstr "Huidige"
 
+#, fuzzy
 msgid "Smooth time"
-msgstr ""
+msgstr "Vlotte tijd"
 
 msgid "s"
 msgstr "s"
@@ -832,17 +834,21 @@ msgstr "Filter"
 msgid "Material"
 msgstr "Materiaal"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Opmerking"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "Laatst gebruikt"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "Resterend gewicht"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "Resterende lengte"
 
 msgid "Error trying to fetch spools"
 msgstr "Error tijdens laden spoelen"
@@ -856,11 +862,15 @@ msgstr "Error opruimen actieve spoel"
 msgid "Error setting active spool"
 msgstr "Error instellen actieve spoel"
 
+msgid "Error getting active spool"
+msgstr "Error krijgen actieve spoel"
+
 msgid "No info available"
 msgstr "Geen info beschikbaar"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "IP-adres"
 
 msgid "Memory"
 msgstr "Geheugen"
@@ -892,8 +902,9 @@ msgstr "Bezig met controleren van updates, moment geduld.."
 msgid "Not working or not configured"
 msgstr "Niet werkend of niet geconfigureerd"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "Weet je het zeker?"
 
 msgid "Perform a full upgrade?"
 msgstr "Volledige upgrade uitvoeren?"
@@ -980,8 +991,9 @@ msgstr "Voeg KlipperScreen.log toe als je om hulp vraagt.\n"
 msgid "Close"
 msgstr "Sluiten"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "DPMS is mislukt en uitgeschakeld"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Kan geen verbinding met Moonraker maken"
@@ -1007,8 +1019,9 @@ msgstr "Klipper probeert te starten"
 msgid "Klipper has shutdown"
 msgstr "Klipper is afgesloten"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "Geen geschikte macros:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "macro's die beginnen met '_' zijn verborgen"
@@ -1030,9 +1043,6 @@ msgstr "Probeert opnieuw"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: verbonden"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Error krijgen actieve spoel"
 
 #~ msgid "Max:"
 #~ msgstr "Max:"

@@ -3,11 +3,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2024-11-29 19:00+0000\n"
 "Last-Translator: \"Zs.Antal\" <antonio092130@icloud.com>\n"
-"Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/hu/>\n"
+"Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -600,13 +599,15 @@ msgstr "Folytat"
 msgid "Save Z"
 msgstr "Z mentése"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "{sign}{offset:.3f} eltolás alkalmazása a szondához?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "{sign}{offset:.3f} eltolás alkalmazása az végállomáshoz?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -828,17 +829,21 @@ msgstr "Szűrő"
 msgid "Material"
 msgstr "Anyag"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Megjegyzés"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "Utoljára használt"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "Hátralévő súly"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "Hátralévő hossz"
 
 msgid "Error trying to fetch spools"
 msgstr "Hiba a tekercsek lekérésekor"
@@ -852,11 +857,15 @@ msgstr "Hiba az aktív tekercs törlésekor"
 msgid "Error setting active spool"
 msgstr "Hiba az aktív tekercs beállításakor"
 
+msgid "Error getting active spool"
+msgstr "Hiba az aktív tekercs lekérésekor"
+
 msgid "No info available"
 msgstr "Nincs információ"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "IP-cím"
 
 msgid "Memory"
 msgstr "Memória"
@@ -888,8 +897,9 @@ msgstr "Frissítések keresése, kérlek, várj..."
 msgid "Not working or not configured"
 msgstr "Nem működik vagy nincs beállítva"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "Biztos benne?"
 
 msgid "Perform a full upgrade?"
 msgstr "Teljes frissítést szeretnél?"
@@ -976,8 +986,9 @@ msgstr "Csatold a KlipperScreen.log-ot, amikor segítséget kérsz.\n"
 msgid "Close"
 msgstr "Bezárás"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "A DPMS sikertelen volt, és letiltásra került"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Nem lehet csatlakozni a Moonrakerhez"
@@ -1003,8 +1014,9 @@ msgstr "A Klipper megpróbál elindulni"
 msgid "Klipper has shutdown"
 msgstr "A Klipper leállt"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "Nincs jogosult makró:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "a '_' jellel kezdődő nevű makrók el vannak rejtve"
@@ -1025,9 +1037,6 @@ msgstr "Újrapróbálkozás"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: csatlakoztatva"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Hiba az aktív tekercs lekérésekor"
 
 #~ msgid "Max:"
 #~ msgstr "Max:"
@@ -1087,8 +1096,8 @@ msgstr "Moonraker: csatlakoztatva"
 #~ "Not supported for auto-detection, it needs to be configured in "
 #~ "klipperscreen.conf"
 #~ msgstr ""
-#~ "Az automatikus felismerés nem támogatott, ezt a klipperscreen.conf "
-#~ "fájlban kell beállítani."
+#~ "Az automatikus felismerés nem támogatott, ezt a klipperscreen.conf fájlban "
+#~ "kell beállítani."
 
 #~ msgid "Unknown screw position"
 #~ msgstr "Ismeretlen csavarhelyzet"

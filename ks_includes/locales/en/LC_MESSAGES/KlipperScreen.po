@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -847,6 +847,9 @@ msgid "Error clearing active spool"
 msgstr ""
 
 msgid "Error setting active spool"
+msgstr ""
+
+msgid "Error getting active spool"
 msgstr ""
 
 msgid "No info available"

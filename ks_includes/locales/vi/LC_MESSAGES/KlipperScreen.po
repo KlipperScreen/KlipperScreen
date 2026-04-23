@@ -3,11 +3,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2024-08-12 07:09+0000\n"
 "Last-Translator: Hiep Nguyen <tanhiep26@gmail.com>\n"
-"Language-Team: Vietnamese <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/vi/>\n"
+"Language-Team: Vietnamese <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/vi/>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,8 +32,9 @@ msgstr "Thêm"
 msgid "Print"
 msgstr "In"
 
+#, fuzzy
 msgid "Gcodes"
-msgstr ""
+msgstr "Mã G"
 
 msgid "Bed Level"
 msgstr "Cân bằng bàn"
@@ -114,8 +114,9 @@ msgstr "Nghiêng Z"
 msgid "Print Control"
 msgstr "Điều khiển in"
 
+#, fuzzy
 msgid "Lock"
-msgstr ""
+msgstr "Khóa"
 
 msgid "Menu"
 msgstr "Menu"
@@ -165,8 +166,9 @@ msgstr "Thời gian chờ để màn hình tắt hoặc nguồn tắt trong quá
 msgid "24 Hour Time"
 msgstr "Thời gian định dạng 24 giờ"
 
+#, fuzzy
 msgid "Disable for 12hs with am / pm"
-msgstr ""
+msgstr "Tắt trong 12 giờ với am/pm"
 
 msgid "Macro shortcut on sidebar"
 msgstr "Lối tắt macro trên thanh bên"
@@ -234,11 +236,13 @@ msgstr "Hữu ích cho màn hình cảm ứng không phản hồi"
 msgid "Auto-open Extrude On Pause"
 msgstr "Tự động mở Extrude Khi Tạm Dừng"
 
+#, fuzzy
 msgid "Show cursor"
-msgstr ""
+msgstr "Hiển thị con trỏ"
 
+#, fuzzy
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "Để điều khiển chuột hoặc xác nhận độ chính xác cảm ứng"
 
 msgid "Invert X"
 msgstr "Đảo ngược trục X"
@@ -277,14 +281,17 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] "giây"
 
+#, fuzzy
 msgid "Network not found"
-msgstr ""
+msgstr "Không tìm thấy mạng"
 
+#, fuzzy
 msgid "Unknown security type"
-msgstr ""
+msgstr "Loại bảo mật không xác định"
 
+#, fuzzy
 msgid "Insufficient privileges"
-msgstr ""
+msgstr "Không đủ quyền"
 
 msgid "Invalid password"
 msgstr "Mật khẩu không hợp lệ"
@@ -292,8 +299,9 @@ msgstr "Mật khẩu không hợp lệ"
 msgid "Couldn't add network"
 msgstr "Không thể kết nối với mạng"
 
+#, fuzzy
 msgid "Failed to delete connection"
-msgstr ""
+msgstr "Xóa kết nối thất bại"
 
 msgid "Starting WiFi Association"
 msgstr "Bắt đầu Liên kết WiFi"
@@ -301,14 +309,17 @@ msgstr "Bắt đầu Liên kết WiFi"
 msgid "Connecting"
 msgstr "Kết nối"
 
+#, fuzzy
 msgid "Getting IP address"
-msgstr ""
+msgstr "Đang lấy địa chỉ IP"
 
+#, fuzzy
 msgid "Network connected"
-msgstr ""
+msgstr "Đã kết nối mạng"
 
+#, fuzzy
 msgid "Network disconnected"
-msgstr ""
+msgstr "Mất kết nối mạng"
 
 msgid "Connection failed"
 msgstr "Kết nối thất bại"
@@ -319,17 +330,21 @@ msgstr "Không có lưới nào được tải"
 msgid "Calibrate"
 msgstr "Hiệu chuẩn"
 
+#, fuzzy
 msgid "Invalid temperature"
-msgstr ""
+msgstr "Nhiệt độ không hợp lệ"
 
+#, fuzzy
 msgid "Password"
-msgstr ""
+msgstr "Mật khẩu"
 
+#, fuzzy
 msgid "Unlock"
-msgstr ""
+msgstr "Mở khóa"
 
+#, fuzzy
 msgid "Unlock failed"
-msgstr ""
+msgstr "Mở khóa thất bại"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Bạn có chắc chắn muốn loại bỏ vật này không?"
@@ -385,8 +400,9 @@ msgstr "Tự động cuộn"
 msgid "Send"
 msgstr "Gửi"
 
+#, fuzzy
 msgid "Example"
-msgstr ""
+msgstr "Ví dụ"
 
 msgid "Exclude Object"
 msgstr "Loại trừ vật in"
@@ -472,23 +488,29 @@ msgstr "Hủy bỏ"
 msgid "Modified"
 msgstr "Đã chỉnh sửa"
 
+#, fuzzy
 msgid "Layer Height"
-msgstr ""
+msgstr "Chiều cao lớp"
 
+#, fuzzy
 msgid "Filament"
-msgstr ""
+msgstr "Chỉ filament"
 
+#, fuzzy
 msgid "Estimated Time"
-msgstr ""
+msgstr "Thời gian ước tính"
 
+#, fuzzy
 msgid "g"
-msgstr ""
+msgstr "g"
 
+#, fuzzy
 msgid "Nozzle diameter"
-msgstr ""
+msgstr "Đường kính vòi phun"
 
+#, fuzzy
 msgid "Last Duration"
-msgstr ""
+msgstr "Thời gian cuối cùng"
 
 msgid "Rename/Move:"
 msgstr "Đổi tên/Di chuyển:"
@@ -523,8 +545,9 @@ msgstr "Tự động hiệu chuẩn"
 msgid "Calibrated"
 msgstr "Đã hiệu chuẩn"
 
+#, fuzzy
 msgid "Job Status"
-msgstr ""
+msgstr "Trạng thái công việc"
 
 msgid "mm/s"
 msgstr "mm/s"
@@ -595,13 +618,15 @@ msgstr "Tiếp tục"
 msgid "Save Z"
 msgstr "Lưu Z"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "Áp dụng bù lệch {sign}{offset:.3f} cho Probe?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "Áp dụng bù lệch {sign}{offset:.3f} cho Endstop?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -616,8 +641,9 @@ msgstr "Hủy in"
 msgid "Go Back"
 msgstr "Về trước"
 
+#, fuzzy
 msgid "Working"
-msgstr ""
+msgstr "Đang hoạt động"
 
 msgid "Complete"
 msgstr "Hoàn thành"
@@ -690,8 +716,9 @@ msgstr "Chỉ dành cho bảng điều khiển di chuyển"
 msgid "Z Speed (mm/s)"
 msgstr "Tốc độ Z (mm/s)"
 
+#, fuzzy
 msgid "Failed to initialize"
-msgstr ""
+msgstr "Khởi tạo thất bại"
 
 msgid "Interface"
 msgstr "Giao diện"
@@ -702,21 +729,26 @@ msgstr "Không tìm thấy giao diện không dây"
 msgid "Connected"
 msgstr "Đã kết nối"
 
+#, fuzzy
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
+msgstr "Bạn có muốn quên hoặc ngắt kết nối %s?"
 
+#, fuzzy
 msgid "Forget"
-msgstr ""
+msgstr "Quên"
 
+#, fuzzy
 msgid "Disconnect"
-msgstr ""
+msgstr "Ngắt kết nối"
 
+#, fuzzy
 msgid "Remove network"
-msgstr ""
+msgstr "Xóa mạng"
 
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "Người dùng"
 
 #, python-format
 msgid "Connecting to %s"
@@ -731,17 +763,21 @@ msgstr "Tên miền máy chủ"
 msgid "Notification log empty"
 msgstr "Nhật ký thông báo trống"
 
+#, fuzzy
 msgid "Pressure advance"
-msgstr ""
+msgstr "Lùi tiến áp suất"
 
+#, fuzzy
 msgid "Current"
-msgstr ""
+msgstr "Hiện tại"
 
+#, fuzzy
 msgid "Smooth time"
-msgstr ""
+msgstr "Thời gian mượt"
 
+#, fuzzy
 msgid "s"
-msgstr ""
+msgstr "s"
 
 msgid "Printer Select"
 msgstr "Chọn máy in"
@@ -824,17 +860,21 @@ msgstr "Bộ lọc"
 msgid "Material"
 msgstr "Vật liệu"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Bình luận"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "Sử dụng gần nhất"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "Trọng lượng còn lại"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "Chiều dài còn lại"
 
 msgid "Error trying to fetch spools"
 msgstr "Lỗi khi tìm kiếm các spool"
@@ -848,11 +888,16 @@ msgstr "Lỗi khi xóa spool đang hoạt động"
 msgid "Error setting active spool"
 msgstr "Lỗi khi đặt spool đang hoạt động"
 
-msgid "No info available"
-msgstr ""
+msgid "Error getting active spool"
+msgstr "Lỗi khi lấy spool đang hoạt động"
 
+#, fuzzy
+msgid "No info available"
+msgstr "Không có thông tin"
+
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "Địa chỉ IP"
 
 msgid "Memory"
 msgstr "Bộ nhớ"
@@ -884,8 +929,9 @@ msgstr "Đang kiểm tra cập nhật, vui lòng đợi..."
 msgid "Not working or not configured"
 msgstr "Không hoạt động hoặc chưa được cấu hình"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "Bạn có chắc?"
 
 msgid "Perform a full upgrade?"
 msgstr "Thực hiện nâng cấp toàn bộ?"
@@ -955,14 +1001,17 @@ msgstr "Lỗi: Không thể lấy vị trí để thăm dò"
 msgid "Failed, adjust position first"
 msgstr "Không thành công, trước tiên hãy điều chỉnh vị trí"
 
+#, fuzzy
 msgid "The system doesn't meet the minimum requirement"
-msgstr ""
+msgstr "Hệ thống không đáp ứng yêu cầu tối thiểu"
 
+#, fuzzy
 msgid "Minimum:"
-msgstr ""
+msgstr "Tối thiểu:"
 
+#, fuzzy
 msgid "System:"
-msgstr ""
+msgstr "Hệ thống:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "Cung cấp KlipperScreen.log khi cần trợ giúp.\n"
@@ -970,8 +1019,9 @@ msgstr "Cung cấp KlipperScreen.log khi cần trợ giúp.\n"
 msgid "Close"
 msgstr "Đóng"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "DPMS gặp lỗi và đã bị tắt"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Không thể kết nối với Moonraker"
@@ -997,8 +1047,9 @@ msgstr "Klipper đang cố gắng khởi động"
 msgid "Klipper has shutdown"
 msgstr "Klipper đã tắt"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "Không có macro đủ điều kiện:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "các macro có tên bắt đầu bằng '_' đã bị ẩn"
@@ -1010,17 +1061,15 @@ msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr "Tải/Lấy nhựa ra được ẩn và nên sử dụng từ bảng điều khiển đùn"
 
+#, fuzzy
 msgid "Temperature too low to extrude"
-msgstr ""
+msgstr "Nhiệt độ quá thấp để đùn"
 
 msgid "Retrying"
 msgstr "Đang thử lại"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: đã kết nối"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Lỗi khi lấy spool đang hoạt động"
 
 #~ msgid "Password saved"
 #~ msgstr "Mật khẩu đã lưu"

@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2024-12-22 20:00+0000\n"
 "Last-Translator: Niolay Danov <nikdan@abv.bg>\n"
-"Language-Team: Bulgarian <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/bg/>\n"
+"Language-Team: Bulgarian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -605,13 +604,15 @@ msgstr "Продължи"
 msgid "Save Z"
 msgstr "Запиши Z"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "Приложи отместване {sign}{offset:.3f} към зондирането?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "Приложи отместване {sign}{offset:.3f} към крайната точка?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -833,17 +834,21 @@ msgstr "Филтър"
 msgid "Material"
 msgstr "Материал"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Коментар"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "Последно използвано"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "Оставащо тегло"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "Оставаща дължина"
 
 msgid "Error trying to fetch spools"
 msgstr "Грешка при опит за извличане на шпули"
@@ -857,11 +862,15 @@ msgstr "Грешка при изчистване на активния спул"
 msgid "Error setting active spool"
 msgstr "Грешка при настройване на активен спул"
 
+msgid "Error getting active spool"
+msgstr "Грешка при активиране на спула"
+
 msgid "No info available"
 msgstr "Няма налична информация"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "IP Адрес"
 
 msgid "Memory"
 msgstr "Памет"
@@ -893,8 +902,9 @@ msgstr "Проверява се за актуализации, моля изча
 msgid "Not working or not configured"
 msgstr "Не работи или не е конфигуриран"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "Сигурни ли сте?"
 
 msgid "Perform a full upgrade?"
 msgstr "Пълна актуализация?"
@@ -981,8 +991,9 @@ msgstr "Осигурете KlipperScreen.log, когато поискате по
 msgid "Close"
 msgstr "Затваряне"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "DPMS се провали и е деактивиран"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Не може да се свърже с Moonraker"
@@ -1008,8 +1019,9 @@ msgstr "Klipper е готов"
 msgid "Klipper has shutdown"
 msgstr "Klipper се изключи"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "Няма подходящи макроси:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "макросите с име, започващо с '_' са скрити"
@@ -1031,9 +1043,6 @@ msgstr "Повторен опит"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: Свързан"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Грешка при активиране на спула"
 
 #~ msgid "Max:"
 #~ msgstr "Макс:"

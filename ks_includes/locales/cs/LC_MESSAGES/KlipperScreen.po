@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2025-07-28 13:11+0000\n"
 "Last-Translator: Miloslav Kos <kos.m@post.cz>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/cs/>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -607,13 +606,15 @@ msgstr "Obnovit"
 msgid "Save Z"
 msgstr "Uložit Z"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "Použít posun {sign}{offset:.3f} na Probe?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "Použít posun {sign}{offset:.3f} na Endstop?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -834,17 +835,21 @@ msgstr "Filtr"
 msgid "Material"
 msgstr "Materiál"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Komentář"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "Naposledy použito"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "Zbývající váha"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "Zbývající délka"
 
 msgid "Error trying to fetch spools"
 msgstr "Chyba při pokusu o načtení cívek"
@@ -858,11 +863,15 @@ msgstr "Chyba při vymazání aktivní cívky"
 msgid "Error setting active spool"
 msgstr "Chyba nastavení aktivní cívky"
 
+msgid "Error getting active spool"
+msgstr "Chyba při získávání aktivní cívky"
+
 msgid "No info available"
 msgstr "Nejsou k dispozici žádné informace"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "IP adresa"
 
 msgid "Memory"
 msgstr "Paměť"
@@ -894,8 +903,9 @@ msgstr "Kontrola aktualizací, prosím počkejte..."
 msgid "Not working or not configured"
 msgstr "Nefunguje nebo není nakonfigurováno"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "Jste si jisti?"
 
 msgid "Perform a full upgrade?"
 msgstr "Úplně aktualizovat?"
@@ -984,8 +994,9 @@ msgstr "Při žádosti o pomoc uveďte soubor KlipperScreen.log.\n"
 msgid "Close"
 msgstr "Zavřít"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "DPMS selhalo a bylo vypnuto"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Nelze se připojit k Moonrakeru"
@@ -1011,8 +1022,9 @@ msgstr "Klipper startuje"
 msgid "Klipper has shutdown"
 msgstr "Klipper zastaven"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "Žádné vhodné makra:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "makra s názvem začínajícím na '_' jsou skrytá"
@@ -1033,9 +1045,6 @@ msgstr "Zkouším znovu"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: připojen"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Chyba při získávání aktivní cívky"
 
 #~ msgid "Max:"
 #~ msgstr "Max:"

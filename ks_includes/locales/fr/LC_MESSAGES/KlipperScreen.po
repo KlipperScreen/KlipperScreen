@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2025-05-24 19:01+0000\n"
 "Last-Translator: Jean-Yves Leduc <leduc.jy@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -605,13 +604,15 @@ msgstr "Reprendre"
 msgid "Save Z"
 msgstr "Enregistrer Z"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "Appliquer un décalage de {sign}{offset:.3f} au Probe ?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "Appliquer un décalage de {sign}{offset:.3f} à l'Endstop ?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -670,7 +671,8 @@ msgstr "Lancer un étalonnage PID pour :"
 
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr ""
-"Cela peut prendre plus de 5 minutes en fonction de la puissance du chauffage."
+"Cela peut prendre plus de 5 minutes en fonction de la puissance du "
+"chauffage."
 
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
@@ -834,17 +836,21 @@ msgstr "Filtre"
 msgid "Material"
 msgstr "Matériau"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Commentaire"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "Dernière utilisation"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "Poids restant"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "Longueur restante"
 
 msgid "Error trying to fetch spools"
 msgstr "Erreur de récupération des bobines"
@@ -858,11 +864,15 @@ msgstr "Erreur d'effacement de la bobine active"
 msgid "Error setting active spool"
 msgstr "Erreur de réglage de la bobine active"
 
+msgid "Error getting active spool"
+msgstr "Erreur d'obtention de la bobine active"
+
 msgid "No info available"
 msgstr "Pas d'information disponible"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "Adresse IP"
 
 msgid "Memory"
 msgstr "Mémoire"
@@ -894,8 +904,9 @@ msgstr "Recherche de mises à jour, veuillez patienter..."
 msgid "Not working or not configured"
 msgstr "Ne fonctionne pas ou n'est pas configuré"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "Êtes-vous sûr ?"
 
 msgid "Perform a full upgrade?"
 msgstr "Effectuer une mise à jour complète ?"
@@ -983,8 +994,9 @@ msgstr ""
 msgid "Close"
 msgstr "Fermer"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "DPMS a échoué et a été désactivé"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Ne peut pas se connecter à Moonraker"
@@ -1010,8 +1022,9 @@ msgstr "Klipper tente de démarrer"
 msgid "Klipper has shutdown"
 msgstr "Klipper s'est arrêté"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "Aucun macro éligible :"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "les macros dont le nom commence par '_' sont cachées"
@@ -1033,9 +1046,6 @@ msgstr "Réessaye"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker : connecté"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Erreur d'obtention de la bobine active"
 
 #~ msgid "Max:"
 #~ msgstr "Max :"

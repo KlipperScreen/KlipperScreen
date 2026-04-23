@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/sv/>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,8 +36,9 @@ msgstr "Mer"
 msgid "Print"
 msgstr "Skriv ut"
 
+#, fuzzy
 msgid "Gcodes"
-msgstr ""
+msgstr "G-koder"
 
 msgid "Bed Level"
 msgstr "Bädd Level"
@@ -118,8 +118,9 @@ msgstr "Z Lutning"
 msgid "Print Control"
 msgstr "Utskriftskontroll"
 
+#, fuzzy
 msgid "Lock"
-msgstr ""
+msgstr "Lås"
 
 msgid "Menu"
 msgstr "Meny"
@@ -127,8 +128,9 @@ msgstr "Meny"
 msgid "Icon Theme"
 msgstr "Ikon tema"
 
+#, fuzzy
 msgid "Changes how the interface looks"
-msgstr ""
+msgstr "Ändrar hur gränssnittet ser ut"
 
 msgid "(default)"
 msgstr "(standard)"
@@ -136,8 +138,9 @@ msgstr "(standard)"
 msgid "Estimated Time Method"
 msgstr "Beräknad tidsmetod"
 
+#, fuzzy
 msgid "Changes how the time remaining is calculated"
-msgstr ""
+msgstr "Ändrar hur återstående tid beräknas"
 
 msgid "Auto"
 msgstr "Automatisk"
@@ -154,8 +157,9 @@ msgstr "Slicer"
 msgid "Screen Power Off Time"
 msgstr "Avstängningstid för skärmen"
 
+#, fuzzy
 msgid "Timeout for screen black-out or power-off"
-msgstr ""
+msgstr "Tidsgräns för skärmavstängning eller avstängning"
 
 msgid "Never"
 msgstr "Aldrig"
@@ -163,14 +167,16 @@ msgstr "Aldrig"
 msgid "Printing"
 msgstr "Skriver ut"
 
+#, fuzzy
 msgid "Timeout for screen black-out or power-off during printing"
-msgstr ""
+msgstr "Tidsgräns för skärmavstängning eller avstängning under utskrift"
 
 msgid "24 Hour Time"
 msgstr "24 timmars tid"
 
+#, fuzzy
 msgid "Disable for 12hs with am / pm"
-msgstr ""
+msgstr "Inaktivera i 12 timmar med am/pm"
 
 msgid "Macro shortcut on sidebar"
 msgstr "Makro genväg på sidofältet"
@@ -178,8 +184,9 @@ msgstr "Makro genväg på sidofältet"
 msgid "Font Size"
 msgstr "Textstorlek"
 
+#, fuzzy
 msgid "Inversely affects the icon size"
-msgstr ""
+msgstr "Påverkar ikonstorleken omvänt"
 
 msgid "Small"
 msgstr "Liten"
@@ -199,50 +206,59 @@ msgstr "Maximal"
 msgid "Confirm Emergency Stop"
 msgstr "Bekräfta nödstopp"
 
+#, fuzzy
 msgid "Asks for confirmation before stopping"
-msgstr ""
+msgstr "Be om bekräftelse innan stopp"
 
 msgid "Hide sensors in Temp."
 msgstr "Dölj sensorer i Temp."
 
+#, fuzzy
 msgid "Show only devices that are able to be set"
-msgstr ""
+msgstr "Visa endast enheter som kan ställas in"
 
 msgid "Screen DPMS"
 msgstr "Skärm DPMS"
 
+#, fuzzy
 msgid "Enable screen power management"
-msgstr ""
+msgstr "Aktivera skärmströmhantering"
 
+#, fuzzy
 msgid "Not all screens support this"
-msgstr ""
+msgstr "Inte alla skärmar stöder detta"
 
 msgid "Auto-close notifications"
 msgstr "Automatisk stängning av aviseringar"
 
+#, fuzzy
 msgid "Close messages after a timeout"
-msgstr ""
+msgstr "Stäng meddelanden efter en tidsgräns"
 
 msgid "Show Heater Power"
 msgstr "Visa kraft värmare"
 
+#, fuzzy
 msgid "Current percentage and graph line"
-msgstr ""
+msgstr "Nuvarande procent och grafisk linje"
 
 msgid "Show Scrollbars Buttons"
 msgstr "Visa rullningslistknappar"
 
+#, fuzzy
 msgid "Useful for un-responsive touchscreens"
-msgstr ""
+msgstr "Användbart för reaktionslösa pekskärmar"
 
 msgid "Auto-open Extrude On Pause"
 msgstr "Autoöppna Extrude vid paus"
 
+#, fuzzy
 msgid "Show cursor"
-msgstr ""
+msgstr "Visa markör"
 
+#, fuzzy
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "För muskontroll eller för att verifiera pekskärmsnoggrannhet"
 
 msgid "Invert X"
 msgstr "Invertera X"
@@ -275,51 +291,63 @@ msgstr[1] "minuter"
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Är du säker på att du vill köra Nödstopp?"
 
+#, fuzzy
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "dag"
+msgstr[1] "dagar"
 
+#, fuzzy
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "sekund"
+msgstr[1] "sekunder"
 
+#, fuzzy
 msgid "Network not found"
-msgstr ""
+msgstr "Nätverk ej hittat"
 
+#, fuzzy
 msgid "Unknown security type"
-msgstr ""
+msgstr "Okänd säkerhetstyp"
 
+#, fuzzy
 msgid "Insufficient privileges"
-msgstr ""
+msgstr "Otillräckliga behörigheter"
 
 msgid "Invalid password"
 msgstr "Felaktigt lösenord"
 
+#, fuzzy
 msgid "Couldn't add network"
-msgstr ""
+msgstr "Kunde inte lägga till nätverk"
 
+#, fuzzy
 msgid "Failed to delete connection"
-msgstr ""
+msgstr "Misslyckades att ta bort anslutning"
 
 msgid "Starting WiFi Association"
 msgstr "Startar WiFi Association"
 
+#, fuzzy
 msgid "Connecting"
-msgstr ""
+msgstr "Ansluter"
 
+#, fuzzy
 msgid "Getting IP address"
-msgstr ""
+msgstr "Hämtar IP-adress"
 
+#, fuzzy
 msgid "Network connected"
-msgstr ""
+msgstr "Nätverk anslutet"
 
+#, fuzzy
 msgid "Network disconnected"
-msgstr ""
+msgstr "Nätverk frånkopplat"
 
+#, fuzzy
 msgid "Connection failed"
-msgstr ""
+msgstr "Anslutning misslyckades"
 
 msgid "No mesh has been loaded"
 msgstr "Ingen mesh har laddats"
@@ -327,17 +355,21 @@ msgstr "Ingen mesh har laddats"
 msgid "Calibrate"
 msgstr "Kalibrera"
 
+#, fuzzy
 msgid "Invalid temperature"
-msgstr ""
+msgstr "Ogiltig temperatur"
 
+#, fuzzy
 msgid "Password"
-msgstr ""
+msgstr "Lösenord"
 
+#, fuzzy
 msgid "Unlock"
-msgstr ""
+msgstr "Lås upp"
 
+#, fuzzy
 msgid "Unlock failed"
-msgstr ""
+msgstr "Uplåsning misslyckades"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Är du säker på att du vill utesluta objektet?"
@@ -354,17 +386,21 @@ msgstr "Inaktivera motorer"
 msgid "Screws Adjust"
 msgstr "Skruvar Justera"
 
+#, fuzzy
 msgid "Rotation invalid"
-msgstr ""
+msgstr "Rotation ogiltig"
 
+#, fuzzy
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr ""
+msgstr "Detta panel stöder upp till 9 skruvar i ett 3x3-rutnät"
 
+#, fuzzy
 msgid "It's possible that the configuration is not correct"
-msgstr ""
+msgstr "Det är möjligt att konfigurationen inte är korrekt"
 
+#, fuzzy
 msgid "Screws not used:"
-msgstr ""
+msgstr "Skruvar som inte används:"
 
 msgid "Reference"
 msgstr "Referens"
@@ -393,8 +429,9 @@ msgstr "Auto-scrolla"
 msgid "Send"
 msgstr "Skicka"
 
+#, fuzzy
 msgid "Example"
-msgstr ""
+msgstr "Exempel"
 
 msgid "Exclude Object"
 msgstr "Exkludera objekt"
@@ -417,8 +454,9 @@ msgstr "Tryckförflyttning"
 msgid "Retraction"
 msgstr "Indragning"
 
+#, fuzzy
 msgid "Extruders"
-msgstr ""
+msgstr "Extruderare"
 
 msgid "Distance (mm)"
 msgstr "Avstånd (mm)"
@@ -480,23 +518,29 @@ msgstr "Avbryt"
 msgid "Modified"
 msgstr "Ändrad"
 
+#, fuzzy
 msgid "Layer Height"
-msgstr ""
+msgstr "Lagerhöjd"
 
+#, fuzzy
 msgid "Filament"
-msgstr ""
+msgstr "Filament"
 
+#, fuzzy
 msgid "Estimated Time"
-msgstr ""
+msgstr "Uppskattad tid"
 
+#, fuzzy
 msgid "g"
-msgstr ""
+msgstr "g"
 
+#, fuzzy
 msgid "Nozzle diameter"
-msgstr ""
+msgstr "Mondiameter"
 
+#, fuzzy
 msgid "Last Duration"
-msgstr ""
+msgstr "Senaste varaktighet"
 
 msgid "Rename/Move:"
 msgstr "Byt namn/flytta:"
@@ -531,8 +575,9 @@ msgstr "Auto-kalibrera"
 msgid "Calibrated"
 msgstr "Kalibrerad"
 
+#, fuzzy
 msgid "Job Status"
-msgstr ""
+msgstr "Jobbstatus"
 
 msgid "mm/s"
 msgstr "mm/s"
@@ -603,13 +648,15 @@ msgstr "Återuppta"
 msgid "Save Z"
 msgstr "Spara Z"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "Verka {sign}{offset:.3f} offset mot Proben?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "Verka {sign}{offset:.3f} offset mot Ändstop?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -624,8 +671,9 @@ msgstr "Avbryt utskrift"
 msgid "Go Back"
 msgstr "Gå tillbaka"
 
+#, fuzzy
 msgid "Working"
-msgstr ""
+msgstr "Arbetar"
 
 msgid "Complete"
 msgstr "Färdig"
@@ -648,8 +696,9 @@ msgstr "Vilar"
 msgid "Max Acceleration"
 msgstr "Max acceleration"
 
+#, fuzzy
 msgid "Minimum Cruise Ratio"
-msgstr ""
+msgstr "Minsta krympningsförhållande"
 
 msgid "Max Velocity"
 msgstr "Max Hastighet"
@@ -681,23 +730,27 @@ msgstr "Är du säker på att du vill inaktivera motorer?"
 msgid "Move Distance (mm)"
 msgstr "Förflyttningsavstånd (mm)"
 
+#, fuzzy
 msgid "This will affect screw positions and mesh graph"
-msgstr ""
+msgstr "Detta påverkar skruvpositioner och mesh-graf"
 
+#, fuzzy
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr ""
+msgstr "Växlar knappar om de ligger ovanpå varandra, påverkar andra paneler"
 
 msgid "XY Speed (mm/s)"
 msgstr "XY-hastighet (mm/s)"
 
+#, fuzzy
 msgid "Only for the move panel"
-msgstr ""
+msgstr "Endast för flyttningspanelen"
 
 msgid "Z Speed (mm/s)"
 msgstr "Z hastighet (mm/s)"
 
+#, fuzzy
 msgid "Failed to initialize"
-msgstr ""
+msgstr "Misslyckades att initiera"
 
 msgid "Interface"
 msgstr "Gränssnitt"
@@ -708,21 +761,26 @@ msgstr "Inget trådlöst gränssnitt har hittats"
 msgid "Connected"
 msgstr "Ansluten"
 
+#, fuzzy
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
+msgstr "Vill du glömma bort eller koppla bort %s?"
 
+#, fuzzy
 msgid "Forget"
-msgstr ""
+msgstr "Glömma bort"
 
+#, fuzzy
 msgid "Disconnect"
-msgstr ""
+msgstr "Koppla bort"
 
+#, fuzzy
 msgid "Remove network"
-msgstr ""
+msgstr "Ta bort nätverk"
 
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "Användare"
 
 #, python-format
 msgid "Connecting to %s"
@@ -737,23 +795,28 @@ msgstr "Värdnamn"
 msgid "Notification log empty"
 msgstr "Aviseringsloggen tom"
 
+#, fuzzy
 msgid "Pressure advance"
-msgstr ""
+msgstr "Tryckförskjutning"
 
+#, fuzzy
 msgid "Current"
-msgstr ""
+msgstr "Nuvarande"
 
+#, fuzzy
 msgid "Smooth time"
-msgstr ""
+msgstr "Jämn tid"
 
+#, fuzzy
 msgid "s"
-msgstr ""
+msgstr "s"
 
 msgid "Printer Select"
 msgstr "Välj skrivare"
 
+#, fuzzy
 msgid "Please wait"
-msgstr ""
+msgstr "Vänligen vänta"
 
 msgid "Retraction Length"
 msgstr "Indragningslängd"
@@ -773,8 +836,9 @@ msgstr "Skrivaranslutningar"
 msgid "Shutdown"
 msgstr "Stänga av"
 
+#, fuzzy
 msgid "Emergency Stop"
-msgstr ""
+msgstr "Nödstop"
 
 msgid "Are you sure you wish to reboot the system?"
 msgstr "Är du säker på att du vill starta om systemet?"
@@ -791,8 +855,9 @@ msgstr "Värd"
 msgid "Printer"
 msgstr "Skrivare"
 
+#, fuzzy
 msgid "Both"
-msgstr ""
+msgstr "Båda"
 
 msgid "Initializing printer..."
 msgstr "Initierar skrivaren..."
@@ -830,38 +895,52 @@ msgstr "Filter"
 msgid "Material"
 msgstr "Material"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Kommentar"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "Senast använd"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "Återstående vikt"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "Återstående längd"
 
+#, fuzzy
 msgid "Error trying to fetch spools"
-msgstr ""
+msgstr "Fel vid hämtning av spolar"
 
 msgid "All"
 msgstr "Alla"
 
+#, fuzzy
 msgid "Error clearing active spool"
-msgstr ""
+msgstr "Fel vid rensning av aktiv spole"
 
+#, fuzzy
 msgid "Error setting active spool"
-msgstr ""
+msgstr "Fel vid inställning av aktiv spole"
 
+#, fuzzy
+msgid "Error getting active spool"
+msgstr "Fel vid hämtning av aktiv spole"
+
+#, fuzzy
 msgid "No info available"
-msgstr ""
+msgstr "Ingen information tillgänglig"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "IP-adress"
 
+#, fuzzy
 msgid "Memory"
-msgstr ""
+msgstr "Minne"
 
 msgid "Cooldown"
 msgstr "Nedkylning"
@@ -890,8 +969,9 @@ msgstr "Söker efter uppdateringar, vänta..."
 msgid "Not working or not configured"
 msgstr "Fungerar inte eller inte konfigurerad"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "Är du säker?"
 
 msgid "Perform a full upgrade?"
 msgstr "Utför en fullständig uppgradering?"
@@ -957,20 +1037,24 @@ msgstr "Sänk munstycket"
 msgid "Abort"
 msgstr "Avbryt"
 
+#, fuzzy
 msgid "Error: Couldn't get a position to probe"
-msgstr ""
+msgstr "Fel: Kunde inte få en position att sondera"
 
 msgid "Failed, adjust position first"
 msgstr "Misslyckades, justera positionen först"
 
+#, fuzzy
 msgid "The system doesn't meet the minimum requirement"
-msgstr ""
+msgstr "Systemet uppfyller inte minimikraven"
 
+#, fuzzy
 msgid "Minimum:"
-msgstr ""
+msgstr "Minsta:"
 
+#, fuzzy
 msgid "System:"
-msgstr ""
+msgstr "System:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "Ange KlipperScreen.log när du ber om hjälp.\n"
@@ -978,14 +1062,16 @@ msgstr "Ange KlipperScreen.log när du ber om hjälp.\n"
 msgid "Close"
 msgstr "Stäng"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "DPMS har misslyckats och har inaktiverats"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Kan inte ansluta till Moonraker"
 
+#, fuzzy
 msgid "Lost Connection to Moonraker"
-msgstr ""
+msgstr "Förlorade anslutningen till Moonraker"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper har kopplat bort"
@@ -1005,8 +1091,9 @@ msgstr "Klipper försöker starta"
 msgid "Klipper has shutdown"
 msgstr "Klipper har stängts av"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "Inga lämpliga makron:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "makron med ett namn som börjar med '_' är dolda"
@@ -1019,8 +1106,9 @@ msgid ""
 msgstr ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT är dolda och bör användas från extrudering"
 
+#, fuzzy
 msgid "Temperature too low to extrude"
-msgstr ""
+msgstr "Temperaturen för låg för att extrudera"
 
 msgid "Retrying"
 msgstr "Försöker igen"

@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2024-09-07 00:09+0000\n"
 "Last-Translator: Leart Dukaj <premtimdukaj@hotmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/de_FORMAL/>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/de_FORMAL/>\n"
 "Language: de_formal\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -118,8 +117,9 @@ msgstr "Z-Neigung"
 msgid "Print Control"
 msgstr "Druck Steuerung"
 
+#, fuzzy
 msgid "Lock"
-msgstr ""
+msgstr "Sperren"
 
 msgid "Menu"
 msgstr "Menü"
@@ -238,11 +238,13 @@ msgstr "Nützlich für nicht reagierende Touchscreens"
 msgid "Auto-open Extrude On Pause"
 msgstr "Extrudieren bei Pause automatisch öffnen"
 
+#, fuzzy
 msgid "Show cursor"
-msgstr ""
+msgstr "Zeige Cursor"
 
+#, fuzzy
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "Für Maussteuerung oder zur Überprüfung der Touchscreen-Genauigkeit"
 
 msgid "Invert X"
 msgstr "Achse X invertieren"
@@ -327,17 +329,21 @@ msgstr "Es wurde kein Netz geladen"
 msgid "Calibrate"
 msgstr "Kalibrieren"
 
+#, fuzzy
 msgid "Invalid temperature"
-msgstr ""
+msgstr "Ungültige Temperatur"
 
+#, fuzzy
 msgid "Password"
-msgstr ""
+msgstr "Passwort"
 
+#, fuzzy
 msgid "Unlock"
-msgstr ""
+msgstr "Entsperren"
 
+#, fuzzy
 msgid "Unlock failed"
-msgstr ""
+msgstr "Entsperren fehlgeschlagen"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Möchten Sie das Objekt wirklich ausschließen?"
@@ -603,13 +609,15 @@ msgstr "Fortsetzen"
 msgid "Save Z"
 msgstr "Z speichern"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "Offset von {sign}{offset:.3f} auf Probe anwenden?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "Offset von {sign}{offset:.3f} auf Endstop anwenden?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -723,8 +731,9 @@ msgstr "Trennen"
 msgid "Remove network"
 msgstr "Netzwerk entfernen"
 
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "Benutzer"
 
 #, python-format
 msgid "Connecting to %s"
@@ -832,17 +841,21 @@ msgstr "Filter"
 msgid "Material"
 msgstr "Material"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Kommentar"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "Zuletzt verwendet"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "Verbleibendes Gewicht"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "Verbleibende Länge"
 
 msgid "Error trying to fetch spools"
 msgstr "Fehler beim Abrufen der Spulen"
@@ -856,11 +869,15 @@ msgstr "Fehler beim Leeren der aktiven Spule"
 msgid "Error setting active spool"
 msgstr "Fehler beim Einstellen der aktiven Spule"
 
+msgid "Error getting active spool"
+msgstr "Fehler beim Abrufen der aktiven Spule"
+
 msgid "No info available"
 msgstr "Keine Informationen verfügbar"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "IP-Adresse"
 
 msgid "Memory"
 msgstr "Speicher"
@@ -892,8 +909,9 @@ msgstr "Suche nach Updates, bitte warten..."
 msgid "Not working or not configured"
 msgstr "Nicht funktionsfähig oder nicht konfiguriert"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "Bist du sicher?"
 
 msgid "Perform a full upgrade?"
 msgstr "Vollständiges Upgrade durchführen?"
@@ -982,8 +1000,9 @@ msgstr "Wenn Hilfe benötigt wird KlipperScreen.log angeben\n"
 msgid "Close"
 msgstr "Schließen"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "DPMS ist fehlgeschlagen und wurde deaktiviert"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Es kann keine Verbindung zu Moonraker hergestellt werden"
@@ -1009,8 +1028,9 @@ msgstr "Klipper versucht zu starten"
 msgid "Klipper has shutdown"
 msgstr "Klipper abgeschaltet"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "Keine geeigneten Makros:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "Makros mit einem Namen, der mit '_' beginnt, sind ausgeblendet"
@@ -1024,17 +1044,15 @@ msgstr ""
 "Filament_Laden/Filament_Entladen sind versteckt und sollten von extrudieren "
 "aus verwendet werden"
 
+#, fuzzy
 msgid "Temperature too low to extrude"
-msgstr ""
+msgstr "Temperatur zu niedrig zum Extrudieren"
 
 msgid "Retrying"
 msgstr "Wiederhole"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: Verbunden"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Fehler beim Abrufen der aktiven Spule"
 
 #~ msgid "Max:"
 #~ msgstr "Max:"

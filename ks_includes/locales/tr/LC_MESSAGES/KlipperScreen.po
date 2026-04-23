@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2025-01-15 08:00+0000\n"
 "Last-Translator: Selim <technical50@users.noreply.hosted.weblate.org>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/tr/>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -603,13 +602,15 @@ msgstr "Devam Et"
 msgid "Save Z"
 msgstr "Z Kaydet"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "{sign}{offset:.3f} ofseti Probe'a uygula?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "{sign}{offset:.3f} ofseti Endstop'a uygula?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -830,17 +831,21 @@ msgstr "Filtre"
 msgid "Material"
 msgstr "Malzeme"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Yorum"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "Son kullanılan"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "Kalan ağırlık"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "Kalan uzunluk"
 
 msgid "Error trying to fetch spools"
 msgstr "Makaraları çekmeye çalışırken hata oluştu"
@@ -854,11 +859,15 @@ msgstr "Aktif makara temizleme hatası"
 msgid "Error setting active spool"
 msgstr "Etkin makara ayar hatası"
 
+msgid "Error getting active spool"
+msgstr "Aktif makara hata veriyor"
+
 msgid "No info available"
 msgstr "Bilgi yok"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "IP Adresi"
 
 msgid "Memory"
 msgstr "Hafıza"
@@ -890,8 +899,9 @@ msgstr "Güncellemeler kontrol ediliyor, lütfen bekleyin..."
 msgid "Not working or not configured"
 msgstr "Çalışmamakta veya konfigre edilmemiş"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "Emin misiniz?"
 
 msgid "Perform a full upgrade?"
 msgstr "Tam yükseltme yap?"
@@ -978,8 +988,9 @@ msgstr "Yardım isterken KlipperScreen.log dosyasını sağlayın.\n"
 msgid "Close"
 msgstr "Kapat"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "DPMS başarısız oldu ve devre dışı bırakıldı"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Moonraker'a bağlanılamıyor"
@@ -1005,8 +1016,9 @@ msgstr "Klipper başlatılmaya çalışılıyor"
 msgid "Klipper has shutdown"
 msgstr "Klipper Kapandı"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "Geçerli makro yok:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "adı '_' ile başlayan makrolar gizlendi"
@@ -1016,7 +1028,8 @@ msgstr "'rename_existing'i kullanan makrolar gizlendi"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "FILEMENT_YUKLE/FILEMENT_KALDIR gizlidir ve extrude'dan kullanılmalıdır"
+msgstr ""
+"FILEMENT_YUKLE/FILEMENT_KALDIR gizlidir ve extrude'dan kullanılmalıdır"
 
 msgid "Temperature too low to extrude"
 msgstr "Sıcaklık ekstrüzyon için çok düşük"
@@ -1026,9 +1039,6 @@ msgstr "Yeniden Deneniyor"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: bağlandı"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Aktif makara hata veriyor"
 
 #~ msgid "Max:"
 #~ msgstr "Maksimum:"

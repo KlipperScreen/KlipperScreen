@@ -3,17 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2024-12-10 12:04+0000\n"
 "Last-Translator: Julia <daviteusz0@gmail.com>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/pl/>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.9-dev\n"
 
 msgid "Main Menu"
@@ -606,13 +604,15 @@ msgstr "Wznów"
 msgid "Save Z"
 msgstr "Zapisz Z"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "Zastosować przesunięcie {sign}{offset:.3f} do Probe?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "Zastosować przesunięcie {sign}{offset:.3f} do Endstop?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -833,17 +833,21 @@ msgstr "Filtruj"
 msgid "Material"
 msgstr "Materiał"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Komentarz"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "Ostatnio użyte"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "Pozostała waga"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "Pozostała długość"
 
 msgid "Error trying to fetch spools"
 msgstr "Błąd podczas pobierania szpuli"
@@ -857,11 +861,15 @@ msgstr "Błąd czyszczenia aktywnej szpuli"
 msgid "Error setting active spool"
 msgstr "Błąd ustawiania aktywnej szpuli"
 
+msgid "Error getting active spool"
+msgstr "Błąd pobierania aktywnej szpuli"
+
 msgid "No info available"
 msgstr "Brak informacji"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "Adres IP"
 
 msgid "Memory"
 msgstr "Pamięć"
@@ -893,8 +901,9 @@ msgstr "Sprawdzanie aktualizacji, proszę czekać..."
 msgid "Not working or not configured"
 msgstr "Nie działa lub nie jest skonfigurowane"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "Jesteś pewien?"
 
 msgid "Perform a full upgrade?"
 msgstr "Przeprowadzić pełną aktualizację?"
@@ -983,8 +992,9 @@ msgstr "Dołącz KlipperScreen.log prosząc o pomoc.\n"
 msgid "Close"
 msgstr "Zamknij"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "DPMS nie powiodło się i zostało wyłączone"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Nie można połączyć się z Moonrakerem"
@@ -1010,8 +1020,9 @@ msgstr "Klipper próbuje się uruchomić"
 msgid "Klipper has shutdown"
 msgstr "Klipper został wyłączony"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "Brak dostępnych makr:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "makra z nazwą zaczynającą się od \"_\" są ukryte"
@@ -1033,9 +1044,6 @@ msgstr "Ponawianie próby"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: połączony"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Błąd pobierania aktywnej szpuli"
 
 #~ msgid "Max:"
 #~ msgstr "Maks:"
@@ -1086,8 +1094,8 @@ msgstr "Moonraker: połączony"
 #~ "Not supported for auto-detection, it needs to be configured in "
 #~ "klipperscreen.conf"
 #~ msgstr ""
-#~ "Nieobsługiwany do automatycznego wykrywania, musi być skonfigurowany w "
-#~ "pliku klipperscreen.conf"
+#~ "Nieobsługiwany do automatycznego wykrywania, musi być skonfigurowany w pliku"
+#~ " klipperscreen.conf"
 
 #~ msgid "Unknown screw position"
 #~ msgstr "Nieznana pozycja śruby"

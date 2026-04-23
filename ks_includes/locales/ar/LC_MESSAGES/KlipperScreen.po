@@ -7,17 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2026-01-10 23:01+0000\n"
 "Last-Translator: Joe <alawadhi3000@hotmail.com>\n"
-"Language-Team: Arabic <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/ar/>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Weblate 5.15.1\n"
 
 msgid "Main Menu"
@@ -320,8 +318,9 @@ msgstr "لا يمكن إضافة شبكة"
 msgid "Failed to delete connection"
 msgstr "فشل في حذف الاتصال"
 
+#, fuzzy
 msgid "Starting WiFi Association"
-msgstr ""
+msgstr "بدء ارتباط واي فاي"
 
 msgid "Connecting"
 msgstr "توصيل"
@@ -620,13 +619,15 @@ msgstr "استناف"
 msgid "Save Z"
 msgstr "احفظ Z"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "تطبيق إزاحة {sign}{offset:.3f} على الفحص؟"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "تطبيق إزاحة {sign}{offset:.3f} على نقطة النهاية؟"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -847,17 +848,21 @@ msgstr "فلتر"
 msgid "Material"
 msgstr "المادّة"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "تعليق"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "آخر استخدام"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "الوزن المتبقي"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "الطول المتبقي"
 
 msgid "Error trying to fetch spools"
 msgstr "خطأ في محاولت جلب البكرة"
@@ -871,11 +876,15 @@ msgstr "خطأ في مسح تفعيل البكرة"
 msgid "Error setting active spool"
 msgstr "خطأ في اعداد البكرة"
 
+msgid "Error getting active spool"
+msgstr "خطأ في الحصول على تفعيل البكرة"
+
 msgid "No info available"
 msgstr "لا توجد معلومات متاحة"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "عنوان IP"
 
 msgid "Memory"
 msgstr "الذاكرة"
@@ -907,8 +916,9 @@ msgstr "التحقق من التحديثات، يرجى الانتظار..."
 msgid "Not working or not configured"
 msgstr "لا يعمل أو لم يتم تكوينه"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "هل أنت متأكد؟"
 
 msgid "Perform a full upgrade?"
 msgstr "إجراء ترقية كاملة؟"
@@ -1003,8 +1013,9 @@ msgstr "قم بتوفير KlipperScreen.log عند طلب المساعدة\n"
 msgid "Close"
 msgstr "إغلاق"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "فشل DPMS وتم تعطيله"
 
 msgid "Cannot connect to Moonraker"
 msgstr "لا يمكن الاتصال ب Moonraker"
@@ -1030,8 +1041,9 @@ msgstr "يحاول Klipper البدء"
 msgid "Klipper has shutdown"
 msgstr "تم إغلاق Klipper"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "لا توجد ماكروبات صالحة:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "وحدات الماكرو التي يبدأ اسمها ب \"_\" مخفية"
@@ -1051,9 +1063,6 @@ msgstr "جاري المحاولة"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker : متصل"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "خطأ في الحصول على تفعيل البكرة"
 
 #~ msgid "Max:"
 #~ msgstr "الحد الأقصى:"

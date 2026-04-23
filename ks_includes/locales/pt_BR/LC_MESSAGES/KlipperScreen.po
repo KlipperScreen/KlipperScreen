@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2025-01-23 05:01+0000\n"
 "Last-Translator: Erick Andrade <andrade.erick1987@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
-"klipperscreen/klipperscreen/pt_BR/>\n"
+"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -164,7 +163,8 @@ msgid "Printing"
 msgstr "Imprimindo"
 
 msgid "Timeout for screen black-out or power-off during printing"
-msgstr "Timeout para escurecimento ou desligamento da tela durante a impressão"
+msgstr ""
+"Timeout para escurecimento ou desligamento da tela durante a impressão"
 
 msgid "24 Hour Time"
 msgstr "Horário de 24 Horas"
@@ -241,8 +241,9 @@ msgstr "Autoabrir Extrudar Em Pausa"
 msgid "Show cursor"
 msgstr "Mostrar cursor"
 
+#, fuzzy
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "Para controle do mouse ou verificar precisão da tela"
 
 msgid "Invert X"
 msgstr "Inverter X"
@@ -603,13 +604,15 @@ msgstr "Continuar"
 msgid "Save Z"
 msgstr "Salvar Z"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "Aplicar deslocamento {sign}{offset:.3f} na Sonda?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "Aplicar deslocamento {sign}{offset:.3f} no Final de Curso?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -719,8 +722,9 @@ msgstr "Esquecer"
 msgid "Disconnect"
 msgstr "Desconectar"
 
+#, fuzzy
 msgid "Remove network"
-msgstr ""
+msgstr "Remover rede"
 
 msgid "User"
 msgstr "Usuário"
@@ -738,8 +742,9 @@ msgstr "Nome do Hospedeiro"
 msgid "Notification log empty"
 msgstr "Registro de notificação vazio"
 
+#, fuzzy
 msgid "Pressure advance"
-msgstr ""
+msgstr "Avanço de pressão"
 
 msgid "Current"
 msgstr "Atual"
@@ -831,17 +836,21 @@ msgstr "Filtro"
 msgid "Material"
 msgstr "Material"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Comentário"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "Usado por último"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "Peso restante"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "Comprimento restante"
 
 msgid "Error trying to fetch spools"
 msgstr "Erro ao tentar buscar spools"
@@ -855,11 +864,15 @@ msgstr "Erro ao limpar o carretel ativo"
 msgid "Error setting active spool"
 msgstr "Erro ao definir a fila de impressão ativa"
 
+msgid "Error getting active spool"
+msgstr "Erro ao obter a fila de impressão ativa"
+
 msgid "No info available"
 msgstr "Sem informação disponível"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "Endereço IP"
 
 msgid "Memory"
 msgstr "Memória"
@@ -891,8 +904,9 @@ msgstr "Verificando atualizações, por favor espere..."
 msgid "Not working or not configured"
 msgstr "Sem funcionar ou não configurado"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "Tem certeza?"
 
 msgid "Perform a full upgrade?"
 msgstr "Realizar uma atualização completa?"
@@ -979,8 +993,9 @@ msgstr "Forneça o KlipperScreen.log quando pedir ajuda.\n"
 msgid "Close"
 msgstr "Fechar"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "O DPMS falhou e foi desativado"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Não é possível se conectar ao Moonraker"
@@ -1006,8 +1021,9 @@ msgstr "Klipper está tentando iniciar"
 msgid "Klipper has shutdown"
 msgstr "Klipper foi desligado"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "Sem macros elegíveis:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "macros com nome que começa com '_' estão escondidas"
@@ -1029,9 +1045,6 @@ msgstr "Tentando Novamente"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: conectado"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Erro ao obter a fila de impressão ativa"
 
 #~ msgid "Max:"
 #~ msgstr "Max:"

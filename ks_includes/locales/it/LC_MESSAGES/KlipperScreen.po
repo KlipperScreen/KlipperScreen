@@ -3,11 +3,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2025-03-15 11:32+0000\n"
 "Last-Translator: Giadej <Giadej@users.noreply.hosted.weblate.org>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/it/>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -599,13 +598,15 @@ msgstr "Riprendi"
 msgid "Save Z"
 msgstr "Salva Z"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "Applica offset {sign}{offset:.3f} a Probe?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "Applica offset {sign}{offset:.3f} a Endstop?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -682,7 +683,8 @@ msgid "This will affect screw positions and mesh graph"
 msgstr "Questo influisce sulla posizione delle viti e sul grafico della mesh"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr "Scambia i pulsanti se sono sovrapposti, influisce sugli altri pannelli"
+msgstr ""
+"Scambia i pulsanti se sono sovrapposti, influisce sugli altri pannelli"
 
 msgid "XY Speed (mm/s)"
 msgstr "Velocità XY (mm/s)"
@@ -827,17 +829,21 @@ msgstr "Filtro"
 msgid "Material"
 msgstr "Materiale"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Commento"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "Ultimo uso"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "Peso rimanente"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "Lunghezza rimanente"
 
 msgid "Error trying to fetch spools"
 msgstr "Errore nel tentativo di recuperare le bobine"
@@ -851,11 +857,15 @@ msgstr "Errore nella cancellazione della bobina attiva"
 msgid "Error setting active spool"
 msgstr "Errore nel settaggio della bobina attiva"
 
+msgid "Error getting active spool"
+msgstr "Errore nel caricamento della bobina attiva"
+
 msgid "No info available"
 msgstr "Informazioni non disponibili"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "Indirizzo IP"
 
 msgid "Memory"
 msgstr "Memoria"
@@ -887,8 +897,9 @@ msgstr "Controllo aggiornamenti in corso, attendere..."
 msgid "Not working or not configured"
 msgstr "Non funzionante o non configurato"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "Sei sicuro?"
 
 msgid "Perform a full upgrade?"
 msgstr "Eseguire un aggiornamento completo?"
@@ -975,8 +986,9 @@ msgstr "Fornire il KlipperScreen.log quando si chiede aiuto.\n"
 msgid "Close"
 msgstr "Chiudi"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "DPMS non riuscito ed è stato disabilitato"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Impossibile connettersi a Moonraker"
@@ -1002,8 +1014,9 @@ msgstr "Klipper sta tentando di avviarsi"
 msgid "Klipper has shutdown"
 msgstr "Klipper si è spento"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "Nessun macro valido:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "macro con nome che inzia con '_' sono nascoste"
@@ -1025,9 +1038,6 @@ msgstr "Nuovo tentativo"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: connesso"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Errore nel caricamento della bobina attiva"
 
 #~ msgid "Max:"
 #~ msgstr "Massimo:"

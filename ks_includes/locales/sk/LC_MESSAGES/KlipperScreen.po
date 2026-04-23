@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-26 12:31-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2025-08-06 16:01+0000\n"
 "Last-Translator: Pavol Vrba <pvrba2000@gmail.com>\n"
-"Language-Team: Slovak <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/sk/>\n"
+"Language-Team: Slovak <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/sk/>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,86 +18,26 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
 "X-Generator: Weblate 5.13-dev\n"
 
-#, python-format
-msgid "%s will be updated to version"
-msgstr "%s bude aktualizovaný na verziu"
+msgid "Main Menu"
+msgstr "Hlavné Menu"
 
-msgid "(default)"
-msgstr "(predvolené)"
+msgid "Move"
+msgstr "Posuv"
 
-msgid "24 Hour Time"
-msgstr "24 hodinový čas"
+msgid "Temperature"
+msgstr "Teplota"
 
-msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr "FIRMWARE_RESTART môže vyriešiť problém."
+msgid "Extrude"
+msgstr "Vysunúť"
 
-msgid "ADXL Not Configured"
-msgstr "ADXL nie je nakonfigurovaný"
+msgid "More"
+msgstr "Viac"
 
-msgid "Abort"
-msgstr "Prerušiť"
+msgid "Print"
+msgstr "Tlač"
 
-msgid "Acceleration:"
-msgstr "Zrýchlenie:"
-
-msgid "Accept"
-msgstr "Prijať"
-
-msgid "Add profile"
-msgstr "Pridať profil"
-
-msgid "All"
-msgstr "Všetko"
-
-msgid "Apply"
-msgstr "Použiť"
-
-#, python-format
-msgid "Apply %s%.3f offset to Endstop?"
-msgstr "Potvrdiť %s%.3f offset koncového spínača?"
-
-#, python-format
-msgid "Apply %s%.3f offset to Probe?"
-msgstr "Potvrdiť %s%.3f offset sondy?"
-
-msgid "Archived"
-msgstr "Archivované"
-
-msgid "Are you sure do you want to exclude the object?"
-msgstr "Naozaj chcete vylúčiť objekt?"
-
-msgid "Are you sure you want to run Emergency Stop?"
-msgstr "Naozaj chcete spustiť núdzové zastavenie?"
-
-msgid "Are you sure you wish to cancel this print?"
-msgstr "Naozaj chcete zrušiť túto tlač?"
-
-msgid "Are you sure you wish to disable motors?"
-msgstr "Naozaj chcete deaktivovať motory?"
-
-msgid "Are you sure you wish to reboot the system?"
-msgstr "Ste si istý, že chcete reštartovať systém?"
-
-msgid "Are you sure you wish to shutdown the system?"
-msgstr "Ste si istý, že chcete vypnúť systém?"
-
-msgid "Asks for confirmation before stopping"
-msgstr "Pred zastavením požiadať o potvrdenie"
-
-msgid "Auto"
-msgstr "Auto"
-
-msgid "Auto-calibrate"
-msgstr "Auto-kalibrácia"
-
-msgid "Auto-close notifications"
-msgstr "Automaticky zatvoriť upozornenia"
-
-msgid "Auto-open Extrude On Pause"
-msgstr "Automatické otvorenie Vysunutia pri pozastavení"
-
-msgid "Auto-scroll"
-msgstr "Auto-posuv"
+msgid "Gcodes"
+msgstr "Gkódy"
 
 msgid "Bed Level"
 msgstr "Vyrovnanie podložky"
@@ -106,281 +45,56 @@ msgstr "Vyrovnanie podložky"
 msgid "Bed Mesh"
 msgstr "Mapa podložky"
 
-msgid "Both"
-msgstr "Oba"
+msgid "Z Calibrate"
+msgstr "Kalibrácia Z"
 
-msgid "Calibrate"
-msgstr "Kalibrovať"
-
-msgid "Calibrated"
-msgstr "Nakalibrované"
-
-msgid "Calibrating"
-msgstr "Kalibrujem"
-
-msgid "Camera"
-msgstr "Kamera"
-
-msgid "Can't set above the maximum:"
-msgstr "Nedá sa nastaviť viac ako maximum:"
-
-msgid "Cancel"
-msgstr "Zrušiť"
-
-msgid "Cancel Print"
-msgstr "Zrušiť tlač"
-
-msgid "Cancelled"
-msgstr "Zrušené"
-
-msgid "Cancelling"
-msgstr "Ruším"
-
-msgid "Cannot connect to Moonraker"
-msgstr "Nedá sa pripojiť k Moonrakeru"
-
-msgid "Changes how the interface looks"
-msgstr "Zmení vzhľad rozhrania"
-
-msgid "Changes how the time remaining is calculated"
-msgstr "Zmení spôsob výpočtu zostávajúceho času"
-
-msgid "Channel"
-msgstr "Kanál"
-
-msgid "Check ADXL Wiring"
-msgstr "Skontrolujte zapojenie ADXL"
-
-msgid "Checking for updates, please wait..."
-msgstr "Hľadajú sa aktualizácie, čakajte prosím…"
-
-msgid "Clear"
-msgstr "Vyčistiť"
-
-msgid "Close"
-msgstr "Zatvoriť"
-
-msgid "Close messages after a timeout"
-msgstr "Zatvoriť správy po uplynutí časového limitu"
-
-msgid "Complete"
-msgstr "Dokončené"
-
-msgid "Confirm Emergency Stop"
-msgstr "Potvrdenie núdzového zastavenia"
-
-msgid "Connected"
-msgstr "Pripojenie"
-
-msgid "Connecting"
-msgstr "Pripájam"
-
-#, python-format
-msgid "Connecting to %s"
-msgstr "Pripájanie k %s"
-
-msgid "Connection failed"
-msgstr "Pripojenie zlyhalo"
-
-msgid "Console"
-msgstr "Konzola"
-
-msgid "Cooldown"
-msgstr "Ochladzovanie"
-
-msgid "Couldn't add network"
-msgstr "Nepodarilo sa pridať sieť"
-
-msgid "Current"
-msgstr "Aktuálne"
-
-msgid "Current percentage and graph line"
-msgstr "Aktuálne percento a graf"
-
-msgid "DPMS has failed to load and has been disabled"
-msgstr "Načítanie systému DPMS sa nepodarilo a systém bol deaktivovaný"
-
-msgid "Date"
-msgstr "Dátum"
-
-msgid "Delete"
-msgstr "Zmazať"
-
-msgid "Delete Directory?"
-msgstr "Zmazať Adresár?"
-
-msgid "Delete File?"
-msgstr "Zmazať Súbor?"
-
-msgid "Disable Motors"
-msgstr "Deaktivovať Motory"
-
-msgid "Disable for 12hs with am / pm"
-msgstr "Zakázať na 12 hodín s am / pm"
-
-msgid "Disconnect"
-msgstr "Odpojiť"
-
-msgid "Distance (mm)"
-msgstr "Vzdialenosť (mm)"
-
-#, python-format
-msgid "Do you want to forget or disconnect %s?"
-msgstr "Chcete zabudnúť alebo odpojiť %s?"
-
-#, python-format
-msgid "Do you want to recover %s?"
-msgstr "Chcete obnoviť %s?"
-
-msgid "Elapsed:"
-msgstr "Uplynuté:"
-
-msgid "Emergency Stop"
-msgstr "Núdzové Zastavenie"
-
-msgid "Enable screen power management"
-msgstr "Povoliť správu napájania obrazovky"
-
-msgid "Error"
-msgstr "Chyba"
-
-msgid "Error clearing active spool"
-msgstr "Chyba pri čistení aktívnej cievky"
-
-msgid "Error getting active spool"
-msgstr "Chyba pri získavaní aktívnej cievky"
-
-msgid "Error setting active spool"
-msgstr "Chyba pri nastavovaní aktívnej cievky"
-
-msgid "Error trying to fetch spools"
-msgstr "Chyba pri pokuse o načítanie cievok"
-
-msgid "Error: Couldn't get a position to probe"
-msgstr "Chyba: Nepodarilo sa nájsť polohu na sondovanie"
-
-msgid "Estimated Time"
-msgstr "Zostávajúci Čas"
-
-msgid "Estimated Time Method"
-msgstr "Metóda odhadovaného času"
-
-msgid "Example"
-msgstr "Príklad"
-
-msgid "Exclude Object"
-msgstr "Vylúčiť Objekt"
-
-msgid "Extra Large"
-msgstr "Extra Veľké"
-
-msgid "Extrude"
-msgstr "Vysunúť"
-
-msgid "Extruders"
-msgstr "Extrudéry"
-
-msgid "Extrusion +"
-msgstr "Extrúzia +"
-
-msgid "Extrusion -"
-msgstr "Extrúzia -"
-
-msgid "Failed to delete connection"
-msgstr "Nepodarilo sa odstrániť pripojenie"
-
-msgid "Failed to initialize"
-msgstr "Inicializácia zlyhala"
-
-msgid "Failed, adjust position first"
-msgstr "Nepodarilo sa, najprv upravte polohu"
+msgid "Limits"
+msgstr "Limity"
 
 msgid "Fan"
 msgstr "Ventilátor"
 
-msgid "Filament"
-msgstr "Vlákno"
+msgid "Leds"
+msgstr "Ledky"
 
-msgid "Filament Used"
-msgstr "Použité Vlákno"
+msgid "Macros"
+msgstr "Makrá"
 
-msgid "Filament total:"
-msgstr "Vlákno celkom:"
+msgid "Pins"
+msgstr "Piny"
 
-msgid "Filament used:"
-msgstr "Použitého vlákna:"
+msgid "Power"
+msgstr "Napájanie"
 
-msgid "Filament:"
-msgstr "Vlákno:"
+msgid "Camera"
+msgstr "Kamera"
 
-msgid "File"
-msgstr "Súbor"
+msgid "Console"
+msgstr "Konzola"
 
-msgid "File:"
-msgstr "Súbor:"
+msgid "Update"
+msgstr "Aktualizovať"
 
-msgid "Filter"
-msgstr "Filter"
+msgid "Input Shaper"
+msgstr "Tvarovač Vstupu"
 
-msgid "Finding ADXL"
-msgstr "Hľadám ADXL"
+msgid "Save Config"
+msgstr "Uložiť konfiguráciu"
+
+msgid "Network"
+msgstr "Sieť"
+
+msgid "Notifications"
+msgstr "Oanámenia"
+
+msgid "System"
+msgstr "Systém"
 
 msgid "Fine Tuning"
 msgstr "Jemné Ladenie"
 
-msgid "Finish"
-msgstr "Koniec"
-
-msgid "Firmware Restart"
-msgstr "Reštart Firmware"
-
-msgid "Flow:"
-msgstr "Prietok:"
-
-msgid "Flowrate:"
-msgstr "Prietok:"
-
-msgid "Font Size"
-msgstr "Veľkosť písma"
-
-msgid "For mouse control or to verify touchscreen accuracy"
-msgstr "Na ovládanie myšou alebo na overenie presnosti dotykovej obrazovky"
-
-msgid "Forget"
-msgstr "Zabudni"
-
-msgid "Full Update"
-msgstr "Úplná aktualizácia"
-
-msgid "Gcodes"
-msgstr "Gkódy"
-
-msgid "Getting IP address"
-msgstr "Získavanie IP adresy"
-
-msgid "Go Back"
-msgstr "Choď späť"
-
-msgid "Height:"
-msgstr "Výška:"
-
-msgid "Hide"
-msgstr "Skryť"
-
-msgid "Hide sensors in Temp."
-msgstr "Skryť senzory v Temp."
-
-msgid "Home"
-msgstr "Domov"
-
-msgid "Home All"
-msgstr "Domov Všetko"
-
 msgid "Home X"
 msgstr "Domov X"
-
-msgid "Home XY"
-msgstr "Domov XY"
 
 msgid "Home Y"
 msgstr "Domov Y"
@@ -388,44 +102,147 @@ msgstr "Domov Y"
 msgid "Home Z"
 msgstr "Domov Z"
 
-msgid "Host"
-msgstr "Host"
+msgid "Home All"
+msgstr "Domov Všetko"
 
-msgid "Hostname"
-msgstr "Názov hosta"
+msgid "Home XY"
+msgstr "Domov XY"
 
-msgid "ID"
-msgstr "ID"
+msgid "Quad Gantry Level"
+msgstr "Štvorúrová Portálová Úroveň"
+
+msgid "Z Tilt"
+msgstr "Z Náklon"
+
+msgid "Print Control"
+msgstr "Kontrola tlače"
+
+msgid "Lock"
+msgstr "Zámok"
+
+msgid "Menu"
+msgstr "Menu"
 
 msgid "Icon Theme"
 msgstr "Téma ikon"
 
-msgid "Initializing printer..."
-msgstr "Inicializuje sa tlačiareň…"
+msgid "Changes how the interface looks"
+msgstr "Zmení vzhľad rozhrania"
 
-msgid "Initiate a PID calibration for:"
-msgstr "Spustite kalibráciue PID pre:"
+msgid "(default)"
+msgstr "(predvolené)"
 
-msgid "Input Shaper"
-msgstr "Tvarovač Vstupu"
+msgid "Estimated Time Method"
+msgstr "Metóda odhadovaného času"
 
-msgid "Insufficient privileges"
-msgstr "Nedostatočné oprávnenia"
+msgid "Changes how the time remaining is calculated"
+msgstr "Zmení spôsob výpočtu zostávajúceho času"
 
-msgid "Interface"
-msgstr "Rozhranie"
+msgid "Auto"
+msgstr "Auto"
 
-msgid "Invalid"
-msgstr "Nesprávne"
+msgid "File"
+msgstr "Súbor"
 
-msgid "Invalid password"
-msgstr "Nesprávne heslo"
+msgid "Filament Used"
+msgstr "Použité Vlákno"
 
-msgid "Invalid temperature"
-msgstr "Nesprávna teplota"
+msgid "Slicer"
+msgstr "Slicer"
+
+msgid "Screen Power Off Time"
+msgstr "Čas vypnutia obrazovky"
+
+msgid "Timeout for screen black-out or power-off"
+msgstr "Časový limit pre výpadok obrazovky alebo vypnutie napájania"
+
+msgid "Never"
+msgstr "Nikdy"
+
+msgid "Printing"
+msgstr "Tlačím"
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr ""
+"Časový limit pre stmavenie obrazovky alebo vypnutie napájania počas tlače"
+
+msgid "24 Hour Time"
+msgstr "24 hodinový čas"
+
+msgid "Disable for 12hs with am / pm"
+msgstr "Zakázať na 12 hodín s am / pm"
+
+msgid "Macro shortcut on sidebar"
+msgstr "Skratka makra na bočnom paneli"
+
+msgid "Font Size"
+msgstr "Veľkosť písma"
 
 msgid "Inversely affects the icon size"
 msgstr "Nepriaznivo ovplyvňuje veľkosť ikony"
+
+msgid "Small"
+msgstr "Malý"
+
+msgid "Medium"
+msgstr "Stredne"
+
+msgid "Large"
+msgstr "Veľký"
+
+msgid "Extra Large"
+msgstr "Extra Veľké"
+
+msgid "Maximum"
+msgstr "Maximum"
+
+msgid "Confirm Emergency Stop"
+msgstr "Potvrdenie núdzového zastavenia"
+
+msgid "Asks for confirmation before stopping"
+msgstr "Pred zastavením požiadať o potvrdenie"
+
+msgid "Hide sensors in Temp."
+msgstr "Skryť senzory v Temp."
+
+msgid "Show only devices that are able to be set"
+msgstr "Zobraziť iba zariadenia, ktoré je možné nastaviť"
+
+msgid "Screen DPMS"
+msgstr "Obrazovka DPMS"
+
+msgid "Enable screen power management"
+msgstr "Povoliť správu napájania obrazovky"
+
+msgid "Not all screens support this"
+msgstr "Nie všetky obrazovky toto podporujú"
+
+msgid "Auto-close notifications"
+msgstr "Automaticky zatvoriť upozornenia"
+
+msgid "Close messages after a timeout"
+msgstr "Zatvoriť správy po uplynutí časového limitu"
+
+msgid "Show Heater Power"
+msgstr "Zobraziť Výkon Ohrievača"
+
+msgid "Current percentage and graph line"
+msgstr "Aktuálne percento a graf"
+
+msgid "Show Scrollbars Buttons"
+msgstr "Zobraziť Tlačidlá Posuvníka"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr "Užitočné pre nereagujúce dotykové obrazovky"
+
+msgid "Auto-open Extrude On Pause"
+msgstr "Automatické otvorenie Vysunutia pri pozastavení"
+
+msgid "Show cursor"
+msgstr "Zobraziť kurzor"
+
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr "Na ovládanie myšou alebo na overenie presnosti dotykovej obrazovky"
 
 msgid "Invert X"
 msgstr "Invertovať X"
@@ -436,550 +253,14 @@ msgstr "Invertovať Y"
 msgid "Invert Z"
 msgstr "Invertovať Z"
 
-msgid "It may take more than 5 minutes depending on the heater power."
-msgstr "V závislosti od výkonu ohrievača to môže trvať aj viac ako 5 minút."
-
-msgid "It's possible that the configuration is not correct"
-msgstr "Je možné, že konfigurácia nie je správna"
-
-msgid "Job Status"
-msgstr "Stav Úlohy"
-
-msgid "Klipper Restart"
-msgstr "Reštart Klippera"
-
-msgid "Klipper has disconnected"
-msgstr "Klipper sa odpojil"
-
-msgid "Klipper has encountered an error."
-msgstr "V aplikácii Klipper sa vyskytla chyba."
-
-msgid "Klipper has shutdown"
-msgstr "Klipper sa vypol"
-
-msgid "Klipper is attempting to start"
-msgstr "Klipper sa pokúša naštartovať"
-
-msgid "Klipper will reboot"
-msgstr "Klipper sa reštartuje"
-
-msgid "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT sú skryté a mali by sa použiť z vysunutia"
-
-msgid "Language"
-msgstr "Jazyk"
-
-msgid "Large"
-msgstr "Veľký"
-
-msgid "Last Duration"
-msgstr "Posledné Trvanie"
-
-msgid "Last Used"
-msgstr "Naposledy Použité"
-
-msgid "Layer Height"
-msgstr "Výška Vrstvy"
-
-msgid "Layer:"
-msgstr "Vrstva:"
-
-msgid "Leds"
-msgstr "Ledky"
-
-msgid "Left:"
-msgstr "Zostáva:"
-
-msgid "Limits"
-msgstr "Limity"
-
-msgid "Load"
-msgstr "Načítať"
-
-msgid "Loading..."
-msgstr "Nahrávam…"
-
-msgid "Lock"
-msgstr "Zámok"
-
-msgid "Lost Connection to Moonraker"
-msgstr "Stratené spojenie s Moonrakerom"
-
-msgid "Lower Nozzle"
-msgstr "Spodná Tryska"
-
-msgid "Macro shortcut on sidebar"
-msgstr "Skratka makra na bočnom paneli"
-
-msgid "Macros"
-msgstr "Makrá"
-
-msgid "Main Menu"
-msgstr "Hlavné Menu"
-
-msgid "Material"
-msgstr "Materiál"
-
-msgid "Max"
-msgstr "Max"
-
-msgid "Max Acceleration"
-msgstr "Maximálne Zrýchlenie"
-
-msgid "Max Velocity"
-msgstr "Maximálna Rýchlosť"
-
-msgid "Max:"
-msgstr "Max:"
-
-msgid "Maximum"
-msgstr "Maximum"
-
-msgid "Measure Both"
-msgstr "Zmerať Oba"
-
-msgid "Measure X"
-msgstr "Zmerať Y"
-
-msgid "Measure Y"
-msgstr "Zmerať Y"
-
-msgid "Medium"
-msgstr "Stredne"
-
-msgid "Memory"
-msgstr "Pamäť"
-
-msgid "Menu"
-msgstr "Menu"
-
-msgid "Minimum Cruise Ratio"
-msgstr "Minimálny Pomer Posuvu"
-
-msgid "Minimum:"
-msgstr "Minimum:"
-
-msgid "Modified"
-msgstr "Modifikovaný"
-
-msgid "Moonraker: connected"
-msgstr "Moonraker: pripojený"
-
-msgid "More"
-msgstr "Viac"
-
-msgid "Move"
-msgstr "Posuv"
-
-msgid "Move Distance (mm)"
-msgstr "Vzdialenosť pohybu (mm)"
-
-msgid "Name"
-msgstr "Názov"
-
-msgid "Network"
-msgstr "Sieť"
-
-msgid "Network connected"
-msgstr "Sieť pripojená"
-
-msgid "Network disconnected"
-msgstr "Sieť odpojená"
-
-msgid "Network not found"
-msgstr "Sieť sa nenašla"
-
-msgid "Never"
-msgstr "Nikdy"
-
-msgid "New"
-msgstr "Nový"
-
-msgid "No elegible macros:"
-msgstr "Žiadne použiteľné makrá:"
-
-msgid "No info available"
-msgstr "Žiadne informácie nie sú k dispozícii"
-
-msgid "No mesh has been loaded"
-msgstr "Nebola načítaná žiadna sieť"
-
-msgid "No wireless interface has been found"
-msgstr "Bezdrôtové rozhranie sa nenašlo"
-
-msgid "Not all screens support this"
-msgstr "Nie všetky obrazovky toto podporujú"
-
-msgid "Not working or not configured"
-msgstr "Nefunguje alebo nie je nakonfigurované"
-
-msgid "Nothing selected"
-msgstr "Nič nebolo vybrané"
-
-msgid "Notification log empty"
-msgstr "Denník oznámení je prázdny"
-
-msgid "Notifications"
-msgstr "Oanámenia"
-
-msgid "Nozzle diameter"
-msgstr "Priemer trysky"
-
-msgid "Only for the move panel"
-msgstr "Iba pre panel posuvu"
-
-#, python-format
-msgid "Outdated by %d"
-msgstr "Neaktuálne od %d"
-
-msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "Balík bude aktualizovaný"
-msgstr[1] "Balíky budú aktualizované"
-msgstr[2] "Balíkov bude aktualizovaných"
-
-msgid "Part Fan"
-msgstr "Ventilátor časti"
-
-msgid "Password"
-msgstr "Heslo"
-
-msgid "Password saved"
-msgstr "Heslo uložené"
-
-msgid "Pause"
-msgstr "Pozastaviť"
-
-msgid "Paused"
-msgstr "Pozastavené"
-
-msgid "Perform a full upgrade?"
-msgstr "Vykonať úplnú aktualizáciu?"
-
-msgid "Pins"
-msgstr "Piny"
-
-msgid "Please recompile and flash the micro-controller."
-msgstr "Prosím, prekompilujte a naprogramujte mikrokontrolér."
-
-msgid "Please wait"
-msgstr "Prosím, počkajte"
-
-msgid "Power"
-msgstr "Napájanie"
-
-msgid "Power On Printer"
-msgstr "Zapnutie tlačiarne"
-
-msgid "Pressure Advance"
-msgstr "Predstih Tlaku"
-
-msgid "Pressure Advance:"
-msgstr "Predstih tlaku:"
-
-msgid "Pressure advance"
-msgstr "Predstih tlaku"
-
-msgid "Print"
-msgstr "Tlač"
-
-msgid "Print Control"
-msgstr "Kontrola tlače"
-
-msgid "Printer"
-msgstr "Tlačiareň"
-
-msgid "Printer Connections"
-msgstr "Pripojenia tlačiarne"
-
-msgid "Printer Select"
-msgstr "Výber tlačiarne"
-
-msgid "Printing"
-msgstr "Tlačím"
-
-msgid "Probe Offset"
-msgstr "Offset Sondy"
-
-msgid "Profile Name:"
-msgstr "Názov profilu:"
-
-msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Pri žiadosti o pomoc poskytnite súbor KlipperScreen.log.\n"
-
-msgid "Quad Gantry Level"
-msgstr "Štvorúrová Portálová Úroveň"
-
-msgid "Raise Nozzle"
-msgstr "Zdvihnutie Trysky"
-
-msgid "Recover"
-msgstr "Obnoviť"
-
-msgid "Recover Hard"
-msgstr "Obnoviť tvrdo"
-
-msgid "Recover Soft"
-msgstr "Obnoviť Jemne"
-
-msgid "Reference"
-msgstr "Referencia"
-
-msgid "Refresh"
-msgstr "Obnoviť"
-
-msgid "Remove network"
-msgstr "Odstrániť sieť"
-
-msgid "Rename/Move:"
-msgstr "Premenovať/Presunúť:"
-
-msgid "Restart"
-msgstr "Reštart"
-
-msgid "Resume"
-msgstr "Návrat"
-
-msgid "Retract"
-msgstr "Zasunúť"
-
-msgid "Retraction"
-msgstr "Zasunutie"
-
-msgid "Retraction Length"
-msgstr "Dĺžka Zasunutia"
-
-msgid "Retraction Speed"
-msgstr "Rýchlosť Zasunutia"
-
-msgid "Retry"
-msgstr "Zopakovať"
-
-msgid "Retrying"
-msgstr "Opakovanie"
-
-msgid "Rotation invalid"
-msgstr "Neplatná rotácia"
-
-msgid "Save"
-msgstr "Uložiť"
-
-msgid "Save Config"
-msgstr "Uložiť konfiguráciu"
-
-msgid "Save Z"
-msgstr "Uložiť Z"
-
-msgid "Save configuration?"
-msgstr "Uložiť konfiguráciu?"
-
-msgid "Saved"
-msgstr "Uložené"
-
-#, python-format
-msgid "Saved offset: %s"
-msgstr "Uložený posun: %s"
-
-msgid "Screen DPMS"
-msgstr "Obrazovka DPMS"
-
-msgid "Screen Power Off Time"
-msgstr "Čas vypnutia obrazovky"
-
-msgid "Screws Adjust"
-msgstr "Nastavenie Skrutiek"
-
-msgid "Screws not used:"
-msgstr "Skrutky sa nepoužívajú:"
-
-msgid "Send"
-msgstr "Poslať"
-
-msgid "Set Temp"
-msgstr "Nastavenie Teploty"
-
-msgid "Settings"
-msgstr "Nastavenia"
-
-msgid "Show"
-msgstr "Zobraziť"
-
-msgid "Show Heater Power"
-msgstr "Zobraziť Výkon Ohrievača"
-
-msgid "Show Scrollbars Buttons"
-msgstr "Zobraziť Tlačidlá Posuvníka"
-
-msgid "Show cursor"
-msgstr "Zobraziť kurzor"
-
-msgid "Show only devices that are able to be set"
-msgstr "Zobraziť iba zariadenia, ktoré je možné nastaviť"
-
-msgid "Shutdown"
-msgstr "Vypnutie Systému"
-
-msgid "Size"
-msgstr "Veľkosť"
-
-msgid "Slicer"
-msgstr "Slicer"
-
-msgid "Slicer:"
-msgstr "Slicer:"
-
-msgid "Small"
-msgstr "Malý"
-
-msgid "Smooth time"
-msgstr "Plynulý čas"
-
-msgid "Speed (mm/s)"
-msgstr "Rýchlosť (mm/s)"
-
-msgid "Speed +"
-msgstr "Rýchlosť +"
-
-msgid "Speed -"
-msgstr "Rýchlosť -"
-
-msgid "Speed:"
-msgstr "Rýchlosť:"
-
-msgid "Square Corner Velocity"
-msgstr "Rýchlosť v štvorcovom rohu"
-
-msgid "Standby"
-msgstr "Pohotovostný režim"
-
-msgid "Start"
-msgstr "Štart"
-
-msgid "Starting recovery for"
-msgstr "Spúšťa sa obnovenie pre"
-
-msgid "Starting update for"
-msgstr "Spúšťa sa aktualizácia pre"
-
-msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr "Zamení tlačidlá, ak sú na sebe, ovplyvní to aj ostatné panely"
-
-msgid "System"
-msgstr "Systém"
-
-msgid "System Restart"
-msgstr "Reštart Systému"
-
-msgid "System Shutdown"
-msgstr "Vzpnutie Systému"
-
-msgid "System:"
-msgstr "Systém:"
-
-msgid "Temp (°C)"
-msgstr "Teplota (°C)"
-
-msgid "Temperature"
-msgstr "Teplota"
-
-msgid "Temperature too low to extrude"
-msgstr "Príliš nízka teplota na vytlačenie"
-
-msgid "The system doesn't meet the minimum requirement"
-msgstr "Systém nespĺňa minimálne požiadavky"
-
-msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr "Tento panel podporuje až 9 skrutiek v mriežke 3x3"
-
-msgid "This will affect screw positions and mesh graph"
-msgstr "Toto ovplyvní polohy skrutiek a graf siete"
-
-msgid "Timeout for screen black-out or power-off"
-msgstr "Časový limit pre výpadok obrazovky alebo vypnutie napájania"
-
-msgid "Timeout for screen black-out or power-off during printing"
-msgstr "Časový limit pre stmavenie obrazovky alebo vypnutie napájania počas tlače"
-
-msgid "Total:"
-msgstr "Celkovo:"
-
-msgid "Unknown Heater"
-msgstr "Neznámy ohrievač"
-
-msgid "Unknown security type"
-msgstr "Neznámy typ zabezpečenia"
-
-msgid "Unload"
-msgstr "Vysunúť"
-
-msgid "Unlock"
-msgstr "Odomknúť"
-
-msgid "Unlock failed"
-msgstr "Odomknutie zlyhalo"
-
-msgid "Unretract Extra Length"
-msgstr "Uvoľnenie Extra Dĺžky"
-
-msgid "Unretract Speed"
-msgstr "Rýchlosť Vysunutia"
-
-msgid "Up To Date"
-msgstr "Aktuálne"
-
-msgid "Update"
-msgstr "Aktualizovať"
-
-msgid "Updating"
-msgstr "Aktualizujem"
-
-msgid "Useful for un-responsive touchscreens"
-msgstr "Užitočné pre nereagujúce dotykové obrazovky"
-
-msgid "User"
-msgstr "Používateľ"
-
-msgid "WebRTC is not supported by the backend trying Stream"
-msgstr "WebRTC nepodporuje backend, ktorý sa pokúša o Stream"
-
-msgid "Working"
-msgstr "Pracujem"
-
 msgid "XY Move Speed (mm/s)"
 msgstr "Rýchlosť pohybu XY (mm/s)"
-
-msgid "XY Speed (mm/s)"
-msgstr "XY Rýchlosť (mm/s)"
-
-msgid "Z Calibrate"
-msgstr "Kalibrácia Z"
 
 msgid "Z Move Speed (mm/s)"
 msgstr "Rýchlosť pohybu Z (mm/s)"
 
-msgid "Z Speed (mm/s)"
-msgstr "Z Rýchlosť (mm/s)"
-
-msgid "Z Tilt"
-msgstr "Z Náklon"
-
-msgid "Z offset:"
-msgstr "Z offset:"
-
-msgid "commit"
-msgid_plural "commits"
-msgstr[0] "zápis"
-msgstr[1] "zápisy"
-msgstr[2] "zápisov"
-
-msgid "day"
-msgid_plural "days"
-msgstr[0] "deň"
-msgstr[1] "dni"
-msgstr[2] "dní"
-
-msgid "g"
-msgstr "g"
+msgid "Language"
+msgstr "Jazyk"
 
 msgid "hour"
 msgid_plural "hours"
@@ -987,20 +268,276 @@ msgstr[0] "hodina"
 msgstr[1] "hodiny"
 msgstr[2] "hodín"
 
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "makrá, ktoré používajú ‘rename_existing’, sú skryté"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "makrá s názvom začínajúcim na ‘_’ sú skryté"
-
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minúta"
 msgstr[1] "minúty"
 msgstr[2] "minút"
 
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "Naozaj chcete spustiť núdzové zastavenie?"
+
+msgid "day"
+msgid_plural "days"
+msgstr[0] "deň"
+msgstr[1] "dni"
+msgstr[2] "dní"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "sekunda"
+msgstr[1] "sekundy"
+msgstr[2] "sekúnd"
+
+msgid "Network not found"
+msgstr "Sieť sa nenašla"
+
+msgid "Unknown security type"
+msgstr "Neznámy typ zabezpečenia"
+
+msgid "Insufficient privileges"
+msgstr "Nedostatočné oprávnenia"
+
+msgid "Invalid password"
+msgstr "Nesprávne heslo"
+
+msgid "Couldn't add network"
+msgstr "Nepodarilo sa pridať sieť"
+
+msgid "Failed to delete connection"
+msgstr "Nepodarilo sa odstrániť pripojenie"
+
+#, fuzzy
+msgid "Starting WiFi Association"
+msgstr "Spúšťam asociáciu WiFi"
+
+msgid "Connecting"
+msgstr "Pripájam"
+
+msgid "Getting IP address"
+msgstr "Získavanie IP adresy"
+
+msgid "Network connected"
+msgstr "Sieť pripojená"
+
+msgid "Network disconnected"
+msgstr "Sieť odpojená"
+
+msgid "Connection failed"
+msgstr "Pripojenie zlyhalo"
+
+msgid "No mesh has been loaded"
+msgstr "Nebola načítaná žiadna sieť"
+
+msgid "Calibrate"
+msgstr "Kalibrovať"
+
+msgid "Invalid temperature"
+msgstr "Nesprávna teplota"
+
+msgid "Password"
+msgstr "Heslo"
+
+msgid "Unlock"
+msgstr "Odomknúť"
+
+msgid "Unlock failed"
+msgstr "Odomknutie zlyhalo"
+
+msgid "Are you sure do you want to exclude the object?"
+msgstr "Naozaj chcete vylúčiť objekt?"
+
+msgid "Finish"
+msgstr "Koniec"
+
+msgid "Updating"
+msgstr "Aktualizujem"
+
+msgid "Disable Motors"
+msgstr "Deaktivovať Motory"
+
+msgid "Screws Adjust"
+msgstr "Nastavenie Skrutiek"
+
+msgid "Rotation invalid"
+msgstr "Neplatná rotácia"
+
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr "Tento panel podporuje až 9 skrutiek v mriežke 3x3"
+
+msgid "It's possible that the configuration is not correct"
+msgstr "Je možné, že konfigurácia nie je správna"
+
+msgid "Screws not used:"
+msgstr "Skrutky sa nepoužívajú:"
+
+msgid "Reference"
+msgstr "Referencia"
+
+msgid "Add profile"
+msgstr "Pridať profil"
+
+msgid "Clear"
+msgstr "Vyčistiť"
+
+msgid "Profile Name:"
+msgstr "Názov profilu:"
+
+msgid "Save"
+msgstr "Uložiť"
+
+msgid "Calibrating"
+msgstr "Kalibrujem"
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr "WebRTC nepodporuje backend, ktorý sa pokúša o Stream"
+
+msgid "Auto-scroll"
+msgstr "Auto-posuv"
+
+msgid "Send"
+msgstr "Poslať"
+
+msgid "Example"
+msgstr "Príklad"
+
+msgid "Exclude Object"
+msgstr "Vylúčiť Objekt"
+
+msgid "Are you sure you wish to cancel this print?"
+msgstr "Naozaj chcete zrušiť túto tlač?"
+
+msgid "Load"
+msgstr "Načítať"
+
+msgid "Unload"
+msgstr "Vysunúť"
+
+msgid "Retract"
+msgstr "Zasunúť"
+
+msgid "Pressure Advance"
+msgstr "Predstih Tlaku"
+
+msgid "Retraction"
+msgstr "Zasunutie"
+
+msgid "Extruders"
+msgstr "Extrudéry"
+
+msgid "Distance (mm)"
+msgstr "Vzdialenosť (mm)"
+
+msgid "Speed (mm/s)"
+msgstr "Rýchlosť (mm/s)"
+
+msgid "Part Fan"
+msgstr "Ventilátor časti"
+
+msgid "Max"
+msgstr "Max"
+
 msgid "mm"
 msgstr "mm"
+
+msgid "Speed +"
+msgstr "Rýchlosť +"
+
+msgid "Speed -"
+msgstr "Rýchlosť -"
+
+msgid "Extrusion +"
+msgstr "Extrúzia +"
+
+msgid "Extrusion -"
+msgstr "Extrúzia -"
+
+msgid "Name"
+msgstr "Názov"
+
+msgid "Settings"
+msgstr "Nastavenia"
+
+msgid "Date"
+msgstr "Dátum"
+
+msgid "Size"
+msgstr "Veľkosť"
+
+msgid "Loading..."
+msgstr "Nahrávam…"
+
+msgid "Delete File?"
+msgstr "Zmazať Súbor?"
+
+msgid "Delete Directory?"
+msgstr "Zmazať Adresár?"
+
+msgid "Start"
+msgstr "Štart"
+
+msgid "Delete"
+msgstr "Zmazať"
+
+msgid "Cancel"
+msgstr "Zrušiť"
+
+msgid "Modified"
+msgstr "Modifikovaný"
+
+msgid "Layer Height"
+msgstr "Výška Vrstvy"
+
+msgid "Filament"
+msgstr "Vlákno"
+
+msgid "Estimated Time"
+msgstr "Zostávajúci Čas"
+
+msgid "g"
+msgstr "g"
+
+msgid "Nozzle diameter"
+msgstr "Priemer trysky"
+
+msgid "Last Duration"
+msgstr "Posledné Trvanie"
+
+msgid "Rename/Move:"
+msgstr "Premenovať/Presunúť:"
+
+msgid "Finding ADXL"
+msgstr "Hľadám ADXL"
+
+msgid "Measure X"
+msgstr "Zmerať Y"
+
+msgid "Measure Y"
+msgstr "Zmerať Y"
+
+msgid "Measure Both"
+msgstr "Zmerať Oba"
+
+msgid "Klipper will reboot"
+msgstr "Klipper sa reštartuje"
+
+msgid "Save configuration?"
+msgstr "Uložiť konfiguráciu?"
+
+msgid "Check ADXL Wiring"
+msgstr "Skontrolujte zapojenie ADXL"
+
+msgid "ADXL Not Configured"
+msgstr "ADXL nie je nakonfigurovaný"
+
+msgid "Auto-calibrate"
+msgstr "Auto-kalibrácia"
+
+msgid "Calibrated"
+msgstr "Nakalibrované"
+
+msgid "Job Status"
+msgstr "Stav Úlohy"
 
 msgid "mm/s"
 msgstr "mm/s"
@@ -1011,11 +548,522 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+msgid "Left:"
+msgstr "Zostáva:"
+
+msgid "Elapsed:"
+msgstr "Uplynuté:"
+
+msgid "Total:"
+msgstr "Celkovo:"
+
+msgid "Slicer:"
+msgstr "Slicer:"
+
+msgid "File:"
+msgstr "Súbor:"
+
+msgid "Filament:"
+msgstr "Vlákno:"
+
+msgid "Speed:"
+msgstr "Rýchlosť:"
+
+msgid "Acceleration:"
+msgstr "Zrýchlenie:"
+
+msgid "Flow:"
+msgstr "Prietok:"
+
+msgid "Z offset:"
+msgstr "Z offset:"
+
+msgid "Filament used:"
+msgstr "Použitého vlákna:"
+
+msgid "Filament total:"
+msgstr "Vlákno celkom:"
+
+msgid "Pressure Advance:"
+msgstr "Predstih tlaku:"
+
+msgid "Flowrate:"
+msgstr "Prietok:"
+
+msgid "Height:"
+msgstr "Výška:"
+
+msgid "Layer:"
+msgstr "Vrstva:"
+
+msgid "Pause"
+msgstr "Pozastaviť"
+
+msgid "Restart"
+msgstr "Reštart"
+
+msgid "Resume"
+msgstr "Návrat"
+
+msgid "Save Z"
+msgstr "Uložiť Z"
+
+#, fuzzy
+#, python-brace-format
+msgid "Apply {sign}{offset:.3f} offset to Probe?"
+msgstr "Aplikovať offset {sign}{offset:.3f} na Probe?"
+
+#, fuzzy
+#, python-brace-format
+msgid "Apply {sign}{offset:.3f} offset to Endstop?"
+msgstr "Aplikovať offset {sign}{offset:.3f} na Endstop?"
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr "Uložený posun: %s"
+
+msgid "Apply"
+msgstr "Použiť"
+
+msgid "Cancel Print"
+msgstr "Zrušiť tlač"
+
+msgid "Go Back"
+msgstr "Choď späť"
+
+msgid "Working"
+msgstr "Pracujem"
+
+msgid "Complete"
+msgstr "Dokončené"
+
+msgid "Error"
+msgstr "Chyba"
+
+msgid "Cancelling"
+msgstr "Ruším"
+
+msgid "Cancelled"
+msgstr "Zrušené"
+
+msgid "Paused"
+msgstr "Pozastavené"
+
+msgid "Standby"
+msgstr "Pohotovostný režim"
+
+msgid "Max Acceleration"
+msgstr "Maximálne Zrýchlenie"
+
+msgid "Minimum Cruise Ratio"
+msgstr "Minimálny Pomer Posuvu"
+
+msgid "Max Velocity"
+msgstr "Maximálna Rýchlosť"
+
+msgid "Square Corner Velocity"
+msgstr "Rýchlosť v štvorcovom rohu"
+
+msgid "Unknown Heater"
+msgstr "Neznámy ohrievač"
+
+msgid "Can't set above the maximum:"
+msgstr "Nedá sa nastaviť viac ako maximum:"
+
+msgid "Initiate a PID calibration for:"
+msgstr "Spustite kalibráciue PID pre:"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr "V závislosti od výkonu ohrievača to môže trvať aj viac ako 5 minút."
+
+msgid "Temp (°C)"
+msgstr "Teplota (°C)"
+
+msgid "Home"
+msgstr "Domov"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "Naozaj chcete deaktivovať motory?"
+
+msgid "Move Distance (mm)"
+msgstr "Vzdialenosť pohybu (mm)"
+
+msgid "This will affect screw positions and mesh graph"
+msgstr "Toto ovplyvní polohy skrutiek a graf siete"
+
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr "Zamení tlačidlá, ak sú na sebe, ovplyvní to aj ostatné panely"
+
+msgid "XY Speed (mm/s)"
+msgstr "XY Rýchlosť (mm/s)"
+
+msgid "Only for the move panel"
+msgstr "Iba pre panel posuvu"
+
+msgid "Z Speed (mm/s)"
+msgstr "Z Rýchlosť (mm/s)"
+
+msgid "Failed to initialize"
+msgstr "Inicializácia zlyhala"
+
+msgid "Interface"
+msgstr "Rozhranie"
+
+msgid "No wireless interface has been found"
+msgstr "Bezdrôtové rozhranie sa nenašlo"
+
+msgid "Connected"
+msgstr "Pripojenie"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr "Chcete zabudnúť alebo odpojiť %s?"
+
+msgid "Forget"
+msgstr "Zabudni"
+
+msgid "Disconnect"
+msgstr "Odpojiť"
+
+msgid "Remove network"
+msgstr "Odstrániť sieť"
+
+msgid "User"
+msgstr "Používateľ"
+
+#, python-format
+msgid "Connecting to %s"
+msgstr "Pripájanie k %s"
+
+msgid "Channel"
+msgstr "Kanál"
+
+msgid "Hostname"
+msgstr "Názov hosta"
+
+msgid "Notification log empty"
+msgstr "Denník oznámení je prázdny"
+
+msgid "Pressure advance"
+msgstr "Predstih tlaku"
+
+msgid "Current"
+msgstr "Aktuálne"
+
+msgid "Smooth time"
+msgstr "Plynulý čas"
+
 msgid "s"
 msgstr "s"
 
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "sekunda"
-msgstr[1] "sekundy"
-msgstr[2] "sekúnd"
+msgid "Printer Select"
+msgstr "Výber tlačiarne"
+
+msgid "Please wait"
+msgstr "Prosím, počkajte"
+
+msgid "Retraction Length"
+msgstr "Dĺžka Zasunutia"
+
+msgid "Retraction Speed"
+msgstr "Rýchlosť Zasunutia"
+
+msgid "Unretract Extra Length"
+msgstr "Uvoľnenie Extra Dĺžky"
+
+msgid "Unretract Speed"
+msgstr "Rýchlosť Vysunutia"
+
+msgid "Printer Connections"
+msgstr "Pripojenia tlačiarne"
+
+msgid "Shutdown"
+msgstr "Vypnutie Systému"
+
+msgid "Emergency Stop"
+msgstr "Núdzové Zastavenie"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "Ste si istý, že chcete reštartovať systém?"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "Ste si istý, že chcete vypnúť systém?"
+
+msgid "Accept"
+msgstr "Prijať"
+
+msgid "Host"
+msgstr "Host"
+
+msgid "Printer"
+msgstr "Tlačiareň"
+
+msgid "Both"
+msgstr "Oba"
+
+msgid "Initializing printer..."
+msgstr "Inicializuje sa tlačiareň…"
+
+msgid "Klipper Restart"
+msgstr "Reštart Klippera"
+
+msgid "Firmware Restart"
+msgstr "Reštart Firmware"
+
+msgid "System Restart"
+msgstr "Reštart Systému"
+
+msgid "System Shutdown"
+msgstr "Vzpnutie Systému"
+
+msgid "Retry"
+msgstr "Zopakovať"
+
+msgid "Power On Printer"
+msgstr "Zapnutie tlačiarne"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Last Used"
+msgstr "Naposledy Použité"
+
+msgid "Archived"
+msgstr "Archivované"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Material"
+msgstr "Materiál"
+
+#, fuzzy
+msgid "Comment"
+msgstr "Komentár"
+
+#, fuzzy
+msgid "Last used"
+msgstr "Naposledy použité"
+
+#, fuzzy
+msgid "Remaining weight"
+msgstr "Zostávajúca hmotnosť"
+
+#, fuzzy
+msgid "Remaining length"
+msgstr "Zostávajúca dĺžka"
+
+msgid "Error trying to fetch spools"
+msgstr "Chyba pri pokuse o načítanie cievok"
+
+msgid "All"
+msgstr "Všetko"
+
+msgid "Error clearing active spool"
+msgstr "Chyba pri čistení aktívnej cievky"
+
+msgid "Error setting active spool"
+msgstr "Chyba pri nastavovaní aktívnej cievky"
+
+msgid "Error getting active spool"
+msgstr "Chyba pri získavaní aktívnej cievky"
+
+msgid "No info available"
+msgstr "Žiadne informácie nie sú k dispozícii"
+
+#, fuzzy
+msgid "IP Address"
+msgstr "IP adresa"
+
+msgid "Memory"
+msgstr "Pamäť"
+
+msgid "Cooldown"
+msgstr "Ochladzovanie"
+
+msgid "Nothing selected"
+msgstr "Nič nebolo vybrané"
+
+msgid "Set Temp"
+msgstr "Nastavenie Teploty"
+
+msgid "Show"
+msgstr "Zobraziť"
+
+msgid "Hide"
+msgstr "Skryť"
+
+msgid "Full Update"
+msgstr "Úplná aktualizácia"
+
+msgid "Refresh"
+msgstr "Obnoviť"
+
+msgid "Checking for updates, please wait..."
+msgstr "Hľadajú sa aktualizácie, čakajte prosím…"
+
+msgid "Not working or not configured"
+msgstr "Nefunguje alebo nie je nakonfigurované"
+
+#, fuzzy
+msgid "Are you sure?"
+msgstr "Ste si istý?"
+
+msgid "Perform a full upgrade?"
+msgstr "Vykonať úplnú aktualizáciu?"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "Chcete obnoviť %s?"
+
+msgid "Recover Hard"
+msgstr "Obnoviť tvrdo"
+
+msgid "Recover Soft"
+msgstr "Obnoviť Jemne"
+
+msgid "Recover"
+msgstr "Obnoviť"
+
+#, python-format
+msgid "Outdated by %d"
+msgstr "Neaktuálne od %d"
+
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "zápis"
+msgstr[1] "zápisy"
+msgstr[2] "zápisov"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "Balík bude aktualizovaný"
+msgstr[1] "Balíky budú aktualizované"
+msgstr[2] "Balíkov bude aktualizovaných"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s bude aktualizovaný na verziu"
+
+msgid "Starting recovery for"
+msgstr "Spúšťa sa obnovenie pre"
+
+msgid "Starting update for"
+msgstr "Spúšťa sa aktualizácia pre"
+
+msgid "Invalid"
+msgstr "Nesprávne"
+
+msgid "Up To Date"
+msgstr "Aktuálne"
+
+msgid "Probe Offset"
+msgstr "Offset Sondy"
+
+msgid "Saved"
+msgstr "Uložené"
+
+msgid "New"
+msgstr "Nový"
+
+msgid "Raise Nozzle"
+msgstr "Zdvihnutie Trysky"
+
+msgid "Lower Nozzle"
+msgstr "Spodná Tryska"
+
+msgid "Abort"
+msgstr "Prerušiť"
+
+msgid "Error: Couldn't get a position to probe"
+msgstr "Chyba: Nepodarilo sa nájsť polohu na sondovanie"
+
+msgid "Failed, adjust position first"
+msgstr "Nepodarilo sa, najprv upravte polohu"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr "Systém nespĺňa minimálne požiadavky"
+
+msgid "Minimum:"
+msgstr "Minimum:"
+
+msgid "System:"
+msgstr "Systém:"
+
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr "Pri žiadosti o pomoc poskytnite súbor KlipperScreen.log.\n"
+
+msgid "Close"
+msgstr "Zatvoriť"
+
+#, fuzzy
+msgid "DPMS has failed and has been disabled"
+msgstr "DPMS zlyhalo a bolo zakázané"
+
+msgid "Cannot connect to Moonraker"
+msgstr "Nedá sa pripojiť k Moonrakeru"
+
+msgid "Lost Connection to Moonraker"
+msgstr "Stratené spojenie s Moonrakerom"
+
+msgid "Klipper has disconnected"
+msgstr "Klipper sa odpojil"
+
+msgid "Klipper has encountered an error."
+msgstr "V aplikácii Klipper sa vyskytla chyba."
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr "FIRMWARE_RESTART môže vyriešiť problém."
+
+msgid "Please recompile and flash the micro-controller."
+msgstr "Prosím, prekompilujte a naprogramujte mikrokontrolér."
+
+msgid "Klipper is attempting to start"
+msgstr "Klipper sa pokúša naštartovať"
+
+msgid "Klipper has shutdown"
+msgstr "Klipper sa vypol"
+
+#, fuzzy
+msgid "No eligible macros:"
+msgstr "Žiadne vhodné makrá:"
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "makrá s názvom začínajúcim na ‘_’ sú skryté"
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "makrá, ktoré používajú ‘rename_existing’, sú skryté"
+
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT sú skryté a mali by sa použiť z vysunutia"
+
+msgid "Temperature too low to extrude"
+msgstr "Príliš nízka teplota na vytlačenie"
+
+msgid "Retrying"
+msgstr "Opakovanie"
+
+msgid "Moonraker: connected"
+msgstr "Moonraker: pripojený"
+
+#, python-format
+#~ msgid "Apply %s%.3f offset to Endstop?"
+#~ msgstr "Potvrdiť %s%.3f offset koncového spínača?"
+
+#, python-format
+#~ msgid "Apply %s%.3f offset to Probe?"
+#~ msgstr "Potvrdiť %s%.3f offset sondy?"
+
+#~ msgid "DPMS has failed to load and has been disabled"
+#~ msgstr "Načítanie systému DPMS sa nepodarilo a systém bol deaktivovaný"
+
+#~ msgid "Max:"
+#~ msgstr "Max:"
+
+#~ msgid "No elegible macros:"
+#~ msgstr "Žiadne použiteľné makrá:"
+
+#~ msgid "Password saved"
+#~ msgstr "Heslo uložené"

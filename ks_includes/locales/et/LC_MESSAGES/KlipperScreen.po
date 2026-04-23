@@ -3,11 +3,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2024-07-26 19:09+0000\n"
 "Last-Translator: Jegert Uusküla <jegertuuskula@gmail.com>\n"
-"Language-Team: Estonian <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/et/>\n"
+"Language-Team: Estonian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -114,8 +113,9 @@ msgstr "Z kalle"
 msgid "Print Control"
 msgstr "Prindi juhtimine"
 
+#, fuzzy
 msgid "Lock"
-msgstr ""
+msgstr "Lukusta"
 
 msgid "Menu"
 msgstr "Menüü"
@@ -234,11 +234,13 @@ msgstr "Kasulik mitte reageerivate puuteekraanide jaoks"
 msgid "Auto-open Extrude On Pause"
 msgstr "Pausi ajal ekstrusiooni automaatne avamine"
 
+#, fuzzy
 msgid "Show cursor"
-msgstr ""
+msgstr "Näytä osoitin"
 
+#, fuzzy
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "Hiiren hallinta tai kosketusnäytön tarkkuuden varmistamiseksi"
 
 msgid "Invert X"
 msgstr "Pööra X"
@@ -323,17 +325,21 @@ msgstr "Võrku ei ole laaditud"
 msgid "Calibrate"
 msgstr "Kalibreeri"
 
+#, fuzzy
 msgid "Invalid temperature"
-msgstr ""
+msgstr "Virheellinen lämpötila"
 
+#, fuzzy
 msgid "Password"
-msgstr ""
+msgstr "Salasana"
 
+#, fuzzy
 msgid "Unlock"
-msgstr ""
+msgstr "Avaa lukitus"
 
+#, fuzzy
 msgid "Unlock failed"
-msgstr ""
+msgstr "Lukituksen avaus epäonnistui"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Kas olete kindel, et soovite objekti välistada?"
@@ -599,13 +605,15 @@ msgstr "Jätka"
 msgid "Save Z"
 msgstr "Salvesta Z"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "Käytä {sign}{offset:.3f} siirtoa kohteeseen Probe?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "Käytä {sign}{offset:.3f} siirtoa kohteeseen Endstop?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -663,7 +671,8 @@ msgid "Initiate a PID calibration for:"
 msgstr "Algata PID kalibreerimine jaoks:"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr "See võib võtta rohkem kui 5 minutit, sõltuvalt kütteseadme võimsusest."
+msgstr ""
+"See võib võtta rohkem kui 5 minutit, sõltuvalt kütteseadme võimsusest."
 
 msgid "Temp (°C)"
 msgstr "Temperatuur (°C)"
@@ -717,8 +726,9 @@ msgstr "Ühendu lahti"
 msgid "Remove network"
 msgstr "Eemalda võrk"
 
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "Käyttäjä"
 
 #, python-format
 msgid "Connecting to %s"
@@ -826,17 +836,21 @@ msgstr "Filter"
 msgid "Material"
 msgstr "Materjal"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Kommentti"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "Viimeksi käytetty"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "Jäljellä oleva paino"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "Jäljellä oleva pituus"
 
 msgid "Error trying to fetch spools"
 msgstr "Viga poolide toomise katsel"
@@ -850,11 +864,15 @@ msgstr "Viga aktiivse pooli tühjendamisel"
 msgid "Error setting active spool"
 msgstr "Viga aktiivse pooli seadistamisel"
 
+msgid "Error getting active spool"
+msgstr "Viga aktiivse pooli hankimisel"
+
 msgid "No info available"
 msgstr "Teave puudub"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "IP-osoite"
 
 msgid "Memory"
 msgstr "Mälu"
@@ -886,8 +904,9 @@ msgstr "Uuenduste kontrollimine, palun oodake..."
 msgid "Not working or not configured"
 msgstr "Ei tööta või ei ole seadistatud"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "Oletko varma?"
 
 msgid "Perform a full upgrade?"
 msgstr "Kas sooritada täisuuendus?"
@@ -974,8 +993,9 @@ msgstr "Abi küsimisel andke KlipperScreen.log.\n"
 msgid "Close"
 msgstr "Sulge"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "DPMS epäonnistui ja on poistettu käytöstä"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Ei saa ühendust Moonrakeriga"
@@ -1001,8 +1021,9 @@ msgstr "Klipper püüab käivituda"
 msgid "Klipper has shutdown"
 msgstr "Klipper on välja lülitatud"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "Ei kelvollisia makroja:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "Makrod, mille nimi algab '_' on peidetud"
@@ -1016,17 +1037,15 @@ msgstr ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT on peidetud ja neid tuleks kasutada "
 "ekstrudeerimisel"
 
+#, fuzzy
 msgid "Temperature too low to extrude"
-msgstr ""
+msgstr "Lämpötila liian matala puristamiseen"
 
 msgid "Retrying"
 msgstr "Uuesti proovimine"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: ühendatud"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Viga aktiivse pooli hankimisel"
 
 #~ msgid "Max:"
 #~ msgstr "Maksimaalne:"

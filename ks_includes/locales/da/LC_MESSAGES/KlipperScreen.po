@@ -3,11 +3,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2025-07-09 06:02+0000\n"
 "Last-Translator: Simon B <simon.buro@hotmail.com>\n"
-"Language-Team: Danish <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/da/>\n"
+"Language-Team: Danish <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/da/>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -238,7 +237,8 @@ msgid "Show cursor"
 msgstr "Vis musemarkør"
 
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr "Til brug af mus eller for at kontrollere nøjagtigheden af touchskærmen"
+msgstr ""
+"Til brug af mus eller for at kontrollere nøjagtigheden af touchskærmen"
 
 msgid "Invert X"
 msgstr "Invertér X"
@@ -599,13 +599,15 @@ msgstr "Genoptag"
 msgid "Save Z"
 msgstr "Gem Z"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "Anvend {sign}{offset:.3f} offset til Probe?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "Anvend {sign}{offset:.3f} offset til Endstop?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -826,17 +828,21 @@ msgstr "Filter"
 msgid "Material"
 msgstr "Materiale"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Kommentar"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "Sidst brugt"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "Resterende vægt"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "Resterende længde"
 
 msgid "Error trying to fetch spools"
 msgstr "Fejl ved hentning af spoler"
@@ -850,11 +856,15 @@ msgstr "Fejl ved fjernelse af aktiv spole"
 msgid "Error setting active spool"
 msgstr "Fejl ved indstilling af aktiv spole"
 
+msgid "Error getting active spool"
+msgstr "Fejl ved hentning af aktiv spole"
+
 msgid "No info available"
 msgstr "Ingen info tilgængeligt"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "IP-adresse"
 
 msgid "Memory"
 msgstr "Hukommelse"
@@ -886,8 +896,9 @@ msgstr "Tjekker for opdateringer, vent venligst..."
 msgid "Not working or not configured"
 msgstr "Fungerer ikke, eller ikke konfigureret"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "Er du sikker?"
 
 msgid "Perform a full upgrade?"
 msgstr "Vil du udføre en fuld opgradering?"
@@ -974,8 +985,9 @@ msgstr "Inkludér Klipperscreen.log når du beder om hjælp\n"
 msgid "Close"
 msgstr "Luk"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "DPMS mislykkedes og er deaktiveret"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Kan ikke oprette forbindelse til Moonraker"
@@ -1001,8 +1013,9 @@ msgstr "Klipper forsøger at starte"
 msgid "Klipper has shutdown"
 msgstr "Klipper er lukket ned"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "Ingen gyldige makroer:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "makroer hvis navne begynder med '_' er skjulte"
@@ -1024,9 +1037,6 @@ msgstr "Forsøger igen"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: tilsluttet"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Fejl ved hentning af aktiv spole"
 
 #~ msgid "Max:"
 #~ msgstr "Maks:"

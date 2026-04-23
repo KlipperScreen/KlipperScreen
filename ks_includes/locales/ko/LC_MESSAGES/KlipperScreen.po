@@ -3,12 +3,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2024-07-06 14:10+0900\n"
-"Last-Translator: ElectricalBoy "
-"<15651807+ElectricalBoy@users.noreply.github.com>\n"
-"Language-Team: Korean <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/ko/>\n"
+"Last-Translator: ElectricalBoy <15651807+ElectricalBoy@users.noreply.github.com>\n"
+"Language-Team: Korean <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -115,8 +113,9 @@ msgstr "Z 기울기"
 msgid "Print Control"
 msgstr "출력 제어"
 
+#, fuzzy
 msgid "Lock"
-msgstr ""
+msgstr "잠금"
 
 msgid "Menu"
 msgstr "메뉴"
@@ -124,8 +123,9 @@ msgstr "메뉴"
 msgid "Icon Theme"
 msgstr "아이콘 테마"
 
+#, fuzzy
 msgid "Changes how the interface looks"
-msgstr ""
+msgstr "인터페이스 외관을 변경합니다"
 
 msgid "(default)"
 msgstr "(기본)"
@@ -151,8 +151,9 @@ msgstr "슬라이서"
 msgid "Screen Power Off Time"
 msgstr "화면 절전 시간"
 
+#, fuzzy
 msgid "Timeout for screen black-out or power-off"
-msgstr ""
+msgstr "화면 꺼짐 또는 전원 종료 대기 시간"
 
 msgid "Never"
 msgstr "결코"
@@ -160,14 +161,16 @@ msgstr "결코"
 msgid "Printing"
 msgstr "출력 중"
 
+#, fuzzy
 msgid "Timeout for screen black-out or power-off during printing"
-msgstr ""
+msgstr "출력 중 화면 꺼짐 또는 전원 종료 대기 시간"
 
 msgid "24 Hour Time"
 msgstr "24시간제 사용"
 
+#, fuzzy
 msgid "Disable for 12hs with am / pm"
-msgstr ""
+msgstr "am/pm 형식으로 12시간 동안 비활성화"
 
 msgid "Macro shortcut on sidebar"
 msgstr "사이드바에 매크로 아이콘 표시"
@@ -175,8 +178,9 @@ msgstr "사이드바에 매크로 아이콘 표시"
 msgid "Font Size"
 msgstr "글꼴 크기"
 
+#, fuzzy
 msgid "Inversely affects the icon size"
-msgstr ""
+msgstr "아이콘 크기에 반비례"
 
 msgid "Small"
 msgstr "작게"
@@ -196,14 +200,16 @@ msgstr "최대"
 msgid "Confirm Emergency Stop"
 msgstr "비상정지 확인창 표시"
 
+#, fuzzy
 msgid "Asks for confirmation before stopping"
-msgstr ""
+msgstr "중지 전 확인 요청"
 
 msgid "Hide sensors in Temp."
 msgstr "온도 섹션에서 센서 항목 숨김."
 
+#, fuzzy
 msgid "Show only devices that are able to be set"
-msgstr ""
+msgstr "설정 가능한 장치만 표시"
 
 msgid "Screen DPMS"
 msgstr "화면 DPMS"
@@ -211,20 +217,23 @@ msgstr "화면 DPMS"
 msgid "Enable screen power management"
 msgstr "화면 전원 관리 활성화"
 
+#, fuzzy
 msgid "Not all screens support this"
-msgstr ""
+msgstr "모든 화면이 이 기능을 지원하지 않음"
 
 msgid "Auto-close notifications"
 msgstr "자동 알림 닫기"
 
+#, fuzzy
 msgid "Close messages after a timeout"
-msgstr ""
+msgstr "대기 시간 후 메시지 닫기"
 
 msgid "Show Heater Power"
 msgstr "히터 전원 보기"
 
+#, fuzzy
 msgid "Current percentage and graph line"
-msgstr ""
+msgstr "현재 백분율 및 그래프 선"
 
 msgid "Show Scrollbars Buttons"
 msgstr "스크롤바 버튼 보기"
@@ -235,11 +244,13 @@ msgstr "응답 없는 터치스크린에 유용함"
 msgid "Auto-open Extrude On Pause"
 msgstr "일시정지 시 압출 가능"
 
+#, fuzzy
 msgid "Show cursor"
-msgstr ""
+msgstr "커서 표시"
 
+#, fuzzy
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "마우스 제어 또는 터치스크린 정확도 확인용"
 
 msgid "Invert X"
 msgstr "X축 반전"
@@ -320,17 +331,21 @@ msgstr "메쉬가 로드되지 않았습니다"
 msgid "Calibrate"
 msgstr "교정"
 
+#, fuzzy
 msgid "Invalid temperature"
-msgstr ""
+msgstr "잘못된 온도"
 
+#, fuzzy
 msgid "Password"
-msgstr ""
+msgstr "비밀번호"
 
+#, fuzzy
 msgid "Unlock"
-msgstr ""
+msgstr "잠금 해제"
 
+#, fuzzy
 msgid "Unlock failed"
-msgstr ""
+msgstr "잠금 해제 실패"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "개체를 제외하시겠습니까?"
@@ -350,14 +365,17 @@ msgstr "베드 스크류 조정"
 msgid "Rotation invalid"
 msgstr "유효하지 않은 회전"
 
+#, fuzzy
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr ""
+msgstr "이 패널은 3x3 그리드에서 최대 9개의 나사를 지원합니다"
 
+#, fuzzy
 msgid "It's possible that the configuration is not correct"
-msgstr ""
+msgstr "설정이 올바르지 않을 수 있습니다"
 
+#, fuzzy
 msgid "Screws not used:"
-msgstr ""
+msgstr "사용되지 않는 나사:"
 
 msgid "Reference"
 msgstr "참조"
@@ -488,8 +506,9 @@ msgstr "g"
 msgid "Nozzle diameter"
 msgstr "노즐 구경"
 
+#, fuzzy
 msgid "Last Duration"
-msgstr ""
+msgstr "마지막 지속 시간"
 
 msgid "Rename/Move:"
 msgstr "이름 변경/이동:"
@@ -596,13 +615,15 @@ msgstr "재개"
 msgid "Save Z"
 msgstr "Z 오프셋 저장"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "프로브에 {sign}{offset:.3f} 오프셋 적용?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "엔드스톱에 {sign}{offset:.3f} 오프셋 적용?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -674,17 +695,20 @@ msgstr "모터 전원을 끄시겠습니까?"
 msgid "Move Distance (mm)"
 msgstr "이동 거리 (mm)"
 
+#, fuzzy
 msgid "This will affect screw positions and mesh graph"
-msgstr ""
+msgstr "나사 위치와 메시 그래프에 영향을 줍니다"
 
+#, fuzzy
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr ""
+msgstr "버튼이 겹쳐 있을 경우 위치를 교환하며, 다른 패널에도 영향을 줍니다"
 
 msgid "XY Speed (mm/s)"
 msgstr "XY 속도 (mm/s)"
 
+#, fuzzy
 msgid "Only for the move panel"
-msgstr ""
+msgstr "이동 패널에만 적용"
 
 msgid "Z Speed (mm/s)"
 msgstr "Z 속도 (mm/s)"
@@ -705,8 +729,9 @@ msgstr "연결됨"
 msgid "Do you want to forget or disconnect %s?"
 msgstr "%s와의 연결을 해제하시겠습니까?"
 
+#, fuzzy
 msgid "Forget"
-msgstr ""
+msgstr "삭제"
 
 msgid "Disconnect"
 msgstr "연결 끊기"
@@ -714,8 +739,9 @@ msgstr "연결 끊기"
 msgid "Remove network"
 msgstr "네트워크 제거"
 
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "사용자"
 
 #, python-format
 msgid "Connecting to %s"
@@ -733,11 +759,13 @@ msgstr "알림 로그가 비어 있음"
 msgid "Pressure advance"
 msgstr "프레셔 어드밴스"
 
+#, fuzzy
 msgid "Current"
-msgstr ""
+msgstr "현재"
 
+#, fuzzy
 msgid "Smooth time"
-msgstr ""
+msgstr "부드러운 시간"
 
 msgid "s"
 msgstr "초"
@@ -823,17 +851,21 @@ msgstr "필터"
 msgid "Material"
 msgstr "재료"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "주석"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "마지막 사용"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "남은 중량"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "남은 길이"
 
 msgid "Error trying to fetch spools"
 msgstr "스풀을 가져오는 중 오류 발생"
@@ -847,11 +879,16 @@ msgstr "활성 스풀 제거 중 오류 발생"
 msgid "Error setting active spool"
 msgstr "활성 스풀 설정 중 오류 발생"
 
-msgid "No info available"
-msgstr ""
+msgid "Error getting active spool"
+msgstr "활성 스풀을 가져오는 중 오류 발생"
 
+#, fuzzy
+msgid "No info available"
+msgstr "사용 가능한 정보 없음"
+
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "IP 주소"
 
 msgid "Memory"
 msgstr "메모리"
@@ -883,8 +920,9 @@ msgstr "업데이트 확인 중입니다. 잠시 기다려 주세요..."
 msgid "Not working or not configured"
 msgstr "작동하지 않거나 구성되지 않음"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "정말 진행합니까?"
 
 msgid "Perform a full upgrade?"
 msgstr "전체 업그레이드를 실행하시겠습니까?"
@@ -969,8 +1007,9 @@ msgstr "도움을 요청할 때 KlipperScreen.log를 제공하십시오.\n"
 msgid "Close"
 msgstr "닫기"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "DPMS 실패로 인해 비활성화되었습니다"
 
 msgid "Cannot connect to Moonraker"
 msgstr "문래이커에 연결할 수 없음"
@@ -996,8 +1035,9 @@ msgstr "클리퍼 시작하는 중"
 msgid "Klipper has shutdown"
 msgstr "클리퍼가 시스템 종료되었습니다"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "사용 가능한 매크로 없음:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "이름이 '_'로 시작하는 매크로는 숨겨집니다"
@@ -1007,20 +1047,17 @@ msgstr "'rename_existing'을(를) 사용하는 매크로가 숨겨집니다"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT는 숨겨져 있으므로 압출에서 사용해야 합니다"
+msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT는 숨겨져 있으므로 압출에서 사용해야 합니다"
 
+#, fuzzy
 msgid "Temperature too low to extrude"
-msgstr ""
+msgstr "압출하기에 온도가 너무 낮음"
 
 msgid "Retrying"
 msgstr "재시도 중"
 
 msgid "Moonraker: connected"
 msgstr "문래이커: 연결됨"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "활성 스풀을 가져오는 중 오류 발생"
 
 #~ msgid "Max:"
 #~ msgstr "최대:"

@@ -7,17 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Dominik <dominik.sostar@gmail.com>\n"
-"Language-Team: Slovenian <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/sl/>\n"
+"Language-Team: Slovenian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 5.5-dev\n"
 
 msgid "Main Menu"
@@ -38,8 +36,9 @@ msgstr "Več"
 msgid "Print"
 msgstr "Natisni"
 
+#, fuzzy
 msgid "Gcodes"
-msgstr ""
+msgstr "Gkode"
 
 msgid "Bed Level"
 msgstr "Umerjanje plošče"
@@ -110,8 +109,9 @@ msgstr "Nuliraj vse"
 msgid "Home XY"
 msgstr "Nuliraj XY"
 
+#, fuzzy
 msgid "Quad Gantry Level"
-msgstr ""
+msgstr "Nivoiranje štirikotnega nosilca"
 
 msgid "Z Tilt"
 msgstr "Z nagib"
@@ -119,8 +119,9 @@ msgstr "Z nagib"
 msgid "Print Control"
 msgstr "Nadzor tiskanja"
 
+#, fuzzy
 msgid "Lock"
-msgstr ""
+msgstr "Zakleni"
 
 msgid "Menu"
 msgstr "Meni"
@@ -128,8 +129,9 @@ msgstr "Meni"
 msgid "Icon Theme"
 msgstr "Tema ikon"
 
+#, fuzzy
 msgid "Changes how the interface looks"
-msgstr ""
+msgstr "Spremeni videz vmesnika"
 
 msgid "(default)"
 msgstr "(privzeto)"
@@ -137,8 +139,9 @@ msgstr "(privzeto)"
 msgid "Estimated Time Method"
 msgstr "Način predvidenega časa"
 
+#, fuzzy
 msgid "Changes how the time remaining is calculated"
-msgstr ""
+msgstr "Spremeni izračun preostalega časa"
 
 msgid "Auto"
 msgstr "Samodejno"
@@ -155,8 +158,9 @@ msgstr "Slicer"
 msgid "Screen Power Off Time"
 msgstr "Čas izklopa zaslona"
 
+#, fuzzy
 msgid "Timeout for screen black-out or power-off"
-msgstr ""
+msgstr "Časovna omejitev za izklop zaslona ali napajanja"
 
 msgid "Never"
 msgstr "Nikoli"
@@ -164,14 +168,16 @@ msgstr "Nikoli"
 msgid "Printing"
 msgstr "Tiskam"
 
+#, fuzzy
 msgid "Timeout for screen black-out or power-off during printing"
-msgstr ""
+msgstr "Časovna omejitev za izklop zaslona ali napajanja med tiskanjem"
 
 msgid "24 Hour Time"
 msgstr "24 urni čas"
 
+#, fuzzy
 msgid "Disable for 12hs with am / pm"
-msgstr ""
+msgstr "Onemogoči za 12 ur z am/pm"
 
 msgid "Macro shortcut on sidebar"
 msgstr "Makro bližnjica na stranski vrstici"
@@ -179,8 +185,9 @@ msgstr "Makro bližnjica na stranski vrstici"
 msgid "Font Size"
 msgstr "Velikost pisave"
 
+#, fuzzy
 msgid "Inversely affects the icon size"
-msgstr ""
+msgstr "Obratno vpliva na velikost ikon"
 
 msgid "Small"
 msgstr "Majhno"
@@ -200,50 +207,60 @@ msgstr "Največ"
 msgid "Confirm Emergency Stop"
 msgstr "Potrdite zaustavitev v sili"
 
+#, fuzzy
 msgid "Asks for confirmation before stopping"
-msgstr ""
+msgstr "Zahteva potrditev pred ustavitvijo"
 
 msgid "Hide sensors in Temp."
 msgstr "Skrij senzorje v temp."
 
+#, fuzzy
 msgid "Show only devices that are able to be set"
-msgstr ""
+msgstr "Prikaži samo naprave, ki jih je mogoče nastaviti"
 
 msgid "Screen DPMS"
 msgstr "DPMS zaslona"
 
+#, fuzzy
 msgid "Enable screen power management"
-msgstr ""
+msgstr "Omogoči upravljanje napajanja zaslona"
 
+#, fuzzy
 msgid "Not all screens support this"
-msgstr ""
+msgstr "Neki zasloni tega ne podpirajo"
 
 msgid "Auto-close notifications"
 msgstr "Samodejno zapri obvestila"
 
+#, fuzzy
 msgid "Close messages after a timeout"
-msgstr ""
+msgstr "Zapri sporočila po časovni omejitvi"
 
 msgid "Show Heater Power"
 msgstr "Pokaži moč grelnika"
 
+#, fuzzy
 msgid "Current percentage and graph line"
-msgstr ""
+msgstr "Trenutni odstotek in grafična črta"
 
 msgid "Show Scrollbars Buttons"
 msgstr "Pokaži gumbe drsnih trakov"
 
+#, fuzzy
 msgid "Useful for un-responsive touchscreens"
-msgstr ""
+msgstr "Koristno za neodzivne zasloni na dotik"
 
+#, fuzzy
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "Samodejno odpri Ekstruzijo ob prekinitvi"
 
+#, fuzzy
 msgid "Show cursor"
-msgstr ""
+msgstr "Prikaži kazalec"
 
+#, fuzzy
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "Za upravljanje z miško ali preverjanje natančnosti zaslona na dotik"
 
 msgid "Invert X"
 msgstr "Zrcali X"
@@ -280,55 +297,67 @@ msgstr[3] "minut"
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Ali ste prepričani, da želite zagnati zaustavitev v sili?"
 
+#, fuzzy
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "dan"
+msgstr[1] "dneva"
+msgstr[2] "dni"
+msgstr[3] "dni"
 
+#, fuzzy
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "sekunda"
+msgstr[1] "sekundi"
+msgstr[2] "sekund"
+msgstr[3] "sekund"
 
+#, fuzzy
 msgid "Network not found"
-msgstr ""
+msgstr "Omrežje ni najdeno"
 
+#, fuzzy
 msgid "Unknown security type"
-msgstr ""
+msgstr "Neznana vrsta varnosti"
 
+#, fuzzy
 msgid "Insufficient privileges"
-msgstr ""
+msgstr "Neustrezne pravice"
 
 msgid "Invalid password"
 msgstr "Napačno geslo"
 
+#, fuzzy
 msgid "Couldn't add network"
-msgstr ""
+msgstr "Ni mogoče dodati omrežja"
 
+#, fuzzy
 msgid "Failed to delete connection"
-msgstr ""
+msgstr "Brisanje povezave ni uspelo"
 
 msgid "Starting WiFi Association"
 msgstr "Zagon povezave WiFi"
 
+#, fuzzy
 msgid "Connecting"
-msgstr ""
+msgstr "Povezovanje"
 
+#, fuzzy
 msgid "Getting IP address"
-msgstr ""
+msgstr "Pridobivanje naslova IP"
 
+#, fuzzy
 msgid "Network connected"
-msgstr ""
+msgstr "Omrežje povezano"
 
+#, fuzzy
 msgid "Network disconnected"
-msgstr ""
+msgstr "Omrežje preklicano"
 
+#, fuzzy
 msgid "Connection failed"
-msgstr ""
+msgstr "Povezava ni uspela"
 
 msgid "No mesh has been loaded"
 msgstr "Mreža ni naložena"
@@ -336,17 +365,21 @@ msgstr "Mreža ni naložena"
 msgid "Calibrate"
 msgstr "Umerite"
 
+#, fuzzy
 msgid "Invalid temperature"
-msgstr ""
+msgstr "Neveljavna temperatura"
 
+#, fuzzy
 msgid "Password"
-msgstr ""
+msgstr "Geslo"
 
+#, fuzzy
 msgid "Unlock"
-msgstr ""
+msgstr "Odkleni"
 
+#, fuzzy
 msgid "Unlock failed"
-msgstr ""
+msgstr "Odklep ni uspel"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Ali ste prepričani da želite izključiti predmet?"
@@ -363,17 +396,21 @@ msgstr "Onemogoči motorje"
 msgid "Screws Adjust"
 msgstr "Nastavitev vijakov"
 
+#, fuzzy
 msgid "Rotation invalid"
-msgstr ""
+msgstr "Rotacija neveljavna"
 
+#, fuzzy
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr ""
+msgstr "Ta panel podpira do 9 vijakov v mreži 3x3"
 
+#, fuzzy
 msgid "It's possible that the configuration is not correct"
-msgstr ""
+msgstr "Konfiguracija morda ni pravilna"
 
+#, fuzzy
 msgid "Screws not used:"
-msgstr ""
+msgstr "Vijaki, ki se ne uporabljajo:"
 
 msgid "Reference"
 msgstr "Referenca"
@@ -393,8 +430,9 @@ msgstr "Shrani"
 msgid "Calibrating"
 msgstr "Umerjam"
 
+#, fuzzy
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
+msgstr "WebRTC ni podprt s strani strežnika, poskus z Stream"
 
 msgid "Auto-scroll"
 msgstr "Samodejno pomikanje"
@@ -402,8 +440,9 @@ msgstr "Samodejno pomikanje"
 msgid "Send"
 msgstr "Pošlji"
 
+#, fuzzy
 msgid "Example"
-msgstr ""
+msgstr "Primer"
 
 msgid "Exclude Object"
 msgstr "Izključi predmet"
@@ -414,8 +453,9 @@ msgstr "Ali ste prepričani da želite preklicati to tiskanje?"
 msgid "Load"
 msgstr "Naloži"
 
+#, fuzzy
 msgid "Unload"
-msgstr ""
+msgstr "Odstranitev"
 
 msgid "Retract"
 msgstr "Umakni"
@@ -480,8 +520,9 @@ msgstr "Izbrišem imenik?"
 msgid "Start"
 msgstr "Začni"
 
+#, fuzzy
 msgid "Delete"
-msgstr ""
+msgstr "Izbriši"
 
 msgid "Cancel"
 msgstr "Prekliči"
@@ -489,23 +530,29 @@ msgstr "Prekliči"
 msgid "Modified"
 msgstr "Spremenjeno"
 
+#, fuzzy
 msgid "Layer Height"
-msgstr ""
+msgstr "Višina plasti"
 
+#, fuzzy
 msgid "Filament"
-msgstr ""
+msgstr "Filament"
 
+#, fuzzy
 msgid "Estimated Time"
-msgstr ""
+msgstr "Ocenjen čas"
 
+#, fuzzy
 msgid "g"
-msgstr ""
+msgstr "g"
 
+#, fuzzy
 msgid "Nozzle diameter"
-msgstr ""
+msgstr "Premer konice"
 
+#, fuzzy
 msgid "Last Duration"
-msgstr ""
+msgstr "Zadnja trajanja"
 
 msgid "Rename/Move:"
 msgstr "Preimenuj/Premakni:"
@@ -540,8 +587,9 @@ msgstr "Samodejna umeritev"
 msgid "Calibrated"
 msgstr "Umerjeno"
 
+#, fuzzy
 msgid "Job Status"
-msgstr ""
+msgstr "Status naloga"
 
 msgid "mm/s"
 msgstr "mm/s"
@@ -585,14 +633,16 @@ msgstr "Z odmik:"
 msgid "Filament used:"
 msgstr "Porabljen filament:"
 
+#, fuzzy
 msgid "Filament total:"
-msgstr ""
+msgstr "Skupna količina filamenta:"
 
 msgid "Pressure Advance:"
 msgstr "Pressure Advance:"
 
+#, fuzzy
 msgid "Flowrate:"
-msgstr ""
+msgstr "Hitrost pretoka:"
 
 msgid "Height:"
 msgstr "Višina:"
@@ -612,13 +662,15 @@ msgstr "Nadaljuj"
 msgid "Save Z"
 msgstr "Shrani Z"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "Uporabi odmik {sign}{offset:.3f} na Preizkuševalnik?"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "Uporabi odmik {sign}{offset:.3f} na Končni stik?"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -633,8 +685,9 @@ msgstr "Prekliči tisk"
 msgid "Go Back"
 msgstr "Nazaj"
 
+#, fuzzy
 msgid "Working"
-msgstr ""
+msgstr "V delu"
 
 msgid "Complete"
 msgstr "Končano"
@@ -657,14 +710,16 @@ msgstr "Ostani v pripravljenosti"
 msgid "Max Acceleration"
 msgstr "Največji pospešek"
 
+#, fuzzy
 msgid "Minimum Cruise Ratio"
-msgstr ""
+msgstr "Najmanjše razmerje krmarjenja"
 
 msgid "Max Velocity"
 msgstr "Največja hitrost"
 
+#, fuzzy
 msgid "Square Corner Velocity"
-msgstr ""
+msgstr "Hitrost pri kotih"
 
 msgid "Unknown Heater"
 msgstr "Neznan grelec"
@@ -690,23 +745,27 @@ msgstr "Ali ste prepričani, da želite onemogočiti motorje?"
 msgid "Move Distance (mm)"
 msgstr "Razdalja premika (mm)"
 
+#, fuzzy
 msgid "This will affect screw positions and mesh graph"
-msgstr ""
+msgstr "To bo vplivalo na položaje vijakov in graf mreže"
 
+#, fuzzy
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr ""
+msgstr "Zamenja gumbe, če so eden na drugem, vpliva na druge plošče"
 
 msgid "XY Speed (mm/s)"
 msgstr "XY hitrost (mm/s)"
 
+#, fuzzy
 msgid "Only for the move panel"
-msgstr ""
+msgstr "Samo za ploščo premikanja"
 
 msgid "Z Speed (mm/s)"
 msgstr "Z hitrost (mm/s)"
 
+#, fuzzy
 msgid "Failed to initialize"
-msgstr ""
+msgstr "Inicializacija ni uspela"
 
 msgid "Interface"
 msgstr "Vmesnik"
@@ -717,21 +776,26 @@ msgstr "Brezžičnega vmesnika ni bilo mogoče najti"
 msgid "Connected"
 msgstr "Povezano"
 
+#, fuzzy
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
-msgstr ""
+msgstr "Ali želite pozabiti ali prekiniti povezavo s %s?"
 
+#, fuzzy
 msgid "Forget"
-msgstr ""
+msgstr "Pozabi"
 
+#, fuzzy
 msgid "Disconnect"
-msgstr ""
+msgstr "Prekini povezavo"
 
+#, fuzzy
 msgid "Remove network"
-msgstr ""
+msgstr "Odstrani omrežje"
 
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "Uporabnik"
 
 #, python-format
 msgid "Connecting to %s"
@@ -746,23 +810,28 @@ msgstr "Ime gostitelja"
 msgid "Notification log empty"
 msgstr "Dnevnik obvestil je prazen"
 
+#, fuzzy
 msgid "Pressure advance"
-msgstr ""
+msgstr "Napredek tlaka"
 
+#, fuzzy
 msgid "Current"
-msgstr ""
+msgstr "Trenutno"
 
+#, fuzzy
 msgid "Smooth time"
-msgstr ""
+msgstr "Čas izgladitve"
 
+#, fuzzy
 msgid "s"
-msgstr ""
+msgstr "s"
 
 msgid "Printer Select"
 msgstr "Izberi tiskalnik"
 
+#, fuzzy
 msgid "Please wait"
-msgstr ""
+msgstr "Prosimo, počakajte"
 
 msgid "Retraction Length"
 msgstr "Dolžina umika"
@@ -773,8 +842,9 @@ msgstr "Hitrost umika"
 msgid "Unretract Extra Length"
 msgstr "Odstrani dodatno dolžino"
 
+#, fuzzy
 msgid "Unretract Speed"
-msgstr ""
+msgstr "Hitrost ne-umik"
 
 msgid "Printer Connections"
 msgstr "Povezave tiskalnika"
@@ -782,8 +852,9 @@ msgstr "Povezave tiskalnika"
 msgid "Shutdown"
 msgstr "Zaustavitev"
 
+#, fuzzy
 msgid "Emergency Stop"
-msgstr ""
+msgstr "Nujna zaustavitev"
 
 msgid "Are you sure you wish to reboot the system?"
 msgstr "Ali ste prepričani da želite znova zagnati sistem?"
@@ -800,8 +871,9 @@ msgstr "Gostitelj"
 msgid "Printer"
 msgstr "Tiskalnik"
 
+#, fuzzy
 msgid "Both"
-msgstr ""
+msgstr "Oboje"
 
 msgid "Initializing printer..."
 msgstr "Inicializacija tiskalnika ..."
@@ -839,38 +911,52 @@ msgstr "Filter"
 msgid "Material"
 msgstr "Materijal"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Komentar"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "Zadnja uporaba"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "Preostala teža"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "Preostala dolžina"
 
+#, fuzzy
 msgid "Error trying to fetch spools"
-msgstr ""
+msgstr "Napaka pri pridobivanju podatkov o vretencih"
 
 msgid "All"
 msgstr "Vse"
 
+#, fuzzy
 msgid "Error clearing active spool"
-msgstr ""
+msgstr "Napaka pri brisanju aktivnega vretenca"
 
+#, fuzzy
 msgid "Error setting active spool"
-msgstr ""
+msgstr "Napaka pri nastavljanju aktivnega vretenca"
 
+#, fuzzy
+msgid "Error getting active spool"
+msgstr "Napaka pri pridobivanju aktivnega vretenca"
+
+#, fuzzy
 msgid "No info available"
-msgstr ""
+msgstr "Ni na voljo nobena informacija"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "Naslov IP"
 
+#, fuzzy
 msgid "Memory"
-msgstr ""
+msgstr "Spomin"
 
 msgid "Cooldown"
 msgstr "Ohlajanje"
@@ -899,8 +985,9 @@ msgstr "Preverjanje posodobitev, počakajte ..."
 msgid "Not working or not configured"
 msgstr "Ne deluje ali ni konfigurirano"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "Ali ste prepričani?"
 
 msgid "Perform a full upgrade?"
 msgstr "Izvedem polno posodobitev?"
@@ -909,11 +996,13 @@ msgstr "Izvedem polno posodobitev?"
 msgid "Do you want to recover %s?"
 msgstr "Ali želite obnoviti %s?"
 
+#, fuzzy
 msgid "Recover Hard"
-msgstr ""
+msgstr "Trdo obnovi"
 
+#, fuzzy
 msgid "Recover Soft"
-msgstr ""
+msgstr "Mehko obnovi"
 
 msgid "Recover"
 msgstr "Obnovi"
@@ -922,12 +1011,13 @@ msgstr "Obnovi"
 msgid "Outdated by %d"
 msgstr "Zastarelo za %d"
 
+#, fuzzy
 msgid "commit"
 msgid_plural "commits"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "potrditev"
+msgstr[1] "potrditvi"
+msgstr[2] "potrditev"
+msgstr[3] "potrditve"
 
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
@@ -970,20 +1060,24 @@ msgstr "Znižaj šobo"
 msgid "Abort"
 msgstr "Prekini"
 
+#, fuzzy
 msgid "Error: Couldn't get a position to probe"
-msgstr ""
+msgstr "Napaka: Ni mogoče dobiti položaja za preizkuševanje"
 
 msgid "Failed, adjust position first"
 msgstr "Ni uspelo, najprej prilagodite položaj"
 
+#, fuzzy
 msgid "The system doesn't meet the minimum requirement"
-msgstr ""
+msgstr "Sistem ne izpolnjuje najnižjih zahtev"
 
+#, fuzzy
 msgid "Minimum:"
-msgstr ""
+msgstr "Min:"
 
+#, fuzzy
 msgid "System:"
-msgstr ""
+msgstr "Sistem:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "Ko prosite za pomoč, navedite KlipperScreen.log.\n"
@@ -991,8 +1085,9 @@ msgstr "Ko prosite za pomoč, navedite KlipperScreen.log.\n"
 msgid "Close"
 msgstr "Zapri"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "DPMS je spodletel in onemogočen"
 
 msgid "Cannot connect to Moonraker"
 msgstr "Ne morem se povezati z Moonrakerjem"
@@ -1009,8 +1104,9 @@ msgstr "Klipper je javil napako."
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "Ponovni zagon MKE bi mogoče rešilo težavo."
 
+#, fuzzy
 msgid "Please recompile and flash the micro-controller."
-msgstr ""
+msgstr "Ponovno prevedite in naložite mikrokontroler."
 
 msgid "Klipper is attempting to start"
 msgstr "Klipper se skuša zagnati"
@@ -1018,8 +1114,9 @@ msgstr "Klipper se skuša zagnati"
 msgid "Klipper has shutdown"
 msgstr "Klipper se je ugasnil"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "Ni ustreznih makrov:"
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "makri z imenom, ki se začne z '_', so skriti"
@@ -1033,8 +1130,9 @@ msgstr ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT sta skrita in ju je treba uporabiti pri "
 "ekstrudiranju"
 
+#, fuzzy
 msgid "Temperature too low to extrude"
-msgstr ""
+msgstr "Temperatura prenizka za ekstruzijo"
 
 msgid "Retrying"
 msgstr "Poskušam znova"

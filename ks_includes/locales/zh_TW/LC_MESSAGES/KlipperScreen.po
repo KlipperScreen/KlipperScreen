@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 14:29-0300\n"
+"POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2026-03-19 07:09+0000\n"
 "Last-Translator: Kayz C <kayzed.x@gmail.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
-"projects/klipperscreen/klipperscreen/zh_Hant/>\n"
+"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -599,13 +598,15 @@ msgstr "繼續"
 msgid "Save Z"
 msgstr "儲存Z軸"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
-msgstr ""
+msgstr "將偏移量 {sign}{offset:.3f} 套用到探針？"
 
+#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
-msgstr ""
+msgstr "將偏移量 {sign}{offset:.3f} 套用到限位開關？"
 
 #, python-format
 msgid "Saved offset: %s"
@@ -826,17 +827,21 @@ msgstr "過濾器"
 msgid "Material"
 msgstr "材料"
 
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "評論"
 
+#, fuzzy
 msgid "Last used"
-msgstr ""
+msgstr "上次使用"
 
+#, fuzzy
 msgid "Remaining weight"
-msgstr ""
+msgstr "剩餘重量"
 
+#, fuzzy
 msgid "Remaining length"
-msgstr ""
+msgstr "剩餘長度"
 
 msgid "Error trying to fetch spools"
 msgstr "嘗試獲取線盤時發生錯誤"
@@ -850,11 +855,15 @@ msgstr "清除使用中的線盤時發生錯誤"
 msgid "Error setting active spool"
 msgstr "設定使用中的線盤時發生錯誤"
 
+msgid "Error getting active spool"
+msgstr "取得使用中的線盤時發生錯誤"
+
 msgid "No info available"
 msgstr "沒有可用的資訊"
 
+#, fuzzy
 msgid "IP Address"
-msgstr ""
+msgstr "IP 位址"
 
 msgid "Memory"
 msgstr "記憶體"
@@ -886,8 +895,9 @@ msgstr "正在檢查更新，請稍等..."
 msgid "Not working or not configured"
 msgstr "無法運作或未配置"
 
+#, fuzzy
 msgid "Are you sure?"
-msgstr ""
+msgstr "您確定嗎？"
 
 msgid "Perform a full upgrade?"
 msgstr "是否全部升級？"
@@ -972,8 +982,9 @@ msgstr "在尋求幫助時，請提供 KlipperScreen.log。\n"
 msgid "Close"
 msgstr "關閉"
 
+#, fuzzy
 msgid "DPMS has failed and has been disabled"
-msgstr ""
+msgstr "DPMS 失敗且已停用"
 
 msgid "Cannot connect to Moonraker"
 msgstr "無法連接到Moonraker"
@@ -999,8 +1010,9 @@ msgstr "Klipper正在啟動"
 msgid "Klipper has shutdown"
 msgstr "Klipper已關閉"
 
+#, fuzzy
 msgid "No eligible macros:"
-msgstr ""
+msgstr "無合規巨集："
 
 msgid "macros with a name starting with '_' are hidden"
 msgstr "以 ' _ '開頭的巨集將會被隱藏"
@@ -1020,9 +1032,6 @@ msgstr "正在重試"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker：已連線"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "取得使用中的線盤時發生錯誤"
 
 #~ msgid "Max:"
 #~ msgstr "最大："
