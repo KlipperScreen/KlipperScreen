@@ -13,12 +13,10 @@ for FILE in ks_includes/locales/*; do
     # Only process if it's a directory and contains the .po file
     if [ -d "$FILE" ] && [ -f "$FILE/LC_MESSAGES/KlipperScreen.po" ]; then
         echo "Processing $FILE"
-        msgmerge -q "$FILE/LC_MESSAGES/KlipperScreen.po" \
-                   ks_includes/locales/KlipperScreen.pot \
-                -o "$FILE/LC_MESSAGES/KlipperScreen.po"
 
-        # Clean Fuzzy translations
-        msgattrib --clear-fuzzy --empty -o "$FILE/LC_MESSAGES/KlipperScreen.po" "$FILE/LC_MESSAGES/KlipperScreen.po"
+        msgmerge -q --no-fuzzy-matching \
+                 -U "$FILE/LC_MESSAGES/KlipperScreen.po" \
+                 ks_includes/locales/KlipperScreen.pot
 
         # Compile mo
         msgfmt -o "$FILE/LC_MESSAGES/KlipperScreen.mo" "$FILE/LC_MESSAGES/KlipperScreen.po"
