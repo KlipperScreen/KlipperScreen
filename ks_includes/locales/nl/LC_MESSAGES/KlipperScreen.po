@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-26 12:31-0300\n"
+"POT-Creation-Date: 2026-04-23 14:29-0300\n"
 "PO-Revision-Date: 2025-04-29 16:26+0000\n"
 "Last-Translator: Themechanic1987 <Nigel_andreas@hotmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/klipperscreen/"
@@ -19,86 +19,26 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.12-dev\n"
 
-#, python-format
-msgid "%s will be updated to version"
-msgstr "%s zal worden ge-update naar versie"
+msgid "Main Menu"
+msgstr "Hoofd Menu"
 
-msgid "(default)"
-msgstr "(standaard)"
+msgid "Move"
+msgstr "Beweeg"
 
-msgid "24 Hour Time"
-msgstr "24 Uurs Tijd"
+msgid "Temperature"
+msgstr "Temperatuur"
 
-msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr "Een FIRMWARE_RESTART kan het probleem oplossen."
+msgid "Extrude"
+msgstr "Extrude"
 
-msgid "ADXL Not Configured"
-msgstr "ADXL Niet Geconfigureerd"
+msgid "More"
+msgstr "Meer"
 
-msgid "Abort"
-msgstr "Annuleer"
+msgid "Print"
+msgstr "Print"
 
-msgid "Acceleration:"
-msgstr "Acceleratie:"
-
-msgid "Accept"
-msgstr "Accepteer"
-
-msgid "Add profile"
-msgstr "Profiel toevoegen"
-
-msgid "All"
-msgstr "Alles"
-
-msgid "Apply"
-msgstr "Toepassen"
-
-#, python-format
-msgid "Apply %s%.3f offset to Endstop?"
-msgstr "Gebruik %s%.3f offset voor Eindstop?"
-
-#, python-format
-msgid "Apply %s%.3f offset to Probe?"
-msgstr "Gebruik %s%.3f offset voor Probe?"
-
-msgid "Archived"
-msgstr "Gearchiveerd"
-
-msgid "Are you sure do you want to exclude the object?"
-msgstr "Weet je zeker dat je het object wilt uitsluiten?"
-
-msgid "Are you sure you want to run Emergency Stop?"
-msgstr "Weet je zeker dat je de Noodstop wilt inschakelen?"
-
-msgid "Are you sure you wish to cancel this print?"
-msgstr "Weet je zeker dat je deze print wilt annuleren?"
-
-msgid "Are you sure you wish to disable motors?"
-msgstr "Weet je zeker dat je de motors wilt uitschakelen?"
-
-msgid "Are you sure you wish to reboot the system?"
-msgstr "Weet je zeker dat je het systeem wilt herstarten?"
-
-msgid "Are you sure you wish to shutdown the system?"
-msgstr "Weet je zeker dat je het systeem wilt afsluiten?"
-
-msgid "Asks for confirmation before stopping"
-msgstr "Vraagt om bevestiging voor stop"
-
-msgid "Auto"
-msgstr "Auto"
-
-msgid "Auto-calibrate"
-msgstr "Auto-kalibreren"
-
-msgid "Auto-close notifications"
-msgstr "Auto-sluit notificaties"
-
-msgid "Auto-open Extrude On Pause"
-msgstr "Auto-open Extrude na Pauze"
-
-msgid "Auto-scroll"
-msgstr "Auto-scroll"
+msgid "Gcodes"
+msgstr "Gcodes"
 
 msgid "Bed Level"
 msgstr "Bed Level"
@@ -106,283 +46,56 @@ msgstr "Bed Level"
 msgid "Bed Mesh"
 msgstr "Bed Mesh"
 
-msgid "Both"
-msgstr "Beide"
+msgid "Z Calibrate"
+msgstr "Z Kalibratie"
 
-msgid "Calibrate"
-msgstr "Kalibreer"
-
-msgid "Calibrated"
-msgstr "Gekalibreerd"
-
-msgid "Calibrating"
-msgstr "Kalibreren"
-
-msgid "Camera"
-msgstr "Camera"
-
-msgid "Can't set above the maximum:"
-msgstr "Kan niet boven maximum instellen:"
-
-msgid "Cancel"
-msgstr "Annuleer"
-
-msgid "Cancel Print"
-msgstr "Annuleer Print"
-
-msgid "Cancelled"
-msgstr "Geannuleerd"
-
-msgid "Cancelling"
-msgstr "Annuleren"
-
-msgid "Cannot connect to Moonraker"
-msgstr "Kan geen verbinding met Moonraker maken"
-
-msgid "Changes how the interface looks"
-msgstr "Wijzigt het uiterlijk van de interface"
-
-msgid "Changes how the time remaining is calculated"
-msgstr "Wijzigt de calculatie van de resterende tijd"
-
-msgid "Channel"
-msgstr "Kanaal"
-
-msgid "Check ADXL Wiring"
-msgstr "Controleer AXDL Bedrading"
-
-msgid "Checking for updates, please wait..."
-msgstr "Bezig met controleren van updates, moment geduld.."
-
-msgid "Clear"
-msgstr "Leegmaken"
-
-msgid "Close"
-msgstr "Sluiten"
-
-msgid "Close messages after a timeout"
-msgstr "Sluit berichten na een timeout"
-
-msgid "Complete"
-msgstr "Voltooid"
-
-msgid "Confirm Emergency Stop"
-msgstr "Bevestig Nood Stop"
-
-msgid "Connected"
-msgstr "Verbonden"
-
-msgid "Connecting"
-msgstr "Verbinden"
-
-#, python-format
-msgid "Connecting to %s"
-msgstr "Verbinden met %s"
-
-msgid "Connection failed"
-msgstr "Verbindingsfout"
-
-msgid "Console"
-msgstr "Console"
-
-msgid "Cooldown"
-msgstr "Afkoelen"
-
-msgid "Couldn't add network"
-msgstr "Kan netwerk niet toevoegen"
-
-msgid "Current"
-msgstr "Huidige"
-
-msgid "Current percentage and graph line"
-msgstr "Huidige percentage en grafiek lijn"
-
-msgid "DPMS has failed to load and has been disabled"
-msgstr "DPMS kon niet worden geladen en is uitgeschakeld"
-
-msgid "Date"
-msgstr "Datum"
-
-msgid "Delete"
-msgstr "Verwijder"
-
-msgid "Delete Directory?"
-msgstr "Verwijder directory?"
-
-msgid "Delete File?"
-msgstr "Verwijder bestand?"
-
-msgid "Disable Motors"
-msgstr "Motors Uitschakelen"
-
-msgid "Disable for 12hs with am / pm"
-msgstr "Uitschakelen gedurende 12 uur met am / pm"
-
-msgid "Disconnect"
-msgstr "Ontkoppelen"
-
-msgid "Distance (mm)"
-msgstr "Afstand (mm)"
-
-#, python-format
-msgid "Do you want to forget or disconnect %s?"
-msgstr "Wil je vergeten of disconnect %s?"
-
-#, python-format
-msgid "Do you want to recover %s?"
-msgstr "Wil je %s herstellen?"
-
-msgid "Elapsed:"
-msgstr "Verstreken:"
-
-msgid "Emergency Stop"
-msgstr "Noodstop"
-
-msgid "Enable screen power management"
-msgstr "Scherm stroom beheer inschakelen"
-
-msgid "Error"
-msgstr "Error"
-
-msgid "Error clearing active spool"
-msgstr "Error opruimen actieve spoel"
-
-msgid "Error getting active spool"
-msgstr "Error krijgen actieve spoel"
-
-msgid "Error setting active spool"
-msgstr "Error instellen actieve spoel"
-
-msgid "Error trying to fetch spools"
-msgstr "Error tijdens laden spoelen"
-
-msgid "Error: Couldn't get a position to probe"
-msgstr "Error: kon geen probe positie vinden"
-
-msgid "Estimated Time"
-msgstr "Geschatte Tijd"
-
-msgid "Estimated Time Method"
-msgstr "Schatting Tijd Methode"
-
-msgid "Example"
-msgstr "Voorbeeld"
-
-msgid "Exclude Object"
-msgstr "Uitsluiten Object"
-
-msgid "Extra Large"
-msgstr "Extra Groot"
-
-msgid "Extrude"
-msgstr "Extrude"
-
-msgid "Extruders"
-msgstr "Extruders"
-
-msgid "Extrusion +"
-msgstr "Extrusion +"
-
-msgid "Extrusion -"
-msgstr "Extrusion -"
-
-msgid "Failed to delete connection"
-msgstr "Kan connectie niet verwijderen"
-
-msgid "Failed to initialize"
-msgstr "Kan niet initialiseren"
-
-msgid "Failed, adjust position first"
-msgstr "Mislukt, wijzig positie eerst"
+msgid "Limits"
+msgstr "Limieten"
 
 msgid "Fan"
 msgstr "Ventilator"
 
-msgid "Filament"
-msgstr "Filament"
+msgid "Leds"
+msgstr "Leds"
 
-msgid "Filament Used"
-msgstr "Filament Gebruikt"
+msgid "Macros"
+msgstr "Macros"
 
-msgid "Filament total:"
-msgstr "Filament totaal:"
+msgid "Pins"
+msgstr "Pinnen"
 
-msgid "Filament used:"
-msgstr "Filament gebruikt:"
+msgid "Power"
+msgstr "Stroom"
 
-msgid "Filament:"
-msgstr "Filament:"
+msgid "Camera"
+msgstr "Camera"
 
-msgid "File"
-msgstr "Bestand"
+msgid "Console"
+msgstr "Console"
 
-msgid "File:"
-msgstr "Bestand:"
+msgid "Update"
+msgstr "Update"
 
-msgid "Filter"
-msgstr "Filter"
+msgid "Input Shaper"
+msgstr "Input Shaper"
 
-msgid "Finding ADXL"
-msgstr "Zoekt ADXL"
+msgid "Save Config"
+msgstr "Config Opslaan"
+
+msgid "Network"
+msgstr "Netwerk"
+
+msgid "Notifications"
+msgstr "Notificaties"
+
+msgid "System"
+msgstr "Systeem"
 
 msgid "Fine Tuning"
 msgstr "Fine Tuning"
 
-msgid "Finish"
-msgstr "Voltooi"
-
-msgid "Firmware Restart"
-msgstr "Firmware Herstarten"
-
-msgid "Flow:"
-msgstr "Flow:"
-
-msgid "Flowrate:"
-msgstr "Flowrate:"
-
-msgid "Font Size"
-msgstr "Lettertype Grootte"
-
-msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
-"Voor muisbediening of om de nauwkeurigheid van het aanraakscherm te "
-"verifiëren"
-
-msgid "Forget"
-msgstr "Vergeet"
-
-msgid "Full Update"
-msgstr "Volledige Update"
-
-msgid "Gcodes"
-msgstr "Gcodes"
-
-msgid "Getting IP address"
-msgstr "Zoeken IP adres"
-
-msgid "Go Back"
-msgstr "Ga Terug"
-
-msgid "Height:"
-msgstr "Hoogte:"
-
-msgid "Hide"
-msgstr "Verberg"
-
-msgid "Hide sensors in Temp."
-msgstr "Verberg sensoren in Temp."
-
-msgid "Home"
-msgstr "Home"
-
-msgid "Home All"
-msgstr "Home alles"
-
 msgid "Home X"
 msgstr "Home X"
-
-msgid "Home XY"
-msgstr "Home XY"
 
 msgid "Home Y"
 msgstr "Home Y"
@@ -390,44 +103,148 @@ msgstr "Home Y"
 msgid "Home Z"
 msgstr "Home Z"
 
-msgid "Host"
-msgstr "Host"
+msgid "Home All"
+msgstr "Home alles"
 
-msgid "Hostname"
-msgstr "Hostnaam"
+msgid "Home XY"
+msgstr "Home XY"
 
-msgid "ID"
-msgstr "ID"
+msgid "Quad Gantry Level"
+msgstr "Quad Gantry Level"
+
+msgid "Z Tilt"
+msgstr "Z Tilt"
+
+msgid "Print Control"
+msgstr "Print Control"
+
+msgid "Lock"
+msgstr "Vergrendelen"
+
+msgid "Menu"
+msgstr "Menu"
 
 msgid "Icon Theme"
 msgstr "Icoon Thema"
 
-msgid "Initializing printer..."
-msgstr "Initialiseren printer…"
+msgid "Changes how the interface looks"
+msgstr "Wijzigt het uiterlijk van de interface"
 
-msgid "Initiate a PID calibration for:"
-msgstr "Initieer een PID-kalibratie voor:"
+msgid "(default)"
+msgstr "(standaard)"
 
-msgid "Input Shaper"
-msgstr "Input Shaper"
+msgid "Estimated Time Method"
+msgstr "Schatting Tijd Methode"
 
-msgid "Insufficient privileges"
-msgstr "Onvoldoende rechten"
+msgid "Changes how the time remaining is calculated"
+msgstr "Wijzigt de calculatie van de resterende tijd"
 
-msgid "Interface"
-msgstr "Interface"
+msgid "Auto"
+msgstr "Auto"
 
-msgid "Invalid"
-msgstr "Ongeldig"
+msgid "File"
+msgstr "Bestand"
 
-msgid "Invalid password"
-msgstr "Ongeldig wachtwoord"
+msgid "Filament Used"
+msgstr "Filament Gebruikt"
 
-msgid "Invalid temperature"
-msgstr "Ongeldige temperatuur"
+msgid "Slicer"
+msgstr "Slicer"
+
+msgid "Screen Power Off Time"
+msgstr "Scherm Uitschakelen Tijd"
+
+msgid "Timeout for screen black-out or power-off"
+msgstr "Timeout voor schermbeveiliging of uitschakelen"
+
+msgid "Never"
+msgstr "Nooit"
+
+msgid "Printing"
+msgstr "Bezig met printen"
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr "Timeout voor schermbeveiliging of uitschakelen tijdens printen"
+
+msgid "24 Hour Time"
+msgstr "24 Uurs Tijd"
+
+msgid "Disable for 12hs with am / pm"
+msgstr "Uitschakelen gedurende 12 uur met am / pm"
+
+msgid "Macro shortcut on sidebar"
+msgstr "Macro snelkoppeling in sidebar"
+
+msgid "Font Size"
+msgstr "Lettertype Grootte"
 
 msgid "Inversely affects the icon size"
 msgstr "Beïnvloedt de icoongrootte omgekeerd"
+
+msgid "Small"
+msgstr "Klein"
+
+msgid "Medium"
+msgstr "Medium"
+
+msgid "Large"
+msgstr "Groot"
+
+msgid "Extra Large"
+msgstr "Extra Groot"
+
+msgid "Maximum"
+msgstr "Maximum"
+
+msgid "Confirm Emergency Stop"
+msgstr "Bevestig Nood Stop"
+
+msgid "Asks for confirmation before stopping"
+msgstr "Vraagt om bevestiging voor stop"
+
+msgid "Hide sensors in Temp."
+msgstr "Verberg sensoren in Temp."
+
+msgid "Show only devices that are able to be set"
+msgstr "Toon enkel apparaten die ingesteld kunnen worden"
+
+msgid "Screen DPMS"
+msgstr "Scherm DPMS"
+
+msgid "Enable screen power management"
+msgstr "Scherm stroom beheer inschakelen"
+
+msgid "Not all screens support this"
+msgstr "Niet alle schermen ondersteunen dit"
+
+msgid "Auto-close notifications"
+msgstr "Auto-sluit notificaties"
+
+msgid "Close messages after a timeout"
+msgstr "Sluit berichten na een timeout"
+
+msgid "Show Heater Power"
+msgstr "Toon Heater Stroom"
+
+msgid "Current percentage and graph line"
+msgstr "Huidige percentage en grafiek lijn"
+
+msgid "Show Scrollbars Buttons"
+msgstr "Toon Scrollbars Knoppen"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr "Nuttig voor niet-reagerende aanraakschermen"
+
+msgid "Auto-open Extrude On Pause"
+msgstr "Auto-open Extrude na Pauze"
+
+msgid "Show cursor"
+msgstr "Toon cursor"
+
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr ""
+"Voor muisbediening of om de nauwkeurigheid van het aanraakscherm te "
+"verifiëren"
 
 msgid "Invert X"
 msgstr "Invert X"
@@ -438,152 +255,64 @@ msgstr "Invert Y"
 msgid "Invert Z"
 msgstr "Invert Z"
 
-msgid "It may take more than 5 minutes depending on the heater power."
-msgstr "Het kan meer dan 5 minuten duren op basis van de heater power."
+msgid "XY Move Speed (mm/s)"
+msgstr "XY Move Snelheid (mm/s)"
 
-msgid "It's possible that the configuration is not correct"
-msgstr "Het is mogelijk dat de configuratie incorrect is"
-
-msgid "Job Status"
-msgstr "Opdrachtstatus"
-
-msgid "Klipper Restart"
-msgstr "Klipper Herstarten"
-
-msgid "Klipper has disconnected"
-msgstr "Klipper verbinding verbroken"
-
-msgid "Klipper has encountered an error."
-msgstr "Klipper heeft een fout ontdekt."
-
-msgid "Klipper has shutdown"
-msgstr "Klipper is afgesloten"
-
-msgid "Klipper is attempting to start"
-msgstr "Klipper probeert te starten"
-
-msgid "Klipper will reboot"
-msgstr "Klipper zal herstarten"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT zijn verborgen en kunnen worden gebruikt in "
-"extrude"
+msgid "Z Move Speed (mm/s)"
+msgstr "Z Move Snelheid (mm/s)"
 
 msgid "Language"
 msgstr "Taal"
 
-msgid "Large"
-msgstr "Groot"
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "uur"
+msgstr[1] "uren"
 
-msgid "Last Duration"
-msgstr "Laatste duur"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "minuut"
+msgstr[1] "minuten"
 
-msgid "Last Used"
-msgstr "Laatst Gebruikt"
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "Weet je zeker dat je de Noodstop wilt inschakelen?"
 
-msgid "Layer Height"
-msgstr "Laag Hoogte"
+msgid "day"
+msgid_plural "days"
+msgstr[0] "dag"
+msgstr[1] "dagen"
 
-msgid "Layer:"
-msgstr "Laag:"
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "seconde"
+msgstr[1] "seconden"
 
-msgid "Leds"
-msgstr "Leds"
+msgid "Network not found"
+msgstr "Netwerk niet gevonden"
 
-msgid "Left:"
-msgstr "Links:"
+msgid "Unknown security type"
+msgstr "Onbekend beveiliging type"
 
-msgid "Limits"
-msgstr "Limieten"
+msgid "Insufficient privileges"
+msgstr "Onvoldoende rechten"
 
-msgid "Load"
-msgstr "Laad"
+msgid "Invalid password"
+msgstr "Ongeldig wachtwoord"
 
-msgid "Loading..."
-msgstr "Laden..."
+msgid "Couldn't add network"
+msgstr "Kan netwerk niet toevoegen"
 
-msgid "Lock"
-msgstr "Vergrendelen"
+msgid "Failed to delete connection"
+msgstr "Kan connectie niet verwijderen"
 
-msgid "Lost Connection to Moonraker"
-msgstr "Verbinding met Moonraker verbroken"
+msgid "Starting WiFi Association"
+msgstr "WiFi Association starten"
 
-msgid "Lower Nozzle"
-msgstr "Onderste Nozzle"
+msgid "Connecting"
+msgstr "Verbinden"
 
-msgid "Macro shortcut on sidebar"
-msgstr "Macro snelkoppeling in sidebar"
-
-msgid "Macros"
-msgstr "Macros"
-
-msgid "Main Menu"
-msgstr "Hoofd Menu"
-
-msgid "Material"
-msgstr "Materiaal"
-
-msgid "Max"
-msgstr "Max"
-
-msgid "Max Acceleration"
-msgstr "Max Acceleratie"
-
-msgid "Max Velocity"
-msgstr "Max Velocity"
-
-msgid "Max:"
-msgstr "Max:"
-
-msgid "Maximum"
-msgstr "Maximum"
-
-msgid "Measure Both"
-msgstr "Meet Beide"
-
-msgid "Measure X"
-msgstr "Meet X"
-
-msgid "Measure Y"
-msgstr "Meet Y"
-
-msgid "Medium"
-msgstr "Medium"
-
-msgid "Memory"
-msgstr "Geheugen"
-
-msgid "Menu"
-msgstr "Menu"
-
-msgid "Minimum Cruise Ratio"
-msgstr "Minimale Cruise Ratio"
-
-msgid "Minimum:"
-msgstr "Minimum:"
-
-msgid "Modified"
-msgstr "Aangepast"
-
-msgid "Moonraker: connected"
-msgstr "Moonraker: verbonden"
-
-msgid "More"
-msgstr "Meer"
-
-msgid "Move"
-msgstr "Beweeg"
-
-msgid "Move Distance (mm)"
-msgstr "Beweeg Afstand (mm)"
-
-msgid "Name"
-msgstr "Naam"
-
-msgid "Network"
-msgstr "Netwerk"
+msgid "Getting IP address"
+msgstr "Zoeken IP adres"
 
 msgid "Network connected"
 msgstr "Netwerk verbonden"
@@ -591,330 +320,20 @@ msgstr "Netwerk verbonden"
 msgid "Network disconnected"
 msgstr "Network verbroken"
 
-msgid "Network not found"
-msgstr "Netwerk niet gevonden"
-
-msgid "Never"
-msgstr "Nooit"
-
-msgid "New"
-msgstr "Nieuw"
-
-msgid "No elegible macros:"
-msgstr "Macros komen niet in aanmerking:"
-
-msgid "No info available"
-msgstr "Geen info beschikbaar"
+msgid "Connection failed"
+msgstr "Verbindingsfout"
 
 msgid "No mesh has been loaded"
 msgstr "Geen mesh geladen"
 
-msgid "No wireless interface has been found"
-msgstr "Geen draadloze netwerk interface gevonden"
+msgid "Calibrate"
+msgstr "Kalibreer"
 
-msgid "Not all screens support this"
-msgstr "Niet alle schermen ondersteunen dit"
-
-msgid "Not working or not configured"
-msgstr "Niet werkend of niet geconfigureerd"
-
-msgid "Nothing selected"
-msgstr "Niets geselecteerd"
-
-msgid "Notification log empty"
-msgstr "Notificatie log is leeg"
-
-msgid "Notifications"
-msgstr "Notificaties"
-
-msgid "Nozzle diameter"
-msgstr "Diameter mondstuk"
-
-msgid "Only for the move panel"
-msgstr "Enkel voor het bewegingspaneel"
-
-#, python-format
-msgid "Outdated by %d"
-msgstr "Verouderd sinds %d"
-
-msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "Pakket word ge-update"
-msgstr[1] "Pakketten worden ge-update"
-
-msgid "Part Fan"
-msgstr "Part Ventilator"
+msgid "Invalid temperature"
+msgstr "Ongeldige temperatuur"
 
 msgid "Password"
 msgstr "Wachtwoord"
-
-msgid "Password saved"
-msgstr "Wachtwoord opgeslagen"
-
-msgid "Pause"
-msgstr "Pauzeer"
-
-msgid "Paused"
-msgstr "Gepauzeerd"
-
-msgid "Perform a full upgrade?"
-msgstr "Volledige upgrade uitvoeren?"
-
-msgid "Pins"
-msgstr "Pinnen"
-
-msgid "Please recompile and flash the micro-controller."
-msgstr "Hercompileer en flash de micro-controller aub."
-
-msgid "Please wait"
-msgstr "Even geduld aub"
-
-msgid "Power"
-msgstr "Stroom"
-
-msgid "Power On Printer"
-msgstr "Printer Aanzetten"
-
-msgid "Pressure Advance"
-msgstr "Pressure Advance"
-
-msgid "Pressure Advance:"
-msgstr "Pressure Advance:"
-
-msgid "Pressure advance"
-msgstr "Pressure advance"
-
-msgid "Print"
-msgstr "Print"
-
-msgid "Print Control"
-msgstr "Print Control"
-
-msgid "Printer"
-msgstr "Printer"
-
-msgid "Printer Connections"
-msgstr "Printer Verbindingen"
-
-msgid "Printer Select"
-msgstr "Printer Selecteren"
-
-msgid "Printing"
-msgstr "Bezig met printen"
-
-msgid "Probe Offset"
-msgstr "Probe Offset"
-
-msgid "Profile Name:"
-msgstr "Profiel Naam:"
-
-msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Voeg KlipperScreen.log toe als je om hulp vraagt.\n"
-
-msgid "Quad Gantry Level"
-msgstr "Quad Gantry Level"
-
-msgid "Raise Nozzle"
-msgstr "Nozzle omhoog"
-
-msgid "Recover"
-msgstr "Herstellen"
-
-msgid "Recover Hard"
-msgstr "Hard Herstel"
-
-msgid "Recover Soft"
-msgstr "Soft Herstel"
-
-msgid "Reference"
-msgstr "Referentie"
-
-msgid "Refresh"
-msgstr "Refresh"
-
-msgid "Remove network"
-msgstr "Verwijder netwerk"
-
-msgid "Rename/Move:"
-msgstr "Hernoem/beweeg:"
-
-msgid "Restart"
-msgstr "Herstarten"
-
-msgid "Resume"
-msgstr "Hervatten"
-
-msgid "Retract"
-msgstr "Retract"
-
-msgid "Retraction"
-msgstr "Retraction"
-
-msgid "Retraction Length"
-msgstr "Retraction Lengte"
-
-msgid "Retraction Speed"
-msgstr "Retraction Snelheid"
-
-msgid "Retry"
-msgstr "Opnieuw"
-
-msgid "Retrying"
-msgstr "Probeert opnieuw"
-
-msgid "Rotation invalid"
-msgstr "Rotatie ongeldig"
-
-msgid "Save"
-msgstr "Opslaan"
-
-msgid "Save Config"
-msgstr "Config Opslaan"
-
-msgid "Save Z"
-msgstr "Z Opslaan"
-
-msgid "Save configuration?"
-msgstr "Configuratie opslaan?"
-
-msgid "Saved"
-msgstr "Opgeslagen"
-
-#, python-format
-msgid "Saved offset: %s"
-msgstr "Offset opgeslagen: %s"
-
-msgid "Screen DPMS"
-msgstr "Scherm DPMS"
-
-msgid "Screen Power Off Time"
-msgstr "Scherm Uitschakelen Tijd"
-
-msgid "Screws Adjust"
-msgstr "Schroeven Aanpassen"
-
-msgid "Screws not used:"
-msgstr "Ongebruikte schroeven:"
-
-msgid "Send"
-msgstr "Verstuur"
-
-msgid "Set Temp"
-msgstr "Verander Temp"
-
-msgid "Settings"
-msgstr "Instellingen"
-
-msgid "Show"
-msgstr "Toon"
-
-msgid "Show Heater Power"
-msgstr "Toon Heater Stroom"
-
-msgid "Show Scrollbars Buttons"
-msgstr "Toon Scrollbars Knoppen"
-
-msgid "Show cursor"
-msgstr "Toon cursor"
-
-msgid "Show only devices that are able to be set"
-msgstr "Toon enkel apparaten die ingesteld kunnen worden"
-
-msgid "Shutdown"
-msgstr "Afsluiten"
-
-msgid "Size"
-msgstr "Afmetingen"
-
-msgid "Slicer"
-msgstr "Slicer"
-
-msgid "Slicer:"
-msgstr "Slicer:"
-
-msgid "Small"
-msgstr "Klein"
-
-msgid "Smooth time"
-msgstr ""
-
-msgid "Speed (mm/s)"
-msgstr "Snelheid (mm/s)"
-
-msgid "Speed +"
-msgstr "Snelheid +"
-
-msgid "Speed -"
-msgstr "Snelheid -"
-
-msgid "Speed:"
-msgstr "Snelheid:"
-
-msgid "Square Corner Velocity"
-msgstr "Square Corner Velocity"
-
-msgid "Standby"
-msgstr "Standby"
-
-msgid "Start"
-msgstr "Start"
-
-msgid "Starting recovery for"
-msgstr "Herstel starten voor"
-
-msgid "Starting update for"
-msgstr "Update starten voor"
-
-msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr "Wissel knoppen als ze over elkaar staan, beïnvloedt andere panelen"
-
-msgid "System"
-msgstr "Systeem"
-
-msgid "System Restart"
-msgstr "Systeem Herstarten"
-
-msgid "System Shutdown"
-msgstr "Systeem Afsluiten"
-
-msgid "System:"
-msgstr "Systeem:"
-
-msgid "Temp (°C)"
-msgstr "Temp (°C)"
-
-msgid "Temperature"
-msgstr "Temperatuur"
-
-msgid "Temperature too low to extrude"
-msgstr "Temperatuur te laag voor extrude"
-
-msgid "The system doesn't meet the minimum requirement"
-msgstr "Het systeem voldoet niet aan de minimum vereisten"
-
-msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr "Dit paneel ondersteunt tot 9 schroeven in een 3x3 raster"
-
-msgid "This will affect screw positions and mesh graph"
-msgstr "Dit zal de schroefposities en mesh graph beïnvloeden"
-
-msgid "Timeout for screen black-out or power-off"
-msgstr "Timeout voor schermbeveiliging of uitschakelen"
-
-msgid "Timeout for screen black-out or power-off during printing"
-msgstr "Timeout voor schermbeveiliging of uitschakelen tijdens printen"
-
-msgid "Total:"
-msgstr "Totaal:"
-
-msgid "Unknown Heater"
-msgstr "Onbekende Heater"
-
-msgid "Unknown security type"
-msgstr "Onbekend beveiliging type"
-
-msgid "Unload"
-msgstr "Uitladen"
 
 msgid "Unlock"
 msgstr "Ontgrendelen"
@@ -922,85 +341,200 @@ msgstr "Ontgrendelen"
 msgid "Unlock failed"
 msgstr "Ontgrendelen mislukt"
 
-msgid "Unretract Extra Length"
-msgstr "Unretract Extra Lengte"
+msgid "Are you sure do you want to exclude the object?"
+msgstr "Weet je zeker dat je het object wilt uitsluiten?"
 
-msgid "Unretract Speed"
-msgstr "Unretract Snelheid"
-
-msgid "Up To Date"
-msgstr "Up To Date"
-
-msgid "Update"
-msgstr "Update"
+msgid "Finish"
+msgstr "Voltooi"
 
 msgid "Updating"
 msgstr "Bezig met updaten"
 
-msgid "Useful for un-responsive touchscreens"
-msgstr "Nuttig voor niet-reagerende aanraakschermen"
+msgid "Disable Motors"
+msgstr "Motors Uitschakelen"
 
-msgid "User"
-msgstr "Gebruiker"
+msgid "Screws Adjust"
+msgstr "Schroeven Aanpassen"
+
+msgid "Rotation invalid"
+msgstr "Rotatie ongeldig"
+
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr "Dit paneel ondersteunt tot 9 schroeven in een 3x3 raster"
+
+msgid "It's possible that the configuration is not correct"
+msgstr "Het is mogelijk dat de configuratie incorrect is"
+
+msgid "Screws not used:"
+msgstr "Ongebruikte schroeven:"
+
+msgid "Reference"
+msgstr "Referentie"
+
+msgid "Add profile"
+msgstr "Profiel toevoegen"
+
+msgid "Clear"
+msgstr "Leegmaken"
+
+msgid "Profile Name:"
+msgstr "Profiel Naam:"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Calibrating"
+msgstr "Kalibreren"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC is niet ondersteund door de backend"
 
-msgid "Working"
-msgstr "Werkend"
+msgid "Auto-scroll"
+msgstr "Auto-scroll"
 
-msgid "XY Move Speed (mm/s)"
-msgstr "XY Move Snelheid (mm/s)"
+msgid "Send"
+msgstr "Verstuur"
 
-msgid "XY Speed (mm/s)"
-msgstr "XY Snelheid (mm/s)"
+msgid "Example"
+msgstr "Voorbeeld"
 
-msgid "Z Calibrate"
-msgstr "Z Kalibratie"
+msgid "Exclude Object"
+msgstr "Uitsluiten Object"
 
-msgid "Z Move Speed (mm/s)"
-msgstr "Z Move Snelheid (mm/s)"
+msgid "Are you sure you wish to cancel this print?"
+msgstr "Weet je zeker dat je deze print wilt annuleren?"
 
-msgid "Z Speed (mm/s)"
-msgstr "Z Snelheid (mm/s)"
+msgid "Load"
+msgstr "Laad"
 
-msgid "Z Tilt"
-msgstr "Z Tilt"
+msgid "Unload"
+msgstr "Uitladen"
 
-msgid "Z offset:"
-msgstr "Z offset:"
+msgid "Retract"
+msgstr "Retract"
 
-msgid "commit"
-msgid_plural "commits"
-msgstr[0] "commit"
-msgstr[1] "commits"
+msgid "Pressure Advance"
+msgstr "Pressure Advance"
 
-msgid "day"
-msgid_plural "days"
-msgstr[0] "dag"
-msgstr[1] "dagen"
+msgid "Retraction"
+msgstr "Retraction"
+
+msgid "Extruders"
+msgstr "Extruders"
+
+msgid "Distance (mm)"
+msgstr "Afstand (mm)"
+
+msgid "Speed (mm/s)"
+msgstr "Snelheid (mm/s)"
+
+msgid "Part Fan"
+msgstr "Part Ventilator"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "mm"
+msgstr "mm"
+
+msgid "Speed +"
+msgstr "Snelheid +"
+
+msgid "Speed -"
+msgstr "Snelheid -"
+
+msgid "Extrusion +"
+msgstr "Extrusion +"
+
+msgid "Extrusion -"
+msgstr "Extrusion -"
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Size"
+msgstr "Afmetingen"
+
+msgid "Loading..."
+msgstr "Laden..."
+
+msgid "Delete File?"
+msgstr "Verwijder bestand?"
+
+msgid "Delete Directory?"
+msgstr "Verwijder directory?"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Delete"
+msgstr "Verwijder"
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "Modified"
+msgstr "Aangepast"
+
+msgid "Layer Height"
+msgstr "Laag Hoogte"
+
+msgid "Filament"
+msgstr "Filament"
+
+msgid "Estimated Time"
+msgstr "Geschatte Tijd"
 
 msgid "g"
 msgstr "g"
 
-msgid "hour"
-msgid_plural "hours"
-msgstr[0] "uur"
-msgstr[1] "uren"
+msgid "Nozzle diameter"
+msgstr "Diameter mondstuk"
 
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "Macro's die 'rename_existing' gebruiken zijn verborgen"
+msgid "Last Duration"
+msgstr "Laatste duur"
 
-msgid "macros with a name starting with '_' are hidden"
-msgstr "macro's die beginnen met '_' zijn verborgen"
+msgid "Rename/Move:"
+msgstr "Hernoem/beweeg:"
 
-msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "minuut"
-msgstr[1] "minuten"
+msgid "Finding ADXL"
+msgstr "Zoekt ADXL"
 
-msgid "mm"
-msgstr "mm"
+msgid "Measure X"
+msgstr "Meet X"
+
+msgid "Measure Y"
+msgstr "Meet Y"
+
+msgid "Measure Both"
+msgstr "Meet Beide"
+
+msgid "Klipper will reboot"
+msgstr "Klipper zal herstarten"
+
+msgid "Save configuration?"
+msgstr "Configuratie opslaan?"
+
+msgid "Check ADXL Wiring"
+msgstr "Controleer AXDL Bedrading"
+
+msgid "ADXL Not Configured"
+msgstr "ADXL Niet Geconfigureerd"
+
+msgid "Auto-calibrate"
+msgstr "Auto-kalibreren"
+
+msgid "Calibrated"
+msgstr "Gekalibreerd"
+
+msgid "Job Status"
+msgstr "Opdrachtstatus"
 
 msgid "mm/s"
 msgstr "mm/s"
@@ -1011,13 +545,500 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+msgid "Left:"
+msgstr "Links:"
+
+msgid "Elapsed:"
+msgstr "Verstreken:"
+
+msgid "Total:"
+msgstr "Totaal:"
+
+msgid "Slicer:"
+msgstr "Slicer:"
+
+msgid "File:"
+msgstr "Bestand:"
+
+msgid "Filament:"
+msgstr "Filament:"
+
+msgid "Speed:"
+msgstr "Snelheid:"
+
+msgid "Acceleration:"
+msgstr "Acceleratie:"
+
+msgid "Flow:"
+msgstr "Flow:"
+
+msgid "Z offset:"
+msgstr "Z offset:"
+
+msgid "Filament used:"
+msgstr "Filament gebruikt:"
+
+msgid "Filament total:"
+msgstr "Filament totaal:"
+
+msgid "Pressure Advance:"
+msgstr "Pressure Advance:"
+
+msgid "Flowrate:"
+msgstr "Flowrate:"
+
+msgid "Height:"
+msgstr "Hoogte:"
+
+msgid "Layer:"
+msgstr "Laag:"
+
+msgid "Pause"
+msgstr "Pauzeer"
+
+msgid "Restart"
+msgstr "Herstarten"
+
+msgid "Resume"
+msgstr "Hervatten"
+
+msgid "Save Z"
+msgstr "Z Opslaan"
+
+#, python-brace-format
+msgid "Apply {sign}{offset:.3f} offset to Probe?"
+msgstr ""
+
+#, python-brace-format
+msgid "Apply {sign}{offset:.3f} offset to Endstop?"
+msgstr ""
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr "Offset opgeslagen: %s"
+
+msgid "Apply"
+msgstr "Toepassen"
+
+msgid "Cancel Print"
+msgstr "Annuleer Print"
+
+msgid "Go Back"
+msgstr "Ga Terug"
+
+msgid "Working"
+msgstr "Werkend"
+
+msgid "Complete"
+msgstr "Voltooid"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Cancelling"
+msgstr "Annuleren"
+
+msgid "Cancelled"
+msgstr "Geannuleerd"
+
+msgid "Paused"
+msgstr "Gepauzeerd"
+
+msgid "Standby"
+msgstr "Standby"
+
+msgid "Max Acceleration"
+msgstr "Max Acceleratie"
+
+msgid "Minimum Cruise Ratio"
+msgstr "Minimale Cruise Ratio"
+
+msgid "Max Velocity"
+msgstr "Max Velocity"
+
+msgid "Square Corner Velocity"
+msgstr "Square Corner Velocity"
+
+msgid "Unknown Heater"
+msgstr "Onbekende Heater"
+
+msgid "Can't set above the maximum:"
+msgstr "Kan niet boven maximum instellen:"
+
+msgid "Initiate a PID calibration for:"
+msgstr "Initieer een PID-kalibratie voor:"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr "Het kan meer dan 5 minuten duren op basis van de heater power."
+
+msgid "Temp (°C)"
+msgstr "Temp (°C)"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "Weet je zeker dat je de motors wilt uitschakelen?"
+
+msgid "Move Distance (mm)"
+msgstr "Beweeg Afstand (mm)"
+
+msgid "This will affect screw positions and mesh graph"
+msgstr "Dit zal de schroefposities en mesh graph beïnvloeden"
+
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr "Wissel knoppen als ze over elkaar staan, beïnvloedt andere panelen"
+
+msgid "XY Speed (mm/s)"
+msgstr "XY Snelheid (mm/s)"
+
+msgid "Only for the move panel"
+msgstr "Enkel voor het bewegingspaneel"
+
+msgid "Z Speed (mm/s)"
+msgstr "Z Snelheid (mm/s)"
+
+msgid "Failed to initialize"
+msgstr "Kan niet initialiseren"
+
+msgid "Interface"
+msgstr "Interface"
+
+msgid "No wireless interface has been found"
+msgstr "Geen draadloze netwerk interface gevonden"
+
+msgid "Connected"
+msgstr "Verbonden"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr "Wil je vergeten of disconnect %s?"
+
+msgid "Forget"
+msgstr "Vergeet"
+
+msgid "Disconnect"
+msgstr "Ontkoppelen"
+
+msgid "Remove network"
+msgstr "Verwijder netwerk"
+
+msgid "User"
+msgstr "Gebruiker"
+
+#, python-format
+msgid "Connecting to %s"
+msgstr "Verbinden met %s"
+
+msgid "Channel"
+msgstr "Kanaal"
+
+msgid "Hostname"
+msgstr "Hostnaam"
+
+msgid "Notification log empty"
+msgstr "Notificatie log is leeg"
+
+msgid "Pressure advance"
+msgstr "Pressure advance"
+
+msgid "Current"
+msgstr "Huidige"
+
+msgid "Smooth time"
+msgstr ""
+
 msgid "s"
 msgstr "s"
 
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "seconde"
-msgstr[1] "seconden"
+msgid "Printer Select"
+msgstr "Printer Selecteren"
+
+msgid "Please wait"
+msgstr "Even geduld aub"
+
+msgid "Retraction Length"
+msgstr "Retraction Lengte"
+
+msgid "Retraction Speed"
+msgstr "Retraction Snelheid"
+
+msgid "Unretract Extra Length"
+msgstr "Unretract Extra Lengte"
+
+msgid "Unretract Speed"
+msgstr "Unretract Snelheid"
+
+msgid "Printer Connections"
+msgstr "Printer Verbindingen"
+
+msgid "Shutdown"
+msgstr "Afsluiten"
+
+msgid "Emergency Stop"
+msgstr "Noodstop"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "Weet je zeker dat je het systeem wilt herstarten?"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "Weet je zeker dat je het systeem wilt afsluiten?"
+
+msgid "Accept"
+msgstr "Accepteer"
+
+msgid "Host"
+msgstr "Host"
+
+msgid "Printer"
+msgstr "Printer"
+
+msgid "Both"
+msgstr "Beide"
+
+msgid "Initializing printer..."
+msgstr "Initialiseren printer…"
+
+msgid "Klipper Restart"
+msgstr "Klipper Herstarten"
+
+msgid "Firmware Restart"
+msgstr "Firmware Herstarten"
+
+msgid "System Restart"
+msgstr "Systeem Herstarten"
+
+msgid "System Shutdown"
+msgstr "Systeem Afsluiten"
+
+msgid "Retry"
+msgstr "Opnieuw"
+
+msgid "Power On Printer"
+msgstr "Printer Aanzetten"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Last Used"
+msgstr "Laatst Gebruikt"
+
+msgid "Archived"
+msgstr "Gearchiveerd"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Material"
+msgstr "Materiaal"
+
+msgid "Comment"
+msgstr ""
+
+msgid "Last used"
+msgstr ""
+
+msgid "Remaining weight"
+msgstr ""
+
+msgid "Remaining length"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr "Error tijdens laden spoelen"
+
+msgid "All"
+msgstr "Alles"
+
+msgid "Error clearing active spool"
+msgstr "Error opruimen actieve spoel"
+
+msgid "Error setting active spool"
+msgstr "Error instellen actieve spoel"
+
+msgid "No info available"
+msgstr "Geen info beschikbaar"
+
+msgid "IP Address"
+msgstr ""
+
+msgid "Memory"
+msgstr "Geheugen"
+
+msgid "Cooldown"
+msgstr "Afkoelen"
+
+msgid "Nothing selected"
+msgstr "Niets geselecteerd"
+
+msgid "Set Temp"
+msgstr "Verander Temp"
+
+msgid "Show"
+msgstr "Toon"
+
+msgid "Hide"
+msgstr "Verberg"
+
+msgid "Full Update"
+msgstr "Volledige Update"
+
+msgid "Refresh"
+msgstr "Refresh"
+
+msgid "Checking for updates, please wait..."
+msgstr "Bezig met controleren van updates, moment geduld.."
+
+msgid "Not working or not configured"
+msgstr "Niet werkend of niet geconfigureerd"
+
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Perform a full upgrade?"
+msgstr "Volledige upgrade uitvoeren?"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "Wil je %s herstellen?"
+
+msgid "Recover Hard"
+msgstr "Hard Herstel"
+
+msgid "Recover Soft"
+msgstr "Soft Herstel"
+
+msgid "Recover"
+msgstr "Herstellen"
+
+#, python-format
+msgid "Outdated by %d"
+msgstr "Verouderd sinds %d"
+
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "commit"
+msgstr[1] "commits"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "Pakket word ge-update"
+msgstr[1] "Pakketten worden ge-update"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s zal worden ge-update naar versie"
+
+msgid "Starting recovery for"
+msgstr "Herstel starten voor"
+
+msgid "Starting update for"
+msgstr "Update starten voor"
+
+msgid "Invalid"
+msgstr "Ongeldig"
+
+msgid "Up To Date"
+msgstr "Up To Date"
+
+msgid "Probe Offset"
+msgstr "Probe Offset"
+
+msgid "Saved"
+msgstr "Opgeslagen"
+
+msgid "New"
+msgstr "Nieuw"
+
+msgid "Raise Nozzle"
+msgstr "Nozzle omhoog"
+
+msgid "Lower Nozzle"
+msgstr "Onderste Nozzle"
+
+msgid "Abort"
+msgstr "Annuleer"
+
+msgid "Error: Couldn't get a position to probe"
+msgstr "Error: kon geen probe positie vinden"
+
+msgid "Failed, adjust position first"
+msgstr "Mislukt, wijzig positie eerst"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr "Het systeem voldoet niet aan de minimum vereisten"
+
+msgid "Minimum:"
+msgstr "Minimum:"
+
+msgid "System:"
+msgstr "Systeem:"
+
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr "Voeg KlipperScreen.log toe als je om hulp vraagt.\n"
+
+msgid "Close"
+msgstr "Sluiten"
+
+msgid "DPMS has failed and has been disabled"
+msgstr ""
+
+msgid "Cannot connect to Moonraker"
+msgstr "Kan geen verbinding met Moonraker maken"
+
+msgid "Lost Connection to Moonraker"
+msgstr "Verbinding met Moonraker verbroken"
+
+msgid "Klipper has disconnected"
+msgstr "Klipper verbinding verbroken"
+
+msgid "Klipper has encountered an error."
+msgstr "Klipper heeft een fout ontdekt."
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr "Een FIRMWARE_RESTART kan het probleem oplossen."
+
+msgid "Please recompile and flash the micro-controller."
+msgstr "Hercompileer en flash de micro-controller aub."
+
+msgid "Klipper is attempting to start"
+msgstr "Klipper probeert te starten"
+
+msgid "Klipper has shutdown"
+msgstr "Klipper is afgesloten"
+
+msgid "No eligible macros:"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "macro's die beginnen met '_' zijn verborgen"
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "Macro's die 'rename_existing' gebruiken zijn verborgen"
+
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT zijn verborgen en kunnen worden gebruikt in "
+"extrude"
+
+msgid "Temperature too low to extrude"
+msgstr "Temperatuur te laag voor extrude"
+
+msgid "Retrying"
+msgstr "Probeert opnieuw"
+
+msgid "Moonraker: connected"
+msgstr "Moonraker: verbonden"
+
+#~ msgid "Error getting active spool"
+#~ msgstr "Error krijgen actieve spoel"
+
+#~ msgid "Max:"
+#~ msgstr "Max:"
+
+#~ msgid "Password saved"
+#~ msgstr "Wachtwoord opgeslagen"
 
 #~ msgid "Hide temp."
 #~ msgstr "Verberg temp."
@@ -1042,9 +1063,6 @@ msgstr[1] "seconden"
 
 #~ msgid "Print Time"
 #~ msgstr "Print Tijd"
-
-#~ msgid "Starting WiFi Association"
-#~ msgstr "WiFi Association starten"
 
 #~ msgid "Warning"
 #~ msgstr "Waarschuwing"

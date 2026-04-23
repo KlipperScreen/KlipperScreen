@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-26 12:31-0300\n"
+"POT-Creation-Date: 2026-04-23 14:29-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,85 +18,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#, python-format
-msgid "%s will be updated to version"
+msgid "Main Menu"
 msgstr ""
 
-msgid "(default)"
+msgid "Move"
 msgstr ""
 
-msgid "24 Hour Time"
+msgid "Temperature"
 msgstr ""
 
-msgid "A FIRMWARE_RESTART may fix the issue."
+msgid "Extrude"
 msgstr ""
 
-msgid "ADXL Not Configured"
+msgid "More"
 msgstr ""
 
-msgid "Abort"
+msgid "Print"
 msgstr ""
 
-msgid "Acceleration:"
-msgstr ""
-
-msgid "Accept"
-msgstr ""
-
-msgid "Add profile"
-msgstr ""
-
-msgid "All"
-msgstr ""
-
-msgid "Apply"
-msgstr ""
-
-#, python-format
-msgid "Apply %s%.3f offset to Endstop?"
-msgstr ""
-
-#, python-format
-msgid "Apply %s%.3f offset to Probe?"
-msgstr ""
-
-msgid "Archived"
-msgstr ""
-
-msgid "Are you sure do you want to exclude the object?"
-msgstr ""
-
-msgid "Are you sure you want to run Emergency Stop?"
-msgstr ""
-
-msgid "Are you sure you wish to cancel this print?"
-msgstr ""
-
-msgid "Are you sure you wish to disable motors?"
-msgstr ""
-
-msgid "Are you sure you wish to reboot the system?"
-msgstr ""
-
-msgid "Are you sure you wish to shutdown the system?"
-msgstr ""
-
-msgid "Asks for confirmation before stopping"
-msgstr ""
-
-msgid "Auto"
-msgstr ""
-
-msgid "Auto-calibrate"
-msgstr ""
-
-msgid "Auto-close notifications"
-msgstr ""
-
-msgid "Auto-open Extrude On Pause"
-msgstr ""
-
-msgid "Auto-scroll"
+msgid "Gcodes"
 msgstr ""
 
 msgid "Bed Level"
@@ -105,280 +45,55 @@ msgstr ""
 msgid "Bed Mesh"
 msgstr ""
 
-msgid "Both"
+msgid "Z Calibrate"
 msgstr ""
 
-msgid "Calibrate"
-msgstr ""
-
-msgid "Calibrated"
-msgstr ""
-
-msgid "Calibrating"
-msgstr ""
-
-msgid "Camera"
-msgstr ""
-
-msgid "Can't set above the maximum:"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "Cancel Print"
-msgstr ""
-
-msgid "Cancelled"
-msgstr ""
-
-msgid "Cancelling"
-msgstr ""
-
-msgid "Cannot connect to Moonraker"
-msgstr ""
-
-msgid "Changes how the interface looks"
-msgstr ""
-
-msgid "Changes how the time remaining is calculated"
-msgstr ""
-
-msgid "Channel"
-msgstr ""
-
-msgid "Check ADXL Wiring"
-msgstr ""
-
-msgid "Checking for updates, please wait..."
-msgstr ""
-
-msgid "Clear"
-msgstr ""
-
-msgid "Close"
-msgstr ""
-
-msgid "Close messages after a timeout"
-msgstr ""
-
-msgid "Complete"
-msgstr ""
-
-msgid "Confirm Emergency Stop"
-msgstr ""
-
-msgid "Connected"
-msgstr ""
-
-msgid "Connecting"
-msgstr ""
-
-#, python-format
-msgid "Connecting to %s"
-msgstr ""
-
-msgid "Connection failed"
-msgstr ""
-
-msgid "Console"
-msgstr ""
-
-msgid "Cooldown"
-msgstr ""
-
-msgid "Couldn't add network"
-msgstr ""
-
-msgid "Current"
-msgstr ""
-
-msgid "Current percentage and graph line"
-msgstr ""
-
-msgid "DPMS has failed to load and has been disabled"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Delete"
-msgstr ""
-
-msgid "Delete Directory?"
-msgstr ""
-
-msgid "Delete File?"
-msgstr ""
-
-msgid "Disable Motors"
-msgstr ""
-
-msgid "Disable for 12hs with am / pm"
-msgstr ""
-
-msgid "Disconnect"
-msgstr ""
-
-msgid "Distance (mm)"
-msgstr ""
-
-#, python-format
-msgid "Do you want to forget or disconnect %s?"
-msgstr ""
-
-#, python-format
-msgid "Do you want to recover %s?"
-msgstr ""
-
-msgid "Elapsed:"
-msgstr ""
-
-msgid "Emergency Stop"
-msgstr ""
-
-msgid "Enable screen power management"
-msgstr ""
-
-msgid "Error"
-msgstr ""
-
-msgid "Error clearing active spool"
-msgstr ""
-
-msgid "Error getting active spool"
-msgstr ""
-
-msgid "Error setting active spool"
-msgstr ""
-
-msgid "Error trying to fetch spools"
-msgstr ""
-
-msgid "Error: Couldn't get a position to probe"
-msgstr ""
-
-msgid "Estimated Time"
-msgstr ""
-
-msgid "Estimated Time Method"
-msgstr ""
-
-msgid "Example"
-msgstr ""
-
-msgid "Exclude Object"
-msgstr ""
-
-msgid "Extra Large"
-msgstr ""
-
-msgid "Extrude"
-msgstr ""
-
-msgid "Extruders"
-msgstr ""
-
-msgid "Extrusion +"
-msgstr ""
-
-msgid "Extrusion -"
-msgstr ""
-
-msgid "Failed to delete connection"
-msgstr ""
-
-msgid "Failed to initialize"
-msgstr ""
-
-msgid "Failed, adjust position first"
+msgid "Limits"
 msgstr ""
 
 msgid "Fan"
 msgstr ""
 
-msgid "Filament"
+msgid "Leds"
 msgstr ""
 
-msgid "Filament Used"
+msgid "Macros"
 msgstr ""
 
-msgid "Filament total:"
+msgid "Pins"
 msgstr ""
 
-msgid "Filament used:"
+msgid "Power"
 msgstr ""
 
-msgid "Filament:"
+msgid "Camera"
 msgstr ""
 
-msgid "File"
+msgid "Console"
 msgstr ""
 
-msgid "File:"
+msgid "Update"
 msgstr ""
 
-msgid "Filter"
+msgid "Input Shaper"
 msgstr ""
 
-msgid "Finding ADXL"
+msgid "Save Config"
+msgstr ""
+
+msgid "Network"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
+
+msgid "System"
 msgstr ""
 
 msgid "Fine Tuning"
 msgstr ""
 
-msgid "Finish"
-msgstr ""
-
-msgid "Firmware Restart"
-msgstr ""
-
-msgid "Flow:"
-msgstr ""
-
-msgid "Flowrate:"
-msgstr ""
-
-msgid "Font Size"
-msgstr ""
-
-msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
-
-msgid "Forget"
-msgstr ""
-
-msgid "Full Update"
-msgstr ""
-
-msgid "Gcodes"
-msgstr ""
-
-msgid "Getting IP address"
-msgstr ""
-
-msgid "Go Back"
-msgstr ""
-
-msgid "Height:"
-msgstr ""
-
-msgid "Hide"
-msgstr ""
-
-msgid "Hide sensors in Temp."
-msgstr ""
-
-msgid "Home"
-msgstr ""
-
-msgid "Home All"
-msgstr ""
-
 msgid "Home X"
-msgstr ""
-
-msgid "Home XY"
 msgstr ""
 
 msgid "Home Y"
@@ -387,43 +102,145 @@ msgstr ""
 msgid "Home Z"
 msgstr ""
 
-msgid "Host"
+msgid "Home All"
 msgstr ""
 
-msgid "Hostname"
+msgid "Home XY"
 msgstr ""
 
-msgid "ID"
+msgid "Quad Gantry Level"
+msgstr ""
+
+msgid "Z Tilt"
+msgstr ""
+
+msgid "Print Control"
+msgstr ""
+
+msgid "Lock"
+msgstr ""
+
+msgid "Menu"
 msgstr ""
 
 msgid "Icon Theme"
 msgstr ""
 
-msgid "Initializing printer..."
+msgid "Changes how the interface looks"
 msgstr ""
 
-msgid "Initiate a PID calibration for:"
+msgid "(default)"
 msgstr ""
 
-msgid "Input Shaper"
+msgid "Estimated Time Method"
 msgstr ""
 
-msgid "Insufficient privileges"
+msgid "Changes how the time remaining is calculated"
 msgstr ""
 
-msgid "Interface"
+msgid "Auto"
 msgstr ""
 
-msgid "Invalid"
+msgid "File"
 msgstr ""
 
-msgid "Invalid password"
+msgid "Filament Used"
 msgstr ""
 
-msgid "Invalid temperature"
+msgid "Slicer"
+msgstr ""
+
+msgid "Screen Power Off Time"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
+msgid "Never"
+msgstr ""
+
+msgid "Printing"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr ""
+
+msgid "24 Hour Time"
+msgstr ""
+
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
+msgid "Macro shortcut on sidebar"
+msgstr ""
+
+msgid "Font Size"
 msgstr ""
 
 msgid "Inversely affects the icon size"
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Medium"
+msgstr ""
+
+msgid "Large"
+msgstr ""
+
+msgid "Extra Large"
+msgstr ""
+
+msgid "Maximum"
+msgstr ""
+
+msgid "Confirm Emergency Stop"
+msgstr ""
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
+
+msgid "Hide sensors in Temp."
+msgstr ""
+
+msgid "Show only devices that are able to be set"
+msgstr ""
+
+msgid "Screen DPMS"
+msgstr ""
+
+msgid "Enable screen power management"
+msgstr ""
+
+msgid "Not all screens support this"
+msgstr ""
+
+msgid "Auto-close notifications"
+msgstr ""
+
+msgid "Close messages after a timeout"
+msgstr ""
+
+msgid "Show Heater Power"
+msgstr ""
+
+msgid "Current percentage and graph line"
+msgstr ""
+
+msgid "Show Scrollbars Buttons"
+msgstr ""
+
+msgid "Useful for un-responsive touchscreens"
+msgstr ""
+
+msgid "Auto-open Extrude On Pause"
+msgstr ""
+
+msgid "Show cursor"
+msgstr ""
+
+msgid "For mouse control or to verify touchscreen accuracy"
 msgstr ""
 
 msgid "Invert X"
@@ -435,149 +252,63 @@ msgstr ""
 msgid "Invert Z"
 msgstr ""
 
-msgid "It may take more than 5 minutes depending on the heater power."
+msgid "XY Move Speed (mm/s)"
 msgstr ""
 
-msgid "It's possible that the configuration is not correct"
-msgstr ""
-
-msgid "Job Status"
-msgstr ""
-
-msgid "Klipper Restart"
-msgstr ""
-
-msgid "Klipper has disconnected"
-msgstr ""
-
-msgid "Klipper has encountered an error."
-msgstr ""
-
-msgid "Klipper has shutdown"
-msgstr ""
-
-msgid "Klipper is attempting to start"
-msgstr ""
-
-msgid "Klipper will reboot"
-msgstr ""
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgid "Z Move Speed (mm/s)"
 msgstr ""
 
 msgid "Language"
 msgstr ""
 
-msgid "Large"
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Are you sure you want to run Emergency Stop?"
 msgstr ""
 
-msgid "Last Duration"
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Network not found"
 msgstr ""
 
-msgid "Last Used"
+msgid "Unknown security type"
 msgstr ""
 
-msgid "Layer Height"
+msgid "Insufficient privileges"
 msgstr ""
 
-msgid "Layer:"
+msgid "Invalid password"
 msgstr ""
 
-msgid "Leds"
+msgid "Couldn't add network"
 msgstr ""
 
-msgid "Left:"
+msgid "Failed to delete connection"
 msgstr ""
 
-msgid "Limits"
+msgid "Starting WiFi Association"
 msgstr ""
 
-msgid "Load"
+msgid "Connecting"
 msgstr ""
 
-msgid "Loading..."
-msgstr ""
-
-msgid "Lock"
-msgstr ""
-
-msgid "Lost Connection to Moonraker"
-msgstr ""
-
-msgid "Lower Nozzle"
-msgstr ""
-
-msgid "Macro shortcut on sidebar"
-msgstr ""
-
-msgid "Macros"
-msgstr ""
-
-msgid "Main Menu"
-msgstr ""
-
-msgid "Material"
-msgstr ""
-
-msgid "Max"
-msgstr ""
-
-msgid "Max Acceleration"
-msgstr ""
-
-msgid "Max Velocity"
-msgstr ""
-
-msgid "Max:"
-msgstr ""
-
-msgid "Maximum"
-msgstr ""
-
-msgid "Measure Both"
-msgstr ""
-
-msgid "Measure X"
-msgstr ""
-
-msgid "Measure Y"
-msgstr ""
-
-msgid "Medium"
-msgstr ""
-
-msgid "Memory"
-msgstr ""
-
-msgid "Menu"
-msgstr ""
-
-msgid "Minimum Cruise Ratio"
-msgstr ""
-
-msgid "Minimum:"
-msgstr ""
-
-msgid "Modified"
-msgstr ""
-
-msgid "Moonraker: connected"
-msgstr ""
-
-msgid "More"
-msgstr ""
-
-msgid "Move"
-msgstr ""
-
-msgid "Move Distance (mm)"
-msgstr ""
-
-msgid "Name"
-msgstr ""
-
-msgid "Network"
+msgid "Getting IP address"
 msgstr ""
 
 msgid "Network connected"
@@ -586,329 +317,19 @@ msgstr ""
 msgid "Network disconnected"
 msgstr ""
 
-msgid "Network not found"
-msgstr ""
-
-msgid "Never"
-msgstr ""
-
-msgid "New"
-msgstr ""
-
-msgid "No elegible macros:"
-msgstr ""
-
-msgid "No info available"
+msgid "Connection failed"
 msgstr ""
 
 msgid "No mesh has been loaded"
 msgstr ""
 
-msgid "No wireless interface has been found"
+msgid "Calibrate"
 msgstr ""
 
-msgid "Not all screens support this"
-msgstr ""
-
-msgid "Not working or not configured"
-msgstr ""
-
-msgid "Nothing selected"
-msgstr ""
-
-msgid "Notification log empty"
-msgstr ""
-
-msgid "Notifications"
-msgstr ""
-
-msgid "Nozzle diameter"
-msgstr ""
-
-msgid "Only for the move panel"
-msgstr ""
-
-#, python-format
-msgid "Outdated by %d"
-msgstr ""
-
-msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Part Fan"
+msgid "Invalid temperature"
 msgstr ""
 
 msgid "Password"
-msgstr ""
-
-msgid "Password saved"
-msgstr ""
-
-msgid "Pause"
-msgstr ""
-
-msgid "Paused"
-msgstr ""
-
-msgid "Perform a full upgrade?"
-msgstr ""
-
-msgid "Pins"
-msgstr ""
-
-msgid "Please recompile and flash the micro-controller."
-msgstr ""
-
-msgid "Please wait"
-msgstr ""
-
-msgid "Power"
-msgstr ""
-
-msgid "Power On Printer"
-msgstr ""
-
-msgid "Pressure Advance"
-msgstr ""
-
-msgid "Pressure Advance:"
-msgstr ""
-
-msgid "Pressure advance"
-msgstr ""
-
-msgid "Print"
-msgstr ""
-
-msgid "Print Control"
-msgstr ""
-
-msgid "Printer"
-msgstr ""
-
-msgid "Printer Connections"
-msgstr ""
-
-msgid "Printer Select"
-msgstr ""
-
-msgid "Printing"
-msgstr ""
-
-msgid "Probe Offset"
-msgstr ""
-
-msgid "Profile Name:"
-msgstr ""
-
-msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
-
-msgid "Quad Gantry Level"
-msgstr ""
-
-msgid "Raise Nozzle"
-msgstr ""
-
-msgid "Recover"
-msgstr ""
-
-msgid "Recover Hard"
-msgstr ""
-
-msgid "Recover Soft"
-msgstr ""
-
-msgid "Reference"
-msgstr ""
-
-msgid "Refresh"
-msgstr ""
-
-msgid "Remove network"
-msgstr ""
-
-msgid "Rename/Move:"
-msgstr ""
-
-msgid "Restart"
-msgstr ""
-
-msgid "Resume"
-msgstr ""
-
-msgid "Retract"
-msgstr ""
-
-msgid "Retraction"
-msgstr ""
-
-msgid "Retraction Length"
-msgstr ""
-
-msgid "Retraction Speed"
-msgstr ""
-
-msgid "Retry"
-msgstr ""
-
-msgid "Retrying"
-msgstr ""
-
-msgid "Rotation invalid"
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
-msgid "Save Config"
-msgstr ""
-
-msgid "Save Z"
-msgstr ""
-
-msgid "Save configuration?"
-msgstr ""
-
-msgid "Saved"
-msgstr ""
-
-#, python-format
-msgid "Saved offset: %s"
-msgstr ""
-
-msgid "Screen DPMS"
-msgstr ""
-
-msgid "Screen Power Off Time"
-msgstr ""
-
-msgid "Screws Adjust"
-msgstr ""
-
-msgid "Screws not used:"
-msgstr ""
-
-msgid "Send"
-msgstr ""
-
-msgid "Set Temp"
-msgstr ""
-
-msgid "Settings"
-msgstr ""
-
-msgid "Show"
-msgstr ""
-
-msgid "Show Heater Power"
-msgstr ""
-
-msgid "Show Scrollbars Buttons"
-msgstr ""
-
-msgid "Show cursor"
-msgstr ""
-
-msgid "Show only devices that are able to be set"
-msgstr ""
-
-msgid "Shutdown"
-msgstr ""
-
-msgid "Size"
-msgstr ""
-
-msgid "Slicer"
-msgstr ""
-
-msgid "Slicer:"
-msgstr ""
-
-msgid "Small"
-msgstr ""
-
-msgid "Smooth time"
-msgstr ""
-
-msgid "Speed (mm/s)"
-msgstr ""
-
-msgid "Speed +"
-msgstr ""
-
-msgid "Speed -"
-msgstr ""
-
-msgid "Speed:"
-msgstr ""
-
-msgid "Square Corner Velocity"
-msgstr ""
-
-msgid "Standby"
-msgstr ""
-
-msgid "Start"
-msgstr ""
-
-msgid "Starting recovery for"
-msgstr ""
-
-msgid "Starting update for"
-msgstr ""
-
-msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr ""
-
-msgid "System"
-msgstr ""
-
-msgid "System Restart"
-msgstr ""
-
-msgid "System Shutdown"
-msgstr ""
-
-msgid "System:"
-msgstr ""
-
-msgid "Temp (°C)"
-msgstr ""
-
-msgid "Temperature"
-msgstr ""
-
-msgid "Temperature too low to extrude"
-msgstr ""
-
-msgid "The system doesn't meet the minimum requirement"
-msgstr ""
-
-msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr ""
-
-msgid "This will affect screw positions and mesh graph"
-msgstr ""
-
-msgid "Timeout for screen black-out or power-off"
-msgstr ""
-
-msgid "Timeout for screen black-out or power-off during printing"
-msgstr ""
-
-msgid "Total:"
-msgstr ""
-
-msgid "Unknown Heater"
-msgstr ""
-
-msgid "Unknown security type"
-msgstr ""
-
-msgid "Unload"
 msgstr ""
 
 msgid "Unlock"
@@ -917,84 +338,199 @@ msgstr ""
 msgid "Unlock failed"
 msgstr ""
 
-msgid "Unretract Extra Length"
+msgid "Are you sure do you want to exclude the object?"
 msgstr ""
 
-msgid "Unretract Speed"
-msgstr ""
-
-msgid "Up To Date"
-msgstr ""
-
-msgid "Update"
+msgid "Finish"
 msgstr ""
 
 msgid "Updating"
 msgstr ""
 
-msgid "Useful for un-responsive touchscreens"
+msgid "Disable Motors"
 msgstr ""
 
-msgid "User"
+msgid "Screws Adjust"
+msgstr ""
+
+msgid "Rotation invalid"
+msgstr ""
+
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "It's possible that the configuration is not correct"
+msgstr ""
+
+msgid "Screws not used:"
+msgstr ""
+
+msgid "Reference"
+msgstr ""
+
+msgid "Add profile"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
+
+msgid "Profile Name:"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Calibrating"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr ""
 
-msgid "Working"
+msgid "Auto-scroll"
 msgstr ""
 
-msgid "XY Move Speed (mm/s)"
+msgid "Send"
 msgstr ""
 
-msgid "XY Speed (mm/s)"
+msgid "Example"
 msgstr ""
 
-msgid "Z Calibrate"
+msgid "Exclude Object"
 msgstr ""
 
-msgid "Z Move Speed (mm/s)"
+msgid "Are you sure you wish to cancel this print?"
 msgstr ""
 
-msgid "Z Speed (mm/s)"
+msgid "Load"
 msgstr ""
 
-msgid "Z Tilt"
+msgid "Unload"
 msgstr ""
 
-msgid "Z offset:"
+msgid "Retract"
 msgstr ""
 
-msgid "commit"
-msgid_plural "commits"
-msgstr[0] ""
-msgstr[1] ""
+msgid "Pressure Advance"
+msgstr ""
 
-msgid "day"
-msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgid "Retraction"
+msgstr ""
+
+msgid "Extruders"
+msgstr ""
+
+msgid "Distance (mm)"
+msgstr ""
+
+msgid "Speed (mm/s)"
+msgstr ""
+
+msgid "Part Fan"
+msgstr ""
+
+msgid "Max"
+msgstr ""
+
+msgid "mm"
+msgstr ""
+
+msgid "Speed +"
+msgstr ""
+
+msgid "Speed -"
+msgstr ""
+
+msgid "Extrusion +"
+msgstr ""
+
+msgid "Extrusion -"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "Delete File?"
+msgstr ""
+
+msgid "Delete Directory?"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Modified"
+msgstr ""
+
+msgid "Layer Height"
+msgstr ""
+
+msgid "Filament"
+msgstr ""
+
+msgid "Estimated Time"
+msgstr ""
 
 msgid "g"
 msgstr ""
 
-msgid "hour"
-msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "macros that use 'rename_existing' are hidden"
+msgid "Nozzle diameter"
 msgstr ""
 
-msgid "macros with a name starting with '_' are hidden"
+msgid "Last Duration"
 msgstr ""
 
-msgid "minute"
-msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgid "Rename/Move:"
+msgstr ""
 
-msgid "mm"
+msgid "Finding ADXL"
+msgstr ""
+
+msgid "Measure X"
+msgstr ""
+
+msgid "Measure Y"
+msgstr ""
+
+msgid "Measure Both"
+msgstr ""
+
+msgid "Klipper will reboot"
+msgstr ""
+
+msgid "Save configuration?"
+msgstr ""
+
+msgid "Check ADXL Wiring"
+msgstr ""
+
+msgid "ADXL Not Configured"
+msgstr ""
+
+msgid "Auto-calibrate"
+msgstr ""
+
+msgid "Calibrated"
+msgstr ""
+
+msgid "Job Status"
 msgstr ""
 
 msgid "mm/s"
@@ -1006,10 +542,486 @@ msgstr ""
 msgid "mm³/s"
 msgstr ""
 
+msgid "Left:"
+msgstr ""
+
+msgid "Elapsed:"
+msgstr ""
+
+msgid "Total:"
+msgstr ""
+
+msgid "Slicer:"
+msgstr ""
+
+msgid "File:"
+msgstr ""
+
+msgid "Filament:"
+msgstr ""
+
+msgid "Speed:"
+msgstr ""
+
+msgid "Acceleration:"
+msgstr ""
+
+msgid "Flow:"
+msgstr ""
+
+msgid "Z offset:"
+msgstr ""
+
+msgid "Filament used:"
+msgstr ""
+
+msgid "Filament total:"
+msgstr ""
+
+msgid "Pressure Advance:"
+msgstr ""
+
+msgid "Flowrate:"
+msgstr ""
+
+msgid "Height:"
+msgstr ""
+
+msgid "Layer:"
+msgstr ""
+
+msgid "Pause"
+msgstr ""
+
+msgid "Restart"
+msgstr ""
+
+msgid "Resume"
+msgstr ""
+
+msgid "Save Z"
+msgstr ""
+
+#, python-brace-format
+msgid "Apply {sign}{offset:.3f} offset to Probe?"
+msgstr ""
+
+#, python-brace-format
+msgid "Apply {sign}{offset:.3f} offset to Endstop?"
+msgstr ""
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "Cancel Print"
+msgstr ""
+
+msgid "Go Back"
+msgstr ""
+
+msgid "Working"
+msgstr ""
+
+msgid "Complete"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Cancelling"
+msgstr ""
+
+msgid "Cancelled"
+msgstr ""
+
+msgid "Paused"
+msgstr ""
+
+msgid "Standby"
+msgstr ""
+
+msgid "Max Acceleration"
+msgstr ""
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
+
+msgid "Max Velocity"
+msgstr ""
+
+msgid "Square Corner Velocity"
+msgstr ""
+
+msgid "Unknown Heater"
+msgstr ""
+
+msgid "Can't set above the maximum:"
+msgstr ""
+
+msgid "Initiate a PID calibration for:"
+msgstr ""
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
+
+msgid "Temp (°C)"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Are you sure you wish to disable motors?"
+msgstr ""
+
+msgid "Move Distance (mm)"
+msgstr ""
+
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
+
+msgid "XY Speed (mm/s)"
+msgstr ""
+
+msgid "Only for the move panel"
+msgstr ""
+
+msgid "Z Speed (mm/s)"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
+msgid "Interface"
+msgstr ""
+
+msgid "No wireless interface has been found"
+msgstr ""
+
+msgid "Connected"
+msgstr ""
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Forget"
+msgstr ""
+
+msgid "Disconnect"
+msgstr ""
+
+msgid "Remove network"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+#, python-format
+msgid "Connecting to %s"
+msgstr ""
+
+msgid "Channel"
+msgstr ""
+
+msgid "Hostname"
+msgstr ""
+
+msgid "Notification log empty"
+msgstr ""
+
+msgid "Pressure advance"
+msgstr ""
+
+msgid "Current"
+msgstr ""
+
+msgid "Smooth time"
+msgstr ""
+
 msgid "s"
 msgstr ""
 
-msgid "second"
-msgid_plural "seconds"
+msgid "Printer Select"
+msgstr ""
+
+msgid "Please wait"
+msgstr ""
+
+msgid "Retraction Length"
+msgstr ""
+
+msgid "Retraction Speed"
+msgstr ""
+
+msgid "Unretract Extra Length"
+msgstr ""
+
+msgid "Unretract Speed"
+msgstr ""
+
+msgid "Printer Connections"
+msgstr ""
+
+msgid "Shutdown"
+msgstr ""
+
+msgid "Emergency Stop"
+msgstr ""
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr ""
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+msgid "Host"
+msgstr ""
+
+msgid "Printer"
+msgstr ""
+
+msgid "Both"
+msgstr ""
+
+msgid "Initializing printer..."
+msgstr ""
+
+msgid "Klipper Restart"
+msgstr ""
+
+msgid "Firmware Restart"
+msgstr ""
+
+msgid "System Restart"
+msgstr ""
+
+msgid "System Shutdown"
+msgstr ""
+
+msgid "Retry"
+msgstr ""
+
+msgid "Power On Printer"
+msgstr ""
+
+msgid "ID"
+msgstr ""
+
+msgid "Last Used"
+msgstr ""
+
+msgid "Archived"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "Material"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Last used"
+msgstr ""
+
+msgid "Remaining weight"
+msgstr ""
+
+msgid "Remaining length"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "Error clearing active spool"
+msgstr ""
+
+msgid "Error setting active spool"
+msgstr ""
+
+msgid "No info available"
+msgstr ""
+
+msgid "IP Address"
+msgstr ""
+
+msgid "Memory"
+msgstr ""
+
+msgid "Cooldown"
+msgstr ""
+
+msgid "Nothing selected"
+msgstr ""
+
+msgid "Set Temp"
+msgstr ""
+
+msgid "Show"
+msgstr ""
+
+msgid "Hide"
+msgstr ""
+
+msgid "Full Update"
+msgstr ""
+
+msgid "Refresh"
+msgstr ""
+
+msgid "Checking for updates, please wait..."
+msgstr ""
+
+msgid "Not working or not configured"
+msgstr ""
+
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Perform a full upgrade?"
+msgstr ""
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr ""
+
+msgid "Recover Hard"
+msgstr ""
+
+msgid "Recover Soft"
+msgstr ""
+
+msgid "Recover"
+msgstr ""
+
+#, python-format
+msgid "Outdated by %d"
+msgstr ""
+
+msgid "commit"
+msgid_plural "commits"
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr ""
+
+msgid "Starting recovery for"
+msgstr ""
+
+msgid "Starting update for"
+msgstr ""
+
+msgid "Invalid"
+msgstr ""
+
+msgid "Up To Date"
+msgstr ""
+
+msgid "Probe Offset"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
+msgid "Raise Nozzle"
+msgstr ""
+
+msgid "Lower Nozzle"
+msgstr ""
+
+msgid "Abort"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
+msgstr ""
+
+msgid "Failed, adjust position first"
+msgstr ""
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr ""
+
+msgid "Minimum:"
+msgstr ""
+
+msgid "System:"
+msgstr ""
+
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "DPMS has failed and has been disabled"
+msgstr ""
+
+msgid "Cannot connect to Moonraker"
+msgstr ""
+
+msgid "Lost Connection to Moonraker"
+msgstr ""
+
+msgid "Klipper has disconnected"
+msgstr ""
+
+msgid "Klipper has encountered an error."
+msgstr ""
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr ""
+
+msgid "Please recompile and flash the micro-controller."
+msgstr ""
+
+msgid "Klipper is attempting to start"
+msgstr ""
+
+msgid "Klipper has shutdown"
+msgstr ""
+
+msgid "No eligible macros:"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr ""
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr ""
+
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
+
+msgid "Temperature too low to extrude"
+msgstr ""
+
+msgid "Retrying"
+msgstr ""
+
+msgid "Moonraker: connected"
+msgstr ""

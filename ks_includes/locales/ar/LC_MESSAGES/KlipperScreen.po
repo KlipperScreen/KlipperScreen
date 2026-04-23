@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-26 12:31-0300\n"
+"POT-Creation-Date: 2026-04-23 14:29-0300\n"
 "PO-Revision-Date: 2026-01-10 23:01+0000\n"
 "Last-Translator: Joe <alawadhi3000@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/klipperscreen/"
@@ -20,368 +20,83 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Weblate 5.15.1\n"
 
-#, python-format
-msgid "%s will be updated to version"
-msgstr "سيتم تحديثه إلى الإصدار%s"
+msgid "Main Menu"
+msgstr "القائمة الرئيسية"
 
-msgid "(default)"
-msgstr "(افتراضي)"
+msgid "Move"
+msgstr "تحرك"
 
-msgid "24 Hour Time"
-msgstr "وقت 24 ساعة"
-
-msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr "إعادة تشغيل البرنامج الثابت قد يحل المشكلة."
-
-msgid "ADXL Not Configured"
-msgstr "مقياسات السرعة ADXL تحتاج إلى تثبيت"
-
-msgid "Abort"
-msgstr "إجهاض"
-
-msgid "Acceleration:"
-msgstr "التسارع:"
-
-msgid "Accept"
-msgstr "قبول"
-
-msgid "Add profile"
-msgstr "إضافة نمط"
-
-msgid "All"
-msgstr "الكل"
-
-msgid "Apply"
-msgstr "تطبيق"
-
-#, python-format
-msgid "Apply %s%.3f offset to Endstop?"
-msgstr "طبق %s%.3f تعديل مفتاح التوقف?"
-
-#, python-format
-msgid "Apply %s%.3f offset to Probe?"
-msgstr "طبق %s%.3f التعديل على المسبار؟"
-
-msgid "Archived"
-msgstr "المحفوظات"
-
-msgid "Are you sure do you want to exclude the object?"
-msgstr "هل أنت متأكد من أنك تريد استبعاد الجسم؟?"
-
-msgid "Are you sure you want to run Emergency Stop?"
-msgstr "هل أنت متأكد من أنك تريد تشغيل التوقف الطارء؟?"
-
-msgid "Are you sure you wish to cancel this print?"
-msgstr "هل أنت متأكد أنك تريد إلغاء هذه الطباعة؟?"
-
-msgid "Are you sure you wish to disable motors?"
-msgstr "هل أنت متأكد من أنك ترغب في تعطيل المحركات الخطوية ؟?"
-
-msgid "Are you sure you wish to reboot the system?"
-msgstr "هل أنت متأكد أنك تريد إعادة تشغيل النظام؟?"
-
-msgid "Are you sure you wish to shutdown the system?"
-msgstr "هل أنت متأكد أنك تريد إغلاق النظام؟?"
-
-msgid "Asks for confirmation before stopping"
-msgstr "طلب تأكيد قبل التوقف"
-
-msgid "Auto"
-msgstr "تلقائي"
-
-msgid "Auto-calibrate"
-msgstr "معايرة تلقائية"
-
-msgid "Auto-close notifications"
-msgstr "إغلاق الإشعار التلقائي"
-
-msgid "Auto-open Extrude On Pause"
-msgstr "بثق الفتح التلقائي عند الإيقاف المؤقت"
-
-msgid "Auto-scroll"
-msgstr "التمرير التلقائي"
-
-msgid "Bed Level"
-msgstr "وزن مستوى سطح الطباعة"
-
-msgid "Bed Mesh"
-msgstr "شبكة سطح الطباعة"
-
-msgid "Both"
-msgstr "كلاهما"
-
-msgid "Calibrate"
-msgstr "معايرة"
-
-msgid "Calibrated"
-msgstr "مضبط"
-
-msgid "Calibrating"
-msgstr "يضبط"
-
-msgid "Camera"
-msgstr "آلة تصوير"
-
-msgid "Can't set above the maximum:"
-msgstr "لا يمكن تحديده فوق الحد الأقصى:"
-
-msgid "Cancel"
-msgstr "إلغاء"
-
-msgid "Cancel Print"
-msgstr "إلغاء الطباعة"
-
-msgid "Cancelled"
-msgstr "ألغيت"
-
-msgid "Cancelling"
-msgstr "يتم إلغاء"
-
-msgid "Cannot connect to Moonraker"
-msgstr "لا يمكن الاتصال ب Moonraker"
-
-msgid "Changes how the interface looks"
-msgstr "تغير كيف تبدو الوصلة البينية"
-
-msgid "Changes how the time remaining is calculated"
-msgstr "تغيير طريقة حساب الوقت المتبقي"
-
-msgid "Channel"
-msgstr "القناة"
-
-msgid "Check ADXL Wiring"
-msgstr "تحقق من ADXL الأسلاك"
-
-msgid "Checking for updates, please wait..."
-msgstr "التحقق من التحديثات، يرجى الانتظار..."
-
-msgid "Clear"
-msgstr "ازال"
-
-msgid "Close"
-msgstr "إغلاق"
-
-msgid "Close messages after a timeout"
-msgstr "رسائل مُغلقة بعد انتهاء الوقت"
-
-msgid "Complete"
-msgstr "اكتمل"
-
-msgid "Confirm Emergency Stop"
-msgstr "تأكيد التوقف الطارئ"
-
-msgid "Connected"
-msgstr "متصل"
-
-msgid "Connecting"
-msgstr "توصيل"
-
-#, python-format
-msgid "Connecting to %s"
-msgstr "التواصل مع %s"
-
-msgid "Connection failed"
-msgstr "فشل الاتصال"
-
-msgid "Console"
-msgstr "لوحة التحكم"
-
-msgid "Cooldown"
-msgstr "خفض الحرارة"
-
-msgid "Couldn't add network"
-msgstr "لا يمكن إضافة شبكة"
-
-msgid "Current"
-msgstr "الحالي"
-
-msgid "Current percentage and graph line"
-msgstr "النسبة المئوية الحالية وخط الرسم البياني"
-
-msgid "DPMS has failed to load and has been disabled"
-msgstr "نظام إدارة الطاقة الديناميكي فشل في التحميل وتم تعطيله"
-
-msgid "Date"
-msgstr "التاريخ"
-
-msgid "Delete"
-msgstr "حذف"
-
-msgid "Delete Directory?"
-msgstr "حذف الدليل؟"
-
-msgid "Delete File?"
-msgstr "حذف الملف؟"
-
-msgid "Disable Motors"
-msgstr "تعطيل المحركات"
-
-msgid "Disable for 12hs with am / pm"
-msgstr "تعطيل لمدة 12 ساعة مع صباحا / مساء"
-
-msgid "Disconnect"
-msgstr "فصل"
-
-msgid "Distance (mm)"
-msgstr "المسافة (م م)"
-
-#, python-format
-msgid "Do you want to forget or disconnect %s?"
-msgstr "هل تريد أن تنسى أو تفصل %s؟"
-
-#, python-format
-msgid "Do you want to recover %s?"
-msgstr "هل تريد استعادة %s؟"
-
-msgid "Elapsed:"
-msgstr "الوقت المنقضي:"
-
-msgid "Emergency Stop"
-msgstr "توقف طارئ"
-
-msgid "Enable screen power management"
-msgstr "تمكين إدارة طاقة الشاشة"
-
-msgid "Error"
-msgstr "خطاء"
-
-msgid "Error clearing active spool"
-msgstr "خطأ في مسح تفعيل البكرة"
-
-msgid "Error getting active spool"
-msgstr "خطأ في الحصول على تفعيل البكرة"
-
-msgid "Error setting active spool"
-msgstr "خطأ في اعداد البكرة"
-
-msgid "Error trying to fetch spools"
-msgstr "خطأ في محاولت جلب البكرة"
-
-msgid "Error: Couldn't get a position to probe"
-msgstr "خطأ: تعذر لعدم الحصول على مستوي المسبار"
-
-msgid "Estimated Time"
-msgstr "الوقت التقديري"
-
-msgid "Estimated Time Method"
-msgstr "طريقة الوقت المقدر"
-
-msgid "Example"
-msgstr "مثال"
-
-msgid "Exclude Object"
-msgstr "استبعاد الجسم"
-
-msgid "Extra Large"
-msgstr "كبير جدا"
+msgid "Temperature"
+msgstr "درجة الحرارة"
 
 msgid "Extrude"
 msgstr "ابثق"
 
-msgid "Extruders"
-msgstr "البثاقات"
+msgid "More"
+msgstr "أكثر"
 
-msgid "Extrusion +"
-msgstr "إخراج انبثاق +"
-
-msgid "Extrusion -"
-msgstr "إخراج انبثاق -"
-
-msgid "Failed to delete connection"
-msgstr "فشل في حذف الاتصال"
-
-msgid "Failed to initialize"
-msgstr "فشل في التهيئة"
-
-msgid "Failed, adjust position first"
-msgstr "فشل، اضبط الموضع أولا"
-
-msgid "Fan"
-msgstr "المروحة"
-
-msgid "Filament"
-msgstr "الخيط"
-
-msgid "Filament Used"
-msgstr "الخيوط المستخدمة"
-
-msgid "Filament total:"
-msgstr "مجموع الخيوط:"
-
-msgid "Filament used:"
-msgstr "الخيوط المستخدمة:"
-
-msgid "Filament:"
-msgstr "الخيط:"
-
-msgid "File"
-msgstr "ملف"
-
-msgid "File:"
-msgstr "الملف:"
-
-msgid "Filter"
-msgstr "فلتر"
-
-msgid "Finding ADXL"
-msgstr "البحث عن ADXL"
-
-msgid "Fine Tuning"
-msgstr "الضبط الدقيق"
-
-msgid "Finish"
-msgstr "انتهى"
-
-msgid "Firmware Restart"
-msgstr "إعادة تشغيل البرامج"
-
-msgid "Flow:"
-msgstr "التدفق:"
-
-msgid "Flowrate:"
-msgstr "معدل التدفق:"
-
-msgid "Font Size"
-msgstr "حجم الخط"
-
-msgid "For mouse control or to verify touchscreen accuracy"
-msgstr "للتحكم بالفأرة أو للتأكد من دقة شاشة اللمس"
-
-msgid "Forget"
-msgstr "نسي"
-
-msgid "Full Update"
-msgstr "تحديث كامل"
+msgid "Print"
+msgstr "اطبع"
 
 msgid "Gcodes"
 msgstr "كود ج Gcodes"
 
-msgid "Getting IP address"
-msgstr "الحصول على عنوان IP"
+msgid "Bed Level"
+msgstr "مستوى السرير"
 
-msgid "Go Back"
-msgstr "ارجع"
+msgid "Bed Mesh"
+msgstr "شبكة السرير"
 
-msgid "Height:"
-msgstr "الارتفاع:"
+msgid "Z Calibrate"
+msgstr "معايرة Z"
 
-msgid "Hide"
-msgstr "إخفاء"
+msgid "Limits"
+msgstr "حدود"
 
-msgid "Hide sensors in Temp."
-msgstr "إخفاء جهاز استشعار درجة الحرارة."
+msgid "Fan"
+msgstr "المروحة"
 
-msgid "Home"
-msgstr "المنزل"
+msgid "Leds"
+msgstr "المصابيح"
 
-msgid "Home All"
-msgstr "منزل الكل"
+msgid "Macros"
+msgstr "ماكرو"
+
+msgid "Pins"
+msgstr "دبابيس"
+
+msgid "Power"
+msgstr "القوة"
+
+msgid "Camera"
+msgstr "آلة تصوير"
+
+msgid "Console"
+msgstr "لوحة التحكم"
+
+msgid "Update"
+msgstr "حدث"
+
+msgid "Input Shaper"
+msgstr "مشكل الإدخال"
+
+msgid "Save Config"
+msgstr "حفظ التكوين"
+
+msgid "Network"
+msgstr "الشبكة"
+
+msgid "Notifications"
+msgstr "إشعارات"
+
+msgid "System"
+msgstr "النظام"
+
+msgid "Fine Tuning"
+msgstr "الضبط الدقيق"
 
 msgid "Home X"
 msgstr "منزل X"
-
-msgid "Home XY"
-msgstr "منزل XY"
 
 msgid "Home Y"
 msgstr "منزل Y"
@@ -389,44 +104,146 @@ msgstr "منزل Y"
 msgid "Home Z"
 msgstr "منزل Z"
 
-msgid "Host"
-msgstr "مضيف"
+msgid "Home All"
+msgstr "منزل الكل"
 
-msgid "Hostname"
-msgstr "اسم المضيف"
+msgid "Home XY"
+msgstr "منزل XY"
 
-msgid "ID"
-msgstr "الهوية"
+msgid "Quad Gantry Level"
+msgstr "مستوى القنطرية الرباعية"
+
+msgid "Z Tilt"
+msgstr "تعديل ميل Z"
+
+msgid "Print Control"
+msgstr "التحكم في الطباعة"
+
+msgid "Lock"
+msgstr "قفل"
+
+msgid "Menu"
+msgstr "القائِمة"
 
 msgid "Icon Theme"
 msgstr "موضوع الأيقونة"
 
-msgid "Initializing printer..."
-msgstr "تهيئة الطابعة..."
+msgid "Changes how the interface looks"
+msgstr "يغير مظهر الواجهة"
 
-msgid "Initiate a PID calibration for:"
-msgstr "بدء معايرة PID:"
+msgid "(default)"
+msgstr "(افتراضي)"
 
-msgid "Input Shaper"
-msgstr "مشكل الإدخال"
+msgid "Estimated Time Method"
+msgstr "طريقة الوقت المقدر"
 
-msgid "Insufficient privileges"
-msgstr "امتيازات غير كافية"
+msgid "Changes how the time remaining is calculated"
+msgstr "تغيير طريقة حساب الوقت المتبقي"
 
-msgid "Interface"
-msgstr "واجهه المستخدم"
+msgid "Auto"
+msgstr "تلقائي"
 
-msgid "Invalid"
-msgstr "باطل"
+msgid "File"
+msgstr "ملف"
 
-msgid "Invalid password"
-msgstr "كلمة سر غير صالحة"
+msgid "Filament Used"
+msgstr "الخيوط المستخدمة"
 
-msgid "Invalid temperature"
-msgstr "درجة حرارة غير صحيحة"
+msgid "Slicer"
+msgstr "برنامج التقطيع"
+
+msgid "Screen Power Off Time"
+msgstr "وقت إيقاف تشغيل الشاشة"
+
+msgid "Timeout for screen black-out or power-off"
+msgstr "مهلة انقطاع الشاشة أو انقطاع التيار الكهربائي"
+
+msgid "Never"
+msgstr "أبداً"
+
+msgid "Printing"
+msgstr "طباعة"
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr "مهلة انقطاع الشاشة أو إيقاف التشغيل أثناء الطباعة"
+
+msgid "24 Hour Time"
+msgstr "وقت 24 ساعة"
+
+msgid "Disable for 12hs with am / pm"
+msgstr "تعطيل لمدة 12 ساعة مع صباحا / مساء"
+
+msgid "Macro shortcut on sidebar"
+msgstr "اختصار ماكرو على الشريط الجانبي"
+
+msgid "Font Size"
+msgstr "حجم الخط"
 
 msgid "Inversely affects the icon size"
 msgstr "يؤثر عكسيا على حجم الأيقونة"
+
+msgid "Small"
+msgstr "صغيرة"
+
+msgid "Medium"
+msgstr "متوسط"
+
+msgid "Large"
+msgstr "كبير"
+
+msgid "Extra Large"
+msgstr "كبير جدا"
+
+msgid "Maximum"
+msgstr "أَقْصى"
+
+msgid "Confirm Emergency Stop"
+msgstr "تأكيد التوقف الطارئ"
+
+msgid "Asks for confirmation before stopping"
+msgstr "طلب تأكيد قبل التوقف"
+
+msgid "Hide sensors in Temp."
+msgstr "إخفاء جهاز استشعار درجة الحرارة."
+
+msgid "Show only devices that are able to be set"
+msgstr "أظهر فقط الأجهزة التي يمكن ضبطها"
+
+msgid "Screen DPMS"
+msgstr "شاشة DPMS"
+
+msgid "Enable screen power management"
+msgstr "تمكين إدارة طاقة الشاشة"
+
+msgid "Not all screens support this"
+msgstr "ليس كل الشاشات تدعم هذا"
+
+msgid "Auto-close notifications"
+msgstr "إغلاق الإشعار التلقائي"
+
+msgid "Close messages after a timeout"
+msgstr "رسائل مُغلقة بعد انتهاء الوقت"
+
+msgid "Show Heater Power"
+msgstr "أظهر قوة السخان"
+
+msgid "Current percentage and graph line"
+msgstr "النسبة المئوية الحالية وخط الرسم البياني"
+
+msgid "Show Scrollbars Buttons"
+msgstr "أظهر أزرار أشرطة التمرير"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr "مفيد لشاشات اللمس غير المستجيبة"
+
+msgid "Auto-open Extrude On Pause"
+msgstr "بثق الفتح التلقائي عند الإيقاف المؤقت"
+
+msgid "Show cursor"
+msgstr "أظهر المؤشر"
+
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr "للتحكم بالفأرة أو للتأكد من دقة شاشة اللمس"
 
 msgid "Invert X"
 msgstr "عكس X"
@@ -437,560 +254,14 @@ msgstr "عكس Y"
 msgid "Invert Z"
 msgstr "عكس Z"
 
-msgid "It may take more than 5 minutes depending on the heater power."
-msgstr "قد يستغرق الأمر أكثر من 5 دقائق اعتمادا على طاقة السخان."
-
-msgid "It's possible that the configuration is not correct"
-msgstr "من الممكن أن يكون التكوين غير صحيح"
-
-msgid "Job Status"
-msgstr "الحالة الوظيفية"
-
-msgid "Klipper Restart"
-msgstr "إعادة تشغيل Klipper"
-
-msgid "Klipper has disconnected"
-msgstr "لقد انفصل Klipper"
-
-msgid "Klipper has encountered an error."
-msgstr "واجه Klipper خطأ."
-
-msgid "Klipper has shutdown"
-msgstr "تم إغلاق Klipper"
-
-msgid "Klipper is attempting to start"
-msgstr "يحاول Klipper البدء"
-
-msgid "Klipper will reboot"
-msgstr "سيقوم Klipper بإعادة التشغيل"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "تحميل_خيط/تفريغ_خيط مخفية ويجب استخدامها من البثق"
-
-msgid "Language"
-msgstr "اللغة"
-
-msgid "Large"
-msgstr "كبير"
-
-msgid "Last Duration"
-msgstr "المدة الأخيرة"
-
-msgid "Last Used"
-msgstr "آخر استخدام"
-
-msgid "Layer Height"
-msgstr "ارتفاع الطبقة"
-
-msgid "Layer:"
-msgstr "طبقة:"
-
-msgid "Leds"
-msgstr "المصابيح"
-
-msgid "Left:"
-msgstr "متبقي:"
-
-msgid "Limits"
-msgstr "حدود"
-
-msgid "Load"
-msgstr "حمل"
-
-msgid "Loading..."
-msgstr "جاري التحميل..."
-
-msgid "Lock"
-msgstr "قفل"
-
-msgid "Lost Connection to Moonraker"
-msgstr "فقد الاتصال ب Moonraker"
-
-msgid "Lower Nozzle"
-msgstr "انزل الفوهة الي الاسفل"
-
-msgid "Macro shortcut on sidebar"
-msgstr "اختصار ماكرو على الشريط الجانبي"
-
-msgid "Macros"
-msgstr "ماكرو"
-
-msgid "Main Menu"
-msgstr "القائمة الرئيسية"
-
-msgid "Material"
-msgstr "المادّة"
-
-msgid "Max"
-msgstr "الاقصي"
-
-msgid "Max Acceleration"
-msgstr "أقصى تسارع"
-
-msgid "Max Velocity"
-msgstr "السرعة القصوى"
-
-msgid "Max:"
-msgstr "الحد الأقصى:"
-
-msgid "Maximum"
-msgstr "أَقْصى"
-
-msgid "Measure Both"
-msgstr "قم بقياس كليهما"
-
-msgid "Measure X"
-msgstr "قياس X"
-
-msgid "Measure Y"
-msgstr "قياس Y"
-
-msgid "Medium"
-msgstr "متوسط"
-
-msgid "Memory"
-msgstr "الذاكرة"
-
-msgid "Menu"
-msgstr "القائِمة"
-
-msgid "Minimum Cruise Ratio"
-msgstr "الحد الأدنى لنسبة الرحلات"
-
-msgid "Minimum:"
-msgstr "الحد الأدنى:"
-
-msgid "Modified"
-msgstr "معدل"
-
-msgid "Moonraker: connected"
-msgstr "Moonraker : متصل"
-
-msgid "More"
-msgstr "أكثر"
-
-msgid "Move"
-msgstr "تحرك"
-
-msgid "Move Distance (mm)"
-msgstr "مسافة التحرك (مم)"
-
-msgid "Name"
-msgstr "الاسم"
-
-msgid "Network"
-msgstr "الشبكة"
-
-msgid "Network connected"
-msgstr "متصل بالشبكة"
-
-msgid "Network disconnected"
-msgstr "الشبكة غير متصلة"
-
-msgid "Network not found"
-msgstr "لم يتم العثور على الشبكة"
-
-msgid "Never"
-msgstr "أبداً"
-
-msgid "New"
-msgstr "جديد"
-
-msgid "No elegible macros:"
-msgstr "وحدات الماكرو غير المؤهلة:"
-
-msgid "No info available"
-msgstr "لا توجد معلومات متاحة"
-
-msgid "No mesh has been loaded"
-msgstr "لم يتم تحميل أي شبكة"
-
-msgid "No wireless interface has been found"
-msgstr "لم يتم العثور على واجهة لاسلكية"
-
-msgid "Not all screens support this"
-msgstr "ليس كل الشاشات تدعم هذا"
-
-msgid "Not working or not configured"
-msgstr "لا يعمل أو لم يتم تكوينه"
-
-msgid "Nothing selected"
-msgstr "لا شيء تم اختياره"
-
-msgid "Notification log empty"
-msgstr "سجل الإشعارات فارغ"
-
-msgid "Notifications"
-msgstr "إشعارات"
-
-msgid "Nozzle diameter"
-msgstr "قطر الفوهة"
-
-msgid "Only for the move panel"
-msgstr "فقط من أجل لوحة الحركة"
-
-#, python-format
-msgid "Outdated by %d"
-msgstr "عفا عليها الزمن بنسبة %d"
-
-msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "لايوجد تحديث"
-msgstr[1] "سيتم تحديث الحزمة"
-msgstr[2] "تحديث حزمتين"
-msgstr[3] "تحديث الحزم"
-msgstr[4] "تحديث الحزم"
-msgstr[5] "تحديث الحزم"
-
-msgid "Part Fan"
-msgstr "مروحة تبريد المطبوعات"
-
-msgid "Password"
-msgstr "كلمة المرور"
-
-msgid "Password saved"
-msgstr "تم حفظ كلمة المرور"
-
-msgid "Pause"
-msgstr "توقف"
-
-msgid "Paused"
-msgstr "متوقف"
-
-msgid "Perform a full upgrade?"
-msgstr "إجراء ترقية كاملة؟"
-
-msgid "Pins"
-msgstr "دبابيس"
-
-msgid "Please recompile and flash the micro-controller."
-msgstr "يرجى إعادة تجميع وحدة التحكم الدقيقة وميضها."
-
-msgid "Please wait"
-msgstr "من فضلك انتظر"
-
-msgid "Power"
-msgstr "القوة"
-
-msgid "Power On Printer"
-msgstr "شغل الطابعة"
-
-msgid "Pressure Advance"
-msgstr "الضغط المتقدم"
-
-msgid "Pressure Advance:"
-msgstr "الضغط المتقدم:"
-
-msgid "Pressure advance"
-msgstr "تقدم الضغط"
-
-msgid "Print"
-msgstr "اطبع"
-
-msgid "Print Control"
-msgstr "التحكم في الطباعة"
-
-msgid "Printer"
-msgstr "الطابعة"
-
-msgid "Printer Connections"
-msgstr "اتصال الطابعة"
-
-msgid "Printer Select"
-msgstr "اختيار الطابعة"
-
-msgid "Printing"
-msgstr "طباعة"
-
-msgid "Probe Offset"
-msgstr "حدود المسبار Probe Offset"
-
-msgid "Profile Name:"
-msgstr "اسم الملف:"
-
-msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "قم بتوفير KlipperScreen.log عند طلب المساعدة\n"
-
-msgid "Quad Gantry Level"
-msgstr "مستوى القنطرية الرباعية"
-
-msgid "Raise Nozzle"
-msgstr "ارفع الفوهة"
-
-msgid "Recover"
-msgstr "تعين"
-
-msgid "Recover Hard"
-msgstr "تعين هارد رست"
-
-msgid "Recover Soft"
-msgstr "تعين سوفت رست"
-
-msgid "Reference"
-msgstr "مرجع"
-
-msgid "Refresh"
-msgstr "التجديد"
-
-msgid "Remove network"
-msgstr "قم بإزالة الشبكة"
-
-msgid "Rename/Move:"
-msgstr "إعادة تسمية/نقل:"
-
-msgid "Restart"
-msgstr "اعادة التشغيل"
-
-msgid "Resume"
-msgstr "استناف"
-
-msgid "Retract"
-msgstr "تراجع"
-
-msgid "Retraction"
-msgstr "التراجع"
-
-msgid "Retraction Length"
-msgstr "طول التراجع"
-
-msgid "Retraction Speed"
-msgstr "سرعة التراجع"
-
-msgid "Retry"
-msgstr "أعد المحاولة"
-
-msgid "Retrying"
-msgstr "محولة الاعادة"
-
-msgid "Rotation invalid"
-msgstr "الدوران غير صالح"
-
-msgid "Save"
-msgstr "حفظ"
-
-msgid "Save Config"
-msgstr "حفظ التكوين"
-
-msgid "Save Z"
-msgstr "احفظ Z"
-
-msgid "Save configuration?"
-msgstr "حفظ التكوين؟"
-
-msgid "Saved"
-msgstr "تم حفظه"
-
-#, python-format
-msgid "Saved offset: %s"
-msgstr "تم حفظ التحديد: %s"
-
-msgid "Screen DPMS"
-msgstr "شاشة DPMS"
-
-msgid "Screen Power Off Time"
-msgstr "وقت إيقاف تشغيل الشاشة"
-
-msgid "Screws Adjust"
-msgstr "ضبط البراغي"
-
-msgid "Screws not used:"
-msgstr "البراغي غير المستخدمة:"
-
-msgid "Send"
-msgstr "أرسل"
-
-msgid "Set Temp"
-msgstr "ضبط درجة الحرارة"
-
-msgid "Settings"
-msgstr "الإعدادات"
-
-msgid "Show"
-msgstr "عرض"
-
-msgid "Show Heater Power"
-msgstr "أظهر قوة السخان"
-
-msgid "Show Scrollbars Buttons"
-msgstr "أظهر أزرار أشرطة التمرير"
-
-msgid "Show cursor"
-msgstr "أظهر المؤشر"
-
-msgid "Show only devices that are able to be set"
-msgstr "أظهر فقط الأجهزة التي يمكن ضبطها"
-
-msgid "Shutdown"
-msgstr "إيقاف التشغيل"
-
-msgid "Size"
-msgstr "الحجم"
-
-msgid "Slicer"
-msgstr "برنامج التقطيع"
-
-msgid "Slicer:"
-msgstr "المشرح:"
-
-msgid "Small"
-msgstr "صغيرة"
-
-msgid "Smooth time"
-msgstr "وقت سلس"
-
-msgid "Speed (mm/s)"
-msgstr "السرعة (مم/ثانية)"
-
-msgid "Speed +"
-msgstr "السرعة +"
-
-msgid "Speed -"
-msgstr "السرعة -"
-
-msgid "Speed:"
-msgstr "السرعة:"
-
-msgid "Square Corner Velocity"
-msgstr "سرعة الزاوية المربعة"
-
-msgid "Standby"
-msgstr "الاستعداد"
-
-msgid "Start"
-msgstr "ابدأ"
-
-msgid "Starting recovery for"
-msgstr "بدء اعادة التعين من أجل"
-
-msgid "Starting update for"
-msgstr "بدء التحديث من أجل"
-
-msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr "أزرار المقايضة إذا كانت فوق بعضها البعض، تؤثر على اللوحات الأخرى"
-
-msgid "System"
-msgstr "النظام"
-
-msgid "System Restart"
-msgstr "إعادة تشغيل النظام"
-
-msgid "System Shutdown"
-msgstr "إيقاف تشغيل النظام"
-
-msgid "System:"
-msgstr "النظام:"
-
-msgid "Temp (°C)"
-msgstr "درجة الحرارة (°م)"
-
-msgid "Temperature"
-msgstr "درجة الحرارة"
-
-msgid "Temperature too low to extrude"
-msgstr "درجة الحرارة قليلة جدا لبدء التدفق"
-
-msgid "The system doesn't meet the minimum requirement"
-msgstr "النظام لا يفي بالحد الأدنى من المتطلبات"
-
-msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr "تدعم هذه اللوحة ما يصل إلى 9 مسامير في شبكة 3x3"
-
-msgid "This will affect screw positions and mesh graph"
-msgstr "سيؤثر هذا على مواضع المسمار والرسم البياني للشبكة"
-
-msgid "Timeout for screen black-out or power-off"
-msgstr "مهلة انقطاع الشاشة أو انقطاع التيار الكهربائي"
-
-msgid "Timeout for screen black-out or power-off during printing"
-msgstr "مهلة انقطاع الشاشة أو إيقاف التشغيل أثناء الطباعة"
-
-msgid "Total:"
-msgstr "المجموع:"
-
-msgid "Unknown Heater"
-msgstr "سخان غير معروف"
-
-msgid "Unknown security type"
-msgstr "نوع أمان غير معروف"
-
-msgid "Unload"
-msgstr "أفرغ"
-
-msgid "Unlock"
-msgstr "فتح"
-
-msgid "Unlock failed"
-msgstr "خطأ في الفتح"
-
-msgid "Unretract Extra Length"
-msgstr "لا تتراجع عن الطول الإضافي"
-
-msgid "Unretract Speed"
-msgstr "سرعة إلغاء التراجع"
-
-msgid "Up To Date"
-msgstr "اخر تحديث حتي الان"
-
-msgid "Update"
-msgstr "حدث"
-
-msgid "Updating"
-msgstr "يتم التحديث الان"
-
-msgid "Useful for un-responsive touchscreens"
-msgstr "مفيد لشاشات اللمس غير المستجيبة"
-
-msgid "User"
-msgstr "المستخدم"
-
-msgid "WebRTC is not supported by the backend trying Stream"
-msgstr "WebRTC غير مدعوم من قبل الواجهة الخلفية التي تحاول البث"
-
-msgid "Working"
-msgstr "يعمل"
-
 msgid "XY Move Speed (mm/s)"
 msgstr "سرعة الحركة XY (مم/ث)"
-
-msgid "XY Speed (mm/s)"
-msgstr "سرعة XY (مم/ث)"
-
-msgid "Z Calibrate"
-msgstr "معايرة Z"
 
 msgid "Z Move Speed (mm/s)"
 msgstr "سرعة الحركة Z (مم/ث)"
 
-msgid "Z Speed (mm/s)"
-msgstr "سرعة Z (مم/ث)"
-
-msgid "Z Tilt"
-msgstr "تعديل ميل Z"
-
-msgid "Z offset:"
-msgstr "حدود Z:"
-
-msgid "commit"
-msgid_plural "commits"
-msgstr[0] "لا التزام"
-msgstr[1] "التزام"
-msgstr[2] "التزامات"
-msgstr[3] "التزامات"
-msgstr[4] "التزامات"
-msgstr[5] "التزامات"
-
-msgid "day"
-msgid_plural "days"
-msgstr[0] "صفر يوم"
-msgstr[1] "يوم"
-msgstr[2] "يومان"
-msgstr[3] "أيام"
-msgstr[4] "أيام"
-msgstr[5] "أيام"
-
-msgid "g"
-msgstr "g"
+msgid "Language"
+msgstr "اللغة"
 
 msgid "hour"
 msgid_plural "hours"
@@ -1001,35 +272,26 @@ msgstr[3] "ساعات"
 msgstr[4] "ساعات"
 msgstr[5] "ساعات"
 
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "وحدات الماكرو التي تستخدم \"إعادة تسمية_موجودة\" مخفية"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "وحدات الماكرو التي يبدأ اسمها ب \"_\" مخفية"
-
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "دقيقة"
 msgstr[1] "دقيقة"
 msgstr[2] "دقيقتين"
-msgstr[3] "دقيقة"
+msgstr[3] "دقائق"
 msgstr[4] "دقيقة"
-msgstr[5] "دقيقة"
+msgstr[5] "دقائق"
 
-msgid "mm"
-msgstr "مم"
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "هل تريد تأكيد التوقف الطارئ؟"
 
-msgid "mm/s"
-msgstr "مم/ث"
-
-msgid "mm/s²"
-msgstr "مليمتر/متر مربع"
-
-msgid "mm³/s"
-msgstr "مليمتر مكعب"
-
-msgid "s"
-msgstr "ث"
+msgid "day"
+msgid_plural "days"
+msgstr[0] "يوم"
+msgstr[1] "يوم"
+msgstr[2] "يومان"
+msgstr[3] "أيام"
+msgstr[4] "أيام"
+msgstr[5] "أيام"
 
 msgid "second"
 msgid_plural "seconds"
@@ -1038,7 +300,766 @@ msgstr[1] "ثانية"
 msgstr[2] "ثانيتين"
 msgstr[3] "ثواني"
 msgstr[4] "ثواني"
-msgstr[5] "الثانية"
+msgstr[5] "ثوانٍ"
+
+msgid "Network not found"
+msgstr "لم يتم العثور على الشبكة"
+
+msgid "Unknown security type"
+msgstr "نوع أمان غير معروف"
+
+msgid "Insufficient privileges"
+msgstr "امتيازات غير كافية"
+
+msgid "Invalid password"
+msgstr "كلمة سر غير صالحة"
+
+msgid "Couldn't add network"
+msgstr "لا يمكن إضافة شبكة"
+
+msgid "Failed to delete connection"
+msgstr "فشل في حذف الاتصال"
+
+msgid "Starting WiFi Association"
+msgstr ""
+
+msgid "Connecting"
+msgstr "توصيل"
+
+msgid "Getting IP address"
+msgstr "الحصول على عنوان IP"
+
+msgid "Network connected"
+msgstr "متصل بالشبكة"
+
+msgid "Network disconnected"
+msgstr "الشبكة غير متصلة"
+
+msgid "Connection failed"
+msgstr "فشل الاتصال"
+
+msgid "No mesh has been loaded"
+msgstr "لم يتم تحميل أي شبكة"
+
+msgid "Calibrate"
+msgstr "معايرة"
+
+msgid "Invalid temperature"
+msgstr "درجة حرارة غير صحيحة"
+
+msgid "Password"
+msgstr "كلمة المرور"
+
+msgid "Unlock"
+msgstr "فتح"
+
+msgid "Unlock failed"
+msgstr "خطأ في الفتح"
+
+msgid "Are you sure do you want to exclude the object?"
+msgstr "هل أنت متأكد من أنك تريد استبعاد الجسم؟?"
+
+msgid "Finish"
+msgstr "انتهى"
+
+msgid "Updating"
+msgstr "يتم التحديث الان"
+
+msgid "Disable Motors"
+msgstr "تعطيل المحركات"
+
+msgid "Screws Adjust"
+msgstr "ضبط البراغي"
+
+msgid "Rotation invalid"
+msgstr "الدوران غير صالح"
+
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr "تدعم هذه اللوحة ما يصل إلى 9 مسامير في شبكة 3x3"
+
+msgid "It's possible that the configuration is not correct"
+msgstr "من الممكن أن يكون التكوين غير صحيح"
+
+msgid "Screws not used:"
+msgstr "البراغي غير المستخدمة:"
+
+msgid "Reference"
+msgstr "مرجع"
+
+msgid "Add profile"
+msgstr "إضافة نمط"
+
+msgid "Clear"
+msgstr "ازال"
+
+msgid "Profile Name:"
+msgstr "اسم الملف:"
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Calibrating"
+msgstr "يضبط"
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr "WebRTC غير مدعوم من قبل الواجهة الخلفية التي تحاول البث"
+
+msgid "Auto-scroll"
+msgstr "التمرير التلقائي"
+
+msgid "Send"
+msgstr "أرسل"
+
+msgid "Example"
+msgstr "مثال"
+
+msgid "Exclude Object"
+msgstr "استبعاد الجسم"
+
+msgid "Are you sure you wish to cancel this print?"
+msgstr "هل أنت متأكد أنك تريد إلغاء هذه الطباعة؟?"
+
+msgid "Load"
+msgstr "حمل"
+
+msgid "Unload"
+msgstr "أفرغ"
+
+msgid "Retract"
+msgstr "تراجع"
+
+msgid "Pressure Advance"
+msgstr "الضغط المتقدم"
+
+msgid "Retraction"
+msgstr "التراجع"
+
+msgid "Extruders"
+msgstr "البثاقات"
+
+msgid "Distance (mm)"
+msgstr "المسافة (م م)"
+
+msgid "Speed (mm/s)"
+msgstr "السرعة (مم/ثانية)"
+
+msgid "Part Fan"
+msgstr "مروحة تبريد المطبوعات"
+
+msgid "Max"
+msgstr "الاقصي"
+
+msgid "mm"
+msgstr "مم"
+
+msgid "Speed +"
+msgstr "السرعة +"
+
+msgid "Speed -"
+msgstr "السرعة -"
+
+msgid "Extrusion +"
+msgstr "إخراج انبثاق +"
+
+msgid "Extrusion -"
+msgstr "إخراج انبثاق -"
+
+msgid "Name"
+msgstr "الاسم"
+
+msgid "Settings"
+msgstr "الإعدادات"
+
+msgid "Date"
+msgstr "التاريخ"
+
+msgid "Size"
+msgstr "الحجم"
+
+msgid "Loading..."
+msgstr "جاري التحميل..."
+
+msgid "Delete File?"
+msgstr "حذف الملف؟"
+
+msgid "Delete Directory?"
+msgstr "حذف الدليل؟"
+
+msgid "Start"
+msgstr "ابدأ"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Modified"
+msgstr "معدل"
+
+msgid "Layer Height"
+msgstr "ارتفاع الطبقة"
+
+msgid "Filament"
+msgstr "الخيط"
+
+msgid "Estimated Time"
+msgstr "الوقت التقديري"
+
+msgid "g"
+msgstr "g"
+
+msgid "Nozzle diameter"
+msgstr "قطر الفوهة"
+
+msgid "Last Duration"
+msgstr "المدة الأخيرة"
+
+msgid "Rename/Move:"
+msgstr "إعادة تسمية/نقل:"
+
+msgid "Finding ADXL"
+msgstr "البحث عن ADXL"
+
+msgid "Measure X"
+msgstr "قياس X"
+
+msgid "Measure Y"
+msgstr "قياس Y"
+
+msgid "Measure Both"
+msgstr "قم بقياس كليهما"
+
+msgid "Klipper will reboot"
+msgstr "سيقوم Klipper بإعادة التشغيل"
+
+msgid "Save configuration?"
+msgstr "حفظ التكوين؟"
+
+msgid "Check ADXL Wiring"
+msgstr "تحقق من ADXL الأسلاك"
+
+msgid "ADXL Not Configured"
+msgstr "مقياسات السرعة ADXL تحتاج إلى تثبيت"
+
+msgid "Auto-calibrate"
+msgstr "معايرة تلقائية"
+
+msgid "Calibrated"
+msgstr "مضبط"
+
+msgid "Job Status"
+msgstr "الحالة الوظيفية"
+
+msgid "mm/s"
+msgstr "مم/ث"
+
+msgid "mm/s²"
+msgstr "مم/ث²"
+
+msgid "mm³/s"
+msgstr "مم³/ث"
+
+msgid "Left:"
+msgstr "متبقي:"
+
+msgid "Elapsed:"
+msgstr "الوقت المنقضي:"
+
+msgid "Total:"
+msgstr "المجموع:"
+
+msgid "Slicer:"
+msgstr "المشرح:"
+
+msgid "File:"
+msgstr "الملف:"
+
+msgid "Filament:"
+msgstr "الخيط:"
+
+msgid "Speed:"
+msgstr "السرعة:"
+
+msgid "Acceleration:"
+msgstr "التسارع:"
+
+msgid "Flow:"
+msgstr "التدفق:"
+
+msgid "Z offset:"
+msgstr "حدود Z:"
+
+msgid "Filament used:"
+msgstr "الخيوط المستخدمة:"
+
+msgid "Filament total:"
+msgstr "مجموع الخيوط:"
+
+msgid "Pressure Advance:"
+msgstr "الضغط المتقدم:"
+
+msgid "Flowrate:"
+msgstr "معدل التدفق:"
+
+msgid "Height:"
+msgstr "الارتفاع:"
+
+msgid "Layer:"
+msgstr "طبقة:"
+
+msgid "Pause"
+msgstr "توقف"
+
+msgid "Restart"
+msgstr "اعادة التشغيل"
+
+msgid "Resume"
+msgstr "استناف"
+
+msgid "Save Z"
+msgstr "احفظ Z"
+
+#, python-brace-format
+msgid "Apply {sign}{offset:.3f} offset to Probe?"
+msgstr ""
+
+#, python-brace-format
+msgid "Apply {sign}{offset:.3f} offset to Endstop?"
+msgstr ""
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr "تم حفظ التحديد: %s"
+
+msgid "Apply"
+msgstr "تطبيق"
+
+msgid "Cancel Print"
+msgstr "إلغاء الطباعة"
+
+msgid "Go Back"
+msgstr "ارجع"
+
+msgid "Working"
+msgstr "يعمل"
+
+msgid "Complete"
+msgstr "اكتمل"
+
+msgid "Error"
+msgstr "خطاء"
+
+msgid "Cancelling"
+msgstr "يتم إلغاء"
+
+msgid "Cancelled"
+msgstr "ألغيت"
+
+msgid "Paused"
+msgstr "متوقف"
+
+msgid "Standby"
+msgstr "الاستعداد"
+
+msgid "Max Acceleration"
+msgstr "أقصى تسارع"
+
+msgid "Minimum Cruise Ratio"
+msgstr "الحد الأدنى لنسبة الرحلات"
+
+msgid "Max Velocity"
+msgstr "السرعة القصوى"
+
+msgid "Square Corner Velocity"
+msgstr "سرعة الزاوية المربعة"
+
+msgid "Unknown Heater"
+msgstr "سخان غير معروف"
+
+msgid "Can't set above the maximum:"
+msgstr "لا يمكن تحديده فوق الحد الأقصى:"
+
+msgid "Initiate a PID calibration for:"
+msgstr "بدء معايرة PID:"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr "قد يستغرق الأمر أكثر من 5 دقائق اعتمادا على طاقة السخان."
+
+msgid "Temp (°C)"
+msgstr "الحرارة (°م)"
+
+msgid "Home"
+msgstr "المنزل"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "هل أنت متأكد من أنك ترغب في تعطيل المحركات الخطوية ؟?"
+
+msgid "Move Distance (mm)"
+msgstr "مسافة التحرك (مم)"
+
+msgid "This will affect screw positions and mesh graph"
+msgstr "سيؤثر هذا على مواضع المسمار والرسم البياني للشبكة"
+
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr "أزرار المقايضة إذا كانت فوق بعضها البعض، تؤثر على اللوحات الأخرى"
+
+msgid "XY Speed (mm/s)"
+msgstr "سرعة XY (مم/ث)"
+
+msgid "Only for the move panel"
+msgstr "فقط من أجل لوحة الحركة"
+
+msgid "Z Speed (mm/s)"
+msgstr "سرعة Z (مم/ث)"
+
+msgid "Failed to initialize"
+msgstr "فشل في التهيئة"
+
+msgid "Interface"
+msgstr "واجهه المستخدم"
+
+msgid "No wireless interface has been found"
+msgstr "لم يتم العثور على واجهة لاسلكية"
+
+msgid "Connected"
+msgstr "متصل"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr "هل تريد أن تنسى أو تفصل %s؟"
+
+msgid "Forget"
+msgstr "نسي"
+
+msgid "Disconnect"
+msgstr "فصل"
+
+msgid "Remove network"
+msgstr "قم بإزالة الشبكة"
+
+msgid "User"
+msgstr "المستخدم"
+
+#, python-format
+msgid "Connecting to %s"
+msgstr "التواصل مع %s"
+
+msgid "Channel"
+msgstr "القناة"
+
+msgid "Hostname"
+msgstr "اسم المضيف"
+
+msgid "Notification log empty"
+msgstr "سجل الإشعارات فارغ"
+
+msgid "Pressure advance"
+msgstr "تقدم الضغط"
+
+msgid "Current"
+msgstr "الحالي"
+
+msgid "Smooth time"
+msgstr "وقت سلس"
+
+msgid "s"
+msgstr "ث"
+
+msgid "Printer Select"
+msgstr "اختيار الطابعة"
+
+msgid "Please wait"
+msgstr "من فضلك انتظر"
+
+msgid "Retraction Length"
+msgstr "طول التراجع"
+
+msgid "Retraction Speed"
+msgstr "سرعة التراجع"
+
+msgid "Unretract Extra Length"
+msgstr "طول الإضافة الإضافي"
+
+msgid "Unretract Speed"
+msgstr "سرعة إلغاء التراجع"
+
+msgid "Printer Connections"
+msgstr "اتصال الطابعة"
+
+msgid "Shutdown"
+msgstr "إيقاف التشغيل"
+
+msgid "Emergency Stop"
+msgstr "توقف طارئ"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "هل أنت متأكد أنك تريد إعادة تشغيل النظام؟?"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "هل أنت متأكد أنك تريد إغلاق النظام؟?"
+
+msgid "Accept"
+msgstr "قبول"
+
+msgid "Host"
+msgstr "مضيف"
+
+msgid "Printer"
+msgstr "الطابعة"
+
+msgid "Both"
+msgstr "كلاهما"
+
+msgid "Initializing printer..."
+msgstr "تهيئة الطابعة..."
+
+msgid "Klipper Restart"
+msgstr "إعادة تشغيل Klipper"
+
+msgid "Firmware Restart"
+msgstr "إعادة تشغيل البرامج"
+
+msgid "System Restart"
+msgstr "إعادة تشغيل النظام"
+
+msgid "System Shutdown"
+msgstr "إيقاف تشغيل النظام"
+
+msgid "Retry"
+msgstr "أعد المحاولة"
+
+msgid "Power On Printer"
+msgstr "شغل الطابعة"
+
+msgid "ID"
+msgstr "الهوية"
+
+msgid "Last Used"
+msgstr "آخر استخدام"
+
+msgid "Archived"
+msgstr "المحفوظات"
+
+msgid "Filter"
+msgstr "فلتر"
+
+msgid "Material"
+msgstr "المادّة"
+
+msgid "Comment"
+msgstr ""
+
+msgid "Last used"
+msgstr ""
+
+msgid "Remaining weight"
+msgstr ""
+
+msgid "Remaining length"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr "خطأ في محاولت جلب البكرة"
+
+msgid "All"
+msgstr "الكل"
+
+msgid "Error clearing active spool"
+msgstr "خطأ في مسح تفعيل البكرة"
+
+msgid "Error setting active spool"
+msgstr "خطأ في اعداد البكرة"
+
+msgid "No info available"
+msgstr "لا توجد معلومات متاحة"
+
+msgid "IP Address"
+msgstr ""
+
+msgid "Memory"
+msgstr "الذاكرة"
+
+msgid "Cooldown"
+msgstr "خفض الحرارة"
+
+msgid "Nothing selected"
+msgstr "لا شيء تم اختياره"
+
+msgid "Set Temp"
+msgstr "ضبط درجة الحرارة"
+
+msgid "Show"
+msgstr "عرض"
+
+msgid "Hide"
+msgstr "إخفاء"
+
+msgid "Full Update"
+msgstr "تحديث كامل"
+
+msgid "Refresh"
+msgstr "التجديد"
+
+msgid "Checking for updates, please wait..."
+msgstr "التحقق من التحديثات، يرجى الانتظار..."
+
+msgid "Not working or not configured"
+msgstr "لا يعمل أو لم يتم تكوينه"
+
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Perform a full upgrade?"
+msgstr "إجراء ترقية كاملة؟"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "هل تريد استعادة %s؟"
+
+msgid "Recover Hard"
+msgstr "تعين هارد رست"
+
+msgid "Recover Soft"
+msgstr "تعين سوفت رست"
+
+msgid "Recover"
+msgstr "تعين"
+
+#, python-format
+msgid "Outdated by %d"
+msgstr "عفا عليها الزمن بنسبة %d"
+
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "لا التزام"
+msgstr[1] "التزام"
+msgstr[2] "التزامات"
+msgstr[3] "التزامات"
+msgstr[4] "التزامات"
+msgstr[5] "التزامات"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "لايوجد تحديث"
+msgstr[1] "سيتم تحديث الحزمة"
+msgstr[2] "تحديث حزمتين"
+msgstr[3] "تحديث الحزم"
+msgstr[4] "تحديث الحزم"
+msgstr[5] "تحديث الحزم"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "سيتم تحديثه إلى الإصدار%s"
+
+msgid "Starting recovery for"
+msgstr "بدء اعادة التعين من أجل"
+
+msgid "Starting update for"
+msgstr "بدء التحديث من أجل"
+
+msgid "Invalid"
+msgstr "باطل"
+
+msgid "Up To Date"
+msgstr "اخر تحديث حتي الان"
+
+msgid "Probe Offset"
+msgstr "حدود المسبار Probe Offset"
+
+msgid "Saved"
+msgstr "تم حفظه"
+
+msgid "New"
+msgstr "جديد"
+
+msgid "Raise Nozzle"
+msgstr "ارفع الفوهة"
+
+msgid "Lower Nozzle"
+msgstr "انزل الفوهة الي الاسفل"
+
+msgid "Abort"
+msgstr "إجهاض"
+
+msgid "Error: Couldn't get a position to probe"
+msgstr "خطأ: تعذر لعدم الحصول على مستوي المسبار"
+
+msgid "Failed, adjust position first"
+msgstr "فشل، اضبط الموضع أولا"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr "النظام لا يفي بالحد الأدنى من المتطلبات"
+
+msgid "Minimum:"
+msgstr "الحد الأدنى:"
+
+msgid "System:"
+msgstr "النظام:"
+
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr "قم بتوفير KlipperScreen.log عند طلب المساعدة\n"
+
+msgid "Close"
+msgstr "إغلاق"
+
+msgid "DPMS has failed and has been disabled"
+msgstr ""
+
+msgid "Cannot connect to Moonraker"
+msgstr "لا يمكن الاتصال ب Moonraker"
+
+msgid "Lost Connection to Moonraker"
+msgstr "فقد الاتصال ب Moonraker"
+
+msgid "Klipper has disconnected"
+msgstr "لقد انفصل Klipper"
+
+msgid "Klipper has encountered an error."
+msgstr "واجه Klipper خطأ."
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr "إعادة تشغيل البرنامج الثابت قد يحل المشكلة."
+
+msgid "Please recompile and flash the micro-controller."
+msgstr "يرجى إعادة تجميع وحدة التحكم الدقيقة وميضها."
+
+msgid "Klipper is attempting to start"
+msgstr "يحاول Klipper البدء"
+
+msgid "Klipper has shutdown"
+msgstr "تم إغلاق Klipper"
+
+msgid "No eligible macros:"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "وحدات الماكرو التي يبدأ اسمها ب \"_\" مخفية"
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "وحدات الماكرو التي تستخدم \"إعادة تسمية_موجودة\" مخفية"
+
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr "تحميل_خيط/تفريغ_خيط مخفية ويجب استخدامها من البثق"
+
+msgid "Temperature too low to extrude"
+msgstr "درجة الحرارة قليلة جدا لبدء التدفق"
+
+msgid "Retrying"
+msgstr "جاري المحاولة"
+
+msgid "Moonraker: connected"
+msgstr "Moonraker : متصل"
+
+#~ msgid "Error getting active spool"
+#~ msgstr "خطأ في الحصول على تفعيل البكرة"
+
+#~ msgid "Max:"
+#~ msgstr "الحد الأقصى:"
+
+#~ msgid "Password saved"
+#~ msgstr "تم حفظ كلمة المرور"
 
 #~ msgid "Hide temp."
 #~ msgstr "إخفاء درجة الحرارة."

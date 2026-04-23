@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-26 12:31-0300\n"
+"POT-Creation-Date: 2026-04-23 14:29-0300\n"
 "PO-Revision-Date: 2026-03-10 13:09+0000\n"
 "Last-Translator: vjurka <v@jurka.lt>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -20,86 +20,26 @@ msgstr ""
 "(n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.17-dev\n"
 
-#, python-format
-msgid "%s will be updated to version"
-msgstr "%s bus atnaujinta iki versijos"
+msgid "Main Menu"
+msgstr "Pagrindinis meniu"
 
-msgid "(default)"
-msgstr "(pagal nutylėjimą)"
+msgid "Move"
+msgstr "Judinti"
 
-msgid "24 Hour Time"
-msgstr "24-laiko formatas"
+msgid "Temperature"
+msgstr "Temperatūra"
 
-msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr "Perkraukite valdiklį, norėdami ištaisyti problemą."
+msgid "Extrude"
+msgstr "Išstumti"
 
-msgid "ADXL Not Configured"
-msgstr "ADXL nekonfigūruotas"
+msgid "More"
+msgstr "Daugiau"
 
-msgid "Abort"
-msgstr "Atšaukti"
+msgid "Print"
+msgstr "Spausdinti"
 
-msgid "Acceleration:"
-msgstr "Pagreitis:"
-
-msgid "Accept"
-msgstr "Patvirtinti"
-
-msgid "Add profile"
-msgstr "Pridėti profilį"
-
-msgid "All"
-msgstr "Viskas"
-
-msgid "Apply"
-msgstr "Pritaikyti"
-
-#, python-format
-msgid "Apply %s%.3f offset to Endstop?"
-msgstr "Pritaikyti poslinkį %s%.3f pabaigos jutikliui?"
-
-#, python-format
-msgid "Apply %s%.3f offset to Probe?"
-msgstr "Pritaikyti poslinkį %s%.3f zondui?"
-
-msgid "Archived"
-msgstr "Archyvuota"
-
-msgid "Are you sure do you want to exclude the object?"
-msgstr "Ar tikrai norite išmesti objektą?"
-
-msgid "Are you sure you want to run Emergency Stop?"
-msgstr "Ar tikrai paleisti avarinį stabdymą?"
-
-msgid "Are you sure you wish to cancel this print?"
-msgstr "Ar tikrai norite nutraukti spausdinimą?"
-
-msgid "Are you sure you wish to disable motors?"
-msgstr "Ar tikrai norite išjungti variklius?"
-
-msgid "Are you sure you wish to reboot the system?"
-msgstr "Ar tikrai norite perkrauti sistemą?"
-
-msgid "Are you sure you wish to shutdown the system?"
-msgstr "Ar tikrai norite išjungti spausdintuvą?"
-
-msgid "Asks for confirmation before stopping"
-msgstr "Klausti patvirtinimo prieš sustabdant"
-
-msgid "Auto"
-msgstr "Auto"
-
-msgid "Auto-calibrate"
-msgstr "Automatinis kalibravimas"
-
-msgid "Auto-close notifications"
-msgstr "Automatinis pranešimų slėpimas"
-
-msgid "Auto-open Extrude On Pause"
-msgstr "Automatiškai atidaryti Extruderio menių kai suveikia Pauzė"
-
-msgid "Auto-scroll"
-msgstr "Automatinis slinkimas"
+msgid "Gcodes"
+msgstr "G-kodas"
 
 msgid "Bed Level"
 msgstr "Platformos lygis"
@@ -107,281 +47,56 @@ msgstr "Platformos lygis"
 msgid "Bed Mesh"
 msgstr "Platformos tinkliukas"
 
-msgid "Both"
-msgstr "Abu"
+msgid "Z Calibrate"
+msgstr "Z kalibravimas"
 
-msgid "Calibrate"
-msgstr "Kalibravimas"
-
-msgid "Calibrated"
-msgstr "Sukalibruota"
-
-msgid "Calibrating"
-msgstr "Kalibruojama"
-
-msgid "Camera"
-msgstr "Kamera"
-
-msgid "Can't set above the maximum:"
-msgstr "Negalima nustatyti virš maksimumo:"
-
-msgid "Cancel"
-msgstr "Atšaukti"
-
-msgid "Cancel Print"
-msgstr "Atšaukti spausdinimą"
-
-msgid "Cancelled"
-msgstr "Atšaukta"
-
-msgid "Cancelling"
-msgstr "Atšaukiama"
-
-msgid "Cannot connect to Moonraker"
-msgstr "Nepavyksta prisijungti prie Moonraker"
-
-msgid "Changes how the interface looks"
-msgstr "Pakeičia sąsajos išvaizdą"
-
-msgid "Changes how the time remaining is calculated"
-msgstr "Keičia likusio laiko skaičiavimo būdą"
-
-msgid "Channel"
-msgstr "Kanalas"
-
-msgid "Check ADXL Wiring"
-msgstr "Patikrinkite ADXL laidus"
-
-msgid "Checking for updates, please wait..."
-msgstr "Atnaujinimų paieška, laukite..."
-
-msgid "Clear"
-msgstr "Išvalyti"
-
-msgid "Close"
-msgstr "Uždaryti"
-
-msgid "Close messages after a timeout"
-msgstr "Pasibaigus skirtajam laikui uždaryti pranešimus"
-
-msgid "Complete"
-msgstr "Baigta"
-
-msgid "Confirm Emergency Stop"
-msgstr "Patvirtinkite avarinį stabdymą"
-
-msgid "Connected"
-msgstr "Prijungta"
-
-msgid "Connecting"
-msgstr "Prisijungiama"
-
-#, python-format
-msgid "Connecting to %s"
-msgstr "Prisijungiama prie %s"
-
-msgid "Connection failed"
-msgstr "Prisijungti nepavyko"
-
-msgid "Console"
-msgstr "Terminalas"
-
-msgid "Cooldown"
-msgstr "Atvėsinti"
-
-msgid "Couldn't add network"
-msgstr "Nepavyko pridėti tinklo"
-
-msgid "Current"
-msgstr "Dabartinis"
-
-msgid "Current percentage and graph line"
-msgstr "Galios procentai ir grafiko linija"
-
-msgid "DPMS has failed to load and has been disabled"
-msgstr "DPMS nepakrauta ar išjungta"
-
-msgid "Date"
-msgstr "Data"
-
-msgid "Delete"
-msgstr "Naikinti"
-
-msgid "Delete Directory?"
-msgstr "Šalinti katalogą?"
-
-msgid "Delete File?"
-msgstr "Šalinti failą?"
-
-msgid "Disable Motors"
-msgstr "Išjungti variklius"
-
-msgid "Disable for 12hs with am / pm"
-msgstr "Išjungti 12hs su am / pm"
-
-msgid "Disconnect"
-msgstr "Atsijungti"
-
-msgid "Distance (mm)"
-msgstr "Atstumas (mm)"
-
-#, python-format
-msgid "Do you want to forget or disconnect %s?"
-msgstr "Ar tikrai noriti atsijungti ir užmiršti %s?"
-
-#, python-format
-msgid "Do you want to recover %s?"
-msgstr "Ar norite atstatyti %s?"
-
-msgid "Elapsed:"
-msgstr "Praėjo:"
-
-msgid "Emergency Stop"
-msgstr "Avarinis stabdymas"
-
-msgid "Enable screen power management"
-msgstr "Įgalinti ekrano energijos valdymą"
-
-msgid "Error"
-msgstr "Klaida"
-
-msgid "Error clearing active spool"
-msgstr "Klaida išvalant aktyvią ritę"
-
-msgid "Error getting active spool"
-msgstr "Klaida gaunant aktyvią ritę"
-
-msgid "Error setting active spool"
-msgstr "Klaida nustatant aktyvią ritę"
-
-msgid "Error trying to fetch spools"
-msgstr "Klaida bandant gauti rites"
-
-msgid "Error: Couldn't get a position to probe"
-msgstr "Klaida: neįmanoma pozicija aukščio sensoriui"
-
-msgid "Estimated Time"
-msgstr "Apskaičiuotas laikas"
-
-msgid "Estimated Time Method"
-msgstr "Numatomas laikas"
-
-msgid "Example"
-msgstr "Pavyzdys"
-
-msgid "Exclude Object"
-msgstr "Atmesti objektą"
-
-msgid "Extra Large"
-msgstr "Labai didelis"
-
-msgid "Extrude"
-msgstr "Išstumti"
-
-msgid "Extruders"
-msgstr "Ekstruderiai"
-
-msgid "Extrusion +"
-msgstr "Ekstruzija +"
-
-msgid "Extrusion -"
-msgstr "Ekstruzija -"
-
-msgid "Failed to delete connection"
-msgstr "Nepavyko ištrinti ryšio"
-
-msgid "Failed to initialize"
-msgstr "Nepavyko inicijuoti"
-
-msgid "Failed, adjust position first"
-msgstr "Klaida. Pakeiskite padėtį"
+msgid "Limits"
+msgstr "Ribos"
 
 msgid "Fan"
 msgstr "Ventiliatorius"
 
-msgid "Filament"
-msgstr "Gijų siūlas"
+msgid "Leds"
+msgstr "LED'ai"
 
-msgid "Filament Used"
-msgstr "Panaudota plastiko"
+msgid "Macros"
+msgstr "Makro komandos"
 
-msgid "Filament total:"
-msgstr "Viso plastiko:"
+msgid "Pins"
+msgstr "Prievadai"
 
-msgid "Filament used:"
-msgstr "Plastiko naudojimas:"
+msgid "Power"
+msgstr "Maitinimas"
 
-msgid "Filament:"
-msgstr "Plastikas:"
+msgid "Camera"
+msgstr "Kamera"
 
-msgid "File"
-msgstr "Failas"
+msgid "Console"
+msgstr "Terminalas"
 
-msgid "File:"
-msgstr "Failas:"
+msgid "Update"
+msgstr "Atnaujinimai"
 
-msgid "Filter"
-msgstr "Filtras"
+msgid "Input Shaper"
+msgstr "Input Shaper"
 
-msgid "Finding ADXL"
-msgstr "ADXL paieška"
+msgid "Save Config"
+msgstr "Išsaugoti konfigūraciją"
+
+msgid "Network"
+msgstr "Tinklas"
+
+msgid "Notifications"
+msgstr "Pranešimai"
+
+msgid "System"
+msgstr "Sistema"
 
 msgid "Fine Tuning"
 msgstr "Tikslus nustatymas"
 
-msgid "Finish"
-msgstr "Pabaiga"
-
-msgid "Firmware Restart"
-msgstr "Perkrauti kontrolerį"
-
-msgid "Flow:"
-msgstr "Srautas:"
-
-msgid "Flowrate:"
-msgstr "Sąnaudos:"
-
-msgid "Font Size"
-msgstr "Šrifto dydis"
-
-msgid "For mouse control or to verify touchscreen accuracy"
-msgstr "Norėdami valdyti pele ar patikrinti jutiklinio ekrano tikslumą"
-
-msgid "Forget"
-msgstr "Užmiršti"
-
-msgid "Full Update"
-msgstr "Atnaujinti viską"
-
-msgid "Gcodes"
-msgstr "G-kodas"
-
-msgid "Getting IP address"
-msgstr "IP adreso gavimas"
-
-msgid "Go Back"
-msgstr "Atgal"
-
-msgid "Height:"
-msgstr "Aukštis:"
-
-msgid "Hide"
-msgstr "Paslėpti"
-
-msgid "Hide sensors in Temp."
-msgstr "Slėpti temperatūros daviklius."
-
-msgid "Home"
-msgstr "Parkavimas"
-
-msgid "Home All"
-msgstr "Parkuoti viską"
-
 msgid "Home X"
 msgstr "Parkuoti X"
-
-msgid "Home XY"
-msgstr "Parkuoti XY"
 
 msgid "Home Y"
 msgstr "Parkuoti Y"
@@ -389,44 +104,146 @@ msgstr "Parkuoti Y"
 msgid "Home Z"
 msgstr "Parkuoti Z"
 
-msgid "Host"
-msgstr "Hostas"
+msgid "Home All"
+msgstr "Parkuoti viską"
 
-msgid "Hostname"
-msgstr "Hosto vardas"
+msgid "Home XY"
+msgstr "Parkuoti XY"
 
-msgid "ID"
-msgstr "ID"
+msgid "Quad Gantry Level"
+msgstr "Diržų lygiavimas"
+
+msgid "Z Tilt"
+msgstr "Z polinkis"
+
+msgid "Print Control"
+msgstr "Spausdinimo valdymas"
+
+msgid "Lock"
+msgstr "Užrakinti"
+
+msgid "Menu"
+msgstr "Meniu"
 
 msgid "Icon Theme"
 msgstr "Temos"
 
-msgid "Initializing printer..."
-msgstr "Printeris kraunasi..."
+msgid "Changes how the interface looks"
+msgstr "Pakeičia sąsajos išvaizdą"
 
-msgid "Initiate a PID calibration for:"
-msgstr "Paleiskite PID kalibravimą:"
+msgid "(default)"
+msgstr "(pagal nutylėjimą)"
 
-msgid "Input Shaper"
-msgstr "Input Shaper"
+msgid "Estimated Time Method"
+msgstr "Numatomas laikas"
 
-msgid "Insufficient privileges"
-msgstr "Privilegijų nepakanka"
+msgid "Changes how the time remaining is calculated"
+msgstr "Keičia likusio laiko skaičiavimo būdą"
 
-msgid "Interface"
-msgstr "Interfeisas"
+msgid "Auto"
+msgstr "Auto"
 
-msgid "Invalid"
-msgstr "Neteisinga"
+msgid "File"
+msgstr "Failas"
 
-msgid "Invalid password"
-msgstr "Blogas slaptažodis"
+msgid "Filament Used"
+msgstr "Panaudota plastiko"
 
-msgid "Invalid temperature"
-msgstr "Neteisinga temperatūra"
+msgid "Slicer"
+msgstr "Slaiseris"
+
+msgid "Screen Power Off Time"
+msgstr "Ekrano išjungimo laikas"
+
+msgid "Timeout for screen black-out or power-off"
+msgstr "Ekrano užtemimo arba maitinimo išjungimo laikas"
+
+msgid "Never"
+msgstr "Niekada"
+
+msgid "Printing"
+msgstr "Spausdinama"
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr "Ekrano užtemimo arba maitinimo išjungimo laikas spausdinimo metu"
+
+msgid "24 Hour Time"
+msgstr "24-laiko formatas"
+
+msgid "Disable for 12hs with am / pm"
+msgstr "Išjungti 12hs su am / pm"
+
+msgid "Macro shortcut on sidebar"
+msgstr "Rodyti makro komandas šoninėje juostoje"
+
+msgid "Font Size"
+msgstr "Šrifto dydis"
 
 msgid "Inversely affects the icon size"
 msgstr "Atvirkščiai veikia piktogramos dydį"
+
+msgid "Small"
+msgstr "Mažas"
+
+msgid "Medium"
+msgstr "Vidutinis"
+
+msgid "Large"
+msgstr "Didelis"
+
+msgid "Extra Large"
+msgstr "Labai didelis"
+
+msgid "Maximum"
+msgstr "Maksimum"
+
+msgid "Confirm Emergency Stop"
+msgstr "Patvirtinkite avarinį stabdymą"
+
+msgid "Asks for confirmation before stopping"
+msgstr "Klausti patvirtinimo prieš sustabdant"
+
+msgid "Hide sensors in Temp."
+msgstr "Slėpti temperatūros daviklius."
+
+msgid "Show only devices that are able to be set"
+msgstr "Rodyti tik tuos įrenginius, kuriuos galima nustatyti"
+
+msgid "Screen DPMS"
+msgstr "Ekrano DPMS"
+
+msgid "Enable screen power management"
+msgstr "Įgalinti ekrano energijos valdymą"
+
+msgid "Not all screens support this"
+msgstr "Ne visi ekranai tai palaiko"
+
+msgid "Auto-close notifications"
+msgstr "Automatinis pranešimų slėpimas"
+
+msgid "Close messages after a timeout"
+msgstr "Pasibaigus skirtajam laikui uždaryti pranešimus"
+
+msgid "Show Heater Power"
+msgstr "Rodyti šildytuvo galią"
+
+msgid "Current percentage and graph line"
+msgstr "Galios procentai ir grafiko linija"
+
+msgid "Show Scrollbars Buttons"
+msgstr "Rodyti stumdymo juostą"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr "Naudinga nereaguojantiems jutikliniams ekranams"
+
+msgid "Auto-open Extrude On Pause"
+msgstr "Automatiškai atidaryti Extruderio menių kai suveikia Pauzė"
+
+msgid "Show cursor"
+msgstr "Rodyti kursorių"
+
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr "Norėdami valdyti pele ar patikrinti jutiklinio ekrano tikslumą"
 
 msgid "Invert X"
 msgstr "X inversija"
@@ -437,555 +254,14 @@ msgstr "Y inversija"
 msgid "Invert Z"
 msgstr "Z inversija"
 
-msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
-"Priklausomai nuo šildytuvo galios gali užtrukti daugiau kaip 5 minutes."
-
-msgid "It's possible that the configuration is not correct"
-msgstr "Gali būti, kad konfigūracija neteisinga"
-
-msgid "Job Status"
-msgstr "Darbo statusas"
-
-msgid "Klipper Restart"
-msgstr "Perkrauti Klipper'į"
-
-msgid "Klipper has disconnected"
-msgstr "Nėra ryšio su Klipper'iu"
-
-msgid "Klipper has encountered an error."
-msgstr "Klipper'is rado klaidą."
-
-msgid "Klipper has shutdown"
-msgstr "Klipper'is išjungtas"
-
-msgid "Klipper is attempting to start"
-msgstr "Klipper'is pasiruošęs"
-
-msgid "Klipper will reboot"
-msgstr "Klipper'is persikraus"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD FILAMENT / UNLOAD FILAMENT yra paslėpti ir turėtų būti naudojami nuo "
-"išspaudimo"
-
-msgid "Language"
-msgstr "Kalba"
-
-msgid "Large"
-msgstr "Didelis"
-
-msgid "Last Duration"
-msgstr "Paskutinė trukmė"
-
-msgid "Last Used"
-msgstr "Paskutinis naudotas"
-
-msgid "Layer Height"
-msgstr "Sluoksnio aukštis"
-
-msgid "Layer:"
-msgstr "Sluoksnis:"
-
-msgid "Leds"
-msgstr "LED'ai"
-
-msgid "Left:"
-msgstr "Liko:"
-
-msgid "Limits"
-msgstr "Ribos"
-
-msgid "Load"
-msgstr "Užkrauti"
-
-msgid "Loading..."
-msgstr "Užkraunama..."
-
-msgid "Lock"
-msgstr "Užrakinti"
-
-msgid "Lost Connection to Moonraker"
-msgstr "Prarastas ryšys su Moonraker"
-
-msgid "Lower Nozzle"
-msgstr "Nuleisti purkštuką"
-
-msgid "Macro shortcut on sidebar"
-msgstr "Rodyti makro komandas šoninėje juostoje"
-
-msgid "Macros"
-msgstr "Makro komandos"
-
-msgid "Main Menu"
-msgstr "Pagrindinis meniu"
-
-msgid "Material"
-msgstr "Medžiaga"
-
-msgid "Max"
-msgstr "Max"
-
-msgid "Max Acceleration"
-msgstr "Maksimalus pagreitis"
-
-msgid "Max Velocity"
-msgstr "Maksimalus greitis"
-
-msgid "Max:"
-msgstr "Max:"
-
-msgid "Maximum"
-msgstr "Maksimum"
-
-msgid "Measure Both"
-msgstr "Išmatuoti abu"
-
-msgid "Measure X"
-msgstr "Išmatuoti X"
-
-msgid "Measure Y"
-msgstr "Išmatuoti Y"
-
-msgid "Medium"
-msgstr "Vidutinis"
-
-msgid "Memory"
-msgstr "Atmintis"
-
-msgid "Menu"
-msgstr "Meniu"
-
-msgid "Minimum Cruise Ratio"
-msgstr "Minimalus kruizo koeficientas"
-
-msgid "Minimum:"
-msgstr "Minimum:"
-
-msgid "Modified"
-msgstr "Pakeista"
-
-msgid "Moonraker: connected"
-msgstr "Moonraker: prijungtas"
-
-msgid "More"
-msgstr "Daugiau"
-
-msgid "Move"
-msgstr "Judinti"
-
-msgid "Move Distance (mm)"
-msgstr "Poslinkis (mm)"
-
-msgid "Name"
-msgstr "Vardas"
-
-msgid "Network"
-msgstr "Tinklas"
-
-msgid "Network connected"
-msgstr "Tinklas prijungtas"
-
-msgid "Network disconnected"
-msgstr "Tinklas atjungtas"
-
-msgid "Network not found"
-msgstr "Tinklas nerastas"
-
-msgid "Never"
-msgstr "Niekada"
-
-msgid "New"
-msgstr "Naujas"
-
-msgid "No elegible macros:"
-msgstr "Nėra teisingų makro komandų:"
-
-msgid "No info available"
-msgstr "Nėra informacijos"
-
-msgid "No mesh has been loaded"
-msgstr "Tinklelis nebuvo įkeltas"
-
-msgid "No wireless interface has been found"
-msgstr "Belaidė sąsaja nerasta"
-
-msgid "Not all screens support this"
-msgstr "Ne visi ekranai tai palaiko"
-
-msgid "Not working or not configured"
-msgstr "Neveikia arba nesukonfigūruota"
-
-msgid "Nothing selected"
-msgstr "Niekas nepasirinkta"
-
-msgid "Notification log empty"
-msgstr "Pranešimų žurnalas tuščias"
-
-msgid "Notifications"
-msgstr "Pranešimai"
-
-msgid "Nozzle diameter"
-msgstr "Purkštuko diametras"
-
-msgid "Only for the move panel"
-msgstr "Tik perkėlimo skydeliui"
-
-#, python-format
-msgid "Outdated by %d"
-msgstr "Pasenę %d"
-
-msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "Paketas bus atnaujintas"
-msgstr[1] "Paketai bus atnaujinti"
-msgstr[2] "Paketai bus atnaujinti"
-
-msgid "Part Fan"
-msgstr "Dirbinio ventiliatorius"
-
-msgid "Password"
-msgstr "Slaptažodis"
-
-msgid "Password saved"
-msgstr "Slaptažodis išsaugotas"
-
-msgid "Pause"
-msgstr "Pauzė"
-
-msgid "Paused"
-msgstr "Pristabdyta"
-
-msgid "Perform a full upgrade?"
-msgstr "Atlikti pilną atnaujinimą?"
-
-msgid "Pins"
-msgstr "Prievadai"
-
-msgid "Please recompile and flash the micro-controller."
-msgstr "Perprogramuokite mikrovaldiklį."
-
-msgid "Please wait"
-msgstr "Prašome laukti"
-
-msgid "Power"
-msgstr "Maitinimas"
-
-msgid "Power On Printer"
-msgstr "Išjungti spausdintuvą"
-
-msgid "Pressure Advance"
-msgstr "Slėgio kontrolė"
-
-msgid "Pressure Advance:"
-msgstr "Slėgio kontrolė:"
-
-msgid "Pressure advance"
-msgstr "Slėgio reguliavimas"
-
-msgid "Print"
-msgstr "Spausdinti"
-
-msgid "Print Control"
-msgstr "Spausdinimo valdymas"
-
-msgid "Printer"
-msgstr "Spausdintuvas"
-
-msgid "Printer Connections"
-msgstr "Prijungti spausdintuvai"
-
-msgid "Printer Select"
-msgstr "Išsirinkti spausdintuvą"
-
-msgid "Printing"
-msgstr "Spausdinama"
-
-msgid "Probe Offset"
-msgstr "Zondo poslinkis"
-
-msgid "Profile Name:"
-msgstr "Profilio vardas:"
-
-msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Prašydami pagalbos pateikite KlipperScreen.log.\n"
-
-msgid "Quad Gantry Level"
-msgstr "Diržų lygiavimas"
-
-msgid "Raise Nozzle"
-msgstr "Pakelti purkštuką"
-
-msgid "Recover"
-msgstr "Atstatyti"
-
-msgid "Recover Hard"
-msgstr "Pilnas atstatymas"
-
-msgid "Recover Soft"
-msgstr "Švelnus atstatymas"
-
-msgid "Reference"
-msgstr "Nuoroda"
-
-msgid "Refresh"
-msgstr "Atnaujinti"
-
-msgid "Remove network"
-msgstr "Pašalinti tinklą"
-
-msgid "Rename/Move:"
-msgstr "Pervadinti/Perkelti:"
-
-msgid "Restart"
-msgstr "Perkrauti"
-
-msgid "Resume"
-msgstr "Tęsti"
-
-msgid "Retract"
-msgstr "Įtraukti"
-
-msgid "Retraction"
-msgstr "Išstumimas"
-
-msgid "Retraction Length"
-msgstr "Išstūmimo ilgis"
-
-msgid "Retraction Speed"
-msgstr "Išstūmimo greitis"
-
-msgid "Retry"
-msgstr "Pakartoti"
-
-msgid "Retrying"
-msgstr "Antras bandymas"
-
-msgid "Rotation invalid"
-msgstr "Neteisingas sukimas"
-
-msgid "Save"
-msgstr "Išsaugoti"
-
-msgid "Save Config"
-msgstr "Išsaugoti konfigūraciją"
-
-msgid "Save Z"
-msgstr "Išsaugoti Z"
-
-msgid "Save configuration?"
-msgstr "Išsaugoti konfigūraciją?"
-
-msgid "Saved"
-msgstr "Išsaugota"
-
-#, python-format
-msgid "Saved offset: %s"
-msgstr "Išsaugotas poslinkis: %s"
-
-msgid "Screen DPMS"
-msgstr "Ekrano DPMS"
-
-msgid "Screen Power Off Time"
-msgstr "Ekrano išjungimo laikas"
-
-msgid "Screws Adjust"
-msgstr "Reguliuoti varžtus"
-
-msgid "Screws not used:"
-msgstr "Varžtai nenaudoti:"
-
-msgid "Send"
-msgstr "Siūsti"
-
-msgid "Set Temp"
-msgstr "Nustatyta temperatūra"
-
-msgid "Settings"
-msgstr "Nustatymai"
-
-msgid "Show"
-msgstr "Rodyti"
-
-msgid "Show Heater Power"
-msgstr "Rodyti šildytuvo galią"
-
-msgid "Show Scrollbars Buttons"
-msgstr "Rodyti stumdymo juostą"
-
-msgid "Show cursor"
-msgstr "Rodyti kursorių"
-
-msgid "Show only devices that are able to be set"
-msgstr "Rodyti tik tuos įrenginius, kuriuos galima nustatyti"
-
-msgid "Shutdown"
-msgstr "Išjungti"
-
-msgid "Size"
-msgstr "Dydis"
-
-msgid "Slicer"
-msgstr "Slaiseris"
-
-msgid "Slicer:"
-msgstr "Slaiseris:"
-
-msgid "Small"
-msgstr "Mažas"
-
-msgid "Smooth time"
-msgstr "Išlyginimo laikas"
-
-msgid "Speed (mm/s)"
-msgstr "Greitis (mm/s)"
-
-msgid "Speed +"
-msgstr "Greitis +"
-
-msgid "Speed -"
-msgstr "Greitis -"
-
-msgid "Speed:"
-msgstr "Greitis:"
-
-msgid "Square Corner Velocity"
-msgstr "Stataus kampo greitis"
-
-msgid "Standby"
-msgstr "Laukiama"
-
-msgid "Start"
-msgstr "Pradėti"
-
-msgid "Starting recovery for"
-msgstr "Paleidžiamas atkūrimas"
-
-msgid "Starting update for"
-msgstr "Paleidžiami atnaujinimai"
-
-msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr ""
-"Sukeičia mygtukus, jei jie yra vienas ant kito, paveikia kitus skydelius"
-
-msgid "System"
-msgstr "Sistema"
-
-msgid "System Restart"
-msgstr "Sistemos perkrovimas"
-
-msgid "System Shutdown"
-msgstr "Išjungti sistemą"
-
-msgid "System:"
-msgstr "SIstema:"
-
-msgid "Temp (°C)"
-msgstr "Temperatūra (°С)"
-
-msgid "Temperature"
-msgstr "Temperatūra"
-
-msgid "Temperature too low to extrude"
-msgstr "Per maža temperatūra ekstruzijai"
-
-msgid "The system doesn't meet the minimum requirement"
-msgstr "Sistema neatitinka minimalių reikalavimų"
-
-msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr "Ši plokštė palaiko iki 9 varžtų 3x3 tinklelyje"
-
-msgid "This will affect screw positions and mesh graph"
-msgstr "Tai turės įtakos varžtų padėčiai ir tinklelio grafikams"
-
-msgid "Timeout for screen black-out or power-off"
-msgstr "Ekrano užtemimo arba maitinimo išjungimo laikas"
-
-msgid "Timeout for screen black-out or power-off during printing"
-msgstr "Ekrano užtemimo arba maitinimo išjungimo laikas spausdinimo metu"
-
-msgid "Total:"
-msgstr "Viso:"
-
-msgid "Unknown Heater"
-msgstr "Nežinomas šildytuvas"
-
-msgid "Unknown security type"
-msgstr "Nežinomas saugos tipas"
-
-msgid "Unload"
-msgstr "Iškrauti"
-
-msgid "Unlock"
-msgstr "Atrakinti"
-
-msgid "Unlock failed"
-msgstr "Atrakinti nepavyko"
-
-msgid "Unretract Extra Length"
-msgstr "Papildomas plastiko padavimo ilgis"
-
-msgid "Unretract Speed"
-msgstr "Įtraukimo greitis"
-
-msgid "Up To Date"
-msgstr "Atnaujinta"
-
-msgid "Update"
-msgstr "Atnaujinimai"
-
-msgid "Updating"
-msgstr "Atnaujinama"
-
-msgid "Useful for un-responsive touchscreens"
-msgstr "Naudinga nereaguojantiems jutikliniams ekranams"
-
-msgid "User"
-msgstr "Vartotojas"
-
-msgid "WebRTC is not supported by the backend trying Stream"
-msgstr "WebRTC nepalaikoma, bandoma Stream"
-
-msgid "Working"
-msgstr "Dirbama"
-
 msgid "XY Move Speed (mm/s)"
 msgstr "XY judėjimo greitis (mm/s)"
-
-msgid "XY Speed (mm/s)"
-msgstr "XY greitis (mm/s)"
-
-msgid "Z Calibrate"
-msgstr "Z kalibravimas"
 
 msgid "Z Move Speed (mm/s)"
 msgstr "Z judėjimo greitis (mm/s)"
 
-msgid "Z Speed (mm/s)"
-msgstr "Z greitis (mm/s)"
-
-msgid "Z Tilt"
-msgstr "Z polinkis"
-
-msgid "Z offset:"
-msgstr "Poslinkis Z:"
-
-msgid "commit"
-msgid_plural "commits"
-msgstr[0] "pakeitimas"
-msgstr[1] "pakeitimai"
-msgstr[2] "pakeitimai"
-
-msgid "day"
-msgid_plural "days"
-msgstr[0] "diena"
-msgstr[1] "dienos"
-msgstr[2] "dienų"
-
-msgid "g"
-msgstr "g"
+msgid "Language"
+msgstr "Kalba"
 
 msgid "hour"
 msgid_plural "hours"
@@ -993,20 +269,275 @@ msgstr[0] "valanda"
 msgstr[1] "valandos"
 msgstr[2] "valandos"
 
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "makrokomandos, kurios naudoja 'rename_existing', yra paslėptos"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "makrokomandos, kurių pavadinimas prasideda raide \"_\", yra paslėptos"
-
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minutė"
 msgstr[1] "minutės"
 msgstr[2] "minutės"
 
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "Ar tikrai paleisti avarinį stabdymą?"
+
+msgid "day"
+msgid_plural "days"
+msgstr[0] "diena"
+msgstr[1] "dienos"
+msgstr[2] "dienų"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "sekundė"
+msgstr[1] "sekundės"
+msgstr[2] "sekundžių"
+
+msgid "Network not found"
+msgstr "Tinklas nerastas"
+
+msgid "Unknown security type"
+msgstr "Nežinomas saugos tipas"
+
+msgid "Insufficient privileges"
+msgstr "Privilegijų nepakanka"
+
+msgid "Invalid password"
+msgstr "Blogas slaptažodis"
+
+msgid "Couldn't add network"
+msgstr "Nepavyko pridėti tinklo"
+
+msgid "Failed to delete connection"
+msgstr "Nepavyko ištrinti ryšio"
+
+msgid "Starting WiFi Association"
+msgstr "WiFi prisijungimas"
+
+msgid "Connecting"
+msgstr "Prisijungiama"
+
+msgid "Getting IP address"
+msgstr "IP adreso gavimas"
+
+msgid "Network connected"
+msgstr "Tinklas prijungtas"
+
+msgid "Network disconnected"
+msgstr "Tinklas atjungtas"
+
+msgid "Connection failed"
+msgstr "Prisijungti nepavyko"
+
+msgid "No mesh has been loaded"
+msgstr "Tinklelis nebuvo įkeltas"
+
+msgid "Calibrate"
+msgstr "Kalibravimas"
+
+msgid "Invalid temperature"
+msgstr "Neteisinga temperatūra"
+
+msgid "Password"
+msgstr "Slaptažodis"
+
+msgid "Unlock"
+msgstr "Atrakinti"
+
+msgid "Unlock failed"
+msgstr "Atrakinti nepavyko"
+
+msgid "Are you sure do you want to exclude the object?"
+msgstr "Ar tikrai norite išmesti objektą?"
+
+msgid "Finish"
+msgstr "Pabaiga"
+
+msgid "Updating"
+msgstr "Atnaujinama"
+
+msgid "Disable Motors"
+msgstr "Išjungti variklius"
+
+msgid "Screws Adjust"
+msgstr "Reguliuoti varžtus"
+
+msgid "Rotation invalid"
+msgstr "Neteisingas sukimas"
+
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr "Ši plokštė palaiko iki 9 varžtų 3x3 tinklelyje"
+
+msgid "It's possible that the configuration is not correct"
+msgstr "Gali būti, kad konfigūracija neteisinga"
+
+msgid "Screws not used:"
+msgstr "Varžtai nenaudoti:"
+
+msgid "Reference"
+msgstr "Nuoroda"
+
+msgid "Add profile"
+msgstr "Pridėti profilį"
+
+msgid "Clear"
+msgstr "Išvalyti"
+
+msgid "Profile Name:"
+msgstr "Profilio vardas:"
+
+msgid "Save"
+msgstr "Išsaugoti"
+
+msgid "Calibrating"
+msgstr "Kalibruojama"
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr "WebRTC nepalaikoma, bandoma Stream"
+
+msgid "Auto-scroll"
+msgstr "Automatinis slinkimas"
+
+msgid "Send"
+msgstr "Siūsti"
+
+msgid "Example"
+msgstr "Pavyzdys"
+
+msgid "Exclude Object"
+msgstr "Atmesti objektą"
+
+msgid "Are you sure you wish to cancel this print?"
+msgstr "Ar tikrai norite nutraukti spausdinimą?"
+
+msgid "Load"
+msgstr "Užkrauti"
+
+msgid "Unload"
+msgstr "Iškrauti"
+
+msgid "Retract"
+msgstr "Įtraukti"
+
+msgid "Pressure Advance"
+msgstr "Slėgio kontrolė"
+
+msgid "Retraction"
+msgstr "Išstumimas"
+
+msgid "Extruders"
+msgstr "Ekstruderiai"
+
+msgid "Distance (mm)"
+msgstr "Atstumas (mm)"
+
+msgid "Speed (mm/s)"
+msgstr "Greitis (mm/s)"
+
+msgid "Part Fan"
+msgstr "Dirbinio ventiliatorius"
+
+msgid "Max"
+msgstr "Max"
+
 msgid "mm"
 msgstr "mm"
+
+msgid "Speed +"
+msgstr "Greitis +"
+
+msgid "Speed -"
+msgstr "Greitis -"
+
+msgid "Extrusion +"
+msgstr "Ekstruzija +"
+
+msgid "Extrusion -"
+msgstr "Ekstruzija -"
+
+msgid "Name"
+msgstr "Vardas"
+
+msgid "Settings"
+msgstr "Nustatymai"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Size"
+msgstr "Dydis"
+
+msgid "Loading..."
+msgstr "Užkraunama..."
+
+msgid "Delete File?"
+msgstr "Šalinti failą?"
+
+msgid "Delete Directory?"
+msgstr "Šalinti katalogą?"
+
+msgid "Start"
+msgstr "Pradėti"
+
+msgid "Delete"
+msgstr "Naikinti"
+
+msgid "Cancel"
+msgstr "Atšaukti"
+
+msgid "Modified"
+msgstr "Pakeista"
+
+msgid "Layer Height"
+msgstr "Sluoksnio aukštis"
+
+msgid "Filament"
+msgstr "Gijų siūlas"
+
+msgid "Estimated Time"
+msgstr "Apskaičiuotas laikas"
+
+msgid "g"
+msgstr "g"
+
+msgid "Nozzle diameter"
+msgstr "Purkštuko diametras"
+
+msgid "Last Duration"
+msgstr "Paskutinė trukmė"
+
+msgid "Rename/Move:"
+msgstr "Pervadinti/Perkelti:"
+
+msgid "Finding ADXL"
+msgstr "ADXL paieška"
+
+msgid "Measure X"
+msgstr "Išmatuoti X"
+
+msgid "Measure Y"
+msgstr "Išmatuoti Y"
+
+msgid "Measure Both"
+msgstr "Išmatuoti abu"
+
+msgid "Klipper will reboot"
+msgstr "Klipper'is persikraus"
+
+msgid "Save configuration?"
+msgstr "Išsaugoti konfigūraciją?"
+
+msgid "Check ADXL Wiring"
+msgstr "Patikrinkite ADXL laidus"
+
+msgid "ADXL Not Configured"
+msgstr "ADXL nekonfigūruotas"
+
+msgid "Auto-calibrate"
+msgstr "Automatinis kalibravimas"
+
+msgid "Calibrated"
+msgstr "Sukalibruota"
+
+msgid "Job Status"
+msgstr "Darbo statusas"
 
 msgid "mm/s"
 msgstr "mm/s"
@@ -1017,14 +548,504 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+msgid "Left:"
+msgstr "Liko:"
+
+msgid "Elapsed:"
+msgstr "Praėjo:"
+
+msgid "Total:"
+msgstr "Viso:"
+
+msgid "Slicer:"
+msgstr "Slaiseris:"
+
+msgid "File:"
+msgstr "Failas:"
+
+msgid "Filament:"
+msgstr "Plastikas:"
+
+msgid "Speed:"
+msgstr "Greitis:"
+
+msgid "Acceleration:"
+msgstr "Pagreitis:"
+
+msgid "Flow:"
+msgstr "Srautas:"
+
+msgid "Z offset:"
+msgstr "Poslinkis Z:"
+
+msgid "Filament used:"
+msgstr "Plastiko naudojimas:"
+
+msgid "Filament total:"
+msgstr "Viso plastiko:"
+
+msgid "Pressure Advance:"
+msgstr "Slėgio kontrolė:"
+
+msgid "Flowrate:"
+msgstr "Sąnaudos:"
+
+msgid "Height:"
+msgstr "Aukštis:"
+
+msgid "Layer:"
+msgstr "Sluoksnis:"
+
+msgid "Pause"
+msgstr "Pauzė"
+
+msgid "Restart"
+msgstr "Perkrauti"
+
+msgid "Resume"
+msgstr "Tęsti"
+
+msgid "Save Z"
+msgstr "Išsaugoti Z"
+
+#, python-brace-format
+msgid "Apply {sign}{offset:.3f} offset to Probe?"
+msgstr ""
+
+#, python-brace-format
+msgid "Apply {sign}{offset:.3f} offset to Endstop?"
+msgstr ""
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr "Išsaugotas poslinkis: %s"
+
+msgid "Apply"
+msgstr "Pritaikyti"
+
+msgid "Cancel Print"
+msgstr "Atšaukti spausdinimą"
+
+msgid "Go Back"
+msgstr "Atgal"
+
+msgid "Working"
+msgstr "Dirbama"
+
+msgid "Complete"
+msgstr "Baigta"
+
+msgid "Error"
+msgstr "Klaida"
+
+msgid "Cancelling"
+msgstr "Atšaukiama"
+
+msgid "Cancelled"
+msgstr "Atšaukta"
+
+msgid "Paused"
+msgstr "Pristabdyta"
+
+msgid "Standby"
+msgstr "Laukiama"
+
+msgid "Max Acceleration"
+msgstr "Maksimalus pagreitis"
+
+msgid "Minimum Cruise Ratio"
+msgstr "Minimalus kruizo koeficientas"
+
+msgid "Max Velocity"
+msgstr "Maksimalus greitis"
+
+msgid "Square Corner Velocity"
+msgstr "Stataus kampo greitis"
+
+msgid "Unknown Heater"
+msgstr "Nežinomas šildytuvas"
+
+msgid "Can't set above the maximum:"
+msgstr "Negalima nustatyti virš maksimumo:"
+
+msgid "Initiate a PID calibration for:"
+msgstr "Paleiskite PID kalibravimą:"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
+"Priklausomai nuo šildytuvo galios gali užtrukti daugiau kaip 5 minutes."
+
+msgid "Temp (°C)"
+msgstr "Temperatūra (°С)"
+
+msgid "Home"
+msgstr "Parkavimas"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "Ar tikrai norite išjungti variklius?"
+
+msgid "Move Distance (mm)"
+msgstr "Poslinkis (mm)"
+
+msgid "This will affect screw positions and mesh graph"
+msgstr "Tai turės įtakos varžtų padėčiai ir tinklelio grafikams"
+
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
+"Sukeičia mygtukus, jei jie yra vienas ant kito, paveikia kitus skydelius"
+
+msgid "XY Speed (mm/s)"
+msgstr "XY greitis (mm/s)"
+
+msgid "Only for the move panel"
+msgstr "Tik perkėlimo skydeliui"
+
+msgid "Z Speed (mm/s)"
+msgstr "Z greitis (mm/s)"
+
+msgid "Failed to initialize"
+msgstr "Nepavyko inicijuoti"
+
+msgid "Interface"
+msgstr "Interfeisas"
+
+msgid "No wireless interface has been found"
+msgstr "Belaidė sąsaja nerasta"
+
+msgid "Connected"
+msgstr "Prijungta"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr "Ar tikrai noriti atsijungti ir užmiršti %s?"
+
+msgid "Forget"
+msgstr "Užmiršti"
+
+msgid "Disconnect"
+msgstr "Atsijungti"
+
+msgid "Remove network"
+msgstr "Pašalinti tinklą"
+
+msgid "User"
+msgstr "Vartotojas"
+
+#, python-format
+msgid "Connecting to %s"
+msgstr "Prisijungiama prie %s"
+
+msgid "Channel"
+msgstr "Kanalas"
+
+msgid "Hostname"
+msgstr "Hosto vardas"
+
+msgid "Notification log empty"
+msgstr "Pranešimų žurnalas tuščias"
+
+msgid "Pressure advance"
+msgstr "Slėgio reguliavimas"
+
+msgid "Current"
+msgstr "Dabartinis"
+
+msgid "Smooth time"
+msgstr "Išlyginimo laikas"
+
 msgid "s"
 msgstr "s"
 
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "sekundė"
-msgstr[1] "sekundės"
-msgstr[2] "sekundžių"
+msgid "Printer Select"
+msgstr "Išsirinkti spausdintuvą"
+
+msgid "Please wait"
+msgstr "Prašome laukti"
+
+msgid "Retraction Length"
+msgstr "Išstūmimo ilgis"
+
+msgid "Retraction Speed"
+msgstr "Išstūmimo greitis"
+
+msgid "Unretract Extra Length"
+msgstr "Papildomas plastiko padavimo ilgis"
+
+msgid "Unretract Speed"
+msgstr "Įtraukimo greitis"
+
+msgid "Printer Connections"
+msgstr "Prijungti spausdintuvai"
+
+msgid "Shutdown"
+msgstr "Išjungti"
+
+msgid "Emergency Stop"
+msgstr "Avarinis stabdymas"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "Ar tikrai norite perkrauti sistemą?"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "Ar tikrai norite išjungti spausdintuvą?"
+
+msgid "Accept"
+msgstr "Patvirtinti"
+
+msgid "Host"
+msgstr "Hostas"
+
+msgid "Printer"
+msgstr "Spausdintuvas"
+
+msgid "Both"
+msgstr "Abu"
+
+msgid "Initializing printer..."
+msgstr "Printeris kraunasi..."
+
+msgid "Klipper Restart"
+msgstr "Perkrauti Klipper'į"
+
+msgid "Firmware Restart"
+msgstr "Perkrauti kontrolerį"
+
+msgid "System Restart"
+msgstr "Sistemos perkrovimas"
+
+msgid "System Shutdown"
+msgstr "Išjungti sistemą"
+
+msgid "Retry"
+msgstr "Pakartoti"
+
+msgid "Power On Printer"
+msgstr "Išjungti spausdintuvą"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Last Used"
+msgstr "Paskutinis naudotas"
+
+msgid "Archived"
+msgstr "Archyvuota"
+
+msgid "Filter"
+msgstr "Filtras"
+
+msgid "Material"
+msgstr "Medžiaga"
+
+msgid "Comment"
+msgstr ""
+
+msgid "Last used"
+msgstr ""
+
+msgid "Remaining weight"
+msgstr ""
+
+msgid "Remaining length"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr "Klaida bandant gauti rites"
+
+msgid "All"
+msgstr "Viskas"
+
+msgid "Error clearing active spool"
+msgstr "Klaida išvalant aktyvią ritę"
+
+msgid "Error setting active spool"
+msgstr "Klaida nustatant aktyvią ritę"
+
+msgid "No info available"
+msgstr "Nėra informacijos"
+
+msgid "IP Address"
+msgstr ""
+
+msgid "Memory"
+msgstr "Atmintis"
+
+msgid "Cooldown"
+msgstr "Atvėsinti"
+
+msgid "Nothing selected"
+msgstr "Niekas nepasirinkta"
+
+msgid "Set Temp"
+msgstr "Nustatyta temperatūra"
+
+msgid "Show"
+msgstr "Rodyti"
+
+msgid "Hide"
+msgstr "Paslėpti"
+
+msgid "Full Update"
+msgstr "Atnaujinti viską"
+
+msgid "Refresh"
+msgstr "Atnaujinti"
+
+msgid "Checking for updates, please wait..."
+msgstr "Atnaujinimų paieška, laukite..."
+
+msgid "Not working or not configured"
+msgstr "Neveikia arba nesukonfigūruota"
+
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Perform a full upgrade?"
+msgstr "Atlikti pilną atnaujinimą?"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "Ar norite atstatyti %s?"
+
+msgid "Recover Hard"
+msgstr "Pilnas atstatymas"
+
+msgid "Recover Soft"
+msgstr "Švelnus atstatymas"
+
+msgid "Recover"
+msgstr "Atstatyti"
+
+#, python-format
+msgid "Outdated by %d"
+msgstr "Pasenę %d"
+
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "pakeitimas"
+msgstr[1] "pakeitimai"
+msgstr[2] "pakeitimai"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "Paketas bus atnaujintas"
+msgstr[1] "Paketai bus atnaujinti"
+msgstr[2] "Paketai bus atnaujinti"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s bus atnaujinta iki versijos"
+
+msgid "Starting recovery for"
+msgstr "Paleidžiamas atkūrimas"
+
+msgid "Starting update for"
+msgstr "Paleidžiami atnaujinimai"
+
+msgid "Invalid"
+msgstr "Neteisinga"
+
+msgid "Up To Date"
+msgstr "Atnaujinta"
+
+msgid "Probe Offset"
+msgstr "Zondo poslinkis"
+
+msgid "Saved"
+msgstr "Išsaugota"
+
+msgid "New"
+msgstr "Naujas"
+
+msgid "Raise Nozzle"
+msgstr "Pakelti purkštuką"
+
+msgid "Lower Nozzle"
+msgstr "Nuleisti purkštuką"
+
+msgid "Abort"
+msgstr "Atšaukti"
+
+msgid "Error: Couldn't get a position to probe"
+msgstr "Klaida: neįmanoma pozicija aukščio sensoriui"
+
+msgid "Failed, adjust position first"
+msgstr "Klaida. Pakeiskite padėtį"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr "Sistema neatitinka minimalių reikalavimų"
+
+msgid "Minimum:"
+msgstr "Minimum:"
+
+msgid "System:"
+msgstr "SIstema:"
+
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr "Prašydami pagalbos pateikite KlipperScreen.log.\n"
+
+msgid "Close"
+msgstr "Uždaryti"
+
+msgid "DPMS has failed and has been disabled"
+msgstr ""
+
+msgid "Cannot connect to Moonraker"
+msgstr "Nepavyksta prisijungti prie Moonraker"
+
+msgid "Lost Connection to Moonraker"
+msgstr "Prarastas ryšys su Moonraker"
+
+msgid "Klipper has disconnected"
+msgstr "Nėra ryšio su Klipper'iu"
+
+msgid "Klipper has encountered an error."
+msgstr "Klipper'is rado klaidą."
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr "Perkraukite valdiklį, norėdami ištaisyti problemą."
+
+msgid "Please recompile and flash the micro-controller."
+msgstr "Perprogramuokite mikrovaldiklį."
+
+msgid "Klipper is attempting to start"
+msgstr "Klipper'is pasiruošęs"
+
+msgid "Klipper has shutdown"
+msgstr "Klipper'is išjungtas"
+
+msgid "No eligible macros:"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "makrokomandos, kurių pavadinimas prasideda raide \"_\", yra paslėptos"
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "makrokomandos, kurios naudoja 'rename_existing', yra paslėptos"
+
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
+"LOAD FILAMENT / UNLOAD FILAMENT yra paslėpti ir turėtų būti naudojami nuo "
+"išspaudimo"
+
+msgid "Temperature too low to extrude"
+msgstr "Per maža temperatūra ekstruzijai"
+
+msgid "Retrying"
+msgstr "Antras bandymas"
+
+msgid "Moonraker: connected"
+msgstr "Moonraker: prijungtas"
+
+#~ msgid "Error getting active spool"
+#~ msgstr "Klaida gaunant aktyvią ritę"
+
+#~ msgid "Max:"
+#~ msgstr "Max:"
+
+#~ msgid "Password saved"
+#~ msgstr "Slaptažodis išsaugotas"
 
 #~ msgid "Hide temp."
 #~ msgstr "Slėpti temperatūrą."
@@ -1058,9 +1079,6 @@ msgstr[2] "sekundžių"
 
 #~ msgid "Print Time"
 #~ msgstr "Spausdinimo laikas"
-
-#~ msgid "Starting WiFi Association"
-#~ msgstr "WiFi prisijungimas"
 
 #~ msgid "Warning"
 #~ msgstr "Įspėjimas"

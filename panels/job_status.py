@@ -381,11 +381,11 @@ class Panel(ScreenPanel):
         saved_z_offset = None
         msg = f"Apply {sign}{abs(self.zoffset)} offset to {device}?"
         if device == "probe":
-            msg = _("Apply %s%.3f offset to Probe?") % (sign, abs(self.zoffset))
+            msg = _("Apply {sign}{offset:.3f} offset to Probe?").format(sign=sign, offset=abs(self.zoffset))
             if probe := self._printer.get_probe():
                 saved_z_offset = probe['z_offset']
         elif device == "endstop":
-            msg = _("Apply %s%.3f offset to Endstop?") % (sign, abs(self.zoffset))
+            msg = _("Apply {sign}{offset:.3f} offset to Endstop?").format(sign=sign, offset=abs(self.zoffset))
             if 'stepper_z' in self._printer.get_config_section_list():
                 saved_z_offset = self._printer.get_config_section('stepper_z')['position_endstop']
             elif 'stepper_a' in self._printer.get_config_section_list():

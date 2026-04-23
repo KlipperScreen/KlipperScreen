@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-26 12:31-0300\n"
+"POT-Creation-Date: 2026-04-23 14:29-0300\n"
 "PO-Revision-Date: 2026-03-19 07:09+0000\n"
 "Last-Translator: Kayz C <kayzed.x@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
@@ -19,86 +19,26 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 5.17-dev\n"
 
-#, python-format
-msgid "%s will be updated to version"
-msgstr "%s 將被更新為版本"
+msgid "Main Menu"
+msgstr "主選單"
 
-msgid "(default)"
-msgstr "(預設)"
+msgid "Move"
+msgstr "移動"
 
-msgid "24 Hour Time"
-msgstr "使用24小時制"
+msgid "Temperature"
+msgstr "溫度"
 
-msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr "重啟Klipper韌體可能會解決這個問題。"
+msgid "Extrude"
+msgstr "擠出機"
 
-msgid "ADXL Not Configured"
-msgstr "未設定ADXL"
+msgid "More"
+msgstr "更多"
 
-msgid "Abort"
-msgstr "中止"
+msgid "Print"
+msgstr "列印"
 
-msgid "Acceleration:"
-msgstr "加速度："
-
-msgid "Accept"
-msgstr "接受"
-
-msgid "Add profile"
-msgstr "新增設定檔案"
-
-msgid "All"
-msgstr "全部"
-
-msgid "Apply"
-msgstr "套用"
-
-#, python-format
-msgid "Apply %s%.3f offset to Endstop?"
-msgstr "將 %s%.3f 偏移套用於限位？"
-
-#, python-format
-msgid "Apply %s%.3f offset to Probe?"
-msgstr "將 %s%.3f 偏移套用於探針？"
-
-msgid "Archived"
-msgstr "已封存"
-
-msgid "Are you sure do you want to exclude the object?"
-msgstr "你確定要排除該目標嗎？"
-
-msgid "Are you sure you want to run Emergency Stop?"
-msgstr "您確定要緊急停止嗎？"
-
-msgid "Are you sure you wish to cancel this print?"
-msgstr "您確定要取消列印嗎？"
-
-msgid "Are you sure you wish to disable motors?"
-msgstr "您確定要關閉電機嗎？"
-
-msgid "Are you sure you wish to reboot the system?"
-msgstr "您確定要重啟系統嗎？"
-
-msgid "Are you sure you wish to shutdown the system?"
-msgstr "您確定要關閉系統嗎？"
-
-msgid "Asks for confirmation before stopping"
-msgstr "停止前要求確認"
-
-msgid "Auto"
-msgstr "自動"
-
-msgid "Auto-calibrate"
-msgstr "自動校準"
-
-msgid "Auto-close notifications"
-msgstr "自動關閉通知"
-
-msgid "Auto-open Extrude On Pause"
-msgstr "暫停時自動打開擠出"
-
-msgid "Auto-scroll"
-msgstr "自動捲動"
+msgid "Gcodes"
+msgstr "Gcode"
 
 msgid "Bed Level"
 msgstr "熱床調平"
@@ -106,281 +46,56 @@ msgstr "熱床調平"
 msgid "Bed Mesh"
 msgstr "床網"
 
-msgid "Both"
-msgstr "雙向"
+msgid "Z Calibrate"
+msgstr "Z軸校準"
 
-msgid "Calibrate"
-msgstr "校準"
-
-msgid "Calibrated"
-msgstr "已校準"
-
-msgid "Calibrating"
-msgstr "正在校準"
-
-msgid "Camera"
-msgstr "攝影機"
-
-msgid "Can't set above the maximum:"
-msgstr "設定值超出最大值："
-
-msgid "Cancel"
-msgstr "取消"
-
-msgid "Cancel Print"
-msgstr "取消打印"
-
-msgid "Cancelled"
-msgstr "已取消"
-
-msgid "Cancelling"
-msgstr "正在取消"
-
-msgid "Cannot connect to Moonraker"
-msgstr "無法連接到Moonraker"
-
-msgid "Changes how the interface looks"
-msgstr "變更介面外觀"
-
-msgid "Changes how the time remaining is calculated"
-msgstr "更改剩餘時間的計算方式"
-
-msgid "Channel"
-msgstr "群組"
-
-msgid "Check ADXL Wiring"
-msgstr "檢查ADXL的接線"
-
-msgid "Checking for updates, please wait..."
-msgstr "正在檢查更新，請稍等..."
-
-msgid "Clear"
-msgstr "清除"
-
-msgid "Close"
-msgstr "關閉"
-
-msgid "Close messages after a timeout"
-msgstr "逾時後關閉訊息"
-
-msgid "Complete"
-msgstr "完成"
-
-msgid "Confirm Emergency Stop"
-msgstr "緊急停止需確認"
-
-msgid "Connected"
-msgstr "已連線"
-
-msgid "Connecting"
-msgstr "連接中"
-
-#, python-format
-msgid "Connecting to %s"
-msgstr "連線到 %s"
-
-msgid "Connection failed"
-msgstr "連接失敗"
-
-msgid "Console"
-msgstr "控制台"
-
-msgid "Cooldown"
-msgstr "冷卻"
-
-msgid "Couldn't add network"
-msgstr "無法新增網路"
-
-msgid "Current"
-msgstr "目前"
-
-msgid "Current percentage and graph line"
-msgstr "當前百分比和折線圖"
-
-msgid "DPMS has failed to load and has been disabled"
-msgstr "DPMS 載入失敗並已停用"
-
-msgid "Date"
-msgstr "日期"
-
-msgid "Delete"
-msgstr "删除"
-
-msgid "Delete Directory?"
-msgstr "刪除資料夾？"
-
-msgid "Delete File?"
-msgstr "刪除檔案？"
-
-msgid "Disable Motors"
-msgstr "關閉電機"
-
-msgid "Disable for 12hs with am / pm"
-msgstr "停用 12 小時制AM/PM顯示"
-
-msgid "Disconnect"
-msgstr "斷開連線"
-
-msgid "Distance (mm)"
-msgstr "擠出長度（mm）"
-
-#, python-format
-msgid "Do you want to forget or disconnect %s?"
-msgstr "您想忘記或斷開%s嗎？"
-
-#, python-format
-msgid "Do you want to recover %s?"
-msgstr "你想恢復 %s 嗎？"
-
-msgid "Elapsed:"
-msgstr "已用時間："
-
-msgid "Emergency Stop"
-msgstr "緊急停止"
-
-msgid "Enable screen power management"
-msgstr "開啟螢幕電源管理功能"
-
-msgid "Error"
-msgstr "錯誤"
-
-msgid "Error clearing active spool"
-msgstr "清除使用中的線盤時發生錯誤"
-
-msgid "Error getting active spool"
-msgstr "取得使用中的線盤時發生錯誤"
-
-msgid "Error setting active spool"
-msgstr "設定使用中的線盤時發生錯誤"
-
-msgid "Error trying to fetch spools"
-msgstr "嘗試獲取線盤時發生錯誤"
-
-msgid "Error: Couldn't get a position to probe"
-msgstr "錯誤：無法取得要探測的位置"
-
-msgid "Estimated Time"
-msgstr "預計時間"
-
-msgid "Estimated Time Method"
-msgstr "估算剩餘時間方式"
-
-msgid "Example"
-msgstr "範例"
-
-msgid "Exclude Object"
-msgstr "排除目標"
-
-msgid "Extra Large"
-msgstr "特大"
-
-msgid "Extrude"
-msgstr "擠出機"
-
-msgid "Extruders"
-msgstr "擠出機"
-
-msgid "Extrusion +"
-msgstr "擠壓 +"
-
-msgid "Extrusion -"
-msgstr "擠壓 -"
-
-msgid "Failed to delete connection"
-msgstr "刪除連線失敗"
-
-msgid "Failed to initialize"
-msgstr "初始化失敗"
-
-msgid "Failed, adjust position first"
-msgstr "失敗，請先調整位置"
+msgid "Limits"
+msgstr "列印機限制"
 
 msgid "Fan"
 msgstr "風扇"
 
-msgid "Filament"
-msgstr "線材"
+msgid "Leds"
+msgstr "LED"
 
-msgid "Filament Used"
-msgstr "已用線材"
+msgid "Macros"
+msgstr "巨集"
 
-msgid "Filament total:"
-msgstr "使用線材總數："
+msgid "Pins"
+msgstr "引腳"
 
-msgid "Filament used:"
-msgstr "已用線材："
+msgid "Power"
+msgstr "電源"
 
-msgid "Filament:"
-msgstr "線材："
+msgid "Camera"
+msgstr "攝影機"
 
-msgid "File"
-msgstr "檔案"
+msgid "Console"
+msgstr "控制台"
 
-msgid "File:"
-msgstr "檔案："
+msgid "Update"
+msgstr "更新"
 
-msgid "Filter"
-msgstr "過濾器"
+msgid "Input Shaper"
+msgstr "輸入整形"
 
-msgid "Finding ADXL"
-msgstr "尋找ADXL中"
+msgid "Save Config"
+msgstr "儲存設定"
+
+msgid "Network"
+msgstr "網路"
+
+msgid "Notifications"
+msgstr "通知"
+
+msgid "System"
+msgstr "系統"
 
 msgid "Fine Tuning"
 msgstr "微調"
 
-msgid "Finish"
-msgstr "完成"
-
-msgid "Firmware Restart"
-msgstr "重啟Klipper韌體"
-
-msgid "Flow:"
-msgstr "流量："
-
-msgid "Flowrate:"
-msgstr "流速："
-
-msgid "Font Size"
-msgstr "字型大小"
-
-msgid "For mouse control or to verify touchscreen accuracy"
-msgstr "用於滑鼠控制或驗證觸控螢幕的準確性"
-
-msgid "Forget"
-msgstr "忘記"
-
-msgid "Full Update"
-msgstr "全部更新"
-
-msgid "Gcodes"
-msgstr "Gcode"
-
-msgid "Getting IP address"
-msgstr "取得IP位址"
-
-msgid "Go Back"
-msgstr "返回"
-
-msgid "Height:"
-msgstr "高度："
-
-msgid "Hide"
-msgstr "隱藏"
-
-msgid "Hide sensors in Temp."
-msgstr "在溫度顯示中隱藏感測器"
-
-msgid "Home"
-msgstr "歸位"
-
-msgid "Home All"
-msgstr "全部歸位"
-
 msgid "Home X"
 msgstr "歸位X軸"
-
-msgid "Home XY"
-msgstr "歸位XY軸"
 
 msgid "Home Y"
 msgstr "歸位Y軸"
@@ -388,44 +103,146 @@ msgstr "歸位Y軸"
 msgid "Home Z"
 msgstr "歸位Z軸"
 
-msgid "Host"
-msgstr "主機"
+msgid "Home All"
+msgstr "全部歸位"
 
-msgid "Hostname"
-msgstr "主機名"
+msgid "Home XY"
+msgstr "歸位XY軸"
 
-msgid "ID"
-msgstr "ID"
+msgid "Quad Gantry Level"
+msgstr "龍門架調平"
+
+msgid "Z Tilt"
+msgstr "Z軸傾斜校準"
+
+msgid "Print Control"
+msgstr "列印控制"
+
+msgid "Lock"
+msgstr "鎖定"
+
+msgid "Menu"
+msgstr "選單"
 
 msgid "Icon Theme"
 msgstr "主題"
 
-msgid "Initializing printer..."
-msgstr "正在初始化列印機..."
+msgid "Changes how the interface looks"
+msgstr "變更介面外觀"
 
-msgid "Initiate a PID calibration for:"
-msgstr "啟動PID校準："
+msgid "(default)"
+msgstr "(預設)"
 
-msgid "Input Shaper"
-msgstr "輸入整形"
+msgid "Estimated Time Method"
+msgstr "估算剩餘時間方式"
 
-msgid "Insufficient privileges"
-msgstr "權限不足"
+msgid "Changes how the time remaining is calculated"
+msgstr "更改剩餘時間的計算方式"
 
-msgid "Interface"
-msgstr "介面"
+msgid "Auto"
+msgstr "自動"
 
-msgid "Invalid"
-msgstr "無效"
+msgid "File"
+msgstr "檔案"
 
-msgid "Invalid password"
-msgstr "密碼無效"
+msgid "Filament Used"
+msgstr "已用線材"
 
-msgid "Invalid temperature"
-msgstr "無效的溫度"
+msgid "Slicer"
+msgstr "切片軟體"
+
+msgid "Screen Power Off Time"
+msgstr "關閉螢幕時間"
+
+msgid "Timeout for screen black-out or power-off"
+msgstr "螢幕轉黑或關機的超時設定"
+
+msgid "Never"
+msgstr "從不"
+
+msgid "Printing"
+msgstr "列印中"
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr "列印過程中螢幕轉黑或關機的超時設定"
+
+msgid "24 Hour Time"
+msgstr "使用24小時制"
+
+msgid "Disable for 12hs with am / pm"
+msgstr "停用 12 小時制AM/PM顯示"
+
+msgid "Macro shortcut on sidebar"
+msgstr "顯示側邊欄巨集按鈕"
+
+msgid "Font Size"
+msgstr "字型大小"
 
 msgid "Inversely affects the icon size"
 msgstr "反轉圖示大小效果"
+
+msgid "Small"
+msgstr "小"
+
+msgid "Medium"
+msgstr "中"
+
+msgid "Large"
+msgstr "大"
+
+msgid "Extra Large"
+msgstr "特大"
+
+msgid "Maximum"
+msgstr "最大"
+
+msgid "Confirm Emergency Stop"
+msgstr "緊急停止需確認"
+
+msgid "Asks for confirmation before stopping"
+msgstr "停止前要求確認"
+
+msgid "Hide sensors in Temp."
+msgstr "在溫度顯示中隱藏感測器"
+
+msgid "Show only devices that are able to be set"
+msgstr "僅顯示可以設置的設備"
+
+msgid "Screen DPMS"
+msgstr "螢幕省電管理系統"
+
+msgid "Enable screen power management"
+msgstr "開啟螢幕電源管理功能"
+
+msgid "Not all screens support this"
+msgstr "並非所有螢幕都支援此功能"
+
+msgid "Auto-close notifications"
+msgstr "自動關閉通知"
+
+msgid "Close messages after a timeout"
+msgstr "逾時後關閉訊息"
+
+msgid "Show Heater Power"
+msgstr "顯示加熱器功率"
+
+msgid "Current percentage and graph line"
+msgstr "當前百分比和折線圖"
+
+msgid "Show Scrollbars Buttons"
+msgstr "顯示捲軸按鈕"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr "對於無回應的觸控螢幕很有幫助"
+
+msgid "Auto-open Extrude On Pause"
+msgstr "暫停時自動打開擠出"
+
+msgid "Show cursor"
+msgstr "顯示游標"
+
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr "用於滑鼠控制或驗證觸控螢幕的準確性"
 
 msgid "Invert X"
 msgstr "反轉X軸"
@@ -436,150 +253,60 @@ msgstr "反轉Y軸"
 msgid "Invert Z"
 msgstr "反轉Z軸"
 
-msgid "It may take more than 5 minutes depending on the heater power."
-msgstr "這可能需要5分鐘以上的時間，這取決於加熱器的功率。"
+msgid "XY Move Speed (mm/s)"
+msgstr "XY軸移動速度(mm/s)"
 
-msgid "It's possible that the configuration is not correct"
-msgstr "配置可能不正確"
-
-msgid "Job Status"
-msgstr "工作狀態"
-
-msgid "Klipper Restart"
-msgstr "重啟Klipper"
-
-msgid "Klipper has disconnected"
-msgstr "Klipper已斷開連線"
-
-msgid "Klipper has encountered an error."
-msgstr "Klipper遇到一個錯誤。"
-
-msgid "Klipper has shutdown"
-msgstr "Klipper已關閉"
-
-msgid "Klipper is attempting to start"
-msgstr "Klipper正在啟動"
-
-msgid "Klipper will reboot"
-msgstr "Klipper將重新啟動"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT 已被隱藏，應從擠出功能中使用"
+msgid "Z Move Speed (mm/s)"
+msgstr "Z軸移動速度(mm/s)"
 
 msgid "Language"
 msgstr "語言"
 
-msgid "Large"
-msgstr "大"
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "小時"
 
-msgid "Last Duration"
-msgstr "上次耗時"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "分"
 
-msgid "Last Used"
-msgstr "最後使用"
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "您確定要緊急停止嗎？"
 
-msgid "Layer Height"
-msgstr "層高"
+msgid "day"
+msgid_plural "days"
+msgstr[0] "天"
 
-msgid "Layer:"
-msgstr "層數："
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "秒"
 
-msgid "Leds"
-msgstr "LED"
+msgid "Network not found"
+msgstr "未找到網路"
 
-msgid "Left:"
-msgstr "剩餘時間："
+msgid "Unknown security type"
+msgstr "未知的安全類型"
 
-msgid "Limits"
-msgstr "列印機限制"
+msgid "Insufficient privileges"
+msgstr "權限不足"
 
-msgid "Load"
-msgstr "裝載線材"
+msgid "Invalid password"
+msgstr "密碼無效"
 
-msgid "Loading..."
-msgstr "裝載中..."
+msgid "Couldn't add network"
+msgstr "無法新增網路"
 
-msgid "Lock"
-msgstr "鎖定"
+msgid "Failed to delete connection"
+msgstr "刪除連線失敗"
 
-msgid "Lost Connection to Moonraker"
-msgstr "與Moonraker失去連接"
+msgid "Starting WiFi Association"
+msgstr "開始WiFi連線"
 
-msgid "Lower Nozzle"
-msgstr "降低噴嘴"
+msgid "Connecting"
+msgstr "連接中"
 
-msgid "Macro shortcut on sidebar"
-msgstr "顯示側邊欄巨集按鈕"
-
-msgid "Macros"
-msgstr "巨集"
-
-msgid "Main Menu"
-msgstr "主選單"
-
-msgid "Material"
-msgstr "材料"
-
-msgid "Max"
-msgstr "最大"
-
-msgid "Max Acceleration"
-msgstr "最大加速度"
-
-msgid "Max Velocity"
-msgstr "最大速度"
-
-msgid "Max:"
-msgstr "最大："
-
-msgid "Maximum"
-msgstr "最大"
-
-msgid "Measure Both"
-msgstr "同時測量"
-
-msgid "Measure X"
-msgstr "測量X軸"
-
-msgid "Measure Y"
-msgstr "測量Y軸"
-
-msgid "Medium"
-msgstr "中"
-
-msgid "Memory"
-msgstr "記憶體"
-
-msgid "Menu"
-msgstr "選單"
-
-msgid "Minimum Cruise Ratio"
-msgstr "最小巡航率"
-
-msgid "Minimum:"
-msgstr "最小："
-
-msgid "Modified"
-msgstr "已修改"
-
-msgid "Moonraker: connected"
-msgstr "Moonraker：已連線"
-
-msgid "More"
-msgstr "更多"
-
-msgid "Move"
-msgstr "移動"
-
-msgid "Move Distance (mm)"
-msgstr "移動距離（mm）"
-
-msgid "Name"
-msgstr "名稱"
-
-msgid "Network"
-msgstr "網路"
+msgid "Getting IP address"
+msgstr "取得IP位址"
 
 msgid "Network connected"
 msgstr "網路已連線"
@@ -587,329 +314,20 @@ msgstr "網路已連線"
 msgid "Network disconnected"
 msgstr "網路已斷線"
 
-msgid "Network not found"
-msgstr "未找到網路"
-
-msgid "Never"
-msgstr "從不"
-
-msgid "New"
-msgstr "新的值"
-
-msgid "No elegible macros:"
-msgstr "無可用巨集:"
-
-msgid "No info available"
-msgstr "沒有可用的資訊"
+msgid "Connection failed"
+msgstr "連接失敗"
 
 msgid "No mesh has been loaded"
 msgstr "未載入網格"
 
-msgid "No wireless interface has been found"
-msgstr "未找到WiFi介面"
+msgid "Calibrate"
+msgstr "校準"
 
-msgid "Not all screens support this"
-msgstr "並非所有螢幕都支援此功能"
-
-msgid "Not working or not configured"
-msgstr "無法運作或未配置"
-
-msgid "Nothing selected"
-msgstr "未選擇任何內容"
-
-msgid "Notification log empty"
-msgstr "通知紀錄為空"
-
-msgid "Notifications"
-msgstr "通知"
-
-msgid "Nozzle diameter"
-msgstr "噴嘴直徑"
-
-msgid "Only for the move panel"
-msgstr "僅用於移動面板"
-
-#, python-format
-msgid "Outdated by %d"
-msgstr "已過時 %d"
-
-msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "套件將被更新"
-
-msgid "Part Fan"
-msgstr "列印件風扇"
+msgid "Invalid temperature"
+msgstr "無效的溫度"
 
 msgid "Password"
 msgstr "密碼"
-
-msgid "Password saved"
-msgstr "密碼已儲存"
-
-msgid "Pause"
-msgstr "暫停"
-
-msgid "Paused"
-msgstr "已暫停"
-
-msgid "Perform a full upgrade?"
-msgstr "是否全部升級？"
-
-msgid "Pins"
-msgstr "引腳"
-
-msgid "Please recompile and flash the micro-controller."
-msgstr "請重新編譯並燒錄微控制器。"
-
-msgid "Please wait"
-msgstr "請稍候"
-
-msgid "Power"
-msgstr "電源"
-
-msgid "Power On Printer"
-msgstr "啟動列印機"
-
-msgid "Pressure Advance"
-msgstr "壓力提前"
-
-msgid "Pressure Advance:"
-msgstr "壓力提前："
-
-msgid "Pressure advance"
-msgstr "壓力提前"
-
-msgid "Print"
-msgstr "列印"
-
-msgid "Print Control"
-msgstr "列印控制"
-
-msgid "Printer"
-msgstr "列印機"
-
-msgid "Printer Connections"
-msgstr "列印機連線"
-
-msgid "Printer Select"
-msgstr "列印機選擇"
-
-msgid "Printing"
-msgstr "列印中"
-
-msgid "Probe Offset"
-msgstr "探針偏移"
-
-msgid "Profile Name:"
-msgstr "設定檔名稱："
-
-msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "在尋求幫助時，請提供 KlipperScreen.log。\n"
-
-msgid "Quad Gantry Level"
-msgstr "龍門架調平"
-
-msgid "Raise Nozzle"
-msgstr "升高噴嘴"
-
-msgid "Recover"
-msgstr "還原"
-
-msgid "Recover Hard"
-msgstr "硬恢復(git recover hard)"
-
-msgid "Recover Soft"
-msgstr "軟恢復(git reset)"
-
-msgid "Reference"
-msgstr "參考"
-
-msgid "Refresh"
-msgstr "重新整理"
-
-msgid "Remove network"
-msgstr "移除網路"
-
-msgid "Rename/Move:"
-msgstr "重新命名/移動："
-
-msgid "Restart"
-msgstr "重啟"
-
-msgid "Resume"
-msgstr "繼續"
-
-msgid "Retract"
-msgstr "回抽"
-
-msgid "Retraction"
-msgstr "回抽"
-
-msgid "Retraction Length"
-msgstr "回抽長度"
-
-msgid "Retraction Speed"
-msgstr "回抽速度"
-
-msgid "Retry"
-msgstr "重試"
-
-msgid "Retrying"
-msgstr "正在重試"
-
-msgid "Rotation invalid"
-msgstr "旋轉無效"
-
-msgid "Save"
-msgstr "儲存"
-
-msgid "Save Config"
-msgstr "儲存設定"
-
-msgid "Save Z"
-msgstr "儲存Z軸"
-
-msgid "Save configuration?"
-msgstr "是否儲存設定？"
-
-msgid "Saved"
-msgstr "已儲存"
-
-#, python-format
-msgid "Saved offset: %s"
-msgstr "儲存偏移：%s"
-
-msgid "Screen DPMS"
-msgstr "螢幕省電管理系統"
-
-msgid "Screen Power Off Time"
-msgstr "關閉螢幕時間"
-
-msgid "Screws Adjust"
-msgstr "螺絲調整"
-
-msgid "Screws not used:"
-msgstr "未使用的螺絲："
-
-msgid "Send"
-msgstr "發送"
-
-msgid "Set Temp"
-msgstr "設定溫度"
-
-msgid "Settings"
-msgstr "設定"
-
-msgid "Show"
-msgstr "顯示"
-
-msgid "Show Heater Power"
-msgstr "顯示加熱器功率"
-
-msgid "Show Scrollbars Buttons"
-msgstr "顯示捲軸按鈕"
-
-msgid "Show cursor"
-msgstr "顯示游標"
-
-msgid "Show only devices that are able to be set"
-msgstr "僅顯示可以設置的設備"
-
-msgid "Shutdown"
-msgstr "關機"
-
-msgid "Size"
-msgstr "大小"
-
-msgid "Slicer"
-msgstr "切片軟體"
-
-msgid "Slicer:"
-msgstr "切片軟體："
-
-msgid "Small"
-msgstr "小"
-
-msgid "Smooth time"
-msgstr "平滑時間"
-
-msgid "Speed (mm/s)"
-msgstr "速度(mm/s)"
-
-msgid "Speed +"
-msgstr "速度 +"
-
-msgid "Speed -"
-msgstr "速度 -"
-
-msgid "Speed:"
-msgstr "速度："
-
-msgid "Square Corner Velocity"
-msgstr "直角速度"
-
-msgid "Standby"
-msgstr "待機"
-
-msgid "Start"
-msgstr "開始"
-
-msgid "Starting recovery for"
-msgstr "開始恢復"
-
-msgid "Starting update for"
-msgstr "開始更新"
-
-msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr "交換按鈕位置，此選項將影響其他面板"
-
-msgid "System"
-msgstr "系統"
-
-msgid "System Restart"
-msgstr "重啟系統"
-
-msgid "System Shutdown"
-msgstr "關閉系統"
-
-msgid "System:"
-msgstr "系統："
-
-msgid "Temp (°C)"
-msgstr "溫度 (°C)"
-
-msgid "Temperature"
-msgstr "溫度"
-
-msgid "Temperature too low to extrude"
-msgstr "溫度過低無法擠出"
-
-msgid "The system doesn't meet the minimum requirement"
-msgstr "系統不符合最低要求"
-
-msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr "此面板最多支援 9 顆調平螺絲排列於 3x3 格網中"
-
-msgid "This will affect screw positions and mesh graph"
-msgstr "這將影響螺絲位置和網格圖表"
-
-msgid "Timeout for screen black-out or power-off"
-msgstr "螢幕轉黑或關機的超時設定"
-
-msgid "Timeout for screen black-out or power-off during printing"
-msgstr "列印過程中螢幕轉黑或關機的超時設定"
-
-msgid "Total:"
-msgstr "總計："
-
-msgid "Unknown Heater"
-msgstr "未知的加熱器"
-
-msgid "Unknown security type"
-msgstr "未知的安全類型"
-
-msgid "Unload"
-msgstr "解除安裝"
 
 msgid "Unlock"
 msgstr "解鎖"
@@ -917,81 +335,200 @@ msgstr "解鎖"
 msgid "Unlock failed"
 msgstr "解鎖失敗"
 
-msgid "Unretract Extra Length"
-msgstr "回料長度"
+msgid "Are you sure do you want to exclude the object?"
+msgstr "你確定要排除該目標嗎？"
 
-msgid "Unretract Speed"
-msgstr "回料速度"
-
-msgid "Up To Date"
-msgstr "最新版本"
-
-msgid "Update"
-msgstr "更新"
+msgid "Finish"
+msgstr "完成"
 
 msgid "Updating"
 msgstr "正在更新"
 
-msgid "Useful for un-responsive touchscreens"
-msgstr "對於無回應的觸控螢幕很有幫助"
+msgid "Disable Motors"
+msgstr "關閉電機"
 
-msgid "User"
-msgstr "使用者"
+msgid "Screws Adjust"
+msgstr "螺絲調整"
+
+msgid "Rotation invalid"
+msgstr "旋轉無效"
+
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr "此面板最多支援 9 顆調平螺絲排列於 3x3 格網中"
+
+msgid "It's possible that the configuration is not correct"
+msgstr "配置可能不正確"
+
+msgid "Screws not used:"
+msgstr "未使用的螺絲："
+
+msgid "Reference"
+msgstr "參考"
+
+msgid "Add profile"
+msgstr "新增設定檔案"
+
+msgid "Clear"
+msgstr "清除"
+
+msgid "Profile Name:"
+msgstr "設定檔名稱："
+
+msgid "Save"
+msgstr "儲存"
+
+msgid "Calibrating"
+msgstr "正在校準"
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC 不被目前後端支持，請嘗試使用其他串流媒體方式"
 
-msgid "Working"
-msgstr "工作中"
+msgid "Auto-scroll"
+msgstr "自動捲動"
 
-msgid "XY Move Speed (mm/s)"
-msgstr "XY軸移動速度(mm/s)"
+msgid "Send"
+msgstr "發送"
 
-msgid "XY Speed (mm/s)"
-msgstr "XY軸速度(mm/s)"
+msgid "Example"
+msgstr "範例"
 
-msgid "Z Calibrate"
-msgstr "Z軸校準"
+msgid "Exclude Object"
+msgstr "排除目標"
 
-msgid "Z Move Speed (mm/s)"
-msgstr "Z軸移動速度(mm/s)"
+msgid "Are you sure you wish to cancel this print?"
+msgstr "您確定要取消列印嗎？"
 
-msgid "Z Speed (mm/s)"
-msgstr "Z軸速度(mm/s)"
+msgid "Load"
+msgstr "裝載線材"
 
-msgid "Z Tilt"
-msgstr "Z軸傾斜校準"
+msgid "Unload"
+msgstr "解除安裝"
 
-msgid "Z offset:"
-msgstr "Z軸偏移："
+msgid "Retract"
+msgstr "回抽"
 
-msgid "commit"
-msgid_plural "commits"
-msgstr[0] "更改"
+msgid "Pressure Advance"
+msgstr "壓力提前"
 
-msgid "day"
-msgid_plural "days"
-msgstr[0] "天"
+msgid "Retraction"
+msgstr "回抽"
+
+msgid "Extruders"
+msgstr "擠出機"
+
+msgid "Distance (mm)"
+msgstr "擠出長度（mm）"
+
+msgid "Speed (mm/s)"
+msgstr "速度(mm/s)"
+
+msgid "Part Fan"
+msgstr "列印件風扇"
+
+msgid "Max"
+msgstr "最大"
+
+msgid "mm"
+msgstr "mm"
+
+msgid "Speed +"
+msgstr "速度 +"
+
+msgid "Speed -"
+msgstr "速度 -"
+
+msgid "Extrusion +"
+msgstr "擠壓 +"
+
+msgid "Extrusion -"
+msgstr "擠壓 -"
+
+msgid "Name"
+msgstr "名稱"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Size"
+msgstr "大小"
+
+msgid "Loading..."
+msgstr "裝載中..."
+
+msgid "Delete File?"
+msgstr "刪除檔案？"
+
+msgid "Delete Directory?"
+msgstr "刪除資料夾？"
+
+msgid "Start"
+msgstr "開始"
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Modified"
+msgstr "已修改"
+
+msgid "Layer Height"
+msgstr "層高"
+
+msgid "Filament"
+msgstr "線材"
+
+msgid "Estimated Time"
+msgstr "預計時間"
 
 msgid "g"
 msgstr "g"
 
-msgid "hour"
-msgid_plural "hours"
-msgstr[0] "小時"
+msgid "Nozzle diameter"
+msgstr "噴嘴直徑"
 
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "使用 rename_existing 的巨集將會被隱藏"
+msgid "Last Duration"
+msgstr "上次耗時"
 
-msgid "macros with a name starting with '_' are hidden"
-msgstr "以 ' _ '開頭的巨集將會被隱藏"
+msgid "Rename/Move:"
+msgstr "重新命名/移動："
 
-msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "分"
+msgid "Finding ADXL"
+msgstr "尋找ADXL中"
 
-msgid "mm"
-msgstr "mm"
+msgid "Measure X"
+msgstr "測量X軸"
+
+msgid "Measure Y"
+msgstr "測量Y軸"
+
+msgid "Measure Both"
+msgstr "同時測量"
+
+msgid "Klipper will reboot"
+msgstr "Klipper將重新啟動"
+
+msgid "Save configuration?"
+msgstr "是否儲存設定？"
+
+msgid "Check ADXL Wiring"
+msgstr "檢查ADXL的接線"
+
+msgid "ADXL Not Configured"
+msgstr "未設定ADXL"
+
+msgid "Auto-calibrate"
+msgstr "自動校準"
+
+msgid "Calibrated"
+msgstr "已校準"
+
+msgid "Job Status"
+msgstr "工作狀態"
 
 msgid "mm/s"
 msgstr "mm/s"
@@ -1002,12 +539,496 @@ msgstr "mm/s²"
 msgid "mm³/s"
 msgstr "mm³/s"
 
+msgid "Left:"
+msgstr "剩餘時間："
+
+msgid "Elapsed:"
+msgstr "已用時間："
+
+msgid "Total:"
+msgstr "總計："
+
+msgid "Slicer:"
+msgstr "切片軟體："
+
+msgid "File:"
+msgstr "檔案："
+
+msgid "Filament:"
+msgstr "線材："
+
+msgid "Speed:"
+msgstr "速度："
+
+msgid "Acceleration:"
+msgstr "加速度："
+
+msgid "Flow:"
+msgstr "流量："
+
+msgid "Z offset:"
+msgstr "Z軸偏移："
+
+msgid "Filament used:"
+msgstr "已用線材："
+
+msgid "Filament total:"
+msgstr "使用線材總數："
+
+msgid "Pressure Advance:"
+msgstr "壓力提前："
+
+msgid "Flowrate:"
+msgstr "流速："
+
+msgid "Height:"
+msgstr "高度："
+
+msgid "Layer:"
+msgstr "層數："
+
+msgid "Pause"
+msgstr "暫停"
+
+msgid "Restart"
+msgstr "重啟"
+
+msgid "Resume"
+msgstr "繼續"
+
+msgid "Save Z"
+msgstr "儲存Z軸"
+
+#, python-brace-format
+msgid "Apply {sign}{offset:.3f} offset to Probe?"
+msgstr ""
+
+#, python-brace-format
+msgid "Apply {sign}{offset:.3f} offset to Endstop?"
+msgstr ""
+
+#, python-format
+msgid "Saved offset: %s"
+msgstr "儲存偏移：%s"
+
+msgid "Apply"
+msgstr "套用"
+
+msgid "Cancel Print"
+msgstr "取消打印"
+
+msgid "Go Back"
+msgstr "返回"
+
+msgid "Working"
+msgstr "工作中"
+
+msgid "Complete"
+msgstr "完成"
+
+msgid "Error"
+msgstr "錯誤"
+
+msgid "Cancelling"
+msgstr "正在取消"
+
+msgid "Cancelled"
+msgstr "已取消"
+
+msgid "Paused"
+msgstr "已暫停"
+
+msgid "Standby"
+msgstr "待機"
+
+msgid "Max Acceleration"
+msgstr "最大加速度"
+
+msgid "Minimum Cruise Ratio"
+msgstr "最小巡航率"
+
+msgid "Max Velocity"
+msgstr "最大速度"
+
+msgid "Square Corner Velocity"
+msgstr "直角速度"
+
+msgid "Unknown Heater"
+msgstr "未知的加熱器"
+
+msgid "Can't set above the maximum:"
+msgstr "設定值超出最大值："
+
+msgid "Initiate a PID calibration for:"
+msgstr "啟動PID校準："
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr "這可能需要5分鐘以上的時間，這取決於加熱器的功率。"
+
+msgid "Temp (°C)"
+msgstr "溫度 (°C)"
+
+msgid "Home"
+msgstr "歸位"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "您確定要關閉電機嗎？"
+
+msgid "Move Distance (mm)"
+msgstr "移動距離（mm）"
+
+msgid "This will affect screw positions and mesh graph"
+msgstr "這將影響螺絲位置和網格圖表"
+
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr "交換按鈕位置，此選項將影響其他面板"
+
+msgid "XY Speed (mm/s)"
+msgstr "XY軸速度(mm/s)"
+
+msgid "Only for the move panel"
+msgstr "僅用於移動面板"
+
+msgid "Z Speed (mm/s)"
+msgstr "Z軸速度(mm/s)"
+
+msgid "Failed to initialize"
+msgstr "初始化失敗"
+
+msgid "Interface"
+msgstr "介面"
+
+msgid "No wireless interface has been found"
+msgstr "未找到WiFi介面"
+
+msgid "Connected"
+msgstr "已連線"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr "您想忘記或斷開%s嗎？"
+
+msgid "Forget"
+msgstr "忘記"
+
+msgid "Disconnect"
+msgstr "斷開連線"
+
+msgid "Remove network"
+msgstr "移除網路"
+
+msgid "User"
+msgstr "使用者"
+
+#, python-format
+msgid "Connecting to %s"
+msgstr "連線到 %s"
+
+msgid "Channel"
+msgstr "群組"
+
+msgid "Hostname"
+msgstr "主機名"
+
+msgid "Notification log empty"
+msgstr "通知紀錄為空"
+
+msgid "Pressure advance"
+msgstr "壓力提前"
+
+msgid "Current"
+msgstr "目前"
+
+msgid "Smooth time"
+msgstr "平滑時間"
+
 msgid "s"
 msgstr "s"
 
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "秒"
+msgid "Printer Select"
+msgstr "列印機選擇"
+
+msgid "Please wait"
+msgstr "請稍候"
+
+msgid "Retraction Length"
+msgstr "回抽長度"
+
+msgid "Retraction Speed"
+msgstr "回抽速度"
+
+msgid "Unretract Extra Length"
+msgstr "回料長度"
+
+msgid "Unretract Speed"
+msgstr "回料速度"
+
+msgid "Printer Connections"
+msgstr "列印機連線"
+
+msgid "Shutdown"
+msgstr "關機"
+
+msgid "Emergency Stop"
+msgstr "緊急停止"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "您確定要重啟系統嗎？"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "您確定要關閉系統嗎？"
+
+msgid "Accept"
+msgstr "接受"
+
+msgid "Host"
+msgstr "主機"
+
+msgid "Printer"
+msgstr "列印機"
+
+msgid "Both"
+msgstr "雙向"
+
+msgid "Initializing printer..."
+msgstr "正在初始化列印機..."
+
+msgid "Klipper Restart"
+msgstr "重啟Klipper"
+
+msgid "Firmware Restart"
+msgstr "重啟Klipper韌體"
+
+msgid "System Restart"
+msgstr "重啟系統"
+
+msgid "System Shutdown"
+msgstr "關閉系統"
+
+msgid "Retry"
+msgstr "重試"
+
+msgid "Power On Printer"
+msgstr "啟動列印機"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Last Used"
+msgstr "最後使用"
+
+msgid "Archived"
+msgstr "已封存"
+
+msgid "Filter"
+msgstr "過濾器"
+
+msgid "Material"
+msgstr "材料"
+
+msgid "Comment"
+msgstr ""
+
+msgid "Last used"
+msgstr ""
+
+msgid "Remaining weight"
+msgstr ""
+
+msgid "Remaining length"
+msgstr ""
+
+msgid "Error trying to fetch spools"
+msgstr "嘗試獲取線盤時發生錯誤"
+
+msgid "All"
+msgstr "全部"
+
+msgid "Error clearing active spool"
+msgstr "清除使用中的線盤時發生錯誤"
+
+msgid "Error setting active spool"
+msgstr "設定使用中的線盤時發生錯誤"
+
+msgid "No info available"
+msgstr "沒有可用的資訊"
+
+msgid "IP Address"
+msgstr ""
+
+msgid "Memory"
+msgstr "記憶體"
+
+msgid "Cooldown"
+msgstr "冷卻"
+
+msgid "Nothing selected"
+msgstr "未選擇任何內容"
+
+msgid "Set Temp"
+msgstr "設定溫度"
+
+msgid "Show"
+msgstr "顯示"
+
+msgid "Hide"
+msgstr "隱藏"
+
+msgid "Full Update"
+msgstr "全部更新"
+
+msgid "Refresh"
+msgstr "重新整理"
+
+msgid "Checking for updates, please wait..."
+msgstr "正在檢查更新，請稍等..."
+
+msgid "Not working or not configured"
+msgstr "無法運作或未配置"
+
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Perform a full upgrade?"
+msgstr "是否全部升級？"
+
+#, python-format
+msgid "Do you want to recover %s?"
+msgstr "你想恢復 %s 嗎？"
+
+msgid "Recover Hard"
+msgstr "硬恢復(git recover hard)"
+
+msgid "Recover Soft"
+msgstr "軟恢復(git reset)"
+
+msgid "Recover"
+msgstr "還原"
+
+#, python-format
+msgid "Outdated by %d"
+msgstr "已過時 %d"
+
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "更改"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "套件將被更新"
+
+#, python-format
+msgid "%s will be updated to version"
+msgstr "%s 將被更新為版本"
+
+msgid "Starting recovery for"
+msgstr "開始恢復"
+
+msgid "Starting update for"
+msgstr "開始更新"
+
+msgid "Invalid"
+msgstr "無效"
+
+msgid "Up To Date"
+msgstr "最新版本"
+
+msgid "Probe Offset"
+msgstr "探針偏移"
+
+msgid "Saved"
+msgstr "已儲存"
+
+msgid "New"
+msgstr "新的值"
+
+msgid "Raise Nozzle"
+msgstr "升高噴嘴"
+
+msgid "Lower Nozzle"
+msgstr "降低噴嘴"
+
+msgid "Abort"
+msgstr "中止"
+
+msgid "Error: Couldn't get a position to probe"
+msgstr "錯誤：無法取得要探測的位置"
+
+msgid "Failed, adjust position first"
+msgstr "失敗，請先調整位置"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr "系統不符合最低要求"
+
+msgid "Minimum:"
+msgstr "最小："
+
+msgid "System:"
+msgstr "系統："
+
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr "在尋求幫助時，請提供 KlipperScreen.log。\n"
+
+msgid "Close"
+msgstr "關閉"
+
+msgid "DPMS has failed and has been disabled"
+msgstr ""
+
+msgid "Cannot connect to Moonraker"
+msgstr "無法連接到Moonraker"
+
+msgid "Lost Connection to Moonraker"
+msgstr "與Moonraker失去連接"
+
+msgid "Klipper has disconnected"
+msgstr "Klipper已斷開連線"
+
+msgid "Klipper has encountered an error."
+msgstr "Klipper遇到一個錯誤。"
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr "重啟Klipper韌體可能會解決這個問題。"
+
+msgid "Please recompile and flash the micro-controller."
+msgstr "請重新編譯並燒錄微控制器。"
+
+msgid "Klipper is attempting to start"
+msgstr "Klipper正在啟動"
+
+msgid "Klipper has shutdown"
+msgstr "Klipper已關閉"
+
+msgid "No eligible macros:"
+msgstr ""
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "以 ' _ '開頭的巨集將會被隱藏"
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "使用 rename_existing 的巨集將會被隱藏"
+
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT 已被隱藏，應從擠出功能中使用"
+
+msgid "Temperature too low to extrude"
+msgstr "溫度過低無法擠出"
+
+msgid "Retrying"
+msgstr "正在重試"
+
+msgid "Moonraker: connected"
+msgstr "Moonraker：已連線"
+
+#~ msgid "Error getting active spool"
+#~ msgstr "取得使用中的線盤時發生錯誤"
+
+#~ msgid "Max:"
+#~ msgstr "最大："
+
+#~ msgid "Password saved"
+#~ msgstr "密碼已儲存"
 
 #~ msgid "Hide temp."
 #~ msgstr "隱藏溫度"
@@ -1032,9 +1053,6 @@ msgstr[0] "秒"
 
 #~ msgid "Print Time"
 #~ msgstr "列印時間"
-
-#~ msgid "Starting WiFi Association"
-#~ msgstr "開始WiFi連線"
 
 #~ msgid "dBm"
 #~ msgstr "dBm"
