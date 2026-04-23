@@ -10,7 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2025-07-28 13:11+0000\n"
 "Last-Translator: Miloslav Kos <kos.m@post.cz>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/cs/>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -606,12 +607,10 @@ msgstr "Obnovit"
 msgid "Save Z"
 msgstr "Uložit Z"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
 msgstr "Použít posun {sign}{offset:.3f} na Probe?"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
 msgstr "Použít posun {sign}{offset:.3f} na Endstop?"

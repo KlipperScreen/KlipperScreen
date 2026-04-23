@@ -10,7 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2026-03-19 07:09+0000\n"
 "Last-Translator: Kayz C <kayzed.x@gmail.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/zh_Hant/>\n"
+"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
+"projects/klipperscreen/klipperscreen/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -598,12 +599,10 @@ msgstr "繼續"
 msgid "Save Z"
 msgstr "儲存Z軸"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
 msgstr "將偏移量 {sign}{offset:.3f} 套用到探針？"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
 msgstr "將偏移量 {sign}{offset:.3f} 套用到限位開關？"

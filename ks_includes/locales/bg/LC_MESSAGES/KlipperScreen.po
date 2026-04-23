@@ -10,7 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2024-12-22 20:00+0000\n"
 "Last-Translator: Niolay Danov <nikdan@abv.bg>\n"
-"Language-Team: Bulgarian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/bg/>\n"
+"Language-Team: Bulgarian <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -604,12 +605,10 @@ msgstr "Продължи"
 msgid "Save Z"
 msgstr "Запиши Z"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
 msgstr "Приложи отместване {sign}{offset:.3f} към зондирането?"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
 msgstr "Приложи отместване {sign}{offset:.3f} към крайната точка?"
