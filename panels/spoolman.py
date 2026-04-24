@@ -380,7 +380,7 @@ class Panel(ScreenPanel):
 
     def update_active_spool(self, spool_id):
         if not self._treeview:
-                return
+            return
         model = self._treeview.get_model()
         new_id = self._printer.active_spool_id
         old_id = getattr(self, '_prev_active_id', None)
