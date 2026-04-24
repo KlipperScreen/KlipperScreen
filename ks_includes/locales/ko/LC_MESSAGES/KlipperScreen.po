@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2024-07-06 14:10+0900\n"
 "Last-Translator: ElectricalBoy "
 "<15651807+ElectricalBoy@users.noreply.github.com>\n"
@@ -632,11 +632,17 @@ msgstr "저장된 오프셋: %s"
 msgid "Apply"
 msgstr "확인"
 
-msgid "Cancel Print"
-msgstr "출력 취소"
+msgid "Restart Print"
+msgstr "재시작 인쇄"
 
 msgid "Go Back"
 msgstr "뒤로"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "이 인쇄를 다시 시작하시겠습니까?"
+
+msgid "Cancel Print"
+msgstr "출력 취소"
 
 msgid "Working"
 msgstr "작동중"

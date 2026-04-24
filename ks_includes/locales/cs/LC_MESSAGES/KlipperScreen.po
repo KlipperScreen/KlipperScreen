@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2025-07-28 13:11+0000\n"
 "Last-Translator: Miloslav Kos <kos.m@post.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/"
@@ -622,11 +622,17 @@ msgstr "Uložený offset: %s"
 msgid "Apply"
 msgstr "Použít"
 
-msgid "Cancel Print"
-msgstr "Zrušit tisk"
+msgid "Restart Print"
+msgstr "Restartovat tisk"
 
 msgid "Go Back"
 msgstr "Zpět"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Opravdu chcete tento tisk restartovat?"
+
+msgid "Cancel Print"
+msgstr "Zrušit tisk"
 
 msgid "Working"
 msgstr "Pracuje"

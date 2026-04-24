@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2025-01-15 08:00+0000\n"
 "Last-Translator: Selim <technical50@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -618,11 +618,17 @@ msgstr "Kaydedilen telafi mesafesi: %s"
 msgid "Apply"
 msgstr "Uygula"
 
-msgid "Cancel Print"
-msgstr "Baskıyı iptal et"
+msgid "Restart Print"
+msgstr "Baskıyı Yeniden Başlat"
 
 msgid "Go Back"
 msgstr "Geri git"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Bu baskıyı yeniden başlatmak istediğinizden emin misiniz?"
+
+msgid "Cancel Print"
+msgstr "Baskıyı iptal et"
 
 msgid "Working"
 msgstr "Çalışıyor"

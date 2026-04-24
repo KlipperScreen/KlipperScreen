@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Dominik <dominik.sostar@gmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -679,11 +679,17 @@ msgstr "Shranjen odmik: %s"
 msgid "Apply"
 msgstr "Uporabi"
 
-msgid "Cancel Print"
-msgstr "Prekliči tisk"
+msgid "Restart Print"
+msgstr "Ponovni zagon tiska"
 
 msgid "Go Back"
 msgstr "Nazaj"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Ste prepričani, da želite ponovno zagnati ta tisk?"
+
+msgid "Cancel Print"
+msgstr "Prekliči tisk"
 
 #, fuzzy
 msgid "Working"

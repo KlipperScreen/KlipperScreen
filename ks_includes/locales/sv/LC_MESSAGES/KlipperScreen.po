@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -664,11 +664,17 @@ msgstr "Sparad offset: %s"
 msgid "Apply"
 msgstr "Tillämpa"
 
-msgid "Cancel Print"
-msgstr "Avbryt utskrift"
+msgid "Restart Print"
+msgstr "Starta om utskrift"
 
 msgid "Go Back"
 msgstr "Gå tillbaka"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Är du säker på att du vill starta om denna utskrift?"
+
+msgid "Cancel Print"
+msgstr "Avbryt utskrift"
 
 #, fuzzy
 msgid "Working"

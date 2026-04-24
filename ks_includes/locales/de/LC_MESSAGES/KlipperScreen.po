@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2025-04-28 23:30+0000\n"
 "Last-Translator: Otis Mohr <mail@otismohr.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
@@ -618,11 +618,17 @@ msgstr "Gespeicherter Offset: %s"
 msgid "Apply"
 msgstr "Anwenden"
 
-msgid "Cancel Print"
-msgstr "Druck abbrechen"
+msgid "Restart Print"
+msgstr "Druck neu starten"
 
 msgid "Go Back"
 msgstr "Zurück"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Möchten Sie diesen Druck wirklich neu starten?"
+
+msgid "Cancel Print"
+msgstr "Druck abbrechen"
 
 msgid "Working"
 msgstr "Arbeitet"

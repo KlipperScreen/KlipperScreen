@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2024-08-12 07:09+0000\n"
 "Last-Translator: Hiep Nguyen <tanhiep26@gmail.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -634,11 +634,17 @@ msgstr "Đã lưu sai lệch: %s"
 msgid "Apply"
 msgstr "Áp dụng"
 
-msgid "Cancel Print"
-msgstr "Hủy in"
+msgid "Restart Print"
+msgstr "Khởi động lại In"
 
 msgid "Go Back"
 msgstr "Về trước"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Bạn có chắc chắn muốn khởi động lại lần in này?"
+
+msgid "Cancel Print"
+msgstr "Hủy in"
 
 #, fuzzy
 msgid "Working"

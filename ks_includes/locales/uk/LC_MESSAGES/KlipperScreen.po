@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 24-11-26 10.00\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2024-11-26 22:47+0200\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -626,11 +626,17 @@ msgstr "Збережено зміщення: %s"
 msgid "Apply"
 msgstr "Застосувати"
 
-msgid "Cancel Print"
-msgstr "Скасувати друк"
+msgid "Restart Print"
+msgstr "Перезапустити друк"
 
 msgid "Go Back"
 msgstr "Назад"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Ви впевнені, що хочете перезапустити цей друк?"
+
+msgid "Cancel Print"
+msgstr "Скасувати друк"
 
 msgid "Working"
 msgstr "Працює"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2025-07-24 23:12+0000\n"
 "Last-Translator: Владимир Чернояров <s3mpau@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -624,11 +624,17 @@ msgstr "Сохраненный оффсет: %s"
 msgid "Apply"
 msgstr "Применить"
 
-msgid "Cancel Print"
-msgstr "Отменить печать"
+msgid "Restart Print"
+msgstr "Перезапустить печать"
 
 msgid "Go Back"
 msgstr "Назад"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Вы уверены, что хотите перезапустить эту печать?"
+
+msgid "Cancel Print"
+msgstr "Отменить печать"
 
 msgid "Working"
 msgstr "Печатает"

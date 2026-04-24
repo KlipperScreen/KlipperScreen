@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2026-04-23 15:17-0300\n"
 "Last-Translator: Pouriya Zolghadry <merdasss@yahoo.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -769,12 +769,18 @@ msgstr "جابجایی ذخیره شده: %s"
 msgid "Apply"
 msgstr "اعمال"
 
-msgid "Cancel Print"
-msgstr "لغو چاپ"
+msgid "Restart Print"
+msgstr "بازچاپ"
 
 #, fuzzy
 msgid "Go Back"
 msgstr "بازگشت"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "آیا مطمئن هستید که می‌خواهید این چاپ را از نو شروع کنید؟"
+
+msgid "Cancel Print"
+msgstr "لغو چاپ"
 
 #, fuzzy
 msgid "Working"

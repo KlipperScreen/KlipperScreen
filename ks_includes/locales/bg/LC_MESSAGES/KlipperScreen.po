@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2024-12-22 20:00+0000\n"
 "Last-Translator: Niolay Danov <nikdan@abv.bg>\n"
 "Language-Team: Bulgarian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -620,11 +620,17 @@ msgstr "Записан офсет: %s"
 msgid "Apply"
 msgstr "Приложи"
 
-msgid "Cancel Print"
-msgstr "Край на печата"
+msgid "Restart Print"
+msgstr "Рестартиране на печат"
 
 msgid "Go Back"
 msgstr "Назад"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Сигурни ли сте, че искате да рестартирате този печат?"
+
+msgid "Cancel Print"
+msgstr "Край на печата"
 
 msgid "Working"
 msgstr "Работещ"

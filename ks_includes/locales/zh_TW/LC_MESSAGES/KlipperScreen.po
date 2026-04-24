@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2026-03-19 07:09+0000\n"
 "Last-Translator: Kayz C <kayzed.x@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
@@ -614,11 +614,17 @@ msgstr "儲存偏移：%s"
 msgid "Apply"
 msgstr "套用"
 
-msgid "Cancel Print"
-msgstr "取消打印"
+msgid "Restart Print"
+msgstr "重新開始列印"
 
 msgid "Go Back"
 msgstr "返回"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "確定要重新開始此列印嗎？"
+
+msgid "Cancel Print"
+msgstr "取消打印"
 
 msgid "Working"
 msgstr "工作中"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2026-03-10 13:09+0000\n"
 "Last-Translator: vjurka <v@jurka.lt>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -623,11 +623,17 @@ msgstr "Išsaugotas poslinkis: %s"
 msgid "Apply"
 msgstr "Pritaikyti"
 
-msgid "Cancel Print"
-msgstr "Atšaukti spausdinimą"
+msgid "Restart Print"
+msgstr "Perkrauti spausdinimą"
 
 msgid "Go Back"
 msgstr "Atgal"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Ar tikrai norite perkrauti šį spausdinimą?"
+
+msgid "Cancel Print"
+msgstr "Atšaukti spausdinimą"
 
 msgid "Working"
 msgstr "Dirbama"

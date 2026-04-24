@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2025-07-09 06:02+0000\n"
 "Last-Translator: Simon B <simon.buro@hotmail.com>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -614,11 +614,17 @@ msgstr "Gemt offset: %s"
 msgid "Apply"
 msgstr "Anvend"
 
-msgid "Cancel Print"
-msgstr "Annullér print"
+msgid "Restart Print"
+msgstr "Genstart print"
 
 msgid "Go Back"
 msgstr "Gå tilbage"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Er du sikker på, at du vil genstarte dette print?"
+
+msgid "Cancel Print"
+msgstr "Annullér print"
 
 msgid "Working"
 msgstr "Arbejder"

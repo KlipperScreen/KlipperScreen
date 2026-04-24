@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2025-03-15 11:32+0000\n"
 "Last-Translator: Giadej <Giadej@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -614,11 +614,17 @@ msgstr "Offset salvato: %s"
 msgid "Apply"
 msgstr "Applica"
 
-msgid "Cancel Print"
-msgstr "Annulla stampa"
+msgid "Restart Print"
+msgstr "Riavvia stampa"
 
 msgid "Go Back"
 msgstr "Torna indietro"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Sei sicuro di voler riavviare questa stampa?"
+
+msgid "Cancel Print"
+msgstr "Annulla stampa"
 
 msgid "Working"
 msgstr "Lavoro"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -613,10 +613,16 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-msgid "Cancel Print"
+msgid "Restart Print"
 msgstr ""
 
 msgid "Go Back"
+msgstr ""
+
+msgid "Are you sure you wish to restart this print?"
+msgstr ""
+
+msgid "Cancel Print"
 msgstr ""
 
 msgid "Working"

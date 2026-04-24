@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2024-12-10 12:04+0000\n"
 "Last-Translator: Julia <daviteusz0@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -621,11 +621,17 @@ msgstr "Zapisane przesunięcie: %s"
 msgid "Apply"
 msgstr "Zastosuj"
 
-msgid "Cancel Print"
-msgstr "Anuluj drukowanie"
+msgid "Restart Print"
+msgstr "Restartuj Druk"
 
 msgid "Go Back"
 msgstr "Powróć"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Czy na pewno chcesz zrestartować ten druk?"
+
+msgid "Cancel Print"
+msgstr "Anuluj drukowanie"
 
 msgid "Working"
 msgstr "W toku"

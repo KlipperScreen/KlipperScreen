@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2024-07-26 19:09+0000\n"
 "Last-Translator: Jegert Uusküla <jegertuuskula@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -621,11 +621,17 @@ msgstr "Salvestatud nihe: %s"
 msgid "Apply"
 msgstr "Rakenda"
 
-msgid "Cancel Print"
-msgstr "Tühista printimine"
+msgid "Restart Print"
+msgstr "Taaskäivita prindid"
 
 msgid "Go Back"
 msgstr "Mine tagasi"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Kas oled kindel, et soovid selle prindi taaskäivitada?"
+
+msgid "Cancel Print"
+msgstr "Tühista printimine"
 
 msgid "Working"
 msgstr "Töötab"

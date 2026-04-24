@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2025-06-10 01:04+0000\n"
 "Last-Translator: Juverley Junior <juverley@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -625,11 +625,17 @@ msgstr "Deslocamento salvo: %s"
 msgid "Apply"
 msgstr "Aplicar"
 
-msgid "Cancel Print"
-msgstr "Cancelar Impressão"
+msgid "Restart Print"
+msgstr "Reiniciar Impressão"
 
 msgid "Go Back"
 msgstr "Voltar"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Tem certeza de que deseja reiniciar esta impressão?"
+
+msgid "Cancel Print"
+msgstr "Cancelar Impressão"
 
 msgid "Working"
 msgstr "Trabalhando"

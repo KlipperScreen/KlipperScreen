@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2025-05-24 19:01+0000\n"
 "Last-Translator: Jean-Yves Leduc <leduc.jy@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/klipperscreen/"
@@ -620,11 +620,17 @@ msgstr "Décalage enregistré: %s"
 msgid "Apply"
 msgstr "Appliquer"
 
-msgid "Cancel Print"
-msgstr "Annuler l'impression"
+msgid "Restart Print"
+msgstr "Redémarrer l'impression"
 
 msgid "Go Back"
 msgstr "Retour"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Êtes-vous sûr de vouloir redémarrer cette impression ?"
+
+msgid "Cancel Print"
+msgstr "Annuler l'impression"
 
 msgid "Working"
 msgstr "Fonctionne"

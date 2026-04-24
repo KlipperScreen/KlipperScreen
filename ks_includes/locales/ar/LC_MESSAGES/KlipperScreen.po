@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2026-01-10 23:01+0000\n"
 "Last-Translator: Joe <alawadhi3000@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/klipperscreen/"
@@ -636,11 +636,17 @@ msgstr "تم حفظ التحديد: %s"
 msgid "Apply"
 msgstr "تطبيق"
 
-msgid "Cancel Print"
-msgstr "إلغاء الطباعة"
+msgid "Restart Print"
+msgstr "إعادة تشغيل الطباعة"
 
 msgid "Go Back"
 msgstr "ارجع"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "هل أنت متأكد من رغبتك في إعادة تشغيل هذه الطباعة؟"
+
+msgid "Cancel Print"
+msgstr "إلغاء الطباعة"
 
 msgid "Working"
 msgstr "يعمل"

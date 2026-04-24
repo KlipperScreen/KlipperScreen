@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2024-11-29 19:00+0000\n"
 "Last-Translator: \"Zs.Antal\" <antonio092130@icloud.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -615,11 +615,17 @@ msgstr "Eltolás mentve: %s"
 msgid "Apply"
 msgstr "Alkalmaz"
 
-msgid "Cancel Print"
-msgstr "Nyomtatás megszakítása"
+msgid "Restart Print"
+msgstr "Nyomtatás újraindítása"
 
 msgid "Go Back"
 msgstr "Visszalépés"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Biztosan újraindítja ezt a nyomtatást?"
+
+msgid "Cancel Print"
+msgstr "Nyomtatás megszakítása"
 
 msgid "Working"
 msgstr "Munkavégzés"

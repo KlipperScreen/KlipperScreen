@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 16:27-0300\n"
+"POT-Creation-Date: 2026-04-23 22:27-0300\n"
 "PO-Revision-Date: 2026-04-23 21:28+0000\n"
 "Last-Translator: Alfredo Monclus <alfredomonclus@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -620,11 +620,17 @@ msgstr "Desfase Guardado: %s"
 msgid "Apply"
 msgstr "Aplicar"
 
-msgid "Cancel Print"
-msgstr "Cancelar impresión"
+msgid "Restart Print"
+msgstr "Reiniciar Impresión"
 
 msgid "Go Back"
 msgstr "Volver"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "¿Está seguro de que desea reiniciar esta impresión?"
+
+msgid "Cancel Print"
+msgstr "Cancelar impresión"
 
 msgid "Working"
 msgstr "Trabajando"
