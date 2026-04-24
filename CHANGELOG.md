@@ -4,6 +4,7 @@ Probably all versions contain changes regarding documentation, translation, fixe
 
 ## Current master
 
+* add option to add spool weight into the titlebar (spoolman required)
 * add a wifi interface selector in the network panel
 * option to use keyboard navigation
 * allow starting in locked state
