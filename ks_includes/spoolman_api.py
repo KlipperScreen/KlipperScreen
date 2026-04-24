@@ -29,7 +29,7 @@ class SpoolmanAPI:
             logging.error(f"Spoolman API Exception: {e}")
             return None
 
-    def get_active_spool_id(self) -> int | None:
+    def get_active_spool_id(self) -> int:
         """Fetches the current active spool ID."""
         result = self.api.send_request("server/spoolman/spool_id")
         if not result or "spool_id" not in result:
@@ -54,11 +54,11 @@ class SpoolmanAPI:
             logging.error(f"Error clearing active spool: {e}")
             return False
 
-    def get_spool_details(self, spool_id: int) -> dict | None:
+    def get_spool_details(self, spool_id: int) -> dict:
         """Fetches full details for a specific spool."""
         return self._make_request(method="GET", path=f"/v1/spool/{spool_id}")
 
-    def load_all_spools(self, allow_archived: bool = False) -> list | None:
+    def load_all_spools(self, allow_archived: bool = False) -> list:
         """Fetches the full list of spools."""
         path = f"/v1/spool?allow_archived={str(allow_archived).lower()}"
         return self._make_request(method="GET", path=path)
