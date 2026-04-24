@@ -760,7 +760,7 @@ class Panel(ScreenPanel):
             self.enable_button("resume", "cancel")
             self._gtk.Button_busy(self.buttons['cancel'], False)
             self.can_close = False
-        elif self.state == "cancelling"
+        elif self.state == "cancelling":
             self.buttons['button_grid'].attach(self.buttons['resume'], 0, 0, 1, 1)
             self.buttons['button_grid'].attach(self.buttons['cancel'], 1, 0, 1, 1)
             self.buttons['button_grid'].attach(self.buttons['restart'], 2, 0, 1, 1)
