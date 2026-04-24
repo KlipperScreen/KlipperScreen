@@ -27,6 +27,7 @@ from ks_includes.KlippyRest import KlippyRest
 from ks_includes.files import KlippyFiles
 from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.printer import Printer
+from ks_includes.spoolman_api import SpoolmanAPI
 from ks_includes.widgets.keyboard import Keyboard
 from ks_includes.widgets.prompts import Prompt
 from ks_includes.widgets.lockscreen import LockScreen
@@ -260,6 +261,9 @@ class KlipperScreen(Gtk.Window):
             self.printers[ind][name]["moonraker_path"],
             self.printers[ind][name]["moonraker_ssl"],
         )
+
+        self.spoolman_api = SpoolmanAPI(self.apiclient)
+
         self._ws = KlippyWebsocket(
             {
                 "on_connect": self.websocket_connected,
@@ -900,7 +904,22 @@ class KlipperScreen(Gtk.Window):
                     "printer.gcode.script",
                     script
                 )
+        elif action == "notify_active_spool_set":
+            spool_id = data["spool_id"] if "spool_id" in data else self.spoolman_api.get_active_spool_id()
+            self.update_spool_data(spool_id)
         self.process_update(action, data)
+
+    def update_spool_data(self, spool_id=None):
+        if not spool_id:
+            spool_id = self.spoolman_api.get_active_spool_id()
+        if not spool_id or not isinstance(spool_id, int):
+            self.printer.set_active_spool(spool_id=None)
+            return
+        spool_data = self.spoolman_api.get_spool_details(spool_id)
+        if spool_data is None:
+            self.printer.set_active_spool(spool_id=spool_id)
+            return
+        self.printer.set_active_spool(spool_id=spool_id, spool_data=spool_data)
 
     def process_action(self, action):
         if action.startswith("prompt"):
@@ -1108,7 +1127,7 @@ class KlipperScreen(Gtk.Window):
                 self.printer.configure_cameras(cameras['webcams'])
         if "spoolman" in self.server_info["components"]:
             self.printer.enable_spoolman()
-            self.base_panel.refresh_spoolman_weight()
+            self.update_spool_data(self.spoolman_api.get_active_spool_id())
 
     def init_klipper(self):
         if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:

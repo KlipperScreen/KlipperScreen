@@ -427,7 +427,6 @@ class Printer:
         logging.info("Enabling Spoolman")
         self.spoolman = True
 
-    def set_active_spool(self, spool_id=None, spool=None, checked=True):
+    def set_active_spool(self, spool_id=None, spool_data=None):
         self.active_spool_id = spool_id
-        self.active_spool = spool
-        self.active_spool_checked = checked
+        self.active_spool = spool_data

@@ -12,8 +12,6 @@ from datetime import datetime
 from math import log
 from ks_includes.screen_panel import ScreenPanel
 
-SPOOL_ID_UNSET = object()
-
 try:
     import psutil
     psutil_available = True
@@ -112,7 +110,8 @@ class BasePanel(ScreenPanel):
             widget.show()
 
         self.labels['spoolman_icon'] = Gtk.Image()
-        self.labels['spoolman_weight'] = Gtk.Label()
+        self.labels['spoolman_icon'].set_from_pixbuf(self.get_spoolman_icon_pixbuf())
+        self.labels['spoolman_weight'] = Gtk.Label(label="?")
         self.control['spoolman_box'] = Gtk.Box()
         self.control['spoolman_box'].pack_start(self.labels['spoolman_icon'], False, False, 7)
         self.control['spoolman_box'].pack_start(self.labels['spoolman_weight'], False, False, 0)
@@ -170,7 +169,9 @@ class BasePanel(ScreenPanel):
         self.battery_icons = self.load_battery_icons()
         self.battery_percentage()
 
-    def get_spoolman_icon_pixbuf(self, color):
+    def get_spoolman_icon_pixbuf(self, color=None):
+        if not color:
+            self.get_active_spoolman_color()
         klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
         icon_path = os.path.join(klipperscreendir, "styles", self._screen.theme, "images", "spool.svg")
         icon_size = self._gtk.img_scale * self.bts * .9
@@ -211,7 +212,6 @@ class BasePanel(ScreenPanel):
     def show_heaters(self, show=True):
         for child in self.control['temp_box'].get_children():
             self.control['temp_box'].remove(child)
-        self.control['spoolman_box'].hide()
         if self._printer is None or not show:
             return
         try:
@@ -250,8 +250,7 @@ class BasePanel(ScreenPanel):
                 if n >= nlimit + 1:
                     break
                 if item == "spool" and self._printer.spoolman:
-                    self.set_spoolman_refresh()
-                    self.control['temp_box'].add(self.control['spoolman_box'])
+                    self.add_spoolman_box()
                     n += 1
                     continue
                 for device in devices:
@@ -260,10 +259,22 @@ class BasePanel(ScreenPanel):
                         self.control['temp_box'].add(self.labels[f"{device}_box"])
                         n += 1
                         break
+            if (
+                n < nlimit
+                and self._printer.spoolman
+                and self.control['spoolman_box'].get_parent() != self.control['temp_box']
+            ):
+                self.add_spoolman_box()
+                n += 1
 
             self.control['temp_box'].show_all()
         except Exception as e:
             logging.debug(f"Couldn't create heaters box: {e}")
+
+    def add_spoolman_box(self):
+        self.control['temp_box'].add(self.control['spoolman_box'])
+        self.set_spoolman_refresh()
+        self.fetch_spoolman()
 
     def get_icon(self, device, img_size):
         if device.startswith("extruder"):
@@ -292,7 +303,7 @@ class BasePanel(ScreenPanel):
             self.battery_update = GLib.timeout_add_seconds(60, self.battery_percentage)
 
     def set_spoolman_refresh(self):
-        if not self.spoolman_update:
+        if self.spoolman_update is None:
             self.spoolman_update = GLib.timeout_add_seconds(60, self.fetch_spoolman)
 
     def add_content(self, panel):
@@ -303,7 +314,6 @@ class BasePanel(ScreenPanel):
         self.control['shutdown'].set_visible(not printing)
         self.show_shortcut(connected and printer_select)
         self.show_heaters(connected and printer_select)
-        self.refresh_spoolman_weight(connected and printer_select)
         self.show_printer_select(len(self._config.get_printers()) > 1)
         for control in ('back', 'home'):
             self.set_control_sensitive(len(self._screen._cur_panels) > 1, control=control)
@@ -321,10 +331,10 @@ class BasePanel(ScreenPanel):
         if self._printer is None:
             return
         if (
-                not self._printer.spoolman
-                or not self._printer.active_spool
-                or "remaining_weight" not in self._printer.active_spool
-                or self._printer.active_spool["remaining_weight"] is None
+            not self._printer.spoolman
+            or not self._printer.active_spool
+            or "remaining_weight" not in self._printer.active_spool
+            or self._printer.active_spool["remaining_weight"] is None
         ):
             self.update_spoolman_alert_visuals(False)
             self.labels['spoolman_weight'].set_label("?")
@@ -332,43 +342,6 @@ class BasePanel(ScreenPanel):
         remaining_weight = self._printer.active_spool["remaining_weight"]
         self.labels['spoolman_weight'].set_label(f'{round(remaining_weight):.0f} g')
         self.update_spoolman_alert_visuals(remaining_weight < self.spoolman_low_limit)
-
-    def refresh_spoolman_weight(self, show=True, spool_id=SPOOL_ID_UNSET, force=False):
-        if (
-            self._printer is None
-            or not self._printer.spoolman
-            or not show
-        ):
-            return
-        if (
-            not force
-            and spool_id is SPOOL_ID_UNSET
-            and self._printer.active_spool_checked
-        ):
-            self.update_spoolman_weight_label()
-            return
-
-        def reset_spool_ui(sid=None, checked=False):
-            self._printer.set_active_spool(spool_id=sid, checked=checked)
-            self.update_spoolman_weight_label()
-
-        if spool_id is SPOOL_ID_UNSET:
-            result = self._screen.apiclient.send_request("server/spoolman/spool_id")
-            if not result or not result.get("spool_id"):
-                logging.error("Error trying to fetch active spool id")
-                reset_spool_ui(checked=False)
-                return
-            spool_id = result["spool_id"]
-        spool_resp = self._screen.apiclient.post_request("server/spoolman/proxy", json={
-            "request_method": "GET",
-            "path": f"/v1/spool/{spool_id}",
-        })
-        if not spool_resp or "result" not in spool_resp:
-            logging.error("Error trying to fetch active spool information")
-            reset_spool_ui(sid=spool_id, checked=False)
-            return
-        self._printer.set_active_spool(spool_id=spool_id, spool=spool_resp["result"])
-        self.update_spoolman_weight_label()
         color = self.get_active_spoolman_color()
         if color != self.spoolman_current_color:
             self.labels['spoolman_icon'].set_from_pixbuf(self.get_spoolman_icon_pixbuf(color))
@@ -376,12 +349,16 @@ class BasePanel(ScreenPanel):
 
     def fetch_spoolman(self):
         if (
-            "spool" not in self.titlebar_items
+            not self._printer
             or 'printer_select' in self._screen._cur_panels
+            or self.control['spoolman_box'].get_parent() != self.control['temp_box']
         ):
+            logging.debug("Stopping Spoolman updates")
             self.spoolman_update = None
             return False
-        self.refresh_spoolman_weight(force=True)
+        logging.debug("Fetching Spoolman")
+        self._screen.update_spool_data()
+        self.update_spoolman_weight_label()
         return True
 
     def back(self, widget=None):
@@ -395,17 +372,7 @@ class BasePanel(ScreenPanel):
 
     def process_update(self, action, data):
         if action == "notify_active_spool_set":
-            has_spool_id = isinstance(data, dict) and "spool_id" in data
-            if not has_spool_id and self._printer is not None:
-                # Force a refetch when the event arrives without an explicit spool_id
-                # so the titlebar doesn't keep showing a stale cached spool.
-                self._printer.set_active_spool(checked=False)
-            spool_id = data.get("spool_id") if has_spool_id else SPOOL_ID_UNSET
-            self.refresh_spoolman_weight(
-                self._printer is not None
-                and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'},
-                spool_id=spool_id
-            )
+            self.update_spoolman_weight_label()
             return
         if action == "notify_proc_stat_update":
             cpu = data["system_cpu_usage"]["cpu"]
@@ -580,9 +547,6 @@ class BasePanel(ScreenPanel):
         else:
             self.titlebar_items = []
             self.spoolman_low_limit = 20
-        self.refresh_spoolman_weight(
-            self._printer is not None and self._printer.state not in {'disconnected', 'startup', 'shutdown', 'error'}
-        )
 
     def show_update_dialog(self):
         if self.update_dialog is not None:
