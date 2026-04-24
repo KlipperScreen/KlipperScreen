@@ -10,7 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2025-01-15 08:00+0000\n"
 "Last-Translator: Selim <technical50@users.noreply.hosted.weblate.org>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/tr/>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -602,12 +603,10 @@ msgstr "Devam Et"
 msgid "Save Z"
 msgstr "Z Kaydet"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
 msgstr "{sign}{offset:.3f} ofseti Probe'a uygula?"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
 msgstr "{sign}{offset:.3f} ofseti Endstop'a uygula?"
@@ -1028,8 +1027,7 @@ msgstr "'rename_existing'i kullanan makrolar gizlendi"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"FILEMENT_YUKLE/FILEMENT_KALDIR gizlidir ve extrude'dan kullanılmalıdır"
+msgstr "FILEMENT_YUKLE/FILEMENT_KALDIR gizlidir ve extrude'dan kullanılmalıdır"
 
 msgid "Temperature too low to extrude"
 msgstr "Sıcaklık ekstrüzyon için çok düşük"

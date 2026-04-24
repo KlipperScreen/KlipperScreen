@@ -6,7 +6,8 @@ msgstr ""
 "POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2024-07-26 19:09+0000\n"
 "Last-Translator: Jegert Uusküla <jegertuuskula@gmail.com>\n"
-"Language-Team: Estonian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/et/>\n"
+"Language-Team: Estonian <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -605,12 +606,10 @@ msgstr "Jätka"
 msgid "Save Z"
 msgstr "Salvesta Z"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
 msgstr "Käytä {sign}{offset:.3f} siirtoa kohteeseen Probe?"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
 msgstr "Käytä {sign}{offset:.3f} siirtoa kohteeseen Endstop?"
@@ -671,8 +670,7 @@ msgid "Initiate a PID calibration for:"
 msgstr "Algata PID kalibreerimine jaoks:"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
-"See võib võtta rohkem kui 5 minutit, sõltuvalt kütteseadme võimsusest."
+msgstr "See võib võtta rohkem kui 5 minutit, sõltuvalt kütteseadme võimsusest."
 
 msgid "Temp (°C)"
 msgstr "Temperatuur (°C)"

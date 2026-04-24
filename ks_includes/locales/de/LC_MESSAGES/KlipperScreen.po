@@ -10,7 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2025-04-28 23:30+0000\n"
 "Last-Translator: Otis Mohr <mail@otismohr.de>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/de/>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -602,12 +603,10 @@ msgstr "Fortsetzen"
 msgid "Save Z"
 msgstr "Z speichern"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
 msgstr "{sign}{offset:.3f} Offset auf Probe anwenden?"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
 msgstr "{sign}{offset:.3f} Offset auf Endstop anwenden?"

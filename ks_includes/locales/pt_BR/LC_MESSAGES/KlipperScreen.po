@@ -10,7 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2025-01-23 05:01+0000\n"
 "Last-Translator: Erick Andrade <andrade.erick1987@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/pt_BR/>\n"
+"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
+"klipperscreen/klipperscreen/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -163,8 +164,7 @@ msgid "Printing"
 msgstr "Imprimindo"
 
 msgid "Timeout for screen black-out or power-off during printing"
-msgstr ""
-"Timeout para escurecimento ou desligamento da tela durante a impressão"
+msgstr "Timeout para escurecimento ou desligamento da tela durante a impressão"
 
 msgid "24 Hour Time"
 msgstr "Horário de 24 Horas"
@@ -604,12 +604,10 @@ msgstr "Continuar"
 msgid "Save Z"
 msgstr "Salvar Z"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
 msgstr "Aplicar deslocamento {sign}{offset:.3f} na Sonda?"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
 msgstr "Aplicar deslocamento {sign}{offset:.3f} no Final de Curso?"

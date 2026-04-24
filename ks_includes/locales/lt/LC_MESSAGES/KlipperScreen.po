@@ -10,12 +10,14 @@ msgstr ""
 "POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2026-03-10 13:09+0000\n"
 "Last-Translator: vjurka <v@jurka.lt>\n"
-"Language-Team: Lithuanian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/lt/>\n"
+"Language-Team: Lithuanian <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/lt/>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"(n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.17-dev\n"
 
 msgid "Main Menu"
@@ -606,12 +608,10 @@ msgstr "Tęsti"
 msgid "Save Z"
 msgstr "Išsaugoti Z"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
 msgstr "Taikyti {sign}{offset:.3f} poslinkį Zondavimui?"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
 msgstr "Taikyti {sign}{offset:.3f} poslinkį Galiniam stabdžiui?"

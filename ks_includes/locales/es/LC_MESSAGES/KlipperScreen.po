@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-23 16:27-0300\n"
-"PO-Revision-Date: 2024-12-02 18:00+0000\n"
-"Last-Translator: Radiotbo <santiago@esolva.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/es/>\n"
+"PO-Revision-Date: 2026-04-23 21:28+0000\n"
+"Last-Translator: Alfredo Monclus <alfredomonclus@gmail.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.17.1-dev\n"
 
 msgid "Main Menu"
 msgstr "Menú Principal"
@@ -243,8 +244,7 @@ msgid "Show cursor"
 msgstr "Mostrar cursor"
 
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
-"Para controlar el ratón o verificar la precisión de la pantalla táctil"
+msgstr "Para controlar el ratón o verificar la precisión de la pantalla táctil"
 
 msgid "Invert X"
 msgstr "Invertir X"
@@ -605,12 +605,10 @@ msgstr "Continuar"
 msgid "Save Z"
 msgstr "Guardar Z"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
 msgstr "¿Aplicar un desplazamiento de {sign}{offset:.3f} a la sonda?"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
 msgstr "¿Aplicar un desplazamiento de {sign}{offset:.3f} al final?"
@@ -836,19 +834,15 @@ msgstr "Filtro"
 msgid "Material"
 msgstr "Material"
 
-#, fuzzy
 msgid "Comment"
 msgstr "Comentario"
 
-#, fuzzy
 msgid "Last used"
 msgstr "Usado por última vez"
 
-#, fuzzy
 msgid "Remaining weight"
 msgstr "Peso restante"
 
-#, fuzzy
 msgid "Remaining length"
 msgstr "Longitud restante"
 
@@ -870,7 +864,6 @@ msgstr "Error al obtener el spool activo"
 msgid "No info available"
 msgstr "No info. disponible"
 
-#, fuzzy
 msgid "IP Address"
 msgstr "Dirección IP"
 
@@ -904,7 +897,6 @@ msgstr "Buscando actualizaciones, espere por favor..."
 msgid "Not working or not configured"
 msgstr "No funciona o no está configurado"
 
-#, fuzzy
 msgid "Are you sure?"
 msgstr "¿Estás seguro?"
 
@@ -993,7 +985,6 @@ msgstr "Proporcione KlipperScreen.log cuando pida ayuda.\n"
 msgid "Close"
 msgstr "Cerrar"
 
-#, fuzzy
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS ha fallado y se ha deshabilitado"
 
@@ -1021,7 +1012,6 @@ msgstr "Klipper está intentando iniciar"
 msgid "Klipper has shutdown"
 msgstr "Klipper se apagó"
 
-#, fuzzy
 msgid "No eligible macros:"
 msgstr "Sin macros elegibles:"
 

@@ -6,7 +6,8 @@ msgstr ""
 "POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2025-06-20 09:12+0000\n"
 "Last-Translator: kr <Tlake_ichi_ni_san_shi@yahoo.co.jp>\n"
-"Language-Team: Japanese <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/ja/>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/ja/>\n"
 "Language: jp\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -624,12 +625,10 @@ msgstr "再開"
 msgid "Save Z"
 msgstr "Z軸の保存"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
 msgstr "プロブに{sign}{offset:.3f}オフセットを適用しますか？"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
 msgstr "エンドストップに{sign}{offset:.3f}オフセットを適用しますか？"
@@ -708,7 +707,8 @@ msgid "This will affect screw positions and mesh graph"
 msgstr "これはネジの位置とメッシュグラフに影響します"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr "ボタンが重なっている場合はボタンを交換しますが、他のパネルに影響を与えます"
+msgstr ""
+"ボタンが重なっている場合はボタンを交換しますが、他のパネルに影響を与えます"
 
 msgid "XY Speed (mm/s)"
 msgstr "XY速度 (mm/s)"
@@ -948,7 +948,6 @@ msgstr "ソフトリカバリ"
 msgid "Recover"
 msgstr "リカバリ"
 
-#, fuzzy
 #, python-format
 msgid "Outdated by %d"
 msgstr "%d日遅延"
@@ -1060,7 +1059,9 @@ msgstr "「rename_existing」を使用するマクロは非表示になります
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT は非表示になっているため、押し出しから使用する必要があります"
+msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT は非表示になっているため、押し出しから使用する"
+"必要があります"
 
 msgid "Temperature too low to extrude"
 msgstr "温度が低すぎるため押し出すことができません"
@@ -1123,7 +1124,8 @@ msgstr "Moonraker: 接続済"
 #~ msgstr "スライサーの補正時間(%)"
 
 #~ msgid "Calibrated, save configuration to make it permanent"
-#~ msgstr "校正完了しました。次回起動時以降も適用するには設定を保存してください"
+#~ msgstr ""
+#~ "校正完了しました。次回起動時以降も適用するには設定を保存してください"
 
 #~ msgid "Decrease"
 #~ msgstr "減少"

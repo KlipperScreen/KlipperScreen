@@ -10,12 +10,14 @@ msgstr ""
 "POT-Creation-Date: 2026-04-23 16:27-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Dominik <dominik.sostar@gmail.com>\n"
-"Language-Team: Slovenian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/sl/>\n"
+"Language-Team: Slovenian <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 5.5-dev\n"
 
 msgid "Main Menu"
@@ -662,12 +664,10 @@ msgstr "Nadaljuj"
 msgid "Save Z"
 msgstr "Shrani Z"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
 msgstr "Uporabi odmik {sign}{offset:.3f} na Preizkuševalnik?"
 
-#, fuzzy
 #, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
 msgstr "Uporabi odmik {sign}{offset:.3f} na Končni stik?"
@@ -776,7 +776,6 @@ msgstr "Brezžičnega vmesnika ni bilo mogoče najti"
 msgid "Connected"
 msgstr "Povezano"
 
-#, fuzzy
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
 msgstr "Ali želite pozabiti ali prekiniti povezavo s %s?"
