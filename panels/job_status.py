@@ -750,6 +750,7 @@ class Panel(ScreenPanel):
             self.buttons['button_grid'].attach(self.buttons['fine_tune'], 2, 0, 1, 1)
             self.buttons['button_grid'].attach(self.buttons['control'], 3, 0, 1, 1)
             self.enable_button("pause", "cancel")
+            self._gtk.Button_busy(self.buttons['cancel'], False)
             self.can_close = False
         elif self.state == "paused":
             self.buttons['button_grid'].attach(self.buttons['resume'], 0, 0, 1, 1)
@@ -757,6 +758,15 @@ class Panel(ScreenPanel):
             self.buttons['button_grid'].attach(self.buttons['fine_tune'], 2, 0, 1, 1)
             self.buttons['button_grid'].attach(self.buttons['control'], 3, 0, 1, 1)
             self.enable_button("resume", "cancel")
+            self._gtk.Button_busy(self.buttons['cancel'], False)
+            self.can_close = False
+        elif self.state == "cancelling"
+            self.buttons['button_grid'].attach(self.buttons['resume'], 0, 0, 1, 1)
+            self.buttons['button_grid'].attach(self.buttons['cancel'], 1, 0, 1, 1)
+            self.buttons['button_grid'].attach(self.buttons['restart'], 2, 0, 1, 1)
+            self.buttons['button_grid'].attach(self.buttons['menu'], 3, 0, 1, 1)
+            self._gtk.Button_busy(self.buttons['cancel'], True)
+            self.disable_button("resume", "restart", "menu")
             self.can_close = False
         else:
             offset = self._printer.get_stat("gcode_move", "homing_origin")
@@ -779,9 +789,9 @@ class Panel(ScreenPanel):
                 self.enable_button("restart")
             else:
                 self.disable_button("restart")
-            if self.state != "cancelling":
-                self.buttons['button_grid'].attach(self.buttons['menu'], 3, 0, 1, 1)
-                self.can_close = True
+            self.buttons['button_grid'].attach(self.buttons['menu'], 3, 0, 1, 1)
+            self.enable_button("menu")
+            self.can_close = True
         self.content.show_all()
 
     def show_file_thumbnail(self):
