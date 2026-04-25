@@ -9,7 +9,6 @@ from gi.repository import Gtk, GdkPixbuf, GObject, Pango, Gdk
 from ks_includes.widgets.combo import ComboBoxPlus
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.KlippyRest import KlippyRest
-from ks_includes.spoolman_api import SpoolmanAPI
 from datetime import datetime
 
 try:

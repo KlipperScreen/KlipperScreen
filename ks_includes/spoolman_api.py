@@ -7,19 +7,22 @@ class SpoolmanAPI:
     def __init__(self, api_client):
         self.api = api_client
 
-    def _make_request(self, method="GET", path="/v1/spool"):
+    def _make_request(self, method="GET", path="/v1/spool", json_body=None):
         """Helper to standardize API calls through the KlipperScreen proxy."""
         try:
-            result = self.api.post_request("server/spoolman/proxy", json={
+            payload = {
                 "request_method": method,
                 "path": path,
-            })
+            }
+            if json_body:
+                payload["body"] = json_body
+
+            result = self.api.post_request("server/spoolman/proxy", json=payload)
 
             if not result or "result" not in result:
                 logging.warning(f"Spoolman API Error: {result}")
                 return None
 
-            # If the path was empty (e.g., setting spool_id), result might be True/False or a dict
             if isinstance(result["result"], bool):
                 return result["result"]
 
@@ -62,3 +65,11 @@ class SpoolmanAPI:
         """Fetches the full list of spools."""
         path = f"/v1/spool?allow_archived={str(allow_archived).lower()}"
         return self._make_request(method="GET", path=path)
+
+    def update_spool_weight(self, spool_id: int, remaining_weight: float) -> dict:
+        """Change the remaining weight of a spool"""
+        path = f"/v1/spool/{spool_id}"
+        body = {
+            "remaining_weight": remaining_weight
+        }
+        return self._make_request(method="PATCH", path=path, json_body=body)
