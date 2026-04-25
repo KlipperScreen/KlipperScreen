@@ -5,6 +5,7 @@ from gi.repository import GdkPixbuf, Gtk, Pango
 
 from datetime import datetime
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.widgets.keypad import Keypad
 
 
 class Panel(ScreenPanel):
@@ -15,9 +16,11 @@ class Panel(ScreenPanel):
         self.selected_weight_mode = "filament"
         self.grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True, hexpand=True, vexpand=True)
         self.set_extra(extra=extra)
+        self.saved_weight = 0
 
     def set_extra(self, extra=None, **kwargs):
         self.spool = extra
+        self.saved_weight = getattr(self.spool, "remaining_weight", 0)
         if self.selected_weight_mode not in {"measured", "filament"}:
             self.selected_weight_mode = "filament"
         self.title = _("Spool")
@@ -155,7 +158,6 @@ class Panel(ScreenPanel):
 
     def _on_info_panel_clicked(self, widget, event):
         self.selected_weight_mode = "measured" if self.selected_weight_mode == "filament" else "filament"
-        self.labels['entry'].set_text("")
         self.set_extra(extra=self.spool)
         return True
 
@@ -190,75 +192,25 @@ class Panel(ScreenPanel):
 
     def _build_right_panel(self):
         right = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10, hexpand=True, vexpand=True)
-        right.add(self._build_spool_keypad())
+        self.labels["keypad"] = Keypad(
+            self._screen,
+            ok_cb=self._submit_entry,
+            cancel_cb=self._clear_entry,
+            entry_max=8,
+            error_msg=_("Invalid weight")
+        )
+
+        self.labels["keypad"].add_extra_button(
+            self._restore_value,
+            icon="refresh",
+            label=_("Restore"),
+        )
+
+        right.pack_start(self.labels["keypad"], True, True, 0)
         return right
 
-    def _build_spool_keypad(self):
-        keypad = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-
-        self.labels["entry"] = Gtk.Entry(hexpand=True, xalign=0.5, max_length=8)
-        self.labels['entry'].connect("activate", self._submit_entry)
-        entry_side_margin = round(self._gtk.font_size * 0.15)
-        self.labels["entry"].set_margin_start(entry_side_margin)
-        self.labels["entry"].set_margin_end(entry_side_margin)
-
-        numpad = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
-        numpad.set_direction(Gtk.TextDirection.LTR)
-        numpad.get_style_context().add_class('numpad')
-        numpad.set_hexpand(True)
-
-        keys = [
-            ['1', 'numpad_tleft'],
-            ['2', 'numpad_top'],
-            ['3', 'numpad_tright'],
-            ['4', 'numpad_left'],
-            ['5', 'numpad_button'],
-            ['6', 'numpad_right'],
-            ['7', 'numpad_left'],
-            ['8', 'numpad_button'],
-            ['9', 'numpad_right'],
-            ['B', 'numpad_bleft'],
-            ['0', 'numpad_bottom'],
-            ['.', 'numpad_bright']
-        ]
-        for i, key in enumerate(keys):
-            label, style_class = key
-            if label == "B":
-                button = self._gtk.Button("backspace", scale=.66, style="numpad_key")
-            else:
-                button = self._gtk.Button(label=label, style="numpad_key")
-            button.connect('clicked', self._on_spool_keypad_button, label)
-            button.get_style_context().add_class(style_class)
-            numpad.attach(button, i % 3, i // 3, 1, 1)
-
-        ok = self._gtk.Button('complete', style="color1", scale=1.1)
-        if self._screen.vertical_mode:
-            ok.set_size_request(-1, self._gtk.font_size * 4)
-        else:
-            ok.set_size_request(-1, self._gtk.font_size * 5)
-        ok.connect('clicked', self._submit_entry)
-        ok.set_vexpand(False)
-
-        reset = self._gtk.Button(
-            'refresh', _("Reset"), "color2", self._gtk.bsidescale, Gtk.PositionType.LEFT, 1
-        )
-        reset.set_vexpand(False)
-        reset.connect("clicked", self._reset_placeholder)
-
-        bottom = Gtk.Box()
-        bottom.add(reset)
-        bottom.add(ok)
-
-        keypad.add(self.labels["entry"])
-        keypad.add(numpad)
-        keypad.add(bottom)
-        return keypad
-
-    def _on_spool_keypad_button(self, widget, digit):
-        if digit == 'B':
-            self.labels['entry'].set_text(self.labels['entry'].get_text()[:-1])
-        else:
-            self.labels['entry'].set_text(f"{self.labels['entry'].get_text()}{digit}")
+    def _clear_entry(self, widget=None):
+        self.labels["keypad"].clear()
 
     @staticmethod
     def _format_entry_weight(value):
@@ -268,11 +220,8 @@ class Panel(ScreenPanel):
             return str(int(value))
         return f"{value:.2f}".rstrip("0").rstrip(".")
 
-    def _submit_entry(self, widget=None):
-        try:
-            value = float(self.labels['entry'].get_text())
-        except ValueError:
-            self._screen.show_popup_message(_("Invalid weight"))
+    def _submit_entry(self, value):
+        if self.spool is None:
             return
 
         if self.selected_weight_mode == "measured":
@@ -306,6 +255,9 @@ class Panel(ScreenPanel):
 
         self.set_extra(extra=self.spool)
         self._screen.show_popup_message(_("Filament weight updated"), 1)
+
+    def _restore_value(self, entry_val):
+        self.labels['keypad'].entry.set_text(f"{self.saved_weight:.1f}")
 
     def back(self):
         return False
