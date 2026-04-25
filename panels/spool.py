@@ -162,7 +162,7 @@ class Panel(ScreenPanel):
     def _get_empty_spool_weight(self):
         spool_weight = getattr(self.spool, "spool_weight", None)
         vendor_spool_weight = getattr(getattr(self.spool.filament, "vendor", None), "empty_spool_weight", None)
-        return vendor_spool_weight if vendor_spool_weight is not None else spool_weight
+        return spool_weight if spool_weight is not None else vendor_spool_weight
 
     def _get_full_filament_weight(self):
         initial_weight = getattr(self.spool, "initial_weight", None)
