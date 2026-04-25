@@ -93,7 +93,7 @@ Where the matrix can be one of the following options:
 | 90° Clockwise                           | `0 -1 1 1 0 0 0 0 1`  |
 | 90° Counter-Clockwise                   | `0 1 0 -1 0 1 0 0 1`  |
 | 180° (Inverts X and Y)                  | `-1 0 1 0 -1 1 0 0 1` |
-| invert Y                                | `-1 0 1 1 1 0 0 0 1`  |
+| invert Y                                | ` 1 0 0 0 -1 1 0 0 1` |
 | invert X                                | `-1 0 1 0 1 0 0 0 1`  |
 | expand to twice the size horizontally   | `0.5 0 0 0 1 0 0 0 1` |
 
