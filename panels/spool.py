@@ -1,10 +1,9 @@
-from datetime import datetime
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import GdkPixbuf, Gtk, Pango
 
+from datetime import datetime
 from ks_includes.screen_panel import ScreenPanel
 
 
@@ -275,40 +274,36 @@ class Panel(ScreenPanel):
         except ValueError:
             self._screen.show_popup_message(_("Invalid weight"))
             return
+
         if self.selected_weight_mode == "measured":
-            empty_spool_weight = self._get_empty_spool_weight()
-            if empty_spool_weight is not None:
+            empty_spool_weight = self._get_empty_spool_weight() or 0
+            if empty_spool_weight:
                 value -= empty_spool_weight
             if value < 0:
                 self._screen.show_popup_message(_("Measured weight is below empty spool weight"))
                 return
-        result = self._screen.apiclient.post_request("server/spoolman/proxy", json={
-            "use_v2_response": True,
-            "request_method": "PATCH",
-            "path": f"/v1/spool/{self.spool.id}",
-            "body": {
-                "remaining_weight": value
-            }
-        })
+        result = self._screen.spoolman_api.update_spool_weight(
+            spool_id=self.spool.id,
+            remaining_weight=value
+        )
         if not result:
             self._screen.show_popup_message(_("Error updating filament weight"))
             return
+
         if result.get("error"):
             self._screen.show_popup_message(
                 _("Error updating filament weight") + f"\n{result['error'].get('message', '')}"
             )
             return
-        response = result.get("response") or {}
-        self.spool.remaining_weight = response.get("remaining_weight", value)
-        if "used_weight" in response:
-            self.spool.used_weight = response["used_weight"]
-        if "remaining_length" in response:
-            self.spool.remaining_length = response["remaining_length"]
-        if self._screen.printer is not None and self._screen.printer.active_spool_id == self.spool.id:
-            self._screen.base_panel.refresh_spoolman_weight(
-                self._screen.printer.state not in {'disconnected', 'startup', 'shutdown', 'error'},
-                spool_id=self.spool.id
-            )
+
+        self.spool.remaining_weight = result.get("remaining_weight", value)
+
+        if "used_weight" in result:
+            self.spool.used_weight = result["used_weight"]
+
+        if self._screen.printer is not None and getattr(self._screen.printer, 'active_spool_id', None) == self.spool.id:
+            self._screen.printer.active_spool['remaining_weight'] = result.get("remaining_weight")
+
         self.set_extra(extra=self.spool)
         self._screen.show_popup_message(_("Filament weight updated"), 1)
 
