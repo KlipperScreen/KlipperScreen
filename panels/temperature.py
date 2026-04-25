@@ -501,6 +501,8 @@ class Panel(ScreenPanel):
         return max(temp, 0)
 
     def pid_calibrate(self, temp):
+        if temp <= 0:
+            return
         heater = self.active_heater.split(' ', maxsplit=1)[-1]
         if self.verify_max_temp(temp):
             script = {
@@ -626,19 +628,22 @@ class Panel(ScreenPanel):
         self.devices[self.active_heater]["name_button"].get_style_context().add_class(
             "button_active"
         )
-
         if "keypad" not in self.labels:
             self.labels["keypad"] = Keypad(
                 self._screen,
                 self.change_target_temp,
-                self.pid_calibrate,
                 self.hide_numpad,
+                error_msg=_("Invalid temperature")
             )
-        can_pid = (
+        if (
             self._printer.state not in ("printing", "paused")
             and self._screen.printer.config[self.active_heater]["control"] == "pid"
-        )
-        self.labels["keypad"].show_pid(can_pid)
+        ):
+            self.labels["keypad"].add_extra_button(
+                self.pid_calibrate,
+                icon="heat-up",
+                label=_('Calibrate') + ' PID',
+            )
         self.labels["keypad"].clear()
 
         if self._screen.vertical_mode:
