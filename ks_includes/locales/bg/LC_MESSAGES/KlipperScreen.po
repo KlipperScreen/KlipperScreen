@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-23 22:27-0300\n"
-"PO-Revision-Date: 2024-12-22 20:00+0000\n"
+"PO-Revision-Date: 2026-04-25 14:09+0000\n"
 "Last-Translator: Niolay Danov <nikdan@abv.bg>\n"
 "Language-Team: Bulgarian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/bg/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.17.1-dev\n"
 
 msgid "Main Menu"
 msgstr "Главно меню"
@@ -56,7 +56,7 @@ msgid "Fan"
 msgstr "Охлаждане"
 
 msgid "Leds"
-msgstr "LEDs"
+msgstr "Leds"
 
 msgid "Macros"
 msgstr "Макроси"
@@ -128,7 +128,7 @@ msgid "Icon Theme"
 msgstr "Тема"
 
 msgid "Changes how the interface looks"
-msgstr "Променя начина, по който изглежда интерфейсът"
+msgstr "Променя интерфейсът"
 
 msgid "(default)"
 msgstr "(по подразбиране)"
@@ -679,7 +679,7 @@ msgstr ""
 "Може да отнеме повече от 5 минути в зависимост от мощността на нагревателя."
 
 msgid "Temp (°C)"
-msgstr "Темп  (°С)"
+msgstr "Темп (°С)"
 
 msgid "Home"
 msgstr "Паркирай X"
@@ -839,19 +839,15 @@ msgstr "Филтър"
 msgid "Material"
 msgstr "Материал"
 
-#, fuzzy
 msgid "Comment"
 msgstr "Коментар"
 
-#, fuzzy
 msgid "Last used"
 msgstr "Последно използвано"
 
-#, fuzzy
 msgid "Remaining weight"
 msgstr "Оставащо тегло"
 
-#, fuzzy
 msgid "Remaining length"
 msgstr "Оставаща дължина"
 
@@ -873,7 +869,6 @@ msgstr "Грешка при активиране на спула"
 msgid "No info available"
 msgstr "Няма налична информация"
 
-#, fuzzy
 msgid "IP Address"
 msgstr "IP Адрес"
 
@@ -907,7 +902,6 @@ msgstr "Проверява се за актуализации, моля изча
 msgid "Not working or not configured"
 msgstr "Не работи или не е конфигуриран"
 
-#, fuzzy
 msgid "Are you sure?"
 msgstr "Сигурни ли сте?"
 
@@ -996,7 +990,6 @@ msgstr "Осигурете KlipperScreen.log, когато поискате по
 msgid "Close"
 msgstr "Затваряне"
 
-#, fuzzy
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS се провали и е деактивиран"
 
@@ -1024,7 +1017,6 @@ msgstr "Klipper е готов"
 msgid "Klipper has shutdown"
 msgstr "Klipper се изключи"
 
-#, fuzzy
 msgid "No eligible macros:"
 msgstr "Няма подходящи макроси:"
 
