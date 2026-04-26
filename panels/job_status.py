@@ -421,8 +421,14 @@ class Panel(ScreenPanel):
 
     def resume(self, widget):
         self.disable_button("pause", "resume")
+        GLib.timeout_add_seconds(5, self._re_enable_resume_if_paused)
         self._screen._ws.klippy.print_resume()
         self._screen.show_all()
+
+    def _re_enable_resume_if_paused(self):
+        if self.state == "paused":
+            self.enable_button("resume")
+        return False
 
     def pause(self, widget):
         self.disable_button("pause", "resume")
