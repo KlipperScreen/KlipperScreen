@@ -420,7 +420,6 @@ class Panel(ScreenPanel):
             logging.info(f"Could not restart {self.filename}")
 
     def resume(self, widget):
-        self.disable_button("pause", "resume")
         self._screen._send_action(widget, "printer.print.resume", {})
         self._screen.show_all()
 
