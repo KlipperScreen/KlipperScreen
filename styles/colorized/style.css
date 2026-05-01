@@ -89,7 +89,7 @@ button.update:active,
 button.invalid:active,
 .dialog button:active {
     border-style: none;
-    margin-top: .5em;
+    margin-top: .6em;
 }
 
 button.active {

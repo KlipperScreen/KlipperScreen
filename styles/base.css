@@ -71,6 +71,7 @@ button {
     border-radius: 0;
     border: 0;
     -gtk-icon-shadow: none;
+    transition: padding 0s;
 }
 
 .active image,

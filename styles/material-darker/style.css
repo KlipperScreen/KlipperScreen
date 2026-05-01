@@ -52,7 +52,8 @@ button.color4 {
     background-color: #252525;
     border-color: #252525;
     border-radius: .25em;
-    padding-top: 0.4em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 }
 
 
@@ -78,6 +79,7 @@ button.invalid:active,
 .dialog button:active {
     border-style: none;
     background-color: #424242;
+    margin-top: 0.55em;
 }
 
 .active image,

@@ -101,6 +101,8 @@ button.update:active,
 button.invalid:active,
 .dialog button:active {
     border-style: none;
+    margin-top: 0.6em;
+    box-shadow: 0 0;
 }
 
 button.active {
