@@ -434,12 +434,12 @@ class Panel(ScreenPanel):
             self.restart_print()
 
     def resume(self, widget):
-        self._screen._ws.klippy.print_resume()
+        self._screen._send_action(widget, "printer.print.resume", {})
         self._screen.show_all()
 
     def pause(self, widget):
         self.disable_button("pause", "resume")
-        self._screen._ws.klippy.print_pause()
+        self._screen._send_action(widget, "printer.print.pause", {})
         self._screen.show_all()
 
     def cancel(self, widget):
