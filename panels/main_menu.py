@@ -93,6 +93,8 @@ class Panel(MenuPanel):
         # Support for hiding devices by name
         if devname.startswith("_"):
             return False
+        if devname.lower() in self.hidden_sensors:
+            return False
 
         if device.startswith("extruder"):
             if self._printer.extrudercount > 1:

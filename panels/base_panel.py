@@ -543,9 +543,16 @@ class BasePanel(ScreenPanel):
                 logging.info(f"Titlebar name type: {self.titlebar_name_type} items: {self.titlebar_items}")
             else:
                 self.titlebar_items = []
+            hidden_sensors = self.ks_printer_cfg.get("hidden_sensors", None)
+            if hidden_sensors is not None:
+                ScreenPanel.hidden_sensors = [str(i.strip()).lower() for i in hidden_sensors.split(',')]
+                logging.info(f"Hidden sensors: {self.hidden_sensors}")
+            else:
+                ScreenPanel.hidden_sensors = []
             self.spoolman_low_limit = self.ks_printer_cfg.getfloat("spool_low_limit", fallback=20)
         else:
             self.titlebar_items = []
+            ScreenPanel.hidden_sensors = []
             self.spoolman_low_limit = 20
 
     def show_update_dialog(self):
