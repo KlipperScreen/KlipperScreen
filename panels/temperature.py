@@ -606,6 +606,8 @@ class Panel(ScreenPanel):
             return
         for x in self._printer.get_temp_devices():
             if x in data:
+                if x not in self.devices:
+                    self.add_device(x)
                 self.update_temp(
                     x,
                     self._printer.get_stat(x, "temperature"),
