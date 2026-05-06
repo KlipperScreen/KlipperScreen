@@ -1157,6 +1157,9 @@ class KlipperScreen(Gtk.Window):
             self._init_printer("Error getting printer configuration")
             return False
         self.printer.reinit(printer_info, config['status'])
+        objects = self.apiclient.send_request("printer/objects/list")
+        if objects and 'objects' in objects:
+            self.printer.register_dynamic_sensors(objects['objects'])
         self.printer.available_commands = self.apiclient.get_gcode_help()
         info = self.apiclient.send_request("machine/system_info")
         if info and 'system_info' in info:
