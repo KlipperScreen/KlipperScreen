@@ -101,6 +101,18 @@ class Printer:
         self.log_counts(printer_info)
         self.process_update(data)
 
+    def register_dynamic_sensors(self, objects):
+        for obj in objects:
+            if obj.startswith("temperature_sensor "):
+                name = obj.split(" ", 1)[1]
+                if name.startswith("_"):
+                    continue
+                if obj not in self.config:
+                    logging.info(f"Registering dynamic sensor: {obj}")
+                    self.config[obj] = {}
+                    self.data[obj] = {"temperature": 0}
+                    self.tempdevcount += 1
+
     def log_counts(self, printer_info):
         logging.info(f"Klipper version: {printer_info['software_version']}")
         logging.info(f"# Extruders: {self.extrudercount}")
