@@ -50,6 +50,7 @@ class Panel(ScreenPanel):
         self.move_grid = None
         self.time_grid = None
         self.extrusion_grid = None
+        self.idex = False
 
         data = ['pos_x', 'pos_y', 'pos_z', 'time_left', 'duration', 'slicer_time', 'file_time',
                 'filament_time', 'est_time', 'speed_factor', 'req_speed', 'max_accel', 'extrude_factor', 'zoffset',
@@ -170,6 +171,7 @@ class Panel(ScreenPanel):
         nlimit = 2 if self._screen.width <= 500 else 3
         n = 0
         if nlimit > 2 and len(self._printer.get_tools()) == 2:
+            self.idex = True
             for extruder in self.buttons['extruder']:
                 self.labels['temp_grid'].attach(self.buttons['extruder'][extruder], n, 0, 1, 1)
                 n += 1
@@ -524,10 +526,11 @@ class Panel(ScreenPanel):
 
         if 'toolhead' in data:
             if 'extruder' in data['toolhead'] and data['toolhead']['extruder'] != self.current_extruder:
-                self.labels['temp_grid'].remove_column(0)
-                self.labels['temp_grid'].insert_column(0)
                 self.current_extruder = data["toolhead"]["extruder"]
-                self.labels['temp_grid'].attach(self.buttons['extruder'][self.current_extruder], 0, 0, 1, 1)
+                if not self.idex:
+                    self.labels['temp_grid'].remove_column(0)
+                    self.labels['temp_grid'].insert_column(0)
+                    self.labels['temp_grid'].attach(self.buttons['extruder'][self.current_extruder], 0, 0, 1, 1)
                 self._screen.show_all()
             if "max_accel" in data["toolhead"]:
                 self.labels['max_accel'].set_label(f"{data['toolhead']['max_accel']:.0f} {self.mms2}")
