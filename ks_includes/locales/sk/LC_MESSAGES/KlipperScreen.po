@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-23 22:27-0300\n"
-"PO-Revision-Date: 2025-08-06 16:01+0000\n"
+"PO-Revision-Date: 2026-05-07 00:11+0000\n"
 "Last-Translator: Pavol Vrba <pvrba2000@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/sk/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.17.1\n"
 
 msgid "Main Menu"
 msgstr "Hlavné Menu"
@@ -308,7 +308,6 @@ msgstr "Nepodarilo sa pridať sieť"
 msgid "Failed to delete connection"
 msgstr "Nepodarilo sa odstrániť pripojenie"
 
-#, fuzzy
 msgid "Starting WiFi Association"
 msgstr "Spúšťam asociáciu WiFi"
 
@@ -842,19 +841,15 @@ msgstr "Filter"
 msgid "Material"
 msgstr "Materiál"
 
-#, fuzzy
 msgid "Comment"
 msgstr "Komentár"
 
-#, fuzzy
 msgid "Last used"
 msgstr "Naposledy použité"
 
-#, fuzzy
 msgid "Remaining weight"
 msgstr "Zostávajúca hmotnosť"
 
-#, fuzzy
 msgid "Remaining length"
 msgstr "Zostávajúca dĺžka"
 
@@ -876,7 +871,6 @@ msgstr "Chyba pri získavaní aktívnej cievky"
 msgid "No info available"
 msgstr "Žiadne informácie nie sú k dispozícii"
 
-#, fuzzy
 msgid "IP Address"
 msgstr "IP adresa"
 
@@ -910,7 +904,6 @@ msgstr "Hľadajú sa aktualizácie, čakajte prosím…"
 msgid "Not working or not configured"
 msgstr "Nefunguje alebo nie je nakonfigurované"
 
-#, fuzzy
 msgid "Are you sure?"
 msgstr "Ste si istý?"
 
@@ -1001,7 +994,6 @@ msgstr "Pri žiadosti o pomoc poskytnite súbor KlipperScreen.log.\n"
 msgid "Close"
 msgstr "Zatvoriť"
 
-#, fuzzy
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS zlyhalo a bolo zakázané"
 
@@ -1029,7 +1021,6 @@ msgstr "Klipper sa pokúša naštartovať"
 msgid "Klipper has shutdown"
 msgstr "Klipper sa vypol"
 
-#, fuzzy
 msgid "No eligible macros:"
 msgstr "Žiadne vhodné makrá:"
 
