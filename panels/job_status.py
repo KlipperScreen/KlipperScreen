@@ -167,7 +167,7 @@ class Panel(ScreenPanel):
                                                         'extra': extruder})
             self.buttons['extruder'][extruder].set_halign(Gtk.Align.START)
 
-        self.labels['temp_grid'] = Gtk.Grid()
+        self.labels['temp_grid'] = Gtk.Grid(column_homogeneous=True)
         nlimit = 2 if self._screen.width <= 500 else 3
         n = 0
         if nlimit > 2 and len(self._printer.get_tools()) == 2:
