@@ -85,7 +85,7 @@ class Panel(ScreenPanel):
         for widget in self.labels.values():
             label = find_widget(widget, Gtk.Label)
             label.set_justify(Gtk.Justification.CENTER)
-            label.set_line_wrap(True)
+            label.set_line_wrap(False)
             label.set_lines(2)
         if extruder_buttons:
             self.labels['extruders'] = AutoGrid(extruder_buttons, vertical=self._screen.vertical_mode)
