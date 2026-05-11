@@ -33,7 +33,7 @@ window {
 }
 
 treeview.view{
-    padding-right: 0.25em;
+    padding: 1em .25em;
 }
 
 junction {

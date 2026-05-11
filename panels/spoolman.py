@@ -256,7 +256,9 @@ class Panel(ScreenPanel):
         self.load_spools()
         self._treeview = Gtk.TreeView(model=sortable, headers_visible=False, show_expanders=False)
 
-        text_renderer = Gtk.CellRendererText(wrap_width=self._gtk.content_width / 4)
+        text_renderer = Gtk.CellRendererText()
+        # Using wrapping causes unwanted vertical space, and it adds more each times it wraps
+        text_renderer.set_property('ellipsize', Pango.EllipsizeMode.END)
         pixbuf_renderer = Gtk.CellRendererPixbuf(xpad=5, ypad=5)
         checkbox_renderer = Gtk.CellRendererToggle()
         column_id = Gtk.TreeViewColumn(cell_renderer=text_renderer)
