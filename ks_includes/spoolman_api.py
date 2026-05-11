@@ -66,10 +66,7 @@ class SpoolmanAPI:
         path = f"/v1/spool?allow_archived={str(allow_archived).lower()}"
         return self._make_request(method="GET", path=path)
 
-    def update_spool_weight(self, spool_id: int, remaining_weight: float) -> dict:
-        """Change the remaining weight of a spool"""
+    def update_spool(self, spool_id: int, payload: dict) -> dict:
+        """Updates a spool"""
         path = f"/v1/spool/{spool_id}"
-        body = {
-            "remaining_weight": remaining_weight
-        }
-        return self._make_request(method="PATCH", path=path, json_body=body)
+        return self._make_request(method="PATCH", path=path, json_body=payload)

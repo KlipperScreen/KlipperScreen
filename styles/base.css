@@ -671,3 +671,11 @@ flowbox button {
 keyboard_box {
     padding: 0 20em;
 }
+
+.spool_title {
+    padding: .5em;
+}
+
+.spool_icon {
+    padding-right: .5em;
+}

@@ -201,7 +201,7 @@ class Panel(ScreenPanel):
         sort_btn_id.connect("clicked", self.change_sort, "id")
         sort_btn_id.get_style_context().add_class("buttons_slim")
 
-        sort_btn_used = self._gtk.Button(None, _("Last Used"), "color3", self.bts, Gtk.PositionType.RIGHT, 1)
+        sort_btn_used = self._gtk.Button(None, _("Used"), "color3", self.bts, Gtk.PositionType.RIGHT, 1)
         sort_btn_used.connect("clicked", self.change_sort, "last_used")
         sort_btn_used.get_style_context().add_class("buttons_slim")
 
@@ -328,16 +328,25 @@ class Panel(ScreenPanel):
     def _open_spool_detail(self, treeview, event):
         if event.button != 1:
             return False
-        path_info = treeview.get_path_at_pos(int(event.x), int(event.y))
-        if path_info is not None:
-            path, column, cell_x, cell_y = path_info
-            if column == self._column_edit:
-                model = treeview.get_model()
-                it = model.get_iter(path)
-                spool = model.get_value(it, 0)
-                self._screen.show_panel("spool", title=spool.name, extra=spool)
-                return True
-        return False
+        path_info = treeview.get_path_at_pos(event.x, event.y)
+        if not path_info:
+            return False
+
+        path, column, _, _ = path_info
+        if column is not self._column_edit:
+            return False
+
+        model = treeview.get_model()
+        it = model.get_iter(path)
+        if it is None:
+            return False
+        spool = model.get_value(it, 0)
+        if spool is None:
+            logging.error(f"Spool object is None at path {path}")
+            return False
+        logging.info(f"Opening spool editor for ID: {spool.id}")
+        self._screen.show_panel("spool_editor", extra=spool)
+        return True
 
     def _filter_spools(self, model, i, data):
         spool: SpoolmanSpool = model[i][0]
@@ -360,7 +369,7 @@ class Panel(ScreenPanel):
         if hasattr(spool, "comment"):
             result += f'{_("Comment")}:<b> {spool.comment}</b>\n'
         if spool.last_used:
-            result += f'{_("Last used")}:<b> {spool.last_used.astimezone():{self.timeFormat}}</b>\n'
+            result += f'{_("Used")}:<b> {spool.last_used.astimezone():{self.timeFormat}}</b>\n'
         if hasattr(spool, "remaining_weight"):
             result += f'{_("Remaining weight")}: <b>{round(spool.remaining_weight, 2)} g</b>\n'
         if hasattr(spool, "remaining_length"):
