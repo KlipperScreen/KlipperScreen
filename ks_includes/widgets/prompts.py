@@ -105,6 +105,7 @@ class Prompt:
         close.connect("clicked", self.close)
 
         label = Gtk.Label(label=self.text, wrap=True, hexpand=True, vexpand=True)
+        label.get_style_context().add_class("dialog")
 
         self.scroll_box.add(label)
         self.scroll_box.reorder_child(label, 0)
