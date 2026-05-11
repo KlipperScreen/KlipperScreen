@@ -89,7 +89,7 @@ button.update:focus,
 button.invalid:focus,
 .dialog button:focus
 {
-    outline: .1em dashed @solarized-orange;
+    outline: .1em dashed @active;
     outline-offset: .1em;
 }
 

@@ -179,19 +179,19 @@ textview .time {
 }
 
 .dialog-info {
-    border-bottom-color: @color4;
+    border-bottom-color: @color_4;
 }
 
 .dialog-default {
-    border-bottom-color: @color3;
+    border-bottom-color: @color_3;
 }
 
 .dialog-secondary {
-     border-bottom-color: @color2;
+     border-bottom-color: @color_2;
 }
 
 .dialog-primary {
-     border-bottom-color: @color1;
+     border-bottom-color: @color_1;
 }
 
 .horizontal_togglebuttons  {
