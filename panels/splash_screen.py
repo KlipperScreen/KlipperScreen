@@ -86,11 +86,7 @@ class Panel(ScreenPanel):
             self.labels["actions"].add(self.labels["restart_system"])
             self.labels["actions"].add(self.labels["shutdown"])
         self.labels["actions"].add(self.labels["menu"])
-        if (
-            self._screen._ws
-            and not self._screen._ws.connecting
-            or self._screen.reinit_count > self._screen.max_retries
-        ):
+        if (not self._screen.connecting):
             self.labels["actions"].add(self.labels["retry"])
         self.labels["actions"].show_all()
 
@@ -126,7 +122,8 @@ class Panel(ScreenPanel):
 
     def retry(self, widget):
         logging.debug("User retrying connection")
-        self._screen.connect_printer(self._screen.connecting_to_printer)
+        self._screen.reinit_count = 0
+        self._screen._init_printer(_("Connecting to %s") % self._screen.connecting_to_printer)
         self.show_restart_buttons()
 
     def reboot_poweroff(self, widget, method):

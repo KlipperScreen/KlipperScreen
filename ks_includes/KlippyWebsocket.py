@@ -15,10 +15,8 @@ from ks_includes.KlippyGcodes import KlippyGcodes
 class KlippyWebsocket(threading.Thread):
     _req_id = 0
     connected = False
-    connecting = True
+    connecting = False
     callback_table = {}
-    reconnect_count = 0
-    max_retries = 4
 
     def __init__(self, callback, host, port, api_key, path='', ssl=None):
         threading.Thread.__init__(self)
@@ -44,23 +42,15 @@ class KlippyWebsocket(threading.Thread):
         return "wss" if self.ssl else "ws"
 
     def initial_connect(self):
-        if self.connect() is not False:
-            GLib.timeout_add_seconds(10, self.reconnect)
-
-    def reconnect(self):
-        if self.reconnect_count > self.max_retries:
-            logging.debug("Stopping reconnections")
-            self.connecting = False
-            GLib.idle_add(self._callback['on_cancel'])
-            return False
-        return self.connect()
+        logging.info("Starting connection")
+        self.connect()
 
     def connect(self):
         if self.connected:
             logging.debug("Already connected")
             return False
+        self.connecting = True
         logging.debug("Attempting to connect")
-        self.reconnect_count += 1
 
         self.ws_url = f"{self.ws_proto}://{self._url}/websocket?token={self.api_key}"
         self.ws = websocket.WebSocketApp(
@@ -128,10 +118,8 @@ class KlippyWebsocket(threading.Thread):
         return True
 
     def on_open(self, *args):
-        logging.info("Moonraker Websocket Open")
         self.connected = True
         self.connecting = False
-        self.reconnect_count = 0
         if "on_connect" in self._callback:
             GLib.idle_add(self._callback['on_connect'], priority=GLib.PRIORITY_HIGH_IDLE)
 
@@ -144,20 +132,19 @@ class KlippyWebsocket(threading.Thread):
         else:
             status = args[0]
             message = args[1]
+        info = ""
         if message is not None:
-            logging.info(f"{status} {message}")
-        if not self.connected:
-            logging.debug("Connection already closed")
-            return
+            info = f"{status} {message}"
         if "on_close" in self._callback:
-            GLib.idle_add(self._callback['on_close'], priority=GLib.PRIORITY_HIGH_IDLE)
+            GLib.idle_add(self._callback['on_close'], info, priority=GLib.PRIORITY_HIGH_IDLE)
         logging.info("Moonraker Websocket Closed")
         self.connected = False
+        self.connecting = False
 
-    @staticmethod
-    def on_error(*args):
+    def on_error(self, *args):
         error = args[1] if len(args) == 2 else args[0]
-        logging.debug(f"Websocket error: {error}")
+        if "on_error" in self._callback:
+            GLib.idle_add(self._callback['on_error'], error, priority=GLib.PRIORITY_HIGH_IDLE)
 
 
 class MoonrakerApi:

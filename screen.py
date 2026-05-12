@@ -58,6 +58,7 @@ def set_text_direction(lang=None):
 
 class KlipperScreen(Gtk.Window):
     _cur_panels = []
+    connected = False
     connecting = False
     connecting_to_printer = None
     connected_printer = None
@@ -81,6 +82,7 @@ class KlipperScreen(Gtk.Window):
     prompt = None
     tempstore_timeout = None
     check_dpms_timeout = None
+    last_error = ""
 
     def __init__(self, args):
         self.server_info = None
@@ -235,12 +237,12 @@ class KlipperScreen(Gtk.Window):
         self.printer.state = "disconnected"
 
     def connect_printer(self, name):
-        self.printer_initializing(_("Connecting to %s") % name, True)
         self.connecting_to_printer = name
         if self._ws is not None and self._ws.connected:
             self.printer_initializing("Waiting Websocket closure")
             self.close_websocket()
             return
+        self.printer_initializing(_("Initializing KlipperScreen"), True)
         gc.collect()
         self.connecting = True
         self.initialized = False
@@ -269,7 +271,7 @@ class KlipperScreen(Gtk.Window):
                 "on_connect": self.websocket_connected,
                 "on_message": self._websocket_callback,
                 "on_close": self.websocket_disconnected,
-                "on_cancel": self.websocket_connection_cancel,
+                "on_error": self.websocket_error,
             },
             self.printers[ind][name]["moonraker_host"],
             self.printers[ind][name]["moonraker_port"],
@@ -283,7 +285,7 @@ class KlipperScreen(Gtk.Window):
             self.files.reinit()
 
         self.reinit_count = 0
-        self.connect_to_moonraker()
+        self._init_printer(_("Connecting to %s") % self.connecting_to_printer)
 
     def ws_subscribe(self):
         requested_updates = {
@@ -730,33 +732,51 @@ class KlipperScreen(Gtk.Window):
         self.base_panel.show_heaters(False)
         self.show_panel("printer_select", remove_all=True)
 
-    def websocket_connection_cancel(self):
-        self.printer_initializing(
-            _("Cannot connect to Moonraker") + '\n\n'
-            + f'{self.apiclient.status}'
-        )
+    def websocket_error(self, status):
+        self.last_error = f"{status}"
 
     def websocket_connected(self):
         logging.debug("### websocket_connected")
+        self.printer_initializing(_("Moonraker Connected"))
         self._ws.klippy.identify_client(functions.get_software_version(), self._ws.api_key)
         self.reinit_count = 0
+        self.last_error = ""
+        self.connected = True
         self.connecting = False
         self.connected_printer = self.connecting_to_printer
         self.base_panel.set_ks_printer_cfg(self.connected_printer)
         self.init_moonraker_components()
-        self.init_klipper()
 
-    def websocket_disconnected(self):
+    def websocket_disconnected(self, status):
         logging.debug("### websocket_disconnected")
         self.printer.state = "disconnected"
-        self.connecting = True
         self.connected_printer = None
+        go_to_splash = self.connected  # Go to splashscreen if it was connected
+        self.connected = False
+        self.reconnect(status, go_to_splash)
+
+    def reconnect(self, status="", go_to_splash=False):
         self.initialized = False
-        if 'printer_select' not in self._cur_panels:
-            self.printer_initializing(_("Lost Connection to Moonraker"), go_to_splash=True)
-            self.connect_printer(self.connecting_to_printer)
-        else:
+        if 'printer_select' in self._cur_panels:
             self.panels['printer_select'].disconnected_callback()
+            self.connecting = False
+            return
+
+        message = _("Connecting to %s") % self.connecting_to_printer
+        if self.last_error:
+            message += "\n\n" + self.last_error
+            self.last_error = ""
+        if status:
+            message += f"\n\n{status}"
+
+        if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:
+            logging.info("Stopping Retries")
+            self.connecting = False
+            self.printer_initializing(message, go_to_splash)
+            return
+
+        message += "\n\n" + _("Retrying") + f" #{self.reinit_count}"
+        self._init_printer(message, go_to_splash)
 
     def state_disconnected(self):
         logging.debug("### Going to disconnected")
@@ -1065,42 +1085,32 @@ class KlipperScreen(Gtk.Window):
     def _init_printer(self, msg, go_to_splash=False):
         self.printer_initializing(msg, go_to_splash)
         self.initializing = False
+        self.connecting = True
+
+        if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:
+            logging.info("Stopping Retries")
+            return False
+        self.reinit_count += 1
         if self._ws.connected and not self._ws.closing:
             GLib.timeout_add_seconds(4, self.init_klipper)
         else:
             GLib.timeout_add_seconds(4, self.connect_to_moonraker)
 
     def connect_to_moonraker(self):
-        if self.initializing:
-            logging.info("Already Initializing")
-            return False
         if self._ws.closing:
-            logging.info("Cancelling attempt")
-            return False
-        self.initializing = True
-        if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:
-            logging.info("Stopping Retries")
-            self.printer_initializing(_("Cannot connect to Moonraker") + "\n\n"
-                                      + f'{self.apiclient.status}')
-            self.initializing = False
-            return False
-        self.server_info = self.apiclient.get_server_info()
-        if not self.server_info:
-            logging.info("Cannot get server info")
-            if self.reinit_count > 0:
-                self._init_printer(_("Cannot connect to Moonraker") + "\n\n"
-                                   + _("Retrying") + f" #{self.reinit_count}")
-            else:
-                self._init_printer(_("Connecting to %s") % self.connecting_to_printer)
-            self.initializing = False
-            self.reinit_count += 1
-            return False
+            self.printer_initializing(_("Waiting for Moonraker Websocket to close"))
+            return True
         self._ws.initial_connect()
         return False
 
     def init_moonraker_components(self):
         popup = ''
         level = 2
+        # TODO replace REST with websocket where posible
+
+        self.server_info = self.apiclient.get_server_info()
+        logging.info(f"Moonraker info {self.server_info}")
+
         if self.server_info["warnings"]:
             popup += '\nMoonraker warnings:\n'
             for warning in self.server_info["warnings"]:
@@ -1128,34 +1138,26 @@ class KlipperScreen(Gtk.Window):
         if "spoolman" in self.server_info["components"]:
             self.printer.enable_spoolman()
             self.update_spool_data(self.spoolman_api.get_active_spool_id())
+        self.init_klipper()
 
     def init_klipper(self):
-        if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:
-            logging.info("Stopping Retries")
-            return False
         if not self.server_info:
-            logging.debug("Connection Lost Retrying")
-            self.connect_to_moonraker()
-            return False
-        self.reinit_count += 1
-        self.server_info = self.apiclient.get_server_info()
-        logging.info(f"Moonraker info {self.server_info}")
+            self.init_moonraker_components()
+            return
+        # TODO replace REST with websocket where posible
         if self.server_info['klippy_connected'] is False:
             msg = _("Moonraker: connected") + "\n\n"
             msg += f"Klipper: {self.server_info['klippy_state']}" + "\n\n"
-            if self.reinit_count <= self.max_retries:
-                msg += _("Retrying") + f' #{self.reinit_count}'
             self.printer_initializing(msg)
-            GLib.timeout_add_seconds(3, self.init_klipper)
-            return False
+            return
         printer_info = self.apiclient.get_printer_info()
         if printer_info is False:
             self._init_printer("Unable to get printer info from moonraker")
-            return False
+            return
         config = self.apiclient.send_request("printer/objects/query?configfile")
         if config is False:
             self._init_printer("Error getting printer configuration")
-            return False
+            return
         self.printer.reinit(printer_info, config['status'])
         objects = self.apiclient.send_request("printer/objects/list")
         if objects and 'objects' in objects:
@@ -1196,7 +1198,7 @@ class KlipperScreen(Gtk.Window):
         data = self.apiclient.send_request("printer/objects/query?" + "&".join(items))
         if data is False:
             self._init_printer("Error getting printer object data")
-            return False
+            return
         self.ws_subscribe()
 
         self.files.set_gcodes_path()
@@ -1208,7 +1210,7 @@ class KlipperScreen(Gtk.Window):
         self.initializing = False
         self.printer.process_update(data['status'])
         self.log_notification("Printer Initialized", 1)
-        return False
+        return
 
     def init_tempstore(self):
         if len(self.printer.get_temp_devices()) == 0:
