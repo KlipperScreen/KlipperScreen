@@ -114,7 +114,7 @@ class KlipperScreen(Gtk.Window):
                 m = display.get_monitor(i)
                 logging.info(f"Screen {i}: {m.get_geometry().width}x{m.get_geometry().height}")
         else:
-            logging.warning(f"WARNING: No monitors detected by Gdk")
+            logging.warning("WARNING: No monitors detected by Gdk")
         try:
             mon_n = int(args.monitor)
             if not (-1 < mon_n < monitor_amount):
