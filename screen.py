@@ -235,6 +235,7 @@ class KlipperScreen(Gtk.Window):
         self.printer.state = "disconnected"
 
     def connect_printer(self, name):
+        self.printer_initializing(_("Connecting to %s") % name, True)
         self.connecting_to_printer = name
         if self._ws is not None and self._ws.connected:
             self.printer_initializing("Waiting Websocket closure")
@@ -244,7 +245,6 @@ class KlipperScreen(Gtk.Window):
         self.connecting = True
         self.initialized = False
         self.initializing = False
-        logging.info(f"Connecting to printer: {name}")
         ind = next(
             (
                 self.printers.index(printer)
@@ -283,7 +283,6 @@ class KlipperScreen(Gtk.Window):
             self.files.reinit()
 
         self.reinit_count = 0
-        self.printer_initializing(_("Connecting to %s") % name, True)
         self.connect_to_moonraker()
 
     def ws_subscribe(self):
@@ -1041,6 +1040,7 @@ class KlipperScreen(Gtk.Window):
         if 'splash_screen' not in self.panels or go_to_splash:
             self.show_panel("splash_screen", remove_all=True)
         self.panels['splash_screen'].update_text(msg)
+        logging.info(msg.replace("\n\n", "\n"))
         self.log_notification(msg, 0)
 
     def search_power_devices(self, devices):
