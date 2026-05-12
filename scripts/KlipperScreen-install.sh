@@ -312,6 +312,7 @@ EOF
         sudo systemctl enable NetworkManager
         sudo systemctl -q --no-block start NetworkManager
         sync
+        echo "Rebooting system..."
         systemctl reboot
     fi
 }
