@@ -127,7 +127,6 @@ class Panel(ScreenPanel):
         formatted_value = f'{round(row["value"], 2)} g'
         return f'{row["label"]}: {formatted_value}'
 
-
     def _get_initial_weight(self):
         return getattr(self.spool, "initial_weight", None)
 
@@ -197,7 +196,6 @@ class Panel(ScreenPanel):
         if self.numpad_visible:
             return self._build_keypad_panel()
         return self._build_info_panel()
-
 
     def _build_info_panel(self):
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10, hexpand=True, vexpand=True)
@@ -358,7 +356,6 @@ class Panel(ScreenPanel):
             self.grid.attach(self._build_second_panel(), 1, 0, 1, 1)
         self.grid.show_all()
 
-
     def _hide_numpad(self, widget=None):
         self.numpad_visible = False
         if self._screen.vertical_mode:
@@ -370,3 +367,6 @@ class Panel(ScreenPanel):
             self.grid.remove_column(1)
             self.grid.attach(self._build_second_panel(), 1, 0, 1, 1)
         self.grid.show_all()  # needed?
+
+    def deactivate(self):
+        self._hide_numpad()
