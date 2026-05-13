@@ -209,11 +209,8 @@ class Panel(ScreenPanel):
         switch.set_active(self._config.get_config().getboolean("spoolman", "hide_archived", fallback=True))
         switch.connect("notify::active", self.switch_config_option, "spoolman", "hide_archived", self.load_spools)
 
-        name = Gtk.Label(halign=Gtk.Align.START, valign=Gtk.Align.CENTER, wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
-        name.set_markup(_("Archived"))
-
         archived = Gtk.Box(valign=Gtk.Align.CENTER)
-        archived.add(name)
+        archived.add(self._gtk.Image("archived", self._gtk.img_scale * self.bts * 2))
         archived.add(switch)
 
         sbox = Gtk.Box(hexpand=True, vexpand=False)
@@ -294,9 +291,9 @@ class Panel(ScreenPanel):
         edit_renderer = Gtk.CellRendererPixbuf(xpad=8, ypad=8)
         self._column_edit = Gtk.TreeViewColumn(cell_renderer=edit_renderer)
         self._column_edit.set_sizing(Gtk.TreeViewColumnSizing.FIXED)
-        edit_icon_size = self._gtk.img_scale * self.bts * 1.8
+        edit_icon_size = self._gtk.img_scale * self.bts * 2
         self._column_edit.set_fixed_width(max(edit_icon_size + 20, round(self._gtk.font_size * 6.5)))
-        edit_icon = self._gtk.PixbufFromIcon("settings", edit_icon_size, edit_icon_size)
+        edit_icon = self._gtk.PixbufFromIcon("edit", edit_icon_size, edit_icon_size)
         self._column_edit.set_cell_data_func(
             edit_renderer,
             lambda column, cell, model, it, data:
