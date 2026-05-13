@@ -745,7 +745,7 @@ class KlipperScreen(Gtk.Window):
         self.connecting = False
         self.connected_printer = self.connecting_to_printer
         self.base_panel.set_ks_printer_cfg(self.connected_printer)
-        self.init_moonraker_components()
+        self._ws.klippy.query_server_info(self.init_moonraker_components)
 
     def websocket_disconnected(self, status):
         logging.debug("### websocket_disconnected")
@@ -1103,14 +1103,10 @@ class KlipperScreen(Gtk.Window):
         self._ws.initial_connect()
         return False
 
-    def init_moonraker_components(self):
+    def init_moonraker_components(self, data, method, params):
         popup = ''
         level = 2
-        # TODO replace REST with websocket where posible
-
-        self.server_info = self.apiclient.get_server_info()
-        logging.info(f"Moonraker info {self.server_info}")
-
+        self.server_info = data["result"]
         if self.server_info["warnings"]:
             popup += '\nMoonraker warnings:\n'
             for warning in self.server_info["warnings"]:
@@ -1128,28 +1124,31 @@ class KlipperScreen(Gtk.Window):
         if popup:
             self.show_popup_message(popup, level)
         if "power" in self.server_info["components"]:
-            powerdevs = self.apiclient.send_request("machine/device_power/devices")
-            if powerdevs is not False:
-                self.printer.configure_power_devices(powerdevs)
+            self._ws.klippy.get_power_devices(self.set_power_devices)
         if "webcam" in self.server_info["components"]:
-            cameras = self.apiclient.send_request("server/webcams/list")
-            if cameras is not False:
-                self.printer.configure_cameras(cameras['webcams'])
+            self._ws.klippy.list_webcams(self.set_cameras)
         if "spoolman" in self.server_info["components"]:
             self.printer.enable_spoolman()
             self.update_spool_data(self.spoolman_api.get_active_spool_id())
         self.init_klipper()
 
+    def set_power_devices(self, data, method, params):
+        self.printer.configure_power_devices(data['result'])
+
+    def set_cameras(self, data, method, params):
+        self.printer.configure_cameras(data['result']['webcams'])
+
     def init_klipper(self):
         if not self.server_info:
-            self.init_moonraker_components()
+            self._ws.klippy.query_server_info(self.init_moonraker_components)
             return
-        # TODO replace REST with websocket where posible
         if self.server_info['klippy_connected'] is False:
             msg = _("Moonraker: connected") + "\n\n"
             msg += f"Klipper: {self.server_info['klippy_state']}" + "\n\n"
             self.printer_initializing(msg)
+            # wait until notify
             return
+        # TODO replace apiclient with websocket where posible
         printer_info = self.apiclient.get_printer_info()
         if printer_info is False:
             self._init_printer("Unable to get printer info from moonraker")

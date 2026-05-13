@@ -332,3 +332,27 @@ class MoonrakerApi:
                 "api_key": f"{api_key}"
             },
         )
+
+    def query_server_info(self, callback=None, *args):
+        return self._ws.send_method(
+            "server.info",
+            {},
+            callback,
+            *args
+        )
+
+    def list_webcams(self, callback=None, *args):
+        return self._ws.send_method(
+            "server.webcams.list",
+            {},
+            callback,
+            *args
+        )
+
+    def get_power_devices(self, callback=None, *args):
+        return self._ws.send_method(
+            "machine.device_power.devices",
+            {},
+            callback,
+            *args
+        )
