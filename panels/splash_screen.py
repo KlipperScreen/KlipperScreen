@@ -75,7 +75,7 @@ class Panel(ScreenPanel):
         self.clear_action_bar()
         if self.ks_printer_cfg is not None and self._screen._ws.connected:
             power_devices = self.ks_printer_cfg.get("power_devices", "")
-            if power_devices and self._printer.get_power_devices():
+            if power_devices and self._printer and self._printer.get_power_devices():
                 logging.info(f"Associated power devices: {power_devices}")
                 self.add_power_button(power_devices)
 
@@ -86,7 +86,7 @@ class Panel(ScreenPanel):
             self.labels["actions"].add(self.labels["restart_system"])
             self.labels["actions"].add(self.labels["shutdown"])
         self.labels["actions"].add(self.labels["menu"])
-        if (not self._screen.connecting):
+        if (not(self._screen.connecting or self._screen.connected)):
             self.labels["actions"].add(self.labels["retry"])
         self.labels["actions"].show_all()
 

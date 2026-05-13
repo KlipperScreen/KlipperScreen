@@ -356,3 +356,57 @@ class MoonrakerApi:
             callback,
             *args
         )
+
+    def get_printer_info(self, callback=None, *args):
+        return self._ws.send_method(
+            "printer.info",
+            {},
+            callback,
+            *args
+        )
+
+    def query_configfile(self, callback=None, *args):
+        return self._ws.send_method(
+            "printer.objects.query",
+            {
+                "objects": {
+                    "configfile": None
+                }
+            },
+            callback,
+            *args
+        )
+
+    def query_objects(self, objects, callback=None, *args):
+        return self._ws.send_method(
+            "printer.objects.query",
+            {
+                "objects": objects
+            },
+            callback,
+            *args
+        )
+
+    def get_printer_objects(self, callback=None, *args):
+        return self._ws.send_method(
+            "printer.objects.list",
+            {},
+            callback,
+            *args
+        )
+
+    def get_available_commands(self, callback=None, *args):
+        return self._ws.send_method(
+            "printer.gcode.help",
+            {},
+            callback,
+            *args
+        )
+
+    def get_system_info(self, callback=None, *args):
+        return self._ws.send_method(
+            "machine.system_info",
+            {},
+            callback,
+            *args
+        )

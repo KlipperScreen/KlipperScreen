@@ -1138,6 +1138,48 @@ class KlipperScreen(Gtk.Window):
     def set_cameras(self, data, method, params):
         self.printer.configure_cameras(data['result']['webcams'])
 
+    def set_printer_info(self, data, method, params):
+        if 'error' in data:
+            self._init_printer("Unable to get printer info from moonraker")
+            return
+        printer_info = data['result']
+        self._ws.klippy.query_configfile(self.set_configfile, printer_info)
+
+    def set_configfile(self, data, method, params, printer_info):
+        if 'error' in data:
+            self._init_printer("Error getting printer configuration")
+            return
+        self.printer.reinit(printer_info, data['result']['status'])
+        self._ws.klippy.get_printer_objects(self.set_objects)
+
+    def set_objects(self, data, method, params):
+        if 'error' in data:
+            self._init_printer("Error getting printer objects list")
+            return
+        objects = data['result']['objects']
+        self.printer.register_dynamic_sensors(objects)
+        items = {item: None for item in objects}
+        self._ws.klippy.query_objects(items, self.query_objects)
+
+    def query_objects(self, data, method, params):
+        if 'error' in data:
+            self._init_printer("Error getting printer object data")
+            return
+        self.printer.process_update(data['result']['status'])
+        self._finish_init()
+
+    def set_commands(self, data, method, params):
+        if 'error' in data:
+            logging.error("Error getting available gcode commands")
+            return
+        self.printer.available_commands = data['result']
+
+    def set_system_info(self, data, method, params):
+        if 'error' in data:
+            logging.error("Error getting system info")
+            return
+        self.printer.system_info = data['result']['system_info']
+
     def init_klipper(self):
         if not self.server_info:
             self._ws.klippy.query_server_info(self.init_moonraker_components)
@@ -1148,56 +1190,12 @@ class KlipperScreen(Gtk.Window):
             self.printer_initializing(msg)
             # wait until notify
             return
-        # TODO replace apiclient with websocket where posible
-        printer_info = self.apiclient.get_printer_info()
-        if printer_info is False:
-            self._init_printer("Unable to get printer info from moonraker")
-            return
-        config = self.apiclient.send_request("printer/objects/query?configfile")
-        if config is False:
-            self._init_printer("Error getting printer configuration")
-            return
-        self.printer.reinit(printer_info, config['status'])
-        objects = self.apiclient.send_request("printer/objects/list")
-        if objects and 'objects' in objects:
-            self.printer.register_dynamic_sensors(objects['objects'])
-        self.printer.available_commands = self.apiclient.get_gcode_help()
-        info = self.apiclient.send_request("machine/system_info")
-        if info and 'system_info' in info:
-            self.printer.system_info = info['system_info']
+        self.printer_initializing(_("Initializing Klipper Connection"))
+        self._ws.klippy.get_printer_info(self.set_printer_info)
 
-        items = (
-            'bed_mesh',
-            'configfile',
-            'display_status',
-            'extruder',
-            'fan',
-            'gcode_move',
-            'heater_bed',
-            'idle_timeout',
-            'pause_resume',
-            'print_stats',
-            'toolhead',
-            'virtual_sdcard',
-            'webhooks',
-            'motion_report',
-            'firmware_retraction',
-            'exclude_object',
-            'manual_probe',
-            *self.printer.get_tools(),
-            *self.printer.get_heaters(),
-            *self.printer.get_temp_sensors(),
-            *self.printer.get_fans(),
-            *self.printer.get_temp_fans(),
-            *self.printer.get_filament_sensors(),
-            *self.printer.get_output_pins(),
-            *self.printer.get_leds(),
-        )
-
-        data = self.apiclient.send_request("printer/objects/query?" + "&".join(items))
-        if data is False:
-            self._init_printer("Error getting printer object data")
-            return
+    def _finish_init(self):
+        self._ws.klippy.get_available_commands(self.set_commands)
+        self._ws.klippy.get_system_info(self.set_system_info)
         self.ws_subscribe()
 
         self.files.set_gcodes_path()
@@ -1207,9 +1205,7 @@ class KlipperScreen(Gtk.Window):
         self.initialized = True
         self.reinit_count = 0
         self.initializing = False
-        self.printer.process_update(data['status'])
         self.log_notification("Printer Initialized", 1)
-        return
 
     def init_tempstore(self):
         if len(self.printer.get_temp_devices()) == 0:
