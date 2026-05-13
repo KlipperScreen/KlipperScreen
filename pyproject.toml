@@ -1,0 +1,32 @@
+[project]
+name = "KlipperScreen"
+description = "GUI for Klipper"
+readme = "README.md"
+requires-python = ">=3.8"
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+
+# Translation helper
+builtins = ["_"]
+
+extend-exclude = [
+    "docs",
+    "scripts",
+    ".venv",
+]
+
+[tool.ruff.lint]
+# E: pycodestyle, /F: Pyflakes, I: isort (import sorting)
+select = ["E", "F", "I"]
+ignore = [
+    "E402", # Module level import not at top of file (needed for gi)
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["ks_includes", "panels"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
