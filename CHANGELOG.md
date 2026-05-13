@@ -4,6 +4,9 @@ Probably all versions contain changes regarding documentation, translation, fixe
 
 ## Current master
 
+## v0.4.7  (May 13, 2026)
+
+* add a spool edit panel for spoolman
 * add option to add spool weight into the titlebar (spoolman required)
 * add a wifi interface selector in the network panel
 * option to use keyboard navigation
