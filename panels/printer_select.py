@@ -19,9 +19,9 @@ class Panel(ScreenPanel):
         scale = 3
         image_scale = scale * self._gtk.img_scale
         if len(printers) == 2:
-            image_scale *=  2
+            image_scale *= 2
         elif len(printers) == 3:
-            image_scale *=  1.6
+            image_scale *= 1.6
         elif 4 <= len(printers) <= 6:
             image_scale *= 1.4
         for i, printer in enumerate(printers):
