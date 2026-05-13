@@ -832,7 +832,7 @@ msgid "Last Used"
 msgstr "Ultimo usado"
 
 msgid "Archived"
-msgstr "Archivados"
+msgstr "Archivado"
 
 msgid "Filter"
 msgstr "Filtro"
