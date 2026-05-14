@@ -71,8 +71,6 @@ class Panel(MenuPanel):
         return False
 
     def activate(self):
-        if not self._printer.tempstore:
-            self._screen.init_tempstore()
         self.update_graph_visibility()
 
     def deactivate(self):

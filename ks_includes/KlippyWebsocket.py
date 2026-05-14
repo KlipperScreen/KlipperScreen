@@ -419,3 +419,19 @@ class MoonrakerApi:
             callback,
             *args
         )
+
+    def get_temperature_store(self, callback=None, *args):
+        return self._ws.send_method(
+            "server.temperature_store",
+            {},
+            callback,
+            *args
+        )
+
+    def get_server_config(self, callback=None, *args):
+        return self._ws.send_method(
+            "server.config",
+            {},
+            callback,
+            *args
+        )

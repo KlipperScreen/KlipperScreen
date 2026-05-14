@@ -405,10 +405,17 @@ class Printer:
     def init_temp_store(self, tempstore):
         if self.tempstore and set(self.tempstore) != set(tempstore):
             logging.debug("Tempstore has changed")
-            self.tempstore = tempstore
-            self.change_state(self.state)
-        else:
-            self.tempstore = tempstore
+        existing_devices = set(self.tempstore) if self.tempstore else set()
+        new_devices = set(tempstore)
+        for device in new_devices - existing_devices:
+            self.tempstore[device] = tempstore[device]
+        for device in existing_devices | new_devices:
+            if device in tempstore:
+                for section in tempstore[device]:
+                    if device in self.tempstore and section in self.tempstore[device]:
+                        self.tempstore[device][section] = tempstore[device][section]
+                    else:
+                        self.tempstore[device][section] = tempstore[device][section]
         for device in self.tempstore:
             for x in self.tempstore[device]:
                 length = len(self.tempstore[device][x])

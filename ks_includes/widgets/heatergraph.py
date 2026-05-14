@@ -82,7 +82,6 @@ class HeaterGraph(Gtk.DrawingArea):
     def draw_graph(self, da: Gtk.DrawingArea, ctx: cairoContext):
         if not self.printer.tempstore:
             logging.info("Tempstore not initialized!")
-            self._screen.init_tempstore()
             return
         Gtk.render_background(da.get_style_context(), ctx, 0, 0,
                               da.get_allocated_width(), da.get_allocated_height())
