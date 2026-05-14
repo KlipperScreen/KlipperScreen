@@ -4,8 +4,8 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
-from ks_includes.screen_panel import ScreenPanel
 
+from ks_includes.screen_panel import ScreenPanel
 
 # X and Y frequencies
 XY_FREQ = [

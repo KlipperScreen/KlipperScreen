@@ -4,10 +4,12 @@ import os
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GLib, Pango
+from datetime import datetime
+
+from gi.repository import GLib, Gtk, Pango
+
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.sdbus_nm import SdbusNm
-from datetime import datetime
 
 
 class Panel(ScreenPanel):

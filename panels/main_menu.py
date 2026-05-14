@@ -3,11 +3,12 @@ import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GLib
-from panels.menu import Panel as MenuPanel
+from gi.repository import GLib, Gtk
+
+from ks_includes.KlippyGtk import find_widget
 from ks_includes.widgets.heatergraph import HeaterGraph
 from ks_includes.widgets.keypad import Keypad
-from ks_includes.KlippyGtk import find_widget
+from panels.menu import Panel as MenuPanel
 
 
 class Panel(MenuPanel):

@@ -1,11 +1,13 @@
 import logging
-import mpv
 
 import gi
+import mpv
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
 from contextlib import suppress
+
+from gi.repository import Gtk
+
 from ks_includes.screen_panel import ScreenPanel
 
 

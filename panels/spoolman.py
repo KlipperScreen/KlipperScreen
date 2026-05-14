@@ -5,11 +5,12 @@ import pathlib
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GdkPixbuf, GObject, Pango, Gdk
-from ks_includes.widgets.combo import ComboBoxPlus
-from ks_includes.screen_panel import ScreenPanel
-from ks_includes.KlippyRest import KlippyRest
 from datetime import datetime
+
+from gi.repository import Gdk, GdkPixbuf, GObject, Gtk, Pango
+
+from ks_includes.screen_panel import ScreenPanel
+from ks_includes.widgets.combo import ComboBoxPlus
 
 try:
     from zoneinfo import ZoneInfo

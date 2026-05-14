@@ -1,40 +1,42 @@
 #!/usr/bin/python
 
-import ast
 import argparse
+import ast
 import gc
 import json
+import locale
 import logging
 import os
-import subprocess
 import pathlib
-import traceback  # noqa
-import locale
 import re
+import subprocess
 import sys
+import traceback  # noqa
+
 import gi
 
+gi.require_version("Gdk", "3.0")
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib, Pango
-from importlib import import_module
-from jinja2 import Environment
-from signal import SIGTERM
 from datetime import datetime
+from importlib import import_module
+from signal import SIGTERM
+
+from gi.repository import Gdk, GLib, Gtk, Pango
+from jinja2 import Environment
 
 from ks_includes import functions
-from ks_includes.KlippyWebsocket import KlippyWebsocket
-from ks_includes.KlippyRest import KlippyRest
+from ks_includes.config import KlipperScreenConfig
 from ks_includes.files import KlippyFiles
 from ks_includes.KlippyGtk import KlippyGtk
+from ks_includes.KlippyRest import KlippyRest
+from ks_includes.KlippyWebsocket import KlippyWebsocket
 from ks_includes.printer import Printer
 from ks_includes.spoolman_api import SpoolmanAPI
 from ks_includes.widgets.keyboard import Keyboard
-from ks_includes.widgets.prompts import Prompt
 from ks_includes.widgets.lockscreen import LockScreen
+from ks_includes.widgets.prompts import Prompt
 from ks_includes.widgets.screensaver import ScreenSaver
-from ks_includes.config import KlipperScreenConfig
 from panels.base_panel import BasePanel
-
 
 logging.getLogger("urllib3").setLevel(logging.WARNING)
 

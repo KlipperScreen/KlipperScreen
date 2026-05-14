@@ -6,15 +6,15 @@ from uuid import uuid4
 
 import sdbus
 from sdbus_block.networkmanager import (
-    NetworkManager,
+    AccessPoint,
+    ActiveConnection,
+    IPv4Config,
+    NetworkConnectionSettings,
     NetworkDeviceGeneric,
     NetworkDeviceWireless,
-    NetworkConnectionSettings,
-    NetworkManagerSettings,
-    AccessPoint,
+    NetworkManager,
     NetworkManagerConnectionProperties,
-    IPv4Config,
-    ActiveConnection,
+    NetworkManagerSettings,
     enums,
     exceptions,
 )

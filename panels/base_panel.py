@@ -6,10 +6,12 @@ import pathlib
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gio, GLib, Gtk, Pango, GdkPixbuf
-from jinja2 import Environment
 from datetime import datetime
 from math import log
+
+from gi.repository import GdkPixbuf, Gio, GLib, Gtk, Pango
+from jinja2 import Environment
+
 from ks_includes.screen_panel import ScreenPanel
 
 try:
