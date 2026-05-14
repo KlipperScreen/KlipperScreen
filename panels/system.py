@@ -25,7 +25,6 @@ class Panel(ScreenPanel):
             if 'system_info' in self.sysinfo:
                 screen.printer.system_info = self.sysinfo['system_info']
                 self.sysinfo = self.sysinfo['system_info']
-        logging.debug(self.sysinfo)
         if self.sysinfo:
             self.content.add(self.create_layout())
         else:
