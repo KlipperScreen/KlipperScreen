@@ -873,6 +873,13 @@ class Panel(ScreenPanel):
         if "filament_total" in self.file_metadata:
             self.labels['filament_total'].set_label(f"{float(self.file_metadata['filament_total']) / 1000:.1f} m")
         if "job_id" in self.file_metadata and self.file_metadata['job_id']:
-            history = self._screen.apiclient.send_request(f"server/history/job?uid={self.file_metadata['job_id']}")
-            if history and history['job']['status'] == "completed" and history['job']['print_duration']:
-                self.file_metadata["last_time"] = history['job']['print_duration']
+            self._screen._ws.klippy.get_single_job_history(self.file_metadata['job_id'], self.set_last_time)
+
+    def set_last_time(self, data, method, params):
+        if "error" in data or "result" not in data:
+            return
+        job = data["result"].get("job")
+        if job and job.get("status") == "completed" and job.get("print_duration"):
+            self.file_metadata["last_time"] = job["print_duration"]
+            if self.state in ["printing", "paused"]:
+                self.update_time_left()

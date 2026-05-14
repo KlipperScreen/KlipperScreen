@@ -410,3 +410,11 @@ class MoonrakerApi:
             callback,
             *args
         )
+
+    def get_single_job_history(self, uid, callback=None, *args):
+        return self._ws.send_method(
+            "server.history.get_job",
+            {"uid": uid},
+            callback,
+            *args
+        )
