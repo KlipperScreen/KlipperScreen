@@ -2,7 +2,7 @@ import logging
 
 import gi
 
-gi.require_version('Gtk', '3.0')
+gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk
 
 
@@ -28,8 +28,7 @@ class LockScreen:
             GLib.source_remove(self.autolock_timeout)
             self.autolock_timeout = None
         if self.autolock_time > 0 and self.lock_box is None:
-            self.autolock_timeout = GLib.timeout_add_seconds(
-                self.autolock_time, self._auto_lock)
+            self.autolock_timeout = GLib.timeout_add_seconds(self.autolock_time, self._auto_lock)
 
     def _auto_lock(self):
         """Called when the auto-lock timer expires."""
@@ -45,8 +44,9 @@ class LockScreen:
         close = Gtk.Button()
         close.connect("clicked", self.unlock)
         self.lock_box = Gtk.Box(
-            width_request=self.screen.width, height_request=self.screen.height,
-            halign=Gtk.Align.CENTER
+            width_request=self.screen.width,
+            height_request=self.screen.height,
+            halign=Gtk.Align.CENTER,
         )
         self.lock_box.pack_start(close, True, True, 0)
         self.lock_box.get_style_context().add_class("lock")
@@ -64,8 +64,9 @@ class LockScreen:
     def create_unlock_box(self):
         box = Gtk.Box(
             orientation=Gtk.Orientation.VERTICAL,
-            width_request=self.screen.width, height_request=self.screen.height,
-            valign=Gtk.Align.CENTER
+            width_request=self.screen.width,
+            height_request=self.screen.height,
+            valign=Gtk.Align.CENTER,
         )
         entry = Gtk.Entry(hexpand=True, vexpand=False, placeholder_text=_("Password"))
         entry.set_input_purpose(Gtk.InputPurpose.PASSWORD)

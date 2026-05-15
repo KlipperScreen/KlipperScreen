@@ -86,7 +86,6 @@ def WifiChannels(freq: str):
 
 
 class SdbusNm:
-
     def __init__(self, popup_callback):
         self.ensure_nm_running()
         self.system_bus = sdbus.sd_bus_open_system()  # We need system bus
@@ -95,23 +94,21 @@ class SdbusNm:
         sdbus.set_default_bus(self.system_bus)
         self.nm = NetworkManager()
         self.wlan_device = (
-            self.get_wireless_interfaces()[0]
-            if self.get_wireless_interfaces()
-            else None
+            self.get_wireless_interfaces()[0] if self.get_wireless_interfaces() else None
         )
         self.wifi = self.wlan_device is not None
         self.monitor_connection = False
         self.wifi_state = -1
         self.popup = popup_callback
         if self.wlan_device.state == enums.DeviceState.UNMANAGED:
-            self.popup(f"{iface_name} is not managed by NetworkManager and cannot be controlled by this app")
+            self.popup(
+                f"{iface_name} is not managed by NetworkManager and cannot be controlled by this app"
+            )
             return
 
     def ensure_nm_running(self):
         try:
-            status = subprocess.run(
-                ["systemctl", "is-active", "--quiet", "NetworkManager"]
-            )
+            status = subprocess.run(["systemctl", "is-active", "--quiet", "NetworkManager"])
             if status.returncode != 0:
                 raise RuntimeError("Failed to detect NetworkManager service")
         except FileNotFoundError as e:
@@ -122,9 +119,7 @@ class SdbusNm:
         return self.nm.wireless_enabled
 
     def get_interfaces(self):
-        return [
-            NetworkDeviceGeneric(device).interface for device in self.nm.get_devices()
-        ]
+        return [NetworkDeviceGeneric(device).interface for device in self.nm.get_devices()]
 
     def get_wireless_interfaces(self):
         wireless_interfaces = []
@@ -187,11 +182,9 @@ class SdbusNm:
             all_aps = [AccessPoint(result) for result in self.wlan_device.access_points]
             networks.extend(
                 {
-                    "SSID": ap.ssid.decode("utf-8", errors='ignore'),
-                    "known": self.is_known(ap.ssid.decode("utf-8", errors='ignore')),
-                    "security": get_encryption(
-                        ap.rsn_flags or ap.wpa_flags or ap.flags
-                    ),
+                    "SSID": ap.ssid.decode("utf-8", errors="ignore"),
+                    "known": self.is_known(ap.ssid.decode("utf-8", errors="ignore")),
+                    "security": get_encryption(ap.rsn_flags or ap.wpa_flags or ap.flags),
                     "frequency": WifiChannels(ap.frequency)[0],
                     "channel": WifiChannels(ap.frequency)[1],
                     "signal_level": ap.strength,
@@ -212,19 +205,11 @@ class SdbusNm:
         return AccessPoint(self.wlan_device.active_access_point)
 
     def get_connected_bssid(self):
-        return (
-            self.get_connected_ap().hw_address
-            if self.get_connected_ap() is not None
-            else None
-        )
+        return self.get_connected_ap().hw_address if self.get_connected_ap() is not None else None
 
     def get_security_type(self, ssid):
         return next(
-            (
-                network["security"]
-                for network in self.get_networks()
-                if network["SSID"] == ssid
-            ),
+            (network["security"] for network in self.get_networks() if network["SSID"] == ssid),
             None,
         )
 
@@ -246,7 +231,7 @@ class SdbusNm:
             },
             "802-11-wireless": {
                 "mode": ("s", "infrastructure"),
-                "ssid": ("ay", ssid.encode("utf-8", errors='ignore')),
+                "ssid": ("ay", ssid.encode("utf-8", errors="ignore")),
                 "security": ("s", "802-11-wireless-security"),
             },
             "ipv4": {"method": ("s", "auto")},
@@ -350,9 +335,7 @@ class SdbusNm:
     def get_connection_path_by_ssid(self, ssid):
         existing_networks = NetworkManagerSettings().list_connections()
         for connection_path in existing_networks:
-            connection_settings = NetworkConnectionSettings(
-                connection_path
-            ).get_settings()
+            connection_settings = NetworkConnectionSettings(connection_path).get_settings()
             if (
                 connection_settings.get("802-11-wireless")
                 and connection_settings["802-11-wireless"].get("ssid")
@@ -369,8 +352,10 @@ class SdbusNm:
                 con = NetworkConnectionSettings(target_connection)
                 settings = con.get_settings()
 
-                if ("802-11-wireless" in settings
-                        and settings["802-11-wireless"].get("mode") == ("s", "infrastructure")):
+                if "802-11-wireless" in settings and settings["802-11-wireless"].get("mode") == (
+                    "s",
+                    "infrastructure",
+                ):
                     settings["connection"]["interface-name"] = ("s", self.wlan_device.interface)
                     con.update(settings)
                 active_connection = self.nm.activate_connection(target_connection)
@@ -425,7 +410,9 @@ class SdbusNm:
         for wireless in self.get_wireless_interfaces():
             if wireless.interface == iface_name:
                 if wireless.state == enums.DeviceState.UNMANAGED:
-                    self.popup(f"{iface_name} is not managed by NetworkManager and cannot be controlled by this app")
+                    self.popup(
+                        f"{iface_name} is not managed by NetworkManager and cannot be controlled by this app"
+                    )
                     return
                 self.wlan_device = wireless
                 logging.debug(f"Switched wlan_device to {iface_name}")

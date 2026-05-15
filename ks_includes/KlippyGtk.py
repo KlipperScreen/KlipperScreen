@@ -37,7 +37,9 @@ class KlippyGtk:
 
     def __init__(self, screen):
         self.screen = screen
-        self.themedir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles", screen.theme, "images")
+        self.themedir = os.path.join(
+            pathlib.Path(__file__).parent.resolve().parent, "styles", screen.theme, "images"
+        )
         self.font_size_type = screen._config.get_main_config().get("font_size", "medium")
         self.width = screen.width
         self.height = screen.height
@@ -46,13 +48,13 @@ class KlippyGtk:
         self.font_size = min(self.width / self.font_ratio[0], self.height / self.font_ratio[1])
         self.img_scale = self.font_size * 2
         self.button_image_scale = 1.38
-        self.bsidescale = .65  # Buttons with image at the side
+        self.bsidescale = 0.65  # Buttons with image at the side
         self.dialog_buttons_height = round(self.height / 5)
 
         if self.font_size_type == "max":
             self.font_size = self.font_size * 1.06
             self.img_scale = self.img_scale * 0.7
-            self.bsidescale = .7
+            self.bsidescale = 0.7
         elif self.font_size_type == "extralarge":
             self.font_size = self.font_size * 1.05
             self.img_scale = self.img_scale * 0.7
@@ -60,10 +62,10 @@ class KlippyGtk:
         elif self.font_size_type == "large":
             self.font_size = self.font_size * 1.025
             self.img_scale = self.img_scale * 0.85
-            self.bsidescale = .8
+            self.bsidescale = 0.8
         elif self.font_size_type == "small":
             self.font_size = self.font_size * 0.91
-            self.bsidescale = .55
+            self.bsidescale = 0.55
         self.img_width = self.font_size * 3
         self.img_height = self.font_size * 3
         self.titlebar_height = self.font_size * 2
@@ -71,11 +73,11 @@ class KlippyGtk:
 
         if self.screen.vertical_mode:
             self.action_bar_width = int(self.width)
-            self.action_bar_height = int(self.height * .1)
+            self.action_bar_height = int(self.height * 0.1)
             self.content_width = self.width
             self.content_height = self.height - self.titlebar_height - self.action_bar_height
         else:
-            self.action_bar_width = int(self.width * .1)
+            self.action_bar_width = int(self.width * 0.1)
             self.action_bar_height = int(self.height)
             self.content_width = self.width - self.action_bar_width
             self.content_height = self.height - self.titlebar_height
@@ -87,34 +89,36 @@ class KlippyGtk:
         self.color_list = {}  # This is set by screen.py init_style()
         for key in self.color_list:
             if "base" in self.color_list[key]:
-                rgb = [int(self.color_list[key]['base'][i:i + 2], 16) for i in range(0, 6, 2)]
-                self.color_list[key]['rgb'] = rgb
+                rgb = [int(self.color_list[key]["base"][i : i + 2], 16) for i in range(0, 6, 2)]
+                self.color_list[key]["rgb"] = rgb
 
     def get_temp_color(self, device):
         # logging.debug("Color list %s" % self.color_list)
         if device not in self.color_list:
             return False, False
 
-        if 'base' in self.color_list[device]:
-            rgb = self.color_list[device]['rgb'].copy()
-            if self.color_list[device]['state'] > 0:
-                rgb[1] = rgb[1] + self.color_list[device]['hsplit'] * self.color_list[device]['state']
-            self.color_list[device]['state'] += 1
+        if "base" in self.color_list[device]:
+            rgb = self.color_list[device]["rgb"].copy()
+            if self.color_list[device]["state"] > 0:
+                rgb[1] = (
+                    rgb[1] + self.color_list[device]["hsplit"] * self.color_list[device]["state"]
+                )
+            self.color_list[device]["state"] += 1
             rgb = [x / 255 for x in rgb]
             # logging.debug(f"Assigning color: {device} {rgb}")
         else:
-            colors = self.color_list[device]['colors']
-            if self.color_list[device]['state'] >= len(colors):
-                self.color_list[device]['state'] = 0
-            color = colors[self.color_list[device]['state'] % len(colors)]
-            rgb = [int(color[i:i + 2], 16) / 255 for i in range(0, 6, 2)]
-            self.color_list[device]['state'] += 1
+            colors = self.color_list[device]["colors"]
+            if self.color_list[device]["state"] >= len(colors):
+                self.color_list[device]["state"] = 0
+            color = colors[self.color_list[device]["state"] % len(colors)]
+            rgb = [int(color[i : i + 2], 16) / 255 for i in range(0, 6, 2)]
+            self.color_list[device]["state"] += 1
             # logging.debug(f"Assigning color: {device} {rgb} {color}")
         return rgb
 
     def reset_temp_color(self):
         for key in self.color_list:
-            self.color_list[key]['state'] = 0
+            self.color_list[key]["state"] = 0
 
     def Image(self, image_name=None, width=None, height=None):
         if image_name is None:
@@ -123,7 +127,9 @@ class KlippyGtk:
         return Gtk.Image.new_from_pixbuf(pixbuf) if pixbuf is not None else Gtk.Image()
 
     def update_themedir(self, theme):
-        self.themedir = os.path.join(pathlib.Path(__file__).parent.resolve().parent, "styles", theme, "images")
+        self.themedir = os.path.join(
+            pathlib.Path(__file__).parent.resolve().parent, "styles", theme, "images"
+        )
 
     def PixbufFromIcon(self, filename, width=None, height=None):
         width = width if width is not None else self.img_width
@@ -157,18 +163,30 @@ class KlippyGtk:
             return None
         stream = Gio.MemoryInputStream.new_from_data(response, None)
         try:
-            pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(stream, int(width), int(height), True)
+            pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
+                stream, int(width), int(height), True
+            )
         except Exception as e:
             logging.exception(e)
             return None
         stream.close_async(2)
         return pixbuf
 
-    def Button(self, image_name=None, label=None, style=None, scale=None, position=Gtk.PositionType.TOP, lines=2):
+    def Button(
+        self,
+        image_name=None,
+        label=None,
+        style=None,
+        scale=None,
+        position=Gtk.PositionType.TOP,
+        lines=2,
+    ):
         if self.font_size_type == "max" and label is not None:
             image_name = None
         b = Gtk.Button(hexpand=True, vexpand=True, image_position=position, always_show_image=True)
-        focusable = self.screen._config.get_main_config().getboolean("keyboard_navigation", fallback=False)
+        focusable = self.screen._config.get_main_config().getboolean(
+            "keyboard_navigation", fallback=False
+        )
         b.set_can_focus(focusable)
         if label is not None:
             b.set_label(label.replace("\n", " "))
@@ -219,8 +237,13 @@ class KlippyGtk:
         self.remove_dialog(dialog)
 
     def Dialog(self, title, buttons, content, callback=None, *args):
-        dialog = Gtk.Dialog(title=title, modal=True, transient_for=self.screen,
-                            default_width=self.width, default_height=self.height)
+        dialog = Gtk.Dialog(
+            title=title,
+            modal=True,
+            transient_for=self.screen,
+            default_width=self.width,
+            default_height=self.height,
+        )
         dialog.set_size_request(self.width, self.height)
         if not self.screen.windowed:
             dialog.fullscreen()
@@ -235,9 +258,9 @@ class KlippyGtk:
             else:
                 button_hsize = int((self.width / 3))
             for button in buttons:
-                style = button['style'] if 'style' in button else 'dialog-default'
-                dialog.add_button(button['name'], button['response'])
-                button = dialog.get_widget_for_response(button['response'])
+                style = button["style"] if "style" in button else "dialog-default"
+                dialog.add_button(button["name"], button["response"])
+                button = dialog.get_widget_for_response(button["response"])
                 button.set_size_request(button_hsize, self.dialog_buttons_height)
                 button.get_style_context().add_class(style)
                 format_label(button, 2)
@@ -284,17 +307,23 @@ class KlippyGtk:
         logging.debug(f"Cannot remove dialog {dialog}")
 
     def ScrolledWindow(self, steppers=True, **kwargs):
-        steppers = steppers and self.screen._config.get_main_config().getboolean("show_scroll_steppers", fallback=False)
+        steppers = steppers and self.screen._config.get_main_config().getboolean(
+            "show_scroll_steppers", fallback=False
+        )
         return CustomScrolledWindow(steppers, **kwargs)
 
     def set_cursor(self, show: bool, window: Gdk.Window):
         if show:
             window.set_cursor(
-                Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.ARROW))
+                Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.ARROW)
+            )
             if not self.screen.wayland:
                 os.system("xsetroot  -cursor_name  arrow")
         else:
             window.set_cursor(
-                Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.BLANK_CURSOR))
+                Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.BLANK_CURSOR)
+            )
             if not self.screen.wayland:
-                os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
+                os.system(
+                    "xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm"
+                )

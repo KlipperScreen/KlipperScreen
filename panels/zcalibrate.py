@@ -11,7 +11,7 @@ from ks_includes.widgets.combo import ComboBoxPlus
 
 class Panel(ScreenPanel):
     widgets = {}
-    distances = ['.01', '.05', '.1', '.5', '1', '5']
+    distances = [".01", ".05", ".1", ".5", "1", "5"]
     distance = distances[-2]
 
     def __init__(self, screen, title):
@@ -30,31 +30,31 @@ class Panel(ScreenPanel):
         if "BED_MESH_CALIBRATE" not in self._printer.available_commands:
             return
         mesh = self._printer.get_config_section("bed_mesh")
-        if 'mesh_radius' in mesh:
-            self.mesh_radius = float(mesh['mesh_radius'])
-            if 'mesh_origin' in mesh:
-                self.mesh_origin = self._csv_to_array(mesh['mesh_origin'])
-        elif 'mesh_min' in mesh and 'mesh_max' in mesh:
-            self.mesh_min = self._csv_to_array(mesh['mesh_min'])
-            self.mesh_max = self._csv_to_array(mesh['mesh_max'])
-        elif 'min_x' in mesh and 'min_y' in mesh and 'max_x' in mesh and 'max_y' in mesh:
-            self.mesh_min = [float(mesh['min_x']), float(mesh['min_y'])]
-            self.mesh_max = [float(mesh['max_x']), float(mesh['max_y'])]
-        if 'zero_reference_position' in self._printer.get_config_section("bed_mesh"):
-            self.zero_ref = self._csv_to_array(mesh['zero_reference_position'])
+        if "mesh_radius" in mesh:
+            self.mesh_radius = float(mesh["mesh_radius"])
+            if "mesh_origin" in mesh:
+                self.mesh_origin = self._csv_to_array(mesh["mesh_origin"])
+        elif "mesh_min" in mesh and "mesh_max" in mesh:
+            self.mesh_min = self._csv_to_array(mesh["mesh_min"])
+            self.mesh_max = self._csv_to_array(mesh["mesh_max"])
+        elif "min_x" in mesh and "min_y" in mesh and "max_x" in mesh and "max_y" in mesh:
+            self.mesh_min = [float(mesh["min_x"]), float(mesh["min_y"])]
+            self.mesh_max = [float(mesh["max_x"]), float(mesh["max_y"])]
+        if "zero_reference_position" in self._printer.get_config_section("bed_mesh"):
+            self.zero_ref = self._csv_to_array(mesh["zero_reference_position"])
 
     def initialize_probe_params(self):
         self.z_hop_speed = 15.0
         self.z_hop = 5.0
         self.probe = self._printer.get_probe()
         if self.probe:
-            self.x_offset = float(self.probe.get('x_offset', 0.0))
-            self.y_offset = float(self.probe.get('y_offset', 0.0))
-            self.z_offset = float(self.probe['z_offset'])
+            self.x_offset = float(self.probe.get("x_offset", 0.0))
+            self.y_offset = float(self.probe.get("y_offset", 0.0))
+            self.z_offset = float(self.probe["z_offset"])
             if "sample_retract_dist" in self.probe:
-                self.z_hop = float(self.probe['sample_retract_dist'])
+                self.z_hop = float(self.probe["sample_retract_dist"])
             if "speed" in self.probe:
-                self.z_hop_speed = float(self.probe['speed'])
+                self.z_hop_speed = float(self.probe["speed"])
         else:
             self.x_offset = 0.0
             self.y_offset = 0.0
@@ -62,43 +62,43 @@ class Panel(ScreenPanel):
         logging.info(f"Offset X:{self.x_offset} Y:{self.y_offset} Z:{self.z_offset}")
 
     def setup_ui(self):
-        self.widgets['zposition'] = Gtk.Label(label="Z: ?")
-        self.widgets['zoffset'] = Gtk.Label(label="?")
+        self.widgets["zposition"] = Gtk.Label(label="Z: ?")
+        self.widgets["zoffset"] = Gtk.Label(label="?")
 
         pos = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
-        pos.attach(self.widgets['zposition'], 0, 1, 2, 1)
+        pos.attach(self.widgets["zposition"], 0, 1, 2, 1)
 
         if self.probe:
             pos.attach(Gtk.Label(label=_("Probe Offset") + ": "), 0, 2, 2, 1)
             pos.attach(Gtk.Label(label=_("Saved")), 0, 3, 1, 1)
             pos.attach(Gtk.Label(label=_("New")), 1, 3, 1, 1)
             pos.attach(Gtk.Label(label=f"{self.z_offset:.3f}"), 0, 4, 1, 1)
-            pos.attach(self.widgets['zoffset'], 1, 4, 1, 1)
+            pos.attach(self.widgets["zoffset"], 1, 4, 1, 1)
 
         for label in pos.get_children():
             if isinstance(label, Gtk.Label):
                 label.set_ellipsize(Pango.EllipsizeMode.END)
 
         self.buttons = {
-            'zpos': self._gtk.Button('z-farther', _("Raise Nozzle"), 'color4'),
-            'zneg': self._gtk.Button('z-closer', _("Lower Nozzle"), 'color1'),
-            'start': self._gtk.Button('resume', _("Start"), 'color3'),
-            'complete': self._gtk.Button('complete', _('Accept'), 'color3'),
-            'cancel': self._gtk.Button('cancel', _('Abort'), 'color2'),
+            "zpos": self._gtk.Button("z-farther", _("Raise Nozzle"), "color4"),
+            "zneg": self._gtk.Button("z-closer", _("Lower Nozzle"), "color1"),
+            "start": self._gtk.Button("resume", _("Start"), "color3"),
+            "complete": self._gtk.Button("complete", _("Accept"), "color3"),
+            "cancel": self._gtk.Button("cancel", _("Abort"), "color2"),
         }
 
-        self.buttons['zpos'].connect("clicked", self.move, "+")
-        self.buttons['zneg'].connect("clicked", self.move, "-")
-        self.buttons['complete'].connect("clicked", self.accept)
+        self.buttons["zpos"].connect("clicked", self.move, "+")
+        self.buttons["zneg"].connect("clicked", self.move, "-")
+        self.buttons["complete"].connect("clicked", self.accept)
         script = {"script": "ABORT"}
-        self.buttons['cancel'].connect(
+        self.buttons["cancel"].connect(
             "clicked",
             self._screen._confirm_send_action,
             ("Are you sure you want to stop the calibration?"),
             "printer.gcode.script",
-            script
+            script,
         )
-        self.buttons['start'].connect("clicked", self.start_calibration)
+        self.buttons["start"].connect("clicked", self.start_calibration)
 
         self.dropdown = ComboBoxPlus(model=self.set_commands())
         self.dropdown.connect("changed", self.on_dropdown_change)
@@ -119,33 +119,41 @@ class Panel(ScreenPanel):
                 ctx.add_class("horizontal_togglebuttons_active")
             distgrid.attach(self.widgets[i], j, 0, 1, 1)
 
-        self.widgets['move_dist'] = Gtk.Label(_("Move Distance (mm)"))
+        self.widgets["move_dist"] = Gtk.Label(_("Move Distance (mm)"))
         distances = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        distances.pack_start(self.widgets['move_dist'], True, True, 0)
+        distances.pack_start(self.widgets["move_dist"], True, True, 0)
         distances.pack_start(distgrid, True, True, 0)
 
         start_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        start_box.pack_start(self.buttons['start'], True, True, 0)
+        start_box.pack_start(self.buttons["start"], True, True, 0)
         start_box.pack_start(self.dropdown, True, True, 0)
 
         grid = Gtk.Grid(column_homogeneous=True)
         if self._screen.vertical_mode:
-            zpos_row, zneg_row = (2, 1) if self._config.get_config()["main"].getboolean("invert_z", False) else (1, 2)
-            grid.attach(self.buttons['zpos'], 0, zpos_row, 1, 1)
-            grid.attach(self.buttons['zneg'], 0, zneg_row, 1, 1)
+            zpos_row, zneg_row = (
+                (2, 1)
+                if self._config.get_config()["main"].getboolean("invert_z", False)
+                else (1, 2)
+            )
+            grid.attach(self.buttons["zpos"], 0, zpos_row, 1, 1)
+            grid.attach(self.buttons["zneg"], 0, zneg_row, 1, 1)
             grid.attach(start_box, 0, 0, 1, 1)
             grid.attach(pos, 1, 0, 1, 1)
-            grid.attach(self.buttons['complete'], 1, 1, 1, 1)
-            grid.attach(self.buttons['cancel'], 1, 2, 1, 1)
+            grid.attach(self.buttons["complete"], 1, 1, 1, 1)
+            grid.attach(self.buttons["cancel"], 1, 2, 1, 1)
             grid.attach(distances, 0, 3, 2, 1)
         else:
-            zpos_row, zneg_row = (1, 0) if self._config.get_config()["main"].getboolean("invert_z", False) else (0, 1)
-            grid.attach(self.buttons['zpos'], 0, zpos_row, 1, 1)
-            grid.attach(self.buttons['zneg'], 0, zneg_row, 1, 1)
+            zpos_row, zneg_row = (
+                (1, 0)
+                if self._config.get_config()["main"].getboolean("invert_z", False)
+                else (0, 1)
+            )
+            grid.attach(self.buttons["zpos"], 0, zpos_row, 1, 1)
+            grid.attach(self.buttons["zneg"], 0, zneg_row, 1, 1)
             grid.attach(start_box, 1, 0, 1, 1)
             grid.attach(pos, 1, 1, 1, 1)
-            grid.attach(self.buttons['complete'], 2, 0, 1, 1)
-            grid.attach(self.buttons['cancel'], 2, 1, 1, 1)
+            grid.attach(self.buttons["complete"], 2, 0, 1, 1)
+            grid.attach(self.buttons["cancel"], 2, 1, 1, 1)
             grid.attach(distances, 0, 2, 3, 1)
 
         self.content.add(grid)
@@ -176,7 +184,7 @@ class Panel(ScreenPanel):
         # Custom commands
         if self.ks_printer_cfg is not None:
             if custom_config := self.ks_printer_cfg.get("zcalibrate_custom_commands", None):
-                custom_commands = [str(i.strip()) for i in custom_config.split(',')]
+                custom_commands = [str(i.strip()) for i in custom_config.split(",")]
                 for command in custom_commands:
                     commands.append({f"{command}"})
 
@@ -185,7 +193,7 @@ class Panel(ScreenPanel):
 
     @staticmethod
     def _csv_to_array(string):
-        return [float(i.strip()) for i in string.split(',')]
+        return [float(i.strip()) for i in string.split(",")]
 
     def start_calibration(self, widget):
         iterable = self.dropdown.get_active_iter()
@@ -195,7 +203,7 @@ class Panel(ScreenPanel):
         model = self.dropdown.get_model()
         command = model[iterable][0]
 
-        self.buttons['start'].set_sensitive(False)
+        self.buttons["start"].set_sensitive(False)
         self.dropdown.set_sensitive(False)
 
         self._screen._ws.klippy.gcode_script("SET_GCODE_OFFSET Z=0")
@@ -213,7 +221,7 @@ class Panel(ScreenPanel):
         logging.info(f"Lifting Z: {self.z_hop}mm {self.z_hop_speed}mm/s")
         self._screen._ws.klippy.gcode_script(f"G91\nG0 Z{self.z_hop} F{self.z_hop_speed * 60}")
         logging.info(f"Moving to X:{x} Y:{y}")
-        self._screen._ws.klippy.gcode_script(f'G90\nG0 X{x} Y{y} F3000')
+        self._screen._ws.klippy.gcode_script(f"G90\nG0 X{x} Y{y} F3000")
 
     def _get_calibration_location(self):
         if self.ks_printer_cfg is not None:
@@ -227,10 +235,12 @@ class Panel(ScreenPanel):
             logging.debug(f"Using zero reference position: {self.zero_ref}")
             return self.zero_ref[0] - self.x_offset, self.zero_ref[1] - self.y_offset
 
-        if ("safe_z_home" in self._printer.get_config_section_list() and
-                "Z_ENDSTOP_CALIBRATE" not in self._printer.available_commands):
+        if (
+            "safe_z_home" in self._printer.get_config_section_list()
+            and "Z_ENDSTOP_CALIBRATE" not in self._printer.available_commands
+        ):
             return self._get_safe_z()
-        if self.mesh_radius or "delta" in self._printer.get_config_section("printer")['kinematics']:
+        if self.mesh_radius or "delta" in self._printer.get_config_section("printer")["kinematics"]:
             logging.info(f"Round bed calibrating at {self.mesh_origin}")
             return self.mesh_origin[0] - self.x_offset, self.mesh_origin[1] - self.y_offset
 
@@ -239,12 +249,12 @@ class Panel(ScreenPanel):
 
     def _get_safe_z(self):
         safe_z = self._printer.get_config_section("safe_z_home")
-        safe_z_xy = self._csv_to_array(safe_z['home_xy_position'])
+        safe_z_xy = self._csv_to_array(safe_z["home_xy_position"])
         logging.debug(f"Using safe_z {safe_z_xy[0]}, {safe_z_xy[1]}")
-        if 'z_hop' in safe_z:
-            self.z_hop = float(safe_z['z_hop'])
-        if 'z_hop_speed' in safe_z:
-            self.z_hop_speed = float(safe_z['z_hop_speed'])
+        if "z_hop" in safe_z:
+            self.z_hop = float(safe_z["z_hop"])
+        if "z_hop_speed" in safe_z:
+            self.z_hop_speed = float(safe_z["z_hop_speed"])
         return safe_z_xy[0], safe_z_xy[1]
 
     def _calculate_position(self):
@@ -254,8 +264,8 @@ class Panel(ScreenPanel):
             logging.debug(f"Probe in the mesh center X:{mesh_mid_x} Y:{mesh_mid_y}")
             return mesh_mid_x - self.x_offset, mesh_mid_y - self.y_offset
         try:
-            mid_x = float(self._printer.get_config_section("stepper_x")['position_max']) / 2
-            mid_y = float(self._printer.get_config_section("stepper_y")['position_max']) / 2
+            mid_x = float(self._printer.get_config_section("stepper_x")["position_max"]) / 2
+            mid_y = float(self._printer.get_config_section("stepper_y")["position_max"]) / 2
         except KeyError:
             logging.error("Couldn't get max position from stepper_x and stepper_y")
             return None, None
@@ -271,9 +281,9 @@ class Panel(ScreenPanel):
     def process_update(self, action, data):
         if action == "notify_status_update":
             if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-                self.widgets['zposition'].set_text("Z: ?")
-            elif "gcode_move" in data and "gcode_position" in data['gcode_move']:
-                self.update_position(data['gcode_move']['gcode_position'])
+                self.widgets["zposition"].set_text("Z: ?")
+            elif "gcode_move" in data and "gcode_position" in data["gcode_move"]:
+                self.update_position(data["gcode_move"]["gcode_position"])
             if "manual_probe" in data:
                 if data["manual_probe"]["is_active"]:
                     self.buttons_calibrating()
@@ -289,12 +299,14 @@ class Panel(ScreenPanel):
         return
 
     def update_position(self, position):
-        self.widgets['zposition'].set_text(f"Z: {position[2]:.3f}")
-        self.widgets['zoffset'].set_text(f"{abs(position[2] - self.z_offset):.3f}")
+        self.widgets["zposition"].set_text(f"Z: {position[2]:.3f}")
+        self.widgets["zoffset"].set_text(f"{abs(position[2] - self.z_offset):.3f}")
 
     def change_distance(self, widget, distance):
         logging.info(f"### Distance {distance}")
-        self.widgets[f"{self.distance}"].get_style_context().remove_class("horizontal_togglebuttons_active")
+        self.widgets[f"{self.distance}"].get_style_context().remove_class(
+            "horizontal_togglebuttons_active"
+        )
         self.widgets[f"{distance}"].get_style_context().add_class("horizontal_togglebuttons_active")
         self.distance = distance
 
@@ -306,29 +318,29 @@ class Panel(ScreenPanel):
         self._screen._ws.klippy.gcode_script("ACCEPT")
 
     def buttons_calibrating(self):
-        self.buttons['start'].get_style_context().remove_class('color3')
-        self.buttons['start'].set_sensitive(False)
+        self.buttons["start"].get_style_context().remove_class("color3")
+        self.buttons["start"].set_sensitive(False)
         self.dropdown.set_sensitive(False)
 
-        self.buttons['zpos'].set_sensitive(True)
-        self.buttons['zpos'].get_style_context().add_class('color4')
-        self.buttons['zneg'].set_sensitive(True)
-        self.buttons['zneg'].get_style_context().add_class('color1')
-        self.buttons['complete'].set_sensitive(True)
-        self.buttons['complete'].get_style_context().add_class('color3')
-        self.buttons['cancel'].set_sensitive(True)
-        self.buttons['cancel'].get_style_context().add_class('color2')
+        self.buttons["zpos"].set_sensitive(True)
+        self.buttons["zpos"].get_style_context().add_class("color4")
+        self.buttons["zneg"].set_sensitive(True)
+        self.buttons["zneg"].get_style_context().add_class("color1")
+        self.buttons["complete"].set_sensitive(True)
+        self.buttons["complete"].get_style_context().add_class("color3")
+        self.buttons["cancel"].set_sensitive(True)
+        self.buttons["cancel"].get_style_context().add_class("color2")
 
     def buttons_not_calibrating(self):
-        self.buttons['start'].get_style_context().add_class('color3')
-        self.buttons['start'].set_sensitive(True)
+        self.buttons["start"].get_style_context().add_class("color3")
+        self.buttons["start"].set_sensitive(True)
         self.dropdown.set_sensitive(True)
 
-        self.buttons['zpos'].set_sensitive(False)
-        self.buttons['zpos'].get_style_context().remove_class('color4')
-        self.buttons['zneg'].set_sensitive(False)
-        self.buttons['zneg'].get_style_context().remove_class('color1')
-        self.buttons['complete'].set_sensitive(False)
-        self.buttons['complete'].get_style_context().remove_class('color3')
-        self.buttons['cancel'].set_sensitive(False)
-        self.buttons['cancel'].get_style_context().remove_class('color2')
+        self.buttons["zpos"].set_sensitive(False)
+        self.buttons["zpos"].get_style_context().remove_class("color4")
+        self.buttons["zneg"].set_sensitive(False)
+        self.buttons["zneg"].get_style_context().remove_class("color1")
+        self.buttons["complete"].set_sensitive(False)
+        self.buttons["complete"].get_style_context().remove_class("color3")
+        self.buttons["cancel"].set_sensitive(False)
+        self.buttons["cancel"].get_style_context().remove_class("color2")

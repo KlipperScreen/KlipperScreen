@@ -9,7 +9,7 @@ line-length = 100
 target-version = "py38"
 
 # Translation helper
-builtins = ["_"]
+builtins = ["_", "ngettext"]
 
 extend-exclude = [
     "docs",

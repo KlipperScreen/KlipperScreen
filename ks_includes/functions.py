@@ -11,8 +11,8 @@ from queue import SimpleQueue as Queue
 
 dpms_loaded = False
 try:
-    ctypes.cdll.LoadLibrary('libXext.so.6')
-    libXext = ctypes.CDLL('libXext.so.6')
+    ctypes.cdll.LoadLibrary("libXext.so.6")
+    libXext = ctypes.CDLL("libXext.so.6")
 
     class DPMS_State:
         Fail = -1
@@ -21,7 +21,7 @@ try:
         Suspend = 2
         Off = 3
 
-    def get_DPMS_state(display_name_in_byte_string=b':0'):
+    def get_DPMS_state(display_name_in_byte_string=b":0"):
         state = DPMS_State.Fail
         if not isinstance(display_name_in_byte_string, bytes):
             raise TypeError("display_name_in_byte_string must be of type bytes")
@@ -35,14 +35,15 @@ try:
 
         if display.value:
             try:
-                if libXext.DPMSQueryExtension(display, major_opcode_p, first_event_p) \
-                        and libXext.DPMSCapable(display):
+                if libXext.DPMSQueryExtension(
+                    display, major_opcode_p, first_event_p
+                ) and libXext.DPMSCapable(display):
                     onoff_p = ctypes.create_string_buffer(1)
                     state_p = ctypes.create_string_buffer(2)
                     if libXext.DPMSInfo(display, state_p, onoff_p):
-                        onoff = struct.unpack('B', onoff_p.raw)[0]
+                        onoff = struct.unpack("B", onoff_p.raw)[0]
                         if onoff:
-                            state = struct.unpack('H', state_p.raw)[0]
+                            state = struct.unpack("H", state_p.raw)[0]
             finally:
                 libXext.XCloseDisplay(display)
         return state
@@ -55,7 +56,16 @@ except Exception as e:
 
 
 def get_software_version():
-    prog = ('git', '-C', os.path.dirname(__file__), 'describe', '--always', '--tags', '--long', '--dirty')
+    prog = (
+        "git",
+        "-C",
+        os.path.dirname(__file__),
+        "describe",
+        "--always",
+        "--tags",
+        "--long",
+        "--dirty",
+    )
     try:
         process = subprocess.Popen(prog, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         ver, err = process.communicate()
@@ -65,10 +75,10 @@ def get_software_version():
             if isinstance(version, bytes):
                 version = version.decode()
             # Remove the 'g' at the start of the hash
-            parts = version.split('-')
-            if len(parts) > 2 and parts[-2].startswith('g'):
+            parts = version.split("-")
+            if len(parts) > 2 and parts[-2].startswith("g"):
                 parts[-2] = parts[-2][1:]  # Remove the 'g'
-            version = '-'.join(parts)
+            version = "-".join(parts)
             return version
         else:
             logging.debug(f"Error getting git version: {err}")
@@ -109,9 +119,9 @@ class KlipperScreenLoggingHandler(logging.handlers.RotatingFileHandler):
     def __init__(self, filename, **kwargs):
         super(KlipperScreenLoggingHandler, self).__init__(filename, **kwargs)
         self.rollover_info = {
-            'header': f"{'-' * 20}KlipperScreen Log Start{'-' * 20}",
-            'version': f"KlipperScreen Version: {get_software_version()}",
-            'py_ver': f"Python version: {sys.version_info.major}.{sys.version_info.minor}",
+            "header": f"{'-' * 20}KlipperScreen Log Start{'-' * 20}",
+            "version": f"KlipperScreen Version: {get_software_version()}",
+            "py_ver": f"Python version: {sys.version_info.major}.{sys.version_info.minor}",
         }
         self.log_start()
 
@@ -137,13 +147,13 @@ def setup_logging(log_file):
 
     stdout_hdlr = logging.StreamHandler(sys.stdout)
     stdout_fmt = logging.Formatter(
-        '%(asctime)s,%(msecs)03d [%(filename)s:%(funcName)s] - %(message)s',
-        '%Y%m%d %H:%M:%S')
+        "%(asctime)s,%(msecs)03d [%(filename)s:%(funcName)s] - %(message)s", "%Y%m%d %H:%M:%S"
+    )
     stdout_hdlr.setFormatter(stdout_fmt)
     fh = listener = None
     try:
         fh = KlipperScreenLoggingHandler(log_file, maxBytes=4194304, backupCount=1)
-        formatter = logging.Formatter('%(asctime)s [%(filename)s:%(funcName)s()] - %(message)s')
+        formatter = logging.Formatter("%(asctime)s [%(filename)s:%(funcName)s()] - %(message)s")
         fh.setFormatter(formatter)
         listener = logging.handlers.QueueListener(queue, fh, stdout_hdlr)
     except Exception as e:
@@ -159,8 +169,8 @@ def setup_logging(log_file):
 
     def logging_exception_handler(ex_type, value, tb, thread_identifier=None):
         logging.exception(
-            f'Uncaught exception {ex_type}: {value}\n'
-            + '\n'.join([str(x) for x in [*traceback.format_tb(tb)]])
+            f"Uncaught exception {ex_type}: {value}\n"
+            + "\n".join([str(x) for x in [*traceback.format_tb(tb)]])
         )
 
     sys.excepthook = logging_exception_handler

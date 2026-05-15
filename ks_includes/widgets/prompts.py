@@ -10,7 +10,7 @@ class Prompt:
     def __init__(self, screen):
         self.screen = screen
         self.gtk = screen.gtk
-        self.window_title = 'KlipperScreen'
+        self.window_title = "KlipperScreen"
         self.text = self.header = ""
         self.buttons = []
         self.id = 1
@@ -26,59 +26,61 @@ class Prompt:
             self.close()
 
     def decode(self, data):
-        logging.info(f'{data}')
-        if data.startswith('prompt_begin'):
-            self.header = data.replace('prompt_begin', '')
+        logging.info(f"{data}")
+        if data.startswith("prompt_begin"):
+            self.header = data.replace("prompt_begin", "")
             if self.header:
                 self.window_title = self.header
             self.text = ""
             self.buttons = []
             return
-        elif data.startswith('prompt_text'):
-            self.text = data.replace('prompt_text ', '')
+        elif data.startswith("prompt_text"):
+            self.text = data.replace("prompt_text ", "")
             return
-        elif data.startswith('prompt_button '):
-            data = data.replace('prompt_button ', '')
-            params = data.split('|')
+        elif data.startswith("prompt_button "):
+            data = data.replace("prompt_button ", "")
+            params = data.split("|")
             if len(params) == 1:
                 params.append(self.text)
             if len(params) > 3:
-                logging.error('Unexpected number of parameters on the button')
+                logging.error("Unexpected number of parameters on the button")
                 return
             self.set_button(*params)
             return
-        elif data.startswith('prompt_footer_button'):
-            data = data.replace('prompt_footer_button ', '')
-            params = data.split('|')
+        elif data.startswith("prompt_footer_button"):
+            data = data.replace("prompt_footer_button ", "")
+            params = data.split("|")
             if len(params) == 1:
                 params.append(self.text)
             if len(params) > 3:
-                logging.error('Unexpected number of parameters on the button')
+                logging.error("Unexpected number of parameters on the button")
                 return
             self.set_footer_button(*params)
             return
-        elif data == 'prompt_show':
+        elif data == "prompt_show":
             if not self.prompt:
                 self.show()
             return
-        elif data == 'prompt_end':
+        elif data == "prompt_end":
             self.end()
-        elif data == 'prompt_button_group_start':
+        elif data == "prompt_button_group_start":
             self.groups.append(
                 Gtk.FlowBox(
                     selection_mode=Gtk.SelectionMode.NONE,
                     orientation=Gtk.Orientation.HORIZONTAL,
                 )
             )
-        elif data == 'prompt_button_group_end':
+        elif data == "prompt_button_group_end":
             if self.groups:
                 self.scroll_box.add(self.groups.pop())
         else:
-            logging.debug(f'Unknown option {data}')
+            logging.debug(f"Unknown option {data}")
 
-    def set_button(self, name, gcode, style='default'):
-        button = self.gtk.Button(image_name=None, label=f"{name}", style=f'dialog-{style}')
-        button.connect("clicked", self.screen._send_action, "printer.gcode.script", {'script': gcode})
+    def set_button(self, name, gcode, style="default"):
+        button = self.gtk.Button(image_name=None, label=f"{name}", style=f"dialog-{style}")
+        button.connect(
+            "clicked", self.screen._send_action, "printer.gcode.script", {"script": gcode}
+        )
         if self.groups:
             self.groups[-1].add(button)
             # Workaround to expand the buttons horizontally
@@ -88,16 +90,18 @@ class Prompt:
         else:
             self.scroll_box.add(button)
 
-    def set_footer_button(self, name, gcode, style='default'):
+    def set_footer_button(self, name, gcode, style="default"):
         self.buttons.append(
-            {"name": name, "response": self.id, 'gcode': gcode, 'style': f'dialog-{style}'}
+            {"name": name, "response": self.id, "gcode": gcode, "style": f"dialog-{style}"}
         )
         self.id += 1
 
     def show(self):
-        logging.info(f'Prompt {self.header} {self.text} {self.buttons}')
+        logging.info(f"Prompt {self.header} {self.text} {self.buttons}")
 
-        title = Gtk.Label(wrap=True, hexpand=True, vexpand=False, halign=Gtk.Align.CENTER, label=self.header)
+        title = Gtk.Label(
+            wrap=True, hexpand=True, vexpand=False, halign=Gtk.Align.CENTER, label=self.header
+        )
 
         close = self.gtk.Button("cancel", scale=self.gtk.bsidescale)
         close.set_hexpand(False)
@@ -132,11 +136,11 @@ class Prompt:
 
     def response(self, dialog, response_id):
         for button in self.buttons:
-            if button['response'] == response_id:
-                self.screen._send_action(None, "printer.gcode.script", {'script': button['gcode']})
+            if button["response"] == response_id:
+                self.screen._send_action(None, "printer.gcode.script", {"script": button["gcode"]})
 
     def close(self, *args):
-        script = {'script': 'RESPOND type="command" msg="action:prompt_end"'}
+        script = {"script": 'RESPOND type="command" msg="action:prompt_end"'}
         self.screen._send_action(None, "printer.gcode.script", script)
 
     def end(self):

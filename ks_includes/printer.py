@@ -35,7 +35,7 @@ class Printer:
         self.warnings = []
 
     def reinit(self, printer_info, data):
-        self.config = data['configfile']['config']
+        self.config = data["configfile"]["config"]
         self.data = data
         self.tools.clear()
         self.extrudercount = 0
@@ -71,30 +71,19 @@ class Printer:
                 "heater_bed",
                 "heater_generic",
                 "temperature_sensor",
-                "temperature_fan"
+                "temperature_fan",
             ):
                 self.data[x] = {"temperature": 0}
                 if section != "temperature_sensor":
                     self.data[x]["target"] = 0
                 self.tempdevcount += 1
-            elif section in (
-                "fan",
-                "controller_fan",
-                "heater_fan",
-                "fan_generic"
-            ):
+            elif section in ("fan", "controller_fan", "heater_fan", "fan_generic"):
                 self.fancount += 1
             elif section == "output_pin":
                 self.output_pin_count += 1
             elif section == "pwm_tool":
                 self.pwm_tools_count += 1
-            elif section in (
-                "led",
-                "neopixel",
-                "dotstar",
-                "pca9533",
-                "pca9632"
-            ):
+            elif section in ("led", "neopixel", "dotstar", "pca9533", "pca9632"):
                 self.ledcount += 1
 
         self.tools = sorted(self.tools)
@@ -133,10 +122,10 @@ class Printer:
 
         for x in data:
             if x == "configfile":
-                if 'config' in data[x]:
-                    self.config.update(data[x]['config'])
-                if 'warnings' in data[x]:
-                    self.warnings = data[x]['warnings']
+                if "config" in data[x]:
+                    self.config.update(data[x]["config"])
+                if "warnings" in data[x]:
+                    self.warnings = data[x]["warnings"]
             if x not in self.data:
                 self.data[x] = {}
             self.data[x].update(data[x])
@@ -148,13 +137,14 @@ class Printer:
         # webhooks states: startup, ready, shutdown, error
         # print_stats: standby, printing, paused, error, complete
         # idle_timeout: Idle, Printing, Ready
-        if self.data['webhooks']['state'] == "ready" and (
-                'print_stats' in self.data and 'state' in self.data['print_stats']):
-            if self.data['print_stats']['state'] == 'paused':
+        if self.data["webhooks"]["state"] == "ready" and (
+            "print_stats" in self.data and "state" in self.data["print_stats"]
+        ):
+            if self.data["print_stats"]["state"] == "paused":
                 return "paused"
-            if self.data['print_stats']['state'] == 'printing':
+            if self.data["print_stats"]["state"] == "printing":
                 return "printing"
-        return self.data['webhooks']['state']
+        return self.data["webhooks"]["state"]
 
     def process_status_update(self):
         state = self.evaluate_state()
@@ -163,8 +153,8 @@ class Printer:
         return False
 
     def process_power_update(self, data):
-        if data['device'] in self.power_devices:
-            self.power_devices[data['device']]['status'] = data['status']
+        if data["device"] in self.power_devices:
+            self.power_devices[data["device"]]["status"] = data["status"]
 
     def change_state(self, state):
         if state not in list(self.state_callbacks):
@@ -180,10 +170,8 @@ class Printer:
         self.power_devices = {}
 
         logging.debug(f"Processing power devices: {data}")
-        for x in data['devices']:
-            self.power_devices[x['device']] = {
-                "status": "on" if x['status'] == "on" else "off"
-            }
+        for x in data["devices"]:
+            self.power_devices[x["device"]] = {"status": "on" if x["status"] == "on" else "off"}
         logging.debug(f"Power devices: {self.power_devices}")
 
     def configure_cameras(self, data):
@@ -192,7 +180,11 @@ class Printer:
 
     def get_config_section_list(self, search=""):
         if self.config is not None:
-            return [i for i in list(self.config) if i.startswith(search)] if hasattr(self, "config") else []
+            return (
+                [i for i in list(self.config) if i.startswith(search)]
+                if hasattr(self, "config")
+                else []
+            )
         return []
 
     def get_config_section(self, section):
@@ -200,11 +192,7 @@ class Printer:
 
     def get_macro(self, macro):
         return next(
-            (
-                self.config[key]
-                for key in self.config.keys()
-                if key.find(macro) > -1
-            ),
+            (self.config[key] for key in self.config.keys() if key.find(macro) > -1),
             False,
         )
 
@@ -226,7 +214,7 @@ class Printer:
         macros = []
         for macro in self.get_config_section_list("gcode_macro "):
             macro = macro[12:].strip()
-            if macro.startswith("_") or macro.upper() in ('LOAD_FILAMENT', 'UNLOAD_FILAMENT'):
+            if macro.startswith("_") or macro.upper() in ("LOAD_FILAMENT", "UNLOAD_FILAMENT"):
                 continue
             if self.get_macro(macro) and "rename_existing" in self.get_macro(macro):
                 continue
@@ -273,11 +261,14 @@ class Printer:
                 "fans": {"count": self.fancount},
                 "output_pins": {"count": self.output_pin_count},
                 "pwm_tools": {"count": self.pwm_tools_count},
-                "gcode_macros": {"count": len(self.get_gcode_macros()), "list": self.get_gcode_macros()},
+                "gcode_macros": {
+                    "count": len(self.get_gcode_macros()),
+                    "list": self.get_gcode_macros(),
+                },
                 "leds": {"count": self.ledcount},
                 "config_sections": list(self.config.keys()),
                 "available_commands": self.available_commands,
-            }
+            },
         }
 
     def get_leds(self):
@@ -294,16 +285,16 @@ class Printer:
             return None
         elif "color_order" in self.config[led]:
             return self.config[led]["color_order"]
-        colors = ''
+        colors = ""
         for option in self.config[led]:
-            if option in ("red_pin", 'initial_red') and 'R' not in colors:
-                colors += 'R'
-            elif option in ("green_pin", 'initial_green') and 'G' not in colors:
-                colors += 'G'
-            elif option in ("blue_pin", 'initial_blue') and 'B' not in colors:
-                colors += 'B'
-            elif option in ("white_pin", 'initial_white') and 'W' not in colors:
-                colors += 'W'
+            if option in ("red_pin", "initial_red") and "R" not in colors:
+                colors += "R"
+            elif option in ("green_pin", "initial_green") and "G" not in colors:
+                colors += "G"
+            elif option in ("blue_pin", "initial_blue") and "B" not in colors:
+                colors += "B"
+            elif option in ("white_pin", "initial_white") and "W" not in colors:
+                colors += "W"
         logging.debug(f"Colors in led: {colors}")
         return colors
 
@@ -313,7 +304,7 @@ class Printer:
     def get_power_device_status(self, device):
         if device not in self.power_devices:
             return
-        return self.power_devices[device]['status']
+        return self.power_devices[device]["status"]
 
     def get_stat(self, stat, substat=None):
         if self.data is None or stat not in self.data:
@@ -339,12 +330,12 @@ class Printer:
             return speed
         if "speed" in self.data[fan]:
             speed = self.data[fan]["speed"]
-        if 'max_power' in self.config[fan]:
-            max_power = float(self.config[fan]['max_power'])
+        if "max_power" in self.config[fan]:
+            max_power = float(self.config[fan]["max_power"])
             if max_power > 0:
                 speed = speed / max_power
-        if 'off_below' in self.config[fan]:
-            off_below = float(self.config[fan]['off_below'])
+        if "off_below" in self.config[fan]:
+            off_below = float(self.config[fan]["off_below"])
             if speed < off_below:
                 speed = 0
         return speed
@@ -352,7 +343,7 @@ class Printer:
     def get_pin_value(self, pin):
         if pin in self.data:
             return self.data[pin]["value"]
-        elif pin in self.config and 'value' in self.config[pin]:
+        elif pin in self.config and "value" in self.config[pin]:
             return self.config[pin]["value"]
         return 0
 
@@ -388,12 +379,10 @@ class Printer:
 
     def get_temp_devices(self):
         if self.temp_devices is None:
-            devices = [
-                device
-                for device in self.tools
-                if not device.startswith('extruder_stepper')
-            ]
-            self.temp_devices = devices + self.get_heaters() + self.get_temp_sensors() + self.get_temp_fans()
+            devices = [device for device in self.tools if not device.startswith("extruder_stepper")]
+            self.temp_devices = (
+                devices + self.get_heaters() + self.get_temp_sensors() + self.get_temp_fans()
+            )
         return self.temp_devices
 
     def get_tools(self):

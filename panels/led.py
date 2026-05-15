@@ -12,7 +12,7 @@ from ks_includes.screen_panel import ScreenPanel
 
 
 def rgb_to_hex(color):
-    hex_color = '#'
+    hex_color = "#"
     for value in color:
         int_value = round(value * 255)
         hex_color += hex(int_value)[2:].zfill(2)
@@ -30,7 +30,6 @@ def rgbw_to_rgb(color):
 
 
 class Panel(ScreenPanel):
-
     def __init__(self, screen, title):
         title = title or _("Leds")
         super().__init__(screen, title)
@@ -40,7 +39,7 @@ class Panel(ScreenPanel):
         self.preview_label = Gtk.Label()
         self.preset_list = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         self.color_data = [0, 0, 0, 0]
-        self.color_order = 'RGBW'
+        self.color_order = "RGBW"
         self.presets = {"off": [0.0, 0.0, 0.0, 0.0]}
         self.scales = {}
         self.buttons = []
@@ -50,10 +49,10 @@ class Panel(ScreenPanel):
 
     def color_available(self, idx):
         return (
-            (idx == 0 and 'R' in self.color_order)
-            or (idx == 1 and 'G' in self.color_order)
-            or (idx == 2 and 'B' in self.color_order)
-            or (idx == 3 and 'W' in self.color_order)
+            (idx == 0 and "R" in self.color_order)
+            or (idx == 1 and "G" in self.color_order)
+            or (idx == 2 and "B" in self.color_order)
+            or (idx == 3 and "W" in self.color_order)
         )
 
     def activate(self):
@@ -131,13 +130,14 @@ class Panel(ScreenPanel):
 
         columns = 3 if self._screen.vertical_mode else 2
         data_misc = self._screen.apiclient.send_request(
-            "server/database/item?namespace=mainsail&key=miscellaneous.entries")
+            "server/database/item?namespace=mainsail&key=miscellaneous.entries"
+        )
         if data_misc:
-            presets_data = data_misc['value'][next(iter(data_misc["value"]))]['presets']
+            presets_data = data_misc["value"][next(iter(data_misc["value"]))]["presets"]
             if presets_data:
                 self.presets.update(self.parse_presets(presets_data))
         for i, key in enumerate(self.presets):
-            logging.info(f'Adding preset: {key}')
+            logging.info(f"Adding preset: {key}")
             preview = ColorPreviewArea(size=self.da_size)
             preview.set_color(self.presets[key])
             button = self._gtk.Button()
@@ -163,7 +163,7 @@ class Panel(ScreenPanel):
         self.preview_label.set_label(rgb_to_hex(rgbw_to_rgb(self.color_data)))
 
     def process_update(self, action, data):
-        if action != 'notify_status_update':
+        if action != "notify_status_update":
             return
         if self.current_led in data and "color_data" in data[self.current_led]:
             self.update_scales(data[self.current_led]["color_data"][0])
@@ -188,15 +188,18 @@ class Panel(ScreenPanel):
         self.set_led_color(self.color_data)
 
     def set_led_color(self, color_data):
-        name = self.current_led.split()[1] if len(self.current_led.split()) > 1 else self.current_led
-        self._screen._send_action(None, "printer.gcode.script",
-                                  {"script": KlippyGcodes.set_led_color(name, color_data)})
+        name = (
+            self.current_led.split()[1] if len(self.current_led.split()) > 1 else self.current_led
+        )
+        self._screen._send_action(
+            None, "printer.gcode.script", {"script": KlippyGcodes.set_led_color(name, color_data)}
+        )
 
     @staticmethod
     def parse_presets(presets_data) -> {}:
         parsed = {}
         for i, preset in enumerate(presets_data.values()):
-            name = i if preset["name"] == '' else preset["name"].lower()
+            name = i if preset["name"] == "" else preset["name"].lower()
             parsed[name] = []
             for color in ["red", "green", "blue", "white"]:
                 if color not in preset or preset[color] is None:
@@ -221,9 +224,9 @@ class ColorPreviewArea(Gtk.DrawingArea):
     def on_draw(self, da, ctx):
         ctx.set_source_rgb(*self.color)
         # Set the size of the rectangle
-        width = da.get_allocated_width() * .9
-        height = da.get_allocated_height() * .9
-        x = da.get_allocated_width() * .05
+        width = da.get_allocated_width() * 0.9
+        height = da.get_allocated_height() * 0.9
+        x = da.get_allocated_width() * 0.05
         # Set the radius of the corners
         radius = width / 2 * 0.2
         ctx.arc(x + radius, radius, radius, pi, 3 * pi / 2)

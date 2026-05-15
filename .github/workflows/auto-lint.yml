@@ -1,0 +1,41 @@
+name: auto-lint
+on:
+  push:
+    branches:
+      - master
+      - main
+    paths-ignore:
+      - 'docs/**'
+      - 'ks_includes/locales/**'
+  workflow_dispatch:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install ruff
+        run: pip install ruff
+      - name: Run ruff check and fix
+        run: ruff check --fix screen.py ks_includes panels
+      - name: Run ruff format
+        run: ruff format screen.py ks_includes panels
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --quiet && echo "has_changes=false" || echo "has_changes=true"
+        shell: bash
+      - name: Commit lint fixes
+        if: steps.git-check.outputs.has_changes == 'true'
+        uses: stefanzweifel/git-auto-commit-action@v6
+        with:
+          commit_message: "style: auto-fix linting issues with ruff"
+          commit_options: "--no-verify"
+          commit_user_name: KlipperScreen Bot
+          commit_user_email: bot@klipperscreen.dev
+          commit_author: KlipperScreen Bot <bot@klipperscreen.dev>

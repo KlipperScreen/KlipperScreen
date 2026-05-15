@@ -15,10 +15,10 @@ class ObjectMap(Gtk.DrawingArea):
         # self.get_style_context().add_class('objectmap')
         self.printer = printer
         self.max_length = 0
-        self.connect('draw', self.draw_graph)
+        self.connect("draw", self.draw_graph)
         self.add_events(Gdk.EventMask.TOUCH_MASK)
         self.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-        self.connect('button_press_event', self.event_cb)
+        self.connect("button_press_event", self.event_cb)
         self.font_size = round(font_size * 0.75)
         self.font_spacing = round(self.font_size * 1.5)
         self.margin_left = round(self.font_size * 2.75)
@@ -32,12 +32,16 @@ class ObjectMap(Gtk.DrawingArea):
         self.max_x = self.max_y = 0
 
     def x_graph_to_bed(self, width, gx):
-        return (((gx - self.margin_left) * (self.max_x - self.min_x))
-                / (width - self.margin_left - self.margin_right)) + self.min_x
+        return (
+            ((gx - self.margin_left) * (self.max_x - self.min_x))
+            / (width - self.margin_left - self.margin_right)
+        ) + self.min_x
 
     def y_graph_to_bed(self, height, gy):
-        return ((1 - ((gy - self.margin_top) / (height - self.margin_top - self.margin_bottom)))
-                * (self.max_y - self.min_y)) + self.min_y
+        return (
+            (1 - ((gy - self.margin_top) / (height - self.margin_top - self.margin_bottom)))
+            * (self.max_y - self.min_y)
+        ) + self.min_y
 
     def event_cb(self, da, ev):
         # Convert coordinates from screen-graph to bed
@@ -55,8 +59,8 @@ class ObjectMap(Gtk.DrawingArea):
                 obj_max_y = max(obj_max_y, point[1])
             if obj_min_x < x < obj_max_x and obj_min_y < y < obj_max_y:
                 logging.info(f"TOUCHED object it's: {obj['name']}")
-                if obj['name'] not in self.excluded_objects:
-                    self.exclude_object(obj['name'])
+                if obj["name"] not in self.excluded_objects:
+                    self.exclude_object(obj["name"])
                 break
 
     def exclude_object(self, name):
@@ -65,7 +69,7 @@ class ObjectMap(Gtk.DrawingArea):
             None,
             _("Are you sure do you want to exclude the object?") + f"\n\n{name}",
             "printer.gcode.script",
-            script
+            script,
         )
 
     def draw_graph(self, da, ctx):
@@ -83,7 +87,7 @@ class ObjectMap(Gtk.DrawingArea):
                 self.max_y = max(self.max_y, point[1])
 
         # Styling
-        ctx.set_source_rgb(.5, .5, .5)  # Grey
+        ctx.set_source_rgb(0.5, 0.5, 0.5)  # Grey
         ctx.set_line_width(1)
         ctx.set_font_size(self.font_size)
 
@@ -122,12 +126,12 @@ class ObjectMap(Gtk.DrawingArea):
         # Draw objects
         for obj in self.objects:
             # change the color depending on the status
-            if obj['name'] == self.printer.get_stat("exclude_object", "current_object"):
+            if obj["name"] == self.printer.get_stat("exclude_object", "current_object"):
                 ctx.set_source_rgb(1, 0, 0)  # Red
-            elif obj['name'] in self.printer.get_stat("exclude_object", "excluded_objects"):
+            elif obj["name"] in self.printer.get_stat("exclude_object", "excluded_objects"):
                 ctx.set_source_rgb(0, 0, 0)  # Black
             else:
-                ctx.set_source_rgb(.5, .5, .5)  # Grey
+                ctx.set_source_rgb(0.5, 0.5, 0.5)  # Grey
             for i, point in enumerate(obj["polygon"]):
                 # Convert coordinates from bed to screen-graph
                 x = self.x_bed_to_graph(da.get_allocated_width(), point[0])
@@ -142,9 +146,13 @@ class ObjectMap(Gtk.DrawingArea):
             ctx.stroke()
 
     def x_bed_to_graph(self, width, bx):
-        return (((bx - self.min_x) * (width - self.margin_left - self.margin_right))
-                / (self.max_x - self.min_x)) + self.margin_left
+        return (
+            ((bx - self.min_x) * (width - self.margin_left - self.margin_right))
+            / (self.max_x - self.min_x)
+        ) + self.margin_left
 
     def y_bed_to_graph(self, height, by):
-        return ((1 - ((by - self.min_y) / (self.max_y - self.min_y)))
-                * (height - self.margin_top - self.margin_bottom)) + self.margin_top
+        return (
+            (1 - ((by - self.min_y) / (self.max_y - self.min_y)))
+            * (height - self.margin_top - self.margin_bottom)
+        ) + self.margin_top

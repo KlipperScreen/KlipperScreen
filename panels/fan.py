@@ -17,12 +17,12 @@ class Panel(ScreenPanel):
         self.fan_speed = {}
         self.devices = {}
         # Create a grid for all devices
-        self.labels['devices'] = Gtk.Grid(valign=Gtk.Align.CENTER)
+        self.labels["devices"] = Gtk.Grid(valign=Gtk.Align.CENTER)
 
         self.load_fans()
 
         scroll = self._gtk.ScrolledWindow()
-        scroll.add(self.labels['devices'])
+        scroll.add(self.labels["devices"])
 
         self.content.add(scroll)
 
@@ -38,16 +38,16 @@ class Panel(ScreenPanel):
         if fan not in self.devices:
             return
 
-        if self.devices[fan]['changeable'] is True:
-            if self.devices[fan]['scale'].has_grab():
+        if self.devices[fan]["changeable"] is True:
+            if self.devices[fan]["scale"].has_grab():
                 return
             self.devices[fan]["speed"] = round(float(speed) * 100)
-            self.devices[fan]['scale'].disconnect_by_func(self.set_fan_speed)
-            self.devices[fan]['scale'].set_value(self.devices[fan]["speed"])
-            self.devices[fan]['scale'].connect("button-release-event", self.set_fan_speed, fan)
+            self.devices[fan]["scale"].disconnect_by_func(self.set_fan_speed)
+            self.devices[fan]["scale"].set_value(self.devices[fan]["speed"])
+            self.devices[fan]["scale"].connect("button-release-event", self.set_fan_speed, fan)
         else:
             self.devices[fan]["speed"] = float(speed)
-            self.devices[fan]['scale'].set_fraction(self.devices[fan]["speed"])
+            self.devices[fan]["scale"].set_fraction(self.devices[fan]["speed"])
         if widget is not None:
             self.set_fan_speed(None, None, fan)
 
@@ -55,8 +55,14 @@ class Panel(ScreenPanel):
 
         logging.info(f"Adding fan: {fan}")
         changeable = any(fan.startswith(x) or fan == x for x in CHANGEABLE_FANS)
-        name = Gtk.Label(halign=Gtk.Align.START, valign=Gtk.Align.CENTER, hexpand=True, vexpand=True,
-                         wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
+        name = Gtk.Label(
+            halign=Gtk.Align.START,
+            valign=Gtk.Align.CENTER,
+            hexpand=True,
+            vexpand=True,
+            wrap=True,
+            wrap_mode=Pango.WrapMode.WORD_CHAR,
+        )
         fan_name = _("Part Fan") if fan == "fan" else fan.split()[1]
         name.set_markup(f"\n<big><b>{fan_name}</b></big>\n")
 
@@ -104,9 +110,9 @@ class Panel(ScreenPanel):
         else:
             pos = devices.index(fan)
 
-        self.labels['devices'].insert_row(pos)
-        self.labels['devices'].attach(fan_row, 0, pos, 1, 1)
-        self.labels['devices'].show_all()
+        self.labels["devices"].insert_row(pos)
+        self.labels["devices"].attach(fan_row, 0, pos, 1, 1)
+        self.labels["devices"].show_all()
 
     def load_fans(self):
         fans = self._printer.get_fans()
@@ -118,12 +124,14 @@ class Panel(ScreenPanel):
             self.add_fan(fan)
 
     def set_fan_speed(self, widget, event, fan):
-        value = self.devices[fan]['scale'].get_value()
+        value = self.devices[fan]["scale"].get_value()
 
         if fan == "fan":
             self._screen._ws.klippy.gcode_script(f"M106 S{value * 2.55:.0f}")
         else:
-            self._screen._ws.klippy.gcode_script(f"SET_FAN_SPEED FAN={fan.split()[1]} SPEED={float(value) / 100}")
+            self._screen._ws.klippy.gcode_script(
+                f"SET_FAN_SPEED FAN={fan.split()[1]} SPEED={float(value) / 100}"
+            )
         # Check the speed in case it wasn't applied
         GLib.timeout_add_seconds(1, self.check_fan_speed, fan)
 

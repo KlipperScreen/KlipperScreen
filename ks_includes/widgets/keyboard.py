@@ -24,21 +24,14 @@ class Keyboard(Gtk.Box):
         language = self.detect_language(screen._config.get_main_config().get("language", None))
 
         if self.purpose == Gtk.InputPurpose.DIGITS:
-            self.keys = [
-                [
-                    ["7", "8", "9"],
-                    ["4", "5", "6"],
-                    ["1", "2", "3"],
-                    ["↓", "0", "⌫"]
-                ]
-            ]
+            self.keys = [[["7", "8", "9"], ["4", "5", "6"], ["1", "2", "3"], ["↓", "0", "⌫"]]]
         elif self.purpose == Gtk.InputPurpose.NUMBER:
             self.keys = [
                 [
                     ["7", "8", "9", "⌫"],
                     ["4", "5", "6", "+"],
                     ["1", "2", "3", "-"],
-                    ["↓", "0", ".", "↓"]
+                    ["↓", "0", ".", "↓"],
                 ]
             ]
         elif language == "de":
@@ -66,7 +59,7 @@ class Keyboard(Gtk.Box):
                     ["_", "\\", "|", "~", "<", ">", "€", "£", "¥", "•"],
                     ["↑", ".", ",", "?", "!", "'", "º", "¨", "123", "⌫"],
                     ["ABC", " ", "↓"],
-                ]
+                ],
             ]
         elif language == "fr":
             self.keys = [
@@ -93,7 +86,7 @@ class Keyboard(Gtk.Box):
                     ["_", "\\", "|", "~", "<", ">", "€", "£", "¥", "•"],
                     ["↑", ".", ",", "?", "!", "'", "º", "Æ", "æ", "⌫"],
                     ["ABC", " ", "↓"],
-                ]
+                ],
             ]
         else:
             self.keys = [
@@ -120,7 +113,7 @@ class Keyboard(Gtk.Box):
                     ["_", "\\", "|", "~", "<", ">", "€", "£", "¥", "•"],
                     ["↑", ".", ",", "?", "!", "'", "º", "ç", "abc", "⌫"],
                     ["ABC", " ", "↓"],
-                ]
+                ],
             ]
 
             if language == "es":
@@ -132,16 +125,16 @@ class Keyboard(Gtk.Box):
             for r, row in enumerate(pallet):
                 for k, key in enumerate(row):
                     if key == "⌫":
-                        self.buttons[p][r][k] = screen.gtk.Button("backspace", scale=.6)
+                        self.buttons[p][r][k] = screen.gtk.Button("backspace", scale=0.6)
                     elif key == "↑":
-                        self.buttons[p][r][k] = screen.gtk.Button("arrow-up", scale=.6)
+                        self.buttons[p][r][k] = screen.gtk.Button("arrow-up", scale=0.6)
                         self.shift.append(self.buttons[p][r][k])
                     elif key == "↓":
-                        self.buttons[p][r][k] = screen.gtk.Button("arrow-down", scale=.6)
+                        self.buttons[p][r][k] = screen.gtk.Button("arrow-down", scale=0.6)
                     else:
                         self.buttons[p][r][k] = screen.gtk.Button(label=key, lines=1)
-                    self.buttons[p][r][k].connect('button-press-event', self.repeat, key)
-                    self.buttons[p][r][k].connect('button-release-event', self.release)
+                    self.buttons[p][r][k].connect("button-press-event", self.repeat, key)
+                    self.buttons[p][r][k].connect("button-release-event", self.release)
                     self.buttons[p][r][k].get_style_context().add_class("keyboard_pad")
 
         self.pallet_nr = -1
@@ -157,7 +150,7 @@ class Keyboard(Gtk.Box):
     def detect_language(self, language):
         if language is None or language == "system_lang":
             for language in self.langs:
-                if os.getenv('LANG').lower().startswith(language):
+                if os.getenv("LANG").lower().startswith(language):
                     return language
         for _ in self.langs:
             if language.startswith(_):
