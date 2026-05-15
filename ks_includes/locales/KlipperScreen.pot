@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 22:27-0300\n"
+"POT-Creation-Date: 2026-05-15 20:03-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -243,6 +243,17 @@ msgstr ""
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr ""
 
+msgid "Screen wake delay"
+msgstr ""
+
+msgid "Helps to prevent unwanted touchs during screen wake up"
+msgstr ""
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "Invert X"
 msgstr ""
 
@@ -276,11 +287,6 @@ msgstr ""
 
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "second"
-msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -323,10 +329,7 @@ msgstr ""
 msgid "No mesh has been loaded"
 msgstr ""
 
-msgid "Calibrate"
-msgstr ""
-
-msgid "Invalid temperature"
+msgid "Invalid Number"
 msgstr ""
 
 msgid "Password"
@@ -369,6 +372,9 @@ msgid "Reference"
 msgstr ""
 
 msgid "Add profile"
+msgstr ""
+
+msgid "Calibrate"
 msgstr ""
 
 msgid "Clear"
@@ -677,6 +683,9 @@ msgstr ""
 msgid "Temp (°C)"
 msgstr ""
 
+msgid "Invalid temperature"
+msgstr ""
+
 msgid "Home"
 msgstr ""
 
@@ -820,28 +829,73 @@ msgstr ""
 msgid "Power On Printer"
 msgstr ""
 
-msgid "ID"
+msgid "Spool editor"
 msgstr ""
 
-msgid "Last Used"
+msgid "No spool selected"
 msgstr ""
 
-msgid "Archived"
+msgid "Measured weight"
 msgstr ""
 
-msgid "Filter"
+msgid "Remaining weight"
+msgstr ""
+
+msgid "Initial weight"
+msgstr ""
+
+msgid "Empty weight"
+msgstr ""
+
+msgid "Invalid weight"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "Vendor"
 msgstr ""
 
 msgid "Material"
 msgstr ""
 
+msgid "Used"
+msgstr ""
+
+msgid "Location"
+msgstr ""
+
+msgid "Archived"
+msgstr ""
+
+msgid "Price"
+msgstr ""
+
 msgid "Comment"
 msgstr ""
 
-msgid "Last used"
+msgid "Measured weight is below empty spool weight"
 msgstr ""
 
-msgid "Remaining weight"
+msgid "Value must be positive"
+msgstr ""
+
+msgid "Error updating filament weight"
+msgstr ""
+
+msgid "Filament weight updated"
+msgstr ""
+
+msgid "ID"
+msgstr ""
+
+msgid "Filter"
 msgstr ""
 
 msgid "Remaining length"
@@ -857,9 +911,6 @@ msgid "Error clearing active spool"
 msgstr ""
 
 msgid "Error setting active spool"
-msgstr ""
-
-msgid "Error getting active spool"
 msgstr ""
 
 msgid "No info available"
@@ -980,6 +1031,9 @@ msgstr ""
 msgid "System:"
 msgstr ""
 
+msgid "Initializing KlipperScreen"
+msgstr ""
+
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr ""
 
@@ -989,10 +1043,10 @@ msgstr ""
 msgid "DPMS has failed and has been disabled"
 msgstr ""
 
-msgid "Cannot connect to Moonraker"
+msgid "Moonraker Connected"
 msgstr ""
 
-msgid "Lost Connection to Moonraker"
+msgid "Retrying"
 msgstr ""
 
 msgid "Klipper has disconnected"
@@ -1029,8 +1083,11 @@ msgstr ""
 msgid "Temperature too low to extrude"
 msgstr ""
 
-msgid "Retrying"
+msgid "Waiting for Moonraker Websocket to close"
 msgstr ""
 
 msgid "Moonraker: connected"
+msgstr ""
+
+msgid "Initializing Klipper Connection"
 msgstr ""

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 22:27-0300\n"
-"PO-Revision-Date: 2025-05-24 19:01+0000\n"
+"POT-Creation-Date: 2026-05-15 20:01-0300\n"
+"PO-Revision-Date: 2026-05-15 21:30-0300\n"
 "Last-Translator: Jean-Yves Leduc <leduc.jy@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/fr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.12-dev\n"
+"X-Generator: Poedit 3.8\n"
 
 msgid "Main Menu"
 msgstr "Menu principal"
@@ -246,6 +246,19 @@ msgid "For mouse control or to verify touchscreen accuracy"
 msgstr ""
 "Pour le contrôle de la souris ou vérifier la précision de l'écran tactile"
 
+#, fuzzy
+msgid "Screen wake delay"
+msgstr "Délai de réveil de l'écran"
+
+#, fuzzy
+msgid "Helps to prevent unwanted touchs during screen wake up"
+msgstr "Aide à prévenir les touches involontaires lors du réveil de l'écran"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "seconde"
+msgstr[1] "secondes"
+
 msgid "Invert X"
 msgstr "Inverser l'axe X"
 
@@ -281,11 +294,6 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] "jour"
 msgstr[1] "jours"
-
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "seconde"
-msgstr[1] "secondes"
 
 msgid "Network not found"
 msgstr "Réseau non trouvé"
@@ -326,11 +334,9 @@ msgstr "Connexion échouée"
 msgid "No mesh has been loaded"
 msgstr "Aucun maillage chargé"
 
-msgid "Calibrate"
-msgstr "Calibrer"
-
-msgid "Invalid temperature"
-msgstr "Température incorrecte"
+#, fuzzy
+msgid "Invalid Number"
+msgstr "Nombre invalide"
 
 msgid "Password"
 msgstr "Mot de passe"
@@ -373,6 +379,9 @@ msgstr "Référence"
 
 msgid "Add profile"
 msgstr "Ajouter un profil"
+
+msgid "Calibrate"
+msgstr "Calibrer"
 
 msgid "Clear"
 msgstr "Effacer"
@@ -676,10 +685,14 @@ msgstr "Lancer un étalonnage PID pour :"
 
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr ""
-"Cela peut prendre plus de 5 minutes en fonction de la puissance du chauffage."
+"Cela peut prendre plus de 5 minutes en fonction de la puissance du "
+"chauffage."
 
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
+
+msgid "Invalid temperature"
+msgstr "Température incorrecte"
 
 msgid "Home"
 msgstr "Accueil"
@@ -825,32 +838,92 @@ msgstr "Réessayer"
 msgid "Power On Printer"
 msgstr "Allumer l'imprimante"
 
-msgid "ID"
-msgstr "ID"
+#, fuzzy
+msgid "Spool editor"
+msgstr "Éditeur de bobine"
 
-msgid "Last Used"
-msgstr "Dernière utilisation"
+#, fuzzy
+msgid "No spool selected"
+msgstr "Aucune bobine sélectionnée"
+
+#, fuzzy
+msgid "Measured weight"
+msgstr "Poids mesuré"
+
+#, fuzzy
+msgid "Remaining weight"
+msgstr "Poids restant"
+
+#, fuzzy
+msgid "Initial weight"
+msgstr "Poids initial"
+
+#, fuzzy
+msgid "Empty weight"
+msgstr "Poids du tube"
+
+#, fuzzy
+msgid "Invalid weight"
+msgstr "Poids invalide"
+
+#, fuzzy
+msgid "Restore"
+msgstr "Restaurer"
+
+#, fuzzy
+msgid "No"
+msgstr "Non"
+
+#, fuzzy
+msgid "Yes"
+msgstr "Oui"
+
+#, fuzzy
+msgid "Vendor"
+msgstr "Fabricant"
+
+msgid "Material"
+msgstr "Matériau"
+
+#, fuzzy
+msgid "Used"
+msgstr "Utilisé"
+
+#, fuzzy
+msgid "Location"
+msgstr "Emplacement"
 
 msgid "Archived"
 msgstr "Archivé"
 
-msgid "Filter"
-msgstr "Filtre"
-
-msgid "Material"
-msgstr "Matériau"
+#, fuzzy
+msgid "Price"
+msgstr "Prix"
 
 #, fuzzy
 msgid "Comment"
 msgstr "Commentaire"
 
 #, fuzzy
-msgid "Last used"
-msgstr "Dernière utilisation"
+msgid "Measured weight is below empty spool weight"
+msgstr "Le poids mesuré est inférieur au poids du tube vide"
 
 #, fuzzy
-msgid "Remaining weight"
-msgstr "Poids restant"
+msgid "Value must be positive"
+msgstr "La valeur doit être positive"
+
+msgid "Error updating filament weight"
+msgstr "Erreur lors de la mise à jour du poids du filament"
+
+#, fuzzy
+msgid "Filament weight updated"
+msgstr "Poids du filament mis à jour"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Filter"
+msgstr "Filtre"
 
 #, fuzzy
 msgid "Remaining length"
@@ -867,9 +940,6 @@ msgstr "Erreur d'effacement de la bobine active"
 
 msgid "Error setting active spool"
 msgstr "Erreur de réglage de la bobine active"
-
-msgid "Error getting active spool"
-msgstr "Erreur d'obtention de la bobine active"
 
 msgid "No info available"
 msgstr "Pas d'information disponible"
@@ -991,6 +1061,10 @@ msgstr "Minimum :"
 msgid "System:"
 msgstr "Système:"
 
+#, fuzzy
+msgid "Initializing KlipperScreen"
+msgstr "Initialisation de KlipperScreen"
+
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr ""
 "Fournissez le fichier KlipperScreen.log lorsque vous demandez de l'aide.\n"
@@ -1002,11 +1076,12 @@ msgstr "Fermer"
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS a échoué et a été désactivé"
 
-msgid "Cannot connect to Moonraker"
-msgstr "Ne peut pas se connecter à Moonraker"
+#, fuzzy
+msgid "Moonraker Connected"
+msgstr "Moonraker connecté"
 
-msgid "Lost Connection to Moonraker"
-msgstr "Perte de connexion avec Moonraker"
+msgid "Retrying"
+msgstr "Réessaye"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper s'est déconnecté"
@@ -1045,11 +1120,32 @@ msgstr ""
 msgid "Temperature too low to extrude"
 msgstr "Température d'extrusion trop basse"
 
-msgid "Retrying"
-msgstr "Réessaye"
+#, fuzzy
+msgid "Waiting for Moonraker Websocket to close"
+msgstr "En attente de la fermeture du websocket Moonraker"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker : connecté"
+
+#, fuzzy
+msgid "Initializing Klipper Connection"
+msgstr "Initialisation de la connexion Klipper"
+
+#~ msgid "Last Used"
+#~ msgstr "Dernière utilisation"
+
+#, fuzzy
+#~ msgid "Last used"
+#~ msgstr "Dernière utilisation"
+
+#~ msgid "Error getting active spool"
+#~ msgstr "Erreur d'obtention de la bobine active"
+
+#~ msgid "Cannot connect to Moonraker"
+#~ msgstr "Ne peut pas se connecter à Moonraker"
+
+#~ msgid "Lost Connection to Moonraker"
+#~ msgstr "Perte de connexion avec Moonraker"
 
 #~ msgid "Max:"
 #~ msgstr "Max :"

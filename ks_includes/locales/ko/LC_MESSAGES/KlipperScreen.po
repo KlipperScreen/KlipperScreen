@@ -3,12 +3,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 22:27-0300\n"
+"POT-Creation-Date: 2026-05-15 20:01-0300\n"
 "PO-Revision-Date: 2024-07-06 14:10+0900\n"
-"Last-Translator: ElectricalBoy "
-"<15651807+ElectricalBoy@users.noreply.github.com>\n"
-"Language-Team: Korean <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/ko/>\n"
+"Last-Translator: ElectricalBoy <15651807+ElectricalBoy@users.noreply.github.com>\n"
+"Language-Team: Korean <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -254,6 +252,18 @@ msgstr "커서 표시"
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr "마우스 제어 또는 터치스크린 정확도 확인용"
 
+#, fuzzy
+msgid "Screen wake delay"
+msgstr "화면 대기 시간"
+
+#, fuzzy
+msgid "Helps to prevent unwanted touchs during screen wake up"
+msgstr "화면이 깨어날 때 원치 않는 터치 방지"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "초"
+
 msgid "Invert X"
 msgstr "X축 반전"
 
@@ -286,10 +296,6 @@ msgstr "비상정지 시키겠습니까?"
 msgid "day"
 msgid_plural "days"
 msgstr[0] "일"
-
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "초"
 
 msgid "Network not found"
 msgstr "네트워크를 찾을 수 없음"
@@ -330,12 +336,9 @@ msgstr "연결 실패"
 msgid "No mesh has been loaded"
 msgstr "메쉬가 로드되지 않았습니다"
 
-msgid "Calibrate"
-msgstr "교정"
-
 #, fuzzy
-msgid "Invalid temperature"
-msgstr "잘못된 온도"
+msgid "Invalid Number"
+msgstr "잘못된 숫자"
 
 #, fuzzy
 msgid "Password"
@@ -384,6 +387,9 @@ msgstr "참조"
 
 msgid "Add profile"
 msgstr "프로파일 추가"
+
+msgid "Calibrate"
+msgstr "교정"
 
 msgid "Clear"
 msgstr "초기화"
@@ -692,6 +698,10 @@ msgstr "히터에 따라 5분 이상 걸릴 수 있습니다."
 msgid "Temp (°C)"
 msgstr "온도 (°C)"
 
+#, fuzzy
+msgid "Invalid temperature"
+msgstr "잘못된 온도"
+
 msgid "Home"
 msgstr "원점 이동"
 
@@ -842,32 +852,93 @@ msgstr "재시도"
 msgid "Power On Printer"
 msgstr "프린터 전원 켜기"
 
-msgid "ID"
-msgstr "아이디"
+#, fuzzy
+msgid "Spool editor"
+msgstr "스풀 편집기"
 
-msgid "Last Used"
-msgstr "마지막으로 사용"
+#, fuzzy
+msgid "No spool selected"
+msgstr "스풀이 선택되지 않음"
+
+#, fuzzy
+msgid "Measured weight"
+msgstr "측정된 무게"
+
+#, fuzzy
+msgid "Remaining weight"
+msgstr "남은 중량"
+
+#, fuzzy
+msgid "Initial weight"
+msgstr "초기 무게"
+
+#, fuzzy
+msgid "Empty weight"
+msgstr "빈 무게"
+
+#, fuzzy
+msgid "Invalid weight"
+msgstr "잘못된 무게"
+
+#, fuzzy
+msgid "Restore"
+msgstr "복원"
+
+#, fuzzy
+msgid "No"
+msgstr "아니요"
+
+#, fuzzy
+msgid "Yes"
+msgstr "예"
+
+#, fuzzy
+msgid "Vendor"
+msgstr "제조사"
+
+msgid "Material"
+msgstr "재료"
+
+#, fuzzy
+msgid "Used"
+msgstr "사용 중"
+
+#, fuzzy
+msgid "Location"
+msgstr "위치"
 
 msgid "Archived"
 msgstr "저장됨"
 
-msgid "Filter"
-msgstr "필터"
-
-msgid "Material"
-msgstr "재료"
+#, fuzzy
+msgid "Price"
+msgstr "가격"
 
 #, fuzzy
 msgid "Comment"
 msgstr "주석"
 
 #, fuzzy
-msgid "Last used"
-msgstr "마지막 사용"
+msgid "Measured weight is below empty spool weight"
+msgstr "측정된 무게가 빈 스플 무게보다 낮습니다"
 
 #, fuzzy
-msgid "Remaining weight"
-msgstr "남은 중량"
+msgid "Value must be positive"
+msgstr "값은 양수여야 합니다"
+
+#, fuzzy
+msgid "Error updating filament weight"
+msgstr "필라멘트 무게 업데이트 오류"
+
+#, fuzzy
+msgid "Filament weight updated"
+msgstr "필라멘트 무게가 업데이트되었습니다"
+
+msgid "ID"
+msgstr "아이디"
+
+msgid "Filter"
+msgstr "필터"
 
 #, fuzzy
 msgid "Remaining length"
@@ -884,9 +955,6 @@ msgstr "활성 스풀 제거 중 오류 발생"
 
 msgid "Error setting active spool"
 msgstr "활성 스풀 설정 중 오류 발생"
-
-msgid "Error getting active spool"
-msgstr "활성 스풀을 가져오는 중 오류 발생"
 
 #, fuzzy
 msgid "No info available"
@@ -1007,6 +1075,10 @@ msgstr "최소:"
 msgid "System:"
 msgstr "시스템:"
 
+#, fuzzy
+msgid "Initializing KlipperScreen"
+msgstr "KlipperScreen 초기화 중"
+
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "도움을 요청할 때 KlipperScreen.log를 제공하십시오.\n"
 
@@ -1017,11 +1089,12 @@ msgstr "닫기"
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS 실패로 인해 비활성화되었습니다"
 
-msgid "Cannot connect to Moonraker"
-msgstr "문래이커에 연결할 수 없음"
+#, fuzzy
+msgid "Moonraker Connected"
+msgstr "Moonraker 연결됨"
 
-msgid "Lost Connection to Moonraker"
-msgstr "문레이커와 연결이 끊어졌습니다"
+msgid "Retrying"
+msgstr "재시도 중"
 
 msgid "Klipper has disconnected"
 msgstr "클리퍼와 연결이 끊어졌습니다"
@@ -1053,18 +1126,38 @@ msgstr "'rename_existing'을(를) 사용하는 매크로가 숨겨집니다"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT는 숨겨져 있으므로 압출에서 사용해야 합니다"
+msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT는 숨겨져 있으므로 압출에서 사용해야 합니다"
 
 #, fuzzy
 msgid "Temperature too low to extrude"
 msgstr "압출하기에 온도가 너무 낮음"
 
-msgid "Retrying"
-msgstr "재시도 중"
+#, fuzzy
+msgid "Waiting for Moonraker Websocket to close"
+msgstr "Moonraker WebSocket이 닫히기를 기다리는 중"
 
 msgid "Moonraker: connected"
 msgstr "문래이커: 연결됨"
+
+#, fuzzy
+msgid "Initializing Klipper Connection"
+msgstr "Klipper 연결 초기화 중"
+
+#~ msgid "Last Used"
+#~ msgstr "마지막으로 사용"
+
+#, fuzzy
+#~ msgid "Last used"
+#~ msgstr "마지막 사용"
+
+#~ msgid "Error getting active spool"
+#~ msgstr "활성 스풀을 가져오는 중 오류 발생"
+
+#~ msgid "Cannot connect to Moonraker"
+#~ msgstr "문래이커에 연결할 수 없음"
+
+#~ msgid "Lost Connection to Moonraker"
+#~ msgstr "문레이커와 연결이 끊어졌습니다"
 
 #~ msgid "Max:"
 #~ msgstr "최대:"

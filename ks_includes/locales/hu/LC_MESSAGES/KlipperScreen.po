@@ -3,11 +3,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 22:27-0300\n"
+"POT-Creation-Date: 2026-05-15 20:01-0300\n"
 "PO-Revision-Date: 2024-11-29 19:00+0000\n"
 "Last-Translator: \"Zs.Antal\" <antonio092130@icloud.com>\n"
-"Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/hu/>\n"
+"Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -241,6 +240,19 @@ msgstr "Kurzor mutatása"
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr "Egérvezérlés vagy az érintőképernyő pontosságának ellenőrzése"
 
+#, fuzzy
+msgid "Screen wake delay"
+msgstr "Képernyő ébresztési késleltetés"
+
+#, fuzzy
+msgid "Helps to prevent unwanted touchs during screen wake up"
+msgstr "Segít megelőzni a nem kívánt érintéseket a képernyő ébresztése során"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "másodperc"
+msgstr[1] "másodperc"
+
 msgid "Invert X"
 msgstr "Fordított X"
 
@@ -276,11 +288,6 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] "nap"
 msgstr[1] "napok"
-
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "másodperc"
-msgstr[1] "másodperc"
 
 msgid "Network not found"
 msgstr "Nem található hálózat"
@@ -321,11 +328,9 @@ msgstr "Kapcsolat sikertelen"
 msgid "No mesh has been loaded"
 msgstr "Nincs háló betöltve"
 
-msgid "Calibrate"
-msgstr "Kalibrálás"
-
-msgid "Invalid temperature"
-msgstr "Rossz hőmérséklet"
+#, fuzzy
+msgid "Invalid Number"
+msgstr "Érvénytelen szám"
 
 msgid "Password"
 msgstr "Jelszó"
@@ -368,6 +373,9 @@ msgstr "Referencia"
 
 msgid "Add profile"
 msgstr "Profil hozzáadása"
+
+msgid "Calibrate"
+msgstr "Kalibrálás"
 
 msgid "Clear"
 msgstr "Tisztítás"
@@ -675,6 +683,9 @@ msgstr "A fűtés teljesítményétől függően több mint 5 percig tarthat."
 msgid "Temp (°C)"
 msgstr "Hőfok (°C)"
 
+msgid "Invalid temperature"
+msgstr "Rossz hőmérséklet"
+
 msgid "Home"
 msgstr "Kezdőpontok"
 
@@ -819,32 +830,93 @@ msgstr "Újra"
 msgid "Power On Printer"
 msgstr "Nyomtató bekapcsolása"
 
-msgid "ID"
-msgstr "ID"
+#, fuzzy
+msgid "Spool editor"
+msgstr "Tekercs szerkesztő"
 
-msgid "Last Used"
-msgstr "Utoljára használt"
+#, fuzzy
+msgid "No spool selected"
+msgstr "Nincs kiválasztott tekercs"
+
+#, fuzzy
+msgid "Measured weight"
+msgstr "Mért súly"
+
+#, fuzzy
+msgid "Remaining weight"
+msgstr "Hátralévő súly"
+
+#, fuzzy
+msgid "Initial weight"
+msgstr "Kezdeti súly"
+
+#, fuzzy
+msgid "Empty weight"
+msgstr "Üres súly"
+
+#, fuzzy
+msgid "Invalid weight"
+msgstr "Érvénytelen súly"
+
+#, fuzzy
+msgid "Restore"
+msgstr "Visszaállítás"
+
+#, fuzzy
+msgid "No"
+msgstr "Nem"
+
+#, fuzzy
+msgid "Yes"
+msgstr "Igen"
+
+#, fuzzy
+msgid "Vendor"
+msgstr "Gyártó"
+
+msgid "Material"
+msgstr "Anyag"
+
+#, fuzzy
+msgid "Used"
+msgstr "Használt"
+
+#, fuzzy
+msgid "Location"
+msgstr "Hely"
 
 msgid "Archived"
 msgstr "Archivált"
 
-msgid "Filter"
-msgstr "Szűrő"
-
-msgid "Material"
-msgstr "Anyag"
+#, fuzzy
+msgid "Price"
+msgstr "Ár"
 
 #, fuzzy
 msgid "Comment"
 msgstr "Megjegyzés"
 
 #, fuzzy
-msgid "Last used"
-msgstr "Utoljára használt"
+msgid "Measured weight is below empty spool weight"
+msgstr "A mért súly az üres tekercs súly alatt van"
 
 #, fuzzy
-msgid "Remaining weight"
-msgstr "Hátralévő súly"
+msgid "Value must be positive"
+msgstr "Az értéknek pozitívnak kell lennie"
+
+#, fuzzy
+msgid "Error updating filament weight"
+msgstr "Hiba a filamentsúly frissítésekor"
+
+#, fuzzy
+msgid "Filament weight updated"
+msgstr "Filamentsúly frissítve"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Filter"
+msgstr "Szűrő"
 
 #, fuzzy
 msgid "Remaining length"
@@ -861,9 +933,6 @@ msgstr "Hiba az aktív tekercs törlésekor"
 
 msgid "Error setting active spool"
 msgstr "Hiba az aktív tekercs beállításakor"
-
-msgid "Error getting active spool"
-msgstr "Hiba az aktív tekercs lekérésekor"
 
 msgid "No info available"
 msgstr "Nincs információ"
@@ -985,6 +1054,10 @@ msgstr "Minimum:"
 msgid "System:"
 msgstr "Rendszer:"
 
+#, fuzzy
+msgid "Initializing KlipperScreen"
+msgstr "KlipperScreen inicializálása"
+
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "Csatold a KlipperScreen.log-ot, amikor segítséget kérsz.\n"
 
@@ -995,11 +1068,12 @@ msgstr "Bezárás"
 msgid "DPMS has failed and has been disabled"
 msgstr "A DPMS sikertelen volt, és letiltásra került"
 
-msgid "Cannot connect to Moonraker"
-msgstr "Nem lehet csatlakozni a Moonrakerhez"
+#, fuzzy
+msgid "Moonraker Connected"
+msgstr "Moonraker csatlakoztatva"
 
-msgid "Lost Connection to Moonraker"
-msgstr "Megszakadt a kapcsolat a Moonraker-el"
+msgid "Retrying"
+msgstr "Újrapróbálkozás"
 
 msgid "Klipper has disconnected"
 msgstr "A Klipper szétkapcsolt"
@@ -1037,11 +1111,32 @@ msgstr ""
 msgid "Temperature too low to extrude"
 msgstr "Extrudálási hőmérséklet túl alacsony"
 
-msgid "Retrying"
-msgstr "Újrapróbálkozás"
+#, fuzzy
+msgid "Waiting for Moonraker Websocket to close"
+msgstr "Várakozás a Moonraker Websocket bezárására"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: csatlakoztatva"
+
+#, fuzzy
+msgid "Initializing Klipper Connection"
+msgstr "Klipper kapcsolat inicializálása"
+
+#~ msgid "Last Used"
+#~ msgstr "Utoljára használt"
+
+#, fuzzy
+#~ msgid "Last used"
+#~ msgstr "Utoljára használt"
+
+#~ msgid "Error getting active spool"
+#~ msgstr "Hiba az aktív tekercs lekérésekor"
+
+#~ msgid "Cannot connect to Moonraker"
+#~ msgstr "Nem lehet csatlakozni a Moonrakerhez"
+
+#~ msgid "Lost Connection to Moonraker"
+#~ msgstr "Megszakadt a kapcsolat a Moonraker-el"
 
 #~ msgid "Max:"
 #~ msgstr "Max:"
@@ -1101,8 +1196,8 @@ msgstr "Moonraker: csatlakoztatva"
 #~ "Not supported for auto-detection, it needs to be configured in "
 #~ "klipperscreen.conf"
 #~ msgstr ""
-#~ "Az automatikus felismerés nem támogatott, ezt a klipperscreen.conf "
-#~ "fájlban kell beállítani."
+#~ "Az automatikus felismerés nem támogatott, ezt a klipperscreen.conf fájlban "
+#~ "kell beállítani."
 
 #~ msgid "Unknown screw position"
 #~ msgstr "Ismeretlen csavarhelyzet"

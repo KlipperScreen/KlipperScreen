@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 22:27-0300\n"
+"POT-Creation-Date: 2026-05-15 20:01-0300\n"
 "PO-Revision-Date: 2026-04-25 14:09+0000\n"
 "Last-Translator: Niolay Danov <nikdan@abv.bg>\n"
-"Language-Team: Bulgarian <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/bg/>\n"
+"Language-Team: Bulgarian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -246,6 +245,20 @@ msgstr "Показване на курсора"
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr "За управление с мишка или за проверка на точността на сензорния екран"
 
+#, fuzzy
+msgid "Screen wake delay"
+msgstr "Забавяне на събуждане на екрана"
+
+#, fuzzy
+msgid "Helps to prevent unwanted touchs during screen wake up"
+msgstr ""
+"Помага за предотвратяване на нежелани докосвания при събуждане на екрана"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "секунда"
+msgstr[1] "секунди"
+
 msgid "Invert X"
 msgstr "Инверсиране X"
 
@@ -281,11 +294,6 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] "ден"
 msgstr[1] "дни"
-
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "секунда"
-msgstr[1] "секунди"
 
 msgid "Network not found"
 msgstr "Мрежата не е намерена"
@@ -326,11 +334,9 @@ msgstr "Връзката е неуспешна"
 msgid "No mesh has been loaded"
 msgstr "Не е заредена мрежа"
 
-msgid "Calibrate"
-msgstr "Калибриране"
-
-msgid "Invalid temperature"
-msgstr "Невалидна температура"
+#, fuzzy
+msgid "Invalid Number"
+msgstr "Невалиден номер"
 
 msgid "Password"
 msgstr "Паролата"
@@ -373,6 +379,9 @@ msgstr "Връзка"
 
 msgid "Add profile"
 msgstr "Добавете профил"
+
+msgid "Calibrate"
+msgstr "Калибриране"
 
 msgid "Clear"
 msgstr "Изчисти"
@@ -681,6 +690,9 @@ msgstr ""
 msgid "Temp (°C)"
 msgstr "Темп (°С)"
 
+msgid "Invalid temperature"
+msgstr "Невалидна температура"
+
 msgid "Home"
 msgstr "Паркирай X"
 
@@ -824,29 +836,91 @@ msgstr "Повтори"
 msgid "Power On Printer"
 msgstr "Вкл. принтера"
 
-msgid "ID"
-msgstr "ID"
+#, fuzzy
+msgid "Spool editor"
+msgstr "Редактор на макарони"
 
-msgid "Last Used"
-msgstr "Използване на филамента"
+#, fuzzy
+msgid "No spool selected"
+msgstr "Няма избрана макара"
 
-msgid "Archived"
-msgstr "Архивирано"
+#, fuzzy
+msgid "Measured weight"
+msgstr "Измерено тегло"
 
-msgid "Filter"
-msgstr "Филтър"
+msgid "Remaining weight"
+msgstr "Оставащо тегло"
+
+#, fuzzy
+msgid "Initial weight"
+msgstr "Начално тегло"
+
+#, fuzzy
+msgid "Empty weight"
+msgstr "Тегло на празната макара"
+
+#, fuzzy
+msgid "Invalid weight"
+msgstr "Невалидно тегло"
+
+#, fuzzy
+msgid "Restore"
+msgstr "Възстанови"
+
+#, fuzzy
+msgid "No"
+msgstr "Не"
+
+#, fuzzy
+msgid "Yes"
+msgstr "Да"
+
+#, fuzzy
+msgid "Vendor"
+msgstr "Производител"
 
 msgid "Material"
 msgstr "Материал"
 
+#, fuzzy
+msgid "Used"
+msgstr "Използвано"
+
+#, fuzzy
+msgid "Location"
+msgstr "Местоположение"
+
+msgid "Archived"
+msgstr "Архивирано"
+
+#, fuzzy
+msgid "Price"
+msgstr "Цена"
+
 msgid "Comment"
 msgstr "Коментар"
 
-msgid "Last used"
-msgstr "Последно използвано"
+#, fuzzy
+msgid "Measured weight is below empty spool weight"
+msgstr "Измереното тегло е под теглото на празната макара"
 
-msgid "Remaining weight"
-msgstr "Оставащо тегло"
+#, fuzzy
+msgid "Value must be positive"
+msgstr "Стойността трябва да е положителна"
+
+#, fuzzy
+msgid "Error updating filament weight"
+msgstr "Грешка при актуализиране на теглото на филамента"
+
+#, fuzzy
+msgid "Filament weight updated"
+msgstr "Теглото на филамента е актуализирано"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Filter"
+msgstr "Филтър"
 
 msgid "Remaining length"
 msgstr "Оставаща дължина"
@@ -862,9 +936,6 @@ msgstr "Грешка при изчистване на активния спул"
 
 msgid "Error setting active spool"
 msgstr "Грешка при настройване на активен спул"
-
-msgid "Error getting active spool"
-msgstr "Грешка при активиране на спула"
 
 msgid "No info available"
 msgstr "Няма налична информация"
@@ -984,6 +1055,10 @@ msgstr "Минимум:"
 msgid "System:"
 msgstr "Система:"
 
+#, fuzzy
+msgid "Initializing KlipperScreen"
+msgstr "Инициализиране на KlipperScreen"
+
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "Осигурете KlipperScreen.log, когато поискате помощ.\n"
 
@@ -993,11 +1068,12 @@ msgstr "Затваряне"
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS се провали и е деактивиран"
 
-msgid "Cannot connect to Moonraker"
-msgstr "Не може да се свърже с Moonraker"
+#, fuzzy
+msgid "Moonraker Connected"
+msgstr "Moonraker свързан"
 
-msgid "Lost Connection to Moonraker"
-msgstr "Не може да се свърже с Moonraker"
+msgid "Retrying"
+msgstr "Повторен опит"
 
 msgid "Klipper has disconnected"
 msgstr "Няма връзка с Klipper"
@@ -1035,11 +1111,31 @@ msgstr ""
 msgid "Temperature too low to extrude"
 msgstr "Температурата е твърде ниска за екструдиране"
 
-msgid "Retrying"
-msgstr "Повторен опит"
+#, fuzzy
+msgid "Waiting for Moonraker Websocket to close"
+msgstr "Изчакване на затваряне на WebSocket на Moonraker"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: Свързан"
+
+#, fuzzy
+msgid "Initializing Klipper Connection"
+msgstr "Инициализиране на връзка с Klipper"
+
+#~ msgid "Last Used"
+#~ msgstr "Използване на филамента"
+
+#~ msgid "Last used"
+#~ msgstr "Последно използвано"
+
+#~ msgid "Error getting active spool"
+#~ msgstr "Грешка при активиране на спула"
+
+#~ msgid "Cannot connect to Moonraker"
+#~ msgstr "Не може да се свърже с Moonraker"
+
+#~ msgid "Lost Connection to Moonraker"
+#~ msgstr "Не може да се свърже с Moonraker"
 
 #~ msgid "Max:"
 #~ msgstr "Макс:"

@@ -7,17 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 22:27-0300\n"
+"POT-Creation-Date: 2026-05-15 20:01-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Dominik <dominik.sostar@gmail.com>\n"
-"Language-Team: Slovenian <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/sl/>\n"
+"Language-Team: Slovenian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 5.5-dev\n"
 
 msgid "Main Menu"
@@ -264,6 +262,22 @@ msgstr "Prikaži kazalec"
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr "Za upravljanje z miško ali preverjanje natančnosti zaslona na dotik"
 
+#, fuzzy
+msgid "Screen wake delay"
+msgstr "Zakasna pribuditev zaslona"
+
+#, fuzzy
+msgid "Helps to prevent unwanted touchs during screen wake up"
+msgstr "Preprečuje neželene dotike med pribuditvijo zaslona"
+
+#, fuzzy
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "sekunda"
+msgstr[1] "sekundi"
+msgstr[2] "sekund"
+msgstr[3] "sekund"
+
 msgid "Invert X"
 msgstr "Zrcali X"
 
@@ -306,14 +320,6 @@ msgstr[0] "dan"
 msgstr[1] "dneva"
 msgstr[2] "dni"
 msgstr[3] "dni"
-
-#, fuzzy
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "sekunda"
-msgstr[1] "sekundi"
-msgstr[2] "sekund"
-msgstr[3] "sekund"
 
 #, fuzzy
 msgid "Network not found"
@@ -364,12 +370,9 @@ msgstr "Povezava ni uspela"
 msgid "No mesh has been loaded"
 msgstr "Mreža ni naložena"
 
-msgid "Calibrate"
-msgstr "Umerite"
-
 #, fuzzy
-msgid "Invalid temperature"
-msgstr "Neveljavna temperatura"
+msgid "Invalid Number"
+msgstr "Neveljavna številka"
 
 #, fuzzy
 msgid "Password"
@@ -419,6 +422,9 @@ msgstr "Referenca"
 
 msgid "Add profile"
 msgstr "Dodaj profil"
+
+msgid "Calibrate"
+msgstr "Umerite"
 
 msgid "Clear"
 msgstr "Počisti"
@@ -742,6 +748,10 @@ msgstr "Lahko traja več kot 5 minut, odvisno od moči grelnika."
 msgid "Temp (°C)"
 msgstr "Temperatura (°C)"
 
+#, fuzzy
+msgid "Invalid temperature"
+msgstr "Neveljavna temperatura"
+
 msgid "Home"
 msgstr "Nuliraj"
 
@@ -901,32 +911,93 @@ msgstr "Poskusi znova"
 msgid "Power On Printer"
 msgstr "Vklopite tiskalnik"
 
-msgid "ID"
-msgstr "ID"
+#, fuzzy
+msgid "Spool editor"
+msgstr "Urejevalnik špul"
 
-msgid "Last Used"
-msgstr "Nazadnje uporabljeno"
+#, fuzzy
+msgid "No spool selected"
+msgstr "Izbrana ni nobena špula"
+
+#, fuzzy
+msgid "Measured weight"
+msgstr "Izmerjena teža"
+
+#, fuzzy
+msgid "Remaining weight"
+msgstr "Preostala teža"
+
+#, fuzzy
+msgid "Initial weight"
+msgstr "Začetna teža"
+
+#, fuzzy
+msgid "Empty weight"
+msgstr "Teža prazne špule"
+
+#, fuzzy
+msgid "Invalid weight"
+msgstr "Neveljavna teža"
+
+#, fuzzy
+msgid "Restore"
+msgstr "Obnovi"
+
+#, fuzzy
+msgid "No"
+msgstr "Ne"
+
+#, fuzzy
+msgid "Yes"
+msgstr "Da"
+
+#, fuzzy
+msgid "Vendor"
+msgstr "Proizvajalec"
+
+msgid "Material"
+msgstr "Materijal"
+
+#, fuzzy
+msgid "Used"
+msgstr "Uporabljeno"
+
+#, fuzzy
+msgid "Location"
+msgstr "Lokacija"
 
 msgid "Archived"
 msgstr "Arhivirano"
 
-msgid "Filter"
-msgstr "Filter"
-
-msgid "Material"
-msgstr "Materijal"
+#, fuzzy
+msgid "Price"
+msgstr "Cena"
 
 #, fuzzy
 msgid "Comment"
 msgstr "Komentar"
 
 #, fuzzy
-msgid "Last used"
-msgstr "Zadnja uporaba"
+msgid "Measured weight is below empty spool weight"
+msgstr "Izmerjena teža je pod težo prazne špule"
 
 #, fuzzy
-msgid "Remaining weight"
-msgstr "Preostala teža"
+msgid "Value must be positive"
+msgstr "Vrednost mora biti pozitivna"
+
+#, fuzzy
+msgid "Error updating filament weight"
+msgstr "Napaka posodobitve teže filamenta"
+
+#, fuzzy
+msgid "Filament weight updated"
+msgstr "Teža filamenta posodobljena"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Filter"
+msgstr "Filter"
 
 #, fuzzy
 msgid "Remaining length"
@@ -946,10 +1017,6 @@ msgstr "Napaka pri brisanju aktivnega vretenca"
 #, fuzzy
 msgid "Error setting active spool"
 msgstr "Napaka pri nastavljanju aktivnega vretenca"
-
-#, fuzzy
-msgid "Error getting active spool"
-msgstr "Napaka pri pridobivanju aktivnega vretenca"
 
 #, fuzzy
 msgid "No info available"
@@ -1084,6 +1151,10 @@ msgstr "Min:"
 msgid "System:"
 msgstr "Sistem:"
 
+#, fuzzy
+msgid "Initializing KlipperScreen"
+msgstr "Inicializacija KlipperScreen"
+
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "Ko prosite za pomoč, navedite KlipperScreen.log.\n"
 
@@ -1094,11 +1165,12 @@ msgstr "Zapri"
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS je spodletel in onemogočen"
 
-msgid "Cannot connect to Moonraker"
-msgstr "Ne morem se povezati z Moonrakerjem"
+#, fuzzy
+msgid "Moonraker Connected"
+msgstr "Moonraker povezan"
 
-msgid "Lost Connection to Moonraker"
-msgstr "Izgubljena poveza z Moonrakerjem"
+msgid "Retrying"
+msgstr "Poskušam znova"
 
 msgid "Klipper has disconnected"
 msgstr "Poveza s Klipperjem je prekinjena"
@@ -1139,11 +1211,33 @@ msgstr ""
 msgid "Temperature too low to extrude"
 msgstr "Temperatura prenizka za ekstruzijo"
 
-msgid "Retrying"
-msgstr "Poskušam znova"
+#, fuzzy
+msgid "Waiting for Moonraker Websocket to close"
+msgstr "Čakanje na zaprtje Moonraker WebSocket"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: povezan"
+
+#, fuzzy
+msgid "Initializing Klipper Connection"
+msgstr "Inicializacija povezave z Klipperjem"
+
+#~ msgid "Last Used"
+#~ msgstr "Nazadnje uporabljeno"
+
+#, fuzzy
+#~ msgid "Last used"
+#~ msgstr "Zadnja uporaba"
+
+#, fuzzy
+#~ msgid "Error getting active spool"
+#~ msgstr "Napaka pri pridobivanju aktivnega vretenca"
+
+#~ msgid "Cannot connect to Moonraker"
+#~ msgstr "Ne morem se povezati z Moonrakerjem"
+
+#~ msgid "Lost Connection to Moonraker"
+#~ msgstr "Izgubljena poveza z Moonrakerjem"
 
 #~ msgid "Password saved"
 #~ msgstr "Geslo shranjeno"

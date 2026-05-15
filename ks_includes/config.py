@@ -495,7 +495,7 @@ class KlipperScreenConfig:
             {
                 "screensaver_wake_delay": {
                     "section": "main",
-                    "name": _("Screensaver wake delay"),
+                    "name": _("Screen wake delay"),
                     "type": "dropdown",
                     "tooltip": _("Helps to prevent unwanted touchs during screen wake up"),
                     "value": "0",

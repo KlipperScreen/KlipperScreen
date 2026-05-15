@@ -3,11 +3,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 22:27-0300\n"
+"POT-Creation-Date: 2026-05-15 20:01-0300\n"
 "PO-Revision-Date: 2024-08-12 07:09+0000\n"
 "Last-Translator: Hiep Nguyen <tanhiep26@gmail.com>\n"
-"Language-Team: Vietnamese <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/vi/>\n"
+"Language-Team: Vietnamese <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/vi/>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -245,6 +244,18 @@ msgstr "Hiển thị con trỏ"
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr "Để điều khiển chuột hoặc xác nhận độ chính xác cảm ứng"
 
+#, fuzzy
+msgid "Screen wake delay"
+msgstr "Độ trễ đánh thức màn hình"
+
+#, fuzzy
+msgid "Helps to prevent unwanted touchs during screen wake up"
+msgstr "Giúp ngăn các chạm không mong muốn khi màn hình đánh thức"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "giây"
+
 msgid "Invert X"
 msgstr "Đảo ngược trục X"
 
@@ -277,10 +288,6 @@ msgstr "Bạn có chắc chắn muốn chạy Dừng Khẩn cấp không?"
 msgid "day"
 msgid_plural "days"
 msgstr[0] "ngày"
-
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "giây"
 
 #, fuzzy
 msgid "Network not found"
@@ -328,12 +335,9 @@ msgstr "Kết nối thất bại"
 msgid "No mesh has been loaded"
 msgstr "Không có lưới nào được tải"
 
-msgid "Calibrate"
-msgstr "Hiệu chuẩn"
-
 #, fuzzy
-msgid "Invalid temperature"
-msgstr "Nhiệt độ không hợp lệ"
+msgid "Invalid Number"
+msgstr "Số không hợp lệ"
 
 #, fuzzy
 msgid "Password"
@@ -379,6 +383,9 @@ msgstr "Tham chiếu"
 
 msgid "Add profile"
 msgstr "Thêm hồ sơ"
+
+msgid "Calibrate"
+msgstr "Hiệu chuẩn"
 
 msgid "Clear"
 msgstr "Xóa"
@@ -695,6 +702,10 @@ msgstr "Có thể mất hơn 5 phút tùy thuộc vào công suất máy sưởi
 msgid "Temp (°C)"
 msgstr "Nhiệt độ (°C)"
 
+#, fuzzy
+msgid "Invalid temperature"
+msgstr "Nhiệt độ không hợp lệ"
+
 msgid "Home"
 msgstr "Home"
 
@@ -849,32 +860,93 @@ msgstr "Thử lại"
 msgid "Power On Printer"
 msgstr "Bật nguồn máy in"
 
-msgid "ID"
-msgstr "ID"
+#, fuzzy
+msgid "Spool editor"
+msgstr "Trình chỉnh sửa cuộn chỉ"
 
-msgid "Last Used"
-msgstr "Đã sử dụng lần cuối"
+#, fuzzy
+msgid "No spool selected"
+msgstr "Chưa chọn cuộn chỉ"
+
+#, fuzzy
+msgid "Measured weight"
+msgstr "Trọng lượng đo được"
+
+#, fuzzy
+msgid "Remaining weight"
+msgstr "Trọng lượng còn lại"
+
+#, fuzzy
+msgid "Initial weight"
+msgstr "Trọng lượng ban đầu"
+
+#, fuzzy
+msgid "Empty weight"
+msgstr "Trọng lượng cuộn rỗng"
+
+#, fuzzy
+msgid "Invalid weight"
+msgstr "Trọng lượng không hợp lệ"
+
+#, fuzzy
+msgid "Restore"
+msgstr "Khôi phục"
+
+#, fuzzy
+msgid "No"
+msgstr "Không"
+
+#, fuzzy
+msgid "Yes"
+msgstr "Có"
+
+#, fuzzy
+msgid "Vendor"
+msgstr "Nhà cung cấp"
+
+msgid "Material"
+msgstr "Vật liệu"
+
+#, fuzzy
+msgid "Used"
+msgstr "Đã sử dụng"
+
+#, fuzzy
+msgid "Location"
+msgstr "Vị trí"
 
 msgid "Archived"
 msgstr "Đã lưu trữ"
 
-msgid "Filter"
-msgstr "Bộ lọc"
-
-msgid "Material"
-msgstr "Vật liệu"
+#, fuzzy
+msgid "Price"
+msgstr "Giá"
 
 #, fuzzy
 msgid "Comment"
 msgstr "Bình luận"
 
 #, fuzzy
-msgid "Last used"
-msgstr "Sử dụng gần nhất"
+msgid "Measured weight is below empty spool weight"
+msgstr "Trọng lượng đo được nhỏ hơn trọng lượng cuộn rỗng"
 
 #, fuzzy
-msgid "Remaining weight"
-msgstr "Trọng lượng còn lại"
+msgid "Value must be positive"
+msgstr "Giá trị phải là số dương"
+
+#, fuzzy
+msgid "Error updating filament weight"
+msgstr "Lỗi cập nhật trọng lượng chỉ"
+
+#, fuzzy
+msgid "Filament weight updated"
+msgstr "Đã cập nhật trọng lượng chỉ"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Filter"
+msgstr "Bộ lọc"
 
 #, fuzzy
 msgid "Remaining length"
@@ -891,9 +963,6 @@ msgstr "Lỗi khi xóa spool đang hoạt động"
 
 msgid "Error setting active spool"
 msgstr "Lỗi khi đặt spool đang hoạt động"
-
-msgid "Error getting active spool"
-msgstr "Lỗi khi lấy spool đang hoạt động"
 
 #, fuzzy
 msgid "No info available"
@@ -1017,6 +1086,10 @@ msgstr "Tối thiểu:"
 msgid "System:"
 msgstr "Hệ thống:"
 
+#, fuzzy
+msgid "Initializing KlipperScreen"
+msgstr "Đang khởi tạo KlipperScreen"
+
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "Cung cấp KlipperScreen.log khi cần trợ giúp.\n"
 
@@ -1027,11 +1100,12 @@ msgstr "Đóng"
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS gặp lỗi và đã bị tắt"
 
-msgid "Cannot connect to Moonraker"
-msgstr "Không thể kết nối với Moonraker"
+#, fuzzy
+msgid "Moonraker Connected"
+msgstr "Moonraker đã kết nối"
 
-msgid "Lost Connection to Moonraker"
-msgstr "Mất kết nối tới Moonraker"
+msgid "Retrying"
+msgstr "Đang thử lại"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper đã bị ngắt kết nối"
@@ -1069,11 +1143,32 @@ msgstr "Tải/Lấy nhựa ra được ẩn và nên sử dụng từ bảng đi
 msgid "Temperature too low to extrude"
 msgstr "Nhiệt độ quá thấp để đùn"
 
-msgid "Retrying"
-msgstr "Đang thử lại"
+#, fuzzy
+msgid "Waiting for Moonraker Websocket to close"
+msgstr "Đang chờ Moonraker Websocket đóng"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: đã kết nối"
+
+#, fuzzy
+msgid "Initializing Klipper Connection"
+msgstr "Đang khởi tạo kết nối Klipper"
+
+#~ msgid "Last Used"
+#~ msgstr "Đã sử dụng lần cuối"
+
+#, fuzzy
+#~ msgid "Last used"
+#~ msgstr "Sử dụng gần nhất"
+
+#~ msgid "Error getting active spool"
+#~ msgstr "Lỗi khi lấy spool đang hoạt động"
+
+#~ msgid "Cannot connect to Moonraker"
+#~ msgstr "Không thể kết nối với Moonraker"
+
+#~ msgid "Lost Connection to Moonraker"
+#~ msgstr "Mất kết nối tới Moonraker"
 
 #~ msgid "Password saved"
 #~ msgstr "Mật khẩu đã lưu"

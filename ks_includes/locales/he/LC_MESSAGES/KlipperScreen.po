@@ -7,17 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 22:27-0300\n"
+"POT-Creation-Date: 2026-05-15 20:01-0300\n"
 "PO-Revision-Date: 2026-04-23 21:28+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Hebrew <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/he/>\n"
+"Language-Team: Hebrew <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/he/>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
-"n % 10 == 0) ? 2 : 3));\n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && n % 10 == 0) ? 2 : 3));\n"
 "X-Generator: Weblate 5.17.1-dev\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -272,6 +270,22 @@ msgstr "הצג סמן"
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr "לשליטה בעכבר או לאימות דיוק מסך מגע"
 
+#, fuzzy
+msgid "Screen wake delay"
+msgstr "עיכוב התעוררות המסך"
+
+#, fuzzy
+msgid "Helps to prevent unwanted touchs during screen wake up"
+msgstr "מונע מגעים לא רצויים בעת התעוררות המסך"
+
+#, fuzzy
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "שנייה"
+msgstr[1] "שניות"
+msgstr[2] "שניות"
+msgstr[3] "שניות"
+
 msgid "Invert X"
 msgstr "הפוך את X"
 
@@ -315,14 +329,6 @@ msgstr[0] "יום"
 msgstr[1] "ימים"
 msgstr[2] "ימים"
 msgstr[3] "ימים"
-
-#, fuzzy
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "שנייה"
-msgstr[1] "שניות"
-msgstr[2] "שניות"
-msgstr[3] "שניות"
 
 #, fuzzy
 msgid "Network not found"
@@ -375,12 +381,9 @@ msgstr "החיבור נכשל"
 msgid "No mesh has been loaded"
 msgstr "לא נטענה רשת משותפת"
 
-msgid "Calibrate"
-msgstr "לכייל"
-
 #, fuzzy
-msgid "Invalid temperature"
-msgstr "טמפרטורה לא תקינה"
+msgid "Invalid Number"
+msgstr "מספר לא תקין"
 
 #, fuzzy
 msgid "Password"
@@ -431,6 +434,9 @@ msgstr "התייחסות"
 
 msgid "Add profile"
 msgstr "הוסף פרופיל"
+
+msgid "Calibrate"
+msgstr "לכייל"
 
 msgid "Clear"
 msgstr "נקה"
@@ -759,6 +765,10 @@ msgstr ","
 msgid "Temp (°C)"
 msgstr "טמפ' (°C)"
 
+#, fuzzy
+msgid "Invalid temperature"
+msgstr "טמפרטורה לא תקינה"
+
 msgid "Home"
 msgstr "איפוס"
 
@@ -923,36 +933,96 @@ msgid "Power On Printer"
 msgstr "הפעל מדפסת"
 
 #, fuzzy
-msgid "ID"
-msgstr "מזהה"
+msgid "Spool editor"
+msgstr "עורך סלילי חוט"
 
 #, fuzzy
-msgid "Last Used"
-msgstr "שימוש אחרון"
+msgid "No spool selected"
+msgstr "לא נבחר סליל"
 
 #, fuzzy
-msgid "Archived"
-msgstr "ארכיון"
+msgid "Measured weight"
+msgstr "משקל מדוד"
 
 #, fuzzy
-msgid "Filter"
-msgstr "סינון"
+msgid "Remaining weight"
+msgstr "משקל נותר"
+
+#, fuzzy
+msgid "Initial weight"
+msgstr "משקל התחלתי"
+
+#, fuzzy
+msgid "Empty weight"
+msgstr "משקל ריק"
+
+#, fuzzy
+msgid "Invalid weight"
+msgstr "משקל לא תקין"
+
+#, fuzzy
+msgid "Restore"
+msgstr "שחזר"
+
+#, fuzzy
+msgid "No"
+msgstr "לא"
+
+#, fuzzy
+msgid "Yes"
+msgstr "כן"
+
+#, fuzzy
+msgid "Vendor"
+msgstr "יצרן"
 
 #, fuzzy
 msgid "Material"
 msgstr "חומר"
 
 #, fuzzy
+msgid "Used"
+msgstr "שימוש"
+
+#, fuzzy
+msgid "Location"
+msgstr "מיקום"
+
+#, fuzzy
+msgid "Archived"
+msgstr "ארכיון"
+
+#, fuzzy
+msgid "Price"
+msgstr "מחיר"
+
+#, fuzzy
 msgid "Comment"
 msgstr "הערה"
 
 #, fuzzy
-msgid "Last used"
-msgstr "שימוש אחרון"
+msgid "Measured weight is below empty spool weight"
+msgstr "המשקל המדוד נמוך ממשקל הסליל הריק"
 
 #, fuzzy
-msgid "Remaining weight"
-msgstr "משקל נותר"
+msgid "Value must be positive"
+msgstr "הערך חייב להיות חיובי"
+
+#, fuzzy
+msgid "Error updating filament weight"
+msgstr "שגיאה בעדכון משקל החוט"
+
+#, fuzzy
+msgid "Filament weight updated"
+msgstr "משקל החוט עודכן"
+
+#, fuzzy
+msgid "ID"
+msgstr "מזהה"
+
+#, fuzzy
+msgid "Filter"
+msgstr "סינון"
 
 #, fuzzy
 msgid "Remaining length"
@@ -973,10 +1043,6 @@ msgstr "שגיאה בניקוי סליל פעיל"
 #, fuzzy
 msgid "Error setting active spool"
 msgstr "שגיאה בהגדרת סליל פעיל"
-
-#, fuzzy
-msgid "Error getting active spool"
-msgstr "שגיאה בקבלת סליל פעיל"
 
 #, fuzzy
 msgid "No info available"
@@ -1110,6 +1176,10 @@ msgid "System:"
 msgstr "מערכת:"
 
 #, fuzzy
+msgid "Initializing KlipperScreen"
+msgstr "אתחול KlipperScreen"
+
+#, fuzzy
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "ספק את KlipperScreen.log בעת בקשת עזרה.\n"
 
@@ -1120,12 +1190,12 @@ msgstr "סגור"
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS נכשל ובוטל"
 
-msgid "Cannot connect to Moonraker"
-msgstr "לא ניתן להתחבר ל-Moonraker"
-
 #, fuzzy
-msgid "Lost Connection to Moonraker"
-msgstr "אובדן חיבור ל-Moonraker"
+msgid "Moonraker Connected"
+msgstr "Moonraker מחובר"
+
+msgid "Retrying"
+msgstr "מנסה שוב"
 
 msgid "Klipper has disconnected"
 msgstr "קליפר התנתק"
@@ -1160,17 +1230,42 @@ msgstr "מאקרוס המשמשים 'rename_existing' מוסתרים"
 #, fuzzy
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT מוסתרים ויש להשתמש בהם דרך ה-diafilament"
+msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT מוסתרים ויש להשתמש בהם דרך ה-diafilament"
 
 #, fuzzy
 msgid "Temperature too low to extrude"
 msgstr "הטמפרטורה נמוכה מדי להזרמה"
 
-msgid "Retrying"
-msgstr "מנסה שוב"
+#, fuzzy
+msgid "Waiting for Moonraker Websocket to close"
+msgstr "ממתין לסיום סגירת Websocket של Moonraker"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: מחובר"
+
+#, fuzzy
+msgid "Initializing Klipper Connection"
+msgstr "אתחול חיבור לKlipper"
+
+#, fuzzy
+#~ msgid "Last Used"
+#~ msgstr "שימוש אחרון"
+
+#, fuzzy
+#~ msgid "Last used"
+#~ msgstr "שימוש אחרון"
+
+#, fuzzy
+#~ msgid "Error getting active spool"
+#~ msgstr "שגיאה בקבלת סליל פעיל"
+
+#~ msgid "Cannot connect to Moonraker"
+#~ msgstr "לא ניתן להתחבר ל-Moonraker"
+
+#, fuzzy
+#~ msgid "Lost Connection to Moonraker"
+#~ msgstr "אובדן חיבור ל-Moonraker"
 
 #~ msgid "Password saved"
 #~ msgstr "הסיסמה נשמרה"

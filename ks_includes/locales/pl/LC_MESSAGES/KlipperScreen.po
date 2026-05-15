@@ -3,17 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 22:27-0300\n"
+"POT-Creation-Date: 2026-05-15 20:01-0300\n"
 "PO-Revision-Date: 2026-04-26 20:09+0000\n"
 "Last-Translator: Julia <juliazero2@gmail.com>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/pl/>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.17.1-dev\n"
 
 msgid "Main Menu"
@@ -243,6 +241,20 @@ msgstr "Pokaż kursor"
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr "Do obsługi myszą lub zweryfikowania dokładności ekranu dotykowego"
 
+#, fuzzy
+msgid "Screen wake delay"
+msgstr "Opóźnienie wybudzania ekranu"
+
+#, fuzzy
+msgid "Helps to prevent unwanted touchs during screen wake up"
+msgstr "Pomaga zapobiegać niepożądanym dotknięciom podczas wybudzania ekranu"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "sekunda"
+msgstr[1] "sekundy"
+msgstr[2] "sekund"
+
 msgid "Invert X"
 msgstr "Odwróć X"
 
@@ -281,12 +293,6 @@ msgid_plural "days"
 msgstr[0] "dzień"
 msgstr[1] "dni"
 msgstr[2] "dni"
-
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "sekunda"
-msgstr[1] "sekundy"
-msgstr[2] "sekund"
 
 msgid "Network not found"
 msgstr "Nie znaleziono sieci"
@@ -327,11 +333,9 @@ msgstr "Błąd połączenia"
 msgid "No mesh has been loaded"
 msgstr "Nie załadowano żadnej siatki"
 
-msgid "Calibrate"
-msgstr "Kalibruj"
-
-msgid "Invalid temperature"
-msgstr "Nieprawidłowa temperatura"
+#, fuzzy
+msgid "Invalid Number"
+msgstr "Nieprawidłowa liczba"
 
 msgid "Password"
 msgstr "Hasło"
@@ -374,6 +378,9 @@ msgstr "Odniesienie"
 
 msgid "Add profile"
 msgstr "Dodaj profil"
+
+msgid "Calibrate"
+msgstr "Kalibruj"
 
 msgid "Clear"
 msgstr "Wyczyść"
@@ -681,6 +688,9 @@ msgstr "Może to potrwać dłużej niż 5 minut w zależności od mocy grzałki.
 msgid "Temp (°C)"
 msgstr "Temperatura (°C)"
 
+msgid "Invalid temperature"
+msgstr "Nieprawidłowa temperatura"
+
 msgid "Home"
 msgstr "Bazuj"
 
@@ -824,29 +834,91 @@ msgstr "Ponów"
 msgid "Power On Printer"
 msgstr "Zasilanie włączone"
 
-msgid "ID"
-msgstr "ID"
+#, fuzzy
+msgid "Spool editor"
+msgstr "Edytor szpuli"
 
-msgid "Last Used"
-msgstr "Ostatnie użycie"
+#, fuzzy
+msgid "No spool selected"
+msgstr "Nie wybrano szpuli"
 
-msgid "Archived"
-msgstr "Zarchiwizowane"
+#, fuzzy
+msgid "Measured weight"
+msgstr "Zmierzona waga"
 
-msgid "Filter"
-msgstr "Filtruj"
+msgid "Remaining weight"
+msgstr "Pozostała waga"
+
+#, fuzzy
+msgid "Initial weight"
+msgstr "Waga początkowa"
+
+#, fuzzy
+msgid "Empty weight"
+msgstr "Waga pustej szpuli"
+
+#, fuzzy
+msgid "Invalid weight"
+msgstr "Nieprawidłowa waga"
+
+#, fuzzy
+msgid "Restore"
+msgstr "Przywróć"
+
+#, fuzzy
+msgid "No"
+msgstr "Nie"
+
+#, fuzzy
+msgid "Yes"
+msgstr "Tak"
+
+#, fuzzy
+msgid "Vendor"
+msgstr "Producent"
 
 msgid "Material"
 msgstr "Materiał"
 
+#, fuzzy
+msgid "Used"
+msgstr "Używany"
+
+#, fuzzy
+msgid "Location"
+msgstr "Lokalizacja"
+
+msgid "Archived"
+msgstr "Zarchiwizowane"
+
+#, fuzzy
+msgid "Price"
+msgstr "Cena"
+
 msgid "Comment"
 msgstr "Komentarz"
 
-msgid "Last used"
-msgstr "Ostatnio użyto"
+#, fuzzy
+msgid "Measured weight is below empty spool weight"
+msgstr "Zmierzona waga jest mniejsza niż waga pustej szpuli"
 
-msgid "Remaining weight"
-msgstr "Pozostała waga"
+#, fuzzy
+msgid "Value must be positive"
+msgstr "Wartość musi być dodatnia"
+
+#, fuzzy
+msgid "Error updating filament weight"
+msgstr "Błąd aktualizacji wagi filamentu"
+
+#, fuzzy
+msgid "Filament weight updated"
+msgstr "Waga filamentu zaktualizowana"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Filter"
+msgstr "Filtruj"
 
 msgid "Remaining length"
 msgstr "Pozostała długość"
@@ -862,9 +934,6 @@ msgstr "Błąd czyszczenia aktywnej szpuli"
 
 msgid "Error setting active spool"
 msgstr "Błąd ustawiania aktywnej szpuli"
-
-msgid "Error getting active spool"
-msgstr "Błąd pobierania aktywnej szpuli"
 
 msgid "No info available"
 msgstr "Brak informacji"
@@ -986,6 +1055,10 @@ msgstr "Minimum:"
 msgid "System:"
 msgstr "System:"
 
+#, fuzzy
+msgid "Initializing KlipperScreen"
+msgstr "Inicjalizowanie KlipperScreen"
+
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "Dołącz KlipperScreen.log prosząc o pomoc.\n"
 
@@ -995,11 +1068,12 @@ msgstr "Zamknij"
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS nie powiodło się i zostało wyłączone"
 
-msgid "Cannot connect to Moonraker"
-msgstr "Nie można połączyć się z Moonrakerem"
+#, fuzzy
+msgid "Moonraker Connected"
+msgstr "Połączono z Moonraker"
 
-msgid "Lost Connection to Moonraker"
-msgstr "Utracono połączenie z Moonraker"
+msgid "Retrying"
+msgstr "Ponawianie próby"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper został odłączony"
@@ -1037,11 +1111,31 @@ msgstr ""
 msgid "Temperature too low to extrude"
 msgstr "Zbyt niska temperatura do wytłaczania"
 
-msgid "Retrying"
-msgstr "Ponawianie próby"
+#, fuzzy
+msgid "Waiting for Moonraker Websocket to close"
+msgstr "Czekanie na zamknięcie WebSocket Moonraker"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: połączony"
+
+#, fuzzy
+msgid "Initializing Klipper Connection"
+msgstr "Inicjalizowanie połączenia Klipper"
+
+#~ msgid "Last Used"
+#~ msgstr "Ostatnie użycie"
+
+#~ msgid "Last used"
+#~ msgstr "Ostatnio użyto"
+
+#~ msgid "Error getting active spool"
+#~ msgstr "Błąd pobierania aktywnej szpuli"
+
+#~ msgid "Cannot connect to Moonraker"
+#~ msgstr "Nie można połączyć się z Moonrakerem"
+
+#~ msgid "Lost Connection to Moonraker"
+#~ msgstr "Utracono połączenie z Moonraker"
 
 #~ msgid "Max:"
 #~ msgstr "Maks:"
@@ -1092,8 +1186,8 @@ msgstr "Moonraker: połączony"
 #~ "Not supported for auto-detection, it needs to be configured in "
 #~ "klipperscreen.conf"
 #~ msgstr ""
-#~ "Nieobsługiwany do automatycznego wykrywania, musi być skonfigurowany w "
-#~ "pliku klipperscreen.conf"
+#~ "Nieobsługiwany do automatycznego wykrywania, musi być skonfigurowany w pliku"
+#~ " klipperscreen.conf"
 
 #~ msgid "Unknown screw position"
 #~ msgstr "Nieznana pozycja śruby"

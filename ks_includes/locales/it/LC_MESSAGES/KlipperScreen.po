@@ -3,11 +3,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 22:27-0300\n"
+"POT-Creation-Date: 2026-05-15 20:01-0300\n"
 "PO-Revision-Date: 2025-03-15 11:32+0000\n"
 "Last-Translator: Giadej <Giadej@users.noreply.hosted.weblate.org>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/it/>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -240,6 +239,20 @@ msgstr "Mostra cursore"
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr "Per controllo mouse o verifica accuratezza touchscreen"
 
+#, fuzzy
+msgid "Screen wake delay"
+msgstr "Ritardo di risveglio schermo"
+
+#, fuzzy
+msgid "Helps to prevent unwanted touchs during screen wake up"
+msgstr ""
+"Aiuta a prevenire tocchi indesiderati durante il risveglio dello schermo"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "secondo"
+msgstr[1] "secondi"
+
 msgid "Invert X"
 msgstr "Inverti X"
 
@@ -275,11 +288,6 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] "giorno"
 msgstr[1] "giorni"
-
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "secondo"
-msgstr[1] "secondi"
 
 msgid "Network not found"
 msgstr "Rete non trovata"
@@ -320,11 +328,9 @@ msgstr "Connessione fallita"
 msgid "No mesh has been loaded"
 msgstr "Nessuna besh_mesh caricata"
 
-msgid "Calibrate"
-msgstr "Calibra"
-
-msgid "Invalid temperature"
-msgstr "Temperatura non valida"
+#, fuzzy
+msgid "Invalid Number"
+msgstr "Numero non valido"
 
 msgid "Password"
 msgstr "Password"
@@ -367,6 +373,9 @@ msgstr "Riferimento"
 
 msgid "Add profile"
 msgstr "Aggiungi profilo"
+
+msgid "Calibrate"
+msgstr "Calibra"
 
 msgid "Clear"
 msgstr "Pulisci"
@@ -675,6 +684,9 @@ msgstr ""
 msgid "Temp (°C)"
 msgstr "Temperatura (°C)"
 
+msgid "Invalid temperature"
+msgstr "Temperatura non valida"
+
 msgid "Home"
 msgstr "Home"
 
@@ -688,7 +700,8 @@ msgid "This will affect screw positions and mesh graph"
 msgstr "Questo influisce sulla posizione delle viti e sul grafico della mesh"
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr "Scambia i pulsanti se sono sovrapposti, influisce sugli altri pannelli"
+msgstr ""
+"Scambia i pulsanti se sono sovrapposti, influisce sugli altri pannelli"
 
 msgid "XY Speed (mm/s)"
 msgstr "Velocità XY (mm/s)"
@@ -818,32 +831,93 @@ msgstr "Riprova"
 msgid "Power On Printer"
 msgstr "Accendi la stampante"
 
-msgid "ID"
-msgstr "ID"
+#, fuzzy
+msgid "Spool editor"
+msgstr "Editor bobine"
 
-msgid "Last Used"
-msgstr "Ultimo Utilizzo"
+#, fuzzy
+msgid "No spool selected"
+msgstr "Nessuna bobina selezionata"
+
+#, fuzzy
+msgid "Measured weight"
+msgstr "Peso misurato"
+
+#, fuzzy
+msgid "Remaining weight"
+msgstr "Peso rimanente"
+
+#, fuzzy
+msgid "Initial weight"
+msgstr "Peso iniziale"
+
+#, fuzzy
+msgid "Empty weight"
+msgstr "Peso vuoto"
+
+#, fuzzy
+msgid "Invalid weight"
+msgstr "Peso non valido"
+
+#, fuzzy
+msgid "Restore"
+msgstr "Ripristina"
+
+#, fuzzy
+msgid "No"
+msgstr "No"
+
+#, fuzzy
+msgid "Yes"
+msgstr "Sì"
+
+#, fuzzy
+msgid "Vendor"
+msgstr "Vendor"
+
+msgid "Material"
+msgstr "Materiale"
+
+#, fuzzy
+msgid "Used"
+msgstr "Usato"
+
+#, fuzzy
+msgid "Location"
+msgstr "Posizione"
 
 msgid "Archived"
 msgstr "Archiviato"
 
-msgid "Filter"
-msgstr "Filtro"
-
-msgid "Material"
-msgstr "Materiale"
+#, fuzzy
+msgid "Price"
+msgstr "Prezzo"
 
 #, fuzzy
 msgid "Comment"
 msgstr "Commento"
 
 #, fuzzy
-msgid "Last used"
-msgstr "Ultimo uso"
+msgid "Measured weight is below empty spool weight"
+msgstr "Il peso misurato è inferiore al peso della bobina vuota"
 
 #, fuzzy
-msgid "Remaining weight"
-msgstr "Peso rimanente"
+msgid "Value must be positive"
+msgstr "Il valore deve essere positivo"
+
+#, fuzzy
+msgid "Error updating filament weight"
+msgstr "Errore nell'aggiornamento del peso del filamento"
+
+#, fuzzy
+msgid "Filament weight updated"
+msgstr "Peso del filamento aggiornato"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Filter"
+msgstr "Filtro"
 
 #, fuzzy
 msgid "Remaining length"
@@ -860,9 +934,6 @@ msgstr "Errore nella cancellazione della bobina attiva"
 
 msgid "Error setting active spool"
 msgstr "Errore nel settaggio della bobina attiva"
-
-msgid "Error getting active spool"
-msgstr "Errore nel caricamento della bobina attiva"
 
 msgid "No info available"
 msgstr "Informazioni non disponibili"
@@ -984,6 +1055,10 @@ msgstr "Minimo:"
 msgid "System:"
 msgstr "Sistema:"
 
+#, fuzzy
+msgid "Initializing KlipperScreen"
+msgstr "Inizializzazione di KlipperScreen"
+
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "Fornire il KlipperScreen.log quando si chiede aiuto.\n"
 
@@ -994,11 +1069,12 @@ msgstr "Chiudi"
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS non riuscito ed è stato disabilitato"
 
-msgid "Cannot connect to Moonraker"
-msgstr "Impossibile connettersi a Moonraker"
+#, fuzzy
+msgid "Moonraker Connected"
+msgstr "Moonraker Connesso"
 
-msgid "Lost Connection to Moonraker"
-msgstr "Connessione persa con Moonraker"
+msgid "Retrying"
+msgstr "Nuovo tentativo"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper si è disconnesso"
@@ -1037,11 +1113,32 @@ msgstr ""
 msgid "Temperature too low to extrude"
 msgstr "Temperatura troppo bassa per estrudere"
 
-msgid "Retrying"
-msgstr "Nuovo tentativo"
+#, fuzzy
+msgid "Waiting for Moonraker Websocket to close"
+msgstr "Attesa chiusura Websocket di Moonraker"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: connesso"
+
+#, fuzzy
+msgid "Initializing Klipper Connection"
+msgstr "Inizializzazione connessione Klipper"
+
+#~ msgid "Last Used"
+#~ msgstr "Ultimo Utilizzo"
+
+#, fuzzy
+#~ msgid "Last used"
+#~ msgstr "Ultimo uso"
+
+#~ msgid "Error getting active spool"
+#~ msgstr "Errore nel caricamento della bobina attiva"
+
+#~ msgid "Cannot connect to Moonraker"
+#~ msgstr "Impossibile connettersi a Moonraker"
+
+#~ msgid "Lost Connection to Moonraker"
+#~ msgstr "Connessione persa con Moonraker"
 
 #~ msgid "Max:"
 #~ msgstr "Massimo:"

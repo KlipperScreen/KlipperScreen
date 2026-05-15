@@ -7,17 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 22:27-0300\n"
+"POT-Creation-Date: 2026-05-15 20:01-0300\n"
 "PO-Revision-Date: 2026-03-10 13:09+0000\n"
 "Last-Translator: vjurka <v@jurka.lt>\n"
-"Language-Team: Lithuanian <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/lt/>\n"
+"Language-Team: Lithuanian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/lt/>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"(n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.17-dev\n"
 
 msgid "Main Menu"
@@ -245,6 +243,20 @@ msgstr "Rodyti kursorių"
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr "Norėdami valdyti pele ar patikrinti jutiklinio ekrano tikslumą"
 
+#, fuzzy
+msgid "Screen wake delay"
+msgstr "Ekranas įsijungs po"
+
+#, fuzzy
+msgid "Helps to prevent unwanted touchs during screen wake up"
+msgstr "Padeda išvengti atsitiktinio liesties veiksmų ekranui įsijungus"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "sekundė"
+msgstr[1] "sekundės"
+msgstr[2] "sekundžių"
+
 msgid "Invert X"
 msgstr "X inversija"
 
@@ -283,12 +295,6 @@ msgid_plural "days"
 msgstr[0] "diena"
 msgstr[1] "dienos"
 msgstr[2] "dienų"
-
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "sekundė"
-msgstr[1] "sekundės"
-msgstr[2] "sekundžių"
 
 msgid "Network not found"
 msgstr "Tinklas nerastas"
@@ -329,11 +335,9 @@ msgstr "Prisijungti nepavyko"
 msgid "No mesh has been loaded"
 msgstr "Tinklelis nebuvo įkeltas"
 
-msgid "Calibrate"
-msgstr "Kalibravimas"
-
-msgid "Invalid temperature"
-msgstr "Neteisinga temperatūra"
+#, fuzzy
+msgid "Invalid Number"
+msgstr "Neteisingas skaičius"
 
 msgid "Password"
 msgstr "Slaptažodis"
@@ -376,6 +380,9 @@ msgstr "Nuoroda"
 
 msgid "Add profile"
 msgstr "Pridėti profilį"
+
+msgid "Calibrate"
+msgstr "Kalibravimas"
 
 msgid "Clear"
 msgstr "Išvalyti"
@@ -684,6 +691,9 @@ msgstr ""
 msgid "Temp (°C)"
 msgstr "Temperatūra (°С)"
 
+msgid "Invalid temperature"
+msgstr "Neteisinga temperatūra"
+
 msgid "Home"
 msgstr "Parkavimas"
 
@@ -828,32 +838,93 @@ msgstr "Pakartoti"
 msgid "Power On Printer"
 msgstr "Išjungti spausdintuvą"
 
-msgid "ID"
-msgstr "ID"
+#, fuzzy
+msgid "Spool editor"
+msgstr "Sriūgų redaktorius"
 
-msgid "Last Used"
-msgstr "Paskutinis naudotas"
+#, fuzzy
+msgid "No spool selected"
+msgstr "Nepasirinkta nė viena sriūga"
+
+#, fuzzy
+msgid "Measured weight"
+msgstr "Išmatuotas svoris"
+
+#, fuzzy
+msgid "Remaining weight"
+msgstr "Liekamas svoris"
+
+#, fuzzy
+msgid "Initial weight"
+msgstr "Pradinis svoris"
+
+#, fuzzy
+msgid "Empty weight"
+msgstr "Tuščio svoris"
+
+#, fuzzy
+msgid "Invalid weight"
+msgstr "Neteisingas svoris"
+
+#, fuzzy
+msgid "Restore"
+msgstr "Atstatyti"
+
+#, fuzzy
+msgid "No"
+msgstr "Ne"
+
+#, fuzzy
+msgid "Yes"
+msgstr "Taip"
+
+#, fuzzy
+msgid "Vendor"
+msgstr "Gamintojas"
+
+msgid "Material"
+msgstr "Medžiaga"
+
+#, fuzzy
+msgid "Used"
+msgstr "Naudotas"
+
+#, fuzzy
+msgid "Location"
+msgstr "Vieta"
 
 msgid "Archived"
 msgstr "Archyvuota"
 
-msgid "Filter"
-msgstr "Filtras"
-
-msgid "Material"
-msgstr "Medžiaga"
+#, fuzzy
+msgid "Price"
+msgstr "Kaina"
 
 #, fuzzy
 msgid "Comment"
 msgstr "Komentaras"
 
 #, fuzzy
-msgid "Last used"
-msgstr "Paskutinį kartą naudota"
+msgid "Measured weight is below empty spool weight"
+msgstr "Išmatuotas svoris yra mažesnis už tuščios sriūgos svorį"
 
 #, fuzzy
-msgid "Remaining weight"
-msgstr "Liekamas svoris"
+msgid "Value must be positive"
+msgstr "Reikšmė turi būti teigiama"
+
+#, fuzzy
+msgid "Error updating filament weight"
+msgstr "Klaida atnaujinant siūlų svorį"
+
+#, fuzzy
+msgid "Filament weight updated"
+msgstr "Siūlų svoris atnaujintas"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Filter"
+msgstr "Filtras"
 
 #, fuzzy
 msgid "Remaining length"
@@ -870,9 +941,6 @@ msgstr "Klaida išvalant aktyvią ritę"
 
 msgid "Error setting active spool"
 msgstr "Klaida nustatant aktyvią ritę"
-
-msgid "Error getting active spool"
-msgstr "Klaida gaunant aktyvią ritę"
 
 msgid "No info available"
 msgstr "Nėra informacijos"
@@ -996,6 +1064,10 @@ msgstr "Minimum:"
 msgid "System:"
 msgstr "SIstema:"
 
+#, fuzzy
+msgid "Initializing KlipperScreen"
+msgstr "Inicijuojamas KlipperScreen"
+
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "Prašydami pagalbos pateikite KlipperScreen.log.\n"
 
@@ -1006,11 +1078,12 @@ msgstr "Uždaryti"
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS nepavyko ir buvo išjungtas"
 
-msgid "Cannot connect to Moonraker"
-msgstr "Nepavyksta prisijungti prie Moonraker"
+#, fuzzy
+msgid "Moonraker Connected"
+msgstr "Moonraker prisijungęs"
 
-msgid "Lost Connection to Moonraker"
-msgstr "Prarastas ryšys su Moonraker"
+msgid "Retrying"
+msgstr "Antras bandymas"
 
 msgid "Klipper has disconnected"
 msgstr "Nėra ryšio su Klipper'iu"
@@ -1049,11 +1122,32 @@ msgstr ""
 msgid "Temperature too low to extrude"
 msgstr "Per maža temperatūra ekstruzijai"
 
-msgid "Retrying"
-msgstr "Antras bandymas"
+#, fuzzy
+msgid "Waiting for Moonraker Websocket to close"
+msgstr "Laukiama, kol Moonraker Websocket užsidarys"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: prijungtas"
+
+#, fuzzy
+msgid "Initializing Klipper Connection"
+msgstr "Inicijuojamas Klipper ryšys"
+
+#~ msgid "Last Used"
+#~ msgstr "Paskutinis naudotas"
+
+#, fuzzy
+#~ msgid "Last used"
+#~ msgstr "Paskutinį kartą naudota"
+
+#~ msgid "Error getting active spool"
+#~ msgstr "Klaida gaunant aktyvią ritę"
+
+#~ msgid "Cannot connect to Moonraker"
+#~ msgstr "Nepavyksta prisijungti prie Moonraker"
+
+#~ msgid "Lost Connection to Moonraker"
+#~ msgstr "Prarastas ryšys su Moonraker"
 
 #~ msgid "Max:"
 #~ msgstr "Max:"

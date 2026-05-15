@@ -3,11 +3,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 22:27-0300\n"
+"POT-Creation-Date: 2026-05-15 20:01-0300\n"
 "PO-Revision-Date: 2025-07-09 06:02+0000\n"
 "Last-Translator: Simon B <simon.buro@hotmail.com>\n"
-"Language-Team: Danish <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/da/>\n"
+"Language-Team: Danish <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/da/>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -238,7 +237,21 @@ msgid "Show cursor"
 msgstr "Vis musemarkør"
 
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr "Til brug af mus eller for at kontrollere nøjagtigheden af touchskærmen"
+msgstr ""
+"Til brug af mus eller for at kontrollere nøjagtigheden af touchskærmen"
+
+#, fuzzy
+msgid "Screen wake delay"
+msgstr "Skærmvågeforsinkelse"
+
+#, fuzzy
+msgid "Helps to prevent unwanted touchs during screen wake up"
+msgstr "Hjælper med at forhindre uønskede touches under skærmopvågning"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "sekund"
+msgstr[1] "sekunder"
 
 msgid "Invert X"
 msgstr "Invertér X"
@@ -275,11 +288,6 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] "dag"
 msgstr[1] "dage"
-
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "sekund"
-msgstr[1] "sekunder"
 
 msgid "Network not found"
 msgstr "Netværk ikke fundet"
@@ -320,11 +328,9 @@ msgstr "Tilslutning mislykkedes"
 msgid "No mesh has been loaded"
 msgstr "Intet mesh er indlæst"
 
-msgid "Calibrate"
-msgstr "Kalibrér"
-
-msgid "Invalid temperature"
-msgstr "Ugyldig temperatur"
+#, fuzzy
+msgid "Invalid Number"
+msgstr "Ugyldigt tal"
 
 msgid "Password"
 msgstr "Kodeord"
@@ -367,6 +373,9 @@ msgstr "Reference"
 
 msgid "Add profile"
 msgstr "Tilføj profil"
+
+msgid "Calibrate"
+msgstr "Kalibrér"
 
 msgid "Clear"
 msgstr "Ryd"
@@ -674,6 +683,9 @@ msgstr "Det kan tage mere end 5 minutter, afhængigt af opvarmerens styrke."
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
 
+msgid "Invalid temperature"
+msgstr "Ugyldig temperatur"
+
 msgid "Home"
 msgstr "Home"
 
@@ -817,32 +829,93 @@ msgstr "Forsøg igen"
 msgid "Power On Printer"
 msgstr "Tænd printer"
 
-msgid "ID"
-msgstr "ID"
+#, fuzzy
+msgid "Spool editor"
+msgstr "Spoleredigering"
 
-msgid "Last Used"
-msgstr "Sidst brugt"
+#, fuzzy
+msgid "No spool selected"
+msgstr "Ingen spole valgt"
+
+#, fuzzy
+msgid "Measured weight"
+msgstr "Målt vægt"
+
+#, fuzzy
+msgid "Remaining weight"
+msgstr "Resterende vægt"
+
+#, fuzzy
+msgid "Initial weight"
+msgstr "Startvægt"
+
+#, fuzzy
+msgid "Empty weight"
+msgstr "Tom vægt"
+
+#, fuzzy
+msgid "Invalid weight"
+msgstr "Ugyldig vægt"
+
+#, fuzzy
+msgid "Restore"
+msgstr "Gendan"
+
+#, fuzzy
+msgid "No"
+msgstr "Nej"
+
+#, fuzzy
+msgid "Yes"
+msgstr "Ja"
+
+#, fuzzy
+msgid "Vendor"
+msgstr "Producent"
+
+msgid "Material"
+msgstr "Materiale"
+
+#, fuzzy
+msgid "Used"
+msgstr "Brugt"
+
+#, fuzzy
+msgid "Location"
+msgstr "Placering"
 
 msgid "Archived"
 msgstr "Arkiveret"
 
-msgid "Filter"
-msgstr "Filter"
-
-msgid "Material"
-msgstr "Materiale"
+#, fuzzy
+msgid "Price"
+msgstr "Pris"
 
 #, fuzzy
 msgid "Comment"
 msgstr "Kommentar"
 
 #, fuzzy
-msgid "Last used"
-msgstr "Sidst brugt"
+msgid "Measured weight is below empty spool weight"
+msgstr "Målt vægt er under vægten af tom rulle"
 
 #, fuzzy
-msgid "Remaining weight"
-msgstr "Resterende vægt"
+msgid "Value must be positive"
+msgstr "Værdi skal være positiv"
+
+#, fuzzy
+msgid "Error updating filament weight"
+msgstr "Fejl ved opdatering af filamentvægt"
+
+#, fuzzy
+msgid "Filament weight updated"
+msgstr "Filamentvægt opdateret"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Filter"
+msgstr "Filter"
 
 #, fuzzy
 msgid "Remaining length"
@@ -859,9 +932,6 @@ msgstr "Fejl ved fjernelse af aktiv spole"
 
 msgid "Error setting active spool"
 msgstr "Fejl ved indstilling af aktiv spole"
-
-msgid "Error getting active spool"
-msgstr "Fejl ved hentning af aktiv spole"
 
 msgid "No info available"
 msgstr "Ingen info tilgængeligt"
@@ -983,6 +1053,10 @@ msgstr "Minimum:"
 msgid "System:"
 msgstr "System:"
 
+#, fuzzy
+msgid "Initializing KlipperScreen"
+msgstr "Initialiserer KlipperScreen"
+
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "Inkludér Klipperscreen.log når du beder om hjælp\n"
 
@@ -993,11 +1067,12 @@ msgstr "Luk"
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS mislykkedes og er deaktiveret"
 
-msgid "Cannot connect to Moonraker"
-msgstr "Kan ikke oprette forbindelse til Moonraker"
+#, fuzzy
+msgid "Moonraker Connected"
+msgstr "Moonraker forbundet"
 
-msgid "Lost Connection to Moonraker"
-msgstr "Tabte forbindelse til Moonraker"
+msgid "Retrying"
+msgstr "Forsøger igen"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper er frokoblet"
@@ -1036,11 +1111,32 @@ msgstr ""
 msgid "Temperature too low to extrude"
 msgstr "Temperaturen er for lav til at ekstrudere"
 
-msgid "Retrying"
-msgstr "Forsøger igen"
+#, fuzzy
+msgid "Waiting for Moonraker Websocket to close"
+msgstr "Venter på Moonraker Websocket lukker"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: tilsluttet"
+
+#, fuzzy
+msgid "Initializing Klipper Connection"
+msgstr "Initialiserer Klipper-forbindelse"
+
+#~ msgid "Last Used"
+#~ msgstr "Sidst brugt"
+
+#, fuzzy
+#~ msgid "Last used"
+#~ msgstr "Sidst brugt"
+
+#~ msgid "Error getting active spool"
+#~ msgstr "Fejl ved hentning af aktiv spole"
+
+#~ msgid "Cannot connect to Moonraker"
+#~ msgstr "Kan ikke oprette forbindelse til Moonraker"
+
+#~ msgid "Lost Connection to Moonraker"
+#~ msgstr "Tabte forbindelse til Moonraker"
 
 #~ msgid "Max:"
 #~ msgstr "Maks:"

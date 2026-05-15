@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 22:27-0300\n"
+"POT-Creation-Date: 2026-05-15 20:01-0300\n"
 "PO-Revision-Date: 2026-05-07 00:11+0000\n"
 "Last-Translator: Pavol Vrba <pvrba2000@gmail.com>\n"
-"Language-Team: Slovak <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/sk/>\n"
+"Language-Team: Slovak <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/sk/>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -245,6 +244,21 @@ msgstr "Zobraziť kurzor"
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr "Na ovládanie myšou alebo na overenie presnosti dotykovej obrazovky"
 
+#, fuzzy
+msgid "Screen wake delay"
+msgstr "Oneskorenie prebúdzania obrazovky"
+
+#, fuzzy
+msgid "Helps to prevent unwanted touchs during screen wake up"
+msgstr ""
+"Pomáha predchádzať nechtenej dotykovej obsluhe pri prebúdzaní obrazovky"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "sekunda"
+msgstr[1] "sekundy"
+msgstr[2] "sekúnd"
+
 msgid "Invert X"
 msgstr "Invertovať X"
 
@@ -283,12 +297,6 @@ msgid_plural "days"
 msgstr[0] "deň"
 msgstr[1] "dni"
 msgstr[2] "dní"
-
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "sekunda"
-msgstr[1] "sekundy"
-msgstr[2] "sekúnd"
 
 msgid "Network not found"
 msgstr "Sieť sa nenašla"
@@ -329,11 +337,9 @@ msgstr "Pripojenie zlyhalo"
 msgid "No mesh has been loaded"
 msgstr "Nebola načítaná žiadna sieť"
 
-msgid "Calibrate"
-msgstr "Kalibrovať"
-
-msgid "Invalid temperature"
-msgstr "Nesprávna teplota"
+#, fuzzy
+msgid "Invalid Number"
+msgstr "Neplatné číslo"
 
 msgid "Password"
 msgstr "Heslo"
@@ -376,6 +382,9 @@ msgstr "Referencia"
 
 msgid "Add profile"
 msgstr "Pridať profil"
+
+msgid "Calibrate"
+msgstr "Kalibrovať"
 
 msgid "Clear"
 msgstr "Vyčistiť"
@@ -683,6 +692,9 @@ msgstr "V závislosti od výkonu ohrievača to môže trvať aj viac ako 5 minú
 msgid "Temp (°C)"
 msgstr "Teplota (°C)"
 
+msgid "Invalid temperature"
+msgstr "Nesprávna teplota"
+
 msgid "Home"
 msgstr "Domov"
 
@@ -826,29 +838,91 @@ msgstr "Zopakovať"
 msgid "Power On Printer"
 msgstr "Zapnutie tlačiarne"
 
-msgid "ID"
-msgstr "ID"
+#, fuzzy
+msgid "Spool editor"
+msgstr "Editor cievok"
 
-msgid "Last Used"
-msgstr "Naposledy Použité"
+#, fuzzy
+msgid "No spool selected"
+msgstr "Nie je vybraná žiadna cievka"
 
-msgid "Archived"
-msgstr "Archivované"
+#, fuzzy
+msgid "Measured weight"
+msgstr "Nameraná hmotnosť"
 
-msgid "Filter"
-msgstr "Filter"
+msgid "Remaining weight"
+msgstr "Zostávajúca hmotnosť"
+
+#, fuzzy
+msgid "Initial weight"
+msgstr "Počiatočná hmotnosť"
+
+#, fuzzy
+msgid "Empty weight"
+msgstr "Hmotnosť prázdnej cievky"
+
+#, fuzzy
+msgid "Invalid weight"
+msgstr "Neplatná hmotnosť"
+
+#, fuzzy
+msgid "Restore"
+msgstr "Obnoviť"
+
+#, fuzzy
+msgid "No"
+msgstr "Nie"
+
+#, fuzzy
+msgid "Yes"
+msgstr "Áno"
+
+#, fuzzy
+msgid "Vendor"
+msgstr "Výrobca"
 
 msgid "Material"
 msgstr "Materiál"
 
+#, fuzzy
+msgid "Used"
+msgstr "Použité"
+
+#, fuzzy
+msgid "Location"
+msgstr "Lokalita"
+
+msgid "Archived"
+msgstr "Archivované"
+
+#, fuzzy
+msgid "Price"
+msgstr "Cena"
+
 msgid "Comment"
 msgstr "Komentár"
 
-msgid "Last used"
-msgstr "Naposledy použité"
+#, fuzzy
+msgid "Measured weight is below empty spool weight"
+msgstr "Nameraná hmotnosť je nižšia ako hmotnosť prázdnej cievky"
 
-msgid "Remaining weight"
-msgstr "Zostávajúca hmotnosť"
+#, fuzzy
+msgid "Value must be positive"
+msgstr "Hodnota musí byť kladná"
+
+#, fuzzy
+msgid "Error updating filament weight"
+msgstr "Chyba pri aktualizácii hmotnosti filamentu"
+
+#, fuzzy
+msgid "Filament weight updated"
+msgstr "Hmotnosť filamentu aktualizovaná"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Filter"
+msgstr "Filter"
 
 msgid "Remaining length"
 msgstr "Zostávajúca dĺžka"
@@ -864,9 +938,6 @@ msgstr "Chyba pri čistení aktívnej cievky"
 
 msgid "Error setting active spool"
 msgstr "Chyba pri nastavovaní aktívnej cievky"
-
-msgid "Error getting active spool"
-msgstr "Chyba pri získavaní aktívnej cievky"
 
 msgid "No info available"
 msgstr "Žiadne informácie nie sú k dispozícii"
@@ -988,6 +1059,10 @@ msgstr "Minimum:"
 msgid "System:"
 msgstr "Systém:"
 
+#, fuzzy
+msgid "Initializing KlipperScreen"
+msgstr "Inicializácia KlipperScreen"
+
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "Pri žiadosti o pomoc poskytnite súbor KlipperScreen.log.\n"
 
@@ -997,11 +1072,12 @@ msgstr "Zatvoriť"
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS zlyhalo a bolo zakázané"
 
-msgid "Cannot connect to Moonraker"
-msgstr "Nedá sa pripojiť k Moonrakeru"
+#, fuzzy
+msgid "Moonraker Connected"
+msgstr "Moonraker pripojený"
 
-msgid "Lost Connection to Moonraker"
-msgstr "Stratené spojenie s Moonrakerom"
+msgid "Retrying"
+msgstr "Opakovanie"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper sa odpojil"
@@ -1038,11 +1114,31 @@ msgstr ""
 msgid "Temperature too low to extrude"
 msgstr "Príliš nízka teplota na vytlačenie"
 
-msgid "Retrying"
-msgstr "Opakovanie"
+#, fuzzy
+msgid "Waiting for Moonraker Websocket to close"
+msgstr "Čaká sa na uzavretie Moonraker Websocket"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: pripojený"
+
+#, fuzzy
+msgid "Initializing Klipper Connection"
+msgstr "Inicializácia pripojenia Klipper"
+
+#~ msgid "Last Used"
+#~ msgstr "Naposledy Použité"
+
+#~ msgid "Last used"
+#~ msgstr "Naposledy použité"
+
+#~ msgid "Error getting active spool"
+#~ msgstr "Chyba pri získavaní aktívnej cievky"
+
+#~ msgid "Cannot connect to Moonraker"
+#~ msgstr "Nedá sa pripojiť k Moonrakeru"
+
+#~ msgid "Lost Connection to Moonraker"
+#~ msgstr "Stratené spojenie s Moonrakerom"
 
 #, python-format
 #~ msgid "Apply %s%.3f offset to Endstop?"

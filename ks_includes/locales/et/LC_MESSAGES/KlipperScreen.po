@@ -3,11 +3,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 22:27-0300\n"
+"POT-Creation-Date: 2026-05-15 20:01-0300\n"
 "PO-Revision-Date: 2024-07-26 19:09+0000\n"
 "Last-Translator: Jegert Uusküla <jegertuuskula@gmail.com>\n"
-"Language-Team: Estonian <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/et/>\n"
+"Language-Team: Estonian <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -243,6 +242,19 @@ msgstr "Näytä osoitin"
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr "Hiiren hallinta tai kosketusnäytön tarkkuuden varmistamiseksi"
 
+#, fuzzy
+msgid "Screen wake delay"
+msgstr "Ekraani ärkamisviivitus"
+
+#, fuzzy
+msgid "Helps to prevent unwanted touchs during screen wake up"
+msgstr "Aitab vältida ebasoovitud puudutusi ekraani ärkamisel"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "sekund"
+msgstr[1] "sekundit"
+
 msgid "Invert X"
 msgstr "Pööra X"
 
@@ -278,11 +290,6 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] "päev"
 msgstr[1] "päeva"
-
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "sekund"
-msgstr[1] "sekundit"
 
 msgid "Network not found"
 msgstr "Võrku ei leitud"
@@ -323,12 +330,9 @@ msgstr "Ühendamine ebaõnnestus"
 msgid "No mesh has been loaded"
 msgstr "Võrku ei ole laaditud"
 
-msgid "Calibrate"
-msgstr "Kalibreeri"
-
 #, fuzzy
-msgid "Invalid temperature"
-msgstr "Virheellinen lämpötila"
+msgid "Invalid Number"
+msgstr "Vigane number"
 
 #, fuzzy
 msgid "Password"
@@ -374,6 +378,9 @@ msgstr "Viide"
 
 msgid "Add profile"
 msgstr "Lisa profiil"
+
+msgid "Calibrate"
+msgstr "Kalibreeri"
 
 msgid "Clear"
 msgstr "Kustuta"
@@ -676,10 +683,15 @@ msgid "Initiate a PID calibration for:"
 msgstr "Algata PID kalibreerimine jaoks:"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr "See võib võtta rohkem kui 5 minutit, sõltuvalt kütteseadme võimsusest."
+msgstr ""
+"See võib võtta rohkem kui 5 minutit, sõltuvalt kütteseadme võimsusest."
 
 msgid "Temp (°C)"
 msgstr "Temperatuur (°C)"
+
+#, fuzzy
+msgid "Invalid temperature"
+msgstr "Virheellinen lämpötila"
 
 msgid "Home"
 msgstr "Kodu"
@@ -825,32 +837,93 @@ msgstr "Proovi uuesti"
 msgid "Power On Printer"
 msgstr "Printeri sisselülitamine"
 
-msgid "ID"
-msgstr "ID"
+#, fuzzy
+msgid "Spool editor"
+msgstr "Süsiniku redaktor"
 
-msgid "Last Used"
-msgstr "Viimati kasutatud"
+#, fuzzy
+msgid "No spool selected"
+msgstr "Ühtegi süsinikupoolt ei ole valitud"
+
+#, fuzzy
+msgid "Measured weight"
+msgstr "Mõõdetud kaal"
+
+#, fuzzy
+msgid "Remaining weight"
+msgstr "Jäljellä oleva paino"
+
+#, fuzzy
+msgid "Initial weight"
+msgstr "Algne kaal"
+
+#, fuzzy
+msgid "Empty weight"
+msgstr "Tühja kaalu kaal"
+
+#, fuzzy
+msgid "Invalid weight"
+msgstr "Vigane kaal"
+
+#, fuzzy
+msgid "Restore"
+msgstr "Taasta"
+
+#, fuzzy
+msgid "No"
+msgstr "Ei"
+
+#, fuzzy
+msgid "Yes"
+msgstr "Jah"
+
+#, fuzzy
+msgid "Vendor"
+msgstr "Tootja"
+
+msgid "Material"
+msgstr "Materjal"
+
+#, fuzzy
+msgid "Used"
+msgstr "Kasutatud"
+
+#, fuzzy
+msgid "Location"
+msgstr "Asukoht"
 
 msgid "Archived"
 msgstr "Arhiveeritud"
 
-msgid "Filter"
-msgstr "Filter"
-
-msgid "Material"
-msgstr "Materjal"
+#, fuzzy
+msgid "Price"
+msgstr "Hind"
 
 #, fuzzy
 msgid "Comment"
 msgstr "Kommentti"
 
 #, fuzzy
-msgid "Last used"
-msgstr "Viimeksi käytetty"
+msgid "Measured weight is below empty spool weight"
+msgstr "Mõõdetud kaal on väiksem kui tühja süsiniku kaal"
 
 #, fuzzy
-msgid "Remaining weight"
-msgstr "Jäljellä oleva paino"
+msgid "Value must be positive"
+msgstr "Väärtus peab olema positiivne"
+
+#, fuzzy
+msgid "Error updating filament weight"
+msgstr "Viga süsiniku kaalu uuendamisel"
+
+#, fuzzy
+msgid "Filament weight updated"
+msgstr "Süsiniku kaal uuendatud"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Filter"
+msgstr "Filter"
 
 #, fuzzy
 msgid "Remaining length"
@@ -867,9 +940,6 @@ msgstr "Viga aktiivse pooli tühjendamisel"
 
 msgid "Error setting active spool"
 msgstr "Viga aktiivse pooli seadistamisel"
-
-msgid "Error getting active spool"
-msgstr "Viga aktiivse pooli hankimisel"
 
 msgid "No info available"
 msgstr "Teave puudub"
@@ -991,6 +1061,10 @@ msgstr "Minimaalne:"
 msgid "System:"
 msgstr "Süsteem:"
 
+#, fuzzy
+msgid "Initializing KlipperScreen"
+msgstr "KlipperScreeni alustamine"
+
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "Abi küsimisel andke KlipperScreen.log.\n"
 
@@ -1001,11 +1075,12 @@ msgstr "Sulge"
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS epäonnistui ja on poistettu käytöstä"
 
-msgid "Cannot connect to Moonraker"
-msgstr "Ei saa ühendust Moonrakeriga"
+#, fuzzy
+msgid "Moonraker Connected"
+msgstr "Moonraker ühendatud"
 
-msgid "Lost Connection to Moonraker"
-msgstr "Ühendus Moonrakeriga katkes"
+msgid "Retrying"
+msgstr "Uuesti proovimine"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper on lahti ühendatud"
@@ -1045,11 +1120,32 @@ msgstr ""
 msgid "Temperature too low to extrude"
 msgstr "Lämpötila liian matala puristamiseen"
 
-msgid "Retrying"
-msgstr "Uuesti proovimine"
+#, fuzzy
+msgid "Waiting for Moonraker Websocket to close"
+msgstr "Ootab Moonraker Websocket'i sulgemist"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: ühendatud"
+
+#, fuzzy
+msgid "Initializing Klipper Connection"
+msgstr "Klipperi ühenduse alustamine"
+
+#~ msgid "Last Used"
+#~ msgstr "Viimati kasutatud"
+
+#, fuzzy
+#~ msgid "Last used"
+#~ msgstr "Viimeksi käytetty"
+
+#~ msgid "Error getting active spool"
+#~ msgstr "Viga aktiivse pooli hankimisel"
+
+#~ msgid "Cannot connect to Moonraker"
+#~ msgstr "Ei saa ühendust Moonrakeriga"
+
+#~ msgid "Lost Connection to Moonraker"
+#~ msgstr "Ühendus Moonrakeriga katkes"
 
 #~ msgid "Max:"
 #~ msgstr "Maksimaalne:"

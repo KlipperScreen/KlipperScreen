@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-23 22:27-0300\n"
+"POT-Creation-Date: 2026-05-15 20:01-0300\n"
 "PO-Revision-Date: 2026-04-23 21:28+0000\n"
 "Last-Translator: Alfredo Monclus <alfredomonclus@gmail.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/es/>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -244,7 +243,21 @@ msgid "Show cursor"
 msgstr "Mostrar cursor"
 
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr "Para controlar el ratón o verificar la precisión de la pantalla táctil"
+msgstr ""
+"Para controlar el ratón o verificar la precisión de la pantalla táctil"
+
+#, fuzzy
+msgid "Screen wake delay"
+msgstr "Retardo de activación de pantalla"
+
+#, fuzzy
+msgid "Helps to prevent unwanted touchs during screen wake up"
+msgstr "Ayuda a prevenir toques no deseados durante el despertar de la pantalla"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "segundo"
+msgstr[1] "segundos"
 
 msgid "Invert X"
 msgstr "Invertir X"
@@ -281,11 +294,6 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] "día"
 msgstr[1] "días"
-
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "segundo"
-msgstr[1] "segundos"
 
 msgid "Network not found"
 msgstr "Red no encontrada"
@@ -326,11 +334,9 @@ msgstr "La conexión falló"
 msgid "No mesh has been loaded"
 msgstr "Ninguna malla cargada"
 
-msgid "Calibrate"
-msgstr "Calibrar"
-
-msgid "Invalid temperature"
-msgstr "Temperatura incorrecta"
+#, fuzzy
+msgid "Invalid Number"
+msgstr "Número no válido"
 
 msgid "Password"
 msgstr "Contraseña"
@@ -373,6 +379,9 @@ msgstr "Referencia"
 
 msgid "Add profile"
 msgstr "Agregar perfil"
+
+msgid "Calibrate"
+msgstr "Calibrar"
 
 msgid "Clear"
 msgstr "Limpiar"
@@ -681,6 +690,9 @@ msgstr ""
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
 
+msgid "Invalid temperature"
+msgstr "Temperatura incorrecta"
+
 msgid "Home"
 msgstr "Inicio"
 
@@ -825,29 +837,91 @@ msgstr "Reintentar"
 msgid "Power On Printer"
 msgstr "Encender Impresora"
 
-msgid "ID"
-msgstr "ID"
+#, fuzzy
+msgid "Spool editor"
+msgstr "Editor de carretes"
 
-msgid "Last Used"
-msgstr "Ultimo usado"
+#, fuzzy
+msgid "No spool selected"
+msgstr "Ninguna bobina seleccionada"
 
-msgid "Archived"
-msgstr "Archivado"
+#, fuzzy
+msgid "Measured weight"
+msgstr "Peso medido"
 
-msgid "Filter"
-msgstr "Filtro"
+msgid "Remaining weight"
+msgstr "Peso restante"
+
+#, fuzzy
+msgid "Initial weight"
+msgstr "Peso inicial"
+
+#, fuzzy
+msgid "Empty weight"
+msgstr "Peso vacío"
+
+#, fuzzy
+msgid "Invalid weight"
+msgstr "Peso no válido"
+
+#, fuzzy
+msgid "Restore"
+msgstr "Restaurar"
+
+#, fuzzy
+msgid "No"
+msgstr "No"
+
+#, fuzzy
+msgid "Yes"
+msgstr "Sí"
+
+#, fuzzy
+msgid "Vendor"
+msgstr "Proveedor"
 
 msgid "Material"
 msgstr "Material"
 
+#, fuzzy
+msgid "Used"
+msgstr "Usado"
+
+#, fuzzy
+msgid "Location"
+msgstr "Ubicación"
+
+msgid "Archived"
+msgstr "Archivado"
+
+#, fuzzy
+msgid "Price"
+msgstr "Precio"
+
 msgid "Comment"
 msgstr "Comentario"
 
-msgid "Last used"
-msgstr "Usado por última vez"
+#, fuzzy
+msgid "Measured weight is below empty spool weight"
+msgstr "El peso medido está por debajo del peso del carrete vacío"
 
-msgid "Remaining weight"
-msgstr "Peso restante"
+#, fuzzy
+msgid "Value must be positive"
+msgstr "El valor debe ser positivo"
+
+#, fuzzy
+msgid "Error updating filament weight"
+msgstr "Error al actualizar el peso del filamento"
+
+#, fuzzy
+msgid "Filament weight updated"
+msgstr "Peso del filamento actualizado"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Filter"
+msgstr "Filtro"
 
 msgid "Remaining length"
 msgstr "Longitud restante"
@@ -863,9 +937,6 @@ msgstr "Error al borrar spool activo"
 
 msgid "Error setting active spool"
 msgstr "Error al configurar el spool activo"
-
-msgid "Error getting active spool"
-msgstr "Error al obtener el spool activo"
 
 msgid "No info available"
 msgstr "No info. disponible"
@@ -985,6 +1056,10 @@ msgstr "Mínimo:"
 msgid "System:"
 msgstr "Sistema:"
 
+#, fuzzy
+msgid "Initializing KlipperScreen"
+msgstr "Iniciando KlipperScreen"
+
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr "Proporcione KlipperScreen.log cuando pida ayuda.\n"
 
@@ -994,11 +1069,12 @@ msgstr "Cerrar"
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS ha fallado y se ha deshabilitado"
 
-msgid "Cannot connect to Moonraker"
-msgstr "No se puede conectar a Moonraker"
+#, fuzzy
+msgid "Moonraker Connected"
+msgstr "Moonraker Conectado"
 
-msgid "Lost Connection to Moonraker"
-msgstr "Conexión perdida con Moonraker"
+msgid "Retrying"
+msgstr "Reintentando"
 
 msgid "Klipper has disconnected"
 msgstr "Klipper se desconectó"
@@ -1027,20 +1103,37 @@ msgstr "los macros con nombre comenzando en '_' están ocultos"
 msgid "macros that use 'rename_existing' are hidden"
 msgstr "los macros que usan 'rename_existing' están ocultos"
 
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT están ocultos y deberían ser usados desde "
-"extruir"
+msgid "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT están ocultos y deberían ser usados desde extruir"
 
 msgid "Temperature too low to extrude"
 msgstr "Temperatura muy baja para extruir"
 
-msgid "Retrying"
-msgstr "Reintentando"
+#, fuzzy
+msgid "Waiting for Moonraker Websocket to close"
+msgstr "Esperando a que Moonraker Websocket se cierre"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: conectado"
+
+#, fuzzy
+msgid "Initializing Klipper Connection"
+msgstr "Inicializando conexión de Klipper"
+
+#~ msgid "Last Used"
+#~ msgstr "Ultimo usado"
+
+#~ msgid "Last used"
+#~ msgstr "Usado por última vez"
+
+#~ msgid "Error getting active spool"
+#~ msgstr "Error al obtener el spool activo"
+
+#~ msgid "Cannot connect to Moonraker"
+#~ msgstr "No se puede conectar a Moonraker"
+
+#~ msgid "Lost Connection to Moonraker"
+#~ msgstr "Conexión perdida con Moonraker"
 
 #~ msgid "Max:"
 #~ msgstr "Máx:"
