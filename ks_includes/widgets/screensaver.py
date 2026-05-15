@@ -13,7 +13,10 @@ class ScreenSaver:
         self.config = screen._config
         self.screensaver_timeout = None
         self.blackbox = None
+        self.delayed = None
+        self.delayed_seconds = screen._config.get_main_config().getint('screensaver_wake_delay', 1)
 
+    @property
     def is_showing(self):
         return self.blackbox is not None
 
@@ -21,8 +24,6 @@ class ScreenSaver:
         if self.screensaver_timeout is not None:
             GLib.source_remove(self.screensaver_timeout)
             self.screensaver_timeout = None
-        if self.screen.use_dpms:
-            return
         if self.printer and self.printer.state in ("printing", "paused"):
             use_screensaver = self.config.get_main_config().get('screen_blanking_printing') != "off"
         else:
@@ -32,7 +33,7 @@ class ScreenSaver:
                 self.screen.blanking_time, self.show)
 
     def show(self):
-        if self.blackbox is not None:
+        if self.is_showing:
             logging.debug("Screensaver active")
             return
         logging.debug("Showing Screensaver")
@@ -68,20 +69,36 @@ class ScreenSaver:
         return False
 
     def close(self, widget=None):
-        if self.blackbox is None:
+        if not self.is_showing:
             return False
         logging.debug("Closing Screensaver")
-        self.screen.overlay.remove(self.blackbox)
-        self.blackbox = None
-        for child in self.screen.overlay.get_children():
-            child.show()
         if self.screen.use_dpms:
             self.screen.wake_screen()
-        else:
-            self.reset_timeout()
+        self.screen.gtk.set_cursor(self.screen.show_cursor, window=self.screen.get_window())
+        self.screen.power_devices(None, self.config.get_main_config().get("screen_on_devices", ""), on=True)
+        # Screens take a couple of seconds to wake, prevent mistouches during that period
+        if self.delayed is None:
+            self.delayed = GLib.timeout_add_seconds(self.delayed_seconds, self.delayed_wake)
+        return False
+
+    def delayed_wake(self):
+        self.reset_timeout()
+        if self.delayed is not None:
+            GLib.source_remove(self.delayed)
+            self.delayed = None
+        if not self.is_showing:
+            return False
+        self.screen.overlay.remove(self.blackbox)
+        self.blackbox = None
+        logging.debug("Closed Screensaver")
+        for child in self.screen.overlay.get_children():
+            child.show()
         for dialog in self.screen.dialogs:
             logging.info(f"Restoring Dialog {dialog}")
             dialog.show()
-        self.screen.gtk.set_cursor(self.screen.show_cursor, window=self.screen.get_window())
-        self.screen.power_devices(None, self.config.get_main_config().get("screen_on_devices", ""), on=True)
         self.screen.lock_screen.relock()
+        return False
+
+    def set_wake_delay(self, time):
+        self.delayed_seconds = int(time)
+        logging.debug(f"Screensaver Wake delay set to {time}")

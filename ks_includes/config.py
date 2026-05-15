@@ -181,7 +181,7 @@ class KlipperScreenConfig:
                 )
                 numbers = (
                     'job_complete_timeout', 'job_error_timeout', 'move_speed_xy', 'move_speed_z',
-                    'print_estimate_compensation', 'width', 'height', 'autolock_timeout',
+                    'print_estimate_compensation', 'width', 'height', 'autolock_timeout', 'screensaver_wake_delay'
 
                 )
             elif section.startswith('printer '):
@@ -325,6 +325,16 @@ class KlipperScreenConfig:
             {"show_cursor": {"section": "main", "name": _("Show cursor"), "type": "binary",
                              "tooltip": _("For mouse control or to verify touchscreen accuracy"),
                              "value": "False", "callback": screen.update_cursor}},
+            {"screensaver_wake_delay": {
+                "section": "main", "name": _("Screensaver wake delay"), "type": "dropdown",
+                "tooltip": _("Helps to prevent unwanted touchs during screen wake up"),
+                "value": "0", "callback": screen.set_screensaver_wake_delay, "options": [
+                    {"name": "0 " + ngettext("second", "seconds", 0), "value": "0"},
+                    {"name": "1 " + ngettext("second", "seconds", 1), "value": "1"},
+                    {"name": "2 " + ngettext("second", "seconds", 2), "value": "2"},
+                    {"name": "3 " + ngettext("second", "seconds", 3), "value": "3"},
+                    {"name": "4 " + ngettext("second", "seconds", 4), "value": "4"},
+                    {"name": "5 " + ngettext("second", "seconds", 5), "value": "5"},]}},
             # {"": {"section": "main", "name": _(""), "type": ""}}
         ]
 

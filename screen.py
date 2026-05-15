@@ -189,6 +189,7 @@ class KlipperScreen(Gtk.Window):
         self.initial_connection()
         if self._config.get_main_config().getboolean('start_locked', False):
             self.lock_screen.lock(None)
+        self.set_screenblanking_timeout(self._config.get_main_config().get('screen_blanking'))
 
     def update_cursor(self, show: bool):
         self.show_cursor = show
@@ -639,7 +640,7 @@ class KlipperScreen(Gtk.Window):
             self.set_dpms(False)
             return False
         elif state != functions.DPMS_State.On:
-            if not self.screensaver.is_showing():
+            if not self.screensaver.is_showing:
                 self.screensaver.show()
         return True
 
@@ -704,6 +705,9 @@ class KlipperScreen(Gtk.Window):
 
     def set_autolock_timeout(self, time):
         self.lock_screen.set_autolock_timeout(time)
+
+    def set_screensaver_wake_delay(self, time):
+        self.screensaver.set_wake_delay(time)
 
     def set_screenblanking_printing_timeout(self, time):
         if self.printer and self.printer.state in ("printing", "paused"):

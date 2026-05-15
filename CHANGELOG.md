@@ -4,6 +4,8 @@ Probably all versions contain changes regarding documentation, translation, fixe
 
 ## Current master
 
+* add a configurable screensaver delay for slow to wake displays
+
 ## v0.4.7  (May 13, 2026)
 
 * add a spool edit panel for spoolman
