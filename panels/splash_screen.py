@@ -87,7 +87,7 @@ class Panel(ScreenPanel):
             self.labels["actions"].add(self.labels["restart_system"])
             self.labels["actions"].add(self.labels["shutdown"])
         self.labels["actions"].add(self.labels["menu"])
-        if (not(self._screen.connecting or self._screen.connected)):
+        if (not (self._screen.connecting or self._screen.connected)):
             self.labels["actions"].add(self.labels["retry"])
         self.labels["actions"].show_all()
 
