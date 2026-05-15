@@ -175,7 +175,8 @@ class BedMap(Gtk.DrawingArea):
         if columns <= 3:
             return False
         if i != rows // 2 and j != columns // 2:
-            # Skip if the value is equal to the next but verify that this also happens on the other side
+            # Skip if the value equals the next but verify
+            # that this also happens on the other side
             if (
                 j < columns // 2
                 and row[j] == row[j + 1]

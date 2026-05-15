@@ -604,9 +604,13 @@ class Panel(ScreenPanel):
                 self.labels["speed_factor"].set_label(f"{self.speed:3}%")
             if "speed" in data["gcode_move"]:
                 self.req_speed = round(float(data["gcode_move"]["speed"]) / 60 * self.speed_factor)
+                mms_unit = (
+                    f"{self.mms}"
+                    if self.vel < 1000 and self.req_speed < 1000 and self._screen.width > 500
+                    else ""
+                )
                 self.labels["req_speed"].set_label(
-                    f"{self.speed}% {self.vel:3.0f}/{self.req_speed:3.0f} "
-                    f"{f'{self.mms}' if self.vel < 1000 and self.req_speed < 1000 and self._screen.width > 500 else ''}"
+                    f"{self.speed}% {self.vel:3.0f}/{self.req_speed:3.0f} {mms_unit}"
                 )
                 self.buttons["speed"].set_label(self.labels["req_speed"].get_label())
             if "homing_origin" in data["gcode_move"]:
@@ -633,9 +637,13 @@ class Panel(ScreenPanel):
                 self.prev_pos = [pos, now]
             if "live_velocity" in data["motion_report"]:
                 self.vel = float(data["motion_report"]["live_velocity"])
+                mms_unit = (
+                    f"{self.mms}"
+                    if self.vel < 1000 and self.req_speed < 1000 and self._screen.width > 500
+                    else ""
+                )
                 self.labels["req_speed"].set_label(
-                    f"{self.speed}% {self.vel:3.0f}/{self.req_speed:3.0f} "
-                    f"{f'{self.mms}' if self.vel < 1000 and self.req_speed < 1000 and self._screen.width > 500 else ''}"
+                    f"{self.speed}% {self.vel:3.0f}/{self.req_speed:3.0f} {mms_unit}"
                 )
                 self.buttons["speed"].set_label(self.labels["req_speed"].get_label())
             if "live_extruder_velocity" in data["motion_report"]:
@@ -652,7 +660,7 @@ class Panel(ScreenPanel):
             if "state" in data["print_stats"]:
                 self.set_state(
                     data["print_stats"]["state"],
-                    msg=f"{data['print_stats']['message'] if 'message' in data['print_stats'] else ''}",
+                    msg=data["print_stats"].get("message", ""),
                 )
             if "filename" in data["print_stats"]:
                 self.update_filename(data["print_stats"]["filename"])
@@ -935,7 +943,7 @@ class Panel(ScreenPanel):
         self.get_file_metadata()
 
     def animate_label(self):
-        if ellipsized := self.labels["file"].get_layout().is_ellipsized():
+        if self.labels["file"].get_layout().is_ellipsized():
             self.filename_label["current"] = self.filename_label["current"][1:]
             self.labels["file"].set_label(self.filename_label["current"] + " " * 6)
         else:

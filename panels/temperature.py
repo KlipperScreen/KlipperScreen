@@ -218,7 +218,6 @@ class Panel(ScreenPanel):
         for heater in selection:
             if heater.startswith("temperature_sensor "):
                 continue
-            name = heater.split()[1] if len(heater.split()) > 1 else heater
             if heater not in self.active_heaters:
                 self.select_heater(None, heater)
         self.extra_selection = None
@@ -295,8 +294,9 @@ class Panel(ScreenPanel):
                             target = self.preheat_options[setting]["temperature_fan"]
                     if self.validate(heater, target, max_temp):
                         self._screen._ws.klippy.set_temp_fan_temp(name, target)
-            # This small delay is needed to properly update the target if the user configured something above
-            # and then changed the target again using preheat gcode
+            # This small delay is needed to properly update
+            # the target if user configured something above
+            # and then changed the target using preheat gcode
             GLib.timeout_add(250, self.preheat_gcode, widget, setting)
 
     def validate(self, heater, target=None, max_temp=None):

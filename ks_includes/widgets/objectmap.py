@@ -93,7 +93,6 @@ class ObjectMap(Gtk.DrawingArea):
 
         # Borders
         ctx.move_to(self.margin_left, self.margin_top)
-        # logging.info(f"l:{self.margin_left:.0f} t:{self.margin_top:.0f} r:{right:.0f} b:{bottom:.0f}")
         ctx.line_to(right, self.margin_top)
         ctx.line_to(right, bottom)
         ctx.line_to(self.margin_left, bottom)

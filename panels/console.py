@@ -103,7 +103,8 @@ class Panel(ScreenPanel):
 
         self.labels["tb"].insert_markup(
             self.labels["tb"].get_end_iter(),
-            f'\n<span color="{COLORS["time"]}">{datetime.fromtimestamp(msgtime).strftime("%H:%M:%S")}</span> {message}',
+            f'\n<span color="{COLORS["time"]}">'
+            f"{datetime.fromtimestamp(msgtime).strftime('%H:%M:%S')}</span> {message}",
             -1,
         )
         # Limit the length

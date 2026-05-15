@@ -102,7 +102,8 @@ class SdbusNm:
         self.popup = popup_callback
         if self.wlan_device.state == enums.DeviceState.UNMANAGED:
             self.popup(
-                f"{iface_name} is not managed by NetworkManager and cannot be controlled by this app"
+                f"{self.wlan_device.interface} is not managed by "
+                "NetworkManager and cannot be controlled by this app"
             )
             return
 
@@ -358,7 +359,7 @@ class SdbusNm:
                 ):
                     settings["connection"]["interface-name"] = ("s", self.wlan_device.interface)
                     con.update(settings)
-                active_connection = self.nm.activate_connection(target_connection)
+                self.nm.activate_connection(target_connection)
                 return target_connection
             except Exception as e:
                 logging.exception("Unexpected error")
@@ -411,7 +412,8 @@ class SdbusNm:
             if wireless.interface == iface_name:
                 if wireless.state == enums.DeviceState.UNMANAGED:
                     self.popup(
-                        f"{iface_name} is not managed by NetworkManager and cannot be controlled by this app"
+                        f"{iface_name} is not managed by "
+                        "NetworkManager and cannot be controlled by this app"
                     )
                     return
                 self.wlan_device = wireless

@@ -303,7 +303,9 @@ class KlipperScreenConfig:
                 ):
                     msg = (
                         f'Unable to parse "{key}" from [{section}]\n'
-                        f"Expected a {'number' if key in numbers else 'boolean'} but got: {config[section][key]}"
+                        f"Expected a "
+                        f"{'number' if key in numbers else 'boolean'} "
+                        f"but got: {config[section][key]}"
                     )
                     self.errors.append(msg)
                     logging.error("Invalid configuration detected !!!")

@@ -155,7 +155,7 @@ class Panel(ScreenPanel):
         self._screen._ws.klippy.gcode_script("SET_INPUT_SHAPER")
         # Check for the accelerometer
         self._screen._ws.klippy.gcode_script("ACCELEROMETER_QUERY")
-        # Send at least two commands, with my accelerometer the first command after a reboot will fail
+        # Send at least two commands the first may fail, after a reboot
         self._screen._ws.klippy.gcode_script("MEASURE_AXES_NOISE")
 
     def process_update(self, action, data):

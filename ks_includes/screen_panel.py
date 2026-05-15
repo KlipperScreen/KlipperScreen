@@ -138,20 +138,20 @@ class ScreenPanel:
         if seconds is None or seconds < 1:
             return "-"
         days = seconds // 86400
-        day_units = ngettext("day", "days", days)
+        d_unit = ngettext("day", "days", days)
         seconds %= 86400
         hours = seconds // 3600
-        hour_units = ngettext("hour", "hours", hours)
+        h_unit = ngettext("hour", "hours", hours)
         seconds %= 3600
         minutes = seconds // 60
-        min_units = ngettext("minute", "minutes", minutes)
+        m_unit = ngettext("minute", "minutes", minutes)
         seconds %= 60
-        sec_units = ngettext("second", "seconds", seconds)
+        s_unit = ngettext("second", "seconds", seconds)
         return (
-            f"{f'{days:2.0f}{spc}{day_units}{spc}' if days > 0 else ''}"
-            f"{f'{hours:2.0f}{spc}{hour_units}{spc}' if hours > 0 else ''}"
-            f"{f'{minutes:2.0f}{spc}{min_units}{spc}' if minutes > 0 and days == 0 else ''}"
-            f"{f'{seconds:2.0f}{spc}{sec_units}' if days == 0 and hours == 0 and minutes == 0 else ''}"
+            f"{f'{days:2.0f}{spc}{d_unit}{spc}' if days > 0 else ''}"
+            f"{f'{hours:2.0f}{spc}{h_unit}{spc}' if hours > 0 else ''}"
+            f"{f'{minutes:2.0f}{spc}{m_unit}{spc}' if minutes > 0 and days == 0 else ''}"
+            f"{f'{seconds:2.0f}{spc}{s_unit}' if days == 0 and hours == 0 and minutes == 0 else ''}"
         )
 
     def format_eta(self, total, elapsed):
@@ -167,8 +167,14 @@ class ScreenPanel:
         minutes = seconds // 60
         eta = datetime.datetime.now() + datetime.timedelta(days=days, hours=hours, minutes=minutes)
         if self._config.get_main_config().getboolean("24htime", True):
-            return f"{self.format_time(total - elapsed)} | {eta:%H:%M} {f' +{days:2.0f}d' if days > 0 else ''}"
-        return f"{self.format_time(total - elapsed)} | {eta:%I:%M %p} {f' +{days:2.0f}d' if days > 0 else ''}"
+            return (
+                f"{self.format_time(total - elapsed)} | {eta:%H:%M} "
+                f"{f' +{days:2.0f}d' if days > 0 else ''}"
+            )
+        return (
+            f"{self.format_time(total - elapsed)} | {eta:%I:%M %p} "
+            f"{f' +{days:2.0f}d' if days > 0 else ''}"
+        )
 
     @staticmethod
     def format_size(size):
