@@ -76,7 +76,6 @@ class KlipperScreen(Gtk.Window):
     reinit_count = 0
     max_retries = 4
     initialized = False
-    initializing = False
     popup_timeout = None
     wayland = False
     windowed = False
@@ -248,7 +247,6 @@ class KlipperScreen(Gtk.Window):
         gc.collect()
         self.connecting = True
         self.initialized = False
-        self.initializing = False
         ind = next(
             (
                 self.printers.index(printer)
@@ -798,6 +796,7 @@ class KlipperScreen(Gtk.Window):
         elif "micro-controller" in state:
             msg += _("Please recompile and flash the micro-controller.") + "\n"
         self.printer_initializing(msg + "\n" + state, go_to_splash=True)
+        self.initialized = False
 
     def state_paused(self):
         self.state_printing()
@@ -857,9 +856,6 @@ class KlipperScreen(Gtk.Window):
             self.show_panel(home)
 
     def _websocket_callback(self, action, data):
-        if self.connecting:
-            logging.debug("Not connected")
-            return
         if action == "notify_klippy_disconnected":
             self.printer.process_update({'webhooks': {'state': "disconnected"}})
             return
@@ -1089,7 +1085,6 @@ class KlipperScreen(Gtk.Window):
 
     def _init_printer(self, msg, go_to_splash=False):
         self.printer_initializing(msg, go_to_splash)
-        self.initializing = False
         self.connecting = True
 
         if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:
@@ -1221,7 +1216,6 @@ class KlipperScreen(Gtk.Window):
         logging.info("Printer initialized")
         self.initialized = True
         self.reinit_count = 0
-        self.initializing = False
         self.log_notification("Printer Initialized", 1)
 
     def init_tempstore(self):

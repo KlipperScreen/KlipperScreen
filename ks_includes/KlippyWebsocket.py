@@ -50,6 +50,7 @@ class KlippyWebsocket(threading.Thread):
         if self.connected:
             logging.debug("Already connected")
             return False
+        self.closing = False
         self.connecting = True
         logging.debug("Attempting to connect")
 
