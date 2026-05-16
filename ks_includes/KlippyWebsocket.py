@@ -183,13 +183,15 @@ class MoonrakerApi:
         logging.debug("Sending printer.objects.subscribe")
         return self._ws.send_method("printer.objects.subscribe", updates)
 
-    def power_device_off(self, device, callback=None, *args):
-        logging.debug(f"Sending machine.device_power.off: {device}")
-        return self._ws.send_method("machine.device_power.off", {device: False}, callback, *args)
+    def power_device_off(self, devices, callback=None, *args):
+        result = {item: None for item in devices}
+        logging.debug(f"Sending machine.device_power.off: {result}")
+        return self._ws.send_method("machine.device_power.off", result, callback, *args)
 
-    def power_device_on(self, device, callback=None, *args):
-        logging.debug("Sending machine.device_power.on {device}")
-        return self._ws.send_method("machine.device_power.on", {device: False}, callback, *args)
+    def power_device_on(self, devices, callback=None, *args):
+        result = {item: None for item in devices}
+        logging.debug(f"Sending machine.device_power.on: {result}")
+        return self._ws.send_method("machine.device_power.on", result, callback, *args)
 
     def print_cancel(self, callback=None, *args):
         logging.debug("Sending printer.print.cancel")
