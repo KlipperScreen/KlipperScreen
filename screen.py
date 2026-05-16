@@ -1435,6 +1435,8 @@ class KlipperScreen(Gtk.Window):
             self.vertical_mode = new_mode
             self.aspect_ratio = new_ratio
             logging.info(f"Vertical mode: {self.vertical_mode}")
+            self.gtk.update_layout(width, height, new_mode)
+            self.base_panel._reconfigure_main_grid()
             self.reload_panels()
 
 

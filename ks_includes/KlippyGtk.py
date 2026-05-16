@@ -43,54 +43,59 @@ class KlippyGtk:
         self.font_size_type = screen._config.get_main_config().get("font_size", "medium")
         self.width = screen.width
         self.height = screen.height
-        self.ultra_tall = (self.height / self.width) >= 3
-        self.font_ratio = [28, 42] if self.screen.vertical_mode else [40, 27]
-        self.font_size = min(self.width / self.font_ratio[0], self.height / self.font_ratio[1])
-        self.img_scale = self.font_size * 2
-        self.button_image_scale = 1.38
-        self.bsidescale = 0.65  # Buttons with image at the side
-        self.dialog_buttons_height = round(self.height / 5)
-
-        if self.font_size_type == "max":
-            self.font_size = self.font_size * 1.06
-            self.img_scale = self.img_scale * 0.7
-            self.bsidescale = 0.7
-        elif self.font_size_type == "extralarge":
-            self.font_size = self.font_size * 1.05
-            self.img_scale = self.img_scale * 0.7
-            self.bsidescale = 1.0
-        elif self.font_size_type == "large":
-            self.font_size = self.font_size * 1.025
-            self.img_scale = self.img_scale * 0.85
-            self.bsidescale = 0.8
-        elif self.font_size_type == "small":
-            self.font_size = self.font_size * 0.91
-            self.bsidescale = 0.55
-        self.img_width = self.font_size * 3
-        self.img_height = self.font_size * 3
-        self.titlebar_height = self.font_size * 2
-        logging.info(f"Font size: {self.font_size:.1f} ({self.font_size_type})")
-
-        if self.screen.vertical_mode:
-            self.action_bar_width = int(self.width)
-            self.action_bar_height = int(self.height * 0.1)
-            self.content_width = self.width
-            self.content_height = self.height - self.titlebar_height - self.action_bar_height
-        else:
-            self.action_bar_width = int(self.width * 0.1)
-            self.action_bar_height = int(self.height)
-            self.content_width = self.width - self.action_bar_width
-            self.content_height = self.height - self.titlebar_height
-
-        self.keyboard_height = self.content_height * 0.5
-        if self.ultra_tall:
-            self.keyboard_height = self.keyboard_height * 0.5
-
         self.color_list = {}  # This is set by screen.py init_style()
         for key in self.color_list:
             if "base" in self.color_list[key]:
                 rgb = [int(self.color_list[key]["base"][i : i + 2], 16) for i in range(0, 6, 2)]
                 self.color_list[key]["rgb"] = rgb
+        self.update_layout(screen.width, screen.height, screen.vertical_mode)
+
+    def update_layout(self, width, height, vertical_mode):
+        self.width = width
+        self.height = height
+        self.ultra_tall = (height / width) >= 3
+        self.font_ratio = [28, 42] if vertical_mode else [40, 27]
+        self.font_size = min(width / self.font_ratio[0], height / self.font_ratio[1])
+        self.img_scale = self.font_size * 2
+        self.button_image_scale = 1.38
+        self.bsidescale = 0.65  # Buttons with image at the side
+        self.dialog_buttons_height = round(height / 5)
+
+        if self.font_size_type == "max":
+            self.font_size *= 1.06
+            self.img_scale *= 0.7
+            self.bsidescale = 0.7
+        elif self.font_size_type == "extralarge":
+            self.font_size *= 1.05
+            self.img_scale *= 0.7
+            self.bsidescale = 1.0
+        elif self.font_size_type == "large":
+            self.font_size *= 1.025
+            self.img_scale *= 0.85
+            self.bsidescale = 0.8
+        elif self.font_size_type == "small":
+            self.font_size *= 0.91
+            self.bsidescale = 0.55
+
+        self.img_width = self.font_size * 3
+        self.img_height = self.font_size * 3
+        self.titlebar_height = self.font_size * 2
+        logging.info(f"Font size: {self.font_size:.1f} ({self.font_size_type})")
+
+        if vertical_mode:
+            self.action_bar_width = int(width)
+            self.action_bar_height = int(height * 0.1)
+            self.content_width = width
+            self.content_height = height - self.titlebar_height - self.action_bar_height
+        else:
+            self.action_bar_width = int(width * 0.1)
+            self.action_bar_height = int(height)
+            self.content_width = width - self.action_bar_width
+            self.content_height = height - self.titlebar_height
+
+        self.keyboard_height = self.content_height * 0.5
+        if self.ultra_tall:
+            self.keyboard_height *= 0.5
 
     def get_temp_color(self, device):
         # logging.debug("Color list %s" % self.color_list)

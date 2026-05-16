@@ -73,15 +73,8 @@ class BasePanel(ScreenPanel):
             self.control[item].connect("clicked", self._screen.remove_keyboard)
 
         # Action bar
-        self.action_bar = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-        if self._screen.vertical_mode:
-            self.action_bar.set_hexpand(True)
-            self.action_bar.set_vexpand(False)
-        else:
-            self.action_bar.set_hexpand(False)
-            self.action_bar.set_vexpand(True)
+        self.action_bar = Gtk.Box(spacing=5)
         self.action_bar.get_style_context().add_class("action_bar")
-        self.action_bar.set_size_request(self._gtk.action_bar_width, self._gtk.action_bar_height)
         self.action_bar.add(self.control["back"])
         self.action_bar.add(self.control["home"])
         self.action_bar.add(self.control["printer_select"])
@@ -131,19 +124,32 @@ class BasePanel(ScreenPanel):
 
         # Main layout
         self.main_grid = Gtk.Grid()
+        self._build_main_grid()
 
+        self.update_time()
+
+    def _reconfigure_main_grid(self):
+        self.main_grid.remove(self.titlebar)
+        self.main_grid.remove(self.content)
+        self.main_grid.remove(self.action_bar)
+        self._build_main_grid()
+
+    def _build_main_grid(self):
+        self.action_bar.set_size_request(self._gtk.action_bar_width, self._gtk.action_bar_height)
         if self._screen.vertical_mode:
             self.main_grid.attach(self.titlebar, 0, 0, 1, 1)
             self.main_grid.attach(self.content, 0, 1, 1, 1)
             self.main_grid.attach(self.action_bar, 0, 2, 1, 1)
             self.action_bar.set_orientation(orientation=Gtk.Orientation.HORIZONTAL)
+            self.action_bar.set_hexpand(True)
+            self.action_bar.set_vexpand(False)
         else:
-            self.main_grid.attach(self.action_bar, 0, 0, 1, 2)
-            self.action_bar.set_orientation(orientation=Gtk.Orientation.VERTICAL)
             self.main_grid.attach(self.titlebar, 1, 0, 1, 1)
             self.main_grid.attach(self.content, 1, 1, 1, 1)
-
-        self.update_time()
+            self.main_grid.attach(self.action_bar, 0, 0, 1, 2)
+            self.action_bar.set_orientation(orientation=Gtk.Orientation.VERTICAL)
+            self.action_bar.set_hexpand(False)
+            self.action_bar.set_vexpand(True)
 
     def load_battery_icons(self):
         img_size = self._gtk.img_scale * self.bts
