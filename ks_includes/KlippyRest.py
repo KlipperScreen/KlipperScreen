@@ -22,18 +22,6 @@ class KlippyRest:
     def process_response(response):
         return response["result"] if response and "result" in response else response
 
-    def get_server_info(self):
-        return self.send_request("server/info")
-
-    def get_oneshot_token(self):
-        return self.send_request("access/oneshot_token")
-
-    def get_printer_info(self):
-        return self.send_request("printer/info")
-
-    def get_gcode_help(self):
-        return self.send_request("printer/gcode/help")
-
     def get_thumbnail_stream(self, thumbnail):
         return self.send_request(f"server/files/gcodes/{thumbnail}", json=False)
 

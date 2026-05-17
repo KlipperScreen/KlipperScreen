@@ -4,7 +4,6 @@ import argparse
 import ast
 import gc
 import json
-import locale
 import logging
 import os
 import pathlib
@@ -41,21 +40,6 @@ from panels.base_panel import BasePanel
 logging.getLogger("urllib3").setLevel(logging.WARNING)
 
 klipperscreendir = pathlib.Path(__file__).parent.resolve()
-
-
-def set_text_direction(lang=None):
-    rtl_languages = ["he"]
-    if lang is None:
-        for lng in rtl_languages:
-            if locale.getlocale()[0].startswith(lng):
-                lang = lng
-                break
-    if lang in rtl_languages:
-        Gtk.Widget.set_default_direction(Gtk.TextDirection.RTL)
-        logging.debug("Enabling RTL mode")
-        return False
-    Gtk.Widget.set_default_direction(Gtk.TextDirection.LTR)
-    return True
 
 
 class KlipperScreen(Gtk.Window):
