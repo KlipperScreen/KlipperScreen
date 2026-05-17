@@ -254,8 +254,6 @@ class KlipperScreen(Gtk.Window):
             self.printers[ind][name]["moonraker_ssl"],
         )
 
-        self.spoolman_api = SpoolmanAPI(self.apiclient)
-
         self._notification_handler = NotificationHandler(self)
 
         self._ws = KlippyWebsocket(
@@ -271,6 +269,7 @@ class KlipperScreen(Gtk.Window):
             self.printers[ind][name]["moonraker_path"],
             self.printers[ind][name]["moonraker_ssl"],
         )
+        self.spoolman_api = SpoolmanAPI(self._ws)
         if self.files is None:
             self.files = KlippyFiles(self)
         else:
@@ -905,16 +904,22 @@ class KlipperScreen(Gtk.Window):
         self._notification_handler.handle(action, data)
 
     def update_spool_data(self, spool_id=None):
-        if not spool_id:
-            spool_id = self.spoolman_api.get_active_spool_id()
-        if not spool_id or not isinstance(spool_id, int):
-            self.printer.set_active_spool(spool_id=None)
-            return
-        spool_data = self.spoolman_api.get_spool_details(spool_id)
-        if spool_data is None:
+        def on_spool_id(result):
+            if not result or not isinstance(result, int):
+                self.printer.set_active_spool(spool_id=None)
+                return
+            self.spoolman_api.get_spool_details(result, lambda r: self._apply_spool_data(result, r))
+
+        if spool_id:
+            self.spoolman_api.get_spool_details(spool_id, lambda r: self._apply_spool_data(spool_id, r))
+        else:
+            self.spoolman_api.get_active_spool_id(on_spool_id)
+
+    def _apply_spool_data(self, spool_id, result):
+        if result is None:
             self.printer.set_active_spool(spool_id=spool_id)
             return
-        self.printer.set_active_spool(spool_id=spool_id, spool_data=spool_data)
+        self.printer.set_active_spool(spool_id=spool_id, spool_data=result)
 
     def process_action(self, action):
         if action.startswith("prompt"):
@@ -1121,7 +1126,9 @@ class KlipperScreen(Gtk.Window):
             self._ws.klippy.list_webcams(self.set_cameras)
         if "spoolman" in self.server_info["components"]:
             self.printer.enable_spoolman()
-            self.update_spool_data(self.spoolman_api.get_active_spool_id())
+            self.spoolman_api.get_active_spool_id(
+                lambda result: self.update_spool_data(result)
+            )
         self.init_klipper()
 
     def set_power_devices(self, data, method, params):

@@ -466,13 +466,16 @@ class Panel(ScreenPanel):
         hide_archived = self._config.get_config().getboolean(
             "spoolman", "hide_archived", fallback=True
         )
-        self._model.clear()
-        self._materials.clear()
-        spools = self._screen.spoolman_api.load_all_spools(allow_archived=not hide_archived)
+        self._screen.spoolman_api.load_all_spools(
+            allow_archived=not hide_archived, callback=self._load_spools_cb
+        )
+
+    def _load_spools_cb(self, spools):
         if not spools:
             self._screen.show_popup_message(_("Error trying to fetch spools"))
             return
-
+        self._model.clear()
+        self._materials.clear()
         materials = []
         for spool in spools:
             spoolObject = SpoolmanSpool(**spool)
@@ -488,19 +491,25 @@ class Panel(ScreenPanel):
             self._materials.append([material, material])
 
     def get_active_spool(self):
-        spool_id = self._screen.spoolman_api.get_active_spool_id()
+        self._screen.spoolman_api.get_active_spool_id(self._get_active_spool_cb)
+
+    def _get_active_spool_cb(self, spool_id):
         if spool_id is not None:
             self._screen.update_spool_data(spool_id)
         self.update_active_spool(spool_id)
 
     def clear_active_spool(self, sender: Gtk.Button = None):
-        result = self._screen.spoolman_api.clear_active_spool()
+        self._screen.spoolman_api.clear_active_spool(self._clear_active_spool_cb)
+
+    def _clear_active_spool_cb(self, result):
         if not result:
             self._screen.show_popup_message(_("Error clearing active spool"))
-            return
 
     def set_active_spool(self, spool: SpoolmanSpool):
-        result = self._screen.spoolman_api.set_active_spool_id(spool.id)
+        self._screen.spoolman_api.set_active_spool_id(
+            spool.id, self._set_active_spool_cb
+        )
+
+    def _set_active_spool_cb(self, result):
         if not result:
             self._screen.show_popup_message(_("Error setting active spool"))
-            return

@@ -25,6 +25,8 @@ class Panel(ScreenPanel):
 
     def set_extra(self, extra):
         self.spool = extra
+        self._pending_update_spool_id = None
+        self._pending_update_value = None
         for child in self.content.get_children():
             self.content.remove(child)
         self._build_grid()
@@ -274,7 +276,6 @@ class Panel(ScreenPanel):
     def _submit_entry(self, value):
         if self.spool is None:
             return
-        result = {}
         if self.selected_weight_mode == "measured":
             empty_spool_weight = self._get_empty_spool_weight() or 0
             if empty_spool_weight:
@@ -282,57 +283,61 @@ class Panel(ScreenPanel):
             if value < 0:
                 self._screen.show_popup_message(_("Measured weight is below empty spool weight"))
                 return
-            result = self._screen.spoolman_api.update_spool(
-                spool_id=self.spool.id, payload={"remaining_weight": value}
-            )
-        if self.selected_weight_mode == "remaining":
+        if self.selected_weight_mode in ("remaining", "empty", "initial"):
             if value < 0:
                 self._screen.show_popup_message(_("Value must be positive"))
                 return
-            result = self._screen.spoolman_api.update_spool(
-                spool_id=self.spool.id, payload={"remaining_weight": value}
-            )
-        if self.selected_weight_mode == "empty":
-            if value < 0:
-                self._screen.show_popup_message(_("Value must be positive"))
-                return
-            result = self._screen.spoolman_api.update_spool(
-                spool_id=self.spool.id, payload={"spool_weight": value}
-            )
-        if self.selected_weight_mode == "initial":
-            if value < 0:
-                self._screen.show_popup_message(_("Value must be positive"))
-                return
-            result = self._screen.spoolman_api.update_spool(
-                spool_id=self.spool.id, payload={"initial_weight": value}
-            )
+        self._pending_update_value = value
+        self._pending_update_spool_id = self.spool.id
+        self._screen.spoolman_api.update_spool(
+            spool_id=self.spool.id,
+            payload=self._get_update_payload(),
+            callback=self._update_spool_cb
+        )
+
+    def _get_update_payload(self):
+        value = self._pending_update_value
+        if self.selected_weight_mode == "measured":
+            empty_spool_weight = self._get_empty_spool_weight() or 0
+            if empty_spool_weight:
+                value -= empty_spool_weight
+            return {"remaining_weight": value}
+        elif self.selected_weight_mode == "remaining":
+            return {"remaining_weight": value}
+        elif self.selected_weight_mode == "empty":
+            return {"spool_weight": value}
+        elif self.selected_weight_mode == "initial":
+            return {"initial_weight": value}
+        return {}
+
+    def _update_spool_cb(self, result):
+        value = self._pending_update_value
+        pending_id = self._pending_update_spool_id
+        self._pending_update_value = None
+        self._pending_update_spool_id = None
+
+        if self.spool is None:
+            return
+
+        if result and pending_id and self.spool.id != pending_id:
+            return
+
         if not result:
             self._screen.show_popup_message(_("Error updating filament weight"))
             return
 
-        if result.get("error"):
-            self._screen.show_popup_message(
-                _("Error updating filament weight") + f"\n{result['error'].get('message', '')}"
-            )
-            return
-
         self.spool.remaining_weight = result.get("remaining_weight", value)
-
         if "used_weight" in result:
             self.spool.used_weight = result["used_weight"]
-
         if "spool_weight" in result:
             self.spool.spool_weight = result["spool_weight"]
-
         if "initial_weight" in result:
             self.spool.initial_weight = result["initial_weight"]
-
         if (
             self._screen.printer is not None
             and getattr(self._screen.printer, "active_spool_id", None) == self.spool.id
         ):
             self._screen.printer.active_spool["remaining_weight"] = result.get("remaining_weight")
-
         self._refresh_values()
         self._screen.show_popup_message(_("Filament weight updated"), 1)
         self._hide_numpad(None)
