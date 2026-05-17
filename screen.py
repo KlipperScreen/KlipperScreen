@@ -8,7 +8,6 @@ import locale
 import logging
 import os
 import pathlib
-import re
 import subprocess
 import sys
 import traceback  # noqa
@@ -30,6 +29,7 @@ from ks_includes.files import KlippyFiles
 from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.KlippyRest import KlippyRest
 from ks_includes.KlippyWebsocket import KlippyWebsocket
+from ks_includes.notification_handler import NotificationHandler
 from ks_includes.printer import Printer
 from ks_includes.spoolman_api import SpoolmanAPI
 from ks_includes.widgets.keyboard import Keyboard
@@ -271,6 +271,8 @@ class KlipperScreen(Gtk.Window):
         )
 
         self.spoolman_api = SpoolmanAPI(self.apiclient)
+
+        self._notification_handler = NotificationHandler(self)
 
         self._ws = KlippyWebsocket(
             {
@@ -916,89 +918,7 @@ class KlipperScreen(Gtk.Window):
             self.show_panel(home)
 
     def _websocket_callback(self, action, data):
-        if action == "notify_klippy_disconnected":
-            self.printer.process_update({"webhooks": {"state": "disconnected"}})
-            return
-        elif action == "notify_klippy_shutdown":
-            self.printer.process_update({"webhooks": {"state": "shutdown"}})
-            return
-        elif action == "notify_klippy_ready":
-            if not self.initialized:
-                self.reinit_count = 0
-                self.init_klipper()
-                return
-            self.printer.process_update({"webhooks": {"state": "ready"}})
-            return
-        elif action == "notify_status_update" and self.printer.state != "shutdown":
-            self.printer.process_update(data)
-            if (
-                "manual_probe" in data
-                and data["manual_probe"]["is_active"]
-                and "zcalibrate" not in self._cur_panels
-            ):
-                self.show_panel("zcalibrate")
-            if (
-                "screws_tilt_adjust" in data
-                and "max_deviation" in data["screws_tilt_adjust"]
-                and not data["screws_tilt_adjust"]["max_deviation"]
-                and "bed_level" not in self._cur_panels
-            ):
-                self.show_panel("bed_level")
-        elif action == "notify_filelist_changed":
-            if self.files is not None:
-                self.files.process_update(data)
-            return
-        elif action == "notify_metadata_update":
-            self.files.request_metadata(data["filename"])
-            return
-        elif action == "notify_update_response":
-            if "message" in data and "Error" in data["message"]:
-                logging.error(f"{action}:{data['message']}")
-                self.show_popup_message(data["message"], 3, from_ws=True)
-                if "KlipperScreen" in data["message"]:
-                    self.restart_ks()
-        elif action == "notify_power_changed":
-            logging.debug("Power status changed: %s", data)
-            self.printer.process_power_update(data)
-            self.panels["splash_screen"].check_power_status()
-        elif action == "notify_gcode_response" and self.printer.state not in ["error", "shutdown"]:
-            if re.match("^(?:ok\\s+)?(B|C|T\\d*):", data):
-                return
-            if data.startswith("// action:"):
-                self.process_action(data[10:])
-                return
-            elif data.startswith("echo: "):
-                self.show_popup_message(data[6:], 1, from_ws=True)
-            elif "!! Extrude below minimum temp" in data:
-                if self._cur_panels[-1] != "temperature":
-                    self.show_panel(
-                        "temperature", extra=self.printer.get_stat("toolhead", "extruder")
-                    )
-                self.show_popup_message(_("Temperature too low to extrude"))
-                return
-            elif data.startswith("!! "):
-                self.show_popup_message(data[3:], 3, from_ws=True)
-            elif (
-                "unknown" in data.lower()
-                and "TESTZ" not in data
-                and "MEASURE_AXES_NOISE" not in data
-                and "ACCELEROMETER_QUERY" not in data
-            ):
-                self.show_popup_message(data, from_ws=True)
-            elif "SAVE_CONFIG" in data and self.printer.state == "ready":
-                script = {"script": "SAVE_CONFIG"}
-                self._confirm_send_action(
-                    None,
-                    _("Save configuration?") + "\n\n" + _("Klipper will reboot"),
-                    "printer.gcode.script",
-                    script,
-                )
-        elif action == "notify_active_spool_set":
-            spool_id = (
-                data["spool_id"] if "spool_id" in data else self.spoolman_api.get_active_spool_id()
-            )
-            self.update_spool_data(spool_id)
-        self.process_update(action, data)
+        self._notification_handler.handle(action, data)
 
     def update_spool_data(self, spool_id=None):
         if not spool_id:

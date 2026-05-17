@@ -266,7 +266,7 @@ class Panel(ScreenPanel):
             return
         self._screen.base_panel.show_update_dialog()
         msg = _("Starting recovery for") + f" {program}..."
-        self._screen._websocket_callback(
+        self._screen._notification_handler.handle(
             "notify_update_response",
             {"application": {program}, "message": msg, "complete": False},
         )
@@ -289,7 +289,7 @@ class Panel(ScreenPanel):
                 return
         self._screen.base_panel.show_update_dialog()
         msg = _("Updating") if program == "full" else _("Starting update for") + f" {program}..."
-        self._screen._websocket_callback(
+        self._screen._notification_handler.handle(
             "notify_update_response",
             {"application": {program}, "message": msg, "complete": False},
         )
