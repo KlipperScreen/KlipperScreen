@@ -865,7 +865,11 @@ class KlipperScreen(Gtk.Window):
         self.printer_initializing(_("Klipper has shutdown") + "\n\n" + msg, go_to_splash=True)
 
     def check_active_commands(self):
-        if self.printer.get_stat("manual_probe", "is_active"):
+        if self.printer.get_stat("bed_screws", "is_active"):
+            if "bed_level" not in self._cur_panels:
+                self.show_panel("bed_level")
+            return
+        elif self.printer.get_stat("manual_probe", "is_active"):
             if "zcalibrate" not in self._cur_panels:
                 self.show_panel("zcalibrate")
             return
