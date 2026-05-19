@@ -159,11 +159,10 @@ class Panel(ScreenPanel):
         self.content.add(grid)
 
     def on_dropdown_change(self, dropdown):
-        iterable = dropdown.get_active_iter()
-        if iterable is None:
-            self._screen.show_popup_message("Unknown error with dropdown")
-            return
         model = dropdown.get_model()
+        iterable = dropdown.get_active_iter()
+        if len(model) == 0 or iterable is None:
+            return
         logging.debug(f"Selected {model[iterable][0]}")
 
     def set_commands(self):
@@ -191,16 +190,26 @@ class Panel(ScreenPanel):
         logging.info(f"Available commands for calibration: {[row[0] for row in commands]}")
         return commands
 
+    def rebuild_commands(self):
+        if len(self.dropdown.get_model()) > 0:
+            return
+        new_model = self.set_commands()
+        self.dropdown.set_model(new_model)
+        self.dropdown.set_active(0)
+
     @staticmethod
     def _csv_to_array(string):
         return [float(i.strip()) for i in string.split(",")]
 
     def start_calibration(self, widget):
+        model = self.dropdown.get_model()
+        if len(model) == 0:
+            self._screen.show_popup_message(_("Calibration commands not available yet"))
+            return
         iterable = self.dropdown.get_active_iter()
         if iterable is None:
             self._screen.show_popup_message("Unknown error with dropdown")
             return
-        model = self.dropdown.get_model()
         command = model[iterable][0]
 
         self.buttons["start"].set_sensitive(False)
@@ -289,6 +298,8 @@ class Panel(ScreenPanel):
                     self.buttons_calibrating()
                 else:
                     self.buttons_not_calibrating()
+            if len(self.dropdown.get_model()) == 0 and self._printer.available_commands:
+                self.rebuild_commands()
         elif action == "notify_gcode_response":
             if "out of range" in data.lower():
                 self._screen.show_popup_message(data)

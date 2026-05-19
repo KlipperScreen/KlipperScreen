@@ -854,6 +854,7 @@ class KlipperScreen(Gtk.Window):
             return
         self.files.refresh_files()
         self.show_panel("main_menu", remove_all=True, items=self._config.get_menu_items("__main"))
+        self.check_active_commands()
 
     def state_startup(self):
         self.printer_initializing(_("Klipper is attempting to start"))
@@ -862,6 +863,12 @@ class KlipperScreen(Gtk.Window):
         self.printer.stop_tempstore_updates()
         msg = self.printer.get_stat("webhooks", "state_message")
         self.printer_initializing(_("Klipper has shutdown") + "\n\n" + msg, go_to_splash=True)
+
+    def check_active_commands(self):
+        if self.printer.get_stat("manual_probe", "is_active"):
+            if "zcalibrate" not in self._cur_panels:
+                self.show_panel("zcalibrate")
+            return
 
     def toggle_shortcut(self, show):
         if (
