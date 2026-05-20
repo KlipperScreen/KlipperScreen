@@ -98,6 +98,13 @@ moonraker_port: 7125
 # When the active spool drops below this value, the spool icon and weight turn red.
 # spool_low_limit: 20
 
+# Defines what the spool item in the title bar opens when tapped.
+# spool = active spool editor, falls back to the Spoolman list when no spool is active
+# spoolman = Spoolman list
+# If not set, or if an invalid value is provided, the title-bar spool item
+# remains informational only and does not open a panel.
+# spool_shortcut: spoolman
+
 # Z probe calibrate position
 # By default it tries to guess the correct location
 # it will try using zero reference position, safe_z, mesh midddle, middle of axis length, etc

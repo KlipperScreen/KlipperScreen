@@ -248,6 +248,7 @@ class KlipperScreenConfig:
                     "extrude_speeds",
                     "move_distances",
                     "zcalibrate_custom_commands",
+                    "spool_shortcut",
                 )
                 numbers = (
                     "moonraker_port",
