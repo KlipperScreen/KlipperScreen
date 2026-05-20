@@ -304,6 +304,7 @@ class BasePanel(ScreenPanel):
             return
 
         from panels.spoolman import SpoolmanSpool
+
         if SpoolmanSpool.theme_path != self._screen.theme:
             SpoolmanSpool.theme_path = self._screen.theme
             SpoolmanSpool._spool_icon = None
