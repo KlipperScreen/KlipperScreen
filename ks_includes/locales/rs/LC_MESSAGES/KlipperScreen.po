@@ -1,0 +1,1091 @@
+# Serbian (Latin) translation for KlipperScreen.
+msgid ""
+msgstr ""
+"Project-Id-Version: KlipperScreen\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-15 20:01-0300\n"
+"PO-Revision-Date: 2026-05-18 10:47+0200\n"
+"Last-Translator: Ivijan-Stefan Stipić <infinitumform@gmail.com>\n"
+"Language-Team: Ivijan-Stefan Stipić <https://www.linkedin.com/in/"
+"ivijanstefanstipic/>\n"
+"Language: rs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Poedit 3.9\n"
+
+msgid "Main Menu"
+msgstr "Glavni meni"
+
+msgid "Move"
+msgstr "Pomeranje"
+
+msgid "Temperature"
+msgstr "Temperatura"
+
+msgid "Extrude"
+msgstr "Ekstruzija"
+
+msgid "More"
+msgstr "Još"
+
+msgid "Print"
+msgstr "Štampa"
+
+msgid "Gcodes"
+msgstr "G-kodovi"
+
+msgid "Bed Level"
+msgstr "Nivelacija podloge"
+
+msgid "Bed Mesh"
+msgstr "Mreža podloge"
+
+msgid "Z Calibrate"
+msgstr "Kalibracija Z"
+
+msgid "Limits"
+msgstr "Ograničenja"
+
+msgid "Fan"
+msgstr "Ventilator"
+
+msgid "Leds"
+msgstr "LED"
+
+msgid "Macros"
+msgstr "Makroi"
+
+msgid "Pins"
+msgstr "Pinovi"
+
+msgid "Power"
+msgstr "Napajanje"
+
+msgid "Camera"
+msgstr "Kamera"
+
+msgid "Console"
+msgstr "Konzola"
+
+msgid "Update"
+msgstr "Ažuriranje"
+
+msgid "Input Shaper"
+msgstr "Input Shaper"
+
+msgid "Save Config"
+msgstr "Sačuvaj konfiguraciju"
+
+msgid "Network"
+msgstr "Mreža"
+
+msgid "Notifications"
+msgstr "Obaveštenja"
+
+msgid "System"
+msgstr "Sistem"
+
+msgid "Fine Tuning"
+msgstr "Fino podešavanje"
+
+msgid "Home X"
+msgstr "Referenciraj X"
+
+msgid "Home Y"
+msgstr "Referenciraj Y"
+
+msgid "Home Z"
+msgstr "Referenciraj Z"
+
+msgid "Home All"
+msgstr "Referenciraj sve"
+
+msgid "Home XY"
+msgstr "Referenciraj XY"
+
+msgid "Quad Gantry Level"
+msgstr "Nivelacija portala u 4 tačke"
+
+msgid "Z Tilt"
+msgstr "Nagib Z"
+
+msgid "Print Control"
+msgstr "Kontrola štampe"
+
+msgid "Lock"
+msgstr "Zaključaj"
+
+msgid "Menu"
+msgstr "Meni"
+
+msgid "Icon Theme"
+msgstr "Tema ikona"
+
+msgid "Changes how the interface looks"
+msgstr "Menja izgled interfejsa"
+
+msgid "(default)"
+msgstr "(podrazumevano)"
+
+msgid "Estimated Time Method"
+msgstr "Metod procene vremena"
+
+msgid "Changes how the time remaining is calculated"
+msgstr "Menja način izračunavanja preostalog vremena"
+
+msgid "Auto"
+msgstr "Automatski"
+
+msgid "File"
+msgstr "Datoteka"
+
+msgid "Filament Used"
+msgstr "Potrošen filament"
+
+msgid "Slicer"
+msgstr "Slicer"
+
+msgid "Screen Power Off Time"
+msgstr "Vreme gašenja ekrana"
+
+msgid "Timeout for screen black-out or power-off"
+msgstr "Vreme do zatamnjenja ili gašenja ekrana"
+
+msgid "Never"
+msgstr "Nikad"
+
+msgid "Printing"
+msgstr "Štampanje"
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr "Vreme do zatamnjenja ili gašenja ekrana tokom štampe"
+
+msgid "24 Hour Time"
+msgstr "24-časovni format"
+
+msgid "Disable for 12hs with am / pm"
+msgstr "Isključite za 12h format sa AM/PM"
+
+msgid "Macro shortcut on sidebar"
+msgstr "Prečica makroa na bočnoj traci"
+
+msgid "Font Size"
+msgstr "Veličina fonta"
+
+msgid "Inversely affects the icon size"
+msgstr "Obrnuto utiče na veličinu ikona"
+
+msgid "Small"
+msgstr "Malo"
+
+msgid "Medium"
+msgstr "Srednje"
+
+msgid "Large"
+msgstr "Veliko"
+
+msgid "Extra Large"
+msgstr "Veoma veliko"
+
+msgid "Maximum"
+msgstr "Maksimalno"
+
+msgid "Confirm Emergency Stop"
+msgstr "Potvrdi hitno zaustavljanje"
+
+msgid "Asks for confirmation before stopping"
+msgstr "Traži potvrdu pre zaustavljanja"
+
+msgid "Hide sensors in Temp."
+msgstr "Sakrij senzore u Temp."
+
+msgid "Show only devices that are able to be set"
+msgstr "Prikaži samo uređaje koji mogu da se podešavaju"
+
+msgid "Screen DPMS"
+msgstr "DPMS ekrana"
+
+msgid "Enable screen power management"
+msgstr "Omogući upravljanje napajanjem ekrana"
+
+msgid "Not all screens support this"
+msgstr "Ne podržavaju ovo svi ekrani"
+
+msgid "Auto-close notifications"
+msgstr "Automatski zatvori obaveštenja"
+
+msgid "Close messages after a timeout"
+msgstr "Zatvori poruke posle isteka vremena"
+
+msgid "Show Heater Power"
+msgstr "Prikaži snagu grejača"
+
+msgid "Current percentage and graph line"
+msgstr "Trenutni procenat i liniju grafikona"
+
+msgid "Show Scrollbars Buttons"
+msgstr "Prikaži dugmad za skrol trake"
+
+msgid "Useful for un-responsive touchscreens"
+msgstr "Korisno za ekrane na dodir koji slabo reaguju"
+
+msgid "Auto-open Extrude On Pause"
+msgstr "Automatski otvori Ekstruziju pri pauzi"
+
+msgid "Show cursor"
+msgstr "Prikaži kursor"
+
+msgid "For mouse control or to verify touchscreen accuracy"
+msgstr "Za upravljanje mišem ili proveru preciznosti ekrana na dodir"
+
+msgid "Screen wake delay"
+msgstr "Kašnjenje buđenja ekrana"
+
+msgid "Helps to prevent unwanted touchs during screen wake up"
+msgstr "Pomaže da se spreče neželjeni dodiri pri buđenju ekrana"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "sekunda"
+msgstr[1] "sekunde"
+msgstr[2] "sekundi"
+
+msgid "Invert X"
+msgstr "Obrni X"
+
+msgid "Invert Y"
+msgstr "Obrni Y"
+
+msgid "Invert Z"
+msgstr "Obrni Z"
+
+msgid "XY Move Speed (mm/s)"
+msgstr "Brzina XY pomeranja (mm/s)"
+
+msgid "Z Move Speed (mm/s)"
+msgstr "Brzina Z pomeranja (mm/s)"
+
+msgid "Language"
+msgstr "Jezik"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "sat"
+msgstr[1] "sata"
+msgstr[2] "sati"
+
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "minut"
+msgstr[1] "minuta"
+msgstr[2] "minuta"
+
+msgid "Are you sure you want to run Emergency Stop?"
+msgstr "Da li ste sigurni da želite da pokrenete hitno zaustavljanje?"
+
+msgid "day"
+msgid_plural "days"
+msgstr[0] "dan"
+msgstr[1] "dana"
+msgstr[2] "dana"
+
+msgid "Network not found"
+msgstr "Mreža nije pronađena"
+
+msgid "Unknown security type"
+msgstr "Nepoznat tip bezbednosti"
+
+msgid "Insufficient privileges"
+msgstr "Nedovoljne privilegije"
+
+msgid "Invalid password"
+msgstr "Neispravna lozinka"
+
+msgid "Couldn't add network"
+msgstr "Nije moguće dodati mrežu"
+
+msgid "Failed to delete connection"
+msgstr "Brisanje veze nije uspelo"
+
+msgid "Starting WiFi Association"
+msgstr "Pokretanje WiFi povezivanja"
+
+msgid "Connecting"
+msgstr "Povezivanje"
+
+msgid "Getting IP address"
+msgstr "Dobavljanje IP adrese"
+
+msgid "Network connected"
+msgstr "Mreža je povezana"
+
+msgid "Network disconnected"
+msgstr "Mreža je isključena"
+
+msgid "Connection failed"
+msgstr "Povezivanje nije uspelo"
+
+msgid "No mesh has been loaded"
+msgstr "Nije učitana mreža"
+
+msgid "Invalid Number"
+msgstr "Neispravan broj"
+
+msgid "Password"
+msgstr "Lozinka"
+
+msgid "Unlock"
+msgstr "Otključaj"
+
+msgid "Unlock failed"
+msgstr "Otključavanje nije uspelo"
+
+msgid "Are you sure do you want to exclude the object?"
+msgstr "Da li ste sigurni da želite da izuzmete objekat?"
+
+msgid "Finish"
+msgstr "Završi"
+
+msgid "Updating"
+msgstr "Ažuriranje u toku"
+
+msgid "Disable Motors"
+msgstr "Isključi motore"
+
+msgid "Screws Adjust"
+msgstr "Podešavanje šrafova"
+
+msgid "Rotation invalid"
+msgstr "Neispravna rotacija"
+
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr "Ovaj panel podržava do 9 šrafova u mreži 3x3"
+
+msgid "It's possible that the configuration is not correct"
+msgstr "Moguće je da konfiguracija nije ispravna"
+
+msgid "Screws not used:"
+msgstr "Nekorišćeni šrafovi:"
+
+msgid "Reference"
+msgstr "Referenca"
+
+msgid "Add profile"
+msgstr "Dodaj profil"
+
+msgid "Calibrate"
+msgstr "Kalibriši"
+
+msgid "Clear"
+msgstr "Očisti"
+
+msgid "Profile Name:"
+msgstr "Ime profila:"
+
+msgid "Save"
+msgstr "Sačuvaj"
+
+msgid "Calibrating"
+msgstr "Kalibracija u toku"
+
+msgid "WebRTC is not supported by the backend trying Stream"
+msgstr "Backend ne podržava WebRTC, pokušava se Stream"
+
+msgid "Auto-scroll"
+msgstr "Automatsko skrolovanje"
+
+msgid "Send"
+msgstr "Pošalji"
+
+msgid "Example"
+msgstr "Primer"
+
+msgid "Exclude Object"
+msgstr "Izuzmi objekat"
+
+msgid "Are you sure you wish to cancel this print?"
+msgstr "Da li ste sigurni da želite da otkažete ovu štampu?"
+
+msgid "Load"
+msgstr "Učitaj"
+
+msgid "Unload"
+msgstr "Izvuci"
+
+msgid "Retract"
+msgstr "Retrakcija"
+
+msgid "Pressure Advance"
+msgstr "Pressure Advance"
+
+msgid "Retraction"
+msgstr "Retrakcija"
+
+msgid "Extruders"
+msgstr "Ekstruderi"
+
+msgid "Distance (mm)"
+msgstr "Rastojanje (mm)"
+
+msgid "Speed (mm/s)"
+msgstr "Brzina (mm/s)"
+
+msgid "Part Fan"
+msgstr "Ventilator dela"
+
+msgid "Max"
+msgstr "Maks"
+
+msgid "mm"
+msgstr "mm"
+
+msgid "Speed +"
+msgstr "Brzina +"
+
+msgid "Speed -"
+msgstr "Brzina -"
+
+msgid "Extrusion +"
+msgstr "Ekstruzija +"
+
+msgid "Extrusion -"
+msgstr "Ekstruzija -"
+
+msgid "Name"
+msgstr "Naziv"
+
+msgid "Settings"
+msgstr "Podešavanja"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Size"
+msgstr "Veličina"
+
+msgid "Loading..."
+msgstr "Učitavanje..."
+
+msgid "Delete File?"
+msgstr "Obrisati datoteku?"
+
+msgid "Delete Directory?"
+msgstr "Obrisati direktorijum?"
+
+msgid "Start"
+msgstr "Pokreni"
+
+msgid "Delete"
+msgstr "Obriši"
+
+msgid "Cancel"
+msgstr "Otkaži"
+
+msgid "Modified"
+msgstr "Izmenjeno"
+
+msgid "Layer Height"
+msgstr "Visina sloja"
+
+msgid "Filament"
+msgstr "Filament"
+
+msgid "Estimated Time"
+msgstr "Procenjeno vreme"
+
+msgid "g"
+msgstr "g"
+
+msgid "Nozzle diameter"
+msgstr "Prečnik mlaznice"
+
+msgid "Last Duration"
+msgstr "Poslednje trajanje"
+
+msgid "Rename/Move:"
+msgstr "Preimenuj/Premesti:"
+
+msgid "Finding ADXL"
+msgstr "Traženje ADXL-a"
+
+msgid "Measure X"
+msgstr "Izmeri X"
+
+msgid "Measure Y"
+msgstr "Izmeri Y"
+
+msgid "Measure Both"
+msgstr "Izmeri oba"
+
+msgid "Klipper will reboot"
+msgstr "Klipper će se restartovati"
+
+msgid "Save configuration?"
+msgstr "Sačuvati konfiguraciju?"
+
+msgid "Check ADXL Wiring"
+msgstr "Proverite ADXL ožičenje"
+
+msgid "ADXL Not Configured"
+msgstr "ADXL nije podešen"
+
+msgid "Auto-calibrate"
+msgstr "Automatska kalibracija"
+
+msgid "Calibrated"
+msgstr "Kalibrisano"
+
+msgid "Job Status"
+msgstr "Status posla"
+
+msgid "mm/s"
+msgstr "mm/s"
+
+msgid "mm/sÂ²"
+msgstr "mm/s²"
+
+msgid "mmÂ³/s"
+msgstr "mm³/s"
+
+msgid "Left:"
+msgstr "Preostalo:"
+
+msgid "Elapsed:"
+msgstr "Proteklo:"
+
+msgid "Total:"
+msgstr "Ukupno:"
+
+msgid "Slicer:"
+msgstr "Slicer:"
+
+msgid "File:"
+msgstr "Datoteka:"
+
+msgid "Filament:"
+msgstr "Filament:"
+
+msgid "Speed:"
+msgstr "Brzina:"
+
+msgid "Acceleration:"
+msgstr "Ubrzanje:"
+
+msgid "Flow:"
+msgstr "Protok:"
+
+msgid "Z offset:"
+msgstr "Z pomeraj:"
+
+msgid "Filament used:"
+msgstr "Potrošen filament:"
+
+msgid "Filament total:"
+msgstr "Ukupno filamenta:"
+
+msgid "Pressure Advance:"
+msgstr "Pressure Advance:"
+
+msgid "Flowrate:"
+msgstr "Protok:"
+
+msgid "Height:"
+msgstr "Visina:"
+
+msgid "Layer:"
+msgstr "Sloj:"
+
+msgid "Pause"
+msgstr "Pauza"
+
+msgid "Restart"
+msgstr "Restart"
+
+msgid "Resume"
+msgstr "Nastavi"
+
+msgid "Save Z"
+msgstr "Sačuvaj Z"
+
+msgid "Apply {sign}{offset:.3f} offset to Probe?"
+msgstr "Primeni pomeraj {sign}{offset:.3f} na sondu?"
+
+msgid "Apply {sign}{offset:.3f} offset to Endstop?"
+msgstr "Primeni pomeraj {sign}{offset:.3f} na graničnik?"
+
+msgid "Saved offset: %s"
+msgstr "Sačuvan pomeraj: %s"
+
+msgid "Apply"
+msgstr "Primeni"
+
+msgid "Restart Print"
+msgstr "Restartuj štampu"
+
+msgid "Go Back"
+msgstr "Nazad"
+
+msgid "Are you sure you wish to restart this print?"
+msgstr "Da li ste sigurni da želite da restartujete ovu štampu?"
+
+msgid "Cancel Print"
+msgstr "Otkaži štampu"
+
+msgid "Working"
+msgstr "U toku"
+
+msgid "Complete"
+msgstr "Završeno"
+
+msgid "Error"
+msgstr "Greška"
+
+msgid "Cancelling"
+msgstr "Otkazivanje u toku"
+
+msgid "Cancelled"
+msgstr "Otkazano"
+
+msgid "Paused"
+msgstr "Pauzirano"
+
+msgid "Standby"
+msgstr "Stanje pripravnosti"
+
+msgid "Max Acceleration"
+msgstr "Maksimalno ubrzanje"
+
+msgid "Minimum Cruise Ratio"
+msgstr "Minimalni odnos krstarenja"
+
+msgid "Max Velocity"
+msgstr "Maksimalna brzina"
+
+msgid "Square Corner Velocity"
+msgstr "Brzina kroz oštre uglove"
+
+msgid "Unknown Heater"
+msgstr "Nepoznat grejač"
+
+msgid "Can't set above the maximum:"
+msgstr "Nije moguće postaviti iznad maksimuma:"
+
+msgid "Initiate a PID calibration for:"
+msgstr "Pokreni PID kalibraciju za:"
+
+msgid "It may take more than 5 minutes depending on the heater power."
+msgstr "Ovo može da traje duže od 5 minuta u zavisnosti od snage grejača."
+
+msgid "Temp (Â°C)"
+msgstr "Temp (°C)"
+
+msgid "Invalid temperature"
+msgstr "Neispravna temperatura"
+
+msgid "Home"
+msgstr "Referenciraj"
+
+msgid "Are you sure you wish to disable motors?"
+msgstr "Da li ste sigurni da želite da isključite motore?"
+
+msgid "Move Distance (mm)"
+msgstr "Rastojanje pomeranja (mm)"
+
+msgid "This will affect screw positions and mesh graph"
+msgstr "Ovo će uticati na položaje šrafova i graf mreže"
+
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr "Zamenjuje dugmad ako su jedno iznad drugog, utiče i na druge panele"
+
+msgid "XY Speed (mm/s)"
+msgstr "XY brzina (mm/s)"
+
+msgid "Only for the move panel"
+msgstr "Samo za panel pomeranja"
+
+msgid "Z Speed (mm/s)"
+msgstr "Z brzina (mm/s)"
+
+msgid "Failed to initialize"
+msgstr "Nije uspela inicijalizacija"
+
+msgid "Interface"
+msgstr "Interfejs"
+
+msgid "No wireless interface has been found"
+msgstr "Nije pronađen bežični interfejs"
+
+msgid "Connected"
+msgstr "Povezano"
+
+msgid "Do you want to forget or disconnect %s?"
+msgstr "Da li želite da zaboravite ili prekinete vezu sa %s?"
+
+msgid "Forget"
+msgstr "Zaboravi"
+
+msgid "Disconnect"
+msgstr "Prekini vezu"
+
+msgid "Remove network"
+msgstr "Ukloni mrežu"
+
+msgid "User"
+msgstr "Korisnik"
+
+msgid "Connecting to %s"
+msgstr "Povezivanje sa %s"
+
+msgid "Channel"
+msgstr "Kanal"
+
+msgid "Hostname"
+msgstr "Ime hosta"
+
+msgid "Notification log empty"
+msgstr "Dnevnik obaveštenja je prazan"
+
+msgid "Pressure advance"
+msgstr "Pressure advance"
+
+msgid "Current"
+msgstr "Trenutno"
+
+msgid "Smooth time"
+msgstr "Vreme izglađivanja"
+
+msgid "s"
+msgstr "s"
+
+msgid "Printer Select"
+msgstr "Izbor štampača"
+
+msgid "Please wait"
+msgstr "Sačekajte"
+
+msgid "Retraction Length"
+msgstr "Dužina retrakcije"
+
+msgid "Retraction Speed"
+msgstr "Brzina retrakcije"
+
+msgid "Unretract Extra Length"
+msgstr "Dodatna dužina pri vraćanju"
+
+msgid "Unretract Speed"
+msgstr "Brzina vraćanja"
+
+msgid "Printer Connections"
+msgstr "Veze sa štampačem"
+
+msgid "Shutdown"
+msgstr "Gašenje"
+
+msgid "Emergency Stop"
+msgstr "Hitno zaustavljanje"
+
+msgid "Are you sure you wish to reboot the system?"
+msgstr "Da li ste sigurni da želite da restartujete sistem?"
+
+msgid "Are you sure you wish to shutdown the system?"
+msgstr "Da li ste sigurni da želite da ugasite sistem?"
+
+msgid "Accept"
+msgstr "Prihvati"
+
+msgid "Host"
+msgstr "Host"
+
+msgid "Printer"
+msgstr "Štampač"
+
+msgid "Both"
+msgstr "Oba"
+
+msgid "Initializing printer..."
+msgstr "Inicijalizacija štampača..."
+
+msgid "Klipper Restart"
+msgstr "Klipper restart"
+
+msgid "Firmware Restart"
+msgstr "Restart firmvera"
+
+msgid "System Restart"
+msgstr "Restart sistema"
+
+msgid "System Shutdown"
+msgstr "Gašenje sistema"
+
+msgid "Retry"
+msgstr "Pokušaj ponovo"
+
+msgid "Power On Printer"
+msgstr "Uključi štampač"
+
+msgid "Spool editor"
+msgstr "Uređivač kalema"
+
+msgid "No spool selected"
+msgstr "Nije izabran kalem"
+
+msgid "Measured weight"
+msgstr "Izmerena težina"
+
+msgid "Remaining weight"
+msgstr "Preostala težina"
+
+msgid "Initial weight"
+msgstr "Početna težina"
+
+msgid "Empty weight"
+msgstr "Prazna težina"
+
+msgid "Invalid weight"
+msgstr "Neispravna težina"
+
+msgid "Restore"
+msgstr "Vrati"
+
+msgid "No"
+msgstr "Ne"
+
+msgid "Yes"
+msgstr "Da"
+
+msgid "Vendor"
+msgstr "Proizvođač"
+
+msgid "Material"
+msgstr "Materijal"
+
+msgid "Used"
+msgstr "Korišćeno"
+
+msgid "Location"
+msgstr "Lokacija"
+
+msgid "Archived"
+msgstr "Arhivirano"
+
+msgid "Price"
+msgstr "Cena"
+
+msgid "Comment"
+msgstr "Komentar"
+
+msgid "Measured weight is below empty spool weight"
+msgstr "Izmerena težina je manja od težine praznog kalema"
+
+msgid "Value must be positive"
+msgstr "Vrednost mora biti pozitivna"
+
+msgid "Error updating filament weight"
+msgstr "Greška pri ažuriranju težine filamenta"
+
+msgid "Filament weight updated"
+msgstr "Težina filamenta je ažurirana"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Remaining length"
+msgstr "Preostala dužina"
+
+msgid "Error trying to fetch spools"
+msgstr "Greška pri preuzimanju kalemova"
+
+msgid "All"
+msgstr "Sve"
+
+msgid "Error clearing active spool"
+msgstr "Greška pri uklanjanju aktivnog kalema"
+
+msgid "Error setting active spool"
+msgstr "Greška pri postavljanju aktivnog kalema"
+
+msgid "No info available"
+msgstr "Nema dostupnih informacija"
+
+msgid "IP Address"
+msgstr "IP adresa"
+
+msgid "Memory"
+msgstr "Memorija"
+
+msgid "Cooldown"
+msgstr "Hlađenje"
+
+msgid "Nothing selected"
+msgstr "Ništa nije izabrano"
+
+msgid "Set Temp"
+msgstr "Postavi temperaturu"
+
+msgid "Show"
+msgstr "Prikaži"
+
+msgid "Hide"
+msgstr "Sakrij"
+
+msgid "Full Update"
+msgstr "Potpuno ažuriranje"
+
+msgid "Refresh"
+msgstr "Osveži"
+
+msgid "Checking for updates, please wait..."
+msgstr "Provera ažuriranja, sačekajte..."
+
+msgid "Not working or not configured"
+msgstr "Ne radi ili nije podešeno"
+
+msgid "Are you sure?"
+msgstr "Da li ste sigurni?"
+
+msgid "Perform a full upgrade?"
+msgstr "Izvršiti potpuno ažuriranje?"
+
+msgid "Do you want to recover %s?"
+msgstr "Da li želite da oporavite %s?"
+
+msgid "Recover Hard"
+msgstr "Tvrdi oporavak"
+
+msgid "Recover Soft"
+msgstr "Meki oporavak"
+
+msgid "Recover"
+msgstr "Oporavi"
+
+msgid "Outdated by %d"
+msgstr "Zastarelo za %d"
+
+msgid "commit"
+msgid_plural "commits"
+msgstr[0] "commit"
+msgstr[1] "commita"
+msgstr[2] "commita"
+
+msgid "Package will be updated"
+msgid_plural "Packages will be updated"
+msgstr[0] "Paket će biti ažuriran"
+msgstr[1] "Paketi će biti ažurirani"
+msgstr[2] "Paketi će biti ažurirani"
+
+msgid "%s will be updated to version"
+msgstr "%s će biti ažuriran na verziju"
+
+msgid "Starting recovery for"
+msgstr "Pokretanje oporavka za"
+
+msgid "Starting update for"
+msgstr "Pokretanje ažuriranja za"
+
+msgid "Invalid"
+msgstr "Neispravno"
+
+msgid "Up To Date"
+msgstr "Ažurno"
+
+msgid "Probe Offset"
+msgstr "Pomeraj sonde"
+
+msgid "Saved"
+msgstr "Sačuvano"
+
+msgid "New"
+msgstr "Novo"
+
+msgid "Raise Nozzle"
+msgstr "Podigni mlaznicu"
+
+msgid "Lower Nozzle"
+msgstr "Spusti mlaznicu"
+
+msgid "Abort"
+msgstr "Prekini"
+
+msgid "Error: Couldn't get a position to probe"
+msgstr "Greška: nije moguće dobiti poziciju za sondiranje"
+
+msgid "Failed, adjust position first"
+msgstr "Nije uspelo, prvo podesite poziciju"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr "Sistem ne ispunjava minimalni zahtev"
+
+msgid "Minimum:"
+msgstr "Minimum:"
+
+msgid "System:"
+msgstr "Sistem:"
+
+msgid "Initializing KlipperScreen"
+msgstr "Inicijalizacija KlipperScreen-a"
+
+msgid "Provide KlipperScreen.log when asking for help.\n"
+msgstr "Dostavite KlipperScreen.log kada tražite pomoć.\n"
+
+msgid "Close"
+msgstr "Zatvori"
+
+msgid "DPMS has failed and has been disabled"
+msgstr "DPMS nije uspeo i onemogućen je"
+
+msgid "Moonraker Connected"
+msgstr "Moonraker je povezan"
+
+msgid "Retrying"
+msgstr "Ponovni pokušaj"
+
+msgid "Klipper has disconnected"
+msgstr "Klipper je prekinuo vezu"
+
+msgid "Klipper has encountered an error."
+msgstr "Klipper je naišao na grešku."
+
+msgid "A FIRMWARE_RESTART may fix the issue."
+msgstr "FIRMWARE_RESTART može rešiti problem."
+
+msgid "Please recompile and flash the micro-controller."
+msgstr "Ponovo kompajlirajte i flešujte mikrokontroler."
+
+msgid "Klipper is attempting to start"
+msgstr "Klipper pokušava da se pokrene"
+
+msgid "Klipper has shutdown"
+msgstr "Klipper se ugasio"
+
+msgid "No eligible macros:"
+msgstr "Nema odgovarajućih makroa:"
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "makroi čije ime počinje sa '_' su skriveni"
+
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "makroi koji koriste 'rename_existing' su skriveni"
+
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT su skriveni i treba ih koristiti iz "
+"Ekstruzije"
+
+msgid "Temperature too low to extrude"
+msgstr "Temperatura je preniska za ekstruziju"
+
+msgid "Waiting for Moonraker Websocket to close"
+msgstr "Čeka se zatvaranje Moonraker WebSocket veze"
+
+msgid "Moonraker: connected"
+msgstr "Moonraker: povezan"
+
+msgid "Initializing Klipper Connection"
+msgstr "Inicijalizacija veze sa Klipperom"
