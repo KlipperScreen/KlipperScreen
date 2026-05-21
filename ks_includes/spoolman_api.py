@@ -1,5 +1,4 @@
 import logging
-import threading
 
 
 class SpoolmanAPI:
@@ -7,8 +6,6 @@ class SpoolmanAPI:
 
     def __init__(self, websocket_client):
         self._ws = websocket_client
-        self._req_lock = threading.Lock()
-        self._req_id_counter = 0
 
     def _send_request(self, method, params, callback):
         """Send a JSON-RPC request via websocket with callback."""
@@ -19,10 +16,6 @@ class SpoolmanAPI:
         if not self._ws.connected:
             logging.warning("Spoolman: websocket not connected")
             return False
-
-        with self._req_lock:
-            self._req_id_counter += 1
-            req_id = self._req_id_counter
 
         def wrapper(response, *args):
             result = response.get("result") if isinstance(response, dict) else response
@@ -56,6 +49,7 @@ class SpoolmanAPI:
 
     def get_active_spool_id(self, callback):
         """Fetch the current active spool ID."""
+
         def handle(result, *args):
             if isinstance(result, dict):
                 callback(result.get("spool_id"))
@@ -66,6 +60,7 @@ class SpoolmanAPI:
 
     def set_active_spool_id(self, spool_id, callback):
         """Set the active spool ID."""
+
         def handle(result, *args):
             if isinstance(result, dict) and "spool_id" in result:
                 callback(True)
