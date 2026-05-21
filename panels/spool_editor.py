@@ -292,7 +292,7 @@ class Panel(ScreenPanel):
         self._screen.spoolman_api.update_spool(
             spool_id=self.spool.id,
             payload=self._get_update_payload(),
-            callback=self._update_spool_cb
+            callback=self._update_spool_cb,
         )
 
     def _get_update_payload(self):

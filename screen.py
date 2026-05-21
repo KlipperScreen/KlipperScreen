@@ -922,7 +922,9 @@ class KlipperScreen(Gtk.Window):
             self.spoolman_api.get_spool_details(result, lambda r: self._apply_spool_data(result, r))
 
         if spool_id:
-            self.spoolman_api.get_spool_details(spool_id, lambda r: self._apply_spool_data(spool_id, r))
+            self.spoolman_api.get_spool_details(
+                spool_id, lambda r: self._apply_spool_data(spool_id, r)
+            )
         else:
             self.spoolman_api.get_active_spool_id(on_spool_id)
 
@@ -1137,9 +1139,7 @@ class KlipperScreen(Gtk.Window):
             self._ws.klippy.list_webcams(self.set_cameras)
         if "spoolman" in self.server_info["components"]:
             self.printer.enable_spoolman()
-            self.spoolman_api.get_active_spool_id(
-                lambda result: self.update_spool_data(result)
-            )
+            self.spoolman_api.get_active_spool_id(lambda result: self.update_spool_data(result))
         self.init_klipper()
 
     def set_power_devices(self, data, method, params):

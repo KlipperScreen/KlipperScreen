@@ -506,9 +506,7 @@ class Panel(ScreenPanel):
             self._screen.show_popup_message(_("Error clearing active spool"))
 
     def set_active_spool(self, spool: SpoolmanSpool):
-        self._screen.spoolman_api.set_active_spool_id(
-            spool.id, self._set_active_spool_cb
-        )
+        self._screen.spoolman_api.set_active_spool_id(spool.id, self._set_active_spool_cb)
 
     def _set_active_spool_cb(self, result):
         if not result:
