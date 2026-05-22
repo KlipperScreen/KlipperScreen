@@ -248,7 +248,6 @@ class KlipperScreenConfig:
                     "extrude_speeds",
                     "move_distances",
                     "zcalibrate_custom_commands",
-                    "spool_shortcut",
                 )
                 numbers = (
                     "moonraker_port",
@@ -329,7 +328,6 @@ class KlipperScreenConfig:
         return "".join(f"{error}\n\n" for error in self.errors)
 
     def _create_configurable_options(self, screen):
-
         self.configurable_options = [
             {
                 "theme": {
