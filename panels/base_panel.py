@@ -110,9 +110,12 @@ class BasePanel(ScreenPanel):
         self.labels["spoolman_icon"] = Gtk.Image()
         self.labels["spoolman_icon"].set_from_pixbuf(self.get_spoolman_icon_pixbuf())
         self.labels["spoolman_weight"] = Gtk.Label(label="?")
-        self.control["spoolman_box"] = Gtk.Box()
-        self.control["spoolman_box"].pack_start(self.labels["spoolman_icon"], False, False, 7)
-        self.control["spoolman_box"].pack_start(self.labels["spoolman_weight"], False, False, 0)
+        spoolman_box = Gtk.Box()
+        spoolman_box.pack_start(self.labels["spoolman_icon"], False, False, 7)
+        spoolman_box.pack_start(self.labels["spoolman_weight"], False, False, 0)
+        self.control["spoolman_box"] = Gtk.EventBox()
+        self.control["spoolman_box"].add(spoolman_box)
+        self.control["spoolman_box"].connect("button-press-event", self.open_spool_panel)
 
         self.titlebar = Gtk.Box(spacing=5, valign=Gtk.Align.CENTER)
         self.titlebar.get_style_context().add_class("title_bar")
@@ -287,6 +290,10 @@ class BasePanel(ScreenPanel):
         self.control["temp_box"].add(self.control["spoolman_box"])
         self.set_spoolman_refresh()
         self.fetch_spoolman()
+
+    def open_spool_panel(self, widget=None, event=None):
+        self._screen.show_panel("spoolman")
+        return True
 
     def get_icon(self, device, img_size):
         if device.startswith("extruder"):
