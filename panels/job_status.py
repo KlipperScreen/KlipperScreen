@@ -140,6 +140,8 @@ class Panel(ScreenPanel):
         self.grid.attach(overlay, 0, 0, 1, 1)
 
         self.labels["thumbnail"] = self._gtk.Button("file")
+        self.labels["thumbnail"].set_hexpand(False)
+        self.labels["thumbnail"].get_style_context().add_class("printing-thumbnail")
         self.labels["thumbnail"].connect("clicked", self.show_fullscreen_thumbnail)
         self.labels["info_grid"] = Gtk.Grid()
         self.labels["info_grid"].attach(self.labels["thumbnail"], 0, 0, 1, 1)
@@ -389,7 +391,6 @@ class Panel(ScreenPanel):
             self.animation_timeout = None
 
     def create_buttons(self):
-
         self.buttons = {
             "cancel": self._gtk.Button("stop", _("Cancel"), "color2"),
             "control": self._gtk.Button("settings", _("Settings"), "color3"),
@@ -903,7 +904,7 @@ class Panel(ScreenPanel):
         else:
             max_width = self._screen.width * 0.25
             max_height = self._gtk.content_height * 0.47
-        width = min(self.labels["thumbnail"].get_allocated_width(), max_width)
+        width = min(self.labels["thumbnail"].get_allocated_height(), max_width)
         height = min(self.labels["thumbnail"].get_allocated_height(), max_height)
         if width <= 1 or height <= 1:
             width = max_width

@@ -502,6 +502,11 @@ trough {
     font-weight: bold;
 }
 
+.printing-thumbnail {
+    margin-left: .5em;
+    margin-right: .5em;
+}
+
 .printing-progress-text {
     font-size: 1.25em;
     font-weight: bold;
