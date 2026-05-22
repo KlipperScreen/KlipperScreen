@@ -62,8 +62,21 @@ class SpoolmanAPI:
         """Set the active spool ID."""
 
         def handle(result, *args):
+            if isinstance(result, dict) and "error" in result:
+                logging.warning(f"Spoolman API error: {result.get('error')}")
+                callback(False)
+                return
+            if result is None:
+                callback(True)
+                return
             if isinstance(result, dict) and "spool_id" in result:
                 callback(True)
+            elif isinstance(result, dict) and "result" in result:
+                inner = result.get("result")
+                if inner is None or (isinstance(inner, dict) and "spool_id" in inner):
+                    callback(True)
+                else:
+                    callback(False)
             else:
                 callback(False)
 
