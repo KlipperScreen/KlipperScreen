@@ -117,9 +117,6 @@ class Printer:
             self.store_timeout = None
 
     def process_update(self, data):
-        if self.data is None:
-            return
-
         for x in data:
             if x == "configfile":
                 if "config" in data[x]:
