@@ -55,6 +55,20 @@ Using a Virtual printer will need klipper and moonraker need to be installed in 
     like constant temperature and limited availability of pins,
     it's not a limitation of klipperscreen
 
+### Pre-commit hooks
+
+This project uses [pre-commit](https://pre-commit.com/) to run linting and formatting checks before each commit.
+
+Install the hooks:
+```bash
+cd ~/KlipperScreen
+source .venv/bin/activate
+pip install pre-commit
+pre-commit install
+```
+
+This will automatically run `ruff check --fix` and `ruff format` on staged files before every commit.
+
 ## Optional: Configure the IDE
 
 * Set interpreter to the virtual environment created
