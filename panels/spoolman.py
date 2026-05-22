@@ -7,7 +7,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from datetime import datetime
 
-from gi.repository import Gdk, GdkPixbuf, GObject, Gtk, Pango
+from gi.repository import Gdk, GdkPixbuf, GLib, GObject, Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.widgets.combo import ComboBoxPlus
@@ -460,7 +460,6 @@ class Panel(ScreenPanel):
 
     def refresh(self, *args):
         self.load_spools()
-        self.get_active_spool()
 
     def load_spools(self, *args):
         hide_archived = self._config.get_config().getboolean(
@@ -490,6 +489,8 @@ class Panel(ScreenPanel):
         for material in materials:
             self._materials.append([material, material])
 
+        self.get_active_spool()
+
     def get_active_spool(self):
         self._screen.spoolman_api.get_active_spool_id(self._get_active_spool_cb)
 
@@ -497,6 +498,18 @@ class Panel(ScreenPanel):
         if spool_id is not None:
             self._screen.update_spool_data(spool_id)
         self.update_active_spool(spool_id)
+        if spool_id is not None:
+            GLib.idle_add(self._scroll_to_active, spool_id)
+
+    def _scroll_to_active(self, spool_id):
+        if not self._treeview:
+            return False
+        model = self._treeview.get_model()
+        for row in model:
+            if row[0].id == spool_id:
+                self._treeview.scroll_to_cell(row.path, None, True, 0.5, 0.5)
+                break
+        return False
 
     def clear_active_spool(self, sender: Gtk.Button = None):
         self._screen.spoolman_api.clear_active_spool(self._clear_active_spool_cb)
