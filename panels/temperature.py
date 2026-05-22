@@ -33,7 +33,7 @@ class Panel(ScreenPanel):
         self.preheat_options = self._screen._config.get_preheat_options()
         self.grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
         self._gtk.reset_temp_color()
-        self.extra_selection = None
+        self.extra_selection = kwargs.get("extra", None)
         self.numpad_visible = False
 
         if self._screen.vertical_mode:
@@ -133,7 +133,6 @@ class Panel(ScreenPanel):
         self.tempdelta = tempdelta
 
     def change_target_temp_incremental(self, widget, direction):
-
         if len(self.active_heaters) == 0:
             self._screen.show_popup_message(_("Nothing selected"))
         else:
@@ -316,7 +315,6 @@ class Panel(ScreenPanel):
         return False
 
     def add_device(self, device):
-
         logging.info(f"Adding device: {device}")
 
         temperature = self._printer.get_stat(device, "temperature")
@@ -493,7 +491,6 @@ class Panel(ScreenPanel):
             )
 
     def create_left_panel(self):
-
         self.labels["devices"] = Gtk.Grid(vexpand=False)
         self.labels["devices"].get_style_context().add_class("heater-grid")
 
