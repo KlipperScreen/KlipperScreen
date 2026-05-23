@@ -58,6 +58,7 @@ class KlipperScreen(Gtk.Window):
     updating = False
     _ws = None
     reinit_count = 0
+    _klippy_retry_count = 0
     max_retries = 4
     initialized = False
     popup_timeout = None
@@ -276,6 +277,7 @@ class KlipperScreen(Gtk.Window):
             self.files.reinit()
 
         self.reinit_count = 0
+        self._klippy_retry_count = 0
         self._init_printer(_("Connecting to %s") % self.connecting_to_printer)
 
     def ws_subscribe(self):
@@ -781,6 +783,7 @@ class KlipperScreen(Gtk.Window):
         self.printer_initializing(_("Moonraker Connected"))
         self._ws.klippy.identify_client(functions.get_software_version(), self._ws.api_key)
         self.reinit_count = 0
+        self._klippy_retry_count = 0
         self.last_error = ""
         self.connected = True
         self.connecting = False
@@ -824,6 +827,7 @@ class KlipperScreen(Gtk.Window):
         self.printer.stop_tempstore_updates()
         self.initialized = False
         self.reinit_count = 0
+        self._klippy_retry_count = 0
         self._init_printer(_("Klipper has disconnected"), go_to_splash=True)
 
     def state_error(self):
@@ -1207,8 +1211,25 @@ class KlipperScreen(Gtk.Window):
             msg = _("Moonraker: connected") + "\n\n"
             msg += f"Klipper: {self.server_info['klippy_state']}" + "\n\n"
             self.printer_initializing(msg)
-            # wait until notify
+            self._ws.klippy.query_server_info(self._init_klipper_retry)
             return
+        self.printer_initializing(_("Initializing Klipper Connection"))
+        self._ws.klippy.get_printer_info(self.set_printer_info)
+
+    def _init_klipper_retry(self, data, method, params):
+        if not data.get("result", {}).get("klippy_connected", False):
+            if self._klippy_retry_count > self.max_retries:
+                logging.info("Stopping Klipper init retries")
+                self.printer_initializing(_("Klipper not responding after multiple attempts"))
+                return
+            self._klippy_retry_count += 1
+            logging.debug(
+                f"Klipper not connected yet, retry {self._klippy_retry_count}/{self.max_retries}"
+            )
+            GLib.timeout_add_seconds(5, self.init_klipper)
+            return
+        self.server_info = data["result"]
+        self._klippy_retry_count = 0
         self.printer_initializing(_("Initializing Klipper Connection"))
         self._ws.klippy.get_printer_info(self.set_printer_info)
 
@@ -1230,6 +1251,7 @@ class KlipperScreen(Gtk.Window):
         logging.info("Printer initialized")
         self.initialized = True
         self.reinit_count = 0
+        self._klippy_retry_count = 0
         self.log_notification("Printer Initialized", 1)
 
     def init_tempstore(self):

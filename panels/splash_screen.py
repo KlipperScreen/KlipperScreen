@@ -65,7 +65,6 @@ class Panel(ScreenPanel):
             self.labels["actions"].remove(child)
 
     def show_restart_buttons(self):
-
         self.clear_action_bar()
         if self.ks_printer_cfg is not None and self._screen._ws.connected:
             power_devices = self.ks_printer_cfg.get("power_devices", "")
@@ -80,7 +79,10 @@ class Panel(ScreenPanel):
             self.labels["actions"].add(self.labels["restart_system"])
             self.labels["actions"].add(self.labels["shutdown"])
         self.labels["actions"].add(self.labels["menu"])
-        if not (self._screen.connecting or self._screen.connected):
+        if (
+            self._screen.reinit_count > self._screen.max_retries
+            or self._screen._klippy_retry_count > self._screen.max_retries
+        ):
             self.labels["actions"].add(self.labels["retry"])
         self.labels["actions"].show_all()
 
@@ -113,6 +115,7 @@ class Panel(ScreenPanel):
     def retry(self, widget):
         logging.debug("User retrying connection")
         self._screen.reinit_count = 0
+        self._screen._klippy_retry_count = 0
         self._screen._init_printer(_("Connecting to %s") % self._screen.connecting_to_printer)
         self.show_restart_buttons()
 
