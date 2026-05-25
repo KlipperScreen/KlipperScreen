@@ -918,25 +918,18 @@ class KlipperScreen(Gtk.Window):
     def _websocket_callback(self, action, data):
         self._notification_handler.handle(action, data)
 
-    def update_spool_data(self, spool_id=None):
-        def on_spool_id(result):
-            if not result or not isinstance(result, int):
-                self.printer.set_active_spool(spool_id=None)
-                return
-            self.spoolman_api.get_spool_details(result, lambda r: self._apply_spool_data(result, r))
+    def get_active_spool(self):
+        self.spoolman_api.get_active_spool_id(lambda result: self.set_active_spool_details(result))
 
-        if spool_id:
-            self.spoolman_api.get_spool_details(
-                spool_id, lambda r: self._apply_spool_data(spool_id, r)
-            )
-        else:
-            self.spoolman_api.get_active_spool_id(on_spool_id)
+    def set_active_spool_details(self, spool_id=None):
+        self.spoolman_api.get_spool_details(spool_id, lambda r: self._apply_spool_data(spool_id, r))
 
     def _apply_spool_data(self, spool_id, result):
-        if result is None:
-            self.printer.set_active_spool(spool_id=spool_id)
-            return
-        self.printer.set_active_spool(spool_id=spool_id, spool_data=result)
+        if result:
+            self.printer.set_active_spool(spool_data=result)
+        else:
+            self.printer.set_active_spool(spool_data={"id": spool_id})
+        self.process_update("notify_active_spool_set", {"spool_id": spool_id})
 
     def process_action(self, action):
         if action.startswith("prompt"):
@@ -1143,7 +1136,6 @@ class KlipperScreen(Gtk.Window):
             self._ws.klippy.list_webcams(self.set_cameras)
         if "spoolman" in self.server_info["components"]:
             self.printer.enable_spoolman()
-            self.spoolman_api.get_active_spool_id(lambda result: self.update_spool_data(result))
         self.init_klipper()
 
     def set_power_devices(self, data, method, params):
@@ -1247,7 +1239,8 @@ class KlipperScreen(Gtk.Window):
         self.power_devices(
             None, self._config.get_main_config().get("screen_on_devices", ""), on=True
         )
-
+        if "spoolman" in self.server_info["components"]:
+            self.get_active_spool()
         logging.info("Printer initialized")
         self.initialized = True
         self.reinit_count = 0

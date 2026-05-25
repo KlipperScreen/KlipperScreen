@@ -147,12 +147,14 @@ class Panel(ScreenPanel):
     def spool_compare_date(model, row1, row2, user_data):
         spool1 = model.get_value(row1, 0)
         spool2 = model.get_value(row2, 0)
-        return (
-            1
-            if (spool1.last_used or datetime.min).replace(tzinfo=None)
-            > (spool2.last_used or datetime.min).replace(tzinfo=None)
-            else -1
-        )
+
+        # Fall back to a timezone-aware UTC minimum datetime
+        tz_min = datetime.min.replace(tzinfo=ZoneInfo("UTC"))
+
+        date1 = spool1.last_used if spool1.last_used else tz_min
+        date2 = spool2.last_used if spool2.last_used else tz_min
+
+        return 1 if date1 > date2 else -1
 
     def _on_material_filter_clear(self, sender, combobox):
         self._filters["material"] = None
@@ -174,7 +176,7 @@ class Panel(ScreenPanel):
             self.timeFormat = "%Y-%m-%d %H:%M"
         else:
             self.timeFormat = "%Y-%m-%d %I:%M %p"
-
+        self.active_spool_id = None
         SpoolmanSpool.theme_path = screen.theme
         GObject.type_register(SpoolmanSpool)
         self._filters = {}
@@ -274,33 +276,15 @@ class Panel(ScreenPanel):
         pixbuf_renderer = Gtk.CellRendererPixbuf(xpad=5, ypad=5)
         checkbox_renderer = Gtk.CellRendererToggle()
         column_id = Gtk.TreeViewColumn(cell_renderer=text_renderer)
-        column_id.set_cell_data_func(
-            text_renderer,
-            lambda column, cell, model, it, data: (
-                self._set_cell_background(cell, model.get_value(it, 0))
-                and cell.set_property("text", f"{model.get_value(it, 0).id}")
-            ),
-        )
+        column_id.set_cell_data_func(text_renderer, self._set_cell_id)
         column_id.set_sort_column_id(0)
 
         column_icon = Gtk.TreeViewColumn(cell_renderer=pixbuf_renderer)
-        column_icon.set_cell_data_func(
-            pixbuf_renderer,
-            lambda column, cell, model, it, data: (
-                self._set_cell_background(cell, model.get_value(it, 0))
-                and cell.set_property("pixbuf", model.get_value(it, 0).icon)
-            ),
-        )
+        column_icon.set_cell_data_func(pixbuf_renderer, self._set_cell_icon)
 
         column_spool = Gtk.TreeViewColumn(cell_renderer=text_renderer)
         column_spool.set_expand(True)
-        column_spool.set_cell_data_func(
-            text_renderer,
-            lambda column, cell, model, it, data: (
-                self._set_cell_background(cell, model.get_value(it, 0))
-                and cell.set_property("markup", self._get_filament_formated(model.get_value(it, 0)))
-            ),
-        )
+        column_spool.set_cell_data_func(text_renderer, self._set_cell_spool)
 
         column_last_used = Gtk.TreeViewColumn(cell_renderer=text_renderer)
         column_last_used.set_visible(False)
@@ -314,25 +298,12 @@ class Panel(ScreenPanel):
             max(edit_icon_size + 20, round(self._gtk.font_size * 6.5))
         )
         edit_icon = self._gtk.PixbufFromIcon("edit", edit_icon_size, edit_icon_size)
-        self._column_edit.set_cell_data_func(
-            edit_renderer,
-            lambda column, cell, model, it, data: (
-                self._set_cell_background(cell, model.get_value(it, 0))
-                and cell.set_property("pixbuf", edit_icon)
-            ),
-        )
+        self._edit_icon = edit_icon
+        self._column_edit.set_cell_data_func(edit_renderer, self._set_cell_edit)
 
         checkbox_renderer.connect("toggled", self._set_active_spool)
         column_toggle_active_spool = Gtk.TreeViewColumn(cell_renderer=checkbox_renderer)
-        column_toggle_active_spool.set_cell_data_func(
-            checkbox_renderer,
-            lambda column, cell, model, it, data: (
-                self._set_cell_background(cell, model.get_value(it, 0))
-                and cell.set_property(
-                    "active", model.get_value(it, 0).id == self._printer.active_spool_id
-                )
-            ),
-        )
+        column_toggle_active_spool.set_cell_data_func(checkbox_renderer, self._set_cell_toggle)
 
         self._treeview.append_column(column_id)
         self._treeview.append_column(column_icon)
@@ -379,17 +350,56 @@ class Panel(ScreenPanel):
         return matches
 
     def _set_cell_background(self, cell, spool: SpoolmanSpool):
+        if not spool:
+            cell.set_property("cell-background-rgba", None)
+            return True
         cell.set_property(
             "cell-background-rgba",
-            Gdk.RGBA(1, 1, 1, 0.1) if spool.id == self._printer.active_spool_id else None,
+            Gdk.RGBA(1, 1, 1, 0.1) if spool.id == self.active_spool_id else None,
         )
         return True
 
+    def _set_cell_id(self, column, cell, model, it, data):
+        spool = model.get_value(it, 0)
+        if not spool:
+            return
+        self._set_cell_background(cell, spool)
+        cell.set_property("text", f"{spool.id}")
+
+    def _set_cell_icon(self, column, cell, model, it, data):
+        spool = model.get_value(it, 0)
+        if not spool:
+            return
+        self._set_cell_background(cell, spool)
+        cell.set_property("pixbuf", spool.icon)
+
+    def _set_cell_spool(self, column, cell, model, it, data):
+        spool = model.get_value(it, 0)
+        if not spool:
+            return
+        self._set_cell_background(cell, spool)
+        cell.set_property("markup", self._get_filament_formated(spool))
+
+    def _set_cell_edit(self, column, cell, model, it, data):
+        spool = model.get_value(it, 0)
+        if not spool:
+            return
+        self._set_cell_background(cell, spool)
+        cell.set_property("pixbuf", self._edit_icon)
+
+    def _set_cell_toggle(self, column, cell, model, it, data):
+        spool = model.get_value(it, 0)
+        if not spool:
+            return
+        self._set_cell_background(cell, spool)
+        cell.set_property("active", spool.id == self.active_spool_id)
+
     def _get_filament_formated(self, spool: SpoolmanSpool):
-        if spool.id == self._printer.active_spool_id:
+        if spool.id == self.active_spool_id:
             result = f"<big><b>{spool.name}</b></big>\n"
         else:
             result = f"<big>{spool.name}</big>\n"
+
         if hasattr(spool, "comment"):
             result += f"{_('Comment')}:<b> {spool.comment}</b>\n"
         if spool.last_used:
@@ -407,10 +417,14 @@ class Panel(ScreenPanel):
         model = self._treeview.get_model()
         it = model.get_iter(path)
         spool = model.get_value(it, 0)
-        if spool.id == self._printer.active_spool_id:
+
+        if spool.id == self.active_spool_id:
+            self.active_spool_id = None
             self.clear_active_spool()
         else:
+            self.active_spool_id = spool.id
             self.set_active_spool(spool)
+        self.update_active_spool()
 
     def change_sort(self, widget, sort_type):
         self.current_sort_widget.set_image(None)
@@ -434,29 +448,25 @@ class Panel(ScreenPanel):
         widget.set_image(self._gtk.Image(icon, self._gtk.img_scale * self.bts))
 
     def process_update(self, action, data):
-        if action == "notify_active_spool_set":
+        if action == "notify_active_spool_set" and self.active_spool_id != data.get("spool_id"):
+            self.active_spool_id = data["spool_id"]
             self.update_active_spool(data["spool_id"])
+            if self.active_spool_id is not None:
+                GLib.idle_add(self._scroll_to_active, self.active_spool_id)
 
-    def update_active_spool(self, spool_id):
+    def update_active_spool(self, spool_id=None):
         if not self._treeview:
             return
+
+        current_id = spool_id if spool_id is not None else self.active_spool_id
         model = self._treeview.get_model()
-        new_id = self._printer.active_spool_id
-        old_id = getattr(self, "_prev_active_id", None)
-        if new_id == old_id:
-            return
-        found_count = 0
-        target_count = 2 if old_id is not None else 1
-
         for row in model:
-            if row[0].id in (new_id, old_id):
+            spool = row[0]
+            if spool and (spool.id == current_id or spool.id == self._prev_active_id):
                 model.row_changed(row.path, row.iter)
-                found_count += 1
-                if found_count == target_count:
-                    break
 
-        self._prev_active_id = new_id
         self._treeview.queue_draw()
+        self._prev_active_id = current_id
 
     def refresh(self, *args):
         self.load_spools()
@@ -489,17 +499,11 @@ class Panel(ScreenPanel):
         for material in materials:
             self._materials.append([material, material])
 
+        self._prev_active_id = None
         self.get_active_spool()
 
     def get_active_spool(self):
-        self._screen.spoolman_api.get_active_spool_id(self._get_active_spool_cb)
-
-    def _get_active_spool_cb(self, spool_id):
-        if spool_id is not None:
-            self._screen.update_spool_data(spool_id)
-        self.update_active_spool(spool_id)
-        if spool_id is not None:
-            GLib.idle_add(self._scroll_to_active, spool_id)
+        self._screen.get_active_spool()
 
     def _scroll_to_active(self, spool_id):
         if not self._treeview:
@@ -512,11 +516,15 @@ class Panel(ScreenPanel):
         return False
 
     def clear_active_spool(self, sender: Gtk.Button = None):
+        self.active_spool_id = None
         self._screen.spoolman_api.clear_active_spool(self._clear_active_spool_cb)
+        self.update_active_spool()
 
     def _clear_active_spool_cb(self, result):
         if not result:
             self._screen.show_popup_message(_("Error clearing active spool"))
+            return
+        self._screen.set_active_spool_details()
 
     def set_active_spool(self, spool: SpoolmanSpool):
         self._screen.spoolman_api.set_active_spool_id(spool.id, self._set_active_spool_cb)
@@ -524,3 +532,9 @@ class Panel(ScreenPanel):
     def _set_active_spool_cb(self, result):
         if not result:
             self._screen.show_popup_message(_("Error setting active spool"))
+            return
+        self._screen.set_active_spool_details(self.active_spool_id)
+
+    def activate(self):
+        if self.active_spool_id is not None:
+            GLib.idle_add(self._scroll_to_active, self.active_spool_id)

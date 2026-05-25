@@ -9,6 +9,7 @@ class SpoolmanAPI:
 
     def _send_request(self, method, params, callback):
         """Send a JSON-RPC request via websocket with callback."""
+
         if callback is None:
             logging.error(f"Spoolman API: Attempted to call method '{method}' without a callback.")
             return False
@@ -80,7 +81,11 @@ class SpoolmanAPI:
             else:
                 callback(False)
 
-        params = {"spool_id": spool_id}
+        if spool_id:
+            params = {"spool_id": spool_id}
+        else:
+            # 24/05/26 Moonraker bug: it should accept None/null but it doesnt
+            params = {}
         self._send_request("server.spoolman.post_spool_id", params, callback=handle)
 
     def clear_active_spool(self, callback):

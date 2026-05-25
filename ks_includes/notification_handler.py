@@ -122,5 +122,6 @@ class NotificationHandler:
             )
 
     def _active_spool_set(self, data):
-        self._screen.update_spool_data(data.get("spool_id"))
+        self._screen.set_active_spool_details(data.get("spool_id"))
+        # set_active_spool_details will trigger process update after getting the details
         return True

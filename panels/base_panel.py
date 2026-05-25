@@ -294,7 +294,6 @@ class BasePanel(ScreenPanel):
     def add_spoolman_box(self):
         self.control["item_box"].add(self.control["spoolman_box"])
         self.set_spoolman_refresh()
-        self.fetch_spoolman()
 
     def open_spool_panel(self, widget=None, event=None):
         self._screen.show_panel("spoolman")
@@ -332,7 +331,7 @@ class BasePanel(ScreenPanel):
 
     def set_spoolman_refresh(self):
         if self.spoolman_update is None:
-            self.spoolman_update = GLib.timeout_add_seconds(60, self.fetch_spoolman)
+            self.spoolman_update = GLib.timeout_add_seconds(20, self.fetch_spoolman)
 
     def add_content(self, panel):
         printing = self._printer and self._printer.state in {"printing", "paused"}
@@ -389,9 +388,7 @@ class BasePanel(ScreenPanel):
             logging.debug("Stopping Spoolman updates")
             self.spoolman_update = None
             return False
-        logging.debug("Fetching Spoolman")
-        self._screen.update_spool_data()
-        self.update_spoolman_weight_label()
+        self._screen.get_active_spool()
         return True
 
     def back(self, widget=None):
