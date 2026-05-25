@@ -402,6 +402,15 @@ class KlipperScreen(Gtk.Window):
             self.attach_panel(panel_name)
         except Exception as e:
             logging.exception(f"Error attaching panel:\n{e}\n\n{traceback.format_exc()}")
+        if remove_all:
+            self.set_titlebar_items(panel)
+
+    def set_titlebar_items(self, panel):
+        logging.debug("set_titlebar_items")
+        if panel in {"main_menu", "job_status"}:
+            self.base_panel.show_titlebar_items()
+        elif panel in {"splash_screen", "printer_select"}:
+            self.base_panel.clear_titlebar_items()
 
     def set_panel_title(self, title):
         self.base_panel.set_title(title)
@@ -772,7 +781,6 @@ class KlipperScreen(Gtk.Window):
         logging.debug(f"Blanking timeout: {time}")
 
     def show_printer_select(self, widget=None):
-        self.base_panel.show_heaters(False)
         self.show_panel("printer_select", remove_all=True)
 
     def websocket_error(self, status):

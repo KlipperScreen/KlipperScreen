@@ -224,10 +224,12 @@ class BasePanel(ScreenPanel):
             return color.strip().lstrip("#") or default_color
         return default_color
 
-    def show_heaters(self, show=True):
-        for child in self.control["item_box"].get_children():
-            self.control["item_box"].remove(child)
-        if self._printer is None or not show:
+    def show_titlebar_items(self):
+        if self.control["item_box"].get_children():
+            logging.warning("Titlebar items already populated")
+            return
+        if self._printer is None:
+            logging.warning("Cannot load Titlebar items, printer not initialized")
             return
         try:
             devices = self._printer.get_temp_devices()
@@ -291,6 +293,10 @@ class BasePanel(ScreenPanel):
         except Exception as e:
             logging.debug(f"Couldn't create heaters box: {e}")
 
+    def clear_titlebar_items(self):
+        for child in self.control["item_box"].get_children():
+            self.control["item_box"].remove(child)
+
     def add_spoolman_box(self):
         self.control["item_box"].add(self.control["spoolman_box"])
         self.set_spoolman_refresh()
@@ -333,7 +339,7 @@ class BasePanel(ScreenPanel):
         if self.spoolman_update is None:
             self.spoolman_update = GLib.timeout_add_seconds(20, self.fetch_spoolman)
 
-    def add_content(self, panel):
+    def get_printer_state(self):
         printing = self._printer and self._printer.state in {"printing", "paused"}
         connected = self._printer and self._printer.state not in {
             "disconnected",
@@ -341,14 +347,20 @@ class BasePanel(ScreenPanel):
             "shutdown",
             "error",
         }
-        printer_select = "printer_select" not in self._screen._cur_panels
+        printer_select = "printer_select" in self._screen._cur_panels
+        return printing, connected, printer_select
+
+    def update_action_bar(self):
+        printing, connected, printer_select = self.get_printer_state()
         self.control["estop"].set_visible(printing)
         self.control["shutdown"].set_visible(not printing)
-        self.show_shortcut(connected and printer_select)
-        self.show_heaters(connected and printer_select)
+        self.show_shortcut(connected and not printer_select)
         self.show_printer_select(len(self._config.get_printers()) > 1)
         for control in ("back", "home"):
             self.set_control_sensitive(len(self._screen._cur_panels) > 1, control=control)
+
+    def add_content(self, panel):
+        self.update_action_bar()
         self.current_panel = panel
         self.set_title(panel.title)
         self.content.add(panel.content)
