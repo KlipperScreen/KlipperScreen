@@ -1148,6 +1148,9 @@ class KlipperScreen(Gtk.Window):
 
     def set_power_devices(self, data, method, params):
         self.printer.configure_power_devices(data["result"])
+        screen_on_devices = self._config.get_main_config().get("screen_on_devices", "")
+        if screen_on_devices:
+            self.power_devices(widget=None, devices=screen_on_devices, on=True)
 
     def set_cameras(self, data, method, params):
         self.printer.configure_cameras(data["result"]["webcams"])
@@ -1244,9 +1247,6 @@ class KlipperScreen(Gtk.Window):
             self.init_tempstore()
 
         self.files.set_gcodes_path()
-        self.power_devices(
-            None, self._config.get_main_config().get("screen_on_devices", ""), on=True
-        )
         if "spoolman" in self.server_info["components"]:
             self.get_active_spool()
         logging.info("Printer initialized")
