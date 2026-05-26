@@ -1,3 +1,5 @@
+from panels import usb_drives
+
 # Panels
 
 ### Splash Screen
@@ -125,6 +127,12 @@ panel: temperature
 panel: updater
 ```
 ![Updater Panel](img/panels/updater.png)
+
+### Usb Copy
+```py
+panel: usb_drives
+```
+![Usb_Copy](img/panels/usb.png)
 
 ### [Z Calibrate](Panels/Zcalibrate.md)
 ```py

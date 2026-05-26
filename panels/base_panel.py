@@ -68,6 +68,11 @@ class BasePanel(ScreenPanel):
         self.control["shortcut"].connect("clicked", self.menu_item_clicked, self.shorcut)
         self.control["shortcut"].set_no_show_all(True)
 
+        self._usb_panel = {"panel": "usb_drives"}
+        self.control['usb'] = self._gtk.Button('usb-pen-drive-icon', scale=self.abscale)
+        self.control['usb'].connect("clicked", self.menu_item_clicked, self._usb_panel)
+        self.control['usb'].set_no_show_all(True)
+
         # Any action bar button should close the keyboard
         for item in self.control:
             self.control[item].connect("clicked", self._screen.remove_keyboard)
@@ -79,6 +84,7 @@ class BasePanel(ScreenPanel):
         self.action_bar.add(self.control["home"])
         self.action_bar.add(self.control["printer_select"])
         self.action_bar.add(self.control["shortcut"])
+        self.action_bar.add(self.control['usb'])
         self.action_bar.add(self.control["estop"])
         self.action_bar.add(self.control["shutdown"])
         self.show_printer_select(len(self._config.get_printers()) > 1)
@@ -355,6 +361,7 @@ class BasePanel(ScreenPanel):
         self.control["estop"].set_visible(printing)
         self.control["shutdown"].set_visible(not printing)
         self.show_shortcut(connected and not printer_select)
+        self.show_usb(connected and not printer_select and not printing)
         self.show_printer_select(len(self._config.get_printers()) > 1)
         for control in ("back", "home"):
             self.set_control_sensitive(len(self._screen._cur_panels) > 1, control=control)
@@ -517,6 +524,11 @@ class BasePanel(ScreenPanel):
         self.set_control_sensitive(
             self._screen._cur_panels[-1] != self.shutdown["panel"], control="shutdown"
         )
+
+    def show_usb(self, show=True):
+        on_usb = 'usb_drives' in self._screen._cur_panels
+        self.control['usb'].set_visible(show)
+        self.set_control_sensitive(not on_usb, control='usb')
 
     def show_printer_select(self, show=True):
         self.control["printer_select"].set_visible(

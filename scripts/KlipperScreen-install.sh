@@ -233,6 +233,17 @@ polkit.addRule(function(action, subject) {
         return polkit.Result.YES;
         }
 });
+polkit.addRule(function(action, subject) {
+    if ((action.id == "org.freedesktop.udisks2.filesystem-mount" ||
+         action.id == "org.freedesktop.udisks2.filesystem-mount-system" ||
+         action.id == "org.freedesktop.udisks2.filesystem-mount-other-seat" ||
+         action.id == "org.freedesktop.udisks2.filesystem-unmount-others" ||
+         action.id == "org.freedesktop.udisks2.eject-media" ||
+         action.id == "org.freedesktop.udisks2.power-off-drive") &&
+        subject.user == "$USER") {
+        return polkit.Result.YES;
+    }
+});
 EOF
 }
 
@@ -242,14 +253,15 @@ create_policy_legacy()
     sudo tee ${RULE_FILE} > /dev/null << EOF
 [KlipperScreen]
 Identity=unix-user:$USER
-Action=org.freedesktop.login1.power-off;
-       org.freedesktop.login1.power-off-multiple-sessions;
-       org.freedesktop.login1.reboot;
-       org.freedesktop.login1.reboot-multiple-sessions;
-       org.freedesktop.login1.halt;
-       org.freedesktop.login1.halt-multiple-sessions;
-       org.freedesktop.NetworkManager.*
+Action=org.freedesktop.login1.power-off;org.freedesktop.login1.power-off-multiple-sessions;org.freedesktop.login1.reboot;org.freedesktop.login1.reboot-multiple-sessions;org.freedesktop.login1.halt;org.freedesktop.login1.halt-multiple-sessions;org.freedesktop.NetworkManager.*
 ResultAny=yes
+
+[KlipperScreen USB]
+Identity=unix-user:$USER
+Action=org.freedesktop.udisks2.filesystem-mount;org.freedesktop.udisks2.filesystem-mount-system;org.freedesktop.udisks2.filesystem-mount-other-seat;org.freedesktop.udisks2.filesystem-unmount-others;org.freedesktop.udisks2.eject-media;org.freedesktop.udisks2.power-off-drive
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
 EOF
 }
 
@@ -285,6 +297,77 @@ start_KlipperScreen()
 {
     echo_text "Starting service..."
     sudo systemctl restart KlipperScreen
+}
+
+setup_usb_automount()
+{
+    echo_text "Checking USB auto-mounting..."
+
+    # udisks2 provides the D-Bus disk manager that handles duplicate labels
+    # udiskie is a lightweight daemon that uses udisks2 to auto-mount removable drives
+    UDISKS_INSTALLED=0
+    UDISKIE_INSTALLED=0
+
+    if dpkg-query -W -f='${Status}' udisks2 2>/dev/null | grep -q "ok installed"; then
+        echo_ok "udisks2 is already installed"
+        UDISKS_INSTALLED=1
+    fi
+
+    if command -v udiskie &>/dev/null; then
+        echo_ok "udiskie is already installed"
+        UDISKIE_INSTALLED=1
+    fi
+
+    if [ "$UDISKS_INSTALLED" -eq 0 ] || [ "$UDISKIE_INSTALLED" -eq 0 ]; then
+        echo_text "Installing udisks2 and udiskie for USB auto-mounting..."
+        if sudo apt install -y udisks2 udiskie; then
+            echo_ok "Installed udisks2 and udiskie"
+        else
+            echo_error "Failed to install USB auto-mount packages, skipping"
+            return
+        fi
+    fi
+
+    # Add user to plugdev group so udisks2 allows mount/unmount without root
+    sudo adduser "$USER" plugdev 2>/dev/null || true
+
+    # Allow the user's systemd services to run at boot without a login session
+    loginctl enable-linger "$USER" || true
+
+    SYSTEMD_USER_DIR="${HOME}/.config/systemd/user"
+    mkdir -p "$SYSTEMD_USER_DIR"
+    UDISKIE_SERVICE="${SYSTEMD_USER_DIR}/udiskie.service"
+
+    # Find the udiskie binary
+    UDISKIE_BIN=$(command -v udiskie 2>/dev/null)
+    if [ -z "$UDISKIE_BIN" ]; then
+        echo_error "udiskie binary not found after installation"
+        return
+    fi
+
+    # Write service file (overwrite to pick up any path changes)
+    cat > "$UDISKIE_SERVICE" << EOF
+[Unit]
+Description=udiskie USB automounter (KlipperScreen)
+
+[Service]
+ExecStart=${UDISKIE_BIN} --no-tray --no-notify
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+EOF
+
+    systemctl --user daemon-reload 2>/dev/null || true
+    systemctl --user enable udiskie.service 2>/dev/null || true
+    systemctl --user start udiskie.service 2>/dev/null || true
+
+    if systemctl --user is-active --quiet udiskie.service 2>/dev/null; then
+        echo_ok "USB auto-mounting is active"
+    else
+        echo_text "USB auto-mounting service installed (will start on next login/reboot)"
+    fi
 }
 
 install_network_manager()
@@ -347,6 +430,7 @@ fi
 
 
 install_packages
+setup_usb_automount
 create_virtualenv
 create_policy
 fix_fbturbo
