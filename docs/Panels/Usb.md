@@ -3,6 +3,7 @@
 This was created for those who have their printers on the go and may not have the ability to plug it in to a network to grab a file from it or copy a file to it.
 
 The option has been added to the left navigation menu, while in the USB copy mode the back button on the left panel can be used to return to the previous screen.
+
 ![Left_Panel](../img/panels/usb_left_panel.png)
 
 The workflow is simple, Upon inserting a USB drive in a format that your machine can read, it will automatically mount. 
