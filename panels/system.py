@@ -18,6 +18,7 @@ class Panel(ScreenPanel):
         self.scales = {}
         self.labels = {}
         self.grid = Gtk.Grid(column_spacing=10, row_spacing=5)
+        self.backend = "Wayland" if screen.wayland else "XServer"
 
         self.sysinfo = screen.printer.system_info
         if not self.sysinfo:
@@ -86,9 +87,16 @@ class Panel(ScreenPanel):
         self.current_row += 1
 
     def populate_info(self):
+        # date
         self.add_label_to_grid(self.prettify("date"), 0, bold=True)
         self.labels["date"] = Gtk.Label(label="", xalign=0)
         self.grid.attach(self.labels["date"], 1, self.current_row - 1, 1, 1)
+        self.add_label_to_grid("", 0)
+
+        # backend
+        self.add_label_to_grid(self.prettify("backend"), 0, bold=True)
+        self.labels["backend"] = Gtk.Label(label="", xalign=0)
+        self.grid.attach(self.labels["backend"], 1, self.current_row - 1, 1, 1)
         self.add_label_to_grid("", 0)
 
         for category, data in self.sysinfo.items():
@@ -162,3 +170,5 @@ class Panel(ScreenPanel):
             )
             now = datetime.datetime.now().astimezone()
             self.labels["date"].set_label(now.strftime("%a %b %e %H:%M:%S %Z %Y"))
+
+            self.labels["backend"].set_label(self.backend)
