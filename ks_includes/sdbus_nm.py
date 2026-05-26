@@ -100,7 +100,7 @@ class SdbusNm:
         self.monitor_connection = False
         self.wifi_state = -1
         self.popup = popup_callback
-        if self.wifi == True and self.wlan_device.state == enums.DeviceState.UNMANAGED:
+        if self.wifi and self.wlan_device.state == enums.DeviceState.UNMANAGED:
             self.popup(
                 f"{self.wlan_device.interface} is not managed by "
                 "NetworkManager and cannot be controlled by this app"
@@ -173,7 +173,7 @@ class SdbusNm:
 
         dev_obj = NetworkDeviceGeneric(active_connection.devices[0])
         iface_name = dev_obj.interface
-        if self.wifi == True and iface_name == self.wlan_device.interface:
+        if self.wifi and iface_name == self.wlan_device.interface:
             return ip
         return f"{ip} ({iface_name})"
 
