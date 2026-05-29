@@ -69,9 +69,9 @@ class BasePanel(ScreenPanel):
         self.control["shortcut"].set_no_show_all(True)
 
         self._usb_panel = {"panel": "usb_drives"}
-        self.control['usb'] = self._gtk.Button('usb-pen-drive-icon', scale=self.abscale)
-        self.control['usb'].connect("clicked", self.menu_item_clicked, self._usb_panel)
-        self.control['usb'].set_no_show_all(True)
+        self.control["usb"] = self._gtk.Button("usb-pen-drive-icon", scale=self.abscale)
+        self.control["usb"].connect("clicked", self.menu_item_clicked, self._usb_panel)
+        self.control["usb"].set_no_show_all(True)
 
         # Any action bar button should close the keyboard
         for item in self.control:
@@ -84,7 +84,7 @@ class BasePanel(ScreenPanel):
         self.action_bar.add(self.control["home"])
         self.action_bar.add(self.control["printer_select"])
         self.action_bar.add(self.control["shortcut"])
-        self.action_bar.add(self.control['usb'])
+        self.action_bar.add(self.control["usb"])
         self.action_bar.add(self.control["estop"])
         self.action_bar.add(self.control["shutdown"])
         self.show_printer_select(len(self._config.get_printers()) > 1)
@@ -526,9 +526,9 @@ class BasePanel(ScreenPanel):
         )
 
     def show_usb(self, show=True):
-        on_usb = 'usb_drives' in self._screen._cur_panels
-        self.control['usb'].set_visible(show)
-        self.set_control_sensitive(not on_usb, control='usb')
+        on_usb = "usb_drives" in self._screen._cur_panels
+        self.control["usb"].set_visible(show)
+        self.set_control_sensitive(not on_usb, control="usb")
 
     def show_printer_select(self, show=True):
         self.control["printer_select"].set_visible(

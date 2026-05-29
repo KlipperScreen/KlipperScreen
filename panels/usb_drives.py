@@ -4,10 +4,12 @@ import os
 import shutil
 import subprocess
 import threading
+
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import GdkPixbuf, Gio, GLib, Gtk, Pango
+
 from ks_includes.screen_panel import ScreenPanel
 
 _MODE_MAIN = "main"
@@ -22,14 +24,18 @@ class Panel(ScreenPanel):
         super().__init__(screen, title)
 
         self._mode = _MODE_MAIN
-        self._direction = None       # "from" (USB→printer) or "to" (printer→USB)
+        self._direction = None  # "from" (USB→printer) or "to" (printer→USB)
         self._available_drives = []  # [(name, path, mount), ...]
-        self._usb_dest = None        # selected USB mount path
+        self._usb_dest = None  # selected USB mount path
 
         self._vol_monitor = Gio.VolumeMonitor.get()
         self._mount_sigs = [
-            self._vol_monitor.connect("mount-added", lambda *a: GLib.idle_add(self._on_mount_change)),
-            self._vol_monitor.connect("mount-removed", lambda *a: GLib.idle_add(self._on_mount_change)),
+            self._vol_monitor.connect(
+                "mount-added", lambda *a: GLib.idle_add(self._on_mount_change)
+            ),
+            self._vol_monitor.connect(
+                "mount-removed", lambda *a: GLib.idle_add(self._on_mount_change)
+            ),
         ]
 
         self._scroll = self._gtk.ScrolledWindow()
@@ -65,7 +71,9 @@ class Panel(ScreenPanel):
             path = root.get_path()
             if path is None:
                 continue
-            mounts.append((mount.get_name() or os.path.basename(path) or _("USB Drive"), path, mount))
+            mounts.append(
+                (mount.get_name() or os.path.basename(path) or _("USB Drive"), path, mount)
+            )
         if not mounts:
             user = os.environ.get("USER") or os.environ.get("LOGNAME") or "pi"
             for base in (f"/media/{user}", f"/run/media/{user}"):
@@ -84,14 +92,20 @@ class Panel(ScreenPanel):
         self._clear_file_box()
 
         from_btn = self._make_dir_button(
-            "usb-pen-drive-icon", "arrow-right", "sd",
-            _("Copy From USB"), "color1",
+            "usb-pen-drive-icon",
+            "arrow-right",
+            "sd",
+            _("Copy From USB"),
+            "color1",
         )
         from_btn.connect("clicked", self._on_copy_from)
 
         to_btn = self._make_dir_button(
-            "sd", "arrow-right", "usb-pen-drive-icon",
-            _("Copy To USB"), "color3",
+            "sd",
+            "arrow-right",
+            "usb-pen-drive-icon",
+            _("Copy To USB"),
+            "color3",
         )
         to_btn.connect("clicked", self._on_copy_to)
 
@@ -173,8 +187,9 @@ class Panel(ScreenPanel):
         drives = self._usb_mounts()
         self._available_drives = drives
         if not drives:
-            lbl = Gtk.Label(label=_("No USB drives detected"),
-                            vexpand=True, valign=Gtk.Align.CENTER)
+            lbl = Gtk.Label(
+                label=_("No USB drives detected"), vexpand=True, valign=Gtk.Align.CENTER
+            )
             self._file_box.add(lbl)
         else:
             for name, path, mount in drives:
@@ -184,8 +199,7 @@ class Panel(ScreenPanel):
     def _add_drive_row(self, name, path, mount):
         sz = self._gtk.img_scale * self.bts
         img = self._gtk.Image("usb-pen-drive-icon", sz, sz)
-        name_lbl = Gtk.Label(label=name, xalign=0, hexpand=True,
-                             ellipsize=Pango.EllipsizeMode.END)
+        name_lbl = Gtk.Label(label=name, xalign=0, hexpand=True, ellipsize=Pango.EllipsizeMode.END)
 
         inner = Gtk.Box(spacing=5)
         inner.get_style_context().add_class("frame-item")
@@ -210,8 +224,9 @@ class Panel(ScreenPanel):
         self._clear_file_box()
         drives = self._usb_mounts()
         if not drives:
-            lbl = Gtk.Label(label=_("No USB drives detected"),
-                            vexpand=True, valign=Gtk.Align.CENTER)
+            lbl = Gtk.Label(
+                label=_("No USB drives detected"), vexpand=True, valign=Gtk.Align.CENTER
+            )
             self._file_box.add(lbl)
         else:
             for name, path, mount in drives:
@@ -221,8 +236,7 @@ class Panel(ScreenPanel):
     def _add_eject_row(self, name, path, mount):
         sz = self._gtk.img_scale * self.bts
         img = self._gtk.Image("usb-pen-drive-icon", sz, sz)
-        name_lbl = Gtk.Label(label=name, xalign=0, hexpand=True,
-                             ellipsize=Pango.EllipsizeMode.END)
+        name_lbl = Gtk.Label(label=name, xalign=0, hexpand=True, ellipsize=Pango.EllipsizeMode.END)
 
         row = Gtk.Box(spacing=5)
         row.get_style_context().add_class("frame-item")
@@ -271,8 +285,7 @@ class Panel(ScreenPanel):
             return
 
         if not entries:
-            lbl = Gtk.Label(label=_("No files found"),
-                            vexpand=True, valign=Gtk.Align.CENTER)
+            lbl = Gtk.Label(label=_("No files found"), vexpand=True, valign=Gtk.Align.CENTER)
             self._file_box.add(lbl)
             self._file_box.show_all()
             return
@@ -284,8 +297,7 @@ class Panel(ScreenPanel):
     def _add_file_row(self, name, path):
         sz = self._gtk.img_scale * self.bts
         img = self._gtk.Image("file", sz, sz)
-        name_lbl = Gtk.Label(label=name, xalign=0, hexpand=True,
-                             ellipsize=Pango.EllipsizeMode.END)
+        name_lbl = Gtk.Label(label=name, xalign=0, hexpand=True, ellipsize=Pango.EllipsizeMode.END)
 
         row = Gtk.Box(spacing=5)
         row.get_style_context().add_class("frame-item")
@@ -309,15 +321,24 @@ class Panel(ScreenPanel):
 
     def _confirm_eject(self, path, mount, name=""):
         label = name or os.path.basename(path) or _("USB Drive")
-        content = Gtk.Label(label=label, hexpand=True, vexpand=True,
-                            halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER)
+        content = Gtk.Label(
+            label=label,
+            hexpand=True,
+            vexpand=True,
+            halign=Gtk.Align.CENTER,
+            valign=Gtk.Align.CENTER,
+        )
         buttons = [
             {"name": _("Eject"), "response": Gtk.ResponseType.OK, "style": "color1"},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": "color2"},
         ]
         self._gtk.Dialog(
-            _("Eject Drive?"), buttons, content,
-            self._do_eject, path, mount,
+            _("Eject Drive?"),
+            buttons,
+            content,
+            self._do_eject,
+            path,
+            mount,
         )
 
     def _do_eject(self, dialog, response, path, mount):
@@ -332,7 +353,11 @@ class Panel(ScreenPanel):
                     break
         if mount is not None:
             mount.unmount_with_operation(
-                Gio.MountUnmountFlags.NONE, None, None, self._eject_done, None,
+                Gio.MountUnmountFlags.NONE,
+                None,
+                None,
+                self._eject_done,
+                None,
             )
         else:
             threading.Thread(target=self._eject_fallback, args=(path,), daemon=True).start()
@@ -380,9 +405,10 @@ class Panel(ScreenPanel):
                 row.pack_start(self._gtk.Image("file", sz, sz), False, False, 3)
 
             row.pack_start(
-                Gtk.Label(label=name, xalign=0, hexpand=True,
-                          ellipsize=Pango.EllipsizeMode.END),
-                True, True, 0,
+                Gtk.Label(label=name, xalign=0, hexpand=True, ellipsize=Pango.EllipsizeMode.END),
+                True,
+                True,
+                0,
             )
             file_box.add(row)
 
@@ -394,8 +420,11 @@ class Panel(ScreenPanel):
             {"name": _("Nope!"), "response": Gtk.ResponseType.CANCEL, "style": "color2"},
         ]
         self._gtk.Dialog(
-            _("Confirm Copy"), buttons, scroll,
-            self._on_confirm_copy, items,
+            _("Confirm Copy"),
+            buttons,
+            scroll,
+            self._on_confirm_copy,
+            items,
         )
 
     def _get_file_thumbnail(self, path, size):
@@ -451,9 +480,7 @@ class Panel(ScreenPanel):
             if best_data:
                 raw = base64.b64decode("".join(best_data))
                 stream = Gio.MemoryInputStream.new_from_data(raw, None)
-                pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
-                    stream, size, size, True, None
-                )
+                pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(stream, size, size, True, None)
                 stream.close_async(2)
                 return pixbuf
         except Exception as exc:
