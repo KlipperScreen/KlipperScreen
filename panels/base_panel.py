@@ -226,8 +226,7 @@ class BasePanel(ScreenPanel):
 
     def show_titlebar_items(self):
         if self.control["item_box"].get_children():
-            logging.warning("Titlebar items already populated")
-            return
+            self.clear_titlebar_items()
         if self._printer is None:
             logging.warning("Cannot load Titlebar items, printer not initialized")
             return
