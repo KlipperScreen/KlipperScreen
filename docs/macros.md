@@ -217,6 +217,71 @@ RESPOND TYPE=command MSG="action:prompt_button button_text|RESPOND MSG=test|info
 !!! info
     Only 4 footer buttons are allowed, the rest will not show due to screen space concerns
 
+Add text:
+
+`prompt_text`
+
+Displays the provided text in the prompt.
+
+```yaml+jinja title="Add text"
+RESPOND TYPE=command MSG="action:prompt_text Load the matching spool."
+```
+
+Add an image:
+
+`prompt_image`
+
+Displays an image from a Moonraker file path. Upload images to the Moonraker config directory, such
+as `config/images/nozzle.png` or `config/images/spool.svg`, and reference them by that path.
+
+```yaml+jinja title="Add an image"
+RESPOND TYPE=command MSG="action:prompt_image config/images/nozzle.png"
+```
+
+Ordering and scaling:
+
+Prompt items are shown in the order they are defined. Use `prompt_text_scale` before `prompt_text`
+to scale the next text item, and use `prompt_image_scale` before `prompt_image` to scale the next
+image. Images fit the available prompt space by default. Image scale values are relative to that
+fitted size, so values below `1` make the next image smaller and values above `1` make it larger.
+
+Scale the next text item:
+
+`prompt_text_scale`
+
+```yaml+jinja title="Add large text"
+RESPOND TYPE=command MSG="action:prompt_text_scale 1.5"
+RESPOND TYPE=command MSG="action:prompt_text Load the matching spool."
+```
+
+```yaml+jinja title="Add small text"
+RESPOND TYPE=command MSG="action:prompt_text_scale 0.75"
+RESPOND TYPE=command MSG="action:prompt_text Verify color and material before continuing."
+```
+
+Scale the next image:
+
+`prompt_image_scale`
+
+Images preserve their aspect ratio.
+
+```yaml+jinja title="Add an image at half size"
+RESPOND TYPE=command MSG="action:prompt_image_scale 0.5"
+RESPOND TYPE=command MSG="action:prompt_image config/images/spool.svg"
+```
+
+```yaml+jinja title="Add an image above the text"
+RESPOND TYPE=command MSG="action:prompt_image_scale 0.75"
+RESPOND TYPE=command MSG="action:prompt_image config/images/spool.svg"
+RESPOND TYPE=command MSG="action:prompt_text Load the matching spool."
+```
+
+```yaml+jinja title="Add an image after text"
+RESPOND TYPE=command MSG="action:prompt_text Load the matching spool."
+RESPOND TYPE=command MSG="action:prompt_image_scale 0.75"
+RESPOND TYPE=command MSG="action:prompt_image config/images/spool.svg"
+```
+
 Show the prompt on the screen:
 ```yaml+jinja title="Show"
 RESPOND TYPE=command MSG="action:prompt_show"
@@ -268,6 +333,32 @@ gcode:
     RESPOND TYPE=command MSG="action:prompt_show"
 ```
 ![Prompt_2](img/macros/Prompt_2.png)
+
+```yaml+jinja
+[gcode_macro SHOW_COMPLETE_PROMPT]
+gcode:
+    RESPOND TYPE=command MSG="action:prompt_begin Print Status"
+    RESPOND TYPE=command MSG="action:prompt_text_scale 2"
+    RESPOND TYPE=command MSG="action:prompt_text Print Complete"
+    RESPOND TYPE=command MSG="action:prompt_image_scale 0.5"
+    RESPOND TYPE=command MSG="action:prompt_image config/images/green_checkmark.svg"
+    RESPOND TYPE=command MSG="action:prompt_text Without Errors"
+    RESPOND TYPE=command MSG="action:prompt_footer_button Close|RESPOND MSG=close|primary"
+    RESPOND TYPE=command MSG="action:prompt_show"
+```
+![Prompt_3](img/macros/Prompt_3.png)
+
+```yaml+jinja
+[gcode_macro SHOW_FIT_IMAGE_PROMPT]
+gcode:
+    RESPOND TYPE=command MSG="action:prompt_begin Spool Preview"
+    RESPOND TYPE=command MSG="action:prompt_image config/images/blue_filament.svg"
+    RESPOND TYPE=command MSG="action:prompt_footer_button Unload|UNLOAD_FILAMENT|warning"
+    RESPOND TYPE=command MSG="action:prompt_footer_button Load & Purge|LOAD_FILAMENT|primary"
+    RESPOND TYPE=command MSG="action:prompt_footer_button Resume|RESUME|secondary"
+    RESPOND TYPE=command MSG="action:prompt_show"
+```
+![Prompt_4](img/macros/Prompt_4.png)
 
 ## KlipperScreen actions
 
