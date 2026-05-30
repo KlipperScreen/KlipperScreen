@@ -28,7 +28,13 @@ cd ~/
 git clone https://github.com/KlipperScreen/KlipperScreen.git
 ./KlipperScreen/scripts/KlipperScreen-install.sh
 ```
-This script will install the necessary packages, create a Python virtual environment at `~/.KlipperScreen-env`, and install a systemd service file.
+
+This script will install the necessary packages, create a Python virtual environment at `~/.KlipperScreen-env`, and install a systemd service file if you select it on the install.
+
+If you want to run the install script silently do:
+```sh
+BACKEND="X" SERVICE="Y" NETWORK="Y" START=1 ./KlipperScreen/scripts/KlipperScreen-install.sh
+```
 
 !!! tip
     If you need a custom location for the configuration file, you can add the `-c` or `--configfile` option to the systemd file and specify the desired location.
