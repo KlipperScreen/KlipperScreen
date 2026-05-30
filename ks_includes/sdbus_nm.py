@@ -100,7 +100,7 @@ class SdbusNm:
         self.monitor_connection = False
         self.wifi_state = -1
         self.popup = popup_callback
-        if self.wlan_device.state == enums.DeviceState.UNMANAGED:
+        if self.wlan_device and self.wlan_device.state == enums.DeviceState.UNMANAGED:
             self.popup(
                 f"{self.wlan_device.interface} is not managed by "
                 "NetworkManager and cannot be controlled by this app"
@@ -129,6 +129,47 @@ class SdbusNm:
             if dev.device_type == enums.DeviceType.WIFI:
                 wireless_interfaces.append(NetworkDeviceWireless(path))
         return wireless_interfaces
+
+    def get_all_network_devices(self):
+        devices = []
+        for path in self.nm.get_devices():
+            dev = NetworkDeviceGeneric(path)
+            if dev.device_type in (enums.DeviceType.WIFI, enums.DeviceType.ETHERNET):
+                devices.append(
+                    {
+                        "path": path,
+                        "interface": dev.interface,
+                        "type": dev.device_type,
+                    }
+                )
+        return devices
+
+    def get_ip_for_interface(self, iface):
+        for conn_path in self.nm.active_connections:
+            active_conn = ActiveConnection(conn_path)
+            for device_path in active_conn.devices:
+                dev_obj = NetworkDeviceGeneric(device_path)
+                if dev_obj.interface == iface:
+                    ip_info = IPv4Config(active_conn.ip4_config)
+                    if ip_info.address_data:
+                        return ip_info.address_data[0]["address"][1]
+        return "?"
+
+    def set_selected_interface(self, iface):
+        dev = next((d for d in self.get_all_network_devices() if d["interface"] == iface), None)
+        if dev and dev["type"] == enums.DeviceType.WIFI:
+            for wireless in self.get_wireless_interfaces():
+                if wireless.interface == iface and wireless.state == enums.DeviceState.UNMANAGED:
+                    self.popup(
+                        f"{iface} is not managed by "
+                        "NetworkManager and cannot be controlled by this app"
+                    )
+                    return False
+        self._selected_interface = iface
+        return True
+
+    def get_selected_interface(self):
+        return getattr(self, "_selected_interface", None)
 
     def get_interface_status(self):
         return self.wlan_device.state
@@ -162,20 +203,6 @@ class SdbusNm:
 
     def is_known(self, ssid):
         return any(net["SSID"] == ssid for net in self.get_known_networks())
-
-    def get_ip_address(self):
-        active_connection_path = self.nm.primary_connection
-        if not active_connection_path or active_connection_path == "/":
-            return "?"
-        active_connection = ActiveConnection(active_connection_path)
-        ip_info = IPv4Config(active_connection.ip4_config)
-        ip = ip_info.address_data[0]["address"][1]
-
-        dev_obj = NetworkDeviceGeneric(active_connection.devices[0])
-        iface_name = dev_obj.interface
-        if iface_name == self.wlan_device.interface:
-            return ip
-        return f"{ip} ({iface_name})"
 
     def get_networks(self):
         networks = []
@@ -406,17 +433,3 @@ class SdbusNm:
 
     def set_connection_monitoring(self, enable):
         self.monitor_connection = enable
-
-    def set_wlan_device(self, iface_name):
-        for wireless in self.get_wireless_interfaces():
-            if wireless.interface == iface_name:
-                if wireless.state == enums.DeviceState.UNMANAGED:
-                    self.popup(
-                        f"{iface_name} is not managed by "
-                        "NetworkManager and cannot be controlled by this app"
-                    )
-                    return
-                self.wlan_device = wireless
-                logging.debug(f"Switched wlan_device to {iface_name}")
-                return
-        raise ValueError(f"No Wi‑Fi interface named '{iface_name}' found.")
