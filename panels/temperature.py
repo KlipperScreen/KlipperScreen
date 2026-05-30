@@ -315,12 +315,6 @@ class Panel(ScreenPanel):
         return False
 
     def add_device(self, device):
-        logging.info(f"Adding device: {device}")
-
-        temperature = self._printer.get_stat(device, "temperature")
-        if temperature is None:
-            return False
-
         devname = device.split()[1] if len(device.split()) > 1 else device
         # Support for hiding devices by name
         if devname.startswith("_"):
@@ -328,6 +322,10 @@ class Panel(ScreenPanel):
         if devname.lower() in self.hidden_sensors:
             return False
 
+        temperature = self._printer.get_stat(device, "temperature")
+        if temperature is None:
+            return False
+        logging.info(f"Adding device: {device}")
         if device.startswith("extruder"):
             if self._printer.extrudercount > 1:
                 image = f"extruder-{device[8:]}" if device[8:] else "extruder-0"
@@ -575,16 +573,18 @@ class Panel(ScreenPanel):
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
-        for x in self._printer.get_temp_devices():
-            if x in data:
-                if x not in self.devices:
-                    self.add_device(x)
-                self.update_temp(
-                    x,
-                    self._printer.get_stat(x, "temperature"),
-                    self._printer.get_stat(x, "target"),
-                    self._printer.get_stat(x, "power"),
-                )
+
+        for device in self._printer.get_temp_devices():
+            if device not in data:
+                continue
+            if device not in self.devices and not self.add_device(device):
+                return
+            self.update_temp(
+                device,
+                self._printer.get_stat(device, "temperature"),
+                self._printer.get_stat(device, "target"),
+                self._printer.get_stat(device, "power"),
+            )
 
     def show_numpad(self, widget, device=None):
         for d in self.active_heaters:
