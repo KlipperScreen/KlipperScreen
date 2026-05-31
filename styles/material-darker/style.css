@@ -102,7 +102,6 @@ button.invalid {
 menu,
 menuitem,
 combobox button,
-combobox arrow,
 combobox menuitem {
     background-color: #252525;
     border-color: #121212;

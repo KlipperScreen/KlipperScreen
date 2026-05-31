@@ -151,7 +151,6 @@ combobox button {
 
 combobox arrow {
     min-width: 1em;
-    background-color: @bg;
 }
 
 combobox arrow:disabled {
