@@ -5,9 +5,10 @@ import re
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import GLib, Gtk
 
 from ks_includes.KlippyGcodes import KlippyGcodes
+from ks_includes.KlippyGtk import find_widget
 from ks_includes.screen_panel import ScreenPanel
 
 
@@ -270,39 +271,54 @@ class Panel(ScreenPanel):
             self.buttons[button].set_sensitive((not busy))
 
     def process_update(self, action, data):
-        if "idle_timeout" in data:
-            self.process_busy(data["idle_timeout"]["state"].lower() == "printing")
         if action != "notify_status_update":
             return
-        if "screws_tilt_adjust" in data:
-            if "error" in data["screws_tilt_adjust"]:
-                self.buttons["screws"].set_sensitive(True)
-                logging.info("Error reported by screws_tilt_adjust")
-            if "results" in data["screws_tilt_adjust"]:
-                section = self._printer.get_config_section("screws_tilt_adjust")
-                for screw, result in data["screws_tilt_adjust"]["results"].items():
-                    logging.info(f"{screw} {result['sign']} {result['adjust']}")
-                    if screw not in section:
-                        logging.error(f"{screw} not found in {section}")
-                        continue
-                    x, y = section[screw].split(",")
-                    x = float(x) + self.x_offset
-                    y = float(y) + self.y_offset
-                    for key, value in self.screw_positions.items():
-                        if value and x == value[0] and y == value[1]:
-                            logging.debug(f"X: {x} Y: {y} Adjust: {result['adjust']} Pos: {key}")
-                            if result["is_base"]:
-                                logging.info(f"{screw} is the Reference")
-                                self.buttons[key].set_label(_("Reference"))
-                            else:
-                                self.buttons[key].set_label(f"{result['sign']} {result['adjust']}")
-                            if (
-                                int(result["adjust"].split(":")[0]) == 0
-                                and int(result["adjust"].split(":")[1]) < 6
-                            ):
-                                self.buttons[key].set_image(self._gtk.Image("complete"))
-                            else:
-                                self.buttons[key].set_image(self._gtk.Image(result["sign"].lower()))
+        idle_timeout = data.get("idle_timeout")
+        if idle_timeout:
+            self.process_busy(idle_timeout["state"].lower() == "printing")
+        screws_data = data.get("screws_tilt_adjust")
+        if not screws_data:
+            return
+        if "error" in screws_data:
+            self.buttons["screws"].set_sensitive(True)
+            logging.info("Error reported by screws_tilt_adjust")
+        results = screws_data.get("results")
+        if not results:
+            return
+        section = self._printer.get_config_section("screws_tilt_adjust")
+        for screw, result in results.items():
+            logging.info(f"{screw} {result['sign']} {result['adjust']}")
+            if screw not in section:
+                logging.error(f"{screw} not found in {section}")
+                continue
+            x, y = map(float, section[screw].split(","))
+            x += self.x_offset
+            y += self.y_offset
+            for key, value in self.screw_positions.items():
+                if not value or x != value[0] or y != value[1]:
+                    continue
+                logging.debug(f"X: {x} Y: {y} Adjust: {result['adjust']} Pos: {key}")
+                if result["is_base"]:
+                    logging.info(f"{screw} is the Reference")
+                    label = _("Reference")
+                else:
+                    label = f"{result['sign']} {result['adjust']}"
+                self.buttons[key].set_label(label)
+                extra = f"\n<small>Z: {result['z']:.3f}</small>"
+                GLib.idle_add(self.set_button_markup, key, extra)
+                minutes, seconds = map(int, result["adjust"].split(":"))
+                if minutes == 0 and seconds < 6:
+                    image = "complete"
+                else:
+                    image = result["sign"].lower()
+                self.buttons[key].set_image(self._gtk.Image(image))
+
+    def set_button_markup(self, key, text):
+        button = self.buttons[key]
+        label = find_widget(button, Gtk.Label)
+        if label is not None:
+            current = label.get_text()
+            label.set_markup(current + text)
 
     def _get_screws(self, config_section_name):
         screws = []
