@@ -19,6 +19,34 @@ class KlippyWebsocket(threading.Thread):
     connecting = False
     callback_table = {}
 
+    @staticmethod
+    def _format_error(error):
+        if not error:
+            return ""
+        error_str = str(error)
+        if "opcode=8" in error_str and "data=b'" in error_str:
+            try:
+                start = error_str.index("data=b'") + len("data=b'")
+                end = error_str.index("'", start)
+                payload = error_str[start:end]
+                raw = payload.encode("latin1").decode("unicode_escape").encode("latin1")
+                if len(raw) >= 2:
+                    message = raw[2:].decode("utf-8", errors="ignore").strip()
+                    return message
+            except Exception:
+                pass
+        if error_str.startswith("[Errno "):
+            end = error_str.find("] ")
+            if end != -1:
+                error_str = error_str[end + 2 :]
+        return error_str
+
+    @staticmethod
+    def _format_close(status, message):
+        if message:
+            return f"Connection closed: {message}"
+        return ""
+
     def __init__(self, callback, host, port, api_key, path="", ssl=None):
         threading.Thread.__init__(self)
         self._wst = None
@@ -133,9 +161,7 @@ class KlippyWebsocket(threading.Thread):
         else:
             status = args[0]
             message = args[1]
-        info = ""
-        if message is not None:
-            info = f"{status} {message}"
+        info = self._format_close(status, message)
         if "on_close" in self._callback:
             GLib.idle_add(self._callback["on_close"], info, priority=GLib.PRIORITY_HIGH_IDLE)
         logging.info("Moonraker Websocket Closed")
@@ -144,8 +170,9 @@ class KlippyWebsocket(threading.Thread):
 
     def on_error(self, *args):
         error = args[1] if len(args) == 2 else args[0]
+        formatted = self._format_error(error)
         if "on_error" in self._callback:
-            GLib.idle_add(self._callback["on_error"], error, priority=GLib.PRIORITY_HIGH_IDLE)
+            GLib.idle_add(self._callback["on_error"], formatted, priority=GLib.PRIORITY_HIGH_IDLE)
 
 
 class MoonrakerApi:

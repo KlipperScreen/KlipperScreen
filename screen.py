@@ -823,7 +823,6 @@ class KlipperScreen(Gtk.Window):
         message = _("Connecting to %s") % self.state.printer_name
         if self.last_error:
             message += "\n\n" + self.last_error
-            self.last_error = ""
         if status:
             message += f"\n\n{status}"
 
