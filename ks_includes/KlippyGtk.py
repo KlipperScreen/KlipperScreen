@@ -26,8 +26,9 @@ def find_widget(widget, wanted_type):
 def format_label(widget, lines=2):
     label = find_widget(widget, Gtk.Label)
     if label is not None:
-        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-        label.set_line_wrap(True)
+        if lines > 1:
+            label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+            label.set_line_wrap(True)
         label.set_ellipsize(Pango.EllipsizeMode.END)
         label.set_lines(lines)
 
