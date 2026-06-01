@@ -10,6 +10,7 @@ import pathlib
 import subprocess
 import sys
 import traceback  # noqa
+from dataclasses import dataclass
 
 import gi
 
@@ -42,47 +43,55 @@ logging.getLogger("urllib3").setLevel(logging.WARNING)
 klipperscreendir = pathlib.Path(__file__).parent.resolve()
 
 
-class KlipperScreen(Gtk.Window):
-    _cur_panels = []
-    connected = False
-    connecting = False
-    connecting_to_printer = None
-    connected_printer = None
-    files = None
-    keyboard = None
-    keyboard_cache = {}
-    panels = {}
-    popup_message = None
-    printers = None
-    printer = None
-    updating = False
-    _ws = None
-    reinit_count = 0
-    _klippy_retry_count = 0
-    max_retries = 4
-    initialized = False
-    popup_timeout = None
-    wayland = False
-    windowed = False
+@dataclass
+class AppState:
+    printer_name: str = ""
+    connected: bool = False
+    connecting: bool = False
+    updating: bool = False
+    initialized: bool = False
+    reinit_count: int = 0
+    klippy_retry_count: int = 0
     notification_log = []
-    prompt = None
-    check_dpms_timeout = None
-    last_error = ""
+
+
+class KlipperScreen(Gtk.Window):
+    MAX_RETRIES = 4
 
     def __init__(self, args):
-        self.server_info = None
         try:
             super().__init__(title="KlipperScreen")
         except Exception as e:
             logging.exception(f"{e}\n\n{traceback.format_exc()}")
             raise RuntimeError from e
         GLib.set_prgname("KlipperScreen")
-        self.blanking_time = 600
+        self.state: AppState = AppState()
+        self.panels = {}
+        self.panels_reinit = []
+        self._cur_panels = []
+
+        self.server_info = None
+        self.files = None
+        self.printer = None
+        self.printers = None
         self.apiclient = None
+        self._ws = None
+
+        self.keyboard = None
+        self.keyboard_cache = {}
+        self.wayland = False
+        self.windowed = False
+
+        self.blanking_time = 600
+        self.check_dpms_timeout = None
+
+        self.prompt = None
         self.dialogs = []
         self.confirm = None
-        self.panels_reinit = []
+        self.popup_message = None
+        self.popup_timeout = None
         self.last_popup_time = datetime.now()
+        self.last_error = ""
 
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
@@ -229,19 +238,18 @@ class KlipperScreen(Gtk.Window):
 
     def close_websocket(self):
         self._ws.close()
-        self.connected_printer = None
         self.printer.state = "disconnected"
 
     def connect_printer(self, name):
-        self.connecting_to_printer = name
+        self.state.printer_name = name
         if self._ws is not None and self._ws.connected:
             self.printer_initializing("Waiting Websocket closure")
             self.close_websocket()
             return
         self.printer_initializing(_("Initializing KlipperScreen"), True)
         gc.collect()
-        self.connecting = True
-        self.initialized = False
+        self.state.connecting = True
+        self.state.initialized = False
         ind = next(
             (self.printers.index(printer) for printer in self.printers if name == list(printer)[0]),
             0,
@@ -276,9 +284,9 @@ class KlipperScreen(Gtk.Window):
         else:
             self.files.reinit()
 
-        self.reinit_count = 0
-        self._klippy_retry_count = 0
-        self._init_printer(_("Connecting to %s") % self.connecting_to_printer)
+        self.state.reinit_count = 0
+        self.state.klippy_retry_count = 0
+        self._init_printer(_("Connecting to %s") % self.state.printer_name)
 
     def ws_subscribe(self):
         requested_updates = {
@@ -433,13 +441,13 @@ class KlipperScreen(Gtk.Window):
     def log_notification(self, message, level=0):
         time = datetime.now().strftime("%H:%M:%S")
         log_entry = {"message": message, "level": level, "time": time}
-        if len(self.notification_log) > 999:
-            del self.notification_log[0]
-        self.notification_log.append(log_entry)
+        if len(self.state.notification_log) > 999:
+            del self.state.notification_log[0]
+        self.state.notification_log.append(log_entry)
         self.process_update("notify_log", log_entry)
 
     def notification_log_clear(self):
-        self.notification_log.clear()
+        self.state.notification_log.clear()
 
     def show_popup_message(self, message, level=3, from_ws=False):
         if from_ws:
@@ -790,52 +798,50 @@ class KlipperScreen(Gtk.Window):
         logging.debug("### websocket_connected")
         self.printer_initializing(_("Moonraker Connected"))
         self._ws.klippy.identify_client(functions.get_software_version(), self._ws.api_key)
-        self.reinit_count = 0
-        self._klippy_retry_count = 0
+        self.state.reinit_count = 0
+        self.state.klippy_retry_count = 0
         self.last_error = ""
-        self.connected = True
-        self.connecting = False
-        self.connected_printer = self.connecting_to_printer
-        self.base_panel.set_ks_printer_cfg(self.connected_printer)
+        self.state.connected = True
+        self.state.connecting = False
+        self.base_panel.set_ks_printer_cfg(self.state.printer_name)
         self._ws.klippy.query_server_info(self.init_moonraker_components)
 
     def websocket_disconnected(self, status):
         logging.debug("### websocket_disconnected")
         self.printer.state = "disconnected"
-        self.connected_printer = None
-        go_to_splash = self.connected  # Go to splashscreen if it was connected
-        self.connected = False
+        go_to_splash = self.state.connected  # Go to splashscreen if it was connected
+        self.state.connected = False
         self.reconnect(status, go_to_splash)
 
     def reconnect(self, status="", go_to_splash=False):
-        self.initialized = False
+        self.state.initialized = False
         if "printer_select" in self._cur_panels:
             self.panels["printer_select"].disconnected_callback()
-            self.connecting = False
+            self.state.connecting = False
             return
 
-        message = _("Connecting to %s") % self.connecting_to_printer
+        message = _("Connecting to %s") % self.state.printer_name
         if self.last_error:
             message += "\n\n" + self.last_error
             self.last_error = ""
         if status:
             message += f"\n\n{status}"
 
-        if self.reinit_count > self.max_retries or "printer_select" in self._cur_panels:
+        if self.state.reinit_count > self.MAX_RETRIES or "printer_select" in self._cur_panels:
             logging.info("Stopping Retries")
-            self.connecting = False
+            self.state.connecting = False
             self.printer_initializing(message, go_to_splash)
             return
 
-        message += "\n\n" + _("Retrying") + f" #{self.reinit_count}"
+        message += "\n\n" + _("Retrying") + f" #{self.state.reinit_count}"
         self._init_printer(message, go_to_splash)
 
     def state_disconnected(self):
         logging.debug("### Going to disconnected")
         self.printer.stop_tempstore_updates()
-        self.initialized = False
-        self.reinit_count = 0
-        self._klippy_retry_count = 0
+        self.state.initialized = False
+        self.state.reinit_count = 0
+        self.state.klippy_retry_count = 0
         self._init_printer(_("Klipper has disconnected"), go_to_splash=True)
 
     def state_error(self):
@@ -846,7 +852,7 @@ class KlipperScreen(Gtk.Window):
         elif "micro-controller" in state:
             msg += _("Please recompile and flash the micro-controller.") + "\n"
         self.printer_initializing(msg + "\n" + state, go_to_splash=True)
-        self.initialized = False
+        self.state.initialized = False
 
     def state_paused(self):
         self.state_printing()
@@ -860,7 +866,7 @@ class KlipperScreen(Gtk.Window):
         # Do not return to main menu if completing a job, timeouts/user input will return
         if "job_status" in self._cur_panels and wait:
             return
-        if not self.initialized:
+        if not self.state.initialized:
             logging.debug("Printer not initialized yet")
             self.printer.state = "not ready"
             return
@@ -1075,7 +1081,7 @@ class KlipperScreen(Gtk.Window):
 
     def search_power_devices(self, devices):
         found_devices = []
-        if self.connected_printer is None or not devices:
+        if not devices or not self.state.connected or self.printer is None:
             return found_devices
         devices = [str(i.strip()) for i in devices.split(",")]
         power_devices = self.printer.get_power_devices()
@@ -1095,12 +1101,12 @@ class KlipperScreen(Gtk.Window):
 
     def _init_printer(self, msg, go_to_splash=False):
         self.printer_initializing(msg, go_to_splash)
-        self.connecting = True
+        self.state.connecting = True
 
-        if self.reinit_count > self.max_retries or "printer_select" in self._cur_panels:
+        if self.state.reinit_count > self.MAX_RETRIES or "printer_select" in self._cur_panels:
             logging.info("Stopping Retries")
             return False
-        self.reinit_count += 1
+        self.state.reinit_count += 1
         if self._ws.connected and not self._ws.closing:
             GLib.timeout_add_seconds(4, self.init_klipper)
         else:
@@ -1221,18 +1227,18 @@ class KlipperScreen(Gtk.Window):
 
     def _init_klipper_retry(self, data, method, params):
         if not data.get("result", {}).get("klippy_connected", False):
-            if self._klippy_retry_count > self.max_retries:
+            if self.state.klippy_retry_count > self.MAX_RETRIES:
                 logging.info("Stopping Klipper init retries")
                 self.printer_initializing(_("Klipper not responding after multiple attempts"))
                 return
-            self._klippy_retry_count += 1
+            self.state.klippy_retry_count += 1
             logging.debug(
-                f"Klipper not connected yet, retry {self._klippy_retry_count}/{self.max_retries}"
+                f"Klipper not connected, retry {self.state.klippy_retry_count}/{self.MAX_RETRIES}"
             )
             GLib.timeout_add_seconds(5, self.init_klipper)
             return
         self.server_info = data["result"]
-        self._klippy_retry_count = 0
+        self.state.klippy_retry_count = 0
         self.printer_initializing(_("Initializing Klipper Connection"))
         self._ws.klippy.get_printer_info(self.set_printer_info)
 
@@ -1250,9 +1256,9 @@ class KlipperScreen(Gtk.Window):
         if "spoolman" in self.server_info["components"]:
             self.get_active_spool()
         logging.info("Printer initialized")
-        self.initialized = True
-        self.reinit_count = 0
-        self._klippy_retry_count = 0
+        self.state.initialized = True
+        self.state.reinit_count = 0
+        self.state.klippy_retry_count = 0
         self.log_notification("Printer Initialized", 1)
 
     def init_tempstore(self):

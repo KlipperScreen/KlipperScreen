@@ -187,7 +187,7 @@ class Panel(ScreenPanel):
         for macro in self._printer.get_gcode_macros():
             self.options[macro] = {
                 "name": macro,
-                "section": f"displayed_macros {self._screen.connected_printer}",
+                "section": f"displayed_macros {self._screen.state.printer_name}",
                 "type": "binary",
             }
             show = self._config.get_config().getboolean(

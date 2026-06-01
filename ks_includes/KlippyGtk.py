@@ -301,7 +301,7 @@ class KlippyGtk:
         if not isinstance(dialog, Gtk.Dialog):
             logging.error(f"Invalid dialog: {dialog}")
             return
-        if self.screen.updating:
+        if self.screen.state.updating:
             return
         if dialog == self.screen.confirm:
             self.screen.confirm = None

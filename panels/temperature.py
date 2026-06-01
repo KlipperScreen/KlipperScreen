@@ -171,7 +171,7 @@ class Panel(ScreenPanel):
         count = 0
         for device in self.devices:
             visible = self._config.get_config().getboolean(
-                f"graph {self._screen.connected_printer}", device, fallback=True
+                f"graph {self._screen.state.printer_name}", device, fallback=True
             )
             self.devices[device]["visible"] = visible
             self.labels["da"].set_showing(device, visible)
@@ -364,7 +364,7 @@ class Panel(ScreenPanel):
         name.set_alignment(0, 0.5)
         name.get_style_context().add_class(class_name)
         visible = self._config.get_config().getboolean(
-            f"graph {self._screen.connected_printer}", device, fallback=True
+            f"graph {self._screen.state.printer_name}", device, fallback=True
         )
         if visible:
             name.get_style_context().add_class("graph_label")
@@ -425,7 +425,7 @@ class Panel(ScreenPanel):
         self.devices[device]["visible"] ^= True
         logging.info(f"Graph show {self.devices[device]['visible']}: {device}")
 
-        section = f"graph {self._screen.connected_printer}"
+        section = f"graph {self._screen.state.printer_name}"
         if section not in self._config.get_config().sections():
             self._config.get_config().add_section(section)
         self._config.set(section, f"{device}", f"{self.devices[device]['visible']}")

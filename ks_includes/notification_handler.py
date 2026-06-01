@@ -36,7 +36,7 @@ class NotificationHandler:
         self._screen.printer.process_update({"webhooks": {"state": "shutdown"}})
 
     def _klippy_ready(self, data):
-        if not self._screen.initialized:
+        if not self._screen.state.initialized:
             self._screen.init_klipper()
             return True
         self._screen.printer.process_update({"webhooks": {"state": "ready"}})

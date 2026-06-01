@@ -70,7 +70,7 @@ class Panel(ScreenPanel):
 
     def refresh(self):
         self.tb.set_text("")
-        for log in self._screen.notification_log:
+        for log in self._screen.state.notification_log:
             self.add_notification(log)
 
     def process_update(self, action, data):

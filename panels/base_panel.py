@@ -430,7 +430,7 @@ class BasePanel(ScreenPanel):
                 self.last_usage_report = datetime.now()
                 if not ctx.has_class(error):
                     ctx.add_class(error)
-                self._screen.log_notification(f"{self._screen.connecting_to_printer}: {msg}", 2)
+                self._screen.log_notification(f"{self._screen.state.printer_name}: {msg}", 2)
                 self.titlelbl.set_label(msg)
             elif ctx.has_class(error):
                 if (datetime.now() - self.last_usage_report).seconds < 5:
@@ -438,7 +438,7 @@ class BasePanel(ScreenPanel):
                     return
                 self.usage_report = 0
                 ctx.remove_class(error)
-                self.titlelbl.set_label(f"{self._screen.connecting_to_printer}")
+                self.titlelbl.set_label(f"{self._screen.state.printer_name}")
             return
 
         if action == "notify_update_response":
@@ -458,7 +458,7 @@ class BasePanel(ScreenPanel):
                         logging.error(
                             "error trying to show the updater button the dialog might be closed"
                         )
-                        self._screen.updating = False
+                        self._screen.state.updating = False
                         for dialog in self._screen.dialogs:
                             self._gtk.remove_dialog(dialog)
             return
@@ -525,10 +525,10 @@ class BasePanel(ScreenPanel):
     def set_title(self, title):
         self.titlebar.get_style_context().remove_class("message_popup_error")
         if (
-            self._screen.connecting_to_printer != "Printer"
+            self._screen.state.printer_name != "Printer"
             and "printer_select" not in self._screen._cur_panels
         ):
-            printer = self._screen.connecting_to_printer
+            printer = self._screen.state.printer_name
         else:
             printer = ""
         if not title:
@@ -632,13 +632,13 @@ class BasePanel(ScreenPanel):
         dialog.set_response_sensitive(Gtk.ResponseType.OK, False)
         dialog.get_widget_for_response(Gtk.ResponseType.OK).hide()
         self.update_dialog = dialog
-        self._screen.updating = True
+        self._screen.state.updating = True
 
     def finish_updating(self, dialog, response_id):
         if response_id != Gtk.ResponseType.OK:
             return
         logging.info("Finishing update")
-        self._screen.updating = False
+        self._screen.state.updating = False
         self._gtk.remove_dialog(dialog)
         self._screen._menu_go_back(home=True)
 

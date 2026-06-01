@@ -262,7 +262,7 @@ class Panel(ScreenPanel):
             self.reset_repo(self, program, False)
 
     def reset_repo(self, widget, program, hard):
-        if self._screen.updating:
+        if self._screen.state.updating:
             return
         self._screen.base_panel.show_update_dialog()
         msg = _("Starting recovery for") + f" {program}..."
@@ -274,7 +274,7 @@ class Panel(ScreenPanel):
         self._screen._ws.send_method("machine.update.recover", {"name": program, "hard": hard})
 
     def update_program(self, widget, program):
-        if self._screen.updating or not self.update_status:
+        if self._screen.state.updating or not self.update_status:
             return
 
         if program in self.update_status["version_info"]:
@@ -302,7 +302,6 @@ class Panel(ScreenPanel):
             self._screen._ws.send_method("machine.update.client", {"name": program})
 
     def update_program_info(self, p):
-
         if not self.update_status or p not in self.update_status["version_info"]:
             logging.info(f"Unknown version: {p}")
             return
