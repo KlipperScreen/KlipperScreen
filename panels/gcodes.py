@@ -174,7 +174,7 @@ class Panel(ScreenPanel):
                 hexpand=False, vexpand=False, can_focus=False, always_show_image=True
             )
             rename.get_style_context().add_class("color2")
-            rename.set_image(self._gtk.Image("files", self.list_button_size, self.list_button_size))
+            rename.set_image(self._gtk.Image("edit", self.list_button_size, self.list_button_size))
             itemname = Gtk.Label(
                 hexpand=True, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END
             )
@@ -556,9 +556,13 @@ class Panel(ScreenPanel):
         for child in self.content.get_children():
             self.content.remove(child)
 
+        if not fullpath.startswith("gcodes/"):
+            fullpath = f"gcodes/{fullpath}"
+
         if "rename_file" not in self.labels:
             self._create_rename_box(fullpath)
         self.content.add(self.labels["rename_file"])
+        self.content.show_all()
         self.labels["new_name"].set_text(fullpath[7:])
         self.labels["new_name"].grab_focus_without_selecting()
         self.showing_rename = True
