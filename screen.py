@@ -1267,8 +1267,9 @@ class KlipperScreen(Gtk.Window):
         temp_devices = self.printer.get_temp_devices()
         if not temp_devices:
             return
-
-        if "error" in data or "result" not in data or not data["result"]:
+        if "error" in data:
+            logging.error(data["error"])
+        elif "result" not in data or not data["result"]:
             logging.info("Moonraker tempstore not yet available")
         else:
             self.printer.tempstore = data["result"]

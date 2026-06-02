@@ -81,7 +81,6 @@ class HeaterGraph(Gtk.DrawingArea):
 
     def draw_graph(self, da: Gtk.DrawingArea, ctx: cairoContext):
         if not self.printer.tempstore:
-            logging.info("Tempstore not initialized!")
             return
         Gtk.render_background(
             da.get_style_context(), ctx, 0, 0, da.get_allocated_width(), da.get_allocated_height()
@@ -186,7 +185,6 @@ class HeaterGraph(Gtk.DrawingArea):
         return hscale
 
     def graph_time(self, ctx: cairoContext, gsize, points_per_pixel):
-
         now = datetime.datetime.now()
         first = gsize[1][0] - (now.second + ((now.minute % 2) * 60)) / points_per_pixel
         steplen = 120 / points_per_pixel  # For 120s
