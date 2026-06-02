@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-15 20:03-0300\n"
-"PO-Revision-Date: 2026-04-26 20:09+0000\n"
+"PO-Revision-Date: 2026-05-31 20:01+0000\n"
 "Last-Translator: Julia <juliazero2@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/pl/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.17.1-dev\n"
+"X-Generator: Weblate 2026.6.dev0\n"
 
 msgid "Main Menu"
 msgstr "Menu główne"
@@ -243,11 +243,9 @@ msgstr "Pokaż kursor"
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr "Do obsługi myszą lub zweryfikowania dokładności ekranu dotykowego"
 
-#, fuzzy
 msgid "Screen wake delay"
-msgstr "Opóźnienie wybudzania ekranu"
+msgstr "Opóźnienie wybudzenia ekranu"
 
-#, fuzzy
 msgid "Helps to prevent unwanted touchs during screen wake up"
 msgstr "Pomaga zapobiegać niepożądanym dotknięciom podczas wybudzania ekranu"
 
@@ -335,7 +333,6 @@ msgstr "Błąd połączenia"
 msgid "No mesh has been loaded"
 msgstr "Nie załadowano żadnej siatki"
 
-#, fuzzy
 msgid "Invalid Number"
 msgstr "Nieprawidłowa liczba"
 
@@ -836,83 +833,66 @@ msgstr "Ponów"
 msgid "Power On Printer"
 msgstr "Zasilanie włączone"
 
-#, fuzzy
 msgid "Spool editor"
 msgstr "Edytor szpuli"
 
-#, fuzzy
 msgid "No spool selected"
 msgstr "Nie wybrano szpuli"
 
-#, fuzzy
 msgid "Measured weight"
 msgstr "Zmierzona waga"
 
 msgid "Remaining weight"
 msgstr "Pozostała waga"
 
-#, fuzzy
 msgid "Initial weight"
 msgstr "Waga początkowa"
 
-#, fuzzy
 msgid "Empty weight"
 msgstr "Waga pustej szpuli"
 
-#, fuzzy
 msgid "Invalid weight"
 msgstr "Nieprawidłowa waga"
 
-#, fuzzy
 msgid "Restore"
 msgstr "Przywróć"
 
-#, fuzzy
 msgid "No"
 msgstr "Nie"
 
-#, fuzzy
 msgid "Yes"
 msgstr "Tak"
 
-#, fuzzy
 msgid "Vendor"
 msgstr "Producent"
 
 msgid "Material"
 msgstr "Materiał"
 
-#, fuzzy
 msgid "Used"
-msgstr "Używany"
+msgstr "Użyto"
 
-#, fuzzy
 msgid "Location"
 msgstr "Lokalizacja"
 
 msgid "Archived"
 msgstr "Zarchiwizowane"
 
-#, fuzzy
 msgid "Price"
 msgstr "Cena"
 
 msgid "Comment"
 msgstr "Komentarz"
 
-#, fuzzy
 msgid "Measured weight is below empty spool weight"
 msgstr "Zmierzona waga jest mniejsza niż waga pustej szpuli"
 
-#, fuzzy
 msgid "Value must be positive"
 msgstr "Wartość musi być dodatnia"
 
-#, fuzzy
 msgid "Error updating filament weight"
 msgstr "Błąd aktualizacji wagi filamentu"
 
-#, fuzzy
 msgid "Filament weight updated"
 msgstr "Waga filamentu zaktualizowana"
 
@@ -1057,7 +1037,6 @@ msgstr "Minimum:"
 msgid "System:"
 msgstr "System:"
 
-#, fuzzy
 msgid "Initializing KlipperScreen"
 msgstr "Inicjalizowanie KlipperScreen"
 
@@ -1070,7 +1049,6 @@ msgstr "Zamknij"
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS nie powiodło się i zostało wyłączone"
 
-#, fuzzy
 msgid "Moonraker Connected"
 msgstr "Połączono z Moonraker"
 
@@ -1113,14 +1091,12 @@ msgstr ""
 msgid "Temperature too low to extrude"
 msgstr "Zbyt niska temperatura do wytłaczania"
 
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Czekanie na zamknięcie WebSocket Moonraker"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: połączony"
 
-#, fuzzy
 msgid "Initializing Klipper Connection"
 msgstr "Inicjalizowanie połączenia Klipper"
 
