@@ -34,6 +34,8 @@ class BasePanel(ScreenPanel):
         self.spoolman_update = None
         self.titlebar_items = []
         self.titlebar_name_type = None
+        self.titlebar_labels = {}
+        self.titlebar_populated = False
         self.spoolman_low_limit = 20
         self.spoolman_current_color = None
         self.current_extruder = None
@@ -225,8 +227,8 @@ class BasePanel(ScreenPanel):
         return default_color
 
     def show_titlebar_items(self):
-        if self.control["item_box"].get_children():
-            self.clear_titlebar_items()
+        if self.titlebar_populated:
+            return
         if self._printer is None:
             logging.warning("Cannot load Titlebar items, printer not initialized")
             return
@@ -236,15 +238,19 @@ class BasePanel(ScreenPanel):
                 return
             img_size = self._gtk.img_scale * self.bts
             for device in devices:
-                self.labels[device] = Gtk.Label(ellipsize=Pango.EllipsizeMode.START)
-                self.labels[f"{device}_box"] = Gtk.Box()
+                self.titlebar_labels[device] = Gtk.Label(ellipsize=Pango.EllipsizeMode.START)
+                self.titlebar_labels[f"{device}_box"] = Gtk.Box()
                 icon = self.get_icon(device, img_size)
                 if icon is not None:
-                    self.labels[f"{device}_box"].pack_start(icon, False, False, 3)
-                self.labels[f"{device}_box"].pack_start(self.labels[device], False, False, 0)
-                self.labels[f"{device}_eventbox"] = Gtk.EventBox()
-                self.labels[f"{device}_eventbox"].add(self.labels[f"{device}_box"])
-                self.labels[f"{device}_eventbox"].connect(
+                    self.titlebar_labels[f"{device}_box"].pack_start(icon, False, False, 3)
+                self.titlebar_labels[f"{device}_box"].pack_start(
+                    self.titlebar_labels[device], False, False, 0
+                )
+                self.titlebar_labels[f"{device}_eventbox"] = Gtk.EventBox()
+                self.titlebar_labels[f"{device}_eventbox"].add(
+                    self.titlebar_labels[f"{device}_box"]
+                )
+                self.titlebar_labels[f"{device}_eventbox"].connect(
                     "button-press-event", self.open_temp_panel, device
                 )
 
@@ -253,18 +259,20 @@ class BasePanel(ScreenPanel):
             n = 0
             if len(self._printer.get_tools()) > (nlimit - 1):
                 self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-                if self.current_extruder and f"{self.current_extruder}_box" in self.labels:
-                    self.control["item_box"].add(self.labels[f"{self.current_extruder}_eventbox"])
+                if self.current_extruder and f"{self.current_extruder}_box" in self.titlebar_labels:
+                    self.control["item_box"].add(
+                        self.titlebar_labels[f"{self.current_extruder}_eventbox"]
+                    )
             else:
                 self.current_extruder = False
             for device in devices:
                 if n >= nlimit:
                     break
                 if device.startswith("extruder") and self.current_extruder is False:
-                    self.control["item_box"].add(self.labels[f"{device}_eventbox"])
+                    self.control["item_box"].add(self.titlebar_labels[f"{device}_eventbox"])
                     n += 1
                 elif device.startswith("heater"):
-                    self.control["item_box"].add(self.labels[f"{device}_eventbox"])
+                    self.control["item_box"].add(self.titlebar_labels[f"{device}_eventbox"])
                     n += 1
             for item in self.titlebar_items:
                 # Users can fill the bar if they want
@@ -276,8 +284,11 @@ class BasePanel(ScreenPanel):
                     continue
                 for device in devices:
                     name = device.split()[1] if len(device.split()) > 1 else device
-                    if name == item and self.labels[f"{device}_eventbox"].get_parent() is None:
-                        self.control["item_box"].add(self.labels[f"{device}_eventbox"])
+                    if (
+                        name == item
+                        and self.titlebar_labels[f"{device}_eventbox"].get_parent() is None
+                    ):
+                        self.control["item_box"].add(self.titlebar_labels[f"{device}_eventbox"])
                         n += 1
                         break
             if (
@@ -289,12 +300,18 @@ class BasePanel(ScreenPanel):
                 n += 1
 
             self.control["item_box"].show_all()
+            self.titlebar_populated = True
         except Exception as e:
             logging.debug(f"Couldn't create heaters box: {e}")
 
     def clear_titlebar_items(self):
-        for child in self.control["item_box"].get_children():
+        if self.spoolman_update is not None:
+            GLib.source_remove(self.spoolman_update)
+            self.spoolman_update = None
+        for child in list(self.control["item_box"].get_children()):
             self.control["item_box"].remove(child)
+        self.titlebar_labels.clear()
+        self.titlebar_populated = False
 
     def add_spoolman_box(self):
         self.control["item_box"].add(self.control["spoolman_box"])
@@ -469,7 +486,7 @@ class BasePanel(ScreenPanel):
             return
         for device in devices:
             temp = self._printer.get_stat(device, "temperature")
-            if temp and device in self.labels:
+            if temp and device in self.titlebar_labels:
                 name = ""
                 if not (device.startswith("extruder") or device.startswith("heater_bed")):
                     if self.titlebar_name_type == "full":
@@ -478,7 +495,7 @@ class BasePanel(ScreenPanel):
                     elif self.titlebar_name_type == "short":
                         name = device.split()[1] if len(device.split()) > 1 else device
                         name = f"{name[:1].upper()}: "
-                self.labels[device].set_label(f"{name}{temp:.0f}°")
+                self.titlebar_labels[device].set_label(f"{name}{temp:.0f}°")
 
         if (
             self.current_extruder
@@ -486,15 +503,20 @@ class BasePanel(ScreenPanel):
             and "extruder" in data["toolhead"]
             and data["toolhead"]["extruder"] != self.current_extruder
         ):
-            self.control["item_box"].remove(self.labels[f"{self.current_extruder}_eventbox"])
-            self.current_extruder = data["toolhead"]["extruder"]
-            self.control["item_box"].pack_start(
-                self.labels[f"{self.current_extruder}_eventbox"], True, True, 3
-            )
-            self.control["item_box"].reorder_child(
-                self.labels[f"{self.current_extruder}_eventbox"], 0
-            )
-            self.control["item_box"].show_all()
+            current_key = f"{self.current_extruder}_eventbox"
+            new_key = f"{data['toolhead']['extruder']}_eventbox"
+            if current_key in self.titlebar_labels and new_key in self.titlebar_labels:
+                self.control["item_box"].remove(
+                    self.titlebar_labels[f"{self.current_extruder}_eventbox"]
+                )
+                self.current_extruder = data["toolhead"]["extruder"]
+                self.control["item_box"].pack_start(
+                    self.titlebar_labels[f"{self.current_extruder}_eventbox"], True, True, 3
+                )
+                self.control["item_box"].reorder_child(
+                    self.titlebar_labels[f"{self.current_extruder}_eventbox"], 0
+                )
+                self.control["item_box"].show_all()
 
         return False
 
