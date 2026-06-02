@@ -163,6 +163,10 @@ class KlippyGtk:
             logging.error(f"Unable to find image {filename}")
             return None
 
+    @staticmethod
+    def clear_file_image_cache():
+        KlippyGtk.PixbufFromFile.cache_clear()
+
     def PixbufFromHttp(self, resource, width=-1, height=-1):
         response = self.screen.apiclient.get_thumbnail_stream(resource)
         if response is False:

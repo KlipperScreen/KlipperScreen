@@ -64,6 +64,8 @@ class NotificationHandler:
 
     def _filelist_changed(self, data):
         if self._screen.files is not None:
+            if "action" in data and data["action"] == "modify_file":
+                self._screen._gtk.clear_file_image_cache()
             self._screen.files.process_update(data)
         return True
 

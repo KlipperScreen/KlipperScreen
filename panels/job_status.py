@@ -544,6 +544,7 @@ class Panel(ScreenPanel):
                 self.set_state("printing")
             return
         elif action == "notify_metadata_update" and data["filename"] == self.filename:
+            self._gtk.clear_file_image_cache()
             self.get_file_metadata(response=True)
         elif action != "notify_status_update":
             return
