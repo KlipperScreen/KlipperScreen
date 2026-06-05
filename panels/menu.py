@@ -40,6 +40,8 @@ class Panel(ScreenPanel):
             if not self.evaluate_enable(item[key]["enable"]):
                 logging.debug(f"X > {key}")
                 continue
+            if item[key]["panel"] and self._is_shortcut_item(item[key]):
+                continue
             enabled.append(self.labels[key])
         self.autogrid.__init__(enabled, columns, expand_last, self._screen.vertical_mode)
         return self.autogrid
@@ -112,3 +114,9 @@ class Panel(ScreenPanel):
         except Exception as e:
             logging.debug(f"Error evaluating enable statement: {enable}\n{e}")
             return False
+
+    def _is_shortcut_item(self, item):
+        shortcut_target = self._screen._config.get_main_config().get(
+            "side_shortcut_target", fallback="notifications"
+        )
+        return item.get("panel") == shortcut_target
