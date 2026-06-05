@@ -537,6 +537,8 @@ class BasePanel(ScreenPanel):
         return icons.get(panel, panel)
 
     def _shortcut_clicked(self, widget, item):
+        if self.shortcut["panel"] == "notifications":
+            self.update_shortcut_icon(level=0)
         self.menu_item_clicked(widget, item)
 
     def update_shortcut(self, target):
@@ -576,6 +578,27 @@ class BasePanel(ScreenPanel):
             available = count > 0
 
         self.set_control_sensitive(available, control="shortcut")
+
+    def update_shortcut_icon(self, level=None):
+        if self.shortcut["panel"] != "notifications":
+            return
+        if level > 0:
+            # Do not downgrade levels unless resetting
+            if self.shortcut["icon"] == "notifications_important":
+                level = 3
+            if self.shortcut["icon"] == "notifications_active":
+                level = 2
+        if level == 3:
+            icon = "notifications_important"
+        elif level in (1, 2):
+            icon = "notifications_active"
+        else:
+            icon = "notifications"
+        self.shortcut["icon"] = icon
+        pixbuf = self.control["shortcut"].get_image().get_pixbuf()
+        self.control["shortcut"].set_image(
+            self._gtk.Image(icon, pixbuf.get_width(), pixbuf.get_height())
+        )
 
     def show_printer_select(self, show=True):
         self.control["printer_select"].set_visible(show)

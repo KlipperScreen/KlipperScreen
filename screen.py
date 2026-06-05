@@ -432,7 +432,7 @@ class KlipperScreen(Gtk.Window):
         logging.debug(f"Current panel hierarchy: {' > '.join(self._cur_panels)}")
         while len(self.panels[panel].menu) > 1:
             self.panels[panel].unload_menu()
-        if hasattr(self.panels[panel], "process_update"):
+        if hasattr(self.panels[panel], "process_update") and self.printer:
             self.process_update("notify_status_update", self.printer.data)
         if hasattr(self.panels[panel], "activate"):
             self.panels[panel].activate()
@@ -448,6 +448,7 @@ class KlipperScreen(Gtk.Window):
 
     def notification_log_clear(self):
         self.state.notification_log.clear()
+        self.base_panel.update_shortcut_icon(level=0)
 
     def show_popup_message(self, message, level=3, from_ws=False):
         if from_ws:
@@ -491,6 +492,8 @@ class KlipperScreen(Gtk.Window):
         self.popup_message = popup
         self.popup_message.show_all()
 
+        self.base_panel.update_shortcut_icon(level)
+
         if self._config.get_main_config().getboolean("autoclose_popups", True):
             if self.popup_timeout is not None:
                 GLib.source_remove(self.popup_timeout)
@@ -508,6 +511,8 @@ class KlipperScreen(Gtk.Window):
             GLib.source_remove(self.popup_timeout)
             self.popup_timeout = None
         self.popup_message = None
+        if widget is not None:
+            self.base_panel.update_shortcut_icon(level=0)
         return False
 
     def show_error_modal(self, title_msg, description="", help_msg=None):
