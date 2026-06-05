@@ -112,6 +112,7 @@ class Panel(ScreenPanel):
             or "GBM" in message  # will fall back to other vo automatically
             or "open TTY for VT control" in message  # not important to notify in the UI
             or "youtube-dl" in message  # needed for some streams, not relevant for our case
+            or "yt-dlp" in message  # needed for some streams, not relevant for our case
         ):
             return
         if loglevel == "error":
