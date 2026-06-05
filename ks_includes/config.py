@@ -194,7 +194,7 @@ class KlipperScreenConfig:
                     "autoclose_popups",
                     "use_dpms",
                     "use_default_menu",
-                    "side_macro_shortcut",
+                    "side_macro_shortcut",  # Deprecated
                     "use-matchbox-keyboard",
                     "show_heater_power",
                     "show_scroll_steppers",
@@ -215,6 +215,7 @@ class KlipperScreenConfig:
                     "screen_off_devices",
                     "print_view",
                     "lock_password",
+                    "side_shortcut_target",
                 )
                 numbers = (
                     "job_complete_timeout",
@@ -387,12 +388,19 @@ class KlipperScreenConfig:
                 }
             },
             {
-                "side_macro_shortcut": {
+                "side_shortcut_target": {
                     "section": "main",
-                    "name": _("Macro shortcut on sidebar"),
-                    "type": "binary",
-                    "value": "False",
-                    "callback": screen.toggle_shortcut,
+                    "name": _("Action bar Shortcut"),
+                    "type": "dropdown",
+                    "value": "notifications",
+                    "callback": screen.update_shortcut,
+                    "options": [
+                        {"name": _("Notifications"), "value": "notifications"},
+                        {"name": _("Lock"), "value": "lock_screen"},
+                        {"name": _("Macros"), "value": "gcode_macros"},
+                        {"name": _("Camera"), "value": "camera"},
+                        {"name": _("LEDs"), "value": "led"},
+                    ],
                 }
             },
             {
@@ -605,6 +613,10 @@ class KlipperScreenConfig:
             self.configurable_options[i2]["screen_blanking_printing"]["options"].append(
                 {"name": name, "value": f"{num}"}
             )
+
+        # Migrate old side_macro_shortcut to side_shortcut_target
+        if self.config.getboolean("main", "side_macro_shortcut", fallback=False):
+            self.config.set("main", "side_shortcut_target", "gcode_macros")
 
         for item in self.configurable_options:
             name = list(item)[0]

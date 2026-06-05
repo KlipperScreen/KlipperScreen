@@ -62,13 +62,13 @@ class BasePanel(ScreenPanel):
         self.control["printer_select"].connect("clicked", self._screen.show_printer_select)
         self.control["printer_select"].set_no_show_all(True)
 
-        self.shorcut = {
-            "panel": "gcode_macros",
-            "icon": "custom-script",
-        }
-        self.control["shortcut"] = self._gtk.Button(self.shorcut["icon"], scale=self.abscale)
-        self.control["shortcut"].connect("clicked", self.menu_item_clicked, self.shorcut)
-        self.control["shortcut"].set_no_show_all(True)
+        self.shortcut = {}
+        self.shortcut["panel"] = self._config.get_main_config().get(
+            "side_shortcut_target", fallback="notifications"
+        )
+        self.shortcut["icon"] = self._get_shortcut_icon(self.shortcut["panel"])
+        self.control["shortcut"] = self._gtk.Button(self.shortcut["icon"], scale=self.abscale)
+        self.control["shortcut"].connect("clicked", self._shortcut_clicked, self.shortcut)
 
         # Any action bar button should close the keyboard
         for item in self.control:
@@ -370,7 +370,7 @@ class BasePanel(ScreenPanel):
         printing, connected, printer_select = self.get_printer_state()
         self.control["estop"].set_visible(printing)
         self.control["shutdown"].set_visible(not printing)
-        self.show_shortcut(connected and not printer_select)
+        self.show_shortcut(self.shortcut["panel"])
         self.show_printer_select(len(self._config.get_printers()) > 1)
         for control in ("back", "home"):
             self.set_control_sensitive(len(self._screen._cur_panels) > 1, control=control)
@@ -526,22 +526,61 @@ class BasePanel(ScreenPanel):
     def set_control_sensitive(self, value=True, control="shortcut"):
         self.control[control].set_sensitive(value)
 
-    def show_shortcut(self, show=True):
-        show = (
-            show
-            and self._config.get_main_config().getboolean("side_macro_shortcut", False)
-            and self._printer.get_printer_status_data()["printer"]["gcode_macros"]["count"] > 0
-            and self._screen._cur_panels[-1] != "printer_select"
+    def _get_shortcut_icon(self, panel):
+        icons = {
+            "notifications": "notifications",
+            "lock_screen": "lock",
+            "gcode_macros": "custom-script",
+            "camera": "camera",
+            "led": "light",
+        }
+        return icons.get(panel, panel)
+
+    def _shortcut_clicked(self, widget, item):
+        self.menu_item_clicked(widget, item)
+
+    def update_shortcut(self, target):
+        self.shortcut["panel"] = target
+        self.shortcut["icon"] = self._get_shortcut_icon(target)
+        pixbuf = self.control["shortcut"].get_image().get_pixbuf()
+        self.control["shortcut"].set_image(
+            self._gtk.Image(self.shortcut["icon"], pixbuf.get_width(), pixbuf.get_height())
         )
-        self.control["shortcut"].set_visible(show)
-        self.set_control_sensitive(self._screen._cur_panels[-1] != self.shorcut["panel"])
-        self.set_control_sensitive(
-            self._screen._cur_panels[-1] != self.shutdown["panel"], control="shutdown"
-        )
+        self.show_shortcut(target)
+
+    def show_shortcut(self, target=None):
+        current_panel = self._screen._cur_panels[-1] if self._screen._cur_panels else None
+        onTarget = current_panel == target
+        if onTarget:
+            self.set_control_sensitive(False, control="shortcut")
+            return
+        if target in ("lock_screen", "notifications"):
+            self.set_control_sensitive(True, control="shortcut")
+            return
+        if (self._printer is None
+            or not self._screen.state.connected
+            or self._screen._cur_panels[-1] == "printer_select"
+        ):
+            self.set_control_sensitive(False, control="shortcut")
+            return
+        status = self._printer.get_printer_status_data() or {}
+        paths = {
+            "gcode_macros": ("printer", "gcode_macros"),
+            "camera": ("moonraker", "cameras"),
+            "led": ("printer", "leds"),
+        }
+        available = True
+        if target in paths:
+            section, key = paths[target]
+            count = status.get(section, {}).get(key, {}).get("count", 0)
+            available = count > 0
+
+        self.set_control_sensitive(available, control="shortcut")
 
     def show_printer_select(self, show=True):
-        self.control["printer_select"].set_visible(
-            show and "printer_select" not in self._screen._cur_panels
+        self.control["printer_select"].set_visible(show)
+        self.control["printer_select"].set_sensitive(
+            "printer_select" not in self._screen._cur_panels
         )
 
     def set_title(self, title):

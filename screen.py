@@ -891,22 +891,8 @@ class KlipperScreen(Gtk.Window):
                 self.show_panel("zcalibrate")
             return
 
-    def toggle_shortcut(self, show):
-        if (
-            show
-            and not self.printer.get_printer_status_data()["printer"]["gcode_macros"]["count"] > 0
-        ):
-            self.show_popup_message(
-                _("No eligible macros:")
-                + "\n"
-                + _("macros with a name starting with '_' are hidden")
-                + "\n"
-                + _("macros that use 'rename_existing' are hidden")
-                + "\n"
-                + _("LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude")
-                + "\n"
-            )
-        self.base_panel.show_shortcut(show)
+    def update_shortcut(self, target):
+        self.base_panel.update_shortcut(target)
 
     def change_language(self, widget, lang):
         self._config.install_language(lang)
