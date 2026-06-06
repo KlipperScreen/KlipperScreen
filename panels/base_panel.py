@@ -559,7 +559,8 @@ class BasePanel(ScreenPanel):
         if target in ("lock_screen", "notifications"):
             self.set_control_sensitive(True, control="shortcut")
             return
-        if (self._printer is None
+        if (
+            self._printer is None
             or not self._screen.state.connected
             or self._screen._cur_panels[-1] == "printer_select"
         ):
