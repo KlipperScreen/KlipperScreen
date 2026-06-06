@@ -687,3 +687,18 @@ keyboard_box {
 .spool_icon {
     padding-right: .5em;
 }
+
+.endstop {
+    padding: 0.5em;
+    border-radius: .5em;
+    margin: 0.5em 1em;
+}
+
+.endstop-open {
+    background-color: @echo;
+}
+
+.endstop-triggered {
+    background-color: @error;
+}
+

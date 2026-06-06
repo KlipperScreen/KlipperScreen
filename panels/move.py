@@ -115,7 +115,10 @@ class Panel(ScreenPanel):
             distgrid.attach(self.labels[i], j, 0, 1, 1)
 
         for p in ("pos_x", "pos_y", "pos_z"):
-            self.labels[p] = Gtk.Label()
+            self.labels[p] = self._gtk.Button()
+            self.labels[p].set_hexpand(False)
+            self.labels[p].set_vexpand(False)
+            self.labels[p].connect("clicked", self.menu_item_clicked, {"panel": "move_advanced"})
         self.labels["move_dist"] = Gtk.Label(label=_("Move Distance (mm)"))
 
         bottomgrid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
@@ -228,9 +231,9 @@ class Panel(ScreenPanel):
             homed_axes = self._printer.get_stat("toolhead", "homed_axes")
             for i, axis in enumerate(("x", "y", "z")):
                 if axis not in homed_axes:
-                    self.labels[f"pos_{axis}"].set_text(f"{axis.upper()}: ?")
+                    self.labels[f"pos_{axis}"].set_label(f"{axis.upper()}: ?")
                 elif "gcode_move" in data and "gcode_position" in data["gcode_move"]:
-                    self.labels[f"pos_{axis}"].set_text(
+                    self.labels[f"pos_{axis}"].set_label(
                         f"{axis.upper()}: {data['gcode_move']['gcode_position'][i]:.2f}"
                     )
 
