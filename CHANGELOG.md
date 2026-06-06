@@ -4,6 +4,11 @@ Probably all versions contain changes regarding documentation, translation, fixe
 
 ## Current master
 
+* show z in bed_level
+* panel to query_endstops and move to absolute positions
+* configurable action-bar shortcut (instead of just macros)
+* network interface selector includes wired connections
+* add a shortcut from titlebar item to respective panels (temp/spoolman)
 * add a configurable screensaver delay for slow to wake displays
 
 ## v0.4.7  (May 13, 2026)
