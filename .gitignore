@@ -9,3 +9,4 @@ dist/
 build/
 venv/
 .venv/
+docs/extra
