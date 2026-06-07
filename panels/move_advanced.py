@@ -57,14 +57,20 @@ class Panel(ScreenPanel):
     def build_endstop_panel(self):
         if "endstop_box" not in self.labels:
             self.labels["endstop_box"] = Gtk.Box(
-                orientation=Gtk.Orientation.VERTICAL,
-                hexpand=True,
-                vexpand=True,
-                valign=Gtk.Align.START,
+                orientation=Gtk.Orientation.VERTICAL
             )
+            self.labels["endstop_list"] = Gtk.Box(
+                orientation=Gtk.Orientation.VERTICAL
+            )
+            scroll = self._gtk.ScrolledWindow(steppers=False)
+            scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+            scroll.add(self.labels["endstop_list"])
+
             endstop_btn = self._gtk.Button("refresh", _("Query Endstops"), "color4")
+            endstop_btn.set_vexpand(False)
             endstop_btn.connect("clicked", self.query_endstops)
             self.labels["endstop_box"].pack_start(endstop_btn, False, False, 0)
+            self.labels["endstop_box"].pack_start(scroll, True, True, 0)
         return self.labels["endstop_box"]
 
     def build_second_panel(self):
@@ -144,7 +150,9 @@ class Panel(ScreenPanel):
         for endstop in endstops:
             if endstop not in self.endstop_status:
                 self.endstop_status[endstop] = Gtk.Label()
-                self.labels["endstop_box"].pack_start(self.endstop_status[endstop], False, False, 0)
+                self.labels["endstop_list"].pack_start(
+                    self.endstop_status[endstop], False, False, 0
+                )
                 self.endstop_status[endstop].get_style_context().add_class("endstop")
             label = f"{endstop.upper()}: {endstops[endstop].capitalize()}"
             self.endstop_status[endstop].set_label(label)
@@ -166,9 +174,11 @@ class Panel(ScreenPanel):
             open = "open" in data
             label = f"Probe: {'Open' if open else 'Triggered'}"
             logging.info(label)
-            if "probe" not in self.endstop_status and "endstop_box" in self.labels:
+            if "probe" not in self.endstop_status and "endstop_list" in self.labels:
                 self.endstop_status["probe"] = Gtk.Label()
-                self.labels["endstop_box"].pack_start(self.endstop_status["probe"], False, False, 0)
+                self.labels["endstop_list"].pack_start(
+                    self.endstop_status["probe"], False, False, 0
+                )
                 self.endstop_status["probe"].get_style_context().add_class("endstop")
             ctx = self.endstop_status["probe"].get_style_context()
             if open:
