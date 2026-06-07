@@ -167,7 +167,7 @@ class Panel(ScreenPanel):
         for prof in bm_profiles:
             if prof not in self.profiles:
                 self.add_profile(prof)
-        for prof in self.profiles:
+        for prof in list(self.profiles):
             if prof not in bm_profiles:
                 self.remove_profile(prof)
 

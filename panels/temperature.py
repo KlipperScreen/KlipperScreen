@@ -211,7 +211,7 @@ class Panel(ScreenPanel):
             current_extruder = self._printer.data["toolhead"]["extruder"]
             selection.append(current_extruder)
 
-        for heater in self.active_heaters:
+        for heater in list(self.active_heaters):
             if heater not in selection:
                 self.select_heater(None, heater)
         for heater in selection:
