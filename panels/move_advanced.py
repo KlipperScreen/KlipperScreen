@@ -56,12 +56,8 @@ class Panel(ScreenPanel):
 
     def build_endstop_panel(self):
         if "endstop_box" not in self.labels:
-            self.labels["endstop_box"] = Gtk.Box(
-                orientation=Gtk.Orientation.VERTICAL
-            )
-            self.labels["endstop_list"] = Gtk.Box(
-                orientation=Gtk.Orientation.VERTICAL
-            )
+            self.labels["endstop_box"] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+            self.labels["endstop_list"] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
             scroll = self._gtk.ScrolledWindow(steppers=False)
             scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
             scroll.add(self.labels["endstop_list"])
