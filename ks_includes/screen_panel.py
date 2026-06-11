@@ -4,7 +4,7 @@ import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Pango
+from gi.repository import GLib, Gtk, Pango
 
 from ks_includes.KlippyGtk import find_widget
 
@@ -50,19 +50,28 @@ class ScreenPanel:
         else:
             self._screen._ws.klippy.emergency_stop()
 
-    def get_file_image(self, filename, width=None, height=None, small=False):
+    def load_image_async(self, filename, width, height, small=False, callback=None):
         if not self._files.has_thumbnail(filename):
-            return None
+            if callback:
+                callback(None)
+            return
         loc = self._files.get_thumbnail_location(filename, small)
         if loc is None:
-            return None
+            if callback:
+                callback(None)
+            return
         width = width if width is not None else self._gtk.img_width
         height = height if height is not None else self._gtk.img_height
         if loc[0] == "file":
-            return self._gtk.PixbufFromFile(loc[1], width, height)
-        if loc[0] == "http":
-            return self._gtk.PixbufFromHttp(loc[1], width, height)
-        return None
+
+            def _load():
+                pixbuf = self._gtk.PixbufFromFile(loc[1], width, height)
+                if callback:
+                    GLib.idle_add(callback, pixbuf)
+
+            self._gtk._executor.submit(_load)
+        else:
+            self._gtk.PixbufFromHttpAsync(loc[1], width, height, callback)
 
     def menu_item_clicked(self, widget, item):
         panel_args = {}

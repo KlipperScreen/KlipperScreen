@@ -1421,7 +1421,12 @@ def main():
     except Exception as e:
         logging.exception(f"Failed to initialize window\n{e}\n\n{traceback.format_exc()}")
         raise RuntimeError from e
-    win.connect("destroy", Gtk.main_quit)
+
+    def _on_destroy(win):
+        win.gtk.shutdown()
+        Gtk.main_quit()
+
+    win.connect("destroy", _on_destroy)
     win.show_all()
     Gtk.main()
 

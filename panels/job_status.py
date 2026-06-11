@@ -910,17 +910,29 @@ class Panel(ScreenPanel):
         if width <= 1 or height <= 1:
             width = max_width
             height = max_height
-        pixbuf = self.get_file_image(self.filename, width, height)
-        if pixbuf is None:
-            logging.debug("no pixbuf")
+        self.load_image_async(
+            self.filename, width, height, callback=lambda p: self._set_thumbnail(p)
+        )
+
+    def _set_thumbnail(self, pixbuf):
+        if not self.content.get_parent():
             return
         if image := find_widget(self.labels["thumbnail"], Gtk.Image):
             image.set_from_pixbuf(pixbuf)
 
     def show_fullscreen_thumbnail(self, widget):
-        pixbuf = self.get_file_image(
-            self.filename, self._screen.width * 0.9, self._screen.height * 0.75
+        width = self._screen.width * 0.9
+        height = self._screen.height * 0.75
+        self.load_image_async(
+            self.filename,
+            width,
+            height,
+            callback=lambda p: self._show_fullscreen_dialog(p, width, height),
         )
+
+    def _show_fullscreen_dialog(self, pixbuf, width, height):
+        if not self.content.get_parent():
+            return
         if pixbuf is None:
             return
         image = Gtk.Image.new_from_pixbuf(pixbuf)
