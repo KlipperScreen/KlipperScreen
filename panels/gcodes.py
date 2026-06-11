@@ -242,7 +242,20 @@ class Panel(ScreenPanel):
             self.labels["path"].show()
 
     def image_load(self, filepath, widget, size=-1, small=True, iconname=None):
-        pixbuf = self.get_file_image(filepath, size, size, small)
+        widget.set_image(self._gtk.Image(iconname, size, size))
+        format_label(widget)
+
+        self.load_image_async(
+            filepath,
+            size,
+            size,
+            small,
+            lambda pixbuf: self._update_image(widget, pixbuf, iconname, size),
+        )
+
+    def _update_image(self, widget, pixbuf, iconname, size):
+        if not widget.get_parent():
+            return
         if pixbuf is not None:
             widget.set_image(Gtk.Image.new_from_pixbuf(pixbuf))
         elif iconname is not None:
@@ -368,13 +381,6 @@ class Panel(ScreenPanel):
         else:
             width = self._screen.width * 0.5
             height = self._screen.height - self._gtk.dialog_buttons_height - self._gtk.font_size * 6
-        pixbuf = self.get_file_image(filename, width, height)
-        if pixbuf is not None:
-            image = Gtk.Image.new_from_pixbuf(pixbuf)
-            image_button = self._gtk.Button()
-            image_button.set_image(image)
-            image_button.connect("clicked", self.show_fullscreen_thumbnail, filename)
-            inside_box.pack_start(image_button, True, True, 0)
 
         info_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
         fileinfo = Gtk.Label(
@@ -389,6 +395,25 @@ class Panel(ScreenPanel):
         self._gtk.Dialog(
             f"{action} {filename}", buttons, main_box, self.confirm_print_response, filename
         )
+
+        self.load_image_async(
+            filename,
+            width,
+            height,
+            callback=lambda p: self._add_print_image(p, inside_box, filename),
+        )
+
+    def _add_print_image(self, pixbuf, inside_box, filename):
+        if not inside_box.get_parent():
+            return
+        if pixbuf is None:
+            return
+        image = Gtk.Image.new_from_pixbuf(pixbuf)
+        image_button = self._gtk.Button()
+        image_button.set_image(image)
+        image_button.connect("clicked", self.show_fullscreen_thumbnail, filename)
+        inside_box.pack_start(image_button, True, True, 0)
+        image_button.show_all()
 
     def confirm_print_response(self, dialog, response_id, filename):
         self._gtk.remove_dialog(dialog)
@@ -606,7 +631,18 @@ class Panel(ScreenPanel):
         self.back()
 
     def show_fullscreen_thumbnail(self, widget, filename):
-        pixbuf = self.get_file_image(filename, self._screen.width * 0.9, self._screen.height * 0.75)
+        width = self._screen.width * 0.9
+        height = self._screen.height * 0.75
+        self.load_image_async(
+            filename,
+            width,
+            height,
+            callback=lambda p: self._show_fullscreen_dialog(p, filename, width, height),
+        )
+
+    def _show_fullscreen_dialog(self, pixbuf, filename, width, height):
+        if not self.get_parent():
+            return
         if pixbuf is None:
             return
         image = Gtk.Image.new_from_pixbuf(pixbuf)

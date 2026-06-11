@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
+import concurrent.futures
 import logging
 import os
 import pathlib
+import threading
+from collections import OrderedDict
 from functools import lru_cache
 
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gdk, GdkPixbuf, Gio, Gtk, Pango
+from gi.repository import Gdk, GdkPixbuf, Gio, GLib, Gtk, Pango
 
 from ks_includes.widgets.scroll import CustomScrolledWindow
 
@@ -38,6 +41,10 @@ class KlippyGtk:
 
     def __init__(self, screen):
         self.screen = screen
+        self._executor = concurrent.futures.ThreadPoolExecutor(max_workers=4)
+        self._http_pixbuf_cache = OrderedDict()
+        self._http_pixbuf_cache_lock = threading.Lock()
+        self._http_pixbuf_cache_max = 500
         self.themedir = os.path.join(
             pathlib.Path(__file__).parent.resolve().parent, "styles", screen.theme, "images"
         )
@@ -163,24 +170,55 @@ class KlippyGtk:
             logging.error(f"Unable to find image {filename}")
             return None
 
-    @staticmethod
-    def clear_file_image_cache():
+    def clear_file_image_cache(self):
         KlippyGtk.PixbufFromFile.cache_clear()
+        with self._http_pixbuf_cache_lock:
+            self._http_pixbuf_cache.clear()
 
-    def PixbufFromHttp(self, resource, width=-1, height=-1):
-        response = self.screen.apiclient.get_thumbnail_stream(resource)
-        if response is False:
+    def _http_pixbuf_cache_put(self, cache_key, pixbuf):
+        with self._http_pixbuf_cache_lock:
+            if cache_key in self._http_pixbuf_cache:
+                self._http_pixbuf_cache.move_to_end(cache_key)
+            self._http_pixbuf_cache[cache_key] = pixbuf
+            while len(self._http_pixbuf_cache) > self._http_pixbuf_cache_max:
+                self._http_pixbuf_cache.popitem(last=False)
+
+    def _http_pixbuf_cache_get(self, cache_key):
+        with self._http_pixbuf_cache_lock:
+            if cache_key in self._http_pixbuf_cache:
+                self._http_pixbuf_cache.move_to_end(cache_key)
+                return self._http_pixbuf_cache[cache_key]
             return None
-        stream = Gio.MemoryInputStream.new_from_data(response, None)
-        try:
-            pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
-                stream, int(width), int(height), True
-            )
-        except Exception as e:
-            logging.exception(e)
-            return None
-        stream.close_async(2)
-        return pixbuf
+
+    def PixbufFromHttpAsync(self, resource, width, height, callback):
+        cache_key = (resource, int(width), int(height))
+        cached = self._http_pixbuf_cache_get(cache_key)
+        if cached is not None:
+            GLib.idle_add(callback, cached)
+            return
+
+        def _load():
+            response = self.screen.apiclient.get_thumbnail_stream(resource)
+            if response is False:
+                GLib.idle_add(callback, None)
+                return
+            stream = Gio.MemoryInputStream.new_from_data(response, None)
+            try:
+                pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
+                    stream, int(width), int(height), True
+                )
+            except Exception as e:
+                logging.exception(e)
+                pixbuf = None
+                stream.close_async(2)
+                GLib.idle_add(callback, pixbuf)
+                return
+            stream.close_async(2)
+            if pixbuf is not None:
+                self._http_pixbuf_cache_put(cache_key, pixbuf)
+            GLib.idle_add(callback, pixbuf)
+
+        self._executor.submit(_load)
 
     def Button(
         self,
@@ -337,3 +375,6 @@ class KlippyGtk:
                 os.system(
                     "xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm"
                 )
+
+    def shutdown(self):
+        self._executor.shutdown(wait=False)
