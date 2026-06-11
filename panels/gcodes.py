@@ -6,7 +6,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from datetime import datetime
 
-from gi.repository import Gtk, Pango
+from gi.repository import GLib, Gtk, Pango
 
 from ks_includes.KlippyGtk import find_widget
 from ks_includes.screen_panel import ScreenPanel
@@ -129,31 +129,29 @@ class Panel(ScreenPanel):
         fbchild = PrintListItem()
         fbchild.set_date(item["modified"])
         fbchild.set_size(item["size"])
-        if "dirname" in item:
-            if item["dirname"].startswith("."):
-                return
+        is_file = "filename" in item
+        is_dir = "dirname" in item
+        if is_dir:
             name = item["dirname"]
+            if name.startswith("."):
+                return None
             path = f"{self.cur_directory}/{name}"
+            basename = name
             fbchild.set_as_dir(True)
-        elif "filename" in item:
-            if item["filename"].startswith(".") or os.path.splitext(item["filename"])[1] not in {
-                ".gcode",
-                ".gco",
-                ".g",
-            }:
-                return
+        elif is_file:
             name = item["filename"]
-            path = f"{self.cur_directory}/{name}"
-            path = path.replace("gcodes/", "")
+            if name.startswith("."):
+                return None
+            basename, ext = os.path.splitext(name)
+            if ext not in {".gcode", ".gco", ".g"}:
+                return None
+            path = f"{self.cur_directory}/{name}".replace("gcodes/", "")
         else:
             logging.error(f"Unknown item {item}")
-            return
-        basename = os.path.splitext(name)[0]
+            return None
         fbchild.set_path(path)
         fbchild.set_name(basename.casefold())
         if self.list_mode:
-            label = Gtk.Label(label=basename, hexpand=True, vexpand=False)
-            format_label(label)
             info = Gtk.Label(
                 hexpand=True,
                 halign=Gtk.Align.START,
@@ -189,9 +187,9 @@ class Panel(ScreenPanel):
             row.attach(info, 1, 1, 1, 1)
             row.attach(rename, 2, 1, 1, 1)
             row.attach(delete, 3, 1, 1, 1)
-            if "filename" in item:
+            if is_file:
                 icon.connect("clicked", self.confirm_print, path)
-                image_args = (path, icon, self.thumbsize / 2, True, "file")
+                self.image_load(path, icon, self.thumbsize / 2, True, "file")
                 delete.connect("clicked", self.confirm_delete_file, f"gcodes/{path}")
                 rename.connect("clicked", self.show_rename, f"gcodes/{path}")
                 action_icon = "printer" if self._printer.extrudercount > 0 else "load"
@@ -205,9 +203,9 @@ class Panel(ScreenPanel):
                 else:
                     icon.get_style_context().add_class("color3")
                     row.attach(icon, 4, 0, 1, 2)
-            elif "dirname" in item:
+            elif is_dir:
                 icon.connect("clicked", self.change_dir, path)
-                image_args = (None, icon, self.thumbsize / 2, True, "folder")
+                self.image_load(None, icon, self.thumbsize / 2, True, "folder")
                 delete.connect("clicked", self.confirm_delete_directory, path)
                 rename.connect("clicked", self.show_rename, path)
                 action = self._gtk.Button("load", style="color3")
@@ -216,21 +214,16 @@ class Panel(ScreenPanel):
                 action.set_vexpand(False)
                 action.set_halign(Gtk.Align.END)
                 row.attach(action, 4, 0, 1, 2)
-            else:
-                return
             fbchild.add(row)
         else:  # Thumbnail view
             icon = self._gtk.Button(label=basename)
-            if "filename" in item:
+            if is_file:
                 icon.connect("clicked", self.confirm_print, path)
-                image_args = (path, icon, self.thumbsize, False, "file")
-            elif "dirname" in item:
+                self.image_load(path, icon, self.thumbsize, False, "file")
+            elif is_dir:
                 icon.connect("clicked", self.change_dir, path)
-                image_args = (None, icon, self.thumbsize, False, "folder")
-            else:
-                return
+                self.image_load(None, icon, self.thumbsize, False, "folder")
             fbchild.add(icon)
-        self.image_load(*image_args)
         return fbchild
 
     def show_path(self):
@@ -500,20 +493,59 @@ class Panel(ScreenPanel):
         return info
 
     def load_files(self, result, method, params):
+        if hasattr(self, "_gcodes_loading") and self._gcodes_loading:
+            self._gcodes_loading = False
+
         start = datetime.now()
         self.set_loading(True)
         if not result.get("result") or not isinstance(result["result"], dict):
             logging.info(result)
             return
-        items = [
-            self.create_item(item)
-            for item in [*result["result"]["dirs"], *result["result"]["files"]]
-        ]
-        for item in filter(None, items):
-            self.flowbox.add(item)
-        self.set_sort()
-        self.set_loading(False)
-        logging.info(f"Loaded in {(datetime.now() - start).total_seconds():.3f} seconds")
+
+        items = [*result["result"]["dirs"], *result["result"]["files"]]
+        total = len(items)
+
+        if total == 0:
+            self.set_sort()
+            self.set_loading(False)
+            return
+
+        self._gcodes_loading = True
+        next_index = 0
+        BATCH_SIZE = 12
+        first_batch = True
+
+        def step():
+            nonlocal next_index, first_batch
+
+            if not self._gcodes_loading:
+                return False
+
+            rendered = 0
+            while rendered < BATCH_SIZE and next_index < total:
+                item = items[next_index]
+                next_index += 1
+                fbchild = self.create_item(item)
+                if fbchild is not None:
+                    self.flowbox.add(fbchild)
+                    rendered += 1
+
+            if first_batch:
+                first_batch = False
+                elapsed = (datetime.now() - start).total_seconds()
+                logging.info(f"Time to first batch: {elapsed:.3f} seconds")
+                self.set_loading(False)
+
+            if next_index >= total:
+                self.set_sort()
+                self._gcodes_loading = False
+                elapsed = (datetime.now() - start).total_seconds()
+                logging.info(f"Loaded {total} items in {elapsed:.3f} seconds")
+                return False
+
+            return True
+
+        GLib.idle_add(step, priority=GLib.PRIORITY_DEFAULT_IDLE)
 
     def delete_from_list(self, path):
         logging.info(f"deleting {path}")
