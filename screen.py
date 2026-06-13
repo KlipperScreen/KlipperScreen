@@ -28,6 +28,7 @@ from ks_includes.config import KlipperScreenConfig
 from ks_includes.files import KlippyFiles
 from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.KlippyRest import KlippyRest
+from ks_includes.KlippyUDS import KlippyUDS
 from ks_includes.KlippyWebsocket import KlippyWebsocket
 from ks_includes.notification_handler import NotificationHandler
 from ks_includes.printer import Printer
@@ -265,19 +266,37 @@ class KlipperScreen(Gtk.Window):
 
         self._notification_handler = NotificationHandler(self)
 
-        self._ws = KlippyWebsocket(
-            {
-                "on_connect": self.websocket_connected,
-                "on_message": self._websocket_callback,
-                "on_close": self.websocket_disconnected,
-                "on_error": self.websocket_error,
-            },
-            self.printers[ind][name]["moonraker_host"],
-            self.printers[ind][name]["moonraker_port"],
-            self.printers[ind][name]["moonraker_api_key"],
-            self.printers[ind][name]["moonraker_path"],
-            self.printers[ind][name]["moonraker_ssl"],
-        )
+        moonraker_host = self.printers[ind][name]["moonraker_host"]
+        is_uds = moonraker_host.startswith("/") or moonraker_host.startswith("~")
+
+        if is_uds:
+            logging.info("Using Unix domain socket for %s", name)
+            self._ws = KlippyUDS(
+                {
+                    "on_connect": self.websocket_connected,
+                    "on_message": self._websocket_callback,
+                    "on_close": self.websocket_disconnected,
+                    "on_error": self.websocket_error,
+                },
+                moonraker_host,
+                self.printers[ind][name]["moonraker_port"],
+                self.printers[ind][name]["moonraker_api_key"],
+                self.printers[ind][name]["moonraker_path"],
+            )
+        else:
+            self._ws = KlippyWebsocket(
+                {
+                    "on_connect": self.websocket_connected,
+                    "on_message": self._websocket_callback,
+                    "on_close": self.websocket_disconnected,
+                    "on_error": self.websocket_error,
+                },
+                moonraker_host,
+                self.printers[ind][name]["moonraker_port"],
+                self.printers[ind][name]["moonraker_api_key"],
+                self.printers[ind][name]["moonraker_path"],
+                self.printers[ind][name]["moonraker_ssl"],
+            )
         self.spoolman_api = SpoolmanAPI(self._ws)
         if self.files is None:
             self.files = KlippyFiles(self)
