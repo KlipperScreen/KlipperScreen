@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2024-11-27 21:00+0000\n"
 "Last-Translator: Sun Zheng <123456789sunzheng@gmail.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -172,8 +172,13 @@ msgstr "使用24小时制"
 msgid "Disable for 12hs with am / pm"
 msgstr "禁用以使用12小时制 (AM/PM)"
 
-msgid "Macro shortcut on sidebar"
-msgstr "在侧边栏中显示宏按钮"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "操作栏快捷方式"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LEDs"
 
 msgid "Font Size"
 msgstr "字体大小"
@@ -281,6 +286,15 @@ msgstr[0] "小时"
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "分钟"
+
+msgid "Temperature too low to extrude"
+msgstr "温度过低无法挤出"
+
+msgid "Klipper will reboot"
+msgstr "Klipper将重新启动"
+
+msgid "Save configuration?"
+msgstr "是否保存设置？"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "您确定要紧急停止吗？"
@@ -518,12 +532,6 @@ msgstr "测量Y轴"
 msgid "Measure Both"
 msgstr "同时测量"
 
-msgid "Klipper will reboot"
-msgstr "Klipper将重新启动"
-
-msgid "Save configuration?"
-msgstr "是否保存设置？"
-
 msgid "Check ADXL Wiring"
 msgstr "请检查加速度计的接线"
 
@@ -710,17 +718,37 @@ msgstr "仅适用于移动面板"
 msgid "Z Speed (mm/s)"
 msgstr "Z轴速度（mm/s）"
 
+#, fuzzy
+msgid "Advanced Move"
+msgstr "高级移动"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "查询限位开关"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "位置无效"
+
 msgid "Failed to initialize"
 msgstr "初始化失败"
 
 msgid "Interface"
 msgstr "接口"
 
-msgid "No wireless interface has been found"
-msgstr "未找到无线接口"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "未发现网络设备"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "无可用网络设备"
 
 msgid "Connected"
 msgstr "已连接"
+
+msgid "Channel"
+msgstr "群组"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -741,9 +769,6 @@ msgstr "用户"
 #, python-format
 msgid "Connecting to %s"
 msgstr "连接到 %s"
-
-msgid "Channel"
-msgstr "群组"
 
 msgid "Hostname"
 msgstr "主机名"
@@ -1036,6 +1061,10 @@ msgstr "降低喷嘴"
 msgid "Abort"
 msgstr "中止"
 
+#, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "校准命令暂不可用"
+
 msgid "Error: Couldn't get a position to probe"
 msgstr "错误: 无法获取用来探测的位置"
 
@@ -1091,23 +1120,6 @@ msgid "Klipper has shutdown"
 msgstr "Klipper已关闭"
 
 #, fuzzy
-msgid "No eligible macros:"
-msgstr "无可用宏："
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "名称以\"_\"开头的宏将被隐藏"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "使用\"rename_existing\"的宏将被隐藏"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "加载耗材/卸载耗材 已被隐藏，请前往在挤出控制界面"
-
-msgid "Temperature too low to extrude"
-msgstr "温度过低无法挤出"
-
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "等待 Moonraker Websocket 关闭"
 
@@ -1118,238 +1130,6 @@ msgstr "Moonraker: 已连接"
 msgid "Initializing Klipper Connection"
 msgstr "正在初始化 Klipper 连接"
 
-#~ msgid "Last Used"
-#~ msgstr "上次使用"
-
 #, fuzzy
-#~ msgid "Last used"
-#~ msgstr "上次使用"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "加载当前耗材时出错"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "无法连接到Moonraker"
-
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "与 Moonraker 失去连接"
-
-#~ msgid "Max:"
-#~ msgstr "最大："
-
-#~ msgid "Password saved"
-#~ msgstr "密码已保存"
-
-#~ msgid "Hide temp."
-#~ msgstr "隐藏温度"
-
-#~ msgid "PSK for"
-#~ msgstr "PSK"
-
-#~ msgid "Are you sure you want to stop the calibration?"
-#~ msgstr "您确定要停止校准吗？"
-
-#~ msgid "Do you want to let KlipperScreen try to solve the issue?"
-#~ msgstr "你想让KlipperScreen尝试解决这个问题吗？"
-
-#~ msgid "Insufficient priviledges detected"
-#~ msgstr "检测到权限不足"
-
-#~ msgid "Mesh calibrate"
-#~ msgstr "床网校准"
-
-#~ msgid "Uploaded"
-#~ msgstr "上传于"
-
-#~ msgid "Ended official support in June 2023"
-#~ msgstr "2023年6月结束官方支持"
-
-#~ msgid "Hidden"
-#~ msgstr "隐藏的"
-
-#~ msgid "KlipperScreen will drop support in June 2024"
-#~ msgstr "KlipperScreen将于2024 年6月停止适配"
-
-#~ msgid "Print Time"
-#~ msgstr "打印用时"
-
-#~ msgid "Warning"
-#~ msgstr "警告"
-
-#~ msgid "dBm"
-#~ msgstr "dBm"
-
-#~ msgid "Deselect"
-#~ msgstr "取消选择"
-
-#~ msgid "Select"
-#~ msgstr "选择"
-
-#~ msgid "Bed screw configuration:"
-#~ msgstr "热床螺丝配置："
-
-#~ msgid ""
-#~ "Not supported for auto-detection, it needs to be configured in "
-#~ "klipperscreen.conf"
-#~ msgstr "不支持自动检测，需要在klpperscreen.conf中进行配置"
-
-#~ msgid "Unknown screw position"
-#~ msgstr "未知螺丝位置"
-
-#~ msgid "Max Acceleration to Deceleration"
-#~ msgstr "最大加速至减速"
-
-#~ msgid "Continue"
-#~ msgstr "继续"
-
-#~ msgid "Fullscreen"
-#~ msgstr "全屏"
-
-#~ msgid "Actions"
-#~ msgstr "控制"
-
-#~ msgid "Configuration"
-#~ msgstr "设置"
-
-#~ msgid "Homing"
-#~ msgstr "归零"
-
-#~ msgid "Disable XY"
-#~ msgstr "关闭 XY 轴电机"
-
-#~ msgid "Slicer Time correction (%)"
-#~ msgstr "切片软件时间校正(%)"
-
-#~ msgid "Calibrated, save configuration to make it permanent"
-#~ msgstr "已校准，保存配置后生效"
-
-#~ msgid "Decrease"
-#~ msgstr "减少"
-
-#~ msgid "Increase"
-#~ msgstr "增加"
-
-#, python-format
-#~ msgid "Sending Power ON signal to: %s"
-#~ msgstr "打开: %s"
-
-#~ msgid "Sort:"
-#~ msgstr "排序:"
-
-#~ msgid "Calibrating..."
-#~ msgstr "校准中..."
-
-#, python-format
-#~ msgid "Retry #%s"
-#~ msgstr "重试 #%s"
-
-#~ msgid "Add Printer"
-#~ msgstr "添加打印机"
-
-#~ msgid "Initializing"
-#~ msgstr "初始化"
-
-#~ msgid "Off"
-#~ msgstr "关闭"
-
-#~ msgid "View Mesh"
-#~ msgstr "查看热床网格"
-
-#~ msgid "Sort by: "
-#~ msgstr "排序: "
-
-#~ msgid "Bltouch found applied offset"
-#~ msgstr "Bltouch 发现应用的偏移量"
-
-#~ msgid ""
-#~ "Check /tmp/KlipperScreen.log for more information.\n"
-#~ "Please submit an issue on GitHub for help."
-#~ msgstr ""
-#~ "检查/tmp/KlipperScreen.log以获取更多信息。\n"
-#~ "请在GitHub上提交问题以寻求帮助。"
-
-#~ msgid "Probe found applied offset"
-#~ msgstr "找到探头偏移"
-
-#~ msgid "Tool"
-#~ msgstr "工具"
-
-#~ msgid "Displayed Macros"
-#~ msgstr "宏命令显示开关"
-
-#~ msgid "Z Position"
-#~ msgstr "Z 位置"
-
-#~ msgid "IPv4"
-#~ msgstr "IPv4 地址"
-
-#~ msgid "IPv6"
-#~ msgstr "IPv6 地址"
-
-#~ msgid "Klipper Version"
-#~ msgstr "Klipper 版本"
-
-#~ msgid ""
-#~ "Klipper has encountered an error with the micro-controller.\n"
-#~ "Please recompile and flash."
-#~ msgstr ""
-#~ "Klipper与MCU通讯错误。\n"
-#~ "请为主板重新烧录固件。"
-
-#~ msgid ""
-#~ "Klipper has encountered an error.\n"
-#~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
-#~ msgstr ""
-#~ "Klipper 遇到错误。\n"
-#~ "使用”FIRMWARE_RESTART“命令尝试解决此问题。"
-
-#~ msgid "KlipperScreen Version"
-#~ msgstr "KlipperScreen 版本"
-
-#~ msgid "Show Only Heaters in Temp."
-#~ msgstr "仅显示使用中的加热器."
-
-#~ msgid "Temp"
-#~ msgstr "温度"
-
-#~ msgid "Number Pad"
-#~ msgstr "数字键盘"
-
-#~ msgid "Preheat"
-#~ msgstr "预热"
-
-#~ msgid "Screen will show in less than one second"
-#~ msgstr "屏幕将在1秒内显示"
-
-#~ msgid "Medium (default)"
-#~ msgstr "中 (默认)"
-
-#~ msgid "File Estimation (default)"
-#~ msgstr "文件 (默认)"
-
-#~ msgid "Fan Off"
-#~ msgstr "关闭风扇"
-
-#~ msgid "Fan On"
-#~ msgstr "打开风扇"
-
-#~ msgid "Fast"
-#~ msgstr "加速"
-
-#~ msgid "Slow"
-#~ msgstr "减速"
-
-#~ msgid "?"
-#~ msgstr "?"
-
-#~ msgid "Cancel Change"
-#~ msgstr "取消更改"
-
-#~ msgid "Control"
-#~ msgstr "控制"
-
-#~ msgid "Load Average"
-#~ msgstr "平均负载"
-
-#~ msgid "Screen Blanking Time"
-#~ msgstr "关闭屏幕时间"
+msgid "Klipper not responding after multiple attempts"
+msgstr "多次尝试后 Klipper 无响应"

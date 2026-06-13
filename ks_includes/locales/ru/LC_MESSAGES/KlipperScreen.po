@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2025-07-24 23:12+0000\n"
 "Last-Translator: Владимир Чернояров <s3mpau@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -173,8 +173,13 @@ msgstr "24-x часовой формат"
 msgid "Disable for 12hs with am / pm"
 msgstr "Отключить 12 часовой формат"
 
-msgid "Macro shortcut on sidebar"
-msgstr "Показать макросы в панели"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "Ярлык панели действий"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "Светодиоды"
 
 msgid "Font Size"
 msgstr "Размер шрифта"
@@ -288,6 +293,15 @@ msgid_plural "minutes"
 msgstr[0] "минута"
 msgstr[1] "минуты"
 msgstr[2] "минут"
+
+msgid "Temperature too low to extrude"
+msgstr "Слишком низкая температура для выдавливания"
+
+msgid "Klipper will reboot"
+msgstr "Klipper перезагрузится"
+
+msgid "Save configuration?"
+msgstr "Сохранить конфигурацию?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Вы уверены, что хотите совершить аварийную остановку?"
@@ -528,12 +542,6 @@ msgstr "Измерьте Y"
 msgid "Measure Both"
 msgstr "Измерьте и то, и другое"
 
-msgid "Klipper will reboot"
-msgstr "Klipper перезагрузится"
-
-msgid "Save configuration?"
-msgstr "Сохранить конфигурацию?"
-
 msgid "Check ADXL Wiring"
 msgstr "Проверьте подключение ADXL"
 
@@ -722,17 +730,37 @@ msgstr "Только для перемещения панели"
 msgid "Z Speed (mm/s)"
 msgstr "Скорость оси Z (мм/с)"
 
+#, fuzzy
+msgid "Advanced Move"
+msgstr "Расширенное перемещение"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "Запрос концевых выключателей"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "Неверное положение"
+
 msgid "Failed to initialize"
 msgstr "Не удалось инициализировать"
 
 msgid "Interface"
 msgstr "Интерфейс"
 
-msgid "No wireless interface has been found"
-msgstr "Не обнаружен беспроводной интерфейс"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "Сетевые устройства не найдены"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "Сетевые устройства недоступны"
 
 msgid "Connected"
 msgstr "Подключено"
+
+msgid "Channel"
+msgstr "Канал"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -753,9 +781,6 @@ msgstr "Пользователь"
 #, python-format
 msgid "Connecting to %s"
 msgstr "Подключён к %s"
-
-msgid "Channel"
-msgstr "Канал"
 
 msgid "Hostname"
 msgstr "Имя хоста"
@@ -1052,6 +1077,10 @@ msgstr "Поднять стол"
 msgid "Abort"
 msgstr "Отменить"
 
+#, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "Команды калибровки пока недоступны"
+
 msgid "Error: Couldn't get a position to probe"
 msgstr "Ошибка: Невозможно получить позицию зонда"
 
@@ -1107,24 +1136,6 @@ msgid "Klipper has shutdown"
 msgstr "Klipper отключился"
 
 #, fuzzy
-msgid "No eligible macros:"
-msgstr "Нет доступных макросов:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "макросы с именем, начинающиеся с '_', скрыты"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "макросы, использующие rename_existing, скрыты"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT скрыты и должны использоваться из extrude"
-
-msgid "Temperature too low to extrude"
-msgstr "Слишком низкая температура для выдавливания"
-
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Ожидание закрытия WebSocket Moonraker"
 
@@ -1135,252 +1146,6 @@ msgstr "Moonraker: подключен"
 msgid "Initializing Klipper Connection"
 msgstr "Инициализация подключения Klipper"
 
-#~ msgid "Last Used"
-#~ msgstr "Последнее использование"
-
 #, fuzzy
-#~ msgid "Last used"
-#~ msgstr "Последнее использование"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Ошибка при получении активной катушки"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "Не удается подключиться к Moonraker"
-
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "Потеряно соединение с Moonraker"
-
-#~ msgid "Max:"
-#~ msgstr "Максимум:"
-
-#~ msgid "Password saved"
-#~ msgstr "Пароль сохранен"
-
-#~ msgid "Hide temp."
-#~ msgstr "Скрыть температуру."
-
-#~ msgid "PSK for"
-#~ msgstr "Пароль для"
-
-#~ msgid "Mesh calibrate"
-#~ msgstr "Калибровка сетки"
-
-#~ msgid "Uploaded"
-#~ msgstr "Загружено"
-
-#~ msgid "Ended official support in June 2023"
-#~ msgstr "Официальная поддержка прекращена в июне 2023 г"
-
-#~ msgid "Hidden"
-#~ msgstr "Скрытый"
-
-#~ msgid "KlipperScreen will drop support in June 2024"
-#~ msgstr "KlipperScreen прекратит поддержку в июне 2024 г"
-
-#~ msgid "Print Time"
-#~ msgstr "Время печати"
-
-#~ msgid "Warning"
-#~ msgstr "Предупреждение"
-
-#~ msgid "dBm"
-#~ msgstr "дБм"
-
-#~ msgid "Deselect"
-#~ msgstr "Отменить выбор"
-
-#~ msgid "Select"
-#~ msgstr "Выбрать"
-
-#~ msgid "Bed screw configuration:"
-#~ msgstr "Конфигурация винтов кровати:"
-
-#~ msgid ""
-#~ "Not supported for auto-detection, it needs to be configured in "
-#~ "klipperscreen.conf"
-#~ msgstr ""
-#~ "Не поддерживается для автоматического обнаружения, его необходимо "
-#~ "настроить в klipperscreen.conf"
-
-#~ msgid "Unknown screw position"
-#~ msgstr "Неизвестное положение винта"
-
-#~ msgid "Max Acceleration to Deceleration"
-#~ msgstr "Ускорения торможения"
-
-#~ msgid "Continue"
-#~ msgstr "Продолжить"
-
-#~ msgid "Fullscreen"
-#~ msgstr "Полный экран"
-
-#~ msgid "Actions"
-#~ msgstr "Действия"
-
-#~ msgid "Configuration"
-#~ msgstr "Параметр"
-
-#~ msgid "Homing"
-#~ msgstr "Парковка"
-
-#~ msgid "Disable XY"
-#~ msgstr "Отключить XY"
-
-#~ msgid "Slicer Time correction (%)"
-#~ msgstr "Коррекция времени Слайсер (%)"
-
-#~ msgid "Calibrated, save configuration to make it permanent"
-#~ msgstr "Откалибровано, сохраните конфигурацию, чтобы сделать ее постоянной"
-
-#~ msgid "Decrease"
-#~ msgstr "Уменьшить"
-
-#~ msgid "Increase"
-#~ msgstr "Поднять"
-
-#, python-format
-#~ msgid "Sending Power ON signal to: %s"
-#~ msgstr "Отправка сигнала включения питания на: %s"
-
-#~ msgid "Sort:"
-#~ msgstr "Сортировать:"
-
-#~ msgid "Calibrating..."
-#~ msgstr "Калибровка..."
-
-#~ msgid "Z+"
-#~ msgstr "Z+"
-
-#~ msgid "Z-"
-#~ msgstr "Z-"
-
-#~ msgid "X+"
-#~ msgstr "X+"
-
-#~ msgid "X-"
-#~ msgstr "X-"
-
-#~ msgid "Y+"
-#~ msgstr "Y+"
-
-#~ msgid "Y-"
-#~ msgstr "Y-"
-
-#~ msgid "Add Printer"
-#~ msgstr "Добавить принтер"
-
-#~ msgid "Initializing"
-#~ msgstr "Инициализация"
-
-#, python-format
-#~ msgid "Retry #%s"
-#~ msgstr "Повторная попытка #%s"
-
-#~ msgid "Off"
-#~ msgstr "Выкл."
-
-#~ msgid "View Mesh"
-#~ msgstr "Смотреть сетку"
-
-#~ msgid "Sort by: "
-#~ msgstr "Сортировать по: "
-
-#~ msgid "Bltouch found applied offset"
-#~ msgstr "Bltouch обнаружил примененное смещение"
-
-#~ msgid ""
-#~ "Check /tmp/KlipperScreen.log for more information.\n"
-#~ "Please submit an issue on GitHub for help."
-#~ msgstr ""
-#~ "Проверьте /tmp/KlipperScreen.log для дополнитольной информации.\n"
-#~ "Создайте issues на GitHub что-бы получить помощь."
-
-#~ msgid "Probe found applied offset"
-#~ msgstr "Probe обнаружил примененное смещение"
-
-#~ msgid "Tool"
-#~ msgstr "Инструмент"
-
-#~ msgid "Displayed Macros"
-#~ msgstr "Показать  макросы"
-
-#~ msgid "Z Position"
-#~ msgstr "Позиция Z"
-
-#~ msgid "IPv4"
-#~ msgstr "IPv4"
-
-#~ msgid "IPv6"
-#~ msgstr "IPv6"
-
-#~ msgid "Klipper Version"
-#~ msgstr "Версия Klipper"
-
-#~ msgid ""
-#~ "Klipper has encountered an error with the micro-controller.\n"
-#~ "Please recompile and flash."
-#~ msgstr ""
-#~ "Klipper определил ошибку в микроконтроллере.\n"
-#~ "Прошейте заново."
-
-#~ msgid ""
-#~ "Klipper has encountered an error.\n"
-#~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
-#~ msgstr ""
-#~ "Klipper обнаружил ошибку.\n"
-#~ "Выполните перезагрузку прошивки, чтобы попытаться исправить проблему."
-
-#~ msgid "KlipperScreen Version"
-#~ msgstr "Версия KlipperScreen"
-
-#~ msgid "Show Only Heaters in Temp."
-#~ msgstr "Показать только нагреватели в темп."
-
-#~ msgid "Temp"
-#~ msgstr "Температура"
-
-#~ msgid "Number Pad"
-#~ msgstr "Клавиатура"
-
-#~ msgid "Preheat"
-#~ msgstr "Преднагрев"
-
-#~ msgid "Screen will show in less than one second"
-#~ msgstr "Экран отобразится через одну секунду"
-
-#~ msgid "Medium (default)"
-#~ msgstr "Средний (по умолчанию)"
-
-#~ msgid "File Estimation (default)"
-#~ msgstr "По файлу (по умолчанию)"
-
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgid "Change Printer"
-#~ msgstr "Сменить принтер"
-
-#~ msgid "Fan Off"
-#~ msgstr "Bыключить"
-
-#~ msgid "Fan On"
-#~ msgstr "Bключи"
-
-#~ msgid "Fast"
-#~ msgstr "Быстро"
-
-#~ msgid "Slow"
-#~ msgstr "Mедленно"
-
-#~ msgid "?"
-#~ msgstr "?"
-
-#~ msgid "Cancel Change"
-#~ msgstr "Отменить изменения"
-
-#~ msgid "Control"
-#~ msgstr "Управление"
-
-#~ msgid "Load Average"
-#~ msgstr "Средняя нагрузка"
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper не отвечает после нескольких попыток"

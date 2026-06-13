@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2024-07-26 19:09+0000\n"
 "Last-Translator: Jegert Uusküla <jegertuuskula@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -169,8 +169,13 @@ msgstr "24-tunnine aeg"
 msgid "Disable for 12hs with am / pm"
 msgstr "Keela 12 tunniks koos am/pm-ga"
 
-msgid "Macro shortcut on sidebar"
-msgstr "Makro otsetee külgribal"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "Tegevusribbi otsetee"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LED-id"
 
 msgid "Font Size"
 msgstr "Fondi suurus"
@@ -283,6 +288,16 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minut"
 msgstr[1] "minutit"
+
+#, fuzzy
+msgid "Temperature too low to extrude"
+msgstr "Lämpötila liian matala puristamiseen"
+
+msgid "Klipper will reboot"
+msgstr "Klipper taaskäivitub"
+
+msgid "Save configuration?"
+msgstr "Salvesta konfiguratsioon?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Kas olete kindel, et soovite käivitada hädapidurduse?"
@@ -524,12 +539,6 @@ msgstr "Mõõda Y"
 msgid "Measure Both"
 msgstr "Mõõda mõlemad"
 
-msgid "Klipper will reboot"
-msgstr "Klipper taaskäivitub"
-
-msgid "Save configuration?"
-msgstr "Salvesta konfiguratsioon?"
-
 msgid "Check ADXL Wiring"
 msgstr "Kontrollige ADXL juhtmeid"
 
@@ -717,17 +726,37 @@ msgstr "Ainult liigutuspaneelile"
 msgid "Z Speed (mm/s)"
 msgstr "Z kiirus (mm/s)"
 
+#, fuzzy
+msgid "Advanced Move"
+msgstr "Täpsem liigutus"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "Lõppasendite päring"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "Mittetõene asukoht"
+
 msgid "Failed to initialize"
 msgstr "Initsialiseerimine ebaõnnestus"
 
 msgid "Interface"
 msgstr "Liides"
 
-msgid "No wireless interface has been found"
-msgstr "Juhtmeta liidest ei leitud"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "Võrguseadmeid ei leitud"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "Võrguseadmeid ei ole saadaval"
 
 msgid "Connected"
 msgstr "Ühendatud"
+
+msgid "Channel"
+msgstr "Kanal"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -749,9 +778,6 @@ msgstr "Käyttäjä"
 #, python-format
 msgid "Connecting to %s"
 msgstr "Ühendamine %s-ga"
-
-msgid "Channel"
-msgstr "Kanal"
 
 msgid "Hostname"
 msgstr "Hosti nimi"
@@ -1046,6 +1072,10 @@ msgstr "Alumine otsik"
 msgid "Abort"
 msgstr "Katkesta"
 
+#, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "Kalıbratsiooni käskud ei ole veel saadaval"
+
 msgid "Error: Couldn't get a position to probe"
 msgstr "Viga: ei saanud sondi positsiooni"
 
@@ -1101,26 +1131,6 @@ msgid "Klipper has shutdown"
 msgstr "Klipper on välja lülitatud"
 
 #, fuzzy
-msgid "No eligible macros:"
-msgstr "Ei kelvollisia makroja:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "Makrod, mille nimi algab '_' on peidetud"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "Makrod, mis kasutavad 'rename_existing' on peidetud"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT on peidetud ja neid tuleks kasutada "
-"ekstrudeerimisel"
-
-#, fuzzy
-msgid "Temperature too low to extrude"
-msgstr "Lämpötila liian matala puristamiseen"
-
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Ootab Moonraker Websocket'i sulgemist"
 
@@ -1131,57 +1141,6 @@ msgstr "Moonraker: ühendatud"
 msgid "Initializing Klipper Connection"
 msgstr "Klipperi ühenduse alustamine"
 
-#~ msgid "Last Used"
-#~ msgstr "Viimati kasutatud"
-
 #, fuzzy
-#~ msgid "Last used"
-#~ msgstr "Viimeksi käytetty"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Viga aktiivse pooli hankimisel"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "Ei saa ühendust Moonrakeriga"
-
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "Ühendus Moonrakeriga katkes"
-
-#~ msgid "Max:"
-#~ msgstr "Maksimaalne:"
-
-#~ msgid "Password saved"
-#~ msgstr "Parool salvestatud"
-
-#~ msgid "Hide temp."
-#~ msgstr "Peida temp."
-
-#~ msgid "PSK for"
-#~ msgstr "PSK jaoks"
-
-#~ msgid "Are you sure you want to stop the calibration?"
-#~ msgstr "Kas olete kindel, et soovite kalibreerimise peatada?"
-
-#~ msgid "Mesh calibrate"
-#~ msgstr "Võrgu kalibreerimine"
-
-#~ msgid "Uploaded"
-#~ msgstr "Üles laaditud"
-
-#~ msgid "Ended official support in June 2023"
-#~ msgstr "Ametlik tugi lõppes juunis 2023"
-
-#~ msgid "Hidden"
-#~ msgstr "Peidetud"
-
-#~ msgid "KlipperScreen will drop support in June 2024"
-#~ msgstr "KlipperScreen lõpetab toe juunis 2024"
-
-#~ msgid "Print Time"
-#~ msgstr "Printimise aeg"
-
-#~ msgid "Warning"
-#~ msgstr "Hoiatus"
-
-#~ msgid "dBm"
-#~ msgstr "dBm"
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper ei vasta pärast mitmeid katseid"

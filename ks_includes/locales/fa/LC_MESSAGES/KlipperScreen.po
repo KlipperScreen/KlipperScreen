@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2026-04-23 15:17-0300\n"
 "Last-Translator: Pouriya Zolghadry <merdasss@yahoo.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -214,8 +214,12 @@ msgid "Disable for 12hs with am / pm"
 msgstr "فعال‌سازی فرمت ۱۲ ساعته (AM/PM)"
 
 #, fuzzy
-msgid "Macro shortcut on sidebar"
-msgstr "میانبر مکرو در نوار کناری"
+msgid "Action bar Shortcut"
+msgstr "میانبر نوار عملیات"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LEDs"
 
 #, fuzzy
 msgid "Font Size"
@@ -351,6 +355,18 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "دقیقه"
 msgstr[1] "دقیقه‌ها"
+
+#, fuzzy
+msgid "Temperature too low to extrude"
+msgstr "دما برای اکسترود پایین است"
+
+#, fuzzy
+msgid "Klipper will reboot"
+msgstr "Klipper بازنشانی خواهد شد"
+
+#, fuzzy
+msgid "Save configuration?"
+msgstr "ذخیره پیکربندی؟"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "مطمئنید میخواهید توقف اضطراری را فعال نمایید؟"
@@ -648,14 +664,6 @@ msgstr "اندازه‌گیری Y"
 msgid "Measure Both"
 msgstr "اندازه‌گیری هر دو"
 
-#, fuzzy
-msgid "Klipper will reboot"
-msgstr "Klipper بازنشانی خواهد شد"
-
-#, fuzzy
-msgid "Save configuration?"
-msgstr "ذخیره پیکربندی؟"
-
 msgid "Check ADXL Wiring"
 msgstr "بررسی سیم کشی ADXL"
 
@@ -886,6 +894,18 @@ msgid "Z Speed (mm/s)"
 msgstr "سرعت Z (میلی‌متر/ثانیه)"
 
 #, fuzzy
+msgid "Advanced Move"
+msgstr "حرکت پیشرفته"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "بررسی ان‌ستاپ‌ها"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "موقعیت نامعتبر"
+
+#, fuzzy
 msgid "Failed to initialize"
 msgstr "شکست در راه‌اندازی"
 
@@ -894,11 +914,18 @@ msgid "Interface"
 msgstr "رابط کاربری"
 
 #, fuzzy
-msgid "No wireless interface has been found"
-msgstr "هیچ رابط بی‌سیم یافت نشد"
+msgid "No network devices have been found"
+msgstr "هیچ دستگاه شبکه‌ای یافت نشد"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "هیچ دستگاه شبکه‌ای در دسترس نیست"
 
 msgid "Connected"
 msgstr "متصل شد"
+
+msgid "Channel"
+msgstr "کانال"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -922,9 +949,6 @@ msgstr "کاربر"
 #, python-format
 msgid "Connecting to %s"
 msgstr "در حال اتصال به %s"
-
-msgid "Channel"
-msgstr "کانال"
 
 #, fuzzy
 msgid "Hostname"
@@ -1272,6 +1296,10 @@ msgid "Abort"
 msgstr "لغو"
 
 #, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "دستورات کالیبراسیون هنوز در دسترس نیستند"
+
+#, fuzzy
 msgid "Error: Couldn't get a position to probe"
 msgstr "خطا: نمی‌توان موقعیت پروب را دریافت کرد"
 
@@ -1338,28 +1366,6 @@ msgid "Klipper has shutdown"
 msgstr "Klipper خاموش شد"
 
 #, fuzzy
-msgid "No eligible macros:"
-msgstr "ماکروهای واجد شرایطی وجود ندارد:"
-
-#, fuzzy
-msgid "macros with a name starting with '_' are hidden"
-msgstr "ماکروهایی که نام آن‌ها با '_' شروع می‌شود، پنهان هستند"
-
-#, fuzzy
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "ماکروهایی که از 'rename_existing' استفاده می‌کنند، پنهان هستند"
-
-#, fuzzy
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT پنهان هستند و باید از طریق اکسترود استفاده شوند"
-
-#, fuzzy
-msgid "Temperature too low to extrude"
-msgstr "دما برای اکسترود پایین است"
-
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "در انتظار بستن Websocket Moonraker"
 
@@ -1372,20 +1378,5 @@ msgid "Initializing Klipper Connection"
 msgstr "در حال راه‌اندازی اتصال Klipper"
 
 #, fuzzy
-#~ msgid "Last Used"
-#~ msgstr "آخرین استفاده"
-
-#, fuzzy
-#~ msgid "Last used"
-#~ msgstr "آخرین استفاده"
-
-#, fuzzy
-#~ msgid "Error getting active spool"
-#~ msgstr "خطا در دریافت استوانه فعال"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "اتصال به Moonraker میسر نیست"
-
-#, fuzzy
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "اتصال به Moonraker قطع شد"
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper پس از چندین تلاش پاسخ نمی‌دهد"

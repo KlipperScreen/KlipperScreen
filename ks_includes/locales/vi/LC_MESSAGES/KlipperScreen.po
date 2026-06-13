@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2024-08-12 07:09+0000\n"
 "Last-Translator: Hiep Nguyen <tanhiep26@gmail.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -171,8 +171,13 @@ msgstr "Thời gian định dạng 24 giờ"
 msgid "Disable for 12hs with am / pm"
 msgstr "Tắt trong 12 giờ với am/pm"
 
-msgid "Macro shortcut on sidebar"
-msgstr "Lối tắt macro trên thanh bên"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "Phím tắt thanh hành động"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LEDs"
 
 msgid "Font Size"
 msgstr "Kích thước hiển thị chữ"
@@ -282,6 +287,16 @@ msgstr[0] "giờ"
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "phút"
+
+#, fuzzy
+msgid "Temperature too low to extrude"
+msgstr "Nhiệt độ quá thấp để đùn"
+
+msgid "Klipper will reboot"
+msgstr "Klipper sẽ khởi động lại"
+
+msgid "Save configuration?"
+msgstr "Lưu cấu hình?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Bạn có chắc chắn muốn chạy Dừng Khẩn cấp không?"
@@ -536,12 +551,6 @@ msgstr "Đo trục Y"
 msgid "Measure Both"
 msgstr "Đo cả hai"
 
-msgid "Klipper will reboot"
-msgstr "Klipper sẽ khởi động lại"
-
-msgid "Save configuration?"
-msgstr "Lưu cấu hình?"
-
 msgid "Check ADXL Wiring"
 msgstr "Kiểm tra dây kết nối ADXL"
 
@@ -734,17 +743,37 @@ msgid "Z Speed (mm/s)"
 msgstr "Tốc độ Z (mm/s)"
 
 #, fuzzy
+msgid "Advanced Move"
+msgstr "Di chuyển nâng cao"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "Truy vấn Endstops"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "Vị trí không hợp lệ"
+
+#, fuzzy
 msgid "Failed to initialize"
 msgstr "Khởi tạo thất bại"
 
 msgid "Interface"
 msgstr "Giao diện"
 
-msgid "No wireless interface has been found"
-msgstr "Không tìm thấy giao diện không dây"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "Không tìm thấy thiết bị mạng nào"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "Không có thiết bị mạng khả dụng"
 
 msgid "Connected"
 msgstr "Đã kết nối"
+
+msgid "Channel"
+msgstr "Kênh"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -769,9 +798,6 @@ msgstr "Người dùng"
 #, python-format
 msgid "Connecting to %s"
 msgstr "Đang kết nối đến %s"
-
-msgid "Channel"
-msgstr "Kênh"
 
 msgid "Hostname"
 msgstr "Tên miền máy chủ"
@@ -1069,6 +1095,10 @@ msgstr "Hạ đầu phun"
 msgid "Abort"
 msgstr "Hủy"
 
+#, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "Các lệnh hiệu chuẩn chưa khả dụng"
+
 msgid "Error: Couldn't get a position to probe"
 msgstr "Lỗi: Không thể lấy vị trí để thăm dò"
 
@@ -1127,24 +1157,6 @@ msgid "Klipper has shutdown"
 msgstr "Klipper đã tắt"
 
 #, fuzzy
-msgid "No eligible macros:"
-msgstr "Không có macro đủ điều kiện:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "các macro có tên bắt đầu bằng '_' đã bị ẩn"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "các macro sử dụng 'rename_existing' đã bị ẩn"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "Tải/Lấy nhựa ra được ẩn và nên sử dụng từ bảng điều khiển đùn"
-
-#, fuzzy
-msgid "Temperature too low to extrude"
-msgstr "Nhiệt độ quá thấp để đùn"
-
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Đang chờ Moonraker Websocket đóng"
 
@@ -1155,60 +1167,6 @@ msgstr "Moonraker: đã kết nối"
 msgid "Initializing Klipper Connection"
 msgstr "Đang khởi tạo kết nối Klipper"
 
-#~ msgid "Last Used"
-#~ msgstr "Đã sử dụng lần cuối"
-
 #, fuzzy
-#~ msgid "Last used"
-#~ msgstr "Sử dụng gần nhất"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Lỗi khi lấy spool đang hoạt động"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "Không thể kết nối với Moonraker"
-
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "Mất kết nối tới Moonraker"
-
-#~ msgid "Password saved"
-#~ msgstr "Mật khẩu đã lưu"
-
-#~ msgid "Hide temp."
-#~ msgstr "Ẩn nhiệt độ."
-
-#~ msgid "PSK for"
-#~ msgstr "PSK cho"
-
-#~ msgid "Are you sure you want to stop the calibration?"
-#~ msgstr "Bạn có chắc chắn muốn dừng việc hiệu chuẩn không?"
-
-#~ msgid "Mesh calibrate"
-#~ msgstr "Cân chỉnh lưới"
-
-#~ msgid "Uploaded"
-#~ msgstr "Đã tải lên"
-
-#~ msgid "Ended official support in June 2023"
-#~ msgstr "Hỗ trợ chính thức kết thúc vào tháng 6 năm 2023"
-
-#~ msgid "Hidden"
-#~ msgstr "Ẩn"
-
-#~ msgid "KlipperScreen will drop support in June 2024"
-#~ msgstr "KlipperScreen sẽ ngừng hỗ trợ vào tháng 6 năm 2024"
-
-#~ msgid "Print Time"
-#~ msgstr "Thời gian in"
-
-#~ msgid "Warning"
-#~ msgstr "Cảnh báo"
-
-#~ msgid "dBm"
-#~ msgstr "dBm"
-
-#~ msgid "Deselect"
-#~ msgstr "Hủy chọn"
-
-#~ msgid "Bed screw configuration:"
-#~ msgstr "Cấu hình ốc bàn in:"
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper không phản hồi sau nhiều lần thử"

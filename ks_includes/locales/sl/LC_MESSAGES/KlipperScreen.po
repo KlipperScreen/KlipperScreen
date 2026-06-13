@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: Dominik <dominik.sostar@gmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -181,8 +181,13 @@ msgstr "24 urni čas"
 msgid "Disable for 12hs with am / pm"
 msgstr "Onemogoči za 12 ur z am/pm"
 
-msgid "Macro shortcut on sidebar"
-msgstr "Makro bližnjica na stranski vrstici"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "Prekratica vrstice dejavnosti"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LED"
 
 msgid "Font Size"
 msgstr "Velikost pisave"
@@ -311,6 +316,16 @@ msgstr[0] "minuta"
 msgstr[1] "minuti"
 msgstr[2] "minute"
 msgstr[3] "minut"
+
+#, fuzzy
+msgid "Temperature too low to extrude"
+msgstr "Temperatura prenizka za ekstruzijo"
+
+msgid "Klipper will reboot"
+msgstr "Klipper se bo ponovno zagnal"
+
+msgid "Save configuration?"
+msgstr "Shrani konfiguracijo?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Ali ste prepričani, da želite zagnati zaustavitev v sili?"
@@ -579,12 +594,6 @@ msgstr "Izmeri Y"
 msgid "Measure Both"
 msgstr "Izmeri oboje"
 
-msgid "Klipper will reboot"
-msgstr "Klipper se bo ponovno zagnal"
-
-msgid "Save configuration?"
-msgstr "Shrani konfiguracijo?"
-
 msgid "Check ADXL Wiring"
 msgstr "Preverite ožičenje ADXL"
 
@@ -782,17 +791,37 @@ msgid "Z Speed (mm/s)"
 msgstr "Z hitrost (mm/s)"
 
 #, fuzzy
+msgid "Advanced Move"
+msgstr "Napredno premikanje"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "Preveri končna stikala"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "Neveljaven položaj"
+
+#, fuzzy
 msgid "Failed to initialize"
 msgstr "Inicializacija ni uspela"
 
 msgid "Interface"
 msgstr "Vmesnik"
 
-msgid "No wireless interface has been found"
-msgstr "Brezžičnega vmesnika ni bilo mogoče najti"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "Ni bilo najdeno nobene mrežne naprave"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "Ni mrežnih naprav na voljo"
 
 msgid "Connected"
 msgstr "Povezano"
+
+msgid "Channel"
+msgstr "Kanal"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -817,9 +846,6 @@ msgstr "Uporabnik"
 #, python-format
 msgid "Connecting to %s"
 msgstr "Povezujem s/z %s"
-
-msgid "Channel"
-msgstr "Kanal"
 
 msgid "Hostname"
 msgstr "Ime gostitelja"
@@ -1135,6 +1161,10 @@ msgid "Abort"
 msgstr "Prekini"
 
 #, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "Kalibracijski ukredi še niso na voljo"
+
+#, fuzzy
 msgid "Error: Couldn't get a position to probe"
 msgstr "Napaka: Ni mogoče dobiti položaja za preizkuševanje"
 
@@ -1194,26 +1224,6 @@ msgid "Klipper has shutdown"
 msgstr "Klipper se je ugasnil"
 
 #, fuzzy
-msgid "No eligible macros:"
-msgstr "Ni ustreznih makrov:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "makri z imenom, ki se začne z '_', so skriti"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "makri, ki uporabljajo 'rename_existing' so skriti"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT sta skrita in ju je treba uporabiti pri "
-"ekstrudiranju"
-
-#, fuzzy
-msgid "Temperature too low to extrude"
-msgstr "Temperatura prenizka za ekstruzijo"
-
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Čakanje na zaprtje Moonraker WebSocket"
 
@@ -1224,74 +1234,6 @@ msgstr "Moonraker: povezan"
 msgid "Initializing Klipper Connection"
 msgstr "Inicializacija povezave z Klipperjem"
 
-#~ msgid "Last Used"
-#~ msgstr "Nazadnje uporabljeno"
-
 #, fuzzy
-#~ msgid "Last used"
-#~ msgstr "Zadnja uporaba"
-
-#, fuzzy
-#~ msgid "Error getting active spool"
-#~ msgstr "Napaka pri pridobivanju aktivnega vretenca"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "Ne morem se povezati z Moonrakerjem"
-
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "Izgubljena poveza z Moonrakerjem"
-
-#~ msgid "Password saved"
-#~ msgstr "Geslo shranjeno"
-
-#~ msgid "Hide temp."
-#~ msgstr "Skrij temp."
-
-#~ msgid "PSK for"
-#~ msgstr "PSK za"
-
-#~ msgid "Mesh calibrate"
-#~ msgstr "Umeritev mreže"
-
-#~ msgid "Uploaded"
-#~ msgstr "Naloženo"
-
-#~ msgid "Ended official support in June 2023"
-#~ msgstr "Konec uradne podpore junija 2023"
-
-#~ msgid "Hidden"
-#~ msgstr "Skrito"
-
-#~ msgid "KlipperScreen will drop support in June 2024"
-#~ msgstr "KlipperScreen bo do junija 2024 opustil podporo"
-
-#~ msgid "Print Time"
-#~ msgstr "Čas tiskanja"
-
-#~ msgid "Warning"
-#~ msgstr "Opozorilo"
-
-#~ msgid "dBm"
-#~ msgstr "dBm"
-
-#~ msgid "Deselect"
-#~ msgstr "Prekliči izbiro"
-
-#~ msgid "Select"
-#~ msgstr "Izberi"
-
-#~ msgid "Bed screw configuration:"
-#~ msgstr "Umerjanje vijakov plošče:"
-
-#~ msgid ""
-#~ "Not supported for auto-detection, it needs to be configured in "
-#~ "klipperscreen.conf"
-#~ msgstr ""
-#~ "Ni podprto za samodejno zaznavanje, treba ga je konfigurirati v "
-#~ "klipperscreen.conf"
-
-#~ msgid "Unknown screw position"
-#~ msgstr "Neznan položaj vijaka"
-
-#~ msgid "Max Acceleration to Deceleration"
-#~ msgstr "Največji pospešek do pojemka"
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper se ne odziva po več poskusih"

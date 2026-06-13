@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -179,8 +179,13 @@ msgstr "24 timmars tid"
 msgid "Disable for 12hs with am / pm"
 msgstr "Inaktivera i 12 timmar med am/pm"
 
-msgid "Macro shortcut on sidebar"
-msgstr "Makro genväg på sidofältet"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "Snabbväg åtgärdsfält"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LED-lampor"
 
 msgid "Font Size"
 msgstr "Textstorlek"
@@ -302,6 +307,16 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minut"
 msgstr[1] "minuter"
+
+#, fuzzy
+msgid "Temperature too low to extrude"
+msgstr "Temperaturen för låg för att extrudera"
+
+msgid "Klipper will reboot"
+msgstr "Klipper kommer att starta om"
+
+msgid "Save configuration?"
+msgstr "Spara konfigurationen?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Är du säker på att du vill köra Nödstopp?"
@@ -566,12 +581,6 @@ msgstr "Mått Y"
 msgid "Measure Both"
 msgstr "Mät båda"
 
-msgid "Klipper will reboot"
-msgstr "Klipper kommer att starta om"
-
-msgid "Save configuration?"
-msgstr "Spara konfigurationen?"
-
 msgid "Check ADXL Wiring"
 msgstr "Kontrollera ADXL-ledningar"
 
@@ -766,17 +775,37 @@ msgid "Z Speed (mm/s)"
 msgstr "Z hastighet (mm/s)"
 
 #, fuzzy
+msgid "Advanced Move"
+msgstr "Avancerad rörelse"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "Fråga ändlägesbrytare"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "Ogiltig position"
+
+#, fuzzy
 msgid "Failed to initialize"
 msgstr "Misslyckades att initiera"
 
 msgid "Interface"
 msgstr "Gränssnitt"
 
-msgid "No wireless interface has been found"
-msgstr "Inget trådlöst gränssnitt har hittats"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "Inga nätverksenheter hittades"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "Inga nätverksenheter tillgängliga"
 
 msgid "Connected"
 msgstr "Ansluten"
+
+msgid "Channel"
+msgstr "Kanal"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -801,9 +830,6 @@ msgstr "Användare"
 #, python-format
 msgid "Connecting to %s"
 msgstr "Ansluter till %s"
-
-msgid "Channel"
-msgstr "Kanal"
 
 msgid "Hostname"
 msgstr "Värdnamn"
@@ -1111,6 +1137,10 @@ msgid "Abort"
 msgstr "Avbryt"
 
 #, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "Kalibreringskommandon är inte tillgängliga ännu"
+
+#, fuzzy
 msgid "Error: Couldn't get a position to probe"
 msgstr "Fel: Kunde inte få en position att sondera"
 
@@ -1169,25 +1199,6 @@ msgid "Klipper has shutdown"
 msgstr "Klipper har stängts av"
 
 #, fuzzy
-msgid "No eligible macros:"
-msgstr "Inga lämpliga makron:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "makron med ett namn som börjar med '_' är dolda"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "makron som använder 'rename_existing' är dolda"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT är dolda och bör användas från extrudering"
-
-#, fuzzy
-msgid "Temperature too low to extrude"
-msgstr "Temperaturen för låg för att extrudera"
-
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Väntar på att Moonraker Websocket ska stängas"
 
@@ -1198,149 +1209,6 @@ msgstr "Moonraker: ansluten"
 msgid "Initializing Klipper Connection"
 msgstr "Initierar Klipper-anslutning"
 
-#~ msgid "Last Used"
-#~ msgstr "Senast använd"
-
 #, fuzzy
-#~ msgid "Last used"
-#~ msgstr "Senast använd"
-
-#, fuzzy
-#~ msgid "Error getting active spool"
-#~ msgstr "Fel vid hämtning av aktiv spole"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "Kan inte ansluta till Moonraker"
-
-#, fuzzy
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "Förlorade anslutningen till Moonraker"
-
-#~ msgid "Password saved"
-#~ msgstr "Lösenordet har sparats"
-
-#~ msgid "Hide temp."
-#~ msgstr "Dölj temp."
-
-#~ msgid "PSK for"
-#~ msgstr "PSK för"
-
-#~ msgid "Mesh calibrate"
-#~ msgstr "Mesh kalibrera"
-
-#~ msgid "Uploaded"
-#~ msgstr "Uppladdad"
-
-#~ msgid "Ended official support in June 2023"
-#~ msgstr "Avslutade officiellt stöd i juni 2023"
-
-#~ msgid "Hidden"
-#~ msgstr "Dold"
-
-#~ msgid "KlipperScreen will drop support in June 2024"
-#~ msgstr "KlipperScreen kommer att ta bort stödet i juni 2024"
-
-#~ msgid "Print Time"
-#~ msgstr "Utskriftstid"
-
-#~ msgid "Warning"
-#~ msgstr "Varning"
-
-#~ msgid "dBm"
-#~ msgstr "dBm"
-
-#~ msgid "Deselect"
-#~ msgstr "Avmarkera"
-
-#~ msgid "Select"
-#~ msgstr "Välj"
-
-#~ msgid "Bed screw configuration:"
-#~ msgstr "Konfiguration bädd skruvar:"
-
-#~ msgid ""
-#~ "Not supported for auto-detection, it needs to be configured in "
-#~ "klipperscreen.conf"
-#~ msgstr ""
-#~ "Stöds inte för automatisk upptäckt, den måste konfigureras i "
-#~ "klipperscreen.conf"
-
-#~ msgid "Unknown screw position"
-#~ msgstr "Okänd skruvposition"
-
-#~ msgid "Max Acceleration to Deceleration"
-#~ msgstr "Max acceleration till inbromsning"
-
-#~ msgid "Continue"
-#~ msgstr "Fortsätt"
-
-#~ msgid "Actions"
-#~ msgstr "Åtgärder"
-
-#~ msgid "Configuration"
-#~ msgstr "Konfiguration"
-
-#~ msgid "Disable XY"
-#~ msgstr "Inaktivera XY"
-
-#~ msgid "Calibrated, save configuration to make it permanent"
-#~ msgstr "Kalibrerad, spara konfiguration för att göra den permanent"
-
-#~ msgid "Decrease"
-#~ msgstr "Minska"
-
-#~ msgid "Increase"
-#~ msgstr "Öka"
-
-#, python-format
-#~ msgid "Sending Power ON signal to: %s"
-#~ msgstr "Skickar ström PÅ-signal till: %s"
-
-#~ msgid "Z+"
-#~ msgstr "Z+"
-
-#~ msgid "Z-"
-#~ msgstr "Z-"
-
-#~ msgid "X+"
-#~ msgstr "X+"
-
-#~ msgid "X-"
-#~ msgstr "X-"
-
-#~ msgid "Y+"
-#~ msgstr "Y+"
-
-#~ msgid "Y-"
-#~ msgstr "Y-"
-
-#~ msgid "Add Printer"
-#~ msgstr "Lägg till skrivare"
-
-#~ msgid "Initializing"
-#~ msgstr "Initierar"
-
-#~ msgid "Off"
-#~ msgstr "Avstängd"
-
-#~ msgid "Sort by: "
-#~ msgstr "Sortera efter: "
-
-#~ msgid "Bltouch found applied offset"
-#~ msgstr "Bltouch hittade tillämpad offset"
-
-#~ msgid ""
-#~ "Check /tmp/KlipperScreen.log for more information.\n"
-#~ "Please submit an issue on GitHub for help."
-#~ msgstr ""
-#~ "Kontrollera /tmp/KlipperScreen.log för mer information.\n"
-#~ "Skicka in ett problem på GitHub för hjälp."
-
-#~ msgid "Tool"
-#~ msgstr "Verktyg"
-
-#~ msgid "Displayed Macros"
-#~ msgstr "Makron visas"
-
-#~ msgid "Z Position"
-#~ msgstr "Z Position"
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper svarar inte efter flera försök"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2025-01-23 05:01+0000\n"
 "Last-Translator: Erick Andrade <andrade.erick1987@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -172,8 +172,13 @@ msgstr "Horário de 24 Horas"
 msgid "Disable for 12hs with am / pm"
 msgstr "Desativar por 12 horas com AM/PM"
 
-msgid "Macro shortcut on sidebar"
-msgstr "Atalho de Macro na barra lateral"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "Atalho da barra de ações"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LEDs"
 
 msgid "Font Size"
 msgstr "Tamanho da Fonte"
@@ -285,6 +290,15 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuto"
 msgstr[1] "minutos"
+
+msgid "Temperature too low to extrude"
+msgstr "Temperatura muito baixa para extrusão"
+
+msgid "Klipper will reboot"
+msgstr "Klipper irá reiniciar"
+
+msgid "Save configuration?"
+msgstr "Salvar Configuração?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Tem certeza de que quer executar uma Parada de Emergência?"
@@ -523,12 +537,6 @@ msgstr "Medir Y"
 msgid "Measure Both"
 msgstr "Medir Ambos"
 
-msgid "Klipper will reboot"
-msgstr "Klipper irá reiniciar"
-
-msgid "Save configuration?"
-msgstr "Salvar Configuração?"
-
 msgid "Check ADXL Wiring"
 msgstr "Verificar Fiação do ADXL"
 
@@ -716,17 +724,37 @@ msgstr "Somente para o painel de movimentação"
 msgid "Z Speed (mm/s)"
 msgstr "Velocidade Z (mm/s)"
 
+#, fuzzy
+msgid "Advanced Move"
+msgstr "Movimento Avançado"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "Consultar fins de curso"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "Posição inválida"
+
 msgid "Failed to initialize"
 msgstr "Falha ao inicializar"
 
 msgid "Interface"
 msgstr "Interface"
 
-msgid "No wireless interface has been found"
-msgstr "Nenhuma interface sem-fio foi encontrada"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "Nenhum dispositivo de rede foi encontrado"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "Nenhum dispositivo de rede disponível"
 
 msgid "Connected"
 msgstr "Conectado"
+
+msgid "Channel"
+msgstr "Canal"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -748,9 +776,6 @@ msgstr "Usuário"
 #, python-format
 msgid "Connecting to %s"
 msgstr "Conectando a %s"
-
-msgid "Channel"
-msgstr "Canal"
 
 msgid "Hostname"
 msgstr "Nome do Hospedeiro"
@@ -1046,6 +1071,10 @@ msgstr "Baixar Bico de Extrusão"
 msgid "Abort"
 msgstr "Abortar"
 
+#, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "Comandos de calibração ainda não disponíveis"
+
 msgid "Error: Couldn't get a position to probe"
 msgstr "Erro: Não foi possível obter uma posição para sondar"
 
@@ -1101,25 +1130,6 @@ msgid "Klipper has shutdown"
 msgstr "Klipper foi desligado"
 
 #, fuzzy
-msgid "No eligible macros:"
-msgstr "Sem macros elegíveis:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "macros com nome que começa com '_' estão escondidas"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "macros que usam 'rename_existing' estão escondidas"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT estão escondidos e devem ser utilizados de "
-"Extrudar"
-
-msgid "Temperature too low to extrude"
-msgstr "Temperatura muito baixa para extrusão"
-
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Aguardando o fechamento do Websocket do Moonraker"
 
@@ -1130,79 +1140,6 @@ msgstr "Moonraker: conectado"
 msgid "Initializing Klipper Connection"
 msgstr "Inicializando conexão com Klipper"
 
-#~ msgid "Last Used"
-#~ msgstr "Usado pela Última Vez"
-
 #, fuzzy
-#~ msgid "Last used"
-#~ msgstr "Usado por último"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Erro ao obter a fila de impressão ativa"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "Não é possível se conectar ao Moonraker"
-
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "Conexão perdida com o Moonraker"
-
-#~ msgid "Max:"
-#~ msgstr "Max:"
-
-#~ msgid "Password saved"
-#~ msgstr "Senha salva"
-
-#~ msgid "Hide temp."
-#~ msgstr "Esconder temp."
-
-#~ msgid "PSK for"
-#~ msgstr "PSK para"
-
-#~ msgid "Are you sure you want to stop the calibration?"
-#~ msgstr "Tem certeza de que deseja interromper a calibração?"
-
-#~ msgid "Mesh calibrate"
-#~ msgstr "Calibração de Malha"
-
-#~ msgid "Uploaded"
-#~ msgstr "Carregado"
-
-#~ msgid "Ended official support in June 2023"
-#~ msgstr "Suporte oficial finalizado em Junho de 2023"
-
-#~ msgid "Hidden"
-#~ msgstr "Escondido"
-
-#~ msgid "KlipperScreen will drop support in June 2024"
-#~ msgstr "KlipperScreen abandonará o suporte em Junho de 2024"
-
-#~ msgid "Print Time"
-#~ msgstr "Tempo de Impressão"
-
-#~ msgid "Warning"
-#~ msgstr "Aviso"
-
-#~ msgid "dBm"
-#~ msgstr "dBm"
-
-#~ msgid "Deselect"
-#~ msgstr "Desselecionar"
-
-#~ msgid "Select"
-#~ msgstr "Selecionar"
-
-#~ msgid "Bed screw configuration:"
-#~ msgstr "Configuração de atarraxamento da Base:"
-
-#~ msgid ""
-#~ "Not supported for auto-detection, it needs to be configured in "
-#~ "klipperscreen.conf"
-#~ msgstr ""
-#~ "Não suportado para autodetecção, precisa ser configurado em "
-#~ "klipperscreen.conf"
-
-#~ msgid "Unknown screw position"
-#~ msgstr "Posição de atarraxamento desconhecida"
-
-#~ msgid "Max Acceleration to Deceleration"
-#~ msgstr "Aceleração Max. para Desaceleração"
+msgid "Klipper not responding after multiple attempts"
+msgstr "O Klipper não está respondendo após várias tentativas"

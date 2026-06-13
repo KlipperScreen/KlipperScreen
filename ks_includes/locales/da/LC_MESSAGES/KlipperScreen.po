@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2025-07-09 06:02+0000\n"
 "Last-Translator: Simon B <simon.buro@hotmail.com>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/klipperscreen/"
@@ -168,8 +168,13 @@ msgstr "24-timers visning"
 msgid "Disable for 12hs with am / pm"
 msgstr "Deaktiver for 12 timer med am / pm"
 
-msgid "Macro shortcut on sidebar"
-msgstr "Makrogenvej på sidelinjen"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "Genvej til handlingslinje"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LED'er"
 
 msgid "Font Size"
 msgstr "Skriftstørrelse"
@@ -280,6 +285,15 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minut"
 msgstr[1] "minutter"
+
+msgid "Temperature too low to extrude"
+msgstr "Temperaturen er for lav til at ekstrudere"
+
+msgid "Klipper will reboot"
+msgstr "Klipper vil genstarte"
+
+msgid "Save configuration?"
+msgstr "Gem Konfiguration?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Er du sikker på, at du vil aktivere nødstop?"
@@ -518,12 +532,6 @@ msgstr "Mål Y"
 msgid "Measure Both"
 msgstr "Mål begge"
 
-msgid "Klipper will reboot"
-msgstr "Klipper vil genstarte"
-
-msgid "Save configuration?"
-msgstr "Gem Konfiguration?"
-
 msgid "Check ADXL Wiring"
 msgstr "Check ledninger til ADXL"
 
@@ -710,17 +718,37 @@ msgstr "Kun for flyttepanelet"
 msgid "Z Speed (mm/s)"
 msgstr "Z Hastighed (mm/s)"
 
+#, fuzzy
+msgid "Advanced Move"
+msgstr "Avanceret bevægelse"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "Spørg endstoppere"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "Ugyldig position"
+
 msgid "Failed to initialize"
 msgstr "Fejlede i at initialisere"
 
 msgid "Interface"
 msgstr "Interface"
 
-msgid "No wireless interface has been found"
-msgstr "Intet trådløst interface blev fundet"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "Ingen netværksenheder blev fundet"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "Ingen netværksenheder tilgængelige"
 
 msgid "Connected"
 msgstr "Forbundet"
+
+msgid "Channel"
+msgstr "Kanal"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -741,9 +769,6 @@ msgstr "Bruger"
 #, python-format
 msgid "Connecting to %s"
 msgstr "Forbinder til %s"
-
-msgid "Channel"
-msgstr "Kanal"
 
 msgid "Hostname"
 msgstr "Værtsnavn"
@@ -1038,6 +1063,10 @@ msgstr "Sænk Nozzle"
 msgid "Abort"
 msgstr "Afbryd"
 
+#, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "Kalibreringskommandoer er ikke tilgængelige endnu"
+
 msgid "Error: Couldn't get a position to probe"
 msgstr "Fejl: Kunne ikke få en position til at probe"
 
@@ -1093,25 +1122,6 @@ msgid "Klipper has shutdown"
 msgstr "Klipper er lukket ned"
 
 #, fuzzy
-msgid "No eligible macros:"
-msgstr "Ingen gyldige makroer:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "makroer hvis navne begynder med '_' er skjulte"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "makroer der bruger 'rename_existing' er skjulte"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT-makroerne er skjulte, og bør tilgås fra "
-"\"Ekstrudering\""
-
-msgid "Temperature too low to extrude"
-msgstr "Temperaturen er for lav til at ekstrudere"
-
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Venter på Moonraker Websocket lukker"
 
@@ -1122,210 +1132,6 @@ msgstr "Moonraker: tilsluttet"
 msgid "Initializing Klipper Connection"
 msgstr "Initialiserer Klipper-forbindelse"
 
-#~ msgid "Last Used"
-#~ msgstr "Sidst brugt"
-
 #, fuzzy
-#~ msgid "Last used"
-#~ msgstr "Sidst brugt"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Fejl ved hentning af aktiv spole"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "Kan ikke oprette forbindelse til Moonraker"
-
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "Tabte forbindelse til Moonraker"
-
-#~ msgid "Max:"
-#~ msgstr "Maks:"
-
-#~ msgid "Password saved"
-#~ msgstr "Adgangskode gemt"
-
-#~ msgid "Hide temp."
-#~ msgstr "Skjul temperaturer"
-
-#~ msgid "PSK for"
-#~ msgstr "PSK for"
-
-#~ msgid "Are you sure you want to stop the calibration?"
-#~ msgstr "Er du sikker på, at du vil stoppe kalibreringen?"
-
-#~ msgid "Do you want to let KlipperScreen try to solve the issue?"
-#~ msgstr "Vil du lade KlipperScreen forsøge at løse problemet?"
-
-#~ msgid "Insufficient priviledges detected"
-#~ msgstr "Utilstrækkelige priviledges fundet"
-
-#~ msgid "Mesh calibrate"
-#~ msgstr "Mesh-kalibrering"
-
-#~ msgid "Uploaded"
-#~ msgstr "Uploadet"
-
-#~ msgid "Ended official support in June 2023"
-#~ msgstr "Officiel support udløb i Juni 2023"
-
-#~ msgid "Hidden"
-#~ msgstr "Skjult"
-
-#~ msgid "KlipperScreen will drop support in June 2024"
-#~ msgstr "Klipperscreen stopper understøttelsen i Juni 2024"
-
-#~ msgid "Print Time"
-#~ msgstr "Printtid"
-
-#~ msgid "Warning"
-#~ msgstr "Advarsel"
-
-#~ msgid "dBm"
-#~ msgstr "dBm"
-
-#~ msgid "Deselect"
-#~ msgstr "Fravælg"
-
-#~ msgid "Select"
-#~ msgstr "Vælg"
-
-#~ msgid "Bed screw configuration:"
-#~ msgstr "Bed-skrue konfiguration:"
-
-#~ msgid ""
-#~ "Not supported for auto-detection, it needs to be configured in "
-#~ "klipperscreen.conf"
-#~ msgstr ""
-#~ "Understøttes ikke til auto-find, dette skal konfigureres i "
-#~ "klipperscreen.conf"
-
-#~ msgid "Unknown screw position"
-#~ msgstr "Ukendt skrue-position"
-
-#~ msgid "Max Acceleration to Deceleration"
-#~ msgstr "Maks. acceleration til decceleration"
-
-#~ msgid "Continue"
-#~ msgstr "Fortsæt"
-
-#~ msgid "Actions"
-#~ msgstr "Muligheder"
-
-#~ msgid "Homing"
-#~ msgstr "Homing"
-
-#~ msgid "Disable XY"
-#~ msgstr "Deaktivér XY"
-
-#~ msgid "Slicer Time correction (%)"
-#~ msgstr "Slicer Tidskorrektion (%)"
-
-#~ msgid "Calibrated, save configuration to make it permanent"
-#~ msgstr "Kalibreret, gem konfiguration for at gøre den permanent"
-
-#~ msgid "Decrease"
-#~ msgstr "Formindsk"
-
-#~ msgid "Increase"
-#~ msgstr "Forøg"
-
-#, python-format
-#~ msgid "Sending Power ON signal to: %s"
-#~ msgstr "Sender Power ON-signal til: %s"
-
-#~ msgid "Sort:"
-#~ msgstr "Sortere: "
-
-#~ msgid "Calibrating..."
-#~ msgstr "Kalibrerer..."
-
-#~ msgid "Z+"
-#~ msgstr "Z+"
-
-#~ msgid "Z-"
-#~ msgstr "Z-"
-
-#~ msgid "X+"
-#~ msgstr "X+"
-
-#~ msgid "X-"
-#~ msgstr "X-"
-
-#~ msgid "Y+"
-#~ msgstr "Y+"
-
-#~ msgid "Y-"
-#~ msgstr "Y-"
-
-#, python-format
-#~ msgid "Retry #%s"
-#~ msgstr "Prøv igen #%s"
-
-#~ msgid "Add Printer"
-#~ msgstr "Tilføj printer"
-
-#~ msgid "Initializing"
-#~ msgstr "Initialiserer"
-
-#~ msgid "Off"
-#~ msgstr "Sluk"
-
-#~ msgid "View Mesh"
-#~ msgstr "Vis mesh"
-
-#~ msgid "Sort by: "
-#~ msgstr "Sortér efter: "
-
-#~ msgid "Bltouch found applied offset"
-#~ msgstr "Bltouch fundet anvendt offset"
-
-#~ msgid ""
-#~ "Check /tmp/KlipperScreen.log for more information.\n"
-#~ "Please submit an issue on GitHub for help."
-#~ msgstr ""
-#~ "Tjek /tmp/KlipperScreen.log for mere information.\n"
-#~ "Indsend venligst et \"Issue\" på GitHub for hjælp."
-
-#~ msgid "Probe found applied offset"
-#~ msgstr "Probe fundet anvendt offset"
-
-#~ msgid "Tool"
-#~ msgstr "Ekstruder"
-
-#~ msgid "Displayed Macros"
-#~ msgstr "Viste makroer"
-
-#~ msgid "Z Position"
-#~ msgstr "Z-position"
-
-#~ msgid "IPv4"
-#~ msgstr "IPv4"
-
-#~ msgid "IPv6"
-#~ msgstr "IPv6"
-
-#~ msgid "Klipper Version"
-#~ msgstr "Klipper version"
-
-#~ msgid ""
-#~ "Klipper has encountered an error with the micro-controller.\n"
-#~ "Please recompile and flash."
-#~ msgstr ""
-#~ "Klipper har fundet en fejl med mcu.\n"
-#~ "Kompilér og flash venligst firmware på ny."
-
-#~ msgid ""
-#~ "Klipper has encountered an error.\n"
-#~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
-#~ msgstr ""
-#~ "Klipper har fundet en fejl.\n"
-#~ "Tryk på \"Genstart alt\" for at forsøge at udbedre fejlen."
-
-#~ msgid "KlipperScreen Version"
-#~ msgstr "KlipperScreen version"
-
-#~ msgid "Show Only Heaters in Temp."
-#~ msgstr "Vis kun varmelegemer i Temp."
-
-#~ msgid "Temp"
-#~ msgstr "Temp"
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper svarer ikke efter flere forsøg"

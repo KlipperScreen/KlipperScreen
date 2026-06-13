@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2025-03-15 11:32+0000\n"
 "Last-Translator: Giadej <Giadej@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -168,8 +168,13 @@ msgstr "24 ore"
 msgid "Disable for 12hs with am / pm"
 msgstr "Disattiva am/pm per formato 12 ore"
 
-msgid "Macro shortcut on sidebar"
-msgstr "Macros sulla barra laterale"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "Scorciatoia barra delle azioni"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LED"
 
 msgid "Font Size"
 msgstr "Dimensione Carattere"
@@ -281,6 +286,15 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuto"
 msgstr[1] "minuti"
+
+msgid "Temperature too low to extrude"
+msgstr "Temperatura troppo bassa per estrudere"
+
+msgid "Klipper will reboot"
+msgstr "Klipper si riavvierà"
+
+msgid "Save configuration?"
+msgstr "Salva configurazione?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Sei sicuro di voler eseguire l'Arresto di Emergenza?"
@@ -519,12 +533,6 @@ msgstr "Misura Y"
 msgid "Measure Both"
 msgstr "Misura entrambi"
 
-msgid "Klipper will reboot"
-msgstr "Klipper si riavvierà"
-
-msgid "Save configuration?"
-msgstr "Salva configurazione?"
-
 msgid "Check ADXL Wiring"
 msgstr "Controllare cablaggio ADXL"
 
@@ -712,17 +720,37 @@ msgstr "Solo per il pannello \"move\""
 msgid "Z Speed (mm/s)"
 msgstr "Velocità Z(mm/s)"
 
+#, fuzzy
+msgid "Advanced Move"
+msgstr "Movimento avanzato"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "Interroga finecorsa"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "Posizione non valida"
+
 msgid "Failed to initialize"
 msgstr "Inizializzazione fallita"
 
 msgid "Interface"
 msgstr "Interfaccia"
 
-msgid "No wireless interface has been found"
-msgstr "Nessura interfaccia wireless trovata"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "Nessun dispositivo di rete trovato"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "Nessun dispositivo di rete disponibile"
 
 msgid "Connected"
 msgstr "Connesso"
+
+msgid "Channel"
+msgstr "Canale"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -743,9 +771,6 @@ msgstr "Utente"
 #, python-format
 msgid "Connecting to %s"
 msgstr "Connessione a %s"
-
-msgid "Channel"
-msgstr "Canale"
 
 msgid "Hostname"
 msgstr "Hostname"
@@ -1040,6 +1065,10 @@ msgstr "Abbassa Ugello"
 msgid "Abort"
 msgstr "Interrompi"
 
+#, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "Comandi di calibrazione non ancora disponibili"
+
 msgid "Error: Couldn't get a position to probe"
 msgstr "Errore: impossibile ottenere una posizione da sondare"
 
@@ -1095,25 +1124,6 @@ msgid "Klipper has shutdown"
 msgstr "Klipper si è spento"
 
 #, fuzzy
-msgid "No eligible macros:"
-msgstr "Nessun macro valido:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "macro con nome che inzia con '_' sono nascoste"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "macro che usano 'rename_existing' sono nascoste"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT sono nascosti e dovrebbero essere usati da "
-"estrudere"
-
-msgid "Temperature too low to extrude"
-msgstr "Temperatura troppo bassa per estrudere"
-
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Attesa chiusura Websocket di Moonraker"
 
@@ -1124,223 +1134,6 @@ msgstr "Moonraker: connesso"
 msgid "Initializing Klipper Connection"
 msgstr "Inizializzazione connessione Klipper"
 
-#~ msgid "Last Used"
-#~ msgstr "Ultimo Utilizzo"
-
 #, fuzzy
-#~ msgid "Last used"
-#~ msgstr "Ultimo uso"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Errore nel caricamento della bobina attiva"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "Impossibile connettersi a Moonraker"
-
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "Connessione persa con Moonraker"
-
-#~ msgid "Max:"
-#~ msgstr "Massimo:"
-
-#~ msgid "Password saved"
-#~ msgstr "Password salvata"
-
-#~ msgid "Hide temp."
-#~ msgstr "Nascondi temp."
-
-#~ msgid "PSK for"
-#~ msgstr "PSK per"
-
-#~ msgid "Mesh calibrate"
-#~ msgstr "Calibrazione mesh"
-
-#~ msgid "Uploaded"
-#~ msgstr "Caricato"
-
-#~ msgid "Ended official support in June 2023"
-#~ msgstr "Supporto ufficiale terminato in giugno 2023"
-
-#~ msgid "Hidden"
-#~ msgstr "Nascosto"
-
-#~ msgid "KlipperScreen will drop support in June 2024"
-#~ msgstr "KlipperScreen rilascerà il supporto in giugno 2024"
-
-#~ msgid "Print Time"
-#~ msgstr "Tempo di Stampa"
-
-#~ msgid "Warning"
-#~ msgstr "Attenzione"
-
-#~ msgid "dBm"
-#~ msgstr "dBm"
-
-#~ msgid "Deselect"
-#~ msgstr "Deseleziona"
-
-#~ msgid "Select"
-#~ msgstr "Seleziona"
-
-#~ msgid "Bed screw configuration:"
-#~ msgstr "Configurazione Bed Screw:"
-
-#~ msgid ""
-#~ "Not supported for auto-detection, it needs to be configured in "
-#~ "klipperscreen.conf"
-#~ msgstr ""
-#~ "Non supportato per il rilevamento automatico, configurarlo in "
-#~ "klipperscreen.conf"
-
-#~ msgid "Unknown screw position"
-#~ msgstr "Posizione vite sconosciuta"
-
-#~ msgid "Max Acceleration to Deceleration"
-#~ msgstr "Max. Accelerazione a Decelerazione"
-
-#~ msgid "Continue"
-#~ msgstr "Continua"
-
-#~ msgid "Actions"
-#~ msgstr "Azioni"
-
-#~ msgid "Configuration"
-#~ msgstr "Impostazioni"
-
-#~ msgid "Homing"
-#~ msgstr "Homing"
-
-#~ msgid "Disable XY"
-#~ msgstr "Disab. XY"
-
-#~ msgid "Slicer Time correction (%)"
-#~ msgstr "Correzione tempi Slicer (%)"
-
-#~ msgid "Calibrated, save configuration to make it permanent"
-#~ msgstr "Calibrato, salva la configurazione per renderla permanente"
-
-#~ msgid "Decrease"
-#~ msgstr "Diminuisci"
-
-#~ msgid "Increase"
-#~ msgstr "Incrementa"
-
-#~ msgid "Sending Power ON signal to: %s"
-#~ msgstr "Invio del segnale di accensione a: %s"
-
-#~ msgid "Sort:"
-#~ msgstr "Ordinare:"
-
-#~ msgid "Calibrating..."
-#~ msgstr "Calibrazione..."
-
-#~ msgid "Z+"
-#~ msgstr "Z+"
-
-#~ msgid "Z-"
-#~ msgstr "Z-"
-
-#~ msgid "X+"
-#~ msgstr "X+"
-
-#~ msgid "X-"
-#~ msgstr "X-"
-
-#~ msgid "Y+"
-#~ msgstr "Y+"
-
-#~ msgid "Y-"
-#~ msgstr "Y-"
-
-#~ msgid "Retry #%s"
-#~ msgstr "Riprova #%s"
-
-#~ msgid "Add Printer"
-#~ msgstr "Aggiungi Stampante"
-
-#~ msgid "Initializing"
-#~ msgstr "Inizializzo"
-
-#~ msgid "Off"
-#~ msgstr "Off"
-
-#~ msgid "View Mesh"
-#~ msgstr "Visual. Mesh"
-
-#~ msgid "Sort by: "
-#~ msgstr "Ordina: "
-
-#~ msgid "Bltouch found applied offset"
-#~ msgstr "Bltouch ha trovato l'offset applicato"
-
-#~ msgid ""
-#~ "Check /tmp/KlipperScreen.log for more information.\n"
-#~ "Please submit an issue on GitHub for help."
-#~ msgstr ""
-#~ "Verifica /tmp/KlipperScreen.log per info.\n"
-#~ "Aggiungi un problema sul GitHub."
-
-#~ msgid "Probe found applied offset"
-#~ msgstr "Probe ha trovato l'offset applicato"
-
-#~ msgid "Tool"
-#~ msgstr "Strumenti"
-
-#~ msgid "Displayed Macros"
-#~ msgstr "Mostra/Nascondi Macros"
-
-#~ msgid "Z Position"
-#~ msgstr "Posizione Z"
-
-#~ msgid "IPv4"
-#~ msgstr "IPv4"
-
-#~ msgid "IPv6"
-#~ msgstr "IPv6"
-
-#~ msgid "Klipper Version"
-#~ msgstr "Versione Klipper"
-
-#~ msgid ""
-#~ "Klipper has encountered an error with the micro-controller.\n"
-#~ "Please recompile and flash."
-#~ msgstr ""
-#~ "Klipper ha riscontrato un errore con il microcontrollore.\n"
-#~ "Ricompila e flasha."
-
-#~ msgid ""
-#~ "Klipper has encountered an error.\n"
-#~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
-#~ msgstr ""
-#~ "Klipper ha riscontrato un errore.\n"
-#~ "esegui un FIRMWARE_RESTART per tentare di risolvere il problema."
-
-#~ msgid "KlipperScreen Version"
-#~ msgstr "Versione KlipperScreen"
-
-#~ msgid "Show Only Heaters in Temp."
-#~ msgstr "Mostra solo riscaldatori in temp."
-
-#~ msgid "Temp"
-#~ msgstr "Temp"
-
-#~ msgid "Number Pad"
-#~ msgstr "Tastierino"
-
-#~ msgid "Preheat"
-#~ msgstr "Preriscalda"
-
-#~ msgid "Screen will show in less than one second"
-#~ msgstr "Lo schermo verrà visualizzato a breve"
-
-#~ msgid "Medium (default)"
-#~ msgstr "Media (predef.)"
-
-#~ msgid "File Estimation (default)"
-#~ msgstr "Stima file (predef.)"
-
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgid "Change Printer"
-#~ msgstr "Cambia Stampante"
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper non risponde dopo vari tentativi"

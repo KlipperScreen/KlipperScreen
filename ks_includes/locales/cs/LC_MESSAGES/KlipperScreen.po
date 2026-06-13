@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2026-05-04 00:09+0000\n"
 "Last-Translator: Michal Bitala <yzeroy14@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/"
@@ -172,8 +172,13 @@ msgstr "24 hod formát"
 msgid "Disable for 12hs with am / pm"
 msgstr "Vypnout na 12 hodin am / pm"
 
-msgid "Macro shortcut on sidebar"
-msgstr "Makro zkratka na postranním panelu"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "Zkratka akčního panelu"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LED"
 
 msgid "Font Size"
 msgstr "Velikost fontu"
@@ -287,6 +292,15 @@ msgid_plural "minutes"
 msgstr[0] "minuta"
 msgstr[1] "minuty"
 msgstr[2] "minut"
+
+msgid "Temperature too low to extrude"
+msgstr "Příliš nízká teplota pro extruzi"
+
+msgid "Klipper will reboot"
+msgstr "Klipper se restartuje"
+
+msgid "Save configuration?"
+msgstr "Uložit nastavení?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Opravdu okamžitě nouzově zastavit?"
@@ -526,12 +540,6 @@ msgstr "Změřit Y"
 msgid "Measure Both"
 msgstr "Změřit obojí"
 
-msgid "Klipper will reboot"
-msgstr "Klipper se restartuje"
-
-msgid "Save configuration?"
-msgstr "Uložit nastavení?"
-
 msgid "Check ADXL Wiring"
 msgstr "Zkontroluj zapojení ADXL"
 
@@ -718,17 +726,37 @@ msgstr "Pouze pro panel pohybů"
 msgid "Z Speed (mm/s)"
 msgstr "Rychlost pohybu Z (mm/s)"
 
+#, fuzzy
+msgid "Advanced Move"
+msgstr "Pokročilý pohyb"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "Dotaz koncových spínačů"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "Neplatná pozice"
+
 msgid "Failed to initialize"
 msgstr "Inicializace se nezdařila"
 
 msgid "Interface"
 msgstr "Rozhraní"
 
-msgid "No wireless interface has been found"
-msgstr "Nebylo nalezeno žádné bezdrátové rozhraní"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "Nebyla nalezena žádná síťová zařízení"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "Není k dispozici žádná síťová zařízení"
 
 msgid "Connected"
 msgstr "Připojeno"
+
+msgid "Channel"
+msgstr "Kanál"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -749,9 +777,6 @@ msgstr "Uživatel"
 #, python-format
 msgid "Connecting to %s"
 msgstr "Připojování k %s"
-
-msgid "Channel"
-msgstr "Kanál"
 
 msgid "Hostname"
 msgstr "Hostname"
@@ -1048,6 +1073,10 @@ msgstr "Trysku níž"
 msgid "Abort"
 msgstr "Zrušit"
 
+#, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "Kalibrační příkazy ještě nejsou k dispozici"
+
 msgid "Error: Couldn't get a position to probe"
 msgstr "Chyba: Nepodařilo se získat pozici pro sondování"
 
@@ -1102,23 +1131,6 @@ msgstr "Klipper startuje"
 msgid "Klipper has shutdown"
 msgstr "Klipper zastaven"
 
-msgid "No eligible macros:"
-msgstr "Žádná vhodná makra:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "makra s názvem začínajícím na '_' jsou skrytá"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "makra, která používají 'rename_existing', jsou skryta"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT jsou skryté a měly by se používat s extrude"
-
-msgid "Temperature too low to extrude"
-msgstr "Příliš nízká teplota pro extruzi"
-
 #, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Čekání na uzavření WebSocketu Moonrakeru"
@@ -1130,114 +1142,6 @@ msgstr "Moonraker: připojen"
 msgid "Initializing Klipper Connection"
 msgstr "Inicializace připojení k Klipperu"
 
-#~ msgid "Last Used"
-#~ msgstr "Naposledy použitý"
-
 #, fuzzy
-#~ msgid "Last used"
-#~ msgstr "Naposledy použito"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Chyba při získávání aktivní cívky"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "Nelze se připojit k Moonrakeru"
-
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "Ztraceno spojení s Moonrakerem"
-
-#~ msgid "Max:"
-#~ msgstr "Max:"
-
-#~ msgid "Password saved"
-#~ msgstr "Heslo uloženo"
-
-#~ msgid "Hide temp."
-#~ msgstr "Skrýt teplotu"
-
-#~ msgid "PSK for"
-#~ msgstr "PSK pro"
-
-#~ msgid "Are you sure you want to stop the calibration?"
-#~ msgstr "Opravdu chcete kalibraci zastavit?"
-
-#~ msgid "Do you want to let KlipperScreen try to solve the issue?"
-#~ msgstr "Chcete nechat KlipperScreen, aby se pokusil problém vyřešit?"
-
-#~ msgid "Insufficient priviledges detected"
-#~ msgstr "Zjištěna nedostatečná oprávnění"
-
-#~ msgid "Mesh calibrate"
-#~ msgstr "Kalibrace sítě"
-
-#~ msgid "Uploaded"
-#~ msgstr "Nahrané"
-
-#~ msgid "Ended official support in June 2023"
-#~ msgstr "Oficiální podpora ukončena v červnu 2023"
-
-#~ msgid "Hidden"
-#~ msgstr "Skrytý"
-
-#~ msgid "KlipperScreen will drop support in June 2024"
-#~ msgstr "KlipperScreen ztratí podporu v červnu 2024"
-
-#~ msgid "Print Time"
-#~ msgstr "Čas tisku"
-
-#~ msgid "Warning"
-#~ msgstr "Varování"
-
-#~ msgid "dBm"
-#~ msgstr "dBm"
-
-#~ msgid "Deselect"
-#~ msgstr "Odznačit"
-
-#~ msgid "Select"
-#~ msgstr "Vyber"
-
-#~ msgid "Bed screw configuration:"
-#~ msgstr "Vyrovnání šroubů podložky:"
-
-#~ msgid ""
-#~ "Not supported for auto-detection, it needs to be configured in "
-#~ "klipperscreen.conf"
-#~ msgstr "Nepodporováno autodetekcí, nakonfiguruj v klipperscreen.conf"
-
-#~ msgid "Unknown screw position"
-#~ msgstr "Neznámé nastavení šroubů"
-
-#~ msgid "Max Acceleration to Deceleration"
-#~ msgstr "Z max. zrychlení do zpomalení"
-
-#~ msgid "Continue"
-#~ msgstr "Pokračuj"
-
-#~ msgid "Actions"
-#~ msgstr "Akce"
-
-#~ msgid "Configuration"
-#~ msgstr "Konfigurace"
-
-#~ msgid "Homing"
-#~ msgstr "Domů"
-
-#~ msgid "Disable XY"
-#~ msgstr "Uvolnit XY"
-
-#~ msgid "Slicer Time correction (%)"
-#~ msgstr "Časová korekce Sliceru  (%)"
-
-#~ msgid "Calibrated, save configuration to make it permanent"
-#~ msgstr "Zkalibrováno, uložit změny jako trvalé"
-
-#~ msgid "Decrease"
-#~ msgstr "Snížit"
-
-#~ msgid "Increase"
-#~ msgstr "Zvětšit"
-
-#, python-format
-#~ msgid "Sending Power ON signal to: %s"
-#~ msgstr "Odeslat ZAP do %s"
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper nereaguje po několika pokusech"

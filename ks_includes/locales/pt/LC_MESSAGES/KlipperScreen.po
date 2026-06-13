@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2025-06-10 01:04+0000\n"
 "Last-Translator: Juverley Junior <juverley@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -174,8 +174,13 @@ msgstr "Relógio de 24 Horas"
 msgid "Disable for 12hs with am / pm"
 msgstr "Desativar por 12h com am/pm"
 
-msgid "Macro shortcut on sidebar"
-msgstr "Atalho dedicado para Macros"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "Atalho da barra de ação"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LEDs"
 
 msgid "Font Size"
 msgstr "Tamanho da fonte"
@@ -288,6 +293,15 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuto"
 msgstr[1] "minutos"
+
+msgid "Temperature too low to extrude"
+msgstr "Temperatura muito baixa para extrudar"
+
+msgid "Klipper will reboot"
+msgstr "Klipper será reiniciado"
+
+msgid "Save configuration?"
+msgstr "Salvar configuração?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Executar Parada de Emergência ?"
@@ -529,12 +543,6 @@ msgstr "Medida Y"
 msgid "Measure Both"
 msgstr "Medir ambos"
 
-msgid "Klipper will reboot"
-msgstr "Klipper será reiniciado"
-
-msgid "Save configuration?"
-msgstr "Salvar configuração?"
-
 msgid "Check ADXL Wiring"
 msgstr "Verifique a fiação ADXL"
 
@@ -725,17 +733,37 @@ msgstr "Apenas para o painel de movimento"
 msgid "Z Speed (mm/s)"
 msgstr "Velocidade Z (mm/s)"
 
+#, fuzzy
+msgid "Advanced Move"
+msgstr "Movimento avançado"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "Consultar endstops"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "Posição inválida"
+
 msgid "Failed to initialize"
 msgstr "Falha ao inicializar"
 
 msgid "Interface"
 msgstr "Interface"
 
-msgid "No wireless interface has been found"
-msgstr "Nenhuma interface sem fio foi encontrada"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "Nenhum dispositivo de rede foi encontrado"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "Nenhum dispositivo de rede disponível"
 
 msgid "Connected"
 msgstr "Conectado"
+
+msgid "Channel"
+msgstr "Canal"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -756,9 +784,6 @@ msgstr "Usuário"
 #, python-format
 msgid "Connecting to %s"
 msgstr "Conectando %s"
-
-msgid "Channel"
-msgstr "Canal"
 
 msgid "Hostname"
 msgstr "Nome do Host"
@@ -1056,6 +1081,10 @@ msgstr "Descer Extrusor"
 msgid "Abort"
 msgstr "Cancelar"
 
+#, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "Comandos de calibração ainda não disponíveis"
+
 msgid "Error: Couldn't get a position to probe"
 msgstr "Erro: Não foi possível obter uma posição para a sonda"
 
@@ -1111,25 +1140,6 @@ msgid "Klipper has shutdown"
 msgstr "Klipper foi desligado"
 
 #, fuzzy
-msgid "No eligible macros:"
-msgstr "Sem macros elegíveis:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "macros que iniciam com '_' são ocultos"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "macros que usam 'rename_existing' são ocultos"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT estão ocultos e devem ser usados a partir do "
-"extrusor"
-
-msgid "Temperature too low to extrude"
-msgstr "Temperatura muito baixa para extrudar"
-
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Aguardando o fechamento do WebSocket do Moonraker"
 
@@ -1140,116 +1150,6 @@ msgstr "Moonraker: Conectado"
 msgid "Initializing Klipper Connection"
 msgstr "Inicializando conexão com Klipper"
 
-#~ msgid "Last Used"
-#~ msgstr "Último Usado"
-
 #, fuzzy
-#~ msgid "Last used"
-#~ msgstr "Último uso"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Erro ao obter a fila ativa"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "Não foi possível conectar ao Moonraker"
-
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "Conexão Perdida com Moonraker"
-
-#~ msgid "Max:"
-#~ msgstr "Max:"
-
-#~ msgid "Password saved"
-#~ msgstr "Senha Salva"
-
-#~ msgid "Hide temp."
-#~ msgstr "Ocultar Temp."
-
-#~ msgid "PSK for"
-#~ msgstr "PSK por"
-
-#~ msgid "Mesh calibrate"
-#~ msgstr "Calibrar Malha"
-
-#~ msgid "Uploaded"
-#~ msgstr "Carregado"
-
-#~ msgid "Ended official support in June 2023"
-#~ msgstr "Suporte oficial encerrado em Junho de 2023"
-
-#~ msgid "Hidden"
-#~ msgstr "Oculto"
-
-#~ msgid "KlipperScreen will drop support in June 2024"
-#~ msgstr "KlipperScreen perderá o suporte em Junho de 2024"
-
-#~ msgid "Print Time"
-#~ msgstr "Tempo de impressão"
-
-#~ msgid "Warning"
-#~ msgstr "Aviso"
-
-#~ msgid "dBm"
-#~ msgstr "dBm"
-
-#~ msgid "Deselect"
-#~ msgstr "Deselecionar"
-
-#~ msgid "Select"
-#~ msgstr "Selecionar"
-
-#~ msgid "Bed screw configuration:"
-#~ msgstr "Configuração da Porca de Mesa:"
-
-#~ msgid ""
-#~ "Not supported for auto-detection, it needs to be configured in "
-#~ "klipperscreen.conf"
-#~ msgstr ""
-#~ "Não é compatível com detecção automática, precisa ser configurado no "
-#~ "klipperscreen.conf"
-
-#~ msgid "Unknown screw position"
-#~ msgstr "Posição desconhecida do parafuso"
-
-#~ msgid "Max Acceleration to Deceleration"
-#~ msgstr "Max. aceleração de desaceleração"
-
-#~ msgid "Continue"
-#~ msgstr "Continuar"
-
-#~ msgid "Actions"
-#~ msgstr "Ações"
-
-#~ msgid "Configuration"
-#~ msgstr "Configuração"
-
-#~ msgid "Homing"
-#~ msgstr "Zerar"
-
-#~ msgid "Disable XY"
-#~ msgstr "Desabilitar YX"
-
-#~ msgid "Slicer Time correction (%)"
-#~ msgstr "Correção do tempo do fatiador (%)"
-
-#~ msgid "Calibrated, save configuration to make it permanent"
-#~ msgstr "Calibrado, use o comando para salvar"
-
-#~ msgid "Decrease"
-#~ msgstr "Diminuir"
-
-#~ msgid "Feeder"
-#~ msgstr "Alimentador"
-
-#~ msgid "Increase"
-#~ msgstr "Aumentar"
-
-#, python-format
-#~ msgid "Sending Power ON signal to: %s"
-#~ msgstr "Enviando sinal de energia para: %s"
-
-#~ msgid "Sort:"
-#~ msgstr "Ordenar:"
-
-#~ msgid "Calibrating..."
-#~ msgstr "Calibrando..."
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper não responde após várias tentativas"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2026-05-17 08:11+0000\n"
 "Last-Translator: Niolay Danov <nikdan@abv.bg>\n"
 "Language-Team: Bulgarian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -174,8 +174,13 @@ msgstr "24 часово време"
 msgid "Disable for 12hs with am / pm"
 msgstr "Деактивирайте за 12 часа с am / pm"
 
-msgid "Macro shortcut on sidebar"
-msgstr "Покажи макроси в панела"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "Бърз достъп на лентата с действия"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LED"
 
 msgid "Font Size"
 msgstr "Размер на шрифта"
@@ -285,6 +290,15 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "минута"
 msgstr[1] "минути"
+
+msgid "Temperature too low to extrude"
+msgstr "Температурата е твърде ниска за екструдиране"
+
+msgid "Klipper will reboot"
+msgstr "Klipper се рестартира"
+
+msgid "Save configuration?"
+msgstr "Запиши конфигурацията?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Сигурни ли сте, че искате да стартирате аварийно спиране?"
@@ -522,12 +536,6 @@ msgstr "Измерете Y"
 msgid "Measure Both"
 msgstr "Измерете и двете"
 
-msgid "Klipper will reboot"
-msgstr "Klipper се рестартира"
-
-msgid "Save configuration?"
-msgstr "Запиши конфигурацията?"
-
 msgid "Check ADXL Wiring"
 msgstr "Проверете ADXL свързването"
 
@@ -715,17 +723,37 @@ msgstr "Само за панела за движение"
 msgid "Z Speed (mm/s)"
 msgstr "Z скорост (mm/s)"
 
+#, fuzzy
+msgid "Advanced Move"
+msgstr "Напреднало движение"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "Запитване на крайните позиции"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "Невалидна позиция"
+
 msgid "Failed to initialize"
 msgstr "Неуспешно инициализиране"
 
 msgid "Interface"
 msgstr "Интерфейс"
 
-msgid "No wireless interface has been found"
-msgstr "Не е открит безжичен интерфейс"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "Не са открити мрежови устройства"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "Няма налични мрежови устройства"
 
 msgid "Connected"
 msgstr "Свързан"
+
+msgid "Channel"
+msgstr "Канал"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -746,9 +774,6 @@ msgstr "Потребител"
 #, python-format
 msgid "Connecting to %s"
 msgstr "Свързан с  %s"
-
-msgid "Channel"
-msgstr "Канал"
 
 msgid "Hostname"
 msgstr "Име на хоста"
@@ -1021,6 +1046,10 @@ msgstr "Спусни дюзата"
 msgid "Abort"
 msgstr "Прекъсване"
 
+#, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "Команди за калибриране още не са налични"
+
 msgid "Error: Couldn't get a position to probe"
 msgstr "Грешка: Не може да се намери позиция за сондиране"
 
@@ -1072,24 +1101,6 @@ msgstr "Klipper е готов"
 msgid "Klipper has shutdown"
 msgstr "Klipper се изключи"
 
-msgid "No eligible macros:"
-msgstr "Няма подходящи макроси:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "макросите с име, започващо с '_' са скрити"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "макросите, които използват 'rename_existing' са скрити"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT са скрити и трябва да се използват от "
-"екструдиране"
-
-msgid "Temperature too low to extrude"
-msgstr "Температурата е твърде ниска за екструдиране"
-
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Изчакване на затваряне на WebSocket на Moonraker"
 
@@ -1099,99 +1110,6 @@ msgstr "Moonraker: Свързан"
 msgid "Initializing Klipper Connection"
 msgstr "Инициализиране на връзка с Klipper"
 
-#~ msgid "Last Used"
-#~ msgstr "Използване на филамента"
-
-#~ msgid "Last used"
-#~ msgstr "Последно използвано"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Грешка при активиране на спула"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "Не може да се свърже с Moonraker"
-
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "Не може да се свърже с Moonraker"
-
-#~ msgid "Max:"
-#~ msgstr "Макс:"
-
-#~ msgid "Password saved"
-#~ msgstr "Паролата е записана"
-
-#~ msgid "Hide temp."
-#~ msgstr "Скрий температурата."
-
-#~ msgid "PSK for"
-#~ msgstr "PSK за"
-
-#~ msgid "Actions"
-#~ msgstr "Действия"
-
-#~ msgid "Bed screw configuration:"
-#~ msgstr "Конфигурация на винта на леглото:"
-
-#~ msgid "Calibrated, save configuration to make it permanent"
-#~ msgstr "Калибриран, запазете конфигурацията, за да стане постоянна"
-
-#~ msgid "Configuration"
-#~ msgstr "Конфигурация"
-
-#~ msgid "Continue"
-#~ msgstr "Продължи"
-
-#~ msgid "Decrease"
-#~ msgstr "Намали"
-
-#~ msgid "Deselect"
-#~ msgstr "Отмени"
-
-#~ msgid "Disable XY"
-#~ msgstr "Изключи XY"
-
-#~ msgid "Hidden"
-#~ msgstr "Скрит"
-
-#~ msgid "Homing"
-#~ msgstr "Паркирай"
-
-#~ msgid "Increase"
-#~ msgstr "Повдигане"
-
-#~ msgid "KlipperScreen will reboot"
-#~ msgstr "KlipperScreen ще се рестартира"
-
-#~ msgid "Max Acceleration to Deceleration"
-#~ msgstr "Ускорение на забавяне"
-
-#~ msgid "Mesh calibrate"
-#~ msgstr "Калибриране на мрежата"
-
-#~ msgid ""
-#~ "Not supported for auto-detection, it needs to be configured in "
-#~ "klipperscreen.conf"
-#~ msgstr ""
-#~ "Не се поддържа за автоматично откриване, трябва да се конфигурира в "
-#~ "klipperscreen.conf"
-
-#~ msgid "Print Time"
-#~ msgstr "Време за печат"
-
-#~ msgid "Select"
-#~ msgstr "Избери"
-
-#~ msgid "Sending Power ON signal to: %s"
-#~ msgstr "Изпращане на сигнал за включване до: %s"
-
-#~ msgid "Slicer Time correction (%)"
-#~ msgstr "Корекция на времето на слайсера (%)"
-
-#~ msgid "Unknown screw position"
-#~ msgstr "Неизвестна позиция на винта"
-
-#~ msgid "Uploaded"
-#~ msgstr "Качено"
-
-#~ msgid "dBm"
-#~ msgstr "dBm"
+#, fuzzy
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper не отговаря след множество опити"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:01-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2026-05-18 10:46+0200\n"
 "Last-Translator: Ivijan-Stefan Stipić <infinitumform@gmail.com>\n"
 "Language-Team: Ivijan-Stefan Stipić <https://www.linkedin.com/in/"
@@ -169,8 +169,13 @@ msgstr "24-satni format"
 msgid "Disable for 12hs with am / pm"
 msgstr "Onemogućite za 12 h format s AM/PM"
 
-msgid "Macro shortcut on sidebar"
-msgstr "Prečac makronaredbe na bočnoj traci"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "Prečac trake radnji"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LED-ovi"
 
 msgid "Font Size"
 msgstr "Veličina fonta"
@@ -282,6 +287,15 @@ msgid_plural "minutes"
 msgstr[0] "minuta"
 msgstr[1] "minute"
 msgstr[2] "minuta"
+
+msgid "Temperature too low to extrude"
+msgstr "Temperatura je preniska za ekstruziju"
+
+msgid "Klipper will reboot"
+msgstr "Klipper će se ponovno pokrenuti"
+
+msgid "Save configuration?"
+msgstr "Spremiti konfiguraciju?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Jeste li sigurni da želite pokrenuti hitno zaustavljanje?"
@@ -520,12 +534,6 @@ msgstr "Izmjeri Y"
 msgid "Measure Both"
 msgstr "Izmjeri oba"
 
-msgid "Klipper will reboot"
-msgstr "Klipper će se ponovno pokrenuti"
-
-msgid "Save configuration?"
-msgstr "Spremiti konfiguraciju?"
-
 msgid "Check ADXL Wiring"
 msgstr "Provjerite ADXL ožičenje"
 
@@ -544,10 +552,12 @@ msgstr "Status posla"
 msgid "mm/s"
 msgstr "mm/s"
 
-msgid "mm/sÂ²"
+#, fuzzy
+msgid "mm/s²"
 msgstr "mm/s²"
 
-msgid "mmÂ³/s"
+#, fuzzy
+msgid "mm³/s"
 msgstr "mm³/s"
 
 msgid "Left:"
@@ -610,12 +620,15 @@ msgstr "Nastavi"
 msgid "Save Z"
 msgstr "Spremi Z"
 
+#, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Probe?"
 msgstr "Primijeni pomak {sign}{offset:.3f} na sondu?"
 
+#, python-brace-format
 msgid "Apply {sign}{offset:.3f} offset to Endstop?"
 msgstr "Primijeni pomak {sign}{offset:.3f} na graničnik?"
 
+#, python-format
 msgid "Saved offset: %s"
 msgstr "Spremljen pomak: %s"
 
@@ -679,7 +692,8 @@ msgstr "Pokreni PID kalibraciju za:"
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "Ovo može trajati više od 5 minuta, ovisno o snazi grijača."
 
-msgid "Temp (Â°C)"
+#, fuzzy
+msgid "Temp (°C)"
 msgstr "Temp (°C)"
 
 msgid "Invalid temperature"
@@ -709,18 +723,39 @@ msgstr "Samo za panel pomicanja"
 msgid "Z Speed (mm/s)"
 msgstr "Z brzina (mm/s)"
 
+#, fuzzy
+msgid "Advanced Move"
+msgstr "Napredno pomicanje"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "Upit krajnjih graničnika"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "Nevaljiva pozicija"
+
 msgid "Failed to initialize"
 msgstr "Inicijalizacija nije uspjela"
 
 msgid "Interface"
 msgstr "Sučelje"
 
-msgid "No wireless interface has been found"
-msgstr "Nije pronađeno bežično sučelje"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "Nisu pronađeni mrežni uređaji"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "Nema dostupnih mrežnih uređaja"
 
 msgid "Connected"
 msgstr "Povezano"
 
+msgid "Channel"
+msgstr "Kanal"
+
+#, python-format
 msgid "Do you want to forget or disconnect %s?"
 msgstr "Želite li zaboraviti ili prekinuti vezu s %s?"
 
@@ -736,11 +771,9 @@ msgstr "Ukloni mrežu"
 msgid "User"
 msgstr "Korisnik"
 
+#, python-format
 msgid "Connecting to %s"
 msgstr "Povezivanje s %s"
-
-msgid "Channel"
-msgstr "Kanal"
 
 msgid "Hostname"
 msgstr "Naziv hosta"
@@ -952,6 +985,7 @@ msgstr "Jeste li sigurni?"
 msgid "Perform a full upgrade?"
 msgstr "Izvršiti potpuno ažuriranje?"
 
+#, python-format
 msgid "Do you want to recover %s?"
 msgstr "Želite li oporaviti %s?"
 
@@ -964,6 +998,7 @@ msgstr "Meki oporavak"
 msgid "Recover"
 msgstr "Oporavi"
 
+#, python-format
 msgid "Outdated by %d"
 msgstr "Zastarjelo za %d"
 
@@ -979,6 +1014,7 @@ msgstr[0] "Paket će se ažurirati"
 msgstr[1] "Paketi će se ažurirati"
 msgstr[2] "Paketi će se ažurirati"
 
+#, python-format
 msgid "%s will be updated to version"
 msgstr "%s će se ažurirati na verziju"
 
@@ -1011,6 +1047,10 @@ msgstr "Spusti mlaznicu"
 
 msgid "Abort"
 msgstr "Prekini"
+
+#, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "Naredbe za kalibraciju još nisu dostupne"
 
 msgid "Error: Couldn't get a position to probe"
 msgstr "Greška: nije moguće dobiti poziciju za sondiranje"
@@ -1063,23 +1103,6 @@ msgstr "Klipper se pokušava pokrenuti"
 msgid "Klipper has shutdown"
 msgstr "Klipper se ugasio"
 
-msgid "No eligible macros:"
-msgstr "Nema odgovarajućih makronaredbi:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "makronaredbe čije ime počinje s '_' skrivene su"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "makronaredbe koje koriste 'rename_existing' skrivene su"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT su skriveni i treba ih koristiti iz Ekstruzije"
-
-msgid "Temperature too low to extrude"
-msgstr "Temperatura je preniska za ekstruziju"
-
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Čeka se zatvaranje Moonraker WebSocket veze"
 
@@ -1088,3 +1111,7 @@ msgstr "Moonraker: povezan"
 
 msgid "Initializing Klipper Connection"
 msgstr "Inicijalizacija veze s Klipperom"
+
+#, fuzzy
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper ne odgovara nakon više pokušaja"

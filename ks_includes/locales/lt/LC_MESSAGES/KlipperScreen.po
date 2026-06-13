@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2026-03-10 13:09+0000\n"
 "Last-Translator: vjurka <v@jurka.lt>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -173,8 +173,13 @@ msgstr "24-laiko formatas"
 msgid "Disable for 12hs with am / pm"
 msgstr "Išjungti 12hs su am / pm"
 
-msgid "Macro shortcut on sidebar"
-msgstr "Rodyti makro komandas šoninėje juostoje"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "Veiksmų juostos trumpinys"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LED"
 
 msgid "Font Size"
 msgstr "Šrifto dydis"
@@ -288,6 +293,15 @@ msgid_plural "minutes"
 msgstr[0] "minutė"
 msgstr[1] "minutės"
 msgstr[2] "minutės"
+
+msgid "Temperature too low to extrude"
+msgstr "Per maža temperatūra ekstruzijai"
+
+msgid "Klipper will reboot"
+msgstr "Klipper'is persikraus"
+
+msgid "Save configuration?"
+msgstr "Išsaugoti konfigūraciją?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Ar tikrai paleisti avarinį stabdymą?"
@@ -527,12 +541,6 @@ msgstr "Išmatuoti Y"
 msgid "Measure Both"
 msgstr "Išmatuoti abu"
 
-msgid "Klipper will reboot"
-msgstr "Klipper'is persikraus"
-
-msgid "Save configuration?"
-msgstr "Išsaugoti konfigūraciją?"
-
 msgid "Check ADXL Wiring"
 msgstr "Patikrinkite ADXL laidus"
 
@@ -721,17 +729,37 @@ msgstr "Tik perkėlimo skydeliui"
 msgid "Z Speed (mm/s)"
 msgstr "Z greitis (mm/s)"
 
+#, fuzzy
+msgid "Advanced Move"
+msgstr "Pažangus judėjimas"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "Galutinių ribų užklausos"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "Neteisinga pozicija"
+
 msgid "Failed to initialize"
 msgstr "Nepavyko inicijuoti"
 
 msgid "Interface"
 msgstr "Interfeisas"
 
-msgid "No wireless interface has been found"
-msgstr "Belaidė sąsaja nerasta"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "Tinklo įrenginių nerasta"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "Nėra prieinamų tinklo įrenginių"
 
 msgid "Connected"
 msgstr "Prijungta"
+
+msgid "Channel"
+msgstr "Kanalas"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -752,9 +780,6 @@ msgstr "Vartotojas"
 #, python-format
 msgid "Connecting to %s"
 msgstr "Prisijungiama prie %s"
-
-msgid "Channel"
-msgstr "Kanalas"
 
 msgid "Hostname"
 msgstr "Hosto vardas"
@@ -1051,6 +1076,10 @@ msgstr "Nuleisti purkštuką"
 msgid "Abort"
 msgstr "Atšaukti"
 
+#, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "Kalibravimo komandos dar nėra prieinamos"
+
 msgid "Error: Couldn't get a position to probe"
 msgstr "Klaida: neįmanoma pozicija aukščio sensoriui"
 
@@ -1106,25 +1135,6 @@ msgid "Klipper has shutdown"
 msgstr "Klipper'is išjungtas"
 
 #, fuzzy
-msgid "No eligible macros:"
-msgstr "Nėra tinkamų makrokomandų:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "makrokomandos, kurių pavadinimas prasideda raide \"_\", yra paslėptos"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "makrokomandos, kurios naudoja 'rename_existing', yra paslėptos"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD FILAMENT / UNLOAD FILAMENT yra paslėpti ir turėtų būti naudojami nuo "
-"išspaudimo"
-
-msgid "Temperature too low to extrude"
-msgstr "Per maža temperatūra ekstruzijai"
-
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Laukiama, kol Moonraker Websocket užsidarys"
 
@@ -1135,83 +1145,6 @@ msgstr "Moonraker: prijungtas"
 msgid "Initializing Klipper Connection"
 msgstr "Inicijuojamas Klipper ryšys"
 
-#~ msgid "Last Used"
-#~ msgstr "Paskutinis naudotas"
-
 #, fuzzy
-#~ msgid "Last used"
-#~ msgstr "Paskutinį kartą naudota"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Klaida gaunant aktyvią ritę"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "Nepavyksta prisijungti prie Moonraker"
-
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "Prarastas ryšys su Moonraker"
-
-#~ msgid "Max:"
-#~ msgstr "Max:"
-
-#~ msgid "Password saved"
-#~ msgstr "Slaptažodis išsaugotas"
-
-#~ msgid "Hide temp."
-#~ msgstr "Slėpti temperatūrą."
-
-#~ msgid "PSK for"
-#~ msgstr "PSK"
-
-#~ msgid "Are you sure you want to stop the calibration?"
-#~ msgstr "Ar tikrai norite sustabdyti kalibraciją?"
-
-#~ msgid "Do you want to let KlipperScreen try to solve the issue?"
-#~ msgstr "Ar norite leisti KlipperScreen pabandyti išspręsti problemą?"
-
-#~ msgid "Insufficient priviledges detected"
-#~ msgstr "Aptikta, kad privilegijų nepakanka"
-
-#~ msgid "Mesh calibrate"
-#~ msgstr "Tinklelio kalibravimas"
-
-#~ msgid "Uploaded"
-#~ msgstr "Nusiųsta"
-
-#~ msgid "Ended official support in June 2023"
-#~ msgstr "Oficialus palaikymas baigtas 2023 m. birželio mėn"
-
-#~ msgid "Hidden"
-#~ msgstr "Paslėpta"
-
-#~ msgid "KlipperScreen will drop support in June 2024"
-#~ msgstr "KlipperScreen palaikymas bus nutrauktas 2024 m. birželio mėnesį"
-
-#~ msgid "Print Time"
-#~ msgstr "Spausdinimo laikas"
-
-#~ msgid "Warning"
-#~ msgstr "Įspėjimas"
-
-#~ msgid "dBm"
-#~ msgstr "dBm"
-
-#~ msgid "Deselect"
-#~ msgstr "Atžymėti"
-
-#~ msgid "Select"
-#~ msgstr "Išsirinkti"
-
-#~ msgid "Bed screw configuration:"
-#~ msgstr "Platformos varžtų konfigūracija:"
-
-#~ msgid ""
-#~ "Not supported for auto-detection, it needs to be configured in "
-#~ "klipperscreen.conf"
-#~ msgstr "Neaptinkamas automatiškai, reikia konfigūruoti klipperscreen.conf"
-
-#~ msgid "Unknown screw position"
-#~ msgstr "Nežinoma varžto padėtis"
-
-#~ msgid "Max Acceleration to Deceleration"
-#~ msgstr "Pagreitintas stabdymas"
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper neatsako po kelių bandymų"

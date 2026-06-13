@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:01-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -167,7 +167,10 @@ msgstr ""
 msgid "Disable for 12hs with am / pm"
 msgstr ""
 
-msgid "Macro shortcut on sidebar"
+msgid "Action bar Shortcut"
+msgstr ""
+
+msgid "LEDs"
 msgstr ""
 
 msgid "Font Size"
@@ -277,6 +280,15 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "Temperature too low to extrude"
+msgstr ""
+
+msgid "Klipper will reboot"
+msgstr ""
+
+msgid "Save configuration?"
+msgstr ""
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr ""
@@ -514,12 +526,6 @@ msgstr ""
 msgid "Measure Both"
 msgstr ""
 
-msgid "Klipper will reboot"
-msgstr ""
-
-msgid "Save configuration?"
-msgstr ""
-
 msgid "Check ADXL Wiring"
 msgstr ""
 
@@ -706,16 +712,31 @@ msgstr ""
 msgid "Z Speed (mm/s)"
 msgstr ""
 
+msgid "Advanced Move"
+msgstr ""
+
+msgid "Query Endstops"
+msgstr ""
+
+msgid "Invalid position"
+msgstr ""
+
 msgid "Failed to initialize"
 msgstr ""
 
 msgid "Interface"
 msgstr ""
 
-msgid "No wireless interface has been found"
+msgid "No network devices have been found"
+msgstr ""
+
+msgid "No network devices available"
 msgstr ""
 
 msgid "Connected"
+msgstr ""
+
+msgid "Channel"
 msgstr ""
 
 #, python-format
@@ -736,9 +757,6 @@ msgstr ""
 
 #, python-format
 msgid "Connecting to %s"
-msgstr ""
-
-msgid "Channel"
 msgstr ""
 
 msgid "Hostname"
@@ -1012,6 +1030,9 @@ msgstr ""
 msgid "Abort"
 msgstr ""
 
+msgid "Calibration commands not available yet"
+msgstr ""
+
 msgid "Error: Couldn't get a position to probe"
 msgstr ""
 
@@ -1063,22 +1084,6 @@ msgstr ""
 msgid "Klipper has shutdown"
 msgstr ""
 
-msgid "No eligible macros:"
-msgstr ""
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr ""
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-
-msgid "Temperature too low to extrude"
-msgstr ""
-
 msgid "Waiting for Moonraker Websocket to close"
 msgstr ""
 
@@ -1086,4 +1091,7 @@ msgid "Moonraker: connected"
 msgstr ""
 
 msgid "Initializing Klipper Connection"
+msgstr ""
+
+msgid "Klipper not responding after multiple attempts"
 msgstr ""

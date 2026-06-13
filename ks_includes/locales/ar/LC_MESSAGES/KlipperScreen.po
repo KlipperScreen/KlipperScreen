@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2026-01-10 23:01+0000\n"
 "Last-Translator: Joe <alawadhi3000@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/klipperscreen/"
@@ -173,8 +173,13 @@ msgstr "وقت 24 ساعة"
 msgid "Disable for 12hs with am / pm"
 msgstr "تعطيل لمدة 12 ساعة مع صباحا / مساء"
 
-msgid "Macro shortcut on sidebar"
-msgstr "اختصار ماكرو على الشريط الجانبي"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "اختصار شريط الإجراءات"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LEDs"
 
 msgid "Font Size"
 msgstr "حجم الخط"
@@ -297,6 +302,15 @@ msgstr[2] "دقيقتين"
 msgstr[3] "دقائق"
 msgstr[4] "دقيقة"
 msgstr[5] "دقائق"
+
+msgid "Temperature too low to extrude"
+msgstr "درجة الحرارة قليلة جدا لبدء التدفق"
+
+msgid "Klipper will reboot"
+msgstr "سيقوم Klipper بإعادة التشغيل"
+
+msgid "Save configuration?"
+msgstr "حفظ التكوين؟"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "هل تريد تأكيد التوقف الطارئ؟"
@@ -540,12 +554,6 @@ msgstr "قياس Y"
 msgid "Measure Both"
 msgstr "قم بقياس كليهما"
 
-msgid "Klipper will reboot"
-msgstr "سيقوم Klipper بإعادة التشغيل"
-
-msgid "Save configuration?"
-msgstr "حفظ التكوين؟"
-
 msgid "Check ADXL Wiring"
 msgstr "تحقق من ADXL الأسلاك"
 
@@ -732,17 +740,37 @@ msgstr "فقط من أجل لوحة الحركة"
 msgid "Z Speed (mm/s)"
 msgstr "سرعة Z (مم/ث)"
 
+#, fuzzy
+msgid "Advanced Move"
+msgstr "حركة متقدمة"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "استعلام عن Endstops"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "موضع غير صالح"
+
 msgid "Failed to initialize"
 msgstr "فشل في التهيئة"
 
 msgid "Interface"
 msgstr "واجهه المستخدم"
 
-msgid "No wireless interface has been found"
-msgstr "لم يتم العثور على واجهة لاسلكية"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "لم يتم العثور على أجهزة شبكة"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "لا توجد أجهزة شبكة متاحة"
 
 msgid "Connected"
 msgstr "متصل"
+
+msgid "Channel"
+msgstr "القناة"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -763,9 +791,6 @@ msgstr "المستخدم"
 #, python-format
 msgid "Connecting to %s"
 msgstr "التواصل مع %s"
-
-msgid "Channel"
-msgstr "القناة"
 
 msgid "Hostname"
 msgstr "اسم المضيف"
@@ -1068,6 +1093,10 @@ msgstr "انزل الفوهة الي الاسفل"
 msgid "Abort"
 msgstr "إجهاض"
 
+#, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "أوامر المعايرة غير متاحة بعد"
+
 msgid "Error: Couldn't get a position to probe"
 msgstr "خطأ: تعذر لعدم الحصول على مستوي المسبار"
 
@@ -1123,23 +1152,6 @@ msgid "Klipper has shutdown"
 msgstr "تم إغلاق Klipper"
 
 #, fuzzy
-msgid "No eligible macros:"
-msgstr "لا توجد ماكروبات صالحة:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "وحدات الماكرو التي يبدأ اسمها ب \"_\" مخفية"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "وحدات الماكرو التي تستخدم \"إعادة تسمية_موجودة\" مخفية"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "تحميل_خيط/تفريغ_خيط مخفية ويجب استخدامها من البثق"
-
-msgid "Temperature too low to extrude"
-msgstr "درجة الحرارة قليلة جدا لبدء التدفق"
-
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "في انتظار إغلاق اتصال Moonraker عبر WebSocket"
 
@@ -1150,30 +1162,6 @@ msgstr "Moonraker : متصل"
 msgid "Initializing Klipper Connection"
 msgstr "جارٍ تهيئة الاتصال بـ Klipper"
 
-#~ msgid "Last Used"
-#~ msgstr "آخر استخدام"
-
 #, fuzzy
-#~ msgid "Last used"
-#~ msgstr "آخر استخدام"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "خطأ في الحصول على تفعيل البكرة"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "لا يمكن الاتصال ب Moonraker"
-
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "فقد الاتصال ب Moonraker"
-
-#~ msgid "Max:"
-#~ msgstr "الحد الأقصى:"
-
-#~ msgid "Password saved"
-#~ msgstr "تم حفظ كلمة المرور"
-
-#~ msgid "Hide temp."
-#~ msgstr "إخفاء درجة الحرارة."
-
-#~ msgid "PSK for"
-#~ msgstr "PSK من أجل"
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper لا يستجيب بعد محاولات متعددة"

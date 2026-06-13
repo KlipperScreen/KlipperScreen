@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 24-11-26 10.00\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2024-11-26 22:47+0200\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -176,8 +176,13 @@ msgstr "24-годинний час"
 msgid "Disable for 12hs with am / pm"
 msgstr "Вимкнути на 12 годин за допомогою am / pm"
 
-msgid "Macro shortcut on sidebar"
-msgstr "Ярлик макросу на бічній панелі"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "Гаряча клавіша панелі дій"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "Світлодіоди"
 
 msgid "Font Size"
 msgstr "Розмір шрифту"
@@ -291,6 +296,15 @@ msgid_plural "minutes"
 msgstr[0] "хвилина"
 msgstr[1] "хвилини"
 msgstr[2] "хвилин"
+
+msgid "Temperature too low to extrude"
+msgstr "Занизька температура для видавлювання"
+
+msgid "Klipper will reboot"
+msgstr "Klipper перезавантажиться"
+
+msgid "Save configuration?"
+msgstr "Зберегти конфігурацію?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Ви впевнені, що хочете зробити аварійну зупинку?"
@@ -530,12 +544,6 @@ msgstr "Виміряти Y"
 msgid "Measure Both"
 msgstr "Виміряти все"
 
-msgid "Klipper will reboot"
-msgstr "Klipper перезавантажиться"
-
-msgid "Save configuration?"
-msgstr "Зберегти конфігурацію?"
-
 msgid "Check ADXL Wiring"
 msgstr "Перевірте підключення ADXL"
 
@@ -724,17 +732,37 @@ msgstr "Тільки для панелі переміщення"
 msgid "Z Speed (mm/s)"
 msgstr "Швидкість Z (мм/с)"
 
+#, fuzzy
+msgid "Advanced Move"
+msgstr "Розширене переміщення"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "Запит кінцевих вимикачів"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "Некоректна позиція"
+
 msgid "Failed to initialize"
 msgstr "Не вдалося ініціалізувати"
 
 msgid "Interface"
 msgstr "Інтерфейс"
 
-msgid "No wireless interface has been found"
-msgstr "Бездротовий інтерфейс не знайдено"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "Мережеві пристрої не знайдено"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "Мережеві пристрої недоступні"
 
 msgid "Connected"
 msgstr "Підключено"
+
+msgid "Channel"
+msgstr "Канал"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -755,9 +783,6 @@ msgstr "Користувач"
 #, python-format
 msgid "Connecting to %s"
 msgstr "Підключення до %s"
-
-msgid "Channel"
-msgstr "Канал"
 
 msgid "Hostname"
 msgstr "Ім'я хоста"
@@ -1058,6 +1083,10 @@ msgstr "Опустити сопло"
 msgid "Abort"
 msgstr "Перервати"
 
+#, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "Команди калібрування ще недоступні"
+
 msgid "Error: Couldn't get a position to probe"
 msgstr "Помилка: не вдалося отримати позицію для проби"
 
@@ -1113,25 +1142,6 @@ msgid "Klipper has shutdown"
 msgstr "Klipper вимкнувся"
 
 #, fuzzy
-msgid "No eligible macros:"
-msgstr "Немає доступних макросів:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "макроси з назвою, що починається на '_', приховані"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "макроси, які використовують 'rename_existing', приховані"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT приховані, і їх слід використовувати під час "
-"видавлювання"
-
-msgid "Temperature too low to extrude"
-msgstr "Занизька температура для видавлювання"
-
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Очікування закриття WebSocket Moonraker"
 
@@ -1142,170 +1152,6 @@ msgstr "Підключено до Moonraker"
 msgid "Initializing Klipper Connection"
 msgstr "Ініціалізація з'єднання з Klipper"
 
-#~ msgid "Last Used"
-#~ msgstr "Останнє Використання"
-
 #, fuzzy
-#~ msgid "Last used"
-#~ msgstr "Востаннє використано"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Помилка отримання активної котушки"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "Не можливо підключитися до Moonraker"
-
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "Втрачено з’єднання з Moonraker"
-
-#~ msgid "Max:"
-#~ msgstr "Макс:"
-
-#~ msgid "Password saved"
-#~ msgstr "Пароль збережено"
-
-#~ msgid "Hide temp."
-#~ msgstr "Приховати темп."
-
-#~ msgid "PSK for"
-#~ msgstr "PSK для"
-
-#~ msgid "Are you sure you want to stop the calibration?"
-#~ msgstr "Ви впевнені, що хочете припинити калібрування?"
-
-#~ msgid "Mesh calibrate"
-#~ msgstr "Калібрування сітки столу"
-
-#~ msgid "Uploaded"
-#~ msgstr "Завантажено"
-
-#~ msgid "Ended official support in June 2023"
-#~ msgstr "Офіційна підтримка припинена в червні 2023 року"
-
-#~ msgid "Hidden"
-#~ msgstr "Прихований"
-
-#~ msgid "KlipperScreen will drop support in June 2024"
-#~ msgstr "KlipperScreen припинить підтримку в червні 2024 року"
-
-#~ msgid "Print Time"
-#~ msgstr "Час друку"
-
-#~ msgid "Warning"
-#~ msgstr "Попередження"
-
-#~ msgid "dBm"
-#~ msgstr "dBm"
-
-#~ msgid "Deselect"
-#~ msgstr "Скасувати вибір"
-
-#~ msgid "Select"
-#~ msgstr "Вибрати"
-
-#~ msgid "Bed screw configuration:"
-#~ msgstr "Конфігурація гвинтів ліжка:"
-
-#~ msgid ""
-#~ "Not supported for auto-detection, it needs to be configured in "
-#~ "klipperscreen.conf"
-#~ msgstr ""
-#~ "Автоматичне визначення не підтримується, його потрібно налаштувати у "
-#~ "klipperscreen.conf"
-
-#~ msgid "Unknown screw position"
-#~ msgstr "Невідоме положення гвинта"
-
-#~ msgid "Max Acceleration to Deceleration"
-#~ msgstr "Макс. прискорення до гальмування"
-
-#~ msgid "Continue"
-#~ msgstr "Продовжити"
-
-#~ msgid "Fullscreen"
-#~ msgstr "Повноекранний режим"
-
-#~ msgid "Actions"
-#~ msgstr "Дії"
-
-#~ msgid "Configuration"
-#~ msgstr "Конфігурація"
-
-#~ msgid "Homing"
-#~ msgstr "До дому"
-
-#~ msgid "Disable XY"
-#~ msgstr "Вимкнути XY"
-
-#~ msgid "Slicer Time correction (%)"
-#~ msgstr "Виправлення часу слайсера (%)"
-
-#~ msgid "Calibrated, save configuration to make it permanent"
-#~ msgstr "Відкалібровано, збережіть конфігурацію, щоб зробити її постійною"
-
-#~ msgid "Decrease"
-#~ msgstr "Зменшити"
-
-#~ msgid "Increase"
-#~ msgstr "Збільшити"
-
-#, python-format
-#~ msgid "Sending Power ON signal to: %s"
-#~ msgstr "Надсилання сигналу увімкнення живлення на: %s"
-
-#~ msgid "Sort:"
-#~ msgstr "Сортувати:"
-
-#~ msgid "Calibrating..."
-#~ msgstr "Калібрування..."
-
-#~ msgid "Z+"
-#~ msgstr "Бебістеп Z+"
-
-#~ msgid "Z-"
-#~ msgstr "Бебістеп Z-"
-
-#~ msgid "X+"
-#~ msgstr "X+"
-
-#~ msgid "X-"
-#~ msgstr "X-"
-
-#~ msgid "Y+"
-#~ msgstr "Y+"
-
-#~ msgid "Y-"
-#~ msgstr "Y-"
-
-#, python-format
-#~ msgid "Retry #%s"
-#~ msgstr "Повторіть #%s"
-
-#~ msgid "Add Printer"
-#~ msgstr "Додати принтер"
-
-#~ msgid "Initializing"
-#~ msgstr "Ініціалізація"
-
-#~ msgid "Off"
-#~ msgstr "Вимк"
-
-#~ msgid "View Mesh"
-#~ msgstr "Показати сітку"
-
-#~ msgid "Machine"
-#~ msgstr "Машина"
-
-#~ msgid "Sort by: "
-#~ msgstr "Сортувати за: "
-
-#~ msgid "Auto Calibration"
-#~ msgstr "Автоматичне калібрування"
-
-#~ msgid "Manual Calibration"
-#~ msgstr "Ручне калібрування"
-
-#~ msgid "NOTE: Edit your printer.cfg to save manual calibration changes."
-#~ msgstr ""
-#~ "ПРИМІТКА. Відредагуйте файл printer.cfg, щоб зберегти зміни калібрування "
-#~ "вручну."
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper не відповідає після кількох спроб"

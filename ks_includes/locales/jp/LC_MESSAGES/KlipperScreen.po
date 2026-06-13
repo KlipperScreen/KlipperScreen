@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2025-06-20 09:12+0000\n"
 "Last-Translator: kr <Tlake_ichi_ni_san_shi@yahoo.co.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -172,8 +172,13 @@ msgstr "24時間表記"
 msgid "Disable for 12hs with am / pm"
 msgstr "午前/午後の12時間表記を無効化"
 
-msgid "Macro shortcut on sidebar"
-msgstr "サイドバーのマクロショートカット"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "アクションバー ショートカット"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LED"
 
 msgid "Font Size"
 msgstr "フォントサイズ"
@@ -289,6 +294,15 @@ msgstr[0] "時間"
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "分"
+
+msgid "Temperature too low to extrude"
+msgstr "温度が低すぎるため押し出すことができません"
+
+msgid "Klipper will reboot"
+msgstr "Klipperは再起動します"
+
+msgid "Save configuration?"
+msgstr "設定を保存しますか？"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "緊急停止しますか？"
@@ -539,12 +553,6 @@ msgstr "Y軸を計測する"
 msgid "Measure Both"
 msgstr "両方計測する"
 
-msgid "Klipper will reboot"
-msgstr "Klipperは再起動します"
-
-msgid "Save configuration?"
-msgstr "設定を保存しますか？"
-
 msgid "Check ADXL Wiring"
 msgstr "ADXL Wiring を検査する"
 
@@ -737,17 +745,37 @@ msgstr "移動パネル専用"
 msgid "Z Speed (mm/s)"
 msgstr "Z軸 速度 (mm/s)"
 
+#, fuzzy
+msgid "Advanced Move"
+msgstr "高度な移動"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "エンドストップの確認"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "無効な位置"
+
 msgid "Failed to initialize"
 msgstr "初期化に失敗しました"
 
 msgid "Interface"
 msgstr "インターフェース"
 
-msgid "No wireless interface has been found"
-msgstr "ワイヤレスインターフェイスが見つかりませんでした"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "ネットワークデバイスが見つかりませんでした"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "利用可能なネットワークデバイスはありません"
 
 msgid "Connected"
 msgstr "接続済み"
+
+msgid "Channel"
+msgstr "チャンネル"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -768,9 +796,6 @@ msgstr "ユーザ"
 #, python-format
 msgid "Connecting to %s"
 msgstr "%s へ接続中・・・"
-
-msgid "Channel"
-msgstr "チャンネル"
 
 msgid "Hostname"
 msgstr "ホスト名"
@@ -1073,6 +1098,10 @@ msgstr "ノズルが低い"
 msgid "Abort"
 msgstr "中止する"
 
+#, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "キャリブレーションコマンドはまだ利用できません"
+
 msgid "Error: Couldn't get a position to probe"
 msgstr "エラー: 調査する位置を取得できませんでした"
 
@@ -1129,25 +1158,6 @@ msgid "Klipper has shutdown"
 msgstr "Klipperはシャットダウンしました"
 
 #, fuzzy
-msgid "No eligible macros:"
-msgstr "利用可能なマクロはありません:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "名前が「_」で始まるマクロは非表示になります"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "「rename_existing」を使用するマクロは非表示になります"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT は非表示になっているため、押し出しから使用する"
-"必要があります"
-
-msgid "Temperature too low to extrude"
-msgstr "温度が低すぎるため押し出すことができません"
-
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Moonraker WebSocket の閉鎖を待機中"
 
@@ -1158,82 +1168,6 @@ msgstr "Moonraker: 接続済"
 msgid "Initializing Klipper Connection"
 msgstr "Klipper 接続を初期化しています"
 
-#~ msgid "Last Used"
-#~ msgstr "最後に使用したもの"
-
 #, fuzzy
-#~ msgid "Last used"
-#~ msgstr "最後に使用"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "アクティブスプールの取得中にエラーが発生しました"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "Moonrakerに接続できません"
-
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "Moonraker への接続が失われました"
-
-#~ msgid "Max:"
-#~ msgstr "最大:"
-
-#~ msgid "Password saved"
-#~ msgstr "パスワードを保存しました"
-
-#~ msgid "Hide temp."
-#~ msgstr "温度を非表示にする"
-
-#~ msgid "Mesh calibrate"
-#~ msgstr "メッシュ較正"
-
-#~ msgid "Uploaded"
-#~ msgstr "アップロード済"
-
-#~ msgid "Hidden"
-#~ msgstr "非表示"
-
-#~ msgid "Print Time"
-#~ msgstr "印刷時間"
-
-#~ msgid "Deselect"
-#~ msgstr "選択解除"
-
-#~ msgid "Bed screw configuration:"
-#~ msgstr "ベッドスクリュー設定:"
-
-#~ msgid "Unknown screw position"
-#~ msgstr "無効なのスクリュー位置"
-
-#~ msgid "Max Acceleration to Deceleration"
-#~ msgstr "減速時の最大加速度"
-
-#~ msgid "Continue"
-#~ msgstr "継続"
-
-#~ msgid "Actions"
-#~ msgstr "操作"
-
-#~ msgid "Configuration"
-#~ msgstr "設定"
-
-#~ msgid "Homing"
-#~ msgstr "Homing"
-
-#~ msgid "Disable XY"
-#~ msgstr "XY軸制御の無効化"
-
-#~ msgid "Slicer Time correction (%)"
-#~ msgstr "スライサーの補正時間(%)"
-
-#~ msgid "Calibrated, save configuration to make it permanent"
-#~ msgstr ""
-#~ "校正完了しました。次回起動時以降も適用するには設定を保存してください"
-
-#~ msgid "Decrease"
-#~ msgstr "減少"
-
-#~ msgid "Increase"
-#~ msgstr "増加"
-
-#~ msgid "Sort:"
-#~ msgstr "ソート順:"
+msgid "Klipper not responding after multiple attempts"
+msgstr "複数回試行しましたがKlipperが応答しません"

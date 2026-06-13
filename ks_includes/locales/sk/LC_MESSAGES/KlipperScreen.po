@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2026-05-07 00:11+0000\n"
 "Last-Translator: Pavol Vrba <pvrba2000@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/klipperscreen/"
@@ -173,8 +173,13 @@ msgstr "24 hodinový čas"
 msgid "Disable for 12hs with am / pm"
 msgstr "Zakázať na 12 hodín s am / pm"
 
-msgid "Macro shortcut on sidebar"
-msgstr "Skratka makra na bočnom paneli"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "Skratka panela akcií"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LED"
 
 msgid "Font Size"
 msgstr "Veľkosť písma"
@@ -289,6 +294,15 @@ msgid_plural "minutes"
 msgstr[0] "minúta"
 msgstr[1] "minúty"
 msgstr[2] "minút"
+
+msgid "Temperature too low to extrude"
+msgstr "Príliš nízka teplota na vytlačenie"
+
+msgid "Klipper will reboot"
+msgstr "Klipper sa reštartuje"
+
+msgid "Save configuration?"
+msgstr "Uložiť konfiguráciu?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Naozaj chcete spustiť núdzové zastavenie?"
@@ -528,12 +542,6 @@ msgstr "Zmerať Y"
 msgid "Measure Both"
 msgstr "Zmerať Oba"
 
-msgid "Klipper will reboot"
-msgstr "Klipper sa reštartuje"
-
-msgid "Save configuration?"
-msgstr "Uložiť konfiguráciu?"
-
 msgid "Check ADXL Wiring"
 msgstr "Skontrolujte zapojenie ADXL"
 
@@ -720,17 +728,37 @@ msgstr "Iba pre panel posuvu"
 msgid "Z Speed (mm/s)"
 msgstr "Z Rýchlosť (mm/s)"
 
+#, fuzzy
+msgid "Advanced Move"
+msgstr "Pokročilé posunutie"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "Vyžiadať stav koncových spínačov"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "Neplatná poloha"
+
 msgid "Failed to initialize"
 msgstr "Inicializácia zlyhala"
 
 msgid "Interface"
 msgstr "Rozhranie"
 
-msgid "No wireless interface has been found"
-msgstr "Bezdrôtové rozhranie sa nenašlo"
+#, fuzzy
+msgid "No network devices have been found"
+msgstr "Nenašli sa žiadne sieťové zariadenia"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "Nie sú dostupné žiadne sieťové zariadenia"
 
 msgid "Connected"
 msgstr "Pripojenie"
+
+msgid "Channel"
+msgstr "Kanál"
 
 #, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -751,9 +779,6 @@ msgstr "Používateľ"
 #, python-format
 msgid "Connecting to %s"
 msgstr "Pripájanie k %s"
-
-msgid "Channel"
-msgstr "Kanál"
 
 msgid "Hostname"
 msgstr "Názov hosta"
@@ -1045,6 +1070,10 @@ msgstr "Spodná Tryska"
 msgid "Abort"
 msgstr "Prerušiť"
 
+#, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "Príkazy na kalibráciu ešte nie sú k dispozícii"
+
 msgid "Error: Couldn't get a position to probe"
 msgstr "Chyba: Nepodarilo sa nájsť polohu na sondovanie"
 
@@ -1098,23 +1127,6 @@ msgstr "Klipper sa pokúša naštartovať"
 msgid "Klipper has shutdown"
 msgstr "Klipper sa vypol"
 
-msgid "No eligible macros:"
-msgstr "Žiadne vhodné makrá:"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "makrá s názvom začínajúcim na ‘_’ sú skryté"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "makrá, ktoré používajú ‘rename_existing’, sú skryté"
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT sú skryté a mali by sa použiť z vysunutia"
-
-msgid "Temperature too low to extrude"
-msgstr "Príliš nízka teplota na vytlačenie"
-
 #, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "Čaká sa na uzavretie Moonraker Websocket"
@@ -1126,37 +1138,6 @@ msgstr "Moonraker: pripojený"
 msgid "Initializing Klipper Connection"
 msgstr "Inicializácia pripojenia Klipper"
 
-#~ msgid "Last Used"
-#~ msgstr "Naposledy Použité"
-
-#~ msgid "Last used"
-#~ msgstr "Naposledy použité"
-
-#~ msgid "Error getting active spool"
-#~ msgstr "Chyba pri získavaní aktívnej cievky"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "Nedá sa pripojiť k Moonrakeru"
-
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "Stratené spojenie s Moonrakerom"
-
-#, python-format
-#~ msgid "Apply %s%.3f offset to Endstop?"
-#~ msgstr "Potvrdiť %s%.3f offset koncového spínača?"
-
-#, python-format
-#~ msgid "Apply %s%.3f offset to Probe?"
-#~ msgstr "Potvrdiť %s%.3f offset sondy?"
-
-#~ msgid "DPMS has failed to load and has been disabled"
-#~ msgstr "Načítanie systému DPMS sa nepodarilo a systém bol deaktivovaný"
-
-#~ msgid "Max:"
-#~ msgstr "Max:"
-
-#~ msgid "No elegible macros:"
-#~ msgstr "Žiadne použiteľné makrá:"
-
-#~ msgid "Password saved"
-#~ msgstr "Heslo uložené"
+#, fuzzy
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper nereaguje po niekoľkých pokusoch"

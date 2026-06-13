@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 20:03-0300\n"
+"POT-Creation-Date: 2026-06-10 20:07-0300\n"
 "PO-Revision-Date: 2026-04-23 21:28+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/klipperscreen/"
@@ -186,8 +186,13 @@ msgstr "זמן 24 שעות"
 msgid "Disable for 12hs with am / pm"
 msgstr "השבתה ל-12 שעות עם am/pm"
 
-msgid "Macro shortcut on sidebar"
-msgstr "קיצור מקרו בסרגל הצד"
+#, fuzzy
+msgid "Action bar Shortcut"
+msgstr "קיצור דרך לסרגל הפעולות"
+
+#, fuzzy
+msgid "LEDs"
+msgstr "LEDs"
 
 msgid "Font Size"
 msgstr "גודל טקסט"
@@ -320,6 +325,16 @@ msgstr[0] "דקה"
 msgstr[1] "דקות"
 msgstr[2] "דקות"
 msgstr[3] "דקות"
+
+#, fuzzy
+msgid "Temperature too low to extrude"
+msgstr "הטמפרטורה נמוכה מדי להזרמה"
+
+msgid "Klipper will reboot"
+msgstr "קליפר יבצע אתחול"
+
+msgid "Save configuration?"
+msgstr "שמור קונפיגרציה?"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "האם אתה בטוח שאתה רוצה לבצע עצירת חירום?"
@@ -593,12 +608,6 @@ msgstr "מדוד Y"
 msgid "Measure Both"
 msgstr "מדוד את שניהם"
 
-msgid "Klipper will reboot"
-msgstr "קליפר יבצע אתחול"
-
-msgid "Save configuration?"
-msgstr "שמור קונפיגרציה?"
-
 msgid "Check ADXL Wiring"
 msgstr "בדוק את החיווט של ה ADXL"
 
@@ -799,6 +808,18 @@ msgid "Z Speed (mm/s)"
 msgstr "מהירות Z (mm/s)"
 
 #, fuzzy
+msgid "Advanced Move"
+msgstr "תנועה מתקדמת"
+
+#, fuzzy
+msgid "Query Endstops"
+msgstr "שאילתת מגופי קצה"
+
+#, fuzzy
+msgid "Invalid position"
+msgstr "מיקום לא תקין"
+
+#, fuzzy
 msgid "Failed to initialize"
 msgstr ","
 
@@ -806,11 +827,18 @@ msgid "Interface"
 msgstr "ממשק"
 
 #, fuzzy
-msgid "No wireless interface has been found"
-msgstr ","
+msgid "No network devices have been found"
+msgstr "לא נמצאו מכשירי רשת"
+
+#, fuzzy
+msgid "No network devices available"
+msgstr "אין מכשירי רשת זמינים"
 
 msgid "Connected"
 msgstr "מחובר"
+
+msgid "Channel"
+msgstr "ערוץ"
 
 #, fuzzy, python-format
 msgid "Do you want to forget or disconnect %s?"
@@ -834,9 +862,6 @@ msgstr ","
 #, python-format
 msgid "Connecting to %s"
 msgstr "מתחבר ל- %s"
-
-msgid "Channel"
-msgstr "ערוץ"
 
 msgid "Hostname"
 msgstr "שם שרת"
@@ -1159,6 +1184,10 @@ msgid "Abort"
 msgstr "בטל"
 
 #, fuzzy
+msgid "Calibration commands not available yet"
+msgstr "פקודות כיול עדיין לא זמינות"
+
+#, fuzzy
 msgid "Error: Couldn't get a position to probe"
 msgstr "שגיאה: לא ניתן לקבל מיקום לבדיקה"
 
@@ -1218,27 +1247,6 @@ msgid "Klipper has shutdown"
 msgstr "קליפר כבה"
 
 #, fuzzy
-msgid "No eligible macros:"
-msgstr "מאקרוס ללא זכאות:"
-
-#, fuzzy
-msgid "macros with a name starting with '_' are hidden"
-msgstr "מאקרוס עם שם המתחיל ב-'_' מוסתרים"
-
-#, fuzzy
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "מאקרוס המשמשים 'rename_existing' מוסתרים"
-
-#, fuzzy
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT מוסתרים ויש להשתמש בהם דרך ה-diafilament"
-
-#, fuzzy
-msgid "Temperature too low to extrude"
-msgstr "הטמפרטורה נמוכה מדי להזרמה"
-
-#, fuzzy
 msgid "Waiting for Moonraker Websocket to close"
 msgstr "ממתין לסיום סגירת Websocket של Moonraker"
 
@@ -1250,264 +1258,5 @@ msgid "Initializing Klipper Connection"
 msgstr "אתחול חיבור לKlipper"
 
 #, fuzzy
-#~ msgid "Last Used"
-#~ msgstr "שימוש אחרון"
-
-#, fuzzy
-#~ msgid "Last used"
-#~ msgstr "שימוש אחרון"
-
-#, fuzzy
-#~ msgid "Error getting active spool"
-#~ msgstr "שגיאה בקבלת סליל פעיל"
-
-#~ msgid "Cannot connect to Moonraker"
-#~ msgstr "לא ניתן להתחבר ל-Moonraker"
-
-#, fuzzy
-#~ msgid "Lost Connection to Moonraker"
-#~ msgstr "אובדן חיבור ל-Moonraker"
-
-#~ msgid "Password saved"
-#~ msgstr "הסיסמה נשמרה"
-
-#~ msgid "Hide temp."
-#~ msgstr "הסתר טמפרטורה"
-
-#~ msgid "PSK for"
-#~ msgstr "PSK עבור"
-
-#~ msgid "Uploaded"
-#~ msgstr "הועלה"
-
-#~ msgid "Hidden"
-#~ msgstr "מוסתר"
-
-#~ msgid "Print Time"
-#~ msgstr "זמן הדפסה"
-
-#~ msgid "dBm"
-#~ msgstr "dBm"
-
-#~ msgid "Deselect"
-#~ msgstr "בטל את הבחירה"
-
-#~ msgid "Select"
-#~ msgstr "בחר"
-
-#~ msgid "Bed screw configuration:"
-#~ msgstr "הגדרת בורג מיטה"
-
-#~ msgid ""
-#~ "Not supported for auto-detection, it needs to be configured in "
-#~ "klipperscreen.conf"
-#~ msgstr "איתור אוטומטי אינו נתמך, זה צריך להיות מוגדר ב klipperscreen"
-
-#~ msgid "Unknown screw position"
-#~ msgstr "מיקום בורג לא ידוע"
-
-#~ msgid "Max Acceleration to Deceleration"
-#~ msgstr "האצה מרבית להאטה"
-
-#~ msgid "Continue"
-#~ msgstr "המשך"
-
-#~ msgid "Actions"
-#~ msgstr "פעולות"
-
-#~ msgid "Configuration"
-#~ msgstr "קונפיגורציה"
-
-#~ msgid "Homing"
-#~ msgstr "איפוס צירים"
-
-#~ msgid "Disable XY"
-#~ msgstr "השבת את XY"
-
-#~ msgid "Slicer Time correction (%)"
-#~ msgstr "תיקון זמן פריסה (%)"
-
-#~ msgid "Calibrated, save configuration to make it permanent"
-#~ msgstr "מכויל, שמור את התצורה כדי שהיא תהיה קבועה"
-
-#~ msgid "Decrease"
-#~ msgstr "הורד"
-
-#~ msgid "Increase"
-#~ msgstr "הגדל"
-
-#, python-format
-#~ msgid "Sending Power ON signal to: %s"
-#~ msgstr "שולח אות הפעלה אל: %s"
-
-#~ msgid "Sort:"
-#~ msgstr "מיין"
-
-#~ msgid "Calibrating..."
-#~ msgstr "מכייל..."
-
-#~ msgid "Z+"
-#~ msgstr "Z+"
-
-#~ msgid "Z-"
-#~ msgstr "Z-"
-
-#~ msgid "X+"
-#~ msgstr "X+"
-
-#~ msgid "X-"
-#~ msgstr "X-"
-
-#~ msgid "Y+"
-#~ msgstr "Y+"
-
-#~ msgid "Y-"
-#~ msgstr "Y-"
-
-#, python-format
-#~ msgid "Retry #%s"
-#~ msgstr "נסה שוב #%s"
-
-#~ msgid "Add Printer"
-#~ msgstr "הוסף מדפסת"
-
-#~ msgid "Initializing"
-#~ msgstr "מאתחל"
-
-#~ msgid "Off"
-#~ msgstr "כבוי"
-
-#~ msgid "View Mesh"
-#~ msgstr "צפה ברשת"
-
-#~ msgid "Machine"
-#~ msgstr "מכונה"
-
-#~ msgid "Manual Calibration"
-#~ msgstr "כיול ידני"
-
-#~ msgid "Auto Calibration"
-#~ msgstr "כיול אוטומטי"
-
-#~ msgid "Sort by: "
-#~ msgstr "מיין לפי: "
-
-#~ msgid "Bltouch found applied offset"
-#~ msgstr "Bltouch נמצא היסט מוחל"
-
-#~ msgid ""
-#~ "Check /tmp/KlipperScreen.log for more information.\n"
-#~ "Please submit an issue on GitHub for help."
-#~ msgstr ""
-#~ "בדוק KlipperScreen.log, בתיקית tmp ליותר פרטים.\n"
-#~ "אנא שלח דוח תקלה ב- GITHUB, לעזרה."
-
-#~ msgid "Probe found applied offset"
-#~ msgstr "Probe נמצא היסט מוחל"
-
-#~ msgid "Tool"
-#~ msgstr "כלי"
-
-#~ msgid "Displayed Macros"
-#~ msgstr "מוצגים מאקרו"
-
-#~ msgid "Z Position"
-#~ msgstr "מיקום Z"
-
-#~ msgid "IPv4"
-#~ msgstr "IPv4"
-
-#~ msgid "IPv6"
-#~ msgstr "IPv6"
-
-#~ msgid "Unknown Heater "
-#~ msgstr "מחמם לא ידוע "
-
-#~ msgid "Klipper Version"
-#~ msgstr "גרסא של קליפר"
-
-#~ msgid ""
-#~ "Klipper has encountered an error with the micro-controller.\n"
-#~ "Please recompile and flash."
-#~ msgstr ""
-#~ "קליפר נתקל בשגיאה בבקר המיקרו.\n"
-#~ "אנא הידור מחדש והבהב."
-
-#~ msgid ""
-#~ "Klipper has encountered an error.\n"
-#~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
-#~ msgstr ""
-#~ "קליפר נתקל בבעיה. \n"
-#~ "נסה להריץ firmware_restart, כדי לפתור את הבעיה."
-
-#~ msgid "KlipperScreen Version"
-#~ msgstr "גרסא של KlipperScreen"
-
-#~ msgid "Show Only Heaters in Temp."
-#~ msgstr "הצג רק מחממים בטמפ'."
-
-#~ msgid "Temp"
-#~ msgstr "טמפ'"
-
-#~ msgid "Number Pad"
-#~ msgstr "פד נומרי"
-
-#~ msgid "Preheat"
-#~ msgstr "חימום מראש"
-
-#~ msgid "Screen will show in less than one second"
-#~ msgstr "המסך יופיע תוך פחות משנייה אחת"
-
-#~ msgid "Medium (default)"
-#~ msgstr "בינוני (ברירת מחדל)"
-
-#~ msgid "File Estimation (default)"
-#~ msgstr "קובץ (ברירת מחדל)"
-
-#~ msgid "Fan Off"
-#~ msgstr "כבה מאוורר"
-
-#~ msgid "Fan On"
-#~ msgstr "הפעל מאוורר"
-
-#~ msgid "Fast"
-#~ msgstr "מהיר"
-
-#~ msgid "Slow"
-#~ msgstr "האט"
-
-#~ msgid "?"
-#~ msgstr "?"
-
-#~ msgid "Cancel Change"
-#~ msgstr "בטל שינוי"
-
-#~ msgid "Control"
-#~ msgstr "שליטה"
-
-#~ msgid "Load Average"
-#~ msgstr "עומס ממוצע"
-
-#~ msgid "Back"
-#~ msgstr "חזור"
-
-#~ msgid "Extrusion"
-#~ msgstr "שיחול"
-
-#~ msgid "Fan +"
-#~ msgstr "מאוורר +"
-
-#~ msgid "Fan -"
-#~ msgstr "מאוורר -"
-
-#~ msgid "System Information"
-#~ msgstr "מידע אודות המערכת"
-
-#~ msgid "Time Elapsed"
-#~ msgstr "זמן שעבר"
-
-#~ msgid "Time Left"
-#~ msgstr "זמן שנשאר"
-
-#~ msgid "Tool 1"
-#~ msgstr "כלי 1"
+msgid "Klipper not responding after multiple attempts"
+msgstr "Klipper לא מגיב לאחר מספר ניסיונות"
