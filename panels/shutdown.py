@@ -71,9 +71,9 @@ class Panel(ScreenPanel):
             title = _("Shutdown")
         buttons = []
         if (
-            self._screen.apiclient is None
-            or "127.0.0.1" in self._screen.apiclient.endpoint
-            or "localhost" in self._screen.apiclient.endpoint
+            self._screen.restApi is None
+            or "127.0.0.1" in self._screen.restApi.endpoint
+            or "localhost" in self._screen.restApi.endpoint
         ):
             buttons.append(
                 {
@@ -83,7 +83,7 @@ class Panel(ScreenPanel):
                 }
             )
         else:
-            logging.info(self._screen.apiclient.endpoint)
+            logging.info(self._screen.restApi.endpoint)
             buttons.extend(
                 [
                     {"name": _("Host"), "response": Gtk.ResponseType.OK, "style": "dialog-info"},

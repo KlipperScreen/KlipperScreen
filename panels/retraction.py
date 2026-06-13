@@ -74,7 +74,7 @@ class Panel(ScreenPanel):
         self.content.show_all()
 
     def activate(self):
-        self._screen._ws.klippy.gcode_script("GET_RETRACTION")
+        self._screen._ws.api.gcode_script("GET_RETRACTION")
 
     def process_update(self, action, data):
         if action == "notify_status_update" and "firmware_retraction" in data:
@@ -151,10 +151,10 @@ class Panel(ScreenPanel):
         value = self.list[opt]["scale"].get_value()
 
         if opt == "retract_speed":
-            self._screen._ws.klippy.gcode_script(f"SET_RETRACTION RETRACT_SPEED={value}")
+            self._screen._ws.api.gcode_script(f"SET_RETRACTION RETRACT_SPEED={value}")
         elif opt == "retract_length":
-            self._screen._ws.klippy.gcode_script(f"SET_RETRACTION RETRACT_LENGTH={value}")
+            self._screen._ws.api.gcode_script(f"SET_RETRACTION RETRACT_LENGTH={value}")
         elif opt == "unretract_extra_length":
-            self._screen._ws.klippy.gcode_script(f"SET_RETRACTION UNRETRACT_EXTRA_LENGTH={value}")
+            self._screen._ws.api.gcode_script(f"SET_RETRACTION UNRETRACT_EXTRA_LENGTH={value}")
         elif opt == "unretract_speed":
-            self._screen._ws.klippy.gcode_script(f"SET_RETRACTION UNRETRACT_SPEED={value}")
+            self._screen._ws.api.gcode_script(f"SET_RETRACTION UNRETRACT_SPEED={value}")

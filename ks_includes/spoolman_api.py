@@ -2,27 +2,27 @@ import logging
 
 
 class SpoolmanAPI:
-    """Handles communication with the Spoolman proxy via Moonraker websocket."""
+    """Handles communication with the Spoolman proxy via Moonraker."""
 
-    def __init__(self, websocket_client):
-        self._ws = websocket_client
+    def __init__(self, client):
+        self._client = client
 
     def _send_request(self, method, params, callback):
-        """Send a JSON-RPC request via websocket with callback."""
+        """Send a JSON-RPC request via Moonraker with callback."""
 
         if callback is None:
             logging.error(f"Spoolman API: Attempted to call method '{method}' without a callback.")
             return False
 
-        if not self._ws.connected:
-            logging.warning("Spoolman: websocket not connected")
+        if not self._client.connected:
+            logging.warning("Spoolman: not connected")
             return False
 
         def wrapper(response, *args):
             result = response.get("result") if isinstance(response, dict) else response
             callback(result, *args)
 
-        self._ws.send_method(method, params, callback=wrapper)
+        self._client.send_method(method, params, callback=wrapper)
         return True
 
     def _make_request(self, http_method, path, callback, json_body=None, query=None):

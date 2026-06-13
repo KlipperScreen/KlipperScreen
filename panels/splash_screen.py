@@ -107,10 +107,10 @@ class Panel(ScreenPanel):
                         self.labels["power"].set_sensitive(False)
 
     def firmware_restart(self, widget):
-        self._screen._ws.klippy.restart_firmware()
+        self._screen._ws.api.restart_firmware()
 
     def restart_klipper(self, widget):
-        self._screen._ws.klippy.restart()
+        self._screen._ws.api.restart()
 
     def retry(self, widget):
         logging.debug("User retrying connection")

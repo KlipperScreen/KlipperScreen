@@ -75,9 +75,9 @@ class Panel(ScreenPanel):
     def on_switch(self, switch, gparam, device):
         logging.debug(f"Power toggled {device}")
         if switch.get_active():
-            self._screen._ws.klippy.power_device_on([device])
+            self._screen._ws.api.power_device_on([device])
         else:
-            self._screen._ws.klippy.power_device_off([device])
+            self._screen._ws.api.power_device_off([device])
 
     def process_update(self, action, data):
         if action != "notify_power_changed":

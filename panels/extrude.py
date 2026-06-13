@@ -327,7 +327,7 @@ class Panel(ScreenPanel):
             self.load_unload(widget, direction)
 
     def extrude(self, widget, direction):
-        self._screen._ws.klippy.gcode_script(KlippyGcodes.EXTRUDE_REL)
+        self._screen._ws.api.gcode_script(KlippyGcodes.EXTRUDE_REL)
         self._screen._send_action(
             widget,
             "printer.gcode.script",
@@ -356,13 +356,13 @@ class Panel(ScreenPanel):
 
     def enable_disable_fs(self, switch, gparams, name, x):
         if switch.get_active():
-            self._screen._ws.klippy.gcode_script(f"SET_FILAMENT_SENSOR SENSOR={name} ENABLE=1")
+            self._screen._ws.api.gcode_script(f"SET_FILAMENT_SENSOR SENSOR={name} ENABLE=1")
             if self._printer.get_stat(x, "filament_detected"):
                 self.labels[x]["box"].get_style_context().add_class("filament_sensor_detected")
             else:
                 self.labels[x]["box"].get_style_context().add_class("filament_sensor_empty")
         else:
-            self._screen._ws.klippy.gcode_script(f"SET_FILAMENT_SENSOR SENSOR={name} ENABLE=0")
+            self._screen._ws.api.gcode_script(f"SET_FILAMENT_SENSOR SENSOR={name} ENABLE=0")
             self.labels[x]["box"].get_style_context().remove_class("filament_sensor_empty")
             self.labels[x]["box"].get_style_context().remove_class("filament_sensor_detected")
 

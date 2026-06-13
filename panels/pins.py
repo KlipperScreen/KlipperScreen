@@ -91,7 +91,7 @@ class Panel(ScreenPanel):
         else:
             logging.error(f"unknown value for {widget} {event} {pin}")
             return
-        self._screen._ws.klippy.gcode_script(
+        self._screen._ws.api.gcode_script(
             f"SET_PIN PIN={' '.join(pin.split(' ')[1:])} VALUE={value}"
         )
         GLib.timeout_add_seconds(1, self.check_pin_value, pin, widget)

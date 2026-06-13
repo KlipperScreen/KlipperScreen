@@ -48,7 +48,7 @@ class ScreenPanel:
                 widget, _("Are you sure you want to run Emergency Stop?"), "printer.emergency_stop"
             )
         else:
-            self._screen._ws.klippy.emergency_stop()
+            self._screen._ws.api.emergency_stop()
 
     def load_image_async(self, filename, width, height, small=False, callback=None):
         if not self._files.has_thumbnail(filename):

@@ -264,7 +264,7 @@ class Panel(ScreenPanel):
         script = f"{KlippyGcodes.MOVE_RELATIVE}\nG0 {axis}{dist} F{speed}"
         self._screen._send_action(widget, "printer.gcode.script", {"script": script})
         if self._printer.get_stat("gcode_move", "absolute_coordinates"):
-            self._screen._ws.klippy.gcode_script("G90")
+            self._screen._ws.api.gcode_script("G90")
 
     def home(self, widget):
         if "delta" in self._printer.get_config_section("printer")["kinematics"]:

@@ -46,7 +46,7 @@ class Panel(ScreenPanel):
 
     def activate(self):
         if self._screen._ws and self._screen._ws.connected:
-            self._screen.close_websocket()
+            self._screen.close_connection()
             logging.debug("Waiting for disconnect")
             self._screen.base_panel.set_title(_("Please wait"))
             b: Gtk.Button

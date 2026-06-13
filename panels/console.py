@@ -146,7 +146,7 @@ class Panel(ScreenPanel):
         self._screen.remove_keyboard()
 
         self.add_gcode("command", time.time(), cmd)
-        self._screen._ws.klippy.gcode_script(cmd)
+        self._screen._ws.api.gcode_script(cmd)
 
     def activate(self):
         self.clear()

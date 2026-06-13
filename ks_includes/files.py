@@ -122,12 +122,12 @@ class KlippyFiles:
 
     def request_metadata(self, filename):
         if self.is_gcode(filename):
-            self._screen._ws.klippy.get_file_metadata(filename, self._callback)
+            self._screen._ws.api.get_file_metadata(filename, self._callback)
         else:
             logging.info("Not a gcode")
 
     def refresh_files(self):
-        self._screen._ws.klippy.get_file_list(self._callback)
+        self._screen._ws.api.get_file_list(self._callback)
 
     def run_callbacks(self, action, item):
         for cb in self.callbacks:
@@ -141,4 +141,4 @@ class KlippyFiles:
         return self.files[path]
 
     def get_dir_info(self, directory):
-        self._screen._ws.klippy.get_dir_info(self._callback, directory=directory)
+        self._screen._ws.api.get_dir_info(self._callback, directory=directory)
