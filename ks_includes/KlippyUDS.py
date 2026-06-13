@@ -24,7 +24,7 @@ class KlippyUDS(threading.Thread):
         threading.Thread.__init__(self)
         self._wst = None
         self._callback = callback
-        self.klippy = MoonrakerApi(self)
+        self.api = MoonrakerApi(self)
         self.sock = None
         self.closing = False
         self.socket_path = os.path.expanduser(socket_path)

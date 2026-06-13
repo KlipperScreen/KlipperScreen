@@ -129,7 +129,7 @@ class Panel(ScreenPanel):
         grid.attach(scale_grid, 0, 0, 3, 1)
 
         columns = 3 if self._screen.vertical_mode else 2
-        data_misc = self._screen.apiclient.send_request(
+        data_misc = self._screen.restApi.send_request(
             "server/database/item?namespace=mainsail&key=miscellaneous.entries"
         )
         if data_misc:

@@ -152,15 +152,15 @@ class Panel(ScreenPanel):
                     target -= int(self.tempdelta)
                     target = max(target, 0)
                 if heater.startswith("extruder"):
-                    self._screen._ws.klippy.set_tool_temp(
+                    self._screen._ws.api.set_tool_temp(
                         self._printer.get_tool_number(heater), target
                     )
                 elif heater.startswith("heater_bed"):
-                    self._screen._ws.klippy.set_bed_temp(target)
+                    self._screen._ws.api.set_bed_temp(target)
                 elif heater.startswith("heater_generic "):
-                    self._screen._ws.klippy.set_heater_temp(name, target)
+                    self._screen._ws.api.set_heater_temp(name, target)
                 elif heater.startswith("temperature_fan "):
-                    self._screen._ws.klippy.set_temp_fan_temp(name, target)
+                    self._screen._ws.api.set_temp_fan_temp(name, target)
                 else:
                     logging.info(f"Unknown heater: {heater}")
                     self._screen.show_popup_message(_("Unknown Heater") + " " + heater)
@@ -272,7 +272,7 @@ class Panel(ScreenPanel):
                     target = 0
                 if heater.startswith("extruder"):
                     if self.validate(heater, target, max_temp):
-                        self._screen._ws.klippy.set_tool_temp(
+                        self._screen._ws.api.set_tool_temp(
                             self._printer.get_tool_number(heater), target
                         )
                 elif heater.startswith("heater_bed"):
@@ -280,19 +280,19 @@ class Panel(ScreenPanel):
                         with suppress(KeyError):
                             target = self.preheat_options[setting]["bed"]
                     if self.validate(heater, target, max_temp):
-                        self._screen._ws.klippy.set_bed_temp(target)
+                        self._screen._ws.api.set_bed_temp(target)
                 elif heater.startswith("heater_generic "):
                     if target is None:
                         with suppress(KeyError):
                             target = self.preheat_options[setting]["heater_generic"]
                     if self.validate(heater, target, max_temp):
-                        self._screen._ws.klippy.set_heater_temp(name, target)
+                        self._screen._ws.api.set_heater_temp(name, target)
                 elif heater.startswith("temperature_fan "):
                     if target is None:
                         with suppress(KeyError):
                             target = self.preheat_options[setting]["temperature_fan"]
                     if self.validate(heater, target, max_temp):
-                        self._screen._ws.klippy.set_temp_fan_temp(name, target)
+                        self._screen._ws.api.set_temp_fan_temp(name, target)
             # This small delay is needed to properly update
             # the target if user configured something above
             # and then changed the target using preheat gcode
@@ -447,15 +447,15 @@ class Panel(ScreenPanel):
             return
 
         if self.active_heater.startswith("extruder"):
-            self._screen._ws.klippy.set_tool_temp(
+            self._screen._ws.api.set_tool_temp(
                 self._printer.get_tool_number(self.active_heater), temp
             )
         elif self.active_heater == "heater_bed":
-            self._screen._ws.klippy.set_bed_temp(temp)
+            self._screen._ws.api.set_bed_temp(temp)
         elif self.active_heater.startswith("heater_generic "):
-            self._screen._ws.klippy.set_heater_temp(name, temp)
+            self._screen._ws.api.set_heater_temp(name, temp)
         elif self.active_heater.startswith("temperature_fan "):
-            self._screen._ws.klippy.set_temp_fan_temp(name, temp)
+            self._screen._ws.api.set_temp_fan_temp(name, temp)
         else:
             logging.info(f"Unknown heater: {self.active_heater}")
             self._screen.show_popup_message(_("Unknown Heater") + " " + self.active_heater)

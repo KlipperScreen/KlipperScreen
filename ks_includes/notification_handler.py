@@ -3,7 +3,7 @@ import re
 
 
 class NotificationHandler:
-    """Handles routing of Moonraker websocket notifications"""
+    """Handles routing of Moonraker notifications"""
 
     def __init__(self, screen):
         self._screen = screen

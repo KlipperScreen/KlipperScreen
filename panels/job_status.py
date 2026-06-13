@@ -446,10 +446,10 @@ class Panel(ScreenPanel):
         self._gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.APPLY:
             if device == "probe":
-                self._screen._ws.klippy.gcode_script("Z_OFFSET_APPLY_PROBE")
+                self._screen._ws.api.gcode_script("Z_OFFSET_APPLY_PROBE")
             if device == "endstop":
-                self._screen._ws.klippy.gcode_script("Z_OFFSET_APPLY_ENDSTOP")
-            self._screen._ws.klippy.gcode_script("SAVE_CONFIG")
+                self._screen._ws.api.gcode_script("Z_OFFSET_APPLY_ENDSTOP")
+            self._screen._ws.api.gcode_script("SAVE_CONFIG")
 
     def restart(self, widget):
         buttons = [
@@ -468,8 +468,8 @@ class Panel(ScreenPanel):
         if self.filename:
             self.disable_button("restart")
             if self.state == "error":
-                self._screen._ws.klippy.gcode_script("SDCARD_RESET_FILE")
-            self._screen._ws.klippy.print_start(self.filename)
+                self._screen._ws.api.gcode_script("SDCARD_RESET_FILE")
+            self._screen._ws.api.print_start(self.filename)
             logging.info(f"Starting print: {self.filename}")
             self.new_print()
         else:
@@ -511,7 +511,7 @@ class Panel(ScreenPanel):
         logging.debug("Canceling print")
         self.set_state("cancelling")
         self.disable_button("pause", "resume", "cancel")
-        self._screen._ws.klippy.print_cancel()
+        self._screen._ws.api.print_cancel()
 
     def close_panel(self, widget=None):
         if self.can_close:
@@ -982,7 +982,7 @@ class Panel(ScreenPanel):
                 f"{float(self.file_metadata['filament_total']) / 1000:.1f} m"
             )
         if "job_id" in self.file_metadata and self.file_metadata["job_id"]:
-            self._screen._ws.klippy.get_single_job_history(
+            self._screen._ws.api.get_single_job_history(
                 self.file_metadata["job_id"], self.set_last_time
             )
 

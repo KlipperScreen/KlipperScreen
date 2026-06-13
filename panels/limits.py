@@ -148,14 +148,12 @@ class Panel(ScreenPanel):
         value = self.limits[opt]["scale"].get_value()
 
         if opt == "max_accel":
-            self._screen._ws.klippy.gcode_script(f"SET_VELOCITY_LIMIT ACCEL={value}")
+            self._screen._ws.api.gcode_script(f"SET_VELOCITY_LIMIT ACCEL={value}")
         elif opt == "minimum_cruise_ratio":
-            self._screen._ws.klippy.gcode_script(
+            self._screen._ws.api.gcode_script(
                 f"SET_VELOCITY_LIMIT MINIMUM_CRUISE_RATIO={value / 100}"
             )
         elif opt == "max_velocity":
-            self._screen._ws.klippy.gcode_script(f"SET_VELOCITY_LIMIT VELOCITY={value}")
+            self._screen._ws.api.gcode_script(f"SET_VELOCITY_LIMIT VELOCITY={value}")
         elif opt == "square_corner_velocity":
-            self._screen._ws.klippy.gcode_script(
-                f"SET_VELOCITY_LIMIT SQUARE_CORNER_VELOCITY={value}"
-            )
+            self._screen._ws.api.gcode_script(f"SET_VELOCITY_LIMIT SQUARE_CORNER_VELOCITY={value}")

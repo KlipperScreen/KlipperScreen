@@ -23,7 +23,7 @@ class Panel(ScreenPanel):
         self.sysinfo = screen.printer.system_info
         if not self.sysinfo:
             logging.debug("Asking for info")
-            self.sysinfo = screen.apiclient.send_request("machine/system_info")
+            self.sysinfo = screen.restApi.send_request("machine/system_info")
             if "system_info" in self.sysinfo:
                 screen.printer.system_info = self.sysinfo["system_info"]
                 self.sysinfo = self.sysinfo["system_info"]

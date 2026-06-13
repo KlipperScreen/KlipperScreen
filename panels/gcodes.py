@@ -101,7 +101,7 @@ class Panel(ScreenPanel):
         self.main.add(self.scroll)
         self.content.add(self.main)
         self.set_loading(True)
-        self._screen._ws.klippy.get_dir_info(self.load_files, self.cur_directory)
+        self._screen._ws.api.get_dir_info(self.load_files, self.cur_directory)
 
     def switch_view_mode(self, widget):
         self.list_mode ^= True
@@ -396,7 +396,7 @@ class Panel(ScreenPanel):
             return
         elif response_id == Gtk.ResponseType.OK:
             logging.info(f"Starting print: {filename}")
-            self._screen._ws.klippy.print_start(filename)
+            self._screen._ws.api.print_start(filename)
         elif response_id == Gtk.ResponseType.REJECT:
             self.confirm_delete_file(None, f"gcodes/{filename}")
 
@@ -464,7 +464,7 @@ class Panel(ScreenPanel):
                 _("Estimated Time") + f": <b>{self.format_time(fileinfo['estimated_time'])}</b>\n"
             )
         if "job_id" in fileinfo:
-            history = self._screen.apiclient.send_request(
+            history = self._screen.restApi.send_request(
                 f"server/history/job?uid={fileinfo['job_id']}"
             )
             if history and history["job"]["status"] == "completed":
@@ -535,7 +535,7 @@ class Panel(ScreenPanel):
         self.set_loading(True)
         for child in self.flowbox.get_children():
             self.flowbox.remove(child)
-        self._screen._ws.klippy.get_dir_info(self.load_files, self.cur_directory)
+        self._screen._ws.api.get_dir_info(self.load_files, self.cur_directory)
 
     def set_loading(self, loading):
         self.loading = loading

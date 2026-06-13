@@ -168,7 +168,7 @@ class KlippyGtk:
         KlippyGtk.PixbufFromFile.cache_clear()
 
     def PixbufFromHttp(self, resource, width=-1, height=-1):
-        response = self.screen.apiclient.get_thumbnail_stream(resource)
+        response = self.screen.restApi.get_thumbnail_stream(resource)
         if response is False:
             return None
         stream = Gio.MemoryInputStream.new_from_data(response, None)

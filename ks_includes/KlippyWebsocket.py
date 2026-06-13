@@ -52,7 +52,7 @@ class KlippyWebsocket(threading.Thread):
         self._wst = None
         self.ws_url = None
         self._callback = callback
-        self.klippy = MoonrakerApi(self)
+        self.api = MoonrakerApi(self)
         self.ws = None
         self.closing = False
         self.host = host

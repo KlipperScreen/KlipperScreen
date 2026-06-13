@@ -127,9 +127,9 @@ class Panel(ScreenPanel):
         value = self.devices[fan]["scale"].get_value()
 
         if fan == "fan":
-            self._screen._ws.klippy.gcode_script(f"M106 S{value * 2.55:.0f}")
+            self._screen._ws.api.gcode_script(f"M106 S{value * 2.55:.0f}")
         else:
-            self._screen._ws.klippy.gcode_script(
+            self._screen._ws.api.gcode_script(
                 f"SET_FAN_SPEED FAN={fan.split()[1]} SPEED={float(value) / 100}"
             )
         # Check the speed in case it wasn't applied

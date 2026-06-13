@@ -107,11 +107,11 @@ class Panel(ScreenPanel):
     def set_opt_value(self, widget, event, opt):
         value = self.list[opt]["scale"].get_value()
         if opt == "pressure_advance":
-            self._screen._ws.klippy.gcode_script(
+            self._screen._ws.api.gcode_script(
                 f"SET_PRESSURE_ADVANCE EXTRUDER={self.current_extruder} ADVANCE={value}"
             )
         if opt == "smooth_time":
-            self._screen._ws.klippy.gcode_script(
+            self._screen._ws.api.gcode_script(
                 f"SET_PRESSURE_ADVANCE EXTRUDER={self.current_extruder} SMOOTH_TIME={value}"
             )
 

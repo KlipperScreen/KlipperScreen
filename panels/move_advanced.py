@@ -162,7 +162,7 @@ class Panel(ScreenPanel):
                 ctx.add_class("endstop-open")
                 ctx.remove_class("endstop-triggered")
         if "QUERY_PROBE" in self._printer.available_commands:
-            self._screen._ws.klippy.gcode_script("QUERY_PROBE")
+            self._screen._ws.api.gcode_script("QUERY_PROBE")
 
     def process_update(self, action, data):
         if action == "notify_gcode_response" and "probe:" in data.lower():

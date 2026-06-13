@@ -75,7 +75,7 @@ class KlipperScreen(Gtk.Window):
         self.files = None
         self.printer = None
         self.printers = None
-        self.apiclient = None
+        self.restApi = None
         self._ws = None
 
         self.keyboard = None
@@ -237,15 +237,15 @@ class KlipperScreen(Gtk.Window):
             self.base_panel.show_printer_select(True)
             self.show_printer_select()
 
-    def close_websocket(self):
+    def close_connection(self):
         self._ws.close()
         self.printer.state = "disconnected"
 
     def connect_printer(self, name):
         self.state.printer_name = name
         if self._ws is not None and self._ws.connected:
-            self.printer_initializing("Waiting Websocket closure")
-            self.close_websocket()
+            self.printer_initializing(_("Waiting connection closure"))
+            self.close_connection()
             return
         self.printer_initializing(_("Initializing KlipperScreen"), True)
         gc.collect()
@@ -256,7 +256,7 @@ class KlipperScreen(Gtk.Window):
             0,
         )
         self.printer = self.printers[ind]["data"]
-        self.apiclient = KlippyRest(
+        self.restApi = KlippyRest(
             self.printers[ind][name]["moonraker_host"],
             self.printers[ind][name]["moonraker_port"],
             self.printers[ind][name]["moonraker_api_key"],
@@ -273,10 +273,10 @@ class KlipperScreen(Gtk.Window):
             logging.info("Using Unix domain socket for %s", name)
             self._ws = KlippyUDS(
                 {
-                    "on_connect": self.websocket_connected,
-                    "on_message": self._websocket_callback,
-                    "on_close": self.websocket_disconnected,
-                    "on_error": self.websocket_error,
+                    "on_connect": self.socket_connected,
+                    "on_message": self._socket_callback,
+                    "on_close": self.socket_disconnected,
+                    "on_error": self.socket_error,
                 },
                 moonraker_host,
                 self.printers[ind][name]["moonraker_port"],
@@ -286,10 +286,10 @@ class KlipperScreen(Gtk.Window):
         else:
             self._ws = KlippyWebsocket(
                 {
-                    "on_connect": self.websocket_connected,
-                    "on_message": self._websocket_callback,
-                    "on_close": self.websocket_disconnected,
-                    "on_error": self.websocket_error,
+                    "on_connect": self.socket_connected,
+                    "on_message": self._socket_callback,
+                    "on_close": self.socket_disconnected,
+                    "on_error": self.socket_error,
                 },
                 moonraker_host,
                 self.printers[ind][name]["moonraker_port"],
@@ -380,7 +380,7 @@ class KlipperScreen(Gtk.Window):
         for led in self.printer.get_leds():
             requested_updates["objects"][led] = ["color_data"]
 
-        self._ws.klippy.object_subscription(requested_updates)
+        self._ws.api.object_subscription(requested_updates)
 
     @staticmethod
     def _load_panel(panel):
@@ -815,23 +815,22 @@ class KlipperScreen(Gtk.Window):
     def show_printer_select(self, widget=None):
         self.show_panel("printer_select", remove_all=True)
 
-    def websocket_error(self, status):
+    def socket_error(self, status):
         self.last_error = f"{status}"
 
-    def websocket_connected(self):
-        logging.debug("### websocket_connected")
+    def socket_connected(self):
         self.printer_initializing(_("Moonraker Connected"))
-        self._ws.klippy.identify_client(functions.get_software_version(), self._ws.api_key)
+        self._ws.api.identify_client(functions.get_software_version(), self._ws.api_key)
         self.state.reinit_count = 0
         self.state.klippy_retry_count = 0
         self.last_error = ""
         self.state.connected = True
         self.state.connecting = False
         self.base_panel.set_ks_printer_cfg(self.state.printer_name)
-        self._ws.klippy.query_server_info(self.init_moonraker_components)
+        self._ws.api.query_server_info(self.init_moonraker_components)
 
-    def websocket_disconnected(self, status):
-        logging.debug("### websocket_disconnected")
+    def socket_disconnected(self, status):
+        logging.debug("### disconnected")
         self.printer.state = "disconnected"
         go_to_splash = self.state.connected  # Go to splashscreen if it was connected
         self.state.connected = False
@@ -938,7 +937,7 @@ class KlipperScreen(Gtk.Window):
         else:
             self.show_panel(home)
 
-    def _websocket_callback(self, action, data):
+    def _socket_callback(self, action, data):
         self._notification_handler.handle(action, data)
 
     def get_active_spool(self):
@@ -1025,13 +1024,13 @@ class KlipperScreen(Gtk.Window):
     def save(self, dialog, response_id):
         self.gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.OK:
-            self._ws.klippy.gcode_script("SAVE_CONFIG")
+            self._ws.api.gcode_script("SAVE_CONFIG")
         if response_id == "Z_OFFSET_APPLY_PROBE":
-            self._ws.klippy.gcode_script("Z_OFFSET_APPLY_PROBE")
-            self._ws.klippy.gcode_script("SAVE_CONFIG")
+            self._ws.api.gcode_script("Z_OFFSET_APPLY_PROBE")
+            self._ws.api.gcode_script("SAVE_CONFIG")
         if response_id == "Z_OFFSET_APPLY_ENDSTOP":
-            self._ws.klippy.gcode_script("Z_OFFSET_APPLY_ENDSTOP")
-            self._ws.klippy.gcode_script("SAVE_CONFIG")
+            self._ws.api.gcode_script("Z_OFFSET_APPLY_ENDSTOP")
+            self._ws.api.gcode_script("SAVE_CONFIG")
 
     def _confirm_send_action(self, widget, text, method, params=None):
         buttons = [
@@ -1104,9 +1103,9 @@ class KlipperScreen(Gtk.Window):
     def power_devices(self, widget=None, devices=None, on=False):
         devs = self.search_power_devices(devices)
         if on:
-            self._ws.klippy.power_device_on(devs)
+            self._ws.api.power_device_on(devs)
         else:
-            self._ws.klippy.power_device_off(devs)
+            self._ws.api.power_device_off(devs)
 
     def _init_printer(self, msg, go_to_splash=False):
         self.printer_initializing(msg, go_to_splash)
@@ -1123,7 +1122,7 @@ class KlipperScreen(Gtk.Window):
 
     def connect_to_moonraker(self):
         if self._ws.closing:
-            self.printer_initializing(_("Waiting for Moonraker Websocket to close"))
+            self.printer_initializing(_("Waiting for Moonraker connection to close"))
             return True
         self._ws.initial_connect()
         return False
@@ -1154,9 +1153,9 @@ class KlipperScreen(Gtk.Window):
         if popup:
             self.show_popup_message(popup, level)
         if "power" in self.server_info["components"]:
-            self._ws.klippy.get_power_devices(self.set_power_devices)
+            self._ws.api.get_power_devices(self.set_power_devices)
         if "webcam" in self.server_info["components"]:
-            self._ws.klippy.list_webcams(self.set_cameras)
+            self._ws.api.list_webcams(self.set_cameras)
         if "spoolman" in self.server_info["components"]:
             self.printer.enable_spoolman()
         self.init_klipper()
@@ -1175,14 +1174,14 @@ class KlipperScreen(Gtk.Window):
             self._init_printer("Unable to get printer info from moonraker")
             return
         printer_info = data["result"]
-        self._ws.klippy.query_configfile(self.set_configfile, printer_info)
+        self._ws.api.query_configfile(self.set_configfile, printer_info)
 
     def set_configfile(self, data, method, params, printer_info):
         if "error" in data:
             self._init_printer("Error getting printer configuration")
             return
         self.printer.reinit(printer_info, data["result"]["status"])
-        self._ws.klippy.get_printer_objects(self.set_objects)
+        self._ws.api.get_printer_objects(self.set_objects)
 
     def set_objects(self, data, method, params):
         if "error" in data:
@@ -1191,7 +1190,7 @@ class KlipperScreen(Gtk.Window):
         objects = data["result"]["objects"]
         self.printer.register_dynamic_sensors(objects)
         items = {item: None for item in objects}
-        self._ws.klippy.query_objects(items, self.query_objects)
+        self._ws.api.query_objects(items, self.query_objects)
 
     def query_objects(self, data, method, params):
         if "error" in data:
@@ -1223,16 +1222,16 @@ class KlipperScreen(Gtk.Window):
 
     def init_klipper(self):
         if not self.server_info:
-            self._ws.klippy.query_server_info(self.init_moonraker_components)
+            self._ws.api.query_server_info(self.init_moonraker_components)
             return
         if self.server_info["klippy_connected"] is False:
             msg = _("Moonraker: connected") + "\n\n"
             msg += f"Klipper: {self.server_info['klippy_state']}" + "\n\n"
             self.printer_initializing(msg)
-            self._ws.klippy.query_server_info(self._init_klipper_retry)
+            self._ws.api.query_server_info(self._init_klipper_retry)
             return
         self.printer_initializing(_("Initializing Klipper Connection"))
-        self._ws.klippy.get_printer_info(self.set_printer_info)
+        self._ws.api.get_printer_info(self.set_printer_info)
 
     def _init_klipper_retry(self, data, method, params):
         if not data.get("result", {}).get("klippy_connected", False):
@@ -1249,12 +1248,12 @@ class KlipperScreen(Gtk.Window):
         self.server_info = data["result"]
         self.state.klippy_retry_count = 0
         self.printer_initializing(_("Initializing Klipper Connection"))
-        self._ws.klippy.get_printer_info(self.set_printer_info)
+        self._ws.api.get_printer_info(self.set_printer_info)
 
     def _finish_init(self):
-        self._ws.klippy.get_available_commands(self.set_commands)
-        self._ws.klippy.get_system_info(self.set_system_info)
-        self._ws.klippy.get_server_config(self.set_server_config)
+        self._ws.api.get_available_commands(self.set_commands)
+        self._ws.api.get_system_info(self.set_system_info)
+        self._ws.api.get_server_config(self.set_server_config)
 
         self.ws_subscribe()
 
@@ -1271,7 +1270,7 @@ class KlipperScreen(Gtk.Window):
         self.log_notification("Printer Initialized", 1)
 
     def init_tempstore(self):
-        self._ws.klippy.get_temperature_store(self.set_tempstore)
+        self._ws.api.get_temperature_store(self.set_tempstore)
 
     def set_tempstore(self, data, method, params):
         temp_devices = self.printer.get_temp_devices()

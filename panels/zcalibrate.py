@@ -215,22 +215,22 @@ class Panel(ScreenPanel):
         self.buttons["start"].set_sensitive(False)
         self.dropdown.set_sensitive(False)
 
-        self._screen._ws.klippy.gcode_script("SET_GCODE_OFFSET Z=0")
+        self._screen._ws.api.gcode_script("SET_GCODE_OFFSET Z=0")
         if self._printer.config_section_exists("bed_mesh"):
-            self._screen._ws.klippy.gcode_script("BED_MESH_CLEAR")
+            self._screen._ws.api.gcode_script("BED_MESH_CLEAR")
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.klippy.gcode_script("G28")
+            self._screen._ws.api.gcode_script("G28")
         self._move_to_position(*self._get_calibration_location())
-        self._screen._ws.klippy.gcode_script(command)
+        self._screen._ws.api.gcode_script(command)
 
     def _move_to_position(self, x, y):
         if not x or not y:
             self._screen.show_popup_message(_("Error: Couldn't get a position to probe"))
             return
         logging.info(f"Lifting Z: {self.z_hop}mm {self.z_hop_speed}mm/s")
-        self._screen._ws.klippy.gcode_script(f"G91\nG0 Z{self.z_hop} F{self.z_hop_speed * 60}")
+        self._screen._ws.api.gcode_script(f"G91\nG0 Z{self.z_hop} F{self.z_hop_speed * 60}")
         logging.info(f"Moving to X:{x} Y:{y}")
-        self._screen._ws.klippy.gcode_script(f"G90\nG0 X{x} Y{y} F3000")
+        self._screen._ws.api.gcode_script(f"G90\nG0 X{x} Y{y} F3000")
 
     def _get_calibration_location(self):
         if self.ks_printer_cfg is not None:
@@ -322,11 +322,11 @@ class Panel(ScreenPanel):
         self.distance = distance
 
     def move(self, widget, direction):
-        self._screen._ws.klippy.gcode_script(f"TESTZ Z={direction}{self.distance}")
+        self._screen._ws.api.gcode_script(f"TESTZ Z={direction}{self.distance}")
 
     def accept(self, widget):
         logging.info("Accepting Z position")
-        self._screen._ws.klippy.gcode_script("ACCEPT")
+        self._screen._ws.api.gcode_script("ACCEPT")
 
     def buttons_calibrating(self):
         self.buttons["start"].get_style_context().remove_class("color3")

@@ -110,7 +110,7 @@ class Panel(ScreenPanel):
     def start_calibration(self, widget, method):
         self.labels["popover"].popdown()
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.klippy.gcode_script("G28")
+            self._screen._ws.api.gcode_script("G28")
         self.calibrating_axis = method
         if method == "x":
             self._screen._send_action(
@@ -132,7 +132,7 @@ class Panel(ScreenPanel):
         shaper_type_x = self.freq_xy_combo["shaper_type_x"].get_active_text()
         shaper_type_y = self.freq_xy_combo["shaper_type_y"].get_active_text()
 
-        self._screen._ws.klippy.gcode_script(
+        self._screen._ws.api.gcode_script(
             f"SET_INPUT_SHAPER "
             f"SHAPER_FREQ_X={shaper_freq_x} "
             f"SHAPER_TYPE_X={shaper_type_x} "
@@ -152,11 +152,11 @@ class Panel(ScreenPanel):
 
     def activate(self):
         # This will return the current values
-        self._screen._ws.klippy.gcode_script("SET_INPUT_SHAPER")
+        self._screen._ws.api.gcode_script("SET_INPUT_SHAPER")
         # Check for the accelerometer
-        self._screen._ws.klippy.gcode_script("ACCELEROMETER_QUERY")
+        self._screen._ws.api.gcode_script("ACCELEROMETER_QUERY")
         # Send at least two commands the first may fail, after a reboot
-        self._screen._ws.klippy.gcode_script("MEASURE_AXES_NOISE")
+        self._screen._ws.api.gcode_script("MEASURE_AXES_NOISE")
 
     def process_update(self, action, data):
         if action != "notify_gcode_response":
