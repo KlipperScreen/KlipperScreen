@@ -18,7 +18,11 @@ for FILE in ks_includes/locales/*; do
                  -U "$FILE/LC_MESSAGES/KlipperScreen.po" \
                  ks_includes/locales/KlipperScreen.pot
 
-        # Compile mo
+# Compile mo
         msgfmt -o "$FILE/LC_MESSAGES/KlipperScreen.mo" "$FILE/LC_MESSAGES/KlipperScreen.po"
+        rm "$FILE/LC_MESSAGES/KlipperScreen.po~" 2>/dev/null
     fi
 done
+
+# Remove any remaining backup files
+find ks_includes/locales -name "*~" -delete
