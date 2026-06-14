@@ -39,6 +39,12 @@ BACKEND="X" SERVICE="Y" NETWORK="Y" START=1 ./KlipperScreen/scripts/KlipperScree
 !!! tip
     If you need a custom location for the configuration file, you can add the `-c` or `--configfile` option to the systemd file and specify the desired location.
 
+## Graphical Backends
+
+KlipperScreen can be run under various backends like Xserver or Wayland compositors like Cage or Weston.
+
+See the [Backends page](Backends.md) for a detailed comparison and installation instructions.
+
 ## Moonraker Configuration
 
 1. Ensure that the IP of the device is a trusted client in `moonraker.conf`:

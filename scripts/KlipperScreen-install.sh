@@ -5,7 +5,8 @@ KSPATH=$(dirname "$SCRIPTPATH")
 KSENV="${KLIPPERSCREEN_VENV:-${HOME}/.KlipperScreen-env}"
 
 XSERVER="xinit xinput x11-xserver-utils xserver-xorg-input-evdev xserver-xorg-input-libinput xserver-xorg-legacy xserver-xorg-video-fbdev"
-CAGE="cage seatd xwayland"
+CAGE="cage seatd"
+WESTON="weston seatd"
 PYGOBJECT="libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0"
 MISC="librsvg2-common libopenjp2-7 libdbus-glib-1-dev autoconf python3-venv"
 OPTIONAL="fonts-nanum fonts-ipafont libmpv-dev"
@@ -36,14 +37,15 @@ install_graphical_backend()
     if [ -z "$BACKEND" ]; then
       echo_text ""
       echo_text "Choose graphical backend"
-      echo_ok "Default is Xserver"
-      echo_text "Wayland is EXPERIMENTAL, needs kms/drm drivers, and doesn't support DPMS"
+      echo_ok "Default is X11"
+      echo_text "Wayland requires working KMS/DRM drivers"
+      echo_error "KlipperScreen Wayland power management support is not yet implemented"
       echo_text ""
       echo "Press enter for default (Xserver)"
       read -r -e -p "Backend Xserver or Wayland (cage)? [X/w]" BACKEND
     fi
     if [[ "$BACKEND" =~ ^[wW]$ ]]; then
-        echo_text "Installing Wayland Cage Kiosk"
+        echo_text "Installing Cage"
         if sudo apt install -y $CAGE; then
             echo_ok "Installed Cage"
             BACKEND="W"
