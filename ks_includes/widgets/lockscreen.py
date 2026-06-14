@@ -41,6 +41,11 @@ class LockScreen:
     def lock(self, widget):
         self.screen._menu_go_back(None, True)
         logging.info("Locked the screen")
+
+        # Clear keybinding accumulators for security
+        if hasattr(self.screen, "keybinding_system") and self.screen.keybinding_system:
+            self.screen.keybinding_system.on_lock()
+
         close = Gtk.Button()
         close.connect("clicked", self.unlock)
         self.lock_box = Gtk.Box(

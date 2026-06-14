@@ -264,6 +264,26 @@ class KlipperScreenConfig:
                 numbers = [f"{option}" for option in config[section] if option != "gcode"]
             elif section.startswith("menu "):
                 strs = ("name", "icon", "panel", "method", "params", "enable", "confirm", "style")
+            elif section.startswith("keygroup "):
+                keygroup_name = section[9:].strip()
+                if not re.match(r"^[a-z][a-z0-9_]*$", keygroup_name):
+                    self.errors.append(
+                        f"Section [{section}]: name must be snake_case (lowercase with underscores)"
+                    )
+                strs = ("keys",)
+            elif section.startswith("accumulator "):
+                strs = ("handler",)
+                numbers = ("timeout",)
+            elif section.startswith("keybinding "):
+                keybinding_name = section[11:].strip()
+                if not re.match(r"^[a-z][a-z0-9_]*$", keybinding_name):
+                    self.errors.append(
+                        f"Section [{section}]: name must be snake_case (lowercase with underscores)"
+                    )
+                strs = ("key", "keys", "action", "buffer", "gcode", "panel", "confirm", "function")
+                bools = ("require_unlocked",)
+            elif section.startswith("panel "):
+                strs = ("keybindings",)
             elif (
                 section.startswith("graph")
                 or section.startswith("displayed_macros")

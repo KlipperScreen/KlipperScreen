@@ -26,6 +26,13 @@ from jinja2 import Environment
 from ks_includes import functions
 from ks_includes.config import KlipperScreenConfig
 from ks_includes.files import KlippyFiles
+from ks_includes.keybinding_system import (
+    AccumulatorManager,
+    KeyBindingManager,
+    KeyBindingResolver,
+    KeyBindingSystem,
+    KeyGroupManager,
+)
 from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.KlippyRest import KlippyRest
 from ks_includes.KlippyWebsocket import KlippyWebsocket
@@ -151,6 +158,27 @@ class KlipperScreen(Gtk.Window):
         self.style_provider = Gtk.CssProvider()
         self.screensaver = ScreenSaver(self)
         self.lock_screen = LockScreen(self)
+
+        # Initialize keybinding system
+        try:
+            self.keygroup_manager = KeyGroupManager(self._config)
+            self.accumulator_manager = AccumulatorManager(self._config)
+            self.keybinding_manager = KeyBindingManager(self._config, self.keygroup_manager)
+            self.keybinding_resolver = KeyBindingResolver(self._config, self.keybinding_manager)
+            self.keybinding_system = KeyBindingSystem(
+                self, self.keybinding_resolver, self.accumulator_manager
+            )
+            # Register built-in handlers
+            self.keybinding_system.register_handler("go_back", lambda: self.base_panel.back())
+            self.keybinding_system.register_handler(
+                "go_back_home", lambda: self._menu_go_back(home=True)
+            )
+            logging.info("Keybinding system initialized")
+        except Exception as e:
+            logging.error(f"Failed to initialize keybinding system: {e}")
+            # Create a minimal no-op keybinding system
+            self.keybinding_system = None
+
         self.gtk = KlippyGtk(self)
         self.base_css = ""
         self.load_base_styles()
@@ -1358,11 +1386,24 @@ class KlipperScreen(Gtk.Window):
             entry.set_sensitive(True)
 
     def _key_press_event(self, widget, event):
-        keyval_name = Gdk.keyval_name(event.keyval)
-        if keyval_name == "Escape":
-            self._menu_go_back(home=True)
-        elif keyval_name == "BackSpace" and len(self._cur_panels) > 1 and self.keyboard is None:
-            self.base_panel.back()
+        # Check if text entry has focus - pass through to GTK
+        focused = widget.get_focus()
+        if isinstance(focused, Gtk.Entry):
+            return False  # Let GTK handle text entry
+
+        # Check screensaver - only allow wake
+        if self.screensaver.is_showing:
+            self.screensaver.close()
+            return True
+
+        # Delegate to keybinding system if available
+        if self.keybinding_system:
+            handled = self.keybinding_system.handle_key_event(event)
+            if handled:
+                return True
+
+        # If keybinding system didn't handle it, ignore the key
+        return False
 
     def update_size(self, *args):
         width, height = self.get_size()
