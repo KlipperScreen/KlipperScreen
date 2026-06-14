@@ -1,5 +1,9 @@
 # Screen is using the wrong framebuffer
 
+!!! warning
+    THIS IS NOT APPLICABLE TO WAYLAND
+    Wayland compositors do not support framebuffer devices
+
 If you have multiple framebuffers, you may need to fix the X11 configuration,
 list the available framebuffers and check the current one:
 

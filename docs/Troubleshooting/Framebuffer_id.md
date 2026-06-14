@@ -1,5 +1,9 @@
 # Troubleshooting Framebuffer Issues
 
+!!! warning
+    THIS IS NOT APPLICABLE TO WAYLAND
+    Wayland compositors do not support framebuffer devices
+
 Here are some solutions if this line is in the logs:
 ```sh
 (EE) Cannot run in framebuffer mode. Please specify busIDs for all framebuffer devices
