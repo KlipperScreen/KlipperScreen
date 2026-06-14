@@ -261,6 +261,60 @@ icon: heat-up
 panel: preheat
 ```
 
+## Keybindings
+
+Keybindings provide keyboard navigation and customizable shortcuts. See the [Keybindings documentation](Keybindings.md) for complete details.
+
+### Quick Start
+
+```{ .ini }
+# Enable default Escape/Backspace behavior
+[include ~/KlipperScreen/keybindings/default_navigation.cfg]
+```
+
+### Section Types
+
+The keybinding system uses four configuration section types:
+
+**Keygroups** - Reusable sets of keys:
+```{ .ini }
+[keygroup lower_case]
+keys = a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z
+```
+
+**Accumulators** - Buffers that collect keystrokes:
+```{ .ini }
+[accumulator gcode_input]
+# Auto-clear after 2 seconds of inactivity
+timeout = 2.0
+```
+
+**Keybindings** - Named actions bound to keys:
+```{ .ini }
+[keybinding emergency_stop]
+key = F1
+action = exec_gcode
+gcode = M112
+confirm = Execute EMERGENCY STOP?
+require_unlocked = false
+```
+
+**Panel Assignment** - Assign keybindings to panels:
+```{ .ini }
+# Active on all panels
+[panel __global]
+keybindings = emergency_stop,nav_home
+
+# Active only on move panel
+[panel move]
+keybindings = move_up,move_down
+```
+
+!!! note
+    Section names (keygroups and keybindings) must use snake_case (lowercase with underscores).
+
+See [Keybindings.md](Keybindings.md) for action types, examples, and the extension API.
+
 ## KlipperScreen behaviour towards configuration
 
 KlipperScreen will search for a configuration file in the following order:
