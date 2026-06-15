@@ -673,7 +673,7 @@ class Panel(ScreenPanel):
         )
 
     def _show_fullscreen_dialog(self, pixbuf, filename, width, height):
-        if not self.get_parent():
+        if not self.content.get_parent():
             return
         if pixbuf is None:
             return
