@@ -177,3 +177,18 @@ def setup_logging(log_file):
     logging.captureWarnings(True)
 
     return listener, fh
+
+
+def run_systemctl(action):
+    try:
+        result = subprocess.run(
+            ["systemctl", action, "-i"],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        return result.returncode, result.stderr.strip() if result.stderr else ""
+    except subprocess.TimeoutExpired:
+        return -1, "Command timed out after 30 seconds"
+    except Exception as e:
+        return -1, str(e)

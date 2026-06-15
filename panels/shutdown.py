@@ -1,11 +1,11 @@
 import logging
-import os
 
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
+from ks_includes.functions import run_systemctl
 from ks_includes.screen_panel import ScreenPanel
 
 
@@ -106,19 +106,36 @@ class Panel(ScreenPanel):
 
     def reboot_poweroff_confirm(self, dialog, response_id, method):
         self._gtk.remove_dialog(dialog)
+
         if response_id == Gtk.ResponseType.ACCEPT:
             if method == "reboot":
                 self._screen._ws.send_method("machine.reboot")
-                os.system("systemctl reboot -i")
+                ret, err = run_systemctl("reboot")
+                if ret != 0:
+                    self._screen.show_popup_message(
+                        f"Failed to reboot host: {err if err else f'exit code {ret}'}"
+                    )
             else:
                 self.turn_off_power_devices()
                 self._screen._ws.send_method("machine.shutdown")
-                os.system("systemctl poweroff -i")
+                ret, err = run_systemctl("poweroff")
+                if ret != 0:
+                    self._screen.show_popup_message(
+                        f"Failed to power off host: {err if err else f'exit code {ret}'}"
+                    )
         elif response_id == Gtk.ResponseType.OK:
             if method == "reboot":
-                os.system("systemctl reboot -i")
+                ret, err = run_systemctl("reboot")
+                if ret != 0:
+                    self._screen.show_popup_message(
+                        f"Failed to reboot host: {err if err else f'exit code {ret}'}"
+                    )
             else:
-                os.system("systemctl poweroff -i")
+                ret, err = run_systemctl("poweroff")
+                if ret != 0:
+                    self._screen.show_popup_message(
+                        f"Failed to power off host: {err if err else f'exit code {ret}'}"
+                    )
         elif response_id == Gtk.ResponseType.APPLY:
             if method == "reboot":
                 self._screen._ws.send_method("machine.reboot")
