@@ -111,6 +111,7 @@ class Panel(ScreenPanel):
                 self._screen._ws.send_method("machine.reboot")
                 os.system("systemctl reboot -i")
             else:
+                self.turn_off_power_devices()
                 self._screen._ws.send_method("machine.shutdown")
                 os.system("systemctl poweroff -i")
         elif response_id == Gtk.ResponseType.OK:
@@ -126,7 +127,7 @@ class Panel(ScreenPanel):
                 self._screen._ws.send_method("machine.shutdown")
 
     def turn_off_power_devices(self):
-        if self.ks_printer_cfg is not None and self._screen._ws.connected:
+        if self.ks_printer_cfg is not None and self._screen.state.connected:
             power_devices = self.ks_printer_cfg.get("power_devices", "")
             if power_devices and self._printer.get_power_devices():
                 logging.info(f"Turning off associated power devices: {power_devices}")
