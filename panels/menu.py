@@ -106,8 +106,8 @@ class Panel(ScreenPanel):
 
     def evaluate_enable(self, enable):
         if enable == "{{ moonraker_connected }}":
-            logging.info(f"moonraker connected {self._screen._ws.connected}")
-            return self._screen._ws.connected
+            logging.info(f"moonraker connected {self._screen.state.connected}")
+            return self._screen.state.connected
         try:
             j2_temp = Template(enable, autoescape=True)
             return j2_temp.render(self.j2_data) == "True"

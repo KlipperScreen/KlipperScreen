@@ -66,7 +66,7 @@ class Panel(ScreenPanel):
 
     def show_restart_buttons(self):
         self.clear_action_bar()
-        if self.ks_printer_cfg is not None and self._screen._ws.connected:
+        if self.ks_printer_cfg is not None and self._screen.state.connected:
             power_devices = self.ks_printer_cfg.get("power_devices", "")
             if power_devices and self._printer and self._printer.get_power_devices():
                 logging.info(f"Associated power devices: {power_devices}")
@@ -139,7 +139,7 @@ class Panel(ScreenPanel):
                 "style": "dialog-error",
             },
         ]
-        if self._screen._ws.connected:
+        if self._screen.state.connected:
             buttons.insert(
                 1,
                 {
