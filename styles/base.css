@@ -157,6 +157,10 @@ combobox arrow:disabled {
 -gtk-icon-source: None;
 }
 
+combobox window.popup arrow {
+    background-color: transparent;
+}
+
 cellview {
     padding: 0.2em 0.25em 0.2em 0.1em;
     font-size: 0.91em;
