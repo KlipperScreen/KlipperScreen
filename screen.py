@@ -1117,9 +1117,13 @@ class KlipperScreen(Gtk.Window):
             logging.info("Stopping Retries")
             return False
         self.state.reinit_count += 1
-        if self._ws.connected and not self._ws.closing:
+        if self.state.reinit_count == 1:
+            self.connect_to_moonraker()
+        elif self._ws.connected and not self._ws.closing:
+            logging.info("Retry: waiting before reinitializing Klipper")
             GLib.timeout_add_seconds(4, self.init_klipper)
         else:
+            logging.info("Retry: waiting before connecting to Moonraker")
             GLib.timeout_add_seconds(4, self.connect_to_moonraker)
 
     def connect_to_moonraker(self):
