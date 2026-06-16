@@ -264,12 +264,11 @@ class KlipperScreenConfig:
                 numbers = [f"{option}" for option in config[section] if option != "gcode"]
             elif section.startswith("menu "):
                 strs = ("name", "icon", "panel", "method", "params", "enable", "confirm", "style")
-            elif (
-                section.startswith("graph")
-                or section.startswith("displayed_macros")
-                or section.startswith("spoolman")
-            ):
+            elif section.startswith("graph") or section.startswith("displayed_macros"):
                 bools = [f"{option}" for option in config[section]]
+            elif section.startswith("spoolman"):
+                numbers = ("sync_rate", "spool_low_limit")
+                bools = [f"{option}" for option in config[section] if option not in numbers]
             else:
                 self.errors.append(f"Section [{section}] not recognized")
 

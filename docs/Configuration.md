@@ -94,10 +94,6 @@ moonraker_port: 7125
 # Can be 'full' indicating that the full name is shown, 'short' for the first letter, or None (default) for no name
 # titlebar_name_type: None
 
-# Low limit for remaining spool weight in the title bar, in grams.
-# When the active spool drops below this value, the spool icon and weight turn red.
-# spool_low_limit: 20
-
 # Z probe calibrate position
 # By default it tries to guess the correct location
 # it will try using zero reference position, safe_z, mesh midddle, middle of axis length, etc
@@ -126,6 +122,21 @@ moonraker_port: 7125
 
 # Camera needs to be configured in moonraker:
 # https://moonraker.readthedocs.io/en/latest/configuration/#webcam
+
+# Low limit for remaining spool weight in the title bar, in grams.
+# When the active spool drops below this value, the spool icon and weight turn red.
+# Note: if you want a global option use the [spoolman] section
+# spool_low_limit: 20
+```
+
+## Spoolman Options
+```ini
+[spoolman]
+# Low limit for remaining spool weight in the title bar, in grams.
+# When the active spool drops below this value, the spool icon and weight turn red.
+# spool_low_limit: 20
+# Time in seconds between Spoolman syncs.
+# sync_rate: 20
 ```
 
 ## Preheat Options

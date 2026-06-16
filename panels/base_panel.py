@@ -353,7 +353,8 @@ class BasePanel(ScreenPanel):
 
     def set_spoolman_refresh(self):
         if self.spoolman_update is None:
-            self.spoolman_update = GLib.timeout_add_seconds(20, self.fetch_spoolman)
+            rate = self._config.get_config().getint("spoolman", "sync_rate", fallback=20)
+            self.spoolman_update = GLib.timeout_add_seconds(rate, self.fetch_spoolman)
 
     def get_printer_state(self):
         printing = self._printer and self._printer.state in {"printing", "paused"}
@@ -693,7 +694,12 @@ class BasePanel(ScreenPanel):
                 logging.info(f"Hidden sensors: {self.hidden_sensors}")
             else:
                 ScreenPanel.hidden_sensors = []
-            self.spoolman_low_limit = self.ks_printer_cfg.getfloat("spool_low_limit", fallback=20)
+            low_limit = self.ks_printer_cfg.getfloat("spool_low_limit", fallback=None)
+            if low_limit is None:
+                low_limit = self._config.get_config().getfloat(
+                    "spoolman", "spool_low_limit", fallback=20.0
+                )
+            self.spoolman_low_limit = low_limit
         else:
             self.titlebar_items = []
             ScreenPanel.hidden_sensors = []
