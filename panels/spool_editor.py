@@ -338,6 +338,7 @@ class Panel(ScreenPanel):
             and getattr(self._screen.printer, "active_spool_id", None) == self.spool.id
         ):
             self._screen.printer.active_spool["remaining_weight"] = result.get("remaining_weight")
+            self._screen.process_update("notify_active_spool_set", {"spool_id": self.spool.id})
         self._refresh_values()
         self._screen.show_popup_message(_("Filament weight updated"), 1)
         self._hide_numpad(None)

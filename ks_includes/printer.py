@@ -431,3 +431,5 @@ class Printer:
 
     def set_active_spool(self, spool_data):
         self.active_spool = spool_data
+        if isinstance(spool_data, dict) and "id" in spool_data:
+            self.active_spool_id = spool_data["id"]
