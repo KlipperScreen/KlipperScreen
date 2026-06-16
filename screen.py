@@ -47,6 +47,7 @@ klipperscreendir = pathlib.Path(__file__).parent.resolve()
 @dataclass
 class AppState:
     printer_name: str = ""
+    printer_is_local: bool = False
     connected: bool = False
     connecting: bool = False
     updating: bool = False
@@ -267,7 +268,8 @@ class KlipperScreen(Gtk.Window):
         self._notification_handler = NotificationHandler(self)
 
         moonraker_host = self.printers[ind][name]["moonraker_host"]
-        is_uds = moonraker_host.startswith("/") or moonraker_host.startswith("~")
+        is_uds = moonraker_host.startswith(("/", "~"))
+        self.state.printer_is_local = is_uds or moonraker_host in ("localhost", "127.0.0.1")
 
         if is_uds:
             logging.info("Using Unix domain socket for %s", name)

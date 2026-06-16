@@ -70,11 +70,7 @@ class Panel(ScreenPanel):
             label.set_label(_("Are you sure you wish to shutdown the system?"))
             title = _("Shutdown")
         buttons = []
-        if (
-            self._screen.restApi is None
-            or "127.0.0.1" in self._screen.restApi.endpoint
-            or "localhost" in self._screen.restApi.endpoint
-        ):
+        if self._screen.state.printer_is_local:
             buttons.append(
                 {
                     "name": _("Accept"),
