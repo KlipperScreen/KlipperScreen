@@ -1,5 +1,4 @@
 import logging
-import re
 
 import requests
 
@@ -37,8 +36,7 @@ class KlippyRest:
             self.status = ""
             return response.json() if json_response else response.content
         except Exception as e:
-            self.status = self.format_status(e)
-            logging.error(self.status.replace("\n", ">>"))
+            logging.error(e)
             return False
 
     def post_request(self, method, data=None, json=None, json_response=True):
@@ -47,24 +45,3 @@ class KlippyRest:
     def send_request(self, method, json=True, timeout=4):
         res = self._do_request(method, "get", json_response=json, timeout=timeout)
         return self.process_response(res) if json else res
-
-    @staticmethod
-    def format_status(status):
-        try:
-            rep = {
-                "HTTPConnectionPool": "",
-                "/server/info ": "",
-                "Caused by ": "",
-                "(": "",
-                ")": "",
-                ": ": "\n",
-                "'": "",
-                "`": "",
-                '"': "",
-            }
-            rep = {re.escape(k): v for k, v in rep.items()}
-            pattern = re.compile("|".join(rep.keys()))
-            status = pattern.sub(lambda m: rep[re.escape(m.group(0))], f"{status}").split("\n")
-            return "\n".join(_ for _ in status if "urllib3" not in _ and _ != "")
-        except TypeError or KeyError:
-            return status
