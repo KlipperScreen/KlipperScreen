@@ -462,7 +462,9 @@ class Panel(ScreenPanel):
         model = self._treeview.get_model()
         for row in model:
             spool = row[0]
-            if spool and (spool.id == current_id or spool.id == self._prev_active_id):
+            if not spool:
+                continue
+            if current_id is None or spool.id == current_id or spool.id == self._prev_active_id:
                 model.row_changed(row.path, row.iter)
 
         self._treeview.queue_draw()
