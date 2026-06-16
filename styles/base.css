@@ -709,3 +709,7 @@ keyboard_box {
 .no-padding {
     padding: 0;
 }
+
+.monospaced {
+    font-family: monospace;
+}
