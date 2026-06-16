@@ -82,7 +82,7 @@ class Panel(ScreenPanel):
 
         self.labels["ip"] = Gtk.Label(hexpand=True)
         if self.interface is not None:
-            self.labels["ip"].set_text(f"IP: {self.sdbus_nm.get_ip_for_interface(self.interface)}")
+            self.update_ip_label(self.interface)
 
         self.reload_button = self._gtk.Button("refresh", None, "color1", self.bts)
         self.reload_button.set_no_show_all(True)
@@ -101,7 +101,7 @@ class Panel(ScreenPanel):
         self.wifi_toggle_box.add(self.wifi_toggle_switch)
 
         sbox = Gtk.Box(hexpand=True, vexpand=False)
-        if self._screen.width > 400:
+        if not self._screen.vertical_mode:
             sbox.add(iface_label)
         sbox.add(self.labels["interface"])
         sbox.add(self.labels["ip"])
@@ -224,6 +224,12 @@ class Panel(ScreenPanel):
 
         self.network_list.add(self.network_rows[bssid])
 
+    def update_ip_label(self, iface):
+        if self._screen.vertical_mode:
+            self.labels["ip"].set_text(f"{self.sdbus_nm.get_ip_for_interface(iface)}")
+        else:
+            self.labels["ip"].set_text(f"IP: {self.sdbus_nm.get_ip_for_interface(iface)}")
+
     def iface_changed(self, combo):
         selected_iface = combo.get_active_id()
         logging.info(f"Selected interface: {selected_iface}")
@@ -234,7 +240,7 @@ class Panel(ScreenPanel):
             combo.set_active_id(old_iface)
             self.interface = old_iface
             return
-        self.labels["ip"].set_text(f"IP: {self.sdbus_nm.get_ip_for_interface(selected_iface)}")
+        self.update_ip_label(selected_iface)
         selected_dev = next(
             (d for d in self.network_devices if d["interface"] == selected_iface), None
         )
@@ -457,7 +463,7 @@ class Panel(ScreenPanel):
             self.sdbus_nm.get_selected_interface() or self.sdbus_nm.get_primary_interface()
         )
         self.interface = selected_iface
-        self.labels["ip"].set_text(f"IP: {self.sdbus_nm.get_ip_for_interface(selected_iface)}")
+        self.update_ip_label(selected_iface)
         nets = self.sdbus_nm.get_networks()
 
         current_bssids = {net["BSSID"] for net in nets if "BSSID" in net}
