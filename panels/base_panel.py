@@ -737,5 +737,6 @@ class BasePanel(ScreenPanel):
         logging.info("Closing update dialog")
         if self.update_dialog in self._screen.dialogs:
             self._screen.dialogs.remove(self.update_dialog)
+        self._screen.state.updating = False
         self.update_dialog = None
         self._screen._menu_go_back(home=True)
