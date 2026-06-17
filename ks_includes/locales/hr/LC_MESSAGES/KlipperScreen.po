@@ -4,17 +4,17 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-10 20:07-0300\n"
-"PO-Revision-Date: 2026-05-18 10:46+0200\n"
-"Last-Translator: Ivijan-Stefan Stipić <infinitumform@gmail.com>\n"
-"Language-Team: Ivijan-Stefan Stipić <https://www.linkedin.com/in/"
-"ivijanstefanstipic/>\n"
+"PO-Revision-Date: 2026-06-16 05:01+0000\n"
+"Last-Translator: Karlo Horčička <karlo.horcicka@gmail.com>\n"
+"Language-Team: Croatian <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/hr/>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Poedit 3.9\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 2026.7.dev0\n"
 
 msgid "Main Menu"
 msgstr "Glavni izbornik"
@@ -173,9 +173,8 @@ msgstr "Onemogućite za 12 h format s AM/PM"
 msgid "Action bar Shortcut"
 msgstr "Prečac trake radnji"
 
-#, fuzzy
 msgid "LEDs"
-msgstr "LED-ovi"
+msgstr "LED-ice"
 
 msgid "Font Size"
 msgstr "Veličina fonta"
@@ -552,11 +551,9 @@ msgstr "Status posla"
 msgid "mm/s"
 msgstr "mm/s"
 
-#, fuzzy
 msgid "mm/s²"
 msgstr "mm/s²"
 
-#, fuzzy
 msgid "mm³/s"
 msgstr "mm³/s"
 
@@ -731,9 +728,8 @@ msgstr "Napredno pomicanje"
 msgid "Query Endstops"
 msgstr "Upit krajnjih graničnika"
 
-#, fuzzy
 msgid "Invalid position"
-msgstr "Nevaljiva pozicija"
+msgstr "Neispravna pozicija"
 
 msgid "Failed to initialize"
 msgstr "Inicijalizacija nije uspjela"
