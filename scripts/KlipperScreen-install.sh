@@ -37,12 +37,11 @@ install_graphical_backend()
     if [ -z "$BACKEND" ]; then
       echo_text ""
       echo_text "Choose graphical backend"
-      echo_ok "Default is X11"
-      echo_text "Wayland requires working KMS/DRM drivers"
-      echo_error "KlipperScreen Wayland power management support is not yet implemented"
       echo_text ""
-      echo "Press enter for default (Xserver)"
-      read -r -e -p "Backend Xserver or Wayland (cage)? [X/w]" BACKEND
+      echo_text "Wayland requires working KMS/DRM drivers"
+      echo_text ""
+      echo_ok "Press enter to install X11/Xserver"
+      read -r -e -p "Backend X11 or Wayland (cage)? [X/w]" BACKEND
     fi
     if [[ "$BACKEND" =~ ^[wW]$ ]]; then
         echo_text "Installing Cage"
