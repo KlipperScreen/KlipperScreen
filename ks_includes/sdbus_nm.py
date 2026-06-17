@@ -150,6 +150,13 @@ class SdbusNm:
             for device_path in active_conn.devices:
                 dev_obj = NetworkDeviceGeneric(device_path)
                 if dev_obj.interface == iface:
+                    # A connection still activating (no lease yet) reports the null
+                    # D-Bus object path "/" for ip4_config; building an IPv4Config
+                    # proxy on "/" and reading a property raises "Object does not
+                    # exist at path /", which crashes the whole network panel. Guard
+                    # it the same way get_primary_interface() already does.
+                    if active_conn.ip4_config == "/":
+                        return "?"
                     ip_info = IPv4Config(active_conn.ip4_config)
                     if ip_info.address_data:
                         return ip_info.address_data[0]["address"][1]
