@@ -722,18 +722,36 @@ class BasePanel(ScreenPanel):
         dialog.connect("delete-event", self.close_update_dialog)
         dialog.set_response_sensitive(Gtk.ResponseType.OK, False)
         dialog.get_widget_for_response(Gtk.ResponseType.OK).hide()
+        dialog.close_blocked = True
         self.update_dialog = dialog
         self._screen.state.updating = True
+        self._screen.base_panel.close_update_timer = GLib.timeout_add_seconds(
+            300, self.unblock_update_dialog
+        )
 
     def finish_updating(self, dialog, response_id):
         if response_id != Gtk.ResponseType.OK:
             return
         logging.info("Finishing update")
+        if self.close_update_timer is not None:
+            GLib.source_remove(self.close_update_timer)
+            self.close_update_timer = None
         self._screen.state.updating = False
         self._gtk.remove_dialog(dialog)
         self._screen._menu_go_back(home=True)
 
+    def unblock_update_dialog(self):
+        if self.update_dialog is not None:
+            self.update_dialog.close_blocked = False
+        if self.close_update_timer is not None:
+            GLib.source_remove(self.close_update_timer)
+            self.close_update_timer = None
+        return False
+
     def close_update_dialog(self, *args):
+        if self.update_dialog.close_blocked:
+            logging.debug("Update dialog close is blocked by safety timer")
+            return
         logging.info("Closing update dialog")
         if self.update_dialog in self._screen.dialogs:
             self._screen.dialogs.remove(self.update_dialog)
