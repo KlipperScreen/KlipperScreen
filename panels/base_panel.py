@@ -415,7 +415,9 @@ class BasePanel(ScreenPanel):
             or self.control["spoolman_box"].get_parent() != self.control["item_box"]
         ):
             logging.debug("Stopping Spoolman updates")
-            self.spoolman_update = None
+            if self.spoolman_update is not None:
+                GLib.source_remove(self.spoolman_update)
+                self.spoolman_update = None
             return False
         self._screen.get_active_spool()
         return True
@@ -434,6 +436,18 @@ class BasePanel(ScreenPanel):
     def process_update(self, action, data):
         if action == "notify_active_spool_set":
             self.update_spoolman_weight_label()
+            return
+        if action == "notify_spoolman_status_changed":
+            connected = data.get("spoolman_connected", False)
+            self._printer.spoolman = connected
+            self.update_spoolman_weight_label()
+            if not connected:
+                if self.spoolman_update is not None:
+                    GLib.source_remove(self.spoolman_update)
+                    self.spoolman_update = None
+            elif self.spoolman_update is None and self._printer.active_spool:
+                if self.control["spoolman_box"].get_parent() == self.control["item_box"]:
+                    self.set_spoolman_refresh()
             return
         if action == "notify_proc_stat_update":
             cpu = data["system_cpu_usage"]["cpu"]
