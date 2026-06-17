@@ -93,6 +93,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self.popup_timeout = None
         self.last_popup_time = datetime.now()
         self.last_error = ""
+        self.inhibit_cookie = None
 
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
@@ -180,10 +181,9 @@ class KlipperScreen(Gtk.ApplicationWindow):
             self.show_error_modal("Invalid config file", self._config.get_errors())
             return
         self.base_panel.activate()
-        self.use_dpms = self._config.get_main_config().getboolean(
-            "use_dpms", fallback=(not self.wayland)
-        )
-        self.use_dpms &= functions.dpms_loaded
+        self.use_dpms = self._config.get_main_config().getboolean("use_dpms", fallback=False)
+        if not self.wayland:
+            self.use_dpms &= functions.dpms_loaded
         self.set_dpms(self.use_dpms)
         autolock = self._config.get_main_config().getint("autolock_timeout", fallback=0)
         self.lock_screen.set_autolock_timeout(autolock)
@@ -700,7 +700,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self.attach_panel(self._cur_panels[-1])
 
     def check_dpms_state(self):
-        if not self.use_dpms:
+        if not self.use_dpms or self.wayland:
             return False
         state = functions.get_DPMS_state()
         if state == functions.DPMS_State.Fail:
@@ -729,14 +729,24 @@ class KlipperScreen(Gtk.ApplicationWindow):
             self.set_dpms(False)
             return
 
+    def inhibit_idle(self):
+        app = self.get_application()
+        if app and self.inhibit_cookie is None:
+            self.inhibit_cookie = app.inhibit(
+                self, Gtk.ApplicationInhibitFlags.IDLE, "KlipperScreen"
+            )
+            logging.info(f"Idle inhibit acquired: {self.inhibit_cookie}")
+
+    def uninhibit_idle(self):
+        if self.inhibit_cookie is not None:
+            app = self.get_application()
+            if app:
+                app.uninhibit(self.inhibit_cookie)
+                self.inhibit_cookie = None
+                logging.debug("Idle inhibit released")
+
     def set_dpms(self, use_dpms):
-        if self.wayland:
-            self.use_dpms = False
-            self._config.set("main", "use_dpms", False)
-            self._config.save_user_config_options()
-            logging.debug("DPMS handling not supported on Wayland")
-            return
-        if not use_dpms:
+        if not use_dpms and not self.wayland:
             if self.check_dpms_timeout is not None:
                 GLib.source_remove(self.check_dpms_timeout)
             self.check_dpms_timeout = None
@@ -752,6 +762,12 @@ class KlipperScreen(Gtk.ApplicationWindow):
                         f"FAILED to turn DPMS off on {self.display_number}:\n {e}"
                     )
                     return
+        elif use_dpms and self.wayland:
+            if self.get_application() is not None:
+                self.inhibit_idle()
+            else:
+                logging.debug("Warning too early call to set idle inhibit cookie")
+                GLib.idle_add(self.inhibit_idle)
         self.use_dpms = use_dpms
         self._config.set("main", "use_dpms", use_dpms)
         self._config.save_user_config_options()
