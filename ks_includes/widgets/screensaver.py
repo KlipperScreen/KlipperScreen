@@ -34,6 +34,7 @@ class ScreenSaver:
             )
 
     def show(self):
+        self.screen.uninhibit_idle()
         if self.is_showing:
             logging.debug("Screensaver active")
             return
@@ -91,6 +92,7 @@ class ScreenSaver:
 
     def delayed_wake(self):
         self.reset_timeout()
+        self.screen.inhibit_idle()
         if self.delayed is not None:
             GLib.source_remove(self.delayed)
             self.delayed = None
