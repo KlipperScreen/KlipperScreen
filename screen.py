@@ -57,7 +57,7 @@ class AppState:
     notification_log = []
 
 
-class KlipperScreen(Gtk.Window):
+class KlipperScreen(Gtk.ApplicationWindow):
     MAX_RETRIES = 4
 
     def __init__(self, args):
@@ -66,7 +66,6 @@ class KlipperScreen(Gtk.Window):
         except Exception as e:
             logging.exception(f"{e}\n\n{traceback.format_exc()}")
             raise RuntimeError from e
-        GLib.set_prgname("KlipperScreen")
         self.state: AppState = AppState()
         self.panels = {}
         self.panels_reinit = []
@@ -590,7 +589,7 @@ class KlipperScreen(Gtk.Window):
 
         self.style_provider.load_from_data(self.base_css.encode())
         Gtk.StyleContext.add_provider_for_screen(
-            Gdk.Screen.get_default(), Gtk.CssProvider(), Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+            Gdk.Screen.get_default(), self.style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
 
     def load_custom_theme(self, theme_name):
@@ -1406,6 +1405,21 @@ class KlipperScreen(Gtk.Window):
             self.reload_panels()
 
 
+class KlipperScreenApplication(Gtk.Application):
+    def __init__(self, args):
+        super().__init__(application_id="org.klipperscreen.KlipperScreen")
+        self._args = args
+
+    def do_activate(self):
+        self._win = KlipperScreen(self._args)
+        self._win.connect("destroy", self._on_destroy)
+        self.add_window(self._win)
+
+    @staticmethod
+    def _on_destroy(win):
+        win.gtk.shutdown()
+
+
 def main():
     parser = argparse.ArgumentParser(description="KlipperScreen - A GUI for Klipper")
     homedir = os.path.expanduser("~")
@@ -1438,22 +1452,9 @@ def main():
 
     functions.setup_logging(os.path.normpath(os.path.expanduser(args.logfile)))
     functions.patch_threading_excepthook()
-    if not Gtk.init_check():
-        logging.critical("Failed to initialize Gtk")
-        raise RuntimeError
-    try:
-        win = KlipperScreen(args)
-    except Exception as e:
-        logging.exception(f"Failed to initialize window\n{e}\n\n{traceback.format_exc()}")
-        raise RuntimeError from e
 
-    def _on_destroy(win):
-        win.gtk.shutdown()
-        Gtk.main_quit()
-
-    win.connect("destroy", _on_destroy)
-    win.show_all()
-    Gtk.main()
+    app = KlipperScreenApplication(args)
+    app.run()
 
 
 if __name__ == "__main__":
