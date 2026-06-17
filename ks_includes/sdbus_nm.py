@@ -150,6 +150,9 @@ class SdbusNm:
             for device_path in active_conn.devices:
                 dev_obj = NetworkDeviceGeneric(device_path)
                 if dev_obj.interface == iface:
+                    # A connection with no lease yet reports "/"
+                    if active_conn.ip4_config == "/":
+                        return "?"
                     ip_info = IPv4Config(active_conn.ip4_config)
                     if ip_info.address_data:
                         return ip_info.address_data[0]["address"][1]
