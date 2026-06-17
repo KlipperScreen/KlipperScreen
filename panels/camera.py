@@ -52,6 +52,11 @@ class Panel(ScreenPanel):
             self.mpv.terminate()
             self.mpv = None
 
+    def process_update(self, action, data):
+        if action != "notify_webcams_changed":
+            return
+        self._screen.panels_reinit.append("camera")
+
     def play(self, widget, cam):
         url = cam["stream_url"]
         if url.startswith("/"):

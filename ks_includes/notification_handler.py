@@ -17,6 +17,7 @@ class NotificationHandler:
             "notify_metadata_update": self._metadata_update,
             "notify_update_response": self._update_response,
             "notify_power_changed": self._power_changed,
+            "notify_webcams_changed": self._webcams_changed,
             "notify_gcode_response": self._gcode_response,
             "notify_active_spool_set": self._active_spool_set,
         }
@@ -83,6 +84,12 @@ class NotificationHandler:
         logging.debug("Power status changed: %s", data)
         self._screen.printer.process_power_update(data)
         self._screen.panels["splash_screen"].check_power_status()
+
+    def _webcams_changed(self, data):
+        logging.debug("Webcams changed: %s", data)
+        self._screen.printer.configure_cameras(data["webcams"])
+        if "camera" in self._screen.panels:
+            self._screen.panels_reinit.append("camera")
 
     def _gcode_response(self, data):
         if self._screen.printer.state in ["error", "shutdown"]:
