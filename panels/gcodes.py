@@ -6,7 +6,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from datetime import datetime
 
-from gi.repository import GLib, Gtk, Pango
+from gi.repository import Gtk, Pango
 
 from ks_includes.KlippyGtk import find_widget
 from ks_includes.screen_panel import ScreenPanel
@@ -493,59 +493,29 @@ class Panel(ScreenPanel):
         return info
 
     def load_files(self, result, method, params):
-        if hasattr(self, "_gcodes_loading") and self._gcodes_loading:
-            self._gcodes_loading = False
-
         start = datetime.now()
         self.set_loading(True)
         if not result.get("result") or not isinstance(result["result"], dict):
             logging.info(result)
+            self.set_loading(False)
             return
 
         items = [*result["result"]["dirs"], *result["result"]["files"]]
         total = len(items)
 
         if total == 0:
-            self.set_sort()
             self.set_loading(False)
             return
 
-        self._gcodes_loading = True
-        next_index = 0
-        BATCH_SIZE = 12
-        first_batch = True
+        for item in items:
+            fbchild = self.create_item(item)
+            if fbchild is not None:
+                self.flowbox.add(fbchild)
 
-        def step():
-            nonlocal next_index, first_batch
-
-            if not self._gcodes_loading:
-                return False
-
-            rendered = 0
-            while rendered < BATCH_SIZE and next_index < total:
-                item = items[next_index]
-                next_index += 1
-                fbchild = self.create_item(item)
-                if fbchild is not None:
-                    self.flowbox.add(fbchild)
-                    rendered += 1
-
-            if first_batch:
-                first_batch = False
-                elapsed = (datetime.now() - start).total_seconds()
-                logging.info(f"Time to first batch: {elapsed:.3f} seconds")
-                self.set_loading(False)
-
-            if next_index >= total:
-                self.set_sort()
-                self._gcodes_loading = False
-                elapsed = (datetime.now() - start).total_seconds()
-                logging.info(f"Loaded {total} items in {elapsed:.3f} seconds")
-                return False
-
-            return True
-
-        GLib.idle_add(step, priority=GLib.PRIORITY_DEFAULT_IDLE)
+        self.set_sort()
+        self.set_loading(False)
+        elapsed = (datetime.now() - start).total_seconds()
+        logging.info(f"Loaded {total} items in {elapsed:.3f} seconds")
 
     def delete_from_list(self, path):
         logging.info(f"deleting {path}")
