@@ -7,6 +7,7 @@ import logging
 import os
 import pathlib
 import re
+import traceback  # noqa
 from io import StringIO
 
 SCREEN_BLANKING_OPTIONS = [
@@ -268,7 +269,7 @@ class KlipperScreenConfig:
                 bools = [f"{option}" for option in config[section]]
             elif section.startswith("spoolman"):
                 numbers = ("sync_rate", "spool_low_limit")
-                bools = [f"{option}" for option in config[section] if option not in numbers]
+                bools = "hide_archived"
             else:
                 self.errors.append(f"Section [{section}] not recognized")
 
@@ -819,12 +820,15 @@ class KlipperScreenConfig:
         extra_sections.extend([i for i in self.config.sections() if i.startswith("spoolman")])
         for section in extra_sections:
             for item in self.config.options(section):
-                value = self.config[section].getboolean(item, fallback=True)
+                try:
+                    value = self.config[section].getboolean(item, fallback=True)
+                except (ValueError, TypeError):
+                    value = self.config[section].get(item)
                 if value is False or (
-                    self.user_cfg is not None
+                    value is not None
+                    and self.user_cfg is not None
                     and section in self.user_cfg.sections()
-                    and self.user_cfg[section].getboolean(item, fallback=True) is False
-                    and self.user_cfg[section].getboolean(item, fallback=True) != value
+                    and str(value) != self.user_cfg[section].get(item, str(value))
                 ):
                     if section not in save_config.sections():
                         save_config.add_section(section)

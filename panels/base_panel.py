@@ -353,8 +353,8 @@ class BasePanel(ScreenPanel):
 
     def set_spoolman_refresh(self):
         if self.spoolman_update is None:
-            rate = self._config.get_config().getint("spoolman", "sync_rate", fallback=20)
-            self.spoolman_update = GLib.timeout_add_seconds(rate, self.fetch_spoolman)
+            rate = self._config.get_config().getfloat("spoolman", "sync_rate", fallback=20)
+            self.spoolman_update = GLib.timeout_add_seconds(int(rate), self.fetch_spoolman)
 
     def get_printer_state(self):
         printing = self._printer and self._printer.state in {"printing", "paused"}
@@ -402,7 +402,7 @@ class BasePanel(ScreenPanel):
             return
         remaining_weight = self._printer.active_spool["remaining_weight"]
         self.labels["spoolman_weight"].set_label(f"{round(remaining_weight):.0f} g")
-        self.update_spoolman_alert_visuals(remaining_weight < self.spoolman_low_limit)
+        self.update_spoolman_alert_visuals(remaining_weight <= self.spoolman_low_limit)
         color = self.get_active_spoolman_color()
         if color != self.spoolman_current_color:
             self.labels["spoolman_icon"].set_from_pixbuf(self.get_spoolman_icon_pixbuf(color))
