@@ -36,6 +36,10 @@ class MoonrakerApi:
             "server.files.get_directory", {"path": directory}, callback, *args
         )
 
+    def get_file_roots(self, callback=None, *args):
+        logging.debug("Sending server.files.roots")
+        return self._ws.send_method("server.files.roots", {}, callback, *args)
+
     def get_file_metadata(self, filename, callback=None, *args):
         return self._ws.send_method(
             "server.files.metadata", {"filename": filename}, callback, *args
