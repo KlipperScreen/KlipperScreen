@@ -82,16 +82,20 @@ class HeaterGraph(Gtk.DrawingArea):
     def draw_graph(self, da: Gtk.DrawingArea, ctx: cairoContext):
         if not self.printer.tempstore:
             return
+        style_context = da.get_style_context()
         Gtk.render_background(
-            da.get_style_context(), ctx, 0, 0, da.get_allocated_width(), da.get_allocated_height()
+            style_context, ctx, 0, 0, da.get_allocated_width(), da.get_allocated_height()
         )
+        success, color = style_context.lookup_color("lines")
+        if not success:
+            color = Gdk.RGBA(0.5, 0.5, 0.5, 1.0)
         x = round(self.font_size * 2.75)
         y = 10
         width = da.get_allocated_width() - 15
         height = da.get_allocated_height() - self.font_size * 2
         gsize = [[x, y], [width, height]]
 
-        ctx.set_source_rgb(0.5, 0.5, 0.5)
+        ctx.set_source_rgb(color.red, color.green, color.blue)
         ctx.set_line_width(1)
         ctx.set_tolerance(1)
 
@@ -106,8 +110,8 @@ class HeaterGraph(Gtk.DrawingArea):
             return
         d_width = 1 / points_per_pixel
 
-        d_height_scale = self.graph_lines(ctx, gsize, max_num)
-        self.graph_time(ctx, gsize, points_per_pixel)
+        d_height_scale = self.graph_lines(ctx, gsize, max_num, color)
+        self.graph_time(ctx, gsize, points_per_pixel, color)
 
         for name in self.store:
             if not self.store[name]["show"]:
@@ -163,7 +167,7 @@ class HeaterGraph(Gtk.DrawingArea):
         else:
             ctx.stroke()
 
-    def graph_lines(self, ctx: cairoContext, gsize, max_num):
+    def graph_lines(self, ctx: cairoContext, gsize, max_num, color):
         nscale = 10
         max_num = min(max_num, self.max_temp)
         while (max_num / nscale) > 5:
@@ -173,18 +177,18 @@ class HeaterGraph(Gtk.DrawingArea):
         ctx.set_font_size(self.font_size)
 
         for i in range(r):
-            ctx.set_source_rgb(0.5, 0.5, 0.5)
+            ctx.set_source_rgb(color.red, color.green, color.blue)
             lheight = gsize[1][1] - nscale * i * hscale
             ctx.move_to(6, lheight + 3)
             ctx.show_text(str(nscale * i).rjust(3, " "))
             ctx.stroke()
-            ctx.set_source_rgba(0.5, 0.5, 0.5, 0.2)
+            ctx.set_source_rgba(color.red, color.green, color.blue, 0.2)
             ctx.move_to(gsize[0][0], lheight)
             ctx.line_to(gsize[1][0], lheight)
             ctx.stroke()
         return hscale
 
-    def graph_time(self, ctx: cairoContext, gsize, points_per_pixel):
+    def graph_time(self, ctx: cairoContext, gsize, points_per_pixel, color):
         now = datetime.datetime.now()
         first = gsize[1][0] - (now.second + ((now.minute % 2) * 60)) / points_per_pixel
         steplen = 120 / points_per_pixel  # For 120s
@@ -197,12 +201,12 @@ class HeaterGraph(Gtk.DrawingArea):
             x = first - i * steplen
             if x < gsize[0][0]:
                 break
-            ctx.set_source_rgba(0.5, 0.5, 0.5, 0.2)
+            ctx.set_source_rgba(color.red, color.green, color.blue, 0.2)
             ctx.move_to(x, gsize[0][1])
             ctx.line_to(x, gsize[1][1])
             ctx.stroke()
 
-            ctx.set_source_rgb(0.5, 0.5, 0.5)
+            ctx.set_source_rgb(color.red, color.green, color.blue)
             ctx.move_to(x - font_size_multiplier, gsize[1][1] + font_size_multiplier)
 
             ctx.show_text(f"{now - datetime.timedelta(minutes=2) * i:%H:%M}")
