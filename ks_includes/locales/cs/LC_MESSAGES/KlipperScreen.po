@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Czech\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 20:07-0300\n"
+"POT-Creation-Date: 2026-06-21 12:14-0300\n"
 "PO-Revision-Date: 2026-05-04 00:09+0000\n"
 "Last-Translator: Michal Bitala <yzeroy14@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/klipperscreen/"
@@ -970,6 +970,14 @@ msgid "No info available"
 msgstr "Nejsou k dispozici žádné informace"
 
 #, fuzzy
+msgid "Disk"
+msgstr "Disk"
+
+#, fuzzy
+msgid "Cores"
+msgstr "Jádra"
+
+#, fuzzy
 msgid "IP Address"
 msgstr "IP adresa"
 
@@ -1093,6 +1101,10 @@ msgid "System:"
 msgstr "Systém:"
 
 #, fuzzy
+msgid "Waiting connection closure"
+msgstr "Čekání na ukončení připojení"
+
+#, fuzzy
 msgid "Initializing KlipperScreen"
 msgstr "Inicializace KlipperScreen"
 
@@ -1132,8 +1144,8 @@ msgid "Klipper has shutdown"
 msgstr "Klipper zastaven"
 
 #, fuzzy
-msgid "Waiting for Moonraker Websocket to close"
-msgstr "Čekání na uzavření WebSocketu Moonrakeru"
+msgid "Waiting for Moonraker connection to close"
+msgstr "Čekání na ukončení připojení k Moonrakeru"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: připojen"

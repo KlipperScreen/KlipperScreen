@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 20:07-0300\n"
+"POT-Creation-Date: 2026-06-21 12:14-0300\n"
 "PO-Revision-Date: 2024-09-07 00:09+0000\n"
 "Last-Translator: Leart Dukaj <premtimdukaj@hotmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
@@ -984,6 +984,14 @@ msgid "No info available"
 msgstr "Keine Informationen verfügbar"
 
 #, fuzzy
+msgid "Disk"
+msgstr "Disk"
+
+#, fuzzy
+msgid "Cores"
+msgstr "Kerne"
+
+#, fuzzy
 msgid "IP Address"
 msgstr "IP-Adresse"
 
@@ -1107,6 +1115,10 @@ msgid "System:"
 msgstr "System:"
 
 #, fuzzy
+msgid "Waiting connection closure"
+msgstr "Warten auf Verbindungsabbruch"
+
+#, fuzzy
 msgid "Initializing KlipperScreen"
 msgstr "Klipperscreen wird initialisiert"
 
@@ -1147,8 +1159,8 @@ msgid "Klipper has shutdown"
 msgstr "Klipper abgeschaltet"
 
 #, fuzzy
-msgid "Waiting for Moonraker Websocket to close"
-msgstr "Warten auf Schließen der Moonraker-Websocket-Verbindung"
+msgid "Waiting for Moonraker connection to close"
+msgstr "Warten auf Verbindungsabbruch von Moonraker"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: Verbunden"

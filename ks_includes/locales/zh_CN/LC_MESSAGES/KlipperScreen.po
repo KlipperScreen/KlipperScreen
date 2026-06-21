@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 20:07-0300\n"
+"POT-Creation-Date: 2026-06-21 12:14-0300\n"
 "PO-Revision-Date: 2024-11-27 21:00+0000\n"
 "Last-Translator: Sun Zheng <123456789sunzheng@gmail.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -962,6 +962,14 @@ msgid "No info available"
 msgstr "无可用信息"
 
 #, fuzzy
+msgid "Disk"
+msgstr "磁盘"
+
+#, fuzzy
+msgid "Cores"
+msgstr "核心"
+
+#, fuzzy
 msgid "IP Address"
 msgstr "IP 地址"
 
@@ -1081,6 +1089,10 @@ msgid "System:"
 msgstr "系统："
 
 #, fuzzy
+msgid "Waiting connection closure"
+msgstr "等待连接关闭"
+
+#, fuzzy
 msgid "Initializing KlipperScreen"
 msgstr "正在初始化 KlipperScreen"
 
@@ -1120,8 +1132,8 @@ msgid "Klipper has shutdown"
 msgstr "Klipper已关闭"
 
 #, fuzzy
-msgid "Waiting for Moonraker Websocket to close"
-msgstr "等待 Moonraker Websocket 关闭"
+msgid "Waiting for Moonraker connection to close"
+msgstr "等待 Moonraker 连接关闭"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: 已连接"

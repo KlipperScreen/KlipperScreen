@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 20:07-0300\n"
+"POT-Creation-Date: 2026-06-21 12:14-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -930,6 +930,12 @@ msgstr ""
 msgid "No info available"
 msgstr ""
 
+msgid "Disk"
+msgstr ""
+
+msgid "Cores"
+msgstr ""
+
 msgid "IP Address"
 msgstr ""
 
@@ -1048,6 +1054,9 @@ msgstr ""
 msgid "System:"
 msgstr ""
 
+msgid "Waiting connection closure"
+msgstr ""
+
 msgid "Initializing KlipperScreen"
 msgstr ""
 
@@ -1084,7 +1093,7 @@ msgstr ""
 msgid "Klipper has shutdown"
 msgstr ""
 
-msgid "Waiting for Moonraker Websocket to close"
+msgid "Waiting for Moonraker connection to close"
 msgstr ""
 
 msgid "Moonraker: connected"

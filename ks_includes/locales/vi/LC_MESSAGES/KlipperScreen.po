@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 20:07-0300\n"
+"POT-Creation-Date: 2026-06-21 12:14-0300\n"
 "PO-Revision-Date: 2024-08-12 07:09+0000\n"
 "Last-Translator: Hiep Nguyen <tanhiep26@gmail.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -996,6 +996,14 @@ msgid "No info available"
 msgstr "Không có thông tin"
 
 #, fuzzy
+msgid "Disk"
+msgstr "Đĩa"
+
+#, fuzzy
+msgid "Cores"
+msgstr "Lõi"
+
+#, fuzzy
 msgid "IP Address"
 msgstr "Địa chỉ IP"
 
@@ -1118,6 +1126,10 @@ msgid "System:"
 msgstr "Hệ thống:"
 
 #, fuzzy
+msgid "Waiting connection closure"
+msgstr "Đang chờ đóng kết nối"
+
+#, fuzzy
 msgid "Initializing KlipperScreen"
 msgstr "Đang khởi tạo KlipperScreen"
 
@@ -1157,8 +1169,8 @@ msgid "Klipper has shutdown"
 msgstr "Klipper đã tắt"
 
 #, fuzzy
-msgid "Waiting for Moonraker Websocket to close"
-msgstr "Đang chờ Moonraker Websocket đóng"
+msgid "Waiting for Moonraker connection to close"
+msgstr "Đang chờ đóng kết nối Moonraker"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: đã kết nối"

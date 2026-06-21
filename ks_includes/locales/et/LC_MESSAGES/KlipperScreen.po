@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 20:07-0300\n"
+"POT-Creation-Date: 2026-06-21 12:14-0300\n"
 "PO-Revision-Date: 2024-07-26 19:09+0000\n"
 "Last-Translator: Jegert Uusküla <jegertuuskula@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -971,6 +971,14 @@ msgid "No info available"
 msgstr "Teave puudub"
 
 #, fuzzy
+msgid "Disk"
+msgstr "Disk"
+
+#, fuzzy
+msgid "Cores"
+msgstr "Cores"
+
+#, fuzzy
 msgid "IP Address"
 msgstr "IP-osoite"
 
@@ -1092,6 +1100,10 @@ msgid "System:"
 msgstr "Süsteem:"
 
 #, fuzzy
+msgid "Waiting connection closure"
+msgstr "Ootemme ühenduse sulgemist"
+
+#, fuzzy
 msgid "Initializing KlipperScreen"
 msgstr "KlipperScreeni alustamine"
 
@@ -1131,8 +1143,8 @@ msgid "Klipper has shutdown"
 msgstr "Klipper on välja lülitatud"
 
 #, fuzzy
-msgid "Waiting for Moonraker Websocket to close"
-msgstr "Ootab Moonraker Websocket'i sulgemist"
+msgid "Waiting for Moonraker connection to close"
+msgstr "Ootamine, et Moonraker ühendus suletaks"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: ühendatud"

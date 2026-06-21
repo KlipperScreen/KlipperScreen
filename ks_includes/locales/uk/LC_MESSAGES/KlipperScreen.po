@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 24-11-26 10.00\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 20:07-0300\n"
+"POT-Creation-Date: 2026-06-21 12:14-0300\n"
 "PO-Revision-Date: 2024-11-26 22:47+0200\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -978,6 +978,14 @@ msgid "No info available"
 msgstr "Немає інформації"
 
 #, fuzzy
+msgid "Disk"
+msgstr "Disk"
+
+#, fuzzy
+msgid "Cores"
+msgstr "Cores"
+
+#, fuzzy
 msgid "IP Address"
 msgstr "IP-адреса"
 
@@ -1103,6 +1111,10 @@ msgid "System:"
 msgstr "Система:"
 
 #, fuzzy
+msgid "Waiting connection closure"
+msgstr "Waiting connection closure"
+
+#, fuzzy
 msgid "Initializing KlipperScreen"
 msgstr "Ініціалізація KlipperScreen"
 
@@ -1142,8 +1154,8 @@ msgid "Klipper has shutdown"
 msgstr "Klipper вимкнувся"
 
 #, fuzzy
-msgid "Waiting for Moonraker Websocket to close"
-msgstr "Очікування закриття WebSocket Moonraker"
+msgid "Waiting for Moonraker connection to close"
+msgstr "Waiting for Moonraker connection to close"
 
 msgid "Moonraker: connected"
 msgstr "Підключено до Moonraker"

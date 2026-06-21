@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 20:07-0300\n"
+"POT-Creation-Date: 2026-06-21 12:14-0300\n"
 "PO-Revision-Date: 2026-06-16 05:01+0000\n"
 "Last-Translator: Karlo Horčička <karlo.horcicka@gmail.com>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -942,6 +942,14 @@ msgstr "Greška pri postavljanju aktivnog kalema"
 msgid "No info available"
 msgstr "Nema dostupnih informacija"
 
+#, fuzzy
+msgid "Disk"
+msgstr "Disk"
+
+#, fuzzy
+msgid "Cores"
+msgstr "Jezgra"
+
 msgid "IP Address"
 msgstr "IP adresa"
 
@@ -1063,6 +1071,10 @@ msgstr "Minimum:"
 msgid "System:"
 msgstr "Sustav:"
 
+#, fuzzy
+msgid "Waiting connection closure"
+msgstr "Čekanje na zatvaranje veze"
+
 msgid "Initializing KlipperScreen"
 msgstr "Inicijalizacija KlipperScreena"
 
@@ -1099,8 +1111,9 @@ msgstr "Klipper se pokušava pokrenuti"
 msgid "Klipper has shutdown"
 msgstr "Klipper se ugasio"
 
-msgid "Waiting for Moonraker Websocket to close"
-msgstr "Čeka se zatvaranje Moonraker WebSocket veze"
+#, fuzzy
+msgid "Waiting for Moonraker connection to close"
+msgstr "Čekanje na zatvaranje Moonraker veze"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: povezan"

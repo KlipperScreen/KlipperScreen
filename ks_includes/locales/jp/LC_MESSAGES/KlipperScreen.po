@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 20:07-0300\n"
+"POT-Creation-Date: 2026-06-21 12:14-0300\n"
 "PO-Revision-Date: 2025-06-20 09:12+0000\n"
 "Last-Translator: kr <Tlake_ichi_ni_san_shi@yahoo.co.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/klipperscreen/"
@@ -993,6 +993,14 @@ msgid "No info available"
 msgstr "利用できる情報はありません"
 
 #, fuzzy
+msgid "Disk"
+msgstr "ディスク"
+
+#, fuzzy
+msgid "Cores"
+msgstr "コア数"
+
+#, fuzzy
 msgid "IP Address"
 msgstr "IPアドレス"
 
@@ -1118,6 +1126,10 @@ msgid "System:"
 msgstr "システム:"
 
 #, fuzzy
+msgid "Waiting connection closure"
+msgstr "接続の終了を待機中"
+
+#, fuzzy
 msgid "Initializing KlipperScreen"
 msgstr "KlipperScreen を初期化しています"
 
@@ -1158,8 +1170,8 @@ msgid "Klipper has shutdown"
 msgstr "Klipperはシャットダウンしました"
 
 #, fuzzy
-msgid "Waiting for Moonraker Websocket to close"
-msgstr "Moonraker WebSocket の閉鎖を待機中"
+msgid "Waiting for Moonraker connection to close"
+msgstr "Moonrakerの接続終了を待機中"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: 接続済"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 20:07-0300\n"
+"POT-Creation-Date: 2026-06-21 12:14-0300\n"
 "PO-Revision-Date: 2026-05-07 00:11+0000\n"
 "Last-Translator: Pavol Vrba <pvrba2000@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/klipperscreen/"
@@ -968,6 +968,14 @@ msgstr "Chyba pri nastavovaní aktívnej cievky"
 msgid "No info available"
 msgstr "Žiadne informácie nie sú k dispozícii"
 
+#, fuzzy
+msgid "Disk"
+msgstr "Disk"
+
+#, fuzzy
+msgid "Cores"
+msgstr "Jadrá"
+
 msgid "IP Address"
 msgstr "IP adresa"
 
@@ -1090,6 +1098,10 @@ msgid "System:"
 msgstr "Systém:"
 
 #, fuzzy
+msgid "Waiting connection closure"
+msgstr "Čakanie na zatvorenie pripojenia"
+
+#, fuzzy
 msgid "Initializing KlipperScreen"
 msgstr "Inicializácia KlipperScreen"
 
@@ -1128,8 +1140,8 @@ msgid "Klipper has shutdown"
 msgstr "Klipper sa vypol"
 
 #, fuzzy
-msgid "Waiting for Moonraker Websocket to close"
-msgstr "Čaká sa na uzavretie Moonraker Websocket"
+msgid "Waiting for Moonraker connection to close"
+msgstr "Čakanie na zatvorenie pripojenia Moonraker"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: pripojený"

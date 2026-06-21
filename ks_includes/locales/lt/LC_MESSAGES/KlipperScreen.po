@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 20:07-0300\n"
+"POT-Creation-Date: 2026-06-21 12:14-0300\n"
 "PO-Revision-Date: 2026-06-16 05:01+0000\n"
 "Last-Translator: vjurka <v@jurka.lt>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -942,6 +942,14 @@ msgstr "Klaida nustatant aktyvią ritę"
 msgid "No info available"
 msgstr "Nėra informacijos"
 
+#, fuzzy
+msgid "Disk"
+msgstr "Diskas"
+
+#, fuzzy
+msgid "Cores"
+msgstr "Branduoliai"
+
 msgid "IP Address"
 msgstr "IP adresas"
 
@@ -1062,6 +1070,10 @@ msgstr "Minimum:"
 msgid "System:"
 msgstr "Sistema:"
 
+#, fuzzy
+msgid "Waiting connection closure"
+msgstr "Laukiama ryšio uždarymo"
+
 msgid "Initializing KlipperScreen"
 msgstr "Inicijuojamas KlipperScreen"
 
@@ -1098,8 +1110,9 @@ msgstr "Klipper'is pasiruošęs"
 msgid "Klipper has shutdown"
 msgstr "Klipper'is išjungtas"
 
-msgid "Waiting for Moonraker Websocket to close"
-msgstr "Laukiama, kol Moonraker Websocket užsidarys"
+#, fuzzy
+msgid "Waiting for Moonraker connection to close"
+msgstr "Laukiama Moonraker ryšio uždarymo"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: prijungtas"

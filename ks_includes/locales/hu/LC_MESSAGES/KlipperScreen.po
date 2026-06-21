@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 20:07-0300\n"
+"POT-Creation-Date: 2026-06-21 12:14-0300\n"
 "PO-Revision-Date: 2024-11-29 19:00+0000\n"
 "Last-Translator: \"Zs.Antal\" <antonio092130@icloud.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
@@ -964,6 +964,14 @@ msgid "No info available"
 msgstr "Nincs információ"
 
 #, fuzzy
+msgid "Disk"
+msgstr "Disk"
+
+#, fuzzy
+msgid "Cores"
+msgstr "Jád 혹ok"
+
+#, fuzzy
 msgid "IP Address"
 msgstr "IP-cím"
 
@@ -1085,6 +1093,10 @@ msgid "System:"
 msgstr "Rendszer:"
 
 #, fuzzy
+msgid "Waiting connection closure"
+msgstr "Várakozás a kapcsolat bezárására"
+
+#, fuzzy
 msgid "Initializing KlipperScreen"
 msgstr "KlipperScreen inicializálása"
 
@@ -1124,8 +1136,8 @@ msgid "Klipper has shutdown"
 msgstr "A Klipper leállt"
 
 #, fuzzy
-msgid "Waiting for Moonraker Websocket to close"
-msgstr "Várakozás a Moonraker Websocket bezárására"
+msgid "Waiting for Moonraker connection to close"
+msgstr "Várakozás a Moonraker kapcsolat bezárására"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: csatlakoztatva"
