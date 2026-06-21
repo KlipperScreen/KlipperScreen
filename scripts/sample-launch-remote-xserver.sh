@@ -1,5 +1,7 @@
 #!/bin/bash
-# Change XCLIENT and/or display to your destination xserver (XSDL platform). 
+# Launcher script for remote XServer (XSDL) setups.
+# Copy and rename to launch_KlipperScreen.sh in the scripts directory.
+# Change XCLIENT and/or display to your destination xserver (XSDL platform).
 # Example: export DISPLAY=192.168.1.101:0
 
 # Note: You will likely want to reserve a DHCP address or set a static IP of the 
@@ -9,7 +11,7 @@ export XCLIENT=change_me
 export DISPLAY=change_me
 
 if [ $XCLIENT == "change_me" ]; then
-	echo "launch_klipperscreen.sh for XSDL/XServer Clients has not been configured properly. Please edit this file to point to your XServer Client"
+	echo "launch_KlipperScreen.sh for XSDL/XServer Clients has not been configured properly. Please edit this file to point to your XServer Client"
 	exit 
 fi
 

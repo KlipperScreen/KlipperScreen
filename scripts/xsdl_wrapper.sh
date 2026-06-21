@@ -4,10 +4,10 @@
 # Keeps the process alive while the server is active
 # to mimic default X's behaviour and keep the service happy
 
-if  [ -f $PWD/launch_klipperscreen.sh ]; then
-	exec $PWD/launch_klipperscreen.sh
-elif [ ! -f $PWD/launch_klipperscreen.sh ]; then
-	echo "launch_klipperscreen.sh does not exist"
+if  [ -f $PWD/launch_KlipperScreen.sh ]; then
+	exec $PWD/launch_KlipperScreen.sh
+elif [ ! -f $PWD/launch_KlipperScreen.sh ]; then
+	echo "launch_KlipperScreen.sh does not exist"
 	exit
 fi
 

@@ -52,7 +52,7 @@ This article describe how to use KlipperScreen from an Android device using XSer
     ```bash
     cd ~/KlipperScreen/scripts
     cp sample-android-adb.sh launch_KlipperScreen.sh
-    chmod +x ~/KlipperScreen/scripts/launch_KlipperScreen.sh
+    chmod +x launch_KlipperScreen.sh
     ```
 
 4. Start Xserver-XSDL On the Android device
