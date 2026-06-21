@@ -14,7 +14,6 @@ class Panel(ScreenPanel):
         title = _("Spool editor")
         super().__init__(screen, title)
         self.selected_weight_mode = "filament"
-        self.saved_weight = 0
         self.numpad_visible = False
         self._measurement_buttons = {}
         self._progress_bar = None
@@ -27,6 +26,14 @@ class Panel(ScreenPanel):
         self.spool = extra
         self._pending_update_spool_id = None
         self._pending_update_value = None
+        if extra is not None:
+            self._initial_remaining_weight = extra.remaining_weight or 0
+            self._initial_spool_weight = extra.spool_weight or 0
+            self._initial_initial_weight = extra.initial_weight or 0
+        else:
+            self._initial_remaining_weight = 0
+            self._initial_spool_weight = 0
+            self._initial_initial_weight = 0
         for child in self.content.get_children():
             self.content.remove(child)
         self._build_grid()
@@ -357,22 +364,24 @@ class Panel(ScreenPanel):
             self._progress_bar.set_text(f"{round(used, 1)} / {round(initial, 1)} g")
 
     def _restore_value(self, entry_val):
+        if self.selected_weight_mode == "measured":
+            restore_val = self._initial_remaining_weight + self._initial_spool_weight
+        elif self.selected_weight_mode == "remaining":
+            restore_val = self._initial_remaining_weight
+        elif self.selected_weight_mode == "empty":
+            restore_val = self._initial_spool_weight
+        elif self.selected_weight_mode == "initial":
+            restore_val = self._initial_initial_weight
+        else:
+            restore_val = 0
         if "keypad" in self.labels:
-            self.labels["keypad"].entry.set_text(f"{self.saved_weight:.1f}")
+            self.labels["keypad"].entry.set_text(f"{restore_val:.1f}")
 
     def back(self):
         return False
 
     def _show_numpad(self, widget, mode):
         self.selected_weight_mode = mode
-        if mode == "measured":
-            self.saved_weight = (self.spool.remaining_weight or 0) + (self.spool.spool_weight or 0)
-        if mode == "remaining":
-            self.saved_weight = self.spool.remaining_weight or 0
-        if mode == "empty":
-            self.saved_weight = self.spool.spool_weight or 0
-        if mode == "initial":
-            self.saved_weight = self.spool.initial_weight or 0
         self.numpad_visible = True
         if self._screen.vertical_mode:
             self.grid.remove(self.grid.get_child_at(0, 2))
