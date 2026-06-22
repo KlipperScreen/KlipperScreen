@@ -3,7 +3,7 @@ import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gdk, Gtk
+from gi.repository import Gdk, Gtk, Pango
 
 
 class Prompt:
@@ -109,6 +109,7 @@ class Prompt:
         close.connect("clicked", self.close)
 
         label = Gtk.Label(label=self.text, wrap=True, hexpand=True, vexpand=True)
+        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         label.get_style_context().add_class("prompt")
 
         self.scroll_box.add(label)

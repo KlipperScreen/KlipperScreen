@@ -41,6 +41,7 @@ class Panel(ScreenPanel):
         manual_calibration_label.set_markup("<big><b>Manual Calibration</b></big>")
 
         disclaimer = Gtk.Label(wrap=True, halign=Gtk.Align.CENTER)
+        disclaimer.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         disclaimer.set_markup(
             "<small>NOTE: Edit your printer.cfg to save manual calibration changes.</small>"
         )

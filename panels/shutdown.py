@@ -3,7 +3,7 @@ import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, Pango
 
 from ks_includes.functions import run_systemctl
 from ks_includes.screen_panel import ScreenPanel
@@ -63,6 +63,7 @@ class Panel(ScreenPanel):
 
     def reboot_poweroff(self, widget, method):
         label = Gtk.Label(wrap=True, hexpand=True, vexpand=True)
+        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         if method == "reboot":
             label.set_label(_("Are you sure you wish to reboot the system?"))
             title = _("Restart")

@@ -144,6 +144,7 @@ class Panel(ScreenPanel):
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 
         label = Gtk.Label(wrap=True, vexpand=True)
+        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         if program == "full":
             label.set_markup("<b>" + _("Perform a full upgrade?") + "</b>")
             vbox.add(label)
@@ -185,10 +186,12 @@ class Panel(ScreenPanel):
                 for c in info["commits_behind"]:
                     commit_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
                     title = Gtk.Label(wrap=True, hexpand=True)
+                    title.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
                     title.set_markup(f"\n<b>{c['subject']}</b>\n<i>{c['author']}</i>\n")
                     commit_box.add(title)
 
                     details = Gtk.Label(label=c["message"], wrap=True, hexpand=True)
+                    details.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
                     commit_box.add(details)
                     commit_box.add(Gtk.Separator())
                     vbox.add(commit_box)

@@ -227,6 +227,7 @@ class Panel(ScreenPanel):
         if bold:
             text = f"<b>{text}</b>"
         label = Gtk.Label(label=text, use_markup=True, xalign=0, wrap=True)
+        label.set_line_wrap_mode(Gtk.WrapMode.WORD_CHAR)
         self.grid.attach(label, column, self.current_row, 1, 1)
         self.current_row += 1
 

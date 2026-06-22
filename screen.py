@@ -1006,6 +1006,7 @@ class KlipperScreen(Gtk.Window):
             sign = "+" if zoffset > 0 else "-"
             msg = f"Apply {sign}{abs(zoffset)} offset?"
             zlabel = Gtk.Label(label=msg, hexpand=True, vexpand=True, wrap=True)
+            zlabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
             grid.attach(zlabel, 0, 1, 2, 1)
             if "Z_OFFSET_APPLY_PROBE" in self.printer.available_commands:
                 apply_probe = self.gtk.Button(label=_("Save Z") + "\n" + "Probe", style="color1")

@@ -417,6 +417,7 @@ class Panel(ScreenPanel):
     def save_offset(self, widget, device):
         sign = "+" if self.zoffset > 0 else "-"
         label = Gtk.Label(hexpand=True, vexpand=True, wrap=True)
+        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         saved_z_offset = None
         msg = f"Apply {sign}{abs(self.zoffset)} offset to {device}?"
         if device == "probe":
@@ -461,6 +462,7 @@ class Panel(ScreenPanel):
             {"name": _("Go Back"), "response": Gtk.ResponseType.CANCEL, "style": "dialog-info"},
         ]
         label = Gtk.Label(hexpand=True, vexpand=True, wrap=True)
+        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         label.set_markup(_("Are you sure you wish to restart this print?"))
         self._gtk.Dialog(_("Restart"), buttons, label, self.restart_confirm)
 
@@ -497,6 +499,7 @@ class Panel(ScreenPanel):
         if len(self._printer.get_stat("exclude_object", "objects")) > 1:
             buttons.insert(0, {"name": _("Exclude Object"), "response": Gtk.ResponseType.APPLY})
         label = Gtk.Label(hexpand=True, vexpand=True, wrap=True)
+        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         label.set_markup(_("Are you sure you wish to cancel this print?"))
         self._gtk.Dialog(_("Cancel"), buttons, label, self.cancel_confirm)
 

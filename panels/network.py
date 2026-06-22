@@ -274,6 +274,7 @@ class Panel(ScreenPanel):
 
     def remove_confirm_dialog(self, widget, ssid, bssid):
         label = Gtk.Label(wrap=True, vexpand=True)
+        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         label.set_markup(_("Do you want to forget or disconnect %s?") % ssid)
         buttons = [
             {"name": _("Forget"), "response": Gtk.ResponseType.OK, "style": "dialog-warning"},
