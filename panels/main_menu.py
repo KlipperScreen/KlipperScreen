@@ -282,6 +282,8 @@ class Panel(MenuPanel):
         if action != "notify_status_update":
             return
 
+        if not self._printer:
+            return
         for device in self._printer.get_temp_devices():
             if device not in data:
                 continue
