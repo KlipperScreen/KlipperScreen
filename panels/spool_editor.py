@@ -27,9 +27,9 @@ class Panel(ScreenPanel):
         self._pending_update_spool_id = None
         self._pending_update_value = None
         if extra is not None:
-            self._initial_remaining_weight = extra.remaining_weight or 0
-            self._initial_spool_weight = extra.spool_weight or 0
-            self._initial_initial_weight = extra.initial_weight or 0
+            self._initial_remaining_weight = getattr(extra, "remaining_weight", None) or 0
+            self._initial_spool_weight = getattr(extra, "spool_weight", None) or 0
+            self._initial_initial_weight = getattr(extra, "initial_weight", None) or 0
         else:
             self._initial_remaining_weight = 0
             self._initial_spool_weight = 0
