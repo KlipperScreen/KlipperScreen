@@ -996,7 +996,11 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
     def process_update(self, *args):
         self.base_panel.process_update(*args)
-        if self._cur_panels and hasattr(self.panels[self._cur_panels[-1]], "process_update"):
+        if (
+            self.printer
+            and self._cur_panels
+            and hasattr(self.panels[self._cur_panels[-1]], "process_update")
+        ):
             self.panels[self._cur_panels[-1]].process_update(*args)
 
     def confirm_save(self, widget):
