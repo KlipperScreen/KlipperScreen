@@ -8,6 +8,44 @@ here are some examples:
 
 ## Examples of rotation
 
+???+ example "Weston"
+
+    #### For users using Weston instead of cage
+
+    Connect to your host and edit `~/.config/weston.ini`:
+
+    ```bash
+    nano ~/.config/weston.ini
+    ```
+
+    Add or modify this section:
+
+    ```ini
+    [output]
+    name=DSI-1
+    transform=rotate-90
+    ```
+
+    To find the identifier on a terminal run:
+
+    ```bash
+    grep -H . /sys/class/drm/card*-*/status | grep :connected
+    ```
+
+    you will get something like:
+
+    ```bash
+    /sys/class/drm/card0-DSI-1/status:connected
+    ```
+
+    where `DSI-1` would be the identifier.
+    Valid transform values are `normal`, `rotate-90`, `rotate-180`, `rotate-270`.
+    Restart KlipperScreen for changes to take effect.
+
+    ```bash
+    sudo service KlipperScreen restart
+    ```
+
 ???+ example "Universal xorg configuration"
 
     #### Universal xorg configuration
@@ -104,7 +142,7 @@ here are some examples:
     #### Using a dtoverlay config on a Raspberry Pi
     In /boot/config.txt (or /boot/firmware/config.txt)
 
-    with some display you can add rotate, like this example for a 3.5" 
+    with some display you can add rotate, like this example for a 3.5"
     ```bash
     dtoverlay=waveshare35b-v2,rotate=270,drm,speed=30000000,fps=60
     ```
