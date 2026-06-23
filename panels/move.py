@@ -37,6 +37,7 @@ class Panel(ScreenPanel):
             "z-": self._gtk.Button("z-closer", "Z-", "color3"),
             "home": self._gtk.Button("home", _("Home"), "color4"),
             "motors_off": self._gtk.Button("motor-off", _("Disable Motors"), "color4"),
+            "switch_toolhead": self._gtk.Button("toolchanger", "", "color4"),
         }
         self.buttons["x+"].connect("clicked", self.move, "X", "+")
         self.buttons["x-"].connect("clicked", self.move, "X", "-")
@@ -53,6 +54,7 @@ class Panel(ScreenPanel):
             "printer.gcode.script",
             script,
         )
+        self.buttons["switch_toolhead"].connect("clicked", self.switch_toolhead)
         adjust = self._gtk.Button("settings", None, "color2", 1, Gtk.PositionType.LEFT, 1)
         adjust.connect("clicked", self.load_menu, "options", _("Settings"))
         adjust.set_hexpand(False)
@@ -101,7 +103,14 @@ class Panel(ScreenPanel):
             grid.attach(self.buttons[zp], 3, 0, 1, 1)
 
         grid.attach(self.buttons["home"], 0, 0, 1, 1)
-        grid.attach(self.buttons["motors_off"], 2, 0, 1, 1)
+
+        has_dual_carriage = "dual_carriage" in self._printer.get_config_section_list()
+        has_t1 = "T1" in self._printer.available_commands
+        extra_button = self.buttons["motors_off"]
+        if has_dual_carriage and has_t1:
+            extra_button = self.buttons["switch_toolhead"]
+            self.set_toolhead_label()
+        grid.attach(extra_button, 2, 0, 1, 1)
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
@@ -223,9 +232,23 @@ class Panel(ScreenPanel):
         self._screen.panels_reinit.append("zcalibrate")
         self.menu.clear()
 
+    def set_toolhead_label(self):
+        if "switch_toolhead" not in self.buttons:
+            return
+        current = self._printer.get_stat("toolhead", "extruder")
+        if current and current.startswith("extruder"):
+            t_num = current[8:] or "0"
+            self.buttons["switch_toolhead"].set_label(f"T{t_num}")
+
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
+        if (
+            "toolhead" in data
+            and "extruder" in data["toolhead"]
+            and "switch_toolhead" in self.buttons
+        ):
+            self.set_toolhead_label()
         if "toolhead" in data and "max_velocity" in data["toolhead"]:
             max_vel = max(int(float(data["toolhead"]["max_velocity"])), 2)
             adj = self.options["move_speed_xy"].get_adjustment()
@@ -274,3 +297,9 @@ class Panel(ScreenPanel):
         disname = self._screen._config.get_menu_name("move", name)
         menuitems = self._screen._config.get_menu_items("move", name)
         self._screen.show_panel("menu", disname, items=menuitems)
+
+    def switch_toolhead(self, widget):
+        current = self._printer.get_stat("toolhead", "extruder")
+        is_t1 = current and current.startswith("extruder1")
+        script = {"script": "T0" if is_t1 else "T1"}
+        self._screen._send_action(widget, "printer.gcode.script", script)
