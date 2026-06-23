@@ -33,6 +33,7 @@ start_weston() {
     rm -f "$XDG_RUNTIME_DIR/wayland-0.lock"
 
     /usr/bin/weston \
+        --backend=drm-backend.so \
         --socket="$WAYLAND_DISPLAY" \
         --shell=kiosk-shell.so \
         --idle-time=0 &
