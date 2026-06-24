@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-21 12:14-0300\n"
-"PO-Revision-Date: 2026-06-17 22:40+0000\n"
+"PO-Revision-Date: 2026-06-24 07:01+0000\n"
 "Last-Translator: Niolay Danov <nikdan@abv.bg>\n"
 "Language-Team: Bulgarian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/bg/>\n"
@@ -939,11 +939,9 @@ msgstr "Грешка при настройване на активен спул"
 msgid "No info available"
 msgstr "Няма налична информация"
 
-#, fuzzy
 msgid "Disk"
 msgstr "Диск"
 
-#, fuzzy
 msgid "Cores"
 msgstr "Ядра"
 
@@ -1065,7 +1063,6 @@ msgstr "Минимум:"
 msgid "System:"
 msgstr "Система:"
 
-#, fuzzy
 msgid "Waiting connection closure"
 msgstr "Очакване на затваряне на връзката"
 
@@ -1105,7 +1102,6 @@ msgstr "Klipper е готов"
 msgid "Klipper has shutdown"
 msgstr "Klipper се изключи"
 
-#, fuzzy
 msgid "Waiting for Moonraker connection to close"
 msgstr "Очакване на затваряне на връзката с Moonraker"
 
