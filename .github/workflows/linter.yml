@@ -12,7 +12,7 @@ jobs:
   lint-python-code:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Install and run Ruff
         uses: astral-sh/ruff-action@v4.0.0
       - run: ruff check --fix screen.py ks_includes ks_includes/widgets panels
