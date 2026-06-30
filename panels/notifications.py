@@ -1,7 +1,7 @@
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
@@ -23,7 +23,7 @@ class Panel(ScreenPanel):
         super().__init__(screen, title)
         self.empty = _("Notification log empty")
         self.tb = Gtk.TextBuffer(text=self.empty)
-        tv = Gtk.TextView(editable=False, cursor_visible=False, wrap_mode=Gtk.WrapMode.WORD_CHAR)
+        tv = Gtk.TextView(editable=False, cursor_visible=False, wrap_mode=Pango.WrapMode.WORD_CHAR)
         tv.set_buffer(self.tb)
         tv.connect("size-allocate", self._autoscroll)
 

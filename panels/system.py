@@ -4,7 +4,7 @@ import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import GLib, Gtk
+from gi.repository import GLib, Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
 
@@ -140,7 +140,7 @@ class Panel(ScreenPanel):
             used_percent = (used / total) * 100 if total > 0 else 0
 
             label = Gtk.Label(label="", xalign=0, wrap=True, max_width_chars=50)
-            label.set_line_wrap_mode(Gtk.WrapMode.WORD)
+            label.set_line_wrap_mode(Pango.WrapMode.WORD)
             label.get_style_context().add_class("printing-info")
             if len(self.disk_usages) == 1 and len(du["names"]) > 1:
                 label.set_label(
@@ -227,7 +227,7 @@ class Panel(ScreenPanel):
         if bold:
             text = f"<b>{text}</b>"
         label = Gtk.Label(label=text, use_markup=True, xalign=0, wrap=True)
-        label.set_line_wrap_mode(Gtk.WrapMode.WORD_CHAR)
+        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         self.grid.attach(label, column, self.current_row, 1, 1)
         self.current_row += 1
 
