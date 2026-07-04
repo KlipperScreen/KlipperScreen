@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-21 12:14-0300\n"
-"PO-Revision-Date: 2026-05-05 19:16+0000\n"
+"PO-Revision-Date: 2026-07-04 18:01+0000\n"
 "Last-Translator: Selim <technical50@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/tr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17.1\n"
+"X-Generator: Weblate 2026.7.1.dev0\n"
 
 msgid "Main Menu"
 msgstr "Ana Menü"
@@ -172,11 +172,9 @@ msgstr "24 Saatlik Zaman"
 msgid "Disable for 12hs with am / pm"
 msgstr "12 saat boyunca am / pm ile devre dışı bırakın"
 
-#, fuzzy
 msgid "Action bar Shortcut"
 msgstr "Eylem çubuğu Kısayolu"
 
-#, fuzzy
 msgid "LEDs"
 msgstr "LED'ler"
 
@@ -249,11 +247,9 @@ msgstr "İmleci göster"
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr "Fare yada dokunmatik ekranın kesinliğini doğrulamak için"
 
-#, fuzzy
 msgid "Screen wake delay"
 msgstr "Ekran uyandırma gecikmesi"
 
-#, fuzzy
 msgid "Helps to prevent unwanted touchs during screen wake up"
 msgstr "Ekran uyanırken istenmeyen dokunmaları önlemeye yardımcı olur"
 
@@ -346,7 +342,6 @@ msgstr "Bağlantı başarısız oldu"
 msgid "No mesh has been loaded"
 msgstr "Herhangi bir haritalandırma yüklenmedi"
 
-#, fuzzy
 msgid "Invalid Number"
 msgstr "Geçersiz Sayı"
 
@@ -722,15 +717,12 @@ msgstr "Sadece paneli taşımak için"
 msgid "Z Speed (mm/s)"
 msgstr "Z Hızı (mm/s)"
 
-#, fuzzy
 msgid "Advanced Move"
 msgstr "Gelişmiş Hareket"
 
-#, fuzzy
 msgid "Query Endstops"
 msgstr "Endstop'ları Sorgula"
 
-#, fuzzy
 msgid "Invalid position"
 msgstr "Geçersiz konum"
 
@@ -740,11 +732,9 @@ msgstr "Başlatılamadı"
 msgid "Interface"
 msgstr "Arayüz"
 
-#, fuzzy
 msgid "No network devices have been found"
 msgstr "Hiçbir ağ cihazı bulunamadı"
 
-#, fuzzy
 msgid "No network devices available"
 msgstr "Mevcut ağ cihazı yok"
 
@@ -858,85 +848,66 @@ msgstr "Tekrar dene"
 msgid "Power On Printer"
 msgstr "Yazıcıyı aç"
 
-#, fuzzy
 msgid "Spool editor"
-msgstr "İplik düzenleyici"
+msgstr "Makara düzenleyici"
 
-#, fuzzy
 msgid "No spool selected"
-msgstr "Seçili iplik yok"
+msgstr "Seçili Makara yok"
 
-#, fuzzy
 msgid "Measured weight"
 msgstr "Ölçülen ağırlık"
 
-#, fuzzy
 msgid "Remaining weight"
 msgstr "Kalan ağırlık"
 
-#, fuzzy
 msgid "Initial weight"
 msgstr "İlk ağırlık"
 
-#, fuzzy
 msgid "Empty weight"
 msgstr "Boş ağırlık"
 
-#, fuzzy
 msgid "Invalid weight"
 msgstr "Geçersiz ağırlık"
 
-#, fuzzy
 msgid "Restore"
 msgstr "Geri yükle"
 
-#, fuzzy
 msgid "No"
 msgstr "Hayır"
 
-#, fuzzy
 msgid "Yes"
 msgstr "Evet"
 
-#, fuzzy
 msgid "Vendor"
 msgstr "Satıcı"
 
 msgid "Material"
 msgstr "Malzeme"
 
-#, fuzzy
 msgid "Used"
 msgstr "Kullanılan"
 
-#, fuzzy
 msgid "Location"
 msgstr "Konum"
 
 msgid "Archived"
 msgstr "Arşivlenen"
 
-#, fuzzy
 msgid "Price"
 msgstr "Fiyat"
 
-#, fuzzy
 msgid "Comment"
 msgstr "Yorum"
 
-#, fuzzy
 msgid "Measured weight is below empty spool weight"
 msgstr "Ölçülen ağırlık, boş makara ağırlığının altındadır"
 
-#, fuzzy
 msgid "Value must be positive"
 msgstr "Değer pozitif olmalıdır"
 
-#, fuzzy
 msgid "Error updating filament weight"
 msgstr "İplik ağırlığı güncellenirken hata oluştu"
 
-#, fuzzy
 msgid "Filament weight updated"
 msgstr "İplik ağırlığı güncellendi"
 
@@ -946,7 +917,6 @@ msgstr "ID"
 msgid "Filter"
 msgstr "Filtre"
 
-#, fuzzy
 msgid "Remaining length"
 msgstr "Kalan uzunluk"
 
@@ -965,15 +935,12 @@ msgstr "Etkin makara ayar hatası"
 msgid "No info available"
 msgstr "Bilgi yok"
 
-#, fuzzy
 msgid "Disk"
 msgstr "Disk"
 
-#, fuzzy
 msgid "Cores"
 msgstr "Çekirdekler"
 
-#, fuzzy
 msgid "IP Address"
 msgstr "IP Adresi"
 
@@ -1007,7 +974,6 @@ msgstr "Güncellemeler kontrol ediliyor, lütfen bekleyin..."
 msgid "Not working or not configured"
 msgstr "Çalışmamakta veya konfigre edilmemiş"
 
-#, fuzzy
 msgid "Are you sure?"
 msgstr "Emin misiniz?"
 
@@ -1075,7 +1041,6 @@ msgstr "Nozzle indir"
 msgid "Abort"
 msgstr "İptal et"
 
-#, fuzzy
 msgid "Calibration commands not available yet"
 msgstr "Kalibrasyon komutları henüz mevcut değil"
 
@@ -1094,11 +1059,9 @@ msgstr "Minimum:"
 msgid "System:"
 msgstr "Sistem:"
 
-#, fuzzy
 msgid "Waiting connection closure"
 msgstr "Bağlantı kapanışı bekleniyor"
 
-#, fuzzy
 msgid "Initializing KlipperScreen"
 msgstr "KlipperScreen başlatılıyor"
 
@@ -1108,11 +1071,9 @@ msgstr "Yardım isterken KlipperScreen.log dosyasını sağlayın.\n"
 msgid "Close"
 msgstr "Kapat"
 
-#, fuzzy
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS başarısız oldu ve devre dışı bırakıldı"
 
-#, fuzzy
 msgid "Moonraker Connected"
 msgstr "Moonraker Bağlandı"
 
@@ -1137,17 +1098,14 @@ msgstr "Klipper başlatılmaya çalışılıyor"
 msgid "Klipper has shutdown"
 msgstr "Klipper Kapandı"
 
-#, fuzzy
 msgid "Waiting for Moonraker connection to close"
 msgstr "Moonraker bağlantısının kapanması bekleniyor"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: bağlandı"
 
-#, fuzzy
 msgid "Initializing Klipper Connection"
 msgstr "Klipper Bağlantısı başlatılıyor"
 
-#, fuzzy
 msgid "Klipper not responding after multiple attempts"
 msgstr "Birden fazla denemeden sonra Klipper yanıt vermiyor"
