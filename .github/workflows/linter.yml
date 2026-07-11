@@ -14,6 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Install and run Ruff
-        uses: astral-sh/ruff-action@v4.0.0
+        uses: astral-sh/ruff-action@v4.1.0
       - run: ruff check --fix screen.py ks_includes ks_includes/widgets panels
       - run: ruff format screen.py ks_includes panels
