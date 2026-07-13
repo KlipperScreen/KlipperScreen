@@ -174,8 +174,10 @@ class Panel(ScreenPanel):
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
-        if "bed_mesh" in data and "profile_name" in data["bed_mesh"]:
-            self.activate_mesh(data["bed_mesh"]["profile_name"])
+        if "bed_mesh" in data:
+            if "profile_name" in data["bed_mesh"]:
+                self.activate_mesh(data["bed_mesh"]["profile_name"])
+            self.load_meshes()
 
     def remove_create(self):
         if self.show_create is False:
