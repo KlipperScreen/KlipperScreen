@@ -48,12 +48,18 @@ class NotificationHandler:
 
         self._screen.printer.process_update(data)
 
+        if "idle_timeout" in data and "state" in data["idle_timeout"]:
+            if data["idle_timeout"]["state"] == "Printing":
+                self.__remove_confirm_dialogs()
+            return
+
         if (
             "manual_probe" in data
             and data["manual_probe"]["is_active"]
             and "zcalibrate" not in self._screen._cur_panels
         ):
             self._screen.show_panel("zcalibrate")
+            return
 
         if (
             "screws_tilt_adjust" in data
@@ -62,6 +68,12 @@ class NotificationHandler:
             and "bed_level" not in self._screen._cur_panels
         ):
             self._screen.show_panel("bed_level")
+            return
+
+    def __remove_confirm_dialogs(self):
+        if self._screen.confirm is not None:
+            self._screen.gtk.remove_dialog(self._screen.confirm)
+            self._screen.confirm = None
 
     def _filelist_changed(self, data):
         if self._screen.files is not None:
