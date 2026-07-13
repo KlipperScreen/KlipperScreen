@@ -242,6 +242,7 @@ class Panel(ScreenPanel):
             self.labels["create_profile"].pack_start(box, True, True, 5)
 
         self.content.add(self.labels["create_profile"])
+        self.labels["create_profile"].show_all()
         self.labels["profile_name"].grab_focus_without_selecting()
         self.show_create = True
 
