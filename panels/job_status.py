@@ -591,7 +591,7 @@ class Panel(ScreenPanel):
                     f"{data['toolhead']['max_accel']:.0f} {self.mms2}"
                 )
         if "extruder" in data and "pressure_advance" in data["extruder"]:
-            self.labels["advance"].set_label(f"{data['extruder']['pressure_advance']:.2f}")
+            self.labels["advance"].set_label(f"{data['extruder']['pressure_advance']:.3f}")
 
         if "gcode_move" in data:
             if "gcode_position" in data["gcode_move"]:
