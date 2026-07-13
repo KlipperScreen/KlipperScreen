@@ -49,7 +49,8 @@ class Panel(ScreenPanel):
         self.labels["options_menu"].add(self.labels["options"])
 
     def activate(self):
-        self.reload_macros()
+        if not self.macros:
+            self.reload_macros()
 
     def add_gcode_macro(self, macro):
         section = self._printer.get_macro(macro)
@@ -199,8 +200,7 @@ class Panel(ScreenPanel):
         for macro in list(self.options):
             self.add_option("options", self.options, macro, self.options[macro])
         macros = sorted(self.macros, reverse=self.sort_reverse, key=str.casefold)
-        for macro in macros:
-            pos = macros.index(macro)
+        for pos, macro in enumerate(macros):
             self.labels["macros"].insert_row(pos)
             self.labels["macros"].attach(self.macros[macro]["row"], 0, pos, 1, 1)
             self.labels["macros"].show_all()
@@ -208,6 +208,5 @@ class Panel(ScreenPanel):
     def back(self):
         if len(self.menu) > 1:
             self.unload_menu()
-            self.reload_macros()
             return True
         return False
