@@ -203,6 +203,7 @@ class Panel(ScreenPanel):
         self.active_mesh = None
         self.update_graph()
         self.buttons["clear"].set_sensitive(False)
+        self.remove_create()
 
     def _get_position(self, profile):
         pl = list(self.profiles)
