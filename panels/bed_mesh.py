@@ -119,7 +119,6 @@ class Panel(ScreenPanel):
         name.set_vexpand(False)
         name.set_halign(Gtk.Align.START)
         name.connect("clicked", self.send_load_mesh, profile)
-        name.connect("clicked", self.update_graph, profile)
 
         buttons = {
             "save": self._gtk.Button("complete", None, "color4", self.bts),
