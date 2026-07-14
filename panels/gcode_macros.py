@@ -23,6 +23,7 @@ class Panel(ScreenPanel):
         self.options = {}
         self.macros = {}
         self.menu = ["macros_menu"]
+        self.macros_dirty = True
 
         adjust = self._gtk.Button(
             "settings", " " + _("Settings"), "color2", self.bts, Gtk.PositionType.LEFT, 1
@@ -49,8 +50,10 @@ class Panel(ScreenPanel):
         self.labels["options_menu"].add(self.labels["options"])
 
     def activate(self):
-        if not self.macros:
-            self.reload_macros()
+        self.reload_macros()
+
+    def macro_visibility_changed(self, active):
+        self.macros_dirty = True
 
     def add_gcode_macro(self, macro):
         section = self._printer.get_macro(macro)
@@ -177,6 +180,11 @@ class Panel(ScreenPanel):
         GLib.idle_add(self.reload_macros)
 
     def reload_macros(self):
+        if not self.macros_dirty:
+            return
+
+        self.macros_dirty = False
+
         self.labels["macros"].remove_column(0)
         self.macros = {}
         self.options = {}
@@ -190,6 +198,7 @@ class Panel(ScreenPanel):
                 "name": macro,
                 "section": f"displayed_macros {self._screen.state.printer_name}",
                 "type": "binary",
+                "callback": self.macro_visibility_changed,
             }
             show = self._config.get_config().getboolean(
                 self.options[macro]["section"], macro.lower(), fallback=True
@@ -208,5 +217,6 @@ class Panel(ScreenPanel):
     def back(self):
         if len(self.menu) > 1:
             self.unload_menu()
+            self.reload_macros()
             return True
         return False
