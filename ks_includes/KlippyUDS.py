@@ -58,6 +58,12 @@ class KlippyUDS(threading.Thread):
             self.connecting = False
             if "on_error" in self._callback:
                 GLib.idle_add(self._callback["on_error"], str(e), priority=GLib.PRIORITY_HIGH_IDLE)
+            if "on_close" in self._callback:
+                GLib.idle_add(
+                    self._callback["on_close"],
+                    "Connection refused",
+                    priority=GLib.PRIORITY_HIGH_IDLE,
+                )
             return True
         return False
 
