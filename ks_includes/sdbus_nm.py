@@ -169,11 +169,13 @@ class SdbusNm:
             return "?"
         active_connection = ActiveConnection(active_connection_path)
         ip_info = IPv4Config(active_connection.ip4_config)
+        if not ip_info.address_data:
+            return "?"
         ip = ip_info.address_data[0]["address"][1]
 
         dev_obj = NetworkDeviceGeneric(active_connection.devices[0])
         iface_name = dev_obj.interface
-        if iface_name == self.wlan_device.interface:
+        if self.wlan_device is None or iface_name == self.wlan_device.interface:
             return ip
         return f"{ip} ({iface_name})"
 
@@ -198,7 +200,7 @@ class SdbusNm:
         return networks
 
     def get_bssid_from_ssid(self, ssid):
-        return next(net["BSSID"] for net in self.get_networks() if ssid == net["SSID"])
+        return next((net["BSSID"] for net in self.get_networks() if ssid == net["SSID"]), None)
 
     def get_connected_ap(self):
         if self.wlan_device.active_access_point == "/":
@@ -214,7 +216,7 @@ class SdbusNm:
             None,
         )
 
-    def add_network(self, ssid, psk, eap_method, identity="", phase2=None):
+    def add_network(self, ssid, psk, eap_method=None, identity="", phase2=None):
         security_type = self.get_security_type(ssid)
         logging.debug(f"Adding network of type: {security_type}")
         if security_type is None:
