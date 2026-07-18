@@ -12,6 +12,7 @@ Probably all versions contain changes regarding documentation, translation, fixe
 * network interface selector includes wired connections
 * add a shortcut from titlebar item to respective panels (temp/spoolman)
 * add a configurable screensaver delay for slow to wake displays
+* render multi-color spools (Spoolman multi_color_hexes) as a gradient in the spoolman icon, instead of black
 
 ## v0.4.7  (May 13, 2026)
 

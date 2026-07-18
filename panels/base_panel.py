@@ -13,6 +13,7 @@ from gi.repository import GdkPixbuf, Gio, GLib, Gtk, Pango
 from jinja2 import Environment
 
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.svg_gradient import apply_filament_gradient, filament_colors_from_dict
 
 try:
     import psutil
@@ -37,7 +38,7 @@ class BasePanel(ScreenPanel):
         self.titlebar_labels = {}
         self.titlebar_populated = False
         self.spoolman_low_limit = 20
-        self.spoolman_current_color = None
+        self.spoolman_current_colors = None
         self.current_extruder = None
         self.last_usage_report = datetime.now()
         self.usage_report = 0
@@ -184,9 +185,9 @@ class BasePanel(ScreenPanel):
         self.battery_icons = self.load_battery_icons()
         self.battery_percentage()
 
-    def get_spoolman_icon_pixbuf(self, color=None):
-        if not color:
-            self.get_active_spoolman_color()
+    def get_spoolman_icon_pixbuf(self, colors=None):
+        if not colors:
+            colors = self.get_active_spoolman_colors()
         klipperscreendir = pathlib.Path(__file__).parent.resolve().parent
         icon_path = os.path.join(
             klipperscreendir, "styles", self._screen.theme, "images", "spool.svg"
@@ -196,7 +197,7 @@ class BasePanel(ScreenPanel):
             icon_path = os.path.join(klipperscreendir, "styles", "spool.svg")
         try:
             svg = pathlib.Path(icon_path).read_text(encoding="utf-8")
-            svg = svg.replace("var(--filament-color)", f"#{color}")
+            svg = apply_filament_gradient(svg, colors)
             stream = Gio.MemoryInputStream.new_from_data(svg.encode(), None)
             pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
                 stream,
@@ -211,20 +212,15 @@ class BasePanel(ScreenPanel):
             logging.error(f"Couldn't load spoolman icon: {e}")
             return self._gtk.PixbufFromIcon("spool", icon_size, icon_size)
 
-    def get_active_spoolman_color(self):
-        default_color = "000000"
+    def get_active_spoolman_colors(self):
         if (
             self._printer is None
             or not self._printer.active_spool
             or "filament" not in self._printer.active_spool
             or not self._printer.active_spool["filament"]
         ):
-            return default_color
-        filament = self._printer.active_spool["filament"]
-        color = filament.get("color_hex")
-        if isinstance(color, str):
-            return color.strip().lstrip("#") or default_color
-        return default_color
+            return filament_colors_from_dict(None)
+        return filament_colors_from_dict(self._printer.active_spool["filament"])
 
     def show_titlebar_items(self):
         if self.titlebar_populated:
@@ -403,10 +399,10 @@ class BasePanel(ScreenPanel):
         remaining_weight = self._printer.active_spool["remaining_weight"]
         self.labels["spoolman_weight"].set_label(f"{round(remaining_weight):.0f} g")
         self.update_spoolman_alert_visuals(remaining_weight <= self.spoolman_low_limit)
-        color = self.get_active_spoolman_color()
-        if color != self.spoolman_current_color:
-            self.labels["spoolman_icon"].set_from_pixbuf(self.get_spoolman_icon_pixbuf(color))
-            self.spoolman_current_color = color
+        colors = self.get_active_spoolman_colors()
+        if colors != self.spoolman_current_colors:
+            self.labels["spoolman_icon"].set_from_pixbuf(self.get_spoolman_icon_pixbuf(colors))
+            self.spoolman_current_colors = colors
 
     def fetch_spoolman(self):
         if (
