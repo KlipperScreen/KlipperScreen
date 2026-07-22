@@ -848,6 +848,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
     def socket_disconnected(self, status):
         logging.debug("### disconnected")
+        self.server_info = None
         self.printer.state = "disconnected"
         go_to_splash = self.state.connected  # Go to splashscreen if it was connected
         self.state.connected = False
