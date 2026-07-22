@@ -1154,6 +1154,13 @@ class KlipperScreen(Gtk.ApplicationWindow):
         return False
 
     def init_moonraker_components(self, data, method, params):
+        if "error" in data:
+            error_msg = data["error"].get("message", "Unknown error")
+            self._init_printer(f"Error getting Moonraker server info: {error_msg}")
+            return
+        if not data or "result" not in data:
+            self._init_printer("Invalid response from Moonraker")
+            return
         popup = ""
         level = 2
         self.server_info = data["result"]
