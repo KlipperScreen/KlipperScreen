@@ -1136,15 +1136,20 @@ class KlipperScreen(Gtk.ApplicationWindow):
         if self.state.reinit_count > self.MAX_RETRIES or "printer_select" in self._cur_panels:
             logging.info("Stopping Retries")
             return False
+        first_try = self.state.reinit_count == 0
         self.state.reinit_count += 1
-        if self.state.reinit_count == 1:
-            self.connect_to_moonraker()
-        elif self._ws.connected and not self._ws.closing:
-            logging.info("Retry: waiting before reinitializing Klipper")
-            GLib.timeout_add_seconds(4, self.init_klipper)
+        if self._ws.connected and not self._ws.closing:
+            action = self.init_klipper
+            info = "reinitializing Klipper"
         else:
-            logging.info("Retry: waiting before connecting to Moonraker")
-            GLib.timeout_add_seconds(4, self.connect_to_moonraker)
+            action = self.connect_to_moonraker
+            info = "connecting to Moonraker"
+
+        if first_try:
+            action()
+        else:
+            logging.info("Retry: waiting before %s", info)
+            GLib.timeout_add_seconds(4, action)
 
     def connect_to_moonraker(self):
         if self._ws.closing:
@@ -1156,10 +1161,12 @@ class KlipperScreen(Gtk.ApplicationWindow):
     def init_moonraker_components(self, data, method, params):
         if "error" in data:
             error_msg = data["error"].get("message", "Unknown error")
-            self._init_printer(f"Error getting Moonraker server info: {error_msg}")
+            self.state.connecting = False
+            self.printer_initializing(f"Error getting Moonraker server info: {error_msg}")
             return
         if not data or "result" not in data:
-            self._init_printer("Invalid response from Moonraker")
+            self.state.connecting = False
+            self.printer_initializing("Invalid response from Moonraker")
             return
         popup = ""
         level = 2
