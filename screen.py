@@ -1204,21 +1204,24 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
     def set_printer_info(self, data, method, params):
         if "error" in data:
-            self._init_printer("Unable to get printer info from moonraker")
+            error_msg = data["error"].get("message", "Unknown error")
+            self._init_printer(f"Unable to get printer info from moonraker: {error_msg}")
             return
         printer_info = data["result"]
         self._ws.api.query_configfile(self.set_configfile, printer_info)
 
     def set_configfile(self, data, method, params, printer_info):
         if "error" in data:
-            self._init_printer("Error getting printer configuration")
+            error_msg = data["error"].get("message", "Unknown error")
+            self._init_printer(f"Error getting printer configuration: {error_msg}")
             return
         self.printer.reinit(printer_info, data["result"]["status"])
         self._ws.api.get_printer_objects(self.set_objects)
 
     def set_objects(self, data, method, params):
         if "error" in data:
-            self._init_printer("Error getting printer objects list")
+            error_msg = data["error"].get("message", "Unknown error")
+            self._init_printer(f"Error getting printer objects list: {error_msg}")
             return
         objects = data["result"]["objects"]
         self.printer.register_dynamic_sensors(objects)
@@ -1227,20 +1230,23 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
     def query_objects(self, data, method, params):
         if "error" in data:
-            self._init_printer("Error getting printer object data")
+            error_msg = data["error"].get("message", "Unknown error")
+            self._init_printer(f"Error getting printer object data: {error_msg}")
             return
         self.printer.process_update(data["result"]["status"])
         self._finish_init()
 
     def set_commands(self, data, method, params):
         if "error" in data:
-            logging.error("Error getting available gcode commands")
+            error_msg = data["error"].get("message", "Unknown error")
+            logging.error(f"Error getting available gcode commands: {error_msg}")
             return
         self.printer.available_commands = data["result"]
 
     def set_system_info(self, data, method, params):
         if "error" in data:
-            logging.error("Error getting system info")
+            error_msg = data["error"].get("message", "Unknown error")
+            logging.error(f"Error getting system info: {error_msg}")
             return
         self.printer.system_info = data["result"]["system_info"]
 
@@ -1310,7 +1316,8 @@ class KlipperScreen(Gtk.ApplicationWindow):
         if not temp_devices:
             return
         if "error" in data:
-            logging.error(data["error"])
+            error_msg = data["error"].get("message", "Unknown error")
+            logging.error(f"Error getting temperature store: {error_msg}")
         elif "result" not in data or not data["result"]:
             logging.info("Moonraker tempstore not yet available")
         else:
