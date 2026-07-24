@@ -574,8 +574,12 @@ class Panel(ScreenPanel):
             self.buttons['fan'].set_label(fan_label[:12])
         if "print_stats" in data:
             if 'state' in data['print_stats']:
+                new_state = data['print_stats']['state']
+                if new_state == "paused" and self._screen.filament_runout_pause:
+                    self._screen.filament_runout_pause = False
+                    GLib.timeout_add(300, self._screen.show_filament_runout_dialog)
                 self.set_state(
-                    data["print_stats"]["state"],
+                    new_state,
                     msg=f'{data["print_stats"]["message"] if "message" in data["print_stats"] else ""}'
                 )
             if 'filename' in data['print_stats']:

@@ -96,6 +96,7 @@ class KlipperScreen(Gtk.Window):
         self.confirm = None
         self.panels_reinit = []
         self.last_popup_time = datetime.now()
+        self.filament_runout_pause = False
 
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
@@ -453,6 +454,25 @@ class KlipperScreen(Gtk.Window):
         self.popup_message = None
         return False
 
+    def show_filament_runout_dialog(self):
+        buttons = [
+            {"name": _("Confirm"), "response": Gtk.ResponseType.OK, "style": 'dialog-info'}
+        ]
+        label = Gtk.Label(
+            hexpand=True, vexpand=True,
+            halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER,
+            wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR
+        )
+        label.set_markup(f"<big><b>{_('Please check the filament')}</b></big>")
+        self.gtk.Dialog(
+            _("Filament Runout"), buttons, label,
+            self.close_filament_runout_dialog
+        )
+        return False
+
+    def close_filament_runout_dialog(self, dialog, response_id):
+        self.gtk.remove_dialog(dialog)
+
     def show_error_modal(self, title_msg, description="", help_msg=None):
         logging.error(f"Showing error modal: {title_msg} {description}")
 
@@ -762,7 +782,10 @@ class KlipperScreen(Gtk.Window):
 
     def state_paused(self):
         self.state_printing()
-        if self._config.get_main_config().getboolean("auto_open_extrude", fallback=True):
+        if self.filament_runout_pause:
+            self.filament_runout_pause = False
+            GLib.timeout_add(300, self.show_filament_runout_dialog)
+        elif self._config.get_main_config().getboolean("auto_open_extrude", fallback=True):
             self.show_panel("extrude")
 
     def state_printing(self):
@@ -862,7 +885,11 @@ class KlipperScreen(Gtk.Window):
             if re.match('^(?:ok\\s+)?(B|C|T\\d*):', data):
                 return
             if data.startswith("// action:"):
-                self.process_action(data[10:])
+                action = data[10:]
+                if action == "filament_runout":
+                    self.filament_runout_pause = True
+                    logging.info("Filament runout detected, setting flag")
+                self.process_action(action)
                 return
             elif data.startswith("echo: "):
                 self.show_popup_message(data[6:], 1, from_ws=True)
