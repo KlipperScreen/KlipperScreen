@@ -23,6 +23,8 @@ def format_label(widget):
 
 
 class Panel(ScreenPanel):
+    PREVIEW_ICON = "bed-mesh"
+
     def __init__(self, screen, title):
         title = title or (_("Print") if self._printer.extrudercount > 0 else _("Gcodes"))
         super().__init__(screen, title)
@@ -161,18 +163,8 @@ class Panel(ScreenPanel):
             )
             info.get_style_context().add_class("print-info")
             info.set_markup(self.get_info_str(item, path))
-            delete = Gtk.Button(
-                hexpand=False, vexpand=False, can_focus=False, always_show_image=True
-            )
-            delete.get_style_context().add_class("color1")
-            delete.set_image(
-                self._gtk.Image("delete", self.list_button_size, self.list_button_size)
-            )
-            rename = Gtk.Button(
-                hexpand=False, vexpand=False, can_focus=False, always_show_image=True
-            )
-            rename.get_style_context().add_class("color2")
-            rename.set_image(self._gtk.Image("edit", self.list_button_size, self.list_button_size))
+            delete = self._build_action_button("delete", "color1")
+            rename = self._build_action_button("edit", "color2")
             itemname = Gtk.Label(
                 hexpand=True, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END
             )
@@ -185,13 +177,16 @@ class Panel(ScreenPanel):
                 row.attach(icon, 0, 0, 1, 2)
             row.attach(itemname, 1, 0, 3, 1)
             row.attach(info, 1, 1, 1, 1)
-            row.attach(rename, 2, 1, 1, 1)
-            row.attach(delete, 3, 1, 1, 1)
             if is_file:
+                preview = self._build_action_button(self.PREVIEW_ICON, "color4")
                 icon.connect("clicked", self.confirm_print, path)
                 self.image_load(path, icon, self.thumbsize / 2, True, "file")
+                preview.connect("clicked", self.open_preview, path)
                 delete.connect("clicked", self.confirm_delete_file, f"gcodes/{path}")
                 rename.connect("clicked", self.show_rename, f"gcodes/{path}")
+                row.attach(preview, 2, 1, 1, 1)
+                row.attach(rename, 3, 1, 1, 1)
+                row.attach(delete, 4, 1, 1, 1)
                 action_icon = "printer" if self._printer.extrudercount > 0 else "load"
                 action = self._gtk.Button(action_icon, style="color3")
                 action.connect("clicked", self.confirm_print, path)
@@ -199,32 +194,54 @@ class Panel(ScreenPanel):
                 action.set_vexpand(False)
                 action.set_halign(Gtk.Align.END)
                 if self._screen.width >= 400:
-                    row.attach(action, 4, 0, 1, 2)
+                    row.attach(action, 5, 0, 1, 2)
                 else:
                     icon.get_style_context().add_class("color3")
-                    row.attach(icon, 4, 0, 1, 2)
+                    row.attach(icon, 5, 0, 1, 2)
             elif is_dir:
                 icon.connect("clicked", self.change_dir, path)
                 self.image_load(None, icon, self.thumbsize / 2, True, "folder")
                 delete.connect("clicked", self.confirm_delete_directory, path)
                 rename.connect("clicked", self.show_rename, path)
+                row.attach(rename, 2, 1, 1, 1)
+                row.attach(delete, 3, 1, 1, 1)
                 action = self._gtk.Button("load", style="color3")
                 action.connect("clicked", self.change_dir, path)
                 action.set_hexpand(False)
                 action.set_vexpand(False)
                 action.set_halign(Gtk.Align.END)
-                row.attach(action, 4, 0, 1, 2)
+                row.attach(action, 5, 0, 1, 2)
             fbchild.add(row)
         else:  # Thumbnail view
             icon = self._gtk.Button(label=basename)
+            tile = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
             if is_file:
                 icon.connect("clicked", self.confirm_print, path)
                 self.image_load(path, icon, self.thumbsize, False, "file")
+                actions = Gtk.Box(halign=Gtk.Align.CENTER, spacing=6)
+                preview = self._build_action_button(self.PREVIEW_ICON, "color4")
+                preview.connect("clicked", self.open_preview, path)
+                rename = self._build_action_button("edit", "color2")
+                rename.connect("clicked", self.show_rename, f"gcodes/{path}")
+                delete = self._build_action_button("delete", "color1")
+                delete.connect("clicked", self.confirm_delete_file, f"gcodes/{path}")
+                actions.add(preview)
+                actions.add(rename)
+                actions.add(delete)
+                tile.add(icon)
+                tile.add(actions)
             elif is_dir:
                 icon.connect("clicked", self.change_dir, path)
                 self.image_load(None, icon, self.thumbsize, False, "folder")
-            fbchild.add(icon)
+                tile.add(icon)
+            fbchild.add(tile)
         return fbchild
+
+    def _build_action_button(self, icon_name, color_class):
+        button = Gtk.Button(hexpand=False, vexpand=False, can_focus=False, always_show_image=True)
+        button.get_style_context().add_class(color_class)
+        button.set_image(self._gtk.Image(icon_name, self.list_button_size, self.list_button_size))
+        return button
 
     def show_path(self):
         self.labels["path"].set_vexpand(False)
@@ -260,6 +277,14 @@ class Panel(ScreenPanel):
         params = {"path": f"{filepath}"}
         self._screen._confirm_send_action(
             None, _("Delete File?") + "\n\n" + filepath, "server.files.delete_file", params
+        )
+
+    def open_preview(self, widget, filename):
+        self._screen.show_panel(
+            "gcode_viewer",
+            title=_("Preview"),
+            filename=filename,
+            preview_context="selected_file",
         )
 
     def confirm_delete_directory(self, widget, dirpath):

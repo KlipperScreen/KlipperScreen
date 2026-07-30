@@ -6,6 +6,11 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
+from ks_includes.gcode_renderer import (
+    get_renderer_settings,
+    preview_access_location,
+    preview_menu_visible,
+)
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.widgets.autogrid import AutoGrid
 
@@ -14,7 +19,7 @@ class Panel(ScreenPanel):
     def __init__(self, screen, title, items=None):
         super().__init__(screen, title)
         self.items = items
-        self.j2_data = self._printer.get_printer_status_data()
+        self.j2_data = self._get_menu_context()
         self._compiled_enable = {}
         self.create_menu_items()
         self.scroll = self._gtk.ScrolledWindow()
@@ -22,7 +27,7 @@ class Panel(ScreenPanel):
         self.autogrid = AutoGrid()
 
     def activate(self):
-        self.j2_data = self._printer.get_printer_status_data()
+        self.j2_data = self._get_menu_context()
         self.add_content()
 
     def add_content(self):
@@ -131,3 +136,16 @@ class Panel(ScreenPanel):
             "side_shortcut_target", fallback="notifications"
         )
         return item.get("panel") == shortcut_target
+
+    def _get_menu_context(self):
+        context = self._printer.get_printer_status_data()
+        filename = (context.get("printer", {}).get("print_stats", {}) or {}).get("filename", "")
+        renderer = get_renderer_settings(self._config.get_main_config(), logging.getLogger(__name__))
+        context["klipperscreen"] = {
+            "gcode_renderer": {
+                "enabled": renderer.enabled,
+                "preview_available": preview_menu_visible(renderer.enabled, filename),
+                "preview_location": preview_access_location(),
+            }
+        }
+        return context

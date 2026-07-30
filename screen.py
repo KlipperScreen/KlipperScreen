@@ -26,6 +26,7 @@ from jinja2 import Environment
 from ks_includes import functions
 from ks_includes.config import KlipperScreenConfig
 from ks_includes.files import KlippyFiles
+from ks_includes.gcode_renderer import preview_panel_name
 from ks_includes.KlippyGtk import KlippyGtk
 from ks_includes.KlippyRest import KlippyRest
 from ks_includes.KlippyUDS import KlippyUDS
@@ -94,6 +95,8 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self.last_popup_time = datetime.now()
         self.last_error = ""
         self.inhibit_cookie = None
+        self.idle_inhibit_owners = set()
+        self.runtime_blanking_inhibited = False
 
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
@@ -394,7 +397,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
     def show_panel(self, panel, title=None, remove_all=False, panel_name=None, **kwargs):
         if panel_name is None:
-            panel_name = panel
+            panel_name = preview_panel_name(kwargs.get("preview_context")) if panel == "gcode_viewer" else panel
         if panel == "lock_screen":
             self.lock_screen.lock(None)
             return
@@ -420,10 +423,11 @@ class KlipperScreen(Gtk.ApplicationWindow):
                         f"Unable to load panel {panel}", f"{e}\n\n{traceback.format_exc()}"
                     )
                     return
-            elif panel_name in self.panels_reinit:
+            elif panel == "gcode_viewer" or panel_name in self.panels_reinit:
                 logging.info(f"Reinitializing panel {panel}")
                 self.panels[panel_name].__init__(self, title, **kwargs)
-                self.panels_reinit.remove(panel_name)
+                if panel_name in self.panels_reinit:
+                    self.panels_reinit.remove(panel_name)
             self._cur_panels.append(panel_name)
             if "extra" in kwargs and hasattr(self.panels[panel], "set_extra"):
                 self.panels[panel].set_extra(**kwargs)
@@ -700,7 +704,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self.attach_panel(self._cur_panels[-1])
 
     def check_dpms_state(self):
-        if not self.use_dpms or self.wayland:
+        if self.runtime_blanking_inhibited or not self.use_dpms or self.wayland:
             return False
         state = functions.get_DPMS_state()
         if state == functions.DPMS_State.Fail:
@@ -729,7 +733,10 @@ class KlipperScreen(Gtk.ApplicationWindow):
             self.set_dpms(False)
             return
 
-    def inhibit_idle(self):
+    def inhibit_idle(self, owner="screen_blanking"):
+        if owner in self.idle_inhibit_owners:
+            return
+        self.idle_inhibit_owners.add(owner)
         app = self.get_application()
         if app and self.inhibit_cookie is None:
             self.inhibit_cookie = app.inhibit(
@@ -737,13 +744,50 @@ class KlipperScreen(Gtk.ApplicationWindow):
             )
             logging.info(f"Idle inhibit acquired: {self.inhibit_cookie}")
 
-    def uninhibit_idle(self):
-        if self.inhibit_cookie is not None:
-            app = self.get_application()
-            if app:
-                app.uninhibit(self.inhibit_cookie)
-                self.inhibit_cookie = None
-                logging.debug("Idle inhibit released")
+    def uninhibit_idle(self, owner="screen_blanking"):
+        if owner not in self.idle_inhibit_owners:
+            return
+        self.idle_inhibit_owners.remove(owner)
+        if self.idle_inhibit_owners or self.inhibit_cookie is None:
+            return
+        app = self.get_application()
+        if app:
+            app.uninhibit(self.inhibit_cookie)
+            self.inhibit_cookie = None
+            logging.debug("Idle inhibit released")
+
+    def set_runtime_blanking_inhibited(self, inhibited):
+        if self.runtime_blanking_inhibited == inhibited:
+            return
+        self.runtime_blanking_inhibited = inhibited
+        if inhibited:
+            if self.check_dpms_timeout is not None:
+                GLib.source_remove(self.check_dpms_timeout)
+                self.check_dpms_timeout = None
+            self.inhibit_idle(owner="runtime_blanking")
+            if self.use_dpms and not self.wayland:
+                state = functions.get_DPMS_state()
+                if state != functions.DPMS_State.Fail:
+                    try:
+                        cmd = ["xset", "-display", self.display_number, "dpms", "0", "0", "0"]
+                        subprocess.run(cmd, check=True)
+                        cmd = ["xset", "-display", self.display_number, "-dpms"]
+                        subprocess.run(cmd, check=True)
+                    except subprocess.CalledProcessError as e:
+                        self.show_popup_message(
+                            f"FAILED to temporarily inhibit DPMS on {self.display_number}:\n {e}"
+                        )
+        else:
+            self.uninhibit_idle(owner="runtime_blanking")
+            if self.use_dpms and not self.wayland:
+                self.set_dpms_timeout()
+
+    def reset_screenblanking_timeout(self):
+        if self.printer and self.printer.state in ("printing", "paused"):
+            timeout = self._config.get_main_config().get("screen_blanking_printing")
+        else:
+            timeout = self._config.get_main_config().get("screen_blanking")
+        self.set_screenblanking_timeout(timeout)
 
     def set_dpms(self, use_dpms):
         if not use_dpms and not self.wayland:
@@ -823,6 +867,10 @@ class KlipperScreen(Gtk.ApplicationWindow):
                 self.blanking_time = abs(int(time))
             except Exception as exc:
                 logging.exception(exc)
+        if self.runtime_blanking_inhibited:
+            self.screensaver.reset_timeout()
+            logging.debug(f"Blanking timeout updated while temporarily inhibited: {time}")
+            return
         if self.use_dpms and not self.wayland:
             self.set_dpms_timeout()
         else:
@@ -1459,6 +1507,7 @@ class KlipperScreenApplication(Gtk.Application):
 
     @staticmethod
     def _on_destroy(win):
+        win.screensaver.release_all()
         win.gtk.shutdown()
 
 

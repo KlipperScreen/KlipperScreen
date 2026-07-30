@@ -243,6 +243,7 @@ class Printer:
         return None
 
     def get_printer_status_data(self):
+        print_stats = self.get_stat("print_stats") or {}
         return {
             "moonraker": {
                 "power_devices": {"count": len(self.get_power_devices())},
@@ -261,6 +262,10 @@ class Printer:
                     "list": self.get_gcode_macros(),
                 },
                 "leds": {"count": self.ledcount},
+                "print_stats": {
+                    "filename": print_stats.get("filename", ""),
+                    "state": print_stats.get("state", self.state),
+                },
                 "config_sections": list(self.config.keys()),
                 "available_commands": self.available_commands,
             },

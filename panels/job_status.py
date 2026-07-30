@@ -695,7 +695,6 @@ class Panel(ScreenPanel):
                 )
             if self.state in ["printing", "paused"]:
                 self.update_time_left()
-
     def update_flow(self):
         if not self.flowstore:
             self.flowstore.append(0)

@@ -1104,3 +1104,93 @@ msgstr ""
 
 msgid "Klipper not responding after multiple attempts"
 msgstr ""
+
+msgid "Toolpath"
+msgstr "Toolpath"
+
+msgid "Preview"
+msgstr "Preview"
+
+msgid "Feature disabled"
+msgstr "Feature disabled"
+
+msgid "Enable G-code renderer in configuration"
+msgstr "Enable G-code renderer in configuration"
+
+msgid "No file selected"
+msgstr "No file selected"
+
+msgid "No active print file"
+msgstr "No active print file"
+
+msgid "Loading toolpath"
+msgstr "Loading toolpath"
+
+msgid "Unable to load preview"
+msgstr "Unable to load preview"
+
+msgid "No printable moves detected"
+msgstr "No printable moves detected"
+
+msgid "State"
+msgstr "State"
+
+msgid "Progress"
+msgstr "Progress"
+
+msgid "Mode"
+msgstr "Mode"
+
+msgid "Current layer"
+msgstr "Current layer"
+
+msgid "Current + previous"
+msgstr "Current + previous"
+
+msgid "Full model"
+msgstr "Full model"
+
+msgid "Travel"
+msgstr "Travel"
+
+msgid "Show"
+msgstr "Show"
+
+msgid "Hide"
+msgstr "Hide"
+
+msgid "Enable G-code Renderer"
+msgstr "Enable G-code Renderer"
+
+msgid "G-code Renderer FPS"
+msgstr "G-code Renderer FPS"
+
+msgid "Show Travel Moves"
+msgstr "Show Travel Moves"
+
+msgid "Previous Layers"
+msgstr "Previous Layers"
+
+msgid "G-code Renderer Mode"
+msgstr "G-code Renderer Mode"
+
+msgid "G-code preview is disabled"
+msgstr "G-code preview is disabled"
+
+msgid "Zoom -"
+msgstr "Zoom -"
+
+msgid "Zoom +"
+msgstr "Zoom +"
+
+msgid "Fit"
+msgstr "Fit"
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "Idle"
+msgstr "Idle"
+
+msgid "No toolpath data available"
+msgstr "No toolpath data available"
