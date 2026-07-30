@@ -1025,7 +1025,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
         zoffset = float(offset[2]) if offset else 0
         if zoffset != 0:
             sign = "+" if zoffset > 0 else "-"
-            msg = f"Apply {sign}{abs(zoffset)} offset?"
+            msg = f"Apply {sign}{abs(zoffset):.3f} offset?"
             zlabel = Gtk.Label(label=msg, hexpand=True, vexpand=True, wrap=True)
             zlabel.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
             grid.attach(zlabel, 0, 1, 2, 1)
