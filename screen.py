@@ -848,6 +848,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
     def socket_disconnected(self, status):
         logging.debug("### disconnected")
+        self.server_info = None
         self.printer.state = "disconnected"
         go_to_splash = self.state.connected  # Go to splashscreen if it was connected
         self.state.connected = False
@@ -1136,15 +1137,20 @@ class KlipperScreen(Gtk.ApplicationWindow):
         if self.state.reinit_count > self.MAX_RETRIES or "printer_select" in self._cur_panels:
             logging.info("Stopping Retries")
             return False
+        first_try = self.state.reinit_count == 0
         self.state.reinit_count += 1
-        if self.state.reinit_count == 1:
-            self.connect_to_moonraker()
-        elif self._ws.connected and not self._ws.closing:
-            logging.info("Retry: waiting before reinitializing Klipper")
-            GLib.timeout_add_seconds(4, self.init_klipper)
+        if self._ws.connected and not self._ws.closing:
+            action = self.init_klipper
+            info = "reinitializing Klipper"
         else:
-            logging.info("Retry: waiting before connecting to Moonraker")
-            GLib.timeout_add_seconds(4, self.connect_to_moonraker)
+            action = self.connect_to_moonraker
+            info = "connecting to Moonraker"
+
+        if first_try:
+            action()
+        else:
+            logging.info("Retry: waiting before %s", info)
+            GLib.timeout_add_seconds(4, action)
 
     def connect_to_moonraker(self):
         if self._ws.closing:
@@ -1154,6 +1160,15 @@ class KlipperScreen(Gtk.ApplicationWindow):
         return False
 
     def init_moonraker_components(self, data, method, params):
+        if "error" in data:
+            error_msg = data["error"].get("message", "Unknown error")
+            self.state.connecting = False
+            self.printer_initializing(f"Error getting Moonraker server info: {error_msg}")
+            return
+        if not data or "result" not in data:
+            self.state.connecting = False
+            self.printer_initializing("Invalid response from Moonraker")
+            return
         popup = ""
         level = 2
         self.server_info = data["result"]
@@ -1197,21 +1212,24 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
     def set_printer_info(self, data, method, params):
         if "error" in data:
-            self._init_printer("Unable to get printer info from moonraker")
+            error_msg = data["error"].get("message", "Unknown error")
+            self._init_printer(f"Unable to get printer info from moonraker: {error_msg}")
             return
         printer_info = data["result"]
         self._ws.api.query_configfile(self.set_configfile, printer_info)
 
     def set_configfile(self, data, method, params, printer_info):
         if "error" in data:
-            self._init_printer("Error getting printer configuration")
+            error_msg = data["error"].get("message", "Unknown error")
+            self._init_printer(f"Error getting printer configuration: {error_msg}")
             return
         self.printer.reinit(printer_info, data["result"]["status"])
         self._ws.api.get_printer_objects(self.set_objects)
 
     def set_objects(self, data, method, params):
         if "error" in data:
-            self._init_printer("Error getting printer objects list")
+            error_msg = data["error"].get("message", "Unknown error")
+            self._init_printer(f"Error getting printer objects list: {error_msg}")
             return
         objects = data["result"]["objects"]
         self.printer.register_dynamic_sensors(objects)
@@ -1220,20 +1238,23 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
     def query_objects(self, data, method, params):
         if "error" in data:
-            self._init_printer("Error getting printer object data")
+            error_msg = data["error"].get("message", "Unknown error")
+            self._init_printer(f"Error getting printer object data: {error_msg}")
             return
         self.printer.process_update(data["result"]["status"])
         self._finish_init()
 
     def set_commands(self, data, method, params):
         if "error" in data:
-            logging.error("Error getting available gcode commands")
+            error_msg = data["error"].get("message", "Unknown error")
+            logging.error(f"Error getting available gcode commands: {error_msg}")
             return
         self.printer.available_commands = data["result"]
 
     def set_system_info(self, data, method, params):
         if "error" in data:
-            logging.error("Error getting system info")
+            error_msg = data["error"].get("message", "Unknown error")
+            logging.error(f"Error getting system info: {error_msg}")
             return
         self.printer.system_info = data["result"]["system_info"]
 
@@ -1303,7 +1324,8 @@ class KlipperScreen(Gtk.ApplicationWindow):
         if not temp_devices:
             return
         if "error" in data:
-            logging.error(data["error"])
+            error_msg = data["error"].get("message", "Unknown error")
+            logging.error(f"Error getting temperature store: {error_msg}")
         elif "result" not in data or not data["result"]:
             logging.info("Moonraker tempstore not yet available")
         else:

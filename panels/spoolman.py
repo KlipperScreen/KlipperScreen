@@ -10,6 +10,7 @@ from datetime import datetime
 from gi.repository import Gdk, GdkPixbuf, GLib, GObject, Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.svg_gradient import apply_filament_gradient, filament_colors_from_dict
 from ks_includes.widgets.combo import ComboBoxPlus
 
 try:
@@ -52,6 +53,8 @@ class SpoolmanVendor:
 class SpoolmanFilament:
     article_number: str
     color_hex: str
+    multi_color_hexes: str
+    multi_color_direction: str
     comment: str
     density: float
     diameter: float
@@ -113,6 +116,10 @@ class SpoolmanSpool(GObject.GObject):
         return " - ".join(parts) if parts else self.filament.name
 
     @property
+    def _filament_colors(self):
+        return filament_colors_from_dict(vars(self.filament) if self.filament else None)
+
+    @property
     def icon(self):
         if self._icon is None:
             if SpoolmanSpool._spool_icon is None:
@@ -124,11 +131,9 @@ class SpoolmanSpool(GObject.GObject):
                     _spool_icon_path = os.path.join(klipperscreendir, "styles", "spool.svg")
                 SpoolmanSpool._spool_icon = pathlib.Path(_spool_icon_path).read_text()
 
+            svg = apply_filament_gradient(SpoolmanSpool._spool_icon, self._filament_colors)
             loader = GdkPixbuf.PixbufLoader()
-            color = self.filament.color_hex if hasattr(self.filament, "color_hex") else "000000"
-            loader.write(
-                SpoolmanSpool._spool_icon.replace("var(--filament-color)", f"#{color}").encode()
-            )
+            loader.write(svg.encode())
             loader.close()
             self._icon = loader.get_pixbuf()
         return self._icon

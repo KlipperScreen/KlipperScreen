@@ -296,7 +296,8 @@ class Panel(ScreenPanel):
         if response_id == Gtk.ResponseType.CANCEL:
             return
         bssid = self.sdbus_nm.get_bssid_from_ssid(ssid)
-        self.remove_network_from_list(bssid)
+        if bssid is not None:
+            self.remove_network_from_list(bssid)
         if response_id == Gtk.ResponseType.OK:
             logging.info(f"Deleting {ssid}")
             self.sdbus_nm.delete_network(ssid)
@@ -355,10 +356,12 @@ class Panel(ScreenPanel):
                 result = self.sdbus_nm.add_network(ssid, "")
                 if "error" in result:
                     self._screen.show_popup_message(result["message"])
+                    self.activate()
+                    return
             else:
                 self.show_add_network(widget, ssid)
-            self.activate()
-            return
+                self.activate()
+                return
         bssid = self.sdbus_nm.get_bssid_from_ssid(ssid)
         if bssid and bssid in self.network_rows:
             self.remove_network_from_list(bssid)

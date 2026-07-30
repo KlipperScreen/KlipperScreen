@@ -82,6 +82,7 @@ class Panel(ScreenPanel):
         if (
             self._screen.state.reinit_count > self._screen.MAX_RETRIES
             or self._screen.state.klippy_retry_count > self._screen.MAX_RETRIES
+            or not self._screen.state.connecting
         ):
             self.labels["actions"].add(self.labels["retry"])
         self.labels["actions"].show_all()

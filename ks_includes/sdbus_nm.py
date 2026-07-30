@@ -228,7 +228,7 @@ class SdbusNm:
         return networks
 
     def get_bssid_from_ssid(self, ssid):
-        return next(net["BSSID"] for net in self.get_networks() if ssid == net["SSID"])
+        return next((net["BSSID"] for net in self.get_networks() if ssid == net["SSID"]), None)
 
     def get_connected_ap(self):
         if self.wlan_device.active_access_point == "/":
@@ -244,7 +244,7 @@ class SdbusNm:
             None,
         )
 
-    def add_network(self, ssid, psk, eap_method, identity="", phase2=None):
+    def add_network(self, ssid, psk, eap_method=None, identity="", phase2=None):
         security_type = self.get_security_type(ssid)
         logging.debug(f"Adding network of type: {security_type}")
         if security_type is None:
