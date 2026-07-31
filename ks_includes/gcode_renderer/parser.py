@@ -234,7 +234,17 @@ def _handle_linear_move(
     if is_extrusion:
         layer = _ensure_layer(state, model, target_z)
         flags = FLAG_EXTRUSION
-        segment = (start_x, start_y, target_x, target_y, target_z, layer, flags, end_offset, start_z)
+        segment = (
+            start_x,
+            start_y,
+            target_x,
+            target_y,
+            target_z,
+            layer,
+            flags,
+            end_offset,
+            start_z,
+        )
         model.segments.append(segment)
         model.segment_end_offsets.append(end_offset)
         bounds.include(start_x, start_y)
@@ -244,7 +254,17 @@ def _handle_linear_move(
     elif is_travel:
         flags = FLAG_TRAVEL
         layer = state.current_layer if state.current_layer >= 0 else 0
-        segment = (start_x, start_y, target_x, target_y, target_z, layer, flags, end_offset, start_z)
+        segment = (
+            start_x,
+            start_y,
+            target_x,
+            target_y,
+            target_z,
+            layer,
+            flags,
+            end_offset,
+            start_z,
+        )
         model.segments.append(segment)
         model.segment_end_offsets.append(end_offset)
         bounds.include(start_x, start_y)

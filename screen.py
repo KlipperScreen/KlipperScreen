@@ -397,7 +397,11 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
     def show_panel(self, panel, title=None, remove_all=False, panel_name=None, **kwargs):
         if panel_name is None:
-            panel_name = preview_panel_name(kwargs.get("preview_context")) if panel == "gcode_viewer" else panel
+            panel_name = (
+                preview_panel_name(kwargs.get("preview_context"))
+                if panel == "gcode_viewer"
+                else panel
+            )
         if panel == "lock_screen":
             self.lock_screen.lock(None)
             return

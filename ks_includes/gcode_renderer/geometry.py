@@ -78,7 +78,9 @@ class ViewportState:
             return
         self.center_x = (bounds.min_x + bounds.max_x) / 2.0
         self.center_y = (bounds.min_y + bounds.max_y) / 2.0
-        self.scale = choose_fit_scale(rotated_bounds(bounds, self.rotation_deg), width, height, margin_ratio)
+        self.scale = choose_fit_scale(
+            rotated_bounds(bounds, self.rotation_deg), width, height, margin_ratio
+        )
         self.pan_x = 0.0
         self.pan_y = 0.0
         self.fitted = True

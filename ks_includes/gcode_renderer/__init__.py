@@ -1,8 +1,21 @@
 from .cache import GcodeRenderCache, build_cache_fingerprint
-from .geometry import ViewportState, choose_fit_scale, normalize_rotation, rotate_point, rotated_bounds
-from .loading import LoadTracker, load_local_gcode, resolve_local_gcode_path
+from .geometry import (
+    ViewportState,
+    choose_fit_scale,
+    normalize_rotation,
+    rotate_point,
+    rotated_bounds,
+)
 from .layout import ViewerLayoutSpec, get_viewer_layout_spec
-from .model import FLAG_EXTRUSION, FLAG_RETRACTION, FLAG_TRAVEL, RenderMode, SpatialBounds, ToolpathModel
+from .loading import LoadTracker, load_local_gcode, resolve_local_gcode_path
+from .model import (
+    FLAG_EXTRUSION,
+    FLAG_RETRACTION,
+    FLAG_TRAVEL,
+    RenderMode,
+    SpatialBounds,
+    ToolpathModel,
+)
 from .parser import parse_gcode
 from .preview import (
     PreviewContext,
@@ -12,7 +25,14 @@ from .preview import (
     preview_panel_name,
     resolve_preview_context,
 )
-from .projection import CameraState3D, DisplayViewMode, ProjectionMode, clamp_pitch, project_to_screen, rotate_yaw_pitch
+from .projection import (
+    CameraState3D,
+    DisplayViewMode,
+    ProjectionMode,
+    clamp_pitch,
+    project_to_screen,
+    rotate_yaw_pitch,
+)
 from .settings import (
     MAX_FPS,
     MAX_PREVIOUS_LAYERS,

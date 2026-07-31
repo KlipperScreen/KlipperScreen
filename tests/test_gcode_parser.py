@@ -3,9 +3,13 @@ import tempfile
 import unittest
 
 from ks_includes.gcode_renderer.cache import GcodeRenderCache
-from ks_includes.gcode_renderer.model import FLAG_EXTRUSION, FLAG_RETRACTION, FLAG_TRAVEL, RenderMode
+from ks_includes.gcode_renderer.model import (
+    FLAG_EXTRUSION,
+    FLAG_RETRACTION,
+    FLAG_TRAVEL,
+    RenderMode,
+)
 from ks_includes.gcode_renderer.parser import parse_gcode
-
 
 FIXTURE_PATH = os.path.join(os.path.dirname(__file__), "fixtures", "layered_sample.gcode")
 
@@ -114,7 +118,9 @@ class GcodeParserTests(unittest.TestCase):
             b"G90\nM82\nG1 Z0.2\nG1 X10 Y0 E1.0\nG0 Z0.6\nG0 X15 Y0\nG1 X15 Y10 Z0.8 E2.0\n",
             "spatial.gcode",
         )
-        bounds, used_extrusion = model.visible_spatial_bounds(RenderMode.FULL_MODEL, 0, 0, show_travel=True)
+        bounds, used_extrusion = model.visible_spatial_bounds(
+            RenderMode.FULL_MODEL, 0, 0, show_travel=True
+        )
         self.assertTrue(used_extrusion)
         self.assertEqual((bounds.min_x, bounds.min_y, bounds.min_z), (0.0, 0.0, 0.2))
         self.assertEqual((bounds.max_x, bounds.max_y, bounds.max_z), (15.0, 10.0, 0.8))

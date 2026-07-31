@@ -140,7 +140,9 @@ class Panel(ScreenPanel):
     def _get_menu_context(self):
         context = self._printer.get_printer_status_data()
         filename = (context.get("printer", {}).get("print_stats", {}) or {}).get("filename", "")
-        renderer = get_renderer_settings(self._config.get_main_config(), logging.getLogger(__name__))
+        renderer = get_renderer_settings(
+            self._config.get_main_config(), logging.getLogger(__name__)
+        )
         context["klipperscreen"] = {
             "gcode_renderer": {
                 "enabled": renderer.enabled,

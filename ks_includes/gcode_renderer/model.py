@@ -92,9 +92,7 @@ class SpatialBounds:
     @property
     def is_valid(self) -> bool:
         return (
-            self.min_x != float("inf")
-            and self.min_y != float("inf")
-            and self.min_z != float("inf")
+            self.min_x != float("inf") and self.min_y != float("inf") and self.min_z != float("inf")
         )
 
     def corners(self) -> tuple[tuple[float, float, float], ...]:
@@ -280,7 +278,9 @@ class ToolpathModel:
             first_layer = max(0, last_layer - max(previous_layers, 0))
         return tuple(range(first_layer, last_layer + 1))
 
-    def visible_bounds(self, mode: RenderMode, current_layer: int, previous_layers: int) -> tuple[Bounds, bool]:
+    def visible_bounds(
+        self, mode: RenderMode, current_layer: int, previous_layers: int
+    ) -> tuple[Bounds, bool]:
         start, end = self.visible_segment_range(mode, current_layer, previous_layers)
         if start == end:
             return (Bounds(), False)

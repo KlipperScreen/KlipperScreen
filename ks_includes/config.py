@@ -593,7 +593,10 @@ class KlipperScreenConfig:
                     "type": "dropdown",
                     "value": DisplayViewMode.MODE_2D.value,
                     "options": [
-                        {"name": _("2D") + " " + _("(default)"), "value": DisplayViewMode.MODE_2D.value},
+                        {
+                            "name": _("2D") + " " + _("(default)"),
+                            "value": DisplayViewMode.MODE_2D.value,
+                        },
                         {"name": _("3D"), "value": DisplayViewMode.MODE_3D.value},
                     ],
                 }

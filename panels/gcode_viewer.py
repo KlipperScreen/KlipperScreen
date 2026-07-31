@@ -23,8 +23,8 @@ from ks_includes.gcode_renderer import (
     resolve_preview_context,
 )
 from ks_includes.gcode_renderer.cache import validate_toolpath_model
-from ks_includes.gcode_renderer.model import ProgressInfo
 from ks_includes.gcode_renderer.loading import resolve_active_filename, should_clear_active_filename
+from ks_includes.gcode_renderer.model import ProgressInfo
 from ks_includes.gcode_renderer.renderer import ToolpathRenderer
 from ks_includes.screen_panel import ScreenPanel
 
@@ -60,7 +60,9 @@ class Panel(ScreenPanel):
             self.explicit_filename,
             default_active_print=True,
         )
-        self.filename = self.explicit_filename if self.preview_context == PreviewContext.SELECTED_FILE else ""
+        self.filename = (
+            self.explicit_filename if self.preview_context == PreviewContext.SELECTED_FILE else ""
+        )
         self.file_metadata = {}
         self.metadata_requested_for = ""
         self.model = None
@@ -137,7 +139,8 @@ class Panel(ScreenPanel):
         else:
             self._set_panel_state("disabled", _("Enable G-code renderer in Settings"))
         logging.debug(
-            "G-code viewer panel initialized enabled=%s mode=%s view=%s fps=%s show_travel=%s previous_layers=%s",
+            "G-code viewer panel initialized enabled=%s mode=%s view=%s "
+            "fps=%s show_travel=%s previous_layers=%s",
             self.enabled,
             self.render_mode.value,
             self.view_mode.value,
@@ -151,7 +154,8 @@ class Panel(ScreenPanel):
         preview_context = self._get_preview_context()
         resolved_filename = self._resolved_context_filename()
         logging.info(
-            "G-code viewer activate context=%s filename=%s resolved=%s load_in_progress=%s panel_active=%s",
+            "G-code viewer activate context=%s filename=%s resolved=%s "
+            "load_in_progress=%s panel_active=%s",
             preview_context.value if preview_context else "idle",
             self.filename or "",
             resolved_filename or "",
@@ -205,7 +209,8 @@ class Panel(ScreenPanel):
     ):
         resolved_view_mode = self.view_mode if view_mode is None else view_mode
         resolved_drag_active = (
-            self.view_mode == DisplayViewMode.MODE_3D and getattr(self, "drag_state", None) is not None
+            self.view_mode == DisplayViewMode.MODE_3D
+            and getattr(self, "drag_state", None) is not None
             if drag_active is None
             else drag_active
         )
@@ -244,7 +249,8 @@ class Panel(ScreenPanel):
         model = getattr(self, "model", None)
         filename = getattr(self, "filename", "") or getattr(self, "explicit_filename", "")
         logging.error(
-            "3D G-code preview draw failed context=%s filename=%s segments=%s size=%sx%s view=%s interaction=%s",
+            "3D G-code preview draw failed context=%s filename=%s "
+            "segments=%s size=%sx%s view=%s interaction=%s",
             preview_context.value if preview_context else "idle",
             filename,
             getattr(model, "segment_count", 0) if model is not None else 0,
@@ -264,7 +270,9 @@ class Panel(ScreenPanel):
             )
         except Exception:
             logging.exception("Emergency 2D draw fallback failed after 3D preview error")
-            self._draw_3d_error_overlay(ctx, da.get_allocated_width(), da.get_allocated_height(), base_only=True)
+            self._draw_3d_error_overlay(
+                ctx, da.get_allocated_width(), da.get_allocated_height(), base_only=True
+            )
             return
         self._draw_3d_error_overlay(ctx, da.get_allocated_width(), da.get_allocated_height())
 
@@ -466,7 +474,8 @@ class Panel(ScreenPanel):
         printer_filename = self._printer.get_stat("print_stats", "filename") or ""
         resolved_filename = self._resolve_active_filename(printer_filename, data=data)
         logging.info(
-            "G-code viewer active_print refresh printer_filename=%s resolved_filename=%s current_filename=%s print_state=%s",
+            "G-code viewer active_print refresh printer_filename=%s "
+            "resolved_filename=%s current_filename=%s print_state=%s",
             printer_filename or "",
             resolved_filename or "",
             self.filename or "",
@@ -482,7 +491,8 @@ class Panel(ScreenPanel):
             self._reset_loaded_model(invalidate_tracker=True)
         elif should_clear_active_filename(self.filename, resolved_filename, self.print_state):
             logging.info(
-                "G-code viewer clearing preview filename after confirmed reset state=%s previous=%s",
+                "G-code viewer clearing preview filename after confirmed reset "
+                "state=%s previous=%s",
                 self.print_state,
                 self.filename,
             )
@@ -522,7 +532,8 @@ class Panel(ScreenPanel):
         else:
             self.filename = target_filename
         logging.info(
-            "G-code viewer selected_file refresh explicit_filename=%s current_filename=%s print_state=%s",
+            "G-code viewer selected_file refresh explicit_filename=%s "
+            "current_filename=%s print_state=%s",
             self.explicit_filename or "",
             self.filename or "",
             self.print_state,
@@ -554,7 +565,8 @@ class Panel(ScreenPanel):
         generation = self.load_tracker.begin(self.filename, force_reload=force_reload)
         if generation is None:
             logging.info(
-                "G-code viewer skipped load filename=%s force_reload=%s load_in_progress=%s active=%s",
+                "G-code viewer skipped load filename=%s force_reload=%s "
+                "load_in_progress=%s active=%s",
                 self.filename or "",
                 force_reload,
                 self.load_tracker.load_in_progress,
@@ -565,7 +577,8 @@ class Panel(ScreenPanel):
         filename = self.filename
         metadata = dict(self.file_metadata)
         logging.info(
-            "G-code viewer load worker submitted filename=%s generation=%s size=%s modified=%s active=%s",
+            "G-code viewer load worker submitted filename=%s generation=%s "
+            "size=%s modified=%s active=%s",
             filename,
             generation,
             metadata.get("size", 0) or 0,
@@ -588,7 +601,8 @@ class Panel(ScreenPanel):
                 cached = self.cache.load(cache_entry)
                 if cached is not None:
                     logging.info(
-                        "G-code viewer load source=cache filename=%s generation=%s segment_count=%s layer_count=%s",
+                        "G-code viewer load source=cache filename=%s "
+                        "generation=%s segment_count=%s layer_count=%s",
                         filename,
                         generation,
                         cached.segment_count,
@@ -635,7 +649,8 @@ class Panel(ScreenPanel):
             parse_elapsed = perf_counter() - parse_started
             is_valid, reason = validate_toolpath_model(model)
             logging.info(
-                "G-code viewer parse finish filename=%s generation=%s segment_count=%s layer_count=%s valid=%s reason=%s",
+                "G-code viewer parse finish filename=%s generation=%s "
+                "segment_count=%s layer_count=%s valid=%s reason=%s",
                 filename,
                 generation,
                 model.segment_count,
@@ -791,12 +806,20 @@ class Panel(ScreenPanel):
         self.mode_button.set_label(mode_labels[self.render_mode])
         self.travel_button.set_label(_("Travel On") if self.show_travel else _("Travel Off"))
         self._sync_context_display_controls()
-        self._set_button_selected(self.view_buttons[DisplayViewMode.MODE_2D], self.view_mode == DisplayViewMode.MODE_2D)
-        self._set_button_selected(self.view_buttons[DisplayViewMode.MODE_3D], self.view_mode == DisplayViewMode.MODE_3D)
+        self._set_button_selected(
+            self.view_buttons[DisplayViewMode.MODE_2D], self.view_mode == DisplayViewMode.MODE_2D
+        )
+        self._set_button_selected(
+            self.view_buttons[DisplayViewMode.MODE_3D], self.view_mode == DisplayViewMode.MODE_3D
+        )
         show_drag_modes = self.view_mode == DisplayViewMode.MODE_3D
         self.drag_mode_box.set_visible(show_drag_modes)
-        self._set_button_selected(self.drag_buttons[self.DRAG_ROTATE], self.drag_mode_3d == self.DRAG_ROTATE)
-        self._set_button_selected(self.drag_buttons[self.DRAG_PAN], self.drag_mode_3d == self.DRAG_PAN)
+        self._set_button_selected(
+            self.drag_buttons[self.DRAG_ROTATE], self.drag_mode_3d == self.DRAG_ROTATE
+        )
+        self._set_button_selected(
+            self.drag_buttons[self.DRAG_PAN], self.drag_mode_3d == self.DRAG_PAN
+        )
 
     def _refresh_canvas(self):
         if self.render_dirty:
@@ -844,7 +867,9 @@ class Panel(ScreenPanel):
             detail = _("This can take a moment for large files")
         elif state == "ready":
             title = ""
-            self.render_message = None if self.model and self.model.segment_count else self.render_message
+            self.render_message = (
+                None if self.model and self.model.segment_count else self.render_message
+            )
         elif state == "empty":
             title = _("No renderable toolpath found")
             detail = detail or _("This file does not contain previewable motion")
@@ -861,7 +886,9 @@ class Panel(ScreenPanel):
         self.status_card_detail.set_label(detail or "")
 
     def _sync_settings(self, sync_view_mode=True):
-        settings = get_renderer_settings(self._config.get_main_config(), logging.getLogger(__name__))
+        settings = get_renderer_settings(
+            self._config.get_main_config(), logging.getLogger(__name__)
+        )
         self.enabled = settings.enabled
         if sync_view_mode:
             self.view_mode = settings.view
@@ -883,7 +910,11 @@ class Panel(ScreenPanel):
 
         show_travel = settings.show_travel
         if preview_context == PreviewContext.ACTIVE_PRINT:
-            show_travel = True if self._active_print_session_show_travel is None else self._active_print_session_show_travel
+            show_travel = (
+                True
+                if self._active_print_session_show_travel is None
+                else self._active_print_session_show_travel
+            )
         return {
             "show_travel": show_travel,
             "render_mode": settings.mode,
@@ -902,8 +933,12 @@ class Panel(ScreenPanel):
     def _sync_context_display_controls(self):
         if self.mode_button is None or self.travel_button is None:
             return
-        self.mode_button.set_visible(bool(self._context_display_state.get("show_mode_control", True)))
-        self.travel_button.set_visible(bool(self._context_display_state.get("show_travel_control", True)))
+        self.mode_button.set_visible(
+            bool(self._context_display_state.get("show_mode_control", True))
+        )
+        self.travel_button.set_visible(
+            bool(self._context_display_state.get("show_travel_control", True))
+        )
 
     def _context_allows_mode_control(self):
         return bool(self._context_display_state.get("show_mode_control", True))
@@ -927,7 +962,9 @@ class Panel(ScreenPanel):
         preview_context = getattr(self, "preview_context", None)
         explicit_filename = getattr(self, "explicit_filename", "")
         return resolve_preview_context(
-            preview_context.value if isinstance(preview_context, PreviewContext) else preview_context,
+            preview_context.value
+            if isinstance(preview_context, PreviewContext)
+            else preview_context,
             explicit_filename,
             default_active_print=True,
         )
@@ -1047,8 +1084,12 @@ class Panel(ScreenPanel):
         self.rotate_right_button.connect("clicked", self.rotate_right)
         self.mode_button.connect("clicked", self.cycle_mode)
         self.travel_button.connect("clicked", self.toggle_travel)
-        self.view_buttons[DisplayViewMode.MODE_2D].connect("clicked", self.set_view_mode, DisplayViewMode.MODE_2D)
-        self.view_buttons[DisplayViewMode.MODE_3D].connect("clicked", self.set_view_mode, DisplayViewMode.MODE_3D)
+        self.view_buttons[DisplayViewMode.MODE_2D].connect(
+            "clicked", self.set_view_mode, DisplayViewMode.MODE_2D
+        )
+        self.view_buttons[DisplayViewMode.MODE_3D].connect(
+            "clicked", self.set_view_mode, DisplayViewMode.MODE_3D
+        )
         self.drag_buttons[self.DRAG_ROTATE].connect("clicked", self.set_drag_mode, self.DRAG_ROTATE)
         self.drag_buttons[self.DRAG_PAN].connect("clicked", self.set_drag_mode, self.DRAG_PAN)
 
@@ -1063,7 +1104,9 @@ class Panel(ScreenPanel):
         self.controls_panel.set_hexpand(True)
         self.controls_panel.set_vexpand(True)
 
-        view_grid = Gtk.Grid(column_homogeneous=True, row_homogeneous=True, column_spacing=6, row_spacing=6)
+        view_grid = Gtk.Grid(
+            column_homogeneous=True, row_homogeneous=True, column_spacing=6, row_spacing=6
+        )
         view_grid.attach(self.rotate_left_button, 0, 0, 1, 1)
         view_grid.attach(self.rotate_right_button, 1, 0, 1, 1)
         view_grid.attach(self.buttons["zoom_out"], 0, 1, 1, 1)
@@ -1071,7 +1114,9 @@ class Panel(ScreenPanel):
         view_grid.attach(self.buttons["fit"], 0, 2, 1, 1)
         view_grid.attach(self.buttons["reset"], 1, 2, 1, 1)
 
-        self.drag_mode_box = Gtk.Grid(column_homogeneous=True, row_homogeneous=True, column_spacing=6, row_spacing=6)
+        self.drag_mode_box = Gtk.Grid(
+            column_homogeneous=True, row_homogeneous=True, column_spacing=6, row_spacing=6
+        )
         self.drag_mode_box.attach(self.drag_buttons[self.DRAG_ROTATE], 0, 0, 1, 1)
         self.drag_mode_box.attach(self.drag_buttons[self.DRAG_PAN], 1, 0, 1, 1)
 
@@ -1080,7 +1125,9 @@ class Panel(ScreenPanel):
         view_box.add(self.drag_mode_box)
         self.controls_panel.add(self._wrap_control_section(_("View"), view_box))
 
-        self.view_mode_box = Gtk.Grid(column_homogeneous=True, row_homogeneous=True, column_spacing=6, row_spacing=6)
+        self.view_mode_box = Gtk.Grid(
+            column_homogeneous=True, row_homogeneous=True, column_spacing=6, row_spacing=6
+        )
         self.view_mode_box.attach(self.view_buttons[DisplayViewMode.MODE_2D], 0, 0, 1, 1)
         self.view_mode_box.attach(self.view_buttons[DisplayViewMode.MODE_3D], 1, 0, 1, 1)
 
@@ -1173,7 +1220,9 @@ class Panel(ScreenPanel):
             logging.debug("G-code viewer 3D yaw changed angle=%.1f", self.camera_3d.yaw)
         else:
             self.viewport.rotate(delta)
-            logging.debug("G-code viewer 2D rotation changed angle=%.1f", self.viewport.rotation_deg)
+            logging.debug(
+                "G-code viewer 2D rotation changed angle=%.1f", self.viewport.rotation_deg
+            )
         self.queue_render()
 
     def _visible_planar_bounds(self):
@@ -1357,7 +1406,9 @@ class Panel(ScreenPanel):
         button.set_hexpand(False)
         button.set_vexpand(False)
         button.set_can_focus(False)
-        button.set_image(self._gtk.Image("settings", self._gtk.img_scale * 0.8, self._gtk.img_scale * 0.8))
+        button.set_image(
+            self._gtk.Image("settings", self._gtk.img_scale * 0.8, self._gtk.img_scale * 0.8)
+        )
         button.set_always_show_image(True)
         button.set_size_request(self._gtk.font_size * 2, self._gtk.font_size * 2)
         button.connect("clicked", self._screen.screensaver.reset_timeout)
@@ -1399,7 +1450,8 @@ class Panel(ScreenPanel):
 
     def _log_spatial_fit_details(self, bounds, used_extrusion, reset=False):
         logging.debug(
-            "G-code viewer 3D %s bounds=(%.3f, %.3f, %.3f)-(%.3f, %.3f, %.3f) yaw=%.1f pitch=%.1f using=%s",
+            "G-code viewer 3D %s bounds=(%.3f, %.3f, %.3f)-"
+            "(%.3f, %.3f, %.3f) yaw=%.1f pitch=%.1f using=%s",
             "reset" if reset else "fit",
             bounds.min_x,
             bounds.min_y,
@@ -1426,7 +1478,11 @@ class Panel(ScreenPanel):
     @staticmethod
     def _metadata_key(metadata):
         return (
-            metadata.get("path"),
-            metadata.get("size"),
-            metadata.get("modified"),
-        ) if metadata else None
+            (
+                metadata.get("path"),
+                metadata.get("size"),
+                metadata.get("modified"),
+            )
+            if metadata
+            else None
+        )

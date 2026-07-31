@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from collections import OrderedDict
 import logging
 import math
+from collections import OrderedDict
 from dataclasses import dataclass
 from time import perf_counter
 
@@ -269,11 +269,14 @@ class ToolpathRenderer:
         if elapsed > 0.1 and perf_counter() - self._last_slow_render_log > 2.0:
             self._last_slow_render_log = perf_counter()
             if selected_file:
-                projection_ms = projection_stats.projection_elapsed * 1000.0 if projection_stats else 0.0
+                projection_ms = (
+                    projection_stats.projection_elapsed * 1000.0 if projection_stats else 0.0
+                )
                 depth_ms = projection_stats.depth_sort_elapsed * 1000.0 if projection_stats else 0.0
                 cache_state = "hit" if projection_stats and projection_stats.cache_hit else "miss"
                 logging.warning(
-                    "Slow selected-file %s render: %.0f ms geometry=%.0f ms projection=%.0f ms depth=%.0f ms "
+                    "Slow selected-file %s render: %.0f ms "
+                    "geometry=%.0f ms projection=%.0f ms depth=%.0f ms "
                     "visible=%s interactive=%s final=%s cache=%s",
                     view_mode.value,
                     elapsed * 1000.0,
@@ -345,10 +348,18 @@ class ToolpathRenderer:
             else:
                 travel_pending.append(index)
 
-        self._stroke_segments_2d(ctx, model, viewport, width, height, previous_pending, (0.42, 0.42, 0.42, 0.28), 1.0)
-        self._stroke_segments_2d(ctx, model, viewport, width, height, previous_done, (0.12, 0.62, 0.46, 0.32), 1.2)
-        self._stroke_segments_2d(ctx, model, viewport, width, height, current_pending, (0.70, 0.70, 0.70, 0.78), 1.5)
-        self._stroke_segments_2d(ctx, model, viewport, width, height, current_done, (0.12, 0.70, 0.46, 0.95), 2.0)
+        self._stroke_segments_2d(
+            ctx, model, viewport, width, height, previous_pending, (0.42, 0.42, 0.42, 0.28), 1.0
+        )
+        self._stroke_segments_2d(
+            ctx, model, viewport, width, height, previous_done, (0.12, 0.62, 0.46, 0.32), 1.2
+        )
+        self._stroke_segments_2d(
+            ctx, model, viewport, width, height, current_pending, (0.70, 0.70, 0.70, 0.78), 1.5
+        )
+        self._stroke_segments_2d(
+            ctx, model, viewport, width, height, current_done, (0.12, 0.70, 0.46, 0.95), 2.0
+        )
         self._stroke_segments_2d(
             ctx,
             model,
@@ -448,9 +459,13 @@ class ToolpathRenderer:
         )
         if scene.invalid_segments and perf_counter() - self._last_invalid_geometry_log > 2.0:
             self._last_invalid_geometry_log = perf_counter()
-            logging.warning("Skipped %s invalid 3D toolpath segments during projection", scene.invalid_segments)
+            logging.warning(
+                "Skipped %s invalid 3D toolpath segments during projection", scene.invalid_segments
+            )
 
-        reference_bounds = bed_bounds or self._derive_bed_bounds(prepared.spatial_bounds, model.bounds)
+        reference_bounds = bed_bounds or self._derive_bed_bounds(
+            prepared.spatial_bounds, model.bounds
+        )
         if reference_bounds is not None:
             self._draw_3d_bed(ctx, width, height, camera, reference_bounds)
 
@@ -465,14 +480,18 @@ class ToolpathRenderer:
             style = self._style_for_projected_segment(projected, progress, scene)
             if style is None:
                 continue
-            self._stroke_projected_segment(ctx, projected, style, current_style, width, height, camera)
+            self._stroke_projected_segment(
+                ctx, projected, style, current_style, width, height, camera
+            )
             current_style = style
         if current_style is not None:
             ctx.stroke()
             ctx.set_dash([])
 
         if current_segment is not None:
-            self._stroke_projected_highlight(ctx, current_segment, (0.98, 0.62, 0.16, 1.0), 2.8, width, height, camera)
+            self._stroke_projected_highlight(
+                ctx, current_segment, (0.98, 0.62, 0.16, 1.0), 2.8, width, height, camera
+            )
 
         if progress.toolhead is not None:
             projected_tool = project_to_screen(
@@ -500,7 +519,9 @@ class ToolpathRenderer:
         bed_bounds: tuple[float, float, float, float] | None,
         interaction_active: bool,
     ) -> ProjectionStats:
-        projection_indices = prepared.interactive_indices if interaction_active else prepared.extrusion_indices
+        projection_indices = (
+            prepared.interactive_indices if interaction_active else prepared.extrusion_indices
+        )
         scene, stats = self._prepare_projected_scene(
             model,
             prepared,
@@ -515,16 +536,26 @@ class ToolpathRenderer:
         )
         if scene.invalid_segments and perf_counter() - self._last_invalid_geometry_log > 2.0:
             self._last_invalid_geometry_log = perf_counter()
-            logging.warning("Skipped %s invalid 3D toolpath segments during projection", scene.invalid_segments)
+            logging.warning(
+                "Skipped %s invalid 3D toolpath segments during projection", scene.invalid_segments
+            )
 
-        reference_bounds = bed_bounds or self._derive_bed_bounds(prepared.spatial_bounds, model.bounds)
+        reference_bounds = bed_bounds or self._derive_bed_bounds(
+            prepared.spatial_bounds, model.bounds
+        )
         if reference_bounds is not None:
-            self._draw_3d_bed(ctx, width, height, camera, reference_bounds, interactive=interaction_active)
+            self._draw_3d_bed(
+                ctx, width, height, camera, reference_bounds, interactive=interaction_active
+            )
 
         current_style = None
         for projected in scene.segments:
-            style = self._style_for_selected_projected_segment(projected, scene, sampled=interaction_active)
-            self._stroke_projected_segment(ctx, projected, style, current_style, width, height, camera)
+            style = self._style_for_selected_projected_segment(
+                projected, scene, sampled=interaction_active
+            )
+            self._stroke_projected_segment(
+                ctx, projected, style, current_style, width, height, camera
+            )
             current_style = style
         if current_style is not None:
             ctx.stroke()
@@ -539,7 +570,14 @@ class ToolpathRenderer:
         previous_layers: int,
         show_travel: bool,
     ) -> PreparedGeometry:
-        key = (id(model), model.segment_count, mode.value, current_layer, previous_layers, show_travel)
+        key = (
+            id(model),
+            model.segment_count,
+            mode.value,
+            current_layer,
+            previous_layers,
+            show_travel,
+        )
         cached = self._geometry_cache.get(key)
         if cached is not None:
             return cached
@@ -558,7 +596,9 @@ class ToolpathRenderer:
                 travel_indices.append(index)
                 visible_indices.append(index)
 
-        planar_bounds, used_extrusion_bounds = model.visible_bounds(mode, current_layer, previous_layers)
+        planar_bounds, used_extrusion_bounds = model.visible_bounds(
+            mode, current_layer, previous_layers
+        )
         spatial_bounds, _ = model.visible_spatial_bounds(
             mode,
             current_layer,
@@ -684,7 +724,8 @@ class ToolpathRenderer:
             while len(self._selected_projection_cache) > 6:
                 self._selected_projection_cache.popitem(last=False)
             logging.debug(
-                "Selected preview projection cache store model=%s detail=%s source=%s rendered=%s entries=%s",
+                "Selected preview projection cache store "
+                "model=%s detail=%s source=%s rendered=%s entries=%s",
                 model.filename,
                 "interactive" if drag_active else "full",
                 len(indices),
@@ -940,8 +981,12 @@ class ToolpathRenderer:
         ctx.set_dash([])
         ctx.set_source_rgba(*color)
         ctx.set_line_width(line_width)
-        x0, y0 = ToolpathRenderer._projected_to_screen(projected.x0, projected.y0, camera, width, height)
-        x1, y1 = ToolpathRenderer._projected_to_screen(projected.x1, projected.y1, camera, width, height)
+        x0, y0 = ToolpathRenderer._projected_to_screen(
+            projected.x0, projected.y0, camera, width, height
+        )
+        x1, y1 = ToolpathRenderer._projected_to_screen(
+            projected.x1, projected.y1, camera, width, height
+        )
         ctx.move_to(x0, y0)
         ctx.line_to(x1, y1)
         ctx.stroke()
@@ -983,7 +1028,9 @@ class ToolpathRenderer:
         ctx.rotate(math.radians(viewport.rotation_deg))
         ctx.translate(-viewport.center_x, -viewport.center_y)
 
-    def _ensure_selected_projection_cache(self, model: ToolpathModel, prepared: PreparedGeometry) -> None:
+    def _ensure_selected_projection_cache(
+        self, model: ToolpathModel, prepared: PreparedGeometry
+    ) -> None:
         model_key = (id(model), model.filename, model.modified, prepared.cache_key)
         if model_key == self._selected_projection_model_key:
             return
@@ -991,7 +1038,9 @@ class ToolpathRenderer:
         self._selected_projection_cache.clear()
 
     @staticmethod
-    def _derive_bed_bounds(spatial_bounds: SpatialBounds, planar_bounds) -> tuple[float, float, float, float] | None:
+    def _derive_bed_bounds(
+        spatial_bounds: SpatialBounds, planar_bounds
+    ) -> tuple[float, float, float, float] | None:
         if spatial_bounds.is_valid:
             min_x = spatial_bounds.min_x
             min_y = spatial_bounds.min_y
@@ -1024,7 +1073,9 @@ class ToolpathRenderer:
         return nice_fraction * (10**exponent)
 
     @staticmethod
-    def _draw_border(ctx: cairoContext, width: int, height: int, color: tuple[float, float, float, float]) -> None:
+    def _draw_border(
+        ctx: cairoContext, width: int, height: int, color: tuple[float, float, float, float]
+    ) -> None:
         ctx.set_source_rgba(*color)
         ctx.set_line_width(1.0)
         ctx.rectangle(0.5, 0.5, max(width - 1.0, 0), max(height - 1.0, 0))

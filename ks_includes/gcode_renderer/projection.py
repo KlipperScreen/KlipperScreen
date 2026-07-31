@@ -188,9 +188,15 @@ class CameraState3D:
         content_height = max(height * (1.0 - (margin_ratio * 2.0)), 1.0)
         span_x = max(projected.width, 1.0)
         span_y = max(projected.height, 1.0)
-        self.zoom = min(max(min(content_width / span_x, content_height / span_y), MIN_ZOOM), MAX_ZOOM)
-        projected_center_x = (projected.min_x + projected.max_x) / 2.0 if projected.is_valid else 0.0
-        projected_center_y = (projected.min_y + projected.max_y) / 2.0 if projected.is_valid else 0.0
+        self.zoom = min(
+            max(min(content_width / span_x, content_height / span_y), MIN_ZOOM), MAX_ZOOM
+        )
+        projected_center_x = (
+            (projected.min_x + projected.max_x) / 2.0 if projected.is_valid else 0.0
+        )
+        projected_center_y = (
+            (projected.min_y + projected.max_y) / 2.0 if projected.is_valid else 0.0
+        )
         self.pan_x = -(projected_center_x * self.zoom)
         self.pan_y = projected_center_y * self.zoom
         self.fitted = True

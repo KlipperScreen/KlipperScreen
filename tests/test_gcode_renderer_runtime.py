@@ -9,7 +9,6 @@ import unittest
 
 sys.modules.setdefault("requests", types.SimpleNamespace())
 
-from ks_includes.KlippyRest import KlippyRest
 from ks_includes.config import KlipperScreenConfig
 from ks_includes.gcode_renderer import (
     DisplayViewMode,
@@ -17,25 +16,25 @@ from ks_includes.gcode_renderer import (
     LoadTracker,
     PreviewContext,
     RenderMode,
-    clamp_selected_preview_state,
     ViewportState,
+    clamp_selected_preview_state,
     get_renderer_settings,
     get_viewer_layout_spec,
     initial_selected_preview_state,
     load_local_gcode,
+    preview_access_location,
+    preview_menu_visible,
     preview_panel_name,
+    resolve_local_gcode_path,
     resolve_preview_context,
     rotate_point,
     rotated_bounds,
-    preview_access_location,
-    preview_menu_visible,
-    resolve_local_gcode_path,
 )
 from ks_includes.gcode_renderer.cache import validate_toolpath_model
 from ks_includes.gcode_renderer.loading import resolve_active_filename, should_clear_active_filename
 from ks_includes.gcode_renderer.model import Bounds, ProgressInfo
 from ks_includes.gcode_renderer.parser import parse_gcode
-
+from ks_includes.KlippyRest import KlippyRest
 
 REPO_ROOT = os.path.dirname(os.path.dirname(__file__))
 
@@ -50,7 +49,9 @@ class _CaptureRest(KlippyRest):
         super().__init__("127.0.0.1")
         self.calls = []
 
-    def _do_request(self, method, request_method, data=None, json=None, json_response=True, timeout=3):
+    def _do_request(
+        self, method, request_method, data=None, json=None, json_response=True, timeout=3
+    ):
         self.calls.append(
             {
                 "method": method,
@@ -305,10 +306,14 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
     def test_gcode_viewer_sync_settings_is_idempotent_and_load_free(self):
         module = self._parse_gcode_viewer_module()
         sync_func = self._find_method(module, "_sync_settings")
-        sync_calls = sum(1 for node in ast.walk(module) if self._is_method_call(node, "_sync_settings"))
+        sync_calls = sum(
+            1 for node in ast.walk(module) if self._is_method_call(node, "_sync_settings")
+        )
 
         self.assertGreaterEqual(sync_calls, 2)
-        self.assertFalse(any(self._is_method_call(node, "_schedule_load") for node in ast.walk(sync_func)))
+        self.assertFalse(
+            any(self._is_method_call(node, "_schedule_load") for node in ast.walk(sync_func))
+        )
         self.assertFalse(
             any(self._is_method_call(node, "_refresh_from_printer") for node in ast.walk(sync_func))
         )
@@ -317,22 +322,39 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         module = self._parse_gcode_viewer_module()
         activate_func = self._find_method(module, "activate")
 
-        self.assertTrue(any(self._is_method_call(node, "_refresh_from_printer") for node in ast.walk(activate_func)))
-        self.assertTrue(any(self._is_method_call(node, "activate", owner_attr="load_tracker") for node in ast.walk(activate_func)))
+        self.assertTrue(
+            any(
+                self._is_method_call(node, "_refresh_from_printer")
+                for node in ast.walk(activate_func)
+            )
+        )
+        self.assertTrue(
+            any(
+                self._is_method_call(node, "activate", owner_attr="load_tracker")
+                for node in ast.walk(activate_func)
+            )
+        )
 
     def test_gcode_viewer_view_callbacks_do_not_schedule_loads(self):
         module = self._parse_gcode_viewer_module()
         for method_name in ("zoom", "rotate_left", "rotate_right", "fit_view", "reset_view"):
             method = self._find_method(module, method_name)
-            self.assertFalse(any(self._is_method_call(node, "_schedule_load") for node in ast.walk(method)))
+            self.assertFalse(
+                any(self._is_method_call(node, "_schedule_load") for node in ast.walk(method))
+            )
 
     def test_gcode_viewer_display_callbacks_do_not_schedule_loads(self):
         module = self._parse_gcode_viewer_module()
         for method_name in ("set_view_mode", "set_drag_mode", "toggle_travel", "cycle_mode"):
             method = self._find_method(module, method_name)
-            self.assertFalse(any(self._is_method_call(node, "_schedule_load") for node in ast.walk(method)))
             self.assertFalse(
-                any(self._is_method_call(node, "submit", owner_attr="executor") for node in ast.walk(method))
+                any(self._is_method_call(node, "_schedule_load") for node in ast.walk(method))
+            )
+            self.assertFalse(
+                any(
+                    self._is_method_call(node, "submit", owner_attr="executor")
+                    for node in ast.walk(method)
+                )
             )
 
     def test_gcode_viewer_blanking_inhibition_hooks_are_lifecycle_scoped(self):
@@ -343,16 +365,28 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         refresh_func = self._find_method(module, "_refresh_from_printer")
 
         self.assertTrue(
-            any(self._is_method_call(node, "_sync_blanking_inhibition") for node in ast.walk(activate_func))
+            any(
+                self._is_method_call(node, "_sync_blanking_inhibition")
+                for node in ast.walk(activate_func)
+            )
         )
         self.assertTrue(
-            any(self._is_method_call(node, "_release_blanking_inhibition") for node in ast.walk(deactivate_func))
+            any(
+                self._is_method_call(node, "_release_blanking_inhibition")
+                for node in ast.walk(deactivate_func)
+            )
         )
         self.assertTrue(
-            any(self._is_method_call(node, "_sync_blanking_inhibition") for node in ast.walk(set_view_mode_func))
+            any(
+                self._is_method_call(node, "_sync_blanking_inhibition")
+                for node in ast.walk(set_view_mode_func)
+            )
         )
         self.assertTrue(
-            any(self._is_method_call(node, "_sync_blanking_inhibition") for node in ast.walk(refresh_func))
+            any(
+                self._is_method_call(node, "_sync_blanking_inhibition")
+                for node in ast.walk(refresh_func)
+            )
         )
 
     def test_gcode_viewer_sidebar_removes_internal_back_button_and_status_section(self):
@@ -416,9 +450,13 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
 
     def test_visible_bounds_prefer_extrusion_over_travel_outlier(self):
         model = self._build_outlier_model()
-        bounds, used_extrusion = model.visible_bounds(RenderMode.FULL_MODEL, current_layer=0, previous_layers=0)
+        bounds, used_extrusion = model.visible_bounds(
+            RenderMode.FULL_MODEL, current_layer=0, previous_layers=0
+        )
         self.assertTrue(used_extrusion)
-        self.assertEqual((bounds.min_x, bounds.min_y, bounds.max_x, bounds.max_y), (0.0, 0.0, 10.0, 10.0))
+        self.assertEqual(
+            (bounds.min_x, bounds.min_y, bounds.max_x, bounds.max_y), (0.0, 0.0, 10.0, 10.0)
+        )
 
     def test_preview_menu_helpers(self):
         self.assertTrue(preview_menu_visible(True, "folder/part.gcode"))
@@ -453,7 +491,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
             resolve_preview_context(None, "", default_active_print=True),
             PreviewContext.ACTIVE_PRINT,
         )
-        self.assertIsNone(resolve_preview_context("unknown", "folder/part.gcode", default_active_print=True))
+        self.assertIsNone(
+            resolve_preview_context("unknown", "folder/part.gcode", default_active_print=True)
+        )
 
     def test_preview_panel_name_resolution(self):
         self.assertEqual(preview_panel_name("selected_file"), "gcode_viewer_selected")
@@ -480,7 +520,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         try:
             panel_class._build_canvas_area = lambda self: None
             panel_class._build_controls_panel = lambda self: None
-            panel_class._sync_settings = lambda self, sync_view_mode=True: setattr(self, "enabled", False)
+            panel_class._sync_settings = lambda self, sync_view_mode=True: setattr(
+                self, "enabled", False
+            )
             panel_class._apply_responsive_layout = lambda self, *args, **kwargs: None
             panel_class._set_panel_state = lambda self, *args, **kwargs: None
             panel_class.__init__.__globals__["GcodeRenderCache"] = lambda: types.SimpleNamespace()
@@ -513,7 +555,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         try:
             panel_class._build_canvas_area = lambda self: None
             panel_class._build_controls_panel = lambda self: None
-            panel_class._sync_settings = lambda self, sync_view_mode=True: setattr(self, "enabled", False)
+            panel_class._sync_settings = lambda self, sync_view_mode=True: setattr(
+                self, "enabled", False
+            )
             panel_class._apply_responsive_layout = lambda self, *args, **kwargs: None
             panel_class._set_panel_state = lambda self, *args, **kwargs: None
             panel_class.__init__.__globals__["GcodeRenderCache"] = lambda: types.SimpleNamespace()
@@ -553,16 +597,26 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         with open(viewer_path, "r", encoding="utf-8") as handle:
             source = handle.read()
 
-        self.assertIn('self.rotate_left_button = self._make_compact_button("arrow-left", None, "color1")', source)
-        self.assertIn('self.rotate_right_button = self._make_compact_button("arrow-right", None, "color2")', source)
+        self.assertIn(
+            'self.rotate_left_button = self._make_compact_button("arrow-left", None, "color1")',
+            source,
+        )
+        self.assertIn(
+            'self.rotate_right_button = self._make_compact_button("arrow-right", None, "color2")',
+            source,
+        )
         self.assertNotIn('self._make_compact_button(None, _("Rotate left"), "color1")', source)
         self.assertNotIn('self._make_compact_button(None, _("Rotate right"), "color2")', source)
 
     def test_rotate_arrow_icons_exist_in_all_themes(self):
         styles_dir = os.path.join(REPO_ROOT, "styles")
         for theme in ("colorized", "material-dark", "material-darker", "z-bolt"):
-            self.assertTrue(os.path.exists(os.path.join(styles_dir, theme, "images", "arrow-left.svg")))
-            self.assertTrue(os.path.exists(os.path.join(styles_dir, theme, "images", "arrow-right.svg")))
+            self.assertTrue(
+                os.path.exists(os.path.join(styles_dir, theme, "images", "arrow-left.svg"))
+            )
+            self.assertTrue(
+                os.path.exists(os.path.join(styles_dir, theme, "images", "arrow-right.svg"))
+            )
 
     def test_selected_file_context_keeps_explicit_filename(self):
         panel_class = self._load_gcode_viewer_panel_class()
@@ -906,7 +960,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
     def test_selected_file_3d_draw_uses_renderer_draw_path(self):
         panel_class = self._load_gcode_viewer_panel_class()
         draw_calls = []
-        canvas = types.SimpleNamespace(get_allocated_width=lambda: 800, get_allocated_height=lambda: 480)
+        canvas = types.SimpleNamespace(
+            get_allocated_width=lambda: 800, get_allocated_height=lambda: 480
+        )
         panel = object.__new__(panel_class)
         panel.preview_context = "selected_file"
         panel.explicit_filename = "picked.gcode"
@@ -972,7 +1028,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
 
         panel.renderer = types.SimpleNamespace(draw=_draw)
 
-        da = types.SimpleNamespace(get_allocated_width=lambda: 800, get_allocated_height=lambda: 480)
+        da = types.SimpleNamespace(
+            get_allocated_width=lambda: 800, get_allocated_height=lambda: 480
+        )
         panel.on_draw(da, object())
 
         self.assertEqual(calls, [DisplayViewMode.MODE_3D, DisplayViewMode.MODE_2D])
@@ -1001,7 +1059,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         panel.set_view_mode(None, DisplayViewMode.MODE_2D)
 
         self.assertEqual(panel.view_mode, DisplayViewMode.MODE_2D)
-        self.assertEqual(config_sets[0][0], ("main", "gcode_renderer_view", DisplayViewMode.MODE_2D.value))
+        self.assertEqual(
+            config_sets[0][0], ("main", "gcode_renderer_view", DisplayViewMode.MODE_2D.value)
+        )
         self.assertEqual(saves, [True])
 
     def test_successful_3d_draw_remains_in_3d(self):
@@ -1022,10 +1082,14 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         panel.bed_bounds = None
         panel.drag_state = None
         panel._interaction_active = False
-        panel._draw_3d_error_overlay = lambda *args, **kwargs: self.fail("3D error overlay should not be shown")
+        panel._draw_3d_error_overlay = lambda *args, **kwargs: self.fail(
+            "3D error overlay should not be shown"
+        )
         panel.renderer = types.SimpleNamespace(draw=lambda *args, **kwargs: calls.append(args[3]))
 
-        da = types.SimpleNamespace(get_allocated_width=lambda: 800, get_allocated_height=lambda: 480)
+        da = types.SimpleNamespace(
+            get_allocated_width=lambda: 800, get_allocated_height=lambda: 480
+        )
         panel.on_draw(da, object())
 
         self.assertEqual(calls, [DisplayViewMode.MODE_3D])
@@ -1049,10 +1113,14 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         panel.bed_bounds = None
         panel.drag_state = None
         panel._interaction_active = False
-        panel._draw_3d_error_overlay = lambda *args, **kwargs: self.fail("3D error overlay should not be shown")
+        panel._draw_3d_error_overlay = lambda *args, **kwargs: self.fail(
+            "3D error overlay should not be shown"
+        )
         panel.renderer = types.SimpleNamespace(draw=lambda *args, **kwargs: calls.append(args[3]))
 
-        da = types.SimpleNamespace(get_allocated_width=lambda: 800, get_allocated_height=lambda: 480)
+        da = types.SimpleNamespace(
+            get_allocated_width=lambda: 800, get_allocated_height=lambda: 480
+        )
         panel.on_draw(da, object())
 
         self.assertEqual(calls, [DisplayViewMode.MODE_3D])
@@ -1061,7 +1129,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         panel_class = self._load_gcodes_panel_class()
         calls = []
         panel = object.__new__(panel_class)
-        panel._screen = types.SimpleNamespace(show_panel=lambda *args, **kwargs: calls.append((args, kwargs)))
+        panel._screen = types.SimpleNamespace(
+            show_panel=lambda *args, **kwargs: calls.append((args, kwargs))
+        )
 
         panel.open_preview(None, "folder/part.gcode")
 
@@ -1084,16 +1154,18 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         with open(gcodes_path, "r", encoding="utf-8") as handle:
             source = handle.read()
         self.assertIn('PREVIEW_ICON = "bed-mesh"', source)
-        self.assertIn("preview.connect(\"clicked\", self.open_preview, path)", source)
-        self.assertIn("rename.connect(\"clicked\", self.show_rename", source)
-        self.assertIn("delete.connect(\"clicked\", self.confirm_delete_file", source)
+        self.assertIn('preview.connect("clicked", self.open_preview, path)', source)
+        self.assertIn('rename.connect("clicked", self.show_rename', source)
+        self.assertIn('delete.connect("clicked", self.confirm_delete_file', source)
         self.assertNotIn("preview.hide()", source)
         self.assertIn("tile.add(actions)", source)
 
     def test_enabled_renderer_list_file_constructs_preview_action(self):
         panel = self._make_gcodes_panel(list_mode=True, renderer_enabled=True)
         created_icons = []
-        panel._build_action_button = lambda icon_name, color: created_icons.append(icon_name) or _ActionButtonStub(icon_name)
+        panel._build_action_button = lambda icon_name, color: (
+            created_icons.append(icon_name) or _ActionButtonStub(icon_name)
+        )
 
         child = panel.create_item({"filename": "part.gcode", "modified": 1, "size": 10})
 
@@ -1104,7 +1176,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
     def test_disabled_renderer_list_file_has_no_preview_action(self):
         panel = self._make_gcodes_panel(list_mode=True, renderer_enabled=False)
         created_icons = []
-        panel._build_action_button = lambda icon_name, color: created_icons.append(icon_name) or _ActionButtonStub(icon_name)
+        panel._build_action_button = lambda icon_name, color: (
+            created_icons.append(icon_name) or _ActionButtonStub(icon_name)
+        )
 
         child = panel.create_item({"filename": "part.gcode", "modified": 1, "size": 10})
 
@@ -1115,7 +1189,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
     def test_directory_row_does_not_construct_or_attach_preview_action(self):
         panel = self._make_gcodes_panel(list_mode=True, renderer_enabled=True)
         created_icons = []
-        panel._build_action_button = lambda icon_name, color: created_icons.append(icon_name) or _ActionButtonStub(icon_name)
+        panel._build_action_button = lambda icon_name, color: (
+            created_icons.append(icon_name) or _ActionButtonStub(icon_name)
+        )
 
         child = panel.create_item({"dirname": "folder", "modified": 1, "size": 0})
 
@@ -1134,7 +1210,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
     def test_thumbnail_directory_does_not_construct_preview_action(self):
         panel = self._make_gcodes_panel(list_mode=False, renderer_enabled=True)
         created_icons = []
-        panel._build_action_button = lambda icon_name, color: created_icons.append(icon_name) or _ActionButtonStub(icon_name)
+        panel._build_action_button = lambda icon_name, color: (
+            created_icons.append(icon_name) or _ActionButtonStub(icon_name)
+        )
 
         child = panel.create_item({"dirname": "folder", "modified": 1, "size": 0})
 
@@ -1145,7 +1223,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
     def test_enabled_renderer_thumbnail_file_constructs_preview_action(self):
         panel = self._make_gcodes_panel(list_mode=False, renderer_enabled=True)
         created_icons = []
-        panel._build_action_button = lambda icon_name, color: created_icons.append(icon_name) or _ActionButtonStub(icon_name)
+        panel._build_action_button = lambda icon_name, color: (
+            created_icons.append(icon_name) or _ActionButtonStub(icon_name)
+        )
 
         child = panel.create_item({"filename": "part.gcode", "modified": 1, "size": 10})
 
@@ -1156,7 +1236,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
     def test_disabled_renderer_thumbnail_file_has_no_preview_action(self):
         panel = self._make_gcodes_panel(list_mode=False, renderer_enabled=False)
         created_icons = []
-        panel._build_action_button = lambda icon_name, color: created_icons.append(icon_name) or _ActionButtonStub(icon_name)
+        panel._build_action_button = lambda icon_name, color: (
+            created_icons.append(icon_name) or _ActionButtonStub(icon_name)
+        )
 
         child = panel.create_item({"filename": "part.gcode", "modified": 1, "size": 10})
 
@@ -1174,12 +1256,18 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         screen_panel_class = self._load_screen_panel_class()
         calls = []
         panel = object.__new__(screen_panel_class)
-        panel._screen = types.SimpleNamespace(show_panel=lambda *args, **kwargs: calls.append((args, kwargs)))
+        panel._screen = types.SimpleNamespace(
+            show_panel=lambda *args, **kwargs: calls.append((args, kwargs))
+        )
 
         screen_panel_class.menu_item_clicked(
             panel,
             None,
-            {"panel": "gcode_viewer", "name": "Preview", "params": '{"preview_context": "active_print"}'},
+            {
+                "panel": "gcode_viewer",
+                "name": "Preview",
+                "params": '{"preview_context": "active_print"}',
+            },
         )
 
         self.assertEqual(
@@ -1339,7 +1427,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         self.assertTrue(should_clear_active_filename("held.gcode", "", "standby"))
 
     def test_cache_rejects_old_version_and_malformed_model(self):
-        model = parse_gcode(b"G90\nM82\nG1 Z0.2\nG1 X1 Y1 E1.0\n", "cache.gcode", file_size=24, modified=1.0)
+        model = parse_gcode(
+            b"G90\nM82\nG1 Z0.2\nG1 X1 Y1 E1.0\n", "cache.gcode", file_size=24, modified=1.0
+        )
         self.assertEqual(validate_toolpath_model(model), (True, "valid"))
 
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1459,7 +1549,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
             panel.render_mode = RenderMode.CURRENT_LAYER
             panel.view_mode = DisplayViewMode.MODE_2D
             panel._sync_settings = lambda sync_view_mode=False: None
-            panel._refresh_metadata = lambda: setattr(panel, "file_metadata", dict(metadata[filename]))
+            panel._refresh_metadata = lambda: setattr(
+                panel, "file_metadata", dict(metadata[filename])
+            )
             panel._update_progress = lambda: False
             panel.queue_render = lambda: None
             panel._fit_view_to_model = lambda force=False: None
@@ -1553,7 +1645,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         added = []
         screen_panel_class = panel_class.__mro__[1]
         original_add_option = screen_panel_class.add_option
-        screen_panel_class.add_option = lambda self, section, store, name, option: added.append((section, name))
+        screen_panel_class.add_option = lambda self, section, store, name, option: added.append(
+            (section, name)
+        )
         try:
             panel_class(screen, title="Settings")
         finally:
@@ -1574,7 +1668,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         job_status_path = os.path.join(REPO_ROOT, "panels", "job_status.py")
         with open(job_status_path, "r", encoding="utf-8") as handle:
             source = handle.read()
-        self.assertIn('self.labels["info_grid"].attach(self.labels["thumbnail"], 0, 0, 1, 1)', source)
+        self.assertIn(
+            'self.labels["info_grid"].attach(self.labels["thumbnail"], 0, 0, 1, 1)', source
+        )
         self.assertNotIn("preview_button", source)
         self.assertNotIn("thumb_box", source)
         self.assertNotIn("show_toolpath_preview", source)
@@ -1603,7 +1699,9 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         self.assertGreater(len(themed_dirs), 0)
         for theme in themed_dirs:
             icon_path = os.path.join(styles_dir, theme, "images", "bed-mesh.svg")
-            self.assertTrue(os.path.exists(icon_path), msg=f"Missing bed-mesh icon for theme {theme}")
+            self.assertTrue(
+                os.path.exists(icon_path), msg=f"Missing bed-mesh icon for theme {theme}"
+            )
 
     def test_active_3d_preview_acquires_screen_blanking_inhibition(self):
         panel_class = self._load_gcode_viewer_panel_class()
@@ -1811,6 +1909,7 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         sys.modules["gi.repository"] = repository_module
         sys.modules["cairo"] = types.SimpleNamespace(Context=object)
         screen_panel_module = types.ModuleType("ks_includes.screen_panel")
+
         class _ScreenPanelStub:
             def __init__(self, screen, title, **kwargs):
                 self._screen = screen
@@ -1985,12 +2084,16 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
 
         stubs = {
             "ks_includes.functions": {"dpms_loaded": False},
-            "ks_includes.config": {"KlipperScreenConfig": type("KlipperScreenConfig", (object,), {})},
+            "ks_includes.config": {
+                "KlipperScreenConfig": type("KlipperScreenConfig", (object,), {})
+            },
             "ks_includes.files": {"KlippyFiles": type("KlippyFiles", (object,), {})},
             "ks_includes.KlippyGtk": {"KlippyGtk": type("KlippyGtk", (object,), {})},
             "ks_includes.KlippyRest": {"KlippyRest": type("KlippyRest", (object,), {})},
             "ks_includes.KlippyUDS": {"KlippyUDS": type("KlippyUDS", (object,), {})},
-            "ks_includes.KlippyWebsocket": {"KlippyWebsocket": type("KlippyWebsocket", (object,), {})},
+            "ks_includes.KlippyWebsocket": {
+                "KlippyWebsocket": type("KlippyWebsocket", (object,), {})
+            },
             "ks_includes.notification_handler": {
                 "NotificationHandler": type("NotificationHandler", (object,), {})
             },
@@ -2031,7 +2134,11 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         panel.thumbsize = 48
         panel.list_button_size = 24
         panel._printer = types.SimpleNamespace(extrudercount=1)
-        panel._screen = types.SimpleNamespace(width=800, vertical_mode=False, files=types.SimpleNamespace(get_file_info=lambda path: {}))
+        panel._screen = types.SimpleNamespace(
+            width=800,
+            vertical_mode=False,
+            files=types.SimpleNamespace(get_file_info=lambda path: {}),
+        )
         panel._gtk = types.SimpleNamespace(
             Button=lambda *args, **kwargs: _GtkWidgetStub(),
             Image=lambda icon_name=None, *args, **kwargs: _ImageStub(icon_name),

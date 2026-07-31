@@ -8,6 +8,7 @@ from dataclasses import dataclass
 
 from .model import RenderMode
 
+
 def build_cache_fingerprint(filename: str, file_size: int, modified: float) -> str:
     token = f"{filename}|{int(file_size)}|{float(modified):.6f}"
     return hashlib.sha256(token.encode("utf-8")).hexdigest()

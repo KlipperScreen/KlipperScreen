@@ -1,5 +1,5 @@
-import datetime
 import ast
+import datetime
 import logging
 
 import gi

@@ -8,8 +8,8 @@ from datetime import datetime
 
 from gi.repository import Gtk, Pango
 
-from ks_includes.KlippyGtk import find_widget
 from ks_includes.gcode_renderer import get_renderer_settings
+from ks_includes.KlippyGtk import find_widget
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.widgets.flowboxchild_extended import PrintListItem
 
