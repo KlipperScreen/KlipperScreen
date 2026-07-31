@@ -9,6 +9,7 @@ from datetime import datetime
 from gi.repository import Gtk, Pango
 
 from ks_includes.KlippyGtk import find_widget
+from ks_includes.gcode_renderer import get_renderer_settings
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.widgets.flowboxchild_extended import PrintListItem
 
@@ -127,6 +128,9 @@ class Panel(ScreenPanel):
     def deactivate(self):
         self._screen.files.remove_callback(self._callback)
 
+    def _is_gcode_renderer_enabled(self) -> bool:
+        return get_renderer_settings(self._config.get_main_config()).enabled
+
     def create_item(self, item):
         fbchild = PrintListItem()
         fbchild.set_date(item["modified"])
@@ -153,6 +157,7 @@ class Panel(ScreenPanel):
             return None
         fbchild.set_path(path)
         fbchild.set_name(basename.casefold())
+        preview_enabled = is_file and self._is_gcode_renderer_enabled()
         if self.list_mode:
             info = Gtk.Label(
                 hexpand=True,
@@ -178,15 +183,18 @@ class Panel(ScreenPanel):
             row.attach(itemname, 1, 0, 3, 1)
             row.attach(info, 1, 1, 1, 1)
             if is_file:
-                preview = self._build_action_button(self.PREVIEW_ICON, "color4")
                 icon.connect("clicked", self.confirm_print, path)
                 self.image_load(path, icon, self.thumbsize / 2, True, "file")
-                preview.connect("clicked", self.open_preview, path)
                 delete.connect("clicked", self.confirm_delete_file, f"gcodes/{path}")
                 rename.connect("clicked", self.show_rename, f"gcodes/{path}")
-                row.attach(preview, 2, 1, 1, 1)
-                row.attach(rename, 3, 1, 1, 1)
-                row.attach(delete, 4, 1, 1, 1)
+                action_column = 2
+                if preview_enabled:
+                    preview = self._build_action_button(self.PREVIEW_ICON, "color4")
+                    preview.connect("clicked", self.open_preview, path)
+                    row.attach(preview, action_column, 1, 1, 1)
+                    action_column += 1
+                row.attach(rename, action_column, 1, 1, 1)
+                row.attach(delete, action_column + 1, 1, 1, 1)
                 action_icon = "printer" if self._printer.extrudercount > 0 else "load"
                 action = self._gtk.Button(action_icon, style="color3")
                 action.connect("clicked", self.confirm_print, path)
@@ -219,13 +227,14 @@ class Panel(ScreenPanel):
                 icon.connect("clicked", self.confirm_print, path)
                 self.image_load(path, icon, self.thumbsize, False, "file")
                 actions = Gtk.Box(halign=Gtk.Align.CENTER, spacing=6)
-                preview = self._build_action_button(self.PREVIEW_ICON, "color4")
-                preview.connect("clicked", self.open_preview, path)
                 rename = self._build_action_button("edit", "color2")
                 rename.connect("clicked", self.show_rename, f"gcodes/{path}")
                 delete = self._build_action_button("delete", "color1")
                 delete.connect("clicked", self.confirm_delete_file, f"gcodes/{path}")
-                actions.add(preview)
+                if preview_enabled:
+                    preview = self._build_action_button(self.PREVIEW_ICON, "color4")
+                    preview.connect("clicked", self.open_preview, path)
+                    actions.add(preview)
                 actions.add(rename)
                 actions.add(delete)
                 tile.add(icon)

@@ -1090,8 +1090,8 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         self.assertNotIn("preview.hide()", source)
         self.assertIn("tile.add(actions)", source)
 
-    def test_gcode_file_row_constructs_preview_action(self):
-        panel = self._make_gcodes_panel(list_mode=True)
+    def test_enabled_renderer_list_file_constructs_preview_action(self):
+        panel = self._make_gcodes_panel(list_mode=True, renderer_enabled=True)
         created_icons = []
         panel._build_action_button = lambda icon_name, color: created_icons.append(icon_name) or _ActionButtonStub(icon_name)
 
@@ -1101,8 +1101,19 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         self.assertIn(panel.PREVIEW_ICON, created_icons)
         self.assertTrue(self._find_icon_widget(child, panel.PREVIEW_ICON))
 
+    def test_disabled_renderer_list_file_has_no_preview_action(self):
+        panel = self._make_gcodes_panel(list_mode=True, renderer_enabled=False)
+        created_icons = []
+        panel._build_action_button = lambda icon_name, color: created_icons.append(icon_name) or _ActionButtonStub(icon_name)
+
+        child = panel.create_item({"filename": "part.gcode", "modified": 1, "size": 10})
+
+        self.assertIsNotNone(child)
+        self.assertNotIn(panel.PREVIEW_ICON, created_icons)
+        self.assertFalse(self._find_icon_widget(child, panel.PREVIEW_ICON))
+
     def test_directory_row_does_not_construct_or_attach_preview_action(self):
-        panel = self._make_gcodes_panel(list_mode=True)
+        panel = self._make_gcodes_panel(list_mode=True, renderer_enabled=True)
         created_icons = []
         panel._build_action_button = lambda icon_name, color: created_icons.append(icon_name) or _ActionButtonStub(icon_name)
 
@@ -1113,7 +1124,7 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         self.assertFalse(self._find_icon_widget(child, panel.PREVIEW_ICON))
 
     def test_directory_row_show_all_cannot_expose_preview(self):
-        panel = self._make_gcodes_panel(list_mode=True)
+        panel = self._make_gcodes_panel(list_mode=True, renderer_enabled=False)
         child = panel.create_item({"dirname": "folder", "modified": 1, "size": 0})
 
         child.show_all()
@@ -1121,7 +1132,7 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         self.assertFalse(self._find_icon_widget(child, panel.PREVIEW_ICON))
 
     def test_thumbnail_directory_does_not_construct_preview_action(self):
-        panel = self._make_gcodes_panel(list_mode=False)
+        panel = self._make_gcodes_panel(list_mode=False, renderer_enabled=True)
         created_icons = []
         panel._build_action_button = lambda icon_name, color: created_icons.append(icon_name) or _ActionButtonStub(icon_name)
 
@@ -1131,8 +1142,8 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         self.assertNotIn(panel.PREVIEW_ICON, created_icons)
         self.assertFalse(self._find_icon_widget(child, panel.PREVIEW_ICON))
 
-    def test_thumbnail_file_constructs_preview_action(self):
-        panel = self._make_gcodes_panel(list_mode=False)
+    def test_enabled_renderer_thumbnail_file_constructs_preview_action(self):
+        panel = self._make_gcodes_panel(list_mode=False, renderer_enabled=True)
         created_icons = []
         panel._build_action_button = lambda icon_name, color: created_icons.append(icon_name) or _ActionButtonStub(icon_name)
 
@@ -1141,6 +1152,17 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         self.assertIsNotNone(child)
         self.assertIn(panel.PREVIEW_ICON, created_icons)
         self.assertTrue(self._find_icon_widget(child, panel.PREVIEW_ICON))
+
+    def test_disabled_renderer_thumbnail_file_has_no_preview_action(self):
+        panel = self._make_gcodes_panel(list_mode=False, renderer_enabled=False)
+        created_icons = []
+        panel._build_action_button = lambda icon_name, color: created_icons.append(icon_name) or _ActionButtonStub(icon_name)
+
+        child = panel.create_item({"filename": "part.gcode", "modified": 1, "size": 10})
+
+        self.assertIsNotNone(child)
+        self.assertNotIn(panel.PREVIEW_ICON, created_icons)
+        self.assertFalse(self._find_icon_widget(child, panel.PREVIEW_ICON))
 
     def test_print_menu_preview_context_is_explicit(self):
         menu_path = os.path.join(REPO_ROOT, "config", "print_menu.conf")
@@ -1511,6 +1533,43 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         self.assertIn('"gcode_renderer_menu"', source)
         self.assertIn("G-code Renderer", source)
 
+    def test_renderer_settings_submenu_places_enable_first(self):
+        panel_class = self._load_settings_panel_class()
+        options = [
+            {"gcode_renderer_view": {"name": "View"}},
+            {"gcode_renderer_mode": {"name": "Mode"}},
+            {"enable_gcode_renderer": {"name": "Enable"}},
+            {"gcode_renderer_fps": {"name": "FPS"}},
+        ]
+        screen = types.SimpleNamespace(
+            _config=types.SimpleNamespace(
+                get_configurable_options=lambda: list(options),
+                get_printers=lambda: [],
+                lang_list=[],
+            ),
+            change_language=lambda *args, **kwargs: None,
+            gtk=types.SimpleNamespace(ScrolledWindow=lambda: _GtkWidgetStub()),
+        )
+        added = []
+        screen_panel_class = panel_class.__mro__[1]
+        original_add_option = screen_panel_class.add_option
+        screen_panel_class.add_option = lambda self, section, store, name, option: added.append((section, name))
+        try:
+            panel_class(screen, title="Settings")
+        finally:
+            screen_panel_class.add_option = original_add_option
+
+        renderer_names = [name for section, name in added if section == "gcode_renderer"]
+        self.assertEqual(
+            renderer_names,
+            [
+                "enable_gcode_renderer",
+                "gcode_renderer_view",
+                "gcode_renderer_mode",
+                "gcode_renderer_fps",
+            ],
+        )
+
     def test_job_status_source_keeps_original_thumbnail_layout(self):
         job_status_path = os.path.join(REPO_ROOT, "panels", "job_status.py")
         with open(job_status_path, "r", encoding="utf-8") as handle:
@@ -1823,6 +1882,41 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         module._ = lambda text: text
         return module.Panel
 
+    def _load_settings_panel_class(self):
+        gi_module = sys.modules.get("gi")
+        if gi_module is None:
+            gi_module = types.ModuleType("gi")
+            sys.modules["gi"] = gi_module
+        gi_module.require_version = lambda *args, **kwargs: None
+
+        repository_module = types.ModuleType("gi.repository")
+        repository_module.Gtk = types.SimpleNamespace(
+            Grid=_GtkWidgetStub,
+        )
+        sys.modules["gi.repository"] = repository_module
+
+        screen_panel_module = types.ModuleType("ks_includes.screen_panel")
+
+        class _ScreenPanelStub:
+            def __init__(self, screen, title, **kwargs):
+                self._screen = screen
+                self._config = screen._config
+                self._gtk = screen.gtk
+                self.labels = {}
+                self.content = _GtkWidgetStub()
+                self.menu = []
+
+            def add_option(self, *args, **kwargs):
+                return None
+
+        screen_panel_module.ScreenPanel = _ScreenPanelStub
+        sys.modules["ks_includes.screen_panel"] = screen_panel_module
+
+        sys.modules.pop("panels.settings", None)
+        module = importlib.import_module("panels.settings")
+        module._ = lambda text: text
+        return module.Panel
+
     def _load_screensaver_module(self):
         gi_module = sys.modules.get("gi")
         if gi_module is None:
@@ -1928,7 +2022,7 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
             "outlier.gcode",
         )
 
-    def _make_gcodes_panel(self, *, list_mode):
+    def _make_gcodes_panel(self, *, list_mode, renderer_enabled):
         panel_class = self._load_gcodes_panel_class()
         panel = object.__new__(panel_class)
         panel.PREVIEW_ICON = panel_class.PREVIEW_ICON
@@ -1941,6 +2035,11 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         panel._gtk = types.SimpleNamespace(
             Button=lambda *args, **kwargs: _GtkWidgetStub(),
             Image=lambda icon_name=None, *args, **kwargs: _ImageStub(icon_name),
+        )
+        panel._config = types.SimpleNamespace(
+            get_main_config=lambda: {
+                "enable_gcode_renderer": "True" if renderer_enabled else "False"
+            }
         )
         panel.image_load = lambda *args, **kwargs: None
         panel.get_info_str = lambda *args, **kwargs: ""

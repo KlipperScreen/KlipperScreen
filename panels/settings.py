@@ -24,6 +24,9 @@ class Panel(ScreenPanel):
                 renderer_options.append(option)
             else:
                 settings_options.append(option)
+        renderer_options.sort(
+            key=lambda option: 0 if list(option)[0] == "enable_gcode_renderer" else 1
+        )
         settings_options.append(
             {
                 "gcode_renderer": {
