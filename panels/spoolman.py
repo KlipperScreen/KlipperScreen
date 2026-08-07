@@ -280,9 +280,13 @@ class Panel(ScreenPanel):
         text_renderer.set_property("ellipsize", Pango.EllipsizeMode.END)
         pixbuf_renderer = Gtk.CellRendererPixbuf(xpad=5, ypad=5)
         checkbox_renderer = Gtk.CellRendererToggle()
-        column_id = Gtk.TreeViewColumn(cell_renderer=text_renderer)
-        column_id.set_cell_data_func(text_renderer, self._set_cell_id)
+        # Ensure id column does not ellipsize text
+        id_renderer = Gtk.CellRendererText()
+
+        column_id = Gtk.TreeViewColumn(cell_renderer=id_renderer)
+        column_id.set_cell_data_func(id_renderer, self._set_cell_id)
         column_id.set_sort_column_id(0)
+        column_id.set_min_width(60)
 
         column_icon = Gtk.TreeViewColumn(cell_renderer=pixbuf_renderer)
         column_icon.set_cell_data_func(pixbuf_renderer, self._set_cell_icon)
