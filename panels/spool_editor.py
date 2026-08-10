@@ -305,9 +305,6 @@ class Panel(ScreenPanel):
     def _get_update_payload(self):
         value = self._pending_update_value
         if self.selected_weight_mode == "measured":
-            empty_spool_weight = self._get_empty_spool_weight() or 0
-            if empty_spool_weight:
-                value -= empty_spool_weight
             return {"remaining_weight": value}
         elif self.selected_weight_mode == "remaining":
             return {"remaining_weight": value}
