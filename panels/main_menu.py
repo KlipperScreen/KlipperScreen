@@ -233,6 +233,22 @@ class Panel(MenuPanel):
                 script,
             )
 
+    def mpc_calibrate(self, temp):
+        if temp <= 0:
+            return
+        heater = self.active_heater.split(" ", maxsplit=1)[-1]
+        if self.verify_max_temp(temp):
+            script = {"script": f"MPC_CALIBRATE HEATER={heater} TARGET={temp}"}
+            self._screen._confirm_send_action(
+                None,
+                _("Initiate an MPC calibration for:")
+                + f" {heater} @ {temp} ºC"
+                + "\n\n"
+                + _("It may take more than 5 minutes depending on the heater power."),
+                "printer.gcode.script",
+                script,
+            )
+
     def create_left_panel(self):
         self.labels["devices"] = Gtk.Grid(vexpand=False)
         self.labels["devices"].get_style_context().add_class("heater-grid")
@@ -319,6 +335,15 @@ class Panel(MenuPanel):
                 self.pid_calibrate,
                 icon="heat-up",
                 label=_("Calibrate") + " PID",
+            )
+        if (
+            self._printer.state not in ("printing", "paused")
+            and self._screen.printer.config[self.active_heater]["control"] == "mpc"
+        ):
+            self.labels["keypad"].add_extra_button(
+                self.mpc_calibrate,
+                icon="heat-up",
+                label=_("Calibrate") + " MPC",
             )
         self.labels["keypad"].clear()
 
