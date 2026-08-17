@@ -286,7 +286,6 @@ class Panel(ScreenPanel):
         column_id = Gtk.TreeViewColumn(cell_renderer=id_renderer)
         column_id.set_cell_data_func(id_renderer, self._set_cell_id)
         column_id.set_sort_column_id(0)
-        column_id.set_min_width(60)
 
         column_icon = Gtk.TreeViewColumn(cell_renderer=pixbuf_renderer)
         column_icon.set_cell_data_func(pixbuf_renderer, self._set_cell_icon)
