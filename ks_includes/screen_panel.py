@@ -1,3 +1,4 @@
+import ast
 import datetime
 import logging
 
@@ -80,6 +81,16 @@ class ScreenPanel:
             panel_args["title"] = item["name"]
         if "extra" in item:
             panel_args["extra"] = item["extra"]
+        if "params" in item and item["params"] not in (None, False, "", "{}"):
+            params = item["params"]
+            if isinstance(params, str):
+                try:
+                    params = ast.literal_eval(params)
+                except (SyntaxError, ValueError):
+                    logging.debug("Unable to parse panel params: %s", params)
+                    params = {}
+            if isinstance(params, dict):
+                panel_args.update(params)
         self._screen.show_panel(item["panel"], **panel_args)
 
     def load_menu(self, widget, name, title=None):
@@ -333,7 +344,7 @@ class ScreenPanel:
             box.add(label)
             row_box.add(box)
         elif option["type"] == "menu":
-            open_menu = self._gtk.Button("settings", style="color3")
+            open_menu = self._gtk.Button(option.get("icon", "settings"), style="color3")
             open_menu.connect("clicked", self.load_menu, option["menu"], option["name"])
             open_menu.set_hexpand(False)
             open_menu.set_halign(Gtk.Align.END)

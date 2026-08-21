@@ -14,16 +14,59 @@ class ScreenSaver:
         self.screensaver_timeout = None
         self.blackbox = None
         self.delayed = None
+        self._inhibitors = set()
         self.delayed_seconds = screen._config.get_main_config().getint("screensaver_wake_delay", 1)
 
     @property
     def is_showing(self):
         return self.blackbox is not None
 
-    def reset_timeout(self, *args):
+    @property
+    def is_inhibited(self):
+        return bool(self._inhibitors)
+
+    def _cancel_timeout(self):
         if self.screensaver_timeout is not None:
             GLib.source_remove(self.screensaver_timeout)
             self.screensaver_timeout = None
+
+    def inhibit(self, owner):
+        if owner in self._inhibitors:
+            return False
+        self._inhibitors.add(owner)
+        if len(self._inhibitors) > 1:
+            return False
+        logging.info("Screensaver inhibited by %s", owner)
+        self._cancel_timeout()
+        self.screen.set_runtime_blanking_inhibited(True)
+        if self.is_showing:
+            self.close()
+        return True
+
+    def release(self, owner):
+        if owner not in self._inhibitors:
+            return False
+        self._inhibitors.remove(owner)
+        if self._inhibitors:
+            return False
+        logging.info("Screensaver inhibition released by %s", owner)
+        self.screen.set_runtime_blanking_inhibited(False)
+        self.screen.reset_screenblanking_timeout()
+        return True
+
+    def release_all(self):
+        if not self._inhibitors:
+            return False
+        self._inhibitors.clear()
+        logging.info("Screensaver inhibition released for all owners")
+        self.screen.set_runtime_blanking_inhibited(False)
+        self.screen.reset_screenblanking_timeout()
+        return True
+
+    def reset_timeout(self, *args):
+        self._cancel_timeout()
+        if self.is_inhibited:
+            return
         if self.printer and self.printer.state in ("printing", "paused"):
             use_screensaver = self.config.get_main_config().get("screen_blanking_printing") != "off"
         else:
@@ -34,14 +77,16 @@ class ScreenSaver:
             )
 
     def show(self):
+        if self.is_inhibited:
+            logging.debug("Screensaver show skipped while inhibited")
+            self._cancel_timeout()
+            return False
         self.screen.uninhibit_idle()
         if self.is_showing:
             logging.debug("Screensaver active")
             return
         logging.debug("Showing Screensaver")
-        if self.screensaver_timeout is not None:
-            GLib.source_remove(self.screensaver_timeout)
-            self.screensaver_timeout = None
+        self._cancel_timeout()
         if self.screen.blanking_time == 0:
             return False
         self.screen.remove_keyboard()

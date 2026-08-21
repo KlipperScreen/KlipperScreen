@@ -1,4 +1,5 @@
 import logging
+from urllib.parse import quote
 
 import requests
 
@@ -22,7 +23,20 @@ class KlippyRest:
         return response["result"] if response and "result" in response else response
 
     def get_thumbnail_stream(self, thumbnail):
-        return self.send_request(f"server/files/gcodes/{thumbnail}", json=False)
+        return self.send_request(
+            f"server/files/gcodes/{self._quote_file_path(thumbnail)}", json=False
+        )
+
+    def get_gcode_stream(self, filename, timeout=60):
+        return self.send_request(
+            f"server/files/gcodes/{self._quote_file_path(filename)}",
+            json=False,
+            timeout=timeout,
+        )
+
+    @staticmethod
+    def _quote_file_path(path):
+        return quote(path, safe="/")
 
     def _do_request(
         self, method, request_method, data=None, json=None, json_response=True, timeout=3

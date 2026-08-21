@@ -10,6 +10,13 @@ import re
 import traceback  # noqa
 from io import StringIO
 
+from ks_includes.gcode_renderer import (
+    MAX_PREVIOUS_LAYERS,
+    DisplayViewMode,
+    RenderMode,
+    get_renderer_settings,
+)
+
 SCREEN_BLANKING_OPTIONS = [
     60,  # 1 Minute
     120,  # 2 Minutes
@@ -202,6 +209,8 @@ class KlipperScreenConfig:
                     "auto_open_extrude",
                     "start_locked",
                     "keyboard_navigation",
+                    "enable_gcode_renderer",
+                    "gcode_renderer_show_travel",
                 )
                 strs = (
                     "default_printer",
@@ -217,6 +226,8 @@ class KlipperScreenConfig:
                     "print_view",
                     "lock_password",
                     "side_shortcut_target",
+                    "gcode_renderer_view",
+                    "gcode_renderer_mode",
                 )
                 numbers = (
                     "job_complete_timeout",
@@ -228,6 +239,8 @@ class KlipperScreenConfig:
                     "height",
                     "autolock_timeout",
                     "screensaver_wake_delay",
+                    "gcode_renderer_fps",
+                    "gcode_renderer_previous_layers",
                 )
             elif section.startswith("printer "):
                 bools = (
@@ -565,6 +578,80 @@ class KlipperScreenConfig:
             {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
             {"print_view": {"section": "main", "type": None, "value": "thumbs"}},
             {
+                "enable_gcode_renderer": {
+                    "section": "main",
+                    "name": _("Enable G-code renderer"),
+                    "type": "binary",
+                    "value": "False",
+                    "callback": screen.reload_panels,
+                }
+            },
+            {
+                "gcode_renderer_view": {
+                    "section": "main",
+                    "name": _("Default view"),
+                    "type": "dropdown",
+                    "value": DisplayViewMode.MODE_2D.value,
+                    "options": [
+                        {
+                            "name": _("2D") + " " + _("(default)"),
+                            "value": DisplayViewMode.MODE_2D.value,
+                        },
+                        {"name": _("3D"), "value": DisplayViewMode.MODE_3D.value},
+                    ],
+                }
+            },
+            {
+                "gcode_renderer_fps": {
+                    "section": "main",
+                    "name": _("Refresh rate"),
+                    "type": "dropdown",
+                    "value": "5",
+                    "options": [
+                        {"name": "1 FPS", "value": "1"},
+                        {"name": "2 FPS", "value": "2"},
+                        {"name": "3 FPS", "value": "3"},
+                        {"name": "5 FPS", "value": "5"},
+                        {"name": "8 FPS", "value": "8"},
+                        {"name": "10 FPS", "value": "10"},
+                    ],
+                }
+            },
+            {
+                "gcode_renderer_show_travel": {
+                    "section": "main",
+                    "name": _("Show travel moves"),
+                    "type": "binary",
+                    "value": "False",
+                }
+            },
+            {
+                "gcode_renderer_previous_layers": {
+                    "section": "main",
+                    "name": _("Previous layers"),
+                    "type": "scale",
+                    "range": [0, MAX_PREVIOUS_LAYERS],
+                    "step": 1,
+                    "value": "3",
+                }
+            },
+            {
+                "gcode_renderer_mode": {
+                    "section": "main",
+                    "name": _("Rendering mode"),
+                    "type": "dropdown",
+                    "value": RenderMode.CURRENT_LAYER.value,
+                    "options": [
+                        {"name": _("Current layer"), "value": RenderMode.CURRENT_LAYER.value},
+                        {
+                            "name": _("Current and previous"),
+                            "value": RenderMode.CURRENT_AND_PREVIOUS.value,
+                        },
+                        {"name": _("Full model"), "value": RenderMode.FULL_MODEL.value},
+                    ],
+                }
+            },
+            {
                 "language": {
                     "section": "main",
                     "name": _("Language"),
@@ -759,6 +846,9 @@ class KlipperScreenConfig:
 
     def get_main_config(self):
         return self.config["main"]
+
+    def get_renderer_settings(self):
+        return get_renderer_settings(self.get_main_config(), logging.getLogger(__name__))
 
     def get_menu_items(self, menu="__main", subsection=""):
         if subsection != "":

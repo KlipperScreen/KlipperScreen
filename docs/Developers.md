@@ -73,3 +73,7 @@ This will automatically run `ruff check --fix` and `ruff format` on staged files
 
 * Set interpreter to the virtual environment created
 * Set the run configuration to `KlipperScreen/screen.py`
+
+## Live G-code Renderer notes
+
+Implementation notes for the experimental toolpath preview live in [Live_Gcode_Renderer.md](Live_Gcode_Renderer.md).
