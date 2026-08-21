@@ -20,6 +20,7 @@ SupplementaryGroups=klipperscreen
 WorkingDirectory=KS_DIR
 Environment="KS_XCLIENT=KS_ENV/bin/python KS_DIR/screen.py" BACKEND=KS_BACKEND
 ExecStart="KS_DIR/scripts/KlipperScreen-start.sh"
+ExecStartPost=+chvt 7
 
 # Log this user with utmp, letting it show up with commands 'w' and
 # 'who'. This is needed since we replace (a)getty.
