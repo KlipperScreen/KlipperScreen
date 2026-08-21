@@ -44,6 +44,12 @@ install_graphical_backend()
       read -r -e -p "Backend X11 or Wayland (cage)? [X/w]" BACKEND
     fi
     if [[ "$BACKEND" =~ ^[wW]$ ]]; then
+        if command -v cage >/dev/null 2>&1; then
+            echo_ok "Cage already installed"
+            BACKEND="W"
+            break
+        fi
+
         echo_text "Installing Cage"
         if sudo apt install -y $CAGE; then
             echo_ok "Installed Cage"
