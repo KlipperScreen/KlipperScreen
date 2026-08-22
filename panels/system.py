@@ -26,12 +26,6 @@ class Panel(ScreenPanel):
         self._activation_id = 0
 
         self.sysinfo = screen.printer.system_info
-        if not self.sysinfo:
-            logging.debug("Asking for info")
-            self.sysinfo = screen.restApi.send_request("machine/system_info")
-            if "system_info" in self.sysinfo:
-                screen.printer.system_info = self.sysinfo["system_info"]
-                self.sysinfo = self.sysinfo["system_info"]
 
         if self.sysinfo:
             self.create_layout()
