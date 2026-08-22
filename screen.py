@@ -260,13 +260,17 @@ class KlipperScreen(Gtk.ApplicationWindow):
         is_uds = moonraker_host.startswith(("/", "~"))
         rest_host = "localhost" if is_uds else moonraker_host
 
-        self.restApi = KlippyRest(
-            rest_host,
-            self.printers[ind][name]["moonraker_port"],
-            self.printers[ind][name]["moonraker_api_key"],
-            self.printers[ind][name]["moonraker_path"],
-            self.printers[ind][name]["moonraker_ssl"],
+        moonraker_port = self.printers[ind][name]["moonraker_port"]
+        moonraker_path = self.printers[ind][name]["moonraker_path"]
+        moonraker_ssl = self.printers[ind][name]["moonraker_ssl"]
+        if moonraker_ssl is None:
+            moonraker_ssl = int(moonraker_port) in {443, 7130}
+
+        self.moonraker_endpoint = (
+            f"{'https' if moonraker_ssl else 'http'}://{rest_host}:{moonraker_port}"
         )
+        if moonraker_path:
+            self.moonraker_endpoint += f"/{moonraker_path}"
         self._notification_handler = NotificationHandler(self)
         self.state.printer_is_local = is_uds or moonraker_host in ("localhost", "127.0.0.1")
 

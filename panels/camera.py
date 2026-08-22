@@ -61,7 +61,7 @@ class Panel(ScreenPanel):
         url = cam["stream_url"]
         if url.startswith("/"):
             logging.info("camera URL is relative")
-            endpoint = self._screen.restApi.endpoint.split(":")
+            endpoint = self._screen.moonraker_endpoint.split(":")
             url = f"{endpoint[0]}:{endpoint[1]}{url}"
         if "/webrtc" in url:
             self._screen.show_popup_message(
