@@ -27,7 +27,6 @@ from ks_includes import functions
 from ks_includes.config import KlipperScreenConfig
 from ks_includes.files import KlippyFiles
 from ks_includes.KlippyGtk import KlippyGtk
-from ks_includes.KlippyRest import KlippyRest
 from ks_includes.KlippyUDS import KlippyUDS
 from ks_includes.KlippyWebsocket import KlippyWebsocket
 from ks_includes.notification_handler import NotificationHandler
@@ -76,6 +75,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self.printer = None
         self.printers = None
         self.restApi = None
+        self._rest_api_config = None
         self._ws = None
 
         self.keyboard = None
@@ -241,6 +241,12 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self._ws.close()
         self.printer.state = "disconnected"
 
+    def get_rest_api(self):
+        if self.restApi is None:
+            from ks_includes.KlippyRest import KlippyRest
+            self.restApi = KlippyRest(**self._rest_api_config)
+        return self.restApi
+
     def connect_printer(self, name):
         self.state.printer_name = name
         if self._ws is not None and self._ws.connected:
@@ -259,14 +265,15 @@ class KlipperScreen(Gtk.ApplicationWindow):
         moonraker_host = self.printers[ind][name]["moonraker_host"]
         is_uds = moonraker_host.startswith(("/", "~"))
         rest_host = "localhost" if is_uds else moonraker_host
+        self._rest_api_config = {
+            "ip": rest_host,
+            "port": self.printers[ind][name]["moonraker_port"],
+            "api_key": self.printers[ind][name]["moonraker_api_key"],
+            "path": self.printers[ind][name]["moonraker_path"],
+            "ssl": self.printers[ind][name]["moonraker_ssl"],
+        }
 
-        self.restApi = KlippyRest(
-            rest_host,
-            self.printers[ind][name]["moonraker_port"],
-            self.printers[ind][name]["moonraker_api_key"],
-            self.printers[ind][name]["moonraker_path"],
-            self.printers[ind][name]["moonraker_ssl"],
-        )
+        self.restApi = None
         self._notification_handler = NotificationHandler(self)
         self.state.printer_is_local = is_uds or moonraker_host in ("localhost", "127.0.0.1")
 
