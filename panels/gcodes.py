@@ -482,7 +482,7 @@ class Panel(ScreenPanel):
                 _("Estimated Time") + f": <b>{self.format_time(fileinfo['estimated_time'])}</b>\n"
             )
         if "job_id" in fileinfo:
-            history = self._screen.restApi.send_request(
+            history = self._screen.get_rest_api().send_request(
                 f"server/history/job?uid={fileinfo['job_id']}"
             )
             if history and history["job"]["status"] == "completed":

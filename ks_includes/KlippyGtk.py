@@ -198,7 +198,7 @@ class KlippyGtk:
             return
 
         def _load():
-            response = self.screen.restApi.get_thumbnail_stream(resource)
+            response = self.screen.get_rest_api().get_thumbnail_stream(resource)
             if response is False:
                 GLib.idle_add(callback, None)
                 return

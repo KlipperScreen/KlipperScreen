@@ -80,7 +80,7 @@ class Panel(ScreenPanel):
                 }
             )
         else:
-            logging.info(self._screen.restApi.endpoint)
+            logging.info(self._screen.get_rest_api().endpoint)
             buttons.extend(
                 [
                     {"name": _("Host"), "response": Gtk.ResponseType.OK, "style": "dialog-info"},
