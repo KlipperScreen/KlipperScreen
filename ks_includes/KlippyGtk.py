@@ -8,7 +8,6 @@ from collections import OrderedDict
 from functools import lru_cache
 
 import gi
-import requests
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gdk, GdkPixbuf, Gio, GLib, Gtk, Pango
@@ -199,6 +198,8 @@ class KlippyGtk:
             return
 
         def _load():
+            import requests
+
             url = f"{self.screen.moonraker_endpoint}/server/files/gcodes/{resource}"
             headers = (
                 {"x-api-key": self.screen.moonraker_api_key}
