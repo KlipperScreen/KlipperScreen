@@ -15,6 +15,12 @@ panel: job_status
 ```
 [![Job Status](img/panels/job_status.png)](Panels/Job_status.md)
 
+### [G-code Toolpath](Panels/Gcode_viewer.md)
+```py
+panel: gcode_viewer
+```
+Experimental live preview panel for the active print file.
+
 ### [Bed Level](Panels/Screws.md)
 ```py
 panel: bed_level
