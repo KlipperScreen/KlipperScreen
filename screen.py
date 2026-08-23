@@ -27,7 +27,6 @@ from ks_includes import functions
 from ks_includes.config import KlipperScreenConfig
 from ks_includes.files import KlippyFiles
 from ks_includes.KlippyGtk import KlippyGtk
-from ks_includes.KlippyRest import KlippyRest
 from ks_includes.KlippyUDS import KlippyUDS
 from ks_includes.KlippyWebsocket import KlippyWebsocket
 from ks_includes.notification_handler import NotificationHandler
@@ -75,7 +74,6 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self.files = None
         self.printer = None
         self.printers = None
-        self.restApi = None
         self._ws = None
 
         self.keyboard = None
@@ -271,6 +269,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
         )
         if moonraker_path:
             self.moonraker_endpoint += f"/{moonraker_path}"
+        self.moonraker_api_key = self.printers[ind][name]["moonraker_api_key"]
         self._notification_handler = NotificationHandler(self)
         self.state.printer_is_local = is_uds or moonraker_host in ("localhost", "127.0.0.1")
 
