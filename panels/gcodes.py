@@ -376,12 +376,19 @@ class Panel(ScreenPanel):
             height = self._screen.height - self._gtk.dialog_buttons_height - self._gtk.font_size * 6
 
         info_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
+        fileinfo_data = self._screen.files.get_file_info(filename)
+        fileinfo_text = self.get_file_info_extended(fileinfo_data)
         fileinfo = Gtk.Label(
-            label=self.get_file_info_extended(filename),
+            label=fileinfo_text,
             use_markup=True,
             ellipsize=Pango.EllipsizeMode.END,
         )
         info_box.pack_start(fileinfo, True, True, 0)
+
+        if "job_id" in fileinfo_data:
+            self._screen._ws.api.get_single_job_history(
+                fileinfo_data["job_id"], self.set_last_duration, fileinfo, fileinfo_text
+            )
 
         inside_box.pack_start(info_box, True, True, 0)
         main_box.pack_start(inside_box, True, True, 0)
@@ -445,8 +452,7 @@ class Panel(ScreenPanel):
             info += _("Estimated Time") + f": <b>{self.format_time(fileinfo['estimated_time'])}</b>"
         return info
 
-    def get_file_info_extended(self, filename):
-        fileinfo = self._screen.files.get_file_info(filename)
+    def get_file_info_extended(self, fileinfo):
         info = ""
         if "modified" in fileinfo:
             info += _("Modified")
@@ -481,16 +487,20 @@ class Panel(ScreenPanel):
             info += (
                 _("Estimated Time") + f": <b>{self.format_time(fileinfo['estimated_time'])}</b>\n"
             )
-        if "job_id" in fileinfo:
-            history = self._screen.restApi.send_request(
-                f"server/history/job?uid={fileinfo['job_id']}"
-            )
-            if history and history["job"]["status"] == "completed":
-                info += (
-                    _("Last Duration")
-                    + f": <b>{self.format_time(history['job']['print_duration'])}</b>"
-                )
         return info
+
+    def set_last_duration(self, data, method, params, label, fileinfo_text):
+        if "error" in data or "result" not in data:
+            return
+        job = data["result"].get("job")
+        if job and job.get("status") == "completed":
+            duration = job.get("print_duration")
+            if duration:
+                label.set_markup(
+                    fileinfo_text
+                    + _("\nLast Duration")
+                    + f": <b>{self.format_time(duration)}</b>"
+                )
 
     def load_files(self, result, method, params):
         start = datetime.now()

@@ -129,13 +129,6 @@ class Panel(ScreenPanel):
         grid.attach(scale_grid, 0, 0, 3, 1)
 
         columns = 3 if self._screen.vertical_mode else 2
-        data_misc = self._screen.restApi.send_request(
-            "server/database/item?namespace=mainsail&key=miscellaneous.entries"
-        )
-        if data_misc:
-            presets_data = data_misc["value"][next(iter(data_misc["value"]))]["presets"]
-            if presets_data:
-                self.presets.update(self.parse_presets(presets_data))
         for i, key in enumerate(self.presets):
             logging.info(f"Adding preset: {key}")
             preview = ColorPreviewArea(size=self.da_size)

@@ -198,11 +198,23 @@ class KlippyGtk:
             return
 
         def _load():
-            response = self.screen.restApi.get_thumbnail_stream(resource)
-            if response is False:
+            import requests
+
+            url = f"{self.screen.moonraker_endpoint}/server/files/gcodes/{resource}"
+            headers = (
+                {"x-api-key": self.screen.moonraker_api_key}
+                if self.screen.moonraker_api_key
+                else {}
+            )
+            try:
+                response = requests.get(url, headers=headers, timeout=3)
+                response.raise_for_status()
+                data = response.content
+            except Exception as e:
+                logging.error("Failed to load thumbnail: %s", e)
                 GLib.idle_add(callback, None)
                 return
-            stream = Gio.MemoryInputStream.new_from_data(response, None)
+            stream = Gio.MemoryInputStream.new_from_data(data, None)
             try:
                 pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(
                     stream, int(width), int(height), True
