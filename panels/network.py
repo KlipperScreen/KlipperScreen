@@ -119,8 +119,7 @@ class Panel(ScreenPanel):
 
         self.labels["networkinfo"] = Gtk.Label()
 
-        if has_selector:
-            self.labels["main_box"].pack_start(sbox, False, False, 5)
+        self.labels["main_box"].pack_start(sbox, False, False, 5)
 
         if self.sdbus_nm.wifi and primary_is_wifi:
             GLib.idle_add(self.load_networks)
