@@ -20,6 +20,8 @@ except ImportError:
 
 
 def format_date(date):
+    if not date:
+        return ""
     if date.endswith("Z"):
         date = f"{date[:-1]}+00:00"
 
