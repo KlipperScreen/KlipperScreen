@@ -68,6 +68,29 @@ install_graphical_backend()
   done
 }
 
+check_virtual_terminal()
+{
+    echo_text "Checking for working virtual terminal"
+
+    local service_file="/etc/systemd/system/KlipperScreen.service"
+
+    if [ ! -f "$service_file" ]; then
+        echo_error "The service file '$service_file' doesn't exist"
+        exit 1
+    fi
+
+    if [ -e /sys/class/tty/tty7 ] && [ -c /dev/tty7 ]; then
+        MISC+=" kdb"
+        echo_ok "Virtual terminal is available"
+    else
+        echo_text "No usable virtual terminal detected, disabling related configuration"
+        sudo sed -i \
+            -e '/^ConditionPathExists=/s/^/#/' \
+            -e '/^ExecStartPost=/s/^/#/' \
+            "$service_file"
+    fi
+}
+
 install_packages()
 {
     echo_text "Update package data"
@@ -342,6 +365,7 @@ if [[ $SERVICE =~ ^[nN]$ ]]; then
 else
     install_graphical_backend
     install_systemd_service
+    check_virtual_terminal
     if [ -z "$START" ]; then
         START=1
     fi
