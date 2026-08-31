@@ -8,7 +8,7 @@ XSERVER="xinit xinput x11-xserver-utils xserver-xorg-input-evdev xserver-xorg-in
 CAGE="cage seatd"
 WESTON="weston seatd"
 PYGOBJECT="libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0"
-MISC="librsvg2-common libopenjp2-7 libdbus-glib-1-dev autoconf python3-venv"
+MISC="librsvg2-common libopenjp2-7 libdbus-glib-1-dev autoconf python3-venv kbd"
 OPTIONAL="fonts-nanum fonts-ipafont libmpv-dev"
 
 Red='\033[0;31m'

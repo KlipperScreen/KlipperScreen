@@ -12,7 +12,8 @@
         "librsvg2-common",
         "libopenjp2-7",
         "libdbus-glib-1-dev",
-        "autoconf"
+        "autoconf",
+        "kbd"
     ],
     "arch": [
         "cairo",
@@ -25,6 +26,7 @@
         "librsvg",
         "openjpeg2",
         "dbus-glib",
-        "autoconf"
+        "autoconf",
+        "kbd"
     ]
 }
