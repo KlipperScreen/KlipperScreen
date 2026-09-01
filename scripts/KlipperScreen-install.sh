@@ -87,6 +87,12 @@ check_virtual_terminal()
         sudo sed -i \
             -e '/^ConditionPathExists=/s/^/#/' \
             -e '/^ExecStartPost=/s/^/#/' \
+            -e '/^UtmpIdentifier=/s/^/#/' \
+            -e '/^UtmpMode=/s/^/#/' \
+            -e '/^TTYPath=/s/^/#/' \
+            -e '/^TTYReset=/s/^/#/' \
+            -e '/^TTYVHangup=/s/^/#/' \
+            -e '/^TTYVTDisallocate=/s/^/#/' \
             "$service_file"
     fi
 }
