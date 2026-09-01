@@ -80,7 +80,7 @@ check_virtual_terminal()
     fi
 
     if [ -e /sys/class/tty/tty7 ] && [ -c /dev/tty7 ]; then
-        MISC+=" kdb"
+        MISC+=" kbd"
         echo_ok "Virtual terminal is available"
     else
         echo_text "No usable virtual terminal detected, disabling related configuration"
