@@ -84,7 +84,7 @@ check_virtual_terminal()
         echo_ok "Virtual terminal is available"
     else
         echo_text "No usable virtual terminal detected, disabling related configuration"
-        sudo sed -i \
+        if sudo sed -i \
             -e '/^ConditionPathExists=/s/^/#/' \
             -e '/^ExecStartPost=/s/^/#/' \
             -e '/^UtmpIdentifier=/s/^/#/' \
@@ -93,7 +93,12 @@ check_virtual_terminal()
             -e '/^TTYReset=/s/^/#/' \
             -e '/^TTYVHangup=/s/^/#/' \
             -e '/^TTYVTDisallocate=/s/^/#/' \
-            "$service_file"
+            "$service_file"; then
+            echo_ok "Disabled VT-related configuration"
+        else
+            echo_error "Failed to disable VT-related configuration in '$service_file'"
+            exit 1
+        fi
     fi
 }
 
