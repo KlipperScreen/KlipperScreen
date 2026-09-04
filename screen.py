@@ -1128,6 +1128,8 @@ class KlipperScreen(Gtk.ApplicationWindow):
         return found_devices
 
     def power_devices(self, widget=None, devices=None, on=False):
+        if not self._ws:
+            return
         devs = self.search_power_devices(devices)
         if on:
             self._ws.api.power_device_on(devs)
