@@ -555,7 +555,10 @@ class BasePanel(ScreenPanel):
     def update_shortcut(self, target):
         self.shortcut["panel"] = target
         self.shortcut["icon"] = self._get_shortcut_icon(target)
-        pixbuf = self.control["shortcut"].get_image().get_pixbuf()
+        image = self.control["shortcut"].get_image()
+        pixbuf = image.get_pixbuf() if image is not None else None
+        if pixbuf is None:
+            return
         self.control["shortcut"].set_image(
             self._gtk.Image(self.shortcut["icon"], pixbuf.get_width(), pixbuf.get_height())
         )
@@ -607,7 +610,10 @@ class BasePanel(ScreenPanel):
         else:
             icon = "notifications"
         self.shortcut["icon"] = icon
-        pixbuf = self.control["shortcut"].get_image().get_pixbuf()
+        image = self.control["shortcut"].get_image()
+        pixbuf = image.get_pixbuf() if image is not None else None
+        if pixbuf is None:
+            return
         self.control["shortcut"].set_image(
             self._gtk.Image(icon, pixbuf.get_width(), pixbuf.get_height())
         )
