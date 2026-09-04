@@ -83,6 +83,7 @@ class KlippyWebsocket(threading.Thread):
         self.ws_url = f"{self.ws_proto}://{self._url}/websocket"
         self.ws = websocket.WebSocketApp(
             self.ws_url,
+            header=["User-Agent: KlipperScreen"],
             on_close=self.on_close,
             on_error=self.on_error,
             on_message=self.on_message,
