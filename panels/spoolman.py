@@ -83,6 +83,7 @@ class SpoolmanFilament:
 class SpoolmanSpool(GObject.GObject):
     archived: bool
     id: int
+    price: float = None
     remaining_length: float
     remaining_weight: float
     used_length: float
@@ -414,6 +415,11 @@ class Panel(ScreenPanel):
             result += f"{_('Comment')}:<b> {spool.comment}</b>\n"
         if spool.last_used:
             result += f"{_('Used')}:<b> {spool.last_used.astimezone():{self.timeFormat}}</b>\n"
+        price = getattr(spool, "price", None)
+        if price is None and getattr(spool.filament, "price", None) is not None:
+            price = spool.filament.price
+        if price is not None:
+            result += f"{_('Price')}: <b>{float(price):.2f}</b>\n"
         if hasattr(spool, "remaining_weight"):
             result += f"{_('Remaining weight')}: <b>{round(spool.remaining_weight, 2)} g</b>\n"
         if hasattr(spool, "remaining_length"):
