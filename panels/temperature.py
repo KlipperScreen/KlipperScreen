@@ -22,6 +22,7 @@ class Panel(ScreenPanel):
         super().__init__(screen, title)
         self.left_panel = None
         self.devices = {}
+        self._filtered = {}
         self.popover = Gtk.Popover(position=Gtk.PositionType.BOTTOM)
         self.popover_buttons = {}
         self.long_press = {}
@@ -349,6 +350,7 @@ class Panel(ScreenPanel):
             class_name = f"graph_label_fan_{self.f}"
             dev_type = "fan"
         elif self._config.get_main_config().getboolean("only_heaters", False):
+            self._filtered[device] = True
             return False
         else:
             self.h += 1
@@ -394,6 +396,9 @@ class Panel(ScreenPanel):
             "temp": temp,
             "visible": visible,
         }
+
+        if device not in self._filtered:
+            self._filtered[device] = True
 
         devices = sorted(self.devices)
         pos = devices.index(device) + 1
@@ -593,8 +598,10 @@ class Panel(ScreenPanel):
         for device in self._printer.get_temp_devices():
             if device not in data:
                 continue
+            if device in self._filtered:
+                continue
             if device not in self.devices and not self.add_device(device):
-                return
+                continue
             self.update_temp(
                 device,
                 self._printer.get_stat(device, "temperature"),
