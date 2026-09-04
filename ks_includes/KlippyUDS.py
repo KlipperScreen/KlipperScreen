@@ -20,7 +20,7 @@ class KlippyUDS(threading.Thread):
     connecting = False
     callback_table = {}
 
-    def __init__(self, callback, socket_path, port=None, api_key="", path="", ssl=None):
+    def __init__(self, callback, socket_path, port=None, path="", ssl=None):
         threading.Thread.__init__(self)
         self._wst = None
         self._callback = callback
@@ -28,7 +28,6 @@ class KlippyUDS(threading.Thread):
         self.sock = None
         self.closing = False
         self.socket_path = os.path.expanduser(socket_path)
-        self.api_key = api_key
         self._buffer = b""
         self._delimiter = "\x03"
 

@@ -59,8 +59,6 @@ class KlippyWebsocket(threading.Thread):
         self.port = port
         self.path = f"/{path}" if path else ""
         self.ssl = int(self.port) in {443, 7130} if ssl is None else bool(ssl)
-        self.header = {"x-api-key": api_key} if api_key else {}
-        self.api_key = api_key
 
     @property
     def _url(self):
@@ -89,7 +87,6 @@ class KlippyWebsocket(threading.Thread):
             on_error=self.on_error,
             on_message=self.on_message,
             on_open=self.on_open,
-            header=self.header,
         )
         self._wst = threading.Thread(target=self.ws.run_forever, daemon=True)
         try:

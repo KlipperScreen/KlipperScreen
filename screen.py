@@ -270,6 +270,8 @@ class KlipperScreen(Gtk.ApplicationWindow):
         if moonraker_path:
             self.moonraker_endpoint += f"/{moonraker_path}"
         self.moonraker_api_key = self.printers[ind][name]["moonraker_api_key"]
+        if self.moonraker_api_key == "False":
+            self.moonraker_api_key = ""
         self._notification_handler = NotificationHandler(self)
         self.state.printer_is_local = is_uds or moonraker_host in ("localhost", "127.0.0.1")
 
@@ -284,7 +286,6 @@ class KlipperScreen(Gtk.ApplicationWindow):
                 },
                 moonraker_host,
                 self.printers[ind][name]["moonraker_port"],
-                self.printers[ind][name]["moonraker_api_key"],
                 self.printers[ind][name]["moonraker_path"],
             )
         else:
@@ -297,7 +298,6 @@ class KlipperScreen(Gtk.ApplicationWindow):
                 },
                 moonraker_host,
                 self.printers[ind][name]["moonraker_port"],
-                self.printers[ind][name]["moonraker_api_key"],
                 self.printers[ind][name]["moonraker_path"],
                 self.printers[ind][name]["moonraker_ssl"],
             )
@@ -841,7 +841,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
     def socket_connected(self):
         self.printer_initializing(_("Moonraker Connected"))
-        self._ws.api.identify_client(functions.get_software_version(), self._ws.api_key)
+        self._ws.api.identify_client(functions.get_software_version(), self.moonraker_api_key)
         self.state.reinit_count = 0
         self.state.klippy_retry_count = 0
         self.last_error = ""
