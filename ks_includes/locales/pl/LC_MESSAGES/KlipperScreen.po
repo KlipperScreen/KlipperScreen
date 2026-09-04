@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-21 12:14-0300\n"
-"PO-Revision-Date: 2026-05-31 20:01+0000\n"
+"PO-Revision-Date: 2026-08-21 05:52+0000\n"
 "Last-Translator: Julia <juliazero2@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/pl/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.6.dev0\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 
 msgid "Main Menu"
 msgstr "Menu główne"
@@ -171,11 +171,9 @@ msgstr "Zegar 24-godzinny"
 msgid "Disable for 12hs with am / pm"
 msgstr "Wyłącz dla czasu 12-godzinnego (ze wskazaniem am/pm)"
 
-#, fuzzy
 msgid "Action bar Shortcut"
 msgstr "Skrót paska akcji"
 
-#, fuzzy
 msgid "LEDs"
 msgstr "Diody LED"
 
@@ -722,15 +720,12 @@ msgstr "Tylko dla panelu ruchu"
 msgid "Z Speed (mm/s)"
 msgstr "Prędkość Z (mm/s)"
 
-#, fuzzy
 msgid "Advanced Move"
 msgstr "Zaawansowany ruch"
 
-#, fuzzy
 msgid "Query Endstops"
-msgstr "Zapytaj o krańcówki"
+msgstr "Sprawdź krańcówki"
 
-#, fuzzy
 msgid "Invalid position"
 msgstr "Nieprawidłowa pozycja"
 
@@ -740,11 +735,9 @@ msgstr "Nie udało się zainicjalizować"
 msgid "Interface"
 msgstr "Interfejs"
 
-#, fuzzy
 msgid "No network devices have been found"
 msgstr "Nie znaleziono urządzeń sieciowych"
 
-#, fuzzy
 msgid "No network devices available"
 msgstr "Brak dostępnych urządzeń sieciowych"
 
@@ -945,11 +938,9 @@ msgstr "Błąd ustawiania aktywnej szpuli"
 msgid "No info available"
 msgstr "Brak informacji"
 
-#, fuzzy
 msgid "Disk"
 msgstr "Dysk"
 
-#, fuzzy
 msgid "Cores"
 msgstr "Rdzenie"
 
@@ -1055,7 +1046,6 @@ msgstr "Obniż dyszę"
 msgid "Abort"
 msgstr "Przerwij"
 
-#, fuzzy
 msgid "Calibration commands not available yet"
 msgstr "Polecenia kalibracji jeszcze niedostępne"
 
@@ -1074,7 +1064,6 @@ msgstr "Minimum:"
 msgid "System:"
 msgstr "System:"
 
-#, fuzzy
 msgid "Waiting connection closure"
 msgstr "Oczekiwanie na zamknięcie połączenia"
 
@@ -1114,7 +1103,6 @@ msgstr "Klipper próbuje się uruchomić"
 msgid "Klipper has shutdown"
 msgstr "Klipper został wyłączony"
 
-#, fuzzy
 msgid "Waiting for Moonraker connection to close"
 msgstr "Oczekiwanie na zamknięcie połączenia Moonraker"
 
@@ -1124,6 +1112,5 @@ msgstr "Moonraker: połączony"
 msgid "Initializing Klipper Connection"
 msgstr "Inicjalizowanie połączenia Klipper"
 
-#, fuzzy
 msgid "Klipper not responding after multiple attempts"
 msgstr "Klipper nie odpowiada po wielu próbach"
