@@ -186,6 +186,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
         autolock = self._config.get_main_config().getint("autolock_timeout", fallback=0)
         self.lock_screen.set_autolock_timeout(autolock)
         self.log_notification("KlipperScreen Started", 1)
+        self._load_addons()
         self.initial_connection()
         if self._config.get_main_config().getboolean("start_locked", False):
             self.lock_screen.lock(None)
@@ -998,6 +999,41 @@ class KlipperScreen(Gtk.ApplicationWindow):
             self.show_panel(panel, **params)
         else:
             self.show_panel(*action)
+
+    def _load_addons(self):
+        """Give each addons/*.py an init(screen) call once, at startup.
+
+        process_update only reaches the panel currently on screen, so an
+        add-on has nowhere to run: it cannot watch the printer while the user
+        is elsewhere, and has no point at which to ask for the objects it
+        needs. This is that point.
+
+        Modules are loaded by path under a private name rather than by adding
+        the directory to sys.path, so an add-on named like a stdlib module
+        cannot shadow it. A broken add-on must never stop KlipperScreen from
+        starting.
+        """
+        import importlib.util
+
+        addon_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "addons")
+        if not os.path.isdir(addon_dir):
+            return
+        for entry in sorted(os.listdir(addon_dir)):
+            if not entry.endswith(".py") or entry.startswith("_"):
+                continue
+            name = entry[:-3]
+            try:
+                spec = importlib.util.spec_from_file_location(
+                    f"ks_addons.{name}", os.path.join(addon_dir, entry)
+                )
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+                init = getattr(module, "init", None)
+                if callable(init):
+                    init(self)
+                    logging.info(f"Addon loaded: {name}")
+            except Exception:
+                logging.exception(f"Failed to load addon {name}")
 
     def process_update(self, *args):
         self.base_panel.process_update(*args)
