@@ -162,9 +162,6 @@ class Panel(MenuPanel):
             "visible": visible,
         }
 
-        if device not in self._filtered:
-            self._filtered[device] = True
-
         devices = sorted(self.devices)
         pos = devices.index(device) + 1
 
