@@ -73,3 +73,33 @@ This will automatically run `ruff check --fix` and `ruff format` on staged files
 
 * Set interpreter to the virtual environment created
 * Set the run configuration to `KlipperScreen/screen.py`
+
+# Add-ons
+
+A file placed in `addons/` is imported once when KlipperScreen starts. If it
+defines `init(screen)`, that function is called with the `KlipperScreen`
+instance.
+
+```python
+# addons/example.py
+import logging
+
+
+def init(screen):
+    logging.info("example add-on starting")
+```
+
+This exists because `process_update` only reaches the panel currently on
+screen. An add-on that needs to notice something while the user is looking at
+a different panel, or before any of its own panels has been opened, has
+nowhere else to run.
+
+Notes:
+
+* Files beginning with `_` are skipped.
+* Modules are loaded by path under a private name, so an add-on called
+  `json.py` does not shadow the standard library.
+* An add-on that raises is logged and skipped. It cannot stop KlipperScreen
+  from starting.
+* `addons/` is inside the KlipperScreen directory rather than the config
+  directory, which is writable through Moonraker's file manager.
