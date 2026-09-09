@@ -1001,39 +1001,71 @@ class KlipperScreen(Gtk.ApplicationWindow):
             self.show_panel(*action)
 
     def _load_addons(self):
-        """Give each addons/*.py an init(screen) call once, at startup.
+        """Import each addons/<name> once at startup and call init(screen).
 
-        process_update only reaches the panel currently on screen, so an
-        add-on has nowhere to run: it cannot watch the printer while the user
-        is elsewhere, and has no point at which to ask for the objects it
-        needs. This is that point.
+        process_update only reaches the panel on screen, so an add-on has
+        nowhere else to run. Moonraker is deliberately not connected yet:
+        this is where an add-on registers, before the first update arrives.
 
-        Modules are loaded by path under a private name rather than by adding
-        the directory to sys.path, so an add-on named like a stdlib module
-        cannot shadow it. A broken add-on must never stop KlipperScreen from
-        starting.
+        Off unless enable_addons is set, since this runs code that did not
+        come from this project. A broken one must never stop KlipperScreen
+        starting, and must not fail quietly either -- this screen usually
+        has no keyboard and nobody reads the log.
         """
-        import importlib.util
+        if not self._config.get_main_config().getboolean("enable_addons", False):
+            return
+
+        import importlib
+        import types
 
         addon_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "addons")
         if not os.path.isdir(addon_dir):
             return
-        for entry in sorted(os.listdir(addon_dir)):
-            if not entry.endswith(".py") or entry.startswith("_"):
-                continue
-            name = entry[:-3]
-            try:
-                spec = importlib.util.spec_from_file_location(
-                    f"ks_addons.{name}", os.path.join(addon_dir, entry)
+
+        # A private parent package rather than sys.path: addons/json.py becomes
+        # ks_addons.json and cannot shadow the standard library. Giving it a
+        # __path__ lets import_module take a single file or a package directory
+        # alike, so relative imports inside a package work normally.
+        parent = types.ModuleType("ks_addons")
+        parent.__path__ = [addon_dir]
+        sys.modules["ks_addons"] = parent
+
+        names = sorted(
+            {
+                entry[:-3] if entry.endswith(".py") else entry
+                for entry in os.listdir(addon_dir)
+                if not entry.startswith("_")
+                and (
+                    entry.endswith(".py")
+                    or os.path.isfile(os.path.join(addon_dir, entry, "__init__.py"))
                 )
-                module = importlib.util.module_from_spec(spec)
-                spec.loader.exec_module(module)
-                init = getattr(module, "init", None)
+            }
+        )
+        loaded, failed = [], []
+        for name in names:
+            try:
+                init = getattr(importlib.import_module(f"ks_addons.{name}"), "init", None)
                 if callable(init):
                     init(self)
-                    logging.info(f"Addon loaded: {name}")
+                # Recorded even without init(): it has still run.
+                loaded.append(name)
+                logging.info(f"Addon loaded: {name}")
             except Exception:
+                failed.append(name)
                 logging.exception(f"Failed to load addon {name}")
+        if loaded:
+            self.log_notification(
+                ngettext("Add-on loaded", "Add-ons loaded", len(loaded)) + f": {', '.join(loaded)}",
+                1,
+            )
+        if failed:
+            # One popup for all: each call closes the last. It logs the
+            # notification itself, so this is one call and not two.
+            self.show_popup_message(
+                ngettext("Add-on failed to load", "Add-ons failed to load", len(failed))
+                + f": {', '.join(failed)}",
+                3,
+            )
 
     def process_update(self, *args):
         self.base_panel.process_update(*args)

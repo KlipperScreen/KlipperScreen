@@ -2,6 +2,7 @@
 .vscode/
 .DS_Store
 KlipperScreen.conf
+addons/
 __pycache__/
 *.py[cod]
 *$py.class

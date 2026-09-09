@@ -76,9 +76,11 @@ This will automatically run `ruff check --fix` and `ruff format` on staged files
 
 # Add-ons
 
-A file placed in `addons/` is imported once when KlipperScreen starts. If it
-defines `init(screen)`, that function is called with the `KlipperScreen`
-instance.
+Off by default. Turn on `Enable Add-ons` in Settings and restart -- it runs
+code that did not come from this project.
+
+Each `addons/<name>.py`, or `addons/<name>/__init__.py`, is then imported once
+at startup and given `init(screen)` if it defines one.
 
 ```python
 # addons/example.py
@@ -89,17 +91,17 @@ def init(screen):
     logging.info("example add-on starting")
 ```
 
-This exists because `process_update` only reaches the panel currently on
-screen. An add-on that needs to notice something while the user is looking at
-a different panel, or before any of its own panels has been opened, has
-nowhere else to run.
-
-Notes:
-
-* Files beginning with `_` are skipped.
-* Modules are loaded by path under a private name, so an add-on called
-  `json.py` does not shadow the standard library.
-* An add-on that raises is logged and skipped. It cannot stop KlipperScreen
-  from starting.
-* `addons/` is inside the KlipperScreen directory rather than the config
-  directory, which is writable through Moonraker's file manager.
+* `init` runs before Moonraker connects, so `screen.printer` and the websocket
+  are still `None`. Register what you need and act on the first update; do not
+  query the printer here.
+* Names beginning with `_` are skipped.
+* Imported under a private `ks_addons` package, so `addons/json.py` cannot
+  shadow the standard library.
+* Every add-on that loads is named in the notification panel. One that raises
+  is logged, skipped, and named in an error popup; it cannot stop KlipperScreen
+  starting.
+* `addons/` sits here rather than in the config directory, which is writable
+  through Moonraker's file manager. It is gitignored, so an update recovering
+  with `git clean -fd` does not delete it.
+* The setting lives in `KlipperScreen.conf`, outside this repository, so it
+  survives updates.
