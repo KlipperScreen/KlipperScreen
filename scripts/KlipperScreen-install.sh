@@ -33,6 +33,9 @@ echo_ok ()
 
 install_graphical_backend()
 {
+  local interactive=0
+  [ -z "$BACKEND" ] && interactive=1
+
   while true; do
     if [ -z "$BACKEND" ]; then
       echo_text ""
@@ -43,27 +46,60 @@ install_graphical_backend()
       echo_ok "Press enter to install X11/Xserver"
       read -r -e -p "Backend X11 or Wayland (cage)? [X/w]" BACKEND
     fi
+
     if [[ "$BACKEND" =~ ^[wW]$ ]]; then
-        echo_text "Installing Cage"
-        if sudo apt install -y $CAGE; then
+      if [ "$interactive" -eq 1 ]; then
+        echo_text ""
+        echo_text "Choose a Wayland compositor to install"
+        echo_text ""
+        echo_text "Cage is the most lightweight option"
+        echo_text "Weston supports rotation (useful where Cage crashes)"
+        echo_text "None means you will provide the compositor yourself"
+        echo_text ""
+        echo_ok "Press enter to install Cage"
+        read -r -e -p "Cage, Weston or None (C/w/n)? [C]" COMPOSITOR
+      fi
+
+      case "$COMPOSITOR" in
+        w|W|weston)
+          echo_text "Installing Weston"
+          if sudo apt install -y $WESTON; then
+            echo_ok "Installed Weston"
+            BACKEND="W"
+            break
+          else
+            echo_error "Installation of Weston dependencies failed ($WESTON)"
+            exit 1
+          fi
+          ;;
+        n|N|none)
+          echo_ok "No Wayland compositor will be installed"
+          BACKEND="W"
+          break
+          ;;
+        *)
+          echo_text "Installing Cage"
+          if sudo apt install -y $CAGE; then
             echo_ok "Installed Cage"
             BACKEND="W"
             break
-        else
+          else
             echo_error "Installation of Cage dependencies failed ($CAGE)"
             exit 1
-        fi
+          fi
+          ;;
+      esac
+    else
+      echo_text "Installing Xserver"
+      if sudo apt install -y $XSERVER; then
+        echo_ok "Installed X"
+        update_x11
+        BACKEND="X"
+        break
       else
-        echo_text "Installing Xserver"
-        if sudo apt install -y $XSERVER; then
-            echo_ok "Installed X"
-            update_x11
-            BACKEND="X"
-            break
-        else
-            echo_error "Installation of X-server dependencies failed ($XSERVER)"
-            exit 1
-        fi
+        echo_error "Installation of X-server dependencies failed ($XSERVER)"
+        exit 1
+      fi
     fi
   done
 }
