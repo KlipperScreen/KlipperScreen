@@ -202,6 +202,7 @@ class KlipperScreenConfig:
                     "auto_open_extrude",
                     "start_locked",
                     "keyboard_navigation",
+                    "enable_addons",
                 )
                 strs = (
                     "default_printer",
@@ -515,6 +516,19 @@ class KlipperScreenConfig:
                         {"name": "4 " + ngettext("second", "seconds", 4), "value": "4"},
                         {"name": "5 " + ngettext("second", "seconds", 5), "value": "5"},
                     ],
+                }
+            },
+            {
+                "enable_addons": {
+                    "section": "main",
+                    "name": _("Enable Add-ons"),
+                    "type": "binary",
+                    "tooltip": _(
+                        "Runs third-party code from the addons folder at startup. "
+                        "Add-ons are not provided or reviewed by the KlipperScreen "
+                        "developers. Takes effect after a restart."
+                    ),
+                    "value": "False",
                 }
             },
             # {"": {"section": "main", "name": _(""), "type": ""}}
