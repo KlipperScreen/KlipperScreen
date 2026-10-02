@@ -33,6 +33,9 @@ echo_ok ()
 
 install_graphical_backend()
 {
+  local interactive=0
+  [ -z "$BACKEND" ] && interactive=1
+
   while true; do
     if [ -z "$BACKEND" ]; then
       echo_text ""
@@ -43,27 +46,62 @@ install_graphical_backend()
       echo_ok "Press enter to install X11/Xserver"
       read -r -e -p "Backend X11 or Wayland (cage)? [X/w]" BACKEND
     fi
+
     if [[ "$BACKEND" =~ ^[wW]$ ]]; then
-        echo_text "Installing Cage"
-        if sudo apt install -y $CAGE; then
+      if [ "$interactive" -eq 1 ]; then
+        echo_text ""
+        echo_text "Choose a Wayland compositor to install"
+        echo_text ""
+        echo_text "Cage is the most lightweight option"
+        echo_text "Weston is easier to rotate"
+        echo_text "None means you will provide the compositor yourself"
+        echo_text ""
+        echo_ok "Press enter to install Cage"
+        read -r -e -p "Cage, Weston or None (C/w/n)? [C]" COMPOSITOR
+      fi
+
+      case "$COMPOSITOR" in
+        w|W|weston)
+          echo_text "Installing Weston"
+          if sudo apt install -y $WESTON; then
+            echo_ok "Installed Weston"
+            BACKEND="W"
+            break
+          else
+            echo_error "Installation of Weston dependencies failed ($WESTON)"
+            exit 1
+          fi
+          ;;
+        n|N|none)
+          echo_ok "No Wayland compositor will be installed"
+          BACKEND="W"
+          START=0
+          COMPOSITOR_NONE=1
+          break
+          ;;
+        *)
+          echo_text "Installing Cage"
+          if sudo apt install -y $CAGE; then
             echo_ok "Installed Cage"
             BACKEND="W"
             break
-        else
+          else
             echo_error "Installation of Cage dependencies failed ($CAGE)"
             exit 1
-        fi
+          fi
+          ;;
+      esac
+    else
+      echo_text "Installing Xserver"
+      if sudo apt install -y $XSERVER; then
+        echo_ok "Installed X"
+        update_x11
+        BACKEND="X"
+        break
       else
-        echo_text "Installing Xserver"
-        if sudo apt install -y $XSERVER; then
-            echo_ok "Installed X"
-            update_x11
-            BACKEND="X"
-            break
-        else
-            echo_error "Installation of X-server dependencies failed ($XSERVER)"
-            exit 1
-        fi
+        echo_error "Installation of X-server dependencies failed ($XSERVER)"
+        exit 1
+      fi
     fi
   done
 }
@@ -170,9 +208,9 @@ create_virtualenv()
 
     if [[ "$(uname -m)" =~ armv[67]l ]]; then
         echo_text "Using armv[67]l! Adding piwheels.org as extra index..."
-        pip --disable-pip-version-check install --extra-index-url https://www.piwheels.org/simple -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
+        pip --disable-pip-version-check install --extra-index-url https://www.piwheels.org/simple -r "${KSPATH}/scripts/KlipperScreen-requirements.txt"
     else
-        pip --disable-pip-version-check install -r ${KSPATH}/scripts/KlipperScreen-requirements.txt
+        pip --disable-pip-version-check install -r "${KSPATH}/scripts/KlipperScreen-requirements.txt"
     fi
     if [ $? -gt 0 ]; then
         echo_error "Error: pip install exited with status code $?"
@@ -181,10 +219,10 @@ create_virtualenv()
         if [[ "$(uname -m)" =~ armv[67]l ]]; then
             echo_text "Adding piwheels.org as extra index..."
             pip install --extra-index-url https://www.piwheels.org/simple --upgrade pip setuptools
-            pip install --extra-index-url https://www.piwheels.org/simple -r ${KSPATH}/scripts/KlipperScreen-requirements.txt --prefer-binary
+            pip install --extra-index-url https://www.piwheels.org/simple -r "${KSPATH}/scripts/KlipperScreen-requirements.txt" --prefer-binary
         else
             pip install --upgrade pip setuptools
-            pip install -r ${KSPATH}/scripts/KlipperScreen-requirements.txt --prefer-binary
+            pip install -r "${KSPATH}/scripts/KlipperScreen-requirements.txt" --prefer-binary
         fi
         if [ $? -gt 0 ]; then
             echo_error "Unable to install dependencies, aborting install."
@@ -391,6 +429,12 @@ add_desktop_file
 install_network_manager
 if [ -z "$START" ] || [ "$START" -eq 0 ]; then
     echo_ok "KlipperScreen was installed"
+    if [ "${COMPOSITOR_NONE:-0}" = "1" ]; then
+        echo_error "WARNING: No Wayland compositor was installed."
+        echo_text "KlipperScreen will not start until you install one."
+        echo_ok "seatd is needed too, or an equivalent if you prefer."
+        echo_text "Then reboot the system."
+    fi
 else
     start_KlipperScreen
 fi
