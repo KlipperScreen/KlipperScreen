@@ -97,15 +97,11 @@ class Panel(ScreenPanel):
         self.check_power_status()
 
     def check_power_status(self):
-        if "power" in self.labels:
-            devices = self._printer.get_power_devices()
-            if devices is not None:
-                for device in devices:
-                    if self._printer.get_power_device_status(device) == "off":
-                        self.labels["power"].set_sensitive(True)
-                        break
-                    elif self._printer.get_power_device_status(device) == "on":
-                        self.labels["power"].set_sensitive(False)
+        if "power" not in self.labels:
+            return
+        devices = self._printer.get_power_devices()
+        any_off = any(self._printer.get_power_device_status(device) == "off" for device in devices)
+        self.labels["power"].set_sensitive(any_off)
 
     def firmware_restart(self, widget):
         self._screen._ws.api.restart_firmware()

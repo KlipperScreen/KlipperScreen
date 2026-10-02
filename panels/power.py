@@ -26,6 +26,8 @@ class Panel(ScreenPanel):
         self.content.add(scroll)
 
     def activate(self):
+        if not self.devices:
+            self.load_power_devices()
         devices = self._printer.get_power_devices()
         for x in devices:
             self.devices[x]["switch"].disconnect_by_func(self.on_switch)
