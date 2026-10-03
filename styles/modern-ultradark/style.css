@@ -1,0 +1,251 @@
+/* Modern-Utradark theme created by TheDayG0ne 2025 */
+/* Based on Material-dark theme (created by Alfredo Monclus in 2021) */
+@define-color text #ffffff;
+@define-color bg #000000;
+@define-color buttons-bg #050505;
+@define-color color1 #610094;
+@define-color color2 #94007d;
+@define-color color3 #170094;
+@define-color color4 #339400;
+
+@define-color echo #009482;
+@define-color warning #ff8000;
+@define-color error #ff0000;
+
+@define-color active #610094;
+@define-color active-dark #2f2f2f;
+@define-color lines #454545;
+@define-color slider #610094;
+
+* {
+    color: @text;
+}
+
+junction,
+list row,
+treeview.view,
+button,
+window {
+    background-color: @bg;
+}
+
+button.color1 {
+    background-color: @buttons-bg;
+    border-color: @color1;
+    border-radius: .5em;
+}
+
+button.color2 {
+    background-color: @buttons-bg;
+    border-color: @color2;
+    border-radius: .5em;
+}
+
+button.color3 {
+    background-color: @buttons-bg;
+    border-color: @color3;
+    border-radius: .5em;
+}
+
+button.color4 {
+    background-color: @buttons-bg;
+    border-color: @color4;
+    border-radius: .5em;
+}
+
+.button_active {
+    background-color: @active-dark;
+    border-width: .25em;
+    border-radius: .5em;
+}
+
+.active image,
+button.color1:active,
+button.color2:active,
+button.color3:active,
+button.color4:active,
+button.update:active,
+button.invalid:active,
+.dialog button:active {
+    border-style: none;
+}
+
+button.update,
+button.invalid {
+    background-color: @buttons-bg;
+    border: 0;
+    border-bottom: .3em solid;
+    border-radius: .75em;
+}
+
+button.update {
+    border-bottom-color: @echo;
+}
+
+button.invalid {
+    border-bottom-color: @error;
+}
+
+menu,
+menuitem,
+combobox button,
+combobox arrow,
+combobox menuitem {
+    background-color: @active-dark;
+    border-color: @bg;
+}
+
+treeview.view check,
+switch {
+    background-color: @active-dark;
+}
+
+treeview.view check:checked,
+switch:checked {
+    background-color: @echo;
+}
+
+treeview.view check:checked {
+    -gtk-icon-source: url("./styles/material-dark/images/complete.svg");
+}
+
+entry {
+    background-color: @active-dark;
+    border-color: @active-dark;
+}
+
+label {
+    color: @text;
+}
+
+trough {
+    background-color: @active-dark;
+    color: @text;
+}
+
+trough highlight,
+trough progress {
+    background-color: @slider;
+    color: @text;
+    border-color: @bg;
+}
+
+scale-mark {
+    color: @text;
+}
+
+scrollbar,
+scrollbar button,
+scrollbar trough {
+    background-color: @bg;
+}
+
+scrollbar slider {
+    background-color: @active-dark;
+}
+
+textview .time {
+    color: @lines;
+}
+
+.dialog {
+    border: @bg;
+    background-color: @bg;
+}
+
+.dialog button {
+    background-color: @buttons-bg;
+    border-radius: .75em;
+}
+
+.horizontal_togglebuttons {
+    border-color: @bg;
+    background-color: @buttons-bg;
+}
+
+button:active,
+.horizontal_togglebuttons_active,
+button.active {
+    background-color: @active;
+}
+
+.fan_slider {
+    color: @text;
+}
+
+.message_popup {
+    border-bottom-color: @text;
+}
+
+.message_popup_echo,
+.message_popup_echo button {
+    background-color: @echo;
+}
+
+.message_popup_warning,
+.message_popup_warning button {
+    background-color: @warning;
+}
+
+.message_popup_error,
+.message_popup_error button {
+    background-color: @error;
+}
+
+.numpad_key {
+    border-color: @bg;
+    background-color: @buttons-bg;
+}
+
+.printing-status,
+.printing-progress-text,
+.printing-status-label {
+    color: @text;
+}
+
+.message {
+    border-color: @error;
+    color: @text;
+    background-color: @error;
+}
+
+.message button {
+    background-color: @text;
+    color: @bg;
+}
+
+.warning {
+    background-color: @warning;
+}
+
+.error {
+    background-color: @error;
+}
+
+.keyboard_pad {
+    background-color: @buttons-bg;
+}
+
+.dialog-error {
+    border-bottom-color: @error;
+}
+
+.dialog-warning {
+    border-bottom-color: @warning;
+}
+
+.dialog-info {
+    border-bottom-color: @color4;
+}
+
+.dialog-default {
+    border-bottom-color: @color3;
+}
+
+.dialog-secondary {
+     border-bottom-color: @color2;
+}
+
+.dialog-primary {
+     border-bottom-color: @color1;
+}
