@@ -117,6 +117,10 @@ class Panel(ScreenPanel):
         self.show_restart_buttons()
 
     def reboot_poweroff(self, widget, method):
+        response = self.power_action_response(method)
+        if response is not None:
+            self.reboot_poweroff_confirm(None, response, method)
+            return
         label = Gtk.Label(wrap=True, hexpand=True, vexpand=True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         if method == "reboot":
@@ -149,9 +153,13 @@ class Panel(ScreenPanel):
         self._gtk.Dialog(title, buttons, label, self.reboot_poweroff_confirm, method)
 
     def reboot_poweroff_confirm(self, dialog, response_id, method):
-        self._gtk.remove_dialog(dialog)
+        if dialog is not None:
+            self._gtk.remove_dialog(dialog)
 
-        if response_id == Gtk.ResponseType.OK:
+        if response_id == Gtk.ResponseType.ACCEPT:
+            self.reboot_poweroff_confirm(None, Gtk.ResponseType.APPLY, method)
+            self.reboot_poweroff_confirm(None, Gtk.ResponseType.OK, method)
+        elif response_id == Gtk.ResponseType.OK:
             if method == "reboot":
                 ret, err = run_systemctl("reboot")
                 if ret != 0:
