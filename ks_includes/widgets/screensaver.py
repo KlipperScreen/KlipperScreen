@@ -46,9 +46,19 @@ class ScreenSaver:
             return False
         self.screen.remove_keyboard()
         self.screen.close_popup_message()
-        for dialog in self.screen.dialogs:
-            logging.debug("Hiding dialog")
-            dialog.hide()
+        for dialog in list(self.screen.dialogs):
+            # Don't leave a confirmation waiting behind the screensaver, a stray touch after
+            # wake could accept it (e.g. cancelling a print hours after Cancel was pressed)
+            if dialog.get_widget_for_response(Gtk.ResponseType.CANCEL) is not None:
+                logging.info(f"Dismissing dialog '{dialog.get_title()}'")
+                dialog.response(Gtk.ResponseType.CANCEL)
+            if dialog in self.screen.dialogs:
+                logging.debug("Hiding dialog")
+                dialog.hide()
+        # Dismissing a dialog restarts the timeout
+        if self.screensaver_timeout is not None:
+            GLib.source_remove(self.screensaver_timeout)
+            self.screensaver_timeout = None
 
         close = Gtk.Button()
         close.connect("clicked", self.close)
