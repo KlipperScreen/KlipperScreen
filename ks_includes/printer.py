@@ -387,6 +387,14 @@ class Printer:
     def get_tool_number(self, tool):
         return self.tools.index(tool)
 
+    def get_heater_tool_number(self, tool):
+        # With a single heated extruder omit T, so firmware that remaps T (e.g. AFC/INDX hotend
+        # changers) heats the tool currently mounted instead of whatever T0 maps to
+        heated = [t for t in self.tools if not t.startswith("extruder_stepper")]
+        if len(heated) == 1:
+            return None
+        return self.get_tool_number(tool)
+
     def init_temp_store(self, tempstore):
         if self.tempstore and set(self.tempstore) != set(tempstore):
             logging.debug("Tempstore has changed")
