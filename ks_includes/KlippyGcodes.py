@@ -10,6 +10,8 @@ class KlippyGcodes:
 
     @staticmethod
     def set_ext_temp(temp, tool=0):
+        if tool is None:
+            return f"M104 S{temp}"
         return f"M104 T{tool} S{temp}"
 
     @staticmethod
