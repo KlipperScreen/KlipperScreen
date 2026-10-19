@@ -335,6 +335,7 @@ class KlipperScreenConfig:
         self.configurable_options = [
             {
                 "theme": {
+                    "category": _("Appearance"),
                     "section": "main",
                     "name": _("Icon Theme"),
                     "type": "dropdown",
@@ -346,6 +347,7 @@ class KlipperScreenConfig:
             },
             {
                 "print_estimate_method": {
+                    "category": _("Printing"),
                     "section": "main",
                     "name": _("Estimated Time Method"),
                     "type": "dropdown",
@@ -361,6 +363,7 @@ class KlipperScreenConfig:
             },
             {
                 "screen_blanking": {
+                    "category": _("Display"),
                     "section": "main",
                     "name": _("Screen Power Off Time"),
                     "type": "dropdown",
@@ -372,6 +375,7 @@ class KlipperScreenConfig:
             },
             {
                 "screen_blanking_printing": {
+                    "category": _("Display"),
                     "section": "main",
                     "name": _("Screen Power Off Time") + " (" + _("Printing") + ")",
                     "type": "dropdown",
@@ -383,6 +387,7 @@ class KlipperScreenConfig:
             },
             {
                 "24htime": {
+                    "category": _("Appearance"),
                     "section": "main",
                     "name": _("24 Hour Time"),
                     "type": "binary",
@@ -392,6 +397,7 @@ class KlipperScreenConfig:
             },
             {
                 "side_shortcut_target": {
+                    "category": _("Behaviour"),
                     "section": "main",
                     "name": _("Action bar Shortcut"),
                     "type": "dropdown",
@@ -408,6 +414,7 @@ class KlipperScreenConfig:
             },
             {
                 "font_size": {
+                    "category": _("Appearance"),
                     "section": "main",
                     "name": _("Font Size"),
                     "type": "dropdown",
@@ -425,6 +432,7 @@ class KlipperScreenConfig:
             },
             {
                 "confirm_estop": {
+                    "category": _("Behaviour"),
                     "section": "main",
                     "name": _("Confirm Emergency Stop"),
                     "type": "binary",
@@ -434,6 +442,7 @@ class KlipperScreenConfig:
             },
             {
                 "shutdown_action": {
+                    "category": _("Behaviour"),
                     "section": "main",
                     "name": _("Shutdown Action"),
                     "type": "dropdown",
@@ -452,6 +461,7 @@ class KlipperScreenConfig:
             },
             {
                 "reboot_action": {
+                    "category": _("Behaviour"),
                     "section": "main",
                     "name": _("Restart Action"),
                     "type": "dropdown",
@@ -470,6 +480,7 @@ class KlipperScreenConfig:
             },
             {
                 "only_heaters": {
+                    "category": _("Appearance"),
                     "section": "main",
                     "name": _("Hide sensors in Temp."),
                     "type": "binary",
@@ -480,6 +491,7 @@ class KlipperScreenConfig:
             },
             {
                 "use_dpms": {
+                    "category": _("Display"),
                     "section": "main",
                     "name": _("Screen DPMS"),
                     "type": "binary",
@@ -492,6 +504,7 @@ class KlipperScreenConfig:
             },
             {
                 "autoclose_popups": {
+                    "category": _("Behaviour"),
                     "section": "main",
                     "name": _("Auto-close notifications"),
                     "type": "binary",
@@ -501,6 +514,7 @@ class KlipperScreenConfig:
             },
             {
                 "show_heater_power": {
+                    "category": _("Appearance"),
                     "section": "main",
                     "name": _("Show Heater Power"),
                     "type": "binary",
@@ -511,6 +525,7 @@ class KlipperScreenConfig:
             },
             {
                 "show_scroll_steppers": {
+                    "category": _("Appearance"),
                     "section": "main",
                     "name": _("Show Scrollbars Buttons"),
                     "type": "binary",
@@ -521,6 +536,7 @@ class KlipperScreenConfig:
             },
             {
                 "auto_open_extrude": {
+                    "category": _("Printing"),
                     "section": "main",
                     "name": _("Auto-open Extrude On Pause"),
                     "type": "binary",
@@ -530,6 +546,7 @@ class KlipperScreenConfig:
             },
             {
                 "show_cursor": {
+                    "category": _("Appearance"),
                     "section": "main",
                     "name": _("Show cursor"),
                     "type": "binary",
@@ -540,6 +557,7 @@ class KlipperScreenConfig:
             },
             {
                 "screensaver_wake_delay": {
+                    "category": _("Display"),
                     "section": "main",
                     "name": _("Screen wake delay"),
                     "type": "dropdown",
@@ -558,6 +576,7 @@ class KlipperScreenConfig:
             },
             {
                 "enable_addons": {
+                    "category": _("Others"),
                     "section": "main",
                     "name": _("Enable Add-ons"),
                     "type": "binary",

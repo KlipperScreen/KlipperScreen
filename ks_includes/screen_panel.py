@@ -256,7 +256,7 @@ class ScreenPanel:
             # Temperature and Main_Menu
             find_widget(self.devices[dev]["temp"], Gtk.Label).set_text(new_label_text)
 
-    def add_option(self, boxname, opt_array, opt_name, option):
+    def add_option(self, boxname, opt_array, opt_name, option, row_offset=0):
         if option["type"] is None:
             return
         name = Gtk.Label(
@@ -288,6 +288,7 @@ class ScreenPanel:
         row_box = Gtk.Box(spacing=5, valign=Gtk.Align.CENTER, hexpand=True, vexpand=False)
         row_box.get_style_context().add_class("frame-item")
         row_box.add(labels)
+        row_widget = row_box
 
         setting = {}
         if option["type"] == "binary":
@@ -351,11 +352,13 @@ class ScreenPanel:
             box.add(label)
             row_box.add(box)
         elif option["type"] == "menu":
-            open_menu = self._gtk.Button("settings", style="color3")
+            icon = self._gtk.Image("load")
+            icon.set_valign(Gtk.Align.CENTER)
+            row_box.add(icon)
+            open_menu = self._gtk.Button()
+            open_menu.add(row_box)
             open_menu.connect("clicked", self.load_menu, option["menu"], option["name"])
-            open_menu.set_hexpand(False)
-            open_menu.set_halign(Gtk.Align.END)
-            row_box.add(open_menu)
+            row_widget = open_menu
         elif option["type"] == "button":
             select = self._gtk.Button("load", style="color3")
             if "callback" in option:
@@ -364,10 +367,10 @@ class ScreenPanel:
             select.set_halign(Gtk.Align.END)
             row_box.add(select)
 
-        opt_array[opt_name] = {"name": option["name"], "row": row_box}
+        opt_array[opt_name] = {"name": option["name"], "row": row_widget}
 
         opts = sorted(list(opt_array), key=lambda x: opt_array[x]["name"].casefold())
-        pos = opts.index(opt_name)
+        pos = opts.index(opt_name) + row_offset
 
         self.labels[boxname].insert_row(pos)
         self.labels[boxname].attach(opt_array[opt_name]["row"], 0, pos, 1, 1)
