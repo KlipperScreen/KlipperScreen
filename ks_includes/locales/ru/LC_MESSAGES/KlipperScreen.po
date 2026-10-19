@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-21 12:14-0300\n"
-"PO-Revision-Date: 2026-07-17 19:01+0000\n"
-"Last-Translator: michael <michael.narygin@yandex.ru>\n"
+"PO-Revision-Date: 2026-10-18 05:51+0000\n"
+"Last-Translator: michael <michael-narygin@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/ru/>\n"
 "Language: ru\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.8.dev0\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 "X-Poedit-Flags-xgettext: --add-comments\n"
 
 msgid "Main Menu"
@@ -45,7 +45,7 @@ msgid "Bed Level"
 msgstr "Уровень стола"
 
 msgid "Bed Mesh"
-msgstr "Сетка стола"
+msgstr "Карта стола"
 
 msgid "Z Calibrate"
 msgstr "Калибр. Z"
@@ -78,7 +78,7 @@ msgid "Update"
 msgstr "Обновить"
 
 msgid "Input Shaper"
-msgstr "Входной шейпер"
+msgstr "Input Shaper"
 
 msgid "Save Config"
 msgstr "Сохр. Конфиг"
@@ -173,7 +173,6 @@ msgstr "24-x часовой формат"
 msgid "Disable for 12hs with am / pm"
 msgstr "Отключить 12 часовой формат"
 
-#, fuzzy
 msgid "Action bar Shortcut"
 msgstr "Ярлык панели действий"
 
@@ -249,11 +248,9 @@ msgstr "Показать курсор"
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr "Для управления мышью или проверки точности сенсорного экрана"
 
-#, fuzzy
 msgid "Screen wake delay"
 msgstr "Задержка пробуждения экрана"
 
-#, fuzzy
 msgid "Helps to prevent unwanted touchs during screen wake up"
 msgstr "Помогает предотвратить случайные нажатия при пробуждении экрана"
 
@@ -308,7 +305,7 @@ msgstr "Вы уверены, что хотите совершить аварий
 msgid "day"
 msgid_plural "days"
 msgstr[0] "день"
-msgstr[1] "дней"
+msgstr[1] "дня"
 msgstr[2] "дней"
 
 msgid "Network not found"
@@ -348,9 +345,8 @@ msgid "Connection failed"
 msgstr "Подключение отклонено"
 
 msgid "No mesh has been loaded"
-msgstr "Сетка стола не загружена"
+msgstr "Карта стола не загружена"
 
-#, fuzzy
 msgid "Invalid Number"
 msgstr "Неверный номер"
 
@@ -382,7 +378,7 @@ msgid "Rotation invalid"
 msgstr "Вращение невозможно"
 
 msgid "This panel supports up-to 9 screws in a 3x3 Grid"
-msgstr "Эта панель поддерживает до 9 винтов в сетке 3x3."
+msgstr "Эта панель поддерживает до 9 винтов в сетке 3x3"
 
 msgid "It's possible that the configuration is not correct"
 msgstr "Возможно текущая конфигурация некорректна"
@@ -440,7 +436,7 @@ msgid "Retract"
 msgstr "Втянуть"
 
 msgid "Pressure Advance"
-msgstr "Опережение давления"
+msgstr "Pressure Advance"
 
 msgid "Retraction"
 msgstr "Ретракт"
@@ -539,7 +535,7 @@ msgid "Measure Y"
 msgstr "Измерьте Y"
 
 msgid "Measure Both"
-msgstr "Измерьте и то, и другое"
+msgstr "Измерьте обе оси"
 
 msgid "Check ADXL Wiring"
 msgstr "Проверьте подключение ADXL"
@@ -602,7 +598,7 @@ msgid "Filament total:"
 msgstr "Итого филамента:"
 
 msgid "Pressure Advance:"
-msgstr "Опережение давления:"
+msgstr "Pressure Advance:"
 
 msgid "Flowrate:"
 msgstr "Расход:"
@@ -683,7 +679,7 @@ msgid "Max Velocity"
 msgstr "Максимальная скорость"
 
 msgid "Square Corner Velocity"
-msgstr "Квадратная угловая скорость"
+msgstr "Скорость прохождения углов"
 
 msgid "Unknown Heater"
 msgstr "Неизвестный нагреватель"
@@ -729,7 +725,6 @@ msgstr "Только для перемещения панели"
 msgid "Z Speed (mm/s)"
 msgstr "Скорость оси Z (мм/с)"
 
-#, fuzzy
 msgid "Advanced Move"
 msgstr "Расширенное перемещение"
 
@@ -737,7 +732,6 @@ msgstr "Расширенное перемещение"
 msgid "Query Endstops"
 msgstr "Запрос концевых выключателей"
 
-#, fuzzy
 msgid "Invalid position"
 msgstr "Неверное положение"
 
@@ -747,11 +741,9 @@ msgstr "Не удалось инициализировать"
 msgid "Interface"
 msgstr "Интерфейс"
 
-#, fuzzy
 msgid "No network devices have been found"
 msgstr "Сетевые устройства не найдены"
 
-#, fuzzy
 msgid "No network devices available"
 msgstr "Сетевые устройства недоступны"
 
@@ -788,13 +780,13 @@ msgid "Notification log empty"
 msgstr "Журнал уведомлений пуст"
 
 msgid "Pressure advance"
-msgstr "Опережения давления"
+msgstr "Pressure advance"
 
 msgid "Current"
 msgstr "Текущий"
 
 msgid "Smooth time"
-msgstr "Ровное время"
+msgstr "Время сглаживания"
 
 msgid "s"
 msgstr "с"
@@ -865,85 +857,66 @@ msgstr "Повторить попытку"
 msgid "Power On Printer"
 msgstr "Включить принтер"
 
-#, fuzzy
 msgid "Spool editor"
 msgstr "Редактор катушек"
 
-#, fuzzy
 msgid "No spool selected"
 msgstr "Катушка не выбрана"
 
-#, fuzzy
 msgid "Measured weight"
 msgstr "Измеренный вес"
 
-#, fuzzy
 msgid "Remaining weight"
 msgstr "Оставшийся вес"
 
-#, fuzzy
 msgid "Initial weight"
 msgstr "Начальный вес"
 
-#, fuzzy
 msgid "Empty weight"
 msgstr "Вес пустой катушки"
 
-#, fuzzy
 msgid "Invalid weight"
 msgstr "Неверный вес"
 
-#, fuzzy
 msgid "Restore"
 msgstr "Восстановить"
 
-#, fuzzy
 msgid "No"
 msgstr "Нет"
 
-#, fuzzy
 msgid "Yes"
 msgstr "Да"
 
-#, fuzzy
 msgid "Vendor"
 msgstr "Производитель"
 
 msgid "Material"
-msgstr "Тип"
+msgstr "Материал"
 
-#, fuzzy
 msgid "Used"
 msgstr "Использованный"
 
-#, fuzzy
 msgid "Location"
 msgstr "Расположение"
 
 msgid "Archived"
 msgstr "Архивный"
 
-#, fuzzy
 msgid "Price"
 msgstr "Цена"
 
-#, fuzzy
 msgid "Comment"
 msgstr "Комментарий"
 
-#, fuzzy
 msgid "Measured weight is below empty spool weight"
 msgstr "Измеренный вес меньше веса пустой катушки"
 
-#, fuzzy
 msgid "Value must be positive"
 msgstr "Значение должно быть положительным"
 
-#, fuzzy
 msgid "Error updating filament weight"
 msgstr "Ошибка обновления веса филамента"
 
-#, fuzzy
 msgid "Filament weight updated"
 msgstr "Вес филамента обновлен"
 
@@ -953,7 +926,6 @@ msgstr "ID"
 msgid "Filter"
 msgstr "Фильтр"
 
-#, fuzzy
 msgid "Remaining length"
 msgstr "Оставшаяся длина"
 
@@ -972,15 +944,12 @@ msgstr "Ошибка при установке активной катушки"
 msgid "No info available"
 msgstr "Нет доступной информации"
 
-#, fuzzy
 msgid "Disk"
 msgstr "Диск"
 
-#, fuzzy
 msgid "Cores"
 msgstr "Ядра"
 
-#, fuzzy
 msgid "IP Address"
 msgstr "IP-адрес"
 
@@ -1014,7 +983,6 @@ msgstr "Проверка обновлений, подождите..."
 msgid "Not working or not configured"
 msgstr "Не работает или не настроено"
 
-#, fuzzy
 msgid "Are you sure?"
 msgstr "Вы уверены?"
 
@@ -1047,7 +1015,7 @@ msgstr[2] "изменений"
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
 msgstr[0] "Пакет будет обновлен"
-msgstr[1] "Пакеты будут обновляться"
+msgstr[1] "Пакета будут обновляться"
 msgstr[2] "Пакеты будут обновляться"
 
 #, python-format
@@ -1075,21 +1043,22 @@ msgstr "Сохранено"
 msgid "New"
 msgstr "Новый"
 
+#, fuzzy
 msgid "Raise Nozzle"
 msgstr "Опустить стол"
 
+#, fuzzy
 msgid "Lower Nozzle"
 msgstr "Поднять стол"
 
 msgid "Abort"
 msgstr "Отменить"
 
-#, fuzzy
 msgid "Calibration commands not available yet"
 msgstr "Команды калибровки пока недоступны"
 
 msgid "Error: Couldn't get a position to probe"
-msgstr "Ошибка: Невозможно получить позицию зонда"
+msgstr "Ошибка: Невозможно получить позицию датчика"
 
 msgid "Failed, adjust position first"
 msgstr "Ошибка. Сначала измените положение"
@@ -1103,11 +1072,9 @@ msgstr "Минимум:"
 msgid "System:"
 msgstr "Система:"
 
-#, fuzzy
 msgid "Waiting connection closure"
 msgstr "Ожидание закрытия соединения"
 
-#, fuzzy
 msgid "Initializing KlipperScreen"
 msgstr "Инициализация KlipperScreen"
 
@@ -1121,7 +1088,6 @@ msgstr "Закрыть"
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS не удался и был отключен"
 
-#, fuzzy
 msgid "Moonraker Connected"
 msgstr "Moonraker подключен"
 
@@ -1146,17 +1112,14 @@ msgstr "Klipper готов"
 msgid "Klipper has shutdown"
 msgstr "Klipper отключился"
 
-#, fuzzy
 msgid "Waiting for Moonraker connection to close"
 msgstr "Ожидание закрытия соединения с Moonraker"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: подключен"
 
-#, fuzzy
 msgid "Initializing Klipper Connection"
 msgstr "Инициализация подключения Klipper"
 
-#, fuzzy
 msgid "Klipper not responding after multiple attempts"
 msgstr "Klipper не отвечает после нескольких попыток"
