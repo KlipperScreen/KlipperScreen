@@ -218,6 +218,8 @@ class KlipperScreenConfig:
                     "print_view",
                     "lock_password",
                     "side_shortcut_target",
+                    "shutdown_action",
+                    "reboot_action",
                 )
                 numbers = (
                     "job_complete_timeout",
@@ -428,6 +430,42 @@ class KlipperScreenConfig:
                     "type": "binary",
                     "tooltip": _("Asks for confirmation before stopping"),
                     "value": "False",
+                }
+            },
+            {
+                "shutdown_action": {
+                    "section": "main",
+                    "name": _("Shutdown Action"),
+                    "type": "dropdown",
+                    "tooltip": _(
+                        "Skips the confirmation and shuts down the selected target. "
+                        "Always asks while printing"
+                    ),
+                    "value": "ask",
+                    "options": [
+                        {"name": _("Ask") + " " + _("(default)"), "value": "ask"},
+                        {"name": _("Host"), "value": "host"},
+                        {"name": _("Printer"), "value": "printer"},
+                        {"name": _("Both"), "value": "both"},
+                    ],
+                }
+            },
+            {
+                "reboot_action": {
+                    "section": "main",
+                    "name": _("Restart Action"),
+                    "type": "dropdown",
+                    "tooltip": _(
+                        "Skips the confirmation and restarts the selected target. "
+                        "Always asks while printing"
+                    ),
+                    "value": "ask",
+                    "options": [
+                        {"name": _("Ask") + " " + _("(default)"), "value": "ask"},
+                        {"name": _("Host"), "value": "host"},
+                        {"name": _("Printer"), "value": "printer"},
+                        {"name": _("Both"), "value": "both"},
+                    ],
                 }
             },
             {

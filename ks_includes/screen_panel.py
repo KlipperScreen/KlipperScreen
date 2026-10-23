@@ -51,6 +51,24 @@ class ScreenPanel:
         else:
             self._screen._ws.api.emergency_stop()
 
+    def power_action_response(self, method):
+        """Return the configured response for reboot/shutdown, or None to show the dialog."""
+        if self._printer and self._printer.state in ("printing", "paused"):
+            return None
+        action = self._config.get_main_config().get(f"{method}_action", "ask")
+        if action == "ask":
+            return None
+        if self._screen.state.printer_is_local:
+            # A local printer shares the host, so the dialog only offers the full action
+            action = "both"
+        if action != "host" and not self._screen.state.connected:
+            return None
+        return {
+            "host": Gtk.ResponseType.OK,
+            "printer": Gtk.ResponseType.APPLY,
+            "both": Gtk.ResponseType.ACCEPT,
+        }.get(action)
+
     def load_image_async(self, filename, width, height, small=False, callback=None):
         if not self._files.has_thumbnail(filename):
             if callback:

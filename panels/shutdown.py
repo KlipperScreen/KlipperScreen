@@ -62,6 +62,10 @@ class Panel(ScreenPanel):
         self.content.add(self.main)
 
     def reboot_poweroff(self, widget, method):
+        response = self.power_action_response(method)
+        if response is not None:
+            self.reboot_poweroff_confirm(None, response, method)
+            return
         label = Gtk.Label(wrap=True, hexpand=True, vexpand=True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         if method == "reboot":
@@ -80,28 +84,32 @@ class Panel(ScreenPanel):
                 }
             )
         else:
-            buttons.extend(
-                [
-                    {"name": _("Host"), "response": Gtk.ResponseType.OK, "style": "dialog-info"},
-                    {
-                        "name": _("Printer"),
-                        "response": Gtk.ResponseType.APPLY,
-                        "style": "dialog-warning",
-                    },
-                    {
-                        "name": _("Both"),
-                        "response": Gtk.ResponseType.ACCEPT,
-                        "style": "dialog-primary",
-                    },
-                ]
+            buttons.append(
+                {"name": _("Host"), "response": Gtk.ResponseType.OK, "style": "dialog-info"}
             )
+            if self._screen.state.connected:
+                buttons.extend(
+                    [
+                        {
+                            "name": _("Printer"),
+                            "response": Gtk.ResponseType.APPLY,
+                            "style": "dialog-warning",
+                        },
+                        {
+                            "name": _("Both"),
+                            "response": Gtk.ResponseType.ACCEPT,
+                            "style": "dialog-primary",
+                        },
+                    ]
+                )
         buttons.append(
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": "dialog-error"}
         )
         self._gtk.Dialog(title, buttons, label, self.reboot_poweroff_confirm, method)
 
     def reboot_poweroff_confirm(self, dialog, response_id, method):
-        self._gtk.remove_dialog(dialog)
+        if dialog is not None:
+            self._gtk.remove_dialog(dialog)
 
         if response_id == Gtk.ResponseType.ACCEPT:
             if method == "reboot":
