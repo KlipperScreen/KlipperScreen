@@ -733,6 +733,7 @@ class Panel(ScreenPanel):
             self.file_metadata["estimated_time"] if "estimated_time" in self.file_metadata else 0
         )
         print_duration = float(self._printer.get_stat("print_stats", "print_duration"))
+        excluded_ratio = self._excluded_object_ratio()
         if print_duration < 1:  # No-extrusion
             if last_time:
                 print_duration = last_time * progress
@@ -761,12 +762,18 @@ class Panel(ScreenPanel):
         if timeleft_type == "file":
             estimated = file_time
         elif timeleft_type == "filament":
-            estimated = filament_time
+            estimated = filament_time * (1 - excluded_ratio)
         elif timeleft_type == "slicer":
-            estimated = slicer_time
+            estimated = slicer_time * (1 - excluded_ratio)
         else:
             estimated = self.estimate_time(
-                progress, print_duration, file_time, filament_time, slicer_time, last_time
+                progress,
+                print_duration,
+                file_time,
+                filament_time,
+                slicer_time,
+                last_time,
+                excluded_ratio,
             )
         if estimated > 1:
             progress = min(max(print_duration / estimated, 0), 1)
@@ -780,21 +787,31 @@ class Panel(ScreenPanel):
         self.update_progress(progress)
 
     def estimate_time(
-        self, progress, print_duration, file_time, filament_time, slicer_time, last_time
+        self,
+        progress,
+        print_duration,
+        file_time,
+        filament_time,
+        slicer_time,
+        last_time,
+        excluded_ratio=0.0,
     ):
         estimate_above = 0.3
         slicer_time /= sqrt(self.speed_factor)
+
+        # Excluded objects reduce the actual work, but the slicer estimated time
+        # and the filament total still count every object. Scale them down by the
+        # fraction of objects excluded so the estimate, progress arc and time left
+        # stay consistent with the remaining work.
+        slicer_time *= 1 - excluded_ratio
+        filament_time *= 1 - excluded_ratio
+        last_time *= 1 - excluded_ratio
+
         if progress <= estimate_above:
             return last_time or slicer_time or filament_time or file_time
-        objects = self._printer.get_stat("exclude_object", "objects")
-        excluded_objects = self._printer.get_stat("exclude_object", "excluded_objects")
-        exclude_compensation = 3 * (len(excluded_objects) / len(objects)) if len(objects) > 0 else 0
-        weight_last = 4.0 - exclude_compensation if print_duration < last_time else 0
-        weight_slicer = (
-            1.0 + estimate_above - progress - exclude_compensation
-            if print_duration < slicer_time
-            else 0
-        )
+
+        weight_last = 4.0 if print_duration < last_time else 0
+        weight_slicer = 1.0 + estimate_above - progress if print_duration < slicer_time else 0
         weight_filament = (
             min(progress - estimate_above, 0.33) if print_duration < filament_time else 0
         )
@@ -808,6 +825,13 @@ class Panel(ScreenPanel):
             + filament_time * weight_filament
             + file_time * weight_file
         ) / total_weight
+
+    def _excluded_object_ratio(self):
+        objects = self._printer.get_stat("exclude_object", "objects")
+        if not objects:
+            return 0.0
+        excluded_objects = self._printer.get_stat("exclude_object", "excluded_objects")
+        return len(excluded_objects) / len(objects)
 
     def update_progress(self, progress: float):
         self.progress = progress
