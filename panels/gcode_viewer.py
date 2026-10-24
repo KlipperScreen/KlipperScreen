@@ -214,6 +214,10 @@ class Panel(ScreenPanel):
         resolved_interaction_active = (
             self._interaction_active if interaction_active is None else interaction_active
         )
+        # While the status card overlay is visible (any non-ready state) it is the
+        # sole source of status text. Skip the renderer's centered messages so the
+        # canvas text and the overlay do not overlap.
+        suppress_message = self.panel_state != "ready"
         self.renderer.draw(
             da,
             ctx,
@@ -230,6 +234,7 @@ class Panel(ScreenPanel):
             drag_active=resolved_drag_active,
             preview_context=self._get_preview_context(),
             interaction_active=resolved_interaction_active,
+            suppress_message=suppress_message,
         )
 
     def _draw_selected_file_3d_frame(self, da, ctx):

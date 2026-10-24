@@ -175,6 +175,7 @@ class ToolpathRenderer:
         drag_active: bool = False,
         preview_context: PreviewContext | None = None,
         interaction_active: bool = False,
+        suppress_message: bool = False,
     ) -> None:
         width = da.get_allocated_width()
         height = da.get_allocated_height()
@@ -186,6 +187,12 @@ class ToolpathRenderer:
             height,
             self._lookup(style_context, "borders", (0.3, 0.3, 0.3, 1.0)),
         )
+
+        # While the status card overlay is visible (any non-ready state) it owns
+        # all status content, so skip messages *and* the model to avoid overlap
+        # and to avoid drawing with an empty/invalid/None model.
+        if suppress_message:
+            return
 
         if message:
             self._draw_message(
