@@ -165,7 +165,10 @@ class Panel(ScreenPanel):
         self.bed_bounds = self._resolve_bed_reference_bounds()
         self._sync_settings()
         self._apply_responsive_layout(self._screen.width, self._screen.height)
-        if self.refresh_timer is None:
+        # The continuous refresh timer only earns its keep while tracking a live
+        # print, where progress changes arrive asynchronously. A static file
+        # preview has no ongoing state to poll, so it renders on demand instead.
+        if self.refresh_timer is None and preview_context == PreviewContext.ACTIVE_PRINT:
             interval = max(int(1000 / self.refresh_interval), 100)
             self.refresh_timer = GLib.timeout_add(interval, self._refresh_canvas)
         self._refresh_from_printer()
@@ -441,6 +444,10 @@ class Panel(ScreenPanel):
                 self._schedule_load(force_reload=True)
             return
         if action != "notify_status_update":
+            return
+        if self._get_preview_context() == PreviewContext.SELECTED_FILE:
+            # A selected-file preview is static: printer status updates never
+            # change it, so ignore them instead of re-refreshing on every poll.
             return
         self._refresh_from_printer(data)
 
@@ -853,6 +860,11 @@ class Panel(ScreenPanel):
 
     def queue_render(self):
         self.render_dirty = True
+        if self._get_preview_context() != PreviewContext.ACTIVE_PRINT:
+            # Static file preview has no continuous refresh timer, so push the
+            # redraw immediately to keep interactions and updates responsive.
+            if self.canvas is not None:
+                self.canvas.queue_draw()
 
     def _refresh_metadata(self):
         if self._files.file_metadata_exists(self.filename):

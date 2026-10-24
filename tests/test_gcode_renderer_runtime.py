@@ -872,6 +872,91 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
         self.assertIsNone(panel._interaction_restore_timer)
         self.assertEqual(renders, ["render"])
 
+    def test_queue_render_draws_on_demand_for_selected_file(self):
+        panel_class = self._load_gcode_viewer_panel_class()
+        draws = []
+        panel = object.__new__(panel_class)
+        panel.preview_context = "selected_file"
+        panel.explicit_filename = "picked.gcode"
+        panel.canvas = types.SimpleNamespace(queue_draw=lambda: draws.append("draw"))
+
+        panel.queue_render()
+
+        self.assertTrue(panel.render_dirty)
+        self.assertEqual(draws, ["draw"])
+
+    def test_queue_render_does_not_draw_directly_for_active_print(self):
+        panel_class = self._load_gcode_viewer_panel_class()
+        draws = []
+        panel = object.__new__(panel_class)
+        panel.preview_context = "active_print"
+        panel.explicit_filename = ""
+        panel.canvas = types.SimpleNamespace(queue_draw=lambda: draws.append("draw"))
+
+        panel.queue_render()
+
+        self.assertTrue(panel.render_dirty)
+        self.assertEqual(draws, [])
+
+    def test_gcode_viewer_activate_schedules_refresh_timer_only_for_active_print(self):
+        module = self._parse_gcode_viewer_module()
+        activate_func = self._find_method(module, "activate")
+
+        timeout_calls = [
+            node
+            for node in ast.walk(activate_func)
+            if (
+                isinstance(node, ast.Call)
+                and isinstance(node.func, ast.Attribute)
+                and node.func.attr == "timeout_add"
+                and isinstance(node.func.value, ast.Name)
+                and node.func.value.id == "GLib"
+            )
+        ]
+        self.assertEqual(len(timeout_calls), 1)
+
+        enclosing_if = None
+        for node in ast.walk(activate_func):
+            if isinstance(node, ast.If) and any(
+                self._contains(stmt, timeout_calls[0]) for stmt in node.body
+            ):
+                enclosing_if = node
+                break
+
+        self.assertIsNotNone(enclosing_if)
+        self.assertIn("ACTIVE_PRINT", ast.unparse(enclosing_if.test))
+
+    @staticmethod
+    def _contains(node, target):
+        for child in ast.walk(node):
+            if child is target:
+                return True
+        return False
+
+    def test_process_update_ignores_status_for_selected_file(self):
+        panel_class = self._load_gcode_viewer_panel_class()
+        panel = object.__new__(panel_class)
+        panel.preview_context = "selected_file"
+        panel.explicit_filename = "picked.gcode"
+        calls = []
+        panel._refresh_from_printer = lambda data=None: calls.append(data)
+
+        panel.process_update("notify_status_update", {"virtual_sdcard": {}})
+
+        self.assertEqual(calls, [])
+
+    def test_process_update_processes_status_for_active_print(self):
+        panel_class = self._load_gcode_viewer_panel_class()
+        panel = object.__new__(panel_class)
+        panel.preview_context = "active_print"
+        panel.explicit_filename = ""
+        calls = []
+        panel._refresh_from_printer = lambda data=None: calls.append(data)
+
+        panel.process_update("notify_status_update", {"virtual_sdcard": {}})
+
+        self.assertEqual(len(calls), 1)
+
     def test_selected_file_3d_draw_uses_renderer_draw_path(self):
         panel_class = self._load_gcode_viewer_panel_class()
         draw_calls = []
