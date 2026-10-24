@@ -764,13 +764,19 @@ class BasePanel(ScreenPanel):
             self.close_update_timer = None
         return False
 
-    def close_update_dialog(self, *args):
-        if self.update_dialog.close_blocked:
+    def close_update_dialog(self, *args, force=False):
+        if self.update_dialog is None:
+            return
+        if not force and self.update_dialog.close_blocked:
             logging.debug("Update dialog close is blocked by safety timer")
             return
+        if self.close_update_timer is not None:
+            GLib.source_remove(self.close_update_timer)
+            self.close_update_timer = None
         logging.info("Closing update dialog")
         if self.update_dialog in self._screen.dialogs:
             self._screen.dialogs.remove(self.update_dialog)
         self._screen.state.updating = False
+        self.update_dialog.destroy()
         self.update_dialog = None
         self._screen._menu_go_back(home=True)

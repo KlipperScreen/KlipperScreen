@@ -905,6 +905,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
             self.show_panel("extrude")
 
     def state_printing(self):
+        self.base_panel.close_update_dialog(force=True)
         self.show_panel("job_status", remove_all=True)
 
     def state_ready(self, wait=True):
