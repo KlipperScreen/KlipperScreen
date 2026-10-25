@@ -2,6 +2,7 @@
 # Alfredo Monclus (alfrix) 2024
 import logging
 import subprocess
+import time
 from uuid import uuid4
 
 import sdbus
@@ -34,6 +35,13 @@ KEY_MGMT_SAE = 1024  # WPA/RSN Simultaneous Authentication of Equals
 KEY_MGMT_OWE = 2048  # WPA/RSN Opportunistic Wireless Encryption
 KEY_MGMT_OWE_TM = 4096  # WPA/RSN Opportunistic Wireless Encryption transition mode
 KEY_MGMT_EAP_SUITE_B_192 = 8192  # WPA3 Enterprise Suite-B 192
+
+# NetworkManager refuses a new scan if another one was requested in the last
+# 120s window (max 4 per window), replying NotAllowed. Scans started by us are
+# throttled well above that so we never trip the limit.
+NM_SCAN_MIN_INTERVAL = 15.0  # seconds between two scans requested by this app
+NM_SCAN_NOT_ALLOWED_BACKOFF = 20.0  # seconds to wait after a NotAllowed reply
+NM_SCAN_TIMEOUT = 25.0  # max seconds to wait for a requested scan to complete
 
 
 def get_encryption(flags):
@@ -100,6 +108,18 @@ class SdbusNm:
         self.monitor_connection = False
         self.wifi_state = -1
         self.popup = popup_callback
+        # Scan bookkeeping: when the last scan was requested, the value of
+        # LastScan before requesting it, and whether a scan we asked for is
+        # still in flight.
+        self._scan_requested_at = 0.0
+        self._scan_baseline = None
+        self._scan_pending = False
+        self._scan_pending_since = 0.0
+        self._scan_backoff_until = 0.0
+        # get_known_networks() walks every saved profile over D-Bus, cache it
+        self._known_cache = None
+        self._known_cache_expiry = 0.0
+        self._known_cache_ttl = 30.0
         if self.wlan_device and self.wlan_device.state == enums.DeviceState.UNMANAGED:
             self.popup(
                 f"{self.wlan_device.interface} is not managed by "
@@ -188,42 +208,86 @@ class SdbusNm:
         gateway = ActiveConnection(self.nm.primary_connection).devices[0]
         return NetworkDeviceGeneric(gateway).interface
 
-    @staticmethod
-    def get_known_networks():
+    def get_known_networks(self, use_cache=True):
+        """Return the saved Wi-Fi profiles as [{"SSID": str, "UUID": str}].
+
+        Walking the settings tree costs one D-Bus round trip per saved profile,
+        so the result is cached for a short while. Pass use_cache=False to force
+        a refresh (do that after adding or deleting a profile).
+        """
+        now = time.monotonic()
+        if use_cache and self._known_cache is not None and now < self._known_cache_expiry:
+            return self._known_cache
         known_networks = []
-        saved_network_paths = NetworkManagerSettings().list_connections()
+        try:
+            saved_network_paths = NetworkManagerSettings().list_connections()
+        except sdbus.DbusFailedError as e:
+            logging.warning(f"Could not list saved connections: {e}")
+            saved_network_paths = []
         for netpath in saved_network_paths:
-            saved_con = NetworkConnectionSettings(netpath)
-            con_settings = saved_con.get_settings()
+            try:
+                con_settings = NetworkConnectionSettings(netpath).get_settings()
+                ssid = con_settings["802-11-wireless"]["ssid"][1].decode(
+                    "utf-8", errors="ignore"
+                )
+            except (KeyError, TypeError, sdbus.DbusFailedError) as e:
+                # Wired profile, or a profile removed while we were iterating
+                logging.debug(f"Skipping connection {netpath}: {e}")
+                continue
             if con_settings["connection"]["type"][1] == "802-11-wireless":
                 known_networks.append(
                     {
-                        "SSID": con_settings["802-11-wireless"]["ssid"][1].decode(),
+                        "SSID": ssid,
                         "UUID": con_settings["connection"]["uuid"][1],
                     }
                 )
+        self._known_cache = known_networks
+        self._known_cache_expiry = now + self._known_cache_ttl
         return known_networks
 
-    def is_known(self, ssid):
+    def invalidate_known_cache(self):
+        self._known_cache = None
+        self._known_cache_expiry = 0.0
+
+    def is_known(self, ssid, known_ssids=None):
+        if known_ssids is not None:
+            return ssid in known_ssids
         return any(net["SSID"] == ssid for net in self.get_known_networks())
 
     def get_networks(self):
         networks = []
         if self.wlan_device:
             all_aps = [AccessPoint(result) for result in self.wlan_device.access_points]
-            networks.extend(
-                {
-                    "SSID": ap.ssid.decode("utf-8", errors="ignore"),
-                    "known": self.is_known(ap.ssid.decode("utf-8", errors="ignore")),
-                    "security": get_encryption(ap.rsn_flags or ap.wpa_flags or ap.flags),
-                    "frequency": WifiChannels(ap.frequency)[0],
-                    "channel": WifiChannels(ap.frequency)[1],
-                    "signal_level": ap.strength,
-                    "BSSID": ap.hw_address,
-                }
-                for ap in all_aps
-                if ap.ssid
-            )
+            # Resolve the saved SSIDs once instead of once per access point
+            known_ssids = {net["SSID"] for net in self.get_known_networks()}
+            connected_bssid = self.get_connected_bssid()
+            for ap in all_aps:
+                ssid = ap.ssid.decode("utf-8", errors="ignore")
+                if not ssid:
+                    # Hidden network, nothing to show
+                    continue
+                try:
+                    security = get_encryption(ap.rsn_flags or ap.wpa_flags or ap.flags)
+                    frequency = ap.frequency
+                    strength = ap.strength
+                    bssid = ap.hw_address
+                except sdbus.DbusFailedError as e:
+                    # The AP disappeared between listing and reading it
+                    logging.debug(f"Dropping stale access point {ssid}: {e}")
+                    continue
+                band, channel = WifiChannels(frequency)
+                networks.append(
+                    {
+                        "SSID": ssid,
+                        "known": ssid in known_ssids,
+                        "security": security,
+                        "frequency": band,
+                        "channel": channel,
+                        "signal_level": strength,
+                        "BSSID": bssid,
+                        "connected": bssid == connected_bssid,
+                    }
+                )
             return sorted(networks, key=lambda i: i["signal_level"], reverse=True)
         return networks
 
@@ -236,7 +300,8 @@ class SdbusNm:
         return AccessPoint(self.wlan_device.active_access_point)
 
     def get_connected_bssid(self):
-        return self.get_connected_ap().hw_address if self.get_connected_ap() is not None else None
+        ap = self.get_connected_ap()
+        return ap.hw_address if ap is not None else None
 
     def get_security_type(self, ssid):
         return next(
@@ -319,6 +384,7 @@ class SdbusNm:
 
         try:
             NetworkManagerSettings().add_connection(properties)
+            self.invalidate_known_cache()
             return {"status": "success"}
         except exceptions.NmSettingsPermissionDeniedError:
             logging.exception("Insufficient privileges")
@@ -339,6 +405,7 @@ class SdbusNm:
     def delete_network(self, ssid):
         if path := self.get_connection_path_by_ssid(ssid):
             self.delete_connection_path(path)
+            self.invalidate_known_cache()
         else:
             logging.debug(f"SSID '{ssid}' not found among saved connections")
 
@@ -353,15 +420,98 @@ class SdbusNm:
                 "message": _("Failed to delete connection") + f"\n{e}",
             }
 
-    def rescan(self):
+    def _read_last_scan(self):
+        """LastScan in CLOCK_BOOTTIME milliseconds, or None if unreadable."""
         try:
-            state = self.get_interface_status()
-            if state < enums.DeviceState.DISCONNECTED or state > enums.DeviceState.ACTIVATED:
-                logging.debug(f"Interface not ready: {state}")
-                return
-            return self.wlan_device.request_scan({})
-        except Exception as e:
-            self.popup(f"Unexpected error: {e}")
+            return self.wlan_device.last_scan
+        except sdbus.DbusFailedError as e:
+            logging.debug(f"Could not read LastScan: {e}")
+            return None
+
+    def scan_in_progress(self):
+        """True while a scan requested by this app has not completed yet."""
+        if not self._scan_pending:
+            return False
+        last_scan = self._read_last_scan()
+        if last_scan is None:
+            # Can't observe the scan, stop waiting rather than hang the UI
+            self._scan_pending = False
+            return False
+        if self._scan_baseline is not None and last_scan > self._scan_baseline:
+            logging.debug(f"Scan finished (LastScan {self._scan_baseline} -> {last_scan})")
+            self._scan_pending = False
+            return False
+        if self._scan_baseline is None and last_scan > 0:
+            self._scan_pending = False
+            return False
+        if time.monotonic() - self._scan_pending_since > NM_SCAN_TIMEOUT:
+            logging.warning("Timed out waiting for the Wi-Fi scan to finish")
+            self._scan_pending = False
+            return False
+        return True
+
+    def request_rescan(self, force=False):
+        """Ask NetworkManager to scan for access points.
+
+        Returns True only when a new scan was actually requested. Re-requesting a
+        scan shortly after the previous one gets silently dropped by
+        NetworkManager (NotAllowed), which is what made the panel appear to
+        refresh with stale or empty results, so requests are throttled here.
+        """
+        if not self.wlan_device:
+            return False
+        now = time.monotonic()
+        if self.scan_in_progress():
+            logging.debug("Scan already in progress, not requesting another one")
+            return False
+        if not force:
+            if now < self._scan_backoff_until:
+                logging.debug("Skipping scan request, backing off after NotAllowed")
+                return False
+            if now - self._scan_requested_at < NM_SCAN_MIN_INTERVAL:
+                logging.debug("Skipping scan request, too soon after the last one")
+                return False
+        state = self.get_interface_status()
+        if state == enums.DeviceState.UNMANAGED:
+            logging.warning(
+                f"{self.wlan_device.interface} is unmanaged by NetworkManager, cannot scan"
+            )
+            return False
+        if state < enums.DeviceState.DISCONNECTED or state > enums.DeviceState.ACTIVATED:
+            logging.debug(f"Interface not ready for scanning: {state}")
+            return False
+        baseline = self._read_last_scan()
+        if baseline is None:
+            # Without LastScan we cannot tell when the scan completed, keep as is
+            self.popup(_("Unable to track Wi-Fi scan progress"), 2)
+            return False
+        self._scan_requested_at = now
+        try:
+            self.wlan_device.request_scan({})
+        except exceptions.NmDeviceNotAllowedError:
+            logging.info("NetworkManager refused the scan (NotAllowed), backing off")
+            self._scan_backoff_until = now + NM_SCAN_NOT_ALLOWED_BACKOFF
+            self._scan_pending = False
+            return False
+        except sdbus.DbusFailedError as e:
+            if "NotAuthorized" in e.dbus_error_name or "PermissionDenied" in e.dbus_error_name:
+                logging.exception("Not allowed to scan for Wi-Fi networks")
+                self.popup(_("Insufficient privileges to scan Wi-Fi networks"))
+                self._scan_backoff_until = now + NM_SCAN_NOT_ALLOWED_BACKOFF
+            else:
+                logging.exception("Unexpected error requesting a Wi-Fi scan")
+                self.popup(_("Unexpected error") + f": {e}")
+            self._scan_pending = False
+            return False
+        self._scan_baseline = baseline
+        self._scan_pending = True
+        self._scan_pending_since = now
+        logging.debug(f"Scan requested (LastScan baseline {baseline})")
+        return True
+
+    def rescan(self):
+        """Kept for backwards compatibility with older callers."""
+        return self.request_rescan()
 
     def get_connection_path_by_ssid(self, ssid):
         existing_networks = NetworkManagerSettings().list_connections()

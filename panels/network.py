@@ -1,5 +1,6 @@
 import logging
 import os
+import time
 
 import gi
 
@@ -19,6 +20,9 @@ class Panel(ScreenPanel):
         super().__init__(screen, title)
         self.last_drop_time = datetime.now()
         self.show_add = False
+        # Poll used to wait for a scan to complete before repainting the list
+        self.scan_poll_timeout = None
+        self.scan_poll_deadline = None
         try:
             self.sdbus_nm = SdbusNm(self.popup_callback)
         except Exception as e:
@@ -146,19 +150,82 @@ class Panel(ScreenPanel):
         self._screen.show_popup_message(msg, level)
 
     def load_networks(self):
+        """Populate the list from the currently cached scan results."""
+        if self.sdbus_nm is None:
+            return False
         for net in self.sdbus_nm.get_networks():
             if "BSSID" not in net:
                 continue
-            self.add_network(net["BSSID"])
-        GLib.timeout_add_seconds(10, self._gtk.Button_busy, self.reload_button, False)
+            self.add_network(net["BSSID"], net=net)
         self.content.show_all()
         return False
 
-    def add_network(self, bssid):
+    def start_scan_and_load(self, busy_widget=None, force=False):
+        """Request a scan and repaint as soon as its results are available.
+
+        NetworkManager only acknowledges the scan request and fills the access
+        point list a few seconds later, so reading the list right after calling
+        request_scan() would show stale (often empty) data. This shows whatever
+        is already known, then polls LastScan and repaints once the scan lands.
+        """
+        if self.sdbus_nm is None:
+            return False
+        self._cancel_scan_poll()
+        if busy_widget is not None:
+            self._gtk.Button_busy(busy_widget, True)
+        elif self.reload_button.get_visible():
+            self._gtk.Button_busy(self.reload_button, True)
+
+        requested = self.sdbus_nm.request_rescan(force=force)
+        if not requested and self.sdbus_nm.scan_in_progress():
+            # A scan we started earlier is still running, wait for that one
+            self.scan_poll_deadline = time.monotonic() + 25.0
+            self.scan_poll_timeout = GLib.timeout_add(500, self.poll_scan_result)
+            return True
+
+        # Show the cached results right away so the panel is never blank
+        self.load_networks()
+        if requested:
+            self.scan_poll_deadline = time.monotonic() + 25.0
+            self.scan_poll_timeout = GLib.timeout_add(500, self.poll_scan_result)
+        else:
+            self._gtk.Button_busy(self.reload_button, False)
+        return requested
+
+    def poll_scan_result(self):
+        """Repaint once the scan in flight has finished (or give up)."""
+        if self.sdbus_nm is None:
+            self.scan_poll_timeout = None
+            return False
+        if self.sdbus_nm.scan_in_progress():
+            if (
+                self.scan_poll_deadline is not None
+                and time.monotonic() < self.scan_poll_deadline
+            ):
+                return True
+            logging.warning("Gave up waiting for the Wi-Fi scan to finish")
+        self.scan_poll_timeout = None
+        self.load_networks()
+        self.refresh_network_list()
+        self._gtk.Button_busy(self.reload_button, False)
+        return False
+
+    def _cancel_scan_poll(self):
+        if self.scan_poll_timeout is not None:
+            GLib.source_remove(self.scan_poll_timeout)
+            self.scan_poll_timeout = None
+
+    def add_network(self, bssid, net=None):
         if bssid in self.network_rows:
             return
 
-        net = next(net for net in self.sdbus_nm.get_networks() if bssid == net["BSSID"])
+        if net is None:
+            net = next(
+                (n for n in self.sdbus_nm.get_networks() if bssid == n["BSSID"]), None
+            )
+        if net is None:
+            logging.debug(f"Access point {bssid} vanished, not adding it")
+            return
         ssid = net["SSID"]
 
         connect = self._gtk.Button("load", None, "color3", self.bts)
@@ -176,7 +243,7 @@ class Panel(ScreenPanel):
         name = Gtk.Label(
             hexpand=True, halign=Gtk.Align.START, wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR
         )
-        if bssid == self.sdbus_nm.get_connected_bssid():
+        if net.get("connected"):
             ssid += " (" + _("Connected") + ")"
             name.set_markup(f"<big><b>{ssid}</b></big>")
         else:
@@ -255,8 +322,7 @@ class Panel(ScreenPanel):
                 self.scroll.remove(child)
             self.scroll.add(self.network_list)
             self.network_list.show_all()
-            self.sdbus_nm.rescan()
-            GLib.idle_add(self.load_networks)
+            self.start_scan_and_load(force=True)
         else:
             self.wifi_toggle_switch.set_sensitive(False)
             self.wifi_toggle_box.hide()
@@ -462,24 +528,35 @@ class Panel(ScreenPanel):
         self.show_add = True
 
     def update_all_networks(self):
+        """Periodic refresh: repaint and keep a single timer alive."""
+        if self.sdbus_nm is None:
+            self.update_timeout = None
+            return False
+        self.refresh_network_list()
+        self.update_timeout = GLib.timeout_add_seconds(5, self.update_all_networks)
+        # Returning False keeps a single timer alive; returning True here made
+        # each activate() stack another 5s timer querying D-Bus in parallel.
+        return False
+
+    def refresh_network_list(self):
+        """Repaint rows from cached data without touching any timer."""
+        if self.sdbus_nm is None:
+            return False
         selected_iface = (
             self.sdbus_nm.get_selected_interface() or self.sdbus_nm.get_primary_interface()
         )
         self.interface = selected_iface
         self.update_ip_label(selected_iface)
         nets = self.sdbus_nm.get_networks()
+        by_bssid = {net["BSSID"]: net for net in nets if "BSSID" in net}
 
-        current_bssids = {net["BSSID"] for net in nets if "BSSID" in net}
-        to_remove = [bssid for bssid in self.network_rows if bssid not in current_bssids]
+        to_remove = [bssid for bssid in self.network_rows if bssid not in by_bssid]
         for bssid in to_remove:
             self.remove_network_from_list(bssid)
 
-        for net in nets:
-            bssid = net.get("BSSID")
-            if not bssid:
-                continue
+        for bssid, net in by_bssid.items():
             if bssid not in self.network_rows:
-                self.add_network(bssid)
+                self.add_network(bssid, net=net)
             self.update_network_info(net)
 
         for i, net in enumerate(nets):
@@ -488,7 +565,7 @@ class Panel(ScreenPanel):
             if widget:
                 self.network_list.reorder_child(widget, i)
         self.network_list.show_all()
-        return True
+        return False
 
     def update_network_info(self, net):
         if net["BSSID"] not in self.network_rows.keys() or net["BSSID"] not in self.networks:
@@ -536,17 +613,20 @@ class Panel(ScreenPanel):
         self.network_rows = {}
         for child in self.network_list.get_children():
             self.network_list.remove(child)
-        if self.sdbus_nm is not None:
-            selected_dev = next(
-                (d for d in self.network_devices if d["interface"] == self.interface), None
-            )
-            is_wifi = selected_dev and selected_dev["type"] == enums.DeviceType.WIFI
-            if is_wifi:
-                if widget:
-                    self._gtk.Button_busy(widget, True)
-                self.sdbus_nm.rescan()
-                self.load_networks()
-        self.activate()
+        if self.sdbus_nm is None:
+            return
+        selected_dev = next(
+            (d for d in self.network_devices if d["interface"] == self.interface), None
+        )
+        is_wifi = selected_dev and selected_dev["type"] == enums.DeviceType.WIFI
+        if not is_wifi:
+            self.activate()
+            return
+        self.start_scan_and_load(widget)
+        # activate() would start a second scan chain on top of the one we just
+        # started, so only re-arm the periodic refresh timer here.
+        if self.update_timeout is None:
+            self.update_timeout = GLib.timeout_add_seconds(5, self.update_all_networks)
 
     def activate(self):
         if self.sdbus_nm is None:
@@ -557,11 +637,10 @@ class Panel(ScreenPanel):
             )
             is_wifi = selected_dev and selected_dev["type"] == enums.DeviceType.WIFI
             if is_wifi:
-                if self.reload_button.get_sensitive():
-                    self._gtk.Button_busy(self.reload_button, True)
-                    self.sdbus_nm.rescan()
-                    self.load_networks()
-                self.update_all_networks()
+                if self.scan_poll_timeout is None:
+                    self.start_scan_and_load()
+                else:
+                    self.refresh_network_list()
                 self.update_timeout = GLib.timeout_add_seconds(5, self.update_all_networks)
             else:
                 self.update_wired_network_info()
@@ -570,6 +649,7 @@ class Panel(ScreenPanel):
     def deactivate(self):
         if self.sdbus_nm is None:
             return
+        self._cancel_scan_poll()
         if self.update_timeout is not None:
             GLib.source_remove(self.update_timeout)
             self.update_timeout = None
