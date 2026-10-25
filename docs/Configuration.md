@@ -12,8 +12,61 @@ Write in the file only the options that need to be changed, and restart KlipperS
     The line endings should be of UNIX style (LF).
 
 
-## Main Options
-The options listed here are not editable from within the user interface.
+## Settings changeable in the UI
+
+
+### Appearance
+| Setting | Config key | What it does |
+| --- | --- | --- |
+| Icon Theme | `theme` | Changes how the interface looks |
+| 24 Hour Time | `24htime` | Toggle between a 24h clock and 12h with am/pm |
+| Font Size | `font_size` | Small, Medium, Large, Extra Large, Maximum (inversely affects icon size) |
+| Hide sensors in Temp. | `only_heaters` | Show only devices that can be set |
+| Show Heater Power | `show_heater_power` | Show the current percentage and graph line |
+| Show Scrollbars Buttons | `show_scroll_steppers` | Useful for un-responsive touchscreens |
+| Show cursor | `show_cursor` | For mouse control or to verify touchscreen accuracy |
+
+### Display
+| Setting | Config key | What it does |
+| --- | --- | --- |
+| Screen Power Off Time | `screen_blanking` | Timeout for screen black-out or power-off |
+| Screen Power Off Time (Printing) | `screen_blanking_printing` | Same, but while printing |
+| Screen DPMS | `use_dpms` | Enable screen power management (not all screens support this) |
+| Screen wake delay | `screensaver_wake_delay` | Helps prevent unwanted touches during screen wake up |
+
+### Behaviour
+| Setting | Config key | What it does |
+| --- | --- | --- |
+| Action bar Shortcut | `side_shortcut_target` | What the action bar button opens: Notifications, Lock, Macros, Camera, LEDs |
+| Confirm Emergency Stop | `confirm_estop` | Ask for confirmation before stopping |
+| Shutdown Action | `shutdown_action` | Skip the confirmation and shut down the selected target (Host, Printer, Both). Always asks while printing |
+| Restart Action | `reboot_action` | Skip the confirmation and restart the selected target (Host, Printer, Both). Always asks while printing |
+| Auto-close notifications | `autoclose_popups` | Close messages after a timeout |
+
+### Printing
+| Setting | Config key | What it does |
+| --- | --- | --- |
+| Estimated Time Method | `print_estimate_method` | How the remaining time is calculated: auto, file, filament, slicer |
+| Auto-open Extrude On Pause | `auto_open_extrude` | Open the extrude panel automatically when a print is paused |
+
+### Others
+| Setting | Config key | What it does |
+| --- | --- | --- |
+| Enable Add-ons | `enable_addons` | Runs third-party code from the addons folder at startup. Not provided or reviewed by KlipperScreen developers. Takes effect after a restart |
+
+### Language
+| Setting | Config key | What it does |
+| --- | --- | --- |
+| Language | `language` | Switch the on-screen language |
+
+!!! note
+    A few other settings are editable in the UI but live on their own panels instead of the main Settings menu:
+
+    - **Move panel** → Invert X Y or Z, XY and Z Speeds (mm/s)
+    - **Files / Job panel** → Print View (thumbs or list), Print Sort Direction
+
+## Settings not changeable in the UI
+### Main Options
 ```{ .ini .no-copy }
 [main]
 
@@ -58,8 +111,8 @@ The options listed here are not editable from within the user interface.
 !!! tip
     It is strongly recommended that you do not add settings to the config file if you don't need them
 
-## Printer Options
-Multiple printers can be defined
+### Printer Options
+Multiple printers can be defined. Adding or editing a printer (including its `moonraker_host`/`moonraker_port`, shown under *Printer Connections* on the screen) is done here, in the config file.
 ```{ .ini .no-copy }
 # Define printer and name. Name is anything after the first printer word
 [printer MyPrinter]
@@ -129,7 +182,7 @@ moonraker_port: 7125
 # spool_low_limit: 20
 ```
 
-## Spoolman Options
+### Spoolman Options
 ```ini
 [spoolman]
 # Low limit for remaining spool weight in the title bar, in grams.
@@ -139,7 +192,7 @@ moonraker_port: 7125
 # sync_rate: 20
 ```
 
-## Preheat Options
+### Preheat Options
 
 !!! question "Added one the others disappeared, Is this normal?"
     Adding a custom preheat section will cause the defaults to not load, this is
@@ -170,13 +223,13 @@ for example:
 gcode: M107
 ```
 
-## Include files
+### Include files
 ```{ .ini .no-copy }
 # [include conf.d/*.conf]
 # Include another configuration file. Wildcards (*) will expand to match anything.
 ```
 
-## Menu
+### Menu
 This allows a custom configuration for the menu displayed while the printer is idle. You can use sub-menus to group
 different items and there are several panel options available. It is possible to have a gcode script run on a menu
 button press. There are two menus available in KlipperScreen, __main and __print. The __main menu is displayed while the
