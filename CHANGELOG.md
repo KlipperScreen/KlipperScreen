@@ -2,8 +2,18 @@
 This just tracks the most notable changes, if you want all the details checkout the commit history.
 Probably all versions contain changes regarding documentation, translation, fixes and other minor refactors
 
-## Current master
-
+## v0.4.8  (Oct 25, 2026)
+* show the natural language name for translations
+* organize settings into categories
+* add option to skip shutdown and restart confirmation
+* installer: allow installing without the backend
+* add ability to run addons at startup
+* show spoolman spool price
+* add mpc_calibrate
+* move: add carriage change for IDEX
+* wayland: initial dpms + weston support
+* show disk usage in system panel
+* spoolman: auto-scroll to active spool on open
 * add support to use Unix socket for lower overhead on local instances
 * improve the gcode file list load speed (tests show 100x faster on remote instances)
 * show z in bed_level
