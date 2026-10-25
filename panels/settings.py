@@ -75,8 +75,12 @@ class Panel(ScreenPanel):
         self.labels["lang"] = Gtk.Grid()
         self.labels["lang_menu"].add(self.labels["lang"])
         for lang in ["system_lang", *self._config.lang_list]:
+            if lang == "system_lang":
+                name = _("System language")
+            else:
+                name = f"{self._config.get_language_name(lang)} ({lang})"
             self.langs[lang] = {
-                "name": lang,
+                "name": name,
                 "type": "button",
                 "callback": self._screen.change_language,
             }

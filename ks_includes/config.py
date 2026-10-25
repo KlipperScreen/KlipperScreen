@@ -138,7 +138,10 @@ class KlipperScreenConfig:
     def create_translations(self):
         lang_path = os.path.join(klipperscreendir, "ks_includes", "locales")
         self.lang_list = [
-            d for d in os.listdir(lang_path) if not os.path.isfile(os.path.join(lang_path, d))
+            d
+            for d in os.listdir(lang_path)
+            if os.path.isdir(os.path.join(lang_path, d))
+            and os.path.isdir(os.path.join(lang_path, d, "LC_MESSAGES"))
         ]
         self.lang_list.sort()
         for lng in self.lang_list:
@@ -827,6 +830,47 @@ class KlipperScreenConfig:
 
     def get_lang(self):
         return self.lang
+
+    def get_language_name(self, lang):
+        """Return the native (endonym) name for a language code.
+
+        Falls back to the code itself for locales without a known name.
+        """
+        names = {
+            "ar": "العربية",
+            "bg": "Български",
+            "cs": "Čeština",
+            "da": "Dansk",
+            "de": "Deutsch",
+            "de_formal": "Deutsch (höflich)",
+            "en": "English",
+            "es": "Español",
+            "et": "Eesti",
+            "fa": "فارسی",
+            "fr": "Français",
+            "he": "עברית",
+            "hr": "Hrvatski",
+            "hu": "Magyar",
+            "it": "Italiano",
+            "jp": "日本語",
+            "ko": "한국어",
+            "lt": "Lietuvių",
+            "nl": "Nederlands",
+            "pl": "Polski",
+            "pt": "Português",
+            "pt_BR": "Português (Brasil)",
+            "rs": "Srpski",
+            "ru": "Русский",
+            "sk": "Slovenčina",
+            "sl": "Slovenščina",
+            "sv": "Svenska",
+            "tr": "Türkçe",
+            "uk": "Українська",
+            "vi": "Tiếng Việt",
+            "zh_CN": "简体中文",
+            "zh_TW": "繁體中文",
+        }
+        return names.get(lang, lang)
 
     def get_main_config(self):
         return self.config["main"]
