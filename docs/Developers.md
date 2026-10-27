@@ -69,6 +69,58 @@ pre-commit install
 
 This will automatically run `ruff check --fix` and `ruff format` on staged files before every commit.
 
+## Running the tests
+
+The tests are plain `unittest.TestCase` subclasses, so they run with either the
+standard-library `unittest` runner or [pytest](https://docs.pytest.org/). Run
+them from the repo root with the virtual environment activated:
+
+```bash
+# All tests
+python -m unittest discover -s tests
+python -m pytest tests/ -q
+
+# A single test file
+python -m unittest tests.test_sdbus_nm_async
+python -m unittest tests.test_network_panel_async
+python -m pytest tests/test_sdbus_nm_async.py -q
+python -m pytest tests/test_network_panel_async.py -q
+
+# A single test method
+python -m unittest tests.test_network_panel_async.NetworkPanelTests.test_init_schedules_discovery_and_builds_wifi_ui
+python -m pytest "tests/test_network_panel_async.py::NetworkPanelTests::test_init_schedules_discovery_and_builds_wifi_ui" -q
+```
+
+Each run prints a summary line such as `Ran 38 tests in 0.5s` / `53 passed`
+followed by `OK` (or a failure traceback). The tests do not need a display,
+NetworkManager, or a running printer — all D-Bus, GTK and GLib access is faked.
+
+## Writing tests
+
+New tests live in `tests/` and are plain `unittest.TestCase` subclasses.
+Conventions used here:
+
+* **Fakes over the real thing.** D-Bus proxies (`sdbus_async.networkmanager`)
+  are replaced with small fakes — `FakeNM`, `FakeDevice`, `FakeAP`, `Prop`, … —
+  that expose the same awaitable/async API the real bindings do. `Prop` is an
+  *awaitable* property (the real bindings use `await obj.prop`); methods use
+  `AsyncMock`. Call `build_sdbus()` to wire the fakes; it keeps the patches
+  active until `stop_all_patches()`.
+* **Identity gettext.** The app installs `_`/`ngettext` as builtins. Tests set
+  them in `setUp`/`tearDown` so the code under test can translate strings.
+* **Drive coroutines on a real loop.** Async code runs on a fresh `asyncio`
+  loop via `loop.run_until_complete(...)`, never `asyncio.run()` inside a GTK
+  callback. Panel tests drive scheduled coroutines with a small `drain()`
+  helper that yields to the loop until tasks settle.
+* **Fake GTK/GLib for panels.** Panel tests patch `Gtk`/`Pango`/`GLib` with
+  fakes and inject a fake screen and backend, so a `Panel` can be built and its
+  async scheduling, refresh coalescing and teardown verified without a display.
+
+Relevant files:
+
+* `tests/test_sdbus_nm_async.py` — the async `SdbusNm` backend.
+* `tests/test_network_panel_async.py` — the `panels.network` GTK panel.
+
 ## Optional: Configure the IDE
 
 * Set interpreter to the virtual environment created
