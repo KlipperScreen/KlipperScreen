@@ -34,3 +34,20 @@ known-first-party = ["ks_includes", "panels"]
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
+
+[tool.pytest.ini_options]
+# Test tiers:
+#   fidelity -- in-process, no compositor. Proves the fakes reflect reality.
+#   render   -- real GTK under headless Weston (Wayland only, no X11).
+#   indepth  -- opt-in deeper combinations (languages, multiple selectors).
+markers = [
+    "fidelity: in-process tests, no display server or compositor required",
+    "render: requires headless Weston (Wayland); real GTK allocation",
+    "indepth: opt-in deeper combinations (languages, selector sweeps)",
+]
+filterwarnings = [
+    # gi's GLib main-context pump (render tier) calls the deprecated
+    # asyncio.get_event_loop_policy() on Python 3.14; unfixable from our side.
+    "ignore:.*get_event_loop_policy.*:DeprecationWarning",
+]
+testpaths = ["tests"]

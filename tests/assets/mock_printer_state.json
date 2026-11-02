@@ -1,0 +1,71 @@
+{
+  "_comment": "Mock printer state for tests/preview_panel.py. Edit this file to change what panels render -- no code changes needed. 'live' is the deterministic active-print state (also the ceiling for --random). 'tempstore' drives the temp-graph time store.",
+  "tempstore": {
+    "size": 1200,
+    "ramp": 120,
+    "ambient": 23.0,
+    "targets": {
+      "heater_bed": 60.0,
+      "extruder": 205.0,
+      "heater_generic chamber": 45.0
+    }
+  },
+  "live": {
+    "print_stats": {
+      "state": "printing",
+      "filename": "Voron_Foot_Preview_Test_0.2mm_Layers_V2_Final_Release_Candidate_0001_lorem_ipsum_dolor_set_amet_consectetur_adipiscing_elit.gcode",
+      "filament_used": 5200,
+      "total_duration": 7382.0,
+      "print_duration": 5400.0,
+      "info": {
+        "current_layer": 231,
+        "total_layer": 500
+      }
+    },
+    "virtual_sdcard": {
+      "progress": 0.55,
+      "file_position": 550000.0
+    },
+    "toolhead": {
+      "extruder": "extruder",
+      "max_accel": 2000
+    },
+    "gcode_move": {
+      "gcode_position": [120.0, 110.0, 12.34, 1500.0],
+      "live_position": [120.0, 110.0, 12.34, 1500.0],
+      "extrude_factor": 1.0,
+      "speed_factor": 1.0,
+      "speed": 2400,
+      "homing_origin": [0.0, 0.0, 0.0]
+    },
+    "motion_report": {
+      "live_velocity": 120,
+      "live_extruder_velocity": 12.0
+    },
+    "extruder": {
+      "temperature": 200.0,
+      "target": 205.0,
+      "power": 0.6,
+      "pressure_advance": 0.05
+    },
+    "extruder1": {
+      "temperature": 200.0,
+      "target": 205.0,
+      "power": 0.6,
+      "pressure_advance": 0.05
+    },
+    "fan": {
+      "speed": 0.4
+    },
+    "heater_bed": {
+      "temperature": 60.0,
+      "target": 60.0,
+      "power": 0.6
+    },
+    "heater_generic chamber": {
+      "temperature": 40.0,
+      "target": 45.0,
+      "power": 0.6
+    }
+  }
+}

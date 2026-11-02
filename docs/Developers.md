@@ -74,6 +74,10 @@ This will automatically run `ruff check --fix` and `ruff format` on staged files
 * Set interpreter to the virtual environment created
 * Set the run configuration to `KlipperScreen/screen.py`
 
+## Testing panels
+
+For how panels are verified against the target hardware, see [Testing.md](Testing.md).
+
 # Add-ons
 
 Off by default. Turn on `Enable Add-ons` in Settings and restart -- it runs
