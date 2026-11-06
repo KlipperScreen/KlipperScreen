@@ -67,6 +67,12 @@ See the [Backends page](Backends.md) for a detailed comparison and installation 
     managed_services: KlipperScreen
     ```
 
+The network panel uses libnm through `gir1.2-nm-1.0`, available on Debian Bullseye,
+Bookworm and newer releases. The dependency is included in both the system dependency
+manifest and the legacy `install_script` upgrade path. The async sdbus compatibility backend
+remains installed and is selected automatically if the libnm bindings are unavailable.
+The installer reports the backend availability and displays the fallback deprecation notice.
+
 !!! tip
     If you see warnings in other UIs, ignore them until KlipperScreen finishes installing and Moonraker is restarted.
 

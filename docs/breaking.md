@@ -1,6 +1,12 @@
 Only breaking changes will be listed here.
 
 
+#### Next release
+* Replace the synchronous NetworkManager backend with asynchronous libnm.
+  Install `gir1.2-nm-1.0` on Debian/Ubuntu or `libnm` on Arch.
+  The Python `sdbus` and `sdbus_networkmanager` packages are no longer required.
+
+
 #### [2024_05_24](https://github.com/KlipperScreen/KlipperScreen/commit/524aa0e7dc2b27c93534d356ba19963b793f38d8)
 * Drop python 3.7 support, last version for it is v0.4.1: `git reset --hard v0.4.1`
 * Drop old WiFi manager, only maintain sdbus-networkmanager
