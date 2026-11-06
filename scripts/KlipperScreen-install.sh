@@ -7,6 +7,8 @@ KSENV="${KLIPPERSCREEN_VENV:-${HOME}/.KlipperScreen-env}"
 XSERVER="xinit xinput x11-xserver-utils xserver-xorg-input-evdev xserver-xorg-input-libinput xserver-xorg-legacy xserver-xorg-video-fbdev"
 CAGE="cage seatd"
 WESTON="weston seatd"
+# Older Moonraker update managers extract literal PKGLIST assignments.
+PKGLIST="gir1.2-nm-1.0"
 PYGOBJECT="libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0"
 MISC="librsvg2-common libopenjp2-7 libdbus-glib-1-dev autoconf python3-venv"
 OPTIONAL="fonts-nanum fonts-ipafont libmpv-dev"
@@ -167,6 +169,9 @@ install_packages()
         echo_error "Installation of PyGobject dependencies failed ($PYGOBJECT)"
         exit 1
     fi
+    if ! sudo apt install -y $PKGLIST; then
+        echo_error "WARNING: libnm bindings could not be installed. The async sdbus fallback remains available."
+    fi
     if sudo apt install -y $MISC; then
         echo_ok "Installed Misc packages"
     else
@@ -232,6 +237,21 @@ create_virtualenv()
     fi
     deactivate
     echo_ok "Virtual environment created"
+}
+
+report_network_backend()
+{
+    echo_text "Network panel: libnm is the preferred backend."
+    echo_text "The async sdbus compatibility backend is deprecated and remains available as a fallback."
+    if [[ "${KLIPPERSCREEN_NETWORK_BACKEND:-}" == "sdbus" ]]; then
+        echo_error "WARNING: the deprecated async sdbus fallback was explicitly selected."
+        echo_text "Remove KLIPPERSCREEN_NETWORK_BACKEND=sdbus to return to automatic selection."
+    elif "${KSENV}/bin/python" -c 'import gi; gi.require_version("NM", "1.0"); from gi.repository import NM' >/dev/null 2>&1; then
+        echo_ok "libnm GI bindings are available."
+    else
+        echo_error "WARNING: libnm GI bindings are unavailable; the network panel will use the async sdbus fallback."
+        echo_text "Install gir1.2-nm-1.0 to enable the preferred libnm backend."
+    fi
 }
 
 install_systemd_service()
@@ -423,6 +443,7 @@ fi
 
 install_packages
 create_virtualenv
+report_network_backend
 create_policy
 fix_fbturbo
 add_desktop_file
