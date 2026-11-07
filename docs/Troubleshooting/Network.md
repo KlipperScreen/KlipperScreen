@@ -28,32 +28,6 @@ If you lose network connection after installing Network-Manager, follow these st
 
 The initial scan may take a while, first be patient before assuming it's an issue. and check with other tools like `nmtui`
 
-## Hidden networks
-
-Select **Hidden network**, enter the SSID and choose the security type, then enter
-its credentials and save. The network does not need to appear in the scan results.
-Use the connect button in the network list to reuse a saved profile without
-entering its credentials again.
-
-## Compatibility backend
-
-KlipperScreen automatically uses the async sdbus backend from
-[PR #1791](https://github.com/KlipperScreen/KlipperScreen/pull/1791) when the libnm
-GI bindings are unavailable. The installer displays the compatibility backend's
-deprecation notice and warns when fallback is needed. Backend selection is also
-recorded in the runtime log.
-
-To explicitly select the compatibility backend, run `sudo systemctl edit KlipperScreen`
-and add:
-
-```ini
-[Service]
-Environment=KLIPPERSCREEN_NETWORK_BACKEND=sdbus
-```
-
-Restart KlipperScreen with `sudo systemctl restart KlipperScreen`. Remove that
-`Environment` line and restart again to return to automatic backend selection.
-
 ## Permission error
 Usually permissions are set with the installer, try to update and then re-run the installer and reboot
 
