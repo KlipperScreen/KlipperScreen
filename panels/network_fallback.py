@@ -1,4 +1,3 @@
-# Async compatibility panel from alfrix/KlipperScreen PR #1791 (41b3d19).
 import asyncio
 import logging
 import os

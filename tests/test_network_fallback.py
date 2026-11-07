@@ -22,9 +22,9 @@ class FallbackSelectionTests(unittest.TestCase):
         # Import GI modules before patch.dict restores sys.modules. GTypes
         # cannot be registered twice when this file is run on its own.
         importlib.import_module("panels.network")
-        fallback = ModuleType("ks_includes.network_legacy")
+        fallback = ModuleType("panels.network_legacy")
         fallback.Panel = type("LegacyPanel", (), {})
-        modules = {"ks_includes.network_legacy": fallback}
+        modules = {"panels.network_legacy": fallback}
         if missing_nm:
             modules["ks_includes.gio_nm"] = None
         path = Path(__file__).resolve().parents[1] / "panels/network.py"

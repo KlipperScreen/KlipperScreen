@@ -611,11 +611,9 @@ class Panel(ScreenPanel):
             self.nm.set_wireless_enabled(switch.get_active())
 
 
-# Preserve the pre-libnm backend for installations upgraded without the new GI
-# package, and allow explicitly selecting it during the transition.
 if NM_IMPORT_ERROR is not None or os.environ.get("KLIPPERSCREEN_NETWORK_BACKEND") == "sdbus":
     try:
-        from ks_includes.network_legacy import Panel as LegacyPanel
+        from panels.network_fallback import Panel as LegacyPanel
     except (ImportError, ValueError):
         logging.exception("Legacy NetworkManager backend is unavailable")
     else:
