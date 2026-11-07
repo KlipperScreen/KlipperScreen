@@ -260,10 +260,7 @@ class Panel(ScreenPanel):
                 return self.mesh_origin[0] - self.x_offset, self.mesh_origin[1] - self.y_offset
             return self.mesh_origin[0], self.mesh_origin[1]
 
-        x, y = self._calculate_position()
-        if apply_probe_offset:
-            return x, y
-        return x + self.x_offset, y + self.y_offset
+        return self._calculate_position(apply_probe_offset=apply_probe_offset)
 
     def _get_safe_z(self):
         safe_z = self._printer.get_config_section("safe_z_home")
@@ -275,7 +272,7 @@ class Panel(ScreenPanel):
             self.z_hop_speed = float(safe_z["z_hop_speed"])
         return safe_z_xy[0], safe_z_xy[1]
 
-    def _calculate_position(self):
+    def _calculate_position(self, apply_probe_offset=True):
         if self.mesh_max and self.mesh_min:
             mesh_mid_x = (self.mesh_min[0] + self.mesh_max[0]) / 2
             mesh_mid_y = (self.mesh_min[1] + self.mesh_max[1]) / 2
