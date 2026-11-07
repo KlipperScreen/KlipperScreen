@@ -613,12 +613,12 @@ class Panel(ScreenPanel):
 
 if NM_IMPORT_ERROR is not None or os.environ.get("KLIPPERSCREEN_NETWORK_BACKEND") == "sdbus":
     try:
-        from panels.network_fallback import Panel as LegacyPanel
+        from panels.network_fallback import Panel as FallbackPanel
     except (ImportError, ValueError):
-        logging.exception("Legacy NetworkManager backend is unavailable")
+        logging.exception("Fallback NetworkManager backend is unavailable")
     else:
         logging.info(
             "Using the async sdbus compatibility backend (%s)",
             NM_IMPORT_ERROR or "requested by KLIPPERSCREEN_NETWORK_BACKEND",
         )
-        Panel = LegacyPanel
+        Panel = FallbackPanel

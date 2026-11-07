@@ -22,9 +22,9 @@ class FallbackSelectionTests(unittest.TestCase):
         # Import GI modules before patch.dict restores sys.modules. GTypes
         # cannot be registered twice when this file is run on its own.
         importlib.import_module("panels.network")
-        fallback = ModuleType("panels.network_legacy")
-        fallback.Panel = type("LegacyPanel", (), {})
-        modules = {"panels.network_legacy": fallback}
+        fallback = ModuleType("panels.network_fallback")
+        fallback.Panel = type("FallbackPanel", (), {})
+        modules = {"panels.network_fallback": fallback}
         if missing_nm:
             modules["ks_includes.gio_nm"] = None
         path = Path(__file__).resolve().parents[1] / "panels/network.py"
@@ -37,17 +37,17 @@ class FallbackSelectionTests(unittest.TestCase):
             spec.loader.exec_module(module)
         return module.Panel, fallback.Panel
 
-    def test_missing_nm_automatically_selects_legacy_panel(self):
-        selected, legacy = self.load_panel(missing_nm=True)
-        self.assertIs(selected, legacy)
+    def test_missing_nm_automatically_selects_fallback_panel(self):
+        selected, fallback_panel = self.load_panel(missing_nm=True)
+        self.assertIs(selected, fallback_panel)
 
-    def test_explicit_override_selects_legacy_panel(self):
-        selected, legacy = self.load_panel(forced=True)
-        self.assertIs(selected, legacy)
+    def test_explicit_override_selects_fallback_panel(self):
+        selected, fallback_panel = self.load_panel(forced=True)
+        self.assertIs(selected, fallback_panel)
 
     def test_libnm_is_the_default_when_available(self):
-        selected, legacy = self.load_panel()
-        self.assertIsNot(selected, legacy)
+        selected, fallback_panel = self.load_panel()
+        self.assertIsNot(selected, fallback_panel)
 
 
 if __name__ == "__main__":
