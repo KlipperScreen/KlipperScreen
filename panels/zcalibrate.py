@@ -220,7 +220,10 @@ class Panel(ScreenPanel):
             self._screen._ws.api.gcode_script("BED_MESH_CLEAR")
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
             self._screen._ws.api.gcode_script("G28")
-        self._move_to_position(*self._get_calibration_location())
+        apply_probe_offset = not command.startswith("Z_ENDSTOP_CALIBRATE")
+        self._move_to_position(
+            *self._get_calibration_location(apply_probe_offset=apply_probe_offset)
+        )
         self._screen._ws.api.gcode_script(command)
 
     def _move_to_position(self, x, y):
@@ -232,7 +235,7 @@ class Panel(ScreenPanel):
         logging.info(f"Moving to X:{x} Y:{y}")
         self._screen._ws.api.gcode_script(f"G90\nG0 X{x} Y{y} F3000")
 
-    def _get_calibration_location(self):
+    def _get_calibration_location(self, apply_probe_offset=True):
         if self.ks_printer_cfg is not None:
             x = self.ks_printer_cfg.getfloat("calibrate_x_position", None)
             y = self.ks_printer_cfg.getfloat("calibrate_y_position", None)
@@ -242,7 +245,9 @@ class Panel(ScreenPanel):
 
         if self.zero_ref:
             logging.debug(f"Using zero reference position: {self.zero_ref}")
-            return self.zero_ref[0] - self.x_offset, self.zero_ref[1] - self.y_offset
+            if apply_probe_offset:
+                return self.zero_ref[0] - self.x_offset, self.zero_ref[1] - self.y_offset
+            return self.zero_ref[0], self.zero_ref[1]
 
         if (
             "safe_z_home" in self._printer.get_config_section_list()
@@ -251,10 +256,11 @@ class Panel(ScreenPanel):
             return self._get_safe_z()
         if self.mesh_radius or "delta" in self._printer.get_config_section("printer")["kinematics"]:
             logging.info(f"Round bed calibrating at {self.mesh_origin}")
-            return self.mesh_origin[0] - self.x_offset, self.mesh_origin[1] - self.y_offset
+            if apply_probe_offset:
+                return self.mesh_origin[0] - self.x_offset, self.mesh_origin[1] - self.y_offset
+            return self.mesh_origin[0], self.mesh_origin[1]
 
-        x, y = self._calculate_position()
-        return x, y
+        return self._calculate_position(apply_probe_offset=apply_probe_offset)
 
     def _get_safe_z(self):
         safe_z = self._printer.get_config_section("safe_z_home")
@@ -266,12 +272,14 @@ class Panel(ScreenPanel):
             self.z_hop_speed = float(safe_z["z_hop_speed"])
         return safe_z_xy[0], safe_z_xy[1]
 
-    def _calculate_position(self):
+    def _calculate_position(self, apply_probe_offset=True):
         if self.mesh_max and self.mesh_min:
             mesh_mid_x = (self.mesh_min[0] + self.mesh_max[0]) / 2
             mesh_mid_y = (self.mesh_min[1] + self.mesh_max[1]) / 2
             logging.debug(f"Probe in the mesh center X:{mesh_mid_x} Y:{mesh_mid_y}")
-            return mesh_mid_x - self.x_offset, mesh_mid_y - self.y_offset
+            if apply_probe_offset:
+                return mesh_mid_x - self.x_offset, mesh_mid_y - self.y_offset
+            return mesh_mid_x, mesh_mid_y
         try:
             mid_x = float(self._printer.get_config_section("stepper_x")["position_max"]) / 2
             mid_y = float(self._printer.get_config_section("stepper_y")["position_max"]) / 2
@@ -279,7 +287,9 @@ class Panel(ScreenPanel):
             logging.error("Couldn't get max position from stepper_x and stepper_y")
             return None, None
         logging.debug(f"Probe in the center X:{mid_x} Y:{mid_y}")
-        return mid_x - self.x_offset, mid_y - self.y_offset
+        if apply_probe_offset:
+            return mid_x - self.x_offset, mid_y - self.y_offset
+        return mid_x, mid_y
 
     def activate(self):
         if self._printer.get_stat("manual_probe", "is_active"):
