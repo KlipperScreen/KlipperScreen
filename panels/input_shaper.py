@@ -61,7 +61,10 @@ class Panel(ScreenPanel):
             axis_lbl.set_markup(f"<b>{dim_freq['name']}</b>")
 
             self.freq_xy_adj[dim_freq["config"]] = Gtk.Adjustment(
-                0, dim_freq["min"], dim_freq["max"], 0.1
+                value=0,
+                lower=dim_freq["min"],
+                upper=dim_freq["max"],
+                step_increment=0.1,
             )
             scale = Gtk.Scale(
                 adjustment=self.freq_xy_adj[dim_freq["config"]],

@@ -140,7 +140,8 @@ class Panel(MenuPanel):
             image, self.prettify(devname), None, self.bts, Gtk.PositionType.LEFT, 1
         )
         name.connect("clicked", self.toggle_visibility, device)
-        name.set_alignment(0, 0.5)
+        name.props.xalign = 0
+        name.props.yalign = 0.5
         name.get_style_context().add_class(class_name)
         visible = self._config.get_config().getboolean(
             f"graph {self._screen.state.printer_name}", device, fallback=True

@@ -119,7 +119,7 @@ class Panel(ScreenPanel):
                 ctx.add_class("horizontal_togglebuttons_active")
             distgrid.attach(self.widgets[i], j, 0, 1, 1)
 
-        self.widgets["move_dist"] = Gtk.Label(_("Move Distance (mm)"))
+        self.widgets["move_dist"] = Gtk.Label(label=_("Move Distance (mm)"))
         distances = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         distances.pack_start(self.widgets["move_dist"], True, True, 0)
         distances.pack_start(distgrid, True, True, 0)

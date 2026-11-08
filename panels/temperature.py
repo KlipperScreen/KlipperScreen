@@ -363,7 +363,8 @@ class Panel(ScreenPanel):
         name = self._gtk.Button(
             image, self.prettify(devname), None, self.bts, Gtk.PositionType.LEFT, 1
         )
-        name.set_alignment(0, 0.5)
+        name.props.xalign = 0
+        name.props.yalign = 0.5
         name.get_style_context().add_class(class_name)
         visible = self._config.get_config().getboolean(
             f"graph {self._screen.state.printer_name}", device, fallback=True
@@ -511,7 +512,7 @@ class Panel(ScreenPanel):
         self.labels["devices"].get_style_context().add_class("heater-grid")
 
         name = Gtk.Label()
-        temp = Gtk.Label(_("Temp (°C)"))
+        temp = Gtk.Label(label=_("Temp (°C)"))
 
         self.labels["devices"].attach(name, 0, 0, 1, 1)
         self.labels["devices"].attach(temp, 1, 0, 1, 1)

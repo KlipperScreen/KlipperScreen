@@ -57,7 +57,7 @@ class Panel(ScreenPanel):
         self.wifi_toggle_box.add(self.wifi_toggle_switch)
         sbox = Gtk.Box(hexpand=True, vexpand=False)
         if not self._screen.vertical_mode:
-            sbox.add(Gtk.Label(_("Interface") + ": "))
+            sbox.add(Gtk.Label(label=_("Interface") + ": "))
         sbox.add(self.interface_box)
         sbox.add(self.labels["ip"])
         sbox.add(self.reload_button)

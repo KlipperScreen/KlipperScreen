@@ -264,7 +264,8 @@ class Panel(ScreenPanel):
 
         comment = _("Comment") + ": " + (getattr(self.spool, "comment", None) or "-")
         comment_lbl = Gtk.Label(label=comment, wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
-        comment_lbl.set_alignment(0.0, 0.0)
+        comment_lbl.props.xalign = 0.0
+        comment_lbl.props.yalign = 0.0
         comment_area = self._gtk.ScrolledWindow()
         comment_area.add(comment_lbl)
         info_box.pack_start(comment_area, True, True, 0)

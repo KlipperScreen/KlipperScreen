@@ -139,11 +139,11 @@ class Panel(ScreenPanel):
             speedgrid.attach(self.labels[f"speed{i}"], j, 0, 1, 1)
 
         distbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        self.labels["extrude_dist"] = Gtk.Label(_("Distance (mm)"))
+        self.labels["extrude_dist"] = Gtk.Label(label=_("Distance (mm)"))
         distbox.pack_start(self.labels["extrude_dist"], True, True, 0)
         distbox.add(distgrid)
         speedbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        self.labels["extrude_speed"] = Gtk.Label(_("Speed (mm/s)"))
+        self.labels["extrude_speed"] = Gtk.Label(label=_("Speed (mm/s)"))
         speedbox.pack_start(self.labels["extrude_speed"], True, True, 0)
         speedbox.add(speedgrid)
 

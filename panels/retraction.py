@@ -117,7 +117,14 @@ class Panel(ScreenPanel):
         minimum = 1 if option in ["retract_speed", "unretract_speed"] else 0
         self.values[option] = value
         # adj (value, lower, upper, step_increment, page_increment, page_size)
-        adj = Gtk.Adjustment(value, minimum, maxval, 1, 5, 0)
+        adj = Gtk.Adjustment(
+            value=value,
+            lower=minimum,
+            upper=maxval,
+            step_increment=1,
+            page_increment=5,
+            page_size=0,
+        )
         scale = Gtk.Scale(adjustment=adj, digits=digits, hexpand=True, has_origin=True)
         scale.get_style_context().add_class("option_slider")
         scale.connect("button-release-event", self.set_opt_value, option)

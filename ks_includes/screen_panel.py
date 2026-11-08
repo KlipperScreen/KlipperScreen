@@ -167,15 +167,15 @@ class ScreenPanel:
         if seconds is None or seconds < 1:
             return "-"
         days = seconds // 86400
-        d_unit = ngettext("day", "days", days)
+        d_unit = ngettext("day", "days", int(days))
         seconds %= 86400
         hours = seconds // 3600
-        h_unit = ngettext("hour", "hours", hours)
+        h_unit = ngettext("hour", "hours", int(hours))
         seconds %= 3600
         minutes = seconds // 60
-        m_unit = ngettext("minute", "minutes", minutes)
+        m_unit = ngettext("minute", "minutes", int(minutes))
         seconds %= 60
-        s_unit = ngettext("second", "seconds", seconds)
+        s_unit = ngettext("second", "seconds", int(seconds))
         return (
             f"{f'{days:2.0f}{spc}{d_unit}{spc}' if days > 0 else ''}"
             f"{f'{hours:2.0f}{spc}{h_unit}{spc}' if hours > 0 else ''}"

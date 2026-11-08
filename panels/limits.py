@@ -109,7 +109,14 @@ class Panel(ScreenPanel):
 
         # adj (value, lower, upper, step_increment, page_increment, page_size)
         max_value = option["max"] if "max" in option else option["value"] * 1.5
-        adj = Gtk.Adjustment(option["value"], 1, max_value, 1, 5, 0)
+        adj = Gtk.Adjustment(
+            value=option["value"],
+            lower=1,
+            upper=max_value,
+            step_increment=1,
+            page_increment=5,
+            page_size=0,
+        )
         scale = Gtk.Scale(adjustment=adj, digits=0, hexpand=True, has_origin=True)
         scale.get_style_context().add_class("option_slider")
         scale.connect("button-release-event", self.set_opt_value, option)

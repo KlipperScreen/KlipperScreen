@@ -16,7 +16,7 @@ class ComboBoxPlus(Gtk.ComboBox):
         self._store = None
         super().__init__(*args, **kwargs)
         self._last_open_time = 0
-        self.set_focus_on_click(False)
+        self.set_property("focus-on-click", False)
         self.connect("notify::popup-shown", self._on_popup_shown)
 
     def append(self, value, text):

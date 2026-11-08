@@ -126,7 +126,7 @@ class Panel(ScreenPanel):
                     self.macros[macro]["params"].update({result["param"]: entry})
 
         for param in self.macros[macro]["params"]:
-            labels.add(Gtk.Label(param))
+            labels.add(Gtk.Label(label=param))
             self.macros[macro]["params"][param].connect("touch-event", self.show_keyboard)
             self.macros[macro]["params"][param].connect("button-press-event", self.show_keyboard)
             self.macros[macro]["params"][param].connect(

@@ -95,7 +95,7 @@ class Panel(ScreenPanel):
 
         self.top_bar = Gtk.Box(hexpand=True, vexpand=False)
         if not self._screen.vertical_mode:
-            self.top_bar.add(Gtk.Label(_("Interface") + ": "))
+            self.top_bar.add(Gtk.Label(label=_("Interface") + ": "))
         self.iface_pos = 0 if self._screen.vertical_mode else 1
         self.labels["interface"] = Gtk.Label(hexpand=True, halign=Gtk.Align.START)
         self.top_bar.add(self.labels["interface"])

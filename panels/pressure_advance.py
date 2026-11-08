@@ -62,12 +62,12 @@ class Panel(ScreenPanel):
         name_label.set_markup(f"<big><b>{optname}</b></big> ({units})")
 
         adjustment = Gtk.Adjustment(
-            value,
-            0,
-            maxval,
-            0.05 if option.startswith("pressure") else 0.005,
-            0.1 if option.startswith("pressure") else 0.01,
-            0,
+            value=value,
+            lower=0,
+            upper=maxval,
+            step_increment=0.05 if option.startswith("pressure") else 0.005,
+            page_increment=0.1 if option.startswith("pressure") else 0.01,
+            page_size=0,
         )
 
         scale = Gtk.Scale(
