@@ -107,6 +107,20 @@ class SdbusNm:
             )
             return
 
+    @property
+    def wlan_device(self):
+        # NetworkManager re-creates the Wi-Fi device under a new D-Bus path when the radio
+        # is toggled, so the cached proxy may point to an object that no longer exists
+        device = self._wlan_device
+        if device is None or device._dbus.object_path not in self.nm.get_devices():
+            wireless = self.get_wireless_interfaces()
+            self._wlan_device = wireless[0] if wireless else None
+        return self._wlan_device
+
+    @wlan_device.setter
+    def wlan_device(self, device):
+        self._wlan_device = device
+
     def ensure_nm_running(self):
         try:
             status = subprocess.run(["systemctl", "is-active", "--quiet", "NetworkManager"])
