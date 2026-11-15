@@ -2,6 +2,9 @@
 This just tracks the most notable changes, if you want all the details checkout the commit history.
 Probably all versions contain changes regarding documentation, translation, fixes and other minor refactors
 
+#### Next release
+* Replace sdbus_block backend with async libnm with fallback.
+
 ## v0.4.8  (Oct 25, 2026)
 * show the natural language name for translations
 * organize settings into categories
