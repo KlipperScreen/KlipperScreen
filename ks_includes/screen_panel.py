@@ -7,6 +7,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Pango
 
 from ks_includes.KlippyGtk import find_widget
+from ks_includes.widgets.combo import ComboBoxPlus
 
 
 class ScreenPanel:
@@ -137,7 +138,7 @@ class ScreenPanel:
         tree_iter = combo.get_active_iter()
         if tree_iter is not None:
             model = combo.get_model()
-            value = model[tree_iter][1]
+            value = model[tree_iter][0]
             logging.debug(f"[{section}] {option} changed to {value}")
             self._config.set(section, option, value)
             self._config.save_user_config_options()
@@ -309,7 +310,7 @@ class ScreenPanel:
             row_box.add(switch)
             setting = {opt_name: switch}
         elif option["type"] == "dropdown":
-            dropdown = Gtk.ComboBoxText()
+            dropdown = ComboBoxPlus()
             for i, opt in enumerate(option["options"]):
                 dropdown.append(opt["value"], opt["name"])
                 if opt["value"] == self._config.get_config()[option["section"]].get(
