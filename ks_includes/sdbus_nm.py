@@ -219,6 +219,20 @@ class SdbusNm:
                 continue
         self.wifi = self.wlan_device is not None
 
+    async def _refresh_wlan_device_if_stale(self):
+        """Re-resolve the cached wireless device if NM moved its path.
+
+        NetworkManager can re-create the wireless device under a new D-Bus path
+        (e.g. after a radio toggle), leaving ``wlan_device`` pointing at a path
+        that no longer exists. When the cached path is no longer listed, re-run
+        :meth:`_resolve_wireless_device` so later accesses don't fail with a
+        stale-object error.
+        """
+        if self.wlan_device is None or self.wlan_device_path is None:
+            return
+        if self.wlan_device_path not in await self.nm.get_devices():
+            await self._resolve_wireless_device()
+
     async def get_interfaces(self):
         interfaces = []
         for device in await self.nm.get_devices():
@@ -361,6 +375,7 @@ class SdbusNm:
 
     async def get_networks(self):
         networks = []
+        await self._refresh_wlan_device_if_stale()
         if self.wlan_device is None:
             return networks
         try:
@@ -567,6 +582,7 @@ class SdbusNm:
             return {"error": "unknown", "message": _("Couldn't add network") + f"\n{e}"}
 
     async def _wifi_interface(self):
+        await self._refresh_wlan_device_if_stale()
         if self.wlan_device is not None:
             try:
                 return await self.wlan_device.interface
@@ -575,6 +591,7 @@ class SdbusNm:
         return None
 
     async def disconnect_network(self):
+        await self._refresh_wlan_device_if_stale()
         if self.wlan_device is None:
             return
         try:
@@ -651,6 +668,8 @@ class SdbusNm:
         except Exception as e:
             logging.exception("Failed to toggle wifi")
             self.popup(f"Unexpected error: {e}")
+            return
+        await self._resolve_wireless_device()
 
     async def is_wifi_enabled(self):
         return await self.nm.wireless_enabled
