@@ -19,6 +19,8 @@ User=KS_USER
 SupplementaryGroups=klipperscreen
 WorkingDirectory=KS_DIR
 Environment="KS_XCLIENT=KS_ENV/bin/python KS_DIR/screen.py" BACKEND=KS_BACKEND
+# Drop CAP_WAKE_ALARM: pam_systemd grants it to PAMName= services and it breaks Glycin's bwrap SVG sandbox.
+CapabilityBoundingSet=~CAP_WAKE_ALARM
 ExecStart="KS_DIR/scripts/KlipperScreen-start.sh"
 ExecStartPost=+chvt 7
 
