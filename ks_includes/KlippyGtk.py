@@ -62,7 +62,7 @@ class KlippyGtk:
         self.width = width
         self.height = height
         self.ultra_tall = (height / width) >= 3
-        self.font_ratio = [28, 42] if vertical_mode else [40, 27]
+        self.font_ratio = [30, 42] if vertical_mode else [40, 27]
         self.font_size = min(width / self.font_ratio[0], height / self.font_ratio[1])
         self.img_scale = self.font_size * 2
         self.button_image_scale = 1.38
@@ -74,9 +74,9 @@ class KlippyGtk:
             self.img_scale *= 0.7
             self.bsidescale = 0.7
         elif self.font_size_type == "extralarge":
-            self.font_size *= 1.05
+            self.font_size *= 1.03
             self.img_scale *= 0.7
-            self.bsidescale = 1.0
+            self.bsidescale = 0.8
         elif self.font_size_type == "large":
             self.font_size *= 1.025
             self.img_scale *= 0.85
