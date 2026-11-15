@@ -77,6 +77,12 @@ def get_encryption(flags: int) -> str:
     return " ".join(labels)
 
 
+def enum_label(value) -> str:
+    """Render a gi enum member for logs, e.g. NM.DeviceState.ACTIVATED -> 'activated'."""
+    nick = getattr(value, "value_nick", None)
+    return nick if nick else str(value)
+
+
 def wifi_channel(frequency: int) -> tuple:
     if frequency == 2484:
         return "2.4", "14"
@@ -396,7 +402,12 @@ class NetworkManagerClient:
         previous = self.device_states.get(interface)
         self.device_states[interface] = state
         if self.active and interface == self.interface and previous != state:
-            logging.debug("Wi-Fi state changed: %s %s", state, device.get_state_reason())
+            reason = device.get_state_reason()
+            previous_label = enum_label(previous) if previous is not None else "-"
+            message = f"Wi-Fi state changed: {previous_label} -> {enum_label(state)}"
+            if reason != NM.DeviceStateReason.NONE:
+                message += f" ({enum_label(reason)})"
+            logging.debug(message)
         if schedule:
             self._changed()
 
