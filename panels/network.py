@@ -74,8 +74,9 @@ class Panel(ScreenPanel):
         self.labels["main_box"].pack_start(sbox, False, False, 5)
         self.labels["main_box"].pack_start(self.scroll, True, True, 0)
         self.hidden_button = self._gtk.Button(
-            "network", _("Hidden network"), "color2", self.bts, Gtk.PositionType.LEFT
+            "increase", _("Add Network"), "color2", self.bts, Gtk.PositionType.LEFT
         )
+        self.hidden_button.set_vexpand(False)
         self.hidden_button.set_no_show_all(True)
         self.hidden_button.connect("clicked", lambda _widget: self.show_add_network())
         self.labels["main_box"].pack_start(self.hidden_button, False, False, 0)
