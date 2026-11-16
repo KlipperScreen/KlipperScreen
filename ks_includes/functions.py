@@ -91,6 +91,13 @@ def parse_bool(value):
     return value.lower() == "true"
 
 
+def pad_number(value, width, decimals=0):
+    """Format a number right-aligned in a field whose rendered width does not depend
+    on how many digits it has."""
+    # U+2007 FIGURE SPACE is as wide as a digit; an ASCII space is narrower in proportional fonts
+    return f"{value:{width}.{decimals}f}".replace(" ", " ")
+
+
 def patch_threading_excepthook():
     """Installs our exception handler into the threading modules Thread object
     Inspired by https://bugs.python.org/issue1230540
