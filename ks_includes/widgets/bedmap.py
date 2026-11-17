@@ -55,7 +55,7 @@ class BedMap(Gtk.DrawingArea):
             self.mesh_max = new_max
             self.mesh_min = new_min
             self.bm = [list(reversed(b)) for b in list(reversed(bm))]
-        if self.invert_y:
+        elif self.invert_y:
             new_max = [self.mesh_max[0], self.mesh_min[1]]
             new_min = [self.mesh_min[0], self.mesh_max[1]]
             self.mesh_max = new_max
