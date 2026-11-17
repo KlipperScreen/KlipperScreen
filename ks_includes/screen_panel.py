@@ -6,6 +6,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Pango
 
+from ks_includes.functions import pad_number
 from ks_includes.KlippyGtk import find_widget
 from ks_includes.widgets.combo import ComboBoxPlus
 
@@ -240,15 +241,16 @@ class ScreenPanel:
         return name
 
     def update_temp(self, dev, temp, target, power, lines=1, digits=1):
-        new_label_text = f"{temp or 0:.{digits}f}"
+        temp_width = 3 + (digits + 1 if digits else 0)
+        new_label_text = pad_number(temp or 0, temp_width, digits)
         if self._printer.device_has_target(dev) and target:
-            new_label_text += f"/{target:.0f}"
+            new_label_text += f"/{pad_number(target, 3)}"
         if dev not in self.devices:
             new_label_text += "°"
 
         show_power = self._show_heater_power and power
         if show_power:
-            new_label_text += f" {power * 100:3.0f}%"
+            new_label_text += f" {pad_number(power * 100, 3)}%"
 
         if dev in self.labels:
             # Job_Status

@@ -11,6 +11,7 @@ from time import time
 
 from gi.repository import GLib, Gtk, Pango
 
+from ks_includes.functions import pad_number
 from ks_includes.KlippyGtk import find_widget
 from ks_includes.screen_panel import ScreenPanel
 
@@ -607,11 +608,11 @@ class Panel(ScreenPanel):
                 )
             if "extrude_factor" in data["gcode_move"]:
                 self.extrusion = round(float(data["gcode_move"]["extrude_factor"]) * 100)
-                self.labels["extrude_factor"].set_label(f"{self.extrusion:3}%")
+                self.labels["extrude_factor"].set_label(f"{pad_number(self.extrusion, 3)}%")
             if "speed_factor" in data["gcode_move"]:
                 self.speed = round(float(data["gcode_move"]["speed_factor"]) * 100)
                 self.speed_factor = float(data["gcode_move"]["speed_factor"])
-                self.labels["speed_factor"].set_label(f"{self.speed:3}%")
+                self.labels["speed_factor"].set_label(f"{pad_number(self.speed, 3)}%")
             if "speed" in data["gcode_move"]:
                 self.req_speed = round(float(data["gcode_move"]["speed"]) / 60 * self.speed_factor)
                 mms_unit = (
@@ -620,7 +621,8 @@ class Panel(ScreenPanel):
                     else ""
                 )
                 self.labels["req_speed"].set_label(
-                    f"{self.speed}% {self.vel:3.0f}/{self.req_speed:3.0f} {mms_unit}"
+                    f"{pad_number(self.speed, 3)}% "
+                    f"{pad_number(self.vel, 3)}/{pad_number(self.req_speed, 3)} {mms_unit}"
                 )
                 self.buttons["speed"].set_label(self.labels["req_speed"].get_label())
             if "homing_origin" in data["gcode_move"]:
@@ -653,7 +655,8 @@ class Panel(ScreenPanel):
                     else ""
                 )
                 self.labels["req_speed"].set_label(
-                    f"{self.speed}% {self.vel:3.0f}/{self.req_speed:3.0f} {mms_unit}"
+                    f"{pad_number(self.speed, 3)}% "
+                    f"{pad_number(self.vel, 3)}/{pad_number(self.req_speed, 3)} {mms_unit}"
                 )
                 self.buttons["speed"].set_label(self.labels["req_speed"].get_label())
             if "live_extruder_velocity" in data["motion_report"]:
@@ -662,7 +665,7 @@ class Panel(ScreenPanel):
                 )
         fan_label = ""
         for fan in self.fans:
-            self.fans[fan]["speed"] = f"{self._printer.get_fan_speed(fan) * 100:3.0f}%"
+            self.fans[fan]["speed"] = f"{pad_number(self._printer.get_fan_speed(fan) * 100, 3)}%"
             fan_label += f" {self.fans[fan]['name']}{self.fans[fan]['speed']}"
         if fan_label:
             self.buttons["fan"].set_label(fan_label[:12])
@@ -707,7 +710,9 @@ class Panel(ScreenPanel):
         self.flowrate = median(self.flowstore)
         self.flowstore = []
         self.labels["flowrate"].set_label(f"{self.flowrate:.1f} {self.mms3}")
-        self.buttons["extrusion"].set_label(f"{self.extrusion:3}% {self.flowrate:5.1f} {self.mms3}")
+        self.buttons["extrusion"].set_label(
+            f"{pad_number(self.extrusion, 3)}% {pad_number(self.flowrate, 5, 1)} {self.mms3}"
+        )
         return True
 
     def update_time_left(self):

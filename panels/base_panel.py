@@ -13,6 +13,7 @@ from math import log
 from gi.repository import GdkPixbuf, Gio, GLib, Gtk, Pango
 from jinja2 import Environment
 
+from ks_includes.functions import pad_number
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.svg_gradient import apply_filament_gradient, filament_colors_from_dict
 
@@ -507,7 +508,7 @@ class BasePanel(ScreenPanel):
                     elif self.titlebar_name_type == "short":
                         name = device.split()[1] if len(device.split()) > 1 else device
                         name = f"{name[:1].upper()}: "
-                self.titlebar_labels[device].set_label(f"{name}{temp:.0f}°")
+                self.titlebar_labels[device].set_label(f"{name}{pad_number(temp, 3)}°")
 
         if (
             self.current_extruder
@@ -683,7 +684,7 @@ class BasePanel(ScreenPanel):
             self.labels["battery_icon"].set_from_pixbuf(
                 self.get_battery_icon(battery.percent, battery.power_plugged)
             )
-            self.labels["battery"].set_text(f"{battery.percent:.0f}%")
+            self.labels["battery"].set_text(f"{pad_number(battery.percent, 3)}%")
             self.control["battery_box"].show()
             return True
         else:
