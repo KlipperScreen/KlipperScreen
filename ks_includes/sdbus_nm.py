@@ -117,6 +117,7 @@ class SdbusNm:
         self.wifi_state = -1
         self.monitor_connection = False
         self._selected_interface = None
+        self._unverified_connection = None
 
         self._bus = bus if bus is not None else sdbus.sd_bus_open_system()
         sdbus.set_default_bus(self._bus)
@@ -566,7 +567,7 @@ class SdbusNm:
             }
 
         try:
-            await self.settings.add_connection(properties)
+            self._unverified_connection = await self.settings.add_connection(properties)
             return {"status": "success"}
         except exceptions.NmSettingsPermissionDeniedError:
             logging.exception("Insufficient privileges")
@@ -733,6 +734,7 @@ class SdbusNm:
             self._log_phase(_("Network disconnected"))
         elif state == enums.DeviceState.FAILED:
             self.popup(_("Connection failed"), 3)
+            await self._delete_unverified_connection()
         elif state in (enums.DeviceState.PREPARE, enums.DeviceState.CONFIG):
             self._log_phase(_("Connecting"))
         elif state in (
@@ -742,7 +744,16 @@ class SdbusNm:
         ):
             self._log_phase(_("Getting IP address"))
         elif state == enums.DeviceState.ACTIVATED:
+            self._unverified_connection = None
             self._log_phase(_("Network connected"))
+
+    async def _delete_unverified_connection(self):
+        # A kept profile would mark the network as known, so the next attempt
+        # would reuse the rejected credentials instead of asking for them again.
+        path = self._unverified_connection
+        self._unverified_connection = None
+        if path is not None:
+            await self.delete_connection_path(path)
 
     def _log_phase(self, message):
         # NM can re-emit a state (e.g. an association retry walks PREPARE/CONFIG

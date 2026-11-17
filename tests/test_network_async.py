@@ -529,6 +529,40 @@ class ConnectionLifecycle(unittest.TestCase):
         self.assertIsNone(self.manager.connecting_ssid)
         self.assertEqual([(r.operation, r.success) for r in self.results], [("connect", False)])
 
+    def test_failed_first_activation_removes_added_profile(self):
+        connection, active = self.activate_connection("Network-8", psk="wrongpassword")
+        self.assertEqual(self.client.calls, ["add-and-activate"])
+        added = make_profile("Network-8")
+        added.get_setting_connection().set_property("uuid", connection.get_uuid())
+        self.client.profiles.append(added)
+        active.state = int(NM.ActiveConnectionState.DEACTIVATED)
+        self.drain()
+        self.assertEqual(added.deletions, 1)
+        self.assertTrue(all(profile.deletions == 0 for profile in self.profiles))
+        self.assertEqual([(r.operation, r.success) for r in self.results], [("connect", False)])
+
+    def test_successful_first_activation_keeps_added_profile(self):
+        connection, active = self.activate_connection("Network-8", psk="testpassword")
+        added = make_profile("Network-8")
+        added.get_setting_connection().set_property("uuid", connection.get_uuid())
+        self.client.profiles.append(added)
+        active.state = int(NM.ActiveConnectionState.ACTIVATED)
+        self.drain()
+        self.assertEqual(added.deletions, 0)
+
+    def test_failed_activation_of_saved_profile_keeps_it(self):
+        self.start()
+        profile = self.profiles[1]
+        self.manager.connect("Network-1", psk="testpassword")
+        profile.updates[0][1](profile, None)
+        _connection, _device, callback = self.client.activate_callbacks.pop(0)
+        active = FakeActiveConnection()
+        callback(self.client, active)
+        active.state = int(NM.ActiveConnectionState.DEACTIVATED)
+        self.drain()
+        self.assertEqual(profile.deletions, 0)
+        self.assertFalse(self.results[-1].success)
+
     def test_hidden_connection_does_not_require_discovery(self):
         connection, active = self.activate_connection(
             "Unseen hidden network", psk="testpassword", hidden=True, security="WPA-PSK"

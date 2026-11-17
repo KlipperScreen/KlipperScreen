@@ -142,6 +142,7 @@ class NetworkManagerClient:
         self.connecting_ssid = None
         self.connect_attempt = 0
         self.connecting_active = None
+        self.connecting_added_uuid = None
         self.connect_timeout_source = None
 
     def start(self):
@@ -277,7 +278,10 @@ class NetworkManagerClient:
         ):
             operation = "connect"
         if operation == "connect":
+            added_uuid = self.connecting_added_uuid
             self._clear_connect()
+            if added_uuid is not None:
+                self._delete_added_profile(added_uuid)
         else:
             operation = {
                 "dbus_set_property": "wifi",
@@ -733,6 +737,7 @@ class NetworkManagerClient:
         if profile is not None:
             self._update_and_activate(profile, connection)
         else:
+            self.connecting_added_uuid = connection.get_uuid()
             self._add_and_activate(connection)
         return True
 
@@ -749,6 +754,7 @@ class NetworkManagerClient:
         if self.connecting_active is not None:
             self._untrack(self.connecting_active)
         self.connecting_active = None
+        self.connecting_added_uuid = None
         self.connecting_ssid = None
 
     def _connect_timed_out(self, generation):
@@ -904,6 +910,26 @@ class NetworkManagerClient:
             "delete_async",
         )
         return True
+
+    def _delete_added_profile(self, uuid):
+        # A kept profile would mark the network as known, so the next attempt
+        # would reuse the rejected credentials instead of asking for them again.
+        profile = next(
+            (
+                connection
+                for connection in self.client.get_connections() or ()
+                if connection.get_uuid() == uuid
+            ),
+            None,
+        )
+        if profile is None:
+            return
+        self._call(
+            profile,
+            "delete_finish",
+            lambda _result: self._schedule_snapshot(),
+            "delete_async",
+        )
 
     def disconnect(self):
         device = self._wireless_device()
