@@ -145,7 +145,7 @@ class Panel(ScreenPanel):
             basename, ext = os.path.splitext(name)
             if ext not in {".gcode", ".gco", ".g"}:
                 return None
-            path = f"{self.cur_directory}/{name}".replace("gcodes/", "")
+            path = f"{self.cur_directory}/{name}"[len("gcodes/") :]
         else:
             logging.error(f"Unknown item {item}")
             return None
@@ -530,7 +530,10 @@ class Panel(ScreenPanel):
     def delete_from_list(self, path):
         logging.info(f"deleting {path}")
         for item in self.flowbox.get_children():
-            if item.get_path() in {path, f"gcodes/{path}"}:
+            item_path = item.get_path()
+            if item.get_is_dir():
+                item_path = item_path[len("gcodes/") :]
+            if item_path == path:
                 logging.info("found removing")
                 self.flowbox.remove(item)
                 return True
@@ -545,9 +548,9 @@ class Panel(ScreenPanel):
         if self.cur_directory != os.path.dirname(path):
             return
         if action in {"create_dir", "move_dir"}:
-            item.update({"path": path, "dirname": os.path.split(item["path"])[1]})
+            item = {**item, "path": path, "dirname": os.path.split(item["path"])[1]}
         else:
-            item.update({"path": path, "filename": os.path.split(item["path"])[1]})
+            item = {**item, "path": path, "filename": os.path.split(item["path"])[1]}
         fbchild = self.create_item(item)
         if fbchild:
             self.flowbox.add(fbchild)
@@ -561,10 +564,8 @@ class Panel(ScreenPanel):
         elif action == "delete_file":
             self.delete_from_list(data["item"]["path"])
         elif action == "delete_dir":
-            self.delete_from_list(os.path.join("gcodes", data["item"]["path"]))
+            self.delete_from_list(data["item"]["path"])
         elif action in {"modify_file", "move_file", "move_dir"}:
-            if "path" in data["item"] and data["item"]["path"].startswith("gcodes/"):
-                data["item"]["path"] = data["item"]["path"][7:]
             self.add_item_from_callback(action, data)
 
     def _refresh_files(self, *args):
