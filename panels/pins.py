@@ -71,7 +71,9 @@ class Panel(ScreenPanel):
             self.devices[pin]["row"].add(pin_col)
         else:
             self.devices[pin]["switch"] = Gtk.Switch()
-            self.devices[pin]["switch"].connect("notify::active", self.set_output_pin, pin)
+            self.devices[pin]["switch_handler"] = self.devices[pin]["switch"].connect(
+                "notify::active", self.set_output_pin, pin
+            )
             self.devices[pin]["row"] = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
             self.devices[pin]["row"].add(name)
             self.devices[pin]["row"].add(self.devices[pin]["switch"])
@@ -118,6 +120,9 @@ class Panel(ScreenPanel):
             self.devices[pin]["scale"].set_value(round(float(value) * 100))
             self.devices[pin]["scale"].connect("button-release-event", self.set_output_pin, pin)
         elif "switch" in self.devices[pin]:
-            self.devices[pin]["switch"].set_active(value == 1)
+            switch = self.devices[pin]["switch"]
+            switch.handler_block(self.devices[pin]["switch_handler"])
+            switch.set_active(value == 1)
+            switch.handler_unblock(self.devices[pin]["switch_handler"])
         if widget is not None:
             self.set_output_pin(widget, None, pin)
