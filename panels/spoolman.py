@@ -501,7 +501,7 @@ class Panel(ScreenPanel):
         )
 
     def _load_spools_cb(self, spools):
-        if not spools:
+        if spools is None:
             self._screen.show_popup_message(_("Error trying to fetch spools"))
             return
         self._model.clear()
