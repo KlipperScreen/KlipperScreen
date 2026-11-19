@@ -22,6 +22,12 @@ def format_label(widget):
         label.set_lines(3)
 
 
+def strip_gcodes_root(path):
+    """Return path relative to the gcodes root, or unchanged if it is not under it."""
+    root = "gcodes/"
+    return path[len(root) :] if path.startswith(root) else path
+
+
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
         title = title or (_("Print") if self._printer.extrudercount > 0 else _("Gcodes"))
@@ -145,7 +151,7 @@ class Panel(ScreenPanel):
             basename, ext = os.path.splitext(name)
             if ext not in {".gcode", ".gco", ".g"}:
                 return None
-            path = f"{self.cur_directory}/{name}"[len("gcodes/") :]
+            path = strip_gcodes_root(f"{self.cur_directory}/{name}")
         else:
             logging.error(f"Unknown item {item}")
             return None
@@ -532,7 +538,7 @@ class Panel(ScreenPanel):
         for item in self.flowbox.get_children():
             item_path = item.get_path()
             if item.get_is_dir():
-                item_path = item_path[len("gcodes/") :]
+                item_path = strip_gcodes_root(item_path)
             if item_path == path:
                 logging.info("found removing")
                 self.flowbox.remove(item)
