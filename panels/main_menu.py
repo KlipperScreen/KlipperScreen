@@ -5,6 +5,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk
 
+from ks_includes.functions import natural_sort_key
 from ks_includes.KlippyGtk import find_widget
 from ks_includes.widgets.heatergraph import HeaterGraph
 from ks_includes.widgets.keypad import Keypad
@@ -163,7 +164,7 @@ class Panel(MenuPanel):
             "visible": visible,
         }
 
-        devices = sorted(self.devices)
+        devices = sorted(self.devices, key=natural_sort_key)
         pos = devices.index(device) + 1
 
         self.labels["devices"].insert_row(pos)

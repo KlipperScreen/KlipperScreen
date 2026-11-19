@@ -6,6 +6,7 @@ from unittest.mock import MagicMock, patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 with patch.dict(sys.modules, {"gi": MagicMock(), "gi.repository": MagicMock()}):
+    from ks_includes.functions import natural_sort_key
     from ks_includes.printer import Printer
 
 
@@ -32,6 +33,32 @@ class ToolOrderTest(unittest.TestCase):
         tools = printer.get_tools()
         self.assertEqual(tools[:11], ["extruder"] + [f"extruder{i}" for i in range(1, 11)])
         self.assertEqual(tools[11:], ["extruder_stepper aux", "extruder_stepper belt"])
+
+
+class NaturalSortKeyTest(unittest.TestCase):
+    def test_panel_devices_are_ordered_by_number(self):
+        devices = [
+            "temperature_sensor sensor10",
+            "extruder10",
+            "heater_bed",
+            "extruder2",
+            "temperature_sensor sensor2",
+            "extruder",
+        ]
+        self.assertEqual(
+            sorted(devices, key=natural_sort_key),
+            [
+                "extruder",
+                "extruder2",
+                "extruder10",
+                "heater_bed",
+                "temperature_sensor sensor2",
+                "temperature_sensor sensor10",
+            ],
+        )
+
+    def test_names_starting_with_a_digit_do_not_raise(self):
+        self.assertEqual(sorted(["b", "10a", "2a"], key=natural_sort_key), ["2a", "10a", "b"])
 
 
 if __name__ == "__main__":

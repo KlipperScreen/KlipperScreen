@@ -2,6 +2,7 @@ import ctypes
 import logging
 import logging.handlers
 import os
+import re
 import struct
 import subprocess
 import sys
@@ -89,6 +90,11 @@ def get_software_version():
 
 def parse_bool(value):
     return value.lower() == "true"
+
+
+def natural_sort_key(name):
+    """Sort key that compares numbers in a name by value, so extruder2 sorts before extruder10."""
+    return [int(part) if part.isdecimal() else part for part in re.split(r"(\d+)", name)]
 
 
 def pad_number(value, width, decimals=0):

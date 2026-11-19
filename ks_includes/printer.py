@@ -5,6 +5,8 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib
 
+from ks_includes.functions import natural_sort_key
+
 
 class Printer:
     def __init__(self, state_cb, state_callbacks):
@@ -86,20 +88,10 @@ class Printer:
             elif section in ("led", "neopixel", "dotstar", "pca9533", "pca9632"):
                 self.ledcount += 1
 
-        self.tools = sorted(self.tools, key=self._tool_sort_key)
+        # The list index is the T/M104 T tool number, so extruderN must sit at index N
+        self.tools = sorted(self.tools, key=natural_sort_key)
         self.log_counts(printer_info)
         self.process_update(data)
-
-    @staticmethod
-    def _tool_sort_key(tool):
-        # The list index is the T/M104 T tool number, so extruderN must sit at index N,
-        # with extruder steppers after all extruders
-        suffix = tool[len("extruder") :]
-        if suffix == "":
-            return 0, 0, tool
-        if suffix.isdecimal():
-            return 0, int(suffix), tool
-        return 1, 0, tool
 
     def register_dynamic_sensors(self, objects):
         for obj in objects:
