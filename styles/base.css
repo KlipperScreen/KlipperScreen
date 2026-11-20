@@ -360,6 +360,25 @@ trough {
     border-bottom: 1px solid rgba(255,255,255,0.05)
 }
 
+.frame-item.button_active button {
+    background-color: transparent;
+}
+
+.radio-marker {
+    min-width: .6em;
+    min-height: .6em;
+    padding: .2em;
+    margin: 0 .6em 0 .3em;
+    border: .15em solid @lines;
+    border-radius: 1em;
+}
+
+.radio-marker.checked {
+    border-color: @text;
+    background-color: @text;
+    background-clip: content-box;
+}
+
 .heatergraph {
     min-height: 350px;
 }
