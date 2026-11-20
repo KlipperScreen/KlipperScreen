@@ -108,7 +108,7 @@ Write in the file only the options that need to be changed, and restart KlipperS
 # keyboard_navigation: False
 
 # live G-code toolpath preview
-# enable_gcode_renderer: False
+# enable_gcode_renderer: True
 # gcode_renderer_view: 2d
 # gcode_renderer_fps: 5
 # gcode_renderer_show_travel: False
@@ -121,7 +121,7 @@ Write in the file only the options that need to be changed, and restart KlipperS
 
 ### G-code Renderer
 
-The live toolpath preview is disabled by default.
+The live toolpath preview is enabled by default.
 
 ```ini
 [main]

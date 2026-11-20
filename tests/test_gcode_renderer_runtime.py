@@ -1458,7 +1458,7 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
                 handle.write("[main]\n")
 
             config = KlipperScreenConfig(config_path, screen=_ScreenStub())
-            config.set("main", "enable_gcode_renderer", "True")
+            config.set("main", "enable_gcode_renderer", "False")
             config.set("main", "gcode_renderer_view", DisplayViewMode.MODE_3D.value)
             config.set("main", "gcode_renderer_mode", RenderMode.FULL_MODEL.value)
             config.set("main", "gcode_renderer_previous_layers", "4")
@@ -1467,7 +1467,7 @@ class GcodeRendererRuntimeTests(unittest.TestCase):
             with open(config_path, "r", encoding="utf-8") as handle:
                 saved = handle.read()
 
-            self.assertIn("enable_gcode_renderer = True", saved)
+            self.assertIn("enable_gcode_renderer = False", saved)
             self.assertIn("gcode_renderer_view = 3d", saved)
             self.assertIn("gcode_renderer_mode = full_model", saved)
             self.assertIn("gcode_renderer_previous_layers = 4", saved)

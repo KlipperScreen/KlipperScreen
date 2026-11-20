@@ -653,15 +653,17 @@ class KlipperScreenConfig:
             {"print_view": {"section": "main", "type": None, "value": "thumbs"}},
             {
                 "enable_gcode_renderer": {
+                    "category": _("Gcode Viewer"),
                     "section": "main",
                     "name": _("Enable G-code renderer"),
                     "type": "binary",
-                    "value": "False",
+                    "value": "True",
                     "callback": screen.reload_panels,
                 }
             },
             {
                 "gcode_renderer_view": {
+                    "category": _("Gcode Viewer"),
                     "section": "main",
                     "name": _("Default view"),
                     "type": "dropdown",
@@ -677,6 +679,7 @@ class KlipperScreenConfig:
             },
             {
                 "gcode_renderer_fps": {
+                    "category": _("Gcode Viewer"),
                     "section": "main",
                     "name": _("Refresh rate"),
                     "type": "dropdown",
@@ -693,6 +696,7 @@ class KlipperScreenConfig:
             },
             {
                 "gcode_renderer_show_travel": {
+                    "category": _("Gcode Viewer"),
                     "section": "main",
                     "name": _("Show travel moves"),
                     "type": "binary",
@@ -701,6 +705,7 @@ class KlipperScreenConfig:
             },
             {
                 "gcode_renderer_previous_layers": {
+                    "category": _("Gcode Viewer"),
                     "section": "main",
                     "name": _("Previous layers"),
                     "type": "scale",
@@ -711,6 +716,7 @@ class KlipperScreenConfig:
             },
             {
                 "gcode_renderer_mode": {
+                    "category": _("Gcode Viewer"),
                     "section": "main",
                     "name": _("Rendering mode"),
                     "type": "dropdown",

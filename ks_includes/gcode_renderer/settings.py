@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from .model import RenderMode
 from .projection import DisplayViewMode
 
-DEFAULT_ENABLED = False
+DEFAULT_ENABLED = True
 DEFAULT_SHOW_TRAVEL = False
 DEFAULT_MODE = RenderMode.CURRENT_LAYER
 DEFAULT_VIEW = DisplayViewMode.MODE_2D
