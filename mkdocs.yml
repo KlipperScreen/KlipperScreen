@@ -38,6 +38,7 @@ nav:
     - Screenshots: Panels.md
     - Panels:
       - Bed Level/Screws: Panels/Screws.md
+      - G-code Toolpath: Panels/Gcode_viewer.md
       - Job_status/Printing: Panels/Job_status.md
       - Temperature: Panels/Temperature.md
       - Z Calibrate: Panels/Zcalibrate.md
@@ -46,6 +47,7 @@ nav:
     - Changelog: changelog.md
     - Breaking Changes: breaking.md
     - Developers.md
+    - Live G-code Renderer: Live_Gcode_Renderer.md
     - Contact.md
 theme:
   name: material

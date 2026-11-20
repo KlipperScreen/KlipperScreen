@@ -16,6 +16,150 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 2026.7.dev0\n"
 
+msgid "Preview"
+msgstr "Pregled"
+
+msgid "G-code Renderer"
+msgstr "Prikaz G-koda"
+
+msgid "Enable G-code renderer"
+msgstr "Omogući prikaz G-koda"
+
+msgid "Default View"
+msgstr "Zadani prikaz"
+
+msgid "Default view"
+msgstr "Zadani prikaz"
+
+msgid "Refresh rate"
+msgstr "Brzina osvježavanja"
+
+msgid "Show Travel Moves"
+msgstr "Prikaži prazne pomake"
+
+msgid "Show travel moves"
+msgstr "Prikaži prazne pomake"
+
+msgid "Previous Layers"
+msgstr "Prethodni slojevi"
+
+msgid "Previous layers"
+msgstr "Prethodni slojevi"
+
+msgid "Render mode"
+msgstr "Način prikaza"
+
+msgid "Rendering mode"
+msgstr "Način prikaza"
+
+msgid "Current layer"
+msgstr "Trenutni sloj"
+
+msgid "Current + previous"
+msgstr "Trenutni i prethodni"
+
+msgid "Current and previous"
+msgstr "Trenutni i prethodni"
+
+msgid "Full model"
+msgstr "Cijeli model"
+
+msgid "Toolpath"
+msgstr "Putanja alata"
+
+msgid "Feature disabled"
+msgstr "Funkcija je onemogućena"
+
+msgid "Enable G-code renderer in Settings"
+msgstr "Omogući prikaz G-koda u Postavkama"
+
+msgid "No file selected"
+msgstr "Nijedna datoteka nije odabrana"
+
+msgid "No active print file"
+msgstr "Nema aktivne datoteke za ispis"
+
+msgid "No preview loaded"
+msgstr "Pregled nije učitan"
+
+msgid "Loading G-code preview..."
+msgstr "Učitavanje pregleda G-koda..."
+
+msgid "Unable to load G-code preview"
+msgstr "Nije moguće učitati pregled G-koda"
+
+msgid "No renderable toolpath found"
+msgstr "Nije pronađena putanja za prikaz"
+
+msgid "Open Preview while a print is active"
+msgstr "Otvorite Pregled dok je ispis aktivan"
+
+msgid "Open Preview from the file list"
+msgstr "Otvorite Pregled iz popisa datoteka"
+
+msgid "This can take a moment for large files"
+msgstr "Za velike datoteke ovo može potrajati trenutak"
+
+msgid "This file does not contain previewable motion"
+msgstr "Ova datoteka ne sadrži pokrete koji se mogu prikazati"
+
+msgid "Retry or check renderer settings"
+msgstr "Pokušaj ponovno ili provjeri postavke prikaza G-koda"
+
+msgid "View"
+msgstr "Prikaz"
+
+msgid "Layer"
+msgstr "Sloj"
+
+msgid "Z Height"
+msgstr "Visina Z"
+
+msgid "Display"
+msgstr "Prikaz modela"
+
+msgid "2D"
+msgstr "2D"
+
+msgid "3D"
+msgstr "3D"
+
+msgid "Rotate left"
+msgstr "Zakreni ulijevo"
+
+msgid "Rotate right"
+msgstr "Zakreni udesno"
+
+msgid "Rotate"
+msgstr "Zakreni"
+
+msgid "Pan"
+msgstr "Pomicanje"
+
+msgid "Preview Progress"
+msgstr "Napredak pregleda"
+
+msgid "Current + Prev"
+msgstr "Trenutni i prethodni"
+
+msgid "Full Model"
+msgstr "Cijeli model"
+
+msgid "Travel Off"
+msgstr "Prazni pomaci isklj."
+
+msgid "Travel On"
+msgstr "Prazni pomaci uklj."
+
+msgid "Fit"
+msgstr "Prilagodi"
+
+msgid "End"
+msgstr "Kraj"
+
+msgid "Reset"
+msgstr "Vrati"
+
 msgid "Main Menu"
 msgstr "Glavni izbornik"
 

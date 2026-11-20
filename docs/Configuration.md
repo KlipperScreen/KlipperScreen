@@ -106,10 +106,50 @@ Write in the file only the options that need to be changed, and restart KlipperS
 # Beware that the UI is coded to be touchscreen controlled, this is
 # not recommended as the only way to control
 # keyboard_navigation: False
+
+# live G-code toolpath preview
+# enable_gcode_renderer: False
+# gcode_renderer_view: 2d
+# gcode_renderer_fps: 5
+# gcode_renderer_show_travel: False
+# gcode_renderer_previous_layers: 3
+# gcode_renderer_mode: current_layer
 ```
 
 !!! tip
     It is strongly recommended that you do not add settings to the config file if you don't need them
+
+### G-code Renderer
+
+The live toolpath preview is disabled by default.
+
+```ini
+[main]
+enable_gcode_renderer: True
+gcode_renderer_view: 2d
+gcode_renderer_fps: 5
+gcode_renderer_show_travel: False
+gcode_renderer_previous_layers: 3
+gcode_renderer_mode: current_layer
+```
+
+Available preview views:
+
+- `2d`
+- `3d`
+
+Available renderer modes:
+
+- `current_layer`
+- `current_and_previous`
+- `full_model`
+
+Recommended defaults for small Raspberry Pi touchscreens are:
+
+- keep `gcode_renderer_view` at `2d` unless you need the spatial toolpath view
+- keep `gcode_renderer_fps` at `5`
+- keep travel moves hidden unless needed
+- keep `gcode_renderer_mode` at `current_layer` or `current_and_previous`
 
 ### Printer Options
 Multiple printers can be defined. Adding or editing a printer (including its `moonraker_host`/`moonraker_port`, shown under *Printer Connections* on the screen) is done here, in the config file.

@@ -16,6 +16,150 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Poedit 3.9\n"
 
+msgid "Preview"
+msgstr "Pregled"
+
+msgid "G-code Renderer"
+msgstr "G-kod prikaz"
+
+msgid "Enable G-code renderer"
+msgstr "Omogući prikaz G-koda"
+
+msgid "Default View"
+msgstr "Podrazumevani prikaz"
+
+msgid "Default view"
+msgstr "Podrazumevani prikaz"
+
+msgid "Refresh rate"
+msgstr "Brzina osvežavanja"
+
+msgid "Show Travel Moves"
+msgstr "Prikaži prazne pokrete"
+
+msgid "Show travel moves"
+msgstr "Prikaži prazne pokrete"
+
+msgid "Previous Layers"
+msgstr "Prethodni slojevi"
+
+msgid "Previous layers"
+msgstr "Prethodni slojevi"
+
+msgid "Render mode"
+msgstr "Režim prikaza"
+
+msgid "Rendering mode"
+msgstr "Režim prikaza"
+
+msgid "Current layer"
+msgstr "Trenutni sloj"
+
+msgid "Current + previous"
+msgstr "Trenutni i prethodni"
+
+msgid "Current and previous"
+msgstr "Trenutni i prethodni"
+
+msgid "Full model"
+msgstr "Ceo model"
+
+msgid "Toolpath"
+msgstr "Putanja alata"
+
+msgid "Feature disabled"
+msgstr "Funkcija je onemogućena"
+
+msgid "Enable G-code renderer in Settings"
+msgstr "Omogući prikaz G-koda u Podešavanjima"
+
+msgid "No file selected"
+msgstr "Nijedna datoteka nije izabrana"
+
+msgid "No active print file"
+msgstr "Nema aktivne datoteke za štampu"
+
+msgid "No preview loaded"
+msgstr "Pregled nije učitan"
+
+msgid "Loading G-code preview..."
+msgstr "Učitavanje pregleda G-koda..."
+
+msgid "Unable to load G-code preview"
+msgstr "Nije moguće učitati pregled G-koda"
+
+msgid "No renderable toolpath found"
+msgstr "Nije pronađena putanja za prikaz"
+
+msgid "Open Preview while a print is active"
+msgstr "Otvorite Pregled dok je štampa aktivna"
+
+msgid "Open Preview from the file list"
+msgstr "Otvorite Pregled iz liste datoteka"
+
+msgid "This can take a moment for large files"
+msgstr "Za velike datoteke ovo može potrajati trenutak"
+
+msgid "This file does not contain previewable motion"
+msgstr "Ova datoteka ne sadrži pokrete koji se mogu prikazati"
+
+msgid "Retry or check renderer settings"
+msgstr "Pokušaj ponovo ili proveri podešavanja prikaza G-koda"
+
+msgid "View"
+msgstr "Prikaz"
+
+msgid "Layer"
+msgstr "Sloj"
+
+msgid "Z Height"
+msgstr "Visina Z"
+
+msgid "Display"
+msgstr "Prikaz modela"
+
+msgid "2D"
+msgstr "2D"
+
+msgid "3D"
+msgstr "3D"
+
+msgid "Rotate left"
+msgstr "Rotiraj ulevo"
+
+msgid "Rotate right"
+msgstr "Rotiraj udesno"
+
+msgid "Rotate"
+msgstr "Rotiraj"
+
+msgid "Pan"
+msgstr "Pomeranje"
+
+msgid "Preview Progress"
+msgstr "Napredak pregleda"
+
+msgid "Current + Prev"
+msgstr "Trenutni i prethodni"
+
+msgid "Full Model"
+msgstr "Ceo model"
+
+msgid "Travel Off"
+msgstr "Prazni pokreti isklj."
+
+msgid "Travel On"
+msgstr "Prazni pokreti uklj."
+
+msgid "Fit"
+msgstr "Uklopi"
+
+msgid "End"
+msgstr "Kraj"
+
+msgid "Reset"
+msgstr "Resetuj"
+
 msgid "Main Menu"
 msgstr "Glavni meni"
 
