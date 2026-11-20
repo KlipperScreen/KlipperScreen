@@ -177,6 +177,7 @@ class Panel(ScreenPanel):
             self.sort_btn.set_image(self._gtk.Image("arrow-up", self._gtk.img_scale * self.bts))
         self.sort_btn.show()
 
+        self.macros_dirty = True
         GLib.idle_add(self.reload_macros)
 
     def reload_macros(self):
