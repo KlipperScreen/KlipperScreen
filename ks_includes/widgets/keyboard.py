@@ -3,7 +3,7 @@ import os
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import GLib, Gtk
+from gi.repository import Gdk, GLib, Gtk
 
 
 class Keyboard(Gtk.Box):
@@ -188,6 +188,9 @@ class Keyboard(Gtk.Box):
 
     def repeat(self, widget, event, key):
         # Button-press
+        if event is not None and event.type != Gdk.EventType.BUTTON_PRESS:
+            # Fast presses on one key also arrive as double and triple click events
+            return True
         widget.get_style_context().add_class("active")
         self.update_entry(widget, key)
         if self.timeout is None and key == "⌫":
