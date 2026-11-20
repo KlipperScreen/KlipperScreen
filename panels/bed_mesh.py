@@ -4,7 +4,7 @@ import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Pango
+from gi.repository import GLib, Gtk, Pango
 
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
@@ -21,14 +21,14 @@ class Panel(ScreenPanel):
         self.mesh_radius = section["mesh_radius"] if "mesh_radius" in section else None
         self.profiles = {}
         self.buttons = {
-            "add": self._gtk.Button(
-                "increase", " " + _("Add profile"), "color1", self.bts, Gtk.PositionType.LEFT, 1
-            ),
             "calib": self._gtk.Button(
                 "refresh", " " + _("Calibrate"), "color3", self.bts, Gtk.PositionType.LEFT, 1
             ),
+            "add": self._gtk.Button(
+                "increase", " " + _("Save as new"), "color1", self.bts, Gtk.PositionType.LEFT, 1
+            ),
             "clear": self._gtk.Button(
-                "cancel", " " + _("Clear"), "color2", self.bts, Gtk.PositionType.LEFT, 1
+                "cancel", " " + _("Unload mesh"), "color2", self.bts, Gtk.PositionType.LEFT, 1
             ),
         }
         self.buttons["add"].connect("clicked", self.show_create_profile)
@@ -36,15 +36,15 @@ class Panel(ScreenPanel):
         self.buttons["calib"].connect("clicked", self.calibrate_mesh)
 
         topbar = Gtk.Box(spacing=5, hexpand=True, vexpand=False)
+        topbar.add(self.buttons["calib"])
         topbar.add(self.buttons["add"])
         topbar.add(self.buttons["clear"])
-        topbar.add(self.buttons["calib"])
 
         # Create a grid for all profiles
         self.labels["profiles"] = Gtk.Grid(valign=Gtk.Align.CENTER)
 
-        scroll = self._gtk.ScrolledWindow()
-        scroll.add(self.labels["profiles"])
+        self.scroll = self._gtk.ScrolledWindow()
+        self.scroll.add(self.labels["profiles"])
 
         self.load_meshes()
 
@@ -53,13 +53,13 @@ class Panel(ScreenPanel):
         self.labels["map"] = BedMap(self._gtk.font_size, self.active_mesh)
         if self._screen.vertical_mode:
             grid.attach(self.labels["map"], 0, 2, 2, 1)
-            grid.attach(scroll, 0, 3, 2, 1)
+            grid.attach(self.scroll, 0, 3, 2, 1)
             self.labels["map"].set_size_request(
                 self._gtk.content_width - 30, self._gtk.content_height * 0.4
             )
         else:
             grid.attach(self.labels["map"], 0, 2, 1, 1)
-            grid.attach(scroll, 1, 2, 1, 1)
+            grid.attach(self.scroll, 1, 2, 1, 1)
         self.labels["main_grid"] = grid
         self.content.add(self.labels["main_grid"])
 
@@ -67,13 +67,26 @@ class Panel(ScreenPanel):
         self.load_meshes()
         with contextlib.suppress(KeyError):
             self.activate_mesh(self._printer.get_stat("bed_mesh", "profile_name"))
+        GLib.idle_add(self._scroll_to_active)
+
+    def _scroll_to_active(self):
+        if self.active_mesh in self.profiles:
+            adjustment = self.scroll.get_vadjustment()
+            row_top = self.profiles[self.active_mesh]["row"].get_allocation().y
+            adjustment.set_value(min(row_top, adjustment.get_upper() - adjustment.get_page_size()))
+        return False
+
+    def _update_rows(self):
+        for name, row in self.profiles.items():
+            active = name == self.active_mesh
+            for widget, style in ((row["row"], "button_active"), (row["marker"], "checked")):
+                if active:
+                    widget.get_style_context().add_class(style)
+                else:
+                    widget.get_style_context().remove_class(style)
+            row["save"].set_sensitive(self.active_mesh is not None and not active)
 
     def activate_mesh(self, profile):
-        if self.active_mesh is not None:
-            self.profiles[self.active_mesh]["name"].set_sensitive(True)
-            self.profiles[self.active_mesh]["name"].get_style_context().remove_class(
-                "button_active"
-            )
         if profile == "":
             logging.info("Clearing active profile")
             self._clear_profile()
@@ -83,9 +96,8 @@ class Panel(ScreenPanel):
 
         if self.active_mesh != profile:
             logging.info(f"Active {self.active_mesh} changing to {profile}")
-        self.profiles[profile]["name"].set_sensitive(False)
-        self.profiles[profile]["name"].get_style_context().add_class("button_active")
         self.active_mesh = profile
+        self._update_rows()
         self.update_graph(profile=profile)
         self.buttons["clear"].set_sensitive(True)
 
@@ -112,17 +124,31 @@ class Panel(ScreenPanel):
 
     def add_profile(self, profile):
         logging.debug(f"Adding Profile: {profile}")
-        name = self._gtk.Button(label=f"<big><b>{profile}</b></big>")
-        name.get_children()[0].set_use_markup(True)
-        name.get_children()[0].set_line_wrap(True)
-        name.get_children()[0].set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        marker = Gtk.Box(halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER)
+        marker.get_style_context().add_class("radio-marker")
+        label = Gtk.Label(
+            hexpand=True,
+            xalign=0,
+            use_markup=True,
+            wrap=True,
+            wrap_mode=Pango.WrapMode.WORD_CHAR,
+        )
+        label.set_markup(f"<big><b>{GLib.markup_escape_text(profile)}</b></big>")
+        name_box = Gtk.Box()
+        name_box.add(marker)
+        name_box.add(label)
+        name = self._gtk.Button()
+        name.add(name_box)
         name.set_vexpand(False)
-        name.set_halign(Gtk.Align.START)
         name.connect("clicked", self.send_load_mesh, profile)
 
         buttons = {
-            "save": self._gtk.Button("complete", None, "color4", self.bts),
-            "delete": self._gtk.Button("cancel", None, "color2", self.bts),
+            "save": self._gtk.Button(
+                "sd", _("Overwrite"), "color4", self.bts, Gtk.PositionType.TOP, 1
+            ),
+            "delete": self._gtk.Button(
+                "delete", _("Delete"), "color2", self.bts, Gtk.PositionType.TOP, 1
+            ),
         }
         buttons["save"].connect("clicked", self.send_save_mesh, profile)
         buttons["delete"].connect("clicked", self.send_remove_mesh, profile)
@@ -144,6 +170,7 @@ class Panel(ScreenPanel):
 
         self.profiles[profile] = {
             "name": name,
+            "marker": marker,
             "button_box": button_box,
             "row": box,
             "save": buttons["save"],
@@ -154,6 +181,7 @@ class Panel(ScreenPanel):
         self.labels["profiles"].insert_row(pos)
         self.labels["profiles"].attach(self.profiles[profile]["row"], 0, pos, 1, 1)
         self.labels["profiles"].show_all()
+        self._update_rows()
 
     def back(self):
         if self.show_create is True:
@@ -202,6 +230,7 @@ class Panel(ScreenPanel):
 
     def _clear_profile(self):
         self.active_mesh = None
+        self._update_rows()
         self.update_graph()
         self.buttons["clear"].set_sensitive(False)
         self.remove_create()
@@ -282,12 +311,21 @@ class Panel(ScreenPanel):
         )
 
     def send_save_mesh(self, widget, profile):
-        self._screen._send_action(
-            widget, "printer.gcode.script", {"script": KlippyGcodes.bed_mesh_save(profile)}
+        self._screen._confirm_send_action(
+            widget,
+            _("Overwrite %(target)s mesh profile with %(source)s?")
+            % {
+                "target": f"<b>{GLib.markup_escape_text(profile)}</b>",
+                "source": f"<b>{GLib.markup_escape_text(self.active_mesh)}</b>",
+            },
+            "printer.gcode.script",
+            {"script": KlippyGcodes.bed_mesh_save(profile)},
         )
 
     def send_remove_mesh(self, widget, profile):
-        self._screen._send_action(
-            widget, "printer.gcode.script", {"script": KlippyGcodes.bed_mesh_remove(profile)}
+        self._screen._confirm_send_action(
+            widget,
+            _("Delete mesh profile?") + "\n\n" + GLib.markup_escape_text(profile),
+            "printer.gcode.script",
+            {"script": KlippyGcodes.bed_mesh_remove(profile)},
         )
-        self.remove_profile(profile)
