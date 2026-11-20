@@ -368,10 +368,10 @@ class Panel(ScreenPanel):
         self.queue_render()
 
     def rotate_left(self, widget):
-        self._rotate_view(-self.ROTATE_STEP)
+        self._rotate_view(self.ROTATE_STEP)
 
     def rotate_right(self, widget):
-        self._rotate_view(self.ROTATE_STEP)
+        self._rotate_view(-self.ROTATE_STEP)
 
     def cycle_mode(self, widget):
         if not self._context_allows_mode_control():
@@ -1089,8 +1089,8 @@ class Panel(ScreenPanel):
         self.canvas_column.pack_start(self.canvas_overlay, True, True, 0)
 
     def _build_controls_panel(self):
-        self.rotate_left_button = self._make_compact_button("arrow-left", None, "color1")
-        self.rotate_right_button = self._make_compact_button("arrow-right", None, "color2")
+        self.rotate_left_button = self._make_compact_button("ccw", None, "color1")
+        self.rotate_right_button = self._make_compact_button("cw", None, "color2")
         self.mode_button = self._make_compact_button(None, _("Current"), "color3")
         self.travel_button = self._make_compact_button(None, _("Travel Off"), "color4")
         self.view_buttons = {
@@ -1104,8 +1104,8 @@ class Panel(ScreenPanel):
         self.buttons = {
             "zoom_out": self._make_compact_button("decrease", None, "color1"),
             "zoom_in": self._make_compact_button("increase", None, "color2"),
-            "fit": self._make_compact_button("refresh", None, "color3"),
-            "reset": self._make_compact_button("complete", None, "color4"),
+            "fit": self._make_compact_button("z-farther", None, "color3"),
+            "reset": self._make_compact_button("home", None, "color4"),
             "rotate_left": self.rotate_left_button,
             "rotate_right": self.rotate_right_button,
             "mode": self.mode_button,
