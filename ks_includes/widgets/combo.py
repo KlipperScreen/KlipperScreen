@@ -9,7 +9,8 @@ class ComboBoxPlus(Gtk.ComboBox):
     A special ComboBox that checks if the dropdown was closed too fast and re-opens it.
 
     Supports both the model-based Gtk.ComboBox API (passing `model=` zcalibrate)
-    and a simple append() text API like Gtk.ComboBoxText
+    and a simple append() text API like Gtk.ComboBoxText, including
+    set_active_id(), get_active_id() and get_active_text()
     """
 
     def __init__(self, *args, **kwargs):
@@ -27,7 +28,15 @@ class ComboBoxPlus(Gtk.ComboBox):
             self.pack_start(renderer, True)
             self.add_attribute(renderer, "text", 1)
             self.set_model(self._store)
+            self.set_id_column(0)
         self._store.append([value, text])
+
+    def get_active_text(self):
+        """Return the text of the active option added with append(), or None."""
+        tree_iter = self.get_active_iter()
+        if self._store is None or tree_iter is None:
+            return None
+        return self._store[tree_iter][1]
 
     def _on_popup_shown(self, combo, pspec):
         if self.get_property("popup-shown"):
