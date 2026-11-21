@@ -6,6 +6,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.widgets.combo import ComboBoxPlus
 
 # X and Y frequencies
 XY_FREQ = [
@@ -77,7 +78,9 @@ class Panel(ScreenPanel):
             scale.connect("button-release-event", self.set_opt_value, dim_freq["config"])
 
             shaper_slug = dim_freq["config"].replace("_freq_", "_type_")
-            self.freq_xy_combo[shaper_slug] = Gtk.ComboBoxText()
+            # GTK opens the list over the button and, near the screen edge, pads it with
+            # blank rows that scroll away. A wrap width makes it open next to the button.
+            self.freq_xy_combo[shaper_slug] = ComboBoxPlus(wrap_width=1)
             for shaper in SHAPERS:
                 self.freq_xy_combo[shaper_slug].append(shaper, shaper)
                 self.freq_xy_combo[shaper_slug].set_active(0)

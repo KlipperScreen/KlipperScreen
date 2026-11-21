@@ -13,6 +13,7 @@ from sdbus_async.networkmanager import enums
 from ks_includes import async_utils
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.sdbus_nm import SdbusNm
+from ks_includes.widgets.combo import ComboBoxPlus
 
 
 class Panel(ScreenPanel):
@@ -251,7 +252,7 @@ class Panel(ScreenPanel):
             return
         old = self.labels["interface"]
         self.top_bar.remove(old)
-        self.labels["interface"] = Gtk.ComboBoxText()
+        self.labels["interface"] = ComboBoxPlus()
         for dev in self.network_devices:
             self.labels["interface"].append(dev["interface"], dev["interface"])
         if self.interface is not None:

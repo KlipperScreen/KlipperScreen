@@ -8,6 +8,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Pango
 
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.widgets.combo import ComboBoxPlus
 
 try:
     from ks_includes.gio_nm import NetworkManagerClient, NetworkSnapshot
@@ -173,7 +174,7 @@ class Panel(ScreenPanel):
             widget = Gtk.Label(hexpand=True, halign=Gtk.Align.START)
             widget.set_text(self.interface or "?")
         else:
-            widget = Gtk.ComboBoxText(hexpand=True)
+            widget = ComboBoxPlus(hexpand=True)
             for device in self.snapshot.devices:
                 widget.append(device.interface, device.interface)
             self.iface_handler = widget.connect("changed", self.iface_changed)
@@ -522,7 +523,7 @@ class Panel(ScreenPanel):
             self.labels["network_ssid"].set_placeholder_text(_("Network name (SSID)"))
             self.labels["network_ssid"].connect("touch-event", self._screen.show_keyboard)
             self.labels["network_ssid"].connect("button-press-event", self._screen.show_keyboard)
-            self.labels["network_security"] = Gtk.ComboBoxText(hexpand=True)
+            self.labels["network_security"] = ComboBoxPlus(hexpand=True)
             for key, label in (
                 ("WPA-PSK", "WPA/WPA2 Personal"),
                 ("WPA-SAE", "WPA3 Personal"),
