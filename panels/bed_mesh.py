@@ -25,10 +25,10 @@ class Panel(ScreenPanel):
                 "refresh", " " + _("Calibrate"), "color3", self.bts, Gtk.PositionType.LEFT, 1
             ),
             "add": self._gtk.Button(
-                "increase", " " + _("Save as new"), "color1", self.bts, Gtk.PositionType.LEFT, 1
+                "increase", " " + _("Add profile"), "color1", self.bts, Gtk.PositionType.LEFT, 1
             ),
             "clear": self._gtk.Button(
-                "cancel", " " + _("Unload mesh"), "color2", self.bts, Gtk.PositionType.LEFT, 1
+                "cancel", " " + _("Clear"), "color2", self.bts, Gtk.PositionType.LEFT, 1
             ),
         }
         self.buttons["add"].connect("clicked", self.show_create_profile)
@@ -138,17 +138,14 @@ class Panel(ScreenPanel):
         name_box.add(marker)
         name_box.add(label)
         name = self._gtk.Button()
+        name.get_style_context().add_class("profile-name")
         name.add(name_box)
         name.set_vexpand(False)
         name.connect("clicked", self.send_load_mesh, profile)
 
         buttons = {
-            "save": self._gtk.Button(
-                "sd", _("Overwrite"), "color4", self.bts, Gtk.PositionType.TOP, 1
-            ),
-            "delete": self._gtk.Button(
-                "delete", _("Delete"), "color2", self.bts, Gtk.PositionType.TOP, 1
-            ),
+            "save": self._gtk.Button("sd", None, "color4", self.bts),
+            "delete": self._gtk.Button("delete", None, "color2", self.bts),
         }
         buttons["save"].connect("clicked", self.send_save_mesh, profile)
         buttons["delete"].connect("clicked", self.send_remove_mesh, profile)
