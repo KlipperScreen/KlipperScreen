@@ -374,6 +374,16 @@ start_KlipperScreen()
 
 install_network_manager()
 {
+    if command -v nmcli >/dev/null 2>&1; then
+        if systemctl is-active NetworkManager >/dev/null 2>&1; then
+            echo_ok "NetworkManager is installed and in use"
+        else
+            echo_error "NetworkManager is installed but not active"
+            echo_error "The network panel may not work"
+        fi
+        return
+    fi
+
     if [ -z "$NETWORK" ]; then
         echo "Press enter for default (Yes)"
         read -r -e -p "Install NetworkManager for the network panel [Y/n]" NETWORK
