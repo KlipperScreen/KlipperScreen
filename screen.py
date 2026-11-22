@@ -698,6 +698,8 @@ class KlipperScreen(Gtk.ApplicationWindow):
     def _menu_go_back(self, widget=None, home=False):
         logging.info(f"#### Menu go {'home' if home else 'back'}")
         self.remove_keyboard()
+        if len(self._cur_panels) <= 1:
+            return
         while len(self._cur_panels) > 1:
             self._remove_current_panel()
             del self._cur_panels[-1]
@@ -1516,8 +1518,6 @@ class KlipperScreen(Gtk.ApplicationWindow):
     def _key_press_event(self, widget, event):
         keyval_name = Gdk.keyval_name(event.keyval)
         if keyval_name == "Escape":
-            self._menu_go_back(home=True)
-        elif keyval_name == "BackSpace" and len(self._cur_panels) > 1 and self.keyboard is None:
             self.base_panel.back()
 
     def update_size(self, *args):
