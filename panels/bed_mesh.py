@@ -21,19 +21,19 @@ class Panel(ScreenPanel):
         self.mesh_radius = section["mesh_radius"] if "mesh_radius" in section else None
         self.profiles = {}
         self.buttons = {
-            "calib": self._gtk.Button(
-                "refresh", " " + _("Calibrate"), "color3", self.bts, Gtk.PositionType.LEFT, 1
-            ),
             "add": self._gtk.Button(
                 "increase", " " + _("Add profile"), "color1", self.bts, Gtk.PositionType.LEFT, 1
+            ),
+            "calib": self._gtk.Button(
+                "refresh", " " + _("Calibrate"), "color3", self.bts, Gtk.PositionType.LEFT, 1
             ),
             "clear": self._gtk.Button(
                 "cancel", " " + _("Clear"), "color2", self.bts, Gtk.PositionType.LEFT, 1
             ),
         }
+        self.buttons["calib"].connect("clicked", self.calibrate_mesh)
         self.buttons["add"].connect("clicked", self.show_create_profile)
         self.buttons["clear"].connect("clicked", self.send_clear_mesh)
-        self.buttons["calib"].connect("clicked", self.calibrate_mesh)
 
         topbar = Gtk.Box(spacing=5, hexpand=True, vexpand=False)
         topbar.add(self.buttons["calib"])
