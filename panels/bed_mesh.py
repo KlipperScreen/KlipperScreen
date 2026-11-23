@@ -17,9 +17,11 @@ class Panel(ScreenPanel):
         super().__init__(screen, title)
         self.show_create = False
         self.active_mesh = None
+        self.profile_group = None
         section = self._printer.get_config_section("bed_mesh")
         self.mesh_radius = section["mesh_radius"] if "mesh_radius" in section else None
         self.profiles = {}
+        self.pending_removals = set()
         self.buttons = {
             "add": self._gtk.Button(
                 "increase", " " + _("Add profile"), "color1", self.bts, Gtk.PositionType.LEFT, 1
@@ -31,20 +33,37 @@ class Panel(ScreenPanel):
                 "cancel", " " + _("Clear"), "color2", self.bts, Gtk.PositionType.LEFT, 1
             ),
         }
-        self.buttons["calib"].connect("clicked", self.calibrate_mesh)
         self.buttons["add"].connect("clicked", self.show_create_profile)
         self.buttons["clear"].connect("clicked", self.send_clear_mesh)
+        self.buttons["calib"].connect("clicked", self.calibrate_mesh)
 
         topbar = Gtk.Box(spacing=5, hexpand=True, vexpand=False)
-        topbar.add(self.buttons["calib"])
         topbar.add(self.buttons["add"])
         topbar.add(self.buttons["clear"])
+        topbar.add(self.buttons["calib"])
 
         # Create a grid for all profiles
         self.labels["profiles"] = Gtk.Grid(valign=Gtk.Align.CENTER)
 
         self.scroll = self._gtk.ScrolledWindow()
         self.scroll.add(self.labels["profiles"])
+
+        none = self._make_radio(f"<big><b>{_('None')}</b></big>", group=None)
+        none.set_active(True)
+        none.connect("toggled", self.on_profile_toggled, None)
+        none_row = Gtk.Box(spacing=5)
+        none_row.get_style_context().add_class("frame-item")
+        none_row.get_style_context().add_class("no-border")
+        none_row.pack_start(none, True, True, 0)
+        self.profiles[""] = {
+            "name": none,
+            "button_box": None,
+            "row": none_row,
+            "save": None,
+            "delete": None,
+        }
+        self.profile_group = none
+        self.labels["profiles"].attach(none_row, 0, 0, 1, 1)
 
         self.load_meshes()
 
@@ -76,30 +95,33 @@ class Panel(ScreenPanel):
             adjustment.set_value(min(row_top, adjustment.get_upper() - adjustment.get_page_size()))
         return False
 
-    def _update_rows(self):
-        for name, row in self.profiles.items():
-            active = name == self.active_mesh
-            for widget, style in ((row["row"], "button_active"), (row["marker"], "checked")):
-                if active:
-                    widget.get_style_context().add_class(style)
-                else:
-                    widget.get_style_context().remove_class(style)
-            row["save"].set_sensitive(self.active_mesh is not None and not active)
-
     def activate_mesh(self, profile):
-        if profile == "":
+        if not profile:
             logging.info("Clearing active profile")
             self._clear_profile()
             return
+        if profile in self.pending_removals:
+            # Stale status: we are deleting this profile; do not re-add it.
+            return
+        if self.active_mesh is not None:
+            self.profiles[self.active_mesh]["row"].get_style_context().remove_class("button_active")
         if profile not in self.profiles:
             self.add_profile(profile)
 
         if self.active_mesh != profile:
             logging.info(f"Active {self.active_mesh} changing to {profile}")
         self.active_mesh = profile
-        self._update_rows()
+        self.profiles[profile]["name"].set_active(True)
+        self.profiles[profile]["row"].get_style_context().add_class("button_active")
         self.update_graph(profile=profile)
         self.buttons["clear"].set_sensitive(True)
+
+    def on_profile_toggled(self, widget, profile):
+        if widget.get_active() and profile != self.active_mesh:
+            if not profile:
+                self.send_clear_mesh(widget)
+            else:
+                self.send_load_mesh(widget, profile)
 
     def retrieve_bm(self, profile):
         if profile is None:
@@ -122,26 +144,24 @@ class Panel(ScreenPanel):
         self.labels["map"].update_bm(self.retrieve_bm(profile), self.mesh_radius)
         self.labels["map"].queue_draw()
 
+    def _make_radio(self, label, group=None):
+        name = Gtk.RadioButton(group=group, label=label)
+        name.set_can_focus(True)
+        name_label = name.get_children()[0]
+        name_label.set_use_markup(True)
+        name_label.set_line_wrap(True)
+        name_label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        name_label.set_halign(Gtk.Align.START)
+        name.set_hexpand(True)
+        name.set_vexpand(False)
+        return name
+
     def add_profile(self, profile):
         logging.debug(f"Adding Profile: {profile}")
-        marker = Gtk.Box(halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER)
-        marker.get_style_context().add_class("radio-marker")
-        label = Gtk.Label(
-            hexpand=True,
-            xalign=0,
-            use_markup=True,
-            wrap=True,
-            wrap_mode=Pango.WrapMode.WORD_CHAR,
-        )
-        label.set_markup(f"<big><b>{GLib.markup_escape_text(profile)}</b></big>")
-        name_box = Gtk.Box()
-        name_box.add(marker)
-        name_box.add(label)
-        name = self._gtk.Button()
-        name.get_style_context().add_class("profile-name")
-        name.add(name_box)
-        name.set_vexpand(False)
-        name.connect("clicked", self.send_load_mesh, profile)
+        if self.profile_group is None:
+            self.profile_group = Gtk.RadioButton(group=None, label="")
+        name = self._make_radio(f"<big><b>{profile}</b></big>", group=self.profile_group)
+        name.connect("toggled", self.on_profile_toggled, profile)
 
         buttons = {
             "save": self._gtk.Button("sd", None, "color4", self.bts),
@@ -155,19 +175,19 @@ class Panel(ScreenPanel):
             b.set_vexpand(False)
             b.set_halign(Gtk.Align.END)
 
-        button_box = Gtk.Box(spacing=5)
+        button_box = Gtk.Box()
         if profile != "default":
             button_box.add(buttons["save"])
         button_box.add(buttons["delete"])
 
         box = Gtk.Box(spacing=5)
         box.get_style_context().add_class("frame-item")
+        box.get_style_context().add_class("no-border")
         box.pack_start(name, True, True, 0)
         box.pack_start(button_box, False, False, 0)
 
         self.profiles[profile] = {
             "name": name,
-            "marker": marker,
             "button_box": button_box,
             "row": box,
             "save": buttons["save"],
@@ -178,7 +198,6 @@ class Panel(ScreenPanel):
         self.labels["profiles"].insert_row(pos)
         self.labels["profiles"].attach(self.profiles[profile]["row"], 0, pos, 1, 1)
         self.labels["profiles"].show_all()
-        self._update_rows()
 
     def back(self):
         if self.show_create is True:
@@ -189,11 +208,12 @@ class Panel(ScreenPanel):
     def load_meshes(self):
         bm_profiles = self._printer.get_stat("bed_mesh", "profiles")
         for prof in bm_profiles:
-            if prof not in self.profiles:
+            if prof not in self.profiles and prof not in self.pending_removals:
                 self.add_profile(prof)
         for prof in list(self.profiles):
-            if prof not in bm_profiles:
+            if prof and prof not in bm_profiles:
                 self.remove_profile(prof)
+        self.pending_removals = {p for p in self.pending_removals if p in bm_profiles}
 
     def process_update(self, action, data):
         if action != "notify_status_update":
@@ -222,22 +242,26 @@ class Panel(ScreenPanel):
         pos = self._get_position(profile)
         self.labels["profiles"].remove_row(pos)
         del self.profiles[profile]
-        if not self.profiles:
+        # Clearing must happen after the delete, so _clear_profile() has to
+        # tolerate self.active_mesh pointing at the just-removed profile.
+        if profile == self.active_mesh or not self.profiles:
             self._clear_profile()
 
     def _clear_profile(self):
+        if self.active_mesh is not None and self.active_mesh in self.profiles:
+            self.profiles[self.active_mesh]["row"].get_style_context().remove_class("button_active")
         self.active_mesh = None
-        self._update_rows()
+        self.profiles[""]["name"].set_active(True)
         self.update_graph()
         self.buttons["clear"].set_sensitive(False)
         self.remove_create()
 
     def _get_position(self, profile):
-        pl = list(self.profiles)
-        if "default" in pl:
-            pl.remove("default")
-        profiles = sorted(pl)
-        return profiles.index(profile) + 1 if profile != "default" else 0
+        if profile == "":
+            return 0
+        real = [p for p in self.profiles if p]
+        ordered = (["default"] if "default" in self.profiles else []) + sorted(real)
+        return ordered.index(profile) + 1
 
     def show_create_profile(self, widget):
 
@@ -326,3 +350,5 @@ class Panel(ScreenPanel):
             "printer.gcode.script",
             {"script": KlippyGcodes.bed_mesh_remove(profile)},
         )
+        self.pending_removals.add(profile)
+        self.remove_profile(profile)
