@@ -286,6 +286,26 @@ trough {
     margin: .5em .5em;
 }
 
+radiobutton radio {
+    margin: 0 0.6em 0 0.25em;
+    min-width: .75em;
+    min-height: .75em;
+    background: @bg;
+    color: @text;
+    border: .15em solid @text;
+}
+
+radiobutton:checked radio {
+    min-width: .65em;
+    min-height: .65em;
+    color: @text;
+    padding: .1em;
+}
+
+.disabled_radio radiobutton:checked radio {
+    color: @bg;
+}
+
 .action_bar :disabled{
     opacity: .6;
 }
@@ -716,4 +736,8 @@ keyboard_box {
 
 .monospaced {
     font-family: monospace;
+}
+
+.no-border {
+    border: 0;
 }
