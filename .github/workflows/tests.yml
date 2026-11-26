@@ -1,0 +1,37 @@
+name: Unit tests
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-minor-version: [9, 10, 11, 12, 13, 14, 15-dev]
+    name: Python 3.${{ matrix.python-minor-version }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup pip cache
+        uses: actions/cache@v6
+        id: pipcache
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-v2-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-v2-
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        id: setuppy
+        with:
+          python-version: 3.${{ matrix.python-minor-version }}
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+      - name: Install Python packages
+        run: pip install --upgrade setuptools pip wheel tox
+      - name: Run tests
+        env:
+          TOX_ENV: py3${{ matrix.python-minor-version }}
+        run: |
+          python_env=$(echo $TOX_ENV | sed -e s/-dev$//)
+          python -m tox -e ${python_env}
