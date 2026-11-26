@@ -29,11 +29,9 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0
-      - name: Update Python packages
+          sudo apt-get install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0 gir1.2-nm-1.0
+      - name: Update Python build packages
         run: pip install --upgrade setuptools pip wheel tox
-      - name: Install Python dependencies
-        run: pip install -r scripts/KlipperScreen-requirements.txt --prefer-binary
       - name: Run tests
         env:
           TOX_ENV: py3${{ matrix.python-minor-version }}
