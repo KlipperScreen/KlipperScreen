@@ -27,8 +27,10 @@ jobs:
           python-version: 3.${{ matrix.python-minor-version }}
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
-      - name: Install Python packages
+      - name: Update Python packages
         run: pip install --upgrade setuptools pip wheel tox
+      - name: Install Python dependencies
+        run: pip install -r scripts/KlipperScreen-requirements.txt --prefer-binary
       - name: Run tests
         env:
           TOX_ENV: py3${{ matrix.python-minor-version }}
