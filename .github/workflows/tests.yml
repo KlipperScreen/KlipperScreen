@@ -1,7 +1,7 @@
 name: Unit tests
 
 on: [push]
-
+libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -27,6 +27,10 @@ jobs:
           python-version: 3.${{ matrix.python-minor-version }}
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0
       - name: Update Python packages
         run: pip install --upgrade setuptools pip wheel tox
       - name: Install Python dependencies
