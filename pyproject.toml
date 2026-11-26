@@ -3,6 +3,7 @@ name = "KlipperScreen"
 description = "GUI for Klipper"
 readme = "README.md"
 requires-python = ">=3.8"
+dynamic = ["version"]
 
 [tool.ruff]
 line-length = 100
