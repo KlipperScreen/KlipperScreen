@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        python-minor-version: [9, 10, 11, 12, 13, 14, 15-dev]
+        python-minor-version: [10, 11, 12, 13, 14, 15-dev]
     name: Python 3.${{ matrix.python-minor-version }}
     steps:
       - uses: actions/checkout@v7
