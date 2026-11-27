@@ -11,19 +11,12 @@ jobs:
     name: Python 3.${{ matrix.python-minor-version }}
     steps:
       - uses: actions/checkout@v7
-      - name: Setup pip cache
-        uses: actions/cache@v6
-        id: pipcache
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-v2-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-v2-
       - name: Set up Python
         uses: actions/setup-python@v7
-        id: setuppy
         with:
           python-version: 3.${{ matrix.python-minor-version }}
+          check-latest: true
+          cache: 'pip'
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
       - name: Install system dependencies
