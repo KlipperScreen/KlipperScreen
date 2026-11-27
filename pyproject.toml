@@ -3,6 +3,7 @@ name = "KlipperScreen"
 description = "GUI for Klipper"
 readme = "README.md"
 requires-python = ">=3.8"
+dynamic = ["version"]
 
 [tool.ruff]
 line-length = 100
@@ -16,6 +17,9 @@ extend-exclude = [
     "scripts",
     ".venv",
 ]
+
+[tool.setuptools.packages]
+find = {}  # Scan the project directory with the default parameters
 
 [tool.ruff.lint]
 # E: pycodestyle, /F: Pyflakes, I: isort (import sorting)

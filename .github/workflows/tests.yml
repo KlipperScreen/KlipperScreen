@@ -1,0 +1,33 @@
+name: Unit tests
+
+on: [push]
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-minor-version: [10, 11, 12, 13, 14, 15-dev]
+    name: Python 3.${{ matrix.python-minor-version }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: 3.${{ matrix.python-minor-version }}
+          check-latest: true
+          cache: 'pip'
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0 gir1.2-nm-1.0
+      - name: Update Python build packages
+        run: pip install --upgrade setuptools pip wheel tox
+      - name: Run tests
+        env:
+          TOX_ENV: py3${{ matrix.python-minor-version }}
+        run: |
+          python_env=$(echo $TOX_ENV | sed -e s/-dev$//)
+          python -m tox -e ${python_env}
